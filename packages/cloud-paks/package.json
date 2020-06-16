@@ -1,0 +1,7 @@
+{
+  "name": "@carbon/ibm-cloud-paks",
+  "private": true,
+  "version": "0.0.0",
+  "main": "index.js",
+  "license": "Apache-2.0"
+}

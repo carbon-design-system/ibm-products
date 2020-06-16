@@ -1,0 +1,85 @@
+{
+  "name": "ibm-cloud-paks",
+  "private": true,
+  "version": "0.0.0",
+  "repository": "git@github.com:carbon-design-system/ibm-cloud-paks.git",
+  "license": "Apache-2.0",
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": []
+  },
+  "scripts": {
+    "build": "lerna run build --stream --prefix --npm-client yarn",
+    "ci-check": "yarn format:diff",
+    "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
+    "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
+    "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "husky": "^4.2.5",
+    "lerna": "^3.22.1",
+    "lint-staged": "^10.2.10",
+    "prettier": "^2.0.5",
+    "prettier-config-carbon": "^0.1.0",
+    "rimraf": "^3.0.2"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "header-max-length": [
+        2,
+        "always",
+        72
+      ],
+      "body-max-line-length": [
+        2,
+        "always",
+        80
+      ],
+      "scope-case": [
+        0,
+        "always",
+        "lower-case"
+      ],
+      "type-enum": [
+        2,
+        "always",
+        [
+          "build",
+          "ci",
+          "chore",
+          "docs",
+          "feat",
+          "fix",
+          "perf",
+          "refactor",
+          "revert",
+          "test"
+        ]
+      ]
+    }
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "prettier --write"
+    ],
+    "**/*.scss": [
+      "prettier --write"
+    ],
+    "**/*.md": [
+      "prettier --write"
+    ]
+  }
+}

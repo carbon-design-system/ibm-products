@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-module.exports = 'ibm-cloud-paks';
+describe('example-component', () => {
+  it('should work', () => {
+    expect(true).toBe(true);
+  });
+});

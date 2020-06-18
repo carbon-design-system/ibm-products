@@ -1,0 +1,23 @@
+{
+  "name": "@carbon/rollup-config",
+  "private": true,
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "repository": "https://github.com/carbon-design-system/ibm-cloud-paks/tree/master/packages/rollup-config",
+  "bugs": "https://github.com/carbon-design-system/ibm-cloud-paks/issues",
+  "keywords": [
+    "carbon",
+    "carbon design system",
+    "carbon community"
+  ],
+  "dependencies": {
+    "@rollup/plugin-babel": "^5.0.3",
+    "@rollup/plugin-commonjs": "^13.0.0",
+    "@rollup/plugin-node-resolve": "^8.0.1",
+    "babel-preset-ibm-cloud-paks": "^0.0.0"
+  },
+  "devDependencies": {
+    "rollup": "^2.17.0"
+  }
+}

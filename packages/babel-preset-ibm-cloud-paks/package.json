@@ -1,0 +1,25 @@
+{
+  "name": "babel-preset-ibm-cloud-paks",
+  "private": true,
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "repository": "https://github.com/carbon-design-system/ibm-cloud-paks/tree/master/packages/babel-preset-ibm-cloud-paks",
+  "bugs": "https://github.com/carbon-design-system/ibm-cloud-paks/issues",
+  "keywords": [
+    "carbon",
+    "carbon design system",
+    "carbon community"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@babel/core": "^7.10.2",
+    "@babel/plugin-proposal-class-properties": "^7.10.1",
+    "@babel/plugin-transform-runtime": "^7.10.1",
+    "@babel/preset-env": "^7.10.2",
+    "@babel/preset-react": "^7.10.1",
+    "browserslist-config-carbon": "^10.4.0"
+  }
+}

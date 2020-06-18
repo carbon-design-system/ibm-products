@@ -1,7 +1,33 @@
 {
   "name": "@carbon/ibm-cloud-paks",
   "private": true,
+  "description": "Common UI components for IBM Cloud Paks",
   "version": "0.0.0",
-  "main": "index.js",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "repository": "https://github.com/carbon-design-system/ibm-cloud-paks/tree/master/packages/cloud-paks",
+  "bugs": "https://github.com/carbon-design-system/ibm-cloud-paks/issues",
+  "keywords": [
+    "carbon",
+    "carbon design system",
+    "carbon community"
+  ],
+  "scripts": {
+    "build": "yarn clean && rollup -c",
+    "clean": "rimraf es lib",
+    "watch": "yarn clean && rollup -c -w"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1"
+  },
+  "dependencies": {
+    "@carbon/example-component-package": "^0.0.0"
+  },
+  "devDependencies": {
+    "@carbon/rollup-config": "^0.0.0",
+    "react": "^16.13.1",
+    "rollup": "^2.17.0",
+    "rimraf": "^3.0.2"
+  }
 }

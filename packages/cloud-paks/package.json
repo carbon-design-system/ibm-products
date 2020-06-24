@@ -1,7 +1,26 @@
 {
   "name": "@carbon/ibm-cloud-paks",
+  "description": "IBM Cloud Pak",
   "private": true,
   "version": "0.0.0",
   "main": "index.js",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "build-storybook",
+    "start": "start-storybook -p 3000"
+  },
+  "devDependencies": {
+    "@carbon/ibm-security": "^1.26.0",
+    "@storybook/addon-centered": "^5.3.19",
+    "@storybook/addon-docs": "^5.3.19",
+    "@storybook/addons": "^5.3.19",
+    "@storybook/preset-scss": "^1.0.2",
+    "@storybook/react": "^5.3.19",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^3.6.0",
+    "node-sass": "^4.14.1",
+    "react": "^16.13.1",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.2.1"
+  }
 }

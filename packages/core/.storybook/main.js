@@ -6,6 +6,7 @@
  */
 
 const { resolve } = require('path');
+const merge = require('webpack-merge');
 
 module.exports = {
   addons: [
@@ -16,10 +17,25 @@ module.exports = {
         sassLoaderOptions: {
           sassOptions: {
             includePaths: [resolve(__dirname, '..', '..', '..', 'node_modules')],
-          }
-        }
-      }
-    }
+          },
+        },
+      },
+    },
   ],
-  stories: ['../src/**/*.stories.js']
+  stories: ['../../**/*.stories.js'],
+  webpackFinal: async (configuration) =>
+    merge(configuration, {
+      module: {
+        rules: [
+          {
+            test: /\.stories\.js$/,
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-react'],
+            },
+          },
+        ],
+      },
+    },
+  ),
 };

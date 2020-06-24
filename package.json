@@ -12,15 +12,18 @@
   },
   "scripts": {
     "build": "lerna run build --stream --prefix --npm-client yarn",
-    "ci-check": "yarn format:diff",
+    "ci-check": "yarn format:diff && yarn test --ci",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
     "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
-    "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'"
+    "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
+    "test": "jest",
+    "sync": "carbon-cli sync"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
     "husky": "^4.2.5",
+    "jest": "^26.0.1",
     "lerna": "^3.22.1",
     "lint-staged": "^10.2.10",
     "prettier": "^2.0.5",

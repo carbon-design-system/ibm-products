@@ -10,7 +10,9 @@ const merge = require('webpack-merge');
 
 module.exports = {
   addons: [
+    '@storybook/addon-actions/register',
     '@storybook/addon-docs',
+    '@storybook/addon-knobs/register',
     { 
       name: '@storybook/preset-scss',
       options: {

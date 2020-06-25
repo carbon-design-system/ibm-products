@@ -1,9 +1,9 @@
 {
-  "name": "@carbon/cloud-pak-security",
+  "name": "@carbon/cloud-pak-for-security",
   "private": true,
   "version": "0.0.0",
   "license": "Apache-2.0",
-  "repository": "https://github.com/carbon-design-system/ibm-cloud-paks/tree/master/packages/cloud-pak-security",
+  "repository": "https://github.com/carbon-design-system/ibm-cloud-paks/tree/master/packages/security",
   "bugs": "https://github.com/carbon-design-system/ibm-cloud-paks/issues",
   "keywords": [
     "carbon",
@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@carbon/ibm-security": "^1.26.0",
-    "react": "^16.13.1"
+    "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-knobs": "^5.3.19"
   }
 }

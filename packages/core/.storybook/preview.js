@@ -6,7 +6,10 @@
  */
 
 import centered from '@storybook/addon-centered/react';
+import { withKnobs } from '@storybook/addon-knobs';
 import { addDecorator } from '@storybook/react';
+
+addDecorator(withKnobs);
 
 // https://github.com/storybookjs/storybook/issues/8128
 addDecorator((...args) =>

@@ -15,8 +15,6 @@
     "react": "^16.13.1"
   },
   "devDependencies": {
-    "@carbon/ibm-security": "^1.26.0",
-    "@storybook/addon-actions": "^5.3.19",
-    "@storybook/addon-knobs": "^5.3.19"
+    "@carbon/ibm-security": "^1.26.0"
   }
 }

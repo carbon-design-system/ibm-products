@@ -10,8 +10,5 @@
     "carbon design system",
     "carbon community",
     "ibm cloud pak for automation"
-  ],
-  "peerDependencies": {
-    "react": "^16.13.1"
-  }
+  ]
 }

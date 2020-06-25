@@ -10,8 +10,5 @@
     "carbon design system",
     "carbon community",
     "cdai"
-  ],
-  "peerDependencies": {
-    "react": "^16.13.1"
-  }
+  ]
 }

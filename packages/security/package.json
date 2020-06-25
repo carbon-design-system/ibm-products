@@ -1,0 +1,17 @@
+{
+  "name": "@carbon/cloud-pak-for-security",
+  "private": true,
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/carbon-design-system/ibm-cloud-paks/tree/master/packages/security",
+  "bugs": "https://github.com/carbon-design-system/ibm-cloud-paks/issues",
+  "keywords": [
+    "carbon",
+    "carbon design system",
+    "carbon community",
+    "ibm cloud pak for security"
+  ],
+  "devDependencies": {
+    "@carbon/ibm-security": "^1.26.0"
+  }
+}

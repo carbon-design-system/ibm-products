@@ -1,0 +1,33 @@
+{
+  "name": "@carbon/cloud-pak-core",
+  "private": true,
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/carbon-design-system/ibm-cloud-paks/tree/master/packages/core",
+  "bugs": "https://github.com/carbon-design-system/ibm-cloud-paks/issues",
+  "keywords": [
+    "carbon",
+    "carbon design system",
+    "carbon community",
+    "ibm cloud pak"
+  ],
+  "scripts": {
+    "start": "start-storybook -p 3000"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.10.1",
+    "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-centered": "^5.3.19",
+    "@storybook/addon-docs": "^5.3.19",
+    "@storybook/addon-knobs": "^5.3.19",
+    "@storybook/addons": "^5.3.19",
+    "@storybook/preset-scss": "^1.0.2",
+    "@storybook/react": "^5.3.19",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^3.6.0",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.2.1",
+    "webpack-merge": "^4.2.2"
+  }
+}

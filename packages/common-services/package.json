@@ -1,0 +1,14 @@
+{
+  "name": "@carbon/common-services",
+  "private": true,
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/carbon-design-system/ibm-cloud-paks/tree/master/packages/common-services",
+  "bugs": "https://github.com/carbon-design-system/ibm-cloud-paks/issues",
+  "keywords": [
+    "carbon",
+    "carbon design system",
+    "carbon community",
+    "common services"
+  ]
+}

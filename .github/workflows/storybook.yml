@@ -9,8 +9,6 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@master
-      - name: Install Node.js
-        run: nvm install
       - name: Install dependencies
         run: yarn install --offline
       - name: Build Storybook
@@ -21,4 +19,6 @@ jobs:
       - name: Deploy Storybook
         uses: peaceiris/actions-gh-pages@v3
         with:
+          # github_token: ${{ secrets.GITHUB_TOKEN }}
+
           publish_dir: packages/core/storybook-static

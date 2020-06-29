@@ -6,14 +6,17 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@master
-      - name: Use Node.js 12.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
       - name: Install dependencies
         run: yarn install --offline
-      - name: Build project
-        run: yarn build
+      - name: Build Storybook
+        run: |
+          cd packages/core
+          yarn build
+      - name: Deploy Storybook
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: packages/core/storybook-static

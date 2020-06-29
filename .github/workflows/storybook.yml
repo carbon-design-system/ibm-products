@@ -15,6 +15,7 @@ jobs:
         run: |
           cd packages/core
           yarn build
+          ls -a
       - name: Deploy Storybook
         uses: peaceiris/actions-gh-pages@v3
         with:

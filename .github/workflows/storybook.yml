@@ -9,16 +9,14 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@master
-      - name: Install dependencies
+      - name: Install
         run: yarn install --offline
-      - name: Build Storybook
+      - name: Build
         run: |
           cd packages/core
           yarn build
-          ls -a
-      - name: Deploy Storybook
+      - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          # github_token: ${{ secrets.GITHUB_TOKEN }}
-
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: packages/core/storybook-static

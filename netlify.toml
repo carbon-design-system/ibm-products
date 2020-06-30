@@ -1,5 +1,4 @@
 # Netlify build and deploy settings - https://docs.netlify.com/configure-builds/file-based-configuration/#sample-file
 [build]
-base = "packages/core"
 command = "yarn build:storybook"
-publish = "storybook-static"
+publish = "packages/core/storybook-static"

@@ -12,6 +12,7 @@
   },
   "scripts": {
     "build": "lerna run build --stream --prefix --npm-client yarn",
+    "build:storybook": "cd packages/core && yarn build:storybook",
     "ci-check": "yarn format:diff && yarn test --ci",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
     "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",

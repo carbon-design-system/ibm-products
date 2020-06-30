@@ -24,13 +24,11 @@
     "@storybook/addons": "^5.3.19",
     "@storybook/preset-scss": "^1.0.2",
     "@storybook/react": "^5.3.19",
-    "@storybook/source-loader": "^5.3.19",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.6.0",
     "node-sass": "^4.14.1",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.2.1",
-    "webpack-merge": "^4.2.2",
-    "yarn": "^1.22.4"
+    "webpack-merge": "^4.2.2"
   }
 }

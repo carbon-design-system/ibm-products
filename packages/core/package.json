@@ -12,6 +12,7 @@
     "ibm cloud pak"
   ],
   "scripts": {
+    "build": "build-storybook",
     "start": "start-storybook -p 3000"
   },
   "devDependencies": {

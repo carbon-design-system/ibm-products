@@ -7,8 +7,10 @@
 
 import React from 'react';
 
+import { automation } from '../../core/.storybook';
+
 export const Default = () => <>Story</>;
 
 export default {
-  title: 'Automation/Story',
+  title: automation('Story'),
 };

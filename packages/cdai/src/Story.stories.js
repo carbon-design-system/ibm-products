@@ -7,8 +7,10 @@
 
 import React from 'react';
 
+import { cdai } from '../../core/.storybook';
+
 export const Default = () => <>Story</>;
 
 export default {
-  title: 'CD&AI/Story',
+  title: cdai('Story'),
 };

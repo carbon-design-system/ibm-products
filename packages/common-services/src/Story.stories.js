@@ -7,8 +7,10 @@
 
 import React from 'react';
 
+import { commonServices } from '../../core/.storybook';
+
 export const Default = () => <>Story</>;
 
 export default {
-  title: 'Common Services/Story',
+  title: commonServices('Story'),
 };

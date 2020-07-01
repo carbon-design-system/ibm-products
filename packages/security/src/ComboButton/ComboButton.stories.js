@@ -8,7 +8,9 @@
 import { action } from '@storybook/addon-actions';
 import React from 'react';
 
+import { security } from '../../../core/.storybook';
 import { ComboButton, ComboButtonItem } from '..';
+
 import './_index.scss';
 
 export const Default = () => (
@@ -21,6 +23,6 @@ export const Default = () => (
 );
 
 export default {
-  title: 'Security/ComboButton',
+  title: security('ComboButton'),
   component: ComboButton,
 };

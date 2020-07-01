@@ -13,12 +13,14 @@ module.exports = {
     '@storybook/addon-actions/register',
     '@storybook/addon-docs',
     '@storybook/addon-knobs/register',
-    { 
+    {
       name: '@storybook/preset-scss',
       options: {
         sassLoaderOptions: {
           sassOptions: {
-            includePaths: [resolve(__dirname, '..', '..', '..', 'node_modules')],
+            includePaths: [
+              resolve(__dirname, '..', '..', '..', 'node_modules'),
+            ],
           },
         },
       },
@@ -38,6 +40,5 @@ module.exports = {
           },
         ],
       },
-    },
-  ),
+    }),
 };

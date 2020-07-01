@@ -9,6 +9,8 @@ import { action } from '@storybook/addon-actions';
 import { text } from '@storybook/addon-knobs';
 import React from 'react';
 
+import { sectionTitle } from '../../config';
+
 import { ComboButton, ComboButtonItem } from '..';
 import './_index.scss';
 
@@ -22,6 +24,6 @@ export const Default = () => (
 );
 
 export default {
-  title: 'Security/ComboButton',
+  title: `${sectionTitle}/ComboButton`,
   component: ComboButton,
 };

@@ -5,10 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-
-export const Default = () => <>Story</>;
-
-export default {
-  title: 'CD&AI/Story',
-};
+export const sectionTitle = 'Automation';

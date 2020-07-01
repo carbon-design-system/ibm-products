@@ -7,8 +7,10 @@
 
 import React from 'react';
 
-export const Default = () => <>Story</>;
+import { sectionTitle } from '../../config';
+
+export const Default = () => <>Dummy Story</>;
 
 export default {
-  title: 'Common Services/Story',
+  title: `${sectionTitle}/Dummy`,
 };

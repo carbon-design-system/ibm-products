@@ -11,7 +11,7 @@
     "carbon community",
     "ibm cloud pak for security"
   ],
-  "devDependencies": {
+  "dependencies": {
     "@carbon/ibm-security": "^1.26.0"
   }
 }

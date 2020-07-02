@@ -6,18 +6,18 @@
  */
 
 import { action } from '@storybook/addon-actions';
-import { text } from '@storybook/addon-knobs';
 import React from 'react';
 
 import { sectionTitle } from '../../config';
 
 import { ComboButton, ComboButtonItem } from '..';
+
 import './_index.scss';
 
 export const Default = () => (
   <ComboButton>
     <ComboButtonItem onClick={action('onClick')}>
-      {text('ComboButtonItem (ComboButtonItem.children)', 'ComboButtonItem 1')}
+      ComboButtonItem 1
     </ComboButtonItem>
     <ComboButtonItem>ComboButtonItem 2</ComboButtonItem>
   </ComboButton>

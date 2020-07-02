@@ -8,7 +8,7 @@
 import { select, text } from '@storybook/addon-knobs';
 import React from 'react';
 
-import { security } from '../../../core/.storybook';
+import { sectionTitle } from '../../config';
 import { ErrorPage } from '..';
 
 import './_index.scss';
@@ -36,7 +36,7 @@ export const Default = () => (
 );
 
 export default {
-  title: security('ErrorPage'),
+  title: `${sectionTitle}/ErrorPage`,
   component: ErrorPage,
   parameters: { centered: { disable: true } },
 };

@@ -7,10 +7,10 @@
 
 import React from 'react';
 
-import { cdai } from '../../core/.storybook';
+import { sectionTitle } from '../../config';
 
-export const Default = () => <>Story</>;
+export const Default = () => <>Dummy Story</>;
 
 export default {
-  title: cdai('Story'),
+  title: `${sectionTitle}/Dummy`,
 };

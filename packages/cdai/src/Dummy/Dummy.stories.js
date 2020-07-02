@@ -7,10 +7,10 @@
 
 import React from 'react';
 
-import { commonServices } from '../../core/.storybook';
+import { sectionTitle } from '../../config';
 
-export const Default = () => <>Story</>;
+export const Default = () => <>Dummy Story</>;
 
 export default {
-  title: commonServices('Story'),
+  title: `${sectionTitle}/Dummy`,
 };

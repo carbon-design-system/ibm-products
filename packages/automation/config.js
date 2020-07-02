@@ -5,12 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-
-import { automation } from '../../core/.storybook';
-
-export const Default = () => <>Story</>;
-
-export default {
-  title: automation('Story'),
-};
+export const sectionTitle = 'Automation';

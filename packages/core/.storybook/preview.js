@@ -9,7 +9,7 @@ import centered from '@storybook/addon-centered/react';
 import { withKnobs } from '@storybook/addon-knobs';
 import { addDecorator } from '@storybook/react';
 
-import 'carbon-components/scss/globals/scss/_css--body.scss';
+import './index.scss';
 
 addDecorator(withKnobs);
 

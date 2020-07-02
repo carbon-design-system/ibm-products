@@ -25,7 +25,7 @@ export const Default = () => (
     errorName={text('Error name (errorName)', errorName)}
     links={[
       {
-        id: 0,
+        id: '0',
         href: '#',
         text: text('Link text (links[0].text)', 'Link'),
       },

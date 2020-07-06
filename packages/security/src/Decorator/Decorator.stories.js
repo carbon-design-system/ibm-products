@@ -11,8 +11,6 @@ import React from 'react';
 import { sectionTitle } from '../../config';
 import { Decorator } from '..';
 
-import './_index.scss';
-
 const { Critical, Low, High, Medium, Unknown } = Decorator;
 
 const sizes = [Unknown.defaultProps.size, 12];

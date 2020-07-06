@@ -11,8 +11,6 @@ import React from 'react';
 import { sectionTitle } from '../../config';
 import { ErrorPage } from '..';
 
-import './_index.scss';
-
 const {
   defaultProps: { errorMessage, errorName, statusCode, title },
 } = ErrorPage;

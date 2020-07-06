@@ -12,8 +12,6 @@ import { sectionTitle } from '../../config';
 
 import { ComboButton, ComboButtonItem } from '..';
 
-import './_index.scss';
-
 export const Default = () => (
   <ComboButton>
     <ComboButtonItem onClick={action('onClick')}>

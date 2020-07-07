@@ -8,7 +8,6 @@
 import { select, text } from '@storybook/addon-knobs';
 import React from 'react';
 
-import Style from '../../../core/.storybook';
 import { sectionTitle } from '../../config';
 import { ErrorPage } from '..';
 
@@ -21,29 +20,23 @@ const {
 const statusCodes = [403, 404, 500, statusCode];
 
 export const Default = () => (
-  <Style styles={styles}>
-    <ErrorPage
-      errorMessage={text('Error message (errorMessage)', errorMessage)}
-      errorName={text('Error name (errorName)', errorName)}
-      links={[
-        {
-          id: '0',
-          href: '#',
-          text: text('Link text (links[0].text)', 'Link'),
-        },
-      ]}
-      statusCode={select(
-        'Status code (statusCode)',
-        statusCodes,
-        statusCodes[0]
-      )}
-      title={text('Title (title)', title)}
-    />
-  </Style>
+  <ErrorPage
+    errorMessage={text('Error message (errorMessage)', errorMessage)}
+    errorName={text('Error name (errorName)', errorName)}
+    links={[
+      {
+        id: '0',
+        href: '#',
+        text: text('Link text (links[0].text)', 'Link'),
+      },
+    ]}
+    statusCode={select('Status code (statusCode)', statusCodes, statusCodes[0])}
+    title={text('Title (title)', title)}
+  />
 );
 
 export default {
   title: `${sectionTitle}/ErrorPage`,
   component: ErrorPage,
-  parameters: { centered: { disable: true } },
+  parameters: { centered: { disable: true }, styles },
 };

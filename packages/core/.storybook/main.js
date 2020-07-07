@@ -24,6 +24,7 @@ module.exports = {
           },
         },
 
+        // https://webpack.js.org/loaders/style-loader/#lazystyletag
         styleLoaderOptions: {
           injectType: 'lazyStyleTag',
         },

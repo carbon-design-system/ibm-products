@@ -9,13 +9,18 @@ import centered from '@storybook/addon-centered/react';
 import { withKnobs } from '@storybook/addon-knobs';
 import { addDecorator } from '@storybook/react';
 
-import './index.scss';
+import React from 'react';
+
+import Style from '.';
+import styles from './index.scss';
 
 addDecorator(withKnobs);
 
 // https://github.com/storybookjs/storybook/issues/8128
-addDecorator((...args) =>
-  new URL(document.location).searchParams.get('viewMode') === 'docs'
-    ? args[0]()
-    : centered(...args)
-);
+addDecorator((...args) => (
+  <Style styles={styles}>
+    {new URL(document.location).searchParams.get('viewMode') === 'docs'
+      ? args[0]()
+      : centered(...args)}
+  </Style>
+));

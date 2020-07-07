@@ -8,8 +8,11 @@
 import { select, text } from '@storybook/addon-knobs';
 import React from 'react';
 
+import Style from '../../../core/.storybook';
 import { sectionTitle } from '../../config';
 import { ErrorPage } from '..';
+
+import styles from './_index.scss';
 
 const {
   defaultProps: { errorMessage, errorName, statusCode, title },
@@ -18,19 +21,25 @@ const {
 const statusCodes = [403, 404, 500, statusCode];
 
 export const Default = () => (
-  <ErrorPage
-    errorMessage={text('Error message (errorMessage)', errorMessage)}
-    errorName={text('Error name (errorName)', errorName)}
-    links={[
-      {
-        id: '0',
-        href: '#',
-        text: text('Link text (links[0].text)', 'Link'),
-      },
-    ]}
-    statusCode={select('Status code (statusCode)', statusCodes, statusCodes[0])}
-    title={text('Title (title)', title)}
-  />
+  <Style styles={styles}>
+    <ErrorPage
+      errorMessage={text('Error message (errorMessage)', errorMessage)}
+      errorName={text('Error name (errorName)', errorName)}
+      links={[
+        {
+          id: '0',
+          href: '#',
+          text: text('Link text (links[0].text)', 'Link'),
+        },
+      ]}
+      statusCode={select(
+        'Status code (statusCode)',
+        statusCodes,
+        statusCodes[0]
+      )}
+      title={text('Title (title)', title)}
+    />
+  </Style>
 );
 
 export default {

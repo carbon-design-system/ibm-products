@@ -8,17 +8,22 @@
 import { action } from '@storybook/addon-actions';
 import React from 'react';
 
+import Style from '../../../core/.storybook';
 import { sectionTitle } from '../../config';
 
 import { ComboButton, ComboButtonItem } from '..';
 
+import styles from './_index.scss';
+
 export const Default = () => (
-  <ComboButton>
-    <ComboButtonItem onClick={action('onClick')}>
-      ComboButtonItem 1
-    </ComboButtonItem>
-    <ComboButtonItem>ComboButtonItem 2</ComboButtonItem>
-  </ComboButton>
+  <Style styles={styles}>
+    <ComboButton>
+      <ComboButtonItem onClick={action('onClick')}>
+        ComboButtonItem 1
+      </ComboButtonItem>
+      <ComboButtonItem>ComboButtonItem 2</ComboButtonItem>
+    </ComboButton>
+  </Style>
 );
 
 export default {

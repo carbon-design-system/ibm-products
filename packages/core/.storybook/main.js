@@ -23,6 +23,10 @@ module.exports = {
             ],
           },
         },
+
+        styleLoaderOptions: {
+          injectType: 'lazyStyleTag',
+        },
       },
     },
   ],

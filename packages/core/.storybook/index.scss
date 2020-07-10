@@ -5,4 +5,11 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@import '@carbon/type/scss/reset';
+@import 'carbon-components/scss/globals/scss/css--font-face';
+
+$css--reset: false;
+
 @import 'carbon-components/scss/globals/scss/css--body';
+
+@include carbon--type-reset;

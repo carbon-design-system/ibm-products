@@ -9,7 +9,9 @@ import centered from '@storybook/addon-centered/react';
 import { withKnobs } from '@storybook/addon-knobs';
 import { addDecorator } from '@storybook/react';
 
-import './index.scss';
+import React, { useEffect } from 'react';
+
+import index from './index.scss';
 
 addDecorator(withKnobs);
 
@@ -19,3 +21,25 @@ addDecorator((...args) =>
     ? args[0]()
     : centered(...args)
 );
+
+const Style = ({ children, styles }) => {
+  const { unuse, use } = styles;
+
+  useEffect(() => {
+    use();
+
+    return () => unuse();
+  });
+
+  return children;
+};
+
+addDecorator((storyFn, { parameters: { styles } }) => {
+  const story = storyFn();
+
+  return (
+    <Style styles={index}>
+      {styles ? <Style styles={styles}>{story}</Style> : story}
+    </Style>
+  );
+});

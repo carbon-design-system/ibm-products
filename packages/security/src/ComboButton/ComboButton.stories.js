@@ -12,7 +12,7 @@ import { sectionTitle } from '../../config';
 
 import { ComboButton, ComboButtonItem } from '..';
 
-import './_index.scss';
+import styles from './_index.scss';
 
 export const Default = () => (
   <ComboButton>
@@ -26,4 +26,5 @@ export const Default = () => (
 export default {
   title: `${sectionTitle}/ComboButton`,
   component: ComboButton,
+  parameters: { styles },
 };

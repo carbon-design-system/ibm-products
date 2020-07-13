@@ -13,13 +13,17 @@ import { ICA } from '..';
 
 import styles from './_index.scss';
 
+const {
+  defaultProps: { forceShowTotal, percentage, total },
+} = ICA;
+
 export const Default = () => (
   <ICA
     label={text('Label (label)', 'Label')}
-    value={number('Value (value)', 1)}
-    total={number('Total (total)', 100)}
-    percentage={boolean('Percentage (percentage)', false)}
-    forceShowTotal={boolean('Show total (forceShowTotal)', false)}
+    value={number('Value (value)', total)}
+    total={number('Total (total)', total)}
+    percentage={boolean('Percentage (percentage)', percentage)}
+    forceShowTotal={boolean('Show total (forceShowTotal)', forceShowTotal)}
   />
 );
 

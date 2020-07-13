@@ -5,12 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { ComboButton, ComboButtonItem } from './ComboButton';
-export { ErrorPage } from './ErrorPage';
-
 export {
   TypeLayout,
   TypeLayoutBody,
   TypeLayoutCell,
   TypeLayoutRow,
-} from './TypeLayout';
+} from '@carbon/ibm-security';

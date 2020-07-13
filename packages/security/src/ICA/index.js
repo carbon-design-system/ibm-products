@@ -5,6 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { ComboButton, ComboButtonItem } from './ComboButton';
-export { ErrorPage } from './ErrorPage';
-export { ICA } from './ICA';
+export { ICA } from '@carbon/ibm-security';

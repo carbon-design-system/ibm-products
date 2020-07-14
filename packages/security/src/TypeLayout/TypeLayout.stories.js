@@ -19,33 +19,26 @@ const {
 
 const sizes = ['xs', 'sm', size, 'lg'];
 
+const array = (arrayLength) => new Array(arrayLength).fill();
+
+const prop = (rowIndex, cellIndex) => {
+  const value = `TypeLayoutRow[${rowIndex}] TypeLayoutCell[${cellIndex}].children`;
+
+  return text(`Cell text (${value})`, value);
+};
+
 export const Default = () => (
   <TypeLayout
     size={select('Size (size)', sizes, size)}
     border={boolean('Border (border)', border)}>
     <TypeLayoutBody>
-      <TypeLayoutRow>
-        <TypeLayoutCell>
-          {text(
-            'Cell text (TypeLayoutRow[0] TypeLayoutCell[0].children)',
-            'Title'
-          )}
-        </TypeLayoutCell>
-        <TypeLayoutCell>
-          {text(
-            'Cell text (TypeLayoutRow[0] TypeLayoutCell[1].children)',
-            'Description'
-          )}
-        </TypeLayoutCell>
-      </TypeLayoutRow>
-      <TypeLayoutRow>
-        <TypeLayoutCell>Title</TypeLayoutCell>
-        <TypeLayoutCell>Description</TypeLayoutCell>
-      </TypeLayoutRow>
-      <TypeLayoutRow>
-        <TypeLayoutCell>Title</TypeLayoutCell>
-        <TypeLayoutCell>Description</TypeLayoutCell>
-      </TypeLayoutRow>
+      {array(3).map((item, rowIndex) => (
+        <TypeLayoutRow>
+          {array(2).map((item, cellIndex) => (
+            <TypeLayoutCell>{prop(rowIndex, cellIndex)}</TypeLayoutCell>
+          ))}
+        </TypeLayoutRow>
+      ))}
     </TypeLayoutBody>
   </TypeLayout>
 );

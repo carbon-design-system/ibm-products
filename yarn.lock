@@ -1392,7 +1392,7 @@
   resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-10.9.2.tgz#887214457d302ed7df933a9df5974a565c2a3ee9"
   integrity sha512-MnH4drCk2igfCADiWmUFkOaAZg2GwxQmaZ19+Tbu8gkQehICm3/RsuMqKGaq4gdynrXjbD6xsNOhqicKQtfdlg==
 
-"@carbon/colors@^10.9.2":
+"@carbon/colors@^10.11.0", "@carbon/colors@^10.9.2":
   version "10.11.0"
   resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-10.11.0.tgz#060dce87ddfaabe313ad85d677962e92cf6184a1"
   integrity sha512-x9kT5sN3f8sz/gELpVmDbTeNJ20LP70MI+kLsd19RQICrZipoLJG0Ajn1J9t5NCdz3XGBYb3oiUoAtMiwt/4jA==
@@ -1484,6 +1484,16 @@
     "@carbon/colors" "^10.9.2"
     "@carbon/layout" "^10.9.2"
     "@carbon/type" "^10.10.2"
+    color "^3.1.2"
+
+"@carbon/themes@^10.14.0":
+  version "10.14.0"
+  resolved "https://registry.yarnpkg.com/@carbon/themes/-/themes-10.14.0.tgz#24eb4fb47b1e4d4c933106e98c5923685ac0adf8"
+  integrity sha512-bDcupoeR71itBEWSblEINpG4I0w7yWB+6c6JbgnorK1cqbWHCWJwj8fND2h9QlnRIV2vt4pV5/j76Uc0ru0yaw==
+  dependencies:
+    "@carbon/colors" "^10.11.0"
+    "@carbon/layout" "^10.11.0"
+    "@carbon/type" "^10.12.0"
     color "^3.1.2"
 
 "@carbon/type@10.10.2":
@@ -5855,7 +5865,7 @@ comma-separated-tokens@^1.0.0:
   resolved "https://registry.yarnpkg.com/comma-separated-tokens/-/comma-separated-tokens-1.0.8.tgz#632b80b6117867a158f1080ad498b2fbe7e3f5ea"
   integrity sha512-GHuDRO12Sypu2cV70d1dkA2EUmXHgntrzbpvOB+Qy+49ypNfGgFQIC2fhhXbnyrJRynDCAARsT7Ou0M6hirpfw==
 
-commander@^2.19.0, commander@^2.20.0, commander@~2.20.3:
+commander@^2.17.1, commander@^2.19.0, commander@^2.20.0, commander@~2.20.3:
   version "2.20.3"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
   integrity sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
@@ -10239,6 +10249,13 @@ loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.4.0:
   integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
   dependencies:
     js-tokens "^3.0.0 || ^4.0.0"
+
+lorem-ipsum@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/lorem-ipsum/-/lorem-ipsum-2.0.3.tgz#9f1fa634780c9f58a349d4e091c3ba74f733164e"
+  integrity sha512-CX2r84DMWjW/DWiuzicTI9aRaJPAw2cvAGMJYZh/nx12OkTGqloj8y8FU0S8ZkKwOdqhfxEA6Ly8CW2P6Yxjwg==
+  dependencies:
+    commander "^2.17.1"
 
 loud-rejection@^1.0.0:
   version "1.6.0"

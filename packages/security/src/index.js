@@ -8,3 +8,4 @@
 export { ComboButton, ComboButtonItem } from './ComboButton';
 export { ErrorPage } from './ErrorPage';
 export { ICA } from './ICA';
+export { ScrollGradient } from './ScrollGradient';

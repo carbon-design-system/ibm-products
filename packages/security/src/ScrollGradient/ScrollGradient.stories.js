@@ -23,8 +23,6 @@ const {
 } = ScrollGradient;
 
 const dimension = 40;
-
-const children = new LoremIpsum().generateParagraphs(dimension / 10);
 const dimensions = miniUnits(dimension);
 
 const props = () => ({
@@ -33,11 +31,12 @@ const props = () => ({
     'Hide start gradient (hideStartGradient)',
     hideStartGradient
   ),
-  children,
   style: { height: dimensions, width: dimensions },
 });
 
-const Default = () => <ScrollGradient {...props()} />;
+const children = new LoremIpsum().generateParagraphs(dimension / 10);
+
+const Default = () => <ScrollGradient {...props()}>{children}</ScrollGradient>;
 
 const horizontal = () => (
   <ScrollGradient {...props()} direction={ScrollDirection.X}>

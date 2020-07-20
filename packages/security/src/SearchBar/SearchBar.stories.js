@@ -14,7 +14,7 @@ import { SearchBar } from '..';
 
 import styles from './_index.scss';
 
-const value = () => {
+const state = () => {
   const [value, setValue] = useState('');
 
   return {
@@ -33,7 +33,7 @@ const props = () => ({
   clearButtonLabelText: 'Clear',
   labelText: 'Label',
   onSubmit: action('onSubmit'),
-  ...value(),
+  ...state(),
 });
 
 const Default = () => <SearchBar {...props()} />;

@@ -6,6 +6,9 @@
  */
 
 import { boolean, select, text } from '@storybook/addon-knobs';
+
+import { LoremIpsum } from 'lorem-ipsum';
+
 import React from 'react';
 
 import { sectionTitle } from '../../config';
@@ -18,27 +21,25 @@ const {
 } = TypeLayout;
 
 const sizes = ['xs', 'sm', size, 'lg'];
-
-const array = (arrayLength) => new Array(arrayLength).fill();
-
-const prop = (rowIndex, cellIndex) => {
-  const value = `TypeLayoutRow[${rowIndex}] TypeLayoutCell[${cellIndex}].children`;
-
-  return text(`Cell text (${value})`, value);
-};
+const lorem = new LoremIpsum();
 
 export const Default = () => (
   <TypeLayout
     size={select('Size (size)', sizes, size)}
     border={boolean('Border (border)', border)}>
     <TypeLayoutBody>
-      {array(3).map((item, rowIndex) => (
-        <TypeLayoutRow>
-          {array(2).map((item, cellIndex) => (
-            <TypeLayoutCell>{prop(rowIndex, cellIndex)}</TypeLayoutCell>
-          ))}
-        </TypeLayoutRow>
-      ))}
+      <TypeLayoutRow>
+        <TypeLayoutCell>{lorem.generateWords(1)}</TypeLayoutCell>
+        <TypeLayoutCell>{lorem.generateSentences(1)}</TypeLayoutCell>
+      </TypeLayoutRow>
+      <TypeLayoutRow>
+        <TypeLayoutCell>{lorem.generateWords(2)}</TypeLayoutCell>
+        <TypeLayoutCell>{lorem.generateSentences(2)}</TypeLayoutCell>
+      </TypeLayoutRow>
+      <TypeLayoutRow>
+        <TypeLayoutCell>{lorem.generateWords(3)}</TypeLayoutCell>
+        <TypeLayoutCell>{lorem.generateSentences(3)}</TypeLayoutCell>
+      </TypeLayoutRow>
     </TypeLayoutBody>
   </TypeLayout>
 );

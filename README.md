@@ -19,10 +19,11 @@
 
 ## Browser support
 
+This library supports the latest versions of 
 - Apple Safari
 - Google Chrome
 - Microsoft Edge
-- Mozilla Firefox (including ESR)
+- Mozilla Firefox
 
 ## 📝 License
 

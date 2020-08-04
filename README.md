@@ -17,6 +17,13 @@
 
 > IBM Cloud Paks
 
+## Browser support
+
+- Apple Safari
+- Google Chrome
+- Microsoft Edge
+- Mozilla Firefox (including ESR)
+
 ## 📝 License
 
 Licensed under the [Apache 2.0 License](/LICENSE).

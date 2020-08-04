@@ -6,6 +6,7 @@
  */
 
 export { ComboButton, ComboButtonItem } from './ComboButton';
+export { Decorator } from './Decorator';
 export { ErrorPage } from './ErrorPage';
 export { ICA } from './ICA';
 export { ScrollGradient } from './ScrollGradient';

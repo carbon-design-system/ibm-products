@@ -19,7 +19,8 @@
 
 ## Browser support
 
-This library supports the latest versions of 
+This library supports the latest versions of
+
 - Apple Safari
 - Google Chrome
 - Microsoft Edge

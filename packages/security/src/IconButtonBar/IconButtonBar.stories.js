@@ -5,9 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { IconButton } from '@carbon/ibm-security';
 import { Add16 } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
-import { number, select } from '@storybook/addon-knobs';
+import { boolean, number, select } from '@storybook/addon-knobs';
 import React from 'react';
 
 import { sectionTitle } from '../../config';
@@ -16,23 +17,43 @@ import { IconButtonBar } from '..';
 import styles from './_index.scss';
 
 const {
-  defaultProps: { length, size },
+  defaultProps: {
+    iconTooltipDirection,
+    length,
+    overflowMenuDirection,
+    size,
+    tooltip,
+  },
   name,
 } = IconButtonBar;
 
-const actions = new Array(length).fill().map((item = 'Action', index) => ({
-  label: `${item} ${index}`,
-  onClick: action('onClick'),
-  renderIcon: Add16,
-}));
+const {
+  TooltipDirection: { BOTTOM, TOP },
+} = IconButton;
 
+const direction = [BOTTOM, TOP];
 const sizes = ['sm', 'md', size, 'xl'];
 
 export const Default = () => (
   <IconButtonBar
-    actions={actions}
-    length={number('Length (length)', length)}
+    actions={new Array(length).fill().map((item = 'Action', index) => ({
+      label: `${item} ${index}`,
+      onClick: action('onClick'),
+      renderIcon: Add16,
+    }))}
+    length={number('Length (length)', length - 1, { min: 0, max: length })}
     size={select('Size (size)', sizes, size)}
+    tooltip={boolean('Tooltip (tooltip)', tooltip)}
+    iconTooltipDirection={select(
+      'Icon tooltip direction (iconTooltipDirection)',
+      direction,
+      iconTooltipDirection
+    )}
+    overflowMenuDirection={select(
+      'Overflow menu direction (overflowMenuDirection)',
+      direction,
+      overflowMenuDirection
+    )}
   />
 );
 

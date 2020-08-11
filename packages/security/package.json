@@ -12,6 +12,6 @@
     "ibm cloud pak for security"
   ],
   "dependencies": {
-    "@carbon/ibm-security": "^1.26.0"
+    "@carbon/ibm-security": "^1.29.0"
   }
 }

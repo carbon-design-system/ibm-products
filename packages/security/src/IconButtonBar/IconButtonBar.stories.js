@@ -6,7 +6,7 @@
  */
 
 import { IconButton } from '@carbon/ibm-security';
-import { Add16 } from '@carbon/icons-react';
+import { Add16, Edit16, Locked16 } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
 import { boolean, number, select } from '@storybook/addon-knobs';
 import React from 'react';
@@ -32,15 +32,12 @@ const {
 } = IconButton;
 
 const direction = [BOTTOM, TOP];
+const divider = [null, 'left', 'right', 'sides'];
+const icons = [Add16, Edit16, Locked16];
 const sizes = ['sm', 'md', size, 'xl'];
 
 export const Default = () => (
   <IconButtonBar
-    actions={new Array(length).fill().map((item = 'Action', index) => ({
-      label: `${item} ${index}`,
-      onClick: action('onClick'),
-      renderIcon: Add16,
-    }))}
     length={number('Length (length)', length - 1, { min: 0, max: length })}
     size={select('Size (size)', sizes, size)}
     tooltip={boolean('Tooltip (tooltip)', tooltip)}
@@ -54,6 +51,15 @@ export const Default = () => (
       direction,
       overflowMenuDirection
     )}
+    actions={new Array(length).fill().map((item = 'Action', index) => ({
+      divider:
+        index === 0
+          ? select(`Divider (actions[${index}].divider)`, divider, divider[0])
+          : null,
+      label: `${item} ${index}`,
+      onClick: action('onClick'),
+      renderIcon: icons[index],
+    }))}
   />
 );
 

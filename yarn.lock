@@ -1476,6 +1476,11 @@
   resolved "https://registry.yarnpkg.com/@carbon/layout/-/layout-10.11.0.tgz#db029582688484d3b12dfbc53b7ba7f612df90f1"
   integrity sha512-lt3qV4vROar4cwjxPXdYKcnIhCNxiIJVOnaMlGr1YADCXjzQ5f9uQWysDvfwOBPvN3cqeCe18QpIKDe9PaEqiQ==
 
+"@carbon/layout@^10.12.0":
+  version "10.12.0"
+  resolved "https://registry.yarnpkg.com/@carbon/layout/-/layout-10.12.0.tgz#8f80c8d169a1c62669cb65470619b6c259e187a5"
+  integrity sha512-qS6WHPqEyVl1AzAnG5awoxfYw8RbX4Pf5Y/Z46s5wTTxm/zzF7Ju/Ej3H2Xkjny1NL7PsF3xyh2CtiojLBrurg==
+
 "@carbon/motion@10.7.0":
   version "10.7.0"
   resolved "https://registry.yarnpkg.com/@carbon/motion/-/motion-10.7.0.tgz#56ad32f0b37bda697de89c96384682ad29dae56f"

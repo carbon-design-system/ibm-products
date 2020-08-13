@@ -6,7 +6,6 @@
  */
 
 import { withInfo } from '@storybook/addon-info';
-import { withKnobs } from '@storybook/addon-knobs';
 import React, { useEffect } from 'react';
 
 import index from './index.scss';
@@ -25,7 +24,6 @@ const Style = ({ children, styles }) => {
 
 const decorators = [
   withInfo,
-  withKnobs,
   (storyFn, { parameters: { styles } }) => {
     const story = storyFn();
 

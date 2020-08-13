@@ -7,4 +7,4 @@
 
 import React from 'react';
 
-export { ExampleComponent } from './components/ExampleComponent.js.js';
+export { ExampleComponent } from './components/ExampleComponent';

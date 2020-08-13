@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './example-component.scss';
+// import './example-component.scss'; // Do not import SCSS directly it will be rolled up seperately.
 
 /**
  * Primary UI component for user interaction
@@ -15,6 +15,7 @@ export const ExampleComponent = ({
   const mode = primary
     ? 'storybook-example-component--primary'
     : 'storybook-example-component--secondary';
+
   return (
     <button
       type="example-component"

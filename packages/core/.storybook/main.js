@@ -13,6 +13,7 @@ module.exports = {
     '@storybook/addon-actions/register',
     '@storybook/addon-docs',
     '@storybook/addon-knobs/register',
+    '@storybook/addon-essentials',
     {
       name: '@storybook/preset-scss',
       options: {

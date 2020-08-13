@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { action } from '@storybook/addon-actions';
 import React from 'react';
 
 import { sectionTitle } from '../../config';
@@ -14,11 +13,9 @@ import { ComboButton, ComboButtonItem } from '..';
 
 import styles from './_index.scss';
 
-export const Default = () => (
-  <ComboButton>
-    <ComboButtonItem onClick={action('onClick')}>
-      ComboButtonItem 1
-    </ComboButtonItem>
+export const Default = ({ onClick, ...props }) => (
+  <ComboButton {...props}>
+    <ComboButtonItem onClick={onClick}>ComboButtonItem 1</ComboButtonItem>
     <ComboButtonItem>ComboButtonItem 2</ComboButtonItem>
   </ComboButton>
 );
@@ -27,4 +24,6 @@ export default {
   title: `${sectionTitle}/ComboButton`,
   component: ComboButton,
   parameters: { styles },
+  args: ComboButton.defaultProps,
+  argTypes: { onClick: { action: 'onClick' } },
 };

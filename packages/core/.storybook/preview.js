@@ -5,24 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import centered from '@storybook/addon-centered/react';
 import { withInfo } from '@storybook/addon-info';
 import { withKnobs } from '@storybook/addon-knobs';
-import { addDecorator } from '@storybook/react';
-
 import React, { useEffect } from 'react';
 
 import index from './index.scss';
-
-addDecorator(withInfo);
-addDecorator(withKnobs);
-
-// https://github.com/storybookjs/storybook/issues/8128
-addDecorator((...args) =>
-  new URL(document.location).searchParams.get('viewMode') === 'docs'
-    ? args[0]()
-    : centered(...args)
-);
 
 const Style = ({ children, styles }) => {
   const { unuse, use } = styles;
@@ -36,12 +23,22 @@ const Style = ({ children, styles }) => {
   return children;
 };
 
-addDecorator((storyFn, { parameters: { styles } }) => {
-  const story = storyFn();
+const decorators = [
+  withInfo,
+  withKnobs,
+  (storyFn, { parameters: { styles } }) => {
+    const story = storyFn();
 
-  return (
-    <Style styles={index}>
-      {styles ? <Style styles={styles}>{story}</Style> : story}
-    </Style>
-  );
-});
+    return (
+      <Style styles={index}>
+        {styles ? <Style styles={styles}>{story}</Style> : story}
+      </Style>
+    );
+  },
+];
+
+const parameters = {
+  layout: 'centered',
+};
+
+export { decorators, parameters };

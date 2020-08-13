@@ -19,7 +19,7 @@ const {
 
 const statusCodes = [403, 404, 500, statusCode];
 
-export const Default = () => (
+export const Default = (props) => (
   <ErrorPage
     errorMessage={text('Error message (errorMessage)', errorMessage)}
     errorName={text('Error name (errorName)', errorName)}
@@ -32,11 +32,13 @@ export const Default = () => (
     ]}
     statusCode={select('Status code (statusCode)', statusCodes, statusCodes[0])}
     title={text('Title (title)', title)}
+    {...props}
   />
 );
 
 export default {
   title: `${sectionTitle}/ErrorPage`,
   component: ErrorPage,
-  parameters: { centered: { disable: true }, styles },
+  parameters: { layout: 'fullscreen', styles },
+  args: ErrorPage.defaultProps,
 };

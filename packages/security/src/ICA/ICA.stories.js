@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { boolean, number, text } from '@storybook/addon-knobs';
 import React from 'react';
 
 import { sectionTitle } from '../../config';
@@ -13,22 +12,17 @@ import { ICA } from '..';
 
 import styles from './_index.scss';
 
-const {
-  defaultProps: { forceShowTotal, percentage, total },
-} = ICA;
+const { defaultProps } = ICA;
 
-export const Default = () => (
-  <ICA
-    label={text('Label (label)', 'Label')}
-    value={number('Value (value)', total)}
-    total={number('Total (total)', total)}
-    percentage={boolean('Percentage (percentage)', percentage)}
-    forceShowTotal={boolean('Show total (forceShowTotal)', forceShowTotal)}
-  />
-);
+export const Default = (props) => <ICA {...props} />;
 
 export default {
   title: `${sectionTitle}/ICA`,
   component: ICA,
   parameters: { styles },
+  args: {
+    ...defaultProps,
+    label: 'Label',
+    value: defaultProps.total,
+  },
 };

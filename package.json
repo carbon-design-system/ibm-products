@@ -15,8 +15,8 @@
     "build:storybook": "cd packages/core && yarn build:storybook",
     "ci-check": "yarn format:diff && yarn test --ci",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
-    "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
-    "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
+    "format": "prettier --write '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
+    "format:diff": "prettier --list-different '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "test": "jest",
     "sync": "carbon-cli sync"
   },

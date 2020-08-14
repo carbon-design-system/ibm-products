@@ -17,7 +17,7 @@ const Style = ({ children, styles }) => {
     use();
 
     return () => unuse();
-  });
+  }, []);
 
   return children;
 };

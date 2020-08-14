@@ -8,6 +8,15 @@
 
 > IBM Cloud Paks
 
+## Browser support
+
+This library supports the latest versions of
+
+- Apple Safari
+- Google Chrome
+- Microsoft Edge
+- Mozilla Firefox
+
 ## 📝 License
 
 Licensed under the

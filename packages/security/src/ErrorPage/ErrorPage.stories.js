@@ -38,5 +38,5 @@ export const Default = () => (
 export default {
   title: `${sectionTitle}/ErrorPage`,
   component: ErrorPage,
-  parameters: { centered: { disable: true }, styles },
+  parameters: { layout: 'fullscreen', styles },
 };

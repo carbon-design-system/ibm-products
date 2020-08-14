@@ -86,7 +86,7 @@ ExampleComponent.propTypes = {
   /**
    * How large should the buttons be?
    */
-  size: PropTypes.oneOf(['small', 'field', '']),
+  size: PropTypes.oneOf(['default', 'small', 'field']),
   /**
    * Primary button label
    */
@@ -108,7 +108,7 @@ ExampleComponent.propTypes = {
 ExampleComponent.defaultProps = {
   boxedBorder: false,
   borderColor: null,
-  size: '',
+  size: 'default',
   primaryButtonLabel: 'Primary',
   secondaryButtonLabel: 'Secondary',
   primaryKind: 'primary',

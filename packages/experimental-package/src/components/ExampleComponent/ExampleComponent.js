@@ -98,11 +98,11 @@ ExampleComponent.propTypes = {
   /**
    * Optional primary click handler
    */
-  onClickPrimary: PropTypes.func,
+  onPrimaryClick: PropTypes.func,
   /**
    * Optional secpmdaru click handler
    */
-  onClickSecondary: PropTypes.func,
+  onSecondaryClick: PropTypes.func,
 };
 
 ExampleComponent.defaultProps = {

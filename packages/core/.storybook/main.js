@@ -32,7 +32,7 @@ module.exports = {
     },
   ],
 
-  stories: ['../docs/**/*.stories.js', '../../**/*.stories.js'],
+  stories: ['../docs/**/*.stories.*', '../../**/*.stories.*'],
   webpackFinal: async (configuration) =>
     merge(configuration, {
       module: {

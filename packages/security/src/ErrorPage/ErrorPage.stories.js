@@ -5,40 +5,38 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { select, text } from '@storybook/addon-knobs';
 import React from 'react';
 
 import { sectionTitle } from '../../config';
 import { ErrorPage } from '..';
-
 import styles from './_index.scss';
 
+export const Default = (props) => <ErrorPage {...props} />;
+
 const {
-  defaultProps: { errorMessage, errorName, statusCode, title },
+  defaultProps: { backgroundImage, labels, statusCode, ...defaultProps },
 } = ErrorPage;
 
 const statusCodes = [403, 404, 500, statusCode];
-
-export const Default = (props) => (
-  <ErrorPage
-    errorMessage={text('Error message (errorMessage)', errorMessage)}
-    errorName={text('Error name (errorName)', errorName)}
-    links={[
-      {
-        id: '0',
-        href: '#',
-        text: text('Link text (links[0].text)', 'Link'),
-      },
-    ]}
-    statusCode={select('Status code (statusCode)', statusCodes, statusCodes[0])}
-    title={text('Title (title)', title)}
-    {...props}
-  />
-);
 
 export default {
   title: `${sectionTitle}/ErrorPage`,
   component: ErrorPage,
   parameters: { layout: 'fullscreen', styles },
-  args: ErrorPage.defaultProps,
+  args: {
+    ...defaultProps,
+    links: [
+      {
+        id: '0',
+        href: '#',
+        text: 'Link',
+      },
+    ],
+    statusCode: statusCodes[0],
+  },
+  argTypes: {
+    statusCode: {
+      control: { type: 'select', options: statusCodes },
+    },
+  },
 };

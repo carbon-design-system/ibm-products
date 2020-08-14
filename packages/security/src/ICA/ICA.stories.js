@@ -9,12 +9,13 @@ import React from 'react';
 
 import { sectionTitle } from '../../config';
 import { ICA } from '..';
-
 import styles from './_index.scss';
 
-const { defaultProps } = ICA;
-
 export const Default = (props) => <ICA {...props} />;
+
+const {
+  defaultProps: { total, ...defaultProps },
+} = ICA;
 
 export default {
   title: `${sectionTitle}/ICA`,
@@ -23,6 +24,6 @@ export default {
   args: {
     ...defaultProps,
     label: 'Label',
-    value: defaultProps.total,
+    value: total,
   },
 };

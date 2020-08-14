@@ -8,9 +8,7 @@
 import React from 'react';
 
 import { sectionTitle } from '../../config';
-
 import { ComboButton, ComboButtonItem } from '..';
-
 import styles from './_index.scss';
 
 export const Default = ({ onClick, ...props }) => (
@@ -20,10 +18,22 @@ export const Default = ({ onClick, ...props }) => (
   </ComboButton>
 );
 
+const {
+  defaultProps: { direction, ...defaultProps },
+} = ComboButton;
+
 export default {
   title: `${sectionTitle}/ComboButton`,
   component: ComboButton,
+  subcomponents: {
+    ComboButtonItem,
+  },
   parameters: { styles },
-  args: ComboButton.defaultProps,
-  argTypes: { onClick: { action: 'onClick' } },
+  args: { ...defaultProps, direction },
+  argTypes: {
+    direction: {
+      control: { type: 'select', options: [direction, 'bottom'] },
+    },
+    onClick: { action: 'onClick' },
+  },
 };

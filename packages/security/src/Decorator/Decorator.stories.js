@@ -9,31 +9,33 @@ import React from 'react';
 
 import { sectionTitle } from '../../config';
 import { Decorator } from '..';
-
 import styles from './_index.scss';
 
+export const Default = (props) => <Decorator {...props} />;
+
 const {
-  defaultProps: { active, inline, noIcon, scoreThresholds },
+  defaultProps: { onClick, scoreThresholds, ...defaultProps },
 } = Decorator;
 
 const score = scoreThresholds[0];
-
-export const Default = (props) => <Decorator {...props} />;
 
 export default {
   title: `${sectionTitle}/Decorator`,
   component: Decorator,
   parameters: { styles },
   args: {
+    ...defaultProps,
     type: 'IP',
     value: '0.0.0.0',
     score,
-    inline,
-    noIcon,
-    active,
   },
   argTypes: {
     onClick: { action: 'onClick' },
+    href: {
+      control: {
+        type: 'text',
+      },
+    },
     score: {
       control: {
         type: 'range',

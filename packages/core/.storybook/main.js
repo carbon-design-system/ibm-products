@@ -13,7 +13,6 @@ module.exports = {
     '@storybook/addon-actions',
     '@storybook/addon-docs',
     '@storybook/addon-controls',
-    '@storybook/addon-knobs',
     {
       name: '@storybook/preset-scss',
       options: {

@@ -5,14 +5,14 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import { ExampleComponent } from '.';
 
 import styles from './_index.scss'; // import index in case more files are added later.
 
 export default {
-  title: 'Example/ExampleComponent',
+  title: 'Experimental/ExampleComponent',
   component: ExampleComponent,
   argTypes: {
     borderColor: { control: 'color' },
@@ -20,9 +20,32 @@ export default {
   parameters: { styles },
 };
 
-const Template = (args) => <ExampleComponent {...args} />;
+const Template = (args) => {
+  const [count, setCount] = useState(0);
 
-// const parameters = { styles };
+  const handlePrimaryClick = () => {
+    setCount(count + 1);
+    console.log('Primary was clicked');
+  };
+
+  const handleSecondaryClick = () => {
+    setCount(count - 1);
+    console.log('Secondary was clicked');
+  };
+
+  return (
+    <div>
+      <div>Count: {count}</div>
+      <div>
+        <ExampleComponent
+          {...args}
+          onPrimaryClick={handlePrimaryClick}
+          onSecondaryClick={handleSecondaryClick}
+        />
+      </div>
+    </div>
+  );
+};
 
 export const BoxedSet = Template.bind({});
 BoxedSet.args = {

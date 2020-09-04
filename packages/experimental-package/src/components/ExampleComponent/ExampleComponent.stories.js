@@ -5,14 +5,15 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React from 'react';
+import React, { useState } from 'react';
+import { action } from '@storybook/addon-actions';
 
 import { ExampleComponent } from '.';
 
 import styles from './_index.scss'; // import index in case more files are added later.
 
 export default {
-  title: 'Example/ExampleComponent',
+  title: 'Experimental/ExampleComponent',
   component: ExampleComponent,
   argTypes: {
     borderColor: { control: 'color' },
@@ -20,9 +21,15 @@ export default {
   parameters: { styles },
 };
 
-const Template = (args) => <ExampleComponent {...args} />;
-
-// const parameters = { styles };
+const Template = (args) => {
+  return (
+    <ExampleComponent
+      {...args}
+      onPrimaryClick={action('onPrimaryClick')}
+      onSecondaryClick={action('onSecondaryClick')}
+    />
+  );
+};
 
 export const BoxedSet = Template.bind({});
 BoxedSet.args = {

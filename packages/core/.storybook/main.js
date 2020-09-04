@@ -14,6 +14,7 @@ module.exports = {
     '@storybook/addon-docs',
     '@storybook/addon-controls',
     '@storybook/addon-knobs',
+    '@storybook/addon-storysource',
     {
       name: '@storybook/preset-scss',
       options: {

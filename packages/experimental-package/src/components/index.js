@@ -6,3 +6,4 @@
 //
 
 export { ExampleComponent } from './ExampleComponent';
+export { ModifiedTabs } from './ModifiedTabs';

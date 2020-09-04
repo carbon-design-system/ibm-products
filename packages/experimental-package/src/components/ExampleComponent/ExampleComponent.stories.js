@@ -6,6 +6,7 @@
 //
 
 import React, { useState } from 'react';
+import { action } from '@storybook/addon-actions';
 
 import { ExampleComponent } from '.';
 
@@ -21,29 +22,12 @@ export default {
 };
 
 const Template = (args) => {
-  const [count, setCount] = useState(0);
-
-  const handlePrimaryClick = () => {
-    setCount(count + 1);
-    console.log('Primary was clicked');
-  };
-
-  const handleSecondaryClick = () => {
-    setCount(count - 1);
-    console.log('Secondary was clicked');
-  };
-
   return (
-    <div>
-      <div>Count: {count}</div>
-      <div>
-        <ExampleComponent
-          {...args}
-          onPrimaryClick={handlePrimaryClick}
-          onSecondaryClick={handleSecondaryClick}
-        />
-      </div>
-    </div>
+    <ExampleComponent
+      {...args}
+      onPrimaryClick={action('onPrimaryClick')}
+      onSecondaryClick={action('onSecondaryClick')}
+    />
   );
 };
 

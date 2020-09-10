@@ -31,7 +31,7 @@
     "lerna": "^3.22.1",
     "lint-staged": "^10.2.10",
     "prettier": "^2.0.5",
-    "prettier-config-carbon": "^0.1.0",
+    "prettier-config-carbon": "^0.4.0",
     "react": "^16.13.1",
     "rimraf": "^3.0.2"
   },

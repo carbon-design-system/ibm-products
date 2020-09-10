@@ -10,15 +10,14 @@
 .example-component {
   display: flex;
   justify-content: flex-end;
+  --ibm-border-color: transparent;
+}
 
-  --border-color: transparent;
+.example-component--boxed-set {
+  border: 10px solid var(--ibm-border-color);
+}
 
-  &.example-component--boxed-set {
-    border: 10px solid var(--border-color);
-  }
-
-  &.example-component--shadow-set {
-    margin: 10px;
-    box-shadow: 0 0 10px var(--border-color);
-  }
+.example-component--shadow-set {
+  margin: 10px;
+  box-shadow: 0 0 10px var(--ibm-border-color);
 }

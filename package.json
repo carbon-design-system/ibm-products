@@ -18,6 +18,7 @@
     "format": "prettier --write '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "lint": "eslint packages/**/*.js",
+    "lint:style": "stylelint packages/**/*.scss --report-needless-disables --report-invalid-scope-disables",
     "test": "jest",
     "sync": "carbon-cli sync"
   },
@@ -34,9 +35,11 @@
     "lerna": "^3.22.1",
     "lint-staged": "^10.2.10",
     "prettier": "^2.0.5",
-    "prettier-config-carbon": "^0.1.0",
+    "prettier-config-carbon": "^0.4.0",
     "react": "^16.13.1",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "stylelint": "^13.6.1",
+    "stylelint-config-carbon": "^1.0.0"
   },
   "eslintConfig": {
     "parser": "babel-eslint",
@@ -90,13 +93,17 @@
   },
   "lint-staged": {
     "**/*.js": [
-      "prettier --write"
+      "yarn format",
+      "git add"
     ],
     "**/*.scss": [
-      "prettier --write"
+      "yarn format",
+      "yarn lint:style",
+      "git add"
     ],
-    "**/*.md": [
-      "prettier --write"
+    "**/*.{css,md}": [
+      "yarn format",
+      "git add"
     ]
   }
 }

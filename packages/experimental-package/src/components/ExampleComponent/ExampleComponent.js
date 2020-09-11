@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 // import './example-component.scss'; // Do not import SCSS directly it will be rolled up seperately.
 
@@ -38,63 +38,43 @@ export const ExampleComponent = ({
   };
 
   return (
-    <React.Fragment>
-      <div
-        className={[
-          'example-component',
-          `example-component--${size}`,
-          mode,
-        ].join(' ')}
-        style={borderColor && { '--border-color': borderColor }}
-        {...props}>
-        <Button
-          kind={secondaryKind}
-          onClick={handleSecondaryClick}
-          size={size}
-          disabled={props.disabled}>
-          {secondaryButtonLabel}
-        </Button>
-        <Button
-          kind={primaryKind}
-          onClick={handlePrimaryClick}
-          size={size}
-          disabled={props.disabled}>
-          {primaryButtonLabel}
-        </Button>
-      </div>
-    </React.Fragment>
+    <div
+      className={['example-component', `example-component--${size}`, mode].join(
+        ' '
+      )}
+      style={borderColor && { '--border-color': borderColor }}
+      {...props}>
+      <Button
+        kind={secondaryKind}
+        onClick={handleSecondaryClick}
+        size={size}
+        disabled={props.disabled}>
+        {secondaryButtonLabel}
+      </Button>
+      <Button
+        kind={primaryKind}
+        onClick={handlePrimaryClick}
+        size={size}
+        disabled={props.disabled}>
+        {primaryButtonLabel}
+      </Button>
+    </div>
   );
 };
 
 ExampleComponent.propTypes = {
   /**
-   * Is the border a box or a shadow
-   */
-  boxedBorder: PropTypes.bool,
-  /**
    * What border color to use
    */
   borderColor: PropTypes.string,
   /**
-   * What is the primary kind
+   * Is the border a box or a shadow
    */
-  primaryKind: PropTypes.oneOf(['primary', 'danger']),
+  boxedBorder: PropTypes.bool,
   /**
-   * What is the secondary kind
+   * disabled
    */
-  secondaryKind: PropTypes.oneOf(['secondary', 'tertiary']),
-  /**
-   * How large should the buttons be?
-   */
-  size: PropTypes.oneOf(['default', 'small', 'field']),
-  /**
-   * Primary button label
-   */
-  primaryButtonLabel: PropTypes.string.isRequired,
-  /**
-   * Secondary button label
-   */
-  secondaryButtonLabel: PropTypes.string.isRequired,
+  disabled: PropTypes.bool,
   /**
    * Optional primary click handler
    */
@@ -103,6 +83,26 @@ ExampleComponent.propTypes = {
    * Optional secpmdaru click handler
    */
   onSecondaryClick: PropTypes.func,
+  /**
+   * Primary button label
+   */
+  primaryButtonLabel: PropTypes.string.isRequired,
+  /**
+   * What is the primary kind
+   */
+  primaryKind: PropTypes.oneOf(['primary', 'danger']),
+  /**
+   * Secondary button label
+   */
+  secondaryButtonLabel: PropTypes.string.isRequired,
+  /**
+   * What is the secondary kind
+   */
+  secondaryKind: PropTypes.oneOf(['secondary', 'tertiary']),
+  /**
+   * How large should the buttons be?
+   */
+  size: PropTypes.oneOf(['default', 'small', 'field']),
 };
 
 ExampleComponent.defaultProps = {

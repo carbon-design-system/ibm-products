@@ -22,7 +22,7 @@ function run(workspace) {
   return Promise.all(
     packages
       .filter(({ packageJson }) => !packageJson.private)
-      .map(async ({ packageJson, packageFolder }) => {
+      .map(async ({ packageFolder }) => {
         const ignorePath = path.join(packageFolder, '.npmignore');
         const ignorePatterns = defaultIgnorePatterns.slice();
 

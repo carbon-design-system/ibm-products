@@ -2,7 +2,7 @@
 @import 'carbon-components/scss/components/tooltip/tooltip';
 @import 'carbon-components/scss/components/tabs/tabs';
 
-.modified-tabs .modified-tab {
+.modified-tabs .modified-tab-label {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -10,7 +10,7 @@
   height: 100%;
 }
 
-.modified-tabs .modified-tab .bx--btn {
+.modified-tabs .modified-tab-label .bx--btn {
   transform: translateY(8px);
 }
 

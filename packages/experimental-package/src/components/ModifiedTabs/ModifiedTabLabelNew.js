@@ -10,22 +10,16 @@ import PropTypes from 'prop-types';
 
 import { Add16 } from '@carbon/icons-react';
 
-export const ModifiedTabNew = ({ label, onClick }) => {
-  const handleClick = (e) => {
-    if (onClick) {
-      e.preventDefault();
-      onClick();
-    }
-  };
+export const ModifiedTabLabelNew = ({ label }) => {
   return (
-    <span className="modified-tab" onClick={handleClick}>
-      <span className="modified-tab__label">{label}</span>
+    <span className="modified-tab-label">
+      <span className="modified-tab-label__label">{label}</span>
       <Add16 />
     </span>
   );
 };
 
-ModifiedTabNew.propTypes = {
+ModifiedTabLabelNew.propTypes = {
   /**
    * Label content of the tab
    */
@@ -36,7 +30,7 @@ ModifiedTabNew.propTypes = {
   onClick: PropTypes.func,
 };
 
-ModifiedTabNew.defaultProps = {
+ModifiedTabLabelNew.defaultProps = {
   label: '',
   onClick: undefined,
 };

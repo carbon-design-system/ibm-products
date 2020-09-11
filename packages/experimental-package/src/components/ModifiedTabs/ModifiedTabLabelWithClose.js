@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 import { Button } from 'carbon-components-react';
 import { Close16 } from '@carbon/icons-react';
 
-export const ModifiedTabLabel = ({ label, onClose }) => {
-  const handleClose = (e) => {
+export const ModifiedTabLabelWithClose = ({ label, onClose }) => {
+  const handleClose = () => {
     if (onClose) {
-      const closed = onClose();
+      onClose();
     }
   };
   return (
-    <span className="modified-tab">
-      <span className="modified-tab__label">{label}</span>
+    <span className="modified-tab-label">
+      <span className="modified-tab-label__label">{label}</span>
       {/* {onClose ? ( */}
       <Button
         hasIconOnly
@@ -31,7 +31,7 @@ export const ModifiedTabLabel = ({ label, onClose }) => {
   );
 };
 
-ModifiedTabLabel.propTypes = {
+ModifiedTabLabelWithClose.propTypes = {
   /**
    * Label content of the tab
    */
@@ -42,7 +42,7 @@ ModifiedTabLabel.propTypes = {
   onClose: PropTypes.func,
 };
 
-ModifiedTabLabel.defaultProps = {
+ModifiedTabLabelWithClose.defaultProps = {
   label: '',
   onClose: undefined,
 };

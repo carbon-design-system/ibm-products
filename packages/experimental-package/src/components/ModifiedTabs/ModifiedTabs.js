@@ -5,11 +5,11 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, Tab } from 'carbon-components-react';
-import { ModifiedTabLabel } from './ModifiedTabLabel';
-import { ModifiedTabNew } from './ModifiedTabNew';
+import { ModifiedTabLabelWithClose } from './ModifiedTabLabelWithClose';
+import { ModifiedTabLabelNew } from './ModifiedTabLabelNew';
 
 export const ModifiedTabs = ({
   tabs,
@@ -18,7 +18,7 @@ export const ModifiedTabs = ({
   onNewTab,
   onCloseTab,
 }) => {
-  const handleNewTab = (e) => {
+  const handleNewTab = () => {
     if (onNewTab) {
       console.log('new tab');
       onNewTab();
@@ -39,7 +39,7 @@ export const ModifiedTabs = ({
           id={tab.id}
           key={tab.id}
           label={
-            <ModifiedTabLabel
+            <ModifiedTabLabelWithClose
               label={tab.label}
               onClose={() => handleClose(tab.id)}
             />
@@ -51,7 +51,8 @@ export const ModifiedTabs = ({
       <Tab
         href="#"
         id="tab-new"
-        label={<ModifiedTabNew label={newTabLabel} onClick={handleNewTab} />}>
+        label={<ModifiedTabLabelNew label={newTabLabel} />}
+        onClick={handleNewTab}>
         <div className="some-content">{newTabContent}</div>
       </Tab>
       {/* ) : (
@@ -63,25 +64,25 @@ export const ModifiedTabs = ({
 
 ModifiedTabs.propTypes = {
   /**
-   * Tabs array containing tab object { id, label, content }
+   * New tab content
    */
-  tabs: PropTypes.array,
+  newTabContent: PropTypes.object,
   /**
    * New tab label
    */
   newTabLabel: PropTypes.string,
   /**
-   * New tab content
-   */
-  newTabContent: PropTypes.string,
-  /**
-   * Optional onNewTab handler
-   */
-  onNewTab: PropTypes.func,
-  /**
    * Optional onCloseTab handler
    */
   onCloseTab: PropTypes.func,
+  /**
+   * New tab content
+   */
+  onNewTab: PropTypes.func,
+  /**
+   * Tabs array containing tab object { id, label, content }
+   */
+  tabs: PropTypes.array,
 };
 
 ModifiedTabs.defaultProps = {

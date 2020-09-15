@@ -5386,7 +5386,7 @@ carbon-components-react@7.15.0:
     warning "^3.0.0"
     window-or-global "^1.0.1"
 
-carbon-components-react@^7.17.0:
+carbon-components-react@^7.19.0:
   version "7.19.0"
   resolved "https://registry.yarnpkg.com/carbon-components-react/-/carbon-components-react-7.19.0.tgz#4a881b8b85bd57d2f1e662f9698cc1b825fbf88b"
   integrity sha512-ELl2goS/JpRUZ+B4X0QptUy3EvLxeoz5TOoldxmDg1C3bE5ETu9ZRpaDhGCI2K7oLFFknk2TugnYxIwOgcbOsw==
@@ -5415,7 +5415,7 @@ carbon-components@10.15.0:
     lodash.debounce "^4.0.8"
     warning "^3.0.0"
 
-carbon-components@^10.14.0, carbon-components@^10.17.0:
+carbon-components@^10.19.0:
   version "10.19.0"
   resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.19.0.tgz#276924da9d8ba792d6f4c3964b77e26d1ee7619d"
   integrity sha512-lQ3L9VyR8nYq+YkSBfH+b10TfTRrE7oamAaxcoKr2m2M0Mi6tW5jxZlxq86kIJxjdgY2LnzApP7rlra+Yq16fg==

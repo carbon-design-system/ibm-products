@@ -8,13 +8,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Add16 } from '@carbon/icons-react';
+import { Add20 } from '@carbon/icons-react';
 
 export const ModifiedTabLabelNew = ({ label }) => {
   return (
-    <span className="modified-tab-label">
-      <span className="modified-tab-label__label">{label}</span>
-      <Add16 />
+    <span className="modified-tabs__tab-new">
+      <span className="modified-tabs__tab-new__label">{label}</span>
+      <span className="modified-tabs__tab-new-img">
+        <Add20 />
+      </span>
     </span>
   );
 };

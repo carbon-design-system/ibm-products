@@ -32,7 +32,7 @@ export const ExampleComponent = ({
   };
 
   const handleSecondaryClick = (e) => {
-    if (props.onPrimaryClick) {
+    if (props.onSecondaryClick) {
       props.onSecondaryClick(e);
     }
   };

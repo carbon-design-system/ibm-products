@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, Tab } from 'carbon-components-react';
 import { ModifiedTabLabelWithClose } from './ModifiedTabLabelWithClose';
@@ -20,8 +20,11 @@ export const ModifiedTabs = ({
 }) => {
   const handleNewTab = () => {
     if (onNewTab) {
-      console.log('new tab');
       onNewTab();
+      setTimeout(() => {
+        // set focus to the new tab
+        tabsRef.current.getTabAt(tabs.length)?.tabAnchor?.focus();
+      });
     }
   };
 
@@ -31,8 +34,10 @@ export const ModifiedTabs = ({
     }
   };
 
+  const tabsRef = useRef(null);
+
   return (
-    <Tabs className="modified-tabs">
+    <Tabs className="modified-tabs" ref={tabsRef}>
       {tabs.map((tab) => (
         <Tab
           href="#"
@@ -47,17 +52,15 @@ export const ModifiedTabs = ({
           <div className="some-content">{tab.content}</div>
         </Tab>
       ))}
-      {/* {onNewTab ? ( */}
       <Tab
         href="#"
-        id="tab-new"
+        id="modified-tabs__tab-new"
         label={<ModifiedTabLabelNew label={newTabLabel} />}
-        onClick={handleNewTab}>
+        onClick={handleNewTab}
+        onKeyUp={(ev) => ev.keyCode === 32 && handleNewTab()}
+        role="button">
         <div className="some-content">{newTabContent}</div>
       </Tab>
-      {/* ) : (
-        ''
-      )} */}
     </Tabs>
   );
 };

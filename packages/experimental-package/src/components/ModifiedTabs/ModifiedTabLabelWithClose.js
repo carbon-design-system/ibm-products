@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Button } from 'carbon-components-react';
 import { Close16 } from '@carbon/icons-react';
 
 export const ModifiedTabLabelWithClose = ({ label, onClose }) => {
@@ -10,20 +9,25 @@ export const ModifiedTabLabelWithClose = ({ label, onClose }) => {
       onClose();
     }
   };
+  // const handleMousedown = (ev) => {
+  //   console.log('mouse down');
+  //   console.dir(ev);
+  //   ev.stopPropagation();
+  //   ev.cancelBubble = true;
+  //   ev.preventDefault();
+  // };
   return (
-    <span className="modified-tab-label">
-      <span className="modified-tab-label__label">{label}</span>
+    <span className="modified-tabs__tab">
+      <span className="modified-tabs__tab-label">{label}</span>
       {/* {onClose ? ( */}
-      <Button
-        hasIconOnly
-        kind="ghost"
-        renderIcon={Close16}
-        size="small"
-        tooltipAlignment="center"
-        tooltipPosition="bottom"
-        iconDescription="Close button"
+      <button
+        title="Close button"
         onClick={handleClose}
-      />
+        // onMouseDown={handleMousedown}
+        className="modified-tabs__tab-close"
+        type="button">
+        <Close16 />
+      </button>
       {/* ) : (
         ''
       )} */}

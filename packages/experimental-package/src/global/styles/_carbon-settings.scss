@@ -8,11 +8,14 @@
 // Here we import carbon settings for use in referring to colors, type, layout tokens etc.
 @import '~@carbon/type/scss/type';
 @import '~@carbon/layout/scss/layout';
+@import '~@carbon/themes/scss/themes';
+@import '~@carbon/motion/scss/motion';
 
 $feature-flags: (
   ui-shell: true,
   grid-columns-16: true,
+  // enable-css-custom-properties: true,
 );
 
-$carbon--theme: $carbon--theme--g10;
-@include carbon--theme();
+// $carbon--theme: $carbon--theme--white;
+// @include carbon--theme();

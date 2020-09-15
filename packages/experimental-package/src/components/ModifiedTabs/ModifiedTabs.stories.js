@@ -1,3 +1,4 @@
+import { _4K16 } from '@carbon/icons-react';
 //
 // Copyright IBM Corp. 2020, 2020
 //
@@ -5,7 +6,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { ModifiedTabs } from '.';
 
@@ -14,12 +15,11 @@ import styles from './_index.scss'; // import index in case more files are added
 export default {
   title: 'Experimental/ModifiedTabs',
   component: ModifiedTabs,
-  parameters: { styles, layout: 'fullscreen' },
+  parameters: { styles },
 };
 
 const Template = (args) => {
   const [tabs, setTabs] = useState([]);
-  const lastTabId = useRef(0);
 
   const addTab = (tabId) => {
     setTabs((prevState) => [
@@ -27,7 +27,9 @@ const Template = (args) => {
       {
         id: `tab-${tabId}`,
         label: `Tab ${tabId}`,
-        content: <div style={{ color: 'green' }}>Content for tab {tabId}</div>,
+        content: (
+          <div style={{ color: '#00ff00' }}>Content for tab {tabId}</div>
+        ),
       },
     ]);
   };
@@ -37,24 +39,30 @@ const Template = (args) => {
   };
 
   const handleNewTab = () => {
-    lastTabId.current += 1;
-    addTab(lastTabId.current);
+    addTab(tabs.length + 1);
   };
 
   useEffect(() => {
-    while (lastTabId.current < 4) {
-      lastTabId.current += 1;
-      addTab(lastTabId.current);
+    for (let i = 1; i < 5; i++) {
+      addTab(i);
     }
   }, []);
 
   return (
-    <ModifiedTabs
-      {...args}
-      tabs={tabs}
-      onCloseTab={handleCloseTab}
-      onNewTab={handleNewTab}
-    />
+    <div
+      style={{
+        maxWidth: '100%',
+        width: '600px',
+        padding: '30px',
+        overflow: 'hidden',
+      }}>
+      <ModifiedTabs
+        {...args}
+        tabs={tabs}
+        onCloseTab={handleCloseTab}
+        onNewTab={handleNewTab}
+      />
+    </div>
   );
 };
 
@@ -63,5 +71,5 @@ const Template = (args) => {
 export const Default = Template.bind({});
 Default.args = {
   newTabLabel: 'Add new tab',
-  newTabContent: 'Your new tab is being prepared...',
+  newTabContent: <div>Your new tab is being prepared...</div>,
 };

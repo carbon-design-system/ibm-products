@@ -19,7 +19,6 @@ export const ModifiedTabs = ({
   onCloseTab,
 }) => {
   const handleNewTab = () => {
-    console.log('wibble');
     if (onNewTab) {
       onNewTab();
       setTimeout(() => {

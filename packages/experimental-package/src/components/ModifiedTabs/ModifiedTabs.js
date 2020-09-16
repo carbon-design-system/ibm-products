@@ -47,6 +47,7 @@ export const ModifiedTabs = ({
             <ModifiedTabLabelWithClose
               label={tab.label}
               onClose={() => handleClose(tab.id)}
+              unsavedContent={tab.unsavedContent}
             />
           }>
           <div className="some-content">{tab.content}</div>
@@ -94,6 +95,7 @@ ModifiedTabs.defaultProps = {
       id: 'tab-1',
       label: 'Tab 1',
       content: <div>Iam am the content of tab 1.</div>,
+      unsavedContent: false,
     },
   ],
   newTabLabel: 'New tab',

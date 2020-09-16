@@ -17,7 +17,7 @@ import styles from './_storybook-styles.scss'; // import index in case more file
 const commonStoryCode = {
   actionCloseTab: action('onCloseTab'),
   actionNewTab: action('onNewTab'),
-  addTab(tabId, setTabs, unsavedState = false) {
+  addTab(tabId, setTabs) {
     setTabs((prevState) => [
       ...prevState,
       {
@@ -26,7 +26,6 @@ const commonStoryCode = {
         content: (
           <div style={{ color: '#00ff00' }}>Content for tab {tabId}</div>
         ),
-        unsavedState,
       },
     ]);
   },
@@ -41,12 +40,14 @@ export default {
 const Template = (args) => {
   // tabs handling code
   const [tabs, setTabs] = useState([]);
+  const nextTabId = useRef(1);
 
   const { actionCloseTab, actionNewTab, addTab } = commonStoryCode;
 
   const handleNewTab = () => {
     actionNewTab();
-    addTab(tabs.length + 1, setTabs);
+    addTab(nextTabId.current, setTabs);
+    nextTabId.current += 1;
   };
 
   const handleCloseTab = (tabId) => {
@@ -56,7 +57,8 @@ const Template = (args) => {
 
   useEffect(() => {
     for (let i = 1; i < 5; i++) {
-      addTab(i, setTabs);
+      addTab(nextTabId.current, setTabs);
+      nextTabId.current += 1;
     }
   }, [addTab]);
 
@@ -91,6 +93,7 @@ const TemplateWithExternalSavePrompt = (args) => {
   // **** tabs handling code ****
   const [tabs, setTabs] = useState([]);
   const closingTabId = useRef(null);
+  const nextTabId = useRef(1);
 
   const { actionCloseTab, actionNewTab, addTab } = commonStoryCode;
 
@@ -102,12 +105,14 @@ const TemplateWithExternalSavePrompt = (args) => {
 
   const handleNewTab = () => {
     actionNewTab();
-    addTab(tabs.length + 1, setTabs);
+    addTab(nextTabId.current, setTabs);
+    nextTabId.current += 1;
   };
 
   useEffect(() => {
     for (let i = 1; i < 5; i++) {
-      addTab(i, setTabs, false);
+      addTab(nextTabId.current, setTabs);
+      nextTabId.current += 1;
     }
   }, [addTab]);
 

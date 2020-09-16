@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Close16 } from '@carbon/icons-react';
+import { Close16, CloseFilled16 } from '@carbon/icons-react';
 
-export const ModifiedTabLabelWithClose = ({ label, onClose }) => {
+export const ModifiedTabLabelWithClose = ({
+  unsavedContent,
+  label,
+  onClose,
+}) => {
   const handleClose = () => {
     if (onClose) {
       onClose();
@@ -26,7 +30,7 @@ export const ModifiedTabLabelWithClose = ({ label, onClose }) => {
         // onMouseDown={handleMousedown}
         className="modified-tabs__tab-close"
         type="button">
-        <Close16 />
+        {unsavedContent ? <CloseFilled16 /> : <Close16 />}
       </button>
       {/* ) : (
         ''
@@ -44,9 +48,14 @@ ModifiedTabLabelWithClose.propTypes = {
    * Optional onClose handler
    */
   onClose: PropTypes.func,
+  /**
+   * unsavedContent indicates tab contents have not been saved
+   */
+  unsavedContent: PropTypes.bool,
 };
 
 ModifiedTabLabelWithClose.defaultProps = {
+  unsavedContent: false,
   label: '',
   onClose: undefined,
 };

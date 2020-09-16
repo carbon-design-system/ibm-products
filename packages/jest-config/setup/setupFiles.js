@@ -15,6 +15,11 @@ global.requestAnimationFrame = function requestAnimationFrame(callback) {
   callback();
 };
 
+const enzyme = jest.requireActual('enzyme');
+const Adapter = jest.requireActual('enzyme-adapter-react-16');
+
+enzyme.configure({ adapter: new Adapter() });
+
 if (global.HTMLElement) {
   // This is a quirk that we need to bring in due to how our `tabbable` dependency
   // determines what nodes are focusable. Without this override, it's unable to

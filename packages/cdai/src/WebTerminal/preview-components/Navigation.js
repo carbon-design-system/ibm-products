@@ -6,7 +6,11 @@ import {
   HeaderGlobalBar,
 } from 'carbon-components-react';
 
-import { Terminal32 } from '@carbon/icons-react';
+import {
+  Terminal20 as Terminal,
+  Search20 as Search,
+  User20 as User,
+} from '@carbon/icons-react';
 
 const Navigation = () => {
   return (
@@ -15,15 +19,15 @@ const Navigation = () => {
         [Platform]
       </HeaderName>
       <HeaderGlobalBar>
+        <HeaderGlobalAction aria-label="Web terminal" onClick={() => {}}>
+          <Terminal />
+        </HeaderGlobalAction>
         <HeaderGlobalAction aria-label="Search" onClick={() => {}}>
-          <Terminal32 />
+          <Search />
         </HeaderGlobalAction>
-        {/* <HeaderGlobalAction aria-label="Notifications" onClick={() => {}}>
-          <Notification20 />
+        <HeaderGlobalAction aria-label="User" onClick={() => {}}>
+          <User />
         </HeaderGlobalAction>
-        <HeaderGlobalAction aria-label="App Switcher" onClick={() => {}}>
-          <AppSwitcher20 />
-        </HeaderGlobalAction> */}
       </HeaderGlobalBar>
     </Header>
   );

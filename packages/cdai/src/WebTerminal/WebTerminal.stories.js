@@ -10,11 +10,11 @@ import WebTerminal from './WebTerminal';
 import { Navigation } from './preview-components';
 import { sectionTitle } from '../../config';
 
-import './scss/_storybook-styles.scss';
+import styles from './scss/_storybook-styles.scss';
 
 const Template = (args) => {
   return (
-    <div>
+    <div className="example">
       <Navigation />
       <div>Content</div>
       <WebTerminal {...args} />
@@ -27,4 +27,5 @@ Default.args = {};
 
 export default {
   title: `${sectionTitle}/WebTerminal`,
+  parameters: { styles },
 };

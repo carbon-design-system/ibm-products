@@ -44,7 +44,7 @@ export const ExampleComponent = ({
     setExampleStyle({
       [`--${expPrefix}-border-color`]: borderColor,
     });
-  }, [borderColor, expPrefix]);
+  }, [borderColor]);
 
   return (
     <div

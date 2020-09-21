@@ -42,7 +42,7 @@
     "react": "^16.13.1",
     "rimraf": "^3.0.2",
     "stylelint": "^13.6.1",
-    "stylelint-config-carbon": "^1.0.0"
+    "stylelint-config-carbon": "^1.1.0"
   },
   "eslintConfig": {
     "parser": "babel-eslint",

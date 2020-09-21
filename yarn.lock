@@ -1159,10 +1159,17 @@
   dependencies:
     "@carbon/icon-helpers" "^10.9.0"
 
-"@carbon/icons-react@^10.13.0", "@carbon/icons-react@^10.15.0", "@carbon/icons-react@^10.17.0":
+"@carbon/icons-react@^10.13.0":
   version "10.17.0"
   resolved "https://registry.yarnpkg.com/@carbon/icons-react/-/icons-react-10.17.0.tgz#17c0450f2280680e6e6c778f68613723c55f8f39"
   integrity sha512-XAz8RZW+na2ZAGLrw+ojYtI+RwyiGTnmAM0H+TWeG451hZHJ84CnU34G608h9eThndgFgAYYPr4ariFlaXdgZA==
+  dependencies:
+    "@carbon/icon-helpers" "^10.9.0"
+
+"@carbon/icons-react@^10.18.0":
+  version "10.18.0"
+  resolved "https://registry.yarnpkg.com/@carbon/icons-react/-/icons-react-10.18.0.tgz#881312b923a435f3093dacd61d77b4b5bd73b970"
+  integrity sha512-UZFYVBd3rU8tCspMdbj8ZMSjzCcAA7eR9WHLjET5eSP0qg2XrGOBlbJKY2ZrIJPxwrZ4TcAnexjWTQf2JdF1rA==
   dependencies:
     "@carbon/icon-helpers" "^10.9.0"
 
@@ -5419,12 +5426,12 @@ carbon-components-react@7.15.0:
     warning "^3.0.0"
     window-or-global "^1.0.1"
 
-carbon-components-react@^7.19.0:
-  version "7.19.0"
-  resolved "https://registry.yarnpkg.com/carbon-components-react/-/carbon-components-react-7.19.0.tgz#4a881b8b85bd57d2f1e662f9698cc1b825fbf88b"
-  integrity sha512-ELl2goS/JpRUZ+B4X0QptUy3EvLxeoz5TOoldxmDg1C3bE5ETu9ZRpaDhGCI2K7oLFFknk2TugnYxIwOgcbOsw==
+carbon-components-react@^7.20.0:
+  version "7.20.0"
+  resolved "https://registry.yarnpkg.com/carbon-components-react/-/carbon-components-react-7.20.0.tgz#62a9abd47b9a97f58ec206917b8a4f706dbb6877"
+  integrity sha512-vybdHrtF5r17DZCMXGJlkRY3E/yUcsFNDD9WrNu474jXyAxr+2bvf7ywv7iqaPJTzdS4/61YYEekHRXDj21CTQ==
   dependencies:
-    "@carbon/icons-react" "^10.17.0"
+    "@carbon/icons-react" "^10.18.0"
     classnames "2.2.6"
     downshift "5.2.1"
     flatpickr "4.6.1"
@@ -5452,6 +5459,15 @@ carbon-components@^10.19.0:
   version "10.19.0"
   resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.19.0.tgz#276924da9d8ba792d6f4c3964b77e26d1ee7619d"
   integrity sha512-lQ3L9VyR8nYq+YkSBfH+b10TfTRrE7oamAaxcoKr2m2M0Mi6tW5jxZlxq86kIJxjdgY2LnzApP7rlra+Yq16fg==
+  dependencies:
+    flatpickr "4.6.1"
+    lodash.debounce "^4.0.8"
+    warning "^3.0.0"
+
+carbon-components@^10.20.0:
+  version "10.20.0"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.20.0.tgz#3a927ad4f566c5dc263d32c257269c74a3ab23cc"
+  integrity sha512-MysxXg4/DpDt9GJPV3zmxi9X6HyGxr7DyROvVjf4SCyYrBqTeLOoajd3sbPhKxPjDdRIyqEb2roLq5DbbtazLg==
   dependencies:
     flatpickr "4.6.1"
     lodash.debounce "^4.0.8"
@@ -12946,11 +12962,6 @@ prelude-ls@~1.1.2:
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
   integrity sha1-IZMqVJ9eUv/ZqCf1cOBL5iqX2lQ=
 
-prettier-config-carbon@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/prettier-config-carbon/-/prettier-config-carbon-0.1.0.tgz#b0c8d18ca1d45963d37542932145e04b4dd7237a"
-  integrity sha512-GpQgJqtkx7WC88fhRKYIyDCpALjYVwuFlsOcfoeir4z2dMEbiMidShIwlm3n8cQ7MMLftG99yvCa7zpKth2c6Q==
-
 prettier-config-carbon@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/prettier-config-carbon/-/prettier-config-carbon-0.4.0.tgz#c0edfa6315bbede93dba5145a22a5686e3851e64"
@@ -15317,10 +15328,10 @@ style-to-object@0.3.0, style-to-object@^0.3.0:
   dependencies:
     inline-style-parser "0.1.1"
 
-stylelint-config-carbon@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/stylelint-config-carbon/-/stylelint-config-carbon-1.0.0.tgz#be415f9fc2004959c525fc2a0c1883126e97328e"
-  integrity sha512-bwTqUkBbUm1I0yUk6m2sQGUHoi0psNeO7MbwusOr5NfBHLaulWCPder5oW9JWQEtEXI4I0tIs/bXUsz0gZq+RA==
+stylelint-config-carbon@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/stylelint-config-carbon/-/stylelint-config-carbon-1.1.0.tgz#dde79c7de112c2cfca54121f57f15a77aeca182a"
+  integrity sha512-/XV01DxgzojfZ/ZcrB2iRqTkDFtvEXNUaxlPaQ2hL3UP2T3ERKeOuyjngIRkqsbCSSIQdS36IIBadBQA+4+6VQ==
   dependencies:
     stylelint-config-prettier "^8.0.1"
     stylelint-config-rational-order "^0.1.2"

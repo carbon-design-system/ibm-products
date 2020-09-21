@@ -36,9 +36,9 @@
     "style-loader": "^1.2.1"
   },
   "dependencies": {
-    "carbon-components": "^10.19.0",
-    "carbon-components-react": "^7.19.0",
+    "carbon-components": "^10.20.0",
+    "carbon-components-react": "^7.20.0",
     "carbon-icons": "^7.0.7",
-    "@carbon/icons-react": "^10.15.0"
+    "@carbon/icons-react": "^10.18.0"
   }
 }

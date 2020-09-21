@@ -1,4 +1,3 @@
-const settings = {
-  expPrefix: 'exp',
-};
-module.exports = settings;
+const expPrefix = 'exp';
+
+export { expPrefix };

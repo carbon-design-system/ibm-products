@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 // import './example-component.scss'; // Do not import SCSS directly it will be rolled up seperately.
 
@@ -38,14 +38,6 @@ export const ExampleComponent = ({
     }
   };
 
-  const [exampleStyle, setExampleStyle] = useState({});
-
-  useEffect(() => {
-    setExampleStyle({
-      [`--${expPrefix}-border-color`]: borderColor,
-    });
-  }, [borderColor]);
-
   return (
     <div
       className={[
@@ -53,7 +45,9 @@ export const ExampleComponent = ({
         `${expPrefix}-example-component--${size}`,
         mode,
       ].join(' ')}
-      style={exampleStyle}
+      style={{
+        [`--${expPrefix}-border-color`]: borderColor,
+      }}
       {...props}>
       <Button
         kind={secondaryKind}

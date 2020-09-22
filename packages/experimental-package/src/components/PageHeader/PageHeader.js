@@ -46,7 +46,7 @@ PageHeader.propTypes = {
   /**
    * actionBar
    */
-  // actionBar: PropTypes.instanceOf(IconButtonBar),
+  actionBar: PropTypes.node, // PropTypes.instanceOf(IconButtonBar),
   /**
    * React node specifying content to be placed in availableSpace
    */
@@ -59,6 +59,10 @@ PageHeader.propTypes = {
    * Array of BreadcrumbItems
    */
   breadcrumbItems: PropTypes.arrayOf(PropTypes.instanceOf(BreadcrumbItem)),
+  /**
+   * className to be applied to wrapping element
+   */
+  className: PropTypes.string,
   /**
    * navigation consisting of tabs or content switcher
    */
@@ -86,4 +90,5 @@ PageHeader.propTypes = {
 
 PageHeader.defaultProps = {
   background: false,
+  className: '',
 };

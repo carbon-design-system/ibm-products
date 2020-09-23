@@ -9,6 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // import './example-component.scss'; // Do not import SCSS directly it will be rolled up seperately.
 
+import { expPrefix } from '../../global/js/settings';
 import { Button } from 'carbon-components-react';
 
 export const ExampleComponent = ({
@@ -22,8 +23,8 @@ export const ExampleComponent = ({
   ...props
 }) => {
   const mode = boxedBorder
-    ? 'example-component--boxed-set'
-    : 'example-component--shadow-set';
+    ? `${expPrefix}-example-component--boxed-set`
+    : `${expPrefix}-example-component--shadow-set`;
 
   const handlePrimaryClick = (e) => {
     if (props.onPrimaryClick) {
@@ -39,10 +40,14 @@ export const ExampleComponent = ({
 
   return (
     <div
-      className={['example-component', `example-component--${size}`, mode].join(
-        ' '
-      )}
-      style={borderColor && { '--border-color': borderColor }}
+      className={[
+        `${expPrefix}-example-component`,
+        `${expPrefix}-example-component--${size}`,
+        mode,
+      ].join(' ')}
+      style={{
+        [`--${expPrefix}-border-color`]: borderColor,
+      }}
       {...props}>
       <Button
         kind={secondaryKind}

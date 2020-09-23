@@ -44,3 +44,6 @@ ShadowSet.args = {
   boxedBorder: false,
   disabled: false,
 };
+
+export const Minimal = Template.bind({});
+Minimal.args = {};

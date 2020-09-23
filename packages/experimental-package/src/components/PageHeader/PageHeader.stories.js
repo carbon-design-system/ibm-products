@@ -15,11 +15,11 @@ import styles from './_storybook-styles.scss'; // import index in case more file
 export default {
   title: 'Experimental/PageHeader',
   component: PageHeader,
-  parameters: { styles, info: {} },
+  parameters: { styles, layout: 'fullscreen' },
 };
 
 const Template = (args) => {
-  return <PageHeader {...args} />;
+  return <PageHeader className="fish cake" {...args} />;
 };
 
 export const Minimal = Template.bind({});

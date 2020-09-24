@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import cx from 'classnames';
@@ -23,12 +23,16 @@ import {
   Grid,
   Column,
   Row,
+  Breadcrumb,
 } from 'carbon-components-react';
+
+import { ActionBar } from './ActionBar';
+import { ActionBarItem } from './ActionBarItem';
 
 const blockClass = `${expPrefix}-page-header`;
 
 export const PageHeader = ({
-  actionBar,
+  actionBarItems,
   availableSpace,
   background,
   breadcrumbItems,
@@ -39,6 +43,9 @@ export const PageHeader = ({
   tags,
   title,
 }) => {
+  // eslint-disable-next-line no-unused-vars
+  const [titleInBreadcrumbs, setTitleInBreadcrumbs] = useState(true);
+
   return (
     <section
       className={cx([
@@ -47,35 +54,50 @@ export const PageHeader = ({
         { [`${blockClass}--background`]: background },
       ])}>
       <Grid>
-        <Row>
+        <Row className={`${blockClass}--breadcrumb-row`}>
           <Column className={`${blockClass}--breadcrumb-space`}>
-            <div>breadcrumbItems: {breadcrumbItems}</div>
-            {/* conditionally render primary actions if we have actionBar and scrolled */}
-            <div>actionBar: {actionBar}</div>
+            <Breadcrumb
+              className={`${blockClass}--breadcrumb`}
+              noTrailingSlash={titleInBreadcrumbs && !!title}>
+              {breadcrumbItems}
+              {title && titleInBreadcrumbs ? (
+                <BreadcrumbItem href="#" isCurrentPage={true}>
+                  {title}
+                </BreadcrumbItem>
+              ) : (
+                ''
+              )}
+            </Breadcrumb>
+
+            <ActionBar className={`${blockClass}--action-bar`}>
+              {actionBarItems}
+            </ActionBar>
           </Column>
         </Row>
 
-        <Row>
+        <Row className={`${blockClass}--title-row`}>
           <Column className={`${blockClass}--title-space`}>
-            <div>title: {title}</div>
-            <div>pageActions: {pageActions}</div>
+            <div className={`${blockClass}--title`}>{title}</div>
+            <div className={`${blockClass}--page-actions`}>{pageActions}</div>
           </Column>
         </Row>
 
-        <Row>
+        <Row className={`${blockClass}--subtitle-row`}>
           <Column className={`${blockClass}--subtitle-space`}>
-            <div>subTitle: {subTitle}</div>
+            <div className={`${blockClass}--subtitle`}>{subTitle}</div>
           </Column>
         </Row>
-        <Row>
+
+        <Row className={`${blockClass}--available-row`}>
           <Column className={`${blockClass}--available-space`}>
-            <div>availableSpace: {availableSpace}</div>
+            <div>{availableSpace}</div>
           </Column>
         </Row>
-        <Row>
+
+        <Row className={`${blockClass}--navigation-row`}>
           <Column className={`${blockClass}--navigation-space`}>
-            <div>navigation: {navigation}</div>
-            <div>tags: {tags}</div>
+            <div>{navigation}</div>
+            <div>{tags}</div>
           </Column>
         </Row>
       </Grid>
@@ -85,9 +107,9 @@ export const PageHeader = ({
 
 PageHeader.propTypes = {
   /**
-   * actionBar
+   * actionBarItems
    */
-  actionBar: PropTypes.node, // PropTypes.instanceOf(IconButtonBar),
+  actionBarItems: PropTypes.arrayOf(PropTypes.instanceOf(ActionBarItem)), // PropTypes.instanceOf(IconButtonBar),
   /**
    * React node specifying content to be placed in availableSpace
    */

@@ -60,14 +60,12 @@ const summaryDetails = (
   </div>
 );
 const tabBar = (
-  <>
-    <Tabs>
-      <Tab label="Tab 1" />
-      <Tab label="Tab 2" />
-      <Tab label="Tab 3" />
-      <Tab label="Tab 4" />
-    </Tabs>
-  </>
+  <Tabs>
+    <Tab label="Tab 1" />
+    <Tab label="Tab 2" />
+    <Tab label="Tab 3" />
+    <Tab label="Tab 4" />
+  </Tabs>
 );
 const tags = (
   <>

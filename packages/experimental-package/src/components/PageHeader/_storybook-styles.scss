@@ -6,5 +6,12 @@
 //
 @import './index';
 
+@import 'carbon-components/scss/components/breadcrumb/breadcrumb';
+@import 'carbon-components/scss/components/button/button';
 @import 'carbon-components/scss/components/tabs/tabs';
 @import 'carbon-components/scss/components/tag/tag';
+
+.page-header-stories__status-icon {
+  vertical-align: middle;
+  fill: $support-02;
+}

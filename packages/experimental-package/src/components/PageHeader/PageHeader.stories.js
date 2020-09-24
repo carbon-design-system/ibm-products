@@ -8,7 +8,13 @@
 import React from 'react';
 // import { action } from '@storybook/addon-actions';
 
-import { BreadcrumbItem, Button, Tab, Tabs, Tag } from 'carbon-components-react';
+import {
+  BreadcrumbItem,
+  Button,
+  Tab,
+  Tabs,
+  Tag,
+} from 'carbon-components-react';
 import { CheckmarkFilled16 } from '@carbon/icons-react';
 
 import { PageHeader } from '.';
@@ -38,23 +44,23 @@ const pageActions = (
 );
 const statusIndicator = (
   <>
-    <CheckmarkFilled16 className='page-header-stories__status-icon' /> Running
+    <CheckmarkFilled16 className="page-header-stories__status-icon" /> Running
   </>
 );
 const subtitle = 'Optional subtitle if necessary';
 const summaryDetails = (
-  <div style={{display: 'flex'}}>
-    <p style={{marginRight: '50px', maxWidth: '400px'}}>
+  <div style={{ display: 'flex' }}>
+    <p style={{ marginRight: '50px', maxWidth: '400px' }}>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor <strong>incididunt ut labore</strong> et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut
+      tempor <strong>incididunt ut labore</strong> et dolore magna aliqua. Ut
+      enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
       aliquip ex ea commodo consequat.
     </p>
     <p>
       Property: Value
-      <br/>
+      <br />
       Property: Value
-      <br/>
+      <br />
       Property: Value
     </p>
   </div>
@@ -88,33 +94,35 @@ Minimal.args = {};
 
 export const WithoutBackgroundTitleOnly = Template.bind({});
 WithoutBackgroundTitleOnly.args = {
-  title
+  title,
 };
 
 export const WithoutBackgroundTitlePageactions = Template.bind({});
 WithoutBackgroundTitlePageactions.args = {
   title,
-  pageActions
+  pageActions,
 };
 
 export const WithoutBackgroundBreadcrumbitemsTitle = Template.bind({});
 WithoutBackgroundBreadcrumbitemsTitle.args = {
   breadcrumbItems,
-  title
+  title,
 };
 
-export const WithoutBackgroundBreadcrumbitemsTitlePageactions = Template.bind({});
+export const WithoutBackgroundBreadcrumbitemsTitlePageactions = Template.bind(
+  {}
+);
 WithoutBackgroundBreadcrumbitemsTitlePageactions.args = {
   breadcrumbItems,
   title,
-  pageActions
+  pageActions,
 };
 
 export const WithoutBackgroundBreadcrumbitemsTitleStatus = Template.bind({});
 WithoutBackgroundBreadcrumbitemsTitleStatus.args = {
   breadcrumbItems,
   title,
-  availableSpace: statusIndicator
+  availableSpace: statusIndicator,
 };
 
 export const WithBackgroundBreadcrumbitemsTitleTabs = Template.bind({});
@@ -122,16 +130,18 @@ WithBackgroundBreadcrumbitemsTitleTabs.args = {
   background: true,
   breadcrumbItems,
   title,
-  navigation: tabBar
+  navigation: tabBar,
 };
 
-export const WithBackgroundBreadcrumbitemsTitlePageactionsTags = Template.bind({});
+export const WithBackgroundBreadcrumbitemsTitlePageactionsTags = Template.bind(
+  {}
+);
 WithBackgroundBreadcrumbitemsTitlePageactionsTags.args = {
   background: true,
   breadcrumbItems,
   title,
   pageActions,
-  tags
+  tags,
 };
 
 export const WithBackgroundBreadcrumbitemsTitleTabsTags = Template.bind({});
@@ -140,24 +150,28 @@ WithBackgroundBreadcrumbitemsTitleTabsTags.args = {
   breadcrumbItems,
   title,
   navigation: tabBar,
-  tags
+  tags,
 };
 
-export const WithBackgroundBreadcrumbitemsTitlePageactionsSubtitle = Template.bind({});
+export const WithBackgroundBreadcrumbitemsTitlePageactionsSubtitle = Template.bind(
+  {}
+);
 WithBackgroundBreadcrumbitemsTitlePageactionsSubtitle.args = {
   background: true,
   breadcrumbItems,
   title,
   pageActions,
-  subtitle
+  subtitle,
 };
 
-export const WithBackgroundBreadcrumbitemsTitlePageactionsSummarydetailsTabs = Template.bind({});
+export const WithBackgroundBreadcrumbitemsTitlePageactionsSummarydetailsTabs = Template.bind(
+  {}
+);
 WithBackgroundBreadcrumbitemsTitlePageactionsSummarydetailsTabs.args = {
   background: true,
   breadcrumbItems,
   title,
   pageActions,
   availableSpace: summaryDetails,
-  navigation: tabBar
+  navigation: tabBar,
 };

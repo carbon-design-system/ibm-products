@@ -1,0 +1,14 @@
+//
+// Copyright IBM Corp. 2020, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+
+.#{$exp-prefix}-page-header {
+  /* Bleed class for the background */
+  width: 100%;
+}

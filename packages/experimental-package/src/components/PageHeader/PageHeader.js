@@ -8,12 +8,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import cx from 'classnames';
+
+// import { settings } from 'carbon-components';
+// const { prefix } = settings;
+
+import { expPrefix } from '../../global/js/settings';
+
 import {
   BreadcrumbItem,
   Tabs,
   ContentSwitcher,
   Tag,
+  Grid,
+  Column,
+  Row,
 } from 'carbon-components-react';
+
+const blockClass = `${expPrefix}-page-header`;
 
 export const PageHeader = ({
   actionBar,
@@ -28,17 +40,46 @@ export const PageHeader = ({
   title,
 }) => {
   return (
-    <div className={['page-header', className].join(' ')}>
-      <div>background: {background ? 'true' : 'false'}</div>
-      <div>breadcrumbItems: {breadcrumbItems}</div>
-      <div>actionBar: {actionBar}</div>
-      <div>title: {title}</div>
-      <div>pageActions: {pageActions}</div>
-      <div>subTitle: {subTitle}</div>
-      <div>availableSpace: {availableSpace}</div>
-      <div>navigation: {navigation}</div>
-      <div>tags: {tags}</div>
-    </div>
+    <section
+      className={cx([
+        blockClass,
+        className,
+        { [`${blockClass}--background`]: background },
+      ])}>
+      <Grid>
+        <Row>
+          <Column className={`${blockClass}--breadcrumb-space`}>
+            <div>breadcrumbItems: {breadcrumbItems}</div>
+            {/* conditionally render primary actions if we have actionBar and scrolled */}
+            <div>actionBar: {actionBar}</div>
+          </Column>
+        </Row>
+
+        <Row>
+          <Column className={`${blockClass}--title-space`}>
+            <div>title: {title}</div>
+            <div>pageActions: {pageActions}</div>
+          </Column>
+        </Row>
+
+        <Row>
+          <Column className={`${blockClass}--subtitle-space`}>
+            <div>subTitle: {subTitle}</div>
+          </Column>
+        </Row>
+        <Row>
+          <Column className={`${blockClass}--available-space`}>
+            <div>availableSpace: {availableSpace}</div>
+          </Column>
+        </Row>
+        <Row>
+          <Column className={`${blockClass}--navigation-space`}>
+            <div>navigation: {navigation}</div>
+            <div>tags: {tags}</div>
+          </Column>
+        </Row>
+      </Grid>
+    </section>
   );
 };
 

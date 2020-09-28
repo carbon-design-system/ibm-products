@@ -1191,7 +1191,7 @@
     "@carbon/import-once" "^10.3.0"
     "@carbon/layout" "^10.11.0"
 
-"@carbon/type@^10.12.0", "@carbon/type@^10.16.0":
+"@carbon/type@10.16.0", "@carbon/type@^10.12.0", "@carbon/type@^10.16.0":
   version "10.16.0"
   resolved "https://registry.yarnpkg.com/@carbon/type/-/type-10.16.0.tgz#0f85209852f5c1a0e0128b7408d9c71e588a4ca7"
   integrity sha512-Qf2TfUJTFFcrCyFT9sH9wsETAVHKPGID0e3k9KjGrBjvbgeqny1jPHM7B7Gpl29NtOVDY2+K7AvGiBIH7SP/jQ==

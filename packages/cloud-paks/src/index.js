@@ -6,3 +6,4 @@
  */
 
 export * from '@carbon/cloud-pak-for-security';
+export * from '@carbon/experimental-package';

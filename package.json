@@ -42,6 +42,7 @@
     "react": "^16.13.1",
     "rimraf": "^3.0.2",
     "stylelint": "^13.6.1",
+    "stylelint-carbon-use": "git+https://git@github.com/lee-chase/carbon-use.git",
     "stylelint-config-carbon": "^1.1.0"
   },
   "eslintConfig": {

@@ -5,5 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from '@carbon/experimental-package';
 export * from '@carbon/cloud-pak-for-security';

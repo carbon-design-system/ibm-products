@@ -3,24 +3,31 @@
   "private": true,
   "version": "0.0.0",
   "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "module": "es/index.js",
   "repository": "https://github.com/carbon-design-system/ibm-cloud-paks/tree/master/packages/security",
   "bugs": "https://github.com/carbon-design-system/ibm-cloud-paks/issues",
+  "files": [
+    "css",
+    "es",
+    "lib",
+    "scss"
+  ],
   "keywords": [
     "carbon",
     "carbon design system",
     "carbon community",
-    "ibm cloud pak for security"
+    "ibm",
+    "ibm cloud pak for security",
+    "ibm security"
   ],
   "scripts": {
-    "build": "yarn build:js && yarn build:scss",
-    "build:js": "bundler bundle src/index.js -n CloudPakForSecurity",
-    "build:scss": "bundler bundle:scss src/index.scss && rm -rf scss && copyfiles src/**/**/*.scss scss -u 1"
+    "build": "yarn clean && yarn build:js && yarn build:scss",
+    "build:js": "rollup -c",
+    "build:scss": "bundler bundle:scss src/index.scss && copyfiles src/**/**/*.scss scss -u 1",
+    "clean": "rimraf es lib scss"
   },
   "dependencies": {
     "@carbon/ibm-security": "^1.26.0"
-  },
-  "devDependencies": {
-    "@carbon/bundler": "^10.9.0",
-    "copyfiles": "^2.3.0"
   }
 }

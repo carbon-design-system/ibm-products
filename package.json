@@ -27,8 +27,11 @@
     "react": "^16.13.1"
   },
   "devDependencies": {
+    "@carbon/bundler": "^10.9.0",
+    "@carbon/rollup-config": "^0.0.0",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
+    "copyfiles": "^2.3.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.4",
     "eslint": "^7.8.1",
@@ -41,6 +44,7 @@
     "prettier-config-carbon": "^0.4.0",
     "react": "^16.13.1",
     "rimraf": "^3.0.2",
+    "rollup": "^2.28.2",
     "stylelint": "^13.6.1",
     "stylelint-carbon-use": "git+https://git@github.com/lee-chase/carbon-use.git",
     "stylelint-config-carbon": "^1.1.0"

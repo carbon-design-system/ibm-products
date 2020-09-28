@@ -76,15 +76,25 @@ $block-class: #{$exp-prefix}-page-header;
 }
 
 .#{$block-class}--navigation-row {
+  flex-wrap: wrap-reverse;
   margin-top: $spacing-05;
 }
 
-.#{$block-class}--navigation-space {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.#{$block-class}--navigation-row .#{$prefix}--tab-content {
+  display: none; /* need to figure out how to handle the tab content */
 }
 
-.#{$block-class}--navigation-space .#{$prefix}--tab-content {
-  display: none; /* need to figure out how to handle the tab content */
+// .#{$block-class}--navigation-space {
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+// }
+
+// .#{$block-class}--navigation-tabs {
+//   flex: 1 0 50%;
+// }
+
+.#{$block-class}--navigation-tags {
+  white-space: nowrap;
+  text-align: right;
 }

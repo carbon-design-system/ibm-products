@@ -75,7 +75,18 @@ const tags = (
 );
 
 const Template = (args) => {
-  return <PageHeader className="example-class-name" {...args} />;
+  const { tags, tagsIncluded, ..._args } = { ...args };
+
+  return (
+    <div className="container">
+      <PageHeader
+        className="example-class-name"
+        {...args}
+        tags={tagsIncluded ? tags : undefined}
+      />
+      <div className="content">Sample content to stretch the page</div>
+    </div>
+  );
 };
 
 export const AllThings = Template.bind({});
@@ -88,6 +99,7 @@ AllThings.args = {
   pageActions,
   subTitle,
   tags,
+  tagsIncluded: true,
   title,
 };
 

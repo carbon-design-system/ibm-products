@@ -15,6 +15,8 @@ import cx from 'classnames';
 
 import { expPrefix } from '../../global/js/settings';
 
+import { useWindowResize, useWindowScroll } from '../../global/js/use';
+
 import {
   BreadcrumbItem,
   Grid,
@@ -41,6 +43,18 @@ export const PageHeader = ({
 }) => {
   // eslint-disable-next-line no-unused-vars
   const [titleInBreadcrumbs, setTitleInBreadcrumbs] = useState(true);
+
+  // const halfColumns = { sm: 2, md: 4, lg: 8 };
+
+  // const halfOrFull = (test) => (test ? { ...halfColumns } : {});
+
+  useWindowScroll(({ previous, current }) => {
+    console.dir(JSON.stringify({ on: 'scroll', previous, current }));
+  });
+
+  useWindowResize(({ previous, current }) => {
+    console.dir(JSON.stringify({ on: 'resize', previous, current }));
+  });
 
   return (
     <section
@@ -91,10 +105,20 @@ export const PageHeader = ({
         </Row>
 
         <Row className={`${blockClass}--navigation-row`}>
-          <Column className={`${blockClass}--navigation-space`}>
-            <div>{navigation}</div>
-            <div>{tags}</div>
+          <Column
+            className={`${blockClass}--navigation-tabs`}
+            // {...halfOrFull(tags !== undefined)}
+          >
+            {navigation}
           </Column>
+          {tags !== undefined ? (
+            <Column
+              className={`${blockClass}--navigation-tags`}
+              // {...halfColumns}
+            >
+              {tags}
+            </Column>
+          ) : null}
         </Row>
       </Grid>
     </section>

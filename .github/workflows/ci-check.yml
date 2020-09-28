@@ -17,6 +17,10 @@ jobs:
           node-version: '12.x'
       - name: Install dependencies
         run: yarn install --offline
+      - name: Lint
+        run: yarn lint
+      - name: Test
+        run: yarn test --ci
       - name: Build project
         run: yarn build
       - name: Run Continuous Integration checks

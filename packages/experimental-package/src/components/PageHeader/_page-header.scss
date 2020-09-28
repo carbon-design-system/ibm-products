@@ -1,0 +1,90 @@
+//
+// Copyright IBM Corp. 2020, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+
+@import 'carbon-components/scss/components/breadcrumb/breadcrumb';
+@import 'carbon-components/scss/components/button/button';
+@import 'carbon-components/scss/components/tooltip/tooltip';
+
+$block-class: #{$exp-prefix}-page-header;
+
+.#{$block-class} {
+  /* Bleed class for the background */
+  display: inline-block; /* cause top/bottom margin to reserve space */
+  width: 100%;
+  background-color: $ui-background;
+}
+
+.#{$block-class}--background {
+  background-color: $ui-01;
+}
+
+.#{$block-class}--breadcrumb-row {
+  margin-top: $spacing-04;
+  margin-bottom: $spacing-02;
+}
+
+.#{$block-class}--breadcrumb-space {
+  display: flex;
+  justify-content: space-between;
+  min-height: $spacing-07;
+}
+
+.#{$block-class}--action-bar {
+  margin-top: -$spacing-04; /* align with breadcrumb */
+}
+
+.#{$block-class}--title-row {
+  margin-top: $spacing-02;
+  margin-bottom: $spacing-03;
+}
+
+.#{$block-class}--title-space {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.#{$block-class}--title {
+  @include carbon--type-style('productive-heading-04');
+}
+
+.#{$block-class}--subtitle-row {
+  margin-top: $spacing-03;
+  margin-bottom: $spacing-05;
+}
+
+.#{$block-class}--subtitle-space {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: $spacing-03;
+}
+
+.#{$block-class}--subtitle {
+  @include carbon--type-style('body-long-02');
+}
+
+.#{$block-class}--additional-row {
+  margin-top: $spacing-03;
+  margin-bottom: $spacing-07;
+}
+
+.#{$block-class}--navigation-row {
+  margin-top: $spacing-05;
+}
+
+.#{$block-class}--navigation-space {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.#{$block-class}--navigation-space .#{$prefix}--tab-content {
+  display: none; /* need to figure out how to handle the tab content */
+}

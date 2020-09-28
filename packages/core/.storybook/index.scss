@@ -13,3 +13,41 @@ $css--reset: false;
 @import 'carbon-components/scss/globals/scss/css--body';
 
 @include carbon--type-reset;
+
+@import '../../feature-flags/feature-flags';
+
+@if map-get($feature-flags, 'enable-css-custom-properties') {
+  :root {
+    @include carbon--theme(
+      $theme: $carbon--theme--white,
+      $emit-custom-properties: true
+    );
+  }
+
+  :root[storybook-carbon-theme='g10'] {
+    @include carbon--theme(
+      $theme: $carbon--theme--g10,
+      $emit-custom-properties: true
+    );
+  }
+
+  :root[storybook-carbon-theme='g90'] {
+    @include carbon--theme(
+      $theme: $carbon--theme--g90,
+      $emit-custom-properties: true
+    );
+  }
+
+  :root[storybook-carbon-theme='g100'] {
+    @include carbon--theme(
+      $theme: $carbon--theme--g100,
+      $emit-custom-properties: true
+    );
+  }
+}
+
+// set default color and background for stories
+.sb-show-main {
+  color: $text-01;
+  background-color: $ui-background;
+}

@@ -1,0 +1,17 @@
+//
+// Copyright IBM Corp. 2020, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+@import './index';
+
+@import 'carbon-components/scss/components/breadcrumb/breadcrumb';
+@import 'carbon-components/scss/components/button/button';
+@import 'carbon-components/scss/components/tabs/tabs';
+@import 'carbon-components/scss/components/tag/tag';
+
+.page-header-stories__status-icon {
+  vertical-align: middle;
+  fill: $support-02;
+}

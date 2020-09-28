@@ -4,6 +4,11 @@ Closes #
 
 #### Changelog
 
+Use the following command to list changes or manually list out new, changed and
+removed files.
+
+{{`git diff --name-status $(git merge-base head master)`}}
+
 **New**
 
 - {{new thing}}

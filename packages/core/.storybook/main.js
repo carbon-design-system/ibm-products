@@ -10,9 +10,11 @@ const merge = require('webpack-merge');
 
 module.exports = {
   addons: [
-    '@storybook/addon-actions/register',
+    '@storybook/addon-actions',
     '@storybook/addon-docs',
-    '@storybook/addon-knobs/register',
+    '@storybook/addon-controls',
+    '@storybook/addon-knobs',
+    '@storybook/addon-storysource',
     {
       name: '@storybook/preset-scss',
       options: {
@@ -30,8 +32,10 @@ module.exports = {
         },
       },
     },
+    require.resolve('./addon-carbon-theme/register'),
   ],
-  stories: ['../../**/*.stories.js'],
+
+  stories: ['../docs/**/*.stories.*', '../../**/*.stories.*'],
   webpackFinal: async (configuration) =>
     merge(configuration, {
       module: {

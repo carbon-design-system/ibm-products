@@ -7,7 +7,6 @@
 
 import { miniUnits } from '@carbon/layout';
 import { uiBackground } from '@carbon/themes';
-import { boolean, color, number, select, text } from '@storybook/addon-knobs';
 
 import { LoremIpsum } from 'lorem-ipsum';
 import React from 'react';
@@ -19,35 +18,45 @@ import styles from './_index.scss';
 
 const {
   defaultProps: { hideStartGradient },
-  ScrollDirection,
+  ScrollDirection: { X },
 } = ScrollGradient;
 
 const dimension = 40;
 const dimensions = miniUnits(dimension);
 
 const props = () => ({
-  color: color('Color (color)', uiBackground),
-  hideStartGradient: boolean(
-    'Hide start gradient (hideStartGradient)',
-    hideStartGradient
-  ),
   style: { height: dimensions, width: dimensions },
 });
 
 const children = new LoremIpsum().generateParagraphs(dimension / 10);
 
-const Default = () => <ScrollGradient {...props()}>{children}</ScrollGradient>;
-
-const horizontal = () => (
-  <ScrollGradient {...props()} direction={ScrollDirection.X}>
-    <div style={{ width: miniUnits(dimension * 2) }}>{children}</div>
-  </ScrollGradient>
-);
-
 export default {
   title: `${sectionTitle}/ScrollGradient`,
   component: ScrollGradient,
-  parameters: { styles },
+  parameters: {
+    knobs: {
+      disabled: true,
+    },
+    styles,
+  },
+  args: { color: uiBackground, hideStartGradient },
+  argTypes: {
+    color: {
+      control: {
+        type: 'color',
+      },
+    },
+  },
 };
 
-export { Default, horizontal };
+export const Default = (args) => (
+  <ScrollGradient {...args} {...props()}>
+    {children}
+  </ScrollGradient>
+);
+
+export const horizontal = (args) => (
+  <ScrollGradient {...args} {...props()} direction={X}>
+    <div style={{ width: miniUnits(dimension * 2) }}>{children}</div>
+  </ScrollGradient>
+);

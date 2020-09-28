@@ -1,0 +1,22 @@
+# Build folders
+/build
+packages/*/build/
+packages/*/examples/*/build/
+es
+lib
+dist
+umd
+
+node_modules
+packages/*/examples/*
+
+**/node_modules/**
+
+# Sketch
+*.sketchplugin
+
+# Upgrade
+**/__testfixtures__/**
+
+# React
+**/storybook-static/**

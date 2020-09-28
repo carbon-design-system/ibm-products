@@ -1,0 +1,26 @@
+//
+// Copyright IBM Corp. 2020, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../global/styles/project-settings';
+@import 'carbon-components/scss/components/button/button';
+
+.#{$exp-prefix}-example-component {
+  display: flex;
+  justify-content: flex-end;
+  --#{$exp-prefix}-border-color: transparent;
+}
+
+.#{$exp-prefix}-example-component--boxed-set {
+  // stylelint-disable-next-line
+  border: 10px solid var(--#{$exp-prefix}-border-color);
+}
+
+.#{$exp-prefix}-example-component--shadow-set {
+  margin: $spacing-04;
+  // stylelint-disable-next-line
+  box-shadow: 0 0 10px var(--#{$exp-prefix}-border-color);
+}

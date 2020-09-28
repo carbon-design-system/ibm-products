@@ -5,24 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import centered from '@storybook/addon-centered/react';
 import { withInfo } from '@storybook/addon-info';
-import { withKnobs } from '@storybook/addon-knobs';
-import { addDecorator } from '@storybook/react';
-
+import addons from '@storybook/addons';
 import React, { useEffect } from 'react';
 
+import {
+  CARBON_CURRENT_THEME,
+  // CARBON_TYPE_TOKEN,
+} from './addon-carbon-theme/shared';
+
 import index from './index.scss';
-
-addDecorator(withInfo);
-addDecorator(withKnobs);
-
-// https://github.com/storybookjs/storybook/issues/8128
-addDecorator((...args) =>
-  new URL(document.location).searchParams.get('viewMode') === 'docs'
-    ? args[0]()
-    : centered(...args)
-);
 
 const Style = ({ children, styles }) => {
   const { unuse, use } = styles;
@@ -31,17 +23,47 @@ const Style = ({ children, styles }) => {
     use();
 
     return () => unuse();
-  });
+  }, []);
 
   return children;
 };
 
-addDecorator((storyFn, { parameters: { styles } }) => {
-  const story = storyFn();
+const decorators = [
+  withInfo,
+  (storyFn, { parameters: { styles } }) => {
+    const story = storyFn();
 
-  return (
-    <Style styles={index}>
-      {styles ? <Style styles={styles}>{story}</Style> : story}
-    </Style>
-  );
+    return (
+      <Style styles={index}>
+        {styles ? <Style styles={styles}>{story}</Style> : story}
+      </Style>
+    );
+  },
+];
+
+const parameters = {
+  layout: 'centered',
+};
+
+addons.getChannel().on(CARBON_CURRENT_THEME, (theme) => {
+  document.documentElement.setAttribute('storybook-carbon-theme', theme);
 });
+
+// addons.getChannel().on(CARBON_TYPE_TOKEN, ({ tokenName, tokenValue }) => {
+//   const root = document.documentElement;
+//   const [fontSize, lineHeight] = tokenValue.split('-');
+//   const rem = (px) =>
+//     `${
+//       px / parseFloat(getComputedStyle(document.documentElement).fontSize)
+//     }rem`;
+//   root.style.setProperty(
+//     `--${customPropertyPrefix}-${tokenName}-font-size`,
+//     rem(fontSize)
+//   );
+//   root.style.setProperty(
+//     `--${customPropertyPrefix}-${tokenName}-line-height`,
+//     rem(lineHeight)
+//   );
+// });
+
+export { decorators, parameters };

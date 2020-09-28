@@ -15,3 +15,17 @@
   vertical-align: middle;
   fill: $support-02;
 }
+
+.page-header-stories__dummy-content {
+  margin-top: $spacing-05;
+}
+
+.page-header-stories__dummy-content-block {
+  height: 60px;
+  background: $ui-01;
+  background-clip: content-box;
+}
+
+.page-header-stories__dummy-content-text {
+  padding: $spacing-05;
+}

@@ -1083,6 +1083,14 @@
     "@carbon/import-once" "^10.3.0"
     "@carbon/layout" "^10.11.0"
 
+"@carbon/grid@10.15.0":
+  version "10.15.0"
+  resolved "https://registry.yarnpkg.com/@carbon/grid/-/grid-10.15.0.tgz#560e750f267c5da247ca2b4b01b2a0d16fa899d2"
+  integrity sha512-XSGKz2lMEWmG/9E7ONy/YTF1IjRrcvke+Jz2spWOQPrDcg/n7sCaKlsCR9tISZ4XKjVUWOU3CtaeA1WOJqXnOA==
+  dependencies:
+    "@carbon/import-once" "^10.3.0"
+    "@carbon/layout" "^10.13.0"
+
 "@carbon/ibm-security@^1.26.0":
   version "1.31.0"
   resolved "https://registry.yarnpkg.com/@carbon/ibm-security/-/ibm-security-1.31.0.tgz#8ec49a65ef96854e63a346f7c59577c1283f8706"
@@ -1128,7 +1136,7 @@
   dependencies:
     "@carbon/icon-helpers" "^10.9.0"
 
-"@carbon/icons-react@^10.13.0", "@carbon/icons-react@^10.18.0":
+"@carbon/icons-react@10.18.0", "@carbon/icons-react@^10.13.0", "@carbon/icons-react@^10.18.0":
   version "10.18.0"
   resolved "https://registry.yarnpkg.com/@carbon/icons-react/-/icons-react-10.18.0.tgz#881312b923a435f3093dacd61d77b4b5bd73b970"
   integrity sha512-UZFYVBd3rU8tCspMdbj8ZMSjzCcAA7eR9WHLjET5eSP0qg2XrGOBlbJKY2ZrIJPxwrZ4TcAnexjWTQf2JdF1rA==
@@ -1145,7 +1153,7 @@
   resolved "https://registry.yarnpkg.com/@carbon/layout/-/layout-10.11.0.tgz#db029582688484d3b12dfbc53b7ba7f612df90f1"
   integrity sha512-lt3qV4vROar4cwjxPXdYKcnIhCNxiIJVOnaMlGr1YADCXjzQ5f9uQWysDvfwOBPvN3cqeCe18QpIKDe9PaEqiQ==
 
-"@carbon/layout@^10.11.0", "@carbon/layout@^10.13.0":
+"@carbon/layout@10.13.0", "@carbon/layout@^10.11.0", "@carbon/layout@^10.13.0":
   version "10.13.0"
   resolved "https://registry.yarnpkg.com/@carbon/layout/-/layout-10.13.0.tgz#fd7ecaf1502f4d4ef1598816d9316dd6c84be5da"
   integrity sha512-OgLe9/27zffC019rOGjWd4lavZO7BAkgUyKG+0Mg8IpzqqmGt7v8k4viMH5ThMt8y7Qk1LQfno/4ZzBItWi5Ow==
@@ -1165,7 +1173,7 @@
     "@carbon/type" "^10.12.0"
     color "^3.1.2"
 
-"@carbon/themes@^10.11.0":
+"@carbon/themes@10.19.0", "@carbon/themes@^10.11.0":
   version "10.19.0"
   resolved "https://registry.yarnpkg.com/@carbon/themes/-/themes-10.19.0.tgz#57f7e7bd2d4c0699032e139d351a2500431e5ce8"
   integrity sha512-i5znhSU4o+86P2KONv6SxNLitwvlzOlwrX1guobM3S2w9oFOaQypMEkRpklM8D2l3E0i++/qcdBCa307R0qnsA==
@@ -5422,7 +5430,7 @@ carbon-components@10.15.0:
     lodash.debounce "^4.0.8"
     warning "^3.0.0"
 
-carbon-components@^10.15.0, carbon-components@^10.19.0, carbon-components@^10.20.0:
+carbon-components@^10.15.0, carbon-components@^10.20.0:
   version "10.20.0"
   resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.20.0.tgz#3a927ad4f566c5dc263d32c257269c74a3ab23cc"
   integrity sha512-MysxXg4/DpDt9GJPV3zmxi9X6HyGxr7DyROvVjf4SCyYrBqTeLOoajd3sbPhKxPjDdRIyqEb2roLq5DbbtazLg==

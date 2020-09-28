@@ -11,12 +11,17 @@ import React from 'react';
 import {
   BreadcrumbItem,
   Button,
+  Column,
+  Grid,
+  Row,
   Tab,
   Tabs,
   Tag,
 } from 'carbon-components-react';
 import { CheckmarkFilled16 } from '@carbon/icons-react';
+import { Lightning16 } from '@carbon/icons-react';
 
+import { ActionBarItem } from './ActionBarItem';
 import { PageHeader } from '.';
 
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
@@ -28,6 +33,16 @@ export default {
 };
 
 // Test values for props.
+
+const actionBarItems = (
+  <>
+    <ActionBarItem icon={Lightning16} label="Action 1" />
+    <ActionBarItem icon={Lightning16} label="Action 2" />
+    <ActionBarItem icon={Lightning16} label="Action 3" />
+    <ActionBarItem icon={Lightning16} label="Action 4" />
+  </>
+);
+
 const breadcrumbItems = (
   <>
     <BreadcrumbItem href="#">Breadcrumb 1</BreadcrumbItem>
@@ -36,6 +51,33 @@ const breadcrumbItems = (
   </>
 );
 const className = 'client-class-1 client-class-2';
+const dummyPageContent = (
+  <Grid className="page-header-stories__dummy-content" narrow={true}>
+    <Row>
+      <Column
+        sm={1}
+        md={2}
+        lg={4}
+        className="page-header-stories__dummy-content-block">
+        <div className="page-header-stories__dummy-content-text">Column #1</div>
+      </Column>
+      <Column
+        sm={1}
+        md={2}
+        lg={4}
+        className="page-header-stories__dummy-content-block">
+        <div className="page-header-stories__dummy-content-text">Column #2</div>
+      </Column>
+      <Column
+        sm={2}
+        md={4}
+        lg={8}
+        className="page-header-stories__dummy-content-block">
+        <div className="page-header-stories__dummy-content-text">Column #3</div>
+      </Column>
+    </Row>
+  </Grid>
+);
 const pageActions = (
   <>
     <Button kind="secondary">Secondary button</Button>
@@ -85,12 +127,30 @@ const title = 'Page title';
 
 // Template.
 const Template = (args) => {
-  return <PageHeader className={className} {...args} />;
+  return (
+    <>
+      <PageHeader className={className} {...args} />
+      {dummyPageContent}
+    </>
+  );
 };
 
 // Stories
-export const Minimal = Template.bind({});
-Minimal.args = {};
+export const AllAttributesSet = Template.bind({});
+AllAttributesSet.args = {
+  background: true,
+  breadcrumbItems,
+  actionBarItems,
+  title,
+  pageActions,
+  subtitle,
+  availableSpace: summaryDetails,
+  navigation: tabBar,
+  tags,
+};
+
+export const NoAttributesSet = Template.bind({});
+NoAttributesSet.args = {};
 
 export const WithoutBackgroundTitleOnly = Template.bind({});
 WithoutBackgroundTitleOnly.args = {

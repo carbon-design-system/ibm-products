@@ -31,11 +31,6 @@ $block-class: #{$exp-prefix}-page-header;
   margin-bottom: $spacing-02;
 }
 
-.#{$block-class}--breadcrumb-space {
-  display: flex;
-  justify-content: space-between;
-}
-
 .#{$block-class}--action-bar {
   margin-top: -$spacing-04; /* align with breadcrumb */
   text-align: right;
@@ -76,16 +71,6 @@ $block-class: #{$exp-prefix}-page-header;
 .#{$block-class}--navigation-row .#{$prefix}--tab-content {
   display: none; /* need to figure out how to handle the tab content */
 }
-
-// .#{$block-class}--navigation-space {
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-between;
-// }
-
-// .#{$block-class}--navigation-tabs {
-//   flex: 1 0 50%;
-// }
 
 .#{$block-class}--navigation-tags {
   white-space: nowrap;

@@ -26,6 +26,7 @@ $block-class: #{$exp-prefix}-page-header;
 }
 
 .#{$block-class}--breadcrumb-row {
+  min-height: $spacing-07;
   margin-top: $spacing-04;
   margin-bottom: $spacing-02;
 }
@@ -33,11 +34,11 @@ $block-class: #{$exp-prefix}-page-header;
 .#{$block-class}--breadcrumb-space {
   display: flex;
   justify-content: space-between;
-  min-height: $spacing-07;
 }
 
 .#{$block-class}--action-bar {
   margin-top: -$spacing-04; /* align with breadcrumb */
+  text-align: right;
 }
 
 .#{$block-class}--title-row {
@@ -45,25 +46,17 @@ $block-class: #{$exp-prefix}-page-header;
   margin-bottom: $spacing-03;
 }
 
-.#{$block-class}--title-space {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .#{$block-class}--title {
   @include carbon--type-style('productive-heading-04');
+}
+
+.#{$block-class}--page-actions {
+  text-align: right;
 }
 
 .#{$block-class}--subtitle-row {
   margin-top: $spacing-03;
   margin-bottom: $spacing-05;
-}
-
-.#{$block-class}--subtitle-space {
-  display: flex;
-  justify-content: flex-start;
-  margin-top: $spacing-03;
 }
 
 .#{$block-class}--subtitle {

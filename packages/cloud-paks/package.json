@@ -22,7 +22,8 @@
     "react": "^16.13.1"
   },
   "dependencies": {
-    "@carbon/example-component-package": "^0.0.0"
+    "@carbon/experimental-package": "^0.0.0",
+    "@carbon/cloud-pak-for-security": "^0.0.0"
   },
   "devDependencies": {
     "@carbon/rollup-config": "^0.0.0",

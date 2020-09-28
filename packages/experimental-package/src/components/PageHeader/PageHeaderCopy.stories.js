@@ -74,7 +74,9 @@ const tags = (
   </>
 );
 
-const Template = ({ tags, tagsIncluded, ...args }) => {
+const Template = (args) => {
+  const { tags, tagsIncluded, ..._args } = { ...args };
+
   return (
     <div className="container">
       <PageHeader

@@ -41,5 +41,6 @@ export function useWindowResize(effect, deps, throttleInterval = 0) {
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 }

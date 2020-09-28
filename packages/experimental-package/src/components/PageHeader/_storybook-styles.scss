@@ -28,3 +28,17 @@
   border-bottom: 150vh solid $support-03;
   border-left: 45vw solid transparent;
 }
+
+.page-header-stories__dummy-content {
+  margin-top: $spacing-05;
+}
+
+.page-header-stories__dummy-content-block {
+  height: 60px;
+  background: $ui-01;
+  background-clip: content-box;
+}
+
+.page-header-stories__dummy-content-text {
+  padding: $spacing-05;
+}

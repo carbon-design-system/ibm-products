@@ -17,9 +17,6 @@ import { expPrefix } from '../../global/js/settings';
 
 import {
   BreadcrumbItem,
-  Tabs,
-  ContentSwitcher,
-  Tag,
   Grid,
   Column,
   Row,
@@ -27,7 +24,6 @@ import {
 } from 'carbon-components-react';
 
 import { ActionBar } from './ActionBar';
-import { ActionBarItem } from './ActionBarItem';
 
 const blockClass = `${expPrefix}-page-header`;
 
@@ -109,7 +105,7 @@ PageHeader.propTypes = {
   /**
    * actionBarItems
    */
-  actionBarItems: PropTypes.arrayOf(PropTypes.instanceOf(ActionBarItem)), // PropTypes.instanceOf(IconButtonBar),
+  actionBarItems: PropTypes.element, // expect actionBarItems
   /**
    * React node specifying content to be placed in availableSpace
    */
@@ -121,7 +117,7 @@ PageHeader.propTypes = {
   /**
    * Array of BreadcrumbItems
    */
-  breadcrumbItems: PropTypes.arrayOf(PropTypes.instanceOf(BreadcrumbItem)),
+  breadcrumbItems: PropTypes.element, // expects BreadcrumbItems,
   /**
    * className to be applied to wrapping element
    */
@@ -129,14 +125,11 @@ PageHeader.propTypes = {
   /**
    * navigation consisting of tabs or content switcher
    */
-  navigation: PropTypes.oneOfType([
-    PropTypes.instanceOf(Tabs),
-    PropTypes.instanceOf(ContentSwitcher),
-  ]),
+  navigation: PropTypes.element, // Supports Tabs or ContentSwitcher
   /**
-   * pageActions - JSX
+   * pageActions - page level actions
    */
-  pageActions: PropTypes.node,
+  pageActions: PropTypes.element,
   /**
    * Subtitle/description
    */
@@ -144,7 +137,7 @@ PageHeader.propTypes = {
   /**
    * tags - array of carbon Tags
    */
-  tags: PropTypes.arrayOf(PropTypes.instanceOf(Tag)),
+  tags: PropTypes.element,
   /**
    * Title
    */

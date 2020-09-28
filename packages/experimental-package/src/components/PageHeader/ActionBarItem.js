@@ -54,7 +54,7 @@ ActionBarItem.propTypes = {
   /**
    * icon
    */
-  icon: PropTypes.node,
+  icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   /**
    * label
    */

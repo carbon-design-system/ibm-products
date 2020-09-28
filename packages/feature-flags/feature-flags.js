@@ -5,4 +5,6 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-$exp-prefix: 'exp' !default;
+export default {
+  'enable-css-custom-properties': true,
+};

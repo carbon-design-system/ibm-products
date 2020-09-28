@@ -32,6 +32,7 @@ module.exports = {
         },
       },
     },
+    require.resolve('./addon-carbon-theme/register'),
   ],
 
   stories: ['../docs/**/*.stories.*', '../../**/*.stories.*'],

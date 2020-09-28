@@ -5,11 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-$feature-flags: (
-  ui-shell: true,
-  grid-columns-16: true,
-  // enable-css-custom-properties: true,
-);
+@import '../../../../feature-flags/feature-flags';
 
 // Here we import carbon settings for use in referring to colors, type, layout tokens etc.
 @import '~@carbon/type/scss/type';

@@ -33,7 +33,7 @@ $block-class: #{$exp-prefix}-page-header;
 
 .#{$block-class}--action-bar {
   // stylelint-disable-next-line
-  margin-top: calc(-1 * #{$spacing-04}); /* align with breadcrumb */
+  margin-top: -1 * #{$spacing-02}; /* align with breadcrumb */
   white-space: nowrap;
   text-align: right;
 }

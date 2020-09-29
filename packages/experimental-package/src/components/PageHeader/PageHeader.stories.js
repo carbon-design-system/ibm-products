@@ -30,6 +30,13 @@ export default {
   title: 'Experimental/PageHeader',
   component: PageHeader,
   parameters: { styles, layout: 'fullscreen' },
+  decorators: [
+    (Story) => (
+      <div className="page-header-stories__viewport">
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 // Test values for props.

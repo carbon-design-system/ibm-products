@@ -37,7 +37,7 @@ export const PageHeader = ({
   className,
   navigation,
   pageActions,
-  subTitle,
+  subtitle,
   tags,
   title,
 }) => {
@@ -64,62 +64,90 @@ export const PageHeader = ({
         { [`${blockClass}--background`]: background },
       ])}>
       <Grid>
-        <Row className={`${blockClass}--breadcrumb-row`}>
-          <Column className={`${blockClass}--breadcrumb-space`}>
-            <Breadcrumb
-              className={`${blockClass}--breadcrumb`}
-              noTrailingSlash={titleInBreadcrumbs && !!title}>
-              {breadcrumbItems}
-              {title && titleInBreadcrumbs ? (
-                <BreadcrumbItem href="#" isCurrentPage={true}>
-                  {title}
-                </BreadcrumbItem>
+        {!(breadcrumbItems === undefined && actionBarItems === undefined) ? (
+          <Row className={`${blockClass}--breadcrumb-row`}>
+            <Column className={`${blockClass}--breadcrumb-space`}>
+              {/* keeps actionBar right even if empty */}
+
+              {breadcrumbItems !== undefined ? (
+                <Breadcrumb
+                  className={`${blockClass}--breadcrumb`}
+                  noTrailingSlash={titleInBreadcrumbs && !!title}>
+                  {breadcrumbItems}
+                  {title && titleInBreadcrumbs ? (
+                    <BreadcrumbItem href="#" isCurrentPage={true}>
+                      {title}
+                    </BreadcrumbItem>
+                  ) : (
+                    ''
+                  )}
+                </Breadcrumb>
               ) : (
-                ''
+                <div className="just-for-spacing"></div>
               )}
-            </Breadcrumb>
-
-            <ActionBar className={`${blockClass}--action-bar`}>
-              {actionBarItems}
-            </ActionBar>
-          </Column>
-        </Row>
-
-        <Row className={`${blockClass}--title-row`}>
-          <Column className={`${blockClass}--title-space`}>
-            <div className={`${blockClass}--title`}>{title}</div>
-            <div className={`${blockClass}--page-actions`}>{pageActions}</div>
-          </Column>
-        </Row>
-
-        <Row className={`${blockClass}--subtitle-row`}>
-          <Column className={`${blockClass}--subtitle-space`}>
-            <div className={`${blockClass}--subtitle`}>{subTitle}</div>
-          </Column>
-        </Row>
-
-        <Row className={`${blockClass}--available-row`}>
-          <Column className={`${blockClass}--available-space`}>
-            <div>{availableSpace}</div>
-          </Column>
-        </Row>
-
-        <Row className={`${blockClass}--navigation-row`}>
-          <Column
-            className={`${blockClass}--navigation-tabs`}
-            // {...halfOrFull(tags !== undefined)}
-          >
-            {navigation}
-          </Column>
-          {tags !== undefined ? (
-            <Column
-              className={`${blockClass}--navigation-tags`}
-              // {...halfColumns}
-            >
-              {tags}
             </Column>
-          ) : null}
-        </Row>
+
+            {actionBarItems !== undefined ? (
+              <Column className={`${blockClass}--action-bar`}>
+                <ActionBar className={`${blockClass}--action-bar`}>
+                  {actionBarItems}
+                </ActionBar>
+              </Column>
+            ) : null}
+          </Row>
+        ) : null}
+
+        {!(title === undefined && pageActions === undefined) ? (
+          <Row className={`${blockClass}--title-row`}>
+            <Column className={`${blockClass}--title-space`}>
+              {/* keeps page actions right even if empty */}
+              {title !== undefined ? (
+                <div className={`${blockClass}--title`}>{title}</div>
+              ) : null}
+            </Column>
+
+            {pageActions !== undefined ? (
+              <Column className={`${blockClass}--page-actions`}>
+                {pageActions}
+              </Column>
+            ) : null}
+          </Row>
+        ) : null}
+
+        {subtitle !== undefined ? (
+          <Row className={`${blockClass}--subtitle-row`}>
+            <Column className={`${blockClass}--subtitle`}>{subtitle}</Column>
+          </Row>
+        ) : null}
+
+        {availableSpace !== undefined ? (
+          <Row className={`${blockClass}--available-row`}>
+            <Column className={`${blockClass}--available-space`}>
+              {availableSpace}
+            </Column>
+          </Row>
+        ) : null}
+
+        {!(navigation === undefined && tags === undefined) ? (
+          <Row className={`${blockClass}--navigation-row`}>
+            {navigation !== undefined ? (
+              <Column
+                className={`${blockClass}--navigation-tabs`}
+                // {...halfOrFull(tags !== undefined)}
+              >
+                {navigation}
+              </Column>
+            ) : null}
+            {tags !== undefined ? (
+              <Column
+                className={`${blockClass}--navigation-tags`}
+                // {...halfColumns}
+              >
+                {tags}
+              </Column>
+            ) : null}
+          </Row>
+        ) : null}
       </Grid>
     </section>
   );
@@ -157,7 +185,7 @@ PageHeader.propTypes = {
   /**
    * Subtitle/description
    */
-  subTitle: PropTypes.string,
+  subtitle: PropTypes.string,
   /**
    * tags - array of carbon Tags
    */

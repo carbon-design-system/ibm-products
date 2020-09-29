@@ -17,7 +17,6 @@
     "clean": "rimraf es lib",
     "watch": "yarn clean && rollup -c -w",
     "storybook": "start-storybook -p 6006",
-    "test": "jest",
     "build-storybook": "build-storybook"
   },
   "peerDependencies": {

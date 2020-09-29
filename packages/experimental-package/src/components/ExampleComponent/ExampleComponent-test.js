@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render } from '@testing-library/react';
 import { shallow } from 'enzyme';
 import React from 'react';
 
@@ -23,12 +24,10 @@ describe(name, () => {
   });
 
   test('should have no accessibility violations', async () => {
-    const html = wrapper.render();
+    const { container } = render(<ExampleComponent />);
 
-    console.log(html);
-
-    await expect(html).toHaveNoAxeViolations();
-    await expect(html).toHaveNoDAPViolations(name);
+    await expect(container).toHaveNoAxeViolations();
+    await expect(container).toHaveNoDAPViolations(name);
   });
 
   it('primary and secondary clicks not called', () => {

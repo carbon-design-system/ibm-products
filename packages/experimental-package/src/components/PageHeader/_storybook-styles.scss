@@ -14,6 +14,9 @@
 .sbdocs .page-header-stories__viewport {
   overflow-y: auto;
   max-height: 500px;
+  box-shadow: 0 0 4px 1px $gray-20;
+  color: $text-01;
+  background-color: $ui-background;
 }
 
 .page-header-stories__dummy-content {

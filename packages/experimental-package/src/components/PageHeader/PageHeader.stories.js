@@ -26,10 +26,12 @@ import { PageHeader } from '.';
 
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 
+import mdx from './PageHeader.mdx';
+
 export default {
   title: 'Experimental/PageHeader',
   component: PageHeader,
-  parameters: { styles, layout: 'fullscreen' },
+  parameters: { styles, layout: 'fullscreen', docs: { page: mdx } },
   decorators: [
     (Story) => (
       <div className="page-header-stories__viewport">
@@ -200,6 +202,17 @@ WithBackgroundBreadcrumbitemsTitleTabs.args = {
   navigation: tabBar,
 };
 
+export const WithBackgroundBreadcrumbitemsTitlePageactionsTabs = Template.bind(
+  {}
+);
+WithBackgroundBreadcrumbitemsTitlePageactionsTabs.args = {
+  background: true,
+  breadcrumbItems,
+  title,
+  pageActions,
+  navigation: tabBar,
+};
+
 export const WithBackgroundBreadcrumbitemsTitlePageactionsTags = Template.bind(
   {}
 );
@@ -218,6 +231,25 @@ WithBackgroundBreadcrumbitemsTitleTabsTags.args = {
   title,
   navigation: tabBar,
   tags,
+};
+
+export const WithBackgroundBreadcrumbitemsActionbarTitlePageactionsTabsTags = Template.bind(
+  {}
+);
+WithBackgroundBreadcrumbitemsActionbarTitlePageactionsTabsTags.args = {
+  background: true,
+  breadcrumbItems,
+  actionBarItems,
+  title,
+  pageActions,
+  navigation: tabBar,
+};
+
+export const WithBackgroundBreadcrumbitemsActionbar = Template.bind({});
+WithBackgroundBreadcrumbitemsActionbar.args = {
+  background: true,
+  breadcrumbItems,
+  actionBarItems,
 };
 
 export const WithBackgroundBreadcrumbitemsTitlePageactionsSubtitle = Template.bind(

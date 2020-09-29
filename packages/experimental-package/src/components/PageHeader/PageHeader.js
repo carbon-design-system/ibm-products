@@ -89,7 +89,9 @@ export const PageHeader = ({
 
             {actionBarItems !== undefined ? (
               <Column className={`${blockClass}--action-bar`}>
-                {actionBarItems}
+                <ActionBar className={`${blockClass}--action-bar`}>
+                  {actionBarItems}
+                </ActionBar>
               </Column>
             ) : null}
           </Row>

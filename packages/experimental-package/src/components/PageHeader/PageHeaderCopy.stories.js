@@ -28,6 +28,13 @@ export default {
   title: 'Experimental/PageHeaderCopy',
   component: PageHeader,
   parameters: { styles, layout: 'fullscreen' },
+  decorators: [
+    (Story) => (
+      <div className="page-header-stories__viewport">
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 const breadcrumbItems = (

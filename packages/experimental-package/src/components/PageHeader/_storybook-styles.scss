@@ -11,13 +11,28 @@
 @import 'carbon-components/scss/components/tabs/tabs';
 @import 'carbon-components/scss/components/tag/tag';
 
+.sbdocs .page-header-stories__viewport {
+  overflow-y: auto;
+  max-height: 500px;
+}
+
+.page-header-stories__dummy-content {
+  margin-top: $spacing-05;
+}
+
+.page-header-stories__dummy-content-block {
+  height: 120vh;
+  background: $ui-01;
+  background-clip: content-box;
+}
+
+.page-header-stories__dummy-content-text {
+  padding: $spacing-05;
+}
+
 .page-header-stories__status-icon {
   vertical-align: middle;
   fill: $support-02;
-}
-
-.container {
-  height: 100vh;
 }
 
 .content {
@@ -27,18 +42,4 @@
   border-right: 45vw solid transparent;
   border-bottom: 150vh solid $support-03;
   border-left: 45vw solid transparent;
-}
-
-.page-header-stories__dummy-content {
-  margin-top: $spacing-05;
-}
-
-.page-header-stories__dummy-content-block {
-  height: 60px;
-  background: $ui-01;
-  background-clip: content-box;
-}
-
-.page-header-stories__dummy-content-text {
-  padding: $spacing-05;
 }

@@ -36,6 +36,7 @@
     "enzyme-adapter-react-16": "^1.15.4",
     "eslint": "^7.8.1",
     "eslint-config-carbon": "^2.1.0",
+    "eslint-plugin-react": "7.20.0",
     "husky": "^4.2.5",
     "jest": "^26.0.1",
     "lerna": "^3.22.1",

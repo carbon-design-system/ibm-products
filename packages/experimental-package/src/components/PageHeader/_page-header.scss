@@ -43,6 +43,10 @@ $block-class: #{$exp-prefix}-page-header;
   margin-bottom: $spacing-03;
 }
 
+.#{$block-class}--title-space {
+  min-width: 50%;
+}
+
 .#{$block-class}--title {
   @include carbon--type-style('productive-heading-04');
 }

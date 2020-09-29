@@ -32,7 +32,9 @@ $block-class: #{$exp-prefix}-page-header;
 }
 
 .#{$block-class}--action-bar {
-  margin-top: -$spacing-04; /* align with breadcrumb */
+  // stylelint-disable-next-line
+  margin-top: calc(-1 * #{$spacing-02}); /* align with breadcrumb */
+  white-space: nowrap;
   text-align: right;
 }
 

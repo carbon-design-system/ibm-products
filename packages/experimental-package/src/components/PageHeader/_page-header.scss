@@ -32,13 +32,19 @@ $block-class: #{$exp-prefix}-page-header;
 }
 
 .#{$block-class}--action-bar {
-  margin-top: -$spacing-04; /* align with breadcrumb */
+  // stylelint-disable-next-line
+  margin-top: calc(-1 * #{$spacing-04}); /* align with breadcrumb */
+  white-space: nowrap;
   text-align: right;
 }
 
 .#{$block-class}--title-row {
   margin-top: $spacing-02;
   margin-bottom: $spacing-03;
+}
+
+.#{$block-class}--title-space {
+  min-width: 50%;
 }
 
 .#{$block-class}--title {

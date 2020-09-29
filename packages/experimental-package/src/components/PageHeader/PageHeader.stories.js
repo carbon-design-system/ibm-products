@@ -51,12 +51,37 @@ const actionBarItems = (
     <ActionBarItem icon={Lightning16} label="Action 4" />
   </>
 );
-
+const manyActionBarItems = (
+  <>
+    <ActionBarItem icon={Lightning16} label="Action 1" />
+    <ActionBarItem icon={Lightning16} label="Action 2" />
+    <ActionBarItem icon={Lightning16} label="Action 3" />
+    <ActionBarItem icon={Lightning16} label="Action 4" />
+    <ActionBarItem icon={Lightning16} label="Action 5" />
+    <ActionBarItem icon={Lightning16} label="Action 6" />
+    <ActionBarItem icon={Lightning16} label="Action 7" />
+    <ActionBarItem icon={Lightning16} label="Action 8" />
+    <ActionBarItem icon={Lightning16} label="Action 9" />
+    <ActionBarItem icon={Lightning16} label="Action 10" />
+  </>
+);
 const breadcrumbItems = (
   <>
     <BreadcrumbItem href="#">Breadcrumb 1</BreadcrumbItem>
     <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
     <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
+  </>
+);
+const manyBreadcrumbItems = (
+  <>
+    <BreadcrumbItem href="#">Breadcrumb 1</BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 4</BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 5</BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 6</BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 7</BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 8</BreadcrumbItem>
   </>
 );
 const className = 'client-class-1 client-class-2';
@@ -93,12 +118,21 @@ const pageActions = (
     <Button>Primary button</Button>
   </>
 );
+const manyPageActions = (
+  <>
+    <Button kind="secondary">Secondary button 1</Button>
+    <Button kind="secondary">Secondary button 2</Button>
+    <Button>Primary button</Button>
+  </>
+);
 const statusIndicator = (
   <>
     <CheckmarkFilled16 className="page-header-stories__status-icon" /> Running
   </>
 );
 const subtitle = 'Optional subtitle if necessary';
+const longSubtitle =
+  'Optional subtitle if necessary, which is very long in this case, but will need to be handled somehow';
 const summaryDetails = (
   <div style={{ display: 'flex' }}>
     <p style={{ marginRight: '50px', maxWidth: '400px' }}>
@@ -124,6 +158,18 @@ const tabBar = (
     <Tab label="Tab 4" />
   </Tabs>
 );
+const longTabBar = (
+  <Tabs>
+    <Tab label="Tab 1" />
+    <Tab label="Tab 2" />
+    <Tab label="Tab 3" />
+    <Tab label="Tab 4" />
+    <Tab label="Tab 5" />
+    <Tab label="Tab 6" />
+    <Tab label="Tab 7" />
+    <Tab label="Tab 8" />
+  </Tabs>
+);
 const tags = (
   <>
     <Tag type="blue">A tag</Tag>
@@ -132,7 +178,21 @@ const tags = (
     <Tag type="purple">A tag</Tag>
   </>
 );
+const manyTags = (
+  <>
+    <Tag type="blue">Blue</Tag>
+    <Tag type="green">Green</Tag>
+    <Tag type="warm-gray">Warm gray</Tag>
+    <Tag type="purple">Purple</Tag>
+    <Tag type="red">Red</Tag>
+    <Tag type="teal">Teal</Tag>
+    <Tag type="high-contrast">High contrast</Tag>
+    <Tag type="magenta">Magenta</Tag>
+  </>
+);
 const title = 'Page title';
+const longTitle =
+  'A very long page title that is going to exceed fifty-six characters and get truncated';
 
 // Template.
 const Template = (args) => {
@@ -273,4 +333,17 @@ WithBackgroundBreadcrumbitemsTitlePageactionsSummarydetailsTabs.args = {
   pageActions,
   availableSpace: summaryDetails,
   navigation: tabBar,
+};
+
+export const LongValuesAndManyItems = Template.bind({});
+LongValuesAndManyItems.args = {
+  background: true,
+  breadcrumbItems: manyBreadcrumbItems,
+  actionBarItems: manyActionBarItems,
+  title: longTitle,
+  pageActions: manyPageActions,
+  subtitle: longSubtitle,
+  availableSpace: summaryDetails,
+  navigation: longTabBar,
+  tags: manyTags,
 };

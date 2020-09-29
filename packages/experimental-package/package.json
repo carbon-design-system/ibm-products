@@ -28,7 +28,6 @@
     "@rollup/plugin-commonjs": "^13.0.0",
     "@rollup/plugin-node-resolve": "^8.0.1",
     "babel-loader": "^8.1.0",
-    "classnames": "^2.2.6",
     "css-loader": "^4.2.1",
     "react": "^16.13.1",
     "react-is": "^16.13.1",

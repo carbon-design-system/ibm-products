@@ -6,7 +6,7 @@ const statusLabels = {
   production: 'Production Ready',
 };
 
-export const getComponentLabel = component => {
+export const getComponentLabel = (component) => {
   return `${statusLabels[ComponentStatus[component].status]}/${
     ComponentStatus[component].name
   }`;

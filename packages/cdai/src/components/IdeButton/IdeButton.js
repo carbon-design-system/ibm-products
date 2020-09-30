@@ -20,12 +20,12 @@ const IdeButton = React.forwardRef(
   }
 );
 
-IdeButton.displayName = 'IdeButton'
+IdeButton.displayName = 'IdeButton';
 
 IdeButton.propTypes = {
   children: PropTypes.element,
   className: PropTypes.string,
-  iconAnimation: PropTypes.string
-}
+  iconAnimation: PropTypes.string,
+};
 
 export default IdeButton;

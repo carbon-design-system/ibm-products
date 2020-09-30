@@ -21,7 +21,7 @@ module.exports = async ({ config, mode }) => {
         options: {
           sassOptions: {
             include: [path.resolve(__dirname, '../'), 'node_modules'],
-          }
+          },
         },
       },
     ],

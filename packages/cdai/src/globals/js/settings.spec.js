@@ -16,7 +16,7 @@ describe('settings', () => {
     }));
     // dynamic import so we can modify the import on the component before using it
     const { IdeButton } = await import('../../components/IdeButton');
-    const wrapper = shallow(<IdeButton iconAnimation='rotate-180-anti' />);
+    const wrapper = shallow(<IdeButton iconAnimation="rotate-180-anti" />);
     expect(wrapper.find('.my-prefix-btn--rotate-180-anti')).toHaveLength(1);
   });
 });

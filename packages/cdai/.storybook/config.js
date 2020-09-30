@@ -8,8 +8,7 @@ addParameters({
   options: {
     theme: {
       brandTitle: `CDAI Components`,
-      brandUrl:
-        'https://github.com/carbon-design-system/ibm-cloud-paks',
+      brandUrl: 'https://github.com/carbon-design-system/ibm-cloud-paks',
     },
   },
 });
@@ -20,12 +19,12 @@ addDecorator(
   })
 );
 
-addDecorator(story => <Container story={story} />);
+addDecorator((story) => <Container story={story} />);
 addDecorator(withKnobs);
 
 function loadStories() {
   const req = require.context('../src/components', true, /\.stories\.js$/);
-  req.keys().forEach(filename => req(filename));
+  req.keys().forEach((filename) => req(filename));
 }
 
 configure(loadStories, module);

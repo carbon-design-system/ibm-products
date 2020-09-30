@@ -26,8 +26,8 @@ describe(name, () => {
   test('should have no accessibility violations', async () => {
     const { container } = render(<ExampleComponent />);
 
+    await expect(container).toBeAccessible(name);
     await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations(name);
   });
 
   it('primary and secondary clicks not called', () => {

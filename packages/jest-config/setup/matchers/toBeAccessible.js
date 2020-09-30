@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// https://github.com/IBMa/equal-access/blob/master/accessibility-checker/boilerplates/jest/matchers/toBeAccessible.js
 let accessibilityChecker;
 
 export default async (node, label) => {

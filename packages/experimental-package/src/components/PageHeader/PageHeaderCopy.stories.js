@@ -29,11 +29,7 @@ export default {
   component: PageHeader,
   parameters: { styles, layout: 'fullscreen' },
   decorators: [
-    (Story) => (
-      <div className="page-header-stories__viewport">
-        <Story />
-      </div>
-    ),
+    (story) => <div className="page-header-stories__viewport">{story()}</div>,
   ],
 };
 

@@ -19,6 +19,11 @@ $block-class: #{$exp-prefix}-page-header;
   display: inline-block; /* cause top/bottom margin to reserve space */
   width: 100%;
   background-color: $ui-background;
+
+  /* custom props */
+  --#{$block-class}--breadcrumb-min-height: #{$spacing-07};
+  --#{$block-class}--breadcrumb-title-visibility: hidden;
+  --#{$block-class}--breadcrumb-title-opacity: 1;
 }
 
 .#{$block-class}--background {
@@ -26,10 +31,36 @@ $block-class: #{$exp-prefix}-page-header;
 }
 
 .#{$block-class}--breadcrumb-row {
-  min-height: $spacing-07;
-  margin-top: $spacing-04;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  min-height: var(--#{$block-class}--breadcrumb-min-height);
   margin-bottom: $spacing-02;
+  padding-top: $spacing-04;
+  background-color: $ui-background;
 }
+
+.#{$block-class}--background .#{$block-class}--breadcrumb-row {
+  background-color: $ui-01;
+}
+
+.#{$block-class}--breadcrumb {
+  @include carbon--type-style('label-01');
+}
+
+.#{$block-class}--breadcrumb-title {
+  position: relative;
+  transform: translateY(var(--#{$block-class}--breadcrumb-title-top));
+  visibility: var(--#{$block-class}--breadcrumb-title-visibility);
+  opacity: var(--exp-page-header--breadcrumb-title-opacity);
+}
+
+// .#{$block-class}--breadcrumb-row::before {
+//   display: inline-block;
+//   width: 0;
+//   height: calc(#{$layout-03} + #{$spacing-04});
+//   content: '';
+// }
 
 .#{$block-class}--action-bar {
   // stylelint-disable-next-line

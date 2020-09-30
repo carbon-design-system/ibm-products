@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import cx from 'classnames';
@@ -42,18 +42,59 @@ export const PageHeader = ({
   title,
 }) => {
   // eslint-disable-next-line no-unused-vars
-  const [titleInBreadcrumbs, setTitleInBreadcrumbs] = useState(true);
+  const [titleInBreadcrumbs, setTitleInBreadcrumbs] = useState({
+    visible: false,
+    opacity: 0,
+    scrollY: 0,
+  });
+  const [componentCssCustomProps, setComponentCssCustomProps] = useState({});
+  const headerEl = useRef(null);
+  const breadcrumbTitleEl = useRef(null);
 
   // const halfColumns = { sm: 2, md: 4, lg: 8 };
 
   // const halfOrFull = (test) => (test ? { ...halfColumns } : {});
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    // would love to do this differently but digging in the dom seems easier
+    // than getting a ref to a conditionally rendered item
+    breadcrumbTitleEl.current = headerEl.current.querySelector(
+      `.${blockClass}--breadcrumb-title`
+    );
+
+    const breadcrumbHeight = getComputedStyle(
+      breadcrumbTitleEl.current
+    ).getPropertyValue('height');
+
+    setComponentCssCustomProps((previous) => ({
+      ...previous,
+      [`--${blockClass}--breadcrumb-height-unitless`]: parseInt(
+        breadcrumbHeight,
+        10
+      ),
+      [`--${blockClass}--breadcrumb-height`]: breadcrumbHeight,
+    }));
+  }, [title, breadcrumbItems]);
+
   useWindowScroll(({ previous, current }) => {
-    console.dir(JSON.stringify({ on: 'scroll', previous, current }));
+    if (previous.scrollY !== current.scrollY) {
+      setComponentCssCustomProps((previous) => ({
+        ...previous,
+        [`--${blockClass}--breadcrumb-title-visibility`]:
+          current.scrollY > 0 ? 'visible' : 'hidden',
+        [`--${blockClass}--scroll`]: `${current.scrollY}`,
+        [`--${blockClass}--scroll-px`]: `${current.scrollY}px`,
+        [`--${blockClass}--breadcrumb-title-top`]: `max(0px, calc(100% - var(--${blockClass}--scroll-px)))`,
+        [`--${blockClass}--breadcrumb-title-opacity`]: `calc(var(--${blockClass}--scroll) / var(--${blockClass}--breadcrumb-height-unitless))`,
+      }));
+    }
   });
 
   useWindowResize(({ previous, current }) => {
-    console.dir(JSON.stringify({ on: 'resize', previous, current }));
+    if (previous.innerHeight !== current.innerHeight) {
+      console.dir(JSON.stringify({ on: 'resize', previous, current }));
+    }
   });
 
   return (
@@ -62,7 +103,9 @@ export const PageHeader = ({
         blockClass,
         className,
         { [`${blockClass}--background`]: background },
-      ])}>
+      ])}
+      ref={headerEl}
+      style={componentCssCustomProps}>
       <Grid>
         {!(breadcrumbItems === undefined && actionBarItems === undefined) ? (
           <Row className={`${blockClass}--breadcrumb-row`}>
@@ -74,8 +117,11 @@ export const PageHeader = ({
                   className={`${blockClass}--breadcrumb`}
                   noTrailingSlash={titleInBreadcrumbs && !!title}>
                   {breadcrumbItems}
-                  {title && titleInBreadcrumbs ? (
-                    <BreadcrumbItem href="#" isCurrentPage={true}>
+                  {title ? (
+                    <BreadcrumbItem
+                      href="#"
+                      isCurrentPage={true}
+                      className={`${blockClass}--breadcrumb-title`}>
                       {title}
                     </BreadcrumbItem>
                   ) : (

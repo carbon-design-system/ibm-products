@@ -1,5 +1,5 @@
 {
-  "name": "@carbon/experimental-package",
+  "name": "@carbon/ibm-cloud-paks-experimental",
   "private": true,
   "version": "0.0.0",
   "license": "Apache-2.0",
@@ -16,7 +16,9 @@
   "keywords": [
     "carbon",
     "carbon design system",
-    "carbon community"
+    "carbon community",
+    "ibm",
+    "ibm cloud paks"
   ],
   "scripts": {
     "build": "yarn clean && yarn build:js && yarn build:scss",

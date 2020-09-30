@@ -1,5 +1,5 @@
 {
-  "name": "@carbon/cloud-pak-for-security",
+  "name": "@carbon/ibm-cloud-paks-security",
   "private": true,
   "version": "0.0.0",
   "license": "Apache-2.0",
@@ -18,7 +18,7 @@
     "carbon design system",
     "carbon community",
     "ibm",
-    "ibm cloud pak for security",
+    "ibm cloud paks",
     "ibm security"
   ],
   "scripts": {

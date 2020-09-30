@@ -5,5 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from '@carbon/cloud-pak-for-security';
-export * from '@carbon/experimental-package';
+export * from '@carbon/ibm-cloud-paks-experimental';
+export * from '@carbon/ibm-cloud-paks-security';

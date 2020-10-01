@@ -378,3 +378,49 @@ LongValuesAndManyItems.args = {
   navigation: longTabBar,
   tags: manyTags,
 };
+
+const includeTheseArgs = (args) => {
+  const result = {};
+
+  const keys = Object.keys(args);
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i];
+    if (!key.endsWith('SwitchedArg')) {
+      const switchedArg = args[`${key}SwitchedArg`];
+      if (switchedArg !== false) {
+        result[key] = args[key];
+      }
+    }
+  }
+  return result;
+};
+
+const TemplateWithSwitchedArgs = (args) => {
+  return (
+    <>
+      <PageHeader className="example-class-name" {...includeTheseArgs(args)} />
+      {dummyPageContent}
+    </>
+  );
+};
+
+export const AllAttributesWithSwitches = TemplateWithSwitchedArgs.bind({});
+AllAttributesWithSwitches.args = {
+  actionBarItems,
+  actionBarItemsSwitchedArg: true,
+  availableSpace: summaryDetails,
+  availableSpaceSwitchedArg: true,
+  background: true,
+  breadcrumbItems,
+  breadcrumbItemsSwitchedArg: true,
+  navigation: tabBar,
+  navigationSwitchedArg: true,
+  pageActions,
+  pageActionsSwitchedArg: true,
+  subtitle,
+  subtitleSwitchedArg: true,
+  tags,
+  tagsSwitchedArg: true,
+  title,
+  titleSwitchedArg: true,
+};

@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import cx from 'classnames';
@@ -15,7 +15,7 @@ import cx from 'classnames';
 
 import { expPrefix } from '../../global/js/settings';
 
-import { useWindowResize, useWindowScroll } from '../../global/js/use';
+import { /* useWindowResize, */ useWindowScroll } from '../../global/js/use';
 
 import {
   BreadcrumbItem,
@@ -42,19 +42,63 @@ export const PageHeader = ({
   title,
 }) => {
   // eslint-disable-next-line no-unused-vars
-  const [titleInBreadcrumbs, setTitleInBreadcrumbs] = useState(true);
+  const [titleInBreadcrumbs, setTitleInBreadcrumbs] = useState({
+    visible: false,
+    opacity: 0,
+    scrollY: 0,
+  });
+  const [componentCssCustomProps, setComponentCssCustomProps] = useState({});
+  const headerEl = useRef(null);
+  const breadcrumbTitleEl = useRef(null);
 
   // const halfColumns = { sm: 2, md: 4, lg: 8 };
 
   // const halfOrFull = (test) => (test ? { ...halfColumns } : {});
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    // would love to do this differently but digging in the dom seems easier
+    // than getting a ref to a conditionally rendered item
+    breadcrumbTitleEl.current = headerEl.current.querySelector(
+      `.${blockClass}--breadcrumb-title`
+    );
+
+    let breadcrumbHeight = '0px';
+    if (window !== undefined && breadcrumbTitleEl.current !== null) {
+      breadcrumbHeight = window
+        .getComputedStyle(breadcrumbTitleEl.current)
+        .getPropertyValue('height');
+    }
+
+    setComponentCssCustomProps((previous) => ({
+      ...previous,
+      [`--${blockClass}--breadcrumb-height-unitless`]: parseInt(
+        breadcrumbHeight,
+        10
+      ),
+      [`--${blockClass}--breadcrumb-height`]: breadcrumbHeight,
+    }));
+  }, [title, breadcrumbItems]);
+
   useWindowScroll(({ previous, current }) => {
-    console.dir(JSON.stringify({ on: 'scroll', previous, current }));
+    if (previous.scrollY !== current.scrollY) {
+      setComponentCssCustomProps((previous) => ({
+        ...previous,
+        [`--${blockClass}--breadcrumb-title-visibility`]:
+          current.scrollY > 0 ? 'visible' : 'hidden',
+        [`--${blockClass}--scroll`]: `${current.scrollY}`,
+        [`--${blockClass}--scroll-px`]: `${current.scrollY}px`,
+        [`--${blockClass}--breadcrumb-title-top`]: `max(0px, calc(100% - var(--${blockClass}--scroll-px)))`,
+        [`--${blockClass}--breadcrumb-title-opacity`]: `calc(var(--${blockClass}--scroll) / var(--${blockClass}--breadcrumb-height-unitless))`,
+      }));
+    }
   });
 
-  useWindowResize(({ previous, current }) => {
-    console.dir(JSON.stringify({ on: 'resize', previous, current }));
-  });
+  // useWindowResize(({ previous, current }) => {
+  //   if (previous.innerHeight !== current.innerHeight) {
+  //     console.dir(JSON.stringify({ on: 'resize', previous, current }));
+  //   }
+  // });
 
   return (
     <section
@@ -62,11 +106,17 @@ export const PageHeader = ({
         blockClass,
         className,
         { [`${blockClass}--background`]: background },
-      ])}>
+      ])}
+      ref={headerEl}
+      style={componentCssCustomProps}>
       <Grid>
         {!(breadcrumbItems === undefined && actionBarItems === undefined) ? (
-          <Row className={`${blockClass}--breadcrumb-row`}>
-            <Column className={`${blockClass}--breadcrumb-space`}>
+          <Row
+            className={cx(`${blockClass}--breadcrumb-row`, {
+              [`${blockClass}--breadcrumb-row--with-actions`]:
+                actionBarItems !== undefined,
+            })}>
+            <Column className={`${blockClass}--breadcrumb-colum`}>
               {/* keeps actionBar right even if empty */}
 
               {breadcrumbItems !== undefined ? (
@@ -74,8 +124,11 @@ export const PageHeader = ({
                   className={`${blockClass}--breadcrumb`}
                   noTrailingSlash={titleInBreadcrumbs && !!title}>
                   {breadcrumbItems}
-                  {title && titleInBreadcrumbs ? (
-                    <BreadcrumbItem href="#" isCurrentPage={true}>
+                  {title ? (
+                    <BreadcrumbItem
+                      href="#"
+                      isCurrentPage={true}
+                      className={`${blockClass}--breadcrumb-title`}>
                       {title}
                     </BreadcrumbItem>
                   ) : (
@@ -88,7 +141,7 @@ export const PageHeader = ({
             </Column>
 
             {actionBarItems !== undefined ? (
-              <Column className={`${blockClass}--action-bar`}>
+              <Column className={`${blockClass}--action-bar-colum`}>
                 <ActionBar className={`${blockClass}--action-bar`}>
                   {actionBarItems}
                 </ActionBar>
@@ -99,7 +152,7 @@ export const PageHeader = ({
 
         {!(title === undefined && pageActions === undefined) ? (
           <Row className={`${blockClass}--title-row`}>
-            <Column className={`${blockClass}--title-space`}>
+            <Column className={`${blockClass}--title-colum`}>
               {/* keeps page actions right even if empty */}
               {title !== undefined ? (
                 <div className={`${blockClass}--title`}>{title}</div>
@@ -122,7 +175,7 @@ export const PageHeader = ({
 
         {availableSpace !== undefined ? (
           <Row className={`${blockClass}--available-row`}>
-            <Column className={`${blockClass}--available-space`}>
+            <Column className={`${blockClass}--available-colum`}>
               {availableSpace}
             </Column>
           </Row>

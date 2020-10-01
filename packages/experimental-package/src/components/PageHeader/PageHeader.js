@@ -131,7 +131,11 @@ export const PageHeader = ({
               [`${blockClass}--breadcrumb-row--with-actions`]:
                 actionBarItems !== undefined,
             })}>
-            <Column className={`${blockClass}--breadcrumb-colum`}>
+            <Column
+              className={cx(`${blockClass}--breadcrumb-colum`, {
+                [`${blockClass}--breadcrumb-column--background`]:
+                  breadcrumbItems !== undefined || actionBarItems !== undefined,
+              })}>
               {/* keeps actionBar right even if empty */}
 
               {breadcrumbItems !== undefined ? (
@@ -154,8 +158,11 @@ export const PageHeader = ({
                 ''
               )}
             </Column>
-
-            <Column className={`${blockClass}--action-bar-colum`}>
+            <Column
+              className={cx(`${blockClass}--action-bar-colum`, {
+                [`${blockClass}--action-bar-column--background`]:
+                  actionBarItems !== undefined,
+              })}>
               {actionBarItems !== undefined ? (
                 <ActionBar className={`${blockClass}--action-bar`}>
                   {actionBarItems}

@@ -44,13 +44,13 @@ $raised-z-index: 99;
   border-bottom: 1px solid $ui-03;
 }
 
-.#{$block-class}--breadcrumb,
-.#{$block-class}--action-bar {
+.#{$block-class}--breadcrumb-column--background,
+.#{$block-class}--action-bar-column--background {
   background-color: $ui-background;
 }
 
-.#{$block-class}--background .#{$block-class}--breadcrumb,
-.#{$block-class}--background .#{$block-class}--action-bar {
+.#{$block-class}--background .#{$block-class}--breadcrumb-column--background,
+.#{$block-class}--background .#{$block-class}--action-bar-column--background {
   background-color: $ui-01;
 }
 

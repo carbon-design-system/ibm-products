@@ -15,7 +15,7 @@ import cx from 'classnames';
 
 import { expPrefix } from '../../global/js/settings';
 
-import { useWindowResize, useWindowScroll } from '../../global/js/use';
+import { /* useWindowResize, */ useWindowScroll } from '../../global/js/use';
 
 import {
   BreadcrumbItem,
@@ -63,9 +63,12 @@ export const PageHeader = ({
       `.${blockClass}--breadcrumb-title`
     );
 
-    const breadcrumbHeight = getComputedStyle(
-      breadcrumbTitleEl.current
-    ).getPropertyValue('height');
+    let breadcrumbHeight = '0px';
+    if (window !== undefined && breadcrumbTitleEl.current !== null) {
+      breadcrumbHeight = window
+        .getComputedStyle(breadcrumbTitleEl.current)
+        .getPropertyValue('height');
+    }
 
     setComponentCssCustomProps((previous) => ({
       ...previous,
@@ -91,11 +94,11 @@ export const PageHeader = ({
     }
   });
 
-  useWindowResize(({ previous, current }) => {
-    if (previous.innerHeight !== current.innerHeight) {
-      console.dir(JSON.stringify({ on: 'resize', previous, current }));
-    }
-  });
+  // useWindowResize(({ previous, current }) => {
+  //   if (previous.innerHeight !== current.innerHeight) {
+  //     console.dir(JSON.stringify({ on: 'resize', previous, current }));
+  //   }
+  // });
 
   return (
     <section
@@ -108,8 +111,12 @@ export const PageHeader = ({
       style={componentCssCustomProps}>
       <Grid>
         {!(breadcrumbItems === undefined && actionBarItems === undefined) ? (
-          <Row className={`${blockClass}--breadcrumb-row`}>
-            <Column className={`${blockClass}--breadcrumb-space`}>
+          <Row
+            className={cx(`${blockClass}--breadcrumb-row`, {
+              [`${blockClass}--breadcrumb-row--with-actions`]:
+                actionBarItems !== undefined,
+            })}>
+            <Column className={`${blockClass}--breadcrumb-colum`}>
               {/* keeps actionBar right even if empty */}
 
               {breadcrumbItems !== undefined ? (
@@ -134,7 +141,7 @@ export const PageHeader = ({
             </Column>
 
             {actionBarItems !== undefined ? (
-              <Column className={`${blockClass}--action-bar`}>
+              <Column className={`${blockClass}--action-bar-colum`}>
                 <ActionBar className={`${blockClass}--action-bar`}>
                   {actionBarItems}
                 </ActionBar>
@@ -145,7 +152,7 @@ export const PageHeader = ({
 
         {!(title === undefined && pageActions === undefined) ? (
           <Row className={`${blockClass}--title-row`}>
-            <Column className={`${blockClass}--title-space`}>
+            <Column className={`${blockClass}--title-colum`}>
               {/* keeps page actions right even if empty */}
               {title !== undefined ? (
                 <div className={`${blockClass}--title`}>{title}</div>
@@ -168,7 +175,7 @@ export const PageHeader = ({
 
         {availableSpace !== undefined ? (
           <Row className={`${blockClass}--available-row`}>
-            <Column className={`${blockClass}--available-space`}>
+            <Column className={`${blockClass}--available-colum`}>
               {availableSpace}
             </Column>
           </Row>

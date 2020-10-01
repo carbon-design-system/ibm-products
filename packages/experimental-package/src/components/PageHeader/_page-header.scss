@@ -13,6 +13,7 @@
 @import 'carbon-components/scss/components/tooltip/tooltip';
 
 $block-class: #{$exp-prefix}-page-header;
+$raised-z-index: 99;
 
 .#{$block-class} {
   /* Bleed class for the background */
@@ -33,11 +34,15 @@ $block-class: #{$exp-prefix}-page-header;
 .#{$block-class}--breadcrumb-row {
   position: sticky;
   top: 0;
-  z-index: 99;
+  z-index: $raised-z-index;
   min-height: var(--#{$block-class}--breadcrumb-min-height);
   margin-bottom: $spacing-02;
-  padding-top: $spacing-04;
   background-color: $ui-background;
+}
+
+.#{$block-class}--breadcrumb-row--with-actions {
+  margin-bottom: $spacing-06;
+  border-bottom: 1px solid $ui-03;
 }
 
 .#{$block-class}--background .#{$block-class}--breadcrumb-row {
@@ -46,6 +51,8 @@ $block-class: #{$exp-prefix}-page-header;
 
 .#{$block-class}--breadcrumb {
   @include carbon--type-style('label-01');
+
+  padding-top: $spacing-04;
 }
 
 .#{$block-class}--breadcrumb-title {
@@ -63,8 +70,9 @@ $block-class: #{$exp-prefix}-page-header;
 // }
 
 .#{$block-class}--action-bar {
+  padding-top: $spacing-04;
   // stylelint-disable-next-line
-  margin-top: calc(-1 * #{$spacing-02}); /* align with breadcrumb */
+  margin-top: calc(-1 * #{$spacing-04}); /* align with breadcrumb */
   white-space: nowrap;
   text-align: right;
 }
@@ -74,7 +82,7 @@ $block-class: #{$exp-prefix}-page-header;
   margin-bottom: $spacing-03;
 }
 
-.#{$block-class}--title-space {
+.#{$block-class}--title-col {
   min-width: 50%;
 }
 

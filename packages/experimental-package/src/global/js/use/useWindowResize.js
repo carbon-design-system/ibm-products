@@ -12,15 +12,15 @@ const getWindowSize = () => {
 };
 
 export function useWindowResize(effect, deps, throttleInterval = 0) {
-  const windowSize = useRef(getWindowSize());
+  const windowSize = useRef({});
   const throttleTimeout = useRef(null);
 
   const doGetWindowSize = () => {
-    const newWindowSize = getWindowSize();
+    const newVal = { previous: windowSize.current, current: getWindowSize() };
 
     // call effect
-    effect({ previous: windowSize.current, current: newWindowSize });
-    windowSize.current = newWindowSize;
+    effect(newVal);
+    windowSize.current = newVal.current;
     throttleTimeout.current = null;
   };
 
@@ -39,6 +39,7 @@ export function useWindowResize(effect, deps, throttleInterval = 0) {
     };
 
     window.addEventListener('resize', handleResize);
+    doGetWindowSize();
 
     return () => window.removeEventListener('resize', handleResize);
     // eslint-disable-next-line react-hooks/exhaustive-deps

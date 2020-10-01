@@ -12,24 +12,34 @@ import {
   BreadcrumbItem,
   Button,
   Column,
+  ContentSwitcher,
   Grid,
   Row,
+  Switch,
   Tab,
   Tabs,
   Tag,
 } from 'carbon-components-react';
 import { CheckmarkFilled16 } from '@carbon/icons-react';
-import { Lightning16 } from '@carbon/icons-react';
+import { Lightning16, Bee32 } from '@carbon/icons-react';
 
 import { ActionBarItem } from './ActionBarItem';
 import { PageHeader } from '.';
 
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 
+import mdx from './PageHeader.mdx';
+
 export default {
   title: 'Experimental/PageHeader',
   component: PageHeader,
-  parameters: { styles, layout: 'fullscreen' },
+  subcomponents: {
+    ActionBarItem,
+  },
+  parameters: { styles, layout: 'fullscreen', docs: { page: mdx } },
+  decorators: [
+    (story) => <div className="page-header-stories__viewport">{story()}</div>,
+  ],
 };
 
 // Test values for props.
@@ -42,7 +52,20 @@ const actionBarItems = (
     <ActionBarItem icon={Lightning16} label="Action 4" />
   </>
 );
-
+const manyActionBarItems = (
+  <>
+    <ActionBarItem icon={Lightning16} label="Action 1" />
+    <ActionBarItem icon={Lightning16} label="Action 2" />
+    <ActionBarItem icon={Lightning16} label="Action 3" />
+    <ActionBarItem icon={Lightning16} label="Action 4" />
+    <ActionBarItem icon={Lightning16} label="Action 5" />
+    <ActionBarItem icon={Lightning16} label="Action 6" />
+    <ActionBarItem icon={Lightning16} label="Action 7" />
+    <ActionBarItem icon={Lightning16} label="Action 8" />
+    <ActionBarItem icon={Lightning16} label="Action 9" />
+    <ActionBarItem icon={Lightning16} label="Action 10" />
+  </>
+);
 const breadcrumbItems = (
   <>
     <BreadcrumbItem href="#">Breadcrumb 1</BreadcrumbItem>
@@ -50,7 +73,28 @@ const breadcrumbItems = (
     <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
   </>
 );
+const manyBreadcrumbItems = (
+  <>
+    <BreadcrumbItem href="#">Breadcrumb 1</BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 4</BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 5</BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 6</BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 7</BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 8</BreadcrumbItem>
+  </>
+);
 const className = 'client-class-1 client-class-2';
+const contentSwitcher = (
+  <ContentSwitcher
+    className="page-header-stories__content-switcher"
+    onChange={() => {}}>
+    <Switch name="one" text="First section" />
+    <Switch name="two" text="Second section" />
+    <Switch name="three" text="Third section" />
+  </ContentSwitcher>
+);
 const dummyPageContent = (
   <Grid className="page-header-stories__dummy-content" narrow={true}>
     <Row>
@@ -84,12 +128,21 @@ const pageActions = (
     <Button>Primary button</Button>
   </>
 );
+const manyPageActions = (
+  <>
+    <Button kind="secondary">Secondary button 1</Button>
+    <Button kind="secondary">Secondary button 2</Button>
+    <Button>Primary button</Button>
+  </>
+);
 const statusIndicator = (
   <>
     <CheckmarkFilled16 className="page-header-stories__status-icon" /> Running
   </>
 );
 const subtitle = 'Optional subtitle if necessary';
+const longSubtitle =
+  'Optional subtitle if necessary, which is very long in this case, but will need to be handled somehow';
 const summaryDetails = (
   <div style={{ display: 'flex' }}>
     <p style={{ marginRight: '50px', maxWidth: '400px' }}>
@@ -115,6 +168,18 @@ const tabBar = (
     <Tab label="Tab 4" />
   </Tabs>
 );
+const longTabBar = (
+  <Tabs>
+    <Tab label="Tab 1" />
+    <Tab label="Tab 2" />
+    <Tab label="Tab 3" />
+    <Tab label="Tab 4" />
+    <Tab label="Tab 5" />
+    <Tab label="Tab 6" />
+    <Tab label="Tab 7" />
+    <Tab label="Tab 8" />
+  </Tabs>
+);
 const tags = (
   <>
     <Tag type="blue">A tag</Tag>
@@ -123,7 +188,21 @@ const tags = (
     <Tag type="purple">A tag</Tag>
   </>
 );
+const manyTags = (
+  <>
+    <Tag type="blue">Blue</Tag>
+    <Tag type="green">Green</Tag>
+    <Tag type="warm-gray">Warm gray</Tag>
+    <Tag type="purple">Purple</Tag>
+    <Tag type="red">Red</Tag>
+    <Tag type="teal">Teal</Tag>
+    <Tag type="high-contrast">High contrast</Tag>
+    <Tag type="magenta">Magenta</Tag>
+  </>
+);
 const title = 'Page title';
+const longTitle =
+  'A very long page title that is going to exceed fifty-six characters and get truncated';
 
 // Template.
 const Template = (args) => {
@@ -142,6 +221,7 @@ AllAttributesSet.args = {
   breadcrumbItems,
   actionBarItems,
   title,
+  titleIcon: Bee32,
   pageActions,
   subtitle,
   availableSpace: summaryDetails,
@@ -152,8 +232,8 @@ AllAttributesSet.args = {
 export const NoAttributesSet = Template.bind({});
 NoAttributesSet.args = {};
 
-export const WithoutBackgroundTitleOnly = Template.bind({});
-WithoutBackgroundTitleOnly.args = {
+export const WithoutBackgroundTitle = Template.bind({});
+WithoutBackgroundTitle.args = {
   title,
 };
 
@@ -193,6 +273,37 @@ WithBackgroundBreadcrumbitemsTitleTabs.args = {
   navigation: tabBar,
 };
 
+export const WithBackgroundBreadcrumbitemsTitleIconTabs = Template.bind({});
+WithBackgroundBreadcrumbitemsTitleIconTabs.args = {
+  background: true,
+  breadcrumbItems,
+  title,
+  titleIcon: Bee32,
+  navigation: tabBar,
+};
+
+export const WithBackgroundBreadcrumbitemsTitlePageactionsTabs = Template.bind(
+  {}
+);
+WithBackgroundBreadcrumbitemsTitlePageactionsTabs.args = {
+  background: true,
+  breadcrumbItems,
+  title,
+  pageActions,
+  navigation: tabBar,
+};
+
+export const WithBackgroundBreadcrumbitemsTitlePageactionsContentSwitcher = Template.bind(
+  {}
+);
+WithBackgroundBreadcrumbitemsTitlePageactionsContentSwitcher.args = {
+  background: true,
+  breadcrumbItems,
+  title,
+  pageActions,
+  navigation: contentSwitcher,
+};
+
 export const WithBackgroundBreadcrumbitemsTitlePageactionsTags = Template.bind(
   {}
 );
@@ -211,6 +322,25 @@ WithBackgroundBreadcrumbitemsTitleTabsTags.args = {
   title,
   navigation: tabBar,
   tags,
+};
+
+export const WithBackgroundBreadcrumbitemsActionbarTitlePageactionsTabsTags = Template.bind(
+  {}
+);
+WithBackgroundBreadcrumbitemsActionbarTitlePageactionsTabsTags.args = {
+  background: true,
+  breadcrumbItems,
+  actionBarItems,
+  title,
+  pageActions,
+  navigation: tabBar,
+};
+
+export const WithBackgroundBreadcrumbitemsActionbar = Template.bind({});
+WithBackgroundBreadcrumbitemsActionbar.args = {
+  background: true,
+  breadcrumbItems,
+  actionBarItems,
 };
 
 export const WithBackgroundBreadcrumbitemsTitlePageactionsSubtitle = Template.bind(
@@ -234,4 +364,63 @@ WithBackgroundBreadcrumbitemsTitlePageactionsSummarydetailsTabs.args = {
   pageActions,
   availableSpace: summaryDetails,
   navigation: tabBar,
+};
+
+export const LongValuesAndManyItems = Template.bind({});
+LongValuesAndManyItems.args = {
+  background: true,
+  breadcrumbItems: manyBreadcrumbItems,
+  actionBarItems: manyActionBarItems,
+  title: longTitle,
+  pageActions: manyPageActions,
+  subtitle: longSubtitle,
+  availableSpace: summaryDetails,
+  navigation: longTabBar,
+  tags: manyTags,
+};
+
+const includeTheseArgs = (args) => {
+  const result = {};
+
+  const keys = Object.keys(args);
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i];
+    if (!key.endsWith('SwitchedArg')) {
+      const switchedArg = args[`${key}SwitchedArg`];
+      if (switchedArg !== false) {
+        result[key] = args[key];
+      }
+    }
+  }
+  return result;
+};
+
+const TemplateWithSwitchedArgs = (args) => {
+  return (
+    <>
+      <PageHeader className="example-class-name" {...includeTheseArgs(args)} />
+      {dummyPageContent}
+    </>
+  );
+};
+
+export const AllAttributesWithSwitches = TemplateWithSwitchedArgs.bind({});
+AllAttributesWithSwitches.args = {
+  actionBarItems,
+  actionBarItemsSwitchedArg: true,
+  availableSpace: summaryDetails,
+  availableSpaceSwitchedArg: true,
+  background: true,
+  breadcrumbItems,
+  breadcrumbItemsSwitchedArg: true,
+  navigation: tabBar,
+  navigationSwitchedArg: true,
+  pageActions,
+  pageActionsSwitchedArg: true,
+  subtitle,
+  subtitleSwitchedArg: true,
+  tags,
+  tagsSwitchedArg: true,
+  title,
+  titleSwitchedArg: true,
 };

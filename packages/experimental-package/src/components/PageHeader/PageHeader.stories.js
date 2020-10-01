@@ -12,14 +12,16 @@ import {
   BreadcrumbItem,
   Button,
   Column,
+  ContentSwitcher,
   Grid,
   Row,
+  Switch,
   Tab,
   Tabs,
   Tag,
 } from 'carbon-components-react';
 import { CheckmarkFilled16 } from '@carbon/icons-react';
-import { Lightning16 } from '@carbon/icons-react';
+import { Lightning16, Bee32 } from '@carbon/icons-react';
 
 import { ActionBarItem } from './ActionBarItem';
 import { PageHeader } from '.';
@@ -84,6 +86,15 @@ const manyBreadcrumbItems = (
   </>
 );
 const className = 'client-class-1 client-class-2';
+const contentSwitcher = (
+  <ContentSwitcher
+    className="page-header-stories__content-switcher"
+    onChange={() => {}}>
+    <Switch name="one" text="First section" />
+    <Switch name="two" text="Second section" />
+    <Switch name="three" text="Third section" />
+  </ContentSwitcher>
+);
 const dummyPageContent = (
   <Grid className="page-header-stories__dummy-content" narrow={true}>
     <Row>
@@ -210,6 +221,7 @@ AllAttributesSet.args = {
   breadcrumbItems,
   actionBarItems,
   title,
+  titleIcon: Bee32,
   pageActions,
   subtitle,
   availableSpace: summaryDetails,
@@ -220,8 +232,8 @@ AllAttributesSet.args = {
 export const NoAttributesSet = Template.bind({});
 NoAttributesSet.args = {};
 
-export const WithoutBackgroundTitleOnly = Template.bind({});
-WithoutBackgroundTitleOnly.args = {
+export const WithoutBackgroundTitle = Template.bind({});
+WithoutBackgroundTitle.args = {
   title,
 };
 
@@ -261,6 +273,15 @@ WithBackgroundBreadcrumbitemsTitleTabs.args = {
   navigation: tabBar,
 };
 
+export const WithBackgroundBreadcrumbitemsTitleIconTabs = Template.bind({});
+WithBackgroundBreadcrumbitemsTitleIconTabs.args = {
+  background: true,
+  breadcrumbItems,
+  title,
+  titleIcon: Bee32,
+  navigation: tabBar,
+};
+
 export const WithBackgroundBreadcrumbitemsTitlePageactionsTabs = Template.bind(
   {}
 );
@@ -270,6 +291,17 @@ WithBackgroundBreadcrumbitemsTitlePageactionsTabs.args = {
   title,
   pageActions,
   navigation: tabBar,
+};
+
+export const WithBackgroundBreadcrumbitemsTitlePageactionsContentSwitcher = Template.bind(
+  {}
+);
+WithBackgroundBreadcrumbitemsTitlePageactionsContentSwitcher.args = {
+  background: true,
+  breadcrumbItems,
+  title,
+  pageActions,
+  navigation: contentSwitcher,
 };
 
 export const WithBackgroundBreadcrumbitemsTitlePageactionsTags = Template.bind(

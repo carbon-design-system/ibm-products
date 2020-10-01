@@ -28,6 +28,13 @@ export default {
   title: 'Experimental/PageHeaderCopy',
   component: PageHeader,
   parameters: { styles, layout: 'fullscreen' },
+  decorators: [
+    (Story) => (
+      <div className="page-header-stories__viewport">
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 const breadcrumbItems = (
@@ -50,7 +57,7 @@ const actionBarItems = (
 
 const pageActions = <Button size="field">A button</Button>;
 
-const subTitle = 'This is a sub title';
+const subtitle = 'This is a sub title';
 
 const availableSpace = (
   <div>Something a little bit extra in available space.</div>
@@ -74,16 +81,26 @@ const tags = (
   </>
 );
 
-const Template = (args) => {
-  const { tags, tagsIncluded, ..._args } = { ...args };
+const includeTheseArgs = (args) => {
+  const result = {};
 
+  const keys = Object.keys(args);
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i];
+    if (!key.endsWith('SwitchedArg')) {
+      const switchedArg = args[`${key}SwitchedArg`];
+      if (switchedArg !== false) {
+        result[key] = args[key];
+      }
+    }
+  }
+  return result;
+};
+
+const Template = (args) => {
   return (
     <div className="container">
-      <PageHeader
-        className="example-class-name"
-        {...args}
-        tags={tagsIncluded ? tags : undefined}
-      />
+      <PageHeader className="example-class-name" {...includeTheseArgs(args)} />
       <div className="content">Sample content to stretch the page</div>
     </div>
   );
@@ -92,15 +109,22 @@ const Template = (args) => {
 export const AllThings = Template.bind({});
 AllThings.args = {
   actionBarItems,
+  actionBarItemsSwitchedArg: true,
   availableSpace,
+  availableSpaceSwitchedArg: true,
   background: true,
   breadcrumbItems,
+  breadcrumbItemsSwitchedArg: true,
   navigation,
+  navigationSwitchedArg: true,
   pageActions,
-  subTitle,
+  pageActionsSwitchedArg: true,
+  subtitle,
+  subtitleSwitchedArg: true,
   tags,
-  tagsIncluded: true,
+  tagsSwitchedArg: true,
   title,
+  titleSwitchedArg: true,
 };
 
 export const Minimal = Template.bind({});

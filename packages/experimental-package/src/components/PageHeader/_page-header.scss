@@ -26,18 +26,16 @@ $block-class: #{$exp-prefix}-page-header;
 }
 
 .#{$block-class}--breadcrumb-row {
+  min-height: $spacing-07;
   margin-top: $spacing-04;
   margin-bottom: $spacing-02;
 }
 
-.#{$block-class}--breadcrumb-space {
-  display: flex;
-  justify-content: space-between;
-  min-height: $spacing-07;
-}
-
 .#{$block-class}--action-bar {
-  margin-top: -$spacing-04; /* align with breadcrumb */
+  // stylelint-disable-next-line
+  margin-top: calc(-1 * #{$spacing-02}); /* align with breadcrumb */
+  white-space: nowrap;
+  text-align: right;
 }
 
 .#{$block-class}--title-row {
@@ -46,24 +44,20 @@ $block-class: #{$exp-prefix}-page-header;
 }
 
 .#{$block-class}--title-space {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  min-width: 50%;
 }
 
 .#{$block-class}--title {
   @include carbon--type-style('productive-heading-04');
 }
 
+.#{$block-class}--page-actions {
+  text-align: right;
+}
+
 .#{$block-class}--subtitle-row {
   margin-top: $spacing-03;
   margin-bottom: $spacing-05;
-}
-
-.#{$block-class}--subtitle-space {
-  display: flex;
-  justify-content: flex-start;
-  margin-top: $spacing-03;
 }
 
 .#{$block-class}--subtitle {
@@ -83,16 +77,6 @@ $block-class: #{$exp-prefix}-page-header;
 .#{$block-class}--navigation-row .#{$prefix}--tab-content {
   display: none; /* need to figure out how to handle the tab content */
 }
-
-// .#{$block-class}--navigation-space {
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-between;
-// }
-
-// .#{$block-class}--navigation-tabs {
-//   flex: 1 0 50%;
-// }
 
 .#{$block-class}--navigation-tags {
   white-space: nowrap;

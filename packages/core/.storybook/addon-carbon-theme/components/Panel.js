@@ -40,7 +40,7 @@ const typeTokenDefaults = {
  * Storybook add-on panel for Carbon theme switcher.
  */
 export const CarbonThemesPanel = ({ api, active }) => {
-  const [currentTheme, setCurrentTheme] = useState('white');
+  const [currentTheme, setCurrentTheme] = useState('g10');
   const handleChange = useCallback(
     (event) => {
       const { value } = event.target;
@@ -49,6 +49,7 @@ export const CarbonThemesPanel = ({ api, active }) => {
     },
     [api]
   );
+  api.getChannel().emit(CARBON_CURRENT_THEME, currentTheme);
   return (
     active && (
       <Form>

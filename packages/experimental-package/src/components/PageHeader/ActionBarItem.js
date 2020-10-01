@@ -44,27 +44,34 @@ export const ActionBarItem = ({
 
 ActionBarItem.propTypes = {
   /**
-   * className
+   * Specifies class(es) to be applied to the top-level PageHeader node.
+   * Optional.
    */
   className: PropTypes.string,
   /**
-   * disabled
+   * Specifies whether the ActionBarItem should be disabled, or not.
+   * Optional.
    */
   disabled: PropTypes.bool,
   /**
-   * icon
+   * The icon for the ActionBarItem.
+   * Mandatory.
    */
-  icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
   /**
-   * label
+   * A label to describe the ActionBarItem. Displayed on hover and used as
+   * assistive text.
+   * Mandatory.
    */
-  label: PropTypes.string,
+  label: PropTypes.string.isRequired,
   /**
-   * onClick click event handler
+   * Specifies an onClick handler that is called when the ActionBarItem is
+   * clicked. Optional.
    */
   onClick: PropTypes.func,
 };
 
 ActionBarItem.defaultProps = {
   className: '',
+  disabled: false,
 };

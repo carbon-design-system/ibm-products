@@ -13,12 +13,18 @@
 @import 'carbon-components/scss/components/tooltip/tooltip';
 
 $block-class: #{$exp-prefix}-page-header;
+$raised-z-index: 99;
 
 .#{$block-class} {
   /* Bleed class for the background */
   display: inline-block; /* cause top/bottom margin to reserve space */
   width: 100%;
   background-color: $ui-background;
+
+  /* custom props */
+  --#{$block-class}--breadcrumb-min-height: #{$spacing-07};
+  --#{$block-class}--breadcrumb-title-visibility: hidden;
+  --#{$block-class}--breadcrumb-title-opacity: 1;
 }
 
 .#{$block-class}--background {
@@ -26,19 +32,58 @@ $block-class: #{$exp-prefix}-page-header;
 }
 
 .#{$block-class}--breadcrumb-row {
-  min-height: $spacing-07;
-  margin-top: $spacing-04;
+  position: sticky;
+  top: 0;
+  z-index: $raised-z-index;
+  min-height: var(--#{$block-class}--breadcrumb-min-height);
   margin-bottom: $spacing-02;
+  background-color: $ui-background;
 }
 
+.#{$block-class}--breadcrumb-row--with-actions {
+  margin-bottom: $spacing-06;
+  border-bottom: 1px solid $ui-03;
+}
+
+.#{$block-class}--background .#{$block-class}--breadcrumb-row {
+  background-color: $ui-01;
+}
+
+.#{$block-class}--breadcrumb {
+  @include carbon--type-style('label-01');
+
+  padding-top: $spacing-04;
+}
+
+.#{$block-class}--breadcrumb-title {
+  position: relative;
+  transform: translateY(var(--#{$block-class}--breadcrumb-title-top));
+  visibility: var(--#{$block-class}--breadcrumb-title-visibility);
+  opacity: var(--exp-page-header--breadcrumb-title-opacity);
+}
+
+// .#{$block-class}--breadcrumb-row::before {
+//   display: inline-block;
+//   width: 0;
+//   height: calc(#{$layout-03} + #{$spacing-04});
+//   content: '';
+// }
+
 .#{$block-class}--action-bar {
-  margin-top: -$spacing-04; /* align with breadcrumb */
+  padding-top: $spacing-04;
+  // stylelint-disable-next-line
+  margin-top: calc(-1 * #{$spacing-04}); /* align with breadcrumb */
+  white-space: nowrap;
   text-align: right;
 }
 
 .#{$block-class}--title-row {
   margin-top: $spacing-02;
   margin-bottom: $spacing-03;
+}
+
+.#{$block-class}--title-col {
+  min-width: 50%;
 }
 
 .#{$block-class}--title {

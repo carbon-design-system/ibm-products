@@ -6,20 +6,13 @@
  */
 
 // https://github.com/IBMa/equal-access/blob/master/accessibility-checker/boilerplates/jest/matchers/toBeAccessible.js
-let accessibilityChecker;
+import {
+  assertCompliance,
+  getCompliance,
+  stringifyResults,
+} from 'accessibility-checker';
 
 export default async (node, label) => {
-  // Defer the initialization of `accessibility-checker` to avoid race condition when running a testing suite in Node.js without jsdom.
-  if (!accessibilityChecker) {
-    accessibilityChecker = require('accessibility-checker');
-  }
-
-  const {
-    assertCompliance,
-    getCompliance,
-    stringifyResults,
-  } = accessibilityChecker;
-
   const { report } = await getCompliance(node, label);
 
   return {

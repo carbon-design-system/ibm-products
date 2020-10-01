@@ -208,45 +208,63 @@ export const PageHeader = ({
 
 PageHeader.propTypes = {
   /**
-   * actionBarItems
+   * One or more ActionBarItem components, passed in as React element(s).
+   * If provided, these are rendered at the top right of the header as
+   * action icons. Optional.
    */
   actionBarItems: PropTypes.element, // expect actionBarItems
   /**
-   * React node specifying content to be placed in availableSpace
+   * A zone for placing high-level, client content above the page tabs.
+   * Accepts arbitrary renderable content as a React node. Optional.
    */
   availableSpace: PropTypes.node,
   /**
-   * background displayed or not
+   * Specifies if the PageHeader should have a background color or not.
+   * Optional.
    */
   background: PropTypes.bool,
   /**
-   * Array of BreadcrumbItems
+   * One or more Carbon BreadcrumbItem components, passed in as React element(s).
+   * If provided, these are rendered at the top left of the header as
+   * a breadcrumb. Optional.
    */
   breadcrumbItems: PropTypes.element, // expects BreadcrumbItems,
   /**
-   * className to be applied to wrapping element
+   * Specifies class(es) to be applied to the top-level PageHeader node.
+   * Optional.
    */
   className: PropTypes.string,
   /**
-   * navigation consisting of tabs or content switcher
+   * Content for the navigation area in the PageHeader. Should
+   * be a React element that is normally either a Carbon Tabs component or a
+   * Carbon ContentSwitcher. Optional.
    */
   navigation: PropTypes.element, // Supports Tabs or ContentSwitcher
   /**
-   * pageActions - page level actions
+   * Specifies the primary page actions as a React element. Normally this
+   * is one or more Carbon Button components. Optional.
    */
   pageActions: PropTypes.element,
   /**
-   * Subtitle/description
+   * A subtitle or description that provides additional context to
+   * identify the current page. Optional.
    */
   subtitle: PropTypes.string,
   /**
-   * tags - array of carbon Tags
+   * One or more tags, specified as a Carbon Tags component.
+   * Optional.
    */
   tags: PropTypes.element,
   /**
-   * Title
+   * The title of the page.
+   * Optional.
    */
   title: PropTypes.string,
+  /**
+   * An icon to be included to the left of the title text.
+   * Optional.
+   */
+  titleIcon: PropTypes.PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
 PageHeader.defaultProps = {

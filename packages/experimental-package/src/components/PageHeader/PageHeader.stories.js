@@ -31,13 +31,12 @@ import mdx from './PageHeader.mdx';
 export default {
   title: 'Experimental/PageHeader',
   component: PageHeader,
+  subcomponents: {
+    ActionBarItem,
+  },
   parameters: { styles, layout: 'fullscreen', docs: { page: mdx } },
   decorators: [
-    (Story) => (
-      <div className="page-header-stories__viewport">
-        <Story />
-      </div>
-    ),
+    (story) => <div className="page-header-stories__viewport">{story()}</div>,
   ],
 };
 

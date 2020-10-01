@@ -3,7 +3,7 @@ import { useRef, useLayoutEffect } from 'react';
 const windowExists = typeof window !== `undefined`;
 
 const getScrollPosition = () => {
-  if (!windowExists) return { scrollX: 0, scrollY: 0 };
+  if (!windowExists) return { scrollX: -1, scrollY: -1 }; //
 
   const { scrollX, scrollY } = { ...window };
 
@@ -11,15 +11,19 @@ const getScrollPosition = () => {
 };
 
 export function useWindowScroll(effect, deps, throttleInterval = 0) {
-  const scrollPosition = useRef(getScrollPosition());
+  const scrollPosition = useRef({});
   const throttleTimeout = useRef(null);
 
   const doGetScrollPosition = () => {
-    const newScrollPosition = getScrollPosition();
+    const newVal = {
+      previous: scrollPosition.current,
+      current: getScrollPosition(),
+    };
 
     // call effect
-    effect({ previous: scrollPosition.current, current: newScrollPosition });
-    scrollPosition.current = newScrollPosition;
+    effect(newVal);
+
+    scrollPosition.current = newVal.current;
     throttleTimeout.current = null;
   };
 
@@ -38,6 +42,7 @@ export function useWindowScroll(effect, deps, throttleInterval = 0) {
     };
 
     window.addEventListener('scroll', handleScroll);
+    doGetScrollPosition();
 
     return () => window.removeEventListener('scroll', handleScroll);
     // eslint-disable-next-line react-hooks/exhaustive-deps

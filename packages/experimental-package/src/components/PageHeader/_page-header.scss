@@ -37,7 +37,6 @@ $raised-z-index: 99;
   z-index: $raised-z-index;
   min-height: var(--#{$block-class}--breadcrumb-min-height);
   margin-bottom: $spacing-02;
-  background-color: $ui-background;
 }
 
 .#{$block-class}--breadcrumb-row--with-actions {
@@ -45,7 +44,13 @@ $raised-z-index: 99;
   border-bottom: 1px solid $ui-03;
 }
 
-.#{$block-class}--background .#{$block-class}--breadcrumb-row {
+.#{$block-class}--breadcrumb,
+.#{$block-class}--action-bar {
+  background-color: $ui-background;
+}
+
+.#{$block-class}--background .#{$block-class}--breadcrumb,
+.#{$block-class}--background .#{$block-class}--action-bar {
   background-color: $ui-01;
 }
 
@@ -88,6 +93,13 @@ $raised-z-index: 99;
 
 .#{$block-class}--title {
   @include carbon--type-style('productive-heading-04');
+
+  display: flex;
+  align-items: center;
+}
+
+.#{$block-class}--title-icon {
+  margin-right: $spacing-04;
 }
 
 .#{$block-class}--page-actions {

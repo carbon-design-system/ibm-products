@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import cx from 'classnames';
@@ -40,6 +40,7 @@ export const PageHeader = ({
   subtitle,
   tags,
   title,
+  titleIcon: TitleIcon,
 }) => {
   // eslint-disable-next-line no-unused-vars
   const [titleInBreadcrumbs, setTitleInBreadcrumbs] = useState({
@@ -49,50 +50,64 @@ export const PageHeader = ({
   });
   const [componentCssCustomProps, setComponentCssCustomProps] = useState({});
   const headerEl = useRef(null);
-  const breadcrumbTitleEl = useRef(null);
 
   // const halfColumns = { sm: 2, md: 4, lg: 8 };
 
   // const halfOrFull = (test) => (test ? { ...halfColumns } : {});
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
+  const checkBreadcrumbHeights = () => {
     // would love to do this differently but digging in the dom seems easier
     // than getting a ref to a conditionally rendered item
-    breadcrumbTitleEl.current = headerEl.current.querySelector(
+    const breadcrumbTitleEl = headerEl.current.querySelector(
       `.${blockClass}--breadcrumb-title`
     );
+    const breadcrumbRowEl = headerEl.current.querySelector(
+      `.${blockClass}--breadcrumb-row`
+    );
+    let breadcrumbTitleHeight = 0;
+    let breadcrumbRowMargin = 0;
 
-    let breadcrumbHeight = '0px';
-    if (window !== undefined && breadcrumbTitleEl.current !== null) {
-      breadcrumbHeight = window
-        .getComputedStyle(breadcrumbTitleEl.current)
-        .getPropertyValue('height');
+    if (window !== undefined && breadcrumbTitleEl !== null) {
+      breadcrumbTitleHeight = parseFloat(
+        window.getComputedStyle(breadcrumbTitleEl).getPropertyValue('height'),
+        10
+      );
+
+      breadcrumbRowMargin = parseFloat(
+        window
+          .getComputedStyle(breadcrumbRowEl)
+          .getPropertyValue('margin-bottom'),
+        10
+      );
     }
 
     setComponentCssCustomProps((previous) => ({
       ...previous,
-      [`--${blockClass}--breadcrumb-height-unitless`]: parseInt(
-        breadcrumbHeight,
-        10
-      ),
-      [`--${blockClass}--breadcrumb-height`]: breadcrumbHeight,
+      [`--${blockClass}--breadcrumb-title-scroll`]: breadcrumbTitleHeight,
+      [`--${blockClass}--breadcrumb-title-scroll-px`]: `${breadcrumbTitleHeight}px`,
+      [`--${blockClass}--breadcrumb-title-start`]: breadcrumbRowMargin,
+      [`--${blockClass}--breadcrumb-title-start-px`]: `${breadcrumbRowMargin}px`,
     }));
-  }, [title, breadcrumbItems]);
+  };
 
-  useWindowScroll(({ previous, current }) => {
-    if (previous.scrollY !== current.scrollY) {
-      setComponentCssCustomProps((previous) => ({
-        ...previous,
-        [`--${blockClass}--breadcrumb-title-visibility`]:
-          current.scrollY > 0 ? 'visible' : 'hidden',
-        [`--${blockClass}--scroll`]: `${current.scrollY}`,
-        [`--${blockClass}--scroll-px`]: `${current.scrollY}px`,
-        [`--${blockClass}--breadcrumb-title-top`]: `max(0px, calc(100% - var(--${blockClass}--scroll-px)))`,
-        [`--${blockClass}--breadcrumb-title-opacity`]: `calc(var(--${blockClass}--scroll) / var(--${blockClass}--breadcrumb-height-unitless))`,
-      }));
-    }
-  });
+  useWindowScroll(
+    ({ previous, current }) => {
+      if (previous.scrollY !== current.scrollY) {
+        checkBreadcrumbHeights();
+
+        setComponentCssCustomProps((previous) => ({
+          ...previous,
+          [`--${blockClass}--breadcrumb-title-visibility`]:
+            current.scrollY > 0 ? 'visible' : 'hidden',
+          [`--${blockClass}--scroll`]: `${current.scrollY}`,
+          [`--${blockClass}--scroll-px`]: `${current.scrollY}px`,
+          [`--${blockClass}--breadcrumb-title-top`]: `max(0px, calc(var(--${blockClass}--breadcrumb-title-scroll-px) + var(--${blockClass}--breadcrumb-title-start-px) - var(--${blockClass}--scroll-px)))`,
+          [`--${blockClass}--breadcrumb-title-opacity`]: `calc((var(--${blockClass}--scroll) - var(--${blockClass}--breadcrumb-title-start)) / var(--${blockClass}--breadcrumb-title-scroll))`,
+        }));
+      }
+    },
+    [title, breadcrumbItems]
+  );
 
   // useWindowResize(({ previous, current }) => {
   //   if (previous.innerHeight !== current.innerHeight) {
@@ -136,17 +151,17 @@ export const PageHeader = ({
                   )}
                 </Breadcrumb>
               ) : (
-                <div className="just-for-spacing"></div>
+                ''
               )}
             </Column>
 
-            {actionBarItems !== undefined ? (
-              <Column className={`${blockClass}--action-bar-colum`}>
+            <Column className={`${blockClass}--action-bar-colum`}>
+              {actionBarItems !== undefined ? (
                 <ActionBar className={`${blockClass}--action-bar`}>
                   {actionBarItems}
                 </ActionBar>
-              </Column>
-            ) : null}
+              ) : null}
+            </Column>
           </Row>
         ) : null}
 
@@ -155,7 +170,14 @@ export const PageHeader = ({
             <Column className={`${blockClass}--title-colum`}>
               {/* keeps page actions right even if empty */}
               {title !== undefined ? (
-                <div className={`${blockClass}--title`}>{title}</div>
+                <div className={`${blockClass}--title`}>
+                  {TitleIcon ? (
+                    <TitleIcon className={`${blockClass}--title-icon`} />
+                  ) : (
+                    ''
+                  )}
+                  {title}
+                </div>
               ) : null}
             </Column>
 
@@ -264,7 +286,7 @@ PageHeader.propTypes = {
    * An icon to be included to the left of the title text.
    * Optional.
    */
-  titleIcon: PropTypes.PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  titleIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
 PageHeader.defaultProps = {

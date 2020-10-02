@@ -1,7 +1,7 @@
 {
   "name": "@carbon/cdai",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "Apache-2.0",
   "repository": "https://github.com/carbon-design-system/ibm-cloud-paks/tree/master/packages/cdai",
   "bugs": "https://github.com/carbon-design-system/ibm-cloud-paks/issues",
@@ -10,5 +10,8 @@
     "carbon design system",
     "carbon community",
     "cdai"
-  ]
+  ],
+  "scripts": {
+    "storybook": "start-storybook -p 6006"
+  }
 }

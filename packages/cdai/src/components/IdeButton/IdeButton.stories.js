@@ -9,9 +9,12 @@ import AddIcon16 from '@carbon/icons-react/lib/add/16';
 import BeeIcon16 from '@carbon/icons-react/lib/bee/16';
 import RenewIcon16 from '@carbon/icons-react/lib/renew/16';
 
+import styles from './_storybook.scss';
+
 const button1Ref = React.createRef();
 
 storiesOf(getComponentLabel('IdeButton'), module)
+  .addParameters({ styles })
   .addDecorator(withKnobs)
   .add(
     'Label and icon',

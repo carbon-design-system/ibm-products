@@ -1,3 +1,8 @@
+@import '../../globals/scss/carbon-settings';
+@import '../../globals/scss/variables';
+
+@import 'carbon-components/scss/components/button/button';
+
 @keyframes rotate-180-anti {
   0% {
     transform: rotate(0deg);

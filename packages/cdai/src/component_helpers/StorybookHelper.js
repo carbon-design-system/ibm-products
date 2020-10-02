@@ -1,13 +1,12 @@
-import ComponentStatus from '../../ComponentStatus.json';
+//
+// Copyright IBM Corp. 2020, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
 
-const statusLabels = {
-  donotuse: 'Example - Do Not Use',
-  experimental: 'Under Construction',
-  production: 'Production Ready',
-};
+import { sectionTitle } from '../../config';
 
 export const getComponentLabel = (component) => {
-  return `${statusLabels[ComponentStatus[component].status]}/${
-    ComponentStatus[component].name
-  }`;
+  return `${sectionTitle}/${component}`;
 };

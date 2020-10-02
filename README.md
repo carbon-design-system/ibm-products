@@ -17,6 +17,9 @@ This library supports the latest versions of:
 - Microsoft Edge
 - Mozilla Firefox
 
+## Locally served storybook
+Simply run `yarn storybook` and the storybook will be built and then served on port `3000` on your local machine.
+
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new features,

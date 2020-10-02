@@ -1,5 +1,5 @@
 {
-  "name": "@carbon/experimental-package",
+  "name": "@carbon/ibm-cloud-paks-experimental",
   "private": true,
   "version": "0.0.0",
   "license": "Apache-2.0",
@@ -7,33 +7,28 @@
   "module": "es/index.js",
   "repository": "https://github.com/carbon-design-system/ibm-cloud-paks/tree/master/packages/experimental-package",
   "bugs": "https://github.com/carbon-design-system/ibm-cloud-paks/issues",
+  "files": [
+    "css",
+    "es",
+    "lib",
+    "scss"
+  ],
   "keywords": [
     "carbon",
     "carbon design system",
-    "carbon community"
+    "carbon community",
+    "ibm",
+    "ibm cloud paks"
   ],
   "scripts": {
-    "build": "yarn clean && rollup -c",
-    "clean": "rimraf es lib",
-    "watch": "yarn clean && rollup -c -w",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build": "yarn clean && yarn build:js && yarn build:scss",
+    "build:js": "rollup -c",
+    "build:scss": "bundler bundle:scss src/index.scss && copyfiles 'src/**/*.scss' scss -u 1",
+    "clean": "rimraf es lib scss",
+    "test": "bundler check 'src/**/*.scss'"
   },
   "peerDependencies": {
     "react": "^16.13.1"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.10.2",
-    "@rollup/plugin-babel": "^5.0.3",
-    "@rollup/plugin-commonjs": "^13.0.0",
-    "@rollup/plugin-node-resolve": "^8.0.1",
-    "babel-loader": "^8.1.0",
-    "css-loader": "^4.2.1",
-    "react": "^16.13.1",
-    "react-is": "^16.13.1",
-    "rimraf": "^3.0.2",
-    "sass-loader": "^9.0.3",
-    "style-loader": "^1.2.1"
   },
   "dependencies": {
     "@carbon/icons-react": "^10.18.0",

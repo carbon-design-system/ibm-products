@@ -140,7 +140,7 @@ export default class IdeHTTPErrors extends Component {
   };
 
   // Background rendering
-  renderBackground = isInline => {
+  renderBackground = (isInline) => {
     const { getImage, isLargeViewport, renderSection, state } = this;
     if (
       !state ||
@@ -153,7 +153,7 @@ export default class IdeHTTPErrors extends Component {
     const background = getImage(isInline);
     return renderSection(sectionClassName, background);
   };
-  getImage = isInline => {
+  getImage = (isInline) => {
     const { background: src, className: componentClassName } = this;
     const className = isInline
       ? `${componentClassName}-inline-image`
@@ -193,7 +193,7 @@ export default class IdeHTTPErrors extends Component {
       </div>
     );
   };
-  renderRow = children => (
+  renderRow = (children) => (
     <div className={`${this.gridPrefix}--row`}>{children}</div>
   );
   get gridClasses() {
@@ -254,7 +254,7 @@ export default class IdeHTTPErrors extends Component {
           'links prop defined as an array must contain at least 1 item'
         );
       }
-      links.map(link => assertIsValidLinkObject(link));
+      links.map((link) => assertIsValidLinkObject(link));
     } else {
       throwError(
         `links prop must be an object or array of objects with text+url props, got ${JSON.stringify(
@@ -269,13 +269,13 @@ export default class IdeHTTPErrors extends Component {
       this.throwError(`${propName} prop must be type ${type}, got ${propType}`);
     }
   };
-  assertIsValidLinkObject = link => {
+  assertIsValidLinkObject = (link) => {
     const { assertIsType } = this;
     const { text, url } = link;
     assertIsType('string', 'links.text', text);
     assertIsType('string', 'links.url', url);
   };
-  throwError = msg => {
+  throwError = (msg) => {
     throw new Error(`${this.constructor.name}: ${msg}`);
   };
   get linksPropIsArray() {

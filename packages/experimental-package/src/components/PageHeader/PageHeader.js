@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import cx from 'classnames';
@@ -49,10 +49,12 @@ export const PageHeader = ({
     scrollY: 0,
   });
   const [componentCssCustomProps, setComponentCssCustomProps] = useState({});
+  const [hasBreadcrumbRow, setHasBreadcrumbRow] = useState(false);
+  const [spacingBelowTitle, setSpacingBelowTitle] = useState('06');
+
   const headerEl = useRef(null);
 
   // const halfColumns = { sm: 2, md: 4, lg: 8 };
-
   // const halfOrFull = (test) => (test ? { ...halfColumns } : {});
 
   const checkBreadcrumbHeights = () => {
@@ -115,6 +117,31 @@ export const PageHeader = ({
   //   }
   // });
 
+  useEffect(() => {
+    // eslint-disable-next-line
+    setHasBreadcrumbRow(
+      !(breadcrumbItems === undefined && actionBarItems === undefined)
+    );
+  }, [actionBarItems, breadcrumbItems]);
+
+  useEffect(() => {
+    let belowTitleSpace = '07';
+
+    if (
+      pageActions !== undefined &&
+      navigation !== undefined &&
+      subtitle === undefined &&
+      availableSpace === undefined
+    ) {
+      belowTitleSpace = '06';
+    } else if (subtitle !== undefined || availableSpace !== undefined) {
+      belowTitleSpace = '03';
+    } else if (navigation === undefined && tags !== undefined) {
+      belowTitleSpace = '05';
+    }
+    setSpacingBelowTitle(belowTitleSpace);
+  }, [availableSpace, tags, navigation, subtitle, pageActions]);
+
   return (
     <section
       className={cx([
@@ -125,7 +152,7 @@ export const PageHeader = ({
       ref={headerEl}
       style={componentCssCustomProps}>
       <Grid>
-        {!(breadcrumbItems === undefined && actionBarItems === undefined) ? (
+        {hasBreadcrumbRow ? (
           <Row
             className={cx(`${blockClass}--breadcrumb-row`, {
               [`${blockClass}--breadcrumb-row--with-actions`]:
@@ -173,7 +200,14 @@ export const PageHeader = ({
         ) : null}
 
         {!(title === undefined && pageActions === undefined) ? (
-          <Row className={`${blockClass}--title-row`}>
+          <Row
+            className={cx(
+              `${blockClass}--title-row`,
+              `${blockClass}--title-row--spacing-below-${spacingBelowTitle}`,
+              {
+                [`${blockClass}--title-row--no-breadcrumb-row`]: !hasBreadcrumbRow,
+              }
+            )}>
             <Column className={`${blockClass}--title-column`}>
               {/* keeps page actions right even if empty */}
               {title !== undefined ? (
@@ -210,26 +244,31 @@ export const PageHeader = ({
           </Row>
         ) : null}
 
-        {!(navigation === undefined && tags === undefined) ? (
-          <Row className={`${blockClass}--navigation-row`}>
-            {navigation !== undefined ? (
-              <Column
-                className={`${blockClass}--navigation-tabs`}
-                // {...halfOrFull(tags !== undefined)}
-              >
-                {navigation}
-              </Column>
-            ) : null}
-            {tags !== undefined ? (
-              <Column
-                className={`${blockClass}--navigation-tags`}
-                // {...halfColumns}
-              >
-                {tags}
-              </Column>
-            ) : null}
-          </Row>
-        ) : null}
+        <Row
+          className={cx(`${blockClass}--navigation-row`, {
+            [`${blockClass}--navigation-row--spacing-above-06`]:
+              navigation !== undefined,
+          })}>
+          {navigation !== undefined ? (
+            <Column
+              className={`${blockClass}--navigation-tabs`}
+              // {...halfOrFull(tags !== undefined)}
+            >
+              {navigation}
+            </Column>
+          ) : null}
+          {tags !== undefined ? (
+            <Column
+              className={cx(`${blockClass}--navigation-tags`, {
+                [`${blockClass}--navigation-tags--tags-only`]:
+                  navigation === undefined,
+              })}
+              // {...halfColumns}
+            >
+              {tags}
+            </Column>
+          ) : null}
+        </Row>
       </Grid>
     </section>
   );

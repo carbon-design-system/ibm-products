@@ -124,15 +124,21 @@ const dummyPageContent = (
 );
 const pageActions = (
   <>
-    <Button kind="secondary">Secondary button</Button>
-    <Button>Primary button</Button>
+    <Button kind="secondary" size="field">
+      Secondary button
+    </Button>
+    <Button size="field">Primary button</Button>
   </>
 );
 const manyPageActions = (
   <>
-    <Button kind="secondary">Secondary button 1</Button>
-    <Button kind="secondary">Secondary button 2</Button>
-    <Button>Primary button</Button>
+    <Button kind="secondary" size="field">
+      Secondary button 1
+    </Button>
+    <Button kind="secondary" size="field">
+      Secondary button 2
+    </Button>
+    <Button size="field">Primary button</Button>
   </>
 );
 const statusIndicator = (

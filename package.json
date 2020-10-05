@@ -21,8 +21,8 @@
     "lint:es": "eslint 'packages/**/*.js'",
     "lint:style": "stylelint packages/**/*.scss --report-needless-disables --report-invalid-scope-disables",
     "test": "jest",
-    "sync": "carbon-cli sync",
-    "storybook": "cd packages/core && yarn start"
+    "storybook": "cd packages/core && yarn start",
+    "sync": "carbon-cli sync"
   },
   "peerDependencies": {
     "react": "^16.13.1"

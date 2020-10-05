@@ -132,7 +132,7 @@ export const PageHeader = ({
                 actionBarItems !== undefined,
             })}>
             <Column
-              className={cx(`${blockClass}--breadcrumb-colum`, {
+              className={cx(`${blockClass}--breadcrumb-column`, {
                 [`${blockClass}--breadcrumb-column--background`]:
                   breadcrumbItems !== undefined || actionBarItems !== undefined,
               })}>
@@ -159,7 +159,7 @@ export const PageHeader = ({
               )}
             </Column>
             <Column
-              className={cx(`${blockClass}--action-bar-colum`, {
+              className={cx(`${blockClass}--action-bar-column`, {
                 [`${blockClass}--action-bar-column--background`]:
                   actionBarItems !== undefined,
               })}>
@@ -174,7 +174,7 @@ export const PageHeader = ({
 
         {!(title === undefined && pageActions === undefined) ? (
           <Row className={`${blockClass}--title-row`}>
-            <Column className={`${blockClass}--title-colum`}>
+            <Column className={`${blockClass}--title-column`}>
               {/* keeps page actions right even if empty */}
               {title !== undefined ? (
                 <div className={`${blockClass}--title`}>
@@ -204,7 +204,7 @@ export const PageHeader = ({
 
         {availableSpace !== undefined ? (
           <Row className={`${blockClass}--available-row`}>
-            <Column className={`${blockClass}--available-colum`}>
+            <Column className={`${blockClass}--available-column`}>
               {availableSpace}
             </Column>
           </Row>

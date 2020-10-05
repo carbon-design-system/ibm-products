@@ -6,8 +6,6 @@
  */
 
 import { create } from '@carbon/rollup-config';
-import path from 'path';
+import packageJson from './package.json';
 
-const packageJson = require('./package.json');
-
-export default create(path.join(__dirname, 'src/index.js'), packageJson);
+export default create('src/index.js', packageJson);

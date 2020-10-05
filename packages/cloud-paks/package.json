@@ -8,26 +8,31 @@
   "module": "es/index.js",
   "repository": "https://github.com/carbon-design-system/ibm-cloud-paks/tree/master/packages/cloud-paks",
   "bugs": "https://github.com/carbon-design-system/ibm-cloud-paks/issues",
+  "files": [
+    "css",
+    "es",
+    "lib",
+    "scss"
+  ],
   "keywords": [
     "carbon",
     "carbon design system",
-    "carbon community"
+    "carbon community",
+    "ibm",
+    "ibm cloud paks"
   ],
   "scripts": {
-    "build": "yarn clean && rollup -c",
-    "clean": "rimraf es lib",
-    "watch": "yarn clean && rollup -c -w"
+    "build": "yarn clean && yarn build:js && yarn build:scss",
+    "build:js": "rollup -c",
+    "build:scss": "bundler bundle:scss src/index.scss && copyfiles 'src/**/*.scss' scss -u 1",
+    "clean": "rimraf es lib scss",
+    "test": "bundler check 'src/**/*.scss'"
   },
   "peerDependencies": {
     "react": "^16.13.1"
   },
   "dependencies": {
-    "@carbon/example-component-package": "^0.0.0"
-  },
-  "devDependencies": {
-    "@carbon/rollup-config": "^0.0.0",
-    "react": "^16.13.1",
-    "rollup": "^2.17.0",
-    "rimraf": "^3.0.2"
+    "@carbon/ibm-cloud-paks-security": "^0.0.0",
+    "@carbon/ibm-cloud-paks-experimental": "^0.0.0"
   }
 }

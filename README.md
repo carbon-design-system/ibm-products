@@ -18,7 +18,9 @@ This library supports the latest versions of:
 - Mozilla Firefox
 
 ## Locally served storybook
-Simply run `yarn storybook` and the storybook will be built and then served on port `3000` on your local machine.
+
+Simply run `yarn storybook` and the storybook will be built and then served on
+port `3000` on your local machine.
 
 ## 🙌 Contributing
 

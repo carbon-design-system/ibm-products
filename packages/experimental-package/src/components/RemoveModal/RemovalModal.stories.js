@@ -23,11 +23,19 @@ const Template = (args) => {
     <RemovalModal
       {...args}
       body={`Deleting ${resource} cannot be undone.`}
+      className="remove-modal-test"
       header="Confirm delete"
+      iconDescription="close"
+      id="remove-confirmation"
+      inputInvalidText="A valid value is required"
+      inputLabelText={`Type ${resource} to confirm`}
+      inputPlaceholderText="Name of resource"
       onRequestSubmit={() => console.log('submitted')}
       onRequestClose={() => console.log('cancel')}
       open
+      primaryButtonText="Delete"
       resource={resource}
+      secondaryButtonText="Close"
       subheader={`Delete ${resource}`}
     />
   );

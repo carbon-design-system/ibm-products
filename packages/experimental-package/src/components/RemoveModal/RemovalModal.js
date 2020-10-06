@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import { Modal, TextInput } from 'carbon-components-react';
 import PropTypes from 'prop-types';
+import { expPrefix } from '../../global/js/settings';
 
 export const RemovalModal = ({
   body,
   className,
   header,
+  iconDescription,
+  id,
+  inputInvalidText,
+  inputLabelText,
+  inputPlaceholderText,
   onRequestClose,
   onRequestSubmit,
   open,
@@ -23,7 +29,7 @@ export const RemovalModal = ({
   return (
     <Modal
       danger
-      className={`removal-modal ${className}`}
+      className={`${expPrefix}-removal-modal ${className}`}
       open={open}
       modalHeading={header}
       modalLabel={subheader}
@@ -31,14 +37,15 @@ export const RemovalModal = ({
       primaryButtonDisabled={primaryButtonDisabled}
       secondaryButtonText={secondaryButtonText}
       onRequestSubmit={onRequestSubmit}
-      onRequestClose={onRequestClose}>
-      <p className="removal-modal-body">{body}</p>
+      onRequestClose={onRequestClose}
+      iconDescription={iconDescription}>
+      <p className={`${expPrefix}-removal-modal-body`}>{body}</p>
       {textConfirmation && (
         <TextInput
-          id="remove-confirmation"
-          invalidText="A valid value is required"
-          labelText={`Type ${resource} to confirm`}
-          placeholder="Name of resource"
+          id={id}
+          invalidText={inputInvalidText}
+          labelText={inputLabelText}
+          placeholder={inputPlaceholderText}
           onChange={onChangeHandler}
         />
       )}
@@ -50,6 +57,11 @@ RemovalModal.propTypes = {
   body: PropTypes.string.isRequired,
   className: PropTypes.string,
   header: PropTypes.string.isRequired,
+  iconDescription: PropTypes.string,
+  id: PropTypes.string.isRequired,
+  inputInvalidText: PropTypes.string,
+  inputLabelText: PropTypes.string,
+  inputPlaceholderText: PropTypes.string,
   onRequestClose: PropTypes.func,
   onRequestSubmit: PropTypes.func,
   open: PropTypes.bool.isRequired,
@@ -62,8 +74,12 @@ RemovalModal.propTypes = {
 
 RemovalModal.defaultProps = {
   className: '',
-  primaryButtonText: 'Delete',
-  secondaryButtonText: 'Cancel',
+  iconDescription: '',
+  inputInvalidText: '',
+  inputLabelText: '',
+  inputPlaceholderText: '',
+  primaryButtonText: '',
+  secondaryButtonText: '',
   subheader: '',
   textConfirmation: false,
 };

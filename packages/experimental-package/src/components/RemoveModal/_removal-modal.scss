@@ -1,18 +1,12 @@
 @import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+
 @import 'carbon-components/scss/components/modal/modal';
 
-.removal-modal .bx--modal-container {
+.#{$exp-prefix}-removal-modal .bx--modal-container {
   background: $ui-03;
 }
 
-.removal-modal .bx--btn--secondary {
-  background: $ui-05;
-}
-
-.removal-modal .bx--btn-set .bx--btn.bx--btn--disabled {
-  color: $ui-02;
-}
-
-.removal-modal-body {
+.#{$exp-prefix}-removal-modal-body {
   margin-bottom: $spacing-05;
 }

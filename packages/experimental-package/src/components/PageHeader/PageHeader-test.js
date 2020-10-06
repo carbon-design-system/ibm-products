@@ -68,9 +68,7 @@ describe('PageHeader', () => {
     expect(wrapper.hasClass(classNames[1])).toBe(false);
     expect(wrapper.find('ActionBar')).toHaveLength(0);
     expect(wrapper.find('ActionBarItem')).toHaveLength(0);
-    expect(wrapper.find('span.page-header-test--available-row')).toHaveLength(
-      0
-    );
+    expect(wrapper.find('div.page-header-test--available-row')).toHaveLength(0);
     expect(wrapper.find('Breadcrumb')).toHaveLength(0);
     expect(wrapper.find('BreadcrumbItem')).toHaveLength(0);
     expect(wrapper.find('Tabs')).toHaveLength(0);
@@ -106,9 +104,7 @@ describe('PageHeader', () => {
     expect(wrapper.hasClass(classNames[1])).toBe(true);
     expect(wrapper.find('ActionBar')).toHaveLength(1);
     expect(wrapper.find('ActionBarItem')).toHaveLength(4);
-    expect(wrapper.find('span.page-header-test--available-row')).toHaveLength(
-      1
-    );
+    expect(wrapper.find('div.page-header-test--available-row')).toHaveLength(1);
     expect(wrapper.find('Breadcrumb')).toHaveLength(1);
     expect(wrapper.find('BreadcrumbItem')).toHaveLength(4);
     expect(wrapper.find('Tabs')).toHaveLength(1);

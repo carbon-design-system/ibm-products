@@ -49,7 +49,7 @@ export const PageHeader = ({
     scrollY: 0,
   });
   const [componentCssCustomProps, setComponentCssCustomProps] = useState({});
-  const [hasBreadcrumbRow, setHasBreadcrumbRow] = useState(false);
+  const [hasBreadcrumbRow, setHasBreadcrumbRow] = useState(true);
   const [spacingBelowTitle, setSpacingBelowTitle] = useState('06');
   const dynamicRefs = useRef({});
   const headerEl = useRef(null);

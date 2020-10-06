@@ -78,7 +78,7 @@ export const PageHeader = ({
     const navigationRowEl = getDynamicRef(`.${blockClass}--navigation-row`);
 
     let breadcrumbTitleHeight = breadcrumbTitleEl
-      ? breadcrumbRowEl.clientHeight
+      ? breadcrumbTitleEl.clientHeight
       : 0;
     let breadcrumbRowMarginPx = '0px';
     let headerHeight = headerEl.current ? headerEl.current.clientHeight : 0;
@@ -87,7 +87,7 @@ export const PageHeader = ({
       : 0;
 
     if (window !== undefined) {
-      if (breadcrumbTitleEl) {
+      if (breadcrumbRowEl) {
         breadcrumbRowMarginPx = window
           .getComputedStyle(breadcrumbRowEl)
           .getPropertyValue('margin-bottom');

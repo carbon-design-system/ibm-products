@@ -19,7 +19,8 @@ When contributing to IBM Cloud Paks, your work should always be done in a
 
 1. To install the project's dependencies, from the root directory of your fork,
    run `yarn --offline`
-2. To get your development server running and to start coding, run `yarn start`
+2. To get your development server running and to start coding, run
+   `yarn storybook`
 
 This will start a development server where you can see any changes you are
 making to components in our Storybook.

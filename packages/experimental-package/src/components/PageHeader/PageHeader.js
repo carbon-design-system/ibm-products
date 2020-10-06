@@ -51,51 +51,66 @@ export const PageHeader = ({
   const [componentCssCustomProps, setComponentCssCustomProps] = useState({});
   const [hasBreadcrumbRow, setHasBreadcrumbRow] = useState(false);
   const [spacingBelowTitle, setSpacingBelowTitle] = useState('06');
-
+  const dynamicRefs = useRef({});
   const headerEl = useRef(null);
 
   // const halfColumns = { sm: 2, md: 4, lg: 8 };
   // const halfOrFull = (test) => (test ? { ...halfColumns } : {});
 
-  const checkBreadcrumbHeights = () => {
+  const getDynamicRef = (selector) => {
     // would love to do this differently but digging in the dom seems easier
     // than getting a ref to a conditionally rendered item
-    const breadcrumbTitleEl = headerEl.current.querySelector(
-      `.${blockClass}--breadcrumb-title`
-    );
-    const breadcrumbRowEl = headerEl.current.querySelector(
-      `.${blockClass}--breadcrumb-row`
-    );
-    let breadcrumbTitleHeight = 0;
-    let breadcrumbRowMargin = 0;
-
-    if (window !== undefined && breadcrumbTitleEl !== null) {
-      breadcrumbTitleHeight = parseFloat(
-        window.getComputedStyle(breadcrumbTitleEl).getPropertyValue('height'),
-        10
-      );
-
-      breadcrumbRowMargin = parseFloat(
-        window
-          .getComputedStyle(breadcrumbRowEl)
-          .getPropertyValue('margin-bottom'),
-        10
-      );
+    if (!headerEl.current) {
+      return undefined;
+    } else {
+      if (!dynamicRefs.current[selector]) {
+        dynamicRefs.current[selector] = headerEl.current.querySelector(
+          selector
+        );
+      }
     }
+    return dynamicRefs.current[selector];
+  };
 
+  const checkHeights = () => {
+    const breadcrumbTitleEl = getDynamicRef(`.${blockClass}--breadcrumb-title`);
+    const breadcrumbRowEl = getDynamicRef(`.${blockClass}--breadcrumb-row`);
+    const navigationRowEl = getDynamicRef(`.${blockClass}--navigation-row`);
+
+    let breadcrumbTitleHeight = breadcrumbTitleEl
+      ? breadcrumbRowEl.clientHeight
+      : 0;
+    let breadcrumbRowMarginPx = '0px';
+    let headerHeight = headerEl.current ? headerEl.current.clientHeight : 0;
+    let navigationRowHeight = navigationRowEl
+      ? navigationRowEl.clientHeight
+      : 0;
+
+    if (window !== undefined) {
+      if (breadcrumbTitleEl) {
+        breadcrumbRowMarginPx = window
+          .getComputedStyle(breadcrumbRowEl)
+          .getPropertyValue('margin-bottom');
+      }
+    }
     setComponentCssCustomProps((previous) => ({
       ...previous,
       [`--${blockClass}--breadcrumb-title-scroll`]: breadcrumbTitleHeight,
       [`--${blockClass}--breadcrumb-title-scroll-px`]: `${breadcrumbTitleHeight}px`,
-      [`--${blockClass}--breadcrumb-title-start`]: breadcrumbRowMargin,
-      [`--${blockClass}--breadcrumb-title-start-px`]: `${breadcrumbRowMargin}px`,
+      [`--${blockClass}--breadcrumb-title-start`]: parseFloat(
+        breadcrumbRowMarginPx,
+        10
+      ),
+      [`--${blockClass}--breadcrumb-title-start-px`]: breadcrumbRowMarginPx,
+      [`--${blockClass}--header-height-px`]: `${headerHeight}px`,
+      [`--${blockClass}--header-navigation-height-px`]: `${navigationRowHeight}px`,
     }));
   };
 
   useWindowScroll(
     ({ previous, current }) => {
       if (previous.scrollY !== current.scrollY) {
-        checkBreadcrumbHeights();
+        checkHeights();
 
         setComponentCssCustomProps((previous) => ({
           ...previous,
@@ -104,11 +119,19 @@ export const PageHeader = ({
           [`--${blockClass}--scroll`]: `${current.scrollY}`,
           [`--${blockClass}--scroll-px`]: `${current.scrollY}px`,
           [`--${blockClass}--breadcrumb-title-top`]: `max(0px, calc(var(--${blockClass}--breadcrumb-title-scroll-px) + var(--${blockClass}--breadcrumb-title-start-px) - var(--${blockClass}--scroll-px)))`,
-          [`--${blockClass}--breadcrumb-title-opacity`]: `calc((var(--${blockClass}--scroll) - var(--${blockClass}--breadcrumb-title-start)) / var(--${blockClass}--breadcrumb-title-scroll))`,
+          [`--${blockClass}--breadcrumb-title-opacity`]: `calc(max(0, (var(--${blockClass}--scroll) - var(--${blockClass}--breadcrumb-title-start))) / var(--${blockClass}--breadcrumb-title-scroll))`,
         }));
       }
     },
-    [title, breadcrumbItems]
+    [
+      actionBarItems,
+      availableSpace,
+      breadcrumbItems,
+      navigation,
+      subtitle,
+      tags,
+      title,
+    ]
   );
 
   // useWindowResize(({ previous, current }) => {
@@ -206,12 +229,19 @@ export const PageHeader = ({
               `${blockClass}--title-row--spacing-below-${spacingBelowTitle}`,
               {
                 [`${blockClass}--title-row--no-breadcrumb-row`]: !hasBreadcrumbRow,
+                [`${blockClass}--title-row--sticky`]:
+                  pageActions !== undefined &&
+                  actionBarItems === undefined &&
+                  hasBreadcrumbRow,
               }
             )}>
             <Column className={`${blockClass}--title-column`}>
               {/* keeps page actions right even if empty */}
               {title !== undefined ? (
-                <div className={`${blockClass}--title`}>
+                <div
+                  className={cx(`${blockClass}--title`, {
+                    [`${blockClass}--title--fades`]: hasBreadcrumbRow,
+                  })}>
                   {TitleIcon ? (
                     <TitleIcon className={`${blockClass}--title-icon`} />
                   ) : (

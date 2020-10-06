@@ -17,6 +17,12 @@ $raised-z-index: 99;
 
 .#{$block-class} {
   /* Bleed class for the background */
+  position: sticky;
+  // stylelint-disable-next-line
+  top: calc(
+    var(--#{$block-class}--navigation-height-px) -
+      var(--#{$block-class}--header-height-px)
+  );
   display: inline-block; /* cause top/bottom margin to reserve space */
   width: 100%;
   background-color: $ui-background;
@@ -103,6 +109,11 @@ $raised-z-index: 99;
   margin-top: $spacing-07;
 }
 
+.#{$block-class}--title-row--sticky {
+  position: sticky;
+  top: 0;
+}
+
 .#{$block-class}--title-col {
   min-width: 50%;
 }
@@ -112,6 +123,10 @@ $raised-z-index: 99;
 
   display: flex;
   align-items: center;
+}
+
+.#{$block-class}--title--fades {
+  opacity: calc(1 - var(--exp-page-header--breadcrumb-title-opacity));
 }
 
 .#{$block-class}--title-icon {

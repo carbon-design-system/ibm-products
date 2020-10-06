@@ -17,6 +17,12 @@ $raised-z-index: 99;
 
 .#{$block-class} {
   /* Bleed class for the background */
+  position: sticky;
+  // stylelint-disable-next-line
+  top: calc(
+    var(--#{$block-class}--navigation-height-px) -
+      var(--#{$block-class}--height-px)
+  );
   display: inline-block; /* cause top/bottom margin to reserve space */
   width: 100%;
   background-color: $ui-background;
@@ -83,8 +89,29 @@ $raised-z-index: 99;
 }
 
 .#{$block-class}--title-row {
-  margin-top: $spacing-02;
+  margin-top: $spacing-06;
+  margin-bottom: $spacing-07;
+}
+
+.#{$block-class}--title-row--spacing-below-03 {
   margin-bottom: $spacing-03;
+}
+
+.#{$block-class}--title-row--spacing-below-05 {
+  margin-bottom: $spacing-05;
+}
+
+.#{$block-class}--title-row--spacing-below-06 {
+  margin-bottom: $spacing-06;
+}
+
+.#{$block-class}--title-row--no-breadcrumb-row {
+  margin-top: $spacing-07;
+}
+
+.#{$block-class}--title-row--sticky {
+  position: sticky;
+  top: 0;
 }
 
 .#{$block-class}--title-col {
@@ -96,6 +123,10 @@ $raised-z-index: 99;
 
   display: flex;
   align-items: center;
+}
+
+.#{$block-class}--title--fades {
+  opacity: calc(1 - var(--exp-page-header--breadcrumb-title-opacity));
 }
 
 .#{$block-class}--title-icon {
@@ -125,11 +156,21 @@ $raised-z-index: 99;
   margin-top: $spacing-05;
 }
 
+.#{$block-class}--navigation-row--spacing-above-06 {
+  margin-top: $spacing-06;
+}
+
 .#{$block-class}--navigation-row .#{$prefix}--tab-content {
   display: none; /* need to figure out how to handle the tab content */
 }
 
 .#{$block-class}--navigation-tags {
+  margin-bottom: $spacing-03;
   white-space: nowrap;
   text-align: right;
+}
+
+.#{$block-class}--navigation-tags--tags-only {
+  margin-bottom: $spacing-05;
+  text-align: initial;
 }

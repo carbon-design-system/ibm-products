@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import cx from 'classnames';
@@ -49,51 +49,68 @@ export const PageHeader = ({
     scrollY: 0,
   });
   const [componentCssCustomProps, setComponentCssCustomProps] = useState({});
+  const [hasBreadcrumbRow, setHasBreadcrumbRow] = useState(false);
+  const [spacingBelowTitle, setSpacingBelowTitle] = useState('06');
+  const dynamicRefs = useRef({});
   const headerEl = useRef(null);
 
   // const halfColumns = { sm: 2, md: 4, lg: 8 };
-
   // const halfOrFull = (test) => (test ? { ...halfColumns } : {});
 
-  const checkBreadcrumbHeights = () => {
+  const getDynamicRef = (selector) => {
     // would love to do this differently but digging in the dom seems easier
     // than getting a ref to a conditionally rendered item
-    const breadcrumbTitleEl = headerEl.current.querySelector(
-      `.${blockClass}--breadcrumb-title`
-    );
-    const breadcrumbRowEl = headerEl.current.querySelector(
-      `.${blockClass}--breadcrumb-row`
-    );
-    let breadcrumbTitleHeight = 0;
-    let breadcrumbRowMargin = 0;
-
-    if (window !== undefined && breadcrumbTitleEl !== null) {
-      breadcrumbTitleHeight = parseFloat(
-        window.getComputedStyle(breadcrumbTitleEl).getPropertyValue('height'),
-        10
-      );
-
-      breadcrumbRowMargin = parseFloat(
-        window
-          .getComputedStyle(breadcrumbRowEl)
-          .getPropertyValue('margin-bottom'),
-        10
-      );
+    if (!headerEl.current) {
+      return undefined;
+    } else {
+      if (!dynamicRefs.current[selector]) {
+        dynamicRefs.current[selector] = headerEl.current.querySelector(
+          selector
+        );
+      }
     }
+    return dynamicRefs.current[selector];
+  };
 
+  const checkHeights = () => {
+    const breadcrumbTitleEl = getDynamicRef(`.${blockClass}--breadcrumb-title`);
+    const breadcrumbRowEl = getDynamicRef(`.${blockClass}--breadcrumb-row`);
+    const navigationRowEl = getDynamicRef(`.${blockClass}--navigation-row`);
+
+    let breadcrumbTitleHeight = breadcrumbTitleEl
+      ? breadcrumbTitleEl.clientHeight
+      : 0;
+    let breadcrumbRowMarginPx = '0px';
+    let headerHeight = headerEl.current ? headerEl.current.clientHeight : 0;
+    let navigationRowHeight = navigationRowEl
+      ? navigationRowEl.clientHeight
+      : 0;
+
+    if (window !== undefined) {
+      if (breadcrumbRowEl) {
+        breadcrumbRowMarginPx = window
+          .getComputedStyle(breadcrumbRowEl)
+          .getPropertyValue('margin-bottom');
+      }
+    }
     setComponentCssCustomProps((previous) => ({
       ...previous,
       [`--${blockClass}--breadcrumb-title-scroll`]: breadcrumbTitleHeight,
       [`--${blockClass}--breadcrumb-title-scroll-px`]: `${breadcrumbTitleHeight}px`,
-      [`--${blockClass}--breadcrumb-title-start`]: breadcrumbRowMargin,
-      [`--${blockClass}--breadcrumb-title-start-px`]: `${breadcrumbRowMargin}px`,
+      [`--${blockClass}--breadcrumb-title-start`]: parseFloat(
+        breadcrumbRowMarginPx,
+        10
+      ),
+      [`--${blockClass}--breadcrumb-title-start-px`]: breadcrumbRowMarginPx,
+      [`--${blockClass}--height-px`]: `${headerHeight}px`,
+      [`--${blockClass}--navigation-height-px`]: `${navigationRowHeight}px`,
     }));
   };
 
   useWindowScroll(
     ({ previous, current }) => {
       if (previous.scrollY !== current.scrollY) {
-        checkBreadcrumbHeights();
+        checkHeights();
 
         setComponentCssCustomProps((previous) => ({
           ...previous,
@@ -102,11 +119,19 @@ export const PageHeader = ({
           [`--${blockClass}--scroll`]: `${current.scrollY}`,
           [`--${blockClass}--scroll-px`]: `${current.scrollY}px`,
           [`--${blockClass}--breadcrumb-title-top`]: `max(0px, calc(var(--${blockClass}--breadcrumb-title-scroll-px) + var(--${blockClass}--breadcrumb-title-start-px) - var(--${blockClass}--scroll-px)))`,
-          [`--${blockClass}--breadcrumb-title-opacity`]: `calc((var(--${blockClass}--scroll) - var(--${blockClass}--breadcrumb-title-start)) / var(--${blockClass}--breadcrumb-title-scroll))`,
+          [`--${blockClass}--breadcrumb-title-opacity`]: `calc(max(0, (var(--${blockClass}--scroll) - var(--${blockClass}--breadcrumb-title-start))) / var(--${blockClass}--breadcrumb-title-scroll))`,
         }));
       }
     },
-    [title, breadcrumbItems]
+    [
+      actionBarItems,
+      availableSpace,
+      breadcrumbItems,
+      navigation,
+      subtitle,
+      tags,
+      title,
+    ]
   );
 
   // useWindowResize(({ previous, current }) => {
@@ -114,6 +139,31 @@ export const PageHeader = ({
   //     console.dir(JSON.stringify({ on: 'resize', previous, current }));
   //   }
   // });
+
+  useEffect(() => {
+    // eslint-disable-next-line
+    setHasBreadcrumbRow(
+      !(breadcrumbItems === undefined && actionBarItems === undefined)
+    );
+  }, [actionBarItems, breadcrumbItems]);
+
+  useEffect(() => {
+    let belowTitleSpace = '07';
+
+    if (
+      pageActions !== undefined &&
+      navigation !== undefined &&
+      subtitle === undefined &&
+      availableSpace === undefined
+    ) {
+      belowTitleSpace = '06';
+    } else if (subtitle !== undefined || availableSpace !== undefined) {
+      belowTitleSpace = '03';
+    } else if (navigation === undefined && tags !== undefined) {
+      belowTitleSpace = '05';
+    }
+    setSpacingBelowTitle(belowTitleSpace);
+  }, [availableSpace, tags, navigation, subtitle, pageActions]);
 
   return (
     <section
@@ -125,14 +175,14 @@ export const PageHeader = ({
       ref={headerEl}
       style={componentCssCustomProps}>
       <Grid>
-        {!(breadcrumbItems === undefined && actionBarItems === undefined) ? (
+        {hasBreadcrumbRow ? (
           <Row
             className={cx(`${blockClass}--breadcrumb-row`, {
               [`${blockClass}--breadcrumb-row--with-actions`]:
                 actionBarItems !== undefined,
             })}>
             <Column
-              className={cx(`${blockClass}--breadcrumb-colum`, {
+              className={cx(`${blockClass}--breadcrumb-column`, {
                 [`${blockClass}--breadcrumb-column--background`]:
                   breadcrumbItems !== undefined || actionBarItems !== undefined,
               })}>
@@ -159,7 +209,7 @@ export const PageHeader = ({
               )}
             </Column>
             <Column
-              className={cx(`${blockClass}--action-bar-colum`, {
+              className={cx(`${blockClass}--action-bar-column`, {
                 [`${blockClass}--action-bar-column--background`]:
                   actionBarItems !== undefined,
               })}>
@@ -173,11 +223,25 @@ export const PageHeader = ({
         ) : null}
 
         {!(title === undefined && pageActions === undefined) ? (
-          <Row className={`${blockClass}--title-row`}>
-            <Column className={`${blockClass}--title-colum`}>
+          <Row
+            className={cx(
+              `${blockClass}--title-row`,
+              `${blockClass}--title-row--spacing-below-${spacingBelowTitle}`,
+              {
+                [`${blockClass}--title-row--no-breadcrumb-row`]: !hasBreadcrumbRow,
+                [`${blockClass}--title-row--sticky`]:
+                  pageActions !== undefined &&
+                  actionBarItems === undefined &&
+                  hasBreadcrumbRow,
+              }
+            )}>
+            <Column className={`${blockClass}--title-column`}>
               {/* keeps page actions right even if empty */}
               {title !== undefined ? (
-                <div className={`${blockClass}--title`}>
+                <div
+                  className={cx(`${blockClass}--title`, {
+                    [`${blockClass}--title--fades`]: hasBreadcrumbRow,
+                  })}>
                   {TitleIcon ? (
                     <TitleIcon className={`${blockClass}--title-icon`} />
                   ) : (
@@ -204,32 +268,37 @@ export const PageHeader = ({
 
         {availableSpace !== undefined ? (
           <Row className={`${blockClass}--available-row`}>
-            <Column className={`${blockClass}--available-colum`}>
+            <Column className={`${blockClass}--available-column`}>
               {availableSpace}
             </Column>
           </Row>
         ) : null}
 
-        {!(navigation === undefined && tags === undefined) ? (
-          <Row className={`${blockClass}--navigation-row`}>
-            {navigation !== undefined ? (
-              <Column
-                className={`${blockClass}--navigation-tabs`}
-                // {...halfOrFull(tags !== undefined)}
-              >
-                {navigation}
-              </Column>
-            ) : null}
-            {tags !== undefined ? (
-              <Column
-                className={`${blockClass}--navigation-tags`}
-                // {...halfColumns}
-              >
-                {tags}
-              </Column>
-            ) : null}
-          </Row>
-        ) : null}
+        <Row
+          className={cx(`${blockClass}--navigation-row`, {
+            [`${blockClass}--navigation-row--spacing-above-06`]:
+              navigation !== undefined,
+          })}>
+          {navigation !== undefined ? (
+            <Column
+              className={`${blockClass}--navigation-tabs`}
+              // {...halfOrFull(tags !== undefined)}
+            >
+              {navigation}
+            </Column>
+          ) : null}
+          {tags !== undefined ? (
+            <Column
+              className={cx(`${blockClass}--navigation-tags`, {
+                [`${blockClass}--navigation-tags--tags-only`]:
+                  navigation === undefined,
+              })}
+              // {...halfColumns}
+            >
+              {tags}
+            </Column>
+          ) : null}
+        </Row>
       </Grid>
     </section>
   );

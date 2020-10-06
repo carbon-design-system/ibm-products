@@ -30,6 +30,7 @@ export const RemovalModal = ({
     <Modal
       danger
       className={`${expPrefix}-removal-modal ${className}`}
+      iconDescription={iconDescription}
       open={open}
       modalHeading={header}
       modalLabel={subheader}
@@ -37,8 +38,7 @@ export const RemovalModal = ({
       primaryButtonDisabled={primaryButtonDisabled}
       secondaryButtonText={secondaryButtonText}
       onRequestSubmit={onRequestSubmit}
-      onRequestClose={onRequestClose}
-      iconDescription={iconDescription}>
+      onRequestClose={onRequestClose}>
       <p className={`${expPrefix}-removal-modal-body`}>{body}</p>
       {textConfirmation && (
         <TextInput

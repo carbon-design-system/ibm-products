@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import { expPrefix } from '../../global/js/settings';
 import {
   BreadcrumbItem,
@@ -11,7 +11,6 @@ import {
 import { Lightning16, Bee32 } from '@carbon/icons-react';
 import { ActionBarItem } from './ActionBarItem';
 import { PageHeader } from './PageHeader';
-
 const actionBarItems = (
   <>
     <ActionBarItem icon={Lightning16} label="Action 1" />
@@ -53,22 +52,25 @@ const tags = (
   </>
 );
 const title = 'Page title';
-
 describe('PageHeader', () => {
   let wrapper;
-
+  afterEach(() => {
+    wrapper.unmount();
+  });
   it('renders an empty header when no props are set', () => {
-    wrapper = shallow(<PageHeader />);
-    expect(wrapper.type()).toEqual('section');
-    expect(wrapper.hasClass(`${expPrefix}-page-header`)).toBe(true);
-    expect(wrapper.hasClass(`${expPrefix}-page-header--background`)).toBe(
-      false
-    );
-    expect(wrapper.hasClass(classNames[0])).toBe(false);
-    expect(wrapper.hasClass(classNames[1])).toBe(false);
+    wrapper = mount(<PageHeader />);
+    expect(wrapper.childAt(0).type()).toEqual('section');
+    expect(wrapper.childAt(0).hasClass(`${expPrefix}-page-header`)).toBe(true);
+    expect(
+      wrapper.childAt(0).hasClass(`${expPrefix}-page-header--background`)
+    ).toBe(false);
+    expect(wrapper.childAt(0).hasClass(classNames[0])).toBe(false);
+    expect(wrapper.childAt(0).hasClass(classNames[1])).toBe(false);
     expect(wrapper.find('ActionBar')).toHaveLength(0);
     expect(wrapper.find('ActionBarItem')).toHaveLength(0);
-    expect(wrapper.find('div.page-header-test--available-row')).toHaveLength(0);
+    expect(wrapper.find('span.page-header-test--available-space')).toHaveLength(
+      0
+    );
     expect(wrapper.find('Breadcrumb')).toHaveLength(0);
     expect(wrapper.find('BreadcrumbItem')).toHaveLength(0);
     expect(wrapper.find('Tabs')).toHaveLength(0);
@@ -80,9 +82,8 @@ describe('PageHeader', () => {
     expect(wrapper.find(`.${expPrefix}-page-header--subtitle`)).toHaveLength(0);
     expect(wrapper.find(`.${expPrefix}-page-header--title`)).toHaveLength(0);
   });
-
   it('renders all the appropriate content when all props are set', () => {
-    wrapper = shallow(
+    wrapper = mount(
       <PageHeader
         actionBarItems={actionBarItems}
         availableSpace={availableSpace}
@@ -97,33 +98,34 @@ describe('PageHeader', () => {
         titleIcon={Bee32}
       />
     );
-    expect(wrapper.type()).toEqual('section');
-    expect(wrapper.hasClass(`${expPrefix}-page-header`)).toBe(true);
-    expect(wrapper.hasClass(`${expPrefix}-page-header--background`)).toBe(true);
-    expect(wrapper.hasClass(classNames[0])).toBe(true);
-    expect(wrapper.hasClass(classNames[1])).toBe(true);
+    expect(wrapper.childAt(0).type()).toEqual('section');
+    expect(wrapper.childAt(0).hasClass(`${expPrefix}-page-header`)).toBe(true);
+    expect(
+      wrapper.childAt(0).hasClass(`${expPrefix}-page-header--background`)
+    ).toBe(true);
+    expect(wrapper.childAt(0).hasClass(classNames[0])).toBe(true);
+    expect(wrapper.childAt(0).hasClass(classNames[1])).toBe(true);
     expect(wrapper.find('ActionBar')).toHaveLength(1);
     expect(wrapper.find('ActionBarItem')).toHaveLength(4);
-    expect(wrapper.find('div.page-header-test--available-row')).toHaveLength(1);
+    expect(wrapper.find('span.page-header-test--available-space')).toHaveLength(
+      1
+    );
     expect(wrapper.find('Breadcrumb')).toHaveLength(1);
     expect(wrapper.find('BreadcrumbItem')).toHaveLength(4);
     expect(wrapper.find('Tabs')).toHaveLength(1);
     expect(wrapper.find('Tab')).toHaveLength(4);
     expect(
-      wrapper
-        .find(`.${expPrefix}-page-header--page-actions`)
-        .render()
-        .find('button')
+      wrapper.find(`.${expPrefix}-page-header--page-actions`).find('button')
     ).toHaveLength(2);
     expect(
-      wrapper.find(`.${expPrefix}-page-header--subtitle`).shallow().text()
+      wrapper.find(`.${expPrefix}-page-header--subtitle`).hostNodes().text()
     ).toEqual(subtitle);
     expect(wrapper.find('Tag')).toHaveLength(4);
     expect(
-      wrapper.find(`.${expPrefix}-page-header--title`).shallow().text()
+      wrapper.find(`.${expPrefix}-page-header--title`).hostNodes().text()
     ).toEqual(title);
     expect(
-      wrapper.find(`.${expPrefix}-page-header--title`).render().find('svg')
+      wrapper.find(`.${expPrefix}-page-header--title`).find('svg')
     ).toHaveLength(1);
   });
 });

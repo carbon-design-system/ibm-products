@@ -49,7 +49,7 @@ export const PageHeader = ({
     scrollY: 0,
   });
   const [componentCssCustomProps, setComponentCssCustomProps] = useState({});
-  const [hasBreadcrumbRow, setHasBreadcrumbRow] = useState(true);
+  const [hasBreadcrumbRow, setHasBreadcrumbRow] = useState(false);
   const [spacingBelowTitle, setSpacingBelowTitle] = useState('06');
   const dynamicRefs = useRef({});
   const headerEl = useRef(null);
@@ -102,8 +102,8 @@ export const PageHeader = ({
         10
       ),
       [`--${blockClass}--breadcrumb-title-start-px`]: breadcrumbRowMarginPx,
-      [`--${blockClass}--header-height-px`]: `${headerHeight}px`,
-      [`--${blockClass}--header-navigation-height-px`]: `${navigationRowHeight}px`,
+      [`--${blockClass}--height-px`]: `${headerHeight}px`,
+      [`--${blockClass}--navigation-height-px`]: `${navigationRowHeight}px`,
     }));
   };
 

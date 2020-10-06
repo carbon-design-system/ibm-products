@@ -21,7 +21,7 @@ $raised-z-index: 99;
   // stylelint-disable-next-line
   top: calc(
     var(--#{$block-class}--navigation-height-px) -
-      var(--#{$block-class}--header-height-px)
+      var(--#{$block-class}--height-px)
   );
   display: inline-block; /* cause top/bottom margin to reserve space */
   width: 100%;

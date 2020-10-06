@@ -19,9 +19,7 @@ When contributing to IBM Cloud Paks, your work should always be done in a
 
 1. To install the project's dependencies, from the root directory of your fork,
    run `yarn --offline`
-2. Navigate to the core package in your command line by entering
-   `cd packages/core`
-3. To get your development server running and to start coding, run `yarn start`
+2. To get your development server running and to start coding, run `yarn start`
 
 This will start a development server where you can see any changes you are
 making to components in our Storybook.
@@ -35,7 +33,17 @@ system is set up to automatically bundle your additions / changes. Visit
 [`http://localhost:3000`](http://localhost:3000) to see the changes happen on
 the fly.
 
-## 4. Make a pull request
+## 5. Test your JavaScript code
+
+If you're contributing to our JavaScript code, test your changes by running
+`yarn test`.
+
+New tests are written in
+[React Testing Library](https://testing-library.com/docs/react-testing-library/intro),
+with [Enzyme](https://enzymejs.github.io/enzyme) available for migration
+compatibility.
+
+## 6. Make a pull request
 
 **Note:** Before you make a pull request,
 [search the issues](https://github.com/carbon-design-system/ibm-cloud-paks/issues)
@@ -56,7 +64,7 @@ information about how to write your commit message.
 Also refer to
 [How to write the perfect pull request](https://github.blog/2015-01-21-how-to-write-the-perfect-pull-request).
 
-## 5. Updating a pull request
+## 7. Updating a pull request
 
 Stay up to date with the activity in your pull request. Maintainers will be
 reviewing your work and making comments, asking questions, and suggesting

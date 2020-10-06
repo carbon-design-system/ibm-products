@@ -2,6 +2,7 @@
 @import '../../global/styles/project-settings';
 
 @import 'carbon-components/scss/components/modal/modal';
+@import 'carbon-components/scss/components/text-input/text-input';
 
 .#{$exp-prefix}-removal-modal .bx--modal-container {
   background: $ui-03;

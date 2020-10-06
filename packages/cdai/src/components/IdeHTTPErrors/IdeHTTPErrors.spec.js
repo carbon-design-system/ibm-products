@@ -1,4 +1,5 @@
 import { IdeHTTPErrors } from '.';
+import * as jth from '../../component_helpers/jest_test_helper_functions.js';
 
 describe('IdeHTTPErrors', () => {
   let component, unmount;

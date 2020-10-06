@@ -14,11 +14,6 @@ export default class IdeHTTPErrors extends Component {
      */
     background: number,
     /**
-     * First row of the text section used to display a pre-translated HTTP
-     * status code message
-     */
-    title: string,
-    /**
      * Second row of the text section used to display a pre-translated
      * description for the HTTP status code message
      */
@@ -62,6 +57,11 @@ export default class IdeHTTPErrors extends Component {
         })
       ),
     ]),
+    /**
+     * First row of the text section used to display a pre-translated HTTP
+     * status code message
+     */
+    title: string,
   };
 
   static defaultProps = {
@@ -283,7 +283,11 @@ export default class IdeHTTPErrors extends Component {
   }
   get linksPropIsObject() {
     const { links } = this.props;
-    return links && links.hasOwnProperty('text') && links.hasOwnProperty('url');
+    return (
+      links &&
+      Object.prototype.hasOwnProperty.call(links, 'text') &&
+      Object.prototype.hasOwnProperty.call(links, 'url')
+    );
   }
 
   // Class scope helpers

@@ -7,7 +7,7 @@ import styles from './_storybook.scss';
 
 storiesOf(getComponentLabel('IdeHTTPErrors'), module)
   .addParameters({ readme: { sidebar } })
-  .addParameters({ styles, layout: 'fullscreen'})
+  .addParameters({ styles, layout: 'fullscreen' })
   .add('Default', () => {
     return <IdeHTTPErrors />;
   })

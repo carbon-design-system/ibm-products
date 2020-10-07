@@ -32,9 +32,11 @@ const execAsync = (commands, env) =>
 async function build() {
   const ROOT_DIR = path.resolve(__dirname, '../');
   const BABEL_PATH = path.resolve(__dirname, '../node_modules/.bin/babel');
-  const ignoreGlobs = ['**/__tests__/*', '**/*-test.js', '**/*-story.js'].join(
-    ','
-  );
+  const ignoreGlobs = [
+    '**/__tests__/*',
+    '**/*-test.js',
+    '**/*.stories.js',
+  ].join(',');
   const buildDirectories = ['lib', 'es', 'scss'];
 
   // eslint-disable-next-line no-console

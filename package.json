@@ -32,6 +32,7 @@
     "@carbon/rollup-config": "^0.0.0",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
+    "@testing-library/react": "^11.0.4",
     "copyfiles": "^2.3.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.4",

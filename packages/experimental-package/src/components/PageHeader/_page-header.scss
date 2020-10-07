@@ -81,7 +81,11 @@ $raised-z-index: 99;
 
 .#{$block-class}--breadcrumb-title {
   position: relative;
-  transform: translateY(var(--#{$block-class}--breadcrumb-title-top));
+  // stylelint-disable-next-line carbon/layout-token-use
+  transform: translateY(
+    var(--#{$block-class}--breadcrumb-title-top)
+  ); /* token linter does not support this form */
+
   visibility: var(--#{$block-class}--breadcrumb-title-visibility);
   opacity: var(--exp-page-header--breadcrumb-title-opacity);
 }
@@ -94,9 +98,8 @@ $raised-z-index: 99;
 // }
 
 .#{$block-class}--action-bar {
-  padding-top: $spacing-04;
-  // stylelint-disable-next-line
   margin-top: calc(-1 * #{$spacing-04}); /* align with breadcrumb */
+  padding-top: $spacing-04;
   white-space: nowrap;
 }
 

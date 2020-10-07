@@ -16898,22 +16898,6 @@ stylehacks@^4.0.0:
     postcss "^7.0.0"
     postcss-selector-parser "^3.0.0"
 
-"stylelint-carbon-use@git+https://git@github.com/lee-chase/carbon-use.git":
-  version "0.0.1"
-  resolved "git+https://git@github.com/lee-chase/carbon-use.git#919146dd42998d5e8854df283e66d412445bb6bb"
-  dependencies:
-    "@carbon/colors" "^10.9.2"
-    "@carbon/motion" "^10.9.0"
-    "@carbon/themes" "^10.11.0"
-    carbon-components "^10.15.0"
-    lodash "^4.17.19"
-    postcss "^7.0.27"
-    postcss-media-query-parser "^0.2.3"
-    postcss-resolve-nested-selector "^0.1.1"
-    postcss-scss "^2.0.0"
-    postcss-selector-parser "^6.0.2"
-    postcss-value-parser "^4.0.3"
-
 stylelint-config-carbon@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/stylelint-config-carbon/-/stylelint-config-carbon-1.1.0.tgz#dde79c7de112c2cfca54121f57f15a77aeca182a"
@@ -16978,6 +16962,23 @@ stylelint-order@^4.1.0:
     lodash "^4.17.15"
     postcss "^7.0.31"
     postcss-sorting "^5.0.1"
+
+stylelint-plugin-carbon-tokens@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/stylelint-plugin-carbon-tokens/-/stylelint-plugin-carbon-tokens-0.1.1.tgz#87880ec70cfc298edc7ccfae80df75f64ebdfbb8"
+  integrity sha512-wVoGFAFGYpvJXPcrz9HZ6JiGZAQYd8CLYUOR5dK893fzcZVjwg2+hEXoYbpNyCS4L1jxc4PBaVfvW7si1ynu+A==
+  dependencies:
+    "@carbon/colors" "^10.9.2"
+    "@carbon/motion" "^10.9.0"
+    "@carbon/themes" "^10.11.0"
+    carbon-components "^10.15.0"
+    lodash "^4.17.19"
+    postcss "^7.0.27"
+    postcss-media-query-parser "^0.2.3"
+    postcss-resolve-nested-selector "^0.1.1"
+    postcss-scss "^2.0.0"
+    postcss-selector-parser "^6.0.2"
+    postcss-value-parser "^4.0.3"
 
 stylelint-prettier@^1.1.2:
   version "1.1.2"

@@ -51,6 +51,9 @@ export const PageHeader = ({
   const [componentCssCustomProps, setComponentCssCustomProps] = useState({});
   const [hasBreadcrumbRow, setHasBreadcrumbRow] = useState(false);
   const [spacingBelowTitle, setSpacingBelowTitle] = useState('06');
+  const [pageActionsInBreadcrumbRow, setPageActionsInBreadcrumbRow] = useState(
+    false
+  );
   const dynamicRefs = useRef({});
   const headerEl = useRef(null);
 
@@ -72,54 +75,74 @@ export const PageHeader = ({
     return dynamicRefs.current[selector];
   };
 
-  const checkHeights = () => {
+  const getHeights = () => {
+    const result = {};
     const breadcrumbTitleEl = getDynamicRef(`.${blockClass}--breadcrumb-title`);
     const breadcrumbRowEl = getDynamicRef(`.${blockClass}--breadcrumb-row`);
     const navigationRowEl = getDynamicRef(`.${blockClass}--navigation-row`);
 
-    let breadcrumbTitleHeight = breadcrumbTitleEl
+    result.breadcrumbTitleHeight = breadcrumbTitleEl
       ? breadcrumbTitleEl.clientHeight
       : 0;
-    let breadcrumbRowMarginPx = '0px';
-    let headerHeight = headerEl.current ? headerEl.current.clientHeight : 0;
-    let navigationRowHeight = navigationRowEl
-      ? navigationRowEl.clientHeight
+    result.breadcrumbRowHeight = breadcrumbRowEl
+      ? breadcrumbRowEl.clientHeight
       : 0;
+    result.breadcrumbRowSpaceBelow = 0;
+    result.headerHeight = headerEl.current ? headerEl.current.clientHeight : 1;
+    result.navigationRowHeight = navigationRowEl
+      ? navigationRowEl.clientHeight
+      : 1;
 
-    if (window !== undefined) {
-      if (breadcrumbRowEl) {
-        breadcrumbRowMarginPx = window
-          .getComputedStyle(breadcrumbRowEl)
-          .getPropertyValue('margin-bottom');
-      }
-    }
-    setComponentCssCustomProps((previous) => ({
-      ...previous,
-      [`--${blockClass}--breadcrumb-title-scroll`]: breadcrumbTitleHeight,
-      [`--${blockClass}--breadcrumb-title-scroll-px`]: `${breadcrumbTitleHeight}px`,
-      [`--${blockClass}--breadcrumb-title-start`]: parseFloat(
-        breadcrumbRowMarginPx,
-        10
-      ),
-      [`--${blockClass}--breadcrumb-title-start-px`]: breadcrumbRowMarginPx,
-      [`--${blockClass}--height-px`]: `${headerHeight}px`,
-      [`--${blockClass}--navigation-height-px`]: `${navigationRowHeight}px`,
-    }));
+    result.breadcrumbRowSpaceBelow =
+      window && breadcrumbRowEl
+        ? parseFloat(
+            window
+              .getComputedStyle(breadcrumbRowEl)
+              .getPropertyValue('margin-bottom'),
+            10
+          )
+        : 0;
+    return result;
   };
 
   useWindowScroll(
     ({ previous, current }) => {
       if (previous.scrollY !== current.scrollY) {
-        checkHeights();
+        const heights = getHeights();
+
+        setPageActionsInBreadcrumbRow(
+          current.scrollY > heights.breadcrumbRowSpaceBelow &&
+            actionBarItems !== undefined
+        );
 
         setComponentCssCustomProps((previous) => ({
           ...previous,
+          [`--${blockClass}--height-px`]: `${heights.headerHeight}px`,
+          [`--${blockClass}--header-top`]: `${
+            heights.navigationRowHeight - heights.headerHeight
+          }px`,
           [`--${blockClass}--breadcrumb-title-visibility`]:
             current.scrollY > 0 ? 'visible' : 'hidden',
           [`--${blockClass}--scroll`]: `${current.scrollY}`,
-          [`--${blockClass}--scroll-px`]: `${current.scrollY}px`,
-          [`--${blockClass}--breadcrumb-title-top`]: `max(0px, calc(var(--${blockClass}--breadcrumb-title-scroll-px) + var(--${blockClass}--breadcrumb-title-start-px) - var(--${blockClass}--scroll-px)))`,
-          [`--${blockClass}--breadcrumb-title-opacity`]: `calc(max(0, (var(--${blockClass}--scroll) - var(--${blockClass}--breadcrumb-title-start))) / var(--${blockClass}--breadcrumb-title-scroll))`,
+          [`--${blockClass}--breadcrumb-title-top`]: `${Math.max(
+            0,
+            heights.breadcrumbTitleHeight +
+              heights.breadcrumbRowSpaceBelow -
+              current.scrollY
+          )}px`,
+          [`--${blockClass}--breadcrumb-title-opacity`]: `${Math.max(
+            0,
+            (current.scrollY - heights.breadcrumbRowSpaceBelow) /
+              heights.breadcrumbTitleHeight
+          )}`,
+          [`--${blockClass}--breadcrumb-top`]: `${Math.min(
+            0,
+            heights.headerHeight -
+              heights.breadcrumbRowSpaceBelow -
+              heights.navigationRowHeight -
+              heights.breadcrumbRowHeight -
+              current.scrollY
+          )}px`,
         }));
       }
     },
@@ -214,9 +237,17 @@ export const PageHeader = ({
                   actionBarItems !== undefined,
               })}>
               {actionBarItems !== undefined ? (
-                <ActionBar className={`${blockClass}--action-bar`}>
-                  {actionBarItems}
-                </ActionBar>
+                <>
+                  <div
+                    className={cx(`${blockClass}--page-actions`, {
+                      [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
+                    })}>
+                    {pageActions}
+                  </div>
+                  <ActionBar className={`${blockClass}--action-bar`}>
+                    {actionBarItems}
+                  </ActionBar>
+                </>
               ) : null}
             </Column>
           </Row>
@@ -253,7 +284,10 @@ export const PageHeader = ({
             </Column>
 
             {pageActions !== undefined ? (
-              <Column className={`${blockClass}--page-actions`}>
+              <Column
+                className={cx(`${blockClass}--page-actions`, {
+                  [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
+                })}>
                 {pageActions}
               </Column>
             ) : null}

@@ -10,7 +10,6 @@ import React from 'react';
 
 import {
   BreadcrumbItem,
-  Button,
   Column,
   ContentSwitcher,
   Grid,
@@ -24,6 +23,7 @@ import { CheckmarkFilled16 } from '@carbon/icons-react';
 import { Lightning16, Bee24 } from '@carbon/icons-react';
 
 import { ActionBarItem } from './ActionBarItem';
+import { PageActionItem } from './PageActionItem';
 import { PageHeader } from '.';
 
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
@@ -35,6 +35,7 @@ export default {
   component: PageHeader,
   subcomponents: {
     ActionBarItem,
+    PageActionItem,
   },
   parameters: { styles, layout: 'fullscreen', docs: { page: mdx } },
   decorators: [
@@ -46,24 +47,24 @@ export default {
 
 const actionBarItems = (
   <>
-    <ActionBarItem icon={Lightning16} label="Action 1" />
-    <ActionBarItem icon={Lightning16} label="Action 2" />
-    <ActionBarItem icon={Lightning16} label="Action 3" />
-    <ActionBarItem icon={Lightning16} label="Action 4" />
+    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 1" />
+    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 2" />
+    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 3" />
+    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 4" />
   </>
 );
 const manyActionBarItems = (
   <>
-    <ActionBarItem icon={Lightning16} label="Action 1" />
-    <ActionBarItem icon={Lightning16} label="Action 2" />
-    <ActionBarItem icon={Lightning16} label="Action 3" />
-    <ActionBarItem icon={Lightning16} label="Action 4" />
-    <ActionBarItem icon={Lightning16} label="Action 5" />
-    <ActionBarItem icon={Lightning16} label="Action 6" />
-    <ActionBarItem icon={Lightning16} label="Action 7" />
-    <ActionBarItem icon={Lightning16} label="Action 8" />
-    <ActionBarItem icon={Lightning16} label="Action 9" />
-    <ActionBarItem icon={Lightning16} label="Action 10" />
+    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 1" />
+    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 2" />
+    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 3" />
+    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 4" />
+    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 5" />
+    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 6" />
+    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 7" />
+    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 8" />
+    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 9" />
+    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 10" />
   </>
 );
 const breadcrumbItems = (
@@ -124,21 +125,15 @@ const dummyPageContent = (
 );
 const pageActions = (
   <>
-    <Button kind="secondary" size="field">
-      Secondary button
-    </Button>
-    <Button size="field">Primary button</Button>
+    <PageActionItem kind="secondary">Secondary button</PageActionItem>
+    <PageActionItem kind="primary">Primary button</PageActionItem>
   </>
 );
 const manyPageActions = (
   <>
-    <Button kind="secondary" size="field">
-      Secondary button 1
-    </Button>
-    <Button kind="secondary" size="field">
-      Secondary button 2
-    </Button>
-    <Button size="field">Primary button</Button>
+    <PageActionItem kind="secondary">Secondary button 1</PageActionItem>
+    <PageActionItem kind="secondary">Secondary button 2</PageActionItem>
+    <PageActionItem kind="primary">Primary button</PageActionItem>
   </>
 );
 const statusIndicator = (
@@ -168,22 +163,22 @@ const summaryDetails = (
 );
 const tabBar = (
   <Tabs>
-    <Tab label="Tab 1" />
-    <Tab label="Tab 2" />
-    <Tab label="Tab 3" />
-    <Tab label="Tab 4" />
+    <Tab iconDescription="Tab 1" />
+    <Tab iconDescription="Tab 2" />
+    <Tab iconDescription="Tab 3" />
+    <Tab iconDescription="Tab 4" />
   </Tabs>
 );
 const longTabBar = (
   <Tabs>
-    <Tab label="Tab 1" />
-    <Tab label="Tab 2" />
-    <Tab label="Tab 3" />
-    <Tab label="Tab 4" />
-    <Tab label="Tab 5" />
-    <Tab label="Tab 6" />
-    <Tab label="Tab 7" />
-    <Tab label="Tab 8" />
+    <Tab iconDescription="Tab 1" />
+    <Tab iconDescription="Tab 2" />
+    <Tab iconDescription="Tab 3" />
+    <Tab iconDescription="Tab 4" />
+    <Tab iconDescription="Tab 5" />
+    <Tab iconDescription="Tab 6" />
+    <Tab iconDescription="Tab 7" />
+    <Tab iconDescription="Tab 8" />
   </Tabs>
 );
 const tags = (

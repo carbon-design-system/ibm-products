@@ -14,9 +14,9 @@ import { expPrefix } from '../../global/js/settings';
 
 import { Button } from 'carbon-components-react';
 
-const blockClass = `${expPrefix}-action-bar-item`;
+const blockClass = `${expPrefix}-page-action-item`;
 
-export const ActionBarItem = (props) => {
+export const PageActionItem = (props) => {
   const className = cx([blockClass, props.className]);
 
   return (
@@ -24,23 +24,19 @@ export const ActionBarItem = (props) => {
       {...{
         ...props,
         className,
-        hasIconOnly: true,
-        kind: 'ghost',
         size: 'field',
-        tooltipPosition: 'bottom',
-        tooltipAlignment: 'end',
         type: 'button',
       }}></Button>
   );
 };
 
-ActionBarItem.propTypes = {
+PageActionItem.propTypes = {
   /**
    * Specifies class(es) to be applied to the top-level PageHeader node.
    * Optional.
    */
   className: PropTypes.string,
 };
-ActionBarItem.defaultProps = {
+PageActionItem.defaultProps = {
   className: '',
 };

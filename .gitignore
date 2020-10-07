@@ -2,6 +2,7 @@
 /build
 packages/*/build/
 packages/*/examples/*/build/
+packages/*/scss
 es
 lib
 dist

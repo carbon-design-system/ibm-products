@@ -21,7 +21,7 @@
   "dependencies": {
     "@babel/core": "^7.10.2",
     "accessibility-checker": "^3.0.8",
-    "axe-core": "^3.5.4",
+    "axe-core": "^4.0.2",
     "babel-jest": "^26.0.1",
     "babel-preset-ibm-cloud-paks": "^0.0.0",
     "chalk": "^4.1.0",

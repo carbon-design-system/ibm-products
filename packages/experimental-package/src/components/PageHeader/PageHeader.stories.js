@@ -21,7 +21,7 @@ import {
   Tag,
 } from 'carbon-components-react';
 import { CheckmarkFilled16 } from '@carbon/icons-react';
-import { Lightning16, Bee32 } from '@carbon/icons-react';
+import { Lightning16, Bee24 } from '@carbon/icons-react';
 
 import { ActionBarItem } from './ActionBarItem';
 import { PageHeader } from '.';
@@ -124,15 +124,21 @@ const dummyPageContent = (
 );
 const pageActions = (
   <>
-    <Button kind="secondary">Secondary button</Button>
-    <Button>Primary button</Button>
+    <Button kind="secondary" size="field">
+      Secondary button
+    </Button>
+    <Button size="field">Primary button</Button>
   </>
 );
 const manyPageActions = (
   <>
-    <Button kind="secondary">Secondary button 1</Button>
-    <Button kind="secondary">Secondary button 2</Button>
-    <Button>Primary button</Button>
+    <Button kind="secondary" size="field">
+      Secondary button 1
+    </Button>
+    <Button kind="secondary" size="field">
+      Secondary button 2
+    </Button>
+    <Button size="field">Primary button</Button>
   </>
 );
 const statusIndicator = (
@@ -221,7 +227,7 @@ AllAttributesSet.args = {
   breadcrumbItems,
   actionBarItems,
   title,
-  titleIcon: Bee32,
+  titleIcon: Bee24,
   pageActions,
   subtitle,
   availableSpace: summaryDetails,
@@ -278,7 +284,7 @@ WithBackgroundBreadcrumbitemsTitleIconTabs.args = {
   background: true,
   breadcrumbItems,
   title,
-  titleIcon: Bee32,
+  titleIcon: Bee24,
   navigation: tabBar,
 };
 
@@ -423,4 +429,6 @@ AllAttributesWithSwitches.args = {
   tagsSwitchedArg: true,
   title,
   titleSwitchedArg: true,
+  titleIcon: Bee24,
+  titleIconSwitchedArg: true,
 };

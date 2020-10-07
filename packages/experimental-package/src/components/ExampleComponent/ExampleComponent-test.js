@@ -5,24 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render } from '@testing-library/react';
-import { shallow } from 'enzyme';
+import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 
-import { ExampleComponent } from './ExampleComponent';
+import { ExampleComponent } from '.';
 
-const { name } = ExampleComponent;
+const {
+  defaultProps: { primaryButtonLabel, secondaryButtonLabel },
+  name,
+} = ExampleComponent;
 
 describe(name, () => {
-  let wrapper;
-
-  const primaryClickMock = jest.fn();
-  const secondaryClickMock = jest.fn();
-
-  beforeEach(() => {
-    wrapper = shallow(<ExampleComponent />);
-  });
-
   test('should have no accessibility violations', async () => {
     const { container } = render(<ExampleComponent />);
 
@@ -30,21 +23,24 @@ describe(name, () => {
     await expect(container).toHaveNoAxeViolations();
   });
 
-  it('primary and secondary clicks not called', () => {
-    wrapper.find('Button').at(0).props().onClick();
-    expect(secondaryClickMock).not.toHaveBeenCalled();
-    wrapper.find('Button').at(1).props().onClick();
-    expect(primaryClickMock).not.toHaveBeenCalled();
-  });
+  test('calls primary and secondary actions when buttons are clicked', () => {
+    const { click } = fireEvent;
+    const { fn } = jest;
 
-  it('primary and secondary clicks called', () => {
-    wrapper.setProps({
-      onPrimaryClick: primaryClickMock,
-      onSecondaryClick: secondaryClickMock,
-    });
-    wrapper.find('Button').at(0).props().onClick();
-    expect(secondaryClickMock).toHaveBeenCalled();
-    wrapper.find('Button').at(1).props().onClick();
-    expect(primaryClickMock).toHaveBeenCalled();
+    const primaryClickMock = fn();
+    const secondaryClickMock = fn();
+
+    const { getByText } = render(
+      <ExampleComponent
+        onPrimaryClick={primaryClickMock}
+        onSecondaryClick={secondaryClickMock}
+      />
+    );
+
+    click(getByText(primaryButtonLabel));
+    expect(primaryClickMock).toBeCalled();
+
+    click(getByText(secondaryButtonLabel));
+    expect(secondaryClickMock).toBeCalled();
   });
 });

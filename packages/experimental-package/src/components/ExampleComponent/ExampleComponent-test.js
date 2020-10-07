@@ -1,31 +1,39 @@
+/**
+ * Copyright IBM Corp. 2020, 2020
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
-import { shallow } from 'enzyme';
-import { ExampleComponent } from './ExampleComponent';
 
-describe('ExampleComponent', () => {
-  let wrapper;
-  const primaryClickMock = jest.fn();
-  const secondaryClickMock = jest.fn();
+import { ExampleComponent } from '.';
 
-  beforeEach(() => {
-    wrapper = shallow(<ExampleComponent />);
-  });
+const {
+  defaultProps: { primaryButtonLabel, secondaryButtonLabel },
+  name,
+} = ExampleComponent;
 
-  it('primary and secondary clicks not called', () => {
-    wrapper.find('Button').at(0).props().onClick();
-    expect(secondaryClickMock).not.toHaveBeenCalled();
-    wrapper.find('Button').at(1).props().onClick();
-    expect(primaryClickMock).not.toHaveBeenCalled();
-  });
+describe(name, () => {
+  test('calls primary and secondary actions when buttons are clicked', () => {
+    const { click } = fireEvent;
+    const { fn } = jest;
 
-  it('primary and secondary clicks called', () => {
-    wrapper.setProps({
-      onPrimaryClick: primaryClickMock,
-      onSecondaryClick: secondaryClickMock,
-    });
-    wrapper.find('Button').at(0).props().onClick();
-    expect(secondaryClickMock).toHaveBeenCalled();
-    wrapper.find('Button').at(1).props().onClick();
-    expect(primaryClickMock).toHaveBeenCalled();
+    const primaryClickMock = fn();
+    const secondaryClickMock = fn();
+
+    const { getByText } = render(
+      <ExampleComponent
+        onPrimaryClick={primaryClickMock}
+        onSecondaryClick={secondaryClickMock}
+      />
+    );
+
+    click(getByText(primaryButtonLabel));
+    expect(primaryClickMock).toBeCalled();
+
+    click(getByText(secondaryButtonLabel));
+    expect(secondaryClickMock).toBeCalled();
   });
 });

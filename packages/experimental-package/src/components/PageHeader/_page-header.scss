@@ -18,11 +18,7 @@ $raised-z-index: 99;
 .#{$block-class} {
   /* Bleed class for the background */
   position: sticky;
-  // stylelint-disable-next-line
-  top: calc(
-    var(--#{$block-class}--navigation-height-px) -
-      var(--#{$block-class}--height-px)
-  );
+  top: var(--#{$block-class}--header-top);
   display: inline-block; /* cause top/bottom margin to reserve space */
   width: 100%;
   background-color: $ui-background;
@@ -31,15 +27,18 @@ $raised-z-index: 99;
   --#{$block-class}--breadcrumb-min-height: #{$spacing-07};
   --#{$block-class}--breadcrumb-title-visibility: hidden;
   --#{$block-class}--breadcrumb-title-opacity: 1;
+  --#{$block-class}--breadcrumb-top: 0;
 }
 
 .#{$block-class}--background {
   background-color: $ui-01;
+  border-bottom: 1px solid $ui-03;
 }
 
 .#{$block-class}--breadcrumb-row {
   position: sticky;
-  top: 0;
+  // stylelint-disable-next-line carbon/layout-token-use
+  top: var(--#{$block-class}--breadcrumb-top);
   z-index: $raised-z-index;
   min-height: var(--#{$block-class}--breadcrumb-min-height);
   margin-bottom: $spacing-02;
@@ -48,6 +47,21 @@ $raised-z-index: 99;
 .#{$block-class}--breadcrumb-row--with-actions {
   margin-bottom: $spacing-06;
   border-bottom: 1px solid $ui-03;
+}
+
+.#{$block-class}--action-bar-column {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.#{$block-class}--breadcrumb-row .#{$block-class}--page-actions {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.#{$block-class}--breadcrumb-row .#{$block-class}--page-actions--in-breadcrumb {
+  visibility: visible;
+  opacity: 1;
 }
 
 .#{$block-class}--breadcrumb-column--background,
@@ -88,7 +102,6 @@ $raised-z-index: 99;
   margin-top: calc(-1 * #{$spacing-04}); /* align with breadcrumb */
   padding-top: $spacing-04;
   white-space: nowrap;
-  text-align: right;
 }
 
 .#{$block-class}--title-row {
@@ -117,10 +130,6 @@ $raised-z-index: 99;
   top: 0;
 }
 
-.#{$block-class}--title-col {
-  min-width: 50%;
-}
-
 .#{$block-class}--title {
   @include carbon--type-style('productive-heading-04');
 
@@ -138,6 +147,16 @@ $raised-z-index: 99;
 
 .#{$block-class}--page-actions {
   text-align: right;
+}
+
+.#{$block-class}--title-row .#{$block-class}--page-actions {
+  visibility: visible;
+  opacity: 1;
+}
+
+.#{$block-class}--title-row .#{$block-class}--page-actions--in-breadcrumb {
+  visibility: hidden;
+  opacity: 0;
 }
 
 .#{$block-class}--subtitle-row {

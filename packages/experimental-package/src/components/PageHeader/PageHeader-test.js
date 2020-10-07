@@ -116,7 +116,7 @@ describe('PageHeader', () => {
     expect(wrapper.find('Tab')).toHaveLength(4);
     expect(
       wrapper.find(`.${expPrefix}-page-header--page-actions`).find('button')
-    ).toHaveLength(2);
+    ).toHaveLength(4);
     expect(
       wrapper.find(`.${expPrefix}-page-header--subtitle`).hostNodes().text()
     ).toEqual(subtitle);

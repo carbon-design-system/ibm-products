@@ -16,7 +16,7 @@ import { Button } from 'carbon-components-react';
 
 const blockClass = `${expPrefix}-page-action-item`;
 
-export const PageActionItem = (props) => {
+export const PageActionItem = ({ children, ...props }) => {
   const className = cx([blockClass, props.className]);
 
   return (
@@ -26,17 +26,20 @@ export const PageActionItem = (props) => {
         className,
         size: 'field',
         type: 'button',
-      }}></Button>
+      }}>
+      {children}
+    </Button>
   );
 };
 
-PageActionItem.propTypes = {
-  /**
-   * Specifies class(es) to be applied to the top-level PageHeader node.
-   * Optional.
-   */
-  className: PropTypes.string,
-};
-PageActionItem.defaultProps = {
-  className: '',
-};
+const reservedProps = ['size', 'type'];
+const propTypes = { ...Button.propTypes };
+const defaultProps = { ...Button.defaultProps };
+
+reservedProps.forEach((prop) => {
+  delete propTypes[prop];
+  delete defaultProps[prop];
+});
+
+PageActionItem.propTypes = { ...propTypes };
+PageActionItem.defaultProps = { ...defaultProps };

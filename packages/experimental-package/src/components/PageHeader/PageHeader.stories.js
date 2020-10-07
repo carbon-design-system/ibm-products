@@ -163,22 +163,22 @@ const summaryDetails = (
 );
 const tabBar = (
   <Tabs>
-    <Tab iconDescription="Tab 1" />
-    <Tab iconDescription="Tab 2" />
-    <Tab iconDescription="Tab 3" />
-    <Tab iconDescription="Tab 4" />
+    <Tab label="Tab 1" />
+    <Tab label="Tab 2" />
+    <Tab label="Tab 3" />
+    <Tab label="Tab 4" />
   </Tabs>
 );
 const longTabBar = (
   <Tabs>
-    <Tab iconDescription="Tab 1" />
-    <Tab iconDescription="Tab 2" />
-    <Tab iconDescription="Tab 3" />
-    <Tab iconDescription="Tab 4" />
-    <Tab iconDescription="Tab 5" />
-    <Tab iconDescription="Tab 6" />
-    <Tab iconDescription="Tab 7" />
-    <Tab iconDescription="Tab 8" />
+    <Tab label="Tab 1" />
+    <Tab label="Tab 2" />
+    <Tab label="Tab 3" />
+    <Tab label="Tab 4" />
+    <Tab label="Tab 5" />
+    <Tab label="Tab 6" />
+    <Tab label="Tab 7" />
+    <Tab label="Tab 8" />
   </Tabs>
 );
 const tags = (

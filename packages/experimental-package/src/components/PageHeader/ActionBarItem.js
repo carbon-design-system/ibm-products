@@ -34,13 +34,21 @@ export const ActionBarItem = (props) => {
   );
 };
 
-ActionBarItem.propTypes = {
-  /**
-   * Specifies class(es) to be applied to the top-level PageHeader node.
-   * Optional.
-   */
-  className: PropTypes.string,
-};
-ActionBarItem.defaultProps = {
-  className: '',
-};
+const reservedProps = [
+  'hasIconOnly',
+  'kind',
+  'size',
+  'tooltipPosition',
+  'tooltipAlignment',
+  'type',
+];
+const propTypes = { ...Button.propTypes };
+const defaultProps = { ...Button.defaultProps };
+
+reservedProps.forEach((prop) => {
+  delete propTypes[prop];
+  delete defaultProps[prop];
+});
+
+ActionBarItem.propTypes = { ...propTypes };
+ActionBarItem.defaultProps = { ...defaultProps };

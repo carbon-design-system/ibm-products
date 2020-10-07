@@ -19,7 +19,7 @@
     "format:diff": "prettier --list-different '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "lint": "yarn lint:es && yarn lint:style",
     "lint:es": "eslint 'packages/**/*.js'",
-    "lint:style": "stylelint packages/**/*.scss --report-needless-disables --report-invalid-scope-disables",
+    "lint:style": "stylelint 'packages/**/*.scss' --report-needless-disables --report-invalid-scope-disables",
     "test": "jest",
     "storybook": "cd packages/core && yarn start",
     "sync": "carbon-cli sync"
@@ -48,7 +48,7 @@
     "rimraf": "^3.0.2",
     "rollup": "^2.28.2",
     "stylelint": "^13.6.1",
-    "stylelint-carbon-use": "git+https://git@github.com/lee-chase/carbon-use.git",
+    "stylelint-plugin-carbon-tokens": "^0.1.1",
     "stylelint-config-carbon": "^1.1.0"
   },
   "eslintConfig": {

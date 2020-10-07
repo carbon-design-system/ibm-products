@@ -36,6 +36,7 @@
 
 .#{$ide-prefix}-btn--rotate-180-anti .#{$prefix}--btn__icon {
   animation-name: rotate-180-anti;
-  animation-duration: 2000ms;
+  // stylelint-disable-next-line carbon/motion-token-use
+  animation-duration: 2000ms; /* Carbon motion does not have anything this long */
   animation-iteration-count: infinite;
 }

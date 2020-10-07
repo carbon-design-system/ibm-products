@@ -221,7 +221,14 @@ export const PageHeader = ({
     //   result = headerHeight > layout07;
     // }
     setBackgroundOn(result);
-  }, [background, scrollYValue]);
+  }, [
+    background,
+    scrollYValue,
+    actionBarItems,
+    breadcrumbItems,
+    navigation,
+    tags,
+  ]);
 
   return (
     <section

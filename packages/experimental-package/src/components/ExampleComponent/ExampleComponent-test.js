@@ -16,37 +16,24 @@ const {
 } = ExampleComponent;
 
 describe(name, () => {
-  const { click } = fireEvent;
-  const { fn } = jest;
-
-  test('does not call primary and secondary actions if not provided', () => {
-    const onPrimaryClick = fn();
-    const onSecondaryClick = fn();
-
-    const { getByText } = render(<ExampleComponent />);
-
-    click(getByText(primaryButtonLabel));
-    expect(onPrimaryClick).not.toHaveBeenCalled();
-
-    click(getByText(secondaryButtonLabel));
-    expect(onSecondaryClick).not.toHaveBeenCalled();
-  });
-
   test('calls primary and secondary actions when buttons are clicked', () => {
-    const onPrimaryClick = fn();
-    const onSecondaryClick = fn();
+    const { click } = fireEvent;
+    const { fn } = jest;
+
+    const primaryClickMock = fn();
+    const secondaryClickMock = fn();
 
     const { getByText } = render(
       <ExampleComponent
-        onPrimaryClick={onPrimaryClick}
-        onSecondaryClick={onSecondaryClick}
+        onPrimaryClick={primaryClickMock}
+        onSecondaryClick={secondaryClickMock}
       />
     );
 
     click(getByText(primaryButtonLabel));
-    expect(onPrimaryClick).toHaveBeenCalled();
+    expect(primaryClickMock).toBeCalled();
 
     click(getByText(secondaryButtonLabel));
-    expect(onSecondaryClick).toHaveBeenCalled();
+    expect(secondaryClickMock).toBeCalled();
   });
 });

@@ -211,7 +211,7 @@ export const PageHeader = ({
     const headerHeight = headerEl.current ? headerEl.current.clientHeight : 0;
     let result = background === true;
 
-    if (!result) {
+    if (!result && (breadcrumbItems || actionBarItems || tags || navigation)) {
       result =
         headerHeight - scrollYValue <
         parseFloat(layout05, 10) * parseInt(baseFontSize);

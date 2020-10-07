@@ -7,6 +7,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import { layout05, baseFontSize } from '@carbon/layout';
 
 import cx from 'classnames';
 
@@ -54,6 +55,8 @@ export const PageHeader = ({
   const [pageActionsInBreadcrumbRow, setPageActionsInBreadcrumbRow] = useState(
     false
   );
+  const [backgroundOn, setBackgroundOn] = useState(false);
+  const [scrollYValue, setScrollYValue] = useState(0);
   const dynamicRefs = useRef({});
   const headerEl = useRef(null);
 
@@ -88,20 +91,30 @@ export const PageHeader = ({
       ? breadcrumbRowEl.clientHeight
       : 0;
     result.breadcrumbRowSpaceBelow = 0;
+    result.breadcrumbRowSpaceAbove = 0;
     result.headerHeight = headerEl.current ? headerEl.current.clientHeight : 1;
     result.navigationRowHeight = navigationRowEl
       ? navigationRowEl.clientHeight
       : 1;
 
-    result.breadcrumbRowSpaceBelow =
-      window && breadcrumbRowEl
-        ? parseFloat(
-            window
-              .getComputedStyle(breadcrumbRowEl)
-              .getPropertyValue('margin-bottom'),
-            10
-          )
-        : 0;
+    if (window && breadcrumbRowEl) {
+      result.breadcrumbRowSpaceBelow = parseFloat(
+        window
+          .getComputedStyle(breadcrumbRowEl)
+          .getPropertyValue('margin-bottom'),
+        10
+      );
+      result.breadcrumbRowSpaceAbove = parseFloat(
+        window
+          .getComputedStyle(breadcrumbRowEl)
+          .getPropertyValue('padding-top'),
+        10
+      );
+    } else {
+      result.breadcrumbRowSpaceAbove = 0;
+      result.breadcrumbRowSpaceBelow = 0;
+    }
+
     return result;
   };
 
@@ -115,11 +128,13 @@ export const PageHeader = ({
             actionBarItems !== undefined
         );
 
-        setComponentCssCustomProps((previous) => ({
-          ...previous,
+        setComponentCssCustomProps((prevCSSProps) => ({
+          ...prevCSSProps,
           [`--${blockClass}--height-px`]: `${heights.headerHeight}px`,
           [`--${blockClass}--header-top`]: `${
-            heights.navigationRowHeight - heights.headerHeight
+            navigation || tags
+              ? heights.navigationRowHeight - heights.headerHeight
+              : heights.breadcrumbRowHeight - heights.headerHeight
           }px`,
           [`--${blockClass}--breadcrumb-title-visibility`]:
             current.scrollY > 0 ? 'visible' : 'hidden',
@@ -137,14 +152,18 @@ export const PageHeader = ({
           )}`,
           [`--${blockClass}--breadcrumb-top`]: `${Math.min(
             0,
-            heights.headerHeight -
-              heights.breadcrumbRowSpaceBelow -
-              heights.navigationRowHeight -
-              heights.breadcrumbRowHeight -
-              current.scrollY
+            navigation || tags
+              ? heights.headerHeight -
+                  heights.breadcrumbRowSpaceBelow -
+                  heights.navigationRowHeight -
+                  heights.breadcrumbRowHeight -
+                  current.scrollY
+              : 0
           )}px`,
         }));
       }
+
+      setScrollYValue(current.scrollY);
     },
     [
       actionBarItems,
@@ -188,12 +207,35 @@ export const PageHeader = ({
     setSpacingBelowTitle(belowTitleSpace);
   }, [availableSpace, tags, navigation, subtitle, pageActions]);
 
+  useEffect(() => {
+    const headerHeight = headerEl.current ? headerEl.current.clientHeight : 0;
+    let result = background === true;
+
+    if (!result && (breadcrumbItems || actionBarItems || tags || navigation)) {
+      result =
+        headerHeight - scrollYValue <
+        parseFloat(layout05, 10) * parseInt(baseFontSize);
+    }
+    // if (!result) {
+    // This exists in the design if > title, breadcrumb and status turn on background left off as has responsive issues
+    //   result = headerHeight > layout07;
+    // }
+    setBackgroundOn(result);
+  }, [
+    background,
+    scrollYValue,
+    actionBarItems,
+    breadcrumbItems,
+    navigation,
+    tags,
+  ]);
+
   return (
     <section
       className={cx([
         blockClass,
         className,
-        { [`${blockClass}--background`]: background },
+        { [`${blockClass}--background`]: backgroundOn },
       ])}
       ref={headerEl}
       style={componentCssCustomProps}>

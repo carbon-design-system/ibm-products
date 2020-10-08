@@ -73,6 +73,8 @@ ActionBarItem.propTypes = {
   /**
    * If specifying the `renderIcon` prop, provide a description for that icon that can
    * be read by screen readers
+   *
+   * (inherited from Carbon Button)
    */
   iconDescription: PropTypes.string,
   /**

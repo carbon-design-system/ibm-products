@@ -55,6 +55,7 @@ export const PageHeader = ({
   const [backgroundOn, setBackgroundOn] = useState(false);
   const dynamicRefs = useRef({});
   const headerEl = useRef(null);
+  const [titleHasNoMargin, setTitleHasMarginBelow] = useState(true);
 
   const getDynamicRef = (selector) => {
     // would love to do this differently but digging in the dom seems easier
@@ -71,13 +72,14 @@ export const PageHeader = ({
     return dynamicRefs.current[selector];
   };
 
-  const checkUpdateHeights = () => {
+  const checkUpdateVerticalSpace = () => {
     // Utility function that checks the heights of various elements which are used to determine layout
     const update = {};
 
     const breadcrumbTitleEl = getDynamicRef(`.${blockClass}--breadcrumb-title`);
     const breadcrumbRowEl = getDynamicRef(`.${blockClass}--breadcrumb-row`);
     const navigationRowEl = getDynamicRef(`.${blockClass}--navigation-row`);
+    const titleRowEl = getDynamicRef(`.${blockClass}--title-row`);
 
     update.breadcrumbTitleHeight = breadcrumbTitleEl
       ? breadcrumbTitleEl.clientHeight
@@ -106,6 +108,12 @@ export const PageHeader = ({
     } else {
       update.breadcrumbRowSpaceAbove = 0;
       update.breadcrumbRowSpaceBelow = 0;
+    }
+
+    if (window && titleRowEl) {
+      const rect = titleRowEl.getBoundingClientRect();
+
+      setTitleHasMarginBelow(rect.y > 0);
     }
 
     setMetrics((previous) => ({ ...previous, ...update }));
@@ -168,7 +176,7 @@ export const PageHeader = ({
   useWindowScroll(
     // on scroll or various layout changes check updates if needed
     ({ current }) => {
-      checkUpdateHeights();
+      checkUpdateVerticalSpace();
       setScrollYValue(current.scrollY);
     },
     [
@@ -185,7 +193,7 @@ export const PageHeader = ({
 
   useWindowResize(() => {
     // on window resieze and other updates some values may have changed
-    checkUpdateHeights();
+    checkUpdateVerticalSpace();
   }, [
     actionBarItems,
     availableSpace,
@@ -209,7 +217,9 @@ export const PageHeader = ({
     // Determines the amount of space needed below the title
     let belowTitleSpace = '07';
 
-    if (
+    if (titleHasNoMargin) {
+      belowTitleSpace = '0';
+    } else if (
       pageActions !== undefined &&
       navigation !== undefined &&
       subtitle === undefined &&
@@ -222,7 +232,14 @@ export const PageHeader = ({
       belowTitleSpace = '05';
     }
     setSpacingBelowTitle(belowTitleSpace);
-  }, [availableSpace, tags, navigation, subtitle, pageActions]);
+  }, [
+    availableSpace,
+    titleHasNoMargin,
+    tags,
+    navigation,
+    subtitle,
+    pageActions,
+  ]);
 
   useEffect(() => {
     // Determines if the background should be one based on the header height or scroll

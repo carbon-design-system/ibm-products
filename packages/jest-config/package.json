@@ -16,7 +16,7 @@
     "access": "public"
   },
   "peerDependencies": {
-    "jest": "^26.0.1"
+    "jest": "^25.5.4"
   },
   "dependencies": {
     "@babel/core": "^7.10.2",

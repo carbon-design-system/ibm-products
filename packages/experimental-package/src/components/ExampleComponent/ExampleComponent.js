@@ -1,25 +1,28 @@
-//
-// Copyright IBM Corp. 2020, 2020
-//
-// This source code is licensed under the Apache-2.0 license found in the
-// LICENSE file in the root directory of this source tree.
-//
+/**
+ * Copyright IBM Corp. 2020, 2020
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
-import React from 'react';
+import { Button } from 'carbon-components-react';
 import PropTypes from 'prop-types';
-// import './example-component.scss'; // Do not import SCSS directly it will be rolled up seperately.
+import React from 'react';
 
 import { expPrefix } from '../../global/js/settings';
-import { Button } from 'carbon-components-react';
+
+// import './example-component.scss'; // Do not import SCSS directly it will be rolled up seperately.
 
 export const ExampleComponent = ({
   borderColor,
   boxedBorder,
+  onPrimaryClick,
+  onSecondaryClick,
+  primaryButtonLabel,
   primaryKind,
+  secondaryButtonLabel,
   secondaryKind,
   size,
-  primaryButtonLabel,
-  secondaryButtonLabel,
   ...props
 }) => {
   const mode = boxedBorder
@@ -27,14 +30,14 @@ export const ExampleComponent = ({
     : `${expPrefix}-example-component--shadow-set`;
 
   const handlePrimaryClick = (e) => {
-    if (props.onPrimaryClick) {
-      props.onPrimaryClick(e);
+    if (onPrimaryClick) {
+      onPrimaryClick(e);
     }
   };
 
   const handleSecondaryClick = (e) => {
-    if (props.onSecondaryClick) {
-      props.onSecondaryClick(e);
+    if (onSecondaryClick) {
+      onSecondaryClick(e);
     }
   };
 

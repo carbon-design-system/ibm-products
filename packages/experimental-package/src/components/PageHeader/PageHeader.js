@@ -7,6 +7,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import { layout05, baseFontSize } from '@carbon/layout';
 
 import cx from 'classnames';
 
@@ -15,7 +16,7 @@ import cx from 'classnames';
 
 import { expPrefix } from '../../global/js/settings';
 
-import { /* useWindowResize, */ useWindowScroll } from '../../global/js/use';
+import { useWindowResize, useWindowScroll } from '../../global/js/use';
 
 import {
   BreadcrumbItem,
@@ -42,20 +43,19 @@ export const PageHeader = ({
   title,
   titleIcon: TitleIcon,
 }) => {
-  // eslint-disable-next-line no-unused-vars
-  const [titleInBreadcrumbs, setTitleInBreadcrumbs] = useState({
-    visible: false,
-    opacity: 0,
-    scrollY: 0,
-  });
+  const [metrics, setMetrics] = useState({});
+  // const [windowSize, setWindowSize] = useState({});
+  const [scrollYValue, setScrollYValue] = useState(0);
   const [componentCssCustomProps, setComponentCssCustomProps] = useState({});
   const [hasBreadcrumbRow, setHasBreadcrumbRow] = useState(false);
   const [spacingBelowTitle, setSpacingBelowTitle] = useState('06');
+  const [pageActionsInBreadcrumbRow, setPageActionsInBreadcrumbRow] = useState(
+    false
+  );
+  const [backgroundOn, setBackgroundOn] = useState(false);
   const dynamicRefs = useRef({});
   const headerEl = useRef(null);
-
-  // const halfColumns = { sm: 2, md: 4, lg: 8 };
-  // const halfOrFull = (test) => (test ? { ...halfColumns } : {});
+  const [titleHasNoMargin, setTitleHasMarginBelow] = useState(true);
 
   const getDynamicRef = (selector) => {
     // would love to do this differently but digging in the dom seems easier
@@ -72,75 +72,141 @@ export const PageHeader = ({
     return dynamicRefs.current[selector];
   };
 
-  const checkHeights = () => {
+  const checkUpdateVerticalSpace = () => {
+    // Utility function that checks the heights of various elements which are used to determine layout
+    const update = {};
+
     const breadcrumbTitleEl = getDynamicRef(`.${blockClass}--breadcrumb-title`);
     const breadcrumbRowEl = getDynamicRef(`.${blockClass}--breadcrumb-row`);
     const navigationRowEl = getDynamicRef(`.${blockClass}--navigation-row`);
+    const titleRowEl = getDynamicRef(`.${blockClass}--title-row`);
 
-    let breadcrumbTitleHeight = breadcrumbTitleEl
+    update.breadcrumbTitleHeight = breadcrumbTitleEl
       ? breadcrumbTitleEl.clientHeight
       : 0;
-    let breadcrumbRowMarginPx = '0px';
-    let headerHeight = headerEl.current ? headerEl.current.clientHeight : 0;
-    let navigationRowHeight = navigationRowEl
-      ? navigationRowEl.clientHeight
+    update.breadcrumbRowHeight = breadcrumbRowEl
+      ? breadcrumbRowEl.clientHeight
       : 0;
+    update.headerHeight = headerEl.current ? headerEl.current.clientHeight : 1;
+    update.navigationRowHeight = navigationRowEl
+      ? navigationRowEl.clientHeight
+      : 1;
 
-    if (window !== undefined) {
-      if (breadcrumbRowEl) {
-        breadcrumbRowMarginPx = window
+    if (window && breadcrumbRowEl) {
+      update.breadcrumbRowSpaceBelow = parseFloat(
+        window
           .getComputedStyle(breadcrumbRowEl)
-          .getPropertyValue('margin-bottom');
-      }
-    }
-    setComponentCssCustomProps((previous) => ({
-      ...previous,
-      [`--${blockClass}--breadcrumb-title-scroll`]: breadcrumbTitleHeight,
-      [`--${blockClass}--breadcrumb-title-scroll-px`]: `${breadcrumbTitleHeight}px`,
-      [`--${blockClass}--breadcrumb-title-start`]: parseFloat(
-        breadcrumbRowMarginPx,
+          .getPropertyValue('margin-bottom'),
         10
-      ),
-      [`--${blockClass}--breadcrumb-title-start-px`]: breadcrumbRowMarginPx,
-      [`--${blockClass}--height-px`]: `${headerHeight}px`,
-      [`--${blockClass}--navigation-height-px`]: `${navigationRowHeight}px`,
-    }));
+      );
+      update.breadcrumbRowSpaceAbove = parseFloat(
+        window
+          .getComputedStyle(breadcrumbRowEl)
+          .getPropertyValue('padding-top'),
+        10
+      );
+    } else {
+      update.breadcrumbRowSpaceAbove = 0;
+      update.breadcrumbRowSpaceBelow = 0;
+    }
+
+    if (window && titleRowEl) {
+      const rect = titleRowEl.getBoundingClientRect();
+
+      setTitleHasMarginBelow(rect.y > 0);
+    }
+
+    setMetrics((previous) => ({ ...previous, ...update }));
   };
 
-  useWindowScroll(
-    ({ previous, current }) => {
-      if (previous.scrollY !== current.scrollY) {
-        checkHeights();
+  useEffect(() => {
+    // Determine the location of the pageAction buttons
+    setPageActionsInBreadcrumbRow(
+      scrollYValue > metrics.breadcrumbRowSpaceBelow &&
+        actionBarItems !== undefined
+    );
+  }, [actionBarItems, metrics.breadcrumbRowSpaceBelow, scrollYValue]);
 
-        setComponentCssCustomProps((previous) => ({
-          ...previous,
-          [`--${blockClass}--breadcrumb-title-visibility`]:
-            current.scrollY > 0 ? 'visible' : 'hidden',
-          [`--${blockClass}--scroll`]: `${current.scrollY}`,
-          [`--${blockClass}--scroll-px`]: `${current.scrollY}px`,
-          [`--${blockClass}--breadcrumb-title-top`]: `max(0px, calc(var(--${blockClass}--breadcrumb-title-scroll-px) + var(--${blockClass}--breadcrumb-title-start-px) - var(--${blockClass}--scroll-px)))`,
-          [`--${blockClass}--breadcrumb-title-opacity`]: `calc(max(0, (var(--${blockClass}--scroll) - var(--${blockClass}--breadcrumb-title-start))) / var(--${blockClass}--breadcrumb-title-scroll))`,
-        }));
-      }
+  useEffect(() => {
+    // Updates custom CSS props used to manage scroll behaviour
+    setComponentCssCustomProps((prevCSSProps) => ({
+      ...prevCSSProps,
+      [`--${blockClass}--height-px`]: `${metrics.headerHeight}px`,
+      [`--${blockClass}--header-top`]: `${
+        navigation || tags
+          ? metrics.navigationRowHeight - metrics.headerHeight
+          : metrics.breadcrumbRowHeight - metrics.headerHeight
+      }px`,
+      [`--${blockClass}--breadcrumb-title-visibility`]:
+        scrollYValue > 0 ? 'visible' : 'hidden',
+      [`--${blockClass}--scroll`]: `${scrollYValue}`,
+      [`--${blockClass}--breadcrumb-title-top`]: `${Math.max(
+        0,
+        metrics.breadcrumbTitleHeight +
+          metrics.breadcrumbRowSpaceBelow -
+          scrollYValue
+      )}px`,
+      [`--${blockClass}--breadcrumb-title-opacity`]: `${Math.max(
+        0,
+        (scrollYValue - metrics.breadcrumbRowSpaceBelow) /
+          metrics.breadcrumbTitleHeight
+      )}`,
+      [`--${blockClass}--breadcrumb-top`]: `${Math.min(
+        0,
+        navigation || tags
+          ? metrics.headerHeight -
+              metrics.breadcrumbRowSpaceBelow -
+              metrics.navigationRowHeight -
+              metrics.breadcrumbRowHeight -
+              scrollYValue
+          : 0
+      )}px`,
+    }));
+  }, [
+    metrics.breadcrumbRowHeight,
+    metrics.breadcrumbRowSpaceBelow,
+    metrics.breadcrumbTitleHeight,
+    metrics.headerHeight,
+    metrics.navigationRowHeight,
+    navigation,
+    scrollYValue,
+    tags,
+  ]);
+
+  useWindowScroll(
+    // on scroll or various layout changes check updates if needed
+    ({ current }) => {
+      checkUpdateVerticalSpace();
+      setScrollYValue(current.scrollY);
     },
     [
       actionBarItems,
       availableSpace,
       breadcrumbItems,
       navigation,
+      pageActions,
       subtitle,
       tags,
       title,
     ]
   );
 
-  // useWindowResize(({ previous, current }) => {
-  //   if (previous.innerHeight !== current.innerHeight) {
-  //     console.dir(JSON.stringify({ on: 'resize', previous, current }));
-  //   }
-  // });
+  useWindowResize(() => {
+    // on window resieze and other updates some values may have changed
+    checkUpdateVerticalSpace();
+  }, [
+    actionBarItems,
+    availableSpace,
+    breadcrumbItems,
+    navigation,
+    pageActions,
+    subtitle,
+    tags,
+    title,
+  ]);
 
   useEffect(() => {
+    // Breadcrumb row only rendered if true
     // eslint-disable-next-line
     setHasBreadcrumbRow(
       !(breadcrumbItems === undefined && actionBarItems === undefined)
@@ -148,9 +214,12 @@ export const PageHeader = ({
   }, [actionBarItems, breadcrumbItems]);
 
   useEffect(() => {
+    // Determines the amount of space needed below the title
     let belowTitleSpace = '07';
 
-    if (
+    if (titleHasNoMargin) {
+      belowTitleSpace = '0';
+    } else if (
       pageActions !== undefined &&
       navigation !== undefined &&
       subtitle === undefined &&
@@ -163,14 +232,45 @@ export const PageHeader = ({
       belowTitleSpace = '05';
     }
     setSpacingBelowTitle(belowTitleSpace);
-  }, [availableSpace, tags, navigation, subtitle, pageActions]);
+  }, [
+    availableSpace,
+    titleHasNoMargin,
+    tags,
+    navigation,
+    subtitle,
+    pageActions,
+  ]);
+
+  useEffect(() => {
+    // Determines if the background should be one based on the header height or scroll
+    const headerHeight = headerEl.current ? headerEl.current.clientHeight : 0;
+    let result = background === true;
+
+    if (!result && (breadcrumbItems || actionBarItems || tags || navigation)) {
+      result =
+        headerHeight - scrollYValue <
+        parseFloat(layout05, 10) * parseInt(baseFontSize);
+    }
+    // if (!result) {
+    // This exists in the design if > title, breadcrumb and status turn on background left off as has responsive issues
+    //   result = headerHeight > layout07;
+    // }
+    setBackgroundOn(result);
+  }, [
+    background,
+    scrollYValue,
+    actionBarItems,
+    breadcrumbItems,
+    navigation,
+    tags,
+  ]);
 
   return (
     <section
       className={cx([
         blockClass,
         className,
-        { [`${blockClass}--background`]: background },
+        { [`${blockClass}--background`]: backgroundOn },
       ])}
       ref={headerEl}
       style={componentCssCustomProps}>
@@ -191,7 +291,7 @@ export const PageHeader = ({
               {breadcrumbItems !== undefined ? (
                 <Breadcrumb
                   className={`${blockClass}--breadcrumb`}
-                  noTrailingSlash={titleInBreadcrumbs && !!title}>
+                  noTrailingSlash={title !== undefined}>
                   {breadcrumbItems}
                   {title ? (
                     <BreadcrumbItem
@@ -214,9 +314,17 @@ export const PageHeader = ({
                   actionBarItems !== undefined,
               })}>
               {actionBarItems !== undefined ? (
-                <ActionBar className={`${blockClass}--action-bar`}>
-                  {actionBarItems}
-                </ActionBar>
+                <>
+                  <div
+                    className={cx(`${blockClass}--page-actions`, {
+                      [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
+                    })}>
+                    {pageActions}
+                  </div>
+                  <ActionBar className={`${blockClass}--action-bar`}>
+                    {actionBarItems}
+                  </ActionBar>
+                </>
               ) : null}
             </Column>
           </Row>
@@ -253,7 +361,10 @@ export const PageHeader = ({
             </Column>
 
             {pageActions !== undefined ? (
-              <Column className={`${blockClass}--page-actions`}>
+              <Column
+                className={cx(`${blockClass}--page-actions`, {
+                  [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
+                })}>
                 {pageActions}
               </Column>
             ) : null}

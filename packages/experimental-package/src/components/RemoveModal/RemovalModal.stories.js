@@ -26,7 +26,6 @@ const Template = (args) => {
       className="remove-modal-test"
       header="Confirm delete"
       iconDescription="close"
-      id="remove-confirmation"
       inputInvalidText="A valid value is required"
       inputLabelText={`Type ${resource} to confirm`}
       inputPlaceholderText="Name of resource"

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Modal, TextInput } from 'carbon-components-react';
 import PropTypes from 'prop-types';
 import { expPrefix } from '../../global/js/settings';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 export const RemovalModal = ({
   body,
@@ -22,6 +23,7 @@ export const RemovalModal = ({
   textConfirmation,
 }) => {
   const [userInput, setUserInput] = useState('');
+  const idRef = useRef(id || uuidv4());
   const onChangeHandler = (e) => {
     setUserInput(e.target.value);
   };
@@ -42,7 +44,7 @@ export const RemovalModal = ({
       <p className={`${expPrefix}-removal-modal-body`}>{body}</p>
       {textConfirmation && (
         <TextInput
-          id={id}
+          id={idRef.current}
           invalidText={inputInvalidText}
           labelText={inputLabelText}
           placeholder={inputPlaceholderText}
@@ -58,7 +60,7 @@ RemovalModal.propTypes = {
   className: PropTypes.string,
   header: PropTypes.string.isRequired,
   iconDescription: PropTypes.string,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   inputInvalidText: PropTypes.string,
   inputLabelText: PropTypes.string,
   inputPlaceholderText: PropTypes.string,
@@ -75,6 +77,7 @@ RemovalModal.propTypes = {
 RemovalModal.defaultProps = {
   className: '',
   iconDescription: '',
+  id: '',
   inputInvalidText: '',
   inputLabelText: '',
   inputPlaceholderText: '',

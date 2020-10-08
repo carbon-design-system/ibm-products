@@ -32,12 +32,13 @@ export default {
   },
 };
 
-const Template = ({ content, ...args }) => {
-  return <PageActionItem {...args}>{content}</PageActionItem>;
+const Template = (argsIn) => {
+  const { children, ...args } = { ...argsIn };
+  return <PageActionItem {...args}>{children}</PageActionItem>;
 };
 
 export const Minimal = Template.bind({});
 Minimal.args = {
-  content: 'Button label',
+  children: 'Button label',
   renderIcon: Bee24,
 };

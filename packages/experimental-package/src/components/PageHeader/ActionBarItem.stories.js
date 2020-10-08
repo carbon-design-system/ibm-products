@@ -18,7 +18,7 @@ export default {
   parameters: { styles },
 };
 
-const Template = ({ label, ...args }) => {
+const Template = ({ ...args }) => {
   return <ActionBarItem {...args} />;
 };
 

@@ -121,6 +121,10 @@ $raised-z-index: 99;
   margin-bottom: $spacing-06;
 }
 
+.#{$block-class}--title-row--spacing-below-0 {
+  margin-bottom: 0;
+}
+
 .#{$block-class}--title-row--no-breadcrumb-row {
   margin-top: $spacing-07;
 }

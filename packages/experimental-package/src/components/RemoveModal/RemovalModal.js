@@ -9,7 +9,6 @@ export const RemovalModal = ({
   className,
   header,
   iconDescription,
-  id,
   inputInvalidText,
   inputLabelText,
   inputPlaceholderText,
@@ -21,9 +20,10 @@ export const RemovalModal = ({
   secondaryButtonText,
   subheader,
   textConfirmation,
+  ...other
 }) => {
   const [userInput, setUserInput] = useState('');
-  const idRef = useRef(id || uuidv4());
+  const idRef = useRef(uuidv4());
   const onChangeHandler = (e) => {
     setUserInput(e.target.value);
   };
@@ -40,11 +40,12 @@ export const RemovalModal = ({
       primaryButtonDisabled={primaryButtonDisabled}
       secondaryButtonText={secondaryButtonText}
       onRequestSubmit={onRequestSubmit}
-      onRequestClose={onRequestClose}>
+      onRequestClose={onRequestClose}
+      {...other}>
       <p className={`${expPrefix}-removal-modal-body`}>{body}</p>
       {textConfirmation && (
         <TextInput
-          id={idRef.current}
+          id={`${idRef.current}-confirmation-input`}
           invalidText={inputInvalidText}
           labelText={inputLabelText}
           placeholder={inputPlaceholderText}

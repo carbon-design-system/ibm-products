@@ -32,7 +32,7 @@ $raised-z-index: 99;
 
 .#{$block-class}--background {
   background-color: $ui-01;
-  border-bottom: 1px solid $ui-03;
+  box-shadow: 0 1px 0 $ui-03;
 }
 
 .#{$block-class}--breadcrumb-row {
@@ -42,11 +42,19 @@ $raised-z-index: 99;
   z-index: $raised-z-index;
   min-height: var(--#{$block-class}--breadcrumb-min-height);
   margin-bottom: $spacing-02;
+
+  .#{$block-class}--no-margins-below-row & {
+    margin-bottom: 0;
+  }
 }
 
 .#{$block-class}--breadcrumb-row--with-actions {
   margin-bottom: $spacing-06;
-  border-bottom: 1px solid $ui-03;
+  box-shadow: 0 1px 0 $ui-03;
+
+  .#{$block-class}--no-margins-below-row & {
+    margin-bottom: 0;
+  }
 }
 
 .#{$block-class}--action-bar-column {
@@ -107,31 +115,31 @@ $raised-z-index: 99;
 .#{$block-class}--title-row {
   margin-top: $spacing-06;
   margin-bottom: $spacing-07;
-}
 
-.#{$block-class}--title-row--spacing-below-03 {
-  margin-bottom: $spacing-03;
-}
+  &.#{$block-class}--title-row--spacing-below-03 {
+    margin-bottom: $spacing-03;
+  }
 
-.#{$block-class}--title-row--spacing-below-05 {
-  margin-bottom: $spacing-05;
-}
+  &.#{$block-class}--title-row--spacing-below-05 {
+    margin-bottom: $spacing-05;
+  }
 
-.#{$block-class}--title-row--spacing-below-06 {
-  margin-bottom: $spacing-06;
-}
+  &.#{$block-class}--title-row--spacing-below-06 {
+    margin-bottom: $spacing-06;
+  }
 
-.#{$block-class}--title-row--spacing-below-0 {
-  margin-bottom: 0;
-}
+  &.#{$block-class}--title-row--no-breadcrumb-row {
+    margin-top: $spacing-07;
+  }
 
-.#{$block-class}--title-row--no-breadcrumb-row {
-  margin-top: $spacing-07;
-}
+  &.#{$block-class}--title-row--sticky {
+    position: sticky;
+    top: 0;
+  }
 
-.#{$block-class}--title-row--sticky {
-  position: sticky;
-  top: 0;
+  .#{$block-class}--no-margins-below-row & {
+    margin-bottom: 0;
+  }
 }
 
 .#{$block-class}--title {
@@ -166,6 +174,10 @@ $raised-z-index: 99;
 .#{$block-class}--subtitle-row {
   margin-top: $spacing-03;
   margin-bottom: $spacing-05;
+
+  .#{$block-class}--no-margins-below-row & {
+    margin-bottom: 0;
+  }
 }
 
 .#{$block-class}--subtitle {
@@ -175,6 +187,10 @@ $raised-z-index: 99;
 .#{$block-class}--additional-row {
   margin-top: $spacing-03;
   margin-bottom: $spacing-07;
+
+  .#{$block-class}--no-margins-below-row & {
+    margin-bottom: 0;
+  }
 }
 
 .#{$block-class}--navigation-row {
@@ -191,12 +207,19 @@ $raised-z-index: 99;
 }
 
 .#{$block-class}--navigation-tags {
-  margin-bottom: $spacing-03;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: $spacing-02; /* design says 3 from bottom of tag, which has $spacing-02 already. 2 * $spacing-02 = $spacing-3 */
   white-space: nowrap;
   text-align: right;
 }
 
 .#{$block-class}--navigation-tags--tags-only {
-  margin-bottom: $spacing-05;
-  text-align: initial;
+  justify-content: flex-start;
+  // stylelint-disable-next-line carbon/layout-token-use
+  padding-bottom: calc(
+    #{$spacing-04} + #{$spacing-02}
+  ); /* edge case for carbon token linter allowing non-token values */
+  /* design says 5 from bottom of tag, which has margin $spacing-02  */
 }

@@ -52,10 +52,12 @@ export const PageHeader = ({
   const [pageActionsInBreadcrumbRow, setPageActionsInBreadcrumbRow] = useState(
     false
   );
+  const [rowCount, setRowCount] = useState(1);
+  const [noMarginsBelowRow, setNoMarginsBelowRow] = useState(false);
+
   const [backgroundOn, setBackgroundOn] = useState(false);
   const dynamicRefs = useRef({});
   const headerEl = useRef(null);
-  const [titleHasNoMargin, setTitleHasMarginBelow] = useState(true);
 
   const getDynamicRef = (selector) => {
     // would love to do this differently but digging in the dom seems easier
@@ -78,16 +80,25 @@ export const PageHeader = ({
 
     const breadcrumbTitleEl = getDynamicRef(`.${blockClass}--breadcrumb-title`);
     const breadcrumbRowEl = getDynamicRef(`.${blockClass}--breadcrumb-row`);
-    const navigationRowEl = getDynamicRef(`.${blockClass}--navigation-row`);
     const titleRowEl = getDynamicRef(`.${blockClass}--title-row`);
+    const subtitleRowEl = getDynamicRef(`.${blockClass}--sutbitle-row`);
+    const availableRowEl = getDynamicRef(`.${blockClass}--available-row`);
+    const navigationRowEl = getDynamicRef(`.${blockClass}--navigation-row`);
 
-    update.breadcrumbTitleHeight = breadcrumbTitleEl
-      ? breadcrumbTitleEl.clientHeight
-      : 0;
+    update.headerHeight = headerEl.current ? headerEl.current.clientHeight : 0;
+
     update.breadcrumbRowHeight = breadcrumbRowEl
       ? breadcrumbRowEl.clientHeight
       : 0;
-    update.headerHeight = headerEl.current ? headerEl.current.clientHeight : 1;
+    update.breadcrumbTitleHeight = breadcrumbTitleEl
+      ? breadcrumbTitleEl.clientHeight
+      : 0;
+
+    update.titleRowHeight = titleRowEl ? titleRowEl.clientHeight : 0;
+    update.subtitleRowHeight = subtitleRowEl ? subtitleRowEl.clientHeight : 0;
+    update.availableRowHeight = availableRowEl
+      ? availableRowEl.clientHeight
+      : 0;
     update.navigationRowHeight = navigationRowEl
       ? navigationRowEl.clientHeight
       : 1;
@@ -99,25 +110,52 @@ export const PageHeader = ({
           .getPropertyValue('margin-bottom'),
         10
       );
-      update.breadcrumbRowSpaceAbove = parseFloat(
-        window
-          .getComputedStyle(breadcrumbRowEl)
-          .getPropertyValue('padding-top'),
-        10
-      );
     } else {
-      update.breadcrumbRowSpaceAbove = 0;
       update.breadcrumbRowSpaceBelow = 0;
-    }
-
-    if (window && titleRowEl) {
-      const rect = titleRowEl.getBoundingClientRect();
-
-      setTitleHasMarginBelow(rect.y > 0);
     }
 
     setMetrics((previous) => ({ ...previous, ...update }));
   };
+
+  useEffect(() => {
+    setNoMarginsBelowRow(
+      rowCount < 2 ||
+        metrics.breadcrumbRowHeight +
+          metrics.titleRowHeight +
+          metrics.subtitleRowHeight +
+          metrics.availableRowHeight +
+          metrics.navigationRowHeight <
+          metrics.headerHeight
+    );
+  }, [
+    metrics.availableRowHeight,
+    metrics.breadcrumbRowHeight,
+    metrics.headerHeight,
+    metrics.navigationRowHeight,
+    metrics.subtitleRowHeight,
+    metrics.titleRowHeight,
+    rowCount,
+  ]);
+
+  useEffect(() => {
+    // count rows as we need no margins below if there is only one row
+    let count = 0;
+    count += breadcrumbItems || actionBarItems ? 1 : 0;
+    count += title || pageActions ? 1 : 0;
+    count += subtitle ? 1 : 0;
+    count += availableSpace ? 1 : 0;
+    count += navigation || tags ? 1 : 0;
+    setRowCount(count);
+  }, [
+    actionBarItems,
+    availableSpace,
+    breadcrumbItems,
+    navigation,
+    pageActions,
+    subtitle,
+    tags,
+    title,
+  ]);
 
   useEffect(() => {
     // Determine the location of the pageAction buttons
@@ -153,7 +191,7 @@ export const PageHeader = ({
       )}`,
       [`--${blockClass}--breadcrumb-top`]: `${Math.min(
         0,
-        navigation || tags
+        navigation
           ? metrics.headerHeight -
               metrics.breadcrumbRowSpaceBelow -
               metrics.navigationRowHeight -
@@ -217,9 +255,7 @@ export const PageHeader = ({
     // Determines the amount of space needed below the title
     let belowTitleSpace = '07';
 
-    if (titleHasNoMargin) {
-      belowTitleSpace = '0';
-    } else if (
+    if (
       pageActions !== undefined &&
       navigation !== undefined &&
       subtitle === undefined &&
@@ -232,23 +268,19 @@ export const PageHeader = ({
       belowTitleSpace = '05';
     }
     setSpacingBelowTitle(belowTitleSpace);
-  }, [
-    availableSpace,
-    titleHasNoMargin,
-    tags,
-    navigation,
-    subtitle,
-    pageActions,
-  ]);
+  }, [availableSpace, tags, navigation, subtitle, pageActions]);
 
   useEffect(() => {
     // Determines if the background should be one based on the header height or scroll
-    const headerHeight = headerEl.current ? headerEl.current.clientHeight : 0;
     let result = background === true;
 
-    if (!result && (breadcrumbItems || actionBarItems || tags || navigation)) {
+    if (
+      !result &&
+      metrics.headerHeight > 0 &&
+      (breadcrumbItems || actionBarItems || tags || navigation)
+    ) {
       result =
-        headerHeight - scrollYValue <
+        metrics.headerHeight - scrollYValue <
         parseFloat(layout05, 10) * parseInt(baseFontSize);
     }
     // if (!result) {
@@ -257,11 +289,12 @@ export const PageHeader = ({
     // }
     setBackgroundOn(result);
   }, [
-    background,
-    scrollYValue,
     actionBarItems,
+    background,
     breadcrumbItems,
+    metrics.headerHeight,
     navigation,
+    scrollYValue,
     tags,
   ]);
 
@@ -270,7 +303,10 @@ export const PageHeader = ({
       className={cx([
         blockClass,
         className,
-        { [`${blockClass}--background`]: backgroundOn },
+        {
+          [`${blockClass}--background`]: backgroundOn,
+          [`${blockClass}--no-margins-below-row`]: noMarginsBelowRow,
+        },
       ])}
       ref={headerEl}
       style={componentCssCustomProps}>
@@ -385,31 +421,33 @@ export const PageHeader = ({
           </Row>
         ) : null}
 
-        <Row
-          className={cx(`${blockClass}--navigation-row`, {
-            [`${blockClass}--navigation-row--spacing-above-06`]:
-              navigation !== undefined,
-          })}>
-          {navigation !== undefined ? (
-            <Column
-              className={`${blockClass}--navigation-tabs`}
-              // {...halfOrFull(tags !== undefined)}
-            >
-              {navigation}
-            </Column>
-          ) : null}
-          {tags !== undefined ? (
-            <Column
-              className={cx(`${blockClass}--navigation-tags`, {
-                [`${blockClass}--navigation-tags--tags-only`]:
-                  navigation === undefined,
-              })}
-              // {...halfColumns}
-            >
-              {tags}
-            </Column>
-          ) : null}
-        </Row>
+        {navigation || tags ? (
+          <Row
+            className={cx(`${blockClass}--navigation-row`, {
+              [`${blockClass}--navigation-row--spacing-above-06`]:
+                navigation !== undefined,
+            })}>
+            {navigation !== undefined ? (
+              <Column
+                className={`${blockClass}--navigation-tabs`}
+                // {...halfOrFull(tags !== undefined)}
+              >
+                {navigation}
+              </Column>
+            ) : null}
+            {tags !== undefined ? (
+              <Column
+                className={cx(`${blockClass}--navigation-tags`, {
+                  [`${blockClass}--navigation-tags--tags-only`]:
+                    navigation === undefined,
+                })}
+                // {...halfColumns}
+              >
+                {tags}
+              </Column>
+            ) : null}
+          </Row>
+        ) : null}
       </Grid>
     </section>
   );

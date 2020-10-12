@@ -11,6 +11,7 @@
     "nohoist": []
   },
   "scripts": {
+    "audit": "node scripts/audit.js moderate",
     "build": "lerna run build --stream --prefix --npm-client yarn",
     "build:storybook": "cd packages/core && yarn build:storybook",
     "ci-check": "yarn format:diff && yarn lint && yarn test --ci",
@@ -20,7 +21,7 @@
     "lint": "yarn lint:es && yarn lint:style",
     "lint:es": "eslint 'packages/*/src/**/*.js'",
     "lint:style": "stylelint 'packages/*/src/**/*.scss' --report-needless-disables --report-invalid-scope-disables",
-    "test": "jest",
+    "test": "yarn run audit && jest",
     "storybook": "cd packages/core && yarn start",
     "sync": "carbon-cli sync"
   },

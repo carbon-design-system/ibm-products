@@ -21,7 +21,7 @@
     "lint": "yarn lint:es && yarn lint:style",
     "lint:es": "eslint 'packages/*/src/**/*.js'",
     "lint:style": "stylelint 'packages/*/src/**/*.scss' --report-needless-disables --report-invalid-scope-disables",
-    "test": "yarn run audit && jest",
+    "test": "jest",
     "storybook": "cd packages/core && yarn start",
     "sync": "carbon-cli sync"
   },

@@ -6,7 +6,8 @@
  */
 
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { expPrefix } from '../../global/js/settings';
 
@@ -76,58 +77,56 @@ const title = 'Page title';
 
 describe('PageHeader', () => {
   test('renders an empty header when no props are set', () => {
-    const { container, queryByText } = render(<PageHeader />);
-    expect(container.firstChild.nodeName.toLowerCase()).toEqual('section');
+    render(<PageHeader />);
+
+    const header = document.querySelector(`section.${expPrefix}-page-header`);
+
+    expect(header).not.toBeNull();
     expect(
-      container.firstChild.classList.contains(`${expPrefix}-page-header`)
-    ).toBe(true);
-    expect(
-      container.firstChild.classList.contains(
+      header.classList.contains(
         `${expPrefix}-page-header--background`
       )
     ).toBe(false);
-    expect(container.firstChild.classList.contains(classNames[0])).toBe(false);
-    expect(container.firstChild.classList.contains(classNames[1])).toBe(false);
+    expect(header.classList.contains(classNames[0])).toBe(false);
+    expect(header.classList.contains(classNames[1])).toBe(false);
     expect(
-      container.querySelectorAll(`.${expPrefix}-page-header--action-bar`)
+      document.querySelectorAll(`.${expPrefix}-page-header--action-bar`)
     ).toHaveLength(0);
     expect(
-      container.querySelectorAll(
+      document.querySelectorAll(
         `[label="Action 1"].${expPrefix}-action-bar-item`
       )
     ).toHaveLength(0);
     expect(
-      container.querySelectorAll('span.page-header-test--available-space')
+      document.querySelectorAll('span.page-header-test--available-space')
     ).toHaveLength(0);
     expect(
-      container.querySelectorAll(`.${carbonPrefix}--breadcrumb`)
+      document.querySelectorAll(`.${carbonPrefix}--breadcrumb`)
     ).toHaveLength(0);
-    expect(container.querySelectorAll(`.${carbonPrefix}--tabs`)).toHaveLength(
+    expect(document.querySelectorAll(`.${carbonPrefix}--tabs`)).toHaveLength(
       0
     );
     expect(
-      container.querySelectorAll(`.${expPrefix}-page-header--page-actions`)
+      document.querySelectorAll(`.${expPrefix}-page-header--page-actions`)
     ).toHaveLength(0);
     expect(
-      container.querySelectorAll(`.${expPrefix}-page-header--subtitle`)
+      document.querySelectorAll(`.${expPrefix}-page-header--subtitle`)
     ).toHaveLength(0);
-    expect(queryByText(subtitle)).toBeNull();
-    expect(container.querySelectorAll(`.${carbonPrefix}--tags`)).toHaveLength(
+    expect(screen.queryByText(subtitle)).toBeNull();
+    expect(document.querySelectorAll(`.${carbonPrefix}--tags`)).toHaveLength(
       0
     );
     expect(
-      container.querySelectorAll(`.${expPrefix}-page-header--title`)
+      document.querySelectorAll(`.${expPrefix}-page-header--title`)
     ).toHaveLength(0);
-    expect(queryByText(title)).toBeNull();
+    expect(screen.queryByText(title)).toBeNull();
     expect(
-      container.querySelectorAll(`.${expPrefix}-page-header--title-icon`)
+      document.querySelectorAll(`.${expPrefix}-page-header--title-icon`)
     ).toHaveLength(0);
   });
 
   test('renders all the appropriate content when all props are set', () => {
-    const { click } = fireEvent;
-
-    const { container, getAllByText, getByText } = render(
+    render(
       <PageHeader
         actionBarItems={actionBarItems}
         availableSpace={availableSpace}
@@ -143,62 +142,61 @@ describe('PageHeader', () => {
       />
     );
 
-    expect(container.firstChild.nodeName.toLowerCase()).toEqual('section');
+    const header = document.querySelector(`section.${expPrefix}-page-header`);
+
+    expect(header).not.toBeNull();
     expect(
-      container.firstChild.classList.contains(`${expPrefix}-page-header`)
-    ).toBe(true);
-    expect(
-      container.firstChild.classList.contains(
+      header.classList.contains(
         `${expPrefix}-page-header--background`
       )
     ).toBe(true);
-    expect(container.firstChild.classList.contains(classNames[0])).toBe(true);
-    expect(container.firstChild.classList.contains(classNames[1])).toBe(true);
+    expect(header.classList.contains(classNames[0])).toBe(true);
+    expect(header.classList.contains(classNames[1])).toBe(true);
     expect(
-      container.querySelectorAll(`.${expPrefix}-page-header--action-bar`)
+      document.querySelectorAll(`.${expPrefix}-page-header--action-bar`)
     ).toHaveLength(1);
     expect(
-      container.querySelectorAll(
+      document.querySelectorAll(
         `[label="Action 1"].${expPrefix}-action-bar-item`
       )
     ).toHaveLength(1);
-    click(
-      container.querySelector(`[label="Action 1"].${expPrefix}-action-bar-item`)
+    userEvent.click(
+      document.querySelector(`[label="Action 1"].${expPrefix}-action-bar-item`)
     );
     expect(actionBarItemOnClick).toHaveBeenCalledTimes(1);
     expect(
-      container.querySelectorAll('span.page-header-test--available-space')
+      document.querySelectorAll('span.page-header-test--available-space')
     ).toHaveLength(1);
     expect(
-      container.querySelectorAll(`.${carbonPrefix}--breadcrumb`)
+      document.querySelectorAll(`.${carbonPrefix}--breadcrumb`)
     ).toHaveLength(1);
-    expect(getAllByText(/Breadcrumb [1-3]/)).toHaveLength(3);
-    expect(container.querySelectorAll(`.${carbonPrefix}--tabs`)).toHaveLength(
+    expect(screen.getAllByText(/Breadcrumb [1-3]/)).toHaveLength(3);
+    expect(document.querySelectorAll(`.${carbonPrefix}--tabs`)).toHaveLength(
       1
     );
-    expect(getAllByText(/Tab [1-4]/)).toHaveLength(4);
+    expect(screen.getAllByText(/Tab [1-4]/)).toHaveLength(4);
     expect(
-      container.querySelectorAll(`.${expPrefix}-page-header--page-actions`)
+      document.querySelectorAll(`.${expPrefix}-page-header--page-actions`)
     ).toHaveLength(2);
-    expect(getAllByText('Primary button')).toHaveLength(2);
-    click(getAllByText('Primary button')[0]);
+    expect(screen.getAllByText('Primary button')).toHaveLength(2);
+    userEvent.click(screen.getAllByText('Primary button')[0]);
     expect(pageActionItemOnClick).toHaveBeenCalledTimes(1);
     expect(
-      container.querySelectorAll(`.${expPrefix}-page-header--subtitle`)
+      document.querySelectorAll(`.${expPrefix}-page-header--subtitle`)
     ).toHaveLength(1);
-    expect(getByText(subtitle).textContent).toEqual(subtitle);
-    expect(container.querySelectorAll(`.${carbonPrefix}--tabs`)).toHaveLength(
+    expect(screen.getByText(subtitle).textContent).toEqual(subtitle);
+    expect(document.querySelectorAll(`.${carbonPrefix}--tabs`)).toHaveLength(
       1
     );
-    expect(getAllByText('A tag')).toHaveLength(4);
+    expect(screen.getAllByText('A tag')).toHaveLength(4);
     expect(
-      container.querySelectorAll(`.${expPrefix}-page-header--title`)
+      document.querySelectorAll(`.${expPrefix}-page-header--title`)
     ).toHaveLength(1);
     expect(
-      container.querySelector(`.${expPrefix}-page-header--title`).textContent
+      document.querySelector(`.${expPrefix}-page-header--title`).textContent
     ).toEqual(title);
     expect(
-      container.querySelectorAll(`.${expPrefix}-page-header--title-icon`)
+      document.querySelectorAll(`.${expPrefix}-page-header--title-icon`)
     ).toHaveLength(1);
   });
 });

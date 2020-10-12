@@ -16,7 +16,7 @@ const level = argv[0];
 let auditLevel;
 
 async function audit() {
-  auditLevel = level ? ' --audit-level=' + level : '';
+  auditLevel = level ? ' --level=' + level : '';
   await exec('yarn audit --production' + auditLevel);
 }
 
@@ -37,6 +37,7 @@ audit().catch((err) => {
       'audit stage failed due to an invalid error body! Error was: \n',
       e
     );
-    process.exit(1);
   }
+
+  process.exit(1);
 });

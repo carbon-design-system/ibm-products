@@ -83,9 +83,7 @@ describe('PageHeader', () => {
 
     expect(header).not.toBeNull();
     expect(
-      header.classList.contains(
-        `${expPrefix}-page-header--background`
-      )
+      header.classList.contains(`${expPrefix}-page-header--background`)
     ).toBe(false);
     expect(header.classList.contains(classNames[0])).toBe(false);
     expect(header.classList.contains(classNames[1])).toBe(false);
@@ -103,9 +101,7 @@ describe('PageHeader', () => {
     expect(
       document.querySelectorAll(`.${carbonPrefix}--breadcrumb`)
     ).toHaveLength(0);
-    expect(document.querySelectorAll(`.${carbonPrefix}--tabs`)).toHaveLength(
-      0
-    );
+    expect(document.querySelectorAll(`.${carbonPrefix}--tabs`)).toHaveLength(0);
     expect(
       document.querySelectorAll(`.${expPrefix}-page-header--page-actions`)
     ).toHaveLength(0);
@@ -113,9 +109,7 @@ describe('PageHeader', () => {
       document.querySelectorAll(`.${expPrefix}-page-header--subtitle`)
     ).toHaveLength(0);
     expect(screen.queryByText(subtitle)).toBeNull();
-    expect(document.querySelectorAll(`.${carbonPrefix}--tags`)).toHaveLength(
-      0
-    );
+    expect(document.querySelectorAll(`.${carbonPrefix}--tags`)).toHaveLength(0);
     expect(
       document.querySelectorAll(`.${expPrefix}-page-header--title`)
     ).toHaveLength(0);
@@ -146,9 +140,7 @@ describe('PageHeader', () => {
 
     expect(header).not.toBeNull();
     expect(
-      header.classList.contains(
-        `${expPrefix}-page-header--background`
-      )
+      header.classList.contains(`${expPrefix}-page-header--background`)
     ).toBe(true);
     expect(header.classList.contains(classNames[0])).toBe(true);
     expect(header.classList.contains(classNames[1])).toBe(true);
@@ -171,9 +163,7 @@ describe('PageHeader', () => {
       document.querySelectorAll(`.${carbonPrefix}--breadcrumb`)
     ).toHaveLength(1);
     expect(screen.getAllByText(/Breadcrumb [1-3]/)).toHaveLength(3);
-    expect(document.querySelectorAll(`.${carbonPrefix}--tabs`)).toHaveLength(
-      1
-    );
+    expect(document.querySelectorAll(`.${carbonPrefix}--tabs`)).toHaveLength(1);
     expect(screen.getAllByText(/Tab [1-4]/)).toHaveLength(4);
     expect(
       document.querySelectorAll(`.${expPrefix}-page-header--page-actions`)
@@ -185,9 +175,7 @@ describe('PageHeader', () => {
       document.querySelectorAll(`.${expPrefix}-page-header--subtitle`)
     ).toHaveLength(1);
     expect(screen.getByText(subtitle).textContent).toEqual(subtitle);
-    expect(document.querySelectorAll(`.${carbonPrefix}--tabs`)).toHaveLength(
-      1
-    );
+    expect(document.querySelectorAll(`.${carbonPrefix}--tabs`)).toHaveLength(1);
     expect(screen.getAllByText('A tag')).toHaveLength(4);
     expect(
       document.querySelectorAll(`.${expPrefix}-page-header--title`)

@@ -1,6 +1,18 @@
+/**
+ * Copyright IBM Corp. 2020, 2020
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React from 'react';
-import { mount } from 'enzyme';
+import { fireEvent, render } from '@testing-library/react';
+
 import { expPrefix } from '../../global/js/settings';
+
+import { settings } from 'carbon-components';
+const { prefix: carbonPrefix } = settings;
+
 import {
   BreadcrumbItem,
   Button,
@@ -9,11 +21,20 @@ import {
   Tag,
 } from 'carbon-components-react';
 import { Lightning16, Bee32 } from '@carbon/icons-react';
+
 import { ActionBarItem } from './ActionBarItem';
-import { PageHeader } from './PageHeader';
+import { PageHeader } from '.';
+
+/* Test properties. */
+const actionBarItemOnClick = jest.fn();
+const pageActionItemOnClick = jest.fn();
 const actionBarItems = (
   <>
-    <ActionBarItem icon={Lightning16} label="Action 1" />
+    <ActionBarItem
+      icon={Lightning16}
+      label="Action 1"
+      onClick={actionBarItemOnClick}
+    />
     <ActionBarItem icon={Lightning16} label="Action 2" />
     <ActionBarItem icon={Lightning16} label="Action 3" />
     <ActionBarItem icon={Lightning16} label="Action 4" />
@@ -31,7 +52,7 @@ const classNames = ['client-class-1', 'client-class-2'];
 const pageActions = (
   <>
     <Button kind="secondary">Secondary button</Button>
-    <Button>Primary button</Button>
+    <Button onClick={pageActionItemOnClick}>Primary button</Button>
   </>
 );
 const subtitle = 'Optional subtitle if necessary';
@@ -52,38 +73,61 @@ const tags = (
   </>
 );
 const title = 'Page title';
+
 describe('PageHeader', () => {
-  let wrapper;
-  afterEach(() => {
-    wrapper.unmount();
-  });
-  it('renders an empty header when no props are set', () => {
-    wrapper = mount(<PageHeader />);
-    expect(wrapper.childAt(0).type()).toEqual('section');
-    expect(wrapper.childAt(0).hasClass(`${expPrefix}-page-header`)).toBe(true);
+  test('renders an empty header when no props are set', () => {
+    const { container, queryByText } = render(<PageHeader />);
+    expect(container.firstChild.nodeName.toLowerCase()).toEqual('section');
     expect(
-      wrapper.childAt(0).hasClass(`${expPrefix}-page-header--background`)
+      container.firstChild.classList.contains(`${expPrefix}-page-header`)
+    ).toBe(true);
+    expect(
+      container.firstChild.classList.contains(
+        `${expPrefix}-page-header--background`
+      )
     ).toBe(false);
-    expect(wrapper.childAt(0).hasClass(classNames[0])).toBe(false);
-    expect(wrapper.childAt(0).hasClass(classNames[1])).toBe(false);
-    expect(wrapper.find('ActionBar')).toHaveLength(0);
-    expect(wrapper.find('ActionBarItem')).toHaveLength(0);
-    expect(wrapper.find('span.page-header-test--available-space')).toHaveLength(
+    expect(container.firstChild.classList.contains(classNames[0])).toBe(false);
+    expect(container.firstChild.classList.contains(classNames[1])).toBe(false);
+    expect(
+      container.querySelectorAll(`.${expPrefix}-page-header--action-bar`)
+    ).toHaveLength(0);
+    expect(
+      container.querySelectorAll(
+        `[label="Action 1"].${expPrefix}-action-bar-item`
+      )
+    ).toHaveLength(0);
+    expect(
+      container.querySelectorAll('span.page-header-test--available-space')
+    ).toHaveLength(0);
+    expect(
+      container.querySelectorAll(`.${carbonPrefix}--breadcrumb`)
+    ).toHaveLength(0);
+    expect(container.querySelectorAll(`.${carbonPrefix}--tabs`)).toHaveLength(
       0
     );
-    expect(wrapper.find('Breadcrumb')).toHaveLength(0);
-    expect(wrapper.find('BreadcrumbItem')).toHaveLength(0);
-    expect(wrapper.find('Tabs')).toHaveLength(0);
-    expect(wrapper.find('Tab')).toHaveLength(0);
-    expect(wrapper.find('Tag')).toHaveLength(0);
     expect(
-      wrapper.find(`.${expPrefix}-page-header--page-actions`)
+      container.querySelectorAll(`.${expPrefix}-page-header--page-actions`)
     ).toHaveLength(0);
-    expect(wrapper.find(`.${expPrefix}-page-header--subtitle`)).toHaveLength(0);
-    expect(wrapper.find(`.${expPrefix}-page-header--title`)).toHaveLength(0);
+    expect(
+      container.querySelectorAll(`.${expPrefix}-page-header--subtitle`)
+    ).toHaveLength(0);
+    expect(queryByText(subtitle)).toBeNull();
+    expect(container.querySelectorAll(`.${carbonPrefix}--tags`)).toHaveLength(
+      0
+    );
+    expect(
+      container.querySelectorAll(`.${expPrefix}-page-header--title`)
+    ).toHaveLength(0);
+    expect(queryByText(title)).toBeNull();
+    expect(
+      container.querySelectorAll(`.${expPrefix}-page-header--title-icon`)
+    ).toHaveLength(0);
   });
-  it('renders all the appropriate content when all props are set', () => {
-    wrapper = mount(
+
+  test('renders all the appropriate content when all props are set', () => {
+    const { click } = fireEvent;
+
+    const { container, getAllByText, getByText } = render(
       <PageHeader
         actionBarItems={actionBarItems}
         availableSpace={availableSpace}
@@ -98,34 +142,63 @@ describe('PageHeader', () => {
         titleIcon={Bee32}
       />
     );
-    expect(wrapper.childAt(0).type()).toEqual('section');
-    expect(wrapper.childAt(0).hasClass(`${expPrefix}-page-header`)).toBe(true);
+
+    expect(container.firstChild.nodeName.toLowerCase()).toEqual('section');
     expect(
-      wrapper.childAt(0).hasClass(`${expPrefix}-page-header--background`)
+      container.firstChild.classList.contains(`${expPrefix}-page-header`)
     ).toBe(true);
-    expect(wrapper.childAt(0).hasClass(classNames[0])).toBe(true);
-    expect(wrapper.childAt(0).hasClass(classNames[1])).toBe(true);
-    expect(wrapper.find('ActionBar')).toHaveLength(1);
-    expect(wrapper.find('ActionBarItem')).toHaveLength(4);
-    expect(wrapper.find('span.page-header-test--available-space')).toHaveLength(
+    expect(
+      container.firstChild.classList.contains(
+        `${expPrefix}-page-header--background`
+      )
+    ).toBe(true);
+    expect(container.firstChild.classList.contains(classNames[0])).toBe(true);
+    expect(container.firstChild.classList.contains(classNames[1])).toBe(true);
+    expect(
+      container.querySelectorAll(`.${expPrefix}-page-header--action-bar`)
+    ).toHaveLength(1);
+    expect(
+      container.querySelectorAll(
+        `[label="Action 1"].${expPrefix}-action-bar-item`
+      )
+    ).toHaveLength(1);
+    click(
+      container.querySelector(`[label="Action 1"].${expPrefix}-action-bar-item`)
+    );
+    expect(actionBarItemOnClick).toHaveBeenCalledTimes(1);
+    expect(
+      container.querySelectorAll('span.page-header-test--available-space')
+    ).toHaveLength(1);
+    expect(
+      container.querySelectorAll(`.${carbonPrefix}--breadcrumb`)
+    ).toHaveLength(1);
+    expect(getAllByText(/Breadcrumb [1-3]/)).toHaveLength(3);
+    expect(container.querySelectorAll(`.${carbonPrefix}--tabs`)).toHaveLength(
       1
     );
-    expect(wrapper.find('Breadcrumb')).toHaveLength(1);
-    expect(wrapper.find('BreadcrumbItem')).toHaveLength(4);
-    expect(wrapper.find('Tabs')).toHaveLength(1);
-    expect(wrapper.find('Tab')).toHaveLength(4);
+    expect(getAllByText(/Tab [1-4]/)).toHaveLength(4);
     expect(
-      wrapper.find(`.${expPrefix}-page-header--page-actions`).find('button')
-    ).toHaveLength(4);
+      container.querySelectorAll(`.${expPrefix}-page-header--page-actions`)
+    ).toHaveLength(2);
+    expect(getAllByText('Primary button')).toHaveLength(2);
+    click(getAllByText('Primary button')[0]);
+    expect(pageActionItemOnClick).toHaveBeenCalledTimes(1);
     expect(
-      wrapper.find(`.${expPrefix}-page-header--subtitle`).hostNodes().text()
-    ).toEqual(subtitle);
-    expect(wrapper.find('Tag')).toHaveLength(4);
+      container.querySelectorAll(`.${expPrefix}-page-header--subtitle`)
+    ).toHaveLength(1);
+    expect(getByText(subtitle).textContent).toEqual(subtitle);
+    expect(container.querySelectorAll(`.${carbonPrefix}--tabs`)).toHaveLength(
+      1
+    );
+    expect(getAllByText('A tag')).toHaveLength(4);
     expect(
-      wrapper.find(`.${expPrefix}-page-header--title`).hostNodes().text()
+      container.querySelectorAll(`.${expPrefix}-page-header--title`)
+    ).toHaveLength(1);
+    expect(
+      container.querySelector(`.${expPrefix}-page-header--title`).textContent
     ).toEqual(title);
     expect(
-      wrapper.find(`.${expPrefix}-page-header--title`).find('svg')
+      container.querySelectorAll(`.${expPrefix}-page-header--title-icon`)
     ).toHaveLength(1);
   });
 });

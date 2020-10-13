@@ -11,6 +11,7 @@
     "nohoist": []
   },
   "scripts": {
+    "audit": "node scripts/audit.js dependencies moderate",
     "build": "lerna run build --stream --prefix --npm-client yarn",
     "build:storybook": "cd packages/core && yarn build:storybook",
     "ci-check": "yarn format:diff && yarn lint && yarn test --ci",

@@ -1,11 +1,9 @@
-/**
- * Licensed Materials - Property of IBM
- *
- * 5737-I89
- * © Copyright IBM Corp. 2019, 2020 All Rights Reserved
- * US Government Users Restricted Rights - Use, duplication or
- * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
- **/
+//
+// Copyright IBM Corp. 2020, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
 
 'use strict';
 

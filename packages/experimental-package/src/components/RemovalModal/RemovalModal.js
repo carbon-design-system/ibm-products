@@ -57,21 +57,65 @@ export const RemovalModal = ({
 };
 
 RemovalModal.propTypes = {
+  /**
+   * The conent to be displayed in the body of the modal
+   */
   body: PropTypes.string.isRequired,
+  /**
+   * Optional classname
+   */
   className: PropTypes.string,
+  /**
+   * The text displayed at the top of the modal
+   */
   header: PropTypes.string.isRequired,
+  /**
+   * Provide a description for "close" icon that can be read by screen readers
+   */
   iconDescription: PropTypes.string,
-  id: PropTypes.string,
+  /**
+   * Message showed when user input fails validation
+   */
   inputInvalidText: PropTypes.string,
+  /**
+   * Label for text box
+   */
   inputLabelText: PropTypes.string,
+  /**
+   * Placeholder for text box
+   */
   inputPlaceholderText: PropTypes.string,
+  /**
+   * Callback function that runs when user closes the modal
+   */
   onRequestClose: PropTypes.func,
+  /**
+   * Callback function that runs when user submits the modal
+   */
   onRequestSubmit: PropTypes.func,
+  /**
+   * Specify whether the Modal is currently open
+   */
   open: PropTypes.bool.isRequired,
+  /**
+   * Specify the text for the primary button
+   */
   primaryButtonText: PropTypes.string,
+  /**
+   * The name of the resource being acted upon
+   */
   resource: PropTypes.string.isRequired,
+  /**
+   * Specify the text for the secondary button
+   */
   secondaryButtonText: PropTypes.string,
+  /**
+   * Specify the text for the subheader
+   */
   subheader: PropTypes.string,
+  /**
+   * Specify whether or not to show the text confirmation input
+   */
   textConfirmation: PropTypes.bool,
 };
 
@@ -82,6 +126,8 @@ RemovalModal.defaultProps = {
   inputInvalidText: '',
   inputLabelText: '',
   inputPlaceholderText: '',
+  onRequestClose: () => {},
+  onRequestSubmit: () => {},
   primaryButtonText: '',
   secondaryButtonText: '',
   subheader: '',

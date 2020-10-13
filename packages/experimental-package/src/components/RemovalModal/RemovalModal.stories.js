@@ -6,15 +6,19 @@
 //
 
 import React from 'react';
-
 import { RemovalModal } from '.';
-
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
+import mdx from './RemovalModal.mdx';
 
 export default {
   title: 'Experimental/RemovalModal',
   component: RemovalModal,
-  parameters: { styles },
+  parameters: {
+    styles,
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 const Template = (args) => {
@@ -40,8 +44,8 @@ const Template = (args) => {
   );
 };
 
-export const WithOutConfirmation = Template.bind({});
-WithOutConfirmation.args = {};
+export const WithoutConfirmation = Template.bind({});
+WithoutConfirmation.args = {};
 
 export const WithConfirmation = Template.bind({});
 WithConfirmation.args = {

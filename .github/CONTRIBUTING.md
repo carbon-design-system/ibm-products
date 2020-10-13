@@ -34,7 +34,7 @@ system is set up to automatically bundle your additions / changes. Visit
 [`http://localhost:3000`](http://localhost:3000) to see the changes happen on
 the fly.
 
-## 5. Test your JavaScript code
+## 4. Test your JavaScript code
 
 If you're contributing to our JavaScript code, test your changes by running
 `yarn test`.
@@ -44,7 +44,7 @@ New tests are written in
 with [Enzyme](https://enzymejs.github.io/enzyme) available for migration
 compatibility.
 
-## 6. Make a pull request
+## 5. Make a pull request
 
 **Note:** Before you make a pull request,
 [search the issues](https://github.com/carbon-design-system/ibm-cloud-paks/issues)
@@ -65,7 +65,7 @@ information about how to write your commit message.
 Also refer to
 [How to write the perfect pull request](https://github.blog/2015-01-21-how-to-write-the-perfect-pull-request).
 
-## 7. Updating a pull request
+## 6. Updating a pull request
 
 Stay up to date with the activity in your pull request. Maintainers will be
 reviewing your work and making comments, asking questions, and suggesting

@@ -18,8 +18,8 @@
     "format": "prettier --write '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "lint": "yarn lint:es && yarn lint:style",
-    "lint:es": "eslint 'packages/**/*.js'",
-    "lint:style": "stylelint 'packages/**/*.scss' --report-needless-disables --report-invalid-scope-disables",
+    "lint:es": "eslint 'packages/*/src/**/*.js'",
+    "lint:style": "stylelint 'packages/*/src/**/*.scss' --report-needless-disables --report-invalid-scope-disables",
     "test": "jest",
     "storybook": "cd packages/core && yarn start",
     "sync": "carbon-cli sync"

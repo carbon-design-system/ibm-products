@@ -12,11 +12,11 @@ import cx from 'classnames';
 
 import { expPrefix } from '../../global/js/settings';
 
-import { Button } from 'carbon-components-react';
+import { Button, ButtonKinds } from 'carbon-components-react';
 
-const blockClass = `${expPrefix}-action-bar-item`;
+const blockClass = `${expPrefix}-page-action-item`;
 
-export const ActionBarItem = (props) => {
+export const PageActionItem = ({ children, ...props }) => {
   const className = cx([blockClass, props.className]);
 
   return (
@@ -24,25 +24,16 @@ export const ActionBarItem = (props) => {
       {...{
         ...props,
         className,
-        hasIconOnly: true,
-        kind: 'ghost',
         size: 'field',
-        tooltipPosition: 'bottom',
-        tooltipAlignment: 'end',
         type: 'button',
-      }}></Button>
+      }}>
+      {children}
+    </Button>
   );
 };
 
 // Props the user cannot change
-const reservedProps = [
-  'hasIconOnly',
-  'kind',
-  'size',
-  'tooltipPosition',
-  'tooltipAlignment',
-  'type',
-];
+const reservedProps = ['size', 'type'];
 // Base props on Carbon Button
 const propTypes = { ...Button.propTypes };
 const defaultProps = { ...Button.defaultProps };
@@ -53,7 +44,7 @@ reservedProps.forEach((prop) => {
   delete defaultProps[prop];
 });
 
-ActionBarItem.propTypes = {
+PageActionItem.propTypes = {
   /**
    * The ...propTypes are copies of those from Button minus the props reserved for use by this component
    */
@@ -65,11 +56,23 @@ ActionBarItem.propTypes = {
   /
   / ****************************************/
   /**
+   * Specify the content of your Button
+   *
+   * (inherited from Carbon Button)
+   */
+  children: PropTypes.node,
+  /**
    * Specify an optional className to be added to your Button
    *
    * (inherited from Carbon Button)
    */
   className: PropTypes.string,
+  /**
+   * Specify if the button is an icon-only button
+   *
+   * (inherited from Carbon Button)
+   */
+  hasIconOnly: PropTypes.bool,
   /**
    * If specifying the `renderIcon` prop, provide a description for that icon that can
    * be read by screen readers
@@ -77,6 +80,12 @@ ActionBarItem.propTypes = {
    * (inherited from Carbon Button)
    */
   iconDescription: PropTypes.string,
+  /**
+   * Specify the kind of Button you want to create
+   *
+   * (inherited from Carbon Button)
+   */
+  kind: PropTypes.oneOf(ButtonKinds).isRequired,
   /**
    * Optional click handler
    *
@@ -92,4 +101,4 @@ ActionBarItem.propTypes = {
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
-ActionBarItem.defaultProps = { ...defaultProps };
+PageActionItem.defaultProps = { ...defaultProps };

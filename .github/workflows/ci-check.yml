@@ -19,6 +19,8 @@ jobs:
         run: yarn install --offline
       - name: Lint
         run: yarn lint
+      - name: Audit
+        run: yarn run audit
       - name: Test
         run: yarn test --ci
       - name: Build project

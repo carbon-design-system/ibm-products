@@ -16,6 +16,13 @@ const {
 } = ExampleComponent;
 
 describe(name, () => {
+  test('should have no accessibility violations', async () => {
+    const { container } = render(<ExampleComponent />);
+
+    await expect(container).toBeAccessible(name);
+    await expect(container).toHaveNoAxeViolations();
+  });
+
   test('calls primary and secondary actions when buttons are clicked', () => {
     const { click } = fireEvent;
     const { fn } = jest;

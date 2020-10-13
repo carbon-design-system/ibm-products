@@ -9,23 +9,22 @@
   "keywords": [
     "carbon",
     "carbon design system",
-    "carbon community"
+    "carbon community",
+    "jest"
   ],
   "publishConfig": {
     "access": "public"
   },
   "peerDependencies": {
-    "jest": "^26.0.1"
+    "jest": "^25.5.4"
   },
   "dependencies": {
     "@babel/core": "^7.10.2",
-    "axe-core": "^3.5.4",
+    "accessibility-checker": "^3.0.8",
+    "axe-core": "^4.0.2",
     "babel-jest": "^26.0.1",
     "babel-preset-ibm-cloud-paks": "^0.0.0",
     "chalk": "^4.1.0",
     "jest-circus": "^26.0.1"
-  },
-  "devDependencies": {
-    "jest": "^26.0.1"
   }
 }

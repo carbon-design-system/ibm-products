@@ -5,24 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
+// `setupFilesAfterEnv` enables running the code immediately after the test framework has been installed in the environment - https://jestjs.io/docs/en/configuration.html#setupfilesafterenv-array
 
-const chalk = require('chalk');
-const util = require('util');
-const toHaveNoAxeViolations = require('./matchers/toHaveNoAxeViolations');
+import chalk from 'chalk';
+import util from 'util';
 
-// We can extend `expect` using custom matchers as defined by:
-// https://jest-bot.github.io/jest/docs/expect.html#expectextendmatchers
-//
-// As recommended by `jest-extended`
-// (https://github.com/jest-community/jest-extended) we're going to place this
-// inside of the `setupFilesAfterEnv` option for Jest. If we used the default
-// `setupFiles` option, we would be unable to hook into the testing framework
-// that is loaded in after those files are run.
-//
-// For more information, check out the docs here:
-// https://jestjs.io/docs/en/configuration.html#setupfilesafterenv-array
-expect.extend({ toHaveNoAxeViolations });
+import toHaveNoAxeViolations from './matchers/toHaveNoAxeViolations';
+import toBeAccessible from './matchers/toBeAccessible';
+
+// `expect` can be extended using custom matchers as per https://jest-bot.github.io/jest/docs/expect.html#expectextendmatchers
+expect.extend({ toBeAccessible, toHaveNoAxeViolations });
 
 // Our test suite will throw an error if one of the below console methods are
 // called when we are not expecting them. This is often helpful for React

@@ -1,1 +1,13 @@
-* @carbon-design-system/ibm-cloud-paks
+# These owners will be the default owners for everything in the repo - https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners
+
+* @carbon-design-system/ibm-cloud-paks-development
+
+# Packages
+
+## Cloud & Cognitive
+
+packages/cdai/ @asfordmatt @matthew-chirgwin @vladbalanescu
+
+## IBM Security
+
+packages/security/ @dbrugger @SimonFinney

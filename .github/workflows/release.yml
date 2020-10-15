@@ -1,0 +1,29 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - 12/publish-step
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Install
+        run: yarn --offline
+
+      - name: Build
+        run: yarn build
+
+      - name: Continuous integration check
+        run: yarn ci-check
+
+      - name: Publish
+        run: yarn publish:dry-run

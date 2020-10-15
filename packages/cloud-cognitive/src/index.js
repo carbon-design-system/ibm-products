@@ -5,5 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from '@carbon/ibm-cloud-paks-experimental';
-export * from '@carbon/ibm-cloud-paks-security';
+export * from '@carbon/ibm-cloud-cognitive-experimental';
+export * from '@carbon/ibm-cloud-cognitive-security';

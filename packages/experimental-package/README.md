@@ -1,21 +1,21 @@
-# @carbon/ibm-cloud-paks-experimental
+# @carbon/ibm-cloud-cognitive-experimental
 
-> Experimental UI components for IBM Cloud Paks
+> Carbon for Cloud & Cognitive experimental UI components
 
 ## Getting started
 
-To install `@carbon/ibm-cloud-paks-experimental` in your project, you will need
-to run the following command using [npm](https://www.npmjs.com/):
+To install `@carbon/ibm-cloud-cognitive-experimental` in your project, you will
+need to run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/ibm-cloud-paks-experimental
+npm install -S @carbon/ibm-cloud-cognitive-experimental
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/ibm-cloud-paks-experimental
+yarn add @carbon/ibm-cloud-cognitive-experimental
 ```
 
 ## 🙌 Contributing

@@ -1,7 +1,7 @@
 {
-  "name": "@carbon/cdai",
+  "name": "@carbon/ibm-cloud-cognitive-cdai",
   "private": true,
-  "description": "CD&AI components for IBM Cloud Paks",
+  "description": "Carbon for Cloud & Cognitive CD&AI UI components",
   "version": "0.0.2",
   "license": "Apache-2.0",
   "main": "lib/index.js",
@@ -17,8 +17,7 @@
     "carbon",
     "carbon design system",
     "carbon community",
-    "ibm",
-    "ibm cloud paks",
+    "carbon for cloud & cognitive",
     "cdai"
   ],
   "scripts": {

@@ -10,14 +10,12 @@
     "carbon",
     "carbon design system",
     "carbon community",
-    "ibm",
-    "ibm cloud paks",
-    "rollup"
+    "carbon for cloud & cognitive"
   ],
   "dependencies": {
     "@rollup/plugin-babel": "^5.0.3",
     "@rollup/plugin-commonjs": "^13.0.0",
     "@rollup/plugin-node-resolve": "^8.0.1",
-    "babel-preset-ibm-cloud-paks": "^0.0.0"
+    "babel-preset-ibm-cloud-cognitive": "^0.0.0"
   }
 }

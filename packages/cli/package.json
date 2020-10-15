@@ -1,5 +1,5 @@
 {
-  "name": "@carbon/cloud-pak-cli",
+  "name": "@carbon/ibm-cloud-cognitive-cli",
   "private": true,
   "description": "A CLI for building, maintaining, and releasing packages for Carbon",
   "version": "0.0.0",
@@ -13,8 +13,7 @@
     "carbon",
     "carbon design system",
     "carbon community",
-    "ibm",
-    "ibm cloud paks"
+    "carbon for cloud & cognitive"
   ],
   "dependencies": {
     "@commitlint/parse": "^11.0.0",

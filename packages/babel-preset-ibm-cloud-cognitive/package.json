@@ -1,17 +1,16 @@
 {
-  "name": "babel-preset-ibm-cloud-paks",
+  "name": "babel-preset-ibm-cloud-cognitive",
   "private": true,
   "version": "0.0.0",
   "license": "Apache-2.0",
   "main": "index.js",
-  "repository": "https://github.com/carbon-design-system/ibm-cloud-paks/tree/master/packages/babel-preset-ibm-cloud-paks",
+  "repository": "https://github.com/carbon-design-system/ibm-cloud-paks/tree/master/packages/babel-preset-ibm-cloud-cognitive",
   "bugs": "https://github.com/carbon-design-system/ibm-cloud-paks/issues",
   "keywords": [
     "carbon",
     "carbon design system",
     "carbon community",
-    "ibm",
-    "ibm cloud paks"
+    "carbon for cloud & cognitive"
   ],
   "dependencies": {
     "@babel/core": "^7.10.2",

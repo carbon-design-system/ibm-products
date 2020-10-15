@@ -1,5 +1,5 @@
 {
-  "name": "ibm-cloud-paks",
+  "name": "ibm-cloud-cognitive",
   "private": true,
   "version": "0.0.0",
   "repository": "git@github.com:carbon-design-system/ibm-cloud-paks.git",
@@ -21,7 +21,6 @@
     "lint": "yarn lint:es && yarn lint:style",
     "lint:es": "eslint 'packages/*/src/**/*.js'",
     "lint:style": "stylelint 'packages/*/src/**/*.scss' --report-needless-disables --report-invalid-scope-disables",
-    "publish:dry-run": "echo 'publish:dry-run'",
     "test": "jest",
     "storybook": "cd packages/core && yarn start",
     "sync": "carbon-cli sync"

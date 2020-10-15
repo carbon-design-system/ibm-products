@@ -1,5 +1,5 @@
 {
-  "name": "@carbon/cloud-pak-core",
+  "name": "@carbon/ibm-cloud-cognitive-core",
   "private": true,
   "version": "0.0.0",
   "license": "Apache-2.0",
@@ -9,9 +9,7 @@
     "carbon",
     "carbon design system",
     "carbon community",
-    "ibm cloud pak",
-    "ibm",
-    "ibm cloud paks"
+    "carbon for cloud & cognitive"
   ],
   "scripts": {
     "build:storybook": "build-storybook",

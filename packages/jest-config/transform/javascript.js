@@ -8,6 +8,6 @@
 'use strict';
 
 const { createTransformer } = require('babel-jest');
-const babelOptions = require('babel-preset-ibm-cloud-paks/test');
+const babelOptions = require('babel-preset-ibm-cloud-cognitive/test');
 
 module.exports = createTransformer(babelOptions);

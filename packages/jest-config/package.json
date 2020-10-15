@@ -10,9 +10,7 @@
     "carbon",
     "carbon design system",
     "carbon community",
-    "ibm",
-    "ibm cloud paks",
-    "jest"
+    "carbon for cloud & cognitive"
   ],
   "peerDependencies": {
     "jest": "^25.5.4"
@@ -22,7 +20,7 @@
     "accessibility-checker": "^3.0.8",
     "axe-core": "^4.0.2",
     "babel-jest": "^26.0.1",
-    "babel-preset-ibm-cloud-paks": "^0.0.0",
+    "babel-preset-ibm-cloud-cognitive": "^0.0.0",
     "chalk": "^4.1.0",
     "jest-circus": "^26.0.1"
   }

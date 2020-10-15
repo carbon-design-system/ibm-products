@@ -362,7 +362,7 @@ function createContributing() {
         {
           type: 'text',
           value:
-            "We're always looking for contributors to help us fix bugs, build new features, or help us improve documentation. If you're interested, definitely check out our ",
+            "We're always looking for contributors to help us fix bugs, build new features, or help us improve the project documentation. If you're interested, definitely check out our ",
         },
         {
           type: 'link',
@@ -371,7 +371,7 @@ function createContributing() {
           children: [
             {
               type: 'text',
-              value: 'contributing guide',
+              value: 'Contributing Guide',
             },
           ],
         },
@@ -387,13 +387,13 @@ function createContributing() {
           children: [
             {
               type: 'text',
-              value: "Carbon's developer handbook",
+              value: "Carbon's Developer Handbook",
             },
           ],
         },
         {
           type: 'text',
-          value: '.',
+          value: '! 👀',
         },
       ],
     },

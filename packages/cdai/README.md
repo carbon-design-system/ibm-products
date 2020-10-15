@@ -21,10 +21,12 @@ yarn add @carbon/cdai
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new features,
-or help us improve documentation. If you're interested, definitely check out our
-[contributing guide](https://github.com/carbon-design-system/ibm-cloud-paks/blob/master/.github/CONTRIBUTING.md)
+or help us improve the project documentation. If you're interested, definitely
+check out our
+[Contributing Guide](https://github.com/carbon-design-system/ibm-cloud-paks/blob/master/.github/CONTRIBUTING.md)
 and
-[Carbon's developer handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md).
+[Carbon's Developer Handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md)!
+👀
 
 ## 📝 License
 

@@ -10,6 +10,8 @@
 const fs = require('fs-extra');
 const path = require('path');
 
+const REPO_URL_BASE = 'https://github.com/carbon-design-system/ibm-cloud-paks';
+
 function monorepo() {
   async function transformer(tree, file) {
     const { cwd } = file;
@@ -365,8 +367,7 @@ function createContributing() {
         {
           type: 'link',
           title: null,
-          url:
-            'https://github.com/carbon-design-system/ibm-cloud-paks/blob/master/.github/CONTRIBUTING.md',
+          url: `${REPO_URL_BASE}/blob/master/.github/CONTRIBUTING.md`,
           children: [
             {
               type: 'text',
@@ -421,8 +422,7 @@ function createLicense() {
         {
           type: 'link',
           title: null,
-          url:
-            'https://github.com/carbon-design-system/ibm-cloud-paks/blob/master/LICENSE',
+          url: `${REPO_URL_BASE}/blob/master/LICENSE`,
           children: [
             {
               type: 'text',

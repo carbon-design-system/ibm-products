@@ -1,21 +1,23 @@
-# Name
+# Name of component or pattern
 
-# Brief description
+## Brief description
 
-# Details
+Add a brief description.
+
+## Details
 
 [Link to Design]()
 [Link to example or existing component]()
 
-## Links to other materials
+### Links to other materials
 
 e.g. sketch files, icons, images, prototypes
 
-# Design Maintainer(s)
+## Design Maintainer(s)
 - Owner/main maintainer(s)
 - Second/backup maintainer(s)
 
-# Tasks
+## Tasks
 - [ ] Component code (add to experimental)
 - [ ] Storybook - stories to cover design scenarios, story with long, min and max content, etc
 - [ ] Doc tab in storybook derived from design docs with embedded stories where appropriate

@@ -5,8 +5,8 @@
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/carbon-design-system/ibm-cloud-paks/tree/master/packages/experimental-package",
-  "bugs": "https://github.com/carbon-design-system/ibm-cloud-paks/issues",
+  "repository": "https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental",
+  "bugs": "https://github.com/carbon-design-system/ibm-cloud-cognitive/issues",
   "files": [
     "css",
     "es",

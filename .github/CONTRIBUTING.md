@@ -12,7 +12,8 @@ and [fork the repo](https://help.github.com/articles/fork-a-repo/),
 
 ## 2. Work in a branch
 
-When contributing to IBM Cloud Paks, your work should always be done in a
+When contributing to Carbon for Cloud & Cognitive, your work should always be
+done in a
 [branch off your fork](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-and-deleting-branches-within-your-repository).
 
 ## 3. Start the development server

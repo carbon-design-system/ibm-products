@@ -6,7 +6,7 @@ Also refer to
 ## 1. Fork the repo
 
 Go to
-[IBM Cloud Pak's repository on GitHub](https://github.com/carbon-design-system/ibm-cloud-cognitive)
+[Carbon for Cloud & Cognitive's repository on GitHub](https://github.com/carbon-design-system/ibm-cloud-cognitive)
 and [fork the repo](https://help.github.com/articles/fork-a-repo/),
 [syncing with the original repo](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo#keep-your-fork-synced).
 

@@ -9,11 +9,10 @@
   "keywords": [
     "carbon",
     "carbon design system",
-    "carbon community"
+    "carbon community",
+    "ibm",
+    "ibm cloud paks"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
   "dependencies": {
     "@babel/core": "^7.10.2",
     "@babel/plugin-proposal-class-properties": "^7.10.1",

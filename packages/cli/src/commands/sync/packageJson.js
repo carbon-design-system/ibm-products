@@ -12,9 +12,14 @@ const path = require('path');
 
 const REPO_URL_BASE = 'https://github.com/carbon-design-system/ibm-cloud-paks';
 
-// This is our default set of keywords to include in each `package.json`
-// packageJson
-const DEFAULT_KEYWORDS = ['carbon', 'carbon design system', 'carbon community'];
+// Default set of keywords to include in each `package.json`.
+const DEFAULT_KEYWORDS = [
+  'carbon',
+  'carbon design system',
+  'carbon community',
+  'ibm',
+  'ibm cloud paks',
+];
 
 // We're going to use this in our `sortFields` method. The idea is that we want
 // our `package.json` packageJsons to be ordered in the order given in this array. To

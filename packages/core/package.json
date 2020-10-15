@@ -9,7 +9,9 @@
     "carbon",
     "carbon design system",
     "carbon community",
-    "ibm cloud pak"
+    "ibm cloud pak",
+    "ibm",
+    "ibm cloud paks"
   ],
   "scripts": {
     "build:storybook": "build-storybook",

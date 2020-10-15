@@ -360,22 +360,39 @@ function createContributing() {
         {
           type: 'text',
           value:
-            "We're always looking for contributors to help us fix bugs, build new features, or help us improve the project documentation. If you're interested, definitely check out our ",
+            "We're always looking for contributors to help us fix bugs, build new features, or help us improve documentation. If you're interested, definitely check out our ",
         },
         {
           type: 'link',
           title: null,
-          url: '/.github/CONTRIBUTING.md',
+          url:
+            'https://github.com/carbon-design-system/ibm-cloud-paks/blob/master/.github/CONTRIBUTING.md',
           children: [
             {
               type: 'text',
-              value: 'Contributing Guide',
+              value: 'contributing guide',
             },
           ],
         },
         {
           type: 'text',
-          value: '! 👀',
+          value: ' and ',
+        },
+        {
+          type: 'link',
+          title: null,
+          url:
+            'https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md',
+          children: [
+            {
+              type: 'text',
+              value: "Carbon's developer handbook",
+            },
+          ],
+        },
+        {
+          type: 'text',
+          value: '.',
         },
       ],
     },
@@ -404,7 +421,8 @@ function createLicense() {
         {
           type: 'link',
           title: null,
-          url: '/LICENSE',
+          url:
+            'https://github.com/carbon-design-system/ibm-cloud-paks/blob/master/LICENSE',
           children: [
             {
               type: 'text',

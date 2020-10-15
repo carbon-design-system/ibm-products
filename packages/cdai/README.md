@@ -1,21 +1,21 @@
-# @carbon/ibm-cloud-paks
+# @carbon/cdai
 
-> Common UI components for IBM Cloud Paks
+> CD&AI components for IBM Cloud Paks
 
 ## Getting started
 
-To install `@carbon/ibm-cloud-paks` in your project, you will need to run the
-following command using [npm](https://www.npmjs.com/):
+To install `@carbon/cdai` in your project, you will need to run the following
+command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/ibm-cloud-paks
+npm install -S @carbon/cdai
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/ibm-cloud-paks
+yarn add @carbon/cdai
 ```
 
 ## 🙌 Contributing

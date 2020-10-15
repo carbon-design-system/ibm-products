@@ -1,6 +1,6 @@
 {
   "name": "@carbon/ibm-cloud-paks-experimental",
-  "private": true,
+  "description": "Experimental UI components for IBM Cloud Paks",
   "version": "0.0.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
@@ -20,6 +20,9 @@
     "ibm",
     "ibm cloud paks"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "yarn clean && yarn build:js && yarn build:scss",
     "build:js": "rollup -c",

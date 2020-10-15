@@ -1,14 +1,24 @@
 {
   "name": "@carbon/cdai",
   "private": true,
+  "description": "CD&AI components for IBM Cloud Paks",
   "version": "0.0.2",
   "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "module": "es/index.js",
   "repository": "https://github.com/carbon-design-system/ibm-cloud-paks/tree/master/packages/cdai",
   "bugs": "https://github.com/carbon-design-system/ibm-cloud-paks/issues",
+  "files": [
+    "es",
+    "lib",
+    "scss"
+  ],
   "keywords": [
     "carbon",
     "carbon design system",
     "carbon community",
+    "ibm",
+    "ibm cloud paks",
     "cdai"
   ],
   "scripts": {

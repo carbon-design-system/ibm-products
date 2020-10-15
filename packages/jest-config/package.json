@@ -10,11 +10,10 @@
     "carbon",
     "carbon design system",
     "carbon community",
+    "ibm",
+    "ibm cloud paks",
     "jest"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
   "peerDependencies": {
     "jest": "^25.5.4"
   },

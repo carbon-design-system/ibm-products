@@ -12,11 +12,10 @@
   "keywords": [
     "carbon",
     "carbon design system",
-    "carbon community"
+    "carbon community",
+    "ibm",
+    "ibm cloud paks"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
   "dependencies": {
     "@commitlint/parse": "^11.0.0",
     "chalk": "^4.0.0",

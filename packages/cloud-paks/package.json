@@ -1,6 +1,5 @@
 {
   "name": "@carbon/ibm-cloud-paks",
-  "private": true,
   "description": "Common UI components for IBM Cloud Paks",
   "version": "0.0.0",
   "license": "Apache-2.0",
@@ -21,6 +20,9 @@
     "ibm",
     "ibm cloud paks"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "yarn clean && yarn build:js && yarn build:scss",
     "build:js": "rollup -c",

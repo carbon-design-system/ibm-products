@@ -1,6 +1,6 @@
 {
   "name": "@carbon/ibm-cloud-paks-security",
-  "private": true,
+  "description": "IBM Security UI components for IBM Cloud Paks",
   "version": "0.0.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
@@ -21,6 +21,9 @@
     "ibm cloud paks",
     "ibm security"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "yarn clean && yarn build:js && yarn build:scss",
     "build:js": "rollup -c",

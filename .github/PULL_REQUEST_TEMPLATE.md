@@ -1,4 +1,4 @@
-Contributs to #
+Contributes to #
 
 {{short description}}
 

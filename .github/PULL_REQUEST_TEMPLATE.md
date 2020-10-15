@@ -1,4 +1,4 @@
-Closes #
+Contributes to #
 
 {{short description}}
 

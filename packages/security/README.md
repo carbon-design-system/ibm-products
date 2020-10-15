@@ -1,21 +1,21 @@
-# @carbon/ibm-cloud-paks-security
+# @carbon/ibm-cloud-cognitive-security
 
-> IBM Security UI components for IBM Cloud Paks
+> Carbon for Cloud & Cognitive IBM Security UI components
 
 ## Getting started
 
-To install `@carbon/ibm-cloud-paks-security` in your project, you will need to
-run the following command using [npm](https://www.npmjs.com/):
+To install `@carbon/ibm-cloud-cognitive-security` in your project, you will need
+to run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/ibm-cloud-paks-security
+npm install -S @carbon/ibm-cloud-cognitive-security
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/ibm-cloud-paks-security
+yarn add @carbon/ibm-cloud-cognitive-security
 ```
 
 ## 🙌 Contributing

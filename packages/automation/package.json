@@ -1,5 +1,5 @@
 {
-  "name": "@carbon/cloud-pak-for-automation",
+  "name": "@carbon/ibm-cloud-cognitive-automation",
   "private": true,
   "version": "0.0.0",
   "license": "Apache-2.0",
@@ -9,8 +9,7 @@
     "carbon",
     "carbon design system",
     "carbon community",
-    "ibm",
-    "ibm cloud paks",
-    "ibm cloud pak for automation"
+    "carbon for cloud & cognitive",
+    "automation"
   ]
 }

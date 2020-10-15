@@ -1,21 +1,21 @@
-# @carbon/cdai
+# @carbon/ibm-cloud-cognitive-cdai
 
-> CD&AI components for IBM Cloud Paks
+> Carbon for Cloud & Cognitive CD&AI UI components
 
 ## Getting started
 
-To install `@carbon/cdai` in your project, you will need to run the following
-command using [npm](https://www.npmjs.com/):
+To install `@carbon/ibm-cloud-cognitive-cdai` in your project, you will need to
+run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/cdai
+npm install -S @carbon/ibm-cloud-cognitive-cdai
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/cdai
+yarn add @carbon/ibm-cloud-cognitive-cdai
 ```
 
 ## 🙌 Contributing

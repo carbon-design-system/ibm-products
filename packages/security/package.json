@@ -1,6 +1,6 @@
 {
-  "name": "@carbon/ibm-cloud-paks-security",
-  "description": "IBM Security UI components for IBM Cloud Paks",
+  "name": "@carbon/ibm-cloud-cognitive-security",
+  "description": "Carbon for Cloud & Cognitive IBM Security UI components",
   "version": "0.0.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
@@ -17,8 +17,7 @@
     "carbon",
     "carbon design system",
     "carbon community",
-    "ibm",
-    "ibm cloud paks",
+    "carbon for cloud & cognitive",
     "ibm security"
   ],
   "publishConfig": {

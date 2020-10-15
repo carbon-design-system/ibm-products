@@ -1,6 +1,6 @@
 {
-  "name": "@carbon/ibm-cloud-paks-experimental",
-  "description": "Experimental UI components for IBM Cloud Paks",
+  "name": "@carbon/ibm-cloud-cognitive-experimental",
+  "description": "Carbon for Cloud & Cognitive experimental UI components",
   "version": "0.0.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
@@ -17,8 +17,8 @@
     "carbon",
     "carbon design system",
     "carbon community",
-    "ibm",
-    "ibm cloud paks"
+    "carbon for cloud & cognitive",
+    "experimental"
   ],
   "publishConfig": {
     "access": "public"

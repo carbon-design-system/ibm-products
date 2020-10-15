@@ -1,21 +1,21 @@
-# @carbon/ibm-cloud-paks
+# @carbon/ibm-cloud-cognitive
 
-> Common UI components for IBM Cloud Paks
+> Carbon for Cloud & Cognitive common UI components
 
 ## Getting started
 
-To install `@carbon/ibm-cloud-paks` in your project, you will need to run the
-following command using [npm](https://www.npmjs.com/):
+To install `@carbon/ibm-cloud-cognitive` in your project, you will need to run
+the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/ibm-cloud-paks
+npm install -S @carbon/ibm-cloud-cognitive
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/ibm-cloud-paks
+yarn add @carbon/ibm-cloud-cognitive
 ```
 
 ## 🙌 Contributing

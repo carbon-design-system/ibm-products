@@ -25,14 +25,16 @@ port `3000` on your local machine.
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new features,
-or help us improve documentation. If you're interested, definitely check out our
-[contributing guide](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CONTRIBUTING.md)
+or help us improve the project documentation. If you're interested, definitely
+check out our
+[Contributing Guide](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CONTRIBUTING.md)
 and
-[Carbon's developer handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md).
+[Carbon's Developer Handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md)!
+👀
 
 ## 📝 License
 
 Licensed under the
-[Apache 2.0 License](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/LICENSE).
+[Apache-2.0 License](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/LICENSE).
 
 [![This site is powered by Netlify](https://www.netlify.com/img/global/badges/netlify-color-accent.svg)](https://www.netlify.com)

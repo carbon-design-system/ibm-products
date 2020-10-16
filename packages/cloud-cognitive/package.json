@@ -11,7 +11,9 @@
     "css",
     "es",
     "lib",
-    "scss"
+    "scss",
+    "experimental.js",
+    "security.js"
   ],
   "keywords": [
     "carbon",

@@ -294,10 +294,8 @@ export const PageHeader = ({
     ) {
       const startAddingAt = parseFloat(layout05, 10) * parseInt(baseFontSize);
       const scrollRemaining = metrics.headerHeight - scrollYValue;
-      // console.log(scrollRemaining, startAddingAt);
       if (scrollRemaining < startAddingAt) {
         const distanceAddingOver = startAddingAt - metrics.breadcrumbRowHeight;
-        console.log((startAddingAt - scrollRemaining) / distanceAddingOver);
         result = Math.min(
           1,
           (startAddingAt - scrollRemaining) / distanceAddingOver

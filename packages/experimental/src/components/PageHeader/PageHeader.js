@@ -14,6 +14,8 @@ import cx from 'classnames';
 // import { settings } from 'carbon-components';
 // const { prefix } = settings;
 
+import ReactResizeDetector from 'react-resize-detector';
+
 import { expPrefix } from '../../global/js/settings';
 
 import { useWindowResize, useWindowScroll } from '../../global/js/use';
@@ -298,158 +300,166 @@ export const PageHeader = ({
     tags,
   ]);
 
-  return (
-    <section
-      className={cx([
-        blockClass,
-        className,
-        {
-          [`${blockClass}--background`]: backgroundOn,
-          [`${blockClass}--no-margins-below-row`]: noMarginsBelowRow,
-        },
-      ])}
-      ref={headerEl}
-      style={componentCssCustomProps}>
-      <Grid>
-        {hasBreadcrumbRow ? (
-          <Row
-            className={cx(`${blockClass}--breadcrumb-row`, {
-              [`${blockClass}--breadcrumb-row--with-actions`]:
-                actionBarItems !== undefined,
-            })}>
-            <Column
-              className={cx(`${blockClass}--breadcrumb-column`, {
-                [`${blockClass}--breadcrumb-column--background`]:
-                  breadcrumbItems !== undefined || actionBarItems !== undefined,
-              })}>
-              {/* keeps actionBar right even if empty */}
+  const handleResize = () => {
+    // receives width and height parameters if needed
+    checkUpdateVerticalSpace();
+  };
 
-              {breadcrumbItems !== undefined ? (
-                <Breadcrumb
-                  className={`${blockClass}--breadcrumb`}
-                  noTrailingSlash={title !== undefined}>
-                  {breadcrumbItems}
-                  {title ? (
-                    <BreadcrumbItem
-                      href="#"
-                      isCurrentPage={true}
-                      className={`${blockClass}--breadcrumb-title`}>
-                      {title}
-                    </BreadcrumbItem>
-                  ) : (
-                    ''
-                  )}
-                </Breadcrumb>
-              ) : (
-                ''
-              )}
-            </Column>
-            <Column
-              className={cx(`${blockClass}--action-bar-column`, {
-                [`${blockClass}--action-bar-column--background`]:
+  return (
+    <ReactResizeDetector handleHeight onResize={handleResize}>
+      <section
+        className={cx([
+          blockClass,
+          className,
+          {
+            [`${blockClass}--background`]: backgroundOn,
+            [`${blockClass}--no-margins-below-row`]: noMarginsBelowRow,
+          },
+        ])}
+        ref={headerEl}
+        style={componentCssCustomProps}>
+        <Grid>
+          {hasBreadcrumbRow ? (
+            <Row
+              className={cx(`${blockClass}--breadcrumb-row`, {
+                [`${blockClass}--breadcrumb-row--with-actions`]:
                   actionBarItems !== undefined,
               })}>
-              {actionBarItems !== undefined ? (
-                <>
-                  <div
-                    className={cx(`${blockClass}--page-actions`, {
-                      [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
-                    })}>
-                    {pageActions}
-                  </div>
-                  <ActionBar className={`${blockClass}--action-bar`}>
-                    {actionBarItems}
-                  </ActionBar>
-                </>
-              ) : null}
-            </Column>
-          </Row>
-        ) : null}
-
-        {!(title === undefined && pageActions === undefined) ? (
-          <Row
-            className={cx(
-              `${blockClass}--title-row`,
-              `${blockClass}--title-row--spacing-below-${spacingBelowTitle}`,
-              {
-                [`${blockClass}--title-row--no-breadcrumb-row`]: !hasBreadcrumbRow,
-                [`${blockClass}--title-row--sticky`]:
-                  pageActions !== undefined &&
-                  actionBarItems === undefined &&
-                  hasBreadcrumbRow,
-              }
-            )}>
-            <Column className={`${blockClass}--title-column`}>
-              {/* keeps page actions right even if empty */}
-              {title !== undefined ? (
-                <div
-                  className={cx(`${blockClass}--title`, {
-                    [`${blockClass}--title--fades`]: hasBreadcrumbRow,
-                  })}>
-                  {TitleIcon ? (
-                    <TitleIcon className={`${blockClass}--title-icon`} />
-                  ) : (
-                    ''
-                  )}
-                  {title}
-                </div>
-              ) : null}
-            </Column>
-
-            {pageActions !== undefined ? (
               <Column
-                className={cx(`${blockClass}--page-actions`, {
-                  [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
+                className={cx(`${blockClass}--breadcrumb-column`, {
+                  [`${blockClass}--breadcrumb-column--background`]:
+                    breadcrumbItems !== undefined ||
+                    actionBarItems !== undefined,
                 })}>
-                {pageActions}
+                {/* keeps actionBar right even if empty */}
+
+                {breadcrumbItems !== undefined ? (
+                  <Breadcrumb
+                    className={`${blockClass}--breadcrumb`}
+                    noTrailingSlash={title !== undefined}>
+                    {breadcrumbItems}
+                    {title ? (
+                      <BreadcrumbItem
+                        href="#"
+                        isCurrentPage={true}
+                        className={`${blockClass}--breadcrumb-title`}>
+                        {title}
+                      </BreadcrumbItem>
+                    ) : (
+                      ''
+                    )}
+                  </Breadcrumb>
+                ) : (
+                  ''
+                )}
               </Column>
-            ) : null}
-          </Row>
-        ) : null}
-
-        {subtitle !== undefined ? (
-          <Row className={`${blockClass}--subtitle-row`}>
-            <Column className={`${blockClass}--subtitle`}>{subtitle}</Column>
-          </Row>
-        ) : null}
-
-        {availableSpace !== undefined ? (
-          <Row className={`${blockClass}--available-row`}>
-            <Column className={`${blockClass}--available-column`}>
-              {availableSpace}
-            </Column>
-          </Row>
-        ) : null}
-
-        {navigation || tags ? (
-          <Row
-            className={cx(`${blockClass}--navigation-row`, {
-              [`${blockClass}--navigation-row--spacing-above-06`]:
-                navigation !== undefined,
-            })}>
-            {navigation !== undefined ? (
               <Column
-                className={`${blockClass}--navigation-tabs`}
-                // {...halfOrFull(tags !== undefined)}
-              >
-                {navigation}
+                className={cx(`${blockClass}--action-bar-column`, {
+                  [`${blockClass}--action-bar-column--background`]:
+                    actionBarItems !== undefined,
+                })}>
+                {actionBarItems !== undefined ? (
+                  <>
+                    <div
+                      className={cx(`${blockClass}--page-actions`, {
+                        [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
+                      })}>
+                      {pageActions}
+                    </div>
+                    <ActionBar className={`${blockClass}--action-bar`}>
+                      {actionBarItems}
+                    </ActionBar>
+                  </>
+                ) : null}
               </Column>
-            ) : null}
-            {tags !== undefined ? (
-              <Column
-                className={cx(`${blockClass}--navigation-tags`, {
-                  [`${blockClass}--navigation-tags--tags-only`]:
-                    navigation === undefined,
-                })}
-                // {...halfColumns}
-              >
-                {tags}
+            </Row>
+          ) : null}
+
+          {!(title === undefined && pageActions === undefined) ? (
+            <Row
+              className={cx(
+                `${blockClass}--title-row`,
+                `${blockClass}--title-row--spacing-below-${spacingBelowTitle}`,
+                {
+                  [`${blockClass}--title-row--no-breadcrumb-row`]: !hasBreadcrumbRow,
+                  [`${blockClass}--title-row--sticky`]:
+                    pageActions !== undefined &&
+                    actionBarItems === undefined &&
+                    hasBreadcrumbRow,
+                }
+              )}>
+              <Column className={`${blockClass}--title-column`}>
+                {/* keeps page actions right even if empty */}
+                {title !== undefined ? (
+                  <div
+                    className={cx(`${blockClass}--title`, {
+                      [`${blockClass}--title--fades`]: hasBreadcrumbRow,
+                    })}>
+                    {TitleIcon ? (
+                      <TitleIcon className={`${blockClass}--title-icon`} />
+                    ) : (
+                      ''
+                    )}
+                    {title}
+                  </div>
+                ) : null}
               </Column>
-            ) : null}
-          </Row>
-        ) : null}
-      </Grid>
-    </section>
+
+              {pageActions !== undefined ? (
+                <Column
+                  className={cx(`${blockClass}--page-actions`, {
+                    [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
+                  })}>
+                  {pageActions}
+                </Column>
+              ) : null}
+            </Row>
+          ) : null}
+
+          {subtitle !== undefined ? (
+            <Row className={`${blockClass}--subtitle-row`}>
+              <Column className={`${blockClass}--subtitle`}>{subtitle}</Column>
+            </Row>
+          ) : null}
+
+          {availableSpace !== undefined ? (
+            <Row className={`${blockClass}--available-row`}>
+              <Column className={`${blockClass}--available-column`}>
+                {availableSpace}
+              </Column>
+            </Row>
+          ) : null}
+
+          {navigation || tags ? (
+            <Row
+              className={cx(`${blockClass}--navigation-row`, {
+                [`${blockClass}--navigation-row--spacing-above-06`]:
+                  navigation !== undefined,
+              })}>
+              {navigation !== undefined ? (
+                <Column
+                  className={`${blockClass}--navigation-tabs`}
+                  // {...halfOrFull(tags !== undefined)}
+                >
+                  {navigation}
+                </Column>
+              ) : null}
+              {tags !== undefined ? (
+                <Column
+                  className={cx(`${blockClass}--navigation-tags`, {
+                    [`${blockClass}--navigation-tags--tags-only`]:
+                      navigation === undefined,
+                  })}
+                  // {...halfColumns}
+                >
+                  {tags}
+                </Column>
+              ) : null}
+            </Row>
+          ) : null}
+        </Grid>
+      </section>
+    </ReactResizeDetector>
   );
 };
 

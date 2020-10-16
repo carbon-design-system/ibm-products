@@ -7,6 +7,4 @@
 
 'use strict';
 
-const jestConfig = require('jest-config');
-
-module.exports = jestConfig;
+module.exports = require('jest-config');

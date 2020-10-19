@@ -181,7 +181,7 @@ export const PageHeader = ({
       ...prevCSSProps,
       [`--${blockClass}--height-px`]: `${metrics.headerHeight}px`,
       [`--${blockClass}--header-top`]: `${
-        navigation || tags
+        navigation
           ? metrics.navigationRowHeight - metrics.headerHeight
           : metrics.breadcrumbRowHeight - metrics.headerHeight
       }px`,

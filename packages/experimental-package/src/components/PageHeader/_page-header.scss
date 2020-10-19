@@ -80,6 +80,7 @@ $raised-z-index: 99;
 .#{$block-class}--breadcrumb-row .#{$block-class}--page-actions {
   visibility: hidden;
   opacity: 0;
+  transition: all $duration--fast-02 carbon--motion('entrance', 'productive');
 }
 
 .#{$block-class}--breadcrumb-row .#{$block-class}--page-actions--in-breadcrumb {
@@ -169,11 +170,16 @@ $raised-z-index: 99;
   }
 }
 
+.#{$block-class}--title-column {
+  overflow: hidden; /* required for ellipsis in title */
+}
+
 .#{$block-class}--title {
   @include carbon--type-style('productive-heading-04');
 
-  display: flex;
-  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .#{$block-class}--title--fades {
@@ -191,6 +197,7 @@ $raised-z-index: 99;
 .#{$block-class}--title-row .#{$block-class}--page-actions {
   visibility: visible;
   opacity: 1;
+  transition: all $duration--fast-02 carbon--motion('entrance', 'productive');
 }
 
 .#{$block-class}--title-row .#{$block-class}--page-actions--in-breadcrumb {

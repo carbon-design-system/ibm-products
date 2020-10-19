@@ -19,13 +19,33 @@ e.g. sketch files, icons, images, prototypes
 
 ## Tasks
 
-- [ ] Component code (add to experimental)
+- [ ] Initial review of design/existing code
+
+### Working in experimental package
+
+- [ ] Create a shell component which
+  - [ ] Create ComponentName/ComponentName.js component file that renders props
+        in raw form (no styling or sub components, plain text OK)
+  - [ ] Adds prop-types with comments for DocGen to
+        ComponentName/ComponentName.js
+  - [ ] Add Doc file e.g. ComponentName.mdx with a brief description of the
+        component.
+- [ ] First engineering review/playback
+
+### Continuing in experimental package
+
 - [ ] Storybook - stories to cover design scenarios, story with long, min and
       max content, etc
 - [ ] Doc tab in storybook derived from design docs with embedded stories where
       appropriate
 - [ ] Code to include prop-types with comments for automated DocGen
       documentation
-- [ ] Tests are written in React Test Library
+- [ ] Tests (written in React Test Library) to cover behavior from the
+      documented in the components mdx file.
+
+### Review and promote
+
 - [ ] Design review
-- [ ] Engineering review - Via PR to promote component to production package
+- [ ] Add design review issues addressed, issues raised or discounted.
+- [ ] Engineering review - Submit PR to promote component to production package
+- [ ] All engineering issues addressed, issues raised or discounted.

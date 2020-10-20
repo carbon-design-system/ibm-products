@@ -4,18 +4,18 @@
   "version": "0.0.0",
   "license": "Apache-2.0",
   "main": "index.js",
-  "repository": "https://github.com/carbon-design-system/ibm-cloud-paks/tree/master/packages/rollup-config",
-  "bugs": "https://github.com/carbon-design-system/ibm-cloud-paks/issues",
+  "repository": "https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/rollup-config",
+  "bugs": "https://github.com/carbon-design-system/ibm-cloud-cognitive/issues",
   "keywords": [
     "carbon",
     "carbon design system",
     "carbon community",
-    "rollup"
+    "carbon for cloud & cognitive"
   ],
   "dependencies": {
     "@rollup/plugin-babel": "^5.0.3",
     "@rollup/plugin-commonjs": "^13.0.0",
     "@rollup/plugin-node-resolve": "^8.0.1",
-    "babel-preset-ibm-cloud-paks": "^0.0.0"
+    "babel-preset-ibm-cloud-cognitive": "^0.0.0"
   }
 }

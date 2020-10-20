@@ -1,12 +1,12 @@
 {
-  "name": "@carbon/ibm-cloud-paks-security",
-  "private": true,
+  "name": "@carbon/ibm-cloud-cognitive-security",
+  "description": "Carbon for Cloud & Cognitive IBM Security UI components",
   "version": "0.0.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/carbon-design-system/ibm-cloud-paks/tree/master/packages/security",
-  "bugs": "https://github.com/carbon-design-system/ibm-cloud-paks/issues",
+  "repository": "https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/security",
+  "bugs": "https://github.com/carbon-design-system/ibm-cloud-cognitive/issues",
   "files": [
     "css",
     "es",
@@ -17,10 +17,12 @@
     "carbon",
     "carbon design system",
     "carbon community",
-    "ibm",
-    "ibm cloud paks",
+    "carbon for cloud & cognitive",
     "ibm security"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "yarn clean && yarn build:js && yarn build:scss",
     "build:js": "rollup -c",

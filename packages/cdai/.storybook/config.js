@@ -15,7 +15,7 @@ addParameters({
   options: {
     theme: {
       brandTitle: `CDAI Components`,
-      brandUrl: 'https://github.com/carbon-design-system/ibm-cloud-paks',
+      brandUrl: 'https://github.com/carbon-design-system/ibm-cloud-cognitive',
     },
   },
 });

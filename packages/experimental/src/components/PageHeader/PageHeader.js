@@ -57,7 +57,7 @@ export const PageHeader = ({
   const [rowCount, setRowCount] = useState(1);
   const [noMarginsBelowRow, setNoMarginsBelowRow] = useState(false);
 
-  const [backgroundOn, setBackgroundOn] = useState(false);
+  const [backgroundOpacity, setBackgroundOpacity] = useState(false);
   const dynamicRefs = useRef({});
   const headerEl = useRef(null);
 
@@ -83,7 +83,7 @@ export const PageHeader = ({
     const breadcrumbTitleEl = getDynamicRef(`.${blockClass}--breadcrumb-title`);
     const breadcrumbRowEl = getDynamicRef(`.${blockClass}--breadcrumb-row`);
     const titleRowEl = getDynamicRef(`.${blockClass}--title-row`);
-    const subtitleRowEl = getDynamicRef(`.${blockClass}--sutbitle-row`);
+    const subtitleRowEl = getDynamicRef(`.${blockClass}--subtitle-row`);
     const availableRowEl = getDynamicRef(`.${blockClass}--available-row`);
     const navigationRowEl = getDynamicRef(`.${blockClass}--navigation-row`);
 
@@ -110,6 +110,10 @@ export const PageHeader = ({
         window
           .getComputedStyle(breadcrumbRowEl)
           .getPropertyValue('margin-bottom'),
+        10
+      );
+      update.titleRowSpaceAbove = parseFloat(
+        window.getComputedStyle(titleRowEl).getPropertyValue('margin-top'),
         10
       );
     } else {
@@ -162,10 +166,14 @@ export const PageHeader = ({
   useEffect(() => {
     // Determine the location of the pageAction buttons
     setPageActionsInBreadcrumbRow(
-      scrollYValue > metrics.breadcrumbRowSpaceBelow &&
-        actionBarItems !== undefined
+      scrollYValue > metrics.titleRowSpaceAbove && actionBarItems !== undefined
     );
-  }, [actionBarItems, metrics.breadcrumbRowSpaceBelow, scrollYValue]);
+  }, [
+    actionBarItems,
+    metrics.breadcrumbRowSpaceBelow,
+    metrics.titleRowSpaceAbove,
+    scrollYValue,
+  ]);
 
   useEffect(() => {
     // Updates custom CSS props used to manage scroll behaviour
@@ -173,7 +181,7 @@ export const PageHeader = ({
       ...prevCSSProps,
       [`--${blockClass}--height-px`]: `${metrics.headerHeight}px`,
       [`--${blockClass}--header-top`]: `${
-        navigation || tags
+        navigation
           ? metrics.navigationRowHeight - metrics.headerHeight
           : metrics.breadcrumbRowHeight - metrics.headerHeight
       }px`,
@@ -186,10 +194,13 @@ export const PageHeader = ({
           metrics.breadcrumbRowSpaceBelow -
           scrollYValue
       )}px`,
-      [`--${blockClass}--breadcrumb-title-opacity`]: `${Math.max(
-        0,
-        (scrollYValue - metrics.breadcrumbRowSpaceBelow) /
-          metrics.breadcrumbTitleHeight
+      [`--${blockClass}--breadcrumb-title-opacity`]: `${Math.min(
+        1,
+        Math.max(
+          0,
+          (scrollYValue - metrics.breadcrumbRowSpaceBelow) /
+            metrics.breadcrumbTitleHeight
+        )
       )}`,
       [`--${blockClass}--breadcrumb-top`]: `${Math.min(
         0,
@@ -274,26 +285,37 @@ export const PageHeader = ({
 
   useEffect(() => {
     // Determines if the background should be one based on the header height or scroll
-    let result = background === true;
+    let result = background && 1;
 
     if (
       !result &&
       metrics.headerHeight > 0 &&
       (breadcrumbItems || actionBarItems || tags || navigation)
     ) {
-      result =
-        metrics.headerHeight - scrollYValue <
-        parseFloat(layout05, 10) * parseInt(baseFontSize);
+      const startAddingAt = parseFloat(layout05, 10) * parseInt(baseFontSize);
+      const scrollRemaining = metrics.headerHeight - scrollYValue;
+      if (scrollRemaining < startAddingAt) {
+        const distanceAddingOver = startAddingAt - metrics.breadcrumbRowHeight;
+        result = Math.min(
+          1,
+          (startAddingAt - scrollRemaining) / distanceAddingOver
+        );
+      }
     }
     // if (!result) {
     // This exists in the design if > title, breadcrumb and status turn on background left off as has responsive issues
     //   result = headerHeight > layout07;
     // }
-    setBackgroundOn(result);
+    setComponentCssCustomProps((prevCSSProps) => ({
+      ...prevCSSProps,
+      [`--${blockClass}--background-opacity`]: result,
+    }));
+    setBackgroundOpacity(result);
   }, [
     actionBarItems,
     background,
     breadcrumbItems,
+    metrics.breadcrumbRowHeight,
     metrics.headerHeight,
     navigation,
     scrollYValue,
@@ -312,7 +334,7 @@ export const PageHeader = ({
           blockClass,
           className,
           {
-            [`${blockClass}--background`]: backgroundOn,
+            [`${blockClass}--background`]: backgroundOpacity > 0,
             [`${blockClass}--no-margins-below-row`]: noMarginsBelowRow,
           },
         ])}

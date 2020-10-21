@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     # tags:
-    #  - v*
+    #  - 'v*'
 
     branches:
       - 12/publish-step
@@ -14,10 +14,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2 # https://github.com/actions/checkout
 
       - name: Setup Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v1 # https://github.com/actions/setup-node
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org
@@ -31,11 +31,13 @@ jobs:
       - name: Continuous integration check
         run: yarn ci-check
 
+      # `yarn lerna publish from-package --yes`
       - name: Publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: echo 'publish'
 
+      # https://github.com/actions/create-release - `release_name: ${{ github.ref }}, tag_name: ${{ github.ref }}`
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

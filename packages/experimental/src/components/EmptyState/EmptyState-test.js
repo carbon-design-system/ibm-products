@@ -22,11 +22,9 @@ describe(name, () => {
       <EmptyState
         heading="Empty state heading"
         subtext="Empty state subtext"
-        action={{
-          text: 'Create new',
-          type: 'primary',
-          actionHandler: onActionHandler,
-        }}
+        actionText="Create new"
+        actionType="tertiary"
+        actionHandler={onActionHandler}
       />
     );
 

@@ -469,13 +469,20 @@ export const PageHeader = ({
           {/* Last row margin-below causes problems for scroll behaviour when it sticks the header.
           This buffer is used in CSS instead to add vertical space after the last row but only if there is no navigation row
            */}
-          <div
-            className={cx([
-              `${blockClass}--last-row-buffer`,
-              {
-                [`${blockClass}--last-row-buffer--active`]: lastRowBufferActive,
-              },
-            ])}></div>
+          {(breadcrumbItems ||
+            actionBarItems ||
+            title ||
+            pageActions ||
+            availableSpace ||
+            subtitle) && (
+            <div
+              className={cx([
+                `${blockClass}--last-row-buffer`,
+                {
+                  [`${blockClass}--last-row-buffer--active`]: lastRowBufferActive,
+                },
+              ])}></div>
+          )}
 
           {navigation || tags ? (
             <Row

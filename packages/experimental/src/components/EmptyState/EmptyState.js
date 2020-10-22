@@ -15,12 +15,12 @@ export const EmptyState = ({
   actionText,
   actionType,
   actionIcon,
-  actionHandler,
   heading,
   subtext,
   illustration,
   illustrationSize,
   illustrationTheme,
+  onActionEvent,
 }) => {
   return (
     <div className={`${expPrefix}-empty-state`}>
@@ -40,11 +40,11 @@ export const EmptyState = ({
       ) : (
         <p className={`${expPrefix}-subtext`}>{subtext}</p>
       )}
-      {actionText && actionHandler && (
+      {actionText && onActionEvent && (
         <Button
           className={`${expPrefix}-empty-state-action-button`}
           kind={actionType || 'tertiary'}
-          onClick={actionHandler}
+          onClick={onActionEvent}
           renderIcon={actionIcon || null}>
           {actionText}
         </Button>
@@ -54,10 +54,6 @@ export const EmptyState = ({
 };
 
 EmptyState.propTypes = {
-  /**
-   * Empty state action button handler
-   */
-  actionHandler: PropTypes.func,
   /**
    * Empty state action button icon
    */
@@ -78,7 +74,7 @@ EmptyState.propTypes = {
    * Empty state illustration
    */
   illustration: PropTypes.oneOf([
-    'default',
+    'nodata',
     'error',
     'unauthorized',
     'notags',
@@ -93,6 +89,10 @@ EmptyState.propTypes = {
    * Empty state illustration theme variations
    */
   illustrationTheme: PropTypes.oneOf(['light', 'dark']),
+  /**
+   * Empty state action button handler
+   */
+  onActionEvent: PropTypes.func,
   /**
    * Empty state subtext
    */

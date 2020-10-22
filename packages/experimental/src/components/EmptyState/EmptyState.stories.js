@@ -44,12 +44,12 @@ Default.args = {};
 
 export const WithIllustration = Template.bind({});
 WithIllustration.args = {
-  illustration: 'default',
+  illustration: 'nodata',
 };
 
 export const WithDarkModeIllustration = Template.bind({});
 WithDarkModeIllustration.args = {
-  illustration: 'default',
+  illustration: 'nodata',
   illustrationTheme: 'dark',
 };
 
@@ -57,13 +57,13 @@ export const withAction = Template.bind({});
 withAction.args = {
   actionText: 'Create new',
   actionType: 'tertiary',
-  actionHandler: action('actionHandler'),
+  onActionEvent: action('actionHandler'),
 };
 
 export const withActionIconButton = Template.bind({});
 withActionIconButton.args = {
   actionText: 'Create new',
   actionType: 'tertiary',
-  actionHandler: action('actionHandler'),
+  onActionEvent: action('actionHandler'),
   actionIcon: Add20,
 };

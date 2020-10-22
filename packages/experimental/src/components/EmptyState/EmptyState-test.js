@@ -24,7 +24,7 @@ describe(name, () => {
         subtext="Empty state subtext"
         actionText="Create new"
         actionType="tertiary"
-        actionHandler={onActionHandler}
+        onActionEvent={onActionHandler}
       />
     );
 

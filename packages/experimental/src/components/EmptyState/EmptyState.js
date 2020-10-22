@@ -12,7 +12,10 @@ import { Button } from 'carbon-components-react';
 import { expPrefix } from '../../global/js/settings';
 
 export const EmptyState = ({
-  action,
+  actionText,
+  actionType,
+  actionIcon,
+  actionHandler,
   heading,
   subtext,
   illustration,
@@ -37,13 +40,13 @@ export const EmptyState = ({
       ) : (
         <p className={`${expPrefix}-subtext`}>{subtext}</p>
       )}
-      {action && action.text && (
+      {actionText && actionHandler && (
         <Button
           className={`${expPrefix}-empty-state-action-button`}
-          kind={action.type || 'tertiary'}
-          onClick={action.actionHandler}
-          renderIcon={action.renderIcon || null}>
-          {action.text}
+          kind={actionType || 'tertiary'}
+          onClick={actionHandler}
+          renderIcon={actionIcon || null}>
+          {actionText}
         </Button>
       )}
     </div>
@@ -52,14 +55,21 @@ export const EmptyState = ({
 
 EmptyState.propTypes = {
   /**
-   * Empty state action button
+   * Empty state action button handler
    */
-  action: PropTypes.shape({
-    text: PropTypes.string,
-    type: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
-    actionHandler: PropTypes.func,
-    renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-  }),
+  actionHandler: PropTypes.func,
+  /**
+   * Empty state action button icon
+   */
+  actionIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  /**
+   * Empty state action button text
+   */
+  actionText: PropTypes.string,
+  /**
+   * Empty state action button type
+   */
+  actionType: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
   /**
    * Empty state heading
    */

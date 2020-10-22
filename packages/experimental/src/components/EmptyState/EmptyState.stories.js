@@ -55,19 +55,15 @@ WithDarkModeIllustration.args = {
 
 export const withAction = Template.bind({});
 withAction.args = {
-  action: {
-    text: 'Create new',
-    type: 'tertiary',
-    actionHandler: action('actionHandler'),
-  },
+  actionText: 'Create new',
+  actionType: 'tertiary',
+  actionHandler: action('actionHandler'),
 };
 
 export const withActionIconButton = Template.bind({});
 withActionIconButton.args = {
-  action: {
-    text: 'Create new',
-    type: 'tertiary',
-    actionHandler: action('actionHandler'),
-    renderIcon: Add20,
-  },
+  actionText: 'Create new',
+  actionType: 'tertiary',
+  actionHandler: action('actionHandler'),
+  actionIcon: Add20,
 };

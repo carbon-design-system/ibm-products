@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
+import { Add20 } from '@carbon/icons-react';
 
 import { EmptyState } from '.';
 
@@ -52,5 +53,15 @@ withAction.args = {
     text: 'Create new',
     type: 'tertiary',
     actionHandler: action('actionHandler'),
+  },
+};
+
+export const withActionIconButton = Template.bind({});
+withActionIconButton.args = {
+  action: {
+    text: 'Create new',
+    type: 'tertiary',
+    actionHandler: action('actionHandler'),
+    renderIcon: Add20,
   },
 };

@@ -41,7 +41,8 @@ export const EmptyState = ({
         <Button
           className={`${expPrefix}-empty-state-action-button`}
           kind={action.type || 'tertiary'}
-          onClick={action.actionHandler}>
+          onClick={action.actionHandler}
+          renderIcon={action.renderIcon || null}>
           {action.text}
         </Button>
       )}
@@ -57,6 +58,7 @@ EmptyState.propTypes = {
     text: PropTypes.string,
     type: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
     actionHandler: PropTypes.func,
+    renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   }),
   /**
    * Empty state heading
@@ -78,7 +80,7 @@ EmptyState.propTypes = {
    */
   illustrationSize: PropTypes.oneOf(['lg', 'sm']),
   /**
-   * Empty state illustration theme
+   * Empty state illustration theme variations
    */
   illustrationTheme: PropTypes.oneOf(['light', 'dark']),
   /**

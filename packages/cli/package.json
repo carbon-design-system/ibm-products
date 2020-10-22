@@ -1,5 +1,5 @@
 {
-  "name": "@carbon/cloud-pak-cli",
+  "name": "@carbon/ibm-cloud-cognitive-cli",
   "private": true,
   "description": "A CLI for building, maintaining, and releasing packages for Carbon",
   "version": "0.0.0",
@@ -7,16 +7,14 @@
   "bin": {
     "carbon-cli": "./bin/carbon-cli.js"
   },
-  "repository": "https://github.com/carbon-design-system/ibm-cloud-paks/tree/master/packages/cli",
-  "bugs": "https://github.com/carbon-design-system/ibm-cloud-paks/issues",
+  "repository": "https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/cli",
+  "bugs": "https://github.com/carbon-design-system/ibm-cloud-cognitive/issues",
   "keywords": [
     "carbon",
     "carbon design system",
-    "carbon community"
+    "carbon community",
+    "carbon for cloud & cognitive"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
   "dependencies": {
     "@commitlint/parse": "^11.0.0",
     "chalk": "^4.0.0",

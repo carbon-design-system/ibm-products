@@ -12,7 +12,7 @@ import cx from 'classnames';
 
 import { expPrefix } from '../../global/js/settings';
 
-import { Button, ButtonKinds } from 'carbon-components-react';
+import { Button } from 'carbon-components-react';
 
 const blockClass = `${expPrefix}-page-action-item`;
 
@@ -85,7 +85,7 @@ PageActionItem.propTypes = {
    *
    * (inherited from Carbon Button)
    */
-  kind: PropTypes.oneOf(ButtonKinds).isRequired,
+  kind: PropTypes.string,
   /**
    * Optional click handler
    *

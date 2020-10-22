@@ -14,6 +14,8 @@ import cx from 'classnames';
 // import { settings } from 'carbon-components';
 // const { prefix } = settings;
 
+import ReactResizeDetector from 'react-resize-detector';
+
 import { expPrefix } from '../../global/js/settings';
 
 import { useWindowResize, useWindowScroll } from '../../global/js/use';
@@ -55,7 +57,7 @@ export const PageHeader = ({
   const [rowCount, setRowCount] = useState(1);
   const [noMarginsBelowRow, setNoMarginsBelowRow] = useState(false);
 
-  const [backgroundOn, setBackgroundOn] = useState(false);
+  const [backgroundOpacity, setBackgroundOpacity] = useState(false);
   const dynamicRefs = useRef({});
   const headerEl = useRef(null);
 
@@ -81,7 +83,7 @@ export const PageHeader = ({
     const breadcrumbTitleEl = getDynamicRef(`.${blockClass}--breadcrumb-title`);
     const breadcrumbRowEl = getDynamicRef(`.${blockClass}--breadcrumb-row`);
     const titleRowEl = getDynamicRef(`.${blockClass}--title-row`);
-    const subtitleRowEl = getDynamicRef(`.${blockClass}--sutbitle-row`);
+    const subtitleRowEl = getDynamicRef(`.${blockClass}--subtitle-row`);
     const availableRowEl = getDynamicRef(`.${blockClass}--available-row`);
     const navigationRowEl = getDynamicRef(`.${blockClass}--navigation-row`);
 
@@ -108,6 +110,10 @@ export const PageHeader = ({
         window
           .getComputedStyle(breadcrumbRowEl)
           .getPropertyValue('margin-bottom'),
+        10
+      );
+      update.titleRowSpaceAbove = parseFloat(
+        window.getComputedStyle(titleRowEl).getPropertyValue('margin-top'),
         10
       );
     } else {
@@ -160,10 +166,14 @@ export const PageHeader = ({
   useEffect(() => {
     // Determine the location of the pageAction buttons
     setPageActionsInBreadcrumbRow(
-      scrollYValue > metrics.breadcrumbRowSpaceBelow &&
-        actionBarItems !== undefined
+      scrollYValue > metrics.titleRowSpaceAbove && actionBarItems !== undefined
     );
-  }, [actionBarItems, metrics.breadcrumbRowSpaceBelow, scrollYValue]);
+  }, [
+    actionBarItems,
+    metrics.breadcrumbRowSpaceBelow,
+    metrics.titleRowSpaceAbove,
+    scrollYValue,
+  ]);
 
   useEffect(() => {
     // Updates custom CSS props used to manage scroll behaviour
@@ -171,7 +181,7 @@ export const PageHeader = ({
       ...prevCSSProps,
       [`--${blockClass}--height-px`]: `${metrics.headerHeight}px`,
       [`--${blockClass}--header-top`]: `${
-        navigation || tags
+        navigation
           ? metrics.navigationRowHeight - metrics.headerHeight
           : metrics.breadcrumbRowHeight - metrics.headerHeight
       }px`,
@@ -184,10 +194,13 @@ export const PageHeader = ({
           metrics.breadcrumbRowSpaceBelow -
           scrollYValue
       )}px`,
-      [`--${blockClass}--breadcrumb-title-opacity`]: `${Math.max(
-        0,
-        (scrollYValue - metrics.breadcrumbRowSpaceBelow) /
-          metrics.breadcrumbTitleHeight
+      [`--${blockClass}--breadcrumb-title-opacity`]: `${Math.min(
+        1,
+        Math.max(
+          0,
+          (scrollYValue - metrics.breadcrumbRowSpaceBelow) /
+            metrics.breadcrumbTitleHeight
+        )
       )}`,
       [`--${blockClass}--breadcrumb-top`]: `${Math.min(
         0,
@@ -272,184 +285,203 @@ export const PageHeader = ({
 
   useEffect(() => {
     // Determines if the background should be one based on the header height or scroll
-    let result = background === true;
+    let result = background && 1;
 
     if (
       !result &&
       metrics.headerHeight > 0 &&
       (breadcrumbItems || actionBarItems || tags || navigation)
     ) {
-      result =
-        metrics.headerHeight - scrollYValue <
-        parseFloat(layout05, 10) * parseInt(baseFontSize);
+      const startAddingAt = parseFloat(layout05, 10) * parseInt(baseFontSize);
+      const scrollRemaining = metrics.headerHeight - scrollYValue;
+      if (scrollRemaining < startAddingAt) {
+        const distanceAddingOver = startAddingAt - metrics.breadcrumbRowHeight;
+        result = Math.min(
+          1,
+          (startAddingAt - scrollRemaining) / distanceAddingOver
+        );
+      }
     }
     // if (!result) {
     // This exists in the design if > title, breadcrumb and status turn on background left off as has responsive issues
     //   result = headerHeight > layout07;
     // }
-    setBackgroundOn(result);
+    setComponentCssCustomProps((prevCSSProps) => ({
+      ...prevCSSProps,
+      [`--${blockClass}--background-opacity`]: result,
+    }));
+    setBackgroundOpacity(result);
   }, [
     actionBarItems,
     background,
     breadcrumbItems,
+    metrics.breadcrumbRowHeight,
     metrics.headerHeight,
     navigation,
     scrollYValue,
     tags,
   ]);
 
-  return (
-    <section
-      className={cx([
-        blockClass,
-        className,
-        {
-          [`${blockClass}--background`]: backgroundOn,
-          [`${blockClass}--no-margins-below-row`]: noMarginsBelowRow,
-        },
-      ])}
-      ref={headerEl}
-      style={componentCssCustomProps}>
-      <Grid>
-        {hasBreadcrumbRow ? (
-          <Row
-            className={cx(`${blockClass}--breadcrumb-row`, {
-              [`${blockClass}--breadcrumb-row--with-actions`]:
-                actionBarItems !== undefined,
-            })}>
-            <Column
-              className={cx(`${blockClass}--breadcrumb-column`, {
-                [`${blockClass}--breadcrumb-column--background`]:
-                  breadcrumbItems !== undefined || actionBarItems !== undefined,
-              })}>
-              {/* keeps actionBar right even if empty */}
+  const handleResize = () => {
+    // receives width and height parameters if needed
+    checkUpdateVerticalSpace();
+  };
 
-              {breadcrumbItems !== undefined ? (
-                <Breadcrumb
-                  className={`${blockClass}--breadcrumb`}
-                  noTrailingSlash={title !== undefined}>
-                  {breadcrumbItems}
-                  {title ? (
-                    <BreadcrumbItem
-                      href="#"
-                      isCurrentPage={true}
-                      className={`${blockClass}--breadcrumb-title`}>
-                      {title}
-                    </BreadcrumbItem>
-                  ) : (
-                    ''
-                  )}
-                </Breadcrumb>
-              ) : (
-                ''
-              )}
-            </Column>
-            <Column
-              className={cx(`${blockClass}--action-bar-column`, {
-                [`${blockClass}--action-bar-column--background`]:
+  return (
+    <ReactResizeDetector handleHeight onResize={handleResize}>
+      <section
+        className={cx([
+          blockClass,
+          className,
+          {
+            [`${blockClass}--background`]: backgroundOpacity > 0,
+            [`${blockClass}--no-margins-below-row`]: noMarginsBelowRow,
+          },
+        ])}
+        ref={headerEl}
+        style={componentCssCustomProps}>
+        <Grid>
+          {hasBreadcrumbRow ? (
+            <Row
+              className={cx(`${blockClass}--breadcrumb-row`, {
+                [`${blockClass}--breadcrumb-row--with-actions`]:
                   actionBarItems !== undefined,
               })}>
-              {actionBarItems !== undefined ? (
-                <>
-                  <div
-                    className={cx(`${blockClass}--page-actions`, {
-                      [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
-                    })}>
-                    {pageActions}
-                  </div>
-                  <ActionBar className={`${blockClass}--action-bar`}>
-                    {actionBarItems}
-                  </ActionBar>
-                </>
-              ) : null}
-            </Column>
-          </Row>
-        ) : null}
-
-        {!(title === undefined && pageActions === undefined) ? (
-          <Row
-            className={cx(
-              `${blockClass}--title-row`,
-              `${blockClass}--title-row--spacing-below-${spacingBelowTitle}`,
-              {
-                [`${blockClass}--title-row--no-breadcrumb-row`]: !hasBreadcrumbRow,
-                [`${blockClass}--title-row--sticky`]:
-                  pageActions !== undefined &&
-                  actionBarItems === undefined &&
-                  hasBreadcrumbRow,
-              }
-            )}>
-            <Column className={`${blockClass}--title-column`}>
-              {/* keeps page actions right even if empty */}
-              {title !== undefined ? (
-                <div
-                  className={cx(`${blockClass}--title`, {
-                    [`${blockClass}--title--fades`]: hasBreadcrumbRow,
-                  })}>
-                  {TitleIcon ? (
-                    <TitleIcon className={`${blockClass}--title-icon`} />
-                  ) : (
-                    ''
-                  )}
-                  {title}
-                </div>
-              ) : null}
-            </Column>
-
-            {pageActions !== undefined ? (
               <Column
-                className={cx(`${blockClass}--page-actions`, {
-                  [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
+                className={cx(`${blockClass}--breadcrumb-column`, {
+                  [`${blockClass}--breadcrumb-column--background`]:
+                    breadcrumbItems !== undefined ||
+                    actionBarItems !== undefined,
                 })}>
-                {pageActions}
+                {/* keeps actionBar right even if empty */}
+
+                {breadcrumbItems !== undefined ? (
+                  <Breadcrumb
+                    className={`${blockClass}--breadcrumb`}
+                    noTrailingSlash={title !== undefined}>
+                    {breadcrumbItems}
+                    {title ? (
+                      <BreadcrumbItem
+                        href="#"
+                        isCurrentPage={true}
+                        className={`${blockClass}--breadcrumb-title`}>
+                        {title}
+                      </BreadcrumbItem>
+                    ) : (
+                      ''
+                    )}
+                  </Breadcrumb>
+                ) : (
+                  ''
+                )}
               </Column>
-            ) : null}
-          </Row>
-        ) : null}
-
-        {subtitle !== undefined ? (
-          <Row className={`${blockClass}--subtitle-row`}>
-            <Column className={`${blockClass}--subtitle`}>{subtitle}</Column>
-          </Row>
-        ) : null}
-
-        {availableSpace !== undefined ? (
-          <Row className={`${blockClass}--available-row`}>
-            <Column className={`${blockClass}--available-column`}>
-              {availableSpace}
-            </Column>
-          </Row>
-        ) : null}
-
-        {navigation || tags ? (
-          <Row
-            className={cx(`${blockClass}--navigation-row`, {
-              [`${blockClass}--navigation-row--spacing-above-06`]:
-                navigation !== undefined,
-            })}>
-            {navigation !== undefined ? (
               <Column
-                className={`${blockClass}--navigation-tabs`}
-                // {...halfOrFull(tags !== undefined)}
-              >
-                {navigation}
+                className={cx(`${blockClass}--action-bar-column`, {
+                  [`${blockClass}--action-bar-column--background`]:
+                    actionBarItems !== undefined,
+                })}>
+                {actionBarItems !== undefined ? (
+                  <>
+                    <div
+                      className={cx(`${blockClass}--page-actions`, {
+                        [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
+                      })}>
+                      {pageActions}
+                    </div>
+                    <ActionBar className={`${blockClass}--action-bar`}>
+                      {actionBarItems}
+                    </ActionBar>
+                  </>
+                ) : null}
               </Column>
-            ) : null}
-            {tags !== undefined ? (
-              <Column
-                className={cx(`${blockClass}--navigation-tags`, {
-                  [`${blockClass}--navigation-tags--tags-only`]:
-                    navigation === undefined,
-                })}
-                // {...halfColumns}
-              >
-                {tags}
+            </Row>
+          ) : null}
+
+          {!(title === undefined && pageActions === undefined) ? (
+            <Row
+              className={cx(
+                `${blockClass}--title-row`,
+                `${blockClass}--title-row--spacing-below-${spacingBelowTitle}`,
+                {
+                  [`${blockClass}--title-row--no-breadcrumb-row`]: !hasBreadcrumbRow,
+                  [`${blockClass}--title-row--sticky`]:
+                    pageActions !== undefined &&
+                    actionBarItems === undefined &&
+                    hasBreadcrumbRow,
+                }
+              )}>
+              <Column className={`${blockClass}--title-column`}>
+                {/* keeps page actions right even if empty */}
+                {title !== undefined ? (
+                  <div
+                    className={cx(`${blockClass}--title`, {
+                      [`${blockClass}--title--fades`]: hasBreadcrumbRow,
+                    })}>
+                    {TitleIcon ? (
+                      <TitleIcon className={`${blockClass}--title-icon`} />
+                    ) : (
+                      ''
+                    )}
+                    {title}
+                  </div>
+                ) : null}
               </Column>
-            ) : null}
-          </Row>
-        ) : null}
-      </Grid>
-    </section>
+
+              {pageActions !== undefined ? (
+                <Column
+                  className={cx(`${blockClass}--page-actions`, {
+                    [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
+                  })}>
+                  {pageActions}
+                </Column>
+              ) : null}
+            </Row>
+          ) : null}
+
+          {subtitle !== undefined ? (
+            <Row className={`${blockClass}--subtitle-row`}>
+              <Column className={`${blockClass}--subtitle`}>{subtitle}</Column>
+            </Row>
+          ) : null}
+
+          {availableSpace !== undefined ? (
+            <Row className={`${blockClass}--available-row`}>
+              <Column className={`${blockClass}--available-column`}>
+                {availableSpace}
+              </Column>
+            </Row>
+          ) : null}
+
+          {navigation || tags ? (
+            <Row
+              className={cx(`${blockClass}--navigation-row`, {
+                [`${blockClass}--navigation-row--spacing-above-06`]:
+                  navigation !== undefined,
+              })}>
+              {navigation !== undefined ? (
+                <Column
+                  className={`${blockClass}--navigation-tabs`}
+                  // {...halfOrFull(tags !== undefined)}
+                >
+                  {navigation}
+                </Column>
+              ) : null}
+              {tags !== undefined ? (
+                <Column
+                  className={cx(`${blockClass}--navigation-tags`, {
+                    [`${blockClass}--navigation-tags--tags-only`]:
+                      navigation === undefined,
+                  })}
+                  // {...halfColumns}
+                >
+                  {tags}
+                </Column>
+              ) : null}
+            </Row>
+          ) : null}
+        </Grid>
+      </section>
+    </ReactResizeDetector>
   );
 };
 

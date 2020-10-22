@@ -1,25 +1,29 @@
 {
-  "name": "@carbon/ibm-cloud-paks-experimental",
-  "private": true,
+  "name": "@carbon/ibm-cloud-cognitive",
+  "description": "Carbon for Cloud & Cognitive common UI components",
   "version": "0.0.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/carbon-design-system/ibm-cloud-paks/tree/master/packages/experimental-package",
-  "bugs": "https://github.com/carbon-design-system/ibm-cloud-paks/issues",
+  "repository": "https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/cloud-cognitive",
+  "bugs": "https://github.com/carbon-design-system/ibm-cloud-cognitive/issues",
   "files": [
     "css",
     "es",
     "lib",
-    "scss"
+    "scss",
+    "experimental.js",
+    "security.js"
   ],
   "keywords": [
     "carbon",
     "carbon design system",
     "carbon community",
-    "ibm",
-    "ibm cloud paks"
+    "carbon for cloud & cognitive"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "yarn clean && yarn build:js && yarn build:scss",
     "build:js": "rollup -c",
@@ -31,9 +35,7 @@
     "react": "^16.13.1"
   },
   "dependencies": {
-    "@carbon/icons-react": "^10.18.0",
-    "carbon-components": "^10.20.0",
-    "carbon-components-react": "^7.20.0",
-    "carbon-icons": "^7.0.7"
+    "@carbon/ibm-cloud-cognitive-security": "^0.0.0",
+    "@carbon/ibm-cloud-cognitive-experimental": "^0.0.0"
   }
 }

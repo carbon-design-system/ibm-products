@@ -158,12 +158,6 @@ export const PageHeader = ({
   ]);
 
   useEffect(() => {
-    console.log(
-      preCollapseTitleRow,
-      scrollYValue,
-      metrics.titleRowSpaceAbove,
-      actionBarItems !== undefined
-    );
     // Determine the location of the pageAction buttons
     setPageActionsInBreadcrumbRow(
       preCollapseTitleRow ||

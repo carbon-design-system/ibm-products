@@ -24,12 +24,25 @@ export const EmptyState = ({
   illustrationTheme,
   onActionEvent,
 }) => {
+  const defaultIllustrationOptions = [
+    'nodata',
+    'error',
+    'unauthorized',
+    'notags',
+    'notfound',
+    'notifications',
+  ];
   return (
     <div className={`${expPrefix}-empty-state`}>
-      {illustration && typeof illustration === 'string' && (
+      {illustration && (
         <img
-          src={require(`./EmptyStateIllustrations/${illustrationTheme}/${illustration}.svg`)}
-          alt=""
+          src={
+            typeof illustration === 'string' &&
+            defaultIllustrationOptions.includes(illustration)
+              ? require(`./EmptyStateIllustrations/${illustrationTheme}/${illustration}.svg`)
+              : illustration
+          }
+          alt="Empty state illustration"
           className={[
             `${expPrefix}-empty-state-illustration`,
             `${expPrefix}-empty-state-illustration--${illustrationSize}`,
@@ -78,22 +91,32 @@ EmptyState.propTypes = {
    */
   heading: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
   /**
-   * Empty state illustration
+   * Empty state illustration, either pass one of the default options
+   * or specify the src of a custom illustration to be displayed.
+   * To ensure you have a light and dark theme, you can conditionally specify light or dark
+   * based on your app's current theme value. Example:
+   * `illustration={appTheme === ('carbon--g100' || 'carbon--g90') ? myCustomDarkIllustration : myCustomLightIllustration}`
    */
-  illustration: PropTypes.oneOf([
-    'nodata',
-    'error',
-    'unauthorized',
-    'notags',
-    'notfound',
-    'notifications',
+  illustration: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.oneOf([
+      'nodata',
+      'error',
+      'unauthorized',
+      'notags',
+      'notfound',
+      'notifications',
+    ]),
   ]),
   /**
    * Empty state illustration size
    */
   illustrationSize: PropTypes.oneOf(['lg', 'sm']),
   /**
-   * Empty state illustration theme variations
+   * Empty state illustration theme variations.
+   * To ensure you use the correct themed illustrations, you can conditionally specify light or dark
+   * based on your app's current theme value. Example:
+   * `illustrationTheme={appTheme === ('carbon--g100' || 'carbon--g90') ? 'dark' : 'light'}`
    */
   illustrationTheme: PropTypes.oneOf(['light', 'dark']),
   /**

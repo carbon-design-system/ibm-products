@@ -8,6 +8,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add20 } from '@carbon/icons-react';
+import CustomIllustration from './EmptyStateIllustrations/light/error.svg';
 import mdx from './EmptyState.mdx';
 
 import { EmptyState } from '.';
@@ -53,6 +54,11 @@ WithDarkModeIllustration.args = {
   illustrationTheme: 'dark',
 };
 
+export const WithCustomIllustration = Template.bind({});
+WithCustomIllustration.args = {
+  illustration: CustomIllustration,
+};
+
 export const withAction = Template.bind({});
 withAction.args = {
   actionText: 'Create new',
@@ -70,6 +76,16 @@ withActionIconButton.args = {
 
 export const withLink = Template.bind({});
 withLink.args = {
+  linkText: 'View documentation',
+  linkUrl: 'https://www.carbondesignsystem.com',
+};
+
+export const withActionAndLink = Template.bind({});
+withActionAndLink.args = {
+  actionText: 'Create new',
+  actionType: 'tertiary',
+  onActionEvent: action('actionHandler'),
+  actionIcon: Add20,
   linkText: 'View documentation',
   linkUrl: 'https://www.carbondesignsystem.com',
 };

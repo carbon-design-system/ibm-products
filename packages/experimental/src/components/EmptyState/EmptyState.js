@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'carbon-components-react';
+import { Button, Link } from 'carbon-components-react';
 
 import { expPrefix } from '../../global/js/settings';
 
@@ -16,6 +16,8 @@ export const EmptyState = ({
   actionType,
   actionIcon,
   heading,
+  linkText,
+  linkUrl,
   subtext,
   illustration,
   illustrationSize,
@@ -48,6 +50,11 @@ export const EmptyState = ({
           renderIcon={actionIcon || null}>
           {actionText}
         </Button>
+      )}
+      {linkText && linkUrl && (
+        <Link className={`${expPrefix}-empty-state-link`} href={linkUrl}>
+          {linkText}
+        </Link>
       )}
     </div>
   );
@@ -89,6 +96,14 @@ EmptyState.propTypes = {
    * Empty state illustration theme variations
    */
   illustrationTheme: PropTypes.oneOf(['light', 'dark']),
+  /**
+   * Empty state link text
+   */
+  linkText: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  /**
+   * Empty state link url
+   */
+  linkUrl: PropTypes.string,
   /**
    * Empty state action button handler
    */

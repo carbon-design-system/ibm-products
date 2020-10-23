@@ -67,3 +67,9 @@ withActionIconButton.args = {
   onActionEvent: action('actionHandler'),
   actionIcon: Add20,
 };
+
+export const withLink = Template.bind({});
+withLink.args = {
+  linkText: 'View documentation',
+  linkUrl: 'https://www.carbondesignsystem.com',
+};

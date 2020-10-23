@@ -8,6 +8,7 @@
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 @import 'carbon-components/scss/components/button/button';
+@import 'carbon-components/scss/components/link/link';
 
 .#{$exp-prefix}-empty-state {
   .#{$exp-prefix}-header,
@@ -29,6 +30,8 @@
   }
 }
 
-.#{$exp-prefix}-empty-state-action-button {
+.#{$exp-prefix}-empty-state-action-button,
+.#{$exp-prefix}-empty-state-link {
+  display: block;
   margin-top: $spacing-06;
 }

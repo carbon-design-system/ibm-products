@@ -22,6 +22,16 @@ This library supports the latest versions of:
 Simply run `yarn storybook` and the storybook will be built and then served on
 port `3000` on your local machine.
 
+## Currently hosted packages
+
+Today, the packages being hosted here are:
+
+- Automation
+- CD&AI
+- Security
+- Bedrock services --> common services
+- Experimental
+
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new features,

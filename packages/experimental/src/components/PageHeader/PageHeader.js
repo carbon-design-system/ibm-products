@@ -14,6 +14,8 @@ import cx from 'classnames';
 // import { settings } from 'carbon-components';
 // const { prefix } = settings;
 
+import { ContentSwitcher } from 'carbon-components-react';
+
 import ReactResizeDetector from 'react-resize-detector';
 
 import { expPrefix } from '../../global/js/settings';
@@ -38,15 +40,16 @@ export const PageHeader = ({
   background,
   breadcrumbItems,
   className,
+  keepBreadcrumbAndTabs,
   navigation,
   pageActions,
+  preCollapseTitleRow,
   subtitle,
   tags,
   title,
   titleIcon: TitleIcon,
 }) => {
   const [metrics, setMetrics] = useState({});
-  // const [windowSize, setWindowSize] = useState({});
   const [scrollYValue, setScrollYValue] = useState(0);
   const [componentCssCustomProps, setComponentCssCustomProps] = useState({});
   const [hasBreadcrumbRow, setHasBreadcrumbRow] = useState(false);
@@ -54,10 +57,8 @@ export const PageHeader = ({
   const [pageActionsInBreadcrumbRow, setPageActionsInBreadcrumbRow] = useState(
     false
   );
-  const [rowCount, setRowCount] = useState(1);
-  const [noMarginsBelowRow, setNoMarginsBelowRow] = useState(false);
-
   const [backgroundOpacity, setBackgroundOpacity] = useState(false);
+  const [lastRowBufferActive, setLastRowBufferActive] = useState(false);
   const dynamicRefs = useRef({});
   const headerEl = useRef(null);
 
@@ -67,7 +68,8 @@ export const PageHeader = ({
     if (!headerEl.current) {
       return undefined;
     } else {
-      if (!dynamicRefs.current[selector]) {
+      let ref = dynamicRefs.current[selector];
+      if (!ref || ref.parentNode === null) {
         dynamicRefs.current[selector] = headerEl.current.querySelector(
           selector
         );
@@ -88,10 +90,15 @@ export const PageHeader = ({
     const navigationRowEl = getDynamicRef(`.${blockClass}--navigation-row`);
 
     update.headerHeight = headerEl.current ? headerEl.current.clientHeight : 0;
+    update.headerWidth = headerEl.current ? headerEl.current.clientWidth : 0;
 
     update.breadcrumbRowHeight = breadcrumbRowEl
       ? breadcrumbRowEl.clientHeight
       : 0;
+    update.breadcrumbRowWidth = breadcrumbRowEl
+      ? breadcrumbRowEl.clientWidth
+      : 0;
+
     update.breadcrumbTitleHeight = breadcrumbTitleEl
       ? breadcrumbTitleEl.clientHeight
       : 0;
@@ -105,59 +112,46 @@ export const PageHeader = ({
       ? navigationRowEl.clientHeight
       : 1;
 
-    if (window && breadcrumbRowEl) {
-      update.breadcrumbRowSpaceBelow = parseFloat(
-        window
-          .getComputedStyle(breadcrumbRowEl)
-          .getPropertyValue('margin-bottom'),
-        10
-      );
-      update.titleRowSpaceAbove = parseFloat(
-        window.getComputedStyle(titleRowEl).getPropertyValue('margin-top'),
-        10
-      );
-    } else {
-      update.breadcrumbRowSpaceBelow = 0;
+    update.breadcrumbRowSpaceBelow = 0;
+    update.titleRowSpaceAbove = 0;
+
+    if (window) {
+      let val;
+      if (breadcrumbRowEl) {
+        val = parseFloat(
+          window
+            .getComputedStyle(breadcrumbRowEl)
+            .getPropertyValue('margin-bottom'),
+          10
+        );
+        update.breadcrumbTitleHeight = isNaN(val) ? 0 : val;
+      }
+      if (titleRowEl) {
+        // debugger;
+        val = parseFloat(
+          window.getComputedStyle(titleRowEl).getPropertyValue('margin-top'),
+          10
+        );
+        update.titleRowSpaceAbove = isNaN(val) ? 0 : val;
+      }
     }
 
     setMetrics((previous) => ({ ...previous, ...update }));
   };
 
   useEffect(() => {
-    setNoMarginsBelowRow(
-      rowCount < 2 ||
-        metrics.breadcrumbRowHeight +
-          metrics.titleRowHeight +
-          metrics.subtitleRowHeight +
-          metrics.availableRowHeight +
-          metrics.navigationRowHeight <
-          metrics.headerHeight
+    setLastRowBufferActive(
+      !(navigation || tags) &&
+        ((!preCollapseTitleRow && (title || pageActions)) ||
+          subtitle ||
+          availableSpace)
     );
   }, [
-    metrics.availableRowHeight,
-    metrics.breadcrumbRowHeight,
-    metrics.headerHeight,
-    metrics.navigationRowHeight,
-    metrics.subtitleRowHeight,
-    metrics.titleRowHeight,
-    rowCount,
-  ]);
-
-  useEffect(() => {
-    // count rows as we need no margins below if there is only one row
-    let count = 0;
-    count += breadcrumbItems || actionBarItems ? 1 : 0;
-    count += title || pageActions ? 1 : 0;
-    count += subtitle ? 1 : 0;
-    count += availableSpace ? 1 : 0;
-    count += navigation || tags ? 1 : 0;
-    setRowCount(count);
-  }, [
-    actionBarItems,
     availableSpace,
-    breadcrumbItems,
     navigation,
     pageActions,
+    preCollapseTitleRow,
+    setLastRowBufferActive,
     subtitle,
     tags,
     title,
@@ -166,12 +160,15 @@ export const PageHeader = ({
   useEffect(() => {
     // Determine the location of the pageAction buttons
     setPageActionsInBreadcrumbRow(
-      scrollYValue > metrics.titleRowSpaceAbove && actionBarItems !== undefined
+      preCollapseTitleRow ||
+        (scrollYValue > metrics.titleRowSpaceAbove &&
+          actionBarItems !== undefined)
     );
   }, [
     actionBarItems,
     metrics.breadcrumbRowSpaceBelow,
     metrics.titleRowSpaceAbove,
+    preCollapseTitleRow,
     scrollYValue,
   ]);
 
@@ -180,9 +177,14 @@ export const PageHeader = ({
     setComponentCssCustomProps((prevCSSProps) => ({
       ...prevCSSProps,
       [`--${blockClass}--height-px`]: `${metrics.headerHeight}px`,
+      [`--${blockClass}--width-px`]: `${metrics.headerWidth}px`,
       [`--${blockClass}--header-top`]: `${
-        navigation
-          ? metrics.navigationRowHeight - metrics.headerHeight
+        navigation && navigation.type !== ContentSwitcher
+          ? keepBreadcrumbAndTabs
+            ? metrics.navigationRowHeight +
+              metrics.breadcrumbRowHeight -
+              metrics.headerHeight
+            : metrics.navigationRowHeight - metrics.headerHeight
           : metrics.breadcrumbRowHeight - metrics.headerHeight
       }px`,
       [`--${blockClass}--breadcrumb-title-visibility`]:
@@ -202,9 +204,12 @@ export const PageHeader = ({
             metrics.breadcrumbTitleHeight
         )
       )}`,
+      [`--${blockClass}--breadcrumb-row-width-px`]: `${metrics.breadcrumbRowWidth}px`,
       [`--${blockClass}--breadcrumb-top`]: `${Math.min(
         0,
-        navigation
+        !keepBreadcrumbAndTabs &&
+          navigation &&
+          navigation.type !== ContentSwitcher
           ? metrics.headerHeight -
               metrics.breadcrumbRowSpaceBelow -
               metrics.navigationRowHeight -
@@ -214,10 +219,13 @@ export const PageHeader = ({
       )}px`,
     }));
   }, [
+    keepBreadcrumbAndTabs,
     metrics.breadcrumbRowHeight,
     metrics.breadcrumbRowSpaceBelow,
     metrics.breadcrumbTitleHeight,
+    metrics.breadcrumbRowWidth,
     metrics.headerHeight,
+    metrics.headerWidth,
     metrics.navigationRowHeight,
     navigation,
     scrollYValue,
@@ -266,7 +274,7 @@ export const PageHeader = ({
 
   useEffect(() => {
     // Determines the amount of space needed below the title
-    let belowTitleSpace = '07';
+    let belowTitleSpace = 'default';
 
     if (
       pageActions !== undefined &&
@@ -332,10 +340,10 @@ export const PageHeader = ({
       <section
         className={cx([
           blockClass,
+          `${blockClass}--no-margins-below-row`,
           className,
           {
             [`${blockClass}--background`]: backgroundOpacity > 0,
-            [`${blockClass}--no-margins-below-row`]: noMarginsBelowRow,
           },
         ])}
         ref={headerEl}
@@ -364,7 +372,12 @@ export const PageHeader = ({
                       <BreadcrumbItem
                         href="#"
                         isCurrentPage={true}
-                        className={`${blockClass}--breadcrumb-title`}>
+                        className={cx([
+                          `${blockClass}--breadcrumb-title`,
+                          {
+                            [`${blockClass}--breadcrumb-title--pre-collapsed`]: preCollapseTitleRow,
+                          },
+                        ])}>
                         {title}
                       </BreadcrumbItem>
                     ) : (
@@ -397,7 +410,8 @@ export const PageHeader = ({
             </Row>
           ) : null}
 
-          {!(title === undefined && pageActions === undefined) ? (
+          {!preCollapseTitleRow &&
+          !(title === undefined && pageActions === undefined) ? (
             <Row
               className={cx(
                 `${blockClass}--title-row`,
@@ -452,6 +466,24 @@ export const PageHeader = ({
             </Row>
           ) : null}
 
+          {/* Last row margin-below causes problems for scroll behaviour when it sticks the header.
+          This buffer is used in CSS instead to add vertical space after the last row but only if there is no navigation row
+           */}
+          {(breadcrumbItems ||
+            actionBarItems ||
+            title ||
+            pageActions ||
+            availableSpace ||
+            subtitle) && (
+            <div
+              className={cx([
+                `${blockClass}--last-row-buffer`,
+                {
+                  [`${blockClass}--last-row-buffer--active`]: lastRowBufferActive,
+                },
+              ])}></div>
+          )}
+
           {navigation || tags ? (
             <Row
               className={cx(`${blockClass}--navigation-row`, {
@@ -459,10 +491,7 @@ export const PageHeader = ({
                   navigation !== undefined,
               })}>
               {navigation !== undefined ? (
-                <Column
-                  className={`${blockClass}--navigation-tabs`}
-                  // {...halfOrFull(tags !== undefined)}
-                >
+                <Column className={`${blockClass}--navigation-tabs`}>
                   {navigation}
                 </Column>
               ) : null}
@@ -471,9 +500,7 @@ export const PageHeader = ({
                   className={cx(`${blockClass}--navigation-tags`, {
                     [`${blockClass}--navigation-tags--tags-only`]:
                       navigation === undefined,
-                  })}
-                  // {...halfColumns}
-                >
+                  })}>
                   {tags}
                 </Column>
               ) : null}
@@ -514,6 +541,11 @@ PageHeader.propTypes = {
    */
   className: PropTypes.string,
   /**
+   * Standard behavior scrolls the breadcrumb off to leave just tabs. This
+   * option preserves vertical space for both.
+   */
+  keepBreadcrumbAndTabs: PropTypes.bool,
+  /**
    * Content for the navigation area in the PageHeader. Should
    * be a React element that is normally either a Carbon Tabs component or a
    * Carbon ContentSwitcher. Optional.
@@ -524,6 +556,11 @@ PageHeader.propTypes = {
    * is one or more Carbon Button components. Optional.
    */
   pageActions: PropTypes.element,
+  /**
+   * The title row typically starts below the breadcrumb row. This option
+   * preCollapses it into the breadcrumb row.
+   */
+  preCollapseTitleRow: PropTypes.bool,
   /**
    * A subtitle or description that provides additional context to
    * identify the current page. Optional.
@@ -549,4 +586,6 @@ PageHeader.propTypes = {
 PageHeader.defaultProps = {
   background: false,
   className: '',
+  keepBreadcrumbAndTabs: false,
+  preCollapseTitleRow: false,
 };

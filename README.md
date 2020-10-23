@@ -30,6 +30,7 @@ Today, the packages being hosted here are:
 - CD&AI
 - Security
 - Bedrock services --> common services
+- Experimental
 
 ## 🙌 Contributing
 

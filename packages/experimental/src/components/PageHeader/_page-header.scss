@@ -274,7 +274,7 @@ $raised-z-index: 99;
   display: none; /* need to figure out how to handle the tab content */
 }
 
-.#{$block-class}--navigation-tabs .#{$prefix}--tabs {
+.#{$block-class}--navigation-tabs {
   margin-left: calc(-1 * #{$spacing-04});
 }
 

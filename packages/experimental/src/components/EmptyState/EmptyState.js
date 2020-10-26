@@ -49,7 +49,11 @@ export const EmptyState = ({
           ].join(' ')}
         />
       )}
-      <h3 className={`${expPrefix}-header`}>{heading}</h3>
+      {typeof heading !== 'string' ? (
+        heading
+      ) : (
+        <h3 className={`${expPrefix}-header`}>{heading}</h3>
+      )}
       {typeof subtext !== 'string' ? (
         subtext
       ) : (

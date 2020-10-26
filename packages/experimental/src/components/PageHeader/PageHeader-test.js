@@ -44,9 +44,15 @@ const actionBarItems = (
 const availableSpace = <span className="page-header-test--available-space" />;
 const breadcrumbItems = (
   <>
-    <BreadcrumbItem href="#">Breadcrumb 1</BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
+    <BreadcrumbItem href="#" data-testid="breadcrumbitem">
+      Breadcrumb 1
+    </BreadcrumbItem>
+    <BreadcrumbItem href="#" data-testid="breadcrumbitem">
+      Breadcrumb 2
+    </BreadcrumbItem>
+    <BreadcrumbItem href="#" data-testid="breadcrumbitem">
+      Breadcrumb 3
+    </BreadcrumbItem>
   </>
 );
 const classNames = ['client-class-1', 'client-class-2'];
@@ -58,7 +64,7 @@ const pageActions = (
 );
 const subtitle = 'Optional subtitle if necessary';
 const tabBar = (
-  <Tabs>
+  <Tabs data-testid="tabs">
     <Tab label="Tab 1" />
     <Tab label="Tab 2" />
     <Tab label="Tab 3" />
@@ -67,10 +73,18 @@ const tabBar = (
 );
 const tags = (
   <>
-    <Tag type="blue">A tag</Tag>
-    <Tag type="green">A tag</Tag>
-    <Tag type="warm-gray">A tag</Tag>
-    <Tag type="purple">A tag</Tag>
+    <Tag data-testid="tags" type="blue">
+      A tag
+    </Tag>
+    <Tag data-testid="tags" type="green">
+      A tag
+    </Tag>
+    <Tag data-testid="tags" type="warm-gray">
+      A tag
+    </Tag>
+    <Tag data-testid="tags" type="purple">
+      A tag
+    </Tag>
   </>
 );
 const title = 'Page title';
@@ -98,10 +112,8 @@ describe('PageHeader', () => {
     expect(
       document.querySelectorAll('span.page-header-test--available-space')
     ).toHaveLength(0);
-    expect(
-      document.querySelectorAll(`.${carbonPrefix}--breadcrumb`)
-    ).toHaveLength(0);
-    expect(document.querySelectorAll(`.${carbonPrefix}--tabs`)).toHaveLength(0);
+    expect(screen.queryAllByTestId('breadcrumbitem')).toHaveLength(0);
+    expect(screen.queryAllByTestId('tabs')).toHaveLength(0);
     expect(
       document.querySelectorAll(`.${expPrefix}-page-header--page-actions`)
     ).toHaveLength(0);
@@ -109,7 +121,7 @@ describe('PageHeader', () => {
       document.querySelectorAll(`.${expPrefix}-page-header--subtitle`)
     ).toHaveLength(0);
     expect(screen.queryByText(subtitle)).toBeNull();
-    expect(document.querySelectorAll(`.${carbonPrefix}--tags`)).toHaveLength(0);
+    expect(screen.queryAllByTestId('tags')).toHaveLength(0);
     expect(
       document.querySelectorAll(`.${expPrefix}-page-header--title`)
     ).toHaveLength(0);
@@ -160,10 +172,10 @@ describe('PageHeader', () => {
       document.querySelectorAll('span.page-header-test--available-space')
     ).toHaveLength(1);
     expect(
-      document.querySelectorAll(`.${carbonPrefix}--breadcrumb`)
+      document.querySelectorAll(`.${expPrefix}-page-header--breadcrumb`)
     ).toHaveLength(1);
     expect(screen.getAllByText(/Breadcrumb [1-3]/)).toHaveLength(3);
-    expect(document.querySelectorAll(`.${carbonPrefix}--tabs`)).toHaveLength(1);
+    expect(screen.queryAllByTestId('tabs')).toHaveLength(1);
     expect(screen.getAllByText(/Tab [1-4]/)).toHaveLength(4);
     expect(
       document.querySelectorAll(`.${expPrefix}-page-header--page-actions`)
@@ -175,7 +187,7 @@ describe('PageHeader', () => {
       document.querySelectorAll(`.${expPrefix}-page-header--subtitle`)
     ).toHaveLength(1);
     expect(screen.getByText(subtitle).textContent).toEqual(subtitle);
-    expect(document.querySelectorAll(`.${carbonPrefix}--tabs`)).toHaveLength(1);
+    expect(screen.queryAllByTestId('tabs')).toHaveLength(1);
     expect(screen.getAllByText('A tag')).toHaveLength(4);
     expect(
       document.querySelectorAll(`.${expPrefix}-page-header--title`)

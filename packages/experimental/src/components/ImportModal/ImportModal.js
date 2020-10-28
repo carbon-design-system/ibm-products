@@ -10,8 +10,11 @@ import PropTypes from 'prop-types';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 export const ImportModal = ({
+  errorBody,
+  errorSubject,
   labelText,
   maxFileSize,
+  modalBody,
   modalHeading,
   onRequestClose,
   onRequestSubmit,
@@ -23,23 +26,23 @@ export const ImportModal = ({
   const [file, setFile] = useState(null);
   const onAddFile = (evt, { addedFiles }) => {
     evt.stopPropagation();
-    const newFile = addedFiles.map((file) => ({
+    const updatedFile = addedFiles.map((file) => ({
       uuid: uuidv4(),
       status: 'edit',
       iconDescription: 'Delete file',
       name: file.name,
       filesize: file.size,
       invalidFileType: file.invalidFileType,
-      file,
+      fileData: file,
     }))[0];
 
-    if (maxFileSize && newFile.filesize > maxFileSize) {
-      newFile.invalid = true;
-      newFile.errorSubject = 'File size exceeds limit';
-      newFile.errorBody = `${maxFileSize}kb max file size. Select a new file and try again.`;
+    if (maxFileSize && updatedFile.filesize > maxFileSize) {
+      updatedFile.invalid = true;
+      updatedFile.errorSubject = errorSubject;
+      updatedFile.errorBody = errorBody;
     }
 
-    setFile(newFile);
+    setFile(updatedFile);
   };
 
   const onRemoveFile = () => {
@@ -47,7 +50,7 @@ export const ImportModal = ({
   };
 
   const onSubmitHandler = () => {
-    onRequestSubmit(file);
+    onRequestSubmit(file.fileData);
   };
 
   const primaryButtonDisabled = !file || (file && file.invalid);
@@ -62,8 +65,7 @@ export const ImportModal = ({
       onRequestSubmit={onSubmitHandler}
       onRequestClose={onRequestClose}>
       <FormItem>
-        <p>Account photo</p>
-        <p>Only .jpg and .png files. 500kb max file size</p>
+        <p>{modalBody}</p>
         <FileUploaderDropContainer
           accept={validFileTypes}
           labelText={labelText}
@@ -92,8 +94,11 @@ export const ImportModal = ({
 };
 
 ImportModal.propTypes = {
+  errorBody: PropTypes.string,
+  errorSubject: PropTypes.string,
   labelText: PropTypes.string,
   maxFileSize: PropTypes.number,
+  modalBody: PropTypes.string,
   modalHeading: PropTypes.string,
   onRequestClose: PropTypes.func,
   onRequestSubmit: PropTypes.func,
@@ -104,13 +109,16 @@ ImportModal.propTypes = {
 };
 
 ImportModal.defaultProps = {
-  labelText: 'Drag and drop files here or click to upload',
-  maxFileSize: 500000,
-  onRequestClose: () => console.log('closed'),
-  onRequestSubmit: (file) => console.log('submitted', file),
+  errorBody: '',
+  errorSubject: '',
+  labelText: '',
+  maxFileSize: Infinity,
+  modalBody: '',
+  modalHeading: '',
+  onRequestClose: () => {},
+  onRequestSubmit: () => {},
   open: true,
-  primaryButtonText: 'Import',
-  secondaryButtonText: 'Cancel',
-  modalHeading: 'Import',
-  validFileTypes: ['image/jpeg', 'image/png'],
+  primaryButtonText: '',
+  secondaryButtonText: '',
+  validFileTypes: [],
 };

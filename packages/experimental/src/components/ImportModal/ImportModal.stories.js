@@ -22,5 +22,18 @@ const Template = (args) => {
   return <ImportModal {...args} />;
 };
 
-export const Moop = Template.bind({});
-Moop.args = {};
+export const MinimalSetup = Template.bind({});
+
+MinimalSetup.args = {
+  errorBody: '500kb max file size. Select a new file and try again.',
+  errorSubject: 'File size exceeds limit',
+  labelText: 'Drag and drop files here or click to upload',
+  maxFileSize: 500000,
+  onRequestClose: () => console.log('closed'),
+  onRequestSubmit: (file) => console.log('file contents', file),
+  open: true,
+  primaryButtonText: 'Import',
+  secondaryButtonText: 'Cancel',
+  modalHeading: 'Import',
+  validFileTypes: ['image/jpeg', 'image/png'],
+};

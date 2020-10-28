@@ -342,6 +342,8 @@ WithBackgroundBreadcrumbitemsActionbar.args = {
   background: true,
   breadcrumbItems,
   actionBarItems,
+  preCollapseTitleRow: true,
+  title,
 };
 
 export const WithBackgroundBreadcrumbitemsTitlePageactionsSubtitle = Template.bind(
@@ -365,6 +367,36 @@ WithBackgroundBreadcrumbitemsTitlePageactionsSummarydetailsTabs.args = {
   pageActions,
   availableSpace: summaryDetails,
   navigation: tabBar,
+};
+
+export const AllAttributesSetKeepsBreadcrumbAndTabs = Template.bind({});
+AllAttributesSetKeepsBreadcrumbAndTabs.args = {
+  keepBreadcrumbAndTabs: true,
+  background: true,
+  breadcrumbItems,
+  actionBarItems,
+  title,
+  titleIcon: Bee24,
+  pageActions,
+  subtitle,
+  availableSpace: summaryDetails,
+  navigation: tabBar,
+  tags,
+};
+
+export const AllAttributesSetPreCollapseTitle = Template.bind({});
+AllAttributesSetPreCollapseTitle.args = {
+  preCollapseTitleRow: true,
+  background: true,
+  breadcrumbItems,
+  actionBarItems,
+  title,
+  titleIcon: Bee24,
+  pageActions,
+  subtitle,
+  availableSpace: summaryDetails,
+  navigation: tabBar,
+  tags,
 };
 
 export const LongValuesAndManyItems = Template.bind({});
@@ -414,10 +446,12 @@ AllAttributesWithSwitches.args = {
   background: true,
   breadcrumbItems,
   breadcrumbItemsSwitchedArg: true,
+  keepBreadcrumbAndTabs: false,
   navigation: tabBar,
   navigationSwitchedArg: true,
   pageActions,
   pageActionsSwitchedArg: true,
+  preCollapseTitleRow: false,
   subtitle,
   subtitleSwitchedArg: true,
   tags,

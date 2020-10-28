@@ -2,8 +2,8 @@ name: Release
 
 on:
   push:
-    # tags:
-    #  - 'v*'
+    # branches:
+    # - master
 
     branches:
       - 12/publish-step
@@ -31,7 +31,9 @@ jobs:
       - name: Continuous integration check
         run: yarn ci-check
 
-      # `yarn lerna publish from-package --yes`
+      # Dry run - `yarn lerna publish from-package --conventional-commits --no-changelog --no-git-tag-version --no-push`
+
+      # `yarn lerna publish from-package --conventional-commits --no-changelog --yes`
       - name: Publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

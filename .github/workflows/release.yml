@@ -2,11 +2,10 @@ name: Release
 
 on:
   push:
-    # branches:
-    # - master
-
     branches:
       - 12/publish-step
+
+      # - master
 
 jobs:
   Release:
@@ -32,15 +31,19 @@ jobs:
         run: yarn ci-check
 
       # Dry run - `yarn lerna publish from-package --conventional-commits --no-changelog --no-git-tag-version --no-push`
-
-      # `yarn lerna publish from-package --conventional-commits --no-changelog --yes`
       - name: Publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: echo 'publish'
+        run: echo 'publish' # `yarn lerna publish from-package --conventional-commits --no-changelog --yes`
 
-      # https://github.com/actions/create-release - `release_name: ${{ github.ref }}, tag_name: ${{ github.ref }}`
       - name: Release
+
+        # uses: actions/create-release@latest # https://github.com/actions/create-release
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: echo 'release'
+
+        # with:
+        #   release_name: ${{ github.ref }}
+        #   tag_name: ${{ github.ref }}

@@ -11,8 +11,8 @@ import userEvent from '@testing-library/user-event';
 
 import { expPrefix } from '../../global/js/settings';
 
-import { settings } from 'carbon-components';
-const { prefix: carbonPrefix } = settings;
+// import { settings } from 'carbon-components';
+// const { prefix: carbonPrefix } = settings;
 
 import {
   BreadcrumbItem,

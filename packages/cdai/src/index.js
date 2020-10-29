@@ -6,3 +6,5 @@
 //
 
 export { IdeButton } from './components/IdeButton';
+export { IdeHTTPErrors } from './components/IdeHTTPErrors';
+export { IdeAutoSave, IdeManualSave } from './components/IdeSaving';

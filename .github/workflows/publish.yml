@@ -1,9 +1,11 @@
-name: Release
+name: Publish
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - 12/publish-step
+
+      # - master
 
 jobs:
   Release:
@@ -17,6 +19,7 @@ jobs:
         uses: actions/setup-node@v1 # https://github.com/actions/setup-node
         with:
           node-version: 12
+          registry-url: https://registry.npmjs.org
 
       - name: Install
         run: yarn --offline
@@ -27,14 +30,9 @@ jobs:
       - name: Continuous integration check
         run: yarn ci-check
 
-      - name: Release
-
-        # uses: actions/create-release@latest # https://github.com/actions/create-release
-
+      # Dry run - `yarn lerna version --conventional-commits --no-changelog --no-git-tag-version --no-push --yes`
+      - name: Publish
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: echo 'release'
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: echo 'publish' # `yarn lerna publish --conventional-commits --no-changelog --yes`
 
-        # with:
-        #   release_name: ${{ github.ref }}
-        #   tag_name: ${{ github.ref }}

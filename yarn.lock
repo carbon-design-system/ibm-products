@@ -1133,6 +1133,11 @@
   resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-10.13.0.tgz#8b17a4555dd00c4494471471c7813b3df5bab9a3"
   integrity sha512-SVWgbwa5cjT4cnZ6xJZUB8KJakSIzEqvtD23RHOWpv/qLATXbCEWzSvsa7RO0hNaqYH5EYkYxFS2Y+qV/Mz9pA==
 
+"@carbon/colors@^10.14.0":
+  version "10.14.0"
+  resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-10.14.0.tgz#daf40ec57ff28d7ade9f245ba5fdff08c7f890ce"
+  integrity sha512-BxmiXJxv+wULW0OA2SL2fz3aYlIKQ/BqU9Bb4ji/o+K2k4yjFYPLYRZuzR88tx79kipTOwPomY1mPYMbvK3kBQ==
+
 "@carbon/grid@10.12.0":
   version "10.12.0"
   resolved "https://registry.yarnpkg.com/@carbon/grid/-/grid-10.12.0.tgz#412037a8a4fa29b58347747fe78f95bc74229290"
@@ -1194,7 +1199,14 @@
   dependencies:
     "@carbon/icon-helpers" "^10.9.0"
 
-"@carbon/icons-react@10.18.0", "@carbon/icons-react@^10.13.0", "@carbon/icons-react@^10.18.0":
+"@carbon/icons-react@10.19.0", "@carbon/icons-react@^10.19.0":
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/@carbon/icons-react/-/icons-react-10.19.0.tgz#f5941db0673a669cdf4cf6602d30f006aa6192eb"
+  integrity sha512-pbAegbVe5geqmz36W//y99W4DV+WRyBvL/3733AgZ4vPuXKLrK9exOUp7C1O/NPWrxIhOppMc3QZRWuicMU31g==
+  dependencies:
+    "@carbon/icon-helpers" "^10.9.0"
+
+"@carbon/icons-react@^10.13.0":
   version "10.18.0"
   resolved "https://registry.yarnpkg.com/@carbon/icons-react/-/icons-react-10.18.0.tgz#881312b923a435f3093dacd61d77b4b5bd73b970"
   integrity sha512-UZFYVBd3rU8tCspMdbj8ZMSjzCcAA7eR9WHLjET5eSP0qg2XrGOBlbJKY2ZrIJPxwrZ4TcAnexjWTQf2JdF1rA==
@@ -1231,7 +1243,17 @@
     "@carbon/type" "^10.12.0"
     color "^3.1.2"
 
-"@carbon/themes@10.19.0", "@carbon/themes@^10.11.0":
+"@carbon/themes@10.21.0":
+  version "10.21.0"
+  resolved "https://registry.yarnpkg.com/@carbon/themes/-/themes-10.21.0.tgz#97eca5b28d5c1e2dfb9a0cb3dde93aea1ec8e702"
+  integrity sha512-3gcO0R7NYhOTBgPiRPZmr0cU4dc1SK5OtziyGMCZ7huBDskVe7jn7oMpfIifS3c6gn5Yvh1R5rp7Ue1R8DFudg==
+  dependencies:
+    "@carbon/colors" "^10.14.0"
+    "@carbon/layout" "^10.13.0"
+    "@carbon/type" "^10.16.0"
+    color "^3.1.2"
+
+"@carbon/themes@^10.11.0":
   version "10.19.0"
   resolved "https://registry.yarnpkg.com/@carbon/themes/-/themes-10.19.0.tgz#57f7e7bd2d4c0699032e139d351a2500431e5ce8"
   integrity sha512-i5znhSU4o+86P2KONv6SxNLitwvlzOlwrX1guobM3S2w9oFOaQypMEkRpklM8D2l3E0i++/qcdBCa307R0qnsA==
@@ -5890,12 +5912,12 @@ carbon-components-react@7.15.0:
     warning "^3.0.0"
     window-or-global "^1.0.1"
 
-carbon-components-react@^7.20.0:
-  version "7.20.0"
-  resolved "https://registry.yarnpkg.com/carbon-components-react/-/carbon-components-react-7.20.0.tgz#62a9abd47b9a97f58ec206917b8a4f706dbb6877"
-  integrity sha512-vybdHrtF5r17DZCMXGJlkRY3E/yUcsFNDD9WrNu474jXyAxr+2bvf7ywv7iqaPJTzdS4/61YYEekHRXDj21CTQ==
+carbon-components-react@^7.22.0:
+  version "7.22.0"
+  resolved "https://registry.yarnpkg.com/carbon-components-react/-/carbon-components-react-7.22.0.tgz#1daa7da777984a724c642dd899ba3ea1368f538c"
+  integrity sha512-36f90jO2tHIyOzOY+ytWLwmFEahXZa1bdzybQvx3QPi2HOi6UVjTADBPipvARhOFgAlpCqLL1CIqLCEKipR3uw==
   dependencies:
-    "@carbon/icons-react" "^10.18.0"
+    "@carbon/icons-react" "^10.19.0"
     classnames "2.2.6"
     downshift "5.2.1"
     flatpickr "4.6.1"
@@ -5919,10 +5941,19 @@ carbon-components@10.15.0:
     lodash.debounce "^4.0.8"
     warning "^3.0.0"
 
-carbon-components@^10.15.0, carbon-components@^10.20.0:
+carbon-components@^10.15.0:
   version "10.20.0"
   resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.20.0.tgz#3a927ad4f566c5dc263d32c257269c74a3ab23cc"
   integrity sha512-MysxXg4/DpDt9GJPV3zmxi9X6HyGxr7DyROvVjf4SCyYrBqTeLOoajd3sbPhKxPjDdRIyqEb2roLq5DbbtazLg==
+  dependencies:
+    flatpickr "4.6.1"
+    lodash.debounce "^4.0.8"
+    warning "^3.0.0"
+
+carbon-components@^10.22.0:
+  version "10.22.0"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.22.0.tgz#866791ca8e3f651054543d63f6a898cff6bcacf9"
+  integrity sha512-0cADWQf1e+6YsxXnjEz630Z7GZa3Z1ssO0UW/HnnJy03Dr+qdT3o6sIgSqObYLddJliAVcjeTlwJshZ9K4bWJQ==
   dependencies:
     flatpickr "4.6.1"
     lodash.debounce "^4.0.8"

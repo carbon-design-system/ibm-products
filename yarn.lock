@@ -1201,6 +1201,13 @@
   dependencies:
     "@carbon/icon-helpers" "^10.9.0"
 
+"@carbon/icons-react@^10.20.0":
+  version "10.20.0"
+  resolved "https://registry.yarnpkg.com/@carbon/icons-react/-/icons-react-10.20.0.tgz#f69938a80bac78eee47ddd1c30e544f180d3e09b"
+  integrity sha512-xjdfCsbrgyWo5ykjmBYq/JZIfJ0rlhm2Da54gzNZjtHs416JFWYx0CbykEHzFwOulMOS8uba9uDyxtBUd1T3ew==
+  dependencies:
+    "@carbon/icon-helpers" "^10.9.0"
+
 "@carbon/import-once@10.3.0", "@carbon/import-once@^10.3.0":
   version "10.3.0"
   resolved "https://registry.yarnpkg.com/@carbon/import-once/-/import-once-10.3.0.tgz#58617da4efb6d7a11352d8e6b7209da1d39f364d"
@@ -5890,12 +5897,12 @@ carbon-components-react@7.15.0:
     warning "^3.0.0"
     window-or-global "^1.0.1"
 
-carbon-components-react@^7.20.0:
-  version "7.20.0"
-  resolved "https://registry.yarnpkg.com/carbon-components-react/-/carbon-components-react-7.20.0.tgz#62a9abd47b9a97f58ec206917b8a4f706dbb6877"
-  integrity sha512-vybdHrtF5r17DZCMXGJlkRY3E/yUcsFNDD9WrNu474jXyAxr+2bvf7ywv7iqaPJTzdS4/61YYEekHRXDj21CTQ==
+carbon-components-react@^7.23.0:
+  version "7.23.0"
+  resolved "https://registry.yarnpkg.com/carbon-components-react/-/carbon-components-react-7.23.0.tgz#d05fa5d7bb4cc2835ee0001f5a860ec12c2c8610"
+  integrity sha512-QNdk4QCJz2Uu8k8rx2a0kIDyUawpQby47gnaWMWrLGsgQ6eKiF/yHbw1izn4I9tKWm4wU4NzVsnfE3OVFDcmPw==
   dependencies:
-    "@carbon/icons-react" "^10.18.0"
+    "@carbon/icons-react" "^10.20.0"
     classnames "2.2.6"
     downshift "5.2.1"
     flatpickr "4.6.1"

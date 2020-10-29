@@ -25,10 +25,16 @@ const Template = (args) => {
 export const MinimalSetup = Template.bind({});
 
 MinimalSetup.args = {
-  errorBody: '500kb max file size. Select a new file and try again.',
-  errorSubject: 'File size exceeds limit',
+  defaultErrorBody: 'Select a new file and try again.',
+  errorHeader: 'Import failed',
+  fetchErrorBody: 'Unable to fetch URL.',
+  inputButtonText: 'Add file',
+  inputHeader: 'Add a file by specifcying a URL',
+  inputPlaceholder: 'URL',
+  invalidFileTypeErrorBody: 'Invalid file type.',
   labelText: 'Drag and drop files here or click to upload',
   maxFileSize: 500000,
+  maxFileSizeErrorBody: '500kb max file size. Select a new file and try again.',
   onRequestClose: () => console.log('closed'),
   onRequestSubmit: (file) => console.log('file contents', file),
   open: true,

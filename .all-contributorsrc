@@ -76,6 +76,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "dbrugger",
+      "name": "Dominik Brugger",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/10086178?v=4",
+      "profile": "https://github.com/dbrugger",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,

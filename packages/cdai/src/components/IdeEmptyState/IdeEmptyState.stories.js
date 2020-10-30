@@ -15,9 +15,11 @@ import { IdeEmptyState } from '.';
 import { action } from '@storybook/addon-actions';
 import customLgImage from './test_assets/custom.lg.svg';
 import customSmImage from './test_assets/custom.sm.svg';
+import styles from './_storybook.scss';
 
 storiesOf(getComponentLabel('IdeEmptyState'), module)
   .addParameters({ readme: { sidebar } })
+  .addParameters({ styles })
   .addDecorator(withInfo)
   .addDecorator(withKnobs)
   .add('Default', () => (

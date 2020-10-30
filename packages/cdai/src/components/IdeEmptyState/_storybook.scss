@@ -5,8 +5,4 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import 'globals/scss/variables';
-
-@import 'components/IdeButton/IdeButton';
-@import 'components/IdeEmptyState/IdeEmptyState';
-@import 'components/IdeHTTPErrors/IdeHTTPErrors';
+@import './IdeEmptyState';

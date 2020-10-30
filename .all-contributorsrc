@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "SimonFinney",
+      "name": "Simon Finney",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/3846874?v=4",
+      "profile": "http://simonfinney.dev",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "ibm-cloud-cognitive",
+  "projectOwner": "carbon-design-system",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}

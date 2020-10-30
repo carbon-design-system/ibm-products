@@ -34,6 +34,8 @@ const defaultProps = {
   invalidFileTypeErrorBody: 'Invalid file type.',
   maxFileSize: 500000,
   maxFileSizeErrorBody: '500kb max file size. Select a new file and try again.',
+  modalBody:
+    'you can specify a file to import by either dragging it into the drag and drop area or by specifying a url. (maximum file size of 500kb; .jpg and .png file extensions only.)',
   onRequestClose: () => console.log('closed'),
   onRequestSubmit: (file) => console.log('file contents', file),
   open: true,
@@ -44,7 +46,7 @@ const defaultProps = {
 };
 
 const Template = (args) => {
-  return <ImportModal {...defaultProps} {...args} />;
+  return <ImportModal {...args} />;
 };
 
 /**
@@ -86,5 +88,7 @@ export const WithStateManager = () => {
   );
 };
 
-export const MinimalSetup = Template.bind({});
-MinimalSetup.args = {};
+export const Minimal = Template.bind({});
+Minimal.args = {
+  ...defaultProps,
+};

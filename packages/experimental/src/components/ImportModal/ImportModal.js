@@ -7,7 +7,7 @@ import {
   Button,
 } from 'carbon-components-react';
 import PropTypes from 'prop-types';
-// import { expPrefix } from '../../global/js/settings';
+import { expPrefix } from '../../global/js/settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 export const ImportModal = ({
@@ -104,6 +104,9 @@ export const ImportModal = ({
   };
 
   const primaryButtonDisabled = !file || (file && file.invalid);
+  const importButtonDisabled = !fileUrl || file;
+  const fileUploaderDisabled = file;
+  const textInputDisabled = file;
 
   return (
     <Modal
@@ -113,38 +116,54 @@ export const ImportModal = ({
       modalHeading={modalHeading}
       primaryButtonDisabled={primaryButtonDisabled}
       onRequestSubmit={onSubmitHandler}
-      onRequestClose={onRequestClose}>
-      <p>{modalBody}</p>
-      <FileUploaderDropContainer
-        accept={validFileTypes}
-        labelText={fileDropLabel}
-        onAddFiles={onAddFile}
-      />
-      <h5>{inputHeader}</h5>
-      <TextInput
-        id={inputId}
-        labelText={inputLabel}
-        onChange={inputHandler}
-        placeholder={inputPlaceholder}
-        value={fileUrl}
-      />
-      <Button onClick={fetchFile}>{inputButtonText}</Button>
-      <div className="bx--file-container" style={{ width: '100%' }}>
-        {file && (
-          <FileUploaderItem
-            onDelete={onRemoveFile}
-            name={file.name}
-            status={file.status}
-            size="default"
-            uuid={file.uuid}
-            iconDescription={file.iconDescription}
-            invalid={file.invalid}
-            errorBody={file.errorBody}
-            errorSubject={file.errorSubject}
-            filesize={file.filesize}
-            invalidFileType={file.invalidFileType}
+      onRequestClose={onRequestClose}
+      className={`${expPrefix}--import-modal`}>
+      <div className={`${expPrefix}--import-modal-inner`}>
+        <p className={`${expPrefix}--import-modal-body`}>{modalBody}</p>
+        <p className={`${expPrefix}--import-modal-heading`}>
+          Add files using drag and drop
+        </p>
+        <FileUploaderDropContainer
+          accept={validFileTypes}
+          labelText={fileDropLabel}
+          onAddFiles={onAddFile}
+          disabled={fileUploaderDisabled}
+        />
+        <p className={`${expPrefix}--import-modal-heading`}>{inputHeader}</p>
+        <div className={`${expPrefix}--input-group`}>
+          <TextInput
+            id={inputId}
+            labelText={inputLabel}
+            onChange={inputHandler}
+            placeholder={inputPlaceholder}
+            value={fileUrl}
+            disabled={textInputDisabled}
           />
-        )}
+          <Button
+            onClick={fetchFile}
+            className={`${expPrefix}--import-button`}
+            size="sm"
+            disabled={importButtonDisabled}>
+            {inputButtonText}
+          </Button>
+        </div>
+        <div className="bx--file-container" style={{ width: '100%' }}>
+          {file && (
+            <FileUploaderItem
+              onDelete={onRemoveFile}
+              name={file.name}
+              status={file.status}
+              size="default"
+              uuid={file.uuid}
+              iconDescription={file.iconDescription}
+              invalid={file.invalid}
+              errorBody={file.errorBody}
+              errorSubject={file.errorSubject}
+              filesize={file.filesize}
+              invalidFileType={file.invalidFileType}
+            />
+          )}
+        </div>
       </div>
     </Modal>
   );

@@ -22,6 +22,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "moores2",
+      "name": "Simon Moore",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/6977424?v=4",
+      "profile": "https://github.com/moores2",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,

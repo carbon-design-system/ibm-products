@@ -80,7 +80,9 @@ storiesOf(getComponentLabel('IdeEmptyState'), module)
     <IdeEmptyState
       {...{
         button: () => (
-          <button onClick={action('Clicked')}>Custom button</button>
+          <button type="button" onClick={action('Clicked')}>
+            Custom button
+          </button>
         ),
       }}
     />

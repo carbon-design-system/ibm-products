@@ -58,7 +58,10 @@
     "parser": "babel-eslint",
     "extends": [
       "carbon"
-    ]
+    ],
+    "rules": {
+      "react/display-name": [0]
+    }
   },
   "husky": {
     "hooks": {

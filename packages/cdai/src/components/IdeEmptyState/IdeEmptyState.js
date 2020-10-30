@@ -69,8 +69,9 @@ const IdeEmptyState = ({ body, button, format, image, links, title }) => {
   return (
     <div className={`${prefix} ${prefix}--format-${format}`}>
       <div
-        className={`${prefix}__image-container ${prefix}__image-container--format-${format}`}></div>
-      {renderImage()}
+        className={`${prefix}__image-container ${prefix}__image-container--format-${format}`}>
+        {renderImage()}
+      </div>
       <div
         {...{
           className: `${prefix}__content-container ${prefix}__content-container--format-${format}`,

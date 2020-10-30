@@ -5,12 +5,11 @@
 > details.
 
 Empty states are moments in an app where there is no data to display to the
-user. They are most commonly seen the first time a user interacts with a
-product or page, but can be used when data has been deleted or is
-unavailable.
+user. They are most commonly seen the first time a user interacts with a product
+or page, but can be used when data has been deleted or is unavailable.
 
-See https://www.carbondesignsystem.com/patterns/empty-states-pattern/ for
-more info.
+See https://www.carbondesignsystem.com/patterns/empty-states-pattern/ for more
+info.
 
 ## Carbon elements used
 
@@ -21,18 +20,16 @@ more info.
 ## Component details
 
 All props are optional, but it is recommended to change the `title` prop
-(because it defaults to `CHANGE ME`). A default image is always rendered.
-Other props do not render if left undefined.
-
+(because it defaults to `CHANGE ME`). A default image is always rendered. Other
+props do not render if left undefined.
 
 ### `format`: String (Optional)
-  
-The format to use when rendering (sm = vertical, lg = horizontal).
-Defaults to `lg` if undefined.
+
+The format to use when rendering (sm = vertical, lg = horizontal). Defaults to
+`lg` if undefined.
 
 - `sm`
 - `lg` (Default)
-
 
 ### `image`: String (Optional)
 
@@ -74,10 +71,10 @@ The source of the image to render.
 
 #### Function
 
-A user-defined function that returns an image to render. Use for complex
-cases where you need full control (see storybook for an example). It is
-NOT RECOMMENDED to use this unless you absolutely have to deviate from
-the standard designs.
+A user-defined function that returns an image to render. Use for complex cases
+where you need full control (see storybook for an example). It is NOT
+RECOMMENDED to use this unless you absolutely have to deviate from the standard
+designs.
 
 ```
 <IdeEmptyState
@@ -91,24 +88,20 @@ the standard designs.
 />
 ```
 
-
 ### `title`: String (Optional)
 
-The text rendered in the 1st row of the content area. Defaults to `CHANGE
-ME` if undefined. Must be pre-translated.
-
+The text rendered in the 1st row of the content area. Defaults to `CHANGE ME` if
+undefined. Must be pre-translated.
 
 ### `body`: String (Optional)
-
 
 The text rendered in the 2nd row of the content area. Does not render if
 undefined. Must be pre-translated.
 
-
 ### `button`: Function OR Object (Optional)
 
-The primary action button rendered in the 3rd row of the content area. Does
-not render if undefined.
+The primary action button rendered in the 3rd row of the content area. Does not
+render if undefined.
 
 #### Object
 
@@ -140,14 +133,12 @@ The text to use when rendering. Must be pre-translated.
 
 #### Function
 
-A user-defined function that returns a button to render. Use for complex
-cases where you need full control (see storybook for an example). It is NOT
-RECOMMENDED to use this unless you absolutely have to deviate from the
-standard designs.
-
+A user-defined function that returns a button to render. Use for complex cases
+where you need full control (see storybook for an example). It is NOT
+RECOMMENDED to use this unless you absolutely have to deviate from the standard
+designs.
 
 ### `links`: Object OR Array (Optional)
-
 
 The links rendered in the 4th row of the content area. Does not render if
 undefined.
@@ -158,8 +149,8 @@ A link object.
 
 ```
 {
-  text: '...', (String, required) 
-  url: '...', (String, required) 
+  text: '...', (String, required)
+  url: '...', (String, required)
 }
 ```
 
@@ -178,12 +169,12 @@ An array of links objects.
 ```
 [
   {
-    text: '...', (String, required) 
-    url: '...', (String, required) 
+    text: '...', (String, required)
+    url: '...', (String, required)
   },
   {
-    text: '...', (String, required) 
-    url: '...', (String, required) 
+    text: '...', (String, required)
+    url: '...', (String, required)
   },
 ]
 ```
@@ -196,7 +187,6 @@ The text to display when rendering the link. Must be pre-translated.
 
 The link's destination.
 
-
 ## Remaining items to implement/designed
 
 - a11y
@@ -207,6 +197,6 @@ The link's destination.
 |         Date | Change                                                           | Contributed by, Product                    |
 | -----------: | :--------------------------------------------------------------- | :----------------------------------------- |
 | Feb 21, 2020 | Enhance image prop to allow custom images                        | Simon Ho (simonho@ca.ibm.com), API Connect |
-| Feb  6, 2020 | Refactor entire component based on new designs (BREAKING CHANGE) | Simon Ho (simonho@ca.ibm.com), API Connect |
+|  Feb 6, 2020 | Refactor entire component based on new designs (BREAKING CHANGE) | Simon Ho (simonho@ca.ibm.com), API Connect |
 | Sep 25, 2019 | Refactor SVG rendering                                           | Simon Ho (simonho@ca.ibm.com), API Connect |
-| Sep  9, 2019 | First contribution of the IdeEmptyState component                | Simon Ho (simonho@ca.ibm.com), API Connect |
+|  Sep 9, 2019 | First contribution of the IdeEmptyState component                | Simon Ho (simonho@ca.ibm.com), API Connect |

@@ -64,7 +64,7 @@ storiesOf(getComponentLabel('IdeEmptyState'), module)
     <IdeEmptyState
       {...{
         format: 'sm',
-        image: className => (
+        image: (className) => (
           <img
             {...{
               alt: 'Custom alt',

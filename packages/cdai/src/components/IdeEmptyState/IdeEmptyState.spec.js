@@ -10,7 +10,7 @@ import customImage from './test_assets/custom.lg.svg';
 
 describe('IdeEmptyState', () => {
   let component, unmount;
-  const mountTestComponent = props => {
+  const mountTestComponent = (props) => {
     const { getJSXForComponent, mountComponent } = jth;
     const test = mountComponent(
       getJSXForComponent(IdeEmptyState, {}, props),

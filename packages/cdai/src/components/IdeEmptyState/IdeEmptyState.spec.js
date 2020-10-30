@@ -7,6 +7,7 @@
 
 import { IdeEmptyState } from '.';
 import customImage from './test_assets/custom.lg.svg';
+import * as jth from '../../component_helpers/jest_test_helper_functions.js';
 
 describe('IdeEmptyState', () => {
   let component, unmount;

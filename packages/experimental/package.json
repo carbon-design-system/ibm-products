@@ -34,9 +34,9 @@
     "react": "^16.13.1"
   },
   "dependencies": {
-    "@carbon/icons-react": "^10.18.0",
-    "carbon-components": "^10.20.0",
-    "carbon-components-react": "^7.20.0",
+    "@carbon/icons-react": "^10.19.0",
+    "carbon-components": "^10.22.0",
+    "carbon-components-react": "^7.22.0",
     "carbon-icons": "^7.0.7",
     "react-resize-detector": "^5.2.0"
   }

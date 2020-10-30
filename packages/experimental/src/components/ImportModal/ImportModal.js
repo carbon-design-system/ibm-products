@@ -15,12 +15,14 @@ export const ImportModal = ({
   errorHeader,
   fetchErrorBody,
   fetchErrorHeader,
+  fileDropLabel,
   inputButtonText,
   inputHeader,
+  inputId,
+  inputLabel,
   inputPlaceholder,
   invalidFileTypeErrorBody,
   invalidFileTypeErrorHeader,
-  labelText,
   maxFileSize,
   maxFileSizeErrorBody,
   maxFileSizeErrorHeader,
@@ -34,7 +36,7 @@ export const ImportModal = ({
   validFileTypes,
 }) => {
   const [file, setFile] = useState(null);
-  const [fileUrl, setFileUrl] = useState('https://loremflickr.com/320/240');
+  const [fileUrl, setFileUrl] = useState('');
 
   const updateFile = (newFile, fetchError) => {
     const updatedFile = {
@@ -115,14 +117,16 @@ export const ImportModal = ({
       <p>{modalBody}</p>
       <FileUploaderDropContainer
         accept={validFileTypes}
-        labelText={labelText}
+        labelText={fileDropLabel}
         onAddFiles={onAddFile}
       />
       <h5>{inputHeader}</h5>
       <TextInput
+        id={inputId}
+        labelText={inputLabel}
+        onChange={inputHandler}
         placeholder={inputPlaceholder}
         value={fileUrl}
-        onChange={inputHandler}
       />
       <Button onClick={fetchFile}>{inputButtonText}</Button>
       <div className="bx--file-container" style={{ width: '100%' }}>
@@ -147,26 +151,97 @@ export const ImportModal = ({
 };
 
 ImportModal.propTypes = {
+  /**
+   * The default message shown for an import error
+   */
   defaultErrorBody: PropTypes.string,
+  /**
+   * The header that is displayed to show an error message
+   */
   errorHeader: PropTypes.string,
+  /**
+   * Optional error body to display specifically for a fetch error
+   */
   fetchErrorBody: PropTypes.string,
+  /**
+   * Optional error header to display specifically for a fetch error
+   */
   fetchErrorHeader: PropTypes.string,
+  /**
+   * Label for the drag and drop box
+   */
+  fileDropLabel: PropTypes.string,
+  /**
+   * Button text for import by url button
+   */
   inputButtonText: PropTypes.string,
+  /**
+   * Header to display above import by url
+   */
   inputHeader: PropTypes.string,
+  /**
+   * ID for text input
+   */
+  inputId: PropTypes.string,
+  /**
+   * Label for text input
+   */
+  inputLabel: PropTypes.string,
+  /**
+   * Placeholder for text input
+   */
   inputPlaceholder: PropTypes.string,
+  /**
+   * Optional error message to display specifically for a invalid file type error
+   */
   invalidFileTypeErrorBody: PropTypes.string,
+  /**
+   * Optional error header to display specifically for a invalid file type error
+   */
   invalidFileTypeErrorHeader: PropTypes.string,
-  labelText: PropTypes.string,
+  /**
+   * File size limit in bytes
+   */
   maxFileSize: PropTypes.number,
+  /**
+   * Optional error message to display specifically for a max file size error
+   */
   maxFileSizeErrorBody: PropTypes.string,
+  /**
+   * Optional error header to display specifically for a max file size error
+   */
   maxFileSizeErrorHeader: PropTypes.string,
+  /**
+   * Content that is displayed inside the modal
+   */
   modalBody: PropTypes.string,
+  /**
+   * Header that displays at the top of the modal
+   */
   modalHeading: PropTypes.string,
+  /**
+   * Specify a handler for closing modal
+   */
   onRequestClose: PropTypes.func,
+  /**
+   * Specify a handler for "submitting" modal. Access the imported file via `file => {}`
+   */
   onRequestSubmit: PropTypes.func,
+  /**
+   * Specify whether the Modal is currently open
+   */
   open: PropTypes.bool,
+  /**
+   * Specify the text for the primary button
+   */
   primaryButtonText: PropTypes.string,
+  /**
+   * Specify the text for the secondary button
+   */
   secondaryButtonText: PropTypes.string,
+  /**
+   * Specify the types of files that this input should be able to receive
+   */
   validFileTypes: PropTypes.array,
 };
 
@@ -176,11 +251,13 @@ ImportModal.defaultProps = {
   fetchErrorBody: '',
   fetchErrorHeader: '',
   inputButtonText: '',
+  inputId: '',
   inputHeader: '',
+  inputLabel: '',
   inputPlaceholder: '',
   invalidFileTypeErrorBody: '',
   invalidFileTypeErrorHeader: '',
-  labelText: '',
+  fileDropLabel: '',
   maxFileSize: Infinity,
   maxFileSizeErrorBody: '',
   maxFileSizeErrorHeader: '',

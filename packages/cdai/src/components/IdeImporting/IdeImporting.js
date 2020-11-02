@@ -364,51 +364,54 @@ export default class IdeImporting extends React.Component {
 }
 
 IdeImporting.propTypes = {
-  sync: PropTypes.bool,
+  addUrlBttonLabel: PropTypes.string,
+  allowInvalidFilenameInUrl: PropTypes.bool,
+  allowValidFileEditing: PropTypes.bool,
+  autoCloseDelay: PropTypes.number,
+  defaultUncaughtErrorBody: PropTypes.string,
+  defaultUncaughtErrorSubject: PropTypes.string,
+  dropDescription: PropTypes.string,
+  enableFileDrop: PropTypes.bool,
+  enableUpload: PropTypes.bool,
+  enableUrlInput: PropTypes.bool,
+  extensionIsInvalidText: PropTypes.string,
+  extensionIsRequiredText: PropTypes.string,
+  fileDropHeader: PropTypes.string,
+  /** Max file size in bytes. Defaults to `Infinity`. */
+  fileDropLabel: PropTypes.string,
+  fileDropLabelPlural: PropTypes.string,
+  fileDropLabelSingular: PropTypes.string,
+  /** The file tab label. Defaults to "File" */
+  fileTabLabel: PropTypes.string,
+  filesToUploadText: PropTypes.string,
+  filesToUploadTextPlural: PropTypes.string,
+  importDescription: PropTypes.string,
+  invalidExtensionText: PropTypes.string,
+  invalidFileNameText: PropTypes.string,
+  invalidUrlText: PropTypes.string,
+  maxFileSize: PropTypes.number,
+  maxFileSizeMessage: PropTypes.string,
+  multiple: PropTypes.bool,
+  mustBeExtensionTextPlural: PropTypes.string,
+  mustBeExtensionTextSingular: PropTypes.string,
+  onFileAdded: PropTypes.string,
   onFileRemoved: PropTypes.func,
   /** Called when the entire form is submitted. See README for examples. */
   onImport: PropTypes.func,
+  onValidateUrl: PropTypes.func,
   /** Defaults to `true`. Set to false to hide/close the modal. */
   open: PropTypes.bool,
-  /** Defaults to `['*']`. Specify valid file extensions. */
-  validExtensions: PropTypes.arrayOf(PropTypes.string).isRequired,
-  /** Max file size in bytes. Defaults to `Infinity`. */
-  maxFileSize: PropTypes.number,
-  /** The file tab label. Defaults to "File" */
-  fileTabLabel: PropTypes.string,
+  singleFileLabel: PropTypes.string,
+  sync: PropTypes.bool,
+  uploadDescription: PropTypes.string,
+  urlInputHeader: PropTypes.string,
+  urlInputLabel: PropTypes.string,
   /** The file tab label. Defaults to "URL" */
   urlTabLabel: PropTypes.string,
-  multiple: PropTypes.bool,
-  fileDropLabel: PropTypes.string,
-  urlInputLabel: PropTypes.string,
-  addUrlBttonLabel: PropTypes.string,
-  autoCloseDelay: PropTypes.number,
-  onValidateUrl: PropTypes.func,
-  maxFileSizeMessage: PropTypes.string,
-  invalidUrlText: PropTypes.string,
-  enableFileDrop: PropTypes.bool,
-  enableUrlInput: PropTypes.bool,
-  extensionIsRequiredText: PropTypes.string,
-  invalidFileNameText: PropTypes.string,
-  invalidExtensionText: PropTypes.string,
-  allowInvalidFilenameInUrl: PropTypes.bool,
-  defaultUncaughtErrorSubject: PropTypes.string,
-  defaultUncaughtErrorBody: PropTypes.string,
-  filesToUploadText: PropTypes.string,
-  filesToUploadTextPlural: PropTypes.string,
-  enableUpload: PropTypes.bool,
-  uploadDescription: PropTypes.string,
-  importDescription: PropTypes.string,
-  dropDescription: PropTypes.string,
-  urlInputHeader: PropTypes.string,
-  fileDropHeader: PropTypes.string,
+  /** Defaults to `['*']`. Specify valid file extensions. */
+  validExtensions: PropTypes.arrayOf(PropTypes.string).isRequired,
   verbLabel: PropTypes.string,
-  singleFileLabel: PropTypes.string,
 };
-
-//
-// TODO(ritch): fix these VVV
-//
 
 IdeImporting.defaultProps = {
   uploadDescription: 'Use the inputs below to select file(s) to be uploaded.',
@@ -431,7 +434,6 @@ IdeImporting.defaultProps = {
   maxFileSizeSubject: 'File size exceeds limit',
   maxFileSizeMessage: 'File is larger than the max file size.',
   addUrlBttonLabel: 'Add File',
-  // TODO(ritch) de-duplicate these with the exporting component
   extensionIsRequiredText: 'File must have a valid extension.',
   extensionIsInvalidText: 'Extension is not valid.',
   errorTextSingular: 'Failed to import file.',

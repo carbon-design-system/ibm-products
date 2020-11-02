@@ -7,18 +7,21 @@
 
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
-
 import { IdeImporting } from '.';
 import Readme from './README.md';
-
 import { getComponentLabel } from '../../component_helpers/StorybookHelper';
 import sleep from '../../component_helpers/sleep';
+import PropTypes from 'prop-types';
 import styles from './_storybook.scss';
 
 let attempt = 0;
 
 const StoryWrapper = ({ children }) => {
   return <div style={{ maxWidth: '800px', margin: '50px' }}>{children}</div>;
+};
+
+StoryWrapper.propTypes = {
+  children: PropTypes.node,
 };
 
 storiesOf(`${getComponentLabel('IdeImporting')}/Uploading`, module)
@@ -98,19 +101,19 @@ storiesOf(`${getComponentLabel('IdeImporting')}/Uploading`, module)
         };
         return (
           <div>
-            {files.length ? <FileList files={files} /> : null}
+            {files.length ? buildFilesList(files) : null}
             <IdeImporting {...props} />
           </div>
         );
       }
 
-      function FileList({ files }) {
+      const buildFilesList = (files) => {
         return (
           <div>
             <h1>List of files...</h1>
             <ul>
               {files.map((f) => (
-                <li>
+                <li key={f.toString()}>
                   <h2>
                     {f.file.name}{' '}
                     <strong>{Math.round(f.file.size / 1000)}kb</strong>
@@ -120,7 +123,7 @@ storiesOf(`${getComponentLabel('IdeImporting')}/Uploading`, module)
             </ul>
           </div>
         );
-      }
+      };
 
       return <Story />;
     },

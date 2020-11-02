@@ -304,10 +304,10 @@ export default class IdeImporting extends React.Component {
     const inputProps = {
       key: 'importing-input',
       id: 'ide-input-modal-url-input',
-      label: this.props.urlInputLabel,
+      labelText: this.props.urlInputLabel,
       value: this.state.urlInput,
       disabled: !multiple && this.state.filesToUpload.length > 0,
-      invalid: this.state.urlInput && !urlInputIsValid,
+      invalid: !!(this.state.urlInput && !urlInputIsValid),
       invalidText: this.props.invalidUrlText,
       className: `${idePrefix}-importing-url-input-field`,
       onChange: (e) => {

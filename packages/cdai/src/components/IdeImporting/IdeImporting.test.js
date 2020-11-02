@@ -174,7 +174,7 @@ describe('IdeImporting unit tests', () => {
       onFileAdded: mockHandleFileAdded,
     };
     const wrapper = new IdeImportingWrapper(props);
-    wrapper.addFileViaUrl([{ name: '***' }]);
+    wrapper.addFileViaUrl('****');
     expect(mockHandleFileAdded).not.toBeCalled();
     wrapper.unmount();
   });

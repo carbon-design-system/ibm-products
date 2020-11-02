@@ -65,7 +65,6 @@ describe('IdeImporting unit tests', () => {
     const wrapper = new IdeImportingWrapper(props);
     wrapper.simulateDropFiles([{ name: 'test-file.png' }]);
     wrapper.expectPropCalled('onFileAdded');
-    wrapper.unmount();
   });
 
   it('should handle adding a file via drop (single)', () => {
@@ -78,7 +77,6 @@ describe('IdeImporting unit tests', () => {
     const wrapper = new IdeImportingWrapper(props);
     wrapper.simulateDropFiles([{ name: 'test-file.png' }]);
     wrapper.expectPropCalled('onFileAdded');
-    wrapper.unmount();
   });
 
   it('should disable the file drop as soon as there is text in the URL field (single)', () => {
@@ -121,7 +119,6 @@ describe('IdeImporting unit tests', () => {
     wrapper.expectPropCalled('onFileAdded');
     wrapper.removeFirstFile();
     wrapper.expectNoFiles();
-    wrapper.unmount();
   });
 
   it('should call onFileRemoved when removing a file if supplied', () => {
@@ -138,7 +135,6 @@ describe('IdeImporting unit tests', () => {
     wrapper.removeFirstFile();
     wrapper.expectPropCalled('onFileRemoved');
     wrapper.expectNoFiles();
-    wrapper.unmount();
   });
 
   it('should handle adding a file larger than the max size via drop', () => {
@@ -188,7 +184,6 @@ describe('IdeImporting unit tests', () => {
     const wrapper = new IdeImportingWrapper(props);
     wrapper.addFileViaUrl('http://valid.com/image.png');
     wrapper.expectPropCalled('onFileAdded');
-    wrapper.unmount();
   });
 
   it('should handle custom url validation', async () => {
@@ -202,7 +197,6 @@ describe('IdeImporting unit tests', () => {
     wrapper.addFileViaUrl('http://valid.com/image.png');
     wrapper.expectPropCalled('onFileAdded');
     wrapper.expectPropCalled('onValidateUrl');
-    wrapper.unmount();
   });
 
   it('should handle invalid url extensions', async () => {
@@ -227,7 +221,6 @@ describe('IdeImporting unit tests', () => {
     const wrapper = new IdeImportingWrapper(props);
     wrapper.addFileViaUrl('http://valid.com/image.notvalid');
     expect(mockHandleFileAdded).toBeCalled();
-    wrapper.unmount();
   });
 
   it('should handle invalid url extensions plural', async () => {
@@ -252,7 +245,6 @@ describe('IdeImporting unit tests', () => {
     const wrapper = new IdeImportingWrapper(props);
     wrapper.dropAFewPngFiles();
     wrapper.simulateDeleteFile();
-    wrapper.unmount();
   });
 
   describe('countFiles', () => {
@@ -377,7 +369,6 @@ describe('IdeImporting unit tests', () => {
         };
         const wrapper = new IdeImportingWrapper(props);
         wrapper.dropAFewPngFiles();
-        wrapper.unmount();
       }
 
       // simple override

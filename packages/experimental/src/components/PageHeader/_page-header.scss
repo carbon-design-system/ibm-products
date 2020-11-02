@@ -52,7 +52,6 @@ $raised-z-index: 99;
 
 .#{$block-class}--breadcrumb-row {
   position: sticky;
-  // stylelint-disable-next-line carbon/layout-token-use
   top: var(--#{$block-class}--breadcrumb-top);
   z-index: $raised-z-index;
   min-height: var(--#{$block-class}--breadcrumb-min-height);
@@ -96,6 +95,7 @@ $raised-z-index: 99;
 }
 
 .#{$block-class}--breadcrumb-row .#{$block-class}--page-actions {
+  white-space: nowrap;
   visibility: hidden;
   opacity: 0;
   transition: all $duration--fast-02 carbon--motion('entrance', 'productive');
@@ -184,7 +184,10 @@ $raised-z-index: 99;
   }
 
   &.#{$block-class}--title-row--spacing-below-05 {
-    margin-bottom: $layout-01;
+    + .#{$block-class}--last-row-buffer--active {
+      // only used when nothing below title
+      height: $spacing-05;
+    }
   }
 
   &.#{$block-class}--title-row--spacing-below-06 {
@@ -202,6 +205,7 @@ $raised-z-index: 99;
 }
 
 .#{$block-class}--title-column {
+  flex: 0 1 60%;
   overflow: hidden; /* required for ellipsis in title */
 }
 
@@ -222,6 +226,7 @@ $raised-z-index: 99;
 }
 
 .#{$block-class}--page-actions {
+  flex: 1 1 40%;
   text-align: right;
 }
 
@@ -258,12 +263,16 @@ $raised-z-index: 99;
 
 .#{$block-class}--navigation-row {
   flex-wrap: wrap-reverse;
-  margin-top: $layout-01;
+  margin-top: $spacing-04;
 
   .#{$prefix}--content-switcher {
     box-sizing: content-box;
     padding-bottom: $layout-01;
   }
+}
+
+.#{$block-class}--last-row-buffer--active + .#{$block-class}--navigation-row {
+  margin-top: 0;
 }
 
 .#{$block-class}--navigation-row--spacing-above-06 {
@@ -276,10 +285,16 @@ $raised-z-index: 99;
 
 .#{$block-class}--navigation-tabs {
   margin-left: calc(-1 * #{$spacing-04});
+
+  .#{$block-class}--navigation-row--has-tags & {
+    flex: 0 1 75%;
+    max-width: 75%;
+  }
 }
 
 .#{$block-class}--navigation-tags {
   display: flex;
+  flex: 1 1 25%;
   align-items: center;
   justify-content: flex-end;
   padding-bottom: $spacing-02; /* design says 3 from bottom of tag, which has $spacing-02 already. 2 * $spacing-02 = $spacing-3 */
@@ -289,11 +304,7 @@ $raised-z-index: 99;
 
 .#{$block-class}--navigation-tags--tags-only {
   justify-content: flex-start;
-  // stylelint-disable-next-line carbon/layout-token-use
-  padding-bottom: calc(
-    #{$spacing-04} + #{$spacing-02}
-  ); /* edge case for carbon token linter allowing non-token values */
-  /* design says 5 from bottom of tag, which has margin $spacing-02  */
+  padding-bottom: $spacing-04;
 }
 
 .#{$block-class}--navigation-row .#{$prefix}--content-switcher-btn {

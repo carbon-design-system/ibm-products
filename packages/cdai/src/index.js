@@ -5,6 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+export { IdeEmptyState } from './components/IdeEmptyState';
 export { IdeButton } from './components/IdeButton';
 export { IdeHTTPErrors } from './components/IdeHTTPErrors';
 export { IdeAutoSave, IdeManualSave } from './components/IdeSaving';

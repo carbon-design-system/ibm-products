@@ -1,3 +1,8 @@
+---
+name: New component or pattern 💡
+about: Create a new component or pattern
+---
+
 # Name of component or pattern
 
 ## Brief description
@@ -35,7 +40,7 @@ e.g. sketch files, icons, images, prototypes
 ### Continuing in experimental package
 
 - [ ] Storybook - stories to cover design scenarios, story with long, min and
-      max content, etc
+      max content, story to demonstrate right-to-left support, etc.
 - [ ] Doc tab in storybook derived from design docs with embedded stories where
       appropriate
 - [ ] Code to include prop-types with comments for automated DocGen

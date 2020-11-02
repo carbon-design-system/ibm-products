@@ -13,7 +13,7 @@
   margin-left: $spacing-05;
 }
 
-.#{$exp-prefix}--import-modal-heading {
+.#{$exp-prefix}--import-modal-label {
   margin-bottom: $spacing-03;
   @include carbon--type-style('productive-heading-01');
 }

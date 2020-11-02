@@ -25,8 +25,10 @@ export default {
 
 const defaultProps = {
   defaultErrorBody: 'Select a new file and try again.',
+  dropHeader: 'Add files using drag and drop',
   errorHeader: 'Import failed',
   fetchErrorBody: 'Unable to fetch URL.',
+  fileDropHeader: 'Add files using drag and drop',
   fileDropLabel: 'Drag and drop files here or click to upload',
   inputButtonText: 'Add file',
   inputHeader: 'Add a file by specifcying a URL',

@@ -15,6 +15,7 @@ export const ImportModal = ({
   errorHeader,
   fetchErrorBody,
   fetchErrorHeader,
+  fileDropHeader,
   fileDropLabel,
   inputButtonText,
   inputHeader,
@@ -66,8 +67,8 @@ export const ImportModal = ({
     setFile(updatedFile);
   };
 
-  const fetchFile = async (e) => {
-    e.preventDefault();
+  const fetchFile = async (evt) => {
+    evt.preventDefault();
     const fileName = fileUrl.substring(fileUrl.lastIndexOf('/') + 1);
     setFile({
       name: fileName,
@@ -99,14 +100,14 @@ export const ImportModal = ({
     onRequestSubmit(file.fileData);
   };
 
-  const inputHandler = (e) => {
-    setFileUrl(e.target.value);
+  const inputHandler = (evt) => {
+    setFileUrl(evt.target.value);
   };
 
   const primaryButtonDisabled = !file || (file && file.invalid);
-  const importButtonDisabled = !fileUrl || file;
-  const fileUploaderDisabled = file;
-  const textInputDisabled = file;
+  const importButtonDisabled = !fileUrl || !!file;
+  const fileUploaderDisabled = !!file;
+  const textInputDisabled = !!file;
 
   return (
     <Modal
@@ -120,16 +121,14 @@ export const ImportModal = ({
       className={`${expPrefix}--import-modal`}>
       <div className={`${expPrefix}--import-modal-inner`}>
         <p className={`${expPrefix}--import-modal-body`}>{modalBody}</p>
-        <p className={`${expPrefix}--import-modal-heading`}>
-          Add files using drag and drop
-        </p>
+        <p className={`${expPrefix}--import-modal-label`}>{fileDropHeader}</p>
         <FileUploaderDropContainer
           accept={validFileTypes}
           labelText={fileDropLabel}
           onAddFiles={onAddFile}
           disabled={fileUploaderDisabled}
         />
-        <p className={`${expPrefix}--import-modal-heading`}>{inputHeader}</p>
+        <p className={`${expPrefix}--import-modal-label`}>{inputHeader}</p>
         <div className={`${expPrefix}--input-group`}>
           <TextInput
             id={inputId}
@@ -160,7 +159,6 @@ export const ImportModal = ({
               errorBody={file.errorBody}
               errorSubject={file.errorSubject}
               filesize={file.filesize}
-              invalidFileType={file.invalidFileType}
             />
           )}
         </div>
@@ -186,6 +184,10 @@ ImportModal.propTypes = {
    * Optional error header to display specifically for a fetch error
    */
   fetchErrorHeader: PropTypes.string,
+  /**
+   * Header for the drag and drop box
+   */
+  fileDropHeader: PropTypes.string,
   /**
    * Label for the drag and drop box
    */
@@ -276,6 +278,7 @@ ImportModal.defaultProps = {
   inputPlaceholder: '',
   invalidFileTypeErrorBody: '',
   invalidFileTypeErrorHeader: '',
+  fileDropHeader: '',
   fileDropLabel: '',
   maxFileSize: Infinity,
   maxFileSizeErrorBody: '',

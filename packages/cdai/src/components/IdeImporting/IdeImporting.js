@@ -394,7 +394,7 @@ IdeImporting.propTypes = {
   multiple: PropTypes.bool,
   mustBeExtensionTextPlural: PropTypes.string,
   mustBeExtensionTextSingular: PropTypes.string,
-  onFileAdded: PropTypes.string,
+  onFileAdded: PropTypes.func,
   onFileRemoved: PropTypes.func,
   /** Called when the entire form is submitted. See README for examples. */
   onImport: PropTypes.func,

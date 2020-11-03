@@ -111,6 +111,8 @@ Array [
     <ForwardRef(SideNav)
       addFocusListeners={false}
       addMouseListeners={false}
+      aria-label="Example Aria Labeled"
+      aria-labelledby="Example Aria Labeled by"
       className="ide-navigation--nav-theme ide-navigation--nav-overrides "
       data-ui-id="IdeNavigation--left-nav"
       defaultExpanded={false}

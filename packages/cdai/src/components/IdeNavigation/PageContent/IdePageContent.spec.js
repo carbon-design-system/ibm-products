@@ -7,7 +7,7 @@
 
 import IdePageContent from './IdePageContent';
 import { withBleedClass, withChildren } from './test_assets/testProps.js';
-import * as jth from '../../component_helpers/jest_test_helper_functions.js';
+import * as jth from '../../../component_helpers/jest_test_helper_functions.js';
 
 describe('IdePageContent unit tests', () => {
   let component, unmount;

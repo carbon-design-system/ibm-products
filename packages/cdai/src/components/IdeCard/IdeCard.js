@@ -319,7 +319,7 @@ IdeCard.propTypes = {
   /** Optional prop - custom class names to be used for a card */
   className: PropTypes.string,
   /** Optional prop - needed in case cardDisabled: true is provided to display the tooltip text */
-  disabledText: PropTypes.string,
+  disabledText: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** OnClick handler - callback function to model the onClick behaviour of a card*/
   onInteract: PropTypes.func,
   /** Optional prop - set this to "external" to always display the launch out icon */

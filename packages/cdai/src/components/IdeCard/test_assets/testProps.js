@@ -47,7 +47,7 @@ export const nodeContentCard = {
 export const nodeContentCardNoContent = {
   ...defaultProps,
   cardType: 'node',
-  cardContent: false,
+  cardContent: {},
 };
 
 export const customCard = {
@@ -107,8 +107,6 @@ export const externalLinkCard = {
 
 export const noCardType = {
   cardId: 'foobar',
-  cardType: 'invalidProp',
-  cardSize: 'invalidProp',
   cardContent: {
     links: [
       { text: '7 started', href: '#started' },

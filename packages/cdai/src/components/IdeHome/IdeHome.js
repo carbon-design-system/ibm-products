@@ -310,6 +310,7 @@ IdeHome.propTypes = {
     }),
     /** A react component, with all props etc defined */
     PropTypes.element,
+    PropTypes.object,
   ]),
   /** An optional callback function to call when the toggle is activated. */
   headerHandleCollapseFunc: PropTypes.func,

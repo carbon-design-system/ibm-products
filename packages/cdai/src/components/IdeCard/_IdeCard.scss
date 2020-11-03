@@ -11,7 +11,6 @@
 @import 'carbon-components/scss/components/tile/tile';
 @import 'carbon-components/scss/components/tooltip/tooltip';
 
-// Force override for IdeCard stories background
 .sb-show-main {
   background-color: #ffffff !important;
 }
@@ -47,8 +46,8 @@ $ide-card-size: carbon--mini-units(30);
 .#{$ide-prefix}-card--card-overides:hover,
 .#{$ide-prefix}-card--card-overides:visited,
 .#{$ide-prefix}-card--card-overides:visited:hover {
-  // carbon overides to remove blue text color
   padding: carbon--mini-units(2);
+  // carbon overides to remove blue text color
   color: inherit; /* no blue link color */
   text-decoration: none; /* no underline */
 }

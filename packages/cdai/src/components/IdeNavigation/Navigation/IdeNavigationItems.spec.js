@@ -6,7 +6,7 @@
 //
 
 import { IdeSideNavLink, IdeSideNavMenu } from './IdeNavigationItems';
-import * as jth from '../../component_helpers/jest_test_helper_functions.js';
+import * as jth from '../../../component_helpers/jest_test_helper_functions.js';
 
 describe('IdeNavigationItem unit tests', () => {
   let component, unmount;

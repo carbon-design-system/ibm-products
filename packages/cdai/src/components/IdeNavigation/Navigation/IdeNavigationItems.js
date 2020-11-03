@@ -10,10 +10,19 @@ import { SideNavLink, SideNavMenu } from 'carbon-components-react';
 import { idePrefix } from '../../../globals/js/settings';
 import PropTypes from 'prop-types';
 
-export const IdeSideNavLink = ({ className = '', ...others }) => (
+export const IdeSideNavLink = ({
+  className = '',
+  // eslint-disable-next-line
+  children = <></>,
+  ariaLabel = '',
+  ...others
+}) => (
   <SideNavLink
     {...others}
     className={`${idePrefix}-navigation--altHover-link ${className}`}
+    // eslint-disable-next-line
+    children={children}
+    aria-label={ariaLabel}
     large
   />
 );
@@ -27,6 +36,8 @@ export const IdeSideNavMenu = ({ className = '', ...others }) => (
 );
 
 IdeSideNavLink.propTypes = {
+  ariaLabel: PropTypes.string,
+  children: PropTypes.node,
   className: PropTypes.string,
 };
 

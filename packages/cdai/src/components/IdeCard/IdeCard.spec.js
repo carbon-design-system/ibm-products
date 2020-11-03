@@ -111,7 +111,7 @@ describe('IdeCard unit tests', () => {
       <IdeCard
         cardId="id"
         cardType="text"
-        cardDisabled="true"
+        cardDisabled
         disabledText="You don't have access to this instance"
         cardContent={{ text: 'testText' }}
       />

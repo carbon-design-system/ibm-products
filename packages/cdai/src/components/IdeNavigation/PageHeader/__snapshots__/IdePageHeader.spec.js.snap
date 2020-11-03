@@ -60,7 +60,6 @@ Array [
             data-ui-id="IdePageHeader--tabs-container"
           >
             <Tabs
-              role="navigation"
               selected={0}
               selectionMode="automatic"
               type="default"
@@ -98,7 +97,7 @@ Array [
             className="storybook--idepageheader-button"
             data-ui-id="custom"
           >
-            <ForwardRef(Button)
+            <Button
               disabled={false}
               kind="primary"
               size="default"
@@ -108,7 +107,7 @@ Array [
               type="button"
             >
               Add new topic
-            </ForwardRef(Button)>
+            </Button>
           </div>
         </div>
       </div>
@@ -184,7 +183,6 @@ Array [
             data-ui-id="IdePageHeader--tabs-container"
           >
             <Tabs
-              role="navigation"
               selected={0}
               selectionMode="automatic"
               type="default"

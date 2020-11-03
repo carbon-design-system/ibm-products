@@ -5,5 +5,4 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-$ide-prefix: 'ide' !default;
-$card__disabled-background-colour: rgba($ui-background, 0.4);
+export { default as IdeHome } from './IdeHome.js';

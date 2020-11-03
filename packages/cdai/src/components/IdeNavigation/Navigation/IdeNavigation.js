@@ -93,14 +93,6 @@ export default class IdeNavigation extends React.Component {
 }
 
 IdeNavigation.propTypes = {
-  /** expanded. Specify this to make this a controlled component. Use onToggle to be notified of expansion changes */
-  expanded: PropTypes.bool,
-  /** onToggle. Called when a controlled component to notify the parent of a change in expansion state  */
-  onToggle: PropTypes.func,
-  /** showFirstLevel. Defaults to true. Set this to false to only show the content, and not the left navigation */
-  showFirstLevel: PropTypes.bool,
-  /** footerDescription - required. Provide a pre translated string to describe what the expansion control does */
-  footerDescription: PropTypes.string.isRequired,
   /** Required aria attributes. Both must be provided */
   ariaAttributes: PropTypes.shape({
     /** aria labelledby markup which is applied to the navigation, referencing the label which describe the nav. Must be provided */
@@ -108,14 +100,22 @@ IdeNavigation.propTypes = {
     /** aria label which is applied to the navigation. Must be provided, and be pre translated */
     'aria-label': PropTypes.string.isRequired,
   }).isRequired,
-  /** className - optional styling to be applied to the component */
+  /** children. This should be/represent the current page selected by the user */
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
   className: PropTypes.string,
   /** contentClassName - optional styling to be applied to the the container which renders any children */
   contentClassName: PropTypes.string,
+  /** expanded. Specify this to make this a controlled component. Use onToggle to be notified of expansion changes */
+  expanded: PropTypes.bool,
+  /** footerDescription - required. Provide a pre translated string to describe what the expansion control does */
+  footerDescription: PropTypes.string.isRequired,
   /** navigation links. An array of Carbon SideNav items, being menus, links, text etc*/
   navigationLinks: PropTypes.arrayOf(PropTypes.node).isRequired,
-  /** children. This should be/represent the current page selected by the user */
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
+  /** onToggle. Called when a controlled component to notify the parent of a change in expansion state  */
+  onToggle: PropTypes.func,
+  /** showFirstLevel. Defaults to true. Set this to false to only show the content, and not the left navigation */
+  showFirstLevel: PropTypes.bool,
+  /** className - optional styling to be applied to the component */
 };
 
 IdeNavigation.defaultProps = {

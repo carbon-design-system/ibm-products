@@ -8,7 +8,7 @@
 import React from 'react';
 import { SideNavLink, SideNavMenu } from 'carbon-components-react';
 import { idePrefix } from '../../../globals/js/settings';
-// export Ide varients of the Carbon SideNav items - these add the large prop, and alt hover states
+import PropTypes from 'prop-types';
 
 export const IdeSideNavLink = ({ className = '', ...others }) => (
   <SideNavLink
@@ -25,3 +25,11 @@ export const IdeSideNavMenu = ({ className = '', ...others }) => (
     large
   />
 );
+
+IdeSideNavLink.propTypes = {
+  className: PropTypes.string,
+};
+
+IdeSideNavMenu.propTypes = {
+  className: PropTypes.string,
+};

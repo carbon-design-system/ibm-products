@@ -15,6 +15,7 @@ import {
   withOneSetToRender,
 } from './test_assets/testProps.js';
 import { idAttributeSelector } from '../../component_helpers/IDHelper';
+import * as jth from '../../component_helpers/jest_test_helper_functions.js';
 
 describe('IdeHome unit tests', () => {
   let component, unmount;

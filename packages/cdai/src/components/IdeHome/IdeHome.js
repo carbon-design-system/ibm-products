@@ -86,7 +86,7 @@ export default class IdeHome extends React.Component {
         ideCardProps.cardContent = { links: task.taskLinks };
       }
 
-      return <IdeCard {...ideCardProps}></IdeCard>;
+      return <IdeCard {...ideCardProps} key={ideCardProps.key}></IdeCard>;
     });
   }
 
@@ -143,26 +143,23 @@ export default class IdeHome extends React.Component {
       }
       if (multipleSetType === 'section') {
         // sections case
-        setsJSX = (
-          <>
-            {setsToRender.map((set) => {
-              return (
-                <section
-                  {...idAttribute(`IdeHome-Section-${set.id}`)}
-                  className={`${prefix}--row ${idePrefix}-home-full-width`}>
-                  {set.heading && (
-                    <h3
-                      {...idAttribute(`IdeHome-Section-title-${set.id}`)}
-                      className={`${idePrefix}-home--section-title`}>
-                      {set.heading}
-                    </h3>
-                  )}
-                  {set.tasks ? set.tasks : set.renderFunc()}
-                </section>
-              );
-            })}
-          </>
-        );
+        setsJSX = setsToRender.map((set) => {
+          return (
+            <section
+              key={set.id}
+              {...idAttribute(`IdeHome-Section-${set.id}`)}
+              className={`${prefix}--row ${idePrefix}-home-full-width`}>
+              {set.heading && (
+                <h3
+                  {...idAttribute(`IdeHome-Section-title-${set.id}`)}
+                  className={`${idePrefix}-home--section-title`}>
+                  {set.heading}
+                </h3>
+              )}
+              {set.tasks ? set.tasks : set.renderFunc()}
+            </section>
+          );
+        });
       }
     } else if (setsToRender.length === 1) {
       // one set case
@@ -293,20 +290,14 @@ export default class IdeHome extends React.Component {
 }
 
 IdeHome.propTypes = {
-  /** An optional boolean flag which should be instantiated to true by the consumer should they want the banner to be collapsible. */
-  headerCollapsible: PropTypes.bool,
-  /** An optional boolean flag which should be instantiated to false by the consumer so that the expanded banner is initially used. When this flag is provided the collapsible banner will be used by default. */
-  headerCollapsed: PropTypes.bool,
-  /** An optional callback function to call when the toggle is activated. */
-  headerHandleCollapseFunc: PropTypes.func,
-  /** An optional toggle text to use on the collapsible header button - for expanding the header. */
-  headerButtonTextExpand: PropTypes.string,
   /** An optional toggle text to use on the collapsible header button - for collapsing the header. */
   headerButtonTextCollapse: PropTypes.string,
-  /** Main header text. Must be pre translated */
-  headerOne: PropTypes.string.isRequired,
-  /** Secondary header text. Optional. Must be pre translated */
-  headerTwo: PropTypes.string,
+  /** An optional toggle text to use on the collapsible header button - for expanding the header. */
+  headerButtonTextExpand: PropTypes.string,
+  /** An optional boolean flag which should be instantiated to false by the consumer so that the expanded banner is initially used. When this flag is provided the collapsible banner will be used by default. */
+  headerCollapsed: PropTypes.bool,
+  /** An optional boolean flag which should be instantiated to true by the consumer should they want the banner to be collapsible. */
+  headerCollapsible: PropTypes.bool,
   /** Optional graphic properties. This graphic will be rendered alongside the header text. This can either be a react component, or the following shape*/
   headerGraphic: PropTypes.oneOfType([
     PropTypes.shape({
@@ -320,6 +311,16 @@ IdeHome.propTypes = {
     /** A react component, with all props etc defined */
     PropTypes.element,
   ]),
+  /** An optional callback function to call when the toggle is activated. */
+  headerHandleCollapseFunc: PropTypes.func,
+  /** Main header text. Must be pre translated */
+  headerOne: PropTypes.string.isRequired,
+  /** Secondary header text. Optional. Must be pre translated */
+  headerTwo: PropTypes.string,
+  /** The initial set to render on mount. Should be the id of the set you want to render first. If undefined, will render the first set provide */
+  initialSet: PropTypes.string,
+  /** How multiple sets are to be displayed - tab is default. */
+  multipleSetType: PropTypes.oneOf(['section', 'tab']),
   /** Set of grouped activities or tasks. If more than one is provided options appear as tabs. */
   sets: PropTypes.arrayOf(
     PropTypes.shape({
@@ -396,10 +397,6 @@ IdeHome.propTypes = {
       renderFunc: PropTypes.func,
     })
   ),
-  /** The initial set to render on mount. Should be the id of the set you want to render first. If undefined, will render the first set provide */
-  initialSet: PropTypes.string,
-  /** How multiple sets are to be displayed - tab is default. */
-  multipleSetType: PropTypes.oneOf(['section', 'tab']),
 };
 
 IdeHome.defaultProps = {

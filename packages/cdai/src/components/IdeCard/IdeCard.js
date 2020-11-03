@@ -264,32 +264,29 @@ export class IdeCard extends React.Component {
     secondaryGraphic
   ) => {
     return (
-      <>
-        {(cardGraphic || cardType === 'externalLink') && (
-          <div
-            className={
-              `${idePrefix}-card--tile-img-group` +
-              (!cardGraphic ? ` ${idePrefix}-card--tile-img-group-right` : '')
-            }
-            {...idAttribute(`ide-card-${cardId}-Image-Group`)}>
-            {cardGraphic && (
-              <div
-                className={`${idePrefix}-card--tile-img`}
-                {...idAttribute(`ide-card-${cardId}-Image`)}>
-                {cardGraphic && renderGraphic(cardGraphic)}
-              </div>
-            )}
-            {(cardType === 'externalLink' ||
-              secondaryGraphic === 'external') && (
-              <div
-                className={`${idePrefix}-card--tile-img`}
-                {...idAttribute(`ide-card-${cardId}-launch-Image`)}>
-                {renderGraphic(Launch)}
-              </div>
-            )}
-          </div>
-        )}
-      </>
+      (cardGraphic || cardType === 'externalLink') && (
+        <div
+          className={
+            `${idePrefix}-card--tile-img-group` +
+            (!cardGraphic ? ` ${idePrefix}-card--tile-img-group-right` : '')
+          }
+          {...idAttribute(`ide-card-${cardId}-Image-Group`)}>
+          {cardGraphic && (
+            <div
+              className={`${idePrefix}-card--tile-img`}
+              {...idAttribute(`ide-card-${cardId}-Image`)}>
+              {cardGraphic && renderGraphic(cardGraphic)}
+            </div>
+          )}
+          {(cardType === 'externalLink' || secondaryGraphic === 'external') && (
+            <div
+              className={`${idePrefix}-card--tile-img`}
+              {...idAttribute(`ide-card-${cardId}-launch-Image`)}>
+              {renderGraphic(Launch)}
+            </div>
+          )}
+        </div>
+      )
     );
   };
 }
@@ -299,34 +296,34 @@ IdeCard.propTypes = {
   cardContent: PropTypes.object,
   /** Optional prop - display a disabled card with a tooltip on hover*/
   cardDisabled: PropTypes.bool,
-  /** Optional prop - small text displayed at the bottom of the card*/
-  cardHeadingDescription: PropTypes.string,
-  /** The unique id of the card */
-  cardId: PropTypes.string,
   /** Optional property - icon to be displayed on the card */
   cardGraphic: PropTypes.object,
   /** Required property - card main text */
   cardHeading: PropTypes.string.isRequired,
-  /** Optional property - Link to be used for the underlying anchor */
-  cardHref: PropTypes.string,
-  /** Card cardLinkType - if the task represents a link, whether the url should open in a new tab */
-  cardLinkType: PropTypes.oneOf(['internal', 'external']),
-  /** Card href target - if the task represents an external link then whether to specify a target */
-  cardLinkTarget: PropTypes.string,
-  /** The size of the card - standard by default */
-  cardSize: PropTypes.oneOf(['standard', 'large']),
+  /** Optional prop - small text displayed at the bottom of the card*/
+  cardHeadingDescription: PropTypes.string,
   /** Optional prop - small text on top of the main card heading*/
   cardHeadingTitle: PropTypes.string,
+  /** Optional property - Link to be used for the underlying anchor */
+  cardHref: PropTypes.string,
+  /** The unique id of the card */
+  cardId: PropTypes.string,
+  /** Card href target - if the task represents an external link then whether to specify a target */
+  cardLinkTarget: PropTypes.string,
+  /** Card cardLinkType - if the task represents a link, whether the url should open in a new tab */
+  cardLinkType: PropTypes.oneOf(['internal', 'external']),
+  /** The size of the card - standard by default */
+  cardSize: PropTypes.oneOf(['standard', 'large']),
   /** The type of the card (link, node, text, or custom) - text by default */
   cardType: PropTypes.oneOf(['externalLink', 'node', 'link', 'text', 'custom']),
   /** Optional prop - custom class names to be used for a card */
   className: PropTypes.string,
   /** Optional prop - needed in case cardDisabled: true is provided to display the tooltip text */
   disabledText: PropTypes.string,
-  /** Optional prop - set this to "external" to always display the launch out icon */
-  secondaryGraphic: PropTypes.oneOf(['external']),
   /** OnClick handler - callback function to model the onClick behaviour of a card*/
   onInteract: PropTypes.func,
+  /** Optional prop - set this to "external" to always display the launch out icon */
+  secondaryGraphic: PropTypes.oneOf(['external']),
 };
 
 IdeCard.defaultProps = {

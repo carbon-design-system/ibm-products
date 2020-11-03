@@ -39,10 +39,10 @@ IdePageContent.defaultProps = {
 IdePageContent.propTypes = {
   /** bleedClassName. If your content required a bleed effect, provide a class name here (with your desired background colour) to apply this effect */
   bleedClassName: PropTypes.string,
-  /** className. Append your own css class to the grid if required */
-  className: PropTypes.string,
   /** children. Standard prop, required to render content inside this component/take advantage of the provided grid and alignment classes */
   children: PropTypes.node,
+  /** className. Append your own css class to the grid if required */
+  className: PropTypes.string,
 };
 
 export default IdePageContent;

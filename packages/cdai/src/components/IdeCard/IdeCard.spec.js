@@ -9,6 +9,7 @@ import { IdeCard } from '.';
 import { mount } from 'enzyme';
 import React from 'react';
 import { idAttributeSelector } from '../../component_helpers/IDHelper';
+import * as jth from '../../component_helpers/jest_test_helper_functions.js';
 import {
   defaultProps,
   disabledCard,

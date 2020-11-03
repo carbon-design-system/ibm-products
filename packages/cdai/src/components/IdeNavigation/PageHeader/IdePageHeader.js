@@ -131,18 +131,18 @@ IdePageHeader.defaultProps = {
 IdePageHeader.propTypes = {
   /** optional - an instance of the Carbon Breadcrumb component representing you current navigation state */
   breadcrumb: PropTypes.node,
-  /** optional - a render function, which will pass as parameter one the JSX for your header. Use this to render other content alongisde the header (eg an icon)  */
-  headingRenderFunction: PropTypes.func,
+  /** optional - className. Use this to add any custom css you may need */
+  className: PropTypes.string,
+  /** optional - an area of bespoke JSX rendering. Use this if you want to position specific elements alongside/in this navigation element */
+  customContent: PropTypes.node,
   /** optional - a string to display as the header text */
   heading: PropTypes.string,
+  /** optional - a render function, which will pass as parameter one the JSX for your header. Use this to render other content alongisde the header (eg an icon)  */
+  headingRenderFunction: PropTypes.func,
   /** optional - a string to display as the subtitle under the header text */
   subtitle: PropTypes.string,
   /** optional - an instance of the Carbon Tabs component, with child tabs contained within. Itended content of the Tab are react-router links to navigate you around the UI */
   tabs: PropTypes.node,
-  /** optional - an area of bespoke JSX rendering. Use this if you want to position specific elements alongside/in this navigation element */
-  customContent: PropTypes.node,
-  /** optional - className. Use this to add any custom css you may need */
-  className: PropTypes.string,
 };
 
 export default IdePageHeader;

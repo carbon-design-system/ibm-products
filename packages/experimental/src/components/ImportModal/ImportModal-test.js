@@ -17,7 +17,7 @@ global.fetch = jest.fn(() =>
   Promise.resolve({
     ok: true,
     status: 200,
-    blob: () => Promise.resolve({}),
+    blob: () => Promise.resolve({ type: 'image/jpeg' }),
   })
 );
 

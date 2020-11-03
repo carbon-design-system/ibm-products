@@ -36,78 +36,100 @@ export const ImportModal = ({
   secondaryButtonText,
   validFileTypes,
 }) => {
-  const [file, setFile] = useState(null);
-  const [fileUrl, setFileUrl] = useState('');
+  const [files, setFiles] = useState([]);
+  const [importUrl, setImportUrl] = useState('');
 
-  const updateFile = (newFile, fetchError) => {
-    const updatedFile = {
-      uuid: uuidv4(),
-      status: 'edit',
-      iconDescription: 'Delete file',
-      name: newFile.name,
-      filesize: newFile.size,
-      invalidFileType: newFile.invalidFileType,
-      fileData: newFile,
-    };
+  const isInvalidFileType = (file) => {
+    const acceptedTypes = new Set(validFileTypes);
+    const { name, type: mimeType = '' } = file;
+    const extension = name.split('.').pop();
+    if (acceptedTypes.has(mimeType) || acceptedTypes.has(extension))
+      return false;
+    return true;
+  };
 
-    if (fetchError) {
-      updatedFile.errorBody = fetchErrorBody || defaultErrorBody;
-      updatedFile.errorSubject = fetchErrorHeader || errorHeader;
-      updatedFile.invalid = true;
-    } else if (updatedFile.invalidFileType) {
-      updatedFile.errorBody = invalidFileTypeErrorBody || defaultErrorBody;
-      updatedFile.errorSubject = invalidFileTypeErrorHeader || errorHeader;
-      updatedFile.invalid = true;
-    } else if (maxFileSize && updatedFile.filesize > maxFileSize) {
-      updatedFile.errorBody = maxFileSizeErrorBody || defaultErrorBody;
-      updatedFile.errorSubject = maxFileSizeErrorHeader || errorHeader;
-      updatedFile.invalid = true;
-    }
-
-    setFile(updatedFile);
+  const updateFiles = (newFiles) => {
+    const updatedFiles = newFiles.map((file) => {
+      const newFile = {
+        uuid: file.uuid || uuidv4(),
+        status: 'edit',
+        iconDescription: 'Delete file',
+        name: file.name,
+        filesize: file.size,
+        invalidFileType: file.invalidFileType,
+        fileData: file,
+        fetchError: file.fetchError,
+      };
+      if (newFile.fetchError) {
+        newFile.errorBody = fetchErrorBody || defaultErrorBody;
+        newFile.errorSubject = fetchErrorHeader || errorHeader;
+        newFile.invalid = true;
+      } else if (newFile.invalidFileType) {
+        newFile.errorBody = invalidFileTypeErrorBody || defaultErrorBody;
+        newFile.errorSubject = invalidFileTypeErrorHeader || errorHeader;
+        newFile.invalid = true;
+      } else if (maxFileSize && newFile.filesize > maxFileSize) {
+        newFile.errorBody = maxFileSizeErrorBody || defaultErrorBody;
+        newFile.errorSubject = maxFileSizeErrorHeader || errorHeader;
+        newFile.invalid = true;
+      }
+      return newFile;
+    });
+    const finalFiles = [...files, ...updatedFiles];
+    setFiles(finalFiles);
   };
 
   const fetchFile = async (evt) => {
     evt.preventDefault();
-    const fileName = fileUrl.substring(fileUrl.lastIndexOf('/') + 1);
-    setFile({
+    const fileName = importUrl
+      .substring(importUrl.lastIndexOf('/') + 1)
+      .split('?')[0];
+    const pendingFile = {
       name: fileName,
       status: 'uploading',
-    });
+      uuid: uuidv4(),
+    };
+    const updatedFiles = [...files, pendingFile];
+    setFiles(updatedFiles);
     try {
-      const response = await fetch(fileUrl);
+      const response = await fetch(importUrl);
       if (!response.ok || response.status !== 200)
         throw new Error(response.status);
       const blob = await response.blob();
-      const file = new File([blob], fileName);
-      updateFile(file);
+      const newFile = new File([blob], fileName, { type: blob.type });
+      newFile.invalidFileType = isInvalidFileType(newFile);
+      newFile.uuid = pendingFile.uuid;
+      updateFiles([newFile]);
     } catch (err) {
       console.error('fetch failed', err);
-      updateFile({ name: fileName }, err);
+      const newFile = {
+        ...pendingFile,
+        fetchError: true,
+      };
+      updateFiles([newFile], true);
     }
   };
 
   const onAddFile = (evt, { addedFiles }) => {
     evt.stopPropagation();
-    updateFile(addedFiles[0]);
+    updateFiles(addedFiles);
   };
 
-  const onRemoveFile = () => {
-    setFile(null);
+  const onRemoveFile = (uuid) => {
+    const updatedFiles = files.filter((f) => f.uuid !== uuid);
+    setFiles(updatedFiles);
   };
 
   const onSubmitHandler = () => {
-    onRequestSubmit(file.fileData);
+    onRequestSubmit(files);
   };
 
   const inputHandler = (evt) => {
-    setFileUrl(evt.target.value);
+    setImportUrl(evt.target.value);
   };
 
-  const primaryButtonDisabled = !file || (file && file.invalid);
-  const importButtonDisabled = !fileUrl || !!file;
-  const fileUploaderDisabled = !!file;
-  const textInputDisabled = !!file;
+  const primaryButtonDisabled = !files.length || files.some((f) => f.invalid);
+  const importButtonDisabled = !importUrl;
 
   return (
     <Modal
@@ -126,7 +148,7 @@ export const ImportModal = ({
           accept={validFileTypes}
           labelText={fileDropLabel}
           onAddFiles={onAddFile}
-          disabled={fileUploaderDisabled}
+          multiple
         />
         <p className={`${expPrefix}--import-modal-label`}>{inputHeader}</p>
         <div className={`${expPrefix}--input-group`}>
@@ -135,8 +157,7 @@ export const ImportModal = ({
             labelText={inputLabel}
             onChange={inputHandler}
             placeholder={inputPlaceholder}
-            value={fileUrl}
-            disabled={textInputDisabled}
+            value={importUrl}
           />
           <Button
             onClick={fetchFile}
@@ -147,9 +168,10 @@ export const ImportModal = ({
           </Button>
         </div>
         <div className="bx--file-container" style={{ width: '100%' }}>
-          {file && (
+          {files.map((file) => (
             <FileUploaderItem
-              onDelete={onRemoveFile}
+              key={file.uuid}
+              onDelete={() => onRemoveFile(file.uuid)}
               name={file.name}
               status={file.status}
               size="default"
@@ -160,7 +182,7 @@ export const ImportModal = ({
               errorSubject={file.errorSubject}
               filesize={file.filesize}
             />
-          )}
+          ))}
         </div>
       </div>
     </Modal>

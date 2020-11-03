@@ -2,7 +2,7 @@
   "name": "@carbon/ibm-cloud-cognitive-cdai",
   "private": true,
   "description": "Carbon for Cloud & Cognitive CD&AI UI components",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",

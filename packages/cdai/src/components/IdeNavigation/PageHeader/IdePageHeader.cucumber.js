@@ -10,15 +10,15 @@ import IdePageHeader from './IdePageHeader';
 import * as props from './test_assets/testProps.js';
 import { idAttributeSelector } from '../../../component_helpers/IDHelper';
 
-cucumber.defineRule('Setup of the IdePageHeader world', world => {
+cucumber.defineRule('Setup of the IdePageHeader world', (world) => {
   world.componentToRender = IdePageHeader;
 });
 
-const getPropsForPropSet = propertySet => {
+const getPropsForPropSet = (propertySet) => {
   let properties = propertySet.split(',');
   let propertiesToReturn = {};
 
-  properties.forEach(property => {
+  properties.forEach((property) => {
     switch (property) {
       case 'none':
       default:
@@ -82,7 +82,7 @@ cucumber.defineRule(
 cucumber.defineRule(
   'the content of {string} is rendered as expected',
   (world, propSet) => {
-    propSet.split(',').forEach(propertyToValidate => {
+    propSet.split(',').forEach((propertyToValidate) => {
       switch (propertyToValidate) {
         case 'none':
         default:

@@ -58,7 +58,7 @@ export class IdeCard extends React.Component {
     const { prefix } = settings;
 
     let interactions = createInteractionHandler(
-      evt => {
+      (evt) => {
         if (!cardHref || cardDisabled) {
           evt.preventDefault();
         }
@@ -178,7 +178,7 @@ export class IdeCard extends React.Component {
           <ul>
             {cardContent &&
               cardContent.links &&
-              cardContent.links.map(link => (
+              cardContent.links.map((link) => (
                 <li key={link.href}>
                   <Link
                     {...idAttribute(`ide-card-${cardId}-${link.href}-Link`)}

@@ -63,7 +63,7 @@ const renderMockContent = (component, includeSamplePageContent = true) => (
   </div>
 );
 
-const interactiveIdeNavigationProps = props => {
+const interactiveIdeNavigationProps = (props) => {
   return {
     ...props,
     expanded: boolean('Start expanded', true),

@@ -27,7 +27,7 @@ const defaultHandlers = [handlers.onClick, handlers.onKeyDown];
 
 // triggers a callback if event key matches one in validKeys
 export const keyAndClickHandler = (callback, validKeys = defaultValidKeys) => {
-  return evt => {
+  return (evt) => {
     if (evt && (evt.type || evt.key)) {
       if (validKeys.includes(evt.type) || validKeys.includes(evt.key)) {
         callback(evt);

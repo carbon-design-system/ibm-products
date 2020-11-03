@@ -55,7 +55,7 @@ describe('IdeHome unit tests', () => {
     mountTestComponent();
     expect(component.getElements()).toMatchSnapshot();
     for (let [id, classNames] of Object.entries(testClassNames)) {
-      classNames.map(className => {
+      classNames.map((className) => {
         expect(
           component.find(idAttributeSelector(id)).hasClass(className)
         ).toEqual(true);
@@ -127,7 +127,7 @@ describe('IdeHome unit tests', () => {
     mountTestComponent(null, props);
     expect(component.exists(idAttributeSelector('IdeHome-header-toggle')));
     for (let [id, classNames] of Object.entries(testClassNames)) {
-      classNames.map(className => {
+      classNames.map((className) => {
         expect(
           component.find(idAttributeSelector(id)).hasClass(className)
         ).toEqual(true);
@@ -161,7 +161,7 @@ describe('IdeHome unit tests', () => {
       component.find(idAttributeSelector('IdeHome-Header')).prop('className')
     ).toEqual('collapsed ide-home-header bx--row');
     for (let [id, classNames] of Object.entries(testClassNames)) {
-      classNames.map(className => {
+      classNames.map((className) => {
         expect(
           component.find(idAttributeSelector(id)).hasClass(className)
         ).toEqual(true);

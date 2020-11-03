@@ -11,7 +11,7 @@ import { idePrefix } from '../globals/js/settings';
 // 1. if we have a render function, assume react component
 // 2. if already a valid react element, just render it
 // 3. If this was an object with imgSrc, imgAlt and class name we need to build an img component from them.
-export const renderGraphic = graphicStruct => {
+export const renderGraphic = (graphicStruct) => {
   // if we have a render function, assume react component
   if (graphicStruct.render && typeof graphicStruct.render === 'function') {
     return React.createElement(graphicStruct);

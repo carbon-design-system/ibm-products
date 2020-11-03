@@ -44,7 +44,7 @@ export const withTabs = {
 };
 
 export const withHeadingRenderFunction = {
-  headingRenderFunction: headingJSX => (
+  headingRenderFunction: (headingJSX) => (
     <React.Fragment>
       <Bee32 {...idAttribute('custom-header-content')} />
       {headingJSX}

@@ -26,7 +26,7 @@ import {
 import { getComponentLabel } from '../../component_helpers/StorybookHelper';
 import styles from './_storybook.scss';
 
-const onInteractPlaceholder = tileId => action()(tileId + ' interaction');
+const onInteractPlaceholder = (tileId) => action()(tileId + ' interaction');
 
 const coreConfig = coreConfigFunc({
   className: 'storybook--use-width', // for purpose of appearance in the storybook, take all width available

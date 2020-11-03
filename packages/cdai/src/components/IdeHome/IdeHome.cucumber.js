@@ -24,7 +24,7 @@ const testSets = {
   [IDE_CARD]: props.tasksForEachIdeCardType,
 };
 
-cucumber.defineRule('Setup of the IdeHome world', world => {
+cucumber.defineRule('Setup of the IdeHome world', (world) => {
   world.componentToRender = IdeHome;
 });
 
@@ -61,7 +61,7 @@ cucumber.defineRule(
   'the {string} set is the selected tab',
   (world, setName) => {
     let propsToCheckFor = getSetForActivity(setName, world.ideInteractionCb);
-    let indexOfSet = world.props.sets.findIndex(set => {
+    let indexOfSet = world.props.sets.findIndex((set) => {
       return set.id === propsToCheckFor.id;
     });
     expect(
@@ -116,13 +116,13 @@ cucumber.defineRule(
 cucumber.defineRule(
   'the property startSelected is added to the {string} set',
   (world, setId) => {
-    world.props.sets.find(set => {
+    world.props.sets.find((set) => {
       return set.id === setId;
     }).startSelected = true;
   }
 );
 
-cucumber.defineRule('I want to render sections rather than tabs', world => {
+cucumber.defineRule('I want to render sections rather than tabs', (world) => {
   world.props.multipleSetType = 'section';
 });
 
@@ -138,7 +138,7 @@ cucumber.defineRule(
   }
 );
 
-cucumber.defineRule('the expected IDECard components are rendered', world => {
+cucumber.defineRule('the expected IDECard components are rendered', (world) => {
   const { tasks } = getSetForActivity(IDE_CARD);
 
   // mapping of the card IDs from the tasks (in IDE_CARD) to the expected IdeCard type property given at render

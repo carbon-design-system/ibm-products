@@ -31,7 +31,7 @@ export default class IdeHome extends React.Component {
   static getDerivedStateFromProps(props, state) {
     let derivedState = null;
     // check which set to render, if startSelected provided in any set
-    let selectedSetIndex = props.sets.findIndex(set => {
+    let selectedSetIndex = props.sets.findIndex((set) => {
       return set.startSelected === true;
     });
 
@@ -54,7 +54,7 @@ export default class IdeHome extends React.Component {
 
   // Input an array of tasks and returns an array of cards
   createCardsFromTasks(tasks) {
-    return tasks.map(task => {
+    return tasks.map((task) => {
       let ideCardProps = {
         key: task.taskId,
         cardId: task.taskId,
@@ -94,7 +94,7 @@ export default class IdeHome extends React.Component {
     let setsToRender = [];
 
     // build each set with its tasks
-    sets.forEach(set => {
+    sets.forEach((set) => {
       const setToRender = {
         id: set.id,
         heading: set.setHeading,
@@ -145,7 +145,7 @@ export default class IdeHome extends React.Component {
         // sections case
         setsJSX = (
           <>
-            {setsToRender.map(set => {
+            {setsToRender.map((set) => {
               return (
                 <section
                   {...idAttribute(`IdeHome-Section-${set.id}`)}

@@ -13,7 +13,7 @@ import IdePageContent from '../PageContent/IdePageContent.js';
 import { idePrefix } from '../../../globals/js/settings';
 
 const { prefix } = settings;
-const renderBreadcrumb = breadcrumbContent => (
+const renderBreadcrumb = (breadcrumbContent) => (
   <div
     key={`IdePageHeader--breadcrumb-container`}
     className={`${idePrefix}-page-header--breadcrumb-container`}
@@ -40,7 +40,7 @@ const renderHeader = (header, headingRenderFunction) => (
   </div>
 );
 
-const renderSubtitle = subtitle => (
+const renderSubtitle = (subtitle) => (
   <div
     key={`IdePageHeader--subtitle--container`}
     className={`${idePrefix}-page-header--subtitle-container`}
@@ -55,7 +55,7 @@ const renderSubtitle = subtitle => (
     ) : null}
   </div>
 );
-const renderTabs = tabContent =>
+const renderTabs = (tabContent) =>
   tabContent ? (
     <div
       key={`IdePageHeader--tabs-container`}
@@ -120,7 +120,7 @@ const IdePageHeader = ({
 
 IdePageHeader.defaultProps = {
   breadcrumb: null,
-  headingRenderFunction: headerJSX => headerJSX,
+  headingRenderFunction: (headerJSX) => headerJSX,
   heading: null,
   subtitle: null,
   tabs: null,

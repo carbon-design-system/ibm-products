@@ -6,6 +6,7 @@
 //
 
 export { IdeEmptyState } from './components/IdeEmptyState';
+export { IdeImporting } from './components/IdeImporting';
 export { IdeButton } from './components/IdeButton';
 export { IdeHTTPErrors } from './components/IdeHTTPErrors';
 export { IdeAutoSave, IdeManualSave } from './components/IdeSaving';

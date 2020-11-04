@@ -27,45 +27,53 @@ expect.extend({ toBeAccessible, toHaveNoAxeViolations });
 //
 // Inspired by the following setup from facebook/react
 // https://github.com/facebook/react/blob/6250462bed19c9f18a8cf3c2b5fcaf9aba1df72b/scripts/jest/setupTests.js#L69
-const consoleMethods = ['error', 'warn', process.env.CI && 'log'].filter(
-  Boolean
-);
+// const consoleMethods = ['error', 'warn', process.env.CI && 'log'].filter(
+//   Boolean
+// );
 
-for (const methodName of consoleMethods) {
-  const unexpectedConsoleCallStacks = [];
-  const newMethod = function (format, ...args) {
-    const stack = new Error().stack;
-    unexpectedConsoleCallStacks.push([
-      stack.substr(stack.indexOf('\n') + 1),
-      util.format(format, ...args),
-    ]);
-  };
+// for (const methodName of consoleMethods) {
+//   const unexpectedConsoleCallStacks = [];
+//   const newMethod = function (format, ...args) {
+//     const stack = new Error().stack;
+//     unexpectedConsoleCallStacks.push([
+//       stack.substr(stack.indexOf('\n') + 1),
+//       util.format(format, ...args),
+//     ]);
+//   };
 
-  console[methodName] = newMethod;
+//   console[methodName] = newMethod;
 
-  global.beforeEach(() => {
-    unexpectedConsoleCallStacks.length = 0;
-  });
+//   global.beforeEach(() => {
+//     unexpectedConsoleCallStacks.length = 0;
+//   });
 
-  global.afterEach(() => {
-    if (console[methodName] !== newMethod) {
-      throw new Error(`Test did not restore a mock for console.${methodName}`);
-    }
+//   global.afterEach(() => {
+//     if (console[methodName] !== newMethod) {
+//       throw new Error(`Test did not restore a mock for console.${methodName}`);
+//     }
 
-    if (unexpectedConsoleCallStacks.length > 0) {
-      const messages = unexpectedConsoleCallStacks.map(
-        ([stack, message]) =>
-          `${message}\n` +
-          `${stack
-            .split('\n')
-            .map((line) => chalk.gray(line))
-            .join('\n')}`
-      );
-      const message = `Expected test not to call ${chalk.bold(
-        `console.${methodName}()`
-      )}`;
+//     if (unexpectedConsoleCallStacks.length > 0) {
+//       const messages = unexpectedConsoleCallStacks.map(
+//         ([stack, message]) =>
+//           `${message}\n` +
+//           `${stack
+//             .split('\n')
+//             .map((line) => chalk.gray(line))
+//             .join('\n')}`
+//       );
+//       const message = `Expected test not to call ${chalk.bold(
+//         `console.${methodName}()`
+//       )}`;
 
-      throw new Error(`${message}\n\n${messages.join('\n\n')}`);
-    }
-  });
-}
+//       throw new Error(`${message}\n\n${messages.join('\n\n')}`);
+//     }
+//   });
+// }
+
+global.beforeEach(() => {
+  jest.spyOn(global.console, 'warn');
+});
+
+global.afterEach(() => {
+  jest.clearAllMocks();
+});

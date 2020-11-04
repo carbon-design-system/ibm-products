@@ -13,6 +13,7 @@
 .#{$exp-prefix}-tearsheet-shell-container {
   height: 100%;
   max-height: calc(100% - 48px);
+  // stylelint-disable-next-line carbon/layout-token-use
   transform: translate3d(0, 500px, 0);
 }
 

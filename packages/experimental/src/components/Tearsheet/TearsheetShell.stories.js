@@ -40,21 +40,17 @@ export default {
 const className = 'client-class-1 client-class-2';
 
 const dummyContent = (
-  <>
-    <div style={{ padding: '50px', height: '400px', background: 'pink' }}>
-      Tearsheet content
-    </div>
-  </>
+  <div style={{ padding: '50px', height: '400px', background: 'pink' }}>
+    Tearsheet content
+  </div>
 );
 
 // Template.
 const Template = (args) => {
   return (
-    <>
-      <TearsheetShell className={className} {...args}>
-        {dummyContent}
-      </TearsheetShell>
-    </>
+    <TearsheetShell className={className} {...args}>
+      {dummyContent}
+    </TearsheetShell>
   );
 };
 

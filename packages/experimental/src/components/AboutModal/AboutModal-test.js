@@ -151,9 +151,7 @@ describe('AboutModal', () => {
       />
     );
     const { click } = fireEvent;
-    const tabToSelect = container.querySelector(
-      '.bx--tabs__nav-item:not(.bx--tabs__nav-item--selected)'
-    );
+    const tabToSelect = container.querySelectorAll('.bx--tabs__nav-item')[1];
     click(tabToSelect);
     expect(tabToSelect.classList.contains('bx--tabs__nav-item--selected'));
   });

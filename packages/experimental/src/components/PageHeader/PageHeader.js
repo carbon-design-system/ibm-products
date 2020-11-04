@@ -101,7 +101,7 @@ export const PageHeader = ({
 
     update.breadcrumbTitleHeight = breadcrumbTitleEl
       ? breadcrumbTitleEl.clientHeight
-      : 0;
+      : 1;
 
     update.titleRowHeight = titleRowEl ? titleRowEl.clientHeight : 0;
     update.subtitleRowHeight = subtitleRowEl ? subtitleRowEl.clientHeight : 0;
@@ -124,7 +124,7 @@ export const PageHeader = ({
             .getPropertyValue('margin-bottom'),
           10
         );
-        update.breadcrumbTitleHeight = isNaN(val) ? 0 : val;
+        update.breadcrumbRowSpaceBelow = isNaN(val) ? 0 : val;
       }
       if (titleRowEl) {
         // debugger;
@@ -140,11 +140,13 @@ export const PageHeader = ({
   };
 
   useEffect(() => {
+    // No navigation and title row not pre-collapsed
+    // and only one of tags or (subtitle or available space)
     setLastRowBufferActive(
-      !(navigation || tags) &&
-        ((!preCollapseTitleRow && (title || pageActions)) ||
-          subtitle ||
-          availableSpace)
+      !navigation &&
+        !preCollapseTitleRow &&
+        (title || pageActions) &&
+        !tags !== !(subtitle || availableSpace)
     );
   }, [
     availableSpace,
@@ -200,8 +202,8 @@ export const PageHeader = ({
         1,
         Math.max(
           0,
-          (scrollYValue - metrics.breadcrumbRowSpaceBelow) /
-            metrics.breadcrumbTitleHeight
+          (scrollYValue - (metrics.breadcrumbRowSpaceBelow || 0)) /
+            (metrics.breadcrumbTitleHeight || 1) // don't want to
         )
       )}`,
       [`--${blockClass}--breadcrumb-row-width-px`]: `${metrics.breadcrumbRowWidth}px`,
@@ -489,6 +491,7 @@ export const PageHeader = ({
               className={cx(`${blockClass}--navigation-row`, {
                 [`${blockClass}--navigation-row--spacing-above-06`]:
                   navigation !== undefined,
+                [`${blockClass}--navigation-row--has-tags`]: tags,
               })}>
               {navigation !== undefined ? (
                 <Column className={`${blockClass}--navigation-tabs`}>

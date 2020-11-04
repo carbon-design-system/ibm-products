@@ -18,11 +18,11 @@
 }
 
 .#{$exp-prefix}-tearsheet-shell-container--lower {
-  max-height: calc(100% - ( #{$spacing-09} + #{$spacing-08} ));
+  max-height: calc(100% - (#{$spacing-09} + #{$spacing-08}));
 }
 
 .#{$exp-prefix}-tearsheet-shell-container--wide {
-  width: calc(100% - ( 2 * #{$spacing-07} ));
+  width: calc(100% - (2 * #{$spacing-07}));
 }
 
 .#{$exp-prefix}-tearsheet-shell {

@@ -121,7 +121,7 @@ describe('AboutModal', () => {
   });
 
   test('renders a clickable carbon tab for technologies used', () => {
-    const { container } = render(
+    render(
       <AboutModal
         body="This is an example description"
         open
@@ -151,7 +151,7 @@ describe('AboutModal', () => {
       />
     );
     const { click } = fireEvent;
-    const tabToSelect = container.querySelectorAll('.bx--tabs__nav-item')[1];
+    const tabToSelect = screen.getByRole('tab', { name: /Version number/i });
     click(tabToSelect);
     expect(tabToSelect.classList.contains('bx--tabs__nav-item--selected'));
   });

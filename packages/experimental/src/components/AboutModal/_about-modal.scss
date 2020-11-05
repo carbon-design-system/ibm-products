@@ -47,7 +47,7 @@
 }
 
 .#{$exp-prefix}-about-modal.#{$exp-prefix}-about-modal-light-theme
-  .bx--tabs.#{$exp-prefix}-about-modal-tab-container {
+  .#{$exp-prefix}-about-modal-tab-container {
   @include carbon--theme($carbon--theme--white, true);
 }
 
@@ -61,7 +61,7 @@
 }
 
 .#{$exp-prefix}-about-modal.#{$exp-prefix}-about-modal-dark-theme
-  .bx--tabs.#{$exp-prefix}-about-modal-tab-container {
+  .#{$exp-prefix}-about-modal-tab-container {
   @include carbon--theme($carbon--theme--g100, true);
 }
 
@@ -122,7 +122,7 @@
       justify-content: center;
     }
   }
-  .bx--tabs.#{$exp-prefix}-about-modal-tab-container {
+  .#{$exp-prefix}-about-modal-tab-container {
     position: relative;
     /* stylelint-disable-next-line carbon/layout-token-use */
     bottom: carbon--rem(20px);

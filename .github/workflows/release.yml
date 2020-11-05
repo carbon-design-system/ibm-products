@@ -23,7 +23,7 @@ jobs:
           git config user.name $GITHUB_ACTOR
 
       - name: Setup Node.js
-      uses: actions/setup-node@v1 # https://github.com/actions/setup-node
+        uses: actions/setup-node@v1 # https://github.com/actions/setup-node
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org

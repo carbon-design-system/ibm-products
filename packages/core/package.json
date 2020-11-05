@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-core",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "Apache-2.0",
   "repository": "https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/core",
   "bugs": "https://github.com/carbon-design-system/ibm-cloud-cognitive/issues",
@@ -25,8 +25,8 @@
     "@carbon/import-once": "10.3.0",
     "@carbon/layout": "10.13.0",
     "@carbon/motion": "10.9.0",
-    "@carbon/type": "10.16.0",
     "@carbon/themes": "10.21.0",
+    "@carbon/type": "10.16.0",
     "@storybook/addon-actions": "^6.0.6",
     "@storybook/addon-controls": "^6.0.6",
     "@storybook/addon-docs": "^6.0.6",

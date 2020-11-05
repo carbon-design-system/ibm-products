@@ -2,6 +2,11 @@
   "version": "independent",
   "npmClient": "yarn",
   "npmClientArgs": ["--frozen-lockfile"],
+  "command": {
+    "version": {
+      "message": "chore(release): publish"
+    }
+  },
   "useWorkspaces": true,
   "ignoreChanges": [
     "**/__fixtures__/**",

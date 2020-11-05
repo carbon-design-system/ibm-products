@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2 # https://github.com/actions/checkout
+        with:
+          fetch-depth: 0 # https://github.com/actions/checkout/issues/217
 
         # https://github.com/actions/checkout#push-a-commit-using-the-built-in-token
       - run: |
@@ -35,9 +37,9 @@ jobs:
       - name: Continuous integration check
         run: yarn ci-check
 
-      # Dry run - `yarn lerna version --no-git-tag-version --no-push --yes`
+      # Dry run - `yarn lerna version --no-changelog --no-git-tag-version --no-push --yes`
       - name: Publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: echo 'publish' # yarn lerna publish --yes
+        run: echo 'publish' # yarn lerna publish --no-changelog --yes
 

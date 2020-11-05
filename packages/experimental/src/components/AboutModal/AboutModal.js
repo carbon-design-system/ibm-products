@@ -48,6 +48,10 @@ export const AboutModal = ({
 
   return (
     <ReactResizeDetector onResize={handleResize}>
+      {/*
+        This extra div is necessary because the ReactResizeDetector component tries to attach a `targetRef` to it's child element,
+        and it throws an error in the browser console when trying to attach that `targetRef` to Carbon's <ComposedModal> component.
+      */}
       <div>
         <ComposedModal
           className={[

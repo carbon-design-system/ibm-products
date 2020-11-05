@@ -2,7 +2,7 @@
   "name": "@carbon/ibm-cloud-cognitive-cdai",
   "private": true,
   "description": "Carbon for Cloud & Cognitive CD&AI UI components",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -23,8 +23,6 @@
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build": "node scripts/build.js"
-  },
-  "dependencies": {
   },
   "devDependencies": {
     "@babel/cli": "^7.11.6",

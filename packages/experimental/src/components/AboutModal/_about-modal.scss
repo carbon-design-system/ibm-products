@@ -28,7 +28,8 @@
 
 .#{$exp-prefix}-modal-content
   .bx--modal-content.#{$exp-prefix}-about-modal-content {
-  padding-bottom: $spacing-07;
+  margin-bottom: $layout-05;
+  padding-bottom: $layout-05;
 }
 
 .#{$exp-prefix}-about-modal .#{$exp-prefix}-modal-content .bx--modal-footer {
@@ -79,7 +80,6 @@
   .bx--modal-content.#{$exp-prefix}-about-modal-content {
     @include carbon--type-style('body-short-02');
 
-    padding-top: $spacing-02;
     overflow-y: scroll;
   }
   .#{$exp-prefix}-about-modal-product-logo {
@@ -175,7 +175,7 @@
 
 .#{$exp-prefix}-about-modal .bx--modal-header {
   margin-bottom: 0;
-  padding-bottom: 0;
+  padding-bottom: $spacing-03;
 }
 
 .#{$exp-prefix}-about-modal

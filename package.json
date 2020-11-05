@@ -17,7 +17,7 @@
     "ci-check": "yarn format:diff && yarn lint && yarn test --ci",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
     "format": "prettier --write '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
-    "format:diff": "prettier --list-different '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
+    "format:diff": "prettier --list-different '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!README.md'",
     "lint": "yarn lint:es && yarn lint:style",
     "lint:es": "eslint 'packages/*/src/**/*.js'",
     "lint:style": "stylelint 'packages/*/src/**/*.scss' --report-needless-disables --report-invalid-scope-disables",
@@ -51,14 +51,17 @@
     "rimraf": "^3.0.2",
     "rollup": "^2.28.2",
     "stylelint": "^13.6.1",
-    "stylelint-plugin-carbon-tokens": "^0.1.1",
+    "stylelint-plugin-carbon-tokens": "^0.6.1",
     "stylelint-config-carbon": "^1.1.0"
   },
   "eslintConfig": {
     "parser": "babel-eslint",
     "extends": [
       "carbon"
-    ]
+    ],
+    "rules": {
+      "react/display-name": [0]
+    }
   },
   "husky": {
     "hooks": {

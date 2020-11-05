@@ -82,7 +82,7 @@
     @include carbon--type-style('body-short-02');
 
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
   .#{$exp-prefix}-about-modal-product-logo {
     max-width: 6rem;

@@ -30,9 +30,10 @@ jobs:
       - name: Continuous integration check
         run: yarn ci-check
 
-      # Dry run - `yarn lerna version --conventional-commits --no-changelog --no-git-tag-version --no-push --yes`
+      # Dry run - `yarn lerna version --conventional-commits --create-release github --no-git-tag-version --no-push --yes`
       - name: Publish
         env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: echo 'publish' # `yarn lerna publish --conventional-commits --no-changelog --yes`
+        run: echo 'publish' # `yarn lerna publish --conventional-commits --create-release github --yes`
 

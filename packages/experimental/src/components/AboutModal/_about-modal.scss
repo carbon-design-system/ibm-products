@@ -23,6 +23,7 @@
   .bx--modal-container
   .#{$exp-prefix}-modal-content {
   display: grid;
+  overflow-x: hidden;
   overflow-y: auto;
 }
 
@@ -80,6 +81,7 @@
   .bx--modal-content.#{$exp-prefix}-about-modal-content {
     @include carbon--type-style('body-short-02');
 
+    overflow-x: hidden;
     overflow-y: scroll;
   }
   .#{$exp-prefix}-about-modal-product-logo {

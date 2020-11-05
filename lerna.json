@@ -4,6 +4,7 @@
   "npmClientArgs": ["--frozen-lockfile"],
   "command": {
     "version": {
+      "conventionalCommits": true,
       "message": "chore(release): publish"
     }
   },

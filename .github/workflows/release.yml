@@ -3,9 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - 12/publish-step
-
-      # - master
+      - master
 
 jobs:
   Release:
@@ -42,5 +40,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }} # https://github.com/lerna/lerna/issues/1957
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: echo 'publish' # `yarn lerna publish --create-release github --yes`
-
+        run: yarn lerna publish --create-release github --yes

@@ -1,0 +1,18 @@
+//
+// Copyright IBM Corp. 2020, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+
+@import 'carbon-components/scss/components/button/button';
+@import 'carbon-components/scss/components/tooltip/tooltip';
+
+$block-class: #{$exp-prefix}-toolbar-group;
+
+.#{$block-class} {
+  display: inline-flex;
+}

@@ -8,6 +8,7 @@
 import { Button } from 'carbon-components-react';
 import PropTypes from 'prop-types';
 import React from 'react';
+import cx from 'classnames';
 
 import { expPrefix } from '../../global/js/settings';
 
@@ -16,6 +17,7 @@ import { expPrefix } from '../../global/js/settings';
 export const ExampleComponent = ({
   borderColor,
   boxedBorder,
+  className,
   onPrimaryClick,
   onSecondaryClick,
   primaryButtonLabel,
@@ -43,11 +45,12 @@ export const ExampleComponent = ({
 
   return (
     <div
-      className={[
+      className={cx([
+        className,
         `${expPrefix}-example-component`,
         `${expPrefix}-example-component--${size}`,
         mode,
-      ].join(' ')}
+      ])}
       style={{
         [`--${expPrefix}-border-color`]: borderColor,
       }}
@@ -79,6 +82,11 @@ ExampleComponent.propTypes = {
    * Is the border a box or a shadow
    */
   boxedBorder: PropTypes.bool,
+  /**
+   * Specifies class(es) to be applied to the top-level PageHeader node.
+   * Optional.
+   */
+  className: PropTypes.string,
   /**
    * disabled
    */

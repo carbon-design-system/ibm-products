@@ -8,17 +8,19 @@
 @import '../../global/styles/project-settings';
 @import 'carbon-components/scss/components/button/button';
 
-.#{$exp-prefix}-example-component {
+$block-class: #{$exp-prefix}-example-component;
+
+.#{$block-class} {
   display: flex;
   justify-content: flex-end;
   --#{$exp-prefix}-border-color: transparent;
 }
 
-.#{$exp-prefix}-example-component--boxed-set {
+.#{$block-class}--boxed-set {
   border: 10px solid var(--#{$exp-prefix}-border-color);
 }
 
-.#{$exp-prefix}-example-component--shadow-set {
+.#{$block-class}--shadow-set {
   margin: $spacing-04;
   box-shadow: 0 0 10px var(--#{$exp-prefix}-border-color);
 }

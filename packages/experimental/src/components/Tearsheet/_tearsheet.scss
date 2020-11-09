@@ -10,26 +10,85 @@
 
 @import 'carbon-components/scss/components/modal/modal';
 
-.#{$exp-prefix}-tearsheet-shell-container {
+$block-class: #{$exp-prefix}-tearsheet;
+
+// TearsheetShell styles.
+
+.#{$block-class}--container {
+  top: auto;
   height: 100%;
   max-height: calc(100% - #{$spacing-09});
   // stylelint-disable-next-line carbon/layout-token-use
   transform: translate3d(0, 500px, 0);
 }
 
-.#{$exp-prefix}-tearsheet-shell-container--lower {
+.#{$block-class}--container--lower {
   max-height: calc(100% - (#{$spacing-09} + #{$spacing-08}));
 }
 
-.#{$exp-prefix}-tearsheet-shell-container--wide {
+.#{$block-class}--container--wide {
   width: calc(100% - (2 * #{$spacing-07}));
 }
 
-.#{$exp-prefix}-tearsheet-shell {
+.#{$block-class} {
   align-items: flex-end;
 }
 
-.#{$exp-prefix}-tearsheet-shell-body.#{$exp-prefix}-tearsheet-shell-body {
+// Tearsheet styles.
+
+.#{$block-class}--header {
+  margin: 0;
+  padding: $spacing-06;
+  border-bottom: 1px solid $ui-03;
+}
+
+.#{$block-class}--header--no-close-icon {
+  display: none;
+}
+
+.#{$block-class}--header-description {
+  margin-top: $spacing-03;
+  @include carbon--type-style('body-short-01');
+}
+
+.#{$block-class}--header-navigation {
+  margin: $spacing-04 0 calc(-1 * #{$spacing-06});
+}
+
+.#{$block-class}--body.#{$block-class}--body {
+  display: flex;
+  flex-grow: 1;
   margin: 0;
   padding: 0;
+}
+
+.#{$block-class}--influencer {
+  width: 256px;
+  min-width: 256px;
+  border-right: 1px solid $ui-03;
+}
+
+.#{$block-class}--influencer--right {
+  order: 1;
+}
+
+.#{$block-class}--influencer--wide {
+  width: 320px;
+  min-width: 320px;
+}
+
+.#{$block-class}--right {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.#{$block-class}--main {
+  flex-grow: 1;
+  background: $ui-02;
+}
+
+.#{$block-class}--buttons {
+  background: $ui-02;
+  border-top: 1px solid $ui-03;
 }

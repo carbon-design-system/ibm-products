@@ -119,11 +119,11 @@ export const TagSet = ({
     setTipOpen(false);
   };
 
-  const handleResize = (width, height) => {
+  const handleResize = () => {
     checkFullyVisibleTags();
   };
 
-  const handleSizerTagsResize = (width, height) => {
+  const handleSizerTagsResize = () => {
     checkFullyVisibleTags();
   };
 

@@ -5,13 +5,4 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import './IdeCard';
-
-// Override just for storybook demo purposes
-.sb-show-main {
-  background-color: $ui-01 !important;
-
-  .ide-card a {
-    background-color: $ui-02;
-  }
-}
+export { default as IdeSlideOverPanel } from './IdeSlideOverPanel.js';

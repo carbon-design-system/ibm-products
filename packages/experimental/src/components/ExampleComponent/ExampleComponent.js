@@ -11,7 +11,9 @@ import React from 'react';
 
 import { expPrefix } from '../../global/js/settings';
 
-// import './example-component.scss'; // Do not import SCSS directly it will be rolled up seperately.
+const blockClass = `${expPrefix}-example-component`;
+
+// import './example-component.scss'; // Do not import SCSS directly it will be rolled up separately.
 
 export const ExampleComponent = ({
   borderColor,
@@ -26,8 +28,8 @@ export const ExampleComponent = ({
   ...props
 }) => {
   const mode = boxedBorder
-    ? `${expPrefix}-example-component--boxed-set`
-    : `${expPrefix}-example-component--shadow-set`;
+    ? `${blockClass}--boxed-set`
+    : `${blockClass}--shadow-set`;
 
   const handlePrimaryClick = (e) => {
     if (onPrimaryClick) {
@@ -43,12 +45,9 @@ export const ExampleComponent = ({
 
   return (
     <div
-      className={[
-        `${expPrefix}-example-component`,
-        `${expPrefix}-example-component--${size}`,
-        mode,
-      ].join(' ')}
+      className={[`${blockClass}`, `${blockClass}--${size}`, mode].join(' ')}
       style={{
+        /* stylelint-disable-next-line carbon/theme-token-use */
         [`--${expPrefix}-border-color`]: borderColor,
       }}
       {...props}>

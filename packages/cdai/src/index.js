@@ -15,4 +15,3 @@ export { IdeNavigation } from './components/IdeNavigation';
 export { IdeAutoSave, IdeManualSave } from './components/IdeSaving';
 export { IdeRemove } from './components/IdeRemove';
 export { IdeSlideOverPanel } from './components/IdeSlideOverPanel';
-

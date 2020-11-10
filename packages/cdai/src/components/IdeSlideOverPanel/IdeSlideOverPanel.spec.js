@@ -130,10 +130,7 @@ describe('IdeSlideOverPanel', () => {
 
     it('Triggers onClose when close button is clicked', () => {
       const event = {};
-      wrapper
-        .find('.ide-slide-over-panel--close')
-        .props()
-        .onClick(event);
+      wrapper.find('.ide-slide-over-panel--close').props().onClick(event);
       expect(closeSpy).toHaveBeenCalledWith(event);
     });
   });
@@ -152,10 +149,7 @@ describe('IdeSlideOverPanel', () => {
 
     it('Triggers onClose when overlay background is clicked', () => {
       const event = { key: 'click' };
-      wrapper
-        .find('.ide-slide-over-overlay')
-        .props()
-        .onClick(event);
+      wrapper.find('.ide-slide-over-overlay').props().onClick(event);
       expect(closeSpy).toHaveBeenCalledWith(event);
     });
   });
@@ -173,10 +167,7 @@ describe('IdeSlideOverPanel', () => {
 
     it('Triggers onOverlayClose instead of onClose if provided', () => {
       const event = { key: 'click' };
-      wrapper
-        .find('.ide-slide-over-overlay')
-        .props()
-        .onClick(event);
+      wrapper.find('.ide-slide-over-overlay').props().onClick(event);
       expect(closeSpy).not.toHaveBeenCalledWith(event);
       expect(overlayCloseSpy).toHaveBeenCalledWith(event);
     });

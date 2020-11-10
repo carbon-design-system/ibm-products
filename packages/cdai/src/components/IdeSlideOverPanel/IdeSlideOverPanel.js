@@ -123,25 +123,10 @@ const IdeSlideOverPanel = ({
 };
 
 IdeSlideOverPanel.propTypes = {
-  open: PropTypes.bool,
-  size: PropTypes.string,
-  title: PropTypes.string,
-  onClose: PropTypes.func.isRequired,
-  onOverlayClose: PropTypes.func,
   className: PropTypes.string,
-  danger: PropTypes.bool,
   closeButtonIconDescription: PropTypes.string,
   controls: PropTypes.bool,
-  footer: PropTypes.object,
-  onPrimaryClick: PropTypes.func,
-  onSecondaryClick: PropTypes.func,
-  secondaryButtonText: PropTypes.string,
-  primaryButtonDisabled: PropTypes.bool,
-  secondaryButtonDisabled: PropTypes.bool,
-  primaryButtonText: PropTypes.string,
-  primaryButtonIcon: PropTypes.object,
-  secondaryButtonIcon: PropTypes.object,
-  withOverlay: PropTypes.bool,
+  danger: PropTypes.bool,
   focusTrapOptions: PropTypes.shape({
     onActivate: PropTypes.func,
     onDeactivate: PropTypes.func,
@@ -166,6 +151,21 @@ IdeSlideOverPanel.propTypes = {
     allowOutsideClick: PropTypes.func,
     preventScroll: PropTypes.bool,
   }),
+  footer: PropTypes.object,
+  onClose: PropTypes.func.isRequired,
+  onOverlayClose: PropTypes.func,
+  onPrimaryClick: PropTypes.func,
+  onSecondaryClick: PropTypes.func,
+  open: PropTypes.bool,
+  primaryButtonDisabled: PropTypes.bool,
+  primaryButtonIcon: PropTypes.object,
+  primaryButtonText: PropTypes.string,
+  secondaryButtonDisabled: PropTypes.bool,
+  secondaryButtonIcon: PropTypes.object,
+  secondaryButtonText: PropTypes.string,
+  size: PropTypes.string,
+  title: PropTypes.string,
+  withOverlay: PropTypes.bool,
 };
 
 IdeSlideOverPanel.defaultProps = {

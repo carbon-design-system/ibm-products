@@ -12,11 +12,19 @@ import { Tag } from 'carbon-components-react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 
 const TagItems = [
-  <Tag key="tag1">Tag 1</Tag>,
+  <Tag key="tag1" type="blue">
+    Tag 1
+  </Tag>,
   <Tag key="tag12">Tag 12</Tag>,
-  <Tag key="tag123">Tag 123</Tag>,
-  <Tag key="tag1234">Tag 1234</Tag>,
-  <Tag key="tag12345">Tag 12345</Tag>,
+  <Tag key="tag123" type="high-contrast">
+    Tag 123
+  </Tag>,
+  <Tag key="tag1234" type="cyan">
+    Tag 1234
+  </Tag>,
+  <Tag key="tag12345" type="red">
+    Tag 12345
+  </Tag>,
 ];
 
 export default {
@@ -53,11 +61,19 @@ const Template2 = (argsIn) => {
   return (
     <div style={{ width: containerWidth }}>
       <TagSet {...args}>
-        <Tag>0001</Tag>
-        <Tag>0002</Tag>
-        <Tag>0003</Tag>
-        <Tag>0004</Tag>
-        <Tag>0005</Tag>
+        <Tag key="tag1" type="blue">
+          Tag 1
+        </Tag>
+        <Tag key="tag12">Tag 12</Tag>
+        <Tag key="tag123" type="high-contrast">
+          Tag 123
+        </Tag>
+        <Tag key="tag1234" type="cyan">
+          Tag 1234
+        </Tag>
+        <Tag key="tag12345" type="red">
+          Tag 12345
+        </Tag>
       </TagSet>
     </div>
   );

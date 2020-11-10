@@ -1,0 +1,52 @@
+//
+// Copyright IBM Corp. 2020, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+
+@import 'carbon-components/scss/components/tooltip/tooltip';
+@import 'carbon-components/scss/components/tag/tag';
+
+$block-class: #{$exp-prefix}-tag-set;
+
+.#{$block-class} {
+  width: 100%;
+}
+
+.#{$block-class}--space {
+  position: relative;
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.#{$block-class}--space--right {
+  text-align: end;
+}
+
+.#{$block-class}--tag-container {
+  display: inline-flex; /* needed to register a width */
+  white-space: nowrap;
+}
+
+.#{$block-class}--tag-container--hidden {
+  /* This tag container is used to measure the width of all displayable tags */
+  position: absolute;
+  width: 100%;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.#{$block-class}--overflow {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.#{$block-class}--overflow--hidden {
+  max-width: 0;
+  overflow: hidden;
+  visibility: hidden;
+}

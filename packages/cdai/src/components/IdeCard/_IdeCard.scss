@@ -11,10 +11,6 @@
 @import 'carbon-components/scss/components/tile/tile';
 @import 'carbon-components/scss/components/tooltip/tooltip';
 
-.sb-show-main {
-  background-color: #ffffff !important;
-}
-
 $ide-card-size: carbon--mini-units(30);
 
 .#{$ide-prefix}-card {

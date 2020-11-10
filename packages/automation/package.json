@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-automation",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "Apache-2.0",
   "repository": "https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/automation",
   "bugs": "https://github.com/carbon-design-system/ibm-cloud-cognitive/issues",

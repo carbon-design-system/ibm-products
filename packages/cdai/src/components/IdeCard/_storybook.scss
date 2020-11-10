@@ -9,5 +9,9 @@
 
 // Override just for storybook demo purposes
 .sb-show-main {
-  background-color: $ui-03 !important;
+  background-color: $ui-01 !important;
+
+  .ide-card a {
+    background-color: $ui-02;
+  }
 }

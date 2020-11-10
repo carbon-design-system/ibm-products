@@ -1,0 +1,35 @@
+//
+// Copyright IBM Corp. 2020, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+@import './index';
+
+@import 'carbon-components/scss/components/button/button';
+@import 'carbon-components/scss/components/tabs/tabs';
+
+.tearsheet-stories__dummy-content-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: $layout-04;
+}
+
+.tearsheet-stories__buttons {
+  display: flex;
+}
+
+.tearsheet-stories__button {
+  width: 25%;
+  max-width: 312px;
+}
+
+.tearsheet-stories__button-padding {
+  width: 100%;
+}
+
+.tearsheet-stories__tabs .#{$prefix}--tab-content {
+  display: none;
+}

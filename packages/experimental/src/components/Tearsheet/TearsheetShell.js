@@ -12,7 +12,9 @@ import cx from 'classnames';
 
 import { expPrefix } from '../../global/js/settings';
 
-import { ComposedModal, ModalBody } from 'carbon-components-react';
+import { ComposedModal } from 'carbon-components-react';
+
+const blockClass = `${expPrefix}-tearsheet`;
 
 export const TearsheetShell = ({
   children,
@@ -24,15 +26,14 @@ export const TearsheetShell = ({
   size,
 }) => {
   const classes = cx({
-    [`${expPrefix}-tearsheet-shell`]: true,
+    [`${blockClass}`]: true,
     [className]: className,
   });
   const containerClasses = cx({
-    [`${expPrefix}-tearsheet-shell-container`]: true,
-    [`${expPrefix}-tearsheet-shell-container--lower`]: height === 'lower',
-    [`${expPrefix}-tearsheet-shell-container--wide`]: size === 'wide',
+    [`${blockClass}--container`]: true,
+    [`${blockClass}--container--lower`]: height === 'lower',
+    [`${blockClass}--container--wide`]: size === 'wide',
   });
-  const bodyClasses = `${expPrefix}-tearsheet-shell-body`;
 
   return (
     <ComposedModal
@@ -41,9 +42,7 @@ export const TearsheetShell = ({
       onClose={onClose}
       open={open}
       preventCloseOnClickOutside={preventCloseOnClickOutside}>
-      <ModalBody hasForm className={bodyClasses}>
-        {children}
-      </ModalBody>
+      {children}
     </ComposedModal>
   );
 };
@@ -62,7 +61,7 @@ TearsheetShell.propTypes = {
    * Specifies the height of the tearsheet `'normal' | 'lower'` Lower is
    * 40px lower to allow more underlying content to be visible. Optional.
    */
-  height: PropTypes.string,
+  height: PropTypes.oneOf(['normal', 'lower']),
   /**
    * Specifies an optional handler for closing modal. Returning `false`
    * here prevents the modal from closing.
@@ -79,7 +78,7 @@ TearsheetShell.propTypes = {
   /**
    * Specifies the width of the Tearsheet. `'narrow' | 'wide'`
    */
-  size: PropTypes.string,
+  size: PropTypes.oneOf(['narrow', 'wide']),
 };
 
 TearsheetShell.defaultProps = {

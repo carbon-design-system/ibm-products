@@ -9,32 +9,12 @@ import React from 'react';
 
 import { TearsheetShell } from './TearsheetShell';
 
-import styles from './_index.scss';
+import styles from './_storybook-styles.scss';
 
 export default {
   title: 'Experimental/TearsheetShell',
   component: TearsheetShell,
   parameters: { styles },
-  argTypes: {
-    height: {
-      control: {
-        type: 'select',
-        options: {
-          'Normal height': 'normal',
-          'Lower (extra 40px visible above top of tearsheet)': 'lower',
-        },
-      },
-    },
-    size: {
-      control: {
-        type: 'select',
-        options: {
-          Wide: 'wide',
-          Narrow: 'narrow',
-        },
-      },
-    },
-  },
 };
 
 const className = 'client-class-1 client-class-2';

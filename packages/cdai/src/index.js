@@ -5,6 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+export { IdeCreate, IdeCreateStep } from './components/IdeCreate';
 export { IdeEmptyState } from './components/IdeEmptyState';
 export { IdeImporting } from './components/IdeImporting';
 export { IdeButton } from './components/IdeButton';

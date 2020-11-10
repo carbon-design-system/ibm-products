@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/compare/@carbon/ibm-cloud-cognitive-experimental@0.1.0...@carbon/ibm-cloud-cognitive-experimental@0.2.0) (2020-11-10)
+
+
+### Features
+
+* create tag set (tags with overflow) ([#188](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/issues/188)) ([84c4d3e](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/commit/84c4d3ee3c5783e506a231a18b3e2fa738c9c0d1))
+
+
+
+
+
 # 0.1.0 (2020-11-10)
 
 

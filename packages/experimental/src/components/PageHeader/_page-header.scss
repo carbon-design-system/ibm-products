@@ -83,6 +83,7 @@ $raised-z-index: 99;
 
 .#{$block-class}--action-bar-column {
   display: flex;
+  flex-wrap: wrap-reverse; /* page actions go below the actionBarItems */
   justify-content: flex-end;
 
   // stylelint-disable-next-line carbon/layout-token-use
@@ -92,6 +93,10 @@ $raised-z-index: 99;
           var(--exp-page-header--width-px)
       ) / 2
   );
+
+  @include carbon--breakpoint-up('lg') {
+    flex-wrap: nowrap; /* assume enough space */
+  }
 }
 
 .#{$block-class}--breadcrumb-row .#{$block-class}--page-actions {
@@ -174,6 +179,10 @@ $raised-z-index: 99;
   margin-top: $layout-02;
   margin-bottom: 0;
 
+  @include carbon--breakpoint-up('md') {
+    flex-wrap: nowrap; /* assume enough space */
+  }
+
   + .#{$block-class}--last-row-buffer--active {
     // only used when nothing below title
     height: $layout-03;
@@ -205,8 +214,12 @@ $raised-z-index: 99;
 }
 
 .#{$block-class}--title-column {
-  flex: 0 1 60%;
+  flex: 0 0 100%;
   overflow: hidden; /* required for ellipsis in title */
+
+  @include carbon--breakpoint-up('md') {
+    flex: 0 1 60%;
+  }
 }
 
 .#{$block-class}--title {
@@ -226,8 +239,15 @@ $raised-z-index: 99;
 }
 
 .#{$block-class}--page-actions {
-  flex: 1 1 40%;
-  text-align: right;
+  flex: 0 0 100%;
+  margin-top: $spacing-05;
+  white-space: nowrap;
+
+  @include carbon--breakpoint-up('md') {
+    flex: 1 1 40%;
+    margin-top: 0;
+    text-align: right;
+  }
 }
 
 .#{$block-class}--title-row .#{$block-class}--page-actions {

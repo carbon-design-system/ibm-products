@@ -1,0 +1,40 @@
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+
+@import 'carbon-components/scss/components/modal/modal';
+@import 'carbon-components/scss/components/file-uploader/file-uploader';
+@import 'carbon-components/scss/components/text-input/text-input';
+
+.#{$exp-prefix}--input-group {
+  display: flex;
+}
+
+.#{$exp-prefix}--import-button {
+  margin-left: $spacing-05;
+}
+
+.#{$exp-prefix}--import-modal-label {
+  margin-bottom: $spacing-03;
+  @include carbon--type-style('productive-heading-01');
+}
+
+.#{$exp-prefix}--import-modal-body {
+  margin-bottom: $spacing-05;
+}
+
+.#{$exp-prefix}--import-modal .bx--modal-container {
+  background: $ui-background;
+}
+
+.#{$exp-prefix}--import-modal .bx--modal-content {
+  padding-right: $spacing-05;
+}
+
+.#{$exp-prefix}--import-modal .bx--file__selected-file {
+  max-width: none;
+  background: $ui-01;
+}
+
+.#{$exp-prefix}--import-modal .bx--text-input {
+  background: $ui-01;
+}

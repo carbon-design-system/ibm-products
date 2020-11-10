@@ -30,4 +30,9 @@ if (global.HTMLElement) {
       return this.parentNode;
     },
   });
+
+  // After carbon-react 7.20, the Tabs/Tab component added certain scrolling
+  // behavior, which does not work in JSDOM for testing. It was suggested (by Josh Black) to mock this behavior
+  // explicitly for `scrollIntoView` via our jest setup.
+  Element.prototype.scrollIntoView = jest.fn();
 }

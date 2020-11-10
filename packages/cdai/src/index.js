@@ -11,12 +11,8 @@ export { IdeButton } from './components/IdeButton';
 export { IdeHTTPErrors } from './components/IdeHTTPErrors';
 export { IdeCard } from './components/IdeCard';
 export { IdeHome } from './components/IdeHome';
-export {
-  IdePageHeader,
-  IdePageContent,
-  IdeNavigation,
-  IdeSideNavLink,
-  IdeSideNavMenu,
-} from './components/IdeNavigation';
+export { IdeNavigation } from './components/IdeNavigation';
 export { IdeAutoSave, IdeManualSave } from './components/IdeSaving';
 export { IdeRemove } from './components/IdeRemove';
+export { IdeSlideOverPanel } from './components/IdeSlideOverPanel';
+

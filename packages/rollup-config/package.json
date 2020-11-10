@@ -1,7 +1,7 @@
 {
   "name": "@carbon/rollup-config",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": "https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/rollup-config",
@@ -16,6 +16,6 @@
     "@rollup/plugin-babel": "^5.0.3",
     "@rollup/plugin-commonjs": "^13.0.0",
     "@rollup/plugin-node-resolve": "^8.0.1",
-    "babel-preset-ibm-cloud-cognitive": "^0.0.0"
+    "babel-preset-ibm-cloud-cognitive": "^0.0.1"
   }
 }

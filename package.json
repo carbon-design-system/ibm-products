@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@carbon/bundler": "^10.9.0",
-    "@carbon/rollup-config": "^0.0.1",
+    "@carbon/rollup-config": "^0.1.0",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
     "@testing-library/react": "^11.0.4",

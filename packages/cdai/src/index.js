@@ -11,6 +11,12 @@ export { IdeButton } from './components/IdeButton';
 export { IdeHTTPErrors } from './components/IdeHTTPErrors';
 export { IdeCard } from './components/IdeCard';
 export { IdeHome } from './components/IdeHome';
-export { IdeNavigation } from './components/IdeNavigation';
+export {
+  IdePageHeader,
+  IdePageContent,
+  IdeNavigation,
+  IdeSideNavLink,
+  IdeSideNavMenu,
+} from './components/IdeNavigation';
 export { IdeAutoSave, IdeManualSave } from './components/IdeSaving';
 export { IdeRemove } from './components/IdeRemove';

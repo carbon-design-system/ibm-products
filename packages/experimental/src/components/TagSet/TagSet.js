@@ -112,7 +112,6 @@ export const TagSet = ({
   }, [maxVisibleTags, sizingTags]);
 
   const showTip = () => {
-    // debugger;
     setTipOpen(true);
   };
 
@@ -121,18 +120,12 @@ export const TagSet = ({
   };
 
   const handleResize = (width, height) => {
-    console.log('resize', width, height);
     checkFullyVisibleTags();
   };
 
   const handleSizerTagsResize = (width, height) => {
-    console.log('sizer tag resize', width, height);
     checkFullyVisibleTags();
   };
-
-  // const getNumberOfTagsFullyVisible() {
-  //   return 1;
-  // };
 
   return (
     <ReactResizeDetector onResize={handleResize}>
@@ -196,7 +189,7 @@ TagSet.propTypes = {
    */
   overflowDirection: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
   /**
-   * align tabs to right of available space
+   * align tags to right of available space
    */
   rightAlign: PropTypes.bool,
 };

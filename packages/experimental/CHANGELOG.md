@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/compare/@carbon/ibm-cloud-cognitive-experimental@0.2.2...@carbon/ibm-cloud-cognitive-experimental@0.2.3) (2020-11-11)
+
+
+### Bug Fixes
+
+* add Tearsheet and PageHeader to index.js ([#203](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/issues/203)) ([cd4731f](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/commit/cd4731fb36b9e5517e1aa756e4432f8fd68088c6))
+
+
+
+
+
 ## [0.2.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/compare/@carbon/ibm-cloud-cognitive-experimental@0.2.1...@carbon/ibm-cloud-cognitive-experimental@0.2.2) (2020-11-11)
 
 

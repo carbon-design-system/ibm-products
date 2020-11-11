@@ -5,7 +5,11 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+export { AboutModal } from './AboutModal';
+export { EmptyState } from './EmptyState';
 export { ExampleComponent } from './ExampleComponent';
+export { ImportModal } from './ImportModal';
 export { ModifiedTabs } from './ModifiedTabs';
 export { PageHeader, ActionBarItem, PageActionItem } from './PageHeader';
+export { RemovalModal } from './RemovalModal';
 export { Tearsheet } from './Tearsheet';

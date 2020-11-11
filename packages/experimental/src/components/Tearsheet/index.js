@@ -5,6 +5,4 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-export { PageHeader } from './PageHeader';
-export { ActionBarItem } from './ActionBarItem';
-export { PageActionItem } from './PageActionItem';
+export { Tearsheet } from './Tearsheet';

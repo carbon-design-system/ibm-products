@@ -39,5 +39,8 @@
     "carbon-components-react": "^7.23.0",
     "carbon-icons": "^7.0.7",
     "react-resize-detector": "^5.2.0"
+  },
+  "devDependencies": {
+    "@carbon/rollup-config": "^0.1.0"
   }
 }

@@ -7,3 +7,5 @@
 
 export { ExampleComponent } from './ExampleComponent';
 export { ModifiedTabs } from './ModifiedTabs';
+export { PageHeader, ActionBarItem, PageActionItem } from './PageHeader';
+export { Tearsheet } from './Tearsheet';

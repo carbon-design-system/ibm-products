@@ -5,6 +5,6 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-export { PageHeader } from './PageHeader';
-export { ActionBarItem } from './ActionBarItem';
-export { PageActionItem } from './PageActionItem';
+// NOTE: An index file is most useful when you have multiple components
+
+export { AboutModal } from './AboutModal';

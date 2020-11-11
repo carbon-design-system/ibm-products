@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, TextInput, InlineLoading } from 'carbon-components-react';
 import { InformationFilled16 } from '@carbon/icons-react';
-import APIKeyDownloader from './APIKeyDownloader';
+import { APIKeyDownloader } from '../APIKeyDownloader';
 import { expPrefix } from '../../global/js/settings';
 
 export const APIKeyModal = ({
@@ -78,7 +78,10 @@ export const APIKeyModal = ({
         />
       )}
       {nameRequired && !apiKey && loading && (
-        <InlineLoading description={loadingMessage} />
+        <InlineLoading
+          description={loadingMessage}
+          className={`${expPrefix}--apikey-modal-loader`}
+        />
       )}
       {apiKeyLoaded && (
         <div className={`${expPrefix}--apikey-modal-messaging`}>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { expPrefix } from '../../global/js/settings';
 
-const APIKeyDownloader = ({ apiKey, bodyText, fileName, linkText }) => {
+export const APIKeyDownloader = ({ apiKey, bodyText, fileName, linkText }) => {
   const [linkProps, setLinkProps] = useState('');
 
   useEffect(() => {
@@ -28,8 +28,6 @@ const APIKeyDownloader = ({ apiKey, bodyText, fileName, linkText }) => {
     </p>
   );
 };
-
-export default APIKeyDownloader;
 
 APIKeyDownloader.propTypes = {
   apiKey: PropTypes.string,

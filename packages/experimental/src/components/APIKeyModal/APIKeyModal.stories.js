@@ -26,6 +26,7 @@ export default {
 const defaultProps = {
   apiKey: '123-456-789',
   apiKeyInputId: 'apiKeyInput',
+  apiKeyLabel: 'API key',
   copyButtonText: 'Copy',
   open: true,
   secondaryButtonText: 'Close',
@@ -90,7 +91,6 @@ export const Standard = () => {
         <APIKeyModal
           {...defaultProps}
           apiKey={apiKey}
-          apiKeyLabel="API key"
           downloadBodyText="This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it."
           downloadLinkText="Download as JSON"
           downloadable

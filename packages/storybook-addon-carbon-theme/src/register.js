@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable react/display-name */
 /**
  * Copyright IBM Corp. 2016, 2018
  *

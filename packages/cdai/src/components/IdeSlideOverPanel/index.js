@@ -5,4 +5,4 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import './example-component.scss';
+export { default as IdeSlideOverPanel } from './IdeSlideOverPanel.js';

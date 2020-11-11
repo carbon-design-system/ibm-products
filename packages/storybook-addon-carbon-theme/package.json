@@ -1,6 +1,6 @@
 {
   "name": "@carbon/storybook-addon-theme",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Carbon theme switcher for Storybook",
   "keywords": [
     "addon",

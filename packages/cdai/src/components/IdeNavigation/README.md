@@ -17,7 +17,7 @@ _1_ SideNavMenu hover state still to be implemented.
 
 ## Change history
 
-| Date       | Change                                         | Contributed by / Product                              |
-| ---------- | ---------------------------------------------- | ----------------------------------------------------- |
-| 18/10/2019 | Readme update                                  | Matthew Chirgwin (chirmatt@uk.ibm.com), Event Streams |
-| 16/09/2019 | First contribution of IdeNavigation components | Matthew Chirgwin (chirmatt@uk.ibm.com), Event Streams |
+| Date       | Change                                         | Contributed by / Product         |
+| ---------- | ---------------------------------------------- | -------------------------------- |
+| 18/10/2019 | Readme update                                  | Matthew Chirgwin / Event Streams |
+| 16/09/2019 | First contribution of IdeNavigation components | Matthew Chirgwin / Event Streams |

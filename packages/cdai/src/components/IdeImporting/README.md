@@ -99,6 +99,6 @@ function MyUploadExample({ onFilesChanged }) {
 
 ## Change history
 
-| Date       | Change                              | Contributed by / Product                          |
-| ---------- | ----------------------------------- | ------------------------------------------------- |
-| 11/22/2019 | First contribution of the component | Ritchie Martori (martori@us.ibm.com), API Connect |
+| Date       | Change                              | Contributed by / Product      |
+| ---------- | ----------------------------------- | ----------------------------- |
+| 11/22/2019 | First contribution of the component | Ritchie Martori / API Connect |

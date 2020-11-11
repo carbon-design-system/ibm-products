@@ -35,6 +35,6 @@ Behaviours for this component are defined in
 
 ## Change history
 
-| Date       | Change                                    | Contributed by / Product                              |
-| ---------- | ----------------------------------------- | ----------------------------------------------------- |
-| 16/09/2019 | First contribution of IdeRemove component | Matthew Chirgwin (chirmatt@uk.ibm.com), Event Streams |
+| Date       | Change                                    | Contributed by / Product         |
+| ---------- | ----------------------------------------- | -------------------------------- |
+| 16/09/2019 | First contribution of IdeRemove component | Matthew Chirgwin / Event Streams |

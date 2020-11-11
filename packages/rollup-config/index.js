@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+'use strict';
+
 const { babel } = require('@rollup/plugin-babel');
 const commonjs = require('@rollup/plugin-commonjs');
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
@@ -17,8 +19,6 @@ function create(input, packageJson) {
   const {
     dependencies = {},
     devDependencies = {},
-    main,
-    module,
     peerDependencies = {},
   } = packageJson;
 
@@ -28,7 +28,6 @@ function create(input, packageJson) {
       ...Object.keys(dependencies),
       ...Object.keys(devDependencies),
       ...Object.keys(peerDependencies),
-      'prop-types',
     ],
     plugins: [
       babel({
@@ -37,27 +36,25 @@ function create(input, packageJson) {
         presets: [require.resolve('babel-preset-ibm-cloud-cognitive')],
         babelHelpers: 'bundled',
       }),
+      nodeResolve(),
       commonjs({
         include: /node_modules/,
       }),
-      nodeResolve(),
     ],
   };
-
-  // https://github.com/carbon-design-system/carbon/issues/5442
 
   return [
     {
       ...baseConfig,
       output: {
-        file: module,
+        file: 'es/index.js',
         format: 'esm',
       },
     },
     {
       ...baseConfig,
       output: {
-        file: main,
+        file: 'lib/index.js',
         format: 'commonjs',
       },
     },

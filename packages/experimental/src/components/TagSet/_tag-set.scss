@@ -4,6 +4,7 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
+@import '../../global/styles/carbon-settings'; // goes before index as it affects how carbon is used.
 @import '../../global/styles/project-settings';
 
 @import 'carbon-components/scss/components/tooltip/tooltip';
@@ -48,4 +49,26 @@ $block-class: #{$exp-prefix}-tag-set;
   max-width: 0;
   overflow: hidden;
   visibility: hidden;
+}
+
+.#{$block-class}--overflow-tag {
+  display: inline-block;
+}
+
+.#{$block-class}--overflow-tag .#{$prefix}--tag__close-icon {
+  // undo override by .bx--tooltip button
+  padding: 0;
+}
+
+.#{$block-class}--overflow-tag .#{$prefix}--tag--high-contrast {
+  color: $text-01;
+  background-color: $ui-background;
+}
+
+.#{$block-class}--overflow-tag .#{$prefix}--tag__close-icon:hover {
+  background-color: $hover-ui;
+}
+
+.#{$block-class}--overflow-tag .#{$prefix}--tag__close-icon:focus {
+  box-shadow: inset 0 0 0 2px $focus;
 }

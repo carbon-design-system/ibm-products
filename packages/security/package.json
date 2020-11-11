@@ -32,5 +32,8 @@
   },
   "dependencies": {
     "@carbon/ibm-security": "^1.26.0"
+  },
+  "devDependencies": {
+    "@carbon/rollup-config": "^0.1.0"
   }
 }

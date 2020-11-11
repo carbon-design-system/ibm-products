@@ -37,5 +37,8 @@
   "dependencies": {
     "@carbon/ibm-cloud-cognitive-experimental": "^0.2.0",
     "@carbon/ibm-cloud-cognitive-security": "^0.1.0"
+  },
+  "devDependencies": {
+    "@carbon/rollup-config": "^0.1.0"
   }
 }

@@ -28,6 +28,6 @@ of this component can be found in IdePageHeader and IdeHome.
 
 ## Change history
 
-| Date       | Change                                           | Contributed by / Product                              |
-| ---------- | ------------------------------------------------ | ----------------------------------------------------- |
-| 03/09/2019 | First contribution of IDEPageComponent component | Matthew Chirgwin (chirmatt@uk.ibm.com), Event Streams |
+| Date       | Change                                           | Contributed by / Product         |
+| ---------- | ------------------------------------------------ | -------------------------------- |
+| 03/09/2019 | First contribution of IDEPageComponent component | Matthew Chirgwin / Event Streams |

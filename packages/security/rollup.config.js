@@ -8,4 +8,4 @@
 import { create } from '@carbon/rollup-config';
 import packageJson from './package.json';
 
-export default create('src/index.js', packageJson);
+export default create('src', packageJson);

@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
 const { babel } = require('@rollup/plugin-babel');
 const commonjs = require('@rollup/plugin-commonjs');
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
@@ -19,6 +17,8 @@ function create(input, packageJson) {
   const {
     dependencies = {},
     devDependencies = {},
+    main,
+    module,
     peerDependencies = {},
   } = packageJson;
 
@@ -28,6 +28,7 @@ function create(input, packageJson) {
       ...Object.keys(dependencies),
       ...Object.keys(devDependencies),
       ...Object.keys(peerDependencies),
+      'prop-types',
     ],
     plugins: [
       babel({
@@ -36,10 +37,10 @@ function create(input, packageJson) {
         presets: [require.resolve('babel-preset-ibm-cloud-cognitive')],
         babelHelpers: 'bundled',
       }),
-      nodeResolve(),
       commonjs({
         include: /node_modules/,
       }),
+      nodeResolve(),
     ],
   };
 
@@ -47,14 +48,14 @@ function create(input, packageJson) {
     {
       ...baseConfig,
       output: {
-        file: 'es/index.js',
+        file: module,
         format: 'esm',
       },
     },
     {
       ...baseConfig,
       output: {
-        file: 'lib/index.js',
+        file: main,
         format: 'commonjs',
       },
     },

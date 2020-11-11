@@ -26,7 +26,7 @@
   },
   "scripts": {
     "build": "yarn clean && yarn build:js && yarn build:scss",
-    "build:js": "rollup -c",
+    "build:js": "node ../core/scripts/build && rollup -c",
     "build:scss": "bundler bundle:scss src/index.scss && copyfiles 'src/**/*.scss' scss -u 1",
     "clean": "rimraf es lib scss",
     "test": "bundler check 'src/**/*.scss'"

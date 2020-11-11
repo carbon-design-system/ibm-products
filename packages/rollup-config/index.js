@@ -44,6 +44,8 @@ function create(input, packageJson) {
     ],
   };
 
+  // https://github.com/carbon-design-system/carbon/issues/5442
+
   return [
     {
       ...baseConfig,

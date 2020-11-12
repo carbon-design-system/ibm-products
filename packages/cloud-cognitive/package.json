@@ -26,7 +26,7 @@
   },
   "scripts": {
     "build": "yarn clean && yarn build:js && yarn build:scss",
-    "build:js": "node ../core/scripts/build",
+    "build:js": "node scripts/build",
     "build:scss": "bundler bundle:scss src/index.scss && copyfiles 'src/**/*.scss' scss -u 1",
     "clean": "rimraf es lib scss",
     "test": "bundler check 'src/**/*.scss'"
@@ -39,6 +39,7 @@
     "@carbon/ibm-cloud-cognitive-security": "^0.1.1"
   },
   "devDependencies": {
+    "@carbon/ibm-cloud-cognitive-core": "^0.1.0",
     "@carbon/rollup-config": "^0.1.0"
   }
 }

@@ -51,7 +51,7 @@ const ModalStateManager = ({
   renderLauncher: LauncherContent,
   children: ModalContent,
 }) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [apiKey, setApiKey] = useState('');
   const [loading, setLoading] = useState(false);
   const setKeyHandler = async (name) => {
@@ -85,18 +85,18 @@ export const Standard = () => {
   return (
     <ModalStateManager
       renderLauncher={({ setOpen }) => (
-        <Button onClick={() => setOpen(true)}>Launch modal</Button>
+        <Button onClick={() => setOpen(true)}>Create API key</Button>
       )}>
       {({ open, setOpen, setApiKey, apiKey, loading }) => (
         <APIKeyModal
           {...defaultProps}
           apiKey={apiKey}
+          createButtonText="Generate API key"
+          createHeader="Generate an API key"
           downloadBodyText="This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it."
           downloadLinkText="Download as JSON"
           downloadable
           downloadableFileName="apikey"
-          generateButtonText="Generate API key"
-          generateHeader="Generate an API key"
           loadingMessage="your key is being created. please wait..."
           loading={loading}
           modalBody="Optional description text. To connect securely to {{product}}, your application or tool needs an API key with permission to access the cluster and resources."

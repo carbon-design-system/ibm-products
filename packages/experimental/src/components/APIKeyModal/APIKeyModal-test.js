@@ -35,13 +35,13 @@ const defaultProps = {
 const standardProps = {
   ...defaultProps,
   apiKey: '',
+  createButtonText: 'Generate API key',
+  createHeader: 'Generate an API key',
   downloadBodyText:
     'This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it.',
   downloadLinkText: 'Download as JSON',
   downloadable: true,
   downloadableFileName: 'apikey',
-  generateButtonText: 'Generate API key',
-  generateHeader: 'Generate an API key',
   loadingMessage: 'your key is being created. please wait...',
   loading: false,
   modalBody:

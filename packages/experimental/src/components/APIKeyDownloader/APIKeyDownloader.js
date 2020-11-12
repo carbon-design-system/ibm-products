@@ -30,9 +30,27 @@ export const APIKeyDownloader = ({ apiKey, bodyText, fileName, linkText }) => {
 };
 
 APIKeyDownloader.propTypes = {
+  /**
+   * the api key the user recieves
+   */
   apiKey: PropTypes.string,
+  /**
+   * main component text
+   */
   bodyText: PropTypes.string,
-  className: PropTypes.string,
+  /**
+   * optional name for the file being generated
+   */
   fileName: PropTypes.string,
+  /**
+   * text for the anchor tag
+   */
   linkText: PropTypes.string,
+};
+
+APIKeyDownloader.defaultProps = {
+  apiKey: '',
+  bodyText: '',
+  fileName: '',
+  linkText: '',
 };

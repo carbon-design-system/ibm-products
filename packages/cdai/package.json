@@ -36,6 +36,10 @@
     "rimraf": "^3.0.2",
     "sinon": "^7.4.2"
   },
+  "dependencies": {
+    "pluralize": "^8.0.0",
+    "react-highlighter": "^0.4.3"
+  },
   "babel": {
     "presets": [
       "./scripts/env",

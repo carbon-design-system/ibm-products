@@ -194,9 +194,9 @@ The link's destination.
 
 # Change history
 
-|         Date | Change                                                           | Contributed by, Product                    |
-| -----------: | :--------------------------------------------------------------- | :----------------------------------------- |
-| Feb 21, 2020 | Enhance image prop to allow custom images                        | Simon Ho (simonho@ca.ibm.com), API Connect |
-|  Feb 6, 2020 | Refactor entire component based on new designs (BREAKING CHANGE) | Simon Ho (simonho@ca.ibm.com), API Connect |
-| Sep 25, 2019 | Refactor SVG rendering                                           | Simon Ho (simonho@ca.ibm.com), API Connect |
-|  Sep 9, 2019 | First contribution of the IdeEmptyState component                | Simon Ho (simonho@ca.ibm.com), API Connect |
+|         Date | Change                                                           | Contributed by, Product |
+| -----------: | :--------------------------------------------------------------- | :---------------------- |
+| Feb 21, 2020 | Enhance image prop to allow custom images                        | Simon Ho / API Connect  |
+|  Feb 6, 2020 | Refactor entire component based on new designs (BREAKING CHANGE) | Simon Ho / API Connect  |
+| Sep 25, 2019 | Refactor SVG rendering                                           | Simon Ho / API Connect  |
+|  Sep 9, 2019 | First contribution of the IdeEmptyState component                | Simon Ho / API Connect  |

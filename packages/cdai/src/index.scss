@@ -8,6 +8,7 @@
 @import 'globals/scss/variables';
 
 @import 'components/IdeButton/IdeButton';
+@import 'components/IdeCreate/ide-create';
 @import 'components/IdeEmptyState/IdeEmptyState';
 @import 'components/IdeImporting/IdeImporting';
 @import 'components/IdeSaving/IdeSaving';
@@ -16,3 +17,4 @@
 @import 'components/IdeNavigation/IdeNavigation';
 @import 'components/IdeHTTPErrors/IdeHTTPErrors';
 @import 'components/IdeRemove/IdeRemove';
+@import 'components/IdeSlideOverPanel/IdeSlideOverPanel';

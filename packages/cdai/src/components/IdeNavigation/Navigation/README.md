@@ -33,8 +33,8 @@ update navigation state.
 
 ## Change history
 
-| Date       | Change                                           | Contributed by / Product                              |
-| ---------- | ------------------------------------------------ | ----------------------------------------------------- |
-| 15/10/2019 | Update implementation following Carbon update    | Matthew Chirgwin (chirmatt@uk.ibm.com), Event Streams |
-| 27/09/2019 | Update to align with carbon theme                | Matthew Chirgwin (chirmatt@uk.ibm.com), Event Streams |
-| 16/09/2019 | First contribution of IDEPageComponent component | Matthew Chirgwin (chirmatt@uk.ibm.com), Event Streams |
+| Date       | Change                                           | Contributed by / Product         |
+| ---------- | ------------------------------------------------ | -------------------------------- |
+| 15/10/2019 | Update implementation following Carbon update    | Matthew Chirgwin / Event Streams |
+| 27/09/2019 | Update to align with carbon theme                | Matthew Chirgwin / Event Streams |
+| 16/09/2019 | First contribution of IDEPageComponent component | Matthew Chirgwin / Event Streams |

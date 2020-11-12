@@ -101,7 +101,7 @@ with non-String values.
 
 # Change history
 
-|         Date | Change                                            | Contributed by, Product                    |
-| -----------: | :------------------------------------------------ | :----------------------------------------- |
-|  Oct 9, 2019 | First contribution of the IdeHTTPErrors component | Simon Ho (simonho@ca.ibm.com), API Connect |
-| Jan 10, 2020 | Allow user-defined values for all props           | Simon Ho (simonho@ca.ibm.com), API Connect |
+|         Date | Change                                            | Contributed by, Product |
+| -----------: | :------------------------------------------------ | :---------------------- |
+|  Oct 9, 2019 | First contribution of the IdeHTTPErrors component | Simon Ho / API Connect  |
+| Jan 10, 2020 | Allow user-defined values for all props           | Simon Ho / API Connect  |

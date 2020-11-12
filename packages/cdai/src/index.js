@@ -15,4 +15,6 @@ export { IdeHome } from './components/IdeHome';
 export { IdeNavigation } from './components/IdeNavigation';
 export { IdeAutoSave, IdeManualSave } from './components/IdeSaving';
 export { IdeRemove } from './components/IdeRemove';
+export { IdeFilter } from './components/IdeFilter';
+export { IdeTableToolbarSearach } from './components/IdeTableToolbarSearach';
 export { IdeSlideOverPanel } from './components/IdeSlideOverPanel';

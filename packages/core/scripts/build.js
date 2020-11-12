@@ -6,8 +6,10 @@
  */
 
 const { execSync } = require('child_process');
+const { copySync } = require('cpx');
 const { resolve } = require('path');
 
+const directory = 'src';
 const configFile = resolve(__dirname, '..', '.babelrc');
 
 const ignore = [
@@ -18,9 +20,10 @@ const ignore = [
   '**/*-test.js',
 ].join(',');
 
-const babel = ({ BABEL_ENV, output }) => {
+const compile = ({ BABEL_ENV, output }) => {
+  // https://babeljs.io/docs/en/babel-cli#usage
   execSync(
-    `babel src --config-file ${configFile} -d ${output} --ignore '${ignore}'`,
+    `babel ${directory} --config-file ${configFile} -d ${output} --ignore '${ignore}'`,
     {
       env: Object.assign({}, process.env, {
         BABEL_ENV,
@@ -28,11 +31,14 @@ const babel = ({ BABEL_ENV, output }) => {
       stdio: 'inherit',
     }
   );
+
+  // https://www.npmjs.com/package/cpx#nodejs-api
+  copySync(`${directory}/**/assets/**`, output);
 };
 
 try {
-  babel({ BABEL_ENV: 'es', output: 'es' });
-  babel({ BABEL_ENV: 'cjs', output: 'lib' });
+  compile({ BABEL_ENV: 'es', output: 'es' });
+  compile({ BABEL_ENV: 'cjs', output: 'lib' });
 } catch (error) {
   console.error(error);
   process.exit(1);

@@ -9,7 +9,7 @@ import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 
 import { EmptyState } from '.';
-import CustomIllustration from './EmptyStateIllustrations/light/error.svg';
+import CustomIllustration from './assets/light/error.svg';
 
 const { name } = EmptyState;
 

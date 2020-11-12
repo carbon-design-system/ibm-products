@@ -8,7 +8,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add20 } from '@carbon/icons-react';
-import CustomIllustration from './EmptyStateIllustrations/light/error.svg';
+import CustomIllustration from './assets/light/error.svg';
 import mdx from './EmptyState.mdx';
 
 import { EmptyState } from '.';

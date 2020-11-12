@@ -25,6 +25,7 @@
     "@carbon/import-once": "10.3.0",
     "@carbon/layout": "10.14.0",
     "@carbon/motion": "10.9.0",
+    "@carbon/storybook-addon-theme": "^0.2.1",
     "@carbon/themes": "10.21.0",
     "@carbon/type": "10.17.0",
     "@storybook/addon-actions": "^6.0.6",

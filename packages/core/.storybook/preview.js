@@ -8,11 +8,7 @@
 import { withInfo } from '@storybook/addon-info';
 import addons from '@storybook/addons';
 import React, { useEffect } from 'react';
-
-import {
-  CARBON_CURRENT_THEME,
-  // CARBON_TYPE_TOKEN,
-} from './addon-carbon-theme/shared';
+import { withCarbonTheme } from '@carbon/storybook-addon-theme/react';
 
 import index from './index.scss';
 
@@ -39,31 +35,14 @@ const decorators = [
       </Style>
     );
   },
+  withCarbonTheme,
 ];
 
 const parameters = {
   layout: 'centered',
+  carbonTheme: {
+    theme: 'g10', // optional default carbon theme
+  },
 };
-
-addons.getChannel().on(CARBON_CURRENT_THEME, (theme) => {
-  document.documentElement.setAttribute('storybook-carbon-theme', theme);
-});
-
-// addons.getChannel().on(CARBON_TYPE_TOKEN, ({ tokenName, tokenValue }) => {
-//   const root = document.documentElement;
-//   const [fontSize, lineHeight] = tokenValue.split('-');
-//   const rem = (px) =>
-//     `${
-//       px / parseFloat(getComputedStyle(document.documentElement).fontSize)
-//     }rem`;
-//   root.style.setProperty(
-//     `--${customPropertyPrefix}-${tokenName}-font-size`,
-//     rem(fontSize)
-//   );
-//   root.style.setProperty(
-//     `--${customPropertyPrefix}-${tokenName}-line-height`,
-//     rem(lineHeight)
-//   );
-// });
 
 export { decorators, parameters };

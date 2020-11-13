@@ -32,7 +32,7 @@ module.exports = {
         },
       },
     },
-    require.resolve('./addon-carbon-theme/register'),
+    '@carbon/storybook-addon-theme/register',
   ],
 
   stories: ['../docs/**/*.stories.*', '../../**/*.stories.*'],

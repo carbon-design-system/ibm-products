@@ -235,32 +235,6 @@ const IdeDataTable = ({
 };
 
 IdeDataTable.propTypes = {
-  /** render a loading skeleton */
-  loading: PropTypes.bool,
-  /** Carbon IdeDataTable headers object */
-  headers: PropTypes.arrayOf(PropTypes.object),
-  /** Carbon IdeDataTable rows object */
-  rows: PropTypes.arrayOf(PropTypes.object),
-  /** Carbon IdeDataTable size option */
-  size: PropTypes.string,
-  /** ["single", "multi", "none"] - selection type on the table */
-  selectType: PropTypes.oneOf(Object.values(SelectTypes)),
-  /** Callback for row selection */
-  onSelect: PropTypes.func,
-  /** Callback for row click */
-  onClick: PropTypes.func,
-  /** Number of loading rows */
-  skeletonRowCount: PropTypes.number,
-  /** Custom function to render header items */
-  renderHeader: PropTypes.func,
-  /** Custom function to render row cells */
-  renderRow: PropTypes.func,
-  /** Use carbon expandable rows */
-  expandable: PropTypes.bool,
-  /** Custom function to render content for an expanded row */
-  renderExpandedRow: PropTypes.func,
-  /** Custom function to render content for table toolbar */
-  renderToolbar: PropTypes.func,
   /** Pretranslated strings for each key to replace default aria labels on components */
   ariaLabels: PropTypes.shape({
     'carbon.table.row.expand': PropTypes.string,
@@ -274,6 +248,32 @@ IdeDataTable.propTypes = {
     'ide.table.addition.row.click': PropTypes.string,
   }),
   className: PropTypes.string,
+  /** Use carbon expandable rows */
+  expandable: PropTypes.bool,
+  /** Carbon IdeDataTable headers object */
+  headers: PropTypes.arrayOf(PropTypes.object),
+  /** render a loading skeleton */
+  loading: PropTypes.bool,
+  /** Callback for row click */
+  onClick: PropTypes.func,
+  /** Callback for row selection */
+  onSelect: PropTypes.func,
+  /** Custom function to render content for an expanded row */
+  renderExpandedRow: PropTypes.func,
+  /** Custom function to render header items */
+  renderHeader: PropTypes.func,
+  /** Custom function to render row cells */
+  renderRow: PropTypes.func,
+  /** Custom function to render content for table toolbar */
+  renderToolbar: PropTypes.func,
+  /** Carbon IdeDataTable rows object */
+  rows: PropTypes.arrayOf(PropTypes.object),
+  /** ["single", "multi", "none"] - selection type on the table */
+  selectType: PropTypes.oneOf(Object.values(SelectTypes)),
+  /** Carbon IdeDataTable size option */
+  size: PropTypes.string,
+  /** Number of loading rows */
+  skeletonRowCount: PropTypes.number,
 };
 
 IdeDataTable.defaultProps = {

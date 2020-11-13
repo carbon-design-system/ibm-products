@@ -57,7 +57,9 @@ storiesOf(getComponentLabel('IdeTableToolbarSearch'), module)
               <TableHead>
                 <TableRow>
                   {headers.map((header) => (
-                    <TableHeader {...getHeaderProps({ header })}>
+                    <TableHeader
+                      key={header.header}
+                      {...getHeaderProps({ header })}>
                       {header.header}
                     </TableHeader>
                   ))}
@@ -65,7 +67,7 @@ storiesOf(getComponentLabel('IdeTableToolbarSearch'), module)
               </TableHead>
               <TableBody>
                 {rows.map((row) => (
-                  <TableRow {...getRowProps({ row })}>
+                  <TableRow key={rows.indexOf(row)} {...getRowProps({ row })}>
                     {row.cells.map((cell) => (
                       <TableCell key={cell.id}>{cell.value}</TableCell>
                     ))}

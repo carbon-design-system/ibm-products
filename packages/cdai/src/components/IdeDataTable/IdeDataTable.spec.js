@@ -14,7 +14,7 @@ import {
   idAttribute,
   fuzzyAttributeSelector,
 } from '../../component_helpers/IDHelper.js';
-
+import * as jth from '../../component_helpers/jest_test_helper_functions.js';
 import { rows, headers } from './fixtures/table.data.js';
 
 const baseComponent = (props = {}) =>
@@ -294,7 +294,10 @@ describe('<IdeDataTable>', () => {
     const renderRow = (row) => {
       return [
         <td key="1">
-          <button onClick={onButtonClick} {...idAttribute(prefix(row.id))}>
+          <button
+            type="button"
+            onClick={onButtonClick}
+            {...idAttribute(prefix(row.id))}>
             Click Me
           </button>
         </td>,
@@ -395,6 +398,7 @@ describe('<IdeDataTable>', () => {
       rowContent.push(
         <td>
           <button
+            type="button"
             onClick={actions.expandRow}
             {...idAttribute(`expand__button-${row.id}`)}>
             Expand
@@ -438,6 +442,7 @@ describe('<IdeDataTable>', () => {
       rowContent.push(
         <td>
           <button
+            type="button"
             onClick={actions.selectRow}
             {...idAttribute(`select__button-${row.id}`)}>
             Select

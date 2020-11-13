@@ -102,15 +102,16 @@ const formatOptionLabel = (option, context, allOptions) => {
 // custom components
 const MultiValueContainer = (props) => (
   <Tag
-    children={props.children}
     type={props.data.type || 'filter'}
-    className={`${idePrefix}-filter--tag`}
-  />
+    className={`${idePrefix}-filter--tag`}>
+    {props.children}
+  </Tag>
 );
 const MultiValueRemove = (props) => {
   const type = props.data.type || 'filter';
   return (
     <button
+      type="button"
       {...props.innerProps}
       className={`${idePrefix}-filter--close${
         type === 'filter'
@@ -204,7 +205,16 @@ IdeFilter.defaultProps = {
 };
 
 IdeFilter.propTypes = {
+  allowCreateWhileLoading: PropTypes.bool,
   ariaLabel: PropTypes.string,
+  autoFocus: PropTypes.bool,
+  inputValue: PropTypes.string,
+  isLoading: PropTypes.bool,
+  light: PropTypes.bool,
+  loadingMessage: PropTypes.func,
+  menuIsOpen: PropTypes.bool,
+  onChange: PropTypes.func.isRequired,
+  onInputChange: PropTypes.func,
   options: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
@@ -217,23 +227,33 @@ IdeFilter.propTypes = {
       ).isRequired,
     })
   ).isRequired,
-  onChange: PropTypes.func.isRequired,
-  onInputChange: PropTypes.func,
   placeholderText: PropTypes.string,
-  menuIsOpen: PropTypes.bool,
-  inputValue: PropTypes.string,
+  searchForText: PropTypes.string,
   value: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired,
     })
   ),
-  loadingMessage: PropTypes.func,
-  allowCreateWhileLoading: PropTypes.bool,
-  isLoading: PropTypes.bool,
-  light: PropTypes.bool,
-  searchForText: PropTypes.string,
-  autoFocus: PropTypes.bool,
+};
+
+MultiValueContainer.propTypes = {
+  children: PropTypes.node,
+  data: PropTypes.shape({
+    type: PropTypes.string,
+  }),
+};
+
+MultiValueRemove.propTypes = {
+  children: PropTypes.node,
+  data: PropTypes.shape({
+    type: PropTypes.string,
+  }),
+  innerProps: PropTypes.node,
+};
+
+ClearIndicator.propTypes = {
+  innerProps: PropTypes.node,
 };
 
 export default IdeFilter;

@@ -78,7 +78,7 @@ storiesOf(getComponentLabel('IdeDataTable'), module)
   .add('custom header render function', () => {
     const renderHeader = (headers) =>
       headers.map((header) => (
-        <TableHeader>
+        <TableHeader key={headers.indexOf(header)}>
           {header.header}
           <Information16 />
         </TableHeader>
@@ -113,7 +113,7 @@ storiesOf(getComponentLabel('IdeDataTable'), module)
   .add('custom row render function', () => {
     const renderRow = (row) =>
       row.cells.map((cell, index) => (
-        <td>
+        <td key={index}>
           <div>{cell.value}</div>
           <div>
             <strong>
@@ -164,17 +164,25 @@ storiesOf(getComponentLabel('IdeDataTable'), module)
         const cellContent = ((header) => {
           switch (header) {
             case 'select': {
-              return <button onClick={actions.selectRow}>Select</button>;
+              return (
+                <button type="button" onClick={actions.selectRow}>
+                  Select
+                </button>
+              );
             }
             case 'expand': {
-              return <button onClick={actions.expandRow}>Expand</button>;
+              return (
+                <button type="button" onClick={actions.expandRow}>
+                  Expand
+                </button>
+              );
             }
             default: {
               return cell.value;
             }
           }
         })(cell.info.header);
-        return <td>{cellContent}</td>;
+        return <td key={row.cells.indexOf(cell)}>{cellContent}</td>;
       });
       return rows;
     };

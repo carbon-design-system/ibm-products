@@ -8,6 +8,8 @@
 import React from 'react';
 import { TableToolbarSearch } from 'carbon-components-react';
 import { idePrefix } from '../../globals/js/settings';
+import PropTypes from 'prop-types';
+
 const IdeTableToolbarSearch = React.forwardRef(
   ({ className, ...otherProps }, ref) => {
     let searchClasses = `${idePrefix}-table-toolbar-search`;
@@ -24,5 +26,10 @@ const IdeTableToolbarSearch = React.forwardRef(
     );
   }
 );
+
+IdeTableToolbarSearch.propTypes = {
+  /** custom class name */
+  className: PropTypes.string,
+};
 
 export default IdeTableToolbarSearch;

@@ -5,6 +5,12 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// ******************************
+// *
+// * ONLY EDIT IN packages/feature-flags files elsewhere are copies
+// *
+// ******************************
+
 export default {
-  'enable-css-custom-properties': true,
+  'enable-css-custom-properties': false,
 };

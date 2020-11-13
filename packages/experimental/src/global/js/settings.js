@@ -1,4 +1,4 @@
-import featureFlags from '../../../../feature-flags/feature-flags';
+import featureFlags from '../../common-files/feature-flags/feature-flags';
 
 const expPrefix = 'exp';
 

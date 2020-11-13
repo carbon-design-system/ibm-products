@@ -5,7 +5,6 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import { DataTable, DataTableSkeleton } from 'carbon-components-react';
 const {
   Table,
   TableContainer,
@@ -28,6 +27,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as KeyHandler from '../../component_helpers/A11yHelper.js';
 import { idAttribute } from '../../component_helpers/IDHelper';
+import { DataTable, DataTableSkeleton } from 'carbon-components-react';
 import { idePrefix } from '../../globals/js/settings';
 const SelectTypes = Object.freeze({
   MULTI: 'multi',

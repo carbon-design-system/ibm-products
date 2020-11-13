@@ -5,6 +5,9 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@import '../../globals/scss/carbon-settings';
+@import '../../globals/scss/variables';
+
 .#{$ide-prefix}-filter {
   position: relative;
 }

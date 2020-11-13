@@ -1,0 +1,121 @@
+//
+// Copyright IBM Corp. 2020, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/carbon-settings';
+@import '../../globals/scss/variables';
+@import 'carbon-components/scss/components/tag/tag';
+
+.#{$ide-prefix}-filter {
+  position: relative;
+}
+
+.#{$ide-prefix}-filter .highlight {
+  background-color: $highlight;
+}
+
+.#{$ide-prefix}-filter .#{$ide-prefix}-filter--search-icon {
+  position: absolute;
+  top: calc(50% - #{$spacing-03});
+  left: $spacing-04;
+  z-index: 1;
+  opacity: 0.75;
+}
+
+.#{$ide-prefix}-filter .#{$ide-prefix}-filter--tag-filter:hover {
+  background: $inverse-hover-ui;
+  border-radius: 50%;
+}
+
+.#{$ide-prefix}-filter .#{$ide-prefix}-filter--tag-filter:focus {
+  border-radius: 50%;
+  outline: none;
+  box-shadow: inset 0 0 0 2px $inverse-focus-ui;
+}
+
+.#{$ide-prefix}-filter .#{$ide-prefix}-filter--close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: $spacing-01;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  fill: currentColor;
+}
+
+.#{$ide-prefix}-filter .#{$ide-prefix}-filter--close:hover {
+  background: $inverse-hover-ui;
+  border-radius: 50%;
+}
+
+.#{$ide-prefix}-filter .#{$ide-prefix}-filter--close:focus {
+  border-radius: 50%;
+  outline: none;
+  box-shadow: inset 0 0 0 2px $inverse-focus-ui;
+}
+
+.#{$ide-prefix}-filter .#{$ide-prefix}-filter--close > svg {
+  width: 8px;
+  height: 8px;
+  vertical-align: middle;
+}
+
+.#{$ide-prefix}-filter .#{$ide-prefix}-filter--clear {
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+  fill: $text-01;
+}
+
+.#{$ide-prefix}-filter .#{$ide-prefix}-filter--clear:hover {
+  background: $hover-field;
+}
+
+.#{$ide-prefix}-filter .#{$ide-prefix}-filter--clear > svg {
+  margin: 19px;
+}
+
+.#{$ide-prefix}-filter .#{$ide-prefix}-filter--tag {
+  margin-left: 0;
+  font-size: carbon--type-scale(3);
+}
+
+.#{$ide-prefix}-filter .#{$ide-prefix}-filter--category {
+  margin-right: $spacing-02;
+  font-weight: bold;
+}
+
+/** React select prefixes classes
+https://react-select.com/styles#using-classnames
+Can't do in js as doesn't play well with carbon themes
+
+importants because css ordering on component doesnt work otherwise
+**/
+.#{$ide-prefix}-filter .#{$ide-prefix}-filter__control {
+  background-color: $field-01;
+  border-bottom: 1px solid $ui-04;
+}
+
+.#{$ide-prefix}-filter .#{$ide-prefix}-filter__control:focus,
+.#{$ide-prefix}-filter .#{$ide-prefix}-filter__control:hover {
+  outline: 2px solid $focus;
+}
+
+.#{$ide-prefix}-filter .#{$ide-prefix}-filter__menu {
+  background-color: $field-01;
+}
+
+.#{$ide-prefix}-filter .#{$ide-prefix}-filter__placeholder {
+  color: $ui-04;
+}
+
+.#{$ide-prefix}-filter--light .#{$ide-prefix}-filter__control {
+  background-color: $field-02;
+}

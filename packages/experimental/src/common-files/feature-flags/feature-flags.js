@@ -7,7 +7,8 @@
 
 // ******************************
 // *
-// * ONLY EDIT IN packages/feature-flags files elsewhere are copies
+// * ONLY EDIT IN /common-files/feature-flags files elsewhere are copies
+// * created by a pre-commit step
 // *
 // ******************************
 

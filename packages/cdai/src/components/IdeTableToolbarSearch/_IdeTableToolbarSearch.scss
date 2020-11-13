@@ -9,7 +9,6 @@
 @import 'carbon-components/scss/components/toolbar/toolbar';
 @import 'carbon-components/scss/components/data-table/data-table';
 
-
 .#{$ide-prefix}-table-toolbar-search {
   transition: flex $duration--moderate-02 $carbon--standard-easing,
     background $duration--fast-02 $carbon--ease-in;

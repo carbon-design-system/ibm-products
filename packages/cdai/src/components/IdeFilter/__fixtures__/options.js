@@ -56,9 +56,9 @@ export const options = [
   },
 ];
 
-export const untypedOptions = options.map(category => ({
+export const untypedOptions = options.map((category) => ({
   label: category.label,
-  options: category.options.map(option => ({
+  options: category.options.map((option) => ({
     label: option.label,
     value: option.value,
   })),

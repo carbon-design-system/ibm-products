@@ -76,8 +76,8 @@ storiesOf(getComponentLabel('IdeDataTable'), module)
     return <IdeDataTable rows={displayRows} headers={customHeaders} />;
   })
   .add('custom header render function', () => {
-    const renderHeader = headers =>
-      headers.map(header => (
+    const renderHeader = (headers) =>
+      headers.map((header) => (
         <TableHeader>
           {header.header}
           <Information16 />
@@ -93,8 +93,8 @@ storiesOf(getComponentLabel('IdeDataTable'), module)
   })
   .add('jsx inside table row data', () => {
     const customRows = displayRows
-      .map(row => ({ id: row.id }))
-      .map(row =>
+      .map((row) => ({ id: row.id }))
+      .map((row) =>
         headers.reduce((row, header, index) => {
           return {
             ...row,
@@ -111,7 +111,7 @@ storiesOf(getComponentLabel('IdeDataTable'), module)
     return <IdeDataTable rows={customRows} headers={headers} />;
   })
   .add('custom row render function', () => {
-    const renderRow = row =>
+    const renderRow = (row) =>
       row.cells.map((cell, index) => (
         <td>
           <div>{cell.value}</div>
@@ -131,7 +131,7 @@ storiesOf(getComponentLabel('IdeDataTable'), module)
     );
   })
   .add('expandable rows', () => {
-    const renderExpanded = row => (
+    const renderExpanded = (row) => (
       <div>{`This is expandable for ${row.id}`}</div>
     );
     return (
@@ -156,12 +156,12 @@ storiesOf(getComponentLabel('IdeDataTable'), module)
     );
   })
   .add('custom actions', () => {
-    const renderExpanded = row => (
+    const renderExpanded = (row) => (
       <div>{`This is expandable for ${row.id}`}</div>
     );
     const renderRow = (row, actions) => {
-      const rows = row.cells.map(cell => {
-        const cellContent = (header => {
+      const rows = row.cells.map((cell) => {
+        const cellContent = ((header) => {
           switch (header) {
             case 'select': {
               return <button onClick={actions.selectRow}>Select</button>;
@@ -183,7 +183,7 @@ storiesOf(getComponentLabel('IdeDataTable'), module)
       { header: 'expand', key: 'expand' },
       { header: 'select', key: 'select' },
     ];
-    const newRows = displayRows.map(row => ({
+    const newRows = displayRows.map((row) => ({
       ...row,
       expand: '',
       select: '',

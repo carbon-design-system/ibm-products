@@ -21,12 +21,7 @@ describe('IdeFilter', () => {
       />
     );
     expect(wrapper).toBeDefined();
-    expect(
-      wrapper
-        .find('.ide-filter--select')
-        .at(0)
-        .text()
-    ).toBe('Search...');
+    expect(wrapper.find('.ide-filter--select').at(0).text()).toBe('Search...');
   });
   it('Renders options with filter tags by default', () => {
     const wrapper = mount(
@@ -41,32 +36,26 @@ describe('IdeFilter', () => {
         ]}
       />
     );
-    expect(
-      wrapper
-        .find('.ide-filter--tag')
-        .at(0)
-        .props().type
-    ).toEqual('filter');
+    expect(wrapper.find('.ide-filter--tag').at(0).props().type).toEqual(
+      'filter'
+    );
   });
   it('Renders options in menu', () => {
     const wrapper = mount(
       <IdeFilter options={options} menuIsOpen onChange={() => {}} />
     );
-    wrapper
-      .find('input')
-      .props()
-      .onFocus();
+    wrapper.find('input').props().onFocus();
     expect(wrapper).toBeDefined();
     const optionLabels = wrapper
       .find('.ide-filter__option')
-      .map(option => option.text());
+      .map((option) => option.text());
     let expectedOptionLabels = [];
-    options.forEach(category => {
+    options.forEach((category) => {
       expectedOptionLabels = expectedOptionLabels.concat(
-        category.options.map(option => option.label)
+        category.options.map((option) => option.label)
       );
     });
-    expectedOptionLabels.forEach(expectedOption => {
+    expectedOptionLabels.forEach((expectedOption) => {
       expect(optionLabels.includes(expectedOption)).toBe(true);
     });
   });
@@ -75,11 +64,7 @@ describe('IdeFilter', () => {
     const wrapper = mount(
       <IdeFilter options={options} menuIsOpen onChange={changeSpy} />
     );
-    wrapper
-      .find('.ide-filter__option')
-      .at(0)
-      .props()
-      .onClick();
+    wrapper.find('.ide-filter__option').at(0).props().onClick();
     expect(changeSpy).toHaveBeenCalledWith([options[0].options[0]], {
       action: 'select-option',
       name: undefined,
@@ -116,17 +101,10 @@ describe('IdeFilter', () => {
     wrapper
       .find('input')
       .simulate('change', { target: { value: 'something' } });
-    expect(
-      wrapper
-        .find('.ide-filter__option')
-        .at(0)
-        .text()
-    ).toEqual('Search for "something"');
-    wrapper
-      .find('.ide-filter__option')
-      .at(0)
-      .props()
-      .onClick();
+    expect(wrapper.find('.ide-filter__option').at(0).text()).toEqual(
+      'Search for "something"'
+    );
+    wrapper.find('.ide-filter__option').at(0).props().onClick();
     const expectedOption = {
       label: 'Search for "something"',
       value: 'something',

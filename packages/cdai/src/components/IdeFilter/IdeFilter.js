@@ -15,7 +15,7 @@ import { iconClose, iconSearch } from 'carbon-icons';
 import { idePrefix } from '../../globals/js/settings';
 // custom styling
 const customStyles = {
-  multiValueLabel: provided => ({
+  multiValueLabel: (provided) => ({
     ...provided,
     color: 'inherit',
   }),
@@ -41,7 +41,7 @@ const customStyles = {
     }
     return style;
   },
-  menu: provided => ({
+  menu: (provided) => ({
     ...provided,
     borderRadius: 0,
     padding: '1rem 26px',
@@ -49,10 +49,10 @@ const customStyles = {
     // important overrides
     backgroundColor: undefined,
   }),
-  placeholder: provided => ({
+  placeholder: (provided) => ({
     ...provided,
   }),
-  groupHeading: provided => ({
+  groupHeading: (provided) => ({
     ...provided,
     textTransform: 'none',
     fontSize: '0.875rem',
@@ -65,11 +65,11 @@ const getNewOptionData = (inputValue, optionLabel) => ({
   value: inputValue,
   __plaintext__: true,
 });
-const formatCreateLabel = searchForText => inputValue =>
+const formatCreateLabel = (searchForText) => (inputValue) =>
   `${searchForText} "${inputValue}"`;
 const findCategoryForOption = (option, allOptions) => {
-  const category = allOptions.find(category =>
-    category.options.find(thisOption => thisOption.value === option.value)
+  const category = allOptions.find((category) =>
+    category.options.find((thisOption) => thisOption.value === option.value)
   );
   return pluralize.singular(category.label);
 };
@@ -100,14 +100,14 @@ const formatOptionLabel = (option, context, allOptions) => {
 };
 
 // custom components
-const MultiValueContainer = props => (
+const MultiValueContainer = (props) => (
   <Tag
     children={props.children}
     type={props.data.type || 'filter'}
     className={`${idePrefix}-filter--tag`}
   />
 );
-const MultiValueRemove = props => {
+const MultiValueRemove = (props) => {
   const type = props.data.type || 'filter';
   return (
     <button
@@ -123,7 +123,7 @@ const MultiValueRemove = props => {
 };
 const DropdownIndicator = () => null;
 const IndicatorSeparator = () => null;
-const ClearIndicator = props => (
+const ClearIndicator = (props) => (
   <div {...props.innerProps} className={`${idePrefix}-filter--clear`}>
     <Icon icon={iconClose} description="Clear" />
   </div>

@@ -19,7 +19,7 @@ import { rows, headers } from './fixtures/table.data.js';
 
 const baseComponent = (props = {}) =>
   jth.getJSXForComponent(IdeDataTable, { rows: [], headers: [] }, props);
-const prefix = value => `test-prefix-${value}`;
+const prefix = (value) => `test-prefix-${value}`;
 
 describe('<IdeDataTable>', () => {
   let componentUnderTest;
@@ -62,12 +62,9 @@ describe('<IdeDataTable>', () => {
 
     const { component } = componentUnderTest;
     expect(component.find('tbody tr')).toHaveLength(rows.length);
-    expect(
-      component
-        .find('tbody tr')
-        .at(0)
-        .find('td')
-    ).toHaveLength(headers.length);
+    expect(component.find('tbody tr').at(0).find('td')).toHaveLength(
+      headers.length
+    );
     expect(component.find('thead th')).toHaveLength(headers.length);
   });
 
@@ -83,10 +80,7 @@ describe('<IdeDataTable>', () => {
     );
 
     const { component } = componentUnderTest;
-    component
-      .find('tbody tr')
-      .at(0)
-      .simulate('click');
+    component.find('tbody tr').at(0).simulate('click');
 
     expect(onClick).toHaveBeenCalledWith(rows[0].id);
   });
@@ -95,7 +89,7 @@ describe('<IdeDataTable>', () => {
     const onClick = jest.fn();
     componentUnderTest = jth.mountComponent(
       baseComponent({
-        rows: rows.map(row => ({ ...row, disabled: true })),
+        rows: rows.map((row) => ({ ...row, disabled: true })),
         headers,
         onClick,
       }),
@@ -103,10 +97,7 @@ describe('<IdeDataTable>', () => {
     );
 
     const { component } = componentUnderTest;
-    component
-      .find('tbody tr')
-      .at(0)
-      .simulate('click');
+    component.find('tbody tr').at(0).simulate('click');
 
     expect(onClick).not.toHaveBeenCalled();
   });
@@ -124,10 +115,7 @@ describe('<IdeDataTable>', () => {
     );
 
     const { component } = componentUnderTest;
-    component
-      .find('tbody tr')
-      .at(0)
-      .simulate('click');
+    component.find('tbody tr').at(0).simulate('click');
 
     expect(onClick).not.toHaveBeenCalled();
   });
@@ -182,7 +170,7 @@ describe('<IdeDataTable>', () => {
 
     component.find(`input[id$="select-all"]`).simulate('click');
     expect(onSelect).toHaveBeenCalledWith(
-      expect.arrayContaining(rows.map(row => row.id))
+      expect.arrayContaining(rows.map((row) => row.id))
     );
 
     component.find(`input[id$="select-all"]`).simulate('click');
@@ -206,7 +194,7 @@ describe('<IdeDataTable>', () => {
     const { component } = componentUnderTest;
     component.find(`input[id$="select-all"]`).simulate('click');
     expect(onSelect).toHaveBeenCalledWith(
-      someRows.filter(row => !row.disabled).map(row => row.id)
+      someRows.filter((row) => !row.disabled).map((row) => row.id)
     );
   });
 
@@ -227,7 +215,7 @@ describe('<IdeDataTable>', () => {
     const { component } = componentUnderTest;
 
     // select all rows first - first select all should deselect all
-    someRows.forEach(row =>
+    someRows.forEach((row) =>
       component.find(`input[id$="${row.id}"]`).simulate('click')
     );
     onSelect.mockClear();
@@ -240,12 +228,12 @@ describe('<IdeDataTable>', () => {
     component.find(`input[id$="select-all"]`).simulate('click');
     expect(onSelect).toBeCalledTimes(1); // one select
     // all rows returned
-    expect(onSelect).toBeCalledWith(someRows.map(row => row.id));
+    expect(onSelect).toBeCalledWith(someRows.map((row) => row.id));
   });
 
   it('I can render custom header fields', () => {
     const renderHeader = (headers, getHeaderProps) => {
-      return headers.map(header => {
+      return headers.map((header) => {
         const props = getHeaderProps(header);
         return (
           <th {...props} {...idAttribute(prefix(header.key))} key={header.key}>
@@ -264,7 +252,7 @@ describe('<IdeDataTable>', () => {
     );
 
     const { component } = componentUnderTest;
-    headers.forEach(header =>
+    headers.forEach((header) =>
       expect(
         component.find(idAttributeSelector(prefix(header.key))).exists()
       ).toBe(true)
@@ -274,8 +262,8 @@ describe('<IdeDataTable>', () => {
   it('I can render custom row content', () => {
     const fewRows = rows.slice(3);
 
-    const renderRow = row => {
-      return row.cells.map(cell => (
+    const renderRow = (row) => {
+      return row.cells.map((cell) => (
         <td {...idAttribute(prefix(row.id))} key={cell.id}>
           {cell.value}
         </td>
@@ -292,7 +280,7 @@ describe('<IdeDataTable>', () => {
     );
 
     const { component } = componentUnderTest;
-    fewRows.forEach(row =>
+    fewRows.forEach((row) =>
       expect(component.find(idAttributeSelector(prefix(row.id)))).toHaveLength(
         headers.length
       )
@@ -303,7 +291,7 @@ describe('<IdeDataTable>', () => {
     const onClick = jest.fn();
     const onButtonClick = jest.fn();
     const fewRows = rows.slice(3);
-    const renderRow = row => {
+    const renderRow = (row) => {
       return [
         <td key="1">
           <button onClick={onButtonClick} {...idAttribute(prefix(row.id))}>
@@ -342,7 +330,7 @@ describe('<IdeDataTable>', () => {
     );
 
     const { component } = componentUnderTest;
-    Object.values(expectedLabels).forEach(label =>
+    Object.values(expectedLabels).forEach((label) =>
       expect(component.find(`*[aria-label="${label}"]`).exists()).toBe(true)
     );
   });
@@ -359,14 +347,14 @@ describe('<IdeDataTable>', () => {
     );
 
     const { component } = componentUnderTest;
-    Object.values(expectedLabels).forEach(label =>
+    Object.values(expectedLabels).forEach((label) =>
       expect(component.find(`*[aria-label="${label}"]`).exists()).toBe(true)
     );
   });
 
   it('I can render expandable rows', () => {
     const someRows = rows.slice(0, 3);
-    const expandedRow = row => (
+    const expandedRow = (row) => (
       <div {...idAttribute(`expanded-${row.id}`)}>TEST</div>
     );
     componentUnderTest = jth.mountComponent(
@@ -393,12 +381,12 @@ describe('<IdeDataTable>', () => {
   it('I can expand a row using exposed row actions', () => {
     const someRows = rows.slice(0, 3);
 
-    const expandedRow = row => (
+    const expandedRow = (row) => (
       <div {...idAttribute(`expanded-${row.id}`)}>TEST</div>
     );
 
     const renderRow = (row, actions) => {
-      const rowContent = row.cells.map(cell => (
+      const rowContent = row.cells.map((cell) => (
         <td {...idAttribute(prefix(row.id))} key={cell.id}>
           {cell.value}
         </td>
@@ -441,7 +429,7 @@ describe('<IdeDataTable>', () => {
     const someRows = rows.slice(0, 3);
 
     const renderRow = (row, actions) => {
-      const rowContent = row.cells.map(cell => (
+      const rowContent = row.cells.map((cell) => (
         <td {...idAttribute(prefix(row.id))} key={cell.id}>
           {cell.value}
         </td>

@@ -56,7 +56,9 @@ const IdeDataTable = ({
 }) => {
   const selectAll = (rows, selectedRows) => () => {
     const selected = selectedRows.length === rows.length ? [] : rows;
-    return onSelect(selected.filter(row => !row.disabled).map(row => row.id));
+    return onSelect(
+      selected.filter((row) => !row.disabled).map((row) => row.id)
+    );
   };
 
   const selectRow = (selectedRows, selectedRow) => () => {
@@ -65,7 +67,7 @@ const IdeDataTable = ({
     }
 
     const selectedIndex = selectedRows.findIndex(
-      row => row.id === selectedRow.id
+      (row) => row.id === selectedRow.id
     );
 
     const newRows = [...selectedRows];
@@ -74,10 +76,10 @@ const IdeDataTable = ({
       ? newRows.splice(selectedIndex, 1)
       : newRows.push(selectedRow);
 
-    return onSelect && onSelect(newRows.map(row => row.id));
+    return onSelect && onSelect(newRows.map((row) => row.id));
   };
 
-  const handleClick = rowId => evt => {
+  const handleClick = (rowId) => (evt) => {
     if (
       !Array.isArray(evt._dispatchInstances) &&
       typeof onClick === 'function'
@@ -158,7 +160,7 @@ const IdeDataTable = ({
                 }
                 {renderHeader
                   ? renderHeader(headers, getHeaderProps)
-                  : headers.map(header => {
+                  : headers.map((header) => {
                       const { key, ...headerProps } = getHeaderProps({
                         header,
                       });
@@ -197,7 +199,7 @@ const IdeDataTable = ({
                             expandRow: () => expandRow(row.id),
                             selectRow: () => programatticSelect(row.id),
                           })
-                        : row.cells.map(cell => (
+                        : row.cells.map((cell) => (
                             <TableCell key={cell.id}>{cell.value}</TableCell>
                           ))}
                     </CustomTableRow>

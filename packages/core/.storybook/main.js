@@ -33,7 +33,7 @@ module.exports = {
         },
       },
     },
-    require.resolve('./addon-carbon-theme/register'),
+    '@carbon/storybook-addon-theme/register',
   ],
 
   stories: sync(resolve(__dirname, '..', '..', '**/*.stories.*')).filter(

@@ -8,7 +8,7 @@
 import React from 'react';
 import { addons, types } from '@storybook/addons';
 import { CarbonThemesPanel /* , CarbonTypePanel */ } from './components/Panel';
-import featureFlags from '../../common-files/feature-flags/feature-flags';
+import featureFlags from '../../generated/feature-flags/feature-flags';
 
 import {
   CARBON_THEMES_ADDON_ID,

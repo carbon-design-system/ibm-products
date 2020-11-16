@@ -20,9 +20,9 @@ cd ..
 root_path=$PWD
 
 COMMON_FILES="$PWD/common-files";
-CDAI_COMMON_FILES="$PWD/packages/cdai/src/common-files"
-CORE_COMMON_FILES="$PWD/packages/core/common-files"
-EXPERIMENTAL_COMMON_FILES="$PWD/packages/experimental/src/common-files";
+CDAI_COMMON_FILES="$PWD/packages/cdai/src/generated"
+CORE_COMMON_FILES="$PWD/packages/core/generated"
+EXPERIMENTAL_COMMON_FILES="$PWD/packages/experimental/src/generated";
 
 PACKAGES=($CDAI_COMMON_FILES $CORE_COMMON_FILES $EXPERIMENTAL_COMMON_FILES);
 

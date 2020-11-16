@@ -9,6 +9,7 @@ export const APIKeyModal = ({
   apiKey,
   apiKeyInputId,
   apiKeyLabel,
+  apiKeyVisibility,
   copyButtonText,
   createButtonText,
   createHeader,
@@ -30,7 +31,6 @@ export const APIKeyModal = ({
   secondaryButtonText,
   successBody,
   successHeader,
-  visibilityToggler,
 }) => {
   const [name, setName] = useState('');
   const setNameHandler = (evt) => {
@@ -57,14 +57,14 @@ export const APIKeyModal = ({
       {modalBody && (
         <p className={`${expPrefix}--apikey-modal-body`}>{modalBody}</p>
       )}
-      {apiKey && visibilityToggler && (
+      {apiKey && apiKeyVisibility && (
         <TextInput.PasswordInput
           value={apiKey}
           labelText={apiKeyLabel}
           id={apiKeyInputId}
         />
       )}
-      {apiKey && !visibilityToggler && (
+      {apiKey && !apiKeyVisibility && (
         <TextInput value={apiKey} labelText={apiKeyLabel} id={apiKeyInputId} />
       )}
       {nameRequired && !apiKeyLoaded && (
@@ -117,6 +117,10 @@ APIKeyModal.propTypes = {
    * label for the api key input field
    */
   apiKeyLabel: PropTypes.string,
+  /**
+   * specifies if the api key input should use the password type toggle
+   */
+  apiKeyVisibility: PropTypes.bool,
   /**
    * text for the copy button
    */
@@ -201,16 +205,13 @@ APIKeyModal.propTypes = {
    * modal header for a successful api key creation
    */
   successHeader: PropTypes.string,
-  /**
-   * specifies if the api key input should use the password type toggle
-   */
-  visibilityToggler: PropTypes.bool,
 };
 
 APIKeyModal.defaultProps = {
   apiKey: '',
   apiKeyInputId: '',
   apiKeyLabel: '',
+  apiKeyVisibility: false,
   copyButtonText: '',
   downloadBodyText: '',
   downloadLinkText: '',
@@ -232,5 +233,4 @@ APIKeyModal.defaultProps = {
   secondaryButtonText: '',
   successBody: '',
   successHeader: '',
-  visibilityToggler: false,
 };

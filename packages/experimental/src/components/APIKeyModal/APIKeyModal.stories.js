@@ -54,8 +54,8 @@ const ModalStateManager = ({
   const [open, setOpen] = useState(false);
   const [apiKey, setApiKey] = useState('');
   const [loading, setLoading] = useState(false);
+  // eslint-disable-next-line
   const setKeyHandler = async (name) => {
-    console.log(`some api call for ${name}`);
     setLoading(true);
     const timeout = () => new Promise((resolve) => setTimeout(resolve, 2000));
     await timeout();
@@ -91,6 +91,7 @@ export const Standard = () => {
         <APIKeyModal
           {...defaultProps}
           apiKey={apiKey}
+          apiKeyVisibility
           createButtonText="Generate API key"
           createHeader="Generate an API key"
           downloadBodyText="This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it."
@@ -108,7 +109,6 @@ export const Standard = () => {
           onRequestClose={() => setOpen(false)}
           onRequestSubmit={setApiKey}
           open={open}
-          visibilityToggler
         />
       )}
     </ModalStateManager>

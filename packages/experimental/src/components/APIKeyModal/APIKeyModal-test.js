@@ -35,6 +35,7 @@ const defaultProps = {
 const standardProps = {
   ...defaultProps,
   apiKey: '',
+  apiKeyVisibility: true,
   createButtonText: 'Generate API key',
   createHeader: 'Generate an API key',
   downloadBodyText:
@@ -55,7 +56,6 @@ const standardProps = {
   onRequestClose: () => {},
   onRequestSubmit: () => {},
   open: true,
-  visibilityToggler: true,
 };
 
 describe(name, () => {

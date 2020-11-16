@@ -12,6 +12,8 @@
 @import 'carbon-components/scss/components/button/button';
 @import 'carbon-components/scss/components/tooltip/tooltip';
 
+@import '../TagSet/index';
+
 $block-class: #{$exp-prefix}-page-header;
 $raised-z-index: 99;
 
@@ -314,9 +316,10 @@ $raised-z-index: 99;
 
 .#{$block-class}--navigation-tags {
   display: flex;
-  flex: 1 1 25%;
+  flex: 1 0 25%;
   align-items: center;
   justify-content: flex-end;
+  max-width: 25%;
   padding-bottom: $spacing-02; /* design says 3 from bottom of tag, which has $spacing-02 already. 2 * $spacing-02 = $spacing-3 */
   white-space: nowrap;
   text-align: right;

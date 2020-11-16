@@ -18,6 +18,8 @@ $block-class: #{$exp-prefix}-tag-set;
 
 .#{$block-class}--space {
   position: relative;
+  top: -100vh;
+  left: -100vw;
   display: block;
   width: 100%;
   white-space: nowrap;

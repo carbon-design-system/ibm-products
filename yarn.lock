@@ -18379,10 +18379,10 @@ stylelint-order@^4.1.0:
     postcss "^7.0.31"
     postcss-sorting "^5.0.1"
 
-stylelint-plugin-carbon-tokens@^0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/stylelint-plugin-carbon-tokens/-/stylelint-plugin-carbon-tokens-0.6.1.tgz#cdfab74dbf909ad4615c39040b1610b0fb0582e3"
-  integrity sha512-mKWpMUxabuhgEfsZhIDcxPtfxukXZRMM+dYRSAqbhxN8Sees+I3IAE8hwivExRT0XiByi8crpKsd2g7Qwk2/9A==
+stylelint-plugin-carbon-tokens@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/stylelint-plugin-carbon-tokens/-/stylelint-plugin-carbon-tokens-0.7.0.tgz#b7588a62c36b4a84ea30fec21b66978a7012ddef"
+  integrity sha512-95/Eqirk9Ur6Zm5NjLsIuCEUKxUSdzIuGbqOKQ9QCfke5b8kIBaBPj0+rwl2c/tcKmFqHsEC5+t5qiM0HLsFzQ==
   dependencies:
     "@carbon/colors" "^10.9.2"
     "@carbon/motion" "^10.9.0"

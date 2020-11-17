@@ -2,7 +2,7 @@
   "name": "@carbon/ibm-cloud-cognitive-cdai",
   "private": true,
   "description": "Carbon for Cloud & Cognitive CD&AI UI components",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -32,7 +32,6 @@
     "@babel/plugin-transform-runtime": "^7.11.5",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
-    "cpx": "^1.5.0",
     "rimraf": "^3.0.2",
     "sinon": "^7.4.2"
   },

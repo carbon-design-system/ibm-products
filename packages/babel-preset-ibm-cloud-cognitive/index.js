@@ -12,6 +12,7 @@ module.exports = () => ({
     [
       '@babel/preset-env',
       {
+        modules: process.env.BABEL_ENV === 'cjs' && 'commonjs',
         targets: {
           browsers: ['extends browserslist-config-carbon'],
           node: '12',
@@ -20,5 +21,13 @@ module.exports = () => ({
     ],
     '@babel/preset-react',
   ],
-  plugins: ['@babel/plugin-proposal-class-properties'],
+  plugins: [
+    '@babel/plugin-proposal-class-properties',
+    [
+      '@babel/plugin-transform-runtime',
+      {
+        regenerator: true,
+      },
+    ],
+  ],
 });

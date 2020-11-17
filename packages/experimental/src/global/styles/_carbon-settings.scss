@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '../../../../feature-flags/feature-flags';
+@import '../../generated/feature-flags/feature-flags';
 
 // Here we import carbon settings for use in referring to colors, type, layout tokens etc.
 @import '@carbon/type/scss/type';

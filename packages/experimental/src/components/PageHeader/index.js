@@ -6,3 +6,5 @@
 //
 
 export { PageHeader } from './PageHeader';
+export { ActionBarItem } from './ActionBarItem';
+export { PageActionItem } from './PageActionItem';

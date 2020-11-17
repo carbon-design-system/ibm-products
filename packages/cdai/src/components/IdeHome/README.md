@@ -88,10 +88,10 @@ export const withCollapsibleAbilityFunc = () => {
 
 ## Change history
 
-| Date       | Change                                                    | Contributed by / Product                              |
-| ---------- | --------------------------------------------------------- | ----------------------------------------------------- |
-| 01/06/2020 | BREAKING CHANGE: Rename iconType prop to secondaryGraphic | Simon Ho (simonho@ca.ibm.com, API Connnect            |
-| 29/05/2020 | Add iconType prop                                         | Simon Ho (simonho@ca.ibm.com, API Connnect            |
-| 27/09/2019 | Update to align with carbon theme                         | Matthew Chirgwin (chirmatt@uk.ibm.com), Event Streams |
-| 03/09/2019 | Updated to use IdePageContent component                   | Matthew Chirgwin (chirmatt@uk.ibm.com), Event Streams |
-| 23/07/2019 | First contribution of IdeHome component                   | Matthew Chirgwin (chirmatt@uk.ibm.com), Event Streams |
+| Date       | Change                                                    | Contributed by / Product         |
+| ---------- | --------------------------------------------------------- | -------------------------------- |
+| 01/06/2020 | BREAKING CHANGE: Rename iconType prop to secondaryGraphic | Simon Ho / API Connnect          |
+| 29/05/2020 | Add iconType prop                                         | Simon Ho / API Connnect          |
+| 27/09/2019 | Update to align with carbon theme                         | Matthew Chirgwin / Event Streams |
+| 03/09/2019 | Updated to use IdePageContent component                   | Matthew Chirgwin / Event Streams |
+| 23/07/2019 | First contribution of IdeHome component                   | Matthew Chirgwin / Event Streams |

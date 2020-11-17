@@ -13,9 +13,11 @@
   "scripts": {
     "audit": "node scripts/audit.js dependencies moderate",
     "build": "lerna run build --stream --prefix --npm-client yarn",
+    "build:storybook-addon-carbon-theme": "lerna run --scope \"@carbon/storybook-addon-theme\" build",
     "build:storybook": "cd packages/core && yarn build:storybook",
     "ci-check": "yarn format:diff && yarn lint && yarn test --ci",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
+    "copy-common-files" : "sh ./scripts/copy-common-files.sh;",
     "format": "prettier --write '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!**/CHANGELOG.md' '!README.md'",
     "lint": "yarn lint:es && yarn lint:style",
@@ -30,12 +32,12 @@
   },
   "devDependencies": {
     "@carbon/bundler": "^10.9.0",
-    "@carbon/rollup-config": "^0.0.1",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
     "@testing-library/react": "^11.0.4",
     "@testing-library/user-event": "^12.1.7",
     "copyfiles": "^2.3.0",
+    "cpx": "^1.5.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.4",
     "eslint": "^7.8.1",
@@ -51,7 +53,7 @@
     "rimraf": "^3.0.2",
     "rollup": "^2.28.2",
     "stylelint": "^13.6.1",
-    "stylelint-plugin-carbon-tokens": "^0.6.1",
+    "stylelint-plugin-carbon-tokens": "^0.7.0",
     "stylelint-config-carbon": "^1.1.0"
   },
   "eslintConfig": {
@@ -68,7 +70,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
+      "pre-commit": "yarn copy-common-files;  lint-staged"
     }
   },
   "commitlint": {

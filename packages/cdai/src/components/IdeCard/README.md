@@ -32,10 +32,10 @@ The cards can be rendered in 2 ways:
 
 ## Change history
 
-| Date       | Change                                                        | Contributed by / Product                         |
-| ---------- | ------------------------------------------------------------- | ------------------------------------------------ |
-| 13/07/2020 | BREAKING CHANGE: Rename classname prop to className           | Vlad B (vlad.balanescu@uk.ibm.com) CP4I          |
-| 01/06/2020 | BREAKING CHANGE: Rename iconType prop to secondaryGraphic     | Simon Ho (simonho@ca.ibm.com) API Connect        |
-| 29/05/2020 | BREAKING CHANGE: Rename showExternalLinkIcon prop to iconType | Simon Ho (simonho@ca.ibm.com) API Connect        |
-| 22/05/2020 | Add showExternalLinkIcon prop                                 | Simon Ho (simonho@ca.ibm.com) API Connect        |
-| 15/01/2020 | Initial creation of the component                             | Vlad Balanescu (vlad.balanescu@uk.ibm.com) ICP4I |
+| Date       | Change                                                        | Contributed by / Product |
+| ---------- | ------------------------------------------------------------- | ------------------------ |
+| 13/07/2020 | BREAKING CHANGE: Rename classname prop to className           | Vlad Balanescu / CP4I    |
+| 01/06/2020 | BREAKING CHANGE: Rename iconType prop to secondaryGraphic     | Simon Ho / API Connect   |
+| 29/05/2020 | BREAKING CHANGE: Rename showExternalLinkIcon prop to iconType | Simon Ho / API Connect   |
+| 22/05/2020 | Add showExternalLinkIcon prop                                 | Simon Ho / API Connect   |
+| 15/01/2020 | Initial creation of the component                             | Vlad Balanescu / ICP4I   |

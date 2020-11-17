@@ -131,7 +131,7 @@ return (
 
 # Change history
 
-|          Date | Change                                        | Contributed by, Product                         |
-| ------------: | :-------------------------------------------- | :---------------------------------------------- |
-| Sept 26, 2019 | First contribution of the IdeCreate component | Philip Taunton (philip_taunton@uk.ibm.com), MQ  |
-|  Apr 30, 2020 | Add support for multiple steps                | Matt Chapman (mchapman@uk.ibm.com), App Connect |
+|          Date | Change                                        | Contributed by, Product    |
+| ------------: | :-------------------------------------------- | :------------------------- |
+| Sept 26, 2019 | First contribution of the IdeCreate component | Philip Taunton / MQ        |
+|  Apr 30, 2020 | Add support for multiple steps                | Matt Chapman / App Connect |

@@ -43,7 +43,7 @@ by adding the required spacing when rendering the passed page content.
 
 ## Change history
 
-| Date       | Change                                        | Contributed by / Product                              |
-| ---------- | --------------------------------------------- | ----------------------------------------------------- |
-| 27/09/2019 | Update to align with carbon theme             | Matthew Chirgwin (chirmatt@uk.ibm.com), Event Streams |
-| 23/08/2019 | First contribution of IdePageHeader component | Matthew Chirgwin (chirmatt@uk.ibm.com), Event Streams |
+| Date       | Change                                        | Contributed by / Product         |
+| ---------- | --------------------------------------------- | -------------------------------- |
+| 27/09/2019 | Update to align with carbon theme             | Matthew Chirgwin / Event Streams |
+| 23/08/2019 | First contribution of IdePageHeader component | Matthew Chirgwin / Event Streams |

@@ -1,5 +1,18 @@
 # Change Log
 
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [0.2.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/compare/@carbon/ibm-cloud-cognitive-experimental@0.2.3...@carbon/ibm-cloud-cognitive-experimental@0.2.4) (2020-11-17)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
+# Change Log
+
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 

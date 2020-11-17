@@ -13,9 +13,11 @@
   "scripts": {
     "audit": "node scripts/audit.js dependencies moderate",
     "build": "lerna run build --stream --prefix --npm-client yarn",
+    "build:storybook-addon-carbon-theme": "lerna run --scope \"@carbon/storybook-addon-theme\" build",
     "build:storybook": "cd packages/core && yarn build:storybook",
     "ci-check": "yarn format:diff && yarn lint && yarn test --ci",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
+    "copy-common-files" : "sh ./scripts/copy-common-files.sh;",
     "format": "prettier --write '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!**/CHANGELOG.md' '!README.md'",
     "lint": "yarn lint:es && yarn lint:style",
@@ -68,7 +70,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
+      "pre-commit": "yarn copy-common-files;  lint-staged"
     }
   },
   "commitlint": {

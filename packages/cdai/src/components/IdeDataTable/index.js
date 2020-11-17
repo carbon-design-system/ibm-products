@@ -5,6 +5,5 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-export default {
-  'enable-css-custom-properties': true,
-};
+export * from './IdeDataTable.js';
+export { default as IdeDataTable } from './IdeDataTable.js';

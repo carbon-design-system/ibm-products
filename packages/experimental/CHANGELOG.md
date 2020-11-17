@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/compare/@carbon/ibm-cloud-cognitive-experimental@0.3.0...@carbon/ibm-cloud-cognitive-experimental@0.4.0) (2020-11-17)
+
+
+### Features
+
+* add TearsheetNarrow component ([#218](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/issues/218)) ([fe967c0](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/commit/fe967c03ff79c241e19278dc95a803c577efc676))
+
+
+
+
+
 # [0.3.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/compare/@carbon/ibm-cloud-cognitive-experimental@0.2.5...@carbon/ibm-cloud-cognitive-experimental@0.3.0) (2020-11-17)
 
 

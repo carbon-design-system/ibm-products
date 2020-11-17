@@ -25,7 +25,7 @@
   },
   "scripts": {
     "build": "yarn clean && yarn build:js && yarn build:scss",
-    "build:js": "rollup -c",
+    "build:js": "node scripts/build",
     "build:scss": "bundler bundle:scss src/index.scss && copyfiles 'src/**/*.scss' scss -u 1",
     "clean": "rimraf es lib scss",
     "test": "bundler check 'src/**/*.scss'"
@@ -34,6 +34,7 @@
     "react": "^16.13.1"
   },
   "dependencies": {
+    "@babel/runtime": "^7.11.2",
     "@carbon/icons-react": "^10.20.0",
     "carbon-components": "^10.23.0",
     "carbon-components-react": "^7.23.0",
@@ -41,6 +42,7 @@
     "react-resize-detector": "^5.2.0"
   },
   "devDependencies": {
+    "@carbon/ibm-cloud-cognitive-core": "^0.1.0",
     "@carbon/rollup-config": "^0.1.0"
   }
 }

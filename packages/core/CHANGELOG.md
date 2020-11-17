@@ -28,10 +28,6 @@ All notable changes to this project will be documented in this file. See
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
 
-
-
-
-
 ## [0.1.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/core/compare/@carbon/ibm-cloud-cognitive-core@0.1.0...@carbon/ibm-cloud-cognitive-core@0.1.1) (2020-11-13)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core

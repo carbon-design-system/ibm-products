@@ -26,7 +26,7 @@ $block-class: #{$exp-prefix}-tearsheet;
   max-height: calc(100% - (#{$spacing-09} + #{$spacing-08}));
 }
 
-.#{$block-class}--container--wide {
+.#{$block-class}--wide .#{$block-class}--container {
   width: calc(100% - (2 * #{$spacing-07}));
 }
 
@@ -36,7 +36,7 @@ $block-class: #{$exp-prefix}-tearsheet;
 
 // Tearsheet styles.
 
-.#{$block-class}--header {
+.#{$block-class}--wide .#{$block-class}--header {
   margin: 0;
   padding: $spacing-06;
   border-bottom: 1px solid $ui-03;
@@ -46,12 +46,24 @@ $block-class: #{$exp-prefix}-tearsheet;
   display: none;
 }
 
+.#{$block-class}--wide .#{$prefix}--modal-header__heading {
+  @include carbon--type-style('productive-heading-04');
+}
+
 .#{$block-class}--header-description {
-  margin-top: $spacing-03;
+  margin-top: $spacing-05;
   @include carbon--type-style('body-short-01');
 }
 
+.#{$block-class}--wide .#{$block-class}--header-description {
+  margin-top: $spacing-03;
+}
+
 .#{$block-class}--header-navigation {
+  margin: $spacing-04 0 0;
+}
+
+.#{$block-class}--wide .#{$block-class}--header-navigation {
   margin: $spacing-04 0 calc(-1 * #{$spacing-06});
 }
 
@@ -85,10 +97,17 @@ $block-class: #{$exp-prefix}-tearsheet;
 
 .#{$block-class}--main {
   flex-grow: 1;
+  overflow: auto;
+}
+
+.#{$block-class}--wide .#{$block-class}--main {
   background: $ui-02;
 }
 
 .#{$block-class}--buttons {
-  background: $ui-02;
   border-top: 1px solid $ui-03;
+}
+
+.#{$block-class}--wide .#{$block-class}--buttons {
+  background: $ui-02;
 }

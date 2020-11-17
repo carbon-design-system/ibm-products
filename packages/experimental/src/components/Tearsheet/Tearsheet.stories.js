@@ -7,6 +7,8 @@
 
 import React from 'react';
 
+import { action } from '@storybook/addon-actions';
+
 import { Button, Tab, Tabs } from 'carbon-components-react';
 
 import { Tearsheet } from './Tearsheet';
@@ -18,17 +20,18 @@ export default {
   component: Tearsheet,
   parameters: { styles },
   argTypes: {
+    open: {},
     label: {
       control: {
         type: 'text',
       },
     },
-    description: {
+    title: {
       control: {
         type: 'text',
       },
     },
-    title: {
+    description: {
       control: {
         type: 'text',
       },
@@ -40,14 +43,24 @@ export default {
 
 const buttons = (
   <div className="tearsheet-stories__buttons">
-    <Button kind="ghost" className="tearsheet-stories__button">
+    <Button
+      kind="ghost"
+      className="tearsheet-stories__button-25"
+      onClick={action('Ghost button click')}>
       Ghost
     </Button>
     <div className="tearsheet-stories__button-padding"></div>
-    <Button kind="secondary" className="tearsheet-stories__button">
+    <Button
+      kind="secondary"
+      className="tearsheet-stories__button-25"
+      onClick={action('Secondary button click')}>
       Secondary
     </Button>
-    <Button className="tearsheet-stories__button">Primary</Button>
+    <Button
+      className="tearsheet-stories__button-25"
+      onClick={action('Primary button click')}>
+      Primary
+    </Button>
   </div>
 );
 
@@ -74,7 +87,7 @@ const mainContent = (
 
 const tabs = (
   <div className="tearsheet-stories__tabs">
-    <Tabs>
+    <Tabs onSelectionChange={action('Tab selection changed')}>
       <Tab label="Tab 1" />
       <Tab label="Tab 2" />
       <Tab label="Tab 3" />
@@ -105,7 +118,7 @@ AllAttributesSet.args = {
   influencerWidth: 'narrow',
   label,
   navigation: tabs,
-  // onClose: () => false,
+  onClose: action('onClose called'),
   open: true,
   preventCloseOnClickOutside: true,
   title,

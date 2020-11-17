@@ -5,7 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { fireEvent, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import React from 'react';
 
 import { ExampleComponent } from '.';
@@ -24,7 +26,6 @@ describe(name, () => {
   });
 
   test('calls primary and secondary actions when buttons are clicked', () => {
-    const { click } = fireEvent;
     const { fn } = jest;
 
     const primaryClickMock = fn();
@@ -37,10 +38,10 @@ describe(name, () => {
       />
     );
 
-    click(getByText(primaryButtonLabel));
+    userEvent.click(getByText(primaryButtonLabel));
     expect(primaryClickMock).toBeCalled();
 
-    click(getByText(secondaryButtonLabel));
+    userEvent.click(getByText(secondaryButtonLabel));
     expect(secondaryClickMock).toBeCalled();
   });
 });

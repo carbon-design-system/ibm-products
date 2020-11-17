@@ -9,6 +9,10 @@
   margin-bottom: $spacing-05;
 }
 
+.#{$exp-prefix}--apikey-modal .bx--inline-loading {
+  min-height: 3rem; // increasing the height from 2 to 3 resolves an issue where the scroll bar bounces
+}
+
 .#{$exp-prefix}--apikey-modal-body {
   margin-bottom: $spacing-05;
 }

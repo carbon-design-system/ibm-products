@@ -18,7 +18,7 @@ import { TearsheetShell } from './TearsheetShell';
 
 const blockClass = `${expPrefix}-tearsheet`;
 
-export const Tearsheet = ({
+export const TearsheetNarrow = ({
   buttons,
   children,
   className,
@@ -26,11 +26,7 @@ export const Tearsheet = ({
   description,
   hasCloseIcon,
   height,
-  influencer,
-  influencerPosition,
-  influencerWidth,
   label,
-  navigation,
   onClose,
   open,
   preventCloseOnClickOutside,
@@ -40,12 +36,6 @@ export const Tearsheet = ({
     [`${blockClass}--header--no-close-icon`]: !hasCloseIcon,
   });
 
-  const influencerClasses = cx({
-    [`${blockClass}--influencer`]: true,
-    [`${blockClass}--influencer--right`]: influencerPosition === 'right',
-    [`${blockClass}--influencer--wide`]: influencerWidth === 'wide',
-  });
-
   return (
     <TearsheetShell
       className={className}
@@ -53,8 +43,8 @@ export const Tearsheet = ({
       onClose={onClose}
       open={open}
       preventCloseOnClickOutside={preventCloseOnClickOutside}
-      size="wide">
-      {(label || title || description || navigation) && (
+      size="narrow">
+      {(label || title || description) && (
         <ModalHeader
           className={`${blockClass}--header`}
           closeClassName={closeClasses}
@@ -66,15 +56,9 @@ export const Tearsheet = ({
               {description}
             </div>
           )}
-          {navigation && (
-            <div className={`${blockClass}--header-navigation`}>
-              {navigation}
-            </div>
-          )}
         </ModalHeader>
       )}
       <ModalBody className={`${blockClass}--body`}>
-        {influencer && <div className={influencerClasses}>{influencer}</div>}
         <div className={`${blockClass}--right`}>
           {children && <div className={`${blockClass}--main`}>{children}</div>}
           {buttons && <div className={`${blockClass}--buttons`}>{buttons}</div>}
@@ -84,7 +68,7 @@ export const Tearsheet = ({
   );
 };
 
-Tearsheet.propTypes = {
+TearsheetNarrow.propTypes = {
   /**
    * Specifies the content for the buttons section of the Tearsheet.
    * Optional.
@@ -118,31 +102,10 @@ Tearsheet.propTypes = {
    */
   height: PropTypes.oneOf(['normal', 'lower']),
   /**
-   * Specifies the content for the influencer section of the Tearsheet.
-   * Optional.
-   */
-  influencer: PropTypes.node,
-  /**
-   * Specifies the position of the influencer section `'left' | 'right'`.
-   * Optional.
-   */
-  influencerPosition: PropTypes.oneOf(['left', 'right']),
-  /**
-   * Specifies the width of the influencer `'narrow' | 'wide'`. Narrow is
-   * 256px, wide is 320px. Optional.
-   */
-  influencerWidth: PropTypes.oneOf(['narrow', 'wide']),
-  /**
    * Specifies the label of the Tearsheet.
    * Optional.
    */
   label: PropTypes.node,
-  /**
-   * Specifies navigation content such as a `Tabs` component to be included
-   * at the bottom of the Tearsheet header.
-   * Optional.
-   */
-  navigation: PropTypes.node,
   /**
    * Specifies an optional handler that is called when closing the modal.
    * Returning `false` here prevents the modal from closing.
@@ -163,12 +126,10 @@ Tearsheet.propTypes = {
   title: PropTypes.node,
 };
 
-Tearsheet.defaultProps = {
+TearsheetNarrow.defaultProps = {
   className: '',
   closeIconDescription: 'Close',
   hasCloseIcon: true,
   height: 'normal',
-  influencerPosition: 'left',
-  influencerWidth: 'narrow',
   preventCloseOnClickOutside: false,
 };

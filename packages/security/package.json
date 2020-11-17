@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-security",
   "description": "Carbon for Cloud & Cognitive IBM Security UI components",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -34,7 +34,7 @@
     "@carbon/ibm-security": "^1.26.0"
   },
   "devDependencies": {
-    "@carbon/ibm-cloud-cognitive-core": "^0.1.4",
+    "@carbon/ibm-cloud-cognitive-core": "^0.2.0",
     "@carbon/rollup-config": "^0.1.1"
   }
 }

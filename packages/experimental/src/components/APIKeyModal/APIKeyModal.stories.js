@@ -43,76 +43,66 @@ const Template = (args) => {
   return <APIKeyModal {...args} />;
 };
 
-/**
- * Simple state manager for modals.
- */
-/* eslint-disable react/prop-types */
-const ModalStateManager = ({
-  renderLauncher: LauncherContent,
-  children: ModalContent,
-}) => {
+const TemplateWithState = (args) => {
   const [open, setOpen] = useState(false);
   const [apiKey, setApiKey] = useState('');
   const [loading, setLoading] = useState(false);
   // eslint-disable-next-line
-  const setKeyHandler = async (name) => {
+  const setKeyHandler = async (resourceName) => {
     setLoading(true);
     const timeout = () => new Promise((resolve) => setTimeout(resolve, 2000));
     await timeout();
     setApiKey('111-111-111-111');
     setLoading(false);
   };
+  const onCloseHandler = () => {
+    setApiKey('');
+    setOpen(false);
+  };
+  const modalToggler = () => {
+    setOpen(!open);
+  };
+
   return (
     <>
-      {!ModalContent || typeof document === 'undefined'
-        ? null
-        : ReactDOM.createPortal(
-            <ModalContent
-              apiKey={apiKey}
-              loading={loading}
-              open={open}
-              setOpen={setOpen}
-              setApiKey={setKeyHandler}
-            />,
-            document.body
-          )}
-      {LauncherContent && <LauncherContent open={open} setOpen={setOpen} />}
+      {ReactDOM.createPortal(
+        <APIKeyModal
+          {...args}
+          apiKey={apiKey}
+          loading={loading}
+          onRequestClose={onCloseHandler}
+          onRequestSubmit={setKeyHandler}
+          open={open}
+        />,
+        document.body
+      )}
+      <Button onClick={modalToggler}>Add API key</Button>
     </>
   );
 };
 
-export const Standard = () => {
-  return (
-    <ModalStateManager
-      renderLauncher={({ setOpen }) => (
-        <Button onClick={() => setOpen(true)}>Create API key</Button>
-      )}>
-      {({ open, setOpen, setApiKey, apiKey, loading }) => (
-        <APIKeyModal
-          {...defaultProps}
-          apiKey={apiKey}
-          apiKeyVisibility
-          createButtonText="Generate API key"
-          createHeader="Generate an API key"
-          downloadBodyText="This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it."
-          downloadLinkText="Download as JSON"
-          downloadable
-          downloadableFileName="apikey"
-          loadingMessage="your key is being created. please wait..."
-          loading={loading}
-          modalBody="Optional description text. To connect securely to {{product}}, your application or tool needs an API key with permission to access the cluster and resources."
-          nameHelperText="Providing the application name will help you idenfity your api key later."
-          nameInputId="nameInput"
-          nameLabel="Name your application"
-          namePlaceholder="Application name"
-          nameRequired
-          onRequestClose={() => setOpen(false)}
-          onRequestSubmit={setApiKey}
-          open={open}
-        />
-      )}
-    </ModalStateManager>
-  );
+const StateWrapper = (args) => <TemplateWithState {...args} />;
+
+export const Standard = StateWrapper.bind({});
+Standard.args = {
+  ...defaultProps,
+  apiKeyVisibility: true,
+  createButtonText: 'Generate API key',
+  createHeader: 'Generate an API key',
+  downloadBodyText:
+    'This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it.',
+  downloadLinkText: 'Download as JSON',
+  downloadable: true,
+  downloadableFileName: 'apikey',
+  loadingMessage: 'your key is being created. please wait...',
+  modalBody:
+    'Optional description text. To connect securely to {{product}}, your application or tool needs an API key with permission to access the cluster and resources.',
+  nameHelperText:
+    'Providing the application name will help you idenfity your api key later.',
+  nameInputId: 'nameInput',
+  nameLabel: 'Name your application',
+  namePlaceholder: 'Application name',
+  nameRequired: true,
 };
 
 export const Minimal = Template.bind({});

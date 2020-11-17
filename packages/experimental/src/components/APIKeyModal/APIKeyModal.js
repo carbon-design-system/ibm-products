@@ -43,6 +43,10 @@ export const APIKeyModal = ({
     if (apiKeyLoaded) navigator.clipboard.writeText(apiKey);
     else onRequestSubmit(name);
   };
+  const onCloseHandler = () => {
+    setName('');
+    onRequestClose();
+  };
   const header = apiKeyLoaded ? successHeader : createHeader;
   return (
     <Modal
@@ -53,7 +57,7 @@ export const APIKeyModal = ({
       secondaryButtonText={secondaryButtonText}
       onRequestSubmit={submitHandler}
       primaryButtonDisabled={primaryButtonDisabled}
-      onRequestClose={onRequestClose}>
+      onRequestClose={onCloseHandler}>
       {modalBody && (
         <p className={`${expPrefix}--apikey-modal-body`}>{modalBody}</p>
       )}
@@ -77,7 +81,7 @@ export const APIKeyModal = ({
           id={nameInputId}
         />
       )}
-      {nameRequired && !apiKey && loading && (
+      {loading && (
         <InlineLoading
           description={loadingMessage}
           className={`${expPrefix}--apikey-modal-loader`}

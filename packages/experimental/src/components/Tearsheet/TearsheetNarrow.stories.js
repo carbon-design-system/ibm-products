@@ -11,15 +11,15 @@ import { action } from '@storybook/addon-actions';
 
 import { expPrefix } from '../../global/js/settings';
 
-import { Button, Tab, Tabs } from 'carbon-components-react';
+import { Button } from 'carbon-components-react';
 
-import { Tearsheet } from './Tearsheet';
+import { TearsheetNarrow } from './TearsheetNarrow';
 
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: 'Experimental/Tearsheet',
-  component: Tearsheet,
+  title: 'Experimental/TearsheetNarrow',
+  component: TearsheetNarrow,
   parameters: { styles },
   argTypes: {
     buttonSet: {
@@ -49,8 +49,6 @@ export default {
         type: 'text',
       },
     },
-    influencerPosition: {},
-    influencerWidth: {},
     preventCloseOnClickOutside: {},
     title: {
       control: {
@@ -67,17 +65,7 @@ export default {
         disable: true,
       },
     },
-    influencer: {
-      control: {
-        disable: true,
-      },
-    },
     onClose: {
-      control: {
-        disable: true,
-      },
-    },
-    navigation: {
       control: {
         disable: true,
       },
@@ -96,12 +84,12 @@ const buttons_1 = (
   <div className="tearsheet-stories__buttons">
     <Button
       kind="secondary"
-      className="tearsheet-stories__button-25"
+      className="tearsheet-stories__button-50"
       onClick={action('Secondary button click')}>
       Cancel
     </Button>
     <Button
-      className="tearsheet-stories__button-25"
+      className="tearsheet-stories__button-50"
       onClick={action('Primary button click')}>
       Create
     </Button>
@@ -193,25 +181,10 @@ const description = (
   </span>
 );
 
-const influencer = (
-  <div className="tearsheet-stories__dummy-content-block">Influencer</div>
-);
-
 const label = 'The label of the tearsheet';
 
 const mainContent = (
   <div className="tearsheet-stories__dummy-content-block">Main content</div>
-);
-
-const tabs = (
-  <div className="tearsheet-stories__tabs">
-    <Tabs onSelectionChange={action('Tab selection changed')}>
-      <Tab label="Tab 1" />
-      <Tab label="Tab 2" />
-      <Tab label="Tab 3" />
-      <Tab label="Tab 4" />
-    </Tabs>
-  </div>
 );
 
 const title = 'Title of the tearsheet';
@@ -225,14 +198,14 @@ const Template = ({ buttonSet, ...args }) => {
     <>
       <style>{`.${expPrefix}-tearsheet { opacity: 0 }`};</style>
       <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
-      <Tearsheet
+      <TearsheetNarrow
         className={className}
         {...args}
         buttons={buttonSets[buttonSet]}
         open={open}
         onClose={() => setOpen(false)}>
         {mainContent}
-      </Tearsheet>
+      </TearsheetNarrow>
     </>
   );
 };
@@ -244,13 +217,7 @@ AllAttributesSet.args = {
   description,
   hasCloseIcon: true,
   height: 'normal',
-  influencer,
-  influencerPosition: 'left',
-  influencerWidth: 'narrow',
   label,
-  navigation: tabs,
-  onClose: action('onClose called'),
-  open: true,
   preventCloseOnClickOutside: true,
   title,
   buttonSet: 0,
@@ -258,34 +225,3 @@ AllAttributesSet.args = {
 
 export const NoAttributesSet = Template.bind({});
 NoAttributesSet.args = {};
-
-export const NoHeaderNavigation = Template.bind({});
-NoHeaderNavigation.args = {
-  closeIconDescription,
-  description,
-  hasCloseIcon: true,
-  height: 'normal',
-  influencer,
-  influencerPosition: 'left',
-  influencerWidth: 'narrow',
-  label,
-  onClose: action('onClose called'),
-  open: true,
-  preventCloseOnClickOutside: true,
-  title,
-  buttonSet: 0,
-};
-
-export const NoHeaderNavigationOrInfluencer = Template.bind({});
-NoHeaderNavigationOrInfluencer.args = {
-  closeIconDescription,
-  description,
-  hasCloseIcon: true,
-  height: 'normal',
-  label,
-  onClose: action('onClose called'),
-  open: true,
-  preventCloseOnClickOutside: true,
-  title,
-  buttonSet: 0,
-};

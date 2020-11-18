@@ -66,25 +66,19 @@ Array [
             >
               <Tab
                 data-ui-id="tab1"
-                href="#"
                 label="Tab one"
                 onClick={[Function]}
                 onKeyDown={[Function]}
-                renderContent={[Function]}
                 role="presentation"
                 selected={false}
-                tabIndex={0}
               />
               <Tab
                 data-ui-id="tab2"
-                href="#"
                 label="Tab two"
                 onClick={[Function]}
                 onKeyDown={[Function]}
-                renderContent={[Function]}
                 role="presentation"
                 selected={false}
-                tabIndex={0}
               />
             </Tabs>
           </div>
@@ -189,25 +183,19 @@ Array [
             >
               <Tab
                 data-ui-id="tab1"
-                href="#"
                 label="Tab one"
                 onClick={[Function]}
                 onKeyDown={[Function]}
-                renderContent={[Function]}
                 role="presentation"
                 selected={false}
-                tabIndex={0}
               />
               <Tab
                 data-ui-id="tab2"
-                href="#"
                 label="Tab two"
                 onClick={[Function]}
                 onKeyDown={[Function]}
-                renderContent={[Function]}
                 role="presentation"
                 selected={false}
-                tabIndex={0}
               />
             </Tabs>
           </div>

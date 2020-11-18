@@ -39,7 +39,7 @@ export const EmptyState = ({
           src={
             typeof illustration === 'string' &&
             defaultIllustrationOptions.includes(illustration)
-              ? require(`./EmptyStateIllustrations/${illustrationTheme}/${illustration}.svg`)
+              ? require(`./assets/${illustrationTheme}/${illustration}.svg`)
               : illustration
           }
           alt="Empty state illustration"

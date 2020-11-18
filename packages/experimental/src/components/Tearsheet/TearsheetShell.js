@@ -27,12 +27,12 @@ export const TearsheetShell = ({
 }) => {
   const classes = cx({
     [`${blockClass}`]: true,
+    [`${blockClass}--wide`]: size === 'wide',
     [className]: className,
   });
   const containerClasses = cx({
     [`${blockClass}--container`]: true,
     [`${blockClass}--container--lower`]: height === 'lower',
-    [`${blockClass}--container--wide`]: size === 'wide',
   });
 
   return (
@@ -41,7 +41,8 @@ export const TearsheetShell = ({
       containerClassName={containerClasses}
       onClose={onClose}
       open={open}
-      preventCloseOnClickOutside={preventCloseOnClickOutside}>
+      preventCloseOnClickOutside={preventCloseOnClickOutside}
+      size="sm">
       {children}
     </ComposedModal>
   );

@@ -18,8 +18,6 @@ $block-class: #{$exp-prefix}-tag-set;
 
 .#{$block-class}--space {
   position: relative;
-  top: -100vh;
-  left: -100vw;
   display: block;
   width: 100%;
   white-space: nowrap;
@@ -37,6 +35,8 @@ $block-class: #{$exp-prefix}-tag-set;
 .#{$block-class}--tag-container--hidden {
   // This tag container is used to measure the width of all displayable tags
   position: absolute;
+  top: -100vh;
+  left: -100vw;
   width: 100%;
   visibility: hidden;
   pointer-events: none;

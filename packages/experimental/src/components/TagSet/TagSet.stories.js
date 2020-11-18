@@ -83,3 +83,18 @@ export const AsDom = Template2.bind({});
 AsDom.args = {
   containerWidth: 500,
 };
+
+const TemplateMin = (argsIn) => {
+  const { children, containerWidth } = { ...argsIn };
+  return (
+    <div style={{ width: containerWidth }}>
+      <TagSet>{children}</TagSet>
+    </div>
+  );
+};
+
+export const Minimal = TemplateMin.bind({});
+Minimal.args = {
+  children: TagItems,
+  containerWidth: 500,
+};

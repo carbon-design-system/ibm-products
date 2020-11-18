@@ -5,9 +5,11 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import { action } from '@storybook/addon-actions';
+
+import { expPrefix } from '../../global/js/settings';
 
 import { Button, Tab, Tabs } from 'carbon-components-react';
 
@@ -20,20 +22,69 @@ export default {
   component: Tearsheet,
   parameters: { styles },
   argTypes: {
-    open: {},
+    buttonSet: {
+      control: {
+        type: 'select',
+        options: {
+          'Two buttons': 0,
+          'Three buttons with ghost': 1,
+          'Three buttons': 2,
+          'Four buttons': 3,
+          None: 4,
+        },
+        default: 0,
+      },
+    },
+    className,
+    closeIconDescription: {},
+    description: {
+      control: {
+        type: 'text',
+      },
+    },
+    hasCloseIcon: {},
+    height: {},
     label: {
       control: {
         type: 'text',
       },
     },
+    influencerPosition: {},
+    influencerWidth: {},
+    preventCloseOnClickOutside: {},
     title: {
       control: {
         type: 'text',
       },
     },
-    description: {
+    buttons: {
       control: {
-        type: 'text',
+        disable: true,
+      },
+    },
+    children: {
+      control: {
+        disable: true,
+      },
+    },
+    influencer: {
+      control: {
+        disable: true,
+      },
+    },
+    onClose: {
+      control: {
+        disable: true,
+      },
+    },
+    navigation: {
+      control: {
+        disable: true,
+      },
+    },
+    open: {
+      control: {
+        disable: true,
       },
     },
   },
@@ -41,30 +92,97 @@ export default {
 
 // Test values for props.
 
-const buttons = (
+const buttons_1 = (
+  <div className="tearsheet-stories__buttons">
+    <Button
+      kind="secondary"
+      className="tearsheet-stories__button-25"
+      onClick={action('Secondary button click')}>
+      Cancel
+    </Button>
+    <Button
+      className="tearsheet-stories__button-25"
+      onClick={action('Primary button click')}>
+      Create
+    </Button>
+  </div>
+);
+const buttons_2 = (
   <div className="tearsheet-stories__buttons">
     <Button
       kind="ghost"
       className="tearsheet-stories__button-25"
       onClick={action('Ghost button click')}>
-      Ghost
+      Cancel
     </Button>
     <div className="tearsheet-stories__button-padding"></div>
     <Button
       kind="secondary"
       className="tearsheet-stories__button-25"
       onClick={action('Secondary button click')}>
-      Secondary
+      Back
     </Button>
     <Button
       className="tearsheet-stories__button-25"
       onClick={action('Primary button click')}>
-      Primary
+      Next
     </Button>
   </div>
 );
+const buttons_3 = (
+  <div className="tearsheet-stories__buttons">
+    <Button
+      kind="secondary"
+      className="tearsheet-stories__button-25"
+      onClick={action('Secondary button click')}>
+      Keep both
+    </Button>
+    <Button
+      kind="secondary"
+      className="tearsheet-stories__button-25"
+      onClick={action('Secondary button click')}>
+      Stop
+    </Button>
+    <Button
+      className="tearsheet-stories__button-25"
+      onClick={action('Primary button click')}>
+      Replace
+    </Button>
+  </div>
+);
+const buttons_4 = (
+  <div className="tearsheet-stories__buttons">
+    <Button
+      kind="ghost"
+      className="tearsheet-stories__button-25"
+      onClick={action('Ghost button click')}>
+      Cancel
+    </Button>
+    <div className="tearsheet-stories__button-padding"></div>
+    <Button
+      kind="secondary"
+      className="tearsheet-stories__button-25"
+      onClick={action('Secondary button click')}>
+      Keep both
+    </Button>
+    <Button
+      kind="secondary"
+      className="tearsheet-stories__button-25"
+      onClick={action('Secondary button click')}>
+      Stop
+    </Button>
+    <Button
+      className="tearsheet-stories__button-25"
+      onClick={action('Primary button click')}>
+      Replace
+    </Button>
+  </div>
+);
+const buttonSets = [buttons_1, buttons_2, buttons_3, buttons_4];
 
 const className = 'client-class-1 client-class-2';
+
+const closeIconDescription = 'Close the tearsheet';
 
 const description = (
   <span>
@@ -99,19 +217,32 @@ const tabs = (
 const title = 'Title of the tearsheet';
 
 // Template.
-const Template = (args) => {
+// eslint-disable-next-line react/prop-types
+const Template = ({ buttonSet, ...args }) => {
+  const [open, setOpen] = useState(false);
+
   return (
-    <Tearsheet className={className} {...args}>
-      {mainContent}
-    </Tearsheet>
+    <>
+      <style>{`.${expPrefix}-tearsheet { opacity: 0 }`};</style>
+      <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
+      <Tearsheet
+        className={className}
+        {...args}
+        buttons={buttonSets[buttonSet]}
+        open={open}
+        onClose={() => setOpen(false)}>
+        {mainContent}
+      </Tearsheet>
+    </>
   );
 };
 
 // Stories
 export const AllAttributesSet = Template.bind({});
 AllAttributesSet.args = {
-  buttons,
+  closeIconDescription,
   description,
+  hasCloseIcon: true,
   height: 'normal',
   influencer,
   influencerPosition: 'left',
@@ -122,7 +253,39 @@ AllAttributesSet.args = {
   open: true,
   preventCloseOnClickOutside: true,
   title,
+  buttonSet: 0,
 };
 
 export const NoAttributesSet = Template.bind({});
 NoAttributesSet.args = {};
+
+export const NoHeaderNavigation = Template.bind({});
+NoHeaderNavigation.args = {
+  closeIconDescription,
+  description,
+  hasCloseIcon: true,
+  height: 'normal',
+  influencer,
+  influencerPosition: 'left',
+  influencerWidth: 'narrow',
+  label,
+  onClose: action('onClose called'),
+  open: true,
+  preventCloseOnClickOutside: true,
+  title,
+  buttonSet: 0,
+};
+
+export const NoHeaderNavigationOrInfluencer = Template.bind({});
+NoHeaderNavigationOrInfluencer.args = {
+  closeIconDescription,
+  description,
+  hasCloseIcon: true,
+  height: 'normal',
+  label,
+  onClose: action('onClose called'),
+  open: true,
+  preventCloseOnClickOutside: true,
+  title,
+  buttonSet: 0,
+};

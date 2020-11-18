@@ -9,6 +9,8 @@ import React, { useState } from 'react';
 
 import { action } from '@storybook/addon-actions';
 
+import { expPrefix } from '../../global/js/settings';
+
 import { Button } from 'carbon-components-react';
 
 import { TearsheetNarrow } from './TearsheetNarrow';
@@ -28,6 +30,7 @@ export default {
           'Three buttons with ghost': 1,
           'Three buttons': 2,
           'Four buttons': 3,
+          None: 4,
         },
         default: 0,
       },
@@ -193,6 +196,7 @@ const Template = ({ buttonSet, ...args }) => {
 
   return (
     <>
+      <style>{`.${expPrefix}-tearsheet { opacity: 0 }`};</style>
       <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
       <TearsheetNarrow
         className={className}
@@ -214,8 +218,6 @@ AllAttributesSet.args = {
   hasCloseIcon: true,
   height: 'normal',
   label,
-  onClose: action('onClose called'),
-  open: true,
   preventCloseOnClickOutside: true,
   title,
   buttonSet: 0,

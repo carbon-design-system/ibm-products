@@ -22,13 +22,24 @@
   justify-content: flex-end;
 }
 
+.tearsheet-stories__button-25,
+.tearsheet-stories__button-50 {
+  max-width: none;
+  // stylelint-disable-next-line carbon/layout-token-use
+  margin-left: 1px;
+}
+
 .tearsheet-stories__button-25 {
   width: 25%;
-  max-width: 312px;
 }
 
 .tearsheet-stories__button-50 {
   width: 50%;
+}
+
+.tearsheet-stories__button-25:first-child,
+.tearsheet-stories__button-50:first-child {
+  margin-left: 0;
 }
 
 .tearsheet-stories__button-padding {

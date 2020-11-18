@@ -6,7 +6,6 @@
 //
 
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 import { Button } from 'carbon-components-react';
 import { APIKeyModal } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
@@ -65,25 +64,20 @@ const TemplateWithState = (args) => {
 
   return (
     <>
-      {ReactDOM.createPortal(
-        <APIKeyModal
-          {...args}
-          apiKey={apiKey}
-          loading={loading}
-          onRequestClose={onCloseHandler}
-          onRequestSubmit={setKeyHandler}
-          open={open}
-        />,
-        document.body
-      )}
+      <APIKeyModal
+        {...args}
+        apiKey={apiKey}
+        loading={loading}
+        onRequestClose={onCloseHandler}
+        onRequestSubmit={setKeyHandler}
+        open={open}
+      />
       <Button onClick={modalToggler}>Add API key</Button>
     </>
   );
 };
 
-const StateWrapper = (args) => <TemplateWithState {...args} />;
-
-export const Standard = StateWrapper.bind({});
+export const Standard = TemplateWithState.bind({});
 Standard.args = {
   ...defaultProps,
   apiKeyVisibility: true,

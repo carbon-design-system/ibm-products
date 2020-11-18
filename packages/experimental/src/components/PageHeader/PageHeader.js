@@ -31,6 +31,7 @@ import {
 } from 'carbon-components-react';
 
 import { ActionBar } from './ActionBar';
+import { TagSet } from '../';
 
 const blockClass = `${expPrefix}-page-header`;
 
@@ -504,7 +505,7 @@ export const PageHeader = ({
                     [`${blockClass}--navigation-tags--tags-only`]:
                       navigation === undefined,
                   })}>
-                  {tags}
+                  <TagSet>{tags}</TagSet>
                 </Column>
               ) : null}
             </Row>
@@ -573,7 +574,7 @@ PageHeader.propTypes = {
    * One or more tags, specified as a Carbon Tags component.
    * Optional.
    */
-  tags: PropTypes.element,
+  tags: PropTypes.arrayOf(PropTypes.element),
   /**
    * The title of the page.
    * Optional.

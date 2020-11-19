@@ -30,9 +30,11 @@ const decorators = [
     const story = storyFn();
 
     return (
-      <Style styles={index}>
-        {styles ? <Style styles={styles}>{story}</Style> : story}
-      </Style>
+      <div className="preview-position-fix">
+        <Style styles={index}>
+          {styles ? <Style styles={styles}>{story}</Style> : story}
+        </Style>
+      </div>
     );
   },
   withCarbonTheme,

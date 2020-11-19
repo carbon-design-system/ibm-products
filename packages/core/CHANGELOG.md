@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/core/compare/@carbon/ibm-cloud-cognitive-core@0.2.0...@carbon/ibm-cloud-cognitive-core@0.3.0) (2020-11-19)
+
+
+### Features
+
+* apikey modal ([#200](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/core/issues/200)) ([e4d94e5](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/core/commit/e4d94e549fa693a66850228407a748503ff47325))
+
+
+
+
+
 # [0.2.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/core/compare/@carbon/ibm-cloud-cognitive-core@0.1.4...@carbon/ibm-cloud-cognitive-core@0.2.0) (2020-11-17)
 
 

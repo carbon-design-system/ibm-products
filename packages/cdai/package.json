@@ -38,7 +38,7 @@
     "sinon": "^7.4.2"
   },
   "dependencies": {
-    "@babel/runtime": "^7.11.5",
+    "@babel/runtime": "^7.11.2",
     "focus-trap-react": "^6.0.0",
     "pluralize": "^8.0.0",
     "react-highlighter": "^0.4.3",

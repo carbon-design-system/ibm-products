@@ -7,9 +7,12 @@
 
 import React from 'react';
 
-import { TagSet, blockClass } from './TagSet';
+import TagSet from './TagSet';
 import { Tag } from 'carbon-components-react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
+import { expPrefix } from '../../global/js/settings';
+
+const blockClass = `${expPrefix}-tag-set`;
 
 const TagItems = [
   <Tag key="tag1" type="blue">

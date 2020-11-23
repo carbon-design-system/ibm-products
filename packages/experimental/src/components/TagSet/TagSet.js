@@ -18,7 +18,7 @@ import { expPrefix } from '../../global/js/settings';
 
 import ReactResizeDetector from 'react-resize-detector';
 
-export const blockClass = `${expPrefix}-tag-set`;
+const blockClass = `${expPrefix}-tag-set`;
 
 export const TagSet = ({
   children,
@@ -317,3 +317,5 @@ TagSet.defaultProps = {
   showAllSearchPlaceHolderText: 'Search all tags',
   showAllTagsLabel: 'View all tags',
 };
+
+export default TagSet;

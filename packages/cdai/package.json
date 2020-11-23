@@ -38,8 +38,25 @@
     "sinon": "^7.4.2"
   },
   "dependencies": {
+    "@babel/runtime": "^7.11.2",
+    "focus-trap-react": "^6.0.0",
     "pluralize": "^8.0.0",
-    "react-highlighter": "^0.4.3"
+    "react-highlighter": "^0.4.3",
+    "react-select": "^3.1.0",
+    "uuid": "^3.4.0"
+  },
+  "peerDependencies": {
+    "@carbon/elements": "^10.11.1",
+    "carbon-addons-cloud": "^3.5.4",
+    "carbon-addons-cloud-react": "^1.12.4",
+    "carbon-components": "^10.11.1",
+    "carbon-components-react": "^7.17.0",
+    "carbon-icons": "^7.0.7",
+    "node-sass": "^4.13.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "yarn": "^1.16.0"
   },
   "babel": {
     "presets": [

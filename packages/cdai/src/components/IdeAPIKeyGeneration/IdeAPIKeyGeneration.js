@@ -301,17 +301,15 @@ export default class IdeAPIKeyGeneration extends React.Component {
       : null;
 
     return !this.state.hasAPIKeyGenerationCompleted ? (
-      <>
-        <InlineLoading
-          status={isAPIKeyGenerating ? 'active' : 'inactive'}
-          description={generatingLabelText}
-          iconDescription={generatingLabelText}
-          onSuccess={this.handleAPIKeyGenerationCompletion}
-          successDelay={0}
-          className={`${idePrefix}-api-key-generation-api-key-generating`}
-          {...idAttribute('IdeAPIKeyGeneration-APIKeyGenerating')}
-        />
-      </>
+      <InlineLoading
+        status={isAPIKeyGenerating ? 'active' : 'inactive'}
+        description={generatingLabelText}
+        iconDescription={generatingLabelText}
+        onSuccess={this.handleAPIKeyGenerationCompletion}
+        successDelay={0}
+        className={`${idePrefix}-api-key-generation-api-key-generating`}
+        {...idAttribute('IdeAPIKeyGeneration-APIKeyGenerating')}
+      />
     ) : (
       <>
         {descriptiveNameStep && this.state.descriptiveName && (
@@ -475,7 +473,10 @@ export default class IdeAPIKeyGeneration extends React.Component {
   }
 }
 
+/* eslint-disable react/sort-prop-types */
 IdeAPIKeyGeneration.propTypes = {
+  /** CSS class to add to the component */
+  className: PropTypes.string,
   /** Whether the API Key Generation modal is currently open. */
   open: PropTypes.bool.isRequired,
   /** Modal label text. */

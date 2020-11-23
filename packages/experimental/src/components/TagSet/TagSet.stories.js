@@ -7,7 +7,7 @@
 
 import React from 'react';
 
-import { TagSet } from './TagSet';
+import { TagSet, blockClass } from './TagSet';
 import { Tag } from 'carbon-components-react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 
@@ -27,6 +27,101 @@ const TagItems = [
   </Tag>,
 ];
 
+const ManyTagItems = [
+  {
+    label: 'One',
+    type: 'blue',
+    dataSearch: 'one',
+  },
+  {
+    label: 'Two',
+    type: 'red',
+    filter: true,
+  },
+  {
+    label: 'Three',
+    type: 'cyan',
+  },
+  {
+    label: 'Four',
+    type: 'high-contrast',
+  },
+  {
+    label: 'Five',
+    type: 'blue',
+  },
+  {
+    label: 'Six',
+    type: 'red',
+  },
+  {
+    label: 'Seven',
+    type: 'cyan',
+    filter: true,
+  },
+  {
+    label: 'Eight',
+    type: 'high-contrast',
+  },
+  {
+    label: 'Nine',
+    type: 'red',
+  },
+  {
+    label: 'Ten',
+    type: 'blue',
+    filter: true,
+  },
+  {
+    label: 'Eleven',
+    type: 'cyan',
+  },
+  {
+    label: 'Twelve',
+    type: 'high-contrast',
+    dataSearch: 'twelve',
+  },
+  {
+    label: 'Thirteen',
+    type: 'red',
+  },
+  {
+    label: 'Fourteen',
+    type: 'cyan',
+  },
+  {
+    label: 'Fifteen',
+    type: 'blue',
+    filter: true,
+  },
+  {
+    label: 'Sixteen',
+    type: 'high-contrast',
+    filter: true,
+  },
+  {
+    label: 'Seventeen',
+    type: 'red',
+  },
+  {
+    label: 'Eighteen',
+    type: 'cyan',
+    filter: true,
+  },
+  {
+    label: 'Nineteen',
+    type: 'red',
+  },
+  {
+    label: 'Twenty',
+    type: 'high-contrast',
+  },
+].map(({ label, type, filter, dataSearch }) => (
+  <Tag key={label} data-search={dataSearch} {...{ filter, type }}>
+    {label}
+  </Tag>
+));
+
 export default {
   title: 'Experimental/TagSet',
   component: TagSet,
@@ -37,7 +132,15 @@ export default {
     },
   },
   decorators: [
-    (story) => <div className="tag-set-story__viewport">{story()}</div>,
+    (story) => (
+      <>
+        <style>
+          {`.${blockClass}--show-all-modal { opacity: 0; visibility: hidden; /* prevents glitch storybook modal css load */ }`}
+          ;
+        </style>
+        <div className="tag-set-story__viewport">{story()}</div>
+      </>
+    ),
   ],
 };
 
@@ -53,6 +156,12 @@ const Template = (argsIn) => {
 export const TagArray = Template.bind({});
 TagArray.args = {
   children: TagItems,
+  containerWidth: 500,
+};
+
+export const ManyTags = Template.bind({});
+ManyTags.args = {
+  children: ManyTagItems,
   containerWidth: 500,
 };
 

@@ -1067,6 +1067,13 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime@^7.12.5":
+  version "7.12.5"
+  resolved "https://na.artifactory.swg-devops.com/artifactory/api/npm/appconnect-npm/@babel/runtime/-/runtime-7.12.5.tgz?dl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Fruntime%2F-%2Fruntime-7.12.5.tgz#410e7e487441e1b360c29be715d870d9b985882e"
+  integrity sha1-QQ5+SHRB4bNgwpvnFdhw2bmFiC4=
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/standalone@^7.4.5":
   version "7.11.6"
   resolved "https://registry.yarnpkg.com/@babel/standalone/-/standalone-7.11.6.tgz#2ea3c9463c8b1d04ee2dacc5ac4b81674cec2967"
@@ -9415,6 +9422,13 @@ focus-trap-react@^6.0.0:
   dependencies:
     focus-trap "^4.0.2"
 
+focus-trap-react@^8.3.0:
+  version "8.3.0"
+  resolved "https://na.artifactory.swg-devops.com/artifactory/api/npm/appconnect-npm/focus-trap-react/-/focus-trap-react-8.3.0.tgz?dl=https%3A%2F%2Fregistry.npmjs.org%2Ffocus-trap-react%2F-%2Ffocus-trap-react-8.3.0.tgz#8151c7f69bd59afd680b87224b7c0abc2206d7a3"
+  integrity sha1-gVHH9pvVmv1oC4ciS3wKvCIG16M=
+  dependencies:
+    focus-trap "^6.2.0"
+
 focus-trap@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/focus-trap/-/focus-trap-4.0.2.tgz#4ee2b96547c9ea0e4252a2d4b2cca68944194663"
@@ -9422,6 +9436,13 @@ focus-trap@^4.0.2:
   dependencies:
     tabbable "^3.1.2"
     xtend "^4.0.1"
+
+focus-trap@^6.2.0:
+  version "6.2.0"
+  resolved "https://na.artifactory.swg-devops.com/artifactory/api/npm/appconnect-npm/focus-trap/-/focus-trap-6.2.0.tgz?dl=https%3A%2F%2Fregistry.npmjs.org%2Ffocus-trap%2F-%2Ffocus-trap-6.2.0.tgz#ff8aa4bef1f4c47f6fee3fdcee71474771cab374"
+  integrity sha1-/4qkvvH0xH9v7j/c7nFHR3HKs3Q=
+  dependencies:
+    tabbable "^5.1.3"
 
 follow-redirects@1.5.10:
   version "1.5.10"
@@ -16257,6 +16278,20 @@ react-select@^3.0.8:
     react-input-autosize "^2.2.2"
     react-transition-group "^4.3.0"
 
+react-select@^3.1.1:
+  version "3.1.1"
+  resolved "https://na.artifactory.swg-devops.com/artifactory/api/npm/appconnect-npm/react-select/-/react-select-3.1.1.tgz?dl=https%3A%2F%2Fregistry.npmjs.org%2Freact-select%2F-%2Freact-select-3.1.1.tgz#156a5b4a6c22b1e3d62a919cb1fd827adb4060bc"
+  integrity sha1-FWpbSmwisePWKpGcsf2CettAYLw=
+  dependencies:
+    "@babel/runtime" "^7.4.4"
+    "@emotion/cache" "^10.0.9"
+    "@emotion/core" "^10.0.9"
+    "@emotion/css" "^10.0.9"
+    memoize-one "^5.0.0"
+    prop-types "^15.6.0"
+    react-input-autosize "^2.2.2"
+    react-transition-group "^4.3.0"
+
 react-sizeme@^2.6.7:
   version "2.6.12"
   resolved "https://registry.yarnpkg.com/react-sizeme/-/react-sizeme-2.6.12.tgz#ed207be5476f4a85bf364e92042520499455453e"
@@ -18647,6 +18682,11 @@ tabbable@^3.1.2:
   resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-3.1.2.tgz#f2d16cccd01f400e38635c7181adfe0ad965a4a2"
   integrity sha512-wjB6puVXTYO0BSFtCmWQubA/KIn7Xvajw0x0l6eJUudMG/EAiJvIUnyNX6xO4NpGrJ16lbD0eUseB9WxW0vlpQ==
 
+tabbable@^5.1.3:
+  version "5.1.3"
+  resolved "https://na.artifactory.swg-devops.com/artifactory/api/npm/appconnect-npm/tabbable/-/tabbable-5.1.3.tgz?dl=https%3A%2F%2Fregistry.npmjs.org%2Ftabbable%2F-%2Ftabbable-5.1.3.tgz#8bb22b620d5a54d575c3243e4a324bd36acf99ec"
+  integrity sha1-i7IrYg1aVNV1wyQ+SjJL02rPmew=
+
 table@^5.0.0, table@^5.2.3:
   version "5.4.6"
   resolved "https://registry.yarnpkg.com/table/-/table-5.4.6.tgz#1292d19500ce3f86053b05f0e8e7e4a3bb21079e"
@@ -19687,6 +19727,11 @@ uuid@^8.0.0:
   version "8.3.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.0.tgz#ab738085ca22dc9a8c92725e459b1d507df5d6ea"
   integrity sha512-fX6Z5o4m6XsXBdli9g7DtWgAx+osMsRRZFKma1mIUsLCz6vRvv+pz5VNbyu9UEDzpMWulZfvpgb/cmDXVulYFQ==
+
+uuid@^8.3.1:
+  version "8.3.1"
+  resolved "https://na.artifactory.swg-devops.com/artifactory/api/npm/appconnect-npm/uuid/-/uuid-8.3.1.tgz?dl=https%3A%2F%2Fregistry.npmjs.org%2Fuuid%2F-%2Fuuid-8.3.1.tgz#2ba2e6ca000da60fce5a196954ab241131e05a31"
+  integrity sha1-K6LmygANpg/OWhlpVKskETHgWjE=
 
 v8-compile-cache@^2.0.3, v8-compile-cache@^2.1.1:
   version "2.1.1"

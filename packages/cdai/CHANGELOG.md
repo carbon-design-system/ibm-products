@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/cdai/compare/@carbon/ibm-cloud-cognitive-cdai@0.4.1...@carbon/ibm-cloud-cognitive-cdai@0.4.2) (2020-11-23)
+
+
+### Bug Fixes
+
+* updates deps for cdai ([#227](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/cdai/issues/227)) ([380b707](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/cdai/commit/380b707c748bc6565b95708b9a32eaa3adf53cda))
+
+
+
+
+
 ## [0.4.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/cdai/compare/@carbon/ibm-cloud-cognitive-cdai@0.3.0...@carbon/ibm-cloud-cognitive-cdai@0.4.1) (2020-11-23)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai

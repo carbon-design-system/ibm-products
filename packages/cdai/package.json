@@ -43,7 +43,7 @@
     "pluralize": "^8.0.0",
     "react-highlighter": "^0.4.3",
     "react-select": "^3.1.0",
-    "uuid": "^8.3.0"
+    "uuid": "^3.4.0"
   },
   "peerDependencies": {
     "@carbon/elements": "^10.11.1",

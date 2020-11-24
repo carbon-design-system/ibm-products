@@ -54,21 +54,25 @@ export const Tearsheet = ({
       open={open}
       preventCloseOnClickOutside={preventCloseOnClickOutside}
       size="wide">
-      <ModalHeader
-        className={`${blockClass}--header`}
-        closeClassName={closeClasses}
-        iconDescription={closeIconDescription}
-        label={label}
-        title={title}>
-        {description && (
-          <div className={`${blockClass}--header-description`}>
-            {description}
-          </div>
-        )}
-        {navigation && (
-          <div className={`${blockClass}--header-navigation`}>{navigation}</div>
-        )}
-      </ModalHeader>
+      {(label || title || description || navigation) && (
+        <ModalHeader
+          className={`${blockClass}--header`}
+          closeClassName={closeClasses}
+          iconDescription={closeIconDescription}
+          label={label}
+          title={title}>
+          {description && (
+            <div className={`${blockClass}--header-description`}>
+              {description}
+            </div>
+          )}
+          {navigation && (
+            <div className={`${blockClass}--header-navigation`}>
+              {navigation}
+            </div>
+          )}
+        </ModalHeader>
+      )}
       <ModalBody className={`${blockClass}--body`}>
         {influencer && <div className={influencerClasses}>{influencer}</div>}
         <div className={`${blockClass}--right`}>

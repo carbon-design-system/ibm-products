@@ -6,3 +6,4 @@
 //
 
 export { Tearsheet } from './Tearsheet';
+export { TearsheetNarrow } from './TearsheetNarrow';

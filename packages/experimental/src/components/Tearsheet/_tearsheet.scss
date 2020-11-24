@@ -11,8 +11,49 @@
 @import 'carbon-components/scss/components/modal/modal';
 
 $block-class: #{$exp-prefix}-tearsheet;
+// stylelint-disable-next-line carbon/theme-token-use
+$overlay-color: $carbon--gray-100;
 
 // TearsheetShell styles.
+
+.#{$block-class} {
+  align-items: flex-end;
+}
+
+.#{$block-class}.#{$block-class}--stacked-1-of-2 {
+  z-index: z('modal') - 1;
+  // stylelint-disable-next-line carbon/theme-token-use
+  background-color: rgba($overlay-color, 0.33);
+}
+
+.#{$block-class}.#{$block-class}--stacked-1-of-3 {
+  z-index: z('modal') - 2;
+  // stylelint-disable-next-line carbon/theme-token-use
+  background-color: rgba($overlay-color, 0.11);
+}
+
+.#{$block-class}.#{$block-class}--stacked-2-of-3 {
+  z-index: z('modal') - 1;
+  // stylelint-disable-next-line carbon/theme-token-use
+  background-color: rgba($overlay-color, 0.25);
+}
+
+.#{$block-class}.#{$block-class}--stacked-2-of-2,
+.#{$block-class}.#{$block-class}--stacked-3-of-3 {
+  // stylelint-disable-next-line carbon/theme-token-use
+  background-color: rgba($overlay-color, 0.25);
+}
+
+.#{$block-class}[class*='#{$block-class}--stacked'] {
+  // stylelint-disable-next-line carbon/motion-token-use
+  transition: visibility 0s linear, z-index $duration--moderate-02;
+}
+
+.#{$block-class}.#{$block-class}--stacked-closed {
+  // stylelint-disable-next-line carbon/motion-token-use
+  transition: visibility 0s linear $duration--moderate-02,
+    opacity $duration--moderate-02 motion(exit, expressive);
+}
 
 .#{$block-class}--container {
   top: auto;
@@ -22,21 +63,86 @@ $block-class: #{$exp-prefix}-tearsheet;
   transform: translate3d(0, 500px, 0);
 }
 
+.#{$block-class}.#{$block-class} .#{$block-class}--container {
+  transition: width $duration--moderate-02 motion(standard, expressive),
+    transform $duration--moderate-02 motion(entrance, expressive);
+}
+
+.#{$block-class}--stacked-2-of-2 .#{$block-class}--container,
+.#{$block-class}--stacked-2-of-3 .#{$block-class}--container {
+  max-height: calc(100% - (#{$spacing-09} + #{$spacing-05}));
+}
+
+.#{$block-class}--stacked-3-of-3 .#{$block-class}--container {
+  max-height: calc(100% - (#{$spacing-09} + (2 * #{$spacing-05})));
+}
+
 .#{$block-class}--container--lower {
   max-height: calc(100% - (#{$spacing-09} + #{$spacing-08}));
 }
 
-.#{$block-class}--container--wide {
+.#{$block-class}--stacked-2-of-2 .#{$block-class}--container--lower,
+.#{$block-class}--stacked-2-of-3 .#{$block-class}--container--lower {
+  max-height: calc(100% - (#{$spacing-09} + #{$spacing-08} + #{$spacing-05}));
+}
+
+.#{$block-class}--stacked-3-of-3 .#{$block-class}--container--lower {
+  max-height: calc(
+    100% - (#{$spacing-09} + #{$spacing-08} + (2 * #{$spacing-05}))
+  );
+}
+
+.#{$block-class}--stacked-1-of-2:not(.#{$block-class}--wide)
+  .#{$block-class}--container,
+.#{$block-class}--stacked-2-of-3:not(.#{$block-class}--wide)
+  .#{$block-class}--container {
+  @include carbon--breakpoint(md) {
+    width: calc(60% - (2 * #{$spacing-05}));
+  }
+
+  @include carbon--breakpoint(lg) {
+    width: calc(42% - (2 * #{$spacing-05}));
+  }
+
+  @include carbon--breakpoint(xlg) {
+    width: calc(36% - (2 * #{$spacing-05}));
+  }
+}
+
+.#{$block-class}--stacked-1-of-3:not(.#{$block-class}--wide)
+  .#{$block-class}--container {
+  @include carbon--breakpoint(md) {
+    width: calc(60% - (4 * #{$spacing-05}));
+  }
+
+  @include carbon--breakpoint(lg) {
+    width: calc(42% - (4 * #{$spacing-05}));
+  }
+
+  @include carbon--breakpoint(xlg) {
+    width: calc(36% - (4 * #{$spacing-05}));
+  }
+}
+
+.#{$block-class}--wide .#{$block-class}--container {
   width: calc(100% - (2 * #{$spacing-07}));
 }
 
-.#{$block-class} {
-  align-items: flex-end;
+.#{$block-class}--stacked-1-of-2.#{$block-class}--wide
+  .#{$block-class}--container,
+.#{$block-class}--stacked-2-of-3.#{$block-class}--wide
+  .#{$block-class}--container {
+  width: calc(100% - (2 * #{$spacing-07}) - (2 * #{$spacing-05}));
+}
+
+.#{$block-class}--stacked-1-of-3.#{$block-class}--wide
+  .#{$block-class}--container {
+  width: calc(100% - (2 * #{$spacing-07}) - (4 * #{$spacing-05}));
 }
 
 // Tearsheet styles.
 
-.#{$block-class}--header {
+.#{$block-class}--wide .#{$block-class}--header {
   margin: 0;
   padding: $spacing-06;
   border-bottom: 1px solid $ui-03;
@@ -46,12 +152,24 @@ $block-class: #{$exp-prefix}-tearsheet;
   display: none;
 }
 
+.#{$block-class}--wide .#{$prefix}--modal-header__heading {
+  @include carbon--type-style('productive-heading-04');
+}
+
 .#{$block-class}--header-description {
-  margin-top: $spacing-03;
+  margin-top: $spacing-05;
   @include carbon--type-style('body-short-01');
 }
 
+.#{$block-class}--wide .#{$block-class}--header-description {
+  margin-top: $spacing-03;
+}
+
 .#{$block-class}--header-navigation {
+  margin: $spacing-04 0 0;
+}
+
+.#{$block-class}--wide .#{$block-class}--header-navigation {
   margin: $spacing-04 0 calc(-1 * #{$spacing-06});
 }
 
@@ -85,10 +203,17 @@ $block-class: #{$exp-prefix}-tearsheet;
 
 .#{$block-class}--main {
   flex-grow: 1;
+  overflow: auto;
+}
+
+.#{$block-class}--wide .#{$block-class}--main {
   background: $ui-02;
 }
 
 .#{$block-class}--buttons {
-  background: $ui-02;
   border-top: 1px solid $ui-03;
+}
+
+.#{$block-class}--wide .#{$block-class}--buttons {
+  background: $ui-02;
 }

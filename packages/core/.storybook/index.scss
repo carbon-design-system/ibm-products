@@ -14,7 +14,7 @@ $css--reset: false;
 
 @include carbon--type-reset;
 
-@import '../../feature-flags/feature-flags';
+@import '../generated/feature-flags/feature-flags';
 
 @if map-get($feature-flags, 'enable-css-custom-properties') {
   :root {
@@ -50,4 +50,14 @@ $css--reset: false;
 .sb-show-main {
   color: $text-01;
   background-color: $ui-background;
+}
+
+/**
+  Override used for modals in any .mdx preview block.
+  storybook generates preview blocks with a surrounding div with style="position: relative; z-index: 0;"
+  this causes style problems for modals when not using react portals.
+  modals in mdx files should now be formatted like this to prevent z-index issues
+*/
+.preview-position-fix > div {
+  position: static !important; /* stylelint-disable-line declaration-no-important */
 }

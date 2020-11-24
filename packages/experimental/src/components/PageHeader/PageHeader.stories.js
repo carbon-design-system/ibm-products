@@ -181,26 +181,49 @@ const longTabBar = (
     <Tab label="Tab 8" />
   </Tabs>
 );
-const tags = (
-  <>
-    <Tag type="blue">A tag</Tag>
-    <Tag type="green">A tag</Tag>
-    <Tag type="warm-gray">A tag</Tag>
-    <Tag type="purple">A tag</Tag>
-  </>
-);
-const manyTags = (
-  <>
-    <Tag type="blue">Blue</Tag>
-    <Tag type="green">Green</Tag>
-    <Tag type="warm-gray">Warm gray</Tag>
-    <Tag type="purple">Purple</Tag>
-    <Tag type="red">Red</Tag>
-    <Tag type="teal">Teal</Tag>
-    <Tag type="high-contrast">High contrast</Tag>
-    <Tag type="magenta">Magenta</Tag>
-  </>
-);
+
+const tags = [
+  <Tag type="blue" key="tag-1">
+    A tag
+  </Tag>,
+  <Tag type="green" key="tag-2">
+    A tag
+  </Tag>,
+  <Tag type="warm-gray" key="tag-3">
+    A tag
+  </Tag>,
+  <Tag type="purple" key="tag-4">
+    A tag
+  </Tag>,
+];
+
+const manyTags = [
+  <Tag type="blue" key="blue">
+    Blue
+  </Tag>,
+  <Tag type="green" key="green">
+    Green
+  </Tag>,
+  <Tag type="warm-gray" key="warm-gray">
+    Warm gray
+  </Tag>,
+  <Tag type="purple" key="purple">
+    Purple
+  </Tag>,
+  <Tag type="red" key="red">
+    Red
+  </Tag>,
+  <Tag type="teal" key="teal">
+    Teal
+  </Tag>,
+  <Tag type="high-contrast" key="high-contrast">
+    High contrast
+  </Tag>,
+  <Tag type="magenta" key="magenta">
+    Magenta
+  </Tag>,
+];
+
 const title = 'Page title';
 const longTitle =
   'A very long page title that is going to exceed fifty-six characters and get truncated';

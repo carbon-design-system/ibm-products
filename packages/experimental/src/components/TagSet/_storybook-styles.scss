@@ -7,12 +7,14 @@
 @import '../../global/styles/carbon-settings'; // goes before index as it affects how carbon is used.
 @import './index';
 
-.tag-set-story__viewport {
+$block-class: #{$exp-prefix}-tag-set;
+
+.#{$block-class}__viewport {
   position: relative;
   box-shadow: 0 0 0 $layout-02 $ui-01;
 }
 
-.tag-set-story__viewport::before {
+.#{$block-class}__viewport::before {
   position: absolute;
   top: calc(-1 * #{$layout-02});
   left: 0;

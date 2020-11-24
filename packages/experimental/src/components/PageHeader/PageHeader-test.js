@@ -71,22 +71,20 @@ const tabBar = (
     <Tab label="Tab 4" />
   </Tabs>
 );
-const tags = (
-  <>
-    <Tag data-testid="tags" type="blue">
-      A tag
-    </Tag>
-    <Tag data-testid="tags" type="green">
-      A tag
-    </Tag>
-    <Tag data-testid="tags" type="warm-gray">
-      A tag
-    </Tag>
-    <Tag data-testid="tags" type="purple">
-      A tag
-    </Tag>
-  </>
-);
+const tags = [
+  <Tag data-testid="tags" type="blue" key="blue">
+    A tag
+  </Tag>,
+  <Tag data-testid="tags" type="green" key="green">
+    A tag
+  </Tag>,
+  <Tag data-testid="tags" type="warm-gray" key="warm-gray">
+    A tag
+  </Tag>,
+  <Tag data-testid="tags" type="purple" key="purple">
+    A tag
+  </Tag>,
+];
 const title = 'Page title';
 
 describe('PageHeader', () => {

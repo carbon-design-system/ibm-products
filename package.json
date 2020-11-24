@@ -17,8 +17,10 @@
     "build:storybook": "cd packages/core && yarn build:storybook",
     "ci-check": "yarn format:diff && yarn lint && yarn test --ci",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
+    "copy-common-files": "sh ./scripts/copy-common-files.sh;",
     "format": "prettier --write '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!**/CHANGELOG.md' '!README.md'",
+    "monorepo:npm-upgrade": "sh ./scripts/monorepo-npm-upgrade.sh",
     "lint": "yarn lint:es && yarn lint:style",
     "lint:es": "eslint 'packages/*/src/**/*.js'",
     "lint:style": "stylelint 'packages/*/src/**/*.scss' --report-needless-disables --report-invalid-scope-disables",
@@ -36,6 +38,7 @@
     "@testing-library/react": "^11.0.4",
     "@testing-library/user-event": "^12.1.7",
     "copyfiles": "^2.3.0",
+    "cpx": "^1.5.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.4",
     "eslint": "^7.8.1",
@@ -44,6 +47,7 @@
     "husky": "^4.2.5",
     "jest": "^25.5.4",
     "lerna": "^3.22.1",
+    "npm-upgrade": "^2.0.4",
     "lint-staged": "^10.2.10",
     "prettier": "^2.0.5",
     "prettier-config-carbon": "^0.4.0",
@@ -51,7 +55,7 @@
     "rimraf": "^3.0.2",
     "rollup": "^2.28.2",
     "stylelint": "^13.6.1",
-    "stylelint-plugin-carbon-tokens": "^0.6.1",
+    "stylelint-plugin-carbon-tokens": "^0.7.0",
     "stylelint-config-carbon": "^1.1.0"
   },
   "eslintConfig": {
@@ -68,7 +72,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
+      "pre-commit": "yarn copy-common-files;  lint-staged"
     }
   },
   "commitlint": {

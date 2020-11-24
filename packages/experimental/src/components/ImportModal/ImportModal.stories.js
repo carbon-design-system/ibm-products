@@ -6,7 +6,6 @@
 //
 
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 import { Button } from 'carbon-components-react';
 import { ImportModal } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
@@ -51,46 +50,26 @@ const Template = (args) => {
   return <ImportModal {...args} />;
 };
 
-/**
- * Simple state manager for modals.
- */
-/* eslint-disable react/prop-types */
-const ModalStateManager = ({
-  renderLauncher: LauncherContent,
-  children: ModalContent,
-}) => {
+const TemplateWithState = (args) => {
   const [open, setOpen] = useState(false);
   return (
     <>
-      {!ModalContent || typeof document === 'undefined'
-        ? null
-        : ReactDOM.createPortal(
-            <ModalContent open={open} setOpen={setOpen} />,
-            document.body
-          )}
-      {LauncherContent && <LauncherContent open={open} setOpen={setOpen} />}
+      <ImportModal
+        {...args}
+        open={open}
+        onRequestClose={() => setOpen(false)}
+      />
+      <Button onClick={() => setOpen(true)}>Launch modal</Button>
     </>
   );
 };
 
-export const WithStateManager = () => {
-  return (
-    <ModalStateManager
-      renderLauncher={({ setOpen }) => (
-        <Button onClick={() => setOpen(true)}>Launch modal</Button>
-      )}>
-      {({ open, setOpen }) => (
-        <ImportModal
-          {...defaultProps}
-          open={open}
-          onRequestClose={() => setOpen(false)}
-        />
-      )}
-    </ModalStateManager>
-  );
+export const WithStateManager = TemplateWithState.bind({});
+WithStateManager.args = {
+  ...defaultProps,
 };
 
-export const Minimal = Template.bind({});
-Minimal.args = {
+export const Standard = Template.bind({});
+Standard.args = {
   ...defaultProps,
 };

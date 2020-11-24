@@ -7,11 +7,13 @@
 
 @import 'globals/scss/variables';
 
+@import 'components/IdeAPIKeyGeneration/IdeAPIKeyGeneration';
 @import 'components/IdeButton/IdeButton';
 @import 'components/IdeCreate/ide-create';
 @import 'components/IdeEmptyState/IdeEmptyState';
 @import 'components/IdeImporting/IdeImporting';
-@import 'components/IdeSaving/IdeSaving';
+@import 'components/IdeSaving/IdeAutoSave';
+@import 'components/IdeSaving/IdeManualSave';
 @import 'components/IdeCard/IdeCard';
 @import 'components/IdeHome/IdeHome';
 @import 'components/IdeNavigation/IdeNavigation';
@@ -19,5 +21,5 @@
 @import 'components/IdeRemove/IdeRemove';
 @import 'components/IdeFilter/IdeFilter';
 @import 'components/IdeDataTable/IdeDataTable';
-@import 'components/IdeToolbarSearch/IdeToolbarSearch';
+@import 'components/IdeTableToolbarSearch/IdeTableToolbarSearch';
 @import 'components/IdeSlideOverPanel/IdeSlideOverPanel';

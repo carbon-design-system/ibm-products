@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/compare/@carbon/ibm-cloud-cognitive-experimental@0.7.0...@carbon/ibm-cloud-cognitive-experimental@0.7.1) (2020-11-24)
+
+
+### Bug Fixes
+
+* update import and remove modal stories ([#221](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/issues/221)) ([c08d1cf](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/commit/c08d1cf44a4b3c726b304061a3ac6e1b6b4035e6))
+
+
+
+
+
 # [0.7.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/compare/@carbon/ibm-cloud-cognitive-experimental@0.6.0...@carbon/ibm-cloud-cognitive-experimental@0.7.0) (2020-11-23)
 
 

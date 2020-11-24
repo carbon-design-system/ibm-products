@@ -1,0 +1,28 @@
+@import '@carbon/colors/scss/colors';
+
+.web-terminal {
+  position: fixed;
+  top: 2.9375rem;
+  right: 0;
+  width: 584px;
+  height: calc(100vh - 2.9375rem);
+  background-color: $gray-100;
+}
+
+.web-terminal__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 3rem;
+  padding: 0 1rem;
+  background-color: $gray-90;
+}
+
+.web-terminal__bar-icon {
+  cursor: pointer;
+  fill: $gray-10;
+}
+
+.web-terminal__actions .web-terminal__bar-icon {
+  margin-right: 1rem;
+}

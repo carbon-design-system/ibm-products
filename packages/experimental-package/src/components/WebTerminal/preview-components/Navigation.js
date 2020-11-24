@@ -12,14 +12,14 @@ import {
   User20 as User,
 } from '@carbon/icons-react';
 
-const Navigation = () => {
+const Navigation = ({ openTerminal }) => {
   return (
     <Header aria-label="IBM Platform Name">
       <HeaderName href="#" prefix="IBM">
         [Platform]
       </HeaderName>
       <HeaderGlobalBar>
-        <HeaderGlobalAction aria-label="Web terminal" onClick={() => {}}>
+        <HeaderGlobalAction aria-label="Web terminal" onClick={openTerminal}>
           <Terminal />
         </HeaderGlobalAction>
         <HeaderGlobalAction aria-label="Search" onClick={() => {}}>

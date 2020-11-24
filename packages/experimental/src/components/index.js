@@ -13,4 +13,4 @@ export { ModifiedTabs } from './ModifiedTabs';
 export { PageHeader, ActionBarItem, PageActionItem } from './PageHeader';
 export { RemovalModal } from './RemovalModal';
 export { TagSet } from './TagSet';
-export { Tearsheet } from './Tearsheet';
+export { Tearsheet, TearsheetNarrow } from './Tearsheet';

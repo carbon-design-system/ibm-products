@@ -19,7 +19,7 @@ for package in * ; do
 
         cd $package
             if echo "$mode" | grep -iq "^y" ;then
-                npm-upgrade
+                npx npm-upgrade
             fi
         cd ..
     fi
@@ -33,5 +33,5 @@ mode=$( while ! head -c 1 | grep -i '[yn]' ;do true ;done )
 stty $old_stty_cfg
 
 if echo "$mode" | grep -iq "^y" ;then
-    npm-upgrade
+    npx npm-upgrade
 fi

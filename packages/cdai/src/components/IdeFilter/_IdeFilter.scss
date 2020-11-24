@@ -7,7 +7,8 @@
 
 @import '../../globals/scss/carbon-settings';
 @import '../../globals/scss/variables';
-@import 'carbon-components/scss/components/tag/tag';
+
+@import '~carbon-components/scss/components/tag/tag';
 
 .#{$ide-prefix}-filter {
   position: relative;

@@ -6,7 +6,6 @@
 //
 
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 import { Button } from 'carbon-components-react';
 import { RemovalModal } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
@@ -23,85 +22,56 @@ export default {
   },
 };
 
-const Template = (args) => {
-  const resource = 'bx1001';
-  return (
-    <RemovalModal
-      {...args}
-      body={`Deleting ${resource} cannot be undone.`}
-      className="remove-modal-test"
-      header="Confirm delete"
-      iconDescription="close"
-      inputInvalidText="A valid value is required"
-      inputLabelText={`Type ${resource} to confirm`}
-      inputPlaceholderText="Name of resource"
-      onRequestSubmit={() => console.log('submitted')}
-      onRequestClose={() => console.log('cancel')}
-      open
-      primaryButtonText="Delete"
-      resource={resource}
-      secondaryButtonText="Close"
-      subheader={`Delete ${resource}`}
-    />
-  );
+const resource = 'bx1001';
+
+const defaultProps = {
+  body: `Deleting ${resource} cannot be undone.`,
+  className: 'remove-modal-test',
+  header: 'Confirm delete',
+  iconDescription: 'close',
+  inputInvalidText: 'A valid value is required',
+  inputLabelText: `Type ${resource} to confirm`,
+  inputPlaceholderText: 'Name of resource',
+  onRequestSubmit: () => console.log('submitted'),
+  onRequestClose: () => console.log('cancel'),
+  open: true,
+  primaryButtonText: 'Delete',
+  resource,
+  secondaryButtonText: 'Close',
+  subheader: `Delete ${resource}`,
 };
 
-/**
- * Simple state manager for modals.
- */
-/* eslint-disable react/prop-types */
-const ModalStateManager = ({
-  renderLauncher: LauncherContent,
-  children: ModalContent,
-}) => {
+const Template = (args) => {
+  return <RemovalModal {...args} />;
+};
+
+const TemplateWIthState = (args) => {
   const [open, setOpen] = useState(false);
   return (
     <>
-      {!ModalContent || typeof document === 'undefined'
-        ? null
-        : ReactDOM.createPortal(
-            <ModalContent open={open} setOpen={setOpen} />,
-            document.body
-          )}
-      {LauncherContent && <LauncherContent open={open} setOpen={setOpen} />}
+      <RemovalModal
+        {...args}
+        open={open}
+        onRequestClose={() => setOpen(false)}
+      />
+      <Button onClick={() => setOpen(true)}>Launch modal</Button>
     </>
   );
 };
 
-export const WithStateManager = () => {
-  const resource = 'bx1001';
-  return (
-    <ModalStateManager
-      renderLauncher={({ setOpen }) => (
-        <Button onClick={() => setOpen(true)}>Launch modal</Button>
-      )}>
-      {({ open, setOpen }) => (
-        <RemovalModal
-          body={`Deleting ${resource} cannot be undone.`}
-          className="remove-modal-test"
-          header="Confirm delete"
-          iconDescription="close"
-          inputInvalidText="A valid value is required"
-          inputLabelText={`Type ${resource} to confirm`}
-          inputPlaceholderText="Name of resource"
-          onRequestSubmit={() => setOpen(false)}
-          onRequestClose={() => setOpen(false)}
-          open={open}
-          primaryButtonText="Delete"
-          resource={resource}
-          secondaryButtonText="Close"
-          subheader={`Delete ${resource}`}
-          textConfirmation
-        />
-      )}
-    </ModalStateManager>
-  );
+export const WithStateManager = TemplateWIthState.bind({});
+WithStateManager.args = {
+  ...defaultProps,
+  textConfirmation: true,
 };
 
 export const WithoutConfirmation = Template.bind({});
-WithoutConfirmation.args = {};
+WithoutConfirmation.args = {
+  ...defaultProps,
+};
 
 export const WithConfirmation = Template.bind({});
 WithConfirmation.args = {
+  ...defaultProps,
   textConfirmation: true,
 };

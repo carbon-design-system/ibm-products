@@ -8,7 +8,7 @@
 @import '../../globals/scss/carbon-settings';
 @import '../../globals/scss/variables';
 
-@import 'carbon-components/scss/components/button/button';
+@import '~carbon-components/scss/components/button/button';
 
 .#{$ide-prefix}-manual-save--button {
   width: carbon--mini-units(20);

@@ -8,9 +8,9 @@
 @import '../../globals/scss/carbon-settings';
 @import '../../globals/scss/variables';
 
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/link/link';
-@import 'carbon-components/scss/components/progress-indicator/progress-indicator';
+@import '~carbon-components/scss/components/button/button';
+@import '~carbon-components/scss/components/link/link';
+@import '~carbon-components/scss/components/progress-indicator/progress-indicator';
 
 .#{$ide-prefix}-create-header {
   padding-bottom: $spacing-05;

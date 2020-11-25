@@ -7,6 +7,6 @@
 
 // https://www.npmjs.com/package/accessibility-checker#configuring-accessibility-checker
 module.exports = {
-  policies: ['WCAG_2_1'],
   failLevels: ['violation'],
+  policies: ['WCAG_2_1'],
 };

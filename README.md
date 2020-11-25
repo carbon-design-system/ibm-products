@@ -14,9 +14,15 @@
 
 > Carbon for Cloud & Cognitive
 
-## Live Catalogue of Components using Storybook:
+## Getting started
 
-https://ibm-cloud-cognitive.netlify.app/?path=/story/cd-ai-idebutton--label-and-icon
+If you're just getting started and looking for React components, take a look at
+[our Storybook](https://ibm-cloud-cognitive.netlify.app).
+
+If you want to try out Carbon for Cloud & Cognitive, you can use
+[CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/master/examples/codesandbox).
+
+[![Edit CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/master/examples/codesandbox)
 
 ## Browser Support
 

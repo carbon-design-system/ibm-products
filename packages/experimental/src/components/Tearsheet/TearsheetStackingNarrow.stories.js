@@ -11,22 +11,18 @@ import { action } from '@storybook/addon-actions';
 
 import { expPrefix } from '../../global/js/settings';
 
-import { Button, Tab, Tabs } from 'carbon-components-react';
+import { Button } from 'carbon-components-react';
 
-import { Tearsheet } from './Tearsheet';
 import { TearsheetNarrow } from './TearsheetNarrow';
 
 import styles from './_storybook-styles.scss';
 
-import mdx from './Tearsheet.mdx';
+import mdx from './TearsheetStacking.mdx';
 
 export default {
-  title: 'Experimental/Tearsheet',
-  component: Tearsheet,
-  subcomponents: {
-    TearsheetNarrow,
-  },
-  parameters: { styles, docs: { page: mdx } },
+  title: 'Experimental/TearsheetStackingNarrow',
+  component: TearsheetNarrow,
+  parameters: { controls: { expanded: true }, styles, docs: { page: mdx } },
   argTypes: {
     buttonSet: {
       control: {
@@ -55,12 +51,10 @@ export default {
         type: 'text',
       },
     },
-    influencerPosition: {},
-    influencerWidth: {},
     preventCloseOnClickOutside: {},
     title: {
       control: {
-        type: 'text',
+        disable: true,
       },
     },
     buttons: {
@@ -73,17 +67,7 @@ export default {
         disable: true,
       },
     },
-    influencer: {
-      control: {
-        disable: true,
-      },
-    },
     onClose: {
-      control: {
-        disable: true,
-      },
-    },
-    navigation: {
       control: {
         disable: true,
       },
@@ -102,12 +86,12 @@ const buttons_1 = (
   <div className="tearsheet-stories__buttons">
     <Button
       kind="secondary"
-      className="tearsheet-stories__button-25"
+      className="tearsheet-stories__button-50"
       onClick={action('Secondary button click')}>
       Cancel
     </Button>
     <Button
-      className="tearsheet-stories__button-25"
+      className="tearsheet-stories__button-50"
       onClick={action('Primary button click')}>
       Create
     </Button>
@@ -199,99 +183,72 @@ const description = (
   </span>
 );
 
-const influencer = (
-  <div className="tearsheet-stories__dummy-content-block">Influencer</div>
-);
-
 const label = 'The label of the tearsheet';
 
-const mainContent = (
-  <div className="tearsheet-stories__dummy-content-block">Main content</div>
-);
+// Stories
 
-const tabs = (
-  <div className="tearsheet-stories__tabs">
-    <Tabs onSelectionChange={action('Tab selection changed')}>
-      <Tab label="Tab 1" />
-      <Tab label="Tab 2" />
-      <Tab label="Tab 3" />
-      <Tab label="Tab 4" />
-    </Tabs>
-  </div>
-);
-
-const title = 'Title of the tearsheet';
-
-// Template.
 // eslint-disable-next-line react/prop-types
-const Template = ({ buttonSet, ...args }) => {
-  const [open, setOpen] = useState(false);
+export const StackedTearsheets = ({ buttonSet, ...args }) => {
+  const [open1, setopen1] = useState(false);
+  const [open2, setopen2] = useState(false);
+  const [open3, setopen3] = useState(false);
 
   return (
     <>
       <style>{`.${expPrefix}-tearsheet { opacity: 0 }`};</style>
-      <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
-      <Tearsheet
+      <div
+        style={{
+          display: 'flex',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          zIndex: 10000,
+        }}>
+        <Button onClick={() => setopen1(!open1)}>Toggle #1</Button>
+        <Button onClick={() => setopen2(!open2)}>Toggle #2</Button>
+        <Button onClick={() => setopen3(!open3)}>Toggle #3</Button>
+      </div>
+      <TearsheetNarrow
         className={className}
         {...args}
+        title="Tearsheet #1"
         buttons={buttonSets[buttonSet]}
-        open={open}
-        onClose={() => setOpen(false)}>
-        {mainContent}
-      </Tearsheet>
+        open={open1}
+        onClose={() => setopen1(false)}>
+        <div className="tearsheet-stories__dummy-content-block">
+          Main content 1
+        </div>
+      </TearsheetNarrow>
+      <TearsheetNarrow
+        className={className}
+        {...args}
+        title="Tearsheet #2"
+        buttons={buttonSets[buttonSet]}
+        open={open2}
+        onClose={() => setopen2(false)}>
+        <div className="tearsheet-stories__dummy-content-block">
+          Main content 2
+        </div>
+      </TearsheetNarrow>
+      <TearsheetNarrow
+        className={className}
+        {...args}
+        title="Tearsheet #3"
+        buttons={buttonSets[buttonSet]}
+        open={open3}
+        onClose={() => setopen3(false)}>
+        <div className="tearsheet-stories__dummy-content-block">
+          Main content 3
+        </div>
+      </TearsheetNarrow>
     </>
   );
 };
-
-// Stories
-export const AllAttributesSet = Template.bind({});
-AllAttributesSet.args = {
+StackedTearsheets.args = {
   closeIconDescription,
   description,
-  hasCloseIcon: true,
-  height: 'normal',
-  influencer,
-  influencerPosition: 'left',
-  influencerWidth: 'narrow',
+  height: 'lower',
   label,
-  navigation: tabs,
-  onClose: action('onClose called'),
-  open: true,
   preventCloseOnClickOutside: true,
-  title,
-  buttonSet: 0,
-};
-
-export const NoAttributesSet = Template.bind({});
-NoAttributesSet.args = {};
-
-export const NoHeaderNavigation = Template.bind({});
-NoHeaderNavigation.args = {
-  closeIconDescription,
-  description,
-  hasCloseIcon: true,
-  height: 'normal',
-  influencer,
-  influencerPosition: 'left',
-  influencerWidth: 'narrow',
-  label,
-  onClose: action('onClose called'),
-  open: true,
-  preventCloseOnClickOutside: true,
-  title,
-  buttonSet: 0,
-};
-
-export const NoHeaderNavigationOrInfluencer = Template.bind({});
-NoHeaderNavigationOrInfluencer.args = {
-  closeIconDescription,
-  description,
-  hasCloseIcon: true,
-  height: 'normal',
-  label,
-  onClose: action('onClose called'),
-  open: true,
-  preventCloseOnClickOutside: true,
-  title,
   buttonSet: 0,
 };

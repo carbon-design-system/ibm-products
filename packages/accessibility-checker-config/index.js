@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { create } from '@carbon/rollup-config';
-import packageJson from './package.json';
-
-export default create('src/index.js', packageJson);
+// https://www.npmjs.com/package/accessibility-checker#configuring-accessibility-checker
+module.exports = {
+  policies: ['WCAG_2_1'],
+  failLevels: ['violation'],
+};

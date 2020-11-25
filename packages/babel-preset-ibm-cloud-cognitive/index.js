@@ -5,14 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
+const {
+  env: { BABEL_ENV },
+} = process;
 
 module.exports = () => ({
   presets: [
     [
       '@babel/preset-env',
       {
-        modules: process.env.BABEL_ENV === 'cjs' && 'commonjs',
+        ...(BABEL_ENV && { modules: BABEL_ENV === 'cjs' && 'commonjs' }),
         targets: {
           browsers: ['extends browserslist-config-carbon'],
           node: '12',

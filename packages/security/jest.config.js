@@ -5,7 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { createTransformer } = require('babel-jest');
-const babelOptions = require('babel-preset-ibm-cloud-cognitive');
-
-module.exports = createTransformer(babelOptions());
+module.exports = require('jest-config');

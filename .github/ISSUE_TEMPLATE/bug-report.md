@@ -39,7 +39,7 @@ assignees: ''
 
 > Please create a reduced test case in CodeSandbox
 >
-> https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/master/codesandbox
+> https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/master/examples/codesandbox
 
 ## Additional information
 

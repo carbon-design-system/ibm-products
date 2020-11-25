@@ -31,7 +31,8 @@
     "test": "bundler check 'src/**/*.scss'"
   },
   "dependencies": {
-    "@carbon/ibm-security": "^1.26.0"
+    "@carbon/ibm-security": "^1.26.0",
+    "@carbon/import-once": "^10.3.0"
   },
   "devDependencies": {
     "@carbon/ibm-cloud-cognitive-core": "^0.3.0",

@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { ComboButton, ComboButtonItem } from '@carbon/ibm-security';
+export default from './ComboButton';
+export ComboButtonItem from './ComboButtonItem';

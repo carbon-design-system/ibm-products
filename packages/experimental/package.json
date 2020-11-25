@@ -34,7 +34,7 @@
     "react": "^16.13.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.11.2",
+    "@babel/runtime": "^7.12.5",
     "@carbon/icons-react": "^10.21.0",
     "carbon-components": "^10.24.0",
     "carbon-components-react": "^7.24.0",

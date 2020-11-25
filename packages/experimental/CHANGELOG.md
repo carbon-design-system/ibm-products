@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/compare/@carbon/ibm-cloud-cognitive-experimental@0.7.1...@carbon/ibm-cloud-cognitive-experimental@0.8.0) (2020-11-24)
+
+
+### Features
+
+* make tearsheets stackable ([#229](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/issues/229)) ([23c26b2](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/commit/23c26b2db35cff9f20732e3e5f327743bdcbdfb7))
+
+
+
+
+
 ## [0.7.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/compare/@carbon/ibm-cloud-cognitive-experimental@0.7.0...@carbon/ibm-cloud-cognitive-experimental@0.7.1) (2020-11-24)
 
 

@@ -22,7 +22,7 @@ import React, { Children, createElement, useRef, useState } from 'react';
 
 const getInstanceId = setupGetInstanceId();
 
-const namespace = 'security--combo-button';
+const blockClass = 'security--combo-button';
 
 const getActionProps = ({ props: { disabled, href, ...props } }, rest) => ({
   disabled,
@@ -35,8 +35,8 @@ const getActionProps = ({ props: { disabled, href, ...props } }, rest) => ({
  * The combo button consolidates similar actions, while exposing the most commonly used one.
  */
 const ComboButton = ({ children, className, overflowMenu, ...rest }) => {
+  const { current: instanceId } = useRef(getInstanceId());
   const [isOpen, setIsOpen] = useState(false);
-  const { current: overflowMenuItemKey } = useRef(getInstanceId());
 
   const [primaryAction, ...restActions] = Children.toArray(children).filter(
     Boolean
@@ -45,28 +45,28 @@ const ComboButton = ({ children, className, overflowMenu, ...rest }) => {
   return (
     <div
       {...rest}
-      className={classnames(namespace, className)}
+      className={classnames(blockClass, className)}
       data-floating-menu-container>
       <Button {...getActionProps(primaryAction)} />
 
       {restActions.length > 0 && (
         <OverflowMenu
           {...overflowMenu}
-          className={`${namespace}__overflow-menu`}
-          menuOptionsClass={`${namespace}__overflow-menu__list`}
+          className={`${blockClass}__overflow-menu`}
+          menuOptionsClass={`${blockClass}__overflow-menu__list`}
           onClick={() => !isOpen && setIsOpen(true)}
           onClose={() => setIsOpen(false)}
           renderIcon={() =>
             createElement(isOpen ? ChevronUp16 : ChevronDown16, {
-              className: `${namespace}__overflow-menu__icon`,
+              className: `${blockClass}__overflow-menu__icon`,
             })
           }
           flipped>
           {restActions.map((action, index) => (
             <OverflowMenuItem
               {...getActionProps(action, { itemText: action.props.children })}
-              key={`${namespace}--${overflowMenuItemKey}__overflow-menu__item__${index}`}
-              className={`${namespace}__overflow-menu__item`}
+              key={`${blockClass}--${instanceId}__overflow-menu__item__${index}`}
+              className={`${blockClass}__overflow-menu__item`}
             />
           ))}
         </OverflowMenu>

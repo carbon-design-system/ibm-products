@@ -50,6 +50,8 @@ e.g. sketch files, icons, images, prototypes
 
 ### Review and promote
 
+- [ ] Verify whether any new production dependencies have previously been
+      [pedigree reviewed](https://pedigree-service.wdc1a.cirrus.ibm.com/)
 - [ ] Design review
 - [ ] Add design review issues addressed, issues raised or discounted.
 - [ ] Engineering review - Submit PR to promote component to production package

@@ -24,3 +24,6 @@ removed files.
 #### Testing / Reviewing
 
 {{ Add descriptions, steps or a checklist for how reviewers can verify this PR works or not }}
+
+- [ ] Verify whether any new production dependencies have previously been
+      [pedigree reviewed](https://pedigree-service.wdc1a.cirrus.ibm.com/)

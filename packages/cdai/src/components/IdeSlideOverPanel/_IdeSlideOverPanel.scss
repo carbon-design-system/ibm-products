@@ -8,9 +8,10 @@
 //
 @import '../../globals/scss/carbon-settings';
 @import '../../globals/scss/variables';
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/text-input/text-input';
-@import 'carbon-components/scss/components/text-area/text-area';
+
+@import '~carbon-components/scss/components/button/button';
+@import '~carbon-components/scss/components/text-input/text-input';
+@import '~carbon-components/scss/components/text-area/text-area';
 
 .#{$ide-prefix}-slide-over-overlay {
   position: fixed;

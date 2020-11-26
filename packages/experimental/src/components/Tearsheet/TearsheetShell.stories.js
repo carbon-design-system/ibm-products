@@ -11,10 +11,12 @@ import { TearsheetShell } from './TearsheetShell';
 
 import styles from './_storybook-styles.scss';
 
+import mdx from './TearsheetShell.mdx';
+
 export default {
   title: 'Experimental/TearsheetShell',
   component: TearsheetShell,
-  parameters: { styles },
+  parameters: { controls: { expanded: true }, styles, docs: { page: mdx } },
 };
 
 const className = 'client-class-1 client-class-2';

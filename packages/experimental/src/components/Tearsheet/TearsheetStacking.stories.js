@@ -14,14 +14,15 @@ import { expPrefix } from '../../global/js/settings';
 import { Button } from 'carbon-components-react';
 
 import { Tearsheet } from './Tearsheet';
-import { TearsheetNarrow } from './TearsheetNarrow';
 
 import styles from './_storybook-styles.scss';
+
+import mdx from './TearsheetStacking.mdx';
 
 export default {
   title: 'Experimental/TearsheetStacking',
   component: Tearsheet,
-  parameters: { styles },
+  parameters: { controls: { expanded: true }, styles, docs: { page: mdx } },
   argTypes: {
     buttonSet: {
       control: {
@@ -55,7 +56,7 @@ export default {
     preventCloseOnClickOutside: {},
     title: {
       control: {
-        type: 'text',
+        disable: true,
       },
     },
     buttons: {
@@ -202,13 +203,11 @@ const label = 'The label of the tearsheet';
 
 // Stories
 
-export const StackedTearsheets = ({ ...args }) => {
+// eslint-disable-next-line react/prop-types
+export const StackedTearsheets = ({ buttonSet, ...args }) => {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
-  const [open4, setOpen4] = useState(false);
-  const [open5, setOpen5] = useState(false);
-  const [open6, setOpen6] = useState(false);
 
   return (
     <>
@@ -221,18 +220,15 @@ export const StackedTearsheets = ({ ...args }) => {
           left: 0,
           zIndex: 10000,
         }}>
-        <Button onClick={() => setOpen1(!open1)}>Toggle #1 (wide)</Button>
-        <Button onClick={() => setOpen2(!open2)}>Toggle #2 (wide)</Button>
-        <Button onClick={() => setOpen3(!open3)}>Toggle #3 (wide)</Button>
-        <Button onClick={() => setOpen4(!open4)}>Toggle #4</Button>
-        <Button onClick={() => setOpen5(!open5)}>Toggle #5</Button>
-        <Button onClick={() => setOpen6(!open6)}>Toggle #6</Button>
+        <Button onClick={() => setOpen1(!open1)}>Toggle #1</Button>
+        <Button onClick={() => setOpen2(!open2)}>Toggle #2</Button>
+        <Button onClick={() => setOpen3(!open3)}>Toggle #3</Button>
       </div>
       <Tearsheet
         className={className}
         {...args}
         title="Tearsheet #1"
-        influencer={influencer}
+        buttons={buttonSets[buttonSet]}
         open={open1}
         onClose={() => setOpen1(false)}>
         <div className="tearsheet-stories__dummy-content-block">
@@ -243,7 +239,7 @@ export const StackedTearsheets = ({ ...args }) => {
         className={className}
         {...args}
         title="Tearsheet #2"
-        influencer={influencer}
+        buttons={buttonSets[buttonSet]}
         open={open2}
         onClose={() => setOpen2(false)}>
         <div className="tearsheet-stories__dummy-content-block">
@@ -254,43 +250,13 @@ export const StackedTearsheets = ({ ...args }) => {
         className={className}
         {...args}
         title="Tearsheet #3"
-        influencer={influencer}
+        buttons={buttonSets[buttonSet]}
         open={open3}
         onClose={() => setOpen3(false)}>
         <div className="tearsheet-stories__dummy-content-block">
           Main content 3
         </div>
       </Tearsheet>
-      <TearsheetNarrow
-        className={className}
-        {...args}
-        title="Tearsheet #4"
-        open={open4}
-        onClose={() => setOpen4(false)}>
-        <div className="tearsheet-stories__dummy-content-block">
-          Main content 4
-        </div>
-      </TearsheetNarrow>
-      <TearsheetNarrow
-        className={className}
-        {...args}
-        title="Tearsheet #5"
-        open={open5}
-        onClose={() => setOpen5(false)}>
-        <div className="tearsheet-stories__dummy-content-block">
-          Main content 5
-        </div>
-      </TearsheetNarrow>
-      <TearsheetNarrow
-        className={className}
-        {...args}
-        title="Tearsheet #6"
-        open={open6}
-        onClose={() => setOpen6(false)}>
-        <div className="tearsheet-stories__dummy-content-block">
-          Main content 6
-        </div>
-      </TearsheetNarrow>
     </>
   );
 };
@@ -298,7 +264,9 @@ StackedTearsheets.args = {
   buttons: buttonSets[1],
   closeIconDescription,
   description,
-  height: 'normal',
+  height: 'lower',
+  influencer,
   label,
   preventCloseOnClickOutside: true,
+  buttonSet: 0,
 };

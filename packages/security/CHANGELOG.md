@@ -1,23 +1,34 @@
 # Change Log
 
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## [0.2.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/security/compare/@carbon/ibm-cloud-cognitive-security@0.2.1...@carbon/ibm-cloud-cognitive-security@0.2.2) (2020-11-26)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-security
 
+
+
+
+
 ## [0.2.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/security/compare/@carbon/ibm-cloud-cognitive-security@0.2.0...@carbon/ibm-cloud-cognitive-security@0.2.1) (2020-11-26)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-security
 
+
+
+
+
 # [0.2.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/security/compare/@carbon/ibm-cloud-cognitive-security@0.1.4...@carbon/ibm-cloud-cognitive-security@0.2.0) (2020-11-24)
+
 
 ### Features
 
-- add cdai apikey component
-  ([#223](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/security/issues/223))
-  ([4c09f15](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/security/commit/4c09f15c3c62c3965d98c91b9695fa7a1cba8f0b))
+* add cdai apikey component ([#223](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/security/issues/223)) ([4c09f15](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/security/commit/4c09f15c3c62c3965d98c91b9695fa7a1cba8f0b))
+
+
+
+
 
 # Change Log
 

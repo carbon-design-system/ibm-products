@@ -1,7 +1,7 @@
 {
   "name": "babel-preset-ibm-cloud-cognitive",
   "private": true,
-  "version": "0.0.3",
+  "version": "0.1.0",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": "https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/babel-preset-ibm-cloud-cognitive",
@@ -13,11 +13,11 @@
     "carbon for cloud & cognitive"
   ],
   "dependencies": {
-    "@babel/core": "^7.10.2",
-    "@babel/plugin-proposal-class-properties": "^7.10.1",
+    "@babel/core": "^7.12.9",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/plugin-transform-runtime": "^7.12.1",
-    "@babel/preset-env": "^7.10.2",
-    "@babel/preset-react": "^7.10.1",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/preset-react": "^7.12.7",
     "browserslist-config-carbon": "^10.4.0"
   }
 }

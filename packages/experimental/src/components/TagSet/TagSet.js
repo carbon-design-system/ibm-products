@@ -91,7 +91,9 @@ export const TagSet = ({
     if (showAllModalOpen) {
       const newFilteredAllTags = [];
       children.forEach((child) => {
-        const dataSearch = child.props['data-search']?.toLocaleLowerCase();
+        const dataSearch = (
+          child.props['data-search'] || ''
+        ).toLocaleLowerCase();
         const contentsAsString = child.props.children
           .toString()
           .toLocaleLowerCase();
@@ -179,9 +181,11 @@ export const TagSet = ({
   };
 
   const handleClickOutsideCheck = (ev) => {
-    const tooltipEl = overflowTagContent.current?.parentElement?.parentElement;
+    const tooltipEl =
+      overflowTagContent.current &&
+      overflowTagContent.current.parentElement.parentElement;
     if (
-      tooltipEl !== undefined &&
+      tooltipEl &&
       (tooltipEl === ev.target || tooltipEl.contains(ev.target))
     ) {
       // inside click

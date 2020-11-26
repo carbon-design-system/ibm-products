@@ -1,63 +1,70 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [0.9.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/compare/@carbon/ibm-cloud-cognitive-experimental@0.9.4...@carbon/ibm-cloud-cognitive-experimental@0.9.5) (2020-11-26)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+## [0.9.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/compare/@carbon/ibm-cloud-cognitive-experimental@0.9.3...@carbon/ibm-cloud-cognitive-experimental@0.9.4) (2020-11-26)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+## [0.9.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/compare/@carbon/ibm-cloud-cognitive-experimental@0.9.2...@carbon/ibm-cloud-cognitive-experimental@0.9.3) (2020-11-26)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+## [0.9.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/compare/@carbon/ibm-cloud-cognitive-experimental@0.9.1...@carbon/ibm-cloud-cognitive-experimental@0.9.2) (2020-11-26)
+
+### Bug Fixes
+
+- docgen optional chaining issue TagSet and ModifiedTabs
+  ([#237](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/issues/237))
+  ([93c6e53](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/commit/93c6e5347670f6157e3caba62099af6109fb1f2c))
 
 ## [0.9.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/compare/@carbon/ibm-cloud-cognitive-experimental@0.9.0...@carbon/ibm-cloud-cognitive-experimental@0.9.1) (2020-11-26)
 
-
 ### Bug Fixes
 
-* small stories update to RemovalModal ([#230](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/issues/230)) ([2e3e564](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/commit/2e3e564b43efbf75bacabf1db16a700062fd2d82))
-
-
-
-
+- small stories update to RemovalModal
+  ([#230](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/issues/230))
+  ([2e3e564](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/commit/2e3e564b43efbf75bacabf1db16a700062fd2d82))
 
 # [0.9.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/compare/@carbon/ibm-cloud-cognitive-experimental@0.8.0...@carbon/ibm-cloud-cognitive-experimental@0.9.0) (2020-11-25)
 
-
 ### Features
 
-* improve tearsheet documentation and stories ([#235](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/issues/235)) ([2daff03](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/commit/2daff03ae5cf427b8a0bce2d465d7879b519eecf))
-
-
-
-
+- improve tearsheet documentation and stories
+  ([#235](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/issues/235))
+  ([2daff03](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/commit/2daff03ae5cf427b8a0bce2d465d7879b519eecf))
 
 # [0.8.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/compare/@carbon/ibm-cloud-cognitive-experimental@0.7.1...@carbon/ibm-cloud-cognitive-experimental@0.8.0) (2020-11-24)
 
-
 ### Features
 
-* make tearsheets stackable ([#229](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/issues/229)) ([23c26b2](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/commit/23c26b2db35cff9f20732e3e5f327743bdcbdfb7))
-
-
-
-
+- make tearsheets stackable
+  ([#229](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/issues/229))
+  ([23c26b2](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/commit/23c26b2db35cff9f20732e3e5f327743bdcbdfb7))
 
 ## [0.7.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/compare/@carbon/ibm-cloud-cognitive-experimental@0.7.0...@carbon/ibm-cloud-cognitive-experimental@0.7.1) (2020-11-24)
 
-
 ### Bug Fixes
 
-* update import and remove modal stories ([#221](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/issues/221)) ([c08d1cf](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/commit/c08d1cf44a4b3c726b304061a3ac6e1b6b4035e6))
-
-
-
-
+- update import and remove modal stories
+  ([#221](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/issues/221))
+  ([c08d1cf](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/commit/c08d1cf44a4b3c726b304061a3ac6e1b6b4035e6))
 
 # [0.7.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/compare/@carbon/ibm-cloud-cognitive-experimental@0.6.0...@carbon/ibm-cloud-cognitive-experimental@0.7.0) (2020-11-23)
 
-
 ### Features
 
-* add cdai apikey component ([#223](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/issues/223)) ([4c09f15](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/commit/4c09f15c3c62c3965d98c91b9695fa7a1cba8f0b))
-* add show all to tag-set ([#222](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/issues/222)) ([762060a](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/commit/762060acf708ea6d19d9f48d6520d05ef3e43836))
-
-
-
-
+- add cdai apikey component
+  ([#223](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/issues/223))
+  ([4c09f15](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/commit/4c09f15c3c62c3965d98c91b9695fa7a1cba8f0b))
+- add show all to tag-set
+  ([#222](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/issues/222))
+  ([762060a](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/commit/762060acf708ea6d19d9f48d6520d05ef3e43836))
 
 # Change Log
 

@@ -20,7 +20,7 @@ import styles from './_storybook-styles.scss';
 import mdx from './TearsheetStacking.mdx';
 
 export default {
-  title: 'Experimental/TearsheetStackingNarrow',
+  title: 'Experimental/Tearsheets/TearsheetStackingNarrow',
   component: TearsheetNarrow,
   parameters: { controls: { expanded: true }, styles, docs: { page: mdx } },
   argTypes: {

@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/core/compare/@carbon/ibm-cloud-cognitive-core@0.4.0...@carbon/ibm-cloud-cognitive-core@0.4.1) (2020-11-26)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
+
+# [0.4.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/core/compare/@carbon/ibm-cloud-cognitive-core@0.3.0...@carbon/ibm-cloud-cognitive-core@0.4.0) (2020-11-26)
+
+### Features
+
+- add cdai apikey component
+  ([#223](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/core/issues/223))
+  ([4c09f15](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/core/commit/4c09f15c3c62c3965d98c91b9695fa7a1cba8f0b))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.3.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/core/compare/@carbon/ibm-cloud-cognitive-core@0.2.0...@carbon/ibm-cloud-cognitive-core@0.3.0) (2020-11-19)
 
 ### Features

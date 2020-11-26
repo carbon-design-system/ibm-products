@@ -3,6 +3,54 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.8](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.1.7...@carbon/ibm-cloud-cognitive@0.1.8) (2020-11-26)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.1.7](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.1.6...@carbon/ibm-cloud-cognitive@0.1.7) (2020-11-26)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.1.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.1.5...@carbon/ibm-cloud-cognitive@0.1.6) (2020-11-26)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.1.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.1.4...@carbon/ibm-cloud-cognitive@0.1.5) (2020-11-26)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.1.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.1.3...@carbon/ibm-cloud-cognitive@0.1.4) (2020-11-25)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.1.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.1.2...@carbon/ibm-cloud-cognitive@0.1.3) (2020-11-24)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
 ## [0.1.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.1.1...@carbon/ibm-cloud-cognitive@0.1.2) (2020-11-24)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

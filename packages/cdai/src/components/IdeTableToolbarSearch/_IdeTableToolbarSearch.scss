@@ -6,8 +6,9 @@
 //
 @import '../../globals/scss/carbon-settings';
 @import '../../globals/scss/variables';
-@import 'carbon-components/scss/components/toolbar/toolbar';
-@import 'carbon-components/scss/components/data-table/data-table';
+
+@import '~carbon-components/scss/components/toolbar/toolbar';
+@import '~carbon-components/scss/components/data-table/data-table';
 
 .#{$ide-prefix}-table-toolbar-search {
   transition: flex $duration--moderate-02 $carbon--standard-easing,

@@ -6,8 +6,9 @@
 //
 @import '../../globals/scss/carbon-settings';
 @import '../../globals/scss/variables';
-@import 'carbon-components/scss/components/tabs/tabs';
-@import 'carbon-components/scss/components/button/button';
+
+@import '~carbon-components/scss/components/tabs/tabs';
+@import '~carbon-components/scss/components/button/button';
 
 $ide-home-header-height: 25rem;
 $ide-home-header-collapsed-height: 3rem;

@@ -13,20 +13,16 @@ import { expPrefix } from '../../global/js/settings';
 
 import { Button } from 'carbon-components-react';
 
-import { Tearsheet } from './Tearsheet';
 import { TearsheetNarrow } from './TearsheetNarrow';
 
 import styles from './_storybook-styles.scss';
 
-import mdx from './Tearsheet.mdx';
+import mdx from './TearsheetStacking.mdx';
 
 export default {
-  title: 'Experimental/Tearsheets/TearsheetNarrow',
+  title: 'Experimental/Tearsheets/TearsheetStackingNarrow',
   component: TearsheetNarrow,
-  subcomponents: {
-    Tearsheet,
-  },
-  parameters: { styles, docs: { page: mdx } },
+  parameters: { controls: { expanded: true }, styles, docs: { page: mdx } },
   argTypes: {
     buttonSet: {
       control: {
@@ -58,7 +54,7 @@ export default {
     preventCloseOnClickOutside: {},
     title: {
       control: {
-        type: 'text',
+        disable: true,
       },
     },
     buttons: {
@@ -189,45 +185,70 @@ const description = (
 
 const label = 'The label of the tearsheet';
 
-const mainContent = (
-  <div className="tearsheet-stories__dummy-content-block">Main content</div>
-);
+// Stories
 
-const title = 'Title of the tearsheet';
-
-// Template.
 // eslint-disable-next-line react/prop-types
-const Template = ({ buttonSet, ...args }) => {
-  const [open, setOpen] = useState(false);
+export const StackedTearsheets = ({ buttonSet, ...args }) => {
+  const [open1, setopen1] = useState(false);
+  const [open2, setopen2] = useState(false);
+  const [open3, setopen3] = useState(false);
 
   return (
     <>
       <style>{`.${expPrefix}-tearsheet { opacity: 0 }`};</style>
-      <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
+      <div
+        style={{
+          display: 'flex',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          zIndex: 10000,
+        }}>
+        <Button onClick={() => setopen1(!open1)}>Toggle #1</Button>
+        <Button onClick={() => setopen2(!open2)}>Toggle #2</Button>
+        <Button onClick={() => setopen3(!open3)}>Toggle #3</Button>
+      </div>
       <TearsheetNarrow
         className={className}
         {...args}
+        title="Tearsheet #1"
         buttons={buttonSets[buttonSet]}
-        open={open}
-        onClose={() => setOpen(false)}>
-        {mainContent}
+        open={open1}
+        onClose={() => setopen1(false)}>
+        <div className="tearsheet-stories__dummy-content-block">
+          Main content 1
+        </div>
+      </TearsheetNarrow>
+      <TearsheetNarrow
+        className={className}
+        {...args}
+        title="Tearsheet #2"
+        buttons={buttonSets[buttonSet]}
+        open={open2}
+        onClose={() => setopen2(false)}>
+        <div className="tearsheet-stories__dummy-content-block">
+          Main content 2
+        </div>
+      </TearsheetNarrow>
+      <TearsheetNarrow
+        className={className}
+        {...args}
+        title="Tearsheet #3"
+        buttons={buttonSets[buttonSet]}
+        open={open3}
+        onClose={() => setopen3(false)}>
+        <div className="tearsheet-stories__dummy-content-block">
+          Main content 3
+        </div>
       </TearsheetNarrow>
     </>
   );
 };
-
-// Stories
-export const AllAttributesSet = Template.bind({});
-AllAttributesSet.args = {
+StackedTearsheets.args = {
   closeIconDescription,
   description,
-  hasCloseIcon: true,
-  height: 'normal',
+  height: 'lower',
   label,
   preventCloseOnClickOutside: true,
-  title,
   buttonSet: 0,
 };
-
-export const NoAttributesSet = Template.bind({});
-NoAttributesSet.args = {};

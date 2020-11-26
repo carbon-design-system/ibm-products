@@ -21,7 +21,7 @@ import styles from './_storybook-styles.scss';
 import mdx from './Tearsheet.mdx';
 
 export default {
-  title: 'Experimental/Tearsheet',
+  title: 'Experimental/Tearsheets/Tearsheet',
   component: Tearsheet,
   subcomponents: {
     TearsheetNarrow,

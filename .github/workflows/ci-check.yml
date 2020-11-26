@@ -1,4 +1,4 @@
-name: Continuous Integration check
+name: Continuous integration check
 
 on:
   pull_request:

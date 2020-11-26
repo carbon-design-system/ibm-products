@@ -1,1 +1,2 @@
 # https://github.com/probot/stale#usage
+staleLabel: 'status: wontfix'

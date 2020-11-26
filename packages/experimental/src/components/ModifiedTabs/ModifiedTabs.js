@@ -24,7 +24,9 @@ export const ModifiedTabs = ({
       setTimeout(() => {
         // set focus to the new tab
         const tab = tabsRef.current.getTabAt(tabs.length);
-        tab.tabAnchor.focus();
+        if (tab & tab.tabAnchor) {
+          tab.tabAnchor.focus();
+        }
       });
     }
   };

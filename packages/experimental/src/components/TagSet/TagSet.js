@@ -185,7 +185,7 @@ export const TagSet = ({
       overflowTagContent.current &&
       overflowTagContent.current.parentElement.parentElement;
     if (
-      tooltipEl !== undefined &&
+      tooltipEl &&
       (tooltipEl === ev.target || tooltipEl.contains(ev.target))
     ) {
       // inside click

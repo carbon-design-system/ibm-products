@@ -25,7 +25,7 @@ export default {
 const resource = 'bx1001';
 
 const defaultProps = {
-  body: `Deleting ${resource} cannot be undone.`,
+  body: `Deleting ${resource} will permanently delete the configuration. This action cannot be undone.`,
   className: 'remove-modal-test',
   header: 'Confirm delete',
   iconDescription: 'close',
@@ -68,6 +68,10 @@ WithStateManager.args = {
 export const WithoutConfirmation = Template.bind({});
 WithoutConfirmation.args = {
   ...defaultProps,
+  body: `Removing ${resource} will permanently remove the configuration. This action cannot be undone.`,
+  header: 'Confirm removal',
+  primaryButtonText: 'Remove',
+  subheader: `Remove ${resource}`,
 };
 
 export const WithConfirmation = Template.bind({});

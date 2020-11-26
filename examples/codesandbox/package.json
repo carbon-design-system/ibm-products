@@ -1,0 +1,13 @@
+{
+  "name": "codesandbox",
+  "main": "src/index.js",
+  "dependencies": {
+    "@carbon/ibm-cloud-cognitive": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-scripts": "latest"
+  },
+  "scripts": {
+    "start": "react-scripts start"
+  }
+}

@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/compare/@carbon/ibm-cloud-cognitive-experimental@0.9.2...@carbon/ibm-cloud-cognitive-experimental@0.9.3) (2020-11-26)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
+## [0.9.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/compare/@carbon/ibm-cloud-cognitive-experimental@0.9.1...@carbon/ibm-cloud-cognitive-experimental@0.9.2) (2020-11-26)
+
+
+### Bug Fixes
+
+* docgen optional chaining issue TagSet and ModifiedTabs ([#237](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/issues/237)) ([93c6e53](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/commit/93c6e5347670f6157e3caba62099af6109fb1f2c))
+
+
+
+
+
+## [0.9.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/compare/@carbon/ibm-cloud-cognitive-experimental@0.9.0...@carbon/ibm-cloud-cognitive-experimental@0.9.1) (2020-11-26)
+
+
+### Bug Fixes
+
+* small stories update to RemovalModal ([#230](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/issues/230)) ([2e3e564](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/commit/2e3e564b43efbf75bacabf1db16a700062fd2d82))
+
+
+
+
+
 # [0.9.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/compare/@carbon/ibm-cloud-cognitive-experimental@0.8.0...@carbon/ibm-cloud-cognitive-experimental@0.9.0) (2020-11-25)
 
 

@@ -20,7 +20,7 @@ import styles from './_storybook-styles.scss';
 import mdx from './TearsheetStacking.mdx';
 
 export default {
-  title: 'Experimental/TearsheetStacking',
+  title: 'Experimental/Tearsheets/TearsheetStacking',
   component: Tearsheet,
   parameters: { controls: { expanded: true }, styles, docs: { page: mdx } },
   argTypes: {

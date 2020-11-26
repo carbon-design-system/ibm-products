@@ -14,7 +14,7 @@ import styles from './_storybook-styles.scss';
 import mdx from './TearsheetShell.mdx';
 
 export default {
-  title: 'Experimental/TearsheetShell',
+  title: 'Experimental/Tearsheets/TearsheetShell',
   component: TearsheetShell,
   parameters: { controls: { expanded: true }, styles, docs: { page: mdx } },
 };

@@ -17,7 +17,7 @@
 @import 'carbon-components/scss/components/button/button';
 @import 'carbon-components/scss/components/overflow-menu/overflow-menu';
 
-@include exports(combo-button) {
+@include exports($name: combo-button) {
   /// Sets the prefix for all IBM Security-specific classes.
   /// @access private
   /// @type String

@@ -7,7 +7,11 @@
   "bin": {
     "carbon-cli": "./bin/carbon-cli.js"
   },
-  "repository": "https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/cli",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/ibm-cloud-cognitive.git",
+    "directory": "packages/cli"
+  },
   "bugs": "https://github.com/carbon-design-system/ibm-cloud-cognitive/issues",
   "keywords": [
     "carbon",

@@ -4,7 +4,11 @@
   "version": "0.2.0",
   "license": "Apache-2.0",
   "main": "index.js",
-  "repository": "https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/jest-config",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/ibm-cloud-cognitive.git",
+    "directory": "packages/jest-config"
+  },
   "bugs": "https://github.com/carbon-design-system/ibm-cloud-cognitive/issues",
   "keywords": [
     "carbon",

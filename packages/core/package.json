@@ -1,10 +1,14 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-core",
   "private": true,
-  "main": "scripts/build.js",
   "version": "0.4.1",
   "license": "Apache-2.0",
-  "repository": "https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/core",
+  "main": "scripts/build.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/ibm-cloud-cognitive.git",
+    "directory": "packages/core"
+  },
   "bugs": "https://github.com/carbon-design-system/ibm-cloud-cognitive/issues",
   "keywords": [
     "carbon",

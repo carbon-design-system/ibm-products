@@ -227,6 +227,28 @@ storiesOf(`${getComponentLabel('IdeImporting')}/Uploading`, module)
       </StoryWrapper>
     );
   })
+  .add('Hide the file drop area after uploading a single file', () => {
+    const props = {
+      enableUrlInput: false,
+      multiple: false,
+      enableUpload: false,
+      hideImport: true,
+      validExtensions: ['png'],
+      onFileAdded: async () => {
+        await sleep(Math.random() * 3);
+        attempt++;
+        if (attempt === 2) {
+          throw new Error('fail');
+        }
+      },
+    };
+
+    return (
+      <StoryWrapper>
+        <IdeImporting {...props} />
+      </StoryWrapper>
+    );
+  })
   .add('Import multiple files by URL', () => {
     const props = {
       enableFileDrop: false,

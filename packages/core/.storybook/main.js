@@ -16,23 +16,6 @@ module.exports = {
     '@storybook/addon-controls',
     '@storybook/addon-knobs',
     '@storybook/addon-storysource',
-    {
-      name: '@storybook/preset-scss',
-      options: {
-        sassLoaderOptions: {
-          sassOptions: {
-            includePaths: [
-              resolve(__dirname, '..', '..', '..', 'node_modules'),
-            ],
-          },
-        },
-
-        // https://webpack.js.org/loaders/style-loader/#lazystyletag
-        styleLoaderOptions: {
-          injectType: 'lazyStyleTag',
-        },
-      },
-    },
     '@carbon/storybook-addon-theme/register',
   ],
 
@@ -47,9 +30,28 @@ module.exports = {
           {
             test: /\.stories\.js$/,
             loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-react'],
-            },
+            options: require('babel-preset-ibm-cloud-cognitive')(),
+          },
+          {
+            test: /\.scss$/,
+            use: [
+              {
+                loader: 'style-loader',
+                options: {
+                  // https://webpack.js.org/loaders/style-loader/#lazystyletag
+                  injectType: 'lazyStyleTag',
+                },
+              },
+              'css-loader',
+              {
+                loader: 'fast-sass-loader',
+                options: {
+                  includePaths: [
+                    resolve(__dirname, '..', '..', '..', 'node_modules'),
+                  ],
+                },
+              },
+            ],
           },
         ],
       },

@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.9.7...@carbon/ibm-cloud-cognitive-experimental@0.10.0) (2020-12-01)
+
+
+### Features
+
+* add automated tests for tearsheet component ([#249](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/249)) ([6510288](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6510288adc51d3983d85904406184f5e0aa7db78))
+
+
+
+
+
+## [0.9.7](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.9.6...@carbon/ibm-cloud-cognitive-experimental@0.9.7) (2020-12-01)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
 ## [0.9.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.9.5...@carbon/ibm-cloud-cognitive-experimental@0.9.6) (2020-11-30)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental

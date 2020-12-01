@@ -2,7 +2,7 @@
 name: 'Bug Report 🐛'
 about: Something isn't working as expected? Here is the right place to report.
 title: ''
-labels: 'type: bug 🐛'
+labels: 'type: bug'
 assignees: ''
 ---
 
@@ -36,6 +36,10 @@ assignees: ''
 2. Step two
 3. Step three
 4. etc.
+
+> Please create a reduced test case in CodeSandbox
+>
+> https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/master/examples/codesandbox
 
 ## Additional information
 

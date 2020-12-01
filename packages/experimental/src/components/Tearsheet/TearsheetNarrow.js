@@ -75,7 +75,8 @@ TearsheetNarrow.propTypes = {
    */
   buttons: PropTypes.node,
   /**
-   * Specifies the content of the Tearsheet body. Optional.
+   * Specifies the content of the Tearsheet body.
+   * Optional.
    */
   children: PropTypes.node,
   /**
@@ -84,7 +85,8 @@ TearsheetNarrow.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * The description for the close icon. Optional.
+   * The description for the close icon.
+   * Optional.
    */
   closeIconDescription: PropTypes.string,
   /**
@@ -93,7 +95,8 @@ TearsheetNarrow.propTypes = {
    */
   description: PropTypes.node,
   /**
-   * Specifies if the Tearsheet has a close icon. Optional.
+   * Specifies if the Tearsheet has a close icon.
+   * Optional.
    */
   hasCloseIcon: PropTypes.bool,
   /**
@@ -112,11 +115,13 @@ TearsheetNarrow.propTypes = {
    */
   onClose: PropTypes.func,
   /**
-   * Specifies whether the Tearsheet is currently open or not.
+   * Specifies whether the Tearsheet is currently open or
+   * not.
    */
   open: PropTypes.bool,
   /**
    * Prevents the Tearsheet from closing automatically if the user clicks outside of it.
+   * Optional.
    */
   preventCloseOnClickOutside: PropTypes.bool,
   /**

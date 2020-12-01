@@ -6,9 +6,10 @@
 //
 @import '../../globals/scss/carbon-settings';
 @import '../../globals/scss/variables';
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/file-uploader/file-uploader';
-@import 'carbon-components/scss/components/text-input/text-input';
+
+@import '~carbon-components/scss/components/button/button';
+@import '~carbon-components/scss/components/file-uploader/file-uploader';
+@import '~carbon-components/scss/components/text-input/text-input';
 
 .#{$ide-prefix}-import-container {
   .#{$prefix}--file__drop-container {

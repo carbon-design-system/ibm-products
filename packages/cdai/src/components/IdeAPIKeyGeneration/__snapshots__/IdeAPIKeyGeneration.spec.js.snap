@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IdeAPIKeyGeneration unit tests IdeAPIKeyGeneration tolerates no props being provided, and renders with defaults 1`] = `
+Array [
+  <Modal
+    aria-label="Generate API key"
+    className="ide-api-key-generation "
+    data-ui-id="IdeAPIKeyGeneration"
+    hasScrollingContent={false}
+    iconDescription="Close"
+    modalAriaLabel="Generate API key"
+    modalHeading="Generate API key"
+    modalLabel=""
+    onKeyDown={[Function]}
+    onRequestClose={[Function]}
+    onRequestSubmit={[Function]}
+    open={false}
+    passiveModal={false}
+    preventCloseOnClickOutside={false}
+    primaryButtonDisabled={true}
+    primaryButtonText="Copy"
+    secondaryButtonText="Close"
+    selectorPrimaryFocus="[data-modal-primary-focus]"
+  >
+    <div
+      className="ide-api-key-generation--content IdeAPIKeyGeneration-APIKeyGen ide-api-key-generation-api-key--content"
+      data-ui-id="IdeAPIKeyGeneration-APIKeyGen"
+    >
+      <React.Fragment>
+        <div
+          className="ide-api-key-generation-api-key"
+        >
+          <ForwardRef(TextInput)
+            data-ui-id="IdeAPIKeyGeneration-APIKey"
+            disabled={false}
+            helperText=""
+            id="IdeAPIKeyGeneration-APIKey"
+            inline={false}
+            invalid={false}
+            invalidText=""
+            labelText="API key"
+            light={true}
+            onChange={[Function]}
+            onClick={[Function]}
+            readOnly={true}
+            type="text"
+            warn={false}
+            warnText=""
+          />
+        </div>
+      </React.Fragment>
+    </div>
+  </Modal>,
+]
+`;

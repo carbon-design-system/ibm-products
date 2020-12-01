@@ -48,8 +48,19 @@ e.g. sketch files, icons, images, prototypes
 - [ ] Tests (written in React Test Library) to cover behavior from the
       documented in the components mdx file.
 
+### New production dependencies
+
+- [ ] Verify the dependency has previously been
+      [pedigree reviewed](https://pedigree-service.wdc1a.cirrus.ibm.com)
+- [ ] Verify the dependency
+      [doesn't contain any vulnerabilities](https://snyk.io/vuln)
+- [ ] Verify the dependency [bundle size](https://bundlephobia.com) is
+      acceptable
+- [ ] Verify the dependency is [actively maintained](https://www.npmtrends.com)
+
 ### Review and promote
 
+-
 - [ ] Design review
 - [ ] Add design review issues addressed, issues raised or discounted.
 - [ ] Engineering review - Submit PR to promote component to production package

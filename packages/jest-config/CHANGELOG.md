@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/jest-config@0.2.0...jest-config@0.2.1) (2020-11-30)
+
+**Note:** Version bump only for package jest-config
+
+
+
+
+
 # [0.2.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/jest-config/compare/jest-config@0.1.1...jest-config@0.2.0) (2020-11-26)
 
 

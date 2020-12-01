@@ -79,6 +79,26 @@ describe('IdeImporting unit tests', () => {
     wrapper.expectPropCalled('onFileAdded');
   });
 
+  it('should hide the file drop area after uploading a single file', () => {
+    const mockHandleFileAdded = jest.fn();
+    const props = {
+      multiple: false,
+      validExtensions: ['png'],
+      hideImport: true,
+      onFileAdded: mockHandleFileAdded,
+    };
+    const wrapper = new IdeImportingWrapper(props);
+    const errorMessage = new Error(
+      'FileUploaderDropContainer not found when using strictFind()'
+    );
+    wrapper.simulateDropFiles([{ name: 'test-file.png' }]);
+    wrapper.expectPropCalled('onFileAdded');
+    expect(() => {
+      wrapper.strictFind('FileUploaderDropContainer');
+    }).toThrow(errorMessage);
+    wrapper.unmount();
+  });
+
   it('should disable the file drop as soon as there is text in the URL field (single)', () => {
     const mockHandleFileAdded = jest.fn();
     const props = {

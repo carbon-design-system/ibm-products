@@ -17,6 +17,8 @@ const {
   name,
 } = ExampleComponent;
 
+jest.setTimeout(15000);
+
 describe(name, () => {
   test('should have no accessibility violations', async () => {
     const { container } = render(<ExampleComponent />);

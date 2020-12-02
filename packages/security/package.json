@@ -1,11 +1,15 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-security",
   "description": "Carbon for Cloud & Cognitive IBM Security UI components",
-  "version": "0.1.4",
+  "version": "0.2.5",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/security",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/ibm-cloud-cognitive.git",
+    "directory": "packages/security"
+  },
   "bugs": "https://github.com/carbon-design-system/ibm-cloud-cognitive/issues",
   "files": [
     "css",
@@ -34,7 +38,7 @@
     "@carbon/ibm-security": "^1.26.0"
   },
   "devDependencies": {
-    "@carbon/ibm-cloud-cognitive-core": "^0.3.0",
-    "@carbon/rollup-config": "^0.1.1"
+    "@carbon/ibm-cloud-cognitive-core": "^0.4.4",
+    "@carbon/rollup-config": "^0.2.1"
   }
 }

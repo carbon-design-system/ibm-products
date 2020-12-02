@@ -15,6 +15,7 @@ $css--reset: false;
 @include carbon--type-reset;
 
 @import '../generated/feature-flags/feature-flags';
+@import '@carbon/themes/scss/themes';
 
 @if map-get($feature-flags, 'enable-css-custom-properties') {
   :root {

@@ -6,7 +6,6 @@
 //
 
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 import { Button } from 'carbon-components-react';
 import { ImportModal } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
@@ -31,13 +30,13 @@ const defaultProps = {
   fileDropHeader: 'Add files using drag and drop',
   fileDropLabel: 'Drag and drop files here or click to upload',
   inputButtonText: 'Add file',
-  inputHeader: 'Add a file by specifcying a URL',
+  inputHeader: 'Add a file by specifying a URL',
   inputPlaceholder: 'URL',
   invalidFileTypeErrorBody: 'Invalid file type.',
   maxFileSize: 500000,
   maxFileSizeErrorBody: '500kb max file size. Select a new file and try again.',
   modalBody:
-    'you can specify a file to import by either dragging it into the drag and drop area or by specifying a url. (maximum file size of 500kb; .jpg and .png file extensions only.)',
+    'You can specify a file to import by either dragging it into the drag and drop area or by specifying a URL. (Maximum file size of 500KB; .jpg and .png file extensions only.)',
   onRequestClose: () => console.log('closed'),
   onRequestSubmit: (file) => console.log('file contents', file),
   open: true,
@@ -51,46 +50,26 @@ const Template = (args) => {
   return <ImportModal {...args} />;
 };
 
-/**
- * Simple state manager for modals.
- */
-/* eslint-disable react/prop-types */
-const ModalStateManager = ({
-  renderLauncher: LauncherContent,
-  children: ModalContent,
-}) => {
+const TemplateWithState = (args) => {
   const [open, setOpen] = useState(false);
   return (
     <>
-      {!ModalContent || typeof document === 'undefined'
-        ? null
-        : ReactDOM.createPortal(
-            <ModalContent open={open} setOpen={setOpen} />,
-            document.body
-          )}
-      {LauncherContent && <LauncherContent open={open} setOpen={setOpen} />}
+      <ImportModal
+        {...args}
+        open={open}
+        onRequestClose={() => setOpen(false)}
+      />
+      <Button onClick={() => setOpen(true)}>Launch modal</Button>
     </>
   );
 };
 
-export const WithStateManager = () => {
-  return (
-    <ModalStateManager
-      renderLauncher={({ setOpen }) => (
-        <Button onClick={() => setOpen(true)}>Launch modal</Button>
-      )}>
-      {({ open, setOpen }) => (
-        <ImportModal
-          {...defaultProps}
-          open={open}
-          onRequestClose={() => setOpen(false)}
-        />
-      )}
-    </ModalStateManager>
-  );
+export const WithStateManager = TemplateWithState.bind({});
+WithStateManager.args = {
+  ...defaultProps,
 };
 
-export const Minimal = Template.bind({});
-Minimal.args = {
+export const Standard = Template.bind({});
+Standard.args = {
   ...defaultProps,
 };

@@ -1,9 +1,13 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-common-services",
   "private": true,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "Apache-2.0",
-  "repository": "https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/common-services",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/ibm-cloud-cognitive.git",
+    "directory": "packages/common-services"
+  },
   "bugs": "https://github.com/carbon-design-system/ibm-cloud-cognitive/issues",
   "keywords": [
     "carbon",

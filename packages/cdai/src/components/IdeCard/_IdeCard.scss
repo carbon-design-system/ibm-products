@@ -7,9 +7,10 @@
 
 @import '../../globals/scss/carbon-settings';
 @import '../../globals/scss/variables';
-@import 'carbon-components/scss/components/link/link';
-@import 'carbon-components/scss/components/tile/tile';
-@import 'carbon-components/scss/components/tooltip/tooltip';
+
+@import '~carbon-components/scss/components/link/link';
+@import '~carbon-components/scss/components/tile/tile';
+@import '~carbon-components/scss/components/tooltip/tooltip';
 
 $ide-card-size: carbon--mini-units(30);
 

@@ -6,9 +6,10 @@
 //
 @import '../../globals/scss/carbon-settings';
 @import '../../globals/scss/variables';
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/file-uploader/file-uploader';
-@import 'carbon-components/scss/components/text-input/text-input';
+
+@import '~carbon-components/scss/components/button/button';
+@import '~carbon-components/scss/components/file-uploader/file-uploader';
+@import '~carbon-components/scss/components/text-input/text-input';
 
 .#{$ide-prefix}-import-container {
   .#{$prefix}--file__drop-container {
@@ -25,6 +26,18 @@
       max-width: 100%;
     }
   }
+
+  .#{$ide-prefix}-hide-import {
+    margin-top: 0;
+  }
+
+  .#{$ide-prefix}--file-header-label {
+    margin-bottom: 0.5rem;
+    @include carbon--type-style('label-01');
+
+    color: $text-02;
+  }
+
   .#{$ide-prefix}-file-by-url {
     margin-top: $spacing-07;
   }

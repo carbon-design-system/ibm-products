@@ -40,6 +40,29 @@ export const BreadcrumbWithOverflow = ({
   const sizingContainerRef = useRef(null);
   const displayedArea = useRef(null);
 
+  // eslint-disable-next-line react/prop-types
+  const BreadcrumbOverflowMenu = ({ overflowItems }) => {
+    return (
+      <BreadcrumbItem key="breadcrumb-overflow">
+        <OverflowMenu
+          ariaLabel={null}
+          renderIcon={OverflowMenuHorizontal32}
+          className={`${blockClass}--overflow-menu`}>
+          {
+            // eslint-disable-next-line react/prop-types
+            overflowItems.map((item, index) => (
+              <OverflowMenuItem
+                key={`${item.props.href}#${index}`}
+                href={item.props.href}
+                itemText={item.props.children}
+              />
+            ))
+          }
+        </OverflowMenu>
+      </BreadcrumbItem>
+    );
+  };
+
   useEffect(() => {
     // updates displayedBreadcrumbItems and overflowBreadcrumbItems based on displayCount and children
     const newDisplayedBreadcrumbItems = [];
@@ -58,42 +81,39 @@ export const BreadcrumbWithOverflow = ({
       newOverflowBreadcrumbItems.push(React.cloneElement(child));
     }
 
-    for (let index = 0; index < displayCount; index++) {
-      if (index === 1 && displayCount < children.length) {
-        // we only want the last children.length - displayCount
-        index += children.length - displayCount + 1;
-      }
-
-      const child = children[index];
+    if (displayCount === 0) {
       newDisplayedBreadcrumbItems.push(
-        React.cloneElement(child, {
-          className: cx(
-            child.props.className,
-            `${blockClass}--displayed-breadcrumb`
-          ),
-          key: `displayed-breadcrumb-${child.key}`,
-        })
+        <BreadcrumbOverflowMenu overflowItems={newOverflowBreadcrumbItems} />
       );
-      if (index === 0 && displayCount < children.length) {
-        // add overflow menu after first item
+    } else {
+      let displayed = 0;
+      for (let index = 0; displayed < displayCount; index++) {
+        displayed++;
+        if (index === 1 && displayCount < children.length) {
+          // we only want the last children.length - displayCount
+          index += children.length - displayCount;
+        }
 
-        // TODO: add a proper key
+        const child = children[index];
         newDisplayedBreadcrumbItems.push(
-          <BreadcrumbItem key="breadcrumb-overflow">
-            <OverflowMenu
-              ariaLabel={null}
-              renderIcon={OverflowMenuHorizontal32}
-              className={`${blockClass}--overflow-menu`}>
-              {newOverflowBreadcrumbItems.map((item, index) => (
-                <OverflowMenuItem
-                  key={`${item.props.href}#${index}`}
-                  href={item.props.href}
-                  itemText={item.props.children}
-                />
-              ))}
-            </OverflowMenu>
-          </BreadcrumbItem>
+          React.cloneElement(child, {
+            className: cx(
+              child.props.className,
+              `${blockClass}--displayed-breadcrumb`
+            ),
+            key: `displayed-breadcrumb-${child.key}`,
+          })
         );
+        if (index === 0 && displayCount < children.length) {
+          // add overflow menu after first item
+
+          // TODO: add a proper key
+          newDisplayedBreadcrumbItems.push(
+            <BreadcrumbOverflowMenu
+              overflowItems={newOverflowBreadcrumbItems}
+            />
+          );
+        }
       }
     }
 
@@ -109,14 +129,25 @@ export const BreadcrumbWithOverflow = ({
       const sizingBreadcrumbItems = sizingContainerRef.current.querySelectorAll(
         `.${prefix}--breadcrumb-item`
       );
-      const overflowWidth = sizingBreadcrumbItems[0].clientWidth;
 
-      for (let i = 1; i < sizingBreadcrumbItems.length; i++) {
-        const breadcrumbItemWidth = sizingBreadcrumbItems[i].clientWidth;
+      const breadcrumbWidthsIncludingMargin = [];
+      for (let item of sizingBreadcrumbItems) {
+        const computedStyle = window
+          ? window.getComputedStyle(sizingBreadcrumbItems[0])
+          : null;
+        const marginWidths = computedStyle
+          ? parseFloat(computedStyle.marginLeft, 0) +
+            parseFloat(computedStyle.marginRight, 0)
+          : 0;
+        breadcrumbWidthsIncludingMargin.push(item.clientWidth + marginWidths);
+      }
 
+      let overflowWidth = breadcrumbWidthsIncludingMargin[0];
+
+      for (let i = 1; i < breadcrumbWidthsIncludingMargin.length; i++) {
         // add all that will fit (ignoring overflow breadcrumb for now)
-        if (spaceAvailable >= breadcrumbItemWidth) {
-          spaceAvailable -= breadcrumbItemWidth;
+        if (spaceAvailable >= breadcrumbWidthsIncludingMargin[i]) {
+          spaceAvailable -= breadcrumbWidthsIncludingMargin[i];
           willFit += 1;
         } else {
           break;
@@ -131,7 +162,7 @@ export const BreadcrumbWithOverflow = ({
           willFit -= 1; // remove one breadcrumb-item
 
           // we remove from 1 up not from end
-          spaceAvailable += sizingBreadcrumbItems[i].clientWidth;
+          spaceAvailable += breadcrumbWidthsIncludingMargin[i];
         }
       }
     }

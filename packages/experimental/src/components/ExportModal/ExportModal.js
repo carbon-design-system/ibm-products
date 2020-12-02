@@ -21,6 +21,10 @@ export const ExportModal = ({
     setName(evt.target.value);
   };
 
+  const onSubmitHandler = () => {
+    onRequestSubmit(name);
+  };
+
   const hasInvalidExtension = () => {
     if (!validExtensions || !validExtensions.length) return false;
     if (!name.includes('.')) return true;
@@ -37,7 +41,7 @@ export const ExportModal = ({
       primaryButtonText={primaryButtonText}
       secondaryButtonText={secondaryButtonText}
       modalHeading={modalHeading}
-      onRequestSubmit={onRequestSubmit}
+      onRequestSubmit={onSubmitHandler}
       onRequestClose={onRequestClose}
       className={`${expPrefix}--export-modal`}
       primaryButtonDisabled={primaryButtonDisabled}>

@@ -6,7 +6,7 @@
 //
 
 import React from 'react';
-// import { action } from '@storybook/addon-actions';
+import { action } from '@storybook/addon-actions';
 
 import { BreadcrumbWithOverflow } from '.';
 
@@ -34,18 +34,45 @@ export default {
 
 const BreadcrumbItems = [
   <BreadcrumbItem key="1">
-    <a href="/#">Breadcrumb 1</a>
+    <a
+      href="/#"
+      onClick={(ev) => {
+        ev.preventDefault();
+        action('Breadcrumb 1 click')();
+      }}>
+      Breadcrumb 1
+    </a>
   </BreadcrumbItem>,
-  <BreadcrumbItem key="2">
+  <BreadcrumbItem
+    key="2"
+    onClick={(ev) => {
+      ev.preventDefault();
+      action('Breadcrumb 2 click')();
+    }}>
     <a href="/#">Breadcrumb 2</a>
   </BreadcrumbItem>,
-  <BreadcrumbItem key="3">
+  <BreadcrumbItem
+    key="3"
+    onClick={(ev) => {
+      ev.preventDefault();
+      action('Breadcrumb 3 click')();
+    }}>
     <a href="/#">Breadcrumb 3</a>
   </BreadcrumbItem>,
-  <BreadcrumbItem key="4">
+  <BreadcrumbItem
+    key="4"
+    onClick={(ev) => {
+      ev.preventDefault();
+      action('Breadcrumb 4 click')();
+    }}>
     <a href="/#">Breadcrumb 4</a>
   </BreadcrumbItem>,
-  <BreadcrumbItem key="5">
+  <BreadcrumbItem
+    key="5"
+    onClick={(ev) => {
+      ev.preventDefault();
+      action('Breadcrumb 5 click')();
+    }}>
     <a href="/#">Breadcrumb 5</a>
   </BreadcrumbItem>,
 ];
@@ -64,9 +91,3 @@ BreadcrumbItemArray.args = {
   children: BreadcrumbItems,
   containerWidth: 500,
 };
-
-// export const ManyTags = Template.bind({});
-// ManyTags.args = {
-//   children: BreadcrumbItems,
-//   containerWidth: 500,
-// };

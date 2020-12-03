@@ -54,6 +54,7 @@ export const BreadcrumbWithOverflow = ({
               <OverflowMenuItem
                 key={`${item.props.href}#${index}`}
                 href={item.props.href}
+                onClick={item.props.onClick}
                 itemText={item.props.children}
               />
             ))

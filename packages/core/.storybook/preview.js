@@ -6,7 +6,6 @@
  */
 
 import { withInfo } from '@storybook/addon-info';
-import addons from '@storybook/addons';
 import React, { useEffect } from 'react';
 import { withCarbonTheme } from '@carbon/storybook-addon-theme/react';
 

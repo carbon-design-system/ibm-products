@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.11.0...@carbon/ibm-cloud-cognitive-experimental@0.12.0) (2020-12-03)
+
+
+### Features
+
+* Breadcrumb with overflow ([#252](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/252)) ([c9acc7a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c9acc7af3fa35fa72495e93cb30271ce5124f99f))
+
+
+
+
+
 # [0.11.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.10.2...@carbon/ibm-cloud-cognitive-experimental@0.11.0) (2020-12-03)
 
 

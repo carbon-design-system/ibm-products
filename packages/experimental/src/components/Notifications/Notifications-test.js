@@ -27,7 +27,7 @@ describe('Notifications', () => {
 
     click(
       container.querySelector(
-        `#${prefix}-notifications-do-not-disturn-toggle-component`
+        `#${prefix}-notifications-do-not-disturb-toggle-component`
       )
     );
     expect(onToggle).toBeCalled();

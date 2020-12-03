@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { expPrefix as prefix } from '../../global/js/settings';
 import { Button, Link, ToggleSmall } from 'carbon-components-react';
@@ -18,10 +18,27 @@ import {
 } from '@carbon/icons-react';
 import { timeAgo } from './utils';
 import { EmptyState } from '../EmptyState';
+import useClickOutside from './useClickOutside';
 
-const Notifications = ({ data, open, onDisableNotificationChange }) => {
+const Notifications = ({
+  data,
+  open,
+  setOpen,
+  onDoNotDisturbChange,
+  title,
+  dismissAllLabel,
+  doNotDisturbLabel,
+  todayLabel,
+  yesterdayLabel,
+  previousLabel,
+}) => {
+  const notificationPanelRef = useRef();
   const [shouldRender, setRender] = useState(open);
   const [allNotifications, setAllNotifications] = useState([]);
+
+  useClickOutside(notificationPanelRef, () => {
+    setOpen(!open);
+  });
 
   useEffect(() => {
     // Set the notifications passed to the state within this component
@@ -184,10 +201,11 @@ const Notifications = ({ data, open, onDisableNotificationChange }) => {
       <div
         className={[`${prefix}-notifications-panel-container`].join(' ')}
         style={{ animation: `${open ? 'fadeIn 250ms' : 'fadeOut 250ms'}` }}
-        onAnimationEnd={onAnimationEnd}>
+        onAnimationEnd={onAnimationEnd}
+        ref={notificationPanelRef}>
         <div className={`${prefix}-notifications-header-container`}>
           <div className={`${prefix}-notifications-header-flex`}>
-            <h6 className={`${prefix}-notifications-header`}>Notifications</h6>
+            <h1 className={`${prefix}-notifications-header`}>{title}</h1>
             <Button
               size="small"
               kind="ghost"
@@ -195,16 +213,16 @@ const Notifications = ({ data, open, onDisableNotificationChange }) => {
               onClick={() => {
                 setAllNotifications([]);
               }}>
-              Dismiss all
+              {dismissAllLabel}
             </Button>
           </div>
           <ToggleSmall
             className={`${prefix}-notifications-do-not-disturb-toggle`}
-            id={`${prefix}-notifications-do-not-disturn-toggle-component`}
-            labelA="Do not disturb"
-            labelB="Do not disturb"
-            onToggle={(event) => onDisableNotificationChange(event)}
-            aria-label="Do not disturb toggle"
+            id={`${prefix}-notifications-do-not-disturb-toggle-component`}
+            labelA={doNotDisturbLabel}
+            labelB={doNotDisturbLabel}
+            onToggle={(event) => onDoNotDisturbChange(event)}
+            aria-label={doNotDisturbLabel}
           />
         </div>
         <div
@@ -220,7 +238,7 @@ const Notifications = ({ data, open, onDisableNotificationChange }) => {
             <>
               <h6
                 className={`${prefix}-notifications-panel-time-section-label`}>
-                Today
+                {todayLabel}
               </h6>
               {withinLastDayNotifications.map((notification, index) =>
                 renderNotification('today', notification, index)
@@ -231,7 +249,7 @@ const Notifications = ({ data, open, onDisableNotificationChange }) => {
             <>
               <h6
                 className={`${prefix}-notifications-panel-time-section-label`}>
-                Yesterday
+                {yesterdayLabel}
               </h6>
               {previousDayNotifications.map((notification, index) =>
                 renderNotification('yesterday', notification, index)
@@ -242,7 +260,7 @@ const Notifications = ({ data, open, onDisableNotificationChange }) => {
             <>
               <h6
                 className={`${prefix}-notifications-panel-time-section-label`}>
-                Previous
+                {previousLabel}
               </h6>
               {previousNotifications.map((notification, index) =>
                 renderNotification('previous', notification, index)
@@ -281,13 +299,50 @@ Notifications.propTypes = {
     })
   ).isRequired,
   /**
+   * Label for Dismiss all button
+   */
+  dismissAllLabel: PropTypes.string,
+  /**
+   * Label for Do not disturb toggle
+   */
+  doNotDisturbLabel: PropTypes.string,
+  /**
    * Function that returns the current selected value of the disable notification toggle
    */
-  onDisableNotificationChange: PropTypes.func,
+  onDoNotDisturbChange: PropTypes.func,
   /**
    * Determines whether the notifications panel should render or not
    */
   open: PropTypes.bool.isRequired,
+  /**
+   * Sets the previous label text
+   */
+  previousLabel: PropTypes.string,
+  /**
+   * Sets the notifications panel open state
+   */
+  setOpen: PropTypes.func.isRequired,
+  /**
+   * Sets the title for the Notifications panel
+   */
+  title: PropTypes.string,
+  /**
+   * Sets the today label text
+   */
+  todayLabel: PropTypes.string,
+  /**
+   * Sets the yesterday label text
+   */
+  yesterdayLabel: PropTypes.string,
+};
+
+Notifications.defaultProps = {
+  doNotDisturbLabel: 'Do not disturb',
+  dismissAllLabel: 'Dismiss all',
+  previousLabel: 'Previous',
+  title: 'Notifications',
+  todayLabel: 'Today',
+  yesterdayLabel: 'Yesterday',
 };
 
 export default Notifications;

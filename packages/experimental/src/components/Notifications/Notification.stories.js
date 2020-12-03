@@ -6,15 +6,21 @@
  */
 
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 import { action } from '@storybook/addon-actions';
-import { Button } from 'carbon-components-react';
+import {
+  Header,
+  HeaderContainer,
+  HeaderName,
+  HeaderGlobalBar,
+  HeaderGlobalAction,
+} from 'carbon-components-react/lib/components/UIShell';
+import { User20, Notification20 } from '@carbon/icons-react';
+import { white } from '@carbon/colors';
+import styles from './_storybook-styles.scss';
 
 import Notifications from './Notifications';
 import mdx from './Notifications.mdx';
 import data from './Notifications_data';
-
-import styles from './_index.scss';
 
 export default {
   title: 'Experimental/Notifications',
@@ -27,62 +33,57 @@ export default {
   },
 };
 
-/**
- * Simple state manager for modals.
- */
-/* eslint-disable react/prop-types */
-const ModalStateManager = ({
-  renderLauncher: LauncherContent,
-  children: ModalContent,
-}) => {
+const renderUIShellHeader = (open, setOpen) => (
+  <HeaderContainer
+    render={() => (
+      <Header aria-label="IBM Cloud Pak">
+        <HeaderName href="/" prefix="IBM">
+          Cloud Pak
+        </HeaderName>
+        <HeaderGlobalBar
+          style={{
+            zIndex: 2,
+          }}>
+          <HeaderGlobalAction
+            aria-label="App switcher"
+            onClick={() => setOpen(!open)}>
+            <Notification20
+              style={{
+                fill: white,
+              }}
+            />
+          </HeaderGlobalAction>
+          <HeaderGlobalAction aria-label="App switcher">
+            <User20
+              style={{
+                fill: white,
+              }}
+            />
+          </HeaderGlobalAction>
+        </HeaderGlobalBar>
+      </Header>
+    )}
+  />
+);
+
+const Template = (args) => {
   const [open, setOpen] = useState(false);
   return (
     <>
-      {!ModalContent || typeof document === 'undefined'
-        ? null
-        : ReactDOM.createPortal(
-            <ModalContent open={open} setOpen={setOpen} />,
-            document.body
-          )}
-      {LauncherContent && <LauncherContent open={open} setOpen={setOpen} />}
+      {renderUIShellHeader(open, setOpen)}
+      <Notifications {...args} open={open} setOpen={setOpen} />
     </>
   );
 };
 
-export const Default = () => {
-  return (
-    <ModalStateManager
-      renderLauncher={({ open, setOpen }) => (
-        <Button onClick={() => setOpen(!open)}>
-          {open ? 'Close notifications' : 'Open notifications'}
-        </Button>
-      )}>
-      {({ open }) => (
-        <Notifications
-          open={open}
-          data={data}
-          onDisableNotificationChange={(value) => action(`Toggled to ${value}`)}
-        />
-      )}
-    </ModalStateManager>
-  );
+export const Default = Template.bind({});
+Default.args = {
+  data,
+  onDoNotDisturbChange: (value) => action(`Toggled to ${value}`),
 };
 
-export const EmptyState = () => {
-  return (
-    <ModalStateManager
-      renderLauncher={({ open, setOpen }) => (
-        <Button onClick={() => setOpen(!open)}>
-          {open ? 'Close notifications' : 'Open notifications'}
-        </Button>
-      )}>
-      {({ open }) => (
-        <Notifications
-          open={open}
-          data={[]}
-          onDisableNotificationChange={(value) => action(`Toggled to ${value}`)}
-        />
-      )}
-    </ModalStateManager>
-  );
+export const EmptyState = Template.bind({});
+EmptyState.args = {
+  data: [],
+  onDoNotDisturbChange: (value) => action(`Toggled to ${value}`),
 };

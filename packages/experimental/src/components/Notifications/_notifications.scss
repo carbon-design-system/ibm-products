@@ -75,6 +75,8 @@
       color: $text-01;
     }
     .#{$exp-prefix}-notifications-header {
+      @include carbon--type-style('productive-heading-01');
+
       margin: 0;
     }
   }

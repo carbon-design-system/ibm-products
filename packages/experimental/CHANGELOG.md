@@ -3,6 +3,63 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.10.2...@carbon/ibm-cloud-cognitive-experimental@0.11.0) (2020-12-03)
+
+
+### Features
+
+* export modal ([#253](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/253)) ([d7e35ae](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d7e35ae34567dbfdb99ece3964f558137b687940))
+
+
+
+
+
+## [0.10.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.10.1...@carbon/ibm-cloud-cognitive-experimental@0.10.2) (2020-12-02)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
+## [0.10.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.10.0...@carbon/ibm-cloud-cognitive-experimental@0.10.1) (2020-12-01)
+
+
+### Bug Fixes
+
+* import modal typo fix ([#247](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/247)) ([56b1165](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/56b11654238e35fa4da7de0da4b842916633a984))
+
+
+
+
+
+# [0.10.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.9.7...@carbon/ibm-cloud-cognitive-experimental@0.10.0) (2020-12-01)
+
+
+### Features
+
+* add automated tests for tearsheet component ([#249](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/249)) ([6510288](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6510288adc51d3983d85904406184f5e0aa7db78))
+
+
+
+
+
+## [0.9.7](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.9.6...@carbon/ibm-cloud-cognitive-experimental@0.9.7) (2020-12-01)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
+## [0.9.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.9.5...@carbon/ibm-cloud-cognitive-experimental@0.9.6) (2020-11-30)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
 ## [0.9.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental/compare/@carbon/ibm-cloud-cognitive-experimental@0.9.4...@carbon/ibm-cloud-cognitive-experimental@0.9.5) (2020-11-26)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental

@@ -22,7 +22,7 @@ describe('Notifications', () => {
     const { fn } = jest;
     const onToggle = fn();
     const { container } = render(
-      <Notifications data={[]} open onDisableNotificationChange={onToggle} />
+      <Notifications data={[]} open onDoNotDisturbChange={onToggle} />
     );
 
     click(

@@ -6,6 +6,7 @@
 //
 
 export { AboutModal } from './AboutModal';
+export { BreadcrumbWithOverflow } from './BreadcrumbWithOverflow';
 export { EmptyState } from './EmptyState';
 export { ExampleComponent } from './ExampleComponent';
 export { ImportModal } from './ImportModal';

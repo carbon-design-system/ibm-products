@@ -7,13 +7,13 @@
 
 import React, { useState } from 'react';
 import { Button } from 'carbon-components-react';
-import { RemovalModal } from '.';
+import { RemoveDeleteModal } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import mdx from './RemovalModal.mdx';
+import mdx from './RemoveDeleteModal.mdx';
 
 export default {
-  title: 'Experimental/RemovalModal',
-  component: RemovalModal,
+  title: 'Experimental/RemoveDeleteModal',
+  component: RemoveDeleteModal,
   parameters: {
     styles,
     docs: {
@@ -42,14 +42,14 @@ const defaultProps = {
 };
 
 const Template = (args) => {
-  return <RemovalModal {...args} />;
+  return <RemoveDeleteModal {...args} />;
 };
 
 const TemplateWIthState = (args) => {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <RemovalModal
+      <RemoveDeleteModal
         {...args}
         open={open}
         onRequestClose={() => setOpen(false)}

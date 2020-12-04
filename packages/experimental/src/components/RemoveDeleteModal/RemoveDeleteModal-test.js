@@ -8,12 +8,12 @@
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 
-import { RemovalModal } from '.';
+import { RemoveDeleteModal } from '.';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 jest.mock('../../global/js/utils/uuidv4');
 
-describe('RemovalModal', () => {
+describe('RemoveDeleteModal', () => {
   beforeAll(() => {
     uuidv4.mockImplementation(() => 'testid');
   });
@@ -26,7 +26,7 @@ describe('RemovalModal', () => {
     const onRequestClose = fn();
 
     const { getByText, container } = render(
-      <RemovalModal
+      <RemoveDeleteModal
         open
         header="test header"
         body="test body"
@@ -54,7 +54,7 @@ describe('RemovalModal', () => {
     const onRequestSubmit = fn();
 
     const { getByText, container } = render(
-      <RemovalModal
+      <RemoveDeleteModal
         open
         header="test header"
         body="test body"

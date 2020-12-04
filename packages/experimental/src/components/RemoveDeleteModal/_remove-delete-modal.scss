@@ -4,10 +4,10 @@
 @import 'carbon-components/scss/components/modal/modal';
 @import 'carbon-components/scss/components/text-input/text-input';
 
-.#{$exp-prefix}-removal-modal .bx--modal-container {
+.#{$exp-prefix}-remove-delete-modal .bx--modal-container {
   background: $ui-03;
 }
 
-.#{$exp-prefix}-removal-modal-body {
+.#{$exp-prefix}-remove-delete-modal-body {
   margin-bottom: $spacing-05;
 }

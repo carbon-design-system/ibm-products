@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { expPrefix } from '../../global/js/settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-export const RemovalModal = ({
+export const RemoveDeleteModal = ({
   body,
   className,
   header,
@@ -31,7 +31,7 @@ export const RemovalModal = ({
   return (
     <Modal
       danger
-      className={`${expPrefix}-removal-modal ${className}`}
+      className={`${expPrefix}-remove-delete-modal ${className}`}
       iconDescription={iconDescription}
       open={open}
       modalHeading={header}
@@ -42,7 +42,7 @@ export const RemovalModal = ({
       onRequestSubmit={onRequestSubmit}
       onRequestClose={onRequestClose}
       {...other}>
-      <p className={`${expPrefix}-removal-modal-body`}>{body}</p>
+      <p className={`${expPrefix}-remove-delete-modal-body`}>{body}</p>
       {textConfirmation && (
         <TextInput
           id={`${idRef.current}-confirmation-input`}
@@ -56,7 +56,7 @@ export const RemovalModal = ({
   );
 };
 
-RemovalModal.propTypes = {
+RemoveDeleteModal.propTypes = {
   /**
    * The conent to be displayed in the body of the modal
    */
@@ -119,7 +119,7 @@ RemovalModal.propTypes = {
   textConfirmation: PropTypes.bool,
 };
 
-RemovalModal.defaultProps = {
+RemoveDeleteModal.defaultProps = {
   className: '',
   iconDescription: '',
   id: '',

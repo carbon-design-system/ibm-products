@@ -38,7 +38,9 @@ $block-class: #{$exp-prefix}-breadcrumb-with-overflow;
 .#{$block-class}--breadcrumb-container--hidden {
   // This breadcrumb container is used to measure the width of all displayable breadcrumbs
   position: absolute;
+  // stylelint-disable-next-line carbon/layout-token-use
   top: -100vh;
+  // stylelint-disable-next-line carbon/layout-token-use
   left: -100vw;
   width: 100%;
   visibility: hidden;

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.12.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.12.2...@carbon/ibm-cloud-cognitive-experimental@0.12.3) (2020-12-04)
+
+
+### Bug Fixes
+
+* change RemovalModal to RemoveDeleteModal ([#255](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/255)) ([cdb2f5b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/cdb2f5b2c0643bbe5c8d8ab27d5763c939da2302))
+
+
+
+
+
 ## [0.12.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.12.1...@carbon/ibm-cloud-cognitive-experimental@0.12.2) (2020-12-04)
 
 

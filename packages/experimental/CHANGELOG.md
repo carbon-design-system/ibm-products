@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.12.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.12.1...@carbon/ibm-cloud-cognitive-experimental@0.12.2) (2020-12-04)
+
+
+### Bug Fixes
+
+* use correct carbon token for about modal gradient ([#256](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/256)) ([9a9626a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9a9626af8d8eb5b5ae26135a755e3047f1e8ea6b))
+
+
+
+
+
 ## [0.12.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.12.0...@carbon/ibm-cloud-cognitive-experimental@0.12.1) (2020-12-03)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental

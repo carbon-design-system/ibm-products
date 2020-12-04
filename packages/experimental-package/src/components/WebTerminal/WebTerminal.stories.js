@@ -26,9 +26,11 @@ const Template = (args) => {
           <div className="bx--col">Page content</div>
         </div>
       </div>
-      {isTerminalOpen && (
-        <WebTerminal closeTerminal={closeTerminal} {...args} />
-      )}
+      <WebTerminal
+        open={isTerminalOpen}
+        closeTerminal={closeTerminal}
+        {...args}
+      />
     </div>
   );
 };

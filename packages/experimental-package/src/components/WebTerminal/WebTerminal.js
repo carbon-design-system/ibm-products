@@ -2,7 +2,11 @@ import React from 'react';
 import { Close16 as Close, Help16 as Help } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 
-const WebTerminal = ({ closeTerminal }) => {
+const WebTerminal = ({ open, closeTerminal }) => {
+  if (!open) {
+    return null;
+  }
+
   return (
     <div className="web-terminal">
       <header className="web-terminal__bar">

@@ -144,7 +144,13 @@ export const ExportModal = ({
 };
 
 ExportModal.propTypes = {
+  /**
+   * specify if an error occured
+   */
   error: PropTypes.bool,
+  /**
+   * messaging to display in the event of an error
+   */
   errorMessage: PropTypes.string,
   /**
    *
@@ -159,7 +165,13 @@ ExportModal.propTypes = {
    * text for an invalid input
    */
   invalidInputText: PropTypes.string,
+  /**
+   * specify if the modal is in a loading state
+   */
   loading: PropTypes.bool,
+  /**
+   * messaing to display during the loading state
+   */
   loadingMessage: PropTypes.string,
   /**
    * Optional body content for modal
@@ -181,6 +193,9 @@ ExportModal.propTypes = {
    * Specify whether the Modal is currently open
    */
   open: PropTypes.bool,
+  /**
+   * Array of extensions to display as radio buttons
+   */
   preformattedExtensions: PropTypes.arrayOf(
     PropTypes.shape({
       extension: PropTypes.string,
@@ -196,7 +211,13 @@ ExportModal.propTypes = {
    * Specify the text for the secondary button
    */
   secondaryButtonText: PropTypes.string,
+  /**
+   * messaging to display if the export was successful
+   */
   successMessage: PropTypes.string,
+  /**
+   * specify if the export was successful
+   */
   successful: PropTypes.bool,
   /**
    * array of valid extensions the file can have

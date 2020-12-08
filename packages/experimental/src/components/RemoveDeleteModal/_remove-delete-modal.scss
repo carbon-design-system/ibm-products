@@ -1,0 +1,13 @@
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+
+@import 'carbon-components/scss/components/modal/modal';
+@import 'carbon-components/scss/components/text-input/text-input';
+
+.#{$exp-prefix}-remove-delete-modal .bx--modal-container {
+  background: $ui-03;
+}
+
+.#{$exp-prefix}-remove-delete-modal-body {
+  margin-bottom: $spacing-05;
+}

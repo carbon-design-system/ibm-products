@@ -8,10 +8,12 @@
 // Package all scss files here for those that want them all bundled up.
 
 @import './AboutModal/index';
+@import './BreadcrumbWithOverflow/index';
 @import './EmptyState/index';
 @import './ExampleComponent/index';
 @import './ImportModal/index';
 @import './ModifiedTabs/index';
+@import './Notifications/index';
 @import './PageHeader/index';
-@import './RemovalModal/index';
+@import './RemoveDeleteModal/index';
 @import './Tearsheet/index';

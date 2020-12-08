@@ -1,0 +1,190 @@
+//
+// Copyright IBM Corp. 2020, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+@import '@carbon/themes/scss/themes';
+@import '@carbon/colors/scss/colors';
+@import '@carbon/motion/scss/motion.scss';
+
+@import 'carbon-components/scss/components/button/button';
+@import 'carbon-components/scss/components/link/link';
+@import 'carbon-components/scss/components/toggle/toggle';
+
+@keyframes fadeIn {
+  0% {
+    // stylelint-disable-next-line carbon/layout-token-use
+    transform: translateY(-38.5rem); // the height of the notifcation panel
+    opacity: 0;
+  }
+  100% {
+    // stylelint-disable-next-line carbon/layout-token-use
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    // stylelint-disable-next-line carbon/layout-token-use
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    // stylelint-disable-next-line carbon/layout-token-use
+    transform: translateY(-38.5rem); // the height of the notifcation panel
+    opacity: 0;
+  }
+}
+
+.#{$exp-prefix}-notifications-panel-container {
+  @include carbon--theme($carbon--theme--g100, true);
+
+  position: fixed;
+  top: $spacing-09;
+  right: 0;
+  z-index: 2;
+  min-width: 22.75rem;
+  max-width: 22.75rem;
+  min-height: 38.5rem;
+  max-height: 38.5rem;
+  overflow: auto;
+  color: $text-01;
+  background-color: $ui-background;
+  // stylelint-disable-next-line carbon/motion-token-use
+  transition: transform 250ms;
+  transition-timing-function: carbon--motion(standard);
+
+  .#{$exp-prefix}-notifications-header-container {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    padding: $spacing-05;
+    background-color: $ui-background;
+    border-bottom: 1px solid $ui-02;
+    .#{$exp-prefix}-notifications-header-flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .#{$exp-prefix}-notifications-dismiss-button {
+      color: $text-01;
+    }
+    .#{$exp-prefix}-notifications-header {
+      @include carbon--type-style('productive-heading-01');
+
+      margin: 0;
+    }
+  }
+  .#{$exp-prefix}-notifications-panel-time-section-label {
+    @include carbon--type-style('label-01');
+    @include carbon--font-weight('semibold');
+
+    position: sticky;
+    top: $layout-06;
+    z-index: 2;
+    padding: $spacing-03 $spacing-05;
+    color: $text-02;
+    background-color: $ui-01;
+  }
+  .#{$exp-prefix}-notifications-panel-notification {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    min-height: 6.25rem;
+    // stylelint-disable-next-line carbon/layout-token-use
+    padding: $spacing-05 $spacing-05 1.125rem;
+    .#{$exp-prefix}-notifications-panel-notification-title {
+      margin-bottom: $spacing-02;
+    }
+    .#{$exp-prefix}-notifications-panel-notifications-link {
+      @include carbon--type-style('label-01');
+    }
+    .#{$exp-prefix}-notifications-panel-notification-status-icon {
+      min-width: 1rem;
+      margin-right: $spacing-03;
+      &.#{$exp-prefix}-notifications-panel-notification-status-icon-error {
+        fill: $support-01;
+      }
+      &.#{$exp-prefix}-notifications-panel-notification-status-icon-success {
+        fill: $support-02;
+      }
+      &.#{$exp-prefix}-notifications-panel-notification-status-icon-warning {
+        fill: $support-03;
+      }
+      &.#{$exp-prefix}-notifications-panel-notification-status-icon-informational {
+        fill: $support-04;
+      }
+    }
+    .#{$exp-prefix}-notifications-panel-notification-content {
+      .#{$exp-prefix}-notifications-panel-notification-time-label {
+        margin-bottom: $spacing-03;
+      }
+      .#{$exp-prefix}-notifications-panel-notification-time-label,
+      .#{$exp-prefix}-notifications-panel-notification-description {
+        @include carbon--type-style('label-01');
+
+        color: $text-02;
+      }
+      .#{$exp-prefix}-notifications-panel-notification-description {
+        &.#{$exp-prefix}-notifications-panel-notification-short-description {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+        &.#{$exp-prefix}-notifications-panel-notification-long-description {
+          display: block;
+          -webkit-line-clamp: initial;
+          overflow: initial;
+        }
+      }
+      .#{$exp-prefix}-notifications-panel-notification-read-more-button,
+      .#{$exp-prefix}-notifications-panel-notification-read-less-button {
+        @include carbon--type-style('label-01');
+
+        min-width: 5.5rem;
+        padding: 0;
+
+        // stylelint-disable-next-line max-nesting-depth
+        .bx--btn__icon {
+          // stylelint-disable-next-line carbon/motion-token-use
+          transition: transform 250ms ease;
+        }
+        &.#{$exp-prefix}-notifications-panel-notification-read-more-button {
+          // stylelint-disable-next-line max-nesting-depth
+          .bx--btn__icon {
+            transform: rotate(0deg);
+          }
+        }
+        &.#{$exp-prefix}-notifications-panel-notification-read-less-button {
+          // stylelint-disable-next-line max-nesting-depth
+          .bx--btn__icon {
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+  }
+  .#{$exp-prefix}-notifications-panel-notification-today:not(:last-of-type):before,
+  .#{$exp-prefix}-notifications-panel-notification-yesterday:not(:last-of-type):before,
+  .#{$exp-prefix}-notifications-panel-notification-previous:not(:last-of-type):before {
+    position: absolute;
+    bottom: 0;
+    width: calc(100% - 2rem);
+    height: 1px;
+    margin: 0 auto;
+    background-color: $ui-02;
+    content: '';
+  }
+  .#{$exp-prefix}-notificaitons-panel-main-section-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32.5rem;
+  }
+}

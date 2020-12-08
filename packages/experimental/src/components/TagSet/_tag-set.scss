@@ -37,7 +37,9 @@ $block-class: #{$exp-prefix}-tag-set;
 .#{$block-class}--tag-container--hidden {
   // This tag container is used to measure the width of all displayable tags
   position: absolute;
+  // stylelint-disable-next-line carbon/layout-token-use
   top: -100vh;
+  // stylelint-disable-next-line carbon/layout-token-use
   left: -100vw;
   width: 100%;
   visibility: hidden;

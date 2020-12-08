@@ -1,11 +1,15 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-experimental",
   "description": "Carbon for Cloud & Cognitive experimental UI components",
-  "version": "0.9.5",
+  "version": "0.12.3",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/ibm-cloud-cognitive.git",
+    "directory": "packages/experimental"
+  },
   "bugs": "https://github.com/carbon-design-system/ibm-cloud-cognitive/issues",
   "files": [
     "css",
@@ -42,7 +46,7 @@
     "react-resize-detector": "^5.2.0"
   },
   "devDependencies": {
-    "@carbon/ibm-cloud-cognitive-core": "^0.4.1",
-    "@carbon/rollup-config": "^0.2.0"
+    "@carbon/ibm-cloud-cognitive-core": "^0.4.4",
+    "@carbon/rollup-config": "^0.2.1"
   }
 }

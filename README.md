@@ -2,7 +2,7 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors-)
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
@@ -79,6 +79,7 @@ Thanks goes to these wonderful people
   <tr>
     <td align="center"><a href="https://github.com/asfordmatt"><img src="https://avatars2.githubusercontent.com/u/14233261?v=4" width="100px;" alt=""/><br /><sub><b>Matt Chapman</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=asfordmatt" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/dbrugger"><img src="https://avatars1.githubusercontent.com/u/10086178?v=4" width="100px;" alt=""/><br /><sub><b>Dominik Brugger</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=dbrugger" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/polinaouk"><img src="https://avatars2.githubusercontent.com/u/24444328?v=4" width="100px;" alt=""/><br /><sub><b>Polina Olemskaia</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=polinaouk" title="Code">💻</a></td>
   </tr>
 </table>
 

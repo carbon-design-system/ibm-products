@@ -13,7 +13,7 @@ import { Bee24 } from '@carbon/icons-react';
 import styles from './_index.scss'; // import index in case more files are added later.
 
 export default {
-  title: 'Experimental/PageHeaderUtility/ActionBarItem',
+  title: 'Experimental/PageHeader/ActionBarItem',
   component: ActionBarItem,
   parameters: { styles },
 };

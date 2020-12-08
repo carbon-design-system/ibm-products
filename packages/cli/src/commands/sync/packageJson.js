@@ -73,10 +73,11 @@ function run(workspace) {
   const { directory, packages } = workspace;
   return Promise.all(
     packages.map(async ({ packageJsonPath, packageJson, packageFolder }) => {
-      let repository = `${REPO_URL_BASE}/tree/master/`;
-      repository += path.relative(directory, packageFolder);
-
-      packageJson.repository = repository;
+      packageJson.repository = {
+        type: 'git',
+        url: `${REPO_URL_BASE}.git`,
+        directory: path.relative(directory, packageFolder),
+      };
       packageJson.bugs = `${REPO_URL_BASE}/issues`;
       packageJson.license = 'Apache-2.0';
 

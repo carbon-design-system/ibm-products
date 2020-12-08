@@ -28,17 +28,21 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && yarn build:js && yarn build:scss",
+    "build": "npm-run-all clean -p build:*",
+    "build:css": "bundler bundle:scss src/index.scss",
     "build:js": "node scripts/build",
-    "build:scss": "bundler bundle:scss src/index.scss && copyfiles 'src/**/*.scss' scss -u 1",
-    "clean": "rimraf es lib scss",
-    "test": "bundler check 'src/**/*.scss'"
+    "build:scss": "copyfiles 'src/**/*.scss' scss -u 1",
+    "clean": "rimraf css es lib scss",
+    "test": "run-p test:*",
+    "test:js": "jest",
+    "test:scss": "bundler check 'src/**/*.scss'"
   },
   "dependencies": {
     "@carbon/ibm-security": "^1.26.0"
   },
   "devDependencies": {
     "@carbon/ibm-cloud-cognitive-core": "^0.4.4",
-    "@carbon/rollup-config": "^0.2.1"
+    "jest-config": "^0.2.0",
+    "npm-run-all": "^4.1.5"
   }
 }

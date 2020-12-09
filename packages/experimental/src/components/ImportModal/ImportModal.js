@@ -17,6 +17,7 @@ export const ImportModal = ({
   fetchErrorHeader,
   fileDropHeader,
   fileDropLabel,
+  fileUploadLabel,
   inputButtonText,
   inputHeader,
   inputId,
@@ -75,7 +76,7 @@ export const ImportModal = ({
       }
       return newFile;
     });
-    const finalFiles = [...files, ...updatedFiles];
+    const finalFiles = [...updatedFiles];
     setFiles(finalFiles);
   };
 
@@ -89,24 +90,23 @@ export const ImportModal = ({
       status: 'uploading',
       uuid: uuidv4(),
     };
-    const updatedFiles = [...files, pendingFile];
-    setFiles(updatedFiles);
+    setFiles([pendingFile]);
     try {
       const response = await fetch(importUrl);
       if (!response.ok || response.status !== 200)
         throw new Error(response.status);
       const blob = await response.blob();
-      const newFile = new File([blob], fileName, { type: blob.type });
-      newFile.invalidFileType = isInvalidFileType(newFile);
-      newFile.uuid = pendingFile.uuid;
-      updateFiles([newFile]);
+      const fetchedFile = new File([blob], fileName, { type: blob.type });
+      fetchedFile.invalidFileType = isInvalidFileType(fetchedFile);
+      fetchedFile.uuid = pendingFile.uuid;
+      updateFiles([fetchedFile]);
     } catch (err) {
       console.error('fetch failed', err);
-      const newFile = {
+      const failedFile = {
         ...pendingFile,
         fetchError: true,
       };
-      updateFiles([newFile], true);
+      updateFiles([failedFile]);
     }
   };
 
@@ -130,6 +130,7 @@ export const ImportModal = ({
 
   const primaryButtonDisabled = !files.length || files.some((f) => f.invalid);
   const importButtonDisabled = !importUrl;
+  const fileUploaded = Boolean(files.length);
 
   return (
     <Modal
@@ -141,49 +142,52 @@ export const ImportModal = ({
       onRequestSubmit={onSubmitHandler}
       onRequestClose={onRequestClose}
       className={`${expPrefix}--import-modal`}>
-      <div className={`${expPrefix}--import-modal-inner`}>
-        <p className={`${expPrefix}--import-modal-body`}>{modalBody}</p>
-        <p className={`${expPrefix}--import-modal-label`}>{fileDropHeader}</p>
-        <FileUploaderDropContainer
-          accept={validFileTypes}
-          labelText={fileDropLabel}
-          onAddFiles={onAddFile}
-          multiple
+      <p className={`${expPrefix}--import-modal-body`}>{modalBody}</p>
+      <p className={`${expPrefix}--import-modal-label`}>{fileDropHeader}</p>
+      <FileUploaderDropContainer
+        accept={validFileTypes}
+        labelText={fileDropLabel}
+        onAddFiles={onAddFile}
+      />
+      <p className={`${expPrefix}--import-modal-label`}>{inputHeader}</p>
+      <div className={`${expPrefix}--input-group`}>
+        <TextInput
+          id={inputId}
+          labelText={inputLabel}
+          onChange={inputHandler}
+          placeholder={inputPlaceholder}
+          value={importUrl}
+          disabled={fileUploaded}
         />
-        <p className={`${expPrefix}--import-modal-label`}>{inputHeader}</p>
-        <div className={`${expPrefix}--input-group`}>
-          <TextInput
-            id={inputId}
-            labelText={inputLabel}
-            onChange={inputHandler}
-            placeholder={inputPlaceholder}
-            value={importUrl}
+        <Button
+          onClick={fetchFile}
+          className={`${expPrefix}--import-button`}
+          size="sm"
+          disabled={importButtonDisabled}>
+          {inputButtonText}
+        </Button>
+      </div>
+      <div className="bx--file-container" style={{ width: '100%' }}>
+        {fileUploaded && (
+          <p className={`${expPrefix}--import-modal-helper-text`}>
+            1 / 1 {fileUploadLabel}
+          </p>
+        )}
+        {files.map((file) => (
+          <FileUploaderItem
+            key={file.uuid}
+            onDelete={() => onRemoveFile(file.uuid)}
+            name={file.name}
+            status={file.status}
+            size="default"
+            uuid={file.uuid}
+            iconDescription={file.iconDescription}
+            invalid={file.invalid}
+            errorBody={file.errorBody}
+            errorSubject={file.errorSubject}
+            filesize={file.filesize}
           />
-          <Button
-            onClick={fetchFile}
-            className={`${expPrefix}--import-button`}
-            size="sm"
-            disabled={importButtonDisabled}>
-            {inputButtonText}
-          </Button>
-        </div>
-        <div className="bx--file-container" style={{ width: '100%' }}>
-          {files.map((file) => (
-            <FileUploaderItem
-              key={file.uuid}
-              onDelete={() => onRemoveFile(file.uuid)}
-              name={file.name}
-              status={file.status}
-              size="default"
-              uuid={file.uuid}
-              iconDescription={file.iconDescription}
-              invalid={file.invalid}
-              errorBody={file.errorBody}
-              errorSubject={file.errorSubject}
-              filesize={file.filesize}
-            />
-          ))}
-        </div>
+        ))}
       </div>
     </Modal>
   );
@@ -214,6 +218,10 @@ ImportModal.propTypes = {
    * Label for the drag and drop box
    */
   fileDropLabel: PropTypes.string,
+  /**
+   * Label that appears when a file is uploaded to show number of files (1 / 1)
+   */
+  fileUploadLabel: PropTypes.string,
   /**
    * Button text for import by url button
    */
@@ -293,6 +301,9 @@ ImportModal.defaultProps = {
   errorHeader: '',
   fetchErrorBody: '',
   fetchErrorHeader: '',
+  fileDropHeader: '',
+  fileDropLabel: '',
+  fileUploadLabel: '',
   inputButtonText: '',
   inputId: '',
   inputHeader: '',
@@ -300,8 +311,6 @@ ImportModal.defaultProps = {
   inputPlaceholder: '',
   invalidFileTypeErrorBody: '',
   invalidFileTypeErrorHeader: '',
-  fileDropHeader: '',
-  fileDropLabel: '',
   maxFileSize: Infinity,
   maxFileSizeErrorBody: '',
   maxFileSizeErrorHeader: '',

@@ -34,7 +34,7 @@ export default class IdeImporting extends React.Component {
       open: props.open,
       urlInput: '',
       urlInputIsValid: false,
-      filesToUpload: [],
+      filesToUpload: props.initialFiles,
       finished: false,
     };
 
@@ -407,6 +407,7 @@ IdeImporting.propTypes = {
   invalidExtensionText: PropTypes.string,
   invalidFileNameText: PropTypes.string,
   invalidUrlText: PropTypes.string,
+  initialFiles: PropTypes.array,
   maxFileSize: PropTypes.number,
   maxFileSizeMessage: PropTypes.string,
   multiple: PropTypes.bool,
@@ -464,6 +465,7 @@ IdeImporting.defaultProps = {
   enableFileDrop: true,
   enableUrlInput: true,
   invalidFileText: 'Invalid File',
+  initialFiles: [],
   mustBeExtensionTextSingular: 'Must be a $EXT file.',
   mustBeExtensionTextPlural: 'Must be one of: $EXT.',
   allowInvalidFilenameInUrl: false,

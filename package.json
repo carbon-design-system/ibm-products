@@ -25,7 +25,7 @@
     "lint:es": "eslint 'packages/*/src/**/*.js'",
     "lint:style": "stylelint 'packages/*/src/**/*.scss' --report-needless-disables --report-invalid-scope-disables",
     "test": "lerna run test --stream && jest",
-    "storybook": "cd packages/core && yarn start",
+    "storybook": "yarn build:storybook-addon-carbon-theme && cd packages/core && yarn start",
     "sync": "carbon-cli sync"
   },
   "peerDependencies": {

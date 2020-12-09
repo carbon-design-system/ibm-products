@@ -99,6 +99,43 @@ describe('IdeImporting unit tests', () => {
     wrapper.unmount();
   });
 
+  it('should handle an initial state value', () => {
+    const mockHandleFileAdded = jest.fn();
+    const props = {
+      multiple: false,
+      validExtensions: ['yml'],
+      hideImport: true,
+      onFileAdded: mockHandleFileAdded,
+      initialFiles: [
+        {
+          file: {
+            lastModified: 1606086665265,
+            lastModifiedDate:
+              'Sun Nov 22 2020 23:11:05 GMT+0000 (Greenwich Mean Time)',
+            name: 'accounts',
+            size: 702,
+            type: 'application/x-yaml',
+            webkitRelativePath: '',
+            index: 0,
+          },
+          invalid: false,
+          status: 'edit',
+          url: undefined,
+          uuid: 'b4a92c13-10ca',
+        },
+      ],
+    };
+    const wrapper = new IdeImportingWrapper(props);
+
+    const errorMessage = new Error(
+      'FileUploaderDropContainer not found when using strictFind()'
+    );
+    expect(() => {
+      wrapper.strictFind('FileUploaderDropContainer');
+    }).toThrow(errorMessage);
+    wrapper.unmount();
+  });
+
   it('should disable the file drop as soon as there is text in the URL field (single)', () => {
     const mockHandleFileAdded = jest.fn();
     const props = {

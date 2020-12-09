@@ -15,7 +15,6 @@ $feature-flags: (
 
 @import '~carbon-components/scss/globals/scss/styles';
 
-
 @import '~@carbon/themes/scss/themes';
 $carbon--theme: $carbon--theme--white;
 @include carbon--theme();

@@ -32,6 +32,7 @@
     "build:js": "node scripts/build",
     "build:scss": "bundler bundle:scss src/index.scss && copyfiles 'src/**/*.scss' scss -u 1",
     "clean": "rimraf es lib scss",
+    "generate": "node scripts/generate",
     "test": "bundler check 'src/**/*.scss'"
   },
   "peerDependencies": {
@@ -47,6 +48,11 @@
   },
   "devDependencies": {
     "@carbon/ibm-cloud-cognitive-core": "^0.4.5",
-    "@carbon/rollup-config": "^0.2.2"
+    "@carbon/rollup-config": "^0.2.2",
+    "fs-extra": "^9.0.1",
+    "glob": "^7.1.6",
+    "inquirer": "^7.3.3",
+    "param-case": "^3.0.4",
+    "string.prototype.replaceall": "^1.0.4"
   }
 }

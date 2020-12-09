@@ -170,7 +170,7 @@ export const ImportModal = ({
       <div className="bx--file-container" style={{ width: '100%' }}>
         {fileUploaded && (
           <p className={`${expPrefix}--import-modal-helper-text`}>
-            1 / 1 {fileUploadLabel}
+            {fileUploadLabel}
           </p>
         )}
         {files.map((file) => (

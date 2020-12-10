@@ -9,6 +9,8 @@
 
 // **TODO** restore 12-13 & 32-73 and remove 75-81 once carbon fixes issues that fail our tests
 
+import '@testing-library/jest-dom';
+
 // import chalk from 'chalk';
 // import util from 'util';
 

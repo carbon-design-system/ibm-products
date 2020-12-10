@@ -7,6 +7,8 @@
 
 import React from 'react';
 
+import sectionTitle from '../../../config';
+
 import DISPLAY_NAME from '.';
 
 import page from './DISPLAY_NAME.mdx';
@@ -15,7 +17,7 @@ import styles from './_STYLE_NAME.scss';
 const { name } = DISPLAY_NAME;
 
 export default {
-  title: name,
+  title: `${sectionTitle}/${name}`,
   component: DISPLAY_NAME,
 
   // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#DISPLAY_NAME-args

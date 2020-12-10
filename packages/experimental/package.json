@@ -48,11 +48,9 @@
   },
   "devDependencies": {
     "@carbon/ibm-cloud-cognitive-core": "^0.4.5",
-    "@carbon/rollup-config": "^0.2.2",
+    "chalk": "^4.1.0",
     "fs-extra": "^9.0.1",
-    "glob": "^7.1.6",
-    "inquirer": "^7.3.3",
     "param-case": "^3.0.4",
-    "string.prototype.replaceall": "^1.0.4"
+    "yargs": "^16.2.0"
   }
 }

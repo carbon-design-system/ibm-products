@@ -7,8 +7,14 @@
 
 @import '@carbon/import-once/scss/import-once';
 
+@import '../../global/styles/project-settings';
+
 @include exports($name: STYLE_NAME) {
-  .STYLE_NAME {
+  /// @type String
+  /// @access private
+  $block-class: #{$exp-prefix}--STYLE_NAME;
+
+  .#{$block-class} {
     // TODO: Styles.
   }
 }

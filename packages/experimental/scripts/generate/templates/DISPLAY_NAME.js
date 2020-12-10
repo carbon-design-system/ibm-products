@@ -9,14 +9,16 @@ import classnames from 'classnames';
 import { node, string } from 'prop-types';
 import React from 'react';
 
-const blockClassName = 'STYLE_NAME';
+import { expPrefix } from '../../global/js/settings';
+
+const blockClass = `${expPrefix}--STYLE_NAME`;
 
 /**
  * TODO: Description.
  */
-const DISPLAY_NAME = ({ children, className, ...rest }) => {
+export const DISPLAY_NAME = ({ children, className, ...rest }) => {
   return (
-    <div className={classnames(blockClassName, className)} {...rest}>
+    <div className={classnames(blockClass, className)} {...rest}>
       {children}
     </div>
   );
@@ -34,5 +36,3 @@ DISPLAY_NAME.propTypes = {
 DISPLAY_NAME.defaultProps = {
   className: null,
 };
-
-export default DISPLAY_NAME;

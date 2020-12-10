@@ -44,6 +44,7 @@
     "eslint": "^7.14.0",
     "eslint-config-carbon": "^2.1.0",
     "eslint-plugin-react": "7.21.5",
+    "glob": "^7.1.6",
     "husky": "^4.3.0",
     "jest": "^25.5.4",
     "lerna": "^3.22.1",

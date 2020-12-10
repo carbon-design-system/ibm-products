@@ -231,7 +231,7 @@ class IdeCreate extends React.Component {
     this._validateProps();
     const currentStep = this.state.step;
     const steps = React.Children.toArray(this.props.children).filter(
-      (c) => c.type === IdeCreateStep
+      (c) => c.displayName === IdeCreateStep
     );
     const stepLabels = steps.filter((child) => child.props.label);
     const stepsDisabled = steps.map((child) => child.props.disabled);

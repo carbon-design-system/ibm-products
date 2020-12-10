@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { DISPLAY_NAME as default } from './DISPLAY_NAME';
+export { DISPLAY_NAME } from './DISPLAY_NAME';

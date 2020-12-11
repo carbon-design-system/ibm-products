@@ -24,6 +24,7 @@ import { OverflowMenuHorizontal32 } from '@carbon/icons-react';
 import { expPrefix } from '../../global/js/settings';
 
 import ReactResizeDetector from 'react-resize-detector';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 const blockClass = `${expPrefix}-breadcrumb-with-overflow`;
 
@@ -39,11 +40,13 @@ export const BreadcrumbWithOverflow = ({
   const breadcrumbItemWithOverflow = useRef(null);
   const sizingContainerRef = useRef(null);
   const displayedArea = useRef(null);
+  const internalId = useRef(uuidv4());
+  const [childArray, setChildArray] = useState([]);
 
   // eslint-disable-next-line react/prop-types
   const BreadcrumbOverflowMenu = ({ overflowItems }) => {
     return (
-      <BreadcrumbItem key="breadcrumb-overflow">
+      <BreadcrumbItem key={`breadcrumb-overflow-${internalId}`}>
         <OverflowMenu
           ariaLabel={null}
           renderIcon={OverflowMenuHorizontal32}
@@ -52,7 +55,7 @@ export const BreadcrumbWithOverflow = ({
             // eslint-disable-next-line react/prop-types
             overflowItems.map((item, index) => (
               <OverflowMenuItem
-                key={`${item.props.href}#${index}`}
+                key={`breadcrumb-overflow-menu-item-${internalId}-${index}`}
                 href={item.props.href}
                 onClick={item.props.onClick}
                 itemText={item.props.children}
@@ -65,19 +68,34 @@ export const BreadcrumbWithOverflow = ({
   };
 
   useEffect(() => {
-    // updates displayedBreadcrumbItems and overflowBreadcrumbItems based on displayCount and children
+    const newChildArray = [];
+    for (let index in children) {
+      if (children[index].type === React.Fragment) {
+        // loop through children and make array
+        for (let fragIndex in children[index].props.children) {
+          newChildArray.push(children[index].props.children[fragIndex]);
+        }
+      } else {
+        newChildArray.push(children[index]);
+      }
+    }
+    setChildArray(newChildArray);
+  }, [children]);
+
+  useEffect(() => {
+    // updates displayedBreadcrumbItems and overflowBreadcrumbItems based on displayCount and childArray
     const newDisplayedBreadcrumbItems = [];
     const newOverflowBreadcrumbItems = [];
+    let child;
 
     // overflow starts from item 1 not the end
-    for (let index = 0; index < children.length - displayCount; index++) {
-      let child;
+    for (let index = 0; index < childArray.length - displayCount; index++) {
       if (displayCount === 0) {
         // adding them all
-        child = children[index];
+        child = childArray[index];
       } else {
-        // adding just 1 to children.length - displayCount
-        child = children[index + 1];
+        // adding just 1 to childArray.length - displayCount
+        child = childArray[index + 1];
       }
       newOverflowBreadcrumbItems.push(React.cloneElement(child));
     }
@@ -88,27 +106,30 @@ export const BreadcrumbWithOverflow = ({
       );
     } else {
       let displayed = 0;
-      for (let index = 0; displayed < displayCount; index++) {
+      for (
+        let index = 0;
+        displayed < displayCount && index < childArray.length;
+        index++
+      ) {
         displayed++;
-        if (index === 1 && displayCount < children.length) {
-          // we only want the last children.length - displayCount
-          index += children.length - displayCount;
+
+        if (index === 1 && displayCount < childArray.length) {
+          // we only want the last childArray.length - displayCount
+          index += childArray.length - displayCount;
         }
 
-        const child = children[index];
+        child = childArray[index];
         newDisplayedBreadcrumbItems.push(
           React.cloneElement(child, {
-            className: cx(
+            className: cx([
               child.props.className,
-              `${blockClass}--displayed-breadcrumb`
-            ),
-            key: `displayed-breadcrumb-${child.key}`,
+              `${blockClass}--displayed-breadcrumb`,
+            ]),
+            key: `displayed-breadcrumb-${internalId}-${index}`,
           })
         );
-        if (index === 0 && displayCount < children.length) {
+        if (index === 0 && displayCount < childArray.length) {
           // add overflow menu after first item
-
-          // TODO: add a proper key
           newDisplayedBreadcrumbItems.push(
             <BreadcrumbOverflowMenu
               overflowItems={newOverflowBreadcrumbItems}
@@ -119,7 +140,7 @@ export const BreadcrumbWithOverflow = ({
     }
 
     setDisplayedBreadcrumbItems(newDisplayedBreadcrumbItems);
-  }, [children, displayCount]);
+  }, [childArray, displayCount]);
 
   const checkFullyVisibleBreadcrumbItems = () => {
     // how many will fit?
@@ -205,7 +226,7 @@ export const BreadcrumbWithOverflow = ({
                   renderIcon={OverflowMenuHorizontal32}
                 />
               </BreadcrumbItem>
-              {children}
+              {childArray.map((child) => child)}
             </div>
           </ReactResizeDetector>
 

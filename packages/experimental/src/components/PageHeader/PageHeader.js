@@ -22,16 +22,10 @@ import { expPrefix } from '../../global/js/settings';
 
 import { useWindowResize, useWindowScroll } from '../../global/js/use';
 
-import {
-  BreadcrumbItem,
-  Grid,
-  Column,
-  Row,
-  Breadcrumb,
-} from 'carbon-components-react';
+import { BreadcrumbItem, Grid, Column, Row } from 'carbon-components-react';
 
 import { ActionBar } from './ActionBar';
-import { TagSet } from '../';
+import { BreadcrumbWithOverflow, TagSet } from '../';
 
 const blockClass = `${expPrefix}-page-header`;
 
@@ -177,6 +171,8 @@ export const PageHeader = ({
 
   useEffect(() => {
     // Updates custom CSS props used to manage scroll behaviour
+    console.log(metrics);
+
     setComponentCssCustomProps((prevCSSProps) => ({
       ...prevCSSProps,
       [`--${blockClass}--height-px`]: `${metrics.headerHeight}px`,
@@ -196,14 +192,14 @@ export const PageHeader = ({
       [`--${blockClass}--breadcrumb-title-top`]: `${Math.max(
         0,
         metrics.breadcrumbTitleHeight +
-          metrics.breadcrumbRowSpaceBelow -
+          metrics.titleRowSpaceAbove -
           scrollYValue
       )}px`,
       [`--${blockClass}--breadcrumb-title-opacity`]: `${Math.min(
         1,
         Math.max(
           0,
-          (scrollYValue - (metrics.breadcrumbRowSpaceBelow || 0)) /
+          (scrollYValue - (metrics.titleRowSpaceAbove || 0)) /
             (metrics.breadcrumbTitleHeight || 1) // don't want to
         )
       )}`,
@@ -214,7 +210,7 @@ export const PageHeader = ({
           navigation &&
           navigation.type !== ContentSwitcher
           ? metrics.headerHeight -
-              metrics.breadcrumbRowSpaceBelow -
+              metrics.titleRowSpaceAbove -
               metrics.navigationRowHeight -
               metrics.breadcrumbRowHeight -
               scrollYValue
@@ -223,6 +219,7 @@ export const PageHeader = ({
     }));
   }, [
     keepBreadcrumbAndTabs,
+    metrics,
     metrics.breadcrumbRowHeight,
     metrics.breadcrumbRowSpaceBelow,
     metrics.breadcrumbTitleHeight,
@@ -358,58 +355,61 @@ export const PageHeader = ({
                 [`${blockClass}--breadcrumb-row--with-actions`]:
                   actionBarItems !== undefined,
               })}>
-              <Column
-                className={cx(`${blockClass}--breadcrumb-column`, {
-                  [`${blockClass}--breadcrumb-column--background`]:
-                    breadcrumbItems !== undefined ||
-                    actionBarItems !== undefined,
-                })}>
-                {/* keeps actionBar right even if empty */}
+              <div className={`${blockClass}--breadcrumb-row--container`}>
+                <Column
+                  className={cx(`${blockClass}--breadcrumb-column`, {
+                    [`${blockClass}--breadcrumb-column--background`]:
+                      breadcrumbItems !== undefined ||
+                      actionBarItems !== undefined,
+                  })}>
+                  {/* keeps actionBar right even if empty */}
 
-                {breadcrumbItems !== undefined ? (
-                  <Breadcrumb
-                    className={`${blockClass}--breadcrumb`}
-                    noTrailingSlash={title !== undefined}>
-                    {breadcrumbItems}
-                    {title ? (
-                      <BreadcrumbItem
-                        href="#"
-                        isCurrentPage={true}
-                        className={cx([
-                          `${blockClass}--breadcrumb-title`,
-                          {
-                            [`${blockClass}--breadcrumb-title--pre-collapsed`]: preCollapseTitleRow,
-                          },
-                        ])}>
-                        {title}
-                      </BreadcrumbItem>
-                    ) : (
-                      ''
-                    )}
-                  </Breadcrumb>
-                ) : (
-                  ''
-                )}
-              </Column>
-              <Column
-                className={cx(`${blockClass}--action-bar-column`, {
-                  [`${blockClass}--action-bar-column--background`]:
-                    actionBarItems !== undefined,
-                })}>
-                {actionBarItems !== undefined ? (
-                  <>
-                    <div
-                      className={cx(`${blockClass}--page-actions`, {
-                        [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
-                      })}>
-                      {pageActions}
-                    </div>
-                    <ActionBar className={`${blockClass}--action-bar`}>
-                      {actionBarItems}
-                    </ActionBar>
-                  </>
-                ) : null}
-              </Column>
+                  {breadcrumbItems !== undefined ? (
+                    <BreadcrumbWithOverflow
+                      className={`${blockClass}--breadcrumb`}
+                      noTrailingSlash={title !== undefined}
+                      maxVisibleBreadcrumbItems={4}>
+                      {breadcrumbItems}
+                      {title ? (
+                        <BreadcrumbItem
+                          href="#"
+                          isCurrentPage={true}
+                          className={cx([
+                            `${blockClass}--breadcrumb-title`,
+                            {
+                              [`${blockClass}--breadcrumb-title--pre-collapsed`]: preCollapseTitleRow,
+                            },
+                          ])}>
+                          {title}
+                        </BreadcrumbItem>
+                      ) : (
+                        ''
+                      )}
+                    </BreadcrumbWithOverflow>
+                  ) : (
+                    ''
+                  )}
+                </Column>
+                <Column
+                  className={cx(`${blockClass}--action-bar-column`, {
+                    [`${blockClass}--action-bar-column--background`]:
+                      actionBarItems !== undefined,
+                  })}>
+                  {actionBarItems !== undefined ? (
+                    <>
+                      <div
+                        className={cx(`${blockClass}--page-actions`, {
+                          [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
+                        })}>
+                        {pageActions}
+                      </div>
+                      <ActionBar className={`${blockClass}--action-bar`}>
+                        {actionBarItems}
+                      </ActionBar>
+                    </>
+                  ) : null}
+                </Column>
+              </div>
             </Row>
           ) : null}
 

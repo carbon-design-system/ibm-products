@@ -8,12 +8,6 @@
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
-@import 'carbon-components/scss/components/breadcrumb/breadcrumb';
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/tooltip/tooltip';
-
-@import '../TagSet/index';
-
 $block-class: #{$exp-prefix}-page-header;
 $raised-z-index: 99;
 
@@ -63,6 +57,19 @@ $raised-z-index: 99;
   }
 }
 
+.#{$block-class}--breadcrumb-row--container {
+  display: flex;
+  flex-wrap: nowrap;
+
+  min-width: calc(
+    100% +
+      (
+        var(--exp-page-header--width-px) -
+          var(--exp-page-header--breadcrumb-row-width-px)
+      ) / 2
+  );
+}
+
 .#{$block-class}--breadcrumb-row--with-actions {
   + .#{$block-class}--last-row-buffer--active {
     height: $layout-02;
@@ -85,23 +92,22 @@ $raised-z-index: 99;
 
 .#{$block-class}--action-bar-column {
   display: flex;
+  flex: 0 0 100%;
   flex-wrap: wrap-reverse; /* page actions go below the actionBarItems */
   justify-content: flex-end;
-
-  // stylelint-disable-next-line carbon/layout-token-use
-  margin-right: calc(
-    (
-        var(--exp-page-header--breadcrumb-row-width-px) -
-          var(--exp-page-header--width-px)
-      ) / 2
-  );
 
   @include carbon--breakpoint-up('lg') {
     flex-wrap: nowrap; /* assume enough space */
   }
+
+  @include carbon--breakpoint-up('md') {
+    flex: 0 0 40%;
+    max-width: 40%;
+  }
 }
 
 .#{$block-class}--breadcrumb-row .#{$block-class}--page-actions {
+  display: inline-block;
   white-space: nowrap;
   visibility: hidden;
   opacity: 0;
@@ -111,6 +117,17 @@ $raised-z-index: 99;
 .#{$block-class}--breadcrumb-row .#{$block-class}--page-actions--in-breadcrumb {
   visibility: visible;
   opacity: 1;
+}
+
+.#{$block-class}--breadcrumb-column {
+  flex: 0 0 100%;
+  max-width: 100%;
+  overflow: hidden; /* required for ellipsis in title */
+
+  @include carbon--breakpoint-up('md') {
+    flex: 0 1 60%;
+    max-width: 60%;
+  }
 }
 
 .#{$block-class}--breadcrumb-column--background,
@@ -172,6 +189,7 @@ $raised-z-index: 99;
 // }
 
 .#{$block-class}--action-bar {
+  display: inline-block;
   margin-top: calc(-1 * #{$spacing-04}); /* align with breadcrumb */
   padding-top: $spacing-04;
   white-space: nowrap;

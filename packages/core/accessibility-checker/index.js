@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { createTransformer } = require('babel-jest');
-const babelOptions = require('babel-preset-ibm-cloud-cognitive');
-
-module.exports = createTransformer(babelOptions());
+// https://www.npmjs.com/package/accessibility-checker#configuring-accessibility-checker
+module.exports = {
+  failLevels: ['violation'],
+  policies: ['WCAG_2_1'],
+};

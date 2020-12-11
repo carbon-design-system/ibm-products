@@ -1,7 +1,0 @@
-# https://www.npmjs.com/package/accessibility-checker#configuring-accessibility-checker
-
-policies:
-  - WCAG_2_1
-
-failLevels:
-  - violation

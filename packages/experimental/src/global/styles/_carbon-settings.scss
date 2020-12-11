@@ -8,7 +8,7 @@
 @import '../../generated/feature-flags/feature-flags';
 
 // Here we import carbon settings for use in referring to colors, type, layout tokens etc.
-@import '~carbon-components/scss/globals/scss/vars';
+@import 'carbon-components/scss/globals/scss/vars';
 @import '@carbon/type/scss/type';
 @import '@carbon/layout/scss/layout';
 @import '@carbon/grid/scss/grid';

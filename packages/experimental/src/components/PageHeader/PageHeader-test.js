@@ -87,7 +87,14 @@ const tags = [
 ];
 const title = 'Page title';
 
+import uuidv4 from '../../global/js/utils/uuidv4';
+jest.mock('../../global/js/utils/uuidv4');
+
 describe('PageHeader', () => {
+  beforeAll(() => {
+    uuidv4.mockImplementation(() => 'testid');
+  });
+
   test('renders an empty header when no props are set', () => {
     render(<PageHeader />);
 

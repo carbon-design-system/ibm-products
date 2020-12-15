@@ -436,6 +436,7 @@ const SidePanel = ({
                 {primaryPanelActions.map((action, index) => (
                   <Button
                     key={index}
+                    disabled={action.disabled || false}
                     onClick={() => action.onPrimaryActionClick()}
                     kind={action.kind || 'primary'}
                     className={[
@@ -543,6 +544,7 @@ SidePanel.propTypes = {
       label: PropTypes.string,
       onPrimaryActionClick: PropTypes.func,
       kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
+      disabled: PropTypes.bool,
     })
   ),
   /**

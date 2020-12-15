@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.11.2",
+    "@carbon/grid": "^10.17.0",
     "focus-trap-react": "^6.0.0",
     "pluralize": "^8.0.0",
     "react-highlighter": "^0.4.3",

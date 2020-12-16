@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/storybook-addon-theme@0.2.3...@carbon/storybook-addon-theme@0.3.0) (2020-12-16)
+
+
+### Features
+
+* Page header tag overflow update ([#264](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/264)) ([ee22520](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ee225206e291fa3bca990cb2ccabfece8930fc88))
+
+
+
+
+
 ## [0.2.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/storybook-addon-theme@0.2.2...@carbon/storybook-addon-theme@0.2.3) (2020-12-10)
 
 

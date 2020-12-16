@@ -25,6 +25,7 @@ export const TagSet = ({
   className,
   maxVisibleTags,
   rightAlign,
+  overflowAlign,
   overflowDirection,
   showAllModalHeading,
   showAllSearchLabel,
@@ -72,13 +73,7 @@ export const TagSet = ({
         );
       } else {
         if (newOverflowTags.length < 10) {
-          newOverflowTags.push(
-            <span
-              key={`overflow-tag-${child.key}`}
-              className={`${blockClass}--overflow-tag`}>
-              {React.cloneElement(child)}
-            </span>
-          );
+          newOverflowTags.push(React.cloneElement(child));
         }
       }
     });
@@ -231,6 +226,8 @@ export const TagSet = ({
             })}
             onFocus={showTip}>
             <Tooltip
+              align={overflowAlign}
+              className={`${blockClass}--tooltip`}
               direction={overflowDirection}
               open={tipOpen}
               triggerText={<Tag>+{children.length - displayedTags.length}</Tag>}
@@ -239,7 +236,15 @@ export const TagSet = ({
               <div
                 ref={overflowTagContent}
                 className={`${blockClass}--overflow-content`}>
-                {overflowTags}
+                <ul className={`${blockClass}--overflow-tag-list`}>
+                  {overflowTags.map((tag, index) => (
+                    <li
+                      className={`${blockClass}--overflow-tag-item`}
+                      key={`overflow-tag--${index}`}>
+                      {tag.props.children}
+                    </li>
+                  ))}
+                </ul>
                 {overflowTags.length >= 10 && (
                   <Link
                     className={`${blockClass}--show-all-tags-link`}
@@ -289,6 +294,10 @@ TagSet.propTypes = {
    */
   maxVisibleTags: PropTypes.number,
   /**
+   * overflowAlign from the standard tooltip
+   */
+  overflowAlign: PropTypes.oneOf(['start', 'center', 'end']),
+  /**
    * overflowDirection from the standard tooltip
    */
   overflowDirection: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
@@ -315,6 +324,7 @@ TagSet.propTypes = {
 };
 
 TagSet.defaultProps = {
+  overflowAlign: 'center',
   overflowDirection: 'bottom',
   showAllModalHeading: 'All tags',
   showAllSearchLabel: 'Search all tags',

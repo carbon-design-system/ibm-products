@@ -18,8 +18,15 @@
   @include carbon--type-style('productive-heading-01');
 }
 
+.#{$exp-prefix}--import-modal-helper-text {
+  margin-top: $spacing-07;
+  margin-bottom: $spacing-03;
+  @include carbon--type-style('helper-text-01');
+}
+
 .#{$exp-prefix}--import-modal-body {
   margin-bottom: $spacing-05;
+  padding-right: 20%;
 }
 
 .#{$exp-prefix}--import-modal .bx--modal-container {

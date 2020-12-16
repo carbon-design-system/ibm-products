@@ -14,8 +14,6 @@ import cx from 'classnames';
 // import { settings } from 'carbon-components';
 // const { prefix } = settings;
 
-import { ContentSwitcher } from 'carbon-components-react';
-
 import ReactResizeDetector from 'react-resize-detector';
 
 import { expPrefix } from '../../global/js/settings';
@@ -182,7 +180,7 @@ export const PageHeader = ({
       [`--${blockClass}--height-px`]: `${metrics.headerHeight}px`,
       [`--${blockClass}--width-px`]: `${metrics.headerWidth}px`,
       [`--${blockClass}--header-top`]: `${
-        navigation && navigation.type !== ContentSwitcher
+        navigation
           ? keepBreadcrumbAndTabs
             ? metrics.navigationRowHeight +
               metrics.breadcrumbRowHeight -
@@ -210,9 +208,7 @@ export const PageHeader = ({
       [`--${blockClass}--breadcrumb-row-width-px`]: `${metrics.breadcrumbRowWidth}px`,
       [`--${blockClass}--breadcrumb-top`]: `${Math.min(
         0,
-        !keepBreadcrumbAndTabs &&
-          navigation &&
-          navigation.type !== ContentSwitcher
+        !keepBreadcrumbAndTabs && navigation
           ? metrics.headerHeight -
               metrics.breadcrumbRowSpaceBelow -
               metrics.navigationRowHeight -
@@ -551,10 +547,9 @@ PageHeader.propTypes = {
   keepBreadcrumbAndTabs: PropTypes.bool,
   /**
    * Content for the navigation area in the PageHeader. Should
-   * be a React element that is normally either a Carbon Tabs component or a
-   * Carbon ContentSwitcher. Optional.
+   * be a React element that is normally either a Carbon Tabs component. Optional.
    */
-  navigation: PropTypes.element, // Supports Tabs or ContentSwitcher
+  navigation: PropTypes.element, // Supports Tabs
   /**
    * Specifies the primary page actions as a React element. Normally this
    * is one or more Carbon Button components. Optional.

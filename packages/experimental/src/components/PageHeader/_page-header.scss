@@ -76,7 +76,7 @@ $raised-z-index: 99;
   }
 }
 
-.#{$block-class}--breadcrumb-row--with-actions::after {
+.#{$block-class}--breadcrumb-row::after {
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -84,10 +84,19 @@ $raised-z-index: 99;
   width: 50vw;
   height: 1px;
   /* creates a full width box shadow without causing scroll */
-  box-shadow: 25vw 1px 0 0 $ui-03, -25vw 1px 0 0 $ui-03;
+  box-shadow: 0 1px 0 0 $ui-03, 0 1px 0 0 $ui-03;
   // stylelint-disable-next-line carbon/layout-token-use
   transform: translateX(-50%) scaleX(1);
+  opacity: 0;
+  transition: all $duration--moderate-01 ease-out;
   content: '';
+}
+
+.#{$block-class}--breadcrumb-row--next-to-tabs::after,
+.#{$block-class}--breadcrumb-row--with-actions::after {
+  /* creates a full width box shadow without causing scroll */
+  box-shadow: 25vw 1px 0 0 $ui-03, -25vw 1px 0 0 $ui-03;
+  opacity: 1;
 }
 
 .#{$block-class}--action-bar-column {
@@ -111,7 +120,8 @@ $raised-z-index: 99;
   white-space: nowrap;
   visibility: hidden;
   opacity: 0;
-  transition: all $duration--fast-02 carbon--motion('entrance', 'productive');
+  transition: all $duration--moderate-02
+    carbon--motion('entrance', 'productive');
 }
 
 .#{$block-class}--breadcrumb-row .#{$block-class}--page-actions--in-breadcrumb {
@@ -196,6 +206,7 @@ $raised-z-index: 99;
 }
 
 .#{$block-class}--title-row {
+  z-index: $raised-z-index + 1;
   margin-top: $layout-02;
   margin-bottom: 0;
 
@@ -345,7 +356,9 @@ $raised-z-index: 99;
 
 .#{$block-class}--navigation-tags--tags-only {
   justify-content: flex-start;
+  margin-left: calc(-1 * #{$spacing-02});
   padding-bottom: $spacing-04;
+  text-align: initial;
 }
 
 .#{$block-class}--navigation-row .#{$prefix}--content-switcher-btn {

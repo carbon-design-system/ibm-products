@@ -114,6 +114,14 @@ export const PageHeader = ({
     update.breadcrumbRowSpaceBelow = 0;
     update.titleRowSpaceAbove = 0;
 
+    update.headerTopValue = navigation
+      ? keepBreadcrumbAndTabs
+        ? update.navigationRowHeight +
+          update.breadcrumbRowHeight -
+          update.headerHeight
+        : update.navigationRowHeight - update.headerHeight
+      : update.breadcrumbRowHeight - update.headerHeight;
+
     if (window) {
       let val;
       if (breadcrumbRowEl) {
@@ -175,48 +183,42 @@ export const PageHeader = ({
 
   useEffect(() => {
     // Updates custom CSS props used to manage scroll behaviour
-    setComponentCssCustomProps((prevCSSProps) => ({
-      ...prevCSSProps,
-      [`--${blockClass}--height-px`]: `${metrics.headerHeight}px`,
-      [`--${blockClass}--width-px`]: `${metrics.headerWidth}px`,
-      [`--${blockClass}--header-top`]: `${
-        navigation
-          ? keepBreadcrumbAndTabs
-            ? metrics.navigationRowHeight +
-              metrics.breadcrumbRowHeight -
-              metrics.headerHeight
-            : metrics.navigationRowHeight - metrics.headerHeight
-          : metrics.breadcrumbRowHeight - metrics.headerHeight
-      }px`,
-      [`--${blockClass}--breadcrumb-title-visibility`]:
-        scrollYValue > 0 ? 'visible' : 'hidden',
-      [`--${blockClass}--scroll`]: `${scrollYValue}`,
-      [`--${blockClass}--breadcrumb-title-top`]: `${Math.max(
-        0,
-        metrics.breadcrumbTitleHeight +
-          metrics.breadcrumbRowSpaceBelow -
-          scrollYValue
-      )}px`,
-      [`--${blockClass}--breadcrumb-title-opacity`]: `${Math.min(
-        1,
-        Math.max(
+    setComponentCssCustomProps((prevCSSProps) => {
+      return {
+        ...prevCSSProps,
+        [`--${blockClass}--height-px`]: `${metrics.headerHeight}px`,
+        [`--${blockClass}--width-px`]: `${metrics.headerWidth}px`,
+        [`--${blockClass}--header-top`]: `${metrics.headerTopValue}px`,
+        [`--${blockClass}--breadcrumb-title-visibility`]:
+          scrollYValue > 0 ? 'visible' : 'hidden',
+        [`--${blockClass}--scroll`]: `${scrollYValue}`,
+        [`--${blockClass}--breadcrumb-title-top`]: `${Math.max(
           0,
-          (scrollYValue - (metrics.breadcrumbRowSpaceBelow || 0)) /
-            (metrics.breadcrumbTitleHeight || 1) // don't want to
-        )
-      )}`,
-      [`--${blockClass}--breadcrumb-row-width-px`]: `${metrics.breadcrumbRowWidth}px`,
-      [`--${blockClass}--breadcrumb-top`]: `${Math.min(
-        0,
-        !keepBreadcrumbAndTabs && navigation
-          ? metrics.headerHeight -
-              metrics.breadcrumbRowSpaceBelow -
-              metrics.navigationRowHeight -
-              metrics.breadcrumbRowHeight -
-              scrollYValue
-          : 0
-      )}px`,
-    }));
+          metrics.breadcrumbTitleHeight +
+            metrics.breadcrumbRowSpaceBelow -
+            scrollYValue
+        )}px`,
+        [`--${blockClass}--breadcrumb-title-opacity`]: `${Math.min(
+          1,
+          Math.max(
+            0,
+            (scrollYValue - (metrics.breadcrumbRowSpaceBelow || 0)) /
+              (metrics.breadcrumbTitleHeight || 1) // don't want to
+          )
+        )}`,
+        [`--${blockClass}--breadcrumb-row-width-px`]: `${metrics.breadcrumbRowWidth}px`,
+        [`--${blockClass}--breadcrumb-top`]: `${Math.min(
+          0,
+          !keepBreadcrumbAndTabs && navigation
+            ? metrics.headerHeight -
+                metrics.breadcrumbRowSpaceBelow -
+                metrics.navigationRowHeight -
+                metrics.breadcrumbRowHeight -
+                scrollYValue
+            : 0
+        )}px`,
+      };
+    });
   }, [
     keepBreadcrumbAndTabs,
     metrics.breadcrumbRowHeight,
@@ -225,6 +227,7 @@ export const PageHeader = ({
     metrics.breadcrumbRowWidth,
     metrics.headerHeight,
     metrics.headerWidth,
+    metrics.headerTopValue,
     metrics.navigationRowHeight,
     navigation,
     scrollYValue,
@@ -241,6 +244,7 @@ export const PageHeader = ({
       actionBarItems,
       availableSpace,
       breadcrumbItems,
+      keepBreadcrumbAndTabs,
       navigation,
       pageActions,
       subtitle,
@@ -256,6 +260,7 @@ export const PageHeader = ({
     actionBarItems,
     availableSpace,
     breadcrumbItems,
+    keepBreadcrumbAndTabs,
     navigation,
     pageActions,
     subtitle,
@@ -334,6 +339,12 @@ export const PageHeader = ({
     checkUpdateVerticalSpace();
   };
 
+  const nextToTabsCheck = () => {
+    return (
+      actionBarItems === undefined && scrollYValue + metrics.headerTopValue > 0
+    );
+  };
+
   return (
     <ReactResizeDetector handleHeight onResize={handleResize}>
       <section
@@ -353,6 +364,7 @@ export const PageHeader = ({
               className={cx(`${blockClass}--breadcrumb-row`, {
                 [`${blockClass}--breadcrumb-row--with-actions`]:
                   actionBarItems !== undefined,
+                [`${blockClass}--breadcrumb-row--next-to-tabs`]: nextToTabsCheck(),
               })}>
               <Column
                 className={cx(`${blockClass}--breadcrumb-column`, {
@@ -388,10 +400,9 @@ export const PageHeader = ({
                 )}
               </Column>
               <Column
-                className={cx(`${blockClass}--action-bar-column`, {
-                  [`${blockClass}--action-bar-column--background`]:
-                    actionBarItems !== undefined,
-                })}>
+                className={cx(
+                  `${blockClass}--action-bar-column ${blockClass}--action-bar-column--background`
+                )}>
                 {actionBarItems !== undefined ? (
                   <>
                     <div

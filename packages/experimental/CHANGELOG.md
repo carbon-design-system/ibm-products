@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.15.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.14.0...@carbon/ibm-cloud-cognitive-experimental@0.15.0) (2020-12-16)
+
+
+### Features
+
+* added multistep functionality to apikey modal ([#279](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/279)) ([13db6e1](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/13db6e12ea47e142a04fa7ad0a4c149a16d0baa4))
+
+
+
+
+
 # [0.14.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.13.2...@carbon/ibm-cloud-cognitive-experimental@0.14.0) (2020-12-16)
 
 

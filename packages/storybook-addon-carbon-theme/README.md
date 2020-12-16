@@ -21,7 +21,7 @@ npm install @carbon/storybook-addon-theme
 
 ## 🙌 Contributing
 
-We're always looking for contributors to help us fix bugs, build new features,
+We are always looking for contributors to help us fix bugs, build new features,
 or help us improve the project documentation. If you're interested, definitely
 check out our
 [Contributing Guide](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CONTRIBUTING.md)

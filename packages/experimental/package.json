@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-experimental",
   "description": "Carbon for Cloud & Cognitive experimental UI components",
-  "version": "0.12.6",
+  "version": "0.13.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -39,14 +39,14 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.12.5",
-    "@carbon/icons-react": "^10.21.0",
-    "carbon-components": "^10.24.0",
-    "carbon-components-react": "^7.24.0",
+    "@carbon/icons-react": "^10.22.0",
+    "carbon-components": "^10.25.0",
+    "carbon-components-react": "^7.25.0",
     "carbon-icons": "^7.0.7",
     "react-resize-detector": "^5.2.0"
   },
   "devDependencies": {
-    "@carbon/ibm-cloud-cognitive-core": "^0.4.6",
-    "@carbon/rollup-config": "^0.2.2"
+    "@carbon/ibm-cloud-cognitive-core": "^0.5.0",
+    "@carbon/rollup-config": "^0.3.0"
   }
 }

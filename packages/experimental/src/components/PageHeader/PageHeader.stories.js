@@ -216,6 +216,9 @@ const manyTags = [
   <Tag type="teal" key="teal">
     Teal
   </Tag>,
+  <Tag type="red" key="long-one">
+    Longer ThanAPieceOfString
+  </Tag>,
   <Tag type="high-contrast" key="high-contrast">
     High contrast
   </Tag>,

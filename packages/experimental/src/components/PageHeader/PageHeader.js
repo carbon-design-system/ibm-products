@@ -503,7 +503,7 @@ export const PageHeader = ({
                     [`${blockClass}--navigation-tags--tags-only`]:
                       navigation === undefined,
                   })}>
-                  <TagSet>{tags}</TagSet>
+                  <TagSet overflowAlign="end">{tags}</TagSet>
                 </Column>
               ) : null}
             </Row>

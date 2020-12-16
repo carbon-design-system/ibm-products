@@ -26,10 +26,10 @@
     "fast-glob": "^3.2.4",
     "fs-extra": "^9.0.1",
     "inquirer": "^7.3.3",
-    "prettier": "^2.2.0",
+    "prettier": "^2.2.1",
     "prettier-config-carbon": "^0.4.0",
     "remark": "^12.0.0",
-    "semver": "^7.3.2",
+    "semver": "^7.3.4",
     "yargs": "^15.3.1"
   }
 }

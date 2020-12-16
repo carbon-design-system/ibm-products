@@ -15,6 +15,7 @@ import {
   Toggle,
   InlineLoading,
 } from 'carbon-components-react';
+import { action } from '@storybook/addon-actions';
 import { APIKeyModal } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import mdx from './APIKeyModal.mdx';
@@ -54,18 +55,22 @@ const TemplateWithState = (args) => {
   const [open, setOpen] = useState(false);
   const [apiKey, setApiKey] = useState('');
   const [loading, setLoading] = useState(false);
+
   // eslint-disable-next-line
   const setKeyHandler = async (resourceName) => {
+    action('submitted');
     setLoading(true);
     const timeout = () => new Promise((resolve) => setTimeout(resolve, 2000));
     await timeout();
     setApiKey('111-111-111-111');
     setLoading(false);
   };
+
   const onCloseHandler = () => {
     setApiKey('');
     setOpen(false);
   };
+
   const modalToggler = () => {
     setOpen(!open);
   };
@@ -98,16 +103,19 @@ const MultiStepTemplate = (args) => {
 
   // eslint-disable-next-line
   const setKeyHandler = async (resourceName) => {
+    action('submitted');
     setLoading(true);
     const timeout = () => new Promise((resolve) => setTimeout(resolve, 2000));
     await timeout();
     setApiKey('111-111-111-111');
     setLoading(false);
   };
+
   const onCloseHandler = () => {
     setApiKey('');
     setOpen(false);
   };
+
   const modalToggler = () => {
     setOpen(!open);
   };

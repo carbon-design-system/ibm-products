@@ -171,8 +171,6 @@ export const PageHeader = ({
 
   useEffect(() => {
     // Updates custom CSS props used to manage scroll behaviour
-    console.log(metrics);
-
     setComponentCssCustomProps((prevCSSProps) => ({
       ...prevCSSProps,
       [`--${blockClass}--height-px`]: `${metrics.headerHeight}px`,

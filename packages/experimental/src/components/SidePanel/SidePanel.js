@@ -7,6 +7,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { expPrefix as prefix } from '../../global/js/settings';
 import { Button } from 'carbon-components-react';
 import { SIDE_PANEL_SIZES } from './constants';
@@ -313,21 +314,33 @@ const SidePanel = ({
     }
   };
 
+  const mainPanelClassNames = cx([
+    `${prefix}-side-panel-container`,
+    `${prefix}-side-panel-container-${theme}`,
+    setSizeClassName(size),
+    {
+      [`${prefix}-side-panel-container-right-placement`]: placement === 'right',
+      [`${prefix}-side-panel-container-left-placement`]: placement === 'left',
+    },
+  ]);
+
+  const primaryActionContainerClassNames = cx([
+    `${prefix}-side-panel-actions-container`,
+    setSizeClassName(size, true),
+    setPrimaryActionsBarClass(
+      primaryPanelActions && primaryPanelActions.length
+    ),
+    {
+      [`${prefix}-side-panel-actions-container-condensed`]: condensed,
+    },
+  ]);
+
   return (
     shouldRender && (
       <>
         <div
           id={`${prefix}-side-panel-outer`}
-          className={[
-            `${prefix}-side-panel-container`,
-            `${
-              placement === 'right'
-                ? `${prefix}-side-panel-container-right-placement`
-                : `${prefix}-side-panel-container-left-placement`
-            }`,
-            setSizeClassName(size),
-            `${prefix}-side-panel-container-${theme}`,
-          ].join(' ')}
+          className={mainPanelClassNames}
           style={{
             animation: `${
               open
@@ -389,14 +402,13 @@ const SidePanel = ({
                       iconDescription={action.label}
                       tooltipPosition="bottom"
                       tooltipAlignment="center"
-                      className={[
+                      className={cx([
                         `${prefix}-side-panel-action-toolbar-button`,
-                        `${
-                          action.icon
-                            ? `${prefix}-side-panel-action-toolbar-icon-only-button`
-                            : `${prefix}-side-panel-action-toolbar-leading-button`
-                        }`,
-                      ].join(' ')}
+                        {
+                          [`${prefix}-side-panel-action-toolbar-icon-only-button`]: action.icon,
+                          [`${prefix}-side-panel-action-toolbar-leading-button`]: !action.icon,
+                        },
+                      ])}
                       onClick={() => action.onActionToolbarButtonClick()}>
                       {action.leading ? action.label : ''}
                     </Button>
@@ -420,38 +432,21 @@ const SidePanel = ({
               {children}
             </div>
             {primaryPanelActions && primaryPanelActions.length ? (
-              <div
-                className={[
-                  `${prefix}-side-panel-actions-container`,
-                  `${
-                    condensed
-                      ? `${prefix}-side-panel-actions-container-condensed`
-                      : ''
-                  }`,
-                  setSizeClassName(size, true),
-                  setPrimaryActionsBarClass(
-                    primaryPanelActions && primaryPanelActions.length
-                  ),
-                ].join(' ')}>
+              <div className={primaryActionContainerClassNames}>
                 {primaryPanelActions.map((action, index) => (
                   <Button
                     key={index}
                     disabled={action.disabled || false}
                     onClick={() => action.onPrimaryActionClick()}
                     kind={action.kind || 'primary'}
-                    className={[
+                    className={cx([
                       `${prefix}-side-panel-primary-action-button`,
-                      `${
-                        action.kind === 'ghost'
-                          ? `${prefix}-side-panel-ghost-button`
-                          : ''
-                      }`,
-                      `${
-                        condensed
-                          ? `${prefix}-side-panel-primary-action-button-condensed`
-                          : ''
-                      }`,
-                    ].join(' ')}>
+                      {
+                        [`${prefix}-side-panel-ghost-button`]:
+                          action.kind === 'ghost',
+                        [`${prefix}-side-panel-primary-action-button-condensed`]: condensed,
+                      },
+                    ])}>
                     {action.label}
                   </Button>
                 ))}

@@ -17,7 +17,7 @@
     "carbon for cloud & cognitive"
   ],
   "dependencies": {
-    "@rollup/plugin-babel": "^5.2.1",
+    "@rollup/plugin-babel": "^5.2.2",
     "@rollup/plugin-commonjs": "^13.0.0",
     "@rollup/plugin-node-resolve": "^8.0.1",
     "babel-preset-ibm-cloud-cognitive": "^0.1.2"

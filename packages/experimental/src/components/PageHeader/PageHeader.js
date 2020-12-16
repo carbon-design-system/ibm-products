@@ -558,7 +558,7 @@ PageHeader.propTypes = {
   keepBreadcrumbAndTabs: PropTypes.bool,
   /**
    * Content for the navigation area in the PageHeader. Should
-   * be a React element that is normally either a Carbon Tabs component. Optional.
+   * be a React element that is normally a Carbon Tabs component. Optional.
    */
   navigation: PropTypes.element, // Supports Tabs
   /**

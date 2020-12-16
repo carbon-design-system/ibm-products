@@ -327,7 +327,9 @@ $raised-z-index: 99;
 
 .#{$block-class}--navigation-tags--tags-only {
   justify-content: flex-start;
+  margin-left: calc(-1 * #{$spacing-02});
   padding-bottom: $spacing-04;
+  text-align: initial;
 }
 
 .#{$block-class}--navigation-row .#{$prefix}--content-switcher-btn {

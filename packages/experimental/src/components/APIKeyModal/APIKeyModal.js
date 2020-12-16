@@ -12,6 +12,7 @@ export const APIKeyModal = ({
   apiKeyVisibility,
   copyButtonText,
   createButtonText,
+  customSteps,
   createHeader,
   downloadBodyText,
   downloadLinkText,
@@ -20,89 +21,136 @@ export const APIKeyModal = ({
   loading,
   loadingMessage,
   modalBody,
+  modalLabel,
   nameHelperText,
   nameInputId,
   nameLabel,
   namePlaceholder,
   nameRequired,
+  nextStepButtonText,
   onRequestClose,
   onRequestSubmit,
   open,
+  previousStepButtonText,
   secondaryButtonText,
   successBody,
   successHeader,
+  stepHeaders,
 }) => {
   const [name, setName] = useState('');
+  const [currentStep, setCurrentStep] = useState(0);
+
+  const primaryButtonDisabled = nameRequired && !name;
+  const apiKeyLoaded = apiKey && !loading;
+  const hasNextStep =
+    customSteps.length && currentStep < customSteps.length - 1;
+  const hasPreviousStep = customSteps.length && currentStep !== 0;
+
+  const getPrimaryButtonText = () => {
+    if (apiKey) return copyButtonText;
+    if (hasNextStep) return nextStepButtonText;
+    return createButtonText;
+  };
+
+  const getSecondaryButtonText = () => {
+    if (hasPreviousStep && !apiKeyLoaded) return previousStepButtonText;
+    return secondaryButtonText;
+  };
+
+  const getHeader = () => {
+    if (apiKeyLoaded) return successHeader;
+    else if (customSteps.length) return stepHeaders[currentStep];
+    return createHeader;
+  };
+
   const setNameHandler = (evt) => {
     setName(evt.target.value);
   };
-  const primaryButtonDisabled = nameRequired && !name;
-  const primaryButtonText = apiKey ? copyButtonText : createButtonText;
-  const apiKeyLoaded = apiKey && !loading;
+
   const submitHandler = () => {
-    if (apiKeyLoaded) navigator.clipboard.writeText(apiKey);
+    if (hasNextStep) setCurrentStep(currentStep + 1);
+    else if (apiKeyLoaded) navigator.clipboard.writeText(apiKey);
     else onRequestSubmit(name);
   };
+
   const onCloseHandler = () => {
     setName('');
+    setCurrentStep(0);
     onRequestClose();
   };
-  const header = apiKeyLoaded ? successHeader : createHeader;
+
+  const onBackHandler = () => {
+    if (hasPreviousStep && !apiKeyLoaded) setCurrentStep(currentStep - 1);
+    else onCloseHandler();
+  };
+
   return (
     <Modal
       className={`${expPrefix}--apikey-modal`}
       open={open}
-      modalHeading={header}
-      primaryButtonText={primaryButtonText}
-      secondaryButtonText={secondaryButtonText}
+      modalHeading={getHeader()}
+      primaryButtonText={getPrimaryButtonText()}
+      secondaryButtonText={getSecondaryButtonText()}
       onRequestSubmit={submitHandler}
       primaryButtonDisabled={primaryButtonDisabled}
-      onRequestClose={onCloseHandler}>
-      {modalBody && (
-        <p className={`${expPrefix}--apikey-modal-body`}>{modalBody}</p>
-      )}
-      {apiKey && apiKeyVisibility && (
-        <TextInput.PasswordInput
-          value={apiKey}
-          labelText={apiKeyLabel}
-          id={apiKeyInputId}
-        />
-      )}
-      {apiKey && !apiKeyVisibility && (
-        <TextInput value={apiKey} labelText={apiKeyLabel} id={apiKeyInputId} />
-      )}
-      {nameRequired && !apiKeyLoaded && (
-        <TextInput
-          helperText={nameHelperText}
-          placeholder={namePlaceholder}
-          labelText={nameLabel}
-          onChange={(evt) => setNameHandler(evt)}
-          value={name}
-          id={nameInputId}
-        />
-      )}
-      {loading && (
-        <InlineLoading
-          description={loadingMessage}
-          className={`${expPrefix}--apikey-modal-loader`}
-        />
-      )}
-      {apiKeyLoaded && (
-        <div className={`${expPrefix}--apikey-modal-messaging`}>
-          <InformationFilled16 />
-          {downloadable ? (
-            <APIKeyDownloader
-              apiKey={apiKey}
-              bodyText={downloadBodyText}
-              fileName={downloadableFileName}
-              linkText={downloadLinkText}
+      onRequestClose={onCloseHandler}
+      onSecondarySubmit={onBackHandler}
+      modalLabel={hasPreviousStep ? modalLabel : ''}>
+      {customSteps.length && !apiKeyLoaded ? (
+        customSteps[currentStep]
+      ) : (
+        <>
+          {modalBody && (
+            <p className={`${expPrefix}--apikey-modal-body`}>{modalBody}</p>
+          )}
+          {apiKey && apiKeyVisibility && (
+            <TextInput.PasswordInput
+              value={apiKey}
+              labelText={apiKeyLabel}
+              id={apiKeyInputId}
             />
-          ) : (
-            <div className={`${expPrefix}--apikey-modal-messaging-text`}>
-              {successBody}
+          )}
+          {apiKey && !apiKeyVisibility && (
+            <TextInput
+              value={apiKey}
+              labelText={apiKeyLabel}
+              id={apiKeyInputId}
+            />
+          )}
+          {nameRequired && !apiKeyLoaded && (
+            <TextInput
+              helperText={nameHelperText}
+              placeholder={namePlaceholder}
+              labelText={nameLabel}
+              onChange={(evt) => setNameHandler(evt)}
+              value={name}
+              id={nameInputId}
+            />
+          )}
+          {loading && (
+            <InlineLoading
+              description={loadingMessage}
+              className={`${expPrefix}--apikey-modal-loader`}
+            />
+          )}
+          {apiKeyLoaded && (
+            <div className={`${expPrefix}--apikey-modal-messaging`}>
+              <InformationFilled16 />
+              {downloadable ? (
+                <APIKeyDownloader
+                  apiKey={apiKey}
+                  bodyText={downloadBodyText}
+                  fileName={downloadableFileName}
+                  linkText={downloadLinkText}
+                />
+              ) : (
+                <div className={`${expPrefix}--apikey-modal-messaging-text`}>
+                  {successBody}
+                </div>
+              )}
             </div>
           )}
-        </div>
+        </>
       )}
     </Modal>
   );
@@ -138,6 +186,10 @@ APIKeyModal.propTypes = {
    */
   createHeader: PropTypes.string,
   /**
+   * Elements used for custom api key setup
+   */
+  customSteps: PropTypes.arrayOf(PropTypes.node),
+  /**
    * text fot the download message
    */
   downloadBodyText: PropTypes.string,
@@ -166,6 +218,10 @@ APIKeyModal.propTypes = {
    */
   modalBody: PropTypes.string,
   /**
+   * Label for modal
+   */
+  modalLabel: PropTypes.string,
+  /**
    * helper text for name input
    */
   nameHelperText: PropTypes.string,
@@ -186,6 +242,10 @@ APIKeyModal.propTypes = {
    */
   nameRequired: PropTypes.bool,
   /**
+   * Specifies text for next step button
+   */
+  nextStepButtonText: PropTypes.string,
+  /**
    * function to close the modal
    */
   onRequestClose: PropTypes.func,
@@ -198,9 +258,17 @@ APIKeyModal.propTypes = {
    */
   open: PropTypes.bool,
   /**
+   * Specifices text for previous step button
+   */
+  previousStepButtonText: PropTypes.string,
+  /**
    * text for the close button
    */
   secondaryButtonText: PropTypes.string,
+  /**
+   * Modal header for individual steps
+   */
+  stepHeaders: PropTypes.arrayOf(PropTypes.string),
   /**
    * content for when an api key is created successfully
    */
@@ -217,6 +285,7 @@ APIKeyModal.defaultProps = {
   apiKeyLabel: '',
   apiKeyVisibility: false,
   copyButtonText: '',
+  customSteps: [],
   downloadBodyText: '',
   downloadLinkText: '',
   downloadable: false,
@@ -226,6 +295,7 @@ APIKeyModal.defaultProps = {
   loading: false,
   loadingMessage: '',
   modalBody: '',
+  modalLabel: '',
   nameHelperText: '',
   nameInputId: '',
   nameLabel: '',
@@ -235,6 +305,7 @@ APIKeyModal.defaultProps = {
   onRequestSubmit: () => {},
   open: false,
   secondaryButtonText: '',
+  stepHeaders: [],
   successBody: '',
   successHeader: '',
 };

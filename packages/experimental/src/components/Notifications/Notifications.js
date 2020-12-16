@@ -7,6 +7,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { expPrefix as prefix } from '../../global/js/settings';
 import { Button, Link, ToggleSmall } from 'carbon-components-react';
 import {
@@ -97,19 +98,22 @@ const Notifications = ({
       allNotifications.filter((item) => item.id === id)[0];
     const trimLength = 88;
     const description = notification.description;
+    const descriptionClassName = cx([
+      `${prefix}-notifications-panel-notification-description`,
+      {
+        [`${prefix}-notifications-panel-notification-long-description`]: notification.showAll,
+        [`${prefix}-notifications-panel-notification-short-description`]: !notification.showAll,
+      },
+    ]);
+    const showMoreButtonClassName = cx([
+      {
+        [`${prefix}-notifications-panel-notification-read-less-button`]: notification.showAll,
+        [`${prefix}-notifications-panel-notification-read-more-button`]: !notification.showAll,
+      },
+    ]);
     return (
       <div>
-        <p
-          className={[
-            `${prefix}-notifications-panel-notification-description`,
-            `${
-              notification.showAll
-                ? `${prefix}-notifications-panel-notification-long-description`
-                : `${prefix}-notifications-panel-notification-short-description`
-            }`,
-          ].join(' ')}>
-          {description}
-        </p>
+        <p className={descriptionClassName}>{description}</p>
         {description.length > trimLength && (
           <Button
             kind="ghost"
@@ -126,13 +130,7 @@ const Notifications = ({
               });
               setAllNotifications(newData);
             }}
-            className={[
-              `${
-                notification.showAll
-                  ? `${prefix}-notifications-panel-notification-read-less-button`
-                  : `${prefix}-notifications-panel-notification-read-more-button`
-              }`,
-            ].join(' ')}>
+            className={showMoreButtonClassName}>
             {notification.showAll ? 'Read less' : 'Read more'}
           </Button>
         )}
@@ -141,14 +139,21 @@ const Notifications = ({
   };
 
   const renderNotification = (group, notification, index) => {
+    const notificationClassName = cx([
+      `${prefix}-notifications-panel-notification`,
+      `${prefix}-notifications-panel-notification-${group}`,
+    ]);
+    const notificationHeaderClassName = cx([
+      `${prefix}-notifications-panel-notification-title`,
+      {
+        [`${prefix}-notifications-panel-notification-title-unread`]: notification.unread,
+      },
+    ]);
     return (
       <div
         aria-label={`Notification: ${notification.title}`}
         key={`${notification.timestamp}-${notification.title}-${index}`}
-        className={[
-          `${prefix}-notifications-panel-notification`,
-          `${prefix}-notifications-panel-notification-${group}`,
-        ].join(' ')}
+        className={notificationClassName}
         type="button"
         role="button"
         tabIndex={0}
@@ -166,34 +171,34 @@ const Notifications = ({
         }}>
         {notification.type === 'error' && (
           <ErrorFilled16
-            className={[
+            className={cx([
               `${prefix}-notifications-panel-notification-status-icon`,
               `${prefix}-notifications-panel-notification-status-icon-error`,
-            ].join(' ')}
+            ])}
           />
         )}
         {notification.type === 'success' && (
           <CheckmarkFilled16
-            className={[
+            className={cx([
               `${prefix}-notifications-panel-notification-status-icon`,
               `${prefix}-notifications-panel-notification-status-icon-success`,
-            ].join(' ')}
+            ])}
           />
         )}
         {notification.type === 'warning' && (
           <WarningAltFilled16
-            className={[
+            className={cx([
               `${prefix}-notifications-panel-notification-status-icon`,
               `${prefix}-notifications-panel-notification-status-icon-warning`,
-            ].join(' ')}
+            ])}
           />
         )}
         {notification.type === 'informational' && (
           <InformationSquareFilled16
-            className={[
+            className={cx([
               `${prefix}-notifications-panel-notification-status-icon`,
               `${prefix}-notifications-panel-notification-status-icon-informational`,
-            ].join(' ')}
+            ])}
           />
         )}
         <div className={`${prefix}-notifications-panel-notification-content`}>
@@ -201,17 +206,7 @@ const Notifications = ({
             className={`${prefix}-notifications-panel-notification-time-label`}>
             {timeAgo(notification.timestamp)}
           </p>
-          <h6
-            className={[
-              `${prefix}-notifications-panel-notification-title`,
-              `${
-                notification.unread
-                  ? `${prefix}-notifications-panel-notification-title-unread`
-                  : ''
-              }`,
-            ].join(' ')}>
-            {notification.title}
-          </h6>
+          <h6 className={notificationHeaderClassName}>{notification.title}</h6>
           {notification.description &&
             notification.description.length &&
             renderDescription(notification.id)}
@@ -244,6 +239,13 @@ const Notifications = ({
     onDismissSingleNotification(notification);
   };
 
+  const mainSectionClassName = cx([
+    `${prefix}-notifications-panel-main-section`,
+    {
+      [`${prefix}-notificaitons-panel-main-section-empty`]: !allNotifications.length,
+    },
+  ]);
+
   return (
     shouldRender && (
       <div
@@ -272,15 +274,7 @@ const Notifications = ({
             aria-label={doNotDisturbLabel}
           />
         </div>
-        <div
-          className={[
-            `${prefix}-notifications-panel-main-section`,
-            `${
-              !allNotifications.length
-                ? `${prefix}-notificaitons-panel-main-section-empty`
-                : ''
-            }`,
-          ].join(' ')}>
+        <div className={mainSectionClassName}>
           {withinLastDayNotifications && withinLastDayNotifications.length ? (
             <>
               <h6

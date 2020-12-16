@@ -11,10 +11,8 @@ import React from 'react';
 import {
   BreadcrumbItem,
   Column,
-  ContentSwitcher,
   Grid,
   Row,
-  Switch,
   Tab,
   Tabs,
   Tag,
@@ -87,15 +85,6 @@ const manyBreadcrumbItems = (
   </>
 );
 const className = 'client-class-1 client-class-2';
-const contentSwitcher = (
-  <ContentSwitcher
-    className="page-header-stories__content-switcher"
-    onChange={() => {}}>
-    <Switch name="one" text="First section" />
-    <Switch name="two" text="Second section" />
-    <Switch name="three" text="Third section" />
-  </ContentSwitcher>
-);
 const dummyPageContent = (
   <Grid className="page-header-stories__dummy-content" narrow={true}>
     <Row>
@@ -318,17 +307,6 @@ WithBackgroundBreadcrumbitemsTitlePageactionsTabs.args = {
   title,
   pageActions,
   navigation: tabBar,
-};
-
-export const WithBackgroundBreadcrumbitemsTitlePageactionsContentSwitcher = Template.bind(
-  {}
-);
-WithBackgroundBreadcrumbitemsTitlePageactionsContentSwitcher.args = {
-  background: true,
-  breadcrumbItems,
-  title,
-  pageActions,
-  navigation: contentSwitcher,
 };
 
 export const WithBackgroundBreadcrumbitemsTitlePageactionsTags = Template.bind(

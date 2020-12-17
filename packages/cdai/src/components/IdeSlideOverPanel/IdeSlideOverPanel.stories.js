@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { getComponentLabel } from '../../component_helpers/StorybookHelper';
-import { TextInput, TextArea } from 'carbon-components-react';
+import { Button, TextInput, TextArea } from 'carbon-components-react';
 import RightArrowIcon16 from '@carbon/icons-react/lib/arrow--right/16';
 import { IdeSlideOverPanel } from '.';
 import styles from './_storybook.scss';
@@ -107,30 +107,6 @@ storiesOf(getComponentLabel('IdeSlideOverPanel'), module)
     }
   );
 
-storiesOf(getComponentLabel('IdeSlideOverPanel'), module)
-  .add('with controls', () => (
-    <IdeSlideOverPanel size="medium" controls title="Edit Asset metadata" open>
-      {mockContent}
-    </IdeSlideOverPanel>
-  ))
-  .add('with controls - danger', () => (
-    <IdeSlideOverPanel
-      size="large"
-      controls
-      danger
-      title="Edit Asset metadata"
-      open>
-      {mockContent}
-    </IdeSlideOverPanel>
-  ))
-  .add('with controls', () => (
-    <IdeSlideOverPanel size="medium" controls title="Edit Asset metadata" open>
-      {mockContent}
-    </IdeSlideOverPanel>
-  ))
-  .add('with controls - icon buttons switching content', () => {
-    return <DummyMultiPageSlideComponent />;
-  });
 const DummyMultiPageSlideComponent = () => {
   const [page, setPage] = useState(1);
   const onPrimaryButton = () => {
@@ -155,3 +131,70 @@ const DummyMultiPageSlideComponent = () => {
     </IdeSlideOverPanel>
   );
 };
+
+storiesOf(getComponentLabel('IdeSlideOverPanel'), module)
+  .add('with controls', () => (
+    <IdeSlideOverPanel size="medium" controls title="Edit Asset metadata" open>
+      {mockContent}
+    </IdeSlideOverPanel>
+  ))
+  .add('with controls - danger', () => (
+    <IdeSlideOverPanel
+      size="large"
+      controls
+      danger
+      title="Edit Asset metadata"
+      open>
+      {mockContent}
+    </IdeSlideOverPanel>
+  ))
+  .add('with controls', () => (
+    <IdeSlideOverPanel size="medium" controls title="Edit Asset metadata" open>
+      {mockContent}
+    </IdeSlideOverPanel>
+  ))
+  .add('with controls - icon buttons switching content', () => {
+    return <DummyMultiPageSlideComponent />;
+  });
+
+const SlideOverStateManager = (props) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <Button
+        onClick={() => {
+          setOpen(!open);
+        }}>
+        Toggle Slideover
+      </Button>
+
+      <IdeSlideOverPanel
+        {...props}
+        onClose={() => {
+          setOpen(false);
+        }}
+        open={open}>
+        foo
+      </IdeSlideOverPanel>
+    </>
+  );
+};
+
+storiesOf(getComponentLabel('IdeSlideOverPanel'), module)
+  .addDecorator(withKnobs)
+  .addParameters({ styles, layout: 'fullscreen' })
+  .add(
+    'With state manager',
+    () => (
+      <SlideOverStateManager
+        size="medium"
+        title="Medium panel title"
+        withOverlay={boolean('with overlay?', true)}
+      />
+    ),
+    {
+      info: {
+        text: 'Shows a medium panel.',
+      },
+    }
+  );

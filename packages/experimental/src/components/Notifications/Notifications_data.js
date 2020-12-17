@@ -1,3 +1,12 @@
+/**
+ * Copyright IBM Corp. 2020, 2020
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { action } from '@storybook/addon-actions';
+
 const currentDate = new Date();
 let yesterdayDate = new Date();
 yesterdayDate.setDate(yesterdayDate.getDate() - 1);
@@ -11,6 +20,8 @@ const data = [
     title: 'LogRhythm connection failure',
     description: 'LogRhythm is failing to connect, check timeout.',
     timestamp: currentDate,
+    unread: true,
+    onNotificationClick: action(`Clicked on notification`),
   },
   {
     id: 1,
@@ -18,6 +29,7 @@ const data = [
     title: 'System alert',
     description: 'Email classification was exported successfully.',
     timestamp: new Date(currentDate.getTime() - 11 * msInOneMinute),
+    onNotificationClick: action(`Clicked on notification`),
   },
   {
     id: 2,
@@ -25,6 +37,7 @@ const data = [
     title: 'IBM Cloud Pak for Automation Success',
     description: 'Successfully connected cartridge',
     timestamp: new Date(currentDate.getTime() - 120 * msInOneMinute),
+    onNotificationClick: action(`Clicked on notification`),
   },
   {
     id: 3,
@@ -32,6 +45,7 @@ const data = [
     title: 'Successfully connected LogDNA',
     description: 'App connection succeeded',
     timestamp: yesterdayDate,
+    onNotificationClick: action(`Clicked on notification`),
   },
   {
     id: 4,
@@ -39,6 +53,7 @@ const data = [
     title: 'Cloud Foundry app memory',
     description: 'Allocated app memory low',
     timestamp: dayBeforeYesterday,
+    onNotificationClick: action(`Clicked on notification`),
   },
   {
     id: 5,
@@ -49,6 +64,7 @@ const data = [
       url: 'https://www.carbondesignsystem.com',
     },
     timestamp: dayBeforeYesterday,
+    onNotificationClick: action(`Clicked on notification`),
   },
   {
     id: 6,
@@ -57,6 +73,7 @@ const data = [
     description:
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
+    onNotificationClick: action(`Clicked on notification`),
   },
   {
     id: 7,
@@ -65,6 +82,7 @@ const data = [
     description:
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
+    onNotificationClick: action(`Clicked on notification`),
   },
   {
     id: 8,
@@ -73,6 +91,7 @@ const data = [
     description:
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
+    onNotificationClick: action(`Clicked on notification`),
   },
   {
     id: 9,
@@ -81,6 +100,7 @@ const data = [
     description:
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
+    onNotificationClick: action(`Clicked on notification`),
   },
   {
     id: 10,
@@ -89,6 +109,7 @@ const data = [
     description:
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
+    onNotificationClick: action(`Clicked on notification`),
   },
   {
     id: 11,
@@ -97,6 +118,7 @@ const data = [
     description:
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
+    onNotificationClick: action(`Clicked on notification`),
   },
   {
     id: 12,
@@ -105,6 +127,7 @@ const data = [
     description:
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
+    onNotificationClick: action(`Clicked on notification`),
   },
   {
     id: 13,
@@ -113,6 +136,7 @@ const data = [
     description:
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
+    onNotificationClick: action(`Clicked on notification`),
   },
   {
     id: 14,
@@ -121,6 +145,7 @@ const data = [
     description:
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
+    onNotificationClick: action(`Clicked on notification`),
   },
 ];
 

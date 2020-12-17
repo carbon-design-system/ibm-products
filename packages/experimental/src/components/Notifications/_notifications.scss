@@ -63,13 +63,16 @@
     position: sticky;
     top: 0;
     z-index: 2;
-    padding: $spacing-05;
+    padding: $spacing-03 $spacing-05 $spacing-05;
     background-color: $ui-background;
     border-bottom: 1px solid $ui-02;
     .#{$exp-prefix}-notifications-header-flex {
       display: flex;
       align-items: center;
       justify-content: space-between;
+    }
+    .#{$exp-prefix}-notifications-do-not-disturb-toggle .bx--toggle__switch {
+      margin-top: $spacing-02;
     }
     .#{$exp-prefix}-notifications-dismiss-button {
       color: $text-01;
@@ -85,21 +88,49 @@
     @include carbon--font-weight('semibold');
 
     position: sticky;
-    top: $layout-06;
+    // stylelint-disable-next-line carbon/layout-token-use
+    top: 4.8125rem;
     z-index: 2;
     padding: $spacing-03 $spacing-05;
     color: $text-02;
     background-color: $ui-01;
   }
+  .#{$exp-prefix}-notifications-panel-notification:hover,
+  .#{$exp-prefix}-notifications-panel-notification:focus {
+    background-color: $ui-03;
+    .#{$exp-prefix}-notifications-dismiss-single-button {
+      opacity: 1;
+    }
+  }
+  .#{$exp-prefix}-notifications-panel-notification:focus {
+    border-color: $focus;
+    outline: 0;
+    box-shadow: inset 0 0 0 2px $focus, inset 0 0 0 2px $ui-background;
+  }
   .#{$exp-prefix}-notifications-panel-notification {
     position: relative;
     display: flex;
     align-items: flex-start;
+    width: 100%;
     min-height: 6.25rem;
     // stylelint-disable-next-line carbon/layout-token-use
     padding: $spacing-05 $spacing-05 1.125rem;
+    text-align: left;
+    background-color: $ui-background;
+    border: 0;
+    cursor: pointer;
+    // stylelint-disable-next-line carbon/motion-token-use
+    transition: background-color 250ms;
+    transition-timing-function: carbon--motion(standard);
     .#{$exp-prefix}-notifications-panel-notification-title {
       margin-bottom: $spacing-02;
+      color: $text-04;
+      @include carbon--font-weight('regular');
+    }
+    .#{$exp-prefix}-notifications-panel-notification-title.#{$exp-prefix}-notifications-panel-notification-title-unread {
+      margin-bottom: $spacing-02;
+      color: $text-04;
+      @include carbon--font-weight('semibold');
     }
     .#{$exp-prefix}-notifications-panel-notifications-link {
       @include carbon--type-style('label-01');
@@ -169,6 +200,19 @@
         }
       }
     }
+    .#{$exp-prefix}-notifications-dismiss-single-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      min-width: 2rem;
+      padding: 0;
+      color: $text-01;
+      opacity: 0;
+    }
+    .#{$exp-prefix}-notifications-dismiss-single-button:hover,
+    .#{$exp-prefix}-notifications-dismiss-single-button:focus {
+      opacity: 1;
+    }
   }
   .#{$exp-prefix}-notifications-panel-notification-today:not(:last-of-type):before,
   .#{$exp-prefix}-notifications-panel-notification-yesterday:not(:last-of-type):before,
@@ -181,10 +225,49 @@
     background-color: $ui-02;
     content: '';
   }
-  .#{$exp-prefix}-notificaitons-panel-main-section-empty {
+  .#{$exp-prefix}-notificaitons-panel-main-section-empty.#{$exp-prefix}-notifications-panel-main-section {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 32.5rem;
+    height: 100%;
+    min-height: initial;
+    margin-top: $layout-07;
+    .#{$exp-prefix}-subtext {
+      @include carbon--type-style('body-short-01');
+    }
+  }
+  .#{$exp-prefix}-notifications-panel-main-section {
+    min-height: 500px;
+  }
+  .#{$exp-prefix}-notifications-bottom-actions {
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    height: 2.5rem;
+    min-height: 2.5rem;
+    background-color: $ui-background;
+    border-top: 1px solid $ui-02;
+    .#{$exp-prefix}-notifications-view-all-button {
+      width: 100%;
+      max-width: calc(100% - 2.25rem);
+      height: 2.5rem;
+      min-height: 2.5rem;
+      color: $text-01;
+      border-right: 1px solid $ui-02;
+    }
+    .#{$exp-prefix}-notifications-settings-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 2.5rem;
+      height: 2.5rem;
+      min-height: 2.5rem;
+      padding: 0;
+      color: $text-01;
+    }
+    .#{$exp-prefix}-notifications-settings-button .bx--btn__icon {
+      margin: 0;
+    }
   }
 }

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.7](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@0.5.6...@carbon/ibm-cloud-cognitive-cdai@0.5.7) (2020-12-17)
+
+
+### Bug Fixes
+
+* migrate focus trap fix for slideover ([#285](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/285)) ([8a29cce](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8a29cce724f4c47e702d3406f4afa43d50edaf2b))
+
+
+
+
+
 ## [0.5.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@0.5.5...@carbon/ibm-cloud-cognitive-cdai@0.5.6) (2020-12-16)
 
 

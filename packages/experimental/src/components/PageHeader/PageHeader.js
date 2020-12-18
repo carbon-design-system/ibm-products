@@ -396,25 +396,25 @@ export const PageHeader = ({
                     ''
                   )}
                 </Column>
+                <Column
+                  className={cx(
+                    `${blockClass}--action-bar-column ${blockClass}--action-bar-column--background`
+                  )}>
+                  {actionBarItems !== undefined ? (
+                    <>
+                      <div
+                        className={cx(`${blockClass}--page-actions`, {
+                          [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
+                        })}>
+                        {pageActions}
+                      </div>
+                      <ActionBar className={`${blockClass}--action-bar`}>
+                        {actionBarItems}
+                      </ActionBar>
+                    </>
+                  ) : null}
+                </Column>
               </div>
-              <Column
-                className={cx(
-                  `${blockClass}--action-bar-column ${blockClass}--action-bar-column--background`
-                )}>
-                {actionBarItems !== undefined ? (
-                  <>
-                    <div
-                      className={cx(`${blockClass}--page-actions`, {
-                        [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
-                      })}>
-                      {pageActions}
-                    </div>
-                    <ActionBar className={`${blockClass}--action-bar`}>
-                      {actionBarItems}
-                    </ActionBar>
-                  </>
-                ) : null}
-              </Column>
             </Row>
           ) : null}
 

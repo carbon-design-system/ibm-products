@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.16.0...@carbon/ibm-cloud-cognitive-experimental@0.16.1) (2020-12-17)
+
+
+### Bug Fixes
+
+* merge issue in breadcrumb dom ([#289](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/289)) ([017b235](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/017b23575644d7250f58c7fb6cc234d44d8c0902))
+
+
+
+
+
 # [0.16.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.15.1...@carbon/ibm-cloud-cognitive-experimental@0.16.0) (2020-12-17)
 
 

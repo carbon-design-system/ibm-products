@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-cdai",
   "description": "Carbon for Cloud & Cognitive CD&AI UI components",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -33,11 +33,13 @@
   "peerDependencies": {
     "@carbon/elements": "^10.11.1",
     "@carbon/grid": "^10.17.0",
+    "@carbon/icons-react": "^10.22.0",
     "carbon-addons-cloud": "^3.5.4",
     "carbon-addons-cloud-react": "^1.12.4",
     "carbon-components": "^10.11.1",
     "carbon-components-react": "^7.17.0",
     "carbon-icons": "^7.0.7",
+    "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"

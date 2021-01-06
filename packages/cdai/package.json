@@ -38,7 +38,6 @@
     "carbon-components": "^10.11.1",
     "carbon-components-react": "^7.17.0",
     "carbon-icons": "^7.0.7",
-    "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
@@ -59,6 +58,7 @@
     "@babel/plugin-transform-runtime": "^7.11.5",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
+    "node-sass": "^4.13.1",
     "rimraf": "^3.0.2",
     "sinon": "^7.4.2"
   },

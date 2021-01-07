@@ -148,6 +148,7 @@ export const ImportModal = ({
         accept={validFileTypes}
         labelText={fileDropLabel}
         onAddFiles={onAddFile}
+        disabled={files.length}
       />
       <p className={`${expPrefix}--import-modal-label`}>{inputHeader}</p>
       <div className={`${expPrefix}--input-group`}>

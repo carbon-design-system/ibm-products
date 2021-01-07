@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.0.2...@carbon/ibm-cloud-cognitive-cdai@1.0.3) (2021-01-07)
+
+
+### Bug Fixes
+
+* increase zindex in header ([#287](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/287)) ([c4b70c9](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c4b70c94735f6a5e8edbda2dc81ab6c0cda05aed))
+
+
+
+
+
 ## [1.0.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.0.1...@carbon/ibm-cloud-cognitive-cdai@1.0.2) (2021-01-05)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai

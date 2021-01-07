@@ -38,14 +38,14 @@ $block-class: #{$exp-prefix}-breadcrumb-with-overflow;
 .#{$block-class}--breadcrumb-container--hidden {
   // This breadcrumb container is used to measure the width of all displayable breadcrumbs
   position: absolute;
-  // stylelint-disable-next-line carbon/layout-token-use
   top: -100vh;
-  // stylelint-disable-next-line carbon/layout-token-use
   left: -100vw;
-  width: 100%;
+  max-width: 0; // do not take up space.
+  overflow: hidden;
   visibility: hidden;
   pointer-events: none;
 }
+
 .#{$block-class}--sizing-breadcrumb .#{$prefix}--overflow-menu,
 .#{$prefix}--breadcrumb-item .#{$prefix}--overflow-menu {
   box-sizing: content-box;

@@ -19,6 +19,7 @@ import { action } from '@storybook/addon-actions';
 import { APIKeyModal } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import mdx from './APIKeyModal.mdx';
+import { expPrefix } from '../../global/js/settings';
 
 export default {
   title: 'Experimental/APIKeyModal',
@@ -122,7 +123,7 @@ const MultiStepTemplate = (args) => {
 
   const steps = [
     <div key={1}>
-      <p>
+      <p className={`${expPrefix}--apikey-modal-body`}>
         Optional description text. To connect securely to product, your
         application or tool needs an API key with permissions to access the
         cluster and resources such as topics.

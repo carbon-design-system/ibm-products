@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.16.2...@carbon/ibm-cloud-cognitive-experimental@0.16.3) (2021-01-06)
+
+
+### Bug Fixes
+
+* apikey modal design feedback ([#293](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/293)) ([0f4b08f](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/0f4b08fec6c8b65da7c336fb2fef0464598b1665))
+
+
+
+
+
+## [0.16.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.16.1...@carbon/ibm-cloud-cognitive-experimental@0.16.2) (2021-01-05)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
+## [0.16.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.16.0...@carbon/ibm-cloud-cognitive-experimental@0.16.1) (2020-12-17)
+
+
+### Bug Fixes
+
+* merge issue in breadcrumb dom ([#289](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/289)) ([017b235](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/017b23575644d7250f58c7fb6cc234d44d8c0902))
+
+
+
+
+
+# [0.16.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.15.1...@carbon/ibm-cloud-cognitive-experimental@0.16.0) (2020-12-17)
+
+
+### Features
+
+*  add breadcrumb with overflow ([#275](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/275)) ([d810cd9](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d810cd963be0bbf4228bbfe52ba8028e7872d057))
+
+
+
+
+
+## [0.15.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.15.0...@carbon/ibm-cloud-cognitive-experimental@0.15.1) (2020-12-17)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
 # [0.15.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.14.0...@carbon/ibm-cloud-cognitive-experimental@0.15.0) (2020-12-16)
 
 

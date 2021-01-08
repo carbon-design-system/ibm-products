@@ -40,7 +40,7 @@ export const APIKeyModal = ({
   const [name, setName] = useState('');
   const [currentStep, setCurrentStep] = useState(0);
 
-  const primaryButtonDisabled = nameRequired && !name;
+  const primaryButtonDisabled = (nameRequired && !name) || loading;
   const apiKeyLoaded = apiKey && !loading;
   const hasNextStep =
     customSteps.length && currentStep < customSteps.length - 1;
@@ -69,8 +69,10 @@ export const APIKeyModal = ({
 
   const submitHandler = () => {
     if (hasNextStep) setCurrentStep(currentStep + 1);
-    else if (apiKeyLoaded) navigator.clipboard.writeText(apiKey);
-    else onRequestSubmit(name);
+    else if (apiKeyLoaded) {
+      navigator.clipboard.writeText(apiKey);
+      onCloseHandler();
+    } else onRequestSubmit(name);
   };
 
   const onCloseHandler = () => {
@@ -125,6 +127,7 @@ export const APIKeyModal = ({
               onChange={(evt) => setNameHandler(evt)}
               value={name}
               id={nameInputId}
+              disabled={loading}
             />
           )}
           {loading && (

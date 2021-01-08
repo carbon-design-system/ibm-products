@@ -6,10 +6,6 @@
 @import 'carbon-components/scss/components/inline-loading/inline-loading';
 @import 'carbon-components/scss/components/toggle/toggle';
 
-.#{$exp-prefix}--apikey-modal .bx--text-input__field-wrapper {
-  margin-bottom: $spacing-05;
-}
-
 .#{$exp-prefix}--apikey-modal .bx--inline-loading {
   min-height: 3rem; // increasing the height from 2 to 3 resolves an issue where the scroll bar bounces
 }
@@ -31,4 +27,8 @@
 
 .#{$exp-prefix}--apikey-modal-messaging-text > * {
   font: inherit;
+}
+
+.#{$exp-prefix}--apikey-modal .bx--modal-content {
+  padding-right: $spacing-05;
 }

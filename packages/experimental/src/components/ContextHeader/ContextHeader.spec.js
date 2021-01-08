@@ -12,19 +12,19 @@ import { ContextHeader } from '../ContextHeader';
 describe('ContextHeader', () => {
   it('Renders as expected', () => {
     const wrapper = mount(
-      <ContextHeader
-        name='name'
-        namespace='namespace'
-        task='High level task'
-      />
+      <ContextHeader name="name" namespace="namespace" task="High level task" />
     );
     expect(wrapper).toBeDefined();
-    expect(wrapper.find('.ide-context-header')).toHaveLength(1);
-    expect(wrapper.find('.ide-context-header--name')).toHaveLength(1);
-    expect(wrapper.find('.ide-context-header--name').text()).toEqual('name')
-    expect(wrapper.find('.ide-context-header--namespace')).toHaveLength(1);
-    expect(wrapper.find('.ide-context-header--namespace').text()).toEqual('namespace')
-    expect(wrapper.find('.ide-context-header--task')).toHaveLength(1);
-    expect(wrapper.find('.ide-context-header--task').text()).toEqual('High level task')
+    expect(wrapper.find('.exp-context-header')).toHaveLength(1);
+    expect(wrapper.find('.exp-context-header--name')).toHaveLength(1);
+    expect(wrapper.find('.exp-context-header--name').text()).toEqual('name');
+    expect(wrapper.find('.exp-context-header--namespace')).toHaveLength(1);
+    expect(wrapper.find('.exp-context-header--namespace').text()).toEqual(
+      'namespace'
+    );
+    expect(wrapper.find('.exp-context-header--task')).toHaveLength(1);
+    expect(wrapper.find('.exp-context-header--task').text()).toEqual(
+      'High level task'
+    );
   });
 });

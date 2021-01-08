@@ -12,17 +12,15 @@ import { ContextHeader } from '.';
 import styles from './_ContextHeader.scss';
 
 export default {
-  title: 'Experimental/HeaderContext',
+  title: 'Experimental/ContextHeader',
   component: ContextHeader,
   parameters: { styles },
 };
 
 const Template = (args) => {
   return (
-    <div style={{position: 'absolute', left: '0', right: '0', top: '0'}}>
-      <ContextHeader
-        {...args}
-      />
+    <div style={{ position: 'absolute', left: '0', right: '0', top: '0' }}>
+      <ContextHeader {...args} />
     </div>
   );
 };

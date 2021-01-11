@@ -14,7 +14,7 @@
   height: $spacing-07;
   padding: 0 $spacing-05;
   background: $ui-background;
-  border-bottom: 1px solid $ui-03;
+  border-bottom: carbon--mini-units(0.125) solid $ui-03;
 }
 
 .#{$exp-prefix}-context-header--task,

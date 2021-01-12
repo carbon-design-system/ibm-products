@@ -34,7 +34,6 @@
     "@carbon/elements": "^10.11.1",
     "@carbon/grid": "^10.17.0",
     "@carbon/icons-react": "^10.22.0",
-    "carbon-addons-cloud": "^3.5.4",
     "carbon-components": "^10.11.1",
     "carbon-components-react": "^7.17.0",
     "prop-types": "^15.7.2",

@@ -20,6 +20,7 @@ import { APIKeyModal } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import mdx from './APIKeyModal.mdx';
 import { expPrefix } from '../../global/js/settings';
+import wait from '../../global/js/utils/wait';
 
 export default {
   title: 'Experimental/APIKeyModal',
@@ -48,26 +49,24 @@ const defaultProps = {
   successHeader: 'API key successully created',
 };
 
-const timeout = () => new Promise((resolve) => setTimeout(resolve, 2000));
-
 const MinimalTemplate = (args) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const onCloseHandler = () => {
-    setOpen(false);
-  };
-
   const generateKey = async () => {
     setLoading(true);
-    await timeout(2000);
+    await wait(2000);
     setOpen(true);
     setLoading(false);
   };
 
   return (
     <>
-      <APIKeyModal {...args} onRequestClose={onCloseHandler} open={open} />
+      <APIKeyModal
+        {...args}
+        onRequestClose={() => setOpen(false)}
+        open={open}
+      />
       {loading ? (
         <p>Generating...</p>
       ) : (
@@ -86,7 +85,7 @@ const TemplateWithState = (args) => {
   const setKeyHandler = async (resourceName) => {
     action('submitted');
     setLoading(true);
-    await timeout();
+    await wait(2000);
     setApiKey('111-111-111-111');
     setLoading(false);
   };
@@ -94,10 +93,6 @@ const TemplateWithState = (args) => {
   const onCloseHandler = () => {
     setApiKey('');
     setOpen(false);
-  };
-
-  const modalToggler = () => {
-    setOpen(!open);
   };
 
   return (
@@ -110,7 +105,7 @@ const TemplateWithState = (args) => {
         onRequestSubmit={setKeyHandler}
         open={open}
       />
-      <Button onClick={modalToggler}>Generate API key</Button>
+      <Button onClick={() => setOpen(!open)}>Generate API key</Button>
     </>
   );
 };
@@ -130,8 +125,7 @@ const MultiStepTemplate = (args) => {
   const setKeyHandler = async (resourceName) => {
     action('submitted');
     setLoading(true);
-    const timeout = () => new Promise((resolve) => setTimeout(resolve, 2000));
-    await timeout();
+    await wait(2000);
     setApiKey('111-111-111-111');
     setLoading(false);
   };
@@ -139,10 +133,6 @@ const MultiStepTemplate = (args) => {
   const onCloseHandler = () => {
     setApiKey('');
     setOpen(false);
-  };
-
-  const modalToggler = () => {
-    setOpen(!open);
   };
 
   const steps = [
@@ -157,7 +147,6 @@ const MultiStepTemplate = (args) => {
         onChange={(e) => setName(e.target.value)}
         labelText="Name your application"
         placeholder="Application name"
-        style={{ marginBottom: '.5rem' }}
       />
       <FormGroup legendText="What do you want your application to be able to do">
         <RadioButtonGroup
@@ -202,7 +191,7 @@ const MultiStepTemplate = (args) => {
         open={open}
         customSteps={steps}
       />
-      <Button onClick={modalToggler}>Generate API key</Button>
+      <Button onClick={() => setOpen(!open)}>Generate API key</Button>
     </>
   );
 };

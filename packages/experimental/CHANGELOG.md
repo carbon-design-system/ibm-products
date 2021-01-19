@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.16.5...@carbon/ibm-cloud-cognitive-experimental@0.16.6) (2021-01-19)
+
+
+### Bug Fixes
+
+* design feedback updates for apikeymodal ([#297](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/297)) ([50f432a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/50f432a2ff68a1e036225ef810ef2078a04ac9a9))
+
+
+
+
+
 ## [0.16.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.16.4...@carbon/ibm-cloud-cognitive-experimental@0.16.5) (2021-01-13)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental

@@ -103,43 +103,6 @@ const SidePanel = ({
     }
   }, [open, animateTitle, animationComplete]);
 
-  // error handling for primary action buttons
-  useEffect(() => {
-    if (primaryActions && primaryActions.length) {
-      if (
-        (size === 'small' || size === 'extraSmall' || size === 'medium') &&
-        primaryActions.length > 3
-      ) {
-        throw new Error(
-          `You cannot have 4 or more buttons in a '${size}' size panel`
-        );
-      }
-      const ghostButton = primaryActions.filter(
-        (button) => button.kind === 'ghost'
-      );
-      const primaryActionButton = primaryActions.filter(
-        (button) => button.kind === 'primary'
-      );
-      if (ghostButton.length > 1)
-        throw new Error(
-          `You cannot have more than one 'ghost' button in a side panel`
-        );
-      if (primaryActionButton.length > 1)
-        throw new Error(
-          `You cannot have more than one 'primary' action button in a side panel`
-        );
-      if (
-        primaryActions.length > 1 &&
-        ghostButton.length &&
-        (size === 'extraSmall' || size === 'small' || size === 'medium')
-      ) {
-        throw new Error(
-          `You cannot have a 'ghost' button in conjuntion with other action buttons in a ${size} size side panel. Try using a 'secondary' button instead.`
-        );
-      }
-    }
-  }, [primaryActions, size]);
-
   // click outside functionality if `includeOverlay` prop is set
   useEffect(() => {
     const handleOutsideClick = (e) => {
@@ -479,6 +442,52 @@ const SidePanel = ({
   );
 };
 
+const validateActions = () => (props, propName, componentName) => {
+  const prop = props[propName];
+  if (prop === undefined) return;
+  if (prop !== undefined) {
+    // let validationMessage = '';
+    if (props.primaryActions && props.primaryActions.length) {
+      if (
+        (props.size === 'small' ||
+          props.size === 'extraSmall' ||
+          props.size === 'medium') &&
+        props.primaryActions.length > 3
+      ) {
+        throw new Error(
+          `Prop '${propName}' passed to ${componentName} is using an invalid combination of buttons.\n\nYou cannot have 4 or more buttons in a '${props.size}' size panel`
+        );
+      }
+      const ghostButton = props.primaryActions.filter(
+        (button) => button.kind === 'ghost'
+      );
+      const primaryActionButton = props.primaryActions.filter(
+        (button) => button.kind === 'primary'
+      );
+      if (ghostButton.length > 1)
+        throw new Error(
+          `Prop '${propName}' passed to ${componentName} is using an invalid combination of buttons.\n\nYou cannot have more than one 'ghost' button in a side panel`
+        );
+      if (primaryActionButton.length > 1)
+        throw new Error(
+          `Prop '${propName}' passed to ${componentName} is using an invalid combination of buttons.\n\nYou cannot have more than one 'primary' action button in a side panel`
+        );
+      if (
+        props.primaryActions.length > 1 &&
+        ghostButton.length &&
+        (props.size === 'extraSmall' ||
+          props.size === 'small' ||
+          props.size === 'medium')
+      ) {
+        throw new Error(
+          `Prop '${propName}' passed to ${componentName} is using an invalid combination of buttons.\n\nYou cannot have a 'ghost' button in conjuntion with other action buttons in a ${props.size} size side panel. Try using a 'secondary' button instead.`
+        );
+      }
+    }
+    return null;
+  }
+};
+
 SidePanel.propTypes = {
   /**
    * Sets the action toolbar buttons
@@ -534,14 +543,17 @@ SidePanel.propTypes = {
   /**
    * Sets the primary action buttons for the side panel
    */
-  primaryActions: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string,
-      onPrimaryActionClick: PropTypes.func,
-      kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
-      disabled: PropTypes.bool,
-    })
-  ),
+  primaryActions: PropTypes.oneOfType([
+    validateActions(),
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        label: PropTypes.string,
+        onPrimaryActionClick: PropTypes.func,
+        kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
+        disabled: PropTypes.bool,
+      })
+    ),
+  ]),
   /**
    * Specify a CSS selector that matches the DOM element that should
    * be focused when the side panel opens

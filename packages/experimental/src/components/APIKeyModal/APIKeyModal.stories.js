@@ -68,7 +68,7 @@ const MinimalTemplate = (args) => {
         open={open}
       />
       {loading ? (
-        <p>Generating...</p>
+        <InlineLoading description="Generating..." />
       ) : (
         <Button onClick={generateKey}>Generate API key</Button>
       )}
@@ -117,7 +117,7 @@ const MultiStepTemplate = (args) => {
 
   // multi step options
   const [name, setName] = useState('');
-  const [permissions, setPermissions] = useState('read and write');
+  const [permissions, setPermissions] = useState('');
   const [allResources, setAllResources] = useState(false);
   const [resource, setResource] = useState('');
 
@@ -133,51 +133,68 @@ const MultiStepTemplate = (args) => {
   const onCloseHandler = () => {
     setApiKey('');
     setOpen(false);
+    setName('');
+    setPermissions('');
+    setAllResources(false);
+    setResource('');
   };
 
   const steps = [
-    <div key={1}>
-      <p className={`${expPrefix}--apikey-modal-body`}>
-        Optional description text. To connect securely to product, your
-        application or tool needs an API key with permissions to access the
-        cluster and resources such as topics.
-      </p>
-      <TextInput
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        labelText="Name your application"
-        placeholder="Application name"
-      />
-      <FormGroup legendText="What do you want your application to be able to do">
-        <RadioButtonGroup
-          onChange={(opt) => setPermissions(opt)}
-          valueSelected={permissions}>
-          <RadioButton value="Read and write" labelText="Read and write" />
-          <RadioButton value="Read only" labelText="Read only" />
-          <RadioButton value="Write only" labelText="Write only" />
-        </RadioButtonGroup>
-      </FormGroup>
-    </div>,
-    <div key={2}>
-      <FormGroup>
-        <Toggle
-          onChange={(e) => setAllResources(e.target.checked)}
-          labelText="All resources"
-          labelA="Off"
-          labelB="On"
-          toggled={allResources}
-        />
-      </FormGroup>
-      <FormGroup>
-        <TextInput
-          value={resource}
-          onChange={(e) => setResource(e.target.value)}
-          labelText="Which resource?"
-          placeholder="Resources name"
-        />
-      </FormGroup>
-      {loading && <InlineLoading description="Generating..." />}
-    </div>,
+    {
+      valid: Boolean(name && permissions),
+      content: (
+        <div>
+          <p className={`${expPrefix}--apikey-modal-body`}>
+            Optional description text. To connect securely to product, your
+            application or tool needs an API key with permissions to access the
+            cluster and resources such as topics.
+          </p>
+          <TextInput
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            labelText="Name your application"
+            placeholder="Application name"
+            className={`${expPrefix}--apikey-modal-input`}
+          />
+          <FormGroup legendText="What do you want your application to be able to do">
+            <RadioButtonGroup
+              onChange={(opt) => setPermissions(opt)}
+              valueSelected={permissions}>
+              <RadioButton value="Read and write" labelText="Read and write" />
+              <RadioButton value="Read only" labelText="Read only" />
+              <RadioButton value="Write only" labelText="Write only" />
+            </RadioButtonGroup>
+          </FormGroup>
+        </div>
+      ),
+    },
+    {
+      valid: Boolean(resource),
+      content: (
+        <div>
+          <FormGroup>
+            <Toggle
+              onChange={(e) => setAllResources(e.target.checked)}
+              labelText="All resources"
+              labelA="Off"
+              labelB="On"
+              toggled={allResources}
+              disabled={loading}
+            />
+          </FormGroup>
+          <FormGroup>
+            <TextInput
+              value={resource}
+              onChange={(e) => setResource(e.target.value)}
+              labelText="Which resource?"
+              placeholder="Resources name"
+              disabled={loading}
+            />
+          </FormGroup>
+          {loading && <InlineLoading description="Generating..." />}
+        </div>
+      ),
+    },
   ];
 
   return (

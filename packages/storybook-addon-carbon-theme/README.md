@@ -21,7 +21,7 @@ npm install @carbon/storybook-addon-theme
 
 ## 🙌 Contributing
 
-We're always looking for contributors to help us fix bugs, build new features,
+We are always looking for contributors to help us fix bugs, build new features,
 or help us improve the project documentation. If you're interested, definitely
 check out our
 [Contributing Guide](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CONTRIBUTING.md)
@@ -58,17 +58,33 @@ module.exports = {
 
 ### Global Decorator
 
+`.storybook/preview.js`:
+
 ```js
 import { withCarbonTheme } from '@carbon/storybook-addon-theme'; // for React
 // import { withCarbonTheme } from '@carbon/storybook-addon-theme/vue'; // for Vue
-// for Angular
+// for Angular (not yet supported)
 // .
-// .
+// for all (including story decorators)
+import index from './index.scss';
 // .
 addDecorator(withCarbonTheme);
 // .
-// .
-// .
+```
+
+```js
+// Adding the decorator
+const decorators = [withCarbonTheme];
+const parameters = {
+  carbonTheme: {
+    theme: 'g10',
+  },
+};
+export { decorators, parameters };
+```
+
+```js
+// Older storybook versions
 addParameters({
   // optional
   carbonTheme: {
@@ -78,7 +94,7 @@ addParameters({
 });
 ```
 
-within your stories:
+### Story decorator
 
 ```js
 import { withCarbonTheme } from '@carbon/storybook-addon-theme'; // for React
@@ -96,4 +112,40 @@ storiesOf('Component', module)
       themes: ['g10', 'g90'], // optional carbonTheme filter (additive to global)
     },
   });
+```
+
+## SCSS
+
+`.storybook/index.scss`
+
+```scss
+@import '@carbon/themes/scss/themes';
+
+:root {
+  @include carbon--theme(
+    $theme: $carbon--theme--white,
+    $emit-custom-properties: true
+  );
+}
+
+:root[storybook-carbon-theme='g10'] {
+  @include carbon--theme(
+    $theme: $carbon--theme--g10,
+    $emit-custom-properties: true
+  );
+}
+
+:root[storybook-carbon-theme='g90'] {
+  @include carbon--theme(
+    $theme: $carbon--theme--g90,
+    $emit-custom-properties: true
+  );
+}
+
+:root[storybook-carbon-theme='g100'] {
+  @include carbon--theme(
+    $theme: $carbon--theme--g100,
+    $emit-custom-properties: true
+  );
+}
 ```

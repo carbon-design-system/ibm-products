@@ -10,8 +10,9 @@ import PropTypes from 'prop-types';
 import Highlight from 'react-highlighter';
 import pluralize from 'pluralize';
 import CreatableSelect from 'react-select/creatable';
-import { Icon, Tag } from 'carbon-components-react';
-import { iconClose, iconSearch } from 'carbon-icons';
+import { Tag } from 'carbon-components-react';
+import { Close16, Search16 } from '@carbon/icons-react';
+
 import { idePrefix } from '../../globals/js/settings';
 // custom styling
 const customStyles = {
@@ -118,7 +119,7 @@ const MultiValueRemove = (props) => {
           ? ` ${idePrefix}-filter--tag-filter`
           : /* istanbul ignore next */ ''
       }`}>
-      <Icon icon={iconClose} description="Close" />
+      <Close16 description="Close" />
     </button>
   );
 };
@@ -126,7 +127,7 @@ const DropdownIndicator = () => null;
 const IndicatorSeparator = () => null;
 const ClearIndicator = (props) => (
   <div {...props.innerProps} className={`${idePrefix}-filter--clear`}>
-    <Icon icon={iconClose} description="Clear" />
+    <Close16 description="Clear" />
   </div>
 );
 
@@ -151,8 +152,7 @@ const IdeFilter = ({
       className={`${idePrefix}-filter${
         light ? ` ${idePrefix}-filter--light` : ''
       }`}>
-      <Icon
-        icon={iconSearch}
+      <Search16
         className={`${idePrefix}-filter--search-icon`}
         description={placeholderText}
       />

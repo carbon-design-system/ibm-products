@@ -34,7 +34,7 @@ export default class IdeImporting extends React.Component {
       open: props.open,
       urlInput: '',
       urlInputIsValid: false,
-      filesToUpload: [],
+      filesToUpload: props.initialFiles,
       finished: false,
     };
 
@@ -217,19 +217,29 @@ export default class IdeImporting extends React.Component {
     });
   }
   renderFilesToUpload(counts) {
-    const { multiple, singleFileLabel } = this.props;
+    const {
+      multiple,
+      singleFileLabel,
+      fileDropHeader,
+      hideImport,
+    } = this.props;
     return (
       <div className={`${idePrefix}--file-status`} style={{ width: '100%' }}>
-        <div className={`${idePrefix}--file-list`}>
+        <div className={`${idePrefix}--file-list ${idePrefix}-hide-import`}>
           <h6 className={`${idePrefix}--file-list-status`}>
             {multiple && (
               <span>
                 {counts.finished} / {counts.total}{' '}
               </span>
             )}
-            {!multiple && <span>{singleFileLabel} </span>}
-            {this.getVerbLabel()}
+            {!hideImport && !multiple && <span>{singleFileLabel}</span>}
+            {!hideImport && this.getVerbLabel()}
           </h6>
+          {hideImport && (
+            <div className={`${idePrefix}--file-header-label`}>
+              {fileDropHeader}
+            </div>
+          )}
           {this.getSortedFiles().map(
             ({ file, uuid, status, invalid, errorSubject, errorBody }) => (
               <FileUploaderItem
@@ -268,21 +278,28 @@ export default class IdeImporting extends React.Component {
     return false;
   }
   renderFileMode() {
-    const { multiple, enableFileDrop } = this.props;
+    const { multiple, enableFileDrop, hideImport, fileDropHeader } = this.props;
     if (!enableFileDrop) return null;
+    const disabled = this.shouldDisableInput();
 
     const fileUploaderProps = {
       multiple: multiple,
-      disabled: this.shouldDisableInput(),
+      disabled: disabled,
       labelText: multiple
         ? this.props.fileDropLabelPlural
         : this.props.fileDropLabelSingular,
       name: 'name',
       accept: [...this.props.validExtensions.map((ext) => `.${ext}`), '*'],
     };
-    return (
+    return hideImport && disabled ? null : (
       <FormItem>
-        <h5>{this.props.fileDropHeader}</h5>
+        {hideImport ? (
+          <div className={`${idePrefix}--file-header-label`}>
+            {fileDropHeader}
+          </div>
+        ) : (
+          <h5>{fileDropHeader}</h5>
+        )}
         <FileUploaderDropContainer
           {...fileUploaderProps}
           onAddFiles={this.handleFilesAdded}
@@ -385,7 +402,9 @@ IdeImporting.propTypes = {
   fileTabLabel: PropTypes.string,
   filesToUploadText: PropTypes.string,
   filesToUploadTextPlural: PropTypes.string,
+  hideImport: PropTypes.bool,
   importDescription: PropTypes.string,
+  initialFiles: PropTypes.array,
   invalidExtensionText: PropTypes.string,
   invalidFileNameText: PropTypes.string,
   invalidUrlText: PropTypes.string,
@@ -421,6 +440,7 @@ IdeImporting.defaultProps = {
   headingPlural: 'Select Files to import',
   headingSingular: 'Select a File import',
   fileTabLabel: 'File',
+  hideImport: false,
   urlTabLabel: 'URL',
   invalidFileNameText: 'You must provide a valid file name.',
   validExtensions: ['*'],
@@ -445,6 +465,7 @@ IdeImporting.defaultProps = {
   enableFileDrop: true,
   enableUrlInput: true,
   invalidFileText: 'Invalid File',
+  initialFiles: [],
   mustBeExtensionTextSingular: 'Must be a $EXT file.',
   mustBeExtensionTextPlural: 'Must be one of: $EXT.',
   allowInvalidFilenameInUrl: false,

@@ -1,0 +1,26 @@
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+
+@import 'carbon-components/scss/components/modal/modal';
+@import 'carbon-components/scss/components/text-input/text-input';
+@import 'carbon-components/scss/components/radio-button/radio-button';
+@import 'carbon-components/scss/components/loading/loading';
+
+.#{$exp-prefix}-export-modal-body {
+  margin-bottom: $spacing-05;
+}
+
+.#{$exp-prefix}-export-modal-messaging {
+  display: flex;
+  align-items: center;
+}
+
+.#{$exp-prefix}-export-modal-checkmark-icon {
+  margin-right: $spacing-03;
+  fill: $interactive-01;
+}
+
+.#{$exp-prefix}-export-modal-error-icon {
+  margin-right: $spacing-03;
+  fill: $danger;
+}

@@ -1,29 +1,35 @@
-name: ci
+name: Continuous integration check
+
 on:
   pull_request:
     branches:
       - master
+
   push:
     branches:
       - master
+
 jobs:
   check:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@master
-      - name: Use Node.js 12.x
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: '12.x'
-      - name: Install dependencies
-        run: yarn install --offline
-      - name: Lint
-        run: yarn lint
+          node-version: 12
+
+      - name: Install
+        run: yarn --offline
+
       - name: Audit
         run: yarn run audit
-      - name: Test
-        run: yarn test --ci
-      - name: Build project
+
+      - name: Build
         run: yarn build
-      - name: Run Continuous Integration checks
+
+      - name: Continuous Integration check
         run: yarn ci-check

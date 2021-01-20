@@ -7,14 +7,14 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Icon } from 'carbon-components-react';
 
-import { iconErrorSolid } from 'carbon-icons';
+import { ErrorFilled16 } from '@carbon/icons-react';
+
 import { idePrefix } from '../../globals/js/settings';
 const IdeAutoSave = ({ state, text }) => (
   <div className={`${idePrefix}-auto-save`}>
     <div className={`${idePrefix}-auto-save__icon`}>
-      {state === 'failed' && <Icon icon={iconErrorSolid} description="" />}
+      {state === 'failed' && <ErrorFilled16 description="" />}
     </div>
     <span className={`${idePrefix}-auto-save__text`}>{text}</span>
   </div>

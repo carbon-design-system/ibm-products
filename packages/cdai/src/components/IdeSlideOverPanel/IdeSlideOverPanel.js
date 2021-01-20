@@ -176,6 +176,9 @@ IdeSlideOverPanel.defaultProps = {
   secondaryButtonText: 'Cancel',
   primaryButtonText: 'Save',
   closeButtonIconDescription: 'Close',
+  focusTrapOptions: {
+    initialFocus: '.ide-slide-over-panel--close',
+  },
 };
 
 export default IdeSlideOverPanel;

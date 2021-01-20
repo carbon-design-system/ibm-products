@@ -3,6 +3,128 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.0.2...@carbon/ibm-cloud-cognitive-cdai@1.0.3) (2021-01-07)
+
+
+### Bug Fixes
+
+* increase zindex in header ([#287](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/287)) ([c4b70c9](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c4b70c94735f6a5e8edbda2dc81ab6c0cda05aed))
+
+
+
+
+
+## [1.0.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.0.1...@carbon/ibm-cloud-cognitive-cdai@1.0.2) (2021-01-05)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai
+
+
+
+
+
+## [1.0.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@0.5.7...@carbon/ibm-cloud-cognitive-cdai@1.0.1) (2020-12-18)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai
+
+
+
+
+
+## [0.5.7](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@0.5.6...@carbon/ibm-cloud-cognitive-cdai@0.5.7) (2020-12-17)
+
+
+### Bug Fixes
+
+* migrate focus trap fix for slideover ([#285](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/285)) ([8a29cce](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8a29cce724f4c47e702d3406f4afa43d50edaf2b))
+
+
+
+
+
+## [0.5.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@0.5.5...@carbon/ibm-cloud-cognitive-cdai@0.5.6) (2020-12-16)
+
+
+### Bug Fixes
+
+* move to peerDependencies ([#281](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/281)) ([8c1a108](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8c1a1082181078058d52ceb23892b616a1f61b08))
+
+
+
+
+
+## [0.5.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@0.5.4...@carbon/ibm-cloud-cognitive-cdai@0.5.5) (2020-12-15)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai
+
+
+
+
+
+## [0.5.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@0.5.3...@carbon/ibm-cloud-cognitive-cdai@0.5.4) (2020-12-11)
+
+
+### Bug Fixes
+
+* missing tilde in import ([#274](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/274)) ([155812a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/155812a1678aa36043431cd44ae14aaec7b8d029))
+
+
+
+
+
+## [0.5.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@0.5.2...@carbon/ibm-cloud-cognitive-cdai@0.5.3) (2020-12-11)
+
+
+### Bug Fixes
+
+* missing grid scss ([#273](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/273)) ([edc1acd](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/edc1acd123758ce071b252a7252a17b4ab8a6154))
+
+
+
+
+
+## [0.5.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@0.5.1...@carbon/ibm-cloud-cognitive-cdai@0.5.2) (2020-12-09)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai
+
+
+
+
+
+## [0.5.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@0.5.0...@carbon/ibm-cloud-cognitive-cdai@0.5.1) (2020-12-09)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai
+
+
+
+
+
+# [0.5.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@0.4.6...@carbon/ibm-cloud-cognitive-cdai@0.5.0) (2020-12-01)
+
+
+### Features
+
+* **lang:** <IdeImporting> hides the file drop area after uploading ([#248](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/248)) ([c90a47b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c90a47bb9d24d25c3209fb3783dae6f86823f6f4))
+
+
+
+
+
+## [0.4.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@0.4.5...@carbon/ibm-cloud-cognitive-cdai@0.4.6) (2020-11-30)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai
+
+
+
+
+
+## [0.4.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/cdai/compare/@carbon/ibm-cloud-cognitive-cdai@0.4.4...@carbon/ibm-cloud-cognitive-cdai@0.4.5) (2020-11-27)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai
+
+
+
+
+
 ## [0.4.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/cdai/compare/@carbon/ibm-cloud-cognitive-cdai@0.4.3...@carbon/ibm-cloud-cognitive-cdai@0.4.4) (2020-11-25)
 
 

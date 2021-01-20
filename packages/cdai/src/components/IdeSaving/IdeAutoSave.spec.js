@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import { Icon } from 'carbon-components-react';
+import { ErrorFilled16 } from '@carbon/icons-react';
 import * as jth from '../../component_helpers/jest_test_helper_functions.js';
 
 import { IdeAutoSave } from '.';
@@ -32,14 +32,13 @@ describe('IdeAutoSave', () => {
       text: 'defaultText',
     });
     expect(wrapper.find('.ide-auto-save').length).toEqual(1);
-    expect(wrapper.find(Icon).length).toEqual(0);
     expect(wrapper.find('.ide-auto-save__text').text()).toEqual('defaultText');
   });
 
   it('renders failed state with icon', () => {
     const wrapper = mountTestComponent({ state: 'failed', text: 'failedText' });
     expect(wrapper.find('.ide-auto-save').length).toEqual(1);
-    expect(wrapper.find(Icon).length).toEqual(1);
+    expect(wrapper.find(ErrorFilled16).length).toEqual(1);
     expect(wrapper.find('.ide-auto-save__text').text()).toEqual('failedText');
   });
 });

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2020
+ * Copyright IBM Corp. 2020, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,7 +13,7 @@ import {
   OverflowMenu,
   OverflowMenuItem,
 } from 'carbon-components-react';
-import setupGetInstanceId from 'carbon-components-react/es/tools/setupGetInstanceId';
+import setupGetInstanceId from 'carbon-components-react/lib/tools/setupGetInstanceId';
 
 import classnames from 'classnames';
 import { node, string } from 'prop-types';
@@ -43,10 +43,7 @@ const ComboButton = ({ children, className, overflowMenu, ...rest }) => {
   );
 
   return (
-    <div
-      {...rest}
-      className={classnames(blockClass, className)}
-      data-floating-menu-container>
+    <div {...rest} className={classnames(blockClass, className)}>
       <Button {...getActionProps(primaryAction)} />
 
       {restActions.length > 0 && (

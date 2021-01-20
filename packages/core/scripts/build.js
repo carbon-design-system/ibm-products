@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { execSync } = require('child_process');
+const { execFileSync } = require('child_process');
 const { copySync } = require('cpx');
 const { resolve } = require('path');
 
@@ -22,8 +22,9 @@ const ignore = [
 
 const compile = ({ BABEL_ENV, output }) => {
   // https://babeljs.io/docs/en/babel-cli#usage
-  execSync(
-    `babel ${directory} --config-file ${configFile} -d ${output} --ignore '${ignore}'`,
+  execFileSync(
+    'babel',
+    [directory, '--config-file', configFile, '-d', output, '--ignore', ignore],
     {
       env: Object.assign({}, process.env, {
         BABEL_ENV,

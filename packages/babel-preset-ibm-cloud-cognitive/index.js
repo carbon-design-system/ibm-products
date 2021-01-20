@@ -1,18 +1,20 @@
 /**
- * Copyright IBM Corp. 2020, 2020
+ * Copyright IBM Corp. 2020, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
+const {
+  env: { BABEL_ENV },
+} = process;
 
 module.exports = () => ({
   presets: [
     [
       '@babel/preset-env',
       {
-        modules: process.env.BABEL_ENV === 'cjs' && 'commonjs',
+        ...(BABEL_ENV && { modules: BABEL_ENV === 'cjs' && 'commonjs' }),
         targets: {
           browsers: ['extends browserslist-config-carbon'],
           node: '12',
@@ -23,7 +25,6 @@ module.exports = () => ({
   ],
   plugins: [
     '@babel/plugin-proposal-class-properties',
-    '@babel/plugin-proposal-export-default-from',
     [
       '@babel/plugin-transform-runtime',
       {

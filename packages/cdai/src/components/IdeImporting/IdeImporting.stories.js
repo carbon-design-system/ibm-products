@@ -227,6 +227,68 @@ storiesOf(`${getComponentLabel('IdeImporting')}/Uploading`, module)
       </StoryWrapper>
     );
   })
+  .add('Hide the file drop area after uploading a single file', () => {
+    const props = {
+      enableUrlInput: false,
+      multiple: false,
+      enableUpload: false,
+      hideImport: true,
+      validExtensions: ['png'],
+      onFileAdded: async () => {
+        await sleep(Math.random() * 3);
+        attempt++;
+        if (attempt === 2) {
+          throw new Error('fail');
+        }
+      },
+    };
+
+    return (
+      <StoryWrapper>
+        <IdeImporting {...props} />
+      </StoryWrapper>
+    );
+  })
+  .add('Provide an initial state of a single file', () => {
+    const props = {
+      enableUrlInput: false,
+      multiple: false,
+      enableUpload: false,
+      hideImport: true,
+      validExtensions: ['yml'],
+      initialFiles: [
+        {
+          file: {
+            lastModified: 1606086665265,
+            lastModifiedDate:
+              'Sun Nov 22 2020 23:11:05 GMT+0000 (Greenwich Mean Time)',
+            name: 'accounts',
+            size: 702,
+            type: 'application/x-yaml',
+            webkitRelativePath: '',
+            index: 0,
+          },
+          invalid: false,
+          status: 'edit',
+          url: undefined,
+          uuid: 'b4a92c13-10ca',
+        },
+      ],
+      onFileAdded: async () => {
+        await sleep(Math.random() * 3);
+        attempt++;
+        if (attempt === 2) {
+          throw new Error('fail');
+        }
+      },
+    };
+
+    return (
+      <StoryWrapper>
+        <IdeImporting {...props} />
+      </StoryWrapper>
+    );
+  })
   .add('Import multiple files by URL', () => {
     const props = {
       enableFileDrop: false,

@@ -14,13 +14,19 @@ import { expPrefix } from '../../global/js/settings';
 import { Button, Tab, Tabs } from 'carbon-components-react';
 
 import { Tearsheet } from './Tearsheet';
+import { TearsheetNarrow } from './TearsheetNarrow';
 
 import styles from './_storybook-styles.scss';
 
+import mdx from './Tearsheet.mdx';
+
 export default {
-  title: 'Experimental/Tearsheet',
+  title: 'Experimental/Tearsheets/Tearsheet',
   component: Tearsheet,
-  parameters: { styles },
+  subcomponents: {
+    TearsheetNarrow,
+  },
+  parameters: { styles, docs: { page: mdx } },
   argTypes: {
     buttonSet: {
       control: {

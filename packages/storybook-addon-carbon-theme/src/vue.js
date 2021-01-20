@@ -27,6 +27,7 @@ const Wrapper = (getStory, context, { parameters }) => {
   };
 };
 
+// export decorator
 export const withCarbonTheme = makeDecorator({
   name: WITH_CARBON_THEME,
   parameterName: CARBON_THEME_PARAM,

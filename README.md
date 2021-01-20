@@ -2,7 +2,7 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors-)
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
@@ -14,9 +14,15 @@
 
 > Carbon for Cloud & Cognitive
 
-## Live Catalogue of Components using Storybook:
+## Getting started
 
-https://ibm-cloud-cognitive.netlify.app/?path=/story/cd-ai-idebutton--label-and-icon
+If you're just getting started and looking for React components, take a look at
+[our Storybook](https://ibm-cloud-cognitive.netlify.app).
+
+If you want to try out Carbon for Cloud & Cognitive, you can use
+[CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/master/examples/codesandbox).
+
+[![Edit CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/master/examples/codesandbox)
 
 ## Browser Support
 
@@ -73,6 +79,7 @@ Thanks goes to these wonderful people
   <tr>
     <td align="center"><a href="https://github.com/asfordmatt"><img src="https://avatars2.githubusercontent.com/u/14233261?v=4" width="100px;" alt=""/><br /><sub><b>Matt Chapman</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=asfordmatt" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/dbrugger"><img src="https://avatars1.githubusercontent.com/u/10086178?v=4" width="100px;" alt=""/><br /><sub><b>Dominik Brugger</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=dbrugger" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/polinaouk"><img src="https://avatars2.githubusercontent.com/u/24444328?v=4" width="100px;" alt=""/><br /><sub><b>Polina Olemskaia</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=polinaouk" title="Code">💻</a></td>
   </tr>
 </table>
 

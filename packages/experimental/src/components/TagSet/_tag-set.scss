@@ -55,8 +55,10 @@ $block-class: #{$exp-prefix}-tag-set;
   visibility: hidden;
 }
 
-.#{$block-class}--overflow-tag {
-  display: inline-block;
+.#{$block-class}--overflow-tag-item {
+  @include carbon--type-style('body-short-01');
+
+  white-space: nowrap;
 }
 
 .#{$block-class}--overflow-tag .#{$prefix}--tag__close-icon {
@@ -77,16 +79,17 @@ $block-class: #{$exp-prefix}-tag-set;
   box-shadow: inset 0 0 0 2px $focus;
 }
 
-.#{$block-class}--overflow-content {
-  margin: calc(-1 * #{$spacing-02});
-}
-
 .#{$block-class}--show-all-tags-link {
   display: block;
   margin: $spacing-02; // to match the tags
-  margin-top: $spacing-03;
+  margin-left: 0;
 }
 
 .#{$block-class}--show-all-tags-search {
   margin-bottom: $layout-01;
+}
+
+.#{$block-class}--tooltip {
+  // removes the min width in Carbon
+  min-width: initial;
 }

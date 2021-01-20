@@ -18,5 +18,8 @@
   width: carbon--mini-units(2);
   height: carbon--mini-units(2);
   margin: $spacing-02 $spacing-03;
-  fill: $support-01;
+
+  svg {
+    fill: $support-01;
+  }
 }

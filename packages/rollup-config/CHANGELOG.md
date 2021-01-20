@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/rollup-config@0.3.0...@carbon/rollup-config@0.3.1) (2021-01-20)
+
+**Note:** Version bump only for package @carbon/rollup-config
+
+
+
+
+
 # [0.3.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/rollup-config@0.2.2...@carbon/rollup-config@0.3.0) (2020-12-16)
 
 

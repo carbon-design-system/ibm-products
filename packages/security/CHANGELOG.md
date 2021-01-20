@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-security@0.2.8...@carbon/ibm-cloud-cognitive-security@0.3.0) (2021-01-20)
+
+
+### Features
+
+* **combo-button:** add `ComboButton` logic, story, and styles ([#233](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/233)) ([85e2b62](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/85e2b62de80166cda84fa8cc9af311e664d241af))
+
+
+
+
+
 ## [0.2.8](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-security@0.2.7...@carbon/ibm-cloud-cognitive-security@0.2.8) (2020-12-16)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-security

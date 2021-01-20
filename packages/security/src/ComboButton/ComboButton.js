@@ -8,11 +8,9 @@
 import ChevronDown16 from '@carbon/icons-react/lib/chevron--down/16';
 import ChevronUp16 from '@carbon/icons-react/lib/chevron--up/16';
 
-import {
-  Button,
-  OverflowMenu,
-  OverflowMenuItem,
-} from 'carbon-components-react';
+import { Button, OverflowMenuItem } from 'carbon-components-react';
+
+import { OverflowMenu } from 'carbon-components-react/lib/components/OverflowMenu/OverflowMenu';
 import setupGetInstanceId from 'carbon-components-react/lib/tools/setupGetInstanceId';
 
 import classnames from 'classnames';
@@ -43,7 +41,10 @@ const ComboButton = ({ children, className, overflowMenu, ...rest }) => {
   );
 
   return (
-    <div {...rest} className={classnames(blockClass, className)}>
+    <div
+      {...rest}
+      className={classnames(blockClass, className)}
+      data-floating-menu-container>
       <Button {...getActionProps(primaryAction)} />
 
       {restActions.length > 0 && (
@@ -88,4 +89,4 @@ ComboButton.defaultProps = {
   overflowMenu: OverflowMenu.defaultProps,
 };
 
-export default ComboButton;
+export { ComboButton };

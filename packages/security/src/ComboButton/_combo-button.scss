@@ -60,4 +60,8 @@
   .#{$security--prefix}--combo-button__overflow-menu__item {
     max-width: none;
   }
+
+  .#{$security--prefix}--combo-button__overflow-menu__item__icon {
+    margin-left: auto;
+  }
 }

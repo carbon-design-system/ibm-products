@@ -14,20 +14,13 @@ import { OverflowMenu } from 'carbon-components-react/lib/components/OverflowMen
 import setupGetInstanceId from 'carbon-components-react/lib/tools/setupGetInstanceId';
 
 import classnames from 'classnames';
-import { node, string } from 'prop-types';
+import { node, shape, string } from 'prop-types';
 
 import React, { Children, createElement, useRef, useState } from 'react';
 
 const getInstanceId = setupGetInstanceId();
 
 const blockClass = 'security--combo-button';
-
-const getActionProps = ({ props: { disabled, href, ...props } }, rest) => ({
-  disabled,
-  href,
-  ...props,
-  ...rest,
-});
 
 /**
  * The combo button consolidates similar actions, while exposing the most commonly used one.
@@ -36,16 +29,16 @@ const ComboButton = ({ children, className, overflowMenu, ...rest }) => {
   const { current: instanceId } = useRef(getInstanceId());
   const [isOpen, setIsOpen] = useState(false);
 
-  const [primaryAction, ...restActions] = Children.toArray(children).filter(
-    Boolean
-  );
+  const [primaryAction, ...restActions] = Children.toArray(children)
+    .filter(Boolean)
+    .map(({ props }) => props);
 
   return (
     <div
       {...rest}
       className={classnames(blockClass, className)}
       data-floating-menu-container>
-      <Button {...getActionProps(primaryAction)} />
+      <Button {...primaryAction} />
 
       {restActions.length > 0 && (
         <OverflowMenu
@@ -60,13 +53,27 @@ const ComboButton = ({ children, className, overflowMenu, ...rest }) => {
             })
           }
           flipped>
-          {restActions.map((action, index) => (
-            <OverflowMenuItem
-              {...getActionProps(action, { itemText: action.props.children })}
-              key={`${blockClass}--${instanceId}__overflow-menu__item__${index}`}
-              className={`${blockClass}__overflow-menu__item`}
-            />
-          ))}
+          {restActions.map(
+            ({ children, renderIcon: Icon, ...action }, index) => (
+              <OverflowMenuItem
+                {...action}
+                key={`${blockClass}--${instanceId}__overflow-menu__item__${index}`}
+                className={`${blockClass}__overflow-menu__item`}
+                itemText={
+                  <>
+                    {children}
+
+                    {Icon && (
+                      <span
+                        className={`${blockClass}__overflow-menu__item__icon`}>
+                        <Icon />
+                      </span>
+                    )}
+                  </>
+                }
+              />
+            )
+          )}
         </OverflowMenu>
       )}
     </div>
@@ -81,7 +88,7 @@ ComboButton.propTypes = {
   className: string,
 
   /** Provide the [props of the `OverflowMenu`](https://react.carbondesignsystem.com/?path=/docs/overflowmenu) */
-  overflowMenu: OverflowMenu.propTypes,
+  overflowMenu: shape(OverflowMenu.propTypes),
 };
 
 ComboButton.defaultProps = {

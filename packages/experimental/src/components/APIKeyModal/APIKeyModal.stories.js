@@ -20,6 +20,7 @@ import { APIKeyModal } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import mdx from './APIKeyModal.mdx';
 import { expPrefix } from '../../global/js/settings';
+import wait from '../../global/js/utils/wait';
 
 export default {
   title: 'Experimental/APIKeyModal',
@@ -36,7 +37,7 @@ const defaultProps = {
   apiKey: '123-456-789',
   apiKeyInputId: 'apiKeyInput',
   apiKeyLabel: 'API key',
-  copyButtonText: 'Copy',
+  copyButtonText: 'Copy & close',
   open: true,
   secondaryButtonText: 'Close',
   successBody: (
@@ -48,8 +49,31 @@ const defaultProps = {
   successHeader: 'API key successully created',
 };
 
-const Template = (args) => {
-  return <APIKeyModal {...args} />;
+const MinimalTemplate = (args) => {
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const generateKey = async () => {
+    setLoading(true);
+    await wait(2000);
+    setOpen(true);
+    setLoading(false);
+  };
+
+  return (
+    <>
+      <APIKeyModal
+        {...args}
+        onRequestClose={() => setOpen(false)}
+        open={open}
+      />
+      {loading ? (
+        <InlineLoading description="Generating..." />
+      ) : (
+        <Button onClick={generateKey}>Generate API key</Button>
+      )}
+    </>
+  );
 };
 
 const TemplateWithState = (args) => {
@@ -61,8 +85,7 @@ const TemplateWithState = (args) => {
   const setKeyHandler = async (resourceName) => {
     action('submitted');
     setLoading(true);
-    const timeout = () => new Promise((resolve) => setTimeout(resolve, 2000));
-    await timeout();
+    await wait(2000);
     setApiKey('111-111-111-111');
     setLoading(false);
   };
@@ -70,10 +93,6 @@ const TemplateWithState = (args) => {
   const onCloseHandler = () => {
     setApiKey('');
     setOpen(false);
-  };
-
-  const modalToggler = () => {
-    setOpen(!open);
   };
 
   return (
@@ -86,7 +105,7 @@ const TemplateWithState = (args) => {
         onRequestSubmit={setKeyHandler}
         open={open}
       />
-      <Button onClick={modalToggler}>Add API key</Button>
+      <Button onClick={() => setOpen(!open)}>Generate API key</Button>
     </>
   );
 };
@@ -98,7 +117,7 @@ const MultiStepTemplate = (args) => {
 
   // multi step options
   const [name, setName] = useState('');
-  const [permissions, setPermissions] = useState('read and write');
+  const [permissions, setPermissions] = useState('');
   const [allResources, setAllResources] = useState(false);
   const [resource, setResource] = useState('');
 
@@ -106,8 +125,7 @@ const MultiStepTemplate = (args) => {
   const setKeyHandler = async (resourceName) => {
     action('submitted');
     setLoading(true);
-    const timeout = () => new Promise((resolve) => setTimeout(resolve, 2000));
-    await timeout();
+    await wait(2000);
     setApiKey('111-111-111-111');
     setLoading(false);
   };
@@ -115,57 +133,68 @@ const MultiStepTemplate = (args) => {
   const onCloseHandler = () => {
     setApiKey('');
     setOpen(false);
-  };
-
-  const modalToggler = () => {
-    setOpen(!open);
+    setName('');
+    setPermissions('');
+    setAllResources(false);
+    setResource('');
   };
 
   const steps = [
-    <div key={1}>
-      <p className={`${expPrefix}--apikey-modal-body`}>
-        Optional description text. To connect securely to product, your
-        application or tool needs an API key with permissions to access the
-        cluster and resources such as topics.
-      </p>
-      <FormGroup>
-        <TextInput
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          labelText="Descriptive name"
-          placeholder="Descriptive name"
-        />
-      </FormGroup>
-      <FormGroup legendText="What do you want your application to be able to do">
-        <RadioButtonGroup
-          onChange={(opt) => setPermissions(opt)}
-          valueSelected={permissions}>
-          <RadioButton value="Read and write" labelText="Read and write" />
-          <RadioButton value="Read only" labelText="Read only" />
-          <RadioButton value="Write only" labelText="Write only" />
-        </RadioButtonGroup>
-      </FormGroup>
-    </div>,
-    <div key={2}>
-      <FormGroup>
-        <Toggle
-          onChange={(e) => setAllResources(e.target.checked)}
-          labelText="All resources"
-          labelA="Off"
-          labelB="On"
-          toggled={allResources}
-        />
-      </FormGroup>
-      <FormGroup>
-        <TextInput
-          value={resource}
-          onChange={(e) => setResource(e.target.value)}
-          labelText="Which resource?"
-          placeholder="Resources name"
-        />
-      </FormGroup>
-      {loading && <InlineLoading description="loading..." />}
-    </div>,
+    {
+      valid: Boolean(name && permissions),
+      content: (
+        <div>
+          <p className={`${expPrefix}--apikey-modal-body`}>
+            Optional description text. To connect securely to product, your
+            application or tool needs an API key with permissions to access the
+            cluster and resources such as topics.
+          </p>
+          <TextInput
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            labelText="Name your application"
+            placeholder="Application name"
+            className={`${expPrefix}--apikey-modal-input`}
+          />
+          <FormGroup legendText="What do you want your application to be able to do">
+            <RadioButtonGroup
+              onChange={(opt) => setPermissions(opt)}
+              valueSelected={permissions}>
+              <RadioButton value="Read and write" labelText="Read and write" />
+              <RadioButton value="Read only" labelText="Read only" />
+              <RadioButton value="Write only" labelText="Write only" />
+            </RadioButtonGroup>
+          </FormGroup>
+        </div>
+      ),
+    },
+    {
+      valid: Boolean(resource),
+      content: (
+        <div>
+          <FormGroup>
+            <Toggle
+              onChange={(e) => setAllResources(e.target.checked)}
+              labelText="All resources"
+              labelA="Off"
+              labelB="On"
+              toggled={allResources}
+              disabled={loading}
+            />
+          </FormGroup>
+          <FormGroup>
+            <TextInput
+              value={resource}
+              onChange={(e) => setResource(e.target.value)}
+              labelText="Which resource?"
+              placeholder="Resources name"
+              disabled={loading}
+            />
+          </FormGroup>
+          {loading && <InlineLoading description="Generating..." />}
+        </div>
+      ),
+    },
   ];
 
   return (
@@ -179,7 +208,7 @@ const MultiStepTemplate = (args) => {
         open={open}
         customSteps={steps}
       />
-      <Button onClick={modalToggler}>Add API key</Button>
+      <Button onClick={() => setOpen(!open)}>Generate API key</Button>
     </>
   );
 };
@@ -195,20 +224,26 @@ Standard.args = {
   downloadLinkText: 'Download as JSON',
   downloadable: true,
   downloadableFileName: 'apikey',
-  loadingMessage: 'your key is being created. please wait...',
+  loadingMessage: 'Generating...',
   modalBody:
     'Optional description text. To connect securely to {{product}}, your application or tool needs an API key with permission to access the cluster and resources.',
   nameHelperText:
-    'Providing the application name will help you idenfity your api key later.',
+    'Providing the application name will help you idenfity your API key later.',
   nameInputId: 'nameInput',
   nameLabel: 'Name your application',
   namePlaceholder: 'Application name',
   nameRequired: true,
 };
 
-export const Minimal = Template.bind({});
+export const Minimal = MinimalTemplate.bind({});
 Minimal.args = {
   ...defaultProps,
+  apiKeyVisibility: true,
+  downloadBodyText:
+    'This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it.',
+  downloadLinkText: 'Download as JSON',
+  downloadable: true,
+  downloadableFileName: 'apikey',
 };
 
 export const CustomSteps = MultiStepTemplate.bind({});
@@ -222,4 +257,10 @@ CustomSteps.args = {
   ],
   nextStepButtonText: 'Next',
   previousStepButtonText: 'Previous',
+  apiKeyVisibility: true,
+  downloadBodyText:
+    'This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it.',
+  downloadLinkText: 'Download as JSON',
+  downloadable: true,
+  downloadableFileName: 'apikey',
 };

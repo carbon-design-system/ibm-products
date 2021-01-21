@@ -53,6 +53,10 @@ to see if a similar issue has already been submitted. If a similar issue has
 been submitted, assign yourself or ask to be assigned to the issue by posting a
 comment. If the issue does not exist, please make a new issue.
 
+Refer to
+[contributing in Carbon](https://github.com/carbon-design-system/carbon/blob/master/.github/CONTRIBUTING.md#what-is-the-contribution-process)
+for some contribution quick tips.
+
 When you're at a good stopping place and you're ready for feedback from other
 contributors and maintainers,
 [commit](https://docs.github.com/en/github/managing-files-in-a-repository/adding-a-file-to-a-repository-using-the-command-line),

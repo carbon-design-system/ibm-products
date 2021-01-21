@@ -39,12 +39,14 @@ export const APIKeyModal = ({
 }) => {
   const [name, setName] = useState('');
   const [currentStep, setCurrentStep] = useState(0);
+  const hasSteps = Boolean(customSteps.length);
 
-  const primaryButtonDisabled = nameRequired && !name;
-  const apiKeyLoaded = apiKey && !loading;
-  const hasNextStep =
-    customSteps.length && currentStep < customSteps.length - 1;
-  const hasPreviousStep = customSteps.length && currentStep !== 0;
+  const getPrimaryButtonStatus = () => {
+    if (hasSteps && 'valid' in customSteps[currentStep])
+      return !customSteps[currentStep].valid;
+    if (nameRequired) return !name;
+    return loading;
+  };
 
   const getPrimaryButtonText = () => {
     if (apiKey) return copyButtonText;
@@ -59,7 +61,7 @@ export const APIKeyModal = ({
 
   const getHeader = () => {
     if (apiKeyLoaded) return successHeader;
-    else if (customSteps.length) return stepHeaders[currentStep];
+    else if (hasSteps) return stepHeaders[currentStep];
     return createHeader;
   };
 
@@ -69,8 +71,10 @@ export const APIKeyModal = ({
 
   const submitHandler = () => {
     if (hasNextStep) setCurrentStep(currentStep + 1);
-    else if (apiKeyLoaded) navigator.clipboard.writeText(apiKey);
-    else onRequestSubmit(name);
+    else if (apiKeyLoaded) {
+      navigator.clipboard.writeText(apiKey);
+      onCloseHandler();
+    } else onRequestSubmit(name);
   };
 
   const onCloseHandler = () => {
@@ -84,6 +88,11 @@ export const APIKeyModal = ({
     else onCloseHandler();
   };
 
+  const primaryButtonDisabled = getPrimaryButtonStatus();
+  const apiKeyLoaded = apiKey && !loading;
+  const hasNextStep = hasSteps && currentStep < customSteps.length - 1;
+  const hasPreviousStep = hasSteps && currentStep !== 0;
+
   return (
     <Modal
       className={`${expPrefix}--apikey-modal`}
@@ -96,8 +105,8 @@ export const APIKeyModal = ({
       onRequestClose={onCloseHandler}
       onSecondarySubmit={onBackHandler}
       modalLabel={hasPreviousStep ? modalLabel : ''}>
-      {customSteps.length && !apiKeyLoaded ? (
-        customSteps[currentStep]
+      {hasSteps && !apiKeyLoaded ? (
+        customSteps[currentStep].content
       ) : (
         <>
           {modalBody && (
@@ -108,6 +117,7 @@ export const APIKeyModal = ({
               value={apiKey}
               labelText={apiKeyLabel}
               id={apiKeyInputId}
+              className={`${expPrefix}--apikey-modal-input`}
             />
           )}
           {apiKey && !apiKeyVisibility && (
@@ -125,6 +135,7 @@ export const APIKeyModal = ({
               onChange={(evt) => setNameHandler(evt)}
               value={name}
               id={nameInputId}
+              disabled={loading}
             />
           )}
           {loading && (
@@ -186,9 +197,14 @@ APIKeyModal.propTypes = {
    */
   createHeader: PropTypes.string,
   /**
-   * Elements used for custom api key setup
+   * an array that contains the custom step content and if the step has passed validation
    */
-  customSteps: PropTypes.arrayOf(PropTypes.node),
+  customSteps: PropTypes.arrayOf(
+    PropTypes.shape({
+      valid: PropTypes.bool,
+      content: PropTypes.node,
+    })
+  ),
   /**
    * text fot the download message
    */
@@ -238,7 +254,8 @@ APIKeyModal.propTypes = {
    */
   namePlaceholder: PropTypes.string,
   /**
-   * specifices if a name is required or not
+   * specifices if a name is required. If you are using custom steps DO NOT use this for validation.
+   * use the `valid` prop in the `customSteps` prop array for validation. see `customSteps` for additional information.
    */
   nameRequired: PropTypes.bool,
   /**

@@ -10,7 +10,7 @@ import { action } from '@storybook/addon-actions';
 
 import { ExampleComponent } from '.';
 
-import styles from './_index.scss'; // import index in case more files are added later.
+import styles from './_storybook.scss'; // import storybook which includes component and additional storybook styles
 
 export default {
   title: 'Experimental/ExampleComponent',

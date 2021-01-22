@@ -50,6 +50,9 @@ Today, the packages being hosted here are:
 
 ## 🙌 Contributing
 
+This project is made possible by several community members who have invested
+their own time to give back to the Carbon community.
+
 We're always looking for contributors to help us fix bugs, build new features,
 or help us improve the project documentation. If you're interested, definitely
 check out our

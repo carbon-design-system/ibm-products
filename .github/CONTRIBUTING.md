@@ -20,7 +20,9 @@ done in a
 
 1. To install the project's dependencies, from the root directory of your fork,
    run `yarn --offline`
-2. To get your development server running and to start coding, run
+2. To scaffold a new component or pattern, run `yarn generate ComponentName`,
+   where `ComponentName` is the name of the component or pattern
+3. To get your development server running and to start coding, run
    `yarn storybook`
 
 This will start a development server where you can see any changes you are
@@ -43,7 +45,8 @@ If you're contributing to our JavaScript code, test your changes by running
 New tests are written in
 [React Testing Library](https://testing-library.com/docs/react-testing-library/intro),
 with [Enzyme](https://enzymejs.github.io/enzyme) available for migration
-compatibility.
+compatibility, and follow the
+[user experience standards adopter guide](https://github.ibm.com/IBMPrivateCloud/BedrockServices/blob/master/AdopterGuides/CommonUXStandardsAdoptionGuide.md#testing).
 
 ## 5. Make a pull request
 
@@ -52,6 +55,10 @@ compatibility.
 to see if a similar issue has already been submitted. If a similar issue has
 been submitted, assign yourself or ask to be assigned to the issue by posting a
 comment. If the issue does not exist, please make a new issue.
+
+Refer to
+[contributing in Carbon](https://github.com/carbon-design-system/carbon/blob/master/.github/CONTRIBUTING.md#what-is-the-contribution-process)
+for some contribution quick tips.
 
 When you're at a good stopping place and you're ready for feedback from other
 contributors and maintainers,

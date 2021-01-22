@@ -9,7 +9,7 @@ import React from 'react';
 
 import sectionTitle from '../../../config';
 
-import DISPLAY_NAME from '.';
+import { DISPLAY_NAME } from '.';
 
 import page from './DISPLAY_NAME.mdx';
 import styles from './_STYLE_NAME.scss';

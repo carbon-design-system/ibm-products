@@ -14,24 +14,16 @@ import cx from 'classnames';
 // import { settings } from 'carbon-components';
 // const { prefix } = settings;
 
-import { ContentSwitcher } from 'carbon-components-react';
-
 import ReactResizeDetector from 'react-resize-detector';
 
 import { expPrefix } from '../../global/js/settings';
 
 import { useWindowResize, useWindowScroll } from '../../global/js/use';
 
-import {
-  BreadcrumbItem,
-  Grid,
-  Column,
-  Row,
-  Breadcrumb,
-} from 'carbon-components-react';
+import { BreadcrumbItem, Grid, Column, Row } from 'carbon-components-react';
 
 import { ActionBar } from './ActionBar';
-import { TagSet } from '../';
+import { BreadcrumbWithOverflow, TagSet } from '../';
 
 const blockClass = `${expPrefix}-page-header`;
 
@@ -116,6 +108,14 @@ export const PageHeader = ({
     update.breadcrumbRowSpaceBelow = 0;
     update.titleRowSpaceAbove = 0;
 
+    update.headerTopValue = navigation
+      ? keepBreadcrumbAndTabs
+        ? update.navigationRowHeight +
+          update.breadcrumbRowHeight -
+          update.headerHeight
+        : update.navigationRowHeight - update.headerHeight
+      : update.breadcrumbRowHeight - update.headerHeight;
+
     if (window) {
       let val;
       if (breadcrumbRowEl) {
@@ -177,58 +177,52 @@ export const PageHeader = ({
 
   useEffect(() => {
     // Updates custom CSS props used to manage scroll behaviour
-    setComponentCssCustomProps((prevCSSProps) => ({
-      ...prevCSSProps,
-      [`--${blockClass}--height-px`]: `${metrics.headerHeight}px`,
-      [`--${blockClass}--width-px`]: `${metrics.headerWidth}px`,
-      [`--${blockClass}--header-top`]: `${
-        navigation && navigation.type !== ContentSwitcher
-          ? keepBreadcrumbAndTabs
-            ? metrics.navigationRowHeight +
-              metrics.breadcrumbRowHeight -
-              metrics.headerHeight
-            : metrics.navigationRowHeight - metrics.headerHeight
-          : metrics.breadcrumbRowHeight - metrics.headerHeight
-      }px`,
-      [`--${blockClass}--breadcrumb-title-visibility`]:
-        scrollYValue > 0 ? 'visible' : 'hidden',
-      [`--${blockClass}--scroll`]: `${scrollYValue}`,
-      [`--${blockClass}--breadcrumb-title-top`]: `${Math.max(
-        0,
-        metrics.breadcrumbTitleHeight +
-          metrics.breadcrumbRowSpaceBelow -
-          scrollYValue
-      )}px`,
-      [`--${blockClass}--breadcrumb-title-opacity`]: `${Math.min(
-        1,
-        Math.max(
+    setComponentCssCustomProps((prevCSSProps) => {
+      return {
+        ...prevCSSProps,
+        [`--${blockClass}--height-px`]: `${metrics.headerHeight}px`,
+        [`--${blockClass}--width-px`]: `${metrics.headerWidth}px`,
+        [`--${blockClass}--header-top`]: `${metrics.headerTopValue}px`,
+        [`--${blockClass}--breadcrumb-title-visibility`]:
+          scrollYValue > 0 ? 'visible' : 'hidden',
+        [`--${blockClass}--scroll`]: `${scrollYValue}`,
+        [`--${blockClass}--breadcrumb-title-top`]: `${Math.max(
           0,
-          (scrollYValue - (metrics.breadcrumbRowSpaceBelow || 0)) /
-            (metrics.breadcrumbTitleHeight || 1) // don't want to
-        )
-      )}`,
-      [`--${blockClass}--breadcrumb-row-width-px`]: `${metrics.breadcrumbRowWidth}px`,
-      [`--${blockClass}--breadcrumb-top`]: `${Math.min(
-        0,
-        !keepBreadcrumbAndTabs &&
-          navigation &&
-          navigation.type !== ContentSwitcher
-          ? metrics.headerHeight -
-              metrics.breadcrumbRowSpaceBelow -
-              metrics.navigationRowHeight -
-              metrics.breadcrumbRowHeight -
-              scrollYValue
-          : 0
-      )}px`,
-    }));
+          metrics.breadcrumbTitleHeight +
+            metrics.titleRowSpaceAbove -
+            scrollYValue
+        )}px`,
+        [`--${blockClass}--breadcrumb-title-opacity`]: `${Math.min(
+          1,
+          Math.max(
+            0,
+            (scrollYValue - (metrics.titleRowSpaceAbove || 0)) /
+              (metrics.breadcrumbTitleHeight || 1) // don't want to
+          )
+        )}`,
+        [`--${blockClass}--breadcrumb-row-width-px`]: `${metrics.breadcrumbRowWidth}px`,
+        [`--${blockClass}--breadcrumb-top`]: `${Math.min(
+          0,
+          !keepBreadcrumbAndTabs && navigation
+            ? metrics.headerHeight -
+                metrics.titleRowSpaceAbove -
+                metrics.navigationRowHeight -
+                metrics.breadcrumbRowHeight -
+                scrollYValue
+            : 0
+        )}px`,
+      };
+    });
   }, [
     keepBreadcrumbAndTabs,
+    metrics,
     metrics.breadcrumbRowHeight,
     metrics.breadcrumbRowSpaceBelow,
     metrics.breadcrumbTitleHeight,
     metrics.breadcrumbRowWidth,
     metrics.headerHeight,
     metrics.headerWidth,
+    metrics.headerTopValue,
     metrics.navigationRowHeight,
     navigation,
     scrollYValue,
@@ -245,6 +239,7 @@ export const PageHeader = ({
       actionBarItems,
       availableSpace,
       breadcrumbItems,
+      keepBreadcrumbAndTabs,
       navigation,
       pageActions,
       subtitle,
@@ -260,6 +255,7 @@ export const PageHeader = ({
     actionBarItems,
     availableSpace,
     breadcrumbItems,
+    keepBreadcrumbAndTabs,
     navigation,
     pageActions,
     subtitle,
@@ -338,6 +334,12 @@ export const PageHeader = ({
     checkUpdateVerticalSpace();
   };
 
+  const nextToTabsCheck = () => {
+    return (
+      actionBarItems === undefined && scrollYValue + metrics.headerTopValue > 0
+    );
+  };
+
   return (
     <ReactResizeDetector handleHeight onResize={handleResize}>
       <section
@@ -357,59 +359,62 @@ export const PageHeader = ({
               className={cx(`${blockClass}--breadcrumb-row`, {
                 [`${blockClass}--breadcrumb-row--with-actions`]:
                   actionBarItems !== undefined,
+                [`${blockClass}--breadcrumb-row--next-to-tabs`]: nextToTabsCheck(),
               })}>
-              <Column
-                className={cx(`${blockClass}--breadcrumb-column`, {
-                  [`${blockClass}--breadcrumb-column--background`]:
-                    breadcrumbItems !== undefined ||
-                    actionBarItems !== undefined,
-                })}>
-                {/* keeps actionBar right even if empty */}
+              <div className={`${blockClass}--breadcrumb-row--container`}>
+                <Column
+                  className={cx(`${blockClass}--breadcrumb-column`, {
+                    [`${blockClass}--breadcrumb-column--background`]:
+                      breadcrumbItems !== undefined ||
+                      actionBarItems !== undefined,
+                  })}>
+                  {/* keeps actionBar right even if empty */}
 
-                {breadcrumbItems !== undefined ? (
-                  <Breadcrumb
-                    className={`${blockClass}--breadcrumb`}
-                    noTrailingSlash={title !== undefined}>
-                    {breadcrumbItems}
-                    {title ? (
-                      <BreadcrumbItem
-                        href="#"
-                        isCurrentPage={true}
-                        className={cx([
-                          `${blockClass}--breadcrumb-title`,
-                          {
-                            [`${blockClass}--breadcrumb-title--pre-collapsed`]: preCollapseTitleRow,
-                          },
-                        ])}>
-                        {title}
-                      </BreadcrumbItem>
-                    ) : (
-                      ''
-                    )}
-                  </Breadcrumb>
-                ) : (
-                  ''
-                )}
-              </Column>
-              <Column
-                className={cx(`${blockClass}--action-bar-column`, {
-                  [`${blockClass}--action-bar-column--background`]:
-                    actionBarItems !== undefined,
-                })}>
-                {actionBarItems !== undefined ? (
-                  <>
-                    <div
-                      className={cx(`${blockClass}--page-actions`, {
-                        [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
-                      })}>
-                      {pageActions}
-                    </div>
-                    <ActionBar className={`${blockClass}--action-bar`}>
-                      {actionBarItems}
-                    </ActionBar>
-                  </>
-                ) : null}
-              </Column>
+                  {breadcrumbItems !== undefined ? (
+                    <BreadcrumbWithOverflow
+                      className={`${blockClass}--breadcrumb`}
+                      noTrailingSlash={title !== undefined}
+                      maxVisibleBreadcrumbItems={4}>
+                      {breadcrumbItems}
+                      {title ? (
+                        <BreadcrumbItem
+                          href="#"
+                          isCurrentPage={true}
+                          className={cx([
+                            `${blockClass}--breadcrumb-title`,
+                            {
+                              [`${blockClass}--breadcrumb-title--pre-collapsed`]: preCollapseTitleRow,
+                            },
+                          ])}>
+                          {title}
+                        </BreadcrumbItem>
+                      ) : (
+                        ''
+                      )}
+                    </BreadcrumbWithOverflow>
+                  ) : (
+                    ''
+                  )}
+                </Column>
+                <Column
+                  className={cx(
+                    `${blockClass}--action-bar-column ${blockClass}--action-bar-column--background`
+                  )}>
+                  {actionBarItems !== undefined ? (
+                    <>
+                      <div
+                        className={cx(`${blockClass}--page-actions`, {
+                          [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
+                        })}>
+                        {pageActions}
+                      </div>
+                      <ActionBar className={`${blockClass}--action-bar`}>
+                        {actionBarItems}
+                      </ActionBar>
+                    </>
+                  ) : null}
+                </Column>
+              </div>
             </Row>
           ) : null}
 
@@ -505,7 +510,7 @@ export const PageHeader = ({
                     [`${blockClass}--navigation-tags--tags-only`]:
                       navigation === undefined,
                   })}>
-                  <TagSet>{tags}</TagSet>
+                  <TagSet overflowAlign="end">{tags}</TagSet>
                 </Column>
               ) : null}
             </Row>
@@ -551,10 +556,9 @@ PageHeader.propTypes = {
   keepBreadcrumbAndTabs: PropTypes.bool,
   /**
    * Content for the navigation area in the PageHeader. Should
-   * be a React element that is normally either a Carbon Tabs component or a
-   * Carbon ContentSwitcher. Optional.
+   * be a React element that is normally a Carbon Tabs component. Optional.
    */
-  navigation: PropTypes.element, // Supports Tabs or ContentSwitcher
+  navigation: PropTypes.element, // Supports Tabs
   /**
    * Specifies the primary page actions as a React element. Normally this
    * is one or more Carbon Button components. Optional.

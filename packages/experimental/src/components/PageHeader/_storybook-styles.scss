@@ -6,11 +6,12 @@
 //
 @import './index';
 
-@import 'carbon-components/scss/components/breadcrumb/breadcrumb';
-@import 'carbon-components/scss/components/content-switcher/content-switcher';
 @import 'carbon-components/scss/components/button/button';
+@import 'carbon-components/scss/components/content-switcher/content-switcher';
 @import 'carbon-components/scss/components/tabs/tabs';
-@import 'carbon-components/scss/components/tag/tag';
+
+@import '../TagSet/index';
+@import '../BreadcrumbWithOverflow/index';
 
 .sbdocs .page-header-stories__viewport {
   max-height: 500px;

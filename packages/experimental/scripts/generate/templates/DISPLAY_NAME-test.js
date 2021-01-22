@@ -8,7 +8,7 @@
 import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import React from 'react';
 
-import DISPLAY_NAME from '.';
+import { DISPLAY_NAME } from '.';
 
 const { name } = DISPLAY_NAME;
 

@@ -1,0 +1,30 @@
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+
+.card {
+  width: 100%;
+  padding: $spacing-05;
+  background: #cccccc;
+}
+
+.card-title {
+  @include carbon--type-style('productive-heading-03');
+
+  margin-bottom: $spacing-05;
+}
+
+.card-title--double {
+  @include carbon--type-style('productive-heading-05');
+}
+
+.card-caption {
+  @include carbon--type-style('label-01');
+}
+
+.card-body {
+  @include carbon--type-style('body-long-01');
+}
+
+.card-body--short {
+  @include carbon--type-style('body-short-01');
+}

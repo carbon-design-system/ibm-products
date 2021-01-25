@@ -20,7 +20,7 @@ labels: 'status: needs triage'
 ### Design maintainer(s)
 
 <!--
-  Add a name in one of the options below, for example:
+  Add a name in each of the options below, for example:
   - Owner - John Smith
 -->
 

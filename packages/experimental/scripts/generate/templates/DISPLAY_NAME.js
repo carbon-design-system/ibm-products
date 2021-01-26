@@ -5,9 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import classnames from 'classnames';
+import classNames from 'classnames';
 import { node, string } from 'prop-types';
 import React from 'react';
+
+/**
+ * TODO: @import(s) of carbon components
+ */
+
+/**
+ * TODO: Add use of Carbon prefix if needed
+ */
+// import { settings } from 'carbon-components';
+// const { prefix } = settings;
 
 import { expPrefix } from '../../global/js/settings';
 
@@ -18,7 +28,7 @@ const blockClass = `${expPrefix}--STYLE_NAME`;
  */
 export const DISPLAY_NAME = ({ children, className, ...rest }) => {
   return (
-    <div className={classnames(blockClass, className)} {...rest}>
+    <div className={classNames(blockClass, className)} {...rest}>
       {children}
     </div>
   );

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Modal, TextInput, InlineLoading } from 'carbon-components-react';
+import { Modal, TextInput, InlineLoading, Form } from 'carbon-components-react';
 import { InformationFilled16 } from '@carbon/icons-react';
 import { APIKeyDownloader } from '../APIKeyDownloader';
 import { expPrefix } from '../../global/js/settings';
@@ -39,7 +39,12 @@ export const APIKeyModal = ({
 }) => {
   const [name, setName] = useState('');
   const [currentStep, setCurrentStep] = useState(0);
+  const inputRef = useRef();
   const hasSteps = Boolean(customSteps.length);
+
+  useEffect(() => {
+    if (inputRef.current && open) inputRef.current.focus();
+  }, [open]);
 
   const getPrimaryButtonStatus = () => {
     if (hasSteps && 'valid' in customSteps[currentStep])
@@ -69,12 +74,15 @@ export const APIKeyModal = ({
     setName(evt.target.value);
   };
 
-  const submitHandler = () => {
+  const submitHandler = (evt) => {
     if (hasNextStep) setCurrentStep(currentStep + 1);
     else if (apiKeyLoaded) {
       navigator.clipboard.writeText(apiKey);
       onCloseHandler();
-    } else onRequestSubmit(name);
+    } else {
+      evt.preventDefault();
+      onRequestSubmit();
+    }
   };
 
   const onCloseHandler = () => {
@@ -128,15 +136,18 @@ export const APIKeyModal = ({
             />
           )}
           {nameRequired && !apiKeyLoaded && (
-            <TextInput
-              helperText={nameHelperText}
-              placeholder={namePlaceholder}
-              labelText={nameLabel}
-              onChange={(evt) => setNameHandler(evt)}
-              value={name}
-              id={nameInputId}
-              disabled={loading}
-            />
+            <Form onSubmit={submitHandler}>
+              <TextInput
+                helperText={nameHelperText}
+                placeholder={namePlaceholder}
+                labelText={nameLabel}
+                onChange={(evt) => setNameHandler(evt)}
+                value={name}
+                id={nameInputId}
+                disabled={loading}
+                ref={inputRef}
+              />
+            </Form>
           )}
           {loading && (
             <InlineLoading

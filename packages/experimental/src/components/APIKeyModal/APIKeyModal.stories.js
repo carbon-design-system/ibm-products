@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   Button,
   TextInput,
@@ -14,6 +14,7 @@ import {
   FormGroup,
   Toggle,
   InlineLoading,
+  Form,
 } from 'carbon-components-react';
 import { action } from '@storybook/addon-actions';
 import { APIKeyModal } from '.';
@@ -82,7 +83,7 @@ const TemplateWithState = (args) => {
   const [loading, setLoading] = useState(false);
 
   // eslint-disable-next-line
-  const setKeyHandler = async (resourceName) => {
+  const submitHandler = async () => {
     action('submitted');
     setLoading(true);
     await wait(2000);
@@ -102,7 +103,7 @@ const TemplateWithState = (args) => {
         apiKey={apiKey}
         loading={loading}
         onRequestClose={onCloseHandler}
-        onRequestSubmit={setKeyHandler}
+        onRequestSubmit={submitHandler}
         open={open}
       />
       <Button onClick={() => setOpen(!open)}>Generate API key</Button>
@@ -114,6 +115,11 @@ const MultiStepTemplate = (args) => {
   const [open, setOpen] = useState(false);
   const [apiKey, setApiKey] = useState('');
   const [loading, setLoading] = useState(false);
+  const inputRef = useRef();
+
+  useEffect(() => {
+    if (inputRef.current && open) inputRef.current.focus();
+  }, [open]);
 
   // multi step options
   const [name, setName] = useState('');
@@ -122,7 +128,7 @@ const MultiStepTemplate = (args) => {
   const [resource, setResource] = useState('');
 
   // eslint-disable-next-line
-  const setKeyHandler = async (resourceName) => {
+  const submitHandler = async () => {
     action('submitted');
     setLoading(true);
     await wait(2000);
@@ -137,6 +143,11 @@ const MultiStepTemplate = (args) => {
     setPermissions('');
     setAllResources(false);
     setResource('');
+  };
+
+  const formHandler = (evt) => {
+    evt.preventDefault();
+    submitHandler();
   };
 
   const steps = [
@@ -155,11 +166,13 @@ const MultiStepTemplate = (args) => {
             labelText="Name your application"
             placeholder="Application name"
             className={`${expPrefix}--apikey-modal-input`}
+            ref={inputRef}
           />
           <FormGroup legendText="What do you want your application to be able to do">
             <RadioButtonGroup
               onChange={(opt) => setPermissions(opt)}
-              valueSelected={permissions}>
+              valueSelected={permissions}
+              name="permission">
               <RadioButton value="Read and write" labelText="Read and write" />
               <RadioButton value="Read only" labelText="Read only" />
               <RadioButton value="Write only" labelText="Write only" />
@@ -172,25 +185,27 @@ const MultiStepTemplate = (args) => {
       valid: Boolean(resource),
       content: (
         <div>
-          <FormGroup>
-            <Toggle
-              onChange={(e) => setAllResources(e.target.checked)}
-              labelText="All resources"
-              labelA="Off"
-              labelB="On"
-              toggled={allResources}
-              disabled={loading}
-            />
-          </FormGroup>
-          <FormGroup>
-            <TextInput
-              value={resource}
-              onChange={(e) => setResource(e.target.value)}
-              labelText="Which resource?"
-              placeholder="Resources name"
-              disabled={loading}
-            />
-          </FormGroup>
+          <Form onSubmit={formHandler}>
+            <FormGroup>
+              <Toggle
+                onChange={(e) => setAllResources(e.target.checked)}
+                labelText="All resources"
+                labelA="Off"
+                labelB="On"
+                toggled={allResources}
+                disabled={loading}
+              />
+            </FormGroup>
+            <FormGroup>
+              <TextInput
+                value={resource}
+                onChange={(e) => setResource(e.target.value)}
+                labelText="Which resource?"
+                placeholder="Resources name"
+                disabled={loading}
+              />
+            </FormGroup>
+          </Form>
           {loading && <InlineLoading description="Generating..." />}
         </div>
       ),
@@ -204,7 +219,7 @@ const MultiStepTemplate = (args) => {
         apiKey={apiKey}
         loading={loading}
         onRequestClose={onCloseHandler}
-        onRequestSubmit={setKeyHandler}
+        onRequestSubmit={submitHandler}
         open={open}
         customSteps={steps}
       />

@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-security",
   "description": "Carbon for Cloud & Cognitive IBM Security UI components",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -39,13 +39,13 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.11.2",
-    "@carbon/ibm-security": "^1.26.0",
     "@carbon/icons-react": "^10.23.0",
     "@carbon/import-once": "^10.3.0",
     "@carbon/layout": "^10.16.0",
     "@carbon/themes": "^10.25.0",
     "carbon-components": "^10.26.0",
     "carbon-components-react": "^7.26.0",
+    "carbon-icons": "^7.0.7",
     "classnames": "^2.2.6"
   },
   "devDependencies": {

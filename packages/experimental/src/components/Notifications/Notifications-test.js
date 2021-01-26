@@ -13,7 +13,7 @@ import { expPrefix as prefix } from '../../global/js/settings';
 
 describe('Notifications', () => {
   test('renders the notification panel', () => {
-    render(<Notifications data={[]} open />);
+    render(<Notifications data={[]} open setOpen={() => {}} />);
     expect(screen.queryAllByText(/Notifications/i)).toBeTruthy();
   });
 
@@ -22,7 +22,12 @@ describe('Notifications', () => {
     const { fn } = jest;
     const onToggle = fn();
     const { container } = render(
-      <Notifications data={[]} open onDoNotDisturbChange={onToggle} />
+      <Notifications
+        data={[]}
+        open
+        onDoNotDisturbChange={onToggle}
+        setOpen={() => {}}
+      />
     );
 
     click(
@@ -34,7 +39,9 @@ describe('Notifications', () => {
   });
 
   test('should render empty state illustration', () => {
-    const { container } = render(<Notifications data={[]} open />);
+    const { container } = render(
+      <Notifications data={[]} open setOpen={() => {}} />
+    );
     const renderedEmptyStateSvg = container.querySelector('img');
     expect(renderedEmptyStateSvg).toBeTruthy();
   });
@@ -51,6 +58,7 @@ describe('Notifications', () => {
           },
         ]}
         open
+        setOpen={() => {}}
       />
     );
     const renderedEmptyStateSvg = container.querySelectorAll(
@@ -71,6 +79,7 @@ describe('Notifications', () => {
           },
         ]}
         open
+        setOpen={() => {}}
       />
     );
     const renderedEmptyStateSvg = container.querySelectorAll(
@@ -91,6 +100,7 @@ describe('Notifications', () => {
           },
         ]}
         open
+        setOpen={() => {}}
       />
     );
     const renderedEmptyStateSvg = container.querySelectorAll(
@@ -111,6 +121,7 @@ describe('Notifications', () => {
           },
         ]}
         open
+        setOpen={() => {}}
       />
     );
     const renderedEmptyStateSvg = container.querySelectorAll(
@@ -132,9 +143,11 @@ describe('Notifications', () => {
               text: 'View logs',
               url: 'https://www.carbondesignsystem.com/',
             },
+            onNotificationClick: () => {},
           },
         ]}
         open
+        setOpen={() => {}}
       />
     );
     const { click } = fireEvent;
@@ -157,6 +170,7 @@ describe('Notifications', () => {
           },
         ]}
         open
+        setOpen={() => {}}
       />
     );
     expect(getByText(/Read more/i)).toBeTruthy();

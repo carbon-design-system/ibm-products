@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/babel-preset-ibm-cloud-cognitive@0.2.0...babel-preset-ibm-cloud-cognitive@0.3.0) (2021-01-20)
+
+
+### Features
+
+* **combo-button:** add `ComboButton` logic, story, and styles ([#233](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/233)) ([85e2b62](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/85e2b62de80166cda84fa8cc9af311e664d241af))
+
+
+
+
+
+# [0.2.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/babel-preset-ibm-cloud-cognitive@0.1.2...babel-preset-ibm-cloud-cognitive@0.2.0) (2020-12-16)
+
+
+### Features
+
+* Page header tag overflow update ([#264](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/264)) ([ee22520](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ee225206e291fa3bca990cb2ccabfece8930fc88))
+
+
+
+
+
+## [0.1.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/babel-preset-ibm-cloud-cognitive@0.1.1...babel-preset-ibm-cloud-cognitive@0.1.2) (2020-12-08)
+
+**Note:** Version bump only for package babel-preset-ibm-cloud-cognitive
+
+
+
+
+
 ## [0.1.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/babel-preset-ibm-cloud-cognitive@0.1.0...babel-preset-ibm-cloud-cognitive@0.1.1) (2020-11-30)
 
 **Note:** Version bump only for package babel-preset-ibm-cloud-cognitive

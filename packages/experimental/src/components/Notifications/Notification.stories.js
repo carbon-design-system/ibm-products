@@ -79,11 +79,17 @@ const Template = (args) => {
 export const Default = Template.bind({});
 Default.args = {
   data,
-  onDoNotDisturbChange: (value) => action(`Toggled to ${value}`),
+  onDoNotDisturbChange: action('Toggled to do not disturb'),
+  onViewAllClick: action('Clicked view all button'),
+  onSettingsClick: action('Cliked settings gear'),
+  onDismissAllNotifications: action('Dismiss all notifications action'),
+  onDismissSingleNotification: action('Dismiss single notification'),
 };
 
 export const EmptyState = Template.bind({});
 EmptyState.args = {
   data: [],
-  onDoNotDisturbChange: (value) => action(`Toggled to ${value}`),
+  onDoNotDisturbChange: action('Toggled to do not disturb'),
+  onViewAllClick: action('Clicked view all button'),
+  onSettingsClick: action('Clicked settings gear'),
 };

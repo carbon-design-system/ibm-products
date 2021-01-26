@@ -3,6 +3,49 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.17.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.17.0...@carbon/ibm-cloud-cognitive-experimental@0.17.1) (2021-01-26)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
+# [0.17.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.16.10...@carbon/ibm-cloud-cognitive-experimental@0.17.0) (2021-01-26)
+
+
+### Features
+
+* add side panel component ([#282](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/282)) ([4a128d8](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/4a128d8b9ca78aca67c3c0870dee5baa11d0d05e))
+
+
+
+
+
+## [0.16.10](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.16.9...@carbon/ibm-cloud-cognitive-experimental@0.16.10) (2021-01-26)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
+## [0.16.9](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.16.8...@carbon/ibm-cloud-cognitive-experimental@0.16.9) (2021-01-25)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
+## [0.16.8](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.16.7...@carbon/ibm-cloud-cognitive-experimental@0.16.8) (2021-01-21)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
 ## [0.16.7](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.16.6...@carbon/ibm-cloud-cognitive-experimental@0.16.7) (2021-01-20)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental

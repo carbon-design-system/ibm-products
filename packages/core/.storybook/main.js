@@ -20,7 +20,8 @@ module.exports = {
   ],
 
   stories: sync(resolve(__dirname, '..', '..', '**/*.stories.*')).filter(
-    (story) => !story.includes('node_modules')
+    (story) =>
+      !story.includes('node_modules') && !story.includes('DISPLAY_NAME')
   ),
 
   webpackFinal: async (configuration) =>

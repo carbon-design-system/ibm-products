@@ -5,11 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Button } from 'carbon-components-react';
+import { Button, ButtonSet } from 'carbon-components-react';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import { expPrefix } from '../../global/js/settings';
+import cx from 'classnames';
 
 const blockClass = `${expPrefix}-example-component`;
 
@@ -44,8 +45,8 @@ export const ExampleComponent = ({
   };
 
   return (
-    <div
-      className={[`${blockClass}`, `${blockClass}--${size}`, mode].join(' ')}
+    <ButtonSet
+      className={cx([blockClass, `${blockClass}--${size}`, mode])}
       style={{
         /* stylelint-disable-next-line carbon/theme-token-use */
         [`--${expPrefix}-border-color`]: borderColor,
@@ -65,7 +66,7 @@ export const ExampleComponent = ({
         disabled={props.disabled}>
         {primaryButtonLabel}
       </Button>
-    </div>
+    </ButtonSet>
   );
 };
 

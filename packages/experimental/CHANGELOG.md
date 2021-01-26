@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.17.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.17.1...@carbon/ibm-cloud-cognitive-experimental@0.17.2) (2021-01-26)
+
+
+### Bug Fixes
+
+* keyboard support for apikey modal ([#298](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/298)) ([67fc055](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/67fc055fc1ca9b60553da9c278533863b87eda1f))
+
+
+
+
+
 ## [0.17.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.17.0...@carbon/ibm-cloud-cognitive-experimental@0.17.1) (2021-01-26)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental

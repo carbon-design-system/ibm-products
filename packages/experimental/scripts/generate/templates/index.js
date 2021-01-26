@@ -5,7 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { create } from '@carbon/rollup-config';
-import packageJson from './package.json';
-
-export default create('src/index.js', packageJson);
+export { DISPLAY_NAME } from './DISPLAY_NAME';

@@ -44,7 +44,6 @@
     "carbon-components": "^10.25.0",
     "css-loader": "^3.6.0",
     "fast-sass-loader": "^1.5.0",
-    "glob": "^7.1.6",
     "node-sass": "^4.14.1",
     "style-loader": "^1.2.1",
     "webpack-merge": "^4.2.2"

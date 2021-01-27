@@ -16,19 +16,19 @@ import { Button } from 'carbon-components-react';
 
 const blockClass = `${expPrefix}-action-bar-item`;
 
-export const ActionBarItem = (props) => {
-  const className = cx([blockClass, props.className]);
+export const ActionBarItem = ({ inOverflow, ...otherProps }) => {
+  const className = cx([blockClass, otherProps.className]);
 
   return (
     <Button
       {...{
-        ...props,
+        ...otherProps,
         className,
         hasIconOnly: true,
         kind: 'ghost',
         size: 'field',
-        tooltipPosition: 'bottom',
-        tooltipAlignment: 'end',
+        tooltipPosition: inOverflow ? 'left' : 'bottom',
+        tooltipAlignment: inOverflow ? 'center' : 'end',
         type: 'button',
       }}></Button>
   );
@@ -77,6 +77,10 @@ ActionBarItem.propTypes = {
    * (inherited from Carbon Button)
    */
   iconDescription: PropTypes.string,
+  /**
+   * The action bar item is in overflow, set automatically from an ActionBar
+   */
+  inOverflow: PropTypes.bool,
   /**
    * Optional click handler
    *

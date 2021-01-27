@@ -13,7 +13,7 @@
 $block-class: #{$exp-prefix}-breadcrumb-with-overflow;
 
 .#{$block-class} {
-  width: 100%;
+  display: block;
 }
 
 .#{$block-class}--space {
@@ -29,10 +29,12 @@ $block-class: #{$exp-prefix}-breadcrumb-with-overflow;
 
 .#{$block-class}--breadcrumb-container {
   display: inline-flex; // needed to register a width
+  width: 100%;
 }
 
 .#{$block-class}--breadcrumb-container .#{$prefix}--breadcrumb {
   flex-wrap: nowrap;
+  width: 100%;
 }
 
 .#{$block-class}--breadcrumb-container--hidden {

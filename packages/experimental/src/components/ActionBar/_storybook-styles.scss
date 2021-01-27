@@ -7,7 +7,7 @@
 @import '../../global/styles/carbon-settings'; // goes before index as it affects how carbon is used.
 @import './index';
 
-$block-class: #{$exp-prefix}-tag-set;
+$block-class: #{$exp-prefix}-action-bar;
 
 .#{$block-class}--story__viewport {
   position: relative;

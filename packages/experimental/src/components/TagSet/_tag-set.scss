@@ -15,7 +15,7 @@
 $block-class: #{$exp-prefix}-tag-set;
 
 .#{$block-class} {
-  width: 100%;
+  display: block;
 }
 
 .#{$block-class}--space {

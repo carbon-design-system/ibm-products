@@ -6,13 +6,6 @@
 //
 @import './index';
 
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/content-switcher/content-switcher';
-@import 'carbon-components/scss/components/tabs/tabs';
-
-@import '../TagSet/index';
-@import '../BreadcrumbWithOverflow/index';
-
 .sbdocs .page-header-stories__viewport {
   max-height: 500px;
   overflow-y: auto;

@@ -1,0 +1,42 @@
+//
+// Copyright IBM Corp. 2020, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+@import '../../global/styles/carbon-settings'; // goes before index as it affects how carbon is used.
+@import '../../global/styles/project-settings';
+
+@import 'carbon-components/scss/components/button/button';
+
+$block-class: #{$exp-prefix}-button-set-with-overflow;
+
+.#{$block-class} {
+  display: block;
+}
+
+.#{$block-class}--space {
+  position: relative;
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.#{$block-class}--space--right {
+  text-align: end;
+}
+
+.#{$block-class}--button-container {
+  display: inline-flex; // needed to register a width
+}
+
+.#{$block-class}--button-container--hidden {
+  // This button-set container is used to measure the width of all displayable button-sets
+  position: absolute;
+  top: -100vh;
+  // stylelint-disable-next-line carbon/layout-token-use
+  left: calc(-100vw - 100%);
+  overflow: hidden;
+  visibility: hidden;
+  pointer-events: none;
+}

@@ -20,10 +20,17 @@ import { expPrefix } from '../../global/js/settings';
 
 import { useWindowResize, useWindowScroll } from '../../global/js/use';
 
-import { BreadcrumbItem, Grid, Column, Row } from 'carbon-components-react';
+import {
+  BreadcrumbItem,
+  Grid,
+  Column,
+  Row,
+  ButtonSet,
+} from 'carbon-components-react';
 
-import { ActionBar } from './ActionBar';
+import { ActionBar } from '../ActionBar/';
 import { BreadcrumbWithOverflow, TagSet } from '../';
+import { ButtonSetWithOverflow } from './ButtonSetWithOverflow';
 
 const blockClass = `${expPrefix}-page-header`;
 
@@ -54,6 +61,76 @@ export const PageHeader = ({
   const [lastRowBufferActive, setLastRowBufferActive] = useState(false);
   const dynamicRefs = useRef({});
   const headerEl = useRef(null);
+  const [actionBarMaxWidth, setActionBarMaxWidth] = useState(0);
+  const [actionBarMinWidth, setActionBarMinWidth] = useState(0);
+  const [
+    pageActionInBreadcrumbMaxWidth,
+    setPageActionInBreadcrumbMaxWidth,
+  ] = useState(0);
+  const [
+    pageActionInBreadcrumbMinWidth,
+    setPageActionInBreadcrumbMinWidth,
+  ] = useState(0);
+  const [actionBarColumnWidth, setActionBarColumnWidth] = useState(0);
+
+  useEffect(() => {
+    let newActionBarWidth = 'initial';
+    let newPageActionInBreadcrumbWidth = 'initial';
+
+    if (actionBarColumnWidth > 0) {
+      if (
+        pageActionInBreadcrumbMaxWidth > 0 &&
+        actionBarColumnWidth >
+          actionBarMaxWidth + pageActionInBreadcrumbMaxWidth
+      ) {
+        newPageActionInBreadcrumbWidth = `${pageActionInBreadcrumbMaxWidth}px`;
+      } else if (pageActionInBreadcrumbMinWidth > 0) {
+        newPageActionInBreadcrumbWidth = `${pageActionInBreadcrumbMinWidth}px`;
+      }
+
+      if (
+        actionBarMaxWidth > 0 &&
+        actionBarColumnWidth >
+          pageActionInBreadcrumbMinWidth + actionBarMaxWidth
+      ) {
+        newActionBarWidth = `${actionBarMaxWidth}px`;
+      } else {
+        if (actionBarMinWidth > 0) {
+          newActionBarWidth = `${
+            actionBarColumnWidth - pageActionInBreadcrumbMinWidth
+          }px`;
+        }
+      }
+    }
+
+    setComponentCssCustomProps((prevCSSProps) => {
+      return {
+        ...prevCSSProps,
+        [`--${blockClass}--max-action-bar-width-px`]: newActionBarWidth,
+        [`--${blockClass}--button-set-in-breadcrumb-width-px`]: `${newPageActionInBreadcrumbWidth}`,
+      };
+    });
+  }, [
+    actionBarColumnWidth,
+    actionBarMaxWidth,
+    actionBarMinWidth,
+    pageActionInBreadcrumbMaxWidth,
+    pageActionInBreadcrumbMinWidth,
+  ]);
+
+  const handleActionBarWidthChange = ({ minWidth, maxWidth }) => {
+    setActionBarMaxWidth(maxWidth);
+    setActionBarMinWidth(minWidth);
+  };
+
+  const handleButtonSetWidthChange = ({ minWidth, maxWidth }) => {
+    setPageActionInBreadcrumbMaxWidth(maxWidth);
+    setPageActionInBreadcrumbMinWidth(minWidth);
+  };
+
+  const handleResizeActionBarColumn = (width) => {
+    setActionBarColumnWidth(width);
+  };
 
   const getDynamicRef = (selector) => {
     // would love to do this differently but digging in the dom seems easier
@@ -83,13 +160,13 @@ export const PageHeader = ({
     const navigationRowEl = getDynamicRef(`.${blockClass}--navigation-row`);
 
     update.headerHeight = headerEl.current ? headerEl.current.clientHeight : 0;
-    update.headerWidth = headerEl.current ? headerEl.current.clientWidth : 0;
+    update.headerWidth = headerEl.current ? headerEl.current.offsetWidth : 0;
 
     update.breadcrumbRowHeight = breadcrumbRowEl
       ? breadcrumbRowEl.clientHeight
       : 0;
     update.breadcrumbRowWidth = breadcrumbRowEl
-      ? breadcrumbRowEl.clientWidth
+      ? breadcrumbRowEl.offsetWidth
       : 0;
 
     update.breadcrumbTitleHeight = breadcrumbTitleEl
@@ -360,6 +437,9 @@ export const PageHeader = ({
                 [`${blockClass}--breadcrumb-row--with-actions`]:
                   actionBarItems !== undefined,
                 [`${blockClass}--breadcrumb-row--next-to-tabs`]: nextToTabsCheck(),
+                [`${blockClass}--breadcrumb-row--has-breadcrumbs`]: breadcrumbItems,
+                [`${blockClass}--breadcrumb-row--has-action-bar`]:
+                  actionBarItems || pageActions,
               })}>
               <div className={`${blockClass}--breadcrumb-row--container`}>
                 <Column
@@ -396,24 +476,41 @@ export const PageHeader = ({
                     ''
                   )}
                 </Column>
-                <Column
-                  className={cx(
-                    `${blockClass}--action-bar-column ${blockClass}--action-bar-column--background`
-                  )}>
-                  {actionBarItems !== undefined ? (
-                    <>
-                      <div
-                        className={cx(`${blockClass}--page-actions`, {
-                          [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
-                        })}>
-                        {pageActions}
-                      </div>
-                      <ActionBar className={`${blockClass}--action-bar`}>
-                        {actionBarItems}
-                      </ActionBar>
-                    </>
-                  ) : null}
-                </Column>
+                <ReactResizeDetector
+                  handleWidth={true}
+                  onResize={handleResizeActionBarColumn}>
+                  <Column
+                    className={cx([
+                      `${blockClass}--action-bar-column ${blockClass}--action-bar-column--background`,
+                      {
+                        [`${blockClass}--action-bar-column--has-page-actions`]: pageActions,
+                      },
+                    ])}>
+                    {actionBarItems !== undefined ? (
+                      // Investigate the responsive  behaviour or this and the title also fix the ActionBar Item and PageAction story css
+                      <>
+                        {pageActions && (
+                          <div
+                            className={cx(`${blockClass}--page-actions`, {
+                              [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
+                            })}>
+                            <ButtonSetWithOverflow
+                              className={`${blockClass}--button-set--in-breadcrumb`}
+                              onWidthChange={handleButtonSetWidthChange}>
+                              {pageActions}
+                            </ButtonSetWithOverflow>
+                          </div>
+                        )}
+                        <ActionBar
+                          className={`${blockClass}--action-bar`}
+                          onWidthChange={handleActionBarWidthChange}
+                          rightAlign={true}>
+                          {actionBarItems}
+                        </ActionBar>
+                      </>
+                    ) : null}
+                  </Column>
+                </ReactResizeDetector>
               </div>
             </Row>
           ) : null}
@@ -454,7 +551,10 @@ export const PageHeader = ({
                   className={cx(`${blockClass}--page-actions`, {
                     [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
                   })}>
-                  {pageActions}
+                  <ButtonSet
+                    className={`${blockClass}--page-actions-container`}>
+                    {pageActions}
+                  </ButtonSet>
                 </Column>
               ) : null}
             </Row>
@@ -527,7 +627,10 @@ PageHeader.propTypes = {
    * If provided, these are rendered at the top right of the header as
    * action icons. Optional.
    */
-  actionBarItems: PropTypes.element, // expect actionBarItems
+  actionBarItems: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.element,
+  ]), // expects action bar item as array or in fragment
   /**
    * A zone for placing high-level, client content above the page tabs.
    * Accepts arbitrary renderable content as a React node. Optional.

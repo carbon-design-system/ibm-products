@@ -8,6 +8,16 @@
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
+@import 'carbon-components/scss/components/button/button';
+@import 'carbon-components/scss/components/content-switcher/content-switcher';
+@import 'carbon-components/scss/components/tabs/tabs';
+
+@import './button-set-with-overflow';
+@import '../ActionBar/index';
+@import '../TagSet/index';
+@import '../BreadcrumbWithOverflow/index';
+@import './temp-combo-button';
+
 $block-class: #{$exp-prefix}-page-header;
 $raised-z-index: 99;
 
@@ -25,6 +35,8 @@ $raised-z-index: 99;
   --#{$block-class}--breadcrumb-title-opacity: 1;
   --#{$block-class}--breadcrumb-top: 0;
   --#{$block-class}--background-opacity: 1;
+  --#{$block-class}--breadcrumb-title-top: initial;
+  --#{$block-class}--button-set-in-breadcrumb-width-px: initial;
 }
 
 @mixin appearingBackground() {
@@ -99,24 +111,32 @@ $raised-z-index: 99;
   opacity: 1;
 }
 
+.#{$block-class}--breadcrumb-container {
+  width: 100%;
+}
+
 .#{$block-class}--action-bar-column {
   display: flex;
-  flex: 0 0 100%;
-  flex-wrap: wrap-reverse; /* page actions go below the actionBarItems */
-  justify-content: flex-end;
+  justify-content: space-between;
+  overflow: hidden;
+  white-space: nowrap;
 
   @include carbon--breakpoint-up('lg') {
     flex-wrap: nowrap; /* assume enough space */
   }
 
-  @include carbon--breakpoint-up('md') {
-    flex: 0 0 40%;
+  // @include carbon--breakpoint-up('md') {
+  .#{$block-class}--breadcrumb-row--has-breadcrumbs & {
+    flex: 1 0 40%;
     max-width: 40%;
   }
 }
 
 .#{$block-class}--breadcrumb-row .#{$block-class}--page-actions {
   display: inline-block;
+  flex: 1 1 var(--#{$block-class}--button-set-in-breadcrumb-width-px);
+  width: 100%;
+  max-width: var(--#{$block-class}--button-set-in-breadcrumb-width-px);
   white-space: nowrap;
   visibility: hidden;
   opacity: 0;
@@ -129,15 +149,26 @@ $raised-z-index: 99;
   opacity: 1;
 }
 
+.#{$block-class}--breadcrumb-row .#{$block-class}--button-set--in-breadcrumb {
+  // display: inline-block;
+}
+
 .#{$block-class}--breadcrumb-column {
   flex: 0 0 100%;
   max-width: 100%;
   overflow: hidden; /* required for ellipsis in title */
 
-  @include carbon--breakpoint-up('md') {
+  // @include carbon--breakpoint-up('md') {
+  .#{$block-class}--breadcrumb-row--has-action-bar & {
     flex: 0 1 60%;
     max-width: 60%;
   }
+}
+
+.#{$block-class}--action-bar-column-resize {
+  display: flex;
+  justify-content: space-between;
+  max-width: 100%;
 }
 
 .#{$block-class}--breadcrumb-column--background,
@@ -173,11 +204,11 @@ $raised-z-index: 99;
 }
 
 .#{$block-class}--breadcrumb .#{$prefix}--breadcrumb-item,
-.#{$block-class}--breadcrumb .#{$prefix}--breadcrumb-item .#{prefix}--link {
+.#{$block-class}--breadcrumb .#{$prefix}--breadcrumb-item .#{$prefix}--link {
   @include carbon--type-style('label-01');
 }
 
-.#{$block-class}--breadcrumb-title {
+.exp-page-header--breadcrumb-title {
   position: relative;
 
   &:not(.#{$block-class}--breadcrumb-title--pre-collapsed) {
@@ -191,6 +222,19 @@ $raised-z-index: 99;
   }
 }
 
+.#{$block-class}--breadcrumb-row
+  .#{$block-class}--breadcrumb-title.#{$prefix}--breadcrumb-item {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.#{$block-class}--breadcrumb-title.#{$prefix}--breadcrumb-item
+  .#{$prefix}--link {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 // .#{$block-class}--breadcrumb-row::before {
 //   display: inline-block;
 //   width: 0;
@@ -199,10 +243,13 @@ $raised-z-index: 99;
 // }
 
 .#{$block-class}--action-bar {
-  display: inline-block;
+  flex: 1 1 var(--#{$block-class}--max-action-bar-width-px);
+  width: 100%;
+  max-width: var(--#{$block-class}--max-action-bar-width-px);
   margin-top: calc(-1 * #{$spacing-04}); /* align with breadcrumb */
   padding-top: $spacing-04;
   white-space: nowrap;
+  vertical-align: top;
 }
 
 .#{$block-class}--title-row {
@@ -277,17 +324,22 @@ $raised-z-index: 99;
   @include carbon--breakpoint-up('md') {
     flex: 1 1 40%;
     margin-top: 0;
-    text-align: right;
   }
+}
+
+.#{$block-class}--page-actions-container {
+  justify-content: flex-end;
 }
 
 .#{$block-class}--title-row .#{$block-class}--page-actions {
   visibility: visible;
   opacity: 1;
   transition: all $duration--fast-02 carbon--motion('entrance', 'productive');
+  transition-property: opacity, visibility;
 }
 
 .#{$block-class}--title-row .#{$block-class}--page-actions--in-breadcrumb {
+  flex: 0 1 100%;
   visibility: hidden;
   opacity: 0;
 }

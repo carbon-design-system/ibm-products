@@ -25,6 +25,7 @@ import { expPrefix } from '../../global/js/settings';
 
 import ReactResizeDetector from 'react-resize-detector';
 import uuidv4 from '../../global/js/utils/uuidv4';
+import unwrapIfFragment from '../../global/js/utils/unwrap-if-fragment';
 
 const blockClass = `${expPrefix}-breadcrumb-with-overflow`;
 
@@ -39,14 +40,13 @@ export const BreadcrumbWithOverflow = ({
   const [displayedBreadcrumbItems, setDisplayedBreadcrumbItems] = useState([]);
   const breadcrumbItemWithOverflow = useRef(null);
   const sizingContainerRef = useRef(null);
-  const displayedArea = useRef(null);
   const internalId = useRef(uuidv4());
   const [childArray, setChildArray] = useState([]);
 
   // eslint-disable-next-line react/prop-types
   const BreadcrumbOverflowMenu = ({ overflowItems }) => {
     return (
-      <BreadcrumbItem key={`breadcrumb-overflow-${internalId}`}>
+      <BreadcrumbItem key={`breadcrumb-overflow-${internalId.current}`}>
         <OverflowMenu
           ariaLabel={null}
           renderIcon={OverflowMenuHorizontal32}
@@ -55,7 +55,7 @@ export const BreadcrumbWithOverflow = ({
             // eslint-disable-next-line react/prop-types
             overflowItems.map((item, index) => (
               <OverflowMenuItem
-                key={`breadcrumb-overflow-menu-item-${internalId}-${index}`}
+                key={`breadcrumb-overflow-menu-item-${internalId.current}-${index}`}
                 href={item.props.href}
                 onClick={item.props.onClick}
                 itemText={item.props.children}
@@ -67,19 +67,9 @@ export const BreadcrumbWithOverflow = ({
     );
   };
 
+  // creates child array from children which may be a fragment
   useEffect(() => {
-    const newChildArray = [];
-    for (let index in children) {
-      if (children[index].type === React.Fragment) {
-        // loop through children and make array
-        for (let fragIndex in children[index].props.children) {
-          newChildArray.push(children[index].props.children[fragIndex]);
-        }
-      } else {
-        newChildArray.push(children[index]);
-      }
-    }
-    setChildArray(newChildArray);
+    setChildArray(unwrapIfFragment(children));
   }, [children]);
 
   useEffect(() => {
@@ -125,7 +115,7 @@ export const BreadcrumbWithOverflow = ({
               child.props.className,
               `${blockClass}--displayed-breadcrumb`,
             ]),
-            key: `displayed-breadcrumb-${internalId}-${index}`,
+            key: `displayed-breadcrumb-${internalId.current}-${index}`,
           })
         );
         if (index === 0 && displayCount < childArray.length) {
@@ -145,7 +135,7 @@ export const BreadcrumbWithOverflow = ({
   const checkFullyVisibleBreadcrumbItems = () => {
     // how many will fit?
     let willFit = 0;
-    let spaceAvailable = breadcrumbItemWithOverflow.current.clientWidth;
+    let spaceAvailable = breadcrumbItemWithOverflow.current.offsetWidth;
 
     if (sizingContainerRef.current) {
       const sizingBreadcrumbItems = sizingContainerRef.current.querySelectorAll(
@@ -161,7 +151,7 @@ export const BreadcrumbWithOverflow = ({
           ? parseFloat(computedStyle.marginLeft, 0) +
             parseFloat(computedStyle.marginRight, 0)
           : 0;
-        breadcrumbWidthsIncludingMargin.push(item.clientWidth + marginWidths);
+        breadcrumbWidthsIncludingMargin.push(item.offsetWidth + marginWidths);
       }
 
       let overflowWidth = breadcrumbWidthsIncludingMargin[0];
@@ -220,19 +210,19 @@ export const BreadcrumbWithOverflow = ({
               className={`${blockClass}--breadcrumb-container ${blockClass}--breadcrumb-container--hidden`}
               aria-hidden={true}
               ref={sizingContainerRef}>
-              <BreadcrumbItem>
+              <BreadcrumbItem
+                key={`${blockClass}-hidden-overflow-${internalId}`}>
                 <OverflowMenu
                   ariaLabel={null}
                   renderIcon={OverflowMenuHorizontal32}
                 />
               </BreadcrumbItem>
-              {childArray.map((child) => child)}
+              {children}
             </div>
           </ReactResizeDetector>
 
           <Breadcrumb
             className={`${blockClass}--breadcrumb-container`}
-            ref={displayedArea}
             noTrailingSlash={noTrailingSlash}
             {...other}>
             {displayedBreadcrumbItems}
@@ -264,5 +254,4 @@ BreadcrumbWithOverflow.propTypes = {
 
 BreadcrumbWithOverflow.defaultProps = {
   noTrailingSlash: false,
-  overflowDirection: 'bottom',
 };

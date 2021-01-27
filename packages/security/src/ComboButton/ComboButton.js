@@ -22,7 +22,17 @@ const getInstanceId = setupGetInstanceId();
 
 const blockClass = 'security--combo-button';
 
-const getActionProps = ({ props: { disabled, href, ...props } }, rest) => ({
+const getActionContent = (children) => (
+  <span className={`${blockClass}__action`} title={children}>
+    {children}
+  </span>
+);
+
+const getActionProps = (
+  { props: { children, disabled, href, ...props } },
+  rest
+) => ({
+  children: getActionContent(children),
   disabled,
   href,
   ...props,
@@ -62,7 +72,9 @@ const ComboButton = ({ children, className, overflowMenu, ...rest }) => {
           flipped>
           {restActions.map((action, index) => (
             <OverflowMenuItem
-              {...getActionProps(action, { itemText: action.props.children })}
+              {...getActionProps(action, {
+                itemText: getActionContent(action.props.children),
+              })}
               key={`${blockClass}--${instanceId}__overflow-menu__item__${index}`}
               className={`${blockClass}__overflow-menu__item`}
             />

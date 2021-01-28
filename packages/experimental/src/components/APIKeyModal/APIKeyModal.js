@@ -47,10 +47,11 @@ export const APIKeyModal = ({
   }, [open]);
 
   const getPrimaryButtonStatus = () => {
+    if (loading) return true;
     if (hasSteps && 'valid' in customSteps[currentStep])
       return !customSteps[currentStep].valid;
-    if (nameRequired) return !name;
-    return loading;
+    if (nameRequired && !name) return true;
+    return false;
   };
 
   const getPrimaryButtonText = () => {
@@ -125,7 +126,6 @@ export const APIKeyModal = ({
               value={apiKey}
               labelText={apiKeyLabel}
               id={apiKeyInputId}
-              className={`${pkgPrefix}--apikey-modal-input`}
             />
           )}
           {apiKey && !apiKeyVisibility && (

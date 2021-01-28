@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.18.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.17.2...@carbon/ibm-cloud-cognitive-experimental@0.18.0) (2021-01-28)
+
+
+### Features
+
+* prefix change proposal ([#310](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/310)) ([be09803](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/be09803976360b7158bb2268e66047fbcb70f3ab))
+
+
+
+
+
 ## [0.17.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.17.1...@carbon/ibm-cloud-cognitive-experimental@0.17.2) (2021-01-26)
 
 

@@ -1,0 +1,38 @@
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+
+@import 'carbon-components/scss/components/button/button';
+@import 'carbon-components/scss/components/overflow-menu/overflow-menu';
+@import 'carbon-components/scss/components/tooltip/tooltip';
+
+$block-class: #{$pkg-prefix}-action-bar;
+
+.#{$block-class} {
+  display: block;
+}
+
+.#{$block-class}--displayed-items {
+  display: inline-flex;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.#{$block-class}--displayed-items--right {
+  justify-content: flex-end;
+}
+
+.#{$block-class}--overflow-menu {
+  display: inline-block;
+}
+
+.#{$block-class}--options {
+  width: $spacing-08;
+}
+
+.#{$block-class}--overflow-menu-item {
+  padding: 0 $spacing-03;
+}
+
+.#{$block-class}--overflow-menu-item svg {
+  margin: 0 $spacing-02;
+}

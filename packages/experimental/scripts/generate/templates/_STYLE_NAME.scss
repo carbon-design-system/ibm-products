@@ -12,7 +12,7 @@
 @include exports($name: STYLE_NAME) {
   /// @type String
   /// @access private
-  $block-class: #{$exp-prefix}--STYLE_NAME;
+  $block-class: #{$pkg-prefix}--STYLE_NAME;
 
   .#{$block-class} {
     // TODO: Styles.

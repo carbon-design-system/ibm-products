@@ -63,7 +63,8 @@ for some contribution quick tips.
 According to a
 [SmartBear study of a Cisco Systems programming team](https://smartbear.com/learn/code-review/best-practices-for-peer-code-review),
 an effective pull request should not have more than 400 lines of code changed,
-so do not create one massive PR if it can be broken up into smaller PRs.
+so do not create one massive PR if it can be
+[scoped down into smaller, focused PRs](https://www.netlify.com/blog/2020/03/31/how-to-scope-down-prs/).
 
 When you're at a good stopping place and you're ready for feedback from other
 contributors and maintainers,

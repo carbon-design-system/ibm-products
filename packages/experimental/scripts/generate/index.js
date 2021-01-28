@@ -21,6 +21,7 @@ const name = _[0];
 const compile = (template) =>
   Object.entries({
     DISPLAY_NAME: name,
+    FULL_YEAR: new Date().getFullYear(),
     STORYBOOK_NAME: name.toLowerCase(),
     STYLE_NAME: paramCase(name),
   }).reduce(

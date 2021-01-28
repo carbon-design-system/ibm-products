@@ -60,6 +60,11 @@ Refer to
 [contributing in Carbon](https://github.com/carbon-design-system/carbon/blob/master/.github/CONTRIBUTING.md#what-is-the-contribution-process)
 for some contribution quick tips.
 
+According to a
+[SmartBear study of a Cisco Systems programming team](https://smartbear.com/learn/code-review/best-practices-for-peer-code-review),
+an effective pull request should not have more than 400 lines of code changed,
+so do not create one massive PR if it can be broken up into smaller PRs.
+
 When you're at a good stopping place and you're ready for feedback from other
 contributors and maintainers,
 [commit](https://docs.github.com/en/github/managing-files-in-a-repository/adding-a-file-to-a-repository-using-the-command-line),

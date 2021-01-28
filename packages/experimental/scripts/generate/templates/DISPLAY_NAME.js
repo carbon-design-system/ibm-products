@@ -9,9 +9,9 @@ import classnames from 'classnames';
 import { node, string } from 'prop-types';
 import React from 'react';
 
-import { prjPrefix } from '../../global/js/settings';
+import { pkgPrefix } from '../../global/js/settings';
 
-const blockClass = `${prjPrefix}--STYLE_NAME`;
+const blockClass = `${pkgPrefix}--STYLE_NAME`;
 
 /**
  * TODO: Description.

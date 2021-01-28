@@ -10,15 +10,12 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 
-// import { settings } from 'carbon-components';
-// const { prefix } = settings;
-
 import { Link, Modal, Search, Tag, Tooltip } from 'carbon-components-react';
-import { expPrefix } from '../../global/js/settings';
+import { pkgPrefix /*, carbonPrefix */ } from '../../global/js/settings';
 
 import ReactResizeDetector from 'react-resize-detector';
 
-const blockClass = `${expPrefix}-tag-set`;
+const blockClass = `${pkgPrefix}-tag-set`;
 
 export const TagSet = ({
   children,

@@ -10,9 +10,9 @@ import React from 'react';
 import TagSet from './TagSet';
 import { Tag } from 'carbon-components-react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import { prjPrefix } from '../../global/js/settings';
+import { pkgPrefix } from '../../global/js/settings';
 
-const blockClass = `${prjPrefix}-tag-set`;
+const blockClass = `${pkgPrefix}-tag-set`;
 
 const TagItems = [
   <Tag key="tag1" type="blue">

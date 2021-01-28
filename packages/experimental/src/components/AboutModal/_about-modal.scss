@@ -13,61 +13,61 @@
 @import 'carbon-components/scss/components/modal/modal';
 @import 'carbon-components/scss/components/tabs/tabs';
 
-.#{$prj-prefix}-about-modal.#{$prj-prefix}-about-modal-scroll-enabled
+.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-scroll-enabled
   .bx--modal-container {
   height: 100%;
   padding-bottom: $spacing-09;
 }
 
-.#{$prj-prefix}-about-modal.#{$prj-prefix}-about-modal-scroll-enabled
+.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-scroll-enabled
   .bx--modal-container
-  .#{$prj-prefix}-modal-content {
+  .#{$pkg-prefix}-modal-content {
   display: grid;
   overflow-x: hidden;
   overflow-y: auto;
 }
 
-.#{$prj-prefix}-modal-content
-  .bx--modal-content.#{$prj-prefix}-about-modal-content {
+.#{$pkg-prefix}-modal-content
+  .bx--modal-content.#{$pkg-prefix}-about-modal-content {
   margin-bottom: $layout-05;
   padding-bottom: $layout-05;
 }
 
-.#{$prj-prefix}-about-modal .#{$prj-prefix}-modal-content .bx--modal-footer {
+.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-modal-content .bx--modal-footer {
   position: fixed;
   bottom: 0;
   width: 100%;
 }
 
-.#{$prj-prefix}-about-modal.#{$prj-prefix}-about-modal-light-theme {
+.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-light-theme {
   @include carbon--theme($carbon--theme--white, true);
 }
 
-.#{$prj-prefix}-about-modal.#{$prj-prefix}-about-modal-light-theme
+.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-light-theme
   .bx--modal-footer {
   @include carbon--theme($carbon--theme--g100, true);
 }
 
-.#{$prj-prefix}-about-modal.#{$prj-prefix}-about-modal-light-theme
-  .#{$prj-prefix}-about-modal-tab-container {
+.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-light-theme
+  .#{$pkg-prefix}-about-modal-tab-container {
   @include carbon--theme($carbon--theme--white, true);
 }
 
-.#{$prj-prefix}-about-modal.#{$prj-prefix}-about-modal-dark-theme {
+.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-dark-theme {
   @include carbon--theme($carbon--theme--g100, true);
 }
 
-.#{$prj-prefix}-about-modal.#{$prj-prefix}-about-modal-dark-theme
+.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-dark-theme
   .bx--modal-footer {
   @include carbon--theme($carbon--theme--white, true);
 }
 
-.#{$prj-prefix}-about-modal.#{$prj-prefix}-about-modal-dark-theme
-  .#{$prj-prefix}-about-modal-tab-container {
+.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-dark-theme
+  .#{$pkg-prefix}-about-modal-tab-container {
   @include carbon--theme($carbon--theme--g100, true);
 }
 
-.#{$prj-prefix}-about-modal .bx--modal-footer {
+.#{$pkg-prefix}-about-modal .bx--modal-footer {
   position: relative;
   flex-direction: column;
   grid-row: auto;
@@ -76,67 +76,67 @@
   background-color: $ui-background;
 }
 
-.#{$prj-prefix}-about-modal {
+.#{$pkg-prefix}-about-modal {
   background-color: $ui-background;
-  .bx--modal-content.#{$prj-prefix}-about-modal-content {
+  .bx--modal-content.#{$pkg-prefix}-about-modal-content {
     @include carbon--type-style('body-short-02');
 
     overflow-x: hidden;
     overflow-y: auto;
   }
-  .#{$prj-prefix}-about-modal-product-logo {
+  .#{$pkg-prefix}-about-modal-product-logo {
     max-width: 6rem;
     margin: $spacing-05;
   }
-  .#{$prj-prefix}-about-modal-version-label,
-  .#{$prj-prefix}-about-modal-version-number {
+  .#{$pkg-prefix}-about-modal-version-label,
+  .#{$pkg-prefix}-about-modal-version-number {
     @include carbon--type-style('body-short-01');
   }
-  .#{$prj-prefix}-about-modal-version-label {
+  .#{$pkg-prefix}-about-modal-version-label {
     @include carbon--font-weight('semibold');
   }
-  .#{$prj-prefix}-about-modal-links-container {
+  .#{$pkg-prefix}-about-modal-links-container {
     margin-top: $spacing-05;
   }
-  .#{$prj-prefix}-about-modal-link-divider {
+  .#{$pkg-prefix}-about-modal-link-divider {
     margin: 0 $spacing-03;
   }
-  .#{$prj-prefix}-about-modal-scroll-gradient {
+  .#{$pkg-prefix}-about-modal-scroll-gradient {
     position: absolute;
     bottom: $layout-05;
     width: 100%;
     height: 4rem;
     background: linear-gradient(to bottom, transparent, $ui-01 35%);
   }
-  .#{$prj-prefix}-about-modal-tech-used-item {
+  .#{$pkg-prefix}-about-modal-tech-used-item {
     width: 2.25rem;
     height: 2.25rem;
     margin-right: $spacing-04;
     object-fit: contain;
   }
-  .#{$prj-prefix}-about-modal-tab-content-flex {
+  .#{$pkg-prefix}-about-modal-tab-content-flex {
     display: flex;
     align-items: center;
     height: inherit;
-    &.#{$prj-prefix}-about-modal-tab-content-version-flex {
+    &.#{$pkg-prefix}-about-modal-tab-content-version-flex {
       flex-direction: column;
       align-items: flex-start;
       justify-content: center;
     }
   }
-  .#{$prj-prefix}-about-modal-tab-container {
+  .#{$pkg-prefix}-about-modal-tab-container {
     position: relative;
     /* stylelint-disable-next-line carbon/layout-token-use */
     bottom: carbon--rem(20px);
   }
 }
 
-.#{$prj-prefix}-about-modal.#{$prj-prefix}-about-modal-with-tabs
+.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-with-tabs
   .bx--modal-content.exp-about-modal-content {
   margin-bottom: $layout-06;
 }
 
-.#{$prj-prefix}-about-modal.#{$prj-prefix}-about-modal-with-tabs
+.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-with-tabs
   .bx--tab-content {
   position: relative;
   /* stylelint-disable-next-line carbon/layout-token-use */
@@ -146,42 +146,42 @@
   padding: 0;
 }
 
-.#{$prj-prefix}-about-modal .#{$prj-prefix}-about-modal-content,
-.#{$prj-prefix}-about-modal .#{$prj-prefix}-about-modal-legal-text,
-.#{$prj-prefix}-about-modal .#{$prj-prefix}-about-modal-copyright-text,
-.#{$prj-prefix}-about-modal .#{$prj-prefix}-about-modal-version-label,
-.#{$prj-prefix}-about-modal .#{$prj-prefix}-about-modal-version-number {
+.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-content,
+.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-legal-text,
+.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-copyright-text,
+.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-version-label,
+.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-version-number {
   color: $text-01;
 }
 
-.#{$prj-prefix}-about-modal .#{$prj-prefix}-about-modal-legal-text,
-.#{$prj-prefix}-about-modal .#{$prj-prefix}-about-modal-copyright-text {
+.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-legal-text,
+.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-copyright-text {
   margin-top: $spacing-07;
   color: $text-03;
 }
 
-.#{$prj-prefix}-about-modal .#{$prj-prefix}-about-modal-copyright-text {
+.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-copyright-text {
   margin-top: $spacing-05;
 }
 
-.#{$prj-prefix}-about-modal .bx--modal-header,
-.#{$prj-prefix}-about-modal .bx--modal-content {
+.#{$pkg-prefix}-about-modal .bx--modal-header,
+.#{$pkg-prefix}-about-modal .bx--modal-content {
   grid-row: auto;
   padding: 0 $spacing-05;
 }
 
-.#{$prj-prefix}-about-modal .bx--modal-header,
-.#{$prj-prefix}-about-modal .bx--modal-content * {
+.#{$pkg-prefix}-about-modal .bx--modal-header,
+.#{$pkg-prefix}-about-modal .bx--modal-content * {
   max-width: 80%;
 }
 
-.#{$prj-prefix}-about-modal .bx--modal-header {
+.#{$pkg-prefix}-about-modal .bx--modal-header {
   margin-bottom: 0;
   padding-bottom: $spacing-03;
 }
 
-.#{$prj-prefix}-about-modal
+.#{$pkg-prefix}-about-modal
   .bx--modal-header
-  .bx--modal-header__heading.#{$prj-prefix}-about-modal-title {
+  .bx--modal-header__heading.#{$pkg-prefix}-about-modal-title {
   @include carbon--type-style('productive-heading-04');
 }

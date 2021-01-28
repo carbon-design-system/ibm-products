@@ -18,12 +18,12 @@ import {
 } from 'carbon-components-react';
 import { OverflowMenuHorizontal32 } from '@carbon/icons-react';
 
-import { prjPrefix, carbonPrefix } from '../../global/js/settings';
+import { pkgPrefix, carbonPrefix } from '../../global/js/settings';
 
 import ReactResizeDetector from 'react-resize-detector';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-const blockClass = `${prjPrefix}-breadcrumb-with-overflow`;
+const blockClass = `${pkgPrefix}-breadcrumb-with-overflow`;
 
 export const BreadcrumbWithOverflow = ({
   children,

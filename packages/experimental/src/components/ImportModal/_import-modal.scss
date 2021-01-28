@@ -5,43 +5,43 @@
 @import 'carbon-components/scss/components/file-uploader/file-uploader';
 @import 'carbon-components/scss/components/text-input/text-input';
 
-.#{$prj-prefix}--input-group {
+.#{$pkg-prefix}--input-group {
   display: flex;
 }
 
-.#{$prj-prefix}--import-button {
+.#{$pkg-prefix}--import-button {
   margin-left: $spacing-05;
 }
 
-.#{$prj-prefix}--import-modal-label {
+.#{$pkg-prefix}--import-modal-label {
   margin-bottom: $spacing-03;
   @include carbon--type-style('productive-heading-01');
 }
 
-.#{$prj-prefix}--import-modal-helper-text {
+.#{$pkg-prefix}--import-modal-helper-text {
   margin-top: $spacing-07;
   margin-bottom: $spacing-03;
   @include carbon--type-style('helper-text-01');
 }
 
-.#{$prj-prefix}--import-modal-body {
+.#{$pkg-prefix}--import-modal-body {
   margin-bottom: $spacing-05;
   padding-right: 20%;
 }
 
-.#{$prj-prefix}--import-modal .bx--modal-container {
+.#{$pkg-prefix}--import-modal .bx--modal-container {
   background: $ui-background;
 }
 
-.#{$prj-prefix}--import-modal .bx--modal-content {
+.#{$pkg-prefix}--import-modal .bx--modal-content {
   padding-right: $spacing-05;
 }
 
-.#{$prj-prefix}--import-modal .bx--file__selected-file {
+.#{$pkg-prefix}--import-modal .bx--file__selected-file {
   max-width: none;
   background: $ui-01;
 }
 
-.#{$prj-prefix}--import-modal .bx--text-input {
+.#{$pkg-prefix}--import-modal .bx--text-input {
   background: $ui-01;
 }

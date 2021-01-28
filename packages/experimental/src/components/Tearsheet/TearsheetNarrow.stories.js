@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 
 import { action } from '@storybook/addon-actions';
 
-import { prjPrefix } from '../../global/js/settings';
+import { pkgPrefix } from '../../global/js/settings';
 
 import { Button } from 'carbon-components-react';
 
@@ -202,7 +202,7 @@ const Template = ({ buttonSet, ...args }) => {
 
   return (
     <>
-      <style>{`.${prjPrefix}-tearsheet { opacity: 0 }`};</style>
+      <style>{`.${pkgPrefix}-tearsheet { opacity: 0 }`};</style>
       <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
       <TearsheetNarrow
         className={className}

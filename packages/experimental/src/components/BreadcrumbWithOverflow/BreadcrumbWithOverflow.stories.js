@@ -13,8 +13,8 @@ import { BreadcrumbWithOverflow } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { BreadcrumbItem } from 'carbon-components-react';
 
-import { prjPrefix } from '../../global/js/settings';
-const blockClass = `${prjPrefix}-breadcrumb-with-overflow`;
+import { pkgPrefix } from '../../global/js/settings';
+const blockClass = `${pkgPrefix}-breadcrumb-with-overflow`;
 
 export default {
   title: 'Experimental/BreadcrumbWithOverflow',

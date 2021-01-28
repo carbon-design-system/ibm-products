@@ -10,7 +10,7 @@
 @import 'carbon-components/scss/components/breadcrumb/breadcrumb';
 @import 'carbon-components/scss/components/overflow-menu/overflow-menu';
 
-$block-class: #{$prj-prefix}-breadcrumb-with-overflow;
+$block-class: #{$pkg-prefix}-breadcrumb-with-overflow;
 
 .#{$block-class} {
   width: 100%;

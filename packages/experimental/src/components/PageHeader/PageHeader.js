@@ -13,7 +13,7 @@ import cx from 'classnames';
 
 import ReactResizeDetector from 'react-resize-detector';
 
-import { prjPrefix /*, carbonPrefix */ } from '../../global/js/settings';
+import { pkgPrefix /*, carbonPrefix */ } from '../../global/js/settings';
 
 import { useWindowResize, useWindowScroll } from '../../global/js/use';
 
@@ -22,7 +22,7 @@ import { BreadcrumbItem, Grid, Column, Row } from 'carbon-components-react';
 import { ActionBar } from './ActionBar';
 import { BreadcrumbWithOverflow, TagSet } from '../';
 
-const blockClass = `${prjPrefix}-page-header`;
+const blockClass = `${pkgPrefix}-page-header`;
 
 export const PageHeader = ({
   actionBarItems,

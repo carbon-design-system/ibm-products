@@ -9,7 +9,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { prjPrefix /*, carbonPrefix */ } from '../../global/js/settings';
+import { pkgPrefix /*, carbonPrefix */ } from '../../global/js/settings';
 
 import {
   BreadcrumbItem,
@@ -95,20 +95,20 @@ describe('PageHeader', () => {
   test('renders an empty header when no props are set', () => {
     render(<PageHeader />);
 
-    const header = document.querySelector(`section.${prjPrefix}-page-header`);
+    const header = document.querySelector(`section.${pkgPrefix}-page-header`);
 
     expect(header).not.toBeNull();
     expect(
-      header.classList.contains(`${prjPrefix}-page-header--background`)
+      header.classList.contains(`${pkgPrefix}-page-header--background`)
     ).toBe(false);
     expect(header.classList.contains(classNames[0])).toBe(false);
     expect(header.classList.contains(classNames[1])).toBe(false);
     expect(
-      document.querySelectorAll(`.${prjPrefix}-page-header--action-bar`)
+      document.querySelectorAll(`.${pkgPrefix}-page-header--action-bar`)
     ).toHaveLength(0);
     expect(
       document.querySelectorAll(
-        `[label="Action 1"].${prjPrefix}-action-bar-item`
+        `[label="Action 1"].${pkgPrefix}-action-bar-item`
       )
     ).toHaveLength(0);
     expect(
@@ -117,19 +117,19 @@ describe('PageHeader', () => {
     expect(screen.queryAllByTestId('breadcrumbitem')).toHaveLength(0);
     expect(screen.queryAllByTestId('tabs')).toHaveLength(0);
     expect(
-      document.querySelectorAll(`.${prjPrefix}-page-header--page-actions`)
+      document.querySelectorAll(`.${pkgPrefix}-page-header--page-actions`)
     ).toHaveLength(0);
     expect(
-      document.querySelectorAll(`.${prjPrefix}-page-header--subtitle`)
+      document.querySelectorAll(`.${pkgPrefix}-page-header--subtitle`)
     ).toHaveLength(0);
     expect(screen.queryByText(subtitle)).toBeNull();
     expect(screen.queryAllByTestId('tags')).toHaveLength(0);
     expect(
-      document.querySelectorAll(`.${prjPrefix}-page-header--title`)
+      document.querySelectorAll(`.${pkgPrefix}-page-header--title`)
     ).toHaveLength(0);
     expect(screen.queryByText(title)).toBeNull();
     expect(
-      document.querySelectorAll(`.${prjPrefix}-page-header--title-icon`)
+      document.querySelectorAll(`.${pkgPrefix}-page-header--title-icon`)
     ).toHaveLength(0);
   });
 
@@ -150,55 +150,55 @@ describe('PageHeader', () => {
       />
     );
 
-    const header = document.querySelector(`section.${prjPrefix}-page-header`);
+    const header = document.querySelector(`section.${pkgPrefix}-page-header`);
 
     expect(header).not.toBeNull();
     expect(
-      header.classList.contains(`${prjPrefix}-page-header--background`)
+      header.classList.contains(`${pkgPrefix}-page-header--background`)
     ).toBe(true);
     expect(header.classList.contains(classNames[0])).toBe(true);
     expect(header.classList.contains(classNames[1])).toBe(true);
     expect(
-      document.querySelectorAll(`.${prjPrefix}-page-header--action-bar`)
+      document.querySelectorAll(`.${pkgPrefix}-page-header--action-bar`)
     ).toHaveLength(1);
     expect(
       document.querySelectorAll(
-        `[label="Action 1"].${prjPrefix}-action-bar-item`
+        `[label="Action 1"].${pkgPrefix}-action-bar-item`
       )
     ).toHaveLength(1);
     userEvent.click(
-      document.querySelector(`[label="Action 1"].${prjPrefix}-action-bar-item`)
+      document.querySelector(`[label="Action 1"].${pkgPrefix}-action-bar-item`)
     );
     expect(actionBarItemOnClick).toHaveBeenCalledTimes(1);
     expect(
       document.querySelectorAll('span.page-header-test--available-space')
     ).toHaveLength(1);
     expect(
-      document.querySelectorAll(`.${prjPrefix}-page-header--breadcrumb`)
+      document.querySelectorAll(`.${pkgPrefix}-page-header--breadcrumb`)
     ).toHaveLength(1);
     expect(screen.getAllByText(/Breadcrumb [1-3]/)).toHaveLength(3);
     expect(screen.queryAllByTestId('tabs')).toHaveLength(1);
     expect(screen.getAllByText(/Tab [1-4]/)).toHaveLength(4);
     expect(
-      document.querySelectorAll(`.${prjPrefix}-page-header--page-actions`)
+      document.querySelectorAll(`.${pkgPrefix}-page-header--page-actions`)
     ).toHaveLength(2);
     expect(screen.getAllByText('Primary button')).toHaveLength(2);
     userEvent.click(screen.getAllByText('Primary button')[0]);
     expect(pageActionItemOnClick).toHaveBeenCalledTimes(1);
     expect(
-      document.querySelectorAll(`.${prjPrefix}-page-header--subtitle`)
+      document.querySelectorAll(`.${pkgPrefix}-page-header--subtitle`)
     ).toHaveLength(1);
     expect(screen.getByText(subtitle).textContent).toEqual(subtitle);
     expect(screen.queryAllByTestId('tabs')).toHaveLength(1);
     expect(screen.getAllByText('A tag')).toHaveLength(4);
     expect(
-      document.querySelectorAll(`.${prjPrefix}-page-header--title`)
+      document.querySelectorAll(`.${pkgPrefix}-page-header--title`)
     ).toHaveLength(1);
     expect(
-      document.querySelector(`.${prjPrefix}-page-header--title`).textContent
+      document.querySelector(`.${pkgPrefix}-page-header--title`).textContent
     ).toEqual(title);
     expect(
-      document.querySelectorAll(`.${prjPrefix}-page-header--title-icon`)
+      document.querySelectorAll(`.${pkgPrefix}-page-header--title-icon`)
     ).toHaveLength(1);
   });
 });

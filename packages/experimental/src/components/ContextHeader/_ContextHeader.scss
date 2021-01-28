@@ -8,7 +8,7 @@
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
-.#{$prj-prefix}-context-header {
+.#{$pkg-prefix}-context-header {
   display: flex;
   width: 100%;
   height: $spacing-07;
@@ -17,27 +17,27 @@
   border-bottom: carbon--mini-units(0.125) solid $ui-03;
 }
 
-.#{$prj-prefix}-context-header--task,
-.#{$prj-prefix}-context-header--name,
-.#{$prj-prefix}-context-header--namespace,
-.#{$prj-prefix}-context-header--separator {
+.#{$pkg-prefix}-context-header--task,
+.#{$pkg-prefix}-context-header--name,
+.#{$pkg-prefix}-context-header--namespace,
+.#{$pkg-prefix}-context-header--separator {
   @include carbon--type-style('label-01');
 
   display: inline-flex;
   align-items: center;
 }
 
-.#{$prj-prefix}-context-header--task {
+.#{$pkg-prefix}-context-header--task {
   padding-right: $spacing-05;
   color: $text-01;
 }
 
-.#{$prj-prefix}-context-header--name,
-.#{$prj-prefix}-context-header--namespace,
-.#{$prj-prefix}-context-header--separator {
+.#{$pkg-prefix}-context-header--name,
+.#{$pkg-prefix}-context-header--namespace,
+.#{$pkg-prefix}-context-header--separator {
   color: $text-02;
 }
 
-.#{$prj-prefix}-context-header--separator {
+.#{$pkg-prefix}-context-header--separator {
   padding: 0 $spacing-03;
 }

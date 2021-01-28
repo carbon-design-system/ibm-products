@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Modal, TextInput, InlineLoading, Form } from 'carbon-components-react';
 import { InformationFilled16 } from '@carbon/icons-react';
 import { APIKeyDownloader } from '../APIKeyDownloader';
-import { prjPrefix } from '../../global/js/settings';
+import { pkgPrefix } from '../../global/js/settings';
 
 export const APIKeyModal = ({
   apiKey,
@@ -103,7 +103,7 @@ export const APIKeyModal = ({
 
   return (
     <Modal
-      className={`${prjPrefix}--apikey-modal`}
+      className={`${pkgPrefix}--apikey-modal`}
       open={open}
       modalHeading={getHeader()}
       primaryButtonText={getPrimaryButtonText()}
@@ -118,14 +118,14 @@ export const APIKeyModal = ({
       ) : (
         <>
           {modalBody && (
-            <p className={`${prjPrefix}--apikey-modal-body`}>{modalBody}</p>
+            <p className={`${pkgPrefix}--apikey-modal-body`}>{modalBody}</p>
           )}
           {apiKey && apiKeyVisibility && (
             <TextInput.PasswordInput
               value={apiKey}
               labelText={apiKeyLabel}
               id={apiKeyInputId}
-              className={`${prjPrefix}--apikey-modal-input`}
+              className={`${pkgPrefix}--apikey-modal-input`}
             />
           )}
           {apiKey && !apiKeyVisibility && (
@@ -152,11 +152,11 @@ export const APIKeyModal = ({
           {loading && (
             <InlineLoading
               description={loadingMessage}
-              className={`${prjPrefix}--apikey-modal-loader`}
+              className={`${pkgPrefix}--apikey-modal-loader`}
             />
           )}
           {apiKeyLoaded && (
-            <div className={`${prjPrefix}--apikey-modal-messaging`}>
+            <div className={`${pkgPrefix}--apikey-modal-messaging`}>
               <InformationFilled16 />
               {downloadable ? (
                 <APIKeyDownloader
@@ -166,7 +166,7 @@ export const APIKeyModal = ({
                   linkText={downloadLinkText}
                 />
               ) : (
-                <div className={`${prjPrefix}--apikey-modal-messaging-text`}>
+                <div className={`${pkgPrefix}--apikey-modal-messaging-text`}>
                   {successBody}
                 </div>
               )}

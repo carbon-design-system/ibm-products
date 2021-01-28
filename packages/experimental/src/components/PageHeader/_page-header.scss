@@ -8,7 +8,7 @@
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
-$block-class: #{$prj-prefix}-page-header;
+$block-class: #{$pkg-prefix}-page-header;
 $raised-z-index: 99;
 
 .#{$block-class} {

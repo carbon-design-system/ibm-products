@@ -20,7 +20,7 @@ import { action } from '@storybook/addon-actions';
 import { APIKeyModal } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import mdx from './APIKeyModal.mdx';
-import { prjPrefix } from '../../global/js/settings';
+import { pkgPrefix } from '../../global/js/settings';
 import wait from '../../global/js/utils/wait';
 
 export default {
@@ -155,7 +155,7 @@ const MultiStepTemplate = (args) => {
       valid: Boolean(name && permissions),
       content: (
         <div>
-          <p className={`${prjPrefix}--apikey-modal-body`}>
+          <p className={`${pkgPrefix}--apikey-modal-body`}>
             Optional description text. To connect securely to product, your
             application or tool needs an API key with permissions to access the
             cluster and resources such as topics.
@@ -165,7 +165,7 @@ const MultiStepTemplate = (args) => {
             onChange={(e) => setName(e.target.value)}
             labelText="Name your application"
             placeholder="Application name"
-            className={`${prjPrefix}--apikey-modal-input`}
+            className={`${pkgPrefix}--apikey-modal-input`}
             ref={inputRef}
           />
           <FormGroup legendText="What do you want your application to be able to do">

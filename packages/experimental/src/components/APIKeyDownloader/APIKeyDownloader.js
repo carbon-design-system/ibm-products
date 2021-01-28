@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { prjPrefix } from '../../global/js/settings';
+import { pkgPrefix } from '../../global/js/settings';
 
 export const APIKeyDownloader = ({ apiKey, bodyText, fileName, linkText }) => {
   const [linkProps, setLinkProps] = useState('');
@@ -23,7 +23,7 @@ export const APIKeyDownloader = ({ apiKey, bodyText, fileName, linkText }) => {
   }, [apiKey, fileName]);
 
   return (
-    <p className={`${prjPrefix}--apikey-modal-messaging-text`}>
+    <p className={`${pkgPrefix}--apikey-modal-messaging-text`}>
       {bodyText} <a {...linkProps}>{linkText}</a>
     </p>
   );

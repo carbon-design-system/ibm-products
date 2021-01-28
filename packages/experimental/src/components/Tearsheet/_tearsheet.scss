@@ -10,7 +10,7 @@
 
 @import 'carbon-components/scss/components/modal/modal';
 
-$block-class: #{$prj-prefix}-tearsheet;
+$block-class: #{$pkg-prefix}-tearsheet;
 // stylelint-disable-next-line carbon/theme-token-use
 $overlay-color: $carbon--gray-100;
 

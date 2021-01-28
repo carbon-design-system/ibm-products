@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Link } from 'carbon-components-react';
 
-import { expPrefix } from '../../global/js/settings';
+import { prjPrefix } from '../../global/js/settings';
 
 export const EmptyState = ({
   actionText,
@@ -33,7 +33,7 @@ export const EmptyState = ({
     'notifications',
   ];
   return (
-    <div className={`${expPrefix}-empty-state`}>
+    <div className={`${prjPrefix}-empty-state`}>
       {illustration && (
         <img
           src={
@@ -44,24 +44,24 @@ export const EmptyState = ({
           }
           alt="Empty state illustration"
           className={[
-            `${expPrefix}-empty-state-illustration`,
-            `${expPrefix}-empty-state-illustration--${illustrationSize}`,
+            `${prjPrefix}-empty-state-illustration`,
+            `${prjPrefix}-empty-state-illustration--${illustrationSize}`,
           ].join(' ')}
         />
       )}
       {typeof heading !== 'string' ? (
         heading
       ) : (
-        <h3 className={`${expPrefix}-header`}>{heading}</h3>
+        <h3 className={`${prjPrefix}-header`}>{heading}</h3>
       )}
       {typeof subtext !== 'string' ? (
         subtext
       ) : (
-        <p className={`${expPrefix}-subtext`}>{subtext}</p>
+        <p className={`${prjPrefix}-subtext`}>{subtext}</p>
       )}
       {actionText && onActionEvent && (
         <Button
-          className={`${expPrefix}-empty-state-action-button`}
+          className={`${prjPrefix}-empty-state-action-button`}
           kind={actionType || 'tertiary'}
           onClick={onActionEvent}
           renderIcon={actionIcon || null}>
@@ -69,7 +69,7 @@ export const EmptyState = ({
         </Button>
       )}
       {linkText && linkUrl && (
-        <Link className={`${expPrefix}-empty-state-link`} href={linkUrl}>
+        <Link className={`${prjPrefix}-empty-state-link`} href={linkUrl}>
           {linkText}
         </Link>
       )}

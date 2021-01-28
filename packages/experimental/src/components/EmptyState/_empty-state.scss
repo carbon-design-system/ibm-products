@@ -10,28 +10,28 @@
 @import 'carbon-components/scss/components/button/button';
 @import 'carbon-components/scss/components/link/link';
 
-.#{$exp-prefix}-empty-state {
-  .#{$exp-prefix}-header,
-  .#{$exp-prefix}-subtext,
+.#{$prj-prefix}-empty-state {
+  .#{$prj-prefix}-header,
+  .#{$prj-prefix}-subtext,
   p {
     margin: 0;
     padding-bottom: $spacing-02;
   }
 }
 
-.#{$exp-prefix}-empty-state-illustration {
-  &.#{$exp-prefix}-empty-state-illustration--lg {
+.#{$prj-prefix}-empty-state-illustration {
+  &.#{$prj-prefix}-empty-state-illustration--lg {
     min-width: 5rem;
     max-width: 5rem;
   }
-  &.#{$exp-prefix}-empty-state-illustration--sm {
+  &.#{$prj-prefix}-empty-state-illustration--sm {
     min-width: 4rem;
     max-width: 4rem;
   }
 }
 
-.#{$exp-prefix}-empty-state-action-button,
-.#{$exp-prefix}-empty-state-link {
+.#{$prj-prefix}-empty-state-action-button,
+.#{$prj-prefix}-empty-state-link {
   display: block;
   margin-top: $spacing-06;
 }

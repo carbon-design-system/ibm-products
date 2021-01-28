@@ -8,15 +8,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { expPrefix } from '../../global/js/settings';
+import { prjPrefix } from '../../global/js/settings';
 
 const ContextHeader = ({ namespace, name, task }) => {
   return (
-    <div className={`${expPrefix}-context-header`}>
-      <span className={`${expPrefix}-context-header--task`}>{task}</span>
-      <span className={`${expPrefix}-context-header--name`}>{name}</span>
-      <span className={`${expPrefix}-context-header--separator`}>|</span>
-      <span className={`${expPrefix}-context-header--namespace`}>
+    <div className={`${prjPrefix}-context-header`}>
+      <span className={`${prjPrefix}-context-header--task`}>{task}</span>
+      <span className={`${prjPrefix}-context-header--name`}>{name}</span>
+      <span className={`${prjPrefix}-context-header--separator`}>|</span>
+      <span className={`${prjPrefix}-context-header--namespace`}>
         {namespace}
       </span>
     </div>

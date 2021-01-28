@@ -10,11 +10,11 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 
-import { expPrefix } from '../../global/js/settings';
+import { prjPrefix } from '../../global/js/settings';
 
 import { Button } from 'carbon-components-react';
 
-const blockClass = `${expPrefix}-action-bar-item`;
+const blockClass = `${prjPrefix}-action-bar-item`;
 
 export const ActionBarItem = (props) => {
   const className = cx([blockClass, props.className]);

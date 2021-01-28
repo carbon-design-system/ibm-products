@@ -10,9 +10,6 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 
-import { settings } from 'carbon-components';
-const { prefix } = settings;
-
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -21,12 +18,12 @@ import {
 } from 'carbon-components-react';
 import { OverflowMenuHorizontal32 } from '@carbon/icons-react';
 
-import { expPrefix } from '../../global/js/settings';
+import { prjPrefix, carbonPrefix } from '../../global/js/settings';
 
 import ReactResizeDetector from 'react-resize-detector';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-const blockClass = `${expPrefix}-breadcrumb-with-overflow`;
+const blockClass = `${prjPrefix}-breadcrumb-with-overflow`;
 
 export const BreadcrumbWithOverflow = ({
   children,
@@ -149,7 +146,7 @@ export const BreadcrumbWithOverflow = ({
 
     if (sizingContainerRef.current) {
       const sizingBreadcrumbItems = sizingContainerRef.current.querySelectorAll(
-        `.${prefix}--breadcrumb-item`
+        `.${carbonPrefix}--breadcrumb-item`
       );
 
       const breadcrumbWidthsIncludingMargin = [];

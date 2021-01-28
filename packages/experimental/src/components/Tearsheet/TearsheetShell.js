@@ -10,11 +10,11 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 
-import { expPrefix } from '../../global/js/settings';
+import { prjPrefix } from '../../global/js/settings';
 
 import { ComposedModal } from 'carbon-components-react';
 
-const blockClass = `${expPrefix}-tearsheet`;
+const blockClass = `${prjPrefix}-tearsheet`;
 
 const maxStackingDepth = 3;
 

@@ -7,7 +7,7 @@ import {
   Button,
 } from 'carbon-components-react';
 import PropTypes from 'prop-types';
-import { expPrefix } from '../../global/js/settings';
+import { prjPrefix } from '../../global/js/settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 export const ImportModal = ({
@@ -141,17 +141,17 @@ export const ImportModal = ({
       primaryButtonDisabled={primaryButtonDisabled}
       onRequestSubmit={onSubmitHandler}
       onRequestClose={onRequestClose}
-      className={`${expPrefix}--import-modal`}>
-      <p className={`${expPrefix}--import-modal-body`}>{modalBody}</p>
-      <p className={`${expPrefix}--import-modal-label`}>{fileDropHeader}</p>
+      className={`${prjPrefix}--import-modal`}>
+      <p className={`${prjPrefix}--import-modal-body`}>{modalBody}</p>
+      <p className={`${prjPrefix}--import-modal-label`}>{fileDropHeader}</p>
       <FileUploaderDropContainer
         accept={validFileTypes}
         labelText={fileDropLabel}
         onAddFiles={onAddFile}
         disabled={files.length}
       />
-      <p className={`${expPrefix}--import-modal-label`}>{inputHeader}</p>
-      <div className={`${expPrefix}--input-group`}>
+      <p className={`${prjPrefix}--import-modal-label`}>{inputHeader}</p>
+      <div className={`${prjPrefix}--input-group`}>
         <TextInput
           id={inputId}
           labelText={inputLabel}
@@ -162,7 +162,7 @@ export const ImportModal = ({
         />
         <Button
           onClick={fetchFile}
-          className={`${expPrefix}--import-button`}
+          className={`${prjPrefix}--import-button`}
           size="sm"
           disabled={importButtonDisabled}>
           {inputButtonText}
@@ -170,7 +170,7 @@ export const ImportModal = ({
       </div>
       <div className="bx--file-container" style={{ width: '100%' }}>
         {fileUploaded && (
-          <p className={`${expPrefix}--import-modal-helper-text`}>
+          <p className={`${prjPrefix}--import-modal-helper-text`}>
             {fileUploadLabel}
           </p>
         )}

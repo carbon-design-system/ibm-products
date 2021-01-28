@@ -1,7 +1,7 @@
 import featureFlags from '../../generated/feature-flags/feature-flags';
+import { settings } from 'carbon-components';
 
-const expPrefix = 'exp';
+const prjPrefix = 'exp';
+const carbonPrefix = settings.prefix;
 
-export { expPrefix };
-
-export { featureFlags };
+export { prjPrefix, carbonPrefix, featureFlags };

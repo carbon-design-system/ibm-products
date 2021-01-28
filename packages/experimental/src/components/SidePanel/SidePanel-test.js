@@ -9,7 +9,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import React from 'react';
 import SidePanel from './SidePanel';
-import { expPrefix as prefix } from '../../global/js/settings';
+import { prjPrefix } from '../../global/js/settings';
 
 describe('SidePanel', () => {
   test('renders the side panel', () => {
@@ -28,7 +28,7 @@ describe('SidePanel', () => {
       </SidePanel>
     );
     const overlayElement = container.querySelector(
-      `.${prefix}-side-panel-overlay`
+      `.${prjPrefix}-side-panel-overlay`
     );
     expect(overlayElement).toBeTruthy();
   });
@@ -40,7 +40,7 @@ describe('SidePanel', () => {
       </SidePanel>
     );
     const sidePanelOuter = container.querySelector(
-      `.${prefix}-side-panel-container-right-placement`
+      `.${prjPrefix}-side-panel-container-right-placement`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
@@ -52,7 +52,7 @@ describe('SidePanel', () => {
       </SidePanel>
     );
     const sidePanelOuter = container.querySelector(
-      `.${prefix}-side-panel-container-left-placement`
+      `.${prjPrefix}-side-panel-container-left-placement`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
@@ -63,7 +63,7 @@ describe('SidePanel', () => {
       </SidePanel>
     );
     const sidePanelOuter = container.querySelector(
-      `.${prefix}-side-panel-container-left-placement`
+      `.${prjPrefix}-side-panel-container-left-placement`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
@@ -75,7 +75,7 @@ describe('SidePanel', () => {
       </SidePanel>
     );
     const sidePanelOuter = container.querySelector(
-      `.${prefix}-side-panel-container--extra-small`
+      `.${prjPrefix}-side-panel-container--extra-small`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
@@ -87,7 +87,7 @@ describe('SidePanel', () => {
       </SidePanel>
     );
     const sidePanelOuter = container.querySelector(
-      `.${prefix}-side-panel-container--small`
+      `.${prjPrefix}-side-panel-container--small`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
@@ -99,7 +99,7 @@ describe('SidePanel', () => {
       </SidePanel>
     );
     const sidePanelOuter = container.querySelector(
-      `.${prefix}-side-panel-container--medium`
+      `.${prjPrefix}-side-panel-container--medium`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
@@ -111,7 +111,7 @@ describe('SidePanel', () => {
       </SidePanel>
     );
     const sidePanelOuter = container.querySelector(
-      `.${prefix}-side-panel-container--large`
+      `.${prjPrefix}-side-panel-container--large`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
@@ -123,7 +123,7 @@ describe('SidePanel', () => {
       </SidePanel>
     );
     const sidePanelOuter = container.querySelector(
-      `.${prefix}-side-panel-container--max`
+      `.${prjPrefix}-side-panel-container--max`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
@@ -208,7 +208,7 @@ describe('SidePanel', () => {
       </SidePanel>
     );
     const sidePanelOuter = container.querySelector(
-      `.${prefix}-side-panel-ghost-button`
+      `.${prjPrefix}-side-panel-ghost-button`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
@@ -231,7 +231,7 @@ describe('SidePanel', () => {
     const sidePanelAction = screen.getByText(/Primary button/i);
     expect(
       sidePanelAction.classList.contains(
-        `${prefix}-side-panel-primary-action-button-condensed`
+        `${prjPrefix}-side-panel-primary-action-button-condensed`
       )
     ).toBeTruthy();
   });
@@ -243,7 +243,7 @@ describe('SidePanel', () => {
       </SidePanel>
     );
     const navigationAction = container.querySelector(
-      `.${prefix}-side-panel-navigation-back-button`
+      `.${prjPrefix}-side-panel-navigation-back-button`
     );
     expect(navigationAction).toBeTruthy();
   });
@@ -262,7 +262,7 @@ describe('SidePanel', () => {
       </SidePanel>
     );
     const navigationAction = container.querySelector(
-      `.${prefix}-side-panel-navigation-back-button`
+      `.${prjPrefix}-side-panel-navigation-back-button`
     );
     click(navigationAction);
     expect(onNavigationBack).toBeCalled();

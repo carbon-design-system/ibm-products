@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 
 import { action } from '@storybook/addon-actions';
 
-import { expPrefix } from '../../global/js/settings';
+import { prjPrefix } from '../../global/js/settings';
 
 import { Button } from 'carbon-components-react';
 
@@ -211,7 +211,7 @@ export const StackedTearsheets = ({ buttonSet, ...args }) => {
 
   return (
     <>
-      <style>{`.${expPrefix}-tearsheet { opacity: 0 }`};</style>
+      <style>{`.${prjPrefix}-tearsheet { opacity: 0 }`};</style>
       <div
         style={{
           display: 'flex',

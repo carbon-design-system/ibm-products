@@ -6,33 +6,33 @@
 @import 'carbon-components/scss/components/inline-loading/inline-loading';
 @import 'carbon-components/scss/components/toggle/toggle';
 
-.#{$exp-prefix}--apikey-modal .bx--inline-loading {
+.#{$prj-prefix}--apikey-modal .bx--inline-loading {
   min-height: 3rem; // increasing the height from 2 to 3 resolves an issue where the scroll bar bounces
 }
 
-.#{$exp-prefix}--apikey-modal-body {
+.#{$prj-prefix}--apikey-modal-body {
   margin-bottom: $spacing-05;
   padding-right: 20%;
 }
 
-.#{$exp-prefix}--apikey-modal-input {
+.#{$prj-prefix}--apikey-modal-input {
   margin-bottom: $spacing-05;
 }
 
-.#{$exp-prefix}--apikey-modal-messaging {
+.#{$prj-prefix}--apikey-modal-messaging {
   display: flex;
 }
 
-.#{$exp-prefix}--apikey-modal-messaging-text {
+.#{$prj-prefix}--apikey-modal-messaging-text {
   flex: 1;
   margin-left: $spacing-03;
   @include carbon--type-style('label-01');
 }
 
-.#{$exp-prefix}--apikey-modal-messaging-text > * {
+.#{$prj-prefix}--apikey-modal-messaging-text > * {
   font: inherit;
 }
 
-.#{$exp-prefix}--apikey-modal .bx--modal-content {
+.#{$prj-prefix}--apikey-modal .bx--modal-content {
   padding-right: $spacing-05;
 }

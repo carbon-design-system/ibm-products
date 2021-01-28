@@ -10,19 +10,19 @@
 
 @import 'carbon-components/scss/components/button/button';
 
-$block-class: #{$exp-prefix}-example-component;
+$block-class: #{$prj-prefix}-example-component;
 
 .#{$block-class} {
   display: flex;
   justify-content: flex-end;
-  --#{$exp-prefix}-border-color: transparent;
+  --#{$prj-prefix}-border-color: transparent;
 }
 
 .#{$block-class}--boxed-set {
-  border: 10px solid var(--#{$exp-prefix}-border-color);
+  border: 10px solid var(--#{$prj-prefix}-border-color);
 }
 
 .#{$block-class}--shadow-set {
   margin: $spacing-04;
-  box-shadow: 0 0 10px var(--#{$exp-prefix}-border-color);
+  box-shadow: 0 0 10px var(--#{$prj-prefix}-border-color);
 }

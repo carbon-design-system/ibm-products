@@ -116,6 +116,14 @@ $raised-z-index: 99;
 }
 
 .#{$block-class}--action-bar-column {
+  // @include carbon--breakpoint-up('md') {
+  .#{$block-class}--breadcrumb-row--has-breadcrumbs & {
+    flex: 1 0 40%;
+    max-width: 40%;
+  }
+}
+
+.#{$block-class}--action-bar-column-content {
   display: flex;
   justify-content: space-between;
   overflow: hidden;
@@ -123,12 +131,6 @@ $raised-z-index: 99;
 
   @include carbon--breakpoint-up('lg') {
     flex-wrap: nowrap; /* assume enough space */
-  }
-
-  // @include carbon--breakpoint-up('md') {
-  .#{$block-class}--breadcrumb-row--has-breadcrumbs & {
-    flex: 1 0 40%;
-    max-width: 40%;
   }
 }
 
@@ -163,12 +165,6 @@ $raised-z-index: 99;
     flex: 0 1 60%;
     max-width: 60%;
   }
-}
-
-.#{$block-class}--action-bar-column-resize {
-  display: flex;
-  justify-content: space-between;
-  max-width: 100%;
 }
 
 .#{$block-class}--breadcrumb-column--background,

@@ -476,41 +476,45 @@ export const PageHeader = ({
                     ''
                   )}
                 </Column>
-                <ReactResizeDetector
-                  handleWidth={true}
-                  onResize={handleResizeActionBarColumn}>
-                  <Column
-                    className={cx([
-                      `${blockClass}--action-bar-column ${blockClass}--action-bar-column--background`,
-                      {
-                        [`${blockClass}--action-bar-column--has-page-actions`]: pageActions,
-                      },
-                    ])}>
-                    {actionBarItems !== undefined ? (
-                      // Investigate the responsive  behaviour or this and the title also fix the ActionBar Item and PageAction story css
-                      <>
-                        {pageActions && (
-                          <div
-                            className={cx(`${blockClass}--page-actions`, {
-                              [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
-                            })}>
-                            <ButtonSetWithOverflow
-                              className={`${blockClass}--button-set--in-breadcrumb`}
-                              onWidthChange={handleButtonSetWidthChange}>
-                              {pageActions}
-                            </ButtonSetWithOverflow>
-                          </div>
-                        )}
-                        <ActionBar
-                          className={`${blockClass}--action-bar`}
-                          onWidthChange={handleActionBarWidthChange}
-                          rightAlign={true}>
-                          {actionBarItems}
-                        </ActionBar>
-                      </>
-                    ) : null}
-                  </Column>
-                </ReactResizeDetector>
+                <Column
+                  className={cx([
+                    `${blockClass}--action-bar-column ${blockClass}--action-bar-column--background`,
+                    {
+                      [`${blockClass}--action-bar-column--has-page-actions`]: pageActions,
+                    },
+                  ])}>
+                  <ReactResizeDetector
+                    handleWidth={true}
+                    onResize={handleResizeActionBarColumn}>
+                    <div
+                      className={`${blockClass}--action-bar-column-content`}
+                      style={{ width: '100%' }}>
+                      {actionBarItems !== undefined ? (
+                        // Investigate the responsive  behaviour or this and the title also fix the ActionBar Item and PageAction story css
+                        <>
+                          {pageActions && (
+                            <div
+                              className={cx(`${blockClass}--page-actions`, {
+                                [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
+                              })}>
+                              <ButtonSetWithOverflow
+                                className={`${blockClass}--button-set--in-breadcrumb`}
+                                onWidthChange={handleButtonSetWidthChange}>
+                                {pageActions}
+                              </ButtonSetWithOverflow>
+                            </div>
+                          )}
+                          <ActionBar
+                            className={`${blockClass}--action-bar`}
+                            onWidthChange={handleActionBarWidthChange}
+                            rightAlign={true}>
+                            {actionBarItems}
+                          </ActionBar>
+                        </>
+                      ) : null}
+                    </div>
+                  </ReactResizeDetector>
+                </Column>
               </div>
             </Row>
           ) : null}

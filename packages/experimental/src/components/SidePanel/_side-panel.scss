@@ -88,7 +88,6 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       opacity: 1;
     }
     100% {
-      // stylelint-disable-next-line carbon/layout-token-use
       transform: translateY($spacing-07);
       opacity: 0;
     }
@@ -98,7 +97,6 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
 @mixin subtitleEntrance() {
   @keyframes subtitleEntrance {
     0% {
-      // stylelint-disable-next-line carbon/layout-token-use
       transform: translateY($spacing-07); // the size width of the side panel
       opacity: 0;
     }
@@ -127,22 +125,22 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
 
 @mixin smallButtonsStacked {
   flex-direction: column;
-  &.#{$exp-prefix}-side-panel-actions-container--multi-action-3-buttons-or-more
-    .#{$exp-prefix}-side-panel-primary-action-button,
-  &.#{$exp-prefix}-side-panel-actions-container--multi-action
-    .#{$exp-prefix}-side-panel-primary-action-button {
+  &.#{$pkg-prefix}-side-panel-actions-container--multi-action-3-buttons-or-more
+    .#{$pkg-prefix}-side-panel-primary-action-button,
+  &.#{$pkg-prefix}-side-panel-actions-container--multi-action
+    .#{$pkg-prefix}-side-panel-primary-action-button {
     width: 100%;
     max-width: 100%;
   }
 }
 
-.#{$exp-prefix}-side-panel-container {
-  &.#{$exp-prefix}-side-panel-container-light {
+.#{$pkg-prefix}-side-panel-container {
+  &.#{$pkg-prefix}-side-panel-container-light {
     @include carbon--theme($carbon--theme--g10, true);
   }
-  &.#{$exp-prefix}-side-panel-container-dark,
-  &.#{$exp-prefix}-side-panel-container-dark
-    .#{$exp-prefix}-side-panel-body-content {
+  &.#{$pkg-prefix}-side-panel-container-dark,
+  &.#{$pkg-prefix}-side-panel-container-dark
+    .#{$pkg-prefix}-side-panel-body-content {
     @include carbon--theme($carbon--theme--g100, true);
   }
 
@@ -160,50 +158,50 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
   // stylelint-disable-next-line carbon/motion-token-use
   transition: transform 250ms;
   transition-timing-function: carbon--motion(standard);
-  &.#{$exp-prefix}-side-panel-container-right-placement {
+  &.#{$pkg-prefix}-side-panel-container-right-placement {
     right: 0;
     border-left: 1px solid $decorative-01;
   }
-  &.#{$exp-prefix}-side-panel-container-right-placement.#{$exp-prefix}-side-panel-container--extra-small {
+  &.#{$pkg-prefix}-side-panel-container-right-placement.#{$pkg-prefix}-side-panel-container--extra-small {
     @include sidePanelEntrance(right, $extra-small-panel-size);
   }
-  &.#{$exp-prefix}-side-panel-container-right-placement.#{$exp-prefix}-side-panel-container--small {
+  &.#{$pkg-prefix}-side-panel-container-right-placement.#{$pkg-prefix}-side-panel-container--small {
     @include sidePanelEntrance(right, $small-panel-size);
   }
-  &.#{$exp-prefix}-side-panel-container-right-placement.#{$exp-prefix}-side-panel-container--medium {
+  &.#{$pkg-prefix}-side-panel-container-right-placement.#{$pkg-prefix}-side-panel-container--medium {
     @include sidePanelEntrance(right, $medium-panel-size);
   }
-  &.#{$exp-prefix}-side-panel-container-right-placement.#{$exp-prefix}-side-panel-container--large {
+  &.#{$pkg-prefix}-side-panel-container-right-placement.#{$pkg-prefix}-side-panel-container--large {
     @include sidePanelEntrance(right, $large-panel-size);
   }
-  &.#{$exp-prefix}-side-panel-container-right-placement.#{$exp-prefix}-side-panel-container--max {
+  &.#{$pkg-prefix}-side-panel-container-right-placement.#{$pkg-prefix}-side-panel-container--max {
     @include sidePanelEntrance(right, $max-panel-size);
   }
-  &.#{$exp-prefix}-side-panel-container-left-placement {
+  &.#{$pkg-prefix}-side-panel-container-left-placement {
     left: 0;
     border-right: 1px solid $decorative-01;
   }
-  &.#{$exp-prefix}-side-panel-container-left-placement.#{$exp-prefix}-side-panel-container--extra-small {
+  &.#{$pkg-prefix}-side-panel-container-left-placement.#{$pkg-prefix}-side-panel-container--extra-small {
     @include sidePanelEntrance(left, $extra-small-panel-size);
   }
-  &.#{$exp-prefix}-side-panel-container-left-placement.#{$exp-prefix}-side-panel-container--small {
+  &.#{$pkg-prefix}-side-panel-container-left-placement.#{$pkg-prefix}-side-panel-container--small {
     @include sidePanelEntrance(left, $small-panel-size);
   }
-  &.#{$exp-prefix}-side-panel-container-left-placement.#{$exp-prefix}-side-panel-container--medium {
+  &.#{$pkg-prefix}-side-panel-container-left-placement.#{$pkg-prefix}-side-panel-container--medium {
     @include sidePanelEntrance(left, $medium-panel-size);
   }
-  &.#{$exp-prefix}-side-panel-container-left-placement.#{$exp-prefix}-side-panel-container--large {
+  &.#{$pkg-prefix}-side-panel-container-left-placement.#{$pkg-prefix}-side-panel-container--large {
     @include sidePanelEntrance(left, $large-panel-size);
   }
-  &.#{$exp-prefix}-side-panel-container-left-placement.#{$exp-prefix}-side-panel-container--max {
+  &.#{$pkg-prefix}-side-panel-container-left-placement.#{$pkg-prefix}-side-panel-container--max {
     @include sidePanelEntrance(left, $max-panel-size);
   }
-  &.#{$exp-prefix}-side-panel-with-condensed-header {
-    .#{$exp-prefix}-side-panel-title-text {
+  &.#{$pkg-prefix}-side-panel-with-condensed-header {
+    .#{$pkg-prefix}-side-panel-title-text {
       @include carbon--type-style('productive-heading-02');
     }
   }
-  .#{$exp-prefix}-side-panel-title-text {
+  .#{$pkg-prefix}-side-panel-title-text {
     @include carbon--type-style('productive-heading-03');
 
     display: -webkit-box;
@@ -217,7 +215,7 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
   }
-  .#{$exp-prefix}-side-panel-subtitle-text {
+  .#{$pkg-prefix}-side-panel-subtitle-text {
     @include carbon--type-style('body-short-01');
 
     margin-bottom: $spacing-05;
@@ -225,49 +223,49 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
   }
-  .#{$exp-prefix}-side-panel-action-toolbar {
+  .#{$pkg-prefix}-side-panel-action-toolbar {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     margin-bottom: $spacing-03;
-    .#{$exp-prefix}-side-panel-action-toolbar-button {
+    .#{$pkg-prefix}-side-panel-action-toolbar-button {
       min-width: 2rem;
-      &.#{$exp-prefix}-side-panel-action-toolbar-icon-only-button {
+      &.#{$pkg-prefix}-side-panel-action-toolbar-icon-only-button {
         padding: 0;
         color: $text-01;
       }
-      &.#{$exp-prefix}-side-panel-action-toolbar-icon-only-button svg {
+      &.#{$pkg-prefix}-side-panel-action-toolbar-icon-only-button svg {
         margin-left: $spacing-03;
       }
-      &.#{$exp-prefix}-side-panel-action-toolbar-leading-button {
+      &.#{$pkg-prefix}-side-panel-action-toolbar-leading-button {
         margin-right: $spacing-03;
       }
     }
   }
-  .bx--btn.#{$exp-prefix}-side-panel-navigation-back-button,
-  .bx--btn.#{$exp-prefix}-side-panel-close-button {
+  .bx--btn.#{$pkg-prefix}-side-panel-navigation-back-button,
+  .bx--btn.#{$pkg-prefix}-side-panel-close-button {
     min-width: 2rem;
     padding: 0;
     color: $text-01;
   }
-  .bx--btn.#{$exp-prefix}-side-panel-close-button {
+  .bx--btn.#{$pkg-prefix}-side-panel-close-button {
     position: absolute;
     top: $spacing-03;
     right: $spacing-03;
   }
-  .#{$exp-prefix}-side-panel-body-content {
+  .#{$pkg-prefix}-side-panel-body-content {
     padding: $spacing-05;
     padding-top: 0;
     padding-bottom: $layout-07;
   }
-  .#{$exp-prefix}-side-panel-header {
+  .#{$pkg-prefix}-side-panel-header {
     position: sticky;
     top: 0;
     z-index: 1;
     padding: $spacing-05;
     background-color: $ui-01;
   }
-  .#{$exp-prefix}-side-panel-actions-container {
+  .#{$pkg-prefix}-side-panel-actions-container {
     position: sticky;
     bottom: 0;
     display: flex;
@@ -276,90 +274,90 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     width: 100%;
     height: $layout-05;
     background-color: $ui-01;
-    &.#{$exp-prefix}-side-panel-actions--extra-small {
+    &.#{$pkg-prefix}-side-panel-actions--extra-small {
       @include setActionBarSize($extra-small-panel-size);
       @include smallButtonsStacked();
     }
-    &.#{$exp-prefix}-side-panel-actions--small {
+    &.#{$pkg-prefix}-side-panel-actions--small {
       @include setActionBarSize($small-panel-size);
       @include smallButtonsStacked();
     }
-    &.#{$exp-prefix}-side-panel-actions--medium {
+    &.#{$pkg-prefix}-side-panel-actions--medium {
       @include setActionBarSize($medium-panel-size);
 
       flex-direction: row;
-      &.#{$exp-prefix}-side-panel-actions-container--multi-action-3-buttons-or-more {
+      &.#{$pkg-prefix}-side-panel-actions-container--multi-action-3-buttons-or-more {
         flex-direction: column;
-        .#{$exp-prefix}-side-panel-primary-action-button {
+        .#{$pkg-prefix}-side-panel-primary-action-button {
           width: 100%;
         }
       }
     }
-    &.#{$exp-prefix}-side-panel-actions--large {
+    &.#{$pkg-prefix}-side-panel-actions--large {
       @include setActionBarSize($large-panel-size);
 
-      &.#{$exp-prefix}-side-panel-actions-container--multi-action-3-buttons-or-more {
-        .#{$exp-prefix}-side-panel-primary-action-button.#{$exp-prefix}-side-panel-ghost-button {
+      &.#{$pkg-prefix}-side-panel-actions-container--multi-action-3-buttons-or-more {
+        .#{$pkg-prefix}-side-panel-primary-action-button.#{$pkg-prefix}-side-panel-ghost-button {
           width: 50%;
           max-width: 50%;
         }
       }
-      &.#{$exp-prefix}-side-panel-actions-container--single-action {
-        .#{$exp-prefix}-side-panel-primary-action-button.#{$exp-prefix}-side-panel-ghost-button {
+      &.#{$pkg-prefix}-side-panel-actions-container--single-action {
+        .#{$pkg-prefix}-side-panel-primary-action-button.#{$pkg-prefix}-side-panel-ghost-button {
           width: 100%;
           max-width: 100%;
         }
       }
     }
-    &.#{$exp-prefix}-side-panel-actions--max {
-      &.#{$exp-prefix}-side-panel-actions-container--multi-action-3-buttons-or-more {
-        .#{$exp-prefix}-side-panel-primary-action-button.#{$exp-prefix}-side-panel-ghost-button {
+    &.#{$pkg-prefix}-side-panel-actions--max {
+      &.#{$pkg-prefix}-side-panel-actions-container--multi-action-3-buttons-or-more {
+        .#{$pkg-prefix}-side-panel-primary-action-button.#{$pkg-prefix}-side-panel-ghost-button {
           width: 50%;
           max-width: 50%;
         }
       }
-      &.#{$exp-prefix}-side-panel-actions-container--single-action {
-        .#{$exp-prefix}-side-panel-primary-action-button.#{$exp-prefix}-side-panel-ghost-button {
+      &.#{$pkg-prefix}-side-panel-actions-container--single-action {
+        .#{$pkg-prefix}-side-panel-primary-action-button.#{$pkg-prefix}-side-panel-ghost-button {
           width: 100%;
           max-width: 100%;
         }
       }
     }
-    &.#{$exp-prefix}-side-panel-actions-container-condensed {
+    &.#{$pkg-prefix}-side-panel-actions-container-condensed {
       height: $layout-04;
     }
   }
-  .#{$exp-prefix}-side-panel-actions-container
-    .#{$exp-prefix}-side-panel-primary-action-button {
+  .#{$pkg-prefix}-side-panel-actions-container
+    .#{$pkg-prefix}-side-panel-primary-action-button {
     display: flex;
     align-items: flex-start;
     width: 100%;
     max-width: 100%;
     height: 100%;
   }
-  .#{$exp-prefix}-side-panel-actions-container.#{$exp-prefix}-side-panel-actions-container--multi-action
-    .#{$exp-prefix}-side-panel-primary-action-button {
+  .#{$pkg-prefix}-side-panel-actions-container.#{$pkg-prefix}-side-panel-actions-container--multi-action
+    .#{$pkg-prefix}-side-panel-primary-action-button {
     width: 50%;
     max-width: 50%;
   }
-  .#{$exp-prefix}-side-panel-actions-container.#{$exp-prefix}-side-panel-actions-container--single-action.#{$exp-prefix}-side-panel-actions--large
-    .#{$exp-prefix}-side-panel-primary-action-button,
-  .#{$exp-prefix}-side-panel-actions-container.#{$exp-prefix}-side-panel-actions-container--multi-action.#{$exp-prefix}-side-panel-actions--large
-    .#{$exp-prefix}-side-panel-primary-action-button {
+  .#{$pkg-prefix}-side-panel-actions-container.#{$pkg-prefix}-side-panel-actions-container--single-action.#{$pkg-prefix}-side-panel-actions--large
+    .#{$pkg-prefix}-side-panel-primary-action-button,
+  .#{$pkg-prefix}-side-panel-actions-container.#{$pkg-prefix}-side-panel-actions-container--multi-action.#{$pkg-prefix}-side-panel-actions--large
+    .#{$pkg-prefix}-side-panel-primary-action-button {
     width: 50%;
     max-width: 50%;
   }
-  .#{$exp-prefix}-side-panel-actions-container.#{$exp-prefix}-side-panel-actions-container--multi-action-3-buttons-or-more.#{$exp-prefix}-side-panel-actions--large
-    .#{$exp-prefix}-side-panel-primary-action-button,
-  .#{$exp-prefix}-side-panel-actions-container.#{$exp-prefix}-side-panel-actions--max
-    .#{$exp-prefix}-side-panel-primary-action-button {
+  .#{$pkg-prefix}-side-panel-actions-container.#{$pkg-prefix}-side-panel-actions-container--multi-action-3-buttons-or-more.#{$pkg-prefix}-side-panel-actions--large
+    .#{$pkg-prefix}-side-panel-primary-action-button,
+  .#{$pkg-prefix}-side-panel-actions-container.#{$pkg-prefix}-side-panel-actions--max
+    .#{$pkg-prefix}-side-panel-primary-action-button {
     width: 25%;
     max-width: 25%;
   }
-  // .#{$exp-prefix}-side-panel-actions-container.#{$exp-prefix}-side-panel-actions-container--multi-action
-  //   .#{$exp-prefix}-side-panel-primary-action-button,
-  // .#{$exp-prefix}-side-panel-actions-container.#{$exp-prefix}-side-panel-actions-container--multi-action-3-buttons-or-more
-  //   .#{$exp-prefix}-side-panel-primary-action-button {
+  // .#{$pkg-prefix}-side-panel-actions-container.#{$pkg-prefix}-side-panel-actions-container--multi-action
+  //   .#{$pkg-prefix}-side-panel-primary-action-button,
+  // .#{$pkg-prefix}-side-panel-actions-container.#{$pkg-prefix}-side-panel-actions-container--multi-action-3-buttons-or-more
+  //   .#{$pkg-prefix}-side-panel-primary-action-button {
   //     &:not(:last-child) {
   //       border-bottom: 1px solid $ui-04;
   //     }
@@ -384,7 +382,7 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
   }
 }
 
-.#{$exp-prefix}--visually-hidden {
+.#{$pkg-prefix}--visually-hidden {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -398,7 +396,7 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
   clip: rect(0, 0, 0, 0);
 }
 
-.#{$exp-prefix}-side-panel-overlay {
+.#{$pkg-prefix}-side-panel-overlay {
   position: fixed;
   top: 0;
   right: 0;

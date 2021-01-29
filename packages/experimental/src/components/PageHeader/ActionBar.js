@@ -10,12 +10,9 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 
-// import { settings } from 'carbon-components';
-// const { prefix } = settings;
+import { pkgPrefix /*, carbonPrefix */ } from '../../global/js/settings';
 
-import { expPrefix } from '../../global/js/settings';
-
-const blockClass = `${expPrefix}-action-bar`;
+const blockClass = `${pkgPrefix}-action-bar`;
 
 export const ActionBar = ({ children, className }) => {
   return <div className={cx([blockClass, className])}>{children}</div>;

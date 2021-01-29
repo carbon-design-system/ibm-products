@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 
 import { action } from '@storybook/addon-actions';
 
-import { expPrefix } from '../../global/js/settings';
+import { pkgPrefix } from '../../global/js/settings';
 
 import { Button, Tab, Tabs } from 'carbon-components-react';
 
@@ -229,7 +229,7 @@ const Template = ({ buttonSet, ...args }) => {
 
   return (
     <>
-      <style>{`.${expPrefix}-tearsheet { opacity: 0 }`};</style>
+      <style>{`.${pkgPrefix}-tearsheet { opacity: 0 }`};</style>
       <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
       <Tearsheet
         className={className}

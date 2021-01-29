@@ -18,7 +18,7 @@
 @import '../BreadcrumbWithOverflow/index';
 @import './temp-combo-button';
 
-$block-class: #{$exp-prefix}-page-header;
+$block-class: #{$pkg-prefix}-page-header;
 $raised-z-index: 99;
 
 .#{$block-class} {
@@ -191,16 +191,18 @@ $raised-z-index: 99;
   padding-top: $spacing-04;
 }
 
-.#{$block-class}--breadcrumb .#{$prefix}--breadcrumb-item {
+.#{$block-class}--breadcrumb .#{$carbon-prefix}--breadcrumb-item {
   margin-right: $spacing-02;
 }
 
-.#{$block-class}--breadcrumb .#{$prefix}--breadcrumb-item::after {
+.#{$block-class}--breadcrumb .#{$carbon-prefix}--breadcrumb-item::after {
   margin-left: $spacing-02;
 }
 
-.#{$block-class}--breadcrumb .#{$prefix}--breadcrumb-item,
-.#{$block-class}--breadcrumb .#{$prefix}--breadcrumb-item .#{$prefix}--link {
+.#{$block-class}--breadcrumb .#{$carbon-prefix}--breadcrumb-item,
+.#{$block-class}--breadcrumb
+  .#{$carbon-prefix}--breadcrumb-item
+  .#{$carbon-prefix}--link {
   @include carbon--type-style('label-01');
 }
 
@@ -364,7 +366,7 @@ $raised-z-index: 99;
   flex-wrap: wrap-reverse;
   margin-top: $spacing-04;
 
-  .#{$prefix}--content-switcher {
+  .#{$carbon-prefix}--content-switcher {
     box-sizing: content-box;
     padding-bottom: $layout-01;
   }
@@ -378,7 +380,7 @@ $raised-z-index: 99;
   margin-top: $layout-02;
 }
 
-.#{$block-class}--navigation-row .#{$prefix}--tab-content {
+.#{$block-class}--navigation-row .#{$carbon-prefix}--tab-content {
   display: none; /* need to figure out how to handle the tab content */
 }
 
@@ -409,6 +411,6 @@ $raised-z-index: 99;
   text-align: initial;
 }
 
-.#{$block-class}--navigation-row .#{$prefix}--content-switcher-btn {
+.#{$block-class}--navigation-row .#{$carbon-prefix}--content-switcher-btn {
   background-color: $ui-background;
 }

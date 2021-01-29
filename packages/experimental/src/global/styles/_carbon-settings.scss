@@ -18,3 +18,6 @@
 // @import '~@carbon/themes/scss/themes';
 // $carbon--theme: $carbon--theme--white;
 // @include carbon--theme();
+
+// to distinguish it from project settings
+$carbon-prefix: $prefix;

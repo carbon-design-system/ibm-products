@@ -24,6 +24,18 @@ If you want to try out Carbon for Cloud & Cognitive, you can use
 
 [![Edit CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/master/examples/codesandbox)
 
+## Building and running Locally
+
+To get started run the following commands and storybook will be built and then
+served on port `3000` on your local machine.
+
+```
+yarn install
+yarn build
+cd packages/core/
+yarn start
+```
+
 ## Browser Support
 
 This library supports the latest versions of:
@@ -32,11 +44,6 @@ This library supports the latest versions of:
 - Google Chrome
 - Microsoft Edge
 - Mozilla Firefox
-
-## Locally Served Catalogue of Component using Storybook:
-
-Simply run `yarn storybook` and the storybook will be built and then served on
-port `3000` on your local machine.
 
 ## Currently Hosted Packages
 

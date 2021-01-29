@@ -5,7 +5,7 @@
 @import 'carbon-components/scss/components/overflow-menu/overflow-menu';
 @import 'carbon-components/scss/components/tooltip/tooltip';
 
-$block-class: #{$exp-prefix}-action-bar;
+$block-class: #{$pkg-prefix}-action-bar;
 
 .#{$block-class} {
   display: block;

@@ -11,12 +11,9 @@ import { layout05, baseFontSize } from '@carbon/layout';
 
 import cx from 'classnames';
 
-// import { settings } from 'carbon-components';
-// const { prefix } = settings;
-
 import ReactResizeDetector from 'react-resize-detector';
 
-import { expPrefix } from '../../global/js/settings';
+import { pkgPrefix /*, carbonPrefix */ } from '../../global/js/settings';
 
 import { useWindowResize, useWindowScroll } from '../../global/js/use';
 
@@ -32,7 +29,7 @@ import { ActionBar } from '../ActionBar/';
 import { BreadcrumbWithOverflow, TagSet } from '../';
 import { ButtonSetWithOverflow } from './ButtonSetWithOverflow';
 
-const blockClass = `${expPrefix}-page-header`;
+const blockClass = `${pkgPrefix}-page-header`;
 
 export const PageHeader = ({
   actionBarItems,

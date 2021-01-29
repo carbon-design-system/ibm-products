@@ -11,9 +11,9 @@ import { action } from '@storybook/addon-actions';
 import { ActionBar, ActionBarItem } from '.';
 import { Lightning16, Bee24 } from '@carbon/icons-react';
 
-import { expPrefix } from '../../global/js/settings';
+import { pkgPrefix } from '../../global/js/settings';
 
-const blockClass = `${expPrefix}-action-bar`;
+const blockClass = `${pkgPrefix}-action-bar`;
 
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 

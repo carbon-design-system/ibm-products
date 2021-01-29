@@ -8,14 +8,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { expPrefix } from '../../global/js/settings';
+import { pkgPrefix } from '../../global/js/settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
 import unwrapIfFragment from '../../global/js/utils/unwrap-if-fragment';
 import { settings } from 'carbon-components';
 const { prefix } = settings;
 
-const blockClass = `${expPrefix}-temp-combo-button`;
+const blockClass = `${pkgPrefix}-temp-combo-button`;
 
 export const TempComboButton = ({ buttons, className }) => {
   const internalId = useRef(uuidv4());

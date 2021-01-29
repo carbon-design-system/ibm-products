@@ -11,7 +11,7 @@
 @import 'carbon-components/scss/components/overflow-menu/overflow-menu';
 @import 'carbon-components/scss/components/button/button';
 
-$block-class: #{$exp-prefix}-temp-combo-button;
+$block-class: #{$pkg-prefix}-temp-combo-button;
 
 .#{$block-class} {
   justify-content: flex-start;

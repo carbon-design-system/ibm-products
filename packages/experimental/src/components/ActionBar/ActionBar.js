@@ -14,12 +14,12 @@ import ReactResizeDetector from 'react-resize-detector';
 import { settings } from 'carbon-components';
 const { prefix } = settings;
 
-import { expPrefix } from '../../global/js/settings';
+import { pkgPrefix } from '../../global/js/settings';
 import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import unwrapIfFragment from '../../global/js/utils/unwrap-if-fragment';
 
-const blockClass = `${expPrefix}-action-bar`;
+const blockClass = `${pkgPrefix}-action-bar`;
 
 export const ActionBar = ({
   children,

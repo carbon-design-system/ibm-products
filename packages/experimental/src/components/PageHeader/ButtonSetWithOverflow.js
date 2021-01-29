@@ -15,12 +15,12 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 import { ButtonSet } from 'carbon-components-react';
 
-import { expPrefix } from '../../global/js/settings';
+import { pkgPrefix } from '../../global/js/settings';
 // import uuidv4 from '../../global/js/utils/uuidv4';
 // import unwrapIfFragment from '../../global/js/utils/unwrap-if-fragment';
 import { TempComboButton } from './TempComboButton';
 
-const blockClass = `${expPrefix}-button-set-with-overflow`;
+const blockClass = `${pkgPrefix}-button-set-with-overflow`;
 
 export const ButtonSetWithOverflow = ({
   children,

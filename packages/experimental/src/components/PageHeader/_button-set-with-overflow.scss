@@ -9,7 +9,7 @@
 
 @import 'carbon-components/scss/components/button/button';
 
-$block-class: #{$exp-prefix}-button-set-with-overflow;
+$block-class: #{$pkg-prefix}-button-set-with-overflow;
 
 .#{$block-class} {
   display: block;

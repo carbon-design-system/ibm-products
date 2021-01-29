@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.6.0...@carbon/ibm-cloud-cognitive-core@0.6.1) (2021-01-29)
+
+
+### Bug Fixes
+
+* **combo-button:** add truncation ([#308](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/308)) ([35b3517](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/35b351776107d23f6dafd30b9d4a24d626a9d9ec))
+
+
+
+
+
 # [0.6.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.5.2...@carbon/ibm-cloud-cognitive-core@0.6.0) (2021-01-28)
 
 

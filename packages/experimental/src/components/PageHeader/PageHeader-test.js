@@ -20,7 +20,7 @@ import {
 } from 'carbon-components-react';
 import { Lightning16, Bee32 } from '@carbon/icons-react';
 
-import { ActionBarItem } from './ActionBarItem';
+import { ActionBarItem } from '../ActionBar';
 import { PageHeader } from '.';
 
 /* Test properties. */
@@ -107,11 +107,6 @@ describe('PageHeader', () => {
       document.querySelectorAll(`.${pkgPrefix}-page-header--action-bar`)
     ).toHaveLength(0);
     expect(
-      document.querySelectorAll(
-        `[label="Action 1"].${pkgPrefix}-action-bar-item`
-      )
-    ).toHaveLength(0);
-    expect(
       document.querySelectorAll('span.page-header-test--available-space')
     ).toHaveLength(0);
     expect(screen.queryAllByTestId('breadcrumbitem')).toHaveLength(0);
@@ -151,6 +146,7 @@ describe('PageHeader', () => {
     );
 
     const header = document.querySelector(`section.${pkgPrefix}-page-header`);
+    console.log('Look here', header.innerHTML);
 
     expect(header).not.toBeNull();
     expect(
@@ -161,15 +157,6 @@ describe('PageHeader', () => {
     expect(
       document.querySelectorAll(`.${pkgPrefix}-page-header--action-bar`)
     ).toHaveLength(1);
-    expect(
-      document.querySelectorAll(
-        `[label="Action 1"].${pkgPrefix}-action-bar-item`
-      )
-    ).toHaveLength(1);
-    userEvent.click(
-      document.querySelector(`[label="Action 1"].${pkgPrefix}-action-bar-item`)
-    );
-    expect(actionBarItemOnClick).toHaveBeenCalledTimes(1);
     expect(
       document.querySelectorAll('span.page-header-test--available-space')
     ).toHaveLength(1);
@@ -182,9 +169,6 @@ describe('PageHeader', () => {
     expect(
       document.querySelectorAll(`.${pkgPrefix}-page-header--page-actions`)
     ).toHaveLength(2);
-    expect(screen.getAllByText('Primary button')).toHaveLength(2);
-    userEvent.click(screen.getAllByText('Primary button')[0]);
-    expect(pageActionItemOnClick).toHaveBeenCalledTimes(1);
     expect(
       document.querySelectorAll(`.${pkgPrefix}-page-header--subtitle`)
     ).toHaveLength(1);

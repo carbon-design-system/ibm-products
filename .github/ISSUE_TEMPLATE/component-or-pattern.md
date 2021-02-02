@@ -17,7 +17,7 @@ labels: 'status: needs triage'
 > Link to additional assets, for example, existing code, images, and
 > prototypes - provide as much useful information as you can.
 
-### Maintainers
+### Collaborators
 
 <!--
   Add a name in each of the options below, for example:
@@ -26,6 +26,7 @@ labels: 'status: needs triage'
 
 - Design owner(s) -
 - Development peer reviewer(s) -
+- Sponsor user(s) -
 
 #### Definition of done
 
@@ -33,5 +34,5 @@ labels: 'status: needs triage'
       [User Experience Standards Adopter Guide](https://github.ibm.com/IBMPrivateCloud/BedrockServices/blob/master/AdopterGuides/CommonUXStandardsAdoptionGuide.md#user-experience--user-interface-uxui-standards)
 - [ ] Delivery follows the guidance in
       [Contributing Guide](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CONTRIBUTING.md#5-make-a-pull-request)
-- [ ] Feedback from design owners and development peer reviewers are addressed,
-      and any follow-up issues are created
+- [ ] Feedback from collaborators are addressed, and any follow-up issues are
+      created

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Modal, TextInput } from 'carbon-components-react';
 import PropTypes from 'prop-types';
-import { expPrefix } from '../../global/js/settings';
+import { pkgPrefix } from '../../global/js/settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 export const RemoveDeleteModal = ({
@@ -31,7 +31,7 @@ export const RemoveDeleteModal = ({
   return (
     <Modal
       danger
-      className={`${expPrefix}-remove-delete-modal ${className}`}
+      className={`${pkgPrefix}-remove-delete-modal ${className}`}
       iconDescription={iconDescription}
       open={open}
       modalHeading={header}
@@ -42,7 +42,7 @@ export const RemoveDeleteModal = ({
       onRequestSubmit={onRequestSubmit}
       onRequestClose={onRequestClose}
       {...other}>
-      <p className={`${expPrefix}-remove-delete-modal-body`}>{body}</p>
+      <p className={`${pkgPrefix}-remove-delete-modal-body`}>{body}</p>
       {textConfirmation && (
         <TextInput
           id={`${idRef.current}-confirmation-input`}

@@ -5,22 +5,24 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@import '../../global/styles/carbon-settings'; // goes before carbon imports as it affects how carbon is used.
 @import '../../global/styles/project-settings';
+
 @import 'carbon-components/scss/components/button/button';
 
-$block-class: #{$exp-prefix}-example-component;
+$block-class: #{$pkg-prefix}-example-component;
 
 .#{$block-class} {
   display: flex;
   justify-content: flex-end;
-  --#{$exp-prefix}-border-color: transparent;
+  --#{$pkg-prefix}-border-color: transparent;
 }
 
 .#{$block-class}--boxed-set {
-  border: 10px solid var(--#{$exp-prefix}-border-color);
+  border: 10px solid var(--#{$pkg-prefix}-border-color);
 }
 
 .#{$block-class}--shadow-set {
   margin: $spacing-04;
-  box-shadow: 0 0 10px var(--#{$exp-prefix}-border-color);
+  box-shadow: 0 0 10px var(--#{$pkg-prefix}-border-color);
 }

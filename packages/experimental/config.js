@@ -6,3 +6,5 @@
  */
 
 export default 'Experimental';
+
+export const sectionTitle = '2020/Automation';

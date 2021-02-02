@@ -10,11 +10,12 @@ import React from 'react';
 import { TearsheetShell } from './TearsheetShell';
 
 import styles from './_storybook-styles.scss';
+import { storybookPrefix } from '../../global/js/settings';
 
 import mdx from './TearsheetShell.mdx';
 
 export default {
-  title: 'Experimental/Tearsheets/TearsheetShell',
+  title: `${storybookPrefix}/Tearsheets/TearsheetShell`,
   component: TearsheetShell,
   parameters: { controls: { expanded: true }, styles, docs: { page: mdx } },
 };

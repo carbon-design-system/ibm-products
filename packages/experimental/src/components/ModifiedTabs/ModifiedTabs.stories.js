@@ -11,6 +11,7 @@ import { action } from '@storybook/addon-actions';
 
 import { ModifiedTabs } from '.';
 import { Modal, RadioButton, RadioButtonGroup } from 'carbon-components-react';
+import { storybookPrefix } from '../../global/js/settings';
 
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 
@@ -32,7 +33,7 @@ const commonStoryCode = {
 };
 
 export default {
-  title: 'Experimental/ModifiedTabs',
+  title: `${storybookPrefix}/ModifiedTabs`,
   component: ModifiedTabs,
   parameters: { styles },
 };

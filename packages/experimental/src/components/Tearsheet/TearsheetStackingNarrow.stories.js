@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 
 import { action } from '@storybook/addon-actions';
 
-import { pkgPrefix } from '../../global/js/settings';
+import { pkgPrefix, storybookPrefix } from '../../global/js/settings';
 
 import { Button } from 'carbon-components-react';
 
@@ -20,7 +20,7 @@ import styles from './_storybook-styles.scss';
 import mdx from './TearsheetStacking.mdx';
 
 export default {
-  title: 'Experimental/Tearsheets/TearsheetStackingNarrow',
+  title: `${storybookPrefix}/Tearsheets/TearsheetStackingNarrow`,
   component: TearsheetNarrow,
   parameters: { controls: { expanded: true }, styles, docs: { page: mdx } },
   argTypes: {

@@ -9,11 +9,12 @@ import React from 'react';
 
 import { ActionBarItem } from './ActionBarItem';
 import { Bee24 } from '@carbon/icons-react';
+import { storybookPrefix } from '../../global/js/settings';
 
 import styles from './_index.scss'; // import index in case more files are added later.
 
 export default {
-  title: 'Experimental/PageHeader/ActionBarItem',
+  title: `${storybookPrefix}/PageHeader/ActionBarItem`,
   component: ActionBarItem,
   parameters: { styles },
 };

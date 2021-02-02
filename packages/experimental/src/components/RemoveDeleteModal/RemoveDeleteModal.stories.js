@@ -10,9 +10,10 @@ import { Button } from 'carbon-components-react';
 import { RemoveDeleteModal } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import mdx from './RemoveDeleteModal.mdx';
+import { storybookPrefix } from '../../global/js/settings';
 
 export default {
-  title: 'Experimental/RemoveDeleteModal',
+  title: `${storybookPrefix}/RemoveDeleteModal`,
   component: RemoveDeleteModal,
   parameters: {
     styles,

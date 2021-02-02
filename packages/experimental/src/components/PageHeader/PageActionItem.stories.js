@@ -11,9 +11,10 @@ import { PageActionItem } from './PageActionItem';
 import { Bee24 } from '@carbon/icons-react';
 
 import styles from './_index.scss'; // import index in case more files are added later.
+import { storybookPrefix } from '../../global/js/settings';
 
 export default {
-  title: 'Experimental/PageHeader/PageActionItem',
+  title: `${storybookPrefix}/PageHeader/PageActionItem`,
   component: PageActionItem,
   parameters: { styles },
   argTypes: {

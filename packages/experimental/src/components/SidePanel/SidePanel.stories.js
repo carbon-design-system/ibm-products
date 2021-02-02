@@ -31,9 +31,10 @@ import { Copy20, Delete20, Settings20 } from '@carbon/icons-react';
 import SidePanel from './SidePanel';
 import styles from './_storybook-styles.scss';
 import mdx from './SidePanel.mdx';
+import { storybookPrefix } from '../../global/js/settings';
 
 export default {
-  title: 'Experimental/SidePanel',
+  title: `${storybookPrefix}/SidePanel`,
   component: SidePanel,
   parameters: {
     styles,

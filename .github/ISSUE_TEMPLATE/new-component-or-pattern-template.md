@@ -60,7 +60,6 @@ e.g. sketch files, icons, images, prototypes
 
 ### Review and promote
 
--
 - [ ] Design review
 - [ ] Add design review issues addressed, issues raised or discounted.
 - [ ] Engineering review - Submit PR to promote component to production package

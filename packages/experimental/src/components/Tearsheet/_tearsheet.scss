@@ -10,7 +10,7 @@
 
 @import 'carbon-components/scss/components/modal/modal';
 
-$block-class: #{$exp-prefix}-tearsheet;
+$block-class: #{$pkg-prefix}-tearsheet;
 // stylelint-disable-next-line carbon/theme-token-use
 $overlay-color: $carbon--gray-100;
 
@@ -152,7 +152,7 @@ $overlay-color: $carbon--gray-100;
   display: none;
 }
 
-.#{$block-class}--wide .#{$prefix}--modal-header__heading {
+.#{$block-class}--wide .#{$carbon-prefix}--modal-header__heading {
   @include carbon--type-style('productive-heading-04');
 }
 

@@ -9,10 +9,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { expPrefix } from '../../global/js/settings';
-
-import { settings } from 'carbon-components';
-const { prefix: carbonPrefix } = settings;
+import { pkgPrefix, carbonPrefix } from '../../global/js/settings';
 
 import { Button, Tab, Tabs } from 'carbon-components-react';
 
@@ -67,22 +64,22 @@ describe('Tearsheet', () => {
   test('renders a tearsheet when no props are set', () => {
     render(<Tearsheet />);
 
-    const tearsheet = document.querySelector(`div.${expPrefix}-tearsheet`);
+    const tearsheet = document.querySelector(`div.${pkgPrefix}-tearsheet`);
 
     expect(tearsheet).not.toBeNull();
     expect(tearsheet.classList.contains(classNames[0])).toBe(false);
     expect(tearsheet.classList.contains(classNames[1])).toBe(false);
     expect(
-      document.querySelectorAll(`.${expPrefix}-tearsheet--header`)
+      document.querySelectorAll(`.${pkgPrefix}-tearsheet--header`)
     ).toHaveLength(0);
     expect(
-      document.querySelectorAll(`.${expPrefix}-tearsheet--influencer`)
+      document.querySelectorAll(`.${pkgPrefix}-tearsheet--influencer`)
     ).toHaveLength(0);
     expect(
-      document.querySelectorAll(`.${expPrefix}-tearsheet--main`)
+      document.querySelectorAll(`.${pkgPrefix}-tearsheet--main`)
     ).toHaveLength(0);
     expect(
-      document.querySelectorAll(`.${expPrefix}-tearsheet--buttons`)
+      document.querySelectorAll(`.${pkgPrefix}-tearsheet--buttons`)
     ).toHaveLength(0);
   });
 
@@ -103,13 +100,13 @@ describe('Tearsheet', () => {
       </Tearsheet>
     );
 
-    const tearsheet = document.querySelector(`div.${expPrefix}-tearsheet`);
+    const tearsheet = document.querySelector(`div.${pkgPrefix}-tearsheet`);
 
     expect(tearsheet).not.toBeNull();
     expect(tearsheet.classList.contains(classNames[0])).toBe(true);
     expect(tearsheet.classList.contains(classNames[1])).toBe(true);
     expect(
-      document.querySelectorAll(`.${expPrefix}-tearsheet--header`)
+      document.querySelectorAll(`.${pkgPrefix}-tearsheet--header`)
     ).toHaveLength(1);
     expect(screen.getAllByTitle(closeIconDescription)).toHaveLength(1);
     expect(screen.getAllByText(label)).toHaveLength(1);
@@ -118,15 +115,15 @@ describe('Tearsheet', () => {
     expect(screen.queryAllByTestId('tabs')).toHaveLength(1);
     expect(screen.getAllByText(/Tab [1-4]/)).toHaveLength(4);
     expect(
-      document.querySelectorAll(`.${expPrefix}-tearsheet--influencer`)
+      document.querySelectorAll(`.${pkgPrefix}-tearsheet--influencer`)
     ).toHaveLength(1);
     expect(screen.getAllByText('Influencer')).toHaveLength(1);
     expect(
-      document.querySelectorAll(`.${expPrefix}-tearsheet--main`)
+      document.querySelectorAll(`.${pkgPrefix}-tearsheet--main`)
     ).toHaveLength(1);
     expect(screen.getAllByText('Main content')).toHaveLength(1);
     expect(
-      document.querySelectorAll(`.${expPrefix}-tearsheet--buttons`)
+      document.querySelectorAll(`.${pkgPrefix}-tearsheet--buttons`)
     ).toHaveLength(1);
     userEvent.click(screen.getAllByText('Create')[0]);
     expect(buttonOnClick).toHaveBeenCalledTimes(1);
@@ -158,24 +155,24 @@ describe('Tearsheet', () => {
       </TearsheetNarrow>
     );
 
-    const tearsheet = document.querySelector(`div.${expPrefix}-tearsheet`);
+    const tearsheet = document.querySelector(`div.${pkgPrefix}-tearsheet`);
 
     expect(tearsheet).not.toBeNull();
     expect(tearsheet.classList.contains(classNames[0])).toBe(true);
     expect(tearsheet.classList.contains(classNames[1])).toBe(true);
     expect(
-      document.querySelectorAll(`.${expPrefix}-tearsheet--header`)
+      document.querySelectorAll(`.${pkgPrefix}-tearsheet--header`)
     ).toHaveLength(1);
     expect(screen.getAllByTitle(closeIconDescription)).toHaveLength(1);
     expect(screen.getAllByText(label)).toHaveLength(1);
     expect(screen.getAllByText(title)).toHaveLength(1);
     expect(screen.getAllByText(/^Lorem ipsum dolor sit amet/)).toHaveLength(1);
     expect(
-      document.querySelectorAll(`.${expPrefix}-tearsheet--main`)
+      document.querySelectorAll(`.${pkgPrefix}-tearsheet--main`)
     ).toHaveLength(1);
     expect(screen.getAllByText('Main content')).toHaveLength(1);
     expect(
-      document.querySelectorAll(`.${expPrefix}-tearsheet--buttons`)
+      document.querySelectorAll(`.${pkgPrefix}-tearsheet--buttons`)
     ).toHaveLength(1);
     userEvent.click(screen.getAllByText('Create')[0]);
     expect(buttonOnClick).toHaveBeenCalledTimes(1);

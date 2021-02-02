@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2020
+// Copyright IBM Corp. 2020, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -12,6 +12,7 @@
 
 @import '@carbon/themes/scss/tokens';
 
+@import 'carbon-components/scss/globals/scss/helper-mixins';
 @import 'carbon-components/scss/globals/scss/vars';
 
 @import 'carbon-components/scss/components/button/button';
@@ -26,6 +27,10 @@
   .#{$security--prefix}--combo-button {
     position: relative;
     display: inline-flex;
+  }
+
+  .#{$security--prefix}--combo-button__action {
+    @include text-overflow;
   }
 
   .#{$security--prefix}--combo-button__overflow-menu {

@@ -11,10 +11,13 @@
 @import 'carbon-components/scss/globals/scss/vars';
 @import '@carbon/type/scss/type';
 @import '@carbon/layout/scss/layout';
-@import '@carbon/grid/scss/grid';
+@import 'carbon-components/scss/globals/grid/grid';
 @import '@carbon/themes/scss/themes';
 @import '@carbon/motion/scss/motion';
 
 // @import '~@carbon/themes/scss/themes';
 // $carbon--theme: $carbon--theme--white;
 // @include carbon--theme();
+
+// to distinguish it from project settings
+$carbon-prefix: $prefix;

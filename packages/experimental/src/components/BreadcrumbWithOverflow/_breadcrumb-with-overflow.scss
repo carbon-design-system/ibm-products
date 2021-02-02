@@ -10,7 +10,7 @@
 @import 'carbon-components/scss/components/breadcrumb/breadcrumb';
 @import 'carbon-components/scss/components/overflow-menu/overflow-menu';
 
-$block-class: #{$exp-prefix}-breadcrumb-with-overflow;
+$block-class: #{$pkg-prefix}-breadcrumb-with-overflow;
 
 .#{$block-class} {
   width: 100%;
@@ -31,7 +31,7 @@ $block-class: #{$exp-prefix}-breadcrumb-with-overflow;
   display: inline-flex; // needed to register a width
 }
 
-.#{$block-class}--breadcrumb-container .#{$prefix}--breadcrumb {
+.#{$block-class}--breadcrumb-container .#{$carbon-prefix}--breadcrumb {
   flex-wrap: nowrap;
 }
 
@@ -46,8 +46,8 @@ $block-class: #{$exp-prefix}-breadcrumb-with-overflow;
   pointer-events: none;
 }
 
-.#{$block-class}--sizing-breadcrumb .#{$prefix}--overflow-menu,
-.#{$prefix}--breadcrumb-item .#{$prefix}--overflow-menu {
+.#{$block-class}--sizing-breadcrumb .#{$carbon-prefix}--overflow-menu,
+.#{$carbon-prefix}--breadcrumb-item .#{$carbon-prefix}--overflow-menu {
   box-sizing: content-box;
   height: $spacing-05;
   margin-right: calc(-1 * #{$spacing-03});
@@ -55,10 +55,12 @@ $block-class: #{$exp-prefix}-breadcrumb-with-overflow;
   padding-top: $spacing-01;
 }
 
-.#{$block-class}--sizing-breadcrumb .#{$prefix}--breadcrumb-item:last-child {
+.#{$block-class}--sizing-breadcrumb
+  .#{$carbon-prefix}--breadcrumb-item:last-child {
   margin-right: $spacing-03;
 }
 
-.#{$block-class}--sizing-breadcrumb:last-child .#{$prefix}--breadcrumb-item {
+.#{$block-class}--sizing-breadcrumb:last-child
+  .#{$carbon-prefix}--breadcrumb-item {
   margin-right: 0;
 }

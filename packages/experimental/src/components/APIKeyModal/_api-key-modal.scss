@@ -10,13 +10,17 @@
   min-height: 3rem; // increasing the height from 2 to 3 resolves an issue where the scroll bar bounces
 }
 
+.#{$pkg-prefix}--apikey-modal .bx--modal-content {
+  padding-right: $spacing-05;
+}
+
+.#{$pkg-prefix}--apikey-modal .bx--text-input-wrapper {
+  margin-bottom: $spacing-03;
+}
+
 .#{$pkg-prefix}--apikey-modal-body {
   margin-bottom: $spacing-05;
   padding-right: 20%;
-}
-
-.#{$pkg-prefix}--apikey-modal-input {
-  margin-bottom: $spacing-05;
 }
 
 .#{$pkg-prefix}--apikey-modal-messaging {
@@ -31,8 +35,4 @@
 
 .#{$pkg-prefix}--apikey-modal-messaging-text > * {
   font: inherit;
-}
-
-.#{$pkg-prefix}--apikey-modal .bx--modal-content {
-  padding-right: $spacing-05;
 }

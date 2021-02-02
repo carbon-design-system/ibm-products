@@ -60,6 +60,7 @@ Array [
             data-ui-id="IdePageHeader--tabs-container"
           >
             <Tabs
+              scrollIntoView={true}
               selected={0}
               selectionMode="automatic"
               type="default"
@@ -177,6 +178,7 @@ Array [
             data-ui-id="IdePageHeader--tabs-container"
           >
             <Tabs
+              scrollIntoView={true}
               selected={0}
               selectionMode="automatic"
               type="default"

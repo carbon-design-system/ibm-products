@@ -1,10 +1,13 @@
 @import '@carbon/colors/scss/colors';
+@import '@carbon/type/scss/type';
+@import 'carbon-components/scss/globals/scss/spacing';
+@import 'carbon-components/scss/globals/scss/motion';
 
 .web-terminal {
   position: fixed;
   top: 2.9375rem;
   right: 0;
-  width: 584px;
+  width: 36.5rem;
   height: calc(100vh - 2.9375rem);
   background-color: $gray-100;
 }
@@ -14,7 +17,6 @@
   align-items: center;
   justify-content: space-between;
   height: 3rem;
-  padding: 0 1rem;
   background-color: $gray-90;
 }
 
@@ -23,6 +25,55 @@
   fill: $gray-10;
 }
 
-.web-terminal__actions .web-terminal__bar-icon {
-  margin-right: 1rem;
+.web-terminal__bar-icon svg {
+  fill: $gray-10;
+}
+
+.web-terminal__bar-icon-container {
+  position: relative;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.web-terminal__bar-icon-dropdown {
+  position: absolute;
+  top: 3rem;
+  left: 0;
+  width: 10rem;
+  background-color: #3d3d3d;
+
+  transform: translateY(-1rem);
+  visibility: hidden;
+  opacity: 0;
+  transition: all carbon--motion(standard, productive) $duration--fast-02;
+}
+
+.web-terminal__bar-icon-container:hover .web-terminal__bar-icon-dropdown {
+  transform: translateY(0);
+  visibility: visible;
+  opacity: 1;
+}
+
+.web-terminal__bar-icon-dropdown-link {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 2.125rem;
+  padding-left: 1rem;
+  color: #bebebe;
+  text-decoration: none;
+  cursor: pointer;
+  @include carbon--type-style('body-short-01');
+
+  transition: all carbon--motion(standard, productive) $duration--fast-02;
+}
+
+.web-terminal__bar-icon-dropdown-link:hover {
+  color: #f3f3f3;
+  background-color: #4c4c4c;
+}
+
+.web-terminal__close-container {
+  padding: $spacing-04;
+  cursor: pointer;
 }

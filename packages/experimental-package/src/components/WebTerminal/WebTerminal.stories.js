@@ -11,6 +11,33 @@ import { Navigation } from './preview-components';
 
 import styles from './scss/_storybook-styles.scss';
 
+const documentationLinks = [
+  {
+    label: 'BX/ICP docs',
+    href: '#',
+    onClick: () => console.log('clicked'),
+    openInNewTab: false,
+  },
+  {
+    label: 'Kube docs',
+    href: '#',
+    onClick: () => console.log('clicked'),
+    openInNewTab: true,
+  },
+  {
+    label: 'Docker docs',
+    href: '#',
+    onClick: () => console.log('clicked'),
+    openInNewTab: true,
+  },
+  {
+    label: 'Helm docs',
+    href: '#',
+    onClick: () => console.log('clicked'),
+    openInNewTab: true,
+  },
+];
+
 const Template = (args) => {
   const [isTerminalOpen, setIsTerminalOpen] = useState(true);
 
@@ -29,6 +56,7 @@ const Template = (args) => {
       <WebTerminal
         open={isTerminalOpen}
         closeTerminal={closeTerminal}
+        documentationLinks={documentationLinks}
         {...args}
       />
     </div>

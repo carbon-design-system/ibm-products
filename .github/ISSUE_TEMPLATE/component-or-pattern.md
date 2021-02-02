@@ -12,7 +12,7 @@ labels: 'status: needs triage'
 
 > Link to design guidance.
 
-#### Additional assets
+### Additional assets
 
 > Link to additional assets, for example, existing code, images, and
 > prototypes - provide as much useful information as you can.
@@ -28,7 +28,7 @@ labels: 'status: needs triage'
 - Development peer reviewer(s) -
 - Sponsor user(s) -
 
-#### Definition of done
+### Definition of done
 
 - [ ] Implementation follows the requirements in
       [User Experience Standards Adopter Guide](https://github.ibm.com/IBMPrivateCloud/BedrockServices/blob/master/AdopterGuides/CommonUXStandardsAdoptionGuide.md#user-experience--user-interface-uxui-standards)

@@ -1,0 +1,34 @@
+<!-- `position:fixed` cause rendering issues, so do not render the modal -->
+
+import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
+import { RemoveDeleteModal } from './RemoveDeleteModal';
+
+# RemoveDeleteModal
+
+[Usage guidelines](https://www.carbondesignsystem.com/community/patterns/remove-pattern/)
+&nbsp;|&nbsp;
+[Carbon Modal usage guidelines](https://www.carbondesignsystem.com/components/modal/usage)
+&nbsp;|&nbsp;
+[Carbon Modal documentation](https://react.carbondesignsystem.com/?path=/docs/modal--default)
+
+## Overview
+
+The `RemoveDeleteModal` component is simply a wrapper of the Carbon `Modal`
+component. For additional usage guidelines and documentation please refer to the
+links above.
+
+<Preview>
+  <Story id="experimental-RemoveDeleteModal--with-state-manager" />
+</Preview>
+
+## High impact vs medium impact
+
+The `RemoveDeleteModal` covers what is known as high impact and medium impact
+deleting. Enabling `textConfirmation` enables what would be considered the high
+impact state of the modal. For additional information on differentiating between
+delete / remove and low / medium / high impact please refer to the
+[design usage guidelines](https://www.carbondesignsystem.com/community/patterns/remove-pattern/#delete-remove-variations).
+
+## Component API
+
+<Props />

@@ -37,6 +37,7 @@ module.exports = {
     '/build/',
     'e2e',
     'examples',
+    'templates',
     '/umd/',
   ],
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],

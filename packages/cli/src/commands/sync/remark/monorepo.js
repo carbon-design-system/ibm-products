@@ -10,6 +10,9 @@
 const fs = require('fs-extra');
 const path = require('path');
 
+const REPO_URL_BASE =
+  'https://github.com/carbon-design-system/ibm-cloud-cognitive';
+
 function monorepo() {
   async function transformer(tree, file) {
     const { cwd } = file;
@@ -365,11 +368,27 @@ function createContributing() {
         {
           type: 'link',
           title: null,
-          url: '/.github/CONTRIBUTING.md',
+          url: `${REPO_URL_BASE}/blob/master/.github/CONTRIBUTING.md`,
           children: [
             {
               type: 'text',
               value: 'Contributing Guide',
+            },
+          ],
+        },
+        {
+          type: 'text',
+          value: ' and ',
+        },
+        {
+          type: 'link',
+          title: null,
+          url:
+            'https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md',
+          children: [
+            {
+              type: 'text',
+              value: "Carbon's Developer Handbook",
             },
           ],
         },
@@ -404,7 +423,7 @@ function createLicense() {
         {
           type: 'link',
           title: null,
-          url: '/LICENSE',
+          url: `${REPO_URL_BASE}/blob/master/LICENSE`,
           children: [
             {
               type: 'text',

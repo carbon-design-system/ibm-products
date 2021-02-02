@@ -1,31 +1,32 @@
 {
   "name": "jest-config",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.3.2",
   "license": "Apache-2.0",
   "main": "index.js",
-  "repository": "https://github.com/carbon-design-system/ibm-cloud-paks/tree/master/packages/jest-config",
-  "bugs": "https://github.com/carbon-design-system/ibm-cloud-paks/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/ibm-cloud-cognitive.git",
+    "directory": "packages/jest-config"
+  },
+  "bugs": "https://github.com/carbon-design-system/ibm-cloud-cognitive/issues",
   "keywords": [
     "carbon",
     "carbon design system",
-    "carbon community"
+    "carbon community",
+    "carbon for cloud & cognitive"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
   "peerDependencies": {
-    "jest": "^26.0.1"
+    "jest": "^26.6.3"
   },
   "dependencies": {
-    "@babel/core": "^7.10.2",
-    "axe-core": "^3.5.4",
-    "babel-jest": "^26.0.1",
-    "babel-preset-ibm-cloud-paks": "^0.0.0",
+    "@babel/core": "^7.12.10",
+    "@testing-library/jest-dom": "^5.11.6",
+    "accessibility-checker": "^3.1.1",
+    "axe-core": "^4.1.1",
+    "babel-jest": "^26.6.3",
+    "babel-preset-ibm-cloud-cognitive": "^0.3.0",
     "chalk": "^4.1.0",
-    "jest-circus": "^26.0.1"
-  },
-  "devDependencies": {
-    "jest": "^26.0.1"
+    "jest-circus": "^26.6.3"
   }
 }

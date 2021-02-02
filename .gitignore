@@ -2,11 +2,13 @@
 /build
 packages/*/build/
 packages/*/examples/*/build/
+packages/*/scss
 es
 lib
 dist
 umd
 css
+results
 storybook-static
 
 # Config files

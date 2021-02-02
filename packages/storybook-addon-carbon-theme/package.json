@@ -1,0 +1,56 @@
+{
+  "name": "@carbon/storybook-addon-theme",
+  "description": "Carbon theme switcher for Storybook",
+  "version": "0.3.0",
+  "license": "Apache-2.0",
+  "main": "dist/react.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/ibm-cloud-cognitive.git",
+    "directory": "packages/storybook-addon-carbon-theme"
+  },
+  "bugs": "https://github.com/carbon-design-system/ibm-cloud-cognitive/issues",
+  "homepage": "https://github.com/storybookjs/storybook#readme",
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "*.js"
+  ],
+  "keywords": [
+    "addon",
+    "carbon",
+    "theme",
+    "storybook",
+    "carbon design system",
+    "carbon community",
+    "carbon for cloud & cognitive"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run clean && babel src --out-dir dist -s",
+    "prepare": "npm run build"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "vue": "*"
+  },
+  "dependencies": {
+    "@storybook/addons": "5.3.19",
+    "@storybook/api": "5.3.19",
+    "@storybook/client-api": "5.3.19",
+    "@storybook/client-logger": "5.3.19",
+    "@storybook/components": "5.3.19",
+    "@storybook/core-events": "5.3.19",
+    "@storybook/theming": "5.3.19",
+    "core-js": "^3.8.1",
+    "global": "^4.4.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-react": "^7.12.10"
+  }
+}

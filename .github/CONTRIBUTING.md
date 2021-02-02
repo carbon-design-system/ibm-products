@@ -6,22 +6,24 @@ Also refer to
 ## 1. Fork the repo
 
 Go to
-[IBM Cloud Pak's repository on GitHub](https://github.com/carbon-design-system/ibm-cloud-paks)
+[Carbon for Cloud & Cognitive's repository on GitHub](https://github.com/carbon-design-system/ibm-cloud-cognitive)
 and [fork the repo](https://help.github.com/articles/fork-a-repo/),
 [syncing with the original repo](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo#keep-your-fork-synced).
 
 ## 2. Work in a branch
 
-When contributing to IBM Cloud Paks, your work should always be done in a
+When contributing to Carbon for Cloud & Cognitive, your work should always be
+done in a
 [branch off your fork](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-and-deleting-branches-within-your-repository).
 
 ## 3. Start the development server
 
 1. To install the project's dependencies, from the root directory of your fork,
    run `yarn --offline`
-2. Navigate to the core package in your command line by entering
-   `cd packages/core`
-3. To get your development server running and to start coding, run `yarn start`
+2. To scaffold a new component or pattern, run `yarn generate ComponentName`,
+   where `ComponentName` is the name of the component or pattern
+3. To get your development server running and to start coding, run
+   `yarn storybook`
 
 This will start a development server where you can see any changes you are
 making to components in our Storybook.
@@ -35,13 +37,34 @@ system is set up to automatically bundle your additions / changes. Visit
 [`http://localhost:3000`](http://localhost:3000) to see the changes happen on
 the fly.
 
-## 4. Make a pull request
+## 4. Test your JavaScript code
+
+If you're contributing to our JavaScript code, test your changes by running
+`yarn test`.
+
+New tests are written in
+[React Testing Library](https://testing-library.com/docs/react-testing-library/intro),
+with [Enzyme](https://enzymejs.github.io/enzyme) available for migration
+compatibility, and follow the
+[user experience standards adopter guide](https://github.ibm.com/IBMPrivateCloud/BedrockServices/blob/master/AdopterGuides/CommonUXStandardsAdoptionGuide.md#testing).
+
+## 5. Make a pull request
 
 **Note:** Before you make a pull request,
-[search the issues](https://github.com/carbon-design-system/ibm-cloud-paks/issues)
+[search the issues](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues)
 to see if a similar issue has already been submitted. If a similar issue has
 been submitted, assign yourself or ask to be assigned to the issue by posting a
 comment. If the issue does not exist, please make a new issue.
+
+Refer to
+[contributing in Carbon](https://github.com/carbon-design-system/carbon/blob/master/.github/CONTRIBUTING.md#what-is-the-contribution-process)
+for some contribution quick tips.
+
+According to a
+[SmartBear study of a Cisco Systems programming team](https://smartbear.com/learn/code-review/best-practices-for-peer-code-review),
+an effective pull request should not have more than 400 lines of code changed,
+so do not create one massive PR if it can be
+[scoped down into smaller, focused PRs](https://www.netlify.com/blog/2020/03/31/how-to-scope-down-prs/).
 
 When you're at a good stopping place and you're ready for feedback from other
 contributors and maintainers,
@@ -56,7 +79,7 @@ information about how to write your commit message.
 Also refer to
 [How to write the perfect pull request](https://github.blog/2015-01-21-how-to-write-the-perfect-pull-request).
 
-## 5. Updating a pull request
+## 6. Updating a pull request
 
 Stay up to date with the activity in your pull request. Maintainers will be
 reviewing your work and making comments, asking questions, and suggesting

@@ -1,0 +1,49 @@
+//
+// Copyright IBM Corp. 2020, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+@import './index';
+
+@import 'carbon-components/scss/components/button/button';
+@import 'carbon-components/scss/components/content-switcher/content-switcher';
+@import 'carbon-components/scss/components/tabs/tabs';
+
+@import '../TagSet/index';
+@import '../BreadcrumbWithOverflow/index';
+
+.sbdocs .page-header-stories__viewport {
+  max-height: 500px;
+  overflow-y: auto;
+  color: $text-01;
+  background-color: $ui-background;
+  box-shadow: 0 0 4px 1px $ui-03;
+}
+
+.page-header-stories__content-switcher {
+  justify-content: flex-start;
+}
+
+.page-header-stories__content-switcher button {
+  width: auto;
+}
+
+.page-header-stories__dummy-content {
+  margin-top: $spacing-05;
+}
+
+.page-header-stories__dummy-content-block {
+  height: 120vh;
+  background: $ui-01;
+  background-clip: content-box;
+}
+
+.page-header-stories__dummy-content-text {
+  padding: $spacing-05;
+}
+
+.page-header-stories__status-icon {
+  vertical-align: middle;
+  fill: $support-02;
+}

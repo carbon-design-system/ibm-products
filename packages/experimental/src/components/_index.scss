@@ -1,0 +1,21 @@
+//
+// Copyright IBM Corp. 2020, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Package all scss files here for those that want them all bundled up.
+
+@import './AboutModal/index';
+@import './BreadcrumbWithOverflow/index';
+@import './EmptyState/index';
+@import './ExampleComponent/index';
+@import './ImportModal/index';
+@import './ModifiedTabs/index';
+@import './Notifications/index';
+@import './SidePanel/index';
+@import './PageHeader/index';
+@import './RemoveDeleteModal/index';
+@import './TagSet/index';
+@import './Tearsheet/index';

@@ -1,30 +1,31 @@
 /**
- * Copyright IBM Corp. 2020, 2020
+ * Copyright IBM Corp. 2020, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { action } from '@storybook/addon-actions';
+import CloudApp16 from '@carbon/icons-react/lib/cloud-app/16';
 import React from 'react';
 
 import { sectionTitle } from '../../config';
-
 import { ComboButton, ComboButtonItem } from '..';
 
-import styles from './_index.scss';
+import styles from './_combo-button.scss';
+
+export default {
+  title: `${sectionTitle}/${ComboButton.name}`,
+  component: ComboButton,
+  subcomponents: {
+    ComboButtonItem,
+  },
+  parameters: { styles },
+};
 
 export const Default = () => (
   <ComboButton>
-    <ComboButtonItem onClick={action('onClick')}>
-      ComboButtonItem 1
-    </ComboButtonItem>
-    <ComboButtonItem>ComboButtonItem 2</ComboButtonItem>
+    <ComboButtonItem>ComboButtonItem 1</ComboButtonItem>
+    <ComboButtonItem renderIcon={CloudApp16}>ComboButtonItem 2</ComboButtonItem>
+    <ComboButtonItem>ComboButtonItem 3</ComboButtonItem>
   </ComboButton>
 );
-
-export default {
-  title: `${sectionTitle}/ComboButton`,
-  component: ComboButton,
-  parameters: { styles },
-};

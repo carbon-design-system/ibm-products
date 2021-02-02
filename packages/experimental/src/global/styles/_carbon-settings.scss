@@ -1,0 +1,23 @@
+//
+// Copyright IBM Corp. 2020, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../generated/feature-flags/feature-flags';
+
+// Here we import carbon settings for use in referring to colors, type, layout tokens etc.
+@import 'carbon-components/scss/globals/scss/vars';
+@import '@carbon/type/scss/type';
+@import '@carbon/layout/scss/layout';
+@import 'carbon-components/scss/globals/grid/grid';
+@import '@carbon/themes/scss/themes';
+@import '@carbon/motion/scss/motion';
+
+// @import '~@carbon/themes/scss/themes';
+// $carbon--theme: $carbon--theme--white;
+// @include carbon--theme();
+
+// to distinguish it from project settings
+$carbon-prefix: $prefix;

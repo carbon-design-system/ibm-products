@@ -1,17 +1,56 @@
 {
-  "name": "@carbon/cloud-pak-for-security",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@carbon/ibm-cloud-cognitive-security",
+  "description": "Carbon for Cloud & Cognitive IBM Security UI components",
+  "version": "0.4.0",
   "license": "Apache-2.0",
-  "repository": "https://github.com/carbon-design-system/ibm-cloud-paks/tree/master/packages/security",
-  "bugs": "https://github.com/carbon-design-system/ibm-cloud-paks/issues",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/ibm-cloud-cognitive.git",
+    "directory": "packages/security"
+  },
+  "bugs": "https://github.com/carbon-design-system/ibm-cloud-cognitive/issues",
+  "files": [
+    "css",
+    "es",
+    "lib",
+    "scss"
+  ],
   "keywords": [
     "carbon",
     "carbon design system",
     "carbon community",
-    "ibm cloud pak for security"
+    "carbon for cloud & cognitive",
+    "ibm security"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "npm-run-all clean -p build:*",
+    "build:css": "bundler bundle:scss src/index.scss",
+    "build:js": "node scripts/build",
+    "build:scss": "copyfiles 'src/**/*.scss' scss -u 1",
+    "clean": "rimraf css es lib scss",
+    "test": "run-p test:*",
+    "test:js": "jest",
+    "test:scss": "bundler check 'src/**/*.scss'"
+  },
   "dependencies": {
-    "@carbon/ibm-security": "^1.26.0"
+    "@babel/runtime": "^7.11.2",
+    "@carbon/icons-react": "^10.23.0",
+    "@carbon/import-once": "^10.3.0",
+    "@carbon/layout": "^10.16.0",
+    "@carbon/themes": "^10.25.0",
+    "carbon-components": "^10.26.0",
+    "carbon-components-react": "^7.26.0",
+    "carbon-icons": "^7.0.7",
+    "classnames": "^2.2.6"
+  },
+  "devDependencies": {
+    "@carbon/ibm-cloud-cognitive-core": "^0.6.1",
+    "jest-config": "^0.3.2",
+    "npm-run-all": "^4.1.5"
   }
 }

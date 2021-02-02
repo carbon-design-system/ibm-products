@@ -1,0 +1,187 @@
+//
+// Copyright IBM Corp. 2020, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+@import '@carbon/themes/scss/themes';
+@import 'carbon-components/scss/globals/scss/_vars.scss';
+@import 'carbon-components/scss/components/link/link';
+@import 'carbon-components/scss/components/modal/modal';
+@import 'carbon-components/scss/components/tabs/tabs';
+
+.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-scroll-enabled
+  .bx--modal-container {
+  height: 100%;
+  padding-bottom: $spacing-09;
+}
+
+.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-scroll-enabled
+  .bx--modal-container
+  .#{$pkg-prefix}-modal-content {
+  display: grid;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.#{$pkg-prefix}-modal-content
+  .bx--modal-content.#{$pkg-prefix}-about-modal-content {
+  margin-bottom: $layout-05;
+  padding-bottom: $layout-05;
+}
+
+.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-modal-content .bx--modal-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-light-theme {
+  @include carbon--theme($carbon--theme--white, true);
+}
+
+.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-light-theme
+  .bx--modal-footer {
+  @include carbon--theme($carbon--theme--g100, true);
+}
+
+.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-light-theme
+  .#{$pkg-prefix}-about-modal-tab-container {
+  @include carbon--theme($carbon--theme--white, true);
+}
+
+.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-dark-theme {
+  @include carbon--theme($carbon--theme--g100, true);
+}
+
+.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-dark-theme
+  .bx--modal-footer {
+  @include carbon--theme($carbon--theme--white, true);
+}
+
+.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-dark-theme
+  .#{$pkg-prefix}-about-modal-tab-container {
+  @include carbon--theme($carbon--theme--g100, true);
+}
+
+.#{$pkg-prefix}-about-modal .bx--modal-footer {
+  position: relative;
+  flex-direction: column;
+  grid-row: auto;
+  justify-content: center;
+  padding-left: $spacing-05;
+  background-color: $ui-background;
+}
+
+.#{$pkg-prefix}-about-modal {
+  background-color: $ui-background;
+  .bx--modal-content.#{$pkg-prefix}-about-modal-content {
+    @include carbon--type-style('body-short-02');
+
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  .#{$pkg-prefix}-about-modal-product-logo {
+    max-width: 6rem;
+    margin: $spacing-05;
+  }
+  .#{$pkg-prefix}-about-modal-version-label,
+  .#{$pkg-prefix}-about-modal-version-number {
+    @include carbon--type-style('body-short-01');
+  }
+  .#{$pkg-prefix}-about-modal-version-label {
+    @include carbon--font-weight('semibold');
+  }
+  .#{$pkg-prefix}-about-modal-links-container {
+    margin-top: $spacing-05;
+  }
+  .#{$pkg-prefix}-about-modal-link-divider {
+    margin: 0 $spacing-03;
+  }
+  .#{$pkg-prefix}-about-modal-scroll-gradient {
+    position: absolute;
+    bottom: $layout-05;
+    width: 100%;
+    height: 4rem;
+    background: linear-gradient(to bottom, transparent, $ui-01 35%);
+  }
+  .#{$pkg-prefix}-about-modal-tech-used-item {
+    width: 2.25rem;
+    height: 2.25rem;
+    margin-right: $spacing-04;
+    object-fit: contain;
+  }
+  .#{$pkg-prefix}-about-modal-tab-content-flex {
+    display: flex;
+    align-items: center;
+    height: inherit;
+    &.#{$pkg-prefix}-about-modal-tab-content-version-flex {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+  }
+  .#{$pkg-prefix}-about-modal-tab-container {
+    position: relative;
+    /* stylelint-disable-next-line carbon/layout-token-use */
+    bottom: carbon--rem(20px);
+  }
+}
+
+.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-with-tabs
+  .bx--modal-content.exp-about-modal-content {
+  margin-bottom: $layout-06;
+}
+
+.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-with-tabs
+  .bx--tab-content {
+  position: relative;
+  /* stylelint-disable-next-line carbon/layout-token-use */
+  bottom: carbon--rem(20px);
+  height: $layout-05;
+  min-height: $layout-05;
+  padding: 0;
+}
+
+.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-content,
+.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-legal-text,
+.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-copyright-text,
+.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-version-label,
+.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-version-number {
+  color: $text-01;
+}
+
+.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-legal-text,
+.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-copyright-text {
+  margin-top: $spacing-07;
+  color: $text-03;
+}
+
+.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-copyright-text {
+  margin-top: $spacing-05;
+}
+
+.#{$pkg-prefix}-about-modal .bx--modal-header,
+.#{$pkg-prefix}-about-modal .bx--modal-content {
+  grid-row: auto;
+  padding: 0 $spacing-05;
+}
+
+.#{$pkg-prefix}-about-modal .bx--modal-header,
+.#{$pkg-prefix}-about-modal .bx--modal-content * {
+  max-width: 80%;
+}
+
+.#{$pkg-prefix}-about-modal .bx--modal-header {
+  margin-bottom: 0;
+  padding-bottom: $spacing-03;
+}
+
+.#{$pkg-prefix}-about-modal
+  .bx--modal-header
+  .bx--modal-header__heading.#{$pkg-prefix}-about-modal-title {
+  @include carbon--type-style('productive-heading-04');
+}

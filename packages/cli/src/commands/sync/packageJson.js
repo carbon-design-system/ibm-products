@@ -10,11 +10,16 @@
 const fs = require('fs-extra');
 const path = require('path');
 
-const REPO_URL_BASE = 'https://github.com/carbon-design-system/ibm-cloud-paks';
+const REPO_URL_BASE =
+  'https://github.com/carbon-design-system/ibm-cloud-cognitive';
 
-// This is our default set of keywords to include in each `package.json`
-// packageJson
-const DEFAULT_KEYWORDS = ['carbon', 'carbon design system', 'carbon community'];
+// Default set of keywords to include in each `package.json`.
+const DEFAULT_KEYWORDS = [
+  'carbon',
+  'carbon design system',
+  'carbon community',
+  'carbon for cloud & cognitive',
+];
 
 // We're going to use this in our `sortFields` method. The idea is that we want
 // our `package.json` packageJsons to be ordered in the order given in this array. To
@@ -68,10 +73,11 @@ function run(workspace) {
   const { directory, packages } = workspace;
   return Promise.all(
     packages.map(async ({ packageJsonPath, packageJson, packageFolder }) => {
-      let repository = `${REPO_URL_BASE}/tree/master/`;
-      repository += path.relative(directory, packageFolder);
-
-      packageJson.repository = repository;
+      packageJson.repository = {
+        type: 'git',
+        url: `${REPO_URL_BASE}.git`,
+        directory: path.relative(directory, packageFolder),
+      };
       packageJson.bugs = `${REPO_URL_BASE}/issues`;
       packageJson.license = 'Apache-2.0';
 

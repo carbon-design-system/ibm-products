@@ -33,7 +33,7 @@ function create(input, packageJson) {
       babel({
         exclude: /node_modules/,
         babelrc: false,
-        presets: [require.resolve('babel-preset-ibm-cloud-paks')],
+        presets: [require.resolve('babel-preset-ibm-cloud-cognitive')],
         babelHelpers: 'bundled',
       }),
       nodeResolve(),

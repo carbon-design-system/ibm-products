@@ -20,7 +20,7 @@ import {
 import { CheckmarkFilled16 } from '@carbon/icons-react';
 import { Lightning16, Bee24 } from '@carbon/icons-react';
 
-import { ActionBarItem } from './ActionBarItem';
+import { ActionBarItem } from '../ActionBar';
 import { PageActionItem } from './PageActionItem';
 import { PageHeader } from '.';
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.3...@carbon/ibm-cloud-cognitive-experimental@0.19.4) (2021-02-03)
+
+
+### Bug Fixes
+
+* responsivity in action bar column ([#307](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/307)) ([fcf8dc9](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/fcf8dc9c4d5d7a5d200c5c4f5b71dcfe177c615c))
+
+
+
+
+
 ## [0.19.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.2...@carbon/ibm-cloud-cognitive-experimental@0.19.3) (2021-02-02)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental

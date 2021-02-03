@@ -10,13 +10,13 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 
-import { expPrefix } from '../../global/js/settings';
+import { pkgPrefix } from '../../global/js/settings';
 
 import { ModalHeader, ModalBody } from 'carbon-components-react';
 
 import { TearsheetShell } from './TearsheetShell';
 
-const blockClass = `${expPrefix}-tearsheet`;
+const blockClass = `${pkgPrefix}-tearsheet`;
 
 export const Tearsheet = ({
   buttons,

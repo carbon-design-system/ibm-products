@@ -10,11 +10,11 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 
-import { expPrefix } from '../../global/js/settings';
+import { pkgPrefix } from '../../global/js/settings';
 
 import { Button } from 'carbon-components-react';
 
-const blockClass = `${expPrefix}-page-action-item`;
+const blockClass = `${pkgPrefix}-page-action-item`;
 
 export const PageActionItem = ({ children, ...props }) => {
   const className = cx([blockClass, props.className]);

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { bool, node, string } from 'prop-types';
+import { bool, func, node, object, oneOfType, string } from 'prop-types';
 import React from 'react';
 
 /**
@@ -22,11 +22,15 @@ ComboButtonItem.propTypes = {
 
   /** Provide an optional `href` for the `ComboButtonItem` to become an `a` element */
   href: string,
+
+  /** Provide an optional icon to render */
+  renderIcon: oneOfType([func, object]),
 };
 
 ComboButtonItem.defaultProps = {
   disabled: null,
   href: null,
+  renderIcon: null,
 };
 
 export { ComboButtonItem };

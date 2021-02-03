@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-security@0.4.0...@carbon/ibm-cloud-cognitive-security@0.4.1) (2021-02-03)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-security
+
+
+
+
+
+# [0.4.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-security@0.3.4...@carbon/ibm-cloud-cognitive-security@0.4.0) (2021-02-02)
+
+
+### Features
+
+* **combo-button:** add `renderIcon` support ([#299](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/299)) ([794deaf](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/794deafaf8d091f8c2761e835e693bcaaacf32c7))
+
+
+
+
+
 ## [0.3.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-security@0.3.3...@carbon/ibm-cloud-cognitive-security@0.3.4) (2021-01-29)
 
 

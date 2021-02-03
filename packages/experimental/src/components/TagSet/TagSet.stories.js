@@ -141,7 +141,7 @@ export default {
           {`.${blockClass}--show-all-modal { opacity: 0; visibility: hidden; /* prevents glitch storybook modal css load */ }`}
           ;
         </style>
-        <div className="tag-set-story__viewport">{story()}</div>
+        <div className={`${blockClass}--story__viewport`}>{story()}</div>
       </>
     ),
   ],

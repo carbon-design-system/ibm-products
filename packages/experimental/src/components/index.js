@@ -6,12 +6,13 @@
 //
 
 export { AboutModal } from './AboutModal';
+export { ActionBar, ActionBarItem } from './ActionBar';
 export { BreadcrumbWithOverflow } from './BreadcrumbWithOverflow';
 export { EmptyState } from './EmptyState';
 export { ExampleComponent } from './ExampleComponent';
 export { ImportModal } from './ImportModal';
 export { ModifiedTabs } from './ModifiedTabs';
-export { PageHeader, ActionBarItem, PageActionItem } from './PageHeader';
+export { PageHeader, PageActionItem } from './PageHeader';
 export { RemoveDeleteModal } from './RemoveDeleteModal';
 export { TagSet } from './TagSet';
 export { Tearsheet, TearsheetNarrow } from './Tearsheet';

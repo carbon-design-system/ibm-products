@@ -111,10 +111,10 @@ export const TagSet = ({
   const checkFullyVisibleTags = () => {
     // how many will fit?
     let willFit = 0;
-    let spaceAvailable = tagSet.current.clientWidth;
+    let spaceAvailable = tagSet.current.offsetWidth;
 
     for (let i in sizingTags.current) {
-      const tagWidth = sizingTags.current[i].clientWidth;
+      const tagWidth = sizingTags.current[i].offsetWidth;
       if (spaceAvailable >= tagWidth) {
         spaceAvailable -= tagWidth;
         willFit += 1;
@@ -124,10 +124,10 @@ export const TagSet = ({
     }
 
     if (willFit < sizingTags.current.length) {
-      while (willFit > 0 && spaceAvailable < overflowTag.current.clientWidth) {
+      while (willFit > 0 && spaceAvailable < overflowTag.current.offsetWidth) {
         // Highly unlikely any useful tag is smaller
         willFit -= 1; // remove one tag
-        spaceAvailable += sizingTags.current[willFit].clientWidth;
+        spaceAvailable += sizingTags.current[willFit].offsetWidth;
       }
     }
 

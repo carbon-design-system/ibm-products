@@ -58,7 +58,7 @@
     "rollup": "^2.35.1",
     "stylelint": "^13.8.0",
     "stylelint-config-carbon": "^1.2.0",
-    "stylelint-plugin-carbon-tokens": "^0.7.0"
+    "stylelint-plugin-carbon-tokens": "^0.8.1"
   },
   "eslintConfig": {
     "parser": "babel-eslint",

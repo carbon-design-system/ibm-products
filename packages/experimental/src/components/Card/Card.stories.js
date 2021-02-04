@@ -9,6 +9,7 @@ import React from 'react';
 import { Card } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import mdx from './Card.mdx';
+import { ArrowRight24 } from '@carbon/icons-react';
 
 export default {
   title: 'Experimental/Card',
@@ -22,58 +23,48 @@ export default {
 };
 
 const defaultProps = {
-  title: 'title',
-  subTitle: 'subTitle',
-  caption: 'caption',
+  label: 'Label',
+  title: 'Title',
+  onActionSubmit: () => {},
   children: (
     <p>
-      Velit venenatis neque proin curabitur luctus sociosqu suscipit! Volutpat
-      curabitur tellus vehicula volutpat ornare per lorem molestie. Laoreet
-      suscipit vitae vestibulum! Aliquet quis vel inceptos volutpat hac lacinia
-      massa eros nam suscipit. Vivamus congue diam commodo erat sollicitudin
-      ultricies platea aptent ipsum pellentesque. Quam lorem nam quisque
-      phasellus commodo rutrum? Ultrices amet luctus velit dis etiam. Facilisis
-      habitant habitasse dictumst metus potenti eleifend ante cras eleifend a
-      proin. Amet cum himenaeos viverra etiam facilisis natoque eleifend vitae
-      metus dolor morbi? Proin.
+      expressive card body content block. description inviting the user to take
+      action on the card.
     </p>
   ),
+  mediaUrl: 'https://via.placeholder.com/400x300/000/fff',
+  mediaAltText: 'alt text',
 };
 
 const Template = (opts) => {
   const { children, ...args } = opts;
   return (
-    <div className="bx--grid">
-      <div className="bx--row">
-        <div className="bx--col-lg-6">
-          <Card {...args}>{children}</Card>
-        </div>
-      </div>
+    <div className="card-demo-container">
+      <Card {...args}>{children}</Card>
     </div>
   );
 };
 
-export const Standard = Template.bind({});
-Standard.args = {
+export const ActionButton = Template.bind({});
+ActionButton.args = {
   ...defaultProps,
+  actionButtonText: 'Primary button',
 };
 
-export const ShortBody = Template.bind({});
-ShortBody.args = {
+export const ActionIcon = Template.bind({});
+ActionIcon.args = {
   ...defaultProps,
-  children: (
-    <p>
-      Velit venenatis neque proin curabitur luctus sociosqu suscipit! Volutpat
-      curabitur tellus vehicula volutpat ornare per lorem molestie. Laoreet
-      suscipit vitae vestibulum! Aliquet quis vel inceptos volutpat hac lacinia
-    </p>
-  ),
-  short: true,
+  actionIcon: ArrowRight24,
 };
 
-export const NoCaption = Template.bind({});
-NoCaption.args = {
+export const ClickableWithFunction = Template.bind({});
+ClickableWithFunction.args = {
   ...defaultProps,
-  subTitle: '',
-  caption: '',
+  onClick: () => {},
+};
+
+export const ClickableWithLink = Template.bind({});
+ClickableWithLink.args = {
+  ...defaultProps,
+  href: '/',
 };

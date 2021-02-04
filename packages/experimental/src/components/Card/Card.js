@@ -1,35 +1,96 @@
 import React from 'react';
 import cx from 'classnames';
+import { Button } from 'carbon-components-react';
+import PropTypes from 'prop-types';
+import { pkgPrefix } from '../../global/js/settings';
 
 export const Card = ({
-  title,
-  subTitle,
-  caption,
+  actionButtonFn,
+  actionButtonText,
+  actionIcon: ActionIcon,
+  actionIconFn,
   children,
-  short,
   className,
+  href,
+  label,
+  mediaAltText,
+  mediaUrl,
+  onClick,
+  title,
 }) => {
-  const doubleHeading = caption && title;
-  const cardClasses = cx('card', className);
-  const bodyClasses = cx('card-body', {
-    'card-body--short': short,
+  const cardClasses = cx({
+    [`${pkgPrefix}-card`]: true,
+    [`${pkgPrefix}-card--clickable`]: onClick,
+    className,
   });
-  const titleClasses = cx('card-title', {
-    'card-title--double': doubleHeading,
-  });
-  return (
+
+  const CardContent = (
     <div className={cardClasses}>
-      {doubleHeading && (
-        <p className="card-caption">
-          {caption} / {subTitle}
-        </p>
+      {mediaUrl && (
+        <img
+          className={`${pkgPrefix}-card-media`}
+          src={mediaUrl}
+          alt={mediaAltText}
+        />
       )}
-      <p className={titleClasses}>{title}</p>
-      <div className={bodyClasses}>{children}</div>
+      <div className={`${pkgPrefix}-card-header`}>
+        <p className={`${pkgPrefix}-card-label`}>{label}</p>
+        <p className={`${pkgPrefix}-card-title`}>{title}</p>
+      </div>
+      <div className={`${pkgPrefix}-card-body`}>{children}</div>
+      <div className={`${pkgPrefix}-card-actions`}>
+        {actionButtonText && (
+          <div className={`${pkgPrefix}-card-action-button`}>
+            <Button kind="primary" onClick={actionButtonFn}>
+              {actionButtonText}
+            </Button>
+          </div>
+        )}
+        {ActionIcon && (
+          <ActionIcon
+            className={`${pkgPrefix}-card-action-icon`}
+            onClick={actionIconFn}
+          />
+        )}
+      </div>
     </div>
+  );
+
+  if (!href) return CardContent;
+
+  return (
+    <a className={`${pkgPrefix}-card-link`} href={href}>
+      {CardContent}
+    </a>
   );
 };
 
-Card.propTypes = {};
+Card.propTypes = {
+  actionButtonFn: PropTypes.func,
+  actionButtonText: PropTypes.string,
+  actionIcon: PropTypes.object,
+  actionIconFn: PropTypes.func,
+  children: PropTypes.node,
+  className: PropTypes.string,
+  href: PropTypes.string,
+  label: PropTypes.string,
+  mediaAltText: PropTypes.string,
+  mediaUrl: PropTypes.string,
+  onClick: PropTypes.func,
+  title: PropTypes.string,
+};
 
-Card.defaultProps = {};
+Card.defaultProps = {
+  actionButtonFn: null,
+  actionButtonText: '',
+  actionIcon: null,
+  actionIconFn: null,
+  children: '',
+  className: '',
+  href: '',
+  label: '',
+  mediaAltText: '',
+  mediaUrl: '',
+  onClick: null,
+  title: '',
+};

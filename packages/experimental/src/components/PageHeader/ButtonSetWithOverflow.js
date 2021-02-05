@@ -81,12 +81,12 @@ export const ButtonSetWithOverflow = ({
     <ReactResizeDetector handleWidth={true} onResize={handleResize}>
       <div className={cx([blockClass, className])} ref={spaceAvailableRef}>
         <ReactResizeDetector onResize={handleButtonResize}>
-          <ButtonSet
-            className={`${blockClass}--button-container ${blockClass}--button-container--hidden`}
-            aria-hidden={true}
-            ref={sizingContainerRefSet}>
-            {children}
-          </ButtonSet>
+          <div
+            className={`${blockClass}--button-container ${blockClass}--button-container--hidden`}>
+            <ButtonSet aria-hidden={true} ref={sizingContainerRefSet}>
+              {children}
+            </ButtonSet>
+          </div>
         </ReactResizeDetector>
         <ReactResizeDetector onResize={handleButtonResize}>
           <div

@@ -11,6 +11,8 @@
 
 // TODO: @import(s) of all Carbon component styles used by DISPLAY_NAME
 
+// TODO: @import(s) of other related component styles used DISPLAY_NAME style files
+
 @include exports($name: STYLE_NAME) {
   /// @type String
   /// @access private

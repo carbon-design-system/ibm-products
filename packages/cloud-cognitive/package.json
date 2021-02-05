@@ -43,7 +43,6 @@
     "@carbon/ibm-cloud-cognitive-security": "^0.4.1"
   },
   "devDependencies": {
-    "@carbon/ibm-cloud-cognitive-core": "^0.6.1",
-    "@carbon/rollup-config": "^0.3.1"
+    "@carbon/ibm-cloud-cognitive-core": "^0.6.1"
   }
 }

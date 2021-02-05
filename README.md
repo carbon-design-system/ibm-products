@@ -49,10 +49,8 @@ This library supports the latest versions of:
 
 Today, the packages being hosted here are:
 
-- Automation
 - CD&AI
 - Security
-- Bedrock services --> common services
 - Experimental
 
 ## 🙌 Contributing

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import classNames from 'classnames';
+import cx from 'classnames';
 import { node, string } from 'prop-types';
 import React from 'react';
 
@@ -28,7 +28,7 @@ const blockClass = `${expPrefix}--STYLE_NAME`;
  */
 export const DISPLAY_NAME = ({ children, className, ...rest }) => {
   return (
-    <div className={classNames(blockClass, className)} {...rest}>
+    <div className={cxs(blockClass, className)} {...rest}>
       {children}
     </div>
   );

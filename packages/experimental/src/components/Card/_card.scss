@@ -1,0 +1,52 @@
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+
+@import 'carbon-components/scss/components/button/button';
+
+.#{$pkg-prefix}-card {
+  background: $ui-03;
+}
+
+.#{$pkg-prefix}-card--clickable {
+  cursor: pointer;
+}
+
+.#{$pkg-prefix}-card-media {
+  display: block;
+  max-width: 100%;
+}
+
+.#{$pkg-prefix}-card-header {
+  padding: $spacing-05;
+}
+
+.#{$pkg-prefix}-card-title {
+  @include carbon--type-style('productive-heading-03');
+}
+
+.#{$pkg-prefix}-card-label {
+  @include carbon--type-style('label-01');
+}
+
+.#{$pkg-prefix}-card-body {
+  @include carbon--type-style('body-short-01');
+
+  padding: $spacing-05;
+  padding-top: 0;
+}
+
+.#{$pkg-prefix}-card-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.#{$pkg-prefix}-card-action-icon {
+  margin: $spacing-05;
+  margin-top: 0;
+  cursor: pointer;
+}
+
+.#{$pkg-prefix}-card-link {
+  color: inherit;
+  text-decoration: inherit;
+}

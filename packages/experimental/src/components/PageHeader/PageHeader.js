@@ -47,6 +47,7 @@ export const PageHeader = ({
   title,
   titleIcon: TitleIcon,
 }) => {
+  const [hasActionBar, setHasActionBar] = useState(false);
   const [metrics, setMetrics] = useState({});
   const [scrollYValue, setScrollYValue] = useState(0);
   const [componentCssCustomProps, setComponentCssCustomProps] = useState({});
@@ -240,11 +241,10 @@ export const PageHeader = ({
     // Determine the location of the pageAction buttons
     setPageActionsInBreadcrumbRow(
       preCollapseTitleRow ||
-        (scrollYValue > metrics.titleRowSpaceAbove &&
-          actionBarItems !== undefined)
+        (scrollYValue > metrics.titleRowSpaceAbove && hasActionBar)
     );
   }, [
-    actionBarItems,
+    hasActionBar,
     metrics.breadcrumbRowSpaceBelow,
     metrics.titleRowSpaceAbove,
     preCollapseTitleRow,
@@ -352,6 +352,10 @@ export const PageHeader = ({
   }, [actionBarItems, breadcrumbItems]);
 
   useEffect(() => {
+    setHasActionBar(actionBarItems !== undefined);
+  }, [actionBarItems]);
+
+  useEffect(() => {
     // Determines the amount of space needed below the title
     let belowTitleSpace = 'default';
 
@@ -437,8 +441,7 @@ export const PageHeader = ({
           {hasBreadcrumbRow ? (
             <Row
               className={cx(`${blockClass}--breadcrumb-row`, {
-                [`${blockClass}--breadcrumb-row--with-actions`]:
-                  actionBarItems !== undefined,
+                [`${blockClass}--breadcrumb-row--with-actions`]: hasActionBar,
                 [`${blockClass}--breadcrumb-row--next-to-tabs`]: nextToTabsCheck(),
                 [`${blockClass}--breadcrumb-row--has-breadcrumbs`]: breadcrumbItems,
                 [`${blockClass}--breadcrumb-row--has-action-bar`]:
@@ -448,8 +451,7 @@ export const PageHeader = ({
                 <Column
                   className={cx(`${blockClass}--breadcrumb-column`, {
                     [`${blockClass}--breadcrumb-column--background`]:
-                      breadcrumbItems !== undefined ||
-                      actionBarItems !== undefined,
+                      breadcrumbItems !== undefined || hasActionBar,
                   })}>
                   {/* keeps actionBar right even if empty */}
 
@@ -492,7 +494,7 @@ export const PageHeader = ({
                     <div
                       className={`${blockClass}--action-bar-column-content`}
                       style={{ width: '100%' }}>
-                      {actionBarItems !== undefined ? (
+                      {hasActionBar ? (
                         // Investigate the responsive  behaviour or this and the title also fix the ActionBar Item and PageAction story css
                         <>
                           {pageActions && (
@@ -530,6 +532,7 @@ export const PageHeader = ({
                 `${blockClass}--title-row--spacing-below-${spacingBelowTitle}`,
                 {
                   [`${blockClass}--title-row--no-breadcrumb-row`]: !hasBreadcrumbRow,
+                  [`${blockClass}--title-row--under-action-bar`]: hasActionBar,
                   [`${blockClass}--title-row--sticky`]:
                     pageActions !== undefined &&
                     actionBarItems === undefined &&

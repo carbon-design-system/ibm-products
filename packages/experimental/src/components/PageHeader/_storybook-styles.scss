@@ -6,6 +6,8 @@
 //
 @import './index';
 
+@import 'carbon-components/scss/components/ui-shell/ui-shell';
+
 .sbdocs .page-header-stories__viewport {
   max-height: 500px;
   overflow-y: auto;
@@ -39,4 +41,16 @@
 .page-header-stories__status-icon {
   vertical-align: middle;
   fill: $support-02;
+}
+
+.page-header-stories__app {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.page-header-stories__content-container {
+  height: 100%;
+  padding: 0;
 }

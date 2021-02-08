@@ -84,12 +84,19 @@ export const BreadcrumbWithOverflow = ({
         // adding just 1 to childArray.length - displayCount
         child = childArray[index + 1];
       }
-      newOverflowBreadcrumbItems.push(React.cloneElement(child));
+      newOverflowBreadcrumbItems.push(
+        React.cloneElement(child, {
+          key: `displayed-breadcrumb-${internalId}-overflow-item-${index}`,
+        })
+      );
     }
 
     if (displayCount === 0) {
       newDisplayedBreadcrumbItems.push(
-        <BreadcrumbOverflowMenu overflowItems={newOverflowBreadcrumbItems} />
+        <BreadcrumbOverflowMenu
+          overflowItems={newOverflowBreadcrumbItems}
+          key={`$displayed-breadcrumb-${internalId}-overflow`}
+        />
       );
     } else {
       let displayed = 0;
@@ -120,6 +127,7 @@ export const BreadcrumbWithOverflow = ({
           newDisplayedBreadcrumbItems.push(
             <BreadcrumbOverflowMenu
               overflowItems={newOverflowBreadcrumbItems}
+              key={`$displayed-breadcrumb-${internalId}-overflow`}
             />
           );
         }

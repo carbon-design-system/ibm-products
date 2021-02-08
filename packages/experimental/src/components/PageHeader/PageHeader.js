@@ -40,6 +40,7 @@ export const PageHeader = ({
   keepBreadcrumbAndTabs,
   navigation,
   pageActions,
+  pageHeaderOffset,
   preCollapseTitleRow,
   subtitle,
   tags,
@@ -202,7 +203,6 @@ export const PageHeader = ({
         update.breadcrumbRowSpaceBelow = isNaN(val) ? 0 : val;
       }
       if (titleRowEl) {
-        // debugger;
         val = parseFloat(
           window.getComputedStyle(titleRowEl).getPropertyValue('margin-top'),
           10
@@ -215,6 +215,8 @@ export const PageHeader = ({
   };
 
   useEffect(() => {
+    // NOTE: The buffer is used to add space between the bottom of the header and the last content
+
     // No navigation and title row not pre-collapsed
     // and only one of tags or (subtitle or available space)
     setLastRowBufferActive(
@@ -256,7 +258,9 @@ export const PageHeader = ({
         ...prevCSSProps,
         [`--${blockClass}--height-px`]: `${metrics.headerHeight}px`,
         [`--${blockClass}--width-px`]: `${metrics.headerWidth}px`,
-        [`--${blockClass}--header-top`]: `${metrics.headerTopValue}px`,
+        [`--${blockClass}--header-top`]: `${
+          metrics.headerTopValue + pageHeaderOffset
+        }px`,
         [`--${blockClass}--breadcrumb-title-visibility`]:
           scrollYValue > 0 ? 'visible' : 'hidden',
         [`--${blockClass}--scroll`]: `${scrollYValue}`,
@@ -276,14 +280,15 @@ export const PageHeader = ({
         )}`,
         [`--${blockClass}--breadcrumb-row-width-px`]: `${metrics.breadcrumbRowWidth}px`,
         [`--${blockClass}--breadcrumb-top`]: `${Math.min(
-          0,
+          pageHeaderOffset,
           !keepBreadcrumbAndTabs && navigation
             ? metrics.headerHeight -
                 metrics.titleRowSpaceAbove -
                 metrics.navigationRowHeight -
                 metrics.breadcrumbRowHeight -
-                scrollYValue
-            : 0
+                scrollYValue +
+                pageHeaderOffset
+            : pageHeaderOffset
         )}px`,
       };
     });
@@ -299,6 +304,7 @@ export const PageHeader = ({
     metrics.headerTopValue,
     metrics.navigationRowHeight,
     navigation,
+    pageHeaderOffset,
     scrollYValue,
     tags,
   ]);
@@ -669,6 +675,11 @@ PageHeader.propTypes = {
    */
   pageActions: PropTypes.element,
   /**
+   * Number of pixels the page header sits from the top of the screen.
+   * The nature of the pageHeader makes this hard to measure
+   */
+  pageHeaderOffset: PropTypes.number,
+  /**
    * The title row typically starts below the breadcrumb row. This option
    * preCollapses it into the breadcrumb row.
    */
@@ -699,5 +710,6 @@ PageHeader.defaultProps = {
   background: false,
   className: '',
   keepBreadcrumbAndTabs: false,
+  pageHeaderOffset: 0,
   preCollapseTitleRow: false,
 };

@@ -458,9 +458,7 @@ export const PageHeader = ({
                   {breadcrumbItems !== undefined ? (
                     <BreadcrumbWithOverflow
                       className={`${blockClass}--breadcrumb`}
-                      noTrailingSlash={title !== undefined}
-                      // maxVisibleBreadcrumbItems={4}
-                    >
+                      noTrailingSlash={title !== undefined}>
                       {breadcrumbItems}
                       {title ? (
                         <BreadcrumbItem
@@ -522,9 +520,6 @@ export const PageHeader = ({
               </div>
             </Row>
           ) : null}
-
-          {/* - Reduce the width of breadcrumb row when no action bar
-- Swap page actions for breadcrumbRow ones when no action bar items. */}
 
           {!preCollapseTitleRow &&
           !(title === undefined && pageActions === undefined) ? (

@@ -66,3 +66,7 @@ $block-class: #{$pkg-prefix}-breadcrumb-with-overflow;
   .#{$carbon-prefix}--breadcrumb-item {
   margin-right: 0;
 }
+
+.#{$block-class}--displayed-breadcrumb {
+  overflow: hidden;
+}

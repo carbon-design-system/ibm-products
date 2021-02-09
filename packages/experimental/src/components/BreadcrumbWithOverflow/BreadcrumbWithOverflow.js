@@ -75,18 +75,14 @@ export const BreadcrumbWithOverflow = ({
     const newOverflowBreadcrumbItems = [];
     let child;
 
-    // overflow starts from item 1 not the end
-    for (let index = 0; index < childArray.length - displayCount; index++) {
-      if (displayCount === 0) {
-        // adding them all
-        child = childArray[index];
-      } else {
-        // adding just 1 to childArray.length - displayCount
-        child = childArray[index + 1];
-      }
+    // only display the last item if willFit === 1 otherwise always include the last first item
+    const overflowStart = displayCount > 1 ? 1 : 0;
+    for (let i = overflowStart; i < childArray.length - displayCount; i++) {
+      child = childArray[i];
+
       newOverflowBreadcrumbItems.push(
         React.cloneElement(child, {
-          key: `displayed-breadcrumb-${internalId}-overflow-item-${index}`,
+          key: `displayed-breadcrumb-${internalId}-overflow-item-${i}`,
         })
       );
     }
@@ -100,18 +96,32 @@ export const BreadcrumbWithOverflow = ({
       );
     } else {
       let displayed = 0;
-      for (
-        let index = 0;
-        displayed < displayCount && index < childArray.length;
-        index++
-      ) {
+      const addOverflow = () => {
+        newDisplayedBreadcrumbItems.push(
+          <BreadcrumbOverflowMenu
+            overflowItems={newOverflowBreadcrumbItems}
+            key={`$displayed-breadcrumb-${internalId}-overflow`}
+          />
+        );
+      };
+
+      for (let i = 0; displayed < displayCount && i < childArray.length; i++) {
+        // either last item only
+        // first plus displayCount - 1 from end
+        // or all
+        const index =
+          displayCount === 1
+            ? (i = childArray.length - 1)
+            : i === 1 && displayCount < childArray.length
+            ? (i += childArray.length - displayCount)
+            : i;
+
         displayed++;
 
-        if (index === 1 && displayCount < childArray.length) {
-          // we only want the last childArray.length - displayCount
-          index += childArray.length - displayCount;
+        if (displayCount === 1) {
+          // add overflow menu before only item
+          addOverflow();
         }
-
         child = childArray[index];
         newDisplayedBreadcrumbItems.push(
           React.cloneElement(child, {
@@ -122,14 +132,10 @@ export const BreadcrumbWithOverflow = ({
             key: `displayed-breadcrumb-${internalId.current}-${index}`,
           })
         );
-        if (index === 0 && displayCount < childArray.length) {
+
+        if (i === 0 && displayCount < childArray.length) {
           // add overflow menu after first item
-          newDisplayedBreadcrumbItems.push(
-            <BreadcrumbOverflowMenu
-              overflowItems={newOverflowBreadcrumbItems}
-              key={`$displayed-breadcrumb-${internalId}-overflow`}
-            />
-          );
+          addOverflow();
         }
       }
     }
@@ -161,10 +167,20 @@ export const BreadcrumbWithOverflow = ({
 
       let overflowWidth = breadcrumbWidthsIncludingMargin[0];
 
-      for (let i = 1; i < breadcrumbWidthsIncludingMargin.length; i++) {
-        // add all that will fit (ignoring overflow breadcrumb for now)
-        if (spaceAvailable >= breadcrumbWidthsIncludingMargin[i]) {
-          spaceAvailable -= breadcrumbWidthsIncludingMargin[i];
+      for (let i = 0; i < breadcrumbWidthsIncludingMargin.length - 1; i++) {
+        // 0 = add all that will fit (ignoring overflow breadcrumb for now)
+        // last = important
+        // first next most important
+        // then descending order
+        const index =
+          i === 0
+            ? breadcrumbWidthsIncludingMargin.length - 1
+            : i === 1
+            ? 1
+            : breadcrumbWidthsIncludingMargin.length - i;
+
+        if (spaceAvailable >= breadcrumbWidthsIncludingMargin[index]) {
+          spaceAvailable -= breadcrumbWidthsIncludingMargin[index];
           willFit += 1;
         } else {
           break;
@@ -172,7 +188,7 @@ export const BreadcrumbWithOverflow = ({
       }
 
       // address overflow breadcrumb if needed
-      if (willFit < sizingBreadcrumbItems.length - 1) {
+      if (willFit > 1 && willFit < sizingBreadcrumbItems.length - 1) {
         // -1 for overflow item
         for (let i = 1; willFit > 0 && spaceAvailable < overflowWidth; i++) {
           // Highly unlikely any useful breadcrumb-item is smaller

@@ -459,7 +459,8 @@ export const PageHeader = ({
                     <BreadcrumbWithOverflow
                       className={`${blockClass}--breadcrumb`}
                       noTrailingSlash={title !== undefined}
-                      maxVisibleBreadcrumbItems={4}>
+                      // maxVisibleBreadcrumbItems={4}
+                    >
                       {breadcrumbItems}
                       {title ? (
                         <BreadcrumbItem
@@ -491,9 +492,7 @@ export const PageHeader = ({
                   <ReactResizeDetector
                     handleWidth={true}
                     onResize={handleResizeActionBarColumn}>
-                    <div
-                      className={`${blockClass}--action-bar-column-content`}
-                      style={{ width: '100%' }}>
+                    <div className={`${blockClass}--action-bar-column-content`}>
                       {hasActionBar ? (
                         // Investigate the responsive  behaviour or this and the title also fix the ActionBar Item and PageAction story css
                         <>
@@ -523,6 +522,9 @@ export const PageHeader = ({
               </div>
             </Row>
           ) : null}
+
+          {/* - Reduce the width of breadcrumb row when no action bar
+- Swap page actions for breadcrumbRow ones when no action bar items. */}
 
           {!preCollapseTitleRow &&
           !(title === undefined && pageActions === undefined) ? (

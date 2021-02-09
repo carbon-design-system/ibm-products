@@ -76,8 +76,8 @@ $raised-z-index: 99;
   min-width: calc(
     100% +
       (
-        var(--exp-page-header--width-px) -
-          var(--exp-page-header--breadcrumb-row-width-px)
+        var(--#{$block-class}--width-px) -
+          var(--#{$block-class}--breadcrumb-row-width-px)
       ) / 2
   );
 }
@@ -216,7 +216,7 @@ $raised-z-index: 99;
     ); /* token linter does not support this form */
 
     visibility: var(--#{$block-class}--breadcrumb-title-visibility);
-    opacity: var(--exp-page-header--breadcrumb-title-opacity);
+    opacity: var(--#{$block-class}--breadcrumb-title-opacity);
   }
 }
 
@@ -252,11 +252,15 @@ $raised-z-index: 99;
 
 .#{$block-class}--title-row {
   z-index: $raised-z-index + 1;
-  margin-top: $layout-02;
+  margin-top: $spacing-02;
   margin-bottom: 0;
 
   @include carbon--breakpoint-up('md') {
     flex-wrap: nowrap; /* assume enough space */
+  }
+
+  &.#{$block-class}--title-row--under-action-bar {
+    margin-top: $spacing-06;
   }
 
   + .#{$block-class}--last-row-buffer--active {
@@ -285,7 +289,7 @@ $raised-z-index: 99;
 
   &.#{$block-class}--title-row--sticky {
     position: sticky;
-    top: 0;
+    top: var(--#{$block-class}--breadcrumb-top);
   }
 }
 
@@ -307,7 +311,7 @@ $raised-z-index: 99;
 }
 
 .#{$block-class}--title--fades {
-  opacity: calc(1 - var(--exp-page-header--breadcrumb-title-opacity));
+  opacity: calc(1 - var(--#{$block-class}--breadcrumb-title-opacity));
 }
 
 .#{$block-class}--title-icon {

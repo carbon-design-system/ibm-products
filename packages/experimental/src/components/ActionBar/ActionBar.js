@@ -11,8 +11,8 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import ReactResizeDetector from 'react-resize-detector';
 
-import { settings } from 'carbon-components';
-const { prefix } = settings;
+// import { settings } from 'carbon-components';
+// const { prefix } = settings;
 
 import { pkgPrefix } from '../../global/js/settings';
 import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';

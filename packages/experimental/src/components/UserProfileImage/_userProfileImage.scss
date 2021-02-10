@@ -1,0 +1,90 @@
+//
+// Copyright IBM Corp. 2020, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../global/styles/carbon-settings'; // goes before carbon imports as it affects how carbon is used.
+@import '../../global/styles/project-settings';
+
+@import 'carbon-components/scss/components/button/button';
+
+$block-class: #{$exp-prefix}-user-profile-avatar;
+
+.#{$block-class} {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: $icon-03;
+  text-transform: uppercase;
+  border-radius: 50%;  
+}
+
+.test {
+  width: 500px;
+  height: 500px;
+}
+
+.#{block-class}-photo--x-large {
+  width: 64px;
+  height: 64px;
+}
+
+.#{block-class}-photo--large {
+  width: 32px;
+  height: 32px;
+}
+
+.#{block-class}-photo--medium {
+  width: 24px;
+  height: 24px;
+}
+.#{block-class}-photo--small {
+  width: 20px;
+  height: 20px;
+}
+
+.#{block-class}-photo--x-small {
+  width: 16px;
+  height: 16px;
+}
+
+.#{$block-class}--x-large {
+  width: 64px;
+  height: 64px;
+  clip-path: circle(32px at center);
+  @include carbon--type-style('productive-heading-04');
+}
+
+.#{$block-class}--large {
+  width: 32px;
+  height: 32px;
+  clip-path: circle(16px at center);
+  @include carbon--type-style('body-short-01');
+}
+
+.#{$block-class}--medium {
+  width: 24px;
+  height: 24px;
+  clip-path: circle(12px at center);
+  @include carbon--type-style('label-01');
+  @include carbon--font-weight('semibold');
+}
+
+.#{$block-class}--small {
+  width: 20px;
+  height: 20px;
+  clip-path: circle(10px at center);
+  @include carbon--type-style('label-01');
+  @include carbon--font-weight('semibold');
+}
+
+.#{$block-class}--x-small {
+  width: 16px;
+  height: 16px;
+  clip-path: circle(8px at center);
+  @include carbon--type-style('label-01');
+  @include carbon--font-weight('semibold');
+}

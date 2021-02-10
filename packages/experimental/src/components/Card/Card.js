@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { pkgPrefix } from '../../global/js/settings';
 
 export const Card = ({
-  actionOnclick,
   actionButtonText,
   actionIcon: ActionIcon,
   pictogram: Pictogram,
@@ -15,6 +14,7 @@ export const Card = ({
   label,
   media,
   mediaPosition,
+  onActionClick,
   onClick,
   title,
 }) => {
@@ -42,7 +42,7 @@ export const Card = ({
         <div className={`${pkgPrefix}-card-actions`}>
           {actionButtonText && (
             <div className={`${pkgPrefix}-card-action-button`}>
-              <Button kind="primary" onClick={actionOnclick}>
+              <Button kind="primary" onClick={onActionClick}>
                 {actionButtonText}
               </Button>
             </div>
@@ -50,7 +50,7 @@ export const Card = ({
           {ActionIcon && (
             <ActionIcon
               className={`${pkgPrefix}-card-action-icon`}
-              onClick={actionOnclick}
+              onClick={onActionClick}
             />
           )}
         </div>
@@ -70,20 +70,19 @@ export const Card = ({
 Card.propTypes = {
   actionButtonText: PropTypes.string,
   actionIcon: PropTypes.object,
-  actionOnclick: PropTypes.func,
   children: PropTypes.node,
   className: PropTypes.string,
   href: PropTypes.string,
   label: PropTypes.string,
   media: PropTypes.node,
   mediaPosition: PropTypes.oneOf(['top', 'left']),
+  onActionClick: PropTypes.func,
   onClick: PropTypes.func,
   pictogram: PropTypes.object,
   title: PropTypes.string,
 };
 
 Card.defaultProps = {
-  actionOnclick: null,
   actionButtonText: '',
   actionIcon: null,
   children: '',
@@ -92,6 +91,7 @@ Card.defaultProps = {
   label: '',
   media: null,
   mediaPosition: 'top',
+  onActionClick: null,
   onClick: null,
   pictogram: null,
   title: '',

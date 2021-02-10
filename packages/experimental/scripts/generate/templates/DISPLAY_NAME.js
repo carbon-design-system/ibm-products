@@ -16,10 +16,7 @@ import React from 'react';
 /**
  * TODO: Add use of Carbon prefix if needed
  */
-// import { settings } from 'carbon-components';
-// const { prefix } = settings;
-
-import { expPrefix } from '../../global/js/settings';
+import { expPrefix /*, carbonPrefix */ } from '../../global/js/settings';
 
 const blockClass = `${expPrefix}--STYLE_NAME`;
 
@@ -28,7 +25,7 @@ const blockClass = `${expPrefix}--STYLE_NAME`;
  */
 export const DISPLAY_NAME = ({ children, className, ...rest }) => {
   return (
-    <div className={cxs(blockClass, className)} {...rest}>
+    <div className={cx(blockClass, className)} {...rest}>
       {children}
     </div>
   );

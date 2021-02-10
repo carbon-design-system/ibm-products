@@ -8,6 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Link } from 'carbon-components-react';
+import illustrations from './EmptyIllustrations';
 
 import { expPrefix } from '../../global/js/settings';
 
@@ -32,6 +33,9 @@ export const EmptyState = ({
     'notfound',
     'notifications',
   ];
+
+  const illustrationSource = illustrations[illustrationTheme][illustration];
+
   return (
     <div className={`${expPrefix}-empty-state`}>
       {illustration && (
@@ -39,7 +43,7 @@ export const EmptyState = ({
           src={
             typeof illustration === 'string' &&
             defaultIllustrationOptions.includes(illustration)
-              ? require(`./assets/${illustrationTheme}/${illustration}.svg`)
+              ? illustrationSource
               : illustration
           }
           alt="Empty state illustration"

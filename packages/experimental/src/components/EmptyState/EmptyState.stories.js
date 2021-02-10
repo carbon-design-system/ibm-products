@@ -54,6 +54,12 @@ WithDarkModeIllustration.args = {
   illustrationTheme: 'dark',
 };
 
+export const WithDarkModeNotFoundIllustration = Template.bind({});
+WithDarkModeNotFoundIllustration.args = {
+  illustration: 'notfound',
+  illustrationTheme: 'dark',
+};
+
 export const WithCustomIllustration = Template.bind({});
 WithCustomIllustration.args = {
   illustration: CustomIllustration,

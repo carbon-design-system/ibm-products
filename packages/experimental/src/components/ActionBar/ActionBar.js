@@ -11,10 +11,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import ReactResizeDetector from 'react-resize-detector';
 
-// import { settings } from 'carbon-components';
-// const { prefix } = settings;
-
-import { pkgPrefix } from '../../global/js/settings';
+import { pkgPrefix /*, carbonPrefix */ } from '../../global/js/settings';
 import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import unwrapIfFragment from '../../global/js/utils/unwrap-if-fragment';

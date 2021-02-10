@@ -41,6 +41,7 @@ export const ActionBar = ({
           ariaLabel={null}
           className={`${blockClass}--overflow-menu`}
           direction="bottom"
+          flipped
           menuOptionsClass={`${blockClass}--options`}>
           {overflowItems.map((item, index) => {
             // This uses a copy of a menu item option
@@ -52,11 +53,11 @@ export const ActionBar = ({
                 key={`${blockClass}-overflow-${internalId.current}-${index}`}
                 itemText={
                   <div
-                    className={`${prefix}--tooltip__trigger ${prefix}--tooltip--a11y ${prefix}--tooltip--left ${prefix}--tooltip--align-center`}
-                    aria-describedby={`${internalId}--icon-description`}>
+                    className={`${blockClass}--overflow-menu-item-content`}
+                    aria-describedby={`${internalId}--overflow-menu-item-label`}>
                     <span
-                      className={`${prefix}--assistive-text`}
-                      id={`${internalId}--icon-description`}>
+                      className={`${blockClass}--overflow-menu-item-label`}
+                      id={`${internalId}--overflow-menu-item-label`}>
                       {item.props.iconDescription}
                     </span>
                     <item.props.renderIcon />

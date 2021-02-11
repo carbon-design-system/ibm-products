@@ -45,6 +45,7 @@ const WebTerminal = ({
                 {documentationLinks.map(
                   ({ label, onClick, href = null, openInNewTab = true }) => (
                     <li
+                      key={label}
                       className={`${pkgPrefix}-web-terminal__bar-icon-dropdown-item`}>
                       <a
                         className={`${pkgPrefix}-web-terminal__bar-icon-dropdown-link`}

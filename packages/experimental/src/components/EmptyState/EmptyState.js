@@ -7,10 +7,10 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { Button, Link } from 'carbon-components-react';
-import illustrations from './EmptyIllustrations';
 
-import { expPrefix } from '../../global/js/settings';
+import { expPrefix as prefix } from '../../global/js/settings';
 
 export const EmptyState = ({
   actionText,
@@ -25,6 +25,7 @@ export const EmptyState = ({
   illustrationTheme,
   onActionEvent,
 }) => {
+  const requestImageFile = require.context('./assets', true, /.svg$/);
   const defaultIllustrationOptions = [
     'nodata',
     'error',
@@ -33,39 +34,38 @@ export const EmptyState = ({
     'notfound',
     'notifications',
   ];
-
-  const illustrationSource = illustrations[illustrationTheme][illustration];
+  const illustrationSrc =
+    typeof illustration === 'string' &&
+    defaultIllustrationOptions.includes(illustration)
+      ? requestImageFile(`./${illustrationTheme}/${illustration}.svg`)
+      : illustration;
+  const illustrationClasses = cx([
+    `${prefix}-empty-state-illustration`,
+    `${prefix}-empty-state-illustration--${illustrationSize}`,
+  ]);
 
   return (
-    <div className={`${expPrefix}-empty-state`}>
+    <div className={`${prefix}-empty-state`}>
       {illustration && (
         <img
-          src={
-            typeof illustration === 'string' &&
-            defaultIllustrationOptions.includes(illustration)
-              ? illustrationSource
-              : illustration
-          }
+          src={illustrationSrc}
           alt="Empty state illustration"
-          className={[
-            `${expPrefix}-empty-state-illustration`,
-            `${expPrefix}-empty-state-illustration--${illustrationSize}`,
-          ].join(' ')}
+          className={illustrationClasses}
         />
       )}
       {typeof heading !== 'string' ? (
         heading
       ) : (
-        <h3 className={`${expPrefix}-header`}>{heading}</h3>
+        <h3 className={`${prefix}-header`}>{heading}</h3>
       )}
       {typeof subtext !== 'string' ? (
         subtext
       ) : (
-        <p className={`${expPrefix}-subtext`}>{subtext}</p>
+        <p className={`${prefix}-subtext`}>{subtext}</p>
       )}
       {actionText && onActionEvent && (
         <Button
-          className={`${expPrefix}-empty-state-action-button`}
+          className={`${prefix}-empty-state-action-button`}
           kind={actionType || 'tertiary'}
           onClick={onActionEvent}
           renderIcon={actionIcon || null}>
@@ -73,7 +73,7 @@ export const EmptyState = ({
         </Button>
       )}
       {linkText && linkUrl && (
-        <Link className={`${expPrefix}-empty-state-link`} href={linkUrl}>
+        <Link className={`${prefix}-empty-state-link`} href={linkUrl}>
           {linkText}
         </Link>
       )}

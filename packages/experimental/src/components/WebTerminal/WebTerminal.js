@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { Close16 as Close, Help16 as Help } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -21,6 +21,10 @@ const WebTerminal = ({
       onClick(event);
     }
   }, []);
+
+  const showDocumentationLinks = useMemo(() => documentationLinks.length > 0, [
+    documentationLinks,
+  ]);
 
   return open ? (
     <div

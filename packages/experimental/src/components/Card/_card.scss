@@ -4,11 +4,26 @@
 @import 'carbon-components/scss/components/button/button';
 
 .#{$pkg-prefix}-card {
-  background: $ui-03;
+  background: $ui-01;
 }
 
 .#{$pkg-prefix}-card--clickable {
   cursor: pointer;
+}
+
+.#{$pkg-prefix}-card--media-left {
+  display: flex;
+  flex-direction: row;
+}
+
+.#{$pkg-prefix}-card--media-left .#{$pkg-prefix}-card-content-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.#{$pkg-prefix}-card--media-left .#{$pkg-prefix}-card-actions {
+  align-self: flex-end;
+  margin-top: auto;
 }
 
 .#{$pkg-prefix}-card-media {
@@ -49,4 +64,9 @@
 .#{$pkg-prefix}-card-link {
   color: inherit;
   text-decoration: inherit;
+}
+
+.#{$pkg-prefix}-card-pictogram {
+  padding-top: $spacing-05;
+  padding-left: $spacing-05;
 }

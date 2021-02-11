@@ -46,8 +46,11 @@ export const BreadcrumbWithOverflow = ({
       <BreadcrumbItem key={`breadcrumb-overflow-${internalId.current}`}>
         <OverflowMenu
           ariaLabel={null}
+          menuOffset={{ top: 10, left: 59 }} // TODO: REMOVE borrowed from https://github.com/carbon-design-system/carbon/pull/7085
           renderIcon={OverflowMenuHorizontal32}
-          className={`${blockClass}--overflow-menu`}>
+          className={`${blockClass}--overflow-menu`}
+          menuOptionsClass={`${carbonPrefix}--breadcrumb-menu-options`} // TODO: REMOVE borrowed from https://github.com/carbon-design-system/carbon/pull/7085
+        >
           {
             // eslint-disable-next-line react/prop-types
             overflowItems.map((item, index) => (

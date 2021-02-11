@@ -70,7 +70,10 @@ const Template = (args) => {
 };
 
 export const Default = Template.bind({});
-Default.args = { documentationLinks };
+Default.args = {};
+
+export const WithDocumentationLinks = Template.bind({});
+WithDocumentationLinks.args = { documentationLinks };
 
 export default {
   title: `Experimental/WebTerminal`,

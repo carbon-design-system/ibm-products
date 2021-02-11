@@ -10,7 +10,7 @@ import React from 'react';
 import { PageActionItem } from './PageActionItem';
 import { Bee24 } from '@carbon/icons-react';
 
-import styles from './_index.scss'; // import index in case more files are added later.
+import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 
 export default {
   title: 'Experimental/PageHeader/PageActionItem',

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Modal, TextInput, InlineLoading, Form } from 'carbon-components-react';
 import { InformationFilled16 } from '@carbon/icons-react';
 import { APIKeyDownloader } from '../APIKeyDownloader';
-import { expPrefix } from '../../global/js/settings';
+import { pkgPrefix } from '../../global/js/settings';
 
 export const APIKeyModal = ({
   apiKey,
@@ -47,10 +47,11 @@ export const APIKeyModal = ({
   }, [open]);
 
   const getPrimaryButtonStatus = () => {
+    if (loading) return true;
     if (hasSteps && 'valid' in customSteps[currentStep])
       return !customSteps[currentStep].valid;
-    if (nameRequired) return !name;
-    return loading;
+    if (nameRequired && !name) return true;
+    return false;
   };
 
   const getPrimaryButtonText = () => {
@@ -103,7 +104,7 @@ export const APIKeyModal = ({
 
   return (
     <Modal
-      className={`${expPrefix}--apikey-modal`}
+      className={`${pkgPrefix}--apikey-modal`}
       open={open}
       modalHeading={getHeader()}
       primaryButtonText={getPrimaryButtonText()}
@@ -118,14 +119,13 @@ export const APIKeyModal = ({
       ) : (
         <>
           {modalBody && (
-            <p className={`${expPrefix}--apikey-modal-body`}>{modalBody}</p>
+            <p className={`${pkgPrefix}--apikey-modal-body`}>{modalBody}</p>
           )}
           {apiKey && apiKeyVisibility && (
             <TextInput.PasswordInput
               value={apiKey}
               labelText={apiKeyLabel}
               id={apiKeyInputId}
-              className={`${expPrefix}--apikey-modal-input`}
             />
           )}
           {apiKey && !apiKeyVisibility && (
@@ -152,11 +152,11 @@ export const APIKeyModal = ({
           {loading && (
             <InlineLoading
               description={loadingMessage}
-              className={`${expPrefix}--apikey-modal-loader`}
+              className={`${pkgPrefix}--apikey-modal-loader`}
             />
           )}
           {apiKeyLoaded && (
-            <div className={`${expPrefix}--apikey-modal-messaging`}>
+            <div className={`${pkgPrefix}--apikey-modal-messaging`}>
               <InformationFilled16 />
               {downloadable ? (
                 <APIKeyDownloader
@@ -166,7 +166,7 @@ export const APIKeyModal = ({
                   linkText={downloadLinkText}
                 />
               ) : (
-                <div className={`${expPrefix}--apikey-modal-messaging-text`}>
+                <div className={`${pkgPrefix}--apikey-modal-messaging-text`}>
                   {successBody}
                 </div>
               )}

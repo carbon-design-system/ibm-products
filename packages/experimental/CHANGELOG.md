@@ -3,6 +3,129 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.10](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.9...@carbon/ibm-cloud-cognitive-experimental@0.19.10) (2021-02-11)
+
+
+### Bug Fixes
+
+* change action bar overflow item format ([#327](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/327)) ([d497609](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d497609d0a34f2d45a1b38412652a57f7fae8f2f))
+
+
+
+
+
+## [0.19.9](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.8...@carbon/ibm-cloud-cognitive-experimental@0.19.9) (2021-02-10)
+
+
+### Bug Fixes
+
+* styling of breadcrumb with overflow ([#329](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/329)) ([95c168b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/95c168babf1312885132a44d5f11d3c82f010d12))
+
+
+
+
+
+## [0.19.8](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.7...@carbon/ibm-cloud-cognitive-experimental@0.19.8) (2021-02-10)
+
+
+### Bug Fixes
+
+* card updates ([#326](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/326)) ([1a59e35](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/1a59e35aeed86fd9c0a8c318a6fb671a25b51690))
+
+
+
+
+
+## [0.19.7](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.6...@carbon/ibm-cloud-cognitive-experimental@0.19.7) (2021-02-09)
+
+
+### Bug Fixes
+
+* further page header review updates ([#323](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/323)) ([137d952](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/137d952d669adfd2cf1d794f0f3346d9d310d4f9))
+
+
+
+
+
+## [0.19.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.5...@carbon/ibm-cloud-cognitive-experimental@0.19.6) (2021-02-08)
+
+
+### Bug Fixes
+
+* reiew updates ([#321](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/321)) ([fd06c3a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/fd06c3addc3a85bf29499ed64e73e15099be4def))
+
+
+
+
+
+## [0.19.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.4...@carbon/ibm-cloud-cognitive-experimental@0.19.5) (2021-02-05)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
+## [0.19.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.3...@carbon/ibm-cloud-cognitive-experimental@0.19.4) (2021-02-03)
+
+
+### Bug Fixes
+
+* responsivity in action bar column ([#307](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/307)) ([fcf8dc9](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/fcf8dc9c4d5d7a5d200c5c4f5b71dcfe177c615c))
+
+
+
+
+
+## [0.19.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.2...@carbon/ibm-cloud-cognitive-experimental@0.19.3) (2021-02-02)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
+## [0.19.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.1...@carbon/ibm-cloud-cognitive-experimental@0.19.2) (2021-02-02)
+
+
+### Bug Fixes
+
+* additional design feedback ([#314](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/314)) ([ab07dc2](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ab07dc2c359b7316becb18314b9b29b24aa0af1a))
+
+
+
+
+
+## [0.19.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.0...@carbon/ibm-cloud-cognitive-experimental@0.19.1) (2021-01-29)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
+# [0.19.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.18.0...@carbon/ibm-cloud-cognitive-experimental@0.19.0) (2021-01-28)
+
+
+### Features
+
+* update carbon to 10-27 ([#311](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/311)) ([b7569b8](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b7569b8e3a339b8886175ed224164030e036b36c))
+
+
+
+
+
+# [0.18.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.17.2...@carbon/ibm-cloud-cognitive-experimental@0.18.0) (2021-01-28)
+
+
+### Features
+
+* prefix change proposal ([#310](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/310)) ([be09803](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/be09803976360b7158bb2268e66047fbcb70f3ab))
+
+
+
+
+
 ## [0.17.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.17.1...@carbon/ibm-cloud-cognitive-experimental@0.17.2) (2021-01-26)
 
 

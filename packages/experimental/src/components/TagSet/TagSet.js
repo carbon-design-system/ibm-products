@@ -10,15 +10,12 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 
-// import { settings } from 'carbon-components';
-// const { prefix } = settings;
-
 import { Link, Modal, Search, Tag, Tooltip } from 'carbon-components-react';
-import { expPrefix } from '../../global/js/settings';
+import { pkgPrefix /*, carbonPrefix */ } from '../../global/js/settings';
 
 import ReactResizeDetector from 'react-resize-detector';
 
-const blockClass = `${expPrefix}-tag-set`;
+const blockClass = `${pkgPrefix}-tag-set`;
 
 export const TagSet = ({
   children,
@@ -114,10 +111,10 @@ export const TagSet = ({
   const checkFullyVisibleTags = () => {
     // how many will fit?
     let willFit = 0;
-    let spaceAvailable = tagSet.current.clientWidth;
+    let spaceAvailable = tagSet.current.offsetWidth;
 
     for (let i in sizingTags.current) {
-      const tagWidth = sizingTags.current[i].clientWidth;
+      const tagWidth = sizingTags.current[i].offsetWidth;
       if (spaceAvailable >= tagWidth) {
         spaceAvailable -= tagWidth;
         willFit += 1;
@@ -127,10 +124,10 @@ export const TagSet = ({
     }
 
     if (willFit < sizingTags.current.length) {
-      while (willFit > 0 && spaceAvailable < overflowTag.current.clientWidth) {
+      while (willFit > 0 && spaceAvailable < overflowTag.current.offsetWidth) {
         // Highly unlikely any useful tag is smaller
         willFit -= 1; // remove one tag
-        spaceAvailable += sizingTags.current[willFit].clientWidth;
+        spaceAvailable += sizingTags.current[willFit].offsetWidth;
       }
     }
 

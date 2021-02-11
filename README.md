@@ -19,10 +19,30 @@
 If you're just getting started and looking for React components, take a look at
 [our Storybook](https://ibm-cloud-cognitive.netlify.app).
 
+If you're trying to find something specific, here's a full list of packages that
+we support!
+
+| Package name                                                                                                                                | Description                |
+| ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| [`@carbon/ibm-cloud-cognitive`](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/cloud-cognitive)           | Common UI components       |
+| [`@carbon/ibm-cloud-cognitive-experimental`](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental) | Experimental UI components |
+
 If you want to try out Carbon for Cloud & Cognitive, you can use
 [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/master/examples/codesandbox).
 
 [![Edit CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/master/examples/codesandbox)
+
+## Building and running Locally
+
+To get started run the following commands and storybook will be built and then
+served on port `3000` on your local machine.
+
+```
+yarn install
+yarn build
+cd packages/core/
+yarn start
+```
 
 ## Browser Support
 
@@ -32,21 +52,6 @@ This library supports the latest versions of:
 - Google Chrome
 - Microsoft Edge
 - Mozilla Firefox
-
-## Locally Served Catalogue of Component using Storybook:
-
-Simply run `yarn storybook` and the storybook will be built and then served on
-port `3000` on your local machine.
-
-## Currently Hosted Packages
-
-Today, the packages being hosted here are:
-
-- Automation
-- CD&AI
-- Security
-- Bedrock services --> common services
-- Experimental
 
 ## 🙌 Contributing
 

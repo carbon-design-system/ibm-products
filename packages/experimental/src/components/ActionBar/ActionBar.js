@@ -116,6 +116,15 @@ export const ActionBar = ({
     const spaceAvailable = refDisplayedItems.current.offsetWidth;
     const actionBarItemWidth = refDisplayedItems.current.offsetHeight; // short cut measure width
 
+    console.log(
+      'Hi',
+      spaceAvailable,
+      actionBarItemWidth,
+      refDisplayedItems.current.parentNode.offsetWidth,
+      refDisplayedItems.current.parentNode.parentNode.offsetWidth,
+      refDisplayedItems.current.parentNode.parentNode.outerHTML
+    );
+
     if (actionBarItemWidth > 0) {
       const mightFit = spaceAvailable / actionBarItemWidth;
       // visibleItems may include 1 overflow menu

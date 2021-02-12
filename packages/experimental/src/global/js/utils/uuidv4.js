@@ -2,7 +2,7 @@
 
 function uuidv4() {
   const randomValues = (c) =>
-    typeof crypto !== 'object'
+    typeof crypto !== 'undefined'
       ? crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4))
       : (Math.random() * 16) >> (c / 4);
 

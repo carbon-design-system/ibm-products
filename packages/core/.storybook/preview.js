@@ -42,6 +42,26 @@ const decorators = [
 const parameters = {
   controls: { expanded: true, hideNoControlsWarning: true },
   layout: 'centered',
+  options: {
+    storySort: (a, b) => {
+      if (a[1].kind === b[1].kind) {
+        return 0;
+      } else {
+        if (
+          a[1].kind.startsWith('Cloud & Cognitive/Released/') &&
+          b[1].kind.startsWith('Cloud & Cognitive/Canary/')
+        )
+          return -1;
+        if (
+          b[1].kind.startsWith('Cloud & Cognitive/Released/') &&
+          a[1].kind.startsWith('Cloud & Cognitive/Canary/')
+        )
+          return 1;
+        console.log(a[1].kind, b[1].kind);
+        return a[1].id.localeCompare(b[1].id, undefined, { numeric: true });
+      }
+    },
+  },
 
   // Optional default Carbon theme.
   carbonTheme: {

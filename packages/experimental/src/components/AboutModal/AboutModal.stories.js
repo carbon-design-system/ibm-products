@@ -13,7 +13,7 @@ import mdx from './AboutModal.mdx';
 import ansibleLogo from './technologyUsedLogos/ansible_logo.png';
 import grafanaLogo from './technologyUsedLogos/grafana_logo.png';
 import jsLogo from './technologyUsedLogos/js_logo.png';
-import { storybookPrefix } from '../../global/js/settings';
+import { storybookPrefixCanary as storybookPrefix } from '../../global/js/settings';
 
 import { AboutModal } from './AboutModal';
 

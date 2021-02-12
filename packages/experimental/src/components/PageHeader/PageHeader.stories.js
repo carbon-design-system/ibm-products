@@ -23,7 +23,7 @@ import { Lightning16, Bee24 } from '@carbon/icons-react';
 import { ActionBarItem } from '../ActionBar';
 import { PageActionItem } from './PageActionItem';
 import { PageHeader } from '.';
-import { storybookPrefix } from '../../global/js/settings';
+import { storybookPrefixCanary as storybookPrefix } from '../../global/js/settings';
 
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 

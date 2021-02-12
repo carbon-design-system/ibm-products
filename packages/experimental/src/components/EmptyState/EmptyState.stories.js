@@ -10,7 +10,7 @@ import { action } from '@storybook/addon-actions';
 import { Add20 } from '@carbon/icons-react';
 import CustomIllustration from './assets/light/error.svg';
 import mdx from './EmptyState.mdx';
-import { storybookPrefix } from '../../global/js/settings';
+import { storybookPrefixCanary as storybookPrefix } from '../../global/js/settings';
 
 import { EmptyState } from '.';
 

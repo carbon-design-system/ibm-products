@@ -3,6 +3,13 @@ import { settings } from 'carbon-components';
 
 const pkgPrefix = 'exp';
 const carbonPrefix = settings.prefix;
-const storybookPrefix = 'Cloud & Cognitive/Canary';
+const storybookPrefixCanary = 'Cloud & Cognitive/Canary';
+const storybookPrefixReleased = 'Cloud & Cognitive/Released';
 
-export { pkgPrefix, carbonPrefix, featureFlags, storybookPrefix };
+export {
+  pkgPrefix,
+  carbonPrefix,
+  featureFlags,
+  storybookPrefixCanary,
+  storybookPrefixReleased,
+};

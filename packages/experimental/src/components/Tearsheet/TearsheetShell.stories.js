@@ -10,7 +10,7 @@ import React from 'react';
 import { TearsheetShell } from './TearsheetShell';
 
 import styles from './_storybook-styles.scss';
-import { storybookPrefix } from '../../global/js/settings';
+import { storybookPrefixCanary as storybookPrefix } from '../../global/js/settings';
 
 import mdx from './TearsheetShell.mdx';
 

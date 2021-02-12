@@ -8,6 +8,7 @@
 import React, { useState, useCallback } from 'react';
 import WebTerminal from './WebTerminal';
 import { Navigation } from './preview-components';
+import mdx from './WebTerminal.mdx';
 
 import styles from './_storybook-styles.scss';
 
@@ -77,5 +78,10 @@ WithDocumentationLinks.args = { documentationLinks };
 
 export default {
   title: `Experimental/WebTerminal`,
-  parameters: { styles },
+  parameters: {
+    styles,
+    docs: {
+      page: mdx,
+    },
+  },
 };

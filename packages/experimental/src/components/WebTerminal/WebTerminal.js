@@ -83,8 +83,17 @@ WebTerminal.defaultProps = {
 };
 
 WebTerminal.propTypes = {
+  /**
+   * Boolean that determines if the web terminal is opened or closed
+   */
   open: PropTypes.bool.isRequired,
+  /**
+   * Function that should set the open prop to false
+   */
   closeTerminal: PropTypes.func.isRequired,
+  /**
+   * Array of objects for each documentation link
+   */
   documentationLinks: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
@@ -93,10 +102,16 @@ WebTerminal.propTypes = {
       openInNewTab: PropTypes.bool,
     })
   ),
+  /**
+   * Provide your own terminal component as children to show up in the web terminal
+   */
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
+  /**
+   * Custom classname for additional styling of the web terminal
+   */
   className: PropTypes.string,
 };
 

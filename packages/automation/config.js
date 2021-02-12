@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export const sectionTitle = '2020/Automation';
+export const sectionTitle = 'Legacy/Automation';

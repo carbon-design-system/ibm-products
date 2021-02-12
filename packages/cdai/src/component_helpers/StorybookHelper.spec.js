@@ -9,6 +9,6 @@ import { getComponentLabel } from './StorybookHelper';
 
 describe('getComponentLabel', () => {
   it('returns the expected output for a component', () => {
-    expect(getComponentLabel('IdeButton')).toEqual('2020/CD&AI/IdeButton');
+    expect(getComponentLabel('IdeButton')).toEqual('Legacy/CD&AI/IdeButton');
   });
 });

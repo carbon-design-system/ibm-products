@@ -32,7 +32,12 @@ export const TempComboButton = ({ buttons, className }) => {
       menuOptionsClass={`${blockClass}--options`}
       renderIcon={() => (
         <div
-          className={`${blockClass}--trigger  ${carbonPrefix}--btn ${carbonPrefix}--btn--primary ${carbonPrefix}--btn--field`}>
+          className={cx([
+            `${blockClass}--trigger`,
+            `${carbonPrefix}--btn`,
+            `${carbonPrefix}--btn--primary`,
+            `${carbonPrefix}--btn--field`,
+          ])}>
           Page actions
         </div>
       )}

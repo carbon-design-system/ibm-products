@@ -5,14 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import {
   DOCUMENT_POSITION_BROAD_PRECEDING,
   DOCUMENT_POSITION_BROAD_FOLLOWING,
   selectorTabbable,
 } from './keyboardNavigation';
 
-const { prefix } = settings;
+import { carbonPrefix } from '../settings';
 
 /**
  * @param {Node} node A DOM node.
@@ -22,8 +21,8 @@ const { prefix } = settings;
 function elementOrParentIsFloatingMenu(
   node,
   selectorsFloatingMenus = [
-    `.${prefix}--overflow-menu-options`,
-    `.${prefix}--tooltip`,
+    `.${carbonPrefix}--overflow-menu-options`,
+    `.${carbonPrefix}--tooltip`,
     '.flatpickr-calendar',
   ]
 ) {

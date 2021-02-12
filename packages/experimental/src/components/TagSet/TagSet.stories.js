@@ -10,9 +10,9 @@ import React from 'react';
 import TagSet from './TagSet';
 import { Tag } from 'carbon-components-react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import { expPrefix } from '../../global/js/settings';
+import { pkgPrefix } from '../../global/js/settings';
 
-const blockClass = `${expPrefix}-tag-set`;
+const blockClass = `${pkgPrefix}-tag-set`;
 
 const TagItems = [
   <Tag key="tag1" type="blue">
@@ -141,7 +141,7 @@ export default {
           {`.${blockClass}--show-all-modal { opacity: 0; visibility: hidden; /* prevents glitch storybook modal css load */ }`}
           ;
         </style>
-        <div className="tag-set-story__viewport">{story()}</div>
+        <div className={`${blockClass}--story__viewport`}>{story()}</div>
       </>
     ),
   ],

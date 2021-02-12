@@ -18,7 +18,7 @@ import React from 'react';
  */
 import { expPrefix /*, carbonPrefix */ } from '../../global/js/settings';
 
-const blockClass = `${expPrefix}--STYLE_NAME`;
+const blockClass = `${pkgPrefix}--STYLE_NAME`;
 
 /**
  * TODO: Description.

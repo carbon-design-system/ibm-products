@@ -46,8 +46,11 @@ export const BreadcrumbWithOverflow = ({
       <BreadcrumbItem key={`breadcrumb-overflow-${internalId.current}`}>
         <OverflowMenu
           ariaLabel={null}
+          menuOffset={{ top: 10, left: 59 }} // TODO: REMOVE borrowed from https://github.com/carbon-design-system/carbon/pull/7085
           renderIcon={OverflowMenuHorizontal32}
-          className={`${blockClass}--overflow-menu`}>
+          className={`${blockClass}--overflow-menu`}
+          menuOptionsClass={`${carbonPrefix}--breadcrumb-menu-options`} // TODO: REMOVE borrowed from https://github.com/carbon-design-system/carbon/pull/7085
+        >
           {
             // eslint-disable-next-line react/prop-types
             overflowItems.map((item, index) => (
@@ -84,12 +87,19 @@ export const BreadcrumbWithOverflow = ({
         // adding just 1 to childArray.length - displayCount
         child = childArray[index + 1];
       }
-      newOverflowBreadcrumbItems.push(React.cloneElement(child));
+      newOverflowBreadcrumbItems.push(
+        React.cloneElement(child, {
+          key: `displayed-breadcrumb-${internalId}-overflow-item-${index}`,
+        })
+      );
     }
 
     if (displayCount === 0) {
       newDisplayedBreadcrumbItems.push(
-        <BreadcrumbOverflowMenu overflowItems={newOverflowBreadcrumbItems} />
+        <BreadcrumbOverflowMenu
+          overflowItems={newOverflowBreadcrumbItems}
+          key={`$displayed-breadcrumb-${internalId}-overflow`}
+        />
       );
     } else {
       let displayed = 0;
@@ -120,6 +130,7 @@ export const BreadcrumbWithOverflow = ({
           newDisplayedBreadcrumbItems.push(
             <BreadcrumbOverflowMenu
               overflowItems={newOverflowBreadcrumbItems}
+              key={`$displayed-breadcrumb-${internalId}-overflow`}
             />
           );
         }

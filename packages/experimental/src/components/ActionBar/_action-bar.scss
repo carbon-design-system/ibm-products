@@ -25,12 +25,14 @@ $block-class: #{$pkg-prefix}-action-bar;
   display: inline-block;
 }
 
-.#{$block-class}--options {
-  width: $spacing-08;
-}
-
 .#{$block-class}--overflow-menu-item {
   padding: 0 $spacing-03;
+}
+
+.#{$block-class}--overflow-menu-item-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .#{$block-class}--overflow-menu-item svg {

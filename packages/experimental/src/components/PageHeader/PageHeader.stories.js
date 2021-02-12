@@ -11,7 +11,10 @@ import React from 'react';
 import {
   BreadcrumbItem,
   Column,
+  Content,
   Grid,
+  Header,
+  HeaderName,
   Row,
   Tab,
   Tabs,
@@ -444,6 +447,55 @@ const TemplateWithSwitchedArgs = (args) => {
 
 export const AllAttributesWithSwitches = TemplateWithSwitchedArgs.bind({});
 AllAttributesWithSwitches.args = {
+  actionBarItems,
+  actionBarItemsSwitchedArg: true,
+  availableSpace: summaryDetails,
+  availableSpaceSwitchedArg: true,
+  background: true,
+  breadcrumbItems,
+  breadcrumbItemsSwitchedArg: true,
+  keepBreadcrumbAndTabs: false,
+  navigation: tabBar,
+  navigationSwitchedArg: true,
+  pageActions,
+  pageActionsSwitchedArg: true,
+  preCollapseTitleRow: false,
+  subtitle,
+  subtitleSwitchedArg: true,
+  tags,
+  tagsSwitchedArg: true,
+  title,
+  titleSwitchedArg: true,
+  titleIcon: Bee24,
+  titleIconSwitchedArg: true,
+};
+
+const TemplatePageHeaderWithCarbonHeader = (args) => {
+  return (
+    <div className="page-header-stories__app">
+      <Header aria-label="IBM Platform Name">
+        <HeaderName href="#" prefix="IBM">
+          [Platform]
+        </HeaderName>
+      </Header>
+      <Content className="page-header-stories__content-container">
+        <PageHeader
+          className="example-class-name"
+          {...includeTheseArgs(args)}
+          pageHeaderOffset={48} // 48px is the size of the global header. A more elegant way of passing this could be found.
+        />
+        <div className="page-header-stories__inner-content">
+          {dummyPageContent}
+        </div>
+      </Content>
+    </div>
+  );
+};
+
+export const PageHeaderWithCarbonHeader = TemplatePageHeaderWithCarbonHeader.bind(
+  {}
+);
+PageHeaderWithCarbonHeader.args = {
   actionBarItems,
   actionBarItemsSwitchedArg: true,
   availableSpace: summaryDetails,

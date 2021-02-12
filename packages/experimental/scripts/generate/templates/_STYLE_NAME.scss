@@ -9,10 +9,16 @@
 
 @import '../../global/styles/project-settings';
 
+// TODO: @import(s) of all Carbon component styles used by DISPLAY_NAME
+
+// TODO: @import(s) of other related component styles used DISPLAY_NAME style files
+
 @include exports($name: STYLE_NAME) {
   /// @type String
   /// @access private
   $block-class: #{$pkg-prefix}--STYLE_NAME;
+
+  // TODO: Add styles for DISPLAY_NAME
 
   .#{$block-class} {
     // TODO: Styles.

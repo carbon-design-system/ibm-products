@@ -7,43 +7,44 @@
 
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { TestScheduler } from 'jest';
+import { expPrefix } from '../../global/js/settings';
 
 import React from 'react';
 
-import { ExampleComponent } from '.';
+import { UserProfileImage } from '.';
 
 const {
-  defaultProps: { primaryButtonLabel, secondaryButtonLabel },
+  defaultProps: { backgroundColor, icon, size },
   name,
-} = ExampleComponent;
+} = UserProfileImage;
 
 jest.setTimeout(15000);
 
 describe(name, () => {
-  test('should have no accessibility violations', async () => {
-    const { container } = render(<ExampleComponent />);
-
-    await expect(container).toBeAccessible(name);
-    await expect(container).toHaveNoAxeViolations();
+  test('should return appropriately size circle based on size prop', () => {
+    const { container } = render(<UserProfileImage size="x-large" />);
+    const element = container.querySelector(
+      `.${expPrefix}-user-profile-avatar`
+    );
+    const hasSizeClass = element.className.includes('x-large');
+    expect(hasSizeClass).toBeTruthy();
   });
 
-  test('calls primary and secondary actions when buttons are clicked', () => {
-    const { fn } = jest;
+  test('should return an icon for the avatar image', () => {
+    const { container } = render(<UserProfileImage icon="user" />);
+    const renderedSVG = container.querySelector('svg');
+    expect(renderedSVG).toBeTruthy();
+  });
 
-    const primaryClickMock = fn();
-    const secondaryClickMock = fn();
-
-    const { getByText } = render(
-      <ExampleComponent
-        onPrimaryClick={primaryClickMock}
-        onSecondaryClick={secondaryClickMock}
-      />
+  test('should return a circle with background color', () => {
+    const { container } = render(
+      <UserProfileImage backgroundColor="#0f62fe" />
     );
-
-    userEvent.click(getByText(primaryButtonLabel));
-    expect(primaryClickMock).toBeCalled();
-
-    userEvent.click(getByText(secondaryButtonLabel));
-    expect(secondaryClickMock).toBeCalled();
+    const element = container.querySelector(
+      `.${expPrefix}-user-profile-avatar`
+    );
+    const hasBackgroundColor = element.style.backgroundColor;
+    expect(hasBackgroundColor).toBeTruthy();
   });
 });

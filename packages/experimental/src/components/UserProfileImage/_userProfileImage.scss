@@ -5,86 +5,102 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '../../global/styles/carbon-settings'; // goes before carbon imports as it affects how carbon is used.
+@import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
-@import 'carbon-components/scss/components/button/button';
-
 $block-class: #{$exp-prefix}-user-profile-avatar;
+$x-large: $spacing-10; //64px
+$large: $spacing-07; //32px
+$medium: $spacing-06; //24px
+$small: $spacing-03 + $spacing-04; //20px
+$x-small: $spacing-05; //16x
+
+@mixin x-large {
+  width: $x-large;
+  height: $x-large;
+}
+
+@mixin large {
+  width: $large;
+  height: $large;
+}
+
+@mixin medium {
+  width: $medium;
+  height: $medium;
+}
+
+@mixin small {
+  width: $small;
+  height: $small;
+}
+
+@mixin x-small {
+  width: $x-small;
+  height: $x-small;
+}
 
 .#{$block-class} {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: $icon-03;
   text-transform: uppercase;
-  border-radius: 50%;  
+  border-radius: 50%;
 }
 
-.test {
-  width: 500px;
-  height: 500px;
+.#{$block-class}--light {
+  color: $icon-03;
 }
 
-.#{block-class}-photo--x-large {
-  width: 64px;
-  height: 64px;
+.#{$block-class}-photo--x-large {
+  @include x-large;
 }
 
-.#{block-class}-photo--large {
-  width: 32px;
-  height: 32px;
+.#{$block-class}-photo--large {
+  @include large;
 }
 
-.#{block-class}-photo--medium {
-  width: 24px;
-  height: 24px;
+.#{$block-class}-photo--medium {
+  @include medium;
 }
-.#{block-class}-photo--small {
-  width: 20px;
-  height: 20px;
+.#{$block-class}-photo--small {
+  @include small;
 }
 
-.#{block-class}-photo--x-small {
-  width: 16px;
-  height: 16px;
+.#{$block-class}-photo--x-small {
+  @include x-small;
 }
 
 .#{$block-class}--x-large {
-  width: 64px;
-  height: 64px;
-  clip-path: circle(32px at center);
+  clip-path: circle(($x-large/2) at center);
+  @include x-large;
   @include carbon--type-style('productive-heading-04');
 }
 
 .#{$block-class}--large {
-  width: 32px;
-  height: 32px;
-  clip-path: circle(16px at center);
+  clip-path: circle(($large/2) at center);
+  @include large;
   @include carbon--type-style('body-short-01');
 }
 
 .#{$block-class}--medium {
-  width: 24px;
-  height: 24px;
-  clip-path: circle(12px at center);
+  clip-path: circle(($medium/2) at center);
+  @include medium;
   @include carbon--type-style('label-01');
   @include carbon--font-weight('semibold');
 }
 
 .#{$block-class}--small {
-  width: 20px;
-  height: 20px;
-  clip-path: circle(10px at center);
+  clip-path: circle(($small/2) at center);
+  @include small;
   @include carbon--type-style('label-01');
   @include carbon--font-weight('semibold');
 }
 
 .#{$block-class}--x-small {
-  width: 16px;
-  height: 16px;
-  clip-path: circle(8px at center);
+  clip-path: circle(($x-small/2) at center);
+  @include x-small;
   @include carbon--type-style('label-01');
   @include carbon--font-weight('semibold');
 }

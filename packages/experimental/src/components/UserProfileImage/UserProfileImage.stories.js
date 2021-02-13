@@ -21,9 +21,9 @@ export default {
   argTypes: {
     borderColor: { control: 'color' },
   },
-  parameters: { 
-    styles, 
-    docs: {page: mdx} 
+  parameters: {
+    styles,
+    docs: { page: mdx },
   },
 };
 
@@ -40,21 +40,22 @@ const Template = (args) => {
 export const WithUserIcon = Template.bind({});
 WithUserIcon.args = {
   size: 'x-large',
-  backgroundColor: purple[80],
-  icon: 'user'
+  backgroundColor: magenta[60],
+  icon: 'user',
 };
 
 export const WithGroupIcon = Template.bind({});
 WithGroupIcon.args = {
   size: 'x-large',
   backgroundColor: green[80],
-  icon: 'group'
+  icon: 'group',
 };
 
 export const WithInitials = Template.bind({});
 WithInitials.args = {
-  backgroundColor: purple[80],
-  initials: 'eric'
+  size: 'x-large',
+  //backgroundColor: purple[80],
+  initials: 'eric',
 };
 
 export const WithImage = Template.bind({});

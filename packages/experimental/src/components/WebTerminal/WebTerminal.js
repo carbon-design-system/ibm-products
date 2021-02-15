@@ -88,9 +88,16 @@ WebTerminal.defaultProps = {
 
 WebTerminal.propTypes = {
   /**
-   * Boolean that determines if the web terminal is opened or closed
+   * Provide your own terminal component as children to show up in the web terminal
    */
-  open: PropTypes.bool.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
+  /**
+   * Custom classname for additional styling of the web terminal
+   */
+  className: PropTypes.string,
   /**
    * Function that should set the open prop to false
    */
@@ -107,16 +114,9 @@ WebTerminal.propTypes = {
     })
   ),
   /**
-   * Provide your own terminal component as children to show up in the web terminal
+   * Boolean that determines if the web terminal is opened or closed
    */
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
-  /**
-   * Custom classname for additional styling of the web terminal
-   */
-  className: PropTypes.string,
+  open: PropTypes.bool.isRequired,
 };
 
 export default WebTerminal;

@@ -5,12 +5,12 @@ import {
   HeaderGlobalAction,
   HeaderGlobalBar,
 } from 'carbon-components-react';
-
 import {
   Terminal20 as Terminal,
   Search20 as Search,
   User20 as User,
 } from '@carbon/icons-react';
+import PropTypes from 'prop-types';
 
 const Navigation = ({ openTerminal }) => {
   return (
@@ -31,6 +31,13 @@ const Navigation = ({ openTerminal }) => {
       </HeaderGlobalBar>
     </Header>
   );
+};
+
+Navigation.propTypes = {
+  /**
+   * Opens the terminal
+   */
+  openTerminal: PropTypes.func.isRequired,
 };
 
 export default Navigation;

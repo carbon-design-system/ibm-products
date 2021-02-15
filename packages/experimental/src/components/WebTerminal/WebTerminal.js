@@ -39,7 +39,9 @@ const WebTerminal = ({
       <header className={`${pkgPrefix}-web-terminal__bar`}>
         <div className={`${pkgPrefix}-web-terminal__actions`}>
           {showDocumentationLinks && (
-            <div className={`${pkgPrefix}-web-terminal__bar-icon-container`}>
+            <button
+              type="button"
+              className={`${pkgPrefix}-web-terminal__bar-icon-container`}>
               <Help className={`${pkgPrefix}-web-terminal__bar-icon`} />
               <ul className={`${pkgPrefix}-web-terminal__bar-icon-dropdown`}>
                 {documentationLinks.map(
@@ -61,16 +63,18 @@ const WebTerminal = ({
                   )
                 )}
               </ul>
-            </div>
+            </button>
           )}
         </div>
-        <div
+        <button
+          type="button"
           className={`${pkgPrefix}-web-terminal__bar-icon-container`}
-          onClick={closeTerminal}>
+          onClick={closeTerminal}
+          onKeyDown={closeTerminal}>
           <Close
             className={`${pkgPrefix}-web-terminal__bar-icon ${pkgPrefix}-web-terminal__bar-icon--close`}
           />
-        </div>
+        </button>
       </header>
       <div className={`${pkgPrefix}-web-terminal__body`}>{children}</div>
     </div>

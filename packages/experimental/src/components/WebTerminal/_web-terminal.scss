@@ -54,6 +54,8 @@
 }
 
 .#{$pkg-prefix}-web-terminal__bar-icon-container:hover
+  .#{$pkg-prefix}-web-terminal__bar-icon-dropdown,
+.#{$pkg-prefix}-web-terminal__bar-icon-container:focus
   .#{$pkg-prefix}-web-terminal__bar-icon-dropdown {
   transform: translateY(0); /* stylelint-disable-line */
   visibility: visible;

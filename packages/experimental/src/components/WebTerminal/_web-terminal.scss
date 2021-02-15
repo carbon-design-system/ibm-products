@@ -34,6 +34,8 @@
 .#{$pkg-prefix}-web-terminal__bar-icon-container {
   position: relative;
   padding: $spacing-04;
+  background-color: transparent;
+  border: none;
   cursor: pointer;
 }
 

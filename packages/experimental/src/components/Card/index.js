@@ -5,5 +5,4 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-export { PageHeader } from './PageHeader';
-export { PageActionItem } from './PageActionItem';
+export { Card } from './Card';

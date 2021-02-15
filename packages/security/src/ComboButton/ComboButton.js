@@ -31,7 +31,14 @@ const ComboButton = ({ children, className, overflowMenu, ...rest }) => {
 
   const [primaryAction, ...restActions] = Children.toArray(children)
     .filter(Boolean)
-    .map(({ props }) => props);
+    .map(({ props: { children, ...props } }) => ({
+      ...props,
+      children: (
+        <span className={`${blockClass}__action`} title={children}>
+          {children}
+        </span>
+      ),
+    }));
 
   return (
     <div

@@ -15,3 +15,4 @@ export { PageHeader, ActionBarItem, PageActionItem } from './PageHeader';
 export { RemoveDeleteModal } from './RemoveDeleteModal';
 export { TagSet } from './TagSet';
 export { Tearsheet, TearsheetNarrow } from './Tearsheet';
+export { WebTerminal } from './WebTerminal';

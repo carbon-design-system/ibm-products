@@ -1,3 +1,1 @@
-import WebTerminal from './WebTerminal';
-
-export default WebTerminal;
+export { default as WebTerminal } from './WebTerminal';

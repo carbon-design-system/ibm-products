@@ -32,7 +32,8 @@ Defaultx.args = {
   linkUrl: '/?path=/story/cloud-cognitive-canary-emptystate--default',
   subtext: (
     <p>
-      If you have not read the Hitch Hikers Guide to the Universe, DON'T PANIC.
+      If you have not read the Hitch Hikers Guide to the Universe, DON&apos;T
+      PANIC.
     </p>
   ),
 };

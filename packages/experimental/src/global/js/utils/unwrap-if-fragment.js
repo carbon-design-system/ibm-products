@@ -9,12 +9,12 @@ const unwrapIfFragment = (children) => {
 
   const isFragment = (item) => item && item.type === React.Fragment;
 
-  const addChildren = (_children) => {
-    for (let index in _children) {
-      if (isFragment(_children[index])) {
-        addChildren(_children[index].props.children);
+  const addChildren = (children) => {
+    for (let child of children) {
+      if (isFragment(child)) {
+        addChildren(child.props.children);
       } else {
-        newChildArray.push(_children[index]);
+        newChildArray.push(child);
       }
     }
   };

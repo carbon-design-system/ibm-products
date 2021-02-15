@@ -71,6 +71,11 @@ export const BreadcrumbWithOverflow = ({
 
   useEffect(() => {
     // updates displayedBreadcrumbItems and overflowBreadcrumbItems based on displayCount and childArray
+    if (childArray.length === 0) {
+      setDisplayedBreadcrumbItems([]);
+      return;
+    }
+
     const newDisplayedBreadcrumbItems = [];
     const newOverflowBreadcrumbItems = [];
     let child;
@@ -80,9 +85,15 @@ export const BreadcrumbWithOverflow = ({
     //  * the last item is always displayed (even if there isn't really space for it -- it can contract to an ellipsis);
     //  * the first item is the next to be displayed, if there's space once the last item and overflow are shown;
     //  * any remaining space after the first item, last item and overflow are shown is used to show items (n-1), (n-2), (n-3), ..., until the space is used up ;
-    // Note that displayCount has been computed based on the available space and the above sequence.
+    // Note that displayCount (min 1) has been computed based on the available space and the above sequence.
     const overflowStart = displayCount > 1 ? 1 : 0;
-    for (let i = overflowStart; i < childArray.length - displayCount; i++) {
+    // Everything but the last item if 1, otherwise 1 to length + overflowStart - displayCount
+    for (
+      let i = overflowStart;
+      i < childArray.length + overflowStart - displayCount;
+      i++
+    ) {
+      // add items into the overflow menu
       child = childArray[i];
 
       newOverflowBreadcrumbItems.push(
@@ -92,124 +103,134 @@ export const BreadcrumbWithOverflow = ({
       );
     }
 
-    if (displayCount === 0) {
+    // add the first item before overflow if space
+    if (displayCount > 1) {
+      newDisplayedBreadcrumbItems.push(
+        React.cloneElement(childArray[0], {
+          className: cx([
+            childArray[0].props.className,
+            `${blockClass}--displayed-breadcrumb`,
+          ]),
+          key: `displayed-breadcrumb-${internalId.current}-0`,
+        })
+      );
+    }
+
+    // if needed add overflow menu after first item or before last
+    if (displayCount < childArray.length) {
       newDisplayedBreadcrumbItems.push(
         <BreadcrumbOverflowMenu
           overflowItems={newOverflowBreadcrumbItems}
           key={`$displayed-breadcrumb-${internalId}-overflow`}
         />
       );
-    } else {
-      let displayed = 0;
-      const addOverflow = () => {
-        newDisplayedBreadcrumbItems.push(
-          <BreadcrumbOverflowMenu
-            overflowItems={newOverflowBreadcrumbItems}
-            key={`$displayed-breadcrumb-${internalId}-overflow`}
-          />
-        );
-      };
+    }
 
-      for (let i = 0; displayed < displayCount && i < childArray.length; i++) {
-        // either last item only
-        // first plus displayCount - 1 from end
-        // or all
-        const index =
-          displayCount === 1
-            ? (i = childArray.length - 1)
-            : i === 1 && displayCount < childArray.length
-            ? (i += childArray.length - displayCount)
-            : i;
-
-        displayed++;
-
-        if (displayCount === 1) {
-          // add overflow menu before only item
-          addOverflow();
-        }
-        child = childArray[index];
-        newDisplayedBreadcrumbItems.push(
-          React.cloneElement(child, {
-            className: cx([
-              child.props.className,
-              `${blockClass}--displayed-breadcrumb`,
-            ]),
-            key: `displayed-breadcrumb-${internalId.current}-${index}`,
-          })
-        );
-
-        if (i === 0 && displayCount < childArray.length) {
-          // add overflow menu after first item
-          addOverflow();
-        }
-      }
+    // skip items in overflow + 1 for first item
+    for (
+      let i = newOverflowBreadcrumbItems.length + 1;
+      i < childArray.length;
+      i++
+    ) {
+      child = childArray[i];
+      newDisplayedBreadcrumbItems.push(
+        React.cloneElement(child, {
+          className: cx([
+            child.props.className,
+            `${blockClass}--displayed-breadcrumb`,
+          ]),
+          key: `displayed-breadcrumb-${internalId.current}-${i}`,
+        })
+      );
     }
 
     setDisplayedBreadcrumbItems(newDisplayedBreadcrumbItems);
   }, [childArray, displayCount]);
 
   const checkFullyVisibleBreadcrumbItems = () => {
-    // how many will fit?
-    let willFit = 0;
-    let spaceAvailable = breadcrumbItemWithOverflow.current.offsetWidth;
+    const displayItemIndex = (itemCount, index) => {
+      // In this data set the overflow measuring item is [0]
+      // so the first displayItem in the list is [1]
+      // we never return 0;
 
-    if (sizingContainerRef.current) {
-      const sizingBreadcrumbItems = sizingContainerRef.current.querySelectorAll(
-        `.${carbonPrefix}--breadcrumb-item`
-      );
-
-      const breadcrumbWidthsIncludingMargin = [];
-      for (let item of sizingBreadcrumbItems) {
-        const computedStyle = window
-          ? window.getComputedStyle(sizingBreadcrumbItems[0])
-          : null;
-        const marginWidths = computedStyle
-          ? parseFloat(computedStyle.marginLeft, 0) +
-            parseFloat(computedStyle.marginRight, 0)
-          : 0;
-        breadcrumbWidthsIncludingMargin.push(item.offsetWidth + marginWidths);
+      if (index === 0) {
+        return itemCount - 1; // the last item in the list
+      } else if (index === 1) {
+        return 1; // the first item in the list
+      } else {
+        return itemCount - index; // count down from itemCount - 2 to 1
       }
+    };
 
-      let overflowWidth = breadcrumbWidthsIncludingMargin[0];
+    if (maxVisibleBreadcrumbItems <= 1) {
+      setDisplayCount(1);
+    } else {
+      // how many will fit?
+      let willFit = 0;
+      let spaceAvailable = breadcrumbItemWithOverflow.current.offsetWidth;
 
-      for (let i = 0; i < breadcrumbWidthsIncludingMargin.length - 1; i++) {
-        // 0 = add all that will fit (ignoring overflow breadcrumb for now)
-        // last = important
-        // first next most important
-        // then descending order
-        const index =
-          i === 0
-            ? breadcrumbWidthsIncludingMargin.length - 1
-            : i === 1
-            ? 1
-            : breadcrumbWidthsIncludingMargin.length - i;
+      if (sizingContainerRef.current) {
+        const sizingBreadcrumbItems = sizingContainerRef.current.querySelectorAll(
+          `.${carbonPrefix}--breadcrumb-item`
+        );
 
-        if (spaceAvailable >= breadcrumbWidthsIncludingMargin[index]) {
-          spaceAvailable -= breadcrumbWidthsIncludingMargin[index];
-          willFit += 1;
-        } else {
-          break;
+        const breadcrumbWidthsIncludingMargin = [];
+        for (let item of sizingBreadcrumbItems) {
+          const computedStyle = window
+            ? window.getComputedStyle(sizingBreadcrumbItems[0])
+            : null;
+          const marginWidths = computedStyle
+            ? parseFloat(computedStyle.marginLeft, 0) +
+              parseFloat(computedStyle.marginRight, 0)
+            : 0;
+          breadcrumbWidthsIncludingMargin.push(item.offsetWidth + marginWidths);
+        }
+
+        let overflowWidth = breadcrumbWidthsIncludingMargin[0];
+
+        for (let i = 0; i < breadcrumbWidthsIncludingMargin.length - 1; i++) {
+          // count used one less than length to account for the included overflow item
+          const index = displayItemIndex(
+            breadcrumbWidthsIncludingMargin.length,
+            i
+          );
+
+          if (spaceAvailable >= breadcrumbWidthsIncludingMargin[index]) {
+            spaceAvailable -= breadcrumbWidthsIncludingMargin[index];
+            willFit += 1;
+          } else {
+            break;
+          }
+        }
+        // address overflow breadcrumb if needed
+        if (willFit > 1 && willFit < sizingBreadcrumbItems.length - 1) {
+          // -1 for overflow item
+
+          while (willFit > 1 && spaceAvailable < overflowWidth) {
+            willFit -= 1;
+
+            // Highly unlikely any useful breadcrumb-item is smaller
+
+            // item removed is based on last item added which is the current value of willFit
+            const itemToRemove = displayItemIndex(
+              sizingBreadcrumbItems.length - 1,
+              willFit
+            );
+            spaceAvailable += breadcrumbWidthsIncludingMargin[itemToRemove];
+          }
         }
       }
 
-      // address overflow breadcrumb if needed
-      if (willFit > 1 && willFit < sizingBreadcrumbItems.length - 1) {
-        // -1 for overflow item
-        for (let i = 1; willFit > 0 && spaceAvailable < overflowWidth; i++) {
-          // Highly unlikely any useful breadcrumb-item is smaller
-          willFit -= 1; // remove one breadcrumb-item
-
-          // we remove from 1 up not from end
-          spaceAvailable += breadcrumbWidthsIncludingMargin[i];
-        }
+      if (willFit < 1) {
+        setDisplayCount(1);
+      } else {
+        setDisplayCount(
+          maxVisibleBreadcrumbItems
+            ? Math.min(willFit, maxVisibleBreadcrumbItems)
+            : willFit
+        );
       }
     }
-
-    setDisplayCount(
-      maxVisibleBreadcrumbItems
-        ? Math.min(willFit, maxVisibleBreadcrumbItems)
-        : willFit
-    );
   };
 
   useEffect(() => {
@@ -269,7 +290,7 @@ BreadcrumbWithOverflow.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * maximum visible breadcrumb-items
+   * maximum visible breadcrumb-items values less than 1 treated as 1
    */
   maxVisibleBreadcrumbItems: PropTypes.number,
   /**

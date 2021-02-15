@@ -75,7 +75,12 @@ export const BreadcrumbWithOverflow = ({
     const newOverflowBreadcrumbItems = [];
     let child;
 
-    // only display the last item if willFit === 1 otherwise always include the last first item
+    // The breadcrumb has the form [first item] [overflow] [items 2...(n-1)] [last item].
+    // The overflow is only shown if there isn't space to display all the items, and in that case:
+    //  * the last item is always displayed (even if there isn't really space for it -- it can contract to an ellipsis);
+    //  * the first item is the next to be displayed, if there's space once the last item and overflow are shown;
+    //  * any remaining space after the first item, last item and overflow are shown is used to show items (n-1), (n-2), (n-3), ..., until the space is used up ;
+    // Note that displayCount has been computed based on the available space and the above sequence.
     const overflowStart = displayCount > 1 ? 1 : 0;
     for (let i = overflowStart; i < childArray.length - displayCount; i++) {
       child = childArray[i];

@@ -126,9 +126,9 @@ export const BreadcrumbWithOverflow = ({
       );
     }
 
-    // skip items in overflow + 1 for first item
+    // skip items in overflow + overflowStart
     for (
-      let i = newOverflowBreadcrumbItems.length + 1;
+      let i = newOverflowBreadcrumbItems.length + overflowStart;
       i < childArray.length;
       i++
     ) {
@@ -202,18 +202,19 @@ export const BreadcrumbWithOverflow = ({
             break;
           }
         }
-        // address overflow breadcrumb if needed
-        if (willFit > 1 && willFit < sizingBreadcrumbItems.length - 1) {
+
+        // if not enough space for all breadcrumb items
+        if (willFit < breadcrumbWidthsIncludingMargin.length - 1) {
           // -1 for overflow item
 
-          while (willFit > 1 && spaceAvailable < overflowWidth) {
+          while (willFit > 0 && spaceAvailable < overflowWidth) {
             willFit -= 1;
 
-            // Highly unlikely any useful breadcrumb-item is smaller
+            // Highly unlikely any useful breadcrumb-item is smaller than the overflow menu, but we loop anyway just in case
 
             // item removed is based on last item added which is the current value of willFit
             const itemToRemove = displayItemIndex(
-              sizingBreadcrumbItems.length - 1,
+              breadcrumbWidthsIncludingMargin.length,
               willFit
             );
             spaceAvailable += breadcrumbWidthsIncludingMargin[itemToRemove];
@@ -221,7 +222,7 @@ export const BreadcrumbWithOverflow = ({
         }
       }
 
-      if (willFit < 1) {
+      if (willFit <= 1) {
         setDisplayCount(1);
       } else {
         setDisplayCount(
@@ -290,7 +291,7 @@ BreadcrumbWithOverflow.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * maximum visible breadcrumb-items values less than 1 treated as 1
+   * maximum visible breadcrumb-items (values less than 1 are treated as 1)
    */
   maxVisibleBreadcrumbItems: PropTypes.number,
   /**

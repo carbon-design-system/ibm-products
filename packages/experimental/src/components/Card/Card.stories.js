@@ -9,7 +9,7 @@ import React from 'react';
 import { Card } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import mdx from './Card.mdx';
-import { ArrowRight24 } from '@carbon/icons-react';
+import { ArrowRight24, Cloud32 } from '@carbon/icons-react';
 
 export default {
   title: 'Experimental/Card',
@@ -25,15 +25,14 @@ export default {
 const defaultProps = {
   label: 'Label',
   title: 'Title',
-  onActionSubmit: () => {},
+  onActionClick: () => {},
   children: (
     <p>
       expressive card body content block. description inviting the user to take
       action on the card.
     </p>
   ),
-  mediaUrl: 'https://via.placeholder.com/400x300/000/fff',
-  mediaAltText: 'alt text',
+  actionButtonText: 'Primary button',
 };
 
 const Template = (opts) => {
@@ -45,26 +44,51 @@ const Template = (opts) => {
   );
 };
 
-export const ActionButton = Template.bind({});
-ActionButton.args = {
-  ...defaultProps,
-  actionButtonText: 'Primary button',
+const TemplateWide = (opts) => {
+  const { children, ...args } = opts;
+  return (
+    <div className="card-demo-container--wide">
+      <Card {...args}>{children}</Card>
+    </div>
+  );
 };
 
-export const ActionIcon = Template.bind({});
-ActionIcon.args = {
+export const Default = Template.bind({});
+Default.args = {
+  ...defaultProps,
+  media: <img src="https://via.placeholder.com/300x200/000/fff" alt="img" />,
+};
+
+export const MediaLeft = TemplateWide.bind({});
+MediaLeft.args = {
+  ...defaultProps,
+  mediaPosition: 'left',
+  media: <img src="https://via.placeholder.com/300x225/000/fff" alt="img" />,
+};
+
+export const WithActionIcon = Template.bind({});
+WithActionIcon.args = {
   ...defaultProps,
   actionIcon: ArrowRight24,
+  actionButtonText: '',
 };
 
-export const ClickableWithFunction = Template.bind({});
-ClickableWithFunction.args = {
+export const WithPictogram = Template.bind({});
+WithPictogram.args = {
+  ...defaultProps,
+  pictogram: Cloud32,
+};
+
+export const ClickableCardWithOnclick = Template.bind({});
+ClickableCardWithOnclick.args = {
   ...defaultProps,
   onClick: () => {},
+  actionButtonText: '',
 };
 
-export const ClickableWithLink = Template.bind({});
-ClickableWithLink.args = {
+export const ClickableCardWithLink = Template.bind({});
+ClickableCardWithLink.args = {
   ...defaultProps,
   href: '/',
+  actionButtonText: '',
 };

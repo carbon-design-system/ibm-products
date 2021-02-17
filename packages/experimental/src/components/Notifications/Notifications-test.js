@@ -8,7 +8,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
 import React from 'react';
-import Notifications from './Notifications';
+import { Notifications } from '.';
 import { pkgPrefix } from '../../global/js/settings';
 
 describe('Notifications', () => {

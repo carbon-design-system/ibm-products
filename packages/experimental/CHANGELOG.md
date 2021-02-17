@@ -3,6 +3,58 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.15](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.14...@carbon/ibm-cloud-cognitive-experimental@0.19.15) (2021-02-17)
+
+
+### Bug Fixes
+
+* script to generate component shell using correct prefix now ([#350](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/350)) ([671897d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/671897dc27ff82c68119f4164e3a5139aeec6de0))
+
+
+
+
+
+## [0.19.14](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.13...@carbon/ibm-cloud-cognitive-experimental@0.19.14) (2021-02-17)
+
+
+### Bug Fixes
+
+* **Notifications:** underline issue and fix named vs default imports ([#343](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/343)) ([2691b64](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/2691b64b07882e50ecefd9c97dc3e47d5bee6327))
+
+
+
+
+
+## [0.19.13](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.12...@carbon/ibm-cloud-cognitive-experimental@0.19.13) (2021-02-16)
+
+
+### Bug Fixes
+
+* more header review updates ([#325](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/325)) ([2809275](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/28092758e76a0f56daa14df747f3ce0572ef8b59))
+
+
+
+
+
+## [0.19.12](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.11...@carbon/ibm-cloud-cognitive-experimental@0.19.12) (2021-02-12)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
+## [0.19.11](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.10...@carbon/ibm-cloud-cognitive-experimental@0.19.11) (2021-02-11)
+
+
+### Bug Fixes
+
+* **Notifications:** use correct value to prevent horizontal scroll ([#334](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/334)) ([fbc260e](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/fbc260ec9fa54842a5f72c0890dd09e40988b096))
+
+
+
+
+
 ## [0.19.10](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.9...@carbon/ibm-cloud-cognitive-experimental@0.19.10) (2021-02-11)
 
 

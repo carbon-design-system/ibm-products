@@ -220,10 +220,15 @@ $raised-z-index: 99;
   }
 }
 
-.#{$block-class}--breadcrumb-row
+.#{$block-class}--breadcrumb-container
   .#{$block-class}--breadcrumb-title.#{$prefix}--breadcrumb-item {
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.#{$block-class}--breadcrumb-container--hidden
+  .#{$block-class}--breadcrumb-title.#{$block-class}--breadcrumb-title {
+  overflow: initial;
 }
 
 .#{$block-class}--breadcrumb-title.#{$prefix}--breadcrumb-item

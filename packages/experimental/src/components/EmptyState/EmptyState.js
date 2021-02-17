@@ -7,8 +7,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
 import { Button, Link } from 'carbon-components-react';
+import IllustrationRenderer from './assets/IllustrationRenderer';
 
 import { pkgPrefix } from '../../global/js/settings';
 
@@ -25,34 +25,19 @@ export const EmptyState = ({
   illustrationTheme,
   onActionEvent,
 }) => {
-  const requestImageFile = require.context('./assets', true, /.svg$/);
-  const defaultIllustrationOptions = [
-    'nodata',
-    'error',
-    'unauthorized',
-    'notags',
-    'notfound',
-    'notifications',
-  ];
-  const illustrationSrc =
-    typeof illustration === 'string' &&
-    defaultIllustrationOptions.includes(illustration)
-      ? requestImageFile(`./${illustrationTheme}/${illustration}.svg`)
-      : illustration;
-  const illustrationClasses = cx([
-    `${pkgPrefix}-empty-state-illustration`,
-    `${pkgPrefix}-empty-state-illustration--${illustrationSize}`,
-  ]);
+  const renderIllustration = () => {
+    return (
+      <IllustrationRenderer
+        type={illustration}
+        theme={illustrationTheme}
+        size={illustrationSize}
+      />
+    );
+  };
 
   return (
     <div className={`${pkgPrefix}-empty-state`}>
-      {illustration && (
-        <img
-          src={illustrationSrc}
-          alt="Empty state illustration"
-          className={illustrationClasses}
-        />
-      )}
+      {illustration && renderIllustration()}
       {typeof heading !== 'string' ? (
         heading
       ) : (

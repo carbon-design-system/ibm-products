@@ -42,7 +42,7 @@ describe('Notifications', () => {
     const { container } = render(
       <Notifications data={[]} open setOpen={() => {}} />
     );
-    const renderedEmptyStateSvg = container.querySelector('img');
+    const renderedEmptyStateSvg = container.querySelector('svg');
     expect(renderedEmptyStateSvg).toBeTruthy();
   });
 

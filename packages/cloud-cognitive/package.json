@@ -32,6 +32,7 @@
     "build": "yarn clean && yarn build:js && yarn build:scss",
     "build:js": "node scripts/build",
     "build:scss": "bundler bundle:scss src/index.scss && copyfiles 'src/**/*.scss' scss -u 1",
+    "ci-check": "node scripts/import",
     "clean": "rimraf es lib scss",
     "test": "bundler check 'src/**/*.scss'"
   },

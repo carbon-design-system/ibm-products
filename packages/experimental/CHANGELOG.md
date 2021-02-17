@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.15](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.14...@carbon/ibm-cloud-cognitive-experimental@0.19.15) (2021-02-17)
+
+
+### Bug Fixes
+
+* script to generate component shell using correct prefix now ([#350](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/350)) ([671897d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/671897dc27ff82c68119f4164e3a5139aeec6de0))
+
+
+
+
+
 ## [0.19.14](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.13...@carbon/ibm-cloud-cognitive-experimental@0.19.14) (2021-02-17)
 
 

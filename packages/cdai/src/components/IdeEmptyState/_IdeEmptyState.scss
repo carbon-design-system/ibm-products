@@ -60,15 +60,16 @@
 }
 .#{$ide-prefix}-empty-state__link {
   @include carbon--type-style('body-short-01');
-  margin-top: $spacing-03;
+
   display: flex;
   flex-direction: row;
+  margin-top: $spacing-03;
 
   .#{$ide-prefix}-empty-state__launchIcon {
     width: $layout-01;
     height: $layout-01;
-    fill: $interactive-03;
     margin-left: $spacing-01;
+    fill: $interactive-03;
   }
 }
 .#{$ide-prefix}-empty-state__link:first-of-type {

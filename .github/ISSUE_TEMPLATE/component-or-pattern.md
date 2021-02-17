@@ -32,13 +32,13 @@ labels: 'status: needs triage'
 
 - [ ] Delivery follows the guidance in
       [Contributing Guide](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CONTRIBUTING.md#5-make-a-pull-request)
-- [ ] Feedback from collaborators are addressed, and any follow-up issues are
+- [ ] Feedback from collaborators is addressed, and any follow-up issues are
       created
 
 #### Testing
 
-- [ ] Input and outputs are tested
 - [ ] Tests are behavior-driven and based on interactions defined in the design
+- [ ] Inputs and outputs are tested
 - [ ] Accessibility tests for each use case
 - [ ] Targets 80% coverage
 
@@ -46,10 +46,10 @@ labels: 'status: needs triage'
 
 - [ ] Examples document designed use cases
 - [ ] Code examples for each use case, args tables, and docgen are available
-- [ ] Additional usage documentation is accessible via the 'Docs' tab
 - [ ] Provides
       [customization](https://www.npmjs.com/package/@storybook/addon-controls)
       of modifiers
+- [ ] Additional usage documentation is accessible via the 'Docs' tab
 
 #### Consistency
 

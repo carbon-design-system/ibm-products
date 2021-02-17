@@ -165,10 +165,11 @@ const MultiStepTemplate = (args) => {
             onChange={(e) => setName(e.target.value)}
             labelText="Name your application"
             placeholder="Application name"
-            className={`${pkgPrefix}--apikey-modal-input`}
             ref={inputRef}
           />
-          <FormGroup legendText="What do you want your application to be able to do">
+          <FormGroup
+            legendText="What do you want your application to be able to do"
+            className={`${pkgPrefix}--apikey-modal-opts`}>
             <RadioButtonGroup
               onChange={(opt) => setPermissions(opt)}
               valueSelected={permissions}
@@ -194,6 +195,8 @@ const MultiStepTemplate = (args) => {
                 labelB="On"
                 toggled={allResources}
                 disabled={loading}
+                // eslint-disable-next-line jsx-a11y/no-autofocus
+                autoFocus
               />
             </FormGroup>
             <FormGroup>

@@ -17,10 +17,17 @@ import { pkgPrefix /*, carbonPrefix */ } from '../../global/js/settings';
 
 import { useWindowResize, useWindowScroll } from '../../global/js/use';
 
-import { BreadcrumbItem, Grid, Column, Row } from 'carbon-components-react';
+import {
+  BreadcrumbItem,
+  Grid,
+  Column,
+  Row,
+  ButtonSet,
+} from 'carbon-components-react';
 
-import { ActionBar } from './ActionBar';
+import { ActionBar } from '../ActionBar/';
 import { BreadcrumbWithOverflow, TagSet } from '../';
+import { ButtonSetWithOverflow } from './ButtonSetWithOverflow';
 
 const blockClass = `${pkgPrefix}-page-header`;
 
@@ -33,12 +40,14 @@ export const PageHeader = ({
   keepBreadcrumbAndTabs,
   navigation,
   pageActions,
+  pageHeaderOffset,
   preCollapseTitleRow,
   subtitle,
   tags,
   title,
   titleIcon: TitleIcon,
 }) => {
+  const [hasActionBar, setHasActionBar] = useState(false);
   const [metrics, setMetrics] = useState({});
   const [scrollYValue, setScrollYValue] = useState(0);
   const [componentCssCustomProps, setComponentCssCustomProps] = useState({});
@@ -51,6 +60,76 @@ export const PageHeader = ({
   const [lastRowBufferActive, setLastRowBufferActive] = useState(false);
   const dynamicRefs = useRef({});
   const headerEl = useRef(null);
+  const [actionBarMaxWidth, setActionBarMaxWidth] = useState(0);
+  const [actionBarMinWidth, setActionBarMinWidth] = useState(0);
+  const [
+    pageActionInBreadcrumbMaxWidth,
+    setPageActionInBreadcrumbMaxWidth,
+  ] = useState(0);
+  const [
+    pageActionInBreadcrumbMinWidth,
+    setPageActionInBreadcrumbMinWidth,
+  ] = useState(0);
+  const [actionBarColumnWidth, setActionBarColumnWidth] = useState(0);
+
+  useEffect(() => {
+    let newActionBarWidth = 'initial';
+    let newPageActionInBreadcrumbWidth = 'initial';
+
+    if (actionBarColumnWidth > 0) {
+      if (
+        pageActionInBreadcrumbMaxWidth > 0 &&
+        actionBarColumnWidth >
+          actionBarMaxWidth + pageActionInBreadcrumbMaxWidth
+      ) {
+        newPageActionInBreadcrumbWidth = `${pageActionInBreadcrumbMaxWidth}px`;
+      } else if (pageActionInBreadcrumbMinWidth > 0) {
+        newPageActionInBreadcrumbWidth = `${pageActionInBreadcrumbMinWidth}px`;
+      }
+
+      if (
+        actionBarMaxWidth > 0 &&
+        actionBarColumnWidth >
+          pageActionInBreadcrumbMinWidth + actionBarMaxWidth
+      ) {
+        newActionBarWidth = `${actionBarMaxWidth}px`;
+      } else {
+        if (actionBarMinWidth > 0) {
+          newActionBarWidth = `${
+            actionBarColumnWidth - pageActionInBreadcrumbMinWidth
+          }px`;
+        }
+      }
+    }
+
+    setComponentCssCustomProps((prevCSSProps) => {
+      return {
+        ...prevCSSProps,
+        [`--${blockClass}--max-action-bar-width-px`]: newActionBarWidth,
+        [`--${blockClass}--button-set-in-breadcrumb-width-px`]: `${newPageActionInBreadcrumbWidth}`,
+      };
+    });
+  }, [
+    actionBarColumnWidth,
+    actionBarMaxWidth,
+    actionBarMinWidth,
+    pageActionInBreadcrumbMaxWidth,
+    pageActionInBreadcrumbMinWidth,
+  ]);
+
+  const handleActionBarWidthChange = ({ minWidth, maxWidth }) => {
+    setActionBarMaxWidth(maxWidth);
+    setActionBarMinWidth(minWidth);
+  };
+
+  const handleButtonSetWidthChange = ({ minWidth, maxWidth }) => {
+    setPageActionInBreadcrumbMaxWidth(maxWidth);
+    setPageActionInBreadcrumbMinWidth(minWidth);
+  };
+
+  const handleResizeActionBarColumn = (width) => {
+    setActionBarColumnWidth(width);
+  };
 
   const getDynamicRef = (selector) => {
     // would love to do this differently but digging in the dom seems easier
@@ -80,13 +159,13 @@ export const PageHeader = ({
     const navigationRowEl = getDynamicRef(`.${blockClass}--navigation-row`);
 
     update.headerHeight = headerEl.current ? headerEl.current.clientHeight : 0;
-    update.headerWidth = headerEl.current ? headerEl.current.clientWidth : 0;
+    update.headerWidth = headerEl.current ? headerEl.current.offsetWidth : 0;
 
     update.breadcrumbRowHeight = breadcrumbRowEl
       ? breadcrumbRowEl.clientHeight
       : 0;
     update.breadcrumbRowWidth = breadcrumbRowEl
-      ? breadcrumbRowEl.clientWidth
+      ? breadcrumbRowEl.offsetWidth
       : 0;
 
     update.breadcrumbTitleHeight = breadcrumbTitleEl
@@ -125,7 +204,6 @@ export const PageHeader = ({
         update.breadcrumbRowSpaceBelow = isNaN(val) ? 0 : val;
       }
       if (titleRowEl) {
-        // debugger;
         val = parseFloat(
           window.getComputedStyle(titleRowEl).getPropertyValue('margin-top'),
           10
@@ -138,6 +216,8 @@ export const PageHeader = ({
   };
 
   useEffect(() => {
+    // NOTE: The buffer is used to add space between the bottom of the header and the last content
+
     // No navigation and title row not pre-collapsed
     // and only one of tags or (subtitle or available space)
     setLastRowBufferActive(
@@ -161,11 +241,10 @@ export const PageHeader = ({
     // Determine the location of the pageAction buttons
     setPageActionsInBreadcrumbRow(
       preCollapseTitleRow ||
-        (scrollYValue > metrics.titleRowSpaceAbove &&
-          actionBarItems !== undefined)
+        (scrollYValue > metrics.titleRowSpaceAbove && hasActionBar)
     );
   }, [
-    actionBarItems,
+    hasActionBar,
     metrics.breadcrumbRowSpaceBelow,
     metrics.titleRowSpaceAbove,
     preCollapseTitleRow,
@@ -179,7 +258,9 @@ export const PageHeader = ({
         ...prevCSSProps,
         [`--${blockClass}--height-px`]: `${metrics.headerHeight}px`,
         [`--${blockClass}--width-px`]: `${metrics.headerWidth}px`,
-        [`--${blockClass}--header-top`]: `${metrics.headerTopValue}px`,
+        [`--${blockClass}--header-top`]: `${
+          metrics.headerTopValue + pageHeaderOffset
+        }px`,
         [`--${blockClass}--breadcrumb-title-visibility`]:
           scrollYValue > 0 ? 'visible' : 'hidden',
         [`--${blockClass}--scroll`]: `${scrollYValue}`,
@@ -199,14 +280,15 @@ export const PageHeader = ({
         )}`,
         [`--${blockClass}--breadcrumb-row-width-px`]: `${metrics.breadcrumbRowWidth}px`,
         [`--${blockClass}--breadcrumb-top`]: `${Math.min(
-          0,
+          pageHeaderOffset,
           !keepBreadcrumbAndTabs && navigation
             ? metrics.headerHeight -
                 metrics.titleRowSpaceAbove -
                 metrics.navigationRowHeight -
                 metrics.breadcrumbRowHeight -
-                scrollYValue
-            : 0
+                scrollYValue +
+                pageHeaderOffset
+            : pageHeaderOffset
         )}px`,
       };
     });
@@ -222,6 +304,7 @@ export const PageHeader = ({
     metrics.headerTopValue,
     metrics.navigationRowHeight,
     navigation,
+    pageHeaderOffset,
     scrollYValue,
     tags,
   ]);
@@ -267,6 +350,10 @@ export const PageHeader = ({
       !(breadcrumbItems === undefined && actionBarItems === undefined)
     );
   }, [actionBarItems, breadcrumbItems]);
+
+  useEffect(() => {
+    setHasActionBar(actionBarItems !== undefined);
+  }, [actionBarItems]);
 
   useEffect(() => {
     // Determines the amount of space needed below the title
@@ -354,24 +441,24 @@ export const PageHeader = ({
           {hasBreadcrumbRow ? (
             <Row
               className={cx(`${blockClass}--breadcrumb-row`, {
-                [`${blockClass}--breadcrumb-row--with-actions`]:
-                  actionBarItems !== undefined,
+                [`${blockClass}--breadcrumb-row--with-actions`]: hasActionBar,
                 [`${blockClass}--breadcrumb-row--next-to-tabs`]: nextToTabsCheck(),
+                [`${blockClass}--breadcrumb-row--has-breadcrumbs`]: breadcrumbItems,
+                [`${blockClass}--breadcrumb-row--has-action-bar`]:
+                  actionBarItems || pageActions,
               })}>
               <div className={`${blockClass}--breadcrumb-row--container`}>
                 <Column
                   className={cx(`${blockClass}--breadcrumb-column`, {
                     [`${blockClass}--breadcrumb-column--background`]:
-                      breadcrumbItems !== undefined ||
-                      actionBarItems !== undefined,
+                      breadcrumbItems !== undefined || hasActionBar,
                   })}>
                   {/* keeps actionBar right even if empty */}
 
                   {breadcrumbItems !== undefined ? (
                     <BreadcrumbWithOverflow
                       className={`${blockClass}--breadcrumb`}
-                      noTrailingSlash={title !== undefined}
-                      maxVisibleBreadcrumbItems={4}>
+                      noTrailingSlash={title !== undefined}>
                       {breadcrumbItems}
                       {title ? (
                         <BreadcrumbItem
@@ -394,22 +481,41 @@ export const PageHeader = ({
                   )}
                 </Column>
                 <Column
-                  className={cx(
-                    `${blockClass}--action-bar-column ${blockClass}--action-bar-column--background`
-                  )}>
-                  {actionBarItems !== undefined ? (
-                    <>
-                      <div
-                        className={cx(`${blockClass}--page-actions`, {
-                          [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
-                        })}>
-                        {pageActions}
-                      </div>
-                      <ActionBar className={`${blockClass}--action-bar`}>
-                        {actionBarItems}
-                      </ActionBar>
-                    </>
-                  ) : null}
+                  className={cx([
+                    `${blockClass}--action-bar-column ${blockClass}--action-bar-column--background`,
+                    {
+                      [`${blockClass}--action-bar-column--has-page-actions`]: pageActions,
+                    },
+                  ])}>
+                  <ReactResizeDetector
+                    handleWidth={true}
+                    onResize={handleResizeActionBarColumn}>
+                    <div className={`${blockClass}--action-bar-column-content`}>
+                      {hasActionBar ? (
+                        // Investigate the responsive  behaviour or this and the title also fix the ActionBar Item and PageAction story css
+                        <>
+                          {pageActions && (
+                            <div
+                              className={cx(`${blockClass}--page-actions`, {
+                                [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
+                              })}>
+                              <ButtonSetWithOverflow
+                                className={`${blockClass}--button-set--in-breadcrumb`}
+                                onWidthChange={handleButtonSetWidthChange}>
+                                {pageActions}
+                              </ButtonSetWithOverflow>
+                            </div>
+                          )}
+                          <ActionBar
+                            className={`${blockClass}--action-bar`}
+                            onWidthChange={handleActionBarWidthChange}
+                            rightAlign={true}>
+                            {actionBarItems}
+                          </ActionBar>
+                        </>
+                      ) : null}
+                    </div>
+                  </ReactResizeDetector>
                 </Column>
               </div>
             </Row>
@@ -423,6 +529,7 @@ export const PageHeader = ({
                 `${blockClass}--title-row--spacing-below-${spacingBelowTitle}`,
                 {
                   [`${blockClass}--title-row--no-breadcrumb-row`]: !hasBreadcrumbRow,
+                  [`${blockClass}--title-row--under-action-bar`]: hasActionBar,
                   [`${blockClass}--title-row--sticky`]:
                     pageActions !== undefined &&
                     actionBarItems === undefined &&
@@ -451,7 +558,10 @@ export const PageHeader = ({
                   className={cx(`${blockClass}--page-actions`, {
                     [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
                   })}>
-                  {pageActions}
+                  <ButtonSet
+                    className={`${blockClass}--page-actions-container`}>
+                    {pageActions}
+                  </ButtonSet>
                 </Column>
               ) : null}
             </Row>
@@ -524,7 +634,10 @@ PageHeader.propTypes = {
    * If provided, these are rendered at the top right of the header as
    * action icons. Optional.
    */
-  actionBarItems: PropTypes.element, // expect actionBarItems
+  actionBarItems: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.element,
+  ]), // expects action bar item as array or in fragment
   /**
    * A zone for placing high-level, client content above the page tabs.
    * Accepts arbitrary renderable content as a React node. Optional.
@@ -562,6 +675,11 @@ PageHeader.propTypes = {
    */
   pageActions: PropTypes.element,
   /**
+   * Number of pixels the page header sits from the top of the screen.
+   * The nature of the pageHeader makes this hard to measure
+   */
+  pageHeaderOffset: PropTypes.number,
+  /**
    * The title row typically starts below the breadcrumb row. This option
    * preCollapses it into the breadcrumb row.
    */
@@ -592,5 +710,6 @@ PageHeader.defaultProps = {
   background: false,
   className: '',
   keepBreadcrumbAndTabs: false,
+  pageHeaderOffset: 0,
   preCollapseTitleRow: false,
 };

@@ -7,11 +7,11 @@
 @import '../../global/styles/carbon-settings'; // goes before index as it affects how carbon is used.
 @import './index';
 
-$block-class: #{$pkg-prefix}-breadcrumb-with-overflow;
+$block-class: #{$pkg-prefix}-action-bar;
 
 .#{$block-class}--story__viewport {
   position: relative;
-  box-shadow: 0 0 0 $layout-02 $inverse-02;
+  box-shadow: 0 0 0 $layout-02 $ui-01;
 }
 
 .#{$block-class}--story__viewport::before {

@@ -13,7 +13,7 @@ import {
 } from 'carbon-components-react';
 import { idePrefix } from '../../globals/js/settings';
 import assets from './assets';
-import Launch24 from '@carbon/icons-react/lib/launch/24';
+import { Launch24 } from '@carbon/icons-react'
 
 const prefix = `${idePrefix}-empty-state`;
 

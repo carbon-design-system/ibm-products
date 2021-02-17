@@ -30,7 +30,6 @@ labels: 'status: needs triage'
 
 ### Definition of done
 
-- [ ] Implementation follows the requirements outlined below
 - [ ] Delivery follows the guidance in
       [Contributing Guide](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CONTRIBUTING.md#5-make-a-pull-request)
 - [ ] Feedback from collaborators are addressed, and any follow-up issues are

@@ -37,24 +37,31 @@ labels: 'status: needs triage'
 
 #### Testing
 
-- [ ] Tests are behavior-driven and based on interactions defined in the design
+- [ ] Tests are
+      [user-driven](https://testing-library.com/docs/guiding-principles) and
+      based on interactions defined in the design
 - [ ] Inputs and outputs are tested
-- [ ] Accessibility tests for each use case
+- [ ] [Accessibility tests](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/packages/experimental/scripts/generate/templates/DISPLAY_NAME-test.js#L16-L21)
+      for each use case
 - [ ] Targets 80% coverage
 
 #### Documentation
 
-- [ ] Examples document designed use cases
-- [ ] Code examples for each use case, args tables, and docgen are available
+- [ ] Example
+      [stories](https://storybook.js.org/docs/react/writing-stories/introduction)
+      capture and describe designed use cases
+- [ ] [Code examples for each use case, args tables, and docgen](https://storybook.js.org/docs/react/writing-docs/docs-page)
+      are available
 - [ ] Provides
-      [customization](https://www.npmjs.com/package/@storybook/addon-controls)
-      of modifiers
-- [ ] Additional usage documentation is accessible via the 'Docs' tab
+      [customization controls](https://storybook.js.org/docs/react/essentials/controls)
+      for interacting with inputs and modifiers
+- [ ] Additional usage documentation is accessible via the 'Docs' tab where
+      applicable
 
 #### Consistency
 
-- [ ] Props are consistent with Carbon-defined conventions, or internally when
-      unavailable
+- [ ] Props are consistent with Carbon-defined conventions, or otherwise
+      internally where unavailable
 - [ ] Custom class names can be supplied for additional style customization
 - [ ] Additional props are
       [passed through](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)

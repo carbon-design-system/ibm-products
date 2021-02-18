@@ -8,7 +8,17 @@
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
-$block-class: #{$exp-prefix}-page-header;
+@import 'carbon-components/scss/components/button/button';
+@import 'carbon-components/scss/components/content-switcher/content-switcher';
+@import 'carbon-components/scss/components/tabs/tabs';
+
+@import './button-set-with-overflow';
+@import '../ActionBar/index';
+@import '../TagSet/index';
+@import '../BreadcrumbWithOverflow/index';
+@import './temp-combo-button';
+
+$block-class: #{$pkg-prefix}-page-header;
 $raised-z-index: 99;
 
 .#{$block-class} {
@@ -25,6 +35,8 @@ $raised-z-index: 99;
   --#{$block-class}--breadcrumb-title-opacity: 1;
   --#{$block-class}--breadcrumb-top: 0;
   --#{$block-class}--background-opacity: 1;
+  --#{$block-class}--breadcrumb-title-top: initial;
+  --#{$block-class}--button-set-in-breadcrumb-width-px: initial;
 }
 
 @mixin appearingBackground() {
@@ -64,8 +76,8 @@ $raised-z-index: 99;
   min-width: calc(
     100% +
       (
-        var(--exp-page-header--width-px) -
-          var(--exp-page-header--breadcrumb-row-width-px)
+        var(--#{$block-class}--width-px) -
+          var(--#{$block-class}--breadcrumb-row-width-px)
       ) / 2
   );
 }
@@ -99,24 +111,34 @@ $raised-z-index: 99;
   opacity: 1;
 }
 
+.#{$block-class}--breadcrumb-container {
+  width: 100%;
+}
+
 .#{$block-class}--action-bar-column {
+  // @include carbon--breakpoint-up('md') {
+  .#{$block-class}--breadcrumb-row--has-breadcrumbs & {
+    flex: 1 0 40%;
+    max-width: 40%;
+  }
+}
+
+.#{$block-class}--action-bar-column-content {
   display: flex;
-  flex: 0 0 100%;
-  flex-wrap: wrap-reverse; /* page actions go below the actionBarItems */
   justify-content: flex-end;
+  overflow: hidden;
+  white-space: nowrap;
 
   @include carbon--breakpoint-up('lg') {
     flex-wrap: nowrap; /* assume enough space */
-  }
-
-  @include carbon--breakpoint-up('md') {
-    flex: 0 0 40%;
-    max-width: 40%;
   }
 }
 
 .#{$block-class}--breadcrumb-row .#{$block-class}--page-actions {
   display: inline-block;
+  flex: 1 1 var(--#{$block-class}--button-set-in-breadcrumb-width-px);
+  width: 100%;
+  max-width: var(--#{$block-class}--button-set-in-breadcrumb-width-px);
   white-space: nowrap;
   visibility: hidden;
   opacity: 0;
@@ -129,12 +151,17 @@ $raised-z-index: 99;
   opacity: 1;
 }
 
+.#{$block-class}--breadcrumb-row .#{$block-class}--button-set--in-breadcrumb {
+  // display: inline-block;
+}
+
 .#{$block-class}--breadcrumb-column {
   flex: 0 0 100%;
   max-width: 100%;
   overflow: hidden; /* required for ellipsis in title */
 
-  @include carbon--breakpoint-up('md') {
+  // @include carbon--breakpoint-up('md') {
+  .#{$block-class}--breadcrumb-row--has-action-bar & {
     flex: 0 1 60%;
     max-width: 60%;
   }
@@ -164,20 +191,22 @@ $raised-z-index: 99;
   padding-top: $spacing-04;
 }
 
-.#{$block-class}--breadcrumb .#{$prefix}--breadcrumb-item {
+.#{$block-class}--breadcrumb .#{$carbon-prefix}--breadcrumb-item {
   margin-right: $spacing-02;
 }
 
-.#{$block-class}--breadcrumb .#{$prefix}--breadcrumb-item::after {
+.#{$block-class}--breadcrumb .#{$carbon-prefix}--breadcrumb-item::after {
   margin-left: $spacing-02;
 }
 
-.#{$block-class}--breadcrumb .#{$prefix}--breadcrumb-item,
-.#{$block-class}--breadcrumb .#{$prefix}--breadcrumb-item .#{prefix}--link {
+.#{$block-class}--breadcrumb .#{$carbon-prefix}--breadcrumb-item,
+.#{$block-class}--breadcrumb
+  .#{$carbon-prefix}--breadcrumb-item
+  .#{$carbon-prefix}--link {
   @include carbon--type-style('label-01');
 }
 
-.#{$block-class}--breadcrumb-title {
+.exp-page-header--breadcrumb-title {
   position: relative;
 
   &:not(.#{$block-class}--breadcrumb-title--pre-collapsed) {
@@ -187,8 +216,26 @@ $raised-z-index: 99;
     ); /* token linter does not support this form */
 
     visibility: var(--#{$block-class}--breadcrumb-title-visibility);
-    opacity: var(--exp-page-header--breadcrumb-title-opacity);
+    opacity: var(--#{$block-class}--breadcrumb-title-opacity);
   }
+}
+
+.#{$block-class}--breadcrumb-container
+  .#{$block-class}--breadcrumb-title.#{$prefix}--breadcrumb-item {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.#{$block-class}--breadcrumb-container--hidden
+  .#{$block-class}--breadcrumb-title.#{$block-class}--breadcrumb-title {
+  overflow: initial;
+}
+
+.#{$block-class}--breadcrumb-title.#{$prefix}--breadcrumb-item
+  .#{$prefix}--link {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 // .#{$block-class}--breadcrumb-row::before {
@@ -199,19 +246,26 @@ $raised-z-index: 99;
 // }
 
 .#{$block-class}--action-bar {
-  display: inline-block;
+  flex: 1 1 var(--#{$block-class}--max-action-bar-width-px);
+  width: 100%;
+  max-width: var(--#{$block-class}--max-action-bar-width-px);
   margin-top: calc(-1 * #{$spacing-04}); /* align with breadcrumb */
   padding-top: $spacing-04;
   white-space: nowrap;
+  vertical-align: top;
 }
 
 .#{$block-class}--title-row {
   z-index: $raised-z-index + 1;
-  margin-top: $layout-02;
+  margin-top: $spacing-02;
   margin-bottom: 0;
 
   @include carbon--breakpoint-up('md') {
     flex-wrap: nowrap; /* assume enough space */
+  }
+
+  &.#{$block-class}--title-row--under-action-bar {
+    margin-top: $spacing-06;
   }
 
   + .#{$block-class}--last-row-buffer--active {
@@ -240,7 +294,7 @@ $raised-z-index: 99;
 
   &.#{$block-class}--title-row--sticky {
     position: sticky;
-    top: 0;
+    top: var(--#{$block-class}--breadcrumb-top);
   }
 }
 
@@ -262,7 +316,7 @@ $raised-z-index: 99;
 }
 
 .#{$block-class}--title--fades {
-  opacity: calc(1 - var(--exp-page-header--breadcrumb-title-opacity));
+  opacity: calc(1 - var(--#{$block-class}--breadcrumb-title-opacity));
 }
 
 .#{$block-class}--title-icon {
@@ -277,17 +331,22 @@ $raised-z-index: 99;
   @include carbon--breakpoint-up('md') {
     flex: 1 1 40%;
     margin-top: 0;
-    text-align: right;
   }
+}
+
+.#{$block-class}--page-actions-container {
+  justify-content: flex-end;
 }
 
 .#{$block-class}--title-row .#{$block-class}--page-actions {
   visibility: visible;
   opacity: 1;
   transition: all $duration--fast-02 carbon--motion('entrance', 'productive');
+  transition-property: opacity, visibility;
 }
 
 .#{$block-class}--title-row .#{$block-class}--page-actions--in-breadcrumb {
+  flex: 0 1 100%;
   visibility: hidden;
   opacity: 0;
 }
@@ -316,7 +375,7 @@ $raised-z-index: 99;
   flex-wrap: wrap-reverse;
   margin-top: $spacing-04;
 
-  .#{$prefix}--content-switcher {
+  .#{$carbon-prefix}--content-switcher {
     box-sizing: content-box;
     padding-bottom: $layout-01;
   }
@@ -330,7 +389,7 @@ $raised-z-index: 99;
   margin-top: $layout-02;
 }
 
-.#{$block-class}--navigation-row .#{$prefix}--tab-content {
+.#{$block-class}--navigation-row .#{$carbon-prefix}--tab-content {
   display: none; /* need to figure out how to handle the tab content */
 }
 
@@ -361,6 +420,6 @@ $raised-z-index: 99;
   text-align: initial;
 }
 
-.#{$block-class}--navigation-row .#{$prefix}--content-switcher-btn {
+.#{$block-class}--navigation-row .#{$carbon-prefix}--content-switcher-btn {
   background-color: $ui-background;
 }

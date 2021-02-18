@@ -33,7 +33,7 @@
     "react": "^16.13.1"
   },
   "devDependencies": {
-    "@carbon/bundler": "^10.10.0",
+    "@carbon/bundler": "^10.11.0",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
     "@testing-library/react": "^11.2.2",
@@ -55,10 +55,9 @@
     "prettier-config-carbon": "^0.4.0",
     "react": "^16.13.1",
     "rimraf": "^3.0.2",
-    "rollup": "^2.35.1",
     "stylelint": "^13.8.0",
     "stylelint-config-carbon": "^1.2.0",
-    "stylelint-plugin-carbon-tokens": "^0.7.0"
+    "stylelint-plugin-carbon-tokens": "^0.8.1"
   },
   "eslintConfig": {
     "parser": "babel-eslint",

@@ -8,8 +8,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
 import React from 'react';
-import Notifications from './Notifications';
-import { expPrefix as prefix } from '../../global/js/settings';
+import { Notifications } from '.';
+import { pkgPrefix } from '../../global/js/settings';
 
 describe('Notifications', () => {
   test('renders the notification panel', () => {
@@ -32,7 +32,7 @@ describe('Notifications', () => {
 
     click(
       container.querySelector(
-        `#${prefix}-notifications-do-not-disturb-toggle-component`
+        `#${pkgPrefix}-notifications-do-not-disturb-toggle-component`
       )
     );
     expect(onToggle).toBeCalled();
@@ -62,7 +62,7 @@ describe('Notifications', () => {
       />
     );
     const renderedEmptyStateSvg = container.querySelectorAll(
-      `svg.${prefix}-notifications-panel-notification-status-icon-error`
+      `svg.${pkgPrefix}-notifications-panel-notification-status-icon-error`
     );
     expect(renderedEmptyStateSvg[0]).toBeTruthy();
   });
@@ -83,7 +83,7 @@ describe('Notifications', () => {
       />
     );
     const renderedEmptyStateSvg = container.querySelectorAll(
-      `svg.${prefix}-notifications-panel-notification-status-icon-warning`
+      `svg.${pkgPrefix}-notifications-panel-notification-status-icon-warning`
     );
     expect(renderedEmptyStateSvg[0]).toBeTruthy();
   });
@@ -104,7 +104,7 @@ describe('Notifications', () => {
       />
     );
     const renderedEmptyStateSvg = container.querySelectorAll(
-      `svg.${prefix}-notifications-panel-notification-status-icon-success`
+      `svg.${pkgPrefix}-notifications-panel-notification-status-icon-success`
     );
     expect(renderedEmptyStateSvg[0]).toBeTruthy();
   });
@@ -125,7 +125,7 @@ describe('Notifications', () => {
       />
     );
     const renderedEmptyStateSvg = container.querySelectorAll(
-      `svg.${prefix}-notifications-panel-notification-status-icon-informational`
+      `svg.${pkgPrefix}-notifications-panel-notification-status-icon-informational`
     );
     expect(renderedEmptyStateSvg[0]).toBeTruthy();
   });

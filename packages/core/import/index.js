@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { bgGreen, bgRed, red } = require('colors');
+const { bgGreen, bgRed, red } = require('chalk');
 
 module.exports = (path) => {
   let status;

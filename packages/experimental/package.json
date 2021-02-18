@@ -50,7 +50,6 @@
   },
   "devDependencies": {
     "@carbon/ibm-cloud-cognitive-core": "^0.6.1",
-    "chalk": "^4.1.0",
     "fs-extra": "^9.1.0",
     "param-case": "^3.0.4",
     "yargs": "^16.2.0"

@@ -5,4 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-module.exports = (module) => require('assert')(module);
+const { bgGreen, bgRed, red } = require('colors');
+
+module.exports = (path) => {
+  let status;
+
+  try {
+    require('assert')(require(path));
+  } catch (error) {
+    status = error;
+  } finally {
+    console.log(`${status ? bgRed('FAIL') : bgGreen('PASS')} ${path}`);
+
+    if (status) {
+      console.error(`\n${red(status)}`);
+    }
+  }
+};

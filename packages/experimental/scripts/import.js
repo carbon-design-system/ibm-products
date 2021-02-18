@@ -6,5 +6,5 @@
  */
 
 module.exports = require('@carbon/ibm-cloud-cognitive-core/import')(
-  require('../lib')
+  require('path').resolve(__dirname, '..', 'lib')
 );

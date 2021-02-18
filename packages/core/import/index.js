@@ -15,7 +15,7 @@ module.exports = (path) => {
   } catch (error) {
     status = error;
   } finally {
-    console.log(`${status ? bgRed('FAIL') : bgGreen('PASS')} ${path}`);
+    console.log(`${status ? bgRed('FAIL') : bgGreen('PASS')} Import '${path}'`);
 
     if (status) {
       console.error(`\n${red(status)}`);

@@ -16,7 +16,7 @@ import React from 'react';
 /**
  * TODO: Add use of Carbon prefix if needed
  */
-import { expPrefix /*, carbonPrefix */ } from '../../global/js/settings';
+import { pkgPrefix /*, carbonPrefix */ } from '../../global/js/settings';
 
 const blockClass = `${pkgPrefix}--STYLE_NAME`;
 

@@ -162,7 +162,7 @@ const NoTags = ({ theme, size, ...rest }) => {
       {...rest}>
       <defs>
         <linearGradient
-          id="prefix__b"
+          id="prefix__b_dark"
           x1={634.81}
           y1={667.18}
           x2={644.85}
@@ -173,7 +173,7 @@ const NoTags = ({ theme, size, ...rest }) => {
           <stop offset={1} stopOpacity={0.1} />
         </linearGradient>
         <linearGradient
-          id="prefix__c"
+          id="prefix__c_dark"
           x1={29.21}
           y1={7.75}
           x2={56.14}
@@ -184,7 +184,7 @@ const NoTags = ({ theme, size, ...rest }) => {
           <stop offset={1} stopColor="#c6c6c6" />
         </linearGradient>
         <linearGradient
-          id="prefix__d"
+          id="prefix__d_dark"
           x1={45.47}
           y1={46.54}
           x2={55.21}
@@ -194,7 +194,7 @@ const NoTags = ({ theme, size, ...rest }) => {
           <stop offset={1} stopColor="#c6c6c6" />
         </linearGradient>
         <linearGradient
-          id="prefix__e"
+          id="prefix__e_dark"
           x1={38.25}
           y1={59.31}
           x2={38.25}
@@ -204,7 +204,7 @@ const NoTags = ({ theme, size, ...rest }) => {
           <stop offset={0.78} stopColor="#e0e0e0" />
         </linearGradient>
         <linearGradient
-          id="prefix__f"
+          id="prefix__f_dark"
           x1={28.77}
           y1={9.54}
           x2={48.15}
@@ -223,7 +223,7 @@ const NoTags = ({ theme, size, ...rest }) => {
           <stop offset={0.73} stopColor="#d0d0d0" stopOpacity={0} />
         </linearGradient>
         <linearGradient
-          id="prefix__a"
+          id="prefix__a_dark"
           x1={51.28}
           y1={68.32}
           x2={51.34}
@@ -240,23 +240,23 @@ const NoTags = ({ theme, size, ...rest }) => {
           <stop offset={1} stopColor="#d0d0d0" stopOpacity={0} />
         </linearGradient>
         <linearGradient
-          id="prefix__g"
+          id="prefix__g_dark"
           x1={51.09}
           y1={68.25}
           x2={51.22}
           y2={68.33}
-          xlinkHref="#prefix__a"
+          xlinkHref="#prefix__a_dark"
         />
         <linearGradient
-          id="prefix__h"
+          id="prefix__h_dark"
           x1={51.41}
           y1={68.32}
           x2={51.46}
           y2={68.35}
-          xlinkHref="#prefix__a"
+          xlinkHref="#prefix__a_dark"
         />
         <linearGradient
-          id="prefix__i"
+          id="prefix__i_dark"
           x1={33.94}
           y1={19.46}
           x2={42.79}
@@ -266,7 +266,7 @@ const NoTags = ({ theme, size, ...rest }) => {
           <stop offset={1} stopColor="#8c8c8c" />
         </linearGradient>
         <linearGradient
-          id="prefix__j"
+          id="prefix__j_dark"
           x1={35.3}
           y1={23.46}
           x2={38.85}
@@ -283,38 +283,38 @@ const NoTags = ({ theme, size, ...rest }) => {
       </defs>
       <path fill="none" d="M0 0h80v80H0z" />
       <path
-        fill="url(#prefix__b)"
+        fill="url(#prefix__b_dark)"
         d="M51.59 78.34l-26.8-15.48 3.62-2.09 26.8 15.48-3.62 2.09z"
       />
       <path
         d="M45.47 30.38l6.58-3.76 3.12-1.85v.15a1.28 1.28 0 00-.17-.47L42.19 2.21c-.24-.42-.63-.65-.88-.51L28.47 9.12a.44.44 0 00-.18.4l13.88 3a1.38 1.38 0 00.62 1.07z"
-        fill="url(#prefix__c)"
+        fill="url(#prefix__c_dark)"
       />
       <path
         d="M55 66.29a.46.46 0 00.18-.41V25.06a1 1 0 000-.29l-3.12 1.85-6.58 3.76 6.06 37.92z"
-        fill="url(#prefix__d)"
+        fill="url(#prefix__d_dark)"
       />
       <path
         d="M51.53 26.47L38.69 4.23c-.25-.42-.64-.64-.88-.5L25 11.14a.43.43 0 00-.18.4v40.82a1.35 1.35 0 00.62 1.07l25.65 14.83c.34.2.62 0 .62-.36V27.08a1.33 1.33 0 00-.18-.61zM37.08 24a6.93 6.93 0 01-3.14-5.44c0-2 1.4-2.81 3.14-1.81a7 7 0 013.13 5.44c0 2.01-1.4 2.81-3.13 1.81z"
-        fill="url(#prefix__e)"
+        fill="url(#prefix__e_dark)"
       />
       <path
         d="M39.05 4a1.71 1.71 0 00-.64-.64l-.6.34a.3.3 0 01.16 0 1 1 0 01.72.55l12.84 22.22a1.33 1.33 0 01.18.61V67.9a.41.41 0 01-.19.4l.58-.34V27.08a1.75 1.75 0 00-.24-.82z"
-        fill="url(#prefix__f)"
+        fill="url(#prefix__f_dark)"
       />
-      <path d="M51.28 68.33z" fill="url(#prefix__a)" />
+      <path d="M51.28 68.33z" fill="url(#prefix__a_dark)" />
       <path
         d="M51.23 68.32a.42.42 0 01-.14-.06.42.42 0 00.14.06z"
-        fill="url(#prefix__g)"
+        fill="url(#prefix__g_dark)"
       />
-      <path d="M51.48 68.32h-.08z" fill="url(#prefix__h)" />
+      <path d="M51.48 68.32h-.08z" fill="url(#prefix__h_dark)" />
       <path
         d="M39.66 22.17a6.93 6.93 0 01-3.14-5.44 1.36 1.36 0 010-.21c-1.48-.56-2.6.27-2.6 2.05A6.93 6.93 0 0037.08 24c1.66 1 3 .24 3.11-1.6a3.49 3.49 0 01-.53-.23z"
-        fill="url(#prefix__i)"
+        fill="url(#prefix__i_dark)"
       />
       <path
         d="M35.67 16.33a2.88 2.88 0 011.41.43 7 7 0 013.13 5.44c0 1.42-.7 2.24-1.73 2.24a2.82 2.82 0 01-1.4-.43 6.93 6.93 0 01-3.14-5.44c0-1.42.7-2.24 1.73-2.24m0-.41c-1.3 0-2.15 1-2.15 2.65a7.3 7.3 0 003.35 5.8 3.23 3.23 0 001.61.48c1.3 0 2.15-1 2.15-2.65a7.29 7.29 0 00-3.35-5.8 3.2 3.2 0 00-1.61-.48z"
-        fill="url(#prefix__j)"
+        fill="url(#prefix__j_dark)"
       />
     </svg>
   );

@@ -9,6 +9,7 @@ import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 
 import { EmptyState } from '.';
+import { NoDataEmptyState } from './NoDataEmptyState';
 import CustomIllustration from './story_assets/empty-state-bright-magnifying-glass.svg';
 
 const { name } = EmptyState;
@@ -83,7 +84,7 @@ describe(name, () => {
   });
 
   test('should render empty state with illustration', () => {
-    const { container } = render(<EmptyState illustration="nodata" />);
+    const { container } = render(<NoDataEmptyState />);
     const renderedSvg = container.querySelector('svg');
     expect(renderedSvg).toBeTruthy();
   });

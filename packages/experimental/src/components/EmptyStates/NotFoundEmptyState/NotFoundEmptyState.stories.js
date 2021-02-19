@@ -8,16 +8,15 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add20 } from '@carbon/icons-react';
-import CustomIllustration from './story_assets/empty-state-bright-magnifying-glass.svg';
-import mdx from './EmptyState.mdx';
+import mdx from './NotFoundEmptyState.mdx';
 
-import { EmptyState } from '.';
+import { NotFoundEmptyState } from './NotFoundEmptyState';
 
-import styles from './_index.scss';
+import styles from '../_index.scss';
 
 export default {
-  title: 'Experimental/EmptyState',
-  component: EmptyState,
+  title: 'Experimental/EmptyStates/NotFoundEmptyState',
+  component: NotFoundEmptyState,
   parameters: {
     styles,
     docs: {
@@ -28,7 +27,7 @@ export default {
 
 const Template = (args) => {
   return (
-    <EmptyState
+    <NotFoundEmptyState
       heading="Start by adding data assets"
       subtext={
         <p>
@@ -43,26 +42,9 @@ const Template = (args) => {
 export const Default = Template.bind({});
 Default.args = {};
 
-export const WithIllustration = Template.bind({});
-WithIllustration.args = {
-  illustration: 'nodata',
-};
-
 export const WithDarkModeIllustration = Template.bind({});
 WithDarkModeIllustration.args = {
-  illustration: 'nodata',
   illustrationTheme: 'dark',
-};
-
-export const WithDarkModeNotFoundIllustration = Template.bind({});
-WithDarkModeNotFoundIllustration.args = {
-  illustration: 'notfound',
-  illustrationTheme: 'dark',
-};
-
-export const WithCustomIllustration = Template.bind({});
-WithCustomIllustration.args = {
-  illustration: CustomIllustration,
 };
 
 export const withAction = Template.bind({});

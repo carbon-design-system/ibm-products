@@ -1,43 +1,21 @@
-/**
- * Copyright IBM Corp. 2020, 2020
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Link } from 'carbon-components-react';
-import IllustrationRenderer from './assets/IllustrationRenderer';
 
 import { pkgPrefix } from '../../global/js/settings';
 
-export const EmptyState = ({
+export const EmptyStateContent = ({
+  heading,
+  subtext,
   actionText,
+  onActionEvent,
   actionType,
   actionIcon,
-  heading,
   linkText,
   linkUrl,
-  subtext,
-  illustration,
-  illustrationSize,
-  illustrationTheme,
-  onActionEvent,
 }) => {
-  const renderIllustration = () => {
-    return (
-      <IllustrationRenderer
-        type={illustration}
-        theme={illustrationTheme}
-        size={illustrationSize}
-      />
-    );
-  };
-
   return (
-    <div className={`${pkgPrefix}-empty-state`}>
-      {illustration && renderIllustration()}
+    <>
       {typeof heading !== 'string' ? (
         heading
       ) : (
@@ -62,11 +40,11 @@ export const EmptyState = ({
           {linkText}
         </Link>
       )}
-    </div>
+    </>
   );
 };
 
-EmptyState.propTypes = {
+EmptyStateContent.propTypes = {
   /**
    * Empty state action button icon
    */
@@ -128,11 +106,4 @@ EmptyState.propTypes = {
    * Empty state subtext
    */
   subtext: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
-};
-
-EmptyState.defaultProps = {
-  heading: 'Start by adding data assets',
-  subtext: 'Click Upload assets to upload your data',
-  illustrationTheme: 'light',
-  illustrationSize: 'lg',
 };

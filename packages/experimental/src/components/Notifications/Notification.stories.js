@@ -19,7 +19,7 @@ import { white } from '@carbon/colors';
 import styles from './_storybook-styles.scss';
 import { storybookPrefixCanary as storybookPrefix } from '../../global/js/settings';
 
-import Notifications from './Notifications';
+import { Notifications } from '.';
 import mdx from './Notifications.mdx';
 import data from './Notifications_data';
 

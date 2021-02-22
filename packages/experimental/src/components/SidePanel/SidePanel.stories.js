@@ -28,7 +28,7 @@ import {
   HeaderName,
 } from 'carbon-components-react/lib/components/UIShell';
 import { Copy20, Delete20, Settings20 } from '@carbon/icons-react';
-import SidePanel from './SidePanel';
+import { SidePanel } from '.';
 import styles from './_storybook-styles.scss';
 import mdx from './SidePanel.mdx';
 import { storybookPrefixCanary as storybookPrefix } from '../../global/js/settings';

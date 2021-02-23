@@ -20,6 +20,13 @@ export default {
       page: mdx,
     },
   },
+  decorators: [
+    (Story) => (
+      <div className="bx--grid">
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 const defaultProps = {
@@ -34,33 +41,41 @@ const defaultProps = {
   ),
   primaryButtonText: 'Primary',
   cols: 4,
+  cards: 1,
 };
 
 const Template = (opts) => {
-  const { children, cols, ...args } = opts;
-  return (
-    <div className="bx--grid">
-      <div className="bx--row">
-        <div className={`bx--col-lg-${cols}`}>
-          <Card {...args}>{children}</Card>
-        </div>
+  const { children, cols, cards, ...args } = opts;
+  const cardsArray = [];
+  for (let i = 0; i < cards; i++) {
+    cardsArray.push(
+      <div className={`bx--col-lg-${cols}`}>
+        <Card {...args}>{children}</Card>
       </div>
-    </div>
-  );
+    );
+  }
+  return <div className="bx--row">{cardsArray.map((c) => c)}</div>;
 };
 
 export const Default = Template.bind({});
 Default.args = {
   ...defaultProps,
-  media: <img src="https://via.placeholder.com/300x200/000/fff" alt="img" />,
+  media: <img src="https://via.placeholder.com/600x400/000/fff" alt="img" />,
+};
+
+export const MultipleCards = Template.bind({});
+MultipleCards.args = {
+  ...defaultProps,
+  cards: 4,
+  media: <img src="https://via.placeholder.com/600x400/000/fff" alt="img" />,
 };
 
 export const MediaLeft = Template.bind({});
 MediaLeft.args = {
   ...defaultProps,
   mediaPosition: 'left',
-  media: <img src="https://via.placeholder.com/400x300/000/fff" alt="img" />,
-  cols: 12,
+  media: <img src="https://via.placeholder.com/600x450/000/fff" alt="img" />,
+  cols: 8,
 };
 
 export const WithActionIcon = Template.bind({});

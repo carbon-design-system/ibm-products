@@ -20,7 +20,7 @@ const changeArrayPosition = (arr, originalPosition, newPosition) => {
   return arr;
 };
 
-const SidePanel = ({
+export const SidePanel = ({
   open,
   setOpen,
   placement,
@@ -595,5 +595,3 @@ SidePanel.defaultProps = {
   theme: 'light',
   currentStep: 0,
 };
-
-export default SidePanel;

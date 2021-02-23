@@ -214,16 +214,27 @@
       opacity: 1;
     }
   }
-  .#{$pkg-prefix}-notifications-panel-notification-today:not(:last-of-type):before,
-  .#{$pkg-prefix}-notifications-panel-notification-yesterday:not(:last-of-type):before,
-  .#{$pkg-prefix}-notifications-panel-notification-previous:not(:last-of-type):before {
+  .#{$pkg-prefix}-notifications-panel-notification-today:not(:first-of-type):before,
+  .#{$pkg-prefix}-notifications-panel-notification-yesterday:not(:first-of-type):before,
+  .#{$pkg-prefix}-notifications-panel-notification-previous:not(:first-of-type):before {
     position: absolute;
-    bottom: 0;
+    top: 0;
     width: calc(100% - 2rem);
     height: 1px;
     margin: 0 auto;
     background-color: $ui-02;
+    // stylelint-disable-next-line carbon/motion-token-use
+    transition: background-color 250ms;
+    transition-timing-function: carbon--motion(standard);
     content: '';
+  }
+  .#{$pkg-prefix}-notifications-panel-notification-today:hover
+    + .#{$pkg-prefix}-notifications-panel-notification-today:not(:first-of-type):before,
+  .#{$pkg-prefix}-notifications-panel-notification-yesterday:hover
+    + .#{$pkg-prefix}-notifications-panel-notification-yesterday:not(:first-of-type):before,
+  .#{$pkg-prefix}-notifications-panel-notification-previous:hover
+    + .#{$pkg-prefix}-notifications-panel-notification-previous:not(:first-of-type):before {
+    background-color: transparent;
   }
   .#{$pkg-prefix}-notificaitons-panel-main-section-empty.#{$pkg-prefix}-notifications-panel-main-section {
     display: flex;
@@ -250,7 +261,7 @@
     border-top: 1px solid $ui-02;
     .#{$pkg-prefix}-notifications-view-all-button {
       width: 100%;
-      max-width: calc(100% - 2.25rem);
+      max-width: calc(100% - 2.5rem);
       height: 2.5rem;
       min-height: 2.5rem;
       color: $text-01;

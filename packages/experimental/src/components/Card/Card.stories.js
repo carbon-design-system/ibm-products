@@ -9,7 +9,7 @@ import React from 'react';
 import { Card } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import mdx from './Card.mdx';
-import { ArrowRight24 } from '@carbon/icons-react';
+import { ArrowRight24, Cloud32 } from '@carbon/icons-react';
 
 export default {
   title: 'Experimental/Card',
@@ -25,46 +25,75 @@ export default {
 const defaultProps = {
   label: 'Label',
   title: 'Title',
-  onActionSubmit: () => {},
+  onActionClick: () => {},
   children: (
     <p>
       expressive card body content block. description inviting the user to take
       action on the card.
     </p>
   ),
-  mediaUrl: 'https://via.placeholder.com/400x300/000/fff',
-  mediaAltText: 'alt text',
+  primaryButtonText: 'Primary',
+  cols: 4,
 };
 
 const Template = (opts) => {
-  const { children, ...args } = opts;
+  const { children, cols, ...args } = opts;
   return (
-    <div className="card-demo-container">
-      <Card {...args}>{children}</Card>
+    <div className="bx--grid">
+      <div className="bx--row">
+        <div className={`bx--col-lg-${cols}`}>
+          <Card {...args}>{children}</Card>
+        </div>
+      </div>
     </div>
   );
 };
 
-export const ActionButton = Template.bind({});
-ActionButton.args = {
+export const Default = Template.bind({});
+Default.args = {
   ...defaultProps,
-  actionButtonText: 'Primary button',
+  media: <img src="https://via.placeholder.com/300x200/000/fff" alt="img" />,
 };
 
-export const ActionIcon = Template.bind({});
-ActionIcon.args = {
+export const MediaLeft = Template.bind({});
+MediaLeft.args = {
+  ...defaultProps,
+  mediaPosition: 'left',
+  media: <img src="https://via.placeholder.com/400x300/000/fff" alt="img" />,
+  cols: 12,
+};
+
+export const WithActionIcon = Template.bind({});
+WithActionIcon.args = {
   ...defaultProps,
   actionIcon: ArrowRight24,
+  primaryButtonText: '',
 };
 
-export const ClickableWithFunction = Template.bind({});
-ClickableWithFunction.args = {
+export const WithPictogram = Template.bind({});
+WithPictogram.args = {
+  ...defaultProps,
+  pictogram: Cloud32,
+};
+
+export const WithSeondaryAction = Template.bind({});
+WithSeondaryAction.args = {
+  ...defaultProps,
+  secondaryButtonText: 'Secondary',
+  secondaryButtonKind: 'secondary',
+  cols: 8,
+};
+
+export const ClickableCardWithOnclick = Template.bind({});
+ClickableCardWithOnclick.args = {
   ...defaultProps,
   onClick: () => {},
+  primaryButtonText: '',
 };
 
-export const ClickableWithLink = Template.bind({});
-ClickableWithLink.args = {
+export const ClickableCardWithLink = Template.bind({});
+ClickableCardWithLink.args = {
   ...defaultProps,
   href: '/',
+  primaryButtonText: '',
 };

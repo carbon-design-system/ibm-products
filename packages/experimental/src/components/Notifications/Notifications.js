@@ -23,7 +23,7 @@ import { timeAgo } from './utils';
 import { EmptyState } from '../EmptyState';
 import useClickOutside from './useClickOutside';
 
-const Notifications = ({
+export const Notifications = ({
   data,
   open,
   setOpen,
@@ -427,5 +427,3 @@ Notifications.defaultProps = {
   onDismissAllNotifications: () => {},
   onDismissSingleNotification: () => {},
 };
-
-export default Notifications;

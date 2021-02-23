@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.17](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.16...@carbon/ibm-cloud-cognitive-experimental@0.19.17) (2021-02-22)
+
+
+### Bug Fixes
+
+* secondary button + prop comments + column config ([#335](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/335)) ([87b704b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/87b704b4dd656dead0fa5992f5536aa303af5cfa))
+
+
+
+
+
+## [0.19.16](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.15...@carbon/ibm-cloud-cognitive-experimental@0.19.16) (2021-02-19)
+
+
+### Bug Fixes
+
+* add export ([#354](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/354)) ([c8c2eb7](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c8c2eb7818c0fedf5471f684040788f1fac2afe3))
+
+
+
+
+
 ## [0.19.15](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.14...@carbon/ibm-cloud-cognitive-experimental@0.19.15) (2021-02-17)
 
 

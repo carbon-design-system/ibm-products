@@ -6,5 +6,3 @@
  */
 
 export default 'Experimental';
-
-export const sectionTitle = 'Legacy/Automation';

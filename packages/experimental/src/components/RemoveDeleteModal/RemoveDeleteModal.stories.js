@@ -11,7 +11,7 @@ import { RemoveDeleteModal } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import mdx from './RemoveDeleteModal.mdx';
 import {
-  storybookPrefixCanary /* , storybookPrefixReleased */,
+  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
 } from '../../../config';
 
 export default {

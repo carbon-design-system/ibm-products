@@ -12,7 +12,7 @@ import React from 'react';
 // import { action } from '@storybook/addon-actions';
 
 import {
-  storybookPrefixCanary /* , storybookPrefixReleased */,
+  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
 } from '../../../config';
 
 import { DISPLAY_NAME } from '.';

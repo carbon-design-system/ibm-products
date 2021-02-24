@@ -27,7 +27,7 @@ import { ActionBarItem } from '../ActionBar';
 import { PageActionItem } from './PageActionItem';
 import { PageHeader } from '.';
 import {
-  storybookPrefixCanary /* , storybookPrefixReleased */,
+  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
 } from '../../../config';
 
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.

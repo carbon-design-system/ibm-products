@@ -14,7 +14,7 @@ import ansibleLogo from './technologyUsedLogos/ansible_logo.png';
 import grafanaLogo from './technologyUsedLogos/grafana_logo.png';
 import jsLogo from './technologyUsedLogos/js_logo.png';
 import {
-  storybookPrefixCanary /* , storybookPrefixReleased */,
+  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
 } from '../../../config';
 
 import { AboutModal } from './AboutModal';

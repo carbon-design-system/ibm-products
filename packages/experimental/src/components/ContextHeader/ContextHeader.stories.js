@@ -11,7 +11,7 @@ import { ContextHeader } from '.';
 
 import styles from './_ContextHeader.scss';
 import {
-  storybookPrefixCanary /* , storybookPrefixReleased */,
+  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
 } from '../../../config';
 
 export default {

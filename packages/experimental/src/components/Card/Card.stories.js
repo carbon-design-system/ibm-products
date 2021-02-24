@@ -11,7 +11,7 @@ import styles from './_storybook-styles.scss'; // import index in case more file
 import mdx from './Card.mdx';
 import { ArrowRight24, Cloud32 } from '@carbon/icons-react';
 import {
-  storybookPrefixCanary /* , storybookPrefixReleased */,
+  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
 } from '../../../config';
 
 export default {

@@ -12,7 +12,7 @@ import { Bee24 } from '@carbon/icons-react';
 
 import styles from './_index.scss'; // import index in case more files are added later.
 import {
-  storybookPrefixCanary /* , storybookPrefixReleased */,
+  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
 } from '../../../config';
 
 export default {

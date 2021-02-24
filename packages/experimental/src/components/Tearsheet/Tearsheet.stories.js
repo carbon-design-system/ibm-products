@@ -9,10 +9,8 @@ import React, { useState } from 'react';
 
 import { action } from '@storybook/addon-actions';
 
-import {
-  pkgPrefix,
-  storybookPrefixCanary as storybookPrefix,
-} from '../../global/js/settings';
+import { pkgPrefix } from '../../global/js/settings';
+import { storybookPrefixCanary as storybookPrefix } from '../../../config';
 
 import { Button, Tab, Tabs } from 'carbon-components-react';
 

@@ -18,7 +18,7 @@ import { User20, Notification20 } from '@carbon/icons-react';
 import { white } from '@carbon/colors';
 import styles from './_storybook-styles.scss';
 import {
-  storybookPrefixCanary /* , storybookPrefixReleased */,
+  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
 } from '../../../config';
 
 import { Notifications } from '.';

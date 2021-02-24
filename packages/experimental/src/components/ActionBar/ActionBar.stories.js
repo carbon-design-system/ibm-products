@@ -11,10 +11,9 @@ import { action } from '@storybook/addon-actions';
 import { ActionBar, ActionBarItem } from '.';
 import { Lightning16, Bee24 } from '@carbon/icons-react';
 
-import {
-  pkgPrefix,
-  storybookPrefixCanary as storybookPrefix,
-} from '../../global/js/settings';
+import { pkgPrefix } from '../../global/js/settings';
+
+import { storybookPrefixCanary as storybookPrefix } from '../../../config';
 
 const blockClass = `${pkgPrefix}-action-bar`;
 

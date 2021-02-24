@@ -11,7 +11,7 @@ import { TearsheetShell } from './TearsheetShell';
 
 import styles from './_storybook-styles.scss';
 import {
-  storybookPrefixCanary /* , storybookPrefixReleased */,
+  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
 } from '../../../config';
 
 import mdx from './TearsheetShell.mdx';

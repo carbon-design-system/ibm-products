@@ -32,7 +32,7 @@ import { SidePanel } from '.';
 import styles from './_storybook-styles.scss';
 import mdx from './SidePanel.mdx';
 import {
-  storybookPrefixCanary /* , storybookPrefixReleased */,
+  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
 } from '../../../config';
 
 export default {

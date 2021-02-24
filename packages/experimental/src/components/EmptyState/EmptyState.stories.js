@@ -11,7 +11,7 @@ import { Add20 } from '@carbon/icons-react';
 import CustomIllustration from './assets/light/error.svg';
 import mdx from './EmptyState.mdx';
 import {
-  storybookPrefixCanary /* , storybookPrefixReleased */,
+  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
 } from '../../../config';
 
 import { EmptyState } from '.';

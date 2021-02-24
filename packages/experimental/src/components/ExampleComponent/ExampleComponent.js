@@ -5,11 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { Canary } from '../_Canary';
 import { Button, ButtonSet } from 'carbon-components-react';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { pkgPrefix } from '../../global/js/settings';
+import { getPackageFlags, pkgPrefix } from '../../global/js/settings';
 import cx from 'classnames';
 
 const blockClass = `${pkgPrefix}-example-component`;
@@ -28,6 +29,10 @@ export const ExampleComponent = ({
   size,
   ...props
 }) => {
+  if (!getPackageFlags().component.ExampleComponent) {
+    return <Canary component="ExampleComponent" />;
+  }
+
   const mode = boxedBorder
     ? `${blockClass}--boxed-set`
     : `${blockClass}--shadow-set`;

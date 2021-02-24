@@ -5,6 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { getPackageFlags } from './global/js/settings';
-
-export * from './components';
+export { Canary } from './Canary';

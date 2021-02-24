@@ -11,6 +11,10 @@ import { withCarbonTheme } from '@carbon/storybook-addon-theme/react';
 
 import index from './index.scss';
 
+// Only impacts on experimental stories
+import { getPackageFlags } from '../../experimental/src/global/js/settings';
+getPackageFlags({ component: { enableAll: false } }); // {ExampleComponent: true}});
+
 const Style = ({ children, styles }) => {
   const { unuse, use } = styles;
 

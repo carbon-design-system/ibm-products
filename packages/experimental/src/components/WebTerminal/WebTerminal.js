@@ -26,7 +26,9 @@ const WebTerminal = ({
     documentationLinks,
   ]);
 
-  return open ? (
+  if (!open) return null;
+
+  return (
     <div
       className={cx([
         `${pkgPrefix}-web-terminal`,
@@ -78,7 +80,7 @@ const WebTerminal = ({
       </header>
       <div className={`${pkgPrefix}-web-terminal__body`}>{children}</div>
     </div>
-  ) : null;
+  );
 };
 
 WebTerminal.defaultProps = {

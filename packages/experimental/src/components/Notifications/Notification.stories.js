@@ -21,7 +21,7 @@ import {
   storybookPrefixCanary /* , storybookPrefixReleased */,
 } from '../../../config';
 
-import Notifications from './Notifications';
+import { Notifications } from '.';
 import mdx from './Notifications.mdx';
 import data from './Notifications_data';
 

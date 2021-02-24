@@ -7,7 +7,7 @@
 
 import React from 'react';
 import CustomIllustration from './EmptyState/assets/light/error.svg';
-import { storybookPrefixReleased as storybookPrefix } from '../global/js/settings';
+import { storybookPrefixReleased as storybookPrefix } from '../../config';
 
 import { EmptyState } from './EmptyState';
 import styles from './EmptyState/_index.scss';

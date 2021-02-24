@@ -7,7 +7,9 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { storybookPrefixCanary as storybookPrefix } from '../../global/js/settings';
+import {
+  storybookPrefixCanary /* , storybookPrefixReleased */,
+} from '../../../config';
 
 import { ExampleComponent } from '.';
 

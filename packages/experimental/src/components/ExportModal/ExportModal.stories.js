@@ -10,7 +10,9 @@ import { Button } from 'carbon-components-react';
 import { ExportModal } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import mdx from './ExportModal.mdx';
-import { storybookPrefixCanary as storybookPrefix } from '../../global/js/settings';
+import {
+  storybookPrefixCanary /* , storybookPrefixReleased */,
+} from '../../../config';
 
 export default {
   title: `${storybookPrefix}/ExportModal`,

@@ -3,6 +3,99 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.20](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.19...@carbon/ibm-cloud-cognitive-experimental@0.19.20) (2021-02-23)
+
+
+### Bug Fixes
+
+* prefix not using global settings ([#331](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/331)) ([39b3c54](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/39b3c544cf0769dc621ae11843e60a4a54773ddf))
+
+
+
+
+
+## [0.19.19](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.18...@carbon/ibm-cloud-cognitive-experimental@0.19.19) (2021-02-23)
+
+
+### Bug Fixes
+
+* unwrap if fragment ([#357](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/357)) ([f03c063](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f03c063ed60b563de4513ba513fd86c1f3e31a36))
+
+
+
+
+
+## [0.19.18](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.17...@carbon/ibm-cloud-cognitive-experimental@0.19.18) (2021-02-23)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
+## [0.19.17](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.16...@carbon/ibm-cloud-cognitive-experimental@0.19.17) (2021-02-22)
+
+
+### Bug Fixes
+
+* secondary button + prop comments + column config ([#335](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/335)) ([87b704b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/87b704b4dd656dead0fa5992f5536aa303af5cfa))
+
+
+
+
+
+## [0.19.16](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.15...@carbon/ibm-cloud-cognitive-experimental@0.19.16) (2021-02-19)
+
+
+### Bug Fixes
+
+* add export ([#354](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/354)) ([c8c2eb7](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c8c2eb7818c0fedf5471f684040788f1fac2afe3))
+
+
+
+
+
+## [0.19.15](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.14...@carbon/ibm-cloud-cognitive-experimental@0.19.15) (2021-02-17)
+
+
+### Bug Fixes
+
+* script to generate component shell using correct prefix now ([#350](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/350)) ([671897d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/671897dc27ff82c68119f4164e3a5139aeec6de0))
+
+
+
+
+
+## [0.19.14](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.13...@carbon/ibm-cloud-cognitive-experimental@0.19.14) (2021-02-17)
+
+
+### Bug Fixes
+
+* **Notifications:** underline issue and fix named vs default imports ([#343](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/343)) ([2691b64](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/2691b64b07882e50ecefd9c97dc3e47d5bee6327))
+
+
+
+
+
+## [0.19.13](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.12...@carbon/ibm-cloud-cognitive-experimental@0.19.13) (2021-02-16)
+
+
+### Bug Fixes
+
+* more header review updates ([#325](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/325)) ([2809275](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/28092758e76a0f56daa14df747f3ce0572ef8b59))
+
+
+
+
+
+## [0.19.12](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.11...@carbon/ibm-cloud-cognitive-experimental@0.19.12) (2021-02-12)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
 ## [0.19.11](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.10...@carbon/ibm-cloud-cognitive-experimental@0.19.11) (2021-02-11)
 
 

@@ -8,12 +8,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { pkgPrefix } from '../../global/js/settings';
+import { pkgPrefix, carbonPrefix } from '../../global/js/settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
 import unwrapIfFragment from '../../global/js/utils/unwrap-if-fragment';
-import { settings } from 'carbon-components';
-const { prefix } = settings;
 
 const blockClass = `${pkgPrefix}-temp-combo-button`;
 
@@ -34,7 +32,12 @@ export const TempComboButton = ({ buttons, className }) => {
       menuOptionsClass={`${blockClass}--options`}
       renderIcon={() => (
         <div
-          className={`${blockClass}--trigger  ${prefix}--btn ${prefix}--btn--primary ${prefix}--btn--field`}>
+          className={cx([
+            `${blockClass}--trigger`,
+            `${carbonPrefix}--btn`,
+            `${carbonPrefix}--btn--primary`,
+            `${carbonPrefix}--btn--field`,
+          ])}>
           Page actions
         </div>
       )}

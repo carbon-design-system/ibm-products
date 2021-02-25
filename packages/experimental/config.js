@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default 'Experimental';
+export const storybookPrefixCanary = 'Cloud & Cognitive/Canary';
+export const storybookPrefixReleased = 'Cloud & Cognitive/Released';

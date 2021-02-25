@@ -10,9 +10,12 @@ import React from 'react';
 import { ContextHeader } from '.';
 
 import styles from './_ContextHeader.scss';
+import {
+  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
+} from '../../../config';
 
 export default {
-  title: 'Experimental/ContextHeader',
+  title: `${storybookPrefix}/ContextHeader`,
   component: ContextHeader,
   parameters: { styles },
 };

@@ -13,13 +13,16 @@ import mdx from './AboutModal.mdx';
 import ansibleLogo from './technologyUsedLogos/ansible_logo.png';
 import grafanaLogo from './technologyUsedLogos/grafana_logo.png';
 import jsLogo from './technologyUsedLogos/js_logo.png';
+import {
+  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
+} from '../../../config';
 
 import { AboutModal } from './AboutModal';
 
 import styles from './_index.scss';
 
 export default {
-  title: 'Experimental/AboutModal',
+  title: `${storybookPrefix}/AboutModal`,
   component: AboutModal,
   parameters: {
     styles,

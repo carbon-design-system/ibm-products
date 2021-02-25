@@ -1,0 +1,71 @@
+import { Story, ArgsTable, Preview } from '@storybook/addon-docs/blocks';
+import WebTerminal from './WebTerminal';
+
+# WebTerminal
+
+[CD&AI WebTerminal usage guidelines](https://pages.github.ibm.com/cdai-design/pal/patterns/web-terminal/)
+
+## Overview
+
+The `WebTerminal` is prompted by the user and is persistent until dismissed. The
+purpose of a web terminal is to provide users with the ability to type commands
+manually instead of using the GUI.
+
+#### Why do we need an open prop?
+
+You have to pass an `open` prop which toggles from `true` to `false` or `false`
+to `true`. In this case I am using the global navigation terminal icon to
+trigger this `onClick`. It was designed this way so you can open the web
+terminal in any context like within a data table or button.
+
+#### Why do we need a closeTerminal callback?
+
+It is very important that you pass the `closeTerminal` function setting your
+provided `open` prop to false. We didn't add the logic to close the web terminal
+from the component because we want you, the developer, to be able to pass in any
+other operations you want to do like error checks or a confimation modal before
+the user closes the modal.
+
+Example:
+
+```jsx
+const [isTerminalOpen, setIsTerminalOpen] = useState(false);
+const closeTerminal = () => setIsTerminalOpen(false)
+
+<WebTerminal open={isTerminalOpen} closeTerminal={closeTerminal}>
+  ...
+</WebTerminal>
+```
+
+#### Passing in your own terminal.
+
+The `WebTerminal` is wrapper component for your own terminal component that you
+may have been using for your product. Simply pass your own terminal component as
+children.
+
+#### Help user's with helpful documentation links
+
+Optionally you can pass documentation links to help point your users to useful
+documentation for your terminal, or kubernetes commands etc.
+
+<hr />
+
+### Default
+
+The default web terminal is one which opens and the terminal loads. Then if the
+user desires to dismiss it they can click the close icon on the top right corner
+of the component.
+
+<Preview>
+  <Story id="experimental-webterminal--default" />
+</Preview>
+
+### With documentation links
+
+<Preview>
+  <Story id="experimental-webterminal--with-documentation-links" />
+</Preview>
+
+## Component API
+
+<ArgsTable of={WebTerminal} />

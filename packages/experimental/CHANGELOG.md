@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.20.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.22...@carbon/ibm-cloud-cognitive-experimental@0.20.0) (2021-02-25)
+
+
+### Features
+
+* Adds the web terminal component ([#341](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/341)) ([2460eed](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/2460eed2b0ef29d97a0bd2a2f63f6064ee406a03))
+
+
+
+
+
 ## [0.19.22](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.21...@carbon/ibm-cloud-cognitive-experimental@0.19.22) (2021-02-25)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental

@@ -1,11 +1,8 @@
 @import './index';
 
-.card-demo-container {
-  width: 100%;
-  max-width: 300px;
-}
+// make the root full width to get a better idea of how the cards
+// look in a real grid situation
 
-.card-demo-container--wide {
+#root {
   width: 100%;
-  max-width: 900px;
 }

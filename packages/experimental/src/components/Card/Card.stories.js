@@ -35,23 +35,19 @@ const defaultProps = {
       action on the card.
     </p>
   ),
-  actionButtonText: 'Primary button',
+  primaryButtonText: 'Primary',
+  cols: 4,
 };
 
 const Template = (opts) => {
-  const { children, ...args } = opts;
+  const { children, cols, ...args } = opts;
   return (
-    <div className="card-demo-container">
-      <Card {...args}>{children}</Card>
-    </div>
-  );
-};
-
-const TemplateWide = (opts) => {
-  const { children, ...args } = opts;
-  return (
-    <div className="card-demo-container--wide">
-      <Card {...args}>{children}</Card>
+    <div className="bx--grid">
+      <div className="bx--row">
+        <div className={`bx--col-lg-${cols}`}>
+          <Card {...args}>{children}</Card>
+        </div>
+      </div>
     </div>
   );
 };
@@ -62,18 +58,19 @@ Default.args = {
   media: <img src="https://via.placeholder.com/300x200/000/fff" alt="img" />,
 };
 
-export const MediaLeft = TemplateWide.bind({});
+export const MediaLeft = Template.bind({});
 MediaLeft.args = {
   ...defaultProps,
   mediaPosition: 'left',
-  media: <img src="https://via.placeholder.com/300x225/000/fff" alt="img" />,
+  media: <img src="https://via.placeholder.com/400x300/000/fff" alt="img" />,
+  cols: 12,
 };
 
 export const WithActionIcon = Template.bind({});
 WithActionIcon.args = {
   ...defaultProps,
   actionIcon: ArrowRight24,
-  actionButtonText: '',
+  primaryButtonText: '',
 };
 
 export const WithPictogram = Template.bind({});
@@ -82,16 +79,24 @@ WithPictogram.args = {
   pictogram: Cloud32,
 };
 
+export const WithSeondaryAction = Template.bind({});
+WithSeondaryAction.args = {
+  ...defaultProps,
+  secondaryButtonText: 'Secondary',
+  secondaryButtonKind: 'secondary',
+  cols: 8,
+};
+
 export const ClickableCardWithOnclick = Template.bind({});
 ClickableCardWithOnclick.args = {
   ...defaultProps,
   onClick: () => {},
-  actionButtonText: '',
+  primaryButtonText: '',
 };
 
 export const ClickableCardWithLink = Template.bind({});
 ClickableCardWithLink.args = {
   ...defaultProps,
   href: '/',
-  actionButtonText: '',
+  primaryButtonText: '',
 };

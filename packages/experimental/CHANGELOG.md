@@ -3,6 +3,58 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.21](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.20...@carbon/ibm-cloud-cognitive-experimental@0.19.21) (2021-02-24)
+
+
+### Bug Fixes
+
+* crypto for ssr and add test ([#337](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/337)) ([1464d16](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/1464d16646832472f44c2105c4a1c0e44b69c5bc))
+
+
+
+
+
+## [0.19.20](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.19...@carbon/ibm-cloud-cognitive-experimental@0.19.20) (2021-02-23)
+
+
+### Bug Fixes
+
+* prefix not using global settings ([#331](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/331)) ([39b3c54](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/39b3c544cf0769dc621ae11843e60a4a54773ddf))
+
+
+
+
+
+## [0.19.19](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.18...@carbon/ibm-cloud-cognitive-experimental@0.19.19) (2021-02-23)
+
+
+### Bug Fixes
+
+* unwrap if fragment ([#357](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/357)) ([f03c063](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f03c063ed60b563de4513ba513fd86c1f3e31a36))
+
+
+
+
+
+## [0.19.18](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.17...@carbon/ibm-cloud-cognitive-experimental@0.19.18) (2021-02-23)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
+## [0.19.17](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.16...@carbon/ibm-cloud-cognitive-experimental@0.19.17) (2021-02-22)
+
+
+### Bug Fixes
+
+* secondary button + prop comments + column config ([#335](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/335)) ([87b704b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/87b704b4dd656dead0fa5992f5536aa303af5cfa))
+
+
+
+
+
 ## [0.19.16](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.15...@carbon/ibm-cloud-cognitive-experimental@0.19.16) (2021-02-19)
 
 

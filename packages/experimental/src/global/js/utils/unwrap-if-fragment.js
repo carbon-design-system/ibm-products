@@ -10,21 +10,28 @@ const unwrapIfFragment = (children) => {
   const isFragment = (item) => item && item.type === React.Fragment;
 
   const addChildren = (children) => {
-    for (let child of children) {
-      if (isFragment(child)) {
-        addChildren(child.props.children);
+    const loopOver = (children) => {
+      for (let child of children) {
+        addChildren(child);
+      }
+    };
+
+    // children is nothing, one fragment, array with one or more children, or a single item
+    if (!children) return;
+
+    if (isFragment(children)) {
+      loopOver(children.props.children);
+    } else {
+      if (Array.isArray(children)) {
+        loopOver(children);
       } else {
-        newChildArray.push(child);
+        newChildArray.push(children);
       }
     }
   };
 
-  // nothing, one fragment, one or more children
-  if (isFragment(children)) {
-    addChildren(children.props.children);
-  } else {
-    addChildren(children);
-  }
+  // nothing, one fragment, array with one or more children, or a single item
+  addChildren(children);
 
   return newChildArray;
 };

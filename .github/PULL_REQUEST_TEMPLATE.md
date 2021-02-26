@@ -1,3 +1,7 @@
+---
+pipeline: 'Open pull requests'
+---
+
 Contributes to #
 
 {{short description}}

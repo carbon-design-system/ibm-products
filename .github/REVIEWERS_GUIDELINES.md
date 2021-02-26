@@ -8,8 +8,10 @@ Each PR should be reviewed based on these criteria where applicable.
 
 ## New production dependencies
 
-**Hey Reviewer!** Copy and paste the list below. Check where criteria passed,
-strike out where not applicable.
+**Hey Reviewer!** Copy and paste this entire section. Check where criteria
+passed, strike out where not applicable.
+
+`## Review of dependencies`
 
 In any case where a new dependency has been added to package.json review the
 following as part of the PR it is submitted with.
@@ -23,8 +25,10 @@ acceptable\
 
 ## Definition of done
 
-**Hey Reviewer!** Copy and paste the list below. Check where criteria passed,
+**Hey Reviewer!** Copy and paste the section below. Check where criteria passed,
 strike out where not applicable.
+
+`## Review for release`
 
 ### Readiness
 

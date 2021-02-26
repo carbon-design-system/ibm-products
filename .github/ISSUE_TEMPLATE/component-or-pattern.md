@@ -30,6 +30,10 @@ Before starting work on this epic, please review and complete the following.
 
 ### Working in Cloud and Cognitive package
 
-- [ ] Have reviewed contribution guidelines?
-- [ ] Have you noted our reviewer guidelines?
+- [ ] Have reviewed
+      [https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CONTRIBUTING.md](contribution
+      guidelines)?
+- [ ] Have you noted our
+      [https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/REVIEWERS_GUIDELINES.md](reviewer
+      guidelines)?
 - [ ] Did you use the CLI to scaffold your new component?

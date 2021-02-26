@@ -89,3 +89,16 @@ When you need to make a change, use the same method detailed above.
 
 Once all revisions to your pull request are complete, a maintainer will squash
 and merge your commits for you.
+
+## 7. New production dependencies
+
+If you introduce a new dependency to package.json then there will be some
+additional work to do.
+
+- [ ] Verify the dependency has previously been
+      [pedigree reviewed](https://pedigree-service.wdc1a.cirrus.ibm.com)
+- [ ] Verify the dependency
+      [doesn't contain any vulnerabilities](https://snyk.io/vuln)
+- [ ] Verify the dependency [bundle size](https://bundlephobia.com) is
+      acceptable
+- [ ] Verify the dependency is [actively maintained](https://www.npmtrends.com)

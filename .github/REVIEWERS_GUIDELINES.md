@@ -9,9 +9,22 @@ Each PR should be reviewed based on these criteria where applicable.
 **Hey Reviewer!** Copy and paste the list below. Check where criteria passed,
 strike out where not applicable.
 
-Definition of done
+## New production dependencies
 
-Readiness
+In any case where a new dependency has been added to package.json review the
+following as part of the PR it is submitted with.
+
+- [ ] Verify the dependency has previously been
+      [pedigree reviewed](https://pedigree-service.wdc1a.cirrus.ibm.com)
+- [ ] Verify the dependency
+      [doesn't contain any vulnerabilities](https://snyk.io/vuln)
+- [ ] Verify the dependency [bundle size](https://bundlephobia.com) is
+      acceptable
+- [ ] Verify the dependency is [actively maintained](https://www.npmtrends.com)
+
+## Definition of done
+
+### Readiness
 
 `- [ ]` One or more scenarios for a design pattern have been identified as a
 useful unit of functionality to publish. `- [ ]` A functioning component or
@@ -19,7 +32,7 @@ components delivering those scenarios have been delivered and merged to master.
 `- [ ]` Design maintainer has approved the implementation for those scenarios
 (via a comment on the relevant issue/epic).
 
-Engineering review
+### Engineering review
 
 `- [ ]` Breaking changes have only been introduced with prior approval,
 discussion and documented in release notes. Ideally deprecation notices in the
@@ -38,14 +51,14 @@ that are not identified as props (such as title, aria-\*, etc) are passed
 through to an appropriate DOM node of the component as HTML attributes.  `- [ ]`
 No warnings, errors or log messages in the console.
 
-Standards
+### Standards
 
 `- [ ]` No linter warnings or errors are produced. `- [ ]` Carbon tokens (theme,
 layout, motion) are used unless the design specifies otherwise. `- [ ]` Code is
 formatted according to prettier rules (no use of //prettier-ignore). `- [ ]`
 Code is clear, maintainable and follows standard React practices.
 
-Testing
+### Testing
 
 `- [ ]` There is a set of test cases for the components. `- [ ]` The tests
 exercise all inputs (props, slots, etc) and verify appropriate outputs. `- [ ]`
@@ -53,7 +66,7 @@ The tests validate the behaviors and interactions defined in the design where
 practical. `- [ ]` The tests achieve at least 80% coverage. `- [ ]` No warnings,
 errors or log messages in the test output.
 
-Documentation
+### Documentation
 
 `- [ ]` Source code is satisfactorily commented and provides DocGen comments for
 all public components and their props. `- [ ]` There is a story for each design

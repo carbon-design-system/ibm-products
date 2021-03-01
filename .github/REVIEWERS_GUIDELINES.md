@@ -22,6 +22,7 @@ following as part of the PR it is submitted with.
 `- [ ]` Verify the dependency [bundle size](https://bundlephobia.com) is
 acceptable\
 `- [ ]` Verify the dependency is [actively maintained](https://www.npmtrends.com)
+`- [ ]` Verify license conditions are met e.g. forwarding of copyright in necessary.
 
 ## Definition of done
 
@@ -68,6 +69,7 @@ otherwise.\
 `- [ ]` Code is formatted according to prettier rules (no use of
 //prettier-ignore).\
 `- [ ]` Code is clear, maintainable and follows standard React practices.
+`- [ ]` Copyright header in every source file (js, css, scss etc.)
 
 ### Testing
 

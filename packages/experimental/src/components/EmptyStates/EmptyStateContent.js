@@ -19,12 +19,12 @@ export const EmptyStateContent = ({
       {typeof heading !== 'string' ? (
         heading
       ) : (
-        <h3 className={`${pkgPrefix}-header`}>{heading}</h3>
+        <h3 className={`${pkgPrefix}-empty-state-header`}>{heading}</h3>
       )}
       {typeof subtext !== 'string' ? (
         subtext
       ) : (
-        <p className={`${pkgPrefix}-subtext`}>{subtext}</p>
+        <p className={`${pkgPrefix}-empty-state-subtext`}>{subtext}</p>
       )}
       {actionText && onActionEvent && (
         <Button

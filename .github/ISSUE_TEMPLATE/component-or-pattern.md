@@ -35,5 +35,5 @@ Before starting work on this epic, please review and complete the following.
       guidelines](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CONTRIBUTING.md)?
 - [ ] Have you noted our
       [reviewer
-      guidelines](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/REVIEWERS_GUIDELINES.md])?
+      guidelines](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/REVIEWERS_GUIDELINES.md)?
 - [ ] Did you use the CLI to scaffold your new component?

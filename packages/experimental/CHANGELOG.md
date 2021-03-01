@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.20.1...@carbon/ibm-cloud-cognitive-experimental@0.20.2) (2021-03-01)
+
+
+### Bug Fixes
+
+* **SidePanel:** added design changes and added new labelText prop ([#388](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/388)) ([0d0186d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/0d0186d874b79797fa7ca4cd3997197cddff0242))
+
+
+
+
+
 ## [0.20.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.20.0...@carbon/ibm-cloud-cognitive-experimental@0.20.1) (2021-03-01)
 
 

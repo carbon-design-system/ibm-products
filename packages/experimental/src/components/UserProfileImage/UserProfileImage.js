@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Button, ButtonSet } from 'carbon-components-react';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -19,57 +18,21 @@ import {
   Group24,
   Group32,
 } from '@carbon/icons-react';
-import pic from './charlie_64.jpg';
+//import pic from './charlie_64.jpg';
 
 import { expPrefix } from '../../global/js/settings';
 import cx from 'classnames';
-import { render } from 'enzyme';
-import { blue, cyan, gray, green, magenta, purple, teal } from '@carbon/colors';
 
 const blockClass = `${expPrefix}-user-profile-avatar`;
 
 export const UserProfileImage = ({
-  backgroundColor,
-  icon,
+  backgroundColor = 'light-blue',
+  icon = 'user',
   initials,
   image,
-  size,
-  theme,
-  ...props
+  size = 'x-large',
+  theme = 'light'
 }) => {
-  const backgroundColors = {
-    'light':{
-      'dark-blue': blue[80],
-      'light-blue': blue[60],
-      'dark-cyan': cyan[80],
-      'light-cyan': cyan[60],
-      'dark-gray': gray[80],
-      'light-gray': gray[60],
-      'dark-green': green[80],
-      'light-green': green[60],
-      'dark-magenta': magenta[80],
-      'light-magenta': magenta[60],
-      'dark-purple': purple[80],
-      'light-purple': purple[60],
-      'dark-teal': teal[80],
-      'light-teal': teal[60]
-    },
-    'dark':{
-      'dark-blue': blue[40],
-      'light-blue': blue[20],
-      'dark-cyan': cyan[40],
-      'light-cyan': cyan[20],
-      'dark-gray': gray[40],
-      'light-gray': gray[20],
-      'dark-green': green[40],
-      'light-green': green[20],
-      'dark-magenta': magenta[40],
-      'light-magenta': magenta[20],
-      'dark-purple': purple[40],
-      'light-purple': purple[20],
-      'dark-teal': teal[40],
-      'light-teal': teal[20]
-    }}
 
   const icons = {
     user: {
@@ -87,10 +50,6 @@ export const UserProfileImage = ({
       'x-large': <Group32 />,
     },
   };
-  console.log('backcolor', backgroundColors[theme][backgroundColor])
-  let divStyle = {
-    backgroundColor: backgroundColors[theme][backgroundColor],
-  };
 
   const formatInitials = () => {
     if (initials.length === 2) return initials;
@@ -99,7 +58,7 @@ export const UserProfileImage = ({
 
   const renderFillItem = () => {
     if (image) {
-      return <img src={pic} className={`${blockClass}-photo--${size}`} />;
+      return <img src={image} className={`${blockClass}-photo ${blockClass}-photo--${size}`} />;
     } else {
       if (initials) {
         return formatInitials();
@@ -110,8 +69,12 @@ export const UserProfileImage = ({
   };
 
   return (
-    <div className={`${blockClass} ${blockClass}--${size} ${blockClass}--${theme} ${blockClass}--${backgroundColor}`}>
-      {renderFillItem()}
+    <div className={cx([
+      `${blockClass}`, 
+      `${blockClass}--${size}`, 
+      `${blockClass}--${theme}`,
+      `${blockClass}--${backgroundColor}`]) }>
+        {renderFillItem()}
     </div>
   );
 };
@@ -154,13 +117,7 @@ UserProfileImage.propTypes = {
    */
   size: PropTypes.oneOf(['x-large', 'large', 'medium', 'small', 'x-small']),
   /**
-   *
+   * Tells the component which theme to use
    */
-};
-
-UserProfileImage.defaultProps = {
-  backgroundColor: 'light-blue',
-  icon: 'user',
-  size: 'x-large',
-  theme: 'dark',
+  theme: PropTypes.oneOf(['light', 'dark'])
 };

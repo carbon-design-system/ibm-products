@@ -14,7 +14,7 @@ $block-class: #{$exp-prefix}-user-profile-avatar;
 $x-large: $spacing-10; //64px
 $large: $spacing-07; //32px
 $medium: $spacing-06; //24px
-$small: $spacing-03 + $spacing-04; //20px
+$small: 1.25rem; //20px
 $x-small: $spacing-05; //16x
 
 $base-colors: 'blue', 'cyan', 'gray', 'green', 'magenta', 'purple', 'teal';
@@ -66,7 +66,10 @@ $theme-keys: map-keys($themes);
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
-  border-radius: 50%;
+  border-radius: 100%;
+  .#{$block-class}-photo {
+    border-radius: 100%;
+  }
 }
 
 .#{$block-class}-photo--x-large {
@@ -89,34 +92,28 @@ $theme-keys: map-keys($themes);
 }
 
 .#{$block-class}--x-large {
-  clip-path: circle((64px / 2) at center);
-  //color: $ui-01;
   @include x-large;
   @include carbon--type-style('productive-heading-04');
 }
 
 .#{$block-class}--large {
-  clip-path: circle(($large/2) at center);
   @include large;
   @include carbon--type-style('body-short-01');
 }
 
 .#{$block-class}--medium {
-  clip-path: circle(($medium/2) at center);
   @include medium;
   @include carbon--type-style('label-01');
   @include carbon--font-weight('semibold');
 }
 
 .#{$block-class}--small {
-  clip-path: circle(($small/2) at center);
   @include small;
   @include carbon--type-style('label-01');
   @include carbon--font-weight('semibold');
 }
 
 .#{$block-class}--x-small {
-  clip-path: circle(($x-small/2) at center);
   @include x-small;
   @include carbon--type-style('label-01');
   @include carbon--font-weight('semibold');

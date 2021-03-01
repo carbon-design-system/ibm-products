@@ -6,12 +6,10 @@
 //
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
 
 import { UserProfileImage } from '.';
 import mdx from './UserProfileImage.mdx';
 import image from './charlie_64.jpg';
-import { blue, cyan, gray, green, magenta, purple, teal } from '@carbon/colors';
 
 import styles from './_storybook.scss'; // import storybook which includes component and additional storybook styles
 
@@ -35,12 +33,16 @@ const Template = (args) => {
   );
 };
 
+
+export const Default = Template.bind({});
+Default.args = {};
+
 export const WithUserIcon = Template.bind({});
 WithUserIcon.args = {
-  size: 'x-large',
+  size: 'small',
   backgroundColor: 'light-gray',
   icon: 'user',
-  theme: 'dark'
+  theme: 'light'
 };
 
 export const WithGroupIcon = Template.bind({});
@@ -62,5 +64,5 @@ WithInitials.args = {
 export const WithImage = Template.bind({});
 WithImage.args = {
   size: 'x-large',
-  image: './charlie_64.jpg',
+  image,
 };

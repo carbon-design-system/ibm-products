@@ -42,6 +42,11 @@ const decorators = [
 const parameters = {
   controls: { expanded: true, hideNoControlsWarning: true },
   layout: 'centered',
+  options: {
+    storySort: {
+      order: ['Cloud & Cognitive', ['Released', 'Canary'], 'Legacy'],
+    },
+  },
 
   // Optional default Carbon theme.
   carbonTheme: {

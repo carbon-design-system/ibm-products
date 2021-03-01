@@ -13,12 +13,14 @@ import { Lightning16, Bee24 } from '@carbon/icons-react';
 
 import { pkgPrefix } from '../../global/js/settings';
 
+import { storybookPrefixCanary as storybookPrefix } from '../../../config';
+
 const blockClass = `${pkgPrefix}-action-bar`;
 
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 
 export default {
-  title: 'Experimental/ActionBar',
+  title: `${storybookPrefix}/PageHeader/ActionBarItem`,
   component: ActionBar,
   argTypes: {
     containerWidth: {

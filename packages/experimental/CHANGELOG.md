@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.20.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.22...@carbon/ibm-cloud-cognitive-experimental@0.20.0) (2021-02-25)
+
+
+### Features
+
+* Adds the web terminal component ([#341](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/341)) ([2460eed](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/2460eed2b0ef29d97a0bd2a2f63f6064ee406a03))
+
+
+
+
+
+## [0.19.22](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.21...@carbon/ibm-cloud-cognitive-experimental@0.19.22) (2021-02-25)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
+## [0.19.21](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.20...@carbon/ibm-cloud-cognitive-experimental@0.19.21) (2021-02-24)
+
+
+### Bug Fixes
+
+* crypto for ssr and add test ([#337](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/337)) ([1464d16](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/1464d16646832472f44c2105c4a1c0e44b69c5bc))
+
+
+
+
+
+## [0.19.20](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.19...@carbon/ibm-cloud-cognitive-experimental@0.19.20) (2021-02-23)
+
+
+### Bug Fixes
+
+* prefix not using global settings ([#331](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/331)) ([39b3c54](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/39b3c544cf0769dc621ae11843e60a4a54773ddf))
+
+
+
+
+
 ## [0.19.19](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.19.18...@carbon/ibm-cloud-cognitive-experimental@0.19.19) (2021-02-23)
 
 

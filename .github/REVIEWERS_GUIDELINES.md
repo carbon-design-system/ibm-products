@@ -22,12 +22,14 @@ following as part of the PR it is submitted with.
 `- [ ]` Verify the dependency [bundle size](https://bundlephobia.com) is
 acceptable\
 `- [ ]` Verify the dependency is [actively maintained](https://www.npmtrends.com)\
-`- [ ]` Verify license conditions are met e.g. forwarding of copyright if necessary.
+`- [ ]` Verify license conditions are met e.g. forwarding of copyright if
+necessary.
 
 ## Definition of done
 
 **Hey Reviewer!** Copy and paste the section below. Check where criteria passed,
-strike out where not applicable.
+strike out where not applicable, add notes to clarify any issues, and when
+everything is checked the review can be considered complete.
 
 `## Review for release`
 
@@ -68,7 +70,7 @@ HTML attributes.\
 otherwise.\
 `- [ ]` Code is formatted according to prettier rules (no use of
 //prettier-ignore).\
-`- [ ]` Code is clear, maintainable and follows standard React practices.
+`- [ ]` Code is clear, maintainable and follows standard React practices.\
 `- [ ]` Copyright header in every source file (js, css, scss etc.)
 
 `###` Testing

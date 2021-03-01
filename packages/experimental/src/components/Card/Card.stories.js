@@ -20,6 +20,17 @@ export default {
       page: mdx,
     },
   },
+  argTypes: {
+    cards: {
+      defaultValue: 1,
+      control: {
+        type: 'range',
+        min: 1,
+        max: 4,
+        step: 1,
+      },
+    },
+  },
   decorators: [
     (Story) => (
       <div className="bx--grid">
@@ -41,7 +52,6 @@ const defaultProps = {
   ),
   primaryButtonText: 'Primary',
   cols: 4,
-  cards: 1,
 };
 
 const Template = (opts) => {
@@ -60,13 +70,6 @@ const Template = (opts) => {
 export const Default = Template.bind({});
 Default.args = {
   ...defaultProps,
-  media: <img src="https://via.placeholder.com/600x400/000/fff" alt="img" />,
-};
-
-export const MultipleCards = Template.bind({});
-MultipleCards.args = {
-  ...defaultProps,
-  cards: 4,
   media: <img src="https://via.placeholder.com/600x400/000/fff" alt="img" />,
 };
 

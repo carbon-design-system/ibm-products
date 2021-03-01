@@ -11,6 +11,7 @@
 @import '@carbon/motion/scss/motion.scss';
 
 @import 'carbon-components/scss/components/button/button';
+@import 'carbon-components/scss/components/inline-loading/inline-loading';
 
 $extra-small-panel-size: 16rem;
 $small-panel-size: 20rem;
@@ -26,9 +27,7 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
   }
   100% {
     // stylelint-disable-next-line carbon/layout-token-use
-    transform: translateX(
-      -#{$medium-panel-size}
-    ); // the height of the notifcation panel
+    transform: translateX(-#{$medium-panel-size});
 
     opacity: 0;
   }
@@ -42,9 +41,7 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
   }
   100% {
     // stylelint-disable-next-line carbon/layout-token-use
-    transform: translateX(
-      $medium-panel-size
-    ); // the height of the notifcation panel
+    transform: translateX($medium-panel-size);
 
     opacity: 0;
   }
@@ -75,34 +72,6 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     100% {
       // stylelint-disable-next-line carbon/layout-token-use
       transform: translateX(0);
-      opacity: 1;
-    }
-  }
-}
-
-@mixin subtitleExit() {
-  @keyframes subtitleExit {
-    0% {
-      // stylelint-disable-next-line carbon/layout-token-use
-      transform: translateY(0);
-      opacity: 1;
-    }
-    100% {
-      transform: translateY($spacing-07);
-      opacity: 0;
-    }
-  }
-}
-
-@mixin subtitleEntrance() {
-  @keyframes subtitleEntrance {
-    0% {
-      transform: translateY($spacing-07); // the size width of the side panel
-      opacity: 0;
-    }
-    100% {
-      // stylelint-disable-next-line carbon/layout-token-use
-      transform: translateY(0);
       opacity: 1;
     }
   }
@@ -200,12 +169,15 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     .#{$pkg-prefix}-side-panel-title-text {
       @include carbon--type-style('productive-heading-02');
     }
+    .#{$pkg-prefix}-side-panel-header {
+      border-bottom: 1px solid $decorative-01;
+    }
   }
   .#{$pkg-prefix}-side-panel-title-text {
     @include carbon--type-style('productive-heading-03');
 
     display: -webkit-box;
-    margin-right: $spacing-06;
+    margin-right: $spacing-07;
     margin-bottom: $spacing-03;
     overflow: hidden;
     // stylelint-disable-next-line carbon/motion-token-use
@@ -222,6 +194,9 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     overflow: hidden;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+  }
+  .#{$pkg-prefix}-side-panel-label-text {
+    @include carbon--type-style('label-01');
   }
   .#{$pkg-prefix}-side-panel-action-toolbar {
     display: flex;
@@ -362,6 +337,12 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
   //       border-bottom: 1px solid $ui-04;
   //     }
   //   }
+}
+.#{$pkg-prefix}-side-panel-primary-action-button .bx--inline-loading {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: $spacing-07;
 }
 
 @keyframes sidePanelOverlayEntrance {

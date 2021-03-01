@@ -7,6 +7,8 @@
 
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
+@import '@carbon/colors/scss/colors';
+@import './colorMap';
 
 $block-class: #{$exp-prefix}-user-profile-avatar;
 $x-large: $spacing-10; //64px
@@ -14,6 +16,24 @@ $large: $spacing-07; //32px
 $medium: $spacing-06; //24px
 $small: $spacing-03 + $spacing-04; //20px
 $x-small: $spacing-05; //16x
+
+$base-colors: 'blue', 'cyan', 'gray', 'green', 'magenta', 'purple', 'teal';
+$themes: ('light': ('light-shade': 60, 'dark-shade': 80), 'dark': ('light-shade': 30, 'dark-shade': 50));
+$theme-keys: map-keys($themes);
+
+@each $key in $theme-keys {
+    .#{$block-class}--#{$key} {
+        color: $ui-01;
+    }
+  @each $color in $base-colors {
+      @each $shadekey in $theme-keys {
+        .#{$block-class}--#{$key}.#{$block-class}--#{$shadekey}-#{$color} {
+            background-color: map-get($carbon-colors, #{$color}#{map-get(map-get($themes, $key), #{$shadekey}-shade)});
+        }
+      }
+  }
+}
+
 
 @mixin x-large {
   width: $x-large;
@@ -49,10 +69,6 @@ $x-small: $spacing-05; //16x
   border-radius: 50%;
 }
 
-.#{$block-class}--light {
-  color: $icon-03;
-}
-
 .#{$block-class}-photo--x-large {
   @include x-large;
 }
@@ -73,7 +89,8 @@ $x-small: $spacing-05; //16x
 }
 
 .#{$block-class}--x-large {
-  clip-path: circle(($x-large/2) at center);
+  clip-path: circle((64px / 2) at center);
+  //color: $ui-01;
   @include x-large;
   @include carbon--type-style('productive-heading-04');
 }

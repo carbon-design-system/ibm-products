@@ -27,6 +27,7 @@ import { render } from 'enzyme';
 import { blue, cyan, gray, green, magenta, purple, teal } from '@carbon/colors';
 
 const blockClass = `${expPrefix}-user-profile-avatar`;
+
 export const UserProfileImage = ({
   backgroundColor,
   icon,
@@ -36,37 +37,39 @@ export const UserProfileImage = ({
   theme,
   ...props
 }) => {
-  const colors = [
-    blue[60],
-    cyan[60],
-    gray[60],
-    green[60],
-    magenta[60],
-    purple[60],
-    teal[60],
-    blue[80],
-    cyan[80],
-    gray[80],
-    green[80],
-    magenta[80],
-    purple[80],
-    teal[80],
-    blue[40],
-    cyan[40],
-    gray[40],
-    green[40],
-    magenta[40],
-    purple[40],
-    teal[40],
-  ];
-
-  // const colors = {dark: [
-  //   blue[80], cyan[80], gray[80], green[80], magenta[80], purple[80], teal[80],
-  //   blue[60], cyan[60], gray[60], green[60], magenta[60], purple[60], teal[60]
-  // ], light: [
-  //   blue[40], cyan[40], gray[40], green[40], magenta[40], purple[40], teal[40],
-  //   blue[20], cyan[20], gray[20], green[20], magenta[20], purple[20], teal[20]
-  // ]}
+  const backgroundColors = {
+    'light':{
+      'dark-blue': blue[80],
+      'light-blue': blue[60],
+      'dark-cyan': cyan[80],
+      'light-cyan': cyan[60],
+      'dark-gray': gray[80],
+      'light-gray': gray[60],
+      'dark-green': green[80],
+      'light-green': green[60],
+      'dark-magenta': magenta[80],
+      'light-magenta': magenta[60],
+      'dark-purple': purple[80],
+      'light-purple': purple[60],
+      'dark-teal': teal[80],
+      'light-teal': teal[60]
+    },
+    'dark':{
+      'dark-blue': blue[40],
+      'light-blue': blue[20],
+      'dark-cyan': cyan[40],
+      'light-cyan': cyan[20],
+      'dark-gray': gray[40],
+      'light-gray': gray[20],
+      'dark-green': green[40],
+      'light-green': green[20],
+      'dark-magenta': magenta[40],
+      'light-magenta': magenta[20],
+      'dark-purple': purple[40],
+      'light-purple': purple[20],
+      'dark-teal': teal[40],
+      'light-teal': teal[20]
+    }}
 
   const icons = {
     user: {
@@ -84,14 +87,14 @@ export const UserProfileImage = ({
       'x-large': <Group32 />,
     },
   };
-
+  console.log('backcolor', backgroundColors[theme][backgroundColor])
   let divStyle = {
-    backgroundColor: backgroundColor,
+    backgroundColor: backgroundColors[theme][backgroundColor],
   };
 
   const formatInitials = () => {
     if (initials.length === 2) return initials;
-    return initials.slice(0, 2);
+    return initials.match(/(^\S\S?|\b\S)?/g).join("").match(/(^\S|\S$)?/g).join("").toUpperCase()
   };
 
   const renderFillItem = () => {
@@ -107,9 +110,7 @@ export const UserProfileImage = ({
   };
 
   return (
-    <div
-      style={divStyle}
-      className={`${blockClass} ${blockClass}--${theme} ${blockClass}--${size}`}>
+    <div className={`${blockClass} ${blockClass}--${size} ${blockClass}--${theme} ${blockClass}--${backgroundColor}`}>
       {renderFillItem()}
     </div>
   );
@@ -121,27 +122,20 @@ UserProfileImage.propTypes = {
    *  https://pages.github.ibm.com/cdai-design/pal/patterns/user-profile-images/
    */
   backgroundColor: PropTypes.oneOf([
-    blue[60],
-    cyan[60],
-    gray[60],
-    green[60],
-    magenta[60],
-    purple[60],
-    teal[60],
-    blue[80],
-    cyan[80],
-    gray[80],
-    green[80],
-    magenta[80],
-    purple[80],
-    teal[80],
-    blue[40],
-    cyan[40],
-    gray[40],
-    green[40],
-    magenta[80],
-    purple[80],
-    teal[80],
+    'light-blue',
+    'dark-blue',
+    'light-cyan',
+    'dark-cyan',
+    'light-gray',
+    'dark-gray',
+    'light-green',
+    'dark-green',
+    'light-magenta',
+    'dark-magenta',
+    'light-purple',
+    'dark-purlpe',
+    'light-teal',
+    'dark-teal'
   ]),
   /**
    * When passing the icon prop, use either "user" or "group". The values match up to the Carbon Library icons.
@@ -165,7 +159,7 @@ UserProfileImage.propTypes = {
 };
 
 UserProfileImage.defaultProps = {
-  backgroundColor: '#0f62fe',
+  backgroundColor: 'light-blue',
   icon: 'user',
   size: 'x-large',
   theme: 'dark',

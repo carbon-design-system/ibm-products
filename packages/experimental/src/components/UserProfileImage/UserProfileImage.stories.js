@@ -21,8 +21,8 @@ export default {
   argTypes: {
     borderColor: { control: 'color' },
   },
-  parameters: {
-    styles,
+  parameters: { 
+    styles, 
     docs: { page: mdx },
   },
 };
@@ -31,8 +31,6 @@ const Template = (args) => {
   return (
     <UserProfileImage
       {...args}
-      onPrimaryClick={action('onPrimaryClick')}
-      onSecondaryClick={action('onSecondaryClick')}
     />
   );
 };
@@ -40,26 +38,29 @@ const Template = (args) => {
 export const WithUserIcon = Template.bind({});
 WithUserIcon.args = {
   size: 'x-large',
-  backgroundColor: magenta[60],
+  backgroundColor: 'light-gray',
   icon: 'user',
+  theme: 'dark'
 };
 
 export const WithGroupIcon = Template.bind({});
 WithGroupIcon.args = {
   size: 'x-large',
-  backgroundColor: green[80],
+  backgroundColor: 'light-purple',
   icon: 'group',
+  theme: 'light'
 };
 
 export const WithInitials = Template.bind({});
 WithInitials.args = {
   size: 'x-large',
-  //backgroundColor: purple[80],
-  initials: 'eric',
+  backgroundColor: 'light-green',
+  initials: "eva cochet weinand",
+  theme: 'dark'
 };
 
 export const WithImage = Template.bind({});
 WithImage.args = {
   size: 'x-large',
-  image: 'charlie_64.jpg',
+  image: './charlie_64.jpg',
 };

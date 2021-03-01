@@ -21,8 +21,8 @@ following as part of the PR it is submitted with.
 `- [ ]` Verify the dependency [doesn't contain any vulnerabilities](https://snyk.io/vuln)\
 `- [ ]` Verify the dependency [bundle size](https://bundlephobia.com) is
 acceptable\
-`- [ ]` Verify the dependency is [actively maintained](https://www.npmtrends.com)
-`- [ ]` Verify license conditions are met e.g. forwarding of copyright in necessary.
+`- [ ]` Verify the dependency is [actively maintained](https://www.npmtrends.com)\
+`- [ ]` Verify license conditions are met e.g. forwarding of copyright if necessary.
 
 ## Definition of done
 

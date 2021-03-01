@@ -31,7 +31,7 @@ strike out where not applicable.
 
 `## Review for release`
 
-### `###` Readiness
+`###` Readiness
 
 `- [ ]` One or more scenarios for a design pattern have been identified as a
 useful unit of functionality to publish.\
@@ -40,7 +40,7 @@ delivered and merged to master.\
 `- [ ]` Design maintainer has approved the implementation for those scenarios
 (via a comment on the relevant issue/epic).
 
-###  `###` Engineering review
+`###` Engineering review
 
 `- [ ]` Breaking changes have only been introduced with prior approval,
 discussion and documented in release notes. Ideally deprecation notices in the
@@ -61,7 +61,7 @@ aria-\*, etc) are passed through to an appropriate DOM node of the component as
 HTML attributes.\
 `- [ ]` No warnings, errors or log messages in the console.
 
-###  `###` Standards
+`###` Standards
 
 `- [ ]` No linter warnings or errors are produced.\
 `- [ ]` Carbon tokens (theme, layout, motion) are used unless the design specifies
@@ -71,7 +71,7 @@ otherwise.\
 `- [ ]` Code is clear, maintainable and follows standard React practices.
 `- [ ]` Copyright header in every source file (js, css, scss etc.)
 
-###  `###` Testing
+`###` Testing
 
 `- [ ]` There is a set of test cases for the components.\
 `- [ ]` The tests exercise all inputs (props, slots, etc) and verify appropriate
@@ -81,7 +81,7 @@ where practical.\
 `- [ ]` The tests achieve at least 80% coverage.\
 `- [ ]` No warnings, errors or log messages in the test output.
 
-###  `###` Documentation
+`###` Documentation
 
 `- [ ]` Source code is satisfactorily commented and provides DocGen comments for
 all public components and their props.\

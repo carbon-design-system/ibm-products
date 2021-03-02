@@ -7,13 +7,16 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
+import {
+  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
+} from '../../../config';
 
 import { ExampleComponent } from '.';
 
 import styles from './_storybook.scss'; // import storybook which includes component and additional storybook styles
 
 export default {
-  title: 'Experimental/ExampleComponent',
+  title: `${storybookPrefix}/ExampleComponent`,
   component: ExampleComponent,
   argTypes: {
     borderColor: { control: 'color' },

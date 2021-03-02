@@ -9,7 +9,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkgPrefix } from '../../global/js/settings';
-import { Button } from 'carbon-components-react';
+import { Button, InlineLoading } from 'carbon-components-react';
 import { SIDE_PANEL_SIZES } from './constants';
 import { Close20, ArrowLeft20 } from '@carbon/icons-react';
 import wrapFocus from '../../global/js/utils/wrapFocus';
@@ -30,6 +30,7 @@ export const SidePanel = ({
   theme,
   includeOverlay,
   titleText,
+  labelText,
   subtitleText,
   actionToolbarButtons,
   children,
@@ -343,10 +344,16 @@ export const SidePanel = ({
                   onClick={() => onNavigationBack((prev) => prev - 1)}
                 />
               )}
+              {labelText && labelText.length && (
+                <p className={`${pkgPrefix}-side-panel-label-text`}>
+                  {labelText}
+                </p>
+              )}
               {titleText && titleText.length && (
                 <h2
                   className={`${pkgPrefix}-side-panel-title-text`}
-                  ref={sidePanelTitleRef}>
+                  ref={sidePanelTitleRef}
+                  title={titleText}>
                   {titleText}
                 </h2>
               )}
@@ -401,7 +408,7 @@ export const SidePanel = ({
                 {primaryPanelActions.map((action, index) => (
                   <Button
                     key={index}
-                    disabled={action.disabled || false}
+                    disabled={action.disabled || action.loading || false}
                     onClick={() => action.onPrimaryActionClick()}
                     kind={action.kind || 'primary'}
                     className={cx([
@@ -413,6 +420,7 @@ export const SidePanel = ({
                       },
                     ])}>
                     {action.label}
+                    {action.loading && <InlineLoading />}
                   </Button>
                 ))}
               </div>
@@ -527,6 +535,10 @@ SidePanel.propTypes = {
    */
   includeOverlay: PropTypes.bool,
   /**
+   * Sets the label text which will display above the title text
+   */
+  labelText: PropTypes.string,
+  /**
    * Changes the current side panel page to the previous page
    */
   onNavigationBack: PropTypes.func,
@@ -553,6 +565,7 @@ SidePanel.propTypes = {
         onPrimaryActionClick: PropTypes.func,
         kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
         disabled: PropTypes.bool,
+        loading: PropTypes.bool,
       })
     ),
   ]),

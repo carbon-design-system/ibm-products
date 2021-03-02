@@ -9,13 +9,16 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add20 } from '@carbon/icons-react';
 import mdx from './NotificationsEmptyState.mdx';
+import {
+  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
+} from '../../../../config';
 
 import { NotificationsEmptyState } from './NotificationsEmptyState';
 
 import styles from '../_index.scss';
 
 export default {
-  title: 'Experimental/EmptyStates/NotificationsEmptyState',
+  title: `${storybookPrefix}/EmptyStates/NotificationsEmptyState`,
   component: NotificationsEmptyState,
   parameters: {
     styles,

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2020
+ * Copyright IBM Corp. FULL_YEAR, FULL_YEAR
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,7 +11,9 @@ import React from 'react';
  */
 // import { action } from '@storybook/addon-actions';
 
-import sectionTitle from '../../../config';
+import {
+  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
+} from '../../../config';
 
 import { DISPLAY_NAME } from '.';
 
@@ -21,7 +23,7 @@ import styles from './_storybook-styles.scss';
 const { name } = DISPLAY_NAME;
 
 export default {
-  title: `${sectionTitle}/${name}`,
+  title: `${storybookPrefixCanary}/${name}`,
   component: DISPLAY_NAME,
   // TODO: Define argTypes for props not represented by standard JS types
   // argTypes: {

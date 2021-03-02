@@ -9,13 +9,16 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add20 } from '@carbon/icons-react';
 import mdx from './UnauthorizedEmptyState.mdx';
+import {
+  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
+} from '../../../../config';
 
 import { UnauthorizedEmptyState } from './UnauthorizedEmptyState';
 
 import styles from '../_index.scss';
 
 export default {
-  title: 'Experimental/EmptyStates/UnauthorizedEmptyState',
+  title: `${storybookPrefix}/EmptyStates/UnauthorizedEmptyState`,
   component: UnauthorizedEmptyState,
   parameters: {
     styles,

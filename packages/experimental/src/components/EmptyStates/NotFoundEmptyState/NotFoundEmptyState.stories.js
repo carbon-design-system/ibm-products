@@ -9,13 +9,16 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add20 } from '@carbon/icons-react';
 import mdx from './NotFoundEmptyState.mdx';
+import {
+  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
+} from '../../../../config';
 
 import { NotFoundEmptyState } from './NotFoundEmptyState';
 
 import styles from '../_index.scss';
 
 export default {
-  title: 'Experimental/EmptyStates/NotFoundEmptyState',
+  title: `${storybookPrefix}/EmptyStates/NotFoundEmptyState`,
   component: NotFoundEmptyState,
   parameters: {
     styles,

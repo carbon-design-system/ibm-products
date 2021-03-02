@@ -9,13 +9,16 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add20 } from '@carbon/icons-react';
 import mdx from './ErrorEmptyState.mdx';
+import {
+  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
+} from '../../../../config';
 
 import { ErrorEmptyState } from './ErrorEmptyState';
 
 import styles from '../_index.scss';
 
 export default {
-  title: 'Experimental/EmptyStates/ErrorEmptyState',
+  title: `${storybookPrefix}/EmptyStates/ErrorEmptyState`,
   component: ErrorEmptyState,
   parameters: {
     styles,

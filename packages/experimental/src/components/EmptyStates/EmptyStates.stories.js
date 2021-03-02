@@ -10,6 +10,9 @@ import { action } from '@storybook/addon-actions';
 import { Add20 } from '@carbon/icons-react';
 import CustomIllustration from './story_assets/empty-state-bright-magnifying-glass.svg';
 import mdx from './EmptyState.mdx';
+import {
+  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
+} from '../../../config';
 
 import { EmptyState } from '.';
 import { ErrorEmptyState } from './ErrorEmptyState';
@@ -22,7 +25,7 @@ import { UnauthorizedEmptyState } from './UnauthorizedEmptyState';
 import styles from './_index.scss';
 
 export default {
-  title: 'Experimental/EmptyStates/EmptyState',
+  title: `${storybookPrefix}/EmptyStates/EmptyState`,
   component: EmptyState,
   subcomponents: {
     ErrorEmptyState,

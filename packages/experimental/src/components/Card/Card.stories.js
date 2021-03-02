@@ -10,9 +10,12 @@ import { Card } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import mdx from './Card.mdx';
 import { ArrowRight24, Cloud32 } from '@carbon/icons-react';
+import {
+  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
+} from '../../../config';
 
 export default {
-  title: 'Experimental/Card',
+  title: `${storybookPrefix}/Card`,
   component: Card,
   parameters: {
     styles,
@@ -20,6 +23,24 @@ export default {
       page: mdx,
     },
   },
+  argTypes: {
+    cards: {
+      defaultValue: 1,
+      control: {
+        type: 'range',
+        min: 1,
+        max: 4,
+        step: 1,
+      },
+    },
+  },
+  decorators: [
+    (Story) => (
+      <div className="bx--grid">
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 const defaultProps = {
@@ -32,45 +53,42 @@ const defaultProps = {
       action on the card.
     </p>
   ),
-  actionButtonText: 'Primary button',
+  primaryButtonText: 'Primary',
+  cols: 4,
 };
 
 const Template = (opts) => {
-  const { children, ...args } = opts;
-  return (
-    <div className="card-demo-container">
-      <Card {...args}>{children}</Card>
-    </div>
-  );
-};
-
-const TemplateWide = (opts) => {
-  const { children, ...args } = opts;
-  return (
-    <div className="card-demo-container--wide">
-      <Card {...args}>{children}</Card>
-    </div>
-  );
+  const { children, cols, cards, ...args } = opts;
+  const cardsArray = [];
+  for (let i = 0; i < cards; i++) {
+    cardsArray.push(
+      <div className={`bx--col-lg-${cols}`}>
+        <Card {...args}>{children}</Card>
+      </div>
+    );
+  }
+  return <div className="bx--row">{cardsArray.map((c) => c)}</div>;
 };
 
 export const Default = Template.bind({});
 Default.args = {
   ...defaultProps,
-  media: <img src="https://via.placeholder.com/300x200/000/fff" alt="img" />,
+  media: <img src="https://via.placeholder.com/600x400/000/fff" alt="img" />,
 };
 
-export const MediaLeft = TemplateWide.bind({});
+export const MediaLeft = Template.bind({});
 MediaLeft.args = {
   ...defaultProps,
   mediaPosition: 'left',
-  media: <img src="https://via.placeholder.com/300x225/000/fff" alt="img" />,
+  media: <img src="https://via.placeholder.com/600x450/000/fff" alt="img" />,
+  cols: 8,
 };
 
 export const WithActionIcon = Template.bind({});
 WithActionIcon.args = {
   ...defaultProps,
   actionIcon: ArrowRight24,
-  actionButtonText: '',
+  primaryButtonText: '',
 };
 
 export const WithPictogram = Template.bind({});
@@ -79,16 +97,24 @@ WithPictogram.args = {
   pictogram: Cloud32,
 };
 
+export const WithSeondaryAction = Template.bind({});
+WithSeondaryAction.args = {
+  ...defaultProps,
+  secondaryButtonText: 'Secondary',
+  secondaryButtonKind: 'secondary',
+  cols: 8,
+};
+
 export const ClickableCardWithOnclick = Template.bind({});
 ClickableCardWithOnclick.args = {
   ...defaultProps,
   onClick: () => {},
-  actionButtonText: '',
+  primaryButtonText: '',
 };
 
 export const ClickableCardWithLink = Template.bind({});
 ClickableCardWithLink.args = {
   ...defaultProps,
   href: '/',
-  actionButtonText: '',
+  primaryButtonText: '',
 };

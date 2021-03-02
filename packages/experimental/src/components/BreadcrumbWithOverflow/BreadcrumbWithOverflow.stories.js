@@ -14,10 +14,11 @@ import styles from './_storybook-styles.scss'; // import index in case more file
 import { BreadcrumbItem } from 'carbon-components-react';
 
 import { pkgPrefix } from '../../global/js/settings';
+import { storybookPrefixCanary as storybookPrefix } from '../../../config';
 const blockClass = `${pkgPrefix}-breadcrumb-with-overflow`;
 
 export default {
-  title: 'Experimental/BreadcrumbWithOverflow',
+  title: `${storybookPrefix}/BreadcrumbWithOverflow`,
   component: BreadcrumbWithOverflow,
   argTypes: {
     containerWidth: {

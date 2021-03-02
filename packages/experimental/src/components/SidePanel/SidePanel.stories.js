@@ -31,9 +31,12 @@ import { Copy20, Delete20, Settings20 } from '@carbon/icons-react';
 import { SidePanel } from '.';
 import styles from './_storybook-styles.scss';
 import mdx from './SidePanel.mdx';
+import {
+  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
+} from '../../../config';
 
 export default {
-  title: 'Experimental/SidePanel',
+  title: `${storybookPrefix}/SidePanel`,
   component: SidePanel,
   parameters: {
     styles,
@@ -49,7 +52,7 @@ const defaultStoryProps = {
   titleText:
     'Incident management for your application, testing a very long title to see how this behaves with a longer title',
   subtitleText:
-    'This is some text that would talk about how you could investigate incidednt management within this side panel and hopefully detail some of the actions you could perform here.',
+    'This is some text that would talk about how you could investigate incidednt management within this side panel.',
 };
 
 const headerData = [
@@ -295,81 +298,42 @@ const SlideInTemplate = (args) => {
   );
 };
 
-export const RightSlideOverExtraSmall = SlideOverTemplate.bind({});
-RightSlideOverExtraSmall.args = {
+export const SlideOverExtraSmall = SlideOverTemplate.bind({});
+SlideOverExtraSmall.args = {
   size: 'extraSmall',
   includeOverlay: true,
   ...defaultStoryProps,
 };
 
-export const RightSlideOverSmall = SlideOverTemplate.bind({});
-RightSlideOverSmall.args = {
+export const SlideOverSmall = SlideOverTemplate.bind({});
+SlideOverSmall.args = {
   size: 'small',
   includeOverlay: true,
   ...defaultStoryProps,
 };
 
-export const RightSlideOverMedium = SlideOverTemplate.bind({});
-RightSlideOverMedium.args = {
+export const SlideOverMedium = SlideOverTemplate.bind({});
+SlideOverMedium.args = {
   includeOverlay: true,
   ...defaultStoryProps,
 };
 
-export const RightSlideOverLarge = SlideOverTemplate.bind({});
-RightSlideOverLarge.args = {
+export const SlideOverLarge = SlideOverTemplate.bind({});
+SlideOverLarge.args = {
   size: 'large',
   includeOverlay: true,
   ...defaultStoryProps,
 };
 
-export const RightSlideOverMax = SlideOverTemplate.bind({});
-RightSlideOverMax.args = {
+export const SlideOverMax = SlideOverTemplate.bind({});
+SlideOverMax.args = {
   size: 'max',
   includeOverlay: true,
   ...defaultStoryProps,
 };
 
-export const LeftSlideOverExtraSmall = SlideOverTemplate.bind({});
-LeftSlideOverExtraSmall.args = {
-  placement: 'left',
-  size: 'extraSmall',
-  includeOverlay: true,
-  ...defaultStoryProps,
-};
-
-export const LeftSlideOverSmall = SlideOverTemplate.bind({});
-LeftSlideOverSmall.args = {
-  placement: 'left',
-  size: 'small',
-  includeOverlay: true,
-  ...defaultStoryProps,
-};
-
-export const LeftSlideOverMedium = SlideOverTemplate.bind({});
-LeftSlideOverMedium.args = {
-  placement: 'left',
-  includeOverlay: true,
-  ...defaultStoryProps,
-};
-
-export const LeftSlideOverLarge = SlideOverTemplate.bind({});
-LeftSlideOverLarge.args = {
-  placement: 'left',
-  size: 'large',
-  includeOverlay: true,
-  ...defaultStoryProps,
-};
-
-export const LeftSlideOverMax = SlideOverTemplate.bind({});
-LeftSlideOverMax.args = {
-  placement: 'left',
-  size: 'max',
-  includeOverlay: true,
-  ...defaultStoryProps,
-};
-
-export const RightSlideInExtraSmall = SlideInTemplate.bind({});
-RightSlideInExtraSmall.args = {
+export const SlideInExtraSmall = SlideInTemplate.bind({});
+SlideInExtraSmall.args = {
   placement: 'right',
   size: 'extraSmall',
   slideIn: true,
@@ -377,8 +341,8 @@ RightSlideInExtraSmall.args = {
   ...defaultStoryProps,
 };
 
-export const RightSlideInSmall = SlideInTemplate.bind({});
-RightSlideInSmall.args = {
+export const SlideInSmall = SlideInTemplate.bind({});
+SlideInSmall.args = {
   placement: 'right',
   size: 'small',
   slideIn: true,
@@ -386,52 +350,17 @@ RightSlideInSmall.args = {
   ...defaultStoryProps,
 };
 
-export const RightSlideInMedium = SlideInTemplate.bind({});
-RightSlideInMedium.args = {
+export const SlideInMedium = SlideInTemplate.bind({});
+SlideInMedium.args = {
   placement: 'right',
   slideIn: true,
   pageContentSelector: '#cloud-and-cognitive-page-content',
   ...defaultStoryProps,
 };
 
-export const RightSlideInLarge = SlideInTemplate.bind({});
-RightSlideInLarge.args = {
+export const SlideInLarge = SlideInTemplate.bind({});
+SlideInLarge.args = {
   placement: 'right',
-  size: 'large',
-  slideIn: true,
-  pageContentSelector: '#cloud-and-cognitive-page-content',
-  ...defaultStoryProps,
-};
-
-export const LeftSlideInExtraSmall = SlideInTemplate.bind({});
-LeftSlideInExtraSmall.args = {
-  placement: 'left',
-  size: 'extraSmall',
-  slideIn: true,
-  pageContentSelector: '#cloud-and-cognitive-page-content',
-  ...defaultStoryProps,
-};
-
-export const LeftSlideInSmall = SlideInTemplate.bind({});
-LeftSlideInSmall.args = {
-  placement: 'left',
-  size: 'small',
-  slideIn: true,
-  pageContentSelector: '#cloud-and-cognitive-page-content',
-  ...defaultStoryProps,
-};
-
-export const LeftSlideInMedium = SlideInTemplate.bind({});
-LeftSlideInMedium.args = {
-  placement: 'left',
-  slideIn: true,
-  pageContentSelector: '#cloud-and-cognitive-page-content',
-  ...defaultStoryProps,
-};
-
-export const LeftSlideInLarge = SlideInTemplate.bind({});
-LeftSlideInLarge.args = {
-  placement: 'left',
   size: 'large',
   slideIn: true,
   pageContentSelector: '#cloud-and-cognitive-page-content',

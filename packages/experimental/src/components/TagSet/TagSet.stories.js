@@ -11,6 +11,7 @@ import TagSet from './TagSet';
 import { Tag } from 'carbon-components-react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { pkgPrefix } from '../../global/js/settings';
+import { storybookPrefixCanary as storybookPrefix } from '../../../config';
 
 const blockClass = `${pkgPrefix}-tag-set`;
 
@@ -126,7 +127,7 @@ const ManyTagItems = [
 ));
 
 export default {
-  title: 'Experimental/TagSet',
+  title: `${storybookPrefix}/TagSet`,
   component: TagSet,
   parameters: { styles },
   argTypes: {

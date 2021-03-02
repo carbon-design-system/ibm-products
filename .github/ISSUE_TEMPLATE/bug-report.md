@@ -14,6 +14,10 @@ assignees: ''
 
 ## What package(s) are you using?
 
+- [ ] Cloud & Cognitive
+- [ ] Legacy/CDAI
+- [ ] Legacy/Security
+
 ## Detailed description
 
 > Describe in detail the issue you're having.
@@ -25,7 +29,7 @@ assignees: ''
 
 > What browser are you working in?
 
-> What version of the Carbon Design System are you using?
+> What version of the @carbon/ibm-cloud-cognitive packge are you using?
 
 > What offering/product do you work on? Any pressing ship or release dates we
 > should be aware of?

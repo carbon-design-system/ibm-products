@@ -46,7 +46,7 @@ New tests are written in
 [React Testing Library](https://testing-library.com/docs/react-testing-library/intro),
 with [Enzyme](https://enzymejs.github.io/enzyme) available for migration
 compatibility, and follow the
-[user experience standards adopter guide](https://github.ibm.com/IBMPrivateCloud/BedrockServices/blob/master/AdopterGuides/CommonUXStandardsAdoptionGuide.md#testing).
+[User Experience Standards Adopter Guide](https://github.ibm.com/IBMPrivateCloud/BedrockServices/blob/master/AdopterGuides/CommonUXStandardsAdoptionGuide.md#testing).
 
 ## 5. Make a pull request
 
@@ -64,7 +64,7 @@ According to a
 [SmartBear study of a Cisco Systems programming team](https://smartbear.com/learn/code-review/best-practices-for-peer-code-review),
 an effective pull request should not have more than 400 lines of code changed,
 so do not create one massive PR if it can be
-[scoped down into smaller, focused PRs](https://www.netlify.com/blog/2020/03/31/how-to-scope-down-prs/).
+[scoped down into smaller, focused PRs of independent behaviors and functionality](https://www.netlify.com/blog/2020/03/31/how-to-scope-down-prs/).
 
 When you're at a good stopping place and you're ready for feedback from other
 contributors and maintainers,
@@ -89,3 +89,16 @@ When you need to make a change, use the same method detailed above.
 
 Once all revisions to your pull request are complete, a maintainer will squash
 and merge your commits for you.
+
+## 7. New production dependencies
+
+If you introduce a new dependency to package.json then there will be some
+additional work to do.
+
+- [ ] Verify the dependency has previously been
+      [pedigree reviewed](https://pedigree-service.wdc1a.cirrus.ibm.com)
+- [ ] Verify the dependency
+      [doesn't contain any vulnerabilities](https://snyk.io/vuln)
+- [ ] Verify the dependency [bundle size](https://bundlephobia.com) is
+      acceptable
+- [ ] Verify the dependency is [actively maintained](https://www.npmtrends.com)

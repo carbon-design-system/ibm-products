@@ -43,6 +43,7 @@ const Template = (args) => (
       </>
     }
     versionNumber="0.0.1"
+    className="sb--use-carbon-theme-g90"
     {...args}
   />
 );
@@ -87,6 +88,7 @@ export const Default = () => {
             </>
           }
           versionNumber="0.0.1"
+          className="sb--use-carbon-theme-g90"
         />
       )}
     </ModalStateManager>
@@ -160,7 +162,7 @@ withTechnologyUsedTab.args = {
 
 export const withLightTheme = Template.bind({});
 withLightTheme.args = {
-  theme: 'light',
+  className: 'sb--use-carbon-theme-g10',
 };
 
 export const withScroll = Template.bind({});

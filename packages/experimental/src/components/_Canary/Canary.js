@@ -21,8 +21,11 @@ import './_canary.scss';
 export const Canary = ({ component, className, ...rest }) => {
   const componentName = component?.name || component;
 
-  const instructions = `import { pkg } from '@carbon/ibm-cloud-cognitive-experimental';
-pkg.overrideSettings({flags: {component: {${componentName}: true}}});`;
+  const instructions = `
+import { pkg } from '@carbon/ibm-cloud-cognitive-experimental';
+// NOTE: must happen before component import
+pkg.component[${componentName}] = true;
+`;
   return (
     <div className={cx(blockClass, className)} {...rest}>
       <h2>

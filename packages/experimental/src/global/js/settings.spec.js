@@ -15,7 +15,7 @@ describe('settings', () => {
     //   pkg.prefix: 'my-prefix',
     // }));
     pkg.prefix = 'my-prefix';
-    pkg.overrideSettings({ flags: { component: { ExampleComponent: true } } });
+    pkg.component.ExampleComponent = true;
 
     // dynamic import so we can modify the import on the component before using it
     const { ExampleComponent } = await import(

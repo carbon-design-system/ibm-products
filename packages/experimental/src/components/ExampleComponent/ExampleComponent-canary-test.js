@@ -17,7 +17,7 @@ describe(name, () => {
   let ExampleComponent;
   beforeAll(async () => {
      // must happen before component import
-    pkg.overrideSettings({ flags: { component: { ExampleComponent: false } } }  );
+    pkg.component.ExampleComponent = false;
     // ensure import after settings change
     const { ExampleComponent: LateLoadedComponent } = await import('.');
     ExampleComponent = LateLoadedComponent;

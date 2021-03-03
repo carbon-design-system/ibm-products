@@ -13,7 +13,6 @@ import { DISPLAY_NAME } from '.';
 import { pkg } from '../../global/js/settings';
 
 const canaryClass = `${pkg.prefix}-canary`;
-const blockClass = `${pkg.prefix}-example-component`;
 
 describe(name, () => {
   let DISPLAY_NAME;

@@ -15,19 +15,7 @@ export const carbon = {
 };
 
 export const pkg = {
-  get prefix() {
-    return pkgSettings.prefix;
-  },
-  set prefix(val) {
-    pkgSettings.prefix = val;
-  },
-  get flags() {
-    return pkgSettings.flags;
-  },
-  isComponentEnabled: pkgSettings.isComponentEnabled,
-  isFeatureEnabled: pkgSettings.isFeatureEnabled,
-  overrideSettings: pkgSettings.overrideSettings,
-  replaceWithCare: pkgSettings.replaceWithCare,
+  ...pkgSettings
 };
 
 export default { carbon, pkg };

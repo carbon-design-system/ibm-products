@@ -345,7 +345,7 @@ export const SidePanel = ({
                 />
               )}
               {labelText && labelText.length && (
-                <p className={`${pkgPrefix}-side-panel-label-text`}>
+                <p className={`${pkg.prefix}-side-panel-label-text`}>
                   {labelText}
                 </p>
               )}

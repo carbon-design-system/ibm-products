@@ -15,12 +15,16 @@ const blockClass = `${pkg.prefix}-example-component`;
 
 const name = 'ExampleComponent';
 describe(name, () => {
-  test('Renders an experimental-component flag is enabled', async () => {
-    pkg.overrideSettings({ flags: { component: { ExampleComponent: true } } }); // must happen before component import
+  let ExampleComponent;
+  beforeAll(async () => {
+     // must happen before component import
+    pkg.overrideSettings({ flags: { component: { ExampleComponent: true } } });
     // ensure import after settings change
-    const { ExampleComponent } = await import(
-      '../../components/ExampleComponent'
-    );
+    const { ExampleComponent: LateLoadedComponent } = await import('.');
+    ExampleComponent = LateLoadedComponent;
+  });
+
+  test('Renders an experimental-component if flag is enabled', () => {
     const {container} = render(<ExampleComponent />);
 
     expect(container.querySelector(`.${blockClass}`)).not.toBeNull();

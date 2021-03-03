@@ -11,6 +11,7 @@ import { Card } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import mdx from './Card.mdx';
 import { ArrowRight24, Cloud32 } from '@carbon/icons-react';
+import { AspectRatio } from 'carbon-components-react';
 import {
   storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
 } from '../../../config';
@@ -33,16 +34,16 @@ export default {
       },
     },
     mediaRatio: {
-      defaultValue: '1:1',
+      defaultValue: '1x1',
       control: {
         type: 'select',
-        options: ['1:1', '3:2', '4:3', '16:9', '2:1'],
+        options: ['16x9', '9x16', '2x1', '1x2', '4x3', '3x4', '1x1'],
       },
     },
   },
   decorators: [
     (Story) => (
-      <div className="bx--grid">
+      <div className="bx--grid card-story">
         <Story />
       </div>
     ),
@@ -64,19 +65,28 @@ const defaultProps = {
 };
 
 const Template = (opts) => {
-  const { children, columnSize, mediaRatio, ...args } = opts;
-  const colClasses = cx(`bx--col-${columnSize}`, {
-    // solution for dealing with image ratios. refer to _storybook-styles.scss
-    [`media-ratio-11`]: mediaRatio === '1:1',
-    [`media-ratio-32`]: mediaRatio === '3:2',
-    [`media-ratio-43`]: mediaRatio === '4:3',
-    [`media-ratio-169`]: mediaRatio === '16:9',
-    [`media-ratio-21`]: mediaRatio === '2:1',
-  });
+  const { children, columnSize, ...args } = opts;
+  const colClasses = cx(`bx--col-${columnSize}`);
   return (
     <div className="bx--row">
       <div className={colClasses}>
         <Card {...args}>{children}</Card>
+      </div>
+    </div>
+  );
+};
+
+const MediaTemplate = (opts) => {
+  const { children, columnSize, mediaRatio, ...args } = opts;
+  const colClasses = cx(`bx--col-${columnSize}`);
+  return (
+    <div className="bx--row">
+      <div className={colClasses}>
+        <Card
+          media={<AspectRatio ratio={mediaRatio}>{mediaRatio}</AspectRatio>}
+          {...args}>
+          {children}
+        </Card>
       </div>
     </div>
   );
@@ -100,17 +110,15 @@ WithCaption.args = {
   label: '',
 };
 
-export const WithMedia = Template.bind({});
+export const WithMedia = MediaTemplate.bind({});
 WithMedia.args = {
   ...defaultProps,
-  media: <div className="media-box" />,
 };
 
-export const MediaLeft = Template.bind({});
+export const MediaLeft = MediaTemplate.bind({});
 MediaLeft.args = {
   ...defaultProps,
   mediaPosition: 'left',
-  media: <div className="media-box media-box--left" />,
   columnSize: 'md-4',
 };
 

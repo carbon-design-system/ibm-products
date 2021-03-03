@@ -10,14 +10,32 @@ import React from 'react';
 
 import { DISPLAY_NAME } from '.';
 
+import { pkg } from '../../global/js/settings';
+
 const { name } = DISPLAY_NAME;
+const blockClass = `${pkg.prefix}-example-component`;
 
 describe(name, () => {
+  let DISPLAY_NAME;
+  beforeAll(async () => {
+    // must happen before component import
+    pkg.overrideSettings({ flags: { component: { DISPLAY_NAME: true } } });
+    // ensure import after settings change
+    const { DISPLAY_NAME: LateLoadedComponent } = await import('.');
+    DISPLAY_NAME = LateLoadedComponent;
+  });
+
   test('has no accessibility violations', async () => {
     const { container } = render(<DISPLAY_NAME>{name}</DISPLAY_NAME>);
 
     await expect(container).toBeAccessible(name);
     await expect(container).toHaveNoAxeViolations();
+  });
+
+  test('Renders the component `DISPLAY_NAME` if flag is enabled', () => {
+    const { container } = render(<DISPLAY_NAME />);
+
+    expect(container.querySelector(`.${blockClass}`)).not.toBeNull();
   });
 
   it(`adds content for the ${name}`, () => {

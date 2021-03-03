@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.20.2...@carbon/ibm-cloud-cognitive-experimental@0.20.3) (2021-03-03)
+
+
+### Bug Fixes
+
+* remove spurious scrollbar when available height is very small ([#392](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/392)) ([37dd87c](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/37dd87cfb906d8d9256be6d71f0218d2156b3095))
+
+
+
+
+
 ## [0.20.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.20.1...@carbon/ibm-cloud-cognitive-experimental@0.20.2) (2021-03-01)
 
 

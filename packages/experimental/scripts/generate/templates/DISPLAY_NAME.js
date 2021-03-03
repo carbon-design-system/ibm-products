@@ -8,6 +8,7 @@
 import cx from 'classnames';
 import { node, string } from 'prop-types';
 import React from 'react';
+import { Canary } from '../_Canary';
 
 /**
  * TODO: @import(s) of carbon components
@@ -16,14 +17,19 @@ import React from 'react';
 /**
  * TODO: Add use of Carbon prefix if needed
  */
-import { pkgPrefix /*, carbonPrefix */ } from '../../global/js/settings';
+import { pkg /*, carbon */ } from '../../global/js/settings';
 
-const blockClass = `${pkgPrefix}--STYLE_NAME`;
+const blockClass = `${pkg.prefix}--STYLE_NAME`;
 
 /**
  * TODO: Description.
  */
-export const DISPLAY_NAME = ({ children, className, ...rest }) => {
+export const DISPLAY_NAME = (!pkg.isComponentEnabled('AboutModal'))
+// Return canary if not released or flag not set
+? () => <Canary component="AboutModal" />
+// Main component code...
+: ({ children, className, ...rest }) => {
+
   return (
     <div className={cx(blockClass, className)} {...rest}>
       {children}

@@ -8,7 +8,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { pkgPrefix } from '../../global/js/settings';
+import { pkg } from '../../global/js/settings';
 import { Button, Link, ToggleSmall } from 'carbon-components-react';
 import {
   ErrorFilled16,
@@ -99,16 +99,16 @@ export const Notifications = ({
     const trimLength = 88;
     const description = notification.description;
     const descriptionClassName = cx([
-      `${pkgPrefix}-notifications-panel-notification-description`,
+      `${pkg.prefix}-notifications-panel-notification-description`,
       {
-        [`${pkgPrefix}-notifications-panel-notification-long-description`]: notification.showAll,
-        [`${pkgPrefix}-notifications-panel-notification-short-description`]: !notification.showAll,
+        [`${pkg.prefix}-notifications-panel-notification-long-description`]: notification.showAll,
+        [`${pkg.prefix}-notifications-panel-notification-short-description`]: !notification.showAll,
       },
     ]);
     const showMoreButtonClassName = cx([
       {
-        [`${pkgPrefix}-notifications-panel-notification-read-less-button`]: notification.showAll,
-        [`${pkgPrefix}-notifications-panel-notification-read-more-button`]: !notification.showAll,
+        [`${pkg.prefix}-notifications-panel-notification-read-less-button`]: notification.showAll,
+        [`${pkg.prefix}-notifications-panel-notification-read-more-button`]: !notification.showAll,
       },
     ]);
     return (
@@ -140,13 +140,13 @@ export const Notifications = ({
 
   const renderNotification = (group, notification, index) => {
     const notificationClassName = cx([
-      `${pkgPrefix}-notifications-panel-notification`,
-      `${pkgPrefix}-notifications-panel-notification-${group}`,
+      `${pkg.prefix}-notifications-panel-notification`,
+      `${pkg.prefix}-notifications-panel-notification-${group}`,
     ]);
     const notificationHeaderClassName = cx([
-      `${pkgPrefix}-notifications-panel-notification-title`,
+      `${pkg.prefix}-notifications-panel-notification-title`,
       {
-        [`${pkgPrefix}-notifications-panel-notification-title-unread`]: notification.unread,
+        [`${pkg.prefix}-notifications-panel-notification-title-unread`]: notification.unread,
       },
     ]);
     return (
@@ -161,7 +161,7 @@ export const Notifications = ({
         onKeyDown={(event) => {
           if (
             event.target.classList.contains(
-              `${pkgPrefix}-notifications-dismiss-single-button`
+              `${pkg.prefix}-notifications-dismiss-single-button`
             )
           )
             return;
@@ -172,39 +172,39 @@ export const Notifications = ({
         {notification.type === 'error' && (
           <ErrorFilled16
             className={cx([
-              `${pkgPrefix}-notifications-panel-notification-status-icon`,
-              `${pkgPrefix}-notifications-panel-notification-status-icon-error`,
+              `${pkg.prefix}-notifications-panel-notification-status-icon`,
+              `${pkg.prefix}-notifications-panel-notification-status-icon-error`,
             ])}
           />
         )}
         {notification.type === 'success' && (
           <CheckmarkFilled16
             className={cx([
-              `${pkgPrefix}-notifications-panel-notification-status-icon`,
-              `${pkgPrefix}-notifications-panel-notification-status-icon-success`,
+              `${pkg.prefix}-notifications-panel-notification-status-icon`,
+              `${pkg.prefix}-notifications-panel-notification-status-icon-success`,
             ])}
           />
         )}
         {notification.type === 'warning' && (
           <WarningAltFilled16
             className={cx([
-              `${pkgPrefix}-notifications-panel-notification-status-icon`,
-              `${pkgPrefix}-notifications-panel-notification-status-icon-warning`,
+              `${pkg.prefix}-notifications-panel-notification-status-icon`,
+              `${pkg.prefix}-notifications-panel-notification-status-icon-warning`,
             ])}
           />
         )}
         {notification.type === 'informational' && (
           <InformationSquareFilled16
             className={cx([
-              `${pkgPrefix}-notifications-panel-notification-status-icon`,
-              `${pkgPrefix}-notifications-panel-notification-status-icon-informational`,
+              `${pkg.prefix}-notifications-panel-notification-status-icon`,
+              `${pkg.prefix}-notifications-panel-notification-status-icon-informational`,
             ])}
           />
         )}
         <div
-          className={`${pkgPrefix}-notifications-panel-notification-content`}>
+          className={`${pkg.prefix}-notifications-panel-notification-content`}>
           <p
-            className={`${pkgPrefix}-notifications-panel-notification-time-label`}>
+            className={`${pkg.prefix}-notifications-panel-notification-time-label`}>
             {timeAgo(notification.timestamp)}
           </p>
           <h6 className={notificationHeaderClassName}>{notification.title}</h6>
@@ -216,7 +216,7 @@ export const Notifications = ({
             notification.link.url && (
               <Link
                 href={notification.link.url}
-                className={`${pkgPrefix}-notifications-panel-notifications-link`}>
+                className={`${pkg.prefix}-notifications-panel-notifications-link`}>
                 {notification.link.text}
               </Link>
             )}
@@ -227,7 +227,7 @@ export const Notifications = ({
           renderIcon={Close16}
           iconDescription="Dismiss"
           tooltipPosition="left"
-          className={`${pkgPrefix}-notifications-dismiss-single-button`}
+          className={`${pkg.prefix}-notifications-dismiss-single-button`}
           onClick={(event) => dismissSingleNotification(event, notification)}
         />
       </div>
@@ -241,34 +241,34 @@ export const Notifications = ({
   };
 
   const mainSectionClassName = cx([
-    `${pkgPrefix}-notifications-panel-main-section`,
+    `${pkg.prefix}-notifications-panel-main-section`,
     {
-      [`${pkgPrefix}-notificaitons-panel-main-section-empty`]: !allNotifications.length,
+      [`${pkg.prefix}-notificaitons-panel-main-section-empty`]: !allNotifications.length,
     },
   ]);
 
   return (
     shouldRender && (
       <div
-        id={`${pkgPrefix}-notifications-panel`}
-        className={`${pkgPrefix}-notifications-panel-container`}
+        id={`${pkg.prefix}-notifications-panel`}
+        className={`${pkg.prefix}-notifications-panel-container`}
         style={{ animation: `${open ? 'fadeIn 250ms' : 'fadeOut 250ms'}` }}
         onAnimationEnd={onAnimationEnd}
         ref={notificationPanelRef}>
-        <div className={`${pkgPrefix}-notifications-header-container`}>
-          <div className={`${pkgPrefix}-notifications-header-flex`}>
-            <h1 className={`${pkgPrefix}-notifications-header`}>{title}</h1>
+        <div className={`${pkg.prefix}-notifications-header-container`}>
+          <div className={`${pkg.prefix}-notifications-header-flex`}>
+            <h1 className={`${pkg.prefix}-notifications-header`}>{title}</h1>
             <Button
               size="small"
               kind="ghost"
-              className={`${pkgPrefix}-notifications-dismiss-button`}
+              className={`${pkg.prefix}-notifications-dismiss-button`}
               onClick={() => onDismissAllNotifications()}>
               {dismissAllLabel}
             </Button>
           </div>
           <ToggleSmall
-            className={`${pkgPrefix}-notifications-do-not-disturb-toggle`}
-            id={`${pkgPrefix}-notifications-do-not-disturb-toggle-component`}
+            className={`${pkg.prefix}-notifications-do-not-disturb-toggle`}
+            id={`${pkg.prefix}-notifications-do-not-disturb-toggle-component`}
             labelA={doNotDisturbLabel}
             labelB={doNotDisturbLabel}
             onToggle={(event) => onDoNotDisturbChange(event)}
@@ -279,7 +279,7 @@ export const Notifications = ({
           {withinLastDayNotifications && withinLastDayNotifications.length ? (
             <>
               <h6
-                className={`${pkgPrefix}-notifications-panel-time-section-label`}>
+                className={`${pkg.prefix}-notifications-panel-time-section-label`}>
                 {todayLabel}
               </h6>
               {withinLastDayNotifications.map((notification, index) =>
@@ -290,7 +290,7 @@ export const Notifications = ({
           {previousDayNotifications && previousDayNotifications.length ? (
             <>
               <h6
-                className={`${pkgPrefix}-notifications-panel-time-section-label`}>
+                className={`${pkg.prefix}-notifications-panel-time-section-label`}>
                 {yesterdayLabel}
               </h6>
               {previousDayNotifications.map((notification, index) =>
@@ -301,7 +301,7 @@ export const Notifications = ({
           {previousNotifications && previousNotifications.length ? (
             <>
               <h6
-                className={`${pkgPrefix}-notifications-panel-time-section-label`}>
+                className={`${pkg.prefix}-notifications-panel-time-section-label`}>
                 {previousLabel}
               </h6>
               {previousNotifications.map((notification, index) =>
@@ -322,17 +322,17 @@ export const Notifications = ({
         onSettingsClick &&
         allNotifications &&
         allNotifications.length ? (
-          <div className={`${pkgPrefix}-notifications-bottom-actions`}>
+          <div className={`${pkg.prefix}-notifications-bottom-actions`}>
             <Button
               kind="ghost"
-              className={`${pkgPrefix}-notifications-view-all-button`}
+              className={`${pkg.prefix}-notifications-view-all-button`}
               onClick={() => onViewAllClick()}>
               View all ({allNotifications.length})
             </Button>
             <Button
               kind="ghost"
               size="small"
-              className={`${pkgPrefix}-notifications-settings-button`}
+              className={`${pkg.prefix}-notifications-settings-button`}
               renderIcon={Settings16}
               iconDescription="Settings"
               onClick={() => onSettingsClick()}

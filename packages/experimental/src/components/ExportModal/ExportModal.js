@@ -9,7 +9,7 @@ import {
 } from 'carbon-components-react';
 import { ErrorFilled16, CheckmarkFilled16 } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
-import { pkgPrefix } from '../../global/js/settings';
+import { pkg } from '../../global/js/settings';
 
 export const ExportModal = ({
   error,
@@ -82,13 +82,13 @@ export const ExportModal = ({
       modalHeading={modalHeading}
       onRequestSubmit={onSubmitHandler}
       onRequestClose={onCloseHandler}
-      className={`${pkgPrefix}-export-modal`}
+      className={`${pkg.prefix}-export-modal`}
       primaryButtonDisabled={primaryButtonDisabled}
       passiveModal={submitted}>
-      <div className={`${pkgPrefix}-export-modal-inner`}>
+      <div className={`${pkg.prefix}-export-modal-inner`}>
         {!submitted && (
           <>
-            <p className={`${pkgPrefix}-export-modal-body`}>{modalBody}</p>
+            <p className={`${pkg.prefix}-export-modal-body`}>{modalBody}</p>
             {preformattedExtensions.length ? (
               <FormGroup legendText={preformattedExtensionsLabel}>
                 <RadioButtonGroup
@@ -119,22 +119,24 @@ export const ExportModal = ({
           </>
         )}
         {loading && (
-          <div className={`${pkgPrefix}-export-modal-messaging`}>
+          <div className={`${pkg.prefix}-export-modal-messaging`}>
             <Loading small withOverlay={false} />
             <p>{loadingMessage}</p>
           </div>
         )}
         {successful && (
-          <div className={`${pkgPrefix}-export-modal-messaging`}>
+          <div className={`${pkg.prefix}-export-modal-messaging`}>
             <CheckmarkFilled16
-              className={`${pkgPrefix}-export-modal-checkmark-icon`}
+              className={`${pkg.prefix}-export-modal-checkmark-icon`}
             />
             <p>{successMessage}</p>
           </div>
         )}
         {error && (
-          <div className={`${pkgPrefix}-export-modal-messaging`}>
-            <ErrorFilled16 className={`${pkgPrefix}-export-modal-error-icon`} />
+          <div className={`${pkg.prefix}-export-modal-messaging`}>
+            <ErrorFilled16
+              className={`${pkg.prefix}-export-modal-error-icon`}
+            />
             <p>{errorMessage}</p>
           </div>
         )}

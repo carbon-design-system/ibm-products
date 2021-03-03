@@ -11,11 +11,11 @@ import { action } from '@storybook/addon-actions';
 import { ActionBar, ActionBarItem } from '.';
 import { Lightning16, Bee24 } from '@carbon/icons-react';
 
-import { pkgPrefix } from '../../global/js/settings';
+import { pkg } from '../../global/js/settings';
+import { getStorybookPrefix } from '../../../config';
+const storybookPrefix = getStorybookPrefix(pkg, 'ActionBar');
 
-import { storybookPrefixCanary as storybookPrefix } from '../../../config';
-
-const blockClass = `${pkgPrefix}-action-bar`;
+const blockClass = `${pkg.prefix}-action-bar`;
 
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 

@@ -13,7 +13,7 @@ import cx from 'classnames';
 
 import ReactResizeDetector from 'react-resize-detector';
 
-import { pkgPrefix /*, carbonPrefix */ } from '../../global/js/settings';
+import { pkg /*, carbon */ } from '../../global/js/settings';
 
 import { useWindowResize, useWindowScroll } from '../../global/js/use';
 
@@ -29,7 +29,7 @@ import { ActionBar } from '../ActionBar/';
 import { BreadcrumbWithOverflow, TagSet } from '../';
 import { ButtonSetWithOverflow } from './ButtonSetWithOverflow';
 
-const blockClass = `${pkgPrefix}-page-header`;
+const blockClass = `${pkg.prefix}-page-header`;
 
 export const PageHeader = ({
   actionBarItems,

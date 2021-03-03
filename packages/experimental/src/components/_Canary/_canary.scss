@@ -1,0 +1,16 @@
+//
+// Copyright IBM Corp. 2020, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../global/styles/carbon-settings'; // goes before carbon imports as it affects how carbon is used.
+@import '../../global/styles/project-settings';
+
+$block-class: #{$pkg-prefix}-canary;
+
+.#{$block-class}--code {
+  padding: $spacing-05;
+  background-color: $ui-01;
+}

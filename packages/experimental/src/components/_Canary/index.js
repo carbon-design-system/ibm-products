@@ -5,8 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-describe('example-component', () => {
-  it('should work', () => {
-    expect(true).toBe(true);
-  });
-});
+export { Canary } from './Canary';

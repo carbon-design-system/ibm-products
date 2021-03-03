@@ -18,7 +18,7 @@ import {
   Tab,
 } from 'carbon-components-react';
 
-import { pkgPrefix } from '../../global/js/settings';
+import { pkg } from '../../global/js/settings';
 
 export const AboutModal = ({
   copyrightText,
@@ -55,33 +55,33 @@ export const AboutModal = ({
       <div>
         <ComposedModal
           className={[
-            `${pkgPrefix}-about-modal`,
+            `${pkg.prefix}-about-modal`,
             theme === 'dark'
-              ? `${pkgPrefix}-about-modal-dark-theme`
-              : `${pkgPrefix}-about-modal-light-theme`,
+              ? `${pkg.prefix}-about-modal-dark-theme`
+              : `${pkg.prefix}-about-modal-light-theme`,
             hasScrollableContent
-              ? `${pkgPrefix}-about-modal-scroll-enabled`
+              ? `${pkg.prefix}-about-modal-scroll-enabled`
               : '',
             technologiesUsed && technologiesUsed.length > 0
-              ? `${pkgPrefix}-about-modal-with-tabs`
+              ? `${pkg.prefix}-about-modal-with-tabs`
               : '',
           ].join(' ')}
           open={open}
           ref={modalRef}>
-          <div className={`${pkgPrefix}-modal-content`}>
+          <div className={`${pkg.prefix}-modal-content`}>
             <img
               alt="Product logo"
               src={logo}
-              className={`${pkgPrefix}-about-modal-product-logo`}
+              className={`${pkg.prefix}-about-modal-product-logo`}
             />
             <ModalHeader
               title={productName}
-              titleClassName={`${pkgPrefix}-about-modal-title`}
+              titleClassName={`${pkg.prefix}-about-modal-title`}
               closeModal={onRequestClose}
             />
-            <ModalBody className={`${pkgPrefix}-about-modal-content`}>
+            <ModalBody className={`${pkg.prefix}-about-modal-content`}>
               {body}
-              <div className={`${pkgPrefix}-about-modal-links-container`}>
+              <div className={`${pkg.prefix}-about-modal-links-container`}>
                 {links &&
                   links.length > 0 &&
                   links.map((link, i) => (
@@ -89,7 +89,7 @@ export const AboutModal = ({
                       <Link href={link.url}>{link.text}</Link>
                       {i !== links.length - 1 && (
                         <span
-                          className={`${pkgPrefix}-about-modal-link-divider`}>
+                          className={`${pkg.prefix}-about-modal-link-divider`}>
                           |
                         </span>
                       )}
@@ -97,12 +97,12 @@ export const AboutModal = ({
                   ))}
               </div>
               {legalText ? (
-                <p className={`${pkgPrefix}-about-modal-legal-text`}>
+                <p className={`${pkg.prefix}-about-modal-legal-text`}>
                   {legalText}
                 </p>
               ) : null}
               {copyrightText ? (
-                <p className={`${pkgPrefix}-about-modal-copyright-text`}>
+                <p className={`${pkg.prefix}-about-modal-copyright-text`}>
                   {copyrightText}
                 </p>
               ) : null}
@@ -110,7 +110,7 @@ export const AboutModal = ({
             <ModalFooter>
               {technologiesUsed && technologiesUsed.length ? (
                 <Tabs
-                  className={`${pkgPrefix}-about-modal-tab-container`}
+                  className={`${pkg.prefix}-about-modal-tab-container`}
                   light={theme === 'light'}
                   aria-label="About modal technology used and version number tabs">
                   <Tab
@@ -118,7 +118,7 @@ export const AboutModal = ({
                     label="Technologies used"
                     aria-label="Technologies used tab">
                     <div
-                      className={`${pkgPrefix}-about-modal-tab-content-flex`}>
+                      className={`${pkg.prefix}-about-modal-tab-content-flex`}>
                       {technologiesUsed &&
                         technologiesUsed.length &&
                         technologiesUsed.map((tech) => (
@@ -126,7 +126,7 @@ export const AboutModal = ({
                             key={tech.alt}
                             src={tech.src}
                             alt={tech.alt}
-                            className={`${pkgPrefix}-about-modal-tech-used-item`}
+                            className={`${pkg.prefix}-about-modal-tech-used-item`}
                           />
                         ))}
                     </div>
@@ -136,11 +136,11 @@ export const AboutModal = ({
                     label="Version number"
                     aria-label="Version number tab">
                     <div
-                      className={`${pkgPrefix}-about-modal-tab-content-flex ${pkgPrefix}-about-modal-tab-content-version-flex`}>
-                      <p className={`${pkgPrefix}-about-modal-version-label`}>
+                      className={`${pkg.prefix}-about-modal-tab-content-flex ${pkg.prefix}-about-modal-tab-content-version-flex`}>
+                      <p className={`${pkg.prefix}-about-modal-version-label`}>
                         Version number
                       </p>
-                      <p className={`${pkgPrefix}-about-modal-version-number`}>
+                      <p className={`${pkg.prefix}-about-modal-version-number`}>
                         {versionNumber}
                       </p>
                     </div>
@@ -148,17 +148,17 @@ export const AboutModal = ({
                 </Tabs>
               ) : (
                 <>
-                  <p className={`${pkgPrefix}-about-modal-version-label`}>
+                  <p className={`${pkg.prefix}-about-modal-version-label`}>
                     Version number
                   </p>
-                  <p className={`${pkgPrefix}-about-modal-version-number`}>
+                  <p className={`${pkg.prefix}-about-modal-version-number`}>
                     {versionNumber}
                   </p>
                 </>
               )}
             </ModalFooter>
             {hasScrollableContent && (
-              <div className={`${pkgPrefix}-about-modal-scroll-gradient`} />
+              <div className={`${pkg.prefix}-about-modal-scroll-gradient`} />
             )}
           </div>
         </ComposedModal>

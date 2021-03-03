@@ -18,13 +18,13 @@ import {
 } from 'carbon-components-react';
 import { OverflowMenuHorizontal32 } from '@carbon/icons-react';
 
-import { pkgPrefix, carbonPrefix } from '../../global/js/settings';
+import { pkg, carbon } from '../../global/js/settings';
 
 import ReactResizeDetector from 'react-resize-detector';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import unwrapIfFragment from '../../global/js/utils/unwrap-if-fragment';
 
-const blockClass = `${pkgPrefix}-breadcrumb-with-overflow`;
+const blockClass = `${pkg.prefix}-breadcrumb-with-overflow`;
 
 export const BreadcrumbWithOverflow = ({
   children,
@@ -49,7 +49,7 @@ export const BreadcrumbWithOverflow = ({
           menuOffset={{ top: 10, left: 59 }} // TODO: REMOVE borrowed from https://github.com/carbon-design-system/carbon/pull/7085
           renderIcon={OverflowMenuHorizontal32}
           className={`${blockClass}--overflow-menu`}
-          menuOptionsClass={`${carbonPrefix}--breadcrumb-menu-options`} // TODO: REMOVE borrowed from https://github.com/carbon-design-system/carbon/pull/7085
+          menuOptionsClass={`${carbon.prefix}--breadcrumb-menu-options`} // TODO: REMOVE borrowed from https://github.com/carbon-design-system/carbon/pull/7085
         >
           {
             // eslint-disable-next-line react/prop-types
@@ -174,7 +174,7 @@ export const BreadcrumbWithOverflow = ({
 
       if (sizingContainerRef.current) {
         const sizingBreadcrumbItems = sizingContainerRef.current.querySelectorAll(
-          `.${carbonPrefix}--breadcrumb-item`
+          `.${carbon.prefix}--breadcrumb-item`
         );
 
         const breadcrumbWidthsIncludingMargin = [];

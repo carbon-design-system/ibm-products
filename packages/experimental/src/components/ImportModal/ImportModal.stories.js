@@ -10,9 +10,9 @@ import { Button } from 'carbon-components-react';
 import { ImportModal } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import mdx from './ImportModal.mdx';
-import {
-  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
-} from '../../../config';
+import { pkg } from '../../global/js/settings';
+import { getStorybookPrefix } from '../../../config';
+const storybookPrefix = getStorybookPrefix(pkg, 'ImportModal');
 
 export default {
   title: `${storybookPrefix}/ImportModal`,

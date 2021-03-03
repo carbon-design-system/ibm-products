@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Modal, TextInput, InlineLoading, Form } from 'carbon-components-react';
 import { InformationFilled16 } from '@carbon/icons-react';
 import { APIKeyDownloader } from '../APIKeyDownloader';
-import { pkgPrefix } from '../../global/js/settings';
+import { pkg } from '../../global/js/settings';
 
 export const APIKeyModal = ({
   apiKey,
@@ -104,7 +104,7 @@ export const APIKeyModal = ({
 
   return (
     <Modal
-      className={`${pkgPrefix}--apikey-modal`}
+      className={`${pkg.prefix}--apikey-modal`}
       open={open}
       modalHeading={getHeader()}
       primaryButtonText={getPrimaryButtonText()}
@@ -119,7 +119,7 @@ export const APIKeyModal = ({
       ) : (
         <>
           {modalBody && (
-            <p className={`${pkgPrefix}--apikey-modal-body`}>{modalBody}</p>
+            <p className={`${pkg.prefix}--apikey-modal-body`}>{modalBody}</p>
           )}
           {apiKey && apiKeyVisibility && (
             <TextInput.PasswordInput
@@ -152,11 +152,11 @@ export const APIKeyModal = ({
           {loading && (
             <InlineLoading
               description={loadingMessage}
-              className={`${pkgPrefix}--apikey-modal-loader`}
+              className={`${pkg.prefix}--apikey-modal-loader`}
             />
           )}
           {apiKeyLoaded && (
-            <div className={`${pkgPrefix}--apikey-modal-messaging`}>
+            <div className={`${pkg.prefix}--apikey-modal-messaging`}>
               <InformationFilled16 />
               {downloadable ? (
                 <APIKeyDownloader
@@ -166,7 +166,7 @@ export const APIKeyModal = ({
                   linkText={downloadLinkText}
                 />
               ) : (
-                <div className={`${pkgPrefix}--apikey-modal-messaging-text`}>
+                <div className={`${pkg.prefix}--apikey-modal-messaging-text`}>
                   {successBody}
                 </div>
               )}

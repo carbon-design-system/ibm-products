@@ -1,5 +1,5 @@
 import React from 'react';
-import { pkgPrefix } from './settings';
+import { pkg } from './settings';
 import { shallow } from 'enzyme';
 
 describe('settings', () => {
@@ -7,13 +7,16 @@ describe('settings', () => {
     jest.resetAllMocks();
   });
   it('uses the default css prefix', () => {
-    expect(pkgPrefix).toEqual('exp');
+    expect(pkg.prefix).toEqual('exp');
   });
 
   it('can use custom prefix with a react component', async () => {
-    jest.mock('./settings', () => ({
-      pkgPrefix: 'my-prefix',
-    }));
+    // jest.mock('./settings', () => ({
+    //   pkg.prefix: 'my-prefix',
+    // }));
+    pkg.prefix = 'my-prefix';
+    pkg.overrideSettings({ flags: { component: { ExampleComponent: true } } });
+
     // dynamic import so we can modify the import on the component before using it
     const { ExampleComponent } = await import(
       '../../components/ExampleComponent'

@@ -2,7 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 import { Button } from 'carbon-components-react';
 import PropTypes from 'prop-types';
-import { pkgPrefix } from '../../global/js/settings';
+import { pkg } from '../../global/js/settings';
 
 export const Card = ({
   actionIcon: ActionIcon,
@@ -23,27 +23,27 @@ export const Card = ({
   title,
 }) => {
   const cardClasses = cx({
-    [`${pkgPrefix}-card`]: true,
-    [`${pkgPrefix}-card--clickable`]: onClick,
-    [`${pkgPrefix}-card--media-left`]: mediaPosition === 'left',
+    [`${pkg.prefix}-card`]: true,
+    [`${pkg.prefix}-card--clickable`]: onClick,
+    [`${pkg.prefix}-card--media-left`]: mediaPosition === 'left',
     className,
   });
 
   const CardContent = (
     <div className={cardClasses}>
-      {media && <div className={`${pkgPrefix}-card-media`}>{media}</div>}
+      {media && <div className={`${pkg.prefix}-card-media`}>{media}</div>}
       {Pictogram && (
-        <div className={`${pkgPrefix}-card-pictogram`}>
+        <div className={`${pkg.prefix}-card-pictogram`}>
           <Pictogram />
         </div>
       )}
-      <div className={`${pkgPrefix}-card-content-container`}>
-        <div className={`${pkgPrefix}-card-header`}>
-          <p className={`${pkgPrefix}-card-label`}>{label}</p>
-          <p className={`${pkgPrefix}-card-title`}>{title}</p>
+      <div className={`${pkg.prefix}-card-content-container`}>
+        <div className={`${pkg.prefix}-card-header`}>
+          <p className={`${pkg.prefix}-card-label`}>{label}</p>
+          <p className={`${pkg.prefix}-card-title`}>{title}</p>
         </div>
-        <div className={`${pkgPrefix}-card-body`}>{children}</div>
-        <div className={`${pkgPrefix}-card-actions`}>
+        <div className={`${pkg.prefix}-card-body`}>{children}</div>
+        <div className={`${pkg.prefix}-card-actions`}>
           {secondaryButtonText && (
             <Button kind={secondaryButtonKind} onClick={onSecondaryButtonClick}>
               {secondaryButtonText}
@@ -56,7 +56,7 @@ export const Card = ({
           )}
           {ActionIcon && (
             <ActionIcon
-              className={`${pkgPrefix}-card-action-icon`}
+              className={`${pkg.prefix}-card-action-icon`}
               onClick={onPrimaryButtonClick}
             />
           )}
@@ -68,7 +68,7 @@ export const Card = ({
   if (!href) return CardContent;
 
   return (
-    <a className={`${pkgPrefix}-card-link`} href={href}>
+    <a className={`${pkg.prefix}-card-link`} href={href}>
       {CardContent}
     </a>
   );

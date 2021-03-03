@@ -5,18 +5,23 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { Canary } from '../_Canary';
 import { Button, ButtonSet } from 'carbon-components-react';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { pkgPrefix } from '../../global/js/settings';
+import { pkg } from '../../global/js/settings';
 import cx from 'classnames';
 
-const blockClass = `${pkgPrefix}-example-component`;
+const blockClass = `${pkg.prefix}-example-component`;
 
 // import './example-component.scss'; // Do not import SCSS directly it will be rolled up separately.
 
-export const ExampleComponent = ({
+export const ExampleComponent = (!pkg.isComponentEnabled('ExampleComponent'))
+// Return canary if not released or flag not set
+? () => <Canary component="ExampleComponent" />
+// Main component code...
+: ({
   borderColor,
   boxedBorder,
   onPrimaryClick,
@@ -46,10 +51,11 @@ export const ExampleComponent = ({
 
   return (
     <ButtonSet
+      role="main"
       className={cx([blockClass, `${blockClass}--${size}`, mode])}
       style={{
         /* stylelint-disable-next-line carbon/theme-token-use */
-        [`--${pkgPrefix}-border-color`]: borderColor,
+        [`--${pkg.prefix}-border-color`]: borderColor,
       }}
       {...props}>
       <Button

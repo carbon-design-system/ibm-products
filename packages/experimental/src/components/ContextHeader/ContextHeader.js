@@ -8,15 +8,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { pkgPrefix } from '../../global/js/settings';
+import { pkg } from '../../global/js/settings';
 
 const ContextHeader = ({ namespace, name, task }) => {
   return (
-    <div className={`${pkgPrefix}-context-header`}>
-      <span className={`${pkgPrefix}-context-header--task`}>{task}</span>
-      <span className={`${pkgPrefix}-context-header--name`}>{name}</span>
-      <span className={`${pkgPrefix}-context-header--separator`}>|</span>
-      <span className={`${pkgPrefix}-context-header--namespace`}>
+    <div className={`${pkg.prefix}-context-header`}>
+      <span className={`${pkg.prefix}-context-header--task`}>{task}</span>
+      <span className={`${pkg.prefix}-context-header--name`}>{name}</span>
+      <span className={`${pkg.prefix}-context-header--separator`}>|</span>
+      <span className={`${pkg.prefix}-context-header--namespace`}>
         {namespace}
       </span>
     </div>

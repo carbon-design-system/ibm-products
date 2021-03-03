@@ -6,7 +6,7 @@
  */
 
 import cx from 'classnames';
-import { object, string } from 'prop-types';
+import { string } from 'prop-types';
 import React from 'react';
 
 import { pkg } from '../../global/js/settings';

@@ -11,7 +11,7 @@
 import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import React from 'react';
 import { pkg } from '../global/js/settings';
- // must come before import
+// must come before import
 pkg.setAllComponents(false);
 
 const canaryClass = `${pkg.prefix}-canary`;

@@ -24,18 +24,17 @@ const blockClass = `${pkg.prefix}--STYLE_NAME`;
 /**
  * TODO: Description.
  */
-export const DISPLAY_NAME = (!pkg.isComponentEnabled('AboutModal'))
-// Return canary if not released or flag not set
-? () => <Canary component="AboutModal" />
-// Main component code...
-: ({ children, className, ...rest }) => {
-
-  return (
-    <div className={cx(blockClass, className)} {...rest}>
-      {children}
-    </div>
-  );
-};
+export const DISPLAY_NAME = !pkg.isComponentEnabled('AboutModal')
+  ? // Return canary if not released or flag not set
+    () => <Canary component="AboutModal" />
+  : // Main component code...
+    ({ children, className, ...rest }) => {
+      return (
+        <div className={cx(blockClass, className)} {...rest}>
+          {children}
+        </div>
+      );
+    };
 
 // TODO: Prop type checking - https://www.npmjs.com/package/prop-types#usage
 DISPLAY_NAME.propTypes = {

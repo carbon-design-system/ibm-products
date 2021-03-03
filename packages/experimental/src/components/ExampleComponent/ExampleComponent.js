@@ -17,64 +17,64 @@ const blockClass = `${pkg.prefix}-example-component`;
 
 // import './example-component.scss'; // Do not import SCSS directly it will be rolled up separately.
 
-export const ExampleComponent = (!pkg.isComponentEnabled('ExampleComponent'))
-// Return canary if not released or flag not set
-? () => <Canary component="ExampleComponent" />
-// Main component code...
-: ({
-  borderColor,
-  boxedBorder,
-  onPrimaryClick,
-  onSecondaryClick,
-  primaryButtonLabel,
-  primaryKind,
-  secondaryButtonLabel,
-  secondaryKind,
-  size,
-  ...props
-}) => {
-  const mode = boxedBorder
-    ? `${blockClass}--boxed-set`
-    : `${blockClass}--shadow-set`;
+export const ExampleComponent = !pkg.isComponentEnabled('ExampleComponent')
+  ? // Return canary if not released or flag not set
+    () => <Canary component="ExampleComponent" />
+  : // Main component code...
+    ({
+      borderColor,
+      boxedBorder,
+      onPrimaryClick,
+      onSecondaryClick,
+      primaryButtonLabel,
+      primaryKind,
+      secondaryButtonLabel,
+      secondaryKind,
+      size,
+      ...props
+    }) => {
+      const mode = boxedBorder
+        ? `${blockClass}--boxed-set`
+        : `${blockClass}--shadow-set`;
 
-  const handlePrimaryClick = (e) => {
-    if (onPrimaryClick) {
-      onPrimaryClick(e);
-    }
-  };
+      const handlePrimaryClick = (e) => {
+        if (onPrimaryClick) {
+          onPrimaryClick(e);
+        }
+      };
 
-  const handleSecondaryClick = (e) => {
-    if (onSecondaryClick) {
-      onSecondaryClick(e);
-    }
-  };
+      const handleSecondaryClick = (e) => {
+        if (onSecondaryClick) {
+          onSecondaryClick(e);
+        }
+      };
 
-  return (
-    <ButtonSet
-      role="main"
-      className={cx([blockClass, `${blockClass}--${size}`, mode])}
-      style={{
-        /* stylelint-disable-next-line carbon/theme-token-use */
-        [`--${pkg.prefix}-border-color`]: borderColor,
-      }}
-      {...props}>
-      <Button
-        kind={secondaryKind}
-        onClick={handleSecondaryClick}
-        size={size}
-        disabled={props.disabled}>
-        {secondaryButtonLabel}
-      </Button>
-      <Button
-        kind={primaryKind}
-        onClick={handlePrimaryClick}
-        size={size}
-        disabled={props.disabled}>
-        {primaryButtonLabel}
-      </Button>
-    </ButtonSet>
-  );
-};
+      return (
+        <ButtonSet
+          role="main"
+          className={cx([blockClass, `${blockClass}--${size}`, mode])}
+          style={{
+            /* stylelint-disable-next-line carbon/theme-token-use */
+            [`--${pkg.prefix}-border-color`]: borderColor,
+          }}
+          {...props}>
+          <Button
+            kind={secondaryKind}
+            onClick={handleSecondaryClick}
+            size={size}
+            disabled={props.disabled}>
+            {secondaryButtonLabel}
+          </Button>
+          <Button
+            kind={primaryKind}
+            onClick={handlePrimaryClick}
+            size={size}
+            disabled={props.disabled}>
+            {primaryButtonLabel}
+          </Button>
+        </ButtonSet>
+      );
+    };
 
 ExampleComponent.propTypes = {
   /**

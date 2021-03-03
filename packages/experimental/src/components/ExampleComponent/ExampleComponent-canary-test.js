@@ -16,7 +16,7 @@ const name = 'ExampleComponent';
 describe(name, () => {
   let ExampleComponent;
   beforeAll(async () => {
-     // must happen before component import
+    // must happen before component import
     pkg.component.ExampleComponent = false;
     // ensure import after settings change
     const { ExampleComponent: LateLoadedComponent } = await import('.');

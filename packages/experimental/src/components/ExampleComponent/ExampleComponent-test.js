@@ -17,7 +17,7 @@ const name = 'ExampleComponent';
 describe(name, () => {
   let ExampleComponent;
   beforeAll(async () => {
-     // must happen before component import
+    // must happen before component import
     pkg.component.ExampleComponent = true;
     // ensure import after settings change
     const { ExampleComponent: LateLoadedComponent } = await import('.');
@@ -25,7 +25,7 @@ describe(name, () => {
   });
 
   test('Renders an experimental-component if flag is enabled', () => {
-    const {container} = render(<ExampleComponent />);
+    const { container } = render(<ExampleComponent />);
 
     expect(container.querySelector(`.${blockClass}`)).not.toBeNull();
   });

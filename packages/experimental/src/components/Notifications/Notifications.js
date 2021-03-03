@@ -9,7 +9,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkgPrefix } from '../../global/js/settings';
-import { Button, Link, ToggleSmall } from 'carbon-components-react';
+import { Button, Link, Toggle } from 'carbon-components-react';
 import {
   ErrorFilled16,
   WarningAltFilled16,
@@ -292,7 +292,8 @@ export const Notifications = ({
               {dismissAllLabel}
             </Button>
           </div>
-          <ToggleSmall
+          <Toggle
+            size="sm"
             className={`${blockClass}-do-not-disturb-toggle`}
             id={`${blockClass}-do-not-disturb-toggle-component`}
             labelA={doNotDisturbLabel}

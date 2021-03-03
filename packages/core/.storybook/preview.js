@@ -11,7 +11,7 @@ import { withCarbonTheme } from '@carbon/storybook-addon-theme/react';
 
 // Only impacts on experimental stories
 import { pkg } from '../../experimental/src/global/js/settings';
-pkg.overrideSettings({ flags: { component: { enableAll: true } } });
+pkg.setAllComponents(true);
 
 import index from './index.scss';
 

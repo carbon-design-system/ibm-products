@@ -17,14 +17,13 @@ describe(name, () => {
   let DISPLAY_NAME;
   beforeAll(async () => {
     // must happen before component import
-    pkg.overrideSettings({ flags: { component: { DISPLAY_NAME: false } } });
+    pkg.component.DISPLAY_NAME = false;
     // ensure import after settings change
     const { DISPLAY_NAME: LateLoadedComponent } = await import('.');
     DISPLAY_NAME = LateLoadedComponent;
   });
 
   test('Renders a canary if no package flags set', () => {
-    pkg.overrideSettings({}, true);
     const { container } = render(<DISPLAY_NAME />);
 
     expect(container.querySelector(`.${canaryClass}`)).not.toBeNull();

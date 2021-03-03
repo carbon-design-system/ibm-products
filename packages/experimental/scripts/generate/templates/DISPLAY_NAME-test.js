@@ -17,7 +17,7 @@ describe(name, () => {
   let DISPLAY_NAME;
   beforeAll(async () => {
     // must happen before component import
-    pkg.overrideSettings({ flags: { component: { DISPLAY_NAME: true } } });
+    pkg.component.DISPLAY_NAME = true;
     // ensure import after settings change
     const { DISPLAY_NAME: LateLoadedComponent } = await import('.');
     DISPLAY_NAME = LateLoadedComponent;

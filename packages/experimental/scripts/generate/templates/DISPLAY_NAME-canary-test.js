@@ -8,12 +8,11 @@
 import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import React from 'react';
 
-import { DISPLAY_NAME } from '.';
-
 import { pkg } from '../../global/js/settings';
 
 const canaryClass = `${pkg.prefix}-canary`;
 
+const name = DISPLAY_NAME;
 describe(name, () => {
   let DISPLAY_NAME;
   beforeAll(async () => {

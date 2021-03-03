@@ -24,9 +24,9 @@ const blockClass = `${pkg.prefix}--STYLE_NAME`;
 /**
  * TODO: Description.
  */
-export const DISPLAY_NAME = !pkg.isComponentEnabled('AboutModal')
+export const DISPLAY_NAME = !pkg.isComponentEnabled('DISPLAY_NAME')
   ? // Return canary if not released or flag not set
-    () => <Canary component="AboutModal" />
+    () => <Canary component="DISPLAY_NAME" />
   : // Main component code...
     ({ children, className, ...rest }) => {
       return (

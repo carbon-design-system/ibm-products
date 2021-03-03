@@ -8,13 +8,11 @@
 import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import React from 'react';
 
-import { DISPLAY_NAME } from '.';
-
 import { pkg } from '../../global/js/settings';
 
-const { name } = DISPLAY_NAME;
-const blockClass = `${pkg.prefix}-example-component`;
+const blockClass = `${pkg.prefix}-STYLE_NAME`;
 
+const name = DISPLAY_NAME;
 describe(name, () => {
   let DISPLAY_NAME;
   beforeAll(async () => {

@@ -6,6 +6,7 @@
 //
 
 import React from 'react';
+import cx from 'classnames';
 import { Card } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import mdx from './Card.mdx';
@@ -24,13 +25,18 @@ export default {
     },
   },
   argTypes: {
-    cards: {
-      defaultValue: 1,
+    columnSize: {
+      defaultValue: 'lg-4',
       control: {
-        type: 'range',
-        min: 1,
-        max: 4,
-        step: 1,
+        type: 'select',
+        options: ['sm-4', 'md-4', 'lg-4', 'max-4'],
+      },
+    },
+    mediaRatio: {
+      defaultValue: '1:1',
+      control: {
+        type: 'select',
+        options: ['1:1', '3:2', '4:3', '16:9', '2:1'],
       },
     },
   },
@@ -58,30 +64,54 @@ const defaultProps = {
 };
 
 const Template = (opts) => {
-  const { children, cols, cards, ...args } = opts;
-  const cardsArray = [];
-  for (let i = 0; i < cards; i++) {
-    cardsArray.push(
-      <div className={`bx--col-lg-${cols}`}>
+  const { children, columnSize, mediaRatio, ...args } = opts;
+  const colClasses = cx(`bx--col-${columnSize}`, {
+    // solution for dealing with image ratios. refer to _storybook-styles.scss
+    [`media-ratio-11`]: mediaRatio === '1:1',
+    [`media-ratio-32`]: mediaRatio === '3:2',
+    [`media-ratio-43`]: mediaRatio === '4:3',
+    [`media-ratio-169`]: mediaRatio === '16:9',
+    [`media-ratio-21`]: mediaRatio === '2:1',
+  });
+  return (
+    <div className="bx--row">
+      <div className={colClasses}>
         <Card {...args}>{children}</Card>
       </div>
-    );
-  }
-  return <div className="bx--row">{cardsArray.map((c) => c)}</div>;
+    </div>
+  );
 };
 
 export const Default = Template.bind({});
 Default.args = {
   ...defaultProps,
-  media: <img src="https://via.placeholder.com/600x400/000/fff" alt="img" />,
+};
+
+export const LabelOnly = Template.bind({});
+LabelOnly.args = {
+  ...defaultProps,
+  title: '',
+};
+
+export const WithCaption = Template.bind({});
+WithCaption.args = {
+  ...defaultProps,
+  caption: 'Description or long caption',
+  label: '',
+};
+
+export const WithMedia = Template.bind({});
+WithMedia.args = {
+  ...defaultProps,
+  media: <div className="media-box" />,
 };
 
 export const MediaLeft = Template.bind({});
 MediaLeft.args = {
   ...defaultProps,
   mediaPosition: 'left',
-  media: <img src="https://via.placeholder.com/600x450/000/fff" alt="img" />,
-  cols: 8,
+  media: <div className="media-box media-box--left" />,
+  columnSize: 'md-4',
 };
 
 export const WithActionIcon = Template.bind({});
@@ -97,24 +127,17 @@ WithPictogram.args = {
   pictogram: Cloud32,
 };
 
-export const WithSeondaryAction = Template.bind({});
-WithSeondaryAction.args = {
+export const WithSecondaryAction = Template.bind({});
+WithSecondaryAction.args = {
   ...defaultProps,
   secondaryButtonText: 'Secondary',
-  secondaryButtonKind: 'secondary',
-  cols: 8,
+  secondaryButtonKind: 'ghost',
+  columnSize: 'md-4',
 };
 
 export const ClickableCardWithOnclick = Template.bind({});
 ClickableCardWithOnclick.args = {
   ...defaultProps,
   onClick: () => {},
-  primaryButtonText: '',
-};
-
-export const ClickableCardWithLink = Template.bind({});
-ClickableCardWithLink.args = {
-  ...defaultProps,
-  href: '/',
   primaryButtonText: '',
 };

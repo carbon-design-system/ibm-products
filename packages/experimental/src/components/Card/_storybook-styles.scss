@@ -1,4 +1,8 @@
+/* stylelint-disable */
+
 @import './index';
+@import '../../global/styles/project-settings';
+@import '../../global/styles/carbon-settings';
 
 // make the root full width to get a better idea of how the cards
 // look in a real grid situation
@@ -6,3 +10,36 @@
 #root {
   width: 100%;
 }
+
+// solution for image ratios- generate empty boxes to represent media
+
+.media-box {
+  width: 100%;
+  background: $ui-03;
+}
+
+.media-ratio-11 .media-box {
+  padding-bottom: 100%;
+}
+
+.media-ratio-43 .media-box {
+  padding-bottom: 75%;
+}
+
+.media-ratio-32 .media-box {
+  padding-bottom: 66.66%;
+}
+
+.media-ratio-169 .media-box {
+  padding-bottom: 56.25%;
+}
+
+.media-ratio-21 .media-box {
+  padding-bottom: 50%;
+}
+
+.media-box--left {
+  width: 300px;
+}
+
+/* stylelint-enable */

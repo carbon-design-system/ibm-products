@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.7](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.20.6...@carbon/ibm-cloud-cognitive-experimental@0.20.7) (2021-03-04)
+
+
+### Bug Fixes
+
+* **WebTerminal:** move from experimental to canary in storybook ([#406](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/406)) ([e179f34](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e179f34709aa65e190c9fcecbe0cae86ce736df5))
+
+
+
+
+
 ## [0.20.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.20.5...@carbon/ibm-cloud-cognitive-experimental@0.20.6) (2021-03-04)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental

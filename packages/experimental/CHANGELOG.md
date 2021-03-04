@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.20.4...@carbon/ibm-cloud-cognitive-experimental@0.20.5) (2021-03-04)
+
+
+### Bug Fixes
+
+* **SidePanel:** remove slideIn prop from storybook, refactor classnames ([#400](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/400)) ([e7b0d70](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e7b0d70d6dd2e5727d65d2e736a1ed537a6ed044))
+
+
+
+
+
 ## [0.20.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.20.3...@carbon/ibm-cloud-cognitive-experimental@0.20.4) (2021-03-04)
 
 

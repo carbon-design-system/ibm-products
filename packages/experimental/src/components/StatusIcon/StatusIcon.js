@@ -143,7 +143,7 @@ export const StatusIcon = ({ type, theme, size, className, ...rest }) => {
   });
 
   useEffect(() => {
-    setIcon(...icons.filter((icon) => icon.type === type.toLocaleLowerCase()));
+    setIcon(...icons.filter((icon) => icon.type === type));
   }, [type]);
 
   return (

@@ -9,6 +9,9 @@ import React, { useState, useCallback } from 'react';
 import WebTerminal from './WebTerminal';
 import { Navigation } from './preview-components';
 import mdx from './WebTerminal.mdx';
+import {
+  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
+} from '../../../config';
 
 import styles from './_storybook-styles.scss';
 
@@ -77,7 +80,7 @@ export const WithDocumentationLinks = Template.bind({});
 WithDocumentationLinks.args = { documentationLinks };
 
 export default {
-  title: `Experimental/WebTerminal`,
+  title: `${storybookPrefix}/WebTerminal`,
   parameters: {
     styles,
     docs: {

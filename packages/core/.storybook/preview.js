@@ -39,9 +39,13 @@ const decorators = [
   withCarbonTheme,
 ];
 
-const order = ['Cloud & Cognitive/Released', 'Cloud & Cognitive/Canary', 'Legacy'];
+const order = [
+  'Cloud & Cognitive/Released',
+  'Cloud & Cognitive/Canary',
+  'Legacy',
+];
 const toOrder = (value) => {
-  const inOrder = order.findIndex(item => value.startsWith(item));
+  const inOrder = order.findIndex((item) => value.startsWith(item));
   // length is last index + 1
   return inOrder < 0 ? order.length : inOrder;
 };
@@ -59,9 +63,11 @@ const parameters = {
         return aInOrder - bInOrder;
       } else {
         // from storybook doc example https://storybook.js.org/docs/react/writing-stories/naming-components-and-hierarchy
-        return a[1].kind === b[1].kind ? 0 : a[1].id.localeCompare(b[1].id, undefined, { numeric: true });
+        return a[1].kind === b[1].kind
+          ? 0
+          : a[1].id.localeCompare(b[1].id, undefined, { numeric: true });
       }
-    }
+    },
   },
 
   // Optional default Carbon theme.

@@ -136,15 +136,23 @@ export const BreadcrumbWithOverflow = ({
       i++
     ) {
       child = childArray[i];
-      newDisplayedBreadcrumbItems.push(
-        React.cloneElement(child, {
-          className: cx([
-            child.props.className,
-            `${blockClass}--displayed-breadcrumb`,
-          ]),
-          key: `displayed-breadcrumb-${internalId.current}-${i}`,
-        })
-      );
+      const cloneProps = {
+        className: cx([
+          child.props.className,
+          `${blockClass}--displayed-breadcrumb`,
+          {
+            [`${blockClass}--short-last-item`]: i + 1 === childArray.length && displayCount === 1
+          }
+        ]),
+        key: `displayed-breadcrumb-${internalId.current}-${i}`,
+      };
+
+      if (i + 1 === childArray.length && displayCount === 1) {
+        // likely truncated add title
+        cloneProps.title = child.props.children;
+      }
+
+      newDisplayedBreadcrumbItems.push(React.cloneElement(child, cloneProps));
     }
 
     setDisplayedBreadcrumbItems(newDisplayedBreadcrumbItems);

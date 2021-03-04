@@ -126,7 +126,7 @@ $raised-z-index: 99;
 .#{$block-class}--action-bar-column-content {
   display: flex;
   justify-content: flex-end;
-  overflow: hidden;
+  // overflow: hidden;
   white-space: nowrap;
 
   @include carbon--breakpoint-up('lg') {

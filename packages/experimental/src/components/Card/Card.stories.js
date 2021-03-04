@@ -6,10 +6,12 @@
 //
 
 import React from 'react';
+import cx from 'classnames';
 import { Card } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import mdx from './Card.mdx';
 import { ArrowRight24, Cloud32 } from '@carbon/icons-react';
+import { AspectRatio } from 'carbon-components-react';
 import {
   storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
 } from '../../../config';
@@ -23,6 +25,29 @@ export default {
       page: mdx,
     },
   },
+  argTypes: {
+    columnSize: {
+      defaultValue: 'lg-4',
+      control: {
+        type: 'select',
+        options: ['sm-4', 'md-4', 'lg-4', 'max-4'],
+      },
+    },
+    mediaRatio: {
+      defaultValue: '1x1',
+      control: {
+        type: 'select',
+        options: ['16x9', '9x16', '2x1', '1x2', '4x3', '3x4', '1x1'],
+      },
+    },
+  },
+  decorators: [
+    (Story) => (
+      <div className="bx--grid card-story">
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 const defaultProps = {
@@ -40,13 +65,28 @@ const defaultProps = {
 };
 
 const Template = (opts) => {
-  const { children, cols, ...args } = opts;
+  const { children, columnSize, ...args } = opts;
+  const colClasses = cx(`bx--col-${columnSize}`);
   return (
-    <div className="bx--grid">
-      <div className="bx--row">
-        <div className={`bx--col-lg-${cols}`}>
-          <Card {...args}>{children}</Card>
-        </div>
+    <div className="bx--row">
+      <div className={colClasses}>
+        <Card {...args}>{children}</Card>
+      </div>
+    </div>
+  );
+};
+
+const MediaTemplate = (opts) => {
+  const { children, columnSize, mediaRatio, ...args } = opts;
+  const colClasses = cx(`bx--col-${columnSize}`);
+  return (
+    <div className="bx--row">
+      <div className={colClasses}>
+        <Card
+          media={<AspectRatio ratio={mediaRatio}>{mediaRatio}</AspectRatio>}
+          {...args}>
+          {children}
+        </Card>
       </div>
     </div>
   );
@@ -55,15 +95,31 @@ const Template = (opts) => {
 export const Default = Template.bind({});
 Default.args = {
   ...defaultProps,
-  media: <img src="https://via.placeholder.com/300x200/000/fff" alt="img" />,
 };
 
-export const MediaLeft = Template.bind({});
+export const LabelOnly = Template.bind({});
+LabelOnly.args = {
+  ...defaultProps,
+  title: '',
+};
+
+export const WithCaption = Template.bind({});
+WithCaption.args = {
+  ...defaultProps,
+  caption: 'Description or long caption',
+  label: '',
+};
+
+export const WithMedia = MediaTemplate.bind({});
+WithMedia.args = {
+  ...defaultProps,
+};
+
+export const MediaLeft = MediaTemplate.bind({});
 MediaLeft.args = {
   ...defaultProps,
   mediaPosition: 'left',
-  media: <img src="https://via.placeholder.com/400x300/000/fff" alt="img" />,
-  cols: 12,
+  columnSize: 'md-4',
 };
 
 export const WithActionIcon = Template.bind({});
@@ -79,24 +135,17 @@ WithPictogram.args = {
   pictogram: Cloud32,
 };
 
-export const WithSeondaryAction = Template.bind({});
-WithSeondaryAction.args = {
+export const WithSecondaryAction = Template.bind({});
+WithSecondaryAction.args = {
   ...defaultProps,
   secondaryButtonText: 'Secondary',
-  secondaryButtonKind: 'secondary',
-  cols: 8,
+  secondaryButtonKind: 'ghost',
+  columnSize: 'md-4',
 };
 
 export const ClickableCardWithOnclick = Template.bind({});
 ClickableCardWithOnclick.args = {
   ...defaultProps,
   onClick: () => {},
-  primaryButtonText: '',
-};
-
-export const ClickableCardWithLink = Template.bind({});
-ClickableCardWithLink.args = {
-  ...defaultProps,
-  href: '/',
   primaryButtonText: '',
 };

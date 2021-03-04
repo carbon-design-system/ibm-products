@@ -141,8 +141,9 @@ export const BreadcrumbWithOverflow = ({
           child.props.className,
           `${blockClass}--displayed-breadcrumb`,
           {
-            [`${blockClass}--short-last-item`]: i + 1 === childArray.length && displayCount === 1
-          }
+            [`${blockClass}--short-last-item`]:
+              i + 1 === childArray.length && displayCount === 1,
+          },
         ]),
         key: `displayed-breadcrumb-${internalId.current}-${i}`,
       };

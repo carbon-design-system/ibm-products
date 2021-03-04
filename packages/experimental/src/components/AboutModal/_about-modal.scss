@@ -23,8 +23,7 @@
   .bx--modal-container
   .#{$pkg-prefix}-modal-content {
   display: grid;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 .#{$pkg-prefix}-modal-content

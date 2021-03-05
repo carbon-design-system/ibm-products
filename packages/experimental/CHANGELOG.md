@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.9](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.20.8...@carbon/ibm-cloud-cognitive-experimental@0.20.9) (2021-03-05)
+
+
+### Bug Fixes
+
+* **Notifications:** add props for label strings and fix classname usage ([#398](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/398)) ([08a836f](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/08a836fe0ed3de03b80f2df2d2daf80f4e3611df))
+
+
+
+
+
 ## [0.20.8](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.20.7...@carbon/ibm-cloud-cognitive-experimental@0.20.8) (2021-03-05)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental

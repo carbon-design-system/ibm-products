@@ -158,9 +158,14 @@ withTechnologyUsedTab.args = {
   ],
 };
 
+export const withDarkTheme = Template.bind({});
+withDarkTheme.args = {
+  className: 'sb--use-carbon-theme-g90',
+};
+
 export const withLightTheme = Template.bind({});
 withLightTheme.args = {
-  theme: 'light',
+  className: 'sb--use-carbon-theme-g10',
 };
 
 export const withScroll = Template.bind({});

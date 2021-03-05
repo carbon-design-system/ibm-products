@@ -38,41 +38,13 @@
   width: 100%;
 }
 
-.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-light-theme {
-  @include carbon--theme($carbon--theme--white, true);
-}
-
-.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-light-theme
-  .bx--modal-footer {
-  @include carbon--theme($carbon--theme--g100, true);
-}
-
-.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-light-theme
-  .#{$pkg-prefix}-about-modal-tab-container {
-  @include carbon--theme($carbon--theme--white, true);
-}
-
-.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-dark-theme {
-  @include carbon--theme($carbon--theme--g100, true);
-}
-
-.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-dark-theme
-  .bx--modal-footer {
-  @include carbon--theme($carbon--theme--white, true);
-}
-
-.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-dark-theme
-  .#{$pkg-prefix}-about-modal-tab-container {
-  @include carbon--theme($carbon--theme--g100, true);
-}
-
 .#{$pkg-prefix}-about-modal .bx--modal-footer {
   position: relative;
   flex-direction: column;
   grid-row: auto;
   justify-content: center;
   padding-left: $spacing-05;
-  background-color: $ui-background;
+  background-color: $inverse-02;
 }
 
 .#{$pkg-prefix}-about-modal {
@@ -90,6 +62,8 @@
   .#{$pkg-prefix}-about-modal-version-label,
   .#{$pkg-prefix}-about-modal-version-number {
     @include carbon--type-style('body-short-01');
+
+    color: $inverse-01;
   }
   .#{$pkg-prefix}-about-modal-version-label {
     @include carbon--font-weight('semibold');
@@ -147,9 +121,7 @@
 
 .#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-content,
 .#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-legal-text,
-.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-copyright-text,
-.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-version-label,
-.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-version-number {
+.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-copyright-text {
   color: $text-01;
 }
 

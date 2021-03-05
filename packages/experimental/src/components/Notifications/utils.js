@@ -1,4 +1,18 @@
-export const timeAgo = (previousTime) => {
+export const timeAgo = ({
+  previousTime,
+  secondsAgoLabel,
+  minuteAgoLabel,
+  minutesAgoLabel,
+  hoursAgoLabel,
+  hourAgoLabel,
+  daysAgoLabel,
+  yesterdayAtLabel,
+  monthsAgoLabel,
+  monthAgoLabel,
+  yearsAgoLabel,
+  yearAgoLabel,
+  nowLabel,
+}) => {
   const msPerMinute = 60 * 1000;
   const msPerHour = msPerMinute * 60;
   const msPerDay = msPerHour * 24;
@@ -8,30 +22,30 @@ export const timeAgo = (previousTime) => {
   switch (true) {
     case elapsed < msPerMinute:
       return Math.round(elapsed / 1000) > 10
-        ? `${Math.round(elapsed / 1000)} seconds ago`
-        : 'Now';
+        ? `${Math.round(elapsed / 1000)} ${secondsAgoLabel}`
+        : nowLabel;
     case elapsed < msPerHour:
       return Math.round(elapsed / msPerMinute) > 1
-        ? `${Math.round(elapsed / msPerMinute)} minutes ago`
-        : `${Math.round(elapsed / msPerMinute)} minute ago`;
+        ? `${Math.round(elapsed / msPerMinute)} ${minutesAgoLabel}`
+        : `${Math.round(elapsed / msPerMinute)} ${minuteAgoLabel}`;
     case elapsed < msPerDay:
       return Math.round(elapsed / msPerHour) > 1
-        ? `${Math.round(elapsed / msPerHour)} hours ago`
-        : `${Math.round(elapsed / msPerHour)} hour ago`;
+        ? `${Math.round(elapsed / msPerHour)} ${hoursAgoLabel}`
+        : `${Math.round(elapsed / msPerHour)} ${hourAgoLabel}`;
     case elapsed < msPerMonth:
       return Math.round(elapsed / msPerDay) > 1
-        ? `${Math.round(elapsed / msPerDay)} days ago`
-        : `Yesterday at ${new Date(previousTime).toLocaleTimeString(
+        ? `${Math.round(elapsed / msPerDay)} ${daysAgoLabel}`
+        : `${yesterdayAtLabel} ${new Date(previousTime).toLocaleTimeString(
             getBrowserLocales[0]
           )}`;
     case elapsed < msPerYear:
       return Math.round(elapsed / msPerMonth) > 1
-        ? `${Math.round(elapsed / msPerMonth)} months ago`
-        : `${Math.round(elapsed / msPerMonth)} month ago`;
+        ? `${Math.round(elapsed / msPerMonth)} ${monthsAgoLabel}`
+        : `${Math.round(elapsed / msPerMonth)} ${monthAgoLabel}`;
     default:
       return Math.round(elapsed / msPerYear) > 1
-        ? `${Math.round(elapsed / msPerYear)} years ago`
-        : `${Math.round(elapsed / msPerYear)} year ago`;
+        ? `${Math.round(elapsed / msPerYear)} ${yearsAgoLabel}`
+        : `${Math.round(elapsed / msPerYear)} ${yearAgoLabel}`;
   }
 };
 

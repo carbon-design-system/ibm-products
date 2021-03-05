@@ -38,6 +38,13 @@ import {
 export default {
   title: `${storybookPrefix}/SidePanel`,
   component: SidePanel,
+  argTypes: {
+    slideIn: {
+      table: {
+        disable: true,
+      },
+    },
+  },
   parameters: {
     styles,
     docs: {

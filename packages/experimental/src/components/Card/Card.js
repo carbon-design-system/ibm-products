@@ -6,9 +6,9 @@ import { pkg } from '../../global/js/settings';
 
 export const Card = ({
   actionIcon: ActionIcon,
+  caption,
   children,
   className,
-  href,
   label,
   media,
   mediaPosition,
@@ -22,11 +22,14 @@ export const Card = ({
   secondaryButtonText,
   title,
 }) => {
-  const cardClasses = cx({
-    [`${pkg.prefix}-card`]: true,
+  const cardClasses = cx(`${pkg.prefix}-card`, {
     [`${pkg.prefix}-card--clickable`]: onClick,
     [`${pkg.prefix}-card--media-left`]: mediaPosition === 'left',
     className,
+  });
+
+  const headerClasses = cx(`${pkg.prefix}-card-header`, {
+    [`${pkg.prefix}-card-header--label-only`]: label && !title && !caption,
   });
 
   const CardContent = (
@@ -38,19 +41,26 @@ export const Card = ({
         </div>
       )}
       <div className={`${pkg.prefix}-card-content-container`}>
-        <div className={`${pkg.prefix}-card-header`}>
-          <p className={`${pkg.prefix}-card-label`}>{label}</p>
-          <p className={`${pkg.prefix}-card-title`}>{title}</p>
+        <div className={headerClasses}>
+          {label && <p className={`${pkg.prefix}-card-label`}>{label}</p>}
+          {title && <p className={`${pkg.prefix}-card-title`}>{title}</p>}
+          {caption && <p className={`${pkg.prefix}-card-caption`}>{caption}</p>}
         </div>
         <div className={`${pkg.prefix}-card-body`}>{children}</div>
         <div className={`${pkg.prefix}-card-actions`}>
           {secondaryButtonText && (
-            <Button kind={secondaryButtonKind} onClick={onSecondaryButtonClick}>
+            <Button
+              kind={secondaryButtonKind}
+              onClick={onSecondaryButtonClick}
+              size="field">
               {secondaryButtonText}
             </Button>
           )}
           {primaryButtonText && (
-            <Button kind={primaryButtonKind} onClick={onPrimaryButtonClick}>
+            <Button
+              kind={primaryButtonKind}
+              onClick={onPrimaryButtonClick}
+              size="field">
               {primaryButtonText}
             </Button>
           )}
@@ -65,13 +75,7 @@ export const Card = ({
     </div>
   );
 
-  if (!href) return CardContent;
-
-  return (
-    <a className={`${pkg.prefix}-card-link`} href={href}>
-      {CardContent}
-    </a>
-  );
+  return CardContent;
 };
 
 Card.propTypes = {
@@ -80,6 +84,10 @@ Card.propTypes = {
    */
   actionIcon: PropTypes.object,
   /**
+   * Optional header caption
+   */
+  caption: PropTypes.string,
+  /**
    * Content that shows in the body of the card
    */
   children: PropTypes.node,
@@ -87,10 +95,6 @@ Card.propTypes = {
    * Optional user provided class
    */
   className: PropTypes.string,
-  /**
-   * Providing an href turns the card into a clickable link
-   */
-  href: PropTypes.string,
   /**
    * Optional label for the top of the card
    */
@@ -143,9 +147,9 @@ Card.propTypes = {
 
 Card.defaultProps = {
   actionIcon: null,
+  caption: '',
   children: '',
   className: '',
-  href: '',
   label: '',
   media: null,
   mediaPosition: 'top',

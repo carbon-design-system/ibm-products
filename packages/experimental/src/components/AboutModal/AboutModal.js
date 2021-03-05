@@ -8,6 +8,7 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import ReactResizeDetector from 'react-resize-detector';
+import classNames from 'classnames';
 import {
   ComposedModal,
   Link,
@@ -21,6 +22,7 @@ import {
 import { pkg } from '../../global/js/settings';
 
 export const AboutModal = ({
+  className,
   copyrightText,
   legalText,
   links,
@@ -31,7 +33,6 @@ export const AboutModal = ({
   body,
   open,
   technologiesUsed,
-  theme,
 }) => {
   const [hasScrollableContent, setHasScrollableContent] = useState();
   const modalRef = useRef();
@@ -54,18 +55,12 @@ export const AboutModal = ({
       */}
       <div>
         <ComposedModal
-          className={[
-            `${pkg.prefix}-about-modal`,
-            theme === 'dark'
-              ? `${pkg.prefix}-about-modal-dark-theme`
-              : `${pkg.prefix}-about-modal-light-theme`,
-            hasScrollableContent
-              ? `${pkg.prefix}-about-modal-scroll-enabled`
-              : '',
-            technologiesUsed && technologiesUsed.length > 0
-              ? `${pkg.prefix}-about-modal-with-tabs`
-              : '',
-          ].join(' ')}
+          className={classNames(`${pkg.prefix}-about-modal`, {
+            [`${pkg.prefix}-about-modal-scroll-enabled`]: hasScrollableContent,
+            [`${pkg.prefix}-about-modal-with-tabs`]:
+              technologiesUsed && technologiesUsed.length > 0,
+            [className]: className,
+          })}
           open={open}
           ref={modalRef}>
           <div className={`${pkg.prefix}-modal-content`}>
@@ -109,14 +104,10 @@ export const AboutModal = ({
             </ModalBody>
             <ModalFooter>
               {technologiesUsed && technologiesUsed.length ? (
-                <Tabs
-                  className={`${pkg.prefix}-about-modal-tab-container`}
-                  light={theme === 'light'}
-                  aria-label="About modal technology used and version number tabs">
+                <Tabs className={`${pkg.prefix}-about-modal-tab-container`}>
                   <Tab
                     id="about-modal-technologies-used-tab"
-                    label="Technologies used"
-                    aria-label="Technologies used tab">
+                    label="Technologies used">
                     <div
                       className={`${pkg.prefix}-about-modal-tab-content-flex`}>
                       {technologiesUsed &&
@@ -133,8 +124,7 @@ export const AboutModal = ({
                   </Tab>
                   <Tab
                     id="about-modal-version-number-tab"
-                    label="Version number"
-                    aria-label="Version number tab">
+                    label="Version number">
                     <div
                       className={`${pkg.prefix}-about-modal-tab-content-flex ${pkg.prefix}-about-modal-tab-content-version-flex`}>
                       <p className={`${pkg.prefix}-about-modal-version-label`}>
@@ -172,6 +162,12 @@ AboutModal.propTypes = {
    * About modal body content
    */
   body: PropTypes.string.isRequired,
+
+  /**
+   * Specify an optional className to be applied to the modal root node
+   */
+  className: PropTypes.string,
+
   /**
    * About modal product copyright text
    */
@@ -216,10 +212,6 @@ AboutModal.propTypes = {
     })
   ),
   /**
-   * About modal product name
-   */
-  theme: PropTypes.oneOf(['light', 'dark']),
-  /**
    * About modal product version number
    */
   versionNumber: PropTypes.string.isRequired,
@@ -231,5 +223,4 @@ AboutModal.defaultProps = {
   links: [],
   onRequestClose: () => {},
   technologiesUsed: [],
-  theme: 'dark',
 };

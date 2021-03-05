@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.8](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.20.7...@carbon/ibm-cloud-cognitive-experimental@0.20.8) (2021-03-05)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
+## [0.20.7](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.20.6...@carbon/ibm-cloud-cognitive-experimental@0.20.7) (2021-03-04)
+
+
+### Bug Fixes
+
+* **WebTerminal:** move from experimental to canary in storybook ([#406](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/406)) ([e179f34](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e179f34709aa65e190c9fcecbe0cae86ce736df5))
+
+
+
+
+
+## [0.20.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.20.5...@carbon/ibm-cloud-cognitive-experimental@0.20.6) (2021-03-04)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
+## [0.20.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.20.4...@carbon/ibm-cloud-cognitive-experimental@0.20.5) (2021-03-04)
+
+
+### Bug Fixes
+
+* **SidePanel:** remove slideIn prop from storybook, refactor classnames ([#400](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/400)) ([e7b0d70](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e7b0d70d6dd2e5727d65d2e736a1ed537a6ed044))
+
+
+
+
+
+## [0.20.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.20.3...@carbon/ibm-cloud-cognitive-experimental@0.20.4) (2021-03-04)
+
+
+### Bug Fixes
+
+* card design revisions v1 ([#396](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/396)) ([7dd4479](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/7dd44792239c42fc812e9af266e881ca0abff398))
+
+
+
+
+
 ## [0.20.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.20.2...@carbon/ibm-cloud-cognitive-experimental@0.20.3) (2021-03-03)
 
 

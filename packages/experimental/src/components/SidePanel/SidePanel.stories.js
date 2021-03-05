@@ -38,6 +38,13 @@ const storybookPrefix = getStorybookPrefix(pkg, 'SidePanel');
 export default {
   title: `${storybookPrefix}/SidePanel`,
   component: SidePanel,
+  argTypes: {
+    slideIn: {
+      table: {
+        disable: true,
+      },
+    },
+  },
   parameters: {
     styles,
     docs: {

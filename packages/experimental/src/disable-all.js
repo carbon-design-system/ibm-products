@@ -5,4 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './components';
+// NOTE: This file has a side effect of disabling all component flags
+
+import { pkg } from './settings';
+pkg.setAllComponents(false);

@@ -12,7 +12,7 @@ import styles from './_storybook-styles.scss'; // import index in case more file
 import mdx from './Card.mdx';
 import { ArrowRight24, Cloud32 } from '@carbon/icons-react';
 import { AspectRatio } from 'carbon-components-react';
-import { pkg } from '../../global/js/settings';
+import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 const storybookPrefix = getStorybookPrefix(pkg, 'Card');
 

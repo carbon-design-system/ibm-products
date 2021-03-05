@@ -11,7 +11,7 @@ import {
   selectorTabbable,
 } from './keyboardNavigation';
 
-import { carbon } from '../settings';
+import { carbon } from '../../../settings';
 
 /**
  * @param {Node} node A DOM node.

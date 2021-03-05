@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 
 import { action } from '@storybook/addon-actions';
 
-import { pkg } from '../../global/js/settings';
+import { pkg } from '../../settings';
 import { Button, Tab, Tabs } from 'carbon-components-react';
 
 import { Tearsheet } from './Tearsheet';

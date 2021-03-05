@@ -19,7 +19,7 @@ import { white } from '@carbon/colors';
 import styles from './_storybook-styles.scss';
 import { Notifications } from '.';
 
-import { pkg } from '../../global/js/settings';
+import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 const storybookPrefix = getStorybookPrefix(pkg, 'Notifications');
 

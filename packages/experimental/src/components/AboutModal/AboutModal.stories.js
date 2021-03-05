@@ -15,7 +15,7 @@ import grafanaLogo from './technologyUsedLogos/grafana_logo.png';
 import jsLogo from './technologyUsedLogos/js_logo.png';
 import { AboutModal } from './AboutModal';
 
-import { pkg } from '../../global/js/settings';
+import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 const storybookPrefix = getStorybookPrefix(pkg, 'AboutModal');
 

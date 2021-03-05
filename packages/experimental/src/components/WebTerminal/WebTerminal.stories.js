@@ -9,7 +9,7 @@ import React, { useState, useCallback } from 'react';
 import WebTerminal from './WebTerminal';
 import { Navigation } from './preview-components';
 import mdx from './WebTerminal.mdx';
-import { pkg } from '../../global/js/settings';
+import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 const storybookPrefix = getStorybookPrefix(pkg, 'WebTerminal');
 

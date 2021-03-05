@@ -13,7 +13,7 @@ import { BreadcrumbWithOverflow } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { BreadcrumbItem } from 'carbon-components-react';
 
-import { pkg } from '../../global/js/settings';
+import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 const storybookPrefix = getStorybookPrefix(pkg, 'BreadcrumbWithOverflow');
 

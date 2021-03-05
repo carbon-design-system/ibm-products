@@ -9,7 +9,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import React from 'react';
 import { Notifications } from './Notifications';
-import { pkg } from '../../global/js/settings';
+import { pkg } from '../../settings';
 
 describe('Notifications', () => {
   test('renders the notification panel', () => {

@@ -8,7 +8,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { pkg } from '../../global/js/settings';
+import { pkg } from '../../settings';
 import { Button, InlineLoading } from 'carbon-components-react';
 import { SIDE_PANEL_SIZES } from './constants';
 import { Close20, ArrowLeft20 } from '@carbon/icons-react';

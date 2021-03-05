@@ -10,12 +10,10 @@
 
 import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import React from 'react';
-import { pkg } from '../global/js/settings';
-// must come before import
-pkg.setAllComponents(false);
+import { pkg } from '../settings';
 
 const canaryClass = `${pkg.prefix}-canary`;
-import * as components from '..';
+import * as components from '../index-all-disabled';
 const name = 'export checks';
 
 describe(name, () => {
@@ -28,6 +26,7 @@ describe(name, () => {
 
       test(`Renders a canary, for "${key}", if no package flags set`, () => {
         const { container } = render(<TestComponent />);
+
         expect(container.querySelector(`.${canaryClass}`)).not.toBeNull();
       });
     }

@@ -9,7 +9,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { pkg, carbon } from '../../global/js/settings';
+import { pkg, carbon } from '../../settings';
 
 import { Button, Tab, Tabs } from 'carbon-components-react';
 

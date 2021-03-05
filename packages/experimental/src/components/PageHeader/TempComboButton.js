@@ -8,7 +8,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { pkg, carbon } from '../../global/js/settings';
+import { pkg, carbon } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
 import unwrapIfFragment from '../../global/js/utils/unwrap-if-fragment';

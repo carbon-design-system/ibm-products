@@ -9,7 +9,7 @@ import {
 } from 'carbon-components-react';
 import { ErrorFilled16, CheckmarkFilled16 } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
-import { pkg } from '../../global/js/settings';
+import { pkg } from '../../settings';
 
 export const ExportModal = ({
   error,

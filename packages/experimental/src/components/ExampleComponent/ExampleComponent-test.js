@@ -8,22 +8,15 @@
 import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import React from 'react';
 
-import { pkg } from '../../global/js/settings';
+import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported
 
 const blockClass = `${pkg.prefix}-example-component`;
-// const canaryClass = `${pkg.prefix}-canary`;
 
+import { ExampleComponent } from '.';
 const name = 'ExampleComponent';
-describe(name, () => {
-  let ExampleComponent;
-  beforeAll(async () => {
-    // must happen before component import
-    pkg.component.ExampleComponent = true;
-    // ensure import after settings change
-    const { ExampleComponent: LateLoadedComponent } = await import('.');
-    ExampleComponent = LateLoadedComponent;
-  });
 
+describe(name, () => {
   test('Renders an experimental-component if flag is enabled', () => {
     const { container } = render(<ExampleComponent />);
 

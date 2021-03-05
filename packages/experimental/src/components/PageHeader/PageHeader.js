@@ -13,7 +13,7 @@ import cx from 'classnames';
 
 import ReactResizeDetector from 'react-resize-detector';
 
-import { pkg /*, carbon */ } from '../../global/js/settings';
+import { pkg /*, carbon */ } from '../../settings';
 
 import { useWindowResize, useWindowScroll } from '../../global/js/use';
 

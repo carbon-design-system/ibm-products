@@ -9,6 +9,7 @@ import { render } from '@testing-library/react'; // https://testing-library.com/
 import React from 'react';
 
 import { pkg } from '../../global/js/settings';
+import '../../enable-all-canary'; // must come before component is imported
 
 const blockClass = `${pkg.prefix}-STYLE_NAME`;
 

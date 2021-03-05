@@ -2,7 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 import { Button } from 'carbon-components-react';
 import PropTypes from 'prop-types';
-import { pkg } from '../../global/js/settings';
+import { pkg } from '../../settings';
 
 export const Card = ({
   actionIcon: ActionIcon,

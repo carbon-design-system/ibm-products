@@ -8,7 +8,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import { pkg /*, carbon */ } from '../../global/js/settings';
+import { pkg } from '../../settings';
 
 import {
   BreadcrumbItem,

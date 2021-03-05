@@ -8,7 +8,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { pkg } from '../../global/js/settings';
+import { pkg } from '../../settings';
 import { Button, Link, ToggleSmall } from 'carbon-components-react';
 import {
   ErrorFilled16,

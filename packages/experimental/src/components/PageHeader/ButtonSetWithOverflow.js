@@ -12,7 +12,7 @@ import cx from 'classnames';
 import ReactResizeDetector from 'react-resize-detector';
 import { ButtonSet } from 'carbon-components-react';
 
-import { pkg, carbon } from '../../global/js/settings';
+import { pkg, carbon } from '../../settings';
 // import uuidv4 from '../../global/js/utils/uuidv4';
 // import unwrapIfFragment from '../../global/js/utils/unwrap-if-fragment';
 import { TempComboButton } from './TempComboButton';

@@ -7,7 +7,7 @@ import {
   Button,
 } from 'carbon-components-react';
 import PropTypes from 'prop-types';
-import { pkg } from '../../global/js/settings';
+import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 export const ImportModal = ({

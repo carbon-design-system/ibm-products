@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { pkg } from '../../global/js/settings';
+import { pkg } from '../../settings';
 
 export const APIKeyDownloader = ({ apiKey, bodyText, fileName, linkText }) => {
   const [linkProps, setLinkProps] = useState('');

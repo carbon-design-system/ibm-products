@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { Link, Modal, Search, Tag, Tooltip } from 'carbon-components-react';
-import { pkg /*, carbon */ } from '../../global/js/settings';
+import { pkg /*, carbon */ } from '../../settings';
 
 import ReactResizeDetector from 'react-resize-detector';
 

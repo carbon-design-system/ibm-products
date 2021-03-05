@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Modal, TextInput, InlineLoading, Form } from 'carbon-components-react';
 import { InformationFilled16 } from '@carbon/icons-react';
 import { APIKeyDownloader } from '../APIKeyDownloader';
-import { pkg } from '../../global/js/settings';
+import { pkg } from '../../settings';
 
 export const APIKeyModal = ({
   apiKey,

@@ -10,7 +10,7 @@ import React from 'react';
 import { TearsheetShell } from './TearsheetShell';
 
 import styles from './_storybook-styles.scss';
-import { pkg } from '../../global/js/settings';
+import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 const storybookPrefix = getStorybookPrefix(pkg, 'TearsheetShell');
 

@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Link } from 'carbon-components-react';
 
-import { pkg } from '../../global/js/settings';
+import { pkg } from '../../settings';
 
 export const EmptyState = ({
   actionText,

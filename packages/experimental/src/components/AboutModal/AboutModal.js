@@ -19,7 +19,7 @@ import {
   Tab,
 } from 'carbon-components-react';
 
-import { pkg } from '../../global/js/settings';
+import { pkg } from '../../settings';
 
 export const AboutModal = ({
   className,

@@ -9,7 +9,7 @@ import cx from 'classnames';
 import { string } from 'prop-types';
 import React from 'react';
 
-import { pkg } from '../../global/js/settings';
+import { pkg } from '../../settings';
 
 const blockClass = `${pkg.prefix}-canary`;
 

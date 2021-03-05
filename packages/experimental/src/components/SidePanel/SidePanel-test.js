@@ -9,7 +9,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import React from 'react';
 import { SidePanel } from './SidePanel';
-import { pkg } from '../../global/js/settings';
+import { pkg } from '../../settings';
 
 describe('SidePanel', () => {
   test('renders the side panel', () => {

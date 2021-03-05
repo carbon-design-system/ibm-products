@@ -1,5 +1,5 @@
 import React from 'react';
-import { pkg } from './settings';
+import { pkg } from '../settings';
 import { shallow } from 'enzyme';
 
 describe('settings', () => {
@@ -18,9 +18,7 @@ describe('settings', () => {
     pkg.component.ExampleComponent = true;
 
     // dynamic import so we can modify the import on the component before using it
-    const { ExampleComponent } = await import(
-      '../../components/ExampleComponent'
-    );
+    const { ExampleComponent } = await import('../components/ExampleComponent');
     const wrapper = shallow(<ExampleComponent />);
     expect(wrapper.find('.my-prefix-example-component')).toHaveLength(1);
   });

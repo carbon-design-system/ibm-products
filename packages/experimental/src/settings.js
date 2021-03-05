@@ -1,5 +1,5 @@
-import featureFlags from '../../generated/feature-flags/feature-flags';
-import pkgSettings from './package-settings';
+import featureFlags from './generated/feature-flags/feature-flags';
+import pkgSettings from './global/js/package-settings';
 import { settings as carbonSettings } from 'carbon-components';
 
 export const carbon = {

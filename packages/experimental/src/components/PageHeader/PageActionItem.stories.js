@@ -11,7 +11,7 @@ import { PageActionItem } from './PageActionItem';
 import { Bee24 } from '@carbon/icons-react';
 
 import styles from './_index.scss'; // import index in case more files are added later.
-import { pkg } from '../../global/js/settings';
+import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 const storybookPrefix = getStorybookPrefix(pkg, 'PageActionItem');
 

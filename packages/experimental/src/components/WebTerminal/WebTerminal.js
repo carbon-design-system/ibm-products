@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from 'react';
 import { Close16 as Close, Help16 as Help } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { pkg } from '../../global/js/settings';
+import { pkg } from '../../settings';
 
 const WebTerminal = ({
   open,

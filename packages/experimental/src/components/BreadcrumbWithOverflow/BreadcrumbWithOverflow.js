@@ -18,7 +18,7 @@ import {
 } from 'carbon-components-react';
 import { OverflowMenuHorizontal32 } from '@carbon/icons-react';
 
-import { pkg, carbon } from '../../global/js/settings';
+import { pkg, carbon } from '../../settings';
 
 import ReactResizeDetector from 'react-resize-detector';
 import uuidv4 from '../../global/js/utils/uuidv4';

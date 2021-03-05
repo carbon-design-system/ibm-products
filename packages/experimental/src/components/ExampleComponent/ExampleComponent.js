@@ -10,7 +10,7 @@ import { Button, ButtonSet } from 'carbon-components-react';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { pkg } from '../../global/js/settings';
+import { pkg } from '../../settings';
 import cx from 'classnames';
 
 const blockClass = `${pkg.prefix}-example-component`;

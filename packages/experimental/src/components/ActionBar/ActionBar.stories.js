@@ -11,7 +11,7 @@ import { action } from '@storybook/addon-actions';
 import { ActionBar, ActionBarItem } from '.';
 import { Lightning16, Bee24 } from '@carbon/icons-react';
 
-import { pkg } from '../../global/js/settings';
+import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 const storybookPrefix = getStorybookPrefix(pkg, 'ActionBar');
 

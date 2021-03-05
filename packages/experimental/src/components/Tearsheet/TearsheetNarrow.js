@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 
-import { pkg } from '../../global/js/settings';
+import { pkg } from '../../settings';
 
 import { ModalHeader, ModalBody } from 'carbon-components-react';
 

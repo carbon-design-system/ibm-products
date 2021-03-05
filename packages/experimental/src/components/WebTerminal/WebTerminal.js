@@ -27,8 +27,6 @@ const WebTerminal = ({
     documentationLinks,
   ]);
 
-  // if (!open) return null;
-
   useEffect(() => {
     if (open) setRender(true);
   }, [open]);

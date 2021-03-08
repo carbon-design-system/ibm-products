@@ -9,7 +9,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkgPrefix } from '../../global/js/settings';
-import { Button, Link, ToggleSmall } from 'carbon-components-react';
+import { Button, Link, Toggle } from 'carbon-components-react';
 import {
   ErrorFilled16,
   WarningAltFilled16,
@@ -22,6 +22,8 @@ import {
 import { timeAgo } from './utils';
 import { EmptyState } from '../EmptyState';
 import useClickOutside from './useClickOutside';
+
+const blockClass = `${pkgPrefix}-notifications-panel`;
 
 export const Notifications = ({
   data,
@@ -38,6 +40,18 @@ export const Notifications = ({
   onSettingsClick,
   onDismissAllNotifications,
   onDismissSingleNotification,
+  secondsAgoLabel,
+  minuteAgoLabel,
+  minutesAgoLabel,
+  hoursAgoLabel,
+  hourAgoLabel,
+  daysAgoLabel,
+  yesterdayAtLabel,
+  monthsAgoLabel,
+  monthAgoLabel,
+  yearsAgoLabel,
+  yearAgoLabel,
+  nowLabel,
 }) => {
   const notificationPanelRef = useRef();
   const [shouldRender, setRender] = useState(open);
@@ -99,16 +113,16 @@ export const Notifications = ({
     const trimLength = 88;
     const description = notification.description;
     const descriptionClassName = cx([
-      `${pkgPrefix}-notifications-panel-notification-description`,
+      `${blockClass}-notification-description`,
       {
-        [`${pkgPrefix}-notifications-panel-notification-long-description`]: notification.showAll,
-        [`${pkgPrefix}-notifications-panel-notification-short-description`]: !notification.showAll,
+        [`${blockClass}-notification-long-description`]: notification.showAll,
+        [`${blockClass}-notification-short-description`]: !notification.showAll,
       },
     ]);
     const showMoreButtonClassName = cx([
       {
-        [`${pkgPrefix}-notifications-panel-notification-read-less-button`]: notification.showAll,
-        [`${pkgPrefix}-notifications-panel-notification-read-more-button`]: !notification.showAll,
+        [`${blockClass}-notification-read-less-button`]: notification.showAll,
+        [`${blockClass}-notification-read-more-button`]: !notification.showAll,
       },
     ]);
     return (
@@ -140,13 +154,13 @@ export const Notifications = ({
 
   const renderNotification = (group, notification, index) => {
     const notificationClassName = cx([
-      `${pkgPrefix}-notifications-panel-notification`,
-      `${pkgPrefix}-notifications-panel-notification-${group}`,
+      `${blockClass}-notification`,
+      `${blockClass}-notification-${group}`,
     ]);
     const notificationHeaderClassName = cx([
-      `${pkgPrefix}-notifications-panel-notification-title`,
+      `${blockClass}-notification-title`,
       {
-        [`${pkgPrefix}-notifications-panel-notification-title-unread`]: notification.unread,
+        [`${blockClass}-notification-title-unread`]: notification.unread,
       },
     ]);
     return (
@@ -172,40 +186,52 @@ export const Notifications = ({
         {notification.type === 'error' && (
           <ErrorFilled16
             className={cx([
-              `${pkgPrefix}-notifications-panel-notification-status-icon`,
-              `${pkgPrefix}-notifications-panel-notification-status-icon-error`,
+              `${blockClass}-notification-status-icon`,
+              `${blockClass}-notification-status-icon-error`,
             ])}
           />
         )}
         {notification.type === 'success' && (
           <CheckmarkFilled16
             className={cx([
-              `${pkgPrefix}-notifications-panel-notification-status-icon`,
-              `${pkgPrefix}-notifications-panel-notification-status-icon-success`,
+              `${blockClass}-notification-status-icon`,
+              `${blockClass}-notification-status-icon-success`,
             ])}
           />
         )}
         {notification.type === 'warning' && (
           <WarningAltFilled16
             className={cx([
-              `${pkgPrefix}-notifications-panel-notification-status-icon`,
-              `${pkgPrefix}-notifications-panel-notification-status-icon-warning`,
+              `${blockClass}-notification-status-icon`,
+              `${blockClass}-notification-status-icon-warning`,
             ])}
           />
         )}
         {notification.type === 'informational' && (
           <InformationSquareFilled16
             className={cx([
-              `${pkgPrefix}-notifications-panel-notification-status-icon`,
-              `${pkgPrefix}-notifications-panel-notification-status-icon-informational`,
+              `${blockClass}-notification-status-icon`,
+              `${blockClass}-notification-status-icon-informational`,
             ])}
           />
         )}
-        <div
-          className={`${pkgPrefix}-notifications-panel-notification-content`}>
-          <p
-            className={`${pkgPrefix}-notifications-panel-notification-time-label`}>
-            {timeAgo(notification.timestamp)}
+        <div className={`${blockClass}-notification-content`}>
+          <p className={`${blockClass}-notification-time-label`}>
+            {timeAgo({
+              previousTime: notification.timestamp,
+              secondsAgoLabel,
+              minuteAgoLabel,
+              minutesAgoLabel,
+              hoursAgoLabel,
+              hourAgoLabel,
+              daysAgoLabel,
+              yesterdayAtLabel,
+              monthsAgoLabel,
+              monthAgoLabel,
+              yearsAgoLabel,
+              yearAgoLabel,
+              nowLabel,
+            })}
           </p>
           <h6 className={notificationHeaderClassName}>{notification.title}</h6>
           {notification.description &&
@@ -216,7 +242,7 @@ export const Notifications = ({
             notification.link.url && (
               <Link
                 href={notification.link.url}
-                className={`${pkgPrefix}-notifications-panel-notifications-link`}>
+                className={`${blockClass}-notifications-link`}>
                 {notification.link.text}
               </Link>
             )}
@@ -227,7 +253,7 @@ export const Notifications = ({
           renderIcon={Close16}
           iconDescription="Dismiss"
           tooltipPosition="left"
-          className={`${pkgPrefix}-notifications-dismiss-single-button`}
+          className={`${blockClass}-dismiss-single-button`}
           onClick={(event) => dismissSingleNotification(event, notification)}
         />
       </div>
@@ -241,34 +267,35 @@ export const Notifications = ({
   };
 
   const mainSectionClassName = cx([
-    `${pkgPrefix}-notifications-panel-main-section`,
+    `${blockClass}-main-section`,
     {
-      [`${pkgPrefix}-notificaitons-panel-main-section-empty`]: !allNotifications.length,
+      [`${blockClass}-main-section-empty`]: !allNotifications.length,
     },
   ]);
 
   return (
     shouldRender && (
       <div
-        id={`${pkgPrefix}-notifications-panel`}
-        className={`${pkgPrefix}-notifications-panel-container`}
+        id={blockClass}
+        className={`${blockClass}-container`}
         style={{ animation: `${open ? 'fadeIn 250ms' : 'fadeOut 250ms'}` }}
         onAnimationEnd={onAnimationEnd}
         ref={notificationPanelRef}>
-        <div className={`${pkgPrefix}-notifications-header-container`}>
-          <div className={`${pkgPrefix}-notifications-header-flex`}>
-            <h1 className={`${pkgPrefix}-notifications-header`}>{title}</h1>
+        <div className={`${blockClass}-header-container`}>
+          <div className={`${blockClass}-header-flex`}>
+            <h1 className={`${blockClass}-header`}>{title}</h1>
             <Button
               size="small"
               kind="ghost"
-              className={`${pkgPrefix}-notifications-dismiss-button`}
+              className={`${blockClass}-dismiss-button`}
               onClick={() => onDismissAllNotifications()}>
               {dismissAllLabel}
             </Button>
           </div>
-          <ToggleSmall
-            className={`${pkgPrefix}-notifications-do-not-disturb-toggle`}
-            id={`${pkgPrefix}-notifications-do-not-disturb-toggle-component`}
+          <Toggle
+            size="sm"
+            className={`${blockClass}-do-not-disturb-toggle`}
+            id={`${blockClass}-do-not-disturb-toggle-component`}
             labelA={doNotDisturbLabel}
             labelB={doNotDisturbLabel}
             onToggle={(event) => onDoNotDisturbChange(event)}
@@ -278,8 +305,7 @@ export const Notifications = ({
         <div className={mainSectionClassName}>
           {withinLastDayNotifications && withinLastDayNotifications.length ? (
             <>
-              <h6
-                className={`${pkgPrefix}-notifications-panel-time-section-label`}>
+              <h6 className={`${blockClass}-time-section-label`}>
                 {todayLabel}
               </h6>
               {withinLastDayNotifications.map((notification, index) =>
@@ -289,8 +315,7 @@ export const Notifications = ({
           ) : null}
           {previousDayNotifications && previousDayNotifications.length ? (
             <>
-              <h6
-                className={`${pkgPrefix}-notifications-panel-time-section-label`}>
+              <h6 className={`${blockClass}-time-section-label`}>
                 {yesterdayLabel}
               </h6>
               {previousDayNotifications.map((notification, index) =>
@@ -300,8 +325,7 @@ export const Notifications = ({
           ) : null}
           {previousNotifications && previousNotifications.length ? (
             <>
-              <h6
-                className={`${pkgPrefix}-notifications-panel-time-section-label`}>
+              <h6 className={`${blockClass}-time-section-label`}>
                 {previousLabel}
               </h6>
               {previousNotifications.map((notification, index) =>
@@ -322,17 +346,17 @@ export const Notifications = ({
         onSettingsClick &&
         allNotifications &&
         allNotifications.length ? (
-          <div className={`${pkgPrefix}-notifications-bottom-actions`}>
+          <div className={`${blockClass}-bottom-actions`}>
             <Button
               kind="ghost"
-              className={`${pkgPrefix}-notifications-view-all-button`}
+              className={`${blockClass}-view-all-button`}
               onClick={() => onViewAllClick()}>
               View all ({allNotifications.length})
             </Button>
             <Button
               kind="ghost"
               size="small"
-              className={`${pkgPrefix}-notifications-settings-button`}
+              className={`${blockClass}-settings-button`}
               renderIcon={Settings16}
               iconDescription="Settings"
               onClick={() => onSettingsClick()}
@@ -364,6 +388,10 @@ Notifications.propTypes = {
     })
   ).isRequired,
   /**
+   * Sets the `days ago` label text
+   */
+  daysAgoLabel: PropTypes.string,
+  /**
    * Label for Dismiss all button
    */
   dismissAllLabel: PropTypes.string,
@@ -371,6 +399,34 @@ Notifications.propTypes = {
    * Label for Do not disturb toggle
    */
   doNotDisturbLabel: PropTypes.string,
+  /**
+   * Sets the `hour ago` label text
+   */
+  hourAgoLabel: PropTypes.string,
+  /**
+   * Sets the `hours ago` label text
+   */
+  hoursAgoLabel: PropTypes.string,
+  /**
+   * Sets the `minute ago` label text
+   */
+  minuteAgoLabel: PropTypes.string,
+  /**
+   * Sets the `minutes ago` label text
+   */
+  minutesAgoLabel: PropTypes.string,
+  /**
+   * Sets the `month ago` label text
+   */
+  monthAgoLabel: PropTypes.string,
+  /**
+   * Sets the `months ago` label text
+   */
+  monthsAgoLabel: PropTypes.string,
+  /**
+   * Sets the `now` label text
+   */
+  nowLabel: PropTypes.string,
   /**
    * Function that will dismiss all notifications
    */
@@ -400,6 +456,10 @@ Notifications.propTypes = {
    */
   previousLabel: PropTypes.string,
   /**
+   * Sets the `seconds ago` label text
+   */
+  secondsAgoLabel: PropTypes.string,
+  /**
    * Sets the notifications panel open state
    */
   setOpen: PropTypes.func.isRequired,
@@ -411,6 +471,18 @@ Notifications.propTypes = {
    * Sets the today label text
    */
   todayLabel: PropTypes.string,
+  /**
+   * Sets the `year ago` label text
+   */
+  yearAgoLabel: PropTypes.string,
+  /**
+   * Sets the `years ago` label text
+   */
+  yearsAgoLabel: PropTypes.string,
+  /**
+   * Sets the `Yesterday at` label text
+   */
+  yesterdayAtLabel: PropTypes.string,
   /**
    * Sets the yesterday label text
    */
@@ -426,4 +498,16 @@ Notifications.defaultProps = {
   yesterdayLabel: 'Yesterday',
   onDismissAllNotifications: () => {},
   onDismissSingleNotification: () => {},
+  secondsAgoLabel: 'seconds ago',
+  minuteAgoLabel: 'minute ago',
+  minutesAgoLabel: 'minutes ago',
+  hoursAgoLabel: 'hours ago',
+  hourAgoLabel: 'hour ago',
+  daysAgoLabel: 'days ago',
+  yesterdayAtLabel: 'Yesterday at',
+  monthsAgoLabel: 'months ago',
+  monthAgoLabel: 'month ago',
+  yearsAgoLabel: 'years ago',
+  yearAgoLabel: 'year ago',
+  nowLabel: 'Now',
 };

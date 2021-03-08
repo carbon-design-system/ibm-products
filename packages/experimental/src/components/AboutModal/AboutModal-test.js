@@ -68,10 +68,10 @@ describe('AboutModal', () => {
         title={title}
         versionNumber="0.0.1"
         links={[
-          <Link href="https://www.carbondesignsystem.com">
+          <Link href="https://www.carbondesignsystem.com" key="link1">
             Carbon Design System
           </Link>,
-          <Link href="https://www.ibm.com/design/language">
+          <Link href="https://www.ibm.com/design/language" key="link2">
             IBM Design Language
           </Link>,
         ]}

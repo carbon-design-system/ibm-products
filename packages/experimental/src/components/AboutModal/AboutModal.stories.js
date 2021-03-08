@@ -104,16 +104,24 @@ export const Default = () => {
 export const withLinks = Template.bind({});
 withLinks.args = {
   links: [
-    <Link href="https://www.carbondesignsystem.com">Carbon Design System</Link>,
-    <Link href="https://www.ibm.com/design/language">IBM Design Language</Link>,
+    <Link href="https://www.carbondesignsystem.com" key="link1">
+      Carbon Design System
+    </Link>,
+    <Link href="https://www.ibm.com/design/language" key="link2">
+      IBM Design Language
+    </Link>,
   ],
 };
 
 export const withLinksAndLegalText = Template.bind({});
 withLinksAndLegalText.args = {
   links: [
-    <Link href="https://www.carbondesignsystem.com">Carbon Design System</Link>,
-    <Link href="https://www.ibm.com/design/language">IBM Design Language</Link>,
+    <Link href="https://www.carbondesignsystem.com" key="link1">
+      Carbon Design System
+    </Link>,
+    <Link href="https://www.ibm.com/design/language" key="link2">
+      IBM Design Language
+    </Link>,
   ],
   legalText:
     'This Web site contains proprietary notices and copyright information, the terms of which must be observed and followed. Please see the tab entitled “Copyright and trademark information” for related information.',
@@ -122,8 +130,12 @@ withLinksAndLegalText.args = {
 export const withLinksAndLegalAndCopyrightText = Template.bind({});
 withLinksAndLegalAndCopyrightText.args = {
   links: [
-    <Link href="https://www.carbondesignsystem.com">Carbon Design System</Link>,
-    <Link href="https://www.ibm.com/design/language">IBM Design Language</Link>,
+    <Link href="https://www.carbondesignsystem.com" key="link1">
+      Carbon Design System
+    </Link>,
+    <Link href="https://www.ibm.com/design/language" key="link2">
+      IBM Design Language
+    </Link>,
   ],
   legalText:
     'This Web site contains proprietary notices and copyright information, the terms of which must be observed and followed. Please see the tab entitled “Copyright and trademark information” for related information.',

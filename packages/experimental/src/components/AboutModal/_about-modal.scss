@@ -18,15 +18,7 @@
 }
 
 .#{$pkg-prefix}-about-modal .bx--modal-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-
-.#{$pkg-prefix}-about-modal .bx--modal-footer {
-  position: relative;
   flex-direction: column;
-  grid-row: auto;
   justify-content: center;
   padding-left: $spacing-05;
   background-color: $inverse-02;

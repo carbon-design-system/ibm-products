@@ -11,7 +11,6 @@ import ReactResizeDetector from 'react-resize-detector';
 import classNames from 'classnames';
 import {
   ComposedModal,
-  Link,
   ModalHeader,
   ModalFooter,
   ModalBody,
@@ -187,10 +186,6 @@ AboutModal.propTypes = {
    */
   open: PropTypes.bool.isRequired,
   /**
-   * The title of the AboutModal is usually the product or service name.
-   */
-  title: PropTypes.node.isRequired,
-  /**
    * About modal list of technologies
    */
   technologiesUsed: PropTypes.arrayOf(
@@ -199,6 +194,10 @@ AboutModal.propTypes = {
       alt: PropTypes.string,
     })
   ),
+  /**
+   * The title of the AboutModal is usually the product or service name.
+   */
+  title: PropTypes.node.isRequired,
   /**
    * The version number of the product or service, etc.
    */

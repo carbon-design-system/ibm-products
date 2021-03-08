@@ -65,7 +65,7 @@ const settings = {
     setAll(settings.component, enabled);
   },
   setAllFeatures: (enabled) => {
-    setAllOn(settings.feature, enabled);
+    setAll(settings.feature, enabled);
   },
 };
 

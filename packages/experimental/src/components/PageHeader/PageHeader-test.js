@@ -145,8 +145,6 @@ describe('PageHeader', () => {
     );
 
     const header = document.querySelector(`section.${pkgPrefix}-page-header`);
-    console.log('Look here', header.innerHTML);
-
     expect(header).not.toBeNull();
     expect(
       header.classList.contains(`${pkgPrefix}-page-header--background`)

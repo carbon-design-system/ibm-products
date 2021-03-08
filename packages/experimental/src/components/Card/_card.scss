@@ -9,6 +9,11 @@
 
 .#{$pkg-prefix}-card--clickable {
   cursor: pointer;
+  transition: background $duration--fast-02;
+}
+
+.#{$pkg-prefix}-card--clickable:hover {
+  background: $hover-ui;
 }
 
 .#{$pkg-prefix}-card--media-left {
@@ -18,6 +23,7 @@
 
 .#{$pkg-prefix}-card--media-left .#{$pkg-prefix}-card-content-container {
   display: flex;
+  flex: 1;
   flex-direction: column;
 }
 
@@ -35,12 +41,28 @@
   padding: $spacing-05;
 }
 
+.#{$pkg-prefix}-card-header--label-only {
+  padding-bottom: $spacing-03;
+}
+
+.#{$pkg-prefix}-card-header--label-only .#{$pkg-prefix}-card-label {
+  margin-bottom: 0;
+}
+
 .#{$pkg-prefix}-card-title {
   @include carbon--type-style('productive-heading-03');
 }
 
 .#{$pkg-prefix}-card-label {
   @include carbon--type-style('label-01');
+
+  margin-bottom: $spacing-01;
+}
+
+.#{$pkg-prefix}-card-caption {
+  @include carbon--type-style('caption-01');
+
+  margin-top: $spacing-01;
 }
 
 .#{$pkg-prefix}-card-body {

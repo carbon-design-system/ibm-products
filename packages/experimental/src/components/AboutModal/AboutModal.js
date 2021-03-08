@@ -64,89 +64,84 @@ export const AboutModal = ({
           onClose={onClose}
           open={open}
           ref={modalRef}>
-            <div className={`${pkg.prefix}-about-modal-product-logo`} >
-              {logo}
+          <div className={`${pkg.prefix}-about-modal-product-logo`}>{logo}</div>
+          <ModalHeader
+            title={title}
+            titleClassName={`${pkg.prefix}-about-modal-title`}
+          />
+          <ModalBody className={`${pkg.prefix}-about-modal-content`}>
+            {content}
+            <div className={`${pkg.prefix}-about-modal-links-container`}>
+              {links &&
+                links.length > 0 &&
+                links.map((link, i) => (
+                  <React.Fragment key={i}>
+                    {link}
+                    {i !== links.length - 1 && (
+                      <span
+                        className={`${pkg.prefix}-about-modal-link-divider`}>
+                        |
+                      </span>
+                    )}
+                  </React.Fragment>
+                ))}
             </div>
-            <ModalHeader
-              title={title}
-              titleClassName={`${pkg.prefix}-about-modal-title`}
-            />
-            <ModalBody className={`${pkg.prefix}-about-modal-content`}>
-              {content}
-              <div className={`${pkg.prefix}-about-modal-links-container`}>
-                {links &&
-                  links.length > 0 &&
-                  links.map((link, i) => (
-                    <React.Fragment key={i}>
-                      {link}
-                      {i !== links.length - 1 && (
-                        <span
-                          className={`${pkg.prefix}-about-modal-link-divider`}>
-                          |
-                        </span>
-                      )}
-                    </React.Fragment>
-                  ))}
-              </div>
-              {legalText ? (
-                <p className={`${pkg.prefix}-about-modal-legal-text`}>
-                  {legalText}
+            {legalText ? (
+              <p className={`${pkg.prefix}-about-modal-legal-text`}>
+                {legalText}
+              </p>
+            ) : null}
+            {copyrightText ? (
+              <p className={`${pkg.prefix}-about-modal-copyright-text`}>
+                {copyrightText}
+              </p>
+            ) : null}
+            {hasScrollableContent && (
+              <div className={`${pkg.prefix}-about-modal-scroll-gradient`} />
+            )}
+          </ModalBody>
+          <ModalFooter>
+            {technologiesUsed && technologiesUsed.length ? (
+              <Tabs className={`${pkg.prefix}-about-modal-tab-container`}>
+                <Tab
+                  id="about-modal-technologies-used-tab"
+                  label="Technologies used">
+                  <div className={`${pkg.prefix}-about-modal-tab-content-flex`}>
+                    {technologiesUsed &&
+                      technologiesUsed.length &&
+                      technologiesUsed.map((tech) => (
+                        <img
+                          key={tech.alt}
+                          src={tech.src}
+                          alt={tech.alt}
+                          className={`${pkg.prefix}-about-modal-tech-used-item`}
+                        />
+                      ))}
+                  </div>
+                </Tab>
+                <Tab id="about-modal-version-number-tab" label="Version number">
+                  <div
+                    className={`${pkg.prefix}-about-modal-tab-content-flex ${pkg.prefix}-about-modal-tab-content-version-flex`}>
+                    <p className={`${pkg.prefix}-about-modal-version-label`}>
+                      Version number
+                    </p>
+                    <p className={`${pkg.prefix}-about-modal-version-number`}>
+                      {versionNumber}
+                    </p>
+                  </div>
+                </Tab>
+              </Tabs>
+            ) : (
+              <>
+                <p className={`${pkg.prefix}-about-modal-version-label`}>
+                  Version number
                 </p>
-              ) : null}
-              {copyrightText ? (
-                <p className={`${pkg.prefix}-about-modal-copyright-text`}>
-                  {copyrightText}
+                <p className={`${pkg.prefix}-about-modal-version-number`}>
+                  {versionNumber}
                 </p>
-              ) : null}
-              {hasScrollableContent && (
-                <div className={`${pkg.prefix}-about-modal-scroll-gradient`} />
-              )}
-            </ModalBody>
-            <ModalFooter>
-              {technologiesUsed && technologiesUsed.length ? (
-                <Tabs className={`${pkg.prefix}-about-modal-tab-container`}>
-                  <Tab
-                    id="about-modal-technologies-used-tab"
-                    label="Technologies used">
-                    <div
-                      className={`${pkg.prefix}-about-modal-tab-content-flex`}>
-                      {technologiesUsed &&
-                        technologiesUsed.length &&
-                        technologiesUsed.map((tech) => (
-                          <img
-                            key={tech.alt}
-                            src={tech.src}
-                            alt={tech.alt}
-                            className={`${pkg.prefix}-about-modal-tech-used-item`}
-                          />
-                        ))}
-                    </div>
-                  </Tab>
-                  <Tab
-                    id="about-modal-version-number-tab"
-                    label="Version number">
-                    <div
-                      className={`${pkg.prefix}-about-modal-tab-content-flex ${pkg.prefix}-about-modal-tab-content-version-flex`}>
-                      <p className={`${pkg.prefix}-about-modal-version-label`}>
-                        Version number
-                      </p>
-                      <p className={`${pkg.prefix}-about-modal-version-number`}>
-                        {versionNumber}
-                      </p>
-                    </div>
-                  </Tab>
-                </Tabs>
-              ) : (
-                <>
-                  <p className={`${pkg.prefix}-about-modal-version-label`}>
-                    Version number
-                  </p>
-                  <p className={`${pkg.prefix}-about-modal-version-number`}>
-                    {versionNumber}
-                  </p>
-                </>
-              )}
-            </ModalFooter>
+              </>
+            )}
+          </ModalFooter>
         </ComposedModal>
       </div>
     </ReactResizeDetector>

@@ -13,8 +13,7 @@
 @import 'carbon-components/scss/components/modal/modal';
 @import 'carbon-components/scss/components/tabs/tabs';
 
-.#{$pkg-prefix}-about-modal
-  .bx--modal-container {
+.#{$pkg-prefix}-about-modal .bx--modal-container {
   grid-template-rows: auto auto 1fr auto;
 }
 

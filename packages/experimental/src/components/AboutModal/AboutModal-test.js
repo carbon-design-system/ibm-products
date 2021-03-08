@@ -16,8 +16,18 @@ import grafanaLogo from './technologyUsedLogos/grafana_logo.png';
 import jsLogo from './technologyUsedLogos/js_logo.png';
 
 const content = 'This is example content';
-const logo = <img src={ExampleLogo} alt="Example product logo" style={{maxWidth: '6rem'}} />;
-const title = <>IBM <span style={{ fontWeight: '600' }}>Watson AI Ops</span></>;
+const logo = (
+  <img
+    src={ExampleLogo}
+    alt="Example product logo"
+    style={{ maxWidth: '6rem' }}
+  />
+);
+const title = (
+  <>
+    IBM <span style={{ fontWeight: '600' }}>Watson AI Ops</span>
+  </>
+);
 
 describe('AboutModal', () => {
   test('renders title and content', () => {
@@ -31,8 +41,7 @@ describe('AboutModal', () => {
       />
     );
     expect(
-      screen.getByText(/Watson AI Ops/i) &&
-        screen.getByText(content)
+      screen.getByText(/Watson AI Ops/i) && screen.getByText(content)
     ).toBeTruthy();
   });
 
@@ -59,8 +68,12 @@ describe('AboutModal', () => {
         title={title}
         versionNumber="0.0.1"
         links={[
-          <Link href="https://www.carbondesignsystem.com">Carbon Design System</Link>,
-          <Link href="https://www.ibm.com/design/language">IBM Design Language</Link>,
+          <Link href="https://www.carbondesignsystem.com">
+            Carbon Design System
+          </Link>,
+          <Link href="https://www.ibm.com/design/language">
+            IBM Design Language
+          </Link>,
         ]}
       />
     );

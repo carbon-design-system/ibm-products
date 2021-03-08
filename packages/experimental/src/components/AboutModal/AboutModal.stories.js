@@ -32,7 +32,13 @@ export default {
   },
 };
 
-const logo = <img src={ExampleLogo} alt="Example product logo" style={{maxWidth: '6rem'}} />;
+const logo = (
+  <img
+    src={ExampleLogo}
+    alt="Example product logo"
+    style={{ maxWidth: '6rem' }}
+  />
+);
 
 const Template = (args) => (
   <AboutModal

@@ -62,7 +62,7 @@ const settings = {
     return flags.feature[feature];
   },
   setAllComponents: (enabled) => {
-    setAllOn(settings.component, enabled);
+    setAll(settings.component, enabled);
   },
   setAllFeatures: (enabled) => {
     setAllOn(settings.feature, enabled);

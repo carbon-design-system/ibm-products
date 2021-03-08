@@ -214,6 +214,6 @@ AboutModal.defaultProps = {
   copyrightText: '',
   legalText: '',
   links: [],
-  onClose: () => {console.log('onClose called')},
+  onClose: () => {},
   technologiesUsed: [],
 };

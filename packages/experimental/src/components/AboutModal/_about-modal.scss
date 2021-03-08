@@ -15,21 +15,7 @@
 
 .#{$pkg-prefix}-about-modal
   .bx--modal-container {
-  //  height: 100%;
-  //  padding-bottom: $spacing-09;
   grid-template-rows: auto auto 1fr auto;
-}
-
-//.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-scroll-enabled
-//  .bx--modal-container
-//  .#{$pkg-prefix}-modal-content {
-//  display: grid;
-//  overflow: hidden;
-//}
-
-.bx--modal-content.#{$pkg-prefix}-about-modal-content {
-  // margin-bottom: $layout-05;
-  // padding-bottom: $layout-05;
 }
 
 .#{$pkg-prefix}-about-modal .bx--modal-footer {

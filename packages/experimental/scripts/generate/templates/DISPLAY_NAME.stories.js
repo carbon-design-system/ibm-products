@@ -13,7 +13,7 @@ import React from 'react';
 
 import { DISPLAY_NAME } from '.';
 
-import { pkg } from '../../global/js/settings';
+import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 const storybookPrefix = getStorybookPrefix(pkg, DISPLAY_NAME.displayName);
 

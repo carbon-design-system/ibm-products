@@ -17,7 +17,7 @@ import { Canary } from '../_Canary';
 /**
  * TODO: Add use of Carbon prefix if needed
  */
-import { pkg /*, carbon */ } from '../../global/js/settings';
+import { pkg /*, carbon */ } from '../../settings';
 
 const blockClass = `${pkg.prefix}--STYLE_NAME`;
 const componentName = 'DISPLAY_NAME';

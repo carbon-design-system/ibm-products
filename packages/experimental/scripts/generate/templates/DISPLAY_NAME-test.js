@@ -11,7 +11,7 @@ import React from 'react';
 import { pkg } from '../../settings';
 import '../../enable-all'; // must come before component is imported
 
-const blockClass = `${pkg.prefix}-STYLE_NAME`;
+const blockClass = `${pkg.prefix}--STYLE_NAME`;
 
 const name = DISPLAY_NAME;
 describe(name, () => {

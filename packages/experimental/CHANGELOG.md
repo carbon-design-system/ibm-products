@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.10](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.20.9...@carbon/ibm-cloud-cognitive-experimental@0.20.10) (2021-03-08)
+
+
+### Bug Fixes
+
+* remove console log from page header test ([#410](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/410)) ([05aa11b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/05aa11bc5d0d60a1b645a3569963f6411da7549e))
+
+
+
+
+
 ## [0.20.9](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.20.8...@carbon/ibm-cloud-cognitive-experimental@0.20.9) (2021-03-05)
 
 

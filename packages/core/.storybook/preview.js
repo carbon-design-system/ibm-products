@@ -9,6 +9,10 @@ import { withInfo } from '@storybook/addon-info';
 import React, { useEffect } from 'react';
 import { withCarbonTheme } from '@carbon/storybook-addon-theme/react';
 
+// Only impacts on experimental stories
+import { pkg } from '../../experimental/src/settings';
+import '../../experimental/src/enable-all';
+
 import index from './index.scss';
 
 const Style = ({ children, styles }) => {

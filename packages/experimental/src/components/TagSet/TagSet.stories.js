@@ -10,10 +10,10 @@ import React from 'react';
 import TagSet from './TagSet';
 import { Tag } from 'carbon-components-react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import { pkgPrefix } from '../../global/js/settings';
-import { storybookPrefixCanary as storybookPrefix } from '../../../config';
-
-const blockClass = `${pkgPrefix}-tag-set`;
+import { pkg } from '../../settings';
+import { getStorybookPrefix } from '../../../config';
+const storybookPrefix = getStorybookPrefix(pkg, 'TagSet');
+const blockClass = `${pkg.prefix}-tag-set`;
 
 const TagItems = [
   <Tag key="tag1" type="blue">

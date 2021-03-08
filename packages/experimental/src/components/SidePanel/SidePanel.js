@@ -8,7 +8,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { pkgPrefix } from '../../global/js/settings';
+import { pkg } from '../../settings';
 import { Button, InlineLoading } from 'carbon-components-react';
 import { SIDE_PANEL_SIZES } from './constants';
 import { Close20, ArrowLeft20 } from '@carbon/icons-react';
@@ -20,7 +20,7 @@ const changeArrayPosition = (arr, originalPosition, newPosition) => {
   return arr;
 };
 
-const blockClass = `${pkgPrefix}-side-panel`;
+const blockClass = `${pkg.prefix}-side-panel`;
 
 export const SidePanel = ({
   open,

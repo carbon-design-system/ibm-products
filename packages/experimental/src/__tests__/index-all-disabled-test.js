@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2020
+ * Copyright IBM Corp. 2020, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,26 +12,23 @@ import { render } from '@testing-library/react'; // https://testing-library.com/
 import React from 'react';
 import { pkg } from '../settings';
 
-import * as components from '..';
-const name = 'export checks';
 const canaryClass = `${pkg.prefix}-canary`;
+import * as components from '../index-all-disabled';
+const name = 'export checks';
 
 describe(name, () => {
   for (const key in components) {
     if (key.charAt(0) === key.charAt(0).toUpperCase()) {
+      // TODO: remove this test and check all components
+      if (key !== 'ExampleComponent') continue;
+
       const TestComponent = components[key];
 
-      if (!pkg.isComponentEnabled(key)) {
-        // We only check unreleased components render a canary
-        // Non-canary components are tested elsewhere.
-        it(`renders a canary by default for "${key}"`, () => {
-          // TODO: remove this test and check all components
-          if (key !== 'ExampleComponent') return;
+      test(`Renders a canary, for "${key}", if no package flags set`, () => {
+        const { container } = render(<TestComponent />);
 
-          const { container } = render(<TestComponent />);
-          expect(container.querySelector(`.${canaryClass}`)).not.toBeNull();
-        });
-      }
+        expect(container.querySelector(`.${canaryClass}`)).not.toBeNull();
+      });
     }
   }
 });

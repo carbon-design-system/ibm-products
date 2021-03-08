@@ -11,19 +11,17 @@ import React from 'react';
  */
 // import { action } from '@storybook/addon-actions';
 
-import {
-  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
-} from '../../../config';
-
 import { DISPLAY_NAME } from '.';
+
+import { pkg } from '../../settings';
+import { getStorybookPrefix } from '../../../config';
+const storybookPrefix = getStorybookPrefix(pkg, DISPLAY_NAME.displayName);
 
 import page from './DISPLAY_NAME.mdx';
 import styles from './_storybook-styles.scss';
 
-const { name } = DISPLAY_NAME;
-
 export default {
-  title: `${storybookPrefixCanary}/${name}`,
+  title: `${storybookPrefix}/${DISPLAY_NAME.displayName}`,
   component: DISPLAY_NAME,
   // TODO: Define argTypes for props not represented by standard JS types
   // argTypes: {

@@ -8,7 +8,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { pkgPrefix } from '../../global/js/settings';
+import { pkg } from '../../settings';
 import { Button, Link, Toggle } from 'carbon-components-react';
 import {
   ErrorFilled16,
@@ -23,7 +23,7 @@ import { timeAgo } from './utils';
 import { EmptyState } from '../EmptyState';
 import useClickOutside from './useClickOutside';
 
-const blockClass = `${pkgPrefix}-notifications-panel`;
+const blockClass = `${pkg.prefix}-notifications-panel`;
 
 export const Notifications = ({
   data,
@@ -175,7 +175,7 @@ export const Notifications = ({
         onKeyDown={(event) => {
           if (
             event.target.classList.contains(
-              `${pkgPrefix}-notifications-dismiss-single-button`
+              `${pkg.prefix}-notifications-dismiss-single-button`
             )
           )
             return;

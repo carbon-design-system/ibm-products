@@ -32,7 +32,7 @@ describe('Notifications', () => {
 
     click(
       container.querySelector(
-        `#${pkg.prefix}-notifications-do-not-disturb-toggle-component`
+        `#${pkg.prefix}-notifications-panel-do-not-disturb-toggle-component`
       )
     );
     expect(onToggle).toBeCalled();

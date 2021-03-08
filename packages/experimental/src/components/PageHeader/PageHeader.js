@@ -548,7 +548,7 @@ export const PageHeader = ({
                     ) : (
                       ''
                     )}
-                    {title}
+                    <span title={title}>{title}</span>
                   </div>
                 ) : null}
               </Column>

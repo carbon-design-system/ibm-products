@@ -13,7 +13,9 @@ import '../../enable-all'; // must come before component is imported
 
 const blockClass = `${pkg.prefix}--STYLE_NAME`;
 
-const name = DISPLAY_NAME;
+import { DISPLAY_NAME } from '.';
+const name = 'DISPLAY_NAME';
+
 describe(name, () => {
   test('has no accessibility violations', async () => {
     const { container } = render(<DISPLAY_NAME>{name}</DISPLAY_NAME>);

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2020
+ * Copyright IBM Corp. 2021, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,16 +23,16 @@ import { pkg } from '../../settings';
 
 export const AboutModal = ({
   className,
+  content,
   copyrightText,
   legalText,
   links,
   logo,
-  productName,
-  versionNumber,
-  onRequestClose,
-  body,
+  onClose,
   open,
   technologiesUsed,
+  title,
+  versionNumber,
 }) => {
   const [hasScrollableContent, setHasScrollableContent] = useState();
   const modalRef = useRef();
@@ -61,27 +61,24 @@ export const AboutModal = ({
               technologiesUsed && technologiesUsed.length > 0,
             [className]: className,
           })}
+          onClose={onClose}
           open={open}
           ref={modalRef}>
-          <div className={`${pkg.prefix}-modal-content`}>
-            <img
-              alt="Product logo"
-              src={logo}
-              className={`${pkg.prefix}-about-modal-product-logo`}
-            />
+            <div className={`${pkgPrefix}-about-modal-product-logo`} >
+              {logo}
+            </div>
             <ModalHeader
-              title={productName}
-              titleClassName={`${pkg.prefix}-about-modal-title`}
-              closeModal={onRequestClose}
+              title={title}
+              titleClassName={`${pkgPrefix}-about-modal-title`}
             />
-            <ModalBody className={`${pkg.prefix}-about-modal-content`}>
-              {body}
-              <div className={`${pkg.prefix}-about-modal-links-container`}>
+            <ModalBody className={`${pkgPrefix}-about-modal-content`}>
+              {content}
+              <div className={`${pkgPrefix}-about-modal-links-container`}>
                 {links &&
                   links.length > 0 &&
                   links.map((link, i) => (
-                    <React.Fragment key={link.url}>
-                      <Link href={link.url}>{link.text}</Link>
+                    <React.Fragment key={i}>
+                      {link}
                       {i !== links.length - 1 && (
                         <span
                           className={`${pkg.prefix}-about-modal-link-divider`}>
@@ -101,6 +98,9 @@ export const AboutModal = ({
                   {copyrightText}
                 </p>
               ) : null}
+              {hasScrollableContent && (
+                <div className={`${pkgPrefix}-about-modal-scroll-gradient`} />
+              )}
             </ModalBody>
             <ModalFooter>
               {technologiesUsed && technologiesUsed.length ? (
@@ -147,10 +147,6 @@ export const AboutModal = ({
                 </>
               )}
             </ModalFooter>
-            {hasScrollableContent && (
-              <div className={`${pkg.prefix}-about-modal-scroll-gradient`} />
-            )}
-          </div>
         </ComposedModal>
       </div>
     </ReactResizeDetector>
@@ -159,49 +155,46 @@ export const AboutModal = ({
 
 AboutModal.propTypes = {
   /**
-   * About modal body content
-   */
-  body: PropTypes.string.isRequired,
-
-  /**
    * Specify an optional className to be applied to the modal root node
    */
   className: PropTypes.string,
-
   /**
-   * About modal product copyright text
+   * A summary that appears immediately beneath the title, and might
+   * include information such as: version name, server name,
+   * user name, user role, browser version, browser OS etc.
    */
-  copyrightText: PropTypes.string,
+  content: PropTypes.node.isRequired,
   /**
-   * About modal product legal text
+   * Trademark and copyright information. Suggested format for copyright -
+   * "Copyright © 2018 Company".
    */
-  legalText: PropTypes.string,
+  copyrightText: PropTypes.node,
   /**
-   * About modal product links
+   * Text providing legal information.
    */
-  links: PropTypes.arrayOf(
-    PropTypes.shape({
-      text: PropTypes.string,
-      url: PropTypes.string,
-    })
-  ),
+  legalText: PropTypes.node,
   /**
-   * About modal product logo
+   * An array of Carbon `Link` components that contain links to additional
+   * information.
    */
-  logo: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  links: PropTypes.arrayOf(PropTypes.element),
   /**
-   * About modal close function
+   * A visual symbol used to represent the product.
    */
-  onRequestClose: PropTypes.func.isRequired,
+  logo: PropTypes.node.isRequired,
   /**
-   * About modal is open
+   * Specifies an optional handler which is called when the AboutModal
+   * is closed. Returning `false` prevents the AboutModal from closing.
+   */
+  onClose: PropTypes.func,
+  /**
+   * Specifies whether the AboutModal is open or not.
    */
   open: PropTypes.bool.isRequired,
   /**
-   * About modal product name
+   * The title of the AboutModal is usually the product or service name.
    */
-  productName: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
-    .isRequired,
+  title: PropTypes.node.isRequired,
   /**
    * About modal list of technologies
    */
@@ -212,7 +205,7 @@ AboutModal.propTypes = {
     })
   ),
   /**
-   * About modal product version number
+   * The version number of the product or service, etc.
    */
   versionNumber: PropTypes.string.isRequired,
 };
@@ -221,6 +214,6 @@ AboutModal.defaultProps = {
   copyrightText: '',
   legalText: '',
   links: [],
-  onRequestClose: () => {},
+  onClose: () => {console.log('onClose called')},
   technologiesUsed: [],
 };

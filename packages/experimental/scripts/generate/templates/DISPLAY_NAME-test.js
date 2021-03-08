@@ -15,15 +15,6 @@ const blockClass = `${pkg.prefix}--STYLE_NAME`;
 
 const name = DISPLAY_NAME;
 describe(name, () => {
-  let DISPLAY_NAME;
-  beforeAll(async () => {
-    // must happen before component import
-    pkg.component.DISPLAY_NAME = true;
-    // ensure import after settings change
-    const { DISPLAY_NAME: LateLoadedComponent } = await import('.');
-    DISPLAY_NAME = LateLoadedComponent;
-  });
-
   test('has no accessibility violations', async () => {
     const { container } = render(<DISPLAY_NAME>{name}</DISPLAY_NAME>);
 

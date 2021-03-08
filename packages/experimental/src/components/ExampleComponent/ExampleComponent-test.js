@@ -14,7 +14,7 @@ import '../../enable-all'; // must come before component is imported
 const blockClass = `${pkg.prefix}-example-component`;
 
 import { ExampleComponent } from '.';
-const name = 'ExampleComponent';
+const name = ExampleComponent.displayName;
 
 describe(name, () => {
   test('Renders an experimental-component if flag is enabled', () => {

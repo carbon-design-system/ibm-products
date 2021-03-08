@@ -39,7 +39,7 @@ const defaults = {
   },
 };
 
-const setAllOn = (flags, enabled) => {
+const setAll = (flags, enabled) => {
   for (const key in flags) {
     flags[key] = enabled;
   }

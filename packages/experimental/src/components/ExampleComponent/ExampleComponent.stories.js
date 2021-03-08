@@ -17,7 +17,7 @@ import { ExampleComponent } from '.';
 import styles from './_storybook.scss'; // import storybook which includes component and additional storybook styles
 
 export default {
-  title: `${storybookPrefix}/ExampleComponent`,
+  title: `${storybookPrefix}/${ExampleComponent.displayName}`,
   component: ExampleComponent,
   argTypes: {
     borderColor: { control: 'color' },

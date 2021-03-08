@@ -14,12 +14,13 @@ import { pkg } from '../../settings';
 import cx from 'classnames';
 
 const blockClass = `${pkg.prefix}-example-component`;
+const componentName = 'ExampleComponent';
 
-// import './example-component.scss'; // Do not import SCSS directly it will be rolled up separately.
+// NOTE: SCSS is not imported directly here: it is rolled up separately.
 
-export const ExampleComponent = !pkg.isComponentEnabled('ExampleComponent')
+export const ExampleComponent = !pkg.isComponentEnabled(componentName)
   ? // Return canary if not released or flag not set
-    () => <Canary component="ExampleComponent" />
+    () => <Canary component={componentName} />
   : // Main component code...
     ({
       borderColor,
@@ -75,6 +76,8 @@ export const ExampleComponent = !pkg.isComponentEnabled('ExampleComponent')
         </ButtonSet>
       );
     };
+
+ExampleComponent.displayName = componentName; // displayName is used in preference to function.name by React
 
 ExampleComponent.propTypes = {
   /**

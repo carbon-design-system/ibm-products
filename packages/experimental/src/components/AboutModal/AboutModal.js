@@ -64,16 +64,16 @@ export const AboutModal = ({
           onClose={onClose}
           open={open}
           ref={modalRef}>
-            <div className={`${pkgPrefix}-about-modal-product-logo`} >
+            <div className={`${pkg.prefix}-about-modal-product-logo`} >
               {logo}
             </div>
             <ModalHeader
               title={title}
-              titleClassName={`${pkgPrefix}-about-modal-title`}
+              titleClassName={`${pkg.prefix}-about-modal-title`}
             />
-            <ModalBody className={`${pkgPrefix}-about-modal-content`}>
+            <ModalBody className={`${pkg.prefix}-about-modal-content`}>
               {content}
-              <div className={`${pkgPrefix}-about-modal-links-container`}>
+              <div className={`${pkg.prefix}-about-modal-links-container`}>
                 {links &&
                   links.length > 0 &&
                   links.map((link, i) => (
@@ -99,7 +99,7 @@ export const AboutModal = ({
                 </p>
               ) : null}
               {hasScrollableContent && (
-                <div className={`${pkgPrefix}-about-modal-scroll-gradient`} />
+                <div className={`${pkg.prefix}-about-modal-scroll-gradient`} />
               )}
             </ModalBody>
             <ModalFooter>

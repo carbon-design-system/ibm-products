@@ -8,11 +8,14 @@
 import React from 'react';
 
 import { StatusIcon } from '.';
-
+import { pkg } from '../../settings';
+import { getStorybookPrefix } from '../../../config';
+const storybookPrefix = getStorybookPrefix(pkg, 'StatusIcon');
+import mdx from './StatusIcon.mdx';
 import styles from './_storybook.scss'; // import storybook which includes component and additional storybook styles
 
 export default {
-  title: 'Experimental/StatusIcon',
+  title: `${storybookPrefix}/StatusIcon`,
   component: StatusIcon,
   argTypes: {
     type: {
@@ -46,7 +49,12 @@ export default {
       },
     },
   },
-  parameters: { styles },
+  parameters: {
+    styles,
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 const defaultProps = {

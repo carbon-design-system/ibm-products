@@ -131,6 +131,7 @@ const icons = [
 ];
 
 import { pkg } from '../../settings';
+
 import cx from 'classnames';
 
 export const StatusIcon = ({ type, theme, size, className, ...rest }) => {

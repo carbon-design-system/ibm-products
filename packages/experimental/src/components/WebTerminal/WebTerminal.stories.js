@@ -9,9 +9,9 @@ import React, { useState, useCallback } from 'react';
 import WebTerminal from './WebTerminal';
 import { Navigation } from './preview-components';
 import mdx from './WebTerminal.mdx';
-import {
-  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
-} from '../../../config';
+import { pkg } from '../../settings';
+import { getStorybookPrefix } from '../../../config';
+const storybookPrefix = getStorybookPrefix(pkg, 'WebTerminal');
 
 import styles from './_storybook-styles.scss';
 

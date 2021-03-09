@@ -26,9 +26,9 @@ import { Lightning16, Bee24 } from '@carbon/icons-react';
 import { ActionBarItem } from '../ActionBar';
 import { PageActionItem } from './PageActionItem';
 import { PageHeader } from '.';
-import {
-  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
-} from '../../../config';
+import { pkg } from '../../settings';
+import { getStorybookPrefix } from '../../../config';
+const storybookPrefix = getStorybookPrefix(pkg, 'PageHeader');
 
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 

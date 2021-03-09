@@ -10,11 +10,11 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 
-import { pkgPrefix } from '../../global/js/settings';
+import { pkg } from '../../settings';
 
 import { ComposedModal } from 'carbon-components-react';
 
-const blockClass = `${pkgPrefix}-tearsheet`;
+const blockClass = `${pkg.prefix}-tearsheet`;
 
 const maxStackingDepth = 3;
 

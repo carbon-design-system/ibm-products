@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useState, useEffect } from 'react';
 import { Close16 as Close, Help16 as Help } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { pkgPrefix } from '../../global/js/settings';
+import { pkg } from '../../settings';
 
 const WebTerminal = ({
   open,
@@ -39,10 +39,10 @@ const WebTerminal = ({
     shouldRender && (
       <div
         className={cx([
-          `${pkgPrefix}-web-terminal`,
+          `${pkg.prefix}-web-terminal`,
           {
-            [`${pkgPrefix}-web-terminal--open`]: open,
-            [`${pkgPrefix}-web-terminal--closed`]: !open,
+            [`${pkg.prefix}-web-terminal--open`]: open,
+            [`${pkg.prefix}-web-terminal--closed`]: !open,
           },
           className,
         ])}
@@ -52,21 +52,21 @@ const WebTerminal = ({
           }`,
         }}
         onAnimationEnd={onAnimationEnd}>
-        <header className={`${pkgPrefix}-web-terminal__bar`}>
-          <div className={`${pkgPrefix}-web-terminal__actions`}>
+        <header className={`${pkg.prefix}-web-terminal__bar`}>
+          <div className={`${pkg.prefix}-web-terminal__actions`}>
             {showDocumentationLinks && (
               <button
                 type="button"
-                className={`${pkgPrefix}-web-terminal__bar-icon-container`}>
-                <Help className={`${pkgPrefix}-web-terminal__bar-icon`} />
-                <ul className={`${pkgPrefix}-web-terminal__bar-icon-dropdown`}>
+                className={`${pkg.prefix}-web-terminal__bar-icon-container`}>
+                <Help className={`${pkg.prefix}-web-terminal__bar-icon`} />
+                <ul className={`${pkg.prefix}-web-terminal__bar-icon-dropdown`}>
                   {documentationLinks.map(
                     ({ label, onClick, href = null, openInNewTab = true }) => (
                       <li
                         key={label}
-                        className={`${pkgPrefix}-web-terminal__bar-icon-dropdown-item`}>
+                        className={`${pkg.prefix}-web-terminal__bar-icon-dropdown-item`}>
                         <a
-                          className={`${pkgPrefix}-web-terminal__bar-icon-dropdown-link`}
+                          className={`${pkg.prefix}-web-terminal__bar-icon-dropdown-link`}
                           onClick={(event) =>
                             onDocumentationLinkClick(event, onClick)
                           }
@@ -84,15 +84,15 @@ const WebTerminal = ({
           </div>
           <button
             type="button"
-            className={`${pkgPrefix}-web-terminal__bar-icon-container`}
+            className={`${pkg.prefix}-web-terminal__bar-icon-container`}
             onClick={closeTerminal}
             onKeyDown={closeTerminal}>
             <Close
-              className={`${pkgPrefix}-web-terminal__bar-icon ${pkgPrefix}-web-terminal__bar-icon--close`}
+              className={`${pkg.prefix}-web-terminal__bar-icon ${pkg.prefix}-web-terminal__bar-icon--close`}
             />
           </button>
         </header>
-        <div className={`${pkgPrefix}-web-terminal__body`}>{children}</div>
+        <div className={`${pkg.prefix}-web-terminal__body`}>{children}</div>
       </div>
     )
   );

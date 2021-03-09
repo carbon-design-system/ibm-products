@@ -10,11 +10,11 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 
-import { pkgPrefix } from '../../global/js/settings';
+import { pkg } from '../../settings';
 
 import { Button } from 'carbon-components-react';
 
-const blockClass = `${pkgPrefix}-action-bar-item`;
+const blockClass = `${pkg.prefix}-action-bar-item`;
 
 export const ActionBarItem = ({ inOverflow, ...otherProps }) => {
   const className = cx([blockClass, otherProps.className]);

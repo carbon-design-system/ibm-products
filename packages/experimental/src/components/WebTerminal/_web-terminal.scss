@@ -1,6 +1,34 @@
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
+$web-terminal-width: 36.5rem;
+
+@keyframes webTerminalEntrance {
+  0% {
+    // stylelint-disable-next-line carbon/layout-token-use
+    transform: translateX(#{$web-terminal-width});
+    opacity: 0;
+  }
+  100% {
+    // stylelint-disable-next-line carbon/layout-token-use
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes webTerminalExit {
+  0% {
+    // stylelint-disable-next-line carbon/layout-token-use
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    // stylelint-disable-next-line carbon/layout-token-use
+    transform: translateX(#{$web-terminal-width});
+    opacity: 0;
+  }
+}
+
 /*
   The reason for not using theme tokens in the web terminal 
   component is because we want these colors to always be the same 
@@ -13,7 +41,7 @@
   position: fixed;
   top: $spacing-09;
   right: 0;
-  width: 36.5rem;
+  width: $web-terminal-width;
   height: calc(100vh - #{$spacing-09});
   background-color: $gray-100; /* stylelint-disable-line  */
 }

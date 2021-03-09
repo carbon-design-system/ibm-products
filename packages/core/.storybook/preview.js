@@ -10,8 +10,8 @@ import React, { useEffect } from 'react';
 import { withCarbonTheme } from '@carbon/storybook-addon-theme/react';
 
 // Only impacts on experimental stories
-import { pkg } from '../../experimental/src/settings';
-import '../../experimental/src/enable-all';
+import { pkg } from '@carbon/ibm-cloud-cognitive-experimental/es/settings';
+import '@carbon/ibm-cloud-cognitive-experimental/es/enable-all';
 
 import index from './index.scss';
 

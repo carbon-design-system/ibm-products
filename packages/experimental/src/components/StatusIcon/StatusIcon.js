@@ -130,7 +130,7 @@ const icons = [
   },
 ];
 
-import { pkgPrefix } from '../../global/js/settings';
+import { pkg } from '../../settings';
 import cx from 'classnames';
 
 export const StatusIcon = ({ type, theme, size, className, ...rest }) => {
@@ -139,8 +139,8 @@ export const StatusIcon = ({ type, theme, size, className, ...rest }) => {
   const [iconTheme, setIconTheme] = useState(null);
 
   const classNames = cx({
-    [`${pkgPrefix}-status-icon--${iconTheme}`]: iconTheme,
-    [`${pkgPrefix}-status-icon--${iconTheme}-${type}`]: type,
+    [`${pkg.prefix}-status-icon--${iconTheme}`]: iconTheme,
+    [`${pkg.prefix}-status-icon--${iconTheme}-${type}`]: type,
     className,
   });
 

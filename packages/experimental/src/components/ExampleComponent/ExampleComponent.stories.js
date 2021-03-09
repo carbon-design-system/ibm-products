@@ -7,21 +7,25 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import {
-  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
-} from '../../../config';
+import mdx from './ExampleComponent.mdx';
+import { pkg } from '../../settings';
+import { getStorybookPrefix } from '../../../config';
+const storybookPrefix = getStorybookPrefix(pkg, 'ExampleComponent');
 
 import { ExampleComponent } from '.';
 
 import styles from './_storybook.scss'; // import storybook which includes component and additional storybook styles
 
 export default {
-  title: `${storybookPrefix}/ExampleComponent`,
+  title: `${storybookPrefix}/${ExampleComponent.displayName}`,
   component: ExampleComponent,
   argTypes: {
     borderColor: { control: 'color' },
   },
   parameters: { styles },
+  docs: {
+    page: mdx,
+  },
 };
 
 const Template = (args) => {

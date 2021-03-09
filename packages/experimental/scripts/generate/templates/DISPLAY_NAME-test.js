@@ -8,9 +8,13 @@
 import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import React from 'react';
 
-import { DISPLAY_NAME } from '.';
+import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported
 
-const { name } = DISPLAY_NAME;
+const blockClass = `${pkg.prefix}--STYLE_NAME`;
+
+import { DISPLAY_NAME } from '.';
+const name = DISPLAY_NAME.displayName;
 
 describe(name, () => {
   test('has no accessibility violations', async () => {
@@ -18,6 +22,12 @@ describe(name, () => {
 
     await expect(container).toBeAccessible(name);
     await expect(container).toHaveNoAxeViolations();
+  });
+
+  test('Renders the component `DISPLAY_NAME` if flag is enabled', () => {
+    const { container } = render(<DISPLAY_NAME />);
+
+    expect(container.querySelector(`.${blockClass}`)).not.toBeNull();
   });
 
   it(`adds content for the ${name}`, () => {

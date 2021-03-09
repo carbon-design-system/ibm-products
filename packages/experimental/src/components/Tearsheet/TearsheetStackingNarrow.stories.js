@@ -9,12 +9,14 @@ import React, { useState } from 'react';
 
 import { action } from '@storybook/addon-actions';
 
-import { pkgPrefix } from '../../global/js/settings';
-import { storybookPrefixCanary as storybookPrefix } from '../../../config';
+import { pkg } from '../../settings';
 
 import { Button } from 'carbon-components-react';
 
 import { TearsheetNarrow } from './TearsheetNarrow';
+
+import { getStorybookPrefix } from '../../../config';
+const storybookPrefix = getStorybookPrefix(pkg, 'TearsheetNarrow');
 
 import styles from './_storybook-styles.scss';
 
@@ -196,7 +198,7 @@ export const StackedTearsheets = ({ buttonSet, ...args }) => {
 
   return (
     <>
-      <style>{`.${pkgPrefix}-tearsheet { opacity: 0 }`};</style>
+      <style>{`.${pkg.prefix}-tearsheet { opacity: 0 }`};</style>
       <div
         style={{
           display: 'flex',

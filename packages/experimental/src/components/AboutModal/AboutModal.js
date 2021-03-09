@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2020
+ * Copyright IBM Corp. 2021, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,9 +8,9 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import ReactResizeDetector from 'react-resize-detector';
+import classNames from 'classnames';
 import {
   ComposedModal,
-  Link,
   ModalHeader,
   ModalFooter,
   ModalBody,
@@ -18,20 +18,20 @@ import {
   Tab,
 } from 'carbon-components-react';
 
-import { pkgPrefix } from '../../global/js/settings';
+import { pkg } from '../../settings';
 
 export const AboutModal = ({
+  className,
+  content,
   copyrightText,
   legalText,
   links,
   logo,
-  productName,
-  versionNumber,
-  onRequestClose,
-  body,
+  onClose,
   open,
   technologiesUsed,
-  theme,
+  title,
+  versionNumber,
 }) => {
   const [hasScrollableContent, setHasScrollableContent] = useState();
   const modalRef = useRef();
@@ -54,113 +54,93 @@ export const AboutModal = ({
       */}
       <div>
         <ComposedModal
-          className={[
-            `${pkgPrefix}-about-modal`,
-            theme === 'dark'
-              ? `${pkgPrefix}-about-modal-dark-theme`
-              : `${pkgPrefix}-about-modal-light-theme`,
-            hasScrollableContent
-              ? `${pkgPrefix}-about-modal-scroll-enabled`
-              : '',
-            technologiesUsed && technologiesUsed.length > 0
-              ? `${pkgPrefix}-about-modal-with-tabs`
-              : '',
-          ].join(' ')}
+          className={classNames(`${pkg.prefix}-about-modal`, {
+            [`${pkg.prefix}-about-modal-scroll-enabled`]: hasScrollableContent,
+            [`${pkg.prefix}-about-modal-with-tabs`]:
+              technologiesUsed && technologiesUsed.length > 0,
+            [className]: className,
+          })}
+          onClose={onClose}
           open={open}
           ref={modalRef}>
-          <div className={`${pkgPrefix}-modal-content`}>
-            <img
-              alt="Product logo"
-              src={logo}
-              className={`${pkgPrefix}-about-modal-product-logo`}
-            />
-            <ModalHeader
-              title={productName}
-              titleClassName={`${pkgPrefix}-about-modal-title`}
-              closeModal={onRequestClose}
-            />
-            <ModalBody className={`${pkgPrefix}-about-modal-content`}>
-              {body}
-              <div className={`${pkgPrefix}-about-modal-links-container`}>
-                {links &&
-                  links.length > 0 &&
-                  links.map((link, i) => (
-                    <React.Fragment key={link.url}>
-                      <Link href={link.url}>{link.text}</Link>
-                      {i !== links.length - 1 && (
-                        <span
-                          className={`${pkgPrefix}-about-modal-link-divider`}>
-                          |
-                        </span>
-                      )}
-                    </React.Fragment>
-                  ))}
-              </div>
-              {legalText ? (
-                <p className={`${pkgPrefix}-about-modal-legal-text`}>
-                  {legalText}
-                </p>
-              ) : null}
-              {copyrightText ? (
-                <p className={`${pkgPrefix}-about-modal-copyright-text`}>
-                  {copyrightText}
-                </p>
-              ) : null}
-            </ModalBody>
-            <ModalFooter>
-              {technologiesUsed && technologiesUsed.length ? (
-                <Tabs
-                  className={`${pkgPrefix}-about-modal-tab-container`}
-                  light={theme === 'light'}
-                  aria-label="About modal technology used and version number tabs">
-                  <Tab
-                    id="about-modal-technologies-used-tab"
-                    label="Technologies used"
-                    aria-label="Technologies used tab">
-                    <div
-                      className={`${pkgPrefix}-about-modal-tab-content-flex`}>
-                      {technologiesUsed &&
-                        technologiesUsed.length &&
-                        technologiesUsed.map((tech) => (
-                          <img
-                            key={tech.alt}
-                            src={tech.src}
-                            alt={tech.alt}
-                            className={`${pkgPrefix}-about-modal-tech-used-item`}
-                          />
-                        ))}
-                    </div>
-                  </Tab>
-                  <Tab
-                    id="about-modal-version-number-tab"
-                    label="Version number"
-                    aria-label="Version number tab">
-                    <div
-                      className={`${pkgPrefix}-about-modal-tab-content-flex ${pkgPrefix}-about-modal-tab-content-version-flex`}>
-                      <p className={`${pkgPrefix}-about-modal-version-label`}>
-                        Version number
-                      </p>
-                      <p className={`${pkgPrefix}-about-modal-version-number`}>
-                        {versionNumber}
-                      </p>
-                    </div>
-                  </Tab>
-                </Tabs>
-              ) : (
-                <>
-                  <p className={`${pkgPrefix}-about-modal-version-label`}>
-                    Version number
-                  </p>
-                  <p className={`${pkgPrefix}-about-modal-version-number`}>
-                    {versionNumber}
-                  </p>
-                </>
-              )}
-            </ModalFooter>
+          <div className={`${pkg.prefix}-about-modal-product-logo`}>{logo}</div>
+          <ModalHeader
+            title={title}
+            titleClassName={`${pkg.prefix}-about-modal-title`}
+          />
+          <ModalBody className={`${pkg.prefix}-about-modal-content`}>
+            {content}
+            <div className={`${pkg.prefix}-about-modal-links-container`}>
+              {links &&
+                links.length > 0 &&
+                links.map((link, i) => (
+                  <React.Fragment key={i}>
+                    {link}
+                    {i !== links.length - 1 && (
+                      <span
+                        className={`${pkg.prefix}-about-modal-link-divider`}>
+                        |
+                      </span>
+                    )}
+                  </React.Fragment>
+                ))}
+            </div>
+            {legalText ? (
+              <p className={`${pkg.prefix}-about-modal-legal-text`}>
+                {legalText}
+              </p>
+            ) : null}
+            {copyrightText ? (
+              <p className={`${pkg.prefix}-about-modal-copyright-text`}>
+                {copyrightText}
+              </p>
+            ) : null}
             {hasScrollableContent && (
-              <div className={`${pkgPrefix}-about-modal-scroll-gradient`} />
+              <div className={`${pkg.prefix}-about-modal-scroll-gradient`} />
             )}
-          </div>
+          </ModalBody>
+          <ModalFooter>
+            {technologiesUsed && technologiesUsed.length ? (
+              <Tabs className={`${pkg.prefix}-about-modal-tab-container`}>
+                <Tab
+                  id="about-modal-technologies-used-tab"
+                  label="Technologies used">
+                  <div className={`${pkg.prefix}-about-modal-tab-content-flex`}>
+                    {technologiesUsed &&
+                      technologiesUsed.length &&
+                      technologiesUsed.map((tech) => (
+                        <img
+                          key={tech.alt}
+                          src={tech.src}
+                          alt={tech.alt}
+                          className={`${pkg.prefix}-about-modal-tech-used-item`}
+                        />
+                      ))}
+                  </div>
+                </Tab>
+                <Tab id="about-modal-version-number-tab" label="Version number">
+                  <div
+                    className={`${pkg.prefix}-about-modal-tab-content-flex ${pkg.prefix}-about-modal-tab-content-version-flex`}>
+                    <p className={`${pkg.prefix}-about-modal-version-label`}>
+                      Version number
+                    </p>
+                    <p className={`${pkg.prefix}-about-modal-version-number`}>
+                      {versionNumber}
+                    </p>
+                  </div>
+                </Tab>
+              </Tabs>
+            ) : (
+              <>
+                <p className={`${pkg.prefix}-about-modal-version-label`}>
+                  Version number
+                </p>
+                <p className={`${pkg.prefix}-about-modal-version-number`}>
+                  {versionNumber}
+                </p>
+              </>
+            )}
+          </ModalFooter>
         </ComposedModal>
       </div>
     </ReactResizeDetector>
@@ -169,43 +149,42 @@ export const AboutModal = ({
 
 AboutModal.propTypes = {
   /**
-   * About modal body content
+   * Specify an optional className to be applied to the modal root node
    */
-  body: PropTypes.string.isRequired,
+  className: PropTypes.string,
   /**
-   * About modal product copyright text
+   * A summary that appears immediately beneath the title, and might
+   * include information such as: version name, server name,
+   * user name, user role, browser version, browser OS etc.
    */
-  copyrightText: PropTypes.string,
+  content: PropTypes.node.isRequired,
   /**
-   * About modal product legal text
+   * Trademark and copyright information. Suggested format for copyright -
+   * "Copyright © 2018 Company".
    */
-  legalText: PropTypes.string,
+  copyrightText: PropTypes.node,
   /**
-   * About modal product links
+   * Text providing legal information.
    */
-  links: PropTypes.arrayOf(
-    PropTypes.shape({
-      text: PropTypes.string,
-      url: PropTypes.string,
-    })
-  ),
+  legalText: PropTypes.node,
   /**
-   * About modal product logo
+   * An array of Carbon `Link` components that contain links to additional
+   * information.
    */
-  logo: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  links: PropTypes.arrayOf(PropTypes.element),
   /**
-   * About modal close function
+   * A visual symbol used to represent the product.
    */
-  onRequestClose: PropTypes.func.isRequired,
+  logo: PropTypes.node.isRequired,
   /**
-   * About modal is open
+   * Specifies an optional handler which is called when the AboutModal
+   * is closed. Returning `false` prevents the AboutModal from closing.
+   */
+  onClose: PropTypes.func,
+  /**
+   * Specifies whether the AboutModal is open or not.
    */
   open: PropTypes.bool.isRequired,
-  /**
-   * About modal product name
-   */
-  productName: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
-    .isRequired,
   /**
    * About modal list of technologies
    */
@@ -216,20 +195,11 @@ AboutModal.propTypes = {
     })
   ),
   /**
-   * About modal product name
+   * The title of the AboutModal is usually the product or service name.
    */
-  theme: PropTypes.oneOf(['light', 'dark']),
+  title: PropTypes.node.isRequired,
   /**
-   * About modal product version number
+   * The version number of the product or service, etc.
    */
   versionNumber: PropTypes.string.isRequired,
-};
-
-AboutModal.defaultProps = {
-  copyrightText: '',
-  legalText: '',
-  links: [],
-  onRequestClose: () => {},
-  technologiesUsed: [],
-  theme: 'dark',
 };

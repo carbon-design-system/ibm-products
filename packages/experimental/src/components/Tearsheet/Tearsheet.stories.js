@@ -9,13 +9,14 @@ import React, { useState } from 'react';
 
 import { action } from '@storybook/addon-actions';
 
-import { pkgPrefix } from '../../global/js/settings';
-import { storybookPrefixCanary as storybookPrefix } from '../../../config';
-
+import { pkg } from '../../settings';
 import { Button, Tab, Tabs } from 'carbon-components-react';
 
 import { Tearsheet } from './Tearsheet';
 import { TearsheetNarrow } from './TearsheetNarrow';
+
+import { getStorybookPrefix } from '../../../config';
+const storybookPrefix = getStorybookPrefix(pkg, 'Tearsheet');
 
 import styles from './_storybook-styles.scss';
 
@@ -230,7 +231,7 @@ const Template = ({ buttonSet, ...args }) => {
 
   return (
     <>
-      <style>{`.${pkgPrefix}-tearsheet { opacity: 0 }`};</style>
+      <style>{`.${pkg.prefix}-tearsheet { opacity: 0 }`};</style>
       <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
       <Tearsheet
         className={className}

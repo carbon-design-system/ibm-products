@@ -11,7 +11,7 @@ import {
   selectorTabbable,
 } from './keyboardNavigation';
 
-import { carbonPrefix } from '../settings';
+import { carbon } from '../../../settings';
 
 /**
  * @param {Node} node A DOM node.
@@ -21,8 +21,8 @@ import { carbonPrefix } from '../settings';
 function elementOrParentIsFloatingMenu(
   node,
   selectorsFloatingMenus = [
-    `.${carbonPrefix}--overflow-menu-options`,
-    `.${carbonPrefix}--tooltip`,
+    `.${carbon.prefix}--overflow-menu-options`,
+    `.${carbon.prefix}--tooltip`,
     '.flatpickr-calendar',
   ]
 ) {

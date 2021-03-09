@@ -5,8 +5,33 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-describe('example-component', () => {
-  it('should work', () => {
-    expect(true).toBe(true);
-  });
+// import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+// import React from 'react';
+
+import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import React from 'react';
+import { pkg } from '../settings';
+
+import * as components from '..';
+const name = 'export checks';
+const canaryClass = `${pkg.prefix}-canary`;
+
+describe(name, () => {
+  for (const key in components) {
+    if (key.charAt(0) === key.charAt(0).toUpperCase()) {
+      const TestComponent = components[key];
+
+      if (!pkg.isComponentEnabled(key)) {
+        // We only check unreleased components render a canary
+        // Non-canary components are tested elsewhere.
+        it(`renders a canary by default for "${key}"`, () => {
+          // TODO: remove this test and check all components
+          if (key !== 'ExampleComponent') return;
+
+          const { container } = render(<TestComponent />);
+          expect(container.querySelector(`.${canaryClass}`)).not.toBeNull();
+        });
+      }
+    }
+  }
 });

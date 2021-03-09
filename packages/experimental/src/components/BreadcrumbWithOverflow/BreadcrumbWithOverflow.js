@@ -18,13 +18,13 @@ import {
 } from 'carbon-components-react';
 import { OverflowMenuHorizontal32 } from '@carbon/icons-react';
 
-import { pkgPrefix, carbonPrefix } from '../../global/js/settings';
+import { pkg, carbon } from '../../settings';
 
 import ReactResizeDetector from 'react-resize-detector';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import unwrapIfFragment from '../../global/js/utils/unwrap-if-fragment';
 
-const blockClass = `${pkgPrefix}-breadcrumb-with-overflow`;
+const blockClass = `${pkg.prefix}-breadcrumb-with-overflow`;
 
 export const BreadcrumbWithOverflow = ({
   children,
@@ -49,7 +49,7 @@ export const BreadcrumbWithOverflow = ({
           menuOffset={{ top: 10, left: 59 }} // TODO: REMOVE borrowed from https://github.com/carbon-design-system/carbon/pull/7085
           renderIcon={OverflowMenuHorizontal32}
           className={`${blockClass}--overflow-menu`}
-          menuOptionsClass={`${carbonPrefix}--breadcrumb-menu-options`} // TODO: REMOVE borrowed from https://github.com/carbon-design-system/carbon/pull/7085
+          menuOptionsClass={`${carbon.prefix}--breadcrumb-menu-options`} // TODO: REMOVE borrowed from https://github.com/carbon-design-system/carbon/pull/7085
         >
           {
             // eslint-disable-next-line react/prop-types
@@ -136,15 +136,20 @@ export const BreadcrumbWithOverflow = ({
       i++
     ) {
       child = childArray[i];
-      newDisplayedBreadcrumbItems.push(
-        React.cloneElement(child, {
-          className: cx([
-            child.props.className,
-            `${blockClass}--displayed-breadcrumb`,
-          ]),
-          key: `displayed-breadcrumb-${internalId.current}-${i}`,
-        })
-      );
+      const cloneProps = {
+        className: cx([
+          child.props.className,
+          `${blockClass}--displayed-breadcrumb`,
+        ]),
+        key: `displayed-breadcrumb-${internalId.current}-${i}`,
+      };
+
+      if (i + 1 === childArray.length && displayCount === 1) {
+        // likely truncated add title
+        cloneProps.title = child.props.children;
+      }
+
+      newDisplayedBreadcrumbItems.push(React.cloneElement(child, cloneProps));
     }
 
     setDisplayedBreadcrumbItems(newDisplayedBreadcrumbItems);
@@ -174,7 +179,7 @@ export const BreadcrumbWithOverflow = ({
 
       if (sizingContainerRef.current) {
         const sizingBreadcrumbItems = sizingContainerRef.current.querySelectorAll(
-          `.${carbonPrefix}--breadcrumb-item`
+          `.${carbon.prefix}--breadcrumb-item`
         );
 
         const breadcrumbWidthsIncludingMargin = [];

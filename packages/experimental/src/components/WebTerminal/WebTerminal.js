@@ -1,8 +1,8 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState, useEffect } from 'react';
 import { Close16 as Close, Help16 as Help } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { pkgPrefix } from '../../global/js/settings';
+import { pkg } from '../../settings';
 
 const WebTerminal = ({
   open,
@@ -11,6 +11,7 @@ const WebTerminal = ({
   children,
   className,
 }) => {
+  const [shouldRender, setRender] = useState(open);
   /**
    * Triggers whenever the user clicks on an item in the help dropdown
    */
@@ -26,60 +27,74 @@ const WebTerminal = ({
     documentationLinks,
   ]);
 
-  if (!open) return null;
+  useEffect(() => {
+    if (open) setRender(true);
+  }, [open]);
+
+  const onAnimationEnd = () => {
+    if (!open) setRender(false);
+  };
 
   return (
-    <div
-      className={cx([
-        `${pkgPrefix}-web-terminal`,
-        {
-          [`${pkgPrefix}-web-terminal--open`]: open,
-          [`${pkgPrefix}-web-terminal--closed`]: !open,
-        },
-        className,
-      ])}>
-      <header className={`${pkgPrefix}-web-terminal__bar`}>
-        <div className={`${pkgPrefix}-web-terminal__actions`}>
-          {showDocumentationLinks && (
-            <button
-              type="button"
-              className={`${pkgPrefix}-web-terminal__bar-icon-container`}>
-              <Help className={`${pkgPrefix}-web-terminal__bar-icon`} />
-              <ul className={`${pkgPrefix}-web-terminal__bar-icon-dropdown`}>
-                {documentationLinks.map(
-                  ({ label, onClick, href = null, openInNewTab = true }) => (
-                    <li
-                      key={label}
-                      className={`${pkgPrefix}-web-terminal__bar-icon-dropdown-item`}>
-                      <a
-                        className={`${pkgPrefix}-web-terminal__bar-icon-dropdown-link`}
-                        onClick={(event) =>
-                          onDocumentationLinkClick(event, onClick)
-                        }
-                        href={href}
-                        target={openInNewTab ? '_blank' : null}
-                        rel="noreferrer noopener">
-                        {label}
-                      </a>
-                    </li>
-                  )
-                )}
-              </ul>
-            </button>
-          )}
-        </div>
-        <button
-          type="button"
-          className={`${pkgPrefix}-web-terminal__bar-icon-container`}
-          onClick={closeTerminal}
-          onKeyDown={closeTerminal}>
-          <Close
-            className={`${pkgPrefix}-web-terminal__bar-icon ${pkgPrefix}-web-terminal__bar-icon--close`}
-          />
-        </button>
-      </header>
-      <div className={`${pkgPrefix}-web-terminal__body`}>{children}</div>
-    </div>
+    shouldRender && (
+      <div
+        className={cx([
+          `${pkg.prefix}-web-terminal`,
+          {
+            [`${pkg.prefix}-web-terminal--open`]: open,
+            [`${pkg.prefix}-web-terminal--closed`]: !open,
+          },
+          className,
+        ])}
+        style={{
+          animation: `${
+            open ? 'webTerminalEntrance 250ms' : 'webTerminalExit 250ms'
+          }`,
+        }}
+        onAnimationEnd={onAnimationEnd}>
+        <header className={`${pkg.prefix}-web-terminal__bar`}>
+          <div className={`${pkg.prefix}-web-terminal__actions`}>
+            {showDocumentationLinks && (
+              <button
+                type="button"
+                className={`${pkg.prefix}-web-terminal__bar-icon-container`}>
+                <Help className={`${pkg.prefix}-web-terminal__bar-icon`} />
+                <ul className={`${pkg.prefix}-web-terminal__bar-icon-dropdown`}>
+                  {documentationLinks.map(
+                    ({ label, onClick, href = null, openInNewTab = true }) => (
+                      <li
+                        key={label}
+                        className={`${pkg.prefix}-web-terminal__bar-icon-dropdown-item`}>
+                        <a
+                          className={`${pkg.prefix}-web-terminal__bar-icon-dropdown-link`}
+                          onClick={(event) =>
+                            onDocumentationLinkClick(event, onClick)
+                          }
+                          href={href}
+                          target={openInNewTab ? '_blank' : null}
+                          rel="noreferrer noopener">
+                          {label}
+                        </a>
+                      </li>
+                    )
+                  )}
+                </ul>
+              </button>
+            )}
+          </div>
+          <button
+            type="button"
+            className={`${pkg.prefix}-web-terminal__bar-icon-container`}
+            onClick={closeTerminal}
+            onKeyDown={closeTerminal}>
+            <Close
+              className={`${pkg.prefix}-web-terminal__bar-icon ${pkg.prefix}-web-terminal__bar-icon--close`}
+            />
+          </button>
+        </header>
+        <div className={`${pkg.prefix}-web-terminal__body`}>{children}</div>
+      </div>
+    )
   );
 };
 

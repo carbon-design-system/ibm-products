@@ -19,6 +19,7 @@ const defaults = {
     EmptyState: false,
     ExampleComponent: false,
     ExportModal: false,
+    HTTPErrors: false,
     ImportModal: false,
     ModifiedTabs: false,
     Notifications: false,

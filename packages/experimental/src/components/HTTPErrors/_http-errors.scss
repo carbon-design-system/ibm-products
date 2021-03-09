@@ -1,0 +1,42 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '@carbon/import-once/scss/import-once';
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+@import 'carbon-components/scss/components/link/link';
+
+// TODO: @import(s) of all Carbon component styles used by HTTPErrors
+
+@include exports($name: http-errors) {
+  /// @type String
+  /// @access private
+  $block-class: #{$pkg-prefix}--http-errors;
+
+  .#{$block-class} {
+    // TODO: Styles.
+    .#{$block-class}-error-code-label {
+      @include carbon--type-style('productive-heading-02');
+
+      margin-bottom: $spacing-02;
+    }
+    .#{$block-class}-title {
+      @include carbon--type-style('productive-heading-05');
+
+      margin-bottom: $spacing-04;
+    }
+    .#{$block-class}-description {
+      @include carbon--type-style('body-short-01');
+
+      margin-bottom: $spacing-06;
+    }
+    .#{$block-class}-link {
+      display: block;
+      margin-bottom: $spacing-02;
+    }
+  }
+}

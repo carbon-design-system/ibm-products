@@ -135,20 +135,30 @@ import cx from 'classnames';
 
 export const StatusIcon = ({ type, theme, size, className, ...rest }) => {
   const [icon, setIcon] = useState([]);
+  const [iconSize, setIconSize] = useState('');
+  const [iconTheme, setIconTheme] = useState(null);
 
   const classNames = cx({
-    [`${pkgPrefix}-status-icon--${theme}`]: theme,
-    [`${pkgPrefix}-status-icon--${theme}-${type}`]: type,
+    [`${pkgPrefix}-status-icon--${iconTheme}`]: iconTheme,
+    [`${pkgPrefix}-status-icon--${iconTheme}-${type}`]: type,
     className,
   });
 
   useEffect(() => {
-    setIcon(...icons.filter((icon) => icon.type === type));
+    type && setIcon(...icons.filter((icon) => icon.type === type));
   }, [type]);
+
+  useEffect(() => {
+    size && setIconSize(size);
+  }, [size]);
+
+  useEffect(() => {
+    theme && setIconTheme(theme);
+  }, [theme]);
 
   return (
     <div className={classNames} {...rest}>
-      {size ? icon[`${size}`] : icon.small}
+      {icon && iconTheme && iconSize ? icon[`${iconSize}`] : null}
     </div>
   );
 };

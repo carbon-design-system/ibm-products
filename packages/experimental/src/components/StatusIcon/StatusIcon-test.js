@@ -12,18 +12,17 @@ import { StatusIcon } from '.';
 
 const { name } = StatusIcon;
 
+const testProps = {
+  type: 'fatal',
+  size: 'small',
+  theme: 'light',
+};
+
 describe(name, () => {
   test('has no accessibility violations', async () => {
-    const { container } = render(<StatusIcon>{name}</StatusIcon>);
-
+    const { container } = render(<StatusIcon {...testProps} />);
     await expect(container).toBeAccessible(name);
     await expect(container).toHaveNoAxeViolations();
-  });
-
-  it(`adds content for the ${name}`, () => {
-    expect(
-      render(<StatusIcon>{name}</StatusIcon>).getByText(name)
-    ).toBeInTheDocument();
   });
 
   test('adds a class to the containing node', () => {
@@ -31,7 +30,7 @@ describe(name, () => {
 
     expect(
       render(
-        <StatusIcon className={className}>{name}</StatusIcon>
+        <StatusIcon {...testProps} className={className} />
       ).container.querySelector(`.${className}`)
     ).toBeInTheDocument();
   });
@@ -41,7 +40,7 @@ describe(name, () => {
 
     expect(
       render(
-        <StatusIcon data-testid={dataTestId}>{name}</StatusIcon>
+        <StatusIcon {...testProps} data-testid={dataTestId} />
       ).getByTestId(dataTestId)
     ).toBeInTheDocument();
   });

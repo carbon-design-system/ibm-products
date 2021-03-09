@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.21.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.20.14...@carbon/ibm-cloud-cognitive-experimental@0.21.0) (2021-03-09)
+
+
+### Features
+
+* **WebTerminal:** add entrance/exit animation to panel ([#412](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/412)) ([1fe152c](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/1fe152cd14e82fb9e698acc4728da5bc65ed13ae))
+
+
+
+
+
 ## [0.20.14](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.20.13...@carbon/ibm-cloud-cognitive-experimental@0.20.14) (2021-03-09)
 
 

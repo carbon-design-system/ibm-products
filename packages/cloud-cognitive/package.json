@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive",
   "description": "Carbon for Cloud & Cognitive common UI components",
-  "version": "0.1.87",
+  "version": "0.1.88",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -40,9 +40,9 @@
   },
   "dependencies": {
     "@carbon/ibm-cloud-cognitive-experimental": "^0.21.1",
-    "@carbon/ibm-cloud-cognitive-security": "^0.4.7"
+    "@carbon/ibm-cloud-cognitive-security": "^0.4.8"
   },
   "devDependencies": {
-    "@carbon/ibm-cloud-cognitive-core": "^0.6.8"
+    "@carbon/ibm-cloud-cognitive-core": "^0.6.9"
   }
 }

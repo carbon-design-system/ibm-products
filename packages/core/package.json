@@ -17,7 +17,7 @@
     "carbon for cloud & cognitive"
   ],
   "scripts": {
-    "build:storybook": "build-storybook",
+    "build": "build-storybook",
     "start": "start-storybook -p 3000"
   },
   "dependencies": {

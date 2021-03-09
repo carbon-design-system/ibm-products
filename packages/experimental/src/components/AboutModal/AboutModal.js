@@ -203,11 +203,3 @@ AboutModal.propTypes = {
    */
   versionNumber: PropTypes.string.isRequired,
 };
-
-AboutModal.defaultProps = {
-  copyrightText: '',
-  legalText: '',
-  links: [],
-  onClose: () => {},
-  technologiesUsed: [],
-};

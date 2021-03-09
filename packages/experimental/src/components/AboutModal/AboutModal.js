@@ -53,26 +53,19 @@ export const AboutModal = ({
             {links &&
               links.length > 0 &&
               links.map((link, i) => (
-                <React.Fragment key={i}>
-                  {link}
-                  {i !== links.length - 1 && (
-                    <span className={`${pkg.prefix}-about-modal-link-divider`}>
-                      |
-                    </span>
-                  )}
-                </React.Fragment>
+                <React.Fragment key={i}>{link}</React.Fragment>
               ))}
           </div>
-          {legalText ? (
+          {legalText && (
             <p className={`${pkg.prefix}-about-modal-legal-text`}>
               {legalText}
             </p>
-          ) : null}
-          {copyrightText ? (
+          )}
+          {copyrightText && (
             <p className={`${pkg.prefix}-about-modal-copyright-text`}>
               {copyrightText}
             </p>
-          ) : null}
+          )}
           <div className={`${pkg.prefix}-about-modal-scroll-gradient`} />
         </div>
       </ModalBody>

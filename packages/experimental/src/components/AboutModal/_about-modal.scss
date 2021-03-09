@@ -51,8 +51,10 @@
   .#{$pkg-prefix}-about-modal-links-container {
     margin-top: $spacing-05;
   }
-  .#{$pkg-prefix}-about-modal-link-divider {
-    margin: 0 $spacing-03;
+  .#{$pkg-prefix}-about-modal-links-container a + a {
+    margin-left: $spacing-03;
+    padding-left: $spacing-03;
+    border-left: 1px solid $text-01;
   }
   .#{$pkg-prefix}-about-modal-scroll-gradient {
     position: absolute;

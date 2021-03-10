@@ -4,10 +4,9 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import React, { useState, useEffect } from 'react';
 import {
   Misuse16,
   Misuse20,
@@ -51,7 +50,6 @@ import {
   Time32,
 } from '@carbon/icons-react';
 import { pkg } from '../../settings';
-import { Canary } from '../_Canary';
 
 const icons = [
   {
@@ -133,40 +131,37 @@ const icons = [
   },
 ];
 
-const componentName = 'StatusIcon';
 const blockClass = `${pkg.prefix}-status-icon`;
 
-export const StatusIcon = !pkg.isComponentEnabled(componentName)
-  ? () => <Canary component={componentName} />
-  : ({ type, theme, size, className, ...rest }) => {
-      const [icon, setIcon] = useState([]);
-      const [iconSize, setIconSize] = useState('');
-      const [iconTheme, setIconTheme] = useState(null);
+export const StatusIcon = ({ type, theme, size, className, ...rest }) => {
+  const [icon, setIcon] = useState([]);
+  const [iconSize, setIconSize] = useState('');
+  const [iconTheme, setIconTheme] = useState(null);
 
-      const classNames = cx({
-        [`${blockClass}--${iconTheme}`]: iconTheme,
-        [`${blockClass}--${iconTheme}-${type}`]: type,
-        className,
-      });
+  const classNames = cx({
+    [`${blockClass}--${iconTheme}`]: iconTheme,
+    [`${blockClass}--${iconTheme}-${type}`]: type,
+    className,
+  });
 
-      useEffect(() => {
-        type && setIcon(...icons.filter((icon) => icon.type === type));
-      }, [type]);
+  useEffect(() => {
+    type && setIcon(...icons.filter((icon) => icon.type === type));
+  }, [type]);
 
-      useEffect(() => {
-        size && setIconSize(size);
-      }, [size]);
+  useEffect(() => {
+    size && setIconSize(size);
+  }, [size]);
 
-      useEffect(() => {
-        theme && setIconTheme(theme);
-      }, [theme]);
+  useEffect(() => {
+    theme && setIconTheme(theme);
+  }, [theme]);
 
-      return (
-        <div className={classNames} {...rest}>
-          {icon && iconTheme && iconSize ? icon[`${iconSize}`] : null}
-        </div>
-      );
-    };
+  return (
+    <div className={classNames} {...rest}>
+      {icon && iconTheme && iconSize ? icon[`${iconSize}`] : null}
+    </div>
+  );
+};
 
 StatusIcon.displayName = 'StatusIcon';
 

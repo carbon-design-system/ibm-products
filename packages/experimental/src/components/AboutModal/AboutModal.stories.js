@@ -16,10 +16,10 @@ const storybookPrefix = getStorybookPrefix(pkg, 'AboutModal');
 import { AboutModal } from './AboutModal';
 import mdx from './AboutModal.mdx';
 
-import ExampleLogo from './_resources/example-logo.svg';
-import ansibleLogo from './_resources/ansible-logo.png';
-import grafanaLogo from './_resources/grafana-logo.png';
-import jsLogo from './_resources/js-logo.png';
+import ExampleLogo from './_story-assets/example-logo.svg';
+import ansibleLogo from './_story-assets/ansible-logo.png';
+import grafanaLogo from './_story-assets/grafana-logo.png';
+import jsLogo from './_story-assets/js-logo.png';
 
 import styles from './_index.scss';
 

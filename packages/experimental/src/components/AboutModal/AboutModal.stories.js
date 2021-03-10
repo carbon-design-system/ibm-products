@@ -9,8 +9,6 @@ import React, { useState } from 'react';
 
 import { Button, Link } from 'carbon-components-react';
 
-import mdx from './AboutModal.mdx';
-
 import ExampleLogo from './example-logo.svg';
 import ansibleLogo from './technologyUsedLogos/ansible_logo.png';
 import grafanaLogo from './technologyUsedLogos/grafana_logo.png';
@@ -21,6 +19,7 @@ import { getStorybookPrefix } from '../../../config';
 const storybookPrefix = getStorybookPrefix(pkg, 'AboutModal');
 
 import { AboutModal } from './AboutModal';
+import mdx from './AboutModal.mdx';
 
 import styles from './_index.scss';
 

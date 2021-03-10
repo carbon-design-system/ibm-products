@@ -6,6 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import React, { useState, useEffect } from 'react';
 import {
   Misuse16,
@@ -49,6 +50,8 @@ import {
   Time24,
   Time32,
 } from '@carbon/icons-react';
+import { pkg } from '../../settings';
+import { Canary } from '../_Canary';
 
 const icons = [
   {
@@ -130,39 +133,40 @@ const icons = [
   },
 ];
 
-import { pkg } from '../../settings';
+const componentName = 'StatusIcon';
+const blockClass = `${pkg.prefix}-status-icon`;
 
-import cx from 'classnames';
+export const StatusIcon = !pkg.isComponentEnabled(componentName)
+  ? () => <Canary component={componentName} />
+  : ({ type, theme, size, className, ...rest }) => {
+      const [icon, setIcon] = useState([]);
+      const [iconSize, setIconSize] = useState('');
+      const [iconTheme, setIconTheme] = useState(null);
 
-export const StatusIcon = ({ type, theme, size, className, ...rest }) => {
-  const [icon, setIcon] = useState([]);
-  const [iconSize, setIconSize] = useState('');
-  const [iconTheme, setIconTheme] = useState(null);
+      const classNames = cx({
+        [`${blockClass}--${iconTheme}`]: iconTheme,
+        [`${blockClass}--${iconTheme}-${type}`]: type,
+        className,
+      });
 
-  const classNames = cx({
-    [`${pkg.prefix}-status-icon--${iconTheme}`]: iconTheme,
-    [`${pkg.prefix}-status-icon--${iconTheme}-${type}`]: type,
-    className,
-  });
+      useEffect(() => {
+        type && setIcon(...icons.filter((icon) => icon.type === type));
+      }, [type]);
 
-  useEffect(() => {
-    type && setIcon(...icons.filter((icon) => icon.type === type));
-  }, [type]);
+      useEffect(() => {
+        size && setIconSize(size);
+      }, [size]);
 
-  useEffect(() => {
-    size && setIconSize(size);
-  }, [size]);
+      useEffect(() => {
+        theme && setIconTheme(theme);
+      }, [theme]);
 
-  useEffect(() => {
-    theme && setIconTheme(theme);
-  }, [theme]);
-
-  return (
-    <div className={classNames} {...rest}>
-      {icon && iconTheme && iconSize ? icon[`${iconSize}`] : null}
-    </div>
-  );
-};
+      return (
+        <div className={classNames} {...rest}>
+          {icon && iconTheme && iconSize ? icon[`${iconSize}`] : null}
+        </div>
+      );
+    };
 
 StatusIcon.displayName = 'StatusIcon';
 

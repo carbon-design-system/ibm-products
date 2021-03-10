@@ -184,10 +184,3 @@ StatusIcon.propTypes = {
     'pending',
   ]).isRequired,
 };
-
-StatusIcon.defaultProps = {
-  className: null,
-  type: null,
-  theme: null,
-  size: null,
-};

@@ -1,61 +1,44 @@
 import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
 import { AboutModal } from './AboutModal';
 
-# About screen modal
+# About modal
 
-[CD&AI About screen modal usage guidelines](https://pages.github.ibm.com/cdai-design/pal/patterns/empty-state/usage/)
-&nbsp;|&nbsp;
+[About modal usage guidelines](https://pages.github.ibm.com/cdai-design/pal/patterns/about-modal/usage)
 
 ## Overview
 
-The `AboutModal` modal component provides a way to communicate product
-information to users and sits on top of an application’s main window.
+The `AboutModal` component provides a way to communicate product information to
+users. It is triggered by a user’s action, appears on top of the main page
+content, and is persistent until dismissed. The purpose of this modal should be
+immediately apparent to the user, with a clear and obvious path to completion.
 
-The `AboutModal` is triggered by a user’s action which appears on top of the
-main page content, and is persistent until dismissed. The purpose of this modal
-should be immediately apparent to the user, with a clear and obvious path to
-completion.
-
-### Default About screen modal
+## Usage
 
 <Preview>
-  <Story id="cloud-cognitive-canary-aboutmodal--default" />
+  <Story id="cloud-cognitive-canary-aboutmodal--with-all-props-set" />
 </Preview>
 
-### About screen modal with links
+### Overriding the Carbon theme
+
+The design recommendation is to use a dark theme for the AboutModal if the
+application is currently using a light theme, and vice versa. The theme applied
+to the AboutModal can easily be customized as follows:
+
+In SCSS:
+
+```SCSS
+  .exp-about-modal {
+    @include carbon--theme(
+      $theme: $carbon--theme--g90
+    );
+  }
+```
+
+Alternatively, the required Carbon theme can be set as above in a custom CSS
+class which is then applied to the AboutModal using the `className` prop.
 
 <Preview>
-  <Story id="xcloud-cognitive-canary-aboutmodal--with-links" />
-</Preview>
-
-### About screen modal with links and legal text
-
-<Preview>
-  <Story id="xcloud-cognitive-canary-aboutmodal--with-links-and-legal-text" />
-</Preview>
-
-### About screen modal with links, legal, and copyright text
-
-<Preview>
-  <Story id="xcloud-cognitive-canary-aboutmodal--with-links-and-legal-and-copyright-text" />
-</Preview>
-
-### About screen modal with technology used tab
-
-<Preview>
-  <Story id="xcloud-cognitive-canary-aboutmodal--with-technology-used-tab" />
-</Preview>
-
-### About screen modal with light theme
-
-<Preview>
-  <Story id="xcloud-cognitive-canary-aboutmodal--with-light-theme" />
-</Preview>
-
-### About screen modal with scrollable content
-
-<Preview>
-  <Story id="xcloud-cognitive-canary-aboutmodal--with-scroll" />
+  <Story id="cloud-cognitive-canary-aboutmodal--with-dark-theme" />
 </Preview>
 
 ## Component API

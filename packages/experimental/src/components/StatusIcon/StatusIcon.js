@@ -51,85 +51,74 @@ import {
 } from '@carbon/icons-react';
 import { pkg } from '../../settings';
 
-const icons = [
-  {
-    type: 'fatal',
-    small: <Misuse16 />,
-    medium: <Misuse20 />,
-    large: <Misuse24 />,
-    'x-large': <Misuse32 />,
+const icons = {
+  fatal: {
+    small: Misuse16,
+    medium: Misuse20,
+    large: Misuse24,
+    'x-large': Misuse32,
   },
-  {
-    type: 'critical',
-    small: <ErrorFilled16 />,
-    medium: <ErrorFilled20 />,
-    large: <ErrorFilled24 />,
-    'x-large': <ErrorFilled32 />,
+  critical: {
+    small: ErrorFilled16,
+    medium: ErrorFilled20,
+    large: ErrorFilled24,
+    'x-large': ErrorFilled32,
   },
-  {
-    type: 'major-warning',
-    small: <WarningAltInvertedFilled16 />,
-    medium: <WarningAltInvertedFilled20 />,
-    large: <WarningAltInvertedFilled24 />,
-    'x-large': <WarningAltInvertedFilled32 />,
+  'major-warning': {
+    small: WarningAltInvertedFilled16,
+    medium: WarningAltInvertedFilled20,
+    large: WarningAltInvertedFilled24,
+    'x-large': WarningAltInvertedFilled32,
   },
-  {
-    type: 'minor-warning',
-    small: <WarningAltFilled16 />,
-    medium: <WarningAltFilled20 />,
-    large: <WarningAltFilled24 />,
-    'x-large': <WarningAltFilled32 />,
+  'minor-warning': {
+    small: WarningAltFilled16,
+    medium: WarningAltFilled20,
+    large: WarningAltFilled24,
+    'x-large': WarningAltFilled32,
   },
-  {
-    type: 'undefined',
-    small: <UndefinedFilled16 />,
-    medium: <UndefinedFilled20 />,
-    large: <UndefinedFilled24 />,
-    'x-large': <UndefinedFilled32 />,
+  undefined: {
+    small: UndefinedFilled16,
+    medium: UndefinedFilled20,
+    large: UndefinedFilled24,
+    'x-large': UndefinedFilled32,
   },
-  {
-    type: 'unknown',
-    small: <UnknownFilled16 />,
-    medium: <UnknownFilled20 />,
-    large: <UnknownFilled24 />,
-    'x-large': <UnknownFilled32 />,
+  unknown: {
+    small: UnknownFilled16,
+    medium: UnknownFilled20,
+    large: UnknownFilled24,
+    'x-large': UnknownFilled32,
   },
-  {
-    type: 'normal',
-    small: <CheckmarkFilled16 />,
-    medium: <CheckmarkFilled20 />,
-    large: <CheckmarkFilled24 />,
-    'x-large': <CheckmarkFilled32 />,
+  normal: {
+    small: CheckmarkFilled16,
+    medium: CheckmarkFilled20,
+    large: CheckmarkFilled24,
+    'x-large': CheckmarkFilled32,
   },
-  {
-    type: 'info',
-    small: <InformationSquareFilled16 />,
-    medium: <InformationSquareFilled20 />,
-    large: <InformationSquareFilled24 />,
-    'x-large': <InformationSquareFilled32 />,
+  info: {
+    small: InformationSquareFilled16,
+    medium: InformationSquareFilled20,
+    large: InformationSquareFilled24,
+    'x-large': InformationSquareFilled32,
   },
-  {
-    type: 'in-progress',
-    small: <Renew16 />,
-    medium: <Renew20 />,
-    large: <Renew24 />,
-    'x-large': <Renew32 />,
+  'in-progress': {
+    small: Renew16,
+    medium: Renew20,
+    large: Renew24,
+    'x-large': Renew32,
   },
-  {
-    type: 'running',
-    small: <Renew16 />,
-    medium: <Renew20 />,
-    large: <Renew24 />,
-    'x-large': <Renew32 />,
+  running: {
+    small: Renew16,
+    medium: Renew20,
+    large: Renew24,
+    'x-large': Renew32,
   },
-  {
-    type: 'pending',
-    small: <Time16 />,
-    medium: <Time20 />,
-    large: <Time24 />,
-    'x-large': <Time32 />,
+  pending: {
+    small: Time16,
+    medium: Time20,
+    large: Time24,
+    'x-large': Time32,
   },
-];
+};
 
 const blockClass = `${pkg.prefix}-status-icon`;
 
@@ -137,15 +126,16 @@ export const StatusIcon = ({ type, theme, size, className, ...rest }) => {
   const [icon, setIcon] = useState([]);
   const [iconSize, setIconSize] = useState('');
   const [iconTheme, setIconTheme] = useState(null);
+  const IconComponent = icon[iconSize];
 
   const classNames = cx({
     [`${blockClass}--${iconTheme}`]: iconTheme,
     [`${blockClass}--${iconTheme}-${type}`]: type,
-    className,
+    [className]: className,
   });
 
   useEffect(() => {
-    type && setIcon(...icons.filter((icon) => icon.type === type));
+    type && setIcon(icons[type]);
   }, [type]);
 
   useEffect(() => {
@@ -158,7 +148,7 @@ export const StatusIcon = ({ type, theme, size, className, ...rest }) => {
 
   return (
     <div className={classNames} {...rest}>
-      {icon && iconTheme && iconSize ? icon[`${iconSize}`] : null}
+      {IconComponent && <IconComponent />}
     </div>
   );
 };
@@ -182,11 +172,4 @@ StatusIcon.propTypes = {
     'running',
     'pending',
   ]).isRequired,
-};
-
-StatusIcon.defaultProps = {
-  className: null,
-  type: null,
-  theme: null,
-  size: null,
 };

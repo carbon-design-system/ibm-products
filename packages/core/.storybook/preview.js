@@ -5,13 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { withInfo } from '@storybook/addon-info';
 import React, { useEffect } from 'react';
+import { withInfo } from '@storybook/addon-info';
 import { withCarbonTheme } from '@carbon/storybook-addon-theme/react';
-
-// Only impacts on experimental stories
-import { pkg } from '@carbon/ibm-cloud-cognitive-experimental/es/settings';
-import '@carbon/ibm-cloud-cognitive-experimental/es/enable-all';
 
 import index from './index.scss';
 

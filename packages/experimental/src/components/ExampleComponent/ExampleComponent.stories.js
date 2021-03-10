@@ -9,10 +9,10 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import mdx from './ExampleComponent.mdx';
 import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported
 import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, 'ExampleComponent');
-
 import { ExampleComponent } from '.';
+const storybookPrefix = getStorybookPrefix(pkg, ExampleComponent.displayName);
 
 import styles from './_storybook.scss'; // import storybook which includes component and additional storybook styles
 

@@ -6,13 +6,8 @@
  */
 
 import React, { useState } from 'react';
-
+import PropTypes from 'prop-types';
 import { Button, Link } from 'carbon-components-react';
-
-import ExampleLogo from './example-logo.svg';
-import ansibleLogo from './technologyUsedLogos/ansible_logo.png';
-import grafanaLogo from './technologyUsedLogos/grafana_logo.png';
-import jsLogo from './technologyUsedLogos/js_logo.png';
 
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
@@ -20,6 +15,11 @@ const storybookPrefix = getStorybookPrefix(pkg, 'AboutModal');
 
 import { AboutModal } from './AboutModal';
 import mdx from './AboutModal.mdx';
+
+import ExampleLogo from './_resources/example-logo.svg';
+import ansibleLogo from './_resources/ansible-logo.png';
+import grafanaLogo from './_resources/grafana-logo.png';
+import jsLogo from './_resources/js-logo.png';
 
 import styles from './_index.scss';
 
@@ -37,7 +37,7 @@ export default {
 const logo = (
   <img
     src={ExampleLogo}
-    alt="Example product logo"
+    alt="Example product or service logo"
     style={{ maxWidth: '6rem' }}
   />
 );
@@ -69,6 +69,12 @@ const Template = ({ storyInitiallyOpen = true, story, ...other }) => {
       />
     </>
   );
+};
+
+Template.propTypes = {
+  story: PropTypes.object,
+  storyInitiallyOpen: PropTypes.bool,
+  ...AboutModal.propTypes,
 };
 
 export const Basic = Template.bind({});

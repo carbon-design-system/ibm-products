@@ -10,10 +10,10 @@ import React from 'react';
 import { Link } from 'carbon-components-react';
 
 import { AboutModal } from './AboutModal';
-import ExampleLogo from './example-logo.svg';
-import ansibleLogo from './technologyUsedLogos/ansible_logo.png';
-import grafanaLogo from './technologyUsedLogos/grafana_logo.png';
-import jsLogo from './technologyUsedLogos/js_logo.png';
+import ExampleLogo from './_resources/example-logo.svg';
+import ansibleLogo from './_resources/ansible-logo.png';
+import grafanaLogo from './_resources/grafana-logo.png';
+import jsLogo from './_resources/js-logo.png';
 
 const content = 'This is example content';
 const logo = (

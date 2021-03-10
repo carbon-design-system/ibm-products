@@ -66,7 +66,6 @@ export const AboutModal = ({
               {copyrightText}
             </p>
           )}
-          <div className={`${pkg.prefix}-about-modal-scroll-gradient`} />
         </div>
       </ModalBody>
       <ModalFooter>

@@ -1,11 +1,7 @@
-name: Continuous integration check
+name: CI
 
 on:
   pull_request:
-    branches:
-      - master
-
-  push:
     branches:
       - master
 

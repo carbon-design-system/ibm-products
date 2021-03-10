@@ -13,8 +13,6 @@ import { pkg } from '../../settings';
 
 const blockClass = `${pkg.prefix}-canary`;
 
-import './_canary.scss';
-
 /**
  *  Canary component used when the component requested is not yet production
  */

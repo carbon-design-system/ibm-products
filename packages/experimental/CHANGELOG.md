@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.21.1...@carbon/ibm-cloud-cognitive-experimental@0.21.2) (2021-03-09)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
+## [0.21.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.21.0...@carbon/ibm-cloud-cognitive-experimental@0.21.1) (2021-03-09)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
+# [0.21.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.20.14...@carbon/ibm-cloud-cognitive-experimental@0.21.0) (2021-03-09)
+
+
+### Features
+
+* **WebTerminal:** add entrance/exit animation to panel ([#412](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/412)) ([1fe152c](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/1fe152cd14e82fb9e698acc4728da5bc65ed13ae))
+
+
+
+
+
+## [0.20.14](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.20.13...@carbon/ibm-cloud-cognitive-experimental@0.20.14) (2021-03-09)
+
+
+### Bug Fixes
+
+* canary scss and settings imports ([#418](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/418)) ([29711ec](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/29711ec18c66e70565be3361688e2bfd377d23f3))
+
+
+
+
+
 ## [0.20.13](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.20.12...@carbon/ibm-cloud-cognitive-experimental@0.20.13) (2021-03-09)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental

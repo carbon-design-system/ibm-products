@@ -1,4 +1,4 @@
 # Netlify build and deploy settings - https://docs.netlify.com/configure-builds/file-based-configuration/#sample-file
 [build]
-command = "yarn build:storybook-addon-carbon-theme && yarn build:storybook"
+command = "yarn build:storybook"
 publish = "packages/core/storybook-static"

@@ -9,19 +9,21 @@ import React, { useState } from 'react';
 
 import { action } from '@storybook/addon-actions';
 
-import { pkgPrefix } from '../../global/js/settings';
-
+import { pkg } from '../../settings';
 import { Button, Tab, Tabs } from 'carbon-components-react';
 
 import { Tearsheet } from './Tearsheet';
 import { TearsheetNarrow } from './TearsheetNarrow';
+
+import { getStorybookPrefix } from '../../../config';
+const storybookPrefix = getStorybookPrefix(pkg, 'Tearsheet');
 
 import styles from './_storybook-styles.scss';
 
 import mdx from './Tearsheet.mdx';
 
 export default {
-  title: 'Experimental/Tearsheets/Tearsheet',
+  title: `${storybookPrefix}/Tearsheets/Tearsheet`,
   component: Tearsheet,
   subcomponents: {
     TearsheetNarrow,
@@ -229,7 +231,7 @@ const Template = ({ buttonSet, ...args }) => {
 
   return (
     <>
-      <style>{`.${pkgPrefix}-tearsheet { opacity: 0 }`};</style>
+      <style>{`.${pkg.prefix}-tearsheet { opacity: 0 }`};</style>
       <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
       <Tearsheet
         className={className}

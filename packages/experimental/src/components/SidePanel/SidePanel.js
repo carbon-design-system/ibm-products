@@ -8,8 +8,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { pkgPrefix } from '../../global/js/settings';
-import { Button } from 'carbon-components-react';
+import { pkg } from '../../settings';
+import { Button, InlineLoading } from 'carbon-components-react';
 import { SIDE_PANEL_SIZES } from './constants';
 import { Close20, ArrowLeft20 } from '@carbon/icons-react';
 import wrapFocus from '../../global/js/utils/wrapFocus';
@@ -19,6 +19,8 @@ const changeArrayPosition = (arr, originalPosition, newPosition) => {
   arr.splice(newPosition, 0, cutOut);
   return arr;
 };
+
+const blockClass = `${pkg.prefix}-side-panel`;
 
 export const SidePanel = ({
   open,
@@ -30,6 +32,7 @@ export const SidePanel = ({
   theme,
   includeOverlay,
   titleText,
+  labelText,
   subtitleText,
   actionToolbarButtons,
   children,
@@ -80,9 +83,7 @@ export const SidePanel = ({
   // Title animaton
   useEffect(() => {
     if (open && animateTitle && animationComplete) {
-      const sidePanelOuter = document.querySelector(
-        `#${pkgPrefix}-side-panel-outer`
-      );
+      const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
       sidePanelOuter &&
         sidePanelOuter.addEventListener('scroll', () => {
           const scrollTop = sidePanelRef.current.scrollTop;
@@ -91,12 +92,10 @@ export const SidePanel = ({
             document.documentElement.clientHeight;
           let scrollPercent = (scrollTop / scrollBottom) * 100;
           if (scrollPercent >= 25) {
-            sidePanelOuter.classList.add(
-              `${pkgPrefix}-side-panel-with-condensed-header`
-            );
+            sidePanelOuter.classList.add(`${blockClass}-with-condensed-header`);
           } else if (scrollPercent < 25) {
             sidePanelOuter.classList.remove(
-              `${pkgPrefix}-side-panel-with-condensed-header`
+              `${blockClass}-with-condensed-header`
             );
           }
         });
@@ -228,9 +227,9 @@ export const SidePanel = ({
   const setSizeClassName = (panelSize, actions) => {
     let sizeClassName;
     if (!actions) {
-      sizeClassName = `${pkgPrefix}-side-panel-container-`;
+      sizeClassName = `${blockClass}-container-`;
     } else {
-      sizeClassName = `${pkgPrefix}-side-panel-actions-`;
+      sizeClassName = `${blockClass}-actions-`;
     }
     switch (panelSize) {
       case 'extraSmall':
@@ -249,7 +248,7 @@ export const SidePanel = ({
   };
 
   const setPrimaryActionsBarClass = (buttonCount) => {
-    let buttonCountClassName = `${pkgPrefix}-side-panel-actions-container-`;
+    let buttonCountClassName = `${blockClass}-actions-container-`;
     if (buttonCount === 1) {
       buttonCountClassName = `${buttonCountClassName}-single-action`;
     } else if (buttonCount === 2) {
@@ -278,25 +277,23 @@ export const SidePanel = ({
   };
 
   const mainPanelClassNames = cx([
-    `${pkgPrefix}-side-panel-container`,
-    `${pkgPrefix}-side-panel-container-${theme}`,
+    `${blockClass}-container`,
+    `${blockClass}-container-${theme}`,
     setSizeClassName(size),
     {
-      [`${pkgPrefix}-side-panel-container-right-placement`]:
-        placement === 'right',
-      [`${pkgPrefix}-side-panel-container-left-placement`]:
-        placement === 'left',
+      [`${blockClass}-container-right-placement`]: placement === 'right',
+      [`${blockClass}-container-left-placement`]: placement === 'left',
     },
   ]);
 
   const primaryActionContainerClassNames = cx([
-    `${pkgPrefix}-side-panel-actions-container`,
+    `${blockClass}-actions-container`,
     setSizeClassName(size, true),
     setPrimaryActionsBarClass(
       primaryPanelActions && primaryPanelActions.length
     ),
     {
-      [`${pkgPrefix}-side-panel-actions-container-condensed`]: condensed,
+      [`${blockClass}-actions-container-condensed`]: condensed,
     },
   ]);
 
@@ -304,7 +301,7 @@ export const SidePanel = ({
     shouldRender && (
       <>
         <div
-          id={`${pkgPrefix}-side-panel-outer`}
+          id={`${blockClass}-outer`}
           className={mainPanelClassNames}
           style={{
             animation: `${
@@ -325,11 +322,11 @@ export const SidePanel = ({
             ref={startTrapRef}
             tabIndex="0"
             role="link"
-            className={`${pkgPrefix}--visually-hidden`}>
+            className={`${blockClass}--visually-hidden`}>
             Focus sentinel
           </span>
           <div ref={sidePanelInnerRef}>
-            <div className={`${pkgPrefix}-side-panel-header`}>
+            <div className={`${blockClass}-header`}>
               {currentStep > 0 && (
                 <Button
                   kind="ghost"
@@ -339,24 +336,26 @@ export const SidePanel = ({
                   iconDescription="Back"
                   tooltipPosition="right"
                   tooltipAlignment="center"
-                  className={`${pkgPrefix}-side-panel-navigation-back-button`}
+                  className={`${blockClass}-navigation-back-button`}
                   onClick={() => onNavigationBack((prev) => prev - 1)}
                 />
               )}
+              {labelText && labelText.length && (
+                <p className={`${blockClass}-label-text`}>{labelText}</p>
+              )}
               {titleText && titleText.length && (
                 <h2
-                  className={`${pkgPrefix}-side-panel-title-text`}
-                  ref={sidePanelTitleRef}>
+                  className={`${blockClass}-title-text`}
+                  ref={sidePanelTitleRef}
+                  title={titleText}>
                   {titleText}
                 </h2>
               )}
               {subtitleText && subtitleText.length && (
-                <p className={`${pkgPrefix}-side-panel-subtitle-text`}>
-                  {subtitleText}
-                </p>
+                <p className={`${blockClass}-subtitle-text`}>{subtitleText}</p>
               )}
               {actionToolbarButtons && actionToolbarButtons.length && (
-                <div className={`${pkgPrefix}-side-panel-action-toolbar`}>
+                <div className={`${blockClass}-action-toolbar`}>
                   {actionToolbarButtons.map((action) => (
                     <Button
                       key={action.label}
@@ -368,10 +367,10 @@ export const SidePanel = ({
                       tooltipPosition="bottom"
                       tooltipAlignment="center"
                       className={cx([
-                        `${pkgPrefix}-side-panel-action-toolbar-button`,
+                        `${blockClass}-action-toolbar-button`,
                         {
-                          [`${pkgPrefix}-side-panel-action-toolbar-icon-only-button`]: action.icon,
-                          [`${pkgPrefix}-side-panel-action-toolbar-leading-button`]: !action.icon,
+                          [`${blockClass}-action-toolbar-icon-only-button`]: action.icon,
+                          [`${blockClass}-action-toolbar-leading-button`]: !action.icon,
                         },
                       ])}
                       onClick={() => action.onActionToolbarButtonClick()}>
@@ -388,31 +387,29 @@ export const SidePanel = ({
                 iconDescription="Close"
                 tooltipPosition="bottom"
                 tooltipAlignment="center"
-                className={`${pkgPrefix}-side-panel-close-button`}
+                className={`${blockClass}-close-button`}
                 onClick={() => setOpen(false)}
                 ref={sidePanelCloseRef}
               />
             </div>
-            <div className={`${pkgPrefix}-side-panel-body-content`}>
-              {children}
-            </div>
+            <div className={`${blockClass}-body-content`}>{children}</div>
             {primaryPanelActions && primaryPanelActions.length ? (
               <div className={primaryActionContainerClassNames}>
                 {primaryPanelActions.map((action, index) => (
                   <Button
                     key={index}
-                    disabled={action.disabled || false}
+                    disabled={action.disabled || action.loading || false}
                     onClick={() => action.onPrimaryActionClick()}
                     kind={action.kind || 'primary'}
                     className={cx([
-                      `${pkgPrefix}-side-panel-primary-action-button`,
+                      `${blockClass}-primary-action-button`,
                       {
-                        [`${pkgPrefix}-side-panel-ghost-button`]:
-                          action.kind === 'ghost',
-                        [`${pkgPrefix}-side-panel-primary-action-button-condensed`]: condensed,
+                        [`${blockClass}-ghost-button`]: action.kind === 'ghost',
+                        [`${blockClass}-primary-action-button-condensed`]: condensed,
                       },
                     ])}>
                     {action.label}
+                    {action.loading && <InlineLoading />}
                   </Button>
                 ))}
               </div>
@@ -422,14 +419,14 @@ export const SidePanel = ({
             ref={endTrapRef}
             tabIndex="0"
             role="link"
-            className={`${pkgPrefix}--visually-hidden`}>
+            className={`${blockClass}--visually-hidden`}>
             Focus sentinel
           </span>
         </div>
         {includeOverlay && (
           <div
             ref={sidePanelOverlayRef}
-            className={`${pkgPrefix}-side-panel-overlay`}
+            className={`${blockClass}-overlay`}
             style={{
               animation: `${
                 open
@@ -527,6 +524,10 @@ SidePanel.propTypes = {
    */
   includeOverlay: PropTypes.bool,
   /**
+   * Sets the label text which will display above the title text
+   */
+  labelText: PropTypes.string,
+  /**
    * Changes the current side panel page to the previous page
    */
   onNavigationBack: PropTypes.func,
@@ -553,6 +554,7 @@ SidePanel.propTypes = {
         onPrimaryActionClick: PropTypes.func,
         kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
         disabled: PropTypes.bool,
+        loading: PropTypes.bool,
       })
     ),
   ]),

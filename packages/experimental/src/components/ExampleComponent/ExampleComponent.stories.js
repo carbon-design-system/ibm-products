@@ -7,18 +7,25 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-
+import mdx from './ExampleComponent.mdx';
+import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported
+import { getStorybookPrefix } from '../../../config';
 import { ExampleComponent } from '.';
+const storybookPrefix = getStorybookPrefix(pkg, ExampleComponent.displayName);
 
 import styles from './_storybook.scss'; // import storybook which includes component and additional storybook styles
 
 export default {
-  title: 'Experimental/ExampleComponent',
+  title: `${storybookPrefix}/${ExampleComponent.displayName}`,
   component: ExampleComponent,
   argTypes: {
     borderColor: { control: 'color' },
   },
   parameters: { styles },
+  docs: {
+    page: mdx,
+  },
 };
 
 const Template = (args) => {

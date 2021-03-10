@@ -10,13 +10,16 @@ import { action } from '@storybook/addon-actions';
 import { Add20 } from '@carbon/icons-react';
 import CustomIllustration from './assets/light/error.svg';
 import mdx from './EmptyState.mdx';
+import { pkg } from '../../settings';
+import { getStorybookPrefix } from '../../../config';
+const storybookPrefix = getStorybookPrefix(pkg, 'EmptyState');
 
 import { EmptyState } from '.';
 
 import styles from './_index.scss';
 
 export default {
-  title: 'Experimental/EmptyState',
+  title: `${storybookPrefix}/EmptyState`,
   component: EmptyState,
   parameters: {
     styles,

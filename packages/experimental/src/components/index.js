@@ -8,6 +8,7 @@
 export { AboutModal } from './AboutModal';
 export { ActionBar, ActionBarItem } from './ActionBar';
 export { BreadcrumbWithOverflow } from './BreadcrumbWithOverflow';
+export { ContextHeader } from './ContextHeader';
 export { EmptyState } from './EmptyState';
 export { ExampleComponent } from './ExampleComponent';
 export { ImportModal } from './ImportModal';
@@ -18,3 +19,4 @@ export { RemoveDeleteModal } from './RemoveDeleteModal';
 export { SidePanel } from './SidePanel';
 export { TagSet } from './TagSet';
 export { Tearsheet, TearsheetNarrow } from './Tearsheet';
+export { WebTerminal } from './WebTerminal';

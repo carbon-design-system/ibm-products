@@ -10,9 +10,12 @@ import React from 'react';
 import { ContextHeader } from '.';
 
 import styles from './_ContextHeader.scss';
+import { pkg } from '../../settings';
+import { getStorybookPrefix } from '../../../config';
+const storybookPrefix = getStorybookPrefix(pkg, 'ContextHeader');
 
 export default {
-  title: 'Experimental/ContextHeader',
+  title: `${storybookPrefix}/ContextHeader`,
   component: ContextHeader,
   parameters: { styles },
 };

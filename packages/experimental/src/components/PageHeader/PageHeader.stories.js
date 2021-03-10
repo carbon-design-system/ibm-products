@@ -26,13 +26,16 @@ import { Lightning16, Bee24 } from '@carbon/icons-react';
 import { ActionBarItem } from '../ActionBar';
 import { PageActionItem } from './PageActionItem';
 import { PageHeader } from '.';
+import { pkg } from '../../settings';
+import { getStorybookPrefix } from '../../../config';
+const storybookPrefix = getStorybookPrefix(pkg, 'PageHeader');
 
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 
 import mdx from './PageHeader.mdx';
 
 export default {
-  title: 'Experimental/PageHeader',
+  title: `${storybookPrefix}/PageHeader`,
   component: PageHeader,
   subcomponents: {
     ActionBarItem,

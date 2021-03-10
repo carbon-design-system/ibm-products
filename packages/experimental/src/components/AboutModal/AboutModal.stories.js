@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2020
+ * Copyright IBM Corp. 2021, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,19 +7,22 @@
 
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Button } from 'carbon-components-react';
+import { Button, Link } from 'carbon-components-react';
 import ExampleLogo from './example-logo.svg';
 import mdx from './AboutModal.mdx';
 import ansibleLogo from './technologyUsedLogos/ansible_logo.png';
 import grafanaLogo from './technologyUsedLogos/grafana_logo.png';
 import jsLogo from './technologyUsedLogos/js_logo.png';
-
 import { AboutModal } from './AboutModal';
+
+import { pkg } from '../../settings';
+import { getStorybookPrefix } from '../../../config';
+const storybookPrefix = getStorybookPrefix(pkg, 'AboutModal');
 
 import styles from './_index.scss';
 
 export default {
-  title: 'Experimental/AboutModal',
+  title: `${storybookPrefix}/AboutModal`,
   component: AboutModal,
   parameters: {
     styles,
@@ -29,12 +32,20 @@ export default {
   },
 };
 
+const logo = (
+  <img
+    src={ExampleLogo}
+    alt="Example product logo"
+    style={{ maxWidth: '6rem' }}
+  />
+);
+
 const Template = (args) => (
   <AboutModal
-    body="This is an example description"
+    content="This is example content"
     open
-    logo={ExampleLogo}
-    productName={
+    logo={logo}
+    title={
       <>
         IBM <span style={{ fontWeight: '600' }}>Watson AI Ops</span>
       </>
@@ -74,11 +85,11 @@ export const Default = () => {
       )}>
       {({ open, setOpen }) => (
         <AboutModal
-          body="This is an example description"
-          onRequestClose={() => setOpen(!open)}
+          content="This is example content"
+          onClose={() => setOpen(!open)}
           open={open}
-          logo={ExampleLogo}
-          productName={
+          logo={logo}
+          title={
             <>
               IBM <span style={{ fontWeight: '600' }}>Watson AI Ops</span>
             </>
@@ -93,28 +104,24 @@ export const Default = () => {
 export const withLinks = Template.bind({});
 withLinks.args = {
   links: [
-    {
-      url: 'https://www.carbondesignsystem.com',
-      text: 'Carbon Design System',
-    },
-    {
-      url: 'https://www.ibm.com/design/language',
-      text: 'IBM Design Language',
-    },
+    <Link href="https://www.carbondesignsystem.com" key="link1">
+      Carbon Design System
+    </Link>,
+    <Link href="https://www.ibm.com/design/language" key="link2">
+      IBM Design Language
+    </Link>,
   ],
 };
 
 export const withLinksAndLegalText = Template.bind({});
 withLinksAndLegalText.args = {
   links: [
-    {
-      url: 'https://www.carbondesignsystem.com',
-      text: 'Carbon Design System',
-    },
-    {
-      url: 'https://www.ibm.com/design/language',
-      text: 'IBM Design Language',
-    },
+    <Link href="https://www.carbondesignsystem.com" key="link1">
+      Carbon Design System
+    </Link>,
+    <Link href="https://www.ibm.com/design/language" key="link2">
+      IBM Design Language
+    </Link>,
   ],
   legalText:
     'This Web site contains proprietary notices and copyright information, the terms of which must be observed and followed. Please see the tab entitled “Copyright and trademark information” for related information.',
@@ -123,18 +130,16 @@ withLinksAndLegalText.args = {
 export const withLinksAndLegalAndCopyrightText = Template.bind({});
 withLinksAndLegalAndCopyrightText.args = {
   links: [
-    {
-      url: 'https://www.carbondesignsystem.com',
-      text: 'Carbon Design System',
-    },
-    {
-      url: 'https://www.ibm.com/design/language',
-      text: 'IBM Design Language',
-    },
+    <Link href="https://www.carbondesignsystem.com" key="link1">
+      Carbon Design System
+    </Link>,
+    <Link href="https://www.ibm.com/design/language" key="link2">
+      IBM Design Language
+    </Link>,
   ],
   legalText:
     'This Web site contains proprietary notices and copyright information, the terms of which must be observed and followed. Please see the tab entitled “Copyright and trademark information” for related information.',
-  copyrightText: 'Copyright IBM corporation 2020',
+  copyrightText: <>Copyright &copy; 2020 IBM corporation</>,
 };
 
 export const withTechnologyUsedTab = Template.bind({});
@@ -155,14 +160,19 @@ withTechnologyUsedTab.args = {
   ],
 };
 
+export const withDarkTheme = Template.bind({});
+withDarkTheme.args = {
+  className: 'sb--use-carbon-theme-g90',
+};
+
 export const withLightTheme = Template.bind({});
 withLightTheme.args = {
-  theme: 'light',
+  className: 'sb--use-carbon-theme-g10',
 };
 
 export const withScroll = Template.bind({});
 withScroll.args = {
   legalText:
     'This Web site contains proprietary notices and copyright information, the terms of which must be observed and followed. Please see the tab entitled “Copyright and trademark information” for related information. IBM grants you a non-exclusive, non-transferable, limited permission to access and display the Web pages within this site as a customer or potential customer of IBM provided you comply with these Terms of Use, and all copyright, trademark, and other proprietary notices remain intact. You may only use a crawler to crawl this Web site as permitted by this Web site’s robots.txt protocol, and IBM may block any crawlers in its sole discretion. The use authorized under this agreement is non-commercial in nature (e.g., you may not sell the content you access on or through this Web site.) All other use of this site is prohibited. Except for the limited permission in the preceding paragraph, IBM does not grant you any express or implied rights or licenses under any patents, trademarks, copyrights, or other proprietary or intellectual property rights. You may not mirror any of the content from this site on another Web site or in any other media. Any software and other materials that are made available for downloading, access, or other use from this site with their own license terms will be governed by such terms, conditions, and notices. Your failure to comply with such terms or any of the terms on this site will result in automatic termination of any rights granted to you, without prior notice, and you must immediately destroy all copies of downloaded materials in your possession, custody or control. This Web site contains proprietary notices and copyright information, the terms of which must be observed and followed. Please see the tab entitled “Copyright and trademark information” for related information. IBM grants you a non-exclusive, non-transferable, limited permission to access and display the Web pages within this site as a customer or potential customer of IBM provided you comply with these Terms of Use, and all copyright, trademark, and other proprietary notices remain intact. You may only use a crawler to crawl this Web site as permitted by this Web site’s robots.txt protocol, and IBM may block any crawlers in its sole discretion. The use authorized under this agreement is non-commercial in nature (e.g., you may not sell the content you access on or through this Web site.) All other use of this site is prohibited. Except for the limited permission in the preceding paragraph, IBM does not grant you any express or implied rights or licenses under any patents, trademarks, copyrights, or other proprietary or intellectual property rights. You may not mirror any of the content from this site on another Web site or in any other media. Any software and other materials that are made available for downloading, access, or other use from this site with their own license terms will be governed by such terms, conditions, and notices. Your failure to comply with such terms or any of the terms on this site will result in automatic termination of any rights granted to you, without prior notice, and you must immediately destroy all copies of downloaded materials in your possession, custody or control.',
-  copyrightText: 'Copyright IBM corporation 2020',
+  copyrightText: <>Copyright &copy; 2020 IBM corporation</>,
 };

@@ -10,20 +10,20 @@ import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, 'TearsheetNarrow');
-
-import { Button } from 'carbon-components-react';
-
 import { Tearsheet } from './Tearsheet';
 import { TearsheetNarrow } from './TearsheetNarrow';
+const storybookPrefix = getStorybookPrefix(pkg, TearsheetNarrow.displayName);
+
+import { Button } from 'carbon-components-react';
 
 import styles from './_storybook-styles.scss';
 
 import mdx from './Tearsheet.mdx';
 
 export default {
-  title: `${storybookPrefix}/Tearsheets/TearsheetNarrow`,
+  title: `${storybookPrefix}/Tearsheets/${TearsheetNarrow.displayName}`,
   component: TearsheetNarrow,
   subcomponents: {
     Tearsheet,

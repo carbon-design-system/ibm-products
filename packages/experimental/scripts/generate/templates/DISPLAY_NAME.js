@@ -8,21 +8,20 @@
 import cx from 'classnames';
 import { node, string } from 'prop-types';
 import React from 'react';
-import { Canary } from '../_Canary';
 
 /**
  * TODO: @import(s) of carbon components
  */
 
+// NOTE: SCSS is not imported directly here: it is rolled up separately.
+
 /**
  * TODO: Add use of Carbon prefix if needed
  */
+import { Canary } from '../_Canary';
 import { pkg /*, carbon */ } from '../../settings';
-
-const blockClass = `${pkg.prefix}--STYLE_NAME`;
 const componentName = 'DISPLAY_NAME';
-
-// NOTE: SCSS is not imported directly here: it is rolled up separately.
+const blockClass = `${pkg.prefix}--STYLE_NAME`;
 
 /**
  * TODO: Description.

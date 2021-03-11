@@ -1,4 +1,6 @@
 import { Story, ArgsTable, Preview } from '@storybook/addon-docs/blocks';
+import { pkg } from '../../settings';
+import { getStorybookSlug } from '../../../config';
 import WebTerminal from './WebTerminal';
 
 # WebTerminal
@@ -57,13 +59,19 @@ user desires to dismiss it they can click the close icon on the top right corner
 of the component.
 
 <Preview>
-  <Story id="experimental-webterminal--default" />
+  <Story id={getStorybookSlug(pkg, WebTerminal.displayName, 'default')} />
 </Preview>
 
 ### With documentation links
 
 <Preview>
-  <Story id="experimental-webterminal--with-documentation-links" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      WebTerminal.displayName,
+      'with-documentation-links'
+    )}
+  />
 </Preview>
 
 ## Component API

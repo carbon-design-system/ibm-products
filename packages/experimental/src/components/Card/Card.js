@@ -2,81 +2,89 @@ import React from 'react';
 import cx from 'classnames';
 import { Button } from 'carbon-components-react';
 import PropTypes from 'prop-types';
+import { Canary } from '../_Canary';
 import { pkg } from '../../settings';
+const componentName = 'Card';
 
-export const Card = ({
-  actionIcon: ActionIcon,
-  caption,
-  children,
-  className,
-  label,
-  media,
-  mediaPosition,
-  onClick,
-  onPrimaryButtonClick,
-  onSecondaryButtonClick,
-  pictogram: Pictogram,
-  primaryButtonKind,
-  primaryButtonText,
-  secondaryButtonKind,
-  secondaryButtonText,
-  title,
-}) => {
-  const cardClasses = cx(`${pkg.prefix}-card`, {
-    [`${pkg.prefix}-card--clickable`]: onClick,
-    [`${pkg.prefix}-card--media-left`]: mediaPosition === 'left',
-    className,
-  });
+export const Card = !pkg.isComponentEnabled(componentName)
+  ? // Return canary if not released or flag not set
+    () => <Canary component={componentName} />
+  : // Main component code...
+    ({
+      actionIcon: ActionIcon,
+      caption,
+      children,
+      className,
+      label,
+      media,
+      mediaPosition,
+      onClick,
+      onPrimaryButtonClick,
+      onSecondaryButtonClick,
+      pictogram: Pictogram,
+      primaryButtonKind,
+      primaryButtonText,
+      secondaryButtonKind,
+      secondaryButtonText,
+      title,
+    }) => {
+      const cardClasses = cx(`${pkg.prefix}-card`, {
+        [`${pkg.prefix}-card--clickable`]: onClick,
+        [`${pkg.prefix}-card--media-left`]: mediaPosition === 'left',
+        className,
+      });
 
-  const headerClasses = cx(`${pkg.prefix}-card-header`, {
-    [`${pkg.prefix}-card-header--label-only`]: label && !title && !caption,
-  });
+      const headerClasses = cx(`${pkg.prefix}-card-header`, {
+        [`${pkg.prefix}-card-header--label-only`]: label && !title && !caption,
+      });
 
-  const CardContent = (
-    <div className={cardClasses}>
-      {media && <div className={`${pkg.prefix}-card-media`}>{media}</div>}
-      {Pictogram && (
-        <div className={`${pkg.prefix}-card-pictogram`}>
-          <Pictogram />
-        </div>
-      )}
-      <div className={`${pkg.prefix}-card-content-container`}>
-        <div className={headerClasses}>
-          {label && <p className={`${pkg.prefix}-card-label`}>{label}</p>}
-          {title && <p className={`${pkg.prefix}-card-title`}>{title}</p>}
-          {caption && <p className={`${pkg.prefix}-card-caption`}>{caption}</p>}
-        </div>
-        <div className={`${pkg.prefix}-card-body`}>{children}</div>
-        <div className={`${pkg.prefix}-card-actions`}>
-          {secondaryButtonText && (
-            <Button
-              kind={secondaryButtonKind}
-              onClick={onSecondaryButtonClick}
-              size="field">
-              {secondaryButtonText}
-            </Button>
+      const CardContent = (
+        <div className={cardClasses}>
+          {media && <div className={`${pkg.prefix}-card-media`}>{media}</div>}
+          {Pictogram && (
+            <div className={`${pkg.prefix}-card-pictogram`}>
+              <Pictogram />
+            </div>
           )}
-          {primaryButtonText && (
-            <Button
-              kind={primaryButtonKind}
-              onClick={onPrimaryButtonClick}
-              size="field">
-              {primaryButtonText}
-            </Button>
-          )}
-          {ActionIcon && (
-            <ActionIcon
-              className={`${pkg.prefix}-card-action-icon`}
-              onClick={onPrimaryButtonClick}
-            />
-          )}
+          <div className={`${pkg.prefix}-card-content-container`}>
+            <div className={headerClasses}>
+              {label && <p className={`${pkg.prefix}-card-label`}>{label}</p>}
+              {title && <p className={`${pkg.prefix}-card-title`}>{title}</p>}
+              {caption && (
+                <p className={`${pkg.prefix}-card-caption`}>{caption}</p>
+              )}
+            </div>
+            <div className={`${pkg.prefix}-card-body`}>{children}</div>
+            <div className={`${pkg.prefix}-card-actions`}>
+              {secondaryButtonText && (
+                <Button
+                  kind={secondaryButtonKind}
+                  onClick={onSecondaryButtonClick}
+                  size="field">
+                  {secondaryButtonText}
+                </Button>
+              )}
+              {primaryButtonText && (
+                <Button
+                  kind={primaryButtonKind}
+                  onClick={onPrimaryButtonClick}
+                  size="field">
+                  {primaryButtonText}
+                </Button>
+              )}
+              {ActionIcon && (
+                <ActionIcon
+                  className={`${pkg.prefix}-card-action-icon`}
+                  onClick={onPrimaryButtonClick}
+                />
+              )}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  );
+      );
 
-  return CardContent;
-};
+      return CardContent;
+    };
 
 Card.propTypes = {
   /**
@@ -163,3 +171,5 @@ Card.defaultProps = {
   secondaryButtonText: '',
   title: '',
 };
+
+Card.displayName = componentName;

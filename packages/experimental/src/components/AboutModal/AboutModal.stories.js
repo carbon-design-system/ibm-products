@@ -19,7 +19,7 @@ import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 const storybookPrefix = getStorybookPrefix(pkg, 'AboutModal');
 
-import styles from './_index.scss';
+import styles from './_storybook-styles.scss';
 
 export default {
   title: `${storybookPrefix}/AboutModal`,
@@ -50,7 +50,7 @@ const Template = (args) => (
         IBM <span style={{ fontWeight: '600' }}>Watson AI Ops</span>
       </>
     }
-    versionNumber="0.0.1"
+    additionalInfo={[{ label: 'Version number', content: '1.3.41' }]}
     {...args}
   />
 );
@@ -94,7 +94,7 @@ export const Default = () => {
               IBM <span style={{ fontWeight: '600' }}>Watson AI Ops</span>
             </>
           }
-          versionNumber="0.0.1"
+          additionalInfo={[{ label: 'Version number', content: '1.3.41' }]}
         />
       )}
     </ModalStateManager>
@@ -142,20 +142,31 @@ withLinksAndLegalAndCopyrightText.args = {
   copyrightText: <>Copyright &copy; 2020 IBM corporation</>,
 };
 
-export const withTechnologyUsedTab = Template.bind({});
-withTechnologyUsedTab.args = {
-  technologiesUsed: [
+export const withAdditionalInfo = Template.bind({});
+withAdditionalInfo.args = {
+  additionalInfo: [
+    { label: 'Version number', content: '1.3.41' },
     {
-      src: grafanaLogo,
-      alt: 'Logo for grafana',
-    },
-    {
-      src: ansibleLogo,
-      alt: 'Logo for ansible',
-    },
-    {
-      src: jsLogo,
-      alt: 'Logo for javascript',
+      label: 'Technologies used',
+      content: (
+        <>
+          <img
+            src={grafanaLogo}
+            alt="Grafana"
+            className="about-modal-stories--tech-logo"
+          />
+          <img
+            src={ansibleLogo}
+            alt="Ansible"
+            className="about-modal-stories--tech-logo"
+          />
+          <img
+            src={jsLogo}
+            alt="JavaScript"
+            className="about-modal-stories--tech-logo"
+          />
+        </>
+      ),
     },
   ],
 };

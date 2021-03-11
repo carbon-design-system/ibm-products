@@ -31,15 +31,7 @@ const title = (
 
 describe('AboutModal', () => {
   test('renders title and content', () => {
-    render(
-      <AboutModal
-        open
-        logo={logo}
-        content={content}
-        title={title}
-        versionNumber="0.0.1"
-      />
-    );
+    render(<AboutModal open logo={logo} content={content} title={title} />);
     expect(
       screen.getByText(/Watson AI Ops/i) && screen.getByText(content)
     ).toBeTruthy();
@@ -47,13 +39,7 @@ describe('AboutModal', () => {
 
   test('renders product logo', () => {
     const { container } = render(
-      <AboutModal
-        open
-        logo={logo}
-        content={content}
-        title={title}
-        versionNumber="0.0.1"
-      />
+      <AboutModal open logo={logo} content={content} title={title} />
     );
     const renderedProductLogo = container.querySelector('img');
     expect(renderedProductLogo).toBeTruthy();
@@ -66,7 +52,6 @@ describe('AboutModal', () => {
         open
         logo={logo}
         title={title}
-        versionNumber="0.0.1"
         links={[
           <Link href="https://www.carbondesignsystem.com" key="link1">
             Carbon Design System
@@ -95,7 +80,6 @@ describe('AboutModal', () => {
             IBM <span style={{ fontWeight: '600' }}>Watson AI Ops</span>
           </>
         }
-        versionNumber="0.0.1"
         legalText="Legal test text"
       />
     );
@@ -109,35 +93,44 @@ describe('AboutModal', () => {
         logo={logo}
         content={content}
         title={title}
-        versionNumber="0.0.1"
         copyrightText="Copyright test text"
       />
     );
     expect(screen.getByText(/Copyright test text/i)).toBeTruthy();
   });
 
-  test('renders a clickable carbon tab for technologies used', () => {
+  test('renders a clickable carbon tab for additional info', () => {
     render(
       <AboutModal
         content={content}
         open
         logo={logo}
         title={title}
-        versionNumber="0.0.1"
         legalText="This Web site contains proprietary notices and copyright information, the terms of which must be observed and followed. Please see the tab entitled “Copyright and trademark information” for related information."
         copyrightText="Copyright IBM corporation 2020"
-        technologiesUsed={[
+        additionalInfo={[
+          { label: 'Version number', content: '1.3.41' },
           {
-            src: grafanaLogo,
-            alt: 'Logo for grafana',
-          },
-          {
-            src: ansibleLogo,
-            alt: 'Logo for ansible',
-          },
-          {
-            src: jsLogo,
-            alt: 'Logo for javascript',
+            label: 'Technologies used',
+            content: (
+              <>
+                <img
+                  src={grafanaLogo}
+                  alt="Grafana"
+                  className="about-modal-stories--tech-logo"
+                />
+                <img
+                  src={ansibleLogo}
+                  alt="Ansible"
+                  className="about-modal-stories--tech-logo"
+                />
+                <img
+                  src={jsLogo}
+                  alt="JavaScript"
+                  className="about-modal-stories--tech-logo"
+                />
+              </>
+            ),
           },
         ]}
       />
@@ -155,7 +148,6 @@ describe('AboutModal', () => {
         logo={logo}
         content={content}
         title={title}
-        versionNumber="0.0.1"
         copyrightText="Copyright test text"
         theme="light"
       />
@@ -173,9 +165,9 @@ describe('AboutModal', () => {
         logo={logo}
         content={content}
         title={title}
-        versionNumber="0.0.1"
+        additionalInfo={[{ label: 'Version number', content: '1.3.41' }]}
       />
     );
-    expect(getByText(/0.0.1/i)).toBeTruthy();
+    expect(getByText(/1.3.41/i)).toBeTruthy();
   });
 });

@@ -1,10 +1,10 @@
 import cx from 'classnames';
-import { pkgPrefix } from '../../../global/js/settings';
+import { pkg } from '../../../settings';
 
 const setIllustrationClass = (size) =>
   cx([
-    `${pkgPrefix}-empty-state-illustration`,
-    `${pkgPrefix}-empty-state-illustration--${size}`,
+    `${pkg.prefix}-empty-state-illustration`,
+    `${pkg.prefix}-empty-state-illustration--${size}`,
   ]);
 
 export default setIllustrationClass;

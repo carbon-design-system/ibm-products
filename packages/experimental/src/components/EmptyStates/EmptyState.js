@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import setIllustrationClass from './assets/setIllustrationClass';
 
-import { pkgPrefix } from '../../global/js/settings';
+import { pkg } from '../../settings';
 import { EmptyStateContent } from './EmptyStateContent';
 
 export const EmptyState = ({
@@ -35,7 +35,7 @@ export const EmptyState = ({
   };
 
   return (
-    <div className={`${pkgPrefix}-empty-state`}>
+    <div className={`${pkg.prefix}-empty-state`}>
       {illustration && renderIllustration()}
       <EmptyStateContent
         actionText={actionText}

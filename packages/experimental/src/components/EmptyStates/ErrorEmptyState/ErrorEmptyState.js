@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { pkgPrefix } from '../../../global/js/settings';
+import { pkg } from '../../../settings';
 import { EmptyStateContent } from '../EmptyStateContent';
 import ErrorIllustration from '../assets/Error';
 import { EmptyStateDefaultProps } from '../EmptyState';
@@ -18,7 +18,7 @@ export const ErrorEmptyState = ({
   onActionEvent,
 }) => {
   return (
-    <div className={`${pkgPrefix}-empty-state`}>
+    <div className={`${pkg.prefix}-empty-state`}>
       <ErrorIllustration theme={illustrationTheme} size={illustrationSize} />
       <EmptyStateContent
         actionText={actionText}

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { pkgPrefix } from '../../../global/js/settings';
+import { pkg } from '../../../settings';
 import { EmptyStateContent } from '../EmptyStateContent';
 import NotFoundIllustration from '../assets/NotFound';
 import { EmptyStateDefaultProps } from '../EmptyState';
@@ -18,7 +18,7 @@ export const NotFoundEmptyState = ({
   onActionEvent,
 }) => {
   return (
-    <div className={`${pkgPrefix}-empty-state`}>
+    <div className={`${pkg.prefix}-empty-state`}>
       <NotFoundIllustration theme={illustrationTheme} size={illustrationSize} />
       <EmptyStateContent
         actionText={actionText}

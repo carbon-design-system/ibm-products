@@ -9,9 +9,9 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add20 } from '@carbon/icons-react';
 import mdx from './NotFoundEmptyState.mdx';
-import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, 'EmptyState');
+import { pkg } from '../../../settings';
+import { getStorybookPrefix } from '../../../../config';
+const storybookPrefix = getStorybookPrefix(pkg, 'EmptyStates');
 
 import { NotFoundEmptyState } from './NotFoundEmptyState';
 

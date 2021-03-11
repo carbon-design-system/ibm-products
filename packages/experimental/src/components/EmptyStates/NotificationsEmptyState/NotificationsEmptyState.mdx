@@ -1,4 +1,6 @@
 import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
+import { pkg } from '../../../settings';
+import { getStorybookSlug } from '../../../../config';
 import { NotificationsEmptyState } from './NotificationsEmptyState';
 
 # Notifications Empty state
@@ -17,37 +19,73 @@ guidelines and documentation please refer to the links above.
 ### Default Notifications Empty state
 
 <Preview>
-  <Story id="experimental-emptystates-notificationsemptystate--default" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${NotificationsEmptyState.displayName}`,
+      'default'
+    )}
+  />
 </Preview>
 
 ### Notifications Empty state with dark themed illustration
 
 <Preview>
-  <Story id="experimental-emptystates-notificationsemptystate--with-dark-mode-illustration" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${NotificationsEmptyState.displayName}`,
+      'with-dark-mode-illustration'
+    )}
+  />
 </Preview>
 
 ### Notifications Empty state with action
 
 <Preview>
-  <Story id="experimental-emptystates-notificationsemptystate--with-action" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${NotificationsEmptyState.displayName}`,
+      'with-action'
+    )}
+  />
 </Preview>
 
 ### Notifications Empty state with action (Button with icon)
 
 <Preview>
-  <Story id="experimental-emptystates-notificationsemptystate--with-action-icon-button" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${NotificationsEmptyState.displayName}`,
+      'with-action-icon-button'
+    )}
+  />
 </Preview>
 
 ### Notifications Empty state with link
 
 <Preview>
-  <Story id="experimental-emptystates-notificationsemptystate--with-link" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${NotificationsEmptyState.displayName}`,
+      'with-link'
+    )}
+  />
 </Preview>
 
 ### Notifications Empty state with action and link
 
 <Preview>
-  <Story id="experimental-emptystates-notificationsemptystate--with-action-and-link" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${NotificationsEmptyState.displayName}`,
+      'with-action-and-link'
+    )}
+  />
 </Preview>
 
 ## Component API

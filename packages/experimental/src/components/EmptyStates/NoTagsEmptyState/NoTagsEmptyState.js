@@ -1,38 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Canary } from '../../_Canary';
 import { pkg } from '../../../settings';
 import { EmptyStateContent } from '../EmptyStateContent';
 import NoTagsIllustration from '../assets/NoTags';
 import { EmptyStateDefaultProps } from '../EmptyState';
+const componentName = 'NoTagsEmptyState';
 
-export const NoTagsEmptyState = ({
-  actionText,
-  actionType,
-  actionIcon,
-  heading,
-  illustrationSize,
-  illustrationTheme,
-  linkText,
-  linkUrl,
-  subtext,
-  onActionEvent,
-}) => {
-  return (
-    <div className={`${pkg.prefix}-empty-state`}>
-      <NoTagsIllustration theme={illustrationTheme} size={illustrationSize} />
-      <EmptyStateContent
-        actionText={actionText}
-        actionType={actionType}
-        actionIcon={actionIcon}
-        heading={heading}
-        linkText={linkText}
-        linkUrl={linkUrl}
-        subtext={subtext}
-        onActionEvent={onActionEvent}
-      />
-    </div>
-  );
-};
+export const NoTagsEmptyState = !pkg.isComponentEnabled(componentName)
+  ? // Return canary if not released or flag not set
+    () => <Canary component={componentName} />
+  : // Main component code...
+    ({
+      actionText,
+      actionType,
+      actionIcon,
+      heading,
+      illustrationSize,
+      illustrationTheme,
+      linkText,
+      linkUrl,
+      subtext,
+      onActionEvent,
+    }) => {
+      return (
+        <div className={`${pkg.prefix}-empty-state`}>
+          <NoTagsIllustration
+            theme={illustrationTheme}
+            size={illustrationSize}
+          />
+          <EmptyStateContent
+            actionText={actionText}
+            actionType={actionType}
+            actionIcon={actionIcon}
+            heading={heading}
+            linkText={linkText}
+            linkUrl={linkUrl}
+            subtext={subtext}
+            onActionEvent={onActionEvent}
+          />
+        </div>
+      );
+    };
 
 NoTagsEmptyState.propTypes = {
   /**
@@ -80,3 +89,4 @@ NoTagsEmptyState.propTypes = {
   subtext: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
 };
 NoTagsEmptyState.defaultProps = EmptyStateDefaultProps;
+NoTagsEmptyState.displayName = componentName;

@@ -1,41 +1,48 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Canary } from '../../_Canary';
 import { pkg } from '../../../settings';
 import { EmptyStateContent } from '../EmptyStateContent';
 import UnauthorizedIllustration from '../assets/Unauthorized';
 import { EmptyStateDefaultProps } from '../EmptyState';
 
-export const UnauthorizedEmptyState = ({
-  actionText,
-  actionType,
-  actionIcon,
-  heading,
-  illustrationSize,
-  illustrationTheme,
-  linkText,
-  linkUrl,
-  subtext,
-  onActionEvent,
-}) => {
-  return (
-    <div className={`${pkg.prefix}-empty-state`}>
-      <UnauthorizedIllustration
-        theme={illustrationTheme}
-        size={illustrationSize}
-      />
-      <EmptyStateContent
-        actionText={actionText}
-        actionType={actionType}
-        actionIcon={actionIcon}
-        heading={heading}
-        linkText={linkText}
-        linkUrl={linkUrl}
-        subtext={subtext}
-        onActionEvent={onActionEvent}
-      />
-    </div>
-  );
-};
+const componentName = 'UnauthorizedEmptyState';
+
+export const UnauthorizedEmptyState = !pkg.isComponentEnabled(componentName)
+  ? // Return canary if not released or flag not set
+    () => <Canary component={componentName} />
+  : // Main component code...
+    ({
+      actionText,
+      actionType,
+      actionIcon,
+      heading,
+      illustrationSize,
+      illustrationTheme,
+      linkText,
+      linkUrl,
+      subtext,
+      onActionEvent,
+    }) => {
+      return (
+        <div className={`${pkg.prefix}-empty-state`}>
+          <UnauthorizedIllustration
+            theme={illustrationTheme}
+            size={illustrationSize}
+          />
+          <EmptyStateContent
+            actionText={actionText}
+            actionType={actionType}
+            actionIcon={actionIcon}
+            heading={heading}
+            linkText={linkText}
+            linkUrl={linkUrl}
+            subtext={subtext}
+            onActionEvent={onActionEvent}
+          />
+        </div>
+      );
+    };
 
 UnauthorizedEmptyState.propTypes = {
   /**
@@ -83,3 +90,4 @@ UnauthorizedEmptyState.propTypes = {
   subtext: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
 };
 UnauthorizedEmptyState.defaultProps = EmptyStateDefaultProps;
+UnauthorizedEmptyState.displayName = componentName;

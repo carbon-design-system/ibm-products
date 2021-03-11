@@ -109,4 +109,4 @@ EmptyStateContent.propTypes = {
   subtext: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
 };
 
-EmptyState.displayName = componentName;
+EmptyStateContent.displayName = componentName;

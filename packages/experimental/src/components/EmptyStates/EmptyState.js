@@ -9,47 +9,53 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import setIllustrationClass from './assets/setIllustrationClass';
 
+import { Canary } from '../_Canary';
 import { pkg } from '../../settings';
 import { EmptyStateContent } from './EmptyStateContent';
+const componentName = 'EmptyState';
 
-export const EmptyState = ({
-  actionText,
-  actionType,
-  actionIcon,
-  heading,
-  linkText,
-  linkUrl,
-  subtext,
-  illustration,
-  illustrationSize,
-  onActionEvent,
-}) => {
-  const renderIllustration = () => {
-    return (
-      <img
-        src={illustration}
-        alt="Empty state illustration"
-        className={setIllustrationClass(illustrationSize)}
-      />
-    );
-  };
+export const EmptyState = !pkg.isComponentEnabled(componentName)
+  ? // Return canary if not released or flag not set
+    () => <Canary component={componentName} />
+  : // Main component code...
+    ({
+      actionText,
+      actionType,
+      actionIcon,
+      heading,
+      linkText,
+      linkUrl,
+      subtext,
+      illustration,
+      illustrationSize,
+      onActionEvent,
+    }) => {
+      const renderIllustration = () => {
+        return (
+          <img
+            src={illustration}
+            alt="Empty state illustration"
+            className={setIllustrationClass(illustrationSize)}
+          />
+        );
+      };
 
-  return (
-    <div className={`${pkg.prefix}-empty-state`}>
-      {illustration && renderIllustration()}
-      <EmptyStateContent
-        actionText={actionText}
-        actionType={actionType}
-        actionIcon={actionIcon}
-        heading={heading}
-        linkText={linkText}
-        linkUrl={linkUrl}
-        subtext={subtext}
-        onActionEvent={onActionEvent}
-      />
-    </div>
-  );
-};
+      return (
+        <div className={`${pkg.prefix}-empty-state`}>
+          {illustration && renderIllustration()}
+          <EmptyStateContent
+            actionText={actionText}
+            actionType={actionType}
+            actionIcon={actionIcon}
+            heading={heading}
+            linkText={linkText}
+            linkUrl={linkUrl}
+            subtext={subtext}
+            onActionEvent={onActionEvent}
+          />
+        </div>
+      );
+    };
 
 export const EmptyStateProps = {
   /**
@@ -103,3 +109,4 @@ export const EmptyStateDefaultProps = {
 
 EmptyState.propTypes = EmptyStateProps;
 EmptyState.defaultProps = EmptyStateDefaultProps;
+EmptyState.displayName = componentName;

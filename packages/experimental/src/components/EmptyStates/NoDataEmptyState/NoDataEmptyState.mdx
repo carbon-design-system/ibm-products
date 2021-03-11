@@ -1,4 +1,6 @@
 import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
+import { pkg } from '../../../settings';
+import { getStorybookSlug } from '../../../../config';
 import { NoDataEmptyState } from './NoDataEmptyState';
 
 # No data Empty state
@@ -17,37 +19,73 @@ guidelines and documentation please refer to the links above.
 ### Default No data Empty state
 
 <Preview>
-  <Story id="experimental-emptystates-nodataemptystate--default" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${NoDataEmptyState.displayName}`,
+      'default'
+    )}
+  />
 </Preview>
 
 ### No data Empty state with dark themed illustration
 
 <Preview>
-  <Story id="experimental-emptystates-nodataemptystate--with-dark-mode-illustration" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${NoDataEmptyState.displayName}`,
+      'with-dark-mode-illustration'
+    )}
+  />
 </Preview>
 
 ### No data Empty state with action
 
 <Preview>
-  <Story id="experimental-emptystates-nodataemptystate--with-action" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${NoDataEmptyState.displayName}`,
+      'with-action'
+    )}
+  />
 </Preview>
 
 ### No data Empty state with action (Button with icon)
 
 <Preview>
-  <Story id="experimental-emptystates-nodataemptystate--with-action-icon-button" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${NoDataEmptyState.displayName}`,
+      'with-action-icon-button'
+    )}
+  />
 </Preview>
 
 ### No data Empty state with link
 
 <Preview>
-  <Story id="experimental-emptystates-nodataemptystate--with-link" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${NoDataEmptyState.displayName}`,
+      'with-link'
+    )}
+  />
 </Preview>
 
 ### No data Empty state with action and link
 
 <Preview>
-  <Story id="experimental-emptystates-nodataemptystate--with-action-and-link" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${NoDataEmptyState.displayName}`,
+      'with-action-and-link'
+    )}
+  />
 </Preview>
 
 ## Component API

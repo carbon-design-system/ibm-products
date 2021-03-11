@@ -1,63 +1,30 @@
-/**
- * Copyright IBM Corp. 2020, 2020
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Link } from 'carbon-components-react';
 
 import { pkg } from '../../settings';
 
-export const EmptyState = ({
+export const EmptyStateContent = ({
+  heading,
+  subtext,
   actionText,
+  onActionEvent,
   actionType,
   actionIcon,
-  heading,
   linkText,
   linkUrl,
-  subtext,
-  illustration,
-  illustrationSize,
-  illustrationTheme,
-  onActionEvent,
 }) => {
-  const defaultIllustrationOptions = [
-    'nodata',
-    'error',
-    'unauthorized',
-    'notags',
-    'notfound',
-    'notifications',
-  ];
   return (
-    <div className={`${pkg.prefix}-empty-state`}>
-      {illustration && (
-        <img
-          src={
-            typeof illustration === 'string' &&
-            defaultIllustrationOptions.includes(illustration)
-              ? require(`./assets/${illustrationTheme}/${illustration}.svg`)
-              : illustration
-          }
-          alt="Empty state illustration"
-          className={[
-            `${pkg.prefix}-empty-state-illustration`,
-            `${pkg.prefix}-empty-state-illustration--${illustrationSize}`,
-          ].join(' ')}
-        />
-      )}
+    <>
       {typeof heading !== 'string' ? (
         heading
       ) : (
-        <h3 className={`${pkg.prefix}-header`}>{heading}</h3>
+        <h3 className={`${pkg.prefix}-empty-state-header`}>{heading}</h3>
       )}
       {typeof subtext !== 'string' ? (
         subtext
       ) : (
-        <p className={`${pkg.prefix}-subtext`}>{subtext}</p>
+        <p className={`${pkg.prefix}-empty-state-subtext`}>{subtext}</p>
       )}
       {actionText && onActionEvent && (
         <Button
@@ -73,11 +40,11 @@ export const EmptyState = ({
           {linkText}
         </Link>
       )}
-    </div>
+    </>
   );
 };
 
-EmptyState.propTypes = {
+EmptyStateContent.propTypes = {
   /**
    * Empty state action button icon
    */
@@ -139,11 +106,4 @@ EmptyState.propTypes = {
    * Empty state subtext
    */
   subtext: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
-};
-
-EmptyState.defaultProps = {
-  heading: 'Start by adding data assets',
-  subtext: 'Click Upload assets to upload your data',
-  illustrationTheme: 'light',
-  illustrationSize: 'lg',
 };

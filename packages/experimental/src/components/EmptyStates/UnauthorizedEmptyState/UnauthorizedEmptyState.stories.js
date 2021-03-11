@@ -8,19 +8,18 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add20 } from '@carbon/icons-react';
-import CustomIllustration from './assets/light/error.svg';
-import mdx from './EmptyState.mdx';
-import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, 'EmptyState');
+import mdx from './UnauthorizedEmptyState.mdx';
+import { pkg } from '../../../settings';
+import { getStorybookPrefix } from '../../../../config';
+const storybookPrefix = getStorybookPrefix(pkg, 'EmptyStates');
+console.log(storybookPrefix);
+import { UnauthorizedEmptyState } from './UnauthorizedEmptyState';
 
-import { EmptyState } from '.';
-
-import styles from './_index.scss';
+import styles from '../_index.scss';
 
 export default {
-  title: `${storybookPrefix}/EmptyState`,
-  component: EmptyState,
+  title: `${storybookPrefix}/EmptyStates/UnauthorizedEmptyState`,
+  component: UnauthorizedEmptyState,
   parameters: {
     styles,
     docs: {
@@ -31,7 +30,7 @@ export default {
 
 const Template = (args) => {
   return (
-    <EmptyState
+    <UnauthorizedEmptyState
       heading="Start by adding data assets"
       subtext={
         <p>
@@ -46,20 +45,9 @@ const Template = (args) => {
 export const Default = Template.bind({});
 Default.args = {};
 
-export const WithIllustration = Template.bind({});
-WithIllustration.args = {
-  illustration: 'nodata',
-};
-
 export const WithDarkModeIllustration = Template.bind({});
 WithDarkModeIllustration.args = {
-  illustration: 'nodata',
   illustrationTheme: 'dark',
-};
-
-export const WithCustomIllustration = Template.bind({});
-WithCustomIllustration.args = {
-  illustration: CustomIllustration,
 };
 
 export const withAction = Template.bind({});

@@ -6,7 +6,7 @@ import { HTTPErrors } from '../HTTPErrors';
 
 import { pkg /*, carbon */ } from '../../../settings';
 
-const blockClass = `${pkg.prefix}--http-errors-403`;
+const blockClass = `${pkg.prefix}--http-errors`;
 const componentName = 'HTTPErrors';
 
 export const HTTPError403 = ({
@@ -18,16 +18,18 @@ export const HTTPError403 = ({
   ...rest
 }) => {
   return (
-    <div className={cx(`${blockClass}`)}>
-      <HTTPErrorSvg403 />
+    <div
+      className={cx(`${blockClass}`, {
+        [className]: className,
+      })}
+      {...rest}>
       <HTTPErrors
-        className={className}
         description={description}
         errorCodeLabel={errorCodeLabel}
         title={title}
         links={links}
-        {...rest}
       />
+      <HTTPErrorSvg403 className={cx(`${blockClass}-image`)} />
     </div>
   );
 };

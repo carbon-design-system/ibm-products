@@ -10,8 +10,6 @@
 @import '../../global/styles/project-settings';
 @import 'carbon-components/scss/components/link/link';
 
-// TODO: @import(s) of all Carbon component styles used by HTTPErrors
-
 @include exports($name: http-errors) {
   /// @type String
   /// @access private
@@ -19,6 +17,18 @@
 
   .#{$block-class} {
     // TODO: Styles.
+    &.#{$block-class}-content {
+      @include carbon--breakpoint(sm) {
+        position: fixed;
+        z-index: 2;
+        // stylelint-disable-next-line carbon/layout-token-use
+        transform: translate(-50%, -150%);
+      }
+      @include carbon--breakpoint(md) {
+        // stylelint-disable-next-line carbon/layout-token-use
+        transform: translate(-50%, -50%);
+      }
+    }
     .#{$block-class}-error-code-label {
       @include carbon--type-style('productive-heading-02');
 
@@ -37,6 +47,20 @@
     .#{$block-class}-link {
       display: block;
       margin-bottom: $spacing-02;
+    }
+    .#{$block-class}-image {
+      @include carbon--breakpoint(sm) {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        // stylelint-disable-next-line carbon/layout-token-use
+        transform: translate(-50%, -40%);
+      }
+      @include carbon--breakpoint(md) {
+        // stylelint-disable-next-line carbon/layout-token-use
+        transform: translate(-50%, -50%);
+      }
     }
   }
 }

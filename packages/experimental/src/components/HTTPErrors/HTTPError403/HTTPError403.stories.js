@@ -25,10 +25,6 @@ import styles from '../_storybook-styles.scss';
 export default {
   title: `${storybookPrefix}/HTTPErrors/${HTTPError403.displayName}`,
   component: HTTPError403,
-  // TODO: Define argTypes for props not represented by standard JS types
-  // argTypes: {
-  //   egProp: { control: 'color' },
-  // },
   parameters: {
     docs: {
       page,
@@ -37,9 +33,6 @@ export default {
   },
 };
 
-/**
- * TODO: Declare template(s) that (one or more scenarios)
- */
 const Template = (args) => {
   return (
     <HTTPError403
@@ -54,8 +47,8 @@ const Template = (args) => {
  * TODO: Declare one or more examples per template.
  * NOTE: Complete list of examples should match designed use cases
  */
-export const ExampleOne = Template.bind({});
-ExampleOne.args = {
+export const withAllPropsSet = Template.bind({});
+withAllPropsSet.args = {
   errorCodeLabel: 'Error 403',
   title: 'Forbidden',
   description: 'You are not authorized to access this resource.',

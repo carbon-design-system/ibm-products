@@ -5,34 +5,26 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import React from 'react';
 import cx from 'classnames';
 import { arrayOf, shape, string } from 'prop-types';
-import React from 'react';
 import { Link } from 'carbon-components-react';
 import { Canary } from '../_Canary';
-
-/**
- * TODO: @import(s) of carbon components
- */
-
-/**
- * TODO: Add use of Carbon prefix if needed
- */
 import { pkg /*, carbon */ } from '../../settings';
 
 const blockClass = `${pkg.prefix}--http-errors`;
 const componentName = 'HTTPErrors';
 
-/**
- * TODO: Description.
- */
 export const HTTPErrors = !pkg.isComponentEnabled(componentName)
   ? // Return canary if not released or flag not set
     () => <Canary component={componentName} />
   : // Main component code...
-    ({ className, description, errorCodeLabel, title, links, ...rest }) => {
+    ({ className, description, errorCodeLabel, title, links }) => {
       return (
-        <div className={cx(blockClass, className)} {...rest}>
+        <div
+          className={cx(blockClass, `${blockClass}-content`, {
+            [className]: className,
+          })}>
           <p className={cx(`${blockClass}-error-code-label`)}>
             {errorCodeLabel}
           </p>

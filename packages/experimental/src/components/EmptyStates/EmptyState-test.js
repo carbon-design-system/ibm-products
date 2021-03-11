@@ -9,7 +9,8 @@ import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 
 import { EmptyState } from '.';
-import CustomIllustration from './assets/light/error.svg';
+import { NoDataEmptyState } from './NoDataEmptyState';
+import CustomIllustration from './story_assets/empty-state-bright-magnifying-glass.svg';
 
 const { name } = EmptyState;
 
@@ -83,15 +84,9 @@ describe(name, () => {
   });
 
   test('should render empty state with illustration', () => {
-    const { container } = render(<EmptyState illustration="nodata" />);
-    const renderedSvg = container.querySelector('img');
+    const { container } = render(<NoDataEmptyState />);
+    const renderedSvg = container.querySelector('svg');
     expect(renderedSvg).toBeTruthy();
-  });
-
-  test('should render svg as default illustration', () => {
-    const { container } = render(<EmptyState illustration="nodata" />);
-    const renderedSvgSrc = container.querySelector('img').src;
-    expect(renderedSvgSrc.substr(renderedSvgSrc.length - 4)).toEqual('.svg');
   });
 
   test('should render a custom illustration', () => {

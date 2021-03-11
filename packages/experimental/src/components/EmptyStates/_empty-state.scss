@@ -11,8 +11,8 @@
 @import 'carbon-components/scss/components/link/link';
 
 .#{$pkg-prefix}-empty-state {
-  .#{$pkg-prefix}-header,
-  .#{$pkg-prefix}-subtext,
+  .#{$pkg-prefix}-empty-state-header,
+  .#{$pkg-prefix}-empty-state-subtext,
   p {
     margin: 0;
     padding-bottom: $spacing-02;

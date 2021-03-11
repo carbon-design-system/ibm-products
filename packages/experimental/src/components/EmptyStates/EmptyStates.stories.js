@@ -8,19 +8,33 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add20 } from '@carbon/icons-react';
-import CustomIllustration from './assets/light/error.svg';
+import CustomIllustration from './story_assets/empty-state-bright-magnifying-glass.svg';
 import mdx from './EmptyState.mdx';
-import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, 'EmptyState');
+import {
+  storybookPrefixCanary as storybookPrefix /* , storybookPrefixReleased */,
+} from '../../../config';
 
 import { EmptyState } from '.';
+import { ErrorEmptyState } from './ErrorEmptyState';
+import { NoDataEmptyState } from './NoDataEmptyState';
+import { NoTagsEmptyState } from './NoTagsEmptyState';
+import { NotFoundEmptyState } from './NotFoundEmptyState';
+import { NotificationsEmptyState } from './NotificationsEmptyState';
+import { UnauthorizedEmptyState } from './UnauthorizedEmptyState';
 
 import styles from './_index.scss';
 
 export default {
-  title: `${storybookPrefix}/EmptyState`,
+  title: `${storybookPrefix}/EmptyStates/EmptyState`,
   component: EmptyState,
+  subcomponents: {
+    ErrorEmptyState,
+    NoDataEmptyState,
+    NoTagsEmptyState,
+    NotFoundEmptyState,
+    NotificationsEmptyState,
+    UnauthorizedEmptyState,
+  },
   parameters: {
     styles,
     docs: {
@@ -45,17 +59,6 @@ const Template = (args) => {
 
 export const Default = Template.bind({});
 Default.args = {};
-
-export const WithIllustration = Template.bind({});
-WithIllustration.args = {
-  illustration: 'nodata',
-};
-
-export const WithDarkModeIllustration = Template.bind({});
-WithDarkModeIllustration.args = {
-  illustration: 'nodata',
-  illustrationTheme: 'dark',
-};
 
 export const WithCustomIllustration = Template.bind({});
 WithCustomIllustration.args = {

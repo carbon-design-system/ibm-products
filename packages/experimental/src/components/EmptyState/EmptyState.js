@@ -9,73 +9,79 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Link } from 'carbon-components-react';
 
+import { Canary } from '../_Canary';
 import { pkg } from '../../settings';
+const componentName = 'EmptyState';
 
-export const EmptyState = ({
-  actionText,
-  actionType,
-  actionIcon,
-  heading,
-  linkText,
-  linkUrl,
-  subtext,
-  illustration,
-  illustrationSize,
-  illustrationTheme,
-  onActionEvent,
-}) => {
-  const defaultIllustrationOptions = [
-    'nodata',
-    'error',
-    'unauthorized',
-    'notags',
-    'notfound',
-    'notifications',
-  ];
-  return (
-    <div className={`${pkg.prefix}-empty-state`}>
-      {illustration && (
-        <img
-          src={
-            typeof illustration === 'string' &&
-            defaultIllustrationOptions.includes(illustration)
-              ? require(`./assets/${illustrationTheme}/${illustration}.svg`)
-              : illustration
-          }
-          alt="Empty state illustration"
-          className={[
-            `${pkg.prefix}-empty-state-illustration`,
-            `${pkg.prefix}-empty-state-illustration--${illustrationSize}`,
-          ].join(' ')}
-        />
-      )}
-      {typeof heading !== 'string' ? (
-        heading
-      ) : (
-        <h3 className={`${pkg.prefix}-header`}>{heading}</h3>
-      )}
-      {typeof subtext !== 'string' ? (
-        subtext
-      ) : (
-        <p className={`${pkg.prefix}-subtext`}>{subtext}</p>
-      )}
-      {actionText && onActionEvent && (
-        <Button
-          className={`${pkg.prefix}-empty-state-action-button`}
-          kind={actionType || 'tertiary'}
-          onClick={onActionEvent}
-          renderIcon={actionIcon || null}>
-          {actionText}
-        </Button>
-      )}
-      {linkText && linkUrl && (
-        <Link className={`${pkg.prefix}-empty-state-link`} href={linkUrl}>
-          {linkText}
-        </Link>
-      )}
-    </div>
-  );
-};
+export const EmptyState = !pkg.isComponentEnabled(componentName)
+  ? // Return canary if not released or flag not set
+    () => <Canary component={componentName} />
+  : // Main component code...
+    ({
+      actionText,
+      actionType,
+      actionIcon,
+      heading,
+      linkText,
+      linkUrl,
+      subtext,
+      illustration,
+      illustrationSize,
+      illustrationTheme,
+      onActionEvent,
+    }) => {
+      const defaultIllustrationOptions = [
+        'nodata',
+        'error',
+        'unauthorized',
+        'notags',
+        'notfound',
+        'notifications',
+      ];
+      return (
+        <div className={`${pkg.prefix}-empty-state`}>
+          {illustration && (
+            <img
+              src={
+                typeof illustration === 'string' &&
+                defaultIllustrationOptions.includes(illustration)
+                  ? import(`./assets/${illustrationTheme}/${illustration}.svg`)
+                  : illustration
+              }
+              alt="Empty state illustration"
+              className={[
+                `${pkg.prefix}-empty-state-illustration`,
+                `${pkg.prefix}-empty-state-illustration--${illustrationSize}`,
+              ].join(' ')}
+            />
+          )}
+          {typeof heading !== 'string' ? (
+            heading
+          ) : (
+            <h3 className={`${pkg.prefix}-header`}>{heading}</h3>
+          )}
+          {typeof subtext !== 'string' ? (
+            subtext
+          ) : (
+            <p className={`${pkg.prefix}-subtext`}>{subtext}</p>
+          )}
+          {actionText && onActionEvent && (
+            <Button
+              className={`${pkg.prefix}-empty-state-action-button`}
+              kind={actionType || 'tertiary'}
+              onClick={onActionEvent}
+              renderIcon={actionIcon || null}>
+              {actionText}
+            </Button>
+          )}
+          {linkText && linkUrl && (
+            <Link className={`${pkg.prefix}-empty-state-link`} href={linkUrl}>
+              {linkText}
+            </Link>
+          )}
+        </div>
+      );
+    };
 
 EmptyState.propTypes = {
   /**
@@ -147,3 +153,5 @@ EmptyState.defaultProps = {
   illustrationTheme: 'light',
   illustrationSize: 'lg',
 };
+
+EmptyState.displayName = componentName;

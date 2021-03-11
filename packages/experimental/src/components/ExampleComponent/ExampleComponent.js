@@ -5,18 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Canary } from '../_Canary';
 import { Button, ButtonSet } from 'carbon-components-react';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { pkg } from '../../settings';
 import cx from 'classnames';
 
-const blockClass = `${pkg.prefix}-example-component`;
-const componentName = 'ExampleComponent';
-
 // NOTE: SCSS is not imported directly here: it is rolled up separately.
+
+import { Canary } from '../_Canary';
+import { pkg } from '../../settings';
+const componentName = 'ExampleComponent';
+const blockClass = `${pkg.prefix}-example-component`;
 
 export const ExampleComponent = !pkg.isComponentEnabled(componentName)
   ? // Return canary if not released or flag not set

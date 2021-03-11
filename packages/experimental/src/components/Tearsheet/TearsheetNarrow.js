@@ -10,63 +10,72 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 
-import { pkg } from '../../settings';
-
 import { ModalHeader, ModalBody } from 'carbon-components-react';
 
 import { TearsheetShell } from './TearsheetShell';
 
+import { Canary } from '../_Canary';
+import { pkg } from '../../settings';
+const componentName = 'TearsheetNarrow';
 const blockClass = `${pkg.prefix}-tearsheet`;
 
-export const TearsheetNarrow = ({
-  buttons,
-  children,
-  className,
-  closeIconDescription,
-  description,
-  hasCloseIcon,
-  height,
-  label,
-  onClose,
-  open,
-  preventCloseOnClickOutside,
-  title,
-}) => {
-  const closeClasses = cx({
-    [`${blockClass}--header--no-close-icon`]: !hasCloseIcon,
-  });
+export const TearsheetNarrow = !pkg.isComponentEnabled(componentName)
+  ? // Return canary if not released or flag not set
+    () => <Canary component={componentName} />
+  : // Main component code...
+    ({
+      buttons,
+      children,
+      className,
+      closeIconDescription,
+      description,
+      hasCloseIcon,
+      height,
+      label,
+      onClose,
+      open,
+      preventCloseOnClickOutside,
+      title,
+    }) => {
+      const closeClasses = cx({
+        [`${blockClass}--header--no-close-icon`]: !hasCloseIcon,
+      });
 
-  return (
-    <TearsheetShell
-      className={className}
-      height={height}
-      onClose={onClose}
-      open={open}
-      preventCloseOnClickOutside={preventCloseOnClickOutside}
-      size="narrow">
-      {(label || title || description) && (
-        <ModalHeader
-          className={`${blockClass}--header`}
-          closeClassName={closeClasses}
-          iconDescription={closeIconDescription}
-          label={label}
-          title={title}>
-          {description && (
-            <div className={`${blockClass}--header-description`}>
-              {description}
-            </div>
+      return (
+        <TearsheetShell
+          className={className}
+          height={height}
+          onClose={onClose}
+          open={open}
+          preventCloseOnClickOutside={preventCloseOnClickOutside}
+          size="narrow">
+          {(label || title || description) && (
+            <ModalHeader
+              className={`${blockClass}--header`}
+              closeClassName={closeClasses}
+              iconDescription={closeIconDescription}
+              label={label}
+              title={title}>
+              {description && (
+                <div className={`${blockClass}--header-description`}>
+                  {description}
+                </div>
+              )}
+            </ModalHeader>
           )}
-        </ModalHeader>
-      )}
-      <ModalBody className={`${blockClass}--body`}>
-        <div className={`${blockClass}--right`}>
-          {children && <div className={`${blockClass}--main`}>{children}</div>}
-          {buttons && <div className={`${blockClass}--buttons`}>{buttons}</div>}
-        </div>
-      </ModalBody>
-    </TearsheetShell>
-  );
-};
+          <ModalBody className={`${blockClass}--body`}>
+            <div className={`${blockClass}--right`}>
+              {children && (
+                <div className={`${blockClass}--main`}>{children}</div>
+              )}
+              {buttons && (
+                <div className={`${blockClass}--buttons`}>{buttons}</div>
+              )}
+            </div>
+          </ModalBody>
+        </TearsheetShell>
+      );
+    };
 
 TearsheetNarrow.propTypes = {
   /**
@@ -138,3 +147,5 @@ TearsheetNarrow.defaultProps = {
   height: 'normal',
   preventCloseOnClickOutside: false,
 };
+
+TearsheetNarrow.displayName = componentName;

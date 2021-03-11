@@ -1,4 +1,6 @@
 import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
+import { pkg } from '../../../settings';
+import { getStorybookSlug } from '../../../../config';
 import { ErrorEmptyState } from './ErrorEmptyState';
 
 # Error Empty state
@@ -17,37 +19,73 @@ guidelines and documentation please refer to the links above.
 ### Default Error Empty state
 
 <Preview>
-  <Story id="experimental-emptystates-erroremptystate--default" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${ErrorEmptyState.displayName}`,
+      'default'
+    )}
+  />
 </Preview>
 
 ### Error Empty state with dark themed illustration
 
 <Preview>
-  <Story id="experimental-emptystates-erroremptystate--with-dark-mode-illustration" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${ErrorEmptyState.displayName}`,
+      'with-dark-mode-illustration'
+    )}
+  />
 </Preview>
 
 ### Error Empty state with action
 
 <Preview>
-  <Story id="experimental-emptystates-erroremptystate--with-action" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${ErrorEmptyState.displayName}`,
+      'with-action'
+    )}
+  />
 </Preview>
 
 ### Error Empty state with action (Button with icon)
 
 <Preview>
-  <Story id="experimental-emptystates-erroremptystate--with-action-icon-button" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${ErrorEmptyState.displayName}`,
+      'with-action-icon-button'
+    )}
+  />
 </Preview>
 
 ### Error Empty state with link
 
 <Preview>
-  <Story id="experimental-emptystates-erroremptystate--with-link" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${ErrorEmptyState.displayName}`,
+      'with-link'
+    )}
+  />
 </Preview>
 
 ### Error Empty state with action and link
 
 <Preview>
-  <Story id="experimental-emptystates-erroremptystate--with-action-and-link" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${ErrorEmptyState.displayName}`,
+      'with-action-and-link'
+    )}
+  />
 </Preview>
 
 ## Component API

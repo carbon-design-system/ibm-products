@@ -1,4 +1,6 @@
 import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
+import { pkg } from '../../settings';
+import { getStorybookSlug } from '../../../config';
 import { EmptyState } from './EmptyState';
 
 # Empty state
@@ -17,31 +19,61 @@ guidelines and documentation please refer to the links above.
 ### Default Empty state
 
 <Preview>
-  <Story id="experimental-emptystates-emptystate--default" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${EmptyState.displayName}`,
+      'default'
+    )}
+  />
 </Preview>
 
 ### Empty state with action
 
 <Preview>
-  <Story id="experimental-emptystates-emptystate--with-action" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${EmptyState.displayName}`,
+      'with-action'
+    )}
+  />
 </Preview>
 
 ### Empty state with action (Button with icon)
 
 <Preview>
-  <Story id="experimental-emptystates-emptystate--with-action-icon-button" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${EmptyState.displayName}`,
+      'with-action-icon-button'
+    )}
+  />
 </Preview>
 
 ### Empty state with link
 
 <Preview>
-  <Story id="experimental-emptystates-emptystate--with-link" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${EmptyState.displayName}`,
+      'with-link'
+    )}
+  />
 </Preview>
 
 ### Empty state with action and link
 
 <Preview>
-  <Story id="experimental-emptystates-emptystate--with-action-and-link" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${EmptyState.displayName}`,
+      'with-action-and-link'
+    )}
+  />
 </Preview>
 
 ## Component API

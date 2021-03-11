@@ -7,15 +7,16 @@
 
 import React, { useState } from 'react';
 import { Button } from 'carbon-components-react';
-import { ExportModal } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import mdx from './ExportModal.mdx';
 import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, 'ExportModal');
+import { ExportModal } from '.';
+import mdx from './ExportModal.mdx';
+const storybookPrefix = getStorybookPrefix(pkg, ExportModal.displayName);
 
 export default {
-  title: `${storybookPrefix}/ExportModal`,
+  title: `${storybookPrefix}/${ExportModal.displayName}`,
   component: ExportModal,
   parameters: {
     styles,

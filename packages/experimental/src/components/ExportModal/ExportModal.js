@@ -9,141 +9,147 @@ import {
 } from 'carbon-components-react';
 import { ErrorFilled16, CheckmarkFilled16 } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
+import { Canary } from '../_Canary';
 import { pkg } from '../../settings';
+const componentName = 'ExportModal';
 
-export const ExportModal = ({
-  error,
-  errorMessage,
-  filename,
-  inputLabel,
-  invalidInputText,
-  loading,
-  loadingMessage,
-  modalBody,
-  modalHeading,
-  onRequestClose,
-  onRequestSubmit,
-  open,
-  preformattedExtensions,
-  preformattedExtensionsLabel,
-  primaryButtonText,
-  secondaryButtonText,
-  successMessage,
-  successful,
-  validExtensions,
-}) => {
-  const [name, setName] = useState(filename);
-  const [dirtyInput, setDirtyInput] = useState(false);
-  const [extension, setExtension] = useState(
-    preformattedExtensions[0] ? preformattedExtensions[0].extension : ''
-  );
+export const ExportModal = !pkg.isComponentEnabled(componentName)
+  ? // Return canary if not released or flag not set
+    () => <Canary component={componentName} />
+  : // Main component code...
+    ({
+      error,
+      errorMessage,
+      filename,
+      inputLabel,
+      invalidInputText,
+      loading,
+      loadingMessage,
+      modalBody,
+      modalHeading,
+      onRequestClose,
+      onRequestSubmit,
+      open,
+      preformattedExtensions,
+      preformattedExtensionsLabel,
+      primaryButtonText,
+      secondaryButtonText,
+      successMessage,
+      successful,
+      validExtensions,
+    }) => {
+      const [name, setName] = useState(filename);
+      const [dirtyInput, setDirtyInput] = useState(false);
+      const [extension, setExtension] = useState(
+        preformattedExtensions[0] ? preformattedExtensions[0].extension : ''
+      );
 
-  const onNameChangeHandler = (evt) => {
-    setName(evt.target.value);
-  };
+      const onNameChangeHandler = (evt) => {
+        setName(evt.target.value);
+      };
 
-  const onExtensionChangeHandler = (value) => {
-    setExtension(value);
-  };
+      const onExtensionChangeHandler = (value) => {
+        setExtension(value);
+      };
 
-  const onBlurHandler = () => {
-    setDirtyInput(true);
-  };
+      const onBlurHandler = () => {
+        setDirtyInput(true);
+      };
 
-  const onSubmitHandler = () => {
-    const preformatted = preformattedExtensions.length;
-    const returnName = preformatted
-      ? `${filename}.${extension.toLocaleLowerCase()}`
-      : name;
-    onRequestSubmit(returnName);
-  };
+      const onSubmitHandler = () => {
+        const preformatted = preformattedExtensions.length;
+        const returnName = preformatted
+          ? `${filename}.${extension.toLocaleLowerCase()}`
+          : name;
+        onRequestSubmit(returnName);
+      };
 
-  const onCloseHandler = () => {
-    onRequestClose();
-  };
+      const onCloseHandler = () => {
+        onRequestClose();
+      };
 
-  const hasInvalidExtension = () => {
-    if (!dirtyInput || !validExtensions || !validExtensions.length)
-      return false;
-    if (!name.includes('.')) return true;
-    const ext = name.split('.').pop();
-    if (!validExtensions.includes(ext)) return true;
-    return false;
-  };
+      const hasInvalidExtension = () => {
+        if (!dirtyInput || !validExtensions || !validExtensions.length)
+          return false;
+        if (!name.includes('.')) return true;
+        const ext = name.split('.').pop();
+        if (!validExtensions.includes(ext)) return true;
+        return false;
+      };
 
-  const primaryButtonDisabled = loading || !name || hasInvalidExtension();
-  const submitted = loading || error || successful;
+      const primaryButtonDisabled = loading || !name || hasInvalidExtension();
+      const submitted = loading || error || successful;
 
-  return (
-    <Modal
-      open={open}
-      primaryButtonText={primaryButtonText}
-      secondaryButtonText={secondaryButtonText}
-      modalHeading={modalHeading}
-      onRequestSubmit={onSubmitHandler}
-      onRequestClose={onCloseHandler}
-      className={`${pkg.prefix}-export-modal`}
-      primaryButtonDisabled={primaryButtonDisabled}
-      passiveModal={submitted}>
-      <div className={`${pkg.prefix}-export-modal-inner`}>
-        {!submitted && (
-          <>
-            <p className={`${pkg.prefix}-export-modal-body`}>{modalBody}</p>
-            {preformattedExtensions.length ? (
-              <FormGroup legendText={preformattedExtensionsLabel}>
-                <RadioButtonGroup
-                  orientation="vertical"
-                  onChange={onExtensionChangeHandler}
-                  valueSelected={extension}
-                  name="extensions">
-                  {preformattedExtensions.map((o) => (
-                    <RadioButton
-                      key={o.extension}
-                      id={o.extension}
-                      value={o.extension}
-                      labelText={`${o.extension} (${o.description})`}
-                    />
-                  ))}
-                </RadioButtonGroup>
-              </FormGroup>
-            ) : (
-              <TextInput
-                value={name}
-                onChange={onNameChangeHandler}
-                labelText={inputLabel}
-                invalid={hasInvalidExtension()}
-                invalidText={invalidInputText}
-                onBlur={onBlurHandler}
-              />
+      return (
+        <Modal
+          open={open}
+          primaryButtonText={primaryButtonText}
+          secondaryButtonText={secondaryButtonText}
+          modalHeading={modalHeading}
+          onRequestSubmit={onSubmitHandler}
+          onRequestClose={onCloseHandler}
+          className={`${pkg.prefix}-export-modal`}
+          primaryButtonDisabled={primaryButtonDisabled}
+          passiveModal={submitted}>
+          <div className={`${pkg.prefix}-export-modal-inner`}>
+            {!submitted && (
+              <>
+                <p className={`${pkg.prefix}-export-modal-body`}>{modalBody}</p>
+                {preformattedExtensions.length ? (
+                  <FormGroup legendText={preformattedExtensionsLabel}>
+                    <RadioButtonGroup
+                      orientation="vertical"
+                      onChange={onExtensionChangeHandler}
+                      valueSelected={extension}
+                      name="extensions">
+                      {preformattedExtensions.map((o) => (
+                        <RadioButton
+                          key={o.extension}
+                          id={o.extension}
+                          value={o.extension}
+                          labelText={`${o.extension} (${o.description})`}
+                        />
+                      ))}
+                    </RadioButtonGroup>
+                  </FormGroup>
+                ) : (
+                  <TextInput
+                    value={name}
+                    onChange={onNameChangeHandler}
+                    labelText={inputLabel}
+                    invalid={hasInvalidExtension()}
+                    invalidText={invalidInputText}
+                    onBlur={onBlurHandler}
+                  />
+                )}
+              </>
             )}
-          </>
-        )}
-        {loading && (
-          <div className={`${pkg.prefix}-export-modal-messaging`}>
-            <Loading small withOverlay={false} />
-            <p>{loadingMessage}</p>
+            {loading && (
+              <div className={`${pkg.prefix}-export-modal-messaging`}>
+                <Loading small withOverlay={false} />
+                <p>{loadingMessage}</p>
+              </div>
+            )}
+            {successful && (
+              <div className={`${pkg.prefix}-export-modal-messaging`}>
+                <CheckmarkFilled16
+                  className={`${pkg.prefix}-export-modal-checkmark-icon`}
+                />
+                <p>{successMessage}</p>
+              </div>
+            )}
+            {error && (
+              <div className={`${pkg.prefix}-export-modal-messaging`}>
+                <ErrorFilled16
+                  className={`${pkg.prefix}-export-modal-error-icon`}
+                />
+                <p>{errorMessage}</p>
+              </div>
+            )}
           </div>
-        )}
-        {successful && (
-          <div className={`${pkg.prefix}-export-modal-messaging`}>
-            <CheckmarkFilled16
-              className={`${pkg.prefix}-export-modal-checkmark-icon`}
-            />
-            <p>{successMessage}</p>
-          </div>
-        )}
-        {error && (
-          <div className={`${pkg.prefix}-export-modal-messaging`}>
-            <ErrorFilled16
-              className={`${pkg.prefix}-export-modal-error-icon`}
-            />
-            <p>{errorMessage}</p>
-          </div>
-        )}
-      </div>
-    </Modal>
-  );
-};
+        </Modal>
+      );
+    };
 
 ExportModal.propTypes = {
   /**
@@ -248,3 +254,5 @@ ExportModal.defaultProps = {
   successMessage: '',
   validExtensions: [],
 };
+
+ExportModal.displayName = componentName;

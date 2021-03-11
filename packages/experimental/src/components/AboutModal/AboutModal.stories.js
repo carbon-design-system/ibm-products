@@ -10,11 +10,11 @@ import PropTypes from 'prop-types';
 import { Button, Link } from 'carbon-components-react';
 
 import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, 'AboutModal');
-
 import { AboutModal } from './AboutModal';
 import mdx from './AboutModal.mdx';
+const storybookPrefix = getStorybookPrefix(pkg, AboutModal.displayName);
 
 import ExampleLogo from './_story-assets/example-logo.svg';
 import ansibleLogo from './_story-assets/ansible-logo.png';
@@ -24,7 +24,7 @@ import jsLogo from './_story-assets/js-logo.png';
 import styles from './_index.scss';
 
 export default {
-  title: `${storybookPrefix}/AboutModal`,
+  title: `${storybookPrefix}/${AboutModal.displayName}`,
   component: AboutModal,
   parameters: {
     styles,

@@ -9,6 +9,8 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { Link } from 'carbon-components-react';
 
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
+
 import { AboutModal } from './AboutModal';
 import ExampleLogo from './_story-assets/example-logo.svg';
 import ansibleLogo from './_story-assets/ansible-logo.png';

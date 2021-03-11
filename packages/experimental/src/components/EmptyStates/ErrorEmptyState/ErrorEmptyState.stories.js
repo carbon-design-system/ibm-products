@@ -8,6 +8,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add20 } from '@carbon/icons-react';
+import '../../../enable-all'; // must come before component is imported (directly or indirectly)
 import mdx from './ErrorEmptyState.mdx';
 import { pkg } from '../../../settings';
 import { getStorybookPrefix } from '../../../../config';

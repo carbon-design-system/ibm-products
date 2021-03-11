@@ -1,6 +1,8 @@
 <!-- `position:fixed` cause rendering issues, so do not render the modal -->
 
 import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
+import { pkg } from '../../settings';
+import { getStorybookSlug } from '../../../config';
 import { ImportModal } from './ImportModal';
 
 # ImportModal
@@ -14,7 +16,9 @@ import { ImportModal } from './ImportModal';
 ## Overview
 
 <Preview>
-  <Story id="experimental-importmodal--with-state-manager" />
+  <Story
+    id={getStorybookSlug(pkg, ImportModal.displayName, 'with-state-manager')}
+  />
 </Preview>
 
 ## Component API

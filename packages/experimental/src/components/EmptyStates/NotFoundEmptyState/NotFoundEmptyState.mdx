@@ -1,4 +1,6 @@
 import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
+import { pkg } from '../../../settings';
+import { getStorybookSlug } from '../../../../config';
 import { NotFoundEmptyState } from './NotFoundEmptyState';
 
 # Not Found Empty state
@@ -17,37 +19,73 @@ guidelines and documentation please refer to the links above.
 ### Default Not Found Empty state
 
 <Preview>
-  <Story id="experimental-emptystates-notfoundemptystate--default" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${NotFoundEmptyState.displayName}`,
+      'default'
+    )}
+  />
 </Preview>
 
 ### Not Found Empty state with dark themed illustration
 
 <Preview>
-  <Story id="experimental-emptystates-notfoundemptystate--with-dark-mode-illustration" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${NotFoundEmptyState.displayName}`,
+      'with-dark-mode-illustration'
+    )}
+  />
 </Preview>
 
 ### Not Found Empty state with action
 
 <Preview>
-  <Story id="experimental-emptystates-notfoundemptystate--with-action" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${NotFoundEmptyState.displayName}`,
+      'with-action'
+    )}
+  />
 </Preview>
 
 ### Not Found Empty state with action (Button with icon)
 
 <Preview>
-  <Story id="experimental-emptystates-notfoundemptystate--with-action-icon-button" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${NotFoundEmptyState.displayName}`,
+      'with-action-icon-button'
+    )}
+  />
 </Preview>
 
 ### Not Found Empty state with link
 
 <Preview>
-  <Story id="experimental-emptystates-notfoundemptystate--with-link" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${NotFoundEmptyState.displayName}`,
+      'with-link'
+    )}
+  />
 </Preview>
 
 ### Not Found Empty state with action and link
 
 <Preview>
-  <Story id="experimental-emptystates-notfoundemptystate--with-action-and-link" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${NotFoundEmptyState.displayName}`,
+      'with-action-and-link'
+    )}
+  />
 </Preview>
 
 ## Component API

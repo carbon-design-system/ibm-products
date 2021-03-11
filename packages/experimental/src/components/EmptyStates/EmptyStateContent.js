@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Button, Link } from 'carbon-components-react';
 
 import { pkg } from '../../settings';
+const componentName = 'EmptyStateContent';
 
 export const EmptyStateContent = ({
   heading,
@@ -107,3 +108,5 @@ EmptyStateContent.propTypes = {
    */
   subtext: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
 };
+
+EmptyStateContent.displayName = componentName;

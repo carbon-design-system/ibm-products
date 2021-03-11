@@ -7,17 +7,17 @@
 
 import React from 'react';
 
-import { TearsheetShell } from './TearsheetShell';
-
 import styles from './_storybook-styles.scss';
 import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, 'TearsheetShell');
+import { TearsheetShell } from './TearsheetShell';
+const storybookPrefix = getStorybookPrefix(pkg, TearsheetShell.displayName);
 
 import mdx from './TearsheetShell.mdx';
 
 export default {
-  title: `${storybookPrefix}/Tearsheets/TearsheetShell`,
+  title: `${storybookPrefix}/Tearsheets/${TearsheetShell.displayName}`,
   component: TearsheetShell,
   parameters: { controls: { expanded: true }, styles, docs: { page: mdx } },
 };

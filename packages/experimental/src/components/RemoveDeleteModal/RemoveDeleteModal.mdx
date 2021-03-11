@@ -1,6 +1,8 @@
 <!-- `position:fixed` cause rendering issues, so do not render the modal -->
 
 import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
+import { pkg } from '../../settings';
+import { getStorybookSlug } from '../../../config';
 import { RemoveDeleteModal } from './RemoveDeleteModal';
 
 # RemoveDeleteModal
@@ -18,7 +20,13 @@ component. For additional usage guidelines and documentation please refer to the
 links above.
 
 <Preview>
-  <Story id="experimental-RemoveDeleteModal--with-state-manager" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      RemoveDeleteModal.displayName,
+      'with-state-manager'
+    )}
+  />
 </Preview>
 
 ## High impact vs medium impact

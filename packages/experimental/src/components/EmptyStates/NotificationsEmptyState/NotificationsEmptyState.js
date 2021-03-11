@@ -1,41 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Canary } from '../../_Canary';
 import { pkg } from '../../../settings';
 import { EmptyStateContent } from '../EmptyStateContent';
 import NotificationsIllustration from '../assets/Notifications';
 import { EmptyStateDefaultProps } from '../EmptyState';
+const componentName = 'NotificationsEmptyState';
 
-export const NotificationsEmptyState = ({
-  actionText,
-  actionType,
-  actionIcon,
-  heading,
-  illustrationSize,
-  illustrationTheme,
-  linkText,
-  linkUrl,
-  subtext,
-  onActionEvent,
-}) => {
-  return (
-    <div className={`${pkg.prefix}-empty-state`}>
-      <NotificationsIllustration
-        theme={illustrationTheme}
-        size={illustrationSize}
-      />
-      <EmptyStateContent
-        actionText={actionText}
-        actionType={actionType}
-        actionIcon={actionIcon}
-        heading={heading}
-        linkText={linkText}
-        linkUrl={linkUrl}
-        subtext={subtext}
-        onActionEvent={onActionEvent}
-      />
-    </div>
-  );
-};
+export const NotificationsEmptyState = !pkg.isComponentEnabled(componentName)
+  ? // Return canary if not released or flag not set
+    () => <Canary component={componentName} />
+  : // Main component code...
+    ({
+      actionText,
+      actionType,
+      actionIcon,
+      heading,
+      illustrationSize,
+      illustrationTheme,
+      linkText,
+      linkUrl,
+      subtext,
+      onActionEvent,
+    }) => {
+      return (
+        <div className={`${pkg.prefix}-empty-state`}>
+          <NotificationsIllustration
+            theme={illustrationTheme}
+            size={illustrationSize}
+          />
+          <EmptyStateContent
+            actionText={actionText}
+            actionType={actionType}
+            actionIcon={actionIcon}
+            heading={heading}
+            linkText={linkText}
+            linkUrl={linkUrl}
+            subtext={subtext}
+            onActionEvent={onActionEvent}
+          />
+        </div>
+      );
+    };
 
 NotificationsEmptyState.propTypes = {
   /**
@@ -83,3 +89,4 @@ NotificationsEmptyState.propTypes = {
   subtext: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
 };
 NotificationsEmptyState.defaultProps = EmptyStateDefaultProps;
+NotificationsEmptyState.displayName = componentName;

@@ -9,9 +9,10 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add20 } from '@carbon/icons-react';
 import CustomIllustration from './story_assets/empty-state-bright-magnifying-glass.svg';
-import mdx from './EmptyState.mdx';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
+import mdx from './EmptyState.mdx';
 const storybookPrefix = getStorybookPrefix(pkg, 'EmptyStates');
 
 import { EmptyState } from '.';

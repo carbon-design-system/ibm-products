@@ -8,19 +8,22 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { BreadcrumbWithOverflow } from '.';
-
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { BreadcrumbItem } from 'carbon-components-react';
 
 import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import { BreadcrumbWithOverflow } from '.';
 import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, 'BreadcrumbWithOverflow');
+const storybookPrefix = getStorybookPrefix(
+  pkg,
+  BreadcrumbWithOverflow.displayName
+);
 
 const blockClass = `${pkg.prefix}-breadcrumb-with-overflow`;
 
 export default {
-  title: `${storybookPrefix}/BreadcrumbWithOverflow`,
+  title: `${storybookPrefix}/${BreadcrumbWithOverflow.displayName}`,
   component: BreadcrumbWithOverflow,
   argTypes: {
     containerWidth: {

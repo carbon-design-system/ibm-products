@@ -49,6 +49,7 @@ export const SidePanel = !pkg.isComponentEnabled(componentName)
       currentStep,
       onNavigationBack,
       selectorPrimaryFocus,
+      className,
     }) => {
       const [shouldRender, setRender] = useState(open);
       const [animationComplete, setAnimationComplete] = useState(false);
@@ -320,7 +321,9 @@ export const SidePanel = !pkg.isComponentEnabled(componentName)
           <>
             <div
               id={`${blockClass}-outer`}
-              className={mainPanelClassNames}
+              className={cx(mainPanelClassNames, {
+                [className]: className,
+              })}
               style={{
                 animation: `${
                   open
@@ -532,6 +535,10 @@ SidePanel.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
+  /**
+   * Sets an optional className to be added to the side panel outermost element
+   */
+  className: PropTypes.string,
   /**
    * Determines whether the side panel should render the condensed version (affects action buttons primarily)
    */

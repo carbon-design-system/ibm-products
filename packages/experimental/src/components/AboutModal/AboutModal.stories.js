@@ -6,12 +6,8 @@
  */
 
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import { Button, Link } from 'carbon-components-react';
-import ExampleLogo from './example-logo.svg';
-import ansibleLogo from './technologyUsedLogos/ansible_logo.png';
-import grafanaLogo from './technologyUsedLogos/grafana_logo.png';
-import jsLogo from './technologyUsedLogos/js_logo.png';
 
 import { pkg } from '../../settings';
 import '../../enable-all'; // must come before component is imported (directly or indirectly)
@@ -19,6 +15,11 @@ import { getStorybookPrefix } from '../../../config';
 import { AboutModal } from './AboutModal';
 import mdx from './AboutModal.mdx';
 const storybookPrefix = getStorybookPrefix(pkg, AboutModal.displayName);
+
+import ExampleLogo from './_story-assets/example-logo.svg';
+import ansibleLogo from './_story-assets/ansible-logo.png';
+import grafanaLogo from './_story-assets/grafana-logo.png';
+import jsLogo from './_story-assets/js-logo.png';
 
 import styles from './_index.scss';
 
@@ -36,100 +37,57 @@ export default {
 const logo = (
   <img
     src={ExampleLogo}
-    alt="Example product logo"
+    alt="Example product or service logo"
     style={{ maxWidth: '6rem' }}
   />
 );
 
-const Template = (args) => (
-  <AboutModal
-    content="This is example content"
-    open
-    logo={logo}
-    title={
-      <>
-        IBM <span style={{ fontWeight: '600' }}>Watson AI Ops</span>
-      </>
-    }
-    versionNumber="0.0.1"
-    {...args}
-  />
-);
-
-/**
- * Simple state manager for modals.
- */
-/* eslint-disable react/prop-types */
-const ModalStateManager = ({
-  renderLauncher: LauncherContent,
-  children: ModalContent,
-}) => {
-  const [open, setOpen] = useState(false);
+const Template = ({ storyInitiallyOpen = true, story, ...other }) => {
+  const [open, setOpen] = useState(storyInitiallyOpen);
+  console.dir(this);
   return (
     <>
-      {!ModalContent || typeof document === 'undefined'
-        ? null
-        : ReactDOM.createPortal(
-            <ModalContent open={open} setOpen={setOpen} />,
-            document.body
-          )}
-      {LauncherContent && <LauncherContent open={open} setOpen={setOpen} />}
+      <Button onClick={() => setOpen(true)}>Open {story?.storyName}</Button>
+
+      <style>{`.${pkg.prefix}-about-modal { opacity: 0 }`};</style>
+      <AboutModal
+        open={open}
+        onClose={() => setOpen(false)}
+        logo={logo}
+        title={
+          <>
+            IBM <span style={{ fontWeight: '600' }}>Watson AI Ops</span>
+          </>
+        }
+        content={
+          <>
+            This is example content for an {story?.storyName || 'About Modal'}.
+          </>
+        }
+        versionNumber="0.0.1"
+        {...other}
+      />
     </>
   );
 };
 
-export const Default = () => {
-  return (
-    <ModalStateManager
-      renderLauncher={({ open, setOpen }) => (
-        <Button onClick={() => setOpen(!open)}>Launch modal</Button>
-      )}>
-      {({ open, setOpen }) => (
-        <AboutModal
-          content="This is example content"
-          onClose={() => setOpen(!open)}
-          open={open}
-          logo={logo}
-          title={
-            <>
-              IBM <span style={{ fontWeight: '600' }}>Watson AI Ops</span>
-            </>
-          }
-          versionNumber="0.0.1"
-        />
-      )}
-    </ModalStateManager>
-  );
+Template.propTypes = {
+  story: PropTypes.object,
+  storyInitiallyOpen: PropTypes.bool,
+  ...AboutModal.propTypes,
 };
 
-export const withLinks = Template.bind({});
-withLinks.args = {
-  links: [
-    <Link href="https://www.carbondesignsystem.com" key="link1">
-      Carbon Design System
-    </Link>,
-    <Link href="https://www.ibm.com/design/language" key="link2">
-      IBM Design Language
-    </Link>,
-  ],
-};
-
-export const withLinksAndLegalText = Template.bind({});
-withLinksAndLegalText.args = {
-  links: [
-    <Link href="https://www.carbondesignsystem.com" key="link1">
-      Carbon Design System
-    </Link>,
-    <Link href="https://www.ibm.com/design/language" key="link2">
-      IBM Design Language
-    </Link>,
-  ],
-  legalText:
-    'This Web site contains proprietary notices and copyright information, the terms of which must be observed and followed. Please see the tab entitled “Copyright and trademark information” for related information.',
+export const Basic = Template.bind({});
+Basic.storyName = 'About Modal';
+Basic.args = {
+  story: Basic,
 };
 
 export const withLinksAndLegalAndCopyrightText = Template.bind({});
+withLinksAndLegalAndCopyrightText.storyName =
+  'About Modal with links and legal and copyright text';
 withLinksAndLegalAndCopyrightText.args = {
+  story: withLinksAndLegalAndCopyrightText,
   links: [
     <Link href="https://www.carbondesignsystem.com" key="link1">
       Carbon Design System
@@ -144,7 +102,9 @@ withLinksAndLegalAndCopyrightText.args = {
 };
 
 export const withTechnologyUsedTab = Template.bind({});
+withTechnologyUsedTab.storyName = 'About Modal with technologies used';
 withTechnologyUsedTab.args = {
+  story: withTechnologyUsedTab,
   technologiesUsed: [
     {
       src: grafanaLogo,
@@ -161,18 +121,27 @@ withTechnologyUsedTab.args = {
   ],
 };
 
+export const withAllPropsSet = Template.bind({});
+withAllPropsSet.storyName = 'About Modal with all props set';
+withAllPropsSet.args = {
+  ...withLinksAndLegalAndCopyrightText.args,
+  ...withTechnologyUsedTab.args,
+  story: withAllPropsSet,
+  storyInitiallyOpen: false,
+};
+
 export const withDarkTheme = Template.bind({});
+withDarkTheme.storyName = 'About Modal using dark theme';
 withDarkTheme.args = {
+  story: withDarkTheme,
+  storyInitiallyOpen: false,
   className: 'sb--use-carbon-theme-g90',
 };
 
-export const withLightTheme = Template.bind({});
-withLightTheme.args = {
-  className: 'sb--use-carbon-theme-g10',
-};
-
 export const withScroll = Template.bind({});
+withScroll.storyName = 'About Modal with scrolling';
 withScroll.args = {
+  story: withScroll,
   legalText:
     'This Web site contains proprietary notices and copyright information, the terms of which must be observed and followed. Please see the tab entitled “Copyright and trademark information” for related information. IBM grants you a non-exclusive, non-transferable, limited permission to access and display the Web pages within this site as a customer or potential customer of IBM provided you comply with these Terms of Use, and all copyright, trademark, and other proprietary notices remain intact. You may only use a crawler to crawl this Web site as permitted by this Web site’s robots.txt protocol, and IBM may block any crawlers in its sole discretion. The use authorized under this agreement is non-commercial in nature (e.g., you may not sell the content you access on or through this Web site.) All other use of this site is prohibited. Except for the limited permission in the preceding paragraph, IBM does not grant you any express or implied rights or licenses under any patents, trademarks, copyrights, or other proprietary or intellectual property rights. You may not mirror any of the content from this site on another Web site or in any other media. Any software and other materials that are made available for downloading, access, or other use from this site with their own license terms will be governed by such terms, conditions, and notices. Your failure to comply with such terms or any of the terms on this site will result in automatic termination of any rights granted to you, without prior notice, and you must immediately destroy all copies of downloaded materials in your possession, custody or control. This Web site contains proprietary notices and copyright information, the terms of which must be observed and followed. Please see the tab entitled “Copyright and trademark information” for related information. IBM grants you a non-exclusive, non-transferable, limited permission to access and display the Web pages within this site as a customer or potential customer of IBM provided you comply with these Terms of Use, and all copyright, trademark, and other proprietary notices remain intact. You may only use a crawler to crawl this Web site as permitted by this Web site’s robots.txt protocol, and IBM may block any crawlers in its sole discretion. The use authorized under this agreement is non-commercial in nature (e.g., you may not sell the content you access on or through this Web site.) All other use of this site is prohibited. Except for the limited permission in the preceding paragraph, IBM does not grant you any express or implied rights or licenses under any patents, trademarks, copyrights, or other proprietary or intellectual property rights. You may not mirror any of the content from this site on another Web site or in any other media. Any software and other materials that are made available for downloading, access, or other use from this site with their own license terms will be governed by such terms, conditions, and notices. Your failure to comply with such terms or any of the terms on this site will result in automatic termination of any rights granted to you, without prior notice, and you must immediately destroy all copies of downloaded materials in your possession, custody or control.',
   copyrightText: <>Copyright &copy; 2020 IBM corporation</>,

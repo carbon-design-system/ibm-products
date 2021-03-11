@@ -19,7 +19,7 @@ import {
   Settings16,
 } from '@carbon/icons-react';
 import { timeAgo } from './utils';
-import { EmptyState } from '../EmptyState';
+import { EmptyState } from '../EmptyStates/EmptyState';
 import useClickOutside from './useClickOutside';
 
 import { Canary } from '../_Canary';

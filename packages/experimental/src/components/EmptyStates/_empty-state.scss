@@ -1,0 +1,37 @@
+//
+// Copyright IBM Corp. 2020, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+@import 'carbon-components/scss/components/button/button';
+@import 'carbon-components/scss/components/link/link';
+
+.#{$pkg-prefix}-empty-state {
+  .#{$pkg-prefix}-empty-state-header,
+  .#{$pkg-prefix}-empty-state-subtext,
+  p {
+    margin: 0;
+    padding-bottom: $spacing-02;
+  }
+}
+
+.#{$pkg-prefix}-empty-state-illustration {
+  &.#{$pkg-prefix}-empty-state-illustration--lg {
+    min-width: 5rem;
+    max-width: 5rem;
+  }
+  &.#{$pkg-prefix}-empty-state-illustration--sm {
+    min-width: 4rem;
+    max-width: 4rem;
+  }
+}
+
+.#{$pkg-prefix}-empty-state-action-button,
+.#{$pkg-prefix}-empty-state-link {
+  display: block;
+  margin-top: $spacing-06;
+}

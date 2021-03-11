@@ -28,15 +28,16 @@ import {
   HeaderName,
 } from 'carbon-components-react/lib/components/UIShell';
 import { Copy20, Delete20, Settings20 } from '@carbon/icons-react';
-import { SidePanel } from '.';
 import styles from './_storybook-styles.scss';
-import mdx from './SidePanel.mdx';
 import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, 'SidePanel');
+import { SidePanel } from '.';
+import mdx from './SidePanel.mdx';
+const storybookPrefix = getStorybookPrefix(pkg, SidePanel.displayName);
 
 export default {
-  title: `${storybookPrefix}/SidePanel`,
+  title: `${storybookPrefix}/${SidePanel.displayName}`,
   component: SidePanel,
   argTypes: {
     slideIn: {

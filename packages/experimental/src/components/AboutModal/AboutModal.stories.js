@@ -9,20 +9,21 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Button, Link } from 'carbon-components-react';
 import ExampleLogo from './example-logo.svg';
-import mdx from './AboutModal.mdx';
 import ansibleLogo from './technologyUsedLogos/ansible_logo.png';
 import grafanaLogo from './technologyUsedLogos/grafana_logo.png';
 import jsLogo from './technologyUsedLogos/js_logo.png';
-import { AboutModal } from './AboutModal';
 
 import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, 'AboutModal');
+import { AboutModal } from './AboutModal';
+import mdx from './AboutModal.mdx';
+const storybookPrefix = getStorybookPrefix(pkg, AboutModal.displayName);
 
 import styles from './_index.scss';
 
 export default {
-  title: `${storybookPrefix}/AboutModal`,
+  title: `${storybookPrefix}/${AboutModal.displayName}`,
   component: AboutModal,
   parameters: {
     styles,

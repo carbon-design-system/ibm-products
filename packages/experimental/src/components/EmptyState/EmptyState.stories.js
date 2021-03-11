@@ -9,17 +9,17 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add20 } from '@carbon/icons-react';
 import CustomIllustration from './assets/light/error.svg';
-import mdx from './EmptyState.mdx';
 import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, 'EmptyState');
-
 import { EmptyState } from '.';
+import mdx from './EmptyState.mdx';
+const storybookPrefix = getStorybookPrefix(pkg, EmptyState.displayName);
 
 import styles from './_index.scss';
 
 export default {
-  title: `${storybookPrefix}/EmptyState`,
+  title: `${storybookPrefix}/${EmptyState.displayName}`,
   component: EmptyState,
   parameters: {
     styles,

@@ -8,19 +8,20 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { ActionBar, ActionBarItem } from '.';
 import { Lightning16, Bee24 } from '@carbon/icons-react';
 
 import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, 'ActionBar');
+import { ActionBar, ActionBarItem } from '.';
+const storybookPrefix = getStorybookPrefix(pkg, ActionBar.displayName);
 
 const blockClass = `${pkg.prefix}-action-bar`;
 
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 
 export default {
-  title: `${storybookPrefix}/PageHeader/ActionBarItem`,
+  title: `${storybookPrefix}/PageHeader/${ActionBarItem.displayName}`,
   component: ActionBar,
   argTypes: {
     containerWidth: {

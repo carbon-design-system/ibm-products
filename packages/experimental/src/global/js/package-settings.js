@@ -11,6 +11,7 @@ const defaults = {
   component: {
     AboutModal: false,
     ActionBar: false,
+    ActionBarItem: false,
     APIKeyDownlaoder: false,
     APIKeyModal: false,
     BreadcrumbWithOverflow: false,

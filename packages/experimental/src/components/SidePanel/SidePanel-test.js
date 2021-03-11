@@ -8,8 +8,9 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
 import React from 'react';
-import { SidePanel } from '.';
 import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import { SidePanel } from '.';
 
 describe('SidePanel', () => {
   test('renders the side panel', () => {

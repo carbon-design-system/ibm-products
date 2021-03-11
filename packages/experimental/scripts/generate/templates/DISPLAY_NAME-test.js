@@ -9,7 +9,7 @@ import { render } from '@testing-library/react'; // https://testing-library.com/
 import React from 'react';
 
 import { pkg } from '../../settings';
-import '../../enable-all'; // must come before component is imported
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
 
 const blockClass = `${pkg.prefix}--STYLE_NAME`;
 

@@ -1,4 +1,6 @@
 import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
+import { pkg } from '../../settings';
+import { getStorybookSlug } from '../../../config';
 import { EmptyState } from './EmptyState';
 
 # Empty state
@@ -17,49 +19,71 @@ guidelines and documentation please refer to the links above.
 ### Default Empty state
 
 <Preview>
-  <Story id="experimental-emptystate--default" />
+  <Story id={getStorybookSlug(pkg, EmptyState.displayName, 'default')} />
 </Preview>
 
 ### Empty state with illustration
 
 <Preview>
-  <Story id="experimental-emptystate--with-illustration" />
+  <Story
+    id={getStorybookSlug(pkg, EmptyState.displayName, 'with-illustration')}
+  />
 </Preview>
 
 ### Empty state with dark themed illustration
 
 <Preview>
-  <Story id="experimental-emptystate--with-dark-mode-illustration" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      EmptyState.displayName,
+      'with-dark-mode-illustration'
+    )}
+  />
 </Preview>
 
 ### Empty state with custom illustration
 
 <Preview>
-  <Story id="experimental-emptystate--with-custom-illustration" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      EmptyState.displayName,
+      'with-custom-illustration'
+    )}
+  />
 </Preview>
 
 ### Empty state with action
 
 <Preview>
-  <Story id="experimental-emptystate--with-action" />
+  <Story id={getStorybookSlug(pkg, EmptyState.displayName, 'with-action')} />
 </Preview>
 
 ### Empty state with action (Button with icon)
 
 <Preview>
-  <Story id="experimental-emptystate--with-action-icon-button" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      EmptyState.displayName,
+      'with-action-icon-button'
+    )}
+  />
 </Preview>
 
 ### Empty state with link
 
 <Preview>
-  <Story id="experimental-emptystate--with-link" />
+  <Story id={getStorybookSlug(pkg, EmptyState.displayName, 'with-link')} />
 </Preview>
 
 ### Empty state with action and link
 
 <Preview>
-  <Story id="experimental-emptystate--with-action-and-link" />
+  <Story
+    id={getStorybookSlug(pkg, EmptyState.displayName, 'with-action-and-link')}
+  />
 </Preview>
 
 ## Component API

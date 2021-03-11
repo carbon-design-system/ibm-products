@@ -1,5 +1,7 @@
 import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
-import Notifications from './Notifications';
+import { pkg } from '../../settings';
+import { getStorybookSlug } from '../../../config';
+import { Notifications } from '.';
 
 # Notifications
 
@@ -15,13 +17,13 @@ and interact with them all in one place.
 ### Default Notifications component
 
 <Preview>
-  <Story id="cloud-cognitive-canary-notifications--default" />
+  <Story id={getStorybookSlug(pkg, Notifications.displayName, 'default')} />
 </Preview>
 
 ### Notifications component empty state
 
 <Preview>
-  <Story id="cloud-cognitive-canary-notifications--empty-state" />
+  <Story id={getStorybookSlug(pkg, Notifications.displayName, 'empty-state')} />
 </Preview>
 
 ## Component API

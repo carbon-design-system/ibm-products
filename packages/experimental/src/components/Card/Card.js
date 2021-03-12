@@ -1,6 +1,10 @@
 import React from 'react';
 import cx from 'classnames';
-import { Button } from 'carbon-components-react';
+import {
+  Button,
+  OverflowMenu,
+  OverflowMenuItem,
+} from 'carbon-components-react';
 import PropTypes from 'prop-types';
 import { Canary } from '../_Canary';
 import { pkg } from '../../settings';
@@ -11,7 +15,8 @@ export const Card = !pkg.isComponentEnabled(componentName)
     () => <Canary component={componentName} />
   : // Main component code...
     ({
-      actionIcon: ActionIcon,
+      actionIcons,
+      actionIconsPosition,
       caption,
       children,
       className,
@@ -20,15 +25,19 @@ export const Card = !pkg.isComponentEnabled(componentName)
       mediaPosition,
       onClick,
       onPrimaryButtonClick,
+      overflowActions,
       onSecondaryButtonClick,
       pictogram: Pictogram,
       primaryButtonKind,
       primaryButtonText,
+      productive,
       secondaryButtonKind,
       secondaryButtonText,
       title,
+      titleSize,
     }) => {
       const cardClasses = cx(`${pkg.prefix}-card`, {
+        [`${pkg.prefix}-card--productive`]: productive,
         [`${pkg.prefix}-card--clickable`]: onClick,
         [`${pkg.prefix}-card--media-left`]: mediaPosition === 'left',
         className,
@@ -37,6 +46,34 @@ export const Card = !pkg.isComponentEnabled(componentName)
       const headerClasses = cx(`${pkg.prefix}-card-header`, {
         [`${pkg.prefix}-card-header--label-only`]: label && !title && !caption,
       });
+
+      const titleClasses = cx(`${pkg.prefix}-card-title`, {
+        [`${pkg.prefix}-card-title--lg`]: titleSize === 'large',
+      });
+
+      const getActions = () => {
+        if (overflowActions.length !== 0) {
+          const pos = actionIconsPosition === 'top' ? 'bottom' : 'top';
+          const size = actionIconsPosition === 'top' ? 'sm' : 'lg';
+          return (
+            <OverflowMenu size={size} direction={pos}>
+              {overflowActions.map(({ id, ...rest }) => (
+                <OverflowMenuItem key={id} {...rest} />
+              ))}
+            </OverflowMenu>
+          );
+        }
+
+        if (actionIcons.length === 0) return;
+
+        const icons = actionIcons.map(({ id, icon }) => (
+          <div key={id} className={`${pkg.prefix}-card-icon`}>
+            {icon}
+          </div>
+        ));
+
+        return icons;
+      };
 
       const CardContent = (
         <div className={cardClasses}>
@@ -49,13 +86,20 @@ export const Card = !pkg.isComponentEnabled(componentName)
           <div className={`${pkg.prefix}-card-content-container`}>
             <div className={headerClasses}>
               {label && <p className={`${pkg.prefix}-card-label`}>{label}</p>}
-              {title && <p className={`${pkg.prefix}-card-title`}>{title}</p>}
+              <div className={`${pkg.prefix}-card-title-container`}>
+                {title && <p className={titleClasses}>{title}</p>}
+                {actionIconsPosition === 'top' && (
+                  <div className={`${pkg.prefix}-card-actions`}>
+                    {getActions()}
+                  </div>
+                )}
+              </div>
               {caption && (
                 <p className={`${pkg.prefix}-card-caption`}>{caption}</p>
               )}
             </div>
             <div className={`${pkg.prefix}-card-body`}>{children}</div>
-            <div className={`${pkg.prefix}-card-actions`}>
+            <div className={`${pkg.prefix}-card-footer`}>
               {secondaryButtonText && (
                 <Button
                   kind={secondaryButtonKind}
@@ -66,17 +110,16 @@ export const Card = !pkg.isComponentEnabled(componentName)
               )}
               {primaryButtonText && (
                 <Button
-                  kind={primaryButtonKind}
+                  kind={productive ? 'ghost' : primaryButtonKind}
                   onClick={onPrimaryButtonClick}
                   size="field">
                   {primaryButtonText}
                 </Button>
               )}
-              {ActionIcon && (
-                <ActionIcon
-                  className={`${pkg.prefix}-card-action-icon`}
-                  onClick={onPrimaryButtonClick}
-                />
+              {actionIconsPosition === 'bottom' && (
+                <div className={`${pkg.prefix}-card-actions`}>
+                  {getActions()}
+                </div>
               )}
             </div>
           </div>
@@ -88,9 +131,18 @@ export const Card = !pkg.isComponentEnabled(componentName)
 
 Card.propTypes = {
   /**
-   * Icon to display in the bottom right of the card
+   * Icons that are displayed on card. Refer to design documentation for implementation guidelines
    */
-  actionIcon: PropTypes.object,
+  actionIcons: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      icon: PropTypes.object,
+    })
+  ),
+  /**
+   * Determines if the action icons are on the top or bottom of the card
+   */
+  actionIconsPosition: PropTypes.oneOf(['top', 'bottom']),
   /**
    * Optional header caption
    */
@@ -128,6 +180,16 @@ Card.propTypes = {
    */
   onSecondaryButtonClick: PropTypes.func,
   /**
+   * Use an overflow menu instead of action icons. Refer to design documentation for implementation guidelines
+   */
+  overflowActions: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      itemText: PropTypes.string,
+      onClick: PropTypes.func,
+    })
+  ),
+  /**
    * Provides the icon that's displayed at the top of the card
    */
   pictogram: PropTypes.object,
@@ -140,6 +202,10 @@ Card.propTypes = {
    */
   primaryButtonText: PropTypes.string,
   /**
+   * Establishes if the card is in productive or expressive mode
+   */
+  productive: PropTypes.bool,
+  /**
    * Establishes the kind of button displayed for the secondary button
    */
   secondaryButtonKind: PropTypes.oneOf(['secondary', 'ghost']),
@@ -151,10 +217,15 @@ Card.propTypes = {
    * Title that's displayed at the top of the card
    */
   title: PropTypes.string,
+  /**
+   * Determines title size
+   */
+  titleSize: PropTypes.oneOf(['default', 'large']),
 };
 
 Card.defaultProps = {
-  actionIcon: null,
+  actionIcons: [],
+  actionIconsPosition: 'bottom',
   caption: '',
   children: '',
   className: '',
@@ -164,12 +235,15 @@ Card.defaultProps = {
   onClick: null,
   onPrimaryButtonClick: null,
   onSecondaryButtonClick: null,
+  overflowActions: [],
   pictogram: null,
   primaryButtonKind: 'primary',
   primaryButtonText: '',
+  productive: false,
   secondaryButtonKind: 'secondary',
   secondaryButtonText: '',
   title: '',
+  titleSize: 'default',
 };
 
 Card.displayName = componentName;

@@ -8,7 +8,7 @@
 import React from 'react';
 import cx from 'classnames';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import { ArrowRight24, Cloud32 } from '@carbon/icons-react';
+import { ArrowRight24, Cloud32, TrashCan16, Edit16 } from '@carbon/icons-react';
 import { AspectRatio } from 'carbon-components-react';
 import { pkg } from '../../settings';
 import '../../enable-all'; // must come before component is imported (directly or indirectly)
@@ -28,7 +28,7 @@ export default {
   },
   argTypes: {
     columnSize: {
-      defaultValue: 'sm-4',
+      defaultValue: 'lg-4',
       control: {
         type: 'select',
         options: ['sm-4', 'md-8', 'lg-12', 'max-16'],
@@ -62,6 +62,23 @@ const defaultProps = {
     </p>
   ),
   primaryButtonText: 'Primary',
+};
+
+const defaultProductiveProps = {
+  productive: true,
+  label: 'Label',
+  title: 'Title',
+  onActionClick: () => {},
+  children: (
+    <div>
+      <div className="graph" />
+      <p>Productive content text</p>
+      <p>Productive content text</p>
+    </div>
+  ),
+  primaryButtonText: 'Ghost button',
+  actionIconsPosition: 'bottom',
+  titleSize: 'default',
 };
 
 const Template = (opts) => {
@@ -118,7 +135,12 @@ WithMedia.args = {
 export const WithActionIcon = Template.bind({});
 WithActionIcon.args = {
   ...defaultProps,
-  actionIcon: ArrowRight24,
+  actionIcons: [
+    {
+      id: '1',
+      icon: <ArrowRight24 onClick={() => {}} />,
+    },
+  ],
   primaryButtonText: '',
 };
 
@@ -141,4 +163,36 @@ ClickableCardWithOnclick.args = {
   ...defaultProps,
   onClick: () => {},
   primaryButtonText: '',
+};
+
+export const Productive = Template.bind({});
+Productive.args = {
+  ...defaultProductiveProps,
+  actionIcons: [
+    {
+      id: '1',
+      icon: <Edit16 onClick={() => {}} />,
+    },
+    {
+      id: '2',
+      icon: <TrashCan16 onClick={() => {}} />,
+    },
+  ],
+};
+
+export const ProductiveOverflow = Template.bind({});
+ProductiveOverflow.args = {
+  ...defaultProductiveProps,
+  overflowActions: [
+    {
+      id: '1',
+      itemText: 'Edit',
+      onClick: () => {},
+    },
+    {
+      id: '2',
+      itemText: 'Delete',
+      onClick: () => {},
+    },
+  ],
 };

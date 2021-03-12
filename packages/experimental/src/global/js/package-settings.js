@@ -46,17 +46,55 @@ const defaults = {
   },
 };
 
-const setAll = (flags, enabled) => {
-  for (const key in flags) {
-    flags[key] = enabled;
-  }
-};
+const component = { ...defaults.component };
+const feature = { ...defaults.feature };
+const warningMessage = (type, property) =>
+  `IBM Cloud Cognitive (WARNING): ${type} "${property}" enabled via feature flags. This component has not yet completed it's review process.`;
+const warningMessageAll = (type) =>
+  `IBM Cloud Cognitive (WARNING): All canary ${type.toLowerCase()} have been enabled through use of setAll${type}`;
 
 const settings = {
+  _allComponents: false,
+  _allFeatures: false,
   // flags
-  prefix: defaults.prefix,
-  component: { ...defaults.component },
-  feature: { ...defaults.feature },
+  component: new Proxy(component, {
+    set(target, property, value) {
+      console.warn(warningMessage('Component', property, value));
+      target[property] = value;
+      return true; // value set
+    },
+    get(target, property) {
+      if (settings._allComponents) {
+        return true;
+      }
+
+      const propValue = target[property];
+      if (typeof propValue !== 'undefined') {
+        return propValue;
+      } else {
+        return false; // unknown component
+      }
+    },
+  }),
+  feature: new Proxy(feature, {
+    set(target, property, value) {
+      console.warn(warningMessage('Feature', property, value));
+      target[property] = value;
+      return true; // value set
+    },
+    get(target, property) {
+      if (settings._allFeatures) {
+        return true;
+      }
+
+      const propValue = target[property];
+      if (typeof propValue !== 'undefined') {
+        return propValue;
+      } else {
+        return false; // unknown feature
+      }
+    },
+  }),
   // methods
   isComponentEnabled: (component, byDefault = false) => {
     const componentName = component?.name || component;
@@ -68,11 +106,35 @@ const settings = {
     return flags.feature[feature];
   },
   setAllComponents: (enabled) => {
-    setAll(settings.component, enabled);
+    if (enabled) {
+      console.warn(warningMessageAll('Components'));
+    }
+    settings._allComponents = enabled;
   },
   setAllFeatures: (enabled) => {
-    setAll(settings.feature, enabled);
+    if (enabled) {
+      console.warn(warningMessageAll('Features'));
+    }
+    settings._allFeatures = enabled;
   },
 };
 
-export default settings;
+const settingsProxy = new Proxy(settings, {
+  set(target, property, value) {
+    switch (property) {
+      case '_allComponentsEnabled':
+        target.setAllComponents(!!value);
+        return true; // value set
+
+      case '_allFeaturesEnabled':
+        target.setAllFeatures(!!value);
+        return true; // value set
+
+      default:
+        // do nothing
+        return false; // did not set anything
+    }
+  },
+});
+
+export default settingsProxy;

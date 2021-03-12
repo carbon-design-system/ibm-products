@@ -51,6 +51,8 @@ export const Card = !pkg.isComponentEnabled(componentName)
         [`${pkg.prefix}-card-title--lg`]: titleSize === 'large',
       });
 
+      const hasActions = actionIcons.length > 0 || overflowActions.length > 0;
+
       const getActions = () => {
         if (overflowActions.length !== 0) {
           const pos = actionIconsPosition === 'top' ? 'bottom' : 'top';
@@ -88,7 +90,7 @@ export const Card = !pkg.isComponentEnabled(componentName)
               {label && <p className={`${pkg.prefix}-card-label`}>{label}</p>}
               <div className={`${pkg.prefix}-card-title-container`}>
                 {title && <p className={titleClasses}>{title}</p>}
-                {actionIconsPosition === 'top' && (
+                {hasActions && actionIconsPosition === 'top' && (
                   <div className={`${pkg.prefix}-card-actions`}>
                     {getActions()}
                   </div>
@@ -116,7 +118,7 @@ export const Card = !pkg.isComponentEnabled(componentName)
                   {primaryButtonText}
                 </Button>
               )}
-              {actionIconsPosition === 'bottom' && (
+              {hasActions && actionIconsPosition === 'bottom' && (
                 <div className={`${pkg.prefix}-card-actions`}>
                   {getActions()}
                 </div>

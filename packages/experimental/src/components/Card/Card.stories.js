@@ -27,11 +27,25 @@ export default {
     },
   },
   argTypes: {
-    columnSize: {
-      defaultValue: 'lg-4',
+    actionIconsPosition: {
+      defaultValue: 'bottom',
       control: {
         type: 'select',
-        options: ['sm-4', 'md-8', 'lg-12', 'max-16'],
+        options: ['bottom', 'top'],
+      },
+    },
+    columnSize: {
+      defaultValue: 4,
+      control: {
+        type: 'select',
+        options: [4, 8, 12, 16],
+      },
+    },
+    mediaPosition: {
+      defaultValue: 'top',
+      control: {
+        type: 'select',
+        options: ['top', 'left'],
       },
     },
     mediaRatio: {
@@ -39,6 +53,27 @@ export default {
       control: {
         type: 'select',
         options: ['16x9', '9x16', '2x1', '1x2', '4x3', '3x4', '1x1'],
+      },
+    },
+    primaryButtonKind: {
+      defaultValue: 'primary',
+      control: {
+        type: 'select',
+        options: ['primary', 'ghost'],
+      },
+    },
+    secondaryButtonKind: {
+      defaultValue: 'secondary',
+      control: {
+        type: 'select',
+        options: ['secondary', 'ghost'],
+      },
+    },
+    titleSize: {
+      defaultValue: 'default',
+      control: {
+        type: 'select',
+        options: ['default', 'large'],
       },
     },
   },
@@ -52,9 +87,13 @@ export default {
 };
 
 const defaultProps = {
+  caption: '',
   label: 'Label',
   title: 'Title',
-  onActionClick: () => {},
+};
+
+const expressiveProps = {
+  ...defaultProps,
   children: (
     <p>
       expressive card body content block. description inviting the user to take
@@ -64,11 +103,9 @@ const defaultProps = {
   primaryButtonText: 'Primary',
 };
 
-const defaultProductiveProps = {
-  productive: true,
-  label: 'Label',
-  title: 'Title',
-  onActionClick: () => {},
+const productiveProps = {
+  ...defaultProps,
+  actionIconsPosition: 'bottom',
   children: (
     <div>
       <div className="graph" />
@@ -77,16 +114,17 @@ const defaultProductiveProps = {
     </div>
   ),
   primaryButtonText: 'Ghost button',
-  actionIconsPosition: 'bottom',
+  productive: true,
   titleSize: 'default',
 };
 
+const getColClasses = (col) => cx(`bx--col-lg-${col}`);
+
 const Template = (opts) => {
   const { children, columnSize, ...args } = opts;
-  const colClasses = cx(`bx--col-${columnSize}`);
   return (
     <div className="bx--row">
-      <div className={colClasses}>
+      <div className={getColClasses(columnSize)}>
         <Card {...args}>{children}</Card>
       </div>
     </div>
@@ -95,10 +133,9 @@ const Template = (opts) => {
 
 const MediaTemplate = (opts) => {
   const { children, columnSize, mediaRatio, ...args } = opts;
-  const colClasses = cx(`bx--col-${columnSize}`);
   return (
     <div className="bx--row">
-      <div className={colClasses}>
+      <div className={getColClasses(columnSize)}>
         <Card
           media={<AspectRatio ratio={mediaRatio}>{mediaRatio}</AspectRatio>}
           {...args}>
@@ -111,30 +148,30 @@ const MediaTemplate = (opts) => {
 
 export const Default = Template.bind({});
 Default.args = {
-  ...defaultProps,
+  ...expressiveProps,
 };
 
 export const LabelOnly = Template.bind({});
 LabelOnly.args = {
-  ...defaultProps,
+  ...expressiveProps,
   title: '',
 };
 
 export const WithCaption = Template.bind({});
 WithCaption.args = {
-  ...defaultProps,
+  ...expressiveProps,
   caption: 'Description or long caption',
   label: '',
 };
 
 export const WithMedia = MediaTemplate.bind({});
 WithMedia.args = {
-  ...defaultProps,
+  ...expressiveProps,
 };
 
 export const WithActionIcon = Template.bind({});
 WithActionIcon.args = {
-  ...defaultProps,
+  ...expressiveProps,
   actionIcons: [
     {
       id: '1',
@@ -146,28 +183,28 @@ WithActionIcon.args = {
 
 export const WithPictogram = Template.bind({});
 WithPictogram.args = {
-  ...defaultProps,
+  ...expressiveProps,
   pictogram: Cloud32,
 };
 
 export const WithSecondaryAction = Template.bind({});
 WithSecondaryAction.args = {
-  ...defaultProps,
+  ...expressiveProps,
   secondaryButtonText: 'Secondary',
   secondaryButtonKind: 'ghost',
-  columnSize: 'md-4',
+  columnSize: '8',
 };
 
 export const ClickableCardWithOnclick = Template.bind({});
 ClickableCardWithOnclick.args = {
-  ...defaultProps,
+  ...expressiveProps,
   onClick: () => {},
   primaryButtonText: '',
 };
 
 export const Productive = Template.bind({});
 Productive.args = {
-  ...defaultProductiveProps,
+  ...productiveProps,
   actionIcons: [
     {
       id: '1',
@@ -182,7 +219,7 @@ Productive.args = {
 
 export const ProductiveOverflow = Template.bind({});
 ProductiveOverflow.args = {
-  ...defaultProductiveProps,
+  ...productiveProps,
   overflowActions: [
     {
       id: '1',

@@ -9,7 +9,7 @@ import React from 'react';
 
 import { UserProfileImage } from '.';
 import mdx from './UserProfileImage.mdx';
-import image from './charlie_64.jpg';
+import image from './headshot.png';
 
 import styles from './_storybook.scss'; // import storybook which includes component and additional storybook styles
 
@@ -37,32 +37,17 @@ const Template = (args) => {
 export const Default = Template.bind({});
 Default.args = {};
 
-export const WithUserIcon = Template.bind({});
-WithUserIcon.args = {
-  size: 'small',
-  backgroundColor: 'light-gray',
-  icon: 'user',
-  theme: 'light'
-};
-
 export const WithGroupIcon = Template.bind({});
 WithGroupIcon.args = {
-  size: 'x-large',
-  backgroundColor: 'light-purple',
-  icon: 'group',
-  theme: 'light'
+  icon: 'group'
 };
 
 export const WithInitials = Template.bind({});
 WithInitials.args = {
-  size: 'x-large',
-  backgroundColor: 'light-green',
-  initials: "eva cochet weinand",
-  theme: 'dark'
+  initials: "thomas j. watson",
 };
 
 export const WithImage = Template.bind({});
 WithImage.args = {
-  size: 'x-large',
   image,
 };

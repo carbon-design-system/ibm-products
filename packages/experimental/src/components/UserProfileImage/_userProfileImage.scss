@@ -83,6 +83,7 @@ $theme-keys: map-keys($themes);
   text-transform: uppercase;
   border-radius: 100%;
   .#{$block-class}-photo {
+    //border: 1px solid black;
     border-radius: 100%;
   }
 }

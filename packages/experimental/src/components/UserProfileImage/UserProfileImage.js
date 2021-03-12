@@ -81,8 +81,8 @@ export const UserProfileImage = ({
 
 UserProfileImage.propTypes = {
   /**
-   *  The background color passed should match one of the background colors in the library documentation:
-   *  https://pages.github.ibm.com/cdai-design/pal/patterns/user-profile-images/
+   * The background color passed should match one of the background colors in the library documentation:
+   * https://pages.github.ibm.com/cdai-design/pal/patterns/user-profile-images/
    */
   backgroundColor: PropTypes.oneOf([
     'light-blue',
@@ -113,11 +113,11 @@ UserProfileImage.propTypes = {
    */
   initials: PropTypes.string,
   /**
-   * Determine the size of the avatar circle
+   * Set the size of the avatar circle
    */
   size: PropTypes.oneOf(['x-large', 'large', 'medium', 'small', 'x-small']),
   /**
-   * Tells the component which theme to use
+   * Set theme in which the component will be rendered
    */
   theme: PropTypes.oneOf(['light', 'dark'])
 };

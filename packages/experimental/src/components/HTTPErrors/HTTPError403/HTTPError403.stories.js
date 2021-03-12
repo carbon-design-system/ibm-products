@@ -6,14 +6,8 @@
  */
 
 import React from 'react';
-/**
- * TODO: import action to handle events
- */
-// import { action } from '@storybook/addon-actions';
-
 import { pkg } from '../../../settings';
 import '../../../enable-all'; // must come before component is imported
-
 import { HTTPError403 } from '.';
 import { HTTPErrors } from '../index';
 import { getStorybookPrefix } from '../../../../config';

@@ -5,36 +5,32 @@ import HTTPErrorSvg403 from '../assets/HTTPErrorSvg403';
 import { HTTPErrors } from '../HTTPErrors';
 
 import { pkg } from '../../../settings';
+import { Canary } from '../../_Canary';
 
 const blockClass = `${pkg.prefix}--http-errors`;
-const componentName = 'HTTPErrors';
+const componentName = 'HTTPError403';
 
-export const HTTPError403 = ({
-  className,
-  description,
-  errorCodeLabel,
-  links,
-  title,
-  ...rest
-}) => {
-  return (
-    <div
-      className={cx(`${blockClass}`, {
-        [className]: className,
-      })}
-      {...rest}>
-      <HTTPErrors
-        description={description}
-        errorCodeLabel={errorCodeLabel}
-        title={title}
-        links={links}
-      />
-      <HTTPErrorSvg403 className={cx(`${blockClass}-image`)} />
-    </div>
-  );
-};
+export const HTTPError403 = !pkg.isComponentEnabled(componentName)
+  ? () => <Canary component={componentName} />
+  : ({ className, description, errorCodeLabel, links, title, ...rest }) => {
+      return (
+        <div
+          className={cx(`${blockClass}`, {
+            [className]: className,
+          })}
+          {...rest}>
+          <HTTPErrors
+            description={description}
+            errorCodeLabel={errorCodeLabel}
+            title={title}
+            links={links}
+          />
+          <HTTPErrorSvg403 className={cx(`${blockClass}-image`)} />
+        </div>
+      );
+    };
 
-HTTPErrors.displayName = componentName; // displayName is used in preference to function.name by React
+HTTPError403.displayName = componentName; // displayName is used in preference to function.name by React
 
 HTTPError403.propTypes = {
   /**

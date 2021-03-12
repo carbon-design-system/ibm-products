@@ -26,6 +26,8 @@ const defaults = {
     UnauthorizedEmptyState: false,
     ExampleComponent: false,
     ExportModal: false,
+    HTTPErrors: false,
+    HTTPError403: false,
     ImportModal: false,
     ModifiedTabs: false,
     Notifications: false,

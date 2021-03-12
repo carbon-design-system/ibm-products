@@ -21,7 +21,7 @@ import ansibleLogo from './_story-assets/ansible-logo.png';
 import grafanaLogo from './_story-assets/grafana-logo.png';
 import jsLogo from './_story-assets/js-logo.png';
 
-import styles from './_index.scss';
+import styles from './_storybook.scss';
 
 export default {
   title: `${storybookPrefix}/${AboutModal.displayName}`,

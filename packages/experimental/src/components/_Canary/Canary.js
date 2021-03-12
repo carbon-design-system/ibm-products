@@ -36,9 +36,7 @@ pkg.component.${componentName} = true;
       </p>
       <br />
       <p>e.g. in main.js</p>
-      <CodeSnippet type="multi" light={true}>
-        {instructions}
-      </CodeSnippet>
+      <CodeSnippet type="multi">{instructions}</CodeSnippet>
       <br />
       <p>
         View a live example on{' '}

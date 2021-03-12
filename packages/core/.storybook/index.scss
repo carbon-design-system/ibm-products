@@ -17,7 +17,7 @@ $css--reset: false;
 @import '../generated/feature-flags/feature-flags';
 @import '@carbon/themes/scss/themes';
 
-@import '@carbon/ibm-cloud-cognitive-experimental/scss/components/_Canary/canary';
+// @import '@carbon/ibm-cloud-cognitive-experimental/scss/components/_Canary/canary';
 
 // Setting attribute storybook-carbon-theme="XXX" on the html element
 // will set the carbon theme used for the storybook pane.

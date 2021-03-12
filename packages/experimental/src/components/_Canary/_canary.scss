@@ -7,7 +7,12 @@
 
 @import '../../global/styles/carbon-settings'; // goes before carbon imports as it affects how carbon is used.
 @import '../../global/styles/project-settings';
-@import 'carbon-components/scss/components/code-snippet/code-snippet';
-@import 'carbon-components/scss/components/copy-button/copy-button';
 
 $block-class: #{$pkg-prefix}-canary;
+
+.#{$block-class} {
+  //This is loaded by storybook, we need to make sure it does not impact on
+  // other SCSS so only applies to canary content
+  @import 'carbon-components/scss/components/code-snippet/code-snippet';
+  @import 'carbon-components/scss/components/copy-button/copy-button';
+}

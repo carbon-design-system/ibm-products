@@ -11,7 +11,7 @@ export { BreadcrumbWithOverflow } from './BreadcrumbWithOverflow';
 export { ContextHeader } from './ContextHeader';
 export { EmptyState } from './EmptyState';
 export { ExampleComponent } from './ExampleComponent';
-export { HTTPErrors } from './HTTPErrors';
+export { HTTPError403 } from './HTTPErrors/HTTPError403';
 export { ImportModal } from './ImportModal';
 export { ModifiedTabs } from './ModifiedTabs';
 export { Notifications } from './Notifications';

@@ -4,7 +4,7 @@ import { arrayOf, shape, string } from 'prop-types';
 import HTTPErrorSvg403 from '../assets/HTTPErrorSvg403';
 import { HTTPErrors } from '../HTTPErrors';
 
-import { pkg /*, carbon */ } from '../../../settings';
+import { pkg } from '../../../settings';
 
 const blockClass = `${pkg.prefix}--http-errors`;
 const componentName = 'HTTPErrors';
@@ -13,8 +13,8 @@ export const HTTPError403 = ({
   className,
   description,
   errorCodeLabel,
-  title,
   links,
+  title,
   ...rest
 }) => {
   return (
@@ -68,8 +68,4 @@ HTTPError403.propTypes = {
    * This will be for the main title of the HTTP error component
    */
   title: string,
-};
-
-HTTPError403.defaultProps = {
-  className: null,
 };

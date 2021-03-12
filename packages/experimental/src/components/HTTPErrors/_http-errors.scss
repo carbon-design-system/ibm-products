@@ -16,7 +16,6 @@
   $block-class: #{$pkg-prefix}--http-errors;
 
   .#{$block-class} {
-    // TODO: Styles.
     &.#{$block-class}-content {
       @include carbon--breakpoint(sm) {
         position: fixed;

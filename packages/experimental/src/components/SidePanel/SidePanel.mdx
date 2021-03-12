@@ -1,5 +1,7 @@
 import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
-import SidePanel from './SidePanel';
+import { pkg } from '../../settings';
+import { getStorybookSlug } from '../../../config';
+import { SidePanel } from './.';
 
 # Side Panel
 
@@ -20,7 +22,9 @@ within them.
 ### Default SidePanel component
 
 <Preview>
-  <Story id="experimental-sidepanel--right-slide-over-medium" />
+  <Story
+    id={getStorybookSlug(pkg, SidePanel.displayName, 'slide-over-medium')}
+  />
 </Preview>
 
 ## Component API

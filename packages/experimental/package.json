@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-experimental",
   "description": "Carbon for Cloud & Cognitive experimental UI components",
-  "version": "0.20.12",
+  "version": "0.23.1",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -31,6 +31,7 @@
     "build": "yarn clean && yarn build:js && yarn build:scss",
     "build:js": "node scripts/build",
     "build:scss": "bundler bundle:scss src/index.scss && copyfiles 'src/**/*.scss' scss -u 1",
+    "ci-check": "node scripts/import",
     "clean": "rimraf es lib scss",
     "generate": "node scripts/generate",
     "test": "bundler check 'src/**/*.scss'"
@@ -42,13 +43,12 @@
     "@babel/runtime": "^7.12.5",
     "@carbon/icons-react": "^10.24.0",
     "@carbon/import-once": "^10.5.0",
-    "carbon-components": "^10.27.0",
-    "carbon-components-react": "^7.27.0",
+    "carbon-components": "^10.30.0",
+    "carbon-components-react": "^7.30.0",
     "carbon-icons": "^7.0.7",
     "react-resize-detector": "^5.2.0"
   },
   "devDependencies": {
-    "@carbon/ibm-cloud-cognitive-core": "^0.6.5",
     "chalk": "^4.1.0",
     "fs-extra": "^9.1.0",
     "param-case": "^3.0.4",

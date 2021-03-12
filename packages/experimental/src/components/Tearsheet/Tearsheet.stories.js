@@ -10,20 +10,21 @@ import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { Button, Tab, Tabs } from 'carbon-components-react';
 
 import { Tearsheet } from './Tearsheet';
 import { TearsheetNarrow } from './TearsheetNarrow';
 
 import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, 'Tearsheet');
+const storybookPrefix = getStorybookPrefix(pkg, Tearsheet.displayName);
 
 import styles from './_storybook-styles.scss';
 
 import mdx from './Tearsheet.mdx';
 
 export default {
-  title: `${storybookPrefix}/Tearsheets/Tearsheet`,
+  title: `${storybookPrefix}/Tearsheets/${Tearsheet.displayName}`,
   component: Tearsheet,
   subcomponents: {
     TearsheetNarrow,

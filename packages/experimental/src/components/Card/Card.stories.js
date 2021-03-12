@@ -7,17 +7,18 @@
 
 import React from 'react';
 import cx from 'classnames';
-import { Card } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import mdx from './Card.mdx';
 import { ArrowRight24, Cloud32 } from '@carbon/icons-react';
 import { AspectRatio } from 'carbon-components-react';
 import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, 'Card');
+import { Card } from '.';
+import mdx from './Card.mdx';
+const storybookPrefix = getStorybookPrefix(pkg, Card.displayName);
 
 export default {
-  title: `${storybookPrefix}/Card`,
+  title: `${storybookPrefix}/${Card.displayName}`,
   component: Card,
   parameters: {
     styles,
@@ -27,10 +28,10 @@ export default {
   },
   argTypes: {
     columnSize: {
-      defaultValue: 'lg-4',
+      defaultValue: 'sm-4',
       control: {
         type: 'select',
-        options: ['sm-4', 'md-4', 'lg-4', 'max-4'],
+        options: ['sm-4', 'md-8', 'lg-12', 'max-16'],
       },
     },
     mediaRatio: {
@@ -61,7 +62,6 @@ const defaultProps = {
     </p>
   ),
   primaryButtonText: 'Primary',
-  cols: 4,
 };
 
 const Template = (opts) => {
@@ -113,13 +113,6 @@ WithCaption.args = {
 export const WithMedia = MediaTemplate.bind({});
 WithMedia.args = {
   ...defaultProps,
-};
-
-export const MediaLeft = MediaTemplate.bind({});
-MediaLeft.args = {
-  ...defaultProps,
-  mediaPosition: 'left',
-  columnSize: 'md-4',
 };
 
 export const WithActionIcon = Template.bind({});

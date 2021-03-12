@@ -10,7 +10,8 @@
 @import './AboutModal/index';
 @import './ActionBar/index';
 @import './BreadcrumbWithOverflow/index';
-@import './EmptyState/index';
+@import './_Canary/canary';
+@import './EmptyStates/index';
 @import './ExampleComponent/index';
 @import './HTTPErrors/index';
 @import './ImportModal/index';

@@ -30,6 +30,8 @@ const maxStackingDepth = 3;
 let stack = [];
 let stackHandlers = [];
 
+const componentName = 'TearsheetShell';
+
 export const TearsheetShell = ({
   children,
   className,
@@ -172,3 +174,5 @@ TearsheetShell.defaultProps = {
   preventCloseOnClickOutside: false,
   size: 'wide',
 };
+
+TearsheetShell.displayName = componentName;

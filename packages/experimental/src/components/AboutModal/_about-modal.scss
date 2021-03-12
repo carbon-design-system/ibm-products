@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2020
+// Copyright IBM Corp. 2021, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -13,38 +13,24 @@
 @import 'carbon-components/scss/components/modal/modal';
 @import 'carbon-components/scss/components/tabs/tabs';
 
-.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-scroll-enabled
-  .bx--modal-container {
-  height: 100%;
-  padding-bottom: $spacing-09;
-}
-
-.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-scroll-enabled
-  .bx--modal-container
-  .#{$pkg-prefix}-modal-content {
-  display: grid;
-  overflow: hidden;
-}
-
-.#{$pkg-prefix}-modal-content
-  .bx--modal-content.#{$pkg-prefix}-about-modal-content {
-  margin-bottom: $layout-05;
-  padding-bottom: $layout-05;
-}
-
-.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-modal-content .bx--modal-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+.#{$pkg-prefix}-about-modal .bx--modal-container {
+  grid-template-rows: auto auto 1fr auto;
 }
 
 .#{$pkg-prefix}-about-modal .bx--modal-footer {
   position: relative;
   flex-direction: column;
-  grid-row: auto;
   justify-content: center;
   padding-left: $spacing-05;
   background-color: $inverse-02;
+}
+.#{$pkg-prefix}-about-modal .bx--modal-footer::before {
+  position: absolute;
+  top: calc(-1 * #{$spacing-09});
+  width: 80%;
+  height: $spacing-09;
+  background: linear-gradient(to bottom, transparent, $ui-01 45%);
+  content: '';
 }
 
 .#{$pkg-prefix}-about-modal {
@@ -52,11 +38,15 @@
   .bx--modal-content.#{$pkg-prefix}-about-modal-content {
     @include carbon--type-style('body-short-02');
 
+    min-height: $spacing-10;
+    margin-bottom: 0;
     overflow-x: hidden;
     overflow-y: auto;
   }
+  .#{$pkg-prefix}-about-modal-body-content {
+    margin-bottom: $spacing-09;
+  }
   .#{$pkg-prefix}-about-modal-product-logo {
-    max-width: 6rem;
     margin: $spacing-05;
   }
   .#{$pkg-prefix}-about-modal-version-label,
@@ -71,15 +61,10 @@
   .#{$pkg-prefix}-about-modal-links-container {
     margin-top: $spacing-05;
   }
-  .#{$pkg-prefix}-about-modal-link-divider {
-    margin: 0 $spacing-03;
-  }
-  .#{$pkg-prefix}-about-modal-scroll-gradient {
-    position: absolute;
-    bottom: $layout-05;
-    width: 100%;
-    height: 4rem;
-    background: linear-gradient(to bottom, transparent, $ui-01 35%);
+  .#{$pkg-prefix}-about-modal-links-container a + a {
+    margin-left: $spacing-03;
+    padding-left: $spacing-03;
+    border-left: 1px solid $text-01;
   }
   .#{$pkg-prefix}-about-modal-tech-used-item {
     width: 2.25rem;

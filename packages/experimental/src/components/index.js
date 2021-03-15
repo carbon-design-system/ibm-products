@@ -17,6 +17,7 @@ export { NotificationsEmptyState } from './EmptyStates/NotificationsEmptyState';
 export { UnauthorizedEmptyState } from './EmptyStates/UnauthorizedEmptyState';
 export { ContextHeader } from './ContextHeader';
 export { ExampleComponent } from './ExampleComponent';
+export { HTTPError403 } from './HTTPErrors/HTTPError403';
 export { ImportModal } from './ImportModal';
 export { ModifiedTabs } from './ModifiedTabs';
 export { Notifications } from './Notifications';

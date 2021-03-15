@@ -33,6 +33,7 @@ const defaults = {
     PageHeader: false,
     RemoveDeleteModal: false,
     SidePanel: false,
+    StatusIcon: false,
     TagSet: false,
     Tearsheet: false,
     TearsheetNarrow: false,

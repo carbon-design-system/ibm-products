@@ -18,7 +18,7 @@
     "build:storybook": "yarn build:storybook-dependencies-only && cd packages/core && yarn build",
     "build:storybook-dependencies-only": "yarn build $(lerna ls --scope @carbon/ibm-cloud-cognitive-core --include-dependencies | grep -v '^@carbon/ibm-cloud-cognitive-core$' | xargs -n1 echo '--scope')",
     "ci-check": "yarn format:diff && yarn lint && yarn test --ci && lerna run ci-check --stream",
-    "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
+    "clean": "yarn cache clean && lerna run clean && lerna clean --yes && rimraf node_modules ;",
     "copy-common-files": "sh ./scripts/copy-common-files.sh;",
     "format": "prettier --write '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!README.md'",

@@ -9,11 +9,13 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { Link } from 'carbon-components-react';
 
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
+
 import { AboutModal } from './AboutModal';
-import ExampleLogo from './example-logo.svg';
-import ansibleLogo from './technologyUsedLogos/ansible_logo.png';
-import grafanaLogo from './technologyUsedLogos/grafana_logo.png';
-import jsLogo from './technologyUsedLogos/js_logo.png';
+import ExampleLogo from './_story-assets/example-logo.svg';
+import ansibleLogo from './_story-assets/ansible-logo.png';
+import grafanaLogo from './_story-assets/grafana-logo.png';
+import jsLogo from './_story-assets/js-logo.png';
 
 const content = 'This is example content';
 const logo = (

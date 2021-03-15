@@ -10,29 +10,34 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 
-import { pkg } from '../../settings';
-
 import { Button } from 'carbon-components-react';
 
+import { pkg } from '../../settings';
+import { Canary } from '../_Canary';
+const componentName = 'ActionBarItem';
 const blockClass = `${pkg.prefix}-action-bar-item`;
 
-export const ActionBarItem = ({ inOverflow, ...otherProps }) => {
-  const className = cx([blockClass, otherProps.className]);
+export const ActionBarItem = !pkg.isComponentEnabled(componentName)
+  ? // Return canary if not released or flag not set
+    () => <Canary component={componentName} />
+  : // Main component code...
+    ({ inOverflow, ...otherProps }) => {
+      const className = cx([blockClass, otherProps.className]);
 
-  return (
-    <Button
-      {...{
-        ...otherProps,
-        className,
-        hasIconOnly: true,
-        kind: 'ghost',
-        size: 'field',
-        tooltipPosition: inOverflow ? 'left' : 'bottom',
-        tooltipAlignment: inOverflow ? 'center' : 'end',
-        type: 'button',
-      }}></Button>
-  );
-};
+      return (
+        <Button
+          {...{
+            ...otherProps,
+            className,
+            hasIconOnly: true,
+            kind: 'ghost',
+            size: 'field',
+            tooltipPosition: inOverflow ? 'left' : 'bottom',
+            tooltipAlignment: inOverflow ? 'center' : 'end',
+            type: 'button',
+          }}></Button>
+      );
+    };
 
 // Props the user cannot change
 const reservedProps = [
@@ -53,6 +58,7 @@ reservedProps.forEach((prop) => {
   delete defaultProps[prop];
 });
 
+ActionBarItem.displayName = componentName;
 ActionBarItem.propTypes = {
   /**
    * The ...propTypes are copies of those from Button minus the props reserved for use by this component

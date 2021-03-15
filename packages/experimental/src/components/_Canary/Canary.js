@@ -8,6 +8,7 @@
 import cx from 'classnames';
 import { string } from 'prop-types';
 import React from 'react';
+import { CodeSnippet } from 'carbon-components-react';
 
 import { pkg } from '../../settings';
 
@@ -22,7 +23,7 @@ export const Canary = ({ component, className, ...rest }) => {
   const instructions = `
 import { pkg } from '@carbon/ibm-cloud-cognitive-experimental';
 // NOTE: must happen before component import
-pkg.component[${componentName}] = true;
+pkg.component.${componentName} = true;
 `;
   return (
     <div className={cx(blockClass, className)} {...rest}>
@@ -35,7 +36,17 @@ pkg.component[${componentName}] = true;
       </p>
       <br />
       <p>e.g. in main.js</p>
-      <pre className={`${blockClass}--code`}>{instructions}</pre>
+      <CodeSnippet type="multi" light={true}>
+        {instructions}
+      </CodeSnippet>
+      <br />
+      <p>
+        View a live example on{' '}
+        <a href="https://codesandbox.io/s/example-component-olif5?file=/src/config.js">
+          codesadnbox
+        </a>
+        .
+      </p>
     </div>
   );
 };

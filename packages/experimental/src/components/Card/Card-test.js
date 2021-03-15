@@ -9,6 +9,7 @@ import { render } from '@testing-library/react';
 import React from 'react';
 
 import { Card } from '.';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
 
 const { name } = Card;
 const defaultProps = {

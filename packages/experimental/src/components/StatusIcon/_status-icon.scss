@@ -1,0 +1,123 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '@carbon/import-once/scss/import-once';
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+
+$colors: (
+  fatal: (
+    light: $carbon--black-100,
+    dark: $carbon--gray-30,
+  ),
+  critical: (
+    light: $carbon--red-60,
+    dark: $carbon--red-50,
+  ),
+  major-warning: (
+    light: $carbon--orange-60,
+    dark: $carbon--orange-40,
+  ),
+  undefined: (
+    light: $carbon--purple-80,
+    dark: $carbon--purple-50,
+  ),
+  unknown: (
+    light: $carbon--gray-60,
+    dark: $carbon--gray-40,
+  ),
+  normal: (
+    light: $carbon--green-60,
+    dark: $carbon--green-40,
+  ),
+  info: (
+    light: $carbon--blue-60,
+    dark: $carbon--blue-50,
+  ),
+  in-progress: (
+    light: $carbon--blue-60,
+    dark: $carbon--blue-50,
+  ),
+  running: (
+    light: $carbon--green-60,
+    dark: $carbon--green-40,
+  ),
+  pending: (
+    light: $carbon--gray-60,
+    dark: $carbon--gray-40,
+  ),
+);
+
+$icons: (
+  'fatal',
+  'critical',
+  'major-warning',
+  'undefined',
+  'unknown',
+  'normal',
+  'info',
+  'in-progress',
+  'running',
+  'pending'
+);
+$themes: ('light', 'dark');
+
+$block-class: #{$pkg-prefix}-status-icon;
+
+@function clr($name, $theme: light) {
+  // stylelint-disable-next-line carbon/theme-token-use
+  $color: map-get(map-get($colors, $name), $theme);
+  @return $color;
+}
+
+@keyframes rotating {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.#{$block-class} {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.#{$block-class}--light.#{$block-class}--light-minor-warning,
+.#{$block-class}--dark.#{$block-class}--dark-minor-warning {
+  //stylelint-disable-next-line max-nesting-depth
+  svg {
+    // stylelint-disable-next-line carbon/theme-token-use
+    fill: $carbon--yellow-20;
+  }
+  //stylelint-disable-next-line max-nesting-depth
+  svg > path:nth-of-type(1) {
+    // stylelint-disable-next-line carbon/theme-token-use
+    fill: $carbon--gray-100;
+  }
+}
+
+@each $theme in $themes {
+  @each $icon in $icons {
+    @each $themekey in $themes {
+      .#{$block-class}--#{$theme}.#{$block-class}--#{$themekey}-#{$icon} {
+        svg {
+          @if $icon == in-progress {
+            // stylelint-disable-next-line carbon/motion-token-use, declaration-property-unit-whitelist
+            animation: rotating 8s infinite linear;
+            // stylelint-disable-next-line carbon/theme-token-use
+            fill: clr($icon, $theme);
+          } @else {
+            // stylelint-disable-next-line carbon/theme-token-use
+            fill: clr($icon, $theme);
+          }
+        }
+      }
+    }
+  }
+}

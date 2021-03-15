@@ -23,19 +23,20 @@ import {
 import { CheckmarkFilled16 } from '@carbon/icons-react';
 import { Lightning16, Bee24 } from '@carbon/icons-react';
 
+import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import { getStorybookPrefix } from '../../../config';
 import { ActionBarItem } from '../ActionBar';
 import { PageActionItem } from './PageActionItem';
 import { PageHeader } from '.';
-import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, 'PageHeader');
+const storybookPrefix = getStorybookPrefix(pkg, PageHeader.displayName);
 
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 
 import mdx from './PageHeader.mdx';
 
 export default {
-  title: `${storybookPrefix}/PageHeader`,
+  title: `${storybookPrefix}/${PageHeader.displayName}`,
   component: PageHeader,
   subcomponents: {
     ActionBarItem,

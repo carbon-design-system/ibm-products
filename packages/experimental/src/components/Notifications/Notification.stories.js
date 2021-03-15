@@ -17,17 +17,18 @@ import {
 import { User20, Notification20 } from '@carbon/icons-react';
 import { white } from '@carbon/colors';
 import styles from './_storybook-styles.scss';
+import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { Notifications } from '.';
 
-import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, 'Notifications');
+const storybookPrefix = getStorybookPrefix(pkg, Notifications.displayName);
 
 import mdx from './Notifications.mdx';
 import data from './Notifications_data';
 
 export default {
-  title: `${storybookPrefix}/Notifications`,
+  title: `${storybookPrefix}/${Notifications.displayName}`,
   component: Notifications,
   parameters: {
     styles,

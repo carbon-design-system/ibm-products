@@ -1,20 +1,23 @@
-# Reviewers Checklist
+# Review Checklists
 
-Reviews will be carried out by one or more members of the core contribution
-team. They will include as a minimum the following checks, which establish the
-definition of done for a component.
+## PR reviews
+
+When reviewing a PR, check that our
+[code guidelines](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CONTRIBUTING.md)
+are followed, and keep an eye on the component review checklist below.
 
 Each PR should be reviewed based on these criteria where applicable.
 
-## New production dependencies
+### New production dependencies
 
-**Hey Reviewer!** Copy and paste this entire section. Check where criteria
-passed, strike out where not applicable.
+If a PR introduces new dependencies in `package.json`, paste the following
+checklist into the PR as a comment and check the items off before approving.
+
+**Tip** You should be able to copy and paste the section below directly into a
+GitHub comment, then check where criteria passed, strike out where not
+applicable.
 
 `## Review of dependencies`
-
-In any case where a new dependency has been added to package.json review the
-following as part of the PR it is submitted with.
 
 `- [ ]` Verify the dependency has previously been
 [pedigree reviewed](https://pedigree-service.wdc1a.cirrus.ibm.com)\
@@ -25,11 +28,20 @@ acceptable\
 `- [ ]` Verify license conditions are met e.g. forwarding of copyright if
 necessary.
 
-## Definition of done
+## Component reviews for readiness
 
-**Hey Reviewer!** Copy and paste the section below. Check where criteria passed,
-strike out where not applicable, add notes to clarify any issues, and when
-everything is checked the review can be considered complete.
+Reviews will be carried out by one or more members of the core contribution
+team. They will include as a minimum the following checks, which establish the
+"definition of done" for a component.
+
+Paste the following checklist into the epic or issue under which the component
+is being made ready, then check where criteria passed, and add notes to clarify
+how an item is complete or what remains to be done: for anything more than
+minor/simple items, open issues to track them.
+
+**Tip** You should be able to copy and paste the section below directly into a
+GitHub comment, then check where criteria passed, strike out where not
+applicable, and add notes to each item where applicable.
 
 `## Review for release`
 
@@ -52,8 +64,8 @@ anticipated design scenarios.\
 `- [ ]` Public component features (names, props, etc) are consistent with
 Carbon-defined conventions and are consistent internally. Where there isn't an
 existing convention to apply, ensure robust precedents are being established.\
-`- [ ]` The UI produced is accessible, responsive, translatable, cross-browser (Q:
-what browsers?), and responds to the currently set Carbon theme.\
+`- [ ]` The UI produced is accessible, responsive, translatable, cross-browser, and
+responds to the currently set Carbon theme.\
 `- [ ]` Components are functional components using hooks.\
 `- [ ]` Public components which produce DOM structures support className.\
 `- [ ]` Public components support a ref (via React.forwardRef).\
@@ -70,8 +82,10 @@ HTML attributes.\
 otherwise.\
 `- [ ]` Code is formatted according to prettier rules (no use of
 //prettier-ignore).\
-`- [ ]` Code is clear, maintainable and follows standard React practices.\
-`- [ ]` Copyright header in every source file (js, css, scss etc.)
+`- [ ]` Code is clear, maintainable and follows standard React practices and the
+[code guidelines](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CONTRIBUTING.md).\
+`- [ ]` Copyright header in every source file (js, css, scss etc.) with the
+appropriate years.
 
 `###` Testing
 
@@ -80,7 +94,8 @@ otherwise.\
 outputs.\
 `- [ ]` The tests validate the behaviors and interactions defined in the design
 where practical.\
-`- [ ]` The tests achieve at least 80% coverage.\
+`- [ ]` The tests achieve 100% coverage. Usage of `istanbul ignore` is appropriate
+and not extensive.\
 `- [ ]` No warnings, errors or log messages in the test output.
 
 `###` Documentation

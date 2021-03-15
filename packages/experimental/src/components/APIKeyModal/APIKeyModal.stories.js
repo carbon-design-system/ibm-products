@@ -17,16 +17,17 @@ import {
   Form,
 } from 'carbon-components-react';
 import { action } from '@storybook/addon-actions';
-import { APIKeyModal } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import mdx from './APIKeyModal.mdx';
 import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, 'APIKeyModal');
+import { APIKeyModal } from '.';
+import mdx from './APIKeyModal.mdx';
+const storybookPrefix = getStorybookPrefix(pkg, APIKeyModal.displayName);
 import wait from '../../global/js/utils/wait';
 
 export default {
-  title: `${storybookPrefix}/APIKeyModal`,
+  title: `${storybookPrefix}/${APIKeyModal.displayName}`,
   component: APIKeyModal,
   parameters: {
     styles,

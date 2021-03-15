@@ -7,17 +7,18 @@
 
 import React from 'react';
 import cx from 'classnames';
-import { Card } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import mdx from './Card.mdx';
 import { ArrowRight24, Cloud32 } from '@carbon/icons-react';
 import { AspectRatio } from 'carbon-components-react';
 import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, 'Card');
+import { Card } from '.';
+import mdx from './Card.mdx';
+const storybookPrefix = getStorybookPrefix(pkg, Card.displayName);
 
 export default {
-  title: `${storybookPrefix}/Card`,
+  title: `${storybookPrefix}/${Card.displayName}`,
   component: Card,
   parameters: {
     styles,

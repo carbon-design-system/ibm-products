@@ -6,12 +6,13 @@
  */
 
 import React, { useState, useCallback } from 'react';
-import WebTerminal from './WebTerminal';
 import { Navigation } from './preview-components';
-import mdx from './WebTerminal.mdx';
 import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, 'WebTerminal');
+import WebTerminal from './WebTerminal';
+import mdx from './WebTerminal.mdx';
+const storybookPrefix = getStorybookPrefix(pkg, WebTerminal.displayName);
 
 import styles from './_storybook-styles.scss';
 
@@ -80,7 +81,7 @@ export const WithDocumentationLinks = Template.bind({});
 WithDocumentationLinks.args = { documentationLinks };
 
 export default {
-  title: `${storybookPrefix}/WebTerminal`,
+  title: `${storybookPrefix}/${WebTerminal.displayName}`,
   parameters: {
     styles,
     docs: {

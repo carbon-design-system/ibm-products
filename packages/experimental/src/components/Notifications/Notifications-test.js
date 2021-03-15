@@ -8,8 +8,9 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
 import React from 'react';
-import { Notifications } from '.';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { pkg } from '../../settings';
+import { Notifications } from '.';
 
 describe('Notifications', () => {
   test('renders the notification panel', () => {
@@ -42,7 +43,7 @@ describe('Notifications', () => {
     const { container } = render(
       <Notifications data={[]} open setOpen={() => {}} />
     );
-    const renderedEmptyStateSvg = container.querySelector('img');
+    const renderedEmptyStateSvg = container.querySelector('svg');
     expect(renderedEmptyStateSvg).toBeTruthy();
   });
 

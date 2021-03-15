@@ -2,6 +2,8 @@
 
 import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
 import { Card } from './Card';
+import { pkg } from '../../settings';
+import { getStorybookSlug } from '../../../config';
 
 # Card
 
@@ -14,7 +16,7 @@ import { Card } from './Card';
 ## Overview
 
 <Preview>
-  <Story id="experimental-card--standard" />
+  <Story id={getStorybookSlug(pkg, Card.displayName, 'default')} />
 </Preview>
 
 ## Component API

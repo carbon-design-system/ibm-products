@@ -2,6 +2,8 @@
 
 import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
 import { APIKeyModal } from './APIKeyModal';
+import { pkg } from '../../settings';
+import { getStorybookSlug } from '../../../config';
 
 # APIKeyModal
 
@@ -14,7 +16,7 @@ import { APIKeyModal } from './APIKeyModal';
 ## Overview
 
 <Preview>
-  <Story id="experimental-apikeymodal--standard" />
+  <Story id={getStorybookSlug(pkg, APIKeyModal.displayName, 'standard')} />
 </Preview>
 
 ## Component API

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
+const componentName = 'APIKeyDownloader';
 
 export const APIKeyDownloader = ({ apiKey, bodyText, fileName, linkText }) => {
   const [linkProps, setLinkProps] = useState('');
@@ -29,6 +30,7 @@ export const APIKeyDownloader = ({ apiKey, bodyText, fileName, linkText }) => {
   );
 };
 
+APIKeyDownloader.displayName = componentName;
 APIKeyDownloader.propTypes = {
   /**
    * the api key the user recieves

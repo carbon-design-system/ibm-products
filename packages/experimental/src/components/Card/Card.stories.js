@@ -8,7 +8,7 @@
 import React from 'react';
 import cx from 'classnames';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import { ArrowRight24, Cloud32 } from '@carbon/icons-react';
+import { ArrowRight24, Cloud32, TrashCan16, Edit16 } from '@carbon/icons-react';
 import { AspectRatio } from 'carbon-components-react';
 import { pkg } from '../../settings';
 import '../../enable-all'; // must come before component is imported (directly or indirectly)
@@ -27,11 +27,25 @@ export default {
     },
   },
   argTypes: {
-    columnSize: {
-      defaultValue: 'sm-4',
+    actionIconsPosition: {
+      defaultValue: 'bottom',
       control: {
         type: 'select',
-        options: ['sm-4', 'md-8', 'lg-12', 'max-16'],
+        options: ['bottom', 'top'],
+      },
+    },
+    columnSize: {
+      defaultValue: 4,
+      control: {
+        type: 'select',
+        options: [4, 8, 12, 16],
+      },
+    },
+    mediaPosition: {
+      defaultValue: 'top',
+      control: {
+        type: 'select',
+        options: ['top', 'left'],
       },
     },
     mediaRatio: {
@@ -39,6 +53,27 @@ export default {
       control: {
         type: 'select',
         options: ['16x9', '9x16', '2x1', '1x2', '4x3', '3x4', '1x1'],
+      },
+    },
+    primaryButtonKind: {
+      defaultValue: 'primary',
+      control: {
+        type: 'select',
+        options: ['primary', 'ghost'],
+      },
+    },
+    secondaryButtonKind: {
+      defaultValue: 'secondary',
+      control: {
+        type: 'select',
+        options: ['secondary', 'ghost'],
+      },
+    },
+    titleSize: {
+      defaultValue: 'default',
+      control: {
+        type: 'select',
+        options: ['default', 'large'],
       },
     },
   },
@@ -52,9 +87,13 @@ export default {
 };
 
 const defaultProps = {
+  caption: '',
   label: 'Label',
   title: 'Title',
-  onActionClick: () => {},
+};
+
+const expressiveProps = {
+  ...defaultProps,
   children: (
     <p>
       expressive card body content block. description inviting the user to take
@@ -64,12 +103,28 @@ const defaultProps = {
   primaryButtonText: 'Primary',
 };
 
+const productiveProps = {
+  ...defaultProps,
+  actionIconsPosition: 'bottom',
+  children: (
+    <div>
+      <div className="graph" />
+      <p>Productive content text</p>
+      <p>Productive content text</p>
+    </div>
+  ),
+  primaryButtonText: 'Ghost button',
+  productive: true,
+  titleSize: 'default',
+};
+
+const getColClasses = (col) => cx(`bx--col-lg-${col}`);
+
 const Template = (opts) => {
   const { children, columnSize, ...args } = opts;
-  const colClasses = cx(`bx--col-${columnSize}`);
   return (
     <div className="bx--row">
-      <div className={colClasses}>
+      <div className={getColClasses(columnSize)}>
         <Card {...args}>{children}</Card>
       </div>
     </div>
@@ -78,10 +133,9 @@ const Template = (opts) => {
 
 const MediaTemplate = (opts) => {
   const { children, columnSize, mediaRatio, ...args } = opts;
-  const colClasses = cx(`bx--col-${columnSize}`);
   return (
     <div className="bx--row">
-      <div className={colClasses}>
+      <div className={getColClasses(columnSize)}>
         <Card
           media={<AspectRatio ratio={mediaRatio}>{mediaRatio}</AspectRatio>}
           {...args}>
@@ -94,51 +148,88 @@ const MediaTemplate = (opts) => {
 
 export const Default = Template.bind({});
 Default.args = {
-  ...defaultProps,
+  ...expressiveProps,
 };
 
 export const LabelOnly = Template.bind({});
 LabelOnly.args = {
-  ...defaultProps,
+  ...expressiveProps,
   title: '',
 };
 
 export const WithCaption = Template.bind({});
 WithCaption.args = {
-  ...defaultProps,
+  ...expressiveProps,
   caption: 'Description or long caption',
   label: '',
 };
 
 export const WithMedia = MediaTemplate.bind({});
 WithMedia.args = {
-  ...defaultProps,
+  ...expressiveProps,
 };
 
 export const WithActionIcon = Template.bind({});
 WithActionIcon.args = {
-  ...defaultProps,
-  actionIcon: ArrowRight24,
+  ...expressiveProps,
+  actionIcons: [
+    {
+      id: '1',
+      icon: <ArrowRight24 onClick={() => {}} />,
+    },
+  ],
   primaryButtonText: '',
 };
 
 export const WithPictogram = Template.bind({});
 WithPictogram.args = {
-  ...defaultProps,
+  ...expressiveProps,
   pictogram: Cloud32,
 };
 
 export const WithSecondaryAction = Template.bind({});
 WithSecondaryAction.args = {
-  ...defaultProps,
+  ...expressiveProps,
   secondaryButtonText: 'Secondary',
   secondaryButtonKind: 'ghost',
-  columnSize: 'md-4',
+  columnSize: '8',
 };
 
 export const ClickableCardWithOnclick = Template.bind({});
 ClickableCardWithOnclick.args = {
-  ...defaultProps,
+  ...expressiveProps,
   onClick: () => {},
   primaryButtonText: '',
+};
+
+export const Productive = Template.bind({});
+Productive.args = {
+  ...productiveProps,
+  actionIcons: [
+    {
+      id: '1',
+      icon: <Edit16 onClick={() => {}} />,
+    },
+    {
+      id: '2',
+      icon: <TrashCan16 onClick={() => {}} />,
+    },
+  ],
+};
+
+export const ProductiveOverflow = Template.bind({});
+ProductiveOverflow.args = {
+  ...productiveProps,
+  overflowActions: [
+    {
+      id: '1',
+      itemText: 'Edit',
+      onClick: () => {},
+    },
+    {
+      id: '2',
+      itemText: 'Delete',
+      onClick: () => {},
+    },
+  ],
 };

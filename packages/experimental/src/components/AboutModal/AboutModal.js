@@ -74,7 +74,8 @@ export const AboutModal = !pkg.isComponentEnabled(componentName)
             </div>
           </ModalBody>
           <ModalFooter>
-            {(additionalInfo && additionalInfo.length > 0) &&
+            {additionalInfo &&
+              additionalInfo.length > 0 &&
               (additionalInfo.length === 1 ? (
                 <>
                   <p className={`${pkg.prefix}-about-modal-version-label`}>

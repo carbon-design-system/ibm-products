@@ -58,6 +58,7 @@ const settings = {
   _allComponents: false,
   _allFeatures: false,
   // flags
+  prefix: defaults.prefix,
   component: new Proxy(component, {
     set(target, property, value) {
       console.warn(warningMessage('Component', property, value));

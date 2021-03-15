@@ -9,7 +9,10 @@ import React, { useState } from 'react';
 
 import { action } from '@storybook/addon-actions';
 
-import { pkgPrefix } from '../../global/js/settings';
+import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import { getStorybookPrefix } from '../../../config';
+const storybookPrefix = getStorybookPrefix(pkg, 'Tearsheet');
 
 import { Button } from 'carbon-components-react';
 
@@ -20,7 +23,7 @@ import styles from './_storybook-styles.scss';
 import mdx from './TearsheetStacking.mdx';
 
 export default {
-  title: 'Experimental/Tearsheets/TearsheetStacking',
+  title: `${storybookPrefix}/Tearsheets/TearsheetStacking`,
   component: Tearsheet,
   parameters: { controls: { expanded: true }, styles, docs: { page: mdx } },
   argTypes: {
@@ -211,7 +214,7 @@ export const StackedTearsheets = ({ buttonSet, ...args }) => {
 
   return (
     <>
-      <style>{`.${pkgPrefix}-tearsheet { opacity: 0 }`};</style>
+      <style>{`.${pkg.prefix}-tearsheet { opacity: 0 }`};</style>
       <div
         style={{
           display: 'flex',

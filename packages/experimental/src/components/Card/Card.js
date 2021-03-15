@@ -2,97 +2,174 @@ import React from 'react';
 import cx from 'classnames';
 import { Button } from 'carbon-components-react';
 import PropTypes from 'prop-types';
-import { pkgPrefix } from '../../global/js/settings';
+import { Canary } from '../_Canary';
+import { pkg } from '../../settings';
+const componentName = 'Card';
 
-export const Card = ({
-  actionButtonText,
-  actionIcon: ActionIcon,
-  pictogram: Pictogram,
-  children,
-  className,
-  href,
-  label,
-  media,
-  mediaPosition,
-  onActionClick,
-  onClick,
-  title,
-}) => {
-  const cardClasses = cx({
-    [`${pkgPrefix}-card`]: true,
-    [`${pkgPrefix}-card--clickable`]: onClick,
-    [`${pkgPrefix}-card--media-left`]: mediaPosition === 'left',
-    className,
-  });
+export const Card = !pkg.isComponentEnabled(componentName)
+  ? // Return canary if not released or flag not set
+    () => <Canary component={componentName} />
+  : // Main component code...
+    ({
+      actionIcon: ActionIcon,
+      caption,
+      children,
+      className,
+      label,
+      media,
+      mediaPosition,
+      onClick,
+      onPrimaryButtonClick,
+      onSecondaryButtonClick,
+      pictogram: Pictogram,
+      primaryButtonKind,
+      primaryButtonText,
+      secondaryButtonKind,
+      secondaryButtonText,
+      title,
+    }) => {
+      const cardClasses = cx(`${pkg.prefix}-card`, {
+        [`${pkg.prefix}-card--clickable`]: onClick,
+        [`${pkg.prefix}-card--media-left`]: mediaPosition === 'left',
+        className,
+      });
 
-  const CardContent = (
-    <div className={cardClasses}>
-      {media && <div className={`${pkgPrefix}-card-media`}>{media}</div>}
-      {Pictogram && (
-        <div className={`${pkgPrefix}-card-pictogram`}>
-          <Pictogram />
-        </div>
-      )}
-      <div className={`${pkgPrefix}-card-content-container`}>
-        <div className={`${pkgPrefix}-card-header`}>
-          <p className={`${pkgPrefix}-card-label`}>{label}</p>
-          <p className={`${pkgPrefix}-card-title`}>{title}</p>
-        </div>
-        <div className={`${pkgPrefix}-card-body`}>{children}</div>
-        <div className={`${pkgPrefix}-card-actions`}>
-          {actionButtonText && (
-            <div className={`${pkgPrefix}-card-action-button`}>
-              <Button kind="primary" onClick={onActionClick}>
-                {actionButtonText}
-              </Button>
+      const headerClasses = cx(`${pkg.prefix}-card-header`, {
+        [`${pkg.prefix}-card-header--label-only`]: label && !title && !caption,
+      });
+
+      const CardContent = (
+        <div className={cardClasses}>
+          {media && <div className={`${pkg.prefix}-card-media`}>{media}</div>}
+          {Pictogram && (
+            <div className={`${pkg.prefix}-card-pictogram`}>
+              <Pictogram />
             </div>
           )}
-          {ActionIcon && (
-            <ActionIcon
-              className={`${pkgPrefix}-card-action-icon`}
-              onClick={onActionClick}
-            />
-          )}
+          <div className={`${pkg.prefix}-card-content-container`}>
+            <div className={headerClasses}>
+              {label && <p className={`${pkg.prefix}-card-label`}>{label}</p>}
+              {title && <p className={`${pkg.prefix}-card-title`}>{title}</p>}
+              {caption && (
+                <p className={`${pkg.prefix}-card-caption`}>{caption}</p>
+              )}
+            </div>
+            <div className={`${pkg.prefix}-card-body`}>{children}</div>
+            <div className={`${pkg.prefix}-card-actions`}>
+              {secondaryButtonText && (
+                <Button
+                  kind={secondaryButtonKind}
+                  onClick={onSecondaryButtonClick}
+                  size="field">
+                  {secondaryButtonText}
+                </Button>
+              )}
+              {primaryButtonText && (
+                <Button
+                  kind={primaryButtonKind}
+                  onClick={onPrimaryButtonClick}
+                  size="field">
+                  {primaryButtonText}
+                </Button>
+              )}
+              {ActionIcon && (
+                <ActionIcon
+                  className={`${pkg.prefix}-card-action-icon`}
+                  onClick={onPrimaryButtonClick}
+                />
+              )}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  );
+      );
 
-  if (!href) return CardContent;
-
-  return (
-    <a className={`${pkgPrefix}-card-link`} href={href}>
-      {CardContent}
-    </a>
-  );
-};
+      return CardContent;
+    };
 
 Card.propTypes = {
-  actionButtonText: PropTypes.string,
+  /**
+   * Icon to display in the bottom right of the card
+   */
   actionIcon: PropTypes.object,
+  /**
+   * Optional header caption
+   */
+  caption: PropTypes.string,
+  /**
+   * Content that shows in the body of the card
+   */
   children: PropTypes.node,
+  /**
+   * Optional user provided class
+   */
   className: PropTypes.string,
-  href: PropTypes.string,
+  /**
+   * Optional label for the top of the card
+   */
   label: PropTypes.string,
+  /**
+   * Optional media content like an image to be placed in the card
+   */
   media: PropTypes.node,
+  /**
+   * Establishes the position of the media in the card
+   */
   mediaPosition: PropTypes.oneOf(['top', 'left']),
-  onActionClick: PropTypes.func,
+  /**
+   * Provides the callback for a clickable card
+   */
   onClick: PropTypes.func,
+  /**
+   * Function that's called from the primary button or action icon
+   */
+  onPrimaryButtonClick: PropTypes.func,
+  /**
+   * Function that's called from the secondary button
+   */
+  onSecondaryButtonClick: PropTypes.func,
+  /**
+   * Provides the icon that's displayed at the top of the card
+   */
   pictogram: PropTypes.object,
+  /**
+   * Establishes the kind of button displayed for the primary button
+   */
+  primaryButtonKind: PropTypes.oneOf(['primary', 'ghost']),
+  /**
+   * The text that's displayed in the primary button
+   */
+  primaryButtonText: PropTypes.string,
+  /**
+   * Establishes the kind of button displayed for the secondary button
+   */
+  secondaryButtonKind: PropTypes.oneOf(['secondary', 'ghost']),
+  /**
+   * The text that's displayed in the secondary button
+   */
+  secondaryButtonText: PropTypes.string,
+  /**
+   * Title that's displayed at the top of the card
+   */
   title: PropTypes.string,
 };
 
 Card.defaultProps = {
-  actionButtonText: '',
   actionIcon: null,
+  caption: '',
   children: '',
   className: '',
-  href: '',
   label: '',
   media: null,
   mediaPosition: 'top',
-  onActionClick: null,
   onClick: null,
+  onPrimaryButtonClick: null,
+  onSecondaryButtonClick: null,
   pictogram: null,
+  primaryButtonKind: 'primary',
+  primaryButtonText: '',
+  secondaryButtonKind: 'secondary',
+  secondaryButtonText: '',
   title: '',
 };
+
+Card.displayName = componentName;

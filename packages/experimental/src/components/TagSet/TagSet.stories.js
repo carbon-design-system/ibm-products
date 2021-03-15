@@ -7,12 +7,14 @@
 
 import React from 'react';
 
-import TagSet from './TagSet';
 import { Tag } from 'carbon-components-react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import { pkgPrefix } from '../../global/js/settings';
-
-const blockClass = `${pkgPrefix}-tag-set`;
+import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import { getStorybookPrefix } from '../../../config';
+import TagSet from './TagSet';
+const storybookPrefix = getStorybookPrefix(pkg, TagSet.displayName);
+const blockClass = `${pkg.prefix}-tag-set`;
 
 const TagItems = [
   <Tag key="tag1" type="blue">
@@ -126,7 +128,7 @@ const ManyTagItems = [
 ));
 
 export default {
-  title: 'Experimental/TagSet',
+  title: `${storybookPrefix}/${TagSet.displayName}`,
   component: TagSet,
   parameters: { styles },
   argTypes: {

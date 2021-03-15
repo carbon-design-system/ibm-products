@@ -9,10 +9,13 @@ import { _4K16 } from '@carbon/icons-react';
 import React, { useEffect, useState, useRef } from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { ModifiedTabs } from '.';
 import { Modal, RadioButton, RadioButtonGroup } from 'carbon-components-react';
-
+import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import { getStorybookPrefix } from '../../../config';
+import { ModifiedTabs } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
+const storybookPrefix = getStorybookPrefix(pkg, ModifiedTabs.displayName);
 
 const commonStoryCode = {
   actionCloseTab: action('onCloseTab'),
@@ -32,7 +35,7 @@ const commonStoryCode = {
 };
 
 export default {
-  title: 'Experimental/ModifiedTabs',
+  title: `${storybookPrefix}/${ModifiedTabs.displayName}`,
   component: ModifiedTabs,
   parameters: { styles },
 };

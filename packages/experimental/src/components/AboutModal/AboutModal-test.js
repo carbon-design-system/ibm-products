@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2020
+ * Copyright IBM Corp. 2021, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,31 +7,43 @@
 
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
+import { Link } from 'carbon-components-react';
+
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
 
 import { AboutModal } from './AboutModal';
-import ExampleLogo from './example-logo.svg';
-import ansibleLogo from './technologyUsedLogos/ansible_logo.png';
-import grafanaLogo from './technologyUsedLogos/grafana_logo.png';
-import jsLogo from './technologyUsedLogos/js_logo.png';
+import ExampleLogo from './_story-assets/example-logo.svg';
+import ansibleLogo from './_story-assets/ansible-logo.png';
+import grafanaLogo from './_story-assets/grafana-logo.png';
+import jsLogo from './_story-assets/js-logo.png';
+
+const content = 'This is example content';
+const logo = (
+  <img
+    src={ExampleLogo}
+    alt="Example product logo"
+    style={{ maxWidth: '6rem' }}
+  />
+);
+const title = (
+  <>
+    IBM <span style={{ fontWeight: '600' }}>Watson AI Ops</span>
+  </>
+);
 
 describe('AboutModal', () => {
-  test('renders title and description', () => {
+  test('renders title and content', () => {
     render(
       <AboutModal
         open
-        logo={ExampleLogo}
-        body="This is an example description"
-        productName={
-          <>
-            IBM <span style={{ fontWeight: '600' }}>Watson AI Ops</span>
-          </>
-        }
+        logo={logo}
+        content={content}
+        title={title}
         versionNumber="0.0.1"
       />
     );
     expect(
-      screen.getByText(/Watson AI Ops/i) &&
-        screen.getByText(/This is an example description/i)
+      screen.getByText(/Watson AI Ops/i) && screen.getByText(content)
     ).toBeTruthy();
   });
 
@@ -39,13 +51,9 @@ describe('AboutModal', () => {
     const { container } = render(
       <AboutModal
         open
-        logo={ExampleLogo}
-        body="This is an example description"
-        productName={
-          <>
-            IBM <span style={{ fontWeight: '600' }}>Watson AI Ops</span>
-          </>
-        }
+        logo={logo}
+        content={content}
+        title={title}
         versionNumber="0.0.1"
       />
     );
@@ -53,27 +61,21 @@ describe('AboutModal', () => {
     expect(renderedProductLogo).toBeTruthy();
   });
 
-  test('renders with link', () => {
+  test('renders with links', () => {
     const { getByText, container } = render(
       <AboutModal
-        body="This is an example description"
+        content={content}
         open
-        logo={ExampleLogo}
-        productName={
-          <>
-            IBM <span style={{ fontWeight: '600' }}>Watson AI Ops</span>
-          </>
-        }
+        logo={logo}
+        title={title}
         versionNumber="0.0.1"
         links={[
-          {
-            url: 'https://www.carbondesignsystem.com/',
-            text: 'Carbon Design System',
-          },
-          {
-            url: 'https://www.ibm.com/design/language/',
-            text: 'IBM Design Language',
-          },
+          <Link href="https://www.carbondesignsystem.com" key="link1">
+            Carbon Design System
+          </Link>,
+          <Link href="https://www.ibm.com/design/language" key="link2">
+            IBM Design Language
+          </Link>,
         ]}
       />
     );
@@ -88,9 +90,9 @@ describe('AboutModal', () => {
     render(
       <AboutModal
         open
-        logo={ExampleLogo}
-        body="This is an example description"
-        productName={
+        logo={logo}
+        content={content}
+        title={
           <>
             IBM <span style={{ fontWeight: '600' }}>Watson AI Ops</span>
           </>
@@ -106,13 +108,9 @@ describe('AboutModal', () => {
     render(
       <AboutModal
         open
-        logo={ExampleLogo}
-        body="This is an example description"
-        productName={
-          <>
-            IBM <span style={{ fontWeight: '600' }}>Watson AI Ops</span>
-          </>
-        }
+        logo={logo}
+        content={content}
+        title={title}
         versionNumber="0.0.1"
         copyrightText="Copyright test text"
       />
@@ -123,14 +121,10 @@ describe('AboutModal', () => {
   test('renders a clickable carbon tab for technologies used', () => {
     render(
       <AboutModal
-        body="This is an example description"
+        content={content}
         open
-        logo={ExampleLogo}
-        productName={
-          <>
-            IBM <span style={{ fontWeight: '600' }}>Watson AI Ops</span>
-          </>
-        }
+        logo={logo}
+        title={title}
         versionNumber="0.0.1"
         legalText="This Web site contains proprietary notices and copyright information, the terms of which must be observed and followed. Please see the tab entitled “Copyright and trademark information” for related information."
         copyrightText="Copyright IBM corporation 2020"
@@ -160,13 +154,9 @@ describe('AboutModal', () => {
     const { container } = render(
       <AboutModal
         open
-        logo={ExampleLogo}
-        body="This is an example description"
-        productName={
-          <>
-            IBM <span style={{ fontWeight: '600' }}>Watson AI Ops</span>
-          </>
-        }
+        logo={logo}
+        content={content}
+        title={title}
         versionNumber="0.0.1"
         copyrightText="Copyright test text"
         theme="light"
@@ -182,13 +172,9 @@ describe('AboutModal', () => {
     const { getByText } = render(
       <AboutModal
         open
-        logo={ExampleLogo}
-        body="This is an example description"
-        productName={
-          <>
-            IBM <span style={{ fontWeight: '600' }}>Watson AI Ops</span>
-          </>
-        }
+        logo={logo}
+        content={content}
+        title={title}
         versionNumber="0.0.1"
       />
     );

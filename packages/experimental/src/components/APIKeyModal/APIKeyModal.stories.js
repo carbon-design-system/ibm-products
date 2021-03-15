@@ -17,14 +17,17 @@ import {
   Form,
 } from 'carbon-components-react';
 import { action } from '@storybook/addon-actions';
-import { APIKeyModal } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
+import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import { getStorybookPrefix } from '../../../config';
+import { APIKeyModal } from '.';
 import mdx from './APIKeyModal.mdx';
-import { pkgPrefix } from '../../global/js/settings';
+const storybookPrefix = getStorybookPrefix(pkg, APIKeyModal.displayName);
 import wait from '../../global/js/utils/wait';
 
 export default {
-  title: 'Experimental/APIKeyModal',
+  title: `${storybookPrefix}/${APIKeyModal.displayName}`,
   component: APIKeyModal,
   parameters: {
     styles,
@@ -155,7 +158,7 @@ const MultiStepTemplate = (args) => {
       valid: Boolean(name && permissions),
       content: (
         <div>
-          <p className={`${pkgPrefix}--apikey-modal-body`}>
+          <p className={`${pkg.prefix}--apikey-modal-body`}>
             Optional description text. To connect securely to product, your
             application or tool needs an API key with permissions to access the
             cluster and resources such as topics.
@@ -169,7 +172,7 @@ const MultiStepTemplate = (args) => {
           />
           <FormGroup
             legendText="What do you want your application to be able to do"
-            className={`${pkgPrefix}--apikey-modal-opts`}>
+            className={`${pkg.prefix}--apikey-modal-opts`}>
             <RadioButtonGroup
               onChange={(opt) => setPermissions(opt)}
               valueSelected={permissions}

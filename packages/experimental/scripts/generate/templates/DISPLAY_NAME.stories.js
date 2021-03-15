@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2020
+ * Copyright IBM Corp. FULL_YEAR, FULL_YEAR
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,17 +11,18 @@ import React from 'react';
  */
 // import { action } from '@storybook/addon-actions';
 
-import sectionTitle from '../../../config';
-
 import { DISPLAY_NAME } from '.';
+
+import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import { getStorybookPrefix } from '../../../config';
+const storybookPrefix = getStorybookPrefix(pkg, DISPLAY_NAME.displayName);
 
 import page from './DISPLAY_NAME.mdx';
 import styles from './_storybook-styles.scss';
 
-const { name } = DISPLAY_NAME;
-
 export default {
-  title: `${sectionTitle}/${name}`,
+  title: `${storybookPrefix}/${DISPLAY_NAME.displayName}`,
   component: DISPLAY_NAME,
   // TODO: Define argTypes for props not represented by standard JS types
   // argTypes: {

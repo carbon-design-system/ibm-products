@@ -1,11 +1,23 @@
 @import './index';
+@import '../../global/styles/project-settings';
+@import '../../global/styles/carbon-settings';
 
-.card-demo-container {
+// make the root full width to get a better idea of how the cards
+// look in a real grid situation
+
+#root {
   width: 100%;
-  max-width: 300px;
 }
 
-.card-demo-container--wide {
+// aspect ratio box styling
+.card-story .bx--aspect-ratio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $ui-03;
+}
+
+.#{$pkg-prefix}-card--media-left .#{$pkg-prefix}-card-media {
   width: 100%;
-  max-width: 900px;
+  max-width: 300px;
 }

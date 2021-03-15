@@ -7,192 +7,201 @@ import {
   Button,
 } from 'carbon-components-react';
 import PropTypes from 'prop-types';
-import { pkgPrefix } from '../../global/js/settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
+import { Canary } from '../_Canary';
+import { pkg } from '../../settings';
+const componentName = 'ImportModal';
 
-export const ImportModal = ({
-  defaultErrorBody,
-  errorHeader,
-  fetchErrorBody,
-  fetchErrorHeader,
-  fileDropHeader,
-  fileDropLabel,
-  fileUploadLabel,
-  inputButtonText,
-  inputHeader,
-  inputId,
-  inputLabel,
-  inputPlaceholder,
-  invalidFileTypeErrorBody,
-  invalidFileTypeErrorHeader,
-  maxFileSize,
-  maxFileSizeErrorBody,
-  maxFileSizeErrorHeader,
-  modalBody,
-  modalHeading,
-  onRequestClose,
-  onRequestSubmit,
-  open,
-  primaryButtonText,
-  secondaryButtonText,
-  validFileTypes,
-}) => {
-  const [files, setFiles] = useState([]);
-  const [importUrl, setImportUrl] = useState('');
+export const ImportModal = !pkg.isComponentEnabled(componentName)
+  ? // Return canary if not released or flag not set
+    () => <Canary component={componentName} />
+  : // Main component code...
+    ({
+      defaultErrorBody,
+      errorHeader,
+      fetchErrorBody,
+      fetchErrorHeader,
+      fileDropHeader,
+      fileDropLabel,
+      fileUploadLabel,
+      inputButtonText,
+      inputHeader,
+      inputId,
+      inputLabel,
+      inputPlaceholder,
+      invalidFileTypeErrorBody,
+      invalidFileTypeErrorHeader,
+      maxFileSize,
+      maxFileSizeErrorBody,
+      maxFileSizeErrorHeader,
+      modalBody,
+      modalHeading,
+      onRequestClose,
+      onRequestSubmit,
+      open,
+      primaryButtonText,
+      secondaryButtonText,
+      validFileTypes,
+    }) => {
+      const [files, setFiles] = useState([]);
+      const [importUrl, setImportUrl] = useState('');
 
-  const isInvalidFileType = (file) => {
-    const acceptedTypes = new Set(validFileTypes);
-    const { name, type: mimeType = '' } = file;
-    const extension = name.split('.').pop();
-    if (acceptedTypes.has(mimeType) || acceptedTypes.has(extension))
-      return false;
-    return true;
-  };
-
-  const updateFiles = (newFiles) => {
-    const updatedFiles = newFiles.map((file) => {
-      const newFile = {
-        uuid: file.uuid || uuidv4(),
-        status: 'edit',
-        iconDescription: 'Delete file',
-        name: file.name,
-        filesize: file.size,
-        invalidFileType: file.invalidFileType,
-        fileData: file,
-        fetchError: file.fetchError,
+      const isInvalidFileType = (file) => {
+        const acceptedTypes = new Set(validFileTypes);
+        const { name, type: mimeType = '' } = file;
+        const extension = name.split('.').pop();
+        if (acceptedTypes.has(mimeType) || acceptedTypes.has(extension))
+          return false;
+        return true;
       };
-      if (newFile.fetchError) {
-        newFile.errorBody = fetchErrorBody || defaultErrorBody;
-        newFile.errorSubject = fetchErrorHeader || errorHeader;
-        newFile.invalid = true;
-      } else if (newFile.invalidFileType) {
-        newFile.errorBody = invalidFileTypeErrorBody || defaultErrorBody;
-        newFile.errorSubject = invalidFileTypeErrorHeader || errorHeader;
-        newFile.invalid = true;
-      } else if (maxFileSize && newFile.filesize > maxFileSize) {
-        newFile.errorBody = maxFileSizeErrorBody || defaultErrorBody;
-        newFile.errorSubject = maxFileSizeErrorHeader || errorHeader;
-        newFile.invalid = true;
-      }
-      return newFile;
-    });
-    const finalFiles = [...updatedFiles];
-    setFiles(finalFiles);
-  };
 
-  const fetchFile = async (evt) => {
-    evt.preventDefault();
-    const fileName = importUrl
-      .substring(importUrl.lastIndexOf('/') + 1)
-      .split('?')[0];
-    const pendingFile = {
-      name: fileName,
-      status: 'uploading',
-      uuid: uuidv4(),
-    };
-    setFiles([pendingFile]);
-    try {
-      const response = await fetch(importUrl);
-      if (!response.ok || response.status !== 200)
-        throw new Error(response.status);
-      const blob = await response.blob();
-      const fetchedFile = new File([blob], fileName, { type: blob.type });
-      fetchedFile.invalidFileType = isInvalidFileType(fetchedFile);
-      fetchedFile.uuid = pendingFile.uuid;
-      updateFiles([fetchedFile]);
-    } catch (err) {
-      console.error('fetch failed', err);
-      const failedFile = {
-        ...pendingFile,
-        fetchError: true,
+      const updateFiles = (newFiles) => {
+        const updatedFiles = newFiles.map((file) => {
+          const newFile = {
+            uuid: file.uuid || uuidv4(),
+            status: 'edit',
+            iconDescription: 'Delete file',
+            name: file.name,
+            filesize: file.size,
+            invalidFileType: file.invalidFileType,
+            fileData: file,
+            fetchError: file.fetchError,
+          };
+          if (newFile.fetchError) {
+            newFile.errorBody = fetchErrorBody || defaultErrorBody;
+            newFile.errorSubject = fetchErrorHeader || errorHeader;
+            newFile.invalid = true;
+          } else if (newFile.invalidFileType) {
+            newFile.errorBody = invalidFileTypeErrorBody || defaultErrorBody;
+            newFile.errorSubject = invalidFileTypeErrorHeader || errorHeader;
+            newFile.invalid = true;
+          } else if (maxFileSize && newFile.filesize > maxFileSize) {
+            newFile.errorBody = maxFileSizeErrorBody || defaultErrorBody;
+            newFile.errorSubject = maxFileSizeErrorHeader || errorHeader;
+            newFile.invalid = true;
+          }
+          return newFile;
+        });
+        const finalFiles = [...updatedFiles];
+        setFiles(finalFiles);
       };
-      updateFiles([failedFile]);
-    }
-  };
 
-  const onAddFile = (evt, { addedFiles }) => {
-    evt.stopPropagation();
-    updateFiles(addedFiles);
-  };
+      const fetchFile = async (evt) => {
+        evt.preventDefault();
+        const fileName = importUrl
+          .substring(importUrl.lastIndexOf('/') + 1)
+          .split('?')[0];
+        const pendingFile = {
+          name: fileName,
+          status: 'uploading',
+          uuid: uuidv4(),
+        };
+        setFiles([pendingFile]);
+        try {
+          const response = await fetch(importUrl);
+          if (!response.ok || response.status !== 200)
+            throw new Error(response.status);
+          const blob = await response.blob();
+          const fetchedFile = new File([blob], fileName, { type: blob.type });
+          fetchedFile.invalidFileType = isInvalidFileType(fetchedFile);
+          fetchedFile.uuid = pendingFile.uuid;
+          updateFiles([fetchedFile]);
+        } catch (err) {
+          console.error('fetch failed', err);
+          const failedFile = {
+            ...pendingFile,
+            fetchError: true,
+          };
+          updateFiles([failedFile]);
+        }
+      };
 
-  const onRemoveFile = (uuid) => {
-    const updatedFiles = files.filter((f) => f.uuid !== uuid);
-    setFiles(updatedFiles);
-  };
+      const onAddFile = (evt, { addedFiles }) => {
+        evt.stopPropagation();
+        updateFiles(addedFiles);
+      };
 
-  const onSubmitHandler = () => {
-    onRequestSubmit(files);
-  };
+      const onRemoveFile = (uuid) => {
+        const updatedFiles = files.filter((f) => f.uuid !== uuid);
+        setFiles(updatedFiles);
+      };
 
-  const inputHandler = (evt) => {
-    setImportUrl(evt.target.value);
-  };
+      const onSubmitHandler = () => {
+        onRequestSubmit(files);
+      };
 
-  const primaryButtonDisabled = !files.length || files.some((f) => f.invalid);
-  const importButtonDisabled = !importUrl;
-  const fileUploaded = Boolean(files.length);
+      const inputHandler = (evt) => {
+        setImportUrl(evt.target.value);
+      };
 
-  return (
-    <Modal
-      open={open}
-      primaryButtonText={primaryButtonText}
-      secondaryButtonText={secondaryButtonText}
-      modalHeading={modalHeading}
-      primaryButtonDisabled={primaryButtonDisabled}
-      onRequestSubmit={onSubmitHandler}
-      onRequestClose={onRequestClose}
-      className={`${pkgPrefix}--import-modal`}>
-      <p className={`${pkgPrefix}--import-modal-body`}>{modalBody}</p>
-      <p className={`${pkgPrefix}--import-modal-label`}>{fileDropHeader}</p>
-      <FileUploaderDropContainer
-        accept={validFileTypes}
-        labelText={fileDropLabel}
-        onAddFiles={onAddFile}
-        disabled={files.length}
-      />
-      <p className={`${pkgPrefix}--import-modal-label`}>{inputHeader}</p>
-      <div className={`${pkgPrefix}--input-group`}>
-        <TextInput
-          id={inputId}
-          labelText={inputLabel}
-          onChange={inputHandler}
-          placeholder={inputPlaceholder}
-          value={importUrl}
-          disabled={fileUploaded}
-        />
-        <Button
-          onClick={fetchFile}
-          className={`${pkgPrefix}--import-button`}
-          size="sm"
-          disabled={importButtonDisabled}>
-          {inputButtonText}
-        </Button>
-      </div>
-      <div className="bx--file-container" style={{ width: '100%' }}>
-        {fileUploaded && (
-          <p className={`${pkgPrefix}--import-modal-helper-text`}>
-            {fileUploadLabel}
+      const primaryButtonDisabled =
+        !files.length || files.some((f) => f.invalid);
+      const importButtonDisabled = !importUrl;
+      const fileUploaded = Boolean(files.length);
+
+      return (
+        <Modal
+          open={open}
+          primaryButtonText={primaryButtonText}
+          secondaryButtonText={secondaryButtonText}
+          modalHeading={modalHeading}
+          primaryButtonDisabled={primaryButtonDisabled}
+          onRequestSubmit={onSubmitHandler}
+          onRequestClose={onRequestClose}
+          className={`${pkg.prefix}--import-modal`}>
+          <p className={`${pkg.prefix}--import-modal-body`}>{modalBody}</p>
+          <p className={`${pkg.prefix}--import-modal-label`}>
+            {fileDropHeader}
           </p>
-        )}
-        {files.map((file) => (
-          <FileUploaderItem
-            key={file.uuid}
-            onDelete={() => onRemoveFile(file.uuid)}
-            name={file.name}
-            status={file.status}
-            size="default"
-            uuid={file.uuid}
-            iconDescription={file.iconDescription}
-            invalid={file.invalid}
-            errorBody={file.errorBody}
-            errorSubject={file.errorSubject}
-            filesize={file.filesize}
+          <FileUploaderDropContainer
+            accept={validFileTypes}
+            labelText={fileDropLabel}
+            onAddFiles={onAddFile}
+            disabled={files.length}
           />
-        ))}
-      </div>
-    </Modal>
-  );
-};
+          <p className={`${pkg.prefix}--import-modal-label`}>{inputHeader}</p>
+          <div className={`${pkg.prefix}--input-group`}>
+            <TextInput
+              id={inputId}
+              labelText={inputLabel}
+              onChange={inputHandler}
+              placeholder={inputPlaceholder}
+              value={importUrl}
+              disabled={fileUploaded}
+            />
+            <Button
+              onClick={fetchFile}
+              className={`${pkg.prefix}--import-button`}
+              size="sm"
+              disabled={importButtonDisabled}>
+              {inputButtonText}
+            </Button>
+          </div>
+          <div className="bx--file-container" style={{ width: '100%' }}>
+            {fileUploaded && (
+              <p className={`${pkg.prefix}--import-modal-helper-text`}>
+                {fileUploadLabel}
+              </p>
+            )}
+            {files.map((file) => (
+              <FileUploaderItem
+                key={file.uuid}
+                onDelete={() => onRemoveFile(file.uuid)}
+                name={file.name}
+                status={file.status}
+                size="default"
+                uuid={file.uuid}
+                iconDescription={file.iconDescription}
+                invalid={file.invalid}
+                errorBody={file.errorBody}
+                errorSubject={file.errorSubject}
+                filesize={file.filesize}
+              />
+            ))}
+          </div>
+        </Modal>
+      );
+    };
 
 ImportModal.propTypes = {
   /**
@@ -324,3 +333,5 @@ ImportModal.defaultProps = {
   secondaryButtonText: '',
   validFileTypes: [],
 };
+
+ImportModal.displayName = componentName;

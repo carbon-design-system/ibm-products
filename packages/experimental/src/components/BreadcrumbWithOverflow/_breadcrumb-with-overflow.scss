@@ -121,3 +121,7 @@ $caret-size: rem(7px);
   border-bottom: $caret-size solid $field-01;
   border-left: $caret-size solid transparent;
 }
+
+.#{$block-class}--displayed-breadcrumb {
+  overflow: hidden;
+}

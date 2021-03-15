@@ -17,11 +17,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2 # https://github.com/actions/checkout
-        with:
-          fetch-depth: 2
-
-      - if: ${{ github.event_name == 'pull_request' }} # https://github.com/github/codeql-action#usage
-        run: git checkout HEAD^2
 
       - name: Initialize
         uses: github/codeql-action/init@v1

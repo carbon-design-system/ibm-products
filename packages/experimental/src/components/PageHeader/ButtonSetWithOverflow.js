@@ -10,17 +10,13 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 import ReactResizeDetector from 'react-resize-detector';
-
-import { settings } from 'carbon-components';
-const { prefix } = settings;
 import { ButtonSet } from 'carbon-components-react';
 
-import { pkgPrefix } from '../../global/js/settings';
-// import uuidv4 from '../../global/js/utils/uuidv4';
-// import unwrapIfFragment from '../../global/js/utils/unwrap-if-fragment';
 import { TempComboButton } from './TempComboButton';
 
-const blockClass = `${pkgPrefix}-button-set-with-overflow`;
+import { pkg, carbon } from '../../settings';
+const blockClass = `${pkg.prefix}-button-set-with-overflow`;
+const componentName = 'ButtonSetWithOverflow';
 
 export const ButtonSetWithOverflow = ({
   children,
@@ -38,7 +34,7 @@ export const ButtonSetWithOverflow = ({
     let newShowAsOverflow = true;
 
     const sizingSet = sizingContainerRefSet.current?.querySelectorAll(
-      `.${prefix}--btn`
+      `.${carbon.prefix}--btn`
     );
 
     let sizingSetTotalSize = 0;
@@ -128,3 +124,5 @@ ButtonSetWithOverflow.propTypes = {
 };
 
 ButtonSetWithOverflow.defaultProps = {};
+
+ButtonSetWithOverflow.displayName = componentName;

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2020
+ * Copyright IBM Corp. FULL_YEAR, FULL_YEAR
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,23 +13,32 @@ import React from 'react';
  * TODO: @import(s) of carbon components
  */
 
+// NOTE: SCSS is not imported directly here: it is rolled up separately.
+
 /**
  * TODO: Add use of Carbon prefix if needed
  */
-import { expPrefix /*, carbonPrefix */ } from '../../global/js/settings';
-
-const blockClass = `${pkgPrefix}--STYLE_NAME`;
+import { Canary } from '../_Canary';
+import { pkg /*, carbon */ } from '../../settings';
+const componentName = 'DISPLAY_NAME';
+const blockClass = `${pkg.prefix}--STYLE_NAME`;
 
 /**
  * TODO: Description.
  */
-export const DISPLAY_NAME = ({ children, className, ...rest }) => {
-  return (
-    <div className={cx(blockClass, className)} {...rest}>
-      {children}
-    </div>
-  );
-};
+export const DISPLAY_NAME = !pkg.isComponentEnabled(componentName)
+  ? // Return canary if not released or flag not set
+    () => <Canary component={componentName} />
+  : // Main component code...
+    ({ children, className, ...rest }) => {
+      return (
+        <div className={cx(blockClass, className)} {...rest}>
+          {children}
+        </div>
+      );
+    };
+
+DISPLAY_NAME.displayName = componentName; // displayName is used in preference to function.name by React
 
 // TODO: Prop type checking - https://www.npmjs.com/package/prop-types#usage
 DISPLAY_NAME.propTypes = {

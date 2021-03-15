@@ -7,12 +7,15 @@
 
 import React from 'react';
 
-import { ContextHeader } from '.';
-
 import styles from './_ContextHeader.scss';
+import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import { getStorybookPrefix } from '../../../config';
+import { ContextHeader } from '.';
+const storybookPrefix = getStorybookPrefix(pkg, ContextHeader.displayName);
 
 export default {
-  title: 'Experimental/ContextHeader',
+  title: `${storybookPrefix}/${ContextHeader.displayName}`,
   component: ContextHeader,
   parameters: { styles },
 };

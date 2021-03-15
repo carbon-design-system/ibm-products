@@ -8,8 +8,9 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
 import React from 'react';
-import SidePanel from './SidePanel';
-import { pkgPrefix } from '../../global/js/settings';
+import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import { SidePanel } from '.';
 
 describe('SidePanel', () => {
   test('renders the side panel', () => {
@@ -28,7 +29,7 @@ describe('SidePanel', () => {
       </SidePanel>
     );
     const overlayElement = container.querySelector(
-      `.${pkgPrefix}-side-panel-overlay`
+      `.${pkg.prefix}-side-panel-overlay`
     );
     expect(overlayElement).toBeTruthy();
   });
@@ -40,7 +41,7 @@ describe('SidePanel', () => {
       </SidePanel>
     );
     const sidePanelOuter = container.querySelector(
-      `.${pkgPrefix}-side-panel-container-right-placement`
+      `.${pkg.prefix}-side-panel-container-right-placement`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
@@ -52,7 +53,7 @@ describe('SidePanel', () => {
       </SidePanel>
     );
     const sidePanelOuter = container.querySelector(
-      `.${pkgPrefix}-side-panel-container-left-placement`
+      `.${pkg.prefix}-side-panel-container-left-placement`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
@@ -63,7 +64,7 @@ describe('SidePanel', () => {
       </SidePanel>
     );
     const sidePanelOuter = container.querySelector(
-      `.${pkgPrefix}-side-panel-container-left-placement`
+      `.${pkg.prefix}-side-panel-container-left-placement`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
@@ -75,7 +76,7 @@ describe('SidePanel', () => {
       </SidePanel>
     );
     const sidePanelOuter = container.querySelector(
-      `.${pkgPrefix}-side-panel-container--extra-small`
+      `.${pkg.prefix}-side-panel-container--extra-small`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
@@ -87,7 +88,7 @@ describe('SidePanel', () => {
       </SidePanel>
     );
     const sidePanelOuter = container.querySelector(
-      `.${pkgPrefix}-side-panel-container--small`
+      `.${pkg.prefix}-side-panel-container--small`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
@@ -99,7 +100,7 @@ describe('SidePanel', () => {
       </SidePanel>
     );
     const sidePanelOuter = container.querySelector(
-      `.${pkgPrefix}-side-panel-container--medium`
+      `.${pkg.prefix}-side-panel-container--medium`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
@@ -111,7 +112,7 @@ describe('SidePanel', () => {
       </SidePanel>
     );
     const sidePanelOuter = container.querySelector(
-      `.${pkgPrefix}-side-panel-container--large`
+      `.${pkg.prefix}-side-panel-container--large`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
@@ -123,7 +124,7 @@ describe('SidePanel', () => {
       </SidePanel>
     );
     const sidePanelOuter = container.querySelector(
-      `.${pkgPrefix}-side-panel-container--max`
+      `.${pkg.prefix}-side-panel-container--max`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
@@ -208,7 +209,7 @@ describe('SidePanel', () => {
       </SidePanel>
     );
     const sidePanelOuter = container.querySelector(
-      `.${pkgPrefix}-side-panel-ghost-button`
+      `.${pkg.prefix}-side-panel-ghost-button`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
@@ -231,7 +232,7 @@ describe('SidePanel', () => {
     const sidePanelAction = screen.getByText(/Primary button/i);
     expect(
       sidePanelAction.classList.contains(
-        `${pkgPrefix}-side-panel-primary-action-button-condensed`
+        `${pkg.prefix}-side-panel-primary-action-button-condensed`
       )
     ).toBeTruthy();
   });
@@ -243,7 +244,7 @@ describe('SidePanel', () => {
       </SidePanel>
     );
     const navigationAction = container.querySelector(
-      `.${pkgPrefix}-side-panel-navigation-back-button`
+      `.${pkg.prefix}-side-panel-navigation-back-button`
     );
     expect(navigationAction).toBeTruthy();
   });
@@ -262,7 +263,7 @@ describe('SidePanel', () => {
       </SidePanel>
     );
     const navigationAction = container.querySelector(
-      `.${pkgPrefix}-side-panel-navigation-back-button`
+      `.${pkg.prefix}-side-panel-navigation-back-button`
     );
     click(navigationAction);
     expect(onNavigationBack).toBeCalled();

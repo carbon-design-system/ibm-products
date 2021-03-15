@@ -5,6 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import Notifications from './Notifications';
-
-export default Notifications;
+export { Notifications } from './Notifications';

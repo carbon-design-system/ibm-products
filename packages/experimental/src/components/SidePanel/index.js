@@ -5,6 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import SidePanel from './SidePanel';
-
-export default SidePanel;
+export { SidePanel } from './SidePanel';

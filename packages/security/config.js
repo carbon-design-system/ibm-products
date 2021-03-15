@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export const sectionTitle = 'Security';
+export const sectionTitle = 'Legacy/Security';

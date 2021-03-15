@@ -7,12 +7,16 @@
 
 import React, { useState } from 'react';
 import { Button } from 'carbon-components-react';
-import { ImportModal } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
+import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import { getStorybookPrefix } from '../../../config';
+import { ImportModal } from '.';
 import mdx from './ImportModal.mdx';
+const storybookPrefix = getStorybookPrefix(pkg, ImportModal.displayName);
 
 export default {
-  title: 'Experimental/ImportModal',
+  title: `${storybookPrefix}/${ImportModal.displayName}`,
   component: ImportModal,
   parameters: {
     styles,

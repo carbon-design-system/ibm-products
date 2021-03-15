@@ -8,8 +8,9 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
 import React from 'react';
-import Notifications from './Notifications';
-import { pkgPrefix } from '../../global/js/settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import { pkg } from '../../settings';
+import { Notifications } from '.';
 
 describe('Notifications', () => {
   test('renders the notification panel', () => {
@@ -32,7 +33,7 @@ describe('Notifications', () => {
 
     click(
       container.querySelector(
-        `#${pkgPrefix}-notifications-do-not-disturb-toggle-component`
+        `#${pkg.prefix}-notifications-panel-do-not-disturb-toggle-component`
       )
     );
     expect(onToggle).toBeCalled();
@@ -42,7 +43,7 @@ describe('Notifications', () => {
     const { container } = render(
       <Notifications data={[]} open setOpen={() => {}} />
     );
-    const renderedEmptyStateSvg = container.querySelector('img');
+    const renderedEmptyStateSvg = container.querySelector('svg');
     expect(renderedEmptyStateSvg).toBeTruthy();
   });
 
@@ -62,7 +63,7 @@ describe('Notifications', () => {
       />
     );
     const renderedEmptyStateSvg = container.querySelectorAll(
-      `svg.${pkgPrefix}-notifications-panel-notification-status-icon-error`
+      `svg.${pkg.prefix}-notifications-panel-notification-status-icon-error`
     );
     expect(renderedEmptyStateSvg[0]).toBeTruthy();
   });
@@ -83,7 +84,7 @@ describe('Notifications', () => {
       />
     );
     const renderedEmptyStateSvg = container.querySelectorAll(
-      `svg.${pkgPrefix}-notifications-panel-notification-status-icon-warning`
+      `svg.${pkg.prefix}-notifications-panel-notification-status-icon-warning`
     );
     expect(renderedEmptyStateSvg[0]).toBeTruthy();
   });
@@ -104,7 +105,7 @@ describe('Notifications', () => {
       />
     );
     const renderedEmptyStateSvg = container.querySelectorAll(
-      `svg.${pkgPrefix}-notifications-panel-notification-status-icon-success`
+      `svg.${pkg.prefix}-notifications-panel-notification-status-icon-success`
     );
     expect(renderedEmptyStateSvg[0]).toBeTruthy();
   });
@@ -125,7 +126,7 @@ describe('Notifications', () => {
       />
     );
     const renderedEmptyStateSvg = container.querySelectorAll(
-      `svg.${pkgPrefix}-notifications-panel-notification-status-icon-informational`
+      `svg.${pkg.prefix}-notifications-panel-notification-status-icon-informational`
     );
     expect(renderedEmptyStateSvg[0]).toBeTruthy();
   });

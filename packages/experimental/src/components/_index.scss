@@ -10,7 +10,8 @@
 @import './AboutModal/index';
 @import './ActionBar/index';
 @import './BreadcrumbWithOverflow/index';
-@import './EmptyState/index';
+@import './_Canary/canary';
+@import './EmptyStates/index';
 @import './ExampleComponent/index';
 @import './ImportModal/index';
 @import './ModifiedTabs/index';
@@ -20,3 +21,4 @@
 @import './RemoveDeleteModal/index';
 @import './TagSet/index';
 @import './Tearsheet/index';
+@import './WebTerminal/index';

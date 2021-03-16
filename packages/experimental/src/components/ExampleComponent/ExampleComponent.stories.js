@@ -14,7 +14,7 @@ import { ExampleComponent } from '.';
 import mdx from './ExampleComponent.mdx';
 const storybookPrefix = getStorybookPrefix(pkg, ExampleComponent.displayName);
 
-import styles from './_storybook.scss'; // import storybook which includes component and additional storybook styles
+import styles from './_storybook-styles.scss'; // import storybook which includes component and additional storybook styles
 
 export default {
   title: `${storybookPrefix}/${ExampleComponent.displayName}`,

@@ -11,7 +11,7 @@ module.exports = {
   collectCoverageFrom: [
     'packages/**/src/**/*.js',
     '!packages/**/{examples,stories}/**',
-    '!**/*-story.js',
+    '!**/*.stories.js',
   ],
   moduleFileExtensions: ['js', 'json', 'node'],
   reporters: ['default'],

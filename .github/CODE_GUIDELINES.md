@@ -14,7 +14,7 @@ unclear.
   - index.js &mdash; exports all public components and entry points for users,
     often with something like
     `export { ComponentName } from './ComponentName';`.
-  - _ComponentName_-test.js &mdash; the Jest test cases for the component.
+  - _ComponentName_.test.js &mdash; the Jest test cases for the component.
   - _ComponentName_.stories.js &mdash; the Storybook stories for the component.
   - \__component-name_.scss &mdash; the SCSS styles used by the component.
   - \_index.scss &mdash; imports all the public SCSS for users, often with

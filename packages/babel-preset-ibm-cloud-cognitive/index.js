@@ -32,4 +32,5 @@ module.exports = () => ({
       },
     ],
   ],
+  ignore: ['**/__tests__', '**/*.test.js', '**/*.stories.js'],
 });

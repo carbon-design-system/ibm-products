@@ -49,10 +49,14 @@ const defaults = {
 
 const component = { ...defaults.component };
 const feature = { ...defaults.feature };
-const warningMessage = (type, property) =>
-  `IBM Cloud Cognitive (WARNING): ${type} "${property}" enabled via feature flags. This component has not yet completed it's review process.`;
-const warningMessageAll = (type) =>
-  `IBM Cloud Cognitive (WARNING): All canary ${type.toLowerCase()} have been enabled through use of setAll${type}`;
+const warningMessageComponent = property =>
+  `IBM Cloud Cognitive (WARNING): Component "${property}" enabled via feature flags. This component has not yet completed its review process.`;
+const warningMessageFeature = property =>
+  `IBM Cloud Cognitive (WARNING): Feature "${property}" enabled via feature flags.`;
+const warningMessageAllComponents =
+  'IBM Cloud Cognitive (WARNING): All components enabled through use of setAllComponents. This includes components that have not yet completed their review process.';
+const warningMessageAllFeatures = (type) =>
+  'IBM Cloud Cognitive (WARNING): All features enabled through use of setAllFeatures';
 
 const settings = {
   _allComponents: false,
@@ -61,7 +65,9 @@ const settings = {
   prefix: defaults.prefix,
   component: new Proxy(component, {
     set(target, property, value) {
-      console.warn(warningMessage('Component', property, value));
+      if (value) {
+        console.warn(warningMessageComponent(property));
+      }
       target[property] = value;
       return true; // value set
     },
@@ -80,7 +86,9 @@ const settings = {
   }),
   feature: new Proxy(feature, {
     set(target, property, value) {
-      console.warn(warningMessage('Feature', property, value));
+      if (value) {
+        console.warn(warningMessageFeature(property));
+      }
       target[property] = value;
       return true; // value set
     },
@@ -109,13 +117,13 @@ const settings = {
   },
   setAllComponents: (enabled) => {
     if (enabled) {
-      console.warn(warningMessageAll('Components'));
+      console.warn(warningMessageAllComponents);
     }
     settings._allComponents = enabled;
   },
   setAllFeatures: (enabled) => {
     if (enabled) {
-      console.warn(warningMessageAll('Features'));
+      console.warn(warningMessageAllFeatures);
     }
     settings._allFeatures = enabled;
   },

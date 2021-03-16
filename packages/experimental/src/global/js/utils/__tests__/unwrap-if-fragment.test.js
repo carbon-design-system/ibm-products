@@ -4,6 +4,20 @@ import unwrapIfFragment from '../unwrap-if-fragment.js';
 const AChild = () => <div>A child</div>;
 
 describe('unwrap-if-fragment', () => {
+  it('Should handle a fragment with one child not in an array', () => {
+    const result = unwrapIfFragment(
+      // The following disable is for test purposes
+      // eslint-disable-next-line react/jsx-no-useless-fragment
+      <>
+        <AChild />
+      </>
+    );
+
+    // The following disable is for test purposes
+    // eslint-disable-next-line react/jsx-key
+    expect(result).toEqual([<AChild />]);
+  });
+
   it('Should handle a fragment with one child', () => {
     const children = [AChild];
     const result = unwrapIfFragment(<>{children.map((item) => item)}</>);

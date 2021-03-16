@@ -30,7 +30,10 @@
   },
   "scripts": {
     "build": "yarn clean && yarn build:js && yarn build:scss",
-    "build:js": "node scripts/build",
+    "build:js": "yarn build:js-esm && yarn build:js-cjs",
+    "build:js-esm": "cross-env BABEL_ENV=esm yarn build:js-modules -d es",
+    "build:js-cjs": "cross-env BABEL_ENV=cjs yarn build:js-modules -d lib",
+    "build:js-modules": "babel src",
     "build:scss": "bundler bundle:scss src/index.scss && copyfiles 'src/**/*.scss' scss -u 1",
     "ci-check": "node scripts/import",
     "clean": "rimraf es lib scss",
@@ -42,8 +45,5 @@
   "dependencies": {
     "@carbon/ibm-cloud-cognitive-experimental": "^0.24.2",
     "@carbon/ibm-cloud-cognitive-security": "^0.4.9"
-  },
-  "devDependencies": {
-    "@carbon/ibm-cloud-cognitive-core": "^0.8.6"
   }
 }

@@ -37,6 +37,7 @@ export const ExampleComponent = !pkg.isComponentEnabled(componentName)
       borderColor,
       boxedBorder,
       className,
+      disabled,
       onPrimaryClick,
       onSecondaryClick,
       primaryButtonLabel,
@@ -88,7 +89,7 @@ export const ExampleComponent = !pkg.isComponentEnabled(componentName)
             kind={secondaryKind}
             onClick={handleSecondaryClick}
             size={size}
-            disabled={rest.disabled}>
+            disabled={disabled}>
             {secondaryButtonLabel}
           </Button>
           <Button
@@ -96,7 +97,7 @@ export const ExampleComponent = !pkg.isComponentEnabled(componentName)
             kind={primaryKind}
             onClick={handlePrimaryClick}
             size={size}
-            disabled={rest.disabled}>
+            disabled={disabled}>
             {primaryButtonLabel}
           </Button>
         </ButtonSet>

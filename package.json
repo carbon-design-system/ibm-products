@@ -23,7 +23,7 @@
     "copy-common-files": "sh ./scripts/copy-common-files.sh;",
     "format": "prettier --write '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!README.md'",
-    "generate": "lerna run generate --scope \"@carbon/ibm-cloud-cognitive-experimental",
+    "generate": "lerna run generate --scope \"@carbon/ibm-cloud-cognitive-experimental\" --",
     "monorepo:npm-upgrade": "sh ./scripts/monorepo-npm-upgrade.sh",
     "lint": "yarn lint:es && yarn lint:style",
     "lint:es": "eslint 'packages/*/src/**/*.js'",

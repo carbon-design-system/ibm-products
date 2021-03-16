@@ -1,30 +1,42 @@
 /**
- * Copyright IBM Corp. 2020, 2020
+ * Copyright IBM Corp. 2020, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Button, ButtonSet } from 'carbon-components-react';
-import PropTypes from 'prop-types';
+// Import portions of React that are needed.
 import React from 'react';
 
+// Other standard imports.
+import PropTypes from 'prop-types';
 import cx from 'classnames';
-
-// NOTE: SCSS is not imported directly here: it is rolled up separately.
-
-import { Canary } from '../_Canary';
 import { pkg } from '../../settings';
-const componentName = 'ExampleComponent';
-const blockClass = `${pkg.prefix}-example-component`;
 
+// Carbon and package components we use.
+import { Button, ButtonSet } from 'carbon-components-react';
+import { Canary } from '../_Canary';
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+const blockClass = `${pkg.prefix}--example-component`;
+const componentName = 'ExampleComponent';
+
+// NOTE: the component SCSS is not imported here: it is rolled up separately.
+
+/**
+ * This is an example component to show relevant conventions and usage.
+ */
+// This opening logic means that components that have not yet gone through
+// their review process can be enabled by a feature flag mechanism.
 export const ExampleComponent = !pkg.isComponentEnabled(componentName)
-  ? // Return canary if not released or flag not set
+  ? // Return canary if not released or flag not set.
     () => <Canary component={componentName} />
   : // Main component code...
     ({
+      // The component props, in alphabetical order (for consistency).
       borderColor,
       boxedBorder,
+      className,
       onPrimaryClick,
       onSecondaryClick,
       primaryButtonLabel,
@@ -32,9 +44,10 @@ export const ExampleComponent = !pkg.isComponentEnabled(componentName)
       secondaryButtonLabel,
       secondaryKind,
       size,
-      ...props
+      // Collect any other property values.
+      ...rest
     }) => {
-      const mode = boxedBorder
+      const modeClass = boxedBorder
         ? `${blockClass}--boxed-set`
         : `${blockClass}--shadow-set`;
 
@@ -53,83 +66,114 @@ export const ExampleComponent = !pkg.isComponentEnabled(componentName)
       return (
         <ButtonSet
           role="main"
-          className={cx([blockClass, `${blockClass}--${size}`, mode])}
+          className={cx(
+            // Apply the block class to the main HTML element, along with
+            // any other classes we need.
+            [blockClass, `${blockClass}--${size}`, modeClass],
+            {
+              // Apply any supplied class names to the main HTML element.
+              [className]: className, // this handles className omitted/falsy
+            }
+          )}
           style={{
             /* stylelint-disable-next-line carbon/theme-token-use */
             [`--${pkg.prefix}-border-color`]: borderColor,
           }}
-          {...props}>
+          {
+            /* Pass through any other property values as HTML attributes. */
+            ...rest
+          }>
           <Button
+            className={`${blockClass}__secondary-button`}
             kind={secondaryKind}
             onClick={handleSecondaryClick}
             size={size}
-            disabled={props.disabled}>
+            disabled={rest.disabled}>
             {secondaryButtonLabel}
           </Button>
           <Button
+            className={`${blockClass}__primary-button`}
             kind={primaryKind}
             onClick={handlePrimaryClick}
             size={size}
-            disabled={props.disabled}>
+            disabled={rest.disabled}>
             {primaryButtonLabel}
           </Button>
         </ButtonSet>
       );
     };
 
-ExampleComponent.displayName = componentName; // displayName is used in preference to function.name by React
+// The display name of the component, used by React. Note that displayName
+// is used in preference to relying on function.name.
+ExampleComponent.displayName = componentName;
 
+// The types and DocGen commentary for the component props,
+// in alphabetical order (for consistency).
+// See https://www.npmjs.com/package/prop-types#usage.
 ExampleComponent.propTypes = {
   /**
-   * What border color to use
+   * What border color (HTML color value) to use.
    */
   borderColor: PropTypes.string,
+
   /**
-   * Is the border a box or a shadow
+   * If true, the border is a box, otherwise it is a shadow.
    */
   boxedBorder: PropTypes.bool,
+
   /**
-   * disabled
+   * Provide an optional class to be applied to the containing node.
+   */
+  className: PropTypes.string,
+
+  /**
+   * If true, the buttons are disabled, otherwise they can be used.
    */
   disabled: PropTypes.bool,
+
   /**
-   * Optional primary click handler
+   * An optional primary button click handler.
    */
   onPrimaryClick: PropTypes.func,
+
   /**
-   * Optional secondary click handler
+   * An optional secondary button click handler.
    */
   onSecondaryClick: PropTypes.func,
+
   /**
-   * Primary button label
+   * The primary button label.
    */
   primaryButtonLabel: PropTypes.string.isRequired,
+
   /**
-   * What is the primary kind
+   * The kind of button for the primary button ('primary' or 'danger').
    */
   primaryKind: PropTypes.oneOf(['primary', 'danger']),
+
   /**
-   * Secondary button label
+   * The secondary button label.
    */
   secondaryButtonLabel: PropTypes.string.isRequired,
+
   /**
-   * What is the secondary kind
+   * The kind of button for the secondary button ('secondary' or 'tertiary').
    */
   secondaryKind: PropTypes.oneOf(['secondary', 'tertiary']),
+
   /**
-   * How large should the buttons be?
+   * The size for the buttons ('default', 'small' or 'field').
    */
   size: PropTypes.oneOf(['default', 'small', 'field']),
 };
 
+// Default values for component props. Default values are not required for
+// props that are required, nor for props where the component can apply
+// 'undefined' values reasonably. Default values should be provided when the
+// component needs to make a choice or assumption when a prop is not supplied.
 ExampleComponent.defaultProps = {
   boxedBorder: false,
-  borderColor: null,
-  size: 'default',
-  primaryButtonLabel: 'Primary',
-  secondaryButtonLabel: 'Secondary',
   primaryKind: 'primary',
   secondaryKind: 'secondary',
-  onPrimaryClick: undefined,
-  onSecondaryClick: undefined,
+  size: 'default',
 };

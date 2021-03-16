@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.26.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.25.1...@carbon/ibm-cloud-cognitive-experimental@0.26.0) (2021-03-16)
+
+
+### Features
+
+* **HTTPErrors:** add new 404 and other http error components ([#456](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/456)) ([ea42547](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ea425472c2a31144989acc8f9ba53d6a175651ab))
+
+
+
+
+
 ## [0.25.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.25.0...@carbon/ibm-cloud-cognitive-experimental@0.25.1) (2021-03-16)
 
 

@@ -12,7 +12,7 @@ import { Button, Link } from 'carbon-components-react';
 import { pkg } from '../../settings';
 import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
-import { AboutModal } from './AboutModal';
+import { AboutModal } from '.';
 import mdx from './AboutModal.mdx';
 const storybookPrefix = getStorybookPrefix(pkg, AboutModal.displayName);
 

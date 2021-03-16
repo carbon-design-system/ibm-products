@@ -28,6 +28,8 @@ const defaults = {
     ExportModal: false,
     HTTPErrors: false,
     HTTPError403: false,
+    HTTPError404: false,
+    HTTPErrorOther: false,
     ImportModal: false,
     ModifiedTabs: false,
     Notifications: false,

@@ -20,11 +20,9 @@
       @include carbon--breakpoint(sm) {
         position: fixed;
         z-index: 2;
-        // stylelint-disable-next-line carbon/layout-token-use
         transform: translate(-50%, -150%);
       }
       @include carbon--breakpoint(md) {
-        // stylelint-disable-next-line carbon/layout-token-use
         transform: translate(-50%, -50%);
       }
     }
@@ -53,11 +51,9 @@
         top: 50%;
         left: 50%;
         width: 100%;
-        // stylelint-disable-next-line carbon/layout-token-use
         transform: translate(-50%, -40%);
       }
       @include carbon--breakpoint(md) {
-        // stylelint-disable-next-line carbon/layout-token-use
         transform: translate(-50%, -50%);
       }
     }

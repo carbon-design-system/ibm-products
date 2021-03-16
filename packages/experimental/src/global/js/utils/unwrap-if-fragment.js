@@ -17,7 +17,10 @@ const unwrapIfFragment = (children) => {
 
   const addChildren = (children) => {
     const loopOver = (children) => {
-      for (let child of children) {
+      // children may be a single item
+      const _children = Array.isArray(children) ? children : [children];
+
+      for (let child of _children) {
         addChildren(child);
       }
     };

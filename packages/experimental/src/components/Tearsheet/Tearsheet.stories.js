@@ -13,8 +13,7 @@ import { pkg } from '../../settings';
 import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { Button, Tab, Tabs } from 'carbon-components-react';
 
-import { Tearsheet } from './Tearsheet';
-import { TearsheetNarrow } from './TearsheetNarrow';
+import { Tearsheet, TearsheetNarrow } from '.';
 
 import { getStorybookPrefix } from '../../../config';
 const storybookPrefix = getStorybookPrefix(pkg, Tearsheet.displayName);

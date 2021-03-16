@@ -8,6 +8,7 @@
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
+@import 'carbon-components/scss/globals/grid/grid';
 @import 'carbon-components/scss/components/button/button';
 @import 'carbon-components/scss/components/content-switcher/content-switcher';
 @import 'carbon-components/scss/components/tabs/tabs';
@@ -344,7 +345,6 @@ $raised-z-index: 99;
 }
 
 .#{$block-class}--title-row .#{$block-class}--page-actions--in-breadcrumb {
-  flex: 0 1 100%;
   visibility: hidden;
   opacity: 0;
 }

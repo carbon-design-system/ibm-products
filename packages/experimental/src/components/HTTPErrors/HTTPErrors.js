@@ -25,11 +25,15 @@ export const HTTPErrors = !pkg.isComponentEnabled(componentName)
           className={cx(blockClass, `${blockClass}-content`, {
             [className]: className,
           })}>
-          <p className={cx(`${blockClass}-error-code-label`)}>
-            {errorCodeLabel}
-          </p>
-          <h1 className={cx(`${blockClass}-title`)}>{title}</h1>
-          <p className={cx(`${blockClass}-description`)}>{description}</p>
+          {errorCodeLabel && (
+            <p className={cx(`${blockClass}-error-code-label`)}>
+              {errorCodeLabel}
+            </p>
+          )}
+          {title && <h1 className={cx(`${blockClass}-title`)}>{title}</h1>}
+          {description && (
+            <p className={cx(`${blockClass}-description`)}>{description}</p>
+          )}
           {links && links.length
             ? links.map((link) => (
                 <Link
@@ -78,8 +82,4 @@ HTTPErrors.propTypes = {
    * This will be for the main title of the HTTP error component
    */
   title: string,
-};
-
-HTTPErrors.defaultProps = {
-  className: null,
 };

@@ -8,16 +8,16 @@
 import React from 'react';
 import { pkg } from '../../../settings';
 import '../../../enable-all'; // must come before component is imported
-import { HTTPError403 } from '.';
+import { HTTPError404 } from '.';
 import { getStorybookPrefix } from '../../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, HTTPError403.displayName);
+const storybookPrefix = getStorybookPrefix(pkg, HTTPError404.displayName);
 
-import page from './HTTPError403.mdx';
+import page from './HTTPError404.mdx';
 import styles from '../_storybook-styles.scss';
 
 export default {
-  title: `${storybookPrefix}/HTTPErrors/${HTTPError403.displayName}`,
-  component: HTTPError403,
+  title: `${storybookPrefix}/HTTPErrors/${HTTPError404.displayName}`,
+  component: HTTPError404,
   parameters: {
     docs: {
       page,
@@ -27,13 +27,7 @@ export default {
 };
 
 const Template = (args) => {
-  return (
-    <HTTPError403
-      {...args}
-      // TODO: handle events with action or local handler
-      // onTodo={action('onTodo log action')}
-    />
-  );
+  return <HTTPError404 {...args} />;
 };
 
 /**
@@ -42,9 +36,9 @@ const Template = (args) => {
  */
 export const withAllPropsSet = Template.bind({});
 withAllPropsSet.args = {
-  errorCodeLabel: 'Error 403',
-  title: 'Forbidden',
-  description: 'You are not authorized to access this resource.',
+  errorCodeLabel: 'Error 404',
+  title: 'Page not found',
+  description: 'The page you are looking for was not found.',
   links: [
     {
       text: 'Carbon Design System',

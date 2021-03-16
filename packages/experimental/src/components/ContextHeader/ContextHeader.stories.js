@@ -12,7 +12,7 @@ import { pkg } from '../../settings';
 import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
 import { ContextHeader } from '.';
-import mdx from './ExampleComponent.mdx';
+import mdx from './ContextHeader.mdx';
 const storybookPrefix = getStorybookPrefix(pkg, ContextHeader.displayName);
 
 export default {

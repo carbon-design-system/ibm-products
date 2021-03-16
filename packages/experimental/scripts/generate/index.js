@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { green } = require('chalk'); // https://www.npmjs.com/package/chalk#usage
+const chalk = require('chalk'); // https://www.npmjs.com/package/chalk#usage
 const { outputFileSync, readFileSync } = require('fs-extra');
 const { sync } = require('glob');
 const { paramCase } = require('param-case'); // https://www.npmjs.com/package/param-case#usage
@@ -38,7 +38,7 @@ if (name) {
     outputFileSync(path, data);
 
     console.log(
-      `${green('create')} ${path} (${
+      `${chalk.green('create')} ${path} (${
         new TextEncoder().encode(data).length
       } bytes)`
     );

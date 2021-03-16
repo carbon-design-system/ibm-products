@@ -36,7 +36,7 @@
     "build:scss": "bundler bundle:scss src/index.scss && copyfiles 'src/**/*.scss' scss -u 1",
     "ci-check": "node scripts/import",
     "clean": "rimraf es lib scss",
-    "generate": "node scripts/generate",
+    "generate": "cross-env FORCE_COLOR=1 node scripts/generate",
     "test": "bundler check 'src/**/*.scss'"
   },
   "peerDependencies": {

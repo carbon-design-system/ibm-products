@@ -14,7 +14,7 @@ import '../../enable-all'; // must come before component is imported (directly o
 
 import { Button } from 'carbon-components-react';
 
-import { TearsheetNarrow } from './TearsheetNarrow';
+import { TearsheetNarrow } from '.';
 
 import { getStorybookPrefix } from '../../../config';
 const storybookPrefix = getStorybookPrefix(pkg, 'TearsheetNarrow');

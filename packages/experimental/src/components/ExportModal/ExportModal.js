@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   Modal,
   TextInput,
@@ -11,6 +11,8 @@ import { ErrorFilled16, CheckmarkFilled16 } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 import { Canary } from '../_Canary';
 import { pkg } from '../../settings';
+import uuidv4 from '../../global/js/utils/uuidv4';
+
 const componentName = 'ExportModal';
 
 export const ExportModal = !pkg.isComponentEnabled(componentName)
@@ -38,6 +40,7 @@ export const ExportModal = !pkg.isComponentEnabled(componentName)
       successful,
       validExtensions,
     }) => {
+      const internalId = useRef(uuidv4());
       const [name, setName] = useState(filename);
       const [dirtyInput, setDirtyInput] = useState(false);
       const [extension, setExtension] = useState(
@@ -114,6 +117,7 @@ export const ExportModal = !pkg.isComponentEnabled(componentName)
                   </FormGroup>
                 ) : (
                   <TextInput
+                    id={`text-input--${internalId}`}
                     value={name}
                     onChange={onNameChangeHandler}
                     labelText={inputLabel}

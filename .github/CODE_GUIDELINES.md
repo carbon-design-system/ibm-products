@@ -19,9 +19,9 @@ unclear.
   - \__component-name_.scss &mdash; the SCSS styles used by the component.
   - \_index.scss &mdash; imports all the public SCSS for users, often with
     something like `@import './component-name.scss';`.
-  - \_storybook.scss &mdash; SCSS used by the Storybook stories, which usually
-    includes the component public SCSS and may have additional styles used by
-    the stories.
+  - \_storybook-styles.scss &mdash; SCSS used by the Storybook stories, which
+    usually includes the component public SCSS and may have additional styles
+    used by the stories.
 
 ## Component JavaScript code
 

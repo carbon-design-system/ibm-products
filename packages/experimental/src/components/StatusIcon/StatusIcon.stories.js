@@ -10,7 +10,7 @@ import React from 'react';
 import { StatusIcon } from '.';
 import { pkg } from '../../settings';
 import mdx from './StatusIcon.mdx';
-import styles from './_storybook.scss'; // import storybook which includes component and additional storybook styles
+import styles from './_storybook-styles.scss'; // import storybook which includes component and additional storybook styles
 import { getStorybookPrefix } from '../../../config';
 const storybookPrefix = getStorybookPrefix(pkg, 'StatusIcon');
 

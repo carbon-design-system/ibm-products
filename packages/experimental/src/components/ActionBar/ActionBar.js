@@ -137,7 +137,7 @@ export const ActionBar = !pkg.isComponentEnabled(componentName)
             });
 
           // action bar items are a fixed width
-          if (willFit < childArray.length) {
+          if (willFit > 0 && willFit < childArray.length) {
             willFit -= 1; // remove one for overflow menu
           }
 

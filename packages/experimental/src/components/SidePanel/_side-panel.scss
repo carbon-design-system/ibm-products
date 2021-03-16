@@ -7,6 +7,7 @@
 
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
+@import 'carbon-components/scss/globals/grid/grid';
 @import '@carbon/themes/scss/themes';
 @import '@carbon/motion/scss/motion.scss';
 
@@ -22,7 +23,6 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
 
 @keyframes sidePanelExitLeft {
   0% {
-    // stylelint-disable-next-line carbon/layout-token-use
     transform: translateX(0);
     opacity: 1;
   }
@@ -36,7 +36,6 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
 
 @keyframes sidePanelExitRight {
   0% {
-    // stylelint-disable-next-line carbon/layout-token-use
     transform: translateX(0);
     opacity: 1;
   }
@@ -56,7 +55,6 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       opacity: 0;
     }
     100% {
-      // stylelint-disable-next-line carbon/layout-token-use
       transform: translateX(0);
       opacity: 1;
     }
@@ -71,7 +69,6 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       opacity: 0;
     }
     100% {
-      // stylelint-disable-next-line carbon/layout-token-use
       transform: translateX(0);
       opacity: 1;
     }

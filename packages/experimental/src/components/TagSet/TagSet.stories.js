@@ -12,7 +12,7 @@ import styles from './_storybook-styles.scss'; // import index in case more file
 import { pkg } from '../../settings';
 import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
-import TagSet from './TagSet';
+import { TagSet } from '.';
 const storybookPrefix = getStorybookPrefix(pkg, TagSet.displayName);
 const blockClass = `${pkg.prefix}-tag-set`;
 

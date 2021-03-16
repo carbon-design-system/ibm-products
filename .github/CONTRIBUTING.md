@@ -37,6 +37,25 @@ system is set up to automatically bundle your additions / changes. Visit
 [`http://localhost:3000`](http://localhost:3000) to see the changes happen on
 the fly.
 
+### What is this Canary thing?
+
+In case you were thinking what, why or how with regards to the Canary lines in
+the components...
+
+They were added to enable component feature flags, that is the enabling of
+components through user settings.
+
+This will allow the removal of the term/package `experimental` and permit the
+publication of all components in a single package. Those that have not yet
+completed the release review process will be considered to be `canary` and
+require the consumer to enable via a feature flag.
+
+See example component enabled via feature flags on
+[codesandbox](https://codesandbox.io/s/example-component-canary-olif5).
+
+For more information on how this affects components see
+[CANARY_STRUCTURE.md](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CANARY_STRUCTURE.md).
+
 ## 4. Test your JavaScript code
 
 If you're contributing to our JavaScript code, test your changes by running

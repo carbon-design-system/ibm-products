@@ -29,13 +29,21 @@ export const ContextHeader = !pkg.isComponentEnabled(componentName)
       );
     };
 
-ContextHeader.displayName = 'ContextHeader';
+ContextHeader.displayName = componentName;
 
 ContextHeader.propTypes = {
+  /**
+   * The name of the current instance.
+   */
   name: PropTypes.string.isRequired,
+  /**
+   * The namespace in which the current instance is deployed.
+   */
   namespace: PropTypes.string.isRequired,
+  /**
+   * The high level task the user is using the embedding UI to carry out.
+   */
   task: PropTypes.string.isRequired,
 };
-ContextHeader.displayName = componentName;
 
 export default ContextHeader;

@@ -14,7 +14,7 @@ import { pkg } from '../../../settings';
 import { getStorybookPrefix } from '../../../../config';
 const storybookPrefix = getStorybookPrefix(pkg, 'EmptyStates');
 
-import { NotFoundEmptyState } from './NotFoundEmptyState';
+import { NotFoundEmptyState } from '.';
 
 import styles from '../_index.scss';
 

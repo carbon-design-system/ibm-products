@@ -55,7 +55,7 @@ const warningMessageFeature = (property) =>
   `IBM Cloud Cognitive (WARNING): Feature "${property}" enabled via feature flags.`;
 const warningMessageAllComponents =
   'IBM Cloud Cognitive (WARNING): All components enabled through use of setAllComponents. This includes components that have not yet completed their review process.';
-const warningMessageAllFeatures = (type) =>
+const warningMessageAllFeatures =
   'IBM Cloud Cognitive (WARNING): All features enabled through use of setAllFeatures';
 
 const settings = {

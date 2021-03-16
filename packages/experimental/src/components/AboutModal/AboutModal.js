@@ -26,6 +26,7 @@ export const AboutModal = !pkg.isComponentEnabled(componentName)
     () => <Canary component={componentName} />
   : // Main component code...
     ({
+      additionalInfo,
       className,
       content,
       copyrightText,
@@ -34,15 +35,13 @@ export const AboutModal = !pkg.isComponentEnabled(componentName)
       logo,
       onClose,
       open,
-      technologiesUsed,
       title,
-      versionNumber,
     }) => {
       return (
         <ComposedModal
           className={classNames(`${pkg.prefix}-about-modal`, {
             [`${pkg.prefix}-about-modal-with-tabs`]:
-              technologiesUsed && technologiesUsed.length > 0,
+              additionalInfo && additionalInfo.length > 1,
             [className]: className,
           })}
           onClose={onClose}
@@ -75,52 +74,48 @@ export const AboutModal = !pkg.isComponentEnabled(componentName)
             </div>
           </ModalBody>
           <ModalFooter>
-            {technologiesUsed && technologiesUsed.length ? (
-              <Tabs className={`${pkg.prefix}-about-modal-tab-container`}>
-                <Tab
-                  id="about-modal-technologies-used-tab"
-                  label="Technologies used">
-                  <div className={`${pkg.prefix}-about-modal-tab-content-flex`}>
-                    {technologiesUsed &&
-                      technologiesUsed.length &&
-                      technologiesUsed.map((tech) => (
-                        <img
-                          key={tech.alt}
-                          src={tech.src}
-                          alt={tech.alt}
-                          className={`${pkg.prefix}-about-modal-tech-used-item`}
-                        />
-                      ))}
-                  </div>
-                </Tab>
-                <Tab id="about-modal-version-number-tab" label="Version number">
-                  <div
-                    className={`${pkg.prefix}-about-modal-tab-content-flex ${pkg.prefix}-about-modal-tab-content-version-flex`}>
-                    <p className={`${pkg.prefix}-about-modal-version-label`}>
-                      Version number
-                    </p>
-                    <p className={`${pkg.prefix}-about-modal-version-number`}>
-                      {versionNumber}
-                    </p>
-                  </div>
-                </Tab>
-              </Tabs>
-            ) : (
-              <>
-                <p className={`${pkg.prefix}-about-modal-version-label`}>
-                  Version number
-                </p>
-                <p className={`${pkg.prefix}-about-modal-version-number`}>
-                  {versionNumber}
-                </p>
-              </>
-            )}
+            {additionalInfo &&
+              additionalInfo.length > 0 &&
+              (additionalInfo.length === 1 ? (
+                <>
+                  <p className={`${pkg.prefix}-about-modal-version-label`}>
+                    {additionalInfo[0].label}
+                  </p>
+                  <p className={`${pkg.prefix}-about-modal-version-number`}>
+                    {additionalInfo[0].content}
+                  </p>
+                </>
+              ) : (
+                <Tabs className={`${pkg.prefix}-about-modal-tab-container`}>
+                  {additionalInfo.map((tab, i) => (
+                    <Tab
+                      id={'about-modal-tab-' + tab.label}
+                      label={tab.label}
+                      key={i}>
+                      {tab.content}
+                    </Tab>
+                  ))}
+                </Tabs>
+              ))}
           </ModalFooter>
         </ComposedModal>
       );
     };
 
 AboutModal.propTypes = {
+  /**
+   * Additional information to be displayed in the footer. Can be used for
+   * version information and/or a set of tabs with various contents. If only
+   * one set of additional information is provided then no tabs are
+   * displayed and the label and content are just displayed one above the
+   * other in the footer.
+   */
+  additionalInfo: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      content: PropTypes.node,
+    })
+  ),
   /**
    * Specify an optional className to be applied to the modal root node
    */
@@ -159,22 +154,9 @@ AboutModal.propTypes = {
    */
   open: PropTypes.bool.isRequired,
   /**
-   * About modal list of technologies
-   */
-  technologiesUsed: PropTypes.arrayOf(
-    PropTypes.shape({
-      src: PropTypes.string,
-      alt: PropTypes.string,
-    })
-  ),
-  /**
    * The title of the AboutModal is usually the product or service name.
    */
   title: PropTypes.node.isRequired,
-  /**
-   * The version number of the product or service, etc.
-   */
-  versionNumber: PropTypes.string.isRequired,
 };
 
 AboutModal.displayName = componentName;

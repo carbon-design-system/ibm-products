@@ -41,6 +41,7 @@ const defaults = {
     TearsheetNarrow: false,
     TearsheetShell: false,
     WebTerminal: false,
+    UserProfileImage: false,
   },
 
   // feature level flags

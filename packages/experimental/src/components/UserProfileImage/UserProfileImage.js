@@ -7,6 +7,9 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Canary } from '../_Canary';
+import { pkg } from '../../settings';
+const componentName = 'UserProfileImage';
 
 import {
   User16,
@@ -19,12 +22,15 @@ import {
   Group32,
 } from '@carbon/icons-react';
 
-import { expPrefix } from '../../global/js/settings';
+//import { expPrefix } from '../../global/js/settings';
 import cx from 'classnames';
 
-const blockClass = `${expPrefix}-user-profile-avatar`;
+const blockClass = `${pkg.prefix}-user-profile-avatar`;
 
-export const UserProfileImage = ({
+export const UserProfileImage = !pkg.isComponentEnabled(componentName)
+  ? // Return canary if not released or flag not set
+    () => <Canary component={componentName} />
+  :({
   backgroundColor,
   icon = 'user',
   initials,

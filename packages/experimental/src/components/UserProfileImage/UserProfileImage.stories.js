@@ -8,16 +8,44 @@
 import React from 'react';
 
 import { UserProfileImage } from '.';
+import { pkg } from '../../settings';
+import { getStorybookPrefix } from '../../../config';
 import mdx from './UserProfileImage.mdx';
 import image from './headshot.png';
-
 import styles from './_storybook.scss'; // import storybook which includes component and additional storybook styles
 
+const storybookPrefix = getStorybookPrefix(pkg, 'UserProfileImage');
 export default {
-  title: 'Experimental/UserProfileImage',
+  title: `${storybookPrefix}/UserProfileImage`,
   component: UserProfileImage,
   argTypes: {
-    borderColor: { control: 'color' },
+    backgroundColor: {
+      control: {
+        type: 'select',
+        options: ['light-blue', 'dark-blue']
+      }
+    },
+    theme: {
+      control: {
+        type: 'select',
+        options: ['light', 'dark']
+      }
+    },
+    icon: {
+      control: {
+        type: 'radio',
+        options: ['user', 'group']
+      }
+    },
+    size: {
+      control: {
+        type: 'radio',
+        options: ['x-large', 'large', 'medium', 'small', 'x-small']
+      }
+    },
+    initials: {
+      control: 'string' 
+    }
   },
   parameters: { 
     styles, 

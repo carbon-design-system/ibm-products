@@ -12,8 +12,7 @@
   },
   "scripts": {
     "audit": "node scripts/audit.js dependencies moderate",
-    "build": "lerna run build --stream --prefix --npm-client yarn --include-dependencies --ignore @carbon/ibm-cloud-cognitive-core",
-    "postbuild": "yarn build:storybook-only",
+    "build": "lerna run build --stream --prefix --npm-client yarn --include-dependencies",
     "build:storybook-addon-carbon-theme": "yarn build --scope \"@carbon/storybook-addon-theme\"",    
     "//build:storybook": "# we build dependencies, then run storybook build directly because its dynamic output gets mangled by lerna",
     "build:storybook": "yarn build:storybook-dependencies-only && yarn build:storybook-only",

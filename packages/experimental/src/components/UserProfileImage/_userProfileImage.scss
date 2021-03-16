@@ -45,6 +45,7 @@ $theme-keys: map-keys($themes);
     @debug $color;
     @each $shadekey in $theme-keys {
       .#{$block-class}--#{$key}.#{$block-class}--#{$shadekey}-#{$color} {
+        // stylelint-disable-next-line carbon/theme-token-use
         background-color: get-background-color($color, $key, $shadekey);
       }
     }

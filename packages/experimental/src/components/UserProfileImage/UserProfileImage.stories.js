@@ -6,7 +6,7 @@
 //
 
 import React from 'react';
-
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { UserProfileImage } from '.';
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
@@ -22,45 +22,37 @@ export default {
     backgroundColor: {
       control: {
         type: 'select',
-        options: ['light-blue', 'dark-blue']
-      }
+        options: ['light-blue', 'dark-blue'],
+      },
     },
     theme: {
       control: {
         type: 'select',
-        options: ['light', 'dark']
-      }
+        options: ['light', 'dark'],
+      },
     },
     icon: {
       control: {
         type: 'radio',
-        options: ['user', 'group']
-      }
+        options: ['user', 'group'],
+      },
     },
     size: {
       control: {
         type: 'radio',
-        options: ['x-large', 'large', 'medium', 'small', 'x-small']
-      }
+        options: ['x-large', 'large', 'medium', 'small', 'x-small'],
+      },
     },
-    initials: {
-      control: 'string' 
-    }
   },
-  parameters: { 
-    styles, 
+  parameters: {
+    styles,
     docs: { page: mdx },
   },
 };
 
 const Template = (args) => {
-  return (
-    <UserProfileImage
-      {...args}
-    />
-  );
+  return <UserProfileImage {...args} />;
 };
-
 
 export const Default = Template.bind({});
 Default.args = {
@@ -72,19 +64,19 @@ export const WithGroupIcon = Template.bind({});
 WithGroupIcon.args = {
   backgroundColor: 'light-blue',
   theme: 'light',
-  icon: 'group'
+  icon: 'group',
 };
 
 export const WithInitials = Template.bind({});
 WithInitials.args = {
   backgroundColor: 'light-blue',
   theme: 'light',
-  initials: "thomas j. watson"
+  initials: 'thomas j. watson',
 };
 
 export const WithImage = Template.bind({});
 WithImage.args = {
   backgroundColor: 'light-blue',
   theme: 'light',
-  image
+  image,
 };

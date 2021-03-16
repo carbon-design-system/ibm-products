@@ -5,6 +5,12 @@ import React from 'react';
  * to create a flat array of all children
  */
 const unwrapIfFragment = (children) => {
+  // When passed one of the following
+  // - A fragment with zero or more children *1
+  // - An array with zero or more children *1
+  // - A single node
+  // *1 -  The children of the above can be any of the above
+  // Outputs - A flat array of child nodes
   const newChildArray = [];
 
   const isFragment = (item) => item && item.type === React.Fragment;

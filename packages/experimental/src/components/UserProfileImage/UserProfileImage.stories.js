@@ -35,19 +35,28 @@ const Template = (args) => {
 
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  backgroundColor: 'light-blue',
+  theme: 'light',
+};
 
 export const WithGroupIcon = Template.bind({});
 WithGroupIcon.args = {
+  backgroundColor: 'light-blue',
+  theme: 'light',
   icon: 'group'
 };
 
 export const WithInitials = Template.bind({});
 WithInitials.args = {
-  initials: "thomas j. watson",
+  backgroundColor: 'light-blue',
+  theme: 'light',
+  initials: "thomas j. watson"
 };
 
 export const WithImage = Template.bind({});
 WithImage.args = {
-  image,
+  backgroundColor: 'light-blue',
+  theme: 'light',
+  image
 };

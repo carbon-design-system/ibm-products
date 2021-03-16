@@ -1,16 +1,15 @@
 /**
- * Copyright IBM Corp. 2020, 2020
+ * Copyright IBM Corp. 2021, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import ReactResizeDetector from 'react-resize-detector';
+import classNames from 'classnames';
 import {
   ComposedModal,
-  Link,
   ModalHeader,
   ModalFooter,
   ModalBody,
@@ -18,218 +17,146 @@ import {
   Tab,
 } from 'carbon-components-react';
 
-import { expPrefix } from '../../global/js/settings';
+import { Canary } from '../_Canary';
+import { pkg } from '../../settings';
+const componentName = 'AboutModal';
 
-export const AboutModal = ({
-  copyrightText,
-  legalText,
-  links,
-  logo,
-  productName,
-  versionNumber,
-  onRequestClose,
-  body,
-  open,
-  technologiesUsed,
-  theme,
-}) => {
-  const [hasScrollableContent, setHasScrollableContent] = useState();
-  const modalRef = useRef();
-
-  const handleResize = () => {
-    const modalHeight = modalRef?.current?.innerModal?.current.getBoundingClientRect()
-      .height;
-    const modalContentHeight = modalRef.current.innerModal.current.firstElementChild.getBoundingClientRect()
-      .height;
-    if (modalHeight < modalContentHeight) {
-      setHasScrollableContent(true);
-    }
-  };
-
-  return (
-    <ReactResizeDetector onResize={handleResize}>
-      {/*
-        This extra div is necessary because the ReactResizeDetector component tries to attach a `targetRef` to it's child element,
-        and it throws an error in the browser console when trying to attach that `targetRef` to Carbon's <ComposedModal> component.
-      */}
-      <div>
+export const AboutModal = !pkg.isComponentEnabled(componentName)
+  ? // Return canary if not released or flag not set
+    () => <Canary component={componentName} />
+  : // Main component code...
+    ({
+      additionalInfo,
+      className,
+      content,
+      copyrightText,
+      legalText,
+      links,
+      logo,
+      onClose,
+      open,
+      title,
+    }) => {
+      return (
         <ComposedModal
-          className={[
-            `${expPrefix}-about-modal`,
-            theme === 'dark'
-              ? `${expPrefix}-about-modal-dark-theme`
-              : `${expPrefix}-about-modal-light-theme`,
-            hasScrollableContent
-              ? `${expPrefix}-about-modal-scroll-enabled`
-              : '',
-            technologiesUsed && technologiesUsed.length > 0
-              ? `${expPrefix}-about-modal-with-tabs`
-              : '',
-          ].join(' ')}
-          open={open}
-          ref={modalRef}>
-          <div className={`${expPrefix}-modal-content`}>
-            <img
-              alt="Product logo"
-              src={logo}
-              className={`${expPrefix}-about-modal-product-logo`}
-            />
-            <ModalHeader
-              title={productName}
-              titleClassName={`${expPrefix}-about-modal-title`}
-              closeModal={onRequestClose}
-            />
-            <ModalBody className={`${expPrefix}-about-modal-content`}>
-              {body}
-              <div className={`${expPrefix}-about-modal-links-container`}>
+          className={classNames(`${pkg.prefix}-about-modal`, {
+            [`${pkg.prefix}-about-modal-with-tabs`]:
+              additionalInfo && additionalInfo.length > 1,
+            [className]: className,
+          })}
+          onClose={onClose}
+          open={open}>
+          <div className={`${pkg.prefix}-about-modal-product-logo`}>{logo}</div>
+          <ModalHeader
+            title={title}
+            titleClassName={`${pkg.prefix}-about-modal-title`}
+          />
+          <ModalBody className={`${pkg.prefix}-about-modal-content`}>
+            <div className={`${pkg.prefix}-about-modal-body-content`}>
+              {content}
+              <div className={`${pkg.prefix}-about-modal-links-container`}>
                 {links &&
                   links.length > 0 &&
                   links.map((link, i) => (
-                    <React.Fragment key={link.url}>
-                      <Link href={link.url}>{link.text}</Link>
-                      {i !== links.length - 1 && (
-                        <span
-                          className={`${expPrefix}-about-modal-link-divider`}>
-                          |
-                        </span>
-                      )}
-                    </React.Fragment>
+                    <React.Fragment key={i}>{link}</React.Fragment>
                   ))}
               </div>
-              {legalText ? (
-                <p className={`${expPrefix}-about-modal-legal-text`}>
+              {legalText && (
+                <p className={`${pkg.prefix}-about-modal-legal-text`}>
                   {legalText}
                 </p>
-              ) : null}
-              {copyrightText ? (
-                <p className={`${expPrefix}-about-modal-copyright-text`}>
+              )}
+              {copyrightText && (
+                <p className={`${pkg.prefix}-about-modal-copyright-text`}>
                   {copyrightText}
                 </p>
-              ) : null}
-            </ModalBody>
-            <ModalFooter>
-              {technologiesUsed && technologiesUsed.length ? (
-                <Tabs
-                  className={`${expPrefix}-about-modal-tab-container`}
-                  light={theme === 'light'}
-                  aria-label="About modal technology used and version number tabs">
-                  <Tab
-                    id="about-modal-technologies-used-tab"
-                    label="Technologies used"
-                    aria-label="Technologies used tab">
-                    <div
-                      className={`${expPrefix}-about-modal-tab-content-flex`}>
-                      {technologiesUsed &&
-                        technologiesUsed.length &&
-                        technologiesUsed.map((tech) => (
-                          <img
-                            key={tech.alt}
-                            src={tech.src}
-                            alt={tech.alt}
-                            className={`${expPrefix}-about-modal-tech-used-item`}
-                          />
-                        ))}
-                    </div>
-                  </Tab>
-                  <Tab
-                    id="about-modal-version-number-tab"
-                    label="Version number"
-                    aria-label="Version number tab">
-                    <div
-                      className={`${expPrefix}-about-modal-tab-content-flex ${expPrefix}-about-modal-tab-content-version-flex`}>
-                      <p className={`${expPrefix}-about-modal-version-label`}>
-                        Version number
-                      </p>
-                      <p className={`${expPrefix}-about-modal-version-number`}>
-                        {versionNumber}
-                      </p>
-                    </div>
-                  </Tab>
-                </Tabs>
-              ) : (
+              )}
+            </div>
+          </ModalBody>
+          <ModalFooter>
+            {additionalInfo &&
+              additionalInfo.length > 0 &&
+              (additionalInfo.length === 1 ? (
                 <>
-                  <p className={`${expPrefix}-about-modal-version-label`}>
-                    Version number
+                  <p className={`${pkg.prefix}-about-modal-version-label`}>
+                    {additionalInfo[0].label}
                   </p>
-                  <p className={`${expPrefix}-about-modal-version-number`}>
-                    {versionNumber}
+                  <p className={`${pkg.prefix}-about-modal-version-number`}>
+                    {additionalInfo[0].content}
                   </p>
                 </>
-              )}
-            </ModalFooter>
-            {hasScrollableContent && (
-              <div className={`${expPrefix}-about-modal-scroll-gradient`} />
-            )}
-          </div>
+              ) : (
+                <Tabs className={`${pkg.prefix}-about-modal-tab-container`}>
+                  {additionalInfo.map((tab, i) => (
+                    <Tab
+                      id={'about-modal-tab-' + tab.label}
+                      label={tab.label}
+                      key={i}>
+                      {tab.content}
+                    </Tab>
+                  ))}
+                </Tabs>
+              ))}
+          </ModalFooter>
         </ComposedModal>
-      </div>
-    </ReactResizeDetector>
-  );
-};
+      );
+    };
 
 AboutModal.propTypes = {
   /**
-   * About modal body content
+   * Additional information to be displayed in the footer. Can be used for
+   * version information and/or a set of tabs with various contents. If only
+   * one set of additional information is provided then no tabs are
+   * displayed and the label and content are just displayed one above the
+   * other in the footer.
    */
-  body: PropTypes.string.isRequired,
-  /**
-   * About modal product copyright text
-   */
-  copyrightText: PropTypes.string,
-  /**
-   * About modal product legal text
-   */
-  legalText: PropTypes.string,
-  /**
-   * About modal product links
-   */
-  links: PropTypes.arrayOf(
+  additionalInfo: PropTypes.arrayOf(
     PropTypes.shape({
-      text: PropTypes.string,
-      url: PropTypes.string,
+      label: PropTypes.string,
+      content: PropTypes.node,
     })
   ),
   /**
-   * About modal product logo
+   * Specify an optional className to be applied to the modal root node
    */
-  logo: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  className: PropTypes.string,
   /**
-   * About modal close function
+   * A summary that appears immediately beneath the title, and might
+   * include information such as: version name, server name,
+   * user name, user role, browser version, browser OS etc.
    */
-  onRequestClose: PropTypes.func.isRequired,
+  content: PropTypes.node.isRequired,
   /**
-   * About modal is open
+   * Trademark and copyright information. Suggested format for copyright -
+   * "Copyright © 2018 Company".
+   */
+  copyrightText: PropTypes.node,
+  /**
+   * Text providing legal information.
+   */
+  legalText: PropTypes.node,
+  /**
+   * An array of Carbon `Link` components that contain links to additional
+   * information.
+   */
+  links: PropTypes.arrayOf(PropTypes.element),
+  /**
+   * A visual symbol used to represent the product.
+   */
+  logo: PropTypes.node.isRequired,
+  /**
+   * Specifies an optional handler which is called when the AboutModal
+   * is closed. Returning `false` prevents the AboutModal from closing.
+   */
+  onClose: PropTypes.func,
+  /**
+   * Specifies whether the AboutModal is open or not.
    */
   open: PropTypes.bool.isRequired,
   /**
-   * About modal product name
+   * The title of the AboutModal is usually the product or service name.
    */
-  productName: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
-    .isRequired,
-  /**
-   * About modal list of technologies
-   */
-  technologiesUsed: PropTypes.arrayOf(
-    PropTypes.shape({
-      src: PropTypes.string,
-      alt: PropTypes.string,
-    })
-  ),
-  /**
-   * About modal product name
-   */
-  theme: PropTypes.oneOf(['light', 'dark']),
-  /**
-   * About modal product version number
-   */
-  versionNumber: PropTypes.string.isRequired,
+  title: PropTypes.node.isRequired,
 };
 
-AboutModal.defaultProps = {
-  copyrightText: '',
-  legalText: '',
-  links: [],
-  onRequestClose: () => {},
-  technologiesUsed: [],
-  theme: 'dark',
-};
+AboutModal.displayName = componentName;

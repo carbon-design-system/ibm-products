@@ -10,79 +10,91 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 
-import { expPrefix } from '../../global/js/settings';
-
 import { ModalHeader, ModalBody } from 'carbon-components-react';
 
 import { TearsheetShell } from './TearsheetShell';
 
-const blockClass = `${expPrefix}-tearsheet`;
+const blockClass = `${pkg.prefix}-tearsheet`;
 
-export const Tearsheet = ({
-  buttons,
-  children,
-  className,
-  closeIconDescription,
-  description,
-  hasCloseIcon,
-  height,
-  influencer,
-  influencerPosition,
-  influencerWidth,
-  label,
-  navigation,
-  onClose,
-  open,
-  preventCloseOnClickOutside,
-  title,
-}) => {
-  const closeClasses = cx({
-    [`${blockClass}--header--no-close-icon`]: !hasCloseIcon,
-  });
+import { Canary } from '../_Canary';
+import { pkg } from '../../settings';
+const componentName = 'Tearsheet';
 
-  const influencerClasses = cx({
-    [`${blockClass}--influencer`]: true,
-    [`${blockClass}--influencer--right`]: influencerPosition === 'right',
-    [`${blockClass}--influencer--wide`]: influencerWidth === 'wide',
-  });
+export const Tearsheet = !pkg.isComponentEnabled(componentName)
+  ? // Return canary if not released or flag not set
+    () => <Canary component={componentName} />
+  : // Main component code...
+    ({
+      buttons,
+      children,
+      className,
+      closeIconDescription,
+      description,
+      hasCloseIcon,
+      height,
+      influencer,
+      influencerPosition,
+      influencerWidth,
+      label,
+      navigation,
+      onClose,
+      open,
+      preventCloseOnClickOutside,
+      title,
+    }) => {
+      const closeClasses = cx({
+        [`${blockClass}--header--no-close-icon`]: !hasCloseIcon,
+      });
 
-  return (
-    <TearsheetShell
-      className={className}
-      height={height}
-      onClose={onClose}
-      open={open}
-      preventCloseOnClickOutside={preventCloseOnClickOutside}
-      size="wide">
-      {(label || title || description || navigation) && (
-        <ModalHeader
-          className={`${blockClass}--header`}
-          closeClassName={closeClasses}
-          iconDescription={closeIconDescription}
-          label={label}
-          title={title}>
-          {description && (
-            <div className={`${blockClass}--header-description`}>
-              {description}
-            </div>
+      const influencerClasses = cx({
+        [`${blockClass}--influencer`]: true,
+        [`${blockClass}--influencer--right`]: influencerPosition === 'right',
+        [`${blockClass}--influencer--wide`]: influencerWidth === 'wide',
+      });
+
+      return (
+        <TearsheetShell
+          className={className}
+          height={height}
+          onClose={onClose}
+          open={open}
+          preventCloseOnClickOutside={preventCloseOnClickOutside}
+          size="wide">
+          {(label || title || description || navigation) && (
+            <ModalHeader
+              className={`${blockClass}--header`}
+              closeClassName={closeClasses}
+              iconDescription={closeIconDescription}
+              label={label}
+              title={title}>
+              {description && (
+                <div className={`${blockClass}--header-description`}>
+                  {description}
+                </div>
+              )}
+              {navigation && (
+                <div className={`${blockClass}--header-navigation`}>
+                  {navigation}
+                </div>
+              )}
+            </ModalHeader>
           )}
-          {navigation && (
-            <div className={`${blockClass}--header-navigation`}>
-              {navigation}
+          <ModalBody className={`${blockClass}--body`}>
+            {influencer && (
+              <div className={influencerClasses}>{influencer}</div>
+            )}
+            <div className={`${blockClass}--right`}>
+              {children && (
+                <div className={`${blockClass}--main`}>{children}</div>
+              )}
+              {buttons && (
+                <div className={`${blockClass}--buttons`}>{buttons}</div>
+              )}
             </div>
-          )}
-        </ModalHeader>
-      )}
-      <ModalBody className={`${blockClass}--body`}>
-        {influencer && <div className={influencerClasses}>{influencer}</div>}
-        <div className={`${blockClass}--right`}>
-          {children && <div className={`${blockClass}--main`}>{children}</div>}
-          {buttons && <div className={`${blockClass}--buttons`}>{buttons}</div>}
-        </div>
-      </ModalBody>
-    </TearsheetShell>
-  );
-};
+          </ModalBody>
+        </TearsheetShell>
+      );
+    };
 
 Tearsheet.propTypes = {
   /**
@@ -177,3 +189,5 @@ Tearsheet.defaultProps = {
   influencerWidth: 'narrow',
   preventCloseOnClickOutside: false,
 };
+
+Tearsheet.displayName = componentName;

@@ -19,10 +19,34 @@
 If you're just getting started and looking for React components, take a look at
 [our Storybook](https://ibm-cloud-cognitive.netlify.app).
 
+If you're trying to find something specific, here's a full list of packages that
+we support!
+
+| Package name                                                                                                                                | Description                |
+| ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| [`@carbon/ibm-cloud-cognitive`](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/cloud-cognitive)           | Common UI components       |
+| [`@carbon/ibm-cloud-cognitive-experimental`](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental) | Experimental UI components |
+
 If you want to try out Carbon for Cloud & Cognitive, you can use
 [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/master/examples/codesandbox).
 
 [![Edit CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/master/examples/codesandbox)
+
+## Building and running Locally
+
+To get started run the following commands and storybook will be built and then
+served on port `3000` on your local machine.
+
+```
+yarn install
+yarn storybook
+```
+
+To build all the packages, run the following command.
+
+```
+yarn build
+```
 
 ## Browser Support
 
@@ -32,21 +56,6 @@ This library supports the latest versions of:
 - Google Chrome
 - Microsoft Edge
 - Mozilla Firefox
-
-## Locally Served Catalogue of Component using Storybook:
-
-Simply run `yarn storybook` and the storybook will be built and then served on
-port `3000` on your local machine.
-
-## Currently Hosted Packages
-
-Today, the packages being hosted here are:
-
-- Automation
-- CD&AI
-- Security
-- Bedrock services --> common services
-- Experimental
 
 ## 🙌 Contributing
 
@@ -83,6 +92,8 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://github.com/asfordmatt"><img src="https://avatars2.githubusercontent.com/u/14233261?v=4" width="100px;" alt=""/><br /><sub><b>Matt Chapman</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=asfordmatt" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/dbrugger"><img src="https://avatars1.githubusercontent.com/u/10086178?v=4" width="100px;" alt=""/><br /><sub><b>Dominik Brugger</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=dbrugger" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/polinaouk"><img src="https://avatars2.githubusercontent.com/u/24444328?v=4" width="100px;" alt=""/><br /><sub><b>Polina Olemskaia</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=polinaouk" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/sydrosa"><img src="https://avatars.githubusercontent.com/u/47571589?v=4" width="100px;" alt=""/><br /><sub><b>Syd Rosa</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=sydrosa" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/dcwarwick"><img src="https://avatars.githubusercontent.com/u/6385315?v=4" width="100px;" alt=""/><br /><sub><b>Dave Clark</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=dcwarwick" title="Code">💻</a></td>
   </tr>
 </table>
 

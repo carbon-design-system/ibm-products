@@ -18,7 +18,6 @@ import {
   Group24,
   Group32,
 } from '@carbon/icons-react';
-//import pic from './charlie_64.jpg';
 
 import { expPrefix } from '../../global/js/settings';
 import cx from 'classnames';
@@ -26,12 +25,12 @@ import cx from 'classnames';
 const blockClass = `${expPrefix}-user-profile-avatar`;
 
 export const UserProfileImage = ({
-  backgroundColor = 'light-blue',
+  backgroundColor,
   icon = 'user',
   initials,
   image,
   size = 'x-large',
-  theme = 'light'
+  theme
 }) => {
 
   const icons = {
@@ -119,5 +118,5 @@ UserProfileImage.propTypes = {
   /**
    * Set theme in which the component will be rendered
    */
-  theme: PropTypes.oneOf(['light', 'dark'])
+  theme: PropTypes.oneOf(['light', 'dark']).isRequired
 };

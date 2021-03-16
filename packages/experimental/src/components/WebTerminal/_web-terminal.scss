@@ -1,0 +1,119 @@
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+
+$web-terminal-width: 36.5rem;
+
+@keyframes webTerminalEntrance {
+  0% {
+    // stylelint-disable-next-line carbon/layout-token-use
+    transform: translateX(#{$web-terminal-width});
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes webTerminalExit {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    // stylelint-disable-next-line carbon/layout-token-use
+    transform: translateX(#{$web-terminal-width});
+    opacity: 0;
+  }
+}
+
+/*
+  The reason for not using theme tokens in the web terminal
+  component is because we want these colors to always be the same
+  despite of which carbon theme the user has.
+*/
+
+.#{$pkg-prefix}-web-terminal {
+  @include carbon--theme($carbon--theme--g90, true);
+
+  position: fixed;
+  top: $spacing-09;
+  right: 0;
+  width: $web-terminal-width;
+  height: calc(100vh - #{$spacing-09});
+  background-color: $gray-100; /* stylelint-disable-line  */
+}
+
+.#{$pkg-prefix}-web-terminal__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 3rem;
+  background-color: $ui-background;
+}
+
+.#{$pkg-prefix}-web-terminal__bar-icon {
+  cursor: pointer;
+  fill: $text-01;
+}
+
+.#{$pkg-prefix}-web-terminal__bar-icon-container {
+  position: relative;
+  padding: $spacing-04;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.#{$pkg-prefix}-web-terminal__bar-icon-dropdown {
+  position: absolute;
+  top: 2.8125rem; /* stylelint-disable-line */
+  left: 0;
+  width: 10rem;
+  background-color: $field-01;
+
+  /* stylelint-disable-next-line  */
+  transform: translateY(calc(-1 * #{$spacing-04}));
+  visibility: hidden;
+  opacity: 0;
+  transition: all carbon--motion(standard, productive) $duration--fast-02;
+}
+
+.#{$pkg-prefix}-web-terminal__bar-icon-container:hover
+  .#{$pkg-prefix}-web-terminal__bar-icon-dropdown,
+.#{$pkg-prefix}-web-terminal__bar-icon-container:focus
+  .#{$pkg-prefix}-web-terminal__bar-icon-dropdown {
+  transform: translateY(0);
+  visibility: visible;
+  opacity: 1;
+}
+
+.#{$pkg-prefix}-web-terminal__bar-icon-dropdown-link {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 2.125rem;
+  padding-left: $spacing-04;
+  color: $text-02;
+  text-decoration: none;
+  cursor: pointer;
+  @include carbon--type-style('body-short-01');
+
+  transition: all carbon--motion(standard, productive) $duration--fast-02;
+}
+
+.#{$pkg-prefix}-web-terminal__bar-icon-dropdown-link:hover {
+  color: $text-01;
+  //NOTE: The 4c4c4c is a theme token but not a gray value token
+  background-color: $hover-ui;
+}
+
+.#{$pkg-prefix}-web-terminal__close-container {
+  padding: $spacing-04;
+  cursor: pointer;
+}
+
+// Terminal body styles
+.#{$pkg-prefix}-web-terminal__body {
+  height: 100%;
+}

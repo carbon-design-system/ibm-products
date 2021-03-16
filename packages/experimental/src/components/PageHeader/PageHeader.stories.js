@@ -11,7 +11,10 @@ import React from 'react';
 import {
   BreadcrumbItem,
   Column,
+  Content,
   Grid,
+  Header,
+  HeaderName,
   Row,
   Tab,
   Tabs,
@@ -20,16 +23,20 @@ import {
 import { CheckmarkFilled16 } from '@carbon/icons-react';
 import { Lightning16, Bee24 } from '@carbon/icons-react';
 
-import { ActionBarItem } from './ActionBarItem';
+import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import { getStorybookPrefix } from '../../../config';
+import { ActionBarItem } from '../ActionBar';
 import { PageActionItem } from './PageActionItem';
 import { PageHeader } from '.';
+const storybookPrefix = getStorybookPrefix(pkg, PageHeader.displayName);
 
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 
 import mdx from './PageHeader.mdx';
 
 export default {
-  title: 'Experimental/PageHeader',
+  title: `${storybookPrefix}/${PageHeader.displayName}`,
   component: PageHeader,
   subcomponents: {
     ActionBarItem,
@@ -443,6 +450,55 @@ const TemplateWithSwitchedArgs = (args) => {
 
 export const AllAttributesWithSwitches = TemplateWithSwitchedArgs.bind({});
 AllAttributesWithSwitches.args = {
+  actionBarItems,
+  actionBarItemsSwitchedArg: true,
+  availableSpace: summaryDetails,
+  availableSpaceSwitchedArg: true,
+  background: true,
+  breadcrumbItems,
+  breadcrumbItemsSwitchedArg: true,
+  keepBreadcrumbAndTabs: false,
+  navigation: tabBar,
+  navigationSwitchedArg: true,
+  pageActions,
+  pageActionsSwitchedArg: true,
+  preCollapseTitleRow: false,
+  subtitle,
+  subtitleSwitchedArg: true,
+  tags,
+  tagsSwitchedArg: true,
+  title,
+  titleSwitchedArg: true,
+  titleIcon: Bee24,
+  titleIconSwitchedArg: true,
+};
+
+const TemplatePageHeaderWithCarbonHeader = (args) => {
+  return (
+    <div className="page-header-stories__app">
+      <Header aria-label="IBM Platform Name">
+        <HeaderName href="#" prefix="IBM">
+          [Platform]
+        </HeaderName>
+      </Header>
+      <Content className="page-header-stories__content-container">
+        <PageHeader
+          className="example-class-name"
+          {...includeTheseArgs(args)}
+          pageHeaderOffset={48} // 48px is the size of the global header. A more elegant way of passing this could be found.
+        />
+        <div className="page-header-stories__inner-content">
+          {dummyPageContent}
+        </div>
+      </Content>
+    </div>
+  );
+};
+
+export const PageHeaderWithCarbonHeader = TemplatePageHeaderWithCarbonHeader.bind(
+  {}
+);
+PageHeaderWithCarbonHeader.args = {
   actionBarItems,
   actionBarItemsSwitchedArg: true,
   availableSpace: summaryDetails,

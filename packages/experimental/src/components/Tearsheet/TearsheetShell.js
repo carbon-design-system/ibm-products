@@ -10,11 +10,11 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 
-import { expPrefix } from '../../global/js/settings';
+import { pkg } from '../../settings';
 
 import { ComposedModal } from 'carbon-components-react';
 
-const blockClass = `${expPrefix}-tearsheet`;
+const blockClass = `${pkg.prefix}-tearsheet`;
 
 const maxStackingDepth = 3;
 
@@ -29,6 +29,8 @@ const maxStackingDepth = 3;
 // entries change).
 let stack = [];
 let stackHandlers = [];
+
+const componentName = 'TearsheetShell';
 
 export const TearsheetShell = ({
   children,
@@ -172,3 +174,5 @@ TearsheetShell.defaultProps = {
   preventCloseOnClickOutside: false,
   size: 'wide',
 };
+
+TearsheetShell.displayName = componentName;

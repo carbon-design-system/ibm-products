@@ -42,6 +42,7 @@ $theme-keys: map-keys($themes);
     color: $ui-01;
   }
   @each $color in $base-colors {
+    @debug $color;
     @each $shadekey in $theme-keys {
       .#{$block-class}--#{$key}.#{$block-class}--#{$shadekey}-#{$color} {
         background-color: get-background-color($color, $key, $shadekey);
@@ -83,7 +84,7 @@ $theme-keys: map-keys($themes);
   text-transform: uppercase;
   border-radius: 100%;
   .#{$block-class}-photo {
-    //border: 1px solid black;
+    //border: 1px solid black; //should a decision be made to have a border
     border-radius: 100%;
   }
 }

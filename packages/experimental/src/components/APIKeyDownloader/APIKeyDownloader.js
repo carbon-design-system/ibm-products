@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { expPrefix } from '../../global/js/settings';
+import { pkg } from '../../settings';
+const componentName = 'APIKeyDownloader';
 
 export const APIKeyDownloader = ({ apiKey, bodyText, fileName, linkText }) => {
   const [linkProps, setLinkProps] = useState('');
@@ -23,12 +24,13 @@ export const APIKeyDownloader = ({ apiKey, bodyText, fileName, linkText }) => {
   }, [apiKey, fileName]);
 
   return (
-    <p className={`${expPrefix}--apikey-modal-messaging-text`}>
+    <p className={`${pkg.prefix}--apikey-modal-messaging-text`}>
       {bodyText} <a {...linkProps}>{linkText}</a>
     </p>
   );
 };
 
+APIKeyDownloader.displayName = componentName;
 APIKeyDownloader.propTypes = {
   /**
    * the api key the user recieves

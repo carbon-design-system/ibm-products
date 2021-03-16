@@ -10,27 +10,32 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 
-import { expPrefix } from '../../global/js/settings';
-
 import { Button } from 'carbon-components-react';
 
-const blockClass = `${expPrefix}-page-action-item`;
+import { Canary } from '../_Canary';
+import { pkg } from '../../settings';
+const componentName = 'PageActionItem';
+const blockClass = `${pkg.prefix}-page-action-item`;
 
-export const PageActionItem = ({ children, ...props }) => {
-  const className = cx([blockClass, props.className]);
+export const PageActionItem = !pkg.isComponentEnabled(componentName)
+  ? // Return canary if not released or flag not set
+    () => <Canary component={componentName} />
+  : // Main component code...
+    ({ children, ...props }) => {
+      const className = cx([blockClass, props.className]);
 
-  return (
-    <Button
-      {...{
-        ...props,
-        className,
-        size: 'field',
-        type: 'button',
-      }}>
-      {children}
-    </Button>
-  );
-};
+      return (
+        <Button
+          {...{
+            ...props,
+            className,
+            size: 'field',
+            type: 'button',
+          }}>
+          {children}
+        </Button>
+      );
+    };
 
 // Props the user cannot change
 const reservedProps = ['size', 'type'];
@@ -102,3 +107,5 @@ PageActionItem.propTypes = {
 };
 
 PageActionItem.defaultProps = { ...defaultProps };
+
+PageActionItem.displayName = componentName;

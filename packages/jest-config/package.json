@@ -1,7 +1,7 @@
 {
   "name": "jest-config",
   "private": true,
-  "version": "0.3.1",
+  "version": "0.3.3",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": {
@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.12.10",
+    "@testing-library/jest-dom": "^5.11.6",
     "accessibility-checker": "^3.1.1",
     "axe-core": "^4.1.1",
     "babel-jest": "^26.6.3",

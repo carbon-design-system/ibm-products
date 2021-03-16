@@ -1,5 +1,7 @@
 import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
-import { ExportModal } from './ExportModal';
+import { pkg } from '../../settings';
+import { getStorybookSlug } from '../../../config';
+import { ExportModal } from '.';
 
 # ExportModal
 
@@ -12,7 +14,9 @@ import { ExportModal } from './ExportModal';
 ## Overview
 
 <Preview>
-  <Story id="experimental-exportmodal--with-state-manager" />
+  <Story
+    id={getStorybookSlug(pkg, ExportModal.displayName, 'with-success-message')}
+  />
 </Preview>
 
 ## Component API

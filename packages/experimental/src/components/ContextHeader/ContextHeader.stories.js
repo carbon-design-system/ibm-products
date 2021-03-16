@@ -7,14 +7,21 @@
 
 import React from 'react';
 
+import styles from './_storybook-styles.scss';
+import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import { getStorybookPrefix } from '../../../config';
 import { ContextHeader } from '.';
-
-import styles from './_ContextHeader.scss';
+import mdx from './ContextHeader.mdx';
+const storybookPrefix = getStorybookPrefix(pkg, ContextHeader.displayName);
 
 export default {
-  title: 'Experimental/ContextHeader',
+  title: `${storybookPrefix}/${ContextHeader.displayName}`,
   component: ContextHeader,
   parameters: { styles },
+  docs: {
+    page: mdx,
+  },
 };
 
 const Template = (args) => {

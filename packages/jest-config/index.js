@@ -11,7 +11,7 @@ module.exports = {
   collectCoverageFrom: [
     'packages/**/src/**/*.js',
     '!packages/**/{examples,stories}/**',
-    '!**/*-story.js',
+    '!**/*.stories.js',
   ],
   moduleFileExtensions: ['js', 'json', 'node'],
   reporters: ['default'],
@@ -23,6 +23,7 @@ module.exports = {
     '<rootDir>/**/*.(spec|test).js?(x)',
     '<rootDir>/**/*-(spec|test).js?(x)',
   ],
+  testTimeout: 10000,
   transform: {
     '^.+\\.(js|jsx)$': require.resolve('./transform/javascript.js'),
     '^.+\\.css$': require.resolve('./transform/css.js'),
@@ -37,6 +38,7 @@ module.exports = {
     '/build/',
     'e2e',
     'examples',
+    'templates',
     '/umd/',
   ],
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],

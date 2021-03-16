@@ -1,0 +1,81 @@
+import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
+import { pkg } from '../../settings';
+import { getStorybookSlug } from '../../../config';
+import { EmptyState } from '.';
+
+# Empty state
+
+[CD&AI Empty pattern usage guidelines](https://pages.github.ibm.com/cdai-design/pal/patterns/empty-state/usage/)
+&nbsp;|&nbsp;
+[Carbon Empty pattern usage guidelines](https://www.carbondesignsystem.com/patterns/empty-states-pattern/)
+&nbsp;|&nbsp;
+
+## Overview
+
+The `EmptyState` component follows the Carbon guidelines for empty states with
+some added specifications around illustration usage. For additional usage
+guidelines and documentation please refer to the links above.
+
+### Default Empty state
+
+<Preview>
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${EmptyState.displayName}`,
+      'default'
+    )}
+  />
+</Preview>
+
+### Empty state with action
+
+<Preview>
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${EmptyState.displayName}`,
+      'with-action'
+    )}
+  />
+</Preview>
+
+### Empty state with action (Button with icon)
+
+<Preview>
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${EmptyState.displayName}`,
+      'with-action-icon-button'
+    )}
+  />
+</Preview>
+
+### Empty state with link
+
+<Preview>
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${EmptyState.displayName}`,
+      'with-link'
+    )}
+  />
+</Preview>
+
+### Empty state with action and link
+
+<Preview>
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `emptystates-${EmptyState.displayName}`,
+      'with-action-and-link'
+    )}
+  />
+</Preview>
+
+## Component API
+
+<Props />

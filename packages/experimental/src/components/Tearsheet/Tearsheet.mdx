@@ -1,5 +1,7 @@
 import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
-import { Tearsheet } from './Tearsheet';
+import { pkg } from '../../settings';
+import { getStorybookSlug } from '../../../config';
+import { Tearsheet } from '.';
 import AnatomyImg from './tearsheet-anatomy.png';
 
 # Tearsheet and TearsheetNarrow
@@ -39,13 +41,25 @@ Tearsheets may be stacked up to 3 levels deep.
 ### Wide tearsheet
 
 <Preview>
-  <Story id="experimental-tearsheet--all-attributes-set" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `tearsheets-${Tearsheet.displayName}`,
+      'all-attributes-set'
+    )}
+  />
 </Preview>
 
 ### Narrow tearsheet
 
 <Preview>
-  <Story id="experimental-tearsheetnarrow--all-attributes-set" />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      `tearsheets-${Tearsheet.displayName}`,
+      'all-attributes-set'
+    )}
+  />
 </Preview>
 
 ## Component API

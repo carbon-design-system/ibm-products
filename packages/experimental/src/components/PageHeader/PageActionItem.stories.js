@@ -7,13 +7,17 @@
 
 import React from 'react';
 
-import { PageActionItem } from './PageActionItem';
 import { Bee24 } from '@carbon/icons-react';
 
 import styles from './_index.scss'; // import index in case more files are added later.
+import { pkg } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import { getStorybookPrefix } from '../../../config';
+import { PageActionItem } from '.';
+const storybookPrefix = getStorybookPrefix(pkg, PageActionItem.displayName);
 
 export default {
-  title: 'Experimental/PageHeader/PageActionItem',
+  title: `${storybookPrefix}/PageHeader/${PageActionItem.displayName}`,
   component: PageActionItem,
   parameters: { styles },
   argTypes: {

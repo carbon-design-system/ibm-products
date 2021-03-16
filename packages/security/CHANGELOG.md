@@ -3,6 +3,132 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.11](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-security@0.4.10...@carbon/ibm-cloud-cognitive-security@0.4.11) (2021-03-16)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-security
+
+
+
+
+
+## [0.4.10](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-security@0.4.9...@carbon/ibm-cloud-cognitive-security@0.4.10) (2021-03-16)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-security
+
+
+
+
+
+## [0.4.9](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-security@0.4.8...@carbon/ibm-cloud-cognitive-security@0.4.9) (2021-03-10)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-security
+
+
+
+
+
+## [0.4.8](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-security@0.4.7...@carbon/ibm-cloud-cognitive-security@0.4.8) (2021-03-09)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-security
+
+
+
+
+
+## [0.4.7](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-security@0.4.6...@carbon/ibm-cloud-cognitive-security@0.4.7) (2021-03-09)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-security
+
+
+
+
+
+## [0.4.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-security@0.4.5...@carbon/ibm-cloud-cognitive-security@0.4.6) (2021-03-09)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-security
+
+
+
+
+
+## [0.4.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-security@0.4.4...@carbon/ibm-cloud-cognitive-security@0.4.5) (2021-03-08)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-security
+
+
+
+
+
+## [0.4.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-security@0.4.3...@carbon/ibm-cloud-cognitive-security@0.4.4) (2021-03-05)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-security
+
+
+
+
+
+## [0.4.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-security@0.4.2...@carbon/ibm-cloud-cognitive-security@0.4.3) (2021-03-04)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-security
+
+
+
+
+
+## [0.4.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-security@0.4.1...@carbon/ibm-cloud-cognitive-security@0.4.2) (2021-02-25)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-security
+
+
+
+
+
+## [0.4.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-security@0.4.0...@carbon/ibm-cloud-cognitive-security@0.4.1) (2021-02-03)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-security
+
+
+
+
+
+# [0.4.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-security@0.3.4...@carbon/ibm-cloud-cognitive-security@0.4.0) (2021-02-02)
+
+
+### Features
+
+* **combo-button:** add `renderIcon` support ([#299](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/299)) ([794deaf](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/794deafaf8d091f8c2761e835e693bcaaacf32c7))
+
+
+
+
+
+## [0.3.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-security@0.3.3...@carbon/ibm-cloud-cognitive-security@0.3.4) (2021-01-29)
+
+
+### Bug Fixes
+
+* **combo-button:** add truncation ([#308](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/308)) ([35b3517](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/35b351776107d23f6dafd30b9d4a24d626a9d9ec))
+
+
+
+
+
+## [0.3.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-security@0.3.2...@carbon/ibm-cloud-cognitive-security@0.3.3) (2021-01-28)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-security
+
+
+
+
+
+## [0.3.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-security@0.3.1...@carbon/ibm-cloud-cognitive-security@0.3.2) (2021-01-26)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-security
+
+
+
+
+
 ## [0.3.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-security@0.3.0...@carbon/ibm-cloud-cognitive-security@0.3.1) (2021-01-22)
 
 

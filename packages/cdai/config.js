@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export const sectionTitle = 'CD&AI';
+export const sectionTitle = 'Legacy/CD&AI';

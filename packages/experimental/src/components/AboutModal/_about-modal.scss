@@ -13,17 +13,81 @@
 @import 'carbon-components/scss/components/modal/modal';
 @import 'carbon-components/scss/components/tabs/tabs';
 
+.#{$pkg-prefix}-about-modal {
+  background-color: $ui-background;
+}
+
 .#{$pkg-prefix}-about-modal .bx--modal-container {
   grid-template-rows: auto auto 1fr auto;
+}
+
+.#{$pkg-prefix}-about-modal-product-logo {
+  margin: $spacing-05;
+}
+
+.#{$pkg-prefix}-about-modal .bx--modal-header {
+  grid-row: auto;
+  margin-bottom: 0;
+  padding: 0 20% $spacing-03 $spacing-05;
+}
+
+.#{$pkg-prefix}-about-modal-title {
+  @include carbon--type-style('productive-heading-04');
+}
+
+.#{$pkg-prefix}-about-modal-content {
+  @include carbon--type-style('body-short-02');
+
+  grid-row: auto;
+  min-height: $layout-05;
+  margin-bottom: 0;
+  padding: 0 20% 0 $spacing-05;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.#{$pkg-prefix}-about-modal-with-tabs .#{$pkg-prefix}-about-modal-content {
+  min-height: calc(#{$layout-05} + #{$spacing-08});
+}
+
+.#{$pkg-prefix}-about-modal-body-content {
+  margin-bottom: $spacing-09;
+}
+
+.#{$pkg-prefix}-about-modal-with-tabs .#{$pkg-prefix}-about-modal-body-content {
+  // stylelint-disable-next-line carbon/layout-token-use
+  margin-bottom: calc(#{$spacing-09} + #{$spacing-08});
+}
+
+.#{$pkg-prefix}-about-modal-links-container {
+  margin-top: $spacing-05;
+}
+
+.#{$pkg-prefix}-about-modal-links-container a + a {
+  margin-left: $spacing-03;
+  padding-left: $spacing-03;
+  border-left: 1px solid $text-01;
+}
+
+.#{$pkg-prefix}-about-modal-legal-text,
+.#{$pkg-prefix}-about-modal-copyright-text {
+  margin-top: $spacing-07;
+  color: $text-03;
+}
+
+.#{$pkg-prefix}-about-modal-copyright-text {
+  margin-top: $spacing-05;
 }
 
 .#{$pkg-prefix}-about-modal .bx--modal-footer {
   position: relative;
   flex-direction: column;
   justify-content: center;
-  padding-left: $spacing-05;
+  height: rem(72px);
+  color: $inverse-01;
   background-color: $inverse-02;
 }
+
 .#{$pkg-prefix}-about-modal .bx--modal-footer::before {
   position: absolute;
   top: calc(-1 * #{$spacing-09});
@@ -33,111 +97,27 @@
   content: '';
 }
 
-.#{$pkg-prefix}-about-modal {
-  background-color: $ui-background;
-  .bx--modal-content.#{$pkg-prefix}-about-modal-content {
-    @include carbon--type-style('body-short-02');
-
-    min-height: $spacing-10;
-    margin-bottom: 0;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-  .#{$pkg-prefix}-about-modal-body-content {
-    margin-bottom: $spacing-09;
-  }
-  .#{$pkg-prefix}-about-modal-product-logo {
-    margin: $spacing-05;
-  }
-  .#{$pkg-prefix}-about-modal-version-label,
-  .#{$pkg-prefix}-about-modal-version-number {
-    @include carbon--type-style('body-short-01');
-
-    color: $inverse-01;
-  }
-  .#{$pkg-prefix}-about-modal-version-label {
-    @include carbon--font-weight('semibold');
-  }
-  .#{$pkg-prefix}-about-modal-links-container {
-    margin-top: $spacing-05;
-  }
-  .#{$pkg-prefix}-about-modal-links-container a + a {
-    margin-left: $spacing-03;
-    padding-left: $spacing-03;
-    border-left: 1px solid $text-01;
-  }
-  .#{$pkg-prefix}-about-modal-tech-used-item {
-    width: 2.25rem;
-    height: 2.25rem;
-    margin-right: $spacing-04;
-    object-fit: contain;
-  }
-  .#{$pkg-prefix}-about-modal-tab-content-flex {
-    display: flex;
-    align-items: center;
-    height: inherit;
-    &.#{$pkg-prefix}-about-modal-tab-content-version-flex {
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-    }
-  }
-  .#{$pkg-prefix}-about-modal-tab-container {
-    position: relative;
-    /* stylelint-disable-next-line carbon/layout-token-use */
-    bottom: carbon--rem(20px);
-  }
-}
-
 .#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-with-tabs
-  .bx--modal-content.exp-about-modal-content {
-  margin-bottom: $layout-06;
+  .bx--modal-footer::before {
+  // stylelint-disable-next-line carbon/layout-token-use
+  top: calc(-1 * (#{$spacing-09} + #{$spacing-08}));
+  height: calc(#{$spacing-09} + #{$spacing-08});
+  background: linear-gradient(to bottom, transparent, $ui-01 25%);
 }
 
-.#{$pkg-prefix}-about-modal.#{$pkg-prefix}-about-modal-with-tabs
-  .bx--tab-content {
-  position: relative;
-  /* stylelint-disable-next-line carbon/layout-token-use */
-  bottom: carbon--rem(20px);
-  height: $layout-05;
-  min-height: $layout-05;
-  padding: 0;
+.#{$pkg-prefix}-about-modal-tab-container {
+  position: absolute;
+  bottom: 100%;
 }
 
-.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-content,
-.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-legal-text,
-.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-copyright-text {
-  color: $text-01;
+.#{$pkg-prefix}-about-modal-version-label,
+.#{$pkg-prefix}-about-modal-version-number {
+  @include carbon--type-style('body-short-01');
+
+  padding-left: $spacing-05;
+  color: $inverse-01;
 }
 
-.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-legal-text,
-.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-copyright-text {
-  margin-top: $spacing-07;
-  color: $text-03;
-}
-
-.#{$pkg-prefix}-about-modal .#{$pkg-prefix}-about-modal-copyright-text {
-  margin-top: $spacing-05;
-}
-
-.#{$pkg-prefix}-about-modal .bx--modal-header,
-.#{$pkg-prefix}-about-modal .bx--modal-content {
-  grid-row: auto;
-  padding: 0 $spacing-05;
-}
-
-.#{$pkg-prefix}-about-modal .bx--modal-header,
-.#{$pkg-prefix}-about-modal .bx--modal-content * {
-  max-width: 80%;
-}
-
-.#{$pkg-prefix}-about-modal .bx--modal-header {
-  margin-bottom: 0;
-  padding-bottom: $spacing-03;
-}
-
-.#{$pkg-prefix}-about-modal
-  .bx--modal-header
-  .bx--modal-header__heading.#{$pkg-prefix}-about-modal-title {
-  @include carbon--type-style('productive-heading-04');
+.#{$pkg-prefix}-about-modal-version-label {
+  @include carbon--font-weight('semibold');
 }

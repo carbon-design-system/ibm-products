@@ -97,7 +97,6 @@ $raised-z-index: 99;
   height: 1px;
   /* creates a full width box shadow without causing scroll */
   box-shadow: 0 1px 0 0 $ui-03, 0 1px 0 0 $ui-03;
-  // stylelint-disable-next-line carbon/layout-token-use
   transform: translateX(-50%) scaleX(1);
   opacity: 0;
   transition: all $duration--moderate-01 ease-out;

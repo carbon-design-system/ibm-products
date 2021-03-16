@@ -13,7 +13,7 @@ import mdx from './NotificationsEmptyState.mdx';
 import { pkg } from '../../../settings';
 import { getStorybookPrefix } from '../../../../config';
 const storybookPrefix = getStorybookPrefix(pkg, 'EmptyStates');
-import { NotificationsEmptyState } from './NotificationsEmptyState';
+import { NotificationsEmptyState } from '.';
 
 import styles from '../_index.scss';
 

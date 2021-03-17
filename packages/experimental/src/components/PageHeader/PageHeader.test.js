@@ -29,13 +29,13 @@ const pageActionItemOnClick = jest.fn();
 const actionBarItems = (
   <>
     <ActionBarItem
-      icon={Lightning16}
+      renderIcon={Lightning16}
       label="Action 1"
       onClick={actionBarItemOnClick}
     />
-    <ActionBarItem icon={Lightning16} label="Action 2" />
-    <ActionBarItem icon={Lightning16} label="Action 3" />
-    <ActionBarItem icon={Lightning16} label="Action 4" />
+    <ActionBarItem renderIcon={Lightning16} label="Action 2" />
+    <ActionBarItem renderIcon={Lightning16} label="Action 3" />
+    <ActionBarItem renderIcon={Lightning16} label="Action 4" />
   </>
 );
 const availableSpace = <span className="page-header-test--available-space" />;

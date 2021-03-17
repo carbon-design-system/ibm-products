@@ -24,7 +24,6 @@ $block-class: #{$pkg-prefix}-notifications-panel;
     opacity: 0;
   }
   100% {
-    // stylelint-disable-next-line carbon/layout-token-use
     transform: translateY(0);
     opacity: 1;
   }
@@ -32,7 +31,6 @@ $block-class: #{$pkg-prefix}-notifications-panel;
 
 @keyframes fadeOut {
   0% {
-    // stylelint-disable-next-line carbon/layout-token-use
     transform: translateY(0);
     opacity: 1;
   }

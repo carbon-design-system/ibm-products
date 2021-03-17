@@ -1,16 +1,16 @@
 import React from 'react';
 import cx from 'classnames';
 import { arrayOf, shape, string } from 'prop-types';
-import HTTPErrorSvg403 from '../assets/HTTPErrorSvg403';
+import HTTPErrorSvg404 from '../assets/HTTPErrorSvg404';
 import { HTTPErrors } from '../HTTPErrors';
 
 import { pkg } from '../../../settings';
 import { Canary } from '../../_Canary';
 
 const blockClass = `${pkg.prefix}--http-errors`;
-const componentName = 'HTTPError403';
+const componentName = 'HTTPError404';
 
-export const HTTPError403 = !pkg.isComponentEnabled(componentName)
+export const HTTPError404 = !pkg.isComponentEnabled(componentName)
   ? () => <Canary component={componentName} />
   : ({ className, description, errorCodeLabel, links, title, ...rest }) => {
       return (
@@ -25,12 +25,14 @@ export const HTTPError403 = !pkg.isComponentEnabled(componentName)
             title={title}
             links={links}
           />
-          <HTTPErrorSvg403 className={cx(`${blockClass}-image`)} />
+          <HTTPErrorSvg404 className={cx(`${blockClass}-image`)} />
         </div>
       );
     };
 
-HTTPError403.propTypes = {
+HTTPError404.displayName = componentName; // displayName is used in preference to function.name by React
+
+HTTPError404.propTypes = {
   /**
    * Provide an optional class to be applied to the containing node
    */
@@ -63,5 +65,3 @@ HTTPError403.propTypes = {
    */
   title: string,
 };
-
-HTTPError403.displayName = componentName; // displayName is used in preference to function.name by React

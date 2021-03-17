@@ -23,7 +23,7 @@ import { NotFoundEmptyState } from './NotFoundEmptyState';
 import { NotificationsEmptyState } from './NotificationsEmptyState';
 import { UnauthorizedEmptyState } from './UnauthorizedEmptyState';
 
-import styles from './_index.scss';
+import styles from './_storybook-styles.scss';
 
 export default {
   title: `${storybookPrefix}/EmptyStates/EmptyState`,

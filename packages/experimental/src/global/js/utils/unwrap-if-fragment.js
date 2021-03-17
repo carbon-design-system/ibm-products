@@ -5,13 +5,22 @@ import React from 'react';
  * to create a flat array of all children
  */
 const unwrapIfFragment = (children) => {
+  // When passed one of the following
+  // - A fragment with zero or more children *1
+  // - An array with zero or more children *1
+  // - A single node
+  // *1 -  The children of the above can be any of the above
+  // Outputs - A flat array of child nodes
   const newChildArray = [];
 
   const isFragment = (item) => item && item.type === React.Fragment;
 
   const addChildren = (children) => {
     const loopOver = (children) => {
-      for (let child of children) {
+      // children may be a single item
+      const _children = Array.isArray(children) ? children : [children];
+
+      for (let child of _children) {
         addChildren(child);
       }
     };

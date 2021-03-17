@@ -14,14 +14,14 @@ unclear.
   - index.js &mdash; exports all public components and entry points for users,
     often with something like
     `export { ComponentName } from './ComponentName';`.
-  - _ComponentName_-test.js &mdash; the Jest test cases for the component.
+  - _ComponentName_.test.js &mdash; the Jest test cases for the component.
   - _ComponentName_.stories.js &mdash; the Storybook stories for the component.
   - \__component-name_.scss &mdash; the SCSS styles used by the component.
   - \_index.scss &mdash; imports all the public SCSS for users, often with
     something like `@import './component-name.scss';`.
-  - \_storybook.scss &mdash; SCSS used by the Storybook stories, which usually
-    includes the component public SCSS and may have additional styles used by
-    the stories.
+  - \_storybook-styles.scss &mdash; SCSS used by the Storybook stories, which
+    usually includes the component public SCSS and may have additional styles
+    used by the stories.
 
 ## Component JavaScript code
 

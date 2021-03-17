@@ -18,6 +18,8 @@ export { UnauthorizedEmptyState } from './EmptyStates/UnauthorizedEmptyState';
 export { ContextHeader } from './ContextHeader';
 export { ExampleComponent } from './ExampleComponent';
 export { HTTPError403 } from './HTTPErrors/HTTPError403';
+export { HTTPError404 } from './HTTPErrors/HTTPError404';
+export { HTTPErrorOther } from './HTTPErrors/HTTPErrorOther';
 export { ImportModal } from './ImportModal';
 export { ModifiedTabs } from './ModifiedTabs';
 export { Notifications } from './Notifications';

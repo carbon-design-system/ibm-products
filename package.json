@@ -13,10 +13,11 @@
   "scripts": {
     "audit": "node scripts/audit.js dependencies moderate",
     "build": "lerna run build --stream --prefix --npm-client yarn --include-dependencies",
-    "build:storybook-addon-carbon-theme": "yarn build --scope \"@carbon/storybook-addon-theme\"",    
+    "build:storybook-addon-carbon-theme": "yarn build --scope \"@carbon/storybook-addon-theme\"",
     "//build:storybook": "# we build dependencies, then run storybook build directly because its dynamic output gets mangled by lerna",
-    "build:storybook": "yarn build:storybook-dependencies-only && cd packages/core && yarn build",
+    "build:storybook": "yarn build:storybook-dependencies-only && yarn build:storybook-only",
     "build:storybook-dependencies-only": "yarn build $(lerna ls --scope @carbon/ibm-cloud-cognitive-core --include-dependencies | grep -v '^@carbon/ibm-cloud-cognitive-core$' | xargs -n1 echo '--scope')",
+    "build:storybook-only": "cd packages/core && yarn build",
     "ci-check": "yarn format:diff && yarn lint && yarn test --ci && lerna run ci-check --stream",
     "clean": "yarn cache clean && lerna run clean && lerna clean --yes && rimraf node_modules ;",
     "copy-common-files": "sh ./scripts/copy-common-files.sh;",
@@ -61,7 +62,7 @@
     "rimraf": "^3.0.2",
     "stylelint": "^13.8.0",
     "stylelint-config-carbon": "^1.2.0",
-    "stylelint-plugin-carbon-tokens": "^0.8.1"
+    "stylelint-plugin-carbon-tokens": "^0.9.0"
   },
   "eslintConfig": {
     "parser": "babel-eslint",

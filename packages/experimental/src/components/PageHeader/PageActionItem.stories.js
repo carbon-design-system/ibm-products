@@ -13,7 +13,7 @@ import styles from './_index.scss'; // import index in case more files are added
 import { pkg } from '../../settings';
 import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
-import { PageActionItem } from './PageActionItem';
+import { PageActionItem } from '.';
 const storybookPrefix = getStorybookPrefix(pkg, PageActionItem.displayName);
 
 export default {

@@ -11,7 +11,7 @@ import { Link } from 'carbon-components-react';
 
 import '../../enable-all'; // must come before component is imported (directly or indirectly)
 
-import { AboutModal } from './AboutModal';
+import { AboutModal } from '.';
 import ExampleLogo from './_story-assets/example-logo.svg';
 import ansibleLogo from './_story-assets/ansible-logo.png';
 import grafanaLogo from './_story-assets/grafana-logo.png';

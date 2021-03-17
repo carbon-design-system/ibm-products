@@ -30,8 +30,6 @@ export const HTTPError403 = !pkg.isComponentEnabled(componentName)
       );
     };
 
-HTTPError403.displayName = componentName; // displayName is used in preference to function.name by React
-
 HTTPError403.propTypes = {
   /**
    * Provide an optional class to be applied to the containing node
@@ -65,3 +63,5 @@ HTTPError403.propTypes = {
    */
   title: string,
 };
+
+HTTPError403.displayName = componentName; // displayName is used in preference to function.name by React

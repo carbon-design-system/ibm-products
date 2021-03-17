@@ -157,7 +157,7 @@ export const ImportModal = !pkg.isComponentEnabled(componentName)
             accept={validFileTypes}
             labelText={fileDropLabel}
             onAddFiles={onAddFile}
-            disabled={files.length}
+            disabled={!!files.length}
           />
           <p className={`${pkg.prefix}--import-modal-label`}>{inputHeader}</p>
           <div className={`${pkg.prefix}--input-group`}>

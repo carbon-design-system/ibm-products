@@ -30,7 +30,7 @@ const IdeButton = React.forwardRef(
 IdeButton.displayName = 'IdeButton';
 
 IdeButton.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.node,
   className: PropTypes.string,
   iconAnimation: PropTypes.string,
 };

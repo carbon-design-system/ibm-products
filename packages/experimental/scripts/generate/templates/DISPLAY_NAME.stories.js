@@ -6,55 +6,54 @@
  */
 
 import React from 'react';
-/**
- * TODO: import action to handle events
- */
+// TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
-
-import { DISPLAY_NAME } from '.';
 
 import { pkg } from '../../settings';
 import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, DISPLAY_NAME.displayName);
 
-import page from './DISPLAY_NAME.mdx';
+import { DISPLAY_NAME } from '.';
+import mdx from './DISPLAY_NAME.mdx';
+
 import styles from './_storybook-styles.scss';
+
+const storybookPrefix = getStorybookPrefix(pkg, DISPLAY_NAME.displayName);
 
 export default {
   title: `${storybookPrefix}/${DISPLAY_NAME.displayName}`,
   component: DISPLAY_NAME,
-  // TODO: Define argTypes for props not represented by standard JS types
+  // TODO: Define argTypes for props not represented by standard JS types.
   // argTypes: {
   //   egProp: { control: 'color' },
   // },
   parameters: {
-    docs: {
-      page,
-    },
     styles,
+  },
+  docs: {
+    page: mdx,
   },
 };
 
 /**
- * TODO: Declare template(s) that (one or more scenarios)
+ * TODO: Declare template(s) for one or more scenarios
  */
 const Template = (args) => {
   return (
     <DISPLAY_NAME
-      {...args}
-      // TODO: handle events with action or local handler
+      // TODO: handle events with action or local handler.
       // onTodo={action('onTodo log action')}
+      {...args}
     />
   );
 };
 
 /**
- * TODO: Declare one or more examples per template.
- * NOTE: Complete list of examples should match designed use cases
+ * TODO: Declare one or more stories, generally one per design scenario.
+ * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const ExampleOne = Template.bind({});
-ExampleOne.args = {
+export const CAMEL_NAME = Template.bind({});
+CAMEL_NAME.args = {
   // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#DISPLAY_NAME-args
-  children: name,
+  children: 'hello, world',
 };

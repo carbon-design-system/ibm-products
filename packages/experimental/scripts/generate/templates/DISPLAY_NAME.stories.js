@@ -36,7 +36,7 @@ export default {
 };
 
 /**
- * TODO: Declare template(s) for one or more scenarios
+ * TODO: Declare template(s) for one or more scenarios.
  */
 const Template = (args) => {
   return (

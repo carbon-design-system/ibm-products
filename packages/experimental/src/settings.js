@@ -14,8 +14,4 @@ export const carbon = {
   },
 };
 
-export const pkg = {
-  ...pkgSettings,
-};
-
-export default { carbon, pkg };
+export const pkg = pkgSettings;

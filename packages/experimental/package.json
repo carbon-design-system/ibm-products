@@ -55,7 +55,7 @@
     "chalk": "^4.1.0",
     "cross-env": "^7.0.3",
     "fs-extra": "^9.1.0",
-    "param-case": "^3.0.4",
+    "change-case": "^4.1.2",
     "yargs": "^16.2.0"
   }
 }

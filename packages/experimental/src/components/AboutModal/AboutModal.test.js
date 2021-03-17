@@ -17,6 +17,9 @@ import ansibleLogo from './_story-assets/ansible-logo.png';
 import grafanaLogo from './_story-assets/grafana-logo.png';
 import jsLogo from './_story-assets/js-logo.png';
 
+const onCloseReturnsTrue = jest.fn(() => true);
+const onCloseReturnsFalse = jest.fn(() => false);
+
 const content = 'This is example content';
 const logo = (
   <img
@@ -140,7 +143,11 @@ describe('AboutModal', () => {
     const { click } = fireEvent;
     const tabToSelect = screen.getByRole('tab', { name: /Version number/i });
     click(tabToSelect);
-    expect(tabToSelect.parentElement.classList.contains('bx--tabs__nav-item--selected')).toBeTruthy();
+    expect(
+      tabToSelect.parentElement.classList.contains(
+        'bx--tabs__nav-item--selected'
+      )
+    ).toBeTruthy();
   });
 
   test('renders a version number', () => {
@@ -154,5 +161,77 @@ describe('AboutModal', () => {
       />
     );
     expect(getByText(/1.3.41/i)).toBeTruthy();
+  });
+
+  test('is visible when open is true', () => {
+    const { container } = render(
+      <AboutModal open logo={logo} content={content} title={title} />
+    );
+    const aboutModal = container.querySelector('.bx--modal');
+    expect(aboutModal.classList.contains('is-visible')).toBeTruthy();
+  });
+
+  test('is not visible when open is not true', () => {
+    const { container } = render(
+      <AboutModal open={false} logo={logo} content={content} title={title} />
+    );
+    const aboutModal = container.querySelector('.bx--modal');
+    expect(aboutModal.classList.contains('is-visible')).toBeFalsy();
+  });
+
+  test('applies className to the root node', () => {
+    const { container } = render(
+      <AboutModal
+        open
+        logo={logo}
+        content={content}
+        title={title}
+        className="test-class"
+      />
+    );
+    const aboutModal = container.querySelector('.bx--modal');
+    expect(aboutModal.classList.contains('test-class')).toBeTruthy();
+  });
+
+  test('calls onClose() when modal is closed', () => {
+    const { container } = render(
+      <AboutModal
+        open
+        logo={logo}
+        content={content}
+        title={title}
+        onClose={onCloseReturnsTrue}
+      />
+    );
+    const { click } = fireEvent;
+    const aboutModal = container.querySelector('.bx--modal');
+    const closeButton = aboutModal.querySelector('.bx--modal-close');
+
+    expect(aboutModal.classList.contains('is-visible')).toBeTruthy();
+    expect(onCloseReturnsTrue).toHaveBeenCalledTimes(0);
+    click(closeButton);
+    expect(aboutModal.classList.contains('is-visible')).toBeFalsy();
+    expect(onCloseReturnsTrue).toHaveBeenCalledTimes(1);
+  });
+
+  test('calls onClose() when modal is closed and allows veto of close', () => {
+    const { container } = render(
+      <AboutModal
+        open
+        logo={logo}
+        content={content}
+        title={title}
+        onClose={onCloseReturnsFalse}
+      />
+    );
+    const { click } = fireEvent;
+    const aboutModal = container.querySelector('.bx--modal');
+    const closeButton = aboutModal.querySelector('.bx--modal-close');
+
+    expect(aboutModal.classList.contains('is-visible')).toBeTruthy();
+    expect(onCloseReturnsFalse).toHaveBeenCalledTimes(0);
+    click(closeButton);
+    expect(aboutModal.classList.contains('is-visible')).toBeTruthy();
+    expect(onCloseReturnsFalse).toHaveBeenCalledTimes(1);
   });
 });

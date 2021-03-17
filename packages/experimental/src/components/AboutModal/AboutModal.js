@@ -23,6 +23,7 @@ const componentName = 'AboutModal';
 
 export const AboutModal = !pkg.isComponentEnabled(componentName)
   ? // Return canary if not released or flag not set
+    // istanbul ignore next
     () => <Canary component={componentName} />
   : // Main component code...
     ({

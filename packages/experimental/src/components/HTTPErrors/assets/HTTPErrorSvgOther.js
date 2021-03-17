@@ -1,13 +1,15 @@
 import React from 'react';
+import { string } from 'prop-types';
 
-const HTTPErrorSvgOther = () => {
+const HTTPErrorSvgOther = ({ className }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       width={1584}
       height={916}
-      viewBox="0 0 1584 916">
+      viewBox="0 0 1584 916"
+      className={className}>
       <defs>
         <clipPath id="prefix__clip-path">
           <path className="prefix__cls-1" d="M412 617.45a4 4 0 114 6.93z" />
@@ -1037,6 +1039,10 @@ const HTTPErrorSvgOther = () => {
       </g>
     </svg>
   );
+};
+
+HTTPErrorSvgOther.propTypes = {
+  className: string,
 };
 
 export default HTTPErrorSvgOther;

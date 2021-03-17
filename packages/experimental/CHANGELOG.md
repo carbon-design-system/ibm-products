@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.26.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.25.1...@carbon/ibm-cloud-cognitive-experimental@0.26.0) (2021-03-16)
+
+
+### Features
+
+* **HTTPErrors:** add new 404 and other http error components ([#456](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/456)) ([ea42547](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ea425472c2a31144989acc8f9ba53d6a175651ab))
+
+
+
+
+
+## [0.25.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.25.0...@carbon/ibm-cloud-cognitive-experimental@0.25.1) (2021-03-16)
+
+
+### Bug Fixes
+
+* update card docs ([#459](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/459)) ([faac6c6](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/faac6c68268c9a9538807cd9dafaee69e13f9617))
+
+
+
+
+
+# [0.25.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.24.6...@carbon/ibm-cloud-cognitive-experimental@0.25.0) (2021-03-16)
+
+
+### Features
+
+* warn on feature flag use ([#436](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/436)) ([b3fc781](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b3fc7811e84f3e721da7882256925d9eb4bbfbda))
+
+
+
+
+
+## [0.24.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.24.5...@carbon/ibm-cloud-cognitive-experimental@0.24.6) (2021-03-16)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
 ## [0.24.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.24.4...@carbon/ibm-cloud-cognitive-experimental@0.24.5) (2021-03-16)
 
 

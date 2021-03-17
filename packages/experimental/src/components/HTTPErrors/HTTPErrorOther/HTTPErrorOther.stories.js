@@ -8,16 +8,16 @@
 import React from 'react';
 import { pkg } from '../../../settings';
 import '../../../enable-all'; // must come before component is imported
-import { HTTPError403 } from '.';
+import { HTTPErrorOther } from '.';
 import { getStorybookPrefix } from '../../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, HTTPError403.displayName);
+const storybookPrefix = getStorybookPrefix(pkg, HTTPErrorOther.displayName);
 
-import page from './HTTPError403.mdx';
+import page from './HTTPErrorOther.mdx';
 import styles from '../_storybook-styles.scss';
 
 export default {
-  title: `${storybookPrefix}/HTTPErrors/${HTTPError403.displayName}`,
-  component: HTTPError403,
+  title: `${storybookPrefix}/HTTPErrors/${HTTPErrorOther.displayName}`,
+  component: HTTPErrorOther,
   parameters: {
     docs: {
       page,
@@ -27,13 +27,7 @@ export default {
 };
 
 const Template = (args) => {
-  return (
-    <HTTPError403
-      {...args}
-      // TODO: handle events with action or local handler
-      // onTodo={action('onTodo log action')}
-    />
-  );
+  return <HTTPErrorOther {...args} />;
 };
 
 /**
@@ -42,9 +36,9 @@ const Template = (args) => {
  */
 export const withAllPropsSet = Template.bind({});
 withAllPropsSet.args = {
-  errorCodeLabel: 'Error 403',
-  title: 'Forbidden',
-  description: 'You are not authorized to access this resource.',
+  errorCodeLabel: 'Error 502',
+  title: 'Bad gateway',
+  description: 'Received an invalid response.',
   links: [
     {
       text: 'Carbon Design System',

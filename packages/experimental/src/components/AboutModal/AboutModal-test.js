@@ -140,24 +140,7 @@ describe('AboutModal', () => {
     const { click } = fireEvent;
     const tabToSelect = screen.getByRole('tab', { name: /Version number/i });
     click(tabToSelect);
-    expect(tabToSelect.classList.contains('bx--tabs__nav-item--selected'));
-  });
-
-  test('render modal in light theme', () => {
-    const { container } = render(
-      <AboutModal
-        open
-        logo={logo}
-        content={content}
-        title={title}
-        copyrightText="Copyright test text"
-        theme="light"
-      />
-    );
-    const modalContainer = container.querySelector(
-      '.bx--modal.is-visible.exp-about-modal'
-    );
-    expect(modalContainer.classList.contains('exp-about-modal-light-theme'));
+    expect(tabToSelect.parentElement.classList.contains('bx--tabs__nav-item--selected')).toBeTruthy();
   });
 
   test('renders a version number', () => {

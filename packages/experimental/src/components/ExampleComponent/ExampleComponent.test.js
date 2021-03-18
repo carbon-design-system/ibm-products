@@ -15,7 +15,7 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { ExampleComponent } from '.';
 
-const blockClass = `${pkg.prefix}-example-component`;
+const blockClass = `${pkg.prefix}--example-component`;
 const componentName = ExampleComponent.displayName;
 
 const { click } = fireEvent;
@@ -31,7 +31,6 @@ describe(componentName, () => {
     const { container } = render(
       <ExampleComponent {...{ primaryButtonLabel, secondaryButtonLabel }} />
     );
-    console.log(container.outerHTML);
     expect(container.querySelector(`.${blockClass}`)).not.toBeNull();
   });
 
@@ -75,7 +74,6 @@ describe(componentName, () => {
         {...{ primaryButtonLabel, secondaryButtonLabel, className }}
       />
     );
-    console.log(container.outerHTML);
     expect(container.querySelector(`.${className}`)).toBeInTheDocument();
   });
 

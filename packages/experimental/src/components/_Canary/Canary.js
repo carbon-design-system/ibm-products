@@ -18,9 +18,9 @@ const blockClass = `${pkg.prefix}-canary`;
 /**
  *  Canary component used when the component requested is not yet production
  */
-export const Canary = ({ component, className, ...rest }) => {
-  const componentName = component?.name || component;
-
+export const Canary = (
+  { componentName, className, ...rest } /*, originalArgs*/
+) => {
   const instructions = `
 import { pkg } from '@carbon/ibm-cloud-cognitive-experimental';
 // NOTE: must happen before component import
@@ -55,7 +55,7 @@ Canary.propTypes = {
   className: string,
 
   /** Name of the component that is not ready yet */
-  component: string.isRequired,
+  componentName: string.isRequired,
 };
 
 Canary.defaultProps = {

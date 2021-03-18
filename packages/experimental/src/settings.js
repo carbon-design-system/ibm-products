@@ -1,4 +1,3 @@
-import React from 'react';
 import { Canary } from './components/_Canary';
 
 import featureFlags from './generated/feature-flags/feature-flags';
@@ -18,10 +17,16 @@ export const carbon = {
 };
 
 export const pkg = {
-  checkComponentEnabled: (component) =>
-    pkgSettings.isComponentEnabled(component)
+  // If the component is enabled, return it for use. Otherwise
+  // return a Canary placeholder, setting the name of the
+  // replaced component and transferring any properties set.
+  checkComponentEnabled: (component, name) =>
+    pkgSettings.isComponentEnabled(name)
       ? component
-      : () => <Canary component={component.displayName} />,
+      : Object.assign(
+          Canary.bind(undefined, { componentName: name }),
+          component
+        ),
   ...pkgSettings,
 };
 

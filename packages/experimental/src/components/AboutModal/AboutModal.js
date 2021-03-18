@@ -98,7 +98,7 @@ export let AboutModal = ({
 };
 
 // Return a placeholder if not released and not enabled by feature flag
-AboutModal = pkg.checkComponentEnabled(AboutModal);
+AboutModal = pkg.checkComponentEnabled(AboutModal, componentName);
 
 AboutModal.propTypes = {
   /**

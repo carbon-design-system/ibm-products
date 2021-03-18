@@ -37,6 +37,7 @@
     "ci-check": "node scripts/import",
     "clean": "rimraf es lib scss",
     "generate": "cross-env FORCE_COLOR=1 node scripts/generate",
+    "postinstall": "carbon-telemetry collect --install",
     "test": "bundler check 'src/**/*.scss'"
   },
   "peerDependencies": {
@@ -46,6 +47,7 @@
     "@babel/runtime": "^7.12.5",
     "@carbon/icons-react": "^10.24.0",
     "@carbon/import-once": "^10.5.0",
+    "@carbon/telemetry": "^0.0.0-alpha.6",
     "carbon-components": "^10.30.0",
     "carbon-components-react": "^7.30.0",
     "carbon-icons": "^7.0.7",

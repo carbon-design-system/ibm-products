@@ -60,24 +60,18 @@ unclear.
     up separately.
 - Each public component definition should include the following:
 
-  - The following opening logic, which means that unreleased components can be
-    enabled by feature flag mechanism:
-
+  - The following opening logic, destructuring the props in alphabetical order
+    for consistency, and using a `let` to enable the use of
+    `checkComponentEnabled` (see below).
     ```js
-    export const ComponentName = !pkg.isComponentEnabled(componentName)
-      ? // Return canary if not released or flag not set
-        () => <Canary component={componentName} />
-      : // Main component code...
-        ({
-          className,
-          prop1,
-          prop2,
-
-          propN,
-          ...rest
-        }) => {
+    export let ComponentName = ({
+      className,
+      prop1,
+      prop2,
+      ...
+      ...rest
+    }) => {
     ```
-
   - `rest` should be included on the main DOM element to enable HTML attributes
     to be passed through.
   - The classnames helper (imported as `cx`) should be used on the main DOM
@@ -101,6 +95,13 @@ unclear.
     <prefix>--<component-name>__<element>--<modifier>
     ```
     (and of course there may not always be an element and/or modifier).
+  - The exported object should be passed through `checkComponentEnabled`, which
+    enables non-released components to be enable through a feature flag
+    mechanism:
+    ```js
+    // Return a placeholder if not released and not enabled by feature flag
+    ComponentName = pkg.checkComponentEnabled(ComponentName, componentName);
+    ```
   - The exported object should also have set on it:
     - `.displayName = componentName;`
     - `.propTypes = {};` using the PropTypes to specify property types, shapes,

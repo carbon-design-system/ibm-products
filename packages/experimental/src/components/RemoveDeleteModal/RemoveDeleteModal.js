@@ -3,65 +3,63 @@ import { Modal, TextInput } from 'carbon-components-react';
 import PropTypes from 'prop-types';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { Canary } from '../_Canary';
 import { pkg } from '../../settings';
 const componentName = 'RemoveDeleteModal';
 
-export const RemoveDeleteModal = !pkg.isComponentEnabled(componentName)
-  ? // Return canary if not released or flag not set
-    () => <Canary component={componentName} />
-  : // Main component code...
-    ({
-      body,
-      className,
-      header,
-      iconDescription,
-      inputInvalidText,
-      inputLabelText,
-      inputPlaceholderText,
-      onRequestClose,
-      onRequestSubmit,
-      open,
-      primaryButtonText,
-      resource,
-      secondaryButtonText,
-      subheader,
-      textConfirmation,
-      ...other
-    }) => {
-      const [userInput, setUserInput] = useState('');
-      const idRef = useRef(uuidv4());
-      const onChangeHandler = (e) => {
-        setUserInput(e.target.value);
-      };
-      const primaryButtonDisabled = textConfirmation && userInput !== resource;
-      return (
-        <Modal
-          danger
-          className={`${pkg.prefix}-remove-delete-modal ${className}`}
-          iconDescription={iconDescription}
-          open={open}
-          modalHeading={header}
-          modalLabel={subheader}
-          primaryButtonText={primaryButtonText}
-          primaryButtonDisabled={primaryButtonDisabled}
-          secondaryButtonText={secondaryButtonText}
-          onRequestSubmit={onRequestSubmit}
-          onRequestClose={onRequestClose}
-          {...other}>
-          <p className={`${pkg.prefix}-remove-delete-modal-body`}>{body}</p>
-          {textConfirmation && (
-            <TextInput
-              id={`${idRef.current}-confirmation-input`}
-              invalidText={inputInvalidText}
-              labelText={inputLabelText}
-              placeholder={inputPlaceholderText}
-              onChange={onChangeHandler}
-            />
-          )}
-        </Modal>
-      );
-    };
+export let RemoveDeleteModal = ({
+  body,
+  className,
+  header,
+  iconDescription,
+  inputInvalidText,
+  inputLabelText,
+  inputPlaceholderText,
+  onRequestClose,
+  onRequestSubmit,
+  open,
+  primaryButtonText,
+  resource,
+  secondaryButtonText,
+  subheader,
+  textConfirmation,
+  ...other
+}) => {
+  const [userInput, setUserInput] = useState('');
+  const idRef = useRef(uuidv4());
+  const onChangeHandler = (e) => {
+    setUserInput(e.target.value);
+  };
+  const primaryButtonDisabled = textConfirmation && userInput !== resource;
+  return (
+    <Modal
+      danger
+      className={`${pkg.prefix}-remove-delete-modal ${className}`}
+      iconDescription={iconDescription}
+      open={open}
+      modalHeading={header}
+      modalLabel={subheader}
+      primaryButtonText={primaryButtonText}
+      primaryButtonDisabled={primaryButtonDisabled}
+      secondaryButtonText={secondaryButtonText}
+      onRequestSubmit={onRequestSubmit}
+      onRequestClose={onRequestClose}
+      {...other}>
+      <p className={`${pkg.prefix}-remove-delete-modal-body`}>{body}</p>
+      {textConfirmation && (
+        <TextInput
+          id={`${idRef.current}-confirmation-input`}
+          invalidText={inputInvalidText}
+          labelText={inputLabelText}
+          placeholder={inputPlaceholderText}
+          onChange={onChangeHandler}
+        />
+      )}
+    </Modal>
+  );
+};
+
+// Return a placeholder if not released and not enabled by feature flag
+RemoveDeleteModal = pkg.checkComponentEnabled(RemoveDeleteModal, componentName);
 
 RemoveDeleteModal.propTypes = {
   /**

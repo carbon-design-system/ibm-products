@@ -5,30 +5,37 @@ import HTTPErrorSvgOther from '../assets/HTTPErrorSvgOther';
 import { HTTPErrors } from '../HTTPErrors';
 
 import { pkg } from '../../../settings';
-import { Canary } from '../../_Canary';
 
 const blockClass = `${pkg.prefix}--http-errors`;
 const componentName = 'HTTPErrorOther';
 
-export const HTTPErrorOther = !pkg.isComponentEnabled(componentName)
-  ? () => <Canary component={componentName} />
-  : ({ className, description, errorCodeLabel, links, title, ...rest }) => {
-      return (
-        <div
-          className={cx(`${blockClass}`, {
-            [className]: className,
-          })}
-          {...rest}>
-          <HTTPErrors
-            description={description}
-            errorCodeLabel={errorCodeLabel}
-            title={title}
-            links={links}
-          />
-          <HTTPErrorSvgOther className={cx(`${blockClass}-image`)} />
-        </div>
-      );
-    };
+export let HTTPErrorOther = ({
+  className,
+  description,
+  errorCodeLabel,
+  links,
+  title,
+  ...rest
+}) => {
+  return (
+    <div
+      className={cx(`${blockClass}`, {
+        [className]: className,
+      })}
+      {...rest}>
+      <HTTPErrors
+        description={description}
+        errorCodeLabel={errorCodeLabel}
+        title={title}
+        links={links}
+      />
+      <HTTPErrorSvgOther className={cx(`${blockClass}-image`)} />
+    </div>
+  );
+};
+
+// Return a placeholder if not released and not enabled by feature flag
+HTTPErrorOther = pkg.checkComponentEnabled(HTTPErrorOther, componentName);
 
 HTTPErrorOther.displayName = componentName; // displayName is used in preference to function.name by React
 

@@ -44,7 +44,6 @@ const logo = (
 
 const Template = ({ storyInitiallyOpen = true, story, ...other }) => {
   const [open, setOpen] = useState(storyInitiallyOpen);
-  console.dir(this);
   return (
     <>
       <Button onClick={() => setOpen(true)}>Open {story?.storyName}</Button>

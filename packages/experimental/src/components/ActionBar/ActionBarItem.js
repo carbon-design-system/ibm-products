@@ -13,31 +13,29 @@ import cx from 'classnames';
 import { Button } from 'carbon-components-react';
 
 import { pkg } from '../../settings';
-import { Canary } from '../_Canary';
 const componentName = 'ActionBarItem';
 const blockClass = `${pkg.prefix}-action-bar-item`;
 
-export const ActionBarItem = !pkg.isComponentEnabled(componentName)
-  ? // Return canary if not released or flag not set
-    () => <Canary component={componentName} />
-  : // Main component code...
-    ({ inOverflow, ...otherProps }) => {
-      const className = cx([blockClass, otherProps.className]);
+export let ActionBarItem = ({ inOverflow, ...otherProps }) => {
+  const className = cx([blockClass, otherProps.className]);
 
-      return (
-        <Button
-          {...{
-            ...otherProps,
-            className,
-            hasIconOnly: true,
-            kind: 'ghost',
-            size: 'field',
-            tooltipPosition: inOverflow ? 'left' : 'bottom',
-            tooltipAlignment: inOverflow ? 'center' : 'end',
-            type: 'button',
-          }}></Button>
-      );
-    };
+  return (
+    <Button
+      {...{
+        ...otherProps,
+        className,
+        hasIconOnly: true,
+        kind: 'ghost',
+        size: 'field',
+        tooltipPosition: inOverflow ? 'left' : 'bottom',
+        tooltipAlignment: inOverflow ? 'center' : 'end',
+        type: 'button',
+      }}></Button>
+  );
+};
+
+// Return a placeholder if not released and not enabled by feature flag
+ActionBarItem = pkg.checkComponentEnabled(ActionBarItem, componentName);
 
 // Props the user cannot change
 const reservedProps = [

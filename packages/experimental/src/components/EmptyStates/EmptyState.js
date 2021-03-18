@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import setIllustrationClass from './assets/setIllustrationClass';
+import cx from 'classnames';
 
 import { Canary } from '../_Canary';
 import { pkg } from '../../settings';
@@ -35,7 +35,10 @@ export const EmptyState = !pkg.isComponentEnabled(componentName)
           <img
             src={illustration}
             alt="Empty state illustration"
-            className={setIllustrationClass(illustrationSize)}
+            className={cx([
+              `${pkg.prefix}-empty-state-illustration`,
+              `${pkg.prefix}-empty-state-illustration--${illustrationSize}`,
+            ])}
           />
         );
       };

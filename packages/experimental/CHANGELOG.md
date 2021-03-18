@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.26.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.26.5...@carbon/ibm-cloud-cognitive-experimental@0.26.6) (2021-03-18)
+
+
+### Bug Fixes
+
+* **Notifications:** use new empty state, add empty state label prop ([#468](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/468)) ([7ee3dcd](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/7ee3dcd52f07d9bbf4b21c5b60af07168efa90c0))
+
+
+
+
+
 ## [0.26.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.26.4...@carbon/ibm-cloud-cognitive-experimental@0.26.5) (2021-03-18)
 
 

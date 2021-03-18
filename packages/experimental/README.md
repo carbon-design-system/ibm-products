@@ -30,7 +30,7 @@ and
 
 ## Telemetry
 
-In order to gather usage of these components we use
+In order to gather usage information for these components we use
 [@carbon/telemetry](https://www.carbondesignsystem.com/help/faq/#telemetry).
 
 ## 📝 License

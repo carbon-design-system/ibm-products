@@ -1,3 +1,6 @@
+import React from 'react';
+import { Canary } from './components/_Canary';
+
 import featureFlags from './generated/feature-flags/feature-flags';
 import pkgSettings from './global/js/package-settings';
 import { settings as carbonSettings } from 'carbon-components';
@@ -15,6 +18,10 @@ export const carbon = {
 };
 
 export const pkg = {
+  checkComponentEnabled: (component) =>
+    pkgSettings.isComponentEnabled(component)
+      ? component
+      : () => <Canary component={component.displayName} />,
   ...pkgSettings,
 };
 

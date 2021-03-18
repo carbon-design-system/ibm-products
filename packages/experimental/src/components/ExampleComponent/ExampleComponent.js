@@ -26,83 +26,80 @@ const componentName = 'ExampleComponent';
 /**
  * This is an example component to show relevant conventions and usage.
  */
-// This opening logic means that components that have not yet gone through
-// their review process can be enabled by a feature flag mechanism.
-export const ExampleComponent = !pkg.isComponentEnabled(componentName)
-  ? // Return canary if not released or flag not set.
-    () => <Canary component={componentName} />
-  : // Main component code...
-    ({
-      // The component props, in alphabetical order (for consistency).
-      borderColor,
-      boxedBorder,
-      className,
-      disabled,
-      onPrimaryClick,
-      onSecondaryClick,
-      primaryButtonLabel,
-      primaryKind,
-      secondaryButtonLabel,
-      secondaryKind,
-      size,
-      // Collect any other property values.
-      ...rest
-    }) => {
-      const modeClass = boxedBorder
-        ? `${blockClass}--boxed-set`
-        : `${blockClass}--shadow-set`;
+export let ExampleComponent = ({
+  // The component props, in alphabetical order (for consistency).
+  borderColor,
+  boxedBorder,
+  className,
+  disabled,
+  onPrimaryClick,
+  onSecondaryClick,
+  primaryButtonLabel,
+  primaryKind,
+  secondaryButtonLabel,
+  secondaryKind,
+  size,
+  // Collect any other property values.
+  ...rest
+}) => {
+  const modeClass = boxedBorder
+    ? `${blockClass}--boxed-set`
+    : `${blockClass}--shadow-set`;
 
-      const handlePrimaryClick = (e) => {
-        if (onPrimaryClick) {
-          onPrimaryClick(e);
+  const handlePrimaryClick = (e) => {
+    if (onPrimaryClick) {
+      onPrimaryClick(e);
+    }
+  };
+
+  const handleSecondaryClick = (e) => {
+    if (onSecondaryClick) {
+      onSecondaryClick(e);
+    }
+  };
+
+  return (
+    <ButtonSet
+      role="main"
+      className={cx(
+        // Apply the block class to the main HTML element, along with
+        // any other classes we need.
+        [blockClass, `${blockClass}--${size}`, modeClass],
+        {
+          // Apply any supplied class names to the main HTML element.
+          [className]: className, // this handles className omitted/falsy
         }
-      };
+      )}
+      style={{
+        /* stylelint-disable-next-line carbon/theme-token-use */
+        [`--${pkg.prefix}-border-color`]: borderColor,
+      }}
+      {
+        /* Pass through any other property values as HTML attributes. */
+        ...rest
+      }>
+      <Button
+        className={`${blockClass}__secondary-button`}
+        kind={secondaryKind}
+        onClick={handleSecondaryClick}
+        size={size}
+        disabled={disabled}>
+        {secondaryButtonLabel}
+      </Button>
+      <Button
+        className={`${blockClass}__primary-button`}
+        kind={primaryKind}
+        onClick={handlePrimaryClick}
+        size={size}
+        disabled={disabled}>
+        {primaryButtonLabel}
+      </Button>
+    </ButtonSet>
+  );
+};
 
-      const handleSecondaryClick = (e) => {
-        if (onSecondaryClick) {
-          onSecondaryClick(e);
-        }
-      };
-
-      return (
-        <ButtonSet
-          role="main"
-          className={cx(
-            // Apply the block class to the main HTML element, along with
-            // any other classes we need.
-            [blockClass, `${blockClass}--${size}`, modeClass],
-            {
-              // Apply any supplied class names to the main HTML element.
-              [className]: className, // this handles className omitted/falsy
-            }
-          )}
-          style={{
-            /* stylelint-disable-next-line carbon/theme-token-use */
-            [`--${pkg.prefix}-border-color`]: borderColor,
-          }}
-          {
-            /* Pass through any other property values as HTML attributes. */
-            ...rest
-          }>
-          <Button
-            className={`${blockClass}__secondary-button`}
-            kind={secondaryKind}
-            onClick={handleSecondaryClick}
-            size={size}
-            disabled={disabled}>
-            {secondaryButtonLabel}
-          </Button>
-          <Button
-            className={`${blockClass}__primary-button`}
-            kind={primaryKind}
-            onClick={handlePrimaryClick}
-            size={size}
-            disabled={disabled}>
-            {primaryButtonLabel}
-          </Button>
-        </ButtonSet>
-      );
-    };
+// Return placeholder if component not released and not enabled by feature flag
+ExampleComponent = pkg.checkComponentEnabled(ExampleComponent);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

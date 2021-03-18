@@ -10,7 +10,8 @@ import { string } from 'prop-types';
 import React from 'react';
 import { CodeSnippet } from 'carbon-components-react';
 
-import { pkg } from '../../settings';
+// load the package settings direct, because Canary is used by settings.js
+import pkg from '../../global/js/package-settings';
 
 const blockClass = `${pkg.prefix}-canary`;
 

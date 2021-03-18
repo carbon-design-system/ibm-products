@@ -2,57 +2,49 @@ import React from 'react';
 import cx from 'classnames';
 import { Button } from 'carbon-components-react';
 import PropTypes from 'prop-types';
-import { Canary } from '../_Canary';
 import { pkg } from '../../settings';
 const componentName = 'Saving';
 
-export const Saving = !pkg.isComponentEnabled(componentName)
-  ? // Return canary if not released or flag not set
-    () => <Canary component={componentName} />
-  : // Main component code...
-    ({
-      className,
-      defaultIcon,
-      defaultText,
-      failIcon,
-      failText,
-      inProgressIcon,
-      inProgressText,
-      onClick,
-      status,
-      successIcon,
-      successText,
-      type,
-    }) => {
-      const getStatusText = () => {
-        if (status === 'default') return defaultText;
-        else if (status === 'inprogress') return inProgressText;
-        else if (status === 'success') return successText;
-        return failText;
-      };
+export const Saving = ({
+  className,
+  defaultIcon,
+  defaultText,
+  failIcon,
+  failText,
+  inProgressIcon,
+  inProgressText,
+  onClick,
+  status,
+  successIcon,
+  successText,
+  type,
+}) => {
+  const getStatusText = () => {
+    if (status === 'default') return defaultText;
+    else if (status === 'inprogress') return inProgressText;
+    else if (status === 'success') return successText;
+    return failText;
+  };
 
-      const getStatusIcon = () => {
-        if (status === 'default') return defaultIcon;
-        else if (status === 'inprogress') return inProgressIcon;
-        else if (status === 'success') return successIcon;
-        return failIcon;
-      };
+  const getStatusIcon = () => {
+    if (status === 'default') return defaultIcon;
+    else if (status === 'inprogress') return inProgressIcon;
+    else if (status === 'success') return successIcon;
+    return failIcon;
+  };
 
-      return (
-        <div className={cx(`${pkg.prefix}-saving`, className)}>
-          {type === 'auto' ? (
-            <p>{getStatusText()}</p>
-          ) : (
-            <Button
-              onClick={onClick}
-              kind="primary"
-              renderIcon={getStatusIcon()}>
-              {getStatusText()}
-            </Button>
-          )}
-        </div>
-      );
-    };
+  return (
+    <div className={cx(`${pkg.prefix}-saving`, className)}>
+      {type === 'auto' ? (
+        <p>{getStatusText()}</p>
+      ) : (
+        <Button onClick={onClick} kind="primary" renderIcon={getStatusIcon()}>
+          {getStatusText()}
+        </Button>
+      )}
+    </div>
+  );
+};
 
 Saving.propTypes = {
   /**

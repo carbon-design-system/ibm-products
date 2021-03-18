@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2021, 2021
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React from 'react';
 import cx from 'classnames';
 import { Button } from 'carbon-components-react';
@@ -33,8 +40,12 @@ export const Saving = ({
     return failIcon;
   };
 
+  const classnames = cx(`${pkg.prefix}-saving`, {
+    [className]: className,
+  });
+
   return (
-    <div className={cx(`${pkg.prefix}-saving`, className)}>
+    <div className={classnames}>
       {type === 'auto' ? (
         <p>{getStatusText()}</p>
       ) : (
@@ -48,7 +59,7 @@ export const Saving = ({
 
 Saving.propTypes = {
   /**
-   * Optinal class
+   * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
   /**
@@ -98,15 +109,13 @@ Saving.propTypes = {
 };
 
 Saving.defaultProps = {
-  className: '',
   defaultIcon: null,
   defaultText: '',
   failIcon: null,
   failText: '',
   inProgressIcon: null,
   inProgressText: '',
-  onClick: () => {},
-  status: '',
+  status: 'default',
   successIcon: null,
   successText: '',
   type: '',

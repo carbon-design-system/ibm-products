@@ -1,9 +1,9 @@
-//
-// Copyright IBM Corp. 2020, 2020
-//
-// This source code is licensed under the Apache-2.0 license found in the
-// LICENSE file in the root directory of this source tree.
-//
+/**
+ * Copyright IBM Corp. 2021, 2021
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 import React, { useState, useEffect } from 'react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
@@ -92,7 +92,7 @@ const AutoTemplate = (opts) => {
         className="saving-story-textarea"
       />
       {dirtyInput && status !== 'default' && (
-        <Saving status={status} {...args} />
+        <Saving {...args} status={status} />
       )}
     </div>
   );
@@ -110,7 +110,7 @@ const ManualTemplate = (opts) => {
 
   return (
     <div className="saving-story-container">
-      <Saving onClick={onClickHandler} status={status} {...args} />
+      <Saving {...args} onClick={onClickHandler} status={status} />
     </div>
   );
 };

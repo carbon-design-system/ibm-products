@@ -15,11 +15,13 @@ describe('settings', () => {
     //   pkg.prefix: 'my-prefix',
     // }));
     pkg.prefix = 'my-prefix';
+    pkg._silenceWarnings = true;
     pkg.component.ExampleComponent = true;
 
     // dynamic import so we can modify the import on the component before using it
     const { ExampleComponent } = await import('../components/ExampleComponent');
     const wrapper = shallow(<ExampleComponent />);
-    expect(wrapper.find('.my-prefix-example-component')).toHaveLength(1);
+
+    expect(wrapper.find('.my-prefix--example-component')).toHaveLength(1);
   });
 });

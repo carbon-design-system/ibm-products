@@ -8,13 +8,15 @@
 import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import React from 'react';
 
+import uuidv4 from '../../global/js/utils/uuidv4';
+
 import { Canary } from '.';
 
-const { name } = Canary;
+const componentName = Canary.displayName;
 
-describe(name, () => {
-  const dummyContent = 'a component name';
+const replacedComponentName = `component-${uuidv4()}`;
 
+describe(componentName, () => {
   // test('has no accessibility violations', async () => {
   //   const { container } = render(<Canary component={dummyContent} />);
 
@@ -22,8 +24,8 @@ describe(name, () => {
   //   await expect(container).toHaveNoAxeViolations();
   // });
 
-  it(`adds content for the ${name}`, () => {
-    const wrapper = render(<Canary component={dummyContent} />);
-    expect(wrapper.getByText(dummyContent)).toBeInTheDocument();
+  it(`displays the replaced component name`, () => {
+    const container = render(<Canary componentName={replacedComponentName} />);
+    expect(container.getByText(replacedComponentName)).toBeInTheDocument();
   });
 });

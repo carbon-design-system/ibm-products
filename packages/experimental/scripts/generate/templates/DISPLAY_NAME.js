@@ -15,7 +15,6 @@ import { pkg /*, carbon */ } from '../../settings';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
-import { Canary } from '../_Canary';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--STYLE_NAME`;
@@ -26,38 +25,35 @@ const componentName = 'DISPLAY_NAME';
 /**
  * TODO: A description of the component.
  */
-// This opening logic means that components that have not yet gone through
-// their review process can be enabled by a feature flag mechanism.
-export const DISPLAY_NAME = !pkg.isComponentEnabled(componentName)
-  ? // Return canary if not released or flag not set.
-    () => <Canary component={componentName} />
-  : // Main component code...
-    ({
-      // The component props, in alphabetical order (for consistency).
-      children /* TODO: remove if not needed. */,
-      className,
-      /* TODO: add other props for DISPLAY_NAME */
-      ...rest
-    }) => {
-      return (
-        <div
-          className={cx(
-            // Apply the block class to the main HTML element, along with
-            // any other classes we need.
-            blockClass,
-            {
-              // Apply any supplied class names to the main HTML element.
-              [className]: className, // this handles className omitted/falsy
-            }
-          )}
-          {
-            /* Pass through any other property values as HTML attributes. */
-            ...rest
-          }>
-          {children}
-        </div>
-      );
-    };
+export let DISPLAY_NAME = ({
+  // The component props, in alphabetical order (for consistency).
+  children /* TODO: remove if not needed. */,
+  className,
+  /* TODO: add other props for DISPLAY_NAME */
+  ...rest
+}) => {
+  return (
+    <div
+      className={cx(
+        // Apply the block class to the main HTML element, along with
+        // any other classes we need.
+        blockClass,
+        {
+          // Apply any supplied class names to the main HTML element.
+          [className]: className, // this handles className omitted/falsy
+        }
+      )}
+      {
+        /* Pass through any other property values as HTML attributes. */
+        ...rest
+      }>
+      {children}
+    </div>
+  );
+};
+
+// Return a placeholder if not released and not enabled by feature flag
+DISPLAY_NAME = pkg.checkComponentEnabled(DISPLAY_NAME, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

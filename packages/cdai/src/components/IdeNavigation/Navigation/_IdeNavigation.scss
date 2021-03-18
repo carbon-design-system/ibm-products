@@ -16,6 +16,7 @@
 }
 
 .#{$ide-prefix}-navigation--nav-overrides {
+  // stylelint-disable-next-line declaration-property-value-blacklist
   height: unset; /* we will define the height */
   transition: all $duration--fast-01 cubic-bezier(0.2, 0, 1, 0.9);
 }
@@ -31,11 +32,13 @@
   background: $ui-01;
 
   // IMPORTANT - required so any fixed content renders in the correct place. Issue  raised to address. Short term, disable this as does nothing for us
+  // stylelint-disable-next-line declaration-property-value-blacklist
   transform: unset;
   transition: all $duration--fast-01 cubic-bezier(0.2, 0, 1, 0.9);
 }
 
 .#{$ide-prefix}-navigation--content__hide-nav {
+  // stylelint-disable-next-line declaration-no-important
   margin-left: 0 !important; /* required to enable smooth animation when left nav is not rendered */
 }
 
@@ -43,8 +46,10 @@
 .#{$ide-prefix}-navigation--toggle {
   .#{$prefix}--side-nav__toggle {
     .#{$prefix}--side-nav__icon {
+      // stylelint-disable-next-line declaration-property-value-blacklist
       justify-content: unset;
       width: carbon--mini-units(6);
+      // stylelint-disable-next-line declaration-property-value-blacklist
       margin-right: unset;
     }
   }
@@ -69,12 +74,16 @@
   .#{$prefix}--side-nav__submenu {
     background-color: $ui-05;
     &.active {
+      // stylelint-disable-next-line declaration-no-important
       color: $active-ui !important; /* simpler/safer than overriding the carbon selector */
+      // stylelint-disable-next-line declaration-no-important, carbon/theme-token-use
       background-color: $carbon--gray-90 !important; /* simpler/safer than overriding the carbon selector */
     }
 
     &:hover {
+      // stylelint-disable-next-line declaration-no-important
       color: $active-ui !important; /* simpler/safer than overriding the carbon selector */
+      // stylelint-disable-next-line declaration-no-important
       background-color: $inverse-02 !important; /* simpler/safer than overriding the carbon selector */
     }
   }
@@ -82,6 +91,7 @@
   a.#{$prefix}--side-nav__link > .#{$prefix}--side-nav__link-text,
   .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu-title,
   .#{$prefix}--side-nav__submenu {
+    // stylelint-disable-next-line declaration-no-important
     color: $active-ui !important; /* simpler/safer than overriding the carbon selector */
   }
 
@@ -89,9 +99,12 @@
   .#{$prefix}--side-nav__item--active
     .#{$prefix}--side-nav__submenu[aria-expanded='false'],
   a.#{$prefix}--side-nav__link--current {
+    // stylelint-disable-next-line declaration-no-important
     background-color: $ui-05 !important; /* simpler/safer than overriding the carbon selector */
     &:hover {
+      // stylelint-disable-next-line declaration-no-important
       color: $active-ui !important; /* simpler/safer than overriding the carbon selector */
+      // stylelint-disable-next-line declaration-no-important
       background-color: $inverse-02 !important; /* simpler/safer than overriding the carbon selector */
     }
   }

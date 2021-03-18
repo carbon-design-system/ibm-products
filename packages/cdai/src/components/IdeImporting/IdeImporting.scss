@@ -32,7 +32,7 @@
   }
 
   .#{$ide-prefix}--file-header-label {
-    margin-bottom: 0.5rem;
+    margin-bottom: $spacing-03;
     @include carbon--type-style('label-01');
 
     color: $text-02;

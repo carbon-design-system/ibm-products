@@ -10,6 +10,7 @@
 
 // Override just for storybook demo purposes
 .sb-show-main {
+  // stylelint-disable-next-line declaration-no-important
   background-color: $ui-01 !important;
 
   .ide-card a {

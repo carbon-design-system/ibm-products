@@ -19,7 +19,7 @@ import {
   Settings16,
 } from '@carbon/icons-react';
 import { timeAgo } from './utils';
-import { EmptyState } from '../EmptyStates/EmptyState';
+import { NotificationsEmptyState } from '../EmptyStates/NotificationsEmptyState';
 import useClickOutside from './useClickOutside';
 
 import { Canary } from '../_Canary';
@@ -58,6 +58,7 @@ export const Notifications = !pkg.isComponentEnabled(componentName)
       yearsAgoLabel,
       yearAgoLabel,
       nowLabel,
+      emptyStateLabel,
     }) => {
       const notificationPanelRef = useRef();
       const [shouldRender, setRender] = useState(open);
@@ -351,11 +352,10 @@ export const Notifications = !pkg.isComponentEnabled(componentName)
                 </>
               ) : null}
               {!allNotifications.length && (
-                <EmptyState
-                  illustration="notifications"
+                <NotificationsEmptyState
                   illustrationTheme="dark"
                   heading=""
-                  subtext="You do not have any notifications"
+                  subtext={emptyStateLabel}
                 />
               )}
             </div>
@@ -416,6 +416,10 @@ Notifications.propTypes = {
    * Label for Do not disturb toggle
    */
   doNotDisturbLabel: PropTypes.string,
+  /**
+   * Sets the empty state label text when there are no notifications
+   */
+  emptyStateLabel: PropTypes.string,
   /**
    * Sets the `hour ago` label text
    */
@@ -527,6 +531,7 @@ Notifications.defaultProps = {
   yearsAgoLabel: 'years ago',
   yearAgoLabel: 'year ago',
   nowLabel: 'Now',
+  emptyStateLabel: 'You do not have any notifications',
 };
 
 Notifications.displayName = componentName;

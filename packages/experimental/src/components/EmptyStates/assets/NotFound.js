@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import setIllustrationClass from './setIllustrationClass';
+import cx from 'classnames';
+import { pkg } from '../../../settings';
 
 const NotFound = ({ theme, size, ...rest }) => {
   return theme === 'dark' ? (
@@ -10,7 +11,10 @@ const NotFound = ({ theme, size, ...rest }) => {
       height={80}
       viewBox="0 0 80 80"
       {...rest}
-      className={setIllustrationClass(size)}>
+      className={cx([
+        `${pkg.prefix}-empty-state-illustration`,
+        `${pkg.prefix}-empty-state-illustration--${size}`,
+      ])}>
       <defs>
         <linearGradient
           id="prefix__a"
@@ -128,7 +132,10 @@ const NotFound = ({ theme, size, ...rest }) => {
       width={80}
       height={80}
       viewBox="0 0 80 80"
-      className={setIllustrationClass(size)}
+      className={cx([
+        `${pkg.prefix}-empty-state-illustration`,
+        `${pkg.prefix}-empty-state-illustration--${size}`,
+      ])}
       {...rest}>
       <defs>
         <linearGradient

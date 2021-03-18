@@ -17,7 +17,6 @@ import {
   Tab,
 } from 'carbon-components-react';
 
-import { Canary } from '../_Canary';
 import { pkg } from '../../settings';
 const componentName = 'AboutModal';
 

@@ -17,88 +17,91 @@ import {
   Tab,
 } from 'carbon-components-react';
 
+import { Canary } from '../_Canary';
 import { pkg } from '../../settings';
 const componentName = 'AboutModal';
 
-export let AboutModal = ({
-  additionalInfo,
-  className,
-  content,
-  copyrightText,
-  legalText,
-  links,
-  logo,
-  onClose,
-  open,
-  title,
-}) => {
-  return (
-    <ComposedModal
-      className={classNames(`${pkg.prefix}-about-modal`, {
-        [`${pkg.prefix}-about-modal-with-tabs`]:
-          additionalInfo && additionalInfo.length > 1,
-        [className]: className,
-      })}
-      onClose={onClose}
-      open={open}>
-      <div className={`${pkg.prefix}-about-modal-product-logo`}>{logo}</div>
-      <ModalHeader
-        title={title}
-        titleClassName={`${pkg.prefix}-about-modal-title`}
-      />
-      <ModalBody className={`${pkg.prefix}-about-modal-content`}>
-        <div className={`${pkg.prefix}-about-modal-body-content`}>
-          {content}
-          <div className={`${pkg.prefix}-about-modal-links-container`}>
-            {links &&
-              links.length > 0 &&
-              links.map((link, i) => (
-                <React.Fragment key={i}>{link}</React.Fragment>
+export const AboutModal = !pkg.isComponentEnabled(componentName)
+  ? // Return canary if not released or flag not set
+    // istanbul ignore next
+    () => <Canary component={componentName} />
+  : // Main component code...
+    ({
+      additionalInfo,
+      className,
+      content,
+      copyrightText,
+      legalText,
+      links,
+      logo,
+      onClose,
+      open,
+      title,
+    }) => {
+      return (
+        <ComposedModal
+          className={classNames(`${pkg.prefix}-about-modal`, {
+            [`${pkg.prefix}-about-modal-with-tabs`]:
+              additionalInfo && additionalInfo.length > 1,
+            [className]: className,
+          })}
+          onClose={onClose}
+          open={open}>
+          <div className={`${pkg.prefix}-about-modal-product-logo`}>{logo}</div>
+          <ModalHeader
+            title={title}
+            titleClassName={`${pkg.prefix}-about-modal-title`}
+          />
+          <ModalBody className={`${pkg.prefix}-about-modal-content`}>
+            <div className={`${pkg.prefix}-about-modal-body-content`}>
+              {content}
+              <div className={`${pkg.prefix}-about-modal-links-container`}>
+                {links &&
+                  links.length > 0 &&
+                  links.map((link, i) => (
+                    <React.Fragment key={i}>{link}</React.Fragment>
+                  ))}
+              </div>
+              {legalText && (
+                <p className={`${pkg.prefix}-about-modal-legal-text`}>
+                  {legalText}
+                </p>
+              )}
+              {copyrightText && (
+                <p className={`${pkg.prefix}-about-modal-copyright-text`}>
+                  {copyrightText}
+                </p>
+              )}
+            </div>
+          </ModalBody>
+          <ModalFooter>
+            {additionalInfo &&
+              additionalInfo.length > 0 &&
+              (additionalInfo.length === 1 ? (
+                <>
+                  <p className={`${pkg.prefix}-about-modal-version-label`}>
+                    {additionalInfo[0].label}
+                  </p>
+                  <p className={`${pkg.prefix}-about-modal-version-number`}>
+                    {additionalInfo[0].content}
+                  </p>
+                </>
+              ) : (
+                <Tabs className={`${pkg.prefix}-about-modal-tab-container`}>
+                  {additionalInfo.map((tab, i) => (
+                    <Tab
+                      id={'about-modal-tab-' + tab.label}
+                      label={tab.label}
+                      key={i}>
+                      {tab.content}
+                    </Tab>
+                  ))}
+                </Tabs>
               ))}
-          </div>
-          {legalText && (
-            <p className={`${pkg.prefix}-about-modal-legal-text`}>
-              {legalText}
-            </p>
-          )}
-          {copyrightText && (
-            <p className={`${pkg.prefix}-about-modal-copyright-text`}>
-              {copyrightText}
-            </p>
-          )}
-        </div>
-      </ModalBody>
-      <ModalFooter>
-        {additionalInfo &&
-          additionalInfo.length > 0 &&
-          (additionalInfo.length === 1 ? (
-            <>
-              <p className={`${pkg.prefix}-about-modal-version-label`}>
-                {additionalInfo[0].label}
-              </p>
-              <p className={`${pkg.prefix}-about-modal-version-number`}>
-                {additionalInfo[0].content}
-              </p>
-            </>
-          ) : (
-            <Tabs className={`${pkg.prefix}-about-modal-tab-container`}>
-              {additionalInfo.map((tab, i) => (
-                <Tab
-                  id={'about-modal-tab-' + tab.label}
-                  label={tab.label}
-                  key={i}>
-                  {tab.content}
-                </Tab>
-              ))}
-            </Tabs>
-          ))}
-      </ModalFooter>
-    </ComposedModal>
-  );
-};
-
-// Return a placeholder if not released and not enabled by feature flag
-AboutModal = pkg.checkComponentEnabled(AboutModal, componentName);
+          </ModalFooter>
+        </ComposedModal>
+      );
+    };
 
 AboutModal.propTypes = {
   /**

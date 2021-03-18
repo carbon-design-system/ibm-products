@@ -6,130 +6,122 @@ import {
   OverflowMenuItem,
 } from 'carbon-components-react';
 import PropTypes from 'prop-types';
-import { Canary } from '../_Canary';
 import { pkg } from '../../settings';
 const componentName = 'Card';
 
-export const Card = !pkg.isComponentEnabled(componentName)
-  ? // Return canary if not released or flag not set
-    () => <Canary component={componentName} />
-  : // Main component code...
-    ({
-      actionIcons,
-      actionIconsPosition,
-      caption,
-      children,
-      className,
-      label,
-      media,
-      mediaPosition,
-      onClick,
-      onPrimaryButtonClick,
-      overflowActions,
-      onSecondaryButtonClick,
-      pictogram: Pictogram,
-      primaryButtonKind,
-      primaryButtonText,
-      productive,
-      secondaryButtonKind,
-      secondaryButtonText,
-      title,
-      titleSize,
-    }) => {
-      const cardClasses = cx(`${pkg.prefix}-card`, {
-        [`${pkg.prefix}-card--productive`]: productive,
-        [`${pkg.prefix}-card--clickable`]: onClick,
-        [`${pkg.prefix}-card--media-left`]: mediaPosition === 'left',
-        className,
-      });
+export let Card = ({
+  actionIcons,
+  actionIconsPosition,
+  caption,
+  children,
+  className,
+  label,
+  media,
+  mediaPosition,
+  onClick,
+  onPrimaryButtonClick,
+  overflowActions,
+  onSecondaryButtonClick,
+  pictogram: Pictogram,
+  primaryButtonKind,
+  primaryButtonText,
+  productive,
+  secondaryButtonKind,
+  secondaryButtonText,
+  title,
+  titleSize,
+}) => {
+  const cardClasses = cx(`${pkg.prefix}-card`, {
+    [`${pkg.prefix}-card--productive`]: productive,
+    [`${pkg.prefix}-card--clickable`]: onClick,
+    [`${pkg.prefix}-card--media-left`]: mediaPosition === 'left',
+    className,
+  });
 
-      const headerClasses = cx(`${pkg.prefix}-card-header`, {
-        [`${pkg.prefix}-card-header--label-only`]: label && !title && !caption,
-      });
+  const headerClasses = cx(`${pkg.prefix}-card-header`, {
+    [`${pkg.prefix}-card-header--label-only`]: label && !title && !caption,
+  });
 
-      const titleClasses = cx(`${pkg.prefix}-card-title`, {
-        [`${pkg.prefix}-card-title--lg`]: titleSize === 'large',
-      });
+  const titleClasses = cx(`${pkg.prefix}-card-title`, {
+    [`${pkg.prefix}-card-title--lg`]: titleSize === 'large',
+  });
 
-      const hasActions = actionIcons.length > 0 || overflowActions.length > 0;
+  const hasActions = actionIcons.length > 0 || overflowActions.length > 0;
 
-      const getActions = () => {
-        if (overflowActions.length !== 0) {
-          const pos = actionIconsPosition === 'top' ? 'bottom' : 'top';
-          const size = actionIconsPosition === 'top' ? 'sm' : 'lg';
-          return (
-            <OverflowMenu size={size} direction={pos}>
-              {overflowActions.map(({ id, ...rest }) => (
-                <OverflowMenuItem key={id} {...rest} />
-              ))}
-            </OverflowMenu>
-          );
-        }
-
-        if (actionIcons.length === 0) return;
-
-        const icons = actionIcons.map(({ id, icon }) => (
-          <div key={id} className={`${pkg.prefix}-card-icon`}>
-            {icon}
-          </div>
-        ));
-
-        return icons;
-      };
-
-      const CardContent = (
-        <div className={cardClasses}>
-          {media && <div className={`${pkg.prefix}-card-media`}>{media}</div>}
-          {Pictogram && (
-            <div className={`${pkg.prefix}-card-pictogram`}>
-              <Pictogram />
-            </div>
-          )}
-          <div className={`${pkg.prefix}-card-content-container`}>
-            <div className={headerClasses}>
-              {label && <p className={`${pkg.prefix}-card-label`}>{label}</p>}
-              <div className={`${pkg.prefix}-card-title-container`}>
-                {title && <p className={titleClasses}>{title}</p>}
-                {hasActions && actionIconsPosition === 'top' && (
-                  <div className={`${pkg.prefix}-card-actions`}>
-                    {getActions()}
-                  </div>
-                )}
-              </div>
-              {caption && (
-                <p className={`${pkg.prefix}-card-caption`}>{caption}</p>
-              )}
-            </div>
-            <div className={`${pkg.prefix}-card-body`}>{children}</div>
-            <div className={`${pkg.prefix}-card-footer`}>
-              {secondaryButtonText && (
-                <Button
-                  kind={secondaryButtonKind}
-                  onClick={onSecondaryButtonClick}
-                  size="field">
-                  {secondaryButtonText}
-                </Button>
-              )}
-              {primaryButtonText && (
-                <Button
-                  kind={productive ? 'ghost' : primaryButtonKind}
-                  onClick={onPrimaryButtonClick}
-                  size="field">
-                  {primaryButtonText}
-                </Button>
-              )}
-              {hasActions && actionIconsPosition === 'bottom' && (
-                <div className={`${pkg.prefix}-card-actions`}>
-                  {getActions()}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
+  const getActions = () => {
+    if (overflowActions.length !== 0) {
+      const pos = actionIconsPosition === 'top' ? 'bottom' : 'top';
+      const size = actionIconsPosition === 'top' ? 'sm' : 'lg';
+      return (
+        <OverflowMenu size={size} direction={pos}>
+          {overflowActions.map(({ id, ...rest }) => (
+            <OverflowMenuItem key={id} {...rest} />
+          ))}
+        </OverflowMenu>
       );
+    }
 
-      return CardContent;
-    };
+    if (actionIcons.length === 0) return;
+
+    const icons = actionIcons.map(({ id, icon }) => (
+      <div key={id} className={`${pkg.prefix}-card-icon`}>
+        {icon}
+      </div>
+    ));
+
+    return icons;
+  };
+
+  const CardContent = (
+    <div className={cardClasses}>
+      {media && <div className={`${pkg.prefix}-card-media`}>{media}</div>}
+      {Pictogram && (
+        <div className={`${pkg.prefix}-card-pictogram`}>
+          <Pictogram />
+        </div>
+      )}
+      <div className={`${pkg.prefix}-card-content-container`}>
+        <div className={headerClasses}>
+          {label && <p className={`${pkg.prefix}-card-label`}>{label}</p>}
+          <div className={`${pkg.prefix}-card-title-container`}>
+            {title && <p className={titleClasses}>{title}</p>}
+            {hasActions && actionIconsPosition === 'top' && (
+              <div className={`${pkg.prefix}-card-actions`}>{getActions()}</div>
+            )}
+          </div>
+          {caption && <p className={`${pkg.prefix}-card-caption`}>{caption}</p>}
+        </div>
+        <div className={`${pkg.prefix}-card-body`}>{children}</div>
+        <div className={`${pkg.prefix}-card-footer`}>
+          {secondaryButtonText && (
+            <Button
+              kind={secondaryButtonKind}
+              onClick={onSecondaryButtonClick}
+              size="field">
+              {secondaryButtonText}
+            </Button>
+          )}
+          {primaryButtonText && (
+            <Button
+              kind={productive ? 'ghost' : primaryButtonKind}
+              onClick={onPrimaryButtonClick}
+              size="field">
+              {primaryButtonText}
+            </Button>
+          )}
+          {hasActions && actionIconsPosition === 'bottom' && (
+            <div className={`${pkg.prefix}-card-actions`}>{getActions()}</div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+
+  return CardContent;
+};
+
+// Return a placeholder if not released and not enabled by feature flag
+Card = pkg.checkComponentEnabled(Card, componentName);
 
 Card.propTypes = {
   /**

@@ -97,7 +97,7 @@ export let ExampleComponent = ({
   );
 };
 
-// Return placeholder if component not released and not enabled by feature flag
+// Return a placeholder if not released and not enabled by feature flag
 ExampleComponent = pkg.checkComponentEnabled(ExampleComponent, componentName);
 
 // The display name of the component, used by React. Note that displayName

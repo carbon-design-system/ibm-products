@@ -49,7 +49,9 @@ unclear.
     import { pkg } from '../../settings';
     ```
   - Imports of any Carbon-React components or components from elsewhere in this
-    package that the component is dependent on.
+    package that the component is dependent on. For each public component that
+    will include `import { Canary } from '../_Canary';`, to enable the feature
+    flag mechanism described below.
   - The following standard definitions, which will be used elsewhere in the
     code:
     ```js
@@ -85,10 +87,10 @@ unclear.
     prop:
     ```js
     <html-element class={cx(
-      blockClass,
+      blockClass, {
       // other classes we might need to attach
       [className]: className  // this handles className omitted/falsy
-    )} ...
+    })} ...
     ```
   - All significant DOM objects in the returned component markup should have
     classes set on them to enable users to attach styling. The `blockClass`

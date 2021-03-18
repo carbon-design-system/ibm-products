@@ -16,85 +16,77 @@ import { TearsheetShell } from './TearsheetShell';
 
 const blockClass = `${pkg.prefix}-tearsheet`;
 
-import { Canary } from '../_Canary';
 import { pkg } from '../../settings';
 const componentName = 'Tearsheet';
 
-export const Tearsheet = !pkg.isComponentEnabled(componentName)
-  ? // Return canary if not released or flag not set
-    () => <Canary component={componentName} />
-  : // Main component code...
-    ({
-      buttons,
-      children,
-      className,
-      closeIconDescription,
-      description,
-      hasCloseIcon,
-      height,
-      influencer,
-      influencerPosition,
-      influencerWidth,
-      label,
-      navigation,
-      onClose,
-      open,
-      preventCloseOnClickOutside,
-      title,
-    }) => {
-      const closeClasses = cx({
-        [`${blockClass}--header--no-close-icon`]: !hasCloseIcon,
-      });
+export let Tearsheet = ({
+  buttons,
+  children,
+  className,
+  closeIconDescription,
+  description,
+  hasCloseIcon,
+  height,
+  influencer,
+  influencerPosition,
+  influencerWidth,
+  label,
+  navigation,
+  onClose,
+  open,
+  preventCloseOnClickOutside,
+  title,
+}) => {
+  const closeClasses = cx({
+    [`${blockClass}--header--no-close-icon`]: !hasCloseIcon,
+  });
 
-      const influencerClasses = cx({
-        [`${blockClass}--influencer`]: true,
-        [`${blockClass}--influencer--right`]: influencerPosition === 'right',
-        [`${blockClass}--influencer--wide`]: influencerWidth === 'wide',
-      });
+  const influencerClasses = cx({
+    [`${blockClass}--influencer`]: true,
+    [`${blockClass}--influencer--right`]: influencerPosition === 'right',
+    [`${blockClass}--influencer--wide`]: influencerWidth === 'wide',
+  });
 
-      return (
-        <TearsheetShell
-          className={className}
-          height={height}
-          onClose={onClose}
-          open={open}
-          preventCloseOnClickOutside={preventCloseOnClickOutside}
-          size="wide">
-          {(label || title || description || navigation) && (
-            <ModalHeader
-              className={`${blockClass}--header`}
-              closeClassName={closeClasses}
-              iconDescription={closeIconDescription}
-              label={label}
-              title={title}>
-              {description && (
-                <div className={`${blockClass}--header-description`}>
-                  {description}
-                </div>
-              )}
-              {navigation && (
-                <div className={`${blockClass}--header-navigation`}>
-                  {navigation}
-                </div>
-              )}
-            </ModalHeader>
-          )}
-          <ModalBody className={`${blockClass}--body`}>
-            {influencer && (
-              <div className={influencerClasses}>{influencer}</div>
-            )}
-            <div className={`${blockClass}--right`}>
-              {children && (
-                <div className={`${blockClass}--main`}>{children}</div>
-              )}
-              {buttons && (
-                <div className={`${blockClass}--buttons`}>{buttons}</div>
-              )}
+  return (
+    <TearsheetShell
+      className={className}
+      height={height}
+      onClose={onClose}
+      open={open}
+      preventCloseOnClickOutside={preventCloseOnClickOutside}
+      size="wide">
+      {(label || title || description || navigation) && (
+        <ModalHeader
+          className={`${blockClass}--header`}
+          closeClassName={closeClasses}
+          iconDescription={closeIconDescription}
+          label={label}
+          title={title}>
+          {description && (
+            <div className={`${blockClass}--header-description`}>
+              {description}
             </div>
-          </ModalBody>
-        </TearsheetShell>
-      );
-    };
+          )}
+          {navigation && (
+            <div className={`${blockClass}--header-navigation`}>
+              {navigation}
+            </div>
+          )}
+        </ModalHeader>
+      )}
+      <ModalBody className={`${blockClass}--body`}>
+        {influencer && <div className={influencerClasses}>{influencer}</div>}
+        <div className={`${blockClass}--right`}>
+          {children && <div className={`${blockClass}--main`}>{children}</div>}
+          {buttons && <div className={`${blockClass}--buttons`}>{buttons}</div>}
+        </div>
+      </ModalBody>
+    </TearsheetShell>
+  );
+};
+
+// Return a placeholder if not released and not enabled by feature flag
+Tearsheet = pkg.checkComponentEnabled(Tearsheet, componentName);
 
 Tearsheet.propTypes = {
   /**

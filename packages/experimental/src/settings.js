@@ -29,5 +29,3 @@ export const pkg = {
         ),
   ...pkgSettings,
 };
-
-export default { carbon, pkg };

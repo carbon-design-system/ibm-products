@@ -11,13 +11,13 @@ import React from 'react';
 import { pkg } from '../../settings';
 import '../../enable-all'; // must come before component is imported (directly or indirectly)
 
-const blockClass = `${pkg.prefix}-example-component`;
+const blockClass = `${pkg.prefix}--example-component`;
 
 import { ExampleComponent } from '.';
 const name = ExampleComponent.displayName;
 
 describe(name, () => {
-  test('Renders an experimental-component if flag is enabled', () => {
+  test('Renders an example component', () => {
     const { container } = render(<ExampleComponent />);
 
     expect(container.querySelector(`.${blockClass}`)).not.toBeNull();

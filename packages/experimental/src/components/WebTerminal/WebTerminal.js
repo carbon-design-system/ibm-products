@@ -6,6 +6,7 @@ import cx from 'classnames';
 import { Canary } from '../_Canary';
 import { pkg } from '../../settings';
 const componentName = 'WebTerminal';
+const blockClass = `${pkg.prefix}-web-terminal`;
 
 export const WebTerminal = !pkg.isComponentEnabled(componentName)
   ? // Return canary if not released or flag not set
@@ -41,12 +42,12 @@ export const WebTerminal = !pkg.isComponentEnabled(componentName)
         shouldRender && (
           <div
             className={cx([
-              `${pkg.prefix}-web-terminal`,
+              blockClass,
               {
-                [`${pkg.prefix}-web-terminal--open`]: open,
-                [`${pkg.prefix}-web-terminal--closed`]: !open,
+                [`${blockClass}--open`]: open,
+                [`${blockClass}--closed`]: !open,
+                [className]: className,
               },
-              className,
             ])}
             style={{
               animation: `${
@@ -54,15 +55,14 @@ export const WebTerminal = !pkg.isComponentEnabled(componentName)
               }`,
             }}
             onAnimationEnd={onAnimationEnd}>
-            <header className={`${pkg.prefix}-web-terminal__bar`}>
-              <div className={`${pkg.prefix}-web-terminal__actions`}>
+            <header className={`${blockClass}__bar`}>
+              <div className={`${blockClass}__actions`}>
                 {showDocumentationLinks && (
                   <button
                     type="button"
-                    className={`${pkg.prefix}-web-terminal__bar-icon-container`}>
-                    <Help className={`${pkg.prefix}-web-terminal__bar-icon`} />
-                    <ul
-                      className={`${pkg.prefix}-web-terminal__bar-icon-dropdown`}>
+                    className={`${blockClass}__bar-icon-container`}>
+                    <Help className={`${blockClass}__bar-icon`} />
+                    <ul className={`${blockClass}__bar-icon-dropdown`}>
                       {documentationLinks.map(
                         ({
                           label,
@@ -72,9 +72,9 @@ export const WebTerminal = !pkg.isComponentEnabled(componentName)
                         }) => (
                           <li
                             key={label}
-                            className={`${pkg.prefix}-web-terminal__bar-icon-dropdown-item`}>
+                            className={`${blockClass}__bar-icon-dropdown-item`}>
                             <a
-                              className={`${pkg.prefix}-web-terminal__bar-icon-dropdown-link`}
+                              className={`${blockClass}__bar-icon-dropdown-link`}
                               onClick={(event) =>
                                 onDocumentationLinkClick(event, onClick)
                               }
@@ -92,15 +92,18 @@ export const WebTerminal = !pkg.isComponentEnabled(componentName)
               </div>
               <button
                 type="button"
-                className={`${pkg.prefix}-web-terminal__bar-icon-container`}
+                className={cx([
+                  `${blockClass}__bar-icon-container`,
+                  `${blockClass}__close-button`,
+                ])}
                 onClick={closeTerminal}
                 onKeyDown={closeTerminal}>
                 <Close
-                  className={`${pkg.prefix}-web-terminal__bar-icon ${pkg.prefix}-web-terminal__bar-icon--close`}
+                  className={`${blockClass}__bar-icon ${blockClass}__bar-icon--close`}
                 />
               </button>
             </header>
-            <div className={`${pkg.prefix}-web-terminal__body`}>{children}</div>
+            <div className={`${blockClass}__body`}>{children}</div>
           </div>
         )
       );
@@ -143,7 +146,5 @@ WebTerminal.propTypes = {
    */
   open: PropTypes.bool.isRequired,
 };
-
-export default WebTerminal;
 
 WebTerminal.displayName = componentName;

@@ -75,9 +75,10 @@
 
     .#{$ide-prefix}-create-buttons {
       margin: auto;
-      :not(:only-child()) {
-        margin-left: 0;
-      }
+    }
+
+    .#{$ide-prefix}-create-buttons :not(:only-child()) {
+      margin-left: 0;
     }
   }
 }

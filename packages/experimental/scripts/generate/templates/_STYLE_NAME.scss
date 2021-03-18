@@ -6,21 +6,22 @@
 //
 
 @import '@carbon/import-once/scss/import-once';
-
+@import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
-// TODO: @import(s) of all Carbon component styles used by DISPLAY_NAME
+// TODO: @import(s) of Carbon settings and component styles and other
+// related component styles used by DISPLAY_NAME
 
-// TODO: @import(s) of other related component styles used DISPLAY_NAME style files
-
-@include exports($name: STYLE_NAME) {
-  /// @type String
-  /// @access private
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin STYLE_NAME {
   $block-class: #{$pkg-prefix}--STYLE_NAME;
-
-  // TODO: Add styles for DISPLAY_NAME
 
   .#{$block-class} {
     // TODO: Styles.
   }
+}
+
+@include exports('STYLE_NAME') {
+  @include STYLE_NAME;
 }

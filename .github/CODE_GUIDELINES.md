@@ -49,9 +49,7 @@ unclear.
     import { pkg } from '../../settings';
     ```
   - Imports of any Carbon-React components or components from elsewhere in this
-    package that the component is dependent on. For each public component that
-    will include `import { Canary } from '../_Canary';`, to enable the feature
-    flag mechanism described below.
+    package that the component is dependent on.
   - The following standard definitions, which will be used elsewhere in the
     code:
     ```js
@@ -123,6 +121,7 @@ unclear.
 ## Component SCSS code
 
 - Each source file should include the following:
+
   - Standard copyright header of the form:
     ```scss
     //
@@ -137,8 +136,28 @@ unclear.
   - Standard imports:
     ```scss
     @import '@carbon/import-once/scss/import-once';
+    @import '../../global/styles/carbon-settings';
     @import '../../global/styles/project-settings';
     ```
+  - Imports of styles for any Carbon components or settings or components from
+    elsewhere in this package that the component is dependent on.
+  - The following mixin, which should then contain all the style definitions.
+    This is in order to enable the Carbon import-once mechanism.
+
+    ```scss
+    // Define all component styles in a mixin which is then exported using
+    // the Carbon import-once mechanism.
+    @mixin component-name {
+      $block-class: #{$pkg-prefix}--component-name;
+
+      // styles here
+    }
+
+    @include exports('component-name') {
+      @include component-name;
+    }
+    ```
+
 - Do not use nesting of SCSS.
 - Style directives should use Carbon tokens (theme, layout, motion) are used
   unless the design specifies otherwise.\

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2020
+// Copyright IBM Corp. 2020, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -10,19 +10,27 @@
 
 @import 'carbon-components/scss/components/button/button';
 
-$block-class: #{$pkg-prefix}-example-component;
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin example-component {
+  $block-class: #{$pkg-prefix}--example-component;
 
-.#{$block-class} {
-  display: flex;
-  justify-content: flex-end;
-  --#{$pkg-prefix}-border-color: transparent;
+  .#{$block-class} {
+    display: flex;
+    justify-content: flex-end;
+    --#{$pkg-prefix}-border-color: transparent;
+  }
+
+  .#{$block-class}--boxed-set {
+    border: 10px solid var(--#{$pkg-prefix}-border-color);
+  }
+
+  .#{$block-class}--shadow-set {
+    margin: $spacing-04;
+    box-shadow: 0 0 10px var(--#{$pkg-prefix}-border-color);
+  }
 }
 
-.#{$block-class}--boxed-set {
-  border: 10px solid var(--#{$pkg-prefix}-border-color);
-}
-
-.#{$block-class}--shadow-set {
-  margin: $spacing-04;
-  box-shadow: 0 0 10px var(--#{$pkg-prefix}-border-color);
+@include exports('example-component') {
+  @include example-component;
 }

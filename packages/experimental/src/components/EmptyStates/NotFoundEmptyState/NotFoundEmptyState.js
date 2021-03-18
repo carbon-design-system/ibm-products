@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Canary } from '../../_Canary';
 import { pkg } from '../../../settings';
 import { EmptyStateContent } from '../EmptyStateContent';
 import NotFoundIllustration from '../assets/NotFound';
@@ -8,41 +7,40 @@ import { EmptyStateDefaultProps } from '../EmptyState';
 
 const componentName = 'NotFoundEmptyState';
 
-export const NotFoundEmptyState = !pkg.isComponentEnabled(componentName)
-  ? // Return canary if not released or flag not set
-    () => <Canary component={componentName} />
-  : // Main component code...
-    ({
-      actionText,
-      actionType,
-      actionIcon,
-      heading,
-      illustrationSize,
-      illustrationTheme,
-      linkText,
-      linkUrl,
-      subtext,
-      onActionEvent,
-    }) => {
-      return (
-        <div className={`${pkg.prefix}-empty-state`}>
-          <NotFoundIllustration
-            theme={illustrationTheme}
-            size={illustrationSize}
-          />
-          <EmptyStateContent
-            actionText={actionText}
-            actionType={actionType}
-            actionIcon={actionIcon}
-            heading={heading}
-            linkText={linkText}
-            linkUrl={linkUrl}
-            subtext={subtext}
-            onActionEvent={onActionEvent}
-          />
-        </div>
-      );
-    };
+export let NotFoundEmptyState = ({
+  actionText,
+  actionType,
+  actionIcon,
+  heading,
+  illustrationSize,
+  illustrationTheme,
+  linkText,
+  linkUrl,
+  subtext,
+  onActionEvent,
+}) => {
+  return (
+    <div className={`${pkg.prefix}-empty-state`}>
+      <NotFoundIllustration theme={illustrationTheme} size={illustrationSize} />
+      <EmptyStateContent
+        actionText={actionText}
+        actionType={actionType}
+        actionIcon={actionIcon}
+        heading={heading}
+        linkText={linkText}
+        linkUrl={linkUrl}
+        subtext={subtext}
+        onActionEvent={onActionEvent}
+      />
+    </div>
+  );
+};
+
+// Return a placeholder if not released and not enabled by feature flag
+NotFoundEmptyState = pkg.checkComponentEnabled(
+  NotFoundEmptyState,
+  componentName
+);
 
 NotFoundEmptyState.propTypes = {
   /**

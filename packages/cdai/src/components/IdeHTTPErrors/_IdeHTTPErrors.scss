@@ -66,6 +66,7 @@ $max: 1584px;
 }
 .#{$ide-prefix}-http-errors-image {
   width: carbon--mini-units(175);
+  // stylelint-disable-next-line carbon/layout-token-use
   transform: translate(-35%, 6rem);
   @media (min-width: $max) {
     position: fixed;

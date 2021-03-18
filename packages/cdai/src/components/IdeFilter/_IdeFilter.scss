@@ -78,6 +78,7 @@
 }
 
 .#{$ide-prefix}-filter .#{$ide-prefix}-filter--clear > svg {
+  // stylelint-disable-next-line carbon/layout-token-use
   margin: 19px;
 }
 
@@ -88,6 +89,7 @@
 
 .#{$ide-prefix}-filter .#{$ide-prefix}-filter--category {
   margin-right: $spacing-02;
+  // stylelint-disable-next-line carbon/type-token-use
   font-weight: bold;
 }
 

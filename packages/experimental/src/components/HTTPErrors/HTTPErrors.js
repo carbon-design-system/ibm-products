@@ -9,44 +9,46 @@ import React from 'react';
 import cx from 'classnames';
 import { arrayOf, shape, string } from 'prop-types';
 import { Link } from 'carbon-components-react';
-import { Canary } from '../_Canary';
 import { pkg /*, carbon */ } from '../../settings';
 
 const blockClass = `${pkg.prefix}--http-errors`;
 const componentName = 'HTTPErrors';
 
-export const HTTPErrors = !pkg.isComponentEnabled(componentName)
-  ? // Return canary if not released or flag not set
-    () => <Canary component={componentName} />
-  : // Main component code...
-    ({ className, description, errorCodeLabel, title, links }) => {
-      return (
-        <div
-          className={cx(blockClass, `${blockClass}-content`, {
-            [className]: className,
-          })}>
-          {errorCodeLabel && (
-            <p className={cx(`${blockClass}-error-code-label`)}>
-              {errorCodeLabel}
-            </p>
-          )}
-          {title && <h1 className={cx(`${blockClass}-title`)}>{title}</h1>}
-          {description && (
-            <p className={cx(`${blockClass}-description`)}>{description}</p>
-          )}
-          {links && links.length
-            ? links.map((link) => (
-                <Link
-                  url={link.url}
-                  key={link.text}
-                  className={cx(`${blockClass}-link`)}>
-                  {link.text}
-                </Link>
-              ))
-            : null}
-        </div>
-      );
-    };
+export let HTTPErrors = ({
+  className,
+  description,
+  errorCodeLabel,
+  title,
+  links,
+}) => {
+  return (
+    <div
+      className={cx(blockClass, `${blockClass}-content`, {
+        [className]: className,
+      })}>
+      {errorCodeLabel && (
+        <p className={cx(`${blockClass}-error-code-label`)}>{errorCodeLabel}</p>
+      )}
+      {title && <h1 className={cx(`${blockClass}-title`)}>{title}</h1>}
+      {description && (
+        <p className={cx(`${blockClass}-description`)}>{description}</p>
+      )}
+      {links && links.length
+        ? links.map((link) => (
+            <Link
+              url={link.url}
+              key={link.text}
+              className={cx(`${blockClass}-link`)}>
+              {link.text}
+            </Link>
+          ))
+        : null}
+    </div>
+  );
+};
+
+// Return a placeholder if not released and not enabled by feature flag
+HTTPErrors = pkg.checkComponentEnabled(HTTPErrors, componentName);
 
 HTTPErrors.displayName = componentName; // displayName is used in preference to function.name by React
 

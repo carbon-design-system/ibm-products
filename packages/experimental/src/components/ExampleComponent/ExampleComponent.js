@@ -80,7 +80,8 @@ export let ExampleComponent = React.forwardRef(
         ref={ref}
         role="main"
         style={{
-          // Apply any supplied styles to the main HTML element.
+          // Apply any supplied styles to the main HTML element. Note that if
+          // the prop is not supplied this contributes nothing to the object.
           ...style,
           /* stylelint-disable-next-line carbon/theme-token-use */
           [`--${pkg.prefix}-border-color`]: borderColor,

@@ -49,4 +49,36 @@ if (name) {
       } bytes)`
     );
   });
+
+  // Update src/global/js/package-settings.js
+  const settingsPath = join('src', 'global', 'js', 'package-settings.js');
+  const settingsData = readFileSync(settingsPath, 'utf-8');
+
+  // locate place to add new components
+  const newComponentsHereRegex = /(\s+)\/\* new component flags here /;
+  const here = settingsData.match(newComponentsHereRegex);
+
+  // add new component
+  const newSettingsData = `${settingsData.substr(0, here.index)}${here[1]}${
+    substitutions.DISPLAY_NAME
+  }: false,${settingsData.substr(here.index)}`;
+  outputFileSync(settingsPath, newSettingsData);
+
+  // add new component export to end of src/components/index.js
+  const componentIndexPath = join('src', 'components', 'index.js');
+  const componentIndexData = readFileSync(componentIndexPath, 'utf-8');
+  outputFileSync(
+    componentIndexPath,
+    componentIndexData +
+      `export { ${substitutions.DISPLAY_NAME} } from './${substitutions.DISPLAY_NAME}';\n`
+  );
+
+  // add new component to end of src/components/_index.scss
+  const componentSCSSIndexPath = join('src', 'components', '_index.scss');
+  const componentSCSSIndexData = readFileSync(componentSCSSIndexPath, 'utf-8');
+  outputFileSync(
+    componentSCSSIndexPath,
+    componentSCSSIndexData +
+      `@import './${substitutions.DISPLAY_NAME}/index';\n`
+  );
 }

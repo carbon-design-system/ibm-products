@@ -100,22 +100,25 @@ const formatOptionLabel = (option, context, allOptions) => {
   );
 };
 
+const parseTypeProps = (propsData) =>
+  !propsData.type || propsData.type === 'filter'
+    ? { filter: true }
+    : { type: propsData.type };
+
 // custom components
 const MultiValueContainer = (props) => (
-  <Tag
-    type={props.data.type || 'filter'}
-    className={`${idePrefix}-filter--tag`}>
+  <Tag {...parseTypeProps(props.data)} className={`${idePrefix}-filter--tag`}>
     {props.children}
   </Tag>
 );
 const MultiValueRemove = (props) => {
-  const type = props.data.type || 'filter';
+  const typeProps = parseTypeProps(props.data);
   return (
     <button
       type="button"
       {...props.innerProps}
       className={`${idePrefix}-filter--close${
-        type === 'filter'
+        typeProps.filter
           ? ` ${idePrefix}-filter--tag-filter`
           : /* istanbul ignore next */ ''
       }`}>
@@ -249,11 +252,11 @@ MultiValueRemove.propTypes = {
   data: PropTypes.shape({
     type: PropTypes.string,
   }),
-  innerProps: PropTypes.node,
+  innerProps: PropTypes.object,
 };
 
 ClearIndicator.propTypes = {
-  innerProps: PropTypes.node,
+  innerProps: PropTypes.object,
 };
 
 export default IdeFilter;

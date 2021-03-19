@@ -19,9 +19,6 @@ const name = 'export checks';
 describe(name, () => {
   for (const key in components) {
     if (key.charAt(0) === key.charAt(0).toUpperCase()) {
-      // TODO: remove this test and check all components
-      if (key !== 'ExampleComponent') continue;
-
       const TestComponent = components[key];
 
       test(`Renders a canary, for "${key}", if no package flags set`, () => {

@@ -22,12 +22,9 @@ describe(name, () => {
       const TestComponent = components[key];
 
       if (!pkg.isComponentEnabled(key)) {
-        // We only check unreleased components render a canary
+        // We check that unreleased components render a Canary.
         // Non-canary components are tested elsewhere.
         it(`renders a canary by default for "${key}"`, () => {
-          // TODO: remove this test and check all components
-          if (key !== 'ExampleComponent') return;
-
           const { container } = render(<TestComponent />);
           expect(container.querySelector(`.${canaryClass}`)).not.toBeNull();
         });

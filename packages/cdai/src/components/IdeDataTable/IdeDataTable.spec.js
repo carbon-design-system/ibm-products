@@ -22,6 +22,11 @@ const baseComponent = (props = {}) =>
 const prefix = (value) => `test-prefix-${value}`;
 
 describe('<IdeDataTable>', () => {
+  beforeAll(() => {
+    // ignore the required complaints coming out of DataTable
+    global.console = { warn: jest.fn(), error: jest.fn(), log: jest.fn() };
+  });
+
   let componentUnderTest;
 
   afterEach(() => {

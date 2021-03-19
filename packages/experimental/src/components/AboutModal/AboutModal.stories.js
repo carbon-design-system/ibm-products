@@ -12,7 +12,7 @@ import { Button, Link } from 'carbon-components-react';
 import { pkg } from '../../settings';
 import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
-import { AboutModal } from './AboutModal';
+import { AboutModal } from '.';
 import mdx from './AboutModal.mdx';
 const storybookPrefix = getStorybookPrefix(pkg, AboutModal.displayName);
 
@@ -21,7 +21,7 @@ import ansibleLogo from './_story-assets/ansible-logo.png';
 import grafanaLogo from './_story-assets/grafana-logo.png';
 import jsLogo from './_story-assets/js-logo.png';
 
-import styles from './_index.scss';
+import styles from './_storybook-styles.scss';
 
 export default {
   title: `${storybookPrefix}/${AboutModal.displayName}`,
@@ -44,7 +44,6 @@ const logo = (
 
 const Template = ({ storyInitiallyOpen = true, story, ...other }) => {
   const [open, setOpen] = useState(storyInitiallyOpen);
-  console.dir(this);
   return (
     <>
       <Button onClick={() => setOpen(true)}>Open {story?.storyName}</Button>
@@ -64,7 +63,7 @@ const Template = ({ storyInitiallyOpen = true, story, ...other }) => {
             This is example content for an {story?.storyName || 'About Modal'}.
           </>
         }
-        versionNumber="0.0.1"
+        additionalInfo={[{ label: 'Version number', content: '1.3.41' }]}
         {...other}
       />
     </>
@@ -101,22 +100,33 @@ withLinksAndLegalAndCopyrightText.args = {
   copyrightText: <>Copyright &copy; 2020 IBM corporation</>,
 };
 
-export const withTechnologyUsedTab = Template.bind({});
-withTechnologyUsedTab.storyName = 'About Modal with technologies used';
-withTechnologyUsedTab.args = {
-  story: withTechnologyUsedTab,
-  technologiesUsed: [
+export const withAdditionalInfo = Template.bind({});
+withAdditionalInfo.storyName = 'About Modal with additional info';
+withAdditionalInfo.args = {
+  story: withAdditionalInfo,
+  additionalInfo: [
+    { label: 'Version number', content: '1.3.41' },
     {
-      src: grafanaLogo,
-      alt: 'Logo for grafana',
-    },
-    {
-      src: ansibleLogo,
-      alt: 'Logo for ansible',
-    },
-    {
-      src: jsLogo,
-      alt: 'Logo for javascript',
+      label: 'Technologies used',
+      content: (
+        <>
+          <img
+            src={grafanaLogo}
+            alt="Grafana"
+            className="about-modal-stories--tech-logo"
+          />
+          <img
+            src={ansibleLogo}
+            alt="Ansible"
+            className="about-modal-stories--tech-logo"
+          />
+          <img
+            src={jsLogo}
+            alt="JavaScript"
+            className="about-modal-stories--tech-logo"
+          />
+        </>
+      ),
     },
   ],
 };
@@ -125,7 +135,7 @@ export const withAllPropsSet = Template.bind({});
 withAllPropsSet.storyName = 'About Modal with all props set';
 withAllPropsSet.args = {
   ...withLinksAndLegalAndCopyrightText.args,
-  ...withTechnologyUsedTab.args,
+  ...withAdditionalInfo.args,
   story: withAllPropsSet,
   storyInitiallyOpen: false,
 };

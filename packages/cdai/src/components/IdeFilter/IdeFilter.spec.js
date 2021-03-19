@@ -36,9 +36,7 @@ describe('IdeFilter', () => {
         ]}
       />
     );
-    expect(wrapper.find('.ide-filter--tag').at(0).props().type).toEqual(
-      'filter'
-    );
+    expect(wrapper.find('.ide-filter--tag').at(0).props().filter).toEqual(true);
   });
   it('Renders options in menu', () => {
     const wrapper = mount(
@@ -119,13 +117,20 @@ describe('IdeFilter', () => {
   it('isLoading passed to component', () => {
     const isLoading = true;
     const wrapper = mount(
-      <IdeFilter options={options} menuIsOpen isLoading={isLoading} />
+      <IdeFilter
+        options={options}
+        menuIsOpen
+        isLoading={isLoading}
+        onChange={() => {}}
+      />
     );
     const select = wrapper.find('.ide-filter--select').at(0);
     expect(select.props().isLoading).toEqual(true);
   });
   it('isLoading false by default', () => {
-    const wrapper = mount(<IdeFilter options={options} menuIsOpen />);
+    const wrapper = mount(
+      <IdeFilter options={options} menuIsOpen onChange={() => {}} />
+    );
     const select = wrapper.find('.ide-filter--select').at(0);
     expect(select.props().isLoading).toEqual(false);
   });
@@ -133,6 +138,7 @@ describe('IdeFilter', () => {
     const allowCreateWhileLoading = false;
     const wrapper = mount(
       <IdeFilter
+        onChange={() => {}}
         options={options}
         menuIsOpen
         allowCreateWhileLoading={allowCreateWhileLoading}
@@ -142,21 +148,33 @@ describe('IdeFilter', () => {
     expect(select.props().allowCreateWhileLoading).toEqual(false);
   });
   it('allowCreateWhileLoading true by default', () => {
-    const wrapper = mount(<IdeFilter options={options} menuIsOpen />);
+    const wrapper = mount(
+      <IdeFilter onChange={() => {}} options={options} menuIsOpen />
+    );
     const select = wrapper.find('.ide-filter--select').at(0);
     expect(select.props().allowCreateWhileLoading).toEqual(true);
   });
   it('loadingMessage passed to component', () => {
     const loadingMessage = jest.fn();
     const wrapper = mount(
-      <IdeFilter options={options} menuIsOpen loadingMessage={loadingMessage} />
+      <IdeFilter
+        onChange={() => {}}
+        options={options}
+        menuIsOpen
+        loadingMessage={loadingMessage}
+      />
     );
     const select = wrapper.find('.ide-filter--select').at(0);
     expect(select.props().loadingMessage).toBe(loadingMessage);
   });
   it('searchForText passed to component', () => {
     const wrapper = mount(
-      <IdeFilter options={options} menuIsOpen searchForText={'custom text'} />
+      <IdeFilter
+        onChange={() => {}}
+        options={options}
+        menuIsOpen
+        searchForText={'custom text'}
+      />
     );
     const select = wrapper.find('.ide-filter--select').at(0);
     expect(select.props().formatCreateLabel()).toContain('custom text');

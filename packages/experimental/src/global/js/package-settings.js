@@ -26,6 +26,10 @@ const defaults = {
     UnauthorizedEmptyState: false,
     ExampleComponent: false,
     ExportModal: false,
+    HTTPErrors: false,
+    HTTPError403: false,
+    HTTPError404: false,
+    HTTPErrorOther: false,
     ImportModal: false,
     ModifiedTabs: false,
     Notifications: false,
@@ -47,17 +51,66 @@ const defaults = {
   },
 };
 
-const setAll = (flags, enabled) => {
-  for (const key in flags) {
-    flags[key] = enabled;
-  }
-};
+const component = { ...defaults.component };
+const feature = { ...defaults.feature };
+const warningMessageComponent = (property) =>
+  `IBM Cloud Cognitive (WARNING): Component "${property}" enabled via feature flags. This component has not yet completed its review process.`;
+const warningMessageFeature = (property) =>
+  `IBM Cloud Cognitive (WARNING): Feature "${property}" enabled via feature flags.`;
+const warningMessageAllComponents =
+  'IBM Cloud Cognitive (WARNING): All components enabled through use of setAllComponents. This includes components that have not yet completed their review process.';
+const warningMessageAllFeatures =
+  'IBM Cloud Cognitive (WARNING): All features enabled through use of setAllFeatures';
+
+let allComponents = false;
+let allFeatures = false;
+let silent = false;
 
 const settings = {
   // flags
   prefix: defaults.prefix,
-  component: { ...defaults.component },
-  feature: { ...defaults.feature },
+  component: new Proxy(component, {
+    set(target, property, value) {
+      if (value && !silent) {
+        console.warn(warningMessageComponent(property));
+      }
+      target[property] = value;
+      return true; // value set
+    },
+    get(target, property) {
+      if (allComponents) {
+        return true;
+      }
+
+      const propValue = target[property];
+      if (typeof propValue !== 'undefined') {
+        return propValue;
+      } else {
+        return false; // unknown component
+      }
+    },
+  }),
+  feature: new Proxy(feature, {
+    set(target, property, value) {
+      if (value && !silent) {
+        console.warn(warningMessageFeature(property));
+      }
+      target[property] = value;
+      return true; // value set
+    },
+    get(target, property) {
+      if (allFeatures) {
+        return true;
+      }
+
+      const propValue = target[property];
+      if (typeof propValue !== 'undefined') {
+        return propValue;
+      } else {
+        return false; // unknown feature
+      }
+    },
+  }),
   // methods
   isComponentEnabled: (component, byDefault = false) => {
     const componentName = component?.name || component;
@@ -69,11 +122,32 @@ const settings = {
     return flags.feature[feature];
   },
   setAllComponents: (enabled) => {
-    setAll(settings.component, enabled);
+    if (enabled && !silent) {
+      console.warn(warningMessageAllComponents);
+    }
+    allComponents = enabled;
   },
   setAllFeatures: (enabled) => {
-    setAll(settings.feature, enabled);
+    if (enabled && !silent) {
+      console.warn(warningMessageAllFeatures);
+    }
+    allFeatures = enabled;
   },
 };
 
-export default settings;
+const settingsProxy = new Proxy(settings, {
+  set(target, property, value) {
+    switch (property) {
+      case '_silenceWarnings':
+        // change secret field
+        silent = value;
+        return true; // value set
+
+      default:
+        target[property] = value;
+        return true; // value set
+    }
+  },
+});
+
+export default settingsProxy;

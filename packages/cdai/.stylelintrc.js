@@ -4,7 +4,7 @@ module.exports = {
   plugins: ['stylelint-plugin-carbon-tokens'],
   rules: {
     // set failing rules (not fixed by --fix) to warning
-    'max-nesting-depth': [0, { severity: 'warning' }],
+    'max-nesting-depth': [2, { severity: 'warning' }],
     'declaration-no-important': [
       true,
       {
@@ -17,7 +17,13 @@ module.exports = {
       { severity: 'warning' },
     ],
     // ADDED TO TEST CARBON USE
-    'carbon/layout-token-use': [true, { severity: 'warning' }],
+    'carbon/layout-token-use': [
+      true,
+      {
+        severity: 'warning',
+        acceptCarbonMiniUnitsFunction: true,
+      },
+    ],
     'carbon/motion-token-use': [true, { severity: 'warning' }],
     'carbon/theme-token-use': [true, { severity: 'warning' }],
     'carbon/type-token-use': [

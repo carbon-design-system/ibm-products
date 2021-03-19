@@ -10,16 +10,17 @@ import { string } from 'prop-types';
 import React from 'react';
 import { CodeSnippet } from 'carbon-components-react';
 
-import { pkg } from '../../settings';
+// load the package settings direct, because Canary is used by settings.js
+import pkg from '../../global/js/package-settings';
 
 const blockClass = `${pkg.prefix}-canary`;
 
 /**
  *  Canary component used when the component requested is not yet production
  */
-export const Canary = ({ component, className, ...rest }) => {
-  const componentName = component?.name || component;
-
+export const Canary = (
+  { componentName, className, ...rest } /*, originalArgs*/
+) => {
   const instructions = `
 import { pkg } from '@carbon/ibm-cloud-cognitive-experimental';
 // NOTE: must happen before component import
@@ -36,9 +37,7 @@ pkg.component.${componentName} = true;
       </p>
       <br />
       <p>e.g. in main.js</p>
-      <CodeSnippet type="multi" light={true}>
-        {instructions}
-      </CodeSnippet>
+      <CodeSnippet type="multi">{instructions}</CodeSnippet>
       <br />
       <p>
         View a live example on{' '}
@@ -56,7 +55,7 @@ Canary.propTypes = {
   className: string,
 
   /** Name of the component that is not ready yet */
-  component: string.isRequired,
+  componentName: string.isRequired,
 };
 
 Canary.defaultProps = {

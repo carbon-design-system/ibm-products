@@ -462,15 +462,10 @@ class IdeImportingWrapper {
     // see https://airbnb.io/enzyme/docs/api/ReactWrapper/update.html
     this.wrapper.update();
   }
-  printDebug() {
-    // eslint-disable-next-line no-console
-    console.error(this.wrapper.debug());
-  }
   strictFind(selector) {
     const found = this.wrapper.find(selector);
     if (found.length === 0) {
       let name = typeof selector === 'string' ? selector : selector.name;
-      this.printDebug();
       throw new Error(`${name} not found when using strictFind()`);
     }
     return found;

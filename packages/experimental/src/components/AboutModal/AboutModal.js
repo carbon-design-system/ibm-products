@@ -90,8 +90,7 @@ export let AboutModal = React.forwardRef(
           )}
         </div>
       </ModalBody>
-      <ModalFooter>
-        className={`${blockClass}__footer`}
+      <ModalFooter className={`${blockClass}__footer`}>
         {additionalInfo &&
           additionalInfo.length > 0 &&
           (additionalInfo.length === 1 ? (

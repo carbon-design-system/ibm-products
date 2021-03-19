@@ -32,9 +32,9 @@ export default {
   component: AboutModal,
   parameters: {
     styles,
-  },
-  docs: {
-    page: mdx,
+    docs: {
+      page: mdx,
+    },
   },
 };
 

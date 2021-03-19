@@ -25,32 +25,39 @@ const componentName = 'DISPLAY_NAME';
 /**
  * TODO: A description of the component.
  */
-export let DISPLAY_NAME = ({
-  // The component props, in alphabetical order (for consistency).
-  children /* TODO: remove if not needed. */,
-  className,
-  /* TODO: add other props for DISPLAY_NAME */
-  ...rest
-}) => {
-  return (
-    <div
-      className={cx(
-        // Apply the block class to the main HTML element, along with
-        // any other classes we need.
-        blockClass,
+export let DISPLAY_NAME = React.forwardRef(
+  (
+    {
+      // The component props, in alphabetical order (for consistency).
+      children /* TODO: remove if not needed. */,
+      className,
+      /* TODO: add other props for DISPLAY_NAME */
+      // Collect any other property values passed in.
+      ...rest
+    },
+    ref
+  ) => {
+    return (
+      <div
         {
-          // Apply any supplied class names to the main HTML element.
-          [className]: className, // this handles className omitted/falsy
+          // Pass through any other property values as HTML attributes.
+          ...rest
         }
-      )}
-      {
-        /* Pass through any other property values as HTML attributes. */
-        ...rest
-      }>
-      {children}
-    </div>
-  );
-};
+        className={cx(
+          // Apply the block class to the main HTML element, along with
+          // any other classes we need.
+          blockClass,
+          {
+            // Apply any supplied class names to the main HTML element.
+            [className]: className, // this handles className omitted/falsy
+          }
+        )}
+        ref={ref}>
+        {children}
+      </div>
+    );
+  }
+);
 
 // Return a placeholder if not released and not enabled by feature flag
 DISPLAY_NAME = pkg.checkComponentEnabled(DISPLAY_NAME, componentName);

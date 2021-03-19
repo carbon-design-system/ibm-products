@@ -72,4 +72,13 @@ if (name) {
     componentIndexData +
       `export { ${substitutions.DISPLAY_NAME} } from './${substitutions.DISPLAY_NAME}';\n`
   );
+
+  // add new component to end of src/components/_index.scss
+  const componentSCSSIndexPath = join('src', 'components', '_index.scss');
+  const componentSCSSIndexData = readFileSync(componentSCSSIndexPath, 'utf-8');
+  outputFileSync(
+    componentSCSSIndexPath,
+    componentSCSSIndexData +
+      `@import './${substitutions.DISPLAY_NAME}/index';\n`
+  );
 }

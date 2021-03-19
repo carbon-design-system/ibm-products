@@ -7,6 +7,7 @@
 
 const defaults = {
   prefix: 'exp',
+
   // by default only released components are set to true
   component: {
     AboutModal: false,
@@ -51,8 +52,6 @@ const defaults = {
   },
 };
 
-const component = { ...defaults.component };
-const feature = { ...defaults.feature };
 const warningMessageComponent = (property) =>
   `IBM Cloud Cognitive (WARNING): Component "${property}" enabled via feature flags. This component has not yet completed its review process.`;
 const warningMessageFeature = (property) =>
@@ -66,88 +65,66 @@ let allComponents = false;
 let allFeatures = false;
 let silent = false;
 
-const settings = {
-  // flags
+const component = new Proxy(
+  { ...defaults.component },
+  {
+    set(target, property, value) {
+      value && !silent && console.warn(warningMessageComponent(property));
+      target[property] = value;
+      return true; // value set
+    },
+    get(target, property) {
+      return allComponents || (target[property] ?? false);
+    },
+  }
+);
+
+const feature = new Proxy(
+  { ...defaults.feature },
+  {
+    set(target, property, value) {
+      value && !silent && console.warn(warningMessageFeature(property));
+      target[property] = value;
+      return true; // value set
+    },
+
+    get(target, property) {
+      return allFeatures || (target[property] ?? false);
+    },
+  }
+);
+
+export default {
   prefix: defaults.prefix,
-  component: new Proxy(component, {
-    set(target, property, value) {
-      if (value && !silent) {
-        console.warn(warningMessageComponent(property));
-      }
-      target[property] = value;
-      return true; // value set
-    },
-    get(target, property) {
-      if (allComponents) {
-        return true;
-      }
+  component: component,
+  feature: feature,
 
-      const propValue = target[property];
-      if (typeof propValue !== 'undefined') {
-        return propValue;
-      } else {
-        return false; // unknown component
-      }
-    },
-  }),
-  feature: new Proxy(feature, {
-    set(target, property, value) {
-      if (value && !silent) {
-        console.warn(warningMessageFeature(property));
-      }
-      target[property] = value;
-      return true; // value set
-    },
-    get(target, property) {
-      if (allFeatures) {
-        return true;
-      }
+  isComponentEnabled: (componentOrName, byDefault = false) => {
+    const componentName =
+      componentOrName?.displayName || componentOrName?.name || componentOrName;
+    return byDefault
+      ? defaults.component[componentName]
+      : component[componentName];
+  },
 
-      const propValue = target[property];
-      if (typeof propValue !== 'undefined') {
-        return propValue;
-      } else {
-        return false; // unknown feature
-      }
-    },
-  }),
-  // methods
-  isComponentEnabled: (component, byDefault = false) => {
-    const componentName = component?.name || component;
-    const flags = byDefault ? defaults : settings;
-    return flags.component[componentName];
+  isFeatureEnabled: (featureName, byDefault = false) => {
+    return byDefault ? defaults.feature[featureName] : feature[featureName];
   },
-  isFeatureEnabled: (feature, byDefault = false) => {
-    const flags = byDefault ? defaults : settings;
-    return flags.feature[feature];
-  },
+
   setAllComponents: (enabled) => {
-    if (enabled && !silent) {
-      console.warn(warningMessageAllComponents);
-    }
+    enabled && !silent && console.warn(warningMessageAllComponents);
     allComponents = enabled;
   },
+
   setAllFeatures: (enabled) => {
-    if (enabled && !silent) {
-      console.warn(warningMessageAllFeatures);
-    }
+    enabled && !silent && console.warn(warningMessageAllFeatures);
     allFeatures = enabled;
   },
-};
 
-const settingsProxy = new Proxy(settings, {
-  set(target, property, value) {
-    switch (property) {
-      case '_silenceWarnings':
-        // change secret field
-        silent = value;
-        return true; // value set
-
-      default:
-        target[property] = value;
-        return true; // value set
-    }
+  _silenceWarnings: (value) => {
+    // This will suppress console warnings when components or feature flags
+    // are enabled, and should only be used when this is not an issue, such
+    // as in internal test suites and storybook builds.
+    silent = value;
   },
-});
-
-export default settingsProxy;
+};

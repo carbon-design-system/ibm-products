@@ -43,6 +43,8 @@
 
   .#{$block-class} .#{$block-class}__title {
     @include carbon--type-style('productive-heading-04');
+
+    color: $text-01;
   }
 
   .#{$block-class} .#{$block-class}__body {

@@ -69,8 +69,8 @@ export let AboutModal = React.forwardRef(
       <div className={`${blockClass}__logo`}>{logo}</div>
       <ModalHeader
         className={`${blockClass}__header`}
-        title={title}
-        titleClassName={`${blockClass}__title`}
+        label={title}
+        labelClassName={`${blockClass}__title`}
       />
       <ModalBody className={`${blockClass}__body`}>
         <div className={`${blockClass}__body-content`}>

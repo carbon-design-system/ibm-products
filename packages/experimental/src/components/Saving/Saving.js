@@ -118,7 +118,7 @@ Saving.defaultProps = {
   status: 'default',
   successIcon: null,
   successText: '',
-  type: '',
+  type: 'manual',
 };
 
 Saving.displayName = componentName;

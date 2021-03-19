@@ -5,22 +5,56 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import { Link } from 'carbon-components-react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
+import { pkg, carbon } from '../../settings';
 import '../../enable-all'; // must come before component is imported (directly or indirectly)
 
+import uuidv4 from '../../global/js/utils/uuidv4';
+
+import { Link } from 'carbon-components-react';
 import { AboutModal } from '.';
+
 import ExampleLogo from './_story-assets/example-logo.svg';
 import ansibleLogo from './_story-assets/ansible-logo.png';
 import grafanaLogo from './_story-assets/grafana-logo.png';
 import jsLogo from './_story-assets/js-logo.png';
 
-const onCloseReturnsTrue = jest.fn(() => true);
-const onCloseReturnsFalse = jest.fn(() => false);
+const blockClass = `${pkg.prefix}--about-modal`;
+const componentName = AboutModal.displayName;
 
-const content = 'This is example content';
+const { click } = fireEvent;
+
+const additionalInfo = [
+  { label: 'Version number', content: '1.3.41' },
+  {
+    label: 'Technologies used',
+    content: (
+      <>
+        <img
+          src={grafanaLogo}
+          alt="Grafana"
+          className="about-modal-stories--tech-logo"
+        />
+        <img
+          src={ansibleLogo}
+          alt="Ansible"
+          className="about-modal-stories--tech-logo"
+        />
+        <img
+          src={jsLogo}
+          alt="JavaScript"
+          className="about-modal-stories--tech-logo"
+        />
+      </>
+    ),
+  },
+];
+const className = `class-${uuidv4()}`;
+const content = `This is example content: ${uuidv4()}`;
+const copyrightText = `Copyright test text ${uuidv4()}`;
+const dataTestId = uuidv4();
 const logo = (
   <img
     src={ExampleLogo}
@@ -28,184 +62,139 @@ const logo = (
     style={{ maxWidth: '6rem' }}
   />
 );
+const legalText = `Legal test text ${uuidv4()}`;
+const links = [
+  <Link href="https://www.carbondesignsystem.com" key="link1">
+    Carbon Design System
+  </Link>,
+  <Link href="https://www.ibm.com/design/language" key="link2">
+    IBM Design Language
+  </Link>,
+];
+const onCloseReturnsTrue = jest.fn(() => true);
+const onCloseReturnsFalse = jest.fn(() => false);
+const titleText = `Watson ${uuidv4()} Ops`;
 const title = (
   <>
-    IBM <span style={{ fontWeight: '600' }}>Watson AI Ops</span>
+    IBM <span>{titleText}</span>
   </>
 );
+const versionNumber = `1.3.${uuidv4()}`;
 
-describe('AboutModal', () => {
-  test('renders title and content', () => {
-    render(<AboutModal open logo={logo} content={content} title={title} />);
+describe(componentName, () => {
+  it('renders a component AboutModal', () => {
+    const { container } = render(
+      <AboutModal open {...{ content, logo, title }} />
+    );
+    expect(container.querySelector(`.${blockClass}`)).not.toBeNull();
+  });
+
+  /*it('has no accessibility violations', async () => {
+    const { container } = render(
+      <AboutModal open {...{ content, logo, title }} />
+    );
+    await expect(container).toBeAccessible(componentName);
+    await expect(container).toHaveNoAxeViolations();
+  });*/
+
+  it('renders title and content', () => {
+    render(<AboutModal open {...{ content, logo, title }} />);
     expect(
-      screen.getByText(/Watson AI Ops/i) && screen.getByText(content)
+      screen.getByText(titleText) && screen.getByText(content)
     ).toBeTruthy();
   });
 
-  test('renders product logo', () => {
+  it('renders product logo', () => {
     const { container } = render(
-      <AboutModal open logo={logo} content={content} title={title} />
+      <AboutModal open {...{ content, logo, title }} />
     );
     const renderedProductLogo = container.querySelector('img');
     expect(renderedProductLogo).toBeTruthy();
   });
 
-  test('renders with links', () => {
+  it('renders with links', () => {
     const { getByText, container } = render(
-      <AboutModal
-        content={content}
-        open
-        logo={logo}
-        title={title}
-        links={[
-          <Link href="https://www.carbondesignsystem.com" key="link1">
-            Carbon Design System
-          </Link>,
-          <Link href="https://www.ibm.com/design/language" key="link2">
-            IBM Design Language
-          </Link>,
-        ]}
-      />
+      <AboutModal open {...{ content, links, logo, title }} />
     );
 
-    const { click } = fireEvent;
     const link = container.querySelector('a').href;
     click(getByText('Carbon Design System'));
     expect(link.length && link).toEqual('https://www.carbondesignsystem.com/');
   });
 
-  test('renders legal text', () => {
-    render(
-      <AboutModal
-        open
-        logo={logo}
-        content={content}
-        title={
-          <>
-            IBM <span style={{ fontWeight: '600' }}>Watson AI Ops</span>
-          </>
-        }
-        legalText="Legal test text"
-      />
-    );
-    expect(screen.getByText(/Legal test text/i)).toBeTruthy();
+  it('renders legal text', () => {
+    render(<AboutModal open {...{ content, legalText, logo, title }} />);
+    expect(screen.getByText(legalText)).toBeTruthy();
   });
 
-  test('renders copyright text', () => {
-    render(
-      <AboutModal
-        open
-        logo={logo}
-        content={content}
-        title={title}
-        copyrightText="Copyright test text"
-      />
-    );
-    expect(screen.getByText(/Copyright test text/i)).toBeTruthy();
+  it('renders copyright text', () => {
+    render(<AboutModal open {...{ content, copyrightText, logo, title }} />);
+    expect(screen.getByText(copyrightText)).toBeTruthy();
   });
 
-  test('renders a clickable carbon tab for additional info', () => {
+  it('renders a clickable carbon tab for additional info', () => {
     render(
       <AboutModal
-        content={content}
         open
-        logo={logo}
-        title={title}
-        legalText="This Web site contains proprietary notices and copyright information, the terms of which must be observed and followed. Please see the tab entitled “Copyright and trademark information” for related information."
-        copyrightText="Copyright IBM corporation 2020"
-        additionalInfo={[
-          { label: 'Version number', content: '1.3.41' },
-          {
-            label: 'Technologies used',
-            content: (
-              <>
-                <img
-                  src={grafanaLogo}
-                  alt="Grafana"
-                  className="about-modal-stories--tech-logo"
-                />
-                <img
-                  src={ansibleLogo}
-                  alt="Ansible"
-                  className="about-modal-stories--tech-logo"
-                />
-                <img
-                  src={jsLogo}
-                  alt="JavaScript"
-                  className="about-modal-stories--tech-logo"
-                />
-              </>
-            ),
-          },
-        ]}
+        {...{ additionalInfo, content, copyrightText, legalText, logo, title }}
       />
     );
-    const { click } = fireEvent;
     const tabToSelect = screen.getByRole('tab', { name: /Version number/i });
     click(tabToSelect);
     expect(
       tabToSelect.parentElement.classList.contains(
-        'bx--tabs__nav-item--selected'
+        `${carbon.prefix}--tabs__nav-item--selected`
       )
     ).toBeTruthy();
   });
 
-  test('renders a version number', () => {
+  it('renders a version number', () => {
     const { getByText } = render(
       <AboutModal
         open
-        logo={logo}
-        content={content}
-        title={title}
-        additionalInfo={[{ label: 'Version number', content: '1.3.41' }]}
+        {...{ content, logo, title }}
+        additionalInfo={[{ label: 'Version number', content: versionNumber }]}
       />
     );
-    expect(getByText(/1.3.41/i)).toBeTruthy();
+    expect(getByText(versionNumber)).toBeTruthy();
   });
 
-  test('is visible when open is true', () => {
+  it('is visible when open is true', () => {
     const { container } = render(
       <AboutModal open logo={logo} content={content} title={title} />
     );
-    const aboutModal = container.querySelector('.bx--modal');
+    const aboutModal = container.querySelector(`.${carbon.prefix}--modal`);
     expect(aboutModal.classList.contains('is-visible')).toBeTruthy();
   });
 
-  test('is not visible when open is not true', () => {
+  it('is not visible when open is not true', () => {
     const { container } = render(
-      <AboutModal open={false} logo={logo} content={content} title={title} />
+      <AboutModal open={false} {...{ content, logo, title }} />
     );
-    const aboutModal = container.querySelector('.bx--modal');
+    const aboutModal = container.querySelector(`.${carbon.prefix}--modal`);
     expect(aboutModal.classList.contains('is-visible')).toBeFalsy();
   });
 
-  test('applies className to the root node', () => {
+  it('applies className to the root node', () => {
     const { container } = render(
-      <AboutModal
-        open
-        logo={logo}
-        content={content}
-        title={title}
-        className="test-class"
-      />
+      <AboutModal open {...{ className, content, logo, title }} />
     );
-    const aboutModal = container.querySelector('.bx--modal');
-    expect(aboutModal.classList.contains('test-class')).toBeTruthy();
+    const aboutModal = container.querySelector(`.${carbon.prefix}--modal`);
+    expect(aboutModal.classList.contains(className)).toBeTruthy();
   });
 
-  test('calls onClose() when modal is closed', () => {
+  it('calls onClose() when modal is closed', () => {
     const { container } = render(
       <AboutModal
         open
-        logo={logo}
-        content={content}
-        title={title}
+        {...{ content, logo, title }}
         onClose={onCloseReturnsTrue}
       />
     );
-    const { click } = fireEvent;
-    const aboutModal = container.querySelector('.bx--modal');
-    const closeButton = aboutModal.querySelector('.bx--modal-close');
+    const aboutModal = container.querySelector(`.${carbon.prefix}--modal`);
+    const closeButton = aboutModal.querySelector(
+      `.${carbon.prefix}--modal-close`
+    );
 
     expect(aboutModal.classList.contains('is-visible')).toBeTruthy();
     expect(onCloseReturnsTrue).toHaveBeenCalledTimes(0);
@@ -214,24 +203,40 @@ describe('AboutModal', () => {
     expect(onCloseReturnsTrue).toHaveBeenCalledTimes(1);
   });
 
-  test('calls onClose() when modal is closed and allows veto of close', () => {
+  it('calls onClose() when modal is closed and allows veto of close', () => {
     const { container } = render(
       <AboutModal
         open
-        logo={logo}
-        content={content}
-        title={title}
+        {...{ content, logo, title }}
         onClose={onCloseReturnsFalse}
       />
     );
-    const { click } = fireEvent;
-    const aboutModal = container.querySelector('.bx--modal');
-    const closeButton = aboutModal.querySelector('.bx--modal-close');
+    const aboutModal = container.querySelector(`.${carbon.prefix}--modal`);
+    const closeButton = aboutModal.querySelector(
+      `.${carbon.prefix}--modal-close`
+    );
 
     expect(aboutModal.classList.contains('is-visible')).toBeTruthy();
     expect(onCloseReturnsFalse).toHaveBeenCalledTimes(0);
     click(closeButton);
     expect(aboutModal.classList.contains('is-visible')).toBeTruthy();
     expect(onCloseReturnsFalse).toHaveBeenCalledTimes(1);
+  });
+
+  it('adds additional properties to the containing node', () => {
+    const { container } = render(
+      <AboutModal open {...{ content, logo, title }} data-testid={dataTestId} />
+    );
+    expect(
+      container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
+    ).toBeInTheDocument();
+  });
+
+  it('forwards a ref to an appropriate node', () => {
+    const ref = React.createRef();
+    render(<AboutModal open {...{ content, logo, ref, title }} />);
+    expect(
+      ref.current.outerModal.current.classList.contains(blockClass)
+    ).toBeTruthy();
   });
 });

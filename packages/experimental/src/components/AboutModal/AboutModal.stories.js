@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2020, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,14 +7,16 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Link } from 'carbon-components-react';
 
 import { pkg } from '../../settings';
 import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
+
 import { AboutModal } from '.';
+
+import { Button, Link } from 'carbon-components-react';
+
 import mdx from './AboutModal.mdx';
-const storybookPrefix = getStorybookPrefix(pkg, AboutModal.displayName);
 
 import ExampleLogo from './_story-assets/example-logo.svg';
 import ansibleLogo from './_story-assets/ansible-logo.png';
@@ -23,14 +25,16 @@ import jsLogo from './_story-assets/js-logo.png';
 
 import styles from './_storybook-styles.scss';
 
+const storybookPrefix = getStorybookPrefix(pkg, AboutModal.displayName);
+
 export default {
   title: `${storybookPrefix}/${AboutModal.displayName}`,
   component: AboutModal,
   parameters: {
     styles,
-    docs: {
-      page: mdx,
-    },
+  },
+  docs: {
+    page: mdx,
   },
 };
 
@@ -76,10 +80,9 @@ Template.propTypes = {
   ...AboutModal.propTypes,
 };
 
-export const Basic = Template.bind({});
-Basic.storyName = 'About Modal';
-Basic.args = {
-  story: Basic,
+export const aboutModal = Template.bind({});
+aboutModal.args = {
+  story: aboutModal,
 };
 
 export const withLinksAndLegalAndCopyrightText = Template.bind({});

@@ -49,4 +49,10 @@ describe(componentName, () => {
     render(<DISPLAY_NAME data-testid={dataTestId} />);
     expect(screen.getByTestId(dataTestId)).toBeTruthy();
   });
+
+  it('forwards a ref to an appropriate node', () => {
+    const ref = React.createRef();
+    render(<DISPLAY_NAME ref={ref} />);
+    expect(ref.current.classList.contains(blockClass)).toBeTruthy();
+  });
 });

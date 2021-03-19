@@ -89,13 +89,13 @@ describe(componentName, () => {
     expect(container.querySelector(`.${blockClass}`)).not.toBeNull();
   });
 
-  /*it('has no accessibility violations', async () => {
+  it('has no accessibility violations', async () => {
     const { container } = render(
       <AboutModal open {...{ content, logo, title }} />
     );
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
-  });*/
+  });
 
   it('renders title and content', () => {
     render(<AboutModal open {...{ content, logo, title }} />);

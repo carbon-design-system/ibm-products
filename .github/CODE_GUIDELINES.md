@@ -22,6 +22,7 @@ unclear.
   - \_storybook-styles.scss &mdash; SCSS used by the Storybook stories, which
     usually includes the component public SCSS and may have additional styles
     used by the stories.
+  - _ComponentName_.mdx &mdash; a Storybook docs page for the component.
 
 ## Component JavaScript code
 
@@ -58,22 +59,28 @@ unclear.
     ```
   - Note that a component does not need to import its own SCSS: that is rolled
     up separately.
+  - One or more component definitions will then follow. Related components can
+    be put into separate source files for clarity unless they are very simple.
 - Each public component definition should include the following:
 
-  - The following opening logic, destructuring the props in alphabetical order
-    for consistency, and using a `let` to enable the use of
-    `checkComponentEnabled` (see below).
+  - The following opening logic, using `forwardRef` to pass a supplied ref to an
+    appropriate node, destructuring the props in alphabetical order (for
+    consistency), and using a `let` to enable the use of `checkComponentEnabled`
+    (see below).
     ```js
-    export let ComponentName = ({
+    export let ComponentName = forwardRef(({
       className,
       prop1,
       prop2,
       ...
       ...rest
-    }) => {
+    }, ref) => {
     ```
-  - `rest` should be included on the main DOM element to enable HTML attributes
-    to be passed through.
+  - `{...rest}` should be included on the main DOM element to enable HTML
+    attributes to be passed through. It should appear _first_, so that it cannot
+    override HTML attributes that the component itself sets and requires. If any
+    of the HTML attributes should be overridable by client code, it should be
+    made into a prop so the value(s) can be handled and merged as needed.
   - The classnames helper (imported as `cx`) should be used on the main DOM
     element to combine needed classes and the block class with the `className`
     prop:
@@ -84,6 +91,8 @@ unclear.
       [className]: className  // this handles className omitted/falsy
     })} ...
     ```
+  - `ref={ref}` should be included on a suitable DOM element (often the main DOM
+    element) to enable a supplied ref to be passed to an appropriate node.
   - All significant DOM objects in the returned component markup should have
     classes set on them to enable users to attach styling. The `blockClass`
     constant can help with keeping these consistent:
@@ -94,7 +103,8 @@ unclear.
     ```
     <prefix>--<component-name>__<element>--<modifier>
     ```
-    (and of course there may not always be an element and/or modifier).
+    (and of course there may not always be an element and/or modifier, and there
+    may be more than one).
   - The exported object should be passed through `checkComponentEnabled`, which
     enables non-released components to be enable through a feature flag
     mechanism:
@@ -108,11 +118,13 @@ unclear.
       and required properties, and including DocGen comments to describe the
       properties for a user.
     - `.defaultProps = {};` providing default values for properties that need
-      them. Required props do NOT need default values. Any property that is not
-      required but which the component needs to make an assumed value for should
-      be given a suitable default. Properties that can be left unset do NOT need
-      default values if the component simply tests for and copes with the value
-      being `undefined`.
+      them. Required props should NOT be given default values. Any property that
+      is not required but which the component needs to make an assumed value for
+      should be given a suitable default. Properties that can be left unset do
+      NOT need default values if the component simply tests for and copes with
+      the value being `undefined`. This includes any property that will be
+      passed directly to a nested component or HTML element in the JSX, because
+      React treats `undefined` as not setting the property/attribute.
 
 - Ensure all code is neatly formatted (use `yarn format` and/or a prettier
   plugin for an editor to follow the prettier rules set up in the project), and
@@ -161,7 +173,18 @@ unclear.
 
 - Do not use nesting of SCSS.
 - Style directives should use Carbon tokens (theme, layout, motion) are used
-  unless the design specifies otherwise.\
+  unless the design specifies otherwise.
+- Begin all selectors with the block class. This helps with specificity, and
+  also helps prevent style 'leakage' to other parts of the page they were not
+  intended to apply to.
+- Ensure all selectors have sufficient specificity to override Carbon styles
+  whether Carbon is loaded before _or after_ the component styles. To test this
+  using Storybook, add a line to `_storybook-styles.scss` for the component,
+  loading Carbon after all other styles, and verify that the styles being
+  applied in the stories are still as expected:
+  ```scss
+  //@import 'carbon-components/css/carbon-components.min';
+  ```
 
 ## Test cases
 

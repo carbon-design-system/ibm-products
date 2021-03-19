@@ -160,4 +160,14 @@ describe(componentName, () => {
       container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
     ).toBeInTheDocument();
   });
+
+  it('forwards a ref to an appropriate node', () => {
+    const ref = React.createRef();
+    render(
+      <ExampleComponent
+        {...{ primaryButtonLabel, ref, secondaryButtonLabel }}
+      />
+    );
+    expect(ref.current.classList.contains(blockClass)).toBeTruthy();
+  });
 });

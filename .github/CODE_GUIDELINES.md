@@ -173,7 +173,13 @@ unclear.
 
 - Do not use nesting of SCSS.
 - Style directives should use Carbon tokens (theme, layout, motion) are used
-  unless the design specifies otherwise.\
+  unless the design specifies otherwise.
+- Begin all selectors with the block class. This helps with specificity, and
+  also helps prevent style 'leakage' to other parts of the page they were not
+  intended to apply to.
+- Ensure all selectors have sufficient specificity to override Carbon styles
+  whether Carbon is loaded before _or after_ the component styles. **ADD HOW TO
+  TEST THIS**
 
 ## Test cases
 

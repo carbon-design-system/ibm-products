@@ -273,7 +273,8 @@ export let Notifications = ({
   const mainSectionClassName = cx([
     `${blockClass}-main-section`,
     {
-      [`${blockClass}-main-section-empty`]: !allNotifications.length,
+      [`${blockClass}-main-section-empty`]:
+        allNotifications && !allNotifications.length,
     },
   ]);
 

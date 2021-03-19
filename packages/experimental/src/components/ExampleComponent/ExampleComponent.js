@@ -25,77 +25,84 @@ const componentName = 'ExampleComponent';
 /**
  * This is an example component to show relevant conventions and usage.
  */
-export let ExampleComponent = ({
-  // The component props, in alphabetical order (for consistency).
-  borderColor,
-  boxedBorder,
-  className,
-  disabled,
-  onPrimaryClick,
-  onSecondaryClick,
-  primaryButtonLabel,
-  primaryKind,
-  secondaryButtonLabel,
-  secondaryKind,
-  size,
-  // Collect any other property values.
-  ...rest
-}) => {
-  const modeClass = boxedBorder
-    ? `${blockClass}--boxed-set`
-    : `${blockClass}--shadow-set`;
+export let ExampleComponent = React.forwardRef(
+  (
+    {
+      // The component props, in alphabetical order (for consistency).
+      borderColor,
+      boxedBorder,
+      className,
+      disabled,
+      onPrimaryClick,
+      onSecondaryClick,
+      primaryButtonLabel,
+      primaryKind,
+      secondaryButtonLabel,
+      secondaryKind,
+      size,
+      style,
+      // Collect any other property values passed in.
+      ...rest
+    },
+    ref
+  ) => {
+    const modeClass = boxedBorder
+      ? `${blockClass}--boxed-set`
+      : `${blockClass}--shadow-set`;
 
-  const handlePrimaryClick = (e) => {
-    if (onPrimaryClick) {
-      onPrimaryClick(e);
-    }
-  };
+    const handlePrimaryClick = (e) => {
+      if (onPrimaryClick) {
+        onPrimaryClick(e);
+      }
+    };
 
-  const handleSecondaryClick = (e) => {
-    if (onSecondaryClick) {
-      onSecondaryClick(e);
-    }
-  };
+    const handleSecondaryClick = (e) => {
+      if (onSecondaryClick) {
+        onSecondaryClick(e);
+      }
+    };
 
-  return (
-    <ButtonSet
-      role="main"
-      className={cx(
-        // Apply the block class to the main HTML element, along with
-        // any other classes we need.
-        [blockClass, `${blockClass}--${size}`, modeClass],
+    return (
+      <ButtonSet
         {
-          // Apply any supplied class names to the main HTML element.
-          [className]: className, // this handles className omitted/falsy
+          // Pass through any other property values as HTML attributes.
+          ...rest
         }
-      )}
-      style={{
-        /* stylelint-disable-next-line carbon/theme-token-use */
-        [`--${pkg.prefix}-border-color`]: borderColor,
-      }}
-      {
-        /* Pass through any other property values as HTML attributes. */
-        ...rest
-      }>
-      <Button
-        className={`${blockClass}__secondary-button`}
-        kind={secondaryKind}
-        onClick={handleSecondaryClick}
-        size={size}
-        disabled={disabled}>
-        {secondaryButtonLabel}
-      </Button>
-      <Button
-        className={`${blockClass}__primary-button`}
-        kind={primaryKind}
-        onClick={handlePrimaryClick}
-        size={size}
-        disabled={disabled}>
-        {primaryButtonLabel}
-      </Button>
-    </ButtonSet>
-  );
-};
+        className={cx(
+          // Apply the block class to the main HTML element, along with
+          // any other classes we need.
+          [blockClass, `${blockClass}--${size}`, modeClass],
+          {
+            // Apply any supplied class names to the main HTML element.
+            [className]: className, // this handles className omitted/falsy
+          }
+        )}
+        ref={ref}
+        role="main"
+        style={{
+          // Apply any supplied styles to the main HTML element.
+          ...style,
+          /* stylelint-disable-next-line carbon/theme-token-use */
+          [`--${pkg.prefix}-border-color`]: borderColor,
+        }}>
+        <Button
+          className={`${blockClass}__secondary-button`}
+          kind={secondaryKind}
+          onClick={handleSecondaryClick}
+          {...{ disabled, size }}>
+          {secondaryButtonLabel}
+        </Button>
+        <Button
+          className={`${blockClass}__primary-button`}
+          kind={primaryKind}
+          onClick={handlePrimaryClick}
+          {...{ disabled, size }}>
+          {primaryButtonLabel}
+        </Button>
+      </ButtonSet>
+    );
+  }
+);
 
 // Return a placeholder if not released and not enabled by feature flag
 ExampleComponent = pkg.checkComponentEnabled(ExampleComponent, componentName);
@@ -162,6 +169,11 @@ ExampleComponent.propTypes = {
    * The size for the buttons ('default', 'small' or 'field').
    */
   size: PropTypes.oneOf(['default', 'small', 'field']),
+
+  /**
+   * Optional style settings for the containing node.
+   */
+  style: PropTypes.object,
 };
 
 // Default values for component props. Default values are not required for

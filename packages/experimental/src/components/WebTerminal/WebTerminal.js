@@ -38,70 +38,68 @@ export let WebTerminal = ({
     if (!open) setRender(false);
   };
 
-  return (
-    shouldRender && (
-      <div
-        className={cx([
-          blockClass,
-          {
-            [`${blockClass}--open`]: open,
-            [`${blockClass}--closed`]: !open,
-            [className]: className,
-          },
-        ])}
-        style={{
-          animation: `${
-            open ? 'webTerminalEntrance 250ms' : 'webTerminalExit 250ms'
-          }`,
-        }}
-        onAnimationEnd={onAnimationEnd}>
-        <header className={`${blockClass}__bar`}>
-          <div className={`${blockClass}__actions`}>
-            {showDocumentationLinks && (
-              <button
-                type="button"
-                className={`${blockClass}__bar-icon-container`}>
-                <Help className={`${blockClass}__bar-icon`} />
-                <ul className={`${blockClass}__bar-icon-dropdown`}>
-                  {documentationLinks.map(
-                    ({ label, onClick, href = null, openInNewTab = true }) => (
-                      <li
-                        key={label}
-                        className={`${blockClass}__bar-icon-dropdown-item`}>
-                        <a
-                          className={`${blockClass}__bar-icon-dropdown-link`}
-                          onClick={(event) =>
-                            onDocumentationLinkClick(event, onClick)
-                          }
-                          href={href}
-                          target={openInNewTab ? '_blank' : null}
-                          rel="noreferrer noopener">
-                          {label}
-                        </a>
-                      </li>
-                    )
-                  )}
-                </ul>
-              </button>
-            )}
-          </div>
-          <button
-            type="button"
-            className={cx([
-              `${blockClass}__bar-icon-container`,
-              `${blockClass}__close-button`,
-            ])}
-            onClick={closeTerminal}
-            onKeyDown={closeTerminal}>
-            <Close
-              className={`${blockClass}__bar-icon ${blockClass}__bar-icon--close`}
-            />
-          </button>
-        </header>
-        <div className={`${blockClass}__body`}>{children}</div>
-      </div>
-    )
-  );
+  return shouldRender ? (
+    <div
+      className={cx([
+        blockClass,
+        {
+          [`${blockClass}--open`]: open,
+          [`${blockClass}--closed`]: !open,
+          [className]: className,
+        },
+      ])}
+      style={{
+        animation: `${
+          open ? 'webTerminalEntrance 250ms' : 'webTerminalExit 250ms'
+        }`,
+      }}
+      onAnimationEnd={onAnimationEnd}>
+      <header className={`${blockClass}__bar`}>
+        <div className={`${blockClass}__actions`}>
+          {showDocumentationLinks && (
+            <button
+              type="button"
+              className={`${blockClass}__bar-icon-container`}>
+              <Help className={`${blockClass}__bar-icon`} />
+              <ul className={`${blockClass}__bar-icon-dropdown`}>
+                {documentationLinks.map(
+                  ({ label, onClick, href = null, openInNewTab = true }) => (
+                    <li
+                      key={label}
+                      className={`${blockClass}__bar-icon-dropdown-item`}>
+                      <a
+                        className={`${blockClass}__bar-icon-dropdown-link`}
+                        onClick={(event) =>
+                          onDocumentationLinkClick(event, onClick)
+                        }
+                        href={href}
+                        target={openInNewTab ? '_blank' : null}
+                        rel="noreferrer noopener">
+                        {label}
+                      </a>
+                    </li>
+                  )
+                )}
+              </ul>
+            </button>
+          )}
+        </div>
+        <button
+          type="button"
+          className={cx([
+            `${blockClass}__bar-icon-container`,
+            `${blockClass}__close-button`,
+          ])}
+          onClick={closeTerminal}
+          onKeyDown={closeTerminal}>
+          <Close
+            className={`${blockClass}__bar-icon ${blockClass}__bar-icon--close`}
+          />
+        </button>
+      </header>
+      <div className={`${blockClass}__body`}>{children}</div>
+    </div>
+  ) : null;
 };
 
 // Return a placeholder if not released and not enabled by feature flag

@@ -5,6 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// pull in some Carbon settings for storybook
 @import '@carbon/type/scss/reset';
 @import 'carbon-components/scss/globals/scss/css--font-face';
 
@@ -17,7 +18,8 @@ $css--reset: false;
 @import '../generated/feature-flags/feature-flags';
 @import '@carbon/themes/scss/themes';
 
-@import '@carbon/ibm-cloud-cognitive-experimental/scss/components/_Canary/canary';
+// Uncomment next line if you want to use Canary in storybook
+//@import '@carbon/ibm-cloud-cognitive-experimental/scss/components/_Canary/canary';
 
 // Setting attribute storybook-carbon-theme="XXX" on the html element
 // will set the carbon theme used for the storybook pane.

@@ -178,8 +178,13 @@ unclear.
   also helps prevent style 'leakage' to other parts of the page they were not
   intended to apply to.
 - Ensure all selectors have sufficient specificity to override Carbon styles
-  whether Carbon is loaded before _or after_ the component styles. **ADD HOW TO
-  TEST THIS**
+  whether Carbon is loaded before _or after_ the component styles. To test this
+  using Storybook, add a line to `_storybook-styles.scss` for the component,
+  loading Carbon after all other styles, and verify that the styles being
+  applied in the stories are still as expected:
+  ```scss
+  //@import 'carbon-components/css/carbon-components.min';
+  ```
 
 ## Test cases
 

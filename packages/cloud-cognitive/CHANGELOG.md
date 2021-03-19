@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.1.119...@carbon/ibm-cloud-cognitive@0.2.0) (2021-03-19)
+
+
+### Features
+
+* add carbon telemetry ([#477](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/477)) ([950c9f3](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/950c9f3394af98f93f39851f70e126f944c7477a))
+
+
+
+
+
 ## [0.1.119](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.1.118...@carbon/ibm-cloud-cognitive@0.1.119) (2021-03-18)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

@@ -13,7 +13,7 @@ import mdx from './UnauthorizedEmptyState.mdx';
 import { pkg } from '../../../settings';
 import { getStorybookPrefix } from '../../../../config';
 const storybookPrefix = getStorybookPrefix(pkg, 'EmptyStates');
-import { UnauthorizedEmptyState } from './UnauthorizedEmptyState';
+import { UnauthorizedEmptyState } from '.';
 
 import styles from '../_index.scss';
 

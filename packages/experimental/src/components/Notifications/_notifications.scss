@@ -24,7 +24,6 @@ $block-class: #{$pkg-prefix}-notifications-panel;
     opacity: 0;
   }
   100% {
-    // stylelint-disable-next-line carbon/layout-token-use
     transform: translateY(0);
     opacity: 1;
   }
@@ -32,7 +31,6 @@ $block-class: #{$pkg-prefix}-notifications-panel;
 
 @keyframes fadeOut {
   0% {
-    // stylelint-disable-next-line carbon/layout-token-use
     transform: translateY(0);
     opacity: 1;
   }
@@ -57,8 +55,7 @@ $block-class: #{$pkg-prefix}-notifications-panel;
   overflow: auto;
   color: $text-01;
   background-color: $ui-background;
-  // stylelint-disable-next-line carbon/motion-token-use
-  transition: transform 250ms;
+  transition: transform $duration--fast-02;
   transition-timing-function: carbon--motion(standard);
 
   .#{$block-class}-header-container {
@@ -121,8 +118,7 @@ $block-class: #{$pkg-prefix}-notifications-panel;
     background-color: $ui-background;
     border: 0;
     cursor: pointer;
-    // stylelint-disable-next-line carbon/motion-token-use
-    transition: background-color 250ms;
+    transition: background-color $duration--moderate-02;
     transition-timing-function: carbon--motion(standard);
     .#{$block-class}-notification-title {
       margin-bottom: $spacing-02;
@@ -185,8 +181,7 @@ $block-class: #{$pkg-prefix}-notifications-panel;
 
         // stylelint-disable-next-line max-nesting-depth
         .bx--btn__icon {
-          // stylelint-disable-next-line carbon/motion-token-use
-          transition: transform 250ms ease;
+          transition: transform $duration--moderate-02 ease;
         }
         &.#{$block-class}-notification-read-more-button {
           // stylelint-disable-next-line max-nesting-depth
@@ -225,8 +220,7 @@ $block-class: #{$pkg-prefix}-notifications-panel;
     height: 1px;
     margin: 0 auto;
     background-color: $ui-02;
-    // stylelint-disable-next-line carbon/motion-token-use
-    transition: background-color 250ms;
+    transition: background-color $duration--moderate-02;
     transition-timing-function: carbon--motion(standard);
     content: '';
   }

@@ -11,65 +11,69 @@ import { Tabs, Tab } from 'carbon-components-react';
 import { ModifiedTabLabelWithClose } from './ModifiedTabLabelWithClose';
 import { ModifiedTabLabelNew } from './ModifiedTabLabelNew';
 
-import { Canary } from '../_Canary';
 import { pkg } from '../../settings';
 const componentName = 'ModifiedTabs';
 
-export const ModifiedTabs = !pkg.isComponentEnabled(componentName)
-  ? // Return canary if not released or flag not set
-    () => <Canary component={componentName} />
-  : // Main component code...
-    ({ tabs, newTabLabel, newTabContent, onNewTab, onCloseTab }) => {
-      const handleNewTab = () => {
-        if (onNewTab) {
-          onNewTab();
-          setTimeout(() => {
-            // set focus to the new tab
-            const tab = tabsRef.current.getTabAt(tabs.length);
-            if (tab & tab.tabAnchor) {
-              tab.tabAnchor.focus();
-            }
-          });
+export let ModifiedTabs = ({
+  tabs,
+  newTabLabel,
+  newTabContent,
+  onNewTab,
+  onCloseTab,
+}) => {
+  const handleNewTab = () => {
+    if (onNewTab) {
+      onNewTab();
+      setTimeout(() => {
+        // set focus to the new tab
+        const tab = tabsRef.current.getTabAt(tabs.length);
+        if (tab & tab.tabAnchor) {
+          tab.tabAnchor.focus();
         }
-      };
+      });
+    }
+  };
 
-      const handleClose = (id) => {
-        if (onCloseTab) {
-          onCloseTab(id);
-        }
-      };
+  const handleClose = (id) => {
+    if (onCloseTab) {
+      onCloseTab(id);
+    }
+  };
 
-      const tabsRef = useRef(null);
+  const tabsRef = useRef(null);
 
-      return (
-        <Tabs className="modified-tabs" ref={tabsRef}>
-          {tabs.map((tab) => (
-            <Tab
-              href="#"
-              id={tab.id}
-              key={tab.id}
-              label={
-                <ModifiedTabLabelWithClose
-                  label={tab.label}
-                  onClose={() => handleClose(tab.id)}
-                  unsavedContent={tab.unsavedContent}
-                />
-              }>
-              <div className="some-content">{tab.content}</div>
-            </Tab>
-          ))}
-          <Tab
-            href="#"
-            id="modified-tabs__tab-new"
-            label={<ModifiedTabLabelNew label={newTabLabel} />}
-            onClick={handleNewTab}
-            onKeyUp={(ev) => ev.keyCode === 32 && handleNewTab()}
-            role="button">
-            <div className="some-content">{newTabContent}</div>
-          </Tab>
-        </Tabs>
-      );
-    };
+  return (
+    <Tabs className="modified-tabs" ref={tabsRef}>
+      {tabs.map((tab) => (
+        <Tab
+          href="#"
+          id={tab.id}
+          key={tab.id}
+          label={
+            <ModifiedTabLabelWithClose
+              label={tab.label}
+              onClose={() => handleClose(tab.id)}
+              unsavedContent={tab.unsavedContent}
+            />
+          }>
+          <div className="some-content">{tab.content}</div>
+        </Tab>
+      ))}
+      <Tab
+        href="#"
+        id="modified-tabs__tab-new"
+        label={<ModifiedTabLabelNew label={newTabLabel} />}
+        onClick={handleNewTab}
+        onKeyUp={(ev) => ev.keyCode === 32 && handleNewTab()}
+        role="button">
+        <div className="some-content">{newTabContent}</div>
+      </Tab>
+    </Tabs>
+  );
+};
+
+// Return a placeholder if not released and not enabled by feature flag
+ModifiedTabs = pkg.checkComponentEnabled(ModifiedTabs, componentName);
 
 ModifiedTabs.propTypes = {
   /**

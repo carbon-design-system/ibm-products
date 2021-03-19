@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive",
   "description": "Carbon for Cloud & Cognitive common UI components",
-  "version": "0.1.97",
+  "version": "0.2.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -30,20 +30,22 @@
   },
   "scripts": {
     "build": "yarn clean && yarn build:js && yarn build:scss",
-    "build:js": "node scripts/build",
+    "build:js": "yarn build:js-esm && yarn build:js-cjs",
+    "build:js-esm": "cross-env BABEL_ENV=esm yarn build:js-modules -d es",
+    "build:js-cjs": "cross-env BABEL_ENV=cjs yarn build:js-modules -d lib",
+    "build:js-modules": "babel src",
     "build:scss": "bundler bundle:scss src/index.scss && copyfiles 'src/**/*.scss' scss -u 1",
     "ci-check": "node scripts/import",
     "clean": "rimraf es lib scss",
+    "postinstall": "carbon-telemetry collect --install",
     "test": "bundler check 'src/**/*.scss'"
   },
   "peerDependencies": {
     "react": "^16.13.1"
   },
   "dependencies": {
-    "@carbon/ibm-cloud-cognitive-experimental": "^0.23.2",
-    "@carbon/ibm-cloud-cognitive-security": "^0.4.9"
-  },
-  "devDependencies": {
-    "@carbon/ibm-cloud-cognitive-core": "^0.8.2"
+    "@carbon/ibm-cloud-cognitive-experimental": "^0.27.0",
+    "@carbon/ibm-cloud-cognitive-security": "^0.4.11",
+    "@carbon/telemetry": "^0.0.0-alpha.6"
   }
 }

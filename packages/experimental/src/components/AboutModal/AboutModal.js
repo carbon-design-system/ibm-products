@@ -17,110 +17,103 @@ import {
   Tab,
 } from 'carbon-components-react';
 
-import { Canary } from '../_Canary';
 import { pkg } from '../../settings';
 const componentName = 'AboutModal';
 
-export const AboutModal = !pkg.isComponentEnabled(componentName)
-  ? // Return canary if not released or flag not set
-    () => <Canary component={componentName} />
-  : // Main component code...
-    ({
-      className,
-      content,
-      copyrightText,
-      legalText,
-      links,
-      logo,
-      onClose,
-      open,
-      technologiesUsed,
-      title,
-      versionNumber,
-    }) => {
-      return (
-        <ComposedModal
-          className={classNames(`${pkg.prefix}-about-modal`, {
-            [`${pkg.prefix}-about-modal-with-tabs`]:
-              technologiesUsed && technologiesUsed.length > 0,
-            [className]: className,
-          })}
-          onClose={onClose}
-          open={open}>
-          <div className={`${pkg.prefix}-about-modal-product-logo`}>{logo}</div>
-          <ModalHeader
-            title={title}
-            titleClassName={`${pkg.prefix}-about-modal-title`}
-          />
-          <ModalBody className={`${pkg.prefix}-about-modal-content`}>
-            <div className={`${pkg.prefix}-about-modal-body-content`}>
-              {content}
-              <div className={`${pkg.prefix}-about-modal-links-container`}>
-                {links &&
-                  links.length > 0 &&
-                  links.map((link, i) => (
-                    <React.Fragment key={i}>{link}</React.Fragment>
-                  ))}
-              </div>
-              {legalText && (
-                <p className={`${pkg.prefix}-about-modal-legal-text`}>
-                  {legalText}
-                </p>
-              )}
-              {copyrightText && (
-                <p className={`${pkg.prefix}-about-modal-copyright-text`}>
-                  {copyrightText}
-                </p>
-              )}
-            </div>
-          </ModalBody>
-          <ModalFooter>
-            {technologiesUsed && technologiesUsed.length ? (
-              <Tabs className={`${pkg.prefix}-about-modal-tab-container`}>
+export let AboutModal = ({
+  additionalInfo,
+  className,
+  content,
+  copyrightText,
+  legalText,
+  links,
+  logo,
+  onClose,
+  open,
+  title,
+}) => {
+  return (
+    <ComposedModal
+      className={classNames(`${pkg.prefix}-about-modal`, {
+        [`${pkg.prefix}-about-modal-with-tabs`]:
+          additionalInfo && additionalInfo.length > 1,
+        [className]: className,
+      })}
+      onClose={onClose}
+      open={open}>
+      <div className={`${pkg.prefix}-about-modal-product-logo`}>{logo}</div>
+      <ModalHeader
+        title={title}
+        titleClassName={`${pkg.prefix}-about-modal-title`}
+      />
+      <ModalBody className={`${pkg.prefix}-about-modal-content`}>
+        <div className={`${pkg.prefix}-about-modal-body-content`}>
+          {content}
+          <div className={`${pkg.prefix}-about-modal-links-container`}>
+            {links &&
+              links.length > 0 &&
+              links.map((link, i) => (
+                <React.Fragment key={i}>{link}</React.Fragment>
+              ))}
+          </div>
+          {legalText && (
+            <p className={`${pkg.prefix}-about-modal-legal-text`}>
+              {legalText}
+            </p>
+          )}
+          {copyrightText && (
+            <p className={`${pkg.prefix}-about-modal-copyright-text`}>
+              {copyrightText}
+            </p>
+          )}
+        </div>
+      </ModalBody>
+      <ModalFooter>
+        {additionalInfo &&
+          additionalInfo.length > 0 &&
+          (additionalInfo.length === 1 ? (
+            <>
+              <p className={`${pkg.prefix}-about-modal-version-label`}>
+                {additionalInfo[0].label}
+              </p>
+              <p className={`${pkg.prefix}-about-modal-version-number`}>
+                {additionalInfo[0].content}
+              </p>
+            </>
+          ) : (
+            <Tabs className={`${pkg.prefix}-about-modal-tab-container`}>
+              {additionalInfo.map((tab, i) => (
                 <Tab
-                  id="about-modal-technologies-used-tab"
-                  label="Technologies used">
-                  <div className={`${pkg.prefix}-about-modal-tab-content-flex`}>
-                    {technologiesUsed &&
-                      technologiesUsed.length &&
-                      technologiesUsed.map((tech) => (
-                        <img
-                          key={tech.alt}
-                          src={tech.src}
-                          alt={tech.alt}
-                          className={`${pkg.prefix}-about-modal-tech-used-item`}
-                        />
-                      ))}
-                  </div>
+                  id={'about-modal-tab-' + tab.label}
+                  label={tab.label}
+                  key={i}>
+                  {tab.content}
                 </Tab>
-                <Tab id="about-modal-version-number-tab" label="Version number">
-                  <div
-                    className={`${pkg.prefix}-about-modal-tab-content-flex ${pkg.prefix}-about-modal-tab-content-version-flex`}>
-                    <p className={`${pkg.prefix}-about-modal-version-label`}>
-                      Version number
-                    </p>
-                    <p className={`${pkg.prefix}-about-modal-version-number`}>
-                      {versionNumber}
-                    </p>
-                  </div>
-                </Tab>
-              </Tabs>
-            ) : (
-              <>
-                <p className={`${pkg.prefix}-about-modal-version-label`}>
-                  Version number
-                </p>
-                <p className={`${pkg.prefix}-about-modal-version-number`}>
-                  {versionNumber}
-                </p>
-              </>
-            )}
-          </ModalFooter>
-        </ComposedModal>
-      );
-    };
+              ))}
+            </Tabs>
+          ))}
+      </ModalFooter>
+    </ComposedModal>
+  );
+};
+
+// Return a placeholder if not released and not enabled by feature flag
+AboutModal = pkg.checkComponentEnabled(AboutModal, componentName);
 
 AboutModal.propTypes = {
+  /**
+   * Additional information to be displayed in the footer. Can be used for
+   * version information and/or a set of tabs with various contents. If only
+   * one set of additional information is provided then no tabs are
+   * displayed and the label and content are just displayed one above the
+   * other in the footer.
+   */
+  additionalInfo: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      content: PropTypes.node,
+    })
+  ),
   /**
    * Specify an optional className to be applied to the modal root node
    */
@@ -159,22 +152,9 @@ AboutModal.propTypes = {
    */
   open: PropTypes.bool.isRequired,
   /**
-   * About modal list of technologies
-   */
-  technologiesUsed: PropTypes.arrayOf(
-    PropTypes.shape({
-      src: PropTypes.string,
-      alt: PropTypes.string,
-    })
-  ),
-  /**
    * The title of the AboutModal is usually the product or service name.
    */
   title: PropTypes.node.isRequired,
-  /**
-   * The version number of the product or service, etc.
-   */
-  versionNumber: PropTypes.string.isRequired,
 };
 
 AboutModal.displayName = componentName;

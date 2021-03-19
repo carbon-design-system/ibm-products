@@ -12,30 +12,28 @@ import cx from 'classnames';
 
 import { Button } from 'carbon-components-react';
 
-import { Canary } from '../_Canary';
 import { pkg } from '../../settings';
 const componentName = 'PageActionItem';
 const blockClass = `${pkg.prefix}-page-action-item`;
 
-export const PageActionItem = !pkg.isComponentEnabled(componentName)
-  ? // Return canary if not released or flag not set
-    () => <Canary component={componentName} />
-  : // Main component code...
-    ({ children, ...props }) => {
-      const className = cx([blockClass, props.className]);
+export let PageActionItem = ({ children, ...props }) => {
+  const className = cx([blockClass, props.className]);
 
-      return (
-        <Button
-          {...{
-            ...props,
-            className,
-            size: 'field',
-            type: 'button',
-          }}>
-          {children}
-        </Button>
-      );
-    };
+  return (
+    <Button
+      {...{
+        ...props,
+        className,
+        size: 'field',
+        type: 'button',
+      }}>
+      {children}
+    </Button>
+  );
+};
+
+// Return a placeholder if not released and not enabled by feature flag
+PageActionItem = pkg.checkComponentEnabled(PageActionItem, componentName);
 
 // Props the user cannot change
 const reservedProps = ['size', 'type'];

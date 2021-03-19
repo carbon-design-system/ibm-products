@@ -1,20 +1,22 @@
-//
-// Copyright IBM Corp. 2020, 2020
-//
-// This source code is licensed under the Apache-2.0 license found in the
-// LICENSE file in the root directory of this source tree.
-//
-
+/**
+ * Copyright IBM Corp. 2020, 2021
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 import React from 'react';
 import { action } from '@storybook/addon-actions';
+
 import { pkg } from '../../settings';
 import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
+
 import { ExampleComponent } from '.';
 import mdx from './ExampleComponent.mdx';
-const storybookPrefix = getStorybookPrefix(pkg, ExampleComponent.displayName);
 
-import styles from './_storybook.scss'; // import storybook which includes component and additional storybook styles
+import styles from './_storybook-styles.scss';
+
+const storybookPrefix = getStorybookPrefix(pkg, ExampleComponent.displayName);
 
 export default {
   title: `${storybookPrefix}/${ExampleComponent.displayName}`,
@@ -22,7 +24,9 @@ export default {
   argTypes: {
     borderColor: { control: 'color' },
   },
-  parameters: { styles },
+  parameters: {
+    styles,
+  },
   docs: {
     page: mdx,
   },
@@ -31,26 +35,21 @@ export default {
 const Template = (args) => {
   return (
     <ExampleComponent
-      {...args}
+      primaryButtonLabel="Primary"
+      secondaryButtonLabel="Secondary"
       onPrimaryClick={action('onPrimaryClick')}
       onSecondaryClick={action('onSecondaryClick')}
+      {...args}
     />
   );
 };
 
-export const BoxedSet = Template.bind({});
-BoxedSet.args = {
+export const exampleComponent = Template.bind({});
+exampleComponent.args = {};
+
+export const boxedSet = Template.bind({});
+boxedSet.args = {
+  ...exampleComponent.args,
   borderColor: '#141414',
   boxedBorder: true,
-  disabled: false,
 };
-
-export const ShadowSet = Template.bind({});
-ShadowSet.args = {
-  borderColor: '#141414',
-  boxedBorder: false,
-  disabled: false,
-};
-
-export const Minimal = Template.bind({});
-Minimal.args = {};

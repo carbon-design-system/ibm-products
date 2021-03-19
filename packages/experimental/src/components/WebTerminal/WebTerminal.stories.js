@@ -10,38 +10,12 @@ import { Navigation } from './preview-components';
 import { pkg } from '../../settings';
 import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
-import WebTerminal from './WebTerminal';
+import { WebTerminal } from '.';
 import mdx from './WebTerminal.mdx';
+import { documentationLinks } from './preview-components/documentationLinks';
 const storybookPrefix = getStorybookPrefix(pkg, WebTerminal.displayName);
 
 import styles from './_storybook-styles.scss';
-
-const documentationLinks = [
-  {
-    label: 'BX/ICP docs',
-    href: '#',
-    onClick: () => console.log('clicked'),
-    openInNewTab: false,
-  },
-  {
-    label: 'Kube docs',
-    href: '#',
-    onClick: () => console.log('clicked'),
-    openInNewTab: true,
-  },
-  {
-    label: 'Docker docs',
-    href: '#',
-    onClick: () => console.log('clicked'),
-    openInNewTab: true,
-  },
-  {
-    label: 'Helm docs',
-    href: '#',
-    onClick: () => console.log('clicked'),
-    openInNewTab: true,
-  },
-];
 
 const Template = (args) => {
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);

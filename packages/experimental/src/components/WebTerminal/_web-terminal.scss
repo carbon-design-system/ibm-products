@@ -10,7 +10,6 @@ $web-terminal-width: 36.5rem;
     opacity: 0;
   }
   100% {
-    // stylelint-disable-next-line carbon/layout-token-use
     transform: translateX(0);
     opacity: 1;
   }
@@ -18,7 +17,6 @@ $web-terminal-width: 36.5rem;
 
 @keyframes webTerminalExit {
   0% {
-    // stylelint-disable-next-line carbon/layout-token-use
     transform: translateX(0);
     opacity: 1;
   }
@@ -30,8 +28,8 @@ $web-terminal-width: 36.5rem;
 }
 
 /*
-  The reason for not using theme tokens in the web terminal 
-  component is because we want these colors to always be the same 
+  The reason for not using theme tokens in the web terminal
+  component is because we want these colors to always be the same
   despite of which carbon theme the user has.
 */
 
@@ -85,7 +83,7 @@ $web-terminal-width: 36.5rem;
   .#{$pkg-prefix}-web-terminal__bar-icon-dropdown,
 .#{$pkg-prefix}-web-terminal__bar-icon-container:focus
   .#{$pkg-prefix}-web-terminal__bar-icon-dropdown {
-  transform: translateY(0); /* stylelint-disable-line */
+  transform: translateY(0);
   visibility: visible;
   opacity: 1;
 }

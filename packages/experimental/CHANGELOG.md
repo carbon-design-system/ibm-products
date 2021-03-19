@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.26.11](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.26.10...@carbon/ibm-cloud-cognitive-experimental@0.26.11) (2021-03-18)
+
+
+### Bug Fixes
+
+* update WebTerminal ([#479](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/479)) ([211f3dd](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/211f3dd2fce7e455fc98dc407ac01b9aefb3f15f))
+
+
+
+
+
+## [0.26.10](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.26.9...@carbon/ibm-cloud-cognitive-experimental@0.26.10) (2021-03-18)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
+## [0.26.9](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.26.8...@carbon/ibm-cloud-cognitive-experimental@0.26.9) (2021-03-18)
+
+
+### Bug Fixes
+
+* set standard pattern for SCSS per Carbon ([#478](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/478)) ([fd19d32](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/fd19d32199ea377d46d4bf42375b4ba6d80c31d3))
+
+
+
+
+
+## [0.26.8](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.26.7...@carbon/ibm-cloud-cognitive-experimental@0.26.8) (2021-03-18)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
 ## [0.26.7](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.26.6...@carbon/ibm-cloud-cognitive-experimental@0.26.7) (2021-03-18)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental

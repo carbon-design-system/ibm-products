@@ -28,6 +28,8 @@ const defaults = {
     ExportModal: false,
     HTTPErrors: false,
     HTTPError403: false,
+    HTTPError404: false,
+    HTTPErrorOther: false,
     ImportModal: false,
     ModifiedTabs: false,
     Notifications: false,
@@ -61,21 +63,23 @@ const warningMessageAllComponents =
 const warningMessageAllFeatures =
   'IBM Cloud Cognitive (WARNING): All features enabled through use of setAllFeatures';
 
+let allComponents = false;
+let allFeatures = false;
+let silent = false;
+
 const settings = {
-  _allComponents: false,
-  _allFeatures: false,
   // flags
   prefix: defaults.prefix,
   component: new Proxy(component, {
     set(target, property, value) {
-      if (value) {
+      if (value && !silent) {
         console.warn(warningMessageComponent(property));
       }
       target[property] = value;
       return true; // value set
     },
     get(target, property) {
-      if (settings._allComponents) {
+      if (allComponents) {
         return true;
       }
 
@@ -89,14 +93,14 @@ const settings = {
   }),
   feature: new Proxy(feature, {
     set(target, property, value) {
-      if (value) {
+      if (value && !silent) {
         console.warn(warningMessageFeature(property));
       }
       target[property] = value;
       return true; // value set
     },
     get(target, property) {
-      if (settings._allFeatures) {
+      if (allFeatures) {
         return true;
       }
 
@@ -119,33 +123,30 @@ const settings = {
     return flags.feature[feature];
   },
   setAllComponents: (enabled) => {
-    if (enabled) {
+    if (enabled && !silent) {
       console.warn(warningMessageAllComponents);
     }
-    settings._allComponents = enabled;
+    allComponents = enabled;
   },
   setAllFeatures: (enabled) => {
-    if (enabled) {
+    if (enabled && !silent) {
       console.warn(warningMessageAllFeatures);
     }
-    settings._allFeatures = enabled;
+    allFeatures = enabled;
   },
 };
 
 const settingsProxy = new Proxy(settings, {
   set(target, property, value) {
     switch (property) {
-      case '_allComponentsEnabled':
-        target.setAllComponents(!!value);
-        return true; // value set
-
-      case '_allFeaturesEnabled':
-        target.setAllFeatures(!!value);
+      case '_silenceWarnings':
+        // change secret field
+        silent = value;
         return true; // value set
 
       default:
-        // do nothing
-        return false; // did not set anything
+        target[property] = value;
+        return true; // value set
     }
   },
 });

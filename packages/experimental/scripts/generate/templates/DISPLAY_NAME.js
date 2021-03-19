@@ -5,50 +5,88 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import cx from 'classnames';
-import { node, string } from 'prop-types';
+// Import portions of React that are needed.
 import React from 'react';
 
-/**
- * TODO: @import(s) of carbon components
- */
-
-// NOTE: SCSS is not imported directly here: it is rolled up separately.
-
-/**
- * TODO: Add use of Carbon prefix if needed
- */
-import { Canary } from '../_Canary';
+// Other standard imports.
+import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { pkg /*, carbon */ } from '../../settings';
-const componentName = 'DISPLAY_NAME';
+
+// Carbon and package components we use.
+/* TODO: @import(s) of carbon components and other package components. */
+
+// The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--STYLE_NAME`;
+const componentName = 'DISPLAY_NAME';
+
+// NOTE: the component SCSS is not imported here: it is rolled up separately.
 
 /**
- * TODO: Description.
+ * TODO: A description of the component.
  */
-export const DISPLAY_NAME = !pkg.isComponentEnabled(componentName)
-  ? // Return canary if not released or flag not set
-    () => <Canary component={componentName} />
-  : // Main component code...
-    ({ children, className, ...rest }) => {
-      return (
-        <div className={cx(blockClass, className)} {...rest}>
-          {children}
-        </div>
-      );
-    };
+export let DISPLAY_NAME = React.forwardRef(
+  (
+    {
+      // The component props, in alphabetical order (for consistency).
+      children /* TODO: remove if not needed. */,
+      className,
+      /* TODO: add other props for DISPLAY_NAME */
+      // Collect any other property values passed in.
+      ...rest
+    },
+    ref
+  ) => {
+    return (
+      <div
+        {
+          // Pass through any other property values as HTML attributes.
+          ...rest
+        }
+        className={cx(
+          // Apply the block class to the main HTML element, along with
+          // any other classes we need.
+          blockClass,
+          {
+            // Apply any supplied class names to the main HTML element.
+            [className]: className, // this handles className omitted/falsy
+          }
+        )}
+        ref={ref}>
+        {children}
+      </div>
+    );
+  }
+);
 
-DISPLAY_NAME.displayName = componentName; // displayName is used in preference to function.name by React
+// Return a placeholder if not released and not enabled by feature flag
+DISPLAY_NAME = pkg.checkComponentEnabled(DISPLAY_NAME, componentName);
 
-// TODO: Prop type checking - https://www.npmjs.com/package/prop-types#usage
+// The display name of the component, used by React. Note that displayName
+// is used in preference to relying on function.name.
+DISPLAY_NAME.displayName = componentName;
+
+// The types and DocGen commentary for the component props,
+// in alphabetical order (for consistency).
+// See https://www.npmjs.com/package/prop-types#usage.
 DISPLAY_NAME.propTypes = {
-  /** Provide the contents of the `DISPLAY_NAME` */
-  children: node.isRequired,
+  /**
+   * Provide the contents of the DISPLAY_NAME.
+   */
+  children: PropTypes.node.isRequired,
 
-  /** Provide an optional class to be applied to the containing node */
-  className: string,
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className: PropTypes.string,
+
+  /* TODO: add types and DocGen for all props. */
 };
 
+// Default values for component props. Default values are not required for
+// props that are required, nor for props where the component can apply
+// 'undefined' values reasonably. Default values should be provided when the
+// component needs to make a choice or assumption when a prop is not supplied.
 DISPLAY_NAME.defaultProps = {
-  className: null,
+  /* TODO: add defaults for relevant props. */
 };

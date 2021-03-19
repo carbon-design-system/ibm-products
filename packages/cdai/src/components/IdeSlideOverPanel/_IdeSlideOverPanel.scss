@@ -44,8 +44,10 @@
   flex-direction: column;
   background-color: $ui-background;
   box-shadow: -2px 0 4px 0 rgba($ui-05, 0.25);
+  // stylelint-disable-next-line carbon/layout-token-use
   transform: translateX(calc(100% + 6px));
   visibility: hidden;
+  // stylelint-disable-next-line carbon/motion-token-use
   transition: 0.3s ease-out;
 }
 
@@ -89,7 +91,7 @@
   header
   h3 {
   flex: 1;
-  padding: 0 1rem;
+  padding: 0 $spacing-05;
   @include carbon--type-style('productive-heading-03');
 }
 
@@ -139,6 +141,6 @@
 
 .#{$ide-prefix}-slide-over-panel .#{$ide-prefix}-slide-over-panel--children {
   flex: 1;
-  padding: 1rem;
+  padding: $spacing-05;
   overflow: auto;
 }

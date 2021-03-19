@@ -51,25 +51,23 @@ export const ExampleComponent = ({ props }) => {
 Becomes:
 
 ```js
-import { Canary } from '../_Canary'; // Canary needs importing
 import { pkg } from '../../settings';
 const componentName = 'ExampleComponent';
 const blockClass = `${pkg.prefix}-example-component`;
 
-export const ExampleComponent = !pkg.isComponentEnabled(componentName)
-  ? // Return canary if not released or flag not set
-    () => <Canary component={componentName} />
-  : // Main component code...
-    ({ props }) => {
-      // ...
-    };
+export let ExampleComponent = ({ props }) => {
+  // ...
+};
+
+// Return a placeholder if not released and not enabled by feature flag
+ExampleComponents = pkg.checkComponentEnabled(ExampleComponents, componentName);
 
 ExampleComponents.displayName = componentName; // displayName is used in preference to function.name by React
 ```
 
-- Adding the import of `Canary`.
-- Placing the `pkg.isComponentEnabled` test and ternary before the main
-  component code.
+- Using `let` on the export to enable the export to be replaced later.
+- Using the `pkg.checkComponentEnabled` test, which replaces disabled components
+  with a Canary placeholder.
 - Ensuring we specify a displayName for the component.
 
 ### The test file (Component.test.js)

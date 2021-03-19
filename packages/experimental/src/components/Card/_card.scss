@@ -3,6 +3,7 @@
 
 @import 'carbon-components/scss/components/button/button';
 @import 'carbon-components/scss/components/overflow-menu/overflow-menu';
+@import 'carbon-components/scss/globals/grid/grid';
 
 .#{$pkg-prefix}-card {
   background: $ui-01;

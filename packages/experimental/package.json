@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-experimental",
   "description": "Carbon for Cloud & Cognitive experimental UI components",
-  "version": "0.25.0",
+  "version": "0.28.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -32,11 +32,12 @@
     "build:js": "yarn build:js-esm && yarn build:js-cjs",
     "build:js-esm": "cross-env BABEL_ENV=esm yarn build:js-modules -d es",
     "build:js-cjs": "cross-env BABEL_ENV=cjs yarn build:js-modules -d lib",
-    "build:js-modules": "babel src --ignore '**/__tests__','**/*.test.js','**/*.stories.js'",
+    "build:js-modules": "babel src --ignore '**/__tests__','**/*.test.js','**/*.stories.js','**/enable-all.js','**/disable-all.js'",
     "build:scss": "bundler bundle:scss src/index.scss && copyfiles 'src/**/*.scss' scss -u 1",
     "ci-check": "node scripts/import",
     "clean": "rimraf es lib scss",
-    "generate": "node scripts/generate",
+    "generate": "cross-env FORCE_COLOR=1 node scripts/generate",
+    "postinstall": "carbon-telemetry collect --install",
     "test": "bundler check 'src/**/*.scss'"
   },
   "peerDependencies": {
@@ -46,6 +47,7 @@
     "@babel/runtime": "^7.12.5",
     "@carbon/icons-react": "^10.24.0",
     "@carbon/import-once": "^10.5.0",
+    "@carbon/telemetry": "^0.0.0-alpha.6",
     "carbon-components": "^10.30.0",
     "carbon-components-react": "^7.30.0",
     "carbon-icons": "^7.0.7",
@@ -53,9 +55,9 @@
   },
   "devDependencies": {
     "chalk": "^4.1.0",
+    "change-case": "^4.1.2",
     "cross-env": "^7.0.3",
     "fs-extra": "^9.1.0",
-    "param-case": "^3.0.4",
     "yargs": "^16.2.0"
   }
 }

@@ -1,47 +1,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Canary } from '../../_Canary';
 import { pkg } from '../../../settings';
 import { EmptyStateContent } from '../EmptyStateContent';
 import ErrorIllustration from '../assets/Error';
 import { EmptyStateDefaultProps } from '../EmptyState';
 const componentName = 'ErrorEmptyState';
 
-export const ErrorEmptyState = !pkg.isComponentEnabled(componentName)
-  ? // Return canary if not released or flag not set
-    () => <Canary component={componentName} />
-  : // Main component code...
-    ({
-      actionText,
-      actionType,
-      actionIcon,
-      heading,
-      illustrationSize,
-      illustrationTheme,
-      linkText,
-      linkUrl,
-      subtext,
-      onActionEvent,
-    }) => {
-      return (
-        <div className={`${pkg.prefix}-empty-state`}>
-          <ErrorIllustration
-            theme={illustrationTheme}
-            size={illustrationSize}
-          />
-          <EmptyStateContent
-            actionText={actionText}
-            actionType={actionType}
-            actionIcon={actionIcon}
-            heading={heading}
-            linkText={linkText}
-            linkUrl={linkUrl}
-            subtext={subtext}
-            onActionEvent={onActionEvent}
-          />
-        </div>
-      );
-    };
+export let ErrorEmptyState = ({
+  actionText,
+  actionType,
+  actionIcon,
+  heading,
+  illustrationSize,
+  illustrationTheme,
+  linkText,
+  linkUrl,
+  subtext,
+  onActionEvent,
+}) => {
+  return (
+    <div className={`${pkg.prefix}-empty-state`}>
+      <ErrorIllustration theme={illustrationTheme} size={illustrationSize} />
+      <EmptyStateContent
+        actionText={actionText}
+        actionType={actionType}
+        actionIcon={actionIcon}
+        heading={heading}
+        linkText={linkText}
+        linkUrl={linkUrl}
+        subtext={subtext}
+        onActionEvent={onActionEvent}
+      />
+    </div>
+  );
+};
+
+// Return a placeholder if not released and not enabled by feature flag
+ErrorEmptyState = pkg.checkComponentEnabled(ErrorEmptyState, componentName);
 
 ErrorEmptyState.propTypes = {
   /**

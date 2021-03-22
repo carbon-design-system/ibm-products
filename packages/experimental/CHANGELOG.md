@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.28.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.28.4...@carbon/ibm-cloud-cognitive-experimental@0.28.5) (2021-03-22)
+
+
+### Bug Fixes
+
+* suppress console errors from required props during index tests ([#495](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/495)) ([a577ed0](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a577ed03ace039e0fa4921a62e5a307194fa5842))
+
+
+
+
+
 ## [0.28.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.28.3...@carbon/ibm-cloud-cognitive-experimental@0.28.4) (2021-03-22)
 
 

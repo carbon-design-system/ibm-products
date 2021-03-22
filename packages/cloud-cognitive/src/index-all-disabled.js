@@ -6,7 +6,4 @@
  */
 
 import './disable-all'; // must come before component imports
-
-export { pkg } from './settings';
-
 export * from '.';

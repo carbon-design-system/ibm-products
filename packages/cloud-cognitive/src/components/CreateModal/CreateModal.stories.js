@@ -196,3 +196,34 @@ BasicWithDisabledButton.args = {
     </>
   ),
 };
+
+export const BasicWithDarkTheme = Template.bind({});
+BasicWithDarkTheme.storyName = 'Create Modal using dark theme';
+BasicWithDarkTheme.args = {
+  story: Basic,
+  className: 'sb--use-carbon-theme-g90',
+  ...defaultProps,
+  children: (
+    <>
+      <TextInput
+        id="1"
+        labelText="Text input label"
+        helperText="Helper text goes here"
+        placeholder="Placeholder"
+      />
+      <Dropdown
+        id="default"
+        titleText="Dropdown label"
+        helperText="This is some helper text"
+        label="Dropdown menu options"
+        items={['Option 0', 'Option 1', 'Option 2']}
+      />
+      <TextArea
+        id="1"
+        placeholder="Placeholder text"
+        labelText="Text area label"
+        helperText="Optional helper text"
+      />
+    </>
+  ),
+};

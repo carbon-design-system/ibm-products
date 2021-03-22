@@ -8,5 +8,5 @@
 // NOTE: This file has a side effect of enabling all component flags
 
 import { pkg } from './settings';
-pkg._silenceWarnings = true;
+pkg._silenceWarnings(true);
 pkg.setAllComponents(true);

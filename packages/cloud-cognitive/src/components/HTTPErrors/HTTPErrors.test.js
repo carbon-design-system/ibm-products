@@ -11,31 +11,48 @@ import React from 'react';
 import { pkg } from '../../settings';
 import '../../enable-all';
 
+import uuidv4 from '../../global/js/utils/uuidv4';
+
+import { HTTPError404 } from './HTTPError404';
+
 const blockClass = `${pkg.prefix}--http-errors`;
+const componentName = HTTPError404.displayName;
 
-import { HTTPErrors } from '.';
-const name = HTTPErrors.displayName;
+const dataTestId = uuidv4();
 
-describe(name, () => {
-  test('has no accessibility violations', async () => {
-    const { container } = render(<HTTPErrors title="Test heading" />);
-    await expect(container).toBeAccessible(name);
+describe(componentName, () => {
+  it('has no accessibility violations', async () => {
+    const { container } = render(<HTTPError404 title="Test heading" />);
+    await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
-  });
+  }, 40000);
 
-  test('Renders the component `HTTPErrors` if flag is enabled', () => {
-    const { container } = render(<HTTPErrors />);
+  it('Renders the component `HTTPErrors` if flag is enabled', () => {
+    const { container } = render(<HTTPError404 />);
 
     expect(container.querySelector(`.${blockClass}`)).not.toBeNull();
   });
 
-  test('adds a class to the containing node', () => {
+  it('adds a class to the containing node', () => {
     const className = 'className';
 
     expect(
-      render(<HTTPErrors className={className} />).container.querySelector(
+      render(<HTTPError404 className={className} />).container.querySelector(
         `.${className}`
       )
     ).toBeInTheDocument();
+  });
+
+  it('adds additional properties to the containing node', () => {
+    const { container } = render(<HTTPError404 data-testid={dataTestId} />);
+    expect(
+      container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
+    ).toBeInTheDocument();
+  });
+
+  it('forwards a ref to an appropriate node', () => {
+    const ref = React.createRef();
+    render(<HTTPError404 ref={ref} />);
+    expect(ref.current.classList.contains(blockClass)).toBeTruthy();
   });
 });

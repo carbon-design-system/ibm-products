@@ -1,6 +1,6 @@
 # @carbon/ibm-cloud-cognitive
 
-> Carbon for Cloud & Cognitive UI components
+> Carbon for Cloud & Cognitive common UI components
 
 ## Getting started
 

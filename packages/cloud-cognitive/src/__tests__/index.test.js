@@ -27,6 +27,9 @@ describe(name, () => {
     if (key.charAt(0) === key.charAt(0).toUpperCase()) {
       const TestComponent = components[key];
 
+      // TODO: remove this - security components does not currently support canary
+      if (key.startsWith('ComboButton')) continue;
+
       if (!pkg.isComponentEnabled(key)) {
         // We check that unreleased components render a Canary.
         // Non-canary components are tested elsewhere.

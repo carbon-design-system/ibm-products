@@ -6,10 +6,10 @@ the components...
 They were added to enable component feature flags, that is the enabling of
 components through user settings.
 
-This will allow the removal of the term/package `experimental` and permit the
+This allowed the removal of the term/package `experimental` and permitted the
 publication of all components in a single package. Those that have not yet
-completed the release review process will be considered to be `canary` and
-require the consumer to enable via a feature flag.
+completed the release review process are considered to be `canary` and require
+the consumer to enable via a feature flag.
 
 See example component enabled via feature flags on
 [codesandbox](https://codesandbox.io/s/example-component-canary-olif5).

@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './enable-all'; // must come before component imports
+import './disable-all'; // must come before component imports
 
 export { pkg } from './settings';
 
-export * from './components';
+export * from '.';

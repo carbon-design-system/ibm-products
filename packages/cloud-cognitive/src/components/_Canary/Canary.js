@@ -22,7 +22,7 @@ export const Canary = (
   { componentName, className, ...rest } /*, originalArgs*/
 ) => {
   const instructions = `
-import { pkg } from '@carbon/ibm-cloud-cognitive-experimental';
+import { pkg } from '@carbon/ibm-cloud-cognitive';
 // NOTE: must happen before component import
 pkg.component.${componentName} = true;
 `;

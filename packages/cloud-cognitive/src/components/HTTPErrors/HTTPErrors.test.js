@@ -25,7 +25,7 @@ describe(componentName, () => {
     const { container } = render(<HTTPError404 title="Test heading" />);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
-  }, 40000);
+  }, 80000);
 
   it('Renders the component `HTTPErrors` if flag is enabled', () => {
     const { container } = render(<HTTPError404 />);

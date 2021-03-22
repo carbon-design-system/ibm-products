@@ -17,6 +17,7 @@ const defaults = {
     BreadcrumbWithOverflow: false,
     Card: false,
     ContextHeader: false,
+    CreateModal: false,
     EmptyState: false,
     ErrorEmptyState: false,
     NoDataEmptyState: false,

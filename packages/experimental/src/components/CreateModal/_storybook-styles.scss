@@ -1,0 +1,35 @@
+//
+// Copyright IBM Corp. 2020, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+@import './index';
+@import 'carbon-components/scss/components/number-input/number-input';
+@import 'carbon-components/scss/components/text-area/text-area';
+@import 'carbon-components/scss/components/text-input/text-input';
+@import 'carbon-components/scss/components/dropdown/dropdown';
+@import 'carbon-components/scss/components/date-picker/date-picker';
+@import 'carbon-components/scss/components/radio-button/radio-button';
+
+.bx--number {
+  min-width: 100%;
+}
+
+.bx--date-picker {
+  min-width: 100%;
+}
+
+.bx--date-picker-container {
+  min-width: 100%;
+}
+
+.bx--date-picker.bx--date-picker--single .bx--date-picker__input {
+  width: 100%;
+}
+
+.example-wrapper {
+  display: grid;
+  grid-gap: $spacing-05;
+  grid-template-columns: 1fr 1fr;
+}

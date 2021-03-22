@@ -9,7 +9,7 @@ describe('settings', () => {
 
   it('can use custom prefix with a react component', async () => {
     pkg.prefix = 'my-prefix';
-    pkg._silenceWarnings = true;
+    pkg._silenceWarnings(true);
     pkg.component.ExampleComponent = true;
 
     // dynamic import so we can modify the import on the component before using it

@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.12.5",
+    "@carbon/ibm-cloud-cognitive-experimental": "^0.28.5",
     "@carbon/ibm-cloud-cognitive-security": "^0.4.11",
     "@carbon/icons-react": "^10.24.0",
     "@carbon/import-once": "^10.5.0",

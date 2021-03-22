@@ -46,35 +46,39 @@ export let TagSet = ({
 
   useEffect(() => {
     setAllTags(
-      children.map((child, index) => {
-        return (
-          <div
-            key={`sizing-tag-${child.key}`}
-            className={`${blockClass}--sizing-tag`}
-            ref={(el) => (sizingTags.current[index] = el)}>
-            {React.cloneElement(child)}
-          </div>
-        );
-      })
+      children && children.length > 0
+        ? children.map((child, index) => {
+            return (
+              <div
+                key={`sizing-tag-${child.key}`}
+                className={`${blockClass}--sizing-tag`}
+                ref={(el) => (sizingTags.current[index] = el)}>
+                {React.cloneElement(child)}
+              </div>
+            );
+          })
+        : []
     );
     const newDisplayedTags = [];
     const newOverflowTags = [];
 
-    children.forEach((child, index) => {
-      if (index < displayCount) {
-        newDisplayedTags.push(
-          <div
-            key={`displayed-tag-${child.key}`}
-            className={`${blockClass}--displayed-tag`}>
-            {React.cloneElement(child)}
-          </div>
-        );
-      } else {
-        if (newOverflowTags.length < 10) {
-          newOverflowTags.push(React.cloneElement(child));
+    if (children && children.length > 0) {
+      children.forEach((child, index) => {
+        if (index < displayCount) {
+          newDisplayedTags.push(
+            <div
+              key={`displayed-tag-${child.key}`}
+              className={`${blockClass}--displayed-tag`}>
+              {React.cloneElement(child)}
+            </div>
+          );
+        } else {
+          if (newOverflowTags.length < 10) {
+            newOverflowTags.push(React.cloneElement(child));
+          }
         }
-      }
-    });
+      });
+    }
 
     setDisplayedTags(newDisplayedTags);
     setOverflowTags(newOverflowTags);
@@ -218,7 +222,7 @@ export let TagSet = ({
           </div>
 
           <span
-            aria-hidden={overflowTags === 0}
+            aria-hidden={overflowTags.length === 0}
             className={cx(`${blockClass}--overflow`, {
               [`${blockClass}--overflow--hidden`]: overflowTags.length === 0,
             })}
@@ -228,7 +232,14 @@ export let TagSet = ({
               className={`${blockClass}--tooltip`}
               direction={overflowDirection}
               open={tipOpen}
-              triggerText={<Tag>+{children.length - displayedTags.length}</Tag>}
+              triggerText={
+                <Tag>
+                  +
+                  {children && children.length > 0
+                    ? children.length - displayedTags.length
+                    : 0}
+                </Tag>
+              }
               showIcon={false}
               ref={overflowTag}>
               <div

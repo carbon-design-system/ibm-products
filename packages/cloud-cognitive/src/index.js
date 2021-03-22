@@ -5,5 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+export { pkg } from './settings';
 export * from './components';
-export * from '@carbon/ibm-cloud-cognitive-security';
+export * from '@carbon/ibm-cloud-cognitive-security'; // TODO remove dependency

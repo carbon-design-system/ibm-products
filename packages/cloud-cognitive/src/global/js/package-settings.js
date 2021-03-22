@@ -10,7 +10,10 @@ const defaults = {
 
   // by default only released components are set to true
   component: {
-    AboutModal: false,
+    // reviewed and released components:
+    AboutModal: true,
+
+    // other components not yet reviewed and released:
     ActionBar: false,
     ActionBarItem: false,
     APIKeyDownlaoder: false,

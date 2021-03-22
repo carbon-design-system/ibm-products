@@ -22,10 +22,9 @@ If you're just getting started and looking for React components, take a look at
 If you're trying to find something specific, here's a full list of packages that
 we support!
 
-| Package name                                                                                                                                | Description                |
-| ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
-| [`@carbon/ibm-cloud-cognitive`](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/cloud-cognitive)           | Common UI components       |
-| [`@carbon/ibm-cloud-cognitive-experimental`](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/experimental) | Experimental UI components |
+| Package name                                                                                                                      | Description          |
+| --------------------------------------------------------------------------------------------------------------------------------- | -------------------- |
+| [`@carbon/ibm-cloud-cognitive`](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/cloud-cognitive) | Common UI components |
 
 If you want to try out Carbon for Cloud & Cognitive, you can use
 [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/master/examples/codesandbox).

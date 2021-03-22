@@ -1206,7 +1206,7 @@
   resolved "https://registry.yarnpkg.com/@carbon/motion/-/motion-10.14.0.tgz#e0a9e274fdf7be575390eaa7021b1f7d7811d42c"
   integrity sha512-kH+rNFsG08VvSOu23yuzf64sfQwR0vFmwlSuwQ+H40dsxkV3jFWWwEec0IrFraTBEfHSEso2qRKoNbzAHptYMg==
 
-"@carbon/telemetry@0.0.0-alpha.6":
+"@carbon/telemetry@0.0.0-alpha.6", "@carbon/telemetry@^0.0.0-alpha.6":
   version "0.0.0-alpha.6"
   resolved "https://registry.yarnpkg.com/@carbon/telemetry/-/telemetry-0.0.0-alpha.6.tgz#1d11e64f310e98f32c3db0c55f02e047f2398087"
   integrity sha512-DCE8ui/tFi+qvCH+mewbUbWzsiq5Ko3HU1lgrVbpjWv1LfswLKFmMg4Os+PmX6edYoBj39qVChJPeaN/UyfJDw==
@@ -6229,7 +6229,7 @@ chalk@^4.0.0, chalk@^4.1.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
-change-case@^4.1.1:
+change-case@^4.1.1, change-case@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/change-case/-/change-case-4.1.2.tgz#fedfc5f136045e2398c0410ee441f95704641e12"
   integrity sha512-bSxY2ws9OtviILG1EiY5K7NNxkqg/JnRnFxLtKQ96JaviiIxi7djMrSd0ECT9AC+lttClmYwKw53BWpOMblo7A==
@@ -19121,10 +19121,10 @@ stylelint-order@^4.1.0:
     postcss "^7.0.31"
     postcss-sorting "^5.0.1"
 
-stylelint-plugin-carbon-tokens@^0.8.1:
-  version "0.8.1"
-  resolved "https://registry.yarnpkg.com/stylelint-plugin-carbon-tokens/-/stylelint-plugin-carbon-tokens-0.8.1.tgz#3b5f0b5a8e4264f68b56864c638a4163e2203ca8"
-  integrity sha512-1+WqsimbR/+EpLmGla+/YmyGNfW8+gi/hX4X2q9FOpPqtR3vDKqkJdl+JmbB5MGyTYXfcKTdq4Ev6yXw+kGuPA==
+stylelint-plugin-carbon-tokens@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/stylelint-plugin-carbon-tokens/-/stylelint-plugin-carbon-tokens-0.9.0.tgz#b03d76d8daa8e22d2a7bc484787d82fcab9699b7"
+  integrity sha512-+e160ukGv29LL3GzV/TXqOcTpFPK0Bnkgb8TzSahq0ga1n2h0P4RAp25jSvdizL+vtEGwOQQrGuhhq3qLsxmsQ==
   dependencies:
     "@carbon/colors" "^10.9.2"
     "@carbon/motion" "^10.9.0"

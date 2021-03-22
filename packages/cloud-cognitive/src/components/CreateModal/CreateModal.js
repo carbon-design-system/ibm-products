@@ -148,6 +148,7 @@ CreateModal.propTypes = {
 
 CreateModal.displayName = componentName;
 CreateModal.defaultProps = {
+  title: 'Title',
   disabled: false,
   primaryButtonText: 'Create',
   secondaryButtonText: 'Cancel',

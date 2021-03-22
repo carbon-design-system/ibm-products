@@ -17,6 +17,12 @@ import * as components from '../index-all-enabled';
 const name = 'export checks';
 
 describe(name, () => {
+  beforeAll(() => {
+    // The component instantiations that follow will generate a stack of
+    // console errors about required props not provided, and we don't care.
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+  });
+
   for (const key in components) {
     if (key.charAt(0) === key.charAt(0).toUpperCase()) {
       // TODO: remove this test and check all components
@@ -24,9 +30,8 @@ describe(name, () => {
 
       const TestComponent = components[key];
 
-      test(`Does not render a canary, for "${key}", if package flags set`, () => {
+      it(`Does not render a canary, for "${key}", if package flags set`, () => {
         const { container } = render(<TestComponent />);
-
         expect(container.querySelector(`.${canaryClass}`)).toBeNull();
       });
     }

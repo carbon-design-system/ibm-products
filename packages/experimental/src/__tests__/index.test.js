@@ -17,6 +17,12 @@ const name = 'export checks';
 const canaryClass = `${pkg.prefix}-canary`;
 
 describe(name, () => {
+  beforeAll(() => {
+    // The component instantiations that follow will generate a stack of
+    // console errors about required props not provided, and we don't care.
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+  });
+
   for (const key in components) {
     if (key.charAt(0) === key.charAt(0).toUpperCase()) {
       const TestComponent = components[key];

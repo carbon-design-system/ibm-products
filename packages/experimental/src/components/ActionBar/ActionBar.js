@@ -81,6 +81,8 @@ export let ActionBar = ({
     const newDisplayedItems = [];
     const newOverflowItems = [];
 
+    console.log('display item count: ', displayCount);
+
     // add visible items
     for (let index = 0; index < displayCount; index++) {
       newDisplayedItems.push(
@@ -116,15 +118,6 @@ export let ActionBar = ({
   const checkFullyVisibleItems = () => {
     const spaceAvailable = refDisplayedItems.current.offsetWidth;
     const actionBarItemWidth = refDisplayedItems.current.offsetHeight; // short cut measure width
-
-    console.log(
-      'Hi',
-      spaceAvailable,
-      actionBarItemWidth,
-      refDisplayedItems.current.parentNode.offsetWidth,
-      refDisplayedItems.current.parentNode.parentNode.offsetWidth,
-      refDisplayedItems.current.parentNode.parentNode.outerHTML
-    );
 
     if (actionBarItemWidth > 0) {
       const mightFit = spaceAvailable / actionBarItemWidth;

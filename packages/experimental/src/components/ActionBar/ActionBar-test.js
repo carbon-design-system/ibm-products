@@ -4,22 +4,23 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { ActionBar, ActionBarItem } from '..';
 import { Lightning16, Bee24 } from '@carbon/icons-react';
 
 const ActionBarItems = (
   <>
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 1" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 2" />
-    <ActionBarItem renderIcon={Bee24} iconDescription="Action 3" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 4" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 5" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 6" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 7" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 8" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 9" />
+    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 01" />
+    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 02" />
+    <ActionBarItem renderIcon={Bee24} iconDescription="Action 03" />
+    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 04" />
+    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 05" />
+    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 06" />
+    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 07" />
+    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 08" />
+    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 09" />
     <ActionBarItem renderIcon={Lightning16} iconDescription="Action 10" />
   </>
 );
@@ -37,17 +38,31 @@ Object.defineProperties(window.HTMLElement.prototype, {
   },
 });
 
+const TestActionBar = ({ width, children }) => {
+  return (
+    <div style={{ width, height: 40 }}>
+      <ActionBar data-test="fish" className="fish">
+        {children}
+      </ActionBar>
+    </div>
+  );
+};
+
 describe(ActionBar.name, () => {
-  test('Renders an action bar', () => {
+  it('Renders an action bar', () => {
+    // const { rerender, container } =
     render(
-      <div style={{ width: 150, height: 40 }}>
-        <ActionBar data-test="fish" className="fish">
-          {ActionBarItems}
-        </ActionBar>
-      </div>
+      <TestActionBar width={1150}>{ActionBarItems}</TestActionBar>
     );
+
     expect(
-      screen.getByText(/Action 1/) && screen.getByText(/Action 10/)
+      screen.getByText(/Action 01/) && screen.getByText(/Action 10/)
     ).toBeTruthy();
+  });
+
+  it ('Renders an action bar with overflow items')
+    render(<TestActionBar width={200}>{ActionBarItems}</TestActionBar>);
+
+    console.log('container 2nd:', container.outerHTML);
   });
 });

@@ -25,9 +25,6 @@ describe(name, () => {
 
   for (const key in components) {
     if (key.charAt(0) === key.charAt(0).toUpperCase()) {
-      // TODO: remove this test and check all components
-      if (key !== 'ExampleComponent') continue;
-
       const TestComponent = components[key];
 
       it(`Does not render a canary, for "${key}", if package flags set`, () => {

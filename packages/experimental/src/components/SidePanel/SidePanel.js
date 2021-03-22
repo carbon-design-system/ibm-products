@@ -300,150 +300,148 @@ export let SidePanel = ({
     },
   ]);
 
-  return (
-    shouldRender && (
-      <>
-        <div
-          id={`${blockClass}-outer`}
-          className={cx(mainPanelClassNames, {
-            [className]: className,
-          })}
-          style={{
-            animation: `${
-              open
-                ? placement === 'right'
-                  ? 'sidePanelEntranceRight 250ms'
-                  : 'sidePanelEntranceLeft 250ms'
-                : placement === 'right'
-                ? 'sidePanelExitRight 250ms'
-                : 'sidePanelExitLeft 250ms'
-            }`,
-          }}
-          onAnimationEnd={onAnimationEnd}
-          onAnimationStart={onAnimationStart}
-          ref={sidePanelRef}
-          onBlur={handleBlur}>
-          <span
-            ref={startTrapRef}
-            tabIndex="0"
-            role="link"
-            className={`${blockClass}--visually-hidden`}>
-            Focus sentinel
-          </span>
-          <div ref={sidePanelInnerRef}>
-            <div className={`${blockClass}-header`}>
-              {currentStep > 0 && (
-                <Button
-                  kind="ghost"
-                  size="small"
-                  disabled={false}
-                  renderIcon={ArrowLeft20}
-                  iconDescription="Back"
-                  tooltipPosition="right"
-                  tooltipAlignment="center"
-                  className={`${blockClass}-navigation-back-button`}
-                  onClick={() => onNavigationBack((prev) => prev - 1)}
-                />
-              )}
-              {labelText && labelText.length && (
-                <p className={`${blockClass}-label-text`}>{labelText}</p>
-              )}
-              {titleText && titleText.length && (
-                <h2
-                  className={`${blockClass}-title-text`}
-                  ref={sidePanelTitleRef}
-                  title={titleText}>
-                  {titleText}
-                </h2>
-              )}
-              {subtitleText && subtitleText.length && (
-                <p className={`${blockClass}-subtitle-text`}>{subtitleText}</p>
-              )}
-              {actionToolbarButtons && actionToolbarButtons.length && (
-                <div className={`${blockClass}-action-toolbar`}>
-                  {actionToolbarButtons.map((action) => (
-                    <Button
-                      key={action.label}
-                      kind={action.leading ? action.kind : 'ghost'}
-                      size="small"
-                      disabled={false}
-                      renderIcon={action.icon}
-                      iconDescription={action.label}
-                      tooltipPosition="bottom"
-                      tooltipAlignment="center"
-                      className={cx([
-                        `${blockClass}-action-toolbar-button`,
-                        {
-                          [`${blockClass}-action-toolbar-icon-only-button`]: action.icon,
-                          [`${blockClass}-action-toolbar-leading-button`]: !action.icon,
-                        },
-                      ])}
-                      onClick={() => action.onActionToolbarButtonClick()}>
-                      {action.leading ? action.label : ''}
-                    </Button>
-                  ))}
-                </div>
-              )}
+  return shouldRender ? (
+    <>
+      <div
+        id={`${blockClass}-outer`}
+        className={cx(mainPanelClassNames, {
+          [className]: className,
+        })}
+        style={{
+          animation: `${
+            open
+              ? placement === 'right'
+                ? 'sidePanelEntranceRight 250ms'
+                : 'sidePanelEntranceLeft 250ms'
+              : placement === 'right'
+              ? 'sidePanelExitRight 250ms'
+              : 'sidePanelExitLeft 250ms'
+          }`,
+        }}
+        onAnimationEnd={onAnimationEnd}
+        onAnimationStart={onAnimationStart}
+        ref={sidePanelRef}
+        onBlur={handleBlur}>
+        <span
+          ref={startTrapRef}
+          tabIndex="0"
+          role="link"
+          className={`${blockClass}--visually-hidden`}>
+          Focus sentinel
+        </span>
+        <div ref={sidePanelInnerRef}>
+          <div className={`${blockClass}-header`}>
+            {currentStep > 0 && (
               <Button
                 kind="ghost"
                 size="small"
                 disabled={false}
-                renderIcon={Close20}
-                iconDescription="Close"
-                tooltipPosition="bottom"
+                renderIcon={ArrowLeft20}
+                iconDescription="Back"
+                tooltipPosition="right"
                 tooltipAlignment="center"
-                className={`${blockClass}-close-button`}
-                onClick={() => setOpen(false)}
-                ref={sidePanelCloseRef}
+                className={`${blockClass}-navigation-back-button`}
+                onClick={() => onNavigationBack((prev) => prev - 1)}
               />
-            </div>
-            <div className={`${blockClass}-body-content`}>{children}</div>
-            {primaryPanelActions && primaryPanelActions.length ? (
-              <div className={primaryActionContainerClassNames}>
-                {primaryPanelActions.map((action, index) => (
+            )}
+            {labelText && labelText.length && (
+              <p className={`${blockClass}-label-text`}>{labelText}</p>
+            )}
+            {titleText && titleText.length && (
+              <h2
+                className={`${blockClass}-title-text`}
+                ref={sidePanelTitleRef}
+                title={titleText}>
+                {titleText}
+              </h2>
+            )}
+            {subtitleText && subtitleText.length && (
+              <p className={`${blockClass}-subtitle-text`}>{subtitleText}</p>
+            )}
+            {actionToolbarButtons && actionToolbarButtons.length && (
+              <div className={`${blockClass}-action-toolbar`}>
+                {actionToolbarButtons.map((action) => (
                   <Button
-                    key={index}
-                    disabled={action.disabled || action.loading || false}
-                    onClick={() => action.onPrimaryActionClick()}
-                    kind={action.kind || 'primary'}
+                    key={action.label}
+                    kind={action.leading ? action.kind : 'ghost'}
+                    size="small"
+                    disabled={false}
+                    renderIcon={action.icon}
+                    iconDescription={action.label}
+                    tooltipPosition="bottom"
+                    tooltipAlignment="center"
                     className={cx([
-                      `${blockClass}-primary-action-button`,
+                      `${blockClass}-action-toolbar-button`,
                       {
-                        [`${blockClass}-ghost-button`]: action.kind === 'ghost',
-                        [`${blockClass}-primary-action-button-condensed`]: condensed,
+                        [`${blockClass}-action-toolbar-icon-only-button`]: action.icon,
+                        [`${blockClass}-action-toolbar-leading-button`]: !action.icon,
                       },
-                    ])}>
-                    {action.label}
-                    {action.loading && <InlineLoading />}
+                    ])}
+                    onClick={() => action.onActionToolbarButtonClick()}>
+                    {action.leading ? action.label : ''}
                   </Button>
                 ))}
               </div>
-            ) : null}
+            )}
+            <Button
+              kind="ghost"
+              size="small"
+              disabled={false}
+              renderIcon={Close20}
+              iconDescription="Close"
+              tooltipPosition="bottom"
+              tooltipAlignment="center"
+              className={`${blockClass}-close-button`}
+              onClick={() => setOpen(false)}
+              ref={sidePanelCloseRef}
+            />
           </div>
-          <span
-            ref={endTrapRef}
-            tabIndex="0"
-            role="link"
-            className={`${blockClass}--visually-hidden`}>
-            Focus sentinel
-          </span>
+          <div className={`${blockClass}-body-content`}>{children}</div>
+          {primaryPanelActions && primaryPanelActions.length ? (
+            <div className={primaryActionContainerClassNames}>
+              {primaryPanelActions.map((action, index) => (
+                <Button
+                  key={index}
+                  disabled={action.disabled || action.loading || false}
+                  onClick={() => action.onPrimaryActionClick()}
+                  kind={action.kind || 'primary'}
+                  className={cx([
+                    `${blockClass}-primary-action-button`,
+                    {
+                      [`${blockClass}-ghost-button`]: action.kind === 'ghost',
+                      [`${blockClass}-primary-action-button-condensed`]: condensed,
+                    },
+                  ])}>
+                  {action.label}
+                  {action.loading && <InlineLoading />}
+                </Button>
+              ))}
+            </div>
+          ) : null}
         </div>
-        {includeOverlay && (
-          <div
-            ref={sidePanelOverlayRef}
-            className={`${blockClass}-overlay`}
-            style={{
-              animation: `${
-                open
-                  ? 'sidePanelOverlayEntrance 250ms'
-                  : 'sidePanelOverlayExit 250ms'
-              }`,
-            }}
-          />
-        )}
-      </>
-    )
-  );
+        <span
+          ref={endTrapRef}
+          tabIndex="0"
+          role="link"
+          className={`${blockClass}--visually-hidden`}>
+          Focus sentinel
+        </span>
+      </div>
+      {includeOverlay && (
+        <div
+          ref={sidePanelOverlayRef}
+          className={`${blockClass}-overlay`}
+          style={{
+            animation: `${
+              open
+                ? 'sidePanelOverlayEntrance 250ms'
+                : 'sidePanelOverlayExit 250ms'
+            }`,
+          }}
+        />
+      )}
+    </>
+  ) : null;
 };
 
 // Return a placeholder if not released and not enabled by feature flag

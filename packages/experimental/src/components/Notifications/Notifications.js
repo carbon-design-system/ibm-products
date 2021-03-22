@@ -273,102 +273,99 @@ export let Notifications = ({
   const mainSectionClassName = cx([
     `${blockClass}-main-section`,
     {
-      [`${blockClass}-main-section-empty`]: !allNotifications.length,
+      [`${blockClass}-main-section-empty`]:
+        allNotifications && !allNotifications.length,
     },
   ]);
 
-  return (
-    shouldRender && (
-      <div
-        id={blockClass}
-        className={`${blockClass}-container`}
-        style={{ animation: `${open ? 'fadeIn 250ms' : 'fadeOut 250ms'}` }}
-        onAnimationEnd={onAnimationEnd}
-        ref={notificationPanelRef}>
-        <div className={`${blockClass}-header-container`}>
-          <div className={`${blockClass}-header-flex`}>
-            <h1 className={`${blockClass}-header`}>{title}</h1>
-            <Button
-              size="small"
-              kind="ghost"
-              className={`${blockClass}-dismiss-button`}
-              onClick={() => onDismissAllNotifications()}>
-              {dismissAllLabel}
-            </Button>
-          </div>
-          <Toggle
-            size="sm"
-            className={`${blockClass}-do-not-disturb-toggle`}
-            id={`${blockClass}-do-not-disturb-toggle-component`}
-            labelA={doNotDisturbLabel}
-            labelB={doNotDisturbLabel}
-            onToggle={(event) => onDoNotDisturbChange(event)}
-            aria-label={doNotDisturbLabel}
+  return shouldRender ? (
+    <div
+      id={blockClass}
+      className={`${blockClass}-container`}
+      style={{ animation: `${open ? 'fadeIn 250ms' : 'fadeOut 250ms'}` }}
+      onAnimationEnd={onAnimationEnd}
+      ref={notificationPanelRef}>
+      <div className={`${blockClass}-header-container`}>
+        <div className={`${blockClass}-header-flex`}>
+          <h1 className={`${blockClass}-header`}>{title}</h1>
+          <Button
+            size="small"
+            kind="ghost"
+            className={`${blockClass}-dismiss-button`}
+            onClick={() => onDismissAllNotifications()}>
+            {dismissAllLabel}
+          </Button>
+        </div>
+        <Toggle
+          size="sm"
+          className={`${blockClass}-do-not-disturb-toggle`}
+          id={`${blockClass}-do-not-disturb-toggle-component`}
+          labelA={doNotDisturbLabel}
+          labelB={doNotDisturbLabel}
+          onToggle={(event) => onDoNotDisturbChange(event)}
+          aria-label={doNotDisturbLabel}
+        />
+      </div>
+      <div className={mainSectionClassName}>
+        {withinLastDayNotifications && withinLastDayNotifications.length ? (
+          <>
+            <h6 className={`${blockClass}-time-section-label`}>{todayLabel}</h6>
+            {withinLastDayNotifications.map((notification, index) =>
+              renderNotification('today', notification, index)
+            )}
+          </>
+        ) : null}
+        {previousDayNotifications && previousDayNotifications.length ? (
+          <>
+            <h6 className={`${blockClass}-time-section-label`}>
+              {yesterdayLabel}
+            </h6>
+            {previousDayNotifications.map((notification, index) =>
+              renderNotification('yesterday', notification, index)
+            )}
+          </>
+        ) : null}
+        {previousNotifications && previousNotifications.length ? (
+          <>
+            <h6 className={`${blockClass}-time-section-label`}>
+              {previousLabel}
+            </h6>
+            {previousNotifications.map((notification, index) =>
+              renderNotification('previous', notification, index)
+            )}
+          </>
+        ) : null}
+        {!allNotifications.length && (
+          <NotificationsEmptyState
+            illustrationTheme="dark"
+            heading=""
+            subtext={emptyStateLabel}
+          />
+        )}
+      </div>
+      {onViewAllClick &&
+      onSettingsClick &&
+      allNotifications &&
+      allNotifications.length ? (
+        <div className={`${blockClass}-bottom-actions`}>
+          <Button
+            kind="ghost"
+            className={`${blockClass}-view-all-button`}
+            onClick={() => onViewAllClick()}>
+            View all ({allNotifications.length})
+          </Button>
+          <Button
+            kind="ghost"
+            size="small"
+            className={`${blockClass}-settings-button`}
+            renderIcon={Settings16}
+            iconDescription="Settings"
+            onClick={() => onSettingsClick()}
           />
         </div>
-        <div className={mainSectionClassName}>
-          {withinLastDayNotifications && withinLastDayNotifications.length ? (
-            <>
-              <h6 className={`${blockClass}-time-section-label`}>
-                {todayLabel}
-              </h6>
-              {withinLastDayNotifications.map((notification, index) =>
-                renderNotification('today', notification, index)
-              )}
-            </>
-          ) : null}
-          {previousDayNotifications && previousDayNotifications.length ? (
-            <>
-              <h6 className={`${blockClass}-time-section-label`}>
-                {yesterdayLabel}
-              </h6>
-              {previousDayNotifications.map((notification, index) =>
-                renderNotification('yesterday', notification, index)
-              )}
-            </>
-          ) : null}
-          {previousNotifications && previousNotifications.length ? (
-            <>
-              <h6 className={`${blockClass}-time-section-label`}>
-                {previousLabel}
-              </h6>
-              {previousNotifications.map((notification, index) =>
-                renderNotification('previous', notification, index)
-              )}
-            </>
-          ) : null}
-          {!allNotifications.length && (
-            <NotificationsEmptyState
-              illustrationTheme="dark"
-              heading=""
-              subtext={emptyStateLabel}
-            />
-          )}
-        </div>
-        {onViewAllClick &&
-        onSettingsClick &&
-        allNotifications &&
-        allNotifications.length ? (
-          <div className={`${blockClass}-bottom-actions`}>
-            <Button
-              kind="ghost"
-              className={`${blockClass}-view-all-button`}
-              onClick={() => onViewAllClick()}>
-              View all ({allNotifications.length})
-            </Button>
-            <Button
-              kind="ghost"
-              size="small"
-              className={`${blockClass}-settings-button`}
-              renderIcon={Settings16}
-              iconDescription="Settings"
-              onClick={() => onSettingsClick()}
-            />
-          </div>
-        ) : null}
-      </div>
-    )
-  );
+      ) : null}
+    </div>
+  ) : null;
 };
 
 // Return a placeholder if not released and not enabled by feature flag

@@ -1,8 +1,22 @@
+/**
+ * Copyright IBM Corp. 2020, 2021
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+// Import portions of React that are needed.
 import React from 'react';
+
+// Other standard imports.
 import PropTypes from 'prop-types';
+import { pkg } from '../../settings';
+
+// Carbon and package components we use.
 import { Button, Link } from 'carbon-components-react';
 
-import { pkg } from '../../settings';
+// The block part of our conventional BEM class names (blockClass__E--M).
+const blockClass = `${pkg.prefix}--empty-state`;
 const componentName = 'EmptyStateContent';
 
 export const EmptyStateContent = ({
@@ -20,16 +34,16 @@ export const EmptyStateContent = ({
       {typeof heading !== 'string' ? (
         heading
       ) : (
-        <h3 className={`${pkg.prefix}-empty-state-header`}>{heading}</h3>
+        <h3 className={`${blockClass}__header`}>{heading}</h3>
       )}
       {typeof subtext !== 'string' ? (
         subtext
       ) : (
-        <p className={`${pkg.prefix}-empty-state-subtext`}>{subtext}</p>
+        <p className={`${blockClass}__subtext`}>{subtext}</p>
       )}
       {actionText && onActionEvent && (
         <Button
-          className={`${pkg.prefix}-empty-state-action-button`}
+          className={`${blockClass}__action-button`}
           kind={actionType || 'tertiary'}
           onClick={onActionEvent}
           renderIcon={actionIcon || null}>
@@ -37,7 +51,7 @@ export const EmptyStateContent = ({
         </Button>
       )}
       {linkText && linkUrl && (
-        <Link className={`${pkg.prefix}-empty-state-link`} href={linkUrl}>
+        <Link className={`${blockClass}__link`} href={linkUrl}>
           {linkText}
         </Link>
       )}
@@ -45,6 +59,13 @@ export const EmptyStateContent = ({
   );
 };
 
+// The display name of the component, used by React. Note that displayName
+// is used in preference to relying on function.name.
+EmptyStateContent.displayName = componentName;
+
+// The types and DocGen commentary for the component props,
+// in alphabetical order (for consistency).
+// See https://www.npmjs.com/package/prop-types#usage.
 EmptyStateContent.propTypes = {
   /**
    * Empty state action button icon
@@ -108,5 +129,3 @@ EmptyStateContent.propTypes = {
    */
   subtext: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
 };
-
-EmptyStateContent.displayName = componentName;

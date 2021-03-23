@@ -1,0 +1,58 @@
+import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
+import { pkg } from '../../settings';
+import { getStorybookSlug } from '../../../config';
+import { AboutModal } from '.';
+
+# AboutModal
+
+[About modal usage guidelines](https://pages.github.ibm.com/cdai-design/pal/patterns/about-modal/usage)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+The `AboutModal` component provides a way to communicate product information to
+users. It is triggered by a user’s action, appears on top of the main page
+content, and is persistent until dismissed. The purpose of this modal should be
+immediately apparent to the user, with a clear and obvious path to completion.
+
+## Example usage
+
+<Preview>
+  <Story
+    id={getStorybookSlug(pkg, AboutModal.displayName, 'with-all-props-set')}
+  />
+</Preview>
+
+### Overriding the Carbon theme
+
+The design recommendation is to use a dark theme for the AboutModal if the
+application is currently using a light theme, and vice versa. The theme applied
+to the AboutModal can easily be customized as follows:
+
+In SCSS:
+
+```SCSS
+  .exp-about-modal {
+    @include carbon--theme(
+      $theme: $carbon--theme--g90
+    );
+  }
+```
+
+Alternatively, the required Carbon theme can be set as above in a custom CSS
+class which is then applied to the AboutModal using the `className` prop.
+
+<Preview>
+  <Story
+    id={getStorybookSlug(pkg, AboutModal.displayName, 'with-dark-theme')}
+  />
+</Preview>
+
+## Component API
+
+<Props />

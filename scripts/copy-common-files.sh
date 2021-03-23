@@ -22,9 +22,9 @@ root_path=$PWD
 COMMON_FILES="$PWD/common-files";
 CDAI_COMMON_FILES="$PWD/packages/cdai/src/generated"
 CORE_COMMON_FILES="$PWD/packages/core/generated"
-EXPERIMENTAL_COMMON_FILES="$PWD/packages/experimental/src/generated";
+MAIN_COMMON_FILES="$PWD/packages/cloud-cognitive/src/generated";
 
-PACKAGES=($CDAI_COMMON_FILES $CORE_COMMON_FILES $EXPERIMENTAL_COMMON_FILES);
+PACKAGES=($CDAI_COMMON_FILES $CORE_COMMON_FILES $MAIN_COMMON_FILES);
 
 echo "Cleaning common files from packagese..."
 i=0

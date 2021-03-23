@@ -60,10 +60,7 @@ function wrapFocus({
       currentActiveNode === startTrapNode ||
       comparisonResult & DOCUMENT_POSITION_BROAD_PRECEDING
     ) {
-      let arrayNodes = Array.slice.call(
-        bodyNode.querySelectorAll(selectorTabbable),
-        0
-      );
+      let arrayNodes = Array.from(bodyNode.querySelectorAll(selectorTabbable));
       arrayNodes.reverse();
       const tabbable = arrayNodes.find((elem) => Boolean(elem.offsetParent));
       if (tabbable) {

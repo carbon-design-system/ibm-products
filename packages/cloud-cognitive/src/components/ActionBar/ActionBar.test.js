@@ -4,10 +4,10 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import '../../enable-all'; // must come before component is imported (directly or indirectly)
-import { ActionBar, ActionBarItem } from '..';
+import { ActionBar, ActionBarItem } from '.';
 import { Lightning16, Bee24 } from '@carbon/icons-react';
 
 const ActionBarItems = (
@@ -38,31 +38,54 @@ Object.defineProperties(window.HTMLElement.prototype, {
   },
 });
 
-const TestActionBar = ({ width, children }) => {
+// eslint-disable-next-line react/prop-types
+const TestActionBar = ({ width, children, ...rest }) => {
   return (
     <div style={{ width, height: 40 }}>
-      <ActionBar data-test="fish" className="fish">
+      <ActionBar className="fish" {...rest}>
         {children}
       </ActionBar>
     </div>
   );
 };
 
-describe(ActionBar.name, () => {
+describe(ActionBar.displayName, () => {
+  const { click } = fireEvent;
+
   it('Renders an action bar', () => {
-    // const { rerender, container } =
-    render(
-      <TestActionBar width={1150}>{ActionBarItems}</TestActionBar>
-    );
+    // const { container } =
+    render(<TestActionBar width={1150}>{ActionBarItems}</TestActionBar>);
 
     expect(
       screen.getByText(/Action 01/) && screen.getByText(/Action 10/)
     ).toBeTruthy();
   });
 
-  it ('Renders an action bar with overflow items')
-    render(<TestActionBar width={200}>{ActionBarItems}</TestActionBar>);
+  it('Renders an action bar with overflow items', () => {
+    const overflowAriaLabel = 'Overflow aria label';
+    // not enough room so should see an overflow.
+    // const { container } =
+    render(
+      <TestActionBar width={200} overflowAriaLabel={overflowAriaLabel}>
+        {ActionBarItems}
+      </TestActionBar>
+    );
 
-    console.log('container 2nd:', container.outerHTML);
+    const ofBtn = screen.getByLabelText(overflowAriaLabel);
+    expect(ofBtn).toBeTruthy();
+
+    let a10;
+
+    try {
+      a10 = screen.getByText(/Action 10/);
+    } catch {
+      // expected
+    }
+    expect(a10).toBeUndefined();
+
+    // Click overflow button and check for last action
+    click(ofBtn);
+    a10 = screen.getByText(/Action 10/);
+    expect(a10).toBeTruthy();
   });
 });

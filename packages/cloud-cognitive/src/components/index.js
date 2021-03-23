@@ -6,7 +6,7 @@
 //
 
 export { AboutModal } from './AboutModal';
-export { ActionBar, ActionBarItem } from './ActionBar';
+export { ActionBarItem } from './ActionBar';
 export { BreadcrumbWithOverflow } from './BreadcrumbWithOverflow';
 export { EmptyState } from './EmptyStates/EmptyState';
 export { ErrorEmptyState } from './EmptyStates/ErrorEmptyState';

@@ -22,3 +22,8 @@ $block-class: #{$pkg-prefix}-action-bar;
   white-space: nowrap;
   content: 'NOTE: Containing box only used to show extent of available space';
 }
+
+// Uncomment next line (which must appear last) to test in storybook
+// that the SCSS styles for this component are sufficiently specific
+// to override Carbon whichever order the styles get loaded in.
+//@import 'carbon-components/css/carbon-components.min';

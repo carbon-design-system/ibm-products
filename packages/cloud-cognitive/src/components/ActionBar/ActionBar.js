@@ -5,25 +5,35 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// Import portions of React that are needed.
 import React, { useEffect, useState, useRef } from 'react';
-import PropTypes from 'prop-types';
 
+// Other standard imports.
+import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { pkg } from '../../settings';
 import ReactResizeDetector from 'react-resize-detector';
 
+// Carbon and package components we use.
 import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import unwrapIfFragment from '../../global/js/utils/unwrap-if-fragment';
 
-import { pkg } from '../../settings';
+// The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}-action-bar`;
 const componentName = 'ActionBar';
 
+// NOTE: the component SCSS is not imported here: it is rolled up separately.
+
+/**
+ * The ActionBar is used internally by the PageHeader to wrap ActionBarItems.
+ */
 export let ActionBar = ({
   children,
   className,
   maxVisibleActionBarItems,
   onWidthChange,
+  overflowAriaLabel,
   rightAlign,
 }) => {
   const [displayCount, setDisplayCount] = useState(0);
@@ -33,10 +43,11 @@ export let ActionBar = ({
   const refDisplayedItems = useRef(null);
 
   const ActionBarOverflowItems = ({ overflowItems }) => {
+    /* istanbul ignore next if */ // not sure why this is not hit in tests
     if (displayCount < childArray.length) {
       return (
         <OverflowMenu
-          ariaLabel={null}
+          ariaLabel={overflowAriaLabel}
           className={`${blockClass}--overflow-menu`}
           direction="bottom"
           flipped
@@ -80,8 +91,6 @@ export let ActionBar = ({
   useEffect(() => {
     const newDisplayedItems = [];
     const newOverflowItems = [];
-
-    console.log('display item count: ', displayCount);
 
     // add visible items
     for (let index = 0; index < displayCount; index++) {
@@ -150,6 +159,7 @@ export let ActionBar = ({
   const handleResize = () => {
     // width is the space available for all action bar items horizontally
     // the action bar items are squares so the height should be one item wide
+    /* istanbul ignore next */
     checkFullyVisibleItems();
   };
 
@@ -169,9 +179,6 @@ export let ActionBar = ({
   );
 };
 
-// Return a placeholder if not released and not enabled by feature flag
-ActionBar = pkg.checkComponentEnabled(ActionBar, componentName);
-
 ActionBar.displayName = componentName;
 ActionBar.propTypes = {
   /**
@@ -186,13 +193,17 @@ ActionBar.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * maximum visible ActionbBarItems
+   * maximum visible ActionBarItems
    */
   maxVisibleActionBarItems: PropTypes.number,
   /**
    * onItemCountChange - event reporting maxWidth
    */
   onWidthChange: PropTypes.func,
+  /**
+   * overflowAriaLabel label for open close button overflow used for action bar items that do nto fit.
+   */
+  overflowAriaLabel: PropTypes.string,
   /**
    * align tags to right of available space
    */
@@ -203,5 +214,6 @@ ActionBar.propTypes = {
 };
 
 ActionBar.defaultProps = {
+  overflowAriaLabel: 'Open and close additional action bar items list.',
   rightAlign: false,
 };

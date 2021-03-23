@@ -5,18 +5,27 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// Import portions of React that are needed.
 import React from 'react';
+
+// Other standard imports.
 import PropTypes from 'prop-types';
-
 import cx from 'classnames';
+import { pkg } from '../../settings';
 
+// Carbon and package components we use.
 import { Button } from 'carbon-components-react';
 
-import { pkg } from '../../settings';
+// The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'ActionBarItem';
 const blockClass = `${pkg.prefix}-action-bar-item`;
 
-export let ActionBarItem = ({ inOverflow, ...otherProps }) => {
+// NOTE: the component SCSS is not imported here: it is rolled up separately.
+
+/**
+ * The ActionBarItem is used in the page header to populate the action bar
+ */
+export let ActionBarItem = ({ ...otherProps }) => {
   const className = cx([blockClass, otherProps.className]);
 
   return (
@@ -27,8 +36,8 @@ export let ActionBarItem = ({ inOverflow, ...otherProps }) => {
         hasIconOnly: true,
         kind: 'ghost',
         size: 'field',
-        tooltipPosition: inOverflow ? 'left' : 'bottom',
-        tooltipAlignment: inOverflow ? 'center' : 'end',
+        tooltipPosition: 'bottom',
+        tooltipAlignment: 'end',
         type: 'button',
       }}></Button>
   );
@@ -81,10 +90,6 @@ ActionBarItem.propTypes = {
    * (inherited from Carbon Button)
    */
   iconDescription: PropTypes.string,
-  /**
-   * The action bar item is in overflow, set automatically from an ActionBar
-   */
-  inOverflow: PropTypes.bool,
   /**
    * Optional click handler
    *

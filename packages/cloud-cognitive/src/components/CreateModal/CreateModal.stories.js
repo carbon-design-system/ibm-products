@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   Button,
@@ -31,6 +31,11 @@ import styles from './_storybook-styles.scss';
 export default {
   title: `${storybookPrefix}/${CreateModal.displayName}`,
   component: CreateModal,
+  argTypes: {
+    disabled: {
+      type: 'boolean',
+    },
+  },
   parameters: {
     styles,
     docs: {
@@ -136,28 +141,6 @@ BasicNoSubtitle.args = {
   ),
 };
 
-export const BasicWithMultiFields = Template.bind({});
-BasicWithMultiFields.storyName = 'Create Modal with Multifields';
-BasicWithMultiFields.args = {
-  story: BasicWithMultiFields,
-  ...defaultProps,
-  children: (
-    <>
-      <div className="example-wrapper">
-        <TextInput id="1" labelText="First name" placeholder="Jane" />
-        <TextInput id="2" labelText="Last name" placeholder="Doe" />
-      </div>
-      <DatePicker datePickerType="single">
-        <DatePickerInput
-          placeholder="mm/dd/yyyy"
-          labelText="Date of birth"
-          id="date-picker-single"
-        />
-      </DatePicker>
-    </>
-  ),
-};
-
 export const BasicWithDisabledButton = Template.bind({});
 BasicWithDisabledButton.storyName =
   'Create modal with disabled primary form button';
@@ -200,7 +183,7 @@ BasicWithDisabledButton.args = {
 export const BasicWithDarkTheme = Template.bind({});
 BasicWithDarkTheme.storyName = 'Create Modal using dark theme';
 BasicWithDarkTheme.args = {
-  story: Basic,
+  story: BasicWithDarkTheme,
   className: 'sb--use-carbon-theme-g90',
   ...defaultProps,
   children: (

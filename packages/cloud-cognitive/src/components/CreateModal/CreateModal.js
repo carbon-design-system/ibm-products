@@ -5,22 +5,29 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// Import portions of React that are needed.
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+
+// Carbon and package components we use.
 import {
   ComposedModal,
   ModalHeader,
   ModalFooter,
   ModalBody,
   FormGroup,
+  Form,
   Button,
 } from 'carbon-components-react';
 
+// Other standard imports.
 import { Canary } from '../_Canary';
 import { pkg } from '../../settings';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
+
 const componentName = 'CreateModal';
 
+// Custom PropType validator which checks and ensures that the children property has no more than 4 nodes
 const isValidChildren = () => (props) => {
   let child = props.children.props.children;
   if (child && child.length > 4) {
@@ -38,6 +45,8 @@ export const CreateModal = !pkg.isComponentEnabled(componentName)
       className,
       children,
       onClose,
+      customFooter,
+      onClick,
       onSubmit,
       open,
       title,
@@ -48,44 +57,50 @@ export const CreateModal = !pkg.isComponentEnabled(componentName)
       disabled,
     }) => {
       useEffect(() => {
-        let modal = document.querySelector(`.${pkg.prefix}-create-modal`);
+        let modal = document.querySelector(`.${pkg.prefix}--create-modal`);
         let closeButton = modal.querySelector('.bx--modal-close');
         closeButton.remove();
       }, []);
       return (
         <ComposedModal
-          className={classNames(`${pkg.prefix}-create-modal`, {
+          className={classNames(`${pkg.prefix}--create-modal`, {
             [className]: className,
           })}
-          onClose={onClose}
+          aria-label="modal"
+          // onClose={onClose}
           open={open}
           size="sm"
           preventCloseOnClickOutside>
           <ModalHeader
             title={title}
-            titleClassName={`${pkg.prefix}-create-modal-title`}>
+            titleClassName={`${pkg.prefix}--create-modal__title bx--modal-content__regular-content`}>
             {subtitle && (
-              <p className={`${pkg.prefix}-create-modal-subtitle`}>
+              <p
+                className={`${pkg.prefix}--create-modal__subtitle bx--modal-content__regular-content`}>
                 {subtitle}
               </p>
             )}
           </ModalHeader>
           <ModalBody hasForm>
             {description && (
-              <p className={`${pkg.prefix}-create-modal-description`}>
+              <p
+                className={`${pkg.prefix}--create-modal__description bx--modal-content__regular-content`}>
                 {description}
               </p>
             )}
-
-            <div className={classNames(`${pkg.prefix}-create-modal-form`)}>
-              <FormGroup legendText="">{children}</FormGroup>
-            </div>
+            <Form className={classNames(`${pkg.prefix}--create-modal__form`)}>
+              {children}
+            </Form>
           </ModalBody>
           <ModalFooter>
-            <Button kind="secondary" onClick={onClose}>
+            <Button type="cancel" kind="secondary" onClick={onClose}>
               {secondaryButtonText}
             </Button>
-            <Button kind="primary" onClick={onSubmit} disabled={disabled}>
+            <Button
+              type="submit"
+              kind="primary"
+              onClick={onSubmit}
+              disabled={disabled}>
               {primaryButtonText}
             </Button>
           </ModalFooter>
@@ -148,7 +163,6 @@ CreateModal.propTypes = {
 
 CreateModal.displayName = componentName;
 CreateModal.defaultProps = {
-  title: 'Title',
   disabled: false,
   primaryButtonText: 'Create',
   secondaryButtonText: 'Cancel',

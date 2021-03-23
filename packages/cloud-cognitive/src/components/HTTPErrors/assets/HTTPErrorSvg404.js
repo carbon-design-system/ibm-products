@@ -1,7 +1,17 @@
+/**
+ * Copyright IBM Corp. 2020, 2021
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+// Import portions of React that are needed.
 import React from 'react';
+
+// Other standard imports.
 import { string } from 'prop-types';
 
-const HTTPErrorSvg404 = ({ className }) => {
+export const HTTPErrorSvg404 = ({ className }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -1022,8 +1032,9 @@ const HTTPErrorSvg404 = ({ className }) => {
   );
 };
 
+// The types and DocGen commentary for the component props,
+// in alphabetical order (for consistency).
+// See https://www.npmjs.com/package/prop-types#usage.
 HTTPErrorSvg404.propTypes = {
   className: string,
 };
-
-export default HTTPErrorSvg404;

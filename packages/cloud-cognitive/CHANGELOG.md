@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.30.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.29.0...@carbon/ibm-cloud-cognitive@0.30.0) (2021-03-24)
+
+
+### Features
+
+* animation for in-progress icon ([#512](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/512)) ([cf6d06f](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/cf6d06f8b279fe84c18dd23baf9c267c85e88369))
+
+
+
+
+
 # [0.29.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.28.10...@carbon/ibm-cloud-cognitive@0.29.0) (2021-03-24)
 
 

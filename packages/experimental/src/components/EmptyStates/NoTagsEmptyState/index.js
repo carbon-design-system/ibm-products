@@ -1,1 +1,0 @@
-export { NoTagsEmptyState } from './NoTagsEmptyState';

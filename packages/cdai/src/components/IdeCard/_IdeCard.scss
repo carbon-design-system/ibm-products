@@ -20,6 +20,7 @@ $ide-card-size: carbon--mini-units(30);
   flex: 1 0 21%;
   height: calc(100% - #{carbon--mini-units(0.4)}); /* Double the margin above */
   min-height: $ide-card-size;
+  // stylelint-disable-next-line carbon/layout-token-use
   margin: $spacing-01 / 2;
   padding: 0;
   background-color: $ui-background;

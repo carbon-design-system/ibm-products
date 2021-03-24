@@ -10,10 +10,12 @@ import { IdeSlideOverPanel } from '../IdeSlideOverPanel';
 import { shallow } from 'enzyme';
 import CloseIcon16 from '@carbon/icons-react/lib/close/16';
 
+const requiredProps = { onClose: () => {} };
+
 describe('IdeSlideOverPanel', () => {
   describe('Renders common props as expected', () => {
     const wrapper = shallow(
-      <IdeSlideOverPanel className="extra-class">
+      <IdeSlideOverPanel {...requiredProps} className="extra-class">
         <div className="child">child</div>
         <div className="child">child</div>
       </IdeSlideOverPanel>
@@ -30,7 +32,7 @@ describe('IdeSlideOverPanel', () => {
 
   describe('Renders the provided title', () => {
     const wrapper = shallow(
-      <IdeSlideOverPanel title="Foo"></IdeSlideOverPanel>
+      <IdeSlideOverPanel {...requiredProps} title="Foo"></IdeSlideOverPanel>
     );
 
     it('Renders a header containing the provided title', () => {
@@ -40,12 +42,14 @@ describe('IdeSlideOverPanel', () => {
 
   describe('Honours the open property', () => {
     const openWrapper = shallow(
-      <IdeSlideOverPanel open={true}></IdeSlideOverPanel>
+      <IdeSlideOverPanel {...requiredProps} open={true}></IdeSlideOverPanel>
     );
     const closedWrapper = shallow(
-      <IdeSlideOverPanel open={false}></IdeSlideOverPanel>
+      <IdeSlideOverPanel {...requiredProps} open={false}></IdeSlideOverPanel>
     );
-    const defaultWrapper = shallow(<IdeSlideOverPanel></IdeSlideOverPanel>);
+    const defaultWrapper = shallow(
+      <IdeSlideOverPanel {...requiredProps}></IdeSlideOverPanel>
+    );
 
     it('Renders open when open is true', () => {
       expect(openWrapper.find('.ide-slide-over-panel--open')).toHaveLength(1);
@@ -63,15 +67,17 @@ describe('IdeSlideOverPanel', () => {
   });
 
   describe('Honours the size property', () => {
-    const defaultWrapper = shallow(<IdeSlideOverPanel></IdeSlideOverPanel>);
+    const defaultWrapper = shallow(
+      <IdeSlideOverPanel {...requiredProps}></IdeSlideOverPanel>
+    );
     const smallWrapper = shallow(
-      <IdeSlideOverPanel size="small"></IdeSlideOverPanel>
+      <IdeSlideOverPanel {...requiredProps} size="small"></IdeSlideOverPanel>
     );
     const mediumWrapper = shallow(
-      <IdeSlideOverPanel size="medium"></IdeSlideOverPanel>
+      <IdeSlideOverPanel {...requiredProps} size="medium"></IdeSlideOverPanel>
     );
     const largeWrapper = shallow(
-      <IdeSlideOverPanel size="large"></IdeSlideOverPanel>
+      <IdeSlideOverPanel {...requiredProps} size="large"></IdeSlideOverPanel>
     );
 
     it('Supports a small size', () => {
@@ -176,6 +182,7 @@ describe('IdeSlideOverPanel', () => {
   describe('Renders the controls', () => {
     const wrapper = shallow(
       <IdeSlideOverPanel
+        {...requiredProps}
         controls
         primaryButtonText="Primary Button"
         secondaryButtonText="Secondary Button"></IdeSlideOverPanel>
@@ -194,6 +201,7 @@ describe('IdeSlideOverPanel', () => {
       it('renders primary button as danger, when set', () => {
         const wrapper = shallow(
           <IdeSlideOverPanel
+            {...requiredProps}
             danger
             controls
             primaryButtonText="Primary Button"
@@ -221,6 +229,7 @@ describe('IdeSlideOverPanel', () => {
     it('are merged correctly', () => {
       const wrapper = shallow(
         <IdeSlideOverPanel
+          {...requiredProps}
           controls
           withOverlay
           primaryButtonText="Primary Button"
@@ -240,6 +249,7 @@ describe('IdeSlideOverPanel', () => {
     it('override defaults correctly', () => {
       const wrapper = shallow(
         <IdeSlideOverPanel
+          {...requiredProps}
           controls
           withOverlay
           primaryButtonText="Primary Button"

@@ -1,0 +1,49 @@
+//
+// Copyright IBM Corp. 2020, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '@carbon/import-once/scss/import-once';
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+
+@import 'carbon-components/scss/components/button/button';
+@import 'carbon-components/scss/components/link/link';
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin empty-state {
+  $block-class: #{$pkg-prefix}--empty-state;
+
+  .#{$block-class} {
+    .#{$block-class}__header,
+    .#{$block-class}__subtext,
+    p {
+      margin: 0;
+      padding-bottom: $spacing-02;
+    }
+  }
+
+  .#{$block-class}__illustration {
+    &.#{$block-class}__illustration--lg {
+      min-width: 5rem;
+      max-width: 5rem;
+    }
+    &.#{$block-class}__illustration--sm {
+      min-width: 4rem;
+      max-width: 4rem;
+    }
+  }
+
+  .#{$block-class}__action-button,
+  .#{$block-class}__link {
+    display: block;
+    margin-top: $spacing-06;
+  }
+}
+
+@include exports('empty-state') {
+  @include empty-state;
+}

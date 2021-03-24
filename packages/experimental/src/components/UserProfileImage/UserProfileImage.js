@@ -30,59 +30,70 @@ const blockClass = `${pkg.prefix}-user-profile-avatar`;
 export const UserProfileImage = !pkg.isComponentEnabled(componentName)
   ? // Return canary if not released or flag not set
     () => <Canary component={componentName} />
-  :({
-  backgroundColor,
-  icon = 'user',
-  initials,
-  image,
-  size = 'x-large',
-  theme
-}) => {
+  : ({
+      backgroundColor,
+      icon = 'user',
+      initials,
+      image,
+      size = 'x-large',
+      theme,
+    }) => {
+      const icons = {
+        user: {
+          'x-small': <User16 />,
+          small: <User16 />,
+          medium: <User20 />,
+          large: <User24 />,
+          'x-large': <User32 />,
+        },
+        group: {
+          'x-small': <Group16 />,
+          small: <Group16 />,
+          medium: <Group20 />,
+          large: <Group24 />,
+          'x-large': <Group32 />,
+        },
+      };
 
-  const icons = {
-    user: {
-      'x-small': <User16 />,
-      small: <User16 />,
-      medium: <User20 />,
-      large: <User24 />,
-      'x-large': <User32 />,
-    },
-    group: {
-      'x-small': <Group16 />,
-      small: <Group16 />,
-      medium: <Group20 />,
-      large: <Group24 />,
-      'x-large': <Group32 />,
-    },
-  };
+      const formatInitials = () => {
+        if (initials.length === 2) return initials;
+        return initials
+          .match(/(^\S\S?|\b\S)?/g)
+          .join('')
+          .match(/(^\S|\S$)?/g)
+          .join('')
+          .toUpperCase();
+      };
 
-  const formatInitials = () => {
-    if (initials.length === 2) return initials;
-    return initials.match(/(^\S\S?|\b\S)?/g).join("").match(/(^\S|\S$)?/g).join("").toUpperCase()
-  };
+      const renderFillItem = () => {
+        if (image) {
+          return (
+            <img
+              src={image}
+              className={`${blockClass}-photo ${blockClass}-photo--${size}`}
+            />
+          );
+        } else {
+          if (initials) {
+            return formatInitials();
+          } else {
+            return icons[icon][size];
+          }
+        }
+      };
 
-  const renderFillItem = () => {
-    if (image) {
-      return <img src={image} className={`${blockClass}-photo ${blockClass}-photo--${size}`} />;
-    } else {
-      if (initials) {
-        return formatInitials();
-      } else {
-        return icons[icon][size];
-      }
-    }
-  };
-
-  return (
-    <div className={cx([
-      `${blockClass}`, 
-      `${blockClass}--${size}`, 
-      `${blockClass}--${theme}`,
-      `${blockClass}--${backgroundColor}`]) }>
-        {renderFillItem()}
-    </div>
-  );
-};
+      return (
+        <div
+          className={cx([
+            `${blockClass}`,
+            `${blockClass}--${size}`,
+            `${blockClass}--${theme}`,
+            `${blockClass}--${backgroundColor}`,
+          ])}>
+          {renderFillItem()}
+        </div>
+      );
+    };
 
 UserProfileImage.propTypes = {
   /**
@@ -103,7 +114,7 @@ UserProfileImage.propTypes = {
     'light-purple',
     'dark-purlpe',
     'light-teal',
-    'dark-teal'
+    'dark-teal',
   ]),
   /**
    * When passing the icon prop, use either "user" or "group". The values match up to the Carbon Library icons.
@@ -124,5 +135,5 @@ UserProfileImage.propTypes = {
   /**
    * Set theme in which the component will be rendered
    */
-  theme: PropTypes.oneOf(['light', 'dark']).isRequired
+  theme: PropTypes.oneOf(['light', 'dark']).isRequired,
 };

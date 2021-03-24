@@ -28,6 +28,11 @@ and
 [Carbon's Developer Handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md)!
 👀
 
+## Telemetry
+
+In order to gather usage information for these components we use
+[@carbon/telemetry](https://www.carbondesignsystem.com/help/faq/#telemetry).
+
 ## 📝 License
 
 Licensed under the

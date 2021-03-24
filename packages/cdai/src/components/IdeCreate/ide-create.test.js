@@ -468,6 +468,8 @@ it('should not click on a disabled step when usePreCheck is set', () => {
 });
 
 it('validate no label on pre-check step', () => {
+  const spy = jest.spyOn(console, 'error').mockImplementation();
+
   let wrapper;
   try {
     wrapper = mount(
@@ -476,10 +478,12 @@ it('validate no label on pre-check step', () => {
       </IdeCreate>
     );
   } catch (e) {
+    expect(spy).toBeCalled();
     expect(e.message).toEqual(
       'Error: label should not be set on first step when usePreCheck is set'
     );
   } finally {
+    spy.mockRestore(); // Remove mock
     if (wrapper) {
       wrapper.unmount();
     }

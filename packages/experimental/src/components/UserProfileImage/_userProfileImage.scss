@@ -5,11 +5,12 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '../../global/styles/carbon-settings';
+@import '../../global/styles/carbon-settings'; // goes before carbon imports as it affects how carbon is used.
 @import '../../global/styles/project-settings';
 @import '@carbon/colors/scss/colors';
 @import './colorMap';
 
+@debug 'testing sass';
 $block-class: #{$pkg-prefix}-user-profile-avatar;
 $x-large: $spacing-10; //64px
 $large: $spacing-07; //32px

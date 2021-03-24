@@ -40,6 +40,12 @@ export default class IdeImporting extends React.Component {
 
     this.handleFilesAdded = this.handleFilesAdded.bind(this);
   }
+  componentDidMount() {
+    this.mounted = true;
+  }
+  componentWillUnmount() {
+    this.mounted = false;
+  }
   countFiles() {
     return countFiles(this.state.filesToUpload);
   }
@@ -111,6 +117,8 @@ export default class IdeImporting extends React.Component {
     );
   }
   async handleFileAdded(fileToUpload) {
+    if (!this.mounted) return;
+
     if (fileToUpload.invalid) return;
 
     try {
@@ -118,6 +126,7 @@ export default class IdeImporting extends React.Component {
         status: FILE_UPLOAD_STATUS.UPLOADING,
       });
       await this.props.onFileAdded(fileToUpload);
+      if (!this.mounted) return;
       if (
         this.props.allowValidFileEditing ||
         this.props.enableUpload === false

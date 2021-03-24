@@ -53,7 +53,6 @@ describe(ActionBar.displayName, () => {
   const { click } = fireEvent;
 
   it('Renders an action bar', () => {
-    // const { container } =
     render(<TestActionBar width={1150}>{ActionBarItems}</TestActionBar>);
 
     expect(
@@ -64,7 +63,6 @@ describe(ActionBar.displayName, () => {
   it('Renders an action bar with overflow items', () => {
     const overflowAriaLabel = 'Overflow aria label';
     // not enough room so should see an overflow.
-    // const { container } =
     render(
       <TestActionBar width={200} overflowAriaLabel={overflowAriaLabel}>
         {ActionBarItems}

@@ -25,13 +25,14 @@ const blockClass = `${pkg.prefix}-action-bar-item`;
 /**
  * The ActionBarItem is used in the page header to populate the action bar
  */
-export let ActionBarItem = ({ ...otherProps }) => {
+export let ActionBarItem = React.forwardRef(({ ...otherProps }, ref) => {
   const className = cx([blockClass, otherProps.className]);
 
   return (
     <Button
       {...{
         ...otherProps,
+        ref,
         className,
         hasIconOnly: true,
         kind: 'ghost',
@@ -39,9 +40,10 @@ export let ActionBarItem = ({ ...otherProps }) => {
         tooltipPosition: 'bottom',
         tooltipAlignment: 'end',
         type: 'button',
-      }}></Button>
+      }}
+    />
   );
-};
+});
 
 // Return a placeholder if not released and not enabled by feature flag
 ActionBarItem = pkg.checkComponentEnabled(ActionBarItem, componentName);

@@ -39,6 +39,7 @@ function elementOrParentIsFloatingMenu(
  * @param {Node} options.endTrapNode The DOM node of the focus sentinel the is placed next to `modalNode`.
  * @param {Node} options.currentActiveNode The DOM node that has focus.
  * @param {Node} options.oldActiveNode The DOM node that previously had focus.
+ * @param {Node} [options.selectorsFloatingMenus] The CSS selectors that matches floating menus
  */
 function wrapFocus({
   bodyNode,
@@ -46,12 +47,14 @@ function wrapFocus({
   endTrapNode,
   currentActiveNode,
   oldActiveNode,
+  selectorsFloatingMenus,
 }) {
   if (
     bodyNode &&
     currentActiveNode &&
     oldActiveNode &&
-    !bodyNode.contains(currentActiveNode)
+    !bodyNode.contains(currentActiveNode) &&
+    !elementOrParentIsFloatingMenu(currentActiveNode, selectorsFloatingMenus)
   ) {
     const comparisonResult = oldActiveNode.compareDocumentPosition(
       currentActiveNode

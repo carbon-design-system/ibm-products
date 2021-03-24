@@ -18,7 +18,7 @@ import { Button } from 'carbon-components-react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'ActionBarItem';
-const blockClass = `${pkg.prefix}-action-bar-item`;
+const blockClass = `${pkg.prefix}--action-bar-item`;
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 

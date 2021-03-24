@@ -19,7 +19,7 @@
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
 @mixin action-bar {
-  $block-class: #{$pkg-prefix}-action-bar;
+  $block-class: #{$pkg-prefix}--action-bar;
 
   .#{$block-class} {
     display: block;

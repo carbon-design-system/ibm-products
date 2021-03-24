@@ -20,7 +20,7 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import unwrapIfFragment from '../../global/js/utils/unwrap-if-fragment';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-const blockClass = `${pkg.prefix}-action-bar`;
+const blockClass = `${pkg.prefix}--action-bar`;
 const componentName = 'ActionBar';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.

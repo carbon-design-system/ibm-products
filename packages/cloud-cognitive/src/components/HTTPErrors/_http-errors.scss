@@ -8,11 +8,12 @@
 @import '@carbon/import-once/scss/import-once';
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
+
 @import 'carbon-components/scss/components/link/link';
 
-@include exports($name: http-errors) {
-  /// @type String
-  /// @access private
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin http-errors {
   $block-class: #{$pkg-prefix}--http-errors;
 
   .#{$block-class} {
@@ -45,7 +46,7 @@
       display: block;
       margin-bottom: $spacing-02;
     }
-    .#{$block-class}-image {
+    .#{$block-class}__image {
       @include carbon--breakpoint(sm) {
         position: fixed;
         top: 50%;
@@ -58,4 +59,8 @@
       }
     }
   }
+}
+
+@include exports($name: http-errors) {
+  @include http-errors;
 }

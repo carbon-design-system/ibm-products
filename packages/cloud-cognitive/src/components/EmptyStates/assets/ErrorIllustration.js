@@ -1,9 +1,19 @@
+/**
+ * Copyright IBM Corp. 2020, 2021
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+// Import portions of React that are needed.
 import React from 'react';
+
+// Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
 
-const Error = ({ theme, size, ...rest }) => {
+export const ErrorIllustration = ({ theme, size, ...rest }) => {
   return theme === 'dark' ? (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -166,9 +176,7 @@ const Error = ({ theme, size, ...rest }) => {
   );
 };
 
-Error.propTypes = {
+ErrorIllustration.propTypes = {
   size: PropTypes.oneOf(['lg', 'sm']),
   theme: PropTypes.oneOf(['light', 'dark']),
 };
-
-export default Error;

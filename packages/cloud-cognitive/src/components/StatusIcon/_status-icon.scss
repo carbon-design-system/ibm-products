@@ -108,6 +108,9 @@ $block-class: #{$pkg-prefix}-status-icon;
       .#{$block-class}--#{$theme}.#{$block-class}--#{$themekey}-#{$icon} {
         svg {
           @if $icon == in-progress {
+            @media (prefers-reduced-motion) {
+              animation: none;
+            }
             // stylelint-disable-next-line carbon/motion-token-use, declaration-property-unit-whitelist
             animation: rotating 8s infinite linear;
             // stylelint-disable-next-line carbon/theme-token-use
@@ -119,9 +122,20 @@ $block-class: #{$pkg-prefix}-status-icon;
           } @else {
             // stylelint-disable-next-line carbon/theme-token-use
             fill: clr($icon, $theme);
+            @media (prefers-reduced-motion) {
+              .#{$block-class}--#{$theme}.#{$block-class}--#{$themekey}-in-progress {
+                animation: none;
+              }
+            }
           }
         }
       }
     }
   }
 }
+
+// @media (prefers-reduced-motion) {
+//   .#{$block-class}--#{$theme}.#{$block-class}--#{$themekey}-in-progress {
+//     animation: none;
+//   }
+// }

@@ -108,7 +108,7 @@ $block-class: #{$pkg-prefix}-status-icon;
       .#{$block-class}--#{$theme}.#{$block-class}--#{$themekey}-#{$icon} {
         svg {
           @if $icon == in-progress {
-            @media (prefers-reduced-motion) {
+            @media (prefers-reduced-motion: reduce) {
               animation: none;
             }
             // stylelint-disable-next-line carbon/motion-token-use, declaration-property-unit-whitelist

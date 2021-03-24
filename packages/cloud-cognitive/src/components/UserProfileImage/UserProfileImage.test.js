@@ -15,13 +15,6 @@ import React from 'react';
 import '../../enable-all'; // must come before component is imported (directly or indirectly)
 
 import { UserProfileImage } from '.';
-const blockClass = `${pkg.prefix}-user-profile-avatar`;
-// const {
-//   defaultProps: { backgroundColor, icon, size, theme },
-//   name,
-// } = UserProfileImage;
-
-const { backgroundColor, icon, size, theme } = UserProfileImage;
 
 describe(name, () => {
   test('should return a circle with background color', () => {

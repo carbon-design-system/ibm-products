@@ -7,10 +7,8 @@
 
 @import '../../global/styles/carbon-settings'; // goes before carbon imports as it affects how carbon is used.
 @import '../../global/styles/project-settings';
-@import '@carbon/colors/scss/colors';
 @import './colorMap';
 
-@debug 'testing sass';
 $block-class: #{$pkg-prefix}-user-profile-avatar;
 $x-large: $spacing-10; //64px
 $large: $spacing-07; //32px
@@ -43,7 +41,6 @@ $theme-keys: map-keys($themes);
     color: $ui-01;
   }
   @each $color in $base-colors {
-    @debug $color;
     @each $shadekey in $theme-keys {
       .#{$block-class}--#{$key}.#{$block-class}--#{$shadekey}-#{$color} {
         // stylelint-disable-next-line carbon/theme-token-use

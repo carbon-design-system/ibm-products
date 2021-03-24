@@ -10,8 +10,10 @@ const defaults = {
 
   // by default only released components are set to true
   component: {
-    AboutModal: false,
-    ActionBar: false,
+    // reviewed and released components:
+    AboutModal: true,
+
+    // other components not yet reviewed and released:
     ActionBarItem: false,
     APIKeyDownlaoder: false,
     APIKeyModal: false,
@@ -62,8 +64,12 @@ const warningMessageAllComponents =
 const warningMessageAllFeatures =
   'IBM Cloud Cognitive (WARNING): All features enabled through use of setAllFeatures';
 
-let allComponents = false;
-let allFeatures = false;
+// Values to represent overrides for component or feature settings.
+// Each value maps the initial value to the value that should be returned.
+const all = { INITIAL: (v) => v, ON: () => true, OFF: () => false };
+
+let allComponents = all.INITIAL;
+let allFeatures = all.INITIAL;
 let silent = false;
 
 const component = new Proxy(
@@ -75,7 +81,7 @@ const component = new Proxy(
       return true; // value set
     },
     get(target, property) {
-      return allComponents || (target[property] ?? false);
+      return allComponents(target[property] ?? false);
     },
   }
 );
@@ -90,7 +96,7 @@ const feature = new Proxy(
     },
 
     get(target, property) {
-      return allFeatures || (target[property] ?? false);
+      return allFeatures(target[property] ?? false);
     },
   }
 );
@@ -113,13 +119,15 @@ export default {
   },
 
   setAllComponents: (enabled) => {
-    enabled && !silent && console.warn(warningMessageAllComponents);
-    allComponents = enabled;
+    enabled === true && !silent && console.warn(warningMessageAllComponents);
+    allComponents =
+      enabled === true ? all.ON : enabled === false ? all.OFF : all.INITIAL;
   },
 
   setAllFeatures: (enabled) => {
-    enabled && !silent && console.warn(warningMessageAllFeatures);
-    allFeatures = enabled;
+    enabled === true && !silent && console.warn(warningMessageAllFeatures);
+    allFeatures =
+      enabled === true ? all.ON : enabled === false ? all.OFF : all.INITIAL;
   },
 
   _silenceWarnings: (value) => {

@@ -7,7 +7,6 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Canary } from '../_Canary';
 import { pkg } from '../../settings';
 const componentName = 'UserProfileImage';
 
@@ -27,97 +26,104 @@ import cx from 'classnames';
 
 const blockClass = `${pkg.prefix}-user-profile-avatar`;
 
-export const UserProfileImage = !pkg.isComponentEnabled(componentName)
-  ? // Return canary if not released or flag not set
-    () => <Canary component={componentName} />
-  : ({ backgroundColor, icon, initials, image, size, theme }) => {
-      // const icons = {
-      //   user: {
-      //     'x-small': <User16 />,
-      //     small: <User16 />,
-      //     medium: <User20 />,
-      //     large: <User24 />,
-      //     'x-large': <User32 />,
-      //   },
-      //   group: {
-      //     'x-small': <Group16 />,
-      //     small: <Group16 />,
-      //     medium: <Group20 />,
-      //     large: <Group24 />,
-      //     'x-large': <Group32 />,
-      //   },
-      // };
-      const icons = {
-        user: {
-          'x-small': User16,
-          small: User16,
-          medium: User20,
-          large: User24,
-          'x-large': User32,
-        },
-        group: {
-          'x-small': Group16,
-          small: Group16,
-          medium: Group20,
-          large: Group24,
-          'x-large': Group32,
-        },
-      };
+export let UserProfileImage = ({
+  backgroundColor,
+  icon,
+  initials,
+  image,
+  size,
+  theme,
+}) => {
+  // const icons = {
+  //   user: {
+  //     'x-small': <User16 />,
+  //     small: <User16 />,
+  //     medium: <User20 />,
+  //     large: <User24 />,
+  //     'x-large': <User32 />,
+  //   },
+  //   group: {
+  //     'x-small': <Group16 />,
+  //     small: <Group16 />,
+  //     medium: <Group20 />,
+  //     large: <Group24 />,
+  //     'x-large': <Group32 />,
+  //   },
+  // };
+  const icons = {
+    user: {
+      'x-small': User16,
+      small: User16,
+      medium: User20,
+      large: User24,
+      'x-large': User32,
+    },
+    group: {
+      'x-small': Group16,
+      small: Group16,
+      medium: Group20,
+      large: Group24,
+      'x-large': Group32,
+    },
+  };
 
-      const formatInitials = () => {
-        if (initials.length === 2) return initials;
-        // RegEx takes in the display name and returns the first and last initials. Thomas Watson and Thomas J. Watson
-        // both return JW.
-        return initials
-          .match(/(^\S\S?|\b\S)?/g)
-          .join('')
-          .match(/(^\S|\S$)?/g)
-          .join('')
-          .toUpperCase();
-      };
+  const formatInitials = () => {
+    if (initials.length === 2) return initials;
+    // RegEx takes in the display name and returns the first and last initials. Thomas Watson and Thomas J. Watson
+    // both return JW.
+    return initials
+      .match(/(^\S\S?|\b\S)?/g)
+      .join('')
+      .match(/(^\S|\S$)?/g)
+      .join('')
+      .toUpperCase();
+  };
 
-      // const renderFillItem = () => {
-      //   if (image) {
-      //     return (
-      //       <img
-      //         src={image}
-      //         className={`${blockClass}-photo ${blockClass}-photo--${size}`}
-      //       />
-      //     );
-      //   } else {
-      //     if (initials) {
-      //       return formatInitials();
-      //     } else {
-      //       return icons[icon][size];
-      //     }
-      //   }
-      // };
+  // const renderFillItem = () => {
+  //   if (image) {
+  //     return (
+  //       <img
+  //         src={image}
+  //         className={`${blockClass}-photo ${blockClass}-photo--${size}`}
+  //       />
+  //     );
+  //   } else {
+  //     if (initials) {
+  //       return formatInitials();
+  //     } else {
+  //       return icons[icon][size];
+  //     }
+  //   }
+  // };
 
-      const FillItem = image
-        ? () => (
-            <img
-              alt=""
-              src={image}
-              className={`${blockClass}-photo ${blockClass}-photo--${size}`}
-            />
-          )
-        : initials
-        ? formatInitials
-        : icons[icon][size];
+  const FillItem = image
+    ? () => (
+        <img
+          alt=""
+          src={image}
+          className={`${blockClass}-photo ${blockClass}-photo--${size}`}
+        />
+      )
+    : initials
+    ? formatInitials
+    : icons[icon][size];
 
-      return (
-        <div
-          className={cx([
-            `${blockClass}`,
-            `${blockClass}--${size}`,
-            `${blockClass}--${theme}`,
-            `${blockClass}--${backgroundColor}`,
-          ])}>
-          {/* {renderFillItem()} */}
-          <FillItem />
-        </div>
-      );
-    };
+  return (
+    <div
+      className={cx([
+        `${blockClass}`,
+        `${blockClass}--${size}`,
+        `${blockClass}--${theme}`,
+        `${blockClass}--${backgroundColor}`,
+      ])}>
+      {/* {renderFillItem()} */}
+      <FillItem />
+    </div>
+  );
+};
+
+// Return a placeholder if not released and not enabled by feature flag
+UserProfileImage = pkg.checkComponentEnabled(UserProfileImage, componentName);
 
 UserProfileImage.displayName = componentName;
 UserProfileImage.defaultProps = {

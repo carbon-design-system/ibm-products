@@ -1,9 +1,10 @@
 //
-// Copyright IBM Corp. 2020, 2020
+// Copyright IBM Corp. 2020, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
+
 @import './index';
 
 @import 'carbon-components/scss/components/button/button';
@@ -53,3 +54,8 @@
 .tearsheet-stories__tabs .#{$carbon-prefix}--tab-content {
   display: none;
 }
+
+// Uncomment next line (which must appear last) to test in storybook
+// that the SCSS styles for this component are sufficently specific
+// to override Carbon whichever order the styles get loaded in.
+//@import 'carbon-components/css/carbon-components.min';

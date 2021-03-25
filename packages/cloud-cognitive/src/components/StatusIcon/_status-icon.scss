@@ -76,10 +76,10 @@ $block-class: #{$pkg-prefix}-status-icon;
 
 @keyframes rotating {
   0% {
-    transform: rotate(360deg);
+    transform: scaleY(-1) rotate(360deg);
   }
   100% {
-    transform: rotate(0deg);
+    transform: scaleY(-1) rotate(0deg);
   }
 }
 
@@ -108,16 +108,34 @@ $block-class: #{$pkg-prefix}-status-icon;
       .#{$block-class}--#{$theme}.#{$block-class}--#{$themekey}-#{$icon} {
         svg {
           @if $icon == in-progress {
+            @media (prefers-reduced-motion: reduce) {
+              animation: none;
+            }
             // stylelint-disable-next-line carbon/motion-token-use, declaration-property-unit-whitelist
             animation: rotating 8s infinite linear;
+            // stylelint-disable-next-line carbon/theme-token-use
+            fill: clr($icon, $theme);
+          } @else if $icon == running {
+            transform: scaleY(-1);
             // stylelint-disable-next-line carbon/theme-token-use
             fill: clr($icon, $theme);
           } @else {
             // stylelint-disable-next-line carbon/theme-token-use
             fill: clr($icon, $theme);
+            @media (prefers-reduced-motion) {
+              .#{$block-class}--#{$theme}.#{$block-class}--#{$themekey}-in-progress {
+                animation: none;
+              }
+            }
           }
         }
       }
     }
   }
 }
+
+// @media (prefers-reduced-motion) {
+//   .#{$block-class}--#{$theme}.#{$block-class}--#{$themekey}-in-progress {
+//     animation: none;
+//   }
+// }

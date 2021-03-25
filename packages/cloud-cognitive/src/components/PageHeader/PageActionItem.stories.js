@@ -14,6 +14,7 @@ import { pkg } from '../../settings';
 import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
 import { PageActionItem } from '.';
+
 const storybookPrefix = getStorybookPrefix(pkg, PageActionItem.displayName);
 
 export default {

@@ -1,22 +1,28 @@
-//
-// Copyright IBM Corp. 2020, 2020
-//
-// This source code is licensed under the Apache-2.0 license found in the
-// LICENSE file in the root directory of this source tree.
-//
+/**
+ * Copyright IBM Corp. 2020, 2021
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
+// Import portions of React that are needed.
 import React, { useEffect, useLayoutEffect, useState, useRef } from 'react';
+
+// Other standard imports.
 import PropTypes from 'prop-types';
-
 import cx from 'classnames';
-
 import { pkg } from '../../settings';
 
+// Carbon and package components we use.
 import { ComposedModal } from 'carbon-components-react';
 
-const blockClass = `${pkg.prefix}-tearsheet`;
+// The block part of our conventional BEM class names (blockClass__E--M).
+const blockClass = `${pkg.prefix}--tearsheet`;
+const componentName = 'TearsheetShell';
 
 const maxStackingDepth = 3;
+
+// NOTE: the component SCSS is not imported here: it is rolled up separately.
 
 // Global data structures to communicate the state of tearsheet stacking
 // (i.e. when more than one tearsheet is open). The stack array contains one
@@ -30,8 +36,7 @@ const maxStackingDepth = 3;
 let stack = [];
 let stackHandlers = [];
 
-const componentName = 'TearsheetShell';
-
+// TearSheetShell is used internally by TearSheet and TearSheetNarrow
 export const TearsheetShell = ({
   children,
   className,
@@ -108,8 +113,8 @@ export const TearsheetShell = ({
     [className]: className,
   });
   const containerClasses = cx({
-    [`${blockClass}--container`]: true,
-    [`${blockClass}--container--lower`]: height === 'lower',
+    [`${blockClass}__container`]: true,
+    [`${blockClass}__container--lower`]: height === 'lower',
   });
 
   if (stackPosition <= maxStackingDepth) {
@@ -134,6 +139,13 @@ export const TearsheetShell = ({
   }
 };
 
+// The display name of the component, used by React. Note that displayName
+// is used in preference to relying on function.name.
+TearsheetShell.displayName = componentName;
+
+// The types and DocGen commentary for the component props,
+// in alphabetical order (for consistency).
+// See https://www.npmjs.com/package/prop-types#usage.
 TearsheetShell.propTypes = {
   /**
    * Specifies the content of the TearsheetShell.
@@ -165,14 +177,14 @@ TearsheetShell.propTypes = {
   /**
    * Specifies the width of the Tearsheet. `'narrow' | 'wide'`
    */
-  size: PropTypes.oneOf(['narrow', 'wide']),
+  size: PropTypes.oneOf(['narrow', 'wide']).isRequired,
 };
 
+// Default values for component props. Default values are not required for
+// props that are required, nor for props where the component can apply
+// 'undefined' values reasonably. Default values should be provided when the
+// component needs to make a choice or assumption when a prop is not supplied.
 TearsheetShell.defaultProps = {
-  className: '',
   height: 'normal',
   preventCloseOnClickOutside: false,
-  size: 'wide',
 };
-
-TearsheetShell.displayName = componentName;

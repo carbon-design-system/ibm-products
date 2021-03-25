@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.30.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.30.3...@carbon/ibm-cloud-cognitive@0.30.4) (2021-03-25)
+
+
+### Bug Fixes
+
+* add tests to PageActionItem ([#516](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/516)) ([f1e5de2](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f1e5de288720be43f411b173486b5ed5ebe33759))
+
+
+
+
+
 ## [0.30.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.30.2...@carbon/ibm-cloud-cognitive@0.30.3) (2021-03-25)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

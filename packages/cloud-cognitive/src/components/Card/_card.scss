@@ -1,9 +1,14 @@
+//
+// Copyright IBM Corp. 2020, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
 @import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/overflow-menu/overflow-menu';
-@import 'carbon-components/scss/globals/grid/grid';
 
 .#{$pkg-prefix}-card {
   background: $ui-01;
@@ -43,28 +48,12 @@
   padding: $spacing-05;
 }
 
-.#{$pkg-prefix}-card--productive .#{$pkg-prefix}-card-header {
-  padding-right: 0;
-}
-
 .#{$pkg-prefix}-card-header--label-only {
   padding-bottom: $spacing-03;
 }
 
 .#{$pkg-prefix}-card-header--label-only .#{$pkg-prefix}-card-label {
   margin-bottom: 0;
-}
-
-.#{$pkg-prefix}-card-title {
-  @include carbon--type-style('productive-heading-03');
-}
-
-.#{$pkg-prefix}-card--productive .#{$pkg-prefix}-card-title {
-  @include carbon--type-style('productive-heading-02');
-}
-
-.#{$pkg-prefix}-card--productive .#{$pkg-prefix}-card-title--lg {
-  @include carbon--type-style('productive-heading-03');
 }
 
 .#{$pkg-prefix}-card-title-container {
@@ -98,12 +87,6 @@
   justify-content: flex-end;
 }
 
-.#{$pkg-prefix}-card--productive .#{$pkg-prefix}-card-footer {
-  align-items: center;
-  justify-content: space-between;
-  border-top: 1px solid $ui-03;
-}
-
 .#{$pkg-prefix}-card-actions {
   display: flex;
   flex-direction: row;
@@ -111,16 +94,8 @@
   margin-top: 0;
 }
 
-.#{$pkg-prefix}-card--productive .#{$pkg-prefix}-card-actions {
-  margin: 0;
-}
-
 .#{$pkg-prefix}-card-icon {
   cursor: pointer;
-}
-
-.#{$pkg-prefix}-card--productive .#{$pkg-prefix}-card-icon {
-  margin-right: $spacing-05;
 }
 
 .#{$pkg-prefix}-card-link {

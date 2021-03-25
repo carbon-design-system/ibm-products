@@ -1,0 +1,34 @@
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+// shared card styles can be found in the Card folder
+@import '../Card/card';
+
+@import 'carbon-components/scss/components/overflow-menu/overflow-menu';
+
+.#{$pkg-prefix}-card--productive {
+  .#{$pkg-prefix}-card-header {
+    padding-right: 0;
+  }
+
+  .#{$pkg-prefix}-card-title {
+    @include carbon--type-style('productive-heading-02');
+  }
+
+  .#{$pkg-prefix}-card-title--lg {
+    @include carbon--type-style('productive-heading-03');
+  }
+
+  .#{$pkg-prefix}-card-footer {
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid $ui-03;
+  }
+
+  .#{$pkg-prefix}-card-actions {
+    margin: 0;
+  }
+
+  .#{$pkg-prefix}-card-icon {
+    margin-right: $spacing-05;
+  }
+}

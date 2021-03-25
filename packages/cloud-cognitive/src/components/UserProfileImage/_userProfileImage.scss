@@ -41,7 +41,7 @@ $theme-keys: map-keys($themes);
     color: $ui-01;
   }
   @each $color in $base-colors {
-    @each $shadekey in $theme-keys {
+    @each $contrastkey in $theme-keys {
       .#{$block-class}--#{$key}.#{$block-class}--#{$contrastkey}-#{$color} {
         // stylelint-disable-next-line carbon/theme-token-use
         background-color: get-background-color($color, $key, $contrastkey);

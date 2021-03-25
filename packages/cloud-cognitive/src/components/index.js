@@ -28,4 +28,5 @@ export { RemoveDeleteModal } from './RemoveDeleteModal';
 export { SidePanel } from './SidePanel';
 export { TagSet } from './TagSet';
 export { Tearsheet, TearsheetNarrow } from './Tearsheet';
+export { UserProfileImage } from './UserProfileImage';
 export { WebTerminal } from './WebTerminal';

@@ -14,7 +14,6 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
-  FormGroup,
   Form,
   Button,
 } from 'carbon-components-react';
@@ -37,7 +36,7 @@ const isValidChildren = () => (props) => {
   } else return;
 };
 
-export const CreateModal = !pkg.isComponentEnabled(componentName)
+export let CreateModal = !pkg.isComponentEnabled(componentName)
   ? // Return canary if not released or flag not set
     () => <Canary component={componentName} />
   : // Main component code...
@@ -45,8 +44,6 @@ export const CreateModal = !pkg.isComponentEnabled(componentName)
       className,
       children,
       onClose,
-      customFooter,
-      onClick,
       onSubmit,
       open,
       title,
@@ -107,6 +104,9 @@ export const CreateModal = !pkg.isComponentEnabled(componentName)
         </ComposedModal>
       );
     };
+
+// Return a placeholder if not released and not enabled by feature flag
+CreateModal = pkg.checkComponentEnabled(CreateModal, componentName);
 
 CreateModal.propTypes = {
   /**

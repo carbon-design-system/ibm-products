@@ -2,8 +2,11 @@ import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
 import { pkg } from '../../settings';
 import { getStorybookSlug } from '../../../config';
 import { CreateModal } from '.';
+import { ArgsTable } from '@storybook/addon-docs/blocks';
 
-# ExampleComponent
+# CreateModal
+
+[Carbon create flows guidelines](https://www.carbondesignsystem.com/community/patterns/create-flows/#modal)
 
 ## Table of Contents
 
@@ -13,7 +16,10 @@ import { CreateModal } from '.';
 
 ## Overview
 
-This component is an example
+The `CreateModal` component provides a way for a user to quickly generate a new
+resource. It is triggered by a user’s action, appears on top of the main page
+content, and is persistent until dismissed. The purpose of this modal should be
+immediately apparent to the user, with a clear and obvious path to completion.
 
 ## Example usage
 
@@ -21,15 +27,47 @@ Here it is in use.
 
 <Preview>
   <Story
-    id={getStorybookSlug(pkg, ExampleComponent.displayName, 'boxed-set')}
+    id={getStorybookSlug(pkg, CreateModal.displayName, 'with-state-manager')}
   />
 </Preview>
 
-<Preview>
-  <Story
-    id={getStorybookSlug(pkg, ExampleComponent.displayName, 'shadow-set')}
-  />
-</Preview>
+### Overriding the Carbon theme
+
+The design recommendation is to use a dark theme for the AboutModal if the
+application is currently using a light theme, and vice versa. The theme applied
+to the AboutModal can easily be customized as follows:
+
+In SCSS:
+
+```SCSS
+  .exp-create-modal {
+    @include carbon--theme(
+      $theme: $carbon--theme--g90
+    );
+  }
+```
+
+Alternatively, the required Carbon theme can be set as above in a custom CSS
+class which is then applied to the AboutModal using the `className` prop.
+
+## Form validation
+
+All forms, including that within the `CreateModal` should follow C&CS guidelines
+for form validation. You can find more information on how to validate your form
+fields in
+[Carbon's Form usage page](https://www.carbondesignsystem.com/components/form/usage).
+
+## Errors
+
+The `CreateModal` component does not accept more than 4 child nodes -- adding
+additional will throw an error.
+
+```
+Warning: Failed prop type: The `CreateModal` component does not take more than 4 nodes as children. This is to ensure that the modal does not overflow. Please remove 1 or more nodes.
+```
+
+If your form requires more than 4 form fields, consider using a `Tearsheet` or
+`Sidepanel` component.
 
 ## Component API
 

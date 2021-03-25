@@ -8,12 +8,10 @@
 'use strict';
 
 module.exports = {
-  collectCoverage: true,
   collectCoverageFrom: [
-    'packages/cloud-cognitive/src/**/*.js',
+    'packages/**/src/**/*.js',
     '!packages/**/{examples,stories}/**',
     '!**/*.stories.js',
-    '!**/index*.js',
   ],
   moduleFileExtensions: ['js', 'json', 'node'],
   reporters: ['default'],

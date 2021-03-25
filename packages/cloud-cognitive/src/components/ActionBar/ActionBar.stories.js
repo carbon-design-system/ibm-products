@@ -16,7 +16,7 @@ import { getStorybookPrefix } from '../../../config';
 import { ActionBar, ActionBarItem } from '.';
 const storybookPrefix = getStorybookPrefix(pkg, ActionBar.displayName);
 
-const blockClass = `${pkg.prefix}-action-bar`;
+const blockClass = `${pkg.prefix}--action-bar`;
 
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 

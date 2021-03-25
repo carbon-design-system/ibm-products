@@ -6,7 +6,7 @@
 //
 
 export { AboutModal } from './AboutModal';
-export { ActionBar, ActionBarItem } from './ActionBar';
+export { ActionBarItem } from './ActionBar';
 export { BreadcrumbWithOverflow } from './BreadcrumbWithOverflow';
 export { EmptyState } from './EmptyStates/EmptyState';
 export { ErrorEmptyState } from './EmptyStates/ErrorEmptyState';
@@ -28,4 +28,5 @@ export { RemoveDeleteModal } from './RemoveDeleteModal';
 export { SidePanel } from './SidePanel';
 export { TagSet } from './TagSet';
 export { Tearsheet, TearsheetNarrow } from './Tearsheet';
+export { UserProfileImage } from './UserProfileImage';
 export { WebTerminal } from './WebTerminal';

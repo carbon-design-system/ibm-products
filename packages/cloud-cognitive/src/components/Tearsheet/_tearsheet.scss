@@ -1,219 +1,229 @@
 //
-// Copyright IBM Corp. 2020, 2020
+// Copyright IBM Corp. 2020, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
+@import '@carbon/import-once/scss/import-once';
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
 @import 'carbon-components/scss/components/modal/modal';
 
-$block-class: #{$pkg-prefix}-tearsheet;
-// stylelint-disable-next-line carbon/theme-token-use
-$overlay-color: $carbon--gray-100;
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin example-component {
+  $block-class: #{$pkg-prefix}--tearsheet;
 
-// TearsheetShell styles.
-
-.#{$block-class} {
-  align-items: flex-end;
-}
-
-.#{$block-class}.#{$block-class}--stacked-1-of-2 {
-  z-index: z('modal') - 1;
   // stylelint-disable-next-line carbon/theme-token-use
-  background-color: rgba($overlay-color, 0.33);
-}
+  $overlay-color: $carbon--gray-100;
 
-.#{$block-class}.#{$block-class}--stacked-1-of-3 {
-  z-index: z('modal') - 2;
-  // stylelint-disable-next-line carbon/theme-token-use
-  background-color: rgba($overlay-color, 0.11);
-}
-
-.#{$block-class}.#{$block-class}--stacked-2-of-3 {
-  z-index: z('modal') - 1;
-  // stylelint-disable-next-line carbon/theme-token-use
-  background-color: rgba($overlay-color, 0.25);
-}
-
-.#{$block-class}.#{$block-class}--stacked-2-of-2,
-.#{$block-class}.#{$block-class}--stacked-3-of-3 {
-  // stylelint-disable-next-line carbon/theme-token-use
-  background-color: rgba($overlay-color, 0.25);
-}
-
-.#{$block-class}[class*='#{$block-class}--stacked'] {
-  // stylelint-disable-next-line carbon/motion-token-use
-  transition: visibility 0s linear, z-index $duration--moderate-02;
-}
-
-.#{$block-class}.#{$block-class}--stacked-closed {
-  // stylelint-disable-next-line carbon/motion-token-use
-  transition: visibility 0s linear $duration--moderate-02,
-    opacity $duration--moderate-02 motion(exit, expressive);
-}
-
-.#{$block-class}--container {
-  top: auto;
-  height: 100%;
-  max-height: calc(100% - #{$spacing-09});
-  // stylelint-disable-next-line carbon/layout-token-use
-  transform: translate3d(0, 500px, 0);
-}
-
-.#{$block-class}.#{$block-class} .#{$block-class}--container {
-  transition: width $duration--moderate-02 motion(standard, expressive),
-    transform $duration--moderate-02 motion(entrance, expressive);
-}
-
-.#{$block-class}--stacked-2-of-2 .#{$block-class}--container,
-.#{$block-class}--stacked-2-of-3 .#{$block-class}--container {
-  max-height: calc(100% - (#{$spacing-09} + #{$spacing-05}));
-}
-
-.#{$block-class}--stacked-3-of-3 .#{$block-class}--container {
-  max-height: calc(100% - (#{$spacing-09} + (2 * #{$spacing-05})));
-}
-
-.#{$block-class}--container--lower {
-  max-height: calc(100% - (#{$spacing-09} + #{$spacing-08}));
-}
-
-.#{$block-class}--stacked-2-of-2 .#{$block-class}--container--lower,
-.#{$block-class}--stacked-2-of-3 .#{$block-class}--container--lower {
-  max-height: calc(100% - (#{$spacing-09} + #{$spacing-08} + #{$spacing-05}));
-}
-
-.#{$block-class}--stacked-3-of-3 .#{$block-class}--container--lower {
-  max-height: calc(
-    100% - (#{$spacing-09} + #{$spacing-08} + (2 * #{$spacing-05}))
-  );
-}
-
-.#{$block-class}--stacked-1-of-2:not(.#{$block-class}--wide)
-  .#{$block-class}--container,
-.#{$block-class}--stacked-2-of-3:not(.#{$block-class}--wide)
-  .#{$block-class}--container {
-  @include carbon--breakpoint(md) {
-    width: calc(60% - (2 * #{$spacing-05}));
+  .#{$block-class} {
+    align-items: flex-end;
   }
 
-  @include carbon--breakpoint(lg) {
-    width: calc(42% - (2 * #{$spacing-05}));
+  .#{$block-class}.#{$block-class}--stacked-1-of-2 {
+    z-index: z('modal') - 1;
+    // stylelint-disable-next-line carbon/theme-token-use
+    background-color: rgba($overlay-color, 0.33);
   }
 
-  @include carbon--breakpoint(xlg) {
-    width: calc(36% - (2 * #{$spacing-05}));
+  .#{$block-class}.#{$block-class}--stacked-1-of-3 {
+    z-index: z('modal') - 2;
+    // stylelint-disable-next-line carbon/theme-token-use
+    background-color: rgba($overlay-color, 0.11);
+  }
+
+  .#{$block-class}.#{$block-class}--stacked-2-of-3 {
+    z-index: z('modal') - 1;
+    // stylelint-disable-next-line carbon/theme-token-use
+    background-color: rgba($overlay-color, 0.25);
+  }
+
+  .#{$block-class}.#{$block-class}--stacked-2-of-2,
+  .#{$block-class}.#{$block-class}--stacked-3-of-3 {
+    // stylelint-disable-next-line carbon/theme-token-use
+    background-color: rgba($overlay-color, 0.25);
+  }
+
+  .#{$block-class}[class*='#{$block-class}--stacked'] {
+    // stylelint-disable-next-line carbon/motion-token-use
+    transition: visibility 0s linear, z-index $duration--moderate-02;
+  }
+
+  .#{$block-class}.#{$block-class}--stacked-closed {
+    // stylelint-disable-next-line carbon/motion-token-use
+    transition: visibility 0s linear $duration--moderate-02,
+      opacity $duration--moderate-02 motion(exit, expressive);
+  }
+
+  .#{$block-class} .#{$block-class}__container {
+    top: auto;
+    height: 100%;
+    max-height: calc(100% - #{$spacing-09});
+    // stylelint-disable-next-line carbon/layout-token-use
+    transform: translate3d(0, 500px, 0);
+  }
+
+  .#{$block-class}.#{$block-class} .#{$block-class}__container {
+    transition: width $duration--moderate-02 motion(standard, expressive),
+      transform $duration--moderate-02 motion(entrance, expressive);
+  }
+
+  .#{$block-class}.#{$block-class}--stacked-2-of-2 .#{$block-class}__container,
+  .#{$block-class}.#{$block-class}--stacked-2-of-3 .#{$block-class}__container {
+    max-height: calc(100% - (#{$spacing-09} + #{$spacing-05}));
+  }
+
+  .#{$block-class}.#{$block-class}--stacked-3-of-3 .#{$block-class}__container {
+    max-height: calc(100% - (#{$spacing-09} + (2 * #{$spacing-05})));
+  }
+
+  .#{$block-class} .#{$block-class}__container--lower {
+    max-height: calc(100% - (#{$spacing-09} + #{$spacing-08}));
+  }
+
+  .#{$block-class}.#{$block-class}--stacked-2-of-2
+    .#{$block-class}__container--lower,
+  .#{$block-class}.#{$block-class}--stacked-2-of-3
+    .#{$block-class}__container--lower {
+    max-height: calc(100% - (#{$spacing-09} + #{$spacing-08} + #{$spacing-05}));
+  }
+
+  .#{$block-class}.#{$block-class}--stacked-3-of-3
+    .#{$block-class}__container--lower {
+    max-height: calc(
+      100% - (#{$spacing-09} + #{$spacing-08} + (2 * #{$spacing-05}))
+    );
+  }
+
+  .#{$block-class}.#{$block-class}--stacked-1-of-2:not(.#{$block-class}--wide)
+    .#{$block-class}__container,
+  .#{$block-class}.#{$block-class}--stacked-2-of-3:not(.#{$block-class}--wide)
+    .#{$block-class}__container {
+    @include carbon--breakpoint(md) {
+      width: calc(60% - (2 * #{$spacing-05}));
+    }
+
+    @include carbon--breakpoint(lg) {
+      width: calc(42% - (2 * #{$spacing-05}));
+    }
+
+    @include carbon--breakpoint(xlg) {
+      width: calc(36% - (2 * #{$spacing-05}));
+    }
+  }
+
+  .#{$block-class}.#{$block-class}--stacked-1-of-3:not(.#{$block-class}--wide)
+    .#{$block-class}__container {
+    @include carbon--breakpoint(md) {
+      width: calc(60% - (4 * #{$spacing-05}));
+    }
+
+    @include carbon--breakpoint(lg) {
+      width: calc(42% - (4 * #{$spacing-05}));
+    }
+
+    @include carbon--breakpoint(xlg) {
+      width: calc(36% - (4 * #{$spacing-05}));
+    }
+  }
+
+  .#{$block-class}.#{$block-class}--wide .#{$block-class}__container {
+    width: calc(100% - (2 * #{$spacing-07}));
+  }
+
+  .#{$block-class}.#{$block-class}--stacked-1-of-2.#{$block-class}--wide
+    .#{$block-class}__container,
+  .#{$block-class}.#{$block-class}--stacked-2-of-3.#{$block-class}--wide
+    .#{$block-class}__container {
+    width: calc(100% - (2 * #{$spacing-07}) - (2 * #{$spacing-05}));
+  }
+
+  .#{$block-class}.#{$block-class}--stacked-1-of-3.#{$block-class}--wide
+    .#{$block-class}__container {
+    width: calc(100% - (2 * #{$spacing-07}) - (4 * #{$spacing-05}));
+  }
+
+  .#{$block-class}.#{$block-class}--wide .#{$block-class}__header {
+    margin: 0;
+    padding: $spacing-06;
+    border-bottom: 1px solid $ui-03;
+  }
+
+  .#{$block-class} .#{$block-class}__header--no-close-icon {
+    display: none;
+  }
+
+  .#{$block-class}.#{$block-class}--wide
+    .#{$carbon-prefix}--modal-header__heading {
+    @include carbon--type-style('productive-heading-04');
+  }
+
+  .#{$block-class} .#{$block-class}__header-description {
+    margin-top: $spacing-05;
+    @include carbon--type-style('body-short-01');
+  }
+
+  .#{$block-class}.#{$block-class}--wide .#{$block-class}__header-description {
+    margin-top: $spacing-03;
+  }
+
+  .#{$block-class} .#{$block-class}__header-navigation {
+    margin: $spacing-04 0 0;
+  }
+
+  .#{$block-class}.#{$block-class}--wide .#{$block-class}__header-navigation {
+    margin: $spacing-04 0 calc(-1 * #{$spacing-06});
+  }
+
+  .#{$block-class} .#{$block-class}__body {
+    display: flex;
+    flex-grow: 1;
+    margin: 0;
+    padding: 0;
+  }
+
+  .#{$block-class} .#{$block-class}__influencer {
+    width: 256px;
+    min-width: 256px;
+    border-right: 1px solid $ui-03;
+  }
+
+  .#{$block-class} .#{$block-class}__influencer--right {
+    order: 1;
+  }
+
+  .#{$block-class} .#{$block-class}__influencer--wide {
+    width: 320px;
+    min-width: 320px;
+  }
+
+  .#{$block-class} .#{$block-class}__right {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .#{$block-class} .#{$block-class}__main {
+    flex-grow: 1;
+    overflow: auto;
+  }
+
+  .#{$block-class}.#{$block-class}--wide .#{$block-class}__main {
+    background: $ui-02;
+  }
+
+  .#{$block-class} .#{$block-class}__buttons {
+    border-top: 1px solid $ui-03;
+  }
+
+  .#{$block-class}.#{$block-class}--wide .#{$block-class}__buttons {
+    background: $ui-02;
   }
 }
 
-.#{$block-class}--stacked-1-of-3:not(.#{$block-class}--wide)
-  .#{$block-class}--container {
-  @include carbon--breakpoint(md) {
-    width: calc(60% - (4 * #{$spacing-05}));
-  }
-
-  @include carbon--breakpoint(lg) {
-    width: calc(42% - (4 * #{$spacing-05}));
-  }
-
-  @include carbon--breakpoint(xlg) {
-    width: calc(36% - (4 * #{$spacing-05}));
-  }
-}
-
-.#{$block-class}--wide .#{$block-class}--container {
-  width: calc(100% - (2 * #{$spacing-07}));
-}
-
-.#{$block-class}--stacked-1-of-2.#{$block-class}--wide
-  .#{$block-class}--container,
-.#{$block-class}--stacked-2-of-3.#{$block-class}--wide
-  .#{$block-class}--container {
-  width: calc(100% - (2 * #{$spacing-07}) - (2 * #{$spacing-05}));
-}
-
-.#{$block-class}--stacked-1-of-3.#{$block-class}--wide
-  .#{$block-class}--container {
-  width: calc(100% - (2 * #{$spacing-07}) - (4 * #{$spacing-05}));
-}
-
-// Tearsheet styles.
-
-.#{$block-class}--wide .#{$block-class}--header {
-  margin: 0;
-  padding: $spacing-06;
-  border-bottom: 1px solid $ui-03;
-}
-
-.#{$block-class}--header--no-close-icon {
-  display: none;
-}
-
-.#{$block-class}--wide .#{$carbon-prefix}--modal-header__heading {
-  @include carbon--type-style('productive-heading-04');
-}
-
-.#{$block-class}--header-description {
-  margin-top: $spacing-05;
-  @include carbon--type-style('body-short-01');
-}
-
-.#{$block-class}--wide .#{$block-class}--header-description {
-  margin-top: $spacing-03;
-}
-
-.#{$block-class}--header-navigation {
-  margin: $spacing-04 0 0;
-}
-
-.#{$block-class}--wide .#{$block-class}--header-navigation {
-  margin: $spacing-04 0 calc(-1 * #{$spacing-06});
-}
-
-.#{$block-class}--body.#{$block-class}--body {
-  display: flex;
-  flex-grow: 1;
-  margin: 0;
-  padding: 0;
-}
-
-.#{$block-class}--influencer {
-  width: 256px;
-  min-width: 256px;
-  border-right: 1px solid $ui-03;
-}
-
-.#{$block-class}--influencer--right {
-  order: 1;
-}
-
-.#{$block-class}--influencer--wide {
-  width: 320px;
-  min-width: 320px;
-}
-
-.#{$block-class}--right {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-}
-
-.#{$block-class}--main {
-  flex-grow: 1;
-  overflow: auto;
-}
-
-.#{$block-class}--wide .#{$block-class}--main {
-  background: $ui-02;
-}
-
-.#{$block-class}--buttons {
-  border-top: 1px solid $ui-03;
-}
-
-.#{$block-class}--wide .#{$block-class}--buttons {
-  background: $ui-02;
+@include exports('example-component') {
+  @include example-component;
 }

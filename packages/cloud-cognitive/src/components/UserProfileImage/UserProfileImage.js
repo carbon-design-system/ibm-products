@@ -141,7 +141,7 @@ UserProfileImage.propTypes = {
     'light-magenta',
     'dark-magenta',
     'light-purple',
-    'dark-purlpe',
+    'dark-purple',
     'light-teal',
     'dark-teal',
   ]),

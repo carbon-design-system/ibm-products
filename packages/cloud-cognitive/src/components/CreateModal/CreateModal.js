@@ -19,7 +19,6 @@ import {
 } from 'carbon-components-react';
 
 // Other standard imports.
-import { Canary } from '../_Canary';
 import { pkg } from '../../settings';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -36,74 +35,69 @@ const isValidChildren = () => (props) => {
   } else return;
 };
 
-export let CreateModal = !pkg.isComponentEnabled(componentName)
-  ? // Return canary if not released or flag not set
-    () => <Canary component={componentName} />
-  : // Main component code...
-    ({
-      className,
-      children,
-      onClose,
-      onSubmit,
-      open,
-      title,
-      subtitle,
-      description,
-      secondaryButtonText,
-      primaryButtonText,
-      disabled,
-    }) => {
-      useEffect(() => {
-        let modal = document.querySelector(`.${pkg.prefix}--create-modal`);
-        let closeButton = modal.querySelector('.bx--modal-close');
-        closeButton.remove();
-      }, []);
-      return (
-        <ComposedModal
-          className={classNames(`${pkg.prefix}--create-modal`, {
-            [className]: className,
-          })}
-          aria-label="modal"
-          // onClose={onClose}
-          open={open}
-          size="sm"
-          preventCloseOnClickOutside>
-          <ModalHeader
-            title={title}
-            titleClassName={`${pkg.prefix}--create-modal__title bx--modal-content__regular-content`}>
-            {subtitle && (
-              <p
-                className={`${pkg.prefix}--create-modal__subtitle bx--modal-content__regular-content`}>
-                {subtitle}
-              </p>
-            )}
-          </ModalHeader>
-          <ModalBody hasForm>
-            {description && (
-              <p
-                className={`${pkg.prefix}--create-modal__description bx--modal-content__regular-content`}>
-                {description}
-              </p>
-            )}
-            <Form className={classNames(`${pkg.prefix}--create-modal__form`)}>
-              {children}
-            </Form>
-          </ModalBody>
-          <ModalFooter>
-            <Button type="cancel" kind="secondary" onClick={onClose}>
-              {secondaryButtonText}
-            </Button>
-            <Button
-              type="submit"
-              kind="primary"
-              onClick={onSubmit}
-              disabled={disabled}>
-              {primaryButtonText}
-            </Button>
-          </ModalFooter>
-        </ComposedModal>
-      );
-    };
+export let CreateModal = ({
+  className,
+  children,
+  onClose,
+  onSubmit,
+  open,
+  title,
+  subtitle,
+  description,
+  secondaryButtonText,
+  primaryButtonText,
+  disableSubmit,
+}) => {
+  useEffect(() => {
+    let modal = document.querySelector(`.${pkg.prefix}--create-modal`);
+    let closeButton = modal.querySelector('.bx--modal-close');
+    closeButton.remove();
+  }, []);
+  return (
+    <ComposedModal
+      className={classNames(`${pkg.prefix}--create-modal`, {
+        [className]: className,
+      })}
+      aria-label="modal"
+      open={open}
+      size="sm"
+      preventCloseOnClickOutside>
+      <ModalHeader
+        title={title}
+        titleClassName={`${pkg.prefix}--create-modal__title bx--modal-content__regular-content`}>
+        {subtitle && (
+          <p
+            className={`${pkg.prefix}--create-modal__subtitle bx--modal-content__regular-content`}>
+            {subtitle}
+          </p>
+        )}
+      </ModalHeader>
+      <ModalBody hasForm>
+        {description && (
+          <p
+            className={`${pkg.prefix}--create-modal__description bx--modal-content__regular-content`}>
+            {description}
+          </p>
+        )}
+        <Form className={classNames(`${pkg.prefix}--create-modal__form`)}>
+          {children}
+        </Form>
+      </ModalBody>
+      <ModalFooter>
+        <Button type="button" kind="secondary" onClick={onClose}>
+          {secondaryButtonText}
+        </Button>
+        <Button
+          type="submit"
+          kind="primary"
+          onClick={onSubmit}
+          disabled={disableSubmit}>
+          {primaryButtonText}
+        </Button>
+      </ModalFooter>
+    </ComposedModal>
+  );
+};
 
 // Return a placeholder if not released and not enabled by feature flag
 CreateModal = pkg.checkComponentEnabled(CreateModal, componentName);
@@ -118,14 +112,14 @@ CreateModal.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * The description of the CreateModal is optional and serves to provide more information about the modal.
+   * The description of the CreateModal serves to provide more information about the modal.
    */
-  description: PropTypes.node,
+  description: PropTypes.node.isRequired,
   /**
-   * Specifies an optional handler which is called when the CreateModal
-   * is closed. Returning `false` prevents the CreateModal from closing.
+   * Specifies a handler for disabling or enabling the primary button. This is important for form validation
+   * Returning `true` prevents the primary button from being clicked until required fields are completed.
    */
-  disabled: PropTypes.bool,
+  disableSubmit: PropTypes.bool,
   /**
    * Specifies whether the submission of the modal can be clicked or not.
    * This is important for form validation. Returning `true` enables the primary modal button.
@@ -163,7 +157,7 @@ CreateModal.propTypes = {
 
 CreateModal.displayName = componentName;
 CreateModal.defaultProps = {
-  disabled: false,
+  disableSubmit: false,
   primaryButtonText: 'Create',
   secondaryButtonText: 'Cancel',
 };

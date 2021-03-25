@@ -41,7 +41,7 @@ export default {
 
 const Template = ({ children, ...args }) => {
   return (
-    <CreateModal {...args} open={open} onClose={() => setOpen(false)}>
+    <CreateModal {...args} open>
       {children}
     </CreateModal>
   );
@@ -74,6 +74,10 @@ const defaultProps = {
 };
 
 Template.propTypes = {
+  children: PropTypes.node,
+};
+
+TemplateWithStateManager.propTypes = {
   story: PropTypes.object,
   storyInitiallyOpen: PropTypes.bool,
   ...CreateModal.propTypes,
@@ -87,15 +91,14 @@ Default.args = {
   children: (
     <>
       <TextInput
-        required
         id="1"
+        key="form-field-1"
         labelText="Text input label"
         helperText="Helper text goes here"
         placeholder="Placeholder"
       />
       <NumberInput
-        required
-        id="1"
+        id="2"
         className="create-modal--storybook-input"
         label="Number input label"
         helperText="Optional helper text goes here"
@@ -132,6 +135,7 @@ DefaultWithDarkTheme.args = {
     <>
       <TextInput
         id="1"
+        key="form-field-1"
         labelText="Text input label"
         helperText="Helper text goes here"
         placeholder="Placeholder"
@@ -144,7 +148,7 @@ DefaultWithDarkTheme.args = {
         items={['Option 0', 'Option 1', 'Option 2']}
       />
       <TextArea
-        id="1"
+        id="2"
         placeholder="Placeholder text"
         labelText="Text area label"
         helperText="Optional helper text"
@@ -162,12 +166,13 @@ WithStateManager.args = {
     <>
       <TextInput
         id="1"
+        key="form-field-1"
         labelText="Text input label"
         helperText="Helper text goes here"
         placeholder="Placeholder"
       />
       <NumberInput
-        id="1"
+        id="2"
         className="create-modal--storybook-input"
         label="Number input label"
         helperText="Optional helper text goes here"
@@ -183,7 +188,7 @@ WithStateManager.args = {
         items={['Option 0', 'Option 1', 'Option 2']}
       />
       <TextArea
-        id="1"
+        id="3"
         placeholder="Placeholder text"
         labelText="Text area label"
         helperText="Optional helper text"

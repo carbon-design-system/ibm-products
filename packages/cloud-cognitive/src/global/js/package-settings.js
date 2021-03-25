@@ -14,7 +14,6 @@ const defaults = {
     AboutModal: true,
 
     // other components not yet reviewed and released:
-    ActionBar: false,
     ActionBarItem: false,
     APIKeyDownlaoder: false,
     APIKeyModal: false,

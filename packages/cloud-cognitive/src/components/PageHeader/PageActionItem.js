@@ -5,32 +5,43 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// Import portions of React that are needed.
 import React from 'react';
+
+// Other standard imports.
 import PropTypes from 'prop-types';
 
 import cx from 'classnames';
+import { pkg } from '../../settings';
 
+// Carbon and package components we use.
 import { Button } from 'carbon-components-react';
 
-import { pkg } from '../../settings';
+// The block part of our conventional BEM class names (blockClass__E--M).
+const blockClass = `${pkg.prefix}--page-action-item`;
 const componentName = 'PageActionItem';
-const blockClass = `${pkg.prefix}-page-action-item`;
 
-export let PageActionItem = ({ children, ...props }) => {
-  const className = cx([blockClass, props.className]);
+// NOTE: the component SCSS is not imported here: it is rolled up separately.
 
-  return (
-    <Button
-      {...{
-        ...props,
-        className,
-        size: 'field',
-        type: 'button',
-      }}>
-      {children}
-    </Button>
-  );
-};
+/**
+ * The PageActionItem is used in the page header to populate the page actions
+ */
+export let PageActionItem = React.forwardRef(
+  ({ children, className, ...props }, ref) => {
+    return (
+      <Button
+        {...{
+          ...props,
+          className: cx([blockClass, className]),
+          ref,
+          size: 'field',
+          type: 'button',
+        }}>
+        {children}
+      </Button>
+    );
+  }
+);
 
 // Return a placeholder if not released and not enabled by feature flag
 PageActionItem = pkg.checkComponentEnabled(PageActionItem, componentName);

@@ -93,7 +93,7 @@ export let Notifications = React.forwardRef(
     };
 
     const sortChronologically = (arr) => {
-      if (!arr.length) return;
+      if (!arr || (arr && !arr.length)) return;
       return arr.sort((a, b) => b.timestamp - a.timestamp);
     };
 

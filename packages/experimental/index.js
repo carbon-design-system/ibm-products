@@ -5,4 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from '@carbon/ibm-cloud-cognitive/index-all-enabled.js';
+import { pkg } from '@carbon/ibm-cloud-cognitive';
+pkg.prefix = 'expcanary';
+pkg.setAllComponents(true);
+
+// import the commonJS export from ibm-cloud-cognitive, so this will work
+// when build both as ESM and CJS by Babel
+export * from '@carbon/ibm-cloud-cognitive';

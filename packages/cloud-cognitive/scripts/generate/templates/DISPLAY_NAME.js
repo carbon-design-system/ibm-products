@@ -52,7 +52,8 @@ export let DISPLAY_NAME = React.forwardRef(
             [className]: className, // this handles className omitted/falsy
           }
         )}
-        ref={ref}>
+        ref={ref}
+        role="main">
         {children}
       </div>
     );

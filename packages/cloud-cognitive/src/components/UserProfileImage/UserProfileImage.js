@@ -34,22 +34,6 @@ export let UserProfileImage = ({
   size,
   theme,
 }) => {
-  // const icons = {
-  //   user: {
-  //     'x-small': <User16 />,
-  //     small: <User16 />,
-  //     medium: <User20 />,
-  //     large: <User24 />,
-  //     'x-large': <User32 />,
-  //   },
-  //   group: {
-  //     'x-small': <Group16 />,
-  //     small: <Group16 />,
-  //     medium: <Group20 />,
-  //     large: <Group24 />,
-  //     'x-large': <Group32 />,
-  //   },
-  // };
   const icons = {
     user: {
       'x-small': User16,
@@ -79,23 +63,6 @@ export let UserProfileImage = ({
       .toUpperCase();
   };
 
-  // const renderFillItem = () => {
-  //   if (image) {
-  //     return (
-  //       <img
-  //         src={image}
-  //         className={`${blockClass}-photo ${blockClass}-photo--${size}`}
-  //       />
-  //     );
-  //   } else {
-  //     if (initials) {
-  //       return formatInitials();
-  //     } else {
-  //       return icons[icon][size];
-  //     }
-  //   }
-  // };
-
   const FillItem = image
     ? () => (
         <img
@@ -116,7 +83,6 @@ export let UserProfileImage = ({
         `${blockClass}--${theme}`,
         `${blockClass}--${backgroundColor}`,
       ])}>
-      {/* {renderFillItem()} */}
       <FillItem />
     </div>
   );
@@ -136,8 +102,6 @@ UserProfileImage.propTypes = {
    * https://pages.github.ibm.com/cdai-design/pal/patterns/user-profile-images/
    */
   backgroundColor: PropTypes.oneOf([
-    'light-blue',
-    'dark-blue',
     'light-cyan',
     'dark-cyan',
     'light-gray',

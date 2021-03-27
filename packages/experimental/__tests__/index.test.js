@@ -8,7 +8,7 @@
 import React from 'react';
 import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
-import './silence.js';
+import '../silence.js';
 import { pkg } from '..';
 import * as components from '..';
 

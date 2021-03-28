@@ -31,7 +31,7 @@
     "build:js": "yarn build:js-esm && yarn build:js-cjs",
     "build:js-esm": "cross-env BABEL_ENV=esm yarn build:js-modules -d es",
     "build:js-cjs": "cross-env BABEL_ENV=cjs yarn build:js-modules -d lib",
-    "build:js-modules": "babel index.js",
+    "build:js-modules": "babel index.js config-experimental.js",
     "build:scss": "bundler bundle:scss index.scss && copyfiles '**/*.scss' scss",
     "ci-check": "node scripts/import",
     "clean": "rimraf es lib css scss",

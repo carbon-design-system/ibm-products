@@ -16,8 +16,12 @@ import styles from './_storybook.scss';
 
 const mockContent = (
   <>
-    <TextInput labelText="Asset name" value="Openapi.json"></TextInput>
+    <TextInput
+      labelText="Asset name"
+      value="Openapi.json"
+      id="text-id"></TextInput>
     <TextArea
+      id="textarea-id"
       labelText="Description"
       placeholder="There is no description for this asset"></TextArea>
   </>

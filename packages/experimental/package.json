@@ -3,7 +3,7 @@
   "description": "Carbon for Cloud & Cognitive UI components",
   "version": "0.30.6-canary.3",
   "license": "Apache-2.0",
-  "main": "lib/index.js",
+  "main": "lib/index-commonjs.js",
   "module": "es/index.js",
   "repository": {
     "type": "git",
@@ -31,7 +31,7 @@
     "build:js": "yarn build:js-esm && yarn build:js-cjs",
     "build:js-esm": "cross-env BABEL_ENV=esm yarn build:js-modules -d es",
     "build:js-cjs": "cross-env BABEL_ENV=cjs yarn build:js-modules -d lib",
-    "build:js-modules": "babel index.js config-experimental.js",
+    "build:js-modules": "babel *.js --ignore 'silence.js'",
     "build:scss": "bundler bundle:scss index.scss && copyfiles '**/*.scss' scss",
     "ci-check": "node scripts/import",
     "clean": "rimraf es lib css scss",

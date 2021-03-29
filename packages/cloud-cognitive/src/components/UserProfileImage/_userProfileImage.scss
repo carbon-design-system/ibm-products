@@ -16,23 +16,23 @@ $medium: $spacing-06; //24px
 $small: 1.25rem; //20px
 $x-small: $spacing-05; //16x
 
-$base-colors: 'blue', 'cyan', 'gray', 'green', 'magenta', 'purple', 'teal';
+$base-colors: 'cyan', 'gray', 'green', 'magenta', 'purple', 'teal';
 $themes: (
   'light': (
-    'light-shade': 60,
-    'dark-shade': 80,
+    'light-contrast': 60,
+    'dark-contrast': 80,
   ),
   'dark': (
-    'light-shade': 30,
-    'dark-shade': 50,
+    'light-contrast': 50,
+    'dark-contrast': 30,
   ),
 );
 $theme-keys: map-keys($themes);
 
-@function get-background-color($color, $key, $shadekey) {
+@function get-background-color($color, $key, $contrastkey) {
   @return map-get(
     $carbon-colors,
-    #{$color}#{map-get(map-get($themes, $key), #{$shadekey}-shade)}
+    #{$color}#{map-get(map-get($themes, $key), #{$contrastkey}-contrast)}
   );
 }
 
@@ -41,10 +41,10 @@ $theme-keys: map-keys($themes);
     color: $ui-01;
   }
   @each $color in $base-colors {
-    @each $shadekey in $theme-keys {
-      .#{$block-class}--#{$key}.#{$block-class}--#{$shadekey}-#{$color} {
+    @each $contrastkey in $theme-keys {
+      .#{$block-class}--#{$key}.#{$block-class}--#{$contrastkey}-#{$color} {
         // stylelint-disable-next-line carbon/theme-token-use
-        background-color: get-background-color($color, $key, $shadekey);
+        background-color: get-background-color($color, $key, $contrastkey);
       }
     }
   }

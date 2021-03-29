@@ -7,7 +7,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
 import { Card } from '../Card';
 import { pkg } from '../../settings';
 const componentName = 'ExpressiveCard';
@@ -50,16 +49,7 @@ export let ExpressiveCard = ({
     secondaryButtonText,
     title,
   };
-  return (
-    <Card
-      className={cx({
-        [`${pkg.prefix}-card--clickable`]: onClick,
-        [`${pkg.prefix}-card--media-left`]: mediaPosition === 'left',
-        className,
-      })}
-      {...props}
-    />
-  );
+  return <Card {...props} />;
 };
 
 // Return a placeholder if not released and not enabled by feature flag

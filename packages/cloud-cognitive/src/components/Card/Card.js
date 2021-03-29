@@ -38,13 +38,6 @@ export let Card = ({
   title,
   titleSize,
 }) => {
-  const cardClasses = cx(`${pkg.prefix}-card`, {
-    [`${pkg.prefix}-card--productive`]: productive,
-    [`${pkg.prefix}-card--clickable`]: onClick,
-    [`${pkg.prefix}-card--media-left`]: mediaPosition === 'left',
-    className,
-  });
-
   const headerClasses = cx(`${pkg.prefix}-card-header`, {
     [`${pkg.prefix}-card-header--label-only`]: label && !title && !caption,
   });
@@ -79,8 +72,27 @@ export let Card = ({
     return icons;
   };
 
+  const getCardProps = () => {
+    const cardProps = {
+      className: cx(`${pkg.prefix}-card`, {
+        [`${pkg.prefix}-card--productive`]: productive,
+        [`${pkg.prefix}-card--clickable`]: onClick,
+        [`${pkg.prefix}-card--media-left`]: mediaPosition === 'left',
+        className,
+      }),
+      ...(onClick && {
+        onClick,
+        onKeyDown: onClick,
+        role: 'button',
+        tabIndex: '0',
+      }),
+    };
+
+    return cardProps;
+  };
+
   const CardContent = (
-    <div className={cardClasses}>
+    <div {...getCardProps()}>
       {media && <div className={`${pkg.prefix}-card-media`}>{media}</div>}
       {Pictogram && (
         <div className={`${pkg.prefix}-card-pictogram`}>

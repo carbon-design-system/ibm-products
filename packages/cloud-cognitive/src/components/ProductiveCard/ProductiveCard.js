@@ -7,7 +7,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
 import { Card } from '../Card';
 import { pkg } from '../../settings';
 const componentName = 'ProductiveCard';
@@ -30,6 +29,7 @@ export let ProductiveCard = ({
     actionIconsPosition,
     caption,
     children,
+    className,
     label,
     onPrimaryButtonClick,
     overflowActions,
@@ -37,13 +37,7 @@ export let ProductiveCard = ({
     title,
     titleSize,
   };
-  return (
-    <Card
-      productive
-      className={cx(`${pkg.prefix}-card--productive`, { className })}
-      {...props}
-    />
-  );
+  return <Card productive {...props} />;
 };
 
 // Return a placeholder if not released and not enabled by feature flag

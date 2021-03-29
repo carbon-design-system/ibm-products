@@ -120,9 +120,7 @@ export const EmptyStateProps = {
 export const EmptyStateDefaultProps = {
   heading: 'Start by adding data assets',
   subtext: 'Click Upload assets to upload your data',
-  illustrationTheme: 'light',
   illustrationSize: 'lg',
-  customIllustrationAltText: 'Empty state illustration',
 };
 
 EmptyState.propTypes = EmptyStateProps;

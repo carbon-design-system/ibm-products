@@ -37,7 +37,7 @@ export let ProductiveCard = ({
     title,
     titleSize,
   };
-  return <Card productive {...props} />;
+  return <Card {...props} productive />;
 };
 
 // Return a placeholder if not released and not enabled by feature flag

@@ -9,35 +9,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Card } from '../Card';
 import { pkg } from '../../settings';
+import { stripUnwantedProps } from '../../global/js/utils/props-helper';
 const componentName = 'ProductiveCard';
 
-export let ProductiveCard = ({
-  actionIcons,
-  actionIconsPosition,
-  caption,
-  children,
-  className,
-  label,
-  onPrimaryButtonClick,
-  overflowActions,
-  primaryButtonText,
-  title,
-  titleSize,
-}) => {
-  const props = {
-    actionIcons,
-    actionIconsPosition,
-    caption,
-    children,
-    className,
-    label,
-    onPrimaryButtonClick,
-    overflowActions,
-    primaryButtonText,
-    title,
-    titleSize,
-  };
-  return <Card {...props} productive />;
+export let ProductiveCard = (props) => {
+  const validProps = stripUnwantedProps(props, [
+    'media',
+    'mediaPosition',
+    'onClick',
+    'onSecondaryButtonClick',
+    'pictogram',
+    'primaryButtonClick',
+    'productive',
+    'secondaryButtonKind',
+    'secondaryButtonText',
+  ]);
+  return <Card {...validProps} productive />;
 };
 
 // Return a placeholder if not released and not enabled by feature flag

@@ -9,47 +9,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Card } from '../Card';
 import { pkg } from '../../settings';
+import { stripUnwantedProps } from '../../global/js/utils/props-helper';
 const componentName = 'ExpressiveCard';
 
-export let ExpressiveCard = ({
-  actionIcons,
-  actionIconsPosition,
-  caption,
-  children,
-  className,
-  label,
-  media,
-  mediaPosition,
-  onClick,
-  onPrimaryButtonClick,
-  onSecondaryButtonClick,
-  pictogram: Pictogram,
-  primaryButtonKind,
-  primaryButtonText,
-  secondaryButtonKind,
-  secondaryButtonText,
-  title,
-}) => {
-  const props = {
-    actionIcons,
-    actionIconsPosition,
-    caption,
-    children,
-    className,
-    label,
-    media,
-    mediaPosition,
-    onClick,
-    onPrimaryButtonClick,
-    onSecondaryButtonClick,
-    pictogram: Pictogram,
-    primaryButtonKind,
-    primaryButtonText,
-    secondaryButtonKind,
-    secondaryButtonText,
-    title,
-  };
-  return <Card {...props} />;
+export let ExpressiveCard = (props) => {
+  const validProps = stripUnwantedProps(props, [
+    'overflowActions',
+    'productive',
+    'titleSize',
+  ]);
+  return <Card {...validProps} />;
 };
 
 // Return a placeholder if not released and not enabled by feature flag

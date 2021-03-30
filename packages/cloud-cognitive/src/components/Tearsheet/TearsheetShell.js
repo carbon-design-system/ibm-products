@@ -37,107 +37,116 @@ let stack = [];
 let stackHandlers = [];
 
 // TearSheetShell is used internally by TearSheet and TearSheetNarrow
-export const TearsheetShell = ({
-  children,
-  className,
-  height,
-  onClose,
-  open,
-  preventCloseOnClickOutside,
-  size,
-}) => {
-  const [stackSize, setStackSize] = useState(0);
-  const [stackPosition, setStackPosition] = useState(0);
+export const TearsheetShell = React.forwardRef(
+  (
+    {
+      // The component props, in alphabetical order (for consistency).
+      children,
+      className,
+      height,
+      onClose,
+      open,
+      preventCloseOnClickOutside,
+      size,
+      ...rest
+    },
+    ref
+  ) => {
+    const [stackSize, setStackSize] = useState(0);
+    const [stackPosition, setStackPosition] = useState(0);
 
-  // Keep a record of the previous value of stacksize.
-  const prevStackSize = useRef();
-  useEffect(() => {
-    prevStackSize.current = stackSize;
-  });
+    // Keep a record of the previous value of stacksize.
+    const prevStackSize = useRef();
+    useEffect(() => {
+      prevStackSize.current = stackSize;
+    });
 
-  // Hook called whenever the tearsheet mounts, unmounts, or the open
-  // prop changes value.
-  useLayoutEffect(() => {
-    // Callback that will be called whenever the stacking order changes.
-    // (Also used as the identity of the tearsheet in the stack array.)
-    // stackPosition is 1-based with 0 indicating closed.
-    function handleStackChange(newStackSize, newStackPosition) {
-      setStackSize(Math.min(newStackSize, maxStackingDepth));
-      setStackPosition(newStackPosition);
-    }
+    // Hook called whenever the tearsheet mounts, unmounts, or the open
+    // prop changes value.
+    useLayoutEffect(() => {
+      // Callback that will be called whenever the stacking order changes.
+      // (Also used as the identity of the tearsheet in the stack array.)
+      // stackPosition is 1-based with 0 indicating closed.
+      function handleStackChange(newStackSize, newStackPosition) {
+        setStackSize(Math.min(newStackSize, maxStackingDepth));
+        setStackPosition(newStackPosition);
+      }
 
-    // Register this tearsheet's stack change callback/listener.
-    stackHandlers.push(handleStackChange);
+      // Register this tearsheet's stack change callback/listener.
+      stackHandlers.push(handleStackChange);
 
-    // If the tearsheet is mounting with open=true or open is changing from
-    // false to true to open it then append its notification callback to
-    // the end of the stack array (as its ID), and call all the callbacks
-    // to notify all open tearsheets that the stacking has changed.
-    if (open) {
-      stack.push(handleStackChange);
-      stackHandlers.forEach((handler) =>
-        handler(stack.length, stack.indexOf(handler) + 1)
-      );
-    }
-
-    // Cleanup function called whenever the tearsheet unmounts or the open
-    // prop changes value (in which case it is called prior to this hook
-    // being called again).
-    return function cleanup() {
-      // Remove the notification callback from the stack array, and call
-      // all the callbacks in the array to notify all open tearsheets
-      // if the stacking has changed. This is only necessary if the
-      // tearsheet was open and is either closing or unmounting (i.e
-      // if it has a callback in the stack array that gets removed).
-      const initialStackSize = stack.length;
-      stack = stack.filter((handler) => handler !== handleStackChange);
-      if (stack.length !== initialStackSize) {
+      // If the tearsheet is mounting with open=true or open is changing from
+      // false to true to open it then append its notification callback to
+      // the end of the stack array (as its ID), and call all the callbacks
+      // to notify all open tearsheets that the stacking has changed.
+      if (open) {
+        stack.push(handleStackChange);
         stackHandlers.forEach((handler) =>
           handler(stack.length, stack.indexOf(handler) + 1)
         );
       }
-      stackHandlers = stackHandlers.filter(
-        (handler) => handler !== handleStackChange
-      );
-    };
-  }, [open]);
 
-  const classes = cx({
-    [`${blockClass}`]: true,
-    [`${blockClass}--stacked-${stackPosition}-of-${stackSize}`]:
-      open && stackSize > 1,
-    [`${blockClass}--stacked-1-of-1`]:
-      open && stackSize === 1 && prevStackSize.current === 2, // Don't apply this on the initial open of a single tearsheet.
-    [`${blockClass}--stacked-closed`]: !open && stackSize > 0,
-    [`${blockClass}--wide`]: size === 'wide',
-    [className]: className,
-  });
-  const containerClasses = cx({
-    [`${blockClass}__container`]: true,
-    [`${blockClass}__container--lower`]: height === 'lower',
-  });
+      // Cleanup function called whenever the tearsheet unmounts or the open
+      // prop changes value (in which case it is called prior to this hook
+      // being called again).
+      return function cleanup() {
+        // Remove the notification callback from the stack array, and call
+        // all the callbacks in the array to notify all open tearsheets
+        // if the stacking has changed. This is only necessary if the
+        // tearsheet was open and is either closing or unmounting (i.e
+        // if it has a callback in the stack array that gets removed).
+        const initialStackSize = stack.length;
+        stack = stack.filter((handler) => handler !== handleStackChange);
+        if (stack.length !== initialStackSize) {
+          stackHandlers.forEach((handler) =>
+            handler(stack.length, stack.indexOf(handler) + 1)
+          );
+        }
+        stackHandlers = stackHandlers.filter(
+          (handler) => handler !== handleStackChange
+        );
+      };
+    }, [open]);
 
-  if (stackPosition <= maxStackingDepth) {
-    return (
-      <ComposedModal
-        className={classes}
-        containerClassName={containerClasses}
-        onClose={onClose}
-        open={open}
-        preventCloseOnClickOutside={preventCloseOnClickOutside}
-        size="sm">
-        {children}
-      </ComposedModal>
-    );
-  } else {
-    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-      console.error(
-        'Tearsheet not rendered - more than 3 levels of tearsheet stacking.'
+    const classes = cx({
+      [`${blockClass}`]: true,
+      [`${blockClass}--stacked-${stackPosition}-of-${stackSize}`]:
+        open && stackSize > 1,
+      [`${blockClass}--stacked-1-of-1`]:
+        open && stackSize === 1 && prevStackSize.current === 2, // Don't apply this on the initial open of a single tearsheet.
+      [`${blockClass}--stacked-closed`]: !open && stackSize > 0,
+      [`${blockClass}--wide`]: size === 'wide',
+      [className]: className,
+    });
+    const containerClasses = cx({
+      [`${blockClass}__container`]: true,
+      [`${blockClass}__container--lower`]: height === 'lower',
+    });
+
+    if (stackPosition <= maxStackingDepth) {
+      return (
+        <ComposedModal
+          {
+            // Pass through any other property values.
+            ...rest
+          }
+          className={classes}
+          containerClassName={containerClasses}
+          {...{ onClose, open, preventCloseOnClickOutside, ref }}
+          size="sm">
+          {children}
+        </ComposedModal>
       );
+    } else {
+      if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+        console.error(
+          'Tearsheet not rendered - more than 3 levels of tearsheet stacking.'
+        );
+      }
+      return null;
     }
-    return null;
   }
-};
+);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

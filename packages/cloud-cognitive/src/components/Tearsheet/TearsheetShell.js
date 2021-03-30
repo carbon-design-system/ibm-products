@@ -138,11 +138,9 @@ export const TearsheetShell = React.forwardRef(
         </ComposedModal>
       );
     } else {
-      if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-        console.error(
-          'Tearsheet not rendered - more than 3 levels of tearsheet stacking.'
-        );
-      }
+      console.warn(
+        'Tearsheet not rendered: more than 3 levels of tearsheet stacking.'
+      );
       return null;
     }
   }

@@ -158,6 +158,18 @@ const commonTests = (Ts, name) => {
     render(<Ts {...{ title }} />);
     screen.getByText(title);
   });
+
+  it("doesn't render when stacked more than three deep", () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    render(<Ts open />);
+    render(<Ts open />);
+    render(<Ts open />);
+    render(<Ts open />);
+    expect(screen.getAllByRole('presentation')).toHaveLength(3);
+    expect(warn).toBeCalledWith(
+      'Tearsheet not rendered: more than 3 levels of tearsheet stacking.'
+    );
+  });
 };
 
 describe(componentName, () => {

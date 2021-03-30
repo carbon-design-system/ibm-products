@@ -8,7 +8,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
 import React from 'react';
-import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { Notifications } from '.';

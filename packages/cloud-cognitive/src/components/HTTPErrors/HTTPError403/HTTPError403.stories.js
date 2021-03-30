@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { pkg } from '../../../settings';
-import '../../../enable-all'; // must come before component is imported
+import '../../../utils/enable-all'; // must come before component is imported
 import { HTTPError403 } from '.';
 import { getStorybookPrefix } from '../../../../config';
 const storybookPrefix = getStorybookPrefix(pkg, HTTPError403.displayName);

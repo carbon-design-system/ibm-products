@@ -8,7 +8,7 @@
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 
-import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { RemoveDeleteModal } from '.';
 
 import uuidv4 from '../../global/js/utils/uuidv4';

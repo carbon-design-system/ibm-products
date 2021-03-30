@@ -6,7 +6,8 @@
  */
 
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { pkg, carbon } from '../../settings';
 import '../../enable-all'; // must come before component is imported (directly or indirectly)
@@ -23,8 +24,6 @@ import jsLogo from './_story-assets/js-logo.png';
 
 const blockClass = `${pkg.prefix}--about-modal`;
 const componentName = AboutModal.displayName;
-
-const { click } = fireEvent;
 
 const tabLabel1 = `Version number $(uuidv4())`;
 const tabLabel2 = `Technologies (${uuidv4()}) used`;
@@ -130,7 +129,7 @@ describe(componentName, () => {
     const tabToSelect = screen.getByRole('tab', { name: tabLabel2 });
     const tabSelected = `${carbon.prefix}--tabs__nav-item--selected`;
     expect(tabToSelect.parentElement).not.toHaveClass(tabSelected);
-    click(tabToSelect);
+    userEvent.click(tabToSelect);
     expect(tabToSelect.parentElement).toHaveClass(tabSelected);
   });
 
@@ -162,7 +161,7 @@ describe(componentName, () => {
     const closeButton = screen.getByRole('button', { name: 'Close' });
     expect(aboutModal).toHaveClass('is-visible');
     expect(onCloseReturnsTrue).toHaveBeenCalledTimes(0);
-    click(closeButton);
+    userEvent.click(closeButton);
     expect(aboutModal).not.toHaveClass('is-visible');
     expect(onCloseReturnsTrue).toHaveBeenCalledTimes(1);
   });
@@ -173,7 +172,7 @@ describe(componentName, () => {
     const closeButton = screen.getByRole('button', { name: 'Close' });
     expect(aboutModal).toHaveClass('is-visible');
     expect(onCloseReturnsFalse).toHaveBeenCalledTimes(0);
-    click(closeButton);
+    userEvent.click(closeButton);
     expect(aboutModal).toHaveClass('is-visible');
     expect(onCloseReturnsFalse).toHaveBeenCalledTimes(1);
   });

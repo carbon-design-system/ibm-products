@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2020
+ * Copyright IBM Corp. 2020, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,13 +10,17 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { pkg, carbon } from '../../settings';
+import '../../enable-all'; // must come before component is imported (directly or indirectly)
+
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { Button, Tab, Tabs } from 'carbon-components-react';
-
-import '../../enable-all'; // must come before component is imported (directly or indirectly)
 import { Tearsheet, TearsheetNarrow } from '.';
 
-/* Test properties. */
+const blockClass = `${pkg.prefix}--tearsheet`;
+const componentName = Tearsheet.displayName;
+const componentNameNarrow = TearsheetNarrow.displayName;
+
 const buttonOnClick = jest.fn();
 const onClose = jest.fn();
 
@@ -60,7 +64,6 @@ const tabs = (
 );
 
 const title = 'Title of the tearsheet';
-const blockClass = `${pkg.prefix}--tearsheet`;
 
 describe('Tearsheet', () => {
   test('renders a tearsheet when no props are set', () => {

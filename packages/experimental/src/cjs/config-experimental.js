@@ -5,6 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { pkg } from '@carbon/ibm-cloud-cognitive/es/settings';
-pkg.prefix = 'expcanary';
+import { pkg } from '@carbon/ibm-cloud-cognitive/lib/settings';
+pkg.prefix = 'exp';
 pkg.setAllComponents(true);

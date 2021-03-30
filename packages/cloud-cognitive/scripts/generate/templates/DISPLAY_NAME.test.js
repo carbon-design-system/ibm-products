@@ -25,34 +25,34 @@ const dataTestId = uuidv4();
 
 describe(componentName, () => {
   it('renders a component DISPLAY_NAME', () => {
-    const { container } = render(<DISPLAY_NAME />);
-    expect(container.querySelector(`.${blockClass}`)).not.toBeNull();
+    render(<DISPLAY_NAME> </DISPLAY_NAME>);
+    expect(screen.getByRole('main')).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<DISPLAY_NAME />);
+    const { container } = render(<DISPLAY_NAME> </DISPLAY_NAME>);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it(`renders children`, () => {
     render(<DISPLAY_NAME>{children}</DISPLAY_NAME>);
-    expect(screen.getByText(children)).toBeTruthy();
+    screen.getByText(children);
   });
 
-  it('adds className to the containing node', () => {
-    const { container } = render(<DISPLAY_NAME className={className} />);
-    expect(container.querySelector(`.${className}`)).toBeInTheDocument();
+  it('applies className to the containing node', () => {
+    render(<DISPLAY_NAME className={className}> </DISPLAY_NAME>);
+    expect(screen.getByRole('main')).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', () => {
-    render(<DISPLAY_NAME data-testid={dataTestId} />);
-    expect(screen.getByTestId(dataTestId)).toBeTruthy();
+    render(<DISPLAY_NAME data-testid={dataTestId}> </DISPLAY_NAME>);
+    screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
-    render(<DISPLAY_NAME ref={ref} />);
-    expect(ref.current.classList.contains(blockClass)).toBeTruthy();
+    render(<DISPLAY_NAME ref={ref}> </DISPLAY_NAME>);
+    expect(ref.current).toHaveClass(blockClass);
   });
 });

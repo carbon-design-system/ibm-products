@@ -19,6 +19,14 @@
   min-width: 100%;
 }
 
+.bx--number__control-btn::before {
+  background-color: transparent;
+}
+
+.bx--number__control-btn::after {
+  background-color: transparent;
+}
+
 .bx--date-picker {
   min-width: 100%;
 }

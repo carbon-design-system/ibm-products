@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.32.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.32.0...@carbon/ibm-cloud-cognitive@0.32.1) (2021-03-30)
+
+
+### Bug Fixes
+
+* **HTTPErrors:** fix centering issue with css ([#543](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/543)) ([3783d62](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/3783d627b5626fe6077a317c15f1b6542e23e8ff))
+
+
+
+
+
 # [0.32.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.31.5...@carbon/ibm-cloud-cognitive@0.32.0) (2021-03-30)
 
 

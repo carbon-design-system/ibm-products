@@ -19,10 +19,6 @@
   min-width: 100%;
 }
 
-.bx--number__control-btn {
-  border-bottom: none;
-}
-
 .bx--date-picker {
   min-width: 100%;
 }
@@ -33,6 +29,10 @@
 
 .bx--date-picker.bx--date-picker--single .bx--date-picker__input {
   width: 100%;
+}
+
+.bx--list-box__menu-icon {
+  top: $spacing-03;
 }
 
 .example-wrapper {

@@ -17,11 +17,13 @@ import {
   Column,
   Row,
   ButtonSet,
+  Button,
 } from 'carbon-components-react';
 import { ActionBar } from '../ActionBar/';
 import { BreadcrumbWithOverflow, TagSet } from '../';
 import { ButtonSetWithOverflow } from './ButtonSetWithOverflow';
 import { pkg } from '../../settings';
+import { ChevronUp16 } from '@carbon/icons-react';
 
 const componentName = 'PageHeader';
 const blockClass = `${pkg.prefix}-page-header`;
@@ -32,6 +34,8 @@ export let PageHeader = ({
   background,
   breadcrumbItems,
   className,
+  collapseExpandHeaderLabel,
+  collapseHeader,
   keepBreadcrumbAndTabs,
   navigation,
   pageActions,
@@ -66,6 +70,7 @@ export let PageHeader = ({
     setPageActionInBreadcrumbMinWidth,
   ] = useState(0);
   const [actionBarColumnWidth, setActionBarColumnWidth] = useState(0);
+  const [fullyCollapsed, setFullyCollapsed] = useState(false);
 
   useEffect(() => {
     let newActionBarWidth = 'initial';
@@ -304,6 +309,12 @@ export let PageHeader = ({
     tags,
   ]);
 
+  useEffect(() => {
+    setFullyCollapsed(
+      scrollYValue + metrics.headerTopValue + pageHeaderOffset >= 0
+    );
+  }, [metrics.headerTopValue, pageHeaderOffset, scrollYValue]);
+
   useWindowScroll(
     // on scroll or various layout changes check updates if needed
     ({ current }) => {
@@ -418,6 +429,29 @@ export let PageHeader = ({
       actionBarItems === undefined && scrollYValue + metrics.headerTopValue > 0
     );
   };
+
+  const toggleCollapse = (forceCollapse) => {
+    const collapse =
+      typeof forceCollapse !== 'undefined' ? forceCollapse : !fullyCollapsed;
+
+    if (collapse) {
+      window.scrollTo({
+        top: pageHeaderOffset - (metrics?.headerTopValue || 0),
+        behavior: 'smooth',
+      });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const handleCollapseToggle = () => {
+    toggleCollapse();
+  };
+
+  useEffect(() => {
+    toggleCollapse(collapseHeader);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [collapseHeader]);
 
   return (
     <ReactResizeDetector handleHeight onResize={handleResize}>
@@ -618,6 +652,23 @@ export let PageHeader = ({
             </Row>
           ) : null}
         </Grid>
+        {backgroundOpacity > 0 ? (
+          <Button
+            className={cx(`${blockClass}__collapse-expand-toggle`, {
+              [`${blockClass}__collapse-expand-toggle--collapsed`]: fullyCollapsed,
+            })}
+            data-collapse={fullyCollapsed ? 'collapsed' : 'not collapsed'}
+            hasIconOnly={true}
+            iconDescription={collapseExpandHeaderLabel}
+            kind="ghost"
+            onClick={handleCollapseToggle}
+            renderIcon={ChevronUp16}
+            size="field"
+            tooltipPosition="bottom"
+            tooltipAlignment="end"
+            type="button"
+          />
+        ) : null}
       </section>
     </ReactResizeDetector>
   );
@@ -657,6 +708,15 @@ PageHeader.propTypes = {
    * Optional.
    */
   className: PropTypes.string,
+  /**
+   * Label/assistive text for the collapse/expand chevron
+   */
+  collapseExpandHeaderLabel: PropTypes.string,
+  /**
+   * The header can as a whole be collapsed, expanded or somewhere in between.
+   * This setting controls the initial value, but also takes effect on change
+   */
+  collapseHeader: PropTypes.bool,
   /**
    * Standard behavior scrolls the breadcrumb off to leave just tabs. This
    * option preserves vertical space for both.
@@ -706,6 +766,7 @@ PageHeader.propTypes = {
 PageHeader.defaultProps = {
   background: false,
   className: '',
+  collapseExpandHeaderLabel: 'Toggle expansion',
   keepBreadcrumbAndTabs: false,
   pageHeaderOffset: 0,
   preCollapseTitleRow: false,

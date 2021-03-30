@@ -25,7 +25,7 @@ import jsLogo from './_story-assets/js-logo.png';
 const blockClass = `${pkg.prefix}--about-modal`;
 const componentName = AboutModal.displayName;
 
-const tabLabel1 = `Version number $(uuidv4())`;
+const tabLabel1 = `Version number ${uuidv4()}`;
 const tabLabel2 = `Technologies (${uuidv4()}) used`;
 const additionalInfo = [
   { label: tabLabel1, content: '1.3.41' },

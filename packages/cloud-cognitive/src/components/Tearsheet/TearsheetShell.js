@@ -186,5 +186,4 @@ TearsheetShell.propTypes = {
 // component needs to make a choice or assumption when a prop is not supplied.
 TearsheetShell.defaultProps = {
   height: 'normal',
-  preventCloseOnClickOutside: false,
 };

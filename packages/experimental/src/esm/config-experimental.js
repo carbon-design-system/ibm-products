@@ -6,5 +6,5 @@
  */
 
 import { pkg } from '@carbon/ibm-cloud-cognitive/es/settings';
-pkg.prefix = 'expcanary';
+pkg.prefix = 'exp';
 pkg.setAllComponents(true);

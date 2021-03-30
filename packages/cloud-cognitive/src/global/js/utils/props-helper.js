@@ -8,10 +8,10 @@
 // helpers functions for component props
 
 // remove undesired props from component props object
-export const stripUnwantedProps = (props, blacklist) => {
+export const stripUnwantedProps = (props, keys) => {
   const propsArray = Object.keys(props);
   const desiredProps = propsArray.reduce((acc, cur) => {
-    if (!blacklist.includes(cur)) acc[cur] = props[cur];
+    if (!keys.includes(cur)) acc[cur] = props[cur];
     return acc;
   }, {});
   return desiredProps;

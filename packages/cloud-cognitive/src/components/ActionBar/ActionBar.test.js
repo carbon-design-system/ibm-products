@@ -6,7 +6,7 @@
  */
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { ActionBar, ActionBarItem } from '.';
 import { Lightning16, Bee24 } from '@carbon/icons-react';
 

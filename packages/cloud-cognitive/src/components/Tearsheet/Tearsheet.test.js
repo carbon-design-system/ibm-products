@@ -13,7 +13,7 @@ import { pkg, carbon } from '../../settings';
 
 import { Button, Tab, Tabs } from 'carbon-components-react';
 
-import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { Tearsheet, TearsheetNarrow } from '.';
 
 /* Test properties. */

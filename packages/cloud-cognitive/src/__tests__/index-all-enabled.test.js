@@ -5,15 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
-// import React from 'react';
-
-import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import React from 'react';
+import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+
 import { pkg } from '../settings';
+import '../utils/enable-all'; // must come before components are imported (directly or indirectly)
+
+import * as components from '..';
 
 const canaryClass = `${pkg.prefix}-canary`;
-import * as components from '../index-all-enabled';
 const name = 'export checks';
 
 describe(name, () => {
@@ -27,7 +27,7 @@ describe(name, () => {
     if (key.charAt(0) === key.charAt(0).toUpperCase()) {
       const TestComponent = components[key];
 
-      it(`Does not render a canary, for "${key}", if package flags set`, () => {
+      it(`Does not render a canary for "${key}" if package flags set to enable`, () => {
         const { container } = render(<TestComponent />);
         expect(container.querySelector(`.${canaryClass}`)).toBeNull();
       });

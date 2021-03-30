@@ -130,11 +130,9 @@ export const TearsheetShell = ({
       </ComposedModal>
     );
   } else {
-    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-      console.error(
-        'Tearsheet not rendered - more than 3 levels of tearsheet stacking.'
-      );
-    }
+    console.warn(
+      'Tearsheet not rendered: more than 3 levels of tearsheet stacking.'
+    );
     return null;
   }
 };
@@ -186,5 +184,4 @@ TearsheetShell.propTypes = {
 // component needs to make a choice or assumption when a prop is not supplied.
 TearsheetShell.defaultProps = {
   height: 'normal',
-  preventCloseOnClickOutside: false,
 };

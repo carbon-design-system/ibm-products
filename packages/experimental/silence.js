@@ -5,5 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { Tearsheet } from './Tearsheet';
-export { TearsheetNarrow } from './TearsheetNarrow';
+import { pkg } from '@carbon/ibm-cloud-cognitive/lib/settings';
+pkg._silenceWarnings(true);

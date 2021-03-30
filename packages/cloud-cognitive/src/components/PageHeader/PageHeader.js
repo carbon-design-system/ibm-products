@@ -668,8 +668,7 @@ PageHeader.propTypes = {
    */
   navigation: PropTypes.element, // Supports Tabs
   /**
-   * Specifies the primary page actions as a React element. Normally this
-   * is one or more Carbon Button components. Optional.
+   * Specifies the primary page actions as a React element. zero, one or more PageActionItem components. Optional.
    */
   pageActions: PropTypes.element,
   /**

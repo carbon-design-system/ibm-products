@@ -5,11 +5,16 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// Import portions of React that are needed.
 import React, { useState, useEffect, useRef } from 'react';
+
+// Other standard imports.
 import PropTypes from 'prop-types';
-
 import cx from 'classnames';
+import { pkg, carbon } from '../../settings';
+import ReactResizeDetector from 'react-resize-detector';
 
+// Carbon and package components we use.
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -17,20 +22,24 @@ import {
   OverflowMenuItem,
 } from 'carbon-components-react';
 import { OverflowMenuHorizontal32 } from '@carbon/icons-react';
-
-import ReactResizeDetector from 'react-resize-detector';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import unwrapIfFragment from '../../global/js/utils/unwrap-if-fragment';
 
-import { pkg, carbon } from '../../settings';
+// The block part of our conventional BEM class names (blockClass__E--M).
+const blockClass = `${pkg.prefix}--breadcrumb-with-overflow`;
 const componentName = 'BreadcrumbWithOverflow';
-const blockClass = `${pkg.prefix}-breadcrumb-with-overflow`;
 
+// NOTE: the component SCSS is not imported here: it is rolled up separately.
+
+/**
+ * The BreadcrumbWithOverflow is used internally by the PageHeader to wrap BreadcrumbItems.
+ */
 export let BreadcrumbWithOverflow = ({
   children,
   className,
   maxVisibleBreadcrumbItems,
   noTrailingSlash,
+  overflowAriaLabel,
   ...other
 }) => {
   const [displayCount, setDisplayCount] = useState(3);
@@ -187,10 +196,12 @@ export let BreadcrumbWithOverflow = ({
           const computedStyle = window
             ? window.getComputedStyle(sizingBreadcrumbItems[0])
             : null;
+
           const marginWidths = computedStyle
-            ? parseFloat(computedStyle.marginLeft, 0) +
-              parseFloat(computedStyle.marginRight, 0)
+            ? parseFloat(computedStyle.marginLeft || 0, 10) +
+              parseFloat(computedStyle.marginRight || 0, 10)
             : 0;
+
           breadcrumbWidthsIncludingMargin.push(item.offsetWidth + marginWidths);
         }
 
@@ -269,7 +280,7 @@ export let BreadcrumbWithOverflow = ({
               <BreadcrumbItem
                 key={`${blockClass}-hidden-overflow-${internalId}`}>
                 <OverflowMenu
-                  ariaLabel={null}
+                  ariaLabel={overflowAriaLabel}
                   renderIcon={OverflowMenuHorizontal32}
                 />
               </BreadcrumbItem>
@@ -312,9 +323,14 @@ BreadcrumbWithOverflow.propTypes = {
    * noTrailing slash - same as for Carbon
    */
   noTrailingSlash: PropTypes.bool,
+  /**
+   * overflowAriaLabel label for open close button overflow used for action bar items that do nto fit.
+   */
+  overflowAriaLabel: PropTypes.string,
 };
 
 BreadcrumbWithOverflow.defaultProps = {
+  overflowAriaLabel: 'Open and close additional breadcrumb item list.',
   noTrailingSlash: false,
 };
 BreadcrumbWithOverflow.displayName = componentName;

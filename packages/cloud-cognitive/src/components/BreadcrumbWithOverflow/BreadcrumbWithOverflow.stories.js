@@ -20,7 +20,7 @@ const storybookPrefix = getStorybookPrefix(
   BreadcrumbWithOverflow.displayName
 );
 
-const blockClass = `${pkg.prefix}-breadcrumb-with-overflow`;
+const blockClass = `${pkg.prefix}--breadcrumb-with-overflow`;
 
 export default {
   title: `${storybookPrefix}/${BreadcrumbWithOverflow.displayName}`,

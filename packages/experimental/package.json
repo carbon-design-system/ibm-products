@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.12.5",
-    "@carbon/ibm-cloud-cognitive": "^0.31.4",
+    "@carbon/ibm-cloud-cognitive": "^0.31.5",
     "@carbon/telemetry": "^0.0.0-alpha.6"
   },
   "devDependencies": {

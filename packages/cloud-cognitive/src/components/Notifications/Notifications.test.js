@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import React from 'react';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
@@ -23,10 +24,9 @@ describe('Notifications', () => {
   });
 
   it('should toggle do not disturb switch', () => {
-    const { click } = fireEvent;
     const { fn } = jest;
     const onToggle = fn();
-    const { container } = render(
+    render(
       <Notifications
         data={[]}
         open
@@ -35,18 +35,13 @@ describe('Notifications', () => {
       />
     );
 
-    click(
-      container.querySelector(`#${blockClass}__do-not-disturb-toggle-component`)
-    );
+    userEvent.click(screen.getByRole('checkbox', /Do not disturb/i));
     expect(onToggle).toBeCalled();
   });
 
-  it('should render empty state illustration', () => {
-    const { container } = render(
-      <Notifications data={[]} open setOpen={() => {}} />
-    );
-    const renderedEmptyStateSvg = container.querySelector('svg');
-    expect(renderedEmptyStateSvg).toBeTruthy();
+  it('should render notifications empty state', () => {
+    render(<Notifications data={[]} open setOpen={() => {}} />);
+    expect(screen.getByText(/you do not have any notifications/i));
   });
 
   it('should render notification with error state svg', () => {
@@ -134,7 +129,7 @@ describe('Notifications', () => {
   });
 
   it('should render link in notification', () => {
-    const { getByText, container } = render(
+    render(
       <Notifications
         data={[
           {
@@ -153,10 +148,9 @@ describe('Notifications', () => {
         setOpen={() => {}}
       />
     );
-    const { click } = fireEvent;
-    const link = container.querySelectorAll('a')[0].href;
-    click(getByText('View logs'));
-    expect(link.length && link).toEqual('https://www.carbondesignsystem.com/');
+    const logLink = screen.getByText(/view logs/i);
+    userEvent.click(logLink);
+    expect(logLink);
   });
 
   it('should render Read more button', () => {
@@ -176,7 +170,7 @@ describe('Notifications', () => {
         setOpen={() => {}}
       />
     );
-    expect(getByText(/Read more/i)).toBeTruthy();
+    expect(getByText(/read more/i)).toBeTruthy();
   });
 
   it('adds additional properties to the containing node', () => {

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './config-experimental-commonjs.js';
+import './config-experimental.js';
 
 // import the commonJS export from ibm-cloud-cognitive, so this
 // will work both when built as ESM and as CJS by Babel

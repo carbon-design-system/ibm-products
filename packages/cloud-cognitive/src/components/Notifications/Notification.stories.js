@@ -20,7 +20,7 @@ import { white } from '@carbon/colors';
 import styles from './_storybook-styles.scss';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
-import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { Notifications } from '.';
 
 import { getStorybookPrefix } from '../../../config';

@@ -18,6 +18,9 @@ $css--reset: false;
 @import '../generated/feature-flags/feature-flags';
 @import '@carbon/themes/scss/themes';
 
+@import '@carbon/ibm-cloud-cognitive/css/index.min';
+@import 'carbon-components/css/carbon-components.min';
+
 // Uncomment next line if you want to use Canary in storybook
 //@import '@carbon/ibm-cloud-cognitive/scss/components/_Canary/canary';
 

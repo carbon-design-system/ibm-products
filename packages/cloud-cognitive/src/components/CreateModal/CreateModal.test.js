@@ -10,7 +10,7 @@ import React from 'react';
 import { TextInput } from 'carbon-components-react';
 
 import { pkg, carbon } from '../../settings';
-import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 

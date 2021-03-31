@@ -4,13 +4,8 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
-@import './index';
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/data-table-v2/data-table-v2';
-@import 'carbon-components/scss/components/text-area/text-area';
-@import 'carbon-components/scss/components/text-input/text-input';
-@import 'carbon-components/scss/components/ui-shell/ui-shell';
-@import '@carbon/themes/scss/themes';
+
+@import '../../global/styles/carbon-settings';
 
 $carbon-prefix: side-panel-stories__;
 

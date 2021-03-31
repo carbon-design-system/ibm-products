@@ -315,7 +315,7 @@ export let Notifications = React.forwardRef(
           ...rest
         }
         id={blockClass}
-        className={cx([`${blockClass}__container`], {
+        className={cx([blockClass, `${blockClass}__container`], {
           [className]: className,
         })}
         style={{ animation: `${open ? 'fadeIn 250ms' : 'fadeOut 250ms'}` }}

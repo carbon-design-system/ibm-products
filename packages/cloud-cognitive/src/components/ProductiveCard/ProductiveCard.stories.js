@@ -17,7 +17,7 @@ import mdx from './ProductiveCard.mdx';
 const storybookPrefix = getStorybookPrefix(pkg, ProductiveCard.displayName);
 
 export default {
-  title: `${storybookPrefix}/${ProductiveCard.displayName}`,
+  title: `${storybookPrefix}/Cards/${ProductiveCard.displayName}`,
   component: ProductiveCard,
   parameters: {
     styles,
@@ -69,8 +69,8 @@ const Template = (opts) => {
   );
 };
 
-export const Productive = Template.bind({});
-Productive.args = {
+export const Default = Template.bind({});
+Default.args = {
   ...defaultProps,
   actionIcons: [
     {
@@ -84,8 +84,8 @@ Productive.args = {
   ],
 };
 
-export const ProductiveOverflow = Template.bind({});
-ProductiveOverflow.args = {
+export const WithOverflow = Template.bind({});
+WithOverflow.args = {
   ...defaultProps,
   overflowActions: [
     {

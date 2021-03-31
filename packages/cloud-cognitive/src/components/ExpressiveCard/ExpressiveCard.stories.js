@@ -18,7 +18,7 @@ import mdx from './ExpressiveCard.mdx';
 const storybookPrefix = getStorybookPrefix(pkg, ExpressiveCard.displayName);
 
 export default {
-  title: `${storybookPrefix}/${ExpressiveCard.displayName}`,
+  title: `${storybookPrefix}/Cards/${ExpressiveCard.displayName}`,
   component: ExpressiveCard,
   parameters: {
     styles,

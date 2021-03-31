@@ -27,9 +27,26 @@ Here it is in use.
 
 <Preview>
   <Story
-    id={getStorybookSlug(pkg, CreateModal.displayName, 'with-state-manager')}
+    id={getStorybookSlug(pkg, CreateModal.displayName, 'with-form-validation')}
   />
 </Preview>
+
+## Form validation
+
+All forms, including that within the `CreateModal` should follow C&CS guidelines
+for form validation.
+
+This includes the following:
+
+- The `Submit` button in the modal should be disabled, until all required inputs
+  are complete
+- All required inputs should _only_ throw an invalid error _after_ the elements'
+  focus moves to another form field
+- All optional form fields should have an `(Optional)` helper text label.
+  Optional should always be in parentheses
+
+You can find more information on how to validate your form fields in
+[Carbon's Form usage page](https://www.carbondesignsystem.com/components/form/usage).
 
 ### Overriding the Carbon theme
 
@@ -49,35 +66,6 @@ In SCSS:
 
 Alternatively, the required Carbon theme can be set as above in a custom CSS
 class which is then applied to the CreateModal using the `className` prop.
-
-## Form validation
-
-All forms, including that within the `CreateModal` should follow C&CS guidelines
-for form validation.
-
-This includes the following:
-
-- The `Submit` button in the modal should be disabled, until all required inputs
-  are complete
-- All required inputs should _only_ throw an invalid error _after_ the elements'
-  focus moves to another form field
-- All optional form fields should have an `(Optional)` helper text label.
-  Optional should always be in parentheses
-
-You can find more information on how to validate your form fields in
-[Carbon's Form usage page](https://www.carbondesignsystem.com/components/form/usage).
-
-## Errors
-
-The `CreateModal` component does not accept more than 4 child nodes -- adding
-additional will throw an error.
-
-```
-Warning: Failed prop type: The `CreateModal` component does not take more than 4 nodes as children. This is to ensure that the modal does not overflow. Please remove 1 or more nodes.
-```
-
-If your form requires more than 4 form fields, consider using a `Tearsheet` or
-`Sidepanel` component.
 
 ## Component API
 

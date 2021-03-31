@@ -421,3 +421,34 @@ $raised-z-index: 99;
 .#{$block-class}--navigation-row .#{$carbon-prefix}--content-switcher-btn {
   background-color: $ui-background;
 }
+
+.#{$block-class}
+  .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only.#{$block-class}__collapse-expand-toggle {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: $raised-z-index + 1;
+}
+
+.#{$block-class}
+  .#{$block-class}__collapse-expand-toggle
+  .#{$carbon-prefix}--btn__icon {
+  // transform: rotate(-90deg); // accordion does this, but it feels odd in page header
+  transition: all $duration--slow-01 motion(standard, productive);
+}
+
+.#{$block-class}
+  .#{$block-class}__collapse-expand-toggle--collapsed
+  .#{$carbon-prefix}--btn__icon {
+  // transform: rotate(90deg);
+  transform: scaleY(-1);
+}
+
+.#{$block-class}--background .#{$block-class}--navigation-tags {
+  // allow space for expand/collapse if we have a background
+  padding-right: $spacing-07;
+
+  @include carbon--breakpoint(md) {
+    padding-right: $spacing-05;
+  }
+}

@@ -47,6 +47,7 @@ export let CreateModal = ({
   secondaryButtonText,
   primaryButtonText,
   disableSubmit,
+  primaryFocus,
 }) => {
   useEffect(() => {
     let modal = document.querySelector(`.${pkg.prefix}--create-modal`);
@@ -55,6 +56,7 @@ export let CreateModal = ({
   }, []);
   return (
     <ComposedModal
+      selectorPrimaryFocus={primaryFocus}
       className={classNames(`${pkg.prefix}--create-modal`, {
         [className]: className,
       })}
@@ -139,6 +141,10 @@ CreateModal.propTypes = {
    */
   primaryButtonText: PropTypes.string,
   /**
+   * Specifies which DOM element in the form should be focused.
+   */
+  primaryFocus: PropTypes.node.isRequired,
+  /**
    * Specifies the secondary button's text in the modal.
    */
   secondaryButtonText: PropTypes.string,
@@ -150,9 +156,6 @@ CreateModal.propTypes = {
    * The title of the CreateModal is usually the product or service name.
    */
   title: PropTypes.node.isRequired,
-  /**
-   *
-   */
 };
 
 CreateModal.displayName = componentName;

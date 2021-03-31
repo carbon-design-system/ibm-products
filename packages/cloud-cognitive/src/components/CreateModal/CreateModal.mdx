@@ -52,9 +52,25 @@ class which is then applied to the CreateModal using the `className` prop.
 
 ## Form validation
 
+<Preview>
+  <Story
+    id={getStorybookSlug(pkg, CreateModal.displayName, 'with-form-validation')}
+  />
+</Preview>
+
 All forms, including that within the `CreateModal` should follow C&CS guidelines
-for form validation. You can find more information on how to validate your form
-fields in
+for form validation.
+
+This includes the following:
+
+- The `Submit` button in the modal should be disabled, until all required inputs
+  are complete
+- All required inputs should _only_ throw an invalid error _after_ the elements'
+  focus moves to another form field
+- All optional form fields should have an `(Optional)` helper text label.
+  Optional should always be in parentheses
+
+You can find more information on how to validate your form fields in
 [Carbon's Form usage page](https://www.carbondesignsystem.com/components/form/usage).
 
 ## Errors

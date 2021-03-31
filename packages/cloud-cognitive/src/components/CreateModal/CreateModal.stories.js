@@ -66,11 +66,73 @@ const TemplateWithStateManager = ({
   );
 };
 
+const TemplateWithFormValidation = ({
+  storyInitiallyOpen = false,
+  story,
+  ...args
+}) => {
+  const [open, setOpen] = useState(storyInitiallyOpen);
+  const [textInput, setTextInput] = useState('');
+  const [invalid, setInvalid] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open {story?.storyName}</Button>
+      <style>{`.${pkg.prefix}-create-modal { opacity: 0 }`};</style>
+      <CreateModal
+        {...args}
+        open={open}
+        onClose={() => setOpen(false)}
+        disableSubmit={textInput.length === 0 ? true : false}
+        primaryFocus=".bx--text-input">
+        <TextInput
+          id="1"
+          key="form-field-1"
+          labelText="Text input label"
+          placeholder="Placeholder"
+          onChange={(e) => {
+            setTextInput(e.target.value);
+            setInvalid(false);
+          }}
+          onBlur={() => {
+            textInput.length === 0 && setInvalid(true);
+          }}
+          invalid={invalid}
+          invalidText="This is a required field"
+        />
+        <TextInput
+          id="2"
+          key="form-field-2"
+          labelText="Text input label"
+          placeholder="Placeholder"
+          helperText="(Optional)"
+        />
+        <TextInput
+          id="3"
+          key="form-field-3"
+          labelText="Text input label"
+          placeholder="Placeholder"
+          helperText="(Optional)"
+        />
+        <RadioButtonGroup
+          legendText="Radio button legend text goes here"
+          name="radio-button-group"
+          defaultSelected="radio-1">
+          <RadioButton labelText="Radio-1" value="radio-1" id="radio-1" />
+          <RadioButton labelText="Radio-2" value="radio-2" id="radio-2" />
+          <RadioButton labelText="Radio-3" value="radio-3" id="radio-3" />
+        </RadioButtonGroup>
+      </CreateModal>
+    </>
+  );
+};
+
 const defaultProps = {
   title: 'Title',
   subtitle: 'Your subtitle text will appear here',
   description:
     'This is example description text that will appear here in your modal ',
+  primaryFocus: '.bx--text-input',
 };
 
 Template.propTypes = {
@@ -78,6 +140,12 @@ Template.propTypes = {
 };
 
 TemplateWithStateManager.propTypes = {
+  story: PropTypes.object,
+  storyInitiallyOpen: PropTypes.bool,
+  ...CreateModal.propTypes,
+};
+
+TemplateWithFormValidation.propTypes = {
   story: PropTypes.object,
   storyInitiallyOpen: PropTypes.bool,
   ...CreateModal.propTypes,
@@ -195,4 +263,11 @@ WithStateManager.args = {
       />
     </>
   ),
+};
+
+export const WithFormValidation = TemplateWithFormValidation.bind({});
+WithFormValidation.storyName = 'Create Modal with form validation';
+WithFormValidation.args = {
+  story: WithFormValidation,
+  ...defaultProps,
 };

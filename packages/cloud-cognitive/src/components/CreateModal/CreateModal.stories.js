@@ -103,16 +103,14 @@ const TemplateWithFormValidation = ({
         <TextInput
           id="2"
           key="form-field-2"
-          labelText="Text input label"
+          labelText="Text input label (optional)"
           placeholder="Placeholder"
-          helperText="(Optional)"
         />
         <TextInput
           id="3"
           key="form-field-3"
-          labelText="Text input label"
+          labelText="Text input label (optional)"
           placeholder="Placeholder"
-          helperText="(Optional)"
         />
         <RadioButtonGroup
           legendText="Radio button legend text goes here"

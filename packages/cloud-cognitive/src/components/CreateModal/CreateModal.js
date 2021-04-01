@@ -24,6 +24,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 const componentName = 'CreateModal';
+const blockClass = `${pkg.prefix}--create-modal`;
 
 // Custom PropType validator which checks and ensures that the children property has no more than 4 nodes
 const isValidChildren = () => (props) => {
@@ -55,7 +56,7 @@ export let CreateModal = React.forwardRef(
     ref
   ) => {
     useEffect(() => {
-      let modal = document.querySelector(`.${pkg.prefix}--create-modal`);
+      let modal = document.querySelector(`.${blockClass}`);
       let closeButton = modal.querySelector('.bx--modal-close');
       closeButton.remove();
     }, []);
@@ -63,7 +64,7 @@ export let CreateModal = React.forwardRef(
       <ComposedModal
         {...rest}
         selectorPrimaryFocus={primaryFocus}
-        className={cx(`${pkg.prefix}--create-modal`, {
+        className={cx(blockClass, {
           [className]: className,
         })}
         {...{ open, ref }}
@@ -72,10 +73,10 @@ export let CreateModal = React.forwardRef(
         preventCloseOnClickOutside>
         <ModalHeader
           title={title}
-          titleClassName={`${pkg.prefix}--create-modal__title bx--modal-content__regular-content`}>
+          titleClassName={`${blockClass}__title bx--modal-content__regular-content`}>
           {subtitle && (
             <p
-              className={`${pkg.prefix}--create-modal__subtitle bx--modal-content__regular-content`}>
+              className={`${blockClass}__subtitle bx--modal-content__regular-content`}>
               {subtitle}
             </p>
           )}
@@ -83,13 +84,11 @@ export let CreateModal = React.forwardRef(
         <ModalBody hasForm>
           {description && (
             <p
-              className={`${pkg.prefix}--create-modal__description bx--modal-content__regular-content`}>
+              className={`${blockClass}__description bx--modal-content__regular-content`}>
               {description}
             </p>
           )}
-          <Form className={cx(`${pkg.prefix}--create-modal__form`)}>
-            {children}
-          </Form>
+          <Form className={cx(`${blockClass}__form`)}>{children}</Form>
         </ModalBody>
         <ModalFooter>
           <Button type="button" kind="secondary" onClick={onClose}>

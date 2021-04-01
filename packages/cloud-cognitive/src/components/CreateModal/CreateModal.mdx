@@ -39,11 +39,11 @@ for form validation.
 This includes the following:
 
 - The `Submit` button in the modal should be disabled, until all required inputs
-  are complete
-- All required inputs should _only_ throw an invalid error _after_ the elements'
-  focus moves to another form field
-- All optional form fields should have an `(Optional)` helper text label.
-  Optional should always be in parentheses
+  are filled in and valid
+- All required inputs should _only_ throw an invalid error _after_ the element
+  loses focus
+- All optional form fields should have an `(optional)` text at the end of the
+  input `labelText`. Optional should always be in parentheses
 
 You can find more information on how to validate your form fields in
 [Carbon's Form usage page](https://www.carbondesignsystem.com/components/form/usage).

@@ -8,14 +8,14 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import { Card } from '.';
+import { ExpressiveCard } from '.';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 
-const { name } = Card;
+const { name } = ExpressiveCard;
 const defaultProps = {};
 
 describe(name, () => {
   test('should render', async () => {
-    render(<Card {...defaultProps} />);
+    render(<ExpressiveCard {...defaultProps} />);
   });
 });

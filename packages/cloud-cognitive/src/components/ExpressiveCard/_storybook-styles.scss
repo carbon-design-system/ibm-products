@@ -1,0 +1,23 @@
+//
+// Copyright IBM Corp. 2020, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import './index';
+// shared card styles can be found in the Card folder
+@import '../Card/storybook-styles';
+
+// aspect ratio box styling
+.card-story .bx--aspect-ratio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $ui-03;
+}
+
+.#{$pkg-prefix}-card--media-left .#{$pkg-prefix}-card-media {
+  width: 100%;
+  max-width: 300px;
+}

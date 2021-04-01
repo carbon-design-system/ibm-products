@@ -1,11 +1,11 @@
 <!-- `position:fixed` cause rendering issues, so do not render the modal -->
 
 import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
-import { Card } from '.';
+import { ExpressiveCard } from '.';
 import { pkg } from '../../settings';
 import { getStorybookSlug } from '../../../config';
 
-# Card
+# ExpressiveCard
 
 [Usage guidelines](https://pages.github.ibm.com/cdai-design/pal/components/card/overview)
 
@@ -16,16 +16,8 @@ for different use cases and have corresponding usage and style guidelines to
 match. For information on each implementation please refer to the
 [usage guidelines](https://pages.github.ibm.com/cdai-design/pal/components/card/overview).
 
-### Expressive
-
 <Preview>
-  <Story id={getStorybookSlug(pkg, Card.displayName, 'default')} />
-</Preview>
-
-### Productive
-
-<Preview>
-  <Story id={getStorybookSlug(pkg, Card.displayName, 'productive')} />
+  <Story id={getStorybookSlug(pkg, ExpressiveCard.displayName, 'default')} />
 </Preview>
 
 ## Component API

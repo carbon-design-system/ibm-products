@@ -5,8 +5,4 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-// make the root full width to get a better idea of how the cards
-// look in a real grid situation
-#root {
-  width: 100%;
-}
+export { ProductiveCard } from './ProductiveCard';

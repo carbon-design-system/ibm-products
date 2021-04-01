@@ -7,4 +7,7 @@
 
 // An index file is most useful when you have multiple components
 
-@import './card';
+// shared card styles can be found in the Card folder
+// in this case the expressive card is considered the default Card mode
+
+@import '../Card/card';

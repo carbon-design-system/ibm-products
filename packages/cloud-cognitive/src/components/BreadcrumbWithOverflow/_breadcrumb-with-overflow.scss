@@ -56,7 +56,8 @@
     pointer-events: none;
   }
 
-  // TODO: REMOVE borrowed from https://github.com/carbon-design-system/carbon/pull/7085
+  // TODO: the following CSS is no longer needed when the PR 7085 is in the version of Carbon we are using,
+  // which will be in 10.32.0 as it is now merged. https://github.com/carbon-design-system/carbon/pull/7085
 
   // Overflow Menu overrides
   .#{$prefix}--breadcrumb-item .#{$prefix}--overflow-menu {

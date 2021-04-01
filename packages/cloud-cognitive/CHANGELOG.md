@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.34.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.33.0...@carbon/ibm-cloud-cognitive@0.34.0) (2021-04-01)
+
+
+### Features
+
+* add breadcrumb test and overflow aria label ([#537](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/537)) ([f383b36](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f383b36d4f2987ae3032fa53319b883df95602ba))
+
+
+
+
+
 # [0.33.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.32.4...@carbon/ibm-cloud-cognitive@0.33.0) (2021-04-01)
 
 

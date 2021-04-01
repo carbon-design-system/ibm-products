@@ -6,10 +6,11 @@
  */
 
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import userEvent from '@testing-library/user-event';
 
 import { pkg } from '../../settings';
-import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
@@ -17,8 +18,6 @@ import { ExampleComponent } from '.';
 
 const blockClass = `${pkg.prefix}--example-component`;
 const componentName = ExampleComponent.displayName;
-
-const { click } = fireEvent;
 
 const borderColor = '#acefed';
 const className = `class-${uuidv4()}`;
@@ -81,7 +80,7 @@ describe(componentName, () => {
       onPrimaryClick: primaryHandler,
       onSecondaryClick: secondaryHandler,
     });
-    screen.getAllByRole('button').forEach(click);
+    screen.getAllByRole('button').forEach(userEvent.click);
     expect(primaryHandler).toBeCalledTimes(1);
     expect(secondaryHandler).toBeCalledTimes(1);
   });

@@ -1,9 +1,9 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-experimental",
   "description": "Carbon for Cloud & Cognitive UI components",
-  "version": "0.30.6-canary.6",
+  "version": "0.33.3",
   "license": "Apache-2.0",
-  "main": "lib/index-commonjs.js",
+  "main": "lib/index.js",
   "module": "es/index.js",
   "repository": {
     "type": "git",
@@ -29,9 +29,9 @@
   "scripts": {
     "build": "yarn clean && yarn build:js && yarn build:scss",
     "build:js": "yarn build:js-esm && yarn build:js-cjs",
-    "build:js-esm": "cross-env BABEL_ENV=esm yarn build:js-modules -d es",
-    "build:js-cjs": "cross-env BABEL_ENV=cjs yarn build:js-modules -d lib",
-    "build:js-modules": "babel *.js --ignore 'silence.js'",
+    "build:js-esm": "cross-env BABEL_ENV=esm yarn build:js-modules src/esm -d es",
+    "build:js-cjs": "cross-env BABEL_ENV=cjs yarn build:js-modules src/cjs -d lib",
+    "build:js-modules": "babel",
     "build:scss": "bundler bundle:scss index.scss && copyfiles '**/*.scss' scss",
     "ci-check": "node scripts/import",
     "clean": "rimraf es lib css scss",
@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.12.5",
-    "@carbon/ibm-cloud-cognitive": "^0.31.2",
+    "@carbon/ibm-cloud-cognitive": "^0.32.4",
     "@carbon/telemetry": "^0.0.0-alpha.6"
   },
   "devDependencies": {

@@ -9,7 +9,7 @@ import { render } from '@testing-library/react';
 import React from 'react';
 
 import { pkg } from '../../settings';
-import '../../enable-all';
+import '../../utils/enable-all';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 

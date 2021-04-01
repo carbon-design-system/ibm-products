@@ -73,26 +73,26 @@ ExampleComponents.displayName = componentName; // displayName is used in prefere
 ### The test file (Component.test.js)
 
 In order to test a component it will need to be enabled, regardless of whether
-it is canary or not. To do so you must import `../../enable-all` prior to
+it is canary or not. To do so you must import `../../utils/enable-all` prior to
 importing any Cloud and Cognitive component.
 
 E.g.
 
 ```js
 import { pkg } from '../../settings';
-import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { ExampleComponent } from '.';
 ```
 
 ### The story file (Component.stories.js)
 
 In order to view a component in a story it needs to be enabled, regardless of
-whether it is canary or not. To do so you must import `../../enable-all` prior
-to importing any Cloud and Cognitive component.
+whether it is canary or not. To do so you must import `../../utils/enable-all`
+prior to importing any Cloud and Cognitive component.
 
 ```js
 import { pkg } from '../../settings';
-import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { ExampleComponent } from '.';
 ```
 

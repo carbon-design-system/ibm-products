@@ -12,7 +12,7 @@ import { render } from '@testing-library/react';
 import { pkg } from '../../settings';
 
 import React from 'react';
-import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 
 import { UserProfileImage } from '.';
 

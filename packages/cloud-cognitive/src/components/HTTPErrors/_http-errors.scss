@@ -20,6 +20,8 @@
     &.#{$block-class}-content {
       @include carbon--breakpoint(sm) {
         position: fixed;
+        top: 50%;
+        left: 50%;
         z-index: 2;
         transform: translate(-50%, -150%);
       }

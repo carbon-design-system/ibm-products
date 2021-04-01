@@ -12,7 +12,7 @@ import styles from './_storybook-styles.scss'; // import index in case more file
 import { BreadcrumbItem } from 'carbon-components-react';
 
 import { pkg } from '../../settings';
-import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { BreadcrumbWithOverflow } from '.';
 import { getStorybookPrefix } from '../../../config';
 const storybookPrefix = getStorybookPrefix(

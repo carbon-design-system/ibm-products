@@ -50,7 +50,7 @@ export let DISPLAY_NAME = React.forwardRef(
           {
             // switched classes dependant on props or state
             [`${blockClass}__here-if-small`]: size === 'small',
-            [`${blockClass}__here-if-field`]: size === 'field'
+            [`${blockClass}__here-if-field`]: size === 'field',
           }
         )}
         ref={ref}

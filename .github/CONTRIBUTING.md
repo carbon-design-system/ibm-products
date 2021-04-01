@@ -56,10 +56,14 @@ See example component enabled via feature flags on
 For more information on how this affects components see
 [CANARY_STRUCTURE.md](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CANARY_STRUCTURE.md).
 
-## 4. Test your JavaScript code
+## 4. Test your code
 
 If you're contributing to our JavaScript code, test your changes by running
 `yarn test`.
+
+If you're contributing to our styles, the continuous integration check will fail
+because of a public API snapshot change. Update the snapshot by running
+`yarn test -u`.
 
 New tests are written in
 [React Testing Library](https://testing-library.com/docs/react-testing-library/intro),

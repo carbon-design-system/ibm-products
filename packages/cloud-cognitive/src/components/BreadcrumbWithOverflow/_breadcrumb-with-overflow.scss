@@ -65,6 +65,9 @@
     width: rem(20px);
     height: rem(20px);
 
+    // remove space above button https://github.com/carbon-design-system/carbon/issues/8265
+    margin-top: calc(-1 * #{$spacing-02});
+
     &:focus {
       outline: 1px solid $focus;
     }
@@ -85,6 +88,10 @@
       transition: opacity $duration--fast-01 motion(standard, productive);
       content: '';
     }
+  }
+
+  .#{$prefix}--breadcrumb-item {
+    display: inline-flex;
   }
 
   .#{$prefix}--breadcrumb-item .#{$prefix}--overflow-menu:hover::after {

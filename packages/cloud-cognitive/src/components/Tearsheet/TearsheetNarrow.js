@@ -12,6 +12,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
+import { stripUnwantedProps } from '../../global/js/utils/props-helper';
 
 // Carbon and package components we use.
 import { ModalHeader, ModalBody } from 'carbon-components-react';
@@ -38,10 +39,13 @@ export let TearsheetNarrow = React.forwardRef(
       // The component props, in alphabetical order (for consistency).
       buttons,
       children,
+      // className is passed directly to TearsheetShell in 'rest'
       closeIconDescription,
       description,
       hasCloseIcon,
+      // height is passed directly to TearsheetShell in 'rest'
       label,
+      // onClose, open, preventCloseOnClickOutside are passed directly to TearsheetShell in 'rest'
       title,
       // Collect any other property values passed in.
       ...rest
@@ -51,7 +55,7 @@ export let TearsheetNarrow = React.forwardRef(
     <TearsheetShell
       {
         // Pass through any other property values.
-        ...rest
+        ...stripUnwantedProps(rest, ['size'])
       }
       ref={ref}
       size="narrow">

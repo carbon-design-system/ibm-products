@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.34.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.34.0...@carbon/ibm-cloud-cognitive@0.34.1) (2021-04-01)
+
+
+### Bug Fixes
+
+* pageheader styles either side of md breakpt ([#554](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/554)) ([6abab44](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6abab440845b9919dbdd7e4a3b2c6d021f6477b8))
+
+
+
+
+
 # [0.34.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.33.0...@carbon/ibm-cloud-cognitive@0.34.0) (2021-04-01)
 
 

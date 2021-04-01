@@ -69,13 +69,10 @@ export let ExampleComponent = React.forwardRef(
           ...rest
         }
         className={cx(
-          // Apply the block class to the main HTML element, along with
-          // any other classes we need.
-          [blockClass, `${blockClass}--${size}`, modeClass],
-          {
-            // Apply any supplied class names to the main HTML element.
-            [className]: className, // this handles className omitted/falsy
-          }
+          blockClass, // Apply the block class to the main HTML element
+          className, // Apply any supplied class names to the main HTML element.
+          `${blockClass}--${size}`,
+          modeClass
         )}
         ref={ref}
         role="main"

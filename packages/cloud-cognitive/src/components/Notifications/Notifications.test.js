@@ -166,9 +166,7 @@ describe('Notifications', () => {
       'data-testid': dataTestId,
     });
     expect(
-      container.querySelector(
-        `.${blockClass}__container[data-testid="${dataTestId}"]`
-      )
+      container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
     ).toBeInTheDocument();
   });
 
@@ -178,8 +176,6 @@ describe('Notifications', () => {
       ref,
       data: [],
     });
-    expect(
-      ref.current.classList.contains(`${blockClass}__container`)
-    ).toBeTruthy();
+    expect(ref.current.classList.contains(blockClass)).toBeTruthy();
   });
 });

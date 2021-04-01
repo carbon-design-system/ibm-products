@@ -5,11 +5,4 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '../../global/styles/carbon-settings';
-
-.about-modal-stories--tech-logo {
-  width: 2.25rem;
-  height: 2.25rem;
-  margin-right: $spacing-05;
-  object-fit: contain;
-}
+export { ExpressiveCard } from './ExpressiveCard';

@@ -21,11 +21,11 @@ const blockClass = `${pkg.prefix}--action-bar`;
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 
 export default {
-  title: `${storybookPrefix}/PageHeader/${ActionBarItem.displayName}`,
+  title: `${storybookPrefix}/PageHeader/${ActionBar.displayName}`,
   component: ActionBar,
   argTypes: {
     containerWidth: {
-      control: { type: 'range', min: 50, max: 800, step: 10 },
+      control: { type: 'range', min: 20, max: 800, step: 10 },
     },
   },
   decorators: [

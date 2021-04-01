@@ -133,7 +133,7 @@ export default {
   parameters: { styles },
   argTypes: {
     containerWidth: {
-      control: { type: 'range', min: 50, max: 800, step: 10 },
+      control: { type: 'range', min: 20, max: 800, step: 10 },
     },
   },
   decorators: [

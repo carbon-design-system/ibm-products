@@ -147,7 +147,11 @@ export let ActionBar = ({
         willFit -= 1; // remove one for overflow menu
       }
 
-      setDisplayCount(willFit);
+      if (willFit < 1) {
+        setDisplayCount(0);
+      } else {
+        setDisplayCount(willFit);
+      }
     }
   };
 

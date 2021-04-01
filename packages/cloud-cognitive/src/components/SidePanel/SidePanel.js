@@ -162,7 +162,7 @@ export let SidePanel = React.forwardRef(
             (button) => button.kind === 'ghost'
           );
           if (ghostButton.length) {
-            const ghostIndex = primaryActionButtons.findIndex(
+            const ghostIndex = newArray.findIndex(
               (item) => item.kind === 'ghost'
             );
             newArray = changeArrayPosition(
@@ -178,7 +178,7 @@ export let SidePanel = React.forwardRef(
             primaryActionButtons.length - 1
           ); // put the primary button as the last button in the group
           if (ghostButton.length) {
-            const ghostIndex = primaryActionButtons.findIndex(
+            const ghostIndex = newArray.findIndex(
               (item) => item.kind === 'ghost'
             );
             newArray = changeArrayPosition(newArray, ghostIndex, 0); // put the ghost button as the first button in the group

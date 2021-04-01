@@ -1,5 +1,6 @@
 export const changeArrayPosition = (arr, originalPosition, newPosition) => {
-  let cutOut = arr.splice(originalPosition, 1)[0];
-  arr.splice(newPosition, 0, cutOut);
-  return arr;
+  const newArr = [...arr];
+  const cutOut = newArr.splice(originalPosition, 1)[0];
+  newArr.splice(newPosition, 0, cutOut);
+  return newArr;
 };

@@ -245,15 +245,16 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       width: 100%;
       height: $layout-05;
       background-color: $ui-01;
-      &.#{$block-class}-actions--extra-small {
+      border-top: 1px solid $decorative-01;
+      &.#{$block-class}__actions--extra-small {
         @include setActionBarSize($extra-small-panel-size);
         @include smallButtonsStacked();
       }
-      &.#{$block-class}-actions--small {
+      &.#{$block-class}__actions--small {
         @include setActionBarSize($small-panel-size);
         @include smallButtonsStacked();
       }
-      &.#{$block-class}-actions--medium {
+      &.#{$block-class}__actions--medium {
         @include setActionBarSize($medium-panel-size);
 
         flex-direction: row;
@@ -264,7 +265,7 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
           }
         }
       }
-      &.#{$block-class}-actions--large {
+      &.#{$block-class}__actions--large {
         @include setActionBarSize($large-panel-size);
 
         &.#{$block-class}__actions-container--multi-action-3-buttons-or-more {
@@ -280,7 +281,7 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
           }
         }
       }
-      &.#{$block-class}-actions--max {
+      &.#{$block-class}__actions--max {
         &.#{$block-class}__actions-container--multi-action-3-buttons-or-more {
           .#{$block-class}__primary-action-button.#{$block-class}__ghost-button {
             width: 50%;
@@ -288,10 +289,7 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
           }
         }
         &.#{$block-class}__actions-container--single-action {
-          .#{$block-class}__primary-action-button.#{$block-class}__ghost-button {
-            width: 100%;
-            max-width: 100%;
-          }
+          justify-content: flex-start;
         }
       }
       &.#{$block-class}__actions-container-condensed {
@@ -311,16 +309,16 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       width: 50%;
       max-width: 50%;
     }
-    .#{$block-class}__actions-container.#{$block-class}__actions-container--single-action.#{$block-class}-actions--large
+    .#{$block-class}__actions-container.#{$block-class}__actions-container--single-action.#{$block-class}__actions--large
       .#{$block-class}__primary-action-button,
-    .#{$block-class}__actions-container.#{$block-class}__actions-container--multi-action.#{$block-class}-actions--large
+    .#{$block-class}__actions-container.#{$block-class}__actions-container--multi-action.#{$block-class}__actions--large
       .#{$block-class}__primary-action-button {
       width: 50%;
       max-width: 50%;
     }
-    .#{$block-class}__actions-container.#{$block-class}__actions-container--multi-action-3-buttons-or-more.#{$block-class}-actions--large
+    .#{$block-class}__actions-container.#{$block-class}__actions-container--multi-action-3-buttons-or-more.#{$block-class}__actions--large
       .#{$block-class}__primary-action-button,
-    .#{$block-class}__actions-container.#{$block-class}-actions--max
+    .#{$block-class}__actions-container.#{$block-class}__actions--max
       .#{$block-class}__primary-action-button {
       width: 25%;
       max-width: 25%;

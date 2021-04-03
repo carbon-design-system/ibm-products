@@ -4,7 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import {
@@ -120,46 +120,37 @@ const icons = {
   },
 };
 
-const blockClass = `${pkg.prefix}-status-icon`;
+const blockClass = `${pkg.prefix}--status-icon`;
+const componentName = 'StatusIcon';
 
-export const StatusIcon = ({ type, theme, size, className, ...rest }) => {
-  const [icon, setIcon] = useState([]);
-  const [iconSize, setIconSize] = useState('');
-  const [iconTheme, setIconTheme] = useState(null);
-  const IconComponent = icon[iconSize];
+export let StatusIcon = React.forwardRef(
+  ({ kind, theme, size, className, iconDescription, ...rest }, ref) => {
+    const IconComponent = icons[kind]?.[size];
 
-  const classNames = cx({
-    [`${blockClass}--${iconTheme}`]: iconTheme,
-    [`${blockClass}--${iconTheme}-${type}`]: type,
-    [className]: className,
-  });
+    const classNames = cx(className, `${blockClass}--${theme}`, {
+      [`${blockClass}--${theme}-${kind}`]: kind,
+    });
 
-  useEffect(() => {
-    type && setIcon(icons[type]);
-  }, [type]);
+    return (
+      <div {...rest} className={(`${blockClass}`, classNames)}>
+        {IconComponent && (
+          <IconComponent className={`${blockClass}__icon`} ref={ref}>
+            <title>{iconDescription}</title>
+          </IconComponent>
+        )}
+      </div>
+    );
+  }
+);
 
-  useEffect(() => {
-    size && setIconSize(size);
-  }, [size]);
+StatusIcon = pkg.checkComponentEnabled(StatusIcon, componentName);
 
-  useEffect(() => {
-    theme && setIconTheme(theme);
-  }, [theme]);
-
-  return (
-    <div className={classNames} {...rest}>
-      {IconComponent && <IconComponent />}
-    </div>
-  );
-};
-
-StatusIcon.displayName = 'StatusIcon';
+StatusIcon.displayName = componentName;
 
 StatusIcon.propTypes = {
   className: PropTypes.string,
-  size: PropTypes.oneOf(['small', 'medium', 'large', 'x-large']).isRequired,
-  theme: PropTypes.oneOf(['light', 'dark']).isRequired,
-  type: PropTypes.oneOf([
+  iconDescription: PropTypes.string.isRequired,
+  kind: PropTypes.oneOf([
     'fatal',
     'critical',
     'major-warning',
@@ -172,4 +163,6 @@ StatusIcon.propTypes = {
     'running',
     'pending',
   ]).isRequired,
+  size: PropTypes.oneOf(['small', 'medium', 'large', 'x-large']).isRequired,
+  theme: PropTypes.oneOf(['light', 'dark']).isRequired,
 };

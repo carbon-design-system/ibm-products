@@ -63,11 +63,26 @@ export let Card = ({
 
     if (actionIcons.length === 0) return;
 
-    const icons = actionIcons.map(({ id, icon }) => (
-      <div key={id} className={`${pkg.prefix}-card-icon`}>
-        {icon}
-      </div>
-    ));
+    const icons = actionIcons.map(
+      ({ id, icon: Icon, onClick, iconDescription }) => {
+        if (productive)
+          return (
+            <Button
+              renderIcon={Icon}
+              hasIconOnly
+              onClick={onClick}
+              size="sm"
+              iconDescription={iconDescription}
+              kind="ghost"
+            />
+          );
+        return (
+          <div key={id} className={`${pkg.prefix}-card-icon`}>
+            <Icon aria-label={iconDescription} />
+          </div>
+        );
+      }
+    );
 
     return icons;
   };

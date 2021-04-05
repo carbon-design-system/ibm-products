@@ -52,7 +52,6 @@ const defaultProps = {
       <p>Productive content text</p>
     </>
   ),
-  primaryButtonText: 'Ghost button',
   actionIcons: [
     {
       id: '1',
@@ -124,8 +123,15 @@ WithOverflow.args = {
   ],
 };
 
+export const WithBottomBar = Template.bind({});
+WithBottomBar.args = {
+  ...defaultProps,
+  primaryButtonText: 'Ghost button',
+};
+
 export const ComplexBottomBar = Template.bind({});
 ComplexBottomBar.args = {
   ...defaultProps,
+  primaryButtonText: 'Ghost button',
   actionIconsPosition: 'bottom',
 };

@@ -40,9 +40,7 @@ export let Card = ({
 }) => {
   const headerClasses = cx(`${pkg.prefix}-card-header`, {
     [`${pkg.prefix}-card-header--label-only`]: label && !title && !caption,
-  });
-
-  const titleClasses = cx(`${pkg.prefix}-card-title`, {
+    [`${pkg.prefix}-card-header--has-label`]: label && productive,
     [`${pkg.prefix}-card-title--lg`]: titleSize === 'large',
   });
 
@@ -71,7 +69,7 @@ export let Card = ({
               renderIcon={Icon}
               hasIconOnly
               onClick={onClick}
-              size="sm"
+              size={actionIconsPosition === 'top' ? 'sm' : 'field'}
               iconDescription={iconDescription}
               kind="ghost"
             />
@@ -116,14 +114,21 @@ export let Card = ({
       )}
       <div className={`${pkg.prefix}-card-content-container`}>
         <div className={headerClasses}>
-          {label && <p className={`${pkg.prefix}-card-label`}>{label}</p>}
-          <div className={`${pkg.prefix}-card-title-container`}>
-            {title && <p className={titleClasses}>{title}</p>}
+          <div className={`${pkg.prefix}-card-header-container`}>
+            <div className={`${pkg.prefix}-card-title-container`}>
+              {label && <p className={`${pkg.prefix}-card-label`}>{label}</p>}
+              {title && <p className={`${pkg.prefix}-card-title`}>{title}</p>}
+              {caption && (
+                <p className={`${pkg.prefix}-card-caption`}>{caption}</p>
+              )}
+            </div>
             {hasActions && actionIconsPosition === 'top' && (
-              <div className={`${pkg.prefix}-card-actions`}>{getActions()}</div>
+              <div
+                className={`${pkg.prefix}-card-actions ${pkg.prefix}-card-actions--top`}>
+                {getActions()}
+              </div>
             )}
           </div>
-          {caption && <p className={`${pkg.prefix}-card-caption`}>{caption}</p>}
         </div>
         <div className={`${pkg.prefix}-card-body`}>{children}</div>
         <div className={`${pkg.prefix}-card-footer`}>

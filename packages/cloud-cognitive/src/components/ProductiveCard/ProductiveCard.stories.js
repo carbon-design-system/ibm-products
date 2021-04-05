@@ -140,4 +140,7 @@ export const Clickable = Template.bind({});
 Clickable.args = {
   ...defaultProps,
   onClick: () => {},
+  onClickZone: 'one',
+  primaryButtonText: 'Ghost button',
+  actionIcons: [],
 };

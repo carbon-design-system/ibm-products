@@ -26,6 +26,7 @@ export let Card = ({
   media,
   mediaPosition,
   onClick,
+  onClickZone,
   onPrimaryButtonClick,
   overflowActions,
   onSecondaryButtonClick,
@@ -89,19 +90,55 @@ export let Card = ({
     const cardProps = {
       className: cx(`${pkg.prefix}-card`, {
         [`${pkg.prefix}-card--productive`]: productive,
-        [`${pkg.prefix}-card--clickable`]: onClick,
+        [`${pkg.prefix}-card--clickable`]:
+          (!productive && onClick) || (productive && onClickZone === 'one'),
         [`${pkg.prefix}-card--media-left`]: mediaPosition === 'left',
         className,
       }),
-      ...(onClick && {
-        onClick,
-        onKeyDown: onClick,
-        role: 'button',
-        tabIndex: '0',
-      }),
+      ...(onClick &&
+        onClickZone === 'one' && {
+          onClick,
+          onKeyDown: onClick,
+          role: 'button',
+          tabIndex: '0',
+        }),
     };
 
     return cardProps;
+  };
+
+  const getHeaderBodyProps = () => {
+    const headerBodyProps = {
+      className: cx(`${pkg.prefix}-card-header-body-container`, {
+        [`${pkg.prefix}-card--clickable`]: onClickZone === 'two',
+      }),
+      ...(onClick &&
+        onClickZone === 'two' && {
+          onClick,
+          onKeyDown: onClick,
+          role: 'button',
+          tabIndex: '0',
+        }),
+    };
+
+    return headerBodyProps;
+  };
+
+  const getBodyProps = () => {
+    const bodyProps = {
+      className: cx(`${pkg.prefix}-card-body`, {
+        [`${pkg.prefix}-card--clickable`]: onClickZone === 'three',
+      }),
+      ...(onClick &&
+        onClickZone === 'three' && {
+          onClick,
+          onKeyDown: onClick,
+          role: 'button',
+          tabIndex: '0',
+        }),
+    };
+
+    return bodyProps;
   };
 
   const CardContent = (
@@ -113,24 +150,26 @@ export let Card = ({
         </div>
       )}
       <div className={`${pkg.prefix}-card-content-container`}>
-        <div className={headerClasses}>
-          <div className={`${pkg.prefix}-card-header-container`}>
-            <div className={`${pkg.prefix}-card-title-container`}>
-              {label && <p className={`${pkg.prefix}-card-label`}>{label}</p>}
-              {title && <p className={`${pkg.prefix}-card-title`}>{title}</p>}
-              {caption && (
-                <p className={`${pkg.prefix}-card-caption`}>{caption}</p>
+        <div {...getHeaderBodyProps()}>
+          <div className={headerClasses}>
+            <div className={`${pkg.prefix}-card-header-container`}>
+              <div className={`${pkg.prefix}-card-title-container`}>
+                {label && <p className={`${pkg.prefix}-card-label`}>{label}</p>}
+                {title && <p className={`${pkg.prefix}-card-title`}>{title}</p>}
+                {caption && (
+                  <p className={`${pkg.prefix}-card-caption`}>{caption}</p>
+                )}
+              </div>
+              {hasActions && actionIconsPosition === 'top' && (
+                <div
+                  className={`${pkg.prefix}-card-actions ${pkg.prefix}-card-actions--top`}>
+                  {getActions()}
+                </div>
               )}
             </div>
-            {hasActions && actionIconsPosition === 'top' && (
-              <div
-                className={`${pkg.prefix}-card-actions ${pkg.prefix}-card-actions--top`}>
-                {getActions()}
-              </div>
-            )}
           </div>
+          <div {...getBodyProps()}>{children}</div>
         </div>
-        <div className={`${pkg.prefix}-card-body`}>{children}</div>
         <div className={`${pkg.prefix}-card-footer`}>
           {secondaryButtonText && (
             <Button
@@ -177,6 +216,7 @@ Card.propTypes = {
   media: PropTypes.node,
   mediaPosition: PropTypes.oneOf(['top', 'left']),
   onClick: PropTypes.func,
+  onClickZone: PropTypes.oneOf(['one', 'two', 'three']),
   onPrimaryButtonClick: PropTypes.func,
   onSecondaryButtonClick: PropTypes.func,
   overflowActions: PropTypes.arrayOf(
@@ -200,6 +240,7 @@ Card.defaultProps = {
   actionIcons: [],
   actionIconsPosition: 'bottom',
   mediaPosition: 'top',
+  onClickZone: 'one',
   overflowActions: [],
   primaryButtonKind: 'primary',
   productive: false,

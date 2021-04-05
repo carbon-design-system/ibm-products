@@ -16,7 +16,6 @@ export let ProductiveCard = (props) => {
   const validProps = stripUnwantedProps(props, [
     'media',
     'mediaPosition',
-    'onClick',
     'onSecondaryButtonClick',
     'pictogram',
     'primaryButtonClick',
@@ -60,6 +59,10 @@ ProductiveCard.propTypes = {
    * Optional label for the top of the card
    */
   label: PropTypes.string,
+  /**
+   * Provides the callback for a clickable card
+   */
+  onClick: PropTypes.func,
   /**
    * Function that's called from the primary button or action icon
    */

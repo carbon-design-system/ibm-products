@@ -35,11 +35,9 @@
     margin: 0;
   }
 
-  /* stylelint-disable */
   .#{$pkg-prefix}-card-actions--top {
-    margin-top: -0.25rem;
+    margin-top: calc(-1 * #{$spacing-02});
   }
-  /* stylelint-enable */
 
   .#{$pkg-prefix}-card-title--lg .#{$pkg-prefix}-card-actions--top,
   .#{$pkg-prefix}-card-header--has-label .#{$pkg-prefix}-card-actions--top {

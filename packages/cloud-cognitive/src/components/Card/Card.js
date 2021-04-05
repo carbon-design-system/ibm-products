@@ -78,7 +78,7 @@ export let Card = ({
           );
         return (
           <div key={id} className={`${pkg.prefix}-card-icon`}>
-            <Icon />
+            <Icon aria-label={iconDescription} />
           </div>
         );
       }

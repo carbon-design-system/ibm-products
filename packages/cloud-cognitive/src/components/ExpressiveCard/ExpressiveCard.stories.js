@@ -122,6 +122,7 @@ WithActionIcon.args = {
       id: '1',
       icon: ArrowRight24,
       onClick: () => {},
+      iconDescription: 'Next',
     },
   ],
   primaryButtonText: '',

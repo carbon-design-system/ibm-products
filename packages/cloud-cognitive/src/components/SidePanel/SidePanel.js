@@ -447,6 +447,9 @@ SidePanel.propTypes = {
    * Sets the primary action buttons for the side panel
    */
   primaryActions: PropTypes.oneOfType([
+    // Use the ActionSet to validate the supplied actions, with the 'small'
+    // set constraints (limit of three actions) if the SidePanel size is
+    // extraSmall/small/medium.
     ActionSet.validateActions(
       (props) =>
         props.size === 'small' ||

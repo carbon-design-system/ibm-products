@@ -410,7 +410,7 @@ LeftWithCondensedPrimaryActions.args = {
   primaryActions: [
     {
       label: 'Primary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'primary',
     },
   ],
@@ -422,7 +422,7 @@ OnePrimaryActionExtraSmall.args = {
   primaryActions: [
     {
       label: 'Primary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'primary',
     },
   ],
@@ -435,7 +435,7 @@ OnePrimaryActionSmall.args = {
   primaryActions: [
     {
       label: 'Primary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'primary',
     },
   ],
@@ -448,7 +448,7 @@ OnePrimaryActionMedium.args = {
   primaryActions: [
     {
       label: 'Primary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'primary',
     },
   ],
@@ -460,7 +460,7 @@ OnePrimaryActionLarge.args = {
   primaryActions: [
     {
       label: 'Primary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'primary',
     },
   ],
@@ -473,7 +473,7 @@ OnePrimaryActionMax.args = {
   primaryActions: [
     {
       label: 'Primary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'primary',
     },
   ],
@@ -487,12 +487,12 @@ TwoPrimaryActionExtraSmall.args = {
   primaryActions: [
     {
       label: 'Primary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'primary',
     },
     {
       label: 'Secondary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'secondary',
     },
   ],
@@ -505,12 +505,12 @@ TwoPrimaryActionSmall.args = {
   primaryActions: [
     {
       label: 'Primary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'primary',
     },
     {
       label: 'Secondary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'secondary',
     },
   ],
@@ -523,12 +523,12 @@ TwoPrimaryActionMedium.args = {
   primaryActions: [
     {
       label: 'Primary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'primary',
     },
     {
       label: 'Secondary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'secondary',
     },
   ],
@@ -540,12 +540,12 @@ TwoPrimaryActionLarge.args = {
   primaryActions: [
     {
       label: 'Primary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'primary',
     },
     {
       label: 'Secondary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'secondary',
     },
   ],
@@ -558,12 +558,12 @@ TwoPrimaryActionMax.args = {
   primaryActions: [
     {
       label: 'Primary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'primary',
     },
     {
       label: 'Secondary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'secondary',
     },
   ],
@@ -577,17 +577,17 @@ ThreePrimaryActionExtraSmall.args = {
   primaryActions: [
     {
       label: 'Primary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'primary',
     },
     {
       label: 'Secondary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'secondary',
     },
     {
       label: 'Secondary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'secondary',
     },
   ],
@@ -600,17 +600,17 @@ ThreePrimaryActionSmall.args = {
   primaryActions: [
     {
       label: 'Primary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'primary',
     },
     {
       label: 'Secondary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'secondary',
     },
     {
       label: 'Secondary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'secondary',
     },
   ],
@@ -623,17 +623,17 @@ ThreePrimaryActionMedium.args = {
   primaryActions: [
     {
       label: 'Primary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'primary',
     },
     {
       label: 'Secondary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'secondary',
     },
     {
       label: 'Secondary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'secondary',
     },
   ],
@@ -645,17 +645,17 @@ ThreePrimaryActionLarge.args = {
   primaryActions: [
     {
       label: 'Primary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'primary',
     },
     {
       label: 'Secondary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'secondary',
     },
     {
       label: 'Secondary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'secondary',
     },
   ],
@@ -668,17 +668,17 @@ ThreePrimaryActionMax.args = {
   primaryActions: [
     {
       label: 'Primary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'primary',
     },
     {
       label: 'Secondary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'secondary',
     },
     {
       label: 'Secondary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'secondary',
     },
   ],
@@ -692,17 +692,17 @@ ThreePrimaryActionLargeWithGhost.args = {
   primaryActions: [
     {
       label: 'Primary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'primary',
     },
     {
       label: 'Secondary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'secondary',
     },
     {
       label: 'Ghost button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'ghost',
     },
   ],
@@ -715,17 +715,17 @@ ThreePrimaryActionMaxWithGhost.args = {
   primaryActions: [
     {
       label: 'Primary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'primary',
     },
     {
       label: 'Secondary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'secondary',
     },
     {
       label: 'Ghost button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'ghost',
     },
   ],
@@ -739,7 +739,7 @@ GhostPrimaryActionExtraSmall.args = {
   primaryActions: [
     {
       label: 'Ghost button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'ghost',
     },
   ],
@@ -752,7 +752,7 @@ GhostPrimaryActionSmall.args = {
   primaryActions: [
     {
       label: 'Ghost button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'ghost',
     },
   ],
@@ -765,7 +765,7 @@ GhostPrimaryActionMedium.args = {
   primaryActions: [
     {
       label: 'Ghost button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'ghost',
     },
   ],
@@ -777,7 +777,7 @@ GhostPrimaryActionLarge.args = {
   primaryActions: [
     {
       label: 'Ghost button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'ghost',
     },
   ],
@@ -791,7 +791,7 @@ GhostPrimaryActionMax.args = {
   primaryActions: [
     {
       label: 'Ghost button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'ghost',
     },
   ],
@@ -805,7 +805,7 @@ PanelWithSecondStep.args = {
   primaryActions: [
     {
       label: 'Primary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'primary',
     },
   ],
@@ -819,7 +819,7 @@ DarkThemeSidePanel.args = {
   primaryActions: [
     {
       label: 'Primary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'primary',
     },
   ],
@@ -833,7 +833,7 @@ SpecifyElementToHaveInitialFocus.args = {
   primaryActions: [
     {
       label: 'Primary button',
-      onPrimaryActionClick: () => {},
+      onClick: () => {},
       kind: 'primary',
     },
   ],

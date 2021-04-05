@@ -120,7 +120,8 @@ WithActionIcon.args = {
   actionIcons: [
     {
       id: '1',
-      icon: <ArrowRight24 onClick={() => {}} />,
+      icon: ArrowRight24,
+      onClick: () => {},
     },
   ],
   primaryButtonText: '',

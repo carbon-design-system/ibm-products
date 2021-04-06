@@ -44,12 +44,13 @@ export let DISPLAY_NAME = React.forwardRef(
           ...rest
         }
         className={cx(
-          // Apply the block class to the main HTML element, along with
-          // any other classes we need.
-          blockClass,
+          blockClass, // Apply the block class to the main HTML element
+          className, // Apply any supplied class names to the main HTML element.
+          `${blockClass}__template-string-class-${kind}-n-${size}`,
           {
-            // Apply any supplied class names to the main HTML element.
-            [className]: className, // this handles className omitted/falsy
+            // switched classes dependant on props or state
+            [`${blockClass}__here-if-small`]: size === 'small',
+            [`${blockClass}__here-if-field`]: size === 'field',
           }
         )}
         ref={ref}

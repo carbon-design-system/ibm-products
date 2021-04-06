@@ -25,6 +25,10 @@
     @include carbon--type-style('productive-heading-03');
   }
 
+  .#{$pkg-prefix}-card-body {
+    padding-top: $spacing-03;
+  }
+
   .#{$pkg-prefix}-card-footer {
     align-items: center;
     justify-content: space-between;
@@ -37,6 +41,7 @@
 
   .#{$pkg-prefix}-card-actions--top {
     margin-top: calc(-1 * #{$spacing-02});
+    margin-right: $spacing-03;
   }
 
   .#{$pkg-prefix}-card-title--lg .#{$pkg-prefix}-card-actions--top,

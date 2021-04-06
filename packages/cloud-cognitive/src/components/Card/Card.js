@@ -87,55 +87,56 @@ export let Card = ({
   };
 
   const getCardProps = () => {
+    const clickable =
+      (!!onClick && !productive) ||
+      (!!onClick && productive && clickZone === 'one');
     const cardProps = {
       className: cx(`${pkg.prefix}-card`, {
         [`${pkg.prefix}-card--productive`]: productive,
-        [`${pkg.prefix}-card--clickable`]:
-          (!productive && onClick) || (productive && clickZone === 'one'),
+        [`${pkg.prefix}-card--clickable`]: clickable,
         [`${pkg.prefix}-card--media-left`]: mediaPosition === 'left',
         className,
       }),
-      ...(onClick &&
-        clickZone === 'one' && {
-          onClick,
-          onKeyDown: onClick,
-          role: 'button',
-          tabIndex: '0',
-        }),
+      ...(clickable && {
+        onClick,
+        onKeyDown: onClick,
+        role: 'button',
+        tabIndex: '0',
+      }),
     };
 
     return cardProps;
   };
 
   const getHeaderBodyProps = () => {
+    const clickable = !!onClick && clickZone === 'two';
     const headerBodyProps = {
       className: cx(`${pkg.prefix}-card-header-body-container`, {
-        [`${pkg.prefix}-card--clickable`]: clickZone === 'two',
+        [`${pkg.prefix}-card--clickable`]: clickable,
       }),
-      ...(onClick &&
-        clickZone === 'two' && {
-          onClick,
-          onKeyDown: onClick,
-          role: 'button',
-          tabIndex: '0',
-        }),
+      ...(clickable && {
+        onClick,
+        onKeyDown: onClick,
+        role: 'button',
+        tabIndex: '0',
+      }),
     };
 
     return headerBodyProps;
   };
 
   const getBodyProps = () => {
+    const clickable = !!onClick && clickZone === 'three';
     const bodyProps = {
       className: cx(`${pkg.prefix}-card-body`, {
-        [`${pkg.prefix}-card--clickable`]: clickZone === 'three',
+        [`${pkg.prefix}-card--clickable`]: clickable,
       }),
-      ...(onClick &&
-        clickZone === 'three' && {
-          onClick,
-          onKeyDown: onClick,
-          role: 'button',
-          tabIndex: '0',
-        }),
+      ...(clickable && {
+        onClick,
+        onKeyDown: onClick,
+        role: 'button',
+        tabIndex: '0',
+      }),
     };
 
     return bodyProps;

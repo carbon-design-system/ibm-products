@@ -98,6 +98,7 @@ ProductiveCard.propTypes = {
 ProductiveCard.defaultProps = {
   actionIcons: [],
   actionIconsPosition: 'top',
+  clickZone: 'one',
   overflowActions: [],
   titleSize: 'default',
 };

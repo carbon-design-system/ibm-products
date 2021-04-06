@@ -56,6 +56,10 @@ ProductiveCard.propTypes = {
    */
   className: PropTypes.string,
   /**
+   * Designates which zones of the card are clickable. Refer to design documentation for implementation guidelines
+   */
+  clickZone: PropTypes.oneOf(['one', 'two', 'three']),
+  /**
    * Optional label for the top of the card
    */
   label: PropTypes.string,
@@ -63,10 +67,6 @@ ProductiveCard.propTypes = {
    * Provides the callback for a clickable card
    */
   onClick: PropTypes.func,
-  /**
-   * Designates which zones of the card are clickable. Refer to design documentation for implementation guidelines
-   */
-  onClickZone: PropTypes.oneOf(['one', 'two', 'three']),
   /**
    * Function that's called from the primary button or action icon
    */

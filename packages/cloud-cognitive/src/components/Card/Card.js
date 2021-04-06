@@ -22,11 +22,11 @@ export let Card = ({
   caption,
   children,
   className,
+  clickZone,
   label,
   media,
   mediaPosition,
   onClick,
-  onClickZone,
   onPrimaryButtonClick,
   overflowActions,
   onSecondaryButtonClick,
@@ -91,12 +91,12 @@ export let Card = ({
       className: cx(`${pkg.prefix}-card`, {
         [`${pkg.prefix}-card--productive`]: productive,
         [`${pkg.prefix}-card--clickable`]:
-          (!productive && onClick) || (productive && onClickZone === 'one'),
+          (!productive && onClick) || (productive && clickZone === 'one'),
         [`${pkg.prefix}-card--media-left`]: mediaPosition === 'left',
         className,
       }),
       ...(onClick &&
-        onClickZone === 'one' && {
+        clickZone === 'one' && {
           onClick,
           onKeyDown: onClick,
           role: 'button',
@@ -110,10 +110,10 @@ export let Card = ({
   const getHeaderBodyProps = () => {
     const headerBodyProps = {
       className: cx(`${pkg.prefix}-card-header-body-container`, {
-        [`${pkg.prefix}-card--clickable`]: onClickZone === 'two',
+        [`${pkg.prefix}-card--clickable`]: clickZone === 'two',
       }),
       ...(onClick &&
-        onClickZone === 'two' && {
+        clickZone === 'two' && {
           onClick,
           onKeyDown: onClick,
           role: 'button',
@@ -127,10 +127,10 @@ export let Card = ({
   const getBodyProps = () => {
     const bodyProps = {
       className: cx(`${pkg.prefix}-card-body`, {
-        [`${pkg.prefix}-card--clickable`]: onClickZone === 'three',
+        [`${pkg.prefix}-card--clickable`]: clickZone === 'three',
       }),
       ...(onClick &&
-        onClickZone === 'three' && {
+        clickZone === 'three' && {
           onClick,
           onKeyDown: onClick,
           role: 'button',
@@ -212,11 +212,11 @@ Card.propTypes = {
   caption: PropTypes.string,
   children: PropTypes.node,
   className: PropTypes.string,
+  clickZone: PropTypes.oneOf(['one', 'two', 'three']),
   label: PropTypes.string,
   media: PropTypes.node,
   mediaPosition: PropTypes.oneOf(['top', 'left']),
   onClick: PropTypes.func,
-  onClickZone: PropTypes.oneOf(['one', 'two', 'three']),
   onPrimaryButtonClick: PropTypes.func,
   onSecondaryButtonClick: PropTypes.func,
   overflowActions: PropTypes.arrayOf(
@@ -239,8 +239,8 @@ Card.propTypes = {
 Card.defaultProps = {
   actionIcons: [],
   actionIconsPosition: 'bottom',
+  clickZone: 'one',
   mediaPosition: 'top',
-  onClickZone: 'one',
   overflowActions: [],
   primaryButtonKind: 'primary',
   productive: false,

@@ -199,6 +199,7 @@ const title = 'Title of the tearsheet';
 // Template.
 // eslint-disable-next-line react/prop-types
 const Template = ({ buttonSet, ...args }) => {
+  console.log({ buttonSet });
   const [open, setOpen] = useState(false);
 
   return (

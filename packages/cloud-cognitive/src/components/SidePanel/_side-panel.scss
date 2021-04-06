@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2020
+// Copyright IBM Corp. 2020, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -8,7 +8,6 @@
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 @import 'carbon-components/scss/globals/grid/grid';
-@import '@carbon/themes/scss/themes';
 @import '@carbon/motion/scss/motion.scss';
 
 @import 'carbon-components/scss/components/button/button';
@@ -103,14 +102,6 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
   }
 
   .#{$block-class}__container {
-    &.#{$block-class}__container-light {
-      @include carbon--theme($carbon--theme--g10, true);
-    }
-    &.#{$block-class}__container-dark,
-    &.#{$block-class}__container-dark .#{$block-class}__body-content {
-      @include carbon--theme($carbon--theme--g100, true);
-    }
-
     position: fixed;
     top: $spacing-09;
     z-index: 3;

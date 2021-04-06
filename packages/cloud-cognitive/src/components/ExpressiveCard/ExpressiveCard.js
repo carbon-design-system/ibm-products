@@ -14,6 +14,7 @@ const componentName = 'ExpressiveCard';
 
 export let ExpressiveCard = (props) => {
   const validProps = stripUnwantedProps(props, [
+    'actionIconsPosition',
     'overflowActions',
     'productive',
     'titleSize',
@@ -34,10 +35,6 @@ ExpressiveCard.propTypes = {
       icon: PropTypes.object,
     })
   ),
-  /**
-   * Determines if the action icons are on the top or bottom of the card
-   */
-  actionIconsPosition: PropTypes.oneOf(['top', 'bottom']),
   /**
    * Optional header caption
    */

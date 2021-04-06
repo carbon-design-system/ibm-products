@@ -22,6 +22,7 @@ export let Card = ({
   caption,
   children,
   className,
+  clickZone,
   label,
   media,
   mediaPosition,
@@ -40,9 +41,7 @@ export let Card = ({
 }) => {
   const headerClasses = cx(`${pkg.prefix}-card-header`, {
     [`${pkg.prefix}-card-header--label-only`]: label && !title && !caption,
-  });
-
-  const titleClasses = cx(`${pkg.prefix}-card-title`, {
+    [`${pkg.prefix}-card-header--has-label`]: label && productive,
     [`${pkg.prefix}-card-title--lg`]: titleSize === 'large',
   });
 
@@ -71,7 +70,7 @@ export let Card = ({
               renderIcon={Icon}
               hasIconOnly
               onClick={onClick}
-              size="sm"
+              size={actionIconsPosition === 'top' ? 'sm' : 'field'}
               iconDescription={iconDescription}
               kind="ghost"
             />
@@ -87,23 +86,52 @@ export let Card = ({
     return icons;
   };
 
+  const getClickableProps = () => ({
+    onClick,
+    onKeyDown: onClick,
+    role: 'button',
+    tabIndex: '0',
+  });
+
   const getCardProps = () => {
+    const clickable =
+      (!!onClick && !productive) ||
+      (!!onClick && productive && clickZone === 'one');
     const cardProps = {
       className: cx(`${pkg.prefix}-card`, {
         [`${pkg.prefix}-card--productive`]: productive,
-        [`${pkg.prefix}-card--clickable`]: onClick,
+        [`${pkg.prefix}-card--clickable`]: clickable,
         [`${pkg.prefix}-card--media-left`]: mediaPosition === 'left',
         className,
       }),
-      ...(onClick && {
-        onClick,
-        onKeyDown: onClick,
-        role: 'button',
-        tabIndex: '0',
-      }),
+      ...(clickable && getClickableProps()),
     };
 
     return cardProps;
+  };
+
+  const getHeaderBodyProps = () => {
+    const clickable = !!onClick && clickZone === 'two';
+    const headerBodyProps = {
+      className: cx(`${pkg.prefix}-card-header-body-container`, {
+        [`${pkg.prefix}-card--clickable`]: clickable,
+      }),
+      ...(clickable && getClickableProps()),
+    };
+
+    return headerBodyProps;
+  };
+
+  const getBodyProps = () => {
+    const clickable = !!onClick && clickZone === 'three';
+    const bodyProps = {
+      className: cx(`${pkg.prefix}-card-body`, {
+        [`${pkg.prefix}-card--clickable`]: clickable,
+      }),
+      ...(clickable && getClickableProps()),
+    };
+
+    return bodyProps;
   };
 
   const CardContent = (
@@ -115,17 +143,26 @@ export let Card = ({
         </div>
       )}
       <div className={`${pkg.prefix}-card-content-container`}>
-        <div className={headerClasses}>
-          {label && <p className={`${pkg.prefix}-card-label`}>{label}</p>}
-          <div className={`${pkg.prefix}-card-title-container`}>
-            {title && <p className={titleClasses}>{title}</p>}
-            {hasActions && actionIconsPosition === 'top' && (
-              <div className={`${pkg.prefix}-card-actions`}>{getActions()}</div>
-            )}
+        <div {...getHeaderBodyProps()}>
+          <div className={headerClasses}>
+            <div className={`${pkg.prefix}-card-header-container`}>
+              <div className={`${pkg.prefix}-card-title-container`}>
+                {label && <p className={`${pkg.prefix}-card-label`}>{label}</p>}
+                {title && <p className={`${pkg.prefix}-card-title`}>{title}</p>}
+                {caption && (
+                  <p className={`${pkg.prefix}-card-caption`}>{caption}</p>
+                )}
+              </div>
+              {hasActions && actionIconsPosition === 'top' && (
+                <div
+                  className={`${pkg.prefix}-card-actions ${pkg.prefix}-card-actions--top`}>
+                  {getActions()}
+                </div>
+              )}
+            </div>
           </div>
-          {caption && <p className={`${pkg.prefix}-card-caption`}>{caption}</p>}
+          <div {...getBodyProps()}>{children}</div>
         </div>
-        <div className={`${pkg.prefix}-card-body`}>{children}</div>
         <div className={`${pkg.prefix}-card-footer`}>
           {secondaryButtonText && (
             <Button
@@ -168,6 +205,7 @@ Card.propTypes = {
   caption: PropTypes.string,
   children: PropTypes.node,
   className: PropTypes.string,
+  clickZone: PropTypes.oneOf(['one', 'two', 'three']),
   label: PropTypes.string,
   media: PropTypes.node,
   mediaPosition: PropTypes.oneOf(['top', 'left']),
@@ -194,6 +232,7 @@ Card.propTypes = {
 Card.defaultProps = {
   actionIcons: [],
   actionIconsPosition: 'bottom',
+  clickZone: 'one',
   mediaPosition: 'top',
   overflowActions: [],
   primaryButtonKind: 'primary',

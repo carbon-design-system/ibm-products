@@ -153,10 +153,10 @@ Tearsheet.propTypes = {
   /**
    * Specifies the content for the influencer section of the Tearsheet.
    */
-  influencer: PropTypes.node,
+  influencer: PropTypes.element,
 
   /**
-   * Specifies the position of the influencer section `'left' | 'right'`.
+   * Specifies the position of the influencer section, 'left' or 'right'.
    */
   influencerPosition: PropTypes.oneOf(['left', 'right']),
 
@@ -175,7 +175,7 @@ Tearsheet.propTypes = {
    * Specifies navigation content such as a `Tabs` component to be included
    * at the bottom of the Tearsheet header.
    */
-  navigation: PropTypes.node,
+  navigation: PropTypes.element,
 
   /**
    * Specifies an optional handler that is called when closing the modal.

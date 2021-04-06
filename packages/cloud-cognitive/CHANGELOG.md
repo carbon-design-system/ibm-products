@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.34.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.34.5...@carbon/ibm-cloud-cognitive@0.34.6) (2021-04-06)
+
+
+### Bug Fixes
+
+* action bar crash when no space for overflow ([#556](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/556)) ([74d1718](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/74d1718771dffb434512905a4c5ab2ed518a9a35))
+
+
+
+
+
 ## [0.34.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.34.4...@carbon/ibm-cloud-cognitive@0.34.5) (2021-04-05)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

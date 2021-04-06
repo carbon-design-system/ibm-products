@@ -143,8 +143,6 @@ export let SidePanel = React.forwardRef(
     // used to properly order the primary action buttons according to the designs
     useEffect(() => {
       const primaryActionButtons = actions || [];
-      console.log({ actions });
-      console.log({ primaryActionButtons });
       if (primaryActionButtons && primaryActionButtons.length > 1) {
         const primaryIndex = primaryActionButtons.findIndex(
           (item) => item.kind === 'primary'

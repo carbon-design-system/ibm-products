@@ -310,7 +310,6 @@ const renderUIShellHeader = () => (
 
 // eslint-disable-next-line react/prop-types
 const SlideOverTemplate = ({ actions, ...args }) => {
-  console.log({ actions });
   const [open, setOpen] = useState(false);
   return (
     <>

@@ -14,7 +14,7 @@
 
 > Carbon for Cloud & Cognitive
 
-## Getting started
+## 🚀 Getting started
 
 If you're just getting started and looking for React components, take a look at
 [our Storybook](https://ibm-cloud-cognitive.netlify.app).
@@ -30,6 +30,63 @@ If you want to try out Carbon for Cloud & Cognitive, you can use
 [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/master/examples/codesandbox).
 
 [![Edit CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/master/examples/codesandbox)
+
+## 📦 Installing IBM Cloud Cognitive
+
+To use IBM Cloud Cognitive components, all you need to do is install the
+`@carbon/ibm-cloud-cognitive` package.
+
+```shell
+$ yarn add @carbon/ibm-cloud-cognitive
+
+# or
+
+$ npm install @carbon/ibm-cloud-cognitive
+```
+
+Then you can import the component styles in your `index.js`.
+
+```js
+import '@carbon/ibm-cloud-cognitive/css/index.min.css';
+```
+
+## Usage
+
+To start using the components
+
+```jsx
+import { AboutModal } from '@carbon/ibm-cloud-cognitive';
+
+const App = () => {
+  return <AboutModal />;
+};
+```
+
+## Enabling canary components
+
+Components that have not yet completed the release review process are considered
+to be canary and require the consumer to enable via a feature flag in a
+`config.js` file.
+
+Create a `config.js` in your `src` directory.
+
+```js
+import { pkg } from '@carbon/ibm-cloud-cognitive/es/settings';
+
+// Enable 'canary' (not yet reviewed/released) components
+// that we want to make use of
+pkg.component.AboutModal = true;
+pkg.component.SidePanel = true;
+
+// Live dangerously: enable all components!
+pkg.setAllComponents(true);
+
+// Enable all pre-release feature flags that we want to use
+pkg.flags.noneJustYet = true;
+
+// Live dangerously: enable all pre-release features!
+pkg.setAllFeatures(true);
+```
 
 ## Building and running Locally
 

@@ -86,6 +86,13 @@ export let Card = ({
     return icons;
   };
 
+  const getClickableProps = () => ({
+    onClick,
+    onKeyDown: onClick,
+    role: 'button',
+    tabIndex: '0',
+  });
+
   const getCardProps = () => {
     const clickable =
       (!!onClick && !productive) ||
@@ -97,12 +104,7 @@ export let Card = ({
         [`${pkg.prefix}-card--media-left`]: mediaPosition === 'left',
         className,
       }),
-      ...(clickable && {
-        onClick,
-        onKeyDown: onClick,
-        role: 'button',
-        tabIndex: '0',
-      }),
+      ...(clickable && getClickableProps()),
     };
 
     return cardProps;
@@ -114,12 +116,7 @@ export let Card = ({
       className: cx(`${pkg.prefix}-card-header-body-container`, {
         [`${pkg.prefix}-card--clickable`]: clickable,
       }),
-      ...(clickable && {
-        onClick,
-        onKeyDown: onClick,
-        role: 'button',
-        tabIndex: '0',
-      }),
+      ...(clickable && getClickableProps()),
     };
 
     return headerBodyProps;
@@ -131,12 +128,7 @@ export let Card = ({
       className: cx(`${pkg.prefix}-card-body`, {
         [`${pkg.prefix}-card--clickable`]: clickable,
       }),
-      ...(clickable && {
-        onClick,
-        onKeyDown: onClick,
-        role: 'button',
-        tabIndex: '0',
-      }),
+      ...(clickable && getClickableProps()),
     };
 
     return bodyProps;

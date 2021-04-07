@@ -379,12 +379,6 @@ export const RightWithActionToolbar = SlideOverTemplate.bind({});
 RightWithActionToolbar.args = {
   actionToolbarButtons: [
     {
-      label: 'Check status',
-      leading: true,
-      kind: 'ghost',
-      onActionToolbarButtonClick: () => {},
-    },
-    {
       label: 'Copy',
       icon: Copy20,
       onActionToolbarButtonClick: () => {},

@@ -104,11 +104,11 @@ export let SidePanel = React.forwardRef(
               sidePanelRef.current.scrollHeight -
               document.documentElement.clientHeight;
             let scrollPercent = (scrollTop / scrollBottom) * 100;
-            if (scrollPercent >= 25) {
+            if (Math.round(scrollPercent) > 0) {
               sidePanelOuter.classList.add(
                 `${blockClass}__with-condensed-header`
               );
-            } else if (scrollPercent < 25) {
+            } else if (Math.round(scrollPercent) === 0) {
               sidePanelOuter.classList.remove(
                 `${blockClass}__with-condensed-header`
               );
@@ -299,6 +299,8 @@ export let SidePanel = React.forwardRef(
       {
         [`${blockClass}__container-right-placement`]: placement === 'right',
         [`${blockClass}__container-left-placement`]: placement === 'left',
+        [`${blockClass}__container-with-action-toolbar`]:
+          actionToolbarButtons && actionToolbarButtons.length,
       },
     ]);
 
@@ -348,7 +350,7 @@ export let SidePanel = React.forwardRef(
             Focus sentinel
           </span>
           <div ref={sidePanelInnerRef}>
-            <div className={`${blockClass}__header`}>
+            <div className={`${blockClass}__title-container`}>
               {currentStep > 0 && (
                 <Button
                   kind="ghost"
@@ -373,34 +375,6 @@ export let SidePanel = React.forwardRef(
                   {titleText}
                 </h2>
               )}
-              {subtitleText && subtitleText.length && (
-                <p className={`${blockClass}__subtitle-text`}>{subtitleText}</p>
-              )}
-              {actionToolbarButtons && actionToolbarButtons.length && (
-                <div className={`${blockClass}__action-toolbar`}>
-                  {actionToolbarButtons.map((action) => (
-                    <Button
-                      key={action.label}
-                      kind={action.leading ? action.kind : 'ghost'}
-                      size="small"
-                      disabled={false}
-                      renderIcon={action.icon}
-                      iconDescription={action.label}
-                      tooltipPosition="bottom"
-                      tooltipAlignment="center"
-                      className={cx([
-                        `${blockClass}__action-toolbar-button`,
-                        {
-                          [`${blockClass}__action-toolbar-icon-only-button`]: action.icon,
-                          [`${blockClass}__action-toolbar-leading-button`]: !action.icon,
-                        },
-                      ])}
-                      onClick={() => action.onActionToolbarButtonClick()}>
-                      {action.leading ? action.label : ''}
-                    </Button>
-                  ))}
-                </div>
-              )}
               <Button
                 kind="ghost"
                 size="small"
@@ -414,6 +388,34 @@ export let SidePanel = React.forwardRef(
                 ref={sidePanelCloseRef}
               />
             </div>
+            {subtitleText && subtitleText.length && (
+              <p className={`${blockClass}__subtitle-text`}>{subtitleText}</p>
+            )}
+            {actionToolbarButtons && actionToolbarButtons.length && (
+              <div className={`${blockClass}__action-toolbar`}>
+                {actionToolbarButtons.map((action) => (
+                  <Button
+                    key={action.label}
+                    kind={action.leading ? action.kind : 'ghost'}
+                    size="small"
+                    disabled={false}
+                    renderIcon={action.icon}
+                    iconDescription={action.label}
+                    tooltipPosition="bottom"
+                    tooltipAlignment="center"
+                    className={cx([
+                      `${blockClass}__action-toolbar-button`,
+                      {
+                        [`${blockClass}__action-toolbar-icon-only-button`]: action.icon,
+                        [`${blockClass}__action-toolbar-leading-button`]: !action.icon,
+                      },
+                    ])}
+                    onClick={() => action.onActionToolbarButtonClick()}>
+                    {action.leading ? action.label : ''}
+                  </Button>
+                ))}
+              </div>
+            )}
             <div className={`${blockClass}__body-content`}>{children}</div>
             {primaryPanelActions && primaryPanelActions.length ? (
               <div className={primaryActionContainerClassNames}>

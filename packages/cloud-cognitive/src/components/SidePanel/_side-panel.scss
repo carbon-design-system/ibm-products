@@ -165,17 +165,43 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       .#{$block-class}__title-text {
         @include carbon--type-style('productive-heading-02');
       }
-      .#{$block-class}__header {
+      .#{$block-class}__subtitle-text,
+      .#{$block-class}__action-toolbar {
+        // stylelint-disable-next-line carbon/layout-token-use
+        transform: translateY(-3rem);
+      }
+      .#{$block-class}__subtitle-text {
+        opacity: 0;
+      }
+      .#{$block-class}__title-container {
         border-bottom: 1px solid $decorative-01;
       }
+    }
+    &.#{$block-class}__container-with-action-toolbar.#{$block-class}__with-condensed-header {
+      .#{$block-class}__title-container {
+        border-bottom: 0;
+      }
+      .#{$block-class}__action-toolbar {
+        border-bottom: 1px solid $decorative-01;
+      }
+    }
+    .#{$block-class}__title-container {
+      position: sticky;
+      top: 0;
+      z-index: 4;
+      padding: $spacing-05 $spacing-05 0 $spacing-05;
+      background-color: $ui-01;
     }
     .#{$block-class}__title-text {
       @include carbon--type-style('productive-heading-03');
 
+      position: inherit;
+      z-index: 4;
       display: -webkit-box;
-      margin-right: $spacing-07;
       margin-bottom: $spacing-03;
+      padding-right: $spacing-07;
       overflow: hidden;
+      background-color: $ui-01;
       transition: font-size $duration--moderate-01,
         font-weight $duration--moderate-02;
       transition-timing-function: carbon--motion(standard);
@@ -186,8 +212,10 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     .#{$block-class}__subtitle-text {
       @include carbon--type-style('body-short-01');
 
-      margin-bottom: $spacing-05;
+      padding: 0 $spacing-05 $spacing-05 $spacing-05;
       overflow: hidden;
+      transition: transform $duration--slow-01, opacity $duration--slow-02;
+      transition-timing-function: carbon--motion(standard);
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
     }
@@ -195,10 +223,18 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       @include carbon--type-style('label-01');
     }
     .#{$block-class}__action-toolbar {
+      position: sticky;
+      // stylelint-disable-next-line carbon/layout-token-use
+      top: 6.75rem;
+      z-index: 4;
       display: flex;
       align-items: center;
       justify-content: flex-start;
       margin-bottom: $spacing-03;
+      padding: 0 $spacing-05;
+      background-color: $ui-01;
+      transition: transform $duration--moderate-01;
+      transition-timing-function: carbon--motion(standard);
       .#{$block-class}__action-toolbar-button {
         min-width: 2rem;
         &.#{$block-class}__action-toolbar-icon-only-button {
@@ -223,18 +259,12 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       position: absolute;
       top: $spacing-03;
       right: $spacing-03;
+      z-index: 5;
     }
     .#{$block-class}__body-content {
       padding: $spacing-05;
       padding-top: 0;
       padding-bottom: $layout-07;
-    }
-    .#{$block-class}__header {
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      padding: $spacing-05;
-      background-color: $ui-01;
     }
     .#{$block-class}__actions-container {
       position: sticky;

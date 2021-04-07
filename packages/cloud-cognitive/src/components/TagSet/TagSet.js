@@ -136,9 +136,13 @@ export let TagSet = ({
       }
     }
 
-    setDisplayCount(
-      maxVisibleTags ? Math.min(willFit, maxVisibleTags) : willFit
-    );
+    if (willFit < 1) {
+      setDisplayCount(0);
+    } else {
+      setDisplayCount(
+        maxVisibleTags ? Math.min(willFit, maxVisibleTags) : willFit
+      );
+    }
   };
 
   useEffect(() => {

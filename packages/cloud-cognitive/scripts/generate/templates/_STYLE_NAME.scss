@@ -16,6 +16,7 @@
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
 @mixin STYLE_NAME {
+  // The block part of our conventional BEM class names (blockClass__E--M).
   $block-class: #{$pkg-prefix}--STYLE_NAME;
 
   .#{$block-class} {

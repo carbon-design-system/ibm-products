@@ -20,14 +20,14 @@ const storybookPrefix = getStorybookPrefix(
   BreadcrumbWithOverflow.displayName
 );
 
-const blockClass = `${pkg.prefix}-breadcrumb-with-overflow`;
+const blockClass = `${pkg.prefix}--breadcrumb-with-overflow`;
 
 export default {
   title: `${storybookPrefix}/${BreadcrumbWithOverflow.displayName}`,
   component: BreadcrumbWithOverflow,
   argTypes: {
     containerWidth: {
-      control: { type: 'range', min: 50, max: 800, step: 10 },
+      control: { type: 'range', min: 20, max: 800, step: 10 },
     },
   },
   decorators: [

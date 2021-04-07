@@ -120,7 +120,9 @@ WithActionIcon.args = {
   actionIcons: [
     {
       id: '1',
-      icon: <ArrowRight24 onClick={() => {}} />,
+      icon: ArrowRight24,
+      onClick: () => {},
+      iconDescription: 'Next',
     },
   ],
   primaryButtonText: '',
@@ -140,8 +142,8 @@ WithSecondaryAction.args = {
   columnSize: '8',
 };
 
-export const ClickableCardWithOnclick = Template.bind({});
-ClickableCardWithOnclick.args = {
+export const Clickable = Template.bind({});
+Clickable.args = {
   ...defaultProps,
   onClick: () => {},
   primaryButtonText: '',

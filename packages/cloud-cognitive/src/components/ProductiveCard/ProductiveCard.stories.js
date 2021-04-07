@@ -44,16 +44,28 @@ export default {
 };
 
 const defaultProps = {
-  label: 'Label',
   title: 'Title',
   children: (
-    <div>
+    <>
       <div className="graph" />
       <p>Productive content text</p>
       <p>Productive content text</p>
-    </div>
+    </>
   ),
-  primaryButtonText: 'Ghost button',
+  actionIcons: [
+    {
+      id: '1',
+      icon: Edit16,
+      onClick: () => {},
+      iconDescription: 'Edit',
+    },
+    {
+      id: '2',
+      icon: TrashCan16,
+      onClick: () => {},
+      iconDescription: 'Delete',
+    },
+  ],
 };
 
 const getColClasses = (col) => cx(`bx--col-lg-${col}`);
@@ -72,16 +84,26 @@ const Template = (opts) => {
 export const Default = Template.bind({});
 Default.args = {
   ...defaultProps,
-  actionIcons: [
-    {
-      id: '1',
-      icon: <Edit16 onClick={() => {}} />,
-    },
-    {
-      id: '2',
-      icon: <TrashCan16 onClick={() => {}} />,
-    },
-  ],
+};
+
+export const WithCaption = Template.bind({});
+WithCaption.args = {
+  ...defaultProps,
+  caption: 'caption',
+};
+
+export const WithLabel = Template.bind({});
+WithLabel.args = {
+  ...defaultProps,
+  label: 'Label',
+};
+
+export const LabelOnly = Template.bind({});
+LabelOnly.args = {
+  ...defaultProps,
+  title: '',
+  label: 'Label',
+  actionIcons: [],
 };
 
 export const WithOverflow = Template.bind({});
@@ -99,4 +121,25 @@ WithOverflow.args = {
       onClick: () => {},
     },
   ],
+};
+
+export const WithBottomBar = Template.bind({});
+WithBottomBar.args = {
+  ...defaultProps,
+  primaryButtonText: 'Ghost button',
+};
+
+export const ComplexBottomBar = Template.bind({});
+ComplexBottomBar.args = {
+  ...defaultProps,
+  primaryButtonText: 'Ghost button',
+  actionIconsPosition: 'bottom',
+};
+
+export const Clickable = Template.bind({});
+Clickable.args = {
+  ...defaultProps,
+  onClick: () => {},
+  primaryButtonText: 'Ghost button',
+  actionIcons: [],
 };

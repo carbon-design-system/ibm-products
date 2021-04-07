@@ -3,6 +3,98 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.34.9](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.34.8...@carbon/ibm-cloud-cognitive@0.34.9) (2021-04-07)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.34.8](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.34.7...@carbon/ibm-cloud-cognitive@0.34.8) (2021-04-07)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.34.7](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.34.6...@carbon/ibm-cloud-cognitive@0.34.7) (2021-04-06)
+
+
+### Bug Fixes
+
+* card design feedback ([#561](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/561)) ([7668278](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/76682786f4422cf9267a84b7e6f1409043758537))
+
+
+
+
+
+## [0.34.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.34.5...@carbon/ibm-cloud-cognitive@0.34.6) (2021-04-06)
+
+
+### Bug Fixes
+
+* action bar crash when no space for overflow ([#556](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/556)) ([74d1718](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/74d1718771dffb434512905a4c5ab2ed518a9a35))
+
+
+
+
+
+## [0.34.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.34.4...@carbon/ibm-cloud-cognitive@0.34.5) (2021-04-05)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.34.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.34.3...@carbon/ibm-cloud-cognitive@0.34.4) (2021-04-05)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.34.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.34.2...@carbon/ibm-cloud-cognitive@0.34.3) (2021-04-02)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.34.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.34.1...@carbon/ibm-cloud-cognitive@0.34.2) (2021-04-01)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.34.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.34.0...@carbon/ibm-cloud-cognitive@0.34.1) (2021-04-01)
+
+
+### Bug Fixes
+
+* pageheader styles either side of md breakpt ([#554](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/554)) ([6abab44](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6abab440845b9919dbdd7e4a3b2c6d021f6477b8))
+
+
+
+
+
+# [0.34.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.33.0...@carbon/ibm-cloud-cognitive@0.34.0) (2021-04-01)
+
+
+### Features
+
+* add breadcrumb test and overflow aria label ([#537](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/537)) ([f383b36](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f383b36d4f2987ae3032fa53319b883df95602ba))
+
+
+
+
+
 # [0.33.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.32.4...@carbon/ibm-cloud-cognitive@0.33.0) (2021-04-01)
 
 

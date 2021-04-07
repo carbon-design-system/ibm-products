@@ -185,21 +185,16 @@ export let SidePanel = React.forwardRef(
       }
     }, [slideIn, pageContentSelector, placement, shouldRender, size]);
 
-    const setSizeClassName = (panelSize, actions) => {
-      let sizeClassName;
-      if (!actions) {
-        sizeClassName = `${blockClass}__container-`;
-      } else {
-        sizeClassName = `${blockClass}__actions-`;
-      }
+    const setSizeClassName = (panelSize) => {
+      let sizeClassName = `${blockClass}__container-`;
       switch (panelSize) {
-        case 'extraSmall':
+        case 'xs':
           return (sizeClassName = `${sizeClassName}-extra-small`);
-        case 'small':
+        case 'sm':
           return (sizeClassName = `${sizeClassName}-small`);
-        case 'medium':
+        case 'md':
           return (sizeClassName = `${sizeClassName}-medium`);
-        case 'large':
+        case 'lg':
           return (sizeClassName = `${sizeClassName}-large`);
         case 'max':
           return (sizeClassName = `${sizeClassName}-max`);
@@ -238,7 +233,6 @@ export let SidePanel = React.forwardRef(
 
     const primaryActionContainerClassNames = cx([
       `${blockClass}__actions-container`,
-      setSizeClassName(size, true),
       {
         [`${blockClass}__actions-container-condensed`]: condensed,
       },
@@ -348,9 +342,7 @@ export let SidePanel = React.forwardRef(
             <div className={`${blockClass}__body-content`}>{children}</div>
             <ActionSet
               actions={primaryActions}
-              reverse={
-                size === 'small' || size === 'extraSmall' || size === 'medium'
-              }
+              size={size}
               className={primaryActionContainerClassNames}
             />
           </div>
@@ -447,15 +439,7 @@ SidePanel.propTypes = {
    * Sets the primary action buttons for the side panel
    */
   primaryActions: PropTypes.oneOfType([
-    // Use the ActionSet to validate the supplied actions, with the 'small'
-    // set constraints (limit of three actions) if the SidePanel size is
-    // extraSmall/small/medium.
-    ActionSet.validateActions(
-      (props) =>
-        props.size === 'small' ||
-        props.size === 'extraSmall' ||
-        props.size === 'medium'
-    ),
+    ActionSet.validateActions(),
     PropTypes.arrayOf(
       PropTypes.shape({
         label: PropTypes.string,
@@ -478,7 +462,7 @@ SidePanel.propTypes = {
   /**
    * Sets the size of the side panel
    */
-  size: PropTypes.oneOf(['extraSmall', 'small', 'medium', 'large', 'max']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'max']),
   /**
    * Determines if this panel slides in
    */
@@ -500,7 +484,7 @@ SidePanel.propTypes = {
 SidePanel.defaultProps = {
   animateTitle: true,
   placement: 'right',
-  size: 'medium',
+  size: 'md',
   slideIn: false,
   theme: 'light',
   currentStep: 0,

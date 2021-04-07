@@ -31,7 +31,7 @@ export const ActionSet = React.forwardRef(
       // The component props, in alphabetical order (for consistency).
       actions,
       className,
-      reverse,
+      size,
       // Collect any other property values passed in.
       ...rest
     },
@@ -39,7 +39,7 @@ export const ActionSet = React.forwardRef(
   ) => {
     // order the actions with ghost buttons first and primary buttons last
     // (or the opposite way around if reverse is true)
-    const direction = reverse ? -1 : 1;
+    const direction = size === 'xs' || size === 'sm' || size === 'md' ? -1 : 1;
     const sortedActions = (actions && actions.slice(0)) || [];
     sortedActions.sort((action1, action2) =>
       action1.kind === action2.kind
@@ -57,12 +57,16 @@ export const ActionSet = React.forwardRef(
           // Pass through any other property values as HTML attributes.
           ...rest
         }
-        className={cx(blockClass, className, {
-          [`${blockClass}--single-action`]: sortedActions.length === 1,
-          [`${blockClass}--multi-action`]: sortedActions.length === 2,
-          [`${blockClass}--multi-action-3-buttons-or-more`]:
-            sortedActions.length > 2,
-        })}
+        className={cx(
+          blockClass,
+          className,
+          {
+            [`${blockClass}--single`]: sortedActions.length === 1,
+            [`${blockClass}--double`]: sortedActions.length === 2,
+            [`${blockClass}--triple-plus`]: sortedActions.length >= 3,
+          },
+          `${blockClass}--${size}`
+        )}
         ref={ref}
         role="presentation">
         {sortedActions.map((action, index) => (
@@ -91,8 +95,9 @@ ActionSet.displayName = componentName;
 // and returns true if the component is to be treated as 'small', which means
 // that a limit of three buttons will be enforced as well as not combining
 // ghost buttons with other button types.
-ActionSet.validateActions = (isSmall) => (props, propName, componentName) => {
-  const small = isSmall ? isSmall(props) : false;
+ActionSet.validateActions = () => (props, propName, componentName) => {
+  const small =
+    props.size === 'xs' || props.size === 'sm' || props.size === 'md';
   const prop = props[propName];
 
   const badActions = (problem) =>
@@ -156,9 +161,8 @@ ActionSet.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Normally, ghost buttons are shown first and the primary buttons last.
-   * Set this to true to reverse the ordering so that primary buttons are
-   * shown first and ghost buttons last.
+   * Sets the size of the action set. Different button arrangements are used
+   * in different sizes, to make best use of the available space.
    */
-  reverse: PropTypes.bool,
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'max']),
 };

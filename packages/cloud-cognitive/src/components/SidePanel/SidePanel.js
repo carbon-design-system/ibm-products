@@ -32,6 +32,7 @@ export let SidePanel = React.forwardRef(
   (
     {
       actionToolbarButtons,
+      actions,
       animateTitle,
       children,
       className,
@@ -43,13 +44,11 @@ export let SidePanel = React.forwardRef(
       open,
       pageContentSelector,
       placement,
-      primaryActions,
       selectorPrimaryFocus,
       setOpen,
       size,
       slideIn,
       subtitleText,
-      theme,
       titleText,
       // Collect any other property values passed in.
       ...rest
@@ -143,7 +142,7 @@ export let SidePanel = React.forwardRef(
 
     // used to properly order the primary action buttons according to the designs
     useEffect(() => {
-      const primaryActionButtons = primaryActions || [];
+      const primaryActionButtons = actions || [];
       if (primaryActionButtons && primaryActionButtons.length > 1) {
         const primaryIndex = primaryActionButtons.findIndex(
           (item) => item.kind === 'primary'
@@ -192,7 +191,7 @@ export let SidePanel = React.forwardRef(
       } else {
         setPrimaryPanelActions([...primaryActionButtons]);
       }
-    }, [primaryActions, size]);
+    }, [actions, size]);
 
     // initialize the side panel to close
     const onAnimationEnd = () => {
@@ -262,7 +261,7 @@ export let SidePanel = React.forwardRef(
       }
     };
 
-    const setPrimaryActionsBarClass = (buttonCount) => {
+    const setActionsBarClass = (buttonCount) => {
       let buttonCountClassName = `${blockClass}__actions-container-`;
       if (buttonCount === 1) {
         buttonCountClassName = `${buttonCountClassName}-single-action`;
@@ -294,7 +293,6 @@ export let SidePanel = React.forwardRef(
     const mainPanelClassNames = cx([
       blockClass,
       `${blockClass}__container`,
-      `${blockClass}__container-${theme}`,
       setSizeClassName(size),
       {
         [`${blockClass}__container-right-placement`]: placement === 'right',
@@ -307,9 +305,7 @@ export let SidePanel = React.forwardRef(
     const primaryActionContainerClassNames = cx([
       `${blockClass}__actions-container`,
       setSizeClassName(size, true),
-      setPrimaryActionsBarClass(
-        primaryPanelActions && primaryPanelActions.length
-      ),
+      setActionsBarClass(primaryPanelActions && primaryPanelActions.length),
       {
         [`${blockClass}__actions-container-condensed`]: condensed,
       },
@@ -474,21 +470,21 @@ const validateActions = () => (props, propName, componentName) => {
   if (prop === undefined) return;
   if (prop !== undefined) {
     // let validationMessage = '';
-    if (props.primaryActions && props.primaryActions.length) {
+    if (props.actions && props.actions.length) {
       if (
         (props.size === 'small' ||
           props.size === 'extraSmall' ||
           props.size === 'medium') &&
-        props.primaryActions.length > 3
+        props.actions.length > 3
       ) {
         throw new Error(
           `Prop '${propName}' passed to ${componentName} is using an invalid combination of buttons.\n\nYou cannot have 4 or more buttons in a '${props.size}' size panel`
         );
       }
-      const ghostButton = props.primaryActions.filter(
+      const ghostButton = props.actions.filter(
         (button) => button.kind === 'ghost'
       );
-      const primaryActionButton = props.primaryActions.filter(
+      const primaryActionButton = props.actions.filter(
         (button) => button.kind === 'primary'
       );
       if (ghostButton.length > 1)
@@ -500,7 +496,7 @@ const validateActions = () => (props, propName, componentName) => {
           `Prop '${propName}' passed to ${componentName} is using an invalid combination of buttons.\n\nYou cannot have more than one 'primary' action button in a side panel`
         );
       if (
-        props.primaryActions.length > 1 &&
+        props.actions.length > 1 &&
         ghostButton.length &&
         (props.size === 'extraSmall' ||
           props.size === 'small' ||
@@ -528,6 +524,21 @@ SidePanel.propTypes = {
       kind: PropTypes.oneOf(['ghost', 'tertiary', 'secondary', 'primary']),
     })
   ),
+  /**
+   * Sets the primary action buttons for the side panel
+   */
+  actions: PropTypes.oneOfType([
+    validateActions(),
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        label: PropTypes.string,
+        onPrimaryActionClick: PropTypes.func,
+        kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
+        disabled: PropTypes.bool,
+        loading: PropTypes.bool,
+      })
+    ),
+  ]),
   /**
    * Determines if the title will animate on scroll
    */
@@ -576,21 +587,6 @@ SidePanel.propTypes = {
    */
   placement: PropTypes.oneOf(['left', 'right']),
   /**
-   * Sets the primary action buttons for the side panel
-   */
-  primaryActions: PropTypes.oneOfType([
-    validateActions(),
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        label: PropTypes.string,
-        onPrimaryActionClick: PropTypes.func,
-        kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
-        disabled: PropTypes.bool,
-        loading: PropTypes.bool,
-      })
-    ),
-  ]),
-  /**
    * Specify a CSS selector that matches the DOM element that should
    * be focused when the side panel opens
    */
@@ -612,10 +608,6 @@ SidePanel.propTypes = {
    */
   subtitleText: PropTypes.string,
   /**
-   * Sets the theme that the panel will use
-   */
-  theme: PropTypes.oneOf(['light', 'dark']),
-  /**
    * Sets the title text
    */
   titleText: PropTypes.string,
@@ -626,7 +618,6 @@ SidePanel.defaultProps = {
   placement: 'right',
   size: 'medium',
   slideIn: false,
-  theme: 'light',
   currentStep: 0,
 };
 

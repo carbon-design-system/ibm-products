@@ -166,3 +166,7 @@ ActionSet.propTypes = {
    */
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'max']),
 };
+
+ActionSet.defaultProps = {
+  size: 'md',
+};

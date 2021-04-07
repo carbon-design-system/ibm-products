@@ -55,7 +55,7 @@ export let TearsheetNarrow = React.forwardRef(
       }
       ref={ref}
       size="narrow">
-      {(label || title || description) && (
+      {(label || title || description || hasCloseIcon) && (
         <ModalHeader
           className={`${blockClass}__header`}
           closeClassName={cx({
@@ -172,4 +172,5 @@ TearsheetNarrow.propTypes = {
 TearsheetNarrow.defaultProps = {
   closeIconDescription: 'Close',
   hasCloseIcon: true,
+  height: 'normal',
 };

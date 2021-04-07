@@ -6,9 +6,9 @@
  */
 
 export const SIDE_PANEL_SIZES = {
-  extraSmall: '16rem',
-  small: '20rem',
-  medium: '30rem',
-  large: '40rem',
+  xs: '16rem',
+  sm: '20rem',
+  md: '30rem',
+  lg: '40rem',
   max: '75%',
 };

@@ -92,6 +92,11 @@ export let Notifications = React.forwardRef(
       if (!open) setRender(false);
     };
 
+    const sortChronologically = (arr) => {
+      if (!arr || (arr && !arr.length)) return;
+      return arr.sort((a, b) => b.timestamp - a.timestamp);
+    };
+
     // Notifications should be grouped by "Today", "Yesterday", and "Previous", the variables
     // below filter the notifications based on those conditions and then render them in those groups
     let yesterdayDate = new Date();
@@ -102,13 +107,16 @@ export let Notifications = React.forwardRef(
     dayBeforeYesterdayDate = new Date(
       dayBeforeYesterdayDate.setDate(dayBeforeYesterdayDate.getDate() - 2)
     );
-    const withinLastDayNotifications =
+    let withinLastDayNotifications =
       allNotifications &&
       allNotifications.length &&
       allNotifications.filter(
         (item) => item.timestamp.getTime() >= yesterdayDate.getTime()
       );
-    const previousDayNotifications =
+    withinLastDayNotifications = sortChronologically(
+      withinLastDayNotifications
+    );
+    let previousDayNotifications =
       allNotifications &&
       allNotifications.length &&
       allNotifications.filter(
@@ -116,12 +124,14 @@ export let Notifications = React.forwardRef(
           item.timestamp.getTime() < yesterdayDate.getTime() &&
           item.timestamp.getTime() >= dayBeforeYesterdayDate.getTime()
       );
-    const previousNotifications =
+    previousDayNotifications = sortChronologically(previousDayNotifications);
+    let previousNotifications =
       allNotifications &&
       allNotifications.length &&
       allNotifications.filter(
         (item) => item.timestamp.getTime() < dayBeforeYesterdayDate.getTime()
       );
+    previousNotifications = sortChronologically(previousNotifications);
 
     const renderDescription = (id) => {
       const notification =
@@ -305,7 +315,7 @@ export let Notifications = React.forwardRef(
           ...rest
         }
         id={blockClass}
-        className={cx([`${blockClass}__container`], {
+        className={cx([blockClass, `${blockClass}__container`], {
           [className]: className,
         })}
         style={{ animation: `${open ? 'fadeIn 250ms' : 'fadeOut 250ms'}` }}

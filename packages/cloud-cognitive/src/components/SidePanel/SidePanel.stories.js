@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2020
+ * Copyright IBM Corp. 2020, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30,7 +30,7 @@ import {
 import { Copy20, Delete20, Settings20 } from '@carbon/icons-react';
 import styles from './_storybook-styles.scss';
 import { pkg } from '../../settings';
-import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
 import { SidePanel } from '.';
 import mdx from './SidePanel.mdx';
@@ -39,17 +39,31 @@ const storybookPrefix = getStorybookPrefix(pkg, SidePanel.displayName);
 export default {
   title: `${storybookPrefix}/${SidePanel.displayName}`,
   component: SidePanel,
-  argTypes: {
-    slideIn: {
-      table: {
-        disable: true,
-      },
-    },
-  },
   parameters: {
     styles,
     docs: {
       page: mdx,
+    },
+  },
+  argTypes: {
+    actions: {
+      control: {
+        type: 'select',
+        options: {
+          'One button': 0,
+          'One button (ghost)': 1,
+          'Two buttons': 2,
+          'Three buttons with ghost': 3,
+          'Three buttons': 4,
+          None: 5,
+        },
+        default: 0,
+      },
+    },
+    slideIn: {
+      table: {
+        disable: true,
+      },
     },
   },
 };
@@ -103,15 +117,78 @@ const rowData = [
   },
 ];
 
+const actions_1 = [
+  {
+    label: 'Primary button',
+    onPrimaryActionClick: () => {},
+    kind: 'primary',
+  },
+];
+
+const actions_2 = [
+  {
+    label: 'Ghost button',
+    onPrimaryActionClick: () => {},
+    kind: 'ghost',
+  },
+];
+
+const actions_3 = [
+  {
+    label: 'Primary button',
+    onPrimaryActionClick: () => {},
+    kind: 'primary',
+  },
+  {
+    label: 'Secondary button',
+    onPrimaryActionClick: () => {},
+    kind: 'secondary',
+  },
+];
+
+const actions_4 = [
+  {
+    label: 'Primary button',
+    onPrimaryActionClick: () => {},
+    kind: 'primary',
+  },
+  {
+    label: 'Secondary button',
+    onPrimaryActionClick: () => {},
+    kind: 'secondary',
+  },
+  {
+    label: 'Ghost button',
+    onPrimaryActionClick: () => {},
+    kind: 'ghost',
+  },
+];
+
+const actions_5 = [
+  {
+    label: 'Primary button',
+    onPrimaryActionClick: () => {},
+    kind: 'primary',
+  },
+  {
+    label: 'Secondary button',
+    onPrimaryActionClick: () => {},
+    kind: 'secondary',
+  },
+  {
+    label: 'Secondary button',
+    onPrimaryActionClick: () => {},
+    kind: 'secondary',
+  },
+];
+
+const actionSets = [actions_1, actions_2, actions_3, actions_4, actions_5, []];
+
 // eslint-disable-next-line react/prop-types
-const ChildrenContent = ({ theme }) => {
+const ChildrenContent = () => {
   const [notesValue, setNotesValue] = useState('');
   return (
-    <div
-      className={[
-        `${prefix}body-content`,
-        `${theme === 'dark' ? `${prefix}body-content-dark-theme` : ''}`,
-      ].join(' ')}>
+    <div className={`${prefix}body-content`}>
       <h5>Subtitle</h5>
       <div className={`${prefix}text-inputs`}>
         <TextInput
@@ -231,7 +308,8 @@ const renderUIShellHeader = () => (
   />
 );
 
-const SlideOverTemplate = (args) => {
+// eslint-disable-next-line react/prop-types
+const SlideOverTemplate = ({ actions, ...args }) => {
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -239,23 +317,12 @@ const SlideOverTemplate = (args) => {
       <Button onClick={() => setOpen(!open)}>
         {open ? 'Close side panel' : 'Open side panel'}
       </Button>
-      <SidePanel {...args} open={open} setOpen={setOpen}>
+      <SidePanel
+        {...args}
+        open={open}
+        setOpen={setOpen}
+        actions={actionSets[actions]}>
         <ChildrenContent />
-      </SidePanel>
-    </>
-  );
-};
-
-const SlideOverDarkTemplate = (args) => {
-  const [open, setOpen] = useState(false);
-  return (
-    <>
-      {renderUIShellHeader()}
-      <Button onClick={() => setOpen(!open)}>
-        {open ? 'Close side panel' : 'Open side panel'}
-      </Button>
-      <SidePanel {...args} open={open} setOpen={setOpen}>
-        <ChildrenContent theme="dark" />
       </SidePanel>
     </>
   );
@@ -285,7 +352,8 @@ const StepTemplate = (args) => {
   );
 };
 
-const SlideInTemplate = (args) => {
+// eslint-disable-next-line react/prop-types
+const SlideInTemplate = ({ actions, ...args }) => {
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -299,84 +367,35 @@ const SlideInTemplate = (args) => {
           </Column>
         </Row>
       </Grid>
-      <SidePanel {...args} open={open} setOpen={setOpen}>
+      <SidePanel
+        {...args}
+        open={open}
+        setOpen={setOpen}
+        actions={actionSets[actions]}>
         <ChildrenContent />
       </SidePanel>
     </>
   );
 };
 
-export const SlideOverExtraSmall = SlideOverTemplate.bind({});
-SlideOverExtraSmall.args = {
-  size: 'extraSmall',
+export const SlideOver = SlideOverTemplate.bind({});
+SlideOver.args = {
   includeOverlay: true,
+  actions: 0,
   ...defaultStoryProps,
 };
 
-export const SlideOverSmall = SlideOverTemplate.bind({});
-SlideOverSmall.args = {
-  size: 'small',
-  includeOverlay: true,
-  ...defaultStoryProps,
-};
-
-export const SlideOverMedium = SlideOverTemplate.bind({});
-SlideOverMedium.args = {
-  includeOverlay: true,
-  ...defaultStoryProps,
-};
-
-export const SlideOverLarge = SlideOverTemplate.bind({});
-SlideOverLarge.args = {
-  size: 'large',
-  includeOverlay: true,
-  ...defaultStoryProps,
-};
-
-export const SlideOverMax = SlideOverTemplate.bind({});
-SlideOverMax.args = {
-  size: 'max',
-  includeOverlay: true,
-  ...defaultStoryProps,
-};
-
-export const SlideInExtraSmall = SlideInTemplate.bind({});
-SlideInExtraSmall.args = {
-  placement: 'right',
-  size: 'extraSmall',
-  slideIn: true,
-  pageContentSelector: '#cloud-and-cognitive-page-content',
-  ...defaultStoryProps,
-};
-
-export const SlideInSmall = SlideInTemplate.bind({});
-SlideInSmall.args = {
-  placement: 'right',
-  size: 'small',
-  slideIn: true,
-  pageContentSelector: '#cloud-and-cognitive-page-content',
-  ...defaultStoryProps,
-};
-
-export const SlideInMedium = SlideInTemplate.bind({});
-SlideInMedium.args = {
+export const SlideIn = SlideInTemplate.bind({});
+SlideIn.args = {
   placement: 'right',
   slideIn: true,
   pageContentSelector: '#cloud-and-cognitive-page-content',
+  actions: 0,
   ...defaultStoryProps,
 };
 
-export const SlideInLarge = SlideInTemplate.bind({});
-SlideInLarge.args = {
-  placement: 'right',
-  size: 'large',
-  slideIn: true,
-  pageContentSelector: '#cloud-and-cognitive-page-content',
-  ...defaultStoryProps,
-};
-
-export const RightWithActionToolbar = SlideOverTemplate.bind({});
-RightWithActionToolbar.args = {
+export const WithActionToolbar = SlideOverTemplate.bind({});
+WithActionToolbar.args = {
   actionToolbarButtons: [
     {
       label: 'Check status',
@@ -403,440 +422,25 @@ RightWithActionToolbar.args = {
   ...defaultStoryProps,
 };
 
-export const LeftWithCondensedPrimaryActions = SlideOverTemplate.bind({});
-LeftWithCondensedPrimaryActions.args = {
+export const WithCondensedActions = SlideOverTemplate.bind({});
+WithCondensedActions.args = {
+  ...defaultStoryProps,
   condensed: true,
   placement: 'left',
-  primaryActions: [
-    {
-      label: 'Primary button',
-      onPrimaryActionClick: () => {},
-      kind: 'primary',
-    },
-  ],
-  ...defaultStoryProps,
-};
-
-export const OnePrimaryActionExtraSmall = SlideOverTemplate.bind({});
-OnePrimaryActionExtraSmall.args = {
-  primaryActions: [
-    {
-      label: 'Primary button',
-      onPrimaryActionClick: () => {},
-      kind: 'primary',
-    },
-  ],
-  size: 'extraSmall',
-  ...defaultStoryProps,
-};
-
-export const OnePrimaryActionSmall = SlideOverTemplate.bind({});
-OnePrimaryActionSmall.args = {
-  primaryActions: [
-    {
-      label: 'Primary button',
-      onPrimaryActionClick: () => {},
-      kind: 'primary',
-    },
-  ],
-  size: 'small',
-  ...defaultStoryProps,
-};
-
-export const OnePrimaryActionMedium = SlideOverTemplate.bind({});
-OnePrimaryActionMedium.args = {
-  primaryActions: [
-    {
-      label: 'Primary button',
-      onPrimaryActionClick: () => {},
-      kind: 'primary',
-    },
-  ],
-  ...defaultStoryProps,
-};
-
-export const OnePrimaryActionLarge = SlideOverTemplate.bind({});
-OnePrimaryActionLarge.args = {
-  primaryActions: [
-    {
-      label: 'Primary button',
-      onPrimaryActionClick: () => {},
-      kind: 'primary',
-    },
-  ],
-  size: 'large',
-  ...defaultStoryProps,
-};
-
-export const OnePrimaryActionMax = SlideOverTemplate.bind({});
-OnePrimaryActionMax.args = {
-  primaryActions: [
-    {
-      label: 'Primary button',
-      onPrimaryActionClick: () => {},
-      kind: 'primary',
-    },
-  ],
-  size: 'max',
-  includeOverlay: true,
-  ...defaultStoryProps,
-};
-
-export const TwoPrimaryActionExtraSmall = SlideOverTemplate.bind({});
-TwoPrimaryActionExtraSmall.args = {
-  primaryActions: [
-    {
-      label: 'Primary button',
-      onPrimaryActionClick: () => {},
-      kind: 'primary',
-    },
-    {
-      label: 'Secondary button',
-      onPrimaryActionClick: () => {},
-      kind: 'secondary',
-    },
-  ],
-  size: 'extraSmall',
-  ...defaultStoryProps,
-};
-
-export const TwoPrimaryActionSmall = SlideOverTemplate.bind({});
-TwoPrimaryActionSmall.args = {
-  primaryActions: [
-    {
-      label: 'Primary button',
-      onPrimaryActionClick: () => {},
-      kind: 'primary',
-    },
-    {
-      label: 'Secondary button',
-      onPrimaryActionClick: () => {},
-      kind: 'secondary',
-    },
-  ],
-  size: 'small',
-  ...defaultStoryProps,
-};
-
-export const TwoPrimaryActionMedium = SlideOverTemplate.bind({});
-TwoPrimaryActionMedium.args = {
-  primaryActions: [
-    {
-      label: 'Primary button',
-      onPrimaryActionClick: () => {},
-      kind: 'primary',
-    },
-    {
-      label: 'Secondary button',
-      onPrimaryActionClick: () => {},
-      kind: 'secondary',
-    },
-  ],
-  ...defaultStoryProps,
-};
-
-export const TwoPrimaryActionLarge = SlideOverTemplate.bind({});
-TwoPrimaryActionLarge.args = {
-  primaryActions: [
-    {
-      label: 'Primary button',
-      onPrimaryActionClick: () => {},
-      kind: 'primary',
-    },
-    {
-      label: 'Secondary button',
-      onPrimaryActionClick: () => {},
-      kind: 'secondary',
-    },
-  ],
-  size: 'large',
-  ...defaultStoryProps,
-};
-
-export const TwoPrimaryActionMax = SlideOverTemplate.bind({});
-TwoPrimaryActionMax.args = {
-  primaryActions: [
-    {
-      label: 'Primary button',
-      onPrimaryActionClick: () => {},
-      kind: 'primary',
-    },
-    {
-      label: 'Secondary button',
-      onPrimaryActionClick: () => {},
-      kind: 'secondary',
-    },
-  ],
-  size: 'max',
-  includeOverlay: true,
-  ...defaultStoryProps,
-};
-
-export const ThreePrimaryActionExtraSmall = SlideOverTemplate.bind({});
-ThreePrimaryActionExtraSmall.args = {
-  primaryActions: [
-    {
-      label: 'Primary button',
-      onPrimaryActionClick: () => {},
-      kind: 'primary',
-    },
-    {
-      label: 'Secondary button',
-      onPrimaryActionClick: () => {},
-      kind: 'secondary',
-    },
-    {
-      label: 'Secondary button',
-      onPrimaryActionClick: () => {},
-      kind: 'secondary',
-    },
-  ],
-  size: 'extraSmall',
-  ...defaultStoryProps,
-};
-
-export const ThreePrimaryActionSmall = SlideOverTemplate.bind({});
-ThreePrimaryActionSmall.args = {
-  primaryActions: [
-    {
-      label: 'Primary button',
-      onPrimaryActionClick: () => {},
-      kind: 'primary',
-    },
-    {
-      label: 'Secondary button',
-      onPrimaryActionClick: () => {},
-      kind: 'secondary',
-    },
-    {
-      label: 'Secondary button',
-      onPrimaryActionClick: () => {},
-      kind: 'secondary',
-    },
-  ],
-  size: 'small',
-  ...defaultStoryProps,
-};
-
-export const ThreePrimaryActionMedium = SlideOverTemplate.bind({});
-ThreePrimaryActionMedium.args = {
-  primaryActions: [
-    {
-      label: 'Primary button',
-      onPrimaryActionClick: () => {},
-      kind: 'primary',
-    },
-    {
-      label: 'Secondary button',
-      onPrimaryActionClick: () => {},
-      kind: 'secondary',
-    },
-    {
-      label: 'Secondary button',
-      onPrimaryActionClick: () => {},
-      kind: 'secondary',
-    },
-  ],
-  ...defaultStoryProps,
-};
-
-export const ThreePrimaryActionLarge = SlideOverTemplate.bind({});
-ThreePrimaryActionLarge.args = {
-  primaryActions: [
-    {
-      label: 'Primary button',
-      onPrimaryActionClick: () => {},
-      kind: 'primary',
-    },
-    {
-      label: 'Secondary button',
-      onPrimaryActionClick: () => {},
-      kind: 'secondary',
-    },
-    {
-      label: 'Secondary button',
-      onPrimaryActionClick: () => {},
-      kind: 'secondary',
-    },
-  ],
-  size: 'large',
-  ...defaultStoryProps,
-};
-
-export const ThreePrimaryActionMax = SlideOverTemplate.bind({});
-ThreePrimaryActionMax.args = {
-  primaryActions: [
-    {
-      label: 'Primary button',
-      onPrimaryActionClick: () => {},
-      kind: 'primary',
-    },
-    {
-      label: 'Secondary button',
-      onPrimaryActionClick: () => {},
-      kind: 'secondary',
-    },
-    {
-      label: 'Secondary button',
-      onPrimaryActionClick: () => {},
-      kind: 'secondary',
-    },
-  ],
-  size: 'max',
-  includeOverlay: true,
-  ...defaultStoryProps,
-};
-
-export const ThreePrimaryActionLargeWithGhost = SlideOverTemplate.bind({});
-ThreePrimaryActionLargeWithGhost.args = {
-  primaryActions: [
-    {
-      label: 'Primary button',
-      onPrimaryActionClick: () => {},
-      kind: 'primary',
-    },
-    {
-      label: 'Secondary button',
-      onPrimaryActionClick: () => {},
-      kind: 'secondary',
-    },
-    {
-      label: 'Ghost button',
-      onPrimaryActionClick: () => {},
-      kind: 'ghost',
-    },
-  ],
-  size: 'large',
-  ...defaultStoryProps,
-};
-
-export const ThreePrimaryActionMaxWithGhost = SlideOverTemplate.bind({});
-ThreePrimaryActionMaxWithGhost.args = {
-  primaryActions: [
-    {
-      label: 'Primary button',
-      onPrimaryActionClick: () => {},
-      kind: 'primary',
-    },
-    {
-      label: 'Secondary button',
-      onPrimaryActionClick: () => {},
-      kind: 'secondary',
-    },
-    {
-      label: 'Ghost button',
-      onPrimaryActionClick: () => {},
-      kind: 'ghost',
-    },
-  ],
-  size: 'max',
-  includeOverlay: true,
-  ...defaultStoryProps,
-};
-
-export const GhostPrimaryActionExtraSmall = SlideOverTemplate.bind({});
-GhostPrimaryActionExtraSmall.args = {
-  primaryActions: [
-    {
-      label: 'Ghost button',
-      onPrimaryActionClick: () => {},
-      kind: 'ghost',
-    },
-  ],
-  size: 'extraSmall',
-  ...defaultStoryProps,
-};
-
-export const GhostPrimaryActionSmall = SlideOverTemplate.bind({});
-GhostPrimaryActionSmall.args = {
-  primaryActions: [
-    {
-      label: 'Ghost button',
-      onPrimaryActionClick: () => {},
-      kind: 'ghost',
-    },
-  ],
-  size: 'small',
-  ...defaultStoryProps,
-};
-
-export const GhostPrimaryActionMedium = SlideOverTemplate.bind({});
-GhostPrimaryActionMedium.args = {
-  primaryActions: [
-    {
-      label: 'Ghost button',
-      onPrimaryActionClick: () => {},
-      kind: 'ghost',
-    },
-  ],
-  ...defaultStoryProps,
-};
-
-export const GhostPrimaryActionLarge = SlideOverTemplate.bind({});
-GhostPrimaryActionLarge.args = {
-  primaryActions: [
-    {
-      label: 'Ghost button',
-      onPrimaryActionClick: () => {},
-      kind: 'ghost',
-    },
-  ],
-  size: 'large',
-  selectorPrimaryFocus: '#side-panel-story-text-input-a',
-  ...defaultStoryProps,
-};
-
-export const GhostPrimaryActionMax = SlideOverTemplate.bind({});
-GhostPrimaryActionMax.args = {
-  primaryActions: [
-    {
-      label: 'Ghost button',
-      onPrimaryActionClick: () => {},
-      kind: 'ghost',
-    },
-  ],
-  size: 'max',
-  includeOverlay: true,
-  ...defaultStoryProps,
+  actions: 0,
 };
 
 export const PanelWithSecondStep = StepTemplate.bind({});
 PanelWithSecondStep.args = {
-  primaryActions: [
-    {
-      label: 'Primary button',
-      onPrimaryActionClick: () => {},
-      kind: 'primary',
-    },
-  ],
+  actions: 0,
   includeOverlay: true,
   currentStep: 1,
   ...defaultStoryProps,
 };
 
-export const DarkThemeSidePanel = SlideOverDarkTemplate.bind({});
-DarkThemeSidePanel.args = {
-  primaryActions: [
-    {
-      label: 'Primary button',
-      onPrimaryActionClick: () => {},
-      kind: 'primary',
-    },
-  ],
-  includeOverlay: true,
-  theme: 'dark',
-  ...defaultStoryProps,
-};
-
 export const SpecifyElementToHaveInitialFocus = SlideOverTemplate.bind({});
 SpecifyElementToHaveInitialFocus.args = {
-  primaryActions: [
-    {
-      label: 'Primary button',
-      onPrimaryActionClick: () => {},
-      kind: 'primary',
-    },
-  ],
+  actions: 0,
   selectorPrimaryFocus: '#side-panel-story-text-input-a',
   ...defaultStoryProps,
 };

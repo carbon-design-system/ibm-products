@@ -10,7 +10,7 @@ import React from 'react';
 import { Tag } from 'carbon-components-react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { pkg } from '../../settings';
-import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
 import { TagSet } from '.';
 const storybookPrefix = getStorybookPrefix(pkg, TagSet.displayName);
@@ -133,7 +133,7 @@ export default {
   parameters: { styles },
   argTypes: {
     containerWidth: {
-      control: { type: 'range', min: 50, max: 800, step: 10 },
+      control: { type: 'range', min: 20, max: 800, step: 10 },
     },
   },
   decorators: [

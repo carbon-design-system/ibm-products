@@ -5,8 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// NOTE: This file has a side effect of enabling all component flags
-
-import { pkg } from './settings';
+import { pkg } from '@carbon/ibm-cloud-cognitive/lib/settings';
 pkg._silenceWarnings(true);
-pkg.setAllComponents(true);

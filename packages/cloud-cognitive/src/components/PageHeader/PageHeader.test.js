@@ -9,7 +9,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 
 import { pkg } from '../../settings';
-import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 
 import {
   BreadcrumbItem,
@@ -161,7 +161,12 @@ describe('PageHeader', () => {
     expect(
       document.querySelectorAll(`.${pkg.prefix}-page-header--breadcrumb`)
     ).toHaveLength(1);
-    expect(screen.getAllByText(/Breadcrumb [1-3]/)).toHaveLength(3);
+    expect(
+      screen.getAllByText(/Breadcrumb [1-3]/, {
+        // selector need to ignore sizing items
+        selector: `.exp--breadcrumb-with-overflow--breadcrumb-container:not(.exp--breadcrumb-with-overflow--breadcrumb-container--hidden) .bx--link`,
+      })
+    ).toHaveLength(3);
     expect(screen.queryAllByTestId('tabs')).toHaveLength(1);
     expect(screen.getAllByText(/Tab [1-4]/)).toHaveLength(4);
     expect(

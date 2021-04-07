@@ -21,17 +21,14 @@
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
 @mixin about-modal {
+  // The block part of our conventional BEM class names (blockClass__E--M).
   $block-class: #{$pkg-prefix}--about-modal;
-
-  .#{$block-class} {
-    background-color: $ui-background;
-  }
 
   .#{$block-class} .bx--modal-container {
     grid-template-rows: auto auto 1fr auto;
   }
 
-  .#{$block-class}__logo {
+  .#{$block-class} .#{$block-class}__logo {
     margin: $spacing-05;
   }
 

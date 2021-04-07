@@ -85,11 +85,13 @@ unclear.
     element to combine needed classes and the block class with the `className`
     prop:
     ```js
-    <html-element class={cx(
-      blockClass, {
-      // other classes we might need to attach
-      [className]: className  // this handles className omitted/falsy
-    })} ...
+    <html-element
+      className={cx(
+        blockClass, // Apply the block class to the main HTML element
+        className, // Apply any supplied class names to the main HTML element.
+        ...
+      )}
+      ...
     ```
   - `ref={ref}` should be included on a suitable DOM element (often the main DOM
     element) to enable a supplied ref to be passed to an appropriate node.

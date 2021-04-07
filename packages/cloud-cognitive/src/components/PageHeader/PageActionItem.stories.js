@@ -11,7 +11,7 @@ import { Bee24 } from '@carbon/icons-react';
 
 import styles from './_index.scss'; // import index in case more files are added later.
 import { pkg } from '../../settings';
-import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
 import { PageActionItem } from '.';
 

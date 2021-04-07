@@ -5,5 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './disable-all'; // must come before component imports
-export * from '.';
+import { pkg } from '@carbon/ibm-cloud-cognitive/lib/settings';
+pkg.prefix = 'exp';
+pkg.setAllComponents(true);

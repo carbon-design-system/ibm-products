@@ -6,10 +6,11 @@
  */
 
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { pkg, carbon } from '../../settings';
-import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
@@ -24,12 +25,12 @@ import jsLogo from './_story-assets/js-logo.png';
 const blockClass = `${pkg.prefix}--about-modal`;
 const componentName = AboutModal.displayName;
 
-const { click } = fireEvent;
-
+const tabLabel1 = `Version number ${uuidv4()}`;
+const tabLabel2 = `Technologies (${uuidv4()}) used`;
 const additionalInfo = [
-  { label: 'Version number', content: '1.3.41' },
+  { label: tabLabel1, content: '1.3.41' },
   {
-    label: 'Technologies used',
+    label: tabLabel2,
     content: (
       <>
         <img
@@ -55,17 +56,16 @@ const className = `class-${uuidv4()}`;
 const content = `This is example content: ${uuidv4()}`;
 const copyrightText = `Copyright test text ${uuidv4()}`;
 const dataTestId = uuidv4();
+const logoAltText = `Example product ${uuidv4()} logo`;
 const logo = (
-  <img
-    src={ExampleLogo}
-    alt="Example product logo"
-    style={{ maxWidth: '6rem' }}
-  />
+  <img src={ExampleLogo} alt={logoAltText} style={{ maxWidth: '6rem' }} />
 );
 const legalText = `Legal test text ${uuidv4()}`;
+const linkText = `Carbon (${uuidv4()}) Design System`;
+const linkHref = `https://www.carbondesignsystem.com/${uuidv4()}`;
 const links = [
-  <Link href="https://www.carbondesignsystem.com" key="link1">
-    Carbon Design System
+  <Link href={linkHref} key="link1">
+    {linkText}
   </Link>,
   <Link href="https://www.ibm.com/design/language" key="link2">
     IBM Design Language
@@ -81,162 +81,110 @@ const title = (
 );
 const versionNumber = `1.3.${uuidv4()}`;
 
+// render an AboutModal with content, logo, title, and any other required props
+const renderComponent = ({ ...rest }) =>
+  render(<AboutModal {...{ content, logo, title, ...rest }} />);
+
 describe(componentName, () => {
   it('renders a component AboutModal', () => {
-    const { container } = render(
-      <AboutModal open {...{ content, logo, title }} />
-    );
-    expect(container.querySelector(`.${blockClass}`)).not.toBeNull();
+    renderComponent();
+    expect(screen.getByRole('presentation')).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(
-      <AboutModal open {...{ content, logo, title }} />
-    );
+    const { container } = renderComponent();
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it('renders title and content', () => {
-    render(<AboutModal open {...{ content, logo, title }} />);
-    expect(
-      screen.getByText(titleText) && screen.getByText(content)
-    ).toBeTruthy();
+    renderComponent();
+    screen.getByText(titleText);
+    screen.getByText(content);
   });
 
   it('renders product logo', () => {
-    const { container } = render(
-      <AboutModal open {...{ content, logo, title }} />
-    );
-    const renderedProductLogo = container.querySelector('img');
-    expect(renderedProductLogo).toBeTruthy();
+    renderComponent();
+    screen.getByAltText(logoAltText);
   });
 
   it('renders with links', () => {
-    const { getByText, container } = render(
-      <AboutModal open {...{ content, links, logo, title }} />
-    );
-
-    const link = container.querySelector('a').href;
-    click(getByText('Carbon Design System'));
-    expect(link.length && link).toEqual('https://www.carbondesignsystem.com/');
+    renderComponent({ links });
+    const link = screen.getByRole('link', { name: linkText });
+    expect(link.href).toEqual(linkHref);
   });
 
   it('renders legal text', () => {
-    render(<AboutModal open {...{ content, legalText, logo, title }} />);
-    expect(screen.getByText(legalText)).toBeTruthy();
+    renderComponent({ legalText });
+    screen.getByText(legalText);
   });
 
   it('renders copyright text', () => {
-    render(<AboutModal open {...{ content, copyrightText, logo, title }} />);
-    expect(screen.getByText(copyrightText)).toBeTruthy();
+    renderComponent({ copyrightText });
+    screen.getByText(copyrightText);
   });
 
   it('renders a clickable carbon tab for additional info', () => {
-    render(
-      <AboutModal
-        open
-        {...{ additionalInfo, content, copyrightText, legalText, logo, title }}
-      />
-    );
-    const tabToSelect = screen.getByRole('tab', { name: /Version number/i });
-    click(tabToSelect);
-    expect(
-      tabToSelect.parentElement.classList.contains(
-        `${carbon.prefix}--tabs__nav-item--selected`
-      )
-    ).toBeTruthy();
+    renderComponent({ additionalInfo });
+    const tabToSelect = screen.getByRole('tab', { name: tabLabel2 });
+    const tabSelected = `${carbon.prefix}--tabs__nav-item--selected`;
+    expect(tabToSelect.parentElement).not.toHaveClass(tabSelected);
+    userEvent.click(tabToSelect);
+    expect(tabToSelect.parentElement).toHaveClass(tabSelected);
   });
 
   it('renders a version number', () => {
-    const { getByText } = render(
-      <AboutModal
-        open
-        {...{ content, logo, title }}
-        additionalInfo={[{ label: 'Version number', content: versionNumber }]}
-      />
-    );
-    expect(getByText(versionNumber)).toBeTruthy();
+    renderComponent({
+      additionalInfo: [{ label: tabLabel1, content: versionNumber }],
+    });
+    screen.getByText(versionNumber);
   });
 
   it('is visible when open is true', () => {
-    const { container } = render(
-      <AboutModal open logo={logo} content={content} title={title} />
-    );
-    const aboutModal = container.querySelector(`.${carbon.prefix}--modal`);
-    expect(aboutModal.classList.contains('is-visible')).toBeTruthy();
+    renderComponent({ open: true });
+    expect(screen.getByRole('presentation')).toHaveClass('is-visible');
   });
 
   it('is not visible when open is not true', () => {
-    const { container } = render(
-      <AboutModal open={false} {...{ content, logo, title }} />
-    );
-    const aboutModal = container.querySelector(`.${carbon.prefix}--modal`);
-    expect(aboutModal.classList.contains('is-visible')).toBeFalsy();
+    renderComponent({ open: false });
+    expect(screen.getByRole('presentation')).not.toHaveClass('is-visible');
   });
 
   it('applies className to the root node', () => {
-    const { container } = render(
-      <AboutModal open {...{ className, content, logo, title }} />
-    );
-    const aboutModal = container.querySelector(`.${carbon.prefix}--modal`);
-    expect(aboutModal.classList.contains(className)).toBeTruthy();
+    renderComponent({ className });
+    expect(screen.getByRole('presentation')).toHaveClass(className);
   });
 
   it('calls onClose() when modal is closed', () => {
-    const { container } = render(
-      <AboutModal
-        open
-        {...{ content, logo, title }}
-        onClose={onCloseReturnsTrue}
-      />
-    );
-    const aboutModal = container.querySelector(`.${carbon.prefix}--modal`);
-    const closeButton = aboutModal.querySelector(
-      `.${carbon.prefix}--modal-close`
-    );
-
-    expect(aboutModal.classList.contains('is-visible')).toBeTruthy();
+    renderComponent({ open: true, onClose: onCloseReturnsTrue });
+    const aboutModal = screen.getByRole('presentation');
+    const closeButton = screen.getByRole('button', { name: 'Close' });
+    expect(aboutModal).toHaveClass('is-visible');
     expect(onCloseReturnsTrue).toHaveBeenCalledTimes(0);
-    click(closeButton);
-    expect(aboutModal.classList.contains('is-visible')).toBeFalsy();
+    userEvent.click(closeButton);
+    expect(aboutModal).not.toHaveClass('is-visible');
     expect(onCloseReturnsTrue).toHaveBeenCalledTimes(1);
   });
 
-  it('calls onClose() when modal is closed and allows veto of close', () => {
-    const { container } = render(
-      <AboutModal
-        open
-        {...{ content, logo, title }}
-        onClose={onCloseReturnsFalse}
-      />
-    );
-    const aboutModal = container.querySelector(`.${carbon.prefix}--modal`);
-    const closeButton = aboutModal.querySelector(
-      `.${carbon.prefix}--modal-close`
-    );
-
-    expect(aboutModal.classList.contains('is-visible')).toBeTruthy();
+  it('allows veto when modal is closed', () => {
+    renderComponent({ open: true, onClose: onCloseReturnsFalse });
+    const aboutModal = screen.getByRole('presentation');
+    const closeButton = screen.getByRole('button', { name: 'Close' });
+    expect(aboutModal).toHaveClass('is-visible');
     expect(onCloseReturnsFalse).toHaveBeenCalledTimes(0);
-    click(closeButton);
-    expect(aboutModal.classList.contains('is-visible')).toBeTruthy();
+    userEvent.click(closeButton);
+    expect(aboutModal).toHaveClass('is-visible');
     expect(onCloseReturnsFalse).toHaveBeenCalledTimes(1);
   });
 
   it('adds additional properties to the containing node', () => {
-    const { container } = render(
-      <AboutModal open {...{ content, logo, title }} data-testid={dataTestId} />
-    );
-    expect(
-      container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
-    ).toBeInTheDocument();
+    renderComponent({ 'data-testid': dataTestId });
+    screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
-    render(<AboutModal open {...{ content, logo, ref, title }} />);
-    expect(
-      ref.current.outerModal.current.classList.contains(blockClass)
-    ).toBeTruthy();
+    renderComponent({ ref });
+    expect(ref.current.outerModal.current).toHaveClass(blockClass);
   });
 });

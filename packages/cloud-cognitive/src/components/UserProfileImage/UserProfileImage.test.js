@@ -12,20 +12,20 @@ import { render } from '@testing-library/react';
 import { pkg } from '../../settings';
 
 import React from 'react';
-import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 
 import { UserProfileImage } from '.';
 
 describe(name, () => {
   test('should return a circle with background color', () => {
     const { container } = render(
-      <UserProfileImage theme="light" backgroundColor="light-blue" />
+      <UserProfileImage theme="light" backgroundColor="light-cyan" />
     );
     const element = container.querySelector(
       `.${pkg.prefix}-user-profile-avatar`
     );
 
-    const hasBackgroundColor = element.className.includes('light-blue');
+    const hasBackgroundColor = element.className.includes('light-cyan');
     expect(hasBackgroundColor).toBeTruthy();
   });
 

@@ -32,6 +32,7 @@ export let SidePanel = React.forwardRef(
   (
     {
       actionToolbarButtons,
+      actions,
       animateTitle,
       children,
       className,
@@ -43,13 +44,11 @@ export let SidePanel = React.forwardRef(
       open,
       pageContentSelector,
       placement,
-      primaryActions,
       selectorPrimaryFocus,
       setOpen,
       size,
       slideIn,
       subtitleText,
-      theme,
       titleText,
       // Collect any other property values passed in.
       ...rest
@@ -223,7 +222,6 @@ export let SidePanel = React.forwardRef(
     const mainPanelClassNames = cx([
       blockClass,
       `${blockClass}__container`,
-      `${blockClass}__container-${theme}`,
       setSizeClassName(size),
       {
         [`${blockClass}__container-right-placement`]: placement === 'right',
@@ -341,7 +339,7 @@ export let SidePanel = React.forwardRef(
             </div>
             <div className={`${blockClass}__body-content`}>{children}</div>
             <ActionSet
-              actions={primaryActions}
+              actions={actions}
               size={size}
               className={primaryActionContainerClassNames}
             />
@@ -388,6 +386,21 @@ SidePanel.propTypes = {
       kind: PropTypes.oneOf(['ghost', 'tertiary', 'secondary', 'primary']),
     })
   ),
+  /**
+   * Sets the primary action buttons for the side panel
+   */
+  actions: PropTypes.oneOfType([
+    ActionSet.validateActions(),
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        label: PropTypes.string,
+        onPrimaryActionClick: PropTypes.func,
+        kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
+        disabled: PropTypes.bool,
+        loading: PropTypes.bool,
+      })
+    ),
+  ]),
   /**
    * Determines if the title will animate on scroll
    */
@@ -436,21 +449,6 @@ SidePanel.propTypes = {
    */
   placement: PropTypes.oneOf(['left', 'right']),
   /**
-   * Sets the primary action buttons for the side panel
-   */
-  primaryActions: PropTypes.oneOfType([
-    ActionSet.validateActions(),
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        label: PropTypes.string,
-        onClick: PropTypes.func,
-        kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
-        disabled: PropTypes.bool,
-        loading: PropTypes.bool,
-      })
-    ),
-  ]),
-  /**
    * Specify a CSS selector that matches the DOM element that should
    * be focused when the side panel opens
    */
@@ -472,10 +470,6 @@ SidePanel.propTypes = {
    */
   subtitleText: PropTypes.string,
   /**
-   * Sets the theme that the panel will use
-   */
-  theme: PropTypes.oneOf(['light', 'dark']),
-  /**
    * Sets the title text
    */
   titleText: PropTypes.string,
@@ -486,7 +480,6 @@ SidePanel.defaultProps = {
   placement: 'right',
   size: 'md',
   slideIn: false,
-  theme: 'light',
   currentStep: 0,
 };
 

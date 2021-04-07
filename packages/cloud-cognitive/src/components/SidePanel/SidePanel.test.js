@@ -160,7 +160,7 @@ describe('SidePanel', () => {
   it('should render one primary action button', () => {
     renderSidePanel(
       {
-        primaryActions: [
+        actions: [
           {
             label: 'Primary button',
             onPrimaryActionClick: () => {},
@@ -177,7 +177,7 @@ describe('SidePanel', () => {
   it('should render two action buttons', () => {
     renderSidePanel(
       {
-        primaryActions: [
+        actions: [
           {
             label: 'Action button',
             onPrimaryActionClick: () => {},
@@ -199,7 +199,7 @@ describe('SidePanel', () => {
   it('should render a single ghost action button', () => {
     const { container } = renderSidePanel(
       {
-        primaryActions: [
+        actions: [
           {
             label: 'Ghost action button',
             onPrimaryActionClick: () => {},
@@ -219,7 +219,7 @@ describe('SidePanel', () => {
     renderSidePanel(
       {
         condensed: true,
-        primaryActions: [
+        actions: [
           {
             label: 'Primary button',
             onPrimaryActionClick: () => {},
@@ -273,7 +273,7 @@ describe('SidePanel', () => {
     const onPrimaryActionClick = fn();
     renderSidePanel(
       {
-        primaryActions: [
+        actions: [
           {
             label: 'Primary button',
             onPrimaryActionClick,

@@ -81,7 +81,7 @@ describe('SidePanel', () => {
   it('should render an extra small side panel', () => {
     const { container } = renderSidePanel(
       {
-        size: 'extraSmall',
+        size: 'xs',
       },
       'content'
     );
@@ -94,7 +94,7 @@ describe('SidePanel', () => {
   it('should render a small side panel', () => {
     const { container } = renderSidePanel(
       {
-        size: 'small',
+        size: 'sm',
       },
       'content'
     );
@@ -115,7 +115,7 @@ describe('SidePanel', () => {
   it('should render a large side panel', () => {
     const { container } = renderSidePanel(
       {
-        size: 'large',
+        size: 'lg',
       },
       'content'
     );

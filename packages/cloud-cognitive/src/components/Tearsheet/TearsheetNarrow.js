@@ -38,10 +38,13 @@ export let TearsheetNarrow = React.forwardRef(
       // The component props, in alphabetical order (for consistency).
       buttons,
       children,
+      // className is passed directly to TearsheetShell via rest
       closeIconDescription,
       description,
       hasCloseIcon,
+      // height is passed directly to TearsheetShell via rest
       label,
+      // onClose, open, preventCloseOnClickOutside are passed directly to TearsheetShell via rest
       title,
       // Collect any other property values passed in.
       ...rest

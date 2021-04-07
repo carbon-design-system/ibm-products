@@ -142,8 +142,8 @@ WithSecondaryAction.args = {
   columnSize: '8',
 };
 
-export const ClickableCardWithOnclick = Template.bind({});
-ClickableCardWithOnclick.args = {
+export const Clickable = Template.bind({});
+Clickable.args = {
   ...defaultProps,
   onClick: () => {},
   primaryButtonText: '',

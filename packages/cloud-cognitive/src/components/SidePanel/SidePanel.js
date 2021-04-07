@@ -13,12 +13,12 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import wrapFocus from '../../global/js/utils/wrapFocus';
 import { pkg } from '../../settings';
-import { changeArrayPosition } from './utils';
 import { SIDE_PANEL_SIZES } from './constants';
 
 // Carbon and package components we use.
-import { Button, InlineLoading } from 'carbon-components-react';
+import { Button } from 'carbon-components-react';
 import { Close20, ArrowLeft20 } from '@carbon/icons-react';
+import { ActionSet } from '../ActionSet';
 
 const blockClass = `${pkg.prefix}--side-panel`;
 const componentName = 'SidePanel';
@@ -57,7 +57,6 @@ export let SidePanel = React.forwardRef(
   ) => {
     const [shouldRender, setRender] = useState(open);
     const [animationComplete, setAnimationComplete] = useState(false);
-    const [primaryPanelActions, setPrimaryPanelActions] = useState([]);
     const sidePanelRef = useRef();
     const sidePanelTitleRef = useRef();
     const sidePanelOverlayRef = useRef();
@@ -140,59 +139,6 @@ export let SidePanel = React.forwardRef(
       if (open) setRender(true);
     }, [open]);
 
-    // used to properly order the primary action buttons according to the designs
-    useEffect(() => {
-      const primaryActionButtons = actions || [];
-      if (primaryActionButtons && primaryActionButtons.length > 1) {
-        const primaryIndex = primaryActionButtons.findIndex(
-          (item) => item.kind === 'primary'
-        );
-        const ghostButton = primaryActionButtons.filter(
-          (button) => button.kind === 'ghost'
-        );
-        let newArray = [];
-        if (
-          size === 'extraSmall' ||
-          size === 'small' ||
-          (size === 'medium' && primaryActionButtons.length > 2)
-        ) {
-          newArray = changeArrayPosition(primaryActionButtons, primaryIndex, 0); // put the primary button as the first button in the group
-          const ghostButton = primaryActionButtons.filter(
-            (button) => button.kind === 'ghost'
-          );
-          if (ghostButton.length) {
-            const ghostIndex = newArray.findIndex(
-              (item) => item.kind === 'ghost'
-            );
-            newArray = changeArrayPosition(
-              newArray,
-              ghostIndex,
-              primaryActionButtons.length - 1
-            ); // put the ghost button as the last button in the group
-          }
-        } else {
-          newArray = changeArrayPosition(
-            primaryActionButtons,
-            primaryIndex,
-            primaryActionButtons.length - 1
-          ); // put the primary button as the last button in the group
-          if (ghostButton.length) {
-            const ghostIndex = newArray.findIndex(
-              (item) => item.kind === 'ghost'
-            );
-            newArray = changeArrayPosition(newArray, ghostIndex, 0); // put the ghost button as the first button in the group
-          }
-        }
-        if (newArray.length) {
-          setPrimaryPanelActions([...newArray]);
-        } else {
-          setPrimaryPanelActions([...primaryActionButtons]);
-        }
-      } else {
-        setPrimaryPanelActions([...primaryActionButtons]);
-      }
-    }, [actions, size]);
-
     // initialize the side panel to close
     const onAnimationEnd = () => {
       if (!open) setRender(false);
@@ -238,39 +184,22 @@ export let SidePanel = React.forwardRef(
       }
     }, [slideIn, pageContentSelector, placement, shouldRender, size]);
 
-    const setSizeClassName = (panelSize, actions) => {
-      let sizeClassName;
-      if (!actions) {
-        sizeClassName = `${blockClass}__container-`;
-      } else {
-        sizeClassName = `${blockClass}__actions-`;
-      }
+    const setSizeClassName = (panelSize) => {
+      let sizeClassName = `${blockClass}__container-`;
       switch (panelSize) {
-        case 'extraSmall':
+        case 'xs':
           return (sizeClassName = `${sizeClassName}-extra-small`);
-        case 'small':
+        case 'sm':
           return (sizeClassName = `${sizeClassName}-small`);
-        case 'medium':
+        case 'md':
           return (sizeClassName = `${sizeClassName}-medium`);
-        case 'large':
+        case 'lg':
           return (sizeClassName = `${sizeClassName}-large`);
         case 'max':
           return (sizeClassName = `${sizeClassName}-max`);
         default:
           return (sizeClassName = `${sizeClassName}-medium`);
       }
-    };
-
-    const setActionsBarClass = (buttonCount) => {
-      let buttonCountClassName = `${blockClass}__actions-container-`;
-      if (buttonCount === 1) {
-        buttonCountClassName = `${buttonCountClassName}-single-action`;
-      } else if (buttonCount === 2) {
-        buttonCountClassName = `${buttonCountClassName}-multi-action`;
-      } else if (buttonCount > 2) {
-        buttonCountClassName = `${buttonCountClassName}-multi-action-3-buttons-or-more`;
-      }
-      return buttonCountClassName;
     };
 
     // adds focus trap functionality
@@ -304,8 +233,6 @@ export let SidePanel = React.forwardRef(
 
     const primaryActionContainerClassNames = cx([
       `${blockClass}__actions-container`,
-      setSizeClassName(size, true),
-      setActionsBarClass(primaryPanelActions && primaryPanelActions.length),
       {
         [`${blockClass}__actions-container-condensed`]: condensed,
       },
@@ -413,28 +340,11 @@ export let SidePanel = React.forwardRef(
               </div>
             )}
             <div className={`${blockClass}__body-content`}>{children}</div>
-            {primaryPanelActions && primaryPanelActions.length ? (
-              <div className={primaryActionContainerClassNames}>
-                {primaryPanelActions.map((action, index) => (
-                  <Button
-                    key={index}
-                    disabled={action.disabled || action.loading || false}
-                    onClick={() => action.onPrimaryActionClick()}
-                    kind={action.kind || 'primary'}
-                    className={cx([
-                      `${blockClass}__primary-action-button`,
-                      {
-                        [`${blockClass}__ghost-button`]:
-                          action.kind === 'ghost',
-                        [`${blockClass}__primary-action-button-condensed`]: condensed,
-                      },
-                    ])}>
-                    {action.label}
-                    {action.loading && <InlineLoading />}
-                  </Button>
-                ))}
-              </div>
-            ) : null}
+            <ActionSet
+              actions={actions}
+              size={size}
+              className={primaryActionContainerClassNames}
+            />
           </div>
           <span
             ref={endTrapRef}
@@ -465,52 +375,6 @@ export let SidePanel = React.forwardRef(
 // Return a placeholder if not released and not enabled by feature flag
 SidePanel = pkg.checkComponentEnabled(SidePanel, componentName);
 
-const validateActions = () => (props, propName, componentName) => {
-  const prop = props[propName];
-  if (prop === undefined) return;
-  if (prop !== undefined) {
-    // let validationMessage = '';
-    if (props.actions && props.actions.length) {
-      if (
-        (props.size === 'small' ||
-          props.size === 'extraSmall' ||
-          props.size === 'medium') &&
-        props.actions.length > 3
-      ) {
-        throw new Error(
-          `Prop '${propName}' passed to ${componentName} is using an invalid combination of buttons.\n\nYou cannot have 4 or more buttons in a '${props.size}' size panel`
-        );
-      }
-      const ghostButton = props.actions.filter(
-        (button) => button.kind === 'ghost'
-      );
-      const primaryActionButton = props.actions.filter(
-        (button) => button.kind === 'primary'
-      );
-      if (ghostButton.length > 1)
-        throw new Error(
-          `Prop '${propName}' passed to ${componentName} is using an invalid combination of buttons.\n\nYou cannot have more than one 'ghost' button in a side panel`
-        );
-      if (primaryActionButton.length > 1)
-        throw new Error(
-          `Prop '${propName}' passed to ${componentName} is using an invalid combination of buttons.\n\nYou cannot have more than one 'primary' action button in a side panel`
-        );
-      if (
-        props.actions.length > 1 &&
-        ghostButton.length &&
-        (props.size === 'extraSmall' ||
-          props.size === 'small' ||
-          props.size === 'medium')
-      ) {
-        throw new Error(
-          `Prop '${propName}' passed to ${componentName} is using an invalid combination of buttons.\n\nYou cannot have a 'ghost' button in conjuntion with other action buttons in a ${props.size} size side panel. Try using a 'secondary' button instead.`
-        );
-      }
-    }
-    return null;
-  }
-};
-
 SidePanel.propTypes = {
   /**
    * Sets the action toolbar buttons
@@ -528,7 +392,7 @@ SidePanel.propTypes = {
    * Sets the primary action buttons for the side panel
    */
   actions: PropTypes.oneOfType([
-    validateActions(),
+    ActionSet.validateActions(),
     PropTypes.arrayOf(
       PropTypes.shape({
         label: PropTypes.string,
@@ -598,7 +462,7 @@ SidePanel.propTypes = {
   /**
    * Sets the size of the side panel
    */
-  size: PropTypes.oneOf(['extraSmall', 'small', 'medium', 'large', 'max']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'max']),
   /**
    * Determines if this panel slides in
    */
@@ -616,7 +480,7 @@ SidePanel.propTypes = {
 SidePanel.defaultProps = {
   animateTitle: true,
   placement: 'right',
-  size: 'medium',
+  size: 'md',
   slideIn: false,
   currentStep: 0,
 };

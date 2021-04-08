@@ -12,14 +12,15 @@ import '../../../utils/enable-all'; // must come before component is imported (d
 import mdx from './NoDataEmptyState.mdx';
 import { pkg } from '../../../settings';
 import { getStorybookPrefix } from '../../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, 'EmptyStates');
 
 import { NoDataEmptyState } from '.';
 
 import styles from '../_index.scss';
 
+const storybookPrefix = getStorybookPrefix(pkg, NoDataEmptyState.displayName);
+
 export default {
-  title: `${storybookPrefix}/EmptyStates/NoDataEmptyState`,
+  title: `${storybookPrefix}/EmptyStates/${NoDataEmptyState.displayName}`,
   component: NoDataEmptyState,
   parameters: {
     styles,

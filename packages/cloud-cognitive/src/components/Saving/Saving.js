@@ -8,21 +8,26 @@
 import React from 'react';
 import cx from 'classnames';
 import { Button } from 'carbon-components-react';
+import {
+  Save16,
+  CheckmarkOutline16,
+  ErrorOutline16,
+  ErrorFilled16,
+  InProgress16,
+} from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
 const componentName = 'Saving';
 
-export const Saving = ({
+export let Saving = ({
+  cancelButtonText,
   className,
-  defaultIcon,
   defaultText,
-  failIcon,
   failText,
-  inProgressIcon,
   inProgressText,
-  onClick,
+  onCancel,
+  onSave,
   status,
-  successIcon,
   successText,
   type,
 }) => {
@@ -34,10 +39,10 @@ export const Saving = ({
   };
 
   const getStatusIcon = () => {
-    if (status === 'default') return defaultIcon;
-    else if (status === 'inprogress') return inProgressIcon;
-    else if (status === 'success') return successIcon;
-    return failIcon;
+    if (status === 'default') return CheckmarkOutline16;
+    else if (status === 'inprogress') return InProgress16;
+    else if (status === 'success') return Save16;
+    return ErrorOutline16;
   };
 
   const classnames = cx(`${pkg.prefix}-saving`, {
@@ -47,17 +52,42 @@ export const Saving = ({
   return (
     <div className={classnames}>
       {type === 'auto' ? (
-        <p>{getStatusText()}</p>
+        <div className={`${pkg.prefix}-saving-message`}>
+          {status === 'fail' && (
+            <div className={`${pkg.prefix}-saving-error-icon`}>
+              <ErrorFilled16 />
+            </div>
+          )}
+          <p className={`${pkg.prefix}-saving-text`}>{getStatusText()}</p>
+        </div>
       ) : (
-        <Button onClick={onClick} kind="primary" renderIcon={getStatusIcon()}>
-          {getStatusText()}
-        </Button>
+        <div className={`${pkg.prefix}-saving-buttons`}>
+          <Button
+            onClick={onCancel}
+            kind="secondary"
+            disabled={status !== 'inprogress'}>
+            {cancelButtonText}
+          </Button>
+          <Button
+            onClick={onSave}
+            kind="primary"
+            renderIcon={getStatusIcon()}
+            disabled={status === 'inprogress'}>
+            {getStatusText()}
+          </Button>
+        </div>
       )}
     </div>
   );
 };
 
+Saving = pkg.checkComponentEnabled(Saving, componentName);
+
 Saving.propTypes = {
+  /**
+   * Text for the cancel button
+   */
+  cancelButtonText: PropTypes.string,
   /**
    * Provide an optional class to be applied to the containing node.
    */
@@ -87,9 +117,13 @@ Saving.propTypes = {
    */
   inProgressText: PropTypes.string,
   /**
-   * Function handler for button
+   * Function handler for cancel button
    */
-  onClick: PropTypes.func,
+  onCancel: PropTypes.func,
+  /**
+   * Function handler for save button
+   */
+  onSave: PropTypes.func,
   /**
    * Save state
    */
@@ -109,15 +143,7 @@ Saving.propTypes = {
 };
 
 Saving.defaultProps = {
-  defaultIcon: null,
-  defaultText: '',
-  failIcon: null,
-  failText: '',
-  inProgressIcon: null,
-  inProgressText: '',
   status: 'default',
-  successIcon: null,
-  successText: '',
   type: 'manual',
 };
 

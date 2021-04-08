@@ -9,4 +9,23 @@
 @import '../../global/styles/project-settings';
 
 @import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/overflow-menu/overflow-menu';
+
+.#{$pkg-prefix}-saving-message {
+  display: flex;
+}
+
+.#{$pkg-prefix}-saving-error-icon {
+  margin-right: $spacing-05;
+}
+
+.#{$pkg-prefix}-saving-error-icon svg {
+  fill: $danger-01;
+}
+
+.#{$pkg-prefix}-saving-text {
+  @include carbon--type-style('body-short-01');
+}
+
+.#{$pkg-prefix}-saving-buttons {
+  display: flex;
+}

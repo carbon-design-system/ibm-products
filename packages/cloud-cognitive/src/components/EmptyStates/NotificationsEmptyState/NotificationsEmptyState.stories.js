@@ -12,13 +12,17 @@ import '../../../utils/enable-all'; // must come before component is imported (d
 import mdx from './NotificationsEmptyState.mdx';
 import { pkg } from '../../../settings';
 import { getStorybookPrefix } from '../../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, 'EmptyStates');
 import { NotificationsEmptyState } from '.';
 
 import styles from '../_index.scss';
 
+const storybookPrefix = getStorybookPrefix(
+  pkg,
+  NotificationsEmptyState.displayName
+);
+
 export default {
-  title: `${storybookPrefix}/EmptyStates/NotificationsEmptyState`,
+  title: `${storybookPrefix}/EmptyStates/${NotificationsEmptyState.displayName}`,
   component: NotificationsEmptyState,
   parameters: {
     styles,

@@ -16,7 +16,6 @@ export let ProductiveCard = (props) => {
   const validProps = stripUnwantedProps(props, [
     'media',
     'mediaPosition',
-    'onClick',
     'onSecondaryButtonClick',
     'pictogram',
     'primaryButtonClick',
@@ -57,9 +56,17 @@ ProductiveCard.propTypes = {
    */
   className: PropTypes.string,
   /**
+   * Designates which zones of the card are clickable. Refer to design documentation for implementation guidelines
+   */
+  clickZone: PropTypes.oneOf(['one', 'two', 'three']),
+  /**
    * Optional label for the top of the card
    */
   label: PropTypes.string,
+  /**
+   * Provides the callback for a clickable card
+   */
+  onClick: PropTypes.func,
   /**
    * Function that's called from the primary button or action icon
    */
@@ -91,6 +98,7 @@ ProductiveCard.propTypes = {
 ProductiveCard.defaultProps = {
   actionIcons: [],
   actionIconsPosition: 'top',
+  clickZone: 'one',
   overflowActions: [],
   titleSize: 'default',
 };

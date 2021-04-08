@@ -38,14 +38,17 @@ export let Tearsheet = React.forwardRef(
       // The component props, in alphabetical order (for consistency).
       buttons,
       children,
+      // className is passed directly to TearsheetShell via rest
       closeIconDescription,
       description,
       hasCloseIcon,
+      // height is passed directly to TearsheetShell via rest
       influencer,
       influencerPosition,
       influencerWidth,
       label,
       navigation,
+      // onClose, open, preventCloseOnClickOutside are passed directly to TearsheetShell via rest
       title,
       // Collect any other property values passed in.
       ...rest
@@ -114,76 +117,68 @@ Tearsheet.displayName = componentName;
 Tearsheet.propTypes = {
   /**
    * Specifies the content for the buttons section of the Tearsheet.
-   * Optional.
    */
   buttons: PropTypes.node,
 
   /**
    * Specifies the content of the Tearsheet body.
-   * Optional.
    */
   children: PropTypes.node,
 
   /**
    * Specifies class(es) to be applied to the top-level Tearsheet node.
-   * Optional.
    */
   className: PropTypes.string,
 
   /**
    * The description for the close icon.
-   * Optional.
    */
   closeIconDescription: PropTypes.string,
 
   /**
    * Specifies the description of the Tearsheet.
-   * Optional.
    */
   description: PropTypes.node,
 
   /**
    * Specifies if the Tearsheet has a close icon.
-   * Optional.
    */
   hasCloseIcon: PropTypes.bool,
 
   /**
-   * Specifies the height of the tearsheet `'normal' | 'lower'`. Lower is
-   * 40px lower to allow more underlying content to be visible. Optional.
+   * Specifies the height of the tearsheet. The 'normal' height fills the
+   * viewport leaving room at the top for a header bar to show through from
+   * below. Use 'lower' height to leave a little extra room at the top to allow
+   * a breadcrumb or action bar navigation to also show through.
    */
   height: PropTypes.oneOf(['normal', 'lower']),
 
   /**
    * Specifies the content for the influencer section of the Tearsheet.
-   * Optional.
    */
-  influencer: PropTypes.node,
+  influencer: PropTypes.element,
 
   /**
-   * Specifies the position of the influencer section `'left' | 'right'`.
-   * Optional.
+   * Specifies the position of the influencer section, 'left' or 'right'.
    */
   influencerPosition: PropTypes.oneOf(['left', 'right']),
 
   /**
-   * Specifies the width of the influencer `'narrow' | 'wide'`. Narrow is
-   * 256px, wide is 320px. Optional.
+   * Specifies the width of the influencer: 'narrow' is 256px, and 'wide' is
+   * 320px.
    */
   influencerWidth: PropTypes.oneOf(['narrow', 'wide']),
 
   /**
    * Specifies the label of the Tearsheet.
-   * Optional.
    */
   label: PropTypes.node,
 
   /**
    * Specifies navigation content such as a `Tabs` component to be included
    * at the bottom of the Tearsheet header.
-   * Optional.
    */
-  navigation: PropTypes.node,
+  navigation: PropTypes.element,
 
   /**
    * Specifies an optional handler that is called when closing the modal.
@@ -192,20 +187,18 @@ Tearsheet.propTypes = {
   onClose: PropTypes.func,
 
   /**
-   * Specifies whether the Tearsheet is currently open or
-   * not.
+   * Specifies whether the Tearsheet is currently open.
    */
   open: PropTypes.bool,
 
   /**
-   * Prevents the Tearsheet from closing automatically if the user clicks outside of it.
-   * Optional.
+   * Prevents the Tearsheet from closing automatically if the user clicks
+   * outside it.
    */
   preventCloseOnClickOutside: PropTypes.bool,
 
   /**
    * Specifies the title of the Tearsheet.
-   * Optional.
    */
   title: PropTypes.node,
 };

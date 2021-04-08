@@ -22,7 +22,8 @@ const componentName = Tearsheet.displayName;
 const componentNameNarrow = TearsheetNarrow.displayName;
 
 const onClick = jest.fn();
-const onClose = jest.fn();
+const onCloseReturnsFalse = jest.fn(() => false);
+const onCloseReturnsTrue = jest.fn(() => true);
 
 const createButton = `Create ${uuidv4()}`;
 const buttons = (
@@ -37,6 +38,7 @@ const childFragment = `Main ${uuidv4()} content`;
 const children = <div>{childFragment}</div>;
 const className = `class-${uuidv4()}`;
 const closeIconDescription = `Close the ${uuidv4()} tearsheet`;
+const dataTestId = uuidv4();
 const descriptionFragment = `Lorem ipsum ${uuidv4()} dolor sit amet`;
 const description = (
   <span>
@@ -65,6 +67,7 @@ const navigation = (
 );
 const title = `Title of the ${uuidv4()} tearsheet`;
 
+// These are tests than apply to both Tearsheet and TearsheetNarrow
 const commonTests = (Ts, name) => {
   it(`renders a component ${name}`, () => {
     render(<Ts />);
@@ -134,20 +137,30 @@ const commonTests = (Ts, name) => {
   });
 
   it('calls onClose() when the tearsheet is closed', () => {
-    render(<Ts {...{ onClose }} open />);
+    render(<Ts onClose={onCloseReturnsTrue} open />);
     const tearsheet = screen.getByRole('presentation');
     const closeButton = screen.getByRole('button', { name: 'Close' });
     expect(tearsheet).toHaveClass('is-visible');
-    expect(onClose).toHaveBeenCalledTimes(0);
+    expect(onCloseReturnsTrue).toHaveBeenCalledTimes(0);
     userEvent.click(closeButton);
     expect(tearsheet).not.toHaveClass('is-visible');
-    expect(onClose).toHaveBeenCalledTimes(1);
+    expect(onCloseReturnsTrue).toHaveBeenCalledTimes(1);
   });
 
-  it('renders open', () => {
-    render(<Ts {...{ onClose }} open />);
+  it('allows veto when the tearsheet is closed', () => {
+    render(<Ts onClose={onCloseReturnsFalse} open />);
     const tearsheet = screen.getByRole('presentation');
+    const closeButton = screen.getByRole('button', { name: 'Close' });
     expect(tearsheet).toHaveClass('is-visible');
+    expect(onCloseReturnsFalse).toHaveBeenCalledTimes(0);
+    userEvent.click(closeButton);
+    expect(tearsheet).toHaveClass('is-visible');
+    expect(onCloseReturnsFalse).toHaveBeenCalledTimes(1);
+  });
+
+  it('is visible when open is true', () => {
+    render(<Ts open />);
+    expect(screen.getByRole('presentation')).toHaveClass('is-visible');
   });
 
   // preventCloseOnClickOutside is passed directly to the ComposedModal.
@@ -157,6 +170,17 @@ const commonTests = (Ts, name) => {
   it('renders title', () => {
     render(<Ts {...{ title }} />);
     screen.getByText(title);
+  });
+
+  it('adds additional properties to the containing node', () => {
+    render(<Ts data-testid={dataTestId} />);
+    screen.getByTestId(dataTestId);
+  });
+
+  it('forwards a ref to an appropriate node', () => {
+    const ref = React.createRef();
+    render(<Ts {...{ ref }} />);
+    expect(ref.current.outerModal.current).toHaveClass(blockClass);
   });
 
   it("doesn't render when stacked more than three deep", () => {

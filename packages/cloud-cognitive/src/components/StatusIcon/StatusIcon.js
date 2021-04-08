@@ -148,8 +148,17 @@ StatusIcon = pkg.checkComponentEnabled(StatusIcon, componentName);
 StatusIcon.displayName = componentName;
 
 StatusIcon.propTypes = {
+  /**
+   * Provide an optional class to be applied to the modal root node.
+   */
   className: PropTypes.string,
+  /**
+   * A required prop that provides a description of the icon for accessibility purposes. This string *MUST* match the string that is provided to the "kind" prop
+   */
   iconDescription: PropTypes.string.isRequired,
+  /**
+   * A required prop that displays the respective icon associated with the status
+   */
   kind: PropTypes.oneOf([
     'fatal',
     'critical',
@@ -163,6 +172,14 @@ StatusIcon.propTypes = {
     'running',
     'pending',
   ]).isRequired,
+
+  /**
+   * A required prop that displays the size of the icon associate with the status
+   */
   size: PropTypes.oneOf(['small', 'medium', 'large', 'x-large']).isRequired,
+
+  /**
+   * A required prop that displays the theme of the icon associate with the status
+   */
   theme: PropTypes.oneOf(['light', 'dark']).isRequired,
 };

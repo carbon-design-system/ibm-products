@@ -5,32 +5,77 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import React from 'react';
+
+import { pkg, carbon } from '../../settings';
+import '../../utils/enable-all';
+
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { StatusIcon } from '.';
 
-const { name } = StatusIcon;
+const blockClass = `${pkg.prefix}--about-modal`;
+const { componentName } = StatusIcon.displayName;
 
 const testProps = {
-  type: 'fatal',
+  kind: 'fatal',
+  iconDescription: 'fatal',
   size: 'small',
   theme: 'light',
 };
+const className = `class-${uuidv4()}`;
+const renderComponent = ({ ...rest }) => {
+  <StatusIcon
+    {...rest}
+    kind="fatal"
+    iconDescription="fatal"
+    size="small"
+    theme="light"
+  />;
+};
 
-describe(name, () => {
-  test('has no accessibility violations', async () => {
-    const { container } = render(<StatusIcon {...testProps} />);
-    await expect(container).toBeAccessible(name);
+describe(componentName, () => {
+  it('renders a component StatusIcon', () => {
+    renderComponent();
+  });
+
+  it('has no accessibility violations', async () => {
+    const { container } = render(
+      <StatusIcon
+        kind="fatal"
+        iconDescription="fatal"
+        size="small"
+        theme="light"
+      />
+    );
+    await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
+  });
+
+  it('applies className to the root node', () => {
+    const { container } = renderComponent({ className });
+    expect(container.querySelector(`.${blockClass}`)).toHaveClass(className);
+  });
+
+  it('applies the proper className when `kind` prop of `fatal` is passed', () => {
+    const { container } = renderComponent();
+    expect(container.querySelector(`.${blockClass}`)).toHaveClass(
+      `${blockClass}--light-fatal`
+    );
   });
 
   test('adds a class to the containing node', () => {
     const className = 'className';
-
     expect(
       render(
-        <StatusIcon {...testProps} className={className} />
+        <StatusIcon
+          className={className}
+          kind="fatal"
+          iconDescription="fatal"
+          size="small"
+          theme="light"
+        />
       ).container.querySelector(`.${className}`)
     ).toBeInTheDocument();
   });
@@ -40,7 +85,29 @@ describe(name, () => {
 
     expect(
       render(
-        <StatusIcon {...testProps} data-testid={dataTestId} />
+        <StatusIcon
+          kind="fatal"
+          iconDescription="fatal"
+          size="small"
+          theme="light"
+          data-testid={dataTestId}
+        />
+      ).getByTestId(dataTestId)
+    ).toBeInTheDocument();
+  });
+
+  test('adds type prop to component', () => {
+    const dataTestId = 'dataTestId';
+
+    expect(
+      render(
+        <StatusIcon
+          kind="fatal"
+          iconDescription="fatal"
+          size="small"
+          theme="light"
+          data-testid={dataTestId}
+        />
       ).getByTestId(dataTestId)
     ).toBeInTheDocument();
   });

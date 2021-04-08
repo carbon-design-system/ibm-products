@@ -93,6 +93,9 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
   }
 
   .#{$block-class}__container {
+    --#{$block-class}--subtitle-opacity: 1;
+    --#{$block-class}--title-font-size: 1.25rem;
+
     position: fixed;
     top: $spacing-09;
     z-index: 3;
@@ -145,15 +148,7 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     }
     &.#{$block-class}__with-condensed-header {
       .#{$block-class}__title-text {
-        @include carbon--type-style('productive-heading-02');
-      }
-      .#{$block-class}__subtitle-text,
-      .#{$block-class}__action-toolbar {
-        // stylelint-disable-next-line carbon/layout-token-use
-        transform: translateY(-3rem);
-      }
-      .#{$block-class}__subtitle-text {
-        opacity: 0;
+        @include carbon--font-weight('semibold');
       }
       .#{$block-class}__title-container {
         border-bottom: 1px solid $decorative-01;
@@ -183,6 +178,8 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       margin-bottom: $spacing-03;
       padding-right: $spacing-07;
       overflow: hidden;
+      // stylelint-disable-next-line carbon/type-token-use
+      font-size: var(--#{$block-class}--title-font-size);
       background-color: $ui-01;
       transition: font-size $duration--moderate-01,
         font-weight $duration--moderate-02;
@@ -196,8 +193,7 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
 
       padding: 0 $spacing-05 $spacing-05 $spacing-05;
       overflow: hidden;
-      transition: transform $duration--slow-01, opacity $duration--slow-02;
-      transition-timing-function: carbon--motion(standard);
+      opacity: var(--#{$block-class}--subtitle-opacity);
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
     }
@@ -207,7 +203,7 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     .#{$block-class}__action-toolbar {
       position: sticky;
       // stylelint-disable-next-line carbon/layout-token-use
-      top: 6.75rem;
+      top: 3.75rem;
       z-index: 4;
       display: flex;
       align-items: center;

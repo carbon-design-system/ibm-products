@@ -91,24 +91,54 @@ export let SidePanel = React.forwardRef(
       }
     }, [selectorPrimaryFocus, open, animationComplete]);
 
-    // Title animaton
+    // Title and subtitle animaton
     useEffect(() => {
       if (open && animateTitle && animationComplete) {
         const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
+        const sidePanelSutitleElement = document.querySelector(
+          `.${`${blockClass}__subtitle-text`}`
+        );
         sidePanelOuter &&
           sidePanelOuter.addEventListener('scroll', () => {
             const scrollTop = sidePanelRef.current.scrollTop;
-            const scrollBottom =
-              sidePanelRef.current.scrollHeight -
-              document.documentElement.clientHeight;
-            let scrollPercent = (scrollTop / scrollBottom) * 100;
-            if (Math.round(scrollPercent) > 0) {
+            if (scrollTop > 0) {
               sidePanelOuter.classList.add(
                 `${blockClass}__with-condensed-header`
               );
-            } else if (Math.round(scrollPercent) === 0) {
+              // set subtitle opacity calculation here
+              sidePanelOuter.style.setProperty(
+                `--${blockClass}--subtitle-opacity`,
+                `${Math.min(
+                  1,
+                  (sidePanelSutitleElement.offsetHeight - scrollTop) /
+                    sidePanelSutitleElement.offsetHeight
+                )}`
+              );
+              // set title font size here, previously this was done
+              // via a class addition, however, it is choppier that
+              // way, using css variables allows for a smoother animation
+              // to the title font size
+              let fontSize = Math.min(
+                (sidePanelSutitleElement.offsetHeight - scrollTop) /
+                  sidePanelSutitleElement.offsetHeight +
+                  0.25
+              );
+              fontSize = fontSize < 1 ? 1 : fontSize;
+              sidePanelOuter.style.setProperty(
+                `--${blockClass}--title-font-size`,
+                `${fontSize}rem`
+              );
+            } else {
               sidePanelOuter.classList.remove(
                 `${blockClass}__with-condensed-header`
+              );
+              sidePanelOuter.style.setProperty(
+                `--${blockClass}--subtitle-opacity`,
+                1
+              );
+              sidePanelOuter.style.setProperty(
+                `--${blockClass}--title-font-size`,
+                '1.25rem'
               );
             }
           });

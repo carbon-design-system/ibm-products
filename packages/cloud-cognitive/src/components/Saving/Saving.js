@@ -7,13 +7,12 @@
 
 import React from 'react';
 import cx from 'classnames';
-import { Button } from 'carbon-components-react';
+import { Button, InlineLoading } from 'carbon-components-react';
 import {
   Save16,
   CheckmarkOutline16,
   ErrorOutline16,
   ErrorFilled16,
-  InProgress16,
 } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
@@ -40,7 +39,7 @@ export let Saving = ({
 
   const getStatusIcon = () => {
     if (status === 'default') return CheckmarkOutline16;
-    else if (status === 'inprogress') return InProgress16;
+    else if (status === 'inprogress') return InlineLoading;
     else if (status === 'success') return Save16;
     return ErrorOutline16;
   };

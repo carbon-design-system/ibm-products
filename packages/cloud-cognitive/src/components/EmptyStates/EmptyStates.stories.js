@@ -13,17 +13,21 @@ import '../../utils/enable-all'; // must come before component is imported (dire
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 import mdx from './EmptyState.mdx';
-const storybookPrefix = getStorybookPrefix(pkg, 'EmptyStates');
 
-import { EmptyState } from '.';
-import { ErrorEmptyState } from './ErrorEmptyState';
-import { NoDataEmptyState } from './NoDataEmptyState';
-import { NoTagsEmptyState } from './NoTagsEmptyState';
-import { NotFoundEmptyState } from './NotFoundEmptyState';
-import { NotificationsEmptyState } from './NotificationsEmptyState';
-import { UnauthorizedEmptyState } from './UnauthorizedEmptyState';
+import {
+  EmptyState,
+  ErrorEmptyState,
+  NoDataEmptyState,
+  NoTagsEmptyState,
+  NotFoundEmptyState,
+  NotificationsEmptyState,
+  UnauthorizedEmptyState,
+} from '.';
 
 import styles from './_storybook-styles.scss';
+
+const storybookPrefix = getStorybookPrefix(pkg, EmptyState.displayName);
+console.log(EmptyState.displayName, storybookPrefix);
 
 export default {
   title: `${storybookPrefix}/EmptyStates/EmptyState`,

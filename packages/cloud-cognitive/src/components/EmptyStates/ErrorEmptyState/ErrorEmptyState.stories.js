@@ -12,14 +12,15 @@ import '../../../utils/enable-all'; // must come before component is imported (d
 import mdx from './ErrorEmptyState.mdx';
 import { pkg } from '../../../settings';
 import { getStorybookPrefix } from '../../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, 'EmptyStates');
 
 import { ErrorEmptyState } from '.';
 
 import styles from '../_index.scss';
 
+const storybookPrefix = getStorybookPrefix(pkg, ErrorEmptyState.displayName);
+
 export default {
-  title: `${storybookPrefix}/EmptyStates/ErrorEmptyState`,
+  title: `${storybookPrefix}/EmptyStates/${ErrorEmptyState.displayName}`,
   component: ErrorEmptyState,
   parameters: {
     styles,

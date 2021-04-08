@@ -31,7 +31,12 @@ describe(name, () => {
       if (key.startsWith('ComboButton')) continue;
 
       if (!pkg.isComponentEnabled(key)) {
-        // We check that unreleased components render a Canary.
+        // We check that exported components are listed in package settings.
+        it(`has a component flag in package settings for "${key}"`, () => {
+          expect(pkg.isComponentPublic(key)).toBeTruthy();
+        });
+
+        // We check that unreleased public components render a Canary.
         // Non-canary components are tested elsewhere.
         it(`renders a canary by default for "${key}"`, () => {
           const { container } = render(<TestComponent />);

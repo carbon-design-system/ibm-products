@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2020
+// Copyright IBM Corp. 2020, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -10,7 +10,6 @@
 $carbon-prefix: side-panel-stories__;
 
 .side-panel-stories__body-content {
-  @include carbon--theme($carbon--theme--white, true);
   .#{$carbon-prefix}text-inputs {
     display: flex;
     margin: $spacing-05 0;
@@ -35,8 +34,5 @@ $carbon-prefix: side-panel-stories__;
   }
   .#{$carbon-prefix}content-subtitle {
     margin: $spacing-05 0 $spacing-04;
-  }
-  &.#{$carbon-prefix}body-content-dark-theme {
-    @include carbon--theme($carbon--theme--g90, true);
   }
 }

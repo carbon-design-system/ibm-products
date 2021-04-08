@@ -14,6 +14,8 @@ import '../../utils/enable-all'; // must come before component is imported (dire
 import { SidePanel } from '.';
 
 const blockClass = `${pkg.prefix}--side-panel`;
+const actionSetBlockClass = `${pkg.prefix}--action-set`;
+
 const dataTestId = uuidv4();
 
 const renderSidePanel = ({ ...rest }, children) =>
@@ -79,7 +81,7 @@ describe('SidePanel', () => {
   it('should render an extra small side panel', () => {
     const { container } = renderSidePanel(
       {
-        size: 'extraSmall',
+        size: 'xs',
       },
       'content'
     );
@@ -92,7 +94,7 @@ describe('SidePanel', () => {
   it('should render a small side panel', () => {
     const { container } = renderSidePanel(
       {
-        size: 'small',
+        size: 'sm',
       },
       'content'
     );
@@ -113,7 +115,7 @@ describe('SidePanel', () => {
   it('should render a large side panel', () => {
     const { container } = renderSidePanel(
       {
-        size: 'large',
+        size: 'lg',
       },
       'content'
     );
@@ -160,10 +162,10 @@ describe('SidePanel', () => {
   it('should render one primary action button', () => {
     renderSidePanel(
       {
-        primaryActions: [
+        actions: [
           {
             label: 'Primary button',
-            onPrimaryActionClick: () => {},
+            onClick: () => {},
             kind: 'primary',
           },
         ],
@@ -177,15 +179,15 @@ describe('SidePanel', () => {
   it('should render two action buttons', () => {
     renderSidePanel(
       {
-        primaryActions: [
+        actions: [
           {
             label: 'Action button',
-            onPrimaryActionClick: () => {},
+            onClick: () => {},
             kind: 'primary',
           },
           {
             label: 'Action button',
-            onPrimaryActionClick: () => {},
+            onClick: () => {},
             kind: 'secondary',
           },
         ],
@@ -199,10 +201,10 @@ describe('SidePanel', () => {
   it('should render a single ghost action button', () => {
     const { container } = renderSidePanel(
       {
-        primaryActions: [
+        actions: [
           {
             label: 'Ghost action button',
-            onPrimaryActionClick: () => {},
+            onClick: () => {},
             kind: 'ghost',
           },
         ],
@@ -210,7 +212,7 @@ describe('SidePanel', () => {
       'content'
     );
     const sidePanelOuter = container.querySelector(
-      `.${blockClass}__ghost-button`
+      `.${actionSetBlockClass}__ghost-button`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
@@ -219,10 +221,10 @@ describe('SidePanel', () => {
     renderSidePanel(
       {
         condensed: true,
-        primaryActions: [
+        actions: [
           {
             label: 'Primary button',
-            onPrimaryActionClick: () => {},
+            onClick: () => {},
           },
         ],
       },
@@ -230,8 +232,8 @@ describe('SidePanel', () => {
     );
     const sidePanelAction = screen.getByText(/Primary button/i);
     expect(
-      sidePanelAction.classList.contains(
-        `${blockClass}__primary-action-button-condensed`
+      sidePanelAction.parentElement.classList.contains(
+        `${blockClass}__actions-container-condensed`
       )
     ).toBeTruthy();
   });
@@ -270,13 +272,13 @@ describe('SidePanel', () => {
   it('should click the primary action button', () => {
     const { fn } = jest;
     const { click } = fireEvent;
-    const onPrimaryActionClick = fn();
+    const onClick = fn();
     renderSidePanel(
       {
-        primaryActions: [
+        actions: [
           {
             label: 'Primary button',
-            onPrimaryActionClick,
+            onClick,
           },
         ],
       },
@@ -284,7 +286,7 @@ describe('SidePanel', () => {
     );
     const sidePanelAction = screen.getByText(/Primary button/i);
     click(sidePanelAction);
-    expect(onPrimaryActionClick).toBeCalled();
+    expect(onClick).toBeCalled();
   });
 
   it('adds additional properties to the containing node', () => {

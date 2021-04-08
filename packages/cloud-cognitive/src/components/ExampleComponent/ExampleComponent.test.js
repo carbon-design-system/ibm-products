@@ -94,7 +94,7 @@ describe(componentName, () => {
   it('renders the primaryKind and secondaryKind properties', () => {
     renderComponent({ primaryKind: 'danger', secondaryKind: 'tertiary' });
     expect(
-      screen.getByRole('button', { name: primaryButtonLabel })
+      screen.getByRole('button', { name: `danger ${primaryButtonLabel}` })
     ).toHaveClass('bx--btn--danger');
     expect(
       screen.getByRole('button', { name: secondaryButtonLabel })

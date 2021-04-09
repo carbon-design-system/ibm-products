@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.33.16](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.33.15...@carbon/ibm-cloud-cognitive-experimental@0.33.16) (2021-04-08)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
+## [0.33.15](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.33.14...@carbon/ibm-cloud-cognitive-experimental@0.33.15) (2021-04-08)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
 ## [0.33.14](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.33.13...@carbon/ibm-cloud-cognitive-experimental@0.33.14) (2021-04-07)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental

@@ -53,83 +53,75 @@ import { pkg } from '../../settings';
 
 const icons = {
   fatal: {
-    small: Misuse16,
-    medium: Misuse20,
-    large: Misuse24,
-    'x-large': Misuse32,
+    sm: Misuse16,
+    md: Misuse20,
+    lg: Misuse24,
+    xlg: Misuse32,
   },
   critical: {
-    small: ErrorFilled16,
-    medium: ErrorFilled20,
-    large: ErrorFilled24,
-    'x-large': ErrorFilled32,
+    sm: ErrorFilled16,
+    md: ErrorFilled20,
+    lg: ErrorFilled24,
+    xlg: ErrorFilled32,
   },
   'major-warning': {
-    small: WarningAltInvertedFilled16,
-    medium: WarningAltInvertedFilled20,
-    large: WarningAltInvertedFilled24,
-    'x-large': WarningAltInvertedFilled32,
+    sm: WarningAltInvertedFilled16,
+    md: WarningAltInvertedFilled20,
+    lg: WarningAltInvertedFilled24,
+    xlg: WarningAltInvertedFilled32,
   },
   'minor-warning': {
-    small: WarningAltFilled16,
-    medium: WarningAltFilled20,
-    large: WarningAltFilled24,
-    'x-large': WarningAltFilled32,
+    sm: WarningAltFilled16,
+    md: WarningAltFilled20,
+    lg: WarningAltFilled24,
+    xlg: WarningAltFilled32,
   },
   undefined: {
-    small: UndefinedFilled16,
-    medium: UndefinedFilled20,
-    large: UndefinedFilled24,
-    'x-large': UndefinedFilled32,
+    sm: UndefinedFilled16,
+    md: UndefinedFilled20,
+    lg: UndefinedFilled24,
+    xlg: UndefinedFilled32,
   },
   unknown: {
-    small: UnknownFilled16,
-    medium: UnknownFilled20,
-    large: UnknownFilled24,
-    'x-large': UnknownFilled32,
+    sm: UnknownFilled16,
+    md: UnknownFilled20,
+    lg: UnknownFilled24,
+    xlg: UnknownFilled32,
   },
   normal: {
-    small: CheckmarkFilled16,
-    medium: CheckmarkFilled20,
-    large: CheckmarkFilled24,
-    'x-large': CheckmarkFilled32,
+    sm: CheckmarkFilled16,
+    md: CheckmarkFilled20,
+    lg: CheckmarkFilled24,
+    xlg: CheckmarkFilled32,
   },
   info: {
-    small: InformationSquareFilled16,
-    medium: InformationSquareFilled20,
-    large: InformationSquareFilled24,
-    'x-large': InformationSquareFilled32,
+    sm: InformationSquareFilled16,
+    md: InformationSquareFilled20,
+    lg: InformationSquareFilled24,
+    xlg: InformationSquareFilled32,
   },
   'in-progress': {
-    small: Renew16,
-    medium: Renew20,
-    large: Renew24,
-    'x-large': Renew32,
+    sm: Renew16,
+    md: Renew20,
+    lg: Renew24,
+    xlg: Renew32,
   },
   running: {
-    small: Renew16,
-    medium: Renew20,
-    large: Renew24,
-    'x-large': Renew32,
+    sm: Renew16,
+    md: Renew20,
+    lg: Renew24,
+    xlg: Renew32,
   },
   pending: {
-    small: Time16,
-    medium: Time20,
-    large: Time24,
-    'x-large': Time32,
+    sm: Time16,
+    md: Time20,
+    lg: Time24,
+    xlg: Time32,
   },
 };
 
 const blockClass = `${pkg.prefix}--status-icon`;
 const componentName = 'StatusIcon';
-
-const isValidIconDescription = () => (props) => {
-  if (props.iconDescription.toLowerCase() != props.kind) {
-    throw new Error(
-      'The "icon description" prop must match the status icon "kind" prop'
-    );
-  } else return;
-};
 
 export let StatusIcon = React.forwardRef(
   ({ kind, theme, size, className, iconDescription, ...rest }, ref) => {
@@ -161,9 +153,9 @@ StatusIcon.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * A required prop that provides a description of the icon for accessibility purposes. This string *MUST* match the string that is provided to the "kind" prop
+   * A required prop that provides a description of the icon for accessibility purposes
    */
-  iconDescription: isValidIconDescription(),
+  iconDescription: PropTypes.string.isRequired,
   /**
    * A required prop that displays the respective icon associated with the status
    */
@@ -184,7 +176,7 @@ StatusIcon.propTypes = {
   /**
    * A required prop that displays the size of the icon associate with the status
    */
-  size: PropTypes.oneOf(['small', 'medium', 'large', 'x-large']).isRequired,
+  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xlg']).isRequired,
 
   /**
    * A required prop that displays the theme of the icon associate with the status

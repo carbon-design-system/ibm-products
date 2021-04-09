@@ -19,10 +19,10 @@ const blockClass = `${pkg.prefix}--status-icon`;
 const { componentName } = StatusIcon.displayName;
 const className = `class-${uuidv4()}`;
 const iconSizes = [
-  { input: 'small', output: '16' },
-  { input: 'medium', output: '20' },
-  { input: 'large', output: '24' },
-  { input: 'x-large', output: '32' },
+  { input: 'sm', output: '16' },
+  { input: 'md', output: '20' },
+  { input: 'lg', output: '24' },
+  { input: 'xlg', output: '32' },
 ];
 
 const iconTypes = [
@@ -48,7 +48,7 @@ describe(componentName, () => {
         className={className}
         kind="fatal"
         iconDescription="fatal"
-        size="small"
+        size="sm"
         theme="light"
       />
     );
@@ -60,7 +60,7 @@ describe(componentName, () => {
       <StatusIcon
         kind="fatal"
         iconDescription="fatal"
-        size="small"
+        size="sm"
         theme="light"
       />
     );
@@ -75,7 +75,7 @@ describe(componentName, () => {
         className={className}
         kind="fatal"
         iconDescription="fatal"
-        size="small"
+        size="sm"
         theme="light"
       />
     );
@@ -88,7 +88,7 @@ describe(componentName, () => {
         <StatusIcon
           kind={kind}
           iconDescription={kind}
-          size="small"
+          size="sm"
           theme="light"
         />
       );
@@ -106,7 +106,7 @@ describe(componentName, () => {
         <StatusIcon
           kind={desc}
           iconDescription={desc}
-          size="small"
+          size="sm"
           theme="light"
         />
       );
@@ -124,7 +124,7 @@ describe(componentName, () => {
         <StatusIcon
           kind="fatal"
           iconDescription="fatal"
-          size="small"
+          size="sm"
           theme={theme}
         />
       );

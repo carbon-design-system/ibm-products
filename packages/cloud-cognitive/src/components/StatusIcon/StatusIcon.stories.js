@@ -39,7 +39,7 @@ export default {
     size: {
       control: {
         type: 'select',
-        options: ['small', 'medium', 'large', 'x-large'],
+        options: ['sm', 'md', 'lg', 'xlg'],
       },
     },
     theme: {
@@ -59,9 +59,9 @@ export default {
 
 const defaultProps = {
   kind: 'fatal',
-  size: 'small',
+  size: 'sm',
   theme: 'light',
-  iconDescription: 'fatal',
+  iconDescription: 'fatal icon',
 };
 
 const Template = (args) => {

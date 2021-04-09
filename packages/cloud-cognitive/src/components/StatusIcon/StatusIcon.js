@@ -135,7 +135,7 @@ export let StatusIcon = React.forwardRef(
   ({ kind, theme, size, className, iconDescription, ...rest }, ref) => {
     const IconComponent = icons[kind]?.[size];
 
-    const classNames = cx(className, `${blockClass}--${theme}`, {
+    const classNames = cx(className, blockClass, `${blockClass}--${theme}`, {
       [`${blockClass}--${theme}-${kind}`]: kind,
     });
 

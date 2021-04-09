@@ -103,7 +103,8 @@ LabelOnly.args = {
   ...defaultProps,
   title: '',
   label: 'Label',
-  actionIcons: [],
+  actionIconsPosition: 'bottom',
+  primaryButtonText: 'Ghost button',
 };
 
 export const WithOverflow = Template.bind({});
@@ -123,8 +124,8 @@ WithOverflow.args = {
   ],
 };
 
-export const WithBottomBar = Template.bind({});
-WithBottomBar.args = {
+export const SupplementalBottomBar = Template.bind({});
+SupplementalBottomBar.args = {
   ...defaultProps,
   primaryButtonText: 'Ghost button',
 };

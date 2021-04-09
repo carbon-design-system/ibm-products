@@ -93,6 +93,7 @@ Array [
             data-ui-id="custom"
           >
             <Button
+              dangerDescription="danger"
               disabled={false}
               kind="primary"
               size="default"

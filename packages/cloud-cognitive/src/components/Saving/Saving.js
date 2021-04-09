@@ -21,12 +21,16 @@ const componentName = 'Saving';
 export let Saving = ({
   cancelButtonText,
   className,
+  defaultIconDescription,
   defaultText,
+  failIconDescription,
   failText,
+  inProgressIconDescription,
   inProgressText,
   onCancel,
   onSave,
   status,
+  successIconDescription,
   successText,
   type,
 }) => {
@@ -42,6 +46,13 @@ export let Saving = ({
     else if (status === 'inprogress') return InlineLoading;
     else if (status === 'success') return Save16;
     return ErrorOutline16;
+  };
+
+  const getIconDescription = () => {
+    if (status === 'default') return defaultIconDescription;
+    else if (status === 'inprogress') return inProgressIconDescription;
+    else if (status === 'success') return successIconDescription;
+    return failIconDescription;
   };
 
   const classnames = cx(`${pkg.prefix}-saving`, {
@@ -71,6 +82,7 @@ export let Saving = ({
             onClick={onSave}
             kind="primary"
             renderIcon={getStatusIcon()}
+            iconDescription={getIconDescription()}
             disabled={status === 'inprogress'}>
             {getStatusText()}
           </Button>
@@ -84,7 +96,7 @@ Saving = pkg.checkComponentEnabled(Saving, componentName);
 
 Saving.propTypes = {
   /**
-   * Text for the cancel button
+   * Text for the cancel button (manual).
    */
   cancelButtonText: PropTypes.string,
   /**
@@ -92,51 +104,51 @@ Saving.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Icon for default state
+   * Description for default state icon (manual).
    */
-  defaultIcon: PropTypes.object,
+  defaultIconDescription: PropTypes.string,
   /**
-   * Text for default state
+   * Default text for the save button (manual). Per design guidelines you probably don't want to display this in the auto mode.
    */
   defaultText: PropTypes.string,
   /**
-   * Icon for failure state
+   * Description for fail state icon (manual).
    */
-  failIcon: PropTypes.object,
+  failIconDescription: PropTypes.string,
   /**
-   * Text for failure state
+   * Text for failure state.
    */
   failText: PropTypes.string,
   /**
-   * Icon for in progress state
+   * Description for in progress state icon (manual).
    */
-  inProgressIcon: PropTypes.object,
+  inProgressIconDescription: PropTypes.string,
   /**
-   * Text for in progress state
+   * Text for in progress state.
    */
   inProgressText: PropTypes.string,
   /**
-   * Function handler for cancel button
+   * Function handler for cancel button (manual).
    */
   onCancel: PropTypes.func,
   /**
-   * Function handler for save button
+   * Function handler for save button (manual).
    */
   onSave: PropTypes.func,
   /**
-   * Save state
+   * The save state.
    */
   status: PropTypes.oneOf(['default', 'inprogress', 'success', 'fail']),
   /**
-   * Icon for success state
+   * Description for success state icon (manual).
    */
-  successIcon: PropTypes.object,
+  successIconDescription: PropTypes.string,
   /**
    * Text for success state
    */
   successText: PropTypes.string,
   /**
-   * Design style. See usage guidelines for additional information
+   * Designates the style of the save component. Manual uses a set of buttons and auto just displays a string. See usage guidelines for additional information.
    */
   type: PropTypes.oneOf(['manual', 'auto']),
 };

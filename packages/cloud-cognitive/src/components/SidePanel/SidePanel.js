@@ -174,6 +174,7 @@ export let SidePanel = React.forwardRef(
       if (!open) setRender(false);
       if (sidePanelRef && sidePanelRef.current) {
         sidePanelRef.current.style.overflow = 'auto';
+        sidePanelRef.current.style.overflowX = 'hidden';
       }
       setAnimationComplete(true);
     };
@@ -302,7 +303,9 @@ export let SidePanel = React.forwardRef(
             className={`${blockClass}__visually-hidden`}>
             Focus sentinel
           </span>
-          <div ref={sidePanelInnerRef}>
+          <div
+            ref={sidePanelInnerRef}
+            className={`${blockClass}__inner-content`}>
             <div className={`${blockClass}__title-container`}>
               {currentStep > 0 && (
                 <Button

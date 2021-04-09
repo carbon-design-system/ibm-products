@@ -103,7 +103,6 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     min-width: $medium-panel-size; // set default panel size
     max-width: $medium-panel-size; // set default panel size
     height: calc(100% - 3rem);
-    overflow: auto;
     color: $text-01;
     background-color: $ui-01;
     transition: transform $duration--moderate-02;
@@ -242,10 +241,13 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     .#{$block-class}__body-content {
       padding: $spacing-05;
       padding-top: 0;
-      padding-bottom: $layout-07;
+      padding-bottom: $spacing-12;
+    }
+    .#{$block-class}__inner-content {
+      height: calc(100vh - 3rem);
     }
     .#{$block-class}__actions-container {
-      position: sticky;
+      position: fixed;
       bottom: 0;
       height: $layout-05;
       background-color: $ui-01;
@@ -253,13 +255,13 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       &.#{$action-set-block-class}--xs {
         @include setActionBarSize($extra-small-panel-size);
       }
-      &.#{$action-set-block-class}__sm {
+      &.#{$action-set-block-class}--sm {
         @include setActionBarSize($small-panel-size);
       }
-      &.#{$action-set-block-class}__md {
+      &.#{$action-set-block-class}--md {
         @include setActionBarSize($medium-panel-size);
       }
-      &.#{$action-set-block-class}__lg {
+      &.#{$action-set-block-class}--lg {
         @include setActionBarSize($large-panel-size);
       }
       &.#{$block-class}__actions-container-condensed {

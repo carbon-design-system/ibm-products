@@ -95,7 +95,7 @@ export let SidePanel = React.forwardRef(
     useEffect(() => {
       if (open && animateTitle && animationComplete) {
         const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
-        const sidePanelSutitleElement = document.querySelector(
+        const sidePanelSubtitleElement = document.querySelector(
           `.${`${blockClass}__subtitle-text`}`
         );
         sidePanelOuter &&
@@ -110,8 +110,8 @@ export let SidePanel = React.forwardRef(
                 `--${blockClass}--subtitle-opacity`,
                 `${Math.min(
                   1,
-                  (sidePanelSutitleElement.offsetHeight - scrollTop) /
-                    sidePanelSutitleElement.offsetHeight
+                  (sidePanelSubtitleElement.offsetHeight - scrollTop) /
+                    sidePanelSubtitleElement.offsetHeight
                 )}`
               );
               // set title font size here, previously this was done
@@ -119,8 +119,8 @@ export let SidePanel = React.forwardRef(
               // way, using css variables allows for a smoother animation
               // to the title font size
               let fontSize = Math.min(
-                (sidePanelSutitleElement.offsetHeight - scrollTop) /
-                  sidePanelSutitleElement.offsetHeight +
+                (sidePanelSubtitleElement.offsetHeight - scrollTop) /
+                  sidePanelSubtitleElement.offsetHeight +
                   0.25
               );
               fontSize = fontSize < 1 ? 1 : fontSize;

@@ -155,7 +155,19 @@ StatusIcon.propTypes = {
   /**
    * A required prop that provides a description of the icon for accessibility purposes. This string *MUST* match the string that is provided to the "kind" prop
    */
-  iconDescription: PropTypes.string.isRequired,
+  iconDescription: PropTypes.oneOf([
+    'fatal',
+    'critical',
+    'major-warning',
+    'minor-warning',
+    'undefined',
+    'unknown',
+    'normal',
+    'info',
+    'in-progress',
+    'running',
+    'pending',
+  ]).isRequired,
   /**
    * A required prop that displays the respective icon associated with the status
    */

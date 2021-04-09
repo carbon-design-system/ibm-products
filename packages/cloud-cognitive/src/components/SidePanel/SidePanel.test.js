@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2020
+ * Copyright IBM Corp. 2020, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,127 +9,136 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import React from 'react';
 import { pkg } from '../../settings';
+import uuidv4 from '../../global/js/utils/uuidv4';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { SidePanel } from '.';
 
+const blockClass = `${pkg.prefix}--side-panel`;
+const actionSetBlockClass = `${pkg.prefix}--action-set`;
+
+const dataTestId = uuidv4();
+
+const renderSidePanel = ({ ...rest }, children) =>
+  render(
+    <SidePanel
+      {...{
+        open: true,
+        setOpen: () => {},
+        ...rest,
+      }}>
+      {children}
+    </SidePanel>
+  );
+
 describe('SidePanel', () => {
-  test('renders the side panel', () => {
-    render(
-      <SidePanel setOpen={() => {}} open titleText="Test side panel">
-        Body content
-      </SidePanel>
+  it('renders the side panel', () => {
+    renderSidePanel(
+      {
+        titleText: 'Test side panel',
+      },
+      'content'
     );
     expect(screen.queryAllByText(/Test side panel/i)).toBeTruthy();
   });
 
-  test('should render a side panel with an overlay', () => {
-    const { container } = render(
-      <SidePanel open includeOverlay setOpen={() => {}}>
-        Content
-      </SidePanel>
+  it('should render a side panel with an overlay', () => {
+    const { container } = renderSidePanel(
+      {
+        includeOverlay: true,
+      },
+      'content'
     );
-    const overlayElement = container.querySelector(
-      `.${pkg.prefix}-side-panel-overlay`
-    );
+    const overlayElement = container.querySelector(`.${blockClass}__overlay`);
     expect(overlayElement).toBeTruthy();
   });
 
-  test('should render a side panel from the right', () => {
-    const { container } = render(
-      <SidePanel open setOpen={() => {}} placement="right">
-        Content
-      </SidePanel>
+  it('should render a side panel from the right', () => {
+    const { container } = renderSidePanel(
+      {
+        placement: 'right',
+      },
+      'content'
     );
     const sidePanelOuter = container.querySelector(
-      `.${pkg.prefix}-side-panel-container-right-placement`
+      `.${blockClass}__container-right-placement`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
 
-  test('should render a side panel from the left', () => {
-    const { container } = render(
-      <SidePanel open setOpen={() => {}} placement="left">
-        Content
-      </SidePanel>
+  it('should render a side panel from the left', () => {
+    const { container } = renderSidePanel(
+      {
+        placement: 'left',
+      },
+      'content'
     );
     const sidePanelOuter = container.querySelector(
-      `.${pkg.prefix}-side-panel-container-left-placement`
-    );
-    expect(sidePanelOuter).toBeTruthy();
-  });
-  test('should render a side panel from the left', () => {
-    const { container } = render(
-      <SidePanel open setOpen={() => {}} placement="left">
-        Content
-      </SidePanel>
-    );
-    const sidePanelOuter = container.querySelector(
-      `.${pkg.prefix}-side-panel-container-left-placement`
+      `.${blockClass}__container-left-placement`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
 
-  test('should render an extra small side panel', () => {
-    const { container } = render(
-      <SidePanel open setOpen={() => {}} size="extraSmall">
-        Content
-      </SidePanel>
+  it('should render an extra small side panel', () => {
+    const { container } = renderSidePanel(
+      {
+        size: 'xs',
+      },
+      'content'
     );
     const sidePanelOuter = container.querySelector(
-      `.${pkg.prefix}-side-panel-container--extra-small`
+      `.${blockClass}__container--extra-small`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
 
-  test('should render a small side panel', () => {
-    const { container } = render(
-      <SidePanel open setOpen={() => {}} size="small">
-        Content
-      </SidePanel>
+  it('should render a small side panel', () => {
+    const { container } = renderSidePanel(
+      {
+        size: 'sm',
+      },
+      'content'
     );
     const sidePanelOuter = container.querySelector(
-      `.${pkg.prefix}-side-panel-container--small`
+      `.${blockClass}__container--small`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
 
-  test('should render a medium side panel', () => {
-    const { container } = render(
-      <SidePanel open setOpen={() => {}}>
-        Content
-      </SidePanel>
-    );
+  it('should render a medium side panel', () => {
+    const { container } = renderSidePanel({}, 'content');
     const sidePanelOuter = container.querySelector(
-      `.${pkg.prefix}-side-panel-container--medium`
+      `.${blockClass}__container--medium`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
 
-  test('should render a large side panel', () => {
-    const { container } = render(
-      <SidePanel open setOpen={() => {}} size="large">
-        Content
-      </SidePanel>
+  it('should render a large side panel', () => {
+    const { container } = renderSidePanel(
+      {
+        size: 'lg',
+      },
+      'content'
     );
     const sidePanelOuter = container.querySelector(
-      `.${pkg.prefix}-side-panel-container--large`
+      `.${blockClass}__container--large`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
 
-  test('should render a max side panel', () => {
-    const { container } = render(
-      <SidePanel open setOpen={() => {}} size="max">
-        Content
-      </SidePanel>
+  it('should render a max side panel', () => {
+    const { container } = renderSidePanel(
+      {
+        size: 'max',
+      },
+      'content'
     );
     const sidePanelOuter = container.querySelector(
-      `.${pkg.prefix}-side-panel-container--max`
+      `.${blockClass}__container--max`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
 
-  test('should render a slide in panel version', () => {
+  it('should render a slide in panel version', () => {
     const { container } = render(
       <div>
         <SidePanel
@@ -150,144 +159,144 @@ describe('SidePanel', () => {
     expect(style.marginRight).toBe('30rem');
   });
 
-  test('should render one primary action button', () => {
-    render(
-      <SidePanel
-        open
-        setOpen={() => {}}
-        primaryActions={[
+  it('should render one primary action button', () => {
+    renderSidePanel(
+      {
+        actions: [
           {
             label: 'Primary button',
-            onPrimaryActionClick: () => {},
+            onClick: () => {},
             kind: 'primary',
           },
-        ]}>
-        Content
-      </SidePanel>
+        ],
+      },
+      'content'
     );
     const submitButtons = screen.queryAllByText('Primary button');
     expect(submitButtons).toHaveLength(1);
   });
 
-  test('should render two action buttons', () => {
-    render(
-      <SidePanel
-        open
-        setOpen={() => {}}
-        primaryActions={[
+  it('should render two action buttons', () => {
+    renderSidePanel(
+      {
+        actions: [
           {
             label: 'Action button',
-            onPrimaryActionClick: () => {},
+            onClick: () => {},
             kind: 'primary',
           },
           {
             label: 'Action button',
-            onPrimaryActionClick: () => {},
+            onClick: () => {},
             kind: 'secondary',
           },
-        ]}>
-        Content
-      </SidePanel>
+        ],
+      },
+      'content'
     );
     const submitButtons = screen.queryAllByText('Action button');
     expect(submitButtons).toHaveLength(2);
   });
 
-  test('should render a single ghost action button', () => {
-    const { container } = render(
-      <SidePanel
-        open
-        setOpen={() => {}}
-        primaryActions={[
+  it('should render a single ghost action button', () => {
+    const { container } = renderSidePanel(
+      {
+        actions: [
           {
             label: 'Ghost action button',
-            onPrimaryActionClick: () => {},
+            onClick: () => {},
             kind: 'ghost',
           },
-        ]}>
-        Content
-      </SidePanel>
+        ],
+      },
+      'content'
     );
     const sidePanelOuter = container.querySelector(
-      `.${pkg.prefix}-side-panel-ghost-button`
+      `.${actionSetBlockClass}__ghost-button`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
 
-  test('should render a condensed side panel version', () => {
-    render(
-      <SidePanel
-        open
-        setOpen={() => {}}
-        condensed
-        primaryActions={[
+  it('should render a condensed side panel version', () => {
+    renderSidePanel(
+      {
+        condensed: true,
+        actions: [
           {
             label: 'Primary button',
-            onPrimaryActionClick: () => {},
+            onClick: () => {},
           },
-        ]}>
-        Content
-      </SidePanel>
+        ],
+      },
+      'content'
     );
     const sidePanelAction = screen.getByText(/Primary button/i);
     expect(
-      sidePanelAction.classList.contains(
-        `${pkg.prefix}-side-panel-primary-action-button-condensed`
+      sidePanelAction.parentElement.classList.contains(
+        `${blockClass}__actions-container-condensed`
       )
     ).toBeTruthy();
   });
 
-  test('should render navigation button', () => {
-    const { container } = render(
-      <SidePanel open setOpen={() => {}} currentStep={1}>
-        Content
-      </SidePanel>
+  it('should render navigation button', () => {
+    const { container } = renderSidePanel(
+      {
+        currentStep: 1,
+      },
+      'content'
     );
     const navigationAction = container.querySelector(
-      `.${pkg.prefix}-side-panel-navigation-back-button`
+      `.${blockClass}__navigation-back-button`
     );
     expect(navigationAction).toBeTruthy();
   });
 
-  test('should click the navigation button', () => {
+  it('should click the navigation button', () => {
     const { fn } = jest;
     const { click } = fireEvent;
     const onNavigationBack = fn();
-    const { container } = render(
-      <SidePanel
-        open
-        setOpen={() => {}}
-        currentStep={1}
-        onNavigationBack={onNavigationBack}>
-        Content
-      </SidePanel>
+    const { container } = renderSidePanel(
+      {
+        currentStep: 1,
+        onNavigationBack: onNavigationBack,
+      },
+      'content'
     );
     const navigationAction = container.querySelector(
-      `.${pkg.prefix}-side-panel-navigation-back-button`
+      `.${blockClass}__navigation-back-button`
     );
     click(navigationAction);
     expect(onNavigationBack).toBeCalled();
   });
 
-  test('should click the primary action button', () => {
+  it('should click the primary action button', () => {
     const { fn } = jest;
     const { click } = fireEvent;
-    const onPrimaryActionClick = fn();
-    render(
-      <SidePanel
-        open
-        setOpen={() => {}}
-        primaryActions={[
+    const onClick = fn();
+    renderSidePanel(
+      {
+        actions: [
           {
             label: 'Primary button',
-            onPrimaryActionClick,
+            onClick,
           },
-        ]}>
-        Content
-      </SidePanel>
+        ],
+      },
+      'content'
     );
     const sidePanelAction = screen.getByText(/Primary button/i);
     click(sidePanelAction);
-    expect(onPrimaryActionClick).toBeCalled();
+    expect(onClick).toBeCalled();
+  });
+
+  it('adds additional properties to the containing node', () => {
+    renderSidePanel({ 'data-testid': dataTestId }, 'content');
+    screen.getByTestId(dataTestId);
+  });
+
+  it('forwards a ref to an appropriate node', () => {
+    const ref = React.createRef();
+    renderSidePanel({ ref }, 'content');
+    expect(ref.current).toEqual(screen.getByRole('complementary'));
   });
 });

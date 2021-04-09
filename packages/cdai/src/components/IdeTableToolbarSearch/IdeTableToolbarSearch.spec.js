@@ -17,7 +17,7 @@ describe('IdeTableToolbarSearch', () => {
     );
 
     it('Renders as a <div>', () => {
-      expect(wrapper.dive().is('div')).toBe(true);
+      expect(wrapper.dive().dive().is('div')).toBe(true);
     });
 
     it('Should have the correct classes', () => {

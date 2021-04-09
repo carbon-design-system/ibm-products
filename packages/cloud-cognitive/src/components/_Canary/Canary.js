@@ -5,29 +5,35 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import cx from 'classnames';
-import { string } from 'prop-types';
+// Import portions of React that are needed.
 import React from 'react';
-import { CodeSnippet } from 'carbon-components-react';
+
+// Other standard imports.
+import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 // load the package settings direct, because Canary is used by settings.js
 import pkg from '../../global/js/package-settings';
 
+// Carbon and package components we use.
+import { CodeSnippet } from 'carbon-components-react';
+
+// The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}-canary`;
 
 /**
  *  Canary component used when the component requested is not yet production
  */
 export const Canary = (
-  { componentName, className, ...rest } /*, originalArgs*/
+  { className, componentName, ...rest } /*, originalArgs*/
 ) => {
   const instructions = `
-import { pkg } from '@carbon/ibm-cloud-cognitive';
+import { pkg } from '@carbon/ibm-cloud-cognitive/es/settings';
 // NOTE: must happen before component import
 pkg.component.${componentName} = true;
 `;
   return (
-    <div className={cx(blockClass, className)} {...rest}>
+    <div {...rest} className={cx(blockClass, className)}>
       <h2>
         This component <strong>{componentName}</strong> is not ready yet.
       </h2>
@@ -42,7 +48,7 @@ pkg.component.${componentName} = true;
       <p>
         View a live example on{' '}
         <a href="https://codesandbox.io/s/example-component-olif5?file=/src/config.js">
-          codesadnbox
+          codesandbox
         </a>
         .
       </p>
@@ -52,12 +58,8 @@ pkg.component.${componentName} = true;
 
 Canary.propTypes = {
   /** Provide an optional class to be applied to the containing node */
-  className: string,
+  className: PropTypes.string,
 
   /** Name of the component that is not ready yet */
-  componentName: string.isRequired,
-};
-
-Canary.defaultProps = {
-  className: null,
+  componentName: PropTypes.string.isRequired,
 };

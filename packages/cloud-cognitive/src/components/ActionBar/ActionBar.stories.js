@@ -14,7 +14,7 @@ import { pkg } from '../../settings';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
 import { ActionBar, ActionBarItem } from '.';
-const storybookPrefix = getStorybookPrefix(pkg, ActionBar.displayName);
+const storybookPrefix = getStorybookPrefix(pkg, ActionBarItem.displayName);
 
 const blockClass = `${pkg.prefix}--action-bar`;
 
@@ -25,7 +25,7 @@ export default {
   component: ActionBar,
   argTypes: {
     containerWidth: {
-      control: { type: 'range', min: 50, max: 800, step: 10 },
+      control: { type: 'range', min: 20, max: 800, step: 10 },
     },
   },
   decorators: [

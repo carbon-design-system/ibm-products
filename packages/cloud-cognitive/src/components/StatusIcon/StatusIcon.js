@@ -140,7 +140,7 @@ export let StatusIcon = React.forwardRef(
     });
 
     return (
-      <div {...rest} className={(`${blockClass}`, classNames)}>
+      <div {...rest} className={classNames}>
         {IconComponent && (
           <IconComponent className={`${blockClass}__icon`} ref={ref}>
             <title>{iconDescription}</title>

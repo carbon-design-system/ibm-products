@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2020
+ * Copyright IBM Corp. 2020, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,18 +20,19 @@ import { white } from '@carbon/colors';
 import styles from './_storybook-styles.scss';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
+
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
-import { Notifications } from '.';
+import { NotificationsPanel } from '.';
 
 import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, Notifications.displayName);
+const storybookPrefix = getStorybookPrefix(pkg, NotificationsPanel.displayName);
 
-import mdx from './Notifications.mdx';
-import data from './Notifications_data';
+import mdx from './NotificationsPanel.mdx';
+import data from './NotificationsPanel_data';
 
 export default {
-  title: `${storybookPrefix}/${Notifications.displayName}`,
-  component: Notifications,
+  title: `${storybookPrefix}/${NotificationsPanel.displayName}`,
+  component: NotificationsPanel,
   parameters: {
     styles,
     docs: {
@@ -94,11 +95,11 @@ const Template = (args) => {
     <>
       {renderUIShellHeader(open, setOpen)}
       <Button onClick={addNewNotification}>Add new notification</Button>
-      <Notifications
+      <NotificationsPanel
         {...args}
         data={notificationsData}
         open={open}
-        setOpen={setOpen}
+        onClickOutside={() => setOpen(false)}
       />
     </>
   );
@@ -109,7 +110,11 @@ const EmptyNotifications = (args) => {
   return (
     <>
       {renderUIShellHeader(open, setOpen)}
-      <Notifications {...args} open={open} setOpen={setOpen} />
+      <NotificationsPanel
+        {...args}
+        open={open}
+        onClickOutside={() => setOpen(false)}
+      />
     </>
   );
 };

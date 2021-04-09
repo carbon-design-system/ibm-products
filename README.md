@@ -27,9 +27,9 @@ we support!
 | [`@carbon/ibm-cloud-cognitive`](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/cloud-cognitive) | Common UI components |
 
 If you want to try out Carbon for Cloud & Cognitive, you can use
-[CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/master/examples/codesandbox).
+[CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/codesandbox).
 
-[![Edit CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/master/examples/codesandbox)
+[![Edit CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/codesandbox)
 
 ## 📦 Installing IBM Cloud Cognitive
 

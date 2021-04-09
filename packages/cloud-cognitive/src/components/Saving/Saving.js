@@ -34,26 +34,31 @@ export let Saving = ({
   successText,
   type,
 }) => {
-  const getStatusText = () => {
-    if (status === 'default') return defaultText;
-    else if (status === 'inprogress') return inProgressText;
-    else if (status === 'success') return successText;
-    return failText;
+  const getStatusObj = () => {
+    const statusObj = {};
+
+    if (status === 'default') {
+      statusObj.text = defaultText;
+      statusObj.iconDescription = defaultIconDescription;
+      statusObj.icon = CheckmarkOutline16;
+    } else if (status === 'inprogress') {
+      statusObj.text = inProgressText;
+      statusObj.iconDescription = inProgressIconDescription;
+      statusObj.icon = InlineLoading;
+    } else if (status === 'success') {
+      statusObj.text = successText;
+      statusObj.iconDescription = successIconDescription;
+      statusObj.icon = Save16;
+    } else {
+      statusObj.text = failText;
+      statusObj.iconDescription = failIconDescription;
+      statusObj.icon = ErrorOutline16;
+    }
+
+    return statusObj;
   };
 
-  const getStatusIcon = () => {
-    if (status === 'default') return CheckmarkOutline16;
-    else if (status === 'inprogress') return InlineLoading;
-    else if (status === 'success') return Save16;
-    return ErrorOutline16;
-  };
-
-  const getIconDescription = () => {
-    if (status === 'default') return defaultIconDescription;
-    else if (status === 'inprogress') return inProgressIconDescription;
-    else if (status === 'success') return successIconDescription;
-    return failIconDescription;
-  };
+  const statusObj = getStatusObj();
 
   const classnames = cx(`${pkg.prefix}-saving`, {
     [className]: className,
@@ -68,7 +73,7 @@ export let Saving = ({
               <ErrorFilled16 />
             </div>
           )}
-          <p className={`${pkg.prefix}-saving-text`}>{getStatusText()}</p>
+          <p className={`${pkg.prefix}-saving-text`}>{statusObj.text}</p>
         </div>
       ) : (
         <div className={`${pkg.prefix}-saving-buttons`}>
@@ -81,10 +86,10 @@ export let Saving = ({
           <Button
             onClick={onSave}
             kind="primary"
-            renderIcon={getStatusIcon()}
-            iconDescription={getIconDescription()}
+            renderIcon={statusObj.icon}
+            iconDescription={statusObj.iconDescription}
             disabled={status === 'inprogress'}>
-            {getStatusText()}
+            {statusObj.text}
           </Button>
         </div>
       )}

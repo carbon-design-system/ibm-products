@@ -12,18 +12,28 @@ import '../../utils/enable-all'; // must come before component is imported (dire
 import { Saving } from '.';
 
 const { name } = Saving;
+const defaultProps = {
+  defaultText: 'Save',
+  cancelButtonText: 'Cancel',
+  inProgressText: 'Saving...',
+  failText: 'Failed to save',
+  successText: 'Saved',
+  defaultIconDescription: 'Save',
+  inProgressIconDescription: 'Saving...',
+  failIconDescription: 'Failed to save',
+  successIconDescription: 'Saved',
+};
 
 describe(name, () => {
   test('should render', async () => {
-    render(<Saving />);
+    render(<Saving {...defaultProps} />);
   });
 
   test('renders manual type', async () => {
     const onSave = jest.fn();
     const onCancel = jest.fn();
     const props = {
-      defaultText: 'Save',
-      cancelButtonText: 'Cancel',
+      ...defaultProps,
       onSave,
       onCancel,
     };
@@ -34,17 +44,17 @@ describe(name, () => {
     fireEvent.click(getByText(props.cancelButtonText));
     expect(onCancel).not.toBeCalled();
     rerender(<Saving {...props} status="inprogress" />);
+    expect(getByText(props.inProgressText)).toBeVisible();
     fireEvent.click(getByText(props.cancelButtonText));
     expect(onCancel).toBeCalled();
+    rerender(<Saving {...props} status="fail" />);
+    expect(getByText(props.failText)).toBeVisible();
   });
 
   test('renders auto type', async () => {
     const props = {
+      ...defaultProps,
       type: 'auto',
-      defaultText: 'Save',
-      failText: 'Failed to save',
-      inProgressText: 'Saving...',
-      successText: 'Saved',
     };
 
     const { rerender, getByText } = render(<Saving {...props} />);

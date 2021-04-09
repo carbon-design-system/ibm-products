@@ -5,4 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { HTTPErrors } from './HTTPErrors';
+export { HTTPError403 } from './HTTPError403';
+export { HTTPError404 } from './HTTPError404';
+export { HTTPErrorOther } from './HTTPErrorOther';

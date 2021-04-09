@@ -5,39 +5,54 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import React from 'react';
 
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 import '../../utils/enable-all';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { StatusIcon } from '.';
 
-const blockClass = `${pkg.prefix}--about-modal`;
+const blockClass = `${pkg.prefix}--status-icon`;
 const { componentName } = StatusIcon.displayName;
-
-const testProps = {
-  kind: 'fatal',
-  iconDescription: 'fatal',
-  size: 'small',
-  theme: 'light',
-};
 const className = `class-${uuidv4()}`;
-const renderComponent = ({ ...rest }) => {
-  <StatusIcon
-    {...rest}
-    kind="fatal"
-    iconDescription="fatal"
-    size="small"
-    theme="light"
-  />;
-};
+const iconSizes = [
+  { input: 'small', output: '16' },
+  { input: 'medium', output: '20' },
+  { input: 'large', output: '24' },
+  { input: 'x-large', output: '32' },
+];
+
+const iconTypes = [
+  'fatal',
+  'critical',
+  'major-warning',
+  'minor-warning',
+  'undefined',
+  'unknown',
+  'normal',
+  'info',
+  'in-progress',
+  'running',
+  'pending',
+];
+
+const iconThemes = ['light', 'dark'];
 
 describe(componentName, () => {
   it('renders a component StatusIcon', () => {
-    renderComponent();
+    const { container } = render(
+      <StatusIcon
+        className={className}
+        kind="fatal"
+        iconDescription="fatal"
+        size="small"
+        theme="light"
+      />
+    );
+    expect(container).toBeInTheDocument();
   });
 
   it('has no accessibility violations', async () => {
@@ -51,64 +66,91 @@ describe(componentName, () => {
     );
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
-  });
+  }, 80000);
 
   it('applies className to the root node', () => {
-    const { container } = renderComponent({ className });
-    expect(container.querySelector(`.${blockClass}`)).toHaveClass(className);
-  });
-
-  it('applies the proper className when `kind` prop of `fatal` is passed', () => {
-    const { container } = renderComponent();
-    expect(container.querySelector(`.${blockClass}`)).toHaveClass(
-      `${blockClass}--light-fatal`
-    );
-  });
-
-  test('adds a class to the containing node', () => {
     const className = 'className';
-    expect(
-      render(
-        <StatusIcon
-          className={className}
-          kind="fatal"
-          iconDescription="fatal"
-          size="small"
-          theme="light"
-        />
-      ).container.querySelector(`.${className}`)
-    ).toBeInTheDocument();
+    const { container } = render(
+      <StatusIcon
+        className={className}
+        kind="fatal"
+        iconDescription="fatal"
+        size="small"
+        theme="light"
+      />
+    );
+    expect(container.querySelector(`.${className}`)).toBeInTheDocument();
   });
 
-  test('adds additional props to the containing node', () => {
-    const dataTestId = 'dataTestId';
-
-    expect(
-      render(
+  iconTypes.forEach((kind) => {
+    it(`applies the proper className when kind prop of ${kind} is passed`, () => {
+      const { container } = render(
         <StatusIcon
-          kind="fatal"
-          iconDescription="fatal"
+          kind={kind}
+          iconDescription={kind}
           size="small"
           theme="light"
-          data-testid={dataTestId}
         />
-      ).getByTestId(dataTestId)
-    ).toBeInTheDocument();
+      );
+      const element = container.querySelector(
+        `.${blockClass}--light.${blockClass}--light-${kind}`
+      );
+      const hasKindProp = element.className.includes(`${kind}`);
+      expect(hasKindProp).toBeTruthy();
+    });
   });
 
-  test('adds type prop to component', () => {
-    const dataTestId = 'dataTestId';
+  iconTypes.forEach((desc) => {
+    it(`applies the proper title element when icon description of ${desc} is passed`, () => {
+      const { container } = render(
+        <StatusIcon
+          kind={desc}
+          iconDescription={desc}
+          size="small"
+          theme="light"
+        />
+      );
+      const element = container.querySelector(
+        `.${blockClass}--light.${blockClass}--light-${desc} .${blockClass}__icon`
+      );
+      const hasIconDescriptionProp = element.querySelector('title').textContent;
+      expect(hasIconDescriptionProp).toBeTruthy();
+    });
+  });
 
-    expect(
-      render(
+  iconThemes.forEach((theme) => {
+    it(`applies the proper className when theme prop of ${theme} is passed`, () => {
+      const { container } = render(
         <StatusIcon
           kind="fatal"
           iconDescription="fatal"
           size="small"
-          theme="light"
-          data-testid={dataTestId}
+          theme={theme}
         />
-      ).getByTestId(dataTestId)
-    ).toBeInTheDocument();
+      );
+      const element = container.querySelector(
+        `.${blockClass}--${theme}.${blockClass}--${theme}-fatal`
+      );
+      const hasThemeProp = element.className.includes(`${theme}`);
+      expect(hasThemeProp).toBeTruthy();
+    });
+  });
+
+  iconSizes.forEach(({ input, output }) => {
+    it(`changes element size when size prop of ${input} is passed`, () => {
+      const { container } = render(
+        <StatusIcon
+          kind="fatal"
+          iconDescription="fatal"
+          size={input}
+          theme="light"
+        />
+      );
+      const element = container.querySelector(
+        `.${blockClass}--light.${blockClass}--light-fatal .${blockClass}__icon`
+      );
+      const iconHeight = element.getAttribute('height');
+      expect(iconHeight).toEqual(output);
+    });
   });
 });

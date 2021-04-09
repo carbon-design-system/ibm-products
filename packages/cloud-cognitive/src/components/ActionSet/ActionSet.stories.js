@@ -12,6 +12,7 @@ import '../../utils/enable-all'; // must come before component is imported (dire
 import { getStorybookPrefix } from '../../../config';
 
 import { ActionSet } from '.';
+import { actionsOptions, actionsLabels, actionsMapping } from './actions.js';
 
 import styles from './_storybook-styles.scss';
 
@@ -27,96 +28,18 @@ export default {
     actions: {
       control: {
         type: 'select',
-        options: {
-          'One button': 0,
-          'One button (ghost)': 1,
-          'Two buttons': 2,
-          'Three buttons with ghost': 3,
-          'Three buttons': 4,
-          None: 5,
-        },
-        default: 0,
+        labels: actionsLabels,
       },
-    },
-    slideIn: {
-      table: {
-        disable: true,
-      },
+      options: actionsOptions,
+      mapping: actionsMapping(),
     },
   },
 };
-
-const actions_1 = [
-  {
-    label: 'Primary button',
-    onPrimaryActionClick: () => {},
-    kind: 'primary',
-  },
-];
-
-const actions_2 = [
-  {
-    label: 'Ghost button',
-    onPrimaryActionClick: () => {},
-    kind: 'ghost',
-  },
-];
-
-const actions_3 = [
-  {
-    label: 'Primary button',
-    onPrimaryActionClick: () => {},
-    kind: 'primary',
-  },
-  {
-    label: 'Secondary button',
-    onPrimaryActionClick: () => {},
-    kind: 'secondary',
-  },
-];
-
-const actions_4 = [
-  {
-    label: 'Primary button',
-    onPrimaryActionClick: () => {},
-    kind: 'primary',
-  },
-  {
-    label: 'Secondary button',
-    onPrimaryActionClick: () => {},
-    kind: 'secondary',
-  },
-  {
-    label: 'Ghost button',
-    onPrimaryActionClick: () => {},
-    kind: 'ghost',
-  },
-];
-
-const actions_5 = [
-  {
-    label: 'Primary button',
-    onPrimaryActionClick: () => {},
-    kind: 'primary',
-  },
-  {
-    label: 'Secondary button',
-    onPrimaryActionClick: () => {},
-    kind: 'secondary',
-  },
-  {
-    label: 'Secondary button',
-    onPrimaryActionClick: () => {},
-    kind: 'secondary',
-  },
-];
-
-const actionSets = [actions_1, actions_2, actions_3, actions_4, actions_5, []];
 
 // eslint-disable-next-line react/prop-types
 const Template = ({ actions, ...args }) => {
-  return <ActionSet {...args} actions={actionSets[actions]} />;
+  return <ActionSet {...args} actions={actions} />;
 };
 
 export const actionSet = Template.bind({});
-actionSet.args = { actions: 0 };
+actionSet.args = { actions: 3 };

@@ -179,7 +179,7 @@ StatusIcon.propTypes = {
   size: PropTypes.oneOf(['sm', 'md', 'lg', 'xlg']).isRequired,
 
   /**
-   * A required prop that displays the theme of the icon associate with the status
+   * A required prop that displays the theme of the icon associated with the status
    */
   theme: PropTypes.oneOf(['light', 'dark']).isRequired,
 };

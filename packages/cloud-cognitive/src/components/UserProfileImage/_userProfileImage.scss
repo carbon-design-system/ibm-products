@@ -11,11 +11,21 @@
 @import './colorMap';
 
 $block-class: #{$pkg-prefix}-user-profile-avatar;
-$xl: $spacing-10; //64px
-$lg: $spacing-07; //32px
-$md: $spacing-06; //24px
-$sm: 1.25rem; //20px
-$xs: $spacing-05; //16x
+
+$sizes: (
+  xl: $spacing-10,
+  lg: $spacing-07,
+  md: $spacing-06,
+  sm: 1.25rem,
+  xs: $spacing-05,
+);
+
+@mixin size($size) {
+  $_size: map-get($sizes, $size);
+
+  width: $_size;
+  height: $_size;
+}
 
 $base-colors: 'cyan', 'gray', 'green', 'magenta', 'purple', 'teal';
 $themes: (
@@ -36,31 +46,6 @@ $theme-keys: map-keys($themes);
     $carbon-colors,
     #{$color}#{map-get(map-get($themes, $key), #{$contrastkey}-contrast)}
   );
-}
-
-@mixin xl {
-  width: $xl;
-  height: $xl;
-}
-
-@mixin lg {
-  width: $lg;
-  height: $lg;
-}
-
-@mixin md {
-  width: $md;
-  height: $md;
-}
-
-@mixin sm {
-  width: $sm;
-  height: $sm;
-}
-
-@mixin xs {
-  width: $xs;
-  height: $xs;
 }
 
 @mixin user-profile-image {
@@ -92,48 +77,48 @@ $theme-keys: map-keys($themes);
   }
 
   .#{$block-class}-photo--xl {
-    @include xl;
+    @include size('xl');
   }
 
   .#{$block-class}-photo--lg {
-    @include lg;
+    @include size('lg');
   }
 
   .#{$block-class}-photo--md {
-    @include md;
+    @include size('md');
   }
   .#{$block-class}-photo--sm {
-    @include sm;
+    @include size('sm');
   }
 
   .#{$block-class}-photo--xs {
-    @include xs;
+    @include size('xs');
   }
 
   .#{$block-class}--xl {
-    @include xl;
+    @include size('xl');
     @include carbon--type-style('productive-heading-04');
   }
 
   .#{$block-class}--lg {
-    @include lg;
+    @include size('lg');
     @include carbon--type-style('body-short-01');
   }
 
   .#{$block-class}--md {
-    @include md;
+    @include size('md');
     @include carbon--type-style('label-01');
     @include carbon--font-weight('semibold');
   }
 
   .#{$block-class}--sm {
-    @include sm;
+    @include size('sm');
     @include carbon--type-style('label-01');
     @include carbon--font-weight('semibold');
   }
 
   .#{$block-class}--xs {
-    @include xs;
+    @include size('xs');
     @include carbon--type-style('label-01');
     @include carbon--font-weight('semibold');
   }

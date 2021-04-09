@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import React from 'react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { TextInput } from 'carbon-components-react';
 
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -24,85 +24,109 @@ const title = 'This is a test title';
 const subtitle = 'This is a test subtitle';
 const description =
   'This is a test description. It has several lines. It should render a modal.';
+const primaryFocus = '.bx--text-input';
+
+// render a CreateModal with title, subtitle, description, and any other required props
+const renderComponent = ({ ...rest }) =>
+  render(
+    <CreateModal
+      open
+      {...{
+        title,
+        subtitle,
+        description,
+        primaryFocus,
+        disableSubmit: false,
+        ...rest,
+      }}>
+      <TextInput
+        key="form-field-1"
+        id="1"
+        labelText="Text input label"
+        helperText="Helper text goes here"
+        placeholder="Placeholder"
+      />
+    </CreateModal>
+  );
 
 describe(componentName, () => {
   it('renders a component CreateModal', () => {
-    const { container } = render(
-      <CreateModal open {...{ title, subtitle, description }}>
-        <TextInput
-          key="form-field-1"
-          id="1"
-          labelText="Text input label"
-          helperText="Helper text goes here"
-          placeholder="Placeholder"
-        />
-      </CreateModal>
-    );
-    expect(container.querySelector(`.${blockClass}`)).not.toBeNull();
+    renderComponent();
+    expect(screen.getByRole('presentation')).toHaveClass(blockClass);
   });
 
-  it('renders title and description', () => {
-    render(
-      <CreateModal open {...{ title, subtitle, description }}>
-        <TextInput
-          key="form-field-1"
-          id="1"
-          labelText="Text input label"
-          helperText="Helper text goes here"
-          placeholder="Placeholder"
-        />
-      </CreateModal>
-    );
-    expect(
-      screen.getByText(title) && screen.getByText(description)
-    ).toBeTruthy();
+  it('renders title', () => {
+    renderComponent();
+    expect(screen.getByText(title)).toBeTruthy();
+  });
+
+  it('renders description', () => {
+    renderComponent();
+    expect(screen.getByText(description)).toBeTruthy();
+  });
+
+  it('renders subtitle', () => {
+    renderComponent();
+    expect(screen.getByText(subtitle)).toBeTruthy();
   });
 
   it('applies className to the root node', () => {
-    const { container } = render(
-      <CreateModal open {...{ className, title, subtitle, description }}>
-        <TextInput
-          key="form-field-1"
-          id="1"
-          labelText="Text input label"
-          helperText="Helper text goes here"
-          placeholder="Placeholder"
-        />
-      </CreateModal>
-    );
-    const createModal = container.querySelector(`.${carbon.prefix}--modal`);
-    expect(createModal.classList.contains(className)).toBeTruthy();
+    renderComponent({ className });
+    expect(screen.getByRole('presentation')).toHaveClass(className);
   });
 
   it('is visible when open is true', () => {
-    const { container } = render(
-      <CreateModal open {...{ className, title, subtitle, description }}>
-        <TextInput
-          key="form-field-1"
-          id="1"
-          labelText="Text input label"
-          helperText="Helper text goes here"
-          placeholder="Placeholder"
-        />
-      </CreateModal>
-    );
-    const createModal = container.querySelector(`.${carbon.prefix}--modal`);
-    expect(createModal.classList.contains('is-visible')).toBeTruthy();
+    renderComponent({ open: true });
+    expect(screen.getByRole('presentation')).toHaveClass('is-visible');
+  });
+
+  it('is not visible when open is not true', () => {
+    renderComponent({ open: false });
+    expect(screen.getByRole('presentation')).not.toHaveClass('is-visible');
+  });
+
+  it('forwards a ref to an appropriate node', () => {
+    const ref = React.createRef();
+    renderComponent({ ref });
+    expect(ref.current.outerModal.current).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(
-      <CreateModal open {...{ className, title, subtitle, description }}>
-        <TextInput
-          key="form-field-1"
-          id="1"
-          labelText="Text input label"
-          helperText="Helper text goes here"
-          placeholder="Placeholder"
-        />
-      </CreateModal>
-    );
+    const { container } = renderComponent();
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
+  }, 80000);
+
+  it('calls onSubmit() when primary button is clicked', () => {
+    const { fn } = jest;
+    const { click } = fireEvent;
+    const onSubmit = fn();
+    renderComponent({ primaryButtonText: 'Create', onSubmit: onSubmit });
+    const submitButton = screen.getByRole('button', { name: 'Create' });
+    click(submitButton);
+    expect(onSubmit).toBeCalled();
+  });
+
+  it('calls onClose() when secondary button is clicked', () => {
+    const { fn } = jest;
+    const { click } = fireEvent;
+    const onClose = fn();
+    renderComponent({ secondaryButtonText: 'Cancel', onClose: onClose });
+    const cancelButton = screen.getByRole('button', { name: 'Cancel' });
+    click(cancelButton);
+    expect(onClose).toBeCalled();
+  });
+
+  it('disables primary focus button when `disableSubmit` prop is provided', () => {
+    renderComponent({ disableSubmit: true, primaryButtonText: 'Create' });
+    const submitButton = screen.getByRole('button', { name: 'Create' });
+    const isDisabled = submitButton.className.includes('disabled');
+    expect(isDisabled).toBeTruthy();
+  });
+
+  it('applies focus to selected element', () => {
+    const { container } = renderComponent({ primaryFocus });
+    const firstInput = container.querySelector(primaryFocus);
+    expect(firstInput === document.activeElement).toBeTruthy();
   });
 });

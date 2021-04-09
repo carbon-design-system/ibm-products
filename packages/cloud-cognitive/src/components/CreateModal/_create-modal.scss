@@ -16,6 +16,10 @@
   background-color: $ui-background;
 }
 
+.#{$pkg-prefix}--create-modal .bx--modal-close {
+  display: none;
+}
+
 .#{$pkg-prefix}--create-modal .bx--modal-container {
   @include carbon--breakpoint(md) {
     max-height: 95%;

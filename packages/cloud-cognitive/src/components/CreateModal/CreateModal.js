@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useEffect } from 'react';
+import React from 'react';
 
 // Carbon and package components we use.
 import {
@@ -55,11 +55,6 @@ export let CreateModal = React.forwardRef(
     },
     ref
   ) => {
-    useEffect(() => {
-      let modal = document.querySelector(`.${blockClass}`);
-      let closeButton = modal.querySelector('.bx--modal-close');
-      closeButton.remove();
-    }, []);
     return (
       <ComposedModal
         {...rest}
@@ -145,7 +140,7 @@ CreateModal.propTypes = {
   /**
    * Specifies the primary button's text in the modal.
    */
-  primaryButtonText: PropTypes.string,
+  primaryButtonText: PropTypes.string.isRequired,
   /**
    * Specifies which DOM element in the form should be focused.
    */
@@ -153,7 +148,7 @@ CreateModal.propTypes = {
   /**
    * Specifies the secondary button's text in the modal.
    */
-  secondaryButtonText: PropTypes.string,
+  secondaryButtonText: PropTypes.string.isRequired,
   /**
    * The subtitle of the CreateModal is optional and serves to provide more information about the modal.
    */

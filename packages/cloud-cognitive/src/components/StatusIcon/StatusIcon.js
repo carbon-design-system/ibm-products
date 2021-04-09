@@ -123,6 +123,14 @@ const icons = {
 const blockClass = `${pkg.prefix}--status-icon`;
 const componentName = 'StatusIcon';
 
+const isValidIconDescription = () => (props) => {
+  if (props.iconDescription.toLowerCase() != props.kind) {
+    throw new Error(
+      'The "icon description" prop must match the status icon "kind" prop'
+    );
+  } else return;
+};
+
 export let StatusIcon = React.forwardRef(
   ({ kind, theme, size, className, iconDescription, ...rest }, ref) => {
     const IconComponent = icons[kind]?.[size];
@@ -155,19 +163,20 @@ StatusIcon.propTypes = {
   /**
    * A required prop that provides a description of the icon for accessibility purposes. This string *MUST* match the string that is provided to the "kind" prop
    */
-  iconDescription: PropTypes.oneOf([
-    'fatal',
-    'critical',
-    'major-warning',
-    'minor-warning',
-    'undefined',
-    'unknown',
-    'normal',
-    'info',
-    'in-progress',
-    'running',
-    'pending',
-  ]).isRequired,
+  iconDescription: isValidIconDescription(),
+  // iconDescription: PropTypes.oneOf([
+  //   'fatal',
+  //   'critical',
+  //   'major-warning',
+  //   'minor-warning',
+  //   'undefined',
+  //   'unknown',
+  //   'normal',
+  //   'info',
+  //   'in-progress',
+  //   'running',
+  //   'pending',
+  // ]).isRequired,
   /**
    * A required prop that displays the respective icon associated with the status
    */

@@ -22,7 +22,7 @@ export { ExampleComponent } from './ExampleComponent';
 export { HTTPError403, HTTPError404, HTTPErrorOther } from './HTTPErrors';
 export { ImportModal } from './ImportModal';
 export { ModifiedTabs } from './ModifiedTabs';
-export { Notifications } from './Notifications';
+export { NotificationsPanel } from './NotificationsPanel';
 export { PageHeader, PageActionItem } from './PageHeader';
 export { RemoveDeleteModal } from './RemoveDeleteModal';
 export { Saving } from './Saving';

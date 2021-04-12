@@ -16,7 +16,7 @@
 @import 'carbon-components/scss/components/link/link';
 @import 'carbon-components/scss/components/toggle/toggle';
 
-@mixin notifications {
+@mixin notifications-panel {
   $block-class: #{$pkg-prefix}--notifications-panel;
   @keyframes fadeIn {
     0% {
@@ -274,6 +274,6 @@
   }
 }
 
-@include exports('notifications') {
-  @include notifications;
+@include exports('notifications-panel') {
+  @include notifications-panel;
 }

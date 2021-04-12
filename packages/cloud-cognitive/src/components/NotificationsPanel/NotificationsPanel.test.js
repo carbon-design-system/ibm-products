@@ -12,17 +12,17 @@ import React from 'react';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
-import { Notifications } from '.';
+import { NotificationsPanel } from '.';
 
 const blockClass = `${pkg.prefix}--notifications-panel`;
 const dataTestId = uuidv4();
 
 const renderNotifications = ({ ...rest }) =>
   render(
-    <Notifications
+    <NotificationsPanel
       {...{
         open: true,
-        setOpen: () => {},
+        onClickOutside: () => {},
         ...rest,
       }}
     />

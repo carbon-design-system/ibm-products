@@ -163,17 +163,17 @@ describe(`${componentName}.validateActions`, () => {
     expect(v('max', props[5], prop, componentName)).toThrow();
   });
 
-  it('rejects more than one primary type', () => {
+  it('rejects more than one primary kind', () => {
     expect(v('md', props.primary, prop, componentName)).not.toThrow();
     expect(v('md', props.twoPrimaries, prop, componentName)).toThrow();
   });
 
-  it('rejects more than one ghost type', () => {
+  it('rejects more than one ghost kind', () => {
     expect(v('md', props.ghost, prop, componentName)).not.toThrow();
     expect(v('md', props.twoGhosts, prop, componentName)).toThrow();
   });
 
-  it('rejects ghost type with other types for extra small, small, medium size', () => {
+  it('rejects ghost kind with other kinds for extra small, small, medium size', () => {
     expect(v('xs', props.psg, prop, componentName)).toThrow();
     expect(v('sm', props.psg, prop, componentName)).toThrow();
     expect(v('md', props.psg, prop, componentName)).toThrow();

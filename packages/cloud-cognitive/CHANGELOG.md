@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.34.21](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.34.20...@carbon/ibm-cloud-cognitive@0.34.21) (2021-04-12)
+
+
+### Bug Fixes
+
+* **SidePanel:** correct how bottom padding of content is calculated ([#593](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/593)) ([12168c9](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/12168c9c023e77940a2c6a5b97d1aedeed596a7f))
+
+
+
+
+
 ## [0.34.20](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.34.19...@carbon/ibm-cloud-cognitive@0.34.20) (2021-04-12)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

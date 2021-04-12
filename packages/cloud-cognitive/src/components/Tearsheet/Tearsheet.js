@@ -101,7 +101,7 @@ export let Tearsheet = React.forwardRef(
           {actions && actions.length > 0 && (
             <ActionSet
               actions={actions}
-              size="lg"
+              size="max"
               className={`${blockClass}__buttons`}
             />
           )}
@@ -126,7 +126,7 @@ Tearsheet.propTypes = {
    * Sets the action buttons for the Tearsheet.
    */
   actions: PropTypes.oneOfType([
-    ActionSet.validateActions(),
+    ActionSet.validateActions(() => 'max'),
     PropTypes.arrayOf(
       PropTypes.shape({
         label: PropTypes.string,

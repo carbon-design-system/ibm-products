@@ -31,7 +31,6 @@ export const ActionSet = React.forwardRef(
       // The component props, in alphabetical order (for consistency).
       actions,
       className,
-      condensed,
       size,
       // Collect any other property values passed in.
       ...rest
@@ -78,10 +77,7 @@ export const ActionSet = React.forwardRef(
             kind={action.kind}
             className={cx([
               `${blockClass}__action-button`,
-              {
-                [`${blockClass}__ghost-button`]: action.kind === 'ghost',
-                [`${blockClass}__action-button--condensed`]: condensed,
-              },
+              { [`${blockClass}__ghost-button`]: action.kind === 'ghost' },
             ])}>
             {action.label}
             {action.loading && <InlineLoading />}
@@ -163,11 +159,6 @@ ActionSet.propTypes = {
    * Sets an optional className to be added to the side panel outermost element.
    */
   className: PropTypes.string,
-
-  /**
-   * Determines if the action set buttons will receive the condensed version
-   */
-  condensed: PropTypes.bool,
 
   /**
    * Sets the size of the action set. Different button arrangements are used

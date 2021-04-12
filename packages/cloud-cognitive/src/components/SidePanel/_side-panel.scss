@@ -264,6 +264,13 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       &.#{$action-set-block-class}--lg {
         @include setActionBarSize($large-panel-size);
       }
+      .#{$action-set-block-class}__action-button {
+        min-height: $layout-05;
+      }
+      &.#{$block-class}__actions-container-condensed
+        .#{$action-set-block-class}__action-button {
+        min-height: $layout-04;
+      }
     }
   }
 

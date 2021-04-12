@@ -268,6 +268,13 @@ export let SidePanel = React.forwardRef(
       }
     };
 
+    const primaryActionContainerClassNames = cx([
+      `${blockClass}__actions-container`,
+      {
+        [`${blockClass}__actions-container-condensed`]: condensed,
+      },
+    ]);
+
     const mainPanelClassNames = cx([
       blockClass,
       `${blockClass}__container`,
@@ -386,7 +393,7 @@ export let SidePanel = React.forwardRef(
             <div className={`${blockClass}__body-content`}>{children}</div>
             <ActionSet
               actions={actions}
-              className={`${blockClass}__actions-container`}
+              className={primaryActionContainerClassNames}
               condensed={condensed}
               size={size}
             />

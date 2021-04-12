@@ -33,7 +33,7 @@ const defaults = {
     NoDataEmptyState: false,
     NoTagsEmptyState: false,
     NotFoundEmptyState: false,
-    Notifications: false,
+    NotificationsPanel: false,
     NotificationsEmptyState: false,
     PageActionItem: false,
     PageHeader: false,

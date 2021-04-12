@@ -91,24 +91,54 @@ export let SidePanel = React.forwardRef(
       }
     }, [selectorPrimaryFocus, open, animationComplete]);
 
-    // Title animaton
+    // Title and subtitle animaton
     useEffect(() => {
       if (open && animateTitle && animationComplete) {
         const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
+        const sidePanelSubtitleElement = document.querySelector(
+          `.${`${blockClass}__subtitle-text`}`
+        );
         sidePanelOuter &&
           sidePanelOuter.addEventListener('scroll', () => {
             const scrollTop = sidePanelRef.current.scrollTop;
-            const scrollBottom =
-              sidePanelRef.current.scrollHeight -
-              document.documentElement.clientHeight;
-            let scrollPercent = (scrollTop / scrollBottom) * 100;
-            if (scrollPercent >= 25) {
+            if (scrollTop > 0) {
               sidePanelOuter.classList.add(
                 `${blockClass}__with-condensed-header`
               );
-            } else if (scrollPercent < 25) {
+              // set subtitle opacity calculation here
+              sidePanelOuter.style.setProperty(
+                `--${blockClass}--subtitle-opacity`,
+                `${Math.min(
+                  1,
+                  (sidePanelSubtitleElement.offsetHeight - scrollTop) /
+                    sidePanelSubtitleElement.offsetHeight
+                )}`
+              );
+              // set title font size here, previously this was done
+              // via a class addition, however, it is choppier that
+              // way, using css variables allows for a smoother animation
+              // to the title font size
+              let fontSize = Math.min(
+                (sidePanelSubtitleElement.offsetHeight - scrollTop) /
+                  sidePanelSubtitleElement.offsetHeight +
+                  0.25
+              );
+              fontSize = fontSize < 1 ? 1 : fontSize;
+              sidePanelOuter.style.setProperty(
+                `--${blockClass}--title-font-size`,
+                `${fontSize}rem`
+              );
+            } else {
               sidePanelOuter.classList.remove(
                 `${blockClass}__with-condensed-header`
+              );
+              sidePanelOuter.style.setProperty(
+                `--${blockClass}--subtitle-opacity`,
+                1
+              );
+              sidePanelOuter.style.setProperty(
+                `--${blockClass}--title-font-size`,
+                '1.25rem'
               );
             }
           });
@@ -144,6 +174,7 @@ export let SidePanel = React.forwardRef(
       if (!open) setRender(false);
       if (sidePanelRef && sidePanelRef.current) {
         sidePanelRef.current.style.overflow = 'auto';
+        sidePanelRef.current.style.overflowX = 'hidden';
       }
       setAnimationComplete(true);
     };
@@ -226,6 +257,8 @@ export let SidePanel = React.forwardRef(
       {
         [`${blockClass}__container-right-placement`]: placement === 'right',
         [`${blockClass}__container-left-placement`]: placement === 'left',
+        [`${blockClass}__container-with-action-toolbar`]:
+          actionToolbarButtons && actionToolbarButtons.length,
       },
     ]);
 
@@ -270,8 +303,10 @@ export let SidePanel = React.forwardRef(
             className={`${blockClass}__visually-hidden`}>
             Focus sentinel
           </span>
-          <div ref={sidePanelInnerRef}>
-            <div className={`${blockClass}__header`}>
+          <div
+            ref={sidePanelInnerRef}
+            className={`${blockClass}__inner-content`}>
+            <div className={`${blockClass}__title-container`}>
               {currentStep > 0 && (
                 <Button
                   kind="ghost"
@@ -296,34 +331,6 @@ export let SidePanel = React.forwardRef(
                   {titleText}
                 </h2>
               )}
-              {subtitleText && subtitleText.length && (
-                <p className={`${blockClass}__subtitle-text`}>{subtitleText}</p>
-              )}
-              {actionToolbarButtons && actionToolbarButtons.length && (
-                <div className={`${blockClass}__action-toolbar`}>
-                  {actionToolbarButtons.map((action) => (
-                    <Button
-                      key={action.label}
-                      kind={action.leading ? action.kind : 'ghost'}
-                      size="small"
-                      disabled={false}
-                      renderIcon={action.icon}
-                      iconDescription={action.label}
-                      tooltipPosition="bottom"
-                      tooltipAlignment="center"
-                      className={cx([
-                        `${blockClass}__action-toolbar-button`,
-                        {
-                          [`${blockClass}__action-toolbar-icon-only-button`]: action.icon,
-                          [`${blockClass}__action-toolbar-leading-button`]: !action.icon,
-                        },
-                      ])}
-                      onClick={() => action.onActionToolbarButtonClick()}>
-                      {action.leading ? action.label : ''}
-                    </Button>
-                  ))}
-                </div>
-              )}
               <Button
                 kind="ghost"
                 size="small"
@@ -337,6 +344,34 @@ export let SidePanel = React.forwardRef(
                 ref={sidePanelCloseRef}
               />
             </div>
+            {subtitleText && subtitleText.length && (
+              <p className={`${blockClass}__subtitle-text`}>{subtitleText}</p>
+            )}
+            {actionToolbarButtons && actionToolbarButtons.length && (
+              <div className={`${blockClass}__action-toolbar`}>
+                {actionToolbarButtons.map((action) => (
+                  <Button
+                    key={action.label}
+                    kind={action.leading ? action.kind : 'ghost'}
+                    size="small"
+                    disabled={false}
+                    renderIcon={action.icon}
+                    iconDescription={action.label}
+                    tooltipPosition="bottom"
+                    tooltipAlignment="center"
+                    className={cx([
+                      `${blockClass}__action-toolbar-button`,
+                      {
+                        [`${blockClass}__action-toolbar-icon-only-button`]: action.icon,
+                        [`${blockClass}__action-toolbar-leading-button`]: !action.icon,
+                      },
+                    ])}
+                    onClick={() => action.onActionToolbarButtonClick()}>
+                    {action.leading ? action.label : ''}
+                  </Button>
+                ))}
+              </div>
+            )}
             <div className={`${blockClass}__body-content`}>{children}</div>
             <ActionSet
               actions={actions}

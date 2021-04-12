@@ -19,11 +19,19 @@ export const actionsLabels = {
 };
 
 export const actionsMapping = (labels, action) => {
-  const act = (label, kind) => ({
-    label,
-    kind,
-    onClick: action && (() => action(`Click on '${label}'`)),
-  });
+  const act = (label, kind) => {
+    const actionCall = action && action(`Click on '${label}'`);
+    return {
+      label,
+      kind,
+      onClick:
+        actionCall &&
+        ((evt) => {
+          evt.persist();
+          actionCall(evt);
+        }),
+    };
+  };
   const primary = act(labels?.primary ?? 'Primary button', 'primary');
   const secondary = act(labels?.secondary ?? 'Secondary button', 'secondary');
   const secondary2 = act(labels?.secondary2 ?? 'Secondary button', 'secondary');

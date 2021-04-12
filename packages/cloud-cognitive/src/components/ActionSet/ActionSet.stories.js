@@ -7,6 +7,8 @@
 
 import React from 'react';
 
+import { action } from '@storybook/addon-actions';
+
 import { pkg } from '../../settings';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
@@ -16,6 +18,7 @@ import { actionsOptions, actionsLabels, actionsMapping } from './actions.js';
 
 import styles from './_storybook-styles.scss';
 
+const blockClass = `${pkg.prefix}--action-set`;
 const storybookPrefix = getStorybookPrefix(pkg, ActionSet.displayName);
 
 export default {
@@ -31,14 +34,18 @@ export default {
         labels: actionsLabels,
       },
       options: actionsOptions,
-      mapping: actionsMapping(),
+      mapping: actionsMapping({}, action),
     },
   },
 };
 
 // eslint-disable-next-line react/prop-types
 const Template = ({ actions, ...args }) => {
-  return <ActionSet {...args} actions={actions} />;
+  return (
+    <div className={`${blockClass}__story-container`}>
+      <ActionSet {...args} actions={actions} />
+    </div>
+  );
 };
 
 export const actionSet = Template.bind({});

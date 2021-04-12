@@ -11,10 +11,10 @@ import React, { useEffect, useState, useRef } from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import useClickOutside from '../../global/js/use/useClickOutside';
 import { pkg } from '../../settings';
 import { timeAgo } from './utils';
 import { NotificationsEmptyState } from '../EmptyStates/NotificationsEmptyState';
-import useClickOutside from './useClickOutside';
 
 // Carbon and package components we use.
 import { Button, Link, Toggle } from 'carbon-components-react';
@@ -29,25 +29,26 @@ import {
 } from '@carbon/icons-react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-const componentName = 'Notifications';
+const componentName = 'NotificationsPanel';
 const blockClass = `${pkg.prefix}--notifications-panel`;
 
-export let Notifications = React.forwardRef(
+export let NotificationsPanel = React.forwardRef(
   (
     {
       className,
       data,
       dismissAllLabel,
       doNotDisturbLabel,
-      daysAgoLabel,
+      daysAgoText,
       emptyStateLabel,
-      hoursAgoLabel,
-      hourAgoLabel,
-      minuteAgoLabel,
-      minutesAgoLabel,
-      monthsAgoLabel,
-      monthAgoLabel,
-      nowLabel,
+      hoursAgoText,
+      hourAgoText,
+      minuteAgoText,
+      minutesAgoText,
+      monthsAgoText,
+      monthAgoText,
+      nowText,
+      onClickOutside,
       onDismissAllNotifications,
       onDismissSingleNotification,
       onDoNotDisturbChange,
@@ -57,13 +58,12 @@ export let Notifications = React.forwardRef(
       previousLabel,
       readLessLabel,
       readMoreLabel,
-      secondsAgoLabel,
-      setOpen,
+      secondsAgoText,
       title,
       todayLabel,
-      yearsAgoLabel,
-      yearAgoLabel,
-      yesterdayAtLabel,
+      yearsAgoText,
+      yearAgoText,
+      yesterdayAtText,
       yesterdayLabel,
       ...rest
     },
@@ -73,14 +73,14 @@ export let Notifications = React.forwardRef(
     const [shouldRender, setRender] = useState(open);
     const [allNotifications, setAllNotifications] = useState([]);
 
-    useClickOutside(notificationPanelRef, () => {
-      setOpen(!open);
-    });
-
     useEffect(() => {
       // Set the notifications passed to the state within this component
       setAllNotifications(data);
     }, [data]);
+
+    useClickOutside(notificationPanelRef, () => {
+      onClickOutside();
+    });
 
     useEffect(() => {
       // initialize the notification panel to open
@@ -251,18 +251,18 @@ export let Notifications = React.forwardRef(
             <p className={`${blockClass}__notification-time-label`}>
               {timeAgo({
                 previousTime: notification.timestamp,
-                secondsAgoLabel,
-                minuteAgoLabel,
-                minutesAgoLabel,
-                hoursAgoLabel,
-                hourAgoLabel,
-                daysAgoLabel,
-                yesterdayAtLabel,
-                monthsAgoLabel,
-                monthAgoLabel,
-                yearsAgoLabel,
-                yearAgoLabel,
-                nowLabel,
+                secondsAgoText,
+                minuteAgoText,
+                minutesAgoText,
+                hoursAgoText,
+                hourAgoText,
+                daysAgoText,
+                yesterdayAtText,
+                monthsAgoText,
+                monthAgoText,
+                yearsAgoText,
+                yearAgoText,
+                nowText,
               })}
             </p>
             <h6 className={notificationHeaderClassName}>
@@ -408,16 +408,19 @@ export let Notifications = React.forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-Notifications = pkg.checkComponentEnabled(Notifications, componentName);
+NotificationsPanel = pkg.checkComponentEnabled(
+  NotificationsPanel,
+  componentName
+);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
-Notifications.displayName = componentName;
+NotificationsPanel.displayName = componentName;
 
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
-Notifications.propTypes = {
+NotificationsPanel.propTypes = {
   /**
    * Provide an optional class to be applied to the containing node.
    */
@@ -445,7 +448,7 @@ Notifications.propTypes = {
   /**
    * Sets the `days ago` label text
    */
-  daysAgoLabel: PropTypes.string,
+  daysAgoText: PropTypes.func,
 
   /**
    * Label for Dismiss all button
@@ -465,37 +468,42 @@ Notifications.propTypes = {
   /**
    * Sets the `hour ago` label text
    */
-  hourAgoLabel: PropTypes.string,
+  hourAgoText: PropTypes.func,
 
   /**
    * Sets the `hours ago` label text
    */
-  hoursAgoLabel: PropTypes.string,
+  hoursAgoText: PropTypes.func,
 
   /**
    * Sets the `minute ago` label text
    */
-  minuteAgoLabel: PropTypes.string,
+  minuteAgoText: PropTypes.func,
 
   /**
    * Sets the `minutes ago` label text
    */
-  minutesAgoLabel: PropTypes.string,
+  minutesAgoText: PropTypes.func,
 
   /**
    * Sets the `month ago` label text
    */
-  monthAgoLabel: PropTypes.string,
+  monthAgoText: PropTypes.func,
 
   /**
    * Sets the `months ago` label text
    */
-  monthsAgoLabel: PropTypes.string,
+  monthsAgoText: PropTypes.func,
 
   /**
    * Sets the `now` label text
    */
-  nowLabel: PropTypes.string,
+  nowText: PropTypes.string,
+
+  /**
+   * Sets the notifications panel open state
+   */
+  onClickOutside: PropTypes.func.isRequired,
 
   /**
    * Function that will dismiss all notifications
@@ -545,12 +553,7 @@ Notifications.propTypes = {
   /**
    * Sets the `seconds ago` label text
    */
-  secondsAgoLabel: PropTypes.string,
-
-  /**
-   * Sets the notifications panel open state
-   */
-  setOpen: PropTypes.func.isRequired,
+  secondsAgoText: PropTypes.func,
 
   /**
    * Sets the title for the Notifications panel
@@ -565,17 +568,17 @@ Notifications.propTypes = {
   /**
    * Sets the `year ago` label text
    */
-  yearAgoLabel: PropTypes.string,
+  yearAgoText: PropTypes.func,
 
   /**
    * Sets the `years ago` label text
    */
-  yearsAgoLabel: PropTypes.string,
+  yearsAgoText: PropTypes.func,
 
   /**
    * Sets the `Yesterday at` label text
    */
-  yesterdayAtLabel: PropTypes.string,
+  yesterdayAtText: PropTypes.func,
 
   /**
    * Sets the yesterday label text
@@ -587,28 +590,28 @@ Notifications.propTypes = {
 // props that are required, nor for props where the component can apply
 // 'undefined' values reasonably. Default values should be provided when the
 // component needs to make a choice or assumption when a prop is not supplied.
-Notifications.defaultProps = {
-  doNotDisturbLabel: 'Do not disturb',
+NotificationsPanel.defaultProps = {
+  daysAgoText: (value) => `${value} days ago`,
   dismissAllLabel: 'Dismiss all',
-  previousLabel: 'Previous',
-  title: 'Notifications',
-  todayLabel: 'Today',
-  yesterdayLabel: 'Yesterday',
+  doNotDisturbLabel: 'Do not disturb',
+  emptyStateLabel: 'You do not have any notifications',
+  hourAgoText: (value) => `${value} hour ago`,
+  hoursAgoText: (value) => `${value} hours ago`,
+  minuteAgoText: (value) => `${value} minute ago`,
+  minutesAgoText: (value) => `${value} minutes ago`,
+  monthAgoText: (value) => `${value} month ago`,
+  monthsAgoText: (value) => `${value} months ago`,
+  nowText: 'Now',
   onDismissAllNotifications: () => {},
   onDismissSingleNotification: () => {},
-  secondsAgoLabel: 'seconds ago',
-  minuteAgoLabel: 'minute ago',
-  minutesAgoLabel: 'minutes ago',
-  hoursAgoLabel: 'hours ago',
-  hourAgoLabel: 'hour ago',
-  daysAgoLabel: 'days ago',
-  yesterdayAtLabel: 'Yesterday at',
-  monthsAgoLabel: 'months ago',
-  monthAgoLabel: 'month ago',
-  yearsAgoLabel: 'years ago',
-  yearAgoLabel: 'year ago',
-  nowLabel: 'Now',
-  emptyStateLabel: 'You do not have any notifications',
+  previousLabel: 'Previous',
   readLessLabel: 'Read less',
   readMoreLabel: 'Read more',
+  secondsAgoText: (value) => `${value} seconds ago`,
+  title: 'Notifications',
+  todayLabel: 'Today',
+  yearsAgoText: (value) => `${value} years ago`,
+  yearAgoText: (value) => `${value} year ago`,
+  yesterdayLabel: 'Yesterday',
+  yesterdayAtText: (value) => `Yesterday at ${value}`,
 };

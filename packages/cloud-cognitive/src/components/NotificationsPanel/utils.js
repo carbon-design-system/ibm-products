@@ -1,17 +1,24 @@
+/**
+ * Copyright IBM Corp. 2020, 2021
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 export const timeAgo = ({
   previousTime,
-  secondsAgoLabel,
-  minuteAgoLabel,
-  minutesAgoLabel,
-  hoursAgoLabel,
-  hourAgoLabel,
-  daysAgoLabel,
-  yesterdayAtLabel,
-  monthsAgoLabel,
-  monthAgoLabel,
-  yearsAgoLabel,
-  yearAgoLabel,
-  nowLabel,
+  secondsAgoText,
+  minuteAgoText,
+  minutesAgoText,
+  hoursAgoText,
+  hourAgoText,
+  daysAgoText,
+  yesterdayAtText,
+  monthsAgoText,
+  monthAgoText,
+  yearsAgoText,
+  yearAgoText,
+  nowText,
 }) => {
   const msPerMinute = 60 * 1000;
   const msPerHour = msPerMinute * 60;
@@ -22,30 +29,30 @@ export const timeAgo = ({
   switch (true) {
     case elapsed < msPerMinute:
       return Math.round(elapsed / 1000) > 10
-        ? `${Math.round(elapsed / 1000)} ${secondsAgoLabel}`
-        : nowLabel;
+        ? secondsAgoText(Math.round(elapsed / 1000))
+        : nowText;
     case elapsed < msPerHour:
       return Math.round(elapsed / msPerMinute) > 1
-        ? `${Math.round(elapsed / msPerMinute)} ${minutesAgoLabel}`
-        : `${Math.round(elapsed / msPerMinute)} ${minuteAgoLabel}`;
+        ? minutesAgoText(Math.round(elapsed / msPerMinute))
+        : minuteAgoText(Math.round(elapsed / msPerMinute));
     case elapsed < msPerDay:
       return Math.round(elapsed / msPerHour) > 1
-        ? `${Math.round(elapsed / msPerHour)} ${hoursAgoLabel}`
-        : `${Math.round(elapsed / msPerHour)} ${hourAgoLabel}`;
+        ? hoursAgoText(Math.round(elapsed / msPerHour))
+        : hourAgoText(Math.round(elapsed / msPerHour));
     case elapsed < msPerMonth:
       return Math.round(elapsed / msPerDay) > 1
-        ? `${Math.round(elapsed / msPerDay)} ${daysAgoLabel}`
-        : `${yesterdayAtLabel} ${new Date(previousTime).toLocaleTimeString(
-            getBrowserLocales[0]
-          )}`;
+        ? daysAgoText(Math.round(elapsed / msPerDay))
+        : yesterdayAtText(
+            new Date(previousTime).toLocaleTimeString(getBrowserLocales[0])
+          );
     case elapsed < msPerYear:
       return Math.round(elapsed / msPerMonth) > 1
-        ? `${Math.round(elapsed / msPerMonth)} ${monthsAgoLabel}`
-        : `${Math.round(elapsed / msPerMonth)} ${monthAgoLabel}`;
+        ? monthsAgoText(Math.round(elapsed / msPerMonth))
+        : monthAgoText(Math.round(elapsed / msPerMonth));
     default:
       return Math.round(elapsed / msPerYear) > 1
-        ? `${Math.round(elapsed / msPerYear)} ${yearsAgoLabel}`
-        : `${Math.round(elapsed / msPerYear)} ${yearAgoLabel}`;
+        ? yearsAgoText(Math.round(elapsed / msPerYear))
+        : yearAgoText(Math.round(elapsed / msPerYear));
   }
 };
 

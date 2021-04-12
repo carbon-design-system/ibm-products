@@ -61,6 +61,7 @@ describe(componentName, () => {
             kind: 'ghost',
           },
         ]}
+        size="lg"
       />
     );
     expect(screen.getByRole('button', { name: label1 })).toHaveClass(

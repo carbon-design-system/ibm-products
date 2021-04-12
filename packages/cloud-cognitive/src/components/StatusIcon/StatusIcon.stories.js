@@ -18,7 +18,7 @@ export default {
   title: `${storybookPrefix}/StatusIcon`,
   component: StatusIcon,
   argTypes: {
-    type: {
+    kind: {
       control: {
         type: 'select',
         options: [
@@ -39,7 +39,7 @@ export default {
     size: {
       control: {
         type: 'select',
-        options: ['small', 'medium', 'large', 'x-large'],
+        options: ['sm', 'md', 'lg', 'xlg'],
       },
     },
     theme: {
@@ -58,9 +58,10 @@ export default {
 };
 
 const defaultProps = {
-  type: 'fatal',
-  size: 'small',
+  kind: 'fatal',
+  size: 'sm',
   theme: 'light',
+  iconDescription: 'fatal icon',
 };
 
 const Template = (args) => {

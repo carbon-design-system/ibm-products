@@ -91,6 +91,24 @@ export let SidePanel = React.forwardRef(
       }
     }, [selectorPrimaryFocus, open, animationComplete]);
 
+    useEffect(() => {
+      if (open && actions && actions.length && animationComplete) {
+        const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
+        const actionsContainer =
+          sidePanelOuter &&
+          sidePanelOuter.querySelector(`.${blockClass}__actions-container`);
+        let actionsHeight = actionsContainer.offsetHeight + 16; // add additional 1rem spacing to bottom padding
+        actionsHeight = `${Math.round(actionsHeight / 16)}rem`;
+        sidePanelOuter.style.setProperty(
+          `--${blockClass}--content-bottom-padding`,
+          actionsHeight
+        );
+      }
+      return () => {
+        setAnimationComplete(false);
+      };
+    }, [actions, condensed, open, animationComplete]);
+
     // Title and subtitle animaton
     useEffect(() => {
       if (open && animateTitle && animationComplete) {
@@ -250,6 +268,13 @@ export let SidePanel = React.forwardRef(
       }
     };
 
+    const primaryActionContainerClassNames = cx([
+      `${blockClass}__actions-container`,
+      {
+        [`${blockClass}__actions-container-condensed`]: condensed,
+      },
+    ]);
+
     const mainPanelClassNames = cx([
       blockClass,
       `${blockClass}__container`,
@@ -259,13 +284,6 @@ export let SidePanel = React.forwardRef(
         [`${blockClass}__container-left-placement`]: placement === 'left',
         [`${blockClass}__container-with-action-toolbar`]:
           actionToolbarButtons && actionToolbarButtons.length,
-      },
-    ]);
-
-    const primaryActionContainerClassNames = cx([
-      `${blockClass}__actions-container`,
-      {
-        [`${blockClass}__actions-container-condensed`]: condensed,
       },
     ]);
 
@@ -375,8 +393,9 @@ export let SidePanel = React.forwardRef(
             <div className={`${blockClass}__body-content`}>{children}</div>
             <ActionSet
               actions={actions}
-              size={size}
               className={primaryActionContainerClassNames}
+              condensed={condensed}
+              size={size}
             />
           </div>
           <span

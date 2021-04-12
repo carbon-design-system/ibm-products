@@ -146,25 +146,33 @@ ActionSet.validateActions = (sizeFn) => (props, propName, componentName) => {
       );
     }
 
-    const primaryButtons = prop.filter((button) => button.kind === 'primary');
+    const primaryActions = prop.filter((a) => a.kind === 'primary').length;
 
-    if (primaryButtons.length > 1) {
+    if (primaryActions > 1) {
       throw badActions(
         `You cannot have more than one 'primary' action in a ${componentName}.`
       );
     }
 
-    const ghostButtons = prop.filter((button) => button.kind === 'ghost');
+    const ghostActions = prop.filter((a) => a.kind === 'ghost').length;
 
-    if (ghostButtons.length > 1) {
+    if (ghostActions > 1) {
       throw badActions(
         `You cannot have more than one 'ghost' action in a ${componentName}.`
       );
     }
 
-    if (stack && prop.length > 1 && ghostButtons.length > 0) {
+    if (stack && prop.length > 1 && ghostActions > 0) {
       throw badActions(
         `You cannot have a 'ghost' button in conjunction with other action types in this size of ${componentName}. Try using a 'secondary' button instead.`
+      );
+    }
+
+    const secondaryActions = prop.filter((a) => a.kind === 'secondary').length;
+
+    if (prop.length > primaryActions + secondaryActions + ghostActions) {
+      throw badActions(
+        `You can only have 'primary', 'secondary' and 'ghost' buttons in a ${componentName}.`
       );
     }
   }

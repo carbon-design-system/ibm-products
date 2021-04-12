@@ -25,6 +25,7 @@ export { ModifiedTabs } from './ModifiedTabs';
 export { NotificationsPanel } from './NotificationsPanel';
 export { PageHeader, PageActionItem } from './PageHeader';
 export { RemoveDeleteModal } from './RemoveDeleteModal';
+export { Saving } from './Saving';
 export { SidePanel } from './SidePanel';
 export { TagSet } from './TagSet';
 export { Tearsheet, TearsheetNarrow } from './Tearsheet';

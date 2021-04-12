@@ -30,6 +30,14 @@
     max-width: 100%;
   }
 
+  // For ghosts in row-double,
+  // buttons are 75% width
+  .#{$block-class}__action-button,
+  .#{$block-class}.#{$block-class}--row-double .#{$block-class}__ghost-button {
+    width: 75%;
+    max-width: 75%;
+  }
+
   // For row-single in large (non-ghost),
   // or row-double in medium or large,
   // or ghosts in row-triple,

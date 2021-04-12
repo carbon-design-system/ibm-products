@@ -82,7 +82,10 @@ $block-class: #{$pkg-prefix}--action-set;
     align-items: flex-start;
     width: 100%;
     max-width: 100%;
-    height: 100%;
+    height: $layout-05;
+    &.#{$block-class}__action-button--condensed {
+      height: $layout-04;
+    }
   }
   .#{$block-class}.#{$block-class}--double .#{$block-class}__action-button {
     width: 50%;

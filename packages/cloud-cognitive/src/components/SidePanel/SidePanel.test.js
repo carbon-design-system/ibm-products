@@ -232,8 +232,8 @@ describe('SidePanel', () => {
     );
     const sidePanelAction = screen.getByText(/Primary button/i);
     expect(
-      sidePanelAction.parentElement.classList.contains(
-        `${blockClass}__actions-container-condensed`
+      sidePanelAction.classList.contains(
+        `${actionSetBlockClass}__action-button--condensed`
       )
     ).toBeTruthy();
   });

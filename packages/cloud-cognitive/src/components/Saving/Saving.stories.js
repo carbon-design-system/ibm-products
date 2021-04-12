@@ -13,12 +13,6 @@ import { getStorybookPrefix } from '../../../config';
 import { Saving } from '.';
 import mdx from './Saving.mdx';
 import wait from '../../global/js/utils/wait';
-import {
-  Save16,
-  CheckmarkOutline16,
-  ErrorOutline16,
-  InProgress16,
-} from '@carbon/icons-react';
 import { TextArea } from 'carbon-components-react';
 const storybookPrefix = getStorybookPrefix(pkg, Saving.displayName);
 
@@ -38,25 +32,14 @@ export default {
         type: 'boolean',
       },
     },
-    type: {
-      defaultValue: 'auto',
-      control: {
-        type: 'select',
-        options: ['auto', 'manual'],
-      },
-    },
   },
 };
 
 const defaultProps = {
   className: 'saving-story',
-  defaultIcon: Save16,
   defaultText: 'Save',
-  failIcon: ErrorOutline16,
   failText: 'Failed to save',
-  inProgressIcon: InProgress16,
   inProgressText: 'Saving...',
-  successIcon: CheckmarkOutline16,
   successText: 'Saved',
 };
 
@@ -102,7 +85,7 @@ const ManualTemplate = (opts) => {
   const { successful, ...args } = opts;
   const [status, setStatus] = useState('default');
 
-  const onClickHandler = async () => {
+  const onSaveHandler = async () => {
     setStatus('inprogress');
     await wait(2000);
     setStatus(successful ? 'success' : 'fail');
@@ -110,7 +93,7 @@ const ManualTemplate = (opts) => {
 
   return (
     <div className="saving-story-container">
-      <Saving {...args} onClick={onClickHandler} status={status} />
+      <Saving {...args} onSave={onSaveHandler} status={status} />
     </div>
   );
 };
@@ -125,4 +108,6 @@ export const Manual = ManualTemplate.bind({});
 Manual.args = {
   ...defaultProps,
   type: 'manual',
+  failText: 'Failed to save. Try again?',
+  cancelButtonText: 'Cancel',
 };

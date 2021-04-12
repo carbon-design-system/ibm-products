@@ -19,7 +19,6 @@ Array [
       isFixedNav={false}
       isPersistent={true}
       isRail={true}
-      translateById={[Function]}
     >
       <SideNavItems
         data-ui-id="IdeNavigation--left-nav-item-container"
@@ -121,7 +120,6 @@ Array [
       isFixedNav={false}
       isPersistent={true}
       isRail={true}
-      translateById={[Function]}
     >
       <SideNavItems
         data-ui-id="IdeNavigation--left-nav-item-container"

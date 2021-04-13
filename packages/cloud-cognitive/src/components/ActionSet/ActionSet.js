@@ -70,9 +70,7 @@ export const ActionSet = React.forwardRef(
     // order the actions with ghost buttons first and primary buttons last
     // (and the opposite way if we're stacking)
     buttons.sort((action1, action2) =>
-      action1.kind === action2.kind
-        ? 0
-        : action1.kind === 'ghost' || action2.kind === 'primary'
+      action1.kind === 'ghost' || action2.kind === 'primary'
         ? stack
           ? 1
           : -1

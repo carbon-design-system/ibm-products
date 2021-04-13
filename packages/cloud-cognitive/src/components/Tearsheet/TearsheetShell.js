@@ -43,11 +43,11 @@ export const TearsheetShell = React.forwardRef(
       // The component props, in alphabetical order (for consistency).
       children,
       className,
-      height,
       onClose,
       open,
       preventCloseOnClickOutside,
       size,
+      verticalPosition,
       ...rest
     },
     ref
@@ -120,7 +120,7 @@ export const TearsheetShell = React.forwardRef(
     });
     const containerClasses = cx({
       [`${blockClass}__container`]: true,
-      [`${blockClass}__container--lower`]: height === 'lower',
+      [`${blockClass}__container--lower`]: verticalPosition === 'lower',
     });
 
     if (stackPosition <= maxStackingDepth) {
@@ -158,33 +158,42 @@ TearsheetShell.propTypes = {
    * Specifies the content of the TearsheetShell.
    */
   children: PropTypes.node,
+
   /**
    * Specifies class(es) to be applied to the top-level PageHeader node.
    * Optional.
    */
   className: PropTypes.string,
-  /**
-   * Specifies the height of the tearsheet `'normal' | 'lower'` Lower is
-   * 40px lower to allow more underlying content to be visible. Optional.
-   */
-  height: PropTypes.oneOf(['normal', 'lower']),
+
   /**
    * Specifies an optional handler for closing modal. Returning `false`
    * here prevents the modal from closing.
    */
   onClose: PropTypes.func,
+
   /**
    * Specifies whether the Tearsheet is currently open or not.
    */
   open: PropTypes.bool,
+
   /**
    * Prevents the TearsheetShell from closing automatically if the user clicks outside of it.
    */
   preventCloseOnClickOutside: PropTypes.bool,
+
   /**
    * Specifies the width of the Tearsheet. `'narrow' | 'wide'`
    */
   size: PropTypes.oneOf(['narrow', 'wide']).isRequired,
+
+  /**
+   * Specifies the position of the top of tearsheet in the viewport. The
+   * 'normal' position is a short distance down from the top of the viewport,
+   * leaving room at the top for a header bar to show through from below. The
+   * 'lower' position provides a little extra room at the top to allow an action
+   * bar navigation or breadcrumbs to also show through.
+   */
+  verticalPosition: PropTypes.oneOf(['normal', 'lower']),
 };
 
 // Default values for component props. Default values are not required for
@@ -192,5 +201,5 @@ TearsheetShell.propTypes = {
 // 'undefined' values reasonably. Default values should be provided when the
 // component needs to make a choice or assumption when a prop is not supplied.
 TearsheetShell.defaultProps = {
-  height: 'normal',
+  verticalPosition: 'normal',
 };

@@ -43,9 +43,9 @@ export default {
       options: actionsOptions,
       mapping: actionsMapping(
         {
-          primary: 'Create',
-          secondary: 'Close',
-          secondary2: 'Save',
+          primary: 'Replace',
+          secondary: 'Stop',
+          secondary2: 'Keep Both',
           ghost: 'Cancel',
         },
         action

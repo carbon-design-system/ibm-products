@@ -1,0 +1,28 @@
+//
+// Copyright IBM Corp. 2020, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$imported-modules: 'css--reset' 'css--default-type' 'skeleton' 'helper-classes'
+  'css--font-face' 'css--helpers' 'css--body' 'grid' 'button' 'copy-button'
+  'form' 'loading' 'file-uploader' 'checkbox' 'list-box' 'combo-box'
+  'radio-button' 'toggle' 'search' 'select' 'text-input' 'text-area'
+  'number-input' 'link' 'lists' 'data-table-v2-action' 'data-table-v2-core'
+  'data-table-v2-expandable' 'data-table-sort' 'data-table-inline-edit'
+  'data-table-skeleton' 'structured-list' 'snippet' 'overflow-menu'
+  'content-switcher' 'context-menu' 'date-picker' 'dropdown' 'modal'
+  'multi-select' 'inline-notifications' 'toast-notifications' 'tooltip' 'tabs'
+  'tags' 'pagination' 'accordion' 'progress-indicator' 'breadcrumb' 'toolbar'
+  'time-picker' 'slider' 'tile' 'skeleton-text' 'skeleton-icon'
+  'skeleton-placeholder' 'inline-loading' 'pagination-nav' 'unstable_pagination'
+  'carbon-header' 'carbon-header-panel' 'product-switcher'
+  'carbon-header-switcher' 'carbon-side-nav' 'carbon-navigation'
+  'carbon-content' 'popover';
+
+@import '@carbon/import-once/scss/import-once';
+@import './global/styles/carbon-settings';
+@import './global/styles/project-settings';
+
+@import './components/index-released-only';

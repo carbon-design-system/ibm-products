@@ -14,12 +14,37 @@ import cx from 'classnames';
 import { pkg } from '../../settings';
 
 // Carbon and package components we use.
-import { Button, InlineLoading } from 'carbon-components-react';
+import { Button, ButtonSet, InlineLoading } from 'carbon-components-react';
 
 const blockClass = `${pkg.prefix}--action-set`;
 const componentName = 'ActionSet';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
+
+const ActionSetButton = ({ disabled, kind, label, loading, onClick }) => (
+  <Button
+    disabled={disabled || loading || false}
+    onClick={onClick}
+    kind={kind}
+    className={cx([
+      `${blockClass}__action-button`,
+      { [`${blockClass}__ghost-button`]: kind === 'ghost' },
+    ])}>
+    {label}
+    {loading && <InlineLoading />}
+  </Button>
+);
+
+ActionSetButton.propTypes = {
+  disabled: PropTypes.bool,
+  kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
+  label: PropTypes.string,
+  loading: PropTypes.bool,
+  onClick: PropTypes.func,
+};
+
+const willStack = (size, numberOfActions) =>
+  size === 'xs' || size === 'sm' || (size === 'md' && numberOfActions > 2);
 
 /**
  * An ActionSet presents a set of action buttons, constructed from bundles
@@ -37,22 +62,29 @@ export const ActionSet = React.forwardRef(
     },
     ref
   ) => {
+    const buttons = (actions && actions.slice?.(0)) || [];
+
+    // We stack the buttons in a xs/sm set, or if there are three or more in a md set.
+    const stack = willStack(size, buttons.length);
+
     // order the actions with ghost buttons first and primary buttons last
-    // (or the opposite way around if reverse is true)
-    const direction = size === 'xs' || size === 'sm' || size === 'md' ? -1 : 1;
-    const sortedActions = (actions && actions.slice(0)) || [];
-    sortedActions.sort((action1, action2) =>
+    // (and the opposite way if we're stacking)
+    buttons.sort((action1, action2) =>
       action1.kind === action2.kind
         ? 0
         : action1.kind === 'ghost' || action2.kind === 'primary'
-        ? -direction
+        ? stack
+          ? 1
+          : -1
         : action1.kind === 'primary' || action2.kind === 'ghost'
-        ? direction
+        ? stack
+          ? -1
+          : 1
         : 0
     );
 
     return (
-      <div
+      <ButtonSet
         {
           // Pass through any other property values as HTML attributes.
           ...rest
@@ -61,29 +93,21 @@ export const ActionSet = React.forwardRef(
           blockClass,
           className,
           {
-            [`${blockClass}--single`]: sortedActions.length === 1,
-            [`${blockClass}--double`]: sortedActions.length === 2,
-            [`${blockClass}--triple-plus`]: sortedActions.length >= 3,
+            [`${blockClass}--row-single`]: !stack && buttons.length === 1,
+            [`${blockClass}--row-double`]: !stack && buttons.length === 2,
+            [`${blockClass}--row-triple`]: !stack && buttons.length === 3,
+            [`${blockClass}--row-quadruple`]: !stack && buttons.length >= 4,
+            [`${blockClass}--stack`]: stack,
           },
           `${blockClass}--${size}`
         )}
         ref={ref}
-        role="presentation">
-        {sortedActions.map((action, index) => (
-          <Button
-            key={index}
-            disabled={action.disabled || action.loading || false}
-            onClick={action.onClick}
-            kind={action.kind}
-            className={cx([
-              `${blockClass}__action-button`,
-              { [`${blockClass}__ghost-button`]: action.kind === 'ghost' },
-            ])}>
-            {action.label}
-            {action.loading && <InlineLoading />}
-          </Button>
+        role="presentation"
+        stacked={stack}>
+        {buttons.map((action, index) => (
+          <ActionSetButton {...action} key={index} />
         ))}
-      </div>
+      </ButtonSet>
     );
   }
 );
@@ -92,45 +116,63 @@ ActionSet.displayName = componentName;
 
 // We provide a validator function to help validate the actions supplied.
 // An optional parameter is a function which will be passed all the props
-// and returns true if the component is to be treated as 'small', which means
-// that a limit of three buttons will be enforced as well as not combining
-// ghost buttons with other button types.
-ActionSet.validateActions = () => (props, propName, componentName) => {
-  const small =
-    props.size === 'xs' || props.size === 'sm' || props.size === 'md';
+// and returns the size that the component should be treated as being: if
+// not provided, a 'size' prop is used to determine the size of the component.
+// When the size is xs or sm, or md with three actions, the buttons will be
+// stacked and a maximum of three buttons is applied with no ghosts unless
+// the ghost is the only button. Otherwise a maximum of four buttons with a
+// maximum of one ghost is applied. In either case, a maximum of one primary
+// button is allowed.
+ActionSet.validateActions = (sizeFn) => (props, propName, componentName) => {
   const prop = props[propName];
-
   const badActions = (problem) =>
     new Error(
       `Prop '${propName}' passed to ${componentName} is using an invalid combination of actions.\n\n${problem}`
     );
 
   if (prop && prop?.length > 0) {
-    if (small && prop.length > 3) {
+    const size = sizeFn ? sizeFn(props) : props.size;
+    const stack = willStack(size, prop.length);
+
+    if (stack && prop.length > 3) {
       throw badActions(
         `You cannot have more than three actions in this size of ${componentName}.`
       );
     }
 
-    const primaryButtons = prop.filter((button) => button.kind === 'primary');
+    if (prop.length > 4) {
+      throw badActions(
+        `You cannot have more than four actions in a ${componentName}.`
+      );
+    }
 
-    if (primaryButtons.length > 1) {
+    const primaryActions = prop.filter((a) => a.kind === 'primary').length;
+
+    if (primaryActions > 1) {
       throw badActions(
         `You cannot have more than one 'primary' action in a ${componentName}.`
       );
     }
 
-    const ghostButtons = prop.filter((button) => button.kind === 'ghost');
+    const ghostActions = prop.filter((a) => a.kind === 'ghost').length;
 
-    if (ghostButtons.length > 1) {
+    if (ghostActions > 1) {
       throw badActions(
         `You cannot have more than one 'ghost' action in a ${componentName}.`
       );
     }
 
-    if (small && prop.length > 1 && ghostButtons.length > 0) {
+    if (stack && prop.length > 1 && ghostActions > 0) {
       throw badActions(
-        `You cannot have a 'ghost' button in conjuntion with other action types in this size of ${componentName}. Try using a 'secondary' button instead.`
+        `You cannot have a 'ghost' button in conjunction with other action types in this size of ${componentName}. Try using a 'secondary' button instead.`
+      );
+    }
+
+    const secondaryActions = prop.filter((a) => a.kind === 'secondary').length;
+
+    if (prop.length > primaryActions + secondaryActions + ghostActions) {
+      throw badActions(
+        `You can only have 'primary', 'secondary' and 'ghost' buttons in a ${componentName}.`
       );
     }
   }
@@ -146,11 +188,11 @@ ActionSet.propTypes = {
     ActionSet.validateActions(),
     PropTypes.arrayOf(
       PropTypes.shape({
-        label: PropTypes.string,
-        onClick: PropTypes.func,
-        kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
         disabled: PropTypes.bool,
+        kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
+        label: PropTypes.string,
         loading: PropTypes.bool,
+        onClick: PropTypes.func,
       })
     ),
   ]),

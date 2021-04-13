@@ -96,8 +96,6 @@ export default {
 
 // Test values for props.
 
-const className = 'client-class-1 client-class-2';
-
 const closeIconDescription = 'Close the tearsheet';
 
 const description = (

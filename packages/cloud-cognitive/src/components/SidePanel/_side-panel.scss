@@ -95,6 +95,7 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
   .#{$block-class}__container {
     --#{$block-class}--subtitle-opacity: 1;
     --#{$block-class}--title-font-size: 1.25rem;
+    --#{$block-class}--content-bottom-padding: #{$spacing-10};
 
     position: fixed;
     top: $spacing-09;
@@ -241,7 +242,7 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     .#{$block-class}__body-content {
       padding: $spacing-05;
       padding-top: 0;
-      padding-bottom: $spacing-12;
+      padding-bottom: var(--#{$block-class}--content-bottom-padding);
     }
     .#{$block-class}__inner-content {
       height: calc(100vh - 3rem);
@@ -249,7 +250,6 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     .#{$block-class}__actions-container {
       position: fixed;
       bottom: 0;
-      height: $layout-05;
       background-color: $ui-01;
       border-top: 1px solid $decorative-01;
       &.#{$action-set-block-class}--xs {
@@ -264,8 +264,12 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       &.#{$action-set-block-class}--lg {
         @include setActionBarSize($large-panel-size);
       }
-      &.#{$block-class}__actions-container-condensed {
-        height: $layout-04;
+      .#{$action-set-block-class}__action-button {
+        min-height: $layout-05;
+      }
+      &.#{$block-class}__actions-container-condensed
+        .#{$action-set-block-class}__action-button {
+        min-height: $layout-04;
       }
     }
   }

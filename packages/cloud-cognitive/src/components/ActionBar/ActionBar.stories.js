@@ -104,6 +104,4 @@ export const Minimal = Template.bind({});
 Minimal.args = {
   children: actionBarItems,
   containerWidth: 500,
-  iconDescription: 'Action',
-  renderIcon: Bee24,
 };

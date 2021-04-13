@@ -14,7 +14,7 @@ import '../utils/disable-all'; // must come before components are imported (dire
 import * as components from '..';
 
 const canaryClass = `${pkg.prefix}-canary`;
-const name = 'export checks';
+const name = 'JS export checks';
 
 describe(name, () => {
   beforeAll(() => {

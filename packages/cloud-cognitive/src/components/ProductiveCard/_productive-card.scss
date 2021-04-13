@@ -35,6 +35,10 @@
     border-top: 1px solid $ui-03;
   }
 
+  .#{$pkg-prefix}-card-footer--no-button {
+    justify-content: flex-end;
+  }
+
   .#{$pkg-prefix}-card-actions {
     margin: 0;
   }

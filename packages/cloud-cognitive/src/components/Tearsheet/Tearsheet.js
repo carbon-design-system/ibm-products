@@ -15,6 +15,7 @@ import { pkg } from '../../settings';
 
 // Carbon and package components we use.
 import { ModalHeader, ModalBody } from 'carbon-components-react';
+import { ActionSet } from '../ActionSet';
 
 import { TearsheetShell } from './TearsheetShell';
 
@@ -36,7 +37,7 @@ export let Tearsheet = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
-      buttons,
+      actions,
       children,
       // className is passed directly to TearsheetShell via rest
       closeIconDescription,
@@ -97,7 +98,13 @@ export let Tearsheet = React.forwardRef(
         )}
         <div className={`${blockClass}__right`}>
           {children && <div className={`${blockClass}__main`}>{children}</div>}
-          {buttons && <div className={`${blockClass}__buttons`}>{buttons}</div>}
+          {actions && actions.length > 0 && (
+            <ActionSet
+              actions={actions}
+              size="max"
+              className={`${blockClass}__buttons`}
+            />
+          )}
         </div>
       </ModalBody>
     </TearsheetShell>
@@ -116,9 +123,20 @@ Tearsheet.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 Tearsheet.propTypes = {
   /**
-   * Specifies the content for the buttons section of the Tearsheet.
+   * Sets the action buttons for the Tearsheet.
    */
-  buttons: PropTypes.node,
+  actions: PropTypes.oneOfType([
+    ActionSet.validateActions(() => 'max'),
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        label: PropTypes.string,
+        onPrimaryActionClick: PropTypes.func,
+        kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
+        disabled: PropTypes.bool,
+        loading: PropTypes.bool,
+      })
+    ),
+  ]),
 
   /**
    * Specifies the content of the Tearsheet body.

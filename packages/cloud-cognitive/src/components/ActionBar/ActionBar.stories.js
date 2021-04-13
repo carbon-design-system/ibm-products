@@ -8,7 +8,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { Lightning16, Bee24 } from '@carbon/icons-react';
+import { Lightning16 } from '@carbon/icons-react';
 
 import { pkg } from '../../settings';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.34.24](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.34.23...@carbon/ibm-cloud-cognitive@0.34.24) (2021-04-13)
+
+
+### Bug Fixes
+
+* **SidePanel:** add resize detector to adapt to new actions height ([#596](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/596)) ([e812ff9](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e812ff953cc40d83265d02540357578c95150ec5))
+
+
+
+
+
 ## [0.34.23](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.34.22...@carbon/ibm-cloud-cognitive@0.34.23) (2021-04-13)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

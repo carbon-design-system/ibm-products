@@ -20,8 +20,27 @@ unclear.
   - \_index.scss &mdash; imports all the public SCSS for users, often with
     something like `@import './component-name.scss';`.
   - \_storybook-styles.scss &mdash; SCSS used by the Storybook stories, which
-    may have additional styles used by the stories.
+    may have additional styles used by the stories. Note that this file does NOT
+    need to import any of the component styles, as these are rolled up
+    separately.
   - _ComponentName_.mdx &mdash; a Storybook docs page for the component.
+- Each component which is to be publicly available (for use by users of the
+  package) also needs the following:
+  - The JS must be exported in /src/components/index.js, with something like
+    `export { ComponentName } from './DirectoryName';`.
+  - The SCSS must be include in /src/components/\_index.scss, with something
+    like `@import './DirectoryName/index';`. When the component has been
+    reviewed for release, it should also be included in
+    /src/components/\_index-released-only.scss in the same way.
+  - Each public component must also be identified in
+    /src/globals/js/package-settings.js with a boolean flag in the `component`
+    section, of the form `ComponentName: false,`. The flag should be true when
+    the component has been reviewed for release, and false otherwise.
+  - If a component is not intended for public use, and is only an internal
+    helper within the package, it should NOT be exported from the index.js,
+    should NOT be included in \_index.scss, and should NOT have a flag in the
+    package-settings.js. Instead, the JS should be imported, and the SCSS
+    included, whereever the component is needed internally.
 
 ## Component JavaScript code
 

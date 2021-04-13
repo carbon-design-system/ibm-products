@@ -32,7 +32,7 @@
     "build:js-esm": "cross-env BABEL_ENV=esm yarn build:js-modules -d es",
     "build:js-cjs": "cross-env BABEL_ENV=cjs yarn build:js-modules -d lib",
     "build:js-modules": "babel src --ignore '**/__tests__','**/*.test.js','**/*.stories.js','src/utils/**/*'",
-    "build:scss": "bundler bundle:scss src/index.scss && copyfiles 'src/**/*.scss' scss -u 1",
+    "build:scss": "for f in src/*.scss; do bundler bundle:scss ${f} -o css/build; copyfiles 'css/build/**/*' css -u 2; done && rimraf css/build && copyfiles 'src/**/*.scss' scss -u 1",
     "ci-check": "node scripts/import",
     "clean": "rimraf es lib css scss",
     "generate": "cross-env FORCE_COLOR=1 node scripts/generate",

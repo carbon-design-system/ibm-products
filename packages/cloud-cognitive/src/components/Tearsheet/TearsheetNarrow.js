@@ -81,7 +81,7 @@ export let TearsheetNarrow = React.forwardRef(
           {actions && actions.length > 0 && (
             <ActionSet
               actions={actions}
-              size="sm"
+              size="lg"
               className={`${blockClass}__buttons`}
             />
           )}
@@ -106,7 +106,7 @@ TearsheetNarrow.propTypes = {
    * Sets the action buttons for the Tearsheet.
    */
   actions: PropTypes.oneOfType([
-    ActionSet.validateActions(),
+    ActionSet.validateActions(() => 'lg'),
     PropTypes.arrayOf(
       PropTypes.shape({
         label: PropTypes.string,

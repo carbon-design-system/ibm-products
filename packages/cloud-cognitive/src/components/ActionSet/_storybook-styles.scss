@@ -10,8 +10,25 @@
 
 $block-class: #{$pkg-prefix}--action-set;
 
-.#{$block-class} {
-  min-width: 80vw;
+.#{$block-class}__story-container {
+  min-width: 90vw;
+  min-height: 3rem;
   border: 1px solid $decorative-01;
   box-shadow: 0 0 10px 5px $ui-04;
+}
+
+.#{$block-class}.#{$block-class}--lg {
+  min-width: 60vw;
+}
+
+.#{$block-class}.#{$block-class}--md {
+  min-width: 45vw;
+}
+
+.#{$block-class}.#{$block-class}--sm {
+  min-width: 30vw;
+}
+
+.#{$block-class}.#{$block-class}--xs {
+  min-width: 25vw;
 }

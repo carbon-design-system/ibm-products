@@ -15,6 +15,7 @@ import { pkg } from '../../settings';
 
 // Carbon and package components we use.
 import { ModalHeader, ModalBody } from 'carbon-components-react';
+import { ActionSet } from '../ActionSet';
 
 import { TearsheetShell } from './TearsheetShell';
 
@@ -36,7 +37,7 @@ export let TearsheetNarrow = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
-      buttons,
+      actions,
       children,
       // className is passed directly to TearsheetShell via rest
       closeIconDescription,
@@ -77,7 +78,13 @@ export let TearsheetNarrow = React.forwardRef(
       <ModalBody className={`${blockClass}__body`}>
         <div className={`${blockClass}__right`}>
           {children && <div className={`${blockClass}__main`}>{children}</div>}
-          {buttons && <div className={`${blockClass}__buttons`}>{buttons}</div>}
+          {actions && actions.length > 0 && (
+            <ActionSet
+              actions={actions}
+              size="lg"
+              className={`${blockClass}__buttons`}
+            />
+          )}
         </div>
       </ModalBody>
     </TearsheetShell>
@@ -96,9 +103,20 @@ TearsheetNarrow.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 TearsheetNarrow.propTypes = {
   /**
-   * Specifies the content for the buttons section of the Tearsheet.
+   * Sets the action buttons for the Tearsheet.
    */
-  buttons: PropTypes.node,
+  actions: PropTypes.oneOfType([
+    ActionSet.validateActions(() => 'lg'),
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        label: PropTypes.string,
+        onPrimaryActionClick: PropTypes.func,
+        kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
+        disabled: PropTypes.bool,
+        loading: PropTypes.bool,
+      })
+    ),
+  ]),
 
   /**
    * Specifies the content of the Tearsheet body.

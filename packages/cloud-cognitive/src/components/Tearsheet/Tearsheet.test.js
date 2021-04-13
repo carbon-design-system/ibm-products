@@ -14,7 +14,7 @@ import '../../utils/enable-all'; // must come before component is imported (dire
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { Button, Tab, Tabs } from 'carbon-components-react';
+import { Tab, Tabs } from 'carbon-components-react';
 import { Tearsheet, TearsheetNarrow } from '.';
 
 const blockClass = `${pkg.prefix}--tearsheet`;
@@ -26,14 +26,10 @@ const onCloseReturnsFalse = jest.fn(() => false);
 const onCloseReturnsTrue = jest.fn(() => true);
 
 const createButton = `Create ${uuidv4()}`;
-const buttons = (
-  <div>
-    <Button kind="secondary" onClick={onClick}>
-      Cancel
-    </Button>
-    <Button onClick={onClick}>{createButton}</Button>
-  </div>
-);
+const actions = [
+  { kind: 'secondary', onClick, label: 'Cancel' },
+  { onClick, label: createButton },
+];
 const childFragment = `Main ${uuidv4()} content`;
 const children = <div>{childFragment}</div>;
 const className = `class-${uuidv4()}`;
@@ -90,7 +86,7 @@ const commonTests = (Ts, name) => {
   });
 
   it('renders buttons', () => {
-    render(<Ts {...{ buttons }} />);
+    render(<Ts {...{ actions }} />);
     expect(document.querySelector(`.${blockClass}__buttons`)).not.toBeNull();
     expect(onClick).toHaveBeenCalledTimes(0);
     userEvent.click(screen.getByText(createButton));

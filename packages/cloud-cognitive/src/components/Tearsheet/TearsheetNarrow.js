@@ -43,10 +43,10 @@ export let TearsheetNarrow = React.forwardRef(
       closeIconDescription,
       description,
       hasCloseIcon,
-      // height is passed directly to TearsheetShell via rest
       label,
       // onClose, open, preventCloseOnClickOutside are passed directly to TearsheetShell via rest
       title,
+      // verticalPosition is passed directly to TearsheetShell via rest
       // Collect any other property values passed in.
       ...rest
     },
@@ -144,14 +144,6 @@ TearsheetNarrow.propTypes = {
   hasCloseIcon: PropTypes.bool,
 
   /**
-   * Specifies the height of the tearsheet. The 'normal' height fills the
-   * viewport leaving room at the top for a header bar to show through from
-   * below. Use 'lower' height to leave a little extra room at the top to allow
-   * a breadcrumb or action bar navigation to also show through.
-   */
-  height: PropTypes.oneOf(['normal', 'lower']),
-
-  /**
    * Specifies the label of the Tearsheet.
    */
   label: PropTypes.node,
@@ -177,6 +169,15 @@ TearsheetNarrow.propTypes = {
    * Specifies the title of the Tearsheet.
    */
   title: PropTypes.node,
+
+  /**
+   * Specifies the position of the top of tearsheet in the viewport. The
+   * 'normal' position is a short distance down from the top of the viewport,
+   * leaving room at the top for a header bar to show through from below. The
+   * 'lower' position provides a little extra room at the top to allow an action
+   * bar navigation or breadcrumbs to also show through.
+   */
+  verticalPosition: PropTypes.oneOf(['normal', 'lower']),
 };
 
 // Default values for component props. Default values are not required for
@@ -186,5 +187,5 @@ TearsheetNarrow.propTypes = {
 TearsheetNarrow.defaultProps = {
   closeIconDescription: 'Close',
   hasCloseIcon: true,
-  height: 'normal',
+  verticalPosition: 'normal',
 };

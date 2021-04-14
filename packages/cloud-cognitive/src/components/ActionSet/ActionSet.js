@@ -43,6 +43,8 @@ ActionSetButton.propTypes = {
   onClick: PropTypes.func,
 };
 
+const defaultKind = Button.defaultProps.kind;
+
 const willStack = (size, numberOfActions) =>
   size === 'xs' || size === 'sm' || (size === 'md' && numberOfActions > 2);
 
@@ -69,19 +71,20 @@ export const ActionSet = React.forwardRef(
 
     // order the actions with ghost buttons first and primary buttons last
     // (and the opposite way if we're stacking)
-    buttons.sort((action1, action2) =>
-      action1.kind === action2.kind
-        ? 0
-        : action1.kind === 'ghost' || action2.kind === 'primary'
+    buttons.sort((action1, action2) => {
+      const kind1 = action1.kind || defaultKind;
+      const kind2 = action2.kind || defaultKind;
+
+      return kind1 === 'ghost' || kind2 === 'primary'
         ? stack
           ? 1
           : -1
-        : action1.kind === 'primary' || action2.kind === 'ghost'
+        : kind1 === 'primary' || kind2 === 'ghost'
         ? stack
           ? -1
           : 1
-        : 0
-    );
+        : 0;
+    });
 
     return (
       <ButtonSet
@@ -125,56 +128,52 @@ ActionSet.displayName = componentName;
 // button is allowed.
 ActionSet.validateActions = (sizeFn) => (props, propName, componentName) => {
   const prop = props[propName];
-  const badActions = (problem) =>
-    new Error(
-      `Prop '${propName}' passed to ${componentName} is using an invalid combination of actions.\n\n${problem}`
-    );
+  const actions = prop && prop?.length;
 
-  if (prop && prop?.length > 0) {
+  if (actions > 0) {
     const size = sizeFn ? sizeFn(props) : props.size;
     const stack = willStack(size, prop.length);
 
-    if (stack && prop.length > 3) {
-      throw badActions(
-        `You cannot have more than three actions in this size of ${componentName}.`
-      );
-    }
+    const countActions = (kind) =>
+      prop.filter((action) => (action.kind || defaultKind) === kind).length;
 
-    if (prop.length > 4) {
-      throw badActions(
-        `You cannot have more than four actions in a ${componentName}.`
-      );
-    }
+    const check = (iftrue, problem) => {
+      if (iftrue)
+        throw new Error(`Property '${propName}' is invalid: ${problem}`);
+    };
 
-    const primaryActions = prop.filter((a) => a.kind === 'primary').length;
+    check(
+      stack && actions > 3,
+      `you cannot have more than three actions in this size of ${componentName}.`
+    );
 
-    if (primaryActions > 1) {
-      throw badActions(
-        `You cannot have more than one 'primary' action in a ${componentName}.`
-      );
-    }
+    check(
+      actions > 4,
+      `you cannot have more than four actions in a ${componentName}.`
+    );
 
-    const ghostActions = prop.filter((a) => a.kind === 'ghost').length;
+    const primaryActions = countActions('primary');
+    check(
+      primaryActions > 1,
+      `you cannot have more than one 'primary' action in a ${componentName}.`
+    );
 
-    if (ghostActions > 1) {
-      throw badActions(
-        `You cannot have more than one 'ghost' action in a ${componentName}.`
-      );
-    }
+    const ghostActions = countActions('ghost');
+    check(
+      ghostActions > 1,
+      `you cannot have more than one 'ghost' action in a ${componentName}.`
+    );
 
-    if (stack && prop.length > 1 && ghostActions > 0) {
-      throw badActions(
-        `You cannot have a 'ghost' button in conjunction with other action types in this size of ${componentName}. Try using a 'secondary' button instead.`
-      );
-    }
+    check(
+      stack && actions > 1 && ghostActions > 0,
+      `you cannot have a 'ghost' button in conjunction with other action types in this size of ${componentName}. Try using a 'secondary' button instead.`
+    );
 
-    const secondaryActions = prop.filter((a) => a.kind === 'secondary').length;
-
-    if (prop.length > primaryActions + secondaryActions + ghostActions) {
-      throw badActions(
-        `You can only have 'primary', 'secondary' and 'ghost' buttons in a ${componentName}.`
-      );
-    }
+    const secondaryActions = countActions('secondary');
+    check(
+      prop.length > primaryActions + secondaryActions + ghostActions,
+      `you can only have 'primary', 'secondary' and 'ghost' buttons in a ${componentName}.`
+    );
   }
 
   return null;

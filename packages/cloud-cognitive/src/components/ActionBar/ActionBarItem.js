@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2020
+// Copyright IBM Corp. 2020, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -25,15 +25,13 @@ const blockClass = `${pkg.prefix}--action-bar-item`;
 /**
  * The ActionBarItem is used in the page header to populate the action bar
  */
-export let ActionBarItem = React.forwardRef(({ ...otherProps }, ref) => {
-  const className = cx([blockClass, otherProps.className]);
-
+export let ActionBarItem = React.forwardRef(({ className, ...rest }, ref) => {
   return (
     <Button
       {...{
-        ...otherProps,
+        ...rest,
         ref,
-        className,
+        className: cx(blockClass, className),
         hasIconOnly: true,
         kind: 'ghost',
         size: 'field',

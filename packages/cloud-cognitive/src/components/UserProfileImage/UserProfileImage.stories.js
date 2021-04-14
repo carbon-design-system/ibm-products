@@ -22,7 +22,7 @@ export default {
     backgroundColor: {
       control: {
         type: 'select',
-        options: ['light-blue', 'dark-blue'],
+        options: ['light-cyan', 'dark-cyan'],
       },
     },
     theme: {
@@ -40,7 +40,7 @@ export default {
     size: {
       control: {
         type: 'radio',
-        options: ['x-large', 'large', 'medium', 'small', 'x-small'],
+        options: ['xl', 'lg', 'md', 'sm', 'xs'],
       },
     },
   },
@@ -56,27 +56,27 @@ const Template = (args) => {
 
 export const Default = Template.bind({});
 Default.args = {
-  backgroundColor: 'light-blue',
+  backgroundColor: 'light-cyan',
   theme: 'light',
 };
 
 export const WithGroupIcon = Template.bind({});
 WithGroupIcon.args = {
-  backgroundColor: 'light-blue',
+  backgroundColor: 'light-cyan',
   theme: 'light',
   icon: 'group',
 };
 
 export const WithInitials = Template.bind({});
 WithInitials.args = {
-  backgroundColor: 'light-blue',
+  backgroundColor: 'light-cyan',
   theme: 'light',
   initials: 'thomas j. watson',
 };
 
 export const WithImage = Template.bind({});
 WithImage.args = {
-  backgroundColor: 'light-blue',
+  backgroundColor: 'light-cyan',
   theme: 'light',
   image,
 };

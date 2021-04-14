@@ -27,31 +27,33 @@
       display: block;
     }
 
-    .#{$block-class}--displayed-items {
+    .#{$block-class}__displayed-items {
       display: inline-flex;
       width: 100%;
       white-space: nowrap;
     }
 
-    .#{$block-class}--displayed-items--right {
+    .#{$block-class}__displayed-items--right {
       justify-content: flex-end;
     }
 
-    .#{$block-class}--overflow-menu {
+    .#{$block-class}__overflow-menu {
       display: inline-block;
     }
+  }
 
-    .#{$block-class}--overflow-menu-item {
+  @include block-wrap($block-class + '-options') {
+    .#{$block-class}__overflow-menu-item {
       padding: 0 $spacing-03;
     }
 
-    .#{$block-class}--overflow-menu-item-content {
+    .#{$block-class}__overflow-menu-item-content {
       display: flex;
       justify-content: space-between;
       width: 100%;
     }
 
-    .#{$block-class}--overflow-menu-item svg {
+    .#{$block-class}__overflow-menu-item svg {
       margin: 0 $spacing-02;
     }
   }

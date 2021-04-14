@@ -18,6 +18,8 @@ import ReactResizeDetector from 'react-resize-detector';
 import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import unwrapIfFragment from '../../global/js/utils/unwrap-if-fragment';
+import { deprecateProp } from '../../global/js/utils/props-helper';
+import { ActionBarItem } from './ActionBarItem';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--action-bar`;
@@ -31,9 +33,10 @@ const componentName = 'ActionBar';
 export let ActionBar = React.forwardRef(
   (
     {
+      actions,
       children,
       className,
-      maxVisibleActionBarItems,
+      maxVisible,
       onWidthChange,
       overflowAriaLabel,
       rightAlign,
@@ -45,31 +48,31 @@ export let ActionBar = React.forwardRef(
     const [displayCount, setDisplayCount] = useState(0);
     const [displayedItems, setDisplayedItems] = useState([]);
     const internalId = useRef(uuidv4());
-    const [childArray, setChildArray] = useState([]);
+    const [itemArray, setItemArray] = useState([]);
     const refDisplayedItems = useRef(null);
 
     const ActionBarOverflowItems = ({ overflowItems }) => {
       return (
         <OverflowMenu
           ariaLabel={overflowAriaLabel}
-          className={`${blockClass}--overflow-menu`}
+          className={`${blockClass}__overflow-menu`}
           direction="bottom"
           flipped
-          menuOptionsClass={`${blockClass}--options`}>
+          menuOptionsClass={`${blockClass}-options`}>
           {overflowItems.map((item, index) => {
             // This uses a copy of a menu item option
             // NOTE: Cannot use a real Tooltip icon below as it uses a <button /> the
             // div equivalent below is based on Carbon 10.25.0
             return (
               <OverflowMenuItem
-                className={`${blockClass}--overflow-menu-item`}
+                className={`${blockClass}__overflow-menu-item`}
                 key={`${blockClass}-overflow-${internalId.current}-${index}`}
                 itemText={
                   <div
-                    className={`${blockClass}--overflow-menu-item-content`}
+                    className={`${blockClass}__overflow-menu-item-content`}
                     aria-describedby={`${internalId}--overflow-menu-item-label`}>
                     <span
-                      className={`${blockClass}--overflow-menu-item-label`}
+                      className={`${blockClass}__overflow-menu-item-label`}
                       id={`${internalId}--overflow-menu-item-label`}>
                       {item.props.iconDescription}
                     </span>
@@ -92,8 +95,13 @@ export let ActionBar = React.forwardRef(
 
     // create child array from children which may be a fragment
     useEffect(() => {
-      setChildArray(unwrapIfFragment(children));
-    }, [children]);
+      if (actions) {
+        setItemArray(actions);
+      } else {
+        const unwrapped = unwrapIfFragment(children);
+        setItemArray(unwrapped.map((item) => item.props));
+      }
+    }, [actions, children]);
 
     // creates displayed items based on displayCount and alignment
     useEffect(() => {
@@ -103,18 +111,20 @@ export let ActionBar = React.forwardRef(
       // add visible items
       for (let index = 0; index < displayCount; index++) {
         newDisplayedItems.push(
-          React.cloneElement(childArray[index], {
-            key: `displayed-action-bar-item-${internalId.current}-${index}`,
-          })
+          <ActionBarItem
+            {...itemArray[index]}
+            key={`displayed-action-bar-item-${internalId.current}-${index}`}
+          />
         );
       }
 
       // add overflow items
-      for (let index = displayCount; index < childArray.length; index++) {
+      for (let index = displayCount; index < itemArray.length; index++) {
         newOverflowItems.push(
-          React.cloneElement(childArray[index], {
-            key: `overflow-action-bar-item-${internalId.current}-${index}`,
-          })
+          <ActionBarItem
+            {...itemArray[index]}
+            key={`overflow-action-bar-item-${internalId.current}-${index}`}
+          />
         );
       }
 
@@ -129,7 +139,7 @@ export let ActionBar = React.forwardRef(
       }
 
       setDisplayedItems(newDisplayedItems);
-    }, [childArray, displayCount]);
+    }, [itemArray, displayCount]);
 
     // determine display count based on space available and width of pageActions
     const checkFullyVisibleItems = () => {
@@ -140,9 +150,9 @@ export let ActionBar = React.forwardRef(
       if (actionBarItemWidth > 0) {
         const mightFit = spaceAvailable / actionBarItemWidth;
         // visibleItems may include 1 overflow menu
-        const visibleItems = maxVisibleActionBarItems
-          ? Math.min(childArray.length, maxVisibleActionBarItems + 1) // + 1 for overflow menu if needed
-          : childArray.length;
+        const visibleItems = maxVisible
+          ? Math.min(itemArray.length, maxVisible + 1) // + 1 for overflow menu if needed
+          : itemArray.length;
         let willFit = Math.min(Math.floor(mightFit), visibleItems);
 
         onWidthChange &&
@@ -152,7 +162,7 @@ export let ActionBar = React.forwardRef(
           });
 
         // action bar items are a fixed width
-        if (willFit < childArray.length) {
+        if (willFit < itemArray.length) {
           willFit -= 1; // remove one for overflow menu
         }
 
@@ -167,7 +177,7 @@ export let ActionBar = React.forwardRef(
     useEffect(() => {
       checkFullyVisibleItems();
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [maxVisibleActionBarItems, childArray]);
+    }, [maxVisible, itemArray]);
 
     const handleResize = () => {
       // width is the space available for all action bar items horizontally
@@ -182,8 +192,8 @@ export let ActionBar = React.forwardRef(
           <div
             ref={refDisplayedItems}
             className={cx([
-              `${blockClass}--displayed-items`,
-              { [`${blockClass}--displayed-items--right`]: rightAlign },
+              `${blockClass}__displayed-items`,
+              { [`${blockClass}__displayed-items--right`]: rightAlign },
             ])}>
             {displayedItems}
           </div>
@@ -195,13 +205,30 @@ export let ActionBar = React.forwardRef(
 
 ActionBar.displayName = componentName;
 ActionBar.propTypes = {
+  // /**
+  //  * actions in the bar
+  //  */
+  actions: PropTypes.oneOfType([
+    // ActionBar.validateActions(),
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        iconDescription: PropTypes.string.isRequired,
+        renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
+          .isRequired,
+        onClick: PropTypes.func,
+      })
+    ),
+  ]),
   /**
    * children of the action bar (action bar items)
    */
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.element,
-  ]), // expects action bar item as array or in fragment,
+  children: deprecateProp(
+    PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.element),
+      PropTypes.element,
+    ]),
+    "See documentation on the 'actions' property."
+  ), // expects action bar item as array or in fragment,
   /**
    * className
    */
@@ -209,7 +236,7 @@ ActionBar.propTypes = {
   /**
    * maximum visible ActionBarItems
    */
-  maxVisibleActionBarItems: PropTypes.number,
+  maxVisible: PropTypes.number,
   /**
    * onItemCountChange - event reporting maxWidth
    */

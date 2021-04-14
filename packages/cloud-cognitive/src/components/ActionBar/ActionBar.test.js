@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2020
+ * Copyright IBM Corp. 2020, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -55,9 +55,8 @@ describe(ActionBar.displayName, () => {
   it('Renders an action bar', () => {
     render(<TestActionBar width={1150}>{ActionBarItems}</TestActionBar>);
 
-    expect(
-      screen.getByText(/Action 01/) && screen.getByText(/Action 10/)
-    ).toBeTruthy();
+    screen.getByText(/Action 01/);
+    screen.getByText(/Action 10/);
   });
 
   it('Renders an action bar with overflow items', () => {
@@ -69,21 +68,24 @@ describe(ActionBar.displayName, () => {
       </TestActionBar>
     );
 
-    const ofBtn = screen.getByLabelText(overflowAriaLabel);
-    expect(ofBtn).toBeTruthy();
-
-    let a10;
-
-    try {
-      a10 = screen.getByText(/Action 10/);
-    } catch {
-      // expected
-    }
-    expect(a10).toBeUndefined();
+    expect(screen.queryByText(/Action 10/)).toBeNull();
 
     // Click overflow button and check for last action
+    const ofBtn = screen.getByLabelText(overflowAriaLabel);
     click(ofBtn);
-    a10 = screen.getByText(/Action 10/);
-    expect(a10).toBeTruthy();
+    screen.getByText(/Action 10/);
+  });
+
+  it('Renders an action bar with max items set', () => {
+    render(
+      <TestActionBar width={1150} maxVisibleActionBarItems={2}>
+        {ActionBarItems}
+      </TestActionBar>
+    );
+
+    screen.getByText(/Action 01/);
+    screen.getByText(/Action 02/);
+
+    expect(screen.queryByText(/Action 03/)).toBeNull();
   });
 });

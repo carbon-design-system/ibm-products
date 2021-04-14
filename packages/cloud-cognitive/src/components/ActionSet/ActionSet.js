@@ -21,21 +21,40 @@ const componentName = 'ActionSet';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
-const ActionSetButton = ({ disabled, kind, label, loading, onClick }) => (
-  <Button
-    disabled={disabled || loading || false}
-    onClick={onClick}
-    kind={kind}
-    className={cx([
-      `${blockClass}__action-button`,
-      { [`${blockClass}__ghost-button`]: kind === 'ghost' },
-    ])}>
-    {label}
-    {loading && <InlineLoading />}
-  </Button>
+const ActionSetButton = React.forwardRef(
+  (
+    {
+      // The component props, in alphabetical order (for consistency).
+      className,
+      disabled,
+      kind,
+      label,
+      loading,
+      onClick,
+      // Collect any other property values passed in.
+      ...rest
+    },
+    ref
+  ) => (
+    <Button
+      {
+        // Pass through any other property values as HTML attributes.
+        ...rest
+      }
+      className={cx(className, [
+        `${blockClass}__action-button`,
+        { [`${blockClass}__action-button--ghost`]: kind === 'ghost' },
+      ])}
+      disabled={disabled || loading || false}
+      {...{ kind, onClick, ref }}>
+      {label}
+      {loading && <InlineLoading />}
+    </Button>
+  )
 );
 
 ActionSetButton.propTypes = {
+  className: PropTypes.string,
   disabled: PropTypes.bool,
   kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
   label: PropTypes.string,
@@ -50,7 +69,15 @@ const willStack = (size, numberOfActions) =>
 
 /**
  * An ActionSet presents a set of action buttons, constructed from bundles
- * of prop values and applying some layout rules.
+ * of prop values and applying some layout rules. When the size is 'xs' or 'sm'
+ * the buttons are stacked, and should only include primary and secondary
+ * kinds. When the size is 'md' the buttons are stacked if there are three or
+ * more. When the size is 'md' or 'lg', two buttons share the horizontal space.
+ * When the size is 'lg', three or more buttons use a quarter of the available
+ * horizontal space, and if the size is 'xlg' or 'max' the buttons always use
+ * a quarter of the available horizontal space. If there is a ghost button,
+ * it appears at the left side. If there is a primary button it appears at the
+ * right.
  */
 export const ActionSet = React.forwardRef(
   (
@@ -181,7 +208,14 @@ ActionSet.validateActions = (sizeFn) => (props, propName, componentName) => {
 
 ActionSet.propTypes = {
   /**
-   * Specifies the action buttons to show.
+   * Specifies the action buttons to show. Each action is specified as an
+   * object with optional fields 'label' to supply the button label, 'kind'
+   * to select the button kind (must be 'primary', 'secondary' or 'ghost'),
+   * 'loading' to display a loading indicator, and 'onClick' to receive
+   * notifications when the button is clicked. Additional fields in the object
+   * will be passed to the Button component, and these can include 'disabled',
+   * 'ref', 'className', and any other Button props. Any other fields in the
+   * object will be passed through to the button element as HTML attributes.
    */
   actions: PropTypes.oneOfType([
     ActionSet.validateActions(),
@@ -205,7 +239,7 @@ ActionSet.propTypes = {
    * Sets the size of the action set. Different button arrangements are used
    * in different sizes, to make best use of the available space.
    */
-  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'max']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xlg', 'max']),
 };
 
 ActionSet.defaultProps = {

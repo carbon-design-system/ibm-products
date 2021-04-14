@@ -12,6 +12,8 @@ import userEvent from '@testing-library/user-event';
 import { pkg } from '../../settings';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 
+import { Loading } from 'carbon-components-react';
+
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { ActionSet } from '.';
@@ -20,12 +22,14 @@ const blockClass = `${pkg.prefix}--action-set`;
 const componentName = ActionSet.displayName;
 
 const dataTestId = uuidv4();
-const label1 = `Button ${uuidv4()}`;
+const label1 = `Secondary button ${uuidv4()}`;
 const action1 = { label: label1, kind: 'secondary' };
-const label2 = `Button ${uuidv4()}`;
+const label2 = `Primary button ${uuidv4()}`;
 const action2 = { label: label2, kind: 'primary' };
-const label3 = `Button ${uuidv4()}`;
+const label3 = `Ghost button ${uuidv4()}`;
 const action3 = { label: label3, kind: 'ghost' };
+const label4 = `Another secondary button ${uuidv4()}`;
+const action4 = { label: label4, kind: 'secondary' };
 
 const getByRoleAndLabel = (role, label) =>
   screen.getByRole(role, { name: label });
@@ -36,7 +40,7 @@ const ghostButton = 'bx--btn--ghost';
 
 describe(componentName, () => {
   it('renders a component ActionSet', () => {
-    render(<ActionSet />);
+    render(<ActionSet actions={[]} />);
     expect(screen.getByRole('presentation')).toHaveClass(blockClass);
   });
 
@@ -53,15 +57,25 @@ describe(componentName, () => {
   });
 
   it('renders ghost button first and primary button last', () => {
-    render(<ActionSet size="lg" actions={[action1, action2, action3]} />);
+    render(
+      <ActionSet size="max" actions={[action1, action2, action3, action4]} />
+    );
     const buttons = screen.getAllByRole('button');
     expect(buttons[0].textContent).toEqual(label3);
     expect(buttons[1].textContent).toEqual(label1);
-    expect(buttons[2].textContent).toEqual(label2);
+    expect(buttons[2].textContent).toEqual(label4);
+    expect(buttons[3].textContent).toEqual(label2);
   });
 
   it('renders primary button first when stacking', () => {
-    render(<ActionSet size="sm" actions={[action1, action2]} />);
+    render(<ActionSet size="xs" actions={[action1, action2]} />);
+    const buttons = screen.getAllByRole('button');
+    expect(buttons[0].textContent).toEqual(label2);
+    expect(buttons[1].textContent).toEqual(label1);
+  });
+
+  it('renders primary button first when stacking whichever way round they are supplied', () => {
+    render(<ActionSet size="xs" actions={[action2, action1]} />);
     const buttons = screen.getAllByRole('button');
     expect(buttons[0].textContent).toEqual(label2);
     expect(buttons[1].textContent).toEqual(label1);
@@ -78,6 +92,14 @@ describe(componentName, () => {
     expect(onClick).toBeCalledTimes(0);
     userEvent.click(getByRoleAndLabel('button', label1));
     expect(onClick).toBeCalledTimes(1);
+  });
+
+  it('renders a loading button', () => {
+    render(<ActionSet actions={[{ ...action1, loading: true }]} />);
+    const loader = Loading.defaultProps.description;
+    expect(screen.getByRole('button').textContent).toEqual(
+      `${label1}${loader}${loader}`
+    );
   });
 
   it('adds additional properties to the containing node', () => {

@@ -142,10 +142,10 @@ AllAttributesSet.args = {
   closeIconDescription,
   description,
   hasCloseIcon: true,
-  height: 'normal',
   label,
   preventCloseOnClickOutside: true,
   title,
+  verticalPosition: 'normal',
   actions: 3,
 };
 

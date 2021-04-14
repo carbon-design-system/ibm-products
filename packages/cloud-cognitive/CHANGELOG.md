@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.34.26](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.34.25...@carbon/ibm-cloud-cognitive@0.34.26) (2021-04-14)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.34.25](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.34.24...@carbon/ibm-cloud-cognitive@0.34.25) (2021-04-14)
+
+
+### Bug Fixes
+
+* **SidePanel:** add transition to divider appearing during animation ([#599](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/599)) ([4a7fac1](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/4a7fac1843052b5495996aca21b61660ac0ef304))
+
+
+
+
+
 ## [0.34.24](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.34.23...@carbon/ibm-cloud-cognitive@0.34.24) (2021-04-13)
 
 

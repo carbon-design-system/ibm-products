@@ -13,6 +13,7 @@ module.exports = {
     '!packages/**/{examples,stories}/**',
     '!**/*.stories.js',
   ],
+  coverageReporters: [['text', { skipEmpty: true }]],
   moduleFileExtensions: ['js', 'json', 'node'],
   reporters: ['default'],
   setupFiles: [require.resolve('./setup/setupFiles')],

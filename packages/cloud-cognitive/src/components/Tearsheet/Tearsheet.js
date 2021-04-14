@@ -15,6 +15,7 @@ import { pkg } from '../../settings';
 
 // Carbon and package components we use.
 import { ModalHeader, ModalBody } from 'carbon-components-react';
+import { ActionSet } from '../ActionSet';
 
 import { TearsheetShell } from './TearsheetShell';
 
@@ -36,8 +37,9 @@ export let Tearsheet = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
-      buttons,
+      actions,
       children,
+      // className is passed directly to TearsheetShell via rest
       closeIconDescription,
       description,
       hasCloseIcon,
@@ -46,7 +48,9 @@ export let Tearsheet = React.forwardRef(
       influencerWidth,
       label,
       navigation,
+      // onClose, open, preventCloseOnClickOutside are passed directly to TearsheetShell via rest
       title,
+      // verticalPosition is passed directly to TearsheetShell via rest
       // Collect any other property values passed in.
       ...rest
     },
@@ -94,7 +98,13 @@ export let Tearsheet = React.forwardRef(
         )}
         <div className={`${blockClass}__right`}>
           {children && <div className={`${blockClass}__main`}>{children}</div>}
-          {buttons && <div className={`${blockClass}__buttons`}>{buttons}</div>}
+          {actions && actions.length > 0 && (
+            <ActionSet
+              actions={actions}
+              size="max"
+              className={`${blockClass}__buttons`}
+            />
+          )}
         </div>
       </ModalBody>
     </TearsheetShell>
@@ -113,77 +123,72 @@ Tearsheet.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 Tearsheet.propTypes = {
   /**
-   * Specifies the content for the buttons section of the Tearsheet.
-   * Optional.
+   * Sets the action buttons for the Tearsheet.
    */
-  buttons: PropTypes.node,
+  actions: PropTypes.oneOfType([
+    ActionSet.validateActions(() => 'max'),
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        label: PropTypes.string,
+        onPrimaryActionClick: PropTypes.func,
+        kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
+        disabled: PropTypes.bool,
+        loading: PropTypes.bool,
+      })
+    ),
+  ]),
 
   /**
    * Specifies the content of the Tearsheet body.
-   * Optional.
    */
   children: PropTypes.node,
 
   /**
    * Specifies class(es) to be applied to the top-level Tearsheet node.
-   * Optional.
    */
   className: PropTypes.string,
 
   /**
    * The description for the close icon.
-   * Optional.
    */
   closeIconDescription: PropTypes.string,
 
   /**
    * Specifies the description of the Tearsheet.
-   * Optional.
    */
   description: PropTypes.node,
 
   /**
    * Specifies if the Tearsheet has a close icon.
-   * Optional.
    */
   hasCloseIcon: PropTypes.bool,
 
   /**
-   * Specifies the height of the tearsheet `'normal' | 'lower'`. Lower is
-   * 40px lower to allow more underlying content to be visible. Optional.
-   */
-  height: PropTypes.oneOf(['normal', 'lower']),
-
-  /**
    * Specifies the content for the influencer section of the Tearsheet.
-   * Optional.
    */
-  influencer: PropTypes.node,
+  influencer: PropTypes.element,
 
   /**
-   * Specifies the position of the influencer section `'left' | 'right'`.
-   * Optional.
+   * Specifies the position of the influencer section, 'left' or 'right'.
    */
   influencerPosition: PropTypes.oneOf(['left', 'right']),
 
   /**
-   * Specifies the width of the influencer `'narrow' | 'wide'`. Narrow is
-   * 256px, wide is 320px. Optional.
+   * Specifies the width of the influencer: 'narrow' is 256px, and 'wide' is
+   * 320px.
    */
   influencerWidth: PropTypes.oneOf(['narrow', 'wide']),
 
   /**
    * Specifies the label of the Tearsheet.
-   * Optional.
    */
   label: PropTypes.node,
 
   /**
    * Specifies navigation content such as a `Tabs` component to be included
    * at the bottom of the Tearsheet header.
-   * Optional.
    */
-  navigation: PropTypes.node,
+  navigation: PropTypes.element,
 
   /**
    * Specifies an optional handler that is called when closing the modal.
@@ -192,22 +197,29 @@ Tearsheet.propTypes = {
   onClose: PropTypes.func,
 
   /**
-   * Specifies whether the Tearsheet is currently open or
-   * not.
+   * Specifies whether the Tearsheet is currently open.
    */
   open: PropTypes.bool,
 
   /**
-   * Prevents the Tearsheet from closing automatically if the user clicks outside of it.
-   * Optional.
+   * Prevents the Tearsheet from closing automatically if the user clicks
+   * outside it.
    */
   preventCloseOnClickOutside: PropTypes.bool,
 
   /**
    * Specifies the title of the Tearsheet.
-   * Optional.
    */
   title: PropTypes.node,
+
+  /**
+   * Specifies the position of the top of tearsheet in the viewport. The
+   * 'normal' position is a short distance down from the top of the viewport,
+   * leaving room at the top for a header bar to show through from below. The
+   * 'lower' position provides a little extra room at the top to allow an action
+   * bar navigation or breadcrumbs to also show through.
+   */
+  verticalPosition: PropTypes.oneOf(['normal', 'lower']),
 };
 
 // Default values for component props. Default values are not required for
@@ -217,7 +229,7 @@ Tearsheet.propTypes = {
 Tearsheet.defaultProps = {
   closeIconDescription: 'Close',
   hasCloseIcon: true,
-  height: 'normal',
   influencerPosition: 'left',
   influencerWidth: 'narrow',
+  verticalPosition: 'normal',
 };

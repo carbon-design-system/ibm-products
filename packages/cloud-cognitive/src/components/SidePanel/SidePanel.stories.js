@@ -309,7 +309,7 @@ const renderUIShellHeader = () => (
 );
 
 // eslint-disable-next-line react/prop-types
-const SlideOverTemplate = ({ actions, ...args }) => {
+const SlideOverTemplate = ({ minimalContent, actions, ...args }) => {
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -322,7 +322,7 @@ const SlideOverTemplate = ({ actions, ...args }) => {
         open={open}
         setOpen={setOpen}
         actions={actionSets[actions]}>
-        <ChildrenContent />
+        {!minimalContent && <ChildrenContent />}
       </SidePanel>
     </>
   );
@@ -398,12 +398,6 @@ export const WithActionToolbar = SlideOverTemplate.bind({});
 WithActionToolbar.args = {
   actionToolbarButtons: [
     {
-      label: 'Check status',
-      leading: true,
-      kind: 'ghost',
-      onActionToolbarButtonClick: () => {},
-    },
-    {
       label: 'Copy',
       icon: Copy20,
       onActionToolbarButtonClick: () => {},
@@ -443,4 +437,11 @@ SpecifyElementToHaveInitialFocus.args = {
   actions: 0,
   selectorPrimaryFocus: '#side-panel-story-text-input-a',
   ...defaultStoryProps,
+};
+
+export const WithMinimalContent = SlideOverTemplate.bind({});
+WithMinimalContent.args = {
+  ...defaultStoryProps,
+  actions: 0,
+  minimalContent: true,
 };

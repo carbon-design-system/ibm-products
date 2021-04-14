@@ -12,13 +12,17 @@ import '../../../utils/enable-all'; // must come before component is imported (d
 import mdx from './UnauthorizedEmptyState.mdx';
 import { pkg } from '../../../settings';
 import { getStorybookPrefix } from '../../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, 'EmptyStates');
 import { UnauthorizedEmptyState } from '.';
 
 import styles from '../_index.scss';
 
+const storybookPrefix = getStorybookPrefix(
+  pkg,
+  UnauthorizedEmptyState.displayName
+);
+
 export default {
-  title: `${storybookPrefix}/EmptyStates/UnauthorizedEmptyState`,
+  title: `${storybookPrefix}/EmptyStates/${UnauthorizedEmptyState.displayName}`,
   component: UnauthorizedEmptyState,
   parameters: {
     styles,

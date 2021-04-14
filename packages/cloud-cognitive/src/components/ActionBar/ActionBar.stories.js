@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2020
+// Copyright IBM Corp. 2020, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -8,13 +8,13 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { Lightning16, Bee24 } from '@carbon/icons-react';
+import { Lightning16 } from '@carbon/icons-react';
 
 import { pkg } from '../../settings';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
 import { ActionBar, ActionBarItem } from '.';
-const storybookPrefix = getStorybookPrefix(pkg, ActionBar.displayName);
+const storybookPrefix = getStorybookPrefix(pkg, ActionBarItem.displayName);
 
 const blockClass = `${pkg.prefix}--action-bar`;
 
@@ -104,6 +104,4 @@ export const Minimal = Template.bind({});
 Minimal.args = {
   children: actionBarItems,
   containerWidth: 500,
-  iconDescription: 'Action',
-  renderIcon: Bee24,
 };

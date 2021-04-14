@@ -7,38 +7,58 @@
 
 import React from 'react';
 import cx from 'classnames';
-import { Button } from 'carbon-components-react';
+import { Button, InlineLoading } from 'carbon-components-react';
+import {
+  Save16,
+  CheckmarkOutline16,
+  ErrorOutline16,
+  ErrorFilled16,
+} from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
 const componentName = 'Saving';
 
-export const Saving = ({
+export let Saving = ({
+  cancelButtonText,
   className,
-  defaultIcon,
+  defaultIconDescription,
   defaultText,
-  failIcon,
+  failIconDescription,
   failText,
-  inProgressIcon,
+  inProgressIconDescription,
   inProgressText,
-  onClick,
+  onCancel,
+  onSave,
   status,
-  successIcon,
+  successIconDescription,
   successText,
   type,
 }) => {
-  const getStatusText = () => {
-    if (status === 'default') return defaultText;
-    else if (status === 'inprogress') return inProgressText;
-    else if (status === 'success') return successText;
-    return failText;
+  const getStatusObj = () => {
+    const statusObj = {};
+
+    if (status === 'default') {
+      statusObj.text = defaultText;
+      statusObj.iconDescription = defaultIconDescription;
+      statusObj.icon = CheckmarkOutline16;
+    } else if (status === 'inprogress') {
+      statusObj.text = inProgressText;
+      statusObj.iconDescription = inProgressIconDescription;
+      statusObj.icon = InlineLoading;
+    } else if (status === 'success') {
+      statusObj.text = successText;
+      statusObj.iconDescription = successIconDescription;
+      statusObj.icon = Save16;
+    } else {
+      statusObj.text = failText;
+      statusObj.iconDescription = failIconDescription;
+      statusObj.icon = ErrorOutline16;
+    }
+
+    return statusObj;
   };
 
-  const getStatusIcon = () => {
-    if (status === 'default') return defaultIcon;
-    else if (status === 'inprogress') return inProgressIcon;
-    else if (status === 'success') return successIcon;
-    return failIcon;
-  };
+  const statusObj = getStatusObj();
 
   const classnames = cx(`${pkg.prefix}-saving`, {
     [className]: className,
@@ -47,77 +67,99 @@ export const Saving = ({
   return (
     <div className={classnames}>
       {type === 'auto' ? (
-        <p>{getStatusText()}</p>
+        <div className={`${pkg.prefix}-saving-message`}>
+          {status === 'fail' && (
+            <div className={`${pkg.prefix}-saving-error-icon`}>
+              <ErrorFilled16 />
+            </div>
+          )}
+          <p className={`${pkg.prefix}-saving-text`}>{statusObj.text}</p>
+        </div>
       ) : (
-        <Button onClick={onClick} kind="primary" renderIcon={getStatusIcon()}>
-          {getStatusText()}
-        </Button>
+        <div className={`${pkg.prefix}-saving-buttons`}>
+          <Button
+            onClick={onCancel}
+            kind="secondary"
+            disabled={status !== 'inprogress'}>
+            {cancelButtonText}
+          </Button>
+          <Button
+            onClick={onSave}
+            kind="primary"
+            renderIcon={statusObj.icon}
+            iconDescription={statusObj.iconDescription}
+            disabled={status === 'inprogress'}>
+            {statusObj.text}
+          </Button>
+        </div>
       )}
     </div>
   );
 };
 
+Saving = pkg.checkComponentEnabled(Saving, componentName);
+
 Saving.propTypes = {
+  /**
+   * Text for the cancel button (manual).
+   */
+  cancelButtonText: PropTypes.string,
   /**
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
   /**
-   * Icon for default state
+   * Description for default state icon (manual).
    */
-  defaultIcon: PropTypes.object,
+  defaultIconDescription: PropTypes.string,
   /**
-   * Text for default state
+   * Default text for the save button (manual). Per design guidelines you probably don't want to display this in the auto mode.
    */
   defaultText: PropTypes.string,
   /**
-   * Icon for failure state
+   * Description for fail state icon (manual).
    */
-  failIcon: PropTypes.object,
+  failIconDescription: PropTypes.string,
   /**
-   * Text for failure state
+   * Text for failure state.
    */
   failText: PropTypes.string,
   /**
-   * Icon for in progress state
+   * Description for in progress state icon (manual).
    */
-  inProgressIcon: PropTypes.object,
+  inProgressIconDescription: PropTypes.string,
   /**
-   * Text for in progress state
+   * Text for in progress state.
    */
   inProgressText: PropTypes.string,
   /**
-   * Function handler for button
+   * Function handler for cancel button (manual).
    */
-  onClick: PropTypes.func,
+  onCancel: PropTypes.func,
   /**
-   * Save state
+   * Function handler for save button (manual).
+   */
+  onSave: PropTypes.func,
+  /**
+   * The save state.
    */
   status: PropTypes.oneOf(['default', 'inprogress', 'success', 'fail']),
   /**
-   * Icon for success state
+   * Description for success state icon (manual).
    */
-  successIcon: PropTypes.object,
+  successIconDescription: PropTypes.string,
   /**
    * Text for success state
    */
   successText: PropTypes.string,
   /**
-   * Design style. See usage guidelines for additional information
+   * Designates the style of the save component. Manual uses a set of buttons and auto just displays a string. See usage guidelines for additional information.
    */
   type: PropTypes.oneOf(['manual', 'auto']),
 };
 
 Saving.defaultProps = {
-  defaultIcon: null,
-  defaultText: '',
-  failIcon: null,
-  failText: '',
-  inProgressIcon: null,
-  inProgressText: '',
   status: 'default',
-  successIcon: null,
-  successText: '',
   type: 'manual',
 };
 

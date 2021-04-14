@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CSS export checks doesn't change the exported CSS for released components 1`] = `
+".exp--about-modal .bx--modal-container {
+  grid-template-rows: auto auto 1fr auto;
+}
+
+.exp--about-modal .exp--about-modal__logo {
+  margin: var(--cds-spacing-05, 1rem);
+}
+
+.exp--about-modal .exp--about-modal__header {
+  grid-row: auto;
+  margin-bottom: 0;
+  padding: 0 20% var(--cds-spacing-03, 0.5rem) var(--cds-spacing-05, 1rem);
+}
+
+.exp--about-modal .exp--about-modal__title {
+  font-size: var(--cds-productive-heading-04-font-size, 1.75rem);
+  font-weight: var(--cds-productive-heading-04-font-weight, 400);
+  line-height: var(--cds-productive-heading-04-line-height, 1.29);
+  letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0);
+  color: var(--cds-text-01, #161616);
+}
+
+.exp--about-modal .exp--about-modal__body {
+  font-size: var(--cds-body-short-02-font-size, 1rem);
+  font-weight: var(--cds-body-short-02-font-weight, 400);
+  line-height: var(--cds-body-short-02-line-height, 1.375);
+  letter-spacing: var(--cds-body-short-02-letter-spacing, 0);
+  grid-row: auto;
+  min-height: var(--cds-layout-05, 4rem);
+  margin-bottom: 0;
+  padding: 0 20% 0 var(--cds-spacing-05, 1rem);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.exp--about-modal.exp--about-modal--with-tabs .exp--about-modal__body {
+  min-height: calc(var(--cds-layout-05, 4rem) + var(--cds-spacing-08, 2.5rem));
+}
+
+.exp--about-modal .exp--about-modal__body-content {
+  margin-bottom: var(--cds-spacing-09, 3rem);
+}
+
+.exp--about-modal.exp--about-modal--with-tabs .exp--about-modal__body-content {
+  margin-bottom: calc(var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem));
+}
+
+.exp--about-modal .exp--about-modal__links-container {
+  margin-top: var(--cds-spacing-05, 1rem);
+}
+
+.exp--about-modal .exp--about-modal__links-container a + a {
+  margin-left: var(--cds-spacing-03, 0.5rem);
+  padding-left: var(--cds-spacing-03, 0.5rem);
+  border-left: 1px solid var(--cds-text-01, #161616);
+}
+
+.exp--about-modal .exp--about-modal__legal-text,
+.exp--about-modal .exp--about-modal__copyright-text {
+  margin-top: var(--cds-spacing-07, 2rem);
+  color: var(--cds-text-03, #a8a8a8);
+}
+
+.exp--about-modal .exp--about-modal__copyright-text {
+  margin-top: var(--cds-spacing-05, 1rem);
+}
+
+.exp--about-modal .exp--about-modal__footer {
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  height: 4.5rem;
+  color: var(--cds-inverse-01, #ffffff);
+  background-color: var(--cds-inverse-02, #393939);
+}
+
+.exp--about-modal .exp--about-modal__footer::before {
+  position: absolute;
+  top: calc(-1 * var(--cds-spacing-09, 3rem));
+  width: 80%;
+  height: var(--cds-spacing-09, 3rem);
+  background: linear-gradient(to bottom, transparent, var(--cds-ui-01, #f4f4f4) 45%);
+  content: '';
+}
+
+.exp--about-modal.exp--about-modal--with-tabs .bx--modal-footer::before {
+  top: calc(-1 * (var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem)));
+  height: calc(var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem));
+  background: linear-gradient(to bottom, transparent, var(--cds-ui-01, #f4f4f4) 25%);
+}
+
+.exp--about-modal .exp--about-modal__tab-container {
+  position: absolute;
+  bottom: 100%;
+}
+
+.exp--about-modal .exp--about-modal__version-label,
+.exp--about-modal .exp--about-modal__version-number {
+  font-size: var(--cds-body-short-01-font-size, 0.875rem);
+  font-weight: var(--cds-body-short-01-font-weight, 400);
+  line-height: var(--cds-body-short-01-line-height, 1.29);
+  letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
+  padding-left: var(--cds-spacing-05, 1rem);
+  color: var(--cds-inverse-01, #ffffff);
+}
+
+.exp--about-modal .exp--about-modal__version-label {
+  font-weight: 600;
+}
+"
+`;

@@ -14,6 +14,11 @@ import '../../utils/enable-all'; // must come before component is imported (dire
 import { Button, Tab, Tabs } from 'carbon-components-react';
 
 import { Tearsheet, TearsheetNarrow } from '.';
+import {
+  actionsOptions,
+  actionsLabels,
+  actionsMapping,
+} from '../ActionSet/actions.js';
 
 import { getStorybookPrefix } from '../../../config';
 const storybookPrefix = getStorybookPrefix(pkg, Tearsheet.displayName);
@@ -30,44 +35,35 @@ export default {
   },
   parameters: { styles, docs: { page: mdx } },
   argTypes: {
-    buttonSet: {
+    actions: {
       control: {
         type: 'select',
-        options: {
-          'Two buttons': 0,
-          'Three buttons with ghost': 1,
-          'Three buttons': 2,
-          'Four buttons': 3,
-          None: 4,
-        },
-        default: 0,
+        labels: actionsLabels,
       },
+      options: actionsOptions,
+      mapping: actionsMapping(
+        {
+          primary: 'Replace',
+          secondary: 'Stop',
+          secondary2: 'Keep Both',
+          ghost: 'Cancel',
+        },
+        action
+      ),
     },
-    className,
-    closeIconDescription: {},
     description: {
       control: {
         type: 'text',
       },
     },
-    hasCloseIcon: {},
-    height: {},
     label: {
       control: {
         type: 'text',
       },
     },
-    influencerPosition: {},
-    influencerWidth: {},
-    preventCloseOnClickOutside: {},
     title: {
       control: {
         type: 'text',
-      },
-    },
-    buttons: {
-      control: {
-        disable: true,
       },
     },
     children: {
@@ -99,96 +95,6 @@ export default {
 };
 
 // Test values for props.
-
-const buttons_1 = (
-  <div className="tearsheet-stories__buttons">
-    <Button
-      kind="secondary"
-      className="tearsheet-stories__button-25"
-      onClick={action('Secondary button click')}>
-      Cancel
-    </Button>
-    <Button
-      className="tearsheet-stories__button-25"
-      onClick={action('Primary button click')}>
-      Create
-    </Button>
-  </div>
-);
-const buttons_2 = (
-  <div className="tearsheet-stories__buttons">
-    <Button
-      kind="ghost"
-      className="tearsheet-stories__button-25"
-      onClick={action('Ghost button click')}>
-      Cancel
-    </Button>
-    <div className="tearsheet-stories__button-padding"></div>
-    <Button
-      kind="secondary"
-      className="tearsheet-stories__button-25"
-      onClick={action('Secondary button click')}>
-      Back
-    </Button>
-    <Button
-      className="tearsheet-stories__button-25"
-      onClick={action('Primary button click')}>
-      Next
-    </Button>
-  </div>
-);
-const buttons_3 = (
-  <div className="tearsheet-stories__buttons">
-    <Button
-      kind="secondary"
-      className="tearsheet-stories__button-25"
-      onClick={action('Secondary button click')}>
-      Keep both
-    </Button>
-    <Button
-      kind="secondary"
-      className="tearsheet-stories__button-25"
-      onClick={action('Secondary button click')}>
-      Stop
-    </Button>
-    <Button
-      className="tearsheet-stories__button-25"
-      onClick={action('Primary button click')}>
-      Replace
-    </Button>
-  </div>
-);
-const buttons_4 = (
-  <div className="tearsheet-stories__buttons">
-    <Button
-      kind="ghost"
-      className="tearsheet-stories__button-25"
-      onClick={action('Ghost button click')}>
-      Cancel
-    </Button>
-    <div className="tearsheet-stories__button-padding"></div>
-    <Button
-      kind="secondary"
-      className="tearsheet-stories__button-25"
-      onClick={action('Secondary button click')}>
-      Keep both
-    </Button>
-    <Button
-      kind="secondary"
-      className="tearsheet-stories__button-25"
-      onClick={action('Secondary button click')}>
-      Stop
-    </Button>
-    <Button
-      className="tearsheet-stories__button-25"
-      onClick={action('Primary button click')}>
-      Replace
-    </Button>
-  </div>
-);
-const buttonSets = [buttons_1, buttons_2, buttons_3, buttons_4];
-
-const className = 'client-class-1 client-class-2';
 
 const closeIconDescription = 'Close the tearsheet';
 
@@ -226,7 +132,7 @@ const title = 'Title of the tearsheet';
 
 // Template.
 // eslint-disable-next-line react/prop-types
-const Template = ({ buttonSet, ...args }) => {
+const Template = ({ actions, ...args }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -234,10 +140,8 @@ const Template = ({ buttonSet, ...args }) => {
       <style>{`.${pkg.prefix}-tearsheet { opacity: 0 }`};</style>
       <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
       <Tearsheet
-        className={className}
         {...args}
-        buttons={buttonSets[buttonSet]}
-        open={open}
+        {...{ actions, open }}
         onClose={() => setOpen(false)}>
         {mainContent}
       </Tearsheet>
@@ -251,7 +155,6 @@ AllAttributesSet.args = {
   closeIconDescription,
   description,
   hasCloseIcon: true,
-  height: 'normal',
   influencer,
   influencerPosition: 'left',
   influencerWidth: 'narrow',
@@ -261,7 +164,8 @@ AllAttributesSet.args = {
   open: true,
   preventCloseOnClickOutside: true,
   title,
-  buttonSet: 0,
+  verticalPosition: 'normal',
+  actions: 3,
 };
 
 export const NoAttributesSet = Template.bind({});
@@ -272,16 +176,13 @@ NoHeaderNavigation.args = {
   closeIconDescription,
   description,
   hasCloseIcon: true,
-  height: 'normal',
   influencer,
-  influencerPosition: 'left',
-  influencerWidth: 'narrow',
   label,
   onClose: action('onClose called'),
   open: true,
   preventCloseOnClickOutside: true,
   title,
-  buttonSet: 0,
+  actions: 3,
 };
 
 export const NoHeaderNavigationOrInfluencer = Template.bind({});
@@ -289,11 +190,10 @@ NoHeaderNavigationOrInfluencer.args = {
   closeIconDescription,
   description,
   hasCloseIcon: true,
-  height: 'normal',
   label,
   onClose: action('onClose called'),
   open: true,
   preventCloseOnClickOutside: true,
   title,
-  buttonSet: 0,
+  actions: 3,
 };

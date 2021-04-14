@@ -39,13 +39,21 @@ export let Card = ({
   title,
   titleSize,
 }) => {
+  const hasActions = actionIcons.length > 0 || overflowActions.length > 0;
+  const hasTopActions = hasActions && actionIconsPosition === 'top';
+  const hasBottomActions = hasActions && actionIconsPosition === 'bottom';
+  const hasBottomButton = !!secondaryButtonText || !!primaryButtonText;
+  const hasBottomBar = hasBottomActions || hasBottomButton;
+
   const headerClasses = cx(`${pkg.prefix}-card-header`, {
     [`${pkg.prefix}-card-header--label-only`]: label && !title && !caption,
     [`${pkg.prefix}-card-header--has-label`]: label && productive,
     [`${pkg.prefix}-card-title--lg`]: titleSize === 'large',
   });
 
-  const hasActions = actionIcons.length > 0 || overflowActions.length > 0;
+  const footerClasses = cx(`${pkg.prefix}-card-footer`, {
+    [`${pkg.prefix}-card-footer--no-button`]: !hasBottomButton,
+  });
 
   const getActions = () => {
     if (overflowActions.length !== 0) {
@@ -153,7 +161,7 @@ export let Card = ({
                   <p className={`${pkg.prefix}-card-caption`}>{caption}</p>
                 )}
               </div>
-              {hasActions && actionIconsPosition === 'top' && (
+              {hasTopActions && (
                 <div
                   className={`${pkg.prefix}-card-actions ${pkg.prefix}-card-actions--top`}>
                   {getActions()}
@@ -163,27 +171,29 @@ export let Card = ({
           </div>
           <div {...getBodyProps()}>{children}</div>
         </div>
-        <div className={`${pkg.prefix}-card-footer`}>
-          {secondaryButtonText && (
-            <Button
-              kind={secondaryButtonKind}
-              onClick={onSecondaryButtonClick}
-              size="field">
-              {secondaryButtonText}
-            </Button>
-          )}
-          {primaryButtonText && (
-            <Button
-              kind={productive ? 'ghost' : primaryButtonKind}
-              onClick={onPrimaryButtonClick}
-              size="field">
-              {primaryButtonText}
-            </Button>
-          )}
-          {hasActions && actionIconsPosition === 'bottom' && (
-            <div className={`${pkg.prefix}-card-actions`}>{getActions()}</div>
-          )}
-        </div>
+        {hasBottomBar && (
+          <div className={footerClasses}>
+            {secondaryButtonText && (
+              <Button
+                kind={secondaryButtonKind}
+                onClick={onSecondaryButtonClick}
+                size="field">
+                {secondaryButtonText}
+              </Button>
+            )}
+            {primaryButtonText && (
+              <Button
+                kind={productive ? 'ghost' : primaryButtonKind}
+                onClick={onPrimaryButtonClick}
+                size="field">
+                {primaryButtonText}
+              </Button>
+            )}
+            {hasBottomActions && (
+              <div className={`${pkg.prefix}-card-actions`}>{getActions()}</div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

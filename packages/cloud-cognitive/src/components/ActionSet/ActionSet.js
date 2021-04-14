@@ -14,16 +14,70 @@ import cx from 'classnames';
 import { pkg } from '../../settings';
 
 // Carbon and package components we use.
-import { Button, InlineLoading } from 'carbon-components-react';
+import { Button, ButtonSet, InlineLoading } from 'carbon-components-react';
 
 const blockClass = `${pkg.prefix}--action-set`;
 const componentName = 'ActionSet';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
+const ActionSetButton = React.forwardRef(
+  (
+    {
+      // The component props, in alphabetical order (for consistency).
+      className,
+      disabled,
+      kind,
+      label,
+      loading,
+      onClick,
+      // Collect any other property values passed in.
+      ...rest
+    },
+    ref
+  ) => (
+    <Button
+      {
+        // Pass through any other property values as HTML attributes.
+        ...rest
+      }
+      className={cx(className, [
+        `${blockClass}__action-button`,
+        { [`${blockClass}__action-button--ghost`]: kind === 'ghost' },
+      ])}
+      disabled={disabled || loading || false}
+      {...{ kind, onClick, ref }}>
+      {label}
+      {loading && <InlineLoading />}
+    </Button>
+  )
+);
+
+ActionSetButton.propTypes = {
+  className: PropTypes.string,
+  disabled: PropTypes.bool,
+  kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
+  label: PropTypes.string,
+  loading: PropTypes.bool,
+  onClick: PropTypes.func,
+};
+
+const defaultKind = Button.defaultProps.kind;
+
+const willStack = (size, numberOfActions) =>
+  size === 'xs' || size === 'sm' || (size === 'md' && numberOfActions > 2);
+
 /**
  * An ActionSet presents a set of action buttons, constructed from bundles
- * of prop values and applying some layout rules.
+ * of prop values and applying some layout rules. When the size is 'xs' or 'sm'
+ * the buttons are stacked, and should only include primary and secondary
+ * kinds. When the size is 'md' the buttons are stacked if there are three or
+ * more. When the size is 'md' or 'lg', two buttons share the horizontal space.
+ * When the size is 'lg', three or more buttons use a quarter of the available
+ * horizontal space, and if the size is 'xlg' or 'max' the buttons always use
+ * a quarter of the available horizontal space. If there is a ghost button,
+ * it appears at the left side. If there is a primary button it appears at the
+ * right.
  */
 export const ActionSet = React.forwardRef(
   (
@@ -37,22 +91,30 @@ export const ActionSet = React.forwardRef(
     },
     ref
   ) => {
+    const buttons = (actions && actions.slice?.(0)) || [];
+
+    // We stack the buttons in a xs/sm set, or if there are three or more in a md set.
+    const stack = willStack(size, buttons.length);
+
     // order the actions with ghost buttons first and primary buttons last
-    // (or the opposite way around if reverse is true)
-    const direction = size === 'xs' || size === 'sm' || size === 'md' ? -1 : 1;
-    const sortedActions = (actions && actions.slice(0)) || [];
-    sortedActions.sort((action1, action2) =>
-      action1.kind === action2.kind
-        ? 0
-        : action1.kind === 'ghost' || action2.kind === 'primary'
-        ? -direction
-        : action1.kind === 'primary' || action2.kind === 'ghost'
-        ? direction
-        : 0
-    );
+    // (and the opposite way if we're stacking)
+    buttons.sort((action1, action2) => {
+      const kind1 = action1.kind || defaultKind;
+      const kind2 = action2.kind || defaultKind;
+
+      return kind1 === 'ghost' || kind2 === 'primary'
+        ? stack
+          ? 1
+          : -1
+        : kind1 === 'primary' || kind2 === 'ghost'
+        ? stack
+          ? -1
+          : 1
+        : 0;
+    });
 
     return (
-      <div
+      <ButtonSet
         {
           // Pass through any other property values as HTML attributes.
           ...rest
@@ -61,29 +123,21 @@ export const ActionSet = React.forwardRef(
           blockClass,
           className,
           {
-            [`${blockClass}--single`]: sortedActions.length === 1,
-            [`${blockClass}--double`]: sortedActions.length === 2,
-            [`${blockClass}--triple-plus`]: sortedActions.length >= 3,
+            [`${blockClass}--row-single`]: !stack && buttons.length === 1,
+            [`${blockClass}--row-double`]: !stack && buttons.length === 2,
+            [`${blockClass}--row-triple`]: !stack && buttons.length === 3,
+            [`${blockClass}--row-quadruple`]: !stack && buttons.length >= 4,
+            [`${blockClass}--stack`]: stack,
           },
           `${blockClass}--${size}`
         )}
         ref={ref}
-        role="presentation">
-        {sortedActions.map((action, index) => (
-          <Button
-            key={index}
-            disabled={action.disabled || action.loading || false}
-            onClick={action.onClick}
-            kind={action.kind}
-            className={cx([
-              `${blockClass}__action-button`,
-              { [`${blockClass}__ghost-button`]: action.kind === 'ghost' },
-            ])}>
-            {action.label}
-            {action.loading && <InlineLoading />}
-          </Button>
+        role="presentation"
+        stacked={stack}>
+        {buttons.map((action, index) => (
+          <ActionSetButton {...action} key={index} />
         ))}
-      </div>
+      </ButtonSet>
     );
   }
 );
@@ -92,47 +146,61 @@ ActionSet.displayName = componentName;
 
 // We provide a validator function to help validate the actions supplied.
 // An optional parameter is a function which will be passed all the props
-// and returns true if the component is to be treated as 'small', which means
-// that a limit of three buttons will be enforced as well as not combining
-// ghost buttons with other button types.
-ActionSet.validateActions = () => (props, propName, componentName) => {
-  const small =
-    props.size === 'xs' || props.size === 'sm' || props.size === 'md';
+// and returns the size that the component should be treated as being: if
+// not provided, a 'size' prop is used to determine the size of the component.
+// When the size is xs or sm, or md with three actions, the buttons will be
+// stacked and a maximum of three buttons is applied with no ghosts unless
+// the ghost is the only button. Otherwise a maximum of four buttons with a
+// maximum of one ghost is applied. In either case, a maximum of one primary
+// button is allowed.
+ActionSet.validateActions = (sizeFn) => (props, propName, componentName) => {
   const prop = props[propName];
+  const actions = prop && prop?.length;
 
-  const badActions = (problem) =>
-    new Error(
-      `Prop '${propName}' passed to ${componentName} is using an invalid combination of actions.\n\n${problem}`
+  if (actions > 0) {
+    const size = sizeFn ? sizeFn(props) : props.size;
+    const stack = willStack(size, prop.length);
+
+    const countActions = (kind) =>
+      prop.filter((action) => (action.kind || defaultKind) === kind).length;
+
+    const check = (iftrue, problem) => {
+      if (iftrue)
+        throw new Error(`Property '${propName}' is invalid: ${problem}`);
+    };
+
+    check(
+      stack && actions > 3,
+      `you cannot have more than three actions in this size of ${componentName}.`
     );
 
-  if (prop && prop?.length > 0) {
-    if (small && prop.length > 3) {
-      throw badActions(
-        `You cannot have more than three actions in this size of ${componentName}.`
-      );
-    }
+    check(
+      actions > 4,
+      `you cannot have more than four actions in a ${componentName}.`
+    );
 
-    const primaryButtons = prop.filter((button) => button.kind === 'primary');
+    const primaryActions = countActions('primary');
+    check(
+      primaryActions > 1,
+      `you cannot have more than one 'primary' action in a ${componentName}.`
+    );
 
-    if (primaryButtons.length > 1) {
-      throw badActions(
-        `You cannot have more than one 'primary' action in a ${componentName}.`
-      );
-    }
+    const ghostActions = countActions('ghost');
+    check(
+      ghostActions > 1,
+      `you cannot have more than one 'ghost' action in a ${componentName}.`
+    );
 
-    const ghostButtons = prop.filter((button) => button.kind === 'ghost');
+    check(
+      stack && actions > 1 && ghostActions > 0,
+      `you cannot have a 'ghost' button in conjunction with other action types in this size of ${componentName}. Try using a 'secondary' button instead.`
+    );
 
-    if (ghostButtons.length > 1) {
-      throw badActions(
-        `You cannot have more than one 'ghost' action in a ${componentName}.`
-      );
-    }
-
-    if (small && prop.length > 1 && ghostButtons.length > 0) {
-      throw badActions(
-        `You cannot have a 'ghost' button in conjuntion with other action types in this size of ${componentName}. Try using a 'secondary' button instead.`
-      );
-    }
+    const secondaryActions = countActions('secondary');
+    check(
+      prop.length > primaryActions + secondaryActions + ghostActions,
+      `you can only have 'primary', 'secondary' and 'ghost' buttons in a ${componentName}.`
+    );
   }
 
   return null;
@@ -140,17 +208,24 @@ ActionSet.validateActions = () => (props, propName, componentName) => {
 
 ActionSet.propTypes = {
   /**
-   * Specifies the action buttons to show.
+   * Specifies the action buttons to show. Each action is specified as an
+   * object with optional fields 'label' to supply the button label, 'kind'
+   * to select the button kind (must be 'primary', 'secondary' or 'ghost'),
+   * 'loading' to display a loading indicator, and 'onClick' to receive
+   * notifications when the button is clicked. Additional fields in the object
+   * will be passed to the Button component, and these can include 'disabled',
+   * 'ref', 'className', and any other Button props. Any other fields in the
+   * object will be passed through to the button element as HTML attributes.
    */
   actions: PropTypes.oneOfType([
     ActionSet.validateActions(),
     PropTypes.arrayOf(
       PropTypes.shape({
-        label: PropTypes.string,
-        onClick: PropTypes.func,
-        kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
         disabled: PropTypes.bool,
+        kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
+        label: PropTypes.string,
         loading: PropTypes.bool,
+        onClick: PropTypes.func,
       })
     ),
   ]),
@@ -164,7 +239,7 @@ ActionSet.propTypes = {
    * Sets the size of the action set. Different button arrangements are used
    * in different sizes, to make best use of the available space.
    */
-  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'max']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xlg', 'max']),
 };
 
 ActionSet.defaultProps = {

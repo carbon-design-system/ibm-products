@@ -212,7 +212,7 @@ describe('SidePanel', () => {
       'content'
     );
     const sidePanelOuter = container.querySelector(
-      `.${actionSetBlockClass}__ghost-button`
+      `.${actionSetBlockClass}__action-button--ghost`
     );
     expect(sidePanelOuter).toBeTruthy();
   });

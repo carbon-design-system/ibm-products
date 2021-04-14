@@ -33,7 +33,8 @@
   // For ghosts in row-double,
   // buttons are 75% width
   .#{$block-class}__action-button,
-  .#{$block-class}.#{$block-class}--row-double .#{$block-class}__ghost-button {
+  .#{$block-class}.#{$block-class}--row-double
+    .#{$block-class}__action-button--ghost {
     width: 75%;
     max-width: 75%;
   }
@@ -43,24 +44,27 @@
   // or ghosts in row-triple,
   // buttons are 50% width
   .#{$block-class}.#{$block-class}--row-single.#{$block-class}--lg
-    .#{$block-class}__action-button:not(.#{$block-class}__ghost-button),
+    .#{$block-class}__action-button:not(.#{$block-class}__action-button--ghost),
   .#{$block-class}.#{$block-class}--row-double.#{$block-class}--md
     .#{$block-class}__action-button,
   .#{$block-class}.#{$block-class}--row-double.#{$block-class}--lg
     .#{$block-class}__action-button,
-  .#{$block-class}.#{$block-class}--row-triple .#{$block-class}__ghost-button {
+  .#{$block-class}.#{$block-class}--row-triple
+    .#{$block-class}__action-button--ghost {
     width: 50%;
     max-width: 50%;
   }
 
   // For row-triple in large (non-ghost),
-  // or any non-ghosts in max,
+  // or any non-ghosts in extra large or max,
   // or row-quadruple,
   // buttons are 25% width
   .#{$block-class}.#{$block-class}--row-triple.#{$block-class}--lg
-    .#{$block-class}__action-button:not(.#{$block-class}__ghost-button),
+    .#{$block-class}__action-button:not(.#{$block-class}__action-button--ghost),
+  .#{$block-class}.#{$block-class}--xlg
+    .#{$block-class}__action-button:not(.#{$block-class}__action-button--ghost),
   .#{$block-class}.#{$block-class}--max
-    .#{$block-class}__action-button:not(.#{$block-class}__ghost-button),
+    .#{$block-class}__action-button:not(.#{$block-class}__action-button--ghost),
   .#{$block-class}.#{$block-class}--row-quadruple
     .#{$block-class}__action-button {
     width: 25%;

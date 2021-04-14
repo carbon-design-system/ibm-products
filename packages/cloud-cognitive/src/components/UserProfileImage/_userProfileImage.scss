@@ -5,16 +5,27 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@import '@carbon/import-once/scss/import-once';
 @import '../../global/styles/carbon-settings'; // goes before carbon imports as it affects how carbon is used.
 @import '../../global/styles/project-settings';
 @import './colorMap';
 
 $block-class: #{$pkg-prefix}-user-profile-avatar;
-$x-large: $spacing-10; //64px
-$large: $spacing-07; //32px
-$medium: $spacing-06; //24px
-$small: 1.25rem; //20px
-$x-small: $spacing-05; //16x
+
+$sizes: (
+  xl: $spacing-10,
+  lg: $spacing-07,
+  md: $spacing-06,
+  sm: 1.25rem,
+  xs: $spacing-05,
+);
+
+@mixin size($size) {
+  $_size: map-get($sizes, $size);
+
+  width: $_size;
+  height: $_size;
+}
 
 $base-colors: 'cyan', 'gray', 'green', 'magenta', 'purple', 'teal';
 $themes: (
@@ -27,6 +38,7 @@ $themes: (
     'dark-contrast': 30,
   ),
 );
+
 $theme-keys: map-keys($themes);
 
 @function get-background-color($color, $key, $contrastkey) {
@@ -36,101 +48,82 @@ $theme-keys: map-keys($themes);
   );
 }
 
-@each $key in $theme-keys {
-  .#{$block-class}--#{$key} {
-    color: $ui-01;
-  }
-  @each $color in $base-colors {
-    @each $contrastkey in $theme-keys {
-      .#{$block-class}--#{$key}.#{$block-class}--#{$contrastkey}-#{$color} {
-        // stylelint-disable-next-line carbon/theme-token-use
-        background-color: get-background-color($color, $key, $contrastkey);
+@mixin user-profile-image {
+  @each $key in $theme-keys {
+    .#{$block-class}--#{$key} {
+      color: $ui-01;
+    }
+    @each $color in $base-colors {
+      @each $contrastkey in $theme-keys {
+        .#{$block-class}--#{$key}.#{$block-class}--#{$contrastkey}-#{$color} {
+          // stylelint-disable-next-line carbon/theme-token-use
+          background-color: get-background-color($color, $key, $contrastkey);
+        }
       }
     }
   }
-}
 
-@mixin x-large {
-  width: $x-large;
-  height: $x-large;
-}
-
-@mixin large {
-  width: $large;
-  height: $large;
-}
-
-@mixin medium {
-  width: $medium;
-  height: $medium;
-}
-
-@mixin small {
-  width: $small;
-  height: $small;
-}
-
-@mixin x-small {
-  width: $x-small;
-  height: $x-small;
-}
-
-.#{$block-class} {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-transform: uppercase;
-  border-radius: 100%;
-  .#{$block-class}-photo {
-    //border: 1px solid black; //should a decision be made to have a border
+  .#{$block-class} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
     border-radius: 100%;
+    .#{$block-class}-photo {
+      //border: 1px solid black; //should a decision be made to have a border
+      border-radius: 100%;
+    }
+  }
+
+  .#{$block-class}-photo--xl {
+    @include size('xl');
+  }
+
+  .#{$block-class}-photo--lg {
+    @include size('lg');
+  }
+
+  .#{$block-class}-photo--md {
+    @include size('md');
+  }
+  .#{$block-class}-photo--sm {
+    @include size('sm');
+  }
+
+  .#{$block-class}-photo--xs {
+    @include size('xs');
+  }
+
+  .#{$block-class}--xl {
+    @include size('xl');
+    @include carbon--type-style('productive-heading-04');
+  }
+
+  .#{$block-class}--lg {
+    @include size('lg');
+    @include carbon--type-style('body-short-01');
+  }
+
+  .#{$block-class}--md {
+    @include size('md');
+    @include carbon--type-style('label-01');
+    @include carbon--font-weight('semibold');
+  }
+
+  .#{$block-class}--sm {
+    @include size('sm');
+    @include carbon--type-style('label-01');
+    @include carbon--font-weight('semibold');
+  }
+
+  .#{$block-class}--xs {
+    @include size('xs');
+    @include carbon--type-style('label-01');
+    @include carbon--font-weight('semibold');
   }
 }
 
-.#{$block-class}-photo--x-large {
-  @include x-large;
-}
-
-.#{$block-class}-photo--large {
-  @include large;
-}
-
-.#{$block-class}-photo--medium {
-  @include medium;
-}
-.#{$block-class}-photo--small {
-  @include small;
-}
-
-.#{$block-class}-photo--x-small {
-  @include x-small;
-}
-
-.#{$block-class}--x-large {
-  @include x-large;
-  @include carbon--type-style('productive-heading-04');
-}
-
-.#{$block-class}--large {
-  @include large;
-  @include carbon--type-style('body-short-01');
-}
-
-.#{$block-class}--medium {
-  @include medium;
-  @include carbon--type-style('label-01');
-  @include carbon--font-weight('semibold');
-}
-
-.#{$block-class}--small {
-  @include small;
-  @include carbon--type-style('label-01');
-  @include carbon--font-weight('semibold');
-}
-
-.#{$block-class}--x-small {
-  @include x-small;
-  @include carbon--type-style('label-01');
-  @include carbon--font-weight('semibold');
+@include exports('user-profile-image') {
+  @include user-profile-image;
 }

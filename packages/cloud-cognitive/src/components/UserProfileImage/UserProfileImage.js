@@ -5,11 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
+// Import portions of React that are needed.
 import React from 'react';
-import { pkg } from '../../settings';
-const componentName = 'UserProfileImage';
 
+// Other standard imports.
+import PropTypes from 'prop-types';
+import cx from 'classnames';
+import { pkg } from '../../settings';
+
+// Carbon and package components we use.
 import {
   User16,
   User20,
@@ -21,72 +25,90 @@ import {
   Group32,
 } from '@carbon/icons-react';
 
-//import { expPrefix } from '../../global/js/settings';
-import cx from 'classnames';
-
+// The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}-user-profile-avatar`;
+const componentName = 'UserProfileImage';
 
-export let UserProfileImage = ({
-  backgroundColor,
-  icon,
-  initials,
-  image,
-  size,
-  theme,
-}) => {
-  const icons = {
-    user: {
-      'x-small': User16,
-      small: User16,
-      medium: User20,
-      large: User24,
-      'x-large': User32,
+// NOTE: the component SCSS is not imported here: it is rolled up separately.
+
+/**
+ * This is a user profile image component which displays an image, or initias or icon for a user.
+ */
+export let UserProfileImage = React.forwardRef(
+  (
+    {
+      backgroundColor,
+      className,
+      icon,
+      initials,
+      image,
+      size,
+      theme,
+      // Collect any other property values passed in.
+      ...rest
     },
-    group: {
-      'x-small': Group16,
-      small: Group16,
-      medium: Group20,
-      large: Group24,
-      'x-large': Group32,
-    },
-  };
+    ref
+  ) => {
+    const icons = {
+      user: {
+        xs: User16,
+        sm: User16,
+        md: User20,
+        lg: User24,
+        xl: User32,
+      },
+      group: {
+        xs: Group16,
+        sm: Group16,
+        md: Group20,
+        lg: Group24,
+        xl: Group32,
+      },
+    };
 
-  const formatInitials = () => {
-    if (initials.length === 2) return initials;
-    // RegEx takes in the display name and returns the first and last initials. Thomas Watson and Thomas J. Watson
-    // both return JW.
-    return initials
-      .match(/(^\S\S?|\b\S)?/g)
-      .join('')
-      .match(/(^\S|\S$)?/g)
-      .join('')
-      .toUpperCase();
-  };
+    const formatInitials = () => {
+      if (initials.length === 2) return initials;
+      // RegEx takes in the display name and returns the first and last initials. Thomas Watson and Thomas J. Watson
+      // both return JW.
+      return initials
+        .match(/(^\S\S?|\b\S)?/g)
+        .join('')
+        .match(/(^\S|\S$)?/g)
+        .join('')
+        .toUpperCase();
+    };
 
-  const FillItem = image
-    ? () => (
-        <img
-          alt=""
-          src={image}
-          className={`${blockClass}-photo ${blockClass}-photo--${size}`}
-        />
-      )
-    : initials
-    ? formatInitials
-    : icons[icon][size];
+    const FillItem = image
+      ? () => (
+          <img
+            alt=""
+            src={image}
+            className={`${blockClass}-photo ${blockClass}-photo--${size}`}
+          />
+        )
+      : initials
+      ? formatInitials
+      : icons[icon][size];
 
-  return (
-    <div
-      className={cx([
-        `${blockClass}`,
-        `${blockClass}--${size}`,
-        `${blockClass}--${theme}`,
-        `${blockClass}--${backgroundColor}`,
-      ])}>
-      <FillItem />
-    </div>
-  );
-};
+    return (
+      <div
+        {
+          // Pass through any other property values as HTML attributes.
+          ...rest
+        }
+        ref={ref}
+        className={cx([
+          blockClass,
+          className,
+          `${blockClass}--${size}`,
+          `${blockClass}--${theme}`,
+          `${blockClass}--${backgroundColor}`,
+        ])}>
+        <FillItem />
+      </div>
+    );
+  }
+);
 
 // Return a placeholder if not released and not enabled by feature flag
 UserProfileImage = pkg.checkComponentEnabled(UserProfileImage, componentName);
@@ -94,7 +116,7 @@ UserProfileImage = pkg.checkComponentEnabled(UserProfileImage, componentName);
 UserProfileImage.displayName = componentName;
 UserProfileImage.defaultProps = {
   icon: 'user',
-  size: 'x-large',
+  size: 'xl',
 };
 UserProfileImage.propTypes = {
   /**
@@ -116,6 +138,10 @@ UserProfileImage.propTypes = {
     'dark-teal',
   ]),
   /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className: PropTypes.string,
+  /**
    * When passing the icon prop, use either "user" or "group". The values match up to the Carbon Library icons.
    */
   icon: PropTypes.oneOf(['user', 'group']),
@@ -130,7 +156,7 @@ UserProfileImage.propTypes = {
   /**
    * Set the size of the avatar circle
    */
-  size: PropTypes.oneOf(['x-large', 'large', 'medium', 'small', 'x-small']),
+  size: PropTypes.oneOf(['xl', 'lg', 'md', 'sm', 'xs']),
   /**
    * Set theme in which the component will be rendered
    */

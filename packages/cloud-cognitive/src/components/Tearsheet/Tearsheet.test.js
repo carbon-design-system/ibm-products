@@ -120,13 +120,6 @@ const commonTests = (Ts, name) => {
     expect(screen.queryByRole('button', { name: 'Close' })).toBeNull();
   });
 
-  it('renders height', () => {
-    render(<Ts height="lower" />);
-    expect(screen.getByRole('dialog')).toHaveClass(
-      `${blockClass}__container--lower`
-    );
-  });
-
   it('renders label', () => {
     render(<Ts {...{ label }} />);
     screen.getByText(label);
@@ -166,6 +159,13 @@ const commonTests = (Ts, name) => {
   it('renders title', () => {
     render(<Ts {...{ title }} />);
     screen.getByText(title);
+  });
+
+  it('renders verticalPosition', () => {
+    render(<Ts verticalPosition="lower" />);
+    expect(screen.getByRole('dialog')).toHaveClass(
+      `${blockClass}__container--lower`
+    );
   });
 
   it('adds additional properties to the containing node', () => {

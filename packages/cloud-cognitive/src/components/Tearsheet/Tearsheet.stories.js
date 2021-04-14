@@ -51,31 +51,19 @@ export default {
         action
       ),
     },
-    className,
-    closeIconDescription: {},
     description: {
       control: {
         type: 'text',
       },
     },
-    hasCloseIcon: {},
-    height: {},
     label: {
       control: {
         type: 'text',
       },
     },
-    influencerPosition: {},
-    influencerWidth: {},
-    preventCloseOnClickOutside: {},
     title: {
       control: {
         type: 'text',
-      },
-    },
-    buttons: {
-      control: {
-        disable: true,
       },
     },
     children: {
@@ -107,8 +95,6 @@ export default {
 };
 
 // Test values for props.
-
-const className = 'client-class-1 client-class-2';
 
 const closeIconDescription = 'Close the tearsheet';
 
@@ -169,7 +155,6 @@ AllAttributesSet.args = {
   closeIconDescription,
   description,
   hasCloseIcon: true,
-  height: 'normal',
   influencer,
   influencerPosition: 'left',
   influencerWidth: 'narrow',
@@ -179,6 +164,7 @@ AllAttributesSet.args = {
   open: true,
   preventCloseOnClickOutside: true,
   title,
+  verticalPosition: 'normal',
   actions: 3,
 };
 
@@ -190,10 +176,7 @@ NoHeaderNavigation.args = {
   closeIconDescription,
   description,
   hasCloseIcon: true,
-  height: 'normal',
   influencer,
-  influencerPosition: 'left',
-  influencerWidth: 'narrow',
   label,
   onClose: action('onClose called'),
   open: true,
@@ -207,7 +190,6 @@ NoHeaderNavigationOrInfluencer.args = {
   closeIconDescription,
   description,
   hasCloseIcon: true,
-  height: 'normal',
   label,
   onClose: action('onClose called'),
   open: true,

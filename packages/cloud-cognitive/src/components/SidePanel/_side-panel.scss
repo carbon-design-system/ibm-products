@@ -65,6 +65,18 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
   max-width: $size;
 }
 
+@mixin setDividerStyles() {
+  position: absolute;
+  // stylelint-disable-next-line carbon/layout-token-use
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: $decorative-01;
+  opacity: var(--#{$block-class}--divider-opacity);
+  content: '';
+}
+
 @mixin side-panel {
   @keyframes sidePanelExitLeft {
     0% {
@@ -94,6 +106,7 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
 
   .#{$block-class}__container {
     --#{$block-class}--subtitle-opacity: 1;
+    --#{$block-class}--divider-opacity: 0;
     --#{$block-class}--title-font-size: 1.25rem;
     --#{$block-class}--content-bottom-padding: #{$spacing-10};
 
@@ -150,16 +163,17 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       .#{$block-class}__title-text {
         @include carbon--font-weight('semibold');
       }
-      .#{$block-class}__title-container {
-        border-bottom: 1px solid $decorative-01;
-      }
     }
     &.#{$block-class}__container-with-action-toolbar.#{$block-class}__with-condensed-header {
       .#{$block-class}__title-container {
-        border-bottom: 0;
+        &::before {
+          content: none;
+        }
       }
       .#{$block-class}__action-toolbar {
-        border-bottom: 1px solid $decorative-01;
+        &::before {
+          @include setDividerStyles();
+        }
       }
     }
     .#{$block-class}__title-container {
@@ -168,6 +182,9 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       z-index: 4;
       padding: $spacing-05 $spacing-05 0 $spacing-05;
       background-color: $ui-01;
+      &::before {
+        @include setDividerStyles();
+      }
     }
     .#{$block-class}__title-text {
       @include carbon--type-style('productive-heading-03');
@@ -202,8 +219,7 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     }
     .#{$block-class}__action-toolbar {
       position: sticky;
-      // stylelint-disable-next-line carbon/layout-token-use
-      top: 3.75rem;
+      top: var(--#{$block-class}--title-height);
       z-index: 4;
       display: flex;
       align-items: center;

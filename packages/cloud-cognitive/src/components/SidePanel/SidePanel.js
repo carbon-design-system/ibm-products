@@ -127,21 +127,26 @@ export let SidePanel = React.forwardRef(
       );
     };
 
-    // Title and subtitle animaton
+    // Title and subtitle scroll animaton
     useEffect(() => {
       if (open && animateTitle && animationComplete) {
         const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
+        const sidePanelTitleElement = document.querySelector(
+          `.${blockClass}__title-text`
+        );
         const sidePanelSubtitleElement = document.querySelector(
           `.${`${blockClass}__subtitle-text`}`
         );
         sidePanelOuter &&
           sidePanelOuter.addEventListener('scroll', () => {
             const scrollTop = sidePanelRef.current.scrollTop;
+            // if scrolling has occured
             if (scrollTop > 0) {
               sidePanelOuter.classList.add(
                 `${blockClass}__with-condensed-header`
               );
-              // set subtitle opacity calculation here
+              // Set subtitle opacity calculation here
+              // as scroll progresses
               sidePanelOuter.style.setProperty(
                 `--${blockClass}--subtitle-opacity`,
                 `${Math.min(
@@ -150,16 +155,40 @@ export let SidePanel = React.forwardRef(
                     sidePanelSubtitleElement.offsetHeight
                 )}`
               );
-              // set title font size here, previously this was done
+
+              // Calculate divider opacity to avoid border
+              // abruptly appearing when scrolling starts.
+              // This approach uses a pseudo element and sets
+              // the opacity as scroll progresses.
+              let dividerOpacity = Math.min(
+                scrollTop / sidePanelSubtitleElement.offsetHeight,
+                1
+              );
+              sidePanelOuter.style.setProperty(
+                `--${blockClass}--divider-opacity`,
+                `${Math.min(1, dividerOpacity)}`
+              );
+
+              // We need to know the height of the title element
+              // so that we know how far to place the action toolbar
+              // from the top since it is sticky
+              const titleHeight = Math.max(sidePanelTitleElement.offsetHeight);
+              sidePanelOuter.style.setProperty(
+                `--${blockClass}--title-height`,
+                `${titleHeight + 16}px`
+              );
+
+              // Set title font size here, previously this was done
               // via a class addition, however, it is choppier that
               // way, using css variables allows for a smoother animation
               // to the title font size
-              let fontSize = Math.min(
-                (sidePanelSubtitleElement.offsetHeight - scrollTop) /
-                  sidePanelSubtitleElement.offsetHeight +
-                  0.25
+              let fontSize = Math.max(
+                1,
+                1 +
+                  (0.25 * (sidePanelSubtitleElement.offsetHeight - scrollTop)) /
+                    sidePanelSubtitleElement.offsetHeight
               );
-              fontSize = fontSize < 1 ? 1 : fontSize;
+              fontSize = fontSize.toFixed(4);
               sidePanelOuter.style.setProperty(
                 `--${blockClass}--title-font-size`,
                 `${fontSize}rem`
@@ -175,6 +204,10 @@ export let SidePanel = React.forwardRef(
               sidePanelOuter.style.setProperty(
                 `--${blockClass}--title-font-size`,
                 '1.25rem'
+              );
+              sidePanelOuter.style.setProperty(
+                `--${blockClass}--divider-opacity`,
+                0
               );
             }
           });

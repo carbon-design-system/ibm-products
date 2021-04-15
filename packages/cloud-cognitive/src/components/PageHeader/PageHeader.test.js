@@ -164,7 +164,7 @@ describe('PageHeader', () => {
     expect(
       screen.getAllByText(/Breadcrumb [1-3]/, {
         // selector need to ignore sizing items
-        selector: `.exp--breadcrumb-with-overflow__breadcrumb-container:not(.exp--breadcrumb-with-overflow__breadcrumb-container--hidden) .bx--link`,
+        selector: `.${pkg.prefix}--breadcrumb-with-overflow__breadcrumb-container:not(.${pkg.prefix}--breadcrumb-with-overflow__breadcrumb-container--hidden) .${carbon.prefix}--link`,
       })
     ).toHaveLength(3);
     expect(screen.queryAllByTestId('tabs')).toHaveLength(1);

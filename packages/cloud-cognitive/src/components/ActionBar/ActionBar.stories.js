@@ -46,7 +46,6 @@ const actionBarItems = (
       renderIcon={Lightning16}
       iconDescription="Action 1"
       onClick={action('Action 1')}
-      data-wibble="wibble"
     />
     <ActionBarItem
       renderIcon={Lightning16}

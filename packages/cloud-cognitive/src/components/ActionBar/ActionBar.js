@@ -205,9 +205,9 @@ export let ActionBar = React.forwardRef(
 
 ActionBar.displayName = componentName;
 ActionBar.propTypes = {
- /**
-  * Action items to be displayed in the bar.
-  */
+  /**
+   * Action items to be displayed in the bar.
+   */
   actions: PropTypes.oneOfType([
     // ActionBar.validateActions(),
     PropTypes.arrayOf(
@@ -234,7 +234,7 @@ ActionBar.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Maximum visible action bar items.
+   * maxVisible : Maximum action bar items visible before going into the overflow menu
    */
   maxVisible: PropTypes.number,
   /**

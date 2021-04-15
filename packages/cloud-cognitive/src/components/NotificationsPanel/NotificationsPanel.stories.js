@@ -53,7 +53,7 @@ const renderUIShellHeader = (open, setOpen) => (
             zIndex: 2,
           }}>
           <HeaderGlobalAction
-            aria-label="App switcher"
+            aria-label="Notifications"
             onClick={() => setOpen(!open)}>
             <Notification20
               style={{

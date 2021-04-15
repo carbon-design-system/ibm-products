@@ -20,7 +20,8 @@ import {
   Button,
 } from 'carbon-components-react';
 import { ActionBar } from '../ActionBar/';
-import { BreadcrumbWithOverflow, TagSet } from '../';
+import { BreadcrumbWithOverflow } from '../BreadcrumbWithOverflow';
+import { TagSet } from '../';
 import { ButtonSetWithOverflow } from './ButtonSetWithOverflow';
 import { pkg } from '../../settings';
 import { ChevronUp16 } from '@carbon/icons-react';

@@ -91,7 +91,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     );
 
     const visibleBreadcrumbs = container.querySelectorAll(
-      `.${blockClass}--breadcrumb-container`
+      `.${blockClass}__breadcrumb-container`
     )?.[1];
     const visibleItems = visibleBreadcrumbs.querySelectorAll(
       `.${carbon.prefix}--breadcrumb-item`
@@ -115,7 +115,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     );
 
     const visibleBreadcrumbs = container.querySelectorAll(
-      `.${blockClass}--breadcrumb-container`
+      `.${blockClass}__breadcrumb-container`
     )?.[1];
     const visibleItems = visibleBreadcrumbs.querySelectorAll(
       `.${carbon.prefix}--breadcrumb-item`

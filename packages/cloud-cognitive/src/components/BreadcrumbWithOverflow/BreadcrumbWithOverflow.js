@@ -57,7 +57,7 @@ export let BreadcrumbWithOverflow = ({
           ariaLabel={null}
           menuOffset={{ top: 10, left: 59 }} // TODO: REMOVE borrowed from https://github.com/carbon-design-system/carbon/pull/7085
           renderIcon={OverflowMenuHorizontal32}
-          className={`${blockClass}--overflow-menu`}
+          className={`${blockClass}__overflow-menu`}
           menuOptionsClass={`${carbon.prefix}--breadcrumb-menu-options`} // TODO: REMOVE borrowed from https://github.com/carbon-design-system/carbon/pull/7085
         >
           {
@@ -121,7 +121,7 @@ export let BreadcrumbWithOverflow = ({
         React.cloneElement(childArray[0], {
           className: cx([
             childArray[0].props.className,
-            `${blockClass}--displayed-breadcrumb`,
+            `${blockClass}__displayed-breadcrumb`,
           ]),
           key: `displayed-breadcrumb-${internalId.current}-0`,
         })
@@ -148,7 +148,7 @@ export let BreadcrumbWithOverflow = ({
       const cloneProps = {
         className: cx([
           child.props.className,
-          `${blockClass}--displayed-breadcrumb`,
+          `${blockClass}__displayed-breadcrumb`,
         ]),
         key: `displayed-breadcrumb-${internalId.current}-${i}`,
       };
@@ -271,10 +271,10 @@ export let BreadcrumbWithOverflow = ({
       <div
         className={cx([blockClass, className])}
         ref={breadcrumbItemWithOverflow}>
-        <div className={cx([`${blockClass}--space`])}>
+        <div className={cx([`${blockClass}__space`])}>
           <ReactResizeDetector onResize={handleBreadcrumbItemsResize}>
             <div
-              className={`${blockClass}--breadcrumb-container ${blockClass}--breadcrumb-container--hidden`}
+              className={`${blockClass}__breadcrumb-container ${blockClass}__breadcrumb-container--hidden`}
               aria-hidden={true}
               ref={sizingContainerRef}>
               <BreadcrumbItem
@@ -289,7 +289,7 @@ export let BreadcrumbWithOverflow = ({
           </ReactResizeDetector>
 
           <Breadcrumb
-            className={`${blockClass}--breadcrumb-container`}
+            className={`${blockClass}__breadcrumb-container`}
             noTrailingSlash={noTrailingSlash}
             {...other}>
             {displayedBreadcrumbItems}

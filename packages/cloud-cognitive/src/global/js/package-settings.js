@@ -17,8 +17,6 @@ const defaults = {
     ActionBarItem: false,
     APIKeyDownloader: false,
     APIKeyModal: false,
-    BreadcrumbWithOverflow: false,
-    Card: false,
     ContextHeader: false,
     EmptyState: false,
     ErrorEmptyState: false,

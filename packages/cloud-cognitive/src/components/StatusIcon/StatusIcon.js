@@ -132,9 +132,13 @@ export let StatusIcon = React.forwardRef(
     });
 
     return (
-      <IconComponent {...rest} className={classNames} ref={ref}>
-        <title>{iconDescription}</title>
-      </IconComponent>
+      <React.Fragment>
+        {IconComponent && (
+          <IconComponent {...rest} className={classNames} ref={ref}>
+            <title>{iconDescription}</title>
+          </IconComponent>
+        )}
+      </React.Fragment>
     );
   }
 );

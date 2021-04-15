@@ -10,8 +10,7 @@ import '../../utils/enable-all'; // must come before component is imported (dire
 import { BreadcrumbItem } from 'carbon-components-react';
 import { BreadcrumbWithOverflow } from '.';
 
-import { pkg, carbon } from '../../settings';
-const blockClass = `${pkg.prefix}--breadcrumb-with-overflow`;
+import { carbon } from '../../settings';
 
 const breadcrumbContent = [];
 for (let i = 1; i <= 5; i++) {

@@ -234,7 +234,7 @@ ActionBar.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * maximum visible ActionBarItems
+   * Maximum visible action bar items.
    */
   maxVisible: PropTypes.number,
   /**

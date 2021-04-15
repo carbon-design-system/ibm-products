@@ -58,7 +58,7 @@ export let Card = ({
   const getActions = () => {
     if (overflowActions.length !== 0) {
       const pos = actionIconsPosition === 'top' ? 'bottom' : 'top';
-      const size = actionIconsPosition === 'top' ? 'sm' : 'lg';
+      const size = actionIconsPosition === 'top' ? 'sm' : 'xl';
       return (
         <OverflowMenu size={size} direction={pos} flipped>
           {overflowActions.map(({ id, ...rest }) => (
@@ -75,6 +75,7 @@ export let Card = ({
         if (productive)
           return (
             <Button
+              key={id}
               renderIcon={Icon}
               hasIconOnly
               onClick={onClick}
@@ -84,7 +85,13 @@ export let Card = ({
             />
           );
         return (
-          <div key={id} className={`${pkg.prefix}-card-icon`}>
+          <div
+            key={id}
+            className={`${pkg.prefix}-card-icon`}
+            onClick={onClick}
+            onKeyDown={onClick}
+            role="button"
+            tabIndex="0">
             <Icon aria-label={iconDescription} />
           </div>
         );
@@ -208,7 +215,7 @@ Card.propTypes = {
   actionIcons: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
-      icon: PropTypes.object,
+      icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
     })
   ),
   actionIconsPosition: PropTypes.oneOf(['top', 'bottom']),

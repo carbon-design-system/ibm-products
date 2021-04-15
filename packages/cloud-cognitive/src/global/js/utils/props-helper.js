@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+import PropTypes from 'prop-types';
+
 // helpers functions for component props
 
 // remove undesired props from component props object
@@ -15,4 +17,27 @@ export const stripUnwantedProps = (props, keys) => {
     return acc;
   }, {});
   return desiredProps;
+};
+
+export const deprecateProp = (validator, additionalInfo) => {
+  const deprecatePropValidator = (
+    props,
+    name,
+    componentName,
+    location,
+    propFullName
+  ) => {
+    if (props[name] !== null) {
+      const info = additionalInfo ? ` ${additionalInfo}` : '';
+      console.warn(
+        `The ${location} '${
+          propFullName || name
+        }' of '${componentName}' has been deprecated and will soon be removed.${info}`
+      );
+    }
+
+    return null;
+  };
+
+  return PropTypes.oneOfType([deprecatePropValidator, validator]);
 };

@@ -8,13 +8,19 @@ import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { ActionBar, ActionBarItem } from '.';
-import { Lightning16, Bee24 } from '@carbon/icons-react';
+import { Lightning16, Bee16 } from '@carbon/icons-react';
 
-const ActionBarItems = (
+const actions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => ({
+  renderIcon: num % 2 ? Lightning16 : Bee16,
+  iconDescription: `Action ${num.toString().padStart(2, '0')}`,
+  onClick: () => {},
+}));
+
+const ActionBarChildren = (
   <>
     <ActionBarItem renderIcon={Lightning16} iconDescription="Action 01" />
     <ActionBarItem renderIcon={Lightning16} iconDescription="Action 02" />
-    <ActionBarItem renderIcon={Bee24} iconDescription="Action 03" />
+    <ActionBarItem renderIcon={Bee16} iconDescription="Action 03" />
     <ActionBarItem renderIcon={Lightning16} iconDescription="Action 04" />
     <ActionBarItem renderIcon={Lightning16} iconDescription="Action 05" />
     <ActionBarItem renderIcon={Lightning16} iconDescription="Action 06" />
@@ -52,8 +58,21 @@ const TestActionBar = ({ width, children, ...rest }) => {
 describe(ActionBar.displayName, () => {
   const { click } = fireEvent;
 
+  it('Works with deprecated children', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    render(<TestActionBar width={1150}>{ActionBarChildren}</TestActionBar>);
+
+    screen.getByText(/Action 01/);
+    screen.getByText(/Action 10/);
+
+    expect(warn).toBeCalledWith(
+      "The prop 'children' of 'ActionBar' has been deprecated and will soon be removed. See documentation on the 'actions' property."
+    );
+  });
+
   it('Renders an action bar', () => {
-    render(<TestActionBar width={1150}>{ActionBarItems}</TestActionBar>);
+    render(<TestActionBar width={1150} actions={actions} />);
 
     screen.getByText(/Action 01/);
     screen.getByText(/Action 10/);
@@ -63,9 +82,11 @@ describe(ActionBar.displayName, () => {
     const overflowAriaLabel = 'Overflow aria label';
     // not enough room so should see an overflow.
     render(
-      <TestActionBar width={200} overflowAriaLabel={overflowAriaLabel}>
-        {ActionBarItems}
-      </TestActionBar>
+      <TestActionBar
+        width={200}
+        overflowAriaLabel={overflowAriaLabel}
+        actions={actions}
+      />
     );
 
     expect(screen.queryByText(/Action 10/)).toBeNull();
@@ -77,11 +98,7 @@ describe(ActionBar.displayName, () => {
   });
 
   it('Renders an action bar with max items set', () => {
-    render(
-      <TestActionBar width={1150} maxVisibleActionBarItems={2}>
-        {ActionBarItems}
-      </TestActionBar>
-    );
+    render(<TestActionBar width={1150} maxVisible={2} actions={actions} />);
 
     screen.getByText(/Action 01/);
     screen.getByText(/Action 02/);

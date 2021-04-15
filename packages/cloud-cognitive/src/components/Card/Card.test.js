@@ -15,11 +15,11 @@ import { pkg } from '../../settings';
 const { name } = Card;
 
 describe(name, () => {
-  test('renders', async () => {
+  test('renders', () => {
     render(<Card />);
   });
 
-  test('expressive with primary button', async () => {
+  test('expressive with primary button', () => {
     const onPrimaryButtonClick = jest.fn();
     const props = {
       primaryButtonText: 'Primary',
@@ -30,7 +30,7 @@ describe(name, () => {
     expect(onPrimaryButtonClick).toHaveBeenCalled();
   });
 
-  test('expressive with both buttons', async () => {
+  test('expressive with both buttons', () => {
     const onPrimaryButtonClick = jest.fn();
     const onSecondaryButtonClick = jest.fn();
     const props = {
@@ -46,7 +46,7 @@ describe(name, () => {
     expect(onSecondaryButtonClick).toHaveBeenCalled();
   });
 
-  test('expressive with action icons', async () => {
+  test('expressive with action icons', () => {
     const onClick = jest.fn();
     const actionIcons = [
       {
@@ -64,7 +64,7 @@ describe(name, () => {
     expect(onClick).toHaveBeenCalled();
   });
 
-  test('expressive with onClick', async () => {
+  test('expressive with onClick', () => {
     const onClick = jest.fn();
     const props = {
       onClick,
@@ -74,7 +74,7 @@ describe(name, () => {
     expect(onClick).toHaveBeenCalled();
   });
 
-  test('productive', async () => {
+  test('productive', () => {
     const iconClick = jest.fn();
     const buttonClick = jest.fn();
     const props = {
@@ -98,7 +98,7 @@ describe(name, () => {
     expect(buttonClick).toHaveBeenCalled();
   });
 
-  test('productive with overflow', async () => {
+  test('productive with overflow', () => {
     const onClick = jest.fn();
     const props = {
       overflowActions: [
@@ -115,7 +115,7 @@ describe(name, () => {
     expect(onClick).toHaveBeenCalled();
   });
 
-  test('productive with click zones', async () => {
+  test('productive with click zones', () => {
     const onClick = jest.fn();
     const props = {
       onClick,

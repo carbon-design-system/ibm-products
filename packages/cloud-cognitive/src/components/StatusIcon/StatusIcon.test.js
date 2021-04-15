@@ -18,6 +18,7 @@ import { StatusIcon } from '.';
 const blockClass = `${pkg.prefix}--status-icon`;
 const { componentName } = StatusIcon.displayName;
 const className = `class-${uuidv4()}`;
+
 const iconSizes = [
   { input: 'sm', output: '16' },
   { input: 'md', output: '20' },
@@ -41,45 +42,38 @@ const iconTypes = [
 
 const iconThemes = ['light', 'dark'];
 
+const renderComponent = ({ ...rest }) =>
+  render(
+    <StatusIcon
+      {...rest}
+      kind="fatal"
+      iconDescription="fatal"
+      size="sm"
+      theme="light"
+    />
+  );
+
 describe(componentName, () => {
   it('renders a component StatusIcon', () => {
-    const { container } = render(
-      <StatusIcon
-        className={className}
-        kind="fatal"
-        iconDescription="fatal"
-        size="sm"
-        theme="light"
-      />
-    );
+    const { container } = renderComponent();
     expect(container).toBeInTheDocument();
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(
-      <StatusIcon
-        kind="fatal"
-        iconDescription="fatal"
-        size="sm"
-        theme="light"
-      />
-    );
+    const { container } = renderComponent();
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   }, 80000);
 
   it('applies className to the root node', () => {
-    const className = 'className';
-    const { container } = render(
-      <StatusIcon
-        className={className}
-        kind="fatal"
-        iconDescription="fatal"
-        size="sm"
-        theme="light"
-      />
-    );
+    const { container } = renderComponent({ className });
     expect(container.querySelector(`.${className}`)).toBeInTheDocument();
+  });
+
+  it('forwards a ref to an appropriate node', () => {
+    const ref = React.createRef();
+    renderComponent({ ref });
+    expect(ref.current).toHaveClass(blockClass);
   });
 
   iconTypes.forEach((kind) => {
@@ -95,7 +89,7 @@ describe(componentName, () => {
       const element = container.querySelector(
         `.${blockClass}--light.${blockClass}--light-${kind}`
       );
-      const hasKindProp = element.className.includes(`${kind}`);
+      const hasKindProp = element.className.baseVal.includes(`${kind}`);
       expect(hasKindProp).toBeTruthy();
     });
   });
@@ -111,7 +105,7 @@ describe(componentName, () => {
         />
       );
       const element = container.querySelector(
-        `.${blockClass}--light.${blockClass}--light-${desc} .${blockClass}__icon`
+        `.${blockClass}--light.${blockClass}--light-${desc}`
       );
       const hasIconDescriptionProp = element.querySelector('title').textContent;
       expect(hasIconDescriptionProp).toBeTruthy();
@@ -131,7 +125,7 @@ describe(componentName, () => {
       const element = container.querySelector(
         `.${blockClass}--${theme}.${blockClass}--${theme}-fatal`
       );
-      const hasThemeProp = element.className.includes(`${theme}`);
+      const hasThemeProp = element.className.baseVal.includes(`${theme}`);
       expect(hasThemeProp).toBeTruthy();
     });
   });
@@ -147,7 +141,7 @@ describe(componentName, () => {
         />
       );
       const element = container.querySelector(
-        `.${blockClass}--light.${blockClass}--light-fatal .${blockClass}__icon`
+        `.${blockClass}--light.${blockClass}--light-fatal`
       );
       const iconHeight = element.getAttribute('height');
       expect(iconHeight).toEqual(output);

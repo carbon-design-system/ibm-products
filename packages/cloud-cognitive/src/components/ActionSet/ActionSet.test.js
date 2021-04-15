@@ -21,6 +21,7 @@ import { ActionSet } from '.';
 const blockClass = `${pkg.prefix}--action-set`;
 const componentName = ActionSet.displayName;
 
+const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 const label1 = `Secondary button ${uuidv4()}`;
 const action1 = { label: label1, kind: 'secondary' };
@@ -81,9 +82,18 @@ describe(componentName, () => {
     expect(buttons[1].textContent).toEqual(label1);
   });
 
-  it('renders a single ghost action button', () => {
-    render(<ActionSet actions={[action3]} />);
-    expect(getByRoleAndLabel('button', label3)).toHaveClass(ghostButton);
+  it('applies className to an action button', () => {
+    render(<ActionSet actions={[{ ...action1, className }, action2]} />);
+    expect(getByRoleAndLabel('button', label1)).toHaveClass(className);
+    expect(getByRoleAndLabel('button', label2)).not.toHaveClass(className);
+  });
+
+  it('renders a loading button', () => {
+    render(<ActionSet actions={[{ ...action1, loading: true }]} />);
+    const loader = Loading.defaultProps.description;
+    expect(screen.getByRole('button').textContent).toEqual(
+      `${label1}${loader}${loader}`
+    );
   });
 
   it('reports clicks on an action button', () => {
@@ -94,12 +104,20 @@ describe(componentName, () => {
     expect(onClick).toBeCalledTimes(1);
   });
 
-  it('renders a loading button', () => {
-    render(<ActionSet actions={[{ ...action1, loading: true }]} />);
-    const loader = Loading.defaultProps.description;
-    expect(screen.getByRole('button').textContent).toEqual(
-      `${label1}${loader}${loader}`
-    );
+  it('adds additional properties to an action button', () => {
+    render(<ActionSet actions={[{ ...action1, 'data-testid': dataTestId }]} />);
+    screen.getByTestId(dataTestId);
+  });
+
+  it('forwards a ref to an action button', () => {
+    const ref = React.createRef();
+    render(<ActionSet actions={[{ ...action1, ref }, action2]} />);
+    expect(ref.current).toEqual(getByRoleAndLabel('button', label1));
+  });
+
+  it('applies className to the containing node', () => {
+    render(<ActionSet className={className} />);
+    expect(screen.getByRole('presentation')).toHaveClass(className);
   });
 
   it('adds additional properties to the containing node', () => {

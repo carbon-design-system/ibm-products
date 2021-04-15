@@ -43,6 +43,16 @@ minor/simple items, open issues to track them.
 GitHub comment, then check where criteria passed, strike out where not
 applicable, and add notes to each item where applicable.
 
+Once one or more components have been reviewed for readiness, the following
+steps are needed:
+
+- the flags for the components in package-settings.js should be changed to
+  `true`.
+- the component SCSS should be included in
+  /src/components/\_index-released-only.scss.
+- run the tests, recreating snapshots (using `-u`), and check in the updated
+  public CSS snapshot.
+
 `## Review for release`
 
 `###` Readiness
@@ -73,7 +83,10 @@ responds to the currently set Carbon theme.\
 `- [ ]` Additional attributes that are not identified as props (such as title,
 aria-\*, etc) are passed through to an appropriate DOM node of the component as
 HTML attributes.\
-`- [ ]` No warnings, errors or log messages in the console.
+`- [ ]` No warnings, errors or log messages in the console.\
+`- [ ]` Each public component JS is exported in /src/components/index.js, each
+public component SCSS is included in /src/components/\_index.scss, and each
+public component has a flag in package-settings.js.
 
 `###` Standards
 

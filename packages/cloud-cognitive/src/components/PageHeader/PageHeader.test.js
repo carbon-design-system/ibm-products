@@ -8,7 +8,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 
 import {
@@ -20,24 +20,15 @@ import {
 } from 'carbon-components-react';
 import { Lightning16, Bee32 } from '@carbon/icons-react';
 
-import { ActionBarItem } from '../ActionBar';
 import { PageHeader } from '.';
 
 /* Test properties. */
-const actionBarItemOnClick = jest.fn();
 const pageActionItemOnClick = jest.fn();
-const actionBarItems = (
-  <>
-    <ActionBarItem
-      renderIcon={Lightning16}
-      label="Action 1"
-      onClick={actionBarItemOnClick}
-    />
-    <ActionBarItem renderIcon={Lightning16} label="Action 2" />
-    <ActionBarItem renderIcon={Lightning16} label="Action 3" />
-    <ActionBarItem renderIcon={Lightning16} label="Action 4" />
-  </>
-);
+const actionBarItems = [1, 2, 3, 4].map((item) => ({
+  renderIcon: Lightning16,
+  label: `Action ${item}`,
+}));
+
 const availableSpace = <span className="page-header-test--available-space" />;
 const breadcrumbItems = (
   <>

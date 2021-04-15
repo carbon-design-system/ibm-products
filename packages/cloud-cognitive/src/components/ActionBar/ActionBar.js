@@ -205,9 +205,9 @@ export let ActionBar = React.forwardRef(
 
 ActionBar.displayName = componentName;
 ActionBar.propTypes = {
-  // /**
-  //  * actions in the bar
-  //  */
+ /**
+  * Action items to be displayed in the bar.
+  */
   actions: PropTypes.oneOfType([
     // ActionBar.validateActions(),
     PropTypes.arrayOf(

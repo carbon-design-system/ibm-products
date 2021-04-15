@@ -152,6 +152,10 @@ describe('PageHeader', () => {
     expect(
       document.querySelectorAll(`.${pkg.prefix}-page-header--breadcrumb`)
     ).toHaveLength(1);
+    console.log(
+      document.querySelectorAll(`.${pkg.prefix}-page-header--breadcrumb`)[0]
+        .outerHTML
+    );
     expect(
       screen.getAllByText(/Breadcrumb [1-3]/, {
         // selector need to ignore sizing items

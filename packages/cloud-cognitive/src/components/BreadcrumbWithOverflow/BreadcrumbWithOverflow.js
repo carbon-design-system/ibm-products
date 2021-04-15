@@ -181,7 +181,9 @@ export let BreadcrumbWithOverflow = ({
 
     if (maxVisible <= 1) {
       setDisplayCount(1);
+      console.log('easy');
     } else {
+      console.log('hard');
       // how many will fit?
       let willFit = 0;
       let spaceAvailable = breadcrumbItemWithOverflow.current.offsetWidth; // not sure how to test resize
@@ -205,6 +207,8 @@ export let BreadcrumbWithOverflow = ({
 
           breadcrumbWidthsIncludingMargin.push(item.offsetWidth + marginWidths);
         }
+
+        console.log(spaceAvailable, breadcrumbWidthsIncludingMargin);
 
         let overflowWidth = breadcrumbWidthsIncludingMargin[0];
 

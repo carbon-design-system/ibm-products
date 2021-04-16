@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import React from 'react';
 
 import { pkg } from '../../settings';
@@ -16,8 +16,9 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { StatusIcon } from '.';
 
 const blockClass = `${pkg.prefix}--status-icon`;
-const { componentName } = StatusIcon.displayName;
+const componentName = StatusIcon.displayName;
 const className = `class-${uuidv4()}`;
+const dataTestId = uuidv4();
 
 const iconSizes = [
   { input: 'sm', output: '16' },
@@ -74,6 +75,11 @@ describe(componentName, () => {
     const ref = React.createRef();
     renderComponent({ ref });
     expect(ref.current).toHaveClass(blockClass);
+  });
+
+  it('adds additional properties to the containing node', () => {
+    renderComponent({ 'data-testid': dataTestId });
+    screen.getByTestId(dataTestId);
   });
 
   iconTypes.forEach((kind) => {

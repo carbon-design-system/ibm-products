@@ -105,37 +105,18 @@ export let ActionBar = React.forwardRef(
 
     // creates displayed items based on displayCount and alignment
     useEffect(() => {
-      const newDisplayedItems = [];
-      const newOverflowItems = [];
-
-      // add visible items
-      for (let index = 0; index < displayCount; index++) {
-        newDisplayedItems.push(
-          <ActionBarItem
-            {...itemArray[index]}
-            key={`displayed-action-bar-item-${internalId.current}-${index}`}
-          />
-        );
-      }
-
-      // add overflow items
-      for (let index = displayCount; index < itemArray.length; index++) {
-        newOverflowItems.push(
-          <ActionBarItem
-            {...itemArray[index]}
-            key={`overflow-action-bar-item-${internalId.current}-${index}`}
-          />
-        );
-      }
-
-      // add overflow menu with items
+      const newDisplayedItems = itemArray.map((item, index) => (
+        <ActionBarItem {...item} key={`${index}`} />
+      ));
+      // extract any there are not room for to newOverflowItems
+      const newOverflowItems = newDisplayedItems.splice(displayCount);
+      // add overflow menu if needed
       if (newOverflowItems.length) {
-        const overflowMenu = (
+        newDisplayedItems.push(
           <ActionBarOverflowItems
             overflowItems={newOverflowItems}
             key={`overflow-menu-${internalId.current}`}></ActionBarOverflowItems>
         );
-        newDisplayedItems.push(overflowMenu);
       }
 
       setDisplayedItems(newDisplayedItems);

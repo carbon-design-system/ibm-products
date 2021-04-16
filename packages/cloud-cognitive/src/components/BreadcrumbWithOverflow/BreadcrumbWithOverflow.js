@@ -112,9 +112,7 @@ export let BreadcrumbWithOverflow = ({
         return React.cloneElement(item, { key: index, title, className });
       });
 
-    const allBreadcrumbItems = cloneChildren(childArray);
-    const newDisplayedBreadcrumbItems = [];
-    const newOverflowBreadcrumbItems = [];
+    const newDisplayedBreadcrumbItems = cloneChildren(childArray);
 
     // The breadcrumb has the form [first item] [overflow] [items 2...(n-1)] [last item].
     // The overflow is only shown if there isn't space to display all the items, and in that case:
@@ -122,38 +120,23 @@ export let BreadcrumbWithOverflow = ({
     //  * the first item is the next to be displayed, if there's space once the last item and overflow are shown;
     //  * any remaining space after the first item, last item and overflow are shown is used to show items (n-1), (n-2), (n-3), ..., until the space is used up ;
     // Note that displayCount (min 1) has been computed based on the available space and the above sequence.
-    const overflowStart = displayCount > 1 ? 1 : 0;
-    // Everything but the last item if 1, otherwise 1 to length + overflowStart - displayCount
-    for (
-      let i = overflowStart;
-      i < childArray.length + overflowStart - displayCount;
-      i++
-    ) {
-      newOverflowBreadcrumbItems.push(allBreadcrumbItems[i]);
-    }
+    const overflowPosition = displayCount > 1 ? 1 : 0;
 
-    // add the first item before overflow if space
-    if (displayCount > 1) {
-      newDisplayedBreadcrumbItems.push(allBreadcrumbItems[0]);
-    }
+    let newOverflowBreadcrumbItems = newDisplayedBreadcrumbItems.splice(
+      overflowPosition,
+      childArray.length - displayCount
+    );
 
-    // if needed add overflow menu after first item or before last
-    if (displayCount < childArray.length) {
-      newDisplayedBreadcrumbItems.push(
+    // if needed add overflow menu
+    if (newOverflowBreadcrumbItems.length) {
+      newDisplayedBreadcrumbItems.splice(
+        overflowPosition,
+        0,
         <BreadcrumbOverflowMenu
           overflowItems={newOverflowBreadcrumbItems}
           key={`$displayed-breadcrumb-${internalId}-overflow`}
         />
       );
-    }
-
-    // skip items in overflow + overflowStart
-    for (
-      let i = newOverflowBreadcrumbItems.length + overflowStart;
-      i < childArray.length;
-      i++
-    ) {
-      newDisplayedBreadcrumbItems.push(allBreadcrumbItems[i]);
     }
 
     setDisplayedBreadcrumbItems(newDisplayedBreadcrumbItems);

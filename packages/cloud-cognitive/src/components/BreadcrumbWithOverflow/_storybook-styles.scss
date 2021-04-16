@@ -9,12 +9,12 @@
 
 $block-class: #{$pkg-prefix}--breadcrumb-with-overflow;
 
-.#{$block-class}--story__viewport {
+.#{$block-class}__story-viewport {
   position: relative;
   box-shadow: 0 0 0 $layout-02 $inverse-02;
 }
 
-.#{$block-class}--story__viewport::before {
+.#{$block-class}__story-viewport::before {
   position: absolute;
   top: calc(-1 * #{$layout-02});
   left: 0;

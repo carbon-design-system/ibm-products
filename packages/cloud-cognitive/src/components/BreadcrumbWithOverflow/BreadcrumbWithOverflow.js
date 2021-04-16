@@ -37,7 +37,7 @@ const componentName = 'BreadcrumbWithOverflow';
 export let BreadcrumbWithOverflow = ({
   children,
   className,
-  maxVisibleBreadcrumbItems,
+  maxVisible,
   noTrailingSlash,
   overflowAriaLabel,
   ...other
@@ -57,7 +57,7 @@ export let BreadcrumbWithOverflow = ({
           ariaLabel={null}
           menuOffset={{ top: 10, left: 59 }} // TODO: REMOVE borrowed from https://github.com/carbon-design-system/carbon/pull/7085
           renderIcon={OverflowMenuHorizontal32}
-          className={`${blockClass}--overflow-menu`}
+          className={`${blockClass}__overflow-menu`}
           menuOptionsClass={`${carbon.prefix}--breadcrumb-menu-options`} // TODO: REMOVE borrowed from https://github.com/carbon-design-system/carbon/pull/7085
         >
           {
@@ -121,7 +121,7 @@ export let BreadcrumbWithOverflow = ({
         React.cloneElement(childArray[0], {
           className: cx([
             childArray[0].props.className,
-            `${blockClass}--displayed-breadcrumb`,
+            `${blockClass}__displayed-breadcrumb`,
           ]),
           key: `displayed-breadcrumb-${internalId.current}-0`,
         })
@@ -148,7 +148,7 @@ export let BreadcrumbWithOverflow = ({
       const cloneProps = {
         className: cx([
           child.props.className,
-          `${blockClass}--displayed-breadcrumb`,
+          `${blockClass}__displayed-breadcrumb`,
         ]),
         key: `displayed-breadcrumb-${internalId.current}-${i}`,
       };
@@ -179,13 +179,14 @@ export let BreadcrumbWithOverflow = ({
       }
     };
 
-    if (maxVisibleBreadcrumbItems <= 1) {
+    if (maxVisible <= 1) {
       setDisplayCount(1);
     } else {
       // how many will fit?
       let willFit = 0;
-      let spaceAvailable = breadcrumbItemWithOverflow.current.offsetWidth;
+      let spaceAvailable = breadcrumbItemWithOverflow.current.offsetWidth; // not sure how to test resize
 
+      /* istanbul ignore next if */
       if (sizingContainerRef.current) {
         const sizingBreadcrumbItems = sizingContainerRef.current.querySelectorAll(
           `.${carbon.prefix}--breadcrumb-item`
@@ -244,11 +245,7 @@ export let BreadcrumbWithOverflow = ({
       if (willFit <= 1) {
         setDisplayCount(1);
       } else {
-        setDisplayCount(
-          maxVisibleBreadcrumbItems
-            ? Math.min(willFit, maxVisibleBreadcrumbItems)
-            : willFit
-        );
+        setDisplayCount(maxVisible ? Math.min(willFit, maxVisible) : willFit);
       }
     }
   };
@@ -256,13 +253,15 @@ export let BreadcrumbWithOverflow = ({
   useEffect(() => {
     checkFullyVisibleBreadcrumbItems();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [maxVisibleBreadcrumbItems]);
+  }, [maxVisible]);
 
   const handleResize = () => {
+    /* istanbul ignore next */ // not sure how to test resize
     checkFullyVisibleBreadcrumbItems();
   };
 
   const handleBreadcrumbItemsResize = () => {
+    /* istanbul ignore next */ // not sure how to test resize
     checkFullyVisibleBreadcrumbItems();
   };
 
@@ -271,10 +270,10 @@ export let BreadcrumbWithOverflow = ({
       <div
         className={cx([blockClass, className])}
         ref={breadcrumbItemWithOverflow}>
-        <div className={cx([`${blockClass}--space`])}>
+        <div className={cx([`${blockClass}__space`])}>
           <ReactResizeDetector onResize={handleBreadcrumbItemsResize}>
             <div
-              className={`${blockClass}--breadcrumb-container ${blockClass}--breadcrumb-container--hidden`}
+              className={`${blockClass}__breadcrumb-container ${blockClass}__breadcrumb-container--hidden`}
               aria-hidden={true}
               ref={sizingContainerRef}>
               <BreadcrumbItem
@@ -289,7 +288,7 @@ export let BreadcrumbWithOverflow = ({
           </ReactResizeDetector>
 
           <Breadcrumb
-            className={`${blockClass}--breadcrumb-container`}
+            className={`${blockClass}__breadcrumb-container`}
             noTrailingSlash={noTrailingSlash}
             {...other}>
             {displayedBreadcrumbItems}
@@ -316,9 +315,9 @@ BreadcrumbWithOverflow.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * maximum visible breadcrumb-items (values less than 1 are treated as 1)
+   * maxVisble: maximum visible breadcrumb-items before overflow is used (values less than 1 are treated as 1)
    */
-  maxVisibleBreadcrumbItems: PropTypes.number,
+  maxVisible: PropTypes.number,
   /**
    * noTrailing slash - same as for Carbon
    */

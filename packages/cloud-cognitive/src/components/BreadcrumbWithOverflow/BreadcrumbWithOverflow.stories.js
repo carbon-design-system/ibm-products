@@ -31,9 +31,7 @@ export default {
     },
   },
   decorators: [
-    (story) => (
-      <div className={`${blockClass}--story__viewport`}>{story()}</div>
-    ),
+    (story) => <div className={`${blockClass}__story-viewport`}>{story()}</div>,
   ],
   parameters: { styles },
 };

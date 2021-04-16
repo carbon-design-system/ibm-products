@@ -7,7 +7,6 @@
 
 export { AboutModal } from './AboutModal';
 export { ActionBarItem } from './ActionBar';
-export { BreadcrumbWithOverflow } from './BreadcrumbWithOverflow';
 export { ContextHeader } from './ContextHeader';
 export {
   EmptyState,
@@ -27,6 +26,7 @@ export { PageHeader, PageActionItem } from './PageHeader';
 export { RemoveDeleteModal } from './RemoveDeleteModal';
 export { Saving } from './Saving';
 export { SidePanel } from './SidePanel';
+export { StatusIcon } from './StatusIcon';
 export { TagSet } from './TagSet';
 export { Tearsheet, TearsheetNarrow } from './Tearsheet';
 export { UserProfileImage } from './UserProfileImage';

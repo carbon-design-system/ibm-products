@@ -88,20 +88,15 @@ $block-class: #{$pkg-prefix}--status-icon;
   justify-content: flex-end;
 }
 
-.#{$block-class}--light.#{$block-class}--light-minor-warning
-  .#{$block-class}__icon,
-.#{$block-class}--dark.#{$block-class}--dark-minor-warning
-  .#{$block-class}__icon {
+.#{$block-class}--light.#{$block-class}--light-minor-warning,
+.#{$block-class}--dark.#{$block-class}--dark-minor-warning {
   // stylelint-disable-next-line carbon/theme-token-use
   fill: $carbon--yellow-20;
 }
 
 .#{$block-class}--light.#{$block-class}--light-minor-warning
-  .#{$block-class}__icon
   path:nth-of-type(1),
-.#{$block-class}--dark.#{$block-class}--dark-minor-warning
-  .#{$block-class}__icon
-  path:nth-of-type(1) {
+.#{$block-class}--dark.#{$block-class}--dark-minor-warning path:nth-of-type(1) {
   // stylelint-disable-next-line carbon/theme-token-use
   fill: $carbon--gray-100;
 }
@@ -109,8 +104,7 @@ $block-class: #{$pkg-prefix}--status-icon;
 @each $theme in $themes {
   @each $icon in $icons {
     @each $themekey in $themes {
-      .#{$block-class}--#{$theme}.#{$block-class}--#{$themekey}-#{$icon}
-        .#{$block-class}__icon {
+      .#{$block-class}--#{$theme}.#{$block-class}--#{$themekey}-#{$icon} {
         @if $icon == in-progress {
           @media (prefers-reduced-motion: reduce) {
             animation: none;

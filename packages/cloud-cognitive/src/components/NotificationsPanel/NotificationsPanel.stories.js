@@ -53,10 +53,11 @@ const renderUIShellHeader = (open, setOpen) => (
             zIndex: 2,
           }}>
           <HeaderGlobalAction
-            aria-label="App switcher"
+            aria-label="Notifications"
             onClick={() => setOpen(!open)}>
             <Notification20
               style={{
+                /* stylelint-disable-next-line */
                 fill: white,
               }}
             />
@@ -64,6 +65,7 @@ const renderUIShellHeader = (open, setOpen) => (
           <HeaderGlobalAction aria-label="App switcher">
             <User20
               style={{
+                /* stylelint-disable-next-line */
                 fill: white,
               }}
             />
@@ -100,6 +102,12 @@ const Template = (args) => {
         data={notificationsData}
         open={open}
         onClickOutside={() => setOpen(false)}
+        onDismissAllNotifications={() => setNotificationsData([])}
+        onDismissSingleNotification={({ id }) => {
+          let tempData = [...notificationsData];
+          tempData = tempData.filter((item) => item.id !== id);
+          setNotificationsData(tempData);
+        }}
       />
     </>
   );
@@ -124,8 +132,6 @@ Default.args = {
   onDoNotDisturbChange: action('Toggled to do not disturb'),
   onViewAllClick: action('Clicked view all button'),
   onSettingsClick: action('Cliked settings gear'),
-  onDismissAllNotifications: action('Dismiss all notifications action'),
-  onDismissSingleNotification: action('Dismiss single notification'),
 };
 
 export const EmptyState = EmptyNotifications.bind({});

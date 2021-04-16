@@ -113,8 +113,7 @@
       align-items: flex-start;
       width: 100%;
       min-height: 6.25rem;
-      // stylelint-disable-next-line carbon/layout-token-use
-      padding: $spacing-05 $spacing-05 1.125rem;
+      padding: $spacing-05;
       text-align: left;
       background-color: $ui-background;
       border: 0;
@@ -203,6 +202,10 @@
         padding: 0;
         color: $text-01;
         opacity: 0;
+        &:hover,
+        &:focus {
+          opacity: 1;
+        }
       }
     }
     .#{$block-class}__notification-today:not(:first-of-type):before,
@@ -210,7 +213,7 @@
     .#{$block-class}__notification-previous:not(:first-of-type):before {
       position: absolute;
       top: 0;
-      width: calc(100% - 2rem);
+      width: calc(100% - (2 * #{$spacing-05}));
       height: 1px;
       margin: 0 auto;
       background-color: $ui-02;

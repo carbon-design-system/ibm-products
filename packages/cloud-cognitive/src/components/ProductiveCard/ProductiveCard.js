@@ -37,6 +37,9 @@ ProductiveCard.propTypes = {
     PropTypes.shape({
       id: PropTypes.string,
       icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+      onKeyDown: PropTypes.func,
+      onClick: PropTypes.func,
+      iconDescription: PropTypes.string,
     })
   ),
   /**
@@ -79,6 +82,7 @@ ProductiveCard.propTypes = {
       id: PropTypes.string,
       itemText: PropTypes.string,
       onClick: PropTypes.func,
+      onKeyDown: PropTypes.func,
     })
   ),
   /**

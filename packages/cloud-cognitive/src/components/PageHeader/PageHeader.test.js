@@ -8,7 +8,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 
 import {
@@ -20,24 +20,16 @@ import {
 } from 'carbon-components-react';
 import { Lightning16, Bee32 } from '@carbon/icons-react';
 
-import { ActionBarItem } from '../ActionBar';
 import { PageHeader } from '.';
 
 /* Test properties. */
-const actionBarItemOnClick = jest.fn();
 const pageActionItemOnClick = jest.fn();
-const actionBarItems = (
-  <>
-    <ActionBarItem
-      renderIcon={Lightning16}
-      label="Action 1"
-      onClick={actionBarItemOnClick}
-    />
-    <ActionBarItem renderIcon={Lightning16} label="Action 2" />
-    <ActionBarItem renderIcon={Lightning16} label="Action 3" />
-    <ActionBarItem renderIcon={Lightning16} label="Action 4" />
-  </>
-);
+const actionBarItems = [1, 2, 3, 4].map((item) => ({
+  renderIcon: Lightning16,
+  iconDescription: `Action ${item}`,
+  onClick: () => {},
+}));
+
 const availableSpace = <span className="page-header-test--available-space" />;
 const breadcrumbItems = (
   <>
@@ -88,8 +80,16 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 jest.mock('../../global/js/utils/uuidv4');
 
 describe('PageHeader', () => {
-  beforeAll(() => {
-    uuidv4.mockImplementation(() => 'testid');
+  const mocks = [];
+  beforeEach(() => {
+    mocks.push(uuidv4.mockImplementation(() => 'testid'));
+    mocks.push(jest.spyOn(window, 'scrollTo').mockImplementation());
+  });
+
+  afterEach(() => {
+    mocks.forEach((mock) => {
+      mock.mockRestore();
+    });
   });
 
   test('renders an empty header when no props are set', () => {
@@ -164,7 +164,7 @@ describe('PageHeader', () => {
     expect(
       screen.getAllByText(/Breadcrumb [1-3]/, {
         // selector need to ignore sizing items
-        selector: `.exp--breadcrumb-with-overflow--breadcrumb-container:not(.exp--breadcrumb-with-overflow--breadcrumb-container--hidden) .bx--link`,
+        selector: `.${pkg.prefix}--breadcrumb-with-overflow__breadcrumb-container:not(.${pkg.prefix}--breadcrumb-with-overflow__breadcrumb-container--hidden) .${carbon.prefix}--link`,
       })
     ).toHaveLength(3);
     expect(screen.queryAllByTestId('tabs')).toHaveLength(1);

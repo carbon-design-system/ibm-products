@@ -50,28 +50,16 @@ export default {
 
 // Test values for props.
 
-const actionBarItems = (
-  <>
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 1" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 2" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 3" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 4" />
-  </>
-);
-const manyActionBarItems = (
-  <>
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 1" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 2" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 3" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 4" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 5" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 6" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 7" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 8" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 9" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 10" />
-  </>
-);
+const actionBarItems = [1, 2, 3, 4].map((item) => ({
+  renderIcon: Lightning16,
+  label: `Action ${item}`,
+}));
+
+const manyActionBarItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
+  renderIcon: Lightning16,
+  label: `Action ${item}`,
+}));
+
 const breadcrumbItems = (
   <>
     <BreadcrumbItem href="#">Breadcrumb 1</BreadcrumbItem>

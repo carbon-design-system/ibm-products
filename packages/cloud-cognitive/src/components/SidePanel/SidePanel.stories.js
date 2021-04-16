@@ -320,7 +320,7 @@ const SlideOverTemplate = ({ minimalContent, actions, ...args }) => {
       <SidePanel
         {...args}
         open={open}
-        setOpen={setOpen}
+        onRequestClose={() => setOpen(false)}
         actions={actionSets[actions]}>
         {!minimalContent && <ChildrenContent />}
       </SidePanel>
@@ -340,7 +340,7 @@ const StepTemplate = (args) => {
       <SidePanel
         {...args}
         open={open}
-        setOpen={setOpen}
+        onRequestClose={() => setOpen(false)}
         currentStep={currentStep}
         onNavigationBack={setCurrentStep}>
         <ChildrenContentWithSteps
@@ -370,7 +370,7 @@ const SlideInTemplate = ({ actions, ...args }) => {
       <SidePanel
         {...args}
         open={open}
-        setOpen={setOpen}
+        onRequestClose={() => setOpen(false)}
         actions={actionSets[actions]}>
         <ChildrenContent />
       </SidePanel>
@@ -414,14 +414,6 @@ WithActionToolbar.args = {
     },
   ],
   ...defaultStoryProps,
-};
-
-export const WithCondensedActions = SlideOverTemplate.bind({});
-WithCondensedActions.args = {
-  ...defaultStoryProps,
-  condensed: true,
-  placement: 'left',
-  actions: 0,
 };
 
 export const PanelWithSecondStep = StepTemplate.bind({});

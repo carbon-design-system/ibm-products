@@ -6,6 +6,7 @@
  */
 
 import { action } from '@storybook/addon-actions';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 const currentDate = new Date();
 let yesterdayDate = new Date();
@@ -15,7 +16,7 @@ dayBeforeYesterday.setDate(dayBeforeYesterday.getDate() - 2);
 const msInOneMinute = 60000;
 const data = [
   {
-    id: 0,
+    id: uuidv4(),
     type: 'error',
     title: 'LogRhythm connection failure',
     description: 'LogRhythm is failing to connect, check timeout.',
@@ -24,7 +25,16 @@ const data = [
     onNotificationClick: action(`Clicked on notification`),
   },
   {
-    id: 1,
+    id: uuidv4(),
+    type: 'error',
+    title: 'LogDNA cannot be reached.',
+    description: 'Unable to communicate with LogDNA.',
+    timestamp: new Date(new Date().getTime() - 30 * 1000), // 30 seconds ago
+    unread: true,
+    onNotificationClick: action(`Clicked on notification`),
+  },
+  {
+    id: uuidv4(),
     type: 'warning',
     title: 'System alert',
     description: 'Email classification was exported successfully.',
@@ -32,7 +42,7 @@ const data = [
     onNotificationClick: action(`Clicked on notification`),
   },
   {
-    id: 2,
+    id: uuidv4(),
     type: 'success',
     title: 'IBM Cloud Pak for Automation Success',
     description: 'Successfully connected cartridge',
@@ -40,7 +50,7 @@ const data = [
     onNotificationClick: action(`Clicked on notification`),
   },
   {
-    id: 3,
+    id: uuidv4(),
     type: 'success',
     title: 'Successfully connected LogDNA',
     description: 'App connection succeeded',
@@ -48,7 +58,7 @@ const data = [
     onNotificationClick: action(`Clicked on notification`),
   },
   {
-    id: 4,
+    id: uuidv4(),
     type: 'warning',
     title: 'Cloud Foundry app memory',
     description: 'Allocated app memory low',
@@ -56,7 +66,7 @@ const data = [
     onNotificationClick: action(`Clicked on notification`),
   },
   {
-    id: 5,
+    id: uuidv4(),
     type: 'informational',
     title: 'Logs are now being monitored',
     link: {
@@ -67,7 +77,7 @@ const data = [
     onNotificationClick: action(`Clicked on notification`),
   },
   {
-    id: 6,
+    id: uuidv4(),
     type: 'error',
     title: 'Cluster unreachable',
     description:
@@ -76,7 +86,7 @@ const data = [
     onNotificationClick: action(`Clicked on notification`),
   },
   {
-    id: 7,
+    id: uuidv4(),
     type: 'error',
     title: 'Cluster unreachable',
     description:
@@ -85,7 +95,7 @@ const data = [
     onNotificationClick: action(`Clicked on notification`),
   },
   {
-    id: 8,
+    id: uuidv4(),
     type: 'error',
     title: 'Cluster unreachable',
     description:
@@ -94,7 +104,7 @@ const data = [
     onNotificationClick: action(`Clicked on notification`),
   },
   {
-    id: 9,
+    id: uuidv4(),
     type: 'error',
     title: 'Cluster unreachable',
     description:
@@ -103,7 +113,7 @@ const data = [
     onNotificationClick: action(`Clicked on notification`),
   },
   {
-    id: 10,
+    id: uuidv4(),
     type: 'error',
     title: 'Cluster unreachable',
     description:
@@ -112,7 +122,7 @@ const data = [
     onNotificationClick: action(`Clicked on notification`),
   },
   {
-    id: 11,
+    id: uuidv4(),
     type: 'error',
     title: 'Cluster unreachable',
     description:
@@ -121,7 +131,7 @@ const data = [
     onNotificationClick: action(`Clicked on notification`),
   },
   {
-    id: 12,
+    id: uuidv4(),
     type: 'error',
     title: 'Cluster unreachable',
     description:
@@ -130,7 +140,7 @@ const data = [
     onNotificationClick: action(`Clicked on notification`),
   },
   {
-    id: 13,
+    id: uuidv4(),
     type: 'error',
     title: 'Cluster unreachable',
     description:
@@ -139,7 +149,7 @@ const data = [
     onNotificationClick: action(`Clicked on notification`),
   },
   {
-    id: 14,
+    id: uuidv4(),
     type: 'error',
     title: 'Cluster unreachable',
     description:

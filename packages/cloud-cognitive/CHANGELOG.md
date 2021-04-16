@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.35.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.35.0...@carbon/ibm-cloud-cognitive@0.35.1) (2021-04-16)
+
+
+### Bug Fixes
+
+* minor fix to make AboutModal stories switch more smoothly ([#609](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/609)) ([b3fe083](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b3fe083c411a3d627031094fe608c57bd378990d))
+
+
+
+
+
 # [0.35.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.34.33...@carbon/ibm-cloud-cognitive@0.35.0) (2021-04-16)
 
 

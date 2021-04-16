@@ -26,6 +26,7 @@ import jsLogo from './_story-assets/js-logo.png';
 import styles from './_storybook-styles.scss';
 
 const storybookPrefix = getStorybookPrefix(pkg, AboutModal.displayName);
+const blockClass = `${pkg.prefix}--about-modal`;
 
 export default {
   title: `${storybookPrefix}/${AboutModal.displayName}`,
@@ -52,7 +53,7 @@ const Template = ({ storyInitiallyOpen = true, story, ...other }) => {
     <>
       <Button onClick={() => setOpen(true)}>Open {story?.storyName}</Button>
 
-      <style>{`.${pkg.prefix}-about-modal { opacity: 0 }`};</style>
+      <style>{`.${blockClass} { opacity: 0; }`};</style>
       <AboutModal
         open={open}
         onClose={() => setOpen(false)}

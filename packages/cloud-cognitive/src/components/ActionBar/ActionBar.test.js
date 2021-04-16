@@ -69,6 +69,8 @@ describe(ActionBar.displayName, () => {
     expect(warn).toBeCalledWith(
       "The prop 'children' of 'ActionBar' has been deprecated and will soon be removed. See documentation on the 'actions' property."
     );
+
+    warn.mockRestore(); // Remove mock
   });
 
   it('Renders an action bar', () => {

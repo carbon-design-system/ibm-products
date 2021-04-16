@@ -537,11 +537,11 @@ export let PageHeader = ({
                             </div>
                           )}
                           <ActionBar
+                            actions={actionBarItems}
                             className={`${blockClass}--action-bar`}
                             onWidthChange={handleActionBarWidthChange}
-                            rightAlign={true}>
-                            {actionBarItems}
-                          </ActionBar>
+                            rightAlign={true}
+                          />
                         </>
                       ) : null}
                     </div>
@@ -685,6 +685,14 @@ PageHeader.propTypes = {
    * action icons. Optional.
    */
   actionBarItems: PropTypes.oneOfType([
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        iconDescription: PropTypes.string.isRequired,
+        renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
+          .isRequired,
+        onClick: PropTypes.func,
+      })
+    ),
     PropTypes.arrayOf(PropTypes.element),
     PropTypes.element,
   ]), // expects action bar item as array or in fragment

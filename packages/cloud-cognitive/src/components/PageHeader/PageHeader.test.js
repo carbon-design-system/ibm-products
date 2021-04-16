@@ -26,7 +26,8 @@ import { PageHeader } from '.';
 const pageActionItemOnClick = jest.fn();
 const actionBarItems = [1, 2, 3, 4].map((item) => ({
   renderIcon: Lightning16,
-  label: `Action ${item}`,
+  iconDescription: `Action ${item}`,
+  onClick: () => {},
 }));
 
 const availableSpace = <span className="page-header-test--available-space" />;
@@ -79,8 +80,16 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 jest.mock('../../global/js/utils/uuidv4');
 
 describe('PageHeader', () => {
-  beforeAll(() => {
-    uuidv4.mockImplementation(() => 'testid');
+  const mocks = [];
+  beforeEach(() => {
+    mocks.push(uuidv4.mockImplementation(() => 'testid'));
+    mocks.push(jest.spyOn(window, 'scrollTo').mockImplementation());
+  });
+
+  afterEach(() => {
+    mocks.forEach((mock) => {
+      mock.mockRestore();
+    });
   });
 
   test('renders an empty header when no props are set', () => {

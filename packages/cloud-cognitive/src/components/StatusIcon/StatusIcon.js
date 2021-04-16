@@ -7,7 +7,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import uuidv4 from '../../global/js/utils/uuidv4';
 import {
   Misuse16,
   Misuse20,

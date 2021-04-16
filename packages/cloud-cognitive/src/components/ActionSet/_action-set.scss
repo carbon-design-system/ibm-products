@@ -11,93 +11,62 @@
 @import 'carbon-components/scss/components/button/button';
 @import 'carbon-components/scss/components/inline-loading/inline-loading';
 
-// The block part of our conventional BEM class names (blockClass__E--M).
-$block-class: #{$pkg-prefix}--action-set;
-
-@mixin smallButtonsStacked {
-  flex-direction: column;
-  &.#{$block-class}--triple-plus .#{$block-class}__action-button,
-  &.#{$block-class}--double .#{$block-class}__action-button {
-    width: 100%;
-    max-width: 100%;
-  }
-}
-
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
 @mixin action-set {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+  $block-class: #{$pkg-prefix}--action-set;
+
   .#{$block-class} {
-    display: flex;
-    flex-direction: row;
     justify-content: flex-end;
-    width: 100%;
   }
 
-  .#{$block-class}.#{$block-class}--xs {
-    @include smallButtonsStacked();
-  }
-
-  .#{$block-class}.#{$block-class}--sm {
-    @include smallButtonsStacked();
-  }
-
-  .#{$block-class}.#{$block-class}--md {
-    flex-direction: row;
-    &.#{$block-class}--triple-plus {
-      flex-direction: column;
-      .#{$block-class}__action-button {
-        width: 100%;
-      }
-    }
-  }
-
-  .#{$block-class}.#{$block-class}--lg {
-    &.#{$block-class}--triple-plus {
-      .#{$block-class}__action-button.#{$block-class}__ghost-button {
-        width: 50%;
-        max-width: 50%;
-      }
-    }
-    &.#{$block-class}--single {
-      .#{$block-class}__action-button.#{$block-class}__ghost-button {
-        width: 100%;
-        max-width: 100%;
-      }
-    }
-  }
-  .#{$block-class}.#{$block-class}__actions--max {
-    &.#{$block-class}--triple-plus {
-      .#{$block-class}__action-button.#{$block-class}__ghost-button {
-        width: 50%;
-        max-width: 50%;
-      }
-    }
-    &.#{$block-class}--single {
-      justify-content: flex-start;
-    }
-  }
-
+  // For stacking,
+  // or row-single in medium,
+  // or for ghosts in row-single,
+  // buttons are 100% width -- so set that by default
   .#{$block-class} .#{$block-class}__action-button {
-    display: flex;
-    align-items: flex-start;
     width: 100%;
     max-width: 100%;
-    height: 100%;
   }
-  .#{$block-class}.#{$block-class}--double .#{$block-class}__action-button {
+
+  // For ghosts in row-double,
+  // buttons are 75% width
+  .#{$block-class}__action-button,
+  .#{$block-class}.#{$block-class}--row-double
+    .#{$block-class}__action-button--ghost {
+    width: 75%;
+    max-width: 75%;
+  }
+
+  // For row-single in large (non-ghost),
+  // or row-double in medium or large,
+  // or ghosts in row-triple,
+  // buttons are 50% width
+  .#{$block-class}.#{$block-class}--row-single.#{$block-class}--lg
+    .#{$block-class}__action-button:not(.#{$block-class}__action-button--ghost),
+  .#{$block-class}.#{$block-class}--row-double.#{$block-class}--md
+    .#{$block-class}__action-button,
+  .#{$block-class}.#{$block-class}--row-double.#{$block-class}--lg
+    .#{$block-class}__action-button,
+  .#{$block-class}.#{$block-class}--row-triple
+    .#{$block-class}__action-button--ghost {
     width: 50%;
     max-width: 50%;
   }
-  .#{$block-class}.#{$block-class}--single.#{$block-class}--lg
-    .#{$block-class}__action-button,
-  .#{$block-class}.#{$block-class}--double.#{$block-class}--lg
+
+  // For row-triple in large (non-ghost),
+  // or any non-ghosts in extra large or max,
+  // or row-quadruple,
+  // buttons are 25% width
+  .#{$block-class}.#{$block-class}--row-triple.#{$block-class}--lg
+    .#{$block-class}__action-button:not(.#{$block-class}__action-button--ghost),
+  .#{$block-class}.#{$block-class}--xlg
+    .#{$block-class}__action-button:not(.#{$block-class}__action-button--ghost),
+  .#{$block-class}.#{$block-class}--max
+    .#{$block-class}__action-button:not(.#{$block-class}__action-button--ghost),
+  .#{$block-class}.#{$block-class}--row-quadruple
     .#{$block-class}__action-button {
-    width: 50%;
-    max-width: 50%;
-  }
-  .#{$block-class}.#{$block-class}--triple-plus.#{$block-class}--lg
-    .#{$block-class}__action-button,
-  .#{$block-class}.#{$block-class}--max .#{$block-class}__action-button {
     width: 25%;
     max-width: 25%;
   }

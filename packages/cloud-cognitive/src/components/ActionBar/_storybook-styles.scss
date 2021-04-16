@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2020
+// Copyright IBM Corp. 2020, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -10,12 +10,12 @@
 
 $block-class: #{$pkg-prefix}--action-bar;
 
-.#{$block-class}--story__viewport {
+.#{$block-class}__story-viewport {
   position: relative;
   box-shadow: 0 0 0 $layout-02 $ui-01;
 }
 
-.#{$block-class}--story__viewport::before {
+.#{$block-class}__story-viewport::before {
   position: absolute;
   top: calc(-1 * #{$layout-02});
   left: 0;

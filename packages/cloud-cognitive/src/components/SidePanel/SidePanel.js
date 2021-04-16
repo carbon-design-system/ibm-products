@@ -11,6 +11,7 @@ import React, { useState, useEffect, useRef } from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import ReactResizeDetector from 'react-resize-detector';
 import wrapFocus from '../../global/js/utils/wrapFocus';
 import { pkg } from '../../settings';
 import { SIDE_PANEL_SIZES } from './constants';
@@ -91,24 +92,122 @@ export let SidePanel = React.forwardRef(
       }
     }, [selectorPrimaryFocus, open, animationComplete]);
 
-    // Title animaton
+    useEffect(() => {
+      if (open && actions && actions.length && animationComplete) {
+        const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
+        const actionsContainer = getActionsContainerElement();
+        let actionsHeight = actionsContainer.offsetHeight + 16; // add additional 1rem spacing to bottom padding
+        actionsHeight = `${Math.round(actionsHeight / 16)}rem`;
+        sidePanelOuter.style.setProperty(
+          `--${blockClass}--content-bottom-padding`,
+          actionsHeight
+        );
+      }
+      return () => {
+        setAnimationComplete(false);
+      };
+    }, [actions, condensed, open, animationComplete]);
+
+    const handleResize = () => {
+      const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
+      const actionsContainer = getActionsContainerElement();
+      let actionsHeight = actionsContainer.offsetHeight + 16; // add additional 1rem spacing to bottom padding
+      actionsHeight = `${Math.round(actionsHeight / 16)}rem`;
+      sidePanelOuter.style.setProperty(
+        `--${blockClass}--content-bottom-padding`,
+        actionsHeight
+      );
+    };
+
+    const getActionsContainerElement = () => {
+      const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
+      return (
+        sidePanelOuter &&
+        sidePanelOuter.querySelector(`.${blockClass}__actions-container`)
+      );
+    };
+
+    // Title and subtitle scroll animaton
     useEffect(() => {
       if (open && animateTitle && animationComplete) {
         const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
+        const sidePanelTitleElement = document.querySelector(
+          `.${blockClass}__title-text`
+        );
+        const sidePanelSubtitleElement = document.querySelector(
+          `.${`${blockClass}__subtitle-text`}`
+        );
         sidePanelOuter &&
           sidePanelOuter.addEventListener('scroll', () => {
             const scrollTop = sidePanelRef.current.scrollTop;
-            const scrollBottom =
-              sidePanelRef.current.scrollHeight -
-              document.documentElement.clientHeight;
-            let scrollPercent = (scrollTop / scrollBottom) * 100;
-            if (scrollPercent >= 25) {
+            // if scrolling has occured
+            if (scrollTop > 0) {
               sidePanelOuter.classList.add(
                 `${blockClass}__with-condensed-header`
               );
-            } else if (scrollPercent < 25) {
+              // Set subtitle opacity calculation here
+              // as scroll progresses
+              sidePanelOuter.style.setProperty(
+                `--${blockClass}--subtitle-opacity`,
+                `${Math.min(
+                  1,
+                  (sidePanelSubtitleElement.offsetHeight - scrollTop) /
+                    sidePanelSubtitleElement.offsetHeight
+                )}`
+              );
+
+              // Calculate divider opacity to avoid border
+              // abruptly appearing when scrolling starts.
+              // This approach uses a pseudo element and sets
+              // the opacity as scroll progresses.
+              let dividerOpacity = Math.min(
+                scrollTop / sidePanelSubtitleElement.offsetHeight,
+                1
+              );
+              sidePanelOuter.style.setProperty(
+                `--${blockClass}--divider-opacity`,
+                `${Math.min(1, dividerOpacity)}`
+              );
+
+              // We need to know the height of the title element
+              // so that we know how far to place the action toolbar
+              // from the top since it is sticky
+              const titleHeight = Math.max(sidePanelTitleElement.offsetHeight);
+              sidePanelOuter.style.setProperty(
+                `--${blockClass}--title-height`,
+                `${titleHeight + 16}px`
+              );
+
+              // Set title font size here, previously this was done
+              // via a class addition, however, it is choppier that
+              // way, using css variables allows for a smoother animation
+              // to the title font size
+              let fontSize = Math.max(
+                1,
+                1 +
+                  (0.25 * (sidePanelSubtitleElement.offsetHeight - scrollTop)) /
+                    sidePanelSubtitleElement.offsetHeight
+              );
+              fontSize = fontSize.toFixed(4);
+              sidePanelOuter.style.setProperty(
+                `--${blockClass}--title-font-size`,
+                `${fontSize}rem`
+              );
+            } else {
               sidePanelOuter.classList.remove(
                 `${blockClass}__with-condensed-header`
+              );
+              sidePanelOuter.style.setProperty(
+                `--${blockClass}--subtitle-opacity`,
+                1
+              );
+              sidePanelOuter.style.setProperty(
+                `--${blockClass}--title-font-size`,
+                '1.25rem'
+              );
+              sidePanelOuter.style.setProperty(
+                `--${blockClass}--divider-opacity`,
+                0
               );
             }
           });
@@ -144,6 +243,7 @@ export let SidePanel = React.forwardRef(
       if (!open) setRender(false);
       if (sidePanelRef && sidePanelRef.current) {
         sidePanelRef.current.style.overflow = 'auto';
+        sidePanelRef.current.style.overflowX = 'hidden';
       }
       setAnimationComplete(true);
     };
@@ -219,16 +319,6 @@ export let SidePanel = React.forwardRef(
       }
     };
 
-    const mainPanelClassNames = cx([
-      blockClass,
-      `${blockClass}__container`,
-      setSizeClassName(size),
-      {
-        [`${blockClass}__container-right-placement`]: placement === 'right',
-        [`${blockClass}__container-left-placement`]: placement === 'left',
-      },
-    ]);
-
     const primaryActionContainerClassNames = cx([
       `${blockClass}__actions-container`,
       {
@@ -236,66 +326,94 @@ export let SidePanel = React.forwardRef(
       },
     ]);
 
+    const mainPanelClassNames = cx([
+      blockClass,
+      `${blockClass}__container`,
+      setSizeClassName(size),
+      {
+        [`${blockClass}__container-right-placement`]: placement === 'right',
+        [`${blockClass}__container-left-placement`]: placement === 'left',
+        [`${blockClass}__container-with-action-toolbar`]:
+          actionToolbarButtons && actionToolbarButtons.length,
+      },
+    ]);
+
     return shouldRender ? (
       <>
-        <div
-          {
-            // Pass through any other property values as HTML attributes.
-            ...rest
-          }
-          id={`${blockClass}-outer`}
-          className={cx(mainPanelClassNames, {
-            [className]: className,
-          })}
-          style={{
-            animation: `${
-              open
-                ? placement === 'right'
-                  ? 'sidePanelEntranceRight 250ms'
-                  : 'sidePanelEntranceLeft 250ms'
-                : placement === 'right'
-                ? 'sidePanelExitRight 250ms'
-                : 'sidePanelExitLeft 250ms'
-            }`,
-          }}
-          onAnimationEnd={onAnimationEnd}
-          onAnimationStart={onAnimationStart}
-          onBlur={handleBlur}
-          ref={ref || sidePanelRef}
-          role="complementary">
-          <span
-            ref={startTrapRef}
-            tabIndex="0"
-            role="link"
-            className={`${blockClass}__visually-hidden`}>
-            Focus sentinel
-          </span>
-          <div ref={sidePanelInnerRef}>
-            <div className={`${blockClass}__header`}>
-              {currentStep > 0 && (
+        <ReactResizeDetector onResize={handleResize}>
+          <div
+            {
+              // Pass through any other property values as HTML attributes.
+              ...rest
+            }
+            id={`${blockClass}-outer`}
+            className={cx(mainPanelClassNames, {
+              [className]: className,
+            })}
+            style={{
+              animation: `${
+                open
+                  ? placement === 'right'
+                    ? 'sidePanelEntranceRight 250ms'
+                    : 'sidePanelEntranceLeft 250ms'
+                  : placement === 'right'
+                  ? 'sidePanelExitRight 250ms'
+                  : 'sidePanelExitLeft 250ms'
+              }`,
+            }}
+            onAnimationEnd={onAnimationEnd}
+            onAnimationStart={onAnimationStart}
+            onBlur={handleBlur}
+            ref={ref || sidePanelRef}
+            role="complementary">
+            <span
+              ref={startTrapRef}
+              tabIndex="0"
+              role="link"
+              className={`${blockClass}__visually-hidden`}>
+              Focus sentinel
+            </span>
+            <div
+              ref={sidePanelInnerRef}
+              className={`${blockClass}__inner-content`}>
+              <div className={`${blockClass}__title-container`}>
+                {currentStep > 0 && (
+                  <Button
+                    kind="ghost"
+                    size="small"
+                    disabled={false}
+                    renderIcon={ArrowLeft20}
+                    iconDescription="Back"
+                    tooltipPosition="right"
+                    tooltipAlignment="center"
+                    className={`${blockClass}__navigation-back-button`}
+                    onClick={() => onNavigationBack((prev) => prev - 1)}
+                  />
+                )}
+                {labelText && labelText.length && (
+                  <p className={`${blockClass}__label-text`}>{labelText}</p>
+                )}
+                {titleText && titleText.length && (
+                  <h2
+                    className={`${blockClass}__title-text`}
+                    ref={sidePanelTitleRef}
+                    title={titleText}>
+                    {titleText}
+                  </h2>
+                )}
                 <Button
                   kind="ghost"
                   size="small"
                   disabled={false}
-                  renderIcon={ArrowLeft20}
-                  iconDescription="Back"
-                  tooltipPosition="right"
+                  renderIcon={Close20}
+                  iconDescription="Close"
+                  tooltipPosition="bottom"
                   tooltipAlignment="center"
-                  className={`${blockClass}__navigation-back-button`}
-                  onClick={() => onNavigationBack((prev) => prev - 1)}
+                  className={`${blockClass}__close-button`}
+                  onClick={() => setOpen(false)}
+                  ref={sidePanelCloseRef}
                 />
-              )}
-              {labelText && labelText.length && (
-                <p className={`${blockClass}__label-text`}>{labelText}</p>
-              )}
-              {titleText && titleText.length && (
-                <h2
-                  className={`${blockClass}__title-text`}
-                  ref={sidePanelTitleRef}
-                  title={titleText}>
-                  {titleText}
-                </h2>
-              )}
+              </div>
               {subtitleText && subtitleText.length && (
                 <p className={`${blockClass}__subtitle-text`}>{subtitleText}</p>
               )}
@@ -324,34 +442,23 @@ export let SidePanel = React.forwardRef(
                   ))}
                 </div>
               )}
-              <Button
-                kind="ghost"
-                size="small"
-                disabled={false}
-                renderIcon={Close20}
-                iconDescription="Close"
-                tooltipPosition="bottom"
-                tooltipAlignment="center"
-                className={`${blockClass}__close-button`}
-                onClick={() => setOpen(false)}
-                ref={sidePanelCloseRef}
+              <div className={`${blockClass}__body-content`}>{children}</div>
+              <ActionSet
+                actions={actions}
+                className={primaryActionContainerClassNames}
+                condensed={condensed}
+                size={size}
               />
             </div>
-            <div className={`${blockClass}__body-content`}>{children}</div>
-            <ActionSet
-              actions={actions}
-              size={size}
-              className={primaryActionContainerClassNames}
-            />
+            <span
+              ref={endTrapRef}
+              tabIndex="0"
+              role="link"
+              className={`${blockClass}__visually-hidden`}>
+              Focus sentinel
+            </span>
           </div>
-          <span
-            ref={endTrapRef}
-            tabIndex="0"
-            role="link"
-            className={`${blockClass}__visually-hidden`}>
-            Focus sentinel
-          </span>
-        </div>
+        </ReactResizeDetector>
         {includeOverlay && (
           <div
             ref={sidePanelOverlayRef}

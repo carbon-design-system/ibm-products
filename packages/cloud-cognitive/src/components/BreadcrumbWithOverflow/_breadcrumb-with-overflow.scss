@@ -9,6 +9,7 @@
 @import '@carbon/import-once/scss/import-once';
 @import '../../global/styles/carbon-settings'; // goes before index as it affects how carbon is used.
 @import '../../global/styles/project-settings';
+@import '../../global/styles/mixins';
 
 // Imports of Carbon settings and component styles and other
 // related component styles used by ExampleComponent.
@@ -20,123 +21,46 @@
 @mixin breadcrumb-with-overflow {
   $block-class: #{$pkg-prefix}--breadcrumb-with-overflow;
 
-  .#{$block-class} {
-    display: block;
-  }
-
-  .#{$block-class}--space {
-    position: relative;
-    display: block;
-    width: 100%;
-    white-space: nowrap;
-  }
-
-  .#{$block-class}--space--right {
-    text-align: end;
-  }
-
-  .#{$block-class}--breadcrumb-container {
-    display: inline-flex; // needed to register a width
-    width: 100%;
-  }
-
-  .#{$block-class}--breadcrumb-container .#{$carbon-prefix}--breadcrumb {
-    flex-wrap: nowrap;
-    width: 100%;
-  }
-
-  .#{$block-class}--breadcrumb-container--hidden {
-    // This breadcrumb container is used to measure the width of all displayable breadcrumbs
-    position: absolute;
-    top: -100vh;
-    left: -100vw;
-    max-width: 0; // do not take up space.
-    overflow: hidden;
-    visibility: hidden;
-    pointer-events: none;
-  }
-
-  // TODO: the following CSS is no longer needed when the PR 7085 is in the version of Carbon we are using,
-  // which will be in 10.32.0 as it is now merged. https://github.com/carbon-design-system/carbon/pull/7085
-
-  // Overflow Menu overrides
-  .#{$prefix}--breadcrumb-item .#{$prefix}--overflow-menu {
-    position: relative;
-    width: rem(20px);
-    height: rem(20px);
-
-    // remove space above button https://github.com/carbon-design-system/carbon/issues/8265
-    margin-top: calc(-1 * #{$spacing-02});
-
-    &:focus {
-      outline: 1px solid $focus;
+  @include block-wrap($block-class) {
+    &.#{$block-class} {
+      display: block;
     }
 
-    &:hover {
-      background: transparent;
+    .#{$block-class}__space {
+      position: relative;
+      display: block;
+      width: 100%;
+      white-space: nowrap;
     }
 
-    // Used to mimic link underline
-    &::after {
+    .#{$block-class}__space--right {
+      text-align: end;
+    }
+
+    .#{$block-class}__breadcrumb-container {
+      display: inline-flex; // needed to register a width
+      width: 100%;
+    }
+
+    .#{$block-class}__breadcrumb-container .#{$carbon-prefix}--breadcrumb {
+      flex-wrap: nowrap;
+      width: 100%;
+    }
+
+    .#{$block-class}__breadcrumb-container--hidden {
+      // This breadcrumb container is used to measure the width of all displayable breadcrumbs
       position: absolute;
-      // stylelint-disable-next-line
-      bottom: 2px;
-      width: rem(12px);
-      height: 1px;
-      background: $hover-primary-text;
-      opacity: 0;
-      transition: opacity $duration--fast-01 motion(standard, productive);
-      content: '';
+      top: -100vh;
+      left: -100vw;
+      max-width: 0; // do not take up space.
+      overflow: hidden;
+      visibility: hidden;
+      pointer-events: none;
     }
-  }
 
-  .#{$prefix}--breadcrumb-item {
-    display: inline-flex;
-  }
-
-  .#{$prefix}--breadcrumb-item .#{$prefix}--overflow-menu:hover::after {
-    opacity: 1;
-  }
-
-  .#{$prefix}--breadcrumb-item
-    .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open {
-    background: transparent;
-    box-shadow: none;
-  }
-
-  .#{$prefix}--breadcrumb-item .#{$prefix}--overflow-menu__icon {
-    position: relative;
-    // stylelint-disable-next-line
-    transform: translateY(4px);
-    fill: $link-01;
-  }
-
-  .#{$prefix}--breadcrumb-item
-    .#{$prefix}--overflow-menu:hover
-    .#{$prefix}--overflow-menu__icon {
-    fill: $hover-primary-text;
-  }
-
-  .#{$prefix}--breadcrumb-menu-options:focus {
-    outline: none;
-  }
-
-  $caret-size: rem(7px);
-  .#{$prefix}--breadcrumb-menu-options.#{$prefix}--overflow-menu-options::after {
-    top: -$caret-size;
-    // stylelint-disable-next-line
-    left: $caret-size * 2;
-    width: 0;
-    height: 0;
-    margin: 0 auto;
-    background: transparent;
-    border-right: $caret-size solid transparent;
-    border-bottom: $caret-size solid $field-01;
-    border-left: $caret-size solid transparent;
-  }
-
-  .#{$block-class}--displayed-breadcrumb {
-    overflow: hidden;
+    .#{$block-class}__displayed-breadcrumb {
+      overflow: hidden;
+    }
   }
 }
 

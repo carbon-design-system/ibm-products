@@ -12,13 +12,12 @@ const defaults = {
   component: {
     // reviewed and released components:
     AboutModal: true,
+    Tearsheet: true,
 
     // other public components not yet reviewed and released:
     ActionBarItem: false,
     APIKeyDownloader: false,
     APIKeyModal: false,
-    BreadcrumbWithOverflow: false,
-    Card: false,
     ContextHeader: false,
     CreateModal: false,
     EmptyState: false,
@@ -34,7 +33,7 @@ const defaults = {
     NoDataEmptyState: false,
     NoTagsEmptyState: false,
     NotFoundEmptyState: false,
-    Notifications: false,
+    NotificationsPanel: false,
     NotificationsEmptyState: false,
     PageActionItem: false,
     PageHeader: false,
@@ -44,7 +43,6 @@ const defaults = {
     SidePanel: false,
     StatusIcon: false,
     TagSet: false,
-    Tearsheet: false,
     TearsheetNarrow: false,
     UnauthorizedEmptyState: false,
     UserProfileImage: false,

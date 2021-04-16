@@ -5,22 +5,26 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
-// import React from 'react';
-
-import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import React from 'react';
+import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+
 import { pkg } from '../settings';
 
 import * as components from '..';
-const name = 'export checks';
+
 const canaryClass = `${pkg.prefix}-canary`;
+const name = 'JS export checks';
 
 describe(name, () => {
-  beforeAll(() => {
+  let mockError;
+  beforeEach(() => {
     // The component instantiations that follow will generate a stack of
     // console errors about required props not provided, and we don't care.
-    jest.spyOn(console, 'error').mockImplementation(() => {});
+    mockError = jest.spyOn(console, 'error').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    mockError.mockRestore();
   });
 
   for (const key in components) {

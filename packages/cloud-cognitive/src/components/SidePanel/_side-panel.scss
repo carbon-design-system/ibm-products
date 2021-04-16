@@ -65,6 +65,18 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
   max-width: $size;
 }
 
+@mixin setDividerStyles() {
+  position: absolute;
+  // stylelint-disable-next-line carbon/layout-token-use
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: $decorative-01;
+  opacity: var(--#{$block-class}--divider-opacity);
+  content: '';
+}
+
 @mixin side-panel {
   @keyframes sidePanelExitLeft {
     0% {
@@ -93,6 +105,11 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
   }
 
   .#{$block-class}__container {
+    --#{$block-class}--subtitle-opacity: 1;
+    --#{$block-class}--divider-opacity: 0;
+    --#{$block-class}--title-font-size: 1.25rem;
+    --#{$block-class}--content-bottom-padding: #{$spacing-10};
+
     position: fixed;
     top: $spacing-09;
     z-index: 3;
@@ -100,7 +117,6 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     min-width: $medium-panel-size; // set default panel size
     max-width: $medium-panel-size; // set default panel size
     height: calc(100% - 3rem);
-    overflow: auto;
     color: $text-01;
     background-color: $ui-01;
     transition: transform $duration--moderate-02;
@@ -145,19 +161,43 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     }
     &.#{$block-class}__with-condensed-header {
       .#{$block-class}__title-text {
-        @include carbon--type-style('productive-heading-02');
+        @include carbon--font-weight('semibold');
       }
-      .#{$block-class}__header {
-        border-bottom: 1px solid $decorative-01;
+    }
+    &.#{$block-class}__container-with-action-toolbar.#{$block-class}__with-condensed-header {
+      .#{$block-class}__title-container {
+        &::before {
+          content: none;
+        }
+      }
+      .#{$block-class}__action-toolbar {
+        &::before {
+          @include setDividerStyles();
+        }
+      }
+    }
+    .#{$block-class}__title-container {
+      position: sticky;
+      top: 0;
+      z-index: 4;
+      padding: $spacing-05 $spacing-05 0 $spacing-05;
+      background-color: $ui-01;
+      &::before {
+        @include setDividerStyles();
       }
     }
     .#{$block-class}__title-text {
       @include carbon--type-style('productive-heading-03');
 
+      position: inherit;
+      z-index: 4;
       display: -webkit-box;
-      margin-right: $spacing-07;
       margin-bottom: $spacing-03;
+      padding-right: $spacing-07;
       overflow: hidden;
+      // stylelint-disable-next-line carbon/type-token-use
+      font-size: var(--#{$block-class}--title-font-size);
+      background-color: $ui-01;
       transition: font-size $duration--moderate-01,
         font-weight $duration--moderate-02;
       transition-timing-function: carbon--motion(standard);
@@ -168,8 +208,9 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     .#{$block-class}__subtitle-text {
       @include carbon--type-style('body-short-01');
 
-      margin-bottom: $spacing-05;
+      padding: 0 $spacing-05 $spacing-05 $spacing-05;
       overflow: hidden;
+      opacity: var(--#{$block-class}--subtitle-opacity);
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
     }
@@ -177,10 +218,17 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       @include carbon--type-style('label-01');
     }
     .#{$block-class}__action-toolbar {
+      position: sticky;
+      top: var(--#{$block-class}--title-height);
+      z-index: 4;
       display: flex;
       align-items: center;
       justify-content: flex-start;
       margin-bottom: $spacing-03;
+      padding: 0 $spacing-05;
+      background-color: $ui-01;
+      transition: transform $duration--moderate-01;
+      transition-timing-function: carbon--motion(standard);
       .#{$block-class}__action-toolbar-button {
         min-width: 2rem;
         &.#{$block-class}__action-toolbar-icon-only-button {
@@ -205,39 +253,56 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       position: absolute;
       top: $spacing-03;
       right: $spacing-03;
+      z-index: 5;
     }
     .#{$block-class}__body-content {
       padding: $spacing-05;
       padding-top: 0;
-      padding-bottom: $layout-07;
+      padding-bottom: var(--#{$block-class}--content-bottom-padding);
     }
-    .#{$block-class}__header {
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      padding: $spacing-05;
-      background-color: $ui-01;
+    .#{$block-class}__inner-content {
+      height: calc(100vh - 3rem);
     }
     .#{$block-class}__actions-container {
-      position: sticky;
+      position: fixed;
       bottom: 0;
-      height: $layout-05;
       background-color: $ui-01;
       border-top: 1px solid $decorative-01;
       &.#{$action-set-block-class}--xs {
         @include setActionBarSize($extra-small-panel-size);
       }
-      &.#{$action-set-block-class}__sm {
+      &.#{$action-set-block-class}--sm {
         @include setActionBarSize($small-panel-size);
       }
-      &.#{$action-set-block-class}__md {
+      &.#{$action-set-block-class}--md {
         @include setActionBarSize($medium-panel-size);
       }
-      &.#{$action-set-block-class}__lg {
+      &.#{$action-set-block-class}--lg {
         @include setActionBarSize($large-panel-size);
       }
-      &.#{$block-class}__actions-container-condensed {
-        height: $layout-04;
+      &.#{$action-set-block-class}--max {
+        .#{$action-set-block-class}__action-button {
+          width: 100%;
+          max-width: 100%;
+        }
+
+        @include carbon--breakpoint(md) {
+          flex-direction: row;
+          .#{$action-set-block-class}__action-button {
+            width: 25%;
+          }
+        }
+
+        flex-direction: column;
+        min-width: 75%;
+        max-width: 75%;
+      }
+      .#{$action-set-block-class}__action-button {
+        min-height: $layout-05;
+      }
+      &.#{$block-class}__actions-container-condensed
+        .#{$action-set-block-class}__action-button {
+        min-height: $layout-04;
       }
     }
   }

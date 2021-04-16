@@ -14,7 +14,7 @@ import '../../utils/enable-all'; // must come before component is imported (dire
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { Button, Tab, Tabs } from 'carbon-components-react';
+import { Tab, Tabs } from 'carbon-components-react';
 import { Tearsheet, TearsheetNarrow } from '.';
 
 const blockClass = `${pkg.prefix}--tearsheet`;
@@ -26,14 +26,10 @@ const onCloseReturnsFalse = jest.fn(() => false);
 const onCloseReturnsTrue = jest.fn(() => true);
 
 const createButton = `Create ${uuidv4()}`;
-const buttons = (
-  <div>
-    <Button kind="secondary" onClick={onClick}>
-      Cancel
-    </Button>
-    <Button onClick={onClick}>{createButton}</Button>
-  </div>
-);
+const actions = [
+  { kind: 'secondary', onClick, label: 'Cancel' },
+  { onClick, label: createButton },
+];
 const childFragment = `Main ${uuidv4()} content`;
 const children = <div>{childFragment}</div>;
 const className = `class-${uuidv4()}`;
@@ -90,7 +86,7 @@ const commonTests = (Ts, name) => {
   });
 
   it('renders buttons', () => {
-    render(<Ts {...{ buttons }} />);
+    render(<Ts {...{ actions }} />);
     expect(document.querySelector(`.${blockClass}__buttons`)).not.toBeNull();
     expect(onClick).toHaveBeenCalledTimes(0);
     userEvent.click(screen.getByText(createButton));
@@ -122,13 +118,6 @@ const commonTests = (Ts, name) => {
     render(<Ts hasCloseIcon={false} />);
     expect(document.querySelector(`.${blockClass}__header`)).toBeNull();
     expect(screen.queryByRole('button', { name: 'Close' })).toBeNull();
-  });
-
-  it('renders height', () => {
-    render(<Ts height="lower" />);
-    expect(screen.getByRole('dialog')).toHaveClass(
-      `${blockClass}__container--lower`
-    );
   });
 
   it('renders label', () => {
@@ -170,6 +159,13 @@ const commonTests = (Ts, name) => {
   it('renders title', () => {
     render(<Ts {...{ title }} />);
     screen.getByText(title);
+  });
+
+  it('renders verticalPosition', () => {
+    render(<Ts verticalPosition="lower" />);
+    expect(screen.getByRole('dialog')).toHaveClass(
+      `${blockClass}__container--lower`
+    );
   });
 
   it('adds additional properties to the containing node', () => {

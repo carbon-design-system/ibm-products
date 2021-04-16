@@ -37,7 +37,7 @@ const componentName = 'BreadcrumbWithOverflow';
 export let BreadcrumbWithOverflow = ({
   children,
   className,
-  maxVisibleBreadcrumbItems,
+  maxVisible,
   noTrailingSlash,
   overflowAriaLabel,
   ...other
@@ -57,7 +57,7 @@ export let BreadcrumbWithOverflow = ({
           ariaLabel={null}
           menuOffset={{ top: 10, left: 59 }} // TODO: REMOVE borrowed from https://github.com/carbon-design-system/carbon/pull/7085
           renderIcon={OverflowMenuHorizontal32}
-          className={`${blockClass}--overflow-menu`}
+          className={`${blockClass}__overflow-menu`}
           menuOptionsClass={`${carbon.prefix}--breadcrumb-menu-options`} // TODO: REMOVE borrowed from https://github.com/carbon-design-system/carbon/pull/7085
         >
           {
@@ -87,10 +87,32 @@ export let BreadcrumbWithOverflow = ({
       setDisplayedBreadcrumbItems([]);
       return;
     }
+    const getTitle = (item) => {
+      // This function should extract text from item.props.children
+      return item.props?.children?.props?.children;
+    };
 
-    const newDisplayedBreadcrumbItems = [];
-    const newOverflowBreadcrumbItems = [];
-    let child;
+    // clones of children needed as the children are used in the sizing render
+    const cloneChildren = (items) =>
+      items.map((item, index) => {
+        // likely truncated add title
+        const title =
+          index + 1 === childArray.length && displayCount === 1
+            ? getTitle(item)
+            : null;
+
+        const className =
+          index > 0 || displayCount > 1
+            ? cx([
+                childArray[index].props.className,
+                `${blockClass}__displayed-breadcrumb`,
+              ])
+            : childArray[index].props.className;
+
+        return React.cloneElement(item, { key: index, title, className });
+      });
+
+    const newDisplayedBreadcrumbItems = cloneChildren(childArray);
 
     // The breadcrumb has the form [first item] [overflow] [items 2...(n-1)] [last item].
     // The overflow is only shown if there isn't space to display all the items, and in that case:
@@ -98,67 +120,23 @@ export let BreadcrumbWithOverflow = ({
     //  * the first item is the next to be displayed, if there's space once the last item and overflow are shown;
     //  * any remaining space after the first item, last item and overflow are shown is used to show items (n-1), (n-2), (n-3), ..., until the space is used up ;
     // Note that displayCount (min 1) has been computed based on the available space and the above sequence.
-    const overflowStart = displayCount > 1 ? 1 : 0;
-    // Everything but the last item if 1, otherwise 1 to length + overflowStart - displayCount
-    for (
-      let i = overflowStart;
-      i < childArray.length + overflowStart - displayCount;
-      i++
-    ) {
-      // add items into the overflow menu
-      child = childArray[i];
+    const overflowPosition = displayCount > 1 ? 1 : 0;
 
-      newOverflowBreadcrumbItems.push(
-        React.cloneElement(child, {
-          key: `displayed-breadcrumb-${internalId}-overflow-item-${i}`,
-        })
-      );
-    }
+    let newOverflowBreadcrumbItems = newDisplayedBreadcrumbItems.splice(
+      overflowPosition,
+      childArray.length - displayCount
+    );
 
-    // add the first item before overflow if space
-    if (displayCount > 1) {
-      newDisplayedBreadcrumbItems.push(
-        React.cloneElement(childArray[0], {
-          className: cx([
-            childArray[0].props.className,
-            `${blockClass}--displayed-breadcrumb`,
-          ]),
-          key: `displayed-breadcrumb-${internalId.current}-0`,
-        })
-      );
-    }
-
-    // if needed add overflow menu after first item or before last
-    if (displayCount < childArray.length) {
-      newDisplayedBreadcrumbItems.push(
+    // if needed add overflow menu
+    if (newOverflowBreadcrumbItems.length) {
+      newDisplayedBreadcrumbItems.splice(
+        overflowPosition,
+        0,
         <BreadcrumbOverflowMenu
           overflowItems={newOverflowBreadcrumbItems}
           key={`$displayed-breadcrumb-${internalId}-overflow`}
         />
       );
-    }
-
-    // skip items in overflow + overflowStart
-    for (
-      let i = newOverflowBreadcrumbItems.length + overflowStart;
-      i < childArray.length;
-      i++
-    ) {
-      child = childArray[i];
-      const cloneProps = {
-        className: cx([
-          child.props.className,
-          `${blockClass}--displayed-breadcrumb`,
-        ]),
-        key: `displayed-breadcrumb-${internalId.current}-${i}`,
-      };
-
-      if (i + 1 === childArray.length && displayCount === 1) {
-        // likely truncated add title
-        cloneProps.title = child.props.children;
-      }
-
-      newDisplayedBreadcrumbItems.push(React.cloneElement(child, cloneProps));
     }
 
     setDisplayedBreadcrumbItems(newDisplayedBreadcrumbItems);
@@ -179,13 +157,14 @@ export let BreadcrumbWithOverflow = ({
       }
     };
 
-    if (maxVisibleBreadcrumbItems <= 1) {
+    if (maxVisible <= 1) {
       setDisplayCount(1);
     } else {
       // how many will fit?
       let willFit = 0;
-      let spaceAvailable = breadcrumbItemWithOverflow.current.offsetWidth;
+      let spaceAvailable = breadcrumbItemWithOverflow.current.offsetWidth; // not sure how to test resize
 
+      /* istanbul ignore next if */
       if (sizingContainerRef.current) {
         const sizingBreadcrumbItems = sizingContainerRef.current.querySelectorAll(
           `.${carbon.prefix}--breadcrumb-item`
@@ -244,11 +223,7 @@ export let BreadcrumbWithOverflow = ({
       if (willFit <= 1) {
         setDisplayCount(1);
       } else {
-        setDisplayCount(
-          maxVisibleBreadcrumbItems
-            ? Math.min(willFit, maxVisibleBreadcrumbItems)
-            : willFit
-        );
+        setDisplayCount(maxVisible ? Math.min(willFit, maxVisible) : willFit);
       }
     }
   };
@@ -256,13 +231,15 @@ export let BreadcrumbWithOverflow = ({
   useEffect(() => {
     checkFullyVisibleBreadcrumbItems();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [maxVisibleBreadcrumbItems]);
+  }, [maxVisible]);
 
   const handleResize = () => {
+    /* istanbul ignore next */ // not sure how to test resize
     checkFullyVisibleBreadcrumbItems();
   };
 
   const handleBreadcrumbItemsResize = () => {
+    /* istanbul ignore next */ // not sure how to test resize
     checkFullyVisibleBreadcrumbItems();
   };
 
@@ -271,10 +248,11 @@ export let BreadcrumbWithOverflow = ({
       <div
         className={cx([blockClass, className])}
         ref={breadcrumbItemWithOverflow}>
-        <div className={cx([`${blockClass}--space`])}>
+        <div className={cx([`${blockClass}__space`])}>
+          {/* This next element is purely here to measure the size of the breadcrumb items */}
           <ReactResizeDetector onResize={handleBreadcrumbItemsResize}>
             <div
-              className={`${blockClass}--breadcrumb-container ${blockClass}--breadcrumb-container--hidden`}
+              className={`${blockClass}__breadcrumb-container ${blockClass}__breadcrumb-container--hidden`}
               aria-hidden={true}
               ref={sizingContainerRef}>
               <BreadcrumbItem
@@ -289,7 +267,7 @@ export let BreadcrumbWithOverflow = ({
           </ReactResizeDetector>
 
           <Breadcrumb
-            className={`${blockClass}--breadcrumb-container`}
+            className={`${blockClass}__breadcrumb-container`}
             noTrailingSlash={noTrailingSlash}
             {...other}>
             {displayedBreadcrumbItems}
@@ -316,9 +294,9 @@ BreadcrumbWithOverflow.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * maximum visible breadcrumb-items (values less than 1 are treated as 1)
+   * maxVisble: maximum visible breadcrumb-items before overflow is used (values less than 1 are treated as 1)
    */
-  maxVisibleBreadcrumbItems: PropTypes.number,
+  maxVisible: PropTypes.number,
   /**
    * noTrailing slash - same as for Carbon
    */

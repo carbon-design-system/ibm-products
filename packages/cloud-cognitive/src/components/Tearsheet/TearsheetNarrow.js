@@ -15,6 +15,7 @@ import { pkg } from '../../settings';
 
 // Carbon and package components we use.
 import { ModalHeader, ModalBody } from 'carbon-components-react';
+import { ActionSet } from '../ActionSet';
 
 import { TearsheetShell } from './TearsheetShell';
 
@@ -36,16 +37,16 @@ export let TearsheetNarrow = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
-      buttons,
+      actions,
       children,
       // className is passed directly to TearsheetShell via rest
       closeIconDescription,
       description,
       hasCloseIcon,
-      // height is passed directly to TearsheetShell via rest
       label,
       // onClose, open, preventCloseOnClickOutside are passed directly to TearsheetShell via rest
       title,
+      // verticalPosition is passed directly to TearsheetShell via rest
       // Collect any other property values passed in.
       ...rest
     },
@@ -77,7 +78,13 @@ export let TearsheetNarrow = React.forwardRef(
       <ModalBody className={`${blockClass}__body`}>
         <div className={`${blockClass}__right`}>
           {children && <div className={`${blockClass}__main`}>{children}</div>}
-          {buttons && <div className={`${blockClass}__buttons`}>{buttons}</div>}
+          {actions && actions.length > 0 && (
+            <ActionSet
+              actions={actions}
+              size="lg"
+              className={`${blockClass}__buttons`}
+            />
+          )}
         </div>
       </ModalBody>
     </TearsheetShell>
@@ -96,9 +103,20 @@ TearsheetNarrow.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 TearsheetNarrow.propTypes = {
   /**
-   * Specifies the content for the buttons section of the Tearsheet.
+   * Sets the action buttons for the Tearsheet.
    */
-  buttons: PropTypes.node,
+  actions: PropTypes.oneOfType([
+    ActionSet.validateActions(() => 'lg'),
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        label: PropTypes.string,
+        onPrimaryActionClick: PropTypes.func,
+        kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
+        disabled: PropTypes.bool,
+        loading: PropTypes.bool,
+      })
+    ),
+  ]),
 
   /**
    * Specifies the content of the Tearsheet body.
@@ -126,14 +144,6 @@ TearsheetNarrow.propTypes = {
   hasCloseIcon: PropTypes.bool,
 
   /**
-   * Specifies the height of the tearsheet. The 'normal' height fills the
-   * viewport leaving room at the top for a header bar to show through from
-   * below. Use 'lower' height to leave a little extra room at the top to allow
-   * a breadcrumb or action bar navigation to also show through.
-   */
-  height: PropTypes.oneOf(['normal', 'lower']),
-
-  /**
    * Specifies the label of the Tearsheet.
    */
   label: PropTypes.node,
@@ -159,6 +169,15 @@ TearsheetNarrow.propTypes = {
    * Specifies the title of the Tearsheet.
    */
   title: PropTypes.node,
+
+  /**
+   * Specifies the position of the top of tearsheet in the viewport. The
+   * 'normal' position is a short distance down from the top of the viewport,
+   * leaving room at the top for a header bar to show through from below. The
+   * 'lower' position provides a little extra room at the top to allow an action
+   * bar navigation or breadcrumbs to also show through.
+   */
+  verticalPosition: PropTypes.oneOf(['normal', 'lower']),
 };
 
 // Default values for component props. Default values are not required for
@@ -168,5 +187,5 @@ TearsheetNarrow.propTypes = {
 TearsheetNarrow.defaultProps = {
   closeIconDescription: 'Close',
   hasCloseIcon: true,
-  height: 'normal',
+  verticalPosition: 'normal',
 };

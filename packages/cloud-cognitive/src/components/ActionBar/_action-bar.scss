@@ -9,6 +9,7 @@
 @import '@carbon/import-once/scss/import-once';
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
+@import '../../global/styles/mixins';
 
 // Imports of Carbon settings and component styles and other
 // related component styles used by ExampleComponent.
@@ -21,36 +22,40 @@
 @mixin action-bar {
   $block-class: #{$pkg-prefix}--action-bar;
 
-  .#{$block-class} {
-    display: block;
+  @include block-wrap($block-class) {
+    &.#{$block-class} {
+      display: block;
+    }
+
+    .#{$block-class}__displayed-items {
+      display: inline-flex;
+      width: 100%;
+      white-space: nowrap;
+    }
+
+    .#{$block-class}__displayed-items--right {
+      justify-content: flex-end;
+    }
+
+    .#{$block-class}__overflow-menu {
+      display: inline-block;
+    }
   }
 
-  .#{$block-class}--displayed-items {
-    display: inline-flex;
-    width: 100%;
-    white-space: nowrap;
-  }
+  @include block-wrap($block-class + '-options') {
+    .#{$block-class}__overflow-menu-item {
+      padding: 0 $spacing-03;
+    }
 
-  .#{$block-class}--displayed-items--right {
-    justify-content: flex-end;
-  }
+    .#{$block-class}__overflow-menu-item-content {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
 
-  .#{$block-class}--overflow-menu {
-    display: inline-block;
-  }
-
-  .#{$block-class}--overflow-menu-item {
-    padding: 0 $spacing-03;
-  }
-
-  .#{$block-class}--overflow-menu-item-content {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-
-  .#{$block-class}--overflow-menu-item svg {
-    margin: 0 $spacing-02;
+    .#{$block-class}__overflow-menu-item svg {
+      margin: 0 $spacing-02;
+    }
   }
 }
 

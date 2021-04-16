@@ -66,7 +66,7 @@ $icons: (
 );
 $themes: ('light', 'dark');
 
-$block-class: #{$pkg-prefix}-status-icon;
+$block-class: #{$pkg-prefix}--status-icon;
 
 @function clr($name, $theme: light) {
   // stylelint-disable-next-line carbon/theme-token-use
@@ -90,42 +90,39 @@ $block-class: #{$pkg-prefix}-status-icon;
 
 .#{$block-class}--light.#{$block-class}--light-minor-warning,
 .#{$block-class}--dark.#{$block-class}--dark-minor-warning {
-  //stylelint-disable-next-line max-nesting-depth
-  svg {
-    // stylelint-disable-next-line carbon/theme-token-use
-    fill: $carbon--yellow-20;
-  }
-  //stylelint-disable-next-line max-nesting-depth
-  svg > path:nth-of-type(1) {
-    // stylelint-disable-next-line carbon/theme-token-use
-    fill: $carbon--gray-100;
-  }
+  // stylelint-disable-next-line carbon/theme-token-use
+  fill: $carbon--yellow-20;
+}
+
+.#{$block-class}--light.#{$block-class}--light-minor-warning
+  path:nth-of-type(1),
+.#{$block-class}--dark.#{$block-class}--dark-minor-warning path:nth-of-type(1) {
+  // stylelint-disable-next-line carbon/theme-token-use
+  fill: $carbon--gray-100;
 }
 
 @each $theme in $themes {
   @each $icon in $icons {
     @each $themekey in $themes {
       .#{$block-class}--#{$theme}.#{$block-class}--#{$themekey}-#{$icon} {
-        svg {
-          @if $icon == in-progress {
-            @media (prefers-reduced-motion: reduce) {
+        @if $icon == in-progress {
+          @media (prefers-reduced-motion: reduce) {
+            animation: none;
+          }
+          // stylelint-disable-next-line carbon/motion-token-use, declaration-property-unit-whitelist
+          animation: rotating 8s infinite linear;
+          // stylelint-disable-next-line carbon/theme-token-use
+          fill: clr($icon, $theme);
+        } @else if $icon == running {
+          transform: scaleY(-1);
+          // stylelint-disable-next-line carbon/theme-token-use
+          fill: clr($icon, $theme);
+        } @else {
+          // stylelint-disable-next-line carbon/theme-token-use
+          fill: clr($icon, $theme);
+          @media (prefers-reduced-motion) {
+            .#{$block-class}--#{$theme}.#{$block-class}--#{$themekey}-in-progress {
               animation: none;
-            }
-            // stylelint-disable-next-line carbon/motion-token-use, declaration-property-unit-whitelist
-            animation: rotating 8s infinite linear;
-            // stylelint-disable-next-line carbon/theme-token-use
-            fill: clr($icon, $theme);
-          } @else if $icon == running {
-            transform: scaleY(-1);
-            // stylelint-disable-next-line carbon/theme-token-use
-            fill: clr($icon, $theme);
-          } @else {
-            // stylelint-disable-next-line carbon/theme-token-use
-            fill: clr($icon, $theme);
-            @media (prefers-reduced-motion) {
-              .#{$block-class}--#{$theme}.#{$block-class}--#{$themekey}-in-progress {
-                animation: none;
-              }
             }
           }
         }
@@ -133,9 +130,3 @@ $block-class: #{$pkg-prefix}-status-icon;
     }
   }
 }
-
-// @media (prefers-reduced-motion) {
-//   .#{$block-class}--#{$theme}.#{$block-class}--#{$themekey}-in-progress {
-//     animation: none;
-//   }
-// }

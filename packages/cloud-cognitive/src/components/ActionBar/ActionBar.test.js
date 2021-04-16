@@ -9,6 +9,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { ActionBar, ActionBarItem } from '.';
 import { Lightning16, Bee16 } from '@carbon/icons-react';
+import { mockHTMLElement } from '../../global/js/utils/test-helper';
 
 const actions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => ({
   renderIcon: num % 2 ? Lightning16 : Bee16,
@@ -31,19 +32,6 @@ const ActionBarChildren = (
   </>
 );
 
-Object.defineProperties(window.HTMLElement.prototype, {
-  offsetWidth: {
-    get: function () {
-      return parseInt(this.style.width, 10) || this.parentNode.offsetWidth;
-    },
-  },
-  offsetHeight: {
-    get: function () {
-      return parseInt(this.style.height, 10) || this.parentNode.offsetHeight;
-    },
-  },
-});
-
 // eslint-disable-next-line react/prop-types
 const TestActionBar = ({ width, children, ...rest }) => {
   return (
@@ -56,6 +44,28 @@ const TestActionBar = ({ width, children, ...rest }) => {
 };
 
 describe(ActionBar.displayName, () => {
+  let mockElement;
+  beforeEach(() => {
+    mockElement = mockHTMLElement({
+      offsetWidth: {
+        get: function () {
+          return parseInt(this.style.width, 10) || this.parentNode.offsetWidth;
+        },
+      },
+      offsetHeight: {
+        get: function () {
+          return (
+            parseInt(this.style.height, 10) || this.parentNode.offsetHeight
+          );
+        },
+      },
+    });
+  });
+
+  afterEach(() => {
+    mockElement.mockRestore();
+  });
+
   const { click } = fireEvent;
 
   it('Works with deprecated children', () => {

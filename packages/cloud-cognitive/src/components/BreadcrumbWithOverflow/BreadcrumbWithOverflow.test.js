@@ -9,6 +9,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { BreadcrumbItem } from 'carbon-components-react';
 import { BreadcrumbWithOverflow } from '.';
+import { mockHTMLElement } from '../../global/js/utils/test-helper';
 
 import { carbon } from '../../settings';
 
@@ -34,38 +35,6 @@ const isBreadCrumbItem = function () {
   return this.classList?.contains(`${carbon.prefix}--breadcrumb-item`) || false;
 };
 
-Object.defineProperties(window.HTMLElement.prototype, {
-  marginLeft: {
-    get: () => sizes.breadcrumbMargin,
-  },
-  marginRight: {
-    get: () => sizes.breadcrumbMargin,
-  },
-  offsetWidth: {
-    get: function () {
-      // const classList = [];
-      // this.classList.forEach((val) => classList.push(val));
-      // console.log(classList);
-      if (isBreadCrumbItem.bind(this)()) {
-        return sizes.breadcrumbWidth;
-      } else {
-        // return width of test environment
-        return parseInt(this.style.width, 10) || this.parentNode.offsetWidth;
-      }
-    },
-  },
-  offsetHeight: {
-    get: function () {
-      if (isBreadCrumbItem.bind(this)()) {
-        return sizes.breadcrumbHeight;
-      } else {
-        // return height of test environment
-        return parseInt(this.style.height, 10) || this.parentNode.offsetHeight;
-      }
-    },
-  },
-});
-
 // eslint-disable-next-line react/prop-types
 const TestBreadcrumbWithOverflow = ({ width, children, ...rest }) => {
   return (
@@ -78,6 +47,50 @@ const TestBreadcrumbWithOverflow = ({ width, children, ...rest }) => {
 };
 
 describe(BreadcrumbWithOverflow.displayName, () => {
+  let mockElement;
+
+  beforeEach(() => {
+    mockElement = mockHTMLElement({
+      marginLeft: {
+        value: sizes.breadcrumbMargin,
+      },
+      marginRight: {
+        value: sizes.breadcrumbMargin,
+      },
+      offsetWidth: {
+        get: function () {
+          // const classList = [];
+          // this.classList.forEach((val) => classList.push(val));
+          // console.log(classList);
+          if (isBreadCrumbItem.bind(this)()) {
+            return sizes.breadcrumbWidth;
+          } else {
+            // return width of test environment
+            return (
+              parseInt(this.style.width, 10) || this.parentNode.offsetWidth
+            );
+          }
+        },
+      },
+      offsetHeight: {
+        get: function () {
+          if (isBreadCrumbItem.bind(this)()) {
+            return sizes.breadcrumbHeight;
+          } else {
+            // return height of test environment
+            return (
+              parseInt(this.style.height, 10) || this.parentNode.offsetHeight
+            );
+          }
+        },
+      },
+    });
+  });
+
+  afterEach(() => {
+    mockElement.mockRestore();
+  });
+
   const { click } = fireEvent;
 
   it('Renders all as visible breadcrumbs when space available', () => {

@@ -87,10 +87,34 @@ export let BreadcrumbWithOverflow = ({
       setDisplayedBreadcrumbItems([]);
       return;
     }
+    const getTitle = (item) => {
+      // This function should extract text from item.props.children
+      return item.props?.children?.props?.children;
+    };
 
+    // clones of children needed as the children are used in the sizing render
+    const cloneChildren = (items) =>
+      items.map((item, index) => {
+        // likely truncated add title
+        const title =
+          index + 1 === childArray.length && displayCount === 1
+            ? getTitle(item)
+            : null;
+
+        const className =
+          index > 0 || displayCount > 1
+            ? cx([
+                childArray[index].props.className,
+                `${blockClass}__displayed-breadcrumb`,
+              ])
+            : childArray[index].props.className;
+
+        return React.cloneElement(item, { key: index, title, className });
+      });
+
+    const allBreadcrumbItems = cloneChildren(childArray);
     const newDisplayedBreadcrumbItems = [];
     const newOverflowBreadcrumbItems = [];
-    let child;
 
     // The breadcrumb has the form [first item] [overflow] [items 2...(n-1)] [last item].
     // The overflow is only shown if there isn't space to display all the items, and in that case:
@@ -105,27 +129,12 @@ export let BreadcrumbWithOverflow = ({
       i < childArray.length + overflowStart - displayCount;
       i++
     ) {
-      // add items into the overflow menu
-      child = childArray[i];
-
-      newOverflowBreadcrumbItems.push(
-        React.cloneElement(child, {
-          key: `displayed-breadcrumb-${internalId}-overflow-item-${i}`,
-        })
-      );
+      newOverflowBreadcrumbItems.push(allBreadcrumbItems[i]);
     }
 
     // add the first item before overflow if space
     if (displayCount > 1) {
-      newDisplayedBreadcrumbItems.push(
-        React.cloneElement(childArray[0], {
-          className: cx([
-            childArray[0].props.className,
-            `${blockClass}__displayed-breadcrumb`,
-          ]),
-          key: `displayed-breadcrumb-${internalId.current}-0`,
-        })
-      );
+      newDisplayedBreadcrumbItems.push(allBreadcrumbItems[0]);
     }
 
     // if needed add overflow menu after first item or before last
@@ -144,21 +153,7 @@ export let BreadcrumbWithOverflow = ({
       i < childArray.length;
       i++
     ) {
-      child = childArray[i];
-      const cloneProps = {
-        className: cx([
-          child.props.className,
-          `${blockClass}__displayed-breadcrumb`,
-        ]),
-        key: `displayed-breadcrumb-${internalId.current}-${i}`,
-      };
-
-      if (i + 1 === childArray.length && displayCount === 1) {
-        // likely truncated add title
-        cloneProps.title = child.props.children;
-      }
-
-      newDisplayedBreadcrumbItems.push(React.cloneElement(child, cloneProps));
+      newDisplayedBreadcrumbItems.push(allBreadcrumbItems[i]);
     }
 
     setDisplayedBreadcrumbItems(newDisplayedBreadcrumbItems);
@@ -271,6 +266,7 @@ export let BreadcrumbWithOverflow = ({
         className={cx([blockClass, className])}
         ref={breadcrumbItemWithOverflow}>
         <div className={cx([`${blockClass}__space`])}>
+          {/* This next element is purely here to measure the size of the breadcrumb items */}
           <ReactResizeDetector onResize={handleBreadcrumbItemsResize}>
             <div
               className={`${blockClass}__breadcrumb-container ${blockClass}__breadcrumb-container--hidden`}

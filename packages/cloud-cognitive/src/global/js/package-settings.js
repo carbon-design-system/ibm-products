@@ -12,6 +12,7 @@ const defaults = {
   component: {
     // reviewed and released components:
     AboutModal: true,
+    StatusIcon: true,
     Tearsheet: true,
 
     // other public components not yet reviewed and released:
@@ -40,7 +41,6 @@ const defaults = {
     RemoveDeleteModal: false,
     Saving: false,
     SidePanel: false,
-    StatusIcon: false,
     TagSet: false,
     TearsheetNarrow: false,
     UnauthorizedEmptyState: false,

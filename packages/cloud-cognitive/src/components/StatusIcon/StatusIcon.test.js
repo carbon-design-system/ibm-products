@@ -48,7 +48,7 @@ const renderComponent = ({ ...rest }) =>
     <StatusIcon
       {...rest}
       kind="fatal"
-      iconLabel="fatal"
+      iconDescription="fatal"
       size="sm"
       theme="light"
     />
@@ -85,7 +85,12 @@ describe(componentName, () => {
   iconTypes.forEach((kind) => {
     it(`applies the proper className when kind prop of ${kind} is passed`, () => {
       const { container } = render(
-        <StatusIcon kind={kind} iconLabel={kind} size="sm" theme="light" />
+        <StatusIcon
+          kind={kind}
+          iconDescription={kind}
+          size="sm"
+          theme="light"
+        />
       );
       const element = container.querySelector(
         `.${blockClass}--light.${blockClass}--light-${kind}`
@@ -98,7 +103,12 @@ describe(componentName, () => {
   iconTypes.forEach((label) => {
     it(`applies the proper title element when icon laebl of ${label} is passed`, () => {
       const { container } = render(
-        <StatusIcon kind={label} iconLabel={label} size="sm" theme="light" />
+        <StatusIcon
+          kind={label}
+          iconDescription={label}
+          size="sm"
+          theme="light"
+        />
       );
       const element = container.querySelector(
         `.${blockClass}--light.${blockClass}--light-${label}`
@@ -111,7 +121,12 @@ describe(componentName, () => {
   iconThemes.forEach((theme) => {
     it(`applies the proper className when theme prop of ${theme} is passed`, () => {
       const { container } = render(
-        <StatusIcon kind="fatal" iconLabel="fatal" size="sm" theme={theme} />
+        <StatusIcon
+          kind="fatal"
+          iconDescription="fatal"
+          size="sm"
+          theme={theme}
+        />
       );
       const element = container.querySelector(
         `.${blockClass}--${theme}.${blockClass}--${theme}-fatal`
@@ -124,7 +139,12 @@ describe(componentName, () => {
   iconSizes.forEach(({ input, output }) => {
     it(`changes element size when size prop of ${input} is passed`, () => {
       const { container } = render(
-        <StatusIcon kind="fatal" iconLabel="fatal" size={input} theme="light" />
+        <StatusIcon
+          kind="fatal"
+          iconDescription="fatal"
+          size={input}
+          theme="light"
+        />
       );
       const element = container.querySelector(
         `.${blockClass}--light.${blockClass}--light-fatal`

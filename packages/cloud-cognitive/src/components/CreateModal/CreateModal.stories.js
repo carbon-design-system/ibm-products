@@ -121,6 +121,9 @@ const defaultProps = {
 };
 
 Template.propTypes = {
+  story: PropTypes.object,
+  storyInitiallyOpen: PropTypes.bool,
+  ...CreateModal.propTypes,
   children: PropTypes.node,
 };
 

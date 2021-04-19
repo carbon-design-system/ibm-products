@@ -124,7 +124,7 @@ const blockClass = `${pkg.prefix}--status-icon`;
 const componentName = 'StatusIcon';
 
 export let StatusIcon = React.forwardRef(
-  ({ kind, theme, size, className, iconDescription, ...rest }, ref) => {
+  ({ kind, theme, size, className, iconLabel, ...rest }, ref) => {
     const IconComponent = icons[kind]?.[size];
 
     const classNames = cx(className, blockClass, `${blockClass}--${theme}`, {
@@ -134,7 +134,7 @@ export let StatusIcon = React.forwardRef(
     return (
       IconComponent && (
         <IconComponent {...rest} className={classNames} ref={ref}>
-          <title>{iconDescription}</title>
+          <title>{iconLabel}</title>
         </IconComponent>
       )
     );
@@ -151,9 +151,9 @@ StatusIcon.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * A required prop that provides a description of the icon for accessibility purposes
+   * A required prop that provides a label and tooltip for the icon for accessibility purposes
    */
-  iconDescription: PropTypes.string.isRequired,
+  iconLabel: PropTypes.string.isRequired,
   /**
    * A required prop that displays the respective icon associated with the status
    */

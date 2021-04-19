@@ -19,18 +19,18 @@
 }
 
 .#{$pkg-prefix}--import-modal-helper-text {
-  margin-top: $spacing-07;
+  margin-top: $spacing-06;
   margin-bottom: $spacing-03;
   @include carbon--type-style('helper-text-01');
 }
 
 .#{$pkg-prefix}--import-modal-body {
-  margin-bottom: $spacing-05;
+  margin-bottom: $spacing-06;
   padding-right: 20%;
 }
 
 .#{$pkg-prefix}--import-modal .bx--modal-container {
-  background: $ui-background;
+  background: $ui-01;
 }
 
 .#{$pkg-prefix}--import-modal .bx--modal-content {
@@ -39,9 +39,13 @@
 
 .#{$pkg-prefix}--import-modal .bx--file__selected-file {
   max-width: none;
-  background: $ui-01;
 }
 
-.#{$pkg-prefix}--import-modal .bx--text-input {
-  background: $ui-01;
+.#{$pkg-prefix}--import-modal .bx--file {
+  margin-bottom: $spacing-05;
+}
+
+.bx--file .bx--file-container,
+.bx--file ~ .bx--file-container {
+  margin-top: 0;
 }

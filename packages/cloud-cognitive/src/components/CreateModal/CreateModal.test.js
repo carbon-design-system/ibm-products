@@ -6,7 +6,8 @@
  */
 
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { TextInput } from 'carbon-components-react';
 
 import { pkg } from '../../settings';
@@ -25,6 +26,7 @@ const subtitle = 'This is a test subtitle';
 const description =
   'This is a test description. It has several lines. It should render a modal.';
 const primaryFocus = '.bx--text-input';
+const dataTestId = uuidv4();
 
 // render a CreateModal with title, subtitle, description, and any other required props
 const renderComponent = ({ ...rest }) =>
@@ -91,30 +93,44 @@ describe(componentName, () => {
     expect(ref.current.outerModal.current).toHaveClass(blockClass);
   });
 
+  it('adds additional properties to the containing node', () => {
+    renderComponent({ 'data-testid': dataTestId });
+    screen.getByTestId(dataTestId);
+  });
+
   it('has no accessibility violations', async () => {
     const { container } = renderComponent();
-    await expect(container).toBeAccessible(componentName);
+    await expect(container).toBeAccessible(componentName, 'scan_label');
     await expect(container).toHaveNoAxeViolations();
   }, 80000);
 
   it('calls onSubmit() when primary button is clicked', () => {
-    const { fn } = jest;
-    const { click } = fireEvent;
-    const onSubmit = fn();
-    renderComponent({ primaryButtonText: 'Create', onSubmit: onSubmit });
-    const submitButton = screen.getByRole('button', { name: 'Create' });
-    click(submitButton);
-    expect(onSubmit).toBeCalled();
+    const primaryHandler = jest.fn();
+    renderComponent({ primaryButtonText: 'Create', onSubmit: primaryHandler });
+    userEvent.click(screen.getByRole('button', { name: 'Create' }));
+    expect(primaryHandler).toBeCalledTimes(1);
   });
 
   it('calls onClose() when secondary button is clicked', () => {
-    const { fn } = jest;
-    const { click } = fireEvent;
-    const onClose = fn();
-    renderComponent({ secondaryButtonText: 'Cancel', onClose: onClose });
-    const cancelButton = screen.getByRole('button', { name: 'Cancel' });
-    click(cancelButton);
-    expect(onClose).toBeCalled();
+    const secondaryHandler = jest.fn();
+    renderComponent({
+      secondaryButtonText: 'Cancel',
+      onClose: secondaryHandler,
+    });
+    userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
+    expect(secondaryHandler).toBeCalledTimes(1);
+  });
+
+  it('notifies a click on each button', () => {
+    const primaryHandler = jest.fn();
+    const secondaryHandler = jest.fn();
+    renderComponent({
+      onSubmit: primaryHandler,
+      onClose: secondaryHandler,
+    });
+    screen.getAllByRole('button').forEach(userEvent.click);
+    expect(primaryHandler).toBeCalledTimes(1);
+    expect(secondaryHandler).toBeCalledTimes(1);
   });
 
   it('disables primary focus button when `disableSubmit` prop is provided', () => {

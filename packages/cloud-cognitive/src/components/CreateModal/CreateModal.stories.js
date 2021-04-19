@@ -39,27 +39,14 @@ export default {
   },
 };
 
-const Template = ({ children, ...args }) => {
-  return (
-    <CreateModal {...args} open>
-      {children}
-    </CreateModal>
-  );
-};
-
-const TemplateWithStateManager = ({
-  storyInitiallyOpen = false,
-  story,
-  children,
-  ...args
-}) => {
+const Template = ({ storyInitiallyOpen = true, story, children, ...args }) => {
   const [open, setOpen] = useState(storyInitiallyOpen);
-
   return (
     <>
       <Button onClick={() => setOpen(true)}>Open {story?.storyName}</Button>
-      <style>{`.${pkg.prefix}-create-modal { opacity: 0 }`};</style>
-      <CreateModal {...args} open={open} onClose={() => setOpen(false)}>
+
+      <style>{`.${pkg.prefix}-about-modal { opacity: 0 }`};</style>
+      <CreateModal open={open} onClose={() => setOpen(false)} {...args}>
         {children}
       </CreateModal>
     </>
@@ -137,12 +124,6 @@ Template.propTypes = {
   children: PropTypes.node,
 };
 
-TemplateWithStateManager.propTypes = {
-  story: PropTypes.object,
-  storyInitiallyOpen: PropTypes.bool,
-  ...CreateModal.propTypes,
-};
-
 TemplateWithFormValidation.propTypes = {
   story: PropTypes.object,
   storyInitiallyOpen: PropTypes.bool,
@@ -215,46 +196,6 @@ DefaultWithDarkTheme.args = {
       />
       <TextArea
         id="2"
-        placeholder="Placeholder text"
-        labelText="Text area label"
-        helperText="Optional helper text"
-      />
-    </>
-  ),
-};
-
-export const WithStateManager = TemplateWithStateManager.bind({});
-WithStateManager.storyName = 'Create Modal with state manager';
-WithStateManager.args = {
-  story: WithStateManager,
-  ...defaultProps,
-  children: (
-    <>
-      <TextInput
-        id="1"
-        key="form-field-1"
-        labelText="Text input label"
-        helperText="Helper text goes here"
-        placeholder="Placeholder"
-      />
-      <NumberInput
-        id="2"
-        className="create-modal--storybook-input"
-        label="Number input label"
-        helperText="Optional helper text goes here"
-        min={0}
-        max={50}
-        value={1}
-      />
-      <Dropdown
-        id="default"
-        titleText="Dropdown label"
-        helperText="This is some helper text"
-        label="Dropdown menu options"
-        items={['Option 0', 'Option 1', 'Option 2']}
-      />
-      <TextArea
-        id="3"
         placeholder="Placeholder text"
         labelText="Text area label"
         helperText="Optional helper text"

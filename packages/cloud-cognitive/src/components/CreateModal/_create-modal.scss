@@ -12,61 +12,66 @@
 @import 'carbon-components/scss/components/modal/modal';
 @import 'carbon-components/scss/components/form/form';
 
-.#{$pkg-prefix}--create-modal {
-  background-color: $ui-background;
-}
-
-.#{$pkg-prefix}--create-modal .bx--modal-close {
-  display: none;
-}
-
-.#{$pkg-prefix}--create-modal .bx--modal-container {
-  @include carbon--breakpoint(md) {
-    max-height: 95%;
+@mixin create-modal {
+  .#{$pkg-prefix}--create-modal {
+    background-color: $ui-background;
   }
-  @include carbon--breakpoint(lg) {
-    max-height: 95%;
+
+  .#{$pkg-prefix}--create-modal .bx--modal-close {
+    display: none;
   }
-}
 
-.#{$pkg-prefix}--create-modal .bx--modal-header {
-  margin-bottom: 0;
-  padding-bottom: $spacing-03;
-  border-bottom: 1px solid $ui-03;
-}
+  .#{$pkg-prefix}--create-modal .bx--modal-container {
+    @include carbon--breakpoint(md) {
+      max-height: 95%;
+    }
+    @include carbon--breakpoint(lg) {
+      max-height: 95%;
+    }
+  }
 
-.#{$pkg-prefix}--create-modal .bx--modal-footer .bx--btn {
-  max-width: none;
-}
+  .#{$pkg-prefix}--create-modal .bx--modal-header {
+    margin-bottom: 0;
+    padding-bottom: $spacing-03;
+    border-bottom: 1px solid $ui-03;
+  }
 
-.#{$pkg-prefix}--create-modal__title {
-  @include carbon--type-style('productive-heading-03');
+  .#{$pkg-prefix}--create-modal .bx--modal-footer .bx--btn {
+    max-width: none;
+  }
 
-  margin-bottom: $spacing-02;
-}
+  .#{$pkg-prefix}--create-modal__title {
+    @include carbon--type-style('productive-heading-03');
 
-.#{$pkg-prefix}--create-modal__subtitle {
-  @include carbon--type-style('body-short-01');
+    margin-bottom: $spacing-02;
+  }
 
-  margin-bottom: $spacing-03;
-  color: $text-02;
-}
+  .#{$pkg-prefix}--create-modal__subtitle {
+    @include carbon--type-style('body-short-01');
 
-.#{$pkg-prefix}--create-modal__description {
-  @include carbon--type-style('body-long-01');
+    margin-bottom: $spacing-03;
+    color: $text-02;
+  }
 
-  margin: $spacing-03 0 $spacing-05 0;
-}
+  .#{$pkg-prefix}--create-modal__description {
+    @include carbon--type-style('body-long-01');
 
-.#{$pkg-prefix}--create-modal__form .bx--fieldset {
-  min-width: 100%;
-  margin-bottom: 0;
-}
+    margin: $spacing-03 0 $spacing-05 0;
+  }
 
-.#{$pkg-prefix}--create-modal__form > * {
-  margin-bottom: $spacing-05;
-  // stylelint-disable-next-line max-nesting-depth
-  &:last-child {
+  .#{$pkg-prefix}--create-modal__form .bx--fieldset {
+    min-width: 100%;
     margin-bottom: 0;
   }
+
+  .#{$pkg-prefix}--create-modal__form > * {
+    margin-bottom: $spacing-05;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+@include exports('create-modal') {
+  @include create-modal;
 }

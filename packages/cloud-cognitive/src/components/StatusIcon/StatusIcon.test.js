@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import React from 'react';
 
 import { pkg } from '../../settings';
@@ -16,8 +16,9 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { StatusIcon } from '.';
 
 const blockClass = `${pkg.prefix}--status-icon`;
-const { componentName } = StatusIcon.displayName;
+const componentName = StatusIcon.displayName;
 const className = `class-${uuidv4()}`;
+const dataTestId = uuidv4();
 
 const iconSizes = [
   { input: 'sm', output: '16' },
@@ -47,7 +48,7 @@ const renderComponent = ({ ...rest }) =>
     <StatusIcon
       {...rest}
       kind="fatal"
-      iconDescription="fatal"
+      iconLabel="fatal"
       size="sm"
       theme="light"
     />
@@ -61,7 +62,7 @@ describe(componentName, () => {
 
   it('has no accessibility violations', async () => {
     const { container } = renderComponent();
-    await expect(container).toBeAccessible(componentName);
+    await expect(container).toBeAccessible(componentName, 'scan_label');
     await expect(container).toHaveNoAxeViolations();
   }, 80000);
 
@@ -76,15 +77,15 @@ describe(componentName, () => {
     expect(ref.current).toHaveClass(blockClass);
   });
 
+  it('adds additional properties to the containing node', () => {
+    renderComponent({ 'data-testid': dataTestId });
+    screen.getByTestId(dataTestId);
+  });
+
   iconTypes.forEach((kind) => {
     it(`applies the proper className when kind prop of ${kind} is passed`, () => {
       const { container } = render(
-        <StatusIcon
-          kind={kind}
-          iconDescription={kind}
-          size="sm"
-          theme="light"
-        />
+        <StatusIcon kind={kind} iconLabel={kind} size="sm" theme="light" />
       );
       const element = container.querySelector(
         `.${blockClass}--light.${blockClass}--light-${kind}`
@@ -94,18 +95,13 @@ describe(componentName, () => {
     });
   });
 
-  iconTypes.forEach((desc) => {
-    it(`applies the proper title element when icon description of ${desc} is passed`, () => {
+  iconTypes.forEach((label) => {
+    it(`applies the proper title element when icon laebl of ${label} is passed`, () => {
       const { container } = render(
-        <StatusIcon
-          kind={desc}
-          iconDescription={desc}
-          size="sm"
-          theme="light"
-        />
+        <StatusIcon kind={label} iconLabel={label} size="sm" theme="light" />
       );
       const element = container.querySelector(
-        `.${blockClass}--light.${blockClass}--light-${desc}`
+        `.${blockClass}--light.${blockClass}--light-${label}`
       );
       const hasIconDescriptionProp = element.querySelector('title').textContent;
       expect(hasIconDescriptionProp).toBeTruthy();
@@ -115,12 +111,7 @@ describe(componentName, () => {
   iconThemes.forEach((theme) => {
     it(`applies the proper className when theme prop of ${theme} is passed`, () => {
       const { container } = render(
-        <StatusIcon
-          kind="fatal"
-          iconDescription="fatal"
-          size="sm"
-          theme={theme}
-        />
+        <StatusIcon kind="fatal" iconLabel="fatal" size="sm" theme={theme} />
       );
       const element = container.querySelector(
         `.${blockClass}--${theme}.${blockClass}--${theme}-fatal`
@@ -133,12 +124,7 @@ describe(componentName, () => {
   iconSizes.forEach(({ input, output }) => {
     it(`changes element size when size prop of ${input} is passed`, () => {
       const { container } = render(
-        <StatusIcon
-          kind="fatal"
-          iconDescription="fatal"
-          size={input}
-          theme="light"
-        />
+        <StatusIcon kind="fatal" iconLabel="fatal" size={input} theme="light" />
       );
       const element = container.querySelector(
         `.${blockClass}--light.${blockClass}--light-fatal`

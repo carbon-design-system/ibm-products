@@ -5,43 +5,55 @@
 @import 'carbon-components/scss/components/file-uploader/file-uploader';
 @import 'carbon-components/scss/components/text-input/text-input';
 
-.#{$pkg-prefix}--input-group {
-  display: flex;
+@mixin import-modal {
+  $block-class: #{$pkg-prefix}--import-modal;
+
+  .bx--file .bx--file-container,
+  .bx--file ~ .bx--file-container {
+    margin-top: 0;
+  }
+
+  .#{$pkg-prefix}--input-group {
+    display: flex;
+  }
+
+  .#{$pkg-prefix}--import-button {
+    margin-left: $spacing-05;
+  }
+
+  .#{$block-class}-label {
+    margin-bottom: $spacing-03;
+    @include carbon--type-style('productive-heading-01');
+  }
+
+  .#{$block-class}-helper-text {
+    margin-top: $spacing-06;
+    margin-bottom: $spacing-03;
+    @include carbon--type-style('helper-text-01');
+  }
+
+  .#{$block-class}-body {
+    margin-bottom: $spacing-06;
+    padding-right: 20%;
+  }
+
+  .#{$block-class} .bx--modal-container {
+    background: $ui-01;
+  }
+
+  .#{$block-class} .bx--modal-content {
+    padding-right: $spacing-05;
+  }
+
+  .#{$block-class} .bx--file__selected-file {
+    max-width: none;
+  }
+
+  .#{$block-class} .bx--file {
+    margin-bottom: $spacing-05;
+  }
 }
 
-.#{$pkg-prefix}--import-button {
-  margin-left: $spacing-05;
-}
-
-.#{$pkg-prefix}--import-modal-label {
-  margin-bottom: $spacing-03;
-  @include carbon--type-style('productive-heading-01');
-}
-
-.#{$pkg-prefix}--import-modal-helper-text {
-  margin-top: $spacing-07;
-  margin-bottom: $spacing-03;
-  @include carbon--type-style('helper-text-01');
-}
-
-.#{$pkg-prefix}--import-modal-body {
-  margin-bottom: $spacing-05;
-  padding-right: 20%;
-}
-
-.#{$pkg-prefix}--import-modal .bx--modal-container {
-  background: $ui-background;
-}
-
-.#{$pkg-prefix}--import-modal .bx--modal-content {
-  padding-right: $spacing-05;
-}
-
-.#{$pkg-prefix}--import-modal .bx--file__selected-file {
-  max-width: none;
-  background: $ui-01;
-}
-
-.#{$pkg-prefix}--import-modal .bx--text-input {
-  background: $ui-01;
+@include exports('import-modal') {
+  @include import-modal;
 }

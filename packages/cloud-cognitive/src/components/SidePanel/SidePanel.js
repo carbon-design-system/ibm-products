@@ -71,7 +71,9 @@ export let SidePanel = React.forwardRef(
     // set initial focus when side panel opens
     useEffect(() => {
       const initialFocus = (focusContainerElement) => {
+        /* istanbul ignore next */
         const containerElement = focusContainerElement || sidePanelRef.current;
+        /* istanbul ignore next */
         const primaryFocusElement = containerElement
           ? containerElement.querySelector(selectorPrimaryFocus)
           : null;
@@ -287,20 +289,20 @@ export let SidePanel = React.forwardRef(
     }, [slideIn, pageContentSelector, placement, shouldRender, size]);
 
     const setSizeClassName = (panelSize) => {
-      let sizeClassName = `${blockClass}__container-`;
+      let sizeClassName = `${blockClass}__container`;
       switch (panelSize) {
         case 'xs':
-          return (sizeClassName = `${sizeClassName}-extra-small`);
+          return (sizeClassName = `${sizeClassName}--extra-small`);
         case 'sm':
-          return (sizeClassName = `${sizeClassName}-small`);
+          return (sizeClassName = `${sizeClassName}--small`);
         case 'md':
-          return (sizeClassName = `${sizeClassName}-medium`);
+          return (sizeClassName = `${sizeClassName}--medium`);
         case 'lg':
-          return (sizeClassName = `${sizeClassName}-large`);
+          return (sizeClassName = `${sizeClassName}--large`);
         case 'max':
-          return (sizeClassName = `${sizeClassName}-max`);
+          return (sizeClassName = `${sizeClassName}--max`);
         default:
-          return (sizeClassName = `${sizeClassName}-medium`);
+          return (sizeClassName = `${sizeClassName}--medium`);
       }
     };
 

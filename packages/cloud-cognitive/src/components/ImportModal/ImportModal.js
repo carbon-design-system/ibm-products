@@ -143,7 +143,7 @@ export let ImportModal = ({
       onRequestSubmit={onSubmitHandler}
       onRequestClose={onRequestClose}
       className={`${pkg.prefix}--import-modal`}
-      size="sm">
+      >
       <p className={`${pkg.prefix}--import-modal-body`}>{modalBody}</p>
       <p className={`${pkg.prefix}--import-modal-label`}>{fileDropHeader}</p>
       <FileUploaderDropContainer

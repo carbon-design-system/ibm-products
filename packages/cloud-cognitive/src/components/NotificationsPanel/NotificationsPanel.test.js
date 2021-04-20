@@ -334,5 +334,29 @@ describe('Notifications', () => {
     expect(NotificationsPanel.defaultProps.daysAgoText('test')).toEqual(
       'test days ago'
     );
+    expect(NotificationsPanel.defaultProps.yesterdayAtText('test')).toEqual(
+      'Yesterday at test'
+    );
+    expect(NotificationsPanel.defaultProps.viewAllLabel('test')).toEqual(
+      'View all (test)'
+    );
+    expect(NotificationsPanel.defaultProps.secondsAgoText('test')).toEqual(
+      'test seconds ago'
+    );
+  });
+
+  it('should click onDismissAllNotification and onDismissSingleNotifications buttons to test default props', () => {
+    renderNotifications({
+      data: testData,
+    });
+    const dismissAllButton = screen.getByText(/Dismiss all/i);
+    userEvent.click(dismissAllButton);
+    const notificationElement = screen.getByText(/Test notification title/i)
+      .parentNode.parentNode;
+    const dismissSingleNotificationClass = `${blockClass}__dismiss-single-button`;
+    const dismissIconButtonElement = notificationElement.querySelector(
+      `.${dismissSingleNotificationClass}`
+    );
+    userEvent.click(dismissIconButtonElement);
   });
 });

@@ -111,6 +111,940 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: 600;
 }
 
+@keyframes fadeIn {
+  0% {
+    transform: translateY(-38.5rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-38.5rem);
+    opacity: 0;
+  }
+}
+
+.exp--notifications-panel__container {
+  --cds-interactive-01: #0f62fe;
+  --cds-interactive-02: #6f6f6f;
+  --cds-interactive-03: #ffffff;
+  --cds-interactive-04: #4589ff;
+  --cds-ui-background: #161616;
+  --cds-ui-01: #262626;
+  --cds-ui-02: #393939;
+  --cds-ui-03: #393939;
+  --cds-ui-04: #6f6f6f;
+  --cds-ui-05: #f4f4f4;
+  --cds-text-01: #f4f4f4;
+  --cds-text-02: #c6c6c6;
+  --cds-text-03: #6f6f6f;
+  --cds-text-04: #ffffff;
+  --cds-text-05: #8d8d8d;
+  --cds-text-error: #ff8389;
+  --cds-icon-01: #f4f4f4;
+  --cds-icon-02: #c6c6c6;
+  --cds-icon-03: #ffffff;
+  --cds-link-01: #78a9ff;
+  --cds-link-02: #a6c8ff;
+  --cds-inverse-link: #0f62fe;
+  --cds-field-01: #262626;
+  --cds-field-02: #393939;
+  --cds-inverse-01: #161616;
+  --cds-inverse-02: #f4f4f4;
+  --cds-support-01: #fa4d56;
+  --cds-support-02: #42be65;
+  --cds-support-03: #f1c21b;
+  --cds-support-04: #4589ff;
+  --cds-inverse-support-01: #da1e28;
+  --cds-inverse-support-02: #24a148;
+  --cds-inverse-support-03: #f1c21b;
+  --cds-inverse-support-04: #0f62fe;
+  --cds-overlay-01: rgba(22, 22, 22, 0.7);
+  --cds-danger-01: #da1e28;
+  --cds-danger-02: #fa4d56;
+  --cds-focus: #ffffff;
+  --cds-inverse-focus-ui: #0f62fe;
+  --cds-hover-primary: #0353e9;
+  --cds-active-primary: #002d9c;
+  --cds-hover-primary-text: #a6c8ff;
+  --cds-hover-secondary: #606060;
+  --cds-active-secondary: #393939;
+  --cds-hover-tertiary: #f4f4f4;
+  --cds-active-tertiary: #c6c6c6;
+  --cds-hover-ui: #353535;
+  --cds-hover-light-ui: #4c4c4c;
+  --cds-hover-selected-ui: #4c4c4c;
+  --cds-active-ui: #525252;
+  --cds-active-light-ui: #6f6f6f;
+  --cds-selected-ui: #393939;
+  --cds-selected-light-ui: #525252;
+  --cds-inverse-hover-ui: #e5e5e5;
+  --cds-hover-danger: #b81921;
+  --cds-active-danger: #750e13;
+  --cds-hover-row: #353535;
+  --cds-visited-link: #be95ff;
+  --cds-disabled-01: #262626;
+  --cds-disabled-02: #525252;
+  --cds-disabled-03: #8d8d8d;
+  --cds-highlight: #002d9c;
+  --cds-decorative-01: #525252;
+  --cds-button-separator: #161616;
+  --cds-skeleton-01: #353535;
+  --cds-skeleton-02: #525252;
+  --cds-brand-01: #0f62fe;
+  --cds-brand-02: #6f6f6f;
+  --cds-brand-03: #ffffff;
+  --cds-active-01: #525252;
+  --cds-hover-field: #353535;
+  --cds-danger: #da1e28;
+  --cds-caption-01-font-size: 0.75rem;
+  --cds-caption-01-font-weight: 400;
+  --cds-caption-01-line-height: 1.34;
+  --cds-caption-01-letter-spacing: 0.32px;
+  --cds-label-01-font-size: 0.75rem;
+  --cds-label-01-font-weight: 400;
+  --cds-label-01-line-height: 1.34;
+  --cds-label-01-letter-spacing: 0.32px;
+  --cds-helper-text-01-font-size: 0.75rem;
+  --cds-helper-text-01-line-height: 1.34;
+  --cds-helper-text-01-letter-spacing: 0.32px;
+  --cds-body-short-01-font-size: 0.875rem;
+  --cds-body-short-01-font-weight: 400;
+  --cds-body-short-01-line-height: 1.29;
+  --cds-body-short-01-letter-spacing: 0.16px;
+  --cds-body-long-01-font-size: 0.875rem;
+  --cds-body-long-01-font-weight: 400;
+  --cds-body-long-01-line-height: 1.43;
+  --cds-body-long-01-letter-spacing: 0.16px;
+  --cds-body-short-02-font-size: 1rem;
+  --cds-body-short-02-font-weight: 400;
+  --cds-body-short-02-line-height: 1.375;
+  --cds-body-short-02-letter-spacing: 0;
+  --cds-body-long-02-font-size: 1rem;
+  --cds-body-long-02-font-weight: 400;
+  --cds-body-long-02-line-height: 1.5;
+  --cds-body-long-02-letter-spacing: 0;
+  --cds-code-01-font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
+  --cds-code-01-font-size: 0.75rem;
+  --cds-code-01-font-weight: 400;
+  --cds-code-01-line-height: 1.34;
+  --cds-code-01-letter-spacing: 0.32px;
+  --cds-code-02-font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
+  --cds-code-02-font-size: 0.875rem;
+  --cds-code-02-font-weight: 400;
+  --cds-code-02-line-height: 1.43;
+  --cds-code-02-letter-spacing: 0.32px;
+  --cds-heading-01-font-size: 0.875rem;
+  --cds-heading-01-font-weight: 600;
+  --cds-heading-01-line-height: 1.29;
+  --cds-heading-01-letter-spacing: 0.16px;
+  --cds-productive-heading-01-font-size: 0.875rem;
+  --cds-productive-heading-01-font-weight: 600;
+  --cds-productive-heading-01-line-height: 1.29;
+  --cds-productive-heading-01-letter-spacing: 0.16px;
+  --cds-heading-02-font-size: 1rem;
+  --cds-heading-02-font-weight: 600;
+  --cds-heading-02-line-height: 1.375;
+  --cds-heading-02-letter-spacing: 0;
+  --cds-productive-heading-02-font-size: 1rem;
+  --cds-productive-heading-02-font-weight: 600;
+  --cds-productive-heading-02-line-height: 1.375;
+  --cds-productive-heading-02-letter-spacing: 0;
+  --cds-productive-heading-03-font-size: 1.25rem;
+  --cds-productive-heading-03-font-weight: 400;
+  --cds-productive-heading-03-line-height: 1.4;
+  --cds-productive-heading-03-letter-spacing: 0;
+  --cds-productive-heading-04-font-size: 1.75rem;
+  --cds-productive-heading-04-font-weight: 400;
+  --cds-productive-heading-04-line-height: 1.29;
+  --cds-productive-heading-04-letter-spacing: 0;
+  --cds-productive-heading-05-font-size: 2rem;
+  --cds-productive-heading-05-font-weight: 400;
+  --cds-productive-heading-05-line-height: 1.25;
+  --cds-productive-heading-05-letter-spacing: 0;
+  --cds-productive-heading-06-font-size: 2.625rem;
+  --cds-productive-heading-06-font-weight: 300;
+  --cds-productive-heading-06-line-height: 1.199;
+  --cds-productive-heading-06-letter-spacing: 0;
+  --cds-productive-heading-07-font-size: 3.375rem;
+  --cds-productive-heading-07-font-weight: 300;
+  --cds-productive-heading-07-line-height: 1.19;
+  --cds-productive-heading-07-letter-spacing: 0;
+  --cds-expressive-heading-01-font-size: 0.875rem;
+  --cds-expressive-heading-01-font-weight: 600;
+  --cds-expressive-heading-01-line-height: 1.25;
+  --cds-expressive-heading-01-letter-spacing: 0.16px;
+  --cds-expressive-heading-02-font-size: 1rem;
+  --cds-expressive-heading-02-font-weight: 600;
+  --cds-expressive-heading-02-line-height: 1.5;
+  --cds-expressive-heading-02-letter-spacing: 0;
+  --cds-expressive-heading-03-font-size: 1.25rem;
+  --cds-expressive-heading-03-font-weight: 400;
+  --cds-expressive-heading-03-line-height: 1.4;
+  --cds-expressive-heading-03-letter-spacing: 0;
+  --cds-expressive-heading-04-font-size: 1.75rem;
+  --cds-expressive-heading-04-font-weight: 400;
+  --cds-expressive-heading-04-line-height: 1.29;
+  --cds-expressive-heading-04-letter-spacing: 0;
+  --cds-expressive-heading-05-font-size: 2rem;
+  --cds-expressive-heading-05-font-weight: 400;
+  --cds-expressive-heading-05-line-height: 1.25;
+  --cds-expressive-heading-05-letter-spacing: 0;
+  --cds-expressive-heading-06-font-size: 2rem;
+  --cds-expressive-heading-06-font-weight: 600;
+  --cds-expressive-heading-06-line-height: 1.25;
+  --cds-expressive-heading-06-letter-spacing: 0;
+  --cds-expressive-paragraph-01-font-size: 1.5rem;
+  --cds-expressive-paragraph-01-font-weight: 300;
+  --cds-expressive-paragraph-01-line-height: 1.334;
+  --cds-expressive-paragraph-01-letter-spacing: 0;
+  --cds-quotation-01-font-size: 1.25rem;
+  --cds-quotation-01-font-weight: 400;
+  --cds-quotation-01-line-height: 1.3;
+  --cds-quotation-01-letter-spacing: 0;
+  --cds-quotation-02-font-size: 2rem;
+  --cds-quotation-02-font-weight: 300;
+  --cds-quotation-02-line-height: 1.25;
+  --cds-quotation-02-letter-spacing: 0;
+  --cds-display-01-font-size: 2.625rem;
+  --cds-display-01-font-weight: 300;
+  --cds-display-01-line-height: 1.19;
+  --cds-display-01-letter-spacing: 0;
+  --cds-display-02-font-size: 2.625rem;
+  --cds-display-02-font-weight: 600;
+  --cds-display-02-line-height: 1.19;
+  --cds-display-02-letter-spacing: 0;
+  --cds-display-03-font-size: 2.625rem;
+  --cds-display-03-font-weight: 300;
+  --cds-display-03-line-height: 1.19;
+  --cds-display-03-letter-spacing: 0;
+  --cds-display-04-font-size: 2.625rem;
+  --cds-display-04-font-weight: 600;
+  --cds-display-04-line-height: 1.19;
+  --cds-display-04-letter-spacing: 0;
+  --cds-spacing-01: 0.125rem;
+  --cds-spacing-02: 0.25rem;
+  --cds-spacing-03: 0.5rem;
+  --cds-spacing-04: 0.75rem;
+  --cds-spacing-05: 1rem;
+  --cds-spacing-06: 1.5rem;
+  --cds-spacing-07: 2rem;
+  --cds-spacing-08: 2.5rem;
+  --cds-spacing-09: 3rem;
+  --cds-spacing-10: 4rem;
+  --cds-spacing-11: 5rem;
+  --cds-spacing-12: 6rem;
+  --cds-spacing-13: 10rem;
+  --cds-fluid-spacing-01: 0;
+  --cds-fluid-spacing-02: 2vw;
+  --cds-fluid-spacing-03: 5vw;
+  --cds-fluid-spacing-04: 10vw;
+  --cds-layout-01: 1rem;
+  --cds-layout-02: 1.5rem;
+  --cds-layout-03: 2rem;
+  --cds-layout-04: 3rem;
+  --cds-layout-05: 4rem;
+  --cds-layout-06: 6rem;
+  --cds-layout-07: 10rem;
+  --cds-container-01: 1.5rem;
+  --cds-container-02: 2rem;
+  --cds-container-03: 2.5rem;
+  --cds-container-04: 3rem;
+  --cds-container-05: 4rem;
+  --cds-icon-size-01: 1rem;
+  --cds-icon-size-02: 1.25rem;
+  position: fixed;
+  top: var(--cds-spacing-09, 3rem);
+  right: 0;
+  z-index: 2;
+  min-width: 22.75rem;
+  max-width: 22.75rem;
+  min-height: 38.5rem;
+  max-height: 38.5rem;
+  overflow: auto;
+  color: var(--cds-text-01, #161616);
+  background-color: var(--cds-ui-background, #ffffff);
+  transition: transform 110ms;
+  transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__header-container {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: var(--cds-spacing-03, 0.5rem) var(--cds-spacing-05, 1rem) var(--cds-spacing-05, 1rem);
+  background-color: var(--cds-ui-background, #ffffff);
+  border-bottom: 1px solid var(--cds-ui-02, #ffffff);
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__header-container .exp--notifications-panel__header-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__header-container .exp--notifications-panel__do-not-disturb-toggle .bx--toggle__switch {
+  margin-top: var(--cds-spacing-02, 0.25rem);
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__header-container .exp--notifications-panel__dismiss-button {
+  color: var(--cds-text-01, #161616);
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__header-container .exp--notifications-panel__header {
+  font-size: var(--cds-productive-heading-01-font-size, 0.875rem);
+  font-weight: var(--cds-productive-heading-01-font-weight, 600);
+  line-height: var(--cds-productive-heading-01-line-height, 1.29);
+  letter-spacing: var(--cds-productive-heading-01-letter-spacing, 0.16px);
+  margin: 0;
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__time-section-label {
+  font-size: var(--cds-label-01-font-size, 0.75rem);
+  font-weight: var(--cds-label-01-font-weight, 400);
+  line-height: var(--cds-label-01-line-height, 1.34);
+  letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
+  font-weight: 600;
+  position: sticky;
+  top: 4.8125rem;
+  z-index: 2;
+  padding: var(--cds-spacing-03, 0.5rem) var(--cds-spacing-05, 1rem);
+  color: var(--cds-text-02, #525252);
+  background-color: var(--cds-ui-01, #f4f4f4);
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__notification:hover,
+.exp--notifications-panel__container .exp--notifications-panel__notification:focus {
+  background-color: var(--cds-ui-03, #e0e0e0);
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__notification:hover .exp--notifications-panel__dismiss-single-button,
+.exp--notifications-panel__container .exp--notifications-panel__notification:focus .exp--notifications-panel__dismiss-single-button {
+  opacity: 1;
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__notification:focus {
+  border-color: var(--cds-focus, #0f62fe);
+  outline: 0;
+  box-shadow: inset 0 0 0 2px var(--cds-focus, #0f62fe), inset 0 0 0 2px var(--cds-ui-background, #ffffff);
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__notification {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  min-height: 6.25rem;
+  padding: var(--cds-spacing-05, 1rem);
+  text-align: left;
+  background-color: var(--cds-ui-background, #ffffff);
+  border: 0;
+  cursor: pointer;
+  transition: background-color 240ms;
+  transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-title {
+  margin-bottom: var(--cds-spacing-02, 0.25rem);
+  color: var(--cds-text-04, #ffffff);
+  font-weight: 400;
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-title.exp--notifications-panel__notification-title-unread {
+  margin-bottom: var(--cds-spacing-02, 0.25rem);
+  color: var(--cds-text-04, #ffffff);
+  font-weight: 600;
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notifications-link {
+  font-size: var(--cds-label-01-font-size, 0.75rem);
+  font-weight: var(--cds-label-01-font-weight, 400);
+  line-height: var(--cds-label-01-line-height, 1.34);
+  letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-status-icon {
+  min-width: 1rem;
+  margin-right: var(--cds-spacing-03, 0.5rem);
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-status-icon.exp--notifications-panel__notification-status-icon-error {
+  fill: var(--cds-support-01, #da1e28);
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-status-icon.exp--notifications-panel__notification-status-icon-success {
+  fill: var(--cds-support-02, #24a148);
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-status-icon.exp--notifications-panel__notification-status-icon-warning {
+  fill: var(--cds-support-03, #f1c21b);
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-status-icon.exp--notifications-panel__notification-status-icon-informational {
+  fill: var(--cds-support-04, #0043ce);
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-time-label {
+  margin-bottom: var(--cds-spacing-03, 0.5rem);
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-time-label,
+.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-description {
+  font-size: var(--cds-label-01-font-size, 0.75rem);
+  font-weight: var(--cds-label-01-font-weight, 400);
+  line-height: var(--cds-label-01-line-height, 1.34);
+  letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
+  color: var(--cds-text-02, #525252);
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-description.exp--notifications-panel__notification-short-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-description.exp--notifications-panel__notification-long-description {
+  display: block;
+  -webkit-line-clamp: initial;
+  overflow: initial;
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-read-more-button,
+.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-read-less-button {
+  font-size: var(--cds-label-01-font-size, 0.75rem);
+  font-weight: var(--cds-label-01-font-weight, 400);
+  line-height: var(--cds-label-01-line-height, 1.34);
+  letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
+  min-width: 5.5rem;
+  padding: 0;
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-read-more-button .bx--btn__icon,
+.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-read-less-button .bx--btn__icon {
+  transition: transform 240ms ease;
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-read-more-button.exp--notifications-panel__notification-read-more-button .bx--btn__icon,
+.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-read-less-button.exp--notifications-panel__notification-read-more-button .bx--btn__icon {
+  transform: rotate(0deg);
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-read-more-button.exp--notifications-panel__notification-read-less-button .bx--btn__icon,
+.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-read-less-button.exp--notifications-panel__notification-read-less-button .bx--btn__icon {
+  transform: rotate(180deg);
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__dismiss-single-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 2rem;
+  padding: 0;
+  color: var(--cds-text-01, #161616);
+  opacity: 0;
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__dismiss-single-button:hover, .exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__dismiss-single-button:focus {
+  opacity: 1;
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__notification-today:not(:first-of-type):before,
+.exp--notifications-panel__container .exp--notifications-panel__notification-yesterday:not(:first-of-type):before,
+.exp--notifications-panel__container .exp--notifications-panel__notification-previous:not(:first-of-type):before {
+  position: absolute;
+  top: 0;
+  width: calc(100% - (2 * var(--cds-spacing-05, 1rem)));
+  height: 1px;
+  margin: 0 auto;
+  background-color: var(--cds-ui-02, #ffffff);
+  transition: background-color 240ms;
+  transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
+  content: '';
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__notification-today:hover
++ .exp--notifications-panel__notification-today:not(:first-of-type):before,
+.exp--notifications-panel__container .exp--notifications-panel__notification-yesterday:hover
++ .exp--notifications-panel__notification-yesterday:not(:first-of-type):before,
+.exp--notifications-panel__container .exp--notifications-panel__notification-previous:hover
++ .exp--notifications-panel__notification-previous:not(:first-of-type):before {
+  background-color: transparent;
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__main-section-empty.exp--notifications-panel__main-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: initial;
+  margin-top: var(--cds-layout-07, 10rem);
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__main-section-empty.exp--notifications-panel__main-section .exp-subtext {
+  font-size: var(--cds-body-short-01-font-size, 0.875rem);
+  font-weight: var(--cds-body-short-01-font-weight, 400);
+  line-height: var(--cds-body-short-01-line-height, 1.29);
+  letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__main-section {
+  min-height: 498px;
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__bottom-actions {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  height: 2.5rem;
+  min-height: 2.5rem;
+  background-color: var(--cds-ui-background, #ffffff);
+  border-top: 1px solid var(--cds-ui-02, #ffffff);
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__bottom-actions .exp--notifications-panel__view-all-button {
+  width: 100%;
+  max-width: calc(100% - 2.5rem);
+  height: 2.5rem;
+  min-height: 2.5rem;
+  color: var(--cds-text-01, #161616);
+  border-right: 1px solid var(--cds-ui-02, #ffffff);
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__bottom-actions .exp--notifications-panel__settings-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  height: 2.5rem;
+  min-height: 2.5rem;
+  padding: 0;
+  color: var(--cds-text-01, #161616);
+}
+
+.exp--notifications-panel__container .exp--notifications-panel__bottom-actions .exp--notifications-panel__settings-button .bx--btn__icon {
+  margin: 0;
+}
+
+@keyframes rotating {
+  0% {
+    transform: scaleY(-1) rotate(360deg);
+  }
+  100% {
+    transform: scaleY(-1) rotate(0deg);
+  }
+}
+
+.exp--status-icon {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.exp--status-icon--light.exp--status-icon--light-minor-warning,
+.exp--status-icon--dark.exp--status-icon--dark-minor-warning {
+  fill: #fdd13a;
+}
+
+.exp--status-icon--light.exp--status-icon--light-minor-warning
+path:nth-of-type(1),
+.exp--status-icon--dark.exp--status-icon--dark-minor-warning path:nth-of-type(1) {
+  fill: #161616;
+}
+
+.exp--status-icon--light.exp--status-icon--light-fatal {
+  fill: #000000;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--light-fatal .exp--status-icon--light.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--dark-fatal {
+  fill: #000000;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--dark-fatal .exp--status-icon--light.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--light-critical {
+  fill: #da1e28;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--light-critical .exp--status-icon--light.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--dark-critical {
+  fill: #da1e28;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--dark-critical .exp--status-icon--light.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--light-major-warning {
+  fill: #ba4e00;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--light-major-warning .exp--status-icon--light.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--dark-major-warning {
+  fill: #ba4e00;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--dark-major-warning .exp--status-icon--light.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--light-undefined {
+  fill: #491d8b;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--light-undefined .exp--status-icon--light.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--dark-undefined {
+  fill: #491d8b;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--dark-undefined .exp--status-icon--light.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--light-unknown {
+  fill: #6f6f6f;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--light-unknown .exp--status-icon--light.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--dark-unknown {
+  fill: #6f6f6f;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--dark-unknown .exp--status-icon--light.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--light-normal {
+  fill: #198038;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--light-normal .exp--status-icon--light.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--dark-normal {
+  fill: #198038;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--dark-normal .exp--status-icon--light.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--light-info {
+  fill: #0f62fe;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--light-info .exp--status-icon--light.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--dark-info {
+  fill: #0f62fe;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--dark-info .exp--status-icon--light.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--light-in-progress {
+  animation: rotating 8s infinite linear;
+  fill: #0f62fe;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .exp--status-icon--light.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--dark-in-progress {
+  animation: rotating 8s infinite linear;
+  fill: #0f62fe;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .exp--status-icon--light.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--light-running {
+  transform: scaleY(-1);
+  fill: #198038;
+}
+
+.exp--status-icon--light.exp--status-icon--dark-running {
+  transform: scaleY(-1);
+  fill: #198038;
+}
+
+.exp--status-icon--light.exp--status-icon--light-pending {
+  fill: #6f6f6f;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--light-pending .exp--status-icon--light.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--dark-pending {
+  fill: #6f6f6f;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--dark-pending .exp--status-icon--light.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--light-fatal {
+  fill: #c6c6c6;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--light-fatal .exp--status-icon--dark.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--dark-fatal {
+  fill: #c6c6c6;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--dark-fatal .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--light-critical {
+  fill: #fa4d56;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--light-critical .exp--status-icon--dark.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--dark-critical {
+  fill: #fa4d56;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--dark-critical .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--light-major-warning {
+  fill: #ff832b;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--light-major-warning .exp--status-icon--dark.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--dark-major-warning {
+  fill: #ff832b;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--dark-major-warning .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--light-undefined {
+  fill: #a56eff;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--light-undefined .exp--status-icon--dark.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--dark-undefined {
+  fill: #a56eff;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--dark-undefined .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--light-unknown {
+  fill: #a8a8a8;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--light-unknown .exp--status-icon--dark.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--dark-unknown {
+  fill: #a8a8a8;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--dark-unknown .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--light-normal {
+  fill: #42be65;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--light-normal .exp--status-icon--dark.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--dark-normal {
+  fill: #42be65;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--dark-normal .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--light-info {
+  fill: #4589ff;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--light-info .exp--status-icon--dark.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--dark-info {
+  fill: #4589ff;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--dark-info .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--light-in-progress {
+  animation: rotating 8s infinite linear;
+  fill: #4589ff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .exp--status-icon--dark.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--dark-in-progress {
+  animation: rotating 8s infinite linear;
+  fill: #4589ff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--light-running {
+  transform: scaleY(-1);
+  fill: #42be65;
+}
+
+.exp--status-icon--dark.exp--status-icon--dark-running {
+  transform: scaleY(-1);
+  fill: #42be65;
+}
+
+.exp--status-icon--dark.exp--status-icon--light-pending {
+  fill: #a8a8a8;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--light-pending .exp--status-icon--dark.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--dark-pending {
+  fill: #a8a8a8;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--dark-pending .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
 .exp--tearsheet {
   align-items: flex-end;
 }

@@ -71,7 +71,10 @@ export let TagSet = ({
 
   useEffect(() => {
     // clone children for use as visible and overflow tags
-    let newDisplayedTags = children.map((child) => React.cloneElement(child));
+    let newDisplayedTags =
+      children && children.length > 0
+        ? children.map((child) => React.cloneElement(child))
+        : [];
 
     // separate out tags for the overflow
     const newOverflowTags = newDisplayedTags.splice(

@@ -31,6 +31,7 @@ const ActionSetButton = React.forwardRef(
       label,
       loading,
       onClick,
+      size,
       // Collect any other property values passed in.
       ...rest
     },
@@ -46,7 +47,7 @@ const ActionSetButton = React.forwardRef(
         { [`${blockClass}__action-button--ghost`]: kind === 'ghost' },
       ])}
       disabled={disabled || loading || false}
-      {...{ kind, onClick, ref }}>
+      {...{ kind, onClick, ref, size }}>
       {label}
       {loading && <InlineLoading />}
     </Button>
@@ -60,6 +61,7 @@ ActionSetButton.propTypes = {
   label: PropTypes.string,
   loading: PropTypes.bool,
   onClick: PropTypes.func,
+  size: Button.propTypes.size,
 };
 
 const defaultKind = Button.defaultProps.kind;
@@ -84,6 +86,7 @@ export const ActionSet = React.forwardRef(
     {
       // The component props, in alphabetical order (for consistency).
       actions,
+      buttonSize,
       className,
       size,
       // Collect any other property values passed in.
@@ -135,7 +138,11 @@ export const ActionSet = React.forwardRef(
         role="presentation"
         stacked={stack}>
         {buttons.map((action, index) => (
-          <ActionSetButton {...action} key={index} />
+          <ActionSetButton
+            key={action.key || index}
+            {...action}
+            size={buttonSize}
+          />
         ))}
       </ButtonSet>
     );
@@ -229,6 +236,14 @@ ActionSet.propTypes = {
       })
     ),
   ]),
+
+  /**
+   * Specify the size of buttons to use for the actions. The allowed values are
+   * those for the size prop of carbon Button. If this prop is specified, all
+   * the buttons will be set to this size, overriding any 'size' values (if any)
+   * supplied in the actions array (if any).
+   */
+  buttonSize: Button.propTypes.size,
 
   /**
    * Sets an optional className to be added to the side panel outermost element.

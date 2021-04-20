@@ -90,6 +90,7 @@ export let NotificationsPanel = React.forwardRef(
       if (open) setRender(true);
     }, [open]);
 
+    /* istanbul ignore next */
     const onAnimationEnd = () => {
       // initialize the notification panel to close
       /* istanbul ignore next */
@@ -215,6 +216,7 @@ export let NotificationsPanel = React.forwardRef(
               )
             )
               return;
+            /* istanbul ignore next */
             if (event.which === 13) {
               notification.onNotificationClick(notification);
             }
@@ -322,7 +324,12 @@ export let NotificationsPanel = React.forwardRef(
         className={cx([blockClass, `${blockClass}__container`], {
           [className]: className,
         })}
-        style={{ animation: `${open ? 'fadeIn 250ms' : 'fadeOut 250ms'}` }}
+        style={{
+          animation: `${
+            /* istanbul ignore next */
+            open ? 'fadeIn 250ms' : 'fadeOut 250ms'
+          }`,
+        }}
         onAnimationEnd={onAnimationEnd}
         ref={ref || notificationPanelRef}>
         <div className={`${blockClass}__header-container`}>

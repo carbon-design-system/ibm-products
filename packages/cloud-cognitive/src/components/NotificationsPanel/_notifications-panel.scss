@@ -240,8 +240,8 @@
         @include carbon--type-style('body-short-01');
       }
     }
-    .#{$block-class}-main-section {
-      min-height: 500px;
+    .#{$block-class}__main-section {
+      min-height: 498px;
     }
     .#{$block-class}__bottom-actions {
       position: sticky;

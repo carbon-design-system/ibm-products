@@ -151,7 +151,7 @@ StatusIcon.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * A required prop that provides a description of the icon for accessibility purposes
+   * A required prop that provides a title element and tooltip for the icon for accessibility purposes
    */
   iconDescription: PropTypes.string.isRequired,
   /**

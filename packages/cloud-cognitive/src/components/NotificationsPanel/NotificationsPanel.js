@@ -37,9 +37,10 @@ export let NotificationsPanel = React.forwardRef(
     {
       className,
       data,
-      dismissAllLabel,
-      doNotDisturbLabel,
       daysAgoText,
+      dismissAllLabel,
+      dismissSingleNotificationIconDescription,
+      doNotDisturbLabel,
       emptyStateLabel,
       hoursAgoText,
       hourAgoText,
@@ -59,8 +60,10 @@ export let NotificationsPanel = React.forwardRef(
       readLessLabel,
       readMoreLabel,
       secondsAgoText,
+      settingsIconDescription,
       title,
       todayLabel,
+      viewAllLabel,
       yearsAgoText,
       yearAgoText,
       yesterdayAtText,
@@ -78,7 +81,7 @@ export let NotificationsPanel = React.forwardRef(
       setAllNotifications(data);
     }, [data]);
 
-    useClickOutside(notificationPanelRef, () => {
+    useClickOutside(ref || notificationPanelRef, () => {
       onClickOutside();
     });
 
@@ -87,8 +90,10 @@ export let NotificationsPanel = React.forwardRef(
       if (open) setRender(true);
     }, [open]);
 
+    /* istanbul ignore next */
     const onAnimationEnd = () => {
       // initialize the notification panel to close
+      /* istanbul ignore next */
       if (!open) setRender(false);
     };
 
@@ -177,7 +182,7 @@ export let NotificationsPanel = React.forwardRef(
                 setAllNotifications(newData);
               }}
               className={showMoreButtonClassName}>
-              {notification.showAll ? 'Read less' : 'Read more'}
+              {notification.showAll ? readLessLabel : readMoreLabel}
             </Button>
           )}
         </div>
@@ -197,7 +202,7 @@ export let NotificationsPanel = React.forwardRef(
       ]);
       return (
         <div
-          aria-label={`Notification: ${notification.title}`}
+          aria-label={notification.title}
           key={`${notification.timestamp}-${notification.title}-${index}`}
           className={notificationClassName}
           type="button"
@@ -211,6 +216,7 @@ export let NotificationsPanel = React.forwardRef(
               )
             )
               return;
+            /* istanbul ignore next */
             if (event.which === 13) {
               notification.onNotificationClick(notification);
             }
@@ -285,7 +291,7 @@ export let NotificationsPanel = React.forwardRef(
             kind="ghost"
             size="small"
             renderIcon={Close16}
-            iconDescription="Dismiss"
+            iconDescription={dismissSingleNotificationIconDescription}
             tooltipPosition="left"
             className={`${blockClass}__dismiss-single-button`}
             onClick={(event) => dismissSingleNotification(event, notification)}
@@ -318,7 +324,12 @@ export let NotificationsPanel = React.forwardRef(
         className={cx([blockClass, `${blockClass}__container`], {
           [className]: className,
         })}
-        style={{ animation: `${open ? 'fadeIn 250ms' : 'fadeOut 250ms'}` }}
+        style={{
+          animation: `${
+            /* istanbul ignore next */
+            open ? 'fadeIn 250ms' : 'fadeOut 250ms'
+          }`,
+        }}
         onAnimationEnd={onAnimationEnd}
         ref={ref || notificationPanelRef}>
         <div className={`${blockClass}__header-container`}>
@@ -390,14 +401,14 @@ export let NotificationsPanel = React.forwardRef(
               kind="ghost"
               className={`${blockClass}__view-all-button`}
               onClick={() => onViewAllClick()}>
-              View all ({allNotifications.length})
+              {viewAllLabel(allNotifications.length)}
             </Button>
             <Button
               kind="ghost"
               size="small"
               className={`${blockClass}__settings-button`}
               renderIcon={Settings16}
-              iconDescription="Settings"
+              iconDescription={settingsIconDescription}
               onClick={() => onSettingsClick()}
             />
           </div>
@@ -454,6 +465,11 @@ NotificationsPanel.propTypes = {
    * Label for Dismiss all button
    */
   dismissAllLabel: PropTypes.string,
+
+  /**
+   * Label for Dismiss single notfication icon button
+   */
+  dismissSingleNotificationIconDescription: PropTypes.string,
 
   /**
    * Label for Do not disturb toggle
@@ -556,6 +572,11 @@ NotificationsPanel.propTypes = {
   secondsAgoText: PropTypes.func,
 
   /**
+   * Sets the settings icon description text
+   */
+  settingsIconDescription: PropTypes.string,
+
+  /**
    * Sets the title for the Notifications panel
    */
   title: PropTypes.string,
@@ -564,6 +585,11 @@ NotificationsPanel.propTypes = {
    * Sets the today label text
    */
   todayLabel: PropTypes.string,
+
+  /**
+   * Sets the View all button text
+   */
+  viewAllLabel: PropTypes.func,
 
   /**
    * Sets the `year ago` label text
@@ -593,6 +619,7 @@ NotificationsPanel.propTypes = {
 NotificationsPanel.defaultProps = {
   daysAgoText: (value) => `${value} days ago`,
   dismissAllLabel: 'Dismiss all',
+  dismissSingleNotificationIconDescription: 'Dismiss',
   doNotDisturbLabel: 'Do not disturb',
   emptyStateLabel: 'You do not have any notifications',
   hourAgoText: (value) => `${value} hour ago`,
@@ -608,8 +635,10 @@ NotificationsPanel.defaultProps = {
   readLessLabel: 'Read less',
   readMoreLabel: 'Read more',
   secondsAgoText: (value) => `${value} seconds ago`,
+  settingsIconDescription: 'Settings',
   title: 'Notifications',
   todayLabel: 'Today',
+  viewAllLabel: (value) => `View all (${value})`,
   yearsAgoText: (value) => `${value} years ago`,
   yearAgoText: (value) => `${value} year ago`,
   yesterdayLabel: 'Yesterday',

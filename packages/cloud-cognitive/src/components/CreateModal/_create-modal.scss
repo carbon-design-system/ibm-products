@@ -1,0 +1,77 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '@carbon/themes/scss/themes';
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+@import 'carbon-components/scss/globals/scss/_vars.scss';
+@import 'carbon-components/scss/components/modal/modal';
+@import 'carbon-components/scss/components/form/form';
+
+@mixin create-modal {
+  .#{$pkg-prefix}--create-modal {
+    background-color: $ui-background;
+  }
+
+  .#{$pkg-prefix}--create-modal .bx--modal-close {
+    display: none;
+  }
+
+  .#{$pkg-prefix}--create-modal .bx--modal-container {
+    @include carbon--breakpoint(md) {
+      max-height: 95%;
+    }
+    @include carbon--breakpoint(lg) {
+      max-height: 95%;
+    }
+  }
+
+  .#{$pkg-prefix}--create-modal .bx--modal-header {
+    margin-bottom: 0;
+    padding-bottom: $spacing-03;
+    border-bottom: 1px solid $ui-03;
+  }
+
+  .#{$pkg-prefix}--create-modal .bx--modal-footer .bx--btn {
+    max-width: none;
+  }
+
+  .#{$pkg-prefix}--create-modal__title {
+    @include carbon--type-style('productive-heading-03');
+
+    margin-bottom: $spacing-02;
+  }
+
+  .#{$pkg-prefix}--create-modal__subtitle {
+    @include carbon--type-style('body-short-01');
+
+    margin-bottom: $spacing-03;
+    color: $text-02;
+  }
+
+  .#{$pkg-prefix}--create-modal__description {
+    @include carbon--type-style('body-long-01');
+
+    margin: $spacing-03 0 $spacing-05 0;
+  }
+
+  .#{$pkg-prefix}--create-modal__form .bx--fieldset {
+    min-width: 100%;
+    margin-bottom: 0;
+  }
+
+  .#{$pkg-prefix}--create-modal__form > * {
+    margin-bottom: $spacing-05;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+@include exports('create-modal') {
+  @include create-modal;
+}

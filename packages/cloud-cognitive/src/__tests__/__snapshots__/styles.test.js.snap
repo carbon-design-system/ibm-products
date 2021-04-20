@@ -1252,6 +1252,17 @@ path:nth-of-type(1),
   background: var(--cds-ui-02, #ffffff);
 }
 
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--text-input,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--text-area,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--search-input,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--select-input,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--dropdown,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--dropdown-list,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--number input[type='number'],
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--date-picker__input {
+  background-color: var(--cds-ui-01, #f4f4f4);
+}
+
 .exp--tearsheet .exp--tearsheet__buttons {
   border-top: 1px solid var(--cds-ui-03, #e0e0e0);
 }

@@ -21,6 +21,7 @@ const defaults = {
     APIKeyDownloader: false,
     APIKeyModal: false,
     ContextHeader: false,
+    CreateModal: false,
     EmptyState: false,
     ErrorEmptyState: false,
     ExampleComponent: false,

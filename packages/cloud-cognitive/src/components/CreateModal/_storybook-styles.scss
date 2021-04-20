@@ -1,0 +1,50 @@
+//
+// Copyright IBM Corp. 2020, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+@import './index';
+@import 'carbon-components/scss/components/number-input/number-input';
+@import 'carbon-components/scss/components/text-area/text-area';
+@import 'carbon-components/scss/components/text-input/text-input';
+@import 'carbon-components/scss/components/dropdown/dropdown';
+@import 'carbon-components/scss/components/date-picker/date-picker';
+@import 'carbon-components/scss/components/radio-button/radio-button';
+@import 'carbon-components/scss/components/progress-indicator/progress-indicator';
+@import 'carbon-components/scss/components/tooltip/tooltip';
+@import 'carbon-components/scss/components/modal/modal';
+
+.bx--number {
+  min-width: 100%;
+}
+
+.bx--number__control-btn::before {
+  background-color: transparent;
+}
+
+.bx--number__control-btn::after {
+  background-color: transparent;
+}
+
+.bx--date-picker {
+  min-width: 100%;
+}
+
+.bx--date-picker-container {
+  min-width: 100%;
+}
+
+.bx--date-picker.bx--date-picker--single .bx--date-picker__input {
+  min-width: 100%;
+}
+
+.bx--list-box__menu-icon {
+  top: $spacing-03;
+}
+
+.example-wrapper {
+  display: grid;
+  grid-gap: $spacing-05;
+  grid-template-columns: 1fr 1fr;
+}

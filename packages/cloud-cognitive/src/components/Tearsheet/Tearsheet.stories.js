@@ -11,7 +11,14 @@ import { action } from '@storybook/addon-actions';
 
 import { pkg } from '../../settings';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
-import { Button, Tab, Tabs } from 'carbon-components-react';
+import {
+  Button,
+  Form,
+  FormGroup,
+  Tab,
+  Tabs,
+  TextInput,
+} from 'carbon-components-react';
 
 import { Tearsheet, TearsheetNarrow } from '.';
 import {
@@ -114,7 +121,14 @@ const influencer = (
 const label = 'The label of the tearsheet';
 
 const mainContent = (
-  <div className="tearsheet-stories__dummy-content-block">Main content</div>
+  <div className="tearsheet-stories__dummy-content-block">
+    <Form>
+      <p>Main content</p>
+      <FormGroup>
+        <TextInput labelText="Enter an important value here" />
+      </FormGroup>
+    </Form>
+  </div>
 );
 
 const tabs = (

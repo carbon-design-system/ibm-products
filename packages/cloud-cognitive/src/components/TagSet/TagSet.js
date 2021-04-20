@@ -46,7 +46,11 @@ export let TagSet = ({
 
   useEffect(() => {
     // clone children for use in modal
-    setAllTags(children.map((child) => React.cloneElement(child)));
+    setAllTags(
+      children && children.length > 0
+        ? children.map((child) => React.cloneElement(child))
+        : []
+    );
 
     // use children as sizing tags
     setHiddenSizingTags(

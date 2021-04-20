@@ -119,13 +119,13 @@ CreateModal.propTypes = {
    */
   description: PropTypes.node.isRequired,
   /**
-   * Specifies a handler for disabling or enabling the primary button. This is important for form validation
+   * Specifies a boolean for disabling or enabling the primary button. This is important for form validation
    * Returning `true` prevents the primary button from being clicked until required fields are completed.
    */
   disableSubmit: PropTypes.bool,
   /**
-   * Specifies whether the submission of the modal can be clicked or not.
-   * This is important for form validation. Returning `true` enables the primary modal button.
+   * Specifies an optional handler which is called when the CreateModal
+   * is closed. Returning `false` prevents the modal from closing.
    */
   onClose: PropTypes.func,
   /**

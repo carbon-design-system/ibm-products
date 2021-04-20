@@ -1260,7 +1260,7 @@ path:nth-of-type(1),
 .exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--dropdown-list,
 .exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--number input[type='number'],
 .exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--date-picker__input {
-  background-color: var(--cds-ui-01, #f4f4f4);
+  background-color: var(--cds-field-01, #f4f4f4);
 }
 
 .exp--tearsheet .exp--tearsheet__buttons {

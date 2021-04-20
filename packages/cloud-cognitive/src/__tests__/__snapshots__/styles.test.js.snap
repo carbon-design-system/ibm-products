@@ -111,6 +111,415 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: 600;
 }
 
+@keyframes rotating {
+  0% {
+    transform: scaleY(-1) rotate(360deg);
+  }
+  100% {
+    transform: scaleY(-1) rotate(0deg);
+  }
+}
+
+.exp--status-icon {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.exp--status-icon--light.exp--status-icon--light-minor-warning,
+.exp--status-icon--dark.exp--status-icon--dark-minor-warning {
+  fill: #fdd13a;
+}
+
+.exp--status-icon--light.exp--status-icon--light-minor-warning
+path:nth-of-type(1),
+.exp--status-icon--dark.exp--status-icon--dark-minor-warning path:nth-of-type(1) {
+  fill: #161616;
+}
+
+.exp--status-icon--light.exp--status-icon--light-fatal {
+  fill: #000000;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--light-fatal .exp--status-icon--light.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--dark-fatal {
+  fill: #000000;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--dark-fatal .exp--status-icon--light.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--light-critical {
+  fill: #da1e28;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--light-critical .exp--status-icon--light.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--dark-critical {
+  fill: #da1e28;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--dark-critical .exp--status-icon--light.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--light-major-warning {
+  fill: #ba4e00;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--light-major-warning .exp--status-icon--light.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--dark-major-warning {
+  fill: #ba4e00;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--dark-major-warning .exp--status-icon--light.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--light-undefined {
+  fill: #491d8b;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--light-undefined .exp--status-icon--light.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--dark-undefined {
+  fill: #491d8b;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--dark-undefined .exp--status-icon--light.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--light-unknown {
+  fill: #6f6f6f;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--light-unknown .exp--status-icon--light.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--dark-unknown {
+  fill: #6f6f6f;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--dark-unknown .exp--status-icon--light.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--light-normal {
+  fill: #198038;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--light-normal .exp--status-icon--light.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--dark-normal {
+  fill: #198038;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--dark-normal .exp--status-icon--light.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--light-info {
+  fill: #0f62fe;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--light-info .exp--status-icon--light.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--dark-info {
+  fill: #0f62fe;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--dark-info .exp--status-icon--light.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--light-in-progress {
+  animation: rotating 8s infinite linear;
+  fill: #0f62fe;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .exp--status-icon--light.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--dark-in-progress {
+  animation: rotating 8s infinite linear;
+  fill: #0f62fe;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .exp--status-icon--light.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--light-running {
+  transform: scaleY(-1);
+  fill: #198038;
+}
+
+.exp--status-icon--light.exp--status-icon--dark-running {
+  transform: scaleY(-1);
+  fill: #198038;
+}
+
+.exp--status-icon--light.exp--status-icon--light-pending {
+  fill: #6f6f6f;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--light-pending .exp--status-icon--light.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--dark-pending {
+  fill: #6f6f6f;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--dark-pending .exp--status-icon--light.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--light-fatal {
+  fill: #c6c6c6;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--light-fatal .exp--status-icon--dark.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--dark-fatal {
+  fill: #c6c6c6;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--dark-fatal .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--light-critical {
+  fill: #fa4d56;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--light-critical .exp--status-icon--dark.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--dark-critical {
+  fill: #fa4d56;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--dark-critical .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--light-major-warning {
+  fill: #ff832b;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--light-major-warning .exp--status-icon--dark.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--dark-major-warning {
+  fill: #ff832b;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--dark-major-warning .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--light-undefined {
+  fill: #a56eff;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--light-undefined .exp--status-icon--dark.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--dark-undefined {
+  fill: #a56eff;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--dark-undefined .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--light-unknown {
+  fill: #a8a8a8;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--light-unknown .exp--status-icon--dark.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--dark-unknown {
+  fill: #a8a8a8;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--dark-unknown .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--light-normal {
+  fill: #42be65;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--light-normal .exp--status-icon--dark.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--dark-normal {
+  fill: #42be65;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--dark-normal .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--light-info {
+  fill: #4589ff;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--light-info .exp--status-icon--dark.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--dark-info {
+  fill: #4589ff;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--dark-info .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--light-in-progress {
+  animation: rotating 8s infinite linear;
+  fill: #4589ff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .exp--status-icon--dark.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--dark-in-progress {
+  animation: rotating 8s infinite linear;
+  fill: #4589ff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--light-running {
+  transform: scaleY(-1);
+  fill: #42be65;
+}
+
+.exp--status-icon--dark.exp--status-icon--dark-running {
+  transform: scaleY(-1);
+  fill: #42be65;
+}
+
+.exp--status-icon--dark.exp--status-icon--light-pending {
+  fill: #a8a8a8;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--light-pending .exp--status-icon--dark.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--dark-pending {
+  fill: #a8a8a8;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--dark-pending .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
 .exp--tearsheet {
   align-items: flex-end;
 }

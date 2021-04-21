@@ -40,10 +40,11 @@ export default {
 };
 
 // eslint-disable-next-line react/prop-types
-const Template = ({ actions, ...args }) => {
+const Template = ({ actions, size, ...args }) => {
   return (
-    <div className={`${blockClass}__story-container`}>
-      <ActionSet {...args} actions={actions} />
+    <div
+      className={`${blockClass}__story-container ${blockClass}__story-container--${size}`}>
+      <ActionSet {...{ actions, size, ...args }} />
     </div>
   );
 };

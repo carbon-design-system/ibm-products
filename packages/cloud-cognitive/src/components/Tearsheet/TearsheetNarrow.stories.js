@@ -118,7 +118,6 @@ const mainContent = (
       <p>Main content</p>
       <FormGroup>
         <TextInput labelText="Enter an important value here" />
-        <TextInput light labelText="Here is a light entry field:" />
       </FormGroup>
     </Form>
   </div>

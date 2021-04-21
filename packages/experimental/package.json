@@ -39,12 +39,19 @@
     "test": "bundler check '**/*.scss'"
   },
   "peerDependencies": {
+    "@carbon/icons-react": "^10.29.0",
+    "@carbon/import-once": "^10.5.0",
+    "carbon-components": "^10.32.1",
+    "carbon-components-react": "^7.32.1",
+    "carbon-icons": "^7.0.7",
     "react": "^16.13.1"
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
     "@carbon/ibm-cloud-cognitive": "^0.35.9",
-    "@carbon/telemetry": "^0.0.0-alpha.6"
+    "@carbon/ibm-cloud-cognitive-security": "^0.4.14",
+    "@carbon/telemetry": "^0.0.0-alpha.6",
+    "react-resize-detector": "^5.2.0"
   },
   "devDependencies": {
     "cross-env": "^7.0.3"

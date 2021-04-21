@@ -11,24 +11,28 @@
 $block-class: #{$pkg-prefix}--action-set;
 
 .#{$block-class}__story-container {
-  min-width: 90vw;
+  min-width: 96vw;
   min-height: 3rem;
   border: 1px solid $decorative-01;
   box-shadow: 0 0 10px 5px $ui-04;
 }
 
-.#{$block-class}.#{$block-class}--lg {
+.#{$block-class}__story-container--xlg {
+  min-width: 75vw;
+}
+
+.#{$block-class}__story-container--lg {
   min-width: 60vw;
 }
 
-.#{$block-class}.#{$block-class}--md {
+.#{$block-class}__story-container--md {
   min-width: 45vw;
 }
 
-.#{$block-class}.#{$block-class}--sm {
+.#{$block-class}__story-container--sm {
   min-width: 30vw;
 }
 
-.#{$block-class}.#{$block-class}--xs {
+.#{$block-class}__story-container--xs {
   min-width: 25vw;
 }

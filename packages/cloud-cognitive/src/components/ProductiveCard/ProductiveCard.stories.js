@@ -57,12 +57,14 @@ const defaultProps = {
       id: '1',
       icon: Edit16,
       onClick: () => {},
+      onkeydown: () => {},
       iconDescription: 'Edit',
     },
     {
       id: '2',
       icon: TrashCan16,
       onClick: () => {},
+      onkeydown: () => {},
       iconDescription: 'Delete',
     },
   ],
@@ -115,11 +117,13 @@ WithOverflow.args = {
       id: '1',
       itemText: 'Edit',
       onClick: () => {},
+      onkeydown: () => {},
     },
     {
       id: '2',
       itemText: 'Delete',
       onClick: () => {},
+      onkeydown: () => {},
     },
   ],
 };
@@ -141,6 +145,7 @@ export const Clickable = Template.bind({});
 Clickable.args = {
   ...defaultProps,
   onClick: () => {},
+  onkeydown: () => {},
   primaryButtonText: 'Ghost button',
   actionIcons: [],
 };

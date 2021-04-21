@@ -9,11 +9,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Card } from '../Card';
 import { pkg } from '../../settings';
-import { stripUnwantedProps } from '../../global/js/utils/props-helper';
+import { preparePassthroughProps } from '../../global/js/utils/props-helper';
 const componentName = 'ExpressiveCard';
 
 export let ExpressiveCard = (props) => {
-  const validProps = stripUnwantedProps(props, [
+  const validProps = preparePassthroughProps(props, [
     'actionIconsPosition',
     'overflowActions',
     'productive',

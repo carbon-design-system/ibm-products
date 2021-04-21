@@ -102,6 +102,7 @@ export let Tearsheet = React.forwardRef(
             <ActionSet
               actions={actions}
               size="max"
+              buttonSize="xl"
               className={`${blockClass}__buttons`}
             />
           )}

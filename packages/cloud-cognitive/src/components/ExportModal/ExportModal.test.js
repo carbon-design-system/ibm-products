@@ -27,7 +27,7 @@ const defaultProps = {
 };
 
 describe(name, () => {
-  test('default render with with extension validation', async () => {
+  it('default render with with extension validation', async () => {
     const { click, change, blur } = fireEvent;
     const { fn } = jest;
     const onRequestSubmit = fn();

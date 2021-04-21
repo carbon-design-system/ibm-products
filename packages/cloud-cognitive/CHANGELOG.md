@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.35.11](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.35.10...@carbon/ibm-cloud-cognitive@0.35.11) (2021-04-21)
+
+
+### Bug Fixes
+
+* **NotificationsPanel:** fix z index issue in bottom actions ([#629](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/629)) ([8700e7d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8700e7d7f09c33f39395ca76540db66cd9052d2d))
+
+
+
+
+
+## [0.35.10](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.35.9...@carbon/ibm-cloud-cognitive@0.35.10) (2021-04-21)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
 ## [0.35.9](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.35.8...@carbon/ibm-cloud-cognitive@0.35.9) (2021-04-20)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

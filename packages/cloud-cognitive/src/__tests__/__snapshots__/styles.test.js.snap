@@ -1249,7 +1249,7 @@ path:nth-of-type(1),
 }
 
 .exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main {
-  background: var(--cds-ui-02, #ffffff);
+  background: var(--cds-ui-background, #ffffff);
 }
 
 .exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--text-input,
@@ -1263,12 +1263,23 @@ path:nth-of-type(1),
   background-color: var(--cds-field-01, #f4f4f4);
 }
 
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--text-input--light,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--text-area--light,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--search--light .bx--search-input,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--select--light .bx--select-input,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--dropdown--light,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--dropdown--light .bx--dropdown-list,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--number--light input[type='number'],
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--date-picker--light .bx--date-picker__input {
+  background-color: var(--cds-field-02, #ffffff);
+}
+
 .exp--tearsheet .exp--tearsheet__buttons {
   border-top: 1px solid var(--cds-ui-03, #e0e0e0);
 }
 
 .exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__buttons {
-  background: var(--cds-ui-02, #ffffff);
+  background: var(--cds-ui-background, #ffffff);
 }
 "
 `;

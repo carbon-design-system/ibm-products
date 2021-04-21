@@ -604,6 +604,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--notifications-panel__container .exp--notifications-panel__bottom-actions {
   position: sticky;
   bottom: 0;
+  z-index: 2;
   display: flex;
   align-items: center;
   height: 2.5rem;

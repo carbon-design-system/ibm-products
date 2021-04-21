@@ -28,12 +28,7 @@ import PropTypes from 'prop-types';
 // The order of processing is: (1) start with the defaults, (2) apply the props
 // (replacing any defaults with matching keys), (3) discard any keys in the
 // blockList, (4) add override values (replacing any values with matching keys).
-export const preparePassthroughProps = (
-  props,
-  blockList,
-  overrides,
-  defaults
-) => {
+export const prepareProps = (props, blockList, overrides, defaults) => {
   const defaultedProps = Object.assign({}, defaults, props);
   const desiredProps = Object.keys(defaultedProps).reduce((acc, cur) => {
     if (!blockList.includes(cur)) acc[cur] = defaultedProps[cur];

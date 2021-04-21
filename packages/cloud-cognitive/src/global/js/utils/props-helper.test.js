@@ -1,18 +1,13 @@
-import { preparePassthroughProps } from './props-helper';
+import { prepareProps } from './props-helper';
 
 const defaults = { a: 1, b: 2, c: 3, d: 4, e: 5, f: 6, g: 7, h: 8 };
 const props = { e: 9, f: 10, g: 11, h: 12, i: 13, j: 14, k: 15, l: 16 };
 const overrides = { c: 17, d: 18, g: 19, h: 20, k: 21, l: 22, o: 23, p: 24 };
 const blockList = ['b', 'd', 'f', 'h', 'j', 'l', 'n', 'p'];
 
-describe('preparePassthroughProps', () => {
+describe('prepareProps', () => {
   it('applied correct overrides and blocks values', () => {
-    const result = preparePassthroughProps(
-      props,
-      blockList,
-      overrides,
-      defaults
-    );
+    const result = prepareProps(props, blockList, overrides, defaults);
 
     // defaulted
     expect(result.a).toEqual(1);

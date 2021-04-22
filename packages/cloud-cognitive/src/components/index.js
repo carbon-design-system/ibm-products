@@ -8,6 +8,7 @@
 export { AboutModal } from './AboutModal';
 export { ActionBarItem } from './ActionBar';
 export { ContextHeader } from './ContextHeader';
+export { CreateModal } from './CreateModal';
 export {
   EmptyState,
   ErrorEmptyState,
@@ -18,6 +19,7 @@ export {
   UnauthorizedEmptyState,
 } from './EmptyStates';
 export { ExampleComponent } from './ExampleComponent';
+export { ExportModal } from './ExportModal';
 export { HTTPError403, HTTPError404, HTTPErrorOther } from './HTTPErrors';
 export { ImportModal } from './ImportModal';
 export { ModifiedTabs } from './ModifiedTabs';

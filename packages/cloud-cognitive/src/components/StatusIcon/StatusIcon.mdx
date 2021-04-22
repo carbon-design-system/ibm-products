@@ -1,8 +1,11 @@
 import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
+import { pkg } from '../../settings';
+import { getStorybookSlug } from '../../../config';
+import { StatusIcon } from '.';
 
 # StatusIcon
 
-[C&CS Status Icons patttern usage guidelines](https://pages.github.ibm.com/cdai-design/pal/patterns/status-icons/)
+[C&CS Status Icons usage guidelines](https://pages.github.ibm.com/cdai-design/pal/patterns/status-icons/)
 
 ## Table of Contents
 
@@ -24,8 +27,14 @@ users to quickly assess and identify status and respond accordingly.
 ## Example usage
 
 <Preview>
-  <Story id="cloud-cognitive-canary-statusicon--default" />
+  <Story id={getStorybookSlug(pkg, StatusIcon.displayName, 'default')} />
 </Preview>
+
+## Accessibility
+
+In some instances, different teams may use `StatusIcon` to convey a message that
+is different than the `kind` prop provided. In this case, you can use the
+`iconDescription` prop to convey to a user what the icon means in your usage.
 
 ## Sizing
 

@@ -27,6 +27,7 @@ export let Card = ({
   media,
   mediaPosition,
   onClick,
+  onKeyDown,
   onPrimaryButtonClick,
   overflowActions,
   onSecondaryButtonClick,
@@ -58,7 +59,7 @@ export let Card = ({
   const getActions = () => {
     if (overflowActions.length !== 0) {
       const pos = actionIconsPosition === 'top' ? 'bottom' : 'top';
-      const size = actionIconsPosition === 'top' ? 'sm' : 'lg';
+      const size = actionIconsPosition === 'top' ? 'sm' : 'xl';
       return (
         <OverflowMenu size={size} direction={pos} flipped>
           {overflowActions.map(({ id, ...rest }) => (
@@ -71,10 +72,11 @@ export let Card = ({
     if (actionIcons.length === 0) return;
 
     const icons = actionIcons.map(
-      ({ id, icon: Icon, onClick, iconDescription }) => {
+      ({ id, icon: Icon, onClick, iconDescription, onKeyDown }) => {
         if (productive)
           return (
             <Button
+              key={id}
               renderIcon={Icon}
               hasIconOnly
               onClick={onClick}
@@ -84,7 +86,13 @@ export let Card = ({
             />
           );
         return (
-          <div key={id} className={`${pkg.prefix}-card-icon`}>
+          <div
+            key={id}
+            className={`${pkg.prefix}-card-icon`}
+            onClick={onClick}
+            onKeyDown={onKeyDown}
+            role="button"
+            tabIndex="0">
             <Icon aria-label={iconDescription} />
           </div>
         );
@@ -96,15 +104,16 @@ export let Card = ({
 
   const getClickableProps = () => ({
     onClick,
-    onKeyDown: onClick,
+    onKeyDown,
     role: 'button',
     tabIndex: '0',
   });
 
   const getCardProps = () => {
+    const hasClickEvent = !!onClick || !!onKeyDown;
     const clickable =
-      (!!onClick && !productive) ||
-      (!!onClick && productive && clickZone === 'one');
+      (hasClickEvent && !productive) ||
+      (hasClickEvent && productive && clickZone === 'one');
     const cardProps = {
       className: cx(`${pkg.prefix}-card`, {
         [`${pkg.prefix}-card--productive`]: productive,
@@ -119,7 +128,8 @@ export let Card = ({
   };
 
   const getHeaderBodyProps = () => {
-    const clickable = !!onClick && clickZone === 'two';
+    const hasClickEvent = !!onClick || !!onKeyDown;
+    const clickable = hasClickEvent && clickZone === 'two';
     const headerBodyProps = {
       className: cx(`${pkg.prefix}-card-header-body-container`, {
         [`${pkg.prefix}-card--clickable`]: clickable,
@@ -131,7 +141,8 @@ export let Card = ({
   };
 
   const getBodyProps = () => {
-    const clickable = !!onClick && clickZone === 'three';
+    const hasClickEvent = !!onClick || !!onKeyDown;
+    const clickable = hasClickEvent && clickZone === 'three';
     const bodyProps = {
       className: cx(`${pkg.prefix}-card-body`, {
         [`${pkg.prefix}-card--clickable`]: clickable,
@@ -208,7 +219,10 @@ Card.propTypes = {
   actionIcons: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
-      icon: PropTypes.object,
+      icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+      onKeyDown: PropTypes.func,
+      onClick: PropTypes.func,
+      iconDescription: PropTypes.string,
     })
   ),
   actionIconsPosition: PropTypes.oneOf(['top', 'bottom']),
@@ -220,6 +234,7 @@ Card.propTypes = {
   media: PropTypes.node,
   mediaPosition: PropTypes.oneOf(['top', 'left']),
   onClick: PropTypes.func,
+  onKeyDown: PropTypes.func,
   onPrimaryButtonClick: PropTypes.func,
   onSecondaryButtonClick: PropTypes.func,
   overflowActions: PropTypes.arrayOf(
@@ -227,6 +242,7 @@ Card.propTypes = {
       id: PropTypes.string,
       itemText: PropTypes.string,
       onClick: PropTypes.func,
+      onKeyDown: PropTypes.func,
     })
   ),
   pictogram: PropTypes.object,

@@ -21,22 +21,34 @@
     justify-content: flex-end;
   }
 
-  // For stacking,
-  // or row-single in medium,
-  // or for ghosts in row-single,
-  // buttons are 100% width -- so set that by default
+  .#{$block-class}.#{$block-class}--stack {
+    align-items: stretch;
+  }
+
   .#{$block-class} .#{$block-class}__action-button {
-    width: 100%;
-    max-width: 100%;
+    align-items: center;
+    max-width: none;
+    height: $spacing-10;
+    margin: 0;
+    padding-top: $spacing-05;
+    padding-bottom: $spacing-07;
+  }
+
+  // For row-single in medium,
+  // or for ghosts in row-single,
+  // buttons are 100% width
+  .#{$block-class}.#{$block-class}--row-single.#{$block-class}--md
+    .#{$block-class}__action-button,
+  .#{$block-class}.#{$block-class}--row-single
+    .#{$block-class}__action-button--ghost {
+    flex: 0 1 100%;
   }
 
   // For ghosts in row-double,
   // buttons are 75% width
-  .#{$block-class}__action-button,
   .#{$block-class}.#{$block-class}--row-double
     .#{$block-class}__action-button--ghost {
-    width: 75%;
-    max-width: 75%;
+    flex: 0 1 75%;
   }
 
   // For row-single in large (non-ghost),
@@ -51,8 +63,7 @@
     .#{$block-class}__action-button,
   .#{$block-class}.#{$block-class}--row-triple
     .#{$block-class}__action-button--ghost {
-    width: 50%;
-    max-width: 50%;
+    flex: 0 1 50%;
   }
 
   // For row-triple in large (non-ghost),
@@ -67,8 +78,7 @@
     .#{$block-class}__action-button:not(.#{$block-class}__action-button--ghost),
   .#{$block-class}.#{$block-class}--row-quadruple
     .#{$block-class}__action-button {
-    width: 25%;
-    max-width: 25%;
+    flex: 0 1 25%;
   }
 
   .#{$block-class} .#{$block-class}__action-button .bx--inline-loading {

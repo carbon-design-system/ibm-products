@@ -61,7 +61,7 @@ const defaultProps = {
   kind: 'fatal',
   size: 'sm',
   theme: 'light',
-  iconDescription: 'fatal icon',
+  iconDescription: 'Fatal',
 };
 
 const Template = (args) => {

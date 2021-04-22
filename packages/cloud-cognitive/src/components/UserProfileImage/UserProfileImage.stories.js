@@ -31,7 +31,7 @@ export default {
         options: ['light', 'dark'],
       },
     },
-    icon: {
+    kind: {
       control: {
         type: 'radio',
         options: ['user', 'group'],
@@ -40,7 +40,7 @@ export default {
     size: {
       control: {
         type: 'radio',
-        options: ['xl', 'lg', 'md', 'sm', 'xs'],
+        options: ['xlg', 'lg', 'md', 'sm', 'xs'],
       },
     },
   },
@@ -58,13 +58,16 @@ export const Default = Template.bind({});
 Default.args = {
   backgroundColor: 'light-cyan',
   theme: 'light',
+  size: 'xlg',
+  kind: 'user',
 };
 
 export const WithGroupIcon = Template.bind({});
 WithGroupIcon.args = {
   backgroundColor: 'light-cyan',
   theme: 'light',
-  icon: 'group',
+  kind: 'group',
+  size: 'xlg',
 };
 
 export const WithInitials = Template.bind({});
@@ -72,6 +75,7 @@ WithInitials.args = {
   backgroundColor: 'light-cyan',
   theme: 'light',
   initials: 'thomas j. watson',
+  size: 'xlg',
 };
 
 export const WithImage = Template.bind({});
@@ -79,4 +83,5 @@ WithImage.args = {
   backgroundColor: 'light-cyan',
   theme: 'light',
   image,
+  size: 'xlg',
 };

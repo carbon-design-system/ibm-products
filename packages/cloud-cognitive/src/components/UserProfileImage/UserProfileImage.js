@@ -39,9 +39,10 @@ export let UserProfileImage = React.forwardRef(
     {
       backgroundColor,
       className,
-      icon,
+      kind,
       initials,
       image,
+      imageDescription,
       size,
       theme,
       // Collect any other property values passed in.
@@ -55,14 +56,14 @@ export let UserProfileImage = React.forwardRef(
         sm: User16,
         md: User20,
         lg: User24,
-        xl: User32,
+        xlg: User32,
       },
       group: {
         xs: Group16,
         sm: Group16,
         md: Group20,
         lg: Group24,
-        xl: Group32,
+        xlg: Group32,
       },
     };
 
@@ -81,14 +82,14 @@ export let UserProfileImage = React.forwardRef(
     const FillItem = image
       ? () => (
           <img
-            alt=""
+            alt={imageDescription}
             src={image}
-            className={`${blockClass}-photo ${blockClass}-photo--${size}`}
+            className={`${blockClass}__photo ${blockClass}__photo--${size}`}
           />
         )
       : initials
       ? formatInitials
-      : icons[icon][size];
+      : icons[kind][size];
 
     return (
       <div
@@ -114,10 +115,10 @@ export let UserProfileImage = React.forwardRef(
 UserProfileImage = pkg.checkComponentEnabled(UserProfileImage, componentName);
 
 UserProfileImage.displayName = componentName;
-UserProfileImage.defaultProps = {
-  icon: 'user',
-  size: 'xl',
-};
+// UserProfileImage.defaultProps = {
+//   kind: 'user',
+//   size: 'xl',
+// };
 UserProfileImage.propTypes = {
   /**
    * The background color passed should match one of the background colors in the library documentation:
@@ -142,9 +143,9 @@ UserProfileImage.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * When passing the icon prop, use either "user" or "group". The values match up to the Carbon Library icons.
+   * When passing the kind prop, use either "user" or "group". The values match up to the Carbon Library icons.
    */
-  icon: PropTypes.oneOf(['user', 'group']),
+  kind: PropTypes.oneOf(['user', 'group']),
   /**
    * When passing the image prop, supply a full path to the image to be displayed.
    */
@@ -156,7 +157,7 @@ UserProfileImage.propTypes = {
   /**
    * Set the size of the avatar circle
    */
-  size: PropTypes.oneOf(['xl', 'lg', 'md', 'sm', 'xs']),
+  size: PropTypes.oneOf(['xlg', 'lg', 'md', 'sm', 'xs']).isRequired,
   /**
    * Set theme in which the component will be rendered
    */

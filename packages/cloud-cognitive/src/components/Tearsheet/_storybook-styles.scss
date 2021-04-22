@@ -9,8 +9,8 @@
 
 .tearsheet-stories__dummy-content-block {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: top;
+  justify-content: flex-start;
   height: 100%;
   padding: $layout-04;
 }

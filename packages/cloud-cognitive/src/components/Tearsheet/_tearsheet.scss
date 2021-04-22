@@ -215,7 +215,31 @@
   }
 
   .#{$block-class}.#{$block-class}--wide .#{$block-class}__main {
-    background: $ui-02;
+    background: $ui-background;
+
+    // revert the background colour overridden by bx--modal styles
+    .#{$prefix}--text-input,
+    .#{$prefix}--text-area,
+    .#{$prefix}--search-input,
+    .#{$prefix}--select-input,
+    .#{$prefix}--dropdown,
+    .#{$prefix}--dropdown-list,
+    .#{$prefix}--number input[type='number'],
+    .#{$prefix}--date-picker__input {
+      background-color: $field-01;
+    }
+
+    // and restore the 'light' prop in case light fields are wanted
+    .#{$prefix}--text-input--light,
+    .#{$prefix}--text-area--light,
+    .#{$prefix}--search--light .#{$prefix}--search-input,
+    .#{$prefix}--select--light .#{$prefix}--select-input,
+    .#{$prefix}--dropdown--light,
+    .#{$prefix}--dropdown--light .#{$prefix}--dropdown-list,
+    .#{$prefix}--number--light input[type='number'],
+    .#{$prefix}--date-picker--light .#{$prefix}--date-picker__input {
+      background-color: $field-02;
+    }
   }
 
   .#{$block-class} .#{$block-class}__buttons {
@@ -223,7 +247,7 @@
   }
 
   .#{$block-class}.#{$block-class}--wide .#{$block-class}__buttons {
-    background: $ui-02;
+    background: $ui-background;
   }
 }
 

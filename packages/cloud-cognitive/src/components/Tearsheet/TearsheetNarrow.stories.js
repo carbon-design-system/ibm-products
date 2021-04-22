@@ -11,7 +11,9 @@ import { action } from '@storybook/addon-actions';
 
 import { pkg } from '../../settings';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
-import { getStorybookPrefix } from '../../../config';
+
+import { Button, Form, FormGroup, TextInput } from 'carbon-components-react';
+
 import { Tearsheet, TearsheetNarrow } from '.';
 import {
   actionsOptions,
@@ -19,9 +21,8 @@ import {
   actionsMapping,
 } from '../ActionSet/actions.js';
 
+import { getStorybookPrefix } from '../../../config';
 const storybookPrefix = getStorybookPrefix(pkg, TearsheetNarrow.displayName);
-
-import { Button } from 'carbon-components-react';
 
 import styles from './_storybook-styles.scss';
 
@@ -112,7 +113,14 @@ const description = (
 const label = 'The label of the tearsheet';
 
 const mainContent = (
-  <div className="tearsheet-stories__dummy-content-block">Main content</div>
+  <div className="tearsheet-stories__dummy-content-block">
+    <Form>
+      <p>Main content</p>
+      <FormGroup>
+        <TextInput labelText="Enter an important value here" />
+      </FormGroup>
+    </Form>
+  </div>
 );
 
 const title = 'Title of the tearsheet';

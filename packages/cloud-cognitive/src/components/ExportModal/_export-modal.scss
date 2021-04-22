@@ -6,21 +6,31 @@
 @import 'carbon-components/scss/components/radio-button/radio-button';
 @import 'carbon-components/scss/components/loading/loading';
 
-.#{$pkg-prefix}-export-modal-body {
-  margin-bottom: $spacing-05;
+@mixin export-modal {
+  $block-class: #{$pkg-prefix}--export-modal;
+
+  .#{$block-class}-body {
+    margin-bottom: $spacing-05;
+  }
+
+  .#{$block-class}-messaging {
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$block-class}-messaging p {
+    margin-left: $spacing-03;
+  }
+
+  .#{$block-class}-checkmark-icon {
+    fill: $interactive-01;
+  }
+
+  .#{$block-class}-error-icon {
+    fill: $danger;
+  }
 }
 
-.#{$pkg-prefix}-export-modal-messaging {
-  display: flex;
-  align-items: center;
-}
-
-.#{$pkg-prefix}-export-modal-checkmark-icon {
-  margin-right: $spacing-03;
-  fill: $interactive-01;
-}
-
-.#{$pkg-prefix}-export-modal-error-icon {
-  margin-right: $spacing-03;
-  fill: $danger;
+@include exports('export-modal') {
+  @include export-modal;
 }

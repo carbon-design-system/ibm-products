@@ -25,6 +25,8 @@ import { TagSet } from '../';
 import { ButtonSetWithOverflow } from './ButtonSetWithOverflow';
 import { pkg } from '../../settings';
 import { ChevronUp16 } from '@carbon/icons-react';
+import { deprecatePropUsage } from '../../global/js/utils/props-helper';
+import unwrapIfFragment from '../../global/js/utils/unwrap-if-fragment';
 
 const componentName = 'PageHeader';
 const blockClass = `${pkg.prefix}-page-header`;
@@ -48,6 +50,7 @@ export let PageHeader = ({
   titleIcon: TitleIcon,
 }) => {
   const [hasActionBar, setHasActionBar] = useState(false);
+  const [actionBarItemArray, setActionBarItemArray] = useState([]);
   const [metrics, setMetrics] = useState({});
   const [scrollYValue, setScrollYValue] = useState(0);
   const [componentCssCustomProps, setComponentCssCustomProps] = useState({});
@@ -323,7 +326,7 @@ export let PageHeader = ({
       setScrollYValue(current.scrollY);
     },
     [
-      actionBarItems,
+      actionBarItemArray,
       availableSpace,
       breadcrumbItems,
       keepBreadcrumbAndTabs,
@@ -339,7 +342,7 @@ export let PageHeader = ({
     // on window resieze and other updates some values may have changed
     checkUpdateVerticalSpace();
   }, [
-    actionBarItems,
+    actionBarItemArray,
     availableSpace,
     breadcrumbItems,
     keepBreadcrumbAndTabs,
@@ -354,12 +357,26 @@ export let PageHeader = ({
     // Breadcrumb row only rendered if true
     // eslint-disable-next-line
     setHasBreadcrumbRow(
-      !(breadcrumbItems === undefined && actionBarItems === undefined)
+      !(breadcrumbItems === undefined && actionBarItemArray.length > 0)
     );
-  }, [actionBarItems, breadcrumbItems]);
+  }, [actionBarItemArray, breadcrumbItems]);
 
   useEffect(() => {
-    setHasActionBar(actionBarItems !== undefined);
+    setHasActionBar(actionBarItemArray.length > 0);
+  }, [actionBarItemArray]);
+
+  useEffect(() => {
+    let newActionBarItemArray;
+    // create child array from children which may be a fragment
+    if (actionBarItems) {
+      if (Array.isArray(actionBarItems)) {
+        newActionBarItemArray = actionBarItems;
+      } else {
+        const unwrapped = unwrapIfFragment(actionBarItems);
+        newActionBarItemArray = unwrapped.map((item) => item.props);
+      }
+    }
+    setActionBarItemArray(newActionBarItemArray || []);
   }, [actionBarItems]);
 
   useEffect(() => {
@@ -388,7 +405,7 @@ export let PageHeader = ({
     if (
       !result &&
       metrics.headerHeight > 0 &&
-      (breadcrumbItems || actionBarItems || tags || navigation)
+      (breadcrumbItems || actionBarItemArray || tags || navigation)
     ) {
       const startAddingAt = parseFloat(layout05, 10) * parseInt(baseFontSize);
       const scrollRemaining = metrics.headerHeight - scrollYValue;
@@ -410,7 +427,7 @@ export let PageHeader = ({
     }));
     setBackgroundOpacity(result);
   }, [
-    actionBarItems,
+    actionBarItemArray,
     background,
     breadcrumbItems,
     metrics.breadcrumbRowHeight,
@@ -427,7 +444,8 @@ export let PageHeader = ({
 
   const nextToTabsCheck = () => {
     return (
-      actionBarItems === undefined && scrollYValue + metrics.headerTopValue > 0
+      actionBarItemArray === undefined &&
+      scrollYValue + metrics.headerTopValue > 0
     );
   };
 
@@ -475,7 +493,7 @@ export let PageHeader = ({
                 [`${blockClass}--breadcrumb-row--next-to-tabs`]: nextToTabsCheck(),
                 [`${blockClass}--breadcrumb-row--has-breadcrumbs`]: breadcrumbItems,
                 [`${blockClass}--breadcrumb-row--has-action-bar`]:
-                  actionBarItems || pageActions,
+                  actionBarItemArray || pageActions,
               })}>
               <div className={`${blockClass}--breadcrumb-row--container`}>
                 <Column
@@ -537,7 +555,7 @@ export let PageHeader = ({
                             </div>
                           )}
                           <ActionBar
-                            actions={actionBarItems}
+                            actions={actionBarItemArray}
                             className={`${blockClass}--action-bar`}
                             onWidthChange={handleActionBarWidthChange}
                             rightAlign={true}
@@ -562,7 +580,7 @@ export let PageHeader = ({
                   [`${blockClass}--title-row--under-action-bar`]: hasActionBar,
                   [`${blockClass}--title-row--sticky`]:
                     pageActions !== undefined &&
-                    actionBarItems === undefined &&
+                    actionBarItemArray === undefined &&
                     hasBreadcrumbRow,
                 }
               )}>
@@ -615,7 +633,7 @@ export let PageHeader = ({
           This buffer is used in CSS instead to add vertical space after the last row but only if there is no navigation row
            */}
           {(breadcrumbItems ||
-            actionBarItems ||
+            actionBarItemArray ||
             title ||
             pageActions ||
             availableSpace ||
@@ -693,8 +711,13 @@ PageHeader.propTypes = {
         onClick: PropTypes.func,
       })
     ),
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.element,
+    deprecatePropUsage(
+      PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.element),
+        PropTypes.element,
+      ]),
+      'Expects an array of objects with the following properties: iconDescription, renderIcon and onClick.'
+    ),
   ]), // expects action bar item as array or in fragment
   /**
    * A zone for placing high-level, client content above the page tabs.

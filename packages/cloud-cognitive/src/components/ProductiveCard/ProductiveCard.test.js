@@ -15,7 +15,7 @@ const { name } = ProductiveCard;
 const defaultProps = {};
 
 describe(name, () => {
-  test('should render', async () => {
+  test('should render', () => {
     render(<ProductiveCard {...defaultProps} />);
   });
 });

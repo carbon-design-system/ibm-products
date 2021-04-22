@@ -19,7 +19,7 @@ export const stripUnwantedProps = (props, keys) => {
   return desiredProps;
 };
 
-export const deprecateProp = (validator, additionalInfo) => {
+const deprecatePropInner = (validator, messageFunction, additionalInfo) => {
   const deprecatePropValidator = (
     props,
     name,
@@ -30,9 +30,7 @@ export const deprecateProp = (validator, additionalInfo) => {
     if (props[name] !== null) {
       const info = additionalInfo ? ` ${additionalInfo}` : '';
       console.warn(
-        `The ${location} '${
-          propFullName || name
-        }' of '${componentName}' has been deprecated and will soon be removed.${info}`
+        messageFunction(location, propFullName || name, componentName, info)
       );
     }
 
@@ -40,4 +38,24 @@ export const deprecateProp = (validator, additionalInfo) => {
   };
 
   return PropTypes.oneOfType([deprecatePropValidator, validator]);
+};
+
+export const deprecatePropUsage = (validator, additionalInfo) => {
+  return deprecatePropInner(
+    validator,
+    (location, name, componentName, info) => {
+      return `The usage of ${location} '${name}' of '${componentName}' has been changed and you should update.${info}`;
+    },
+    additionalInfo
+  );
+};
+
+export const deprecateProp = (validator, additionalInfo) => {
+  return deprecatePropInner(
+    validator,
+    (location, name, componentName, info) => {
+      return `The ${location} '${name}' of '${componentName}' has been deprecated and will soon be removed.${info}`;
+    },
+    additionalInfo
+  );
 };

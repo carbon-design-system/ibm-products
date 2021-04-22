@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2021, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -44,6 +44,56 @@ const renderComponent = ({ ...rest }) =>
       <TextInput
         key="form-field-1"
         id="1"
+        labelText="Text input label"
+        helperText="Helper text goes here"
+        placeholder="Placeholder"
+      />
+    </CreateModal>
+  );
+
+const renderComponentWithAdditionalChildren = ({ ...rest }) =>
+  render(
+    <CreateModal
+      open
+      {...{
+        title,
+        subtitle,
+        description,
+        primaryFocus,
+        disableSubmit: false,
+        ...rest,
+      }}>
+      <TextInput
+        key="form-field-1"
+        id="1"
+        labelText="Text input label"
+        helperText="Helper text goes here"
+        placeholder="Placeholder"
+      />
+      <TextInput
+        key="form-field-2"
+        id="2"
+        labelText="Text input label"
+        helperText="Helper text goes here"
+        placeholder="Placeholder"
+      />
+      <TextInput
+        key="form-field-3"
+        id="3"
+        labelText="Text input label"
+        helperText="Helper text goes here"
+        placeholder="Placeholder"
+      />
+      <TextInput
+        key="form-field-4"
+        id="4"
+        labelText="Text input label"
+        helperText="Helper text goes here"
+        placeholder="Placeholder"
+      />
+      <TextInput
+        key="form-field-5"
+        id="5"
         labelText="Text input label"
         helperText="Helper text goes here"
         placeholder="Placeholder"

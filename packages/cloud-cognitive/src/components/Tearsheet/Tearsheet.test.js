@@ -187,7 +187,7 @@ const commonTests = (Ts, name) => {
     render(<Ts open />);
     expect(screen.getAllByRole('presentation')).toHaveLength(3);
     expect(warn).toBeCalledWith(
-      'Tearsheet not rendered: more than 3 levels of tearsheet stacking.'
+      'Tearsheet not rendered: maximum stacking depth exceeded.'
     );
   });
 };

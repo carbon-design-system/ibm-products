@@ -51,56 +51,6 @@ const renderComponent = ({ ...rest }) =>
     </CreateModal>
   );
 
-const renderComponentWithAdditionalChildren = ({ ...rest }) =>
-  render(
-    <CreateModal
-      open
-      {...{
-        title,
-        subtitle,
-        description,
-        primaryFocus,
-        disableSubmit: false,
-        ...rest,
-      }}>
-      <TextInput
-        key="form-field-1"
-        id="1"
-        labelText="Text input label"
-        helperText="Helper text goes here"
-        placeholder="Placeholder"
-      />
-      <TextInput
-        key="form-field-2"
-        id="2"
-        labelText="Text input label"
-        helperText="Helper text goes here"
-        placeholder="Placeholder"
-      />
-      <TextInput
-        key="form-field-3"
-        id="3"
-        labelText="Text input label"
-        helperText="Helper text goes here"
-        placeholder="Placeholder"
-      />
-      <TextInput
-        key="form-field-4"
-        id="4"
-        labelText="Text input label"
-        helperText="Helper text goes here"
-        placeholder="Placeholder"
-      />
-      <TextInput
-        key="form-field-5"
-        id="5"
-        labelText="Text input label"
-        helperText="Helper text goes here"
-        placeholder="Placeholder"
-      />
-    </CreateModal>
-  );
-
 describe(componentName, () => {
   it('renders a component CreateModal', () => {
     renderComponent();

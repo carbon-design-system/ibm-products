@@ -190,7 +190,6 @@ ActionBar.propTypes = {
    * Action items to be displayed in the bar.
    */
   actions: PropTypes.oneOfType([
-    // ActionBar.validateActions(),
     PropTypes.arrayOf(
       PropTypes.shape({
         iconDescription: PropTypes.string.isRequired,

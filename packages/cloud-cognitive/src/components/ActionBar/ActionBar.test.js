@@ -36,9 +36,7 @@ const ActionBarChildren = (
 const TestActionBar = ({ width, children, ...rest }) => {
   return (
     <div style={{ width, height: 40 }}>
-      <ActionBar className="fish" {...rest}>
-        {children}
-      </ActionBar>
+      <ActionBar {...rest}>{children}</ActionBar>
     </div>
   );
 };

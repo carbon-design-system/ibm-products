@@ -149,7 +149,12 @@ describe(TagSet.displayName, () => {
       selector: `.${pkg.prefix}-tag-set--displayed-tag .${carbon.prefix}--tag span`,
     });
 
-    expect(screen.getAllByText(/Tag [0-9]+/).length).toEqual(4);
+    expect(
+      screen.getAllByText(/Tag [0-9]+/, {
+        // selector need to ignore sizing items
+        selector: `.${pkg.prefix}-tag-set--displayed-tag .${carbon.prefix}--tag span`,
+      }).length
+    ).toEqual(5);
   });
 
   describe(TagSetModal.displayName, () => {

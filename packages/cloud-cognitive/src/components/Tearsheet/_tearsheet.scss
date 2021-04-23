@@ -151,8 +151,13 @@
 
   .#{$block-class}.#{$block-class}--wide .#{$block-class}__header {
     margin: 0;
-    padding: $spacing-06;
+    padding: $spacing-07;
     border-bottom: 1px solid $ui-03;
+  }
+
+  .#{$block-class}.#{$block-class}--narrow .#{$block-class}__header {
+    margin: 0;
+    padding: $spacing-05;
   }
 
   .#{$block-class}.#{$block-class}--wide

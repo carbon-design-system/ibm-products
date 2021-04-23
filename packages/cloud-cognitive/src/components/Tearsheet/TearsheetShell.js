@@ -170,6 +170,7 @@ export const TearsheetShell = React.forwardRef(
               open && (depth > 1 || (depth === 1 && prevDepth.current > 1)),
             [`${bc}--stacked-closed`]: !open && depth > 0,
             [`${bc}--wide`]: size === 'wide',
+            [`${bc}--narrow`]: size !== 'wide',
           })}
           containerClassName={cx(`${bc}__container`, {
             [`${bc}__container--lower`]: verticalPosition === 'lower',

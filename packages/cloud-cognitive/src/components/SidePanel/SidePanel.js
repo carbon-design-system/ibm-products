@@ -51,8 +51,8 @@ export let SidePanel = React.forwardRef(
       selectorPrimaryFocus,
       size,
       slideIn,
-      subtitleText,
-      titleText,
+      subtitle,
+      title,
       // Collect any other property values passed in.
       ...rest
     },
@@ -71,25 +71,19 @@ export let SidePanel = React.forwardRef(
     // set initial focus when side panel opens
     useEffect(() => {
       const initialFocus = (focusContainerElement) => {
-        /* istanbul ignore next */
-        const containerElement = focusContainerElement || sidePanelRef.current;
-        /* istanbul ignore next */
-        const primaryFocusElement = containerElement
-          ? containerElement.querySelector(selectorPrimaryFocus)
-          : null;
+        const containerElement = focusContainerElement;
+        const primaryFocusElement =
+          containerElement &&
+          containerElement.querySelector(selectorPrimaryFocus);
 
         if (primaryFocusElement) {
           return primaryFocusElement;
-        }
-
-        return sidePanelCloseRef && sidePanelCloseRef.current;
+        } else return sidePanelCloseRef && sidePanelCloseRef.current;
       };
 
       const focusButton = (focusContainerElement) => {
         const target = initialFocus(focusContainerElement);
-        if (target) {
-          target.focus();
-        }
+        target.focus();
       };
       if (open && animationComplete) {
         focusButton(sidePanelInnerRef.current);
@@ -112,6 +106,7 @@ export let SidePanel = React.forwardRef(
       };
     }, [actions, condensedActions, open, animationComplete]);
 
+    /* istanbul ignore next */
     const handleResize = () => {
       const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
       const actionsContainer = getActionsContainerElement();
@@ -141,6 +136,7 @@ export let SidePanel = React.forwardRef(
         const sidePanelSubtitleElement = document.querySelector(
           `.${`${blockClass}__subtitle-text`}`
         );
+        /* istanbul ignore next */
         sidePanelOuter &&
           sidePanelOuter.addEventListener('scroll', () => {
             const scrollTop = sidePanelRef.current.scrollTop;
@@ -245,18 +241,14 @@ export let SidePanel = React.forwardRef(
     // initialize the side panel to close
     const onAnimationEnd = () => {
       if (!open) setRender(false);
-      if (sidePanelRef && sidePanelRef.current) {
-        sidePanelRef.current.style.overflow = 'auto';
-        sidePanelRef.current.style.overflowX = 'hidden';
-      }
+      sidePanelRef.current.style.overflow = 'auto';
+      sidePanelRef.current.style.overflowX = 'hidden';
       setAnimationComplete(true);
     };
 
     // initializes the side panel to open and prevents the side panel from being scrolled during animation
     const onAnimationStart = () => {
-      if (sidePanelRef && sidePanelRef.current) {
-        sidePanelRef.current.style.overflow = 'hidden';
-      }
+      sidePanelRef.current.style.overflow = 'hidden';
       setAnimationComplete(false);
     };
 
@@ -295,8 +287,6 @@ export let SidePanel = React.forwardRef(
           return (sizeClassName = `${sizeClassName}--extra-small`);
         case 'sm':
           return (sizeClassName = `${sizeClassName}--small`);
-        case 'md':
-          return (sizeClassName = `${sizeClassName}--medium`);
         case 'lg':
           return (sizeClassName = `${sizeClassName}--large`);
         case 'max':
@@ -307,6 +297,7 @@ export let SidePanel = React.forwardRef(
     };
 
     // adds focus trap functionality
+    /* istanbul ignore next */
     const handleBlur = ({
       target: oldActiveNode,
       relatedTarget: currentActiveNode,
@@ -391,18 +382,18 @@ export let SidePanel = React.forwardRef(
                       tooltipPosition="right"
                       tooltipAlignment="center"
                       className={`${blockClass}__navigation-back-button`}
-                      onClick={() => onNavigationBack((prev) => prev - 1)}
+                      onClick={onNavigationBack}
                     />
                   )}
                   {labelText && labelText.length && (
                     <p className={`${blockClass}__label-text`}>{labelText}</p>
                   )}
-                  {titleText && titleText.length && (
+                  {title && title.length && (
                     <h2
                       className={`${blockClass}__title-text`}
                       ref={sidePanelTitleRef}
-                      title={titleText}>
-                      {titleText}
+                      title={title}>
+                      {title}
                     </h2>
                   )}
                   <Button
@@ -418,10 +409,8 @@ export let SidePanel = React.forwardRef(
                     ref={sidePanelCloseRef}
                   />
                 </div>
-                {subtitleText && subtitleText.length && (
-                  <p className={`${blockClass}__subtitle-text`}>
-                    {subtitleText}
-                  </p>
+                {subtitle && subtitle.length && (
+                  <p className={`${blockClass}__subtitle-text`}>{subtitle}</p>
                 )}
                 {actionToolbarButtons && actionToolbarButtons.length && (
                   <div className={`${blockClass}__action-toolbar`}>
@@ -443,7 +432,7 @@ export let SidePanel = React.forwardRef(
                           },
                         ])}
                         onClick={() => action.onActionToolbarButtonClick()}>
-                        {action.leading ? action.label : ''}
+                        {action.leading && action.label}
                       </Button>
                     ))}
                   </div>
@@ -610,12 +599,12 @@ SidePanel.propTypes = {
   /**
    * Sets the subtitle text
    */
-  subtitleText: PropTypes.string,
+  subtitle: PropTypes.string,
 
   /**
    * Sets the title text
    */
-  titleText: PropTypes.string,
+  title: PropTypes.string,
 };
 
 SidePanel.defaultProps = {

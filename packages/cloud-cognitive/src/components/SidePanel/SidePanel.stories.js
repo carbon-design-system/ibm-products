@@ -71,9 +71,9 @@ export default {
 const prefix = 'side-panel-stories__';
 
 const defaultStoryProps = {
-  titleText:
+  title:
     'Incident management for your application, testing a very long title to see how this behaves with a longer title',
-  subtitleText:
+  subtitle:
     'This is some text that would talk about how you could investigate incidednt management within this side panel.',
 };
 
@@ -342,7 +342,7 @@ const StepTemplate = (args) => {
         open={open}
         onRequestClose={() => setOpen(false)}
         currentStep={currentStep}
-        onNavigationBack={setCurrentStep}>
+        onNavigationBack={() => setCurrentStep((prev) => prev - 1)}>
         <ChildrenContentWithSteps
           currentStep={currentStep}
           setCurrentStep={setCurrentStep}

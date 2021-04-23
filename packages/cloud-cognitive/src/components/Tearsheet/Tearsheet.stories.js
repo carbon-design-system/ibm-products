@@ -176,8 +176,6 @@ AllAttributesSet.args = {
   label,
   navigation: tabs,
   onClose: action('onClose called'),
-  open: true,
-  preventCloseOnClickOutside: true,
   title,
   verticalPosition: 'normal',
   actions: 3,
@@ -190,12 +188,9 @@ export const NoHeaderNavigation = Template.bind({});
 NoHeaderNavigation.args = {
   closeIconDescription,
   description,
-  hasCloseIcon: true,
   influencer,
   label,
   onClose: action('onClose called'),
-  open: true,
-  preventCloseOnClickOutside: true,
   title,
   actions: 3,
 };
@@ -204,11 +199,8 @@ export const NoHeaderNavigationOrInfluencer = Template.bind({});
 NoHeaderNavigationOrInfluencer.args = {
   closeIconDescription,
   description,
-  hasCloseIcon: true,
   label,
   onClose: action('onClose called'),
-  open: true,
-  preventCloseOnClickOutside: true,
   title,
   actions: 3,
 };

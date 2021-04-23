@@ -155,6 +155,21 @@
     border-bottom: 1px solid $ui-03;
   }
 
+  .#{$block-class}.#{$block-class}--wide
+    .#{$block-class}__header--with-close-icon {
+    margin-right: $spacing-09;
+    padding-right: $spacing-05;
+  }
+
+  .#{$block-class} .#{$block-class}__header-content {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .#{$block-class} .#{$block-class}__header-actions {
+    padding-left: $spacing-06;
+  }
+
   .#{$block-class} .#{$block-class}__header--no-close-icon {
     display: none;
   }

@@ -19,11 +19,12 @@ export const actionsLabels = {
 };
 
 export const actionsMapping = (labels, action) => {
-  const act = (label, kind) => {
+  const act = (label, kind, key) => {
     const actionCall = action && action(`Click on '${label}'`);
     return {
       label,
       kind,
+      key,
       onClick:
         actionCall &&
         ((evt) => {
@@ -32,10 +33,10 @@ export const actionsMapping = (labels, action) => {
         }),
     };
   };
-  const primary = act(labels?.primary ?? 'Primary button', 'primary');
-  const secondary = act(labels?.secondary ?? 'Secondary button', 'secondary');
-  const secondary2 = act(labels?.secondary2 ?? 'Secondary button', 'secondary');
-  const ghost = act(labels?.ghost ?? 'Ghost button', 'ghost');
+  const primary = act(labels?.primary ?? 'Primary', 'primary', 1);
+  const secondary = act(labels?.secondary ?? 'Secondary', 'secondary', 2);
+  const secondary2 = act(labels?.secondary2 ?? 'Secondary', 'secondary', 3);
+  const ghost = act(labels?.ghost ?? 'Ghost', 'ghost', 4);
 
   return {
     0: [],

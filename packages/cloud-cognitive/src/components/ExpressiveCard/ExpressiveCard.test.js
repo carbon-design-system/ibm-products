@@ -15,7 +15,7 @@ const { name } = ExpressiveCard;
 const defaultProps = {};
 
 describe(name, () => {
-  test('should render', async () => {
+  test('should render', () => {
     render(<ExpressiveCard {...defaultProps} />);
   });
 });

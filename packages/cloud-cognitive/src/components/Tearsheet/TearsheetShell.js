@@ -14,133 +14,182 @@ import cx from 'classnames';
 import { pkg } from '../../settings';
 
 // Carbon and package components we use.
-import { ComposedModal } from 'carbon-components-react';
+import { ComposedModal, ModalHeader, ModalBody } from 'carbon-components-react';
+import { ActionSet } from '../ActionSet';
 
-// The block part of our conventional BEM class names (blockClass__E--M).
-const blockClass = `${pkg.prefix}--tearsheet`;
+// The block part of our conventional BEM class names (bc__E--M).
+const bc = `${pkg.prefix}--tearsheet`;
 const componentName = 'TearsheetShell';
 
-const maxStackingDepth = 3;
+const maxDepth = 3;
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
-// Global data structures to communicate the state of tearsheet stacking
-// (i.e. when more than one tearsheet is open). The stack array contains one
-// item per OPEN tearsheet, in the order of lowest to highest in the
-// visual z-order. Each item in the array is a callback that identifies an instance of
-// an open tearsheet. The stackHandlers array contains the full set of
-// callbacks to ALL open and closed tearsheets, which are called to
-// notify all the tearsheets whenever the stacking of the tearsheets changes.
-// This happens when a tearsheet opens or closes (and thus the stack array
-// entries change).
-let stack = [];
-let stackHandlers = [];
+// Global data structure to communicate the state of tearsheet stacking
+// (i.e. when more than one tearsheet is open). Each tearsheet supplies a
+// handler to be called whenever the stacking of the tearsheets changes, which
+// happens when a tearsheet opens or closes. The 'open' array contains one
+// handler per OPEN tearsheet ordered from lowest to highest in visual z-order.
+// The 'all' array contains all the handlers for open and closed tearsheets.
+const stack = { open: [], all: [] };
+
+// these props are only applicable when size='wide'
+export const tearsheetShellWideProps = [
+  'influencer',
+  'influencerPosition',
+  'influencerWidth',
+  'navigation',
+];
+
+// A simple <div> wrapper conditional on the content being truthy
+const Div = ({ children, cx, ...rest }) =>
+  children ? (
+    <div {...rest} className={cx}>
+      {children}
+    </div>
+  ) : null;
+
+Div.propTypes = { children: PropTypes.node, cx: PropTypes.string };
 
 // TearSheetShell is used internally by TearSheet and TearSheetNarrow
 export const TearsheetShell = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
+      actions,
       children,
       className,
+      closeIconDescription,
+      description,
+      hasCloseIcon,
+      influencer,
+      influencerPosition,
+      influencerWidth,
+      label,
+      navigation,
       onClose,
       open,
       preventCloseOnClickOutside,
       size,
+      title,
       verticalPosition,
+      // Collect any other property values passed in.
       ...rest
     },
     ref
   ) => {
-    const [stackSize, setStackSize] = useState(0);
-    const [stackPosition, setStackPosition] = useState(0);
+    // Keep track of the stack depth and our position in it (1-based, 0=closed)
+    const [depth, setDepth] = useState(0);
+    const [position, setPosition] = useState(0);
 
-    // Keep a record of the previous value of stacksize.
-    const prevStackSize = useRef();
+    // Keep a record of the previous value of depth.
+    const prevDepth = useRef();
     useEffect(() => {
-      prevStackSize.current = stackSize;
+      prevDepth.current = depth;
     });
 
-    // Hook called whenever the tearsheet mounts, unmounts, or the open
-    // prop changes value.
+    // Callback that will be called whenever the stacking order changes.
+    // position is 1-based with 0 indicating closed.
+    function handleStackChange(newDepth, newPosition) {
+      setDepth(newDepth);
+      setPosition(newPosition);
+    }
+
+    // Hook called whenever the tearsheet mounts, unmounts, or 'open' changes.
     useLayoutEffect(() => {
-      // Callback that will be called whenever the stacking order changes.
-      // (Also used as the identity of the tearsheet in the stack array.)
-      // stackPosition is 1-based with 0 indicating closed.
-      function handleStackChange(newStackSize, newStackPosition) {
-        setStackSize(Math.min(newStackSize, maxStackingDepth));
-        setStackPosition(newStackPosition);
-      }
+      const notify = () =>
+        stack.all.forEach((handler) =>
+          handler(
+            Math.min(stack.open.length, maxDepth),
+            stack.open.indexOf(handler) + 1
+          )
+        );
 
       // Register this tearsheet's stack change callback/listener.
-      stackHandlers.push(handleStackChange);
+      stack.all.push(handleStackChange);
 
       // If the tearsheet is mounting with open=true or open is changing from
       // false to true to open it then append its notification callback to
       // the end of the stack array (as its ID), and call all the callbacks
       // to notify all open tearsheets that the stacking has changed.
       if (open) {
-        stack.push(handleStackChange);
-        stackHandlers.forEach((handler) =>
-          handler(stack.length, stack.indexOf(handler) + 1)
-        );
+        stack.open.push(handleStackChange);
+        notify();
       }
 
       // Cleanup function called whenever the tearsheet unmounts or the open
       // prop changes value (in which case it is called prior to this hook
       // being called again).
       return function cleanup() {
-        // Remove the notification callback from the stack array, and call
-        // all the callbacks in the array to notify all open tearsheets
-        // if the stacking has changed. This is only necessary if the
-        // tearsheet was open and is either closing or unmounting (i.e
-        // if it has a callback in the stack array that gets removed).
-        const initialStackSize = stack.length;
-        stack = stack.filter((handler) => handler !== handleStackChange);
-        if (stack.length !== initialStackSize) {
-          stackHandlers.forEach((handler) =>
-            handler(stack.length, stack.indexOf(handler) + 1)
-          );
+        // Remove the notification callback from the all handlers array.
+        stack.all.splice(stack.all.indexOf(handleStackChange), 1);
+
+        // Remove the notification callback from the open handlers array, if
+        // it's there, and notify all open tearsheets that the stacking has
+        // changed (only necessary if this tearsheet was open).
+        const openIndex = stack.open.indexOf(handleStackChange);
+        if (openIndex >= 0) {
+          stack.open.splice(openIndex, 1);
+          notify();
         }
-        stackHandlers = stackHandlers.filter(
-          (handler) => handler !== handleStackChange
-        );
       };
     }, [open]);
 
-    const classes = cx({
-      [`${blockClass}`]: true,
-      [`${blockClass}--stacked-${stackPosition}-of-${stackSize}`]:
-        open && stackSize > 1,
-      [`${blockClass}--stacked-1-of-1`]:
-        open && stackSize === 1 && prevStackSize.current === 2, // Don't apply this on the initial open of a single tearsheet.
-      [`${blockClass}--stacked-closed`]: !open && stackSize > 0,
-      [`${blockClass}--wide`]: size === 'wide',
-      [className]: className,
-    });
-    const containerClasses = cx({
-      [`${blockClass}__container`]: true,
-      [`${blockClass}__container--lower`]: verticalPosition === 'lower',
-    });
-
-    if (stackPosition <= maxStackingDepth) {
+    if (position <= depth) {
       return (
         <ComposedModal
           {
             // Pass through any other property values.
             ...rest
           }
-          className={classes}
-          containerClassName={containerClasses}
+          className={cx(bc, className, {
+            [`${bc}--stacked-${position}-of-${depth}`]:
+              // Don't apply this on the initial open of a single tearsheet.
+              open && (depth > 1 || (depth === 1 && prevDepth.current > 1)),
+            [`${bc}--stacked-closed`]: !open && depth > 0,
+            [`${bc}--wide`]: size === 'wide',
+          })}
+          containerClassName={cx(`${bc}__container`, {
+            [`${bc}__container--lower`]: verticalPosition === 'lower',
+          })}
           {...{ onClose, open, preventCloseOnClickOutside, ref }}
           size="sm">
-          {children}
+          {(label || title || description || navigation || hasCloseIcon) && (
+            <ModalHeader
+              className={`${bc}__header`}
+              closeClassName={cx({
+                [`${bc}__header--no-close-icon`]: !hasCloseIcon,
+              })}
+              {...{ iconDescription: closeIconDescription, label, title }}>
+              <Div cx={`${bc}__header-description`}>{description}</Div>
+              <Div cx={`${bc}__header-navigation`}>{navigation}</Div>
+            </ModalHeader>
+          )}
+          <ModalBody className={`${bc}__body`}>
+            <Div
+              cx={cx({
+                [`${bc}__influencer`]: true,
+                [`${bc}__influencer--right`]: influencerPosition === 'right',
+                [`${bc}__influencer--wide`]: influencerWidth === 'wide',
+              })}>
+              {influencer}
+            </Div>
+            <Div cx={`${bc}__right`}>
+              <Div cx={`${bc}__main`}>{children}</Div>
+              {actions && actions.length > 0 && (
+                <ActionSet
+                  actions={actions}
+                  buttonSize={size === 'wide' ? 'xl' : null}
+                  className={`${bc}__buttons`}
+                  size={size === 'wide' ? 'max' : 'lg'}
+                />
+              )}
+            </Div>
+          </ModalBody>
         </ComposedModal>
       );
     } else {
-      console.warn(
-        'Tearsheet not rendered: more than 3 levels of tearsheet stacking.'
-      );
+      console.warn('Tearsheet not rendered: maximum stacking depth exceeded.');
       return null;
     }
   }
@@ -153,53 +202,129 @@ TearsheetShell.displayName = componentName;
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
+
+// Note that the descriptions here should be kept in sync with those for the
+// corresponding props for Tearsheet and TearsheetNarrow components.
 TearsheetShell.propTypes = {
   /**
-   * Specifies the content of the TearsheetShell.
+   * The actions to be shown as buttons in the action area at the bottom of the
+   * tearsheet. Each action is specified as an object with optional fields
+   * 'label' to supply the button label, 'kind' to select the button kind (must
+   * be 'primary', 'secondary' or 'ghost'), 'loading' to display a loading
+   * indicator, and 'onClick' to receive notifications when the button is
+   * clicked. Additional fields in the object will be passed to the Button
+   * component, and these can include 'disabled', 'ref', 'className', and any
+   * other Button props. Any other fields in the object will be passed through
+   * to the button element as HTML attributes.
+   */
+  actions: PropTypes.arrayOf(
+    // NB we don't include the validator here, as the component wrapping this
+    // one should ensure appropriate validation is done.
+    PropTypes.shape({
+      label: PropTypes.string,
+      onPrimaryActionClick: PropTypes.func,
+      kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
+      disabled: PropTypes.bool,
+      loading: PropTypes.bool,
+    })
+  ),
+
+  /**
+   * The main content of the tearsheet.
    */
   children: PropTypes.node,
 
   /**
-   * Specifies class(es) to be applied to the top-level PageHeader node.
-   * Optional.
+   * An optional class or classes to be added to the outermost element.
    */
   className: PropTypes.string,
 
   /**
-   * Specifies an optional handler for closing modal. Returning `false`
-   * here prevents the modal from closing.
+   * The accessibility title for the close icon (if shown).
+   */
+  closeIconDescription: PropTypes.string,
+
+  /**
+   * A description of the flow, displayed in the header area of the tearsheet.
+   */
+  description: PropTypes.node,
+
+  /**
+   * Enable a close icon ('x') in the header area of the tearsheet. By default,
+   * a tearsheet does not display a close icon, but one should be enabled if
+   * the tearsheet is read-only or has no navigation actions (sometimes called
+   * a "passive tearsheet").
+   */
+  hasCloseIcon: PropTypes.bool,
+
+  /**
+   * The content for the influencer section of the tearsheet, displayed
+   * alongside the main content. This is typically a menu, or filter, or
+   * progress indicator, or similar. NB the influencer is only applicable for
+   * wide tearsheets.
+   */
+  influencer: PropTypes.element,
+
+  /**
+   * The position of the influencer section, 'left' or 'right'.
+   */
+  influencerPosition: PropTypes.oneOf(['left', 'right']),
+
+  /**
+   * The width of the influencer: 'narrow' (the default) is 256px, and 'wide'
+   * is 320px.
+   */
+  influencerWidth: PropTypes.oneOf(['narrow', 'wide']),
+
+  /**
+   * A label for the tearsheet, displayed in the header area of the tearsheet
+   * to maintain context for the tearsheet (e.g. as the title changes from page
+   * to page of a multi-page task).
+   */
+  label: PropTypes.node,
+
+  /**
+   * Navigation content, such as a set of tabs, to be displayed at the bottom
+   * of the header area of the tearsheet. NB the navigation is only applicable
+   * for wide tearsheets.
+   */
+  navigation: PropTypes.element,
+
+  /**
+   * An optional handler that is called when the user closes the tearsheet (by
+   * clicking the close button, if enabled, or clicking outside, if enabled).
+   * Returning `false` here prevents the modal from closing.
    */
   onClose: PropTypes.func,
 
   /**
-   * Specifies whether the Tearsheet is currently open or not.
+   * Specifies whether the tearsheet is currently open.
    */
   open: PropTypes.bool,
 
   /**
-   * Prevents the TearsheetShell from closing automatically if the user clicks outside of it.
+   * Prevent the tearsheet from automatically closing (triggering onClose, if
+   * provided, which can be cancelled by returning 'false') if the user clicks
+   * outside it.
    */
   preventCloseOnClickOutside: PropTypes.bool,
 
   /**
-   * Specifies the width of the Tearsheet. `'narrow' | 'wide'`
+   * Specifies the width of the tearsheet, 'narrow' or 'wide'.
    */
   size: PropTypes.oneOf(['narrow', 'wide']).isRequired,
 
   /**
-   * Specifies the position of the top of tearsheet in the viewport. The
-   * 'normal' position is a short distance down from the top of the viewport,
-   * leaving room at the top for a header bar to show through from below. The
-   * 'lower' position provides a little extra room at the top to allow an action
-   * bar navigation or breadcrumbs to also show through.
+   * The main title of the tearsheet, displayed in the header area.
+   */
+  title: PropTypes.node,
+
+  /**
+   * The position of the top of tearsheet in the viewport. The 'normal'
+   * position (the default) is a short distance down from the top of the
+   * viewport, leaving room at the top for a global header bar to show through
+   * from below. The 'lower' position provides a little extra room at the top
+   * to allow an action bar navigation or breadcrumbs to also show through.
    */
   verticalPosition: PropTypes.oneOf(['normal', 'lower']),
-};
-
-// Default values for component props. Default values are not required for
-// props that are required, nor for props where the component can apply
-// 'undefined' values reasonably. Default values should be provided when the
-// component needs to make a choice or assumption when a prop is not supplied.
-TearsheetShell.defaultProps = {
-  verticalPosition: 'normal',
 };

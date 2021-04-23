@@ -21,6 +21,7 @@ import {
 import { Lightning16, Bee32 } from '@carbon/icons-react';
 
 import { PageHeader } from '.';
+import { ActionBarItem } from '../ActionBar';
 
 /* Test properties. */
 const pageActionItemOnClick = jest.fn();
@@ -29,6 +30,19 @@ const actionBarItems = [1, 2, 3, 4].map((item) => ({
   iconDescription: `Action ${item}`,
   onClick: () => {},
 }));
+
+const actionBarItemsNodes = (
+  <>
+    <ActionBarItem
+      renderIcon={Lightning16}
+      label="Action 1"
+      onClick={() => {}}
+    />
+    <ActionBarItem renderIcon={Lightning16} label="Action 2" />
+    <ActionBarItem renderIcon={Lightning16} label="Action 3" />
+    <ActionBarItem renderIcon={Lightning16} label="Action 4" />
+  </>
+);
 
 const availableSpace = <span className="page-header-test--available-space" />;
 const breadcrumbItems = (
@@ -187,5 +201,17 @@ describe('PageHeader', () => {
     expect(
       document.querySelectorAll(`.${pkg.prefix}-page-header--title-icon`)
     ).toHaveLength(1);
+  });
+
+  test('copes with actionBarItems as nodes', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    render(<PageHeader actionBarItems={actionBarItemsNodes} />);
+
+    expect(warn).toBeCalledWith(
+      "The usage of prop 'actionBarItems' of 'PageHeader' has been changed and you should update. Expects an array of objects with the following properties: iconDescription, renderIcon and onClick."
+    );
+
+    warn.mockRestore(); // Remove mock
   });
 });

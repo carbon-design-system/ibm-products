@@ -9,11 +9,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Card } from '../Card';
 import { pkg } from '../../settings';
-import { stripUnwantedProps } from '../../global/js/utils/props-helper';
+import { prepareProps } from '../../global/js/utils/props-helper';
 const componentName = 'ProductiveCard';
 
 export let ProductiveCard = (props) => {
-  const validProps = stripUnwantedProps(props, [
+  const validProps = prepareProps(props, [
     'media',
     'mediaPosition',
     'onSecondaryButtonClick',

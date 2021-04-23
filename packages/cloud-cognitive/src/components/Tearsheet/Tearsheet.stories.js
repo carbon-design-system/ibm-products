@@ -11,7 +11,14 @@ import { action } from '@storybook/addon-actions';
 
 import { pkg } from '../../settings';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
-import { Button, Tab, Tabs } from 'carbon-components-react';
+import {
+  Button,
+  Form,
+  FormGroup,
+  Tab,
+  Tabs,
+  TextInput,
+} from 'carbon-components-react';
 
 import { Tearsheet, TearsheetNarrow } from '.';
 import {
@@ -114,7 +121,15 @@ const influencer = (
 const label = 'The label of the tearsheet';
 
 const mainContent = (
-  <div className="tearsheet-stories__dummy-content-block">Main content</div>
+  <div className="tearsheet-stories__dummy-content-block">
+    <Form>
+      <p>Main content</p>
+      <FormGroup>
+        <TextInput labelText="Enter an important value here" />
+        <TextInput light labelText="Here is a light entry field:" />
+      </FormGroup>
+    </Form>
+  </div>
 );
 
 const tabs = (
@@ -161,8 +176,6 @@ AllAttributesSet.args = {
   label,
   navigation: tabs,
   onClose: action('onClose called'),
-  open: true,
-  preventCloseOnClickOutside: true,
   title,
   verticalPosition: 'normal',
   actions: 3,
@@ -175,12 +188,9 @@ export const NoHeaderNavigation = Template.bind({});
 NoHeaderNavigation.args = {
   closeIconDescription,
   description,
-  hasCloseIcon: true,
   influencer,
   label,
   onClose: action('onClose called'),
-  open: true,
-  preventCloseOnClickOutside: true,
   title,
   actions: 3,
 };
@@ -189,11 +199,8 @@ export const NoHeaderNavigationOrInfluencer = Template.bind({});
 NoHeaderNavigationOrInfluencer.args = {
   closeIconDescription,
   description,
-  hasCloseIcon: true,
   label,
   onClose: action('onClose called'),
-  open: true,
-  preventCloseOnClickOutside: true,
   title,
   actions: 3,
 };

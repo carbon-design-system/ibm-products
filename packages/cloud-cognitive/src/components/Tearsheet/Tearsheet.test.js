@@ -77,7 +77,7 @@ const commonTests = (Ts, name) => {
   });
 
   it('omits main content sections when no props supplied', () => {
-    render(<Ts hasCloseIcon={false} />);
+    render(<Ts />);
     expect(document.querySelector(`.${blockClass}__header`)).toBeNull();
     expect(document.querySelector(`.${blockClass}__influencer`)).toBeNull();
     expect(document.querySelector(`.${blockClass}__main`)).toBeNull();
@@ -105,7 +105,7 @@ const commonTests = (Ts, name) => {
   });
 
   it('renders closeIconDescription', () => {
-    render(<Ts {...{ closeIconDescription }} />);
+    render(<Ts hasCloseIcon {...{ closeIconDescription }} />);
     screen.getByRole('button', { name: closeIconDescription });
   });
 
@@ -115,9 +115,9 @@ const commonTests = (Ts, name) => {
   });
 
   it('responds to hasCloseIcon', () => {
-    render(<Ts hasCloseIcon={false} />);
-    expect(document.querySelector(`.${blockClass}__header`)).toBeNull();
-    expect(screen.queryByRole('button', { name: 'Close' })).toBeNull();
+    render(<Ts hasCloseIcon />);
+    expect(document.querySelector(`.${blockClass}__header`)).not.toBeNull();
+    screen.getByRole('button', { name: 'Close' });
   });
 
   it('renders label', () => {
@@ -126,7 +126,7 @@ const commonTests = (Ts, name) => {
   });
 
   it('calls onClose() when the tearsheet is closed', () => {
-    render(<Ts onClose={onCloseReturnsTrue} open />);
+    render(<Ts hasCloseIcon onClose={onCloseReturnsTrue} open />);
     const tearsheet = screen.getByRole('presentation');
     const closeButton = screen.getByRole('button', { name: 'Close' });
     expect(tearsheet).toHaveClass('is-visible');
@@ -137,7 +137,7 @@ const commonTests = (Ts, name) => {
   });
 
   it('allows veto when the tearsheet is closed', () => {
-    render(<Ts onClose={onCloseReturnsFalse} open />);
+    render(<Ts hasCloseIcon onClose={onCloseReturnsFalse} open />);
     const tearsheet = screen.getByRole('presentation');
     const closeButton = screen.getByRole('button', { name: 'Close' });
     expect(tearsheet).toHaveClass('is-visible');
@@ -187,7 +187,7 @@ const commonTests = (Ts, name) => {
     render(<Ts open />);
     expect(screen.getAllByRole('presentation')).toHaveLength(3);
     expect(warn).toBeCalledWith(
-      'Tearsheet not rendered: more than 3 levels of tearsheet stacking.'
+      'Tearsheet not rendered: maximum stacking depth exceeded.'
     );
   });
 };

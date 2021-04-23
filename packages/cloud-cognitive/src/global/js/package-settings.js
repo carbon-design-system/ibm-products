@@ -15,6 +15,7 @@ const defaults = {
     NotificationsPanel: true,
     StatusIcon: true,
     Tearsheet: true,
+    TearsheetNarrow: true,
 
     // other public components not yet reviewed and released:
     ActionBarItem: false,
@@ -43,7 +44,6 @@ const defaults = {
     Saving: false,
     SidePanel: false,
     TagSet: false,
-    TearsheetNarrow: false,
     UnauthorizedEmptyState: false,
     UserProfileImage: false,
     WebTerminal: false,

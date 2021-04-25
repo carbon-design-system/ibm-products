@@ -284,7 +284,29 @@ unclear.
 
 ## Stories
 
-- There should be a set of stories to cover the design scenarios. The stories
-  should expose all relevant props and actions.
+- There should be a set of stories to cover the design scenarios. Note that
+  there does not necessarily need to be a separate story for each scenario,
+  providing each scenario can be experienced using the stories provided.
+- The stories should expose all relevant props in the controls panel. In
+  particular:
+  - Ensure that prop-types and DocGen comment appear in the component source
+    files, in order to fully and usefully populate the storybook controls panel
+    and the props table on the documentation page.
+  - Props that can be directly edited (strings, numbers, colors, etc) should
+    have appropriate controls, which may mean overriding the default control
+    types where necessary.
+  - Props that cannot be directly edited, such as props that take arrays or
+    object structures or DOM fragments incorporating specific assets, should be
+    given useful options, for example by using a 'select' control type with a
+    selection of relevant choices (including 'none').
+  - Some props may require some extra controls to be included in the story in
+    order to illustrate them correctly, in which case their controls in the
+    controls panel should be disabled so as not to make conflicting changes.
+  - Props that cannot usefully be modified in the story context (for example,
+    handlers) should be disabled in the controls panel.
+- The stories should also expose all relevant actions and behaviors. This may
+  require adding some extra controls to the stories, and coding some handlers
+  and simple actions. Reproducing a full use case isn't necessary, especially
+  where it becomes intricate or complicated.
 - Additional usage documentation and code samples should be made available on
   the 'Docs' tab along with the props table.

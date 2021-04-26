@@ -11,7 +11,7 @@ import React, { useEffect, useLayoutEffect, useState, useRef } from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 
 // Carbon and package components we use.
 import { ComposedModal, ModalHeader, ModalBody } from 'carbon-components-react';
@@ -19,6 +19,7 @@ import { ActionSet } from '../ActionSet';
 
 // The block part of our conventional BEM class names (bc__E--M).
 const bc = `${pkg.prefix}--tearsheet`;
+const bcModalHeader = `${carbon.prefix}--modal-header`;
 const componentName = 'TearsheetShell';
 
 const maxDepth = 3;
@@ -35,21 +36,28 @@ const stack = { open: [], all: [] };
 
 // these props are only applicable when size='wide'
 export const tearsheetShellWideProps = [
+  'headerActions',
   'influencer',
   'influencerPosition',
   'influencerWidth',
   'navigation',
 ];
 
-// A simple <div> wrapper conditional on the content being truthy
-const Div = ({ children, cx, ...rest }) =>
+// A simple <div> (or other element) wrapper that only renders conditionally
+// on the content being truthy
+const DivIf = ({ Element, children, cx, ...rest }) =>
   children ? (
-    <div {...rest} className={cx}>
+    <Element {...rest} className={cx}>
       {children}
-    </div>
+    </Element>
   ) : null;
 
-Div.propTypes = { children: PropTypes.node, cx: PropTypes.string };
+DivIf.propTypes = {
+  Element: PropTypes.string,
+  children: PropTypes.node,
+  cx: PropTypes.string,
+};
+DivIf.defaultProps = { Element: 'div' };
 
 // TearSheetShell is used internally by TearSheet and TearSheetNarrow
 export const TearsheetShell = React.forwardRef(
@@ -62,6 +70,7 @@ export const TearsheetShell = React.forwardRef(
       closeIconDescription,
       description,
       hasCloseIcon,
+      headerActions,
       influencer,
       influencerPosition,
       influencerWidth,
@@ -136,47 +145,76 @@ export const TearsheetShell = React.forwardRef(
     }, [open]);
 
     if (position <= depth) {
+      // we include a modal header if and only if one or more of these is given
+      const includeHeader =
+        label ||
+        title ||
+        description ||
+        headerActions ||
+        navigation ||
+        hasCloseIcon;
+
+      // We include an ActionSet if and only if one or more actions is given
+      const includeActions = actions && actions?.length > 0;
+
       return (
         <ComposedModal
           {
             // Pass through any other property values.
             ...rest
           }
+          aria-label={title}
           className={cx(bc, className, {
             [`${bc}--stacked-${position}-of-${depth}`]:
               // Don't apply this on the initial open of a single tearsheet.
               open && (depth > 1 || (depth === 1 && prevDepth.current > 1)),
             [`${bc}--stacked-closed`]: !open && depth > 0,
             [`${bc}--wide`]: size === 'wide',
+            [`${bc}--narrow`]: size !== 'wide',
           })}
           containerClassName={cx(`${bc}__container`, {
             [`${bc}__container--lower`]: verticalPosition === 'lower',
           })}
           {...{ onClose, open, preventCloseOnClickOutside, ref }}
           size="sm">
-          {(label || title || description || navigation || hasCloseIcon) && (
+          {includeHeader && (
             <ModalHeader
-              className={`${bc}__header`}
+              className={cx(`${bc}__header`, {
+                [`${bc}__header--with-close-icon`]: hasCloseIcon,
+              })}
               closeClassName={cx({
                 [`${bc}__header--no-close-icon`]: !hasCloseIcon,
               })}
-              {...{ iconDescription: closeIconDescription, label, title }}>
-              <Div cx={`${bc}__header-description`}>{description}</Div>
-              <Div cx={`${bc}__header-navigation`}>{navigation}</Div>
+              iconDescription={closeIconDescription}>
+              <DivIf cx={`${bc}__header-content`}>
+                <DivIf>
+                  {/* we create the label and title here instead of passing them
+                      as modal header props so we can wrap them in layout divs */}
+                  <DivIf Element="h2" cx={`${bcModalHeader}__label`}>
+                    {label}
+                  </DivIf>
+                  <DivIf Element="h3" cx={`${bcModalHeader}__heading`}>
+                    {title}
+                  </DivIf>
+                  <DivIf cx={`${bc}__header-description`}>{description}</DivIf>
+                </DivIf>
+                <DivIf cx={`${bc}__header-actions`}>{headerActions}</DivIf>
+              </DivIf>
+              <DivIf cx={`${bc}__header-navigation`}>{navigation}</DivIf>
             </ModalHeader>
           )}
           <ModalBody className={`${bc}__body`}>
-            <Div
+            <DivIf
               cx={cx({
                 [`${bc}__influencer`]: true,
                 [`${bc}__influencer--right`]: influencerPosition === 'right',
                 [`${bc}__influencer--wide`]: influencerWidth === 'wide',
               })}>
               {influencer}
-            </Div>
-            <Div cx={`${bc}__right`}>
-              <Div cx={`${bc}__main`}>{children}</Div>
-              {actions && actions.length > 0 && (
+            </DivIf>
+            <DivIf cx={`${bc}__right`}>
+              <DivIf cx={`${bc}__main`}>{children}</DivIf>
+              {includeActions && (
                 <ActionSet
                   actions={actions}
                   buttonSize={size === 'wide' ? 'xl' : null}
@@ -184,7 +222,7 @@ export const TearsheetShell = React.forwardRef(
                   size={size === 'wide' ? 'max' : 'lg'}
                 />
               )}
-            </Div>
+            </DivIf>
           </ModalBody>
         </ComposedModal>
       );
@@ -256,6 +294,14 @@ TearsheetShell.propTypes = {
    * a "passive tearsheet").
    */
   hasCloseIcon: PropTypes.bool,
+
+  /**
+   * The content for the header actions area, displayed alongside the title in
+   * the header area of the tearsheet. This is typically a drop-down, or a set
+   * of small buttons, or similar. NB the headerActions is only applicable for
+   * wide tearsheets.
+   */
+  headerActions: PropTypes.element,
 
   /**
    * The content for the influencer section of the tearsheet, displayed

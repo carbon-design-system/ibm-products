@@ -33,8 +33,8 @@ describe(TagSet.displayName, () => {
           let width = 0;
 
           if (
-            this.classList.contains('exp-tag-set--sizing-tag') ||
-            this.classList.contains('exp-tag-set--overflow')
+            this.classList.contains(`${blockClass}__sizing-tag`) ||
+            this.classList.contains(`${blockClass}__overflow`)
           ) {
             width = tagWidth; // all tags 100 in size
           } else {

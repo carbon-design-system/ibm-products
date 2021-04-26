@@ -10,23 +10,28 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 import ReactResizeDetector from 'react-resize-detector';
-import { ButtonSet } from 'carbon-components-react';
+import { ButtonSet, Button } from 'carbon-components-react';
 
 import { TempComboButton } from './TempComboButton';
 
 import { pkg, carbon } from '../../settings';
-const blockClass = `${pkg.prefix}-button-set-with-overflow`;
+import { deprecateProp } from '../../global/js/utils/props-helper';
+import unwrapIfFragment from '../../global/js/utils/unwrap-if-fragment';
+const blockClass = `${pkg.prefix}--button-set-with-overflow`;
 const componentName = 'ButtonSetWithOverflow';
 
 export const ButtonSetWithOverflow = ({
+  buttons,
   children,
   className,
   onWidthChange,
+  size,
 }) => {
   const [showAsOverflow, setShowAsOverflow] = useState(false);
   const spaceAvailableRef = useRef(null);
   const sizingContainerRefSet = useRef(null);
   const sizingContainerRefCombo = useRef(null);
+  const [itemArray, setItemArray] = useState([]);
 
   // determine display count based on space available and width of pageActions
   const checkFullyVisibleItems = () => {
@@ -61,7 +66,7 @@ export const ButtonSetWithOverflow = ({
   useEffect(() => {
     checkFullyVisibleItems();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [children]);
+  }, [itemArray]);
 
   const handleResize = () => {
     // width is the space available for all action bar items horizontally
@@ -73,32 +78,74 @@ export const ButtonSetWithOverflow = ({
     checkFullyVisibleItems();
   };
 
+  useEffect(() => {
+    if (buttons) {
+      setItemArray(buttons);
+    } else {
+      const unwrapped = unwrapIfFragment(children);
+      setItemArray(
+        unwrapped.map((item) => {
+          const { children: label, ...rest } = item.props;
+          return { label, ...rest };
+        })
+      );
+    }
+  }, [buttons, children]);
+
+  const AButtonSet = React.forwardRef(({ buttons, size, ...rest }, ref) => {
+    console.log('asize', size);
+    return (
+      <ButtonSet {...rest} ref={ref}>
+        {buttons.map(({ label, ...other }, index) => (
+          <Button key={index} {...other} size={size} type="button">
+            {label}
+          </Button>
+        ))}
+      </ButtonSet>
+    );
+  });
+  const ATempComboButton = React.forwardRef(
+    ({ buttons, size, ...rest }, ref) => {
+      console.log('tsize', size);
+      return (
+        <TempComboButton {...rest} buttons={buttons} size={size} ref={ref} />
+      );
+    }
+  );
+
+  console.log('size', size);
+
   return (
     <ReactResizeDetector handleWidth={true} onResize={handleResize}>
       <div className={cx([blockClass, className])} ref={spaceAvailableRef}>
         <ReactResizeDetector onResize={handleButtonResize}>
           <div
-            className={`${blockClass}--button-container ${blockClass}--button-container--hidden`}>
-            <ButtonSet aria-hidden={true} ref={sizingContainerRefSet}>
-              {children}
-            </ButtonSet>
+            className={`${blockClass}__button-container ${blockClass}__button-container--hidden`}>
+            <AButtonSet
+              aria-hidden={true}
+              ref={sizingContainerRefSet}
+              size={size}
+              buttons={itemArray}
+            />
           </div>
         </ReactResizeDetector>
         <ReactResizeDetector onResize={handleButtonResize}>
           <div
             ref={sizingContainerRefCombo}
-            className={`${blockClass}--button-container ${blockClass}--button-container--hidden`}
+            className={`${blockClass}__button-container ${blockClass}__button-container--hidden`}
             aria-hidden={true}>
-            <TempComboButton buttons={children} />
+            <ATempComboButton buttons={itemArray} size={size} />
           </div>
         </ReactResizeDetector>
 
         {showAsOverflow ? (
-          <TempComboButton buttons={children} />
+          <ATempComboButton buttons={itemArray} size={size} />
         ) : (
-          <ButtonSet className={`${blockClass}--button-container`}>
-            {children}
-          </ButtonSet>
+          <AButtonSet
+            className={`${blockClass}__button-container`}
+            size={size}
+            buttons={itemArray}
+          />
         )}
       </div>
     </ReactResizeDetector>
@@ -107,12 +154,26 @@ export const ButtonSetWithOverflow = ({
 
 ButtonSetWithOverflow.propTypes = {
   /**
+   * Button shape things for us to render.
+   */
+  buttons: PropTypes.oneOfType([
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        label: PropTypes.node,
+        onClick: PropTypes.func,
+      })
+    ),
+  ]),
+  /**
    * children of the button set
    */
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.element,
-  ]), // expects action bar item as array or in fragment,
+  children: deprecateProp(
+    PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.element),
+      PropTypes.element,
+    ]),
+    "See documentation on the 'buttons' property."
+  ), // expects action bar item as array or in fragment,
   /**
    * className
    */
@@ -121,8 +182,15 @@ ButtonSetWithOverflow.propTypes = {
    * onResize reports maxSize on resize
    */
   onWidthChange: PropTypes.func,
+  /**
+   * Specify the size of the button, from a list of available sizes.
+   * For `default` buttons, this prop can remain unspecified.
+   */
+  size: PropTypes.oneOf(['default', 'field', 'small', 'sm', 'lg', 'xl']),
 };
 
-ButtonSetWithOverflow.defaultProps = {};
+ButtonSetWithOverflow.defaultProps = {
+  size: 'field',
+};
 
 ButtonSetWithOverflow.displayName = componentName;

@@ -27,7 +27,7 @@ const defaultProps = {
 };
 
 describe(name, () => {
-  it('default render with with extension validation', async () => {
+  it('default render with with extension validation', () => {
     const { click, change, blur } = fireEvent;
     const { fn } = jest;
     const onRequestSubmit = fn();
@@ -46,8 +46,12 @@ describe(name, () => {
     click(submitBtn);
     expect(onRequestSubmit).not.toBeCalled();
 
-    change(textInput, { target: { value: 'test.mp3' } });
+    change(textInput, { target: { value: 'test' } });
     blur(textInput);
+    click(submitBtn);
+    expect(onRequestSubmit).not.toBeCalled();
+
+    change(textInput, { target: { value: 'test.mp3' } });
     click(submitBtn);
     expect(onRequestSubmit).not.toBeCalled();
 
@@ -63,5 +67,38 @@ describe(name, () => {
 
     rerender(<ExportModal {...props} successful />);
     expect(getByText(props.successMessage)).toBeVisible();
+  });
+
+  it('with preformatted extensions', () => {
+    const { click } = fireEvent;
+    const { fn } = jest;
+    const onRequestSubmit = fn();
+    const props = {
+      ...defaultProps,
+      onRequestSubmit,
+      filename: 'test',
+      preformattedExtensions: [
+        {
+          extension: 'YAML',
+          description: 'best for IBM managed cloud',
+        },
+        {
+          extension: 'BAR',
+          description: 'best for integration server',
+        },
+      ],
+      preformattedExtensionsLabel: 'Choose an export format',
+    };
+
+    const { container, getByText, getByLabelText } = render(
+      <ExportModal {...props} />
+    );
+    const submitBtn = container.querySelector('.bx--btn--primary');
+
+    expect(getByText(props.preformattedExtensionsLabel)).toBeVisible();
+    click(getByLabelText('BAR (best for integration server)'));
+    click(submitBtn);
+    expect(onRequestSubmit).toBeCalled();
+    expect(onRequestSubmit).toBeCalledWith('test.bar');
   });
 });

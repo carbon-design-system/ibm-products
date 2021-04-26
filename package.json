@@ -18,7 +18,7 @@
     "build:storybook": "yarn build:storybook-dependencies-only && yarn build:storybook-only",
     "build:storybook-dependencies-only": "yarn build $(lerna ls --scope @carbon/ibm-cloud-cognitive-core --include-dependencies | grep -v '^@carbon/ibm-cloud-cognitive-core$' | xargs -n1 echo '--scope')",
     "build:storybook-only": "cd packages/core && yarn build",
-    "cdai-coverage": "yarn test packages/cloud-cognitive/src/components --coverage --collectCoverageFrom=packages/cloud-cognitive/src/components/**/*.js --collectCoverageFrom=!packages/cloud-cognitive/src/components/**/*.stories.js",
+    "ccs-coverage": "yarn test packages/cloud-cognitive/src/components --coverage --collectCoverageFrom=packages/cloud-cognitive/src/components/**/*.js --collectCoverageFrom=!packages/cloud-cognitive/src/components/**/*.stories.js",
     "ci-check": "yarn format:diff && yarn lint && yarn test --ci && lerna run ci-check --stream",
     "clean": "yarn cache clean && lerna run clean && lerna clean --yes",
     "copy-common-files": "sh ./scripts/copy-common-files.sh;",

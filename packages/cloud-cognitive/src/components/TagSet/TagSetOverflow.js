@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import cx from 'classnames';
@@ -30,14 +30,9 @@ export const TagSetOverflow = React.forwardRef(
     const [tipOpen, setTipOpen] = useState(false);
     const overflowTagContent = useRef(null);
 
-    const showTip = () => {
-      setTipOpen(true);
+    const handleChange = (ev, { open }) => {
+      setTipOpen(open);
     };
-
-    const hideTip = () => {
-      setTipOpen(false);
-    };
-
     const handleShowAllTagsClick = (ev) => {
       ev.stopPropagation();
       ev.preventDefault();
@@ -45,47 +40,21 @@ export const TagSetOverflow = React.forwardRef(
       onShowAllClick();
     };
 
-    const handleClickOutsideCheck = useCallback(
-      (ev) => {
-        const tooltipEl =
-          overflowTagContent.current &&
-          overflowTagContent.current.parentElement.parentElement;
-        if (
-          tooltipEl &&
-          (tooltipEl === ev.target || tooltipEl.contains(ev.target))
-        ) {
-          // inside click
-          return;
-        }
-        hideTip(ev);
-      },
-      [overflowTagContent]
-    );
-
-    useEffect(() => {
-      // Check for a click outside of the tooltip
-      document.addEventListener('mousedown', handleClickOutsideCheck);
-      // remove listener on destroy
-      return () => {
-        document.removeEventListener('mousedown', handleClickOutsideCheck);
-      };
-    }, [handleClickOutsideCheck]);
-
     return (
       <span
         aria-hidden={overflowTags.length === 0}
         className={cx(`${blockClass}--overflow`, {
           [`${blockClass}--overflow--hidden`]: overflowTags.length === 0,
         })}
-        onFocus={showTip}>
+        ref={ref}>
         <Tooltip
           align={overflowAlign}
           className={`${blockClass}--tooltip`}
           direction={overflowDirection}
+          onChange={handleChange}
           open={tipOpen}
           triggerText={<Tag>+{overflowTags.length}</Tag>}
-          showIcon={false}
-          ref={ref}>
+          showIcon={false}>
           <div
             ref={overflowTagContent}
             className={`${blockClass}--overflow-content`}>

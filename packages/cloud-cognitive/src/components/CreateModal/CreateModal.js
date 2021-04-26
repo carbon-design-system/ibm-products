@@ -27,13 +27,13 @@ const componentName = 'CreateModal';
 const blockClass = `${pkg.prefix}--create-modal`;
 
 // Custom PropType validator which checks and ensures that the children property has no more than 4 nodes
-const isValidChildren = () => (props) => {
-  let child = props.children.props.children;
-  if (child && child.length > 4) {
+const isValidChildren = () => ({ children }) => {
+  if (children && children.length > 4) {
     throw new Error(
       'The `CreateModal` component does not take more than 4 nodes as children. This is to ensure that the modal does not overflow. Please remove 1 or more nodes.'
     );
-  } else return;
+  }
+  return;
 };
 
 export let CreateModal = React.forwardRef(
@@ -66,22 +66,12 @@ export let CreateModal = React.forwardRef(
         aria-label="modal"
         size="sm"
         preventCloseOnClickOutside>
-        <ModalHeader
-          title={title}
-          titleClassName={`${blockClass}__title bx--modal-content__regular-content`}>
-          {subtitle && (
-            <p
-              className={`${blockClass}__subtitle bx--modal-content__regular-content`}>
-              {subtitle}
-            </p>
-          )}
+        <ModalHeader title={title} titleClassName={`${blockClass}__title`}>
+          {subtitle && <p className={`${blockClass}__subtitle`}>{subtitle}</p>}
         </ModalHeader>
         <ModalBody hasForm>
           {description && (
-            <p
-              className={`${blockClass}__description bx--modal-content__regular-content`}>
-              {description}
-            </p>
+            <p className={`${blockClass}__description`}>{description}</p>
           )}
           <Form className={cx(`${blockClass}__form`)}>{children}</Form>
         </ModalBody>

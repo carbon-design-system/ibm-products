@@ -29,7 +29,7 @@ const primaryFocus = '.bx--text-input';
 const dataTestId = uuidv4();
 
 // render a CreateModal with title, subtitle, description, and any other required props
-const renderComponent = ({ ...rest }) =>
+const renderComponent = ({ ...rest }, children) =>
   render(
     <CreateModal
       open
@@ -41,13 +41,7 @@ const renderComponent = ({ ...rest }) =>
         disableSubmit: false,
         ...rest,
       }}>
-      <TextInput
-        key="form-field-1"
-        id="1"
-        labelText="Text input label"
-        helperText="Helper text goes here"
-        placeholder="Placeholder"
-      />
+      {children}
     </CreateModal>
   );
 
@@ -141,8 +135,67 @@ describe(componentName, () => {
   });
 
   it('applies focus to selected element', () => {
-    const { container } = renderComponent({ primaryFocus });
+    const { container } = renderComponent(
+      { primaryFocus },
+      <TextInput
+        key="form-field-1"
+        id="1"
+        labelText="Text input label"
+        helperText="Helper text goes here"
+        placeholder="Placeholder"
+      />
+    );
     const firstInput = container.querySelector(primaryFocus);
     expect(firstInput === document.activeElement).toBeTruthy();
+  });
+
+  it('throws an error if there are more than 4 child nodes inside of the modal', () => {
+    const { container } = renderComponent(
+      {},
+      <TextInput
+        key="form-field-1"
+        id="1"
+        labelText="Text input label"
+        helperText="Helper text goes here"
+        placeholder="Placeholder"
+      />,
+      <TextInput
+        key="form-field-2"
+        id="2"
+        labelText="Text input label"
+        helperText="Helper text goes here"
+        placeholder="Placeholder"
+      />,
+      <TextInput
+        key="form-field-3"
+        id="3"
+        labelText="Text input label"
+        helperText="Helper text goes here"
+        placeholder="Placeholder"
+      />,
+      <TextInput
+        key="form-field-4"
+        id="4"
+        labelText="Text input label"
+        helperText="Helper text goes here"
+        placeholder="Placeholder"
+      />,
+      <TextInput
+        key="form-field-5"
+        id="5"
+        labelText="Text input label"
+        helperText="Helper text goes here"
+        placeholder="Placeholder"
+      />
+    );
+    const form = container.querySelector(
+      '.bx--modal-content.bx--modal-content--with-form .bx--form.exp--create-modal__form'
+    );
+    console.log(form.children.length);
+    // expect(() => {
+    //   render(container);
+    // }).toThrow(
+    //   'The `CreateModal` component does not take more than 4 nodes as children. This is to ensure that the modal does not overflow. Please remove 1 or more nodes.'
+    // );
   });
 });

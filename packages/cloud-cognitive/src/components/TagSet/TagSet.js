@@ -16,7 +16,7 @@ import ReactResizeDetector from 'react-resize-detector';
 
 import { pkg } from '../../settings';
 const componentName = 'TagSet';
-const blockClass = `${pkg.prefix}-tag-set`;
+const blockClass = `${pkg.prefix}--tag-set`;
 
 export let TagSet = ({
   children,

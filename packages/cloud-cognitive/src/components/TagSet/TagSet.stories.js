@@ -14,7 +14,7 @@ import '../../utils/enable-all'; // must come before component is imported (dire
 import { getStorybookPrefix } from '../../../config';
 import { TagSet } from '.';
 const storybookPrefix = getStorybookPrefix(pkg, TagSet.displayName);
-const blockClass = `${pkg.prefix}-tag-set`;
+const blockClass = `${pkg.prefix}--tag-set`;
 
 const TagItems = [
   <Tag key="tag1" type="blue">

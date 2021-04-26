@@ -12,7 +12,7 @@ import { Modal, Search } from 'carbon-components-react';
 
 import { pkg } from '../../settings';
 const componentName = 'TagSetModal';
-const blockClass = `${pkg.prefix}-tag-set`;
+const blockClass = `${pkg.prefix}--tag-set`;
 
 export const TagSetModal = ({
   allTags,

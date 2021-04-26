@@ -12,7 +12,7 @@
 @import 'carbon-components/scss/components/tooltip/tooltip';
 @import 'carbon-components/scss/components/tag/tag';
 
-$block-class: #{$pkg-prefix}-tag-set;
+$block-class: #{$pkg-prefix}--tag-set;
 
 .#{$block-class} {
   display: block;

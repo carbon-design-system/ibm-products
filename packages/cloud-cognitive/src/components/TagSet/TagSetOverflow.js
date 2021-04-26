@@ -14,7 +14,7 @@ import { Link, Tag, Tooltip } from 'carbon-components-react';
 
 import { pkg } from '../../settings';
 const componentName = 'TagSetOverflow';
-const blockClass = `${pkg.prefix}-tag-set`;
+const blockClass = `${pkg.prefix}--tag-set`;
 
 export const TagSetOverflow = React.forwardRef(
   (

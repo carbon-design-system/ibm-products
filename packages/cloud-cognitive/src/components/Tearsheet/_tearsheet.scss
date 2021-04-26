@@ -151,8 +151,28 @@
 
   .#{$block-class}.#{$block-class}--wide .#{$block-class}__header {
     margin: 0;
-    padding: $spacing-06;
+    padding: $spacing-07;
     border-bottom: 1px solid $ui-03;
+  }
+
+  .#{$block-class}.#{$block-class}--narrow .#{$block-class}__header {
+    margin: 0;
+    padding: $spacing-05;
+  }
+
+  .#{$block-class}.#{$block-class}--wide
+    .#{$block-class}__header--with-close-icon {
+    margin-right: $spacing-09;
+    padding-right: $spacing-05;
+  }
+
+  .#{$block-class} .#{$block-class}__header-content {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .#{$block-class} .#{$block-class}__header-actions {
+    padding-left: $spacing-06;
   }
 
   .#{$block-class} .#{$block-class}__header--no-close-icon {
@@ -215,7 +235,31 @@
   }
 
   .#{$block-class}.#{$block-class}--wide .#{$block-class}__main {
-    background: $ui-02;
+    background: $ui-background;
+
+    // revert the background colour overridden by bx--modal styles
+    .#{$prefix}--text-input,
+    .#{$prefix}--text-area,
+    .#{$prefix}--search-input,
+    .#{$prefix}--select-input,
+    .#{$prefix}--dropdown,
+    .#{$prefix}--dropdown-list,
+    .#{$prefix}--number input[type='number'],
+    .#{$prefix}--date-picker__input {
+      background-color: $field-01;
+    }
+
+    // and restore the 'light' prop in case light fields are wanted
+    .#{$prefix}--text-input--light,
+    .#{$prefix}--text-area--light,
+    .#{$prefix}--search--light .#{$prefix}--search-input,
+    .#{$prefix}--select--light .#{$prefix}--select-input,
+    .#{$prefix}--dropdown--light,
+    .#{$prefix}--dropdown--light .#{$prefix}--dropdown-list,
+    .#{$prefix}--number--light input[type='number'],
+    .#{$prefix}--date-picker--light .#{$prefix}--date-picker__input {
+      background-color: $field-02;
+    }
   }
 
   .#{$block-class} .#{$block-class}__buttons {
@@ -223,7 +267,7 @@
   }
 
   .#{$block-class}.#{$block-class}--wide .#{$block-class}__buttons {
-    background: $ui-02;
+    background: $ui-background;
   }
 }
 

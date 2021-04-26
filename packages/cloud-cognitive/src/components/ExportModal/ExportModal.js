@@ -35,6 +35,7 @@ export let ExportModal = ({
   successful,
   validExtensions,
 }) => {
+  const blockClass = `${pkg.prefix}--export-modal`;
   const internalId = useRef(uuidv4());
   const [name, setName] = useState(filename);
   const [dirtyInput, setDirtyInput] = useState(false);
@@ -86,13 +87,13 @@ export let ExportModal = ({
       modalHeading={modalHeading}
       onRequestSubmit={onSubmitHandler}
       onRequestClose={onCloseHandler}
-      className={`${pkg.prefix}-export-modal`}
+      className={blockClass}
       primaryButtonDisabled={primaryButtonDisabled}
       passiveModal={submitted}>
-      <div className={`${pkg.prefix}-export-modal-inner`}>
+      <div className={`${blockClass}-inner`}>
         {!submitted && (
           <>
-            <p className={`${pkg.prefix}-export-modal-body`}>{modalBody}</p>
+            <p className={`${blockClass}-body`}>{modalBody}</p>
             {preformattedExtensions.length ? (
               <FormGroup legendText={preformattedExtensionsLabel}>
                 <RadioButtonGroup
@@ -123,28 +124,26 @@ export let ExportModal = ({
             )}
           </>
         )}
-        {loading && (
-          <div className={`${pkg.prefix}-export-modal-messaging`}>
-            <Loading small withOverlay={false} />
-            <p>{loadingMessage}</p>
-          </div>
-        )}
-        {successful && (
-          <div className={`${pkg.prefix}-export-modal-messaging`}>
-            <CheckmarkFilled16
-              className={`${pkg.prefix}-export-modal-checkmark-icon`}
-            />
-            <p>{successMessage}</p>
-          </div>
-        )}
-        {error && (
-          <div className={`${pkg.prefix}-export-modal-messaging`}>
-            <ErrorFilled16
-              className={`${pkg.prefix}-export-modal-error-icon`}
-            />
-            <p>{errorMessage}</p>
-          </div>
-        )}
+        <div className={`${blockClass}-messaging`}>
+          {loading && (
+            <>
+              <Loading small withOverlay={false} />
+              <p>{loadingMessage}</p>
+            </>
+          )}
+          {successful && (
+            <>
+              <CheckmarkFilled16 className={`${blockClass}-checkmark-icon`} />
+              <p>{successMessage}</p>
+            </>
+          )}
+          {error && (
+            <>
+              <ErrorFilled16 className={`${blockClass}-error-icon`} />
+              <p>{errorMessage}</p>
+            </>
+          )}
+        </div>
       </div>
     </Modal>
   );

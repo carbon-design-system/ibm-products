@@ -9,11 +9,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Card } from '../Card';
 import { pkg } from '../../settings';
-import { stripUnwantedProps } from '../../global/js/utils/props-helper';
+import { prepareProps } from '../../global/js/utils/props-helper';
 const componentName = 'ExpressiveCard';
 
 export let ExpressiveCard = (props) => {
-  const validProps = stripUnwantedProps(props, [
+  const validProps = prepareProps(props, [
     'actionIconsPosition',
     'overflowActions',
     'productive',
@@ -32,7 +32,10 @@ ExpressiveCard.propTypes = {
   actionIcons: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
-      icon: PropTypes.object,
+      icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+      onKeyDown: PropTypes.func,
+      onClick: PropTypes.func,
+      iconDescription: PropTypes.string,
     })
   ),
   /**

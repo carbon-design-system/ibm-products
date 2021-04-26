@@ -21,7 +21,7 @@ const blockClass = `${pkg.prefix}-tag-set`;
 export let TagSet = ({
   children,
   className,
-  maxVisibleTags,
+  maxVisible,
   rightAlign,
   overflowAlign,
   overflowDirection,
@@ -37,7 +37,7 @@ export let TagSet = ({
   const [showAllModalOpen, setShowAllModalOpen] = useState(false);
   const tagSet = useRef(null);
   const displayedArea = useRef(null);
-  const sizingTags = useRef([]);
+  const [sizingTags, setSizingTags] = useState([]);
   const overflowTag = useRef(null);
 
   const handleShowAllClick = () => {
@@ -52,21 +52,24 @@ export let TagSet = ({
         : []
     );
 
+    const newSizingTags = [];
     // use children as sizing tags
     setHiddenSizingTags(
+      /* istanbul ignore next */
       children && children.length > 0
         ? children.map((child, index) => {
             return (
               <div
                 key={index}
                 className={`${blockClass}--sizing-tag`}
-                ref={(el) => (sizingTags.current[index] = el)}>
+                ref={(el) => (newSizingTags[index] = el)}>
                 {child}
               </div>
             );
           })
         : []
     );
+    setSizingTags(newSizingTags);
   }, [children]);
 
   useEffect(() => {
@@ -113,44 +116,51 @@ export let TagSet = ({
   const checkFullyVisibleTags = useCallback(() => {
     // how many will fit?
     let willFit = 0;
-    let spaceAvailable = tagSet.current.offsetWidth;
 
-    for (let i in sizingTags.current) {
-      const tagWidth = sizingTags.current[i].offsetWidth;
-      if (spaceAvailable >= tagWidth) {
-        spaceAvailable -= tagWidth;
-        willFit += 1;
-      } else {
-        break;
+    if (sizingTags.length > 0) {
+      let spaceAvailable = tagSet.current.offsetWidth;
+
+      for (let i in sizingTags) {
+        const tagWidth = sizingTags[i].offsetWidth;
+
+        if (spaceAvailable >= tagWidth) {
+          spaceAvailable -= tagWidth;
+          willFit += 1;
+        } else {
+          break;
+        }
       }
-    }
 
-    if (willFit < sizingTags.current.length) {
-      while (willFit > 0 && spaceAvailable < overflowTag.current.offsetWidth) {
-        // Highly unlikely any useful tag is smaller
-        willFit -= 1; // remove one tag
-        spaceAvailable += sizingTags.current[willFit].offsetWidth;
+      if (willFit < sizingTags.length) {
+        while (
+          willFit > 0 &&
+          spaceAvailable < overflowTag.current.offsetWidth
+        ) {
+          // Highly unlikely any useful tag is smaller
+          willFit -= 1; // remove one tag
+          spaceAvailable += sizingTags[willFit].offsetWidth;
+        }
       }
     }
 
     if (willFit < 1) {
       setDisplayCount(0);
     } else {
-      setDisplayCount(
-        maxVisibleTags ? Math.min(willFit, maxVisibleTags) : willFit
-      );
+      setDisplayCount(maxVisible ? Math.min(willFit, maxVisible) : willFit);
     }
-  }, [maxVisibleTags, sizingTags]);
+  }, [maxVisible, sizingTags]);
 
   useEffect(() => {
     checkFullyVisibleTags();
-  }, [checkFullyVisibleTags, maxVisibleTags, sizingTags]);
+  }, [checkFullyVisibleTags, maxVisible, sizingTags]);
 
   const handleResize = () => {
+    /* istanbul ignore next */ // not sure how to test resize
     checkFullyVisibleTags();
   };
 
   const handleSizerTagsResize = () => {
+    /* istanbul ignore next */ // not sure how to test resize
     checkFullyVisibleTags();
   };
 
@@ -207,7 +217,7 @@ TagSet.propTypes = {
   /**
    * maximum visible tags
    */
-  maxVisibleTags: PropTypes.number,
+  maxVisible: PropTypes.number,
   /**
    * overflowAlign from the standard tooltip
    */

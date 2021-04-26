@@ -10,86 +10,32 @@ import React from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
-import cx from 'classnames';
 import { pkg } from '../../settings';
+import { prepareProps } from '../../global/js/utils/props-helper';
 
 // Carbon and package components we use.
-import { ModalHeader, ModalBody } from 'carbon-components-react';
 import { ActionSet } from '../ActionSet';
 
-import { TearsheetShell } from './TearsheetShell';
+import {
+  TearsheetShell,
+  tearsheetShellWideProps as blocked,
+} from './TearsheetShell';
 
-// The block part of our conventional BEM class names (blockClass__E--M).
-const blockClass = `${pkg.prefix}--tearsheet`;
 const componentName = 'TearsheetNarrow';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
 /**
- * A tearsheet is a mostly full-screen type of dialog that keeps users in-context
- * and focused by bringing actionable content front and center while revealing
- * parts of the UI behind it. There are two sizes of tearsheets: narrow and wide.
+ * A narrow tearsheet is a slimmer variant of the tearsheet, providing a dialog
+ * that keeps users in-context and focused by bringing actionable content front
+ * and center while revealing more of the UI behind it.
  *
- * A tearsheet is comprised of up to 5 zones, allowing for flexibility depending on
- * the content.
+ * A narrow earsheet comprises 3 zones: a heading area including a title, the
+ * main content area, and a set of action buttons.
  */
-export let TearsheetNarrow = React.forwardRef(
-  (
-    {
-      // The component props, in alphabetical order (for consistency).
-      actions,
-      children,
-      // className is passed directly to TearsheetShell via rest
-      closeIconDescription,
-      description,
-      hasCloseIcon,
-      label,
-      // onClose, open, preventCloseOnClickOutside are passed directly to TearsheetShell via rest
-      title,
-      // verticalPosition is passed directly to TearsheetShell via rest
-      // Collect any other property values passed in.
-      ...rest
-    },
-    ref
-  ) => (
-    <TearsheetShell
-      {
-        // Pass through any other property values.
-        ...rest
-      }
-      ref={ref}
-      size="narrow">
-      {(label || title || description || hasCloseIcon) && (
-        <ModalHeader
-          className={`${blockClass}__header`}
-          closeClassName={cx({
-            [`${blockClass}__header--no-close-icon`]: !hasCloseIcon,
-          })}
-          iconDescription={closeIconDescription}
-          label={label}
-          title={title}>
-          {description && (
-            <div className={`${blockClass}__header-description`}>
-              {description}
-            </div>
-          )}
-        </ModalHeader>
-      )}
-      <ModalBody className={`${blockClass}__body`}>
-        <div className={`${blockClass}__right`}>
-          {children && <div className={`${blockClass}__main`}>{children}</div>}
-          {actions && actions.length > 0 && (
-            <ActionSet
-              actions={actions}
-              size="lg"
-              className={`${blockClass}__buttons`}
-            />
-          )}
-        </div>
-      </ModalBody>
-    </TearsheetShell>
-  )
-);
+export let TearsheetNarrow = React.forwardRef((props, ref) => (
+  <TearsheetShell {...prepareProps(props, blocked, { ref, size: 'narrow' })} />
+));
 
 // Return a placeholder if not released and not enabled by feature flag
 TearsheetNarrow = pkg.checkComponentEnabled(TearsheetNarrow, componentName);
@@ -101,9 +47,20 @@ TearsheetNarrow.displayName = componentName;
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
+
+// Note that the descriptions here should be kept in sync with those for the
+// corresponding props for Tearsheet and TearsheetShell components.
 TearsheetNarrow.propTypes = {
   /**
-   * Sets the action buttons for the Tearsheet.
+   * The navigation actions to be shown as buttons in the action area at the
+   * bottom of the tearsheet. Each action is specified as an object with
+   * optional fields: 'label' to supply the button label, 'kind' to select the
+   * button kind (must be 'primary', 'secondary' or 'ghost'), 'loading' to
+   * display a loading indicator, and 'onClick' to receive notifications when
+   * the button is clicked. Additional fields in the object will be passed to
+   * the Button component, and these can include 'disabled', 'ref', 'className',
+   * and any other Button props. Any other fields in the object will be passed
+   * through to the button element as HTML attributes.
    */
   actions: PropTypes.oneOfType([
     ActionSet.validateActions(() => 'lg'),
@@ -119,63 +76,65 @@ TearsheetNarrow.propTypes = {
   ]),
 
   /**
-   * Specifies the content of the Tearsheet body.
-   */
-  children: PropTypes.node,
-
-  /**
-   * Specifies class(es) to be applied to the top-level Tearsheet node.
+   * An optional class or classes to be added to the outermost element.
    */
   className: PropTypes.string,
 
   /**
-   * The description for the close icon.
+   * The accessibility title for the close icon (if shown).
    */
   closeIconDescription: PropTypes.string,
 
   /**
-   * Specifies the description of the Tearsheet.
+   * A description of the flow, displayed in the header area of the tearsheet.
    */
   description: PropTypes.node,
 
   /**
-   * Specifies if the Tearsheet has a close icon.
+   * Enable a close icon ('x') in the header area of the tearsheet. By default,
+   * a tearsheet does not display a close icon, but one should be enabled if
+   * the tearsheet is read-only or has no navigation actions (sometimes called
+   * a "passive tearsheet").
    */
   hasCloseIcon: PropTypes.bool,
 
   /**
-   * Specifies the label of the Tearsheet.
+   * A label for the tearsheet, displayed in the header area of the tearsheet
+   * to maintain context for the tearsheet (e.g. as the title changes from page
+   * to page of a multi-page task).
    */
   label: PropTypes.node,
 
   /**
-   * Specifies an optional handler that is called when closing the modal.
+   * An optional handler that is called when the user closes the tearsheet (by
+   * clicking the close button, if enabled, or clicking outside, if enabled).
    * Returning `false` here prevents the modal from closing.
    */
   onClose: PropTypes.func,
 
   /**
-   * Specifies whether the Tearsheet is currently open.
+   * Specifies whether the tearsheet is currently open.
    */
   open: PropTypes.bool,
 
   /**
-   * Prevents the Tearsheet from closing automatically if the user clicks
+   * Prevent the tearsheet from automatically closing (triggering onClose, if
+   * provided, which can be cancelled by returning 'false') if the user clicks
    * outside it.
    */
   preventCloseOnClickOutside: PropTypes.bool,
 
   /**
-   * Specifies the title of the Tearsheet.
+   * The main title of the tearsheet, displayed in the header area.
    */
   title: PropTypes.node,
 
   /**
-   * Specifies the position of the top of tearsheet in the viewport. The
-   * 'normal' position is a short distance down from the top of the viewport,
-   * leaving room at the top for a header bar to show through from below. The
-   * 'lower' position provides a little extra room at the top to allow an action
-   * bar navigation or breadcrumbs to also show through.
+   * The position of the top of tearsheet in the viewport. The 'normal'
+   * position (the default) is a short distance down from the top of the
+   * viewport, leaving room at the top for a global header bar to show through
+   * from below. The 'lower' position provides a little extra room at the top
+   * to allow an action bar navigation or breadcrumbs to also show through.
    */
   verticalPosition: PropTypes.oneOf(['normal', 'lower']),
 };
@@ -186,6 +145,6 @@ TearsheetNarrow.propTypes = {
 // component needs to make a choice or assumption when a prop is not supplied.
 TearsheetNarrow.defaultProps = {
   closeIconDescription: 'Close',
-  hasCloseIcon: true,
+  hasCloseIcon: false,
   verticalPosition: 'normal',
 };

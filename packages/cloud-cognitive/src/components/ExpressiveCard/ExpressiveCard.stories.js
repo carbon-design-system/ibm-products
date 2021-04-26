@@ -122,6 +122,7 @@ WithActionIcon.args = {
       id: '1',
       icon: ArrowRight24,
       onClick: () => {},
+      onKeyDown: () => {},
       iconDescription: 'Next',
     },
   ],
@@ -146,5 +147,6 @@ export const Clickable = Template.bind({});
 Clickable.args = {
   ...defaultProps,
   onClick: () => {},
+  onKeyDown: () => {},
   primaryButtonText: '',
 };

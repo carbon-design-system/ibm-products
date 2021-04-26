@@ -16,6 +16,7 @@ import { pkg, carbon } from '../../settings';
 // Carbon and package components we use.
 import { ComposedModal, ModalHeader, ModalBody } from 'carbon-components-react';
 import { ActionSet } from '../ActionSet';
+import { Wrap } from '../../global/js/utils/Wrap';
 
 // The block part of our conventional BEM class names (bc__E--M).
 const bc = `${pkg.prefix}--tearsheet`;
@@ -42,22 +43,6 @@ export const tearsheetShellWideProps = [
   'influencerWidth',
   'navigation',
 ];
-
-// A simple <div> (or other element) wrapper that only renders conditionally
-// on the content being truthy
-const DivIf = ({ Element, children, cx, ...rest }) =>
-  children ? (
-    <Element {...rest} className={cx}>
-      {children}
-    </Element>
-  ) : null;
-
-DivIf.propTypes = {
-  Element: PropTypes.string,
-  children: PropTypes.node,
-  cx: PropTypes.string,
-};
-DivIf.defaultProps = { Element: 'div' };
 
 // TearSheetShell is used internally by TearSheet and TearSheetNarrow
 export const TearsheetShell = React.forwardRef(
@@ -145,7 +130,9 @@ export const TearsheetShell = React.forwardRef(
     }, [open]);
 
     if (position <= depth) {
-      // we include a modal header if and only if one or more of these is given
+      // Include a modal header if and only if one or more of these is given.
+      // We can't use a Wrap for the ModalHeader because ComposedModal requires
+      // the direct child to be the ModalHeader instance.
       const includeHeader =
         label ||
         title ||
@@ -154,7 +141,7 @@ export const TearsheetShell = React.forwardRef(
         navigation ||
         hasCloseIcon;
 
-      // We include an ActionSet if and only if one or more actions is given
+      // Include an ActionSet if and only if one or more actions is given.
       const includeActions = actions && actions?.length > 0;
 
       return (
@@ -186,34 +173,38 @@ export const TearsheetShell = React.forwardRef(
                 [`${bc}__header--no-close-icon`]: !hasCloseIcon,
               })}
               iconDescription={closeIconDescription}>
-              <DivIf cx={`${bc}__header-content`}>
-                <DivIf>
+              <Wrap className={`${bc}__header-content`}>
+                <Wrap>
                   {/* we create the label and title here instead of passing them
                       as modal header props so we can wrap them in layout divs */}
-                  <DivIf Element="h2" cx={`${bcModalHeader}__label`}>
+                  <Wrap element="h2" className={`${bcModalHeader}__label`}>
                     {label}
-                  </DivIf>
-                  <DivIf Element="h3" cx={`${bcModalHeader}__heading`}>
+                  </Wrap>
+                  <Wrap element="h3" className={`${bcModalHeader}__heading`}>
                     {title}
-                  </DivIf>
-                  <DivIf cx={`${bc}__header-description`}>{description}</DivIf>
-                </DivIf>
-                <DivIf cx={`${bc}__header-actions`}>{headerActions}</DivIf>
-              </DivIf>
-              <DivIf cx={`${bc}__header-navigation`}>{navigation}</DivIf>
+                  </Wrap>
+                  <Wrap className={`${bc}__header-description`}>
+                    {description}
+                  </Wrap>
+                </Wrap>
+                <Wrap className={`${bc}__header-actions`}>{headerActions}</Wrap>
+              </Wrap>
+              <Wrap className={`${bc}__header-navigation`}>{navigation}</Wrap>
             </ModalHeader>
           )}
-          <ModalBody className={`${bc}__body`}>
-            <DivIf
-              cx={cx({
+          <Wrap element={ModalBody} className={`${bc}__body`}>
+            <Wrap
+              className={cx({
                 [`${bc}__influencer`]: true,
                 [`${bc}__influencer--right`]: influencerPosition === 'right',
                 [`${bc}__influencer--wide`]: influencerWidth === 'wide',
               })}>
               {influencer}
-            </DivIf>
-            <DivIf cx={`${bc}__right`}>
-              <DivIf cx={`${bc}__main`}>{children}</DivIf>
+            </Wrap>
+            <Wrap className={`${bc}__right`}>
+              <Wrap alwaysRender={includeActions} className={`${bc}__main`}>
+                {children}
+              </Wrap>
               {includeActions && (
                 <ActionSet
                   actions={actions}
@@ -222,8 +213,8 @@ export const TearsheetShell = React.forwardRef(
                   size={size === 'wide' ? 'max' : 'lg'}
                 />
               )}
-            </DivIf>
-          </ModalBody>
+            </Wrap>
+          </Wrap>
         </ComposedModal>
       );
     } else {

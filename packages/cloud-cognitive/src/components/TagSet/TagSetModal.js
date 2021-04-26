@@ -12,7 +12,7 @@ import { Modal, Search } from 'carbon-components-react';
 
 import { pkg } from '../../settings';
 const componentName = 'TagSetModal';
-const blockClass = `${pkg.prefix}-tag-set`;
+const blockClass = `${pkg.prefix}--tag-set`;
 
 export const TagSetModal = ({
   allTags,
@@ -54,20 +54,20 @@ export const TagSetModal = ({
 
   return (
     <Modal
-      className={`${blockClass}--show-all-modal`}
+      className={`${blockClass}__show-all-modal`}
       open={open}
       passiveModal
       size="sm"
       modalHeading={heading}
       onRequestClose={onClose}>
       <Search
-        className={`${blockClass}--show-all-tags-search`}
+        className={`${blockClass}__show-all-tags-search`}
         labelText={searchLabel}
         placeholder={searchPlaceholder}
         onChange={handleSearch}
         size="lg"
       />
-      <div className={`${blockClass}--show-all-tags-content`}>
+      <div className={`${blockClass}__show-all-tags-content`}>
         {filteredModalTags}
       </div>
     </Modal>

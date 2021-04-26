@@ -57,11 +57,11 @@ describe(TagSet.displayName, () => {
     // first and last should be visible
     screen.getByText(tagLabel(0), {
       // selector need to ignore sizing items
-      selector: `.${pkg.prefix}-tag-set--displayed-tag .${carbon.prefix}--tag span`,
+      selector: `.${pkg.prefix}--tag-set--displayed-tag .${carbon.prefix}--tag span`,
     });
     screen.getByText(tagLabel(tags10.length - 1), {
       // selector need to ignore sizing items
-      selector: `.${pkg.prefix}-tag-set--displayed-tag .${carbon.prefix}--tag span`,
+      selector: `.${pkg.prefix}--tag-set--displayed-tag .${carbon.prefix}--tag span`,
     });
   });
 
@@ -72,7 +72,7 @@ describe(TagSet.displayName, () => {
 
     const visible = screen.queryAllByText(/Tag [0-9]+/, {
       // selector need to ignore sizing items
-      selector: `.${pkg.prefix}-tag-set--displayed-tag .${carbon.prefix}--tag span`,
+      selector: `.${pkg.prefix}--tag-set--displayed-tag .${carbon.prefix}--tag span`,
     });
     expect(visible.length).toEqual(0);
 
@@ -81,7 +81,7 @@ describe(TagSet.displayName, () => {
 
     const overflowVisible = screen.queryAllByText(/Tag [0-9]+/, {
       // selector need to ignore sizing items
-      selector: `.${pkg.prefix}-tag-set--overflow-tag-item`,
+      selector: `.${pkg.prefix}--tag-set--overflow-tag-item`,
     });
     expect(overflowVisible.length).toEqual(tags10.length);
   });
@@ -95,12 +95,12 @@ describe(TagSet.displayName, () => {
     // first and last should be visible
     screen.getByText(tagLabel(0), {
       // selector need to ignore sizing items
-      selector: `.${pkg.prefix}-tag-set--displayed-tag .${carbon.prefix}--tag span`,
+      selector: `.${pkg.prefix}--tag-set--displayed-tag .${carbon.prefix}--tag span`,
     });
 
     const visible = screen.queryAllByText(/Tag [0-9]+/, {
       // selector need to ignore sizing items
-      selector: `.${pkg.prefix}-tag-set--displayed-tag .${carbon.prefix}--tag span`,
+      selector: `.${pkg.prefix}--tag-set--displayed-tag .${carbon.prefix}--tag span`,
     });
     expect(visible.length).toEqual(visibleTags);
 
@@ -109,7 +109,7 @@ describe(TagSet.displayName, () => {
 
     const overflowVisible = screen.queryAllByText(/Tag [0-9]+/, {
       // selector need to ignore sizing items
-      selector: `.${pkg.prefix}-tag-set--overflow-tag-item`,
+      selector: `.${pkg.prefix}--tag-set--overflow-tag-item`,
     });
     expect(overflowVisible.length + visible.length).toEqual(tags10.length);
   });
@@ -142,17 +142,17 @@ describe(TagSet.displayName, () => {
     // first and last should be visible
     screen.getByText(tagLabel(0), {
       // selector need to ignore sizing items
-      selector: `.${pkg.prefix}-tag-set--displayed-tag .${carbon.prefix}--tag span`,
+      selector: `.${pkg.prefix}--tag-set--displayed-tag .${carbon.prefix}--tag span`,
     });
     screen.getByText(tagLabel(4), {
       // selector need to ignore sizing items
-      selector: `.${pkg.prefix}-tag-set--displayed-tag .${carbon.prefix}--tag span`,
+      selector: `.${pkg.prefix}--tag-set--displayed-tag .${carbon.prefix}--tag span`,
     });
 
     expect(
       screen.getAllByText(/Tag [0-9]+/, {
         // selector need to ignore sizing items
-        selector: `.${pkg.prefix}-tag-set--displayed-tag .${carbon.prefix}--tag span`,
+        selector: `.${pkg.prefix}--tag-set--displayed-tag .${carbon.prefix}--tag span`,
       }).length
     ).toEqual(5);
   });

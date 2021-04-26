@@ -191,7 +191,12 @@ describe('PageHeader', () => {
     ).toHaveLength(1);
     expect(screen.getByText(subtitle).textContent).toEqual(subtitle);
     expect(screen.queryAllByTestId('tabs')).toHaveLength(1);
-    expect(screen.getAllByText('A tag')).toHaveLength(4);
+    expect(
+      screen.getAllByText('A tag', {
+        // selector need to ignore sizing items
+        selector: `.${pkg.prefix}-tag-set--displayed-tag .${carbon.prefix}--tag span`,
+      })
+    ).toHaveLength(4);
     expect(
       document.querySelectorAll(`.${pkg.prefix}-page-header--title`)
     ).toHaveLength(1);

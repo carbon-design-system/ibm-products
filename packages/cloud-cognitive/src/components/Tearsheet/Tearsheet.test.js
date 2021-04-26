@@ -14,7 +14,7 @@ import '../../utils/enable-all'; // must come before component is imported (dire
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { Tab, Tabs } from 'carbon-components-react';
+import { Button, ButtonSet, Tab, Tabs } from 'carbon-components-react';
 import { Tearsheet, TearsheetNarrow } from '.';
 
 const blockClass = `${pkg.prefix}--tearsheet`;
@@ -43,6 +43,12 @@ const description = (
     ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
     ex ea commodo consequat.
   </span>
+);
+const headerActionButtonLabel = `Button ${uuidv4()}`;
+const headerActions = (
+  <ButtonSet>
+    <Button>{headerActionButtonLabel}</Button>
+  </ButtonSet>
 );
 const influencerFragment = `This is a ${uuidv4()} convincing influencer`;
 const influencer = <div>{influencerFragment}</div>;
@@ -194,6 +200,11 @@ const commonTests = (Ts, name) => {
 
 describe(componentName, () => {
   commonTests(Tearsheet, componentName);
+
+  it('renders headerActions', () => {
+    render(<Tearsheet {...{ headerActions }} />);
+    screen.getByText(headerActionButtonLabel);
+  });
 
   it('renders influencer', () => {
     render(<Tearsheet {...{ influencer }} />);

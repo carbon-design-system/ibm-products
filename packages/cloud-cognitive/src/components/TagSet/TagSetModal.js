@@ -28,7 +28,7 @@ export const TagSetModal = ({
   useEffect(() => {
     const newFilteredModalTags = [];
     if (open) {
-      allTags.forEach((tag) => {
+      allTags.forEach((tag, index) => {
         const dataSearch = (tag.props['data-search'] || '').toLocaleLowerCase();
         const contentsAsString = tag.props.children
           .toString()
@@ -38,9 +38,7 @@ export const TagSetModal = ({
           contentsAsString.indexOf(search) > -1
         ) {
           newFilteredModalTags.push(
-            <span
-              key={`filtered-tag-show-all`}
-              className={`${blockClass}-show-all-tags`}>
+            <span key={index} className={`${blockClass}-show-all-tags`}>
               {React.cloneElement(tag)}
             </span>
           );

@@ -140,10 +140,10 @@ export default {
     (story) => (
       <>
         <style>
-          {`.${blockClass}--show-all-modal { opacity: 0; visibility: hidden; /* prevents glitch storybook modal css load */ }`}
+          {`.${blockClass}__show-all-modal { opacity: 0; visibility: hidden; /* prevents glitch storybook modal css load */ }`}
           ;
         </style>
-        <div className={`${blockClass}--story__viewport`}>{story()}</div>
+        <div className={`${blockClass}__story-viewport`}>{story()}</div>
       </>
     ),
   ],

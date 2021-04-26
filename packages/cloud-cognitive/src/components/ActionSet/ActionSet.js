@@ -215,7 +215,7 @@ ActionSet.validateActions = (sizeFn) => (props, propName, componentName) => {
 
 ActionSet.propTypes = {
   /**
-   * Specifies the action buttons to show. Each action is specified as an
+   * The action buttons to show. Each action is specified as an
    * object with optional fields 'label' to supply the button label, 'kind'
    * to select the button kind (must be 'primary', 'secondary' or 'ghost'),
    * 'loading' to display a loading indicator, and 'onClick' to receive
@@ -238,7 +238,7 @@ ActionSet.propTypes = {
   ]),
 
   /**
-   * Specify the size of buttons to use for the actions. The allowed values are
+   * The size of buttons to use for the actions. The allowed values are
    * those for the size prop of carbon Button. If this prop is specified, all
    * the buttons will be set to this size, overriding any 'size' values (if any)
    * supplied in the actions array (if any).
@@ -246,13 +246,13 @@ ActionSet.propTypes = {
   buttonSize: Button.propTypes.size,
 
   /**
-   * Sets an optional className to be added to the side panel outermost element.
+   * An optional class or classes to be added to the outermost element.
    */
   className: PropTypes.string,
 
   /**
-   * Sets the size of the action set. Different button arrangements are used
-   * in different sizes, to make best use of the available space.
+   * The size of the action set. Different button arrangements are used at
+   * different sizes, to make best use of the available space.
    */
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xlg', 'max']),
 };

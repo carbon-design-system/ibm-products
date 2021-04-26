@@ -11,8 +11,11 @@ import { action } from '@storybook/addon-actions';
 
 import { pkg } from '../../settings';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
+
 import {
   Button,
+  ButtonSet,
+  Dropdown,
   Form,
   FormGroup,
   Tab,
@@ -37,67 +40,59 @@ import mdx from './Tearsheet.mdx';
 export default {
   title: `${storybookPrefix}/Tearsheets/${Tearsheet.displayName}`,
   component: Tearsheet,
-  subcomponents: {
-    TearsheetNarrow,
-  },
+  subcomponents: { TearsheetNarrow },
   parameters: { styles, docs: { page: mdx } },
   argTypes: {
     actions: {
-      control: {
-        type: 'select',
-        labels: actionsLabels,
-      },
+      control: { type: 'select', labels: actionsLabels },
       options: actionsOptions,
       mapping: actionsMapping(
         {
           primary: 'Replace',
-          secondary: 'Stop',
+          secondary: 'Back',
           secondary2: 'Keep Both',
           ghost: 'Cancel',
         },
         action
       ),
     },
-    description: {
+    description: { control: { type: 'text' } },
+    headerActions: {
       control: {
-        type: 'text',
+        type: 'select',
+        labels: {
+          0: 'none',
+          1: 'drop-down',
+          2: 'buttons',
+        },
+      },
+      options: [0, 1, 2],
+      mapping: {
+        0: null,
+        1: (
+          <Dropdown
+            label="Choose an option"
+            items={['option 1', 'option 2', 'option 3', 'option 4']}
+          />
+        ),
+        2: (
+          <ButtonSet>
+            <Button kind="secondary" size="sm" style={{ width: 'initial' }}>
+              Secondary
+            </Button>
+            <Button kind="primary" size="sm" style={{ width: 'initial' }}>
+              Primary
+            </Button>
+          </ButtonSet>
+        ),
       },
     },
-    label: {
-      control: {
-        type: 'text',
-      },
-    },
-    title: {
-      control: {
-        type: 'text',
-      },
-    },
-    children: {
-      control: {
-        disable: true,
-      },
-    },
-    influencer: {
-      control: {
-        disable: true,
-      },
-    },
-    onClose: {
-      control: {
-        disable: true,
-      },
-    },
-    navigation: {
-      control: {
-        disable: true,
-      },
-    },
-    open: {
-      control: {
-        disable: true,
-      },
-    },
+    label: { control: { type: 'text' } },
+    title: { control: { type: 'text' } },
+    influencer: { control: { disable: true } },
+    onClose: { control: { disable: true } },
+    navigation: { control: { disable: true } },
+    open: { control: { disable: true } },
   },
 };
 
@@ -105,14 +100,9 @@ export default {
 
 const closeIconDescription = 'Close the tearsheet';
 
-const description = (
-  <span>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-    tempor <strong>incididunt ut labore</strong> et dolore magna aliqua. Ut enim
-    ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-    ex ea commodo consequat.
-  </span>
-);
+const description =
+  'This is a description for the tearsheet, providing an opportunity to \
+  describe the flow.';
 
 const influencer = (
   <div className="tearsheet-stories__dummy-content-block">Influencer</div>
@@ -152,7 +142,7 @@ const Template = ({ actions, ...args }) => {
 
   return (
     <>
-      <style>{`.${pkg.prefix}-tearsheet { opacity: 0 }`};</style>
+      <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
       <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
       <Tearsheet
         {...args}
@@ -165,50 +155,54 @@ const Template = ({ actions, ...args }) => {
 };
 
 // Stories
-export const AllAttributesSet = Template.bind({});
-AllAttributesSet.args = {
+export const tearsheet = Template.bind({});
+tearsheet.storyName = 'Tearsheet';
+tearsheet.args = {
+  description,
+  onClose: action('onClose called'),
+  title,
+  actions: 6,
+};
+
+export const withAllHeaderItems = Template.bind({});
+withAllHeaderItems.storyName = 'Tearsheet with navigation';
+withAllHeaderItems.args = {
+  closeIconDescription,
+  description,
+  label,
+  navigation: tabs,
+  onClose: action('onClose called'),
+  title,
+  actions: 6,
+};
+
+export const withInfluencer = Template.bind({});
+withInfluencer.storyName = 'Tearsheet with influencer';
+withInfluencer.args = {
+  description,
+  influencer,
+  influencerPosition: 'left',
+  influencerWidth: 'narrow',
+  onClose: action('onClose called'),
+  title,
+  verticalPosition: 'normal',
+  actions: 6,
+};
+
+export const fullyLoaded = Template.bind({});
+fullyLoaded.storyName = 'Tearsheet with all header items and influencer';
+fullyLoaded.args = {
   closeIconDescription,
   description,
   hasCloseIcon: true,
+  headerActions: 2,
   influencer,
   influencerPosition: 'left',
   influencerWidth: 'narrow',
   label,
   navigation: tabs,
   onClose: action('onClose called'),
-  open: true,
-  preventCloseOnClickOutside: true,
   title,
   verticalPosition: 'normal',
-  actions: 3,
-};
-
-export const NoAttributesSet = Template.bind({});
-NoAttributesSet.args = {};
-
-export const NoHeaderNavigation = Template.bind({});
-NoHeaderNavigation.args = {
-  closeIconDescription,
-  description,
-  hasCloseIcon: true,
-  influencer,
-  label,
-  onClose: action('onClose called'),
-  open: true,
-  preventCloseOnClickOutside: true,
-  title,
-  actions: 3,
-};
-
-export const NoHeaderNavigationOrInfluencer = Template.bind({});
-NoHeaderNavigationOrInfluencer.args = {
-  closeIconDescription,
-  description,
-  hasCloseIcon: true,
-  label,
-  onClose: action('onClose called'),
-  open: true,
-  preventCloseOnClickOutside: true,
-  title,
-  actions: 3,
+  actions: 0,
 };

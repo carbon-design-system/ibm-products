@@ -22,7 +22,7 @@ import {
 import { ActionBar } from '../ActionBar/';
 import { BreadcrumbWithOverflow } from '../BreadcrumbWithOverflow';
 import { TagSet } from '../TagSet';
-import { ButtonSetWithOverflow } from './ButtonSetWithOverflow';
+import { ButtonSetWithOverflow } from '../ButtonSetWithOverflow';
 import { pkg } from '../../settings';
 import { ChevronUp16 } from '@carbon/icons-react';
 import { deprecatePropUsage } from '../../global/js/utils/props-helper';
@@ -549,9 +549,9 @@ export let PageHeader = ({
                               })}>
                               <ButtonSetWithOverflow
                                 className={`${blockClass}--button-set--in-breadcrumb`}
-                                onWidthChange={handleButtonSetWidthChange}>
-                                {pageActions}
-                              </ButtonSetWithOverflow>
+                                onWidthChange={handleButtonSetWidthChange}
+                                buttons={pageActions}
+                              />
                             </div>
                           )}
                           <ActionBar
@@ -608,7 +608,17 @@ export let PageHeader = ({
                   })}>
                   <ButtonSet
                     className={`${blockClass}--page-actions-container`}>
-                    {pageActions}
+                    {pageActions.map(
+                      ({ kind, label, onClick, ...rest }, index) => (
+                        <Button
+                          {...rest}
+                          kind={kind}
+                          onClick={onClick}
+                          key={index}>
+                          {label}
+                        </Button>
+                      )
+                    )}
                   </ButtonSet>
                 </Column>
               ) : null}
@@ -760,9 +770,23 @@ PageHeader.propTypes = {
    */
   navigation: PropTypes.element, // Supports Tabs
   /**
-   * Specifies the primary page actions as a React element. zero, one or more PageActionItem components. Optional.
+   * Specifies the primary page actions as a React element. zero, one or more page action button shapes label + onClick
    */
-  pageActions: PropTypes.element,
+  pageActions: PropTypes.oneOfType([
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        label: PropTypes.node,
+        onClick: PropTypes.func,
+      })
+    ),
+    deprecatePropUsage(
+      PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.element),
+        PropTypes.element,
+      ]),
+      'Expects an array of objects with the following properties: label and onClick.'
+    ),
+  ]),
   /**
    * Number of pixels the page header sits from the top of the screen.
    * The nature of the pageHeader makes this hard to measure

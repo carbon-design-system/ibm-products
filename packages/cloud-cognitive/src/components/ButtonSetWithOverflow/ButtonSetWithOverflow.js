@@ -25,6 +25,7 @@ export const ButtonSetWithOverflow = ({
   children,
   className,
   onWidthChange,
+  pageActionsLabel,
   size,
 }) => {
   const [showAsOverflow, setShowAsOverflow] = useState(false);
@@ -71,10 +72,12 @@ export const ButtonSetWithOverflow = ({
   const handleResize = () => {
     // width is the space available for all action bar items horizontally
     // the action bar items are squares so the height should be one item wide
+    /* istanbul ignore next */ // not sure how to test resize
     checkFullyVisibleItems();
   };
 
   const handleButtonResize = () => {
+    /* istanbul ignore next */ // not sure how to test resize
     checkFullyVisibleItems();
   };
 
@@ -93,7 +96,6 @@ export const ButtonSetWithOverflow = ({
   }, [buttons, children]);
 
   const AButtonSet = React.forwardRef(({ buttons, size, ...rest }, ref) => {
-    console.log('asize', size);
     return (
       <ButtonSet {...rest} ref={ref}>
         {buttons.map(({ label, ...other }, index) => (
@@ -106,14 +108,17 @@ export const ButtonSetWithOverflow = ({
   });
   const ATempComboButton = React.forwardRef(
     ({ buttons, size, ...rest }, ref) => {
-      console.log('tsize', size);
       return (
-        <TempComboButton {...rest} buttons={buttons} size={size} ref={ref} />
+        <TempComboButton
+          {...rest}
+          buttons={buttons}
+          size={size}
+          ref={ref}
+          label={pageActionsLabel}
+        />
       );
     }
   );
-
-  console.log('size', size);
 
   return (
     <ReactResizeDetector handleWidth={true} onResize={handleResize}>
@@ -154,11 +159,21 @@ export const ButtonSetWithOverflow = ({
 
 ButtonSetWithOverflow.propTypes = {
   /**
-   * Button shape things for us to render.
+   * Button shape things for us to render - see Carbon button kind, label, onClick.
    */
   buttons: PropTypes.oneOfType([
     PropTypes.arrayOf(
       PropTypes.shape({
+        kind: PropTypes.oneOf([
+          'primary',
+          'secondary',
+          'danger',
+          'ghost',
+          'danger--primary',
+          'danger--ghost',
+          'danger--tertiary',
+          'tertiary',
+        ]),
         label: PropTypes.node,
         onClick: PropTypes.func,
       })
@@ -183,6 +198,10 @@ ButtonSetWithOverflow.propTypes = {
    */
   onWidthChange: PropTypes.func,
   /**
+   * pageActionsLabel - used when button set is shown as combo button
+   */
+  pageActionsLabel: PropTypes.node,
+  /**
    * Specify the size of the button, from a list of available sizes.
    * For `default` buttons, this prop can remain unspecified.
    */
@@ -190,6 +209,7 @@ ButtonSetWithOverflow.propTypes = {
 };
 
 ButtonSetWithOverflow.defaultProps = {
+  pageActionsLabel: 'Page actions',
   size: 'field',
 };
 

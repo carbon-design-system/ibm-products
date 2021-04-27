@@ -59,12 +59,19 @@ const breadcrumbItems = (
   </>
 );
 const classNames = ['client-class-1', 'client-class-2'];
-const pageActions = (
-  <>
-    <Button kind="secondary">Secondary button</Button>
-    <Button onClick={pageActionItemOnClick}>Primary button</Button>
-  </>
-);
+const pageActions = [
+  {
+    kind: 'secondary',
+    label: 'Secondary button',
+    onClick: () => {},
+  },
+  {
+    kind: 'primary',
+    label: 'Primary button',
+    onClick: () => {},
+  },
+];
+
 const subtitle = 'Optional subtitle if necessary';
 const tabBar = (
   <Tabs data-testid="tabs">

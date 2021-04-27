@@ -107,19 +107,37 @@ const dummyPageContent = (
     </Row>
   </Grid>
 );
-const pageActions = (
-  <>
-    <PageActionItem kind="secondary">Secondary button</PageActionItem>
-    <PageActionItem kind="primary">Primary button</PageActionItem>
-  </>
-);
-const manyPageActions = (
-  <>
-    <PageActionItem kind="secondary">Secondary button 1</PageActionItem>
-    <PageActionItem kind="secondary">Secondary button 2</PageActionItem>
-    <PageActionItem kind="primary">Primary button</PageActionItem>
-  </>
-);
+const pageActions = [
+  {
+    kind: 'secondary',
+    label: 'Secondary button',
+    onClick: () => {},
+  },
+  {
+    kind: 'primary',
+    label: 'Primary button',
+    onClick: () => {},
+  },
+];
+
+const manyPageActions = [
+  {
+    kind: 'secondary',
+    label: 'Secondary 1',
+    onClick: () => {},
+  },
+  {
+    kind: 'secondary',
+    label: 'Secondary 2',
+    onClick: () => {},
+  },
+  {
+    kind: 'primary',
+    label: 'Primary',
+    onClick: () => {},
+  },
+];
+
 const statusIndicator = (
   <>
     <CheckmarkFilled16 className="page-header-stories__status-icon" /> Running

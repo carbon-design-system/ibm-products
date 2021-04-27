@@ -12,23 +12,20 @@ import { pkg, carbon } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
 import unwrapIfFragment from '../../global/js/utils/unwrap-if-fragment';
+import { prepareProps } from '../../global/js/utils/props-helper';
 
 const blockClass = `${pkg.prefix}--temp-combo-button`;
 
-export const TempComboButton = ({ buttons, className, size }) => {
+export const TempComboButton = ({ buttons, className, label, size }) => {
   const internalId = useRef(uuidv4());
   const [buttonArray, setButtonArray] = useState([]);
 
   useEffect(() => {
     const newButtonArray = unwrapIfFragment(buttons);
 
-    console.log('hi');
-
     setButtonArray(newButtonArray);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setButtonArray, buttons]);
-
-  console.log('hiya');
 
   return (
     <OverflowMenu
@@ -42,7 +39,7 @@ export const TempComboButton = ({ buttons, className, size }) => {
             `${carbon.prefix}--btn--primary`,
             `${carbon.prefix}--btn--${size}`,
           ])}>
-          Page actions
+          {label}
         </div>
       )}
       data-test={buttonArray.length}>
@@ -51,7 +48,7 @@ export const TempComboButton = ({ buttons, className, size }) => {
           itemText={label}
           key={`temp-combo-button-${internalId}-${index}`}
           onClick={onClick}
-          {...rest}
+          {...prepareProps(rest, ['kind', 'renderIcon'])}
         />
       ))}
     </OverflowMenu>
@@ -74,6 +71,10 @@ TempComboButton.propTypes = {
    * className
    */
   className: PropTypes.string,
+  /**
+   * label: displayed content of TempComboButton (not buttons shown as children)
+   */
+  label: PropTypes.node,
   /**
    * Specify the size of the button, from a list of available sizes.
    * For `default` buttons, this prop can remain unspecified.

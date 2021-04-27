@@ -46,10 +46,19 @@ const renderNotifications = ({ ...rest }) =>
 
 describe('Notifications', () => {
   it('renders the notification panel', () => {
-    renderNotifications({
+    const { animationStart, animationEnd } = fireEvent;
+    const { container, rerender } = renderNotifications({
       data: [],
     });
     expect(screen.queryAllByText(/Notifications/i)).toBeTruthy();
+    const outerElement = container.querySelector(`.${blockClass}`);
+    userEvent.click(container);
+    expect(onClickOutside).toHaveBeenCalled();
+    animationStart(outerElement);
+    rerender(
+      <NotificationsPanel open={false} onClickOutside={jest.fn()} data={[]} />
+    );
+    animationEnd(outerElement);
   });
 
   it('should toggle do not disturb switch', () => {

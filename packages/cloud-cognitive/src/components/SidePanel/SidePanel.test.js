@@ -53,14 +53,11 @@ describe('SidePanel', () => {
   it('renders the side panel', () => {
     const subtitle = uuidv4();
     const labelText = uuidv4();
-    renderSidePanel(
-      {
-        title: 'Test side panel',
-        subtitle,
-        labelText,
-      },
-      'content'
-    );
+    renderSidePanel({
+      title: 'Test side panel',
+      subtitle,
+      labelText,
+    });
     expect(screen.queryAllByText(/Test side panel/i)).toBeTruthy();
     expect(screen.getByText(subtitle));
     expect(screen.getByText(labelText));
@@ -68,13 +65,10 @@ describe('SidePanel', () => {
 
   it('should render a side panel with an overlay and trigger clickOutside hook when clicked', () => {
     const onRequestCloseFn = jest.fn();
-    const { container } = renderSidePanel(
-      {
-        includeOverlay: true,
-        onRequestClose: onRequestCloseFn,
-      },
-      'content'
-    );
+    const { container } = renderSidePanel({
+      includeOverlay: true,
+      onRequestClose: onRequestCloseFn,
+    });
     const overlayElement = container.querySelector(`.${blockClass}__overlay`);
     expect(overlayElement).toBeTruthy();
     userEvent.click(overlayElement);
@@ -82,12 +76,9 @@ describe('SidePanel', () => {
   });
 
   it('should render a side panel from the right', () => {
-    const { container } = renderSidePanel(
-      {
-        placement: 'right',
-      },
-      'content'
-    );
+    const { container } = renderSidePanel({
+      placement: 'right',
+    });
     const sidePanelOuter = container.querySelector(
       `.${blockClass}__container-right-placement`
     );
@@ -95,12 +86,9 @@ describe('SidePanel', () => {
   });
 
   it('should render a side panel from the left', () => {
-    const { container } = renderSidePanel(
-      {
-        placement: 'left',
-      },
-      'content'
-    );
+    const { container } = renderSidePanel({
+      placement: 'left',
+    });
     const sidePanelOuter = container.querySelector(
       `.${blockClass}__container-left-placement`
     );
@@ -143,12 +131,9 @@ describe('SidePanel', () => {
   });
 
   it('should test overlay exit animation', async () => {
-    const { container, rerender } = renderSidePanel(
-      {
-        includeOverlay: true,
-      },
-      'content'
-    );
+    const { container, rerender } = renderSidePanel({
+      includeOverlay: true,
+    });
     const closeIconButton = container.querySelector(
       `.${blockClass}__close-button`
     );
@@ -161,19 +146,16 @@ describe('SidePanel', () => {
   });
 
   it('should render one primary action button', () => {
-    const { container } = renderSidePanel(
-      {
-        includeOverlay: true,
-        actions: [
-          {
-            label: 'Primary button',
-            onClick: () => {},
-            kind: 'primary',
-          },
-        ],
-      },
-      'content'
-    );
+    const { container } = renderSidePanel({
+      includeOverlay: true,
+      actions: [
+        {
+          label: 'Primary button',
+          onClick: () => {},
+          kind: 'primary',
+        },
+      ],
+    });
     const submitButtons = screen.queryAllByText('Primary button');
     const outerElement = container.querySelector(`.${blockClass}`);
     fireEvent.animationStart(outerElement);
@@ -182,40 +164,34 @@ describe('SidePanel', () => {
   });
 
   it('should render two action buttons', () => {
-    renderSidePanel(
-      {
-        actions: [
-          {
-            label: 'Action button',
-            onClick: () => {},
-            kind: 'primary',
-          },
-          {
-            label: 'Action button',
-            onClick: () => {},
-            kind: 'secondary',
-          },
-        ],
-      },
-      'content'
-    );
+    renderSidePanel({
+      actions: [
+        {
+          label: 'Action button',
+          onClick: () => {},
+          kind: 'primary',
+        },
+        {
+          label: 'Action button',
+          onClick: () => {},
+          kind: 'secondary',
+        },
+      ],
+    });
     const submitButtons = screen.queryAllByText('Action button');
     expect(submitButtons).toHaveLength(2);
   });
 
   it('should render a single ghost action button', () => {
-    const { container } = renderSidePanel(
-      {
-        actions: [
-          {
-            label: 'Ghost action button',
-            onClick: () => {},
-            kind: 'ghost',
-          },
-        ],
-      },
-      'content'
-    );
+    const { container } = renderSidePanel({
+      actions: [
+        {
+          label: 'Ghost action button',
+          onClick: () => {},
+          kind: 'ghost',
+        },
+      ],
+    });
     const sidePanelOuter = container.querySelector(
       `.${actionSetBlockClass}__action-button--ghost`
     );
@@ -328,13 +304,10 @@ describe('SidePanel', () => {
   it('should call the onNavigationBack event handler', () => {
     const onNavigationBackFn = jest.fn();
     const { click } = userEvent;
-    const { container } = renderSidePanel(
-      {
-        onNavigationBack: onNavigationBackFn,
-        currentStep: 1,
-      },
-      'content'
-    );
+    const { container } = renderSidePanel({
+      onNavigationBack: onNavigationBackFn,
+      currentStep: 1,
+    });
     const navigationButton = container.querySelector(
       `.${blockClass}__navigation-back-button`
     );
@@ -344,12 +317,9 @@ describe('SidePanel', () => {
 
   sizes.forEach((size) => {
     it('should render the correct size side panel', () => {
-      const { container } = renderSidePanel(
-        {
-          size,
-        },
-        'content'
-      );
+      const { container } = renderSidePanel({
+        size,
+      });
       const sidePanelOuter = container.querySelector(`.${blockClass}`);
       let sizeValue;
       switch (size) {

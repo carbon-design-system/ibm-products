@@ -25,11 +25,11 @@ const defaultProps = {
 };
 
 describe(name, () => {
-  test('should render', async () => {
+  it('should render', () => {
     render(<Saving {...defaultProps} />);
   });
 
-  test('renders manual type', async () => {
+  it('renders manual type', () => {
     const onSave = jest.fn();
     const onCancel = jest.fn();
     const props = {
@@ -51,7 +51,7 @@ describe(name, () => {
     expect(getByText(props.failText)).toBeVisible();
   });
 
-  test('renders auto type', async () => {
+  it('renders auto type', () => {
     const props = {
       ...defaultProps,
       type: 'auto',

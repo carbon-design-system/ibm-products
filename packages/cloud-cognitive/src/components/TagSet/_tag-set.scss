@@ -12,30 +12,30 @@
 @import 'carbon-components/scss/components/tooltip/tooltip';
 @import 'carbon-components/scss/components/tag/tag';
 
-$block-class: #{$pkg-prefix}-tag-set;
+$block-class: #{$pkg-prefix}--tag-set;
 
 .#{$block-class} {
   display: block;
   width: 100%;
 }
 
-.#{$block-class}--space {
+.#{$block-class}__space {
   position: relative;
   display: block;
   width: 100%;
   white-space: nowrap;
 }
 
-.#{$block-class}--space--right {
+.#{$block-class}__space--right {
   text-align: end;
 }
 
-.#{$block-class}--tag-container {
+.#{$block-class}__tag-container {
   display: inline-flex; // needed to register a width
   white-space: nowrap;
 }
 
-.#{$block-class}--tag-container--hidden {
+.#{$block-class}__tag-container--hidden {
   // This tag container is used to measure the width of all displayable tags
   position: absolute;
   top: -100vh;
@@ -45,52 +45,52 @@ $block-class: #{$pkg-prefix}-tag-set;
   pointer-events: none;
 }
 
-.#{$block-class}--overflow {
+.#{$block-class}__overflow {
   display: inline-block;
   vertical-align: bottom;
 }
 
-.#{$block-class}--overflow--hidden {
+.#{$block-class}__overflow--hidden {
   max-width: 0;
   overflow: hidden;
   visibility: hidden;
 }
 
-.#{$block-class}--overflow-tag-item {
+.#{$block-class}__overflow-tag-item {
   @include carbon--type-style('body-short-01');
 
   white-space: nowrap;
 }
 
-.#{$block-class}--overflow-tag .#{$carbon-prefix}--tag__close-icon {
+.#{$block-class}__overflow-tag .#{$carbon-prefix}--tag__close-icon {
   // undo override by .bx--tooltip button
   padding: 0;
 }
 
-.#{$block-class}--overflow-tag .#{$carbon-prefix}--tag--high-contrast {
+.#{$block-class}__overflow-tag .#{$carbon-prefix}--tag--high-contrast {
   color: $text-01;
   background-color: $ui-background;
 }
 
-.#{$block-class}--overflow-tag .#{$carbon-prefix}--tag__close-icon:hover {
+.#{$block-class}__overflow-tag .#{$carbon-prefix}--tag__close-icon:hover {
   background-color: $hover-ui;
 }
 
-.#{$block-class}--overflow-tag .#{$carbon-prefix}--tag__close-icon:focus {
+.#{$block-class}__overflow-tag .#{$carbon-prefix}--tag__close-icon:focus {
   box-shadow: inset 0 0 0 2px $focus;
 }
 
-.#{$block-class}--show-all-tags-link {
+.#{$block-class}__show-all-tags-link {
   display: block;
   margin: $spacing-02; // to match the tags
   margin-left: 0;
 }
 
-.#{$block-class}--show-all-tags-search {
+.#{$block-class}__show-all-tags-search {
   margin-bottom: $layout-01;
 }
 
-.#{$block-class}--tooltip {
+.#{$block-class}__tooltip {
   // removes the min width in Carbon
   min-width: initial;
 }

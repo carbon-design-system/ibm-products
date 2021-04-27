@@ -103,7 +103,6 @@ describe(componentName, () => {
   it('calls onRequestSubmit() when primary button is clicked', () => {
     const primaryHandler = jest.fn();
     renderComponent({
-      // primaryButtonText: 'Create',
       onRequestSubmit: primaryHandler,
     });
     userEvent.click(screen.getByRole('button', { name: 'Create' }));
@@ -113,7 +112,6 @@ describe(componentName, () => {
   it('calls onRequestClose() when secondary button is clicked', () => {
     const secondaryHandler = jest.fn();
     renderComponent({
-      // secondaryButtonText: 'Cancel',
       onRequestClose: secondaryHandler,
     });
     userEvent.click(screen.getByRole('button', { name: 'Cancel' }));

@@ -34,20 +34,20 @@ $ide-card-size: carbon--mini-units(30);
 
 .#{$ide-prefix}-card-container {
   min-width: $ide-card-size;
+
+  .#{$ide-prefix}-card--card-overides,
+  .#{$ide-prefix}-card--card-overides:hover,
+  .#{$ide-prefix}-card--card-overides:visited,
+  .#{$ide-prefix}-card--card-overides:visited:hover {
+    padding: carbon--mini-units(2);
+    // carbon overides to remove blue text color
+    color: inherit; /* no blue link color */
+    text-decoration: none; /* no underline */
+  }
 }
 
 .#{$ide-prefix}-card-container__large {
   min-width: $ide-card-size * 2;
-}
-
-.#{$ide-prefix}-card--card-overides,
-.#{$ide-prefix}-card--card-overides:hover,
-.#{$ide-prefix}-card--card-overides:visited,
-.#{$ide-prefix}-card--card-overides:visited:hover {
-  padding: carbon--mini-units(2);
-  // carbon overides to remove blue text color
-  color: inherit; /* no blue link color */
-  text-decoration: none; /* no underline */
 }
 
 .#{$ide-prefix}-card--tile {

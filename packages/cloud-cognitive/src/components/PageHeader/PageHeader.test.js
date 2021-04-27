@@ -194,7 +194,7 @@ describe('PageHeader', () => {
     expect(
       screen.getAllByText('A tag', {
         // selector need to ignore sizing items
-        selector: `.${pkg.prefix}-tag-set--displayed-tag .${carbon.prefix}--tag span`,
+        selector: `.${pkg.prefix}--tag-set__displayed-tag .${carbon.prefix}--tag span`,
       })
     ).toHaveLength(4);
     expect(

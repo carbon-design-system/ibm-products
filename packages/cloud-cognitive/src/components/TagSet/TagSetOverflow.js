@@ -14,7 +14,7 @@ import { Link, Tag, Tooltip } from 'carbon-components-react';
 
 import { pkg } from '../../settings';
 const componentName = 'TagSetOverflow';
-const blockClass = `${pkg.prefix}-tag-set`;
+const blockClass = `${pkg.prefix}--tag-set`;
 
 export const TagSetOverflow = React.forwardRef(
   (
@@ -43,13 +43,13 @@ export const TagSetOverflow = React.forwardRef(
     return (
       <span
         aria-hidden={overflowTags.length === 0}
-        className={cx(`${blockClass}--overflow`, {
-          [`${blockClass}--overflow--hidden`]: overflowTags.length === 0,
+        className={cx(`${blockClass}__overflow`, {
+          [`${blockClass}__overflow--hidden`]: overflowTags.length === 0,
         })}
         ref={ref}>
         <Tooltip
           align={overflowAlign}
-          className={`${blockClass}--tooltip`}
+          className={`${blockClass}__tooltip`}
           direction={overflowDirection}
           onChange={handleChange}
           open={tipOpen}
@@ -57,17 +57,17 @@ export const TagSetOverflow = React.forwardRef(
           showIcon={false}>
           <div
             ref={overflowTagContent}
-            className={`${blockClass}--overflow-content`}>
-            <ul className={`${blockClass}--overflow-tag-list`}>
+            className={`${blockClass}__overflow-content`}>
+            <ul className={`${blockClass}__overflow-tag-list`}>
               {overflowTags.map((tag, index) => (
-                <li className={`${blockClass}--overflow-tag-item`} key={index}>
+                <li className={`${blockClass}__overflow-tag-item`} key={index}>
                   {tag.props.children}
                 </li>
               ))}
             </ul>
             {overflowTags.length >= 10 && (
               <Link
-                className={`${blockClass}--show-all-tags-link`}
+                className={`${blockClass}__show-all-tags-link`}
                 href=""
                 onClick={handleShowAllTagsClick}>
                 {showAllTagsLabel}

@@ -27,7 +27,6 @@ import { pkg } from '../../settings';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
 import { ActionBarItem } from '../ActionBar';
-import { PageActionItem } from './PageActionItem';
 import { PageHeader } from '.';
 const storybookPrefix = getStorybookPrefix(pkg, PageHeader.displayName);
 
@@ -40,7 +39,6 @@ export default {
   component: PageHeader,
   subcomponents: {
     ActionBarItem,
-    PageActionItem,
   },
   parameters: { styles, layout: 'fullscreen', docs: { page: mdx } },
   decorators: [

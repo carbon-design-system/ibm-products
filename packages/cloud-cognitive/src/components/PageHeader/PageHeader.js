@@ -21,8 +21,8 @@ import {
 } from 'carbon-components-react';
 import { ActionBar } from '../ActionBar/';
 import { BreadcrumbWithOverflow } from '../BreadcrumbWithOverflow';
-import { TagSet } from '../';
-import { ButtonSetWithOverflow } from '../ButtonSetWithOverflow';
+import { TagSet } from '../TagSet';
+import { ButtonSetWithOverflow } from './ButtonSetWithOverflow';
 import { pkg } from '../../settings';
 import { ChevronUp16 } from '@carbon/icons-react';
 import { deprecatePropUsage } from '../../global/js/utils/props-helper';

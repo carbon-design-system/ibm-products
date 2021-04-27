@@ -71,9 +71,9 @@ export default {
 const prefix = 'side-panel-stories__';
 
 const defaultStoryProps = {
-  titleText:
+  title:
     'Incident management for your application, testing a very long title to see how this behaves with a longer title',
-  subtitleText:
+  subtitle:
     'This is some text that would talk about how you could investigate incidednt management within this side panel.',
 };
 
@@ -320,7 +320,7 @@ const SlideOverTemplate = ({ minimalContent, actions, ...args }) => {
       <SidePanel
         {...args}
         open={open}
-        setOpen={setOpen}
+        onRequestClose={() => setOpen(false)}
         actions={actionSets[actions]}>
         {!minimalContent && <ChildrenContent />}
       </SidePanel>
@@ -340,9 +340,9 @@ const StepTemplate = (args) => {
       <SidePanel
         {...args}
         open={open}
-        setOpen={setOpen}
+        onRequestClose={() => setOpen(false)}
         currentStep={currentStep}
-        onNavigationBack={setCurrentStep}>
+        onNavigationBack={() => setCurrentStep((prev) => prev - 1)}>
         <ChildrenContentWithSteps
           currentStep={currentStep}
           setCurrentStep={setCurrentStep}
@@ -370,7 +370,7 @@ const SlideInTemplate = ({ actions, ...args }) => {
       <SidePanel
         {...args}
         open={open}
-        setOpen={setOpen}
+        onRequestClose={() => setOpen(false)}
         actions={actionSets[actions]}>
         <ChildrenContent />
       </SidePanel>
@@ -414,14 +414,6 @@ WithActionToolbar.args = {
     },
   ],
   ...defaultStoryProps,
-};
-
-export const WithCondensedActions = SlideOverTemplate.bind({});
-WithCondensedActions.args = {
-  ...defaultStoryProps,
-  condensed: true,
-  placement: 'left',
-  actions: 0,
 };
 
 export const PanelWithSecondStep = StepTemplate.bind({});

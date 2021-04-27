@@ -8,8 +8,8 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import { ProductiveCard } from '.';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
+import { ProductiveCard } from '.';
 
 const { name } = ProductiveCard;
 const defaultProps = {};

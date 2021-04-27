@@ -11,20 +11,13 @@ import { render, screen } from '@testing-library/react';
 import { pkg, carbon } from '../../settings';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 
-import {
-  BreadcrumbItem,
-  Button,
-  Tab,
-  Tabs,
-  Tag,
-} from 'carbon-components-react';
+import { BreadcrumbItem, Tab, Tabs, Tag } from 'carbon-components-react';
 import { Lightning16, Bee32 } from '@carbon/icons-react';
 
 import { PageHeader } from '.';
 import { ActionBarItem } from '../ActionBar';
 
 /* Test properties. */
-const pageActionItemOnClick = jest.fn();
 const actionBarItems = [1, 2, 3, 4].map((item) => ({
   renderIcon: Lightning16,
   iconDescription: `Action ${item}`,

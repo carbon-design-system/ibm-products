@@ -25,7 +25,7 @@ const title = 'This is a test title';
 const subtitle = 'This is a test subtitle';
 const description =
   'This is a test description. It has several lines. It should render a modal.';
-const primaryFocus = '.bx--text-input';
+const selectorPrimaryFocus = '.bx--text-input';
 const dataTestId = uuidv4();
 
 // render a CreateModal with title, subtitle, description, and any other required props
@@ -37,8 +37,10 @@ const renderComponent = ({ ...rest }, children) =>
         title,
         subtitle,
         description,
-        primaryFocus,
+        selectorPrimaryFocus,
         disableSubmit: false,
+        primaryButtonText: 'Create',
+        secondaryButtonText: 'Cancel',
         ...rest,
       }}>
       {children}
@@ -98,18 +100,21 @@ describe(componentName, () => {
     await expect(container).toHaveNoAxeViolations();
   }, 80000);
 
-  it('calls onSubmit() when primary button is clicked', () => {
+  it('calls onRequestSubmit() when primary button is clicked', () => {
     const primaryHandler = jest.fn();
-    renderComponent({ primaryButtonText: 'Create', onSubmit: primaryHandler });
+    renderComponent({
+      // primaryButtonText: 'Create',
+      onRequestSubmit: primaryHandler,
+    });
     userEvent.click(screen.getByRole('button', { name: 'Create' }));
     expect(primaryHandler).toBeCalledTimes(1);
   });
 
-  it('calls onClose() when secondary button is clicked', () => {
+  it('calls onRequestClose() when secondary button is clicked', () => {
     const secondaryHandler = jest.fn();
     renderComponent({
-      secondaryButtonText: 'Cancel',
-      onClose: secondaryHandler,
+      // secondaryButtonText: 'Cancel',
+      onRequestClose: secondaryHandler,
     });
     userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
     expect(secondaryHandler).toBeCalledTimes(1);
@@ -119,8 +124,8 @@ describe(componentName, () => {
     const primaryHandler = jest.fn();
     const secondaryHandler = jest.fn();
     renderComponent({
-      onSubmit: primaryHandler,
-      onClose: secondaryHandler,
+      onRequestSubmit: primaryHandler,
+      onRequestClose: secondaryHandler,
     });
     screen.getAllByRole('button').forEach(userEvent.click);
     expect(primaryHandler).toBeCalledTimes(1);
@@ -136,7 +141,7 @@ describe(componentName, () => {
 
   it('applies focus to selected element', () => {
     const { container } = renderComponent(
-      { primaryFocus },
+      { selectorPrimaryFocus },
       <TextInput
         key="form-field-1"
         id="1"
@@ -145,13 +150,12 @@ describe(componentName, () => {
         placeholder="Placeholder"
       />
     );
-    const firstInput = container.querySelector(primaryFocus);
+    const firstInput = container.querySelector(selectorPrimaryFocus);
     expect(firstInput === document.activeElement).toBeTruthy();
   });
 
   it('throws an error if there are more than 4 child nodes inside of the modal', () => {
-    const { container } = renderComponent(
-      {},
+    const { container } = renderComponent({}, [
       <TextInput
         key="form-field-1"
         id="1"
@@ -186,16 +190,10 @@ describe(componentName, () => {
         labelText="Text input label"
         helperText="Helper text goes here"
         placeholder="Placeholder"
-      />
-    );
-    const form = container.querySelector(
-      '.bx--modal-content.bx--modal-content--with-form .bx--form.exp--create-modal__form'
-    );
-    console.log(form.children.length);
-    // expect(() => {
-    //   render(container);
-    // }).toThrow(
-    //   'The `CreateModal` component does not take more than 4 nodes as children. This is to ensure that the modal does not overflow. Please remove 1 or more nodes.'
-    // );
+      />,
+    ]);
+    expect(() => {
+      render(...container);
+    }).toThrow();
   });
 });

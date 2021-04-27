@@ -63,10 +63,6 @@ export let ExportModal = ({
     onRequestSubmit(returnName);
   };
 
-  const onCloseHandler = () => {
-    onRequestClose();
-  };
-
   const hasInvalidExtension = () => {
     if (!dirtyInput || !validExtensions || !validExtensions.length)
       return false;
@@ -86,7 +82,7 @@ export let ExportModal = ({
       secondaryButtonText={secondaryButtonText}
       modalHeading={modalHeading}
       onRequestSubmit={onSubmitHandler}
-      onRequestClose={onCloseHandler}
+      onRequestClose={onRequestClose}
       className={blockClass}
       primaryButtonDisabled={primaryButtonDisabled}
       passiveModal={submitted}>

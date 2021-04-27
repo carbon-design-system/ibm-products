@@ -15,11 +15,11 @@ import { pkg } from '../../settings';
 const { name } = Card;
 
 describe(name, () => {
-  test('renders', () => {
+  it('renders', () => {
     render(<Card />);
   });
 
-  test('expressive with primary button', () => {
+  it('expressive with primary button', () => {
     const onPrimaryButtonClick = jest.fn();
     const props = {
       primaryButtonText: 'Primary',
@@ -30,7 +30,7 @@ describe(name, () => {
     expect(onPrimaryButtonClick).toHaveBeenCalled();
   });
 
-  test('expressive with both buttons', () => {
+  it('expressive with both buttons', () => {
     const onPrimaryButtonClick = jest.fn();
     const onSecondaryButtonClick = jest.fn();
     const props = {
@@ -46,7 +46,7 @@ describe(name, () => {
     expect(onSecondaryButtonClick).toHaveBeenCalled();
   });
 
-  test('expressive with action icons', () => {
+  it('expressive with action icons', () => {
     const onClick = jest.fn();
     const actionIcons = [
       {
@@ -64,7 +64,7 @@ describe(name, () => {
     expect(onClick).toHaveBeenCalled();
   });
 
-  test('expressive with onClick', () => {
+  it('expressive with onClick', () => {
     const onClick = jest.fn();
     const props = {
       onClick,
@@ -74,7 +74,19 @@ describe(name, () => {
     expect(onClick).toHaveBeenCalled();
   });
 
-  test('productive', () => {
+  it('expressive with media', () => {
+    const mediaContent = 'media element';
+    const pictogramContent = 'pictogram element';
+    const props = {
+      media: <p>{mediaContent}</p>,
+      pictogram: () => <p>{pictogramContent}</p>,
+    };
+    const { getByText } = render(<Card {...props} />);
+    expect(getByText(mediaContent)).toBeVisible();
+    expect(getByText(pictogramContent)).toBeVisible();
+  });
+
+  it('productive', () => {
     const iconClick = jest.fn();
     const buttonClick = jest.fn();
     const props = {
@@ -91,14 +103,22 @@ describe(name, () => {
       primaryButtonText: 'Ghost button',
       onPrimaryButtonClick: buttonClick,
     };
-    const { getByText } = render(<Card {...props} />);
+    const { container, getByText, rerender } = render(<Card {...props} />);
+    expect(getByText(props.label)).toBeVisible();
+    expect(
+      container.querySelector(`.${pkg.prefix}-card-actions--top`)
+    ).toBeNull();
     fireEvent.click(getByText('icon'));
     expect(iconClick).toHaveBeenCalled();
     fireEvent.click(getByText(props.primaryButtonText));
     expect(buttonClick).toHaveBeenCalled();
+    rerender(<Card {...props} actionIconsPosition="top" />);
+    expect(
+      container.querySelector(`.${pkg.prefix}-card-actions--top`)
+    ).toBeVisible();
   });
 
-  test('productive with overflow', () => {
+  it('productive with overflow', () => {
     const onClick = jest.fn();
     const props = {
       overflowActions: [
@@ -109,24 +129,28 @@ describe(name, () => {
         },
       ],
     };
-    const { getByText, container } = render(<Card {...props} />);
+    const { getByText, container, rerender } = render(<Card {...props} />);
     fireEvent.click(container.querySelector('.bx--overflow-menu'));
     fireEvent.click(getByText('Edit'));
     expect(onClick).toHaveBeenCalled();
+    rerender(<Card {...props} actionIconsPosition="top" />);
   });
 
-  test('productive with click zones', () => {
+  it('productive with click zones', () => {
     const onClick = jest.fn();
     const props = {
       onClick,
       clickZone: 'one',
       title: 'Title',
+      caption: 'Caption',
       primaryButtonText: 'Primary',
       productive: true,
       actionIcons: [],
       children: <p>body</p>,
     };
-    const { rerender, container } = render(<Card {...props} />);
+    const { rerender, getByText, container } = render(<Card {...props} />);
+    expect(getByText(props.title)).toBeVisible();
+    expect(getByText(props.caption)).toBeVisible();
     fireEvent.click(container.querySelector(`.${pkg.prefix}-card--clickable`));
     expect(onClick).toHaveBeenCalled();
     rerender(<Card {...props} clickZone="two" />);

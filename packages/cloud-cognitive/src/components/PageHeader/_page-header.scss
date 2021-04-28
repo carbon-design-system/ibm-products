@@ -186,7 +186,10 @@ $raised-z-index: 99;
 .#{$block-class}--breadcrumb {
   @include carbon--type-style('label-01');
 
-  padding-top: $spacing-04;
+  padding-top: 0;
+  @include carbon--breakpoint(md) {
+    padding-top: $spacing-04;
+  }
 }
 
 .#{$block-class}--breadcrumb .#{$carbon-prefix}--breadcrumb-item {

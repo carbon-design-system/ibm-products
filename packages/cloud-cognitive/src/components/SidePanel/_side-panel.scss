@@ -67,8 +67,7 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
 
 @mixin setDividerStyles() {
   position: absolute;
-  // stylelint-disable-next-line carbon/layout-token-use
-  bottom: -2px;
+  bottom: 0;
   left: 0;
   width: 100%;
   height: 1px;
@@ -180,7 +179,7 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       position: sticky;
       top: 0;
       z-index: 4;
-      padding: $spacing-05 $spacing-05 0 $spacing-05;
+      padding: $spacing-05 $spacing-05 $spacing-03 $spacing-05;
       background-color: $ui-01;
       &::before {
         @include setDividerStyles();
@@ -192,7 +191,6 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       position: inherit;
       z-index: 4;
       display: -webkit-box;
-      margin-bottom: $spacing-03;
       padding-right: $spacing-07;
       overflow: hidden;
       // stylelint-disable-next-line carbon/type-token-use

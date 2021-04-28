@@ -14,6 +14,7 @@ import { pkg } from '../../settings';
 import { prepareProps } from '../../global/js/utils/props-helper';
 
 // Carbon and package components we use.
+import { Button } from 'carbon-components-react';
 import { ActionSet } from '../ActionSet';
 
 import { TearsheetShell } from './TearsheetShell';
@@ -67,10 +68,9 @@ Tearsheet.propTypes = {
     ActionSet.validateActions(() => 'max'),
     PropTypes.arrayOf(
       PropTypes.shape({
-        label: PropTypes.string,
-        onPrimaryActionClick: PropTypes.func,
+        ...Button.propTypes,
         kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
-        disabled: PropTypes.bool,
+        label: PropTypes.string,
         loading: PropTypes.bool,
       })
     ),

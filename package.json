@@ -23,7 +23,7 @@
     "clean": "yarn cache clean && lerna run clean && lerna clean --yes",
     "copy-common-files": "sh ./scripts/copy-common-files.sh;",
     "format": "prettier --write '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
-    "format:diff": "prettier --list-different '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!README.md'",
+    "format:diff": "prettier --list-different '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd,coverage}/**' '!README.md'",
     "generate": "lerna run generate --loglevel success --scope \"@carbon/ibm-cloud-cognitive\" --",
     "monorepo:npm-upgrade": "sh ./scripts/monorepo-npm-upgrade.sh",
     "lint": "yarn lint:es && yarn lint:style",

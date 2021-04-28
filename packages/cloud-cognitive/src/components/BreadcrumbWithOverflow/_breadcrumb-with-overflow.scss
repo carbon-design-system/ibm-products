@@ -33,10 +33,6 @@
       white-space: nowrap;
     }
 
-    .#{$block-class}__space--right {
-      text-align: end;
-    }
-
     .#{$block-class}__breadcrumb-container {
       display: inline-flex; // needed to register a width
       width: 100%;

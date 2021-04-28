@@ -153,6 +153,7 @@ describe(componentName, () => {
   });
 
   it('throws an error if there are more than 4 child nodes inside of the modal', () => {
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
     const { container } = renderComponent({}, [
       <TextInput
         key="form-field-1"
@@ -193,5 +194,7 @@ describe(componentName, () => {
     expect(() => {
       render(...container);
     }).toThrow();
+    error.mockRestore();
+
   });
 });

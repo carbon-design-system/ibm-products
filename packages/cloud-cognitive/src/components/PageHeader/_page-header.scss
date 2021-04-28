@@ -13,11 +13,10 @@
 @import 'carbon-components/scss/components/content-switcher/content-switcher';
 @import 'carbon-components/scss/components/tabs/tabs';
 
-@import './button-set-with-overflow';
+@import '../ButtonSetWithOverflow/button-set-with-overflow';
 @import '../ActionBar/index';
 @import '../TagSet/index';
 @import '../BreadcrumbWithOverflow/index';
-@import './temp-combo-button';
 
 $block-class: #{$pkg-prefix}-page-header;
 $raised-z-index: 99;

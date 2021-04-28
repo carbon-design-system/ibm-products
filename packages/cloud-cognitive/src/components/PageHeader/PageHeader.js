@@ -29,7 +29,7 @@ import { deprecatePropUsage } from '../../global/js/utils/props-helper';
 import unwrapIfFragment from '../../global/js/utils/unwrap-if-fragment';
 
 const componentName = 'PageHeader';
-const blockClass = `${pkg.prefix}-page-header`;
+const blockClass = `${pkg.prefix}--page-header`;
 
 export let PageHeader = ({
   actionBarItems,

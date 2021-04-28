@@ -19,7 +19,7 @@
 @import '../TagSet/index';
 @import '../BreadcrumbWithOverflow/index';
 
-$block-class: #{$pkg-prefix}-page-header;
+$block-class: #{$pkg-prefix}--page-header;
 $raised-z-index: 99;
 
 @mixin page-header {

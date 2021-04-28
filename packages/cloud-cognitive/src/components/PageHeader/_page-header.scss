@@ -7,6 +7,7 @@
 
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
+@import '../../global/styles/mixins';
 
 @import 'carbon-components/scss/globals/grid/grid';
 @import 'carbon-components/scss/components/button/button';
@@ -21,441 +22,453 @@
 $block-class: #{$pkg-prefix}-page-header;
 $raised-z-index: 99;
 
-.#{$block-class} {
-  /* Bleed class for the background */
-  position: sticky;
-  top: var(--#{$block-class}--header-top);
-  display: inline-block; /* cause top/bottom margin to reserve space */
-  width: 100%;
-  background-color: $ui-background;
+@mixin page-header {
+  @include block-wrap($block-class) {
+    &.#{$block-class} {
+      /* Bleed class for the background */
+      position: sticky;
+      top: var(--#{$block-class}__header-top);
+      display: inline-block; /* cause top/bottom margin to reserve space */
+      width: 100%;
+      background-color: $ui-background;
 
-  /* custom props */
-  --#{$block-class}--breadcrumb-min-height: #{$spacing-08};
-  --#{$block-class}--breadcrumb-title-visibility: hidden;
-  --#{$block-class}--breadcrumb-title-opacity: 1;
-  --#{$block-class}--breadcrumb-top: 0;
-  --#{$block-class}--background-opacity: 1;
-  --#{$block-class}--breadcrumb-title-top: initial;
-  --#{$block-class}--button-set-in-breadcrumb-width-px: initial;
-}
+      /* custom props */
+      --#{$block-class}__breadcrumb-min-height: #{$spacing-08};
+      --#{$block-class}__breadcrumb-title-visibility: hidden;
+      --#{$block-class}__breadcrumb-title-opacity: 1;
+      --#{$block-class}__breadcrumb-top: 0;
+      --#{$block-class}__background-opacity: 1;
+      --#{$block-class}__breadcrumb-title-top: initial;
+      --#{$block-class}__button-set-in-breadcrumb-width-px: initial;
+    }
 
-@mixin appearingBackground() {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  background-color: $ui-01;
-  opacity: var(--#{$block-class}--background-opacity);
-  content: '';
-}
+    @mixin appearingBackground() {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-color: $ui-01;
+      opacity: var(--#{$block-class}__background-opacity);
+      content: '';
+    }
 
-.#{$block-class}--background::before {
-  @include appearingBackground();
+    .#{$block-class}__background::before {
+      @include appearingBackground();
 
-  z-index: -1;
-  box-shadow: 0 1px 0 $ui-03;
-}
+      z-index: -1;
+      box-shadow: 0 1px 0 $ui-03;
+    }
 
-.#{$block-class}--breadcrumb-row {
-  position: sticky;
-  top: var(--#{$block-class}--breadcrumb-top);
-  z-index: $raised-z-index;
-  min-height: var(--#{$block-class}--breadcrumb-min-height);
+    .#{$block-class}__breadcrumb-row {
+      position: sticky;
+      top: var(--#{$block-class}__breadcrumb-top);
+      z-index: $raised-z-index;
+      min-height: var(--#{$block-class}__breadcrumb-min-height);
 
-  + .#{$block-class}--last-row-buffer--active {
-    height: $spacing-02;
-  }
-}
+      + .#{$block-class}__last-row-buffer--active {
+        height: $spacing-02;
+      }
+    }
 
-.#{$block-class}--breadcrumb-row--container {
-  display: flex;
-  flex-wrap: nowrap;
+    .#{$block-class}__breadcrumb-row--container {
+      display: flex;
+      flex-wrap: nowrap;
 
-  min-width: calc(
-    100% +
-      (
-        var(--#{$block-class}--width-px) -
-          var(--#{$block-class}--breadcrumb-row-width-px)
-      ) / 2
-  );
-}
+      min-width: calc(
+        100% +
+          (
+            var(--#{$block-class}__width-px) -
+              var(--#{$block-class}__breadcrumb-row-width-px)
+          ) / 2
+      );
+    }
 
-.#{$block-class}--breadcrumb-row--with-actions {
-  + .#{$block-class}--last-row-buffer--active {
-    height: $layout-02;
-  }
-}
+    .#{$block-class}__breadcrumb-row--with-actions {
+      + .#{$block-class}__last-row-buffer--active {
+        height: $layout-02;
+      }
+    }
 
-.#{$block-class}--breadcrumb-row::after {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  display: block;
-  width: 50vw;
-  height: 1px;
-  /* creates a full width box shadow without causing scroll */
-  box-shadow: 0 1px 0 0 $ui-03, 0 1px 0 0 $ui-03;
-  transform: translateX(-50%) scaleX(1);
-  opacity: 0;
-  transition: all $duration--moderate-01 ease-out;
-  content: '';
-}
+    .#{$block-class}__breadcrumb-row::after {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      display: block;
+      width: 50vw;
+      height: 1px;
+      /* creates a full width box shadow without causing scroll */
+      box-shadow: 0 1px 0 0 $ui-03, 0 1px 0 0 $ui-03;
+      transform: translateX(-50%) scaleX(1);
+      opacity: 0;
+      transition: all $duration--moderate-01 ease-out;
+      content: '';
+    }
 
-.#{$block-class}--breadcrumb-row--next-to-tabs::after,
-.#{$block-class}--breadcrumb-row--with-actions::after {
-  /* creates a full width box shadow without causing scroll */
-  box-shadow: 25vw 1px 0 0 $ui-03, -25vw 1px 0 0 $ui-03;
-  opacity: 1;
-}
+    .#{$block-class}__breadcrumb-row--next-to-tabs::after,
+    .#{$block-class}__breadcrumb-row--with-actions::after {
+      /* creates a full width box shadow without causing scroll */
+      box-shadow: 25vw 1px 0 0 $ui-03, -25vw 1px 0 0 $ui-03;
+      opacity: 1;
+    }
 
-.#{$block-class}--breadcrumb-container {
-  width: 100%;
-}
+    .#{$block-class}__breadcrumb-container {
+      width: 100%;
+    }
 
-.#{$block-class}--action-bar-column {
-  // @include carbon--breakpoint-up('md') {
-  .#{$block-class}--breadcrumb-row--has-breadcrumbs & {
-    flex: 1 0 40%;
-    max-width: 40%;
-  }
-}
+    .#{$block-class}__action-bar-column {
+      // @include carbon--breakpoint-up('md') {
+      .#{$block-class}__breadcrumb-row--has-breadcrumbs & {
+        flex: 1 0 40%;
+        max-width: 40%;
+      }
+    }
 
-.#{$block-class}--action-bar-column-content {
-  display: flex;
-  justify-content: flex-end;
-  white-space: nowrap;
+    .#{$block-class}__action-bar-column-content {
+      display: flex;
+      justify-content: flex-end;
+      white-space: nowrap;
 
-  @include carbon--breakpoint-up('lg') {
-    flex-wrap: nowrap; /* assume enough space */
-  }
-}
+      @include carbon--breakpoint-up('lg') {
+        flex-wrap: nowrap; /* assume enough space */
+      }
+    }
 
-.#{$block-class}--breadcrumb-row .#{$block-class}--page-actions {
-  display: inline-block;
-  flex: 1 1 var(--#{$block-class}--button-set-in-breadcrumb-width-px);
-  width: 100%;
-  max-width: var(--#{$block-class}--button-set-in-breadcrumb-width-px);
-  white-space: nowrap;
-  visibility: hidden;
-  opacity: 0;
-  transition: all $duration--moderate-02
-    carbon--motion('entrance', 'productive');
-}
+    .#{$block-class}__breadcrumb-row .#{$block-class}__page-actions {
+      display: inline-block;
+      flex: 1 1 var(--#{$block-class}__button-set-in-breadcrumb-width-px);
+      width: 100%;
+      max-width: var(--#{$block-class}__button-set-in-breadcrumb-width-px);
+      white-space: nowrap;
+      visibility: hidden;
+      opacity: 0;
+      transition: all $duration--moderate-02
+        carbon--motion('entrance', 'productive');
+    }
 
-.#{$block-class}--breadcrumb-row .#{$block-class}--page-actions--in-breadcrumb {
-  visibility: visible;
-  opacity: 1;
-}
+    .#{$block-class}__breadcrumb-row
+      .#{$block-class}__page-actions--in-breadcrumb {
+      visibility: visible;
+      opacity: 1;
+    }
 
-.#{$block-class}--breadcrumb-row .#{$block-class}--button-set--in-breadcrumb {
-  // display: inline-block;
-}
+    .#{$block-class}__breadcrumb-row
+      .#{$block-class}__button-set--in-breadcrumb {
+      // display: inline-block;
+    }
 
-.#{$block-class}--breadcrumb-column {
-  flex: 0 0 100%;
-  max-width: 100%;
-  overflow: hidden; /* required for ellipsis in title */
+    .#{$block-class}__breadcrumb-column {
+      flex: 0 0 100%;
+      max-width: 100%;
+      overflow: hidden; /* required for ellipsis in title */
 
-  // @include carbon--breakpoint-up('md') {
-  .#{$block-class}--breadcrumb-row--has-action-bar & {
-    flex: 0 1 60%;
-    max-width: 60%;
-  }
-}
+      // @include carbon--breakpoint-up('md') {
+      .#{$block-class}__breadcrumb-row--has-action-bar & {
+        flex: 0 1 60%;
+        max-width: 60%;
+      }
+    }
 
-.#{$block-class}--breadcrumb-column--background,
-.#{$block-class}--action-bar-column--background {
-  position: relative;
-  background-color: $ui-background;
-}
+    .#{$block-class}__breadcrumb-column--background,
+    .#{$block-class}__action-bar-column--background {
+      position: relative;
+      background-color: $ui-background;
+    }
 
-// .#{$block-class}--breadcrumb-column--background,
-// .#{$block-class}--action-bar-column--background {
-//   background-color: $ui-background;
-// }
+    // .#{$block-class}__breadcrumb-column--background,
+    // .#{$block-class}__action-bar-column--background {
+    //   background-color: $ui-background;
+    // }
 
-.#{$block-class}--background
-  .#{$block-class}--breadcrumb-column--background::before,
-.#{$block-class}--background
-  .#{$block-class}--action-bar-column--background::before {
-  @include appearingBackground();
-}
+    .#{$block-class}__background
+      .#{$block-class}__breadcrumb-column--background::before,
+    .#{$block-class}__background
+      .#{$block-class}__action-bar-column--background::before {
+      @include appearingBackground();
+    }
 
-.#{$block-class}--breadcrumb {
-  @include carbon--type-style('label-01');
+    .#{$block-class}__breadcrumb {
+      @include carbon--type-style('label-01');
 
-  padding-top: $spacing-04;
-}
+      padding-top: $spacing-04;
+    }
 
-.#{$block-class}--breadcrumb .#{$carbon-prefix}--breadcrumb-item {
-  margin-right: $spacing-02;
-}
+    .#{$block-class}__breadcrumb .#{$carbon-prefix}--breadcrumb-item {
+      margin-right: $spacing-02;
+    }
 
-.#{$block-class}--breadcrumb .#{$carbon-prefix}--breadcrumb-item::after {
-  margin-left: $spacing-02;
-}
+    .#{$block-class}__breadcrumb .#{$carbon-prefix}--breadcrumb-item::after {
+      margin-left: $spacing-02;
+    }
 
-.#{$block-class}--breadcrumb .#{$carbon-prefix}--breadcrumb-item,
-.#{$block-class}--breadcrumb
-  .#{$carbon-prefix}--breadcrumb-item
-  .#{$carbon-prefix}--link {
-  @include carbon--type-style('label-01');
-}
+    .#{$block-class}__breadcrumb .#{$carbon-prefix}--breadcrumb-item,
+    .#{$block-class}__breadcrumb
+      .#{$carbon-prefix}--breadcrumb-item
+      .#{$carbon-prefix}--link {
+      @include carbon--type-style('label-01');
+    }
 
-.exp-page-header--breadcrumb-title {
-  position: relative;
+    .exp-page-header--breadcrumb-title {
+      position: relative;
 
-  &:not(.#{$block-class}--breadcrumb-title--pre-collapsed) {
-    // stylelint-disable-next-line carbon/layout-token-use
-    transform: translateY(
-      var(--#{$block-class}--breadcrumb-title-top)
-    ); /* token linter does not support this form */
+      &:not(.#{$block-class}__breadcrumb-title--pre-collapsed) {
+        // stylelint-disable-next-line carbon/layout-token-use
+        transform: translateY(
+          var(--#{$block-class}__breadcrumb-title-top)
+        ); /* token linter does not support this form */
 
-    visibility: var(--#{$block-class}--breadcrumb-title-visibility);
-    opacity: var(--#{$block-class}--breadcrumb-title-opacity);
-  }
-}
+        visibility: var(--#{$block-class}__breadcrumb-title-visibility);
+        opacity: var(--#{$block-class}__breadcrumb-title-opacity);
+      }
+    }
 
-.#{$block-class}--breadcrumb-container
-  .#{$block-class}--breadcrumb-title.#{$prefix}--breadcrumb-item {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+    .#{$block-class}__breadcrumb-container
+      .#{$block-class}__breadcrumb-title.#{$prefix}--breadcrumb-item {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
-.#{$block-class}--breadcrumb-container--hidden
-  .#{$block-class}--breadcrumb-title.#{$block-class}--breadcrumb-title {
-  overflow: initial;
-}
+    .#{$block-class}__breadcrumb-container--hidden
+      .#{$block-class}__breadcrumb-title.#{$block-class}__breadcrumb-title {
+      overflow: initial;
+    }
 
-.#{$block-class}--breadcrumb-title.#{$prefix}--breadcrumb-item
-  .#{$prefix}--link {
-  width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+    .#{$block-class}__breadcrumb-title.#{$prefix}--breadcrumb-item
+      .#{$prefix}--link {
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
-// .#{$block-class}--breadcrumb-row::before {
-//   display: inline-block;
-//   width: 0;
-//   height: calc(#{$layout-03} + #{$spacing-04});
-//   content: '';
-// }
+    // .#{$block-class}__breadcrumb-row::before {
+    //   display: inline-block;
+    //   width: 0;
+    //   height: calc(#{$layout-03} + #{$spacing-04});
+    //   content: '';
+    // }
 
-.#{$block-class}--action-bar {
-  flex: 1 1 var(--#{$block-class}--max-action-bar-width-px);
-  width: 100%;
-  max-width: var(--#{$block-class}--max-action-bar-width-px);
-  margin-top: calc(-1 * #{$spacing-04}); /* align with breadcrumb */
-  padding-top: $spacing-04;
-  white-space: nowrap;
-  vertical-align: top;
-}
+    .#{$block-class}__action-bar {
+      flex: 1 1 var(--#{$block-class}__max-action-bar-width-px);
+      width: 100%;
+      max-width: var(--#{$block-class}__max-action-bar-width-px);
+      margin-top: calc(-1 * #{$spacing-04}); /* align with breadcrumb */
+      padding-top: $spacing-04;
+      white-space: nowrap;
+      vertical-align: top;
+    }
 
-.#{$block-class}--title-row {
-  z-index: $raised-z-index + 1;
-  margin-top: $spacing-02;
-  margin-bottom: 0;
+    .#{$block-class}__title-row {
+      z-index: $raised-z-index + 1;
+      margin-top: $spacing-02;
+      margin-bottom: 0;
 
-  @include carbon--breakpoint-up('md') {
-    flex-wrap: nowrap; /* assume enough space */
-  }
+      @include carbon--breakpoint-up('md') {
+        flex-wrap: nowrap; /* assume enough space */
+      }
 
-  &.#{$block-class}--title-row--under-action-bar {
-    margin-top: $spacing-06;
-  }
+      &.#{$block-class}__title-row--under-action-bar {
+        margin-top: $spacing-06;
+      }
 
-  + .#{$block-class}--last-row-buffer--active {
-    // only used when nothing below title
-    height: $layout-03;
-  }
+      + .#{$block-class}__last-row-buffer--active {
+        // only used when nothing below title
+        height: $layout-03;
+      }
 
-  &.#{$block-class}--title-row--spacing-below-03 {
-    margin-bottom: $spacing-03;
-  }
+      &.#{$block-class}__title-row--spacing-below-03 {
+        margin-bottom: $spacing-03;
+      }
 
-  &.#{$block-class}--title-row--spacing-below-05 {
-    + .#{$block-class}--last-row-buffer--active {
-      // only used when nothing below title
-      height: $spacing-05;
+      &.#{$block-class}__title-row--spacing-below-05 {
+        + .#{$block-class}__last-row-buffer--active {
+          // only used when nothing below title
+          height: $spacing-05;
+        }
+      }
+
+      &.#{$block-class}__title-row--spacing-below-06 {
+        margin-bottom: $layout-02;
+      }
+
+      &.#{$block-class}__title-row--no-breadcrumb-row {
+        margin-top: $layout-03;
+      }
+
+      &.#{$block-class}__title-row--sticky {
+        position: sticky;
+        top: var(--#{$block-class}__breadcrumb-top);
+      }
+    }
+
+    .#{$block-class}__title-column {
+      flex: 0 0 100%;
+      overflow: hidden; /* required for ellipsis in title */
+
+      @include carbon--breakpoint-up('md') {
+        flex: 0 1 60%;
+      }
+    }
+
+    .#{$block-class}__title {
+      @include carbon--type-style('productive-heading-04');
+
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .#{$block-class}__title--fades {
+      opacity: calc(1 - var(--#{$block-class}__breadcrumb-title-opacity));
+    }
+
+    .#{$block-class}__title-icon {
+      margin-right: $spacing-04;
+    }
+
+    .#{$block-class}__page-actions {
+      flex: 0 0 100%;
+      margin-top: $spacing-05;
+      white-space: nowrap;
+
+      @include carbon--breakpoint-up('md') {
+        flex: 1 1 40%;
+        margin-top: 0;
+      }
+    }
+
+    .#{$block-class}__action-bar-column .#{$block-class}__page-actions {
+      margin-top: 0;
+    }
+
+    .#{$block-class}__page-actions-container {
+      justify-content: flex-start;
+
+      @include carbon--breakpoint-up('md') {
+        justify-content: flex-end;
+      }
+    }
+
+    .#{$block-class}__title-row .#{$block-class}__page-actions {
+      visibility: visible;
+      opacity: 1;
+      transition: all $duration--fast-02
+        carbon--motion('entrance', 'productive');
+      transition-property: opacity, visibility;
+    }
+
+    .#{$block-class}__title-row .#{$block-class}__page-actions--in-breadcrumb {
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    .#{$block-class}__subtitle-row {
+      margin-top: $spacing-03;
+
+      + .#{$block-class}__last-row-buffer--active {
+        height: $layout-01;
+      }
+    }
+
+    .#{$block-class}__subtitle {
+      @include carbon--type-style('body-long-02');
+    }
+
+    .#{$block-class}__available-row {
+      margin-top: $spacing-03;
+
+      + .#{$block-class}__last-row-buffer--active {
+        height: $layout-03;
+      }
+    }
+
+    .#{$block-class}__navigation-row {
+      flex-wrap: wrap-reverse;
+      margin-top: $spacing-04;
+
+      .#{$carbon-prefix}--content-switcher {
+        box-sizing: content-box;
+        padding-bottom: $layout-01;
+      }
+    }
+
+    .#{$block-class}__last-row-buffer--active
+      + .#{$block-class}__navigation-row {
+      margin-top: 0;
+    }
+
+    .#{$block-class}__navigation-row--spacing-above-06 {
+      margin-top: $layout-02;
+    }
+
+    .#{$block-class}__navigation-row .#{$carbon-prefix}--tab-content {
+      display: none; /* need to figure out how to handle the tab content */
+    }
+
+    .#{$block-class}__navigation-tabs {
+      margin-left: calc(-1 * #{$spacing-04});
+
+      .#{$block-class}__navigation-row--has-tags & {
+        flex: 0 1 75%;
+        max-width: 75%;
+      }
+    }
+
+    .#{$block-class}__navigation-tags {
+      display: flex;
+      flex: 1 0 25%;
+      align-items: center;
+      justify-content: flex-end;
+      max-width: 25%;
+      padding-bottom: $spacing-02; /* design says 3 from bottom of tag, which has $spacing-02 already. 2 * $spacing-02 = $spacing-3 */
+      white-space: nowrap;
+      text-align: right;
+    }
+
+    .#{$block-class}__navigation-tags--tags-only {
+      justify-content: flex-start;
+      margin-left: calc(-1 * #{$spacing-02});
+      padding-bottom: $spacing-04;
+      text-align: initial;
+    }
+
+    .#{$block-class}__navigation-row .#{$carbon-prefix}--content-switcher-btn {
+      background-color: $ui-background;
+    }
+
+    .#{$block-class}
+      .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only.#{$block-class}__collapse-expand-toggle {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      z-index: $raised-z-index + 1;
+    }
+
+    .#{$block-class}
+      .#{$block-class}__collapse-expand-toggle
+      .#{$carbon-prefix}--btn__icon {
+      // transform: rotate(-90deg); // accordion does this, but it feels odd in page header
+      transition: all $duration--slow-01 motion(standard, productive);
+    }
+
+    .#{$block-class}
+      .#{$block-class}__collapse-expand-toggle--collapsed
+      .#{$carbon-prefix}--btn__icon {
+      // transform: rotate(90deg);
+      transform: scaleY(-1);
+    }
+
+    .#{$block-class}__background .#{$block-class}__navigation-tags {
+      // allow space for expand/collapse if we have a background
+      padding-right: $spacing-07;
+
+      @include carbon--breakpoint(md) {
+        padding-right: $spacing-05;
+      }
     }
   }
-
-  &.#{$block-class}--title-row--spacing-below-06 {
-    margin-bottom: $layout-02;
-  }
-
-  &.#{$block-class}--title-row--no-breadcrumb-row {
-    margin-top: $layout-03;
-  }
-
-  &.#{$block-class}--title-row--sticky {
-    position: sticky;
-    top: var(--#{$block-class}--breadcrumb-top);
-  }
 }
 
-.#{$block-class}--title-column {
-  flex: 0 0 100%;
-  overflow: hidden; /* required for ellipsis in title */
-
-  @include carbon--breakpoint-up('md') {
-    flex: 0 1 60%;
-  }
-}
-
-.#{$block-class}--title {
-  @include carbon--type-style('productive-heading-04');
-
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.#{$block-class}--title--fades {
-  opacity: calc(1 - var(--#{$block-class}--breadcrumb-title-opacity));
-}
-
-.#{$block-class}--title-icon {
-  margin-right: $spacing-04;
-}
-
-.#{$block-class}--page-actions {
-  flex: 0 0 100%;
-  margin-top: $spacing-05;
-  white-space: nowrap;
-
-  @include carbon--breakpoint-up('md') {
-    flex: 1 1 40%;
-    margin-top: 0;
-  }
-}
-
-.#{$block-class}--action-bar-column .#{$block-class}--page-actions {
-  margin-top: 0;
-}
-
-.#{$block-class}--page-actions-container {
-  justify-content: flex-start;
-
-  @include carbon--breakpoint-up('md') {
-    justify-content: flex-end;
-  }
-}
-
-.#{$block-class}--title-row .#{$block-class}--page-actions {
-  visibility: visible;
-  opacity: 1;
-  transition: all $duration--fast-02 carbon--motion('entrance', 'productive');
-  transition-property: opacity, visibility;
-}
-
-.#{$block-class}--title-row .#{$block-class}--page-actions--in-breadcrumb {
-  visibility: hidden;
-  opacity: 0;
-}
-
-.#{$block-class}--subtitle-row {
-  margin-top: $spacing-03;
-
-  + .#{$block-class}--last-row-buffer--active {
-    height: $layout-01;
-  }
-}
-
-.#{$block-class}--subtitle {
-  @include carbon--type-style('body-long-02');
-}
-
-.#{$block-class}--available-row {
-  margin-top: $spacing-03;
-
-  + .#{$block-class}--last-row-buffer--active {
-    height: $layout-03;
-  }
-}
-
-.#{$block-class}--navigation-row {
-  flex-wrap: wrap-reverse;
-  margin-top: $spacing-04;
-
-  .#{$carbon-prefix}--content-switcher {
-    box-sizing: content-box;
-    padding-bottom: $layout-01;
-  }
-}
-
-.#{$block-class}--last-row-buffer--active + .#{$block-class}--navigation-row {
-  margin-top: 0;
-}
-
-.#{$block-class}--navigation-row--spacing-above-06 {
-  margin-top: $layout-02;
-}
-
-.#{$block-class}--navigation-row .#{$carbon-prefix}--tab-content {
-  display: none; /* need to figure out how to handle the tab content */
-}
-
-.#{$block-class}--navigation-tabs {
-  margin-left: calc(-1 * #{$spacing-04});
-
-  .#{$block-class}--navigation-row--has-tags & {
-    flex: 0 1 75%;
-    max-width: 75%;
-  }
-}
-
-.#{$block-class}--navigation-tags {
-  display: flex;
-  flex: 1 0 25%;
-  align-items: center;
-  justify-content: flex-end;
-  max-width: 25%;
-  padding-bottom: $spacing-02; /* design says 3 from bottom of tag, which has $spacing-02 already. 2 * $spacing-02 = $spacing-3 */
-  white-space: nowrap;
-  text-align: right;
-}
-
-.#{$block-class}--navigation-tags--tags-only {
-  justify-content: flex-start;
-  margin-left: calc(-1 * #{$spacing-02});
-  padding-bottom: $spacing-04;
-  text-align: initial;
-}
-
-.#{$block-class}--navigation-row .#{$carbon-prefix}--content-switcher-btn {
-  background-color: $ui-background;
-}
-
-.#{$block-class}
-  .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only.#{$block-class}__collapse-expand-toggle {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  z-index: $raised-z-index + 1;
-}
-
-.#{$block-class}
-  .#{$block-class}__collapse-expand-toggle
-  .#{$carbon-prefix}--btn__icon {
-  // transform: rotate(-90deg); // accordion does this, but it feels odd in page header
-  transition: all $duration--slow-01 motion(standard, productive);
-}
-
-.#{$block-class}
-  .#{$block-class}__collapse-expand-toggle--collapsed
-  .#{$carbon-prefix}--btn__icon {
-  // transform: rotate(90deg);
-  transform: scaleY(-1);
-}
-
-.#{$block-class}--background .#{$block-class}--navigation-tags {
-  // allow space for expand/collapse if we have a background
-  padding-right: $spacing-07;
-
-  @include carbon--breakpoint(md) {
-    padding-right: $spacing-05;
-  }
+@include exports('page-header') {
+  @include page-header;
 }

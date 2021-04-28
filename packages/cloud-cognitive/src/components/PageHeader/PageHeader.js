@@ -109,8 +109,8 @@ export let PageHeader = ({
     setComponentCssCustomProps((prevCSSProps) => {
       return {
         ...prevCSSProps,
-        [`--${blockClass}--max-action-bar-width-px`]: newActionBarWidth,
-        [`--${blockClass}--button-set-in-breadcrumb-width-px`]: `${newPageActionInBreadcrumbWidth}`,
+        [`--${blockClass}__max-action-bar-width-px`]: newActionBarWidth,
+        [`--${blockClass}__button-set-in-breadcrumb-width-px`]: `${newPageActionInBreadcrumbWidth}`,
       };
     });
   }, [
@@ -155,12 +155,12 @@ export let PageHeader = ({
     // Utility function that checks the heights of various elements which are used to determine layout
     const update = {};
 
-    const breadcrumbTitleEl = getDynamicRef(`.${blockClass}--breadcrumb-title`);
-    const breadcrumbRowEl = getDynamicRef(`.${blockClass}--breadcrumb-row`);
-    const titleRowEl = getDynamicRef(`.${blockClass}--title-row`);
-    const subtitleRowEl = getDynamicRef(`.${blockClass}--subtitle-row`);
-    const availableRowEl = getDynamicRef(`.${blockClass}--available-row`);
-    const navigationRowEl = getDynamicRef(`.${blockClass}--navigation-row`);
+    const breadcrumbTitleEl = getDynamicRef(`.${blockClass}__breadcrumb-title`);
+    const breadcrumbRowEl = getDynamicRef(`.${blockClass}__breadcrumb-row`);
+    const titleRowEl = getDynamicRef(`.${blockClass}__title-row`);
+    const subtitleRowEl = getDynamicRef(`.${blockClass}__subtitle-row`);
+    const availableRowEl = getDynamicRef(`.${blockClass}__available-row`);
+    const navigationRowEl = getDynamicRef(`.${blockClass}__navigation-row`);
 
     update.headerHeight = headerEl.current ? headerEl.current.clientHeight : 0;
     update.headerWidth = headerEl.current ? headerEl.current.offsetWidth : 0;
@@ -260,21 +260,21 @@ export let PageHeader = ({
     setComponentCssCustomProps((prevCSSProps) => {
       return {
         ...prevCSSProps,
-        [`--${blockClass}--height-px`]: `${metrics.headerHeight}px`,
-        [`--${blockClass}--width-px`]: `${metrics.headerWidth}px`,
-        [`--${blockClass}--header-top`]: `${
+        [`--${blockClass}__height-px`]: `${metrics.headerHeight}px`,
+        [`--${blockClass}__width-px`]: `${metrics.headerWidth}px`,
+        [`--${blockClass}__header-top`]: `${
           metrics.headerTopValue + pageHeaderOffset
         }px`,
-        [`--${blockClass}--breadcrumb-title-visibility`]:
+        [`--${blockClass}__breadcrumb-title-visibility`]:
           scrollYValue > 0 ? 'visible' : 'hidden',
-        [`--${blockClass}--scroll`]: `${scrollYValue}`,
-        [`--${blockClass}--breadcrumb-title-top`]: `${Math.max(
+        [`--${blockClass}__scroll`]: `${scrollYValue}`,
+        [`--${blockClass}__breadcrumb-title-top`]: `${Math.max(
           0,
           metrics.breadcrumbTitleHeight +
             metrics.titleRowSpaceAbove -
             scrollYValue
         )}px`,
-        [`--${blockClass}--breadcrumb-title-opacity`]: `${Math.min(
+        [`--${blockClass}__breadcrumb-title-opacity`]: `${Math.min(
           1,
           Math.max(
             0,
@@ -282,8 +282,8 @@ export let PageHeader = ({
               (metrics.breadcrumbTitleHeight || 1) // don't want to
           )
         )}`,
-        [`--${blockClass}--breadcrumb-row-width-px`]: `${metrics.breadcrumbRowWidth}px`,
-        [`--${blockClass}--breadcrumb-top`]: `${Math.min(
+        [`--${blockClass}__breadcrumb-row-width-px`]: `${metrics.breadcrumbRowWidth}px`,
+        [`--${blockClass}__breadcrumb-top`]: `${Math.min(
           pageHeaderOffset,
           !keepBreadcrumbAndTabs && navigation
             ? metrics.headerHeight -
@@ -423,7 +423,7 @@ export let PageHeader = ({
     // }
     setComponentCssCustomProps((prevCSSProps) => ({
       ...prevCSSProps,
-      [`--${blockClass}--background-opacity`]: result,
+      [`--${blockClass}__background-opacity`]: result,
     }));
     setBackgroundOpacity(result);
   }, [
@@ -477,10 +477,10 @@ export let PageHeader = ({
       <section
         className={cx([
           blockClass,
-          `${blockClass}--no-margins-below-row`,
+          `${blockClass}__no-margins-below-row`,
           className,
           {
-            [`${blockClass}--background`]: backgroundOpacity > 0,
+            [`${blockClass}__background`]: backgroundOpacity > 0,
           },
         ])}
         ref={headerEl}
@@ -488,24 +488,24 @@ export let PageHeader = ({
         <Grid>
           {hasBreadcrumbRow ? (
             <Row
-              className={cx(`${blockClass}--breadcrumb-row`, {
-                [`${blockClass}--breadcrumb-row--with-actions`]: hasActionBar,
-                [`${blockClass}--breadcrumb-row--next-to-tabs`]: nextToTabsCheck(),
-                [`${blockClass}--breadcrumb-row--has-breadcrumbs`]: breadcrumbItems,
-                [`${blockClass}--breadcrumb-row--has-action-bar`]:
+              className={cx(`${blockClass}__breadcrumb-row`, {
+                [`${blockClass}__breadcrumb-row--with-actions`]: hasActionBar,
+                [`${blockClass}__breadcrumb-row--next-to-tabs`]: nextToTabsCheck(),
+                [`${blockClass}__breadcrumb-row--has-breadcrumbs`]: breadcrumbItems,
+                [`${blockClass}__breadcrumb-row--has-action-bar`]:
                   actionBarItemArray || pageActions,
               })}>
-              <div className={`${blockClass}--breadcrumb-row--container`}>
+              <div className={`${blockClass}__breadcrumb-row--container`}>
                 <Column
-                  className={cx(`${blockClass}--breadcrumb-column`, {
-                    [`${blockClass}--breadcrumb-column--background`]:
+                  className={cx(`${blockClass}__breadcrumb-column`, {
+                    [`${blockClass}__breadcrumb-column--background`]:
                       breadcrumbItems !== undefined || hasActionBar,
                   })}>
                   {/* keeps actionBar right even if empty */}
 
                   {breadcrumbItems !== undefined ? (
                     <BreadcrumbWithOverflow
-                      className={`${blockClass}--breadcrumb`}
+                      className={`${blockClass}__breadcrumb`}
                       noTrailingSlash={title !== undefined}>
                       {breadcrumbItems}
                       {title ? (
@@ -513,9 +513,9 @@ export let PageHeader = ({
                           href="#"
                           isCurrentPage={true}
                           className={cx([
-                            `${blockClass}--breadcrumb-title`,
+                            `${blockClass}__breadcrumb-title`,
                             {
-                              [`${blockClass}--breadcrumb-title--pre-collapsed`]: preCollapseTitleRow,
+                              [`${blockClass}__breadcrumb-title--pre-collapsed`]: preCollapseTitleRow,
                             },
                           ])}>
                           {title}
@@ -530,25 +530,25 @@ export let PageHeader = ({
                 </Column>
                 <Column
                   className={cx([
-                    `${blockClass}--action-bar-column ${blockClass}--action-bar-column--background`,
+                    `${blockClass}__action-bar-column ${blockClass}__action-bar-column--background`,
                     {
-                      [`${blockClass}--action-bar-column--has-page-actions`]: pageActions,
+                      [`${blockClass}__action-bar-column--has-page-actions`]: pageActions,
                     },
                   ])}>
                   <ReactResizeDetector
                     handleWidth={true}
                     onResize={handleResizeActionBarColumn}>
-                    <div className={`${blockClass}--action-bar-column-content`}>
+                    <div className={`${blockClass}__action-bar-column-content`}>
                       {hasActionBar ? (
                         // Investigate the responsive  behaviour or this and the title also fix the ActionBar Item and PageAction story css
                         <>
                           {pageActions && (
                             <div
-                              className={cx(`${blockClass}--page-actions`, {
-                                [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
+                              className={cx(`${blockClass}__page-actions`, {
+                                [`${blockClass}__page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
                               })}>
                               <ButtonSetWithOverflow
-                                className={`${blockClass}--button-set--in-breadcrumb`}
+                                className={`${blockClass}__button-set--in-breadcrumb`}
                                 onWidthChange={handleButtonSetWidthChange}
                                 buttons={pageActions}
                               />
@@ -556,7 +556,7 @@ export let PageHeader = ({
                           )}
                           <ActionBar
                             actions={actionBarItemArray}
-                            className={`${blockClass}--action-bar`}
+                            className={`${blockClass}__action-bar`}
                             onWidthChange={handleActionBarWidthChange}
                             rightAlign={true}
                           />
@@ -573,26 +573,26 @@ export let PageHeader = ({
           !(title === undefined && pageActions === undefined) ? (
             <Row
               className={cx(
-                `${blockClass}--title-row`,
-                `${blockClass}--title-row--spacing-below-${spacingBelowTitle}`,
+                `${blockClass}__title-row`,
+                `${blockClass}__title-row--spacing-below-${spacingBelowTitle}`,
                 {
-                  [`${blockClass}--title-row--no-breadcrumb-row`]: !hasBreadcrumbRow,
-                  [`${blockClass}--title-row--under-action-bar`]: hasActionBar,
-                  [`${blockClass}--title-row--sticky`]:
+                  [`${blockClass}__title-row--no-breadcrumb-row`]: !hasBreadcrumbRow,
+                  [`${blockClass}__title-row--under-action-bar`]: hasActionBar,
+                  [`${blockClass}__title-row--sticky`]:
                     pageActions !== undefined &&
                     actionBarItemArray === undefined &&
                     hasBreadcrumbRow,
                 }
               )}>
-              <Column className={`${blockClass}--title-column`}>
+              <Column className={`${blockClass}__title-column`}>
                 {/* keeps page actions right even if empty */}
                 {title !== undefined ? (
                   <div
-                    className={cx(`${blockClass}--title`, {
-                      [`${blockClass}--title--fades`]: hasBreadcrumbRow,
+                    className={cx(`${blockClass}__title`, {
+                      [`${blockClass}__title--fades`]: hasBreadcrumbRow,
                     })}>
                     {TitleIcon ? (
-                      <TitleIcon className={`${blockClass}--title-icon`} />
+                      <TitleIcon className={`${blockClass}__title-icon`} />
                     ) : (
                       ''
                     )}
@@ -603,11 +603,11 @@ export let PageHeader = ({
 
               {pageActions !== undefined ? (
                 <Column
-                  className={cx(`${blockClass}--page-actions`, {
-                    [`${blockClass}--page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
+                  className={cx(`${blockClass}__page-actions`, {
+                    [`${blockClass}__page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
                   })}>
                   <ButtonSet
-                    className={`${blockClass}--page-actions-container`}>
+                    className={`${blockClass}__page-actions-container`}>
                     {pageActions.map(
                       ({ kind, label, onClick, ...rest }, index) => (
                         <Button
@@ -626,14 +626,14 @@ export let PageHeader = ({
           ) : null}
 
           {subtitle !== undefined ? (
-            <Row className={`${blockClass}--subtitle-row`}>
-              <Column className={`${blockClass}--subtitle`}>{subtitle}</Column>
+            <Row className={`${blockClass}__subtitle-row`}>
+              <Column className={`${blockClass}__subtitle`}>{subtitle}</Column>
             </Row>
           ) : null}
 
           {availableSpace !== undefined ? (
-            <Row className={`${blockClass}--available-row`}>
-              <Column className={`${blockClass}--available-column`}>
+            <Row className={`${blockClass}__available-row`}>
+              <Column className={`${blockClass}__available-column`}>
                 {availableSpace}
               </Column>
             </Row>
@@ -650,29 +650,29 @@ export let PageHeader = ({
             subtitle) && (
             <div
               className={cx([
-                `${blockClass}--last-row-buffer`,
+                `${blockClass}__last-row-buffer`,
                 {
-                  [`${blockClass}--last-row-buffer--active`]: lastRowBufferActive,
+                  [`${blockClass}__last-row-buffer--active`]: lastRowBufferActive,
                 },
               ])}></div>
           )}
 
           {navigation || tags ? (
             <Row
-              className={cx(`${blockClass}--navigation-row`, {
-                [`${blockClass}--navigation-row--spacing-above-06`]:
+              className={cx(`${blockClass}__navigation-row`, {
+                [`${blockClass}__navigation-row--spacing-above-06`]:
                   navigation !== undefined,
-                [`${blockClass}--navigation-row--has-tags`]: tags,
+                [`${blockClass}__navigation-row--has-tags`]: tags,
               })}>
               {navigation !== undefined ? (
-                <Column className={`${blockClass}--navigation-tabs`}>
+                <Column className={`${blockClass}__navigation-tabs`}>
                   {navigation}
                 </Column>
               ) : null}
               {tags !== undefined ? (
                 <Column
-                  className={cx(`${blockClass}--navigation-tags`, {
-                    [`${blockClass}--navigation-tags--tags-only`]:
+                  className={cx(`${blockClass}__navigation-tags`, {
+                    [`${blockClass}__navigation-tags--tags-only`]:
                       navigation === undefined,
                   })}>
                   <TagSet overflowAlign="end">{tags}</TagSet>

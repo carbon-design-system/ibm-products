@@ -49,7 +49,7 @@ describe(name, () => {
     fetch.mockClear();
   });
 
-  it('renders with successful file upload', async () => {
+  it('renders with successful fetch file upload and submit', async () => {
     const { click, change } = fireEvent;
     const { fn } = jest;
     const onRequestSubmit = fn();
@@ -74,7 +74,7 @@ describe(name, () => {
     expect(onRequestSubmit).toBeCalled();
   });
 
-  it('server error', async () => {
+  it('should display the network error message when the fetch is rejected', async () => {
     fetch.mockImplementationOnce(() => Promise.reject('fetch failed'));
     const { click, change } = fireEvent;
 
@@ -89,7 +89,7 @@ describe(name, () => {
     expect(getByText(defaultProps.fetchErrorBody)).toBeVisible();
   });
 
-  it('fetch failed error', async () => {
+  it('should display the network error message when the fetch isnt a 200 response', async () => {
     fetch.mockImplementationOnce(() =>
       Promise.resolve({
         ok: false,
@@ -108,7 +108,7 @@ describe(name, () => {
     expect(getByText(defaultProps.fetchErrorBody)).toBeVisible();
   });
 
-  it('invalid file type error', async () => {
+  it('should display the invalid file type error message when an incorrect file type is uploaded', async () => {
     fetch.mockImplementationOnce(() =>
       Promise.resolve({
         ok: true,
@@ -129,7 +129,7 @@ describe(name, () => {
     expect(getByText(defaultProps.invalidFileTypeErrorBody)).toBeVisible();
   });
 
-  it('drag and drop', () => {
+  it('should successfully use the drag and drop component to upload a file and then remove the file', () => {
     const { change, click } = fireEvent;
     const { getByText, container } = render(<ImportModal {...defaultProps} />);
     const files = [new File(['foo'], 'foo.jpeg', { type: 'image/jpeg' })];

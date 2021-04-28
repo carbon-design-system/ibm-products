@@ -254,7 +254,9 @@ export let BreadcrumbWithOverflow = ({
   return (
     <ReactResizeDetector onResize={handleResize}>
       <div
-        className={cx([blockClass, className])}
+        className={cx(blockClass, className, {
+          [`${blockClass}__with-items`]: displayedBreadcrumbItems.length > 1,
+        })}
         ref={breadcrumbItemWithOverflow}>
         <div className={cx([`${blockClass}__space`])}>
           {/* This next element is purely here to measure the size of the breadcrumb items */}
@@ -288,7 +290,10 @@ export let BreadcrumbWithOverflow = ({
             />
           )}
           <Breadcrumb
-            className={`${blockClass}__breadcrumb-container`}
+            className={cx(`${blockClass}__breadcrumb-container`, {
+              [`${blockClass}__breadcrumb-container-with-items`]:
+                displayedBreadcrumbItems.length > 1,
+            })}
             noTrailingSlash={noTrailingSlash}
             {...other}>
             {displayedBreadcrumbItems}

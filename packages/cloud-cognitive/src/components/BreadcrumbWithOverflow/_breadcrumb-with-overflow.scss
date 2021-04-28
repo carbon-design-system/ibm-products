@@ -33,7 +33,7 @@
       white-space: nowrap;
     }
 
-    .#{$block-class}__breadcrumb-container {
+    .#{$block-class}__breadcrumb-container.#{$block-class}__breadcrumb-container-with-items {
       display: none;
       width: 100%;
       @include carbon--breakpoint(md) {

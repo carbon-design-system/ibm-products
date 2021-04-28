@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { Button } from 'carbon-components-react';
 import {
@@ -20,6 +20,7 @@ import { white } from '@carbon/colors';
 import styles from './_storybook-styles.scss';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
+import { UnreadNotificationBell } from './preview-components/UnreadNotificationBell';
 
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { NotificationsPanel } from '.';
@@ -41,7 +42,7 @@ export default {
   },
 };
 
-const renderUIShellHeader = (open, setOpen) => (
+const renderUIShellHeader = (open, setOpen, hasUnreadNotifications) => (
   <HeaderContainer
     render={() => (
       <Header aria-label="IBM Cloud Pak">
@@ -55,12 +56,16 @@ const renderUIShellHeader = (open, setOpen) => (
           <HeaderGlobalAction
             aria-label="Notifications"
             onClick={() => setOpen(!open)}>
-            <Notification20
-              style={{
-                /* stylelint-disable-next-line */
-                fill: white,
-              }}
-            />
+            {hasUnreadNotifications ? (
+              <UnreadNotificationBell />
+            ) : (
+              <Notification20
+                style={{
+                  /* stylelint-disable-next-line */
+                  fill: white,
+                }}
+              />
+            )}
           </HeaderGlobalAction>
           <HeaderGlobalAction aria-label="App switcher">
             <User20
@@ -78,6 +83,7 @@ const renderUIShellHeader = (open, setOpen) => (
 
 const Template = (args) => {
   const [open, setOpen] = useState(false);
+  const [hasUnreadNotifications, setHasUnreadNotifications] = useState(false);
   const [notificationsData, setNotificationsData] = useState(data);
 
   const addNewNotification = () => {
@@ -93,9 +99,38 @@ const Template = (args) => {
     setNotificationsData((arr) => [...arr, newNotification]);
   };
 
+  // logic for unread bell indicator
+  useEffect(() => {
+    let unreadTimer;
+    if (open && hasUnreadNotifications) {
+      const tempData = JSON.parse(JSON.stringify(notificationsData));
+      tempData.forEach((element) => {
+        element.unread = false;
+        // convert timestamp back to date object, otherwise this is
+        // a UTC date string and the component is expecting a date object
+        element.timestamp = new Date(element.timestamp);
+      });
+      unreadTimer = setTimeout(() => {
+        setHasUnreadNotifications(false);
+        setNotificationsData(tempData);
+      }, 2000);
+    }
+    if (!open && !hasUnreadNotifications) {
+      let hasUnreadNotificationsCheck;
+      for (let i = 0; i < notificationsData.length; i++) {
+        if (notificationsData[i].unread === true) {
+          hasUnreadNotificationsCheck = true;
+          break;
+        } else hasUnreadNotificationsCheck = false;
+      }
+      setHasUnreadNotifications(hasUnreadNotificationsCheck);
+    }
+    return () => clearTimeout(unreadTimer);
+  }, [open, notificationsData, hasUnreadNotifications]);
+
   return (
     <>
-      {renderUIShellHeader(open, setOpen)}
+      {renderUIShellHeader(open, setOpen, hasUnreadNotifications)}
       <Button onClick={addNewNotification}>Add new notification</Button>
       <NotificationsPanel
         {...args}

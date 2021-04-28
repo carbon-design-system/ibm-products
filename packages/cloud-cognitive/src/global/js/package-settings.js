@@ -37,7 +37,6 @@ const defaults = {
     NoTagsEmptyState: false,
     NotFoundEmptyState: false,
     NotificationsEmptyState: false,
-    PageActionItem: false,
     PageHeader: false,
     ProductiveCard: false,
     RemoveDeleteModal: false,

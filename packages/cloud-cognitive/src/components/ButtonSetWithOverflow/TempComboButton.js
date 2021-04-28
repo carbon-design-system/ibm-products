@@ -12,10 +12,11 @@ import { pkg, carbon } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
 import unwrapIfFragment from '../../global/js/utils/unwrap-if-fragment';
+import { prepareProps } from '../../global/js/utils/props-helper';
 
-const blockClass = `${pkg.prefix}-temp-combo-button`;
+const blockClass = `${pkg.prefix}--temp-combo-button`;
 
-export const TempComboButton = ({ buttons, className }) => {
+export const TempComboButton = ({ buttons, className, label, size }) => {
   const internalId = useRef(uuidv4());
   const [buttonArray, setButtonArray] = useState([]);
 
@@ -29,23 +30,25 @@ export const TempComboButton = ({ buttons, className }) => {
   return (
     <OverflowMenu
       className={cx([className, `${blockClass}`])}
-      menuOptionsClass={`${blockClass}--options`}
+      menuOptionsClass={`${blockClass}__options`}
       renderIcon={() => (
         <div
           className={cx([
-            `${blockClass}--trigger`,
+            `${blockClass}__trigger`,
             `${carbon.prefix}--btn`,
             `${carbon.prefix}--btn--primary`,
-            `${carbon.prefix}--btn--field`,
+            `${carbon.prefix}--btn--${size}`,
           ])}>
-          Page actions
+          {label}
         </div>
       )}
       data-test={buttonArray.length}>
-      {buttonArray.reverse().map((button, index) => (
+      {buttonArray.reverse().map(({ label, onClick, ...rest }, index) => (
         <OverflowMenuItem
-          itemText={button.props.children}
+          itemText={label}
           key={`temp-combo-button-${internalId}-${index}`}
+          onClick={onClick}
+          {...prepareProps(rest, ['kind', 'renderIcon'])}
         />
       ))}
     </OverflowMenu>
@@ -54,16 +57,29 @@ export const TempComboButton = ({ buttons, className }) => {
 
 TempComboButton.propTypes = {
   /**
-   * children of the action bar (action bar items)
+   * Button shape things for us to render.
    */
   buttons: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.element,
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        label: PropTypes.node,
+        onClick: PropTypes.func,
+      })
+    ),
   ]), // expects action bar item as array or in fragment,
   /**
    * className
    */
   className: PropTypes.string,
+  /**
+   * label: displayed content of TempComboButton (not buttons shown as children)
+   */
+  label: PropTypes.node,
+  /**
+   * Specify the size of the button, from a list of available sizes.
+   * For `default` buttons, this prop can remain unspecified.
+   */
+  size: PropTypes.oneOf(['default', 'field', 'small', 'sm', 'lg', 'xl']),
 };
 
 TempComboButton.defaultProps = {};

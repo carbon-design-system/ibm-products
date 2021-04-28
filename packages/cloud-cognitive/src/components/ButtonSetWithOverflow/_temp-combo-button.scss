@@ -11,18 +11,18 @@
 @import 'carbon-components/scss/components/overflow-menu/overflow-menu';
 @import 'carbon-components/scss/components/button/button';
 
-$block-class: #{$pkg-prefix}-temp-combo-button;
+$block-class: #{$pkg-prefix}--temp-combo-button;
 
 .#{$block-class} {
   justify-content: flex-start;
   min-width: 160px;
 }
 
-.#{$block-class}--trigger {
+.#{$block-class}__trigger {
   width: 100%;
   padding: 0 $spacing-05;
 }
 
-.#{$block-class}--options::after {
+.#{$block-class}__options::after {
   content: initial;
 }

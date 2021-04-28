@@ -11,20 +11,13 @@ import { render, screen } from '@testing-library/react';
 import { pkg, carbon } from '../../settings';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 
-import {
-  BreadcrumbItem,
-  Button,
-  Tab,
-  Tabs,
-  Tag,
-} from 'carbon-components-react';
+import { BreadcrumbItem, Tab, Tabs, Tag } from 'carbon-components-react';
 import { Lightning16, Bee32 } from '@carbon/icons-react';
 
 import { PageHeader } from '.';
 import { ActionBarItem } from '../ActionBar';
 
 /* Test properties. */
-const pageActionItemOnClick = jest.fn();
 const actionBarItems = [1, 2, 3, 4].map((item) => ({
   renderIcon: Lightning16,
   iconDescription: `Action ${item}`,
@@ -59,12 +52,19 @@ const breadcrumbItems = (
   </>
 );
 const classNames = ['client-class-1', 'client-class-2'];
-const pageActions = (
-  <>
-    <Button kind="secondary">Secondary button</Button>
-    <Button onClick={pageActionItemOnClick}>Primary button</Button>
-  </>
-);
+const pageActions = [
+  {
+    kind: 'secondary',
+    label: 'Secondary button',
+    onClick: () => {},
+  },
+  {
+    kind: 'primary',
+    label: 'Primary button',
+    onClick: () => {},
+  },
+];
+
 const subtitle = 'Optional subtitle if necessary';
 const tabBar = (
   <Tabs data-testid="tabs">

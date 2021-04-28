@@ -16,7 +16,7 @@ import ReactResizeDetector from 'react-resize-detector';
 
 import { pkg } from '../../settings';
 const componentName = 'TagSet';
-const blockClass = `${pkg.prefix}-tag-set`;
+const blockClass = `${pkg.prefix}--tag-set`;
 
 export let TagSet = ({
   children,
@@ -61,7 +61,7 @@ export let TagSet = ({
             return (
               <div
                 key={index}
-                className={`${blockClass}--sizing-tag`}
+                className={`${blockClass}__sizing-tag`}
                 ref={(el) => (newSizingTags[index] = el)}>
                 {child}
               </div>
@@ -87,7 +87,7 @@ export let TagSet = ({
 
     // add wrapper around displayed tags
     newDisplayedTags = newDisplayedTags.map((tag, index) => (
-      <div key={index} className={`${blockClass}--displayed-tag`}>
+      <div key={index} className={`${blockClass}__displayed-tag`}>
         {tag}
       </div>
     ));
@@ -173,18 +173,18 @@ export let TagSet = ({
       <div className={cx([blockClass, className])} ref={tagSet}>
         <div
           className={cx([
-            `${blockClass}--space`,
-            { [`${blockClass}--space--right`]: rightAlign },
+            `${blockClass}__space`,
+            { [`${blockClass}__space--right`]: rightAlign },
           ])}>
           <ReactResizeDetector onResize={handleSizerTagsResize}>
             <div
-              className={`${blockClass}--tag-container ${blockClass}--tag-container--hidden`}
+              className={`${blockClass}__tag-container ${blockClass}__tag-container--hidden`}
               aria-hidden={true}>
               {hiddenSizingTags}
             </div>
           </ReactResizeDetector>
 
-          <div className={`${blockClass}--tag-container`} ref={displayedArea}>
+          <div className={`${blockClass}__tag-container`} ref={displayedArea}>
             {displayedTags}
           </div>
         </div>

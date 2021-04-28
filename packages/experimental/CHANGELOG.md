@@ -3,6 +3,49 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.34.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.33.64...@carbon/ibm-cloud-cognitive-experimental@0.34.0) (2021-04-28)
+
+
+### Features
+
+* deprecate experimental package ([#664](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/664)) ([caa90ab](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/caa90ab813085fec15b1765a71b46471dfd15833))
+
+
+
+
+
+## [0.33.64](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.33.63...@carbon/ibm-cloud-cognitive-experimental@0.33.64) (2021-04-28)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
+## [0.33.63](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.33.62...@carbon/ibm-cloud-cognitive-experimental@0.33.63) (2021-04-27)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
+## [0.33.62](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.33.61...@carbon/ibm-cloud-cognitive-experimental@0.33.62) (2021-04-27)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
+## [0.33.61](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.33.60...@carbon/ibm-cloud-cognitive-experimental@0.33.61) (2021-04-27)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental
+
+
+
+
+
 ## [0.33.60](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.33.59...@carbon/ibm-cloud-cognitive-experimental@0.33.60) (2021-04-26)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental

@@ -90,11 +90,9 @@ export let NotificationsPanel = React.forwardRef(
       if (open) setRender(true);
     }, [open]);
 
-    /* istanbul ignore next */
     const onAnimationEnd = () => {
       // initialize the notification panel to close
-      /* istanbul ignore next */
-      if (!open) setRender(false);
+      !open && setRender(false);
     };
 
     const sortChronologically = (arr) => {
@@ -216,10 +214,8 @@ export let NotificationsPanel = React.forwardRef(
               )
             )
               return;
-            /* istanbul ignore next */
-            if (event.which === 13) {
+            event.which === 13 &&
               notification.onNotificationClick(notification);
-            }
           }}>
           {notification.type === 'error' && (
             <ErrorFilled16
@@ -321,14 +317,9 @@ export let NotificationsPanel = React.forwardRef(
           ...rest
         }
         id={blockClass}
-        className={cx([blockClass, `${blockClass}__container`], {
-          [className]: className,
-        })}
+        className={cx(blockClass, className, `${blockClass}__container`)}
         style={{
-          animation: `${
-            /* istanbul ignore next */
-            open ? 'fadeIn 250ms' : 'fadeOut 250ms'
-          }`,
+          animation: `${open ? 'fadeIn 250ms' : 'fadeOut 250ms'}`,
         }}
         onAnimationEnd={onAnimationEnd}
         ref={ref || notificationPanelRef}>

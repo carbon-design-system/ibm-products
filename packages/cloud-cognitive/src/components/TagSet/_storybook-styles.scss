@@ -8,14 +8,14 @@
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
-$block-class: #{$pkg-prefix}-tag-set;
+$block-class: #{$pkg-prefix}--tag-set;
 
-.#{$block-class}--story__viewport {
+.#{$block-class}__story-viewport {
   position: relative;
   box-shadow: 0 0 0 $layout-02 $ui-01;
 }
 
-.#{$block-class}--story__viewport::before {
+.#{$block-class}__story-viewport::before {
   position: absolute;
   top: calc(-1 * #{$layout-02});
   left: 0;

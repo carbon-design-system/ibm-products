@@ -11,9 +11,6 @@ import React from 'react';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { ImportModal } from '.';
 
-import uuidv4 from '../../global/js/utils/uuidv4';
-jest.mock('../../global/js/utils/uuidv4');
-
 global.fetch = jest.fn(() =>
   Promise.resolve({
     ok: true,
@@ -33,25 +30,26 @@ const defaultProps = {
   inputHeader: 'Add a file by specifying a URL',
   inputPlaceholder: 'URL',
   invalidFileTypeErrorBody: 'Invalid file type.',
-  maxFileSize: 500000,
+  maxFileSize: 500,
   maxFileSizeErrorBody: '500kb max file size. Select a new file and try again.',
   modalBody:
-    'You can specify a file to import by either dragging it into the drag and drop area or by specifying a URL. (Maximum file size of 500KB; .jpg and .png file extensions only.)',
+    'You can specify a file to import by either dragging it into the drag and drop area or by specifying a URL. (Maximum file size of 500KB; .jpg and .jpeg file extensions only.)',
   onRequestClose: () => {},
   onRequestSubmit: () => {},
   open: true,
   primaryButtonText: 'Import file',
   secondaryButtonText: 'Cancel',
   modalHeading: 'Import',
-  validFileTypes: ['image/jpeg', 'image/png'],
+  validFileTypes: ['image/jpeg'],
+  fileUploadLabel: 'files uploaded',
 };
 
 describe(name, () => {
-  beforeAll(() => {
-    uuidv4.mockImplementation(() => 'testid');
+  beforeEach(() => {
+    fetch.mockClear();
   });
 
-  test('should render', async () => {
+  it('renders with successful file upload', async () => {
     const { click, change } = fireEvent;
     const { fn } = jest;
     const onRequestSubmit = fn();
@@ -68,11 +66,78 @@ describe(name, () => {
     click(submitBtn);
     expect(onRequestSubmit).not.toBeCalled();
 
-    change(textInput, { target: { value: 'test.png' } });
+    change(textInput, { target: { value: 'test.jpeg' } });
     expect(addFileBtn.classList.contains('bx--btn--disabled')).not.toBe(true);
     click(addFileBtn);
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     click(submitBtn);
     expect(onRequestSubmit).toBeCalled();
+  });
+
+  it('server error', async () => {
+    fetch.mockImplementationOnce(() => Promise.reject('fetch failed'));
+    const { click, change } = fireEvent;
+
+    const { getByText, container } = render(<ImportModal {...defaultProps} />);
+
+    const addFileBtn = getByText('Add file');
+    const textInput = container.querySelector('.bx--text-input');
+
+    change(textInput, { target: { value: 'test.jpeg' } });
+    click(addFileBtn);
+    await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+    expect(getByText(defaultProps.fetchErrorBody)).toBeVisible();
+  });
+
+  it('fetch failed error', async () => {
+    fetch.mockImplementationOnce(() =>
+      Promise.resolve({
+        ok: false,
+      })
+    );
+    const { click, change } = fireEvent;
+
+    const { getByText, container } = render(<ImportModal {...defaultProps} />);
+
+    const addFileBtn = getByText('Add file');
+    const textInput = container.querySelector('.bx--text-input');
+
+    change(textInput, { target: { value: 'test.jpeg' } });
+    click(addFileBtn);
+    await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+    expect(getByText(defaultProps.fetchErrorBody)).toBeVisible();
+  });
+
+  it('invalid file type error', async () => {
+    fetch.mockImplementationOnce(() =>
+      Promise.resolve({
+        ok: true,
+        status: 200,
+        blob: () => Promise.resolve({ type: 'pdf' }),
+      })
+    );
+
+    const { click, change } = fireEvent;
+    const { getByText, container } = render(<ImportModal {...defaultProps} />);
+
+    const addFileBtn = getByText('Add file');
+    const textInput = container.querySelector('.bx--text-input');
+
+    change(textInput, { target: { value: 'test.jpeg' } });
+    click(addFileBtn);
+    await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+    expect(getByText(defaultProps.invalidFileTypeErrorBody)).toBeVisible();
+  });
+
+  it('drag and drop', () => {
+    const { change, click } = fireEvent;
+    const { getByText, container } = render(<ImportModal {...defaultProps} />);
+    const files = [new File(['foo'], 'foo.jpeg', { type: 'image/jpeg' })];
+
+    change(container.querySelector('.bx--file-input'), { target: { files } });
+    expect(getByText('foo.jpeg')).toBeVisible();
+
+    click(container.querySelector('.bx--file-close'));
+    expect(container.querySelector('.bx--file-filename')).toBeNull();
   });
 });

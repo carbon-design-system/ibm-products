@@ -30,6 +30,7 @@ export let ImportModal = ({
   maxFileSizeErrorBody,
   maxFileSizeErrorHeader,
   modalBody,
+  multiple,
   modalHeading,
   onRequestClose,
   onRequestSubmit,
@@ -102,7 +103,6 @@ export let ImportModal = ({
       fetchedFile.uuid = pendingFile.uuid;
       updateFiles([fetchedFile]);
     } catch (err) {
-      console.error('fetch failed', err);
       const failedFile = {
         ...pendingFile,
         fetchError: true,
@@ -129,9 +129,12 @@ export let ImportModal = ({
     setImportUrl(evt.target.value);
   };
 
-  const primaryButtonDisabled = !files.length || files.some((f) => f.invalid);
+  const numberOfFiles = files.length;
+  const numberOfInvalidFiles = files.filter((f) => f.isInvalidFileType).length;
+  const hasFiles = !!numberOfFiles;
+  const primaryButtonDisabled = !hasFiles || files.some((f) => f.invalid);
   const importButtonDisabled = !importUrl;
-  const fileUploaded = Boolean(files.length);
+  const invalidValidLabel = `${numberOfInvalidFiles} / ${numberOfFiles}`;
 
   return (
     <Modal
@@ -151,6 +154,7 @@ export let ImportModal = ({
         labelText={fileDropLabel}
         onAddFiles={onAddFile}
         disabled={!!files.length}
+        multiple={multiple}
       />
       <p className={`${pkg.prefix}--import-modal-label`}>{inputHeader}</p>
       <div className={`${pkg.prefix}--input-group`}>
@@ -160,7 +164,7 @@ export let ImportModal = ({
           onChange={inputHandler}
           placeholder={inputPlaceholder}
           value={importUrl}
-          disabled={fileUploaded}
+          disabled={hasFiles}
         />
         <Button
           onClick={fetchFile}
@@ -171,9 +175,9 @@ export let ImportModal = ({
         </Button>
       </div>
       <div className="bx--file-container" style={{ width: '100%' }}>
-        {fileUploaded && (
+        {hasFiles && (
           <p className={`${pkg.prefix}--import-modal-helper-text`}>
-            {fileUploadLabel}
+            {`${invalidValidLabel} ${fileUploadLabel}`}
           </p>
         )}
         {files.map((file) => (
@@ -277,6 +281,10 @@ ImportModal.propTypes = {
    */
   modalHeading: PropTypes.string,
   /**
+   * Designates if the file uploader can accept multiple files
+   */
+  multiple: PropTypes.bool,
+  /**
    * Specify a handler for closing modal
    */
   onRequestClose: PropTypes.func,
@@ -303,30 +311,9 @@ ImportModal.propTypes = {
 };
 
 ImportModal.defaultProps = {
-  defaultErrorBody: '',
-  errorHeader: '',
-  fetchErrorBody: '',
-  fetchErrorHeader: '',
-  fileDropHeader: '',
-  fileDropLabel: '',
-  fileUploadLabel: '',
-  inputButtonText: '',
-  inputId: '',
-  inputHeader: '',
-  inputLabel: '',
-  inputPlaceholder: '',
-  invalidFileTypeErrorBody: '',
-  invalidFileTypeErrorHeader: '',
-  maxFileSize: Infinity,
-  maxFileSizeErrorBody: '',
-  maxFileSizeErrorHeader: '',
-  modalBody: '',
-  modalHeading: '',
   onRequestClose: () => {},
   onRequestSubmit: () => {},
-  open: true,
-  primaryButtonText: '',
-  secondaryButtonText: '',
+  open: false,
   validFileTypes: [],
 };
 

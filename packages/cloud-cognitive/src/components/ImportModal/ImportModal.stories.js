@@ -33,7 +33,7 @@ const defaultProps = {
   fetchErrorBody: 'Unable to fetch URL.',
   fileDropHeader: 'Add files using drag and drop',
   fileDropLabel: 'Drag and drop files here or click to upload',
-  fileUploadLabel: '1 / 1 files uploaded',
+  fileUploadLabel: 'files uploaded',
   inputButtonText: 'Add file',
   inputHeader: 'Add a file by specifying a URL',
   inputPlaceholder: 'URL',

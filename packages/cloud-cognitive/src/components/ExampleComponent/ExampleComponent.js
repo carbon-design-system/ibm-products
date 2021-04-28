@@ -69,13 +69,10 @@ export let ExampleComponent = React.forwardRef(
           ...rest
         }
         className={cx(
-          // Apply the block class to the main HTML element, along with
-          // any other classes we need.
-          [blockClass, `${blockClass}--${size}`, modeClass],
-          {
-            // Apply any supplied class names to the main HTML element.
-            [className]: className, // this handles className omitted/falsy
-          }
+          blockClass, // Apply the block class to the main HTML element
+          className, // Apply any supplied class names to the main HTML element.
+          `${blockClass}--${size}`,
+          modeClass
         )}
         ref={ref}
         role="main"
@@ -105,7 +102,7 @@ export let ExampleComponent = React.forwardRef(
   }
 );
 
-// Return a placeholder if not released and not enabled by feature flag
+// Return a placeholder if not released and not enabled by feature flag.
 ExampleComponent = pkg.checkComponentEnabled(ExampleComponent, componentName);
 
 // The display name of the component, used by React. Note that displayName

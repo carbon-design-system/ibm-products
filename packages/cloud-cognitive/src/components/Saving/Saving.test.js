@@ -5,17 +5,65 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import React from 'react';
 
+import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { Saving } from '.';
-import '../../enable-all'; // must come before component is imported (directly or indirectly)
 
 const { name } = Saving;
-const defaultProps = {};
+const defaultProps = {
+  defaultText: 'Save',
+  cancelButtonText: 'Cancel',
+  inProgressText: 'Saving...',
+  failText: 'Failed to save',
+  successText: 'Saved',
+  defaultIconDescription: 'Save',
+  inProgressIconDescription: 'Saving...',
+  failIconDescription: 'Failed to save',
+  successIconDescription: 'Saved',
+};
 
 describe(name, () => {
-  test('should render', async () => {
+  it('should render', () => {
     render(<Saving {...defaultProps} />);
+  });
+
+  it('renders manual type', () => {
+    const onSave = jest.fn();
+    const onCancel = jest.fn();
+    const props = {
+      ...defaultProps,
+      onSave,
+      onCancel,
+    };
+
+    const { rerender, getByText } = render(<Saving {...props} />);
+    fireEvent.click(getByText(props.defaultText));
+    expect(onSave).toBeCalled();
+    fireEvent.click(getByText(props.cancelButtonText));
+    expect(onCancel).not.toBeCalled();
+    rerender(<Saving {...props} status="inprogress" />);
+    expect(getByText(props.inProgressText)).toBeVisible();
+    fireEvent.click(getByText(props.cancelButtonText));
+    expect(onCancel).toBeCalled();
+    rerender(<Saving {...props} status="fail" />);
+    expect(getByText(props.failText)).toBeVisible();
+  });
+
+  it('renders auto type', () => {
+    const props = {
+      ...defaultProps,
+      type: 'auto',
+    };
+
+    const { rerender, getByText } = render(<Saving {...props} />);
+    expect(getByText(props.defaultText)).toBeVisible();
+    rerender(<Saving {...props} status="inprogress" />);
+    expect(getByText(props.inProgressText)).toBeVisible();
+    rerender(<Saving {...props} status="success" />);
+    expect(getByText(props.successText)).toBeVisible();
+    rerender(<Saving {...props} status="fail" />);
+    expect(getByText(props.failText)).toBeVisible();
   });
 });

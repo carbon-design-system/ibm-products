@@ -59,12 +59,14 @@ export let AboutModal = React.forwardRef(
         // Pass through any other property values as HTML attributes.
         ...rest
       }
-      className={cx(blockClass, {
-        [`${blockClass}--with-tabs`]:
-          additionalInfo && additionalInfo.length > 1,
-        // Apply any supplied class names to the main HTML element.
-        [className]: className, // this handles className omitted/falsy
-      })}
+      className={cx(
+        blockClass, // Apply the block class to the main HTML element
+        className, // Apply any supplied class names to the main HTML element.
+        {
+          [`${blockClass}--with-tabs`]:
+            additionalInfo && additionalInfo.length > 1,
+        }
+      )}
       {...{ onClose, open, ref }}>
       <div className={`${blockClass}__logo`}>{logo}</div>
       <ModalHeader

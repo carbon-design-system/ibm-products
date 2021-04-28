@@ -5,22 +5,27 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
-// import React from 'react';
-
-import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import React from 'react';
+import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+
 import { pkg } from '../settings';
+import '../utils/disable-all'; // must come before components are imported (directly or indirectly)
+
+import * as components from '..';
 
 const canaryClass = `${pkg.prefix}-canary`;
-import * as components from '../index-all-disabled';
-const name = 'export checks';
+const name = 'JS export checks';
 
 describe(name, () => {
-  beforeAll(() => {
+  let mockError;
+  beforeEach(() => {
     // The component instantiations that follow will generate a stack of
     // console errors about required props not provided, and we don't care.
-    jest.spyOn(console, 'error').mockImplementation(() => {});
+    mockError = jest.spyOn(console, 'error').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    mockError.mockRestore();
   });
 
   for (const key in components) {
@@ -30,7 +35,7 @@ describe(name, () => {
       // TODO: remove this - security components does not currently support canary
       if (key.startsWith('ComboButton')) continue;
 
-      it(`Renders a canary, for "${key}", if no package flags set`, () => {
+      it(`Renders a canary for "${key}" if package flags set to disable`, () => {
         const { container } = render(<TestComponent />);
         expect(container.querySelector(`.${canaryClass}`)).not.toBeNull();
       });

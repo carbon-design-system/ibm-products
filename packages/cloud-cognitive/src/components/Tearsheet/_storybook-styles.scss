@@ -1,49 +1,26 @@
 //
-// Copyright IBM Corp. 2020, 2020
+// Copyright IBM Corp. 2020, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
-@import './index';
 
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/tabs/tabs';
+@import '../../global/styles/carbon-settings';
 
 .tearsheet-stories__dummy-content-block {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: top;
+  justify-content: flex-start;
   height: 100%;
-  padding: $layout-04;
+  padding: $layout-02 $layout-03;
 }
 
-.tearsheet-stories__buttons {
+.tearsheet-stories__narrow-content-block {
   display: flex;
-  justify-content: flex-end;
-}
-
-.tearsheet-stories__button-25,
-.tearsheet-stories__button-50 {
-  max-width: none;
-  // stylelint-disable-next-line carbon/layout-token-use
-  margin-left: 1px;
-}
-
-.tearsheet-stories__button-25 {
-  width: 25%;
-}
-
-.tearsheet-stories__button-50 {
-  width: 50%;
-}
-
-.tearsheet-stories__button-25:first-child,
-.tearsheet-stories__button-50:first-child {
-  margin-left: 0;
-}
-
-.tearsheet-stories__button-padding {
-  width: 100%;
+  align-items: top;
+  justify-content: flex-start;
+  height: 100%;
+  padding: $layout-01;
 }
 
 .tearsheet-stories__tabs {

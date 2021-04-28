@@ -8,15 +8,19 @@
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 
-import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
+import uuidv4 from '../../global/js/utils/uuidv4';
+import { pkg } from '../../settings';
 import { EmptyState } from '.';
 import { NoDataEmptyState } from './NoDataEmptyState';
 import CustomIllustration from './story_assets/empty-state-bright-magnifying-glass.svg';
 
+const dataTestId = uuidv4();
+const blockClass = `${pkg.prefix}--empty-state`;
 const { name } = EmptyState;
 
 describe(name, () => {
-  test('should render empty state header and call the action', () => {
+  it('should render empty state header and call the action', () => {
     const { click } = fireEvent;
     const { fn } = jest;
     const onActionHandler = fn();
@@ -35,7 +39,7 @@ describe(name, () => {
     expect(onActionHandler).toBeCalled();
   });
 
-  test('should render a clickable link and match rendered url to linkUrl prop', () => {
+  it('should render a clickable link and match rendered url to linkUrl prop', () => {
     const { getByText, container } = render(
       <EmptyState
         heading="Empty state heading"
@@ -50,14 +54,14 @@ describe(name, () => {
     expect(link.length && link).toEqual('https://www.carbondesignsystem.com/');
   });
 
-  test('should render heading by passing string', () => {
+  it('should render heading by passing string', () => {
     const { getByText } = render(
       <EmptyState heading="Empty state heading" subtext="Empty state subtext" />
     );
     expect(getByText('Empty state heading')).toBeTruthy();
   });
 
-  test('should render heading by passing node', () => {
+  it('should render heading by passing node', () => {
     const { getByText } = render(
       <EmptyState
         heading={<h3>Custom heading</h3>}
@@ -67,14 +71,14 @@ describe(name, () => {
     expect(getByText('Custom heading')).toBeTruthy();
   });
 
-  test('should render subtext by passing string', () => {
+  it('should render subtext by passing string', () => {
     const { getByText } = render(
       <EmptyState heading="Empty state header" subtext="Empty state subtext" />
     );
     expect(getByText('Empty state subtext')).toBeTruthy();
   });
 
-  test('should render subtext by passing node', () => {
+  it('should render subtext by passing node', () => {
     const { getByText } = render(
       <EmptyState
         heading="Empty state header"
@@ -84,17 +88,30 @@ describe(name, () => {
     expect(getByText('This is the subtext of the empty state')).toBeTruthy();
   });
 
-  test('should render empty state with illustration', () => {
+  it('should render empty state with illustration', () => {
     const { container } = render(<NoDataEmptyState />);
     const renderedSvg = container.querySelector('svg');
     expect(renderedSvg).toBeTruthy();
   });
 
-  test('should render a custom illustration', () => {
+  it('should render a custom illustration', () => {
     const { container } = render(
       <EmptyState illustration={CustomIllustration} />
     );
     const customIllustrationElement = container.querySelector('img');
     expect(customIllustrationElement).toBeTruthy();
+  });
+
+  it('forwards a ref to an appropriate node', () => {
+    const ref = React.createRef();
+    render(<EmptyState ref={ref} />);
+    expect(ref.current.classList.contains(blockClass)).toBeTruthy();
+  });
+
+  it('adds additional properties to the containing node', () => {
+    const { container } = render(<EmptyState data-testid={dataTestId} />);
+    expect(
+      container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
+    ).toBeInTheDocument();
   });
 });

@@ -8,36 +8,35 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import { pkg } from '../../settings';
-import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import { pkg, carbon } from '../../settings';
+import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 
-import {
-  BreadcrumbItem,
-  Button,
-  Tab,
-  Tabs,
-  Tag,
-} from 'carbon-components-react';
+import { BreadcrumbItem, Tab, Tabs, Tag } from 'carbon-components-react';
 import { Lightning16, Bee32 } from '@carbon/icons-react';
 
-import { ActionBarItem } from '../ActionBar';
 import { PageHeader } from '.';
+import { ActionBarItem } from '../ActionBar';
 
 /* Test properties. */
-const actionBarItemOnClick = jest.fn();
-const pageActionItemOnClick = jest.fn();
-const actionBarItems = (
+const actionBarItems = [1, 2, 3, 4].map((item) => ({
+  renderIcon: Lightning16,
+  iconDescription: `Action ${item}`,
+  onClick: () => {},
+}));
+
+const actionBarItemsNodes = (
   <>
     <ActionBarItem
       renderIcon={Lightning16}
       label="Action 1"
-      onClick={actionBarItemOnClick}
+      onClick={() => {}}
     />
     <ActionBarItem renderIcon={Lightning16} label="Action 2" />
     <ActionBarItem renderIcon={Lightning16} label="Action 3" />
     <ActionBarItem renderIcon={Lightning16} label="Action 4" />
   </>
 );
+
 const availableSpace = <span className="page-header-test--available-space" />;
 const breadcrumbItems = (
   <>
@@ -53,12 +52,19 @@ const breadcrumbItems = (
   </>
 );
 const classNames = ['client-class-1', 'client-class-2'];
-const pageActions = (
-  <>
-    <Button kind="secondary">Secondary button</Button>
-    <Button onClick={pageActionItemOnClick}>Primary button</Button>
-  </>
-);
+const pageActions = [
+  {
+    kind: 'secondary',
+    label: 'Secondary button',
+    onClick: () => {},
+  },
+  {
+    kind: 'primary',
+    label: 'Primary button',
+    onClick: () => {},
+  },
+];
+
 const subtitle = 'Optional subtitle if necessary';
 const tabBar = (
   <Tabs data-testid="tabs">
@@ -88,8 +94,16 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 jest.mock('../../global/js/utils/uuidv4');
 
 describe('PageHeader', () => {
-  beforeAll(() => {
-    uuidv4.mockImplementation(() => 'testid');
+  const mocks = [];
+  beforeEach(() => {
+    mocks.push(uuidv4.mockImplementation(() => 'testid'));
+    mocks.push(jest.spyOn(window, 'scrollTo').mockImplementation());
+  });
+
+  afterEach(() => {
+    mocks.forEach((mock) => {
+      mock.mockRestore();
+    });
   });
 
   test('renders an empty header when no props are set', () => {
@@ -161,7 +175,12 @@ describe('PageHeader', () => {
     expect(
       document.querySelectorAll(`.${pkg.prefix}-page-header--breadcrumb`)
     ).toHaveLength(1);
-    expect(screen.getAllByText(/Breadcrumb [1-3]/)).toHaveLength(3);
+    expect(
+      screen.getAllByText(/Breadcrumb [1-3]/, {
+        // selector need to ignore sizing items
+        selector: `.${pkg.prefix}--breadcrumb-with-overflow__breadcrumb-container:not(.${pkg.prefix}--breadcrumb-with-overflow__breadcrumb-container--hidden) .${carbon.prefix}--link`,
+      })
+    ).toHaveLength(3);
     expect(screen.queryAllByTestId('tabs')).toHaveLength(1);
     expect(screen.getAllByText(/Tab [1-4]/)).toHaveLength(4);
     expect(
@@ -172,7 +191,12 @@ describe('PageHeader', () => {
     ).toHaveLength(1);
     expect(screen.getByText(subtitle).textContent).toEqual(subtitle);
     expect(screen.queryAllByTestId('tabs')).toHaveLength(1);
-    expect(screen.getAllByText('A tag')).toHaveLength(4);
+    expect(
+      screen.getAllByText('A tag', {
+        // selector need to ignore sizing items
+        selector: `.${pkg.prefix}--tag-set__displayed-tag .${carbon.prefix}--tag span`,
+      })
+    ).toHaveLength(4);
     expect(
       document.querySelectorAll(`.${pkg.prefix}-page-header--title`)
     ).toHaveLength(1);
@@ -182,5 +206,17 @@ describe('PageHeader', () => {
     expect(
       document.querySelectorAll(`.${pkg.prefix}-page-header--title-icon`)
     ).toHaveLength(1);
+  });
+
+  test('copes with actionBarItems as nodes', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    render(<PageHeader actionBarItems={actionBarItemsNodes} />);
+
+    expect(warn).toBeCalledWith(
+      "The usage of prop 'actionBarItems' of 'PageHeader' has been changed and you should update. Expects an array of objects with the following properties: iconDescription, renderIcon and onClick."
+    );
+
+    warn.mockRestore(); // Remove mock
   });
 });

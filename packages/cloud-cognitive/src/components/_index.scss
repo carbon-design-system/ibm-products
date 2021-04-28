@@ -7,19 +7,23 @@
 
 // Package all scss files here for those that want them all bundled up.
 
-@import './AboutModal/index';
-@import './ActionBar/index';
-@import './BreadcrumbWithOverflow/index';
 @import './_Canary/canary';
+
+@import './AboutModal/index';
+@import './ActionSet/index';
+@import './CreateModal/index';
 @import './EmptyStates/index';
 @import './ExampleComponent/index';
+@import './ExportModal/index';
 @import './HTTPErrors/index';
 @import './ImportModal/index';
 @import './ModifiedTabs/index';
-@import './Notifications/index';
-@import './SidePanel/index';
+@import './NotificationsPanel/index';
 @import './PageHeader/index';
 @import './RemoveDeleteModal/index';
-@import './TagSet/index';
+@import './Saving/index';
+@import './SidePanel/index';
+@import './StatusIcon/index';
 @import './Tearsheet/index';
 @import './WebTerminal/index';
+@import './UserProfileImage/index';

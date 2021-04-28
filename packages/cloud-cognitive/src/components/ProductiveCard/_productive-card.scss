@@ -1,0 +1,63 @@
+//
+// Copyright IBM Corp. 2020, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+// shared card styles can be found in the Card folder
+@import '../Card/card';
+
+@import 'carbon-components/scss/components/overflow-menu/overflow-menu';
+
+.#{$pkg-prefix}-card--productive {
+  .#{$pkg-prefix}-card-header {
+    padding-right: 0;
+  }
+
+  .#{$pkg-prefix}-card-title {
+    @include carbon--type-style('productive-heading-02');
+  }
+
+  .#{$pkg-prefix}-card-title--lg .#{$pkg-prefix}-card-title {
+    @include carbon--type-style('productive-heading-03');
+  }
+
+  .#{$pkg-prefix}-card-body {
+    padding-top: $spacing-03;
+  }
+
+  .#{$pkg-prefix}-card-footer {
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid $ui-03;
+  }
+
+  .#{$pkg-prefix}-card-footer--no-button {
+    justify-content: flex-end;
+  }
+
+  .#{$pkg-prefix}-card-actions {
+    margin: 0;
+  }
+
+  .#{$pkg-prefix}-card-actions--top {
+    margin-top: calc(-1 * #{$spacing-02});
+    margin-right: $spacing-03;
+  }
+
+  .#{$pkg-prefix}-card-title--lg .#{$pkg-prefix}-card-actions--top,
+  .#{$pkg-prefix}-card-header--has-label .#{$pkg-prefix}-card-actions--top {
+    margin-top: 0;
+  }
+
+  .#{$pkg-prefix}-card-icon {
+    margin-right: $spacing-05;
+  }
+
+  .#{$pkg-prefix}-card-header-container {
+    align-items: start;
+  }
+}

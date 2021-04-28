@@ -1,24 +1,28 @@
-//
-// Copyright IBM Corp. 2020, 2020
-//
-// This source code is licensed under the Apache-2.0 license found in the
-// LICENSE file in the root directory of this source tree.
-//
+/**
+ * Copyright IBM Corp. 2020, 2021
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add20 } from '@carbon/icons-react';
-import '../../../enable-all'; // must come before component is imported (directly or indirectly)
+import '../../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import mdx from './UnauthorizedEmptyState.mdx';
 import { pkg } from '../../../settings';
 import { getStorybookPrefix } from '../../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, 'EmptyStates');
 import { UnauthorizedEmptyState } from '.';
 
 import styles from '../_index.scss';
 
+const storybookPrefix = getStorybookPrefix(
+  pkg,
+  UnauthorizedEmptyState.displayName
+);
+
 export default {
-  title: `${storybookPrefix}/EmptyStates/UnauthorizedEmptyState`,
+  title: `${storybookPrefix}/EmptyStates/${UnauthorizedEmptyState.displayName}`,
   component: UnauthorizedEmptyState,
   parameters: {
     styles,

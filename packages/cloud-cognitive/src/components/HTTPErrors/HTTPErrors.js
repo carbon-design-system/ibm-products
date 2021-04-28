@@ -5,12 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// Import portions of React that are needed.
 import React from 'react';
-import cx from 'classnames';
+
+// Other standard imports.
 import { arrayOf, shape, string } from 'prop-types';
-import { Link } from 'carbon-components-react';
+import cx from 'classnames';
 import { pkg /*, carbon */ } from '../../settings';
 
+// Carbon and package components we use.
+import { Link } from 'carbon-components-react';
+
+// The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--http-errors`;
 const componentName = 'HTTPErrors';
 
@@ -50,8 +56,13 @@ export let HTTPErrors = ({
 // Return a placeholder if not released and not enabled by feature flag
 HTTPErrors = pkg.checkComponentEnabled(HTTPErrors, componentName);
 
-HTTPErrors.displayName = componentName; // displayName is used in preference to function.name by React
+// The display name of the component, used by React. Note that displayName
+// is used in preference to relying on function.name.
+HTTPErrors.displayName = componentName;
 
+// The types and DocGen commentary for the component props,
+// in alphabetical order (for consistency).
+// See https://www.npmjs.com/package/prop-types#usage.
 HTTPErrors.propTypes = {
   /**
    * Provide an optional class to be applied to the containing node

@@ -7,7 +7,7 @@
 
 const { sync } = require('glob');
 const { resolve } = require('path');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 
 module.exports = {
   addons: [

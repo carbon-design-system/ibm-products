@@ -6,10 +6,11 @@
  */
 
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import userEvent from '@testing-library/user-event';
 
 import { pkg } from '../../settings';
-import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
@@ -18,156 +19,103 @@ import { ExampleComponent } from '.';
 const blockClass = `${pkg.prefix}--example-component`;
 const componentName = ExampleComponent.displayName;
 
-const { click } = fireEvent;
-
 const borderColor = '#acefed';
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 const primaryButtonLabel = `hello, world (${uuidv4()})`;
 const secondaryButtonLabel = `goodbye (${uuidv4()})`;
 
+// render an ExampleComponent with button labels and any other required props
+const renderComponent = ({ ...rest }) =>
+  render(
+    <ExampleComponent
+      {...{ primaryButtonLabel, secondaryButtonLabel, ...rest }}
+    />
+  );
+
 describe(componentName, () => {
   it('renders a component ExampleComponent', () => {
-    const { container } = render(
-      <ExampleComponent {...{ primaryButtonLabel, secondaryButtonLabel }} />
-    );
-    expect(container.querySelector(`.${blockClass}`)).not.toBeNull();
+    renderComponent();
+    expect(screen.getByRole('main')).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(
-      <ExampleComponent {...{ primaryButtonLabel, secondaryButtonLabel }} />
-    );
-    await expect(container).toBeAccessible(componentName);
+    const { container } = renderComponent();
+    await expect(container).toBeAccessible(componentName, 'scan_label');
     await expect(container).toHaveNoAxeViolations();
   });
 
   it(`renders the borderColor property`, () => {
-    const { container } = render(
-      <ExampleComponent
-        {...{ primaryButtonLabel, secondaryButtonLabel, borderColor }}
-      />
-    );
-    const style = window.getComputedStyle(
-      container.querySelector(`.${blockClass}`)
-    );
+    renderComponent({ borderColor });
+    const style = window.getComputedStyle(screen.getByRole('main'));
+    // We'd prefer to test the actual border color style, but jsdom does not
+    // render css custom properties (https://github.com/jsdom/jsdom/issues/1895)
+    // so testing the property is the best we can do.
     expect(style.getPropertyValue(`--${pkg.prefix}-border-color`)).toEqual(
       borderColor
     );
   });
 
   it(`renders the boxedBorder property`, () => {
-    const { container } = render(
-      <ExampleComponent
-        {...{ primaryButtonLabel, secondaryButtonLabel }}
-        boxedBorder
-      />
-    );
-    expect(
-      container.querySelector(`.${blockClass}--boxed-set`)
-    ).toBeInTheDocument();
+    renderComponent({ boxedBorder: true });
+    expect(screen.getByRole('main')).toHaveClass(`${blockClass}--boxed-set`);
   });
 
-  it('adds className to the containing node', () => {
-    const { container } = render(
-      <ExampleComponent
-        {...{ primaryButtonLabel, secondaryButtonLabel, className }}
-      />
-    );
-    expect(container.querySelector(`.${className}`)).toBeInTheDocument();
+  it('applies className to the containing node', () => {
+    renderComponent({ className });
+    expect(screen.getByRole('main')).toHaveClass(className);
   });
 
   it(`renders the disabled property`, () => {
-    const { container } = render(
-      <ExampleComponent
-        {...{ primaryButtonLabel, secondaryButtonLabel }}
-        disabled
-      />
-    );
-    expect(
-      container.querySelector(`.${blockClass}__primary-button`)
-    ).toHaveProperty('disabled');
+    renderComponent({ disabled: true });
+    screen
+      .getAllByRole('button')
+      .forEach((button) => expect(button).toHaveProperty('disabled', true));
   });
 
   it('notifies a click on each button', () => {
     const primaryHandler = jest.fn();
     const secondaryHandler = jest.fn();
-    const { container } = render(
-      <ExampleComponent
-        {...{ primaryButtonLabel, secondaryButtonLabel }}
-        onPrimaryClick={primaryHandler}
-        onSecondaryClick={secondaryHandler}
-      />
-    );
-    const primaryButton = container.querySelector(
-      `.${blockClass}__primary-button`
-    );
-    const secondaryButton = container.querySelector(
-      `.${blockClass}__secondary-button`
-    );
-    click(primaryButton);
-    click(secondaryButton);
+    renderComponent({
+      onPrimaryClick: primaryHandler,
+      onSecondaryClick: secondaryHandler,
+    });
+    screen.getAllByRole('button').forEach(userEvent.click);
     expect(primaryHandler).toBeCalledTimes(1);
     expect(secondaryHandler).toBeCalledTimes(1);
   });
 
   it('renders the primaryButtonLabel and secondaryButtonLabel properties', () => {
-    render(
-      <ExampleComponent {...{ primaryButtonLabel, secondaryButtonLabel }} />
-    );
-    expect(screen.getByText(primaryButtonLabel)).toBeTruthy();
-    expect(screen.getByText(secondaryButtonLabel)).toBeTruthy();
+    renderComponent();
+    screen.getByText(primaryButtonLabel);
+    screen.getByText(secondaryButtonLabel);
   });
 
   it('renders the primaryKind and secondaryKind properties', () => {
-    const { container } = render(
-      <ExampleComponent
-        {...{ primaryButtonLabel, secondaryButtonLabel }}
-        primaryKind="danger"
-        secondaryKind="tertiary"
-      />
-    );
+    renderComponent({ primaryKind: 'danger', secondaryKind: 'tertiary' });
     expect(
-      container.querySelector(`.${blockClass}__primary-button.bx--btn--danger`)
-    ).toBeInTheDocument();
+      screen.getByRole('button', { name: `danger ${primaryButtonLabel}` })
+    ).toHaveClass('bx--btn--danger');
     expect(
-      container.querySelector(
-        `.${blockClass}__secondary-button.bx--btn--tertiary`
-      )
-    ).toBeInTheDocument();
+      screen.getByRole('button', { name: secondaryButtonLabel })
+    ).toHaveClass('bx--btn--tertiary');
   });
 
   it('renders the size property', () => {
-    const { container } = render(
-      <ExampleComponent
-        {...{ primaryButtonLabel, secondaryButtonLabel }}
-        size="small"
-      />
-    );
-    expect(
-      container.querySelector(`.${blockClass}__primary-button.bx--btn--sm`)
-    ).toBeInTheDocument();
+    renderComponent({ size: 'small' });
+    screen
+      .getAllByRole('button')
+      .forEach((button) => expect(button).toHaveClass('bx--btn--sm'));
   });
 
   it('adds additional properties to the containing node', () => {
-    const { container } = render(
-      <ExampleComponent
-        {...{ primaryButtonLabel, secondaryButtonLabel }}
-        data-testid={dataTestId}
-      />
-    );
-    expect(
-      container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
-    ).toBeInTheDocument();
+    renderComponent({ 'data-testid': dataTestId });
+    screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
-    render(
-      <ExampleComponent
-        {...{ primaryButtonLabel, ref, secondaryButtonLabel }}
-      />
-    );
-    expect(ref.current.classList.contains(blockClass)).toBeTruthy();
+    renderComponent({ ref });
+    expect(ref.current).toEqual(screen.getByRole('main'));
   });
 });

@@ -17,11 +17,16 @@ import {
   Column,
   Row,
   ButtonSet,
+  Button,
 } from 'carbon-components-react';
 import { ActionBar } from '../ActionBar/';
-import { BreadcrumbWithOverflow, TagSet } from '../';
-import { ButtonSetWithOverflow } from './ButtonSetWithOverflow';
+import { BreadcrumbWithOverflow } from '../BreadcrumbWithOverflow';
+import { TagSet } from '../TagSet';
+import { ButtonSetWithOverflow } from '../ButtonSetWithOverflow';
 import { pkg } from '../../settings';
+import { ChevronUp16 } from '@carbon/icons-react';
+import { deprecatePropUsage } from '../../global/js/utils/props-helper';
+import unwrapIfFragment from '../../global/js/utils/unwrap-if-fragment';
 
 const componentName = 'PageHeader';
 const blockClass = `${pkg.prefix}-page-header`;
@@ -32,6 +37,8 @@ export let PageHeader = ({
   background,
   breadcrumbItems,
   className,
+  collapseExpandHeaderLabel,
+  collapseHeader,
   keepBreadcrumbAndTabs,
   navigation,
   pageActions,
@@ -43,6 +50,7 @@ export let PageHeader = ({
   titleIcon: TitleIcon,
 }) => {
   const [hasActionBar, setHasActionBar] = useState(false);
+  const [actionBarItemArray, setActionBarItemArray] = useState([]);
   const [metrics, setMetrics] = useState({});
   const [scrollYValue, setScrollYValue] = useState(0);
   const [componentCssCustomProps, setComponentCssCustomProps] = useState({});
@@ -66,6 +74,7 @@ export let PageHeader = ({
     setPageActionInBreadcrumbMinWidth,
   ] = useState(0);
   const [actionBarColumnWidth, setActionBarColumnWidth] = useState(0);
+  const [fullyCollapsed, setFullyCollapsed] = useState(false);
 
   useEffect(() => {
     let newActionBarWidth = 'initial';
@@ -304,6 +313,12 @@ export let PageHeader = ({
     tags,
   ]);
 
+  useEffect(() => {
+    setFullyCollapsed(
+      scrollYValue + metrics.headerTopValue + pageHeaderOffset >= 0
+    );
+  }, [metrics.headerTopValue, pageHeaderOffset, scrollYValue]);
+
   useWindowScroll(
     // on scroll or various layout changes check updates if needed
     ({ current }) => {
@@ -311,7 +326,7 @@ export let PageHeader = ({
       setScrollYValue(current.scrollY);
     },
     [
-      actionBarItems,
+      actionBarItemArray,
       availableSpace,
       breadcrumbItems,
       keepBreadcrumbAndTabs,
@@ -327,7 +342,7 @@ export let PageHeader = ({
     // on window resieze and other updates some values may have changed
     checkUpdateVerticalSpace();
   }, [
-    actionBarItems,
+    actionBarItemArray,
     availableSpace,
     breadcrumbItems,
     keepBreadcrumbAndTabs,
@@ -342,12 +357,26 @@ export let PageHeader = ({
     // Breadcrumb row only rendered if true
     // eslint-disable-next-line
     setHasBreadcrumbRow(
-      !(breadcrumbItems === undefined && actionBarItems === undefined)
+      !(breadcrumbItems === undefined && actionBarItemArray.length > 0)
     );
-  }, [actionBarItems, breadcrumbItems]);
+  }, [actionBarItemArray, breadcrumbItems]);
 
   useEffect(() => {
-    setHasActionBar(actionBarItems !== undefined);
+    setHasActionBar(actionBarItemArray.length > 0);
+  }, [actionBarItemArray]);
+
+  useEffect(() => {
+    let newActionBarItemArray;
+    // create child array from children which may be a fragment
+    if (actionBarItems) {
+      if (Array.isArray(actionBarItems)) {
+        newActionBarItemArray = actionBarItems;
+      } else {
+        const unwrapped = unwrapIfFragment(actionBarItems);
+        newActionBarItemArray = unwrapped.map((item) => item.props);
+      }
+    }
+    setActionBarItemArray(newActionBarItemArray || []);
   }, [actionBarItems]);
 
   useEffect(() => {
@@ -376,7 +405,7 @@ export let PageHeader = ({
     if (
       !result &&
       metrics.headerHeight > 0 &&
-      (breadcrumbItems || actionBarItems || tags || navigation)
+      (breadcrumbItems || actionBarItemArray || tags || navigation)
     ) {
       const startAddingAt = parseFloat(layout05, 10) * parseInt(baseFontSize);
       const scrollRemaining = metrics.headerHeight - scrollYValue;
@@ -398,7 +427,7 @@ export let PageHeader = ({
     }));
     setBackgroundOpacity(result);
   }, [
-    actionBarItems,
+    actionBarItemArray,
     background,
     breadcrumbItems,
     metrics.breadcrumbRowHeight,
@@ -415,9 +444,33 @@ export let PageHeader = ({
 
   const nextToTabsCheck = () => {
     return (
-      actionBarItems === undefined && scrollYValue + metrics.headerTopValue > 0
+      actionBarItemArray === undefined &&
+      scrollYValue + metrics.headerTopValue > 0
     );
   };
+
+  const toggleCollapse = (forceCollapse) => {
+    const collapse =
+      typeof forceCollapse !== 'undefined' ? forceCollapse : !fullyCollapsed;
+
+    if (collapse) {
+      window.scrollTo({
+        top: pageHeaderOffset - (metrics?.headerTopValue || 0),
+        behavior: 'smooth',
+      });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const handleCollapseToggle = () => {
+    toggleCollapse();
+  };
+
+  useEffect(() => {
+    toggleCollapse(collapseHeader);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [collapseHeader]);
 
   return (
     <ReactResizeDetector handleHeight onResize={handleResize}>
@@ -440,7 +493,7 @@ export let PageHeader = ({
                 [`${blockClass}--breadcrumb-row--next-to-tabs`]: nextToTabsCheck(),
                 [`${blockClass}--breadcrumb-row--has-breadcrumbs`]: breadcrumbItems,
                 [`${blockClass}--breadcrumb-row--has-action-bar`]:
-                  actionBarItems || pageActions,
+                  actionBarItemArray || pageActions,
               })}>
               <div className={`${blockClass}--breadcrumb-row--container`}>
                 <Column
@@ -496,17 +549,17 @@ export let PageHeader = ({
                               })}>
                               <ButtonSetWithOverflow
                                 className={`${blockClass}--button-set--in-breadcrumb`}
-                                onWidthChange={handleButtonSetWidthChange}>
-                                {pageActions}
-                              </ButtonSetWithOverflow>
+                                onWidthChange={handleButtonSetWidthChange}
+                                buttons={pageActions}
+                              />
                             </div>
                           )}
                           <ActionBar
+                            actions={actionBarItemArray}
                             className={`${blockClass}--action-bar`}
                             onWidthChange={handleActionBarWidthChange}
-                            rightAlign={true}>
-                            {actionBarItems}
-                          </ActionBar>
+                            rightAlign={true}
+                          />
                         </>
                       ) : null}
                     </div>
@@ -527,7 +580,7 @@ export let PageHeader = ({
                   [`${blockClass}--title-row--under-action-bar`]: hasActionBar,
                   [`${blockClass}--title-row--sticky`]:
                     pageActions !== undefined &&
-                    actionBarItems === undefined &&
+                    actionBarItemArray === undefined &&
                     hasBreadcrumbRow,
                 }
               )}>
@@ -555,7 +608,17 @@ export let PageHeader = ({
                   })}>
                   <ButtonSet
                     className={`${blockClass}--page-actions-container`}>
-                    {pageActions}
+                    {pageActions.map(
+                      ({ kind, label, onClick, ...rest }, index) => (
+                        <Button
+                          {...rest}
+                          kind={kind}
+                          onClick={onClick}
+                          key={index}>
+                          {label}
+                        </Button>
+                      )
+                    )}
                   </ButtonSet>
                 </Column>
               ) : null}
@@ -580,7 +643,7 @@ export let PageHeader = ({
           This buffer is used in CSS instead to add vertical space after the last row but only if there is no navigation row
            */}
           {(breadcrumbItems ||
-            actionBarItems ||
+            actionBarItemArray ||
             title ||
             pageActions ||
             availableSpace ||
@@ -618,6 +681,23 @@ export let PageHeader = ({
             </Row>
           ) : null}
         </Grid>
+        {backgroundOpacity > 0 ? (
+          <Button
+            className={cx(`${blockClass}__collapse-expand-toggle`, {
+              [`${blockClass}__collapse-expand-toggle--collapsed`]: fullyCollapsed,
+            })}
+            data-collapse={fullyCollapsed ? 'collapsed' : 'not collapsed'}
+            hasIconOnly={true}
+            iconDescription={collapseExpandHeaderLabel}
+            kind="ghost"
+            onClick={handleCollapseToggle}
+            renderIcon={ChevronUp16}
+            size="field"
+            tooltipPosition="bottom"
+            tooltipAlignment="end"
+            type="button"
+          />
+        ) : null}
       </section>
     </ReactResizeDetector>
   );
@@ -633,8 +713,21 @@ PageHeader.propTypes = {
    * action icons. Optional.
    */
   actionBarItems: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.element,
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        iconDescription: PropTypes.string.isRequired,
+        renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
+          .isRequired,
+        onClick: PropTypes.func,
+      })
+    ),
+    deprecatePropUsage(
+      PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.element),
+        PropTypes.element,
+      ]),
+      'Expects an array of objects with the following properties: iconDescription, renderIcon and onClick.'
+    ),
   ]), // expects action bar item as array or in fragment
   /**
    * A zone for placing high-level, client content above the page tabs.
@@ -658,6 +751,15 @@ PageHeader.propTypes = {
    */
   className: PropTypes.string,
   /**
+   * Label/assistive text for the collapse/expand chevron
+   */
+  collapseExpandHeaderLabel: PropTypes.string,
+  /**
+   * The header can as a whole be collapsed, expanded or somewhere in between.
+   * This setting controls the initial value, but also takes effect on change
+   */
+  collapseHeader: PropTypes.bool,
+  /**
    * Standard behavior scrolls the breadcrumb off to leave just tabs. This
    * option preserves vertical space for both.
    */
@@ -668,10 +770,23 @@ PageHeader.propTypes = {
    */
   navigation: PropTypes.element, // Supports Tabs
   /**
-   * Specifies the primary page actions as a React element. Normally this
-   * is one or more Carbon Button components. Optional.
+   * Specifies the primary page actions as a React element. zero, one or more page action button shapes label + onClick
    */
-  pageActions: PropTypes.element,
+  pageActions: PropTypes.oneOfType([
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        label: PropTypes.node,
+        onClick: PropTypes.func,
+      })
+    ),
+    deprecatePropUsage(
+      PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.element),
+        PropTypes.element,
+      ]),
+      'Expects an array of objects with the following properties: label and onClick.'
+    ),
+  ]),
   /**
    * Number of pixels the page header sits from the top of the screen.
    * The nature of the pageHeader makes this hard to measure
@@ -707,6 +822,7 @@ PageHeader.propTypes = {
 PageHeader.defaultProps = {
   background: false,
   className: '',
+  collapseExpandHeaderLabel: 'Toggle expansion',
   keepBreadcrumbAndTabs: false,
   pageHeaderOffset: 0,
   preCollapseTitleRow: false,

@@ -7,14 +7,14 @@
 
 import { render, waitFor } from '@testing-library/react';
 import React from 'react';
-import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { APIKeyDownloader } from '.';
 
 const { name } = APIKeyDownloader;
 const defaultProps = {
   apiKey: '123-456-789',
   bodyText: 'API key created',
-  fileName: 'apikey',
+  fileName: 'file',
   linkText: 'download',
 };
 
@@ -22,8 +22,18 @@ global.URL.createObjectURL = jest.fn(() => Promise.resolve('download-link'));
 
 describe(name, () => {
   test('renders with minimal setup', async () => {
-    const { getByText } = render(<APIKeyDownloader {...defaultProps} />);
+    const { rerender, getByText } = render(
+      <APIKeyDownloader {...defaultProps} />
+    );
     const link = getByText('download');
+
+    await waitFor(() => {
+      expect(link).toHaveProperty('download');
+    });
+    expect(link).toHaveProperty('download', 'file.json');
+    expect(link).toHaveProperty('href', 'http://localhost/download-link');
+
+    rerender(<APIKeyDownloader {...defaultProps} fileName="" />);
     await waitFor(() => {
       expect(link).toHaveProperty('download');
     });

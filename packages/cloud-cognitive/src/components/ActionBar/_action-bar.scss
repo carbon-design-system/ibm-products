@@ -1,40 +1,64 @@
+//
+// Copyright IBM Corp. 2020, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@import '@carbon/import-once/scss/import-once';
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
+@import '../../global/styles/mixins';
 
+// Imports of Carbon settings and component styles and other
+// related component styles used by ExampleComponent.
 @import 'carbon-components/scss/components/button/button';
 @import 'carbon-components/scss/components/overflow-menu/overflow-menu';
 @import 'carbon-components/scss/components/tooltip/tooltip';
 
-$block-class: #{$pkg-prefix}-action-bar;
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin action-bar {
+  $block-class: #{$pkg-prefix}--action-bar;
 
-.#{$block-class} {
-  display: block;
+  @include block-wrap($block-class) {
+    &.#{$block-class} {
+      display: block;
+    }
+
+    .#{$block-class}__displayed-items {
+      display: inline-flex;
+      width: 100%;
+      white-space: nowrap;
+    }
+
+    .#{$block-class}__displayed-items--right {
+      justify-content: flex-end;
+    }
+
+    .#{$block-class}__overflow-menu {
+      display: inline-block;
+    }
+  }
+
+  @include block-wrap($block-class + '-options') {
+    .#{$block-class}__overflow-menu-item {
+      padding: 0 $spacing-03;
+    }
+
+    .#{$block-class}__overflow-menu-item-content {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .#{$block-class}__overflow-menu-item svg {
+      margin: 0 $spacing-02;
+    }
+  }
 }
 
-.#{$block-class}--displayed-items {
-  display: inline-flex;
-  width: 100%;
-  white-space: nowrap;
-}
-
-.#{$block-class}--displayed-items--right {
-  justify-content: flex-end;
-}
-
-.#{$block-class}--overflow-menu {
-  display: inline-block;
-}
-
-.#{$block-class}--overflow-menu-item {
-  padding: 0 $spacing-03;
-}
-
-.#{$block-class}--overflow-menu-item-content {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.#{$block-class}--overflow-menu-item svg {
-  margin: 0 $spacing-02;
+@include exports('action-bar') {
+  @include action-bar;
 }

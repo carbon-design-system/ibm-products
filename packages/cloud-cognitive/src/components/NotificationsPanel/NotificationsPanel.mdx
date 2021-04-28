@@ -1,0 +1,29 @@
+import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
+import { pkg } from '../../settings';
+import { getStorybookSlug } from '../../../config';
+import { NotificationsPanel } from '.';
+
+# NotificationsPanel
+
+[CD&AI Notifications panel usage guidelines](https://pages.github.ibm.com/cdai-design/pal/patterns/notifications/)
+
+## Overview
+
+The `NotificationsPanel` component provides a consistent experience to users and
+designers crafting experiences no matter what offering they use or work on. It
+sets expectations on the behavior for notifications, allowing the user to view
+and interact with them all in one place.
+
+### Default NotificationsPanel component
+
+See notification bell in global header above for interaction.
+
+<Preview>
+  <Story
+    id={getStorybookSlug(pkg, NotificationsPanel.displayName, 'default')}
+  />
+</Preview>
+
+## Component API
+
+<Props />

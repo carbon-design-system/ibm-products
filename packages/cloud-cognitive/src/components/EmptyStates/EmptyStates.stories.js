@@ -1,29 +1,33 @@
-//
-// Copyright IBM Corp. 2020, 2020
-//
-// This source code is licensed under the Apache-2.0 license found in the
-// LICENSE file in the root directory of this source tree.
-//
+/**
+ * Copyright IBM Corp. 2020, 2021
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add20 } from '@carbon/icons-react';
 import CustomIllustration from './story_assets/empty-state-bright-magnifying-glass.svg';
-import '../../enable-all'; // must come before component is imported (directly or indirectly)
+import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 import mdx from './EmptyState.mdx';
-const storybookPrefix = getStorybookPrefix(pkg, 'EmptyStates');
 
-import { EmptyState } from '.';
-import { ErrorEmptyState } from './ErrorEmptyState';
-import { NoDataEmptyState } from './NoDataEmptyState';
-import { NoTagsEmptyState } from './NoTagsEmptyState';
-import { NotFoundEmptyState } from './NotFoundEmptyState';
-import { NotificationsEmptyState } from './NotificationsEmptyState';
-import { UnauthorizedEmptyState } from './UnauthorizedEmptyState';
+import {
+  EmptyState,
+  ErrorEmptyState,
+  NoDataEmptyState,
+  NoTagsEmptyState,
+  NotFoundEmptyState,
+  NotificationsEmptyState,
+  UnauthorizedEmptyState,
+} from '.';
 
 import styles from './_storybook-styles.scss';
+
+const storybookPrefix = getStorybookPrefix(pkg, EmptyState.displayName);
+console.log(EmptyState.displayName, storybookPrefix);
 
 export default {
   title: `${storybookPrefix}/EmptyStates/EmptyState`,

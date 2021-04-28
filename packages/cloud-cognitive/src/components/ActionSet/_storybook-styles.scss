@@ -1,0 +1,38 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+
+$block-class: #{$pkg-prefix}--action-set;
+
+.#{$block-class}__story-container {
+  min-width: 96vw;
+  min-height: 3rem;
+  border: 1px solid $decorative-01;
+  box-shadow: 0 0 10px 5px $ui-04;
+}
+
+.#{$block-class}__story-container--xlg {
+  min-width: 75vw;
+}
+
+.#{$block-class}__story-container--lg {
+  min-width: 60vw;
+}
+
+.#{$block-class}__story-container--md {
+  min-width: 45vw;
+}
+
+.#{$block-class}__story-container--sm {
+  min-width: 30vw;
+}
+
+.#{$block-class}__story-container--xs {
+  min-width: 25vw;
+}

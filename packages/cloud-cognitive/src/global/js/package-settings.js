@@ -10,39 +10,40 @@ const defaults = {
 
   // by default only released components are set to true
   component: {
-    AboutModal: false,
-    ActionBar: false,
+    // reviewed and released components:
+    AboutModal: true,
+    NotificationsPanel: true,
+    StatusIcon: true,
+    Tearsheet: true,
+    TearsheetNarrow: true,
+
+    // other public components not yet reviewed and released:
     ActionBarItem: false,
-    APIKeyDownlaoder: false,
+    APIKeyDownloader: false,
     APIKeyModal: false,
-    BreadcrumbWithOverflow: false,
-    Card: false,
     ContextHeader: false,
+    CreateModal: false,
     EmptyState: false,
     ErrorEmptyState: false,
-    NoDataEmptyState: false,
-    NoTagsEmptyState: false,
-    NotFoundEmptyState: false,
-    NotificationsEmptyState: false,
-    UnauthorizedEmptyState: false,
     ExampleComponent: false,
     ExportModal: false,
-    HTTPErrors: false,
+    ExpressiveCard: false,
     HTTPError403: false,
     HTTPError404: false,
     HTTPErrorOther: false,
     ImportModal: false,
     ModifiedTabs: false,
-    Notifications: false,
-    PageActionItem: false,
+    NoDataEmptyState: false,
+    NoTagsEmptyState: false,
+    NotFoundEmptyState: false,
+    NotificationsEmptyState: false,
     PageHeader: false,
+    ProductiveCard: false,
     RemoveDeleteModal: false,
+    Saving: false,
     SidePanel: false,
-    StatusIcon: false,
-    TagSet: false,
-    Tearsheet: false,
-    TearsheetNarrow: false,
-    TearsheetShell: false,
+    UnauthorizedEmptyState: false,
+    UserProfileImage: false,
     WebTerminal: false,
     /* new component flags here - comment used by generate CLI */
   },
@@ -62,8 +63,12 @@ const warningMessageAllComponents =
 const warningMessageAllFeatures =
   'IBM Cloud Cognitive (WARNING): All features enabled through use of setAllFeatures';
 
-let allComponents = false;
-let allFeatures = false;
+// Values to represent overrides for component or feature settings.
+// Each value maps the initial value to the value that should be returned.
+const all = { INITIAL: (v) => v, ON: () => true, OFF: () => false };
+
+let allComponents = all.INITIAL;
+let allFeatures = all.INITIAL;
 let silent = false;
 
 const component = new Proxy(
@@ -75,7 +80,7 @@ const component = new Proxy(
       return true; // value set
     },
     get(target, property) {
-      return allComponents || (target[property] ?? false);
+      return allComponents(target[property] ?? false);
     },
   }
 );
@@ -90,7 +95,7 @@ const feature = new Proxy(
     },
 
     get(target, property) {
-      return allFeatures || (target[property] ?? false);
+      return allFeatures(target[property] ?? false);
     },
   }
 );
@@ -108,18 +113,36 @@ export default {
       : component[componentName];
   },
 
+  isComponentPublic: (componentOrName, byDefault = false) => {
+    const componentName =
+      componentOrName?.displayName || componentOrName?.name || componentOrName;
+    return Object.prototype.hasOwnProperty.call(
+      byDefault ? defaults.component : component,
+      componentName
+    );
+  },
+
   isFeatureEnabled: (featureName, byDefault = false) => {
     return byDefault ? defaults.feature[featureName] : feature[featureName];
   },
 
+  isFeaturePublic: (featureName, byDefault = false) => {
+    return Object.prototype.hasOwnProperty.call(
+      byDefault ? defaults.feature : feature,
+      featureName
+    );
+  },
+
   setAllComponents: (enabled) => {
-    enabled && !silent && console.warn(warningMessageAllComponents);
-    allComponents = enabled;
+    enabled === true && !silent && console.warn(warningMessageAllComponents);
+    allComponents =
+      enabled === true ? all.ON : enabled === false ? all.OFF : all.INITIAL;
   },
 
   setAllFeatures: (enabled) => {
-    enabled && !silent && console.warn(warningMessageAllFeatures);
-    allFeatures = enabled;
+    enabled === true && !silent && console.warn(warningMessageAllFeatures);
+    allFeatures =
+      enabled === true ? all.ON : enabled === false ? all.OFF : all.INITIAL;
   },
 
   _silenceWarnings: (value) => {

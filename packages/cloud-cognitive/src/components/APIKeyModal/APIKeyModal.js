@@ -42,12 +42,15 @@ export let APIKeyModal = ({
   const [currentStep, setCurrentStep] = useState(0);
   const inputRef = useRef();
   const hasSteps = Boolean(customSteps.length);
+  const apiKeyLoaded = apiKey && !loading;
+  const hasNextStep = hasSteps && currentStep < customSteps.length - 1;
+  const hasPreviousStep = hasSteps && currentStep !== 0;
 
   useEffect(() => {
     if (inputRef.current && open) inputRef.current.focus();
   }, [open]);
 
-  const getPrimaryButtonStatus = () => {
+  const isPrimaryButtonDisabled = () => {
     if (loading) return true;
     if (hasSteps && 'valid' in customSteps[currentStep])
       return !customSteps[currentStep].valid;
@@ -98,11 +101,6 @@ export let APIKeyModal = ({
     else onCloseHandler();
   };
 
-  const primaryButtonDisabled = getPrimaryButtonStatus();
-  const apiKeyLoaded = apiKey && !loading;
-  const hasNextStep = hasSteps && currentStep < customSteps.length - 1;
-  const hasPreviousStep = hasSteps && currentStep !== 0;
-
   return (
     <Modal
       className={`${pkg.prefix}--apikey-modal`}
@@ -111,7 +109,7 @@ export let APIKeyModal = ({
       primaryButtonText={getPrimaryButtonText()}
       secondaryButtonText={getSecondaryButtonText()}
       onRequestSubmit={submitHandler}
-      primaryButtonDisabled={primaryButtonDisabled}
+      primaryButtonDisabled={isPrimaryButtonDisabled()}
       onRequestClose={onCloseHandler}
       onSecondarySubmit={onBackHandler}
       modalLabel={hasPreviousStep ? modalLabel : ''}>

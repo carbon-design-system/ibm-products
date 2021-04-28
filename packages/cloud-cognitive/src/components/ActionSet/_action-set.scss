@@ -1,0 +1,94 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+
+@import 'carbon-components/scss/components/button/button';
+@import 'carbon-components/scss/components/inline-loading/inline-loading';
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin action-set {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+  $block-class: #{$pkg-prefix}--action-set;
+
+  .#{$block-class} {
+    justify-content: flex-end;
+  }
+
+  .#{$block-class}.#{$block-class}--stack {
+    align-items: stretch;
+  }
+
+  .#{$block-class} .#{$block-class}__action-button {
+    align-items: center;
+    max-width: none;
+    height: $spacing-10;
+    margin: 0;
+    padding-top: $spacing-05;
+    padding-bottom: $spacing-07;
+  }
+
+  // For row-single in medium,
+  // or for ghosts in row-single,
+  // buttons are 100% width
+  .#{$block-class}.#{$block-class}--row-single.#{$block-class}--md
+    .#{$block-class}__action-button,
+  .#{$block-class}.#{$block-class}--row-single
+    .#{$block-class}__action-button--ghost {
+    flex: 0 1 100%;
+  }
+
+  // For ghosts in row-double,
+  // buttons are 75% width
+  .#{$block-class}.#{$block-class}--row-double
+    .#{$block-class}__action-button--ghost {
+    flex: 0 1 75%;
+  }
+
+  // For row-single in large (non-ghost),
+  // or row-double in medium or large,
+  // or ghosts in row-triple,
+  // buttons are 50% width
+  .#{$block-class}.#{$block-class}--row-single.#{$block-class}--lg
+    .#{$block-class}__action-button:not(.#{$block-class}__action-button--ghost),
+  .#{$block-class}.#{$block-class}--row-double.#{$block-class}--md
+    .#{$block-class}__action-button,
+  .#{$block-class}.#{$block-class}--row-double.#{$block-class}--lg
+    .#{$block-class}__action-button,
+  .#{$block-class}.#{$block-class}--row-triple
+    .#{$block-class}__action-button--ghost {
+    flex: 0 1 50%;
+  }
+
+  // For row-triple in large (non-ghost),
+  // or any non-ghosts in extra large or max,
+  // or row-quadruple,
+  // buttons are 25% width
+  .#{$block-class}.#{$block-class}--row-triple.#{$block-class}--lg
+    .#{$block-class}__action-button:not(.#{$block-class}__action-button--ghost),
+  .#{$block-class}.#{$block-class}--xlg
+    .#{$block-class}__action-button:not(.#{$block-class}__action-button--ghost),
+  .#{$block-class}.#{$block-class}--max
+    .#{$block-class}__action-button:not(.#{$block-class}__action-button--ghost),
+  .#{$block-class}.#{$block-class}--row-quadruple
+    .#{$block-class}__action-button {
+    flex: 0 1 25%;
+  }
+
+  .#{$block-class} .#{$block-class}__action-button .bx--inline-loading {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: $spacing-07;
+  }
+}
+
+@include exports('action-set') {
+  @include action-set;
+}

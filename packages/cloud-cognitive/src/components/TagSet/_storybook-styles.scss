@@ -4,17 +4,18 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
-@import '../../global/styles/carbon-settings'; // goes before index as it affects how carbon is used.
-@import './index';
 
-$block-class: #{$pkg-prefix}-tag-set;
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
 
-.#{$block-class}--story__viewport {
+$block-class: #{$pkg-prefix}--tag-set;
+
+.#{$block-class}__story-viewport {
   position: relative;
   box-shadow: 0 0 0 $layout-02 $ui-01;
 }
 
-.#{$block-class}--story__viewport::before {
+.#{$block-class}__story-viewport::before {
   position: absolute;
   top: calc(-1 * #{$layout-02});
   left: 0;

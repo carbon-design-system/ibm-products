@@ -1,27 +1,27 @@
 //
-// Copyright IBM Corp. 2020, 2020
+// Copyright IBM Corp. 2020, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 
-import { Link, Modal, Search, Tag, Tooltip } from 'carbon-components-react';
-
+import { TagSetOverflow } from './TagSetOverflow';
+import { TagSetModal } from './TagSetModal';
 import ReactResizeDetector from 'react-resize-detector';
 
 import { pkg } from '../../settings';
 const componentName = 'TagSet';
-const blockClass = `${pkg.prefix}-tag-set`;
+const blockClass = `${pkg.prefix}--tag-set`;
 
 export let TagSet = ({
   children,
   className,
-  maxVisibleTags,
+  maxVisible,
   rightAlign,
   overflowAlign,
   overflowDirection,
@@ -32,133 +32,135 @@ export let TagSet = ({
 }) => {
   const [displayCount, setDisplayCount] = useState(3);
   const [displayedTags, setDisplayedTags] = useState([]);
-  const [overflowTags, setOverflowTags] = useState([]);
   const [allTags, setAllTags] = useState([]);
-  const [filteredAllTags, setFilteredAllTags] = useState([]);
-  const [tipOpen, setTipOpen] = useState(false);
+  const [hiddenSizingTags, setHiddenSizingTags] = useState([]);
   const [showAllModalOpen, setShowAllModalOpen] = useState(false);
-  const [search, setSearch] = useState('');
   const tagSet = useRef(null);
   const displayedArea = useRef(null);
-  const sizingTags = useRef([]);
+  const [sizingTags, setSizingTags] = useState([]);
   const overflowTag = useRef(null);
-  const overflowTagContent = useRef(null);
+
+  const handleShowAllClick = () => {
+    setShowAllModalOpen(true);
+  };
 
   useEffect(() => {
+    // clone children for use in modal
     setAllTags(
+      children && children.length > 0
+        ? children.map((child) => React.cloneElement(child))
+        : []
+    );
+
+    const newSizingTags = [];
+    // use children as sizing tags
+    setHiddenSizingTags(
+      /* istanbul ignore next */
       children && children.length > 0
         ? children.map((child, index) => {
             return (
               <div
-                key={`sizing-tag-${child.key}`}
-                className={`${blockClass}--sizing-tag`}
-                ref={(el) => (sizingTags.current[index] = el)}>
-                {React.cloneElement(child)}
+                key={index}
+                className={`${blockClass}__sizing-tag`}
+                ref={(el) => (newSizingTags[index] = el)}>
+                {child}
               </div>
             );
           })
         : []
     );
-    const newDisplayedTags = [];
-    const newOverflowTags = [];
-
-    if (children && children.length > 0) {
-      children.forEach((child, index) => {
-        if (index < displayCount) {
-          newDisplayedTags.push(
-            <div
-              key={`displayed-tag-${child.key}`}
-              className={`${blockClass}--displayed-tag`}>
-              {React.cloneElement(child)}
-            </div>
-          );
-        } else {
-          if (newOverflowTags.length < 10) {
-            newOverflowTags.push(React.cloneElement(child));
-          }
-        }
-      });
-    }
-
-    setDisplayedTags(newDisplayedTags);
-    setOverflowTags(newOverflowTags);
-  }, [children, displayCount]);
+    setSizingTags(newSizingTags);
+  }, [children]);
 
   useEffect(() => {
-    if (showAllModalOpen) {
-      const newFilteredAllTags = [];
-      children.forEach((child) => {
-        const dataSearch = (
-          child.props['data-search'] || ''
-        ).toLocaleLowerCase();
-        const contentsAsString = child.props.children
-          .toString()
-          .toLocaleLowerCase();
-        if (
-          (dataSearch && dataSearch.indexOf(search) > -1) ||
-          contentsAsString.indexOf(search) > -1
-        ) {
-          newFilteredAllTags.push(
-            <span
-              key={`overflow-tag-${child.key}`}
-              className={`${blockClass}-show-all-tags`}>
-              {React.cloneElement(child)}
-            </span>
-          );
-        }
-      });
-      setFilteredAllTags(newFilteredAllTags);
-    } else {
-      setFilteredAllTags([]);
-    }
-  }, [showAllModalOpen, children, search]);
+    // clone children for use as visible and overflow tags
+    let newDisplayedTags =
+      children && children.length > 0
+        ? children.map((child) => React.cloneElement(child))
+        : [];
 
-  const checkFullyVisibleTags = () => {
+    // separate out tags for the overflow
+    const newOverflowTags = newDisplayedTags.splice(
+      displayCount,
+      newDisplayedTags.length - displayCount
+    );
+
+    // add wrapper around displayed tags
+    newDisplayedTags = newDisplayedTags.map((tag, index) => (
+      <div key={index} className={`${blockClass}__displayed-tag`}>
+        {tag}
+      </div>
+    ));
+
+    newDisplayedTags.push(
+      <TagSetOverflow
+        onShowAllClick={handleShowAllClick}
+        overflowTags={newOverflowTags}
+        overflowAlign={overflowAlign}
+        overflowDirection={overflowDirection}
+        showAllTagsLabel={showAllTagsLabel}
+        key="displayed-tag-overflow"
+        ref={overflowTag}
+      />
+    );
+
+    setDisplayedTags(newDisplayedTags);
+  }, [
+    children,
+    displayCount,
+    overflowAlign,
+    overflowDirection,
+    showAllTagsLabel,
+  ]);
+
+  const checkFullyVisibleTags = useCallback(() => {
     // how many will fit?
     let willFit = 0;
-    let spaceAvailable = tagSet.current.offsetWidth;
 
-    for (let i in sizingTags.current) {
-      const tagWidth = sizingTags.current[i].offsetWidth;
-      if (spaceAvailable >= tagWidth) {
-        spaceAvailable -= tagWidth;
-        willFit += 1;
-      } else {
-        break;
+    if (sizingTags.length > 0) {
+      let spaceAvailable = tagSet.current.offsetWidth;
+
+      for (let i in sizingTags) {
+        const tagWidth = sizingTags[i].offsetWidth;
+
+        if (spaceAvailable >= tagWidth) {
+          spaceAvailable -= tagWidth;
+          willFit += 1;
+        } else {
+          break;
+        }
+      }
+
+      if (willFit < sizingTags.length) {
+        while (
+          willFit > 0 &&
+          spaceAvailable < overflowTag.current.offsetWidth
+        ) {
+          // Highly unlikely any useful tag is smaller
+          willFit -= 1; // remove one tag
+          spaceAvailable += sizingTags[willFit].offsetWidth;
+        }
       }
     }
 
-    if (willFit < sizingTags.current.length) {
-      while (willFit > 0 && spaceAvailable < overflowTag.current.offsetWidth) {
-        // Highly unlikely any useful tag is smaller
-        willFit -= 1; // remove one tag
-        spaceAvailable += sizingTags.current[willFit].offsetWidth;
-      }
+    if (willFit < 1) {
+      setDisplayCount(0);
+    } else {
+      setDisplayCount(maxVisible ? Math.min(willFit, maxVisible) : willFit);
     }
-
-    setDisplayCount(
-      maxVisibleTags ? Math.min(willFit, maxVisibleTags) : willFit
-    );
-  };
+  }, [maxVisible, sizingTags]);
 
   useEffect(() => {
     checkFullyVisibleTags();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [maxVisibleTags, sizingTags]);
-
-  const showTip = () => {
-    setTipOpen(true);
-  };
-
-  const hideTip = () => {
-    setTipOpen(false);
-  };
+  }, [checkFullyVisibleTags, maxVisible, sizingTags]);
 
   const handleResize = () => {
+    /* istanbul ignore next */ // not sure how to test resize
     checkFullyVisibleTags();
   };
 
   const handleSizerTagsResize = () => {
+    /* istanbul ignore next */ // not sure how to test resize
     checkFullyVisibleTags();
   };
 
@@ -166,124 +168,35 @@ export let TagSet = ({
     setShowAllModalOpen(false);
   };
 
-  const handleShowAllTagsClick = (ev) => {
-    ev.stopPropagation();
-    ev.preventDefault();
-    setTipOpen(false);
-    setShowAllModalOpen(true);
-  };
-
-  const handleSearch = (ev) => {
-    setSearch(ev.target.value);
-  };
-
-  const handleClickOutsideCheck = (ev) => {
-    const tooltipEl =
-      overflowTagContent.current &&
-      overflowTagContent.current.parentElement.parentElement;
-    if (
-      tooltipEl &&
-      (tooltipEl === ev.target || tooltipEl.contains(ev.target))
-    ) {
-      // inside click
-      return;
-    }
-    hideTip(ev);
-  };
-
-  useEffect(() => {
-    // Check for a click outside of the tooltip
-    document.addEventListener('mousedown', handleClickOutsideCheck);
-    // remove listener on destroy
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutsideCheck);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <ReactResizeDetector onResize={handleResize}>
       <div className={cx([blockClass, className])} ref={tagSet}>
         <div
           className={cx([
-            `${blockClass}--space`,
-            { [`${blockClass}--space--right`]: rightAlign },
+            `${blockClass}__space`,
+            { [`${blockClass}__space--right`]: rightAlign },
           ])}>
           <ReactResizeDetector onResize={handleSizerTagsResize}>
             <div
-              className={`${blockClass}--tag-container ${blockClass}--tag-container--hidden`}
+              className={`${blockClass}__tag-container ${blockClass}__tag-container--hidden`}
               aria-hidden={true}>
-              {allTags}
+              {hiddenSizingTags}
             </div>
           </ReactResizeDetector>
 
-          <div className={`${blockClass}--tag-container`} ref={displayedArea}>
+          <div className={`${blockClass}__tag-container`} ref={displayedArea}>
             {displayedTags}
           </div>
-
-          <span
-            aria-hidden={overflowTags.length === 0}
-            className={cx(`${blockClass}--overflow`, {
-              [`${blockClass}--overflow--hidden`]: overflowTags.length === 0,
-            })}
-            onFocus={showTip}>
-            <Tooltip
-              align={overflowAlign}
-              className={`${blockClass}--tooltip`}
-              direction={overflowDirection}
-              open={tipOpen}
-              triggerText={
-                <Tag>
-                  +
-                  {children && children.length > 0
-                    ? children.length - displayedTags.length
-                    : 0}
-                </Tag>
-              }
-              showIcon={false}
-              ref={overflowTag}>
-              <div
-                ref={overflowTagContent}
-                className={`${blockClass}--overflow-content`}>
-                <ul className={`${blockClass}--overflow-tag-list`}>
-                  {overflowTags.map((tag, index) => (
-                    <li
-                      className={`${blockClass}--overflow-tag-item`}
-                      key={`overflow-tag--${index}`}>
-                      {tag.props.children}
-                    </li>
-                  ))}
-                </ul>
-                {overflowTags.length >= 10 && (
-                  <Link
-                    className={`${blockClass}--show-all-tags-link`}
-                    href=""
-                    onClick={handleShowAllTagsClick}>
-                    {showAllTagsLabel}
-                  </Link>
-                )}
-              </div>
-            </Tooltip>
-          </span>
         </div>
-        <Modal
-          className={`${blockClass}--show-all-modal`}
+
+        <TagSetModal
+          allTags={allTags}
           open={showAllModalOpen}
-          passiveModal
-          size="sm"
-          modalHeading={showAllModalHeading}
-          onRequestClose={handleModalClose}>
-          <Search
-            className={`${blockClass}--show-all-tags-search`}
-            labelText={showAllSearchLabel}
-            placeholder={showAllSearchPlaceHolderText}
-            onChange={handleSearch}
-            size="lg"
-          />
-          <div className={`${blockClass}--show-all-tags-content`}>
-            {filteredAllTags}
-          </div>
-        </Modal>
+          heading={showAllModalHeading}
+          onClose={handleModalClose}
+          searchLabel={showAllSearchLabel}
+          searchPlaceholder={showAllSearchPlaceHolderText}
+        />
       </div>
     </ReactResizeDetector>
   );
@@ -304,7 +217,7 @@ TagSet.propTypes = {
   /**
    * maximum visible tags
    */
-  maxVisibleTags: PropTypes.number,
+  maxVisible: PropTypes.number,
   /**
    * overflowAlign from the standard tooltip
    */

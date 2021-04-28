@@ -115,10 +115,7 @@ export let UserProfileImage = React.forwardRef(
 UserProfileImage = pkg.checkComponentEnabled(UserProfileImage, componentName);
 
 UserProfileImage.displayName = componentName;
-// UserProfileImage.defaultProps = {
-//   kind: 'user',
-//   size: 'xl',
-// };
+
 UserProfileImage.propTypes = {
   /**
    * The background color passed should match one of the background colors in the library documentation:
@@ -143,17 +140,21 @@ UserProfileImage.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * When passing the kind prop, use either "user" or "group". The values match up to the Carbon Library icons.
-   */
-  kind: PropTypes.oneOf(['user', 'group']),
-  /**
    * When passing the image prop, supply a full path to the image to be displayed.
    */
   image: PropTypes.string,
   /**
+   * When passing the image prop use the imageDecsription prop to describe the image for screen reader.
+   */
+  imageDescription: PropTypes.string,
+  /**
    * When passing the initials prop, either send the initials to be used or the user's display name. The first two capital letters of the display name will be used as the initials.
    */
   initials: PropTypes.string,
+  /**
+   * When passing the kind prop, use either "user" or "group". The values match up to the Carbon Library icons.
+   */
+  kind: PropTypes.oneOf(['user', 'group']),
   /**
    * Set the size of the avatar circle
    */

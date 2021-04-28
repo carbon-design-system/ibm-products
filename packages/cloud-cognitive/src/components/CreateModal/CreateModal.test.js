@@ -195,5 +195,7 @@ describe(componentName, () => {
     expect(() => {
       render(...container);
     }).toThrow();
+
+    error.mockRestore();
   });
 });

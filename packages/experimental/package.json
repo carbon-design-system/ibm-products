@@ -1,5 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-experimental",
+  "private-note": "no longer published, package deprecated in favor of @carbon/ibm-cloud-cognitive with feature flags",
+  "private": true,
   "description": "Carbon for Cloud & Cognitive UI components",
   "version": "0.33.64",
   "license": "Apache-2.0",

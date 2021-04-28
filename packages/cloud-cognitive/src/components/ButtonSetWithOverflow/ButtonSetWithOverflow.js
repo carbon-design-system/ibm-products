@@ -166,24 +166,22 @@ ButtonSetWithOverflow.propTypes = {
    * props (but NB not a ref). Any other fields in the object will be passed
    * through to the button element as HTML attributes.
    */
-  buttons: PropTypes.oneOfType([
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        kind: PropTypes.oneOf([
-          'primary',
-          'secondary',
-          'danger',
-          'ghost',
-          'danger--primary',
-          'danger--ghost',
-          'danger--tertiary',
-          'tertiary',
-        ]),
-        label: PropTypes.node,
-        onClick: PropTypes.func,
-      })
-    ),
-  ]),
+  buttons: PropTypes.arrayOf(
+    PropTypes.shape({
+      kind: PropTypes.oneOf([
+        'primary',
+        'secondary',
+        'danger',
+        'ghost',
+        'danger--primary',
+        'danger--ghost',
+        'danger--tertiary',
+        'tertiary',
+      ]),
+      label: PropTypes.node,
+      onClick: PropTypes.func,
+    })
+  ),
   /**
    * children of the button set
    */

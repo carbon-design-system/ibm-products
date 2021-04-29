@@ -19,6 +19,7 @@
 @import '../BreadcrumbWithOverflow/index';
 
 $block-class: #{$pkg-prefix}-page-header;
+$breadcrumb-block-class: #{$pkg-prefix}--breadcrumb-with-overflow;
 $raised-z-index: 99;
 
 .#{$block-class} {
@@ -187,6 +188,13 @@ $raised-z-index: 99;
   @include carbon--type-style('label-01');
 
   padding-top: $spacing-04;
+}
+
+.#{$block-class}--breadcrumb.#{$breadcrumb-block-class}__with-items {
+  padding-top: 0;
+  @include carbon--breakpoint(md) {
+    padding-top: $spacing-04;
+  }
 }
 
 .#{$block-class}--breadcrumb .#{$carbon-prefix}--breadcrumb-item {

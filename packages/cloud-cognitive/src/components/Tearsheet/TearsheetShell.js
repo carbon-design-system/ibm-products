@@ -7,6 +7,7 @@
 
 // Import portions of React that are needed.
 import React, { useEffect, useLayoutEffect, useState, useRef } from 'react';
+import { useResizeDetector } from 'react-resize-detector';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -77,6 +78,8 @@ export const TearsheetShell = React.forwardRef(
     },
     ref
   ) => {
+    const { width, ref: resizer } = useResizeDetector({ handleHeight: false });
+
     // Keep track of the stack depth and our position in it (1-based, 0=closed)
     const [depth, setDepth] = useState(0);
     const [position, setPosition] = useState(0);
@@ -164,6 +167,10 @@ export const TearsheetShell = React.forwardRef(
             [`${bc}--wide`]: size === 'wide',
             [`${bc}--narrow`]: size !== 'wide',
           })}
+          style={{
+            [`--${bc}--xxstacking-scale-factor-single`]: (width - 32) / width,
+            [`--${bc}--xxstacking-scale-factor-double`]: (width - 64) / width,
+          }}
           containerClassName={cx(`${bc}__container`, {
             [`${bc}__container--lower`]: verticalPosition === 'lower',
           })}
@@ -220,6 +227,7 @@ export const TearsheetShell = React.forwardRef(
               )}
             </Wrap>
           </Wrap>
+          <div className={`${bc}__resize-detector`} ref={resizer} />
         </ComposedModal>
       );
     } else {

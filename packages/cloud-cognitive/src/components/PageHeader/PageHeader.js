@@ -109,8 +109,8 @@ export let PageHeader = ({
     setComponentCssCustomProps((prevCSSProps) => {
       return {
         ...prevCSSProps,
-        [`--${blockClass}__max-action-bar-width-px`]: newActionBarWidth,
-        [`--${blockClass}__button-set-in-breadcrumb-width-px`]: `${newPageActionInBreadcrumbWidth}`,
+        [`--${blockClass}--max-action-bar-width-px`]: newActionBarWidth,
+        [`--${blockClass}--button-set-in-breadcrumb-width-px`]: `${newPageActionInBreadcrumbWidth}`,
       };
     });
   }, [
@@ -260,21 +260,21 @@ export let PageHeader = ({
     setComponentCssCustomProps((prevCSSProps) => {
       return {
         ...prevCSSProps,
-        [`--${blockClass}__height-px`]: `${metrics.headerHeight}px`,
-        [`--${blockClass}__width-px`]: `${metrics.headerWidth}px`,
-        [`--${blockClass}__header-top`]: `${
+        [`--${blockClass}--height-px`]: `${metrics.headerHeight}px`,
+        [`--${blockClass}--width-px`]: `${metrics.headerWidth}px`,
+        [`--${blockClass}--header-top`]: `${
           metrics.headerTopValue + pageHeaderOffset
         }px`,
-        [`--${blockClass}__breadcrumb-title-visibility`]:
+        [`--${blockClass}--breadcrumb-title-visibility`]:
           scrollYValue > 0 ? 'visible' : 'hidden',
-        [`--${blockClass}__scroll`]: `${scrollYValue}`,
-        [`--${blockClass}__breadcrumb-title-top`]: `${Math.max(
+        [`--${blockClass}--scroll`]: `${scrollYValue}`,
+        [`--${blockClass}--breadcrumb-title-top`]: `${Math.max(
           0,
           metrics.breadcrumbTitleHeight +
             metrics.titleRowSpaceAbove -
             scrollYValue
         )}px`,
-        [`--${blockClass}__breadcrumb-title-opacity`]: `${Math.min(
+        [`--${blockClass}--breadcrumb-title-opacity`]: `${Math.min(
           1,
           Math.max(
             0,
@@ -282,8 +282,8 @@ export let PageHeader = ({
               (metrics.breadcrumbTitleHeight || 1) // don't want to
           )
         )}`,
-        [`--${blockClass}__breadcrumb-row-width-px`]: `${metrics.breadcrumbRowWidth}px`,
-        [`--${blockClass}__breadcrumb-top`]: `${Math.min(
+        [`--${blockClass}--breadcrumb-row-width-px`]: `${metrics.breadcrumbRowWidth}px`,
+        [`--${blockClass}--breadcrumb-top`]: `${Math.min(
           pageHeaderOffset,
           !keepBreadcrumbAndTabs && navigation
             ? metrics.headerHeight -
@@ -423,7 +423,7 @@ export let PageHeader = ({
     // }
     setComponentCssCustomProps((prevCSSProps) => ({
       ...prevCSSProps,
-      [`--${blockClass}__background-opacity`]: result,
+      [`--${blockClass}--background-opacity`]: result,
     }));
     setBackgroundOpacity(result);
   }, [

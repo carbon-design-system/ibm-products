@@ -22,36 +22,36 @@
 $block-class: #{$pkg-prefix}--page-header;
 $raised-z-index: 99;
 
+@mixin appearingBackground() {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: $ui-01;
+  opacity: var(--#{$block-class}--background-opacity);
+  content: '';
+}
+
 @mixin page-header {
   @include block-wrap($block-class) {
     &.#{$block-class} {
       /* Bleed class for the background */
       position: sticky;
-      top: var(--#{$block-class}__header-top);
+      top: var(--#{$block-class}--header-top);
       display: inline-block; /* cause top/bottom margin to reserve space */
       width: 100%;
       background-color: $ui-background;
 
       /* custom props */
-      --#{$block-class}__breadcrumb-min-height: #{$spacing-08};
-      --#{$block-class}__breadcrumb-title-visibility: hidden;
-      --#{$block-class}__breadcrumb-title-opacity: 1;
-      --#{$block-class}__breadcrumb-top: 0;
-      --#{$block-class}__background-opacity: 1;
-      --#{$block-class}__breadcrumb-title-top: initial;
-      --#{$block-class}__button-set-in-breadcrumb-width-px: initial;
-    }
-
-    @mixin appearingBackground() {
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: block;
-      width: 100%;
-      height: 100%;
-      background-color: $ui-01;
-      opacity: var(--#{$block-class}__background-opacity);
-      content: '';
+      --#{$block-class}--breadcrumb-min-height: #{$spacing-08};
+      --#{$block-class}--breadcrumb-title-visibility: hidden;
+      --#{$block-class}--breadcrumb-title-opacity: 1;
+      --#{$block-class}--breadcrumb-top: 0;
+      --#{$block-class}--background-opacity: 1;
+      --#{$block-class}--breadcrumb-title-top: initial;
+      --#{$block-class}--button-set-in-breadcrumb-width-px: initial;
     }
 
     .#{$block-class}__background::before {
@@ -63,9 +63,9 @@ $raised-z-index: 99;
 
     .#{$block-class}__breadcrumb-row {
       position: sticky;
-      top: var(--#{$block-class}__breadcrumb-top);
+      top: var(--#{$block-class}--breadcrumb-top);
       z-index: $raised-z-index;
-      min-height: var(--#{$block-class}__breadcrumb-min-height);
+      min-height: var(--#{$block-class}--breadcrumb-min-height);
 
       + .#{$block-class}__last-row-buffer--active {
         height: $spacing-02;
@@ -79,8 +79,8 @@ $raised-z-index: 99;
       min-width: calc(
         100% +
           (
-            var(--#{$block-class}__width-px) -
-              var(--#{$block-class}__breadcrumb-row-width-px)
+            var(--#{$block-class}--width-px) -
+              var(--#{$block-class}--breadcrumb-row-width-px)
           ) / 2
       );
     }
@@ -137,9 +137,9 @@ $raised-z-index: 99;
 
     .#{$block-class}__breadcrumb-row .#{$block-class}__page-actions {
       display: inline-block;
-      flex: 1 1 var(--#{$block-class}__button-set-in-breadcrumb-width-px);
+      flex: 1 1 var(--#{$block-class}--button-set-in-breadcrumb-width-px);
       width: 100%;
-      max-width: var(--#{$block-class}__button-set-in-breadcrumb-width-px);
+      max-width: var(--#{$block-class}--button-set-in-breadcrumb-width-px);
       white-space: nowrap;
       visibility: hidden;
       opacity: 0;
@@ -209,17 +209,17 @@ $raised-z-index: 99;
       @include carbon--type-style('label-01');
     }
 
-    ..#{$block-class}__breadcrumb-title {
+    .#{$block-class}__breadcrumb-title {
       position: relative;
 
       &:not(.#{$block-class}__breadcrumb-title--pre-collapsed) {
         // stylelint-disable-next-line carbon/layout-token-use
         transform: translateY(
-          var(--#{$block-class}__breadcrumb-title-top)
+          var(--#{$block-class}--breadcrumb-title-top)
         ); /* token linter does not support this form */
 
-        visibility: var(--#{$block-class}__breadcrumb-title-visibility);
-        opacity: var(--#{$block-class}__breadcrumb-title-opacity);
+        visibility: var(--#{$block-class}--breadcrumb-title-visibility);
+        opacity: var(--#{$block-class}--breadcrumb-title-opacity);
       }
     }
 
@@ -249,9 +249,9 @@ $raised-z-index: 99;
     // }
 
     .#{$block-class}__action-bar {
-      flex: 1 1 var(--#{$block-class}__max-action-bar-width-px);
+      flex: 1 1 var(--#{$block-class}--max-action-bar-width-px);
       width: 100%;
-      max-width: var(--#{$block-class}__max-action-bar-width-px);
+      max-width: var(--#{$block-class}--max-action-bar-width-px);
       margin-top: calc(-1 * #{$spacing-04}); /* align with breadcrumb */
       padding-top: $spacing-04;
       white-space: nowrap;
@@ -297,7 +297,7 @@ $raised-z-index: 99;
 
       &.#{$block-class}__title-row--sticky {
         position: sticky;
-        top: var(--#{$block-class}__breadcrumb-top);
+        top: var(--#{$block-class}--breadcrumb-top);
       }
     }
 
@@ -319,7 +319,7 @@ $raised-z-index: 99;
     }
 
     .#{$block-class}__title--fades {
-      opacity: calc(1 - var(--#{$block-class}__breadcrumb-title-opacity));
+      opacity: calc(1 - var(--#{$block-class}--breadcrumb-title-opacity));
     }
 
     .#{$block-class}__title-icon {

@@ -12,6 +12,7 @@ const defaults = {
   component: {
     // reviewed and released components:
     AboutModal: true,
+    CreateModal: true,
     NotificationsPanel: true,
     StatusIcon: true,
     Tearsheet: true,
@@ -22,7 +23,6 @@ const defaults = {
     APIKeyDownloader: false,
     APIKeyModal: false,
     ContextHeader: false,
-    CreateModal: false,
     EmptyState: false,
     ErrorEmptyState: false,
     ExampleComponent: false,
@@ -37,7 +37,6 @@ const defaults = {
     NoTagsEmptyState: false,
     NotFoundEmptyState: false,
     NotificationsEmptyState: false,
-    PageActionItem: false,
     PageHeader: false,
     ProductiveCard: false,
     RemoveDeleteModal: false,

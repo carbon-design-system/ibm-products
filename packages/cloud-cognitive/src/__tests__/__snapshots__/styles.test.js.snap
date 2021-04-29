@@ -111,6 +111,76 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: 600;
 }
 
+.exp--create-modal {
+  background-color: var(--cds-ui-background, #ffffff);
+}
+
+.exp--create-modal .bx--modal-close {
+  display: none;
+}
+
+@media (min-width: 42rem) {
+  .exp--create-modal .bx--modal-container {
+    max-height: 95%;
+  }
+}
+
+@media (min-width: 66rem) {
+  .exp--create-modal .bx--modal-container {
+    max-height: 95%;
+  }
+}
+
+.exp--create-modal .bx--modal-header {
+  margin-bottom: 0;
+  padding-right: 20%;
+  padding-bottom: var(--cds-spacing-03, 0.5rem);
+  border-bottom: 1px solid var(--cds-ui-03, #e0e0e0);
+}
+
+.exp--create-modal .bx--modal-footer .bx--btn {
+  max-width: none;
+}
+
+.exp--create-modal__title {
+  font-size: var(--cds-productive-heading-03-font-size, 1.25rem);
+  font-weight: var(--cds-productive-heading-03-font-weight, 400);
+  line-height: var(--cds-productive-heading-03-line-height, 1.4);
+  letter-spacing: var(--cds-productive-heading-03-letter-spacing, 0);
+  margin-bottom: var(--cds-spacing-02, 0.25rem);
+}
+
+.exp--create-modal__subtitle {
+  font-size: var(--cds-body-short-01-font-size, 0.875rem);
+  font-weight: var(--cds-body-short-01-font-weight, 400);
+  line-height: var(--cds-body-short-01-line-height, 1.29);
+  letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
+  margin-bottom: var(--cds-spacing-03, 0.5rem);
+  color: var(--cds-text-02, #525252);
+}
+
+.exp--create-modal__description {
+  font-size: var(--cds-body-long-01-font-size, 0.875rem);
+  font-weight: var(--cds-body-long-01-font-weight, 400);
+  line-height: var(--cds-body-long-01-line-height, 1.43);
+  letter-spacing: var(--cds-body-long-01-letter-spacing, 0.16px);
+  margin: var(--cds-spacing-03, 0.5rem) 0 var(--cds-spacing-05, 1rem) 0;
+  padding-right: calc(20% - var(--cds-spacing-05, 1rem));
+}
+
+.exp--create-modal__form .bx--fieldset {
+  min-width: 100%;
+  margin-bottom: 0;
+}
+
+.exp--create-modal__form > * {
+  margin-bottom: var(--cds-spacing-05, 1rem);
+}
+
+.exp--create-modal__form > *:last-child {
+  margin-bottom: 0;
+}
+
 @keyframes fadeIn {
   0% {
     transform: translateY(-38.5rem);

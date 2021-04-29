@@ -6,4 +6,3 @@
 //
 
 export { PageHeader } from './PageHeader';
-export { PageActionItem } from './PageActionItem';

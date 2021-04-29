@@ -168,18 +168,8 @@ ButtonSetWithOverflow.propTypes = {
    */
   buttons: PropTypes.arrayOf(
     PropTypes.shape({
-      kind: PropTypes.oneOf([
-        'primary',
-        'secondary',
-        'danger',
-        'ghost',
-        'danger--primary',
-        'danger--ghost',
-        'danger--tertiary',
-        'tertiary',
-      ]),
+      ...Button.propTypes,
       label: PropTypes.node,
-      onClick: PropTypes.func,
     })
   ),
   /**
@@ -208,7 +198,7 @@ ButtonSetWithOverflow.propTypes = {
    * Specify the size of the button, from a list of available sizes.
    * For `default` buttons, this prop can remain unspecified.
    */
-  size: PropTypes.oneOf(['default', 'field', 'small', 'sm', 'lg', 'xl']),
+  size: Button.propTypes.size,
 };
 
 ButtonSetWithOverflow.defaultProps = {

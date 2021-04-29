@@ -14,7 +14,12 @@ import cx from 'classnames';
 import { pkg, carbon } from '../../settings';
 
 // Carbon and package components we use.
-import { ComposedModal, ModalHeader, ModalBody } from 'carbon-components-react';
+import {
+  Button,
+  ComposedModal,
+  ModalHeader,
+  ModalBody,
+} from 'carbon-components-react';
 import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
 
@@ -250,10 +255,9 @@ TearsheetShell.propTypes = {
     // NB we don't include the validator here, as the component wrapping this
     // one should ensure appropriate validation is done.
     PropTypes.shape({
-      label: PropTypes.string,
-      onPrimaryActionClick: PropTypes.func,
+      ...Button.propTypes,
       kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
-      disabled: PropTypes.bool,
+      label: PropTypes.string,
       loading: PropTypes.bool,
     })
   ),

@@ -94,16 +94,25 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 jest.mock('../../global/js/utils/uuidv4');
 
 describe('PageHeader', () => {
+  const { ResizeObserver } = window;
   const mocks = [];
+
   beforeEach(() => {
     mocks.push(uuidv4.mockImplementation(() => 'testid'));
     mocks.push(jest.spyOn(window, 'scrollTo').mockImplementation());
+    window.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    }));
   });
 
   afterEach(() => {
     mocks.forEach((mock) => {
       mock.mockRestore();
     });
+    jest.restoreAllMocks();
+    window.ResizeObserver = ResizeObserver;
   });
 
   test('renders an empty header when no props are set', () => {

@@ -29,6 +29,7 @@ const blockClass = `${pkg.prefix}--button-set-with-overflow`;
 const buttonWidth = 200;
 
 describe(ButtonSetWithOverflow.displayName, () => {
+  const { ResizeObserver } = window;
   let mockElement;
 
   beforeEach(() => {
@@ -47,10 +48,17 @@ describe(ButtonSetWithOverflow.displayName, () => {
         },
       },
     });
+    window.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    }));
   });
 
   afterEach(() => {
     mockElement.mockRestore();
+    jest.restoreAllMocks();
+    window.ResizeObserver = ResizeObserver;
   });
 
   it('Works with deprecated children', () => {

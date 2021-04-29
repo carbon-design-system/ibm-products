@@ -114,7 +114,9 @@ describe('PageHeader', () => {
     const header = document.querySelector(`section.${blockClass}`);
 
     expect(header).not.toBeNull();
-    expect(header.classList.contains(`${blockClass}__background`)).toBe(false);
+    expect(header.classList.contains(`${blockClass}--show-background`)).toBe(
+      false
+    );
     expect(header.classList.contains(classNames[0])).toBe(false);
     expect(header.classList.contains(classNames[1])).toBe(false);
     expect(
@@ -159,7 +161,9 @@ describe('PageHeader', () => {
 
     const header = document.querySelector(`section.${blockClass}`);
     expect(header).not.toBeNull();
-    expect(header.classList.contains(`${blockClass}__background`)).toBe(true);
+    expect(header.classList.contains(`${blockClass}--show-background`)).toBe(
+      true
+    );
     expect(header.classList.contains(classNames[0])).toBe(true);
     expect(header.classList.contains(classNames[1])).toBe(true);
     expect(

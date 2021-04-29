@@ -13,11 +13,11 @@
     margin-top: 0;
   }
 
-  .#{$pkg-prefix}--input-group {
+  .#{$block-class}-input-group {
     display: flex;
   }
 
-  .#{$pkg-prefix}--import-button {
+  .#{$block-class}-import-button {
     margin-left: $spacing-05;
   }
 

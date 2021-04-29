@@ -62,38 +62,57 @@ describe(name, () => {
       ...defaultProps,
       onRequestSubmit,
     };
-
     const { getByText, container } = render(<ImportModal {...props} />);
 
-    const submitBtn = getByText(props.primaryButtonText);
-    const addFileBtn = getByText(props.inputButtonText);
-    const textInput = container.querySelector('.bx--text-input');
-
-    expect(addFileBtn.classList.contains('bx--btn--disabled')).toBe(true);
-    click(submitBtn);
+    expect(
+      getByText(props.inputButtonText).classList.contains('bx--btn--disabled')
+    ).toBe(true);
+    click(getByText(props.primaryButtonText));
     expect(onRequestSubmit).not.toBeCalled();
 
-    change(textInput, { target: { value: 'test.jpeg' } });
-    expect(addFileBtn.classList.contains('bx--btn--disabled')).not.toBe(true);
-    click(addFileBtn);
+    change(container.querySelector('.bx--text-input'), {
+      target: { value: 'test.jpeg' },
+    });
+    expect(
+      getByText(props.inputButtonText).classList.contains('bx--btn--disabled')
+    ).not.toBe(true);
+    click(getByText(props.inputButtonText));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
-    click(submitBtn);
+    click(getByText(props.primaryButtonText));
     expect(onRequestSubmit).toBeCalled();
   });
 
   it('should display the network error message when the fetch is rejected', async () => {
     fetch.mockImplementationOnce(() => Promise.reject('fetch failed'));
     const { click, change } = fireEvent;
-
     const { getByText, container } = render(<ImportModal {...defaultProps} />);
 
-    const addFileBtn = getByText(defaultProps.inputButtonText);
-    const textInput = container.querySelector('.bx--text-input');
-
-    change(textInput, { target: { value: 'test.jpeg' } });
-    click(addFileBtn);
+    change(container.querySelector('.bx--text-input'), {
+      target: { value: 'test.jpeg' },
+    });
+    click(getByText(defaultProps.inputButtonText));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(defaultProps.fetchErrorBody)).toBeVisible();
+    expect(getByText(defaultProps.fetchErrorHeader)).toBeVisible();
+  });
+
+  it('should display the default error message when one isnt specified', async () => {
+    fetch.mockImplementationOnce(() => Promise.reject('fetch failed'));
+    const { click, change } = fireEvent;
+    const props = {
+      ...defaultProps,
+      fetchErrorBody: '',
+      fetchErrorHeader: '',
+    };
+    const { getByText, container } = render(<ImportModal {...props} />);
+
+    change(container.querySelector('.bx--text-input'), {
+      target: { value: 'test.jpeg' },
+    });
+    click(getByText(defaultProps.inputButtonText));
+    await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+    expect(getByText(props.defaultErrorBody)).toBeVisible();
+    expect(getByText(props.defaultErrorHeader)).toBeVisible();
   });
 
   it('should display the network error message when the fetch isnt a 200 response', async () => {
@@ -103,16 +122,15 @@ describe(name, () => {
       })
     );
     const { click, change } = fireEvent;
-
     const { getByText, container } = render(<ImportModal {...defaultProps} />);
 
-    const addFileBtn = getByText(defaultProps.inputButtonText);
-    const textInput = container.querySelector('.bx--text-input');
-
-    change(textInput, { target: { value: 'test.jpeg' } });
-    click(addFileBtn);
+    change(container.querySelector('.bx--text-input'), {
+      target: { value: 'test.jpeg' },
+    });
+    click(getByText(defaultProps.inputButtonText));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(defaultProps.fetchErrorBody)).toBeVisible();
+    expect(getByText(defaultProps.fetchErrorHeader)).toBeVisible();
   });
 
   it('should display the invalid file type error message when an incorrect file type is uploaded', async () => {
@@ -123,17 +141,41 @@ describe(name, () => {
         blob: () => Promise.resolve({ type: 'pdf' }),
       })
     );
-
     const { click, change } = fireEvent;
     const { getByText, container } = render(<ImportModal {...defaultProps} />);
 
-    const addFileBtn = getByText(defaultProps.inputButtonText);
-    const textInput = container.querySelector('.bx--text-input');
-
-    change(textInput, { target: { value: 'test.jpeg' } });
-    click(addFileBtn);
+    change(container.querySelector('.bx--text-input'), {
+      target: { value: 'test.pdf' },
+    });
+    click(getByText(defaultProps.inputButtonText));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(defaultProps.invalidFileTypeErrorBody)).toBeVisible();
+    expect(getByText(defaultProps.invalidFileTypeErrorHeader)).toBeVisible();
+  });
+
+  it('should display the invalid file type error message when an incorrect file type is uploaded', async () => {
+    fetch.mockImplementationOnce(() =>
+      Promise.resolve({
+        ok: true,
+        status: 200,
+        blob: () => Promise.resolve({ type: 'pdf' }),
+      })
+    );
+    const { click, change } = fireEvent;
+    const props = {
+      ...defaultProps,
+      invalidFileTypeErrorBody: '',
+      invalidFileTypeErrorHeader: '',
+    };
+    const { getByText, container } = render(<ImportModal {...props} />);
+
+    change(container.querySelector('.bx--text-input'), {
+      target: { value: 'test.pdf' },
+    });
+    click(getByText(defaultProps.inputButtonText));
+    await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+    expect(getByText(props.defaultErrorBody)).toBeVisible();
+    expect(getByText(props.defaultErrorHeader)).toBeVisible();
   });
 
   it('should successfully use the drag and drop component to upload a file and then remove the file', () => {

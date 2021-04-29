@@ -54,7 +54,7 @@ $raised-z-index: 99;
       --#{$block-class}--button-set-in-breadcrumb-width-px: initial;
     }
 
-    .#{$block-class}__background::before {
+    &.#{$block-class}--show-background::before {
       @include appearingBackground();
 
       z-index: -1;
@@ -162,12 +162,12 @@ $raised-z-index: 99;
       flex: 0 0 100%;
       max-width: 100%;
       overflow: hidden; /* required for ellipsis in title */
+    }
 
-      // @include carbon--breakpoint-up('md') {
-      .#{$block-class}__breadcrumb-row--has-action-bar & {
-        flex: 0 1 60%;
-        max-width: 60%;
-      }
+    .#{$block-class}__breadcrumb-row--has-action-bar
+      .#{$block-class}__breadcrumb-column {
+      flex: 0 1 60%;
+      max-width: 60%;
     }
 
     .#{$block-class}__breadcrumb-column--background,
@@ -181,9 +181,9 @@ $raised-z-index: 99;
     //   background-color: $ui-background;
     // }
 
-    .#{$block-class}__background
+    &.#{$block-class}--show-background
       .#{$block-class}__breadcrumb-column--background::before,
-    .#{$block-class}__background
+    &.#{$block-class}--show-background
       .#{$block-class}__action-bar-column--background::before {
       @include appearingBackground();
     }
@@ -407,11 +407,12 @@ $raised-z-index: 99;
 
     .#{$block-class}__navigation-tabs {
       margin-left: calc(-1 * #{$spacing-04});
+    }
 
-      .#{$block-class}__navigation-row--has-tags & {
-        flex: 0 1 75%;
-        max-width: 75%;
-      }
+    .#{$block-class}__navigation-row--has-tags
+      .#{$block-class}__navigation-tabs {
+      flex: 0 1 75%;
+      max-width: 75%;
     }
 
     .#{$block-class}__navigation-tags {
@@ -436,29 +437,25 @@ $raised-z-index: 99;
       background-color: $ui-background;
     }
 
-    .#{$block-class}
-      .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only.#{$block-class}__collapse-expand-toggle {
+    .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only.#{$block-class}__collapse-expand-toggle {
       position: absolute;
       right: 0;
       bottom: 0;
       z-index: $raised-z-index + 1;
     }
 
-    .#{$block-class}
-      .#{$block-class}__collapse-expand-toggle
-      .#{$carbon-prefix}--btn__icon {
+    .#{$block-class}__collapse-expand-toggle .#{$carbon-prefix}--btn__icon {
       // transform: rotate(-90deg); // accordion does this, but it feels odd in page header
       transition: all $duration--slow-01 motion(standard, productive);
     }
 
-    .#{$block-class}
-      .#{$block-class}__collapse-expand-toggle--collapsed
+    .#{$block-class}__collapse-expand-toggle--collapsed
       .#{$carbon-prefix}--btn__icon {
       // transform: rotate(90deg);
       transform: scaleY(-1);
     }
 
-    .#{$block-class}__background .#{$block-class}__navigation-tags {
+    &.#{$block-class}--show-background .#{$block-class}__navigation-tags {
       // allow space for expand/collapse if we have a background
       padding-right: $spacing-07;
 

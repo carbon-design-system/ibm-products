@@ -477,10 +477,10 @@ export let PageHeader = ({
       <section
         className={cx([
           blockClass,
-          `${blockClass}__no-margins-below-row`,
+          `${blockClass}--no-margins-below-row`,
           className,
           {
-            [`${blockClass}__background`]: backgroundOpacity > 0,
+            [`${blockClass}--show-background`]: backgroundOpacity > 0,
           },
         ])}
         ref={headerEl}

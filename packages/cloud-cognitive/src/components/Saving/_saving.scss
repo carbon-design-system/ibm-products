@@ -10,22 +10,30 @@
 
 @import 'carbon-components/scss/components/button/button';
 
-.#{$pkg-prefix}-saving-message {
-  display: flex;
+@mixin saving {
+  $block-class: #{$pkg-prefix}--saving;
+
+  .#{$block-class}-message {
+    display: flex;
+  }
+
+  .#{$block-class}-error-icon {
+    margin-right: $spacing-05;
+  }
+
+  .#{$block-class}-error-icon svg {
+    fill: $danger-01;
+  }
+
+  .#{$block-class}-text {
+    @include carbon--type-style('body-short-01');
+  }
+
+  .#{$block-class}-buttons {
+    display: flex;
+  }
 }
 
-.#{$pkg-prefix}-saving-error-icon {
-  margin-right: $spacing-05;
-}
-
-.#{$pkg-prefix}-saving-error-icon svg {
-  fill: $danger-01;
-}
-
-.#{$pkg-prefix}-saving-text {
-  @include carbon--type-style('body-short-01');
-}
-
-.#{$pkg-prefix}-saving-buttons {
-  display: flex;
+@include exports('saving') {
+  @include saving;
 }

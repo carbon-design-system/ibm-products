@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.36.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.35.31...@carbon/ibm-cloud-cognitive@0.36.0) (2021-04-29)
+
+
+### Features
+
+* **PageHeader:** back button to replace breadcrumbs on small viewport ([#676](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/676)) ([ae3224e](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ae3224e12263e78487ed667914be8ba08935e3d9))
+
+
+
+
+
 ## [0.35.31](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.35.30...@carbon/ibm-cloud-cognitive@0.35.31) (2021-04-29)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

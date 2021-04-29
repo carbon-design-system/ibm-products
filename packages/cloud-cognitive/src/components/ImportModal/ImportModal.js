@@ -13,7 +13,7 @@ const componentName = 'ImportModal';
 
 export let ImportModal = ({
   defaultErrorBody,
-  errorHeader,
+  defaultErrorHeader,
   fetchErrorBody,
   fetchErrorHeader,
   fileDropHeader,
@@ -22,7 +22,6 @@ export let ImportModal = ({
   inputButtonText,
   inputHeader,
   inputId,
-  inputLabel,
   inputPlaceholder,
   invalidFileTypeErrorBody,
   invalidFileTypeErrorHeader,
@@ -30,8 +29,8 @@ export let ImportModal = ({
   maxFileSizeErrorBody,
   maxFileSizeErrorHeader,
   modalBody,
-  multiple,
   modalHeading,
+  multiple,
   onRequestClose,
   onRequestSubmit,
   open,
@@ -65,15 +64,15 @@ export let ImportModal = ({
       };
       if (newFile.fetchError) {
         newFile.errorBody = fetchErrorBody || defaultErrorBody;
-        newFile.errorSubject = fetchErrorHeader || errorHeader;
+        newFile.errorSubject = fetchErrorHeader || defaultErrorHeader;
         newFile.invalid = true;
       } else if (newFile.invalidFileType) {
         newFile.errorBody = invalidFileTypeErrorBody || defaultErrorBody;
-        newFile.errorSubject = invalidFileTypeErrorHeader || errorHeader;
+        newFile.errorSubject = invalidFileTypeErrorHeader || defaultErrorHeader;
         newFile.invalid = true;
       } else if (maxFileSize && newFile.filesize > maxFileSize) {
         newFile.errorBody = maxFileSizeErrorBody || defaultErrorBody;
-        newFile.errorSubject = maxFileSizeErrorHeader || errorHeader;
+        newFile.errorSubject = maxFileSizeErrorHeader || defaultErrorHeader;
         newFile.invalid = true;
       }
       return newFile;
@@ -160,7 +159,6 @@ export let ImportModal = ({
       <div className={`${pkg.prefix}--input-group`}>
         <TextInput
           id={inputId}
-          labelText={inputLabel}
           onChange={inputHandler}
           placeholder={inputPlaceholder}
           value={importUrl}
@@ -209,9 +207,9 @@ ImportModal.propTypes = {
    */
   defaultErrorBody: PropTypes.string,
   /**
-   * The header that is displayed to show an error message
+   * The default header that is displayed to show an error message
    */
-  errorHeader: PropTypes.string,
+  defaultErrorHeader: PropTypes.string,
   /**
    * Optional error body to display specifically for a fetch error
    */
@@ -244,10 +242,6 @@ ImportModal.propTypes = {
    * ID for text input
    */
   inputId: PropTypes.string,
-  /**
-   * Label for text input
-   */
-  inputLabel: PropTypes.string,
   /**
    * Placeholder for text input
    */
@@ -311,6 +305,7 @@ ImportModal.propTypes = {
 };
 
 ImportModal.defaultProps = {
+  multiple: false,
   onRequestClose: () => {},
   onRequestSubmit: () => {},
   open: false,

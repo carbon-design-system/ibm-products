@@ -22,26 +22,31 @@ global.fetch = jest.fn(() =>
 const { name } = ImportModal;
 const defaultProps = {
   defaultErrorBody: 'Select a new file and try again.',
-  errorHeader: 'Import failed',
+  defaultErrorHeader: 'Import failed',
   fetchErrorBody: 'Unable to fetch URL.',
+  fetchErrorHeader: 'Import failed',
   fileDropHeader: 'Add files using drag and drop',
   fileDropLabel: 'Drag and drop files here or click to upload',
+  fileUploadLabel: 'files uploaded',
   inputButtonText: 'Add file',
   inputHeader: 'Add a file by specifying a URL',
+  inputId: 'test-id',
   inputPlaceholder: 'URL',
   invalidFileTypeErrorBody: 'Invalid file type.',
-  maxFileSize: 500,
+  invalidFileTypeErrorHeader: 'Import failed',
+  maxFileSize: 500000,
   maxFileSizeErrorBody: '500kb max file size. Select a new file and try again.',
+  maxFileSizeErrorHeader: 'Import failed',
   modalBody:
-    'You can specify a file to import by either dragging it into the drag and drop area or by specifying a URL. (Maximum file size of 500KB; .jpg and .jpeg file extensions only.)',
-  onRequestClose: () => {},
-  onRequestSubmit: () => {},
+    'You can specify a file to import by either dragging it into the drag and drop area or by specifying a URL. (Maximum file size of 500KB; .jpg and .png file extensions only.)',
+  modalHeading: 'Import',
+  multiple: false,
+  onRequestClose: () => console.log('closed'),
+  onRequestSubmit: (file) => console.log('file contents', file),
   open: true,
   primaryButtonText: 'Import file',
   secondaryButtonText: 'Cancel',
-  modalHeading: 'Import',
-  validFileTypes: ['image/jpeg'],
-  fileUploadLabel: 'files uploaded',
+  validFileTypes: ['image/jpeg', 'image/png'],
 };
 
 describe(name, () => {
@@ -53,13 +58,15 @@ describe(name, () => {
     const { click, change } = fireEvent;
     const { fn } = jest;
     const onRequestSubmit = fn();
+    const props = {
+      ...defaultProps,
+      onRequestSubmit,
+    };
 
-    const { getByText, container } = render(
-      <ImportModal {...defaultProps} onRequestSubmit={onRequestSubmit} />
-    );
+    const { getByText, container } = render(<ImportModal {...props} />);
 
-    const submitBtn = getByText('Import file');
-    const addFileBtn = getByText('Add file');
+    const submitBtn = getByText(props.primaryButtonText);
+    const addFileBtn = getByText(props.inputButtonText);
     const textInput = container.querySelector('.bx--text-input');
 
     expect(addFileBtn.classList.contains('bx--btn--disabled')).toBe(true);
@@ -80,7 +87,7 @@ describe(name, () => {
 
     const { getByText, container } = render(<ImportModal {...defaultProps} />);
 
-    const addFileBtn = getByText('Add file');
+    const addFileBtn = getByText(defaultProps.inputButtonText);
     const textInput = container.querySelector('.bx--text-input');
 
     change(textInput, { target: { value: 'test.jpeg' } });
@@ -99,7 +106,7 @@ describe(name, () => {
 
     const { getByText, container } = render(<ImportModal {...defaultProps} />);
 
-    const addFileBtn = getByText('Add file');
+    const addFileBtn = getByText(defaultProps.inputButtonText);
     const textInput = container.querySelector('.bx--text-input');
 
     change(textInput, { target: { value: 'test.jpeg' } });
@@ -120,7 +127,7 @@ describe(name, () => {
     const { click, change } = fireEvent;
     const { getByText, container } = render(<ImportModal {...defaultProps} />);
 
-    const addFileBtn = getByText('Add file');
+    const addFileBtn = getByText(defaultProps.inputButtonText);
     const textInput = container.querySelector('.bx--text-input');
 
     change(textInput, { target: { value: 'test.jpeg' } });

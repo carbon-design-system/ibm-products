@@ -147,8 +147,8 @@ export let ImportModal = ({
       onRequestClose={onRequestClose}
       className={blockClass}
       size="sm">
-      <p className={`${blockClass}-body`}>{modalBody}</p>
-      <p className={`${blockClass}-label`}>{fileDropHeader}</p>
+      <p className={`${blockClass}__body`}>{modalBody}</p>
+      <p className={`${blockClass}__label`}>{fileDropHeader}</p>
       <FileUploaderDropContainer
         accept={validFileTypes}
         labelText={fileDropLabel}
@@ -156,8 +156,8 @@ export let ImportModal = ({
         disabled={!!files.length}
         multiple={multiple}
       />
-      <p className={`${blockClass}-label`}>{inputHeader}</p>
-      <div className={`${blockClass}-input-group`}>
+      <p className={`${blockClass}__label`}>{inputHeader}</p>
+      <div className={`${blockClass}__input-group`}>
         <TextInput
           labelText=""
           id={inputId}
@@ -168,7 +168,7 @@ export let ImportModal = ({
         />
         <Button
           onClick={fetchFile}
-          className={`${blockClass}-import-button`}
+          className={`${blockClass}__import-button`}
           size="sm"
           disabled={importButtonDisabled}>
           {inputButtonText}
@@ -176,7 +176,7 @@ export let ImportModal = ({
       </div>
       <div className="bx--file-container" style={{ width: '100%' }}>
         {hasFiles && (
-          <p className={`${blockClass}-helper-text`}>
+          <p className={`${blockClass}__helper-text`}>
             {`${invalidValidLabel} ${fileUploadLabel}`}
           </p>
         )}

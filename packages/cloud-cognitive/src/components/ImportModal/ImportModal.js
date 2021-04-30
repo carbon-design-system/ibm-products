@@ -134,6 +134,7 @@ export let ImportModal = ({
   const primaryButtonDisabled = !hasFiles || files.some((f) => f.invalid);
   const importButtonDisabled = !importUrl;
   const invalidValidLabel = `${numberOfInvalidFiles} / ${numberOfFiles}`;
+  const blockClass = `${pkg.prefix}--import-modal`;
 
   return (
     <Modal
@@ -144,10 +145,10 @@ export let ImportModal = ({
       primaryButtonDisabled={primaryButtonDisabled}
       onRequestSubmit={onSubmitHandler}
       onRequestClose={onRequestClose}
-      className={`${pkg.prefix}--import-modal`}
+      className={blockClass}
       size="sm">
-      <p className={`${pkg.prefix}--import-modal-body`}>{modalBody}</p>
-      <p className={`${pkg.prefix}--import-modal-label`}>{fileDropHeader}</p>
+      <p className={`${blockClass}__body`}>{modalBody}</p>
+      <p className={`${blockClass}__label`}>{fileDropHeader}</p>
       <FileUploaderDropContainer
         accept={validFileTypes}
         labelText={fileDropLabel}
@@ -155,9 +156,10 @@ export let ImportModal = ({
         disabled={!!files.length}
         multiple={multiple}
       />
-      <p className={`${pkg.prefix}--import-modal-label`}>{inputHeader}</p>
-      <div className={`${pkg.prefix}--input-group`}>
+      <p className={`${blockClass}__label`}>{inputHeader}</p>
+      <div className={`${blockClass}__input-group`}>
         <TextInput
+          labelText=""
           id={inputId}
           onChange={inputHandler}
           placeholder={inputPlaceholder}
@@ -166,7 +168,7 @@ export let ImportModal = ({
         />
         <Button
           onClick={fetchFile}
-          className={`${pkg.prefix}--import-button`}
+          className={`${blockClass}__import-button`}
           size="sm"
           disabled={importButtonDisabled}>
           {inputButtonText}
@@ -174,7 +176,7 @@ export let ImportModal = ({
       </div>
       <div className="bx--file-container" style={{ width: '100%' }}>
         {hasFiles && (
-          <p className={`${pkg.prefix}--import-modal-helper-text`}>
+          <p className={`${blockClass}__helper-text`}>
             {`${invalidValidLabel} ${fileUploadLabel}`}
           </p>
         )}

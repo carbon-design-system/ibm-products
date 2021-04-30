@@ -17,6 +17,8 @@ import { Lightning16, Bee32 } from '@carbon/icons-react';
 import { PageHeader } from '.';
 import { ActionBarItem } from '../ActionBar';
 
+const blockClass = `${pkg.prefix}--page-header`;
+
 /* Test properties. */
 const actionBarItems = [1, 2, 3, 4].map((item) => ({
   renderIcon: Lightning16,
@@ -118,16 +120,16 @@ describe('PageHeader', () => {
   test('renders an empty header when no props are set', () => {
     render(<PageHeader />);
 
-    const header = document.querySelector(`section.${pkg.prefix}-page-header`);
+    const header = document.querySelector(`section.${blockClass}`);
 
     expect(header).not.toBeNull();
-    expect(
-      header.classList.contains(`${pkg.prefix}-page-header--background`)
-    ).toBe(false);
+    expect(header.classList.contains(`${blockClass}--show-background`)).toBe(
+      false
+    );
     expect(header.classList.contains(classNames[0])).toBe(false);
     expect(header.classList.contains(classNames[1])).toBe(false);
     expect(
-      document.querySelectorAll(`.${pkg.prefix}-page-header--action-bar`)
+      document.querySelectorAll(`.${blockClass}__action-bar`)
     ).toHaveLength(0);
     expect(
       document.querySelectorAll('span.page-header-test--available-space')
@@ -135,19 +137,17 @@ describe('PageHeader', () => {
     expect(screen.queryAllByTestId('breadcrumbitem')).toHaveLength(0);
     expect(screen.queryAllByTestId('tabs')).toHaveLength(0);
     expect(
-      document.querySelectorAll(`.${pkg.prefix}-page-header--page-actions`)
+      document.querySelectorAll(`.${blockClass}__page-actions`)
     ).toHaveLength(0);
-    expect(
-      document.querySelectorAll(`.${pkg.prefix}-page-header--subtitle`)
-    ).toHaveLength(0);
+    expect(document.querySelectorAll(`.${blockClass}__subtitle`)).toHaveLength(
+      0
+    );
     expect(screen.queryByText(subtitle)).toBeNull();
     expect(screen.queryAllByTestId('tags')).toHaveLength(0);
-    expect(
-      document.querySelectorAll(`.${pkg.prefix}-page-header--title`)
-    ).toHaveLength(0);
+    expect(document.querySelectorAll(`.${blockClass}__title`)).toHaveLength(0);
     expect(screen.queryByText(title)).toBeNull();
     expect(
-      document.querySelectorAll(`.${pkg.prefix}-page-header--title-icon`)
+      document.querySelectorAll(`.${blockClass}__title-icon`)
     ).toHaveLength(0);
   });
 
@@ -168,21 +168,21 @@ describe('PageHeader', () => {
       />
     );
 
-    const header = document.querySelector(`section.${pkg.prefix}-page-header`);
+    const header = document.querySelector(`section.${blockClass}`);
     expect(header).not.toBeNull();
-    expect(
-      header.classList.contains(`${pkg.prefix}-page-header--background`)
-    ).toBe(true);
+    expect(header.classList.contains(`${blockClass}--show-background`)).toBe(
+      true
+    );
     expect(header.classList.contains(classNames[0])).toBe(true);
     expect(header.classList.contains(classNames[1])).toBe(true);
     expect(
-      document.querySelectorAll(`.${pkg.prefix}-page-header--action-bar`)
+      document.querySelectorAll(`.${blockClass}__action-bar`)
     ).toHaveLength(1);
     expect(
       document.querySelectorAll('span.page-header-test--available-space')
     ).toHaveLength(1);
     expect(
-      document.querySelectorAll(`.${pkg.prefix}-page-header--breadcrumb`)
+      document.querySelectorAll(`.${blockClass}__breadcrumb`)
     ).toHaveLength(1);
     expect(
       screen.getAllByText(/Breadcrumb [1-3]/, {
@@ -193,11 +193,11 @@ describe('PageHeader', () => {
     expect(screen.queryAllByTestId('tabs')).toHaveLength(1);
     expect(screen.getAllByText(/Tab [1-4]/)).toHaveLength(4);
     expect(
-      document.querySelectorAll(`.${pkg.prefix}-page-header--page-actions`)
+      document.querySelectorAll(`.${blockClass}__page-actions`)
     ).toHaveLength(2);
-    expect(
-      document.querySelectorAll(`.${pkg.prefix}-page-header--subtitle`)
-    ).toHaveLength(1);
+    expect(document.querySelectorAll(`.${blockClass}__subtitle`)).toHaveLength(
+      1
+    );
     expect(screen.getByText(subtitle).textContent).toEqual(subtitle);
     expect(screen.queryAllByTestId('tabs')).toHaveLength(1);
     expect(
@@ -206,14 +206,12 @@ describe('PageHeader', () => {
         selector: `.${pkg.prefix}--tag-set__displayed-tag .${carbon.prefix}--tag span`,
       })
     ).toHaveLength(4);
+    expect(document.querySelectorAll(`.${blockClass}__title`)).toHaveLength(1);
+    expect(document.querySelector(`.${blockClass}__title`).textContent).toEqual(
+      title
+    );
     expect(
-      document.querySelectorAll(`.${pkg.prefix}-page-header--title`)
-    ).toHaveLength(1);
-    expect(
-      document.querySelector(`.${pkg.prefix}-page-header--title`).textContent
-    ).toEqual(title);
-    expect(
-      document.querySelectorAll(`.${pkg.prefix}-page-header--title-icon`)
+      document.querySelectorAll(`.${blockClass}__title-icon`)
     ).toHaveLength(1);
   });
 

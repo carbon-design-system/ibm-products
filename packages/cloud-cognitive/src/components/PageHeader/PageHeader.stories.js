@@ -31,8 +31,9 @@ import { PageHeader } from '.';
 const storybookPrefix = getStorybookPrefix(pkg, PageHeader.displayName);
 
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-
 import mdx from './PageHeader.mdx';
+
+const storyClass = 'page-header-stories';
 
 export default {
   title: `${storybookPrefix}/${PageHeader.displayName}`,
@@ -42,7 +43,7 @@ export default {
   },
   parameters: { styles, layout: 'fullscreen', docs: { page: mdx } },
   decorators: [
-    (story) => <div className="page-header-stories__viewport">{story()}</div>,
+    (story) => <div className={`${storyClass}__viewport`}>{story()}</div>,
   ],
 };
 
@@ -79,28 +80,28 @@ const manyBreadcrumbItems = (
 );
 const className = 'client-class-1 client-class-2';
 const dummyPageContent = (
-  <Grid className="page-header-stories__dummy-content" narrow={true}>
+  <Grid className={`${storyClass}__dummy-content`} narrow={true}>
     <Row>
       <Column
         sm={1}
         md={2}
         lg={4}
-        className="page-header-stories__dummy-content-block">
-        <div className="page-header-stories__dummy-content-text">Column #1</div>
+        className={`${storyClass}__dummy-content-block`}>
+        <div className={`${storyClass}__dummy-content-text`}>Column #1</div>
       </Column>
       <Column
         sm={1}
         md={2}
         lg={4}
-        className="page-header-stories__dummy-content-block">
-        <div className="page-header-stories__dummy-content-text">Column #2</div>
+        className={`${storyClass}__dummy-content-block`}>
+        <div className={`${storyClass}__dummy-content-text`}>Column #2</div>
       </Column>
       <Column
         sm={2}
         md={4}
         lg={8}
-        className="page-header-stories__dummy-content-block">
-        <div className="page-header-stories__dummy-content-text">Column #3</div>
+        className={`${storyClass}__dummy-content-block`}>
+        <div className={`${storyClass}__dummy-content-text`}>Column #3</div>
       </Column>
     </Row>
   </Grid>
@@ -138,7 +139,7 @@ const manyPageActions = [
 
 const statusIndicator = (
   <>
-    <CheckmarkFilled16 className="page-header-stories__status-icon" /> Running
+    <CheckmarkFilled16 className={`${storyClass}__status-icon`} /> Running
   </>
 );
 const subtitle = 'Optional subtitle if necessary';
@@ -479,21 +480,19 @@ AllAttributesWithSwitches.args = {
 
 const TemplatePageHeaderWithCarbonHeader = (args) => {
   return (
-    <div className="page-header-stories__app">
+    <div className={`${storyClass}__app`}>
       <Header aria-label="IBM Platform Name">
         <HeaderName href="#" prefix="IBM">
           [Platform]
         </HeaderName>
       </Header>
-      <Content className="page-header-stories__content-container">
+      <Content className={`${storyClass}__content-container`}>
         <PageHeader
           className="example-class-name"
           {...includeTheseArgs(args)}
           pageHeaderOffset={48} // 48px is the size of the global header. A more elegant way of passing this could be found.
         />
-        <div className="page-header-stories__inner-content">
-          {dummyPageContent}
-        </div>
+        <div className={`${storyClass}__inner-content`}>{dummyPageContent}</div>
       </Content>
     </div>
   );

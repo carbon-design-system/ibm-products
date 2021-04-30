@@ -56,10 +56,24 @@ $block-class: #{$pkg-prefix}--tag-set;
   visibility: hidden;
 }
 
-.#{$block-class}__overflow-tag-item {
+.#{$block-class}__overflow-tag-item,
+.#{$block-class}__overflow-tag-item .#{$prefix}--tag {
   @include carbon--type-style('body-short-01');
 
+  min-width: initial;
+  min-height: initial;
+  margin: 0;
+  padding: 0;
+  color: inherit;
   white-space: nowrap;
+  vertical-align: bottom;
+  background-color: inherit;
+}
+
+.#{$block-class}__overflow-tag-item
+  .#{$prefix}--tag
+  .#{$prefix}--tag__close-icon {
+  display: none;
 }
 
 .#{$block-class}__overflow-tag .#{$carbon-prefix}--tag__close-icon {

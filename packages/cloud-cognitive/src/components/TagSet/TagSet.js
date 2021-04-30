@@ -41,8 +41,8 @@ export let TagSet = React.forwardRef(
     const [allTags, setAllTags] = useState([]);
     const [hiddenSizingTags, setHiddenSizingTags] = useState([]);
     const [showAllModalOpen, setShowAllModalOpen] = useState(false);
-    const tagSetRef = useRef(null);
-    const [tagSet, setTagSet] = useState({ current: null });
+    const localTagSetRef = useRef(null);
+    const [tagSetRef, setTagSetRef] = useState({ current: null });
     const displayedArea = useRef(null);
     const [sizingTags, setSizingTags] = useState([]);
     const overflowTag = useRef(null);
@@ -52,8 +52,8 @@ export let TagSet = React.forwardRef(
     };
 
     useEffect(() => {
-      setTagSet(ref || tagSetRef);
-    }, [ref, tagSetRef]);
+      setTagSetRef(ref || localTagSetRef);
+    }, [ref, localTagSetRef]);
 
     useEffect(() => {
       // clone children for use in modal
@@ -129,7 +129,7 @@ export let TagSet = React.forwardRef(
       let willFit = 0;
 
       if (sizingTags.length > 0) {
-        let spaceAvailable = tagSet.current.offsetWidth;
+        let spaceAvailable = tagSetRef.current.offsetWidth;
 
         for (let i in sizingTags) {
           const tagWidth = sizingTags[i].offsetWidth;
@@ -159,7 +159,7 @@ export let TagSet = React.forwardRef(
       } else {
         setDisplayCount(maxVisible ? Math.min(willFit, maxVisible) : willFit);
       }
-    }, [maxVisible, sizingTags, tagSet]);
+    }, [maxVisible, sizingTags, tagSetRef]);
 
     useEffect(() => {
       checkFullyVisibleTags();
@@ -181,7 +181,7 @@ export let TagSet = React.forwardRef(
 
     return (
       <ReactResizeDetector onResize={handleResize}>
-        <div className={cx([blockClass, className])} ref={tagSet} {...rest}>
+        <div className={cx([blockClass, className])} ref={tagSetRef} {...rest}>
           <div
             className={cx([
               `${blockClass}__space`,

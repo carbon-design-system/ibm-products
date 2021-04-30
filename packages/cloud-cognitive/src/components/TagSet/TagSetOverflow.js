@@ -62,7 +62,7 @@ export const TagSetOverflow = React.forwardRef(
             <ul className={`${blockClass}__overflow-tag-list`}>
               {overflowTags.map((tag, index) => (
                 <li className={`${blockClass}__overflow-tag-item`} key={index}>
-                  {tag.props.children}
+                  {tag}
                 </li>
               ))}
             </ul>

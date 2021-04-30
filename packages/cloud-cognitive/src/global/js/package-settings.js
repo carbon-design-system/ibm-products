@@ -42,6 +42,7 @@ const defaults = {
     RemoveDeleteModal: false,
     Saving: false,
     SidePanel: false,
+    TagSet: false,
     UnauthorizedEmptyState: false,
     UserProfileImage: false,
     WebTerminal: false,

@@ -16,49 +16,47 @@
 @mixin http-errors {
   $block-class: #{$pkg-prefix}--http-errors;
 
-  .#{$block-class} {
-    &.#{$block-class}-content {
-      @include carbon--breakpoint(sm) {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        z-index: 2;
-        transform: translate(-50%, -150%);
-      }
-      @include carbon--breakpoint(md) {
-        transform: translate(-50%, -50%);
-      }
+  .#{$block-class} .#{$block-class}__content {
+    @include carbon--breakpoint(sm) {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      z-index: 2;
+      transform: translate(-50%, -150%);
     }
-    .#{$block-class}-error-code-label {
-      @include carbon--type-style('productive-heading-02');
+    @include carbon--breakpoint(md) {
+      transform: translate(-50%, -50%);
+    }
+  }
+  .#{$block-class} .#{$block-class}__error-code-label {
+    @include carbon--type-style('productive-heading-02');
 
-      margin-bottom: $spacing-02;
-    }
-    .#{$block-class}-title {
-      @include carbon--type-style('productive-heading-05');
+    margin-bottom: $spacing-02;
+  }
+  .#{$block-class} .#{$block-class}__title {
+    @include carbon--type-style('productive-heading-05');
 
-      margin-bottom: $spacing-04;
-    }
-    .#{$block-class}-description {
-      @include carbon--type-style('body-short-01');
+    margin-bottom: $spacing-04;
+  }
+  .#{$block-class} .#{$block-class}__description {
+    @include carbon--type-style('body-short-01');
 
-      margin-bottom: $spacing-06;
+    margin-bottom: $spacing-06;
+  }
+  .#{$block-class} .#{$block-class}__link {
+    display: block;
+    margin-bottom: $spacing-02;
+  }
+  .#{$block-class} .#{$block-class}__image {
+    @include carbon--breakpoint(sm) {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      transform: translate(-50%, -40%);
     }
-    .#{$block-class}-link {
-      display: block;
-      margin-bottom: $spacing-02;
-    }
-    .#{$block-class}__image {
-      @include carbon--breakpoint(sm) {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        width: 100%;
-        transform: translate(-50%, -40%);
-      }
-      @include carbon--breakpoint(md) {
-        transform: translate(-50%, -50%);
-      }
+    @include carbon--breakpoint(md) {
+      transform: translate(-50%, -50%);
     }
   }
 }

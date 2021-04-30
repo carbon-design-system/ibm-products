@@ -29,10 +29,13 @@ export const TagSetOverflow = React.forwardRef(
   ) => {
     const [tipOpen, setTipOpen] = useState(false);
     const overflowTagContent = useRef(null);
+    const localRef = useRef(null);
+    const overflowRef = ref || localRef;
 
     const handleChange = (ev, { open }) => {
       setTipOpen(open);
     };
+
     const handleShowAllTagsClick = (ev) => {
       ev.stopPropagation();
       ev.preventDefault();
@@ -46,7 +49,7 @@ export const TagSetOverflow = React.forwardRef(
         className={cx(`${blockClass}__overflow`, {
           [`${blockClass}__overflow--hidden`]: overflowTags.length === 0,
         })}
-        ref={ref}>
+        ref={overflowRef}>
         <Tooltip
           align={overflowAlign}
           className={`${blockClass}__tooltip`}
@@ -61,7 +64,7 @@ export const TagSetOverflow = React.forwardRef(
             <ul className={`${blockClass}__overflow-tag-list`}>
               {overflowTags.map((tag, index) => (
                 <li className={`${blockClass}__overflow-tag-item`} key={index}>
-                  {tag.props.children}
+                  {React.cloneElement(tag, { filter: false })}
                 </li>
               ))}
             </ul>

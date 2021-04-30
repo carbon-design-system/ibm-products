@@ -1118,6 +1118,8 @@ path:nth-of-type(1),
 
 .exp--tearsheet {
   align-items: flex-end;
+  --exp--tearsheet--stacking-scale-factor-single: 0.95;
+  --exp--tearsheet--stacking-scale-factor-double: 0.9;
 }
 
 .exp--tearsheet.exp--tearsheet--stacked-1-of-2 {
@@ -1184,68 +1186,17 @@ path:nth-of-type(1),
   max-height: calc( 100% - (var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem) + (2 * var(--cds-spacing-05, 1rem))));
 }
 
-@media (min-width: 42rem) {
-  .exp--tearsheet.exp--tearsheet--stacked-1-of-2:not(.exp--tearsheet--wide)
-.exp--tearsheet__container,
-  .exp--tearsheet.exp--tearsheet--stacked-2-of-3:not(.exp--tearsheet--wide)
-.exp--tearsheet__container {
-    width: calc(60% - (2 * var(--cds-spacing-05, 1rem)));
-  }
-}
-
-@media (min-width: 66rem) {
-  .exp--tearsheet.exp--tearsheet--stacked-1-of-2:not(.exp--tearsheet--wide)
-.exp--tearsheet__container,
-  .exp--tearsheet.exp--tearsheet--stacked-2-of-3:not(.exp--tearsheet--wide)
-.exp--tearsheet__container {
-    width: calc(42% - (2 * var(--cds-spacing-05, 1rem)));
-  }
-}
-
-@media (min-width: 82rem) {
-  .exp--tearsheet.exp--tearsheet--stacked-1-of-2:not(.exp--tearsheet--wide)
-.exp--tearsheet__container,
-  .exp--tearsheet.exp--tearsheet--stacked-2-of-3:not(.exp--tearsheet--wide)
-.exp--tearsheet__container {
-    width: calc(36% - (2 * var(--cds-spacing-05, 1rem)));
-  }
-}
-
-@media (min-width: 42rem) {
-  .exp--tearsheet.exp--tearsheet--stacked-1-of-3:not(.exp--tearsheet--wide)
-.exp--tearsheet__container {
-    width: calc(60% - (4 * var(--cds-spacing-05, 1rem)));
-  }
-}
-
-@media (min-width: 66rem) {
-  .exp--tearsheet.exp--tearsheet--stacked-1-of-3:not(.exp--tearsheet--wide)
-.exp--tearsheet__container {
-    width: calc(42% - (4 * var(--cds-spacing-05, 1rem)));
-  }
-}
-
-@media (min-width: 82rem) {
-  .exp--tearsheet.exp--tearsheet--stacked-1-of-3:not(.exp--tearsheet--wide)
-.exp--tearsheet__container {
-    width: calc(36% - (4 * var(--cds-spacing-05, 1rem)));
-  }
-}
-
 .exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__container {
   width: calc(100% - (2 * var(--cds-spacing-07, 2rem)));
 }
 
-.exp--tearsheet.exp--tearsheet--stacked-1-of-2.exp--tearsheet--wide
-.exp--tearsheet__container,
-.exp--tearsheet.exp--tearsheet--stacked-2-of-3.exp--tearsheet--wide
-.exp--tearsheet__container {
-  width: calc(100% - (2 * var(--cds-spacing-07, 2rem)) - (2 * var(--cds-spacing-05, 1rem)));
+.exp--tearsheet.exp--tearsheet--stacked-1-of-2 .exp--tearsheet__container,
+.exp--tearsheet.exp--tearsheet--stacked-2-of-3 .exp--tearsheet__container {
+  transform: scale(var(--exp--tearsheet--stacking-scale-factor-single));
 }
 
-.exp--tearsheet.exp--tearsheet--stacked-1-of-3.exp--tearsheet--wide
-.exp--tearsheet__container {
-  width: calc(100% - (2 * var(--cds-spacing-07, 2rem)) - (4 * var(--cds-spacing-05, 1rem)));
+.exp--tearsheet.exp--tearsheet--stacked-1-of-3 .exp--tearsheet__container {
+  transform: scale(var(--exp--tearsheet--stacking-scale-factor-double));
 }
 
 .exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__header {
@@ -1311,6 +1262,11 @@ path:nth-of-type(1),
   flex-grow: 1;
   margin: 0;
   padding: 0;
+}
+
+.exp--tearsheet__resize-detector {
+  width: 100%;
+  height: 0;
 }
 
 .exp--tearsheet .exp--tearsheet__influencer {

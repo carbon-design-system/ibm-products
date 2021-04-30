@@ -10,6 +10,7 @@ import React from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { pkg } from '../../../settings';
 import { EmptyStateContent } from '../EmptyStateContent';
 import { NotificationsIllustration } from '../assets/NotificationsIllustration';
@@ -25,19 +26,26 @@ export let NotificationsEmptyState = React.forwardRef(
       actionIcon,
       actionText,
       actionType,
-      heading,
+      className,
       illustrationSize,
       illustrationTheme,
       linkText,
       linkUrl,
       onActionEvent,
-      subtext,
+      subtitle,
+      title,
       ...rest
     },
     ref
   ) => {
     return (
-      <div className={blockClass} ref={ref} {...rest}>
+      <div
+        {
+          // Pass through any other property values as HTML attributes.
+          ...rest
+        }
+        className={cx(blockClass, className)}
+        ref={ref}>
         <NotificationsIllustration
           size={illustrationSize}
           theme={illustrationTheme}
@@ -46,11 +54,11 @@ export let NotificationsEmptyState = React.forwardRef(
           actionIcon={actionIcon}
           actionText={actionText}
           actionType={actionType}
-          heading={heading}
           linkText={linkText}
           linkUrl={linkUrl}
           onActionEvent={onActionEvent}
-          subtext={subtext}
+          subtitle={subtitle}
+          title={title}
         />
       </div>
     );
@@ -84,9 +92,9 @@ NotificationsEmptyState.propTypes = {
    */
   actionType: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
   /**
-   * Empty state heading
+   * Provide an optional class to be applied to the containing node.
    */
-  heading: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  className: PropTypes.string,
   /**
    * Empty state illustration size
    */
@@ -111,9 +119,13 @@ NotificationsEmptyState.propTypes = {
    */
   onActionEvent: PropTypes.func,
   /**
-   * Empty state subtext
+   * Empty state subtitle
    */
-  subtext: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  /**
+   * Empty state title
+   */
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
 };
 
 // Default values for component props. Default values are not required for

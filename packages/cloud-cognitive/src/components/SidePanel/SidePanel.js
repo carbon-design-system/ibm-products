@@ -212,6 +212,25 @@ export let SidePanel = React.forwardRef(
             }
           });
       }
+      if (open && !animateTitle && animationComplete) {
+        const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
+        const sidePanelTitleElement = document.querySelector(
+          `.${blockClass}__title-container`
+        );
+        const sidePanelSubtitleElement = document.querySelector(
+          `.${blockClass}__subtitle-text`
+        );
+        const titleHeight = sidePanelTitleElement.offsetHeight;
+        const subtitleHeight = sidePanelSubtitleElement.offsetHeight;
+        sidePanelOuter.style.setProperty(
+          `--${blockClass}--title-container-height`,
+          `${titleHeight}px`
+        );
+        sidePanelOuter.style.setProperty(
+          `--${blockClass}--subtitle-container-height`,
+          `${subtitleHeight}px`
+        );
+      }
     }, [open, animateTitle, animationComplete]);
 
     // click outside functionality if `includeOverlay` prop is set
@@ -410,10 +429,21 @@ export let SidePanel = React.forwardRef(
                   />
                 </div>
                 {subtitle && subtitle.length && (
-                  <p className={`${blockClass}__subtitle-text`}>{subtitle}</p>
+                  <p
+                    className={cx(`${blockClass}__subtitle-text`, {
+                      [`${blockClass}__subtitle-text-no-animation`]: !animateTitle,
+                      [`${blockClass}__subtitle-text-no-animation-no-action-toolbar`]:
+                        !animateTitle &&
+                        (!actionToolbarButtons || !actionToolbarButtons.length),
+                    })}>
+                    {subtitle}
+                  </p>
                 )}
                 {actionToolbarButtons && actionToolbarButtons.length && (
-                  <div className={`${blockClass}__action-toolbar`}>
+                  <div
+                    className={cx(`${blockClass}__action-toolbar`, {
+                      [`${blockClass}__action-toolbar-no-animation`]: !animateTitle,
+                    })}>
                     {actionToolbarButtons.map((action) => (
                       <Button
                         key={action.label}

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /**
  * Copyright IBM Corp. 2020, 2021
  *
@@ -34,10 +35,21 @@ const renderSidePanel = ({ ...rest }, children = <p>test</p>) =>
     </SidePanel>
   );
 
-// eslint-disable-next-line react/prop-types
-const SlideIn = ({ placement, open }) => (
+const title = uuidv4();
+const subtitle = uuidv4();
+
+const SlideIn = ({
+  placement,
+  open,
+  animateTitle = true,
+  actionToolbarButtons,
+}) => (
   <div>
     <SidePanel
+      actionToolbarButtons={actionToolbarButtons}
+      title={title}
+      subtitle={subtitle}
+      animateTitle={animateTitle}
       open={open}
       onRequestClose={onRequestCloseFn}
       slideIn
@@ -141,6 +153,32 @@ describe('SidePanel', () => {
     fireEvent.animationStart(outerElement);
     rerender(<SlideIn placement="right" open={false} />);
     fireEvent.animationEnd(outerElement);
+    const updatedStyles = getComputedStyle(pageContent);
+    expect(updatedStyles.marginRight).toBe('0px');
+  });
+
+  it('should render a right slide in panel version', async () => {
+    const { container, rerender } = render(
+      <SlideIn
+        animateTitle={false}
+        placement="right"
+        open
+        actionToolbarButtons={[]}
+      />
+    );
+    const pageContent = container.querySelector(
+      '#side-panel-test-page-content'
+    );
+    const style = getComputedStyle(pageContent);
+    expect(style.marginRight).toBe('30rem');
+    const closeIconButton = container.querySelector(
+      `.${blockClass}__close-button`
+    );
+    const outerElement = container.querySelector(`.${blockClass}`);
+    userEvent.click(closeIconButton);
+    fireEvent.animationStart(outerElement);
+    fireEvent.animationEnd(outerElement);
+    rerender(<SlideIn animateTitle={false} placement="right" open={false} />);
     const updatedStyles = getComputedStyle(pageContent);
     expect(updatedStyles.marginRight).toBe('0px');
   });

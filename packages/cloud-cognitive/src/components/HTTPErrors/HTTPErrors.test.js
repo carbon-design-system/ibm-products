@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 
 import { pkg } from '../../settings';
@@ -14,6 +14,8 @@ import '../../utils/enable-all';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { HTTPError404 } from './HTTPError404';
+import { HTTPError403 } from './HTTPError403';
+import { HTTPErrorOther } from './HTTPErrorOther';
 
 const blockClass = `${pkg.prefix}--http-errors`;
 const componentName = HTTPError404.displayName;
@@ -43,16 +45,97 @@ describe(componentName, () => {
     ).toBeInTheDocument();
   });
 
-  it('adds additional properties to the containing node', () => {
-    const { container } = render(<HTTPError404 data-testid={dataTestId} />);
+  it('should render the HTTPError404 component', () => {
+    const ref = React.createRef();
+    const errorCodeLabel = uuidv4();
+    const description = uuidv4();
+    const { container } = render(
+      <HTTPError404
+        title="Test title"
+        errorCodeLabel={errorCodeLabel}
+        description={description}
+        links={[
+          {
+            text: 'Carbon Design System',
+            url: 'https://www.carbondesignsystem.com',
+          },
+          {
+            text: 'IBM Cloud and Cognitive component library',
+            url: 'https://github.com/carbon-design-system/ibm-cloud-cognitive',
+          },
+        ]}
+        ref={ref}
+        data-testid={dataTestId}
+      />
+    );
+    expect(screen.getByText(errorCodeLabel));
+    expect(screen.getByText(description));
+    expect(screen.getByText('IBM Cloud and Cognitive component library'));
+    expect(ref.current.classList.contains(blockClass)).toBeTruthy();
     expect(
       container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
     ).toBeInTheDocument();
   });
-
-  it('forwards a ref to an appropriate node', () => {
+  it('should render the HTTPError403 component', () => {
     const ref = React.createRef();
-    render(<HTTPError404 ref={ref} />);
+    const errorCodeLabel = uuidv4();
+    const description = uuidv4();
+    const { container } = render(
+      <HTTPError403
+        title="Test title"
+        errorCodeLabel={errorCodeLabel}
+        description={description}
+        links={[
+          {
+            text: 'Carbon Design System',
+            url: 'https://www.carbondesignsystem.com',
+          },
+          {
+            text: 'IBM Cloud and Cognitive component library',
+            url: 'https://github.com/carbon-design-system/ibm-cloud-cognitive',
+          },
+        ]}
+        ref={ref}
+        data-testid={dataTestId}
+      />
+    );
+    expect(screen.getByText(errorCodeLabel));
+    expect(screen.getByText(description));
+    expect(screen.getByText('IBM Cloud and Cognitive component library'));
     expect(ref.current.classList.contains(blockClass)).toBeTruthy();
+    expect(
+      container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
+    ).toBeInTheDocument();
+  });
+  it('should render the HTTPErrorOther component', () => {
+    const ref = React.createRef();
+    const errorCodeLabel = uuidv4();
+    const description = uuidv4();
+    const { container } = render(
+      <HTTPErrorOther
+        title="Test title"
+        errorCodeLabel={errorCodeLabel}
+        description={description}
+        links={[
+          {
+            text: 'Carbon Design System',
+            url: 'https://www.carbondesignsystem.com',
+          },
+          {
+            text: 'IBM Cloud and Cognitive component library',
+            url: 'https://github.com/carbon-design-system/ibm-cloud-cognitive',
+          },
+        ]}
+        ref={ref}
+        data-testid={dataTestId}
+      />
+    );
+    expect(screen.getByText(errorCodeLabel));
+    expect(screen.getByText(description));
+    expect(screen.getByText('IBM Cloud and Cognitive component library'));
+    expect(ref.current.classList.contains(blockClass)).toBeTruthy();
+    expect(
+      container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
+    ).toBeInTheDocument();
   });
 });

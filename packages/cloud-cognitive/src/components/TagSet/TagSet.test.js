@@ -7,6 +7,7 @@ import { TagSet } from '.';
 import { TagSetModal } from './TagSetModal';
 import { Tag } from 'carbon-components-react';
 import { mockHTMLElement } from '../../global/js/utils/test-helper';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 const blockClass = `${pkg.prefix}--tag-set`;
 
@@ -91,7 +92,7 @@ describe(TagSet.displayName, () => {
 
     const overflowVisible = screen.queryAllByText(/Tag [0-9]+/, {
       // selector need to ignore sizing items
-      selector: `.${blockClass}__overflow-tag-item`,
+      selector: `.${blockClass}__overflow-content *`,
     });
     expect(overflowVisible.length).toEqual(tags10.length);
   });
@@ -119,7 +120,7 @@ describe(TagSet.displayName, () => {
 
     const overflowVisible = screen.queryAllByText(/Tag [0-9]+/, {
       // selector need to ignore sizing items
-      selector: `.${blockClass}__overflow-tag-item`,
+      selector: `.${blockClass}__overflow-content *`,
     });
     expect(overflowVisible.length + visible.length).toEqual(tags10.length);
   });
@@ -165,6 +166,23 @@ describe(TagSet.displayName, () => {
         selector: `.${blockClass}__displayed-tag .${carbon.prefix}--tag span`,
       }).length
     ).toEqual(5);
+  });
+
+  it('adds additional properties to the containing node', () => {
+    const dataTestId = uuidv4();
+    window.innerWidth = tagWidth * 10 + 1;
+
+    render(<TagSet data-testid={dataTestId}>{tags10}</TagSet>);
+    screen.getByTestId(dataTestId);
+  });
+
+  it('forwards a ref to an appropriate node', () => {
+    const ref = React.createRef();
+    window.innerWidth = tagWidth * 10 + 1;
+
+    render(<TagSet ref={ref}>{tags10}</TagSet>);
+
+    expect(ref.current).not.toBeNull();
   });
 
   describe(TagSetModal.displayName, () => {

@@ -177,7 +177,7 @@ export let TagSet = React.forwardRef(
 
     return (
       <ReactResizeDetector onResize={handleResize}>
-        <div className={cx([blockClass, className])} ref={tagSetRef} {...rest}>
+        <div {...rest} className={cx([blockClass, className])} ref={tagSetRef}>
           <div
             className={cx([
               `${blockClass}__space`,

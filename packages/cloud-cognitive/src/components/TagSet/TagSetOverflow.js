@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import cx from 'classnames';
@@ -29,7 +29,6 @@ export const TagSetOverflow = React.forwardRef(
   ) => {
     const [tipOpen, setTipOpen] = useState(false);
     const overflowTagContent = useRef(null);
-    const showAllRef = useRef(null);
 
     const handleChange = (ev, { open }) => {
       setTipOpen(open);
@@ -40,15 +39,6 @@ export const TagSetOverflow = React.forwardRef(
       setTipOpen(false);
       onShowAllClick();
     };
-
-    useEffect(() => {
-      // removes focus from the show all tags link
-      setTimeout(() => {
-        if (overflowTagContent.current) {
-          overflowTagContent.current.focus();
-        }
-      }, 0);
-    }, [overflowTagContent, tipOpen]);
 
     return (
       <span

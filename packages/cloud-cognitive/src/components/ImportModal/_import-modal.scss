@@ -20,26 +20,26 @@
     margin-top: 0;
   }
 
-  .#{$pkg-prefix}--input-group {
+  .#{$block-class}__input-group {
     display: flex;
   }
 
-  .#{$pkg-prefix}--import-button {
+  .#{$block-class}__import-button {
     margin-left: $spacing-05;
   }
 
-  .#{$block-class}-label {
+  .#{$block-class}__label {
     margin-bottom: $spacing-03;
     @include carbon--type-style('productive-heading-01');
   }
 
-  .#{$block-class}-helper-text {
+  .#{$block-class}__helper-text {
     margin-top: $spacing-06;
     margin-bottom: $spacing-03;
     @include carbon--type-style('helper-text-01');
   }
 
-  .#{$block-class}-body {
+  .#{$block-class}__body {
     margin-bottom: $spacing-06;
     padding-right: 20%;
   }

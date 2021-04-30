@@ -47,6 +47,7 @@ const TestBreadcrumbWithOverflow = ({ width, children, ...rest }) => {
 };
 
 describe(BreadcrumbWithOverflow.displayName, () => {
+  const { ResizeObserver } = window;
   let mockElement;
 
   beforeEach(() => {
@@ -85,10 +86,17 @@ describe(BreadcrumbWithOverflow.displayName, () => {
         },
       },
     });
+    window.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    }));
   });
 
   afterEach(() => {
     mockElement.mockRestore();
+    jest.restoreAllMocks();
+    window.ResizeObserver = ResizeObserver;
   });
 
   const { click } = fireEvent;

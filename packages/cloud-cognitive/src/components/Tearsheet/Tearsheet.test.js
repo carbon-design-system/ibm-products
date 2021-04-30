@@ -199,6 +199,21 @@ const commonTests = (Ts, name) => {
 };
 
 describe(componentName, () => {
+  const { ResizeObserver } = window;
+
+  beforeAll(() => {
+    window.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    }));
+  });
+
+  afterAll(() => {
+    jest.restoreAllMocks();
+    window.ResizeObserver = ResizeObserver;
+  });
+
   commonTests(Tearsheet, componentName);
 
   it('renders headerActions', () => {
@@ -237,5 +252,20 @@ describe(componentName, () => {
 });
 
 describe(componentNameNarrow, () => {
+  const { ResizeObserver } = window;
+
+  beforeAll(() => {
+    window.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    }));
+  });
+
+  afterAll(() => {
+    jest.restoreAllMocks();
+    window.ResizeObserver = ResizeObserver;
+  });
+
   commonTests(TearsheetNarrow, componentNameNarrow);
 });

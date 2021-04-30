@@ -21,6 +21,8 @@
 
   .#{$block-class} {
     align-items: flex-end;
+    --#{$block-class}--stacking-scale-factor-single: 0.95;
+    --#{$block-class}--stacking-scale-factor-double: 0.9;
   }
 
   .#{$block-class}.#{$block-class}--stacked-1-of-2 {
@@ -101,52 +103,17 @@
     );
   }
 
-  .#{$block-class}.#{$block-class}--stacked-1-of-2:not(.#{$block-class}--wide)
-    .#{$block-class}__container,
-  .#{$block-class}.#{$block-class}--stacked-2-of-3:not(.#{$block-class}--wide)
-    .#{$block-class}__container {
-    @include carbon--breakpoint(md) {
-      width: calc(60% - (2 * #{$spacing-05}));
-    }
-
-    @include carbon--breakpoint(lg) {
-      width: calc(42% - (2 * #{$spacing-05}));
-    }
-
-    @include carbon--breakpoint(xlg) {
-      width: calc(36% - (2 * #{$spacing-05}));
-    }
-  }
-
-  .#{$block-class}.#{$block-class}--stacked-1-of-3:not(.#{$block-class}--wide)
-    .#{$block-class}__container {
-    @include carbon--breakpoint(md) {
-      width: calc(60% - (4 * #{$spacing-05}));
-    }
-
-    @include carbon--breakpoint(lg) {
-      width: calc(42% - (4 * #{$spacing-05}));
-    }
-
-    @include carbon--breakpoint(xlg) {
-      width: calc(36% - (4 * #{$spacing-05}));
-    }
-  }
-
   .#{$block-class}.#{$block-class}--wide .#{$block-class}__container {
     width: calc(100% - (2 * #{$spacing-07}));
   }
 
-  .#{$block-class}.#{$block-class}--stacked-1-of-2.#{$block-class}--wide
-    .#{$block-class}__container,
-  .#{$block-class}.#{$block-class}--stacked-2-of-3.#{$block-class}--wide
-    .#{$block-class}__container {
-    width: calc(100% - (2 * #{$spacing-07}) - (2 * #{$spacing-05}));
+  .#{$block-class}.#{$block-class}--stacked-1-of-2 .#{$block-class}__container,
+  .#{$block-class}.#{$block-class}--stacked-2-of-3 .#{$block-class}__container {
+    transform: scale(var(--#{$block-class}--stacking-scale-factor-single));
   }
 
-  .#{$block-class}.#{$block-class}--stacked-1-of-3.#{$block-class}--wide
-    .#{$block-class}__container {
-    width: calc(100% - (2 * #{$spacing-07}) - (4 * #{$spacing-05}));
+  .#{$block-class}.#{$block-class}--stacked-1-of-3 .#{$block-class}__container {
+    transform: scale(var(--#{$block-class}--stacking-scale-factor-double));
   }
 
   .#{$block-class}.#{$block-class}--wide .#{$block-class}__header {
@@ -206,6 +173,11 @@
     flex-grow: 1;
     margin: 0;
     padding: 0;
+  }
+
+  .#{$block-class}__resize-detector {
+    width: 100%;
+    height: 0;
   }
 
   .#{$block-class} .#{$block-class}__influencer {

@@ -19,10 +19,26 @@
   // stylelint-disable-next-line carbon/theme-token-use
   $overlay-color: $carbon--gray-100;
 
-  .#{$block-class} {
+  $motion-duration: $duration--moderate-02;
+
+  .#{$block-class}.#{$block-class} {
+    z-index: z('modal') + 1;
     align-items: flex-end;
+    // stylelint-disable-next-line carbon/motion-token-use
+    transition: visibility 0s linear $motion-duration,
+      background-color $motion-duration motion(exit, expressive),
+      opacity $motion-duration motion(exit, expressive);
     --#{$block-class}--stacking-scale-factor-single: 0.95;
     --#{$block-class}--stacking-scale-factor-double: 0.9;
+  }
+
+  .#{$block-class}.is-visible {
+    z-index: z('modal');
+    align-items: flex-end;
+    // stylelint-disable-next-line carbon/motion-token-use
+    transition: visibility 0s linear,
+      background-color $motion-duration motion(entrance, expressive),
+      opacity $motion-duration motion(entrance, expressive);
   }
 
   .#{$block-class}.#{$block-class}--stacked-1-of-2 {
@@ -49,17 +65,6 @@
     background-color: rgba($overlay-color, 0.25);
   }
 
-  .#{$block-class}[class*='#{$block-class}--stacked'] {
-    // stylelint-disable-next-line carbon/motion-token-use
-    transition: visibility 0s linear, z-index $duration--moderate-02;
-  }
-
-  .#{$block-class}.#{$block-class}--stacked-closed {
-    // stylelint-disable-next-line carbon/motion-token-use
-    transition: visibility 0s linear $duration--moderate-02,
-      opacity $duration--moderate-02 motion(exit, expressive);
-  }
-
   .#{$block-class} .#{$block-class}__container {
     top: auto;
     height: 100%;
@@ -72,8 +77,8 @@
   }
 
   .#{$block-class}.#{$block-class} .#{$block-class}__container {
-    transition: width $duration--moderate-02 motion(standard, expressive),
-      transform $duration--moderate-02 motion(entrance, expressive);
+    transition: transform $motion-duration motion(entrance, expressive),
+      max-height $motion-duration linear;
   }
 
   .#{$block-class}.#{$block-class}--stacked-2-of-2 .#{$block-class}__container,
@@ -107,12 +112,15 @@
     width: calc(100% - (2 * #{$spacing-07}));
   }
 
-  .#{$block-class}.#{$block-class}--stacked-1-of-2 .#{$block-class}__container,
-  .#{$block-class}.#{$block-class}--stacked-2-of-3 .#{$block-class}__container {
+  .#{$block-class}.#{$block-class}--stacked-1-of-2.is-visible
+    .#{$block-class}__container,
+  .#{$block-class}.#{$block-class}--stacked-2-of-3.is-visible
+    .#{$block-class}__container {
     transform: scale(var(--#{$block-class}--stacking-scale-factor-single));
   }
 
-  .#{$block-class}.#{$block-class}--stacked-1-of-3 .#{$block-class}__container {
+  .#{$block-class}.#{$block-class}--stacked-1-of-3.is-visible
+    .#{$block-class}__container {
     transform: scale(var(--#{$block-class}--stacking-scale-factor-double));
   }
 

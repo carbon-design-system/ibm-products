@@ -378,8 +378,8 @@ export let NotificationsPanel = React.forwardRef(
           {!allNotifications.length && (
             <NotificationsEmptyState
               illustrationTheme="dark"
-              heading=""
-              subtext={emptyStateLabel}
+              title=""
+              subtitle={emptyStateLabel}
             />
           )}
         </div>

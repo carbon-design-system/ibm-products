@@ -50,6 +50,21 @@ const SlideIn = ({ placement, open }) => (
 );
 
 describe('SidePanel', () => {
+  const { ResizeObserver } = window;
+
+  beforeEach(() => {
+    window.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    }));
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+    window.ResizeObserver = ResizeObserver;
+  });
+
   it('renders the side panel', () => {
     const subtitle = uuidv4();
     const labelText = uuidv4();

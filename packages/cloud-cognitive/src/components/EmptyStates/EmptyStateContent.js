@@ -20,26 +20,26 @@ const blockClass = `${pkg.prefix}--empty-state`;
 const componentName = 'EmptyStateContent';
 
 export const EmptyStateContent = ({
-  heading,
-  subtext,
   actionText,
-  onActionEvent,
   actionType,
   actionIcon,
   linkText,
   linkUrl,
+  onActionEvent,
+  subtitle,
+  title,
 }) => {
   return (
     <>
-      {typeof heading !== 'string' ? (
-        heading
+      {typeof title !== 'string' ? (
+        title
       ) : (
-        <h3 className={`${blockClass}__header`}>{heading}</h3>
+        <h3 className={`${blockClass}__header`}>{title}</h3>
       )}
-      {typeof subtext !== 'string' ? (
-        subtext
+      {typeof subtitle !== 'string' ? (
+        subtitle
       ) : (
-        <p className={`${blockClass}__subtext`}>{subtext}</p>
+        <p className={`${blockClass}__subtext`}>{subtitle}</p>
       )}
       {actionText && onActionEvent && (
         <Button
@@ -80,39 +80,6 @@ EmptyStateContent.propTypes = {
    */
   actionType: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
   /**
-   * Empty state heading
-   */
-  heading: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
-  /**
-   * Empty state illustration, either pass one of the default options
-   * or specify the src of a custom illustration to be displayed.
-   * To ensure you have a light and dark theme, you can conditionally specify light or dark
-   * based on your app's current theme value. Example:
-   * `illustration={appTheme === ('carbon--g100' || 'carbon--g90') ? myCustomDarkIllustration : myCustomLightIllustration}`
-   */
-  illustration: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.oneOf([
-      'nodata',
-      'error',
-      'unauthorized',
-      'notags',
-      'notfound',
-      'notifications',
-    ]),
-  ]),
-  /**
-   * Empty state illustration size
-   */
-  illustrationSize: PropTypes.oneOf(['lg', 'sm']),
-  /**
-   * Empty state illustration theme variations.
-   * To ensure you use the correct themed illustrations, you can conditionally specify light or dark
-   * based on your app's current theme value. Example:
-   * `illustrationTheme={appTheme === ('carbon--g100' || 'carbon--g90') ? 'dark' : 'light'}`
-   */
-  illustrationTheme: PropTypes.oneOf(['light', 'dark']),
-  /**
    * Empty state link text
    */
   linkText: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
@@ -125,7 +92,11 @@ EmptyStateContent.propTypes = {
    */
   onActionEvent: PropTypes.func,
   /**
-   * Empty state subtext
+   * Empty state subtitle
    */
-  subtext: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  /**
+   * Empty state title
+   */
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
 };

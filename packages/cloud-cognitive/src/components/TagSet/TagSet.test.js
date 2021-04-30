@@ -24,6 +24,7 @@ const tags10 = tags.slice(0, 10);
 const tagWidth = 100;
 
 describe(TagSet.displayName, () => {
+  const { ResizeObserver } = window;
   let mockElement;
 
   beforeEach(() => {
@@ -45,10 +46,17 @@ describe(TagSet.displayName, () => {
         },
       },
     });
+    window.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    }));
   });
 
   afterEach(() => {
     mockElement.mockRestore();
+    jest.restoreAllMocks();
+    window.ResizeObserver = ResizeObserver;
   });
 
   it('Renders all as visible tags when space available', () => {

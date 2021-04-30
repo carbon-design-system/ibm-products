@@ -42,7 +42,7 @@ export let TagSet = React.forwardRef(
     const [hiddenSizingTags, setHiddenSizingTags] = useState([]);
     const [showAllModalOpen, setShowAllModalOpen] = useState(false);
     const localTagSetRef = useRef(null);
-    const [tagSetRef, setTagSetRef] = useState({ current: null });
+    const tagSetRef = ref || localTagSetRef;
     const displayedArea = useRef(null);
     const [sizingTags, setSizingTags] = useState([]);
     const overflowTag = useRef(null);
@@ -50,10 +50,6 @@ export let TagSet = React.forwardRef(
     const handleShowAllClick = () => {
       setShowAllModalOpen(true);
     };
-
-    useEffect(() => {
-      setTagSetRef(ref || localTagSetRef);
-    }, [ref, localTagSetRef]);
 
     useEffect(() => {
       // clone children for use in modal

@@ -59,24 +59,21 @@ export let Saving = ({
   };
 
   const statusObj = getStatusObj();
-
-  const classnames = cx(`${pkg.prefix}-saving`, {
-    [className]: className,
-  });
+  const blockClass = `${pkg.prefix}--saving`;
 
   return (
-    <div className={classnames}>
+    <div className={cx(blockClass, className)}>
       {type === 'auto' ? (
-        <div className={`${pkg.prefix}-saving-message`}>
+        <div className={`${blockClass}__message`}>
           {status === 'fail' && (
-            <div className={`${pkg.prefix}-saving-error-icon`}>
+            <div className={`${blockClass}__error-icon`}>
               <ErrorFilled16 />
             </div>
           )}
-          <p className={`${pkg.prefix}-saving-text`}>{statusObj.text}</p>
+          <p className={`${blockClass}__text`}>{statusObj.text}</p>
         </div>
       ) : (
-        <div className={`${pkg.prefix}-saving-buttons`}>
+        <div className={`${blockClass}__buttons`}>
           <Button
             onClick={onCancel}
             kind="secondary"

@@ -227,6 +227,7 @@ const ChildrenContent = () => {
           {notesValue.length}/100
         </span>
         <TextArea
+          className={`${prefix}text-area`}
           labelText="Notes"
           value={notesValue}
           onChange={(event) => setNotesValue(event.target.value)}

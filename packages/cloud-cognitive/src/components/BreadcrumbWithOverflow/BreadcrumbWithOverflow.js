@@ -11,8 +11,10 @@ import React, { useState, useEffect, useRef } from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { Button } from 'carbon-components-react';
 import { pkg, carbon } from '../../settings';
 import ReactResizeDetector from 'react-resize-detector';
+import { ArrowLeft16 } from '@carbon/icons-react';
 
 // Carbon and package components we use.
 import {
@@ -243,10 +245,18 @@ export let BreadcrumbWithOverflow = ({
     checkFullyVisibleBreadcrumbItems();
   };
 
+  const buttonHrefValue =
+    displayedBreadcrumbItems[displayedBreadcrumbItems.length - 2]?.props.href;
+  const buttonTooltipValue =
+    displayedBreadcrumbItems[displayedBreadcrumbItems.length - 2]?.props
+      .children;
+
   return (
     <ReactResizeDetector onResize={handleResize}>
       <div
-        className={cx([blockClass, className])}
+        className={cx(blockClass, className, {
+          [`${blockClass}__with-items`]: displayedBreadcrumbItems.length > 1,
+        })}
         ref={breadcrumbItemWithOverflow}>
         <div className={cx([`${blockClass}__space`])}>
           {/* This next element is purely here to measure the size of the breadcrumb items */}
@@ -266,8 +276,24 @@ export let BreadcrumbWithOverflow = ({
             </div>
           </ReactResizeDetector>
 
+          {buttonHrefValue && buttonTooltipValue && (
+            <Button
+              className={`${blockClass}--breadcrumb-back-button`}
+              hasIconOnly
+              iconDescription={buttonTooltipValue}
+              kind="ghost"
+              href={buttonHrefValue || '#'}
+              renderIcon={ArrowLeft16}
+              size="field"
+              tooltipPosition="right"
+              type="button"
+            />
+          )}
           <Breadcrumb
-            className={`${blockClass}__breadcrumb-container`}
+            className={cx(`${blockClass}__breadcrumb-container`, {
+              [`${blockClass}__breadcrumb-container-with-items`]:
+                displayedBreadcrumbItems.length > 1,
+            })}
             noTrailingSlash={noTrailingSlash}
             {...other}>
             {displayedBreadcrumbItems}

@@ -35,8 +35,8 @@ export default {
 const Template = (args) => {
   return (
     <NotificationsEmptyState
-      heading="Start by adding data assets"
-      subtext={
+      title="Start by adding data assets"
+      subtitle={
         <p>
           Click <span>Upload assets</span> to upload your data
         </p>

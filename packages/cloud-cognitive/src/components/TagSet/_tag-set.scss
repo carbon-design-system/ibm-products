@@ -70,12 +70,6 @@ $block-class: #{$pkg-prefix}--tag-set;
   background-color: inherit;
 }
 
-.#{$block-class}__overflow-tag-item
-  .#{$prefix}--tag
-  .#{$prefix}--tag__close-icon {
-  display: none;
-}
-
 .#{$block-class}__overflow-tag .#{$carbon-prefix}--tag__close-icon {
   // undo override by .bx--tooltip button
   padding: 0;

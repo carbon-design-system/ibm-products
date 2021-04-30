@@ -84,7 +84,7 @@ describe(TagSet.displayName, () => {
 
     const overflowVisible = screen.queryAllByText(/Tag [0-9]+/, {
       // selector need to ignore sizing items
-      selector: `.${blockClass}__overflow-tag-item`,
+      selector: `.${blockClass}__overflow-content *`,
     });
     expect(overflowVisible.length).toEqual(tags10.length);
   });
@@ -112,7 +112,7 @@ describe(TagSet.displayName, () => {
 
     const overflowVisible = screen.queryAllByText(/Tag [0-9]+/, {
       // selector need to ignore sizing items
-      selector: `.${blockClass}__overflow-tag-item`,
+      selector: `.${blockClass}__overflow-content *`,
     });
     expect(overflowVisible.length + visible.length).toEqual(tags10.length);
   });

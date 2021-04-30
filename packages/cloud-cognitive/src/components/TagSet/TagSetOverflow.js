@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import cx from 'classnames';
@@ -29,10 +29,13 @@ export const TagSetOverflow = React.forwardRef(
   ) => {
     const [tipOpen, setTipOpen] = useState(false);
     const overflowTagContent = useRef(null);
+    const localRef = useRef(null);
+    const overflowRef = ref || localRef;
 
     const handleChange = (ev, { open }) => {
       setTipOpen(open);
     };
+
     const handleShowAllTagsClick = (ev) => {
       ev.stopPropagation();
       ev.preventDefault();
@@ -46,7 +49,7 @@ export const TagSetOverflow = React.forwardRef(
         className={cx(`${blockClass}__overflow`, {
           [`${blockClass}__overflow--hidden`]: overflowTags.length === 0,
         })}
-        ref={ref}>
+        ref={overflowRef}>
         <Tooltip
           align={overflowAlign}
           className={`${blockClass}__tooltip`}
@@ -56,13 +59,12 @@ export const TagSetOverflow = React.forwardRef(
           triggerText={<Tag>+{overflowTags.length}</Tag>}
           showIcon={false}>
           <div
-            tabIndex="-1"
             ref={overflowTagContent}
             className={`${blockClass}__overflow-content`}>
             <ul className={`${blockClass}__overflow-tag-list`}>
               {overflowTags.map((tag, index) => (
                 <li className={`${blockClass}__overflow-tag-item`} key={index}>
-                  {tag}
+                  {React.cloneElement(tag, { filter: false })}
                 </li>
               ))}
             </ul>

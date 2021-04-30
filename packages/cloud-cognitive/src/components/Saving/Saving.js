@@ -64,16 +64,16 @@ export let Saving = ({
   return (
     <div className={cx(blockClass, className)}>
       {type === 'auto' ? (
-        <div className={`${blockClass}-message`}>
+        <div className={`${blockClass}__message`}>
           {status === 'fail' && (
-            <div className={`${blockClass}-error-icon`}>
+            <div className={`${blockClass}__error-icon`}>
               <ErrorFilled16 />
             </div>
           )}
-          <p className={`${blockClass}-text`}>{statusObj.text}</p>
+          <p className={`${blockClass}__text`}>{statusObj.text}</p>
         </div>
       ) : (
-        <div className={`${blockClass}-buttons`}>
+        <div className={`${blockClass}__buttons`}>
           <Button
             onClick={onCancel}
             kind="secondary"

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /**
  * Copyright IBM Corp. 2020, 2021
  *
@@ -37,7 +38,6 @@ const renderSidePanel = ({ ...rest }, children = <p>test</p>) =>
 const title = uuidv4();
 const subtitle = uuidv4();
 
-// eslint-disable-next-line react/prop-types
 const SlideIn = ({
   placement,
   open,

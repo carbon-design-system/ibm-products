@@ -7,6 +7,7 @@
 
 // Import portions of React that are needed.
 import React, { useEffect, useLayoutEffect, useState, useRef } from 'react';
+import { useResizeDetector } from 'react-resize-detector';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -14,7 +15,12 @@ import cx from 'classnames';
 import { pkg, carbon } from '../../settings';
 
 // Carbon and package components we use.
-import { ComposedModal, ModalHeader, ModalBody } from 'carbon-components-react';
+import {
+  Button,
+  ComposedModal,
+  ModalHeader,
+  ModalBody,
+} from 'carbon-components-react';
 import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
 
@@ -72,6 +78,8 @@ export const TearsheetShell = React.forwardRef(
     },
     ref
   ) => {
+    const { width, ref: resizer } = useResizeDetector({ handleHeight: false });
+
     // Keep track of the stack depth and our position in it (1-based, 0=closed)
     const [depth, setDepth] = useState(0);
     const [position, setPosition] = useState(0);
@@ -154,11 +162,14 @@ export const TearsheetShell = React.forwardRef(
           className={cx(bc, className, {
             [`${bc}--stacked-${position}-of-${depth}`]:
               // Don't apply this on the initial open of a single tearsheet.
-              open && (depth > 1 || (depth === 1 && prevDepth.current > 1)),
-            [`${bc}--stacked-closed`]: !open && depth > 0,
+              depth > 1 || (depth === 1 && prevDepth.current > 1),
             [`${bc}--wide`]: size === 'wide',
             [`${bc}--narrow`]: size !== 'wide',
           })}
+          style={{
+            [`--${bc}--stacking-scale-factor-single`]: (width - 32) / width,
+            [`--${bc}--stacking-scale-factor-double`]: (width - 64) / width,
+          }}
           containerClassName={cx(`${bc}__container`, {
             [`${bc}__container--lower`]: verticalPosition === 'lower',
           })}
@@ -215,6 +226,7 @@ export const TearsheetShell = React.forwardRef(
               )}
             </Wrap>
           </Wrap>
+          <div className={`${bc}__resize-detector`} ref={resizer} />
         </ComposedModal>
       );
     } else {
@@ -250,10 +262,9 @@ TearsheetShell.propTypes = {
     // NB we don't include the validator here, as the component wrapping this
     // one should ensure appropriate validation is done.
     PropTypes.shape({
-      label: PropTypes.string,
-      onPrimaryActionClick: PropTypes.func,
+      ...Button.propTypes,
       kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
-      disabled: PropTypes.bool,
+      label: PropTypes.string,
       loading: PropTypes.bool,
     })
   ),

@@ -55,13 +55,10 @@ const ActionSetButton = React.forwardRef(
 );
 
 ActionSetButton.propTypes = {
-  className: PropTypes.string,
-  disabled: PropTypes.bool,
+  ...Button.PropTypes,
   kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
   label: PropTypes.string,
   loading: PropTypes.bool,
-  onClick: PropTypes.func,
-  size: Button.propTypes.size,
 };
 
 const defaultKind = Button.defaultProps.kind;
@@ -228,11 +225,10 @@ ActionSet.propTypes = {
     ActionSet.validateActions(),
     PropTypes.arrayOf(
       PropTypes.shape({
-        disabled: PropTypes.bool,
+        ...Button.propTypes,
         kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
         label: PropTypes.string,
         loading: PropTypes.bool,
-        onClick: PropTypes.func,
       })
     ),
   ]),

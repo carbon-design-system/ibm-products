@@ -61,6 +61,7 @@ export const TagSetModal = ({
       modalHeading={heading}
       onRequestClose={onClose}>
       <Search
+        data-modal-primary-focus
         className={`${blockClass}__show-all-tags-search`}
         labelText={searchLabel}
         placeholder={searchPlaceholder}

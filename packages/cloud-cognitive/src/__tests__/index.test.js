@@ -16,15 +16,24 @@ const canaryClass = `${pkg.prefix}-canary`;
 const name = 'JS export checks';
 
 describe(name, () => {
+  const { ResizeObserver } = window;
   let mockError;
+
   beforeEach(() => {
     // The component instantiations that follow will generate a stack of
     // console errors about required props not provided, and we don't care.
     mockError = jest.spyOn(console, 'error').mockImplementation(() => {});
+    window.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    }));
   });
 
   afterEach(() => {
     mockError.mockRestore();
+    jest.restoreAllMocks();
+    window.ResizeObserver = ResizeObserver;
   });
 
   for (const key in components) {

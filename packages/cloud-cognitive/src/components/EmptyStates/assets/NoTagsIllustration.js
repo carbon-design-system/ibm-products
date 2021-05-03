@@ -13,19 +13,22 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
 
+// The block part of our conventional BEM class names (blockClass__E--M).
+const blockClass = `${pkg.prefix}--empty-state`;
+
 export const NoTagsIllustration = ({ theme, size, ...rest }) => {
   return theme === 'dark' ? (
     <svg
+      {...rest}
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       width={80}
       height={80}
       viewBox="0 0 80 80"
       className={cx([
-        `${pkg.prefix}-empty-state-illustration`,
-        `${pkg.prefix}-empty-state-illustration--${size}`,
-      ])}
-      {...rest}>
+        `${blockClass}__illustration`,
+        `${blockClass}__illustration--${size}`,
+      ])}>
       <defs>
         <linearGradient
           id="prefix__c"
@@ -167,16 +170,16 @@ export const NoTagsIllustration = ({ theme, size, ...rest }) => {
     </svg>
   ) : (
     <svg
+      {...rest}
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       width={80}
       height={80}
       viewBox="0 0 80 80"
       className={cx([
-        `${pkg.prefix}-empty-state-illustration`,
-        `${pkg.prefix}-empty-state-illustration--${size}`,
-      ])}
-      {...rest}>
+        `${blockClass}__illustration`,
+        `${blockClass}__illustration--${size}`,
+      ])}>
       <defs>
         <linearGradient
           id="prefix__b_dark"

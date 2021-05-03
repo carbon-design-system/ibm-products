@@ -162,14 +162,13 @@ export const TearsheetShell = React.forwardRef(
           className={cx(bc, className, {
             [`${bc}--stacked-${position}-of-${depth}`]:
               // Don't apply this on the initial open of a single tearsheet.
-              open && (depth > 1 || (depth === 1 && prevDepth.current > 1)),
-            [`${bc}--stacked-closed`]: !open && depth > 0,
+              depth > 1 || (depth === 1 && prevDepth.current > 1),
             [`${bc}--wide`]: size === 'wide',
             [`${bc}--narrow`]: size !== 'wide',
           })}
           style={{
-            [`--${bc}--xxstacking-scale-factor-single`]: (width - 32) / width,
-            [`--${bc}--xxstacking-scale-factor-double`]: (width - 64) / width,
+            [`--${bc}--stacking-scale-factor-single`]: (width - 32) / width,
+            [`--${bc}--stacking-scale-factor-double`]: (width - 64) / width,
           }}
           containerClassName={cx(`${bc}__container`, {
             [`${bc}__container--lower`]: verticalPosition === 'lower',

@@ -67,8 +67,7 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
 
 @mixin setDividerStyles() {
   position: absolute;
-  // stylelint-disable-next-line carbon/layout-token-use
-  bottom: -2px;
+  bottom: 0;
   left: 0;
   width: 100%;
   height: 1px;
@@ -106,6 +105,8 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
 
   .#{$block-class}__container {
     --#{$block-class}--subtitle-opacity: 1;
+    --#{$block-class}--title-container-height: 0;
+    --#{$block-class}--subtitle-container-height: 0;
     --#{$block-class}--divider-opacity: 0;
     --#{$block-class}--title-font-size: 1.25rem;
     --#{$block-class}--content-bottom-padding: #{$spacing-10};
@@ -180,7 +181,7 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       position: sticky;
       top: 0;
       z-index: 4;
-      padding: $spacing-05 $spacing-05 0 $spacing-05;
+      padding: $spacing-05 $spacing-05 $spacing-03 $spacing-05;
       background-color: $ui-01;
       &::before {
         @include setDividerStyles();
@@ -192,7 +193,6 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       position: inherit;
       z-index: 4;
       display: -webkit-box;
-      margin-bottom: $spacing-03;
       padding-right: $spacing-07;
       overflow: hidden;
       // stylelint-disable-next-line carbon/type-token-use
@@ -213,6 +213,16 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       opacity: var(--#{$block-class}--subtitle-opacity);
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
+    }
+    .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation {
+      position: sticky;
+      top: var(--#{$block-class}--title-container-height);
+      z-index: 2;
+      background-color: $ui-01;
+    }
+    .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation.#{$block-class}__subtitle-text-no-animation-no-action-toolbar {
+      margin-bottom: $spacing-05;
+      border-bottom: 1px solid $decorative-01;
     }
     .#{$block-class}__label-text {
       @include carbon--type-style('label-01');
@@ -242,6 +252,14 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
           margin-right: $spacing-03;
         }
       }
+    }
+    .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation {
+      // stylelint-disable-next-line carbon/layout-token-use
+      top: calc(
+        var(--#{$block-class}--title-container-height) +
+          var(--#{$block-class}--subtitle-container-height)
+      );
+      border-bottom: 1px solid $decorative-01;
     }
     .bx--btn.#{$block-class}__navigation-back-button,
     .bx--btn.#{$block-class}__close-button {

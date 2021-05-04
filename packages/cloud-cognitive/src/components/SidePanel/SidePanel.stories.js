@@ -227,6 +227,7 @@ const ChildrenContent = () => {
           {notesValue.length}/100
         </span>
         <TextArea
+          className={`${prefix}text-area`}
           labelText="Notes"
           value={notesValue}
           onChange={(event) => setNotesValue(event.target.value)}
@@ -436,4 +437,37 @@ WithMinimalContent.args = {
   ...defaultStoryProps,
   actions: 0,
   minimalContent: true,
+};
+
+export const WithStaticTitle = SlideOverTemplate.bind({});
+WithStaticTitle.args = {
+  ...defaultStoryProps,
+  actions: 0,
+  animateTitle: false,
+  includeOverlay: true,
+};
+
+export const WithStaticTitleAndActionToolbar = SlideOverTemplate.bind({});
+WithStaticTitleAndActionToolbar.args = {
+  ...defaultStoryProps,
+  actions: 0,
+  animateTitle: false,
+  includeOverlay: true,
+  actionToolbarButtons: [
+    {
+      label: 'Copy',
+      icon: Copy20,
+      onActionToolbarButtonClick: () => {},
+    },
+    {
+      label: 'Settings',
+      icon: Settings20,
+      onActionToolbarButtonClick: () => {},
+    },
+    {
+      label: 'Delete',
+      icon: Delete20,
+      onActionToolbarButtonClick: () => {},
+    },
+  ],
 };

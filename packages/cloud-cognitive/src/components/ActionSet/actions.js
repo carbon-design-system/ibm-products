@@ -28,7 +28,7 @@ export const actionsMapping = (labels, action) => {
       onClick:
         actionCall &&
         ((evt) => {
-          evt.persist();
+          evt && evt.persist();
           actionCall(evt);
         }),
     };

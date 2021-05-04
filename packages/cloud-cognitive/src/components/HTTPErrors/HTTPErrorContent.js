@@ -10,7 +10,6 @@ import React from 'react';
 
 // Other standard imports.
 import { arrayOf, shape, string } from 'prop-types';
-import cx from 'classnames';
 import { pkg /*, carbon */ } from '../../settings';
 
 // Carbon and package components we use.
@@ -20,31 +19,27 @@ import { Link } from 'carbon-components-react';
 const blockClass = `${pkg.prefix}--http-errors`;
 const componentName = 'HTTPErrors';
 
-export let HTTPErrors = ({
-  className,
+export let HTTPErrorContent = ({
   description,
   errorCodeLabel,
   title,
   links,
 }) => {
   return (
-    <div
-      className={cx(blockClass, `${blockClass}-content`, {
-        [className]: className,
-      })}>
+    <div className={`${blockClass}__content`}>
       {errorCodeLabel && (
-        <p className={cx(`${blockClass}-error-code-label`)}>{errorCodeLabel}</p>
+        <p className={`${blockClass}__error-code-label`}>{errorCodeLabel}</p>
       )}
-      {title && <h1 className={cx(`${blockClass}-title`)}>{title}</h1>}
+      {title && <h1 className={`${blockClass}__title`}>{title}</h1>}
       {description && (
-        <p className={cx(`${blockClass}-description`)}>{description}</p>
+        <p className={`${blockClass}__description`}>{description}</p>
       )}
       {links && links.length
         ? links.map((link) => (
             <Link
               url={link.url}
               key={link.text}
-              className={cx(`${blockClass}-link`)}>
+              className={`${blockClass}__link`}>
               {link.text}
             </Link>
           ))
@@ -54,20 +49,16 @@ export let HTTPErrors = ({
 };
 
 // Return a placeholder if not released and not enabled by feature flag
-HTTPErrors = pkg.checkComponentEnabled(HTTPErrors, componentName);
+HTTPErrorContent = pkg.checkComponentEnabled(HTTPErrorContent, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
-HTTPErrors.displayName = componentName;
+HTTPErrorContent.displayName = componentName;
 
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
-HTTPErrors.propTypes = {
-  /**
-   * Provide an optional class to be applied to the containing node
-   */
-  className: string,
+HTTPErrorContent.propTypes = {
   /**
    * String that will provide the description for the HTTP error code
    */

@@ -24,14 +24,15 @@ export let EmptyState = React.forwardRef(
       actionIcon,
       actionText,
       actionType,
+      className,
       customIllustrationAltText,
-      heading,
+      title,
       illustration,
       illustrationSize,
       linkText,
       linkUrl,
       onActionEvent,
-      subtext,
+      subtitle,
       ...rest
     },
     ref
@@ -50,17 +51,23 @@ export let EmptyState = React.forwardRef(
     };
 
     return (
-      <div className={blockClass} ref={ref} {...rest}>
+      <div
+        {
+          // Pass through any other property values as HTML attributes.
+          ...rest
+        }
+        className={cx(blockClass, className)}
+        ref={ref}>
         {illustration && renderIllustration()}
         <EmptyStateContent
           actionText={actionText}
           actionType={actionType}
           actionIcon={actionIcon}
-          heading={heading}
           linkText={linkText}
           linkUrl={linkUrl}
-          subtext={subtext}
           onActionEvent={onActionEvent}
+          subtitle={subtitle}
+          title={title}
         />
       </div>
     );
@@ -84,13 +91,13 @@ export const EmptyStateProps = {
    */
   actionType: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
   /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className: PropTypes.string,
+  /**
    * The alt text for custom provided illustrations
    */
   customIllustrationAltText: PropTypes.string,
-  /**
-   * Empty state heading
-   */
-  heading: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
   /**
    * Empty state illustration, specify the `src` of a custom illustration to be displayed.
    */
@@ -114,12 +121,14 @@ export const EmptyStateProps = {
   /**
    * Empty state subtext
    */
-  subtext: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  /**
+   * Empty state heading
+   */
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
 };
 
 export const EmptyStateDefaultProps = {
-  heading: 'Start by adding data assets',
-  subtext: 'Click Upload assets to upload your data',
   illustrationSize: 'lg',
 };
 

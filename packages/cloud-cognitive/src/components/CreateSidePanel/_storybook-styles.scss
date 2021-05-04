@@ -9,10 +9,6 @@
 
 $story-prefix: create-side-panel-stories__;
 
-body {
-  background-color: green !important;
-}
-
 .#{$story-prefix}form-item .bx--number {
   .bx--number input {
     background-color: $ui-02;

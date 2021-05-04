@@ -1,0 +1,104 @@
+//
+// Copyright IBM Corp. 2020, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '@carbon/import-once/scss/import-once';
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+
+@import 'carbon-components/scss/components/button/button';
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin create-side-panel {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+  $block-class: #{$pkg-prefix}--create-side-panel;
+
+  .#{$block-class} {
+    display: flex;
+    justify-content: flex-end;
+    --#{$pkg-prefix}-border-color: transparent;
+  }
+
+  .#{$block-class}.exp--side-panel__container {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .#{$block-class}.exp--side-panel__container .#{$block-class}__content-text {
+    padding-right: calc(20% - #{$spacing-05});
+  }
+
+  .#{$block-class}.exp--side-panel__container .exp--side-panel__title-text {
+    padding-right: calc(20% - #{$spacing-05});
+
+    margin-bottom: $spacing-02;
+  }
+
+  .#{$block-class}.exp--side-panel__container .exp--side-panel__subtitle-text {
+    padding-right: calc(20% - #{$spacing-05});
+
+    padding-bottom: $spacing-05;
+    color: $text-02;
+    border-bottom: 1px solid $ui-03;
+  }
+
+  .#{$block-class}.exp--side-panel__container .exp--side-panel__body-content {
+    padding-top: $spacing-05;
+  }
+
+  .#{$block-class}.exp--side-panel__container
+    .exp--side-panel__title-container {
+    // background-color: $ui-01;
+  }
+
+  .#{$block-class}.exp--create-side-panel.exp--side-panel__container {
+    // background-color: $ui-01;
+  }
+
+  .#{$block-class}__form {
+    padding-top: $spacing-05;
+  }
+
+  .#{$block-class}__form > * {
+    margin-bottom: $spacing-05;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .#{$block-class}__form-title-text {
+    @include carbon--type-style('productive-heading-02');
+    padding-bottom: $spacing-03;
+    // padding-right: calc(20% - #{$spacing-05});
+  }
+
+  .#{$block-class}__form-description-text {
+    // padding-right: calc(20% - #{$spacing-05});
+    @include carbon--type-style('body-long-01');
+  }
+
+  .#{$block-class}.exp--side-panel__container
+    .bx--btn.exp--side-panel__close-button {
+    display: none;
+  }
+
+  .#{$pkg-prefix}--create-side-panel__title {
+    @include carbon--type-style('productive-heading-03');
+
+    margin-bottom: $spacing-02;
+  }
+
+  .#{$pkg-prefix}--create-side-panel__subtitle {
+    @include carbon--type-style('body-short-01');
+
+    margin-bottom: $spacing-03;
+    color: $text-02;
+  }
+}
+
+@include exports('create-side-panel') {
+  @include create-side-panel;
+}

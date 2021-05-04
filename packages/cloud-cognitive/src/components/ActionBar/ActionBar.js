@@ -15,7 +15,11 @@ import { pkg } from '../../settings';
 import ReactResizeDetector from 'react-resize-detector';
 
 // Carbon and package components we use.
-import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
+import {
+  Button,
+  OverflowMenu,
+  OverflowMenuItem,
+} from 'carbon-components-react';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import {
   deprecateProp,
@@ -195,6 +199,7 @@ ActionBar.propTypes = {
   actions: PropTypes.oneOfType([
     PropTypes.arrayOf(
       PropTypes.shape({
+        ...Button.propTypes,
         iconDescription: PropTypes.string.isRequired,
         renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
           .isRequired,

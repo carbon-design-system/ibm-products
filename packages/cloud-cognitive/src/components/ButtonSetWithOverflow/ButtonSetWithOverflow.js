@@ -15,8 +15,10 @@ import { ButtonSet, Button } from 'carbon-components-react';
 import { TempComboButton } from './TempComboButton';
 
 import { pkg, carbon } from '../../settings';
-import { deprecateProp } from '../../global/js/utils/props-helper';
-import unwrapIfFragment from '../../global/js/utils/unwrap-if-fragment';
+import {
+  deprecateProp,
+  extractShapesArray,
+} from '../../global/js/utils/props-helper';
 const blockClass = `${pkg.prefix}--button-set-with-overflow`;
 const componentName = 'ButtonSetWithOverflow';
 
@@ -85,12 +87,11 @@ export const ButtonSetWithOverflow = ({
     if (buttons) {
       setItemArray(buttons);
     } else {
-      const unwrapped = unwrapIfFragment(children);
       setItemArray(
-        unwrapped.map((item) => {
-          const { children: label, ...rest } = item.props;
-          return { label, ...rest };
-        })
+        extractShapesArray(children)?.map((shape) => ({
+          label: shape.children,
+          ...shape,
+        }))
       );
     }
   }, [buttons, children]);

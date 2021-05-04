@@ -25,8 +25,10 @@ import { TagSet } from '../TagSet';
 import { ButtonSetWithOverflow } from '../ButtonSetWithOverflow';
 import { pkg } from '../../settings';
 import { ChevronUp16 } from '@carbon/icons-react';
-import { deprecatePropUsage } from '../../global/js/utils/props-helper';
-import unwrapIfFragment from '../../global/js/utils/unwrap-if-fragment';
+import {
+  deprecatePropUsage,
+  extractShapesArray,
+} from '../../global/js/utils/props-helper';
 
 const componentName = 'PageHeader';
 const blockClass = `${pkg.prefix}--page-header`;
@@ -51,6 +53,7 @@ export let PageHeader = ({
 }) => {
   const [hasActionBar, setHasActionBar] = useState(false);
   const [actionBarItemArray, setActionBarItemArray] = useState([]);
+  const [pageActionsItemArray, setPageActionsItemArray] = useState([]);
   const [metrics, setMetrics] = useState({});
   const [scrollYValue, setScrollYValue] = useState(0);
   const [componentCssCustomProps, setComponentCssCustomProps] = useState({});
@@ -326,7 +329,7 @@ export let PageHeader = ({
       setScrollYValue(current.scrollY);
     },
     [
-      actionBarItemArray,
+      actionBarItems,
       availableSpace,
       breadcrumbItems,
       keepBreadcrumbAndTabs,
@@ -342,7 +345,7 @@ export let PageHeader = ({
     // on window resieze and other updates some values may have changed
     checkUpdateVerticalSpace();
   }, [
-    actionBarItemArray,
+    actionBarItems,
     availableSpace,
     breadcrumbItems,
     keepBreadcrumbAndTabs,
@@ -356,28 +359,23 @@ export let PageHeader = ({
   useEffect(() => {
     // Breadcrumb row only rendered if true
     // eslint-disable-next-line
-    setHasBreadcrumbRow(
-      !(breadcrumbItems === undefined && actionBarItemArray.length > 0)
-    );
-  }, [actionBarItemArray, breadcrumbItems]);
+    setHasBreadcrumbRow(!(breadcrumbItems === undefined && actionBarItems));
+  }, [actionBarItems, breadcrumbItems]);
 
   useEffect(() => {
-    setHasActionBar(actionBarItemArray.length > 0);
-  }, [actionBarItemArray]);
-
-  useEffect(() => {
-    let newActionBarItemArray;
-    // create child array from children which may be a fragment
-    if (actionBarItems) {
-      if (Array.isArray(actionBarItems)) {
-        newActionBarItemArray = actionBarItems;
-      } else {
-        const unwrapped = unwrapIfFragment(actionBarItems);
-        newActionBarItemArray = unwrapped.map((item) => item.props);
-      }
-    }
-    setActionBarItemArray(newActionBarItemArray || []);
+    setHasActionBar(actionBarItems);
   }, [actionBarItems]);
+
+  useEffect(() => {
+    setActionBarItemArray(extractShapesArray(actionBarItems));
+  }, [actionBarItems]);
+
+  useEffect(() => {
+    const shapes = extractShapesArray(pageActions);
+    setPageActionsItemArray(
+      shapes?.map((shape) => ({ label: shape.children, ...shape }))
+    );
+  }, [pageActions]);
 
   useEffect(() => {
     // Determines the amount of space needed below the title
@@ -405,7 +403,7 @@ export let PageHeader = ({
     if (
       !result &&
       metrics.headerHeight > 0 &&
-      (breadcrumbItems || actionBarItemArray || tags || navigation)
+      (breadcrumbItems || actionBarItems || tags || navigation)
     ) {
       const startAddingAt = parseFloat(layout05, 10) * parseInt(baseFontSize);
       const scrollRemaining = metrics.headerHeight - scrollYValue;
@@ -427,7 +425,7 @@ export let PageHeader = ({
     }));
     setBackgroundOpacity(result);
   }, [
-    actionBarItemArray,
+    actionBarItems,
     background,
     breadcrumbItems,
     metrics.breadcrumbRowHeight,
@@ -444,8 +442,7 @@ export let PageHeader = ({
 
   const nextToTabsCheck = () => {
     return (
-      actionBarItemArray === undefined &&
-      scrollYValue + metrics.headerTopValue > 0
+      actionBarItems === undefined && scrollYValue + metrics.headerTopValue > 0
     );
   };
 
@@ -493,7 +490,7 @@ export let PageHeader = ({
                 [`${blockClass}__breadcrumb-row--next-to-tabs`]: nextToTabsCheck(),
                 [`${blockClass}__breadcrumb-row--has-breadcrumbs`]: breadcrumbItems,
                 [`${blockClass}__breadcrumb-row--has-action-bar`]:
-                  actionBarItemArray || pageActions,
+                  actionBarItems || pageActions,
               })}>
               <div className={`${blockClass}__breadcrumb-row--container`}>
                 <Column
@@ -550,7 +547,7 @@ export let PageHeader = ({
                               <ButtonSetWithOverflow
                                 className={`${blockClass}__button-set--in-breadcrumb`}
                                 onWidthChange={handleButtonSetWidthChange}
-                                buttons={pageActions}
+                                buttons={pageActionsItemArray}
                               />
                             </div>
                           )}
@@ -580,7 +577,7 @@ export let PageHeader = ({
                   [`${blockClass}__title-row--under-action-bar`]: hasActionBar,
                   [`${blockClass}__title-row--sticky`]:
                     pageActions !== undefined &&
-                    actionBarItemArray === undefined &&
+                    actionBarItems === undefined &&
                     hasBreadcrumbRow,
                 }
               )}>
@@ -608,7 +605,7 @@ export let PageHeader = ({
                   })}>
                   <ButtonSet
                     className={`${blockClass}__page-actions-container`}>
-                    {pageActions.map(
+                    {pageActionsItemArray.map(
                       ({ kind, label, onClick, ...rest }, index) => (
                         <Button
                           {...rest}
@@ -643,7 +640,7 @@ export let PageHeader = ({
           This buffer is used in CSS instead to add vertical space after the last row but only if there is no navigation row
            */}
           {(breadcrumbItems ||
-            actionBarItemArray ||
+            actionBarItems ||
             title ||
             pageActions ||
             availableSpace ||
@@ -708,9 +705,9 @@ PageHeader = pkg.checkComponentEnabled(PageHeader, componentName);
 
 PageHeader.propTypes = {
   /**
-   * One or more ActionBarItem components, passed in as React element(s).
-   * If provided, these are rendered at the top right of the header as
-   * action icons. Optional.
+   * Specifies the action bar items. Each item is specified as an object
+   * with the properties of a Carbon Button in icon only form. Button kind, size, tooltipPosition,
+   * tooltipAlignment abd type are ignored.
    */
   actionBarItems: PropTypes.oneOfType([
     PropTypes.arrayOf(
@@ -718,7 +715,6 @@ PageHeader.propTypes = {
         iconDescription: PropTypes.string.isRequired,
         renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
           .isRequired,
-        onClick: PropTypes.func,
       })
     ),
     deprecatePropUsage(
@@ -770,13 +766,15 @@ PageHeader.propTypes = {
    */
   navigation: PropTypes.element, // Supports Tabs
   /**
-   * Specifies the primary page actions as a React element. zero, one or more page action button shapes label + onClick
+   * Specifies the primary page actions. Each action is specified as an object
+   * with the properties of a Carbon Button plus:
+   * - label: node
    */
   pageActions: PropTypes.oneOfType([
     PropTypes.arrayOf(
       PropTypes.shape({
-        label: PropTypes.node,
-        onClick: PropTypes.func,
+        ...Button.propTypes,
+        label: PropTypes.node.isRequired,
       })
     ),
     deprecatePropUsage(

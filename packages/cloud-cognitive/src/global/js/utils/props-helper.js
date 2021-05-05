@@ -5,7 +5,10 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+import React from 'react';
 import PropTypes from 'prop-types';
+
+import unwrapIfFragment from './unwrap-if-fragment';
 
 // helper functions for component props
 
@@ -91,4 +94,23 @@ export const deprecateProp = (validator, additionalInfo) => {
     },
     additionalInfo
   );
+};
+
+/**
+ * Takes items as fragment, node or array
+ * @param {node || array} items - which may have shape to extract
+ * @returns Array of items
+ */
+export const extractShapesArray = (items) => {
+  // unwrap if items or the first index looks like a React element or fragment
+  if (
+    items &&
+    (items?.[0]?.props ||
+      items?.[0]?.type === React.Fragment ||
+      items.type === React.Fragment)
+  ) {
+    return unwrapIfFragment(items).map((item) => ({ ...item.props }));
+  }
+
+  return Array.isArray(items) ? items : [];
 };

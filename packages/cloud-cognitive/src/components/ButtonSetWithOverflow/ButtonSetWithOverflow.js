@@ -169,6 +169,7 @@ ButtonSetWithOverflow.propTypes = {
   buttons: PropTypes.arrayOf(
     PropTypes.shape({
       ...Button.propTypes,
+      kind: Button.propTypes.kind,
       label: PropTypes.node,
       onClick: Button.propTypes.onClick,
     })

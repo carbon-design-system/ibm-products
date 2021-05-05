@@ -712,7 +712,9 @@ PageHeader.propTypes = {
   actionBarItems: PropTypes.oneOfType([
     PropTypes.arrayOf(
       PropTypes.shape({
+        ...Button.propTypes,
         iconDescription: PropTypes.string.isRequired,
+        onClick: Button.propTypes.onClick,
         renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
           .isRequired,
       })
@@ -776,6 +778,7 @@ PageHeader.propTypes = {
     PropTypes.arrayOf(
       PropTypes.shape({
         ...Button.propTypes,
+        kind: Button.propTypes.kind,
         label: PropTypes.node.isRequired,
         onClick: Button.propTypes.onClick,
       })

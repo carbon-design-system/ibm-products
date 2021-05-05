@@ -62,8 +62,7 @@ export const TempComboButton = ({ buttons, className, label, size }) => {
 TempComboButton.propTypes = {
   /**
    * Specifies the buttons for the component. Each button is specified as an object
-   * with the properties of a Carbon Button plus:
-   * - label: node
+   * with the properties of a Carbon Button plus label, kind is ignored.
    *
    * Carbon Button API https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */

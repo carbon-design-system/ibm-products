@@ -203,9 +203,9 @@ ActionBar.propTypes = {
       PropTypes.shape({
         ...Button.propTypes,
         iconDescription: PropTypes.string.isRequired,
+        onClick: Button.propTypes.onClick,
         renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
           .isRequired,
-        onClick: Button.propTypes.onClick,
       })
     ),
   ]),

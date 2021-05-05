@@ -13,7 +13,6 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
 
-import { TooltipIcon } from 'carbon-components-react';
 // Carbon and package components we use.
 import {
   User20,

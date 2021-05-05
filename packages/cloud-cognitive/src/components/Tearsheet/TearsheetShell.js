@@ -179,6 +179,7 @@ export const TearsheetShell = React.forwardRef(
             <ModalHeader
               className={cx(`${bc}__header`, {
                 [`${bc}__header--with-close-icon`]: hasCloseIcon,
+                [`${bc}__header--with-nav`]: navigation,
               })}
               closeClassName={cx({
                 [`${bc}__header--no-close-icon`]: !hasCloseIcon,

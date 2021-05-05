@@ -13,13 +13,12 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
 
+import { TooltipIcon } from 'carbon-components-react';
 // Carbon and package components we use.
 import {
-  User16,
   User20,
   User24,
   User32,
-  Group16,
   Group20,
   Group24,
   Group32,
@@ -45,6 +44,7 @@ export let UserProfileImage = React.forwardRef(
       imageDescription,
       size,
       theme,
+      tooltipText,
       // Collect any other property values passed in.
       ...rest
     },
@@ -52,15 +52,11 @@ export let UserProfileImage = React.forwardRef(
   ) => {
     const icons = {
       user: {
-        xs: User16,
-        sm: User16,
         md: User20,
         lg: User24,
         xlg: User32,
       },
       group: {
-        xs: Group16,
-        sm: Group16,
         md: Group20,
         lg: Group24,
         xlg: Group32,
@@ -89,15 +85,16 @@ export let UserProfileImage = React.forwardRef(
         )
       : initials
       ? formatInitials
-      : icons[kind][size];
+      : kind && size && icons[kind][size];
 
-    return (
+    return FillItem ? (
       <div
         {
           // Pass through any other property values as HTML attributes.
           ...rest
         }
         ref={ref}
+        title={tooltipText && tooltipText}
         className={cx([
           blockClass,
           className,
@@ -107,7 +104,7 @@ export let UserProfileImage = React.forwardRef(
         ])}>
         <FillItem />
       </div>
-    );
+    ) : null;
   }
 );
 
@@ -158,9 +155,13 @@ UserProfileImage.propTypes = {
   /**
    * Set the size of the avatar circle
    */
-  size: PropTypes.oneOf(['xlg', 'lg', 'md', 'sm', 'xs']).isRequired,
+  size: PropTypes.oneOf(['xlg', 'lg', 'md']).isRequired,
   /**
    * Set theme in which the component will be rendered
    */
   theme: PropTypes.oneOf(['light', 'dark']).isRequired,
+  /**
+   * Pass in the display name to have it shown on hover
+   */
+  tooltipText: PropTypes.string,
 };

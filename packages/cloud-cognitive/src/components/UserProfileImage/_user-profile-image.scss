@@ -8,7 +8,7 @@
 @import '@carbon/import-once/scss/import-once';
 @import '../../global/styles/carbon-settings'; // goes before carbon imports as it affects how carbon is used.
 @import '../../global/styles/project-settings';
-@import './colorMap';
+@import './color-map';
 
 $block-class: #{$pkg-prefix}-user-profile-avatar;
 

@@ -15,6 +15,12 @@ import image from './headshot.png';
 import styles from './_storybook.scss'; // import storybook which includes component and additional storybook styles
 
 const storybookPrefix = getStorybookPrefix(pkg, 'UserProfileImage');
+const defaultArgs = {
+  backgroundColor: 'light-cyan',
+  theme: 'light',
+  size: 'xlg',
+};
+
 export default {
   title: `${storybookPrefix}/UserProfileImage`,
   component: UserProfileImage,
@@ -40,7 +46,7 @@ export default {
     size: {
       control: {
         type: 'radio',
-        options: ['xlg', 'lg', 'md', 'sm', 'xs'],
+        options: ['xlg', 'lg', 'md'],
       },
     },
   },
@@ -56,32 +62,26 @@ const Template = (args) => {
 
 export const Default = Template.bind({});
 Default.args = {
-  backgroundColor: 'light-cyan',
-  theme: 'light',
-  size: 'xlg',
+  ...defaultArgs,
   kind: 'user',
 };
 
 export const WithGroupIcon = Template.bind({});
 WithGroupIcon.args = {
-  backgroundColor: 'light-cyan',
-  theme: 'light',
+  ...defaultArgs,
   kind: 'group',
-  size: 'xlg',
 };
 
 export const WithInitials = Template.bind({});
 WithInitials.args = {
-  backgroundColor: 'light-cyan',
-  theme: 'light',
+  ...defaultArgs,
   initials: 'thomas j. watson',
-  size: 'xlg',
+  tooltipText: 'Thomas Watson',
 };
 
 export const WithImage = Template.bind({});
 WithImage.args = {
-  backgroundColor: 'light-cyan',
-  theme: 'light',
+  ...defaultArgs,
   image,
-  size: 'xlg',
+  imageDescription: 'image here',
 };

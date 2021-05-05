@@ -160,17 +160,17 @@ export const ButtonSetWithOverflow = ({
 
 ButtonSetWithOverflow.propTypes = {
   /**
-   * Button shape things for us to render. Each button is specified as an
-   * object with an optional field 'label' to supply the button label.
-   * Additional fields in the object will be passed to the Button component,
-   * and these can include 'kind', 'onClick', 'className', and any other Button
-   * props (but NB not a ref). Any other fields in the object will be passed
-   * through to the button element as HTML attributes.
+  /**
+   * Specifies the buttons for the ButtonSetWithOverflow. Each item is specified as an object
+   * with the properties of a Carbon Button plus a label.
+   *
+   * Carbon Button API https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
   buttons: PropTypes.arrayOf(
     PropTypes.shape({
       ...Button.propTypes,
       label: PropTypes.node,
+      onClick: Button.propTypes.onClick,
     })
   ),
   /**

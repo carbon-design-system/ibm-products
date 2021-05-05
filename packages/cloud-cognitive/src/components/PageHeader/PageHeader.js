@@ -769,12 +769,15 @@ PageHeader.propTypes = {
    * Specifies the primary page actions. Each action is specified as an object
    * with the properties of a Carbon Button plus:
    * - label: node
+   *
+   * Carbon Button API https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
   pageActions: PropTypes.oneOfType([
     PropTypes.arrayOf(
       PropTypes.shape({
         ...Button.propTypes,
         label: PropTypes.node.isRequired,
+        onClick: Button.propTypes.onClick,
       })
     ),
     deprecatePropUsage(

@@ -64,12 +64,15 @@ TempComboButton.propTypes = {
    * Specifies the buttons for the component. Each button is specified as an object
    * with the properties of a Carbon Button plus:
    * - label: node
+   *
+   * Carbon Button API https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
   buttons: PropTypes.oneOfType([
     PropTypes.arrayOf(
       PropTypes.shape({
         ...Button.propTypes,
         label: PropTypes.node,
+        onClick: Button.propTypes.onClick,
       })
     ),
   ]), // expects action bar item as array or in fragment,

@@ -15,8 +15,10 @@ import { ButtonSet, Button } from 'carbon-components-react';
 import { TempComboButton } from './TempComboButton';
 
 import { pkg, carbon } from '../../settings';
-import { deprecateProp } from '../../global/js/utils/props-helper';
-import unwrapIfFragment from '../../global/js/utils/unwrap-if-fragment';
+import {
+  deprecateProp,
+  extractShapesArray,
+} from '../../global/js/utils/props-helper';
 const blockClass = `${pkg.prefix}--button-set-with-overflow`;
 const componentName = 'ButtonSetWithOverflow';
 
@@ -85,12 +87,11 @@ export const ButtonSetWithOverflow = ({
     if (buttons) {
       setItemArray(buttons);
     } else {
-      const unwrapped = unwrapIfFragment(children);
       setItemArray(
-        unwrapped.map((item) => {
-          const { children: label, ...rest } = item.props;
-          return { label, ...rest };
-        })
+        extractShapesArray(children)?.map((shape) => ({
+          label: shape.children,
+          ...shape,
+        }))
       );
     }
   }, [buttons, children]);
@@ -159,17 +160,18 @@ export const ButtonSetWithOverflow = ({
 
 ButtonSetWithOverflow.propTypes = {
   /**
-   * Button shape things for us to render. Each button is specified as an
-   * object with an optional field 'label' to supply the button label.
-   * Additional fields in the object will be passed to the Button component,
-   * and these can include 'kind', 'onClick', 'className', and any other Button
-   * props (but NB not a ref). Any other fields in the object will be passed
-   * through to the button element as HTML attributes.
+  /**
+   * Specifies the buttons for the ButtonSetWithOverflow. Each item is specified as an object
+   * with the properties of a Carbon Button plus a label.
+   *
+   * Carbon Button API https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
   buttons: PropTypes.arrayOf(
     PropTypes.shape({
       ...Button.propTypes,
+      kind: Button.propTypes.kind,
       label: PropTypes.node,
+      onClick: Button.propTypes.onClick,
     })
   ),
   /**

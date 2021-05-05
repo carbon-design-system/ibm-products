@@ -11,7 +11,13 @@ import { render, screen } from '@testing-library/react';
 import { pkg, carbon } from '../../settings';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 
-import { BreadcrumbItem, Tab, Tabs, Tag } from 'carbon-components-react';
+import {
+  BreadcrumbItem,
+  Button,
+  Tab,
+  Tabs,
+  Tag,
+} from 'carbon-components-react';
 import { Lightning16, Bee32 } from '@carbon/icons-react';
 
 import { PageHeader } from '.';
@@ -66,6 +72,22 @@ const pageActions = [
     onClick: () => {},
   },
 ];
+
+const pageActionsDepTest = pageActions.map(({ label, ...rest }, index) => (
+  <Button {...rest} key={index}>
+    {label}
+  </Button>
+));
+
+const pageActionsDepTest2 = (
+  <>
+    {pageActions.map(({ label, ...rest }, index) => (
+      <Button {...rest} key={index}>
+        {label}
+      </Button>
+    ))}
+  </>
+);
 
 const subtitle = 'Optional subtitle if necessary';
 const tabBar = (
@@ -222,6 +244,34 @@ describe('PageHeader', () => {
 
     expect(warn).toBeCalledWith(
       "The usage of prop 'actionBarItems' of 'PageHeader' has been changed and you should update. Expects an array of objects with the following properties: iconDescription, renderIcon and onClick."
+    );
+
+    warn.mockRestore(); // Remove mock
+  });
+
+  test('with deprecated page actions', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    render(<PageHeader pageActions={pageActionsDepTest} />);
+
+    screen.getByText('Primary button');
+
+    expect(warn).toBeCalledWith(
+      "The usage of prop 'pageActions' of 'PageHeader' has been changed and you should update. Expects an array of objects with the following properties: label and onClick."
+    );
+
+    warn.mockRestore(); // Remove mock
+  });
+
+  test('with deprecated page actions in a fragment', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    render(<PageHeader pageActions={pageActionsDepTest2} />);
+
+    screen.getByText('Primary button');
+
+    expect(warn).toBeCalledWith(
+      "The usage of prop 'pageActions' of 'PageHeader' has been changed and you should update. Expects an array of objects with the following properties: label and onClick."
     );
 
     warn.mockRestore(); // Remove mock

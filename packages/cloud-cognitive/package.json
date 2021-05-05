@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive",
   "description": "Carbon for Cloud & Cognitive UI components",
-  "version": "0.36.10",
+  "version": "0.36.11",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -32,7 +32,9 @@
     "build:js-esm": "cross-env BABEL_ENV=esm yarn build:js-modules -d es",
     "build:js-cjs": "cross-env BABEL_ENV=cjs yarn build:js-modules -d lib",
     "build:js-modules": "babel src --ignore '**/__tests__','**/*.test.js','**/*.stories.js','src/utils/**/*'",
-    "build:scss": "for f in src/*.scss; do bundler bundle:scss ${f} -o css/build; copyfiles 'css/build/**/*' css -u 2; done && rimraf css/build && copyfiles 'src/**/*.scss' scss -u 1",
+    "build:scss": "yarn build:css-dev; yarn build:css-min; copyfiles 'src/**/*.scss' scss -u 1",
+    "build:css-dev": "sass --style=expanded --load-path node_modules --load-path ../../node_modules src:css",
+    "build:css-min": "sass --style=compressed --no-source-map --load-path node_modules --load-path ../../node_modules src/index.scss:css/index.min.css src/index-full-carbon.scss:css/index-full-carbon.min.css src/index-without-carbon.scss:css/index-without-carbon.min.css src/index-without-carbon-released-only.scss:css/index-without-carbon-released-only.min.css",
     "ci-check": "node scripts/import",
     "clean": "rimraf es lib css scss",
     "generate": "cross-env FORCE_COLOR=1 node scripts/generate",
@@ -42,19 +44,19 @@
   "devDependencies": {
     "@babel/cli": "^7.13.14",
     "@babel/core": "^7.13.15",
-    "@carbon/bundler": "^10.11.0",
     "babel-preset-ibm-cloud-cognitive": "^0.3.1",
     "chalk": "^4.1.0",
     "change-case": "^4.1.2",
     "copyfiles": "^2.4.1",
     "cross-env": "^7.0.3",
+    "dart-sass": "^1.25.0",
     "fs-extra": "^9.1.0",
     "rimraf": "^3.0.2",
     "yargs": "^16.2.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@carbon/ibm-cloud-cognitive-security": "^0.4.15",
+    "@carbon/ibm-cloud-cognitive-security": "^0.4.16",
     "@carbon/telemetry": "^0.0.0-alpha.6",
     "react-resize-detector": "^6.0.0"
   },

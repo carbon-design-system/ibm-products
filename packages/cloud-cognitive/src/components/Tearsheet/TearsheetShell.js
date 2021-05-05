@@ -258,6 +258,8 @@ TearsheetShell.propTypes = {
    * component, and these can include 'disabled', 'ref', 'className', and any
    * other Button props. Any other fields in the object will be passed through
    * to the button element as HTML attributes.
+   *
+   * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
   actions: PropTypes.arrayOf(
     // NB we don't include the validator here, as the component wrapping this
@@ -267,6 +269,8 @@ TearsheetShell.propTypes = {
       kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
       label: PropTypes.string,
       loading: PropTypes.bool,
+      // we duplicate this Button prop to improve the DocGen here
+      onClick: Button.propTypes.onClick,
     })
   ),
 

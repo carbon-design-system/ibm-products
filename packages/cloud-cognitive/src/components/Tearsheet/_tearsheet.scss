@@ -154,6 +154,14 @@
     padding-left: $spacing-06;
   }
 
+  // buttons inside button sets in the header action area have 8px gap
+  .#{$block-class}
+    .#{$block-class}__header-actions
+    .#{$carbon-prefix}--btn-set
+    .#{$carbon-prefix}--btn:not(:first-of-type) {
+    margin-left: $spacing-03;
+  }
+
   .#{$block-class} .#{$block-class}__header--no-close-icon {
     display: none;
   }

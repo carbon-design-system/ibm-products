@@ -194,7 +194,9 @@ ActionBar.propTypes = {
   /**
    * Specifies the action bar items. Each item is specified as an object
    * with the properties of a Carbon Button in icon only form. Button kind, size, tooltipPosition,
-   * tooltipAlignment abd type are ignored.
+   * tooltipAlignment and type are ignored.
+   *
+   * Carbon Button API https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
   actions: PropTypes.oneOfType([
     PropTypes.arrayOf(

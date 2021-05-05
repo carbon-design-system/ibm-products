@@ -22,6 +22,7 @@ import { Lightning16, Bee32 } from '@carbon/icons-react';
 
 import { PageHeader } from '.';
 import { ActionBarItem } from '../ActionBar';
+import { mockHTMLElement } from '../../global/js/utils/test-helper';
 
 const blockClass = `${pkg.prefix}--page-header`;
 
@@ -117,11 +118,93 @@ const title = 'Page title';
 import uuidv4 from '../../global/js/utils/uuidv4';
 jest.mock('../../global/js/utils/uuidv4');
 
+const sizes = {
+  'bx--btn': {
+    get offsetWidth() {
+      return 200;
+    },
+  },
+  'exp--page-header': {
+    get offsetWidth() {
+      return window.innerWidth;
+    },
+  },
+  'exp--page-header__breadcrumb-row': {
+    get offsetWidth() {
+      return window.innerWidth;
+    },
+  },
+  'exp--breadcrumb-with-overflow': {
+    get offsetWidth() {
+      return window.innerWidth * 0.6;
+    },
+  },
+  'exp--tag-set': {
+    get offsetWidth() {
+      return window.innerWidth * 0.25;
+    },
+  },
+  'exp--tag-set__sizing-tag': {
+    get offsetWidth() {
+      return window.innerWidth * 0.05;
+    },
+  },
+  'exp--button-set-with-overflow__button-container': {
+    get offsetWidth() {
+      return window.innerWidth * 0.4;
+    },
+  },
+  'exp--button-set-with-overflow': {
+    get offsetWidth() {
+      return window.innerWidth * 0.4;
+    },
+  },
+  'bx--breadcrumb-item': {
+    get offsetWidth() {
+      return 200;
+    },
+  },
+  'exp--action-bar__displayed-items': {
+    get offsetWidth() {
+      return window.innerWidth * 0.3;
+    },
+  },
+};
+const testSizes = (el, property) => {
+  const classes = el.getAttribute('class').split(' ');
+
+  for (let cls of classes) {
+    const val = sizes[cls] ? sizes[cls][property] : -1;
+    if (val >= 0) {
+      return val;
+    }
+  }
+  return -1;
+};
+
 describe('PageHeader', () => {
   const { ResizeObserver } = window;
+  let mockElement;
   const mocks = [];
 
+  window.innerWidth = 2000;
+
   beforeEach(() => {
+    mockElement = mockHTMLElement({
+      offsetWidth: {
+        get: function () {
+          let width = testSizes(this, 'offsetWidth');
+
+          if (width < 0) {
+            console.log(this.outerHTML);
+            width = window.innerWidth;
+          }
+
+          return width;
+        },
+      },
+    });
+
     mocks.push(uuidv4.mockImplementation(() => 'testid'));
     mocks.push(jest.spyOn(window, 'scrollTo').mockImplementation());
     window.ResizeObserver = jest.fn().mockImplementation(() => ({
@@ -135,6 +218,7 @@ describe('PageHeader', () => {
     mocks.forEach((mock) => {
       mock.mockRestore();
     });
+    mockElement.mockRestore();
     jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
   });

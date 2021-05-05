@@ -707,7 +707,7 @@ PageHeader.propTypes = {
   /**
    * Specifies the action bar items. Each item is specified as an object
    * with the properties of a Carbon Button in icon only form. Button kind, size, tooltipPosition,
-   * tooltipAlignment abd type are ignored.
+   * tooltipAlignment and type are ignored.
    */
   actionBarItems: PropTypes.oneOfType([
     PropTypes.arrayOf(

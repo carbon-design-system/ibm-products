@@ -1204,7 +1204,7 @@ path:nth-of-type(1),
 
 .exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__header {
   margin: 0;
-  padding: var(--cds-spacing-07, 2rem);
+  padding: var(--cds-spacing-06, 1.5rem) var(--cds-spacing-07, 2rem);
   border-bottom: 1px solid var(--cds-ui-03, #e0e0e0);
 }
 

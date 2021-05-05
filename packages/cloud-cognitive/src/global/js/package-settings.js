@@ -12,6 +12,7 @@ const defaults = {
   component: {
     // reviewed and released components:
     AboutModal: true,
+    ContextHeader: true,
     CreateModal: true,
     NotificationsPanel: true,
     StatusIcon: true,
@@ -22,7 +23,6 @@ const defaults = {
     ActionBarItem: false,
     APIKeyDownloader: false,
     APIKeyModal: false,
-    ContextHeader: false,
     EmptyState: false,
     ErrorEmptyState: false,
     ExampleComponent: false,

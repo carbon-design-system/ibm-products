@@ -126,8 +126,12 @@
 
   .#{$block-class}.#{$block-class}--wide .#{$block-class}__header {
     margin: 0;
-    padding: $spacing-07;
+    padding: $spacing-06 $spacing-07;
     border-bottom: 1px solid $ui-03;
+  }
+
+  .#{$block-class}.#{$block-class}--wide .#{$block-class}__header--with-nav {
+    padding-bottom: 0;
   }
 
   .#{$block-class}.#{$block-class}--narrow .#{$block-class}__header {
@@ -150,6 +154,14 @@
     padding-left: $spacing-06;
   }
 
+  // buttons inside button sets in the header action area have 8px gap
+  .#{$block-class}
+    .#{$block-class}__header-actions
+    .#{$carbon-prefix}--btn-set
+    .#{$carbon-prefix}--btn:not(:first-of-type) {
+    margin-left: $spacing-03;
+  }
+
   .#{$block-class} .#{$block-class}__header--no-close-icon {
     display: none;
   }
@@ -170,10 +182,6 @@
 
   .#{$block-class} .#{$block-class}__header-navigation {
     margin: $spacing-04 0 0;
-  }
-
-  .#{$block-class}.#{$block-class}--wide .#{$block-class}__header-navigation {
-    margin: $spacing-04 0 calc(-1 * #{$spacing-06});
   }
 
   .#{$block-class} .#{$block-class}__body {

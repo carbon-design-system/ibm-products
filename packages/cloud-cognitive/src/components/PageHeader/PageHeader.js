@@ -28,6 +28,7 @@ import { ChevronUp16 } from '@carbon/icons-react';
 import {
   deprecatePropUsage,
   extractShapesArray,
+  prepareProps,
 } from '../../global/js/utils/props-helper';
 
 const componentName = 'PageHeader';
@@ -52,6 +53,7 @@ export let PageHeader = React.forwardRef(
       tags,
       title,
       titleIcon: TitleIcon,
+      ...rest
     },
     ref
   ) => {
@@ -70,8 +72,8 @@ export let PageHeader = React.forwardRef(
     const [backgroundOpacity, setBackgroundOpacity] = useState(0);
     const [lastRowBufferActive, setLastRowBufferActive] = useState(false);
     const dynamicRefs = useRef({});
-    const headerElRef = useRef(null);
-    const [headerEl, setHeaderEl] = useState({ current: null });
+    const localHeaderRef = useRef(null);
+    const headerRef = ref || localHeaderRef;
     const [actionBarMaxWidth, setActionBarMaxWidth] = useState(0);
     const [actionBarMinWidth, setActionBarMinWidth] = useState(0);
     const [
@@ -84,10 +86,6 @@ export let PageHeader = React.forwardRef(
     ] = useState(0);
     const [actionBarColumnWidth, setActionBarColumnWidth] = useState(0);
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
-
-    useEffect(() => {
-      setHeaderEl(ref || headerElRef);
-    }, [ref, headerElRef]);
 
     useEffect(() => {
       let newActionBarWidth = 'initial';
@@ -151,12 +149,12 @@ export let PageHeader = React.forwardRef(
     const getDynamicRef = (selector) => {
       // would love to do this differently but digging in the dom seems easier
       // than getting a ref to a conditionally rendered item
-      if (!headerEl.current) {
+      if (!headerRef.current) {
         return undefined;
       } else {
-        let ref = dynamicRefs.current[selector];
-        if (!ref || ref.parentNode === null) {
-          dynamicRefs.current[selector] = headerEl.current.querySelector(
+        let dRef = dynamicRefs.current[selector];
+        if (!dRef || dRef.parentNode === null) {
+          dynamicRefs.current[selector] = headerRef.current.querySelector(
             selector
           );
         }
@@ -177,10 +175,12 @@ export let PageHeader = React.forwardRef(
       const availableRowEl = getDynamicRef(`.${blockClass}__available-row`);
       const navigationRowEl = getDynamicRef(`.${blockClass}__navigation-row`);
 
-      update.headerHeight = headerEl.current
-        ? headerEl.current.clientHeight
+      update.headerHeight = headerRef.current
+        ? headerRef.current.clientHeight
         : 0;
-      update.headerWidth = headerEl.current ? headerEl.current.offsetWidth : 0;
+      update.headerWidth = headerRef.current
+        ? headerRef.current.offsetWidth
+        : 0;
 
       update.breadcrumbRowHeight = breadcrumbRowEl
         ? breadcrumbRowEl.clientHeight
@@ -373,15 +373,15 @@ export let PageHeader = React.forwardRef(
     useEffect(() => {
       // Breadcrumb row only rendered if true
       // eslint-disable-next-line
-      setHasBreadcrumbRow(!(breadcrumbItems === undefined && actionBarItems));
+      setHasBreadcrumbRow(
+        !(breadcrumbItems === undefined && actionBarItems === undefined)
+      );
     }, [actionBarItems, breadcrumbItems]);
 
     useEffect(() => {
-      setHasActionBar(actionBarItems);
-    }, [actionBarItems]);
-
-    useEffect(() => {
-      setActionBarItemArray(extractShapesArray(actionBarItems));
+      const newShapes = extractShapesArray(actionBarItems);
+      setHasActionBar(newShapes.length);
+      setActionBarItemArray(newShapes);
     }, [actionBarItems]);
 
     useEffect(() => {
@@ -488,6 +488,7 @@ export let PageHeader = React.forwardRef(
     return (
       <ReactResizeDetector handleHeight onResize={handleResize}>
         <section
+          {...rest}
           className={cx([
             blockClass,
             `${blockClass}--no-margins-below-row`,
@@ -496,7 +497,7 @@ export let PageHeader = React.forwardRef(
               [`${blockClass}--show-background`]: backgroundOpacity > 0,
             },
           ])}
-          ref={headerEl}
+          ref={headerRef}
           style={componentCssCustomProps}>
           <Grid>
             {hasBreadcrumbRow ? (
@@ -732,7 +733,12 @@ PageHeader.propTypes = {
   actionBarItems: PropTypes.oneOfType([
     PropTypes.arrayOf(
       PropTypes.shape({
-        ...Button.propTypes,
+        ...prepareProps(Button.propTypes, [
+          'kind',
+          'size',
+          'tooltipPosition',
+          'tooltipAlignment',
+        ]),
         iconDescription: PropTypes.string.isRequired,
         onClick: Button.propTypes.onClick,
         renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object])

@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { pkg, carbon } from '../../settings';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
@@ -37,27 +38,21 @@ const actionBarItemsNodes = (
   <>
     <ActionBarItem
       renderIcon={Lightning16}
-      label="Action 1"
+      iconDescription="Action 1"
       onClick={() => {}}
     />
-    <ActionBarItem renderIcon={Lightning16} label="Action 2" />
-    <ActionBarItem renderIcon={Lightning16} label="Action 3" />
-    <ActionBarItem renderIcon={Lightning16} label="Action 4" />
+    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 2" />
+    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 3" />
+    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 4" />
   </>
 );
 
 const availableSpace = <span className="page-header-test--available-space" />;
 const breadcrumbItems = (
   <>
-    <BreadcrumbItem href="#" data-testid="breadcrumbitem">
-      Breadcrumb 1
-    </BreadcrumbItem>
-    <BreadcrumbItem href="#" data-testid="breadcrumbitem">
-      Breadcrumb 2
-    </BreadcrumbItem>
-    <BreadcrumbItem href="#" data-testid="breadcrumbitem">
-      Breadcrumb 3
-    </BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 1</BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
   </>
 );
 const classNames = ['client-class-1', 'client-class-2'];
@@ -91,7 +86,7 @@ const pageActionsDepTest2 = (
 );
 
 const subtitle = 'Optional subtitle if necessary';
-const tabBar = (
+const navigation = (
   <Tabs data-testid="tabs">
     <Tab label="Tab 1" />
     <Tab label="Tab 2" />
@@ -116,6 +111,7 @@ const tags = [
 const title = 'Page title';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
+import { prepareProps } from '../../global/js/utils/props-helper';
 jest.mock('../../global/js/utils/uuidv4');
 
 const sizes = {
@@ -179,11 +175,26 @@ const testSizes = (el, property) => {
       return val;
     }
   }
+  console.log(property, el.outerHTML);
   return -1;
 };
 
+const testProps = {
+  actionBarItems,
+  availableSpace,
+  background: true,
+  breadcrumbItems,
+  className: classNames.join(' '),
+  navigation,
+  pageActions,
+  subtitle,
+  tags,
+  title,
+  titleIcon: Bee32,
+};
+
 describe('PageHeader', () => {
-  const { ResizeObserver } = window;
+  const { ResizeObserver, scrollTo } = window;
   let mockElement;
   const mocks = [];
 
@@ -205,8 +216,11 @@ describe('PageHeader', () => {
       },
     });
 
-    mocks.push(uuidv4.mockImplementation(() => 'testid'));
-    mocks.push(jest.spyOn(window, 'scrollTo').mockImplementation());
+    mocks.push({
+      id: 'uuidv4',
+      mock: uuidv4.mockImplementation(() => 'testid'),
+    });
+    window.scrollTo = jest.spyOn(window, 'scrollTo').mockImplementation();
     window.ResizeObserver = jest.fn().mockImplementation(() => ({
       observe: jest.fn(),
       unobserve: jest.fn(),
@@ -216,24 +230,27 @@ describe('PageHeader', () => {
 
   afterEach(() => {
     mocks.forEach((mock) => {
-      mock.mockRestore();
+      mock.mock.mockRestore();
     });
     mockElement.mockRestore();
     jest.restoreAllMocks();
+    window.scrollTo = scrollTo;
     window.ResizeObserver = ResizeObserver;
   });
 
   test('renders an empty header when no props are set', () => {
-    render(<PageHeader />);
+    const dataTestid = uuidv4();
+    render(<PageHeader data-testid={dataTestid} />);
 
-    const header = document.querySelector(`section.${blockClass}`);
+    // console.dir(screen.getByRole('region')); // section should be a region https://fae.disability.illinois.edu/rulesets/ROLE_5/
+    const header = screen.getByTestId(dataTestid);
+    expect(header).toHaveClass(blockClass);
 
-    expect(header).not.toBeNull();
-    expect(header.classList.contains(`${blockClass}--show-background`)).toBe(
-      false
-    );
-    expect(header.classList.contains(classNames[0])).toBe(false);
-    expect(header.classList.contains(classNames[1])).toBe(false);
+    expect(header).not.toHaveClass(`${blockClass}--show-background`);
+
+    expect(header).not.toHaveClass(classNames[0]);
+    expect(header).not.toHaveClass(classNames[1]);
+
     expect(
       document.querySelectorAll(`.${blockClass}__action-bar`)
     ).toHaveLength(0);
@@ -258,29 +275,16 @@ describe('PageHeader', () => {
   });
 
   test('renders all the appropriate content when all props are set', () => {
-    render(
-      <PageHeader
-        actionBarItems={actionBarItems}
-        availableSpace={availableSpace}
-        background
-        breadcrumbItems={breadcrumbItems}
-        className={classNames.join(' ')}
-        navigation={tabBar}
-        pageActions={pageActions}
-        subtitle={subtitle}
-        tags={tags}
-        title={title}
-        titleIcon={Bee32}
-      />
-    );
+    const dataTestid = uuidv4();
+    render(<PageHeader {...testProps} data-testid={dataTestid} />);
 
-    const header = document.querySelector(`section.${blockClass}`);
-    expect(header).not.toBeNull();
-    expect(header.classList.contains(`${blockClass}--show-background`)).toBe(
-      true
-    );
-    expect(header.classList.contains(classNames[0])).toBe(true);
-    expect(header.classList.contains(classNames[1])).toBe(true);
+    // console.dir(screen.getByRole('region')); // section should be a region https://fae.disability.illinois.edu/rulesets/ROLE_5/
+    const header = screen.getByTestId(dataTestid);
+    expect(header).toHaveClass(blockClass);
+
+    expect(header).toHaveClass(`${blockClass}--show-background`);
+    expect(header).toHaveClass(classNames[0]);
+    expect(header).toHaveClass(classNames[1]);
     expect(
       document.querySelectorAll(`.${blockClass}__action-bar`)
     ).toHaveLength(1);
@@ -359,5 +363,97 @@ describe('PageHeader', () => {
     );
 
     warn.mockRestore(); // Remove mock
+  });
+
+  it('adds additional properties to the containing node', () => {
+    const dataTestid = uuidv4();
+    render(<PageHeader data-testid={dataTestid} />);
+    screen.getByTestId(dataTestid);
+  });
+
+  it('forwards a ref to an appropriate node', () => {
+    const ref = React.createRef();
+    render(<PageHeader ref={ref} />);
+    expect(ref.current).not.toBeNull();
+  });
+
+  test('collapse button works', () => {
+    const dataTestid = uuidv4();
+    render(<PageHeader {...testProps} data-testid={dataTestid} />);
+
+    // console.dir(screen.getByRole('region')); // section should be a region https://fae.disability.illinois.edu/rulesets/ROLE_5/
+    // const header = screen.getByTestId(dataTestid);
+    const collapseButton = screen.getByText('Toggle expansion');
+
+    // const prevCalls = window.scrollTo.callCount;
+    // console.dir(window.scrollTo);
+    window.scrollTo.mockReset();
+    expect(window.scrollTo).not.toHaveBeenCalled();
+    userEvent.click(collapseButton);
+    expect(window.scrollTo).toHaveBeenCalled();
+  });
+
+  test('Navigation row renders when Navigation but no tags', () => {
+    const { navigation } = testProps;
+    render(<PageHeader {...{ navigation }} />);
+
+    expect(screen.queryAllByTestId('tabs')).toHaveLength(1);
+  });
+
+  test('Navigation row renders when Tags but no Navigation', () => {
+    const { tags } = testProps;
+    render(<PageHeader {...{ tags }} />);
+
+    expect(
+      screen.getAllByText('A tag', {
+        // selector need to ignore sizing items
+        selector: `.${pkg.prefix}--tag-set__displayed-tag .${carbon.prefix}--tag span`,
+      })
+    ).toHaveLength(4);
+  });
+
+  test('Title row renders when PageActions but no Title', () => {
+    const { pageActions } = testProps;
+    render(<PageHeader {...{ pageActions }} />);
+
+    expect(
+      document.querySelectorAll(`.${blockClass}__page-actions`)
+    ).toHaveLength(1);
+  });
+
+  test('Title row renders when Title but no PageActions', () => {
+    const { title } = testProps;
+    render(<PageHeader {...{ title }} />);
+
+    expect(
+      document.querySelectorAll(
+        `.${blockClass}__title-row .${blockClass}__title`
+      )
+    ).toHaveLength(1);
+  });
+
+  test('Breadcrumb row renders when breadcrumb but no action bar items', () => {
+    render(
+      <PageHeader
+        {...prepareProps(testProps, 'actionBarItems', 'pageActions')}
+      />
+    );
+
+    expect(
+      screen.getAllByText(/Breadcrumb [1-3]/, {
+        // selector need to ignore sizing items
+        selector: `.${pkg.prefix}--breadcrumb-with-overflow__breadcrumb-container:not(.${pkg.prefix}--breadcrumb-with-overflow__breadcrumb-container--hidden) .${carbon.prefix}--link`,
+      })
+    ).toHaveLength(3);
+  });
+
+  test('Breadcrumb row renders when action bar items but no breadcrumb', () => {
+    render(<PageHeader {...prepareProps(testProps, 'breadcrumbItems')} />);
+
+    // screen.getByText(/Action/);
+    const actionBarItems = document.querySelectorAll(
+      `.${blockClass}__action-bar`
+    );
+    expect(actionBarItems).toHaveLength(1);
   });
 });

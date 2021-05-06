@@ -10,7 +10,11 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg, carbon } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
-import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
+import {
+  Button,
+  OverflowMenu,
+  OverflowMenuItem,
+} from 'carbon-components-react';
 import unwrapIfFragment from '../../global/js/utils/unwrap-if-fragment';
 import { prepareProps } from '../../global/js/utils/props-helper';
 
@@ -57,13 +61,17 @@ export const TempComboButton = ({ buttons, className, label, size }) => {
 
 TempComboButton.propTypes = {
   /**
-   * Button shape things for us to render.
+   * Specifies the buttons for the component. Each button is specified as an object
+   * with the properties of a Carbon Button plus label, kind is ignored.
+   *
+   * Carbon Button API https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
   buttons: PropTypes.oneOfType([
     PropTypes.arrayOf(
       PropTypes.shape({
+        ...Button.propTypes,
         label: PropTypes.node,
-        onClick: PropTypes.func,
+        onClick: Button.propTypes.onClick,
       })
     ),
   ]), // expects action bar item as array or in fragment,

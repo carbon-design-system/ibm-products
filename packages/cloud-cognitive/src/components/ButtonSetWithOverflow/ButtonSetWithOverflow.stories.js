@@ -16,7 +16,6 @@ import { getStorybookPrefix } from '../../../config';
 import { ButtonSetWithOverflow } from '.';
 
 // Carbon and package components we use.
-import { Button } from 'carbon-components-react';
 
 const storybookPrefix = getStorybookPrefix(
   pkg,
@@ -41,31 +40,35 @@ export default {
   parameters: { styles },
 };
 
-const ButtonSetWithOverflowItems = (
-  <>
-    <Button kind="secondary" onClick={action('Secondary 1')}>
-      Secondary 1
-    </Button>
-    <Button kind="secondary" onClick={action('Secondary 2')}>
-      Secondary 2
-    </Button>
-    <Button kind="primary" onClick={action('Primary')}>
-      Primary
-    </Button>
-  </>
-);
+const buttons = [
+  {
+    kind: 'secondary',
+    onClick: action('Secondary 1'),
+    label: 'Secondary 1',
+  },
+  {
+    kind: 'secondary',
+    onClick: action('Secondary 2'),
+    label: 'Secondary 2',
+  },
+  {
+    kind: 'primary',
+    onClick: action('Primary'),
+    label: 'Primary',
+  },
+];
 
 const Template = (argsIn) => {
-  const { children, containerWidth, ...args } = { ...argsIn };
+  const { containerWidth, ...args } = { ...argsIn };
   return (
     <div style={{ width: containerWidth }}>
-      <ButtonSetWithOverflow {...args}>{children}</ButtonSetWithOverflow>
+      <ButtonSetWithOverflow {...args} />
     </div>
   );
 };
 
 export const Default = Template.bind({});
 Default.args = {
-  children: ButtonSetWithOverflowItems,
+  buttons,
   containerWidth: 500,
 };

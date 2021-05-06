@@ -1204,8 +1204,12 @@ path:nth-of-type(1),
 
 .exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__header {
   margin: 0;
-  padding: var(--cds-spacing-07, 2rem);
+  padding: var(--cds-spacing-06, 1.5rem) var(--cds-spacing-07, 2rem);
   border-bottom: 1px solid var(--cds-ui-03, #e0e0e0);
+}
+
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__header--with-nav {
+  padding-bottom: 0;
 }
 
 .exp--tearsheet.exp--tearsheet--narrow .exp--tearsheet__header {
@@ -1226,6 +1230,13 @@ path:nth-of-type(1),
 
 .exp--tearsheet .exp--tearsheet__header-actions {
   padding-left: var(--cds-spacing-06, 1.5rem);
+}
+
+.exp--tearsheet
+.exp--tearsheet__header-actions
+.bx--btn-set
+.bx--btn:not(:first-of-type) {
+  margin-left: var(--cds-spacing-03, 0.5rem);
 }
 
 .exp--tearsheet .exp--tearsheet__header--no-close-icon {
@@ -1254,10 +1265,6 @@ path:nth-of-type(1),
 
 .exp--tearsheet .exp--tearsheet__header-navigation {
   margin: var(--cds-spacing-04, 0.75rem) 0 0;
-}
-
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__header-navigation {
-  margin: var(--cds-spacing-04, 0.75rem) 0 calc(-1 * var(--cds-spacing-06, 1.5rem));
 }
 
 .exp--tearsheet .exp--tearsheet__body {

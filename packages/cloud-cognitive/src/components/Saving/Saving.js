@@ -21,7 +21,7 @@ const componentName = 'Saving';
 export let Saving = forwardRef(
   (
     {
-      cancelButtonText,
+      secondaryButtonText,
       className,
       defaultIconDescription,
       defaultText,
@@ -29,8 +29,8 @@ export let Saving = forwardRef(
       failText,
       inProgressIconDescription,
       inProgressText,
-      onCancel,
-      onSave,
+      onRequestCancel,
+      onRequestSave,
       status,
       successIconDescription,
       successText,
@@ -39,31 +39,28 @@ export let Saving = forwardRef(
     },
     ref
   ) => {
-    const getStatusObj = () => {
-      const statusObj = {};
-
-      if (status === 'default') {
-        statusObj.text = defaultText;
-        statusObj.iconDescription = defaultIconDescription;
-        statusObj.icon = CheckmarkOutline16;
-      } else if (status === 'inprogress') {
-        statusObj.text = inProgressText;
-        statusObj.iconDescription = inProgressIconDescription;
-        statusObj.icon = InlineLoading;
-      } else if (status === 'success') {
-        statusObj.text = successText;
-        statusObj.iconDescription = successIconDescription;
-        statusObj.icon = Save16;
-      } else {
-        statusObj.text = failText;
-        statusObj.iconDescription = failIconDescription;
-        statusObj.icon = ErrorOutline16;
-      }
-
-      return statusObj;
+    const statusObj = {
+      default: {
+        text: defaultText,
+        iconDescription: defaultIconDescription,
+        icon: CheckmarkOutline16,
+      },
+      inProgress: {
+        text: inProgressText,
+        iconDescription: inProgressIconDescription,
+        icon: InlineLoading,
+      },
+      success: {
+        text: successText,
+        iconDescription: successIconDescription,
+        icon: Save16,
+      },
+      fail: {
+        text: failText,
+        iconDescription: failIconDescription,
+        icon: ErrorOutline16,
+      },
     };
-
-    const statusObj = getStatusObj();
     const blockClass = `${pkg.prefix}--saving`;
 
     return (
@@ -75,23 +72,25 @@ export let Saving = forwardRef(
                 <ErrorFilled16 />
               </div>
             )}
-            <p className={`${blockClass}__text`}>{statusObj.text}</p>
+            <p className={`${blockClass}__text`}>{statusObj[status]?.text}</p>
           </div>
         ) : (
           <div className={`${blockClass}__buttons`}>
             <Button
-              onClick={onCancel}
+              onClick={onRequestCancel}
               kind="secondary"
-              disabled={status !== 'inprogress'}>
-              {cancelButtonText}
+              disabled={status !== 'inProgress'}
+              type="button">
+              {secondaryButtonText}
             </Button>
             <Button
-              onClick={onSave}
+              onClick={onRequestSave}
               kind="primary"
-              renderIcon={statusObj.icon}
-              iconDescription={statusObj.iconDescription}
-              disabled={status === 'inprogress'}>
-              {statusObj.text}
+              renderIcon={statusObj[status]?.icon}
+              iconDescription={statusObj[status]?.iconDescription}
+              disabled={status === 'inProgress'}
+              type="button">
+              {statusObj[status]?.text}
             </Button>
           </div>
         )}
@@ -103,10 +102,6 @@ export let Saving = forwardRef(
 Saving = pkg.checkComponentEnabled(Saving, componentName);
 
 Saving.propTypes = {
-  /**
-   * Text for the cancel button (manual).
-   */
-  cancelButtonText: PropTypes.string,
   /**
    * Provide an optional class to be applied to the containing node.
    */
@@ -138,15 +133,20 @@ Saving.propTypes = {
   /**
    * Function handler for cancel button (manual).
    */
-  onCancel: PropTypes.func,
+  onRequestCancel: PropTypes.func,
   /**
    * Function handler for save button (manual).
    */
-  onSave: PropTypes.func,
+  onRequestSave: PropTypes.func,
   /**
-   * The save state.
+   * Text for the secondary or cancel button (manual).
    */
-  status: PropTypes.oneOf(['default', 'inprogress', 'success', 'fail']),
+  secondaryButtonText: PropTypes.string,
+  /**
+   * The status of the save. default being the untouched default state -> inProgress being a save has been initiated -> fail or success being the outcome.
+   */
+  status: PropTypes.oneOf(['default', 'inProgress', 'success', 'fail'])
+    .isRequired,
   /**
    * Description for success state icon (manual).
    */
@@ -158,12 +158,7 @@ Saving.propTypes = {
   /**
    * Designates the style of the save component. Manual uses a set of buttons and auto just displays a string. See usage guidelines for additional information.
    */
-  type: PropTypes.oneOf(['manual', 'auto']),
-};
-
-Saving.defaultProps = {
-  status: 'default',
-  type: 'manual',
+  type: PropTypes.oneOf(['manual', 'auto']).isRequired,
 };
 
 Saving.displayName = componentName;

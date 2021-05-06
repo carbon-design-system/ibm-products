@@ -14,7 +14,7 @@ import cx from 'classnames';
 import { pkg } from '../../settings';
 
 // Carbon and package components we use.
-import { Button, ButtonSet, Form, FormGroup } from 'carbon-components-react';
+import { Form, FormGroup } from 'carbon-components-react';
 import { SidePanel } from '../SidePanel/SidePanel';
 import { ActionSet } from '../ActionSet';
 
@@ -38,31 +38,28 @@ export let CreateSidePanel = React.forwardRef(
       subtitle,
       children,
       description,
-      borderColor,
-      boxedBorder,
       disabled,
       onRequestSubmit,
       primaryButtonLabel,
       primaryKind,
       secondaryButtonLabel,
-      secondaryKind,
-      size,
-      style,
-      // Collect any other property values passed in.
+      selectorPrimaryFocus,
+      pageContentSelector,
       ...rest
     },
     ref
   ) => {
     const actions = [
       {
-        label: 'Create',
+        label: primaryButtonLabel,
         onPrimaryActionClick: () => {
           onRequestSubmit;
         },
         kind: 'primary',
+        disabled: disabled,
       },
       {
-        label: 'Cancel',
+        label: secondaryButtonLabel,
         onSecondaryActionClick: () => {
           onRequestClose;
         },
@@ -72,6 +69,9 @@ export let CreateSidePanel = React.forwardRef(
 
     return (
       <SidePanel
+        pageContentSelector={pageContentSelector}
+        placement="right"
+        slideIn={true}
         animateTitle={false}
         className={cx(blockClass, className)}
         onRequestClose={onRequestClose}
@@ -79,6 +79,7 @@ export let CreateSidePanel = React.forwardRef(
         title="Create partitions"
         subtitle="Specify the details of the partitions you're creating"
         actions={actions}
+        selectorPrimaryFocus={selectorPrimaryFocus}
         size="md">
         <h3
           className={`${blockClass}__form-title-text ${blockClass}__content-text`}>
@@ -109,7 +110,7 @@ CreateSidePanel.propTypes = {
   /**
    * What border color (HTML color value) to use.
    */
-  borderColor: PropTypes.string,
+  onRequestClose: PropTypes.func,
 
   /**
    * If true, the border is a box, otherwise it is a shadow.
@@ -122,7 +123,7 @@ CreateSidePanel.propTypes = {
   className: PropTypes.string,
 
   /**
-   * If true, the buttons are disabled, otherwise they can be used.
+   * If true, the button primary button is disabled, otherwise it can be used.
    */
   disabled: PropTypes.bool,
 
@@ -160,20 +161,18 @@ CreateSidePanel.propTypes = {
    * The size for the buttons ('default', 'small' or 'field').
    */
   size: PropTypes.oneOf(['default', 'small', 'field']),
-
-  /**
-   * Optional style settings for the containing node.
-   */
-  style: PropTypes.object,
 };
 
-// Default values for component props. Default values are not required for
-// props that are required, nor for props where the component can apply
-// 'undefined' values reasonably. Default values should be provided when the
-// component needs to make a choice or assumption when a prop is not supplied.
-CreateSidePanel.defaultProps = {
-  boxedBorder: false,
-  primaryKind: 'primary',
-  secondaryKind: 'secondary',
-  size: 'default',
-};
+// className,
+// onRequestClose,
+// open,
+// title,
+// subtitle,
+// children,
+// description,
+// disabled,
+// onRequestSubmit,
+// primaryButtonLabel,
+// primaryKind,
+// secondaryButtonLabel,
+// selectorPrimaryFocus,

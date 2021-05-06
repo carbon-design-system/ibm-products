@@ -199,14 +199,12 @@ const ChildrenContent = () => {
     <>
       <TextInput
         labelText="Topic name"
-        // id="side-panel-story-text-input-a"
         className={`${prefix}form-item`}
         placeholder="Enter topic name"
       />
       <NumberInput
         id="1"
         className={`${prefix}form-item`}
-        // className="create-modal--storybook-input"
         label="Partitions"
         min={0}
         max={50}
@@ -215,7 +213,6 @@ const ChildrenContent = () => {
       <NumberInput
         id="2"
         className={`${prefix}form-item`}
-        // className="create-modal--storybook-input"
         label="Replicas"
         min={0}
         max={50}
@@ -224,7 +221,6 @@ const ChildrenContent = () => {
       <NumberInput
         id="3"
         className={`${prefix}form-item`}
-        // className="create-modal--storybook-input"
         label="Minimum in-sync replicas"
         min={0}
         max={50}
@@ -240,18 +236,21 @@ const ChildrenContent = () => {
         <NumberInput
           id="4"
           className={`${prefix}form-item`}
-          // className="create-modal--storybook-input"
           label="Retention time"
           min={0}
           max={50}
           value={30}
         />
-        <Dropdown ariaLabel="Dropdown" items={items} label="Options" />
+        <Dropdown
+          ariaLabel="Dropdown"
+          items={items}
+          label="Options"
+          className={`${prefix}form-item`}
+        />
       </div>
       <NumberInput
         id="3"
         className={`${prefix}form-item`}
-        // className="create-modal--storybook-input"
         label="Minimum in-sync replicas"
         min={0}
         max={50}
@@ -286,7 +285,10 @@ const SlideOverTemplate = ({ minimalContent, actions, ...args }) => {
         {...args}
         open={open}
         onRequestClose={() => setOpen(false)}
-        actions={actionSets[actions]}>
+        actions={actionSets[actions]}
+        selectorPrimaryFocus=".bx--text-input"
+        primaryButtonLabel="Create"
+        secondaryButtonLabel="Cancel">
         {!minimalContent && <ChildrenContent />}
       </CreateSidePanel>
     </>
@@ -310,63 +312,24 @@ const SlideInTemplate = ({ actions, ...args }) => {
       </Grid>
       <CreateSidePanel
         {...args}
+        slideIn={true}
         open={open}
         onRequestClose={() => setOpen(false)}
-        actions={actionSets[actions]}>
+        actions={actionSets[actions]}
+        selectorPrimaryFocus=".bx--text-input"
+        primaryButtonLabel="Create"
+        secondaryButtonLabel="Cancel">
         <ChildrenContent />
       </CreateSidePanel>
     </>
   );
 };
 
-export const SlideOver = SlideOverTemplate.bind({});
-SlideOver.args = {
-  includeOverlay: true,
-  actions: 0,
-  ...defaultStoryProps,
-};
-
 export const SlideIn = SlideInTemplate.bind({});
 SlideIn.args = {
-  placement: 'right',
-  slideIn: true,
+  // placement: 'right',
+  // slideIn: true,
   pageContentSelector: '#cloud-and-cognitive-page-content',
   actions: 0,
   ...defaultStoryProps,
-};
-
-export const WithActionToolbar = SlideOverTemplate.bind({});
-WithActionToolbar.args = {
-  actionToolbarButtons: [
-    {
-      label: 'Copy',
-      icon: Copy20,
-      onActionToolbarButtonClick: () => {},
-    },
-    {
-      label: 'Settings',
-      icon: Settings20,
-      onActionToolbarButtonClick: () => {},
-    },
-    {
-      label: 'Delete',
-      icon: Delete20,
-      onActionToolbarButtonClick: () => {},
-    },
-  ],
-  ...defaultStoryProps,
-};
-
-export const SpecifyElementToHaveInitialFocus = SlideOverTemplate.bind({});
-SpecifyElementToHaveInitialFocus.args = {
-  actions: 0,
-  selectorPrimaryFocus: '#side-panel-story-text-input-a',
-  ...defaultStoryProps,
-};
-
-export const WithMinimalContent = SlideOverTemplate.bind({});
-WithMinimalContent.args = {
-  ...defaultStoryProps,
-  actions: 0,
-  minimalContent: true,
 };

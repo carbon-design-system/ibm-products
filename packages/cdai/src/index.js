@@ -5,6 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+export { ContextHeader } from './components/ContextHeader';
 export { IdeAPIKeyGeneration } from './components/IdeAPIKeyGeneration';
 export { IdeButton } from './components/IdeButton';
 export { IdeEmptyState } from './components/IdeEmptyState';

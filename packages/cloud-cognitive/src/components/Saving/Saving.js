@@ -45,7 +45,7 @@ export let Saving = forwardRef(
         iconDescription: defaultIconDescription,
         icon: CheckmarkOutline16,
       },
-      inProgress: {
+      ['in-progress']: {
         text: inProgressText,
         iconDescription: inProgressIconDescription,
         icon: InlineLoading,
@@ -79,7 +79,7 @@ export let Saving = forwardRef(
             <Button
               onClick={onRequestCancel}
               kind="secondary"
-              disabled={status !== 'inProgress'}
+              disabled={status !== 'in-progress'}
               type="button">
               {secondaryButtonText}
             </Button>
@@ -88,7 +88,7 @@ export let Saving = forwardRef(
               kind="primary"
               renderIcon={statusObj[status]?.icon}
               iconDescription={statusObj[status]?.iconDescription}
-              disabled={status === 'inProgress'}
+              disabled={status === 'in-progress'}
               type="button">
               {statusObj[status]?.text}
             </Button>
@@ -143,9 +143,9 @@ Saving.propTypes = {
    */
   secondaryButtonText: PropTypes.string,
   /**
-   * The status of the save. default being the untouched default state -> inProgress being a save has been initiated -> fail or success being the outcome.
+   * The status of the save. default being the untouched default state -> in-progress being a save has been initiated -> fail or success being the outcome.
    */
-  status: PropTypes.oneOf(['default', 'inProgress', 'success', 'fail'])
+  status: PropTypes.oneOf(['default', 'in-progress', 'success', 'fail'])
     .isRequired,
   /**
    * Description for success state icon (manual).

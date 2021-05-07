@@ -52,7 +52,7 @@ const AutoTemplate = (opts) => {
   useEffect(() => {
     const timeoutId = setTimeout(async () => {
       if (dirtyInput) {
-        setStatus('inProgress');
+        setStatus('in-progress');
         await wait(1000);
         setStatus(successful ? 'success' : 'fail');
       }
@@ -86,7 +86,7 @@ const ManualTemplate = (opts) => {
   const [status, setStatus] = useState('default');
 
   const onSaveHandler = async () => {
-    setStatus('inProgress');
+    setStatus('in-progress');
     await wait(2000);
     setStatus(successful ? 'success' : 'fail');
   };

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { forwardRef } from 'react';
 import cx from 'classnames';
 import { Button, InlineLoading } from 'carbon-components-react';
 import {
@@ -18,89 +18,90 @@ import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
 const componentName = 'Saving';
 
-export let Saving = ({
-  cancelButtonText,
-  className,
-  defaultIconDescription,
-  defaultText,
-  failIconDescription,
-  failText,
-  inProgressIconDescription,
-  inProgressText,
-  onCancel,
-  onSave,
-  status,
-  successIconDescription,
-  successText,
-  type,
-}) => {
-  const getStatusObj = () => {
-    const statusObj = {};
+export let Saving = forwardRef(
+  (
+    {
+      secondaryButtonText,
+      className,
+      defaultIconDescription,
+      defaultText,
+      failIconDescription,
+      failText,
+      inProgressIconDescription,
+      inProgressText,
+      onRequestCancel,
+      onRequestSave,
+      status,
+      successIconDescription,
+      successText,
+      type,
+      ...rest
+    },
+    ref
+  ) => {
+    const statusObj = {
+      default: {
+        text: defaultText,
+        iconDescription: defaultIconDescription,
+        icon: CheckmarkOutline16,
+      },
+      ['in-progress']: {
+        text: inProgressText,
+        iconDescription: inProgressIconDescription,
+        icon: InlineLoading,
+      },
+      success: {
+        text: successText,
+        iconDescription: successIconDescription,
+        icon: Save16,
+      },
+      fail: {
+        text: failText,
+        iconDescription: failIconDescription,
+        icon: ErrorOutline16,
+      },
+    };
+    const blockClass = `${pkg.prefix}--saving`;
 
-    if (status === 'default') {
-      statusObj.text = defaultText;
-      statusObj.iconDescription = defaultIconDescription;
-      statusObj.icon = CheckmarkOutline16;
-    } else if (status === 'inprogress') {
-      statusObj.text = inProgressText;
-      statusObj.iconDescription = inProgressIconDescription;
-      statusObj.icon = InlineLoading;
-    } else if (status === 'success') {
-      statusObj.text = successText;
-      statusObj.iconDescription = successIconDescription;
-      statusObj.icon = Save16;
-    } else {
-      statusObj.text = failText;
-      statusObj.iconDescription = failIconDescription;
-      statusObj.icon = ErrorOutline16;
-    }
-
-    return statusObj;
-  };
-
-  const statusObj = getStatusObj();
-  const blockClass = `${pkg.prefix}--saving`;
-
-  return (
-    <div className={cx(blockClass, className)}>
-      {type === 'auto' ? (
-        <div className={`${blockClass}__message`}>
-          {status === 'fail' && (
-            <div className={`${blockClass}__error-icon`}>
-              <ErrorFilled16 />
-            </div>
-          )}
-          <p className={`${blockClass}__text`}>{statusObj.text}</p>
-        </div>
-      ) : (
-        <div className={`${blockClass}__buttons`}>
-          <Button
-            onClick={onCancel}
-            kind="secondary"
-            disabled={status !== 'inprogress'}>
-            {cancelButtonText}
-          </Button>
-          <Button
-            onClick={onSave}
-            kind="primary"
-            renderIcon={statusObj.icon}
-            iconDescription={statusObj.iconDescription}
-            disabled={status === 'inprogress'}>
-            {statusObj.text}
-          </Button>
-        </div>
-      )}
-    </div>
-  );
-};
+    return (
+      <div {...rest} ref={ref} className={cx(blockClass, className)}>
+        {type === 'auto' ? (
+          <div className={`${blockClass}__message`}>
+            {status === 'fail' && (
+              <div className={`${blockClass}__error-icon`}>
+                <ErrorFilled16 />
+              </div>
+            )}
+            <p className={`${blockClass}__text`}>{statusObj[status]?.text}</p>
+          </div>
+        ) : (
+          <div className={`${blockClass}__buttons`}>
+            <Button
+              onClick={onRequestCancel}
+              kind="secondary"
+              disabled={status !== 'in-progress'}
+              type="button">
+              {secondaryButtonText}
+            </Button>
+            <Button
+              onClick={onRequestSave}
+              kind="primary"
+              renderIcon={statusObj[status]?.icon}
+              iconDescription={statusObj[status]?.iconDescription}
+              disabled={status === 'in-progress'}
+              type="button">
+              {statusObj[status]?.text}
+            </Button>
+          </div>
+        )}
+      </div>
+    );
+  }
+);
 
 Saving = pkg.checkComponentEnabled(Saving, componentName);
 
 Saving.propTypes = {
-  /**
-   * Text for the cancel button (manual).
-   */
-  cancelButtonText: PropTypes.string,
   /**
    * Provide an optional class to be applied to the containing node.
    */
@@ -132,15 +133,20 @@ Saving.propTypes = {
   /**
    * Function handler for cancel button (manual).
    */
-  onCancel: PropTypes.func,
+  onRequestCancel: PropTypes.func,
   /**
    * Function handler for save button (manual).
    */
-  onSave: PropTypes.func,
+  onRequestSave: PropTypes.func,
   /**
-   * The save state.
+   * Text for the secondary or cancel button (manual).
    */
-  status: PropTypes.oneOf(['default', 'inprogress', 'success', 'fail']),
+  secondaryButtonText: PropTypes.string,
+  /**
+   * The status of the save. default being the untouched default state -> in-progress being a save has been initiated -> fail or success being the outcome.
+   */
+  status: PropTypes.oneOf(['default', 'in-progress', 'success', 'fail'])
+    .isRequired,
   /**
    * Description for success state icon (manual).
    */
@@ -152,12 +158,7 @@ Saving.propTypes = {
   /**
    * Designates the style of the save component. Manual uses a set of buttons and auto just displays a string. See usage guidelines for additional information.
    */
-  type: PropTypes.oneOf(['manual', 'auto']),
-};
-
-Saving.defaultProps = {
-  status: 'default',
-  type: 'manual',
+  type: PropTypes.oneOf(['manual', 'auto']).isRequired,
 };
 
 Saving.displayName = componentName;

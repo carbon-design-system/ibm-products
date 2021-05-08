@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -34,11 +34,48 @@ export let LoadingBar = React.forwardRef(
       kind,
       size,
       /* TODO: add other props for LoadingBar */
+      active,
+      small,
+      percentage,
+      showPercentageIndicator,
+      percentageIndicatorText,
+      ariaLabel,
+      id,
       // Collect any other property values passed in.
       ...rest
     },
     ref
   ) => {
+    const { current: instanceId } = useRef(id ? id : null);
+
+    function usePrevious(value) {
+      const ref = useRef();
+      useEffect(() => { // Store current value in ref
+        ref.current = value;
+      }, [value]); // Only re-run if value changes
+      // Return previous value (happens before update in useEffect above)
+      return ref.current;
+    }
+    const prevActive = usePrevious(active);
+
+    const isDeterminate = percentage !== undefined;
+    const percProgress = isDeterminate ? percentage + '%' : 0;
+    const showPercIndicator = isDeterminate && showPercentageIndicator;
+    const loadingWrapper = cx({[`${blockClass}--loading-bar--preload`]: !prevActive && !active});
+    const loadingClassName = cx(className, {
+      [`${blockClass}--loading-bar`]: true,
+      [`${blockClass}--loading-bar--small`]: small,
+      [`${blockClass}--loading-bar--linear-stop`]: !active && isDeterminate,
+      [`${blockClass}--loading-bar--indefinite-stop`]: !active && !isDeterminate,
+    });
+    const animationClassName = cx({
+      [`${blockClass}--loading-bar--linear-progress`]: isDeterminate,
+      [`${blockClass}--loading-bar--stop-progress`]: !active && !isDeterminate,
+      [`${blockClass}--loading-bar--indefinite-progress`]:
+        active && !isDeterminate,
+    });
+    const loadingId = `loading-bar-id-${instanceId}`;
+    
     return (
       <div
         {
@@ -57,7 +94,29 @@ export let LoadingBar = React.forwardRef(
         )}
         ref={ref}
         role="main">
-        {children}
+        <div className={loadingWrapper}>
+          <div
+            {...rest}
+            id={loadingId}
+            aria-label={ariaLabel}
+            aria-atomic="true"
+            aria-labelledby={loadingId}
+            aria-live={active ? 'assertive' : 'off'}
+            className={loadingClassName}>
+            <div
+              {...(isDeterminate && { style: { width: percProgress } })}
+              className={`${prefix}--loading-bar--progress`}>
+              <div className={animationClassName} />
+            </div>
+          </div>
+          {showPercIndicator && (
+            <div className={`${prefix}--loading-bar--indicator-wrapper`}>
+              <div className={`${prefix}--loading-bar--indicator`}>
+                {active && percentageIndicatorText}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     );
   }

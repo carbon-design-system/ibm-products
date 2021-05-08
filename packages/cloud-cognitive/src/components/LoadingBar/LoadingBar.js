@@ -31,6 +31,8 @@ export let LoadingBar = React.forwardRef(
       // The component props, in alphabetical order (for consistency).
       children /* TODO: remove if not needed. */,
       className,
+      kind,
+      size,
       /* TODO: add other props for LoadingBar */
       // Collect any other property values passed in.
       ...rest

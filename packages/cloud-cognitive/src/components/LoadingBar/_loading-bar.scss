@@ -15,24 +15,107 @@
 @import '@carbon/themes/scss/themes';
 @import 'carbon-components/scss/globals/scss/_vars.scss';
 
+$loading-bar__height: 8px;
+$loading-bar__small-height: 4px;
+// $duration--slow-02: 720ms; // Expansion duration - carbon value from _motion.scss
+
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
 @mixin loading-bar {
-  /// @type Number
-  /// @access private
-  $loading-bar__height: 8px;
-
-  /// @type Number
-  /// @access private
-  $loading-bar__small-height: 4px;
-
-  /// Expansion duration - carbon value from _motion.scss
-  /// @type Number
-  /// @access private
-  // $duration--slow-02: 720ms;
-
   // The block part of our conventional BEM class names (blockClass__E--M).
   $block-class: #{$pkg-prefix}--loading-bar;
+
+  @keyframes progress-indeterminate {
+    0% {
+      width: 0%;
+      left: 0;
+      right: auto;
+    }
+    20% {
+      width: 100%;
+      left: 0;
+      right: auto;
+    }
+    28% {
+      width: 100%;
+      left: auto;
+      right: 0;
+    }
+    51% {
+      width: 0%;
+      left: auto;
+      right: 0;
+    }
+    58% {
+      width: 0%;
+      left: auto;
+      right: 0;
+    }
+    82% {
+      width: 100%;
+      left: auto;
+      right: 0;
+    }
+    83% {
+      width: 100%;
+      left: 0;
+      right: auto;
+    }
+    96% {
+      width: 0%;
+      left: 0;
+      right: auto;
+    }
+    100% {
+      width: 0%;
+      left: 0;
+      right: auto;
+    }
+  }
+  
+  @keyframes progress-linear {
+    0% {
+      width: 0%;
+      left: 0;
+      right: auto;
+    }
+    100% {
+      width: 100%;
+      left: 0;
+      right: auto;
+    }
+  }
+  
+  @keyframes progress-stop {
+    0% {
+      width: 0%;
+      left: 0;
+      right: auto;
+    }
+    92% {
+      width: 100%;
+      left: 0;
+      right: auto;
+    }
+    100% {
+      width: 100%;
+      left: 0;
+      right: auto;
+    }
+  }
+  
+  @keyframes loadingbar-stop {
+    0% {
+      opacity: 1;
+    }
+    92% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      display: none;
+    }
+  }
 
   .#{$block-class} {
     position: relative;
@@ -45,6 +128,15 @@
     width: 100%;
     height: $loading-bar__height;
   }
+
+  .#{$block-class}:hover,
+  .#{$block-class}:focus,
+  .#{$block-class}:active {
+    border: none;
+    outline: none;
+    cursor: default;
+  }
+
 
   .#{$block-class}__preload {
     opacity: 0 !important;
@@ -93,14 +185,6 @@
     background-color: $interactive-01;
     -webkit-animation: 1800ms ease-in-out progress-stop forwards;
     animation: 1800ms ease-in-out progress-stop forwards;
-  }
-
-  &:hover,
-  &:focus,
-  &:active {
-    border: none;
-    outline: none;
-    cursor: default;
   }
 
   .#{$block-class}__indefinite-progress:before {

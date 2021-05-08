@@ -61,17 +61,17 @@ export let LoadingBar = React.forwardRef(
     const isDeterminate = percentage !== undefined;
     const percProgress = isDeterminate ? percentage + '%' : 0;
     const showPercIndicator = isDeterminate && showPercentageIndicator;
-    const loadingWrapper = cx({[`${blockClass}--loading-bar--preload`]: !prevActive && !active});
+    const loadingWrapper = cx({[`${blockClass}__preload`]: !prevActive && !active});
     const loadingClassName = cx(className, {
-      [`${blockClass}--loading-bar`]: true,
-      [`${blockClass}--loading-bar--small`]: small,
-      [`${blockClass}--loading-bar--linear-stop`]: !active && isDeterminate,
-      [`${blockClass}--loading-bar--indefinite-stop`]: !active && !isDeterminate,
+      [`${blockClass}`]: true,
+      [`${blockClass}__small`]: small,
+      [`${blockClass}__linear-stop`]: !active && isDeterminate,
+      [`${blockClass}__indefinite-stop`]: !active && !isDeterminate,
     });
     const animationClassName = cx({
-      [`${blockClass}--loading-bar--linear-progress`]: isDeterminate,
-      [`${blockClass}--loading-bar--stop-progress`]: !active && !isDeterminate,
-      [`${blockClass}--loading-bar--indefinite-progress`]:
+      [`${blockClass}__linear-progress`]: isDeterminate,
+      [`${blockClass}__stop-progress`]: !active && !isDeterminate,
+      [`${blockClass}__indefinite-progress`]:
         active && !isDeterminate,
     });
     const loadingId = `loading-bar-id-${instanceId}`;
@@ -105,13 +105,13 @@ export let LoadingBar = React.forwardRef(
             className={loadingClassName}>
             <div
               {...(isDeterminate && { style: { width: percProgress } })}
-              className={`${blockClass}--loading-bar--progress`}>
+              className={`${blockClass}__progress`}>
               <div className={animationClassName} />
             </div>
           </div>
           {showPercIndicator && (
-            <div className={`${blockClass}--loading-bar--indicator-wrapper`}>
-              <div className={`${blockClass}--loading-bar--indicator`}>
+            <div className={`${blockClass}__indicator-wrapper`}>
+              <div className={`${blockClass}__indicator`}>
                 {active && percentageIndicatorText}
               </div>
             </div>

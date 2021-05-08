@@ -12,15 +12,119 @@
 
 // TODO: @import(s) of Carbon settings and component styles and other
 // related component styles used by LoadingBar
+@import '@carbon/themes/scss/themes';
+@import 'carbon-components/scss/globals/scss/_vars.scss';
 
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
 @mixin loading-bar {
+  /// @type Number
+  /// @access private
+  $loading-bar__height: 8px;
+
+  /// @type Number
+  /// @access private
+  $loading-bar__small-height: 4px;
+
+  /// Expansion duration - carbon value from _motion.scss
+  /// @type Number
+  /// @access private
+  // $duration--slow-02: 720ms;
+
   // The block part of our conventional BEM class names (blockClass__E--M).
   $block-class: #{$pkg-prefix}--loading-bar;
 
   .#{$block-class} {
-    // TODO: Styles.
+    position: relative;
+    border: none;
+    padding: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    pointer-events: none;
+    background-color: $hover-ui;
+    width: 100%;
+    height: $loading-bar__height;
+  }
+
+  .#{$block-class}__preload {
+    opacity: 0 !important;
+  }
+
+  .#{$block-class}__progress {
+    position: relative;
+    height: $loading-bar__height;
+    transition: width $duration--slow-02 cubic-bezier(0.4, 0.14, 0.3, 1);
+  }
+
+  .#{$block-class}__indicator-wrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .#{$block-class}__indicator {
+    padding-top: 16px;
+    padding-bottom: 8px;
+  }
+
+  .#{$block-class}__small {
+    height: $loading-bar__small-height;
+  }
+
+  .#{$block-class}__small .#{$block-class}__progress {
+    height: $loading-bar__small-height;
+  }
+
+  .#{$block-class}__linear-stop {
+    display: none;
+  }
+
+  .#{$block-class}__indefinite-stop {
+    -webkit-animation: 1800ms ease-in-out loadingbar-stop forwards;
+    animation: 1800ms ease-in-out loadingbar-stop forwards;
+  }
+
+  .#{$block-class}__stop-progress:before {
+    content: '';
+    width: 0%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: $interactive-01;
+    -webkit-animation: 1800ms ease-in-out progress-stop forwards;
+    animation: 1800ms ease-in-out progress-stop forwards;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    border: none;
+    outline: none;
+    cursor: default;
+  }
+
+  .#{$block-class}__indefinite-progress:before {
+    content: '';
+    width: 0%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: $interactive-01;
+    -webkit-animation: 3000ms ease-in-out progress-indeterminate infinite;
+    animation: 3000ms ease-in-out progress-indeterminate infinite;
+  }
+
+  .#{$block-class}__linear-progress:before {
+    content: '';
+    width: 0%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: $interactive-01;
+    -webkit-animation: 1000ms ease-in-out progress-linear forwards;
+    animation: 1000ms ease-in-out progress-linear forwards;
   }
 }
 

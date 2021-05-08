@@ -75,7 +75,7 @@ export let LoadingBar = React.forwardRef(
         active && !isDeterminate,
     });
     const loadingId = `loading-bar-id-${instanceId}`;
-    
+
     return (
       <div
         {
@@ -105,13 +105,13 @@ export let LoadingBar = React.forwardRef(
             className={loadingClassName}>
             <div
               {...(isDeterminate && { style: { width: percProgress } })}
-              className={`${prefix}--loading-bar--progress`}>
+              className={`${blockClass}--loading-bar--progress`}>
               <div className={animationClassName} />
             </div>
           </div>
           {showPercIndicator && (
-            <div className={`${prefix}--loading-bar--indicator-wrapper`}>
-              <div className={`${prefix}--loading-bar--indicator`}>
+            <div className={`${blockClass}--loading-bar--indicator-wrapper`}>
+              <div className={`${blockClass}--loading-bar--indicator`}>
                 {active && percentageIndicatorText}
               </div>
             </div>

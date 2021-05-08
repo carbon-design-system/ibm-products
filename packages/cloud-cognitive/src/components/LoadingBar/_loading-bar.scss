@@ -1,0 +1,29 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@import '@carbon/import-once/scss/import-once';
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+
+// TODO: @import(s) of Carbon settings and component styles and other
+// related component styles used by LoadingBar
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin loading-bar {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+  $block-class: #{$pkg-prefix}--loading-bar;
+
+  .#{$block-class} {
+    // TODO: Styles.
+  }
+}
+
+@include exports('loading-bar') {
+  @include loading-bar;
+}

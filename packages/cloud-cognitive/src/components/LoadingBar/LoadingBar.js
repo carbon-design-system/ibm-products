@@ -138,17 +138,17 @@ LoadingBar.propTypes = {
   small: PropTypes.bool,
 
   /**
-   * Leave undefined for indetermined duration or specify percentage complete that determinate bar should indicate (0-100).
+   * Leave undefined for indetermined duration or specify percentage complete that the determinate bar should indicate (0-100).
    */
   percentage: PropTypes.number,
 
   /**
-   * Specify whether to show the percentage indicator.
+   * In determinate mode, specify whether to show the percentage indicator.
    */
   showPercentageIndicator: PropTypes.bool,
 
   /**
-   * Provide text to be shown on percentage indicator
+   * In determinate mode, provide text to be shown on percentage indicator
    */
   percentageIndicatorText: PropTypes.string,
 

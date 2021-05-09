@@ -53,7 +53,8 @@ const TemplateIndeterminate = (args) => {
 };
 
 const TemplateDeterminate = (args) => {
-const percentageIndicatorText = 'Loading ' + args.percentage + '%';
+  const percentageIndicatorText = args.percentageIndicatorText ? 
+    args.percentageIndicatorText :'Loading ' + args.percentage + '%';
   return (
       <div className={"loading-bar-story-wrapper"}>
           <LoadingBar

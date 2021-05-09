@@ -52,7 +52,6 @@ const Template = (args) => {
 };
 
 const TemplateWithState = (args) => {
-  const small = boolean('Small (small)', false)
   const [small, setSmall] = useState(false);
   return (
       <div style={{ margin: '2rem 1rem 1rem 1rem', width: '24rem' }}>

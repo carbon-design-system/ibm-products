@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
 
@@ -24,8 +24,9 @@ export default {
   title: `${storybookPrefix}/${LoadingBar.displayName}`,
   component: LoadingBar,
   // TODO: Define argTypes for props not represented by standard JS types.
-  argTypes: {
-  },
+  // argTypes: {
+  //   egProp: { control: 'color' },
+  // },
   parameters: {
     styles,
     docs: {
@@ -34,40 +35,17 @@ export default {
   },
 };
 
-const defaultProps = {
-  active: boolean('Active (active)', true),
-  ariaLabel: text(
-      'ARIA label for content (ariaLabel)',
-      'Active loading indicator'
-  ),
-  className: 'some-class',
-  small: false
-};
-
 /**
  * TODO: Declare template(s) for one or more scenarios.
  */
 const Template = (args) => {
-  return <LoadingBar {...args} />;
-};
-
-const TemplateWithState = (args) => {
-  const [small, setSmall] = useState(false);
   return (
-      <div style={{ margin: '2rem 1rem 1rem 1rem', width: '24rem' }}>
-          <LoadingBar 
-            // TODO: handle events with action or local handler.
-            // onTodo={action('onTodo log action')}
-            {...args}
-            small={small}
-          />
-      </div>
-    )
-};
-
-export const WithStateManager = TemplateWithState.bind({});
-WithStateManager.args = {
-  ...defaultProps,
+    <LoadingBar
+      // TODO: handle events with action or local handler.
+      // onTodo={action('onTodo log action')}
+      {...args}
+    />
+  );
 };
 
 /**
@@ -77,5 +55,5 @@ WithStateManager.args = {
 export const loadingBar = Template.bind({});
 loadingBar.args = {
   // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#LoadingBar-args
-  ...defaultProps,
+  children: 'hello, world',
 };

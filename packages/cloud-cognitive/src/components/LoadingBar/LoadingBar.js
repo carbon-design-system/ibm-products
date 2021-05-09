@@ -47,7 +47,7 @@ export let LoadingBar = React.forwardRef(
     const { current: instanceId } = useRef(id ? id : null);
 
     function usePrevious(value) {
-      // const ref = useRef(); TODO temporarily comment out ref /////
+      const ref = useRef();
       useEffect(() => { // Store current value in ref
         ref.current = value;
       }, [value]); // Only re-run if value changes

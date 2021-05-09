@@ -133,7 +133,7 @@ LoadingBar.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify whether you would like the small variant of <LoadingBar>
+   * Specify whether you would like the small variant of this component
    */
   small: PropTypes.bool,
 

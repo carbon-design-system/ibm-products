@@ -44,7 +44,7 @@ const defaultProps = {
  */
 const TemplateIndeterminate = (args) => {
   return (
-      <div style={{ margin: '2rem 1rem 1rem 1rem', width: '24rem' }}>
+      <div className={"loading-bar-story-wrapper"}>
           <LoadingBar
             {...args}
           />
@@ -55,7 +55,7 @@ const TemplateIndeterminate = (args) => {
 const TemplateDeterminate = (args) => {
 const percentageIndicatorText = 'Loading ' + args.percentage + '%';
   return (
-      <div style={{ margin: '2rem 1rem 1rem 1rem', width: '24rem' }}>
+      <div className={"loading-bar-story-wrapper"}>
           <LoadingBar
             {...args}
             percentageIndicatorText={percentageIndicatorText}
@@ -64,19 +64,19 @@ const percentageIndicatorText = 'Loading ' + args.percentage + '%';
     )
 };
 
-export const WithStateManager = TemplateIndeterminate.bind({});
-WithStateManager.args = {
+/**
+ * TODO: Declare one or more stories, generally one per design scenario.
+ * NB no need for a 'Playground' because all stories have all controls anyway.
+ */
+export const Indeterminate = TemplateIndeterminate.bind({});
+Indeterminate.args = {
   percentage: undefined,
   showPercentageIndicator: false,
   ...defaultProps,
 };
 
-/**
- * TODO: Declare one or more stories, generally one per design scenario.
- * NB no need for a 'Playground' because all stories have all controls anyway.
- */
-export const loadingBar = TemplateDeterminate.bind({});
-loadingBar.args = {
+export const Determinate = TemplateDeterminate.bind({});
+Determinate.args = {
   // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#LoadingBar-args
   percentage: 67,
   showPercentageIndicator: true,

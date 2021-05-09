@@ -31,8 +31,6 @@ export let LoadingBar = React.forwardRef(
       // The component props, in alphabetical order (for consistency).
       children /* TODO: remove if not needed. */,
       className,
-      kind,
-      size,
       /* TODO: add other props for LoadingBar */
       active,
       small,
@@ -49,7 +47,7 @@ export let LoadingBar = React.forwardRef(
     const { current: instanceId } = useRef(id ? id : null);
 
     function usePrevious(value) {
-      const ref = useRef();
+      // const ref = useRef(); TODO temporarily comment out ref /////
       useEffect(() => { // Store current value in ref
         ref.current = value;
       }, [value]); // Only re-run if value changes
@@ -61,8 +59,9 @@ export let LoadingBar = React.forwardRef(
     const isDeterminate = percentage !== undefined;
     const percProgress = isDeterminate ? percentage + '%' : 0;
     const showPercIndicator = isDeterminate && showPercentageIndicator;
+    // switch classes dependant on props
     const loadingWrapper = cx({[`${blockClass}__preload`]: !prevActive && !active});
-    const loadingClassName = cx(className, {
+    const loadingClassName = cx({
       [`${blockClass}`]: true,
       [`${blockClass}__small`]: small,
       [`${blockClass}__linear-stop`]: !active && isDeterminate,
@@ -82,41 +81,33 @@ export let LoadingBar = React.forwardRef(
           // Pass through any other property values as HTML attributes.
           ...rest
         }
-        className={cx(
-          blockClass, // Apply the block class to the main HTML element
-          className, // Apply any supplied class names to the main HTML element.
-          `${blockClass}__template-string-class-${kind}-n-${size}`,
-          {
-            // switched classes dependant on props or state
-            [`${blockClass}__here-if-small`]: size === 'small',
-            [`${blockClass}__here-if-field`]: size === 'field',
-          }
-        )}
+        className={cx(loadingWrapper, 
+          // Apply any supplied class names to the main HTML element.
+          className)}
+        //TODOooooo do i need this below?
         ref={ref}
         role="main">
-        <div className={loadingWrapper}>
+        <div
+          {...rest}
+          id={loadingId}
+          aria-label={ariaLabel}
+          aria-atomic="true"
+          aria-labelledby={loadingId}
+          aria-live={active ? 'assertive' : 'off'}
+          className={loadingClassName}>
           <div
-            {...rest}
-            id={loadingId}
-            aria-label={ariaLabel}
-            aria-atomic="true"
-            aria-labelledby={loadingId}
-            aria-live={active ? 'assertive' : 'off'}
-            className={loadingClassName}>
-            <div
-              {...(isDeterminate && { style: { width: percProgress } })}
-              className={`${blockClass}__progress`}>
-              <div className={animationClassName} />
+            {...(isDeterminate && { style: { width: percProgress } })}
+            className={`${blockClass}__progress`}>
+            <div className={animationClassName} />
+          </div>
+        </div>
+        {showPercIndicator && (
+          <div className={`${blockClass}__indicator-wrapper`}>
+            <div className={`${blockClass}__indicator`}>
+              {active && percentageIndicatorText}
             </div>
           </div>
-          {showPercIndicator && (
-            <div className={`${blockClass}__indicator-wrapper`}>
-              <div className={`${blockClass}__indicator`}>
-                {active && percentageIndicatorText}
-              </div>
-            </div>
-          )}
-        </div>
+        )}
       </div>
     );
   }

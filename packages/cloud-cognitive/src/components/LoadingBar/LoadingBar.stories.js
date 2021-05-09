@@ -33,11 +33,8 @@ export default {
 };
 
 const defaultProps = {
-  active: boolean('Active (active)', true),
-  ariaLabel: text(
-      'ARIA label for content (ariaLabel)',
-      'Active loading indicator'
-  ),
+  active: true,
+  ariaLabel: 'Active loading indicator',
   className: 'some-class',
   small: false
 };

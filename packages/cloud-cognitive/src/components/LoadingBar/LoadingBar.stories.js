@@ -34,34 +34,40 @@ export default {
 
 const defaultProps = {
   active: true,
+  small: false,
   ariaLabel: 'Active loading indicator',
-  className: 'some-class',
-  small: false
+  className: 'some-class'
 };
 
 /**
  * TODO: Declare template(s) for one or more scenarios.
  */
-const Template = (args) => {
-  return <LoadingBar {...args} />;
-};
-
-const TemplateWithState = (args) => {
-  const [small, setSmall] = useState(false);
+const TemplateIndeterminate = (args) => {
   return (
       <div style={{ margin: '2rem 1rem 1rem 1rem', width: '24rem' }}>
-          <LoadingBar 
-            // TODO: handle events with action or local handler.
-            // onTodo={action('onTodo log action')}
+          <LoadingBar
             {...args}
-            small={small}
           />
       </div>
     )
 };
 
-export const WithStateManager = TemplateWithState.bind({});
+const TemplateDeterminate = (args) => {
+const percentageIndicatorText = 'Loading ' + args.percentage + '%';
+  return (
+      <div style={{ margin: '2rem 1rem 1rem 1rem', width: '24rem' }}>
+          <LoadingBar
+            {...args}
+            percentageIndicatorText={percentageIndicatorText}
+          />
+      </div>
+    )
+};
+
+export const WithStateManager = TemplateIndeterminate.bind({});
 WithStateManager.args = {
+  percentage: undefined,
+  showPercentageIndicator: false,
   ...defaultProps,
 };
 
@@ -69,8 +75,10 @@ WithStateManager.args = {
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const loadingBar = Template.bind({});
+export const loadingBar = TemplateDeterminate.bind({});
 loadingBar.args = {
   // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#LoadingBar-args
+  percentage: 67,
+  showPercentageIndicator: true,
   ...defaultProps,
 };

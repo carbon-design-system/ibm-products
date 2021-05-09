@@ -83,7 +83,6 @@ export let LoadingBar = React.forwardRef(
         className={cx(loadingWrapper, 
           // Apply any supplied class names to the main HTML element.
           className)}
-        //TODOooooo do i need this below?
         ref={ref}
         role="main">
         <div

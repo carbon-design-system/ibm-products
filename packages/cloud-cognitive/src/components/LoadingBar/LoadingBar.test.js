@@ -19,7 +19,6 @@ const blockClass = `${pkg.prefix}--loading-bar`;
 const componentName = LoadingBar.displayName;
 
 // values to use
-const children = `hello, world (${uuidv4()})`;
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 
@@ -33,11 +32,6 @@ describe(componentName, () => {
     const { container } = render(<LoadingBar> </LoadingBar>);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
-  });
-
-  it(`renders children`, () => {
-    render(<LoadingBar>{children}</LoadingBar>);
-    screen.getByText(children);
   });
 
   it('applies className to the containing node', () => {

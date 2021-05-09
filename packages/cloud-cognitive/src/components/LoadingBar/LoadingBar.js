@@ -134,16 +134,39 @@ LoadingBar.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 LoadingBar.propTypes = {
   /**
-   * Provide the contents of the LoadingBar.
+   * Specify whether you want the loading bar indicator to be active or not
    */
-  children: PropTypes.node.isRequired,
+  active: PropTypes.bool,
 
   /**
-   * Provide an optional class to be applied to the containing node.
+   * Provide an optional className to be applied to the containing node
    */
   className: PropTypes.string,
 
-  /* TODO: add types and DocGen for all props. */
+  /**
+   * Specify whether you would like the small variant of <LoadingBar>
+   */
+  small: PropTypes.bool,
+
+  /**
+   * Leave undefined for indetermined duration or specify percentage complete that determinate bar should indicate (0-100).
+   */
+  percentage: PropTypes.number,
+
+  /**
+   * Specify whether to show the percentage indicator.
+   */
+  showPercentageIndicator: PropTypes.bool,
+
+  /**
+   * Provide text to be shown on percentage indicator
+   */
+  percentageIndicatorText: PropTypes.string,
+
+  /**
+   * Specify a ariaLabel that would be used to best describe the active loading state
+   */
+  ariaLabel: PropTypes.string,
 };
 
 // Default values for component props. Default values are not required for
@@ -152,4 +175,10 @@ LoadingBar.propTypes = {
 // component needs to make a choice or assumption when a prop is not supplied.
 LoadingBar.defaultProps = {
   /* TODO: add defaults for relevant props. */
+  active: true,
+  small: false,
+  percentage: undefined,
+  showPercentageIndicator: false,
+  percentageIndicatorText: undefined,
+  ariaLabel: 'Active loading indicator',
 };

@@ -14,7 +14,7 @@ import cx from 'classnames';
 import { pkg /*, carbon */ } from '../../settings';
 
 // Carbon and package components we use.
-/* TODO: @import(s) of carbon components and other package components. */
+/* @import(s) of carbon components and other package components. */
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--loading-bar`;
@@ -23,14 +23,22 @@ const componentName = 'LoadingBar';
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
 /**
- * TODO: A description of the component.
+ * The LoadingBar component provides a way to communicate the loading state to users.
+ * It is intended to fill the space of where it's used, and should persist until the
+ * loading action is complete. Once complete, the active prop may be set to false to 
+ * hide the LoadingBar.
+ * The LoadingBar has two modes of operation: Indeterminate and Determinate.
+ * If no percentage is provided to the component, the LoadingBar behaves in indeterminate
+ * mode, with the bar moving from side to side, to indicate loading in progress.
+ * If a percentage prop is provided, the determinate mode of operation is used and the
+ * loading bar fills until the specified percentage to indicate current progress to
+ * the user.
  */
 export let LoadingBar = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
       className,
-      /* TODO: add other props for LoadingBar */
       active,
       small,
       percentage,
@@ -125,7 +133,7 @@ LoadingBar.propTypes = {
   /**
    * Specify whether you want the loading bar indicator to be active or not
    */
-  active: PropTypes.bool,
+  active: PropTypes.bool.isRequired,
 
   /**
    * Provide an optional className to be applied to the containing node
@@ -163,7 +171,7 @@ LoadingBar.propTypes = {
 // 'undefined' values reasonably. Default values should be provided when the
 // component needs to make a choice or assumption when a prop is not supplied.
 LoadingBar.defaultProps = {
-  /* TODO: add defaults for relevant props. */
+  /* add defaults for relevant props. */
   active: true,
   small: false,
   percentage: undefined,

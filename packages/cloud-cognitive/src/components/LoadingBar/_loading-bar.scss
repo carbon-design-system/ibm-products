@@ -10,14 +10,13 @@
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
-// TODO: @import(s) of Carbon settings and component styles and other
+// Import(s) of Carbon settings and component styles and other
 // related component styles used by LoadingBar
 @import '@carbon/themes/scss/themes';
 @import 'carbon-components/scss/globals/scss/_vars.scss';
 
 $loading-bar__height: 8px;
 $loading-bar__small-height: 4px;
-// $duration--slow-02: 720ms; // Expansion duration - carbon value from _motion.scss
 
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
@@ -145,7 +144,7 @@ $loading-bar__small-height: 4px;
   .#{$block-class}__progress {
     position: relative;
     height: $loading-bar__height;
-    transition: width $duration--slow-02 cubic-bezier(0.4, 0.14, 0.3, 1);
+    transition: width $duration--slow-02 cubic-bezier(0.4, 0.14, 0.3, 1); // Expansion duration - carbon value from _motion.scss
   }
 
   .#{$block-class}__indicator-wrapper {
@@ -154,6 +153,8 @@ $loading-bar__small-height: 4px;
   }
 
   .#{$block-class}__indicator {
+    @include carbon--type-style('body-short-01');
+    color: $text-01;
     padding-top: 16px;
     padding-bottom: 8px;
   }

@@ -107,11 +107,6 @@ const formatOptionLabel = (option, context, allOptions) => {
   );
 };
 
-const parseTypeProps = (propsData) =>
-  !propsData.type || propsData.type === 'filter'
-    ? { filter: true }
-    : { type: propsData.type };
-
 // custom components
 const MultiValueContainer = (props) => (
   <Tag
@@ -237,10 +232,10 @@ IdeFilter.propTypes = {
   light: PropTypes.bool,
   loadingMessage: PropTypes.func,
   menuIsOpen: PropTypes.bool,
-  onChange: PropTypes.func.isRequired,
-  onInputChange: PropTypes.func,
   onBlur: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
   onFocus: PropTypes.func,
+  onInputChange: PropTypes.func,
   options: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,

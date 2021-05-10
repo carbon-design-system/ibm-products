@@ -14,7 +14,7 @@ import '../../utils/enable-all'; // must come before component is imported (dire
 import { getStorybookPrefix } from '../../../config';
 
 import { LoadingBar } from '.';
-import { ExpressiveCard } from '.';
+import { ExpressiveCard } from '../ExpressiveCard/ExpressiveCard';
 import mdx from './LoadingBar.mdx';
 
 import styles from './_storybook-styles.scss';

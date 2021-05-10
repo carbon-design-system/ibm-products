@@ -59,7 +59,7 @@ export let CreateSidePanel = React.forwardRef(
       },
       {
         label: secondaryButtonText,
-        onSecondaryActionClick: () => {
+        onPrimaryActionClick: () => {
           onRequestClose;
         },
         kind: 'secondary',
@@ -72,7 +72,7 @@ export let CreateSidePanel = React.forwardRef(
         ref={ref}
         pageContentSelector={pageContentSelector}
         placement="right"
-        slideIn={true}
+        slideIn
         animateTitle={false}
         className={cx(blockClass, className)}
         onRequestClose={onRequestClose}

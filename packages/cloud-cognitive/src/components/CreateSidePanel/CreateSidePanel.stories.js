@@ -55,7 +55,7 @@ export default {
         default: 0,
       },
     },
-    Default: {
+    default: {
       table: {
         disable: true,
       },
@@ -71,8 +71,8 @@ const defaultStoryProps = {
   formTitle: 'Core configuration',
   formDescription:
     'We recommend you fill out and evaluate these details at a minimum before deploying your topic.',
-  primaryButtonLabel: 'Create',
-  secondaryButtonLabel: 'Cancel',
+  primaryButtonText: 'Create',
+  secondaryButtonText: 'Cancel',
   selectorPrimaryFocus: '.bx--text-input',
 };
 

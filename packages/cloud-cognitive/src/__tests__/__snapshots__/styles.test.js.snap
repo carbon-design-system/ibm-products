@@ -707,6 +707,29 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin: 0;
 }
 
+.exp--saving__message {
+  display: flex;
+}
+
+.exp--saving__error-icon {
+  margin-right: var(--cds-spacing-05, 1rem);
+}
+
+.exp--saving__error-icon svg {
+  fill: var(--cds-danger-01, #da1e28);
+}
+
+.exp--saving__text {
+  font-size: var(--cds-body-short-01-font-size, 0.875rem);
+  font-weight: var(--cds-body-short-01-font-weight, 400);
+  line-height: var(--cds-body-short-01-line-height, 1.29);
+  letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
+}
+
+.exp--saving__buttons {
+  display: flex;
+}
+
 @keyframes rotating {
   0% {
     transform: scaleY(-1) rotate(360deg);
@@ -1204,8 +1227,12 @@ path:nth-of-type(1),
 
 .exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__header {
   margin: 0;
-  padding: var(--cds-spacing-07, 2rem);
+  padding: var(--cds-spacing-06, 1.5rem) var(--cds-spacing-07, 2rem);
   border-bottom: 1px solid var(--cds-ui-03, #e0e0e0);
+}
+
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__header--with-nav {
+  padding-bottom: 0;
 }
 
 .exp--tearsheet.exp--tearsheet--narrow .exp--tearsheet__header {
@@ -1226,6 +1253,13 @@ path:nth-of-type(1),
 
 .exp--tearsheet .exp--tearsheet__header-actions {
   padding-left: var(--cds-spacing-06, 1.5rem);
+}
+
+.exp--tearsheet
+.exp--tearsheet__header-actions
+.bx--btn-set
+.bx--btn:not(:first-of-type) {
+  margin-left: var(--cds-spacing-03, 0.5rem);
 }
 
 .exp--tearsheet .exp--tearsheet__header--no-close-icon {
@@ -1254,10 +1288,6 @@ path:nth-of-type(1),
 
 .exp--tearsheet .exp--tearsheet__header-navigation {
   margin: var(--cds-spacing-04, 0.75rem) 0 0;
-}
-
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__header-navigation {
-  margin: var(--cds-spacing-04, 0.75rem) 0 calc(-1 * var(--cds-spacing-06, 1.5rem));
 }
 
 .exp--tearsheet .exp--tearsheet__body {

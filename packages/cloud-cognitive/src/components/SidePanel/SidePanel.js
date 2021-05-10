@@ -520,17 +520,28 @@ SidePanel.propTypes = {
   ),
 
   /**
-   * Sets the primary action buttons for the side panel
+   * The primary actions to be shown in the side panel. Each action is
+   * specified as an object with optional fields: 'label' to supply the button
+   * label, 'kind' to select the button kind (must be 'primary', 'secondary' or
+   * 'ghost'), 'loading' to display a loading indicator, and 'onClick' to
+   * receive notifications when the button is clicked. Additional fields in the
+   * object will be passed to the Button component, and these can include
+   * 'disabled', 'ref', 'className', and any other Button props. Any other
+   * fields in the object will be passed through to the button element as HTML
+   * attributes.
+   *
+   * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
   actions: PropTypes.oneOfType([
     ActionSet.validateActions(),
     PropTypes.arrayOf(
       PropTypes.shape({
-        label: PropTypes.string,
-        onPrimaryActionClick: PropTypes.func,
+        ...Button.propTypes,
         kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
-        disabled: PropTypes.bool,
+        label: PropTypes.string,
         loading: PropTypes.bool,
+        // we duplicate this Button prop to improve the DocGen here
+        onClick: Button.propTypes.onClick,
       })
     ),
   ]),

@@ -25,7 +25,6 @@ const defaults = {
     APIKeyModal: false,
     CreateSidePanel: false,
     ContextHeader: false,
-    CreateModal: false,
     EmptyState: false,
     ErrorEmptyState: false,
     ExampleComponent: false,

@@ -23,6 +23,8 @@ import {
   Group32,
 } from '@carbon/icons-react';
 
+import { TooltipIcon } from 'carbon-components-react';
+
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}-user-profile-avatar`;
 const componentName = 'UserProfileImage';
@@ -87,22 +89,25 @@ export let UserProfileImage = React.forwardRef(
       : kind && size && icons[kind][size];
 
     return FillItem ? (
-      <div
-        {
-          // Pass through any other property values as HTML attributes.
-          ...rest
-        }
-        ref={ref}
-        title={tooltipText && tooltipText}
-        className={cx([
-          blockClass,
-          className,
-          `${blockClass}--${size}`,
-          `${blockClass}--${theme}`,
-          `${blockClass}--${backgroundColor}`,
-        ])}>
-        <FillItem />
-      </div>
+      <TooltipIcon tooltipText="filter">
+        <div
+          {
+            // Pass through any other property values as HTML attributes.
+            ...rest
+          }
+          ref={ref}
+          title={tooltipText && tooltipText}
+          className={cx([
+            blockClass,
+            className,
+            'test',
+            `${blockClass}--${size}`,
+            `${blockClass}--${theme}`,
+            `${blockClass}--${backgroundColor}`,
+          ])}>
+          <FillItem className="test" />
+        </div>
+      </TooltipIcon>
     ) : null;
   }
 );

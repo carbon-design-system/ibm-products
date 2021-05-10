@@ -63,13 +63,20 @@ $theme-keys: map-keys($themes);
     }
   }
 
+  .test {
+    color: $danger-01;
+    fill: $danger-01;
+  }
+
   .#{$block-class} {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    color: $danger-01;
     text-transform: uppercase;
     border-radius: 100%;
+    fill: $danger-01;
   }
 
   .#{$block-class}__photo {
@@ -97,6 +104,7 @@ $theme-keys: map-keys($themes);
   }
 
   .#{$block-class}--xlg {
+    fill: $danger-01;
     @include size('xlg');
     @include carbon--type-style('productive-heading-04');
   }

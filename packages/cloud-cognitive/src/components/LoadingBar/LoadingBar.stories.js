@@ -14,6 +14,7 @@ import '../../utils/enable-all'; // must come before component is imported (dire
 import { getStorybookPrefix } from '../../../config';
 
 import { LoadingBar } from '.';
+import { ExpressiveCard } from '.';
 import mdx from './LoadingBar.mdx';
 
 import styles from './_storybook-styles.scss';
@@ -65,6 +66,30 @@ const TemplateDeterminate = (args) => {
     )
 };
 
+const TemplateCardExample = (args) => {
+  const [active, setActive] = useState(false);
+  return (
+      <ExpressiveCard
+        columnSize={4}
+        primaryButtonText={"Start load"}
+        onPrimaryButtonClick={() => setActive(true)}
+        >
+        <LoadingBar
+          {...args}
+        />
+        <div
+          style={{
+              fontSize: '1.2rem',
+              paddingTop: '30px',
+              paddingLeft: '20px',
+          }}
+        >
+            Example with card
+        </div>
+      </ExpressiveCard>
+    )
+};
+
 /**
  * Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
@@ -81,5 +106,12 @@ Determinate.args = {
   // Component args - https://storybook.js.org/docs/react/writing-stories/args#LoadingBar-args
   percentage: 67,
   showPercentageIndicator: true,
+  ...defaultProps,
+};
+
+export const CardExample = TemplateCardExample.bind({});
+Indeterminate.args = {
+  percentage: undefined,
+  showPercentageIndicator: false,
   ...defaultProps,
 };

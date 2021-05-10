@@ -85,7 +85,6 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     100% {
       // stylelint-disable-next-line carbon/layout-token-use
       transform: translateX(-#{$medium-panel-size});
-
       opacity: 0;
     }
   }
@@ -98,7 +97,6 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     100% {
       // stylelint-disable-next-line carbon/layout-token-use
       transform: translateX($medium-panel-size);
-
       opacity: 0;
     }
   }
@@ -108,8 +106,9 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     --#{$block-class}--title-container-height: 0;
     --#{$block-class}--subtitle-container-height: 0;
     --#{$block-class}--divider-opacity: 0;
-    --#{$block-class}--title-font-size: 1.25rem;
+    --#{$block-class}--title-y-position: 0;
     --#{$block-class}--content-bottom-padding: #{$spacing-10};
+    --#{$block-class}--collapsed-title-y-position: 1rem;
 
     position: fixed;
     top: $spacing-09;
@@ -160,11 +159,6 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     &.#{$block-class}__container-left-placement.#{$block-class}__container--max {
       @include sidePanelEntrance(left, $max-panel-size);
     }
-    &.#{$block-class}__with-condensed-header {
-      .#{$block-class}__title-text {
-        @include carbon--font-weight('semibold');
-      }
-    }
     &.#{$block-class}__container-with-action-toolbar.#{$block-class}__with-condensed-header {
       .#{$block-class}__title-container {
         &::before {
@@ -198,15 +192,24 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       display: -webkit-box;
       padding-right: $spacing-07;
       overflow: hidden;
-      // stylelint-disable-next-line carbon/type-token-use
-      font-size: var(--#{$block-class}--title-font-size);
       background-color: $ui-01;
-      transition: font-size $duration--moderate-01,
-        font-weight $duration--moderate-02;
-      transition-timing-function: carbon--motion(standard);
-
-      -webkit-line-clamp: 2;
+      // stylelint-disable-next-line carbon/layout-token-use
+      transform: translateY(var(--#{$block-class}--title-y-position));
+      opacity: var(--#{$block-class}--subtitle-opacity);
       -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+    .#{$block-class}__collapsed-title-text {
+      position: absolute;
+      top: $spacing-05;
+      display: -webkit-box;
+      padding-right: $spacing-07;
+      overflow: hidden;
+      // stylelint-disable-next-line carbon/layout-token-use
+      transform: translateY(var(--#{$block-class}--collapsed-title-y-position));
+      opacity: var(--#{$block-class}--divider-opacity);
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
     }
     .#{$block-class}__subtitle-text {
       @include carbon--type-style('body-short-01');

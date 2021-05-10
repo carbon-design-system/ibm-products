@@ -61,7 +61,6 @@ export let SidePanel = React.forwardRef(
     const [shouldRender, setRender] = useState(open);
     const [animationComplete, setAnimationComplete] = useState(false);
     const sidePanelRef = useRef();
-    const sidePanelTitleRef = useRef();
     const sidePanelOverlayRef = useRef();
     const startTrapRef = useRef();
     const endTrapRef = useRef();
@@ -178,20 +177,27 @@ export let SidePanel = React.forwardRef(
                 `${titleHeight + 16}px`
               );
 
-              // Set title font size here, previously this was done
-              // via a class addition, however, it is choppier that
-              // way, using css variables allows for a smoother animation
-              // to the title font size
-              let fontSize = Math.max(
-                1,
-                1 +
-                  (0.25 * (sidePanelSubtitleElement.offsetHeight - scrollTop)) /
-                    sidePanelSubtitleElement.offsetHeight
+              // Set title y positioning
+              const titleYPosition = Math.min(
+                scrollTop / sidePanelSubtitleElement.offsetHeight,
+                1
               );
-              fontSize = fontSize.toFixed(4);
               sidePanelOuter.style.setProperty(
-                `--${blockClass}--title-font-size`,
-                `${fontSize}rem`
+                `--${blockClass}--title-y-position`,
+                `${-Math.abs(titleYPosition)}rem`
+              );
+
+              // Set collapsed title y positioning
+              let collapsedTitleYPosition = Math.min(
+                1,
+                (sidePanelSubtitleElement.offsetHeight - scrollTop) /
+                  sidePanelSubtitleElement.offsetHeight
+              );
+              collapsedTitleYPosition =
+                collapsedTitleYPosition < 0 ? 0 : collapsedTitleYPosition;
+              sidePanelOuter.style.setProperty(
+                `--${blockClass}--collapsed-title-y-position`,
+                `${collapsedTitleYPosition}rem`
               );
             } else {
               sidePanelOuter.classList.remove(
@@ -202,12 +208,16 @@ export let SidePanel = React.forwardRef(
                 1
               );
               sidePanelOuter.style.setProperty(
-                `--${blockClass}--title-font-size`,
-                '1.25rem'
+                `--${blockClass}--title-y-position`,
+                0
               );
               sidePanelOuter.style.setProperty(
                 `--${blockClass}--divider-opacity`,
                 0
+              );
+              sidePanelOuter.style.setProperty(
+                `--${blockClass}--collapsed-title-y-position`,
+                `1rem`
               );
             }
           });
@@ -409,12 +419,16 @@ export let SidePanel = React.forwardRef(
                     <p className={`${blockClass}__label-text`}>{labelText}</p>
                   )}
                   {title && title.length && (
-                    <h2
-                      className={`${blockClass}__title-text`}
-                      ref={sidePanelTitleRef}
-                      title={title}>
+                    <h2 className={`${blockClass}__title-text`} title={title}>
                       {title}
                     </h2>
+                  )}
+                  {title && title.length && (
+                    <h5
+                      className={`${blockClass}__collapsed-title-text`}
+                      title={title}>
+                      {title}
+                    </h5>
                   )}
                   <Button
                     kind="ghost"

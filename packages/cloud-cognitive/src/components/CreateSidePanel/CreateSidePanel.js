@@ -14,9 +14,8 @@ import cx from 'classnames';
 import { pkg } from '../../settings';
 
 // Carbon and package components we use.
-import { Form, FormGroup } from 'carbon-components-react';
+import { Form } from 'carbon-components-react';
 import { SidePanel } from '../SidePanel/SidePanel';
-import { ActionSet } from '../ActionSet';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--create-side-panel`;
@@ -37,29 +36,29 @@ export let CreateSidePanel = React.forwardRef(
       title,
       subtitle,
       children,
-      description,
-      disabled,
+      disableSubmit,
       onRequestSubmit,
-      primaryButtonLabel,
-      primaryKind,
-      secondaryButtonLabel,
+      primaryButtonText,
+      secondaryButtonText,
       selectorPrimaryFocus,
       pageContentSelector,
+      formTitle,
+      formDescription,
       ...rest
     },
     ref
   ) => {
     const actions = [
       {
-        label: primaryButtonLabel,
+        label: primaryButtonText,
         onPrimaryActionClick: () => {
           onRequestSubmit;
         },
         kind: 'primary',
-        disabled: disabled,
+        disabled: disableSubmit,
       },
       {
-        label: secondaryButtonLabel,
+        label: secondaryButtonText,
         onSecondaryActionClick: () => {
           onRequestClose;
         },
@@ -69,6 +68,8 @@ export let CreateSidePanel = React.forwardRef(
 
     return (
       <SidePanel
+        {...rest}
+        ref={ref}
         pageContentSelector={pageContentSelector}
         placement="right"
         slideIn={true}
@@ -76,19 +77,18 @@ export let CreateSidePanel = React.forwardRef(
         className={cx(blockClass, className)}
         onRequestClose={onRequestClose}
         open={open}
-        title="Create partitions"
-        subtitle="Specify the details of the partitions you're creating"
+        title={title}
+        subtitle={subtitle}
         actions={actions}
         selectorPrimaryFocus={selectorPrimaryFocus}
         size="md">
         <h3
           className={`${blockClass}__form-title-text ${blockClass}__content-text`}>
-          Core configuration
+          {formTitle}
         </h3>
         <p
           className={`${blockClass}__form-description-text ${blockClass}__content-text`}>
-          We recommend you fill out and evaluate these details at a minimum
-          before deploying your topic
+          {formDescription}
         </p>
         <Form className={`${blockClass}__form`}>{children}</Form>
       </SidePanel>
@@ -108,71 +108,72 @@ CreateSidePanel.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 CreateSidePanel.propTypes = {
   /**
-   * What border color (HTML color value) to use.
+   * Sets the body content of the side panel
    */
-  onRequestClose: PropTypes.func,
-
-  /**
-   * If true, the border is a box, otherwise it is a shadow.
-   */
-  boxedBorder: PropTypes.bool,
-
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
   /**
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
 
   /**
-   * If true, the button primary button is disabled, otherwise it can be used.
+   * The description of the CreateSidePanel serves to provide more information about the form within the panel.
    */
-  disabled: PropTypes.bool,
+  description: PropTypes.node,
+  /**
+   * Specifies a boolean for disabling or enabling the primary button. This is important for form validation
+   * Returning `true` prevents the primary button from being clicked until required fields are completed.
+   */
+  disableSubmit: PropTypes.bool,
+  /**
+   * Specifies an optional field that provides a additional context for a form
+   */
+  formDescription: PropTypes.node,
+  /**
+   * Specifies a required that provides a title for a form
+   */
+  formTitle: PropTypes.node.isRequired,
 
   /**
-   * An optional primary button click handler.
+   * Specifies an optional handler which is called when the CreateSidePanel
+   * is closed.
    */
-  onPrimaryClick: PropTypes.func,
-
+  onRequestClose: PropTypes.func,
   /**
-   * An optional secondary button click handler.
+   * Specifies an optional handler which is called when the CreateSidePanel
+   * primary button is pressed.
    */
-  onSecondaryClick: PropTypes.func,
-
+  onRequestSubmit: PropTypes.func,
   /**
-   * The primary button label.
+   * Specifies whether the CreateSidePanel is open or not.
    */
-  primaryButtonLabel: PropTypes.string,
-
+  open: PropTypes.bool,
   /**
-   * The kind of button for the primary button ('primary' or 'danger').
+   * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
+   * This prop is required when using the `slideIn` variant of the side panel.
    */
-  primaryKind: PropTypes.oneOf(['primary', 'danger']),
-
+  pageContentSelector: PropTypes.string.isRequired,
   /**
-   * The secondary button label.
+   * Specifies the primary button's text in the modal.
    */
-  secondaryButtonLabel: PropTypes.string,
-
+  primaryButtonText: PropTypes.string.isRequired,
   /**
-   * The kind of button for the secondary button ('secondary' or 'tertiary').
+   * Specifies the secondary button's text in the modal.
    */
-  secondaryKind: PropTypes.oneOf(['secondary', 'tertiary']),
-
+  secondaryButtonText: PropTypes.string.isRequired,
   /**
-   * The size for the buttons ('default', 'small' or 'field').
+   * Specifies which DOM element in the form should be focused.
    */
-  size: PropTypes.oneOf(['default', 'small', 'field']),
+  selectorPrimaryFocus: PropTypes.node.isRequired,
+  /**
+   * The subtitle of the CreateSidePanel is optional and serves to provide more information about the modal.
+   */
+  subtitle: PropTypes.node,
+  /**
+   * The title of the CreateSidePanel is usually the product or service name.
+   */
+  title: PropTypes.node.isRequired,
 };
-
-// className,
-// onRequestClose,
-// open,
-// title,
-// subtitle,
-// children,
-// description,
-// disabled,
-// onRequestSubmit,
-// primaryButtonLabel,
-// primaryKind,
-// secondaryButtonLabel,
-// selectorPrimaryFocus,

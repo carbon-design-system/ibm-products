@@ -1,26 +1,16 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2021, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 import React, { useState } from 'react';
-import { action } from '@storybook/addon-actions';
 import {
   Button,
   Grid,
   Row,
   Column,
-  TextArea,
   TextInput,
-  DataTable,
-  Table,
-  TableHeader,
-  TableBody,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TableCell,
   NumberInput,
   Dropdown,
 } from 'carbon-components-react';
@@ -29,7 +19,6 @@ import {
   HeaderContainer,
   HeaderName,
 } from 'carbon-components-react/lib/components/UIShell';
-import { Copy20, Delete20, Settings20 } from '@carbon/icons-react';
 
 import { pkg } from '../../settings';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
@@ -37,7 +26,6 @@ import { getStorybookPrefix } from '../../../config';
 
 import { CreateSidePanel } from '.';
 import mdx from './CreateSidePanel.mdx';
-// import './_storybook-styles.scss';
 
 import styles from './_storybook-styles.scss';
 
@@ -67,7 +55,7 @@ export default {
         default: 0,
       },
     },
-    slideIn: {
+    Default: {
       table: {
         disable: true,
       },
@@ -78,187 +66,17 @@ export default {
 const prefix = 'create-side-panel-stories__';
 
 const defaultStoryProps = {
-  title:
-    'Incident management for your application, testing a very long title to see how this behaves with a longer title',
-  subtitle:
-    'This is some text that would talk about how you could investigate incidednt management within this side panel.',
+  title: 'Create partitions',
+  subtitle: "Specify the details of the partitions you're creating",
+  formTitle: 'Core configuration',
+  formDescription:
+    'We recommend you fill out and evaluate these details at a minimum before deploying your topic.',
+  primaryButtonLabel: 'Create',
+  secondaryButtonLabel: 'Cancel',
+  selectorPrimaryFocus: '.bx--text-input',
 };
 
-const headerData = [
-  { id: 1, header: 'Column header', key: 'value' },
-  { id: 2, header: 'Column header', key: 'value' },
-];
-
-const rowData = [
-  {
-    id: 'a',
-    value: 'Cell text',
-  },
-  {
-    id: 'b',
-    value: 'Cell text',
-  },
-  {
-    id: 'c',
-    value: 'Cell text',
-  },
-  {
-    id: 'd',
-    value: 'Cell text',
-  },
-  {
-    id: 'e',
-    value: 'Cell text',
-  },
-  {
-    id: 'f',
-    value: 'Cell text',
-  },
-  {
-    id: 'g',
-    value: 'Cell text',
-  },
-  {
-    id: 'h',
-    value: 'Cell text',
-  },
-];
-
-const actions_1 = [
-  {
-    label: 'Primary button',
-    onPrimaryActionClick: () => {},
-    kind: 'primary',
-  },
-];
-
-const actions_2 = [
-  {
-    label: 'Ghost button',
-    onPrimaryActionClick: () => {},
-    kind: 'ghost',
-  },
-];
-
-const actions_3 = [
-  {
-    label: 'Primary button',
-    onPrimaryActionClick: () => {},
-    kind: 'primary',
-  },
-  {
-    label: 'Secondary button',
-    onPrimaryActionClick: () => {},
-    kind: 'secondary',
-  },
-];
-
-const actions_4 = [
-  {
-    label: 'Primary button',
-    onPrimaryActionClick: () => {},
-    kind: 'primary',
-  },
-  {
-    label: 'Secondary button',
-    onPrimaryActionClick: () => {},
-    kind: 'secondary',
-  },
-  {
-    label: 'Ghost button',
-    onPrimaryActionClick: () => {},
-    kind: 'ghost',
-  },
-];
-
-const actions_5 = [
-  {
-    label: 'Primary button',
-    onPrimaryActionClick: () => {},
-    kind: 'primary',
-  },
-  {
-    label: 'Secondary button',
-    onPrimaryActionClick: () => {},
-    kind: 'secondary',
-  },
-  {
-    label: 'Secondary button',
-    onPrimaryActionClick: () => {},
-    kind: 'secondary',
-  },
-];
-
-const actionSets = [actions_1, actions_2, actions_3, actions_4, actions_5, []];
-
-// eslint-disable-next-line react/prop-types
-const ChildrenContent = () => {
-  const [notesValue, setNotesValue] = useState('');
-  const items = ['Day(s)', 'Month(s)', 'Year(s'];
-  return (
-    <>
-      <TextInput
-        labelText="Topic name"
-        className={`${prefix}form-item`}
-        placeholder="Enter topic name"
-      />
-      <NumberInput
-        id="1"
-        className={`${prefix}form-item`}
-        label="Partitions"
-        min={0}
-        max={50}
-        value={1}
-      />
-      <NumberInput
-        id="2"
-        className={`${prefix}form-item`}
-        label="Replicas"
-        min={0}
-        max={50}
-        value={1}
-      />
-      <NumberInput
-        id="3"
-        className={`${prefix}form-item`}
-        label="Minimum in-sync replicas"
-        min={0}
-        max={50}
-        value={1}
-      />
-      <div
-        style={{
-          display: 'grid',
-          alignItems: 'flex-end',
-          gridGap: '0.75rem',
-          gridTemplateColumns: '1fr 1fr',
-        }}>
-        <NumberInput
-          id="4"
-          className={`${prefix}form-item`}
-          label="Retention time"
-          min={0}
-          max={50}
-          value={30}
-        />
-        <Dropdown
-          ariaLabel="Dropdown"
-          items={items}
-          label="Options"
-          className={`${prefix}form-item`}
-        />
-      </div>
-      <NumberInput
-        id="3"
-        className={`${prefix}form-item`}
-        label="Minimum in-sync replicas"
-        min={0}
-        max={50}
-        value={1}
-      />
-    </>
-  );
-};
+const items = ['Day(s)', 'Month(s)', 'Year(s'];
 
 const renderUIShellHeader = () => (
   <HeaderContainer
@@ -272,31 +90,7 @@ const renderUIShellHeader = () => (
   />
 );
 
-// eslint-disable-next-line react/prop-types
-const SlideOverTemplate = ({ minimalContent, actions, ...args }) => {
-  const [open, setOpen] = useState(false);
-  return (
-    <>
-      {renderUIShellHeader()}
-      <Button onClick={() => setOpen(!open)}>
-        {open ? 'Close side panel' : 'Open side panel'}
-      </Button>
-      <CreateSidePanel
-        {...args}
-        open={open}
-        onRequestClose={() => setOpen(false)}
-        actions={actionSets[actions]}
-        selectorPrimaryFocus=".bx--text-input"
-        primaryButtonLabel="Create"
-        secondaryButtonLabel="Cancel">
-        {!minimalContent && <ChildrenContent />}
-      </CreateSidePanel>
-    </>
-  );
-};
-
-// eslint-disable-next-line react/prop-types
-const SlideInTemplate = ({ actions, ...args }) => {
+const DefaultTemplate = ({ ...args }) => {
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -315,20 +109,171 @@ const SlideInTemplate = ({ actions, ...args }) => {
         slideIn={true}
         open={open}
         onRequestClose={() => setOpen(false)}
-        actions={actionSets[actions]}
-        selectorPrimaryFocus=".bx--text-input"
-        primaryButtonLabel="Create"
-        secondaryButtonLabel="Cancel">
-        <ChildrenContent />
+        selectorPrimaryFocus=".bx--text-input">
+        <TextInput
+          labelText="Topic name"
+          className={`${prefix}form-item`}
+          placeholder="Enter topic name"
+        />
+        <NumberInput
+          id="1"
+          className={`${prefix}form-item`}
+          label="Partitions"
+          min={0}
+          max={50}
+          value={1}
+        />
+        <NumberInput
+          id="2"
+          className={`${prefix}form-item`}
+          label="Replicas"
+          min={0}
+          max={50}
+          value={1}
+        />
+        <NumberInput
+          id="3"
+          className={`${prefix}form-item`}
+          label="Minimum in-sync replicas"
+          min={0}
+          max={50}
+          value={1}
+        />
+        <div
+          style={{
+            display: 'grid',
+            alignItems: 'flex-end',
+            gridGap: '0.75rem',
+            gridTemplateColumns: '1fr 1fr',
+          }}>
+          <NumberInput
+            id="4"
+            className={`${prefix}form-item`}
+            label="Retention time"
+            min={0}
+            max={50}
+            value={30}
+          />
+          <Dropdown
+            ariaLabel="Dropdown"
+            items={items}
+            initialSelectedItem="Day(s)"
+            label="Options"
+            className={`${prefix}form-item`}
+          />
+        </div>
+        <NumberInput
+          id="3"
+          className={`${prefix}form-item`}
+          label="Minimum in-sync replicas"
+          min={0}
+          max={50}
+          value={1}
+        />
       </CreateSidePanel>
     </>
   );
 };
 
-export const SlideIn = SlideInTemplate.bind({});
-SlideIn.args = {
-  // placement: 'right',
-  // slideIn: true,
+const TemplateWithFormValidation = ({ ...args }) => {
+  const [open, setOpen] = useState(false);
+  const [textInput, setTextInput] = useState('');
+  const [invalid, setInvalid] = useState(false);
+  return (
+    <>
+      {renderUIShellHeader()}
+      <Grid id="cloud-and-cognitive-page-content">
+        <Row>
+          <Column>
+            <Button onClick={() => setOpen(!open)}>
+              {open ? 'Close side panel' : 'Open side panel'}
+            </Button>
+          </Column>
+        </Row>
+      </Grid>
+      <CreateSidePanel
+        {...args}
+        slideIn={true}
+        open={open}
+        onRequestClose={() => setOpen(false)}
+        disableSubmit={textInput.length === 0 ? true : false}>
+        <TextInput
+          labelText="Topic name"
+          className={`${prefix}form-item`}
+          placeholder="Enter topic name"
+          onChange={(e) => {
+            setTextInput(e.target.value);
+            setInvalid(false);
+          }}
+          onBlur={() => {
+            textInput.length === 0 && setInvalid(true);
+          }}
+          invalid={invalid}
+          invalidText="This is a required field"
+        />
+        <NumberInput
+          id="1"
+          className={`${prefix}form-item`}
+          label="Partitions"
+          min={0}
+          max={50}
+          value={1}
+        />
+        <NumberInput
+          id="2"
+          className={`${prefix}form-item`}
+          label="Replicas"
+          min={0}
+          max={50}
+          value={1}
+        />
+        <NumberInput
+          id="3"
+          className={`${prefix}form-item`}
+          label="Minimum in-sync replicas"
+          min={0}
+          max={50}
+          value={1}
+        />
+        <div className={`${prefix}example-container`}>
+          <NumberInput
+            id="4"
+            className={`${prefix}form-item`}
+            label="Retention time"
+            min={0}
+            max={50}
+            value={30}
+          />
+          <Dropdown
+            ariaLabel="Dropdown"
+            initialSelectedItem="Day(s)"
+            items={items}
+            label="Options"
+            className={`${prefix}form-item`}
+          />
+        </div>
+        <NumberInput
+          id="3"
+          className={`${prefix}form-item`}
+          label="Minimum in-sync replicas"
+          min={0}
+          max={50}
+          value={1}
+        />
+      </CreateSidePanel>
+    </>
+  );
+};
+
+export const Default = DefaultTemplate.bind({});
+Default.args = {
+  pageContentSelector: '#cloud-and-cognitive-page-content',
+  actions: 0,
+  ...defaultStoryProps,
+};
+
+export const WithFormValidation = TemplateWithFormValidation.bind({});
+WithFormValidation.args = {
   pageContentSelector: '#cloud-and-cognitive-page-content',
   actions: 0,
   ...defaultStoryProps,

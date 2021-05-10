@@ -178,7 +178,7 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       }
     }
     &.#{$block-class}__container-without-overlay {
-      box-shadow: 0 $spacing-02 $spacing-04 $overlay-01;
+      box-shadow: 0 $spacing-01 $spacing-02 $overlay-01;
     }
     .#{$block-class}__title-container {
       position: sticky;

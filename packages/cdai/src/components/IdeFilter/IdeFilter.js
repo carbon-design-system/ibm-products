@@ -61,11 +61,18 @@ const customStyles = {
 };
 
 // custom behaviour
-const getNewOptionData = (inputValue, optionLabel) => ({
-  label: optionLabel,
-  value: inputValue,
-  __plaintext__: true,
-});
+const getNewOptionData = (allowPlaintext = true) => (
+  inputValue,
+  optionLabel
+) => {
+  if (allowPlaintext) {
+    return {
+      label: optionLabel,
+      value: inputValue,
+      __plaintext__: true,
+    };
+  }
+};
 const formatCreateLabel = (searchForText) => (inputValue) =>
   `${searchForText} "${inputValue}"`;
 const findCategoryForOption = (option, allOptions) => {
@@ -107,18 +114,20 @@ const parseTypeProps = (propsData) =>
 
 // custom components
 const MultiValueContainer = (props) => (
-  <Tag {...parseTypeProps(props.data)} className={`${idePrefix}-filter--tag`}>
-    {props.children}
+  <Tag
+    type={props.data.type || 'filter'}
+    className={`${idePrefix}-filter--tag`}>
+    <div className={`${idePrefix}-filter--tag-container`}>{props.children}</div>
   </Tag>
 );
 const MultiValueRemove = (props) => {
-  const typeProps = parseTypeProps(props.data);
+  const type = props.data.type || 'filter';
   return (
     <button
       type="button"
       {...props.innerProps}
       className={`${idePrefix}-filter--close${
-        typeProps.filter
+        type === 'filter'
           ? ` ${idePrefix}-filter--tag-filter`
           : /* istanbul ignore next */ ''
       }`}>
@@ -138,6 +147,8 @@ const IdeFilter = ({
   ariaLabel,
   onChange,
   onInputChange,
+  onBlur,
+  onFocus,
   options,
   value,
   inputValue,
@@ -148,17 +159,23 @@ const IdeFilter = ({
   light,
   isLoading,
   searchForText,
+  searchIcon: SearchIcon,
   autoFocus,
+  allowPlaintext,
 }) => {
   return (
     <div
       className={`${idePrefix}-filter${
         light ? ` ${idePrefix}-filter--light` : ''
       }`}>
-      <Search16
-        className={`${idePrefix}-filter--search-icon`}
-        description={placeholderText}
-      />
+      {SearchIcon ? (
+        <SearchIcon className={`${idePrefix}-filter--search-icon`} />
+      ) : (
+        <Search16
+          className={`${idePrefix}-filter--search-icon`}
+          description={placeholderText}
+        />
+      )}
       <CreatableSelect
         components={{
           MultiValueContainer,
@@ -175,6 +192,8 @@ const IdeFilter = ({
         inputValue={inputValue}
         onChange={onChange}
         onInputChange={onInputChange}
+        onBlur={onBlur}
+        onFocus={onFocus}
         options={options}
         placeholder={placeholderText}
         className={`${idePrefix}-filter--select`}
@@ -183,7 +202,7 @@ const IdeFilter = ({
           formatOptionLabel(option, context, options)
         }
         formatCreateLabel={formatCreateLabel(searchForText)}
-        getNewOptionData={getNewOptionData}
+        getNewOptionData={getNewOptionData(allowPlaintext)}
         loadingMessage={loadingMessage}
         allowCreateWhileLoading={allowCreateWhileLoading}
         isLoading={isLoading}
@@ -205,10 +224,12 @@ IdeFilter.defaultProps = {
   allowCreateWhileLoading: true,
   isLoading: false,
   autoFocus: false,
+  allowPlaintext: true,
 };
 
 IdeFilter.propTypes = {
   allowCreateWhileLoading: PropTypes.bool,
+  allowPlaintext: PropTypes.bool,
   ariaLabel: PropTypes.string,
   autoFocus: PropTypes.bool,
   inputValue: PropTypes.string,
@@ -218,6 +239,8 @@ IdeFilter.propTypes = {
   menuIsOpen: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   onInputChange: PropTypes.func,
+  onBlur: PropTypes.func,
+  onFocus: PropTypes.func,
   options: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
@@ -232,6 +255,7 @@ IdeFilter.propTypes = {
   ).isRequired,
   placeholderText: PropTypes.string,
   searchForText: PropTypes.string,
+  searchIcon: PropTypes.element,
   value: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,

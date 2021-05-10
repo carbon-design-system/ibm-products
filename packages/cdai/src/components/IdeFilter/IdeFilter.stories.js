@@ -13,6 +13,7 @@ import { getComponentLabel } from '../../component_helpers/StorybookHelper';
 import styles from './_storybook.scss';
 import { IdeFilter } from '.';
 import { options, aceOptions } from './__fixtures__/options';
+import { Idea16 } from '@carbon/icons-react';
 
 storiesOf(getComponentLabel('IdeFilter'), module)
   .addParameters({
@@ -68,6 +69,27 @@ storiesOf(getComponentLabel('IdeFilter'), module)
         />
       </div>
     ),
+    {
+      info: {
+        text: 'Shows an IDE filter component.',
+      },
+    }
+  )
+  .add(
+    'custom icon',
+    () => {
+      const CustomIcon = (props) => <Idea16 {...props} />;
+      return (
+        <div style={{ margin: '2rem 1rem 1rem 1rem' }}>
+          <IdeFilter
+            onChange={action('onChange')}
+            options={options}
+            placeholderText="Search for assets, people, tags or types..."
+            searchIcon={CustomIcon}
+          />
+        </div>
+      );
+    },
     {
       info: {
         text: 'Shows an IDE filter component.',

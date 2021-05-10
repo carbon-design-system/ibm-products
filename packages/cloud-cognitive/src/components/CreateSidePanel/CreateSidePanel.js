@@ -51,7 +51,7 @@ export let CreateSidePanel = React.forwardRef(
     const actions = [
       {
         label: primaryButtonText,
-        onPrimaryActionClick: () => {
+        onClick: () => {
           onRequestSubmit;
         },
         kind: 'primary',
@@ -59,7 +59,7 @@ export let CreateSidePanel = React.forwardRef(
       },
       {
         label: secondaryButtonText,
-        onPrimaryActionClick: () => {
+        onClick: () => {
           onRequestClose;
         },
         kind: 'secondary',

@@ -350,6 +350,7 @@ export let SidePanel = React.forwardRef(
         [`${blockClass}__container-left-placement`]: placement === 'left',
         [`${blockClass}__container-with-action-toolbar`]:
           actionToolbarButtons && actionToolbarButtons.length,
+        [`${blockClass}__container-without-overlay`]: !includeOverlay,
       },
     ]);
 

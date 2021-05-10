@@ -76,6 +76,7 @@ const TemplateCardExample = (args) => {
         >
         <LoadingBar
           {...args}
+          active={active}
         />
         <div
           style={{
@@ -110,7 +111,7 @@ Determinate.args = {
 };
 
 export const CardExample = TemplateCardExample.bind({});
-Indeterminate.args = {
+CardExample.args = {
   percentage: undefined,
   showPercentageIndicator: false,
   ...defaultProps,

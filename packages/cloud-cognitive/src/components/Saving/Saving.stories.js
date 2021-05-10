@@ -52,7 +52,7 @@ const AutoTemplate = (opts) => {
   useEffect(() => {
     const timeoutId = setTimeout(async () => {
       if (dirtyInput) {
-        setStatus('inprogress');
+        setStatus('in-progress');
         await wait(1000);
         setStatus(successful ? 'success' : 'fail');
       }
@@ -67,7 +67,7 @@ const AutoTemplate = (opts) => {
   };
 
   return (
-    <div className="saving-story-container">
+    <div>
       <TextArea
         onChange={onChangeHandler}
         value={text}
@@ -86,14 +86,14 @@ const ManualTemplate = (opts) => {
   const [status, setStatus] = useState('default');
 
   const onSaveHandler = async () => {
-    setStatus('inprogress');
+    setStatus('in-progress');
     await wait(2000);
     setStatus(successful ? 'success' : 'fail');
   };
 
   return (
-    <div className="saving-story-container">
-      <Saving {...args} onSave={onSaveHandler} status={status} />
+    <div>
+      <Saving {...args} onRequestSave={onSaveHandler} status={status} />
     </div>
   );
 };
@@ -109,5 +109,5 @@ Manual.args = {
   ...defaultProps,
   type: 'manual',
   failText: 'Failed to save. Try again?',
-  cancelButtonText: 'Cancel',
+  secondaryButtonText: 'Cancel',
 };

@@ -95,4 +95,24 @@ storiesOf(getComponentLabel('IdeFilter'), module)
         text: 'Shows an IDE filter component.',
       },
     }
+  )
+  .add(
+    'disable creation of new options',
+    () => {
+      return (
+        <div style={{ margin: '2rem 1rem 1rem 1rem' }}>
+          <IdeFilter
+            onChange={action('onChange')}
+            options={options}
+            placeholderText="Search for existing options"
+            allowPlaintext={false}
+          />
+        </div>
+      );
+    },
+    {
+      info: {
+        text: 'Shows an IDE filter component.',
+      },
+    }
   );

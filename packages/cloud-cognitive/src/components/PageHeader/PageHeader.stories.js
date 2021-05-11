@@ -486,14 +486,19 @@ const TemplatePageHeaderWithCarbonHeader = (args) => {
           [Platform]
         </HeaderName>
       </Header>
-      <Content className={`${storyClass}__content-container`}>
+      <div
+        className={`${storyClass}__content-container`}
+        style={{
+          // stylelint-disable-next-line carbon/layout-token-use
+          marginTop: '48px',
+        }}>
         <PageHeader
           className="example-class-name"
           {...includeTheseArgs(args)}
           pageHeaderOffset={48} // 48px is the size of the global header. A more elegant way of passing this could be found.
         />
         <div className={`${storyClass}__inner-content`}>{dummyPageContent}</div>
-      </Content>
+      </div>
     </div>
   );
 };

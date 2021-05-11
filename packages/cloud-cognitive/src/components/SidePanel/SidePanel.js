@@ -132,6 +132,9 @@ export let SidePanel = React.forwardRef(
         const sidePanelTitleElement = document.querySelector(
           `.${blockClass}__title-text`
         );
+        const sidePanelCollapsedTitleElement = document.querySelector(
+          `.${blockClass}__collapsed-title-text`
+        );
         const sidePanelSubtitleElement = document.querySelector(
           `.${`${blockClass}__subtitle-text`}`
         );
@@ -146,13 +149,15 @@ export let SidePanel = React.forwardRef(
               );
               // Set subtitle opacity calculation here
               // as scroll progresses
+              let titleOpacity = Math.min(
+                1,
+                (sidePanelSubtitleElement.offsetHeight - scrollTop) /
+                  sidePanelSubtitleElement.offsetHeight
+              );
+              titleOpacity = titleOpacity < 0 ? 0 : titleOpacity;
               sidePanelOuter.style.setProperty(
                 `--${blockClass}--subtitle-opacity`,
-                `${Math.min(
-                  1,
-                  (sidePanelSubtitleElement.offsetHeight - scrollTop) /
-                    sidePanelSubtitleElement.offsetHeight
-                )}`
+                titleOpacity
               );
 
               // Calculate divider opacity to avoid border
@@ -187,6 +192,15 @@ export let SidePanel = React.forwardRef(
                 `${-Math.abs(titleYPosition)}rem`
               );
 
+              // mark title with aria-hidden={true} if opacity reaches 0
+              if (titleOpacity === 0) {
+                sidePanelTitleElement.setAttribute('aria-hidden', 'true');
+                sidePanelCollapsedTitleElement.setAttribute(
+                  'aria-hidden',
+                  'false'
+                );
+              }
+
               // Set collapsed title y positioning
               let collapsedTitleYPosition = Math.min(
                 1,
@@ -200,6 +214,11 @@ export let SidePanel = React.forwardRef(
                 `${collapsedTitleYPosition}rem`
               );
             } else {
+              sidePanelTitleElement.setAttribute('aria-hidden', 'false');
+              sidePanelCollapsedTitleElement.setAttribute(
+                'aria-hidden',
+                'true'
+              );
               sidePanelOuter.classList.remove(
                 `${blockClass}__with-condensed-header`
               );
@@ -419,14 +438,18 @@ export let SidePanel = React.forwardRef(
                     <p className={`${blockClass}__label-text`}>{labelText}</p>
                   )}
                   {title && title.length && (
-                    <h2 className={`${blockClass}__title-text`} title={title}>
+                    <h2
+                      className={`${blockClass}__title-text`}
+                      title={title}
+                      aria-hidden={false}>
                       {title}
                     </h2>
                   )}
                   {title && title.length && (
                     <h5
                       className={`${blockClass}__collapsed-title-text`}
-                      title={title}>
+                      title={title}
+                      aria-hidden={true}>
                       {title}
                     </h5>
                   )}

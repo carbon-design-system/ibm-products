@@ -120,7 +120,7 @@ const rowData = [
 const actions_1 = [
   {
     label: 'Primary button',
-    onPrimaryActionClick: () => {},
+    onClick: () => {},
     kind: 'primary',
   },
 ];
@@ -128,7 +128,7 @@ const actions_1 = [
 const actions_2 = [
   {
     label: 'Ghost button',
-    onPrimaryActionClick: () => {},
+    onClick: () => {},
     kind: 'ghost',
   },
 ];
@@ -136,12 +136,12 @@ const actions_2 = [
 const actions_3 = [
   {
     label: 'Primary button',
-    onPrimaryActionClick: () => {},
+    onClick: () => {},
     kind: 'primary',
   },
   {
     label: 'Secondary button',
-    onPrimaryActionClick: () => {},
+    onClick: () => {},
     kind: 'secondary',
   },
 ];
@@ -149,17 +149,17 @@ const actions_3 = [
 const actions_4 = [
   {
     label: 'Primary button',
-    onPrimaryActionClick: () => {},
+    onClick: () => {},
     kind: 'primary',
   },
   {
     label: 'Secondary button',
-    onPrimaryActionClick: () => {},
+    onClick: () => {},
     kind: 'secondary',
   },
   {
     label: 'Ghost button',
-    onPrimaryActionClick: () => {},
+    onClick: () => {},
     kind: 'ghost',
   },
 ];
@@ -167,17 +167,17 @@ const actions_4 = [
 const actions_5 = [
   {
     label: 'Primary button',
-    onPrimaryActionClick: () => {},
+    onClick: () => {},
     kind: 'primary',
   },
   {
     label: 'Secondary button',
-    onPrimaryActionClick: () => {},
+    onClick: () => {},
     kind: 'secondary',
   },
   {
     label: 'Secondary button',
-    onPrimaryActionClick: () => {},
+    onClick: () => {},
     kind: 'secondary',
   },
 ];

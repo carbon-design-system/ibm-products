@@ -232,30 +232,10 @@ $raised-z-index: 99;
       }
     }
 
-    .#{$block-class}__breadcrumb-container
-      .#{$block-class}__breadcrumb-title.#{$prefix}--breadcrumb-item {
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
     .#{$block-class}__breadcrumb-container--hidden
       .#{$block-class}__breadcrumb-title.#{$block-class}__breadcrumb-title {
       overflow: initial;
     }
-
-    .#{$block-class}__breadcrumb-title.#{$prefix}--breadcrumb-item
-      .#{$prefix}--link {
-      width: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    // .#{$block-class}__breadcrumb-row::before {
-    //   display: inline-block;
-    //   width: 0;
-    //   height: calc(#{$layout-03} + #{$spacing-04});
-    //   content: '';
-    // }
 
     .#{$block-class}__action-bar {
       flex: 1 1 var(--#{$block-class}--max-action-bar-width-px);

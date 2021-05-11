@@ -6,6 +6,7 @@
  */
 
 import React, { useState } from 'react';
+import { action } from '@storybook/addon-actions';
 import {
   Button,
   Grid,
@@ -120,7 +121,7 @@ const rowData = [
 const actions_1 = [
   {
     label: 'Primary button',
-    onClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'primary',
   },
 ];
@@ -128,7 +129,7 @@ const actions_1 = [
 const actions_2 = [
   {
     label: 'Ghost button',
-    onClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'ghost',
   },
 ];
@@ -136,12 +137,12 @@ const actions_2 = [
 const actions_3 = [
   {
     label: 'Primary button',
-    onClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'primary',
   },
   {
     label: 'Secondary button',
-    onClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'secondary',
   },
 ];
@@ -149,17 +150,17 @@ const actions_3 = [
 const actions_4 = [
   {
     label: 'Primary button',
-    onClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'primary',
   },
   {
     label: 'Secondary button',
-    onClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'secondary',
   },
   {
     label: 'Ghost button',
-    onClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'ghost',
   },
 ];
@@ -167,17 +168,17 @@ const actions_4 = [
 const actions_5 = [
   {
     label: 'Primary button',
-    onClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'primary',
   },
   {
     label: 'Secondary button',
-    onClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'secondary',
   },
   {
     label: 'Secondary button',
-    onClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'secondary',
   },
 ];

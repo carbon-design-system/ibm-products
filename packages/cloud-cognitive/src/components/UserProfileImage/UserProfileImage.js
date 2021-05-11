@@ -89,25 +89,46 @@ export let UserProfileImage = React.forwardRef(
       : kind && size && icons[kind][size];
 
     return FillItem ? (
-      <TooltipIcon tooltipText="filter">
-        <div
-          {
-            // Pass through any other property values as HTML attributes.
-            ...rest
-          }
-          ref={ref}
-          title={tooltipText && tooltipText}
-          className={cx([
-            blockClass,
-            className,
-            'test',
-            `${blockClass}--${size}`,
-            `${blockClass}--${theme}`,
-            `${blockClass}--${backgroundColor}`,
-          ])}>
-          <FillItem className="test" />
-        </div>
-      </TooltipIcon>
+      <React.Fragment>
+        {tooltipText ? (
+          <TooltipIcon tooltipText={tooltipText}>
+            <div
+              {
+                // Pass through any other property values as HTML attributes.
+                ...rest
+              }
+              ref={ref}
+              className={cx([
+                blockClass,
+                className,
+                'test',
+                `${blockClass}--${size}`,
+                `${blockClass}--${theme}`,
+                `${blockClass}--${backgroundColor}`,
+              ])}>
+              <FillItem />
+            </div>
+          </TooltipIcon>
+        ) : (
+          <div
+            {
+              // Pass through any other property values as HTML attributes.
+              ...rest
+            }
+            ref={ref}
+            title={tooltipText && tooltipText}
+            className={cx([
+              blockClass,
+              className,
+              'test',
+              `${blockClass}--${size}`,
+              `${blockClass}--${theme}`,
+              `${blockClass}--${backgroundColor}`,
+            ])}>
+            <FillItem className="test" />
+          </div>
+        )}
+      </React.Fragment>
     ) : null;
   }
 );

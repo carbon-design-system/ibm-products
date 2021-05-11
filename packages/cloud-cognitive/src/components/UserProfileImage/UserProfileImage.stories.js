@@ -64,6 +64,7 @@ export const Default = Template.bind({});
 Default.args = {
   ...defaultArgs,
   kind: 'user',
+  tooltipText: 'Thomas Watson',
 };
 
 export const WithGroupIcon = Template.bind({});

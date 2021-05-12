@@ -14,7 +14,6 @@ import '../../utils/enable-all'; // must come before component is imported (dire
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { UserProfileImage } from '.';
-import { TooltipIcon } from 'carbon-components-react';
 
 const blockClass = `${pkg.prefix}-user-profile-avatar`;
 const dataTestId = uuidv4();

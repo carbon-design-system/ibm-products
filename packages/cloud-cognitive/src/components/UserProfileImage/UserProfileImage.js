@@ -21,6 +21,7 @@ import {
   Group20,
   Group24,
   Group32,
+  Reminder16,
 } from '@carbon/icons-react';
 
 import { TooltipIcon } from 'carbon-components-react';
@@ -88,47 +89,33 @@ export let UserProfileImage = React.forwardRef(
       ? formatInitials
       : kind && size && icons[kind][size];
 
+    const renderUserProfileImage = () => (
+      <div
+        {
+          // Pass through any other property values as HTML attributes.
+          ...rest
+        }
+        ref={ref}
+        className={cx([
+          blockClass,
+          className,
+          'test',
+          `${blockClass}--${size}`,
+          `${blockClass}--${theme}`,
+          `${blockClass}--${backgroundColor}`,
+        ])}>
+        <FillItem className="test" />
+      </div>
+    );
+
     return FillItem ? (
-      <React.Fragment>
-        {tooltipText ? (
-          <TooltipIcon tooltipText={tooltipText}>
-            <div
-              {
-                // Pass through any other property values as HTML attributes.
-                ...rest
-              }
-              ref={ref}
-              className={cx([
-                blockClass,
-                className,
-                'test',
-                `${blockClass}--${size}`,
-                `${blockClass}--${theme}`,
-                `${blockClass}--${backgroundColor}`,
-              ])}>
-              <FillItem />
-            </div>
-          </TooltipIcon>
-        ) : (
-          <div
-            {
-              // Pass through any other property values as HTML attributes.
-              ...rest
-            }
-            ref={ref}
-            title={tooltipText && tooltipText}
-            className={cx([
-              blockClass,
-              className,
-              'test',
-              `${blockClass}--${size}`,
-              `${blockClass}--${theme}`,
-              `${blockClass}--${backgroundColor}`,
-            ])}>
-            <FillItem className="test" />
-          </div>
-        )}
-      </React.Fragment>
+      tooltipText ? (
+        <TooltipIcon tooltipText={tooltipText}>
+          {renderUserProfileImage()}
+        </TooltipIcon>
+      ) : (
+        renderUserProfileImage()
+      )
     ) : null;
   }
 );

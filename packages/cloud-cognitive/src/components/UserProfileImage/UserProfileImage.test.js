@@ -14,6 +14,7 @@ import '../../utils/enable-all'; // must come before component is imported (dire
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { UserProfileImage } from '.';
+import { TooltipIcon } from 'carbon-components-react';
 
 const blockClass = `${pkg.prefix}-user-profile-avatar`;
 const dataTestId = uuidv4();
@@ -45,12 +46,6 @@ describe(name, () => {
     const { container } = renderComponent({ image: 'path_to_image.jpg' });
     const imagePath = container.querySelector('img').getAttribute('src');
     expect(typeof imagePath).toBe('string');
-  });
-
-  test('should render tooltip for the avatar image', () => {
-    const { container } = renderComponent({ tooltipText: 'tooltip text' });
-    const tooltipText = container.querySelector('div').getAttribute('title');
-    expect(typeof tooltipText).toBe('string');
   });
 
   test('should return appropriately size circle based on size prop', () => {

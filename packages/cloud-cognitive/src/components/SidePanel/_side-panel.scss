@@ -76,6 +76,14 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
   content: '';
 }
 
+@mixin setCommonTitleStyles() {
+  display: -webkit-box;
+  padding-right: $spacing-07;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
 @mixin side-panel {
   @keyframes sidePanelExitLeft {
     0% {
@@ -186,30 +194,23 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     }
     .#{$block-class}__title-text {
       @include carbon--type-style('productive-heading-03');
+      @include setCommonTitleStyles();
 
       position: inherit;
       z-index: 4;
-      display: -webkit-box;
-      padding-right: $spacing-07;
-      overflow: hidden;
       background-color: $ui-01;
       // stylelint-disable-next-line carbon/layout-token-use
       transform: translateY(var(--#{$block-class}--title-y-position));
       opacity: var(--#{$block-class}--subtitle-opacity);
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
     }
     .#{$block-class}__collapsed-title-text {
+      @include setCommonTitleStyles();
+
       position: absolute;
       top: $spacing-05;
-      display: -webkit-box;
-      padding-right: $spacing-07;
-      overflow: hidden;
       // stylelint-disable-next-line carbon/layout-token-use
       transform: translateY(var(--#{$block-class}--collapsed-title-y-position));
       opacity: var(--#{$block-class}--divider-opacity);
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
     }
     .#{$block-class}__subtitle-text {
       @include carbon--type-style('body-short-01');

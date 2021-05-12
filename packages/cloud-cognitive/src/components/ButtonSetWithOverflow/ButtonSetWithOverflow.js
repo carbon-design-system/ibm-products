@@ -28,6 +28,7 @@ export const ButtonSetWithOverflow = ({
   className,
   onWidthChange,
   pageActionsLabel,
+  rightAlign,
   size,
 }) => {
   const [showAsOverflow, setShowAsOverflow] = useState(false);
@@ -123,7 +124,13 @@ export const ButtonSetWithOverflow = ({
 
   return (
     <ReactResizeDetector handleWidth={true} onResize={handleResize}>
-      <div className={cx([blockClass, className])} ref={spaceAvailableRef}>
+      <div
+        className={cx([
+          blockClass,
+          className,
+          { [`${blockClass}--right`]: rightAlign },
+        ])}
+        ref={spaceAvailableRef}>
         <ReactResizeDetector onResize={handleButtonResize}>
           <div
             className={`${blockClass}__button-container ${blockClass}__button-container--hidden`}>
@@ -196,6 +203,10 @@ ButtonSetWithOverflow.propTypes = {
    * pageActionsLabel - used when button set is shown as combo button
    */
   pageActionsLabel: PropTypes.node,
+  /**
+   * align buttons to right of available space
+   */
+  rightAlign: PropTypes.bool,
   /**
    * Specify the size of the button, from a list of available sizes.
    * For `default` buttons, this prop can remain unspecified.

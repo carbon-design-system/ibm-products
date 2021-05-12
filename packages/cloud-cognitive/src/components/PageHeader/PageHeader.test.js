@@ -379,7 +379,13 @@ describe('PageHeader', () => {
 
   test('collapse button works', () => {
     const dataTestid = uuidv4();
-    render(<PageHeader {...testProps} data-testid={dataTestid} />);
+    render(
+      <PageHeader
+        {...testProps}
+        showCollapseHeaderButton
+        data-testid={dataTestid}
+      />
+    );
 
     // console.dir(screen.getByRole('region')); // section should be a region https://fae.disability.illinois.edu/rulesets/ROLE_5/
     // const header = screen.getByTestId(dataTestid);

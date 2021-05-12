@@ -332,6 +332,18 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     }
   }
 
+  // form fields should receive correct background color
+  .#{$block-class}__container .bx--text-input,
+  .#{$block-class}__container .bx--text-area,
+  .#{$block-class}__container .bx--search-input,
+  .#{$block-class}__container .bx--select-input,
+  .#{$block-class}__container .bx--dropdown,
+  .#{$block-class}__container .bx--dropdown-list,
+  .#{$block-class}__container .bx--number input[type='number'],
+  .#{$block-class}__container .bx--date-picker__input {
+    background-color: $field-02;
+  }
+
   @keyframes sidePanelOverlayEntrance {
     0% {
       opacity: 0;

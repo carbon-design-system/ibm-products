@@ -61,7 +61,6 @@ export let SidePanel = React.forwardRef(
     const [shouldRender, setRender] = useState(open);
     const [animationComplete, setAnimationComplete] = useState(false);
     const sidePanelRef = useRef();
-    const sidePanelTitleRef = useRef();
     const sidePanelOverlayRef = useRef();
     const startTrapRef = useRef();
     const endTrapRef = useRef();
@@ -133,6 +132,9 @@ export let SidePanel = React.forwardRef(
         const sidePanelTitleElement = document.querySelector(
           `.${blockClass}__title-text`
         );
+        const sidePanelCollapsedTitleElement = document.querySelector(
+          `.${blockClass}__collapsed-title-text`
+        );
         const sidePanelSubtitleElement = document.querySelector(
           `.${`${blockClass}__subtitle-text`}`
         );
@@ -147,13 +149,15 @@ export let SidePanel = React.forwardRef(
               );
               // Set subtitle opacity calculation here
               // as scroll progresses
+              let titleOpacity = Math.min(
+                1,
+                (sidePanelSubtitleElement.offsetHeight - scrollTop) /
+                  sidePanelSubtitleElement.offsetHeight
+              );
+              titleOpacity = titleOpacity < 0 ? 0 : titleOpacity;
               sidePanelOuter.style.setProperty(
                 `--${blockClass}--subtitle-opacity`,
-                `${Math.min(
-                  1,
-                  (sidePanelSubtitleElement.offsetHeight - scrollTop) /
-                    sidePanelSubtitleElement.offsetHeight
-                )}`
+                titleOpacity
               );
 
               // Calculate divider opacity to avoid border
@@ -178,22 +182,43 @@ export let SidePanel = React.forwardRef(
                 `${titleHeight + 16}px`
               );
 
-              // Set title font size here, previously this was done
-              // via a class addition, however, it is choppier that
-              // way, using css variables allows for a smoother animation
-              // to the title font size
-              let fontSize = Math.max(
-                1,
-                1 +
-                  (0.25 * (sidePanelSubtitleElement.offsetHeight - scrollTop)) /
-                    sidePanelSubtitleElement.offsetHeight
+              // Set title y positioning
+              const titleYPosition = Math.min(
+                scrollTop / sidePanelSubtitleElement.offsetHeight,
+                1
               );
-              fontSize = fontSize.toFixed(4);
               sidePanelOuter.style.setProperty(
-                `--${blockClass}--title-font-size`,
-                `${fontSize}rem`
+                `--${blockClass}--title-y-position`,
+                `${-Math.abs(titleYPosition)}rem`
+              );
+
+              // mark title with aria-hidden={true} if opacity reaches 0
+              if (titleOpacity === 0) {
+                sidePanelTitleElement.setAttribute('aria-hidden', 'true');
+                sidePanelCollapsedTitleElement.setAttribute(
+                  'aria-hidden',
+                  'false'
+                );
+              }
+
+              // Set collapsed title y positioning
+              let collapsedTitleYPosition = Math.min(
+                1,
+                (sidePanelSubtitleElement.offsetHeight - scrollTop) /
+                  sidePanelSubtitleElement.offsetHeight
+              );
+              collapsedTitleYPosition =
+                collapsedTitleYPosition < 0 ? 0 : collapsedTitleYPosition;
+              sidePanelOuter.style.setProperty(
+                `--${blockClass}--collapsed-title-y-position`,
+                `${collapsedTitleYPosition}rem`
               );
             } else {
+              sidePanelTitleElement.setAttribute('aria-hidden', 'false');
+              sidePanelCollapsedTitleElement.setAttribute(
+                'aria-hidden',
+                'true'
+              );
               sidePanelOuter.classList.remove(
                 `${blockClass}__with-condensed-header`
               );
@@ -202,12 +227,16 @@ export let SidePanel = React.forwardRef(
                 1
               );
               sidePanelOuter.style.setProperty(
-                `--${blockClass}--title-font-size`,
-                '1.25rem'
+                `--${blockClass}--title-y-position`,
+                0
               );
               sidePanelOuter.style.setProperty(
                 `--${blockClass}--divider-opacity`,
                 0
+              );
+              sidePanelOuter.style.setProperty(
+                `--${blockClass}--collapsed-title-y-position`,
+                `1rem`
               );
             }
           });
@@ -350,7 +379,8 @@ export let SidePanel = React.forwardRef(
         [`${blockClass}__container-left-placement`]: placement === 'left',
         [`${blockClass}__container-with-action-toolbar`]:
           actionToolbarButtons && actionToolbarButtons.length,
-        [`${blockClass}__container-without-overlay`]: !includeOverlay,
+        [`${blockClass}__container-without-overlay`]:
+          !includeOverlay && !slideIn,
       },
     ]);
 
@@ -411,10 +441,18 @@ export let SidePanel = React.forwardRef(
                   {title && title.length && (
                     <h2
                       className={`${blockClass}__title-text`}
-                      ref={sidePanelTitleRef}
-                      title={title}>
+                      title={title}
+                      aria-hidden={false}>
                       {title}
                     </h2>
+                  )}
+                  {title && title.length && (
+                    <h5
+                      className={`${blockClass}__collapsed-title-text`}
+                      title={title}
+                      aria-hidden={true}>
+                      {title}
+                    </h5>
                   )}
                   <Button
                     kind="ghost"

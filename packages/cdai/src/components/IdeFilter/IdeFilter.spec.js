@@ -9,6 +9,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { IdeFilter } from '../IdeFilter';
 import { options, untypedOptions } from './__fixtures__/options';
+import { Idea16 } from '@carbon/icons-react';
 
 describe('IdeFilter', () => {
   it('Renders as expected', () => {
@@ -36,7 +37,10 @@ describe('IdeFilter', () => {
         ]}
       />
     );
-    expect(wrapper.find('.ide-filter--tag').at(0).props().filter).toEqual(true);
+    // IdeFilter component does not use filter with buttons because they dont work with the react-select MultiValueRemove
+    expect(wrapper.find('.ide-filter--tag').at(0).props().type).toEqual(
+      'filter'
+    );
   });
   it('Renders options in menu', () => {
     const wrapper = mount(
@@ -178,5 +182,57 @@ describe('IdeFilter', () => {
     );
     const select = wrapper.find('.ide-filter--select').at(0);
     expect(select.props().formatCreateLabel()).toContain('custom text');
+  });
+  it('Renders custom icon', () => {
+    const wrapper = mount(
+      <IdeFilter
+        options={options}
+        light
+        onChange={() => {}}
+        placeholderText="Search..."
+        searchIcon={(className) => (
+          <span className="custom-icon">
+            <Idea16 className={className} />
+          </span>
+        )}
+      />
+    );
+    expect(wrapper).toBeDefined();
+    expect(wrapper.find('.ide-filter--search-icon')).toHaveLength(1);
+    expect(wrapper.find('.custom-icon')).toHaveLength(1);
+  });
+  it('Triggers on input change', () => {
+    const changeSpy = jest.fn();
+    const inputChangeSpy = jest.fn();
+    const wrapper = mount(
+      <IdeFilter
+        options={options}
+        menuIsOpen
+        onChange={changeSpy}
+        onInputChange={inputChangeSpy}
+      />
+    );
+    const input = wrapper.find('input');
+    input.instance().value = 'my new value';
+    input.simulate('change');
+    expect(inputChangeSpy).toHaveBeenCalledWith('my new value', {
+      action: 'input-change',
+    });
+  });
+  it('Can disable creation of plaintext options with allowPlaintext false', () => {
+    const changeSpy = jest.fn();
+    const wrapper = mount(
+      <IdeFilter
+        options={options}
+        inputValue={'something'}
+        onChange={changeSpy}
+        allowPlaintext={false}
+      />
+    );
+    wrapper
+      .find('input')
+      .simulate('change', { target: { value: 'something' } });
+    // disable searching for custom fields
+    expect(wrapper.find('.ide-filter__option')).toHaveLength(0);
   });
 });

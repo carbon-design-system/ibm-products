@@ -87,6 +87,12 @@
   font-size: carbon--type-scale(3);
 }
 
+.#{$ide-prefix}-filter .#{$ide-prefix}-filter--tag-container {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
 .#{$ide-prefix}-filter .#{$ide-prefix}-filter--category {
   margin-right: $spacing-02;
   // stylelint-disable-next-line carbon/type-token-use

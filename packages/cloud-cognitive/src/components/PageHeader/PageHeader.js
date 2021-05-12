@@ -70,6 +70,8 @@ export let PageHeader = React.forwardRef(
       setPageActionsInBreadcrumbRow,
     ] = useState(false);
     const [backgroundOpacity, setBackgroundOpacity] = useState(0);
+    const [hasCollapseButton, setHasCollapseButton] = useState(false);
+    const [spaceForCollapseButton, setSpaceForCollapseButton] = useState(false);
     const [lastRowBufferActive, setLastRowBufferActive] = useState(false);
     const dynamicRefs = useRef({});
     const localHeaderRef = useRef(null);
@@ -430,15 +432,13 @@ export let PageHeader = React.forwardRef(
           );
         }
       }
-      // if (!result) {
-      // This exists in the design if > title, breadcrumb and status turn on background left off as has responsive issues
-      //   result = headerHeight > layout07;
-      // }
+
       setComponentCssCustomProps((prevCSSProps) => ({
         ...prevCSSProps,
         [`--${blockClass}--background-opacity`]: result,
       }));
       setBackgroundOpacity(result);
+      setHasCollapseButton(result > 0);
     }, [
       actionBarItems,
       background,
@@ -449,6 +449,12 @@ export let PageHeader = React.forwardRef(
       scrollYValue,
       tags,
     ]);
+
+    useEffect(() => {
+      setSpaceForCollapseButton(
+        hasCollapseButton && !(navigation || tags) && metrics.headerHeight
+      );
+    }, [hasCollapseButton, navigation, tags, metrics.headerHeight]);
 
     const handleResize = () => {
       // receives width and height parameters if needed
@@ -547,6 +553,7 @@ export let PageHeader = React.forwardRef(
                       `${blockClass}__action-bar-column ${blockClass}__action-bar-column--background`,
                       {
                         [`${blockClass}__action-bar-column--has-page-actions`]: pageActions,
+                        [`${blockClass}__action-bar-column--influenced-by-collapse-button`]: spaceForCollapseButton,
                       },
                     ])}>
                     <ReactResizeDetector
@@ -698,7 +705,7 @@ export let PageHeader = React.forwardRef(
               </Row>
             ) : null}
           </Grid>
-          {backgroundOpacity > 0 ? (
+          {hasCollapseButton ? (
             <Button
               className={cx(`${blockClass}__collapse-expand-toggle`, {
                 [`${blockClass}__collapse-expand-toggle--collapsed`]: fullyCollapsed,

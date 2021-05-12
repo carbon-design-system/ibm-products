@@ -49,6 +49,7 @@ export let PageHeader = React.forwardRef(
       pageActions,
       pageHeaderOffset,
       preCollapseTitleRow,
+      showCollapseHeaderButton,
       subtitle,
       tags,
       title,
@@ -438,7 +439,7 @@ export let PageHeader = React.forwardRef(
         [`--${blockClass}--background-opacity`]: result,
       }));
       setBackgroundOpacity(result);
-      setHasCollapseButton(result > 0);
+      setHasCollapseButton(showCollapseHeaderButton && result > 0);
     }, [
       actionBarItems,
       background,
@@ -447,6 +448,7 @@ export let PageHeader = React.forwardRef(
       metrics.headerHeight,
       navigation,
       scrollYValue,
+      showCollapseHeaderButton,
       tags,
     ]);
 
@@ -788,11 +790,15 @@ PageHeader.propTypes = {
   /**
    * The header can as a whole be collapsed, expanded or somewhere in between.
    * This setting controls the initial value, but also takes effect on change
+   *
+   * NOTE: Used to automate scroll position to hide part of the header. Collapsing has no effect if there is no content to scroll.
    */
   collapseHeader: PropTypes.bool,
   /**
    * Standard behavior scrolls the breadcrumb off to leave just tabs. This
    * option preserves vertical space for both.
+   *
+   * NOTE: Used to automate scroll position to hide part of the header. Collapsing has no effect if there is no content to scroll.
    */
   keepBreadcrumbAndTabs: PropTypes.bool,
   /**
@@ -834,6 +840,12 @@ PageHeader.propTypes = {
    * preCollapses it into the breadcrumb row.
    */
   preCollapseTitleRow: PropTypes.bool,
+  /**
+   * Show the collapse header button.
+   *
+   * NOTE: Used to automate scroll position to hide part of the header. Collapsing has no effect if there is no content to scroll.
+   */
+  showCollapseHeaderButton: PropTypes.bool,
   /**
    * A subtitle or description that provides additional context to
    * identify the current page. Optional.

@@ -21,7 +21,6 @@ import {
   Group20,
   Group24,
   Group32,
-  Reminder16,
 } from '@carbon/icons-react';
 
 import { TooltipIcon } from 'carbon-components-react';

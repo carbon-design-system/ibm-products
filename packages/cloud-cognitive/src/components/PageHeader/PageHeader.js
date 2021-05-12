@@ -16,7 +16,6 @@ import {
   Grid,
   Column,
   Row,
-  ButtonSet,
   Button,
 } from 'carbon-components-react';
 import { ActionBar } from '../ActionBar/';

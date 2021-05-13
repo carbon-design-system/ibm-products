@@ -60,13 +60,13 @@
     display: none;
   }
 
-  .#{$pkg-prefix}--create-side-panel__title {
+  .#{$block-class}__title {
     @include carbon--type-style('productive-heading-03');
 
     margin-bottom: $spacing-02;
   }
 
-  .#{$pkg-prefix}--create-side-panel__subtitle {
+  .#{$block-class}__subtitle {
     @include carbon--type-style('body-short-01');
 
     margin-bottom: $spacing-03;

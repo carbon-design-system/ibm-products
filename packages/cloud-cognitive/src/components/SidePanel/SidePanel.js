@@ -575,11 +575,12 @@ SidePanel.propTypes = {
     ActionSet.validateActions(),
     PropTypes.arrayOf(
       PropTypes.shape({
-        label: PropTypes.string,
-        onPrimaryActionClick: PropTypes.func,
+        ...Button.propTypes,
         kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
-        disabled: PropTypes.bool,
+        label: PropTypes.string,
         loading: PropTypes.bool,
+        // we duplicate this Button prop to improve the DocGen here
+        onClick: Button.propTypes.onClick,
       })
     ),
   ]),

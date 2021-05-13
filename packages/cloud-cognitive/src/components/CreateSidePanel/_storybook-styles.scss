@@ -15,24 +15,3 @@ $story-prefix: create-side-panel-stories__;
   grid-template-columns: 1fr 1fr;
   align-items: flex-end;
 }
-
-.#{$story-prefix}form-item.bx--number {
-  // stylelint-disable-next-line max-nesting-depth
-  .bx--number input {
-    background-color: $field-02;
-  }
-}
-
-.#{$story-prefix}form-item.bx--text-input {
-  background-color: $field-02;
-}
-
-.#{$story-prefix}form-item.bx--number
-  .bx--number__input-wrapper
-  input[type='number'] {
-  background-color: $field-02;
-}
-
-.#{$story-prefix}form-item.bx--dropdown {
-  background-color: $field-02;
-}

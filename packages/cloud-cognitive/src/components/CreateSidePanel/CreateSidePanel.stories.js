@@ -40,27 +40,6 @@ export default {
       page: mdx,
     },
   },
-  argTypes: {
-    actions: {
-      control: {
-        type: 'select',
-        options: {
-          'One button': 0,
-          'One button (ghost)': 1,
-          'Two buttons': 2,
-          'Three buttons with ghost': 3,
-          'Three buttons': 4,
-          None: 5,
-        },
-        default: 0,
-      },
-    },
-    default: {
-      table: {
-        disable: true,
-      },
-    },
-  },
 };
 
 const prefix = 'create-side-panel-stories__';
@@ -268,13 +247,11 @@ const TemplateWithFormValidation = ({ ...args }) => {
 export const Default = DefaultTemplate.bind({});
 Default.args = {
   pageContentSelector: '#cloud-and-cognitive-page-content',
-  actions: 0,
   ...defaultStoryProps,
 };
 
 export const WithFormValidation = TemplateWithFormValidation.bind({});
 WithFormValidation.args = {
   pageContentSelector: '#cloud-and-cognitive-page-content',
-  actions: 0,
   ...defaultStoryProps,
 };

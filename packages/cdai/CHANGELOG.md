@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.2.1...@carbon/ibm-cloud-cognitive-cdai@1.2.2) (2021-05-10)
+
+
+### Bug Fixes
+
+* ide filter close buttons, expose new props ([#720](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/720)) ([83dd53d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/83dd53d4e22b1b3aeef6878eb2cec6ab8806ea5e))
+
+
+
+
+
 ## [1.2.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.1.8...@carbon/ibm-cloud-cognitive-cdai@1.2.1) (2021-05-06)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai

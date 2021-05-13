@@ -265,14 +265,16 @@ export let BreadcrumbWithOverflow = ({
               className={`${blockClass}__breadcrumb-container ${blockClass}__breadcrumb-container--hidden`}
               aria-hidden={true}
               ref={sizingContainerRef}>
-              <BreadcrumbItem
-                key={`${blockClass}-hidden-overflow-${internalId}`}>
-                <OverflowMenu
-                  ariaLabel={overflowAriaLabel}
-                  renderIcon={OverflowMenuHorizontal32}
-                />
-              </BreadcrumbItem>
-              {children}
+              <Breadcrumb>
+                <BreadcrumbItem
+                  key={`${blockClass}-hidden-overflow-${internalId}`}>
+                  <OverflowMenu
+                    ariaLabel={overflowAriaLabel}
+                    renderIcon={OverflowMenuHorizontal32}
+                  />
+                </BreadcrumbItem>
+                {children}
+              </Breadcrumb>
             </div>
           </ReactResizeDetector>
 

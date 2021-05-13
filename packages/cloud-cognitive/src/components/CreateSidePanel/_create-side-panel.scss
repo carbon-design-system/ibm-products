@@ -13,18 +13,21 @@
 
 @mixin create-side-panel {
   $block-class: #{$pkg-prefix}--create-side-panel;
-  $side-panel-block-class: #{$pkg-prefix}--side-panel__container;
+  $side-panel-block-class: #{$pkg-prefix}--side-panel;
 
-  .#{$block-class}.#{$side-panel-block-class} .#{$block-class}__content-text {
+  .#{$block-class}.#{$side-panel-block-class}__container
+    .#{$block-class}__content-text {
     padding-right: calc(20% - #{$spacing-05});
   }
 
-  .#{$block-class}.#{$side-panel-block-class} .exp--side-panel__title-text {
+  .#{$block-class}.#{$side-panel-block-class}__container
+    .#{$side-panel-block-class}__title-text {
     margin-bottom: $spacing-02;
     padding-right: calc(20% - #{$spacing-05});
   }
 
-  .#{$block-class}.#{$side-panel-block-class} .exp--side-panel__subtitle-text {
+  .#{$block-class}.#{$side-panel-block-class}__container
+    .#{$side-panel-block-class}__subtitle-text {
     padding-right: calc(20% - #{$spacing-05});
     padding-bottom: $spacing-05;
     color: $text-02;
@@ -53,7 +56,7 @@
   }
 
   .#{$block-class}.#{$side-panel-block-class}
-    .bx--btn.exp--side-panel__close-button {
+    .bx--btn.#{$side-panel-block-class}__close-button {
     display: none;
   }
 

@@ -11,7 +11,6 @@ import React from 'react';
 import {
   BreadcrumbItem,
   Column,
-  Content,
   Grid,
   Header,
   HeaderName,
@@ -147,7 +146,12 @@ const longSubtitle =
   'Optional subtitle if necessary, which is very long in this case, but will need to be handled somehow';
 const summaryDetails = (
   <div style={{ display: 'flex' }}>
-    <p style={{ marginRight: '50px', maxWidth: '400px' }}>
+    <p
+      style={{
+        // stylelint-disable-next-line carbon/layout-token-use
+        marginRight: '50px',
+        maxWidth: '400px',
+      }}>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor <strong>incididunt ut labore</strong> et dolore magna aliqua. Ut
       enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -486,14 +490,19 @@ const TemplatePageHeaderWithCarbonHeader = (args) => {
           [Platform]
         </HeaderName>
       </Header>
-      <Content className={`${storyClass}__content-container`}>
+      <div
+        className={`${storyClass}__content-container`}
+        style={{
+          // stylelint-disable-next-line carbon/layout-token-use
+          marginTop: '48px',
+        }}>
         <PageHeader
           className="example-class-name"
           {...includeTheseArgs(args)}
           pageHeaderOffset={48} // 48px is the size of the global header. A more elegant way of passing this could be found.
         />
         <div className={`${storyClass}__inner-content`}>{dummyPageContent}</div>
-      </Content>
+      </div>
     </div>
   );
 };

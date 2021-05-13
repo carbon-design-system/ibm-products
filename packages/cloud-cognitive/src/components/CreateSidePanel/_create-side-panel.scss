@@ -15,10 +15,6 @@
   $block-class: #{$pkg-prefix}--create-side-panel;
   $side-panel-block-class: #{$pkg-prefix}--side-panel__container;
 
-  // .#{$block-class}.#{$side-panel-block-class} {
-  //   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19);
-  // }
-
   .#{$block-class}.#{$side-panel-block-class} .#{$block-class}__content-text {
     padding-right: calc(20% - #{$spacing-05});
   }

@@ -230,6 +230,33 @@ const manyTags = [
   <Tag type="magenta" key="magenta">
     Magenta
   </Tag>,
+  <Tag type="blue" key="blue">
+    Blue 2
+  </Tag>,
+  <Tag type="green" key="green">
+    Green 2
+  </Tag>,
+  <Tag type="warm-gray" key="warm-gray">
+    Warm gray 2
+  </Tag>,
+  <Tag type="purple" key="purple">
+    Purple 2
+  </Tag>,
+  <Tag type="red" key="red">
+    Red 2
+  </Tag>,
+  <Tag type="teal" key="teal">
+    Teal 2
+  </Tag>,
+  <Tag type="red" key="long-one">
+    Longer ThanAPieceOfString 2
+  </Tag>,
+  <Tag type="high-contrast" key="high-contrast">
+    High contrast 2
+  </Tag>,
+  <Tag type="magenta" key="magenta">
+    Magenta 2
+  </Tag>,
 ];
 
 const title = 'Page title';

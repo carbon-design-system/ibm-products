@@ -88,6 +88,7 @@ export let PageHeader = React.forwardRef(
     ] = useState(0);
     const [actionBarColumnWidth, setActionBarColumnWidth] = useState(0);
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
+    const [tagSetOverflowClass, setTagSetOverflowClass] = useState('');
 
     useEffect(() => {
       let newActionBarWidth = 'initial';
@@ -332,16 +333,29 @@ export let PageHeader = React.forwardRef(
       tags,
     ]);
 
-    useEffect(() => {
-      setFullyCollapsed(
-        scrollYValue + metrics.headerTopValue + pageHeaderOffset >= 0
-      );
-    }, [metrics.headerTopValue, pageHeaderOffset, scrollYValue]);
-
     useWindowScroll(
       // on scroll or various layout changes check updates if needed
       ({ current }) => {
         checkUpdateVerticalSpace();
+
+        const fullyCollapsed =
+          current.scrollY + metrics.headerTopValue + pageHeaderOffset >= 0;
+        setFullyCollapsed(fullyCollapsed);
+
+        // set offset for tagset tooltip
+        const tagsetTooltipOffset = fullyCollapsed
+          ? metrics.headerHeight + metrics.headerTopValue + pageHeaderOffset
+          : metrics.headerHeight + pageHeaderOffset;
+
+        document.documentElement.style.setProperty(
+          `--${blockClass}--tagset-tooltip-position`,
+          fullyCollapsed ? 'fixed' : 'absolute'
+        );
+
+        document.documentElement.style.setProperty(
+          `--${blockClass}--tagset-tooltip-offset`,
+          `${tagsetTooltipOffset}px`
+        );
         setScrollYValue(current.scrollY);
       },
       [
@@ -349,8 +363,11 @@ export let PageHeader = React.forwardRef(
         availableSpace,
         breadcrumbItems,
         keepBreadcrumbAndTabs,
+        metrics.headerHeight,
+        metrics.headerTopValue,
         navigation,
         pageActions,
+        pageHeaderOffset,
         subtitle,
         tags,
         title,
@@ -699,7 +716,11 @@ export let PageHeader = React.forwardRef(
                       [`${blockClass}__navigation-tags--tags-only`]:
                         navigation === undefined,
                     })}>
-                    <TagSet overflowAlign="end">{tags}</TagSet>
+                    <TagSet
+                      overflowAlign="end"
+                      overflowClassName={`${blockClass}__tagset-tooltip`}>
+                      {tags}
+                    </TagSet>
                   </Column>
                 ) : null}
               </Row>

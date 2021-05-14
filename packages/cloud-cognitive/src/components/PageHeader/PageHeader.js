@@ -797,8 +797,6 @@ PageHeader.propTypes = {
   /**
    * Standard behavior scrolls the breadcrumb off to leave just tabs. This
    * option preserves vertical space for both.
-   *
-   * NOTE: Used to automate scroll position to hide part of the header. Collapsing has no effect if there is no content to scroll.
    */
   keepBreadcrumbAndTabs: PropTypes.bool,
   /**

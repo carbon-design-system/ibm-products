@@ -16,7 +16,6 @@ import {
   Grid,
   Column,
   Row,
-  ButtonSet,
   Button,
 } from 'carbon-components-react';
 import { ActionBar } from '../ActionBar/';
@@ -630,20 +629,11 @@ export let PageHeader = React.forwardRef(
                     className={cx(`${blockClass}__page-actions`, {
                       [`${blockClass}__page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
                     })}>
-                    <ButtonSet
-                      className={`${blockClass}__page-actions-container`}>
-                      {pageActionsItemArray.map(
-                        ({ kind, label, onClick, ...rest }, index) => (
-                          <Button
-                            {...rest}
-                            kind={kind}
-                            onClick={onClick}
-                            key={index}>
-                            {label}
-                          </Button>
-                        )
-                      )}
-                    </ButtonSet>
+                    <ButtonSetWithOverflow
+                      className={`${blockClass}__page-actions-container`}
+                      onWidthChange={handleButtonSetWidthChange}
+                      buttons={pageActionsItemArray}
+                    />
                   </Column>
                 ) : null}
               </Row>

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.37.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.36.24...@carbon/ibm-cloud-cognitive@0.37.0) (2021-05-14)
+
+
+### Bug Fixes
+
+* title and subtitle row responsivity ([#730](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/730)) ([03e6bf2](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/03e6bf28ac2999fc5ce1d94aace6aa8926931d10))
+
+
+### Features
+
+* show collapse button if requested ([#732](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/732)) ([05d7423](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/05d74236caf2f9d5e6d834a621ab9e708a9b1abb))
+
+
+
+
+
 ## [0.36.24](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.36.23...@carbon/ibm-cloud-cognitive@0.36.24) (2021-05-13)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

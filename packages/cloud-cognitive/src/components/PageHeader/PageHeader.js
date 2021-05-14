@@ -88,7 +88,6 @@ export let PageHeader = React.forwardRef(
     ] = useState(0);
     const [actionBarColumnWidth, setActionBarColumnWidth] = useState(0);
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
-    const [tagSetOverflowClass, setTagSetOverflowClass] = useState('');
 
     useEffect(() => {
       let newActionBarWidth = 'initial';

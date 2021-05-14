@@ -391,7 +391,7 @@ WithBackgroundBreadcrumbitemsTitlePageactionsSummarydetailsTabs.args = {
 
 export const AllAttributesSetKeepsBreadcrumbAndTabs = Template.bind({});
 AllAttributesSetKeepsBreadcrumbAndTabs.args = {
-  keepBreadcrumbAndTabs: true,
+  preventBreadcrumbScroll: true,
   background: true,
   breadcrumbItems,
   actionBarItems,
@@ -466,7 +466,7 @@ AllAttributesWithSwitches.args = {
   background: true,
   breadcrumbItems,
   breadcrumbItemsSwitchedArg: true,
-  keepBreadcrumbAndTabs: false,
+  preventBreadcrumbScroll: false,
   navigation: tabBar,
   navigationSwitchedArg: true,
   pageActions,
@@ -518,7 +518,7 @@ PageHeaderWithCarbonHeader.args = {
   background: true,
   breadcrumbItems,
   breadcrumbItemsSwitchedArg: true,
-  keepBreadcrumbAndTabs: false,
+  preventBreadcrumbScroll: false,
   navigation: tabBar,
   navigationSwitchedArg: true,
   pageActions,

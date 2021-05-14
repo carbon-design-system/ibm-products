@@ -9,6 +9,7 @@ export { AboutModal } from './AboutModal';
 export { ActionBarItem } from './ActionBar';
 export { ContextHeader } from './ContextHeader';
 export { CreateModal } from './CreateModal';
+export { CreateSidePanel } from './CreateSidePanel';
 export {
   EmptyState,
   ErrorEmptyState,

@@ -18,10 +18,6 @@ $story-prefix: side-panel-stories__;
   .#{$story-prefix}text-inputs #side-panel-story-text-input-c {
     margin-right: $spacing-05;
   }
-  .#{$story-prefix}text-inputs .#{$story-prefix}text-input,
-  .#{$story-prefix}text-area {
-    background-color: $field-02;
-  }
   .#{$story-prefix}text-area-container {
     position: relative;
   }

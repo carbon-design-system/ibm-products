@@ -43,11 +43,12 @@ export let PageHeader = React.forwardRef(
       className,
       collapseExpandHeaderLabel,
       collapseHeader,
-      keepBreadcrumbAndTabs,
+      preventBreadcrumbScroll,
       navigation,
       pageActions,
       pageHeaderOffset,
       preCollapseTitleRow,
+      showCollapseHeaderButton,
       subtitle,
       tags,
       title,
@@ -207,7 +208,7 @@ export let PageHeader = React.forwardRef(
       update.titleRowSpaceAbove = 0;
 
       update.headerTopValue = navigation
-        ? keepBreadcrumbAndTabs
+        ? preventBreadcrumbScroll
           ? update.navigationRowHeight +
             update.breadcrumbRowHeight -
             update.headerHeight
@@ -303,7 +304,7 @@ export let PageHeader = React.forwardRef(
           [`--${blockClass}--breadcrumb-row-width-px`]: `${metrics.breadcrumbRowWidth}px`,
           [`--${blockClass}--breadcrumb-top`]: `${Math.min(
             pageHeaderOffset,
-            !keepBreadcrumbAndTabs && navigation
+            !preventBreadcrumbScroll && navigation
               ? metrics.headerHeight -
                   metrics.titleRowSpaceAbove -
                   metrics.navigationRowHeight -
@@ -315,7 +316,7 @@ export let PageHeader = React.forwardRef(
         };
       });
     }, [
-      keepBreadcrumbAndTabs,
+      preventBreadcrumbScroll,
       metrics,
       metrics.breadcrumbRowHeight,
       metrics.breadcrumbRowSpaceBelow,
@@ -347,7 +348,7 @@ export let PageHeader = React.forwardRef(
         actionBarItems,
         availableSpace,
         breadcrumbItems,
-        keepBreadcrumbAndTabs,
+        preventBreadcrumbScroll,
         navigation,
         pageActions,
         subtitle,
@@ -363,7 +364,7 @@ export let PageHeader = React.forwardRef(
       actionBarItems,
       availableSpace,
       breadcrumbItems,
-      keepBreadcrumbAndTabs,
+      preventBreadcrumbScroll,
       navigation,
       pageActions,
       subtitle,
@@ -437,7 +438,7 @@ export let PageHeader = React.forwardRef(
         [`--${blockClass}--background-opacity`]: result,
       }));
       setBackgroundOpacity(result);
-      setHasCollapseButton(result > 0);
+      setHasCollapseButton(showCollapseHeaderButton && result > 0);
     }, [
       actionBarItems,
       background,
@@ -446,6 +447,7 @@ export let PageHeader = React.forwardRef(
       metrics.headerHeight,
       navigation,
       scrollYValue,
+      showCollapseHeaderButton,
       tags,
     ]);
 
@@ -778,13 +780,10 @@ PageHeader.propTypes = {
   /**
    * The header can as a whole be collapsed, expanded or somewhere in between.
    * This setting controls the initial value, but also takes effect on change
+   *
+   * NOTE: The header is collapsed by setting the scroll position to hide part of the header. Collapsing has no effect if there is insufficient content to scroll.
    */
   collapseHeader: PropTypes.bool,
-  /**
-   * Standard behavior scrolls the breadcrumb off to leave just tabs. This
-   * option preserves vertical space for both.
-   */
-  keepBreadcrumbAndTabs: PropTypes.bool,
   /**
    * Content for the navigation area in the PageHeader. Should
    * be a React element that is normally a Carbon Tabs component. Optional.
@@ -825,6 +824,17 @@ PageHeader.propTypes = {
    */
   preCollapseTitleRow: PropTypes.bool,
   /**
+   * Standard behavior scrolls the breadcrumb off to leave just tabs. This
+   * option preserves vertical space for both.
+   */
+  preventBreadcrumbScroll: PropTypes.bool,
+  /**
+   * Show the collapse header button.
+   *
+   * NOTE: The header is collapsed by setting the scroll position to hide part of the header. Collapsing has no effect if there is insufficient content to scroll.
+   */
+  showCollapseHeaderButton: PropTypes.bool,
+  /**
    * A subtitle or description that provides additional context to
    * identify the current page. Optional.
    */
@@ -850,7 +860,7 @@ PageHeader.defaultProps = {
   background: false,
   className: '',
   collapseExpandHeaderLabel: 'Toggle expansion',
-  keepBreadcrumbAndTabs: false,
+  preventBreadcrumbScroll: false,
   pageHeaderOffset: 0,
   preCollapseTitleRow: false,
 };

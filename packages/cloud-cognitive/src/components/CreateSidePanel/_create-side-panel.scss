@@ -1,0 +1,79 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '@carbon/import-once/scss/import-once';
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+
+@import 'carbon-components/scss/components/button/button';
+
+@mixin create-side-panel {
+  $block-class: #{$pkg-prefix}--create-side-panel;
+  $side-panel-block-class: #{$pkg-prefix}--side-panel;
+
+  .#{$block-class}.#{$side-panel-block-class}__container
+    .#{$block-class}__content-text {
+    padding-right: calc(20% - #{$spacing-05});
+  }
+
+  .#{$block-class}.#{$side-panel-block-class}__container
+    .#{$side-panel-block-class}__title-text {
+    margin-bottom: $spacing-02;
+    padding-right: calc(20% - #{$spacing-05});
+  }
+
+  .#{$block-class}.#{$side-panel-block-class}__container
+    .#{$side-panel-block-class}__subtitle-text {
+    padding-right: calc(20% - #{$spacing-05});
+    padding-bottom: $spacing-05;
+    color: $text-02;
+    border-bottom: 1px solid $ui-03;
+  }
+
+  .#{$block-class}__form {
+    padding-top: $spacing-05;
+  }
+
+  .#{$block-class}__form > * {
+    margin-bottom: $spacing-05;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .#{$block-class}__form-title-text {
+    @include carbon--type-style('productive-heading-02');
+
+    padding-bottom: $spacing-03;
+  }
+
+  .#{$block-class}__form-description-text {
+    @include carbon--type-style('body-long-01');
+  }
+
+  .#{$block-class}.#{$side-panel-block-class}
+    .bx--btn.#{$side-panel-block-class}__close-button {
+    display: none;
+  }
+
+  .#{$block-class}__title {
+    @include carbon--type-style('productive-heading-03');
+
+    margin-bottom: $spacing-02;
+  }
+
+  .#{$block-class}__subtitle {
+    @include carbon--type-style('body-short-01');
+
+    margin-bottom: $spacing-03;
+    color: $text-02;
+  }
+}
+
+@include exports('create-side-panel') {
+  @include create-side-panel;
+}

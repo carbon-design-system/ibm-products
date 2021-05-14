@@ -5,81 +5,106 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { RemoveDeleteModal } from '.';
 
-import uuidv4 from '../../global/js/utils/uuidv4';
-jest.mock('../../global/js/utils/uuidv4');
+const componentName = RemoveDeleteModal.displayName;
+const resource = 'bx1001';
+const defaultProps = {
+  body: 'test body',
+  className: 'test-class',
+  title: 'test title',
+  iconDescription: 'test icon description',
+  inputInvalidText: 'invalid input',
+  inputLabelText: `type ${resource} to confirm`,
+  inputPlaceholderText: 'name of resource',
+  open: true,
+  primaryButtonText: 'primary button text',
+  resource,
+  secondaryButtonText: 'secondary button text',
+  label: 'test label',
+  textConfirmation: false,
+};
 
-describe('RemoveDeleteModal', () => {
-  beforeAll(() => {
-    uuidv4.mockImplementation(() => 'testid');
-  });
-
-  test('renders without text confirmation', () => {
-    const { click } = fireEvent;
+describe(componentName, () => {
+  it('renders without text confirmation', () => {
+    const { click } = userEvent;
     const { fn } = jest;
 
     const onRequestSubmit = fn();
     const onRequestClose = fn();
+    const props = {
+      ...defaultProps,
+      onRequestClose,
+      onRequestSubmit,
+    };
 
-    const { getByText, container } = render(
-      <RemoveDeleteModal
-        open
-        header="test header"
-        body="test body"
-        resource="the resource"
-        primaryButtonText="submit"
-        secondaryButtonText="cancel"
-        onRequestSubmit={onRequestSubmit}
-        onRequestClose={onRequestClose}
-      />
-    );
+    const { getByText, container } = render(<RemoveDeleteModal {...props} />);
 
-    click(getByText('submit'));
+    click(getByText(props.primaryButtonText));
     expect(onRequestSubmit).toBeCalled();
 
-    click(getByText('cancel'));
+    click(getByText(props.secondaryButtonText));
     expect(onRequestClose).toBeCalled();
 
     expect(container.querySelector('.bx--text-input')).toBeNull();
   });
 
-  test('renders with text confirmation', () => {
-    const { click, change } = fireEvent;
+  it('renders with text confirmation', () => {
+    const { change } = fireEvent;
+    const { click } = userEvent;
     const { fn } = jest;
 
     const onRequestSubmit = fn();
+    const props = {
+      ...defaultProps,
+      textConfirmation: true,
+      onRequestSubmit,
+    };
 
-    const { getByText, container } = render(
-      <RemoveDeleteModal
-        open
-        header="test header"
-        body="test body"
-        resource="bx2000"
-        textConfirmation
-        primaryButtonText="submit"
-        onRequestSubmit={onRequestSubmit}
-      />
-    );
+    const { getByText, container } = render(<RemoveDeleteModal {...props} />);
 
-    const submit = getByText('submit');
-    const input = container.querySelector('.bx--text-input');
+    expect(container.querySelector('.bx--text-input')).not.toBeNull();
 
-    expect(input).not.toBeNull();
-
-    click(submit);
+    click(getByText(props.primaryButtonText));
     expect(onRequestSubmit).not.toBeCalled();
 
-    change(input, { target: { value: 'bx4000' } });
-    click(submit);
+    change(container.querySelector('.bx--text-input'), {
+      target: { value: 'bx1002' },
+    });
+    click(getByText(props.primaryButtonText));
     expect(onRequestSubmit).not.toBeCalled();
 
-    change(input, { target: { value: 'bx2000' } });
-    click(submit);
+    change(container.querySelector('.bx--text-input'), {
+      target: { value: 'bx1001' },
+    });
+    click(getByText(props.primaryButtonText));
     expect(onRequestSubmit).toBeCalled();
+  });
+
+  it('has no accessibility violations', async () => {
+    const { container } = render(<RemoveDeleteModal {...defaultProps} />);
+    await expect(container).toBeAccessible(componentName);
+    await expect(container).toHaveNoAxeViolations();
+  });
+
+  it('applies className to the containing node', () => {
+    const { container } = render(<RemoveDeleteModal {...defaultProps} />);
+    expect(container.firstChild).toHaveClass(defaultProps.className);
+  });
+
+  it('adds additional properties to the containing node', () => {
+    render(<RemoveDeleteModal {...defaultProps} data-testid="test-id" />);
+    screen.getByTestId('test-id');
+  });
+
+  it('forwards a ref to an appropriate node', () => {
+    const ref = React.createRef();
+    render(<RemoveDeleteModal {...defaultProps} ref={ref} />);
+    expect(ref.current).not.toBeNull();
   });
 });

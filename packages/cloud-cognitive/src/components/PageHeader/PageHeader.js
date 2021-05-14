@@ -843,7 +843,7 @@ PageHeader.propTypes = {
   /**
    * Show the collapse header button.
    *
-   * NOTE: Used to automate scroll position to hide part of the header. Collapsing has no effect if there is no content to scroll.
+   * NOTE: The header is collapsed by setting the scroll position to hide part of the header. Collapsing has no effect if there is insufficient content to scroll.
    */
   showCollapseHeaderButton: PropTypes.bool,
   /**

@@ -90,7 +90,7 @@ describe(componentName, () => {
 
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
-    const { container } = render(<Saving {...defaultProps} ref={ref} />);
-    expect(ref.current).toEqual(container.firstChild);
+    render(<Saving {...defaultProps} ref={ref} />);
+    expect(ref.current).not.toBeNull();
   });
 });

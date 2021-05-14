@@ -1,62 +1,82 @@
-import React, { useState, useRef } from 'react';
-import { Modal, TextInput } from 'carbon-components-react';
+import React, { useState, useRef, forwardRef } from 'react';
+import cx from 'classnames';
+import {
+  ComposedModal,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  TextInput,
+} from 'carbon-components-react';
 import PropTypes from 'prop-types';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { pkg } from '../../settings';
 const componentName = 'RemoveDeleteModal';
 
-export let RemoveDeleteModal = ({
-  body,
-  className,
-  header,
-  iconDescription,
-  inputInvalidText,
-  inputLabelText,
-  inputPlaceholderText,
-  onRequestClose,
-  onRequestSubmit,
-  open,
-  primaryButtonText,
-  resource,
-  secondaryButtonText,
-  subheader,
-  textConfirmation,
-  ...other
-}) => {
-  const [userInput, setUserInput] = useState('');
-  const idRef = useRef(uuidv4());
-  const onChangeHandler = (e) => {
-    setUserInput(e.target.value);
-  };
-  const primaryButtonDisabled = textConfirmation && userInput !== resource;
-  return (
-    <Modal
-      danger
-      className={`${pkg.prefix}-remove-delete-modal ${className}`}
-      iconDescription={iconDescription}
-      open={open}
-      modalHeading={header}
-      modalLabel={subheader}
-      primaryButtonText={primaryButtonText}
-      primaryButtonDisabled={primaryButtonDisabled}
-      secondaryButtonText={secondaryButtonText}
-      onRequestSubmit={onRequestSubmit}
-      onRequestClose={onRequestClose}
-      {...other}>
-      <p className={`${pkg.prefix}-remove-delete-modal-body`}>{body}</p>
-      {textConfirmation && (
-        <TextInput
-          id={`${idRef.current}-confirmation-input`}
-          invalidText={inputInvalidText}
-          labelText={inputLabelText}
-          placeholder={inputPlaceholderText}
-          onChange={onChangeHandler}
+export let RemoveDeleteModal = forwardRef(
+  (
+    {
+      body,
+      className,
+      iconDescription,
+      inputInvalidText,
+      inputLabelText,
+      inputPlaceholderText,
+      label,
+      onRequestClose,
+      onRequestSubmit,
+      open,
+      primaryButtonText,
+      resource,
+      secondaryButtonText,
+      textConfirmation,
+      title,
+      ...rest
+    },
+    ref
+  ) => {
+    const [userInput, setUserInput] = useState('');
+    const idRef = useRef(uuidv4());
+    const onChangeHandler = (e) => {
+      setUserInput(e.target.value);
+    };
+    const primaryButtonDisabled = textConfirmation && userInput !== resource;
+    const blockClass = `${pkg.prefix}--remove-delete-modal`;
+    return (
+      <ComposedModal
+        {...rest}
+        open={open}
+        ref={ref}
+        danger
+        className={cx(blockClass, className)}>
+        <ModalHeader
+          title={title}
+          label={label}
+          iconDescription={iconDescription}
         />
-      )}
-    </Modal>
-  );
-};
+        <ModalBody>
+          <p className={`${blockClass}__body`}>{body}</p>
+          {textConfirmation && (
+            <TextInput
+              id={`${idRef.current}-confirmation-input`}
+              invalidText={inputInvalidText}
+              labelText={inputLabelText}
+              placeholder={inputPlaceholderText}
+              onChange={onChangeHandler}
+            />
+          )}
+        </ModalBody>
+        <ModalFooter
+          primaryButtonText={primaryButtonText}
+          secondaryButtonText={secondaryButtonText}
+          primaryButtonDisabled={primaryButtonDisabled}
+          onRequestClose={onRequestClose}
+          onRequestSubmit={onRequestSubmit}
+        />
+      </ComposedModal>
+    );
+  }
+);
 
 // Return a placeholder if not released and not enabled by feature flag
 RemoveDeleteModal = pkg.checkComponentEnabled(RemoveDeleteModal, componentName);
@@ -70,10 +90,6 @@ RemoveDeleteModal.propTypes = {
    * Optional classname
    */
   className: PropTypes.string,
-  /**
-   * The text displayed at the top of the modal
-   */
-  header: PropTypes.string.isRequired,
   /**
    * Provide a description for "close" icon that can be read by screen readers
    */
@@ -90,6 +106,10 @@ RemoveDeleteModal.propTypes = {
    * Placeholder for text box
    */
   inputPlaceholderText: PropTypes.string,
+  /**
+   * Specify the modal label texts
+   */
+  label: PropTypes.string,
   /**
    * Callback function that runs when user closes the modal
    */
@@ -115,27 +135,16 @@ RemoveDeleteModal.propTypes = {
    */
   secondaryButtonText: PropTypes.string,
   /**
-   * Specify the text for the subheader
-   */
-  subheader: PropTypes.string,
-  /**
    * Specify whether or not to show the text confirmation input
    */
   textConfirmation: PropTypes.bool,
+  /**
+   * The text displayed at the top of the modal
+   */
+  title: PropTypes.string.isRequired,
 };
 
 RemoveDeleteModal.defaultProps = {
-  className: '',
-  iconDescription: '',
-  id: '',
-  inputInvalidText: '',
-  inputLabelText: '',
-  inputPlaceholderText: '',
-  onRequestClose: () => {},
-  onRequestSubmit: () => {},
-  primaryButtonText: '',
-  secondaryButtonText: '',
-  subheader: '',
   textConfirmation: false,
 };
 

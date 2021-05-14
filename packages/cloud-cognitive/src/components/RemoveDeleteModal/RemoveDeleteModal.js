@@ -44,11 +44,11 @@ export let RemoveDeleteModal = forwardRef(
     const blockClass = `${pkg.prefix}--remove-delete-modal`;
     return (
       <ComposedModal
+        {...rest}
         open={open}
         ref={ref}
         danger
-        className={cx(blockClass, className)}
-        {...rest}>
+        className={cx(blockClass, className)}>
         <ModalHeader
           title={title}
           label={label}

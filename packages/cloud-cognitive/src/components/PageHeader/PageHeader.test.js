@@ -115,54 +115,59 @@ import { prepareProps } from '../../global/js/utils/props-helper';
 jest.mock('../../global/js/utils/uuidv4');
 
 const sizes = {
-  'bx--btn': {
+  [`${carbon.prefix}--btn`]: {
     get offsetWidth() {
       return 200;
     },
   },
-  'exp--page-header': {
+  [`${blockClass}`]: {
     get offsetWidth() {
       return window.innerWidth;
     },
   },
-  'exp--page-header__breadcrumb-row': {
+  [`${blockClass}__breadcrumb-row`]: {
     get offsetWidth() {
       return window.innerWidth;
     },
   },
-  'exp--breadcrumb-with-overflow': {
+  [`${pkg.prefix}--breadcrumb-with-overflow`]: {
     get offsetWidth() {
       return window.innerWidth * 0.6;
     },
   },
-  'exp--tag-set': {
+  [`${pkg.prefix}--tag-set`]: {
     get offsetWidth() {
       return window.innerWidth * 0.25;
     },
   },
-  'exp--tag-set__sizing-tag': {
+  [`${pkg.prefix}--tag-set__sizing-tag`]: {
     get offsetWidth() {
       return window.innerWidth * 0.05;
     },
   },
-  'exp--button-set-with-overflow__button-container': {
+  [`${pkg.prefix}--button-set-with-overflow__button-container`]: {
     get offsetWidth() {
       return window.innerWidth * 0.4;
     },
   },
-  'exp--button-set-with-overflow': {
+  [`${pkg.prefix}--button-set-with-overflow`]: {
     get offsetWidth() {
       return window.innerWidth * 0.4;
     },
   },
-  'bx--breadcrumb-item': {
+  [`${carbon.prefix}--breadcrumb-item`]: {
     get offsetWidth() {
       return 200;
     },
   },
-  'exp--action-bar__displayed-items': {
+  [`${pkg.prefix}--action-bar__displayed-items`]: {
     get offsetWidth() {
       return window.innerWidth * 0.3;
+    },
+  },
+  [`${blockClass}__breadcrumb-title`]: {
+    get offsetWidth() {
+      return window.innerWidth * 0.2;
     },
   },
 };
@@ -175,7 +180,7 @@ const testSizes = (el, property) => {
       return val;
     }
   }
-  console.log(property, el.outerHTML);
+  console.log('xxx', property, el.outerHTML);
   return -1;
 };
 
@@ -207,7 +212,6 @@ describe('PageHeader', () => {
           let width = testSizes(this, 'offsetWidth');
 
           if (width < 0) {
-            console.log(this.outerHTML);
             width = window.innerWidth;
           }
 
@@ -342,7 +346,9 @@ describe('PageHeader', () => {
 
     render(<PageHeader pageActions={pageActionsDepTest} />);
 
-    screen.getByText('Primary button');
+    screen.getByText('Primary button', {
+      selector: `.${blockClass}__page-actions .${pkg.prefix}--button-set-with-overflow__button-container:not(.${pkg.prefix}--button-set-with-overflow__button-container--hidden) .${carbon.prefix}--btn`,
+    });
 
     expect(warn).toBeCalledWith(
       "The usage of prop 'pageActions' of 'PageHeader' has been changed and you should update. Expects an array of objects with the following properties: label and onClick."
@@ -356,7 +362,9 @@ describe('PageHeader', () => {
 
     render(<PageHeader pageActions={pageActionsDepTest2} />);
 
-    screen.getByText('Primary button');
+    screen.getByText('Primary button', {
+      selector: `.${blockClass}__page-actions .${pkg.prefix}--button-set-with-overflow__button-container:not(.${pkg.prefix}--button-set-with-overflow__button-container--hidden) .${carbon.prefix}--btn`,
+    });
 
     expect(warn).toBeCalledWith(
       "The usage of prop 'pageActions' of 'PageHeader' has been changed and you should update. Expects an array of objects with the following properties: label and onClick."
@@ -379,7 +387,13 @@ describe('PageHeader', () => {
 
   test('collapse button works', () => {
     const dataTestid = uuidv4();
-    render(<PageHeader {...testProps} data-testid={dataTestid} />);
+    render(
+      <PageHeader
+        {...testProps}
+        showCollapseHeaderButton
+        data-testid={dataTestid}
+      />
+    );
 
     // console.dir(screen.getByRole('region')); // section should be a region https://fae.disability.illinois.edu/rulesets/ROLE_5/
     // const header = screen.getByTestId(dataTestid);

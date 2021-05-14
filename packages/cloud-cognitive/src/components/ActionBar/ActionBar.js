@@ -245,9 +245,6 @@ ActionBar.propTypes = {
    * align tags to right of available space
    */
   rightAlign: PropTypes.bool,
-  /**
-   * heading for the show all modal
-   */
 };
 
 ActionBar.defaultProps = {

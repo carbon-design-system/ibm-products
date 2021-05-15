@@ -111,14 +111,16 @@ export const ButtonSetWithOverflow = ({
   const AButtonMenu = React.forwardRef(({ buttons, ...rest }, ref) => {
     return (
       <ButtonMenu {...rest} ref={ref} label={pageActionsLabel}>
-        {buttons.reverse().map(({ label, kind, ...other }, index) => (
-          <ButtonMenuItem
-            key={index}
-            isDelete={kind === 'danger'}
-            itemText={label}
-            {...prepareProps(other, ['iconDescription', 'renderIcon'])}
-          />
-        ))}
+        {buttons
+          .map(({ label, kind, ...other }, index) => (
+            <ButtonMenuItem
+              key={index}
+              isDelete={kind === 'danger'}
+              itemText={label}
+              {...prepareProps(other, ['iconDescription', 'renderIcon'])}
+            />
+          ))
+          .reverse()}
       </ButtonMenu>
     );
   });

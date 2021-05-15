@@ -17,12 +17,14 @@ const name = 'JS export checks';
 
 describe(name, () => {
   const { ResizeObserver } = window;
-  let mockError;
+  let mockError, mockWarn;
 
   beforeEach(() => {
     // The component instantiations that follow will generate a stack of
-    // console errors about required props not provided, and we don't care.
+    // console errors and warnings about required props not provided or
+    // conditions not met, and for the purposes of these tests we don't care.
     mockError = jest.spyOn(console, 'error').mockImplementation(() => {});
+    mockWarn = jest.spyOn(console, 'warn').mockImplementation(() => {});
     window.ResizeObserver = jest.fn().mockImplementation(() => ({
       observe: jest.fn(),
       unobserve: jest.fn(),
@@ -32,6 +34,7 @@ describe(name, () => {
 
   afterEach(() => {
     mockError.mockRestore();
+    mockWarn.mockRestore();
     jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
   });

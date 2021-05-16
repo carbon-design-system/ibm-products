@@ -14,12 +14,7 @@ import cx from 'classnames';
 import { pkg, carbon } from '../../settings';
 
 // Carbon and package components we use.
-import {
-  Button,
-  OverflowMenu,
-  OverflowMenuItem,
-} from 'carbon-components-react';
-import { ButtonMenuItem } from '.';
+import { Button, OverflowMenu } from 'carbon-components-react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--button-menu`;
@@ -96,7 +91,7 @@ ButtonMenu.displayName = componentName;
 ButtonMenu.propTypes = {
   /**
    * Provide the contents of the ButtonMenu. This should be one or more
-   * OverflowMenuItem components.
+   * ButtonMenuItem components.
    */
   children: PropTypes.arrayOf(PropTypes.element).isRequired,
 

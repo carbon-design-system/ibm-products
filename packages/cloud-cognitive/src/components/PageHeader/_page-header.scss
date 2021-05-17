@@ -471,7 +471,6 @@ $raised-z-index: 99;
   }
 
   .#{$block-class}__tagset-tooltip.#{$block-class}__tagset-tooltip {
-    // removes the min width in Carbon
     // stylelint-disable-next-line
     position: var(--#{$block-class}--tagset-tooltip-position) !important;
     // stylelint-disable-next-line

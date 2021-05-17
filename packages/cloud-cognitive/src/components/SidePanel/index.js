@@ -6,3 +6,5 @@
  */
 
 export { SidePanel } from './SidePanel';
+export { SidePanelWizard } from './SidePanelWizard';
+export { SidePanelStep } from './SidePanelStep';

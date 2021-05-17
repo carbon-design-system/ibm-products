@@ -12,3 +12,5 @@ export const SIDE_PANEL_SIZES = {
   lg: '40rem',
   max: '75%',
 };
+
+export const SIDE_PANEL_STEP = 'SidePanelStep';

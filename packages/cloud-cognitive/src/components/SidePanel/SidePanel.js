@@ -41,10 +41,12 @@ export let SidePanel = React.forwardRef(
       condensedActions,
       currentStep,
       includeOverlay,
+      isWizard,
       labelText,
       navigationBackIconDescription,
       onNavigationBack,
       onRequestClose,
+      onUnmount,
       open,
       pageContentSelector,
       placement,
@@ -60,12 +62,17 @@ export let SidePanel = React.forwardRef(
   ) => {
     const [shouldRender, setRender] = useState(open);
     const [animationComplete, setAnimationComplete] = useState(false);
+    const [sidePanelActions, setSidePanelActions] = useState([]);
     const sidePanelRef = useRef();
     const sidePanelOverlayRef = useRef();
     const startTrapRef = useRef();
     const endTrapRef = useRef();
     const sidePanelInnerRef = useRef();
     const sidePanelCloseRef = useRef();
+
+    useEffect(() => {
+      setSidePanelActions(actions);
+    }, [actions]);
 
     // set initial focus when side panel opens
     useEffect(() => {
@@ -90,7 +97,12 @@ export let SidePanel = React.forwardRef(
     }, [selectorPrimaryFocus, open, animationComplete]);
 
     useEffect(() => {
-      if (open && actions && actions.length && animationComplete) {
+      if (
+        open &&
+        sidePanelActions &&
+        sidePanelActions.length &&
+        animationComplete
+      ) {
         const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
         const actionsContainer = getActionsContainerElement();
         let actionsHeight = actionsContainer.offsetHeight + 16; // add additional 1rem spacing to bottom padding
@@ -103,7 +115,7 @@ export let SidePanel = React.forwardRef(
       return () => {
         setAnimationComplete(false);
       };
-    }, [actions, condensedActions, open, animationComplete]);
+    }, [sidePanelActions, condensedActions, open, animationComplete]);
 
     /* istanbul ignore next */
     const handleResize = () => {
@@ -288,7 +300,10 @@ export let SidePanel = React.forwardRef(
 
     // initialize the side panel to close
     const onAnimationEnd = () => {
-      if (!open) setRender(false);
+      if (!open) {
+        onUnmount && onUnmount();
+        setRender(false);
+      }
       sidePanelRef.current.style.overflow = 'auto';
       sidePanelRef.current.style.overflowX = 'hidden';
       setAnimationComplete(true);
@@ -422,7 +437,7 @@ export let SidePanel = React.forwardRef(
                 ref={sidePanelInnerRef}
                 className={`${blockClass}__inner-content`}>
                 <div className={`${blockClass}__title-container`}>
-                  {currentStep > 0 && (
+                  {!isWizard && currentStep > 0 && (
                     <Button
                       kind="ghost"
                       size="small"
@@ -508,7 +523,7 @@ export let SidePanel = React.forwardRef(
                 )}
                 <div className={`${blockClass}__body-content`}>{children}</div>
                 <ActionSet
-                  actions={actions}
+                  actions={sidePanelActions}
                   className={primaryActionContainerClassNames}
                   size={size}
                 />
@@ -624,6 +639,11 @@ SidePanel.propTypes = {
   includeOverlay: PropTypes.bool,
 
   /**
+   * Internal prop that is passed to the SidePanel when using the SidePanelWizard component
+   */
+  isWizard: PropTypes.bool,
+
+  /**
    * Sets the label text which will display above the title text
    */
   labelText: PropTypes.string,
@@ -643,6 +663,12 @@ SidePanel.propTypes = {
    * This handler closes the modal, e.g. changing `open` prop.
    */
   onRequestClose: PropTypes.func.isRequired,
+
+  /**
+   * Optional function called when the side panel exit animation is complete.
+   * This handler can be used for any state cleanup needed.
+   */
+  onUnmount: PropTypes.func,
 
   /**
    * Determines whether the side panel should render or not

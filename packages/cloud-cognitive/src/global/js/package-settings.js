@@ -42,6 +42,8 @@ const defaults = {
     ProductiveCard: false,
     RemoveDeleteModal: false,
     SidePanel: false,
+    SidePanelWizard: false,
+    SidePanelStep: false,
     TagSet: false,
     UnauthorizedEmptyState: false,
     UserProfileImage: false,

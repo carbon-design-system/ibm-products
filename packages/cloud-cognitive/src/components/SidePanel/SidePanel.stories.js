@@ -33,13 +33,17 @@ import styles from './_storybook-styles.scss';
 import { pkg } from '../../settings';
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
-import { SidePanel } from '.';
+import { SidePanel, SidePanelWizard } from '.';
 import mdx from './SidePanel.mdx';
+import { MultiStepPanel } from './preview-components/MultiStepPanel';
 const storybookPrefix = getStorybookPrefix(pkg, SidePanel.displayName);
 
 export default {
   title: `${storybookPrefix}/${SidePanel.displayName}`,
   component: SidePanel,
+  subcomponents: {
+    SidePanelWizard,
+  },
   parameters: {
     styles,
     docs: {
@@ -62,6 +66,11 @@ export default {
       },
     },
     slideIn: {
+      table: {
+        disable: true,
+      },
+    },
+    isWizard: {
       table: {
         disable: true,
       },
@@ -472,3 +481,5 @@ WithStaticTitleAndActionToolbar.args = {
     },
   ],
 };
+
+export const withMultiStep = MultiStepPanel.bind({});

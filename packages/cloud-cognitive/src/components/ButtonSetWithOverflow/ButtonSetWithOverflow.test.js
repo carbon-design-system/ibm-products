@@ -16,7 +16,9 @@ import { Button } from 'carbon-components-react';
 const buttons = (handleClick) =>
   [1, 2, 3].map((num) => ({
     renderIcon: !(num % 3) ? Bee16 : null,
+    iconDescription: !(num % 3) ? 'Busy bee' : null,
     label: `Action ${num}`,
+    kind: num === 1 ? 'primary' : 'secondary',
     onClick: () => {
       handleClick(`Action ${num}`);
     },

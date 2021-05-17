@@ -13,7 +13,6 @@ import React from 'react';
 import { TextInput } from 'carbon-components-react';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { SidePanel } from '.';
 
 const blockClass = `${pkg.prefix}--side-panel`;

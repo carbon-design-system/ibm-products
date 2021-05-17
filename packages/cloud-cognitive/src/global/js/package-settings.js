@@ -23,6 +23,7 @@ const defaults = {
     ActionBarItem: false,
     APIKeyDownloader: false,
     APIKeyModal: false,
+    CreateSidePanel: false,
     ContextHeader: false,
     EmptyState: false,
     ErrorEmptyState: false,

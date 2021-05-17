@@ -11,7 +11,6 @@ import { action } from '@storybook/addon-actions';
 
 import { Modal, RadioButton, RadioButtonGroup } from 'carbon-components-react';
 import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
 import { ModifiedTabs } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.

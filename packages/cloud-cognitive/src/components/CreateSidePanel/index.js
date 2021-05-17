@@ -5,6 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { pkg } from '@carbon/ibm-cloud-cognitive';
-pkg.prefix = 'exp';
-pkg.setAllComponents(true);
+export { CreateSidePanel } from './CreateSidePanel';

@@ -9,7 +9,6 @@ import { fireEvent, render, waitFor } from '@testing-library/react';
 import React from 'react';
 
 import { carbon } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { ImportModal } from '.';
 
 global.fetch = jest.fn(() =>

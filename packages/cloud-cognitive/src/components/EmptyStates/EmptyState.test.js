@@ -8,7 +8,6 @@
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg } from '../../settings';
 import { EmptyState } from '.';

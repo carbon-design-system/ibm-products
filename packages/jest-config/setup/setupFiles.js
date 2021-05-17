@@ -7,6 +7,11 @@
 
 'use strict';
 
+import { pkg } from '../../cloud-cognitive/src/settings';
+
+pkg._silenceWarnings(true);
+pkg.setAllComponents(true);
+
 global.__DEV__ = true;
 
 global.requestAnimationFrame = function requestAnimationFrame(callback) {

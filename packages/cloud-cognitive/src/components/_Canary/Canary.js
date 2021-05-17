@@ -28,8 +28,8 @@ export const Canary = (
   { className, componentName, ...rest } /*, originalArgs*/
 ) => {
   const instructions = `
-import { pkg } from '@carbon/ibm-cloud-cognitive/es/settings';
-// NOTE: must happen before component import
+import { pkg } from '@carbon/ibm-cloud-cognitive';
+// NOTE: must happen before component is first used
 pkg.component.${componentName} = true;
 `;
   return (
@@ -38,8 +38,8 @@ pkg.component.${componentName} = true;
         This component <strong>{componentName}</strong> is not ready yet.
       </h2>
       <p>
-        To enable this initialize package flags before any components are
-        loaded, passing an override object.
+        To enable it, initialize package flags before the component is first
+        used.
       </p>
       <br />
       <p>e.g. in main.js</p>

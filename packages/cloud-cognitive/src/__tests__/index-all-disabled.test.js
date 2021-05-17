@@ -9,12 +9,13 @@ import React from 'react';
 import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
 import { pkg } from '../settings';
-import '../utils/disable-all'; // must come before components are imported (directly or indirectly)
 
 import * as components from '..';
 
 const canaryClass = `${pkg.prefix}-canary`;
 const name = 'JS export checks';
+
+pkg.setAllComponents(false);
 
 describe(name, () => {
   let mockError, mockWarn;

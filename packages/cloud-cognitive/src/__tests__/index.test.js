@@ -15,6 +15,8 @@ import * as components from '..';
 const canaryClass = `${pkg.prefix}-canary`;
 const name = 'JS export checks';
 
+pkg.setAllComponents();
+
 describe(name, () => {
   const { ResizeObserver } = window;
   let mockError, mockWarn;

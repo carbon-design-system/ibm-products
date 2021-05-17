@@ -10,7 +10,6 @@ import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 
 import {
   Button,

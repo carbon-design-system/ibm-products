@@ -8,7 +8,6 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { ButtonSetWithOverflow } from '.';
 import { Bee16 } from '@carbon/icons-react';
 import { mockHTMLElement } from '../../global/js/utils/test-helper';

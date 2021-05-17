@@ -9,7 +9,6 @@ import { render, screen } from '@testing-library/react'; // https://testing-libr
 import React from 'react';
 
 import { pkg } from '../../settings';
-import '../../utils/enable-all';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 

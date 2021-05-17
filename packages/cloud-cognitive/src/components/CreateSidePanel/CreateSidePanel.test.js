@@ -8,8 +8,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
-
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { CreateSidePanel } from '.';

@@ -16,7 +16,7 @@ $block-class: #{$pkg-prefix}--button-set-with-overflow;
 @mixin button-set-with-overflow {
   @include block-wrap($block-class) {
     &.#{$block-class} {
-      display: block;
+      display: flex;
     }
 
     .#{$block-class}__space {
@@ -39,6 +39,10 @@ $block-class: #{$pkg-prefix}--button-set-with-overflow;
       overflow: hidden;
       visibility: hidden;
       pointer-events: none;
+    }
+
+    .#{$block-class}--right {
+      justify-content: flex-end;
     }
   }
 }

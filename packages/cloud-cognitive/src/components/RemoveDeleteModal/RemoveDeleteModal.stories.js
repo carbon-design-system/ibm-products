@@ -9,7 +9,6 @@ import React, { useState } from 'react';
 import { Button } from 'carbon-components-react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
 import { RemoveDeleteModal } from '.';
 import mdx from './RemoveDeleteModal.mdx';
@@ -31,18 +30,16 @@ const resource = 'bx1001';
 const defaultProps = {
   body: `Deleting ${resource} will permanently delete the configuration. This action cannot be undone.`,
   className: 'remove-modal-test',
-  header: 'Confirm delete',
+  title: 'Confirm delete',
   iconDescription: 'close',
   inputInvalidText: 'A valid value is required',
   inputLabelText: `Type ${resource} to confirm`,
   inputPlaceholderText: 'Name of resource',
-  onRequestSubmit: () => console.log('submitted'),
-  onRequestClose: () => console.log('cancel'),
   open: true,
   primaryButtonText: 'Delete',
   resource,
   secondaryButtonText: 'Close',
-  subheader: `Delete ${resource}`,
+  label: `Delete ${resource}`,
 };
 
 const Template = (args) => {
@@ -73,9 +70,9 @@ export const WithoutConfirmation = Template.bind({});
 WithoutConfirmation.args = {
   ...defaultProps,
   body: `Removing ${resource} will permanently remove the configuration. This action cannot be undone.`,
-  header: 'Confirm removal',
+  title: 'Confirm removal',
   primaryButtonText: 'Remove',
-  subheader: `Remove ${resource}`,
+  label: `Remove ${resource}`,
 };
 
 export const WithConfirmation = Template.bind({});

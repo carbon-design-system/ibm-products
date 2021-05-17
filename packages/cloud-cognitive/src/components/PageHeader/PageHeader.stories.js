@@ -23,7 +23,6 @@ import { CheckmarkFilled16 } from '@carbon/icons-react';
 import { Lightning16, Bee24 } from '@carbon/icons-react';
 
 import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
 import { ActionBarItem } from '../ActionBar';
 import { PageHeader } from '.';
@@ -143,7 +142,7 @@ const statusIndicator = (
 );
 const subtitle = 'Optional subtitle if necessary';
 const longSubtitle =
-  'Optional subtitle if necessary, which is very long in this case, but will need to be handled somehow';
+  'Optional subtitle if necessary, which is very long in this case, but will need to be handled somehow. It just keeps going on and on and on and on and on.';
 const summaryDetails = (
   <div style={{ display: 'flex' }}>
     <p
@@ -391,7 +390,7 @@ WithBackgroundBreadcrumbitemsTitlePageactionsSummarydetailsTabs.args = {
 
 export const AllAttributesSetKeepsBreadcrumbAndTabs = Template.bind({});
 AllAttributesSetKeepsBreadcrumbAndTabs.args = {
-  keepBreadcrumbAndTabs: true,
+  preventBreadcrumbScroll: true,
   background: true,
   breadcrumbItems,
   actionBarItems,
@@ -466,7 +465,7 @@ AllAttributesWithSwitches.args = {
   background: true,
   breadcrumbItems,
   breadcrumbItemsSwitchedArg: true,
-  keepBreadcrumbAndTabs: false,
+  preventBreadcrumbScroll: false,
   navigation: tabBar,
   navigationSwitchedArg: true,
   pageActions,
@@ -518,7 +517,7 @@ PageHeaderWithCarbonHeader.args = {
   background: true,
   breadcrumbItems,
   breadcrumbItemsSwitchedArg: true,
-  keepBreadcrumbAndTabs: false,
+  preventBreadcrumbScroll: false,
   navigation: tabBar,
   navigationSwitchedArg: true,
   pageActions,

@@ -22,7 +22,6 @@ import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { UnreadNotificationBell } from './preview-components/UnreadNotificationBell';
 
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { NotificationsPanel } from '.';
 
 import { getStorybookPrefix } from '../../../config';

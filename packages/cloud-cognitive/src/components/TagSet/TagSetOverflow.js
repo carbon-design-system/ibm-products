@@ -92,12 +92,6 @@ TagSetOverflow.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * fixed underneath header
-   */
-  fixed: PropTypes.shape({
-    offset: PropTypes.number,
-  }),
-  /**
    * function to execute on clicking show all
    */
   onShowAllClick: PropTypes.func.isRequired,

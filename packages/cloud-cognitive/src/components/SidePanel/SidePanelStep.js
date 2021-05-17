@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// Import portions of React that are needed.
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';

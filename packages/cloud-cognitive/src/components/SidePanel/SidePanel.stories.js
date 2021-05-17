@@ -32,7 +32,7 @@ import { Copy20, Delete20, Settings20 } from '@carbon/icons-react';
 import styles from './_storybook-styles.scss';
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
-import { SidePanel, SidePanelWizard } from '.';
+import { SidePanel, SidePanelWizard, SidePanelStep } from '.';
 import mdx from './SidePanel.mdx';
 import { MultiStepPanel } from './preview-components/MultiStepPanel';
 const storybookPrefix = getStorybookPrefix(pkg, SidePanel.displayName);
@@ -42,6 +42,7 @@ export default {
   component: SidePanel,
   subcomponents: {
     SidePanelWizard,
+    SidePanelStep,
   },
   parameters: {
     styles,

@@ -10,7 +10,6 @@ import React from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { SidePanelWizard } from './SidePanelWizard';
 import { SidePanelStep } from './SidePanelStep';
 import uuidv4 from '../../global/js/utils/uuidv4';

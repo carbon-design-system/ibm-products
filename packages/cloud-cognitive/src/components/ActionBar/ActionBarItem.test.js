@@ -6,7 +6,6 @@
  */
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { ActionBarItem } from '.';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg, carbon } from '../../settings';

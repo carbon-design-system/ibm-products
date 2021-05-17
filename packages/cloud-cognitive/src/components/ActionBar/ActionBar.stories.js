@@ -11,7 +11,6 @@ import { action } from '@storybook/addon-actions';
 import { Bee16, Lightning16 } from '@carbon/icons-react';
 
 import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
 import { ActionBar, ActionBarItem } from '.';
 const storybookPrefix = getStorybookPrefix(pkg, ActionBar.displayName);

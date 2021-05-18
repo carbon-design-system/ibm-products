@@ -9,24 +9,24 @@
 @mixin export-modal {
   $block-class: #{$pkg-prefix}--export-modal;
 
-  .#{$block-class}-body {
+  .#{$block-class}__body {
     margin-bottom: $spacing-05;
   }
 
-  .#{$block-class}-messaging {
+  .#{$block-class}__messaging {
     display: flex;
     align-items: center;
   }
 
-  .#{$block-class}-messaging p {
+  .#{$block-class}__messaging p {
     margin-left: $spacing-03;
   }
 
-  .#{$block-class}-checkmark-icon {
+  .#{$block-class}__checkmark-icon {
     fill: $interactive-01;
   }
 
-  .#{$block-class}-error-icon {
+  .#{$block-class}__error-icon {
     fill: $danger;
   }
 }

@@ -1,12 +1,16 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, forwardRef } from 'react';
 import {
-  Modal,
+  ComposedModal,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
   TextInput,
   RadioButton,
   RadioButtonGroup,
   FormGroup,
   Loading,
 } from 'carbon-components-react';
+import cx from 'classnames';
 import { ErrorFilled16, CheckmarkFilled16 } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
@@ -14,141 +18,164 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 
 const componentName = 'ExportModal';
 
-export let ExportModal = ({
-  error,
-  errorMessage,
-  filename,
-  inputLabel,
-  invalidInputText,
-  loading,
-  loadingMessage,
-  modalBody,
-  modalHeading,
-  onRequestClose,
-  onRequestSubmit,
-  open,
-  preformattedExtensions,
-  preformattedExtensionsLabel,
-  primaryButtonText,
-  secondaryButtonText,
-  successMessage,
-  successful,
-  validExtensions,
-}) => {
-  const blockClass = `${pkg.prefix}--export-modal`;
-  const internalId = useRef(uuidv4());
-  const [name, setName] = useState(filename);
-  const [dirtyInput, setDirtyInput] = useState(false);
-  const [extension, setExtension] = useState(
-    preformattedExtensions[0] ? preformattedExtensions[0].extension : ''
-  );
+export let ExportModal = forwardRef(
+  (
+    {
+      body,
+      className,
+      error,
+      errorMessage,
+      filename,
+      inputLabel,
+      invalidInputText,
+      loading,
+      loadingMessage,
+      onRequestClose,
+      onRequestSubmit,
+      open,
+      preformattedExtensions,
+      preformattedExtensionsLabel,
+      primaryButtonText,
+      secondaryButtonText,
+      successMessage,
+      successful,
+      title,
+      validExtensions,
+      ...rest
+    },
+    ref
+  ) => {
+    const [name, setName] = useState(filename);
+    const [dirtyInput, setDirtyInput] = useState(false);
+    // by default (if it exists) use the first extension in the extension array
+    const [extension, setExtension] = useState(
+      preformattedExtensions?.[0]?.extension
+    );
 
-  const onNameChangeHandler = (evt) => {
-    setName(evt.target.value);
-  };
+    const onNameChangeHandler = (evt) => {
+      setName(evt.target.value);
+    };
 
-  const onExtensionChangeHandler = (value) => {
-    setExtension(value);
-  };
+    const onExtensionChangeHandler = (value) => {
+      setExtension(value);
+    };
 
-  const onBlurHandler = () => {
-    setDirtyInput(true);
-  };
+    const onBlurHandler = () => {
+      setDirtyInput(true);
+    };
 
-  const onSubmitHandler = () => {
-    const preformatted = preformattedExtensions.length;
-    const returnName = preformatted
-      ? `${filename}.${extension.toLocaleLowerCase()}`
-      : name;
-    onRequestSubmit(returnName);
-  };
+    const onSubmitHandler = () => {
+      const returnName = extension
+        ? `${filename}.${extension.toLocaleLowerCase()}`
+        : name;
+      onRequestSubmit(returnName);
+    };
 
-  const hasInvalidExtension = () => {
-    if (!dirtyInput || !validExtensions || !validExtensions.length)
+    const hasInvalidExtension = () => {
+      if (!dirtyInput || !validExtensions || !validExtensions.length)
+        return false;
+      if (!name.includes('.')) return true;
+      const ext = name.split('.').pop();
+      if (!validExtensions.includes(ext)) return true;
       return false;
-    if (!name.includes('.')) return true;
-    const ext = name.split('.').pop();
-    if (!validExtensions.includes(ext)) return true;
-    return false;
-  };
+    };
 
-  const primaryButtonDisabled = loading || !name || hasInvalidExtension();
-  const submitted = loading || error || successful;
+    const blockClass = `${pkg.prefix}--export-modal`;
+    const internalId = useRef(uuidv4());
+    const primaryButtonDisabled = loading || !name || hasInvalidExtension();
+    const submitted = loading || error || successful;
 
-  return (
-    <Modal
-      open={open}
-      primaryButtonText={primaryButtonText}
-      secondaryButtonText={secondaryButtonText}
-      modalHeading={modalHeading}
-      onRequestSubmit={onSubmitHandler}
-      onRequestClose={onRequestClose}
-      className={blockClass}
-      primaryButtonDisabled={primaryButtonDisabled}
-      passiveModal={submitted}>
-      <div className={`${blockClass}-inner`}>
-        {!submitted && (
-          <>
-            <p className={`${blockClass}-body`}>{modalBody}</p>
-            {preformattedExtensions.length ? (
-              <FormGroup legendText={preformattedExtensionsLabel}>
-                <RadioButtonGroup
-                  orientation="vertical"
-                  onChange={onExtensionChangeHandler}
-                  valueSelected={extension}
-                  name="extensions">
-                  {preformattedExtensions.map((o) => (
-                    <RadioButton
-                      key={o.extension}
-                      id={o.extension}
-                      value={o.extension}
-                      labelText={`${o.extension} (${o.description})`}
-                    />
-                  ))}
-                </RadioButtonGroup>
-              </FormGroup>
-            ) : (
-              <TextInput
-                id={`text-input--${internalId}`}
-                value={name}
-                onChange={onNameChangeHandler}
-                labelText={inputLabel}
-                invalid={hasInvalidExtension()}
-                invalidText={invalidInputText}
-                onBlur={onBlurHandler}
-              />
+    return (
+      <ComposedModal
+        {...rest}
+        open={open}
+        ref={ref}
+        className={cx(blockClass, className)}
+        aria-label={title}>
+        <ModalHeader title={title} />
+        <ModalBody>
+          {!submitted && (
+            <>
+              <p className={`${blockClass}__body`}>{body}</p>
+              {preformattedExtensions.length ? (
+                <FormGroup legendText={preformattedExtensionsLabel}>
+                  <RadioButtonGroup
+                    orientation="vertical"
+                    onChange={onExtensionChangeHandler}
+                    valueSelected={extension}
+                    name="extensions">
+                    {preformattedExtensions.map((o) => (
+                      <RadioButton
+                        key={o.extension}
+                        id={o.extension}
+                        value={o.extension}
+                        labelText={`${o.extension} (${o.description})`}
+                      />
+                    ))}
+                  </RadioButtonGroup>
+                </FormGroup>
+              ) : (
+                <TextInput
+                  id={`text-input--${internalId}`}
+                  value={name}
+                  onChange={onNameChangeHandler}
+                  labelText={inputLabel}
+                  invalid={hasInvalidExtension()}
+                  invalidText={invalidInputText}
+                  onBlur={onBlurHandler}
+                />
+              )}
+            </>
+          )}
+          <div className={`${blockClass}__messaging`}>
+            {loading && (
+              <>
+                <Loading small withOverlay={false} />
+                <p>{loadingMessage}</p>
+              </>
             )}
-          </>
+            {successful && (
+              <>
+                <CheckmarkFilled16
+                  className={`${blockClass}__checkmark-icon`}
+                />
+                <p>{successMessage}</p>
+              </>
+            )}
+            {error && (
+              <>
+                <ErrorFilled16 className={`${blockClass}__error-icon`} />
+                <p>{errorMessage}</p>
+              </>
+            )}
+          </div>
+        </ModalBody>
+        {!submitted && (
+          <ModalFooter
+            primaryButtonText={primaryButtonText}
+            secondaryButtonText={secondaryButtonText}
+            primaryButtonDisabled={primaryButtonDisabled}
+            onRequestClose={onRequestClose}
+            onRequestSubmit={onSubmitHandler}
+          />
         )}
-        <div className={`${blockClass}-messaging`}>
-          {loading && (
-            <>
-              <Loading small withOverlay={false} />
-              <p>{loadingMessage}</p>
-            </>
-          )}
-          {successful && (
-            <>
-              <CheckmarkFilled16 className={`${blockClass}-checkmark-icon`} />
-              <p>{successMessage}</p>
-            </>
-          )}
-          {error && (
-            <>
-              <ErrorFilled16 className={`${blockClass}-error-icon`} />
-              <p>{errorMessage}</p>
-            </>
-          )}
-        </div>
-      </div>
-    </Modal>
-  );
-};
+      </ComposedModal>
+    );
+  }
+);
 
 // Return a placeholder if not released and not enabled by feature flag
 ExportModal = pkg.checkComponentEnabled(ExportModal, componentName);
 
 ExportModal.propTypes = {
+  /**
+   * Body content for the modal
+   */
+  body: PropTypes.string,
+  /**
+   * Optional class name
+   */
+  className: PropTypes.string,
   /**
    * specify if an error occured
    */
@@ -158,7 +185,6 @@ ExportModal.propTypes = {
    */
   errorMessage: PropTypes.string,
   /**
-   *
    * name of the file being exported
    */
   filename: PropTypes.string,
@@ -178,14 +204,6 @@ ExportModal.propTypes = {
    * messaing to display during the loading state
    */
   loadingMessage: PropTypes.string,
-  /**
-   * Optional body content for modal
-   */
-  modalBody: PropTypes.string,
-  /**
-   * Header that displays at the top of the modal
-   */
-  modalHeading: PropTypes.string,
   /**
    * Specify a handler for closing modal
    */
@@ -225,6 +243,10 @@ ExportModal.propTypes = {
    */
   successful: PropTypes.bool,
   /**
+   * The text displayed at the top of the modal
+   */
+  title: PropTypes.string,
+  /**
    * array of valid extensions the file can have
    */
   validExtensions: PropTypes.array,
@@ -232,23 +254,10 @@ ExportModal.propTypes = {
 
 ExportModal.defaultProps = {
   error: false,
-  errorMessage: '',
-  filename: '',
-  inputLabel: '',
-  invalidInputText: '',
   loading: false,
-  loadingMessage: '',
-  modalBody: '',
-  modalHeading: '',
-  onRequestClose: () => {},
-  onRequestSubmit: () => {},
   open: false,
   preformattedExtensions: [],
-  preformattedExtensionsLabel: '',
-  primaryButtonText: '',
-  secondaryButtonText: '',
   successful: false,
-  successMessage: '',
   validExtensions: [],
 };
 

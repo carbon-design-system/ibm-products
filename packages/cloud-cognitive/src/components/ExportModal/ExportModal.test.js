@@ -5,35 +5,40 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { ExportModal } from '.';
 
-const { name } = ExportModal;
+const componentName = ExportModal.displayName;
 const defaultProps = {
+  body: 'body content',
+  className: 'test-class',
+  errorMessage: 'an error occured',
   filename: '',
-  inputLabel: 'File name',
-  modalHeading: 'Export',
+  inputLabel: 'file name',
+  invalidInputText: 'invalid input',
+  loadingMessage: 'loading...',
   open: true,
-  primaryButtonText: 'Export',
-  secondaryButtonText: 'Cancel',
-  validExtensions: ['pdf'],
-  invalidInputText: 'File must have valid extension .pdf',
-  successMessage: 'Success',
-  errorMessage: 'Error',
-  loadingMessage: 'Loading',
+  primaryButtonText: 'primary button',
+  secondaryButtonText: 'secondary button',
+  successMessage: 'success',
+  title: 'header content',
 };
 
-describe(name, () => {
+describe(componentName, () => {
   it('default render with with extension validation', () => {
-    const { click, change, blur } = fireEvent;
+    const { change, blur } = fireEvent;
+    const { click } = userEvent;
     const { fn } = jest;
     const onRequestSubmit = fn();
     const props = {
       ...defaultProps,
       onRequestSubmit,
+      validExtensions: ['pdf'],
+      invalidInputText: 'File must have valid extension .pdf',
     };
 
     const { container, rerender, getByText } = render(
@@ -46,16 +51,16 @@ describe(name, () => {
     click(submitBtn);
     expect(onRequestSubmit).not.toBeCalled();
 
-    change(textInput, { target: { value: 'test' } });
+    change(textInput, { target: { value: `${props.filename}` } });
     blur(textInput);
     click(submitBtn);
     expect(onRequestSubmit).not.toBeCalled();
 
-    change(textInput, { target: { value: 'test.mp3' } });
+    change(textInput, { target: { value: `${props.filename}.mp3` } });
     click(submitBtn);
     expect(onRequestSubmit).not.toBeCalled();
 
-    change(textInput, { target: { value: 'test.pdf' } });
+    change(textInput, { target: { value: `${props.filename}.pdf` } });
     click(submitBtn);
     expect(onRequestSubmit).toBeCalled();
 
@@ -99,6 +104,28 @@ describe(name, () => {
     click(getByLabelText('BAR (best for integration server)'));
     click(submitBtn);
     expect(onRequestSubmit).toBeCalled();
-    expect(onRequestSubmit).toBeCalledWith('test.bar');
+    expect(onRequestSubmit).toBeCalledWith(`${props.filename}.bar`);
+  });
+
+  it('has no accessibility violations', async () => {
+    const { container } = render(<ExportModal {...defaultProps} />);
+    await expect(container).toBeAccessible(componentName);
+    await expect(container).toHaveNoAxeViolations();
+  });
+
+  it('applies className to the containing node', () => {
+    const { container } = render(<ExportModal {...defaultProps} />);
+    expect(container.firstChild).toHaveClass(defaultProps.className);
+  });
+
+  it('adds additional properties to the containing node', () => {
+    render(<ExportModal {...defaultProps} data-testid="test-id" />);
+    screen.getByTestId('test-id');
+  });
+
+  it('forwards a ref to an appropriate node', () => {
+    const ref = React.createRef();
+    render(<ExportModal {...defaultProps} ref={ref} />);
+    expect(ref.current).not.toBeNull();
   });
 });

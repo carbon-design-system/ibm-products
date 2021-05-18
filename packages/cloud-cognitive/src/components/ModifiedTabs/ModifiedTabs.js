@@ -46,7 +46,6 @@ export let ModifiedTabs = ({
     <Tabs className="modified-tabs" ref={tabsRef}>
       {tabs.map((tab) => (
         <Tab
-          href="#"
           id={tab.id}
           key={tab.id}
           label={
@@ -60,7 +59,6 @@ export let ModifiedTabs = ({
         </Tab>
       ))}
       <Tab
-        href="#"
         id="modified-tabs__tab-new"
         label={<ModifiedTabLabelNew label={newTabLabel} />}
         onClick={handleNewTab}

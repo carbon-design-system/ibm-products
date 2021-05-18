@@ -465,6 +465,17 @@ $raised-z-index: 99;
       }
     }
   }
+
+  :root {
+    --#{$block-class}--tagset-tooltip-offset: 0;
+  }
+
+  .#{$block-class}__tagset-tooltip.#{$block-class}__tagset-tooltip {
+    // stylelint-disable-next-line
+    position: var(--#{$block-class}--tagset-tooltip-position) !important;
+    // stylelint-disable-next-line
+    top: var(--#{$block-class}--tagset-tooltip-offset) !important;
+  }
 }
 
 @include exports('page-header') {

@@ -3,9 +3,9 @@
 import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
 import { pkg } from '../../settings';
 import { getStorybookSlug } from '../../../config';
-import { RemoveDeleteModal } from '.';
+import { RemoveModal } from '.';
 
-# RemoveDeleteModal
+# RemoveModal
 
 [Usage guidelines](https://www.carbondesignsystem.com/community/patterns/remove-pattern/)
 &nbsp;|&nbsp;
@@ -15,23 +15,19 @@ import { RemoveDeleteModal } from '.';
 
 ## Overview
 
-The `RemoveDeleteModal` component is simply a wrapper of the Carbon `Modal`
-component. For additional usage guidelines and documentation please refer to the
-links above.
+The `RemoveModal` component is simply a wrapper of the Carbon `Modal` component.
+For additional usage guidelines and documentation please refer to the links
+above.
 
 <Preview>
   <Story
-    id={getStorybookSlug(
-      pkg,
-      RemoveDeleteModal.displayName,
-      'with-state-manager'
-    )}
+    id={getStorybookSlug(pkg, RemoveModal.displayName, 'with-state-manager')}
   />
 </Preview>
 
 ## High impact vs medium impact
 
-The `RemoveDeleteModal` covers what is known as high impact and medium impact
+The `RemoveModal` covers what is known as high impact and medium impact
 deleting. Enabling `textConfirmation` enables what would be considered the high
 impact state of the modal. For additional information on differentiating between
 delete / remove and low / medium / high impact please refer to the

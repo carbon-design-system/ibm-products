@@ -1,0 +1,29 @@
+//
+// Copyright IBM Corp. 2020, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+
+@import 'carbon-components/scss/components/modal/modal';
+@import 'carbon-components/scss/components/text-input/text-input';
+
+@mixin remove-modal {
+  $block-class: #{$pkg-prefix}--remove-modal;
+
+  .#{$block-class} .bx--modal-content {
+    padding-right: $spacing-05;
+  }
+
+  .#{$block-class}__body {
+    margin-bottom: $spacing-05;
+    padding-right: 20%;
+  }
+}
+
+@include exports('remove-modal') {
+  @include remove-modal;
+}

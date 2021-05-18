@@ -41,14 +41,15 @@ export let PageHeader = React.forwardRef(
       background,
       breadcrumbItems,
       className,
-      collapseExpandHeaderLabel,
       collapseHeader,
+      collapseHeaderLabel,
+      expandHeaderLabel,
+      collapseHeaderToggleWanted,
       preventBreadcrumbScroll,
       navigation,
       pageActions,
       pageHeaderOffset,
       preCollapseTitleRow,
-      showCollapseHeaderButton,
       subtitle,
       tags,
       title,
@@ -88,9 +89,6 @@ export let PageHeader = React.forwardRef(
     ] = useState(0);
     const [actionBarColumnWidth, setActionBarColumnWidth] = useState(0);
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
-    const collapseLabel = Array.isArray(collapseExpandHeaderLabel)
-      ? collapseExpandHeaderLabel
-      : [collapseExpandHeaderLabel, collapseExpandHeaderLabel];
 
     useEffect(() => {
       let newActionBarWidth = 'initial';
@@ -456,7 +454,7 @@ export let PageHeader = React.forwardRef(
         [`--${blockClass}--background-opacity`]: result,
       }));
       setBackgroundOpacity(result);
-      setHasCollapseButton(showCollapseHeaderButton && result > 0);
+      setHasCollapseButton(collapseHeaderToggleWanted && result > 0);
     }, [
       actionBarItems,
       background,
@@ -465,7 +463,7 @@ export let PageHeader = React.forwardRef(
       metrics.headerHeight,
       navigation,
       scrollYValue,
-      showCollapseHeaderButton,
+      collapseHeaderToggleWanted,
       tags,
     ]);
 
@@ -727,7 +725,7 @@ export let PageHeader = React.forwardRef(
               data-collapse={fullyCollapsed ? 'collapsed' : 'not collapsed'}
               hasIconOnly={true}
               iconDescription={
-                fullyCollapsed ? collapseLabel[0] : collapseLabel[1]
+                fullyCollapsed ? collapseHeaderLabel : expandHeaderLabel
               }
               kind="ghost"
               onClick={handleCollapseToggle}
@@ -798,21 +796,28 @@ PageHeader.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Label/assistive text for the collapse/expand chevron
-   * Single string e.g. 'toggle expand' or array ['Expand', 'Collapse']
-   * Default ['Expand', 'Collapse']
-   */
-  collapseExpandHeaderLabel: PropTypes.oneOf(
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string)
-  ),
-  /**
    * The header can as a whole be collapsed, expanded or somewhere in between.
    * This setting controls the initial value, but also takes effect on change
    *
    * NOTE: The header is collapsed by setting the scroll position to hide part of the header. Collapsing has no effect if there is insufficient content to scroll.
    */
   collapseHeader: PropTypes.bool,
+  /**
+   * Label/assistive text for the collapse/expand button
+   * Default 'Collapse'
+   */
+  collapseHeaderLabel: PropTypes.string,
+  /**
+   * Enable the collapse header toggle.
+   *
+   * NOTE: The header is collapsed by setting the scroll position to hide part of the header. Collapsing has no effect if there is insufficient content to scroll.
+   */
+  collapseHeaderToggleWanted: PropTypes.bool,
+  /**
+   * Label/assistive text for the collapse/expand button
+   * Default 'Expand'
+   */
+  expandHeaderLabel: PropTypes.string,
   /**
    * Content for the navigation area in the PageHeader. Should
    * be a React element that is normally a Carbon Tabs component. Optional.
@@ -858,12 +863,6 @@ PageHeader.propTypes = {
    */
   preventBreadcrumbScroll: PropTypes.bool,
   /**
-   * Show the collapse header button.
-   *
-   * NOTE: The header is collapsed by setting the scroll position to hide part of the header. Collapsing has no effect if there is insufficient content to scroll.
-   */
-  showCollapseHeaderButton: PropTypes.bool,
-  /**
    * A subtitle or description that provides additional context to
    * identify the current page. Optional.
    */
@@ -888,7 +887,8 @@ PageHeader.propTypes = {
 PageHeader.defaultProps = {
   background: true,
   className: '',
-  collapseExpandHeaderLabel: ['Expand', 'Collapse'],
+  collapseHeaderLabel: 'Collapse',
+  expandHeaderLabel: 'Expand',
   preventBreadcrumbScroll: false,
   pageHeaderOffset: 0,
   preCollapseTitleRow: false,

@@ -236,7 +236,7 @@ TagSet.propTypes = {
   /**
    * overflowClassName for the tooltip popup
    */
-  overflowClassName: PropTypes.bool,
+  overflowClassName: PropTypes.string,
   /**
    * overflowDirection from the standard tooltip
    */

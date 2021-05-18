@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.38.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.37.3...@carbon/ibm-cloud-cognitive@0.38.0) (2021-05-18)
+
+
+### Features
+
+* stop tagset overflow scrolling off screen ([#740](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/740)) ([016a3ec](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/016a3ec8ee20691de3ee0d4eb4ea44912276e67f))
+
+
+
+
+
 ## [0.37.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.37.2...@carbon/ibm-cloud-cognitive@0.37.3) (2021-05-18)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

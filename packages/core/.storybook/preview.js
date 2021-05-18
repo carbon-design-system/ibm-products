@@ -9,7 +9,13 @@ import React, { useEffect } from 'react';
 import { withInfo } from '@storybook/addon-info';
 import { withCarbonTheme } from '@carbon/storybook-addon-theme/react';
 
+import { pkg } from '../../cloud-cognitive/src/settings';
+
 import index from './index.scss';
+
+// Enable all components, whether released or not, for storybook purposes
+pkg._silenceWarnings(true);
+pkg.setAllComponents(true);
 
 const Style = ({ children, styles }) => {
   const { unuse, use } = styles;

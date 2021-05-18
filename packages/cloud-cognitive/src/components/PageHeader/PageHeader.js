@@ -89,9 +89,6 @@ export let PageHeader = React.forwardRef(
     ] = useState(0);
     const [actionBarColumnWidth, setActionBarColumnWidth] = useState(0);
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
-    const collapseLabel = Array.isArray(collapseExpandHeaderLabel)
-      ? collapseExpandHeaderLabel
-      : [collapseExpandHeaderLabel, collapseExpandHeaderLabel];
 
     useEffect(() => {
       let newActionBarWidth = 'initial';

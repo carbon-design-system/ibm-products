@@ -47,6 +47,11 @@ export default {
   },
 };
 
+const emptyStateCommonProps = {
+  title: 'Empty state title',
+  subtitle: 'Description text explaining why this section is empty.',
+};
+
 const Template = (args) => {
   return (
     <EmptyState
@@ -62,15 +67,19 @@ const Template = (args) => {
 };
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  ...emptyStateCommonProps,
+};
 
 export const WithCustomIllustration = Template.bind({});
 WithCustomIllustration.args = {
+  ...emptyStateCommonProps,
   illustration: CustomIllustration,
 };
 
 export const withAction = Template.bind({});
 withAction.args = {
+  ...emptyStateCommonProps,
   actionText: 'Create new',
   actionType: 'tertiary',
   onActionEvent: action('actionHandler'),
@@ -78,6 +87,7 @@ withAction.args = {
 
 export const withActionIconButton = Template.bind({});
 withActionIconButton.args = {
+  ...emptyStateCommonProps,
   actionText: 'Create new',
   actionType: 'tertiary',
   onActionEvent: action('actionHandler'),
@@ -86,12 +96,14 @@ withActionIconButton.args = {
 
 export const withLink = Template.bind({});
 withLink.args = {
+  ...emptyStateCommonProps,
   linkText: 'View documentation',
   linkUrl: 'https://www.carbondesignsystem.com',
 };
 
 export const withActionAndLink = Template.bind({});
 withActionAndLink.args = {
+  ...emptyStateCommonProps,
   actionText: 'Create new',
   actionType: 'tertiary',
   onActionEvent: action('actionHandler'),

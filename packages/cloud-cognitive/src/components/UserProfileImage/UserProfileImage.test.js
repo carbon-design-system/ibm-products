@@ -16,12 +16,16 @@ import { UserProfileImage } from '.';
 
 const blockClass = `${pkg.prefix}-user-profile-avatar`;
 const dataTestId = uuidv4();
+const kind = 'user';
+const size = 'xlg';
+const theme = 'light';
+
+const renderComponent = ({ ...rest }) =>
+  render(<UserProfileImage {...{ kind, size, theme, ...rest }} />);
 
 describe(name, () => {
   test('should return a circle with background color', () => {
-    const { container } = render(
-      <UserProfileImage theme="light" backgroundColor="light-cyan" />
-    );
+    const { container } = renderComponent({ backgroundColor: 'light-cyan' });
     const element = container.querySelector(
       `.${pkg.prefix}-user-profile-avatar`
     );
@@ -31,32 +35,28 @@ describe(name, () => {
   });
 
   test('should return an icon for the avatar image', () => {
-    const { container } = render(
-      <UserProfileImage theme="light" icon="user" />
-    );
+    const { container } = renderComponent();
     const renderedSVG = container.querySelector('svg');
     expect(renderedSVG).toBeTruthy();
   });
 
   test('should render image for the avatar image', () => {
-    const { container } = render(
-      <UserProfileImage theme="light" image="path_to_image.jpg" />
-    );
+    const { container } = renderComponent({ image: 'path_to_image.jpg' });
     const imagePath = container.querySelector('img').getAttribute('src');
     expect(typeof imagePath).toBe('string');
   });
 
   test('should return appropriately size circle based on size prop', () => {
-    const { container } = render(<UserProfileImage theme="light" size="xl" />);
+    const { container } = renderComponent();
     const element = container.querySelector(
       `.${pkg.prefix}-user-profile-avatar`
     );
-    const hasSizeClass = element.className.includes('xl');
+    const hasSizeClass = element.className.includes('xlg');
     expect(hasSizeClass).toBeTruthy();
   });
 
   test('should recognize theme setting', () => {
-    const { container } = render(<UserProfileImage theme="light" />);
+    const { container } = renderComponent();
     const element = container.querySelector(
       `.${pkg.prefix}-user-profile-avatar`
     );
@@ -65,21 +65,19 @@ describe(name, () => {
   });
 
   it('adds additional properties to the containing node', () => {
-    render(<UserProfileImage theme="light" data-testid={dataTestId} />);
+    renderComponent({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
-    render(<UserProfileImage theme="light" ref={ref} />);
+    renderComponent({ ref });
     expect(ref.current.classList.contains(blockClass)).toBeTruthy();
   });
 
   it('applies className to the containing node', () => {
     const customClass = 'test';
-    const { container } = render(
-      <UserProfileImage theme="light" className={customClass} />
-    );
+    const { container } = renderComponent({ className: customClass });
     const element = container.querySelector(`.${blockClass}`);
     expect(element).toHaveClass(customClass);
   });

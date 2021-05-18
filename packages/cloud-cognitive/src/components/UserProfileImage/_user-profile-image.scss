@@ -8,15 +8,15 @@
 @import '@carbon/import-once/scss/import-once';
 @import '../../global/styles/carbon-settings'; // goes before carbon imports as it affects how carbon is used.
 @import '../../global/styles/project-settings';
-@import './colorMap';
+@import './color-map';
 
 $block-class: #{$pkg-prefix}-user-profile-avatar;
 
 $sizes: (
-  xl: $spacing-10,
+  xlg: $spacing-10,
   lg: $spacing-07,
   md: $spacing-06,
-  sm: 1.25rem,
+  sm: calc(#{$spacing-05} + #{$spacing-02}),
   xs: $spacing-05,
 );
 
@@ -70,33 +70,38 @@ $theme-keys: map-keys($themes);
     justify-content: center;
     text-transform: uppercase;
     border-radius: 100%;
-    .#{$block-class}-photo {
-      //border: 1px solid black; //should a decision be made to have a border
-      border-radius: 100%;
-    }
   }
 
-  .#{$block-class}-photo--xl {
-    @include size('xl');
+  .bx--tooltip__trigger .exp-user-profile-avatar svg {
+    fill: $ui-01;
   }
 
-  .#{$block-class}-photo--lg {
+  .#{$block-class}__photo {
+    width: 100%;
+    border-radius: 100%;
+  }
+
+  .#{$block-class}__photo--xlg {
+    @include size('xlg');
+  }
+
+  .#{$block-class}__photo--lg {
     @include size('lg');
   }
 
-  .#{$block-class}-photo--md {
+  .#{$block-class}__photo--md {
     @include size('md');
   }
-  .#{$block-class}-photo--sm {
+  .#{$block-class}__photo--sm {
     @include size('sm');
   }
 
-  .#{$block-class}-photo--xs {
+  .#{$block-class}__photo--xs {
     @include size('xs');
   }
 
-  .#{$block-class}--xl {
-    @include size('xl');
+  .#{$block-class}--xlg {
+    @include size('xlg');
     @include carbon--type-style('productive-heading-04');
   }
 

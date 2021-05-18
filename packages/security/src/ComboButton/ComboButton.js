@@ -40,6 +40,10 @@ const ComboButton = ({ children, className, overflowMenu, ...rest }) => {
       ),
     }));
 
+  console.warn(
+    'Component ComboButton is deprecated and will shortly be removed. Consider using ButtonMenu instead.'
+  );
+
   return (
     <div
       {...rest}

@@ -98,12 +98,11 @@ export let UserProfileImage = React.forwardRef(
         className={cx([
           blockClass,
           className,
-          'test',
           `${blockClass}--${size}`,
           `${blockClass}--${theme}`,
           `${blockClass}--${backgroundColor}`,
         ])}>
-        <FillItem className="test" />
+        <FillItem />
       </div>
     );
 
@@ -123,6 +122,17 @@ export let UserProfileImage = React.forwardRef(
 UserProfileImage = pkg.checkComponentEnabled(UserProfileImage, componentName);
 
 UserProfileImage.displayName = componentName;
+
+UserProfileImage.validateImageDescription = () => ({
+  image,
+  imageDescription,
+}) => {
+  if (image && !imageDescription) {
+    throw new Error(
+      `${componentName}: imageDescription is missing, this is required when using the image prop`
+    );
+  }
+};
 
 UserProfileImage.propTypes = {
   /**
@@ -154,7 +164,7 @@ UserProfileImage.propTypes = {
   /**
    * When passing the image prop use the imageDecsription prop to describe the image for screen reader.
    */
-  imageDescription: PropTypes.string,
+  imageDescription: UserProfileImage.validateImageDescription(),
   /**
    * When passing the initials prop, either send the initials to be used or the user's display name. The first two capital letters of the display name will be used as the initials.
    */

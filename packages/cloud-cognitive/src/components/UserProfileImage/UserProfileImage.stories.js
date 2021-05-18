@@ -86,3 +86,17 @@ WithImage.args = {
   image,
   imageDescription: 'image here',
 };
+
+export const WithImageWithoutDescription = Template.bind({});
+WithImageWithoutDescription.args = {
+  ...defaultArgs,
+  image,
+};
+
+export const WithImageAndTooltip = Template.bind({});
+WithImageAndTooltip.args = {
+  ...defaultArgs,
+  image,
+  imageDescription: 'image here',
+  tooltipText: 'Display Name',
+};

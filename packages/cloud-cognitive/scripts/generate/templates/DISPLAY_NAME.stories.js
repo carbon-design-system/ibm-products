@@ -10,7 +10,6 @@ import React from 'react';
 // import { action } from '@storybook/addon-actions';
 
 import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
 
 import { DISPLAY_NAME } from '.';

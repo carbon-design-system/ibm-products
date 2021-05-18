@@ -8,7 +8,6 @@
 import React, { useState, useCallback } from 'react';
 import { Navigation } from './preview-components';
 import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
 import { WebTerminal } from '.';
 import mdx from './WebTerminal.mdx';

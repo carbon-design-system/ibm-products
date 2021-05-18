@@ -9,23 +9,37 @@ import React from 'react';
 import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
 import { pkg } from '../settings';
-import '../utils/enable-all'; // must come before components are imported (directly or indirectly)
 
 import * as components from '..';
 
 const canaryClass = `${pkg.prefix}-canary`;
 const name = 'JS export checks';
 
+pkg._silenceWarnings(true);
+pkg.setAllComponents(true);
+
 describe(name, () => {
-  let mockError;
+  const { ResizeObserver } = window;
+  let mockError, mockWarn;
+
   beforeEach(() => {
     // The component instantiations that follow will generate a stack of
-    // console errors about required props not provided, and we don't care.
+    // console errors and warnings about required props not provided or
+    // conditions not met, and for the purposes of these tests we don't care.
     mockError = jest.spyOn(console, 'error').mockImplementation(() => {});
+    mockWarn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    window.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    }));
   });
 
   afterEach(() => {
     mockError.mockRestore();
+    mockWarn.mockRestore();
+    jest.restoreAllMocks();
+    window.ResizeObserver = ResizeObserver;
   });
 
   for (const key in components) {

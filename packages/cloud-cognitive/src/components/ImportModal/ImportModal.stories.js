@@ -9,7 +9,6 @@ import React, { useState } from 'react';
 import { Button } from 'carbon-components-react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
 import { ImportModal } from '.';
 import mdx from './ImportModal.mdx';
@@ -28,26 +27,30 @@ export default {
 
 const defaultProps = {
   defaultErrorBody: 'Select a new file and try again.',
-  dropHeader: 'Add files using drag and drop',
-  errorHeader: 'Import failed',
+  defaultErrorHeader: 'Import failed',
   fetchErrorBody: 'Unable to fetch URL.',
+  fetchErrorHeader: 'Import failed',
   fileDropHeader: 'Add files using drag and drop',
   fileDropLabel: 'Drag and drop files here or click to upload',
-  fileUploadLabel: '1 / 1 files uploaded',
+  fileUploadLabel: 'files uploaded',
   inputButtonText: 'Add file',
   inputHeader: 'Add a file by specifying a URL',
+  inputId: 'test-id',
   inputPlaceholder: 'URL',
   invalidFileTypeErrorBody: 'Invalid file type.',
+  invalidFileTypeErrorHeader: 'Import failed',
   maxFileSize: 500000,
   maxFileSizeErrorBody: '500kb max file size. Select a new file and try again.',
+  maxFileSizeErrorHeader: 'Import failed',
   modalBody:
     'You can specify a file to import by either dragging it into the drag and drop area or by specifying a URL. (Maximum file size of 500KB; .jpg and .png file extensions only.)',
+  modalHeading: 'Import',
+  multiple: false,
   onRequestClose: () => console.log('closed'),
   onRequestSubmit: (file) => console.log('file contents', file),
   open: true,
   primaryButtonText: 'Import',
   secondaryButtonText: 'Cancel',
-  modalHeading: 'Import',
   validFileTypes: ['image/jpeg', 'image/png'],
 };
 

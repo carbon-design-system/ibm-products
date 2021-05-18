@@ -6,7 +6,6 @@
  */
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { ActionBar, ActionBarItem } from '.';
 import { Lightning16, Bee16 } from '@carbon/icons-react';
 import { mockHTMLElement } from '../../global/js/utils/test-helper';
@@ -36,15 +35,15 @@ const ActionBarChildren = (
 const TestActionBar = ({ width, children, ...rest }) => {
   return (
     <div style={{ width, height: 40 }}>
-      <ActionBar className="fish" {...rest}>
-        {children}
-      </ActionBar>
+      <ActionBar {...rest}>{children}</ActionBar>
     </div>
   );
 };
 
 describe(ActionBar.displayName, () => {
+  const { ResizeObserver } = window;
   let mockElement;
+
   beforeEach(() => {
     mockElement = mockHTMLElement({
       offsetWidth: {
@@ -60,10 +59,17 @@ describe(ActionBar.displayName, () => {
         },
       },
     });
+    window.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    }));
   });
 
   afterEach(() => {
     mockElement.mockRestore();
+    jest.restoreAllMocks();
+    window.ResizeObserver = ResizeObserver;
   });
 
   const { click } = fireEvent;

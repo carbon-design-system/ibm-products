@@ -5,9 +5,13 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@import '../../global/styles/project-settings';
+
 @import 'carbon-components/scss/components/ui-shell/ui-shell';
 
-.sbdocs .page-header-stories__viewport {
+$story-class: 'page-header-stories';
+
+.sbdocs .#{$story-class}__viewport {
   max-height: 500px;
   overflow-y: auto;
   color: $text-01;
@@ -15,41 +19,41 @@
   box-shadow: 0 0 4px 1px $ui-03;
 }
 
-.page-header-stories__content-switcher {
+.#{$story-class}__content-switcher {
   justify-content: flex-start;
 }
 
-.page-header-stories__content-switcher button {
+.#{$story-class}__content-switcher button {
   width: auto;
 }
 
-.page-header-stories__dummy-content {
+.#{$story-class}__dummy-content {
   margin-top: $spacing-05;
 }
 
-.page-header-stories__dummy-content-block {
+.#{$story-class}__dummy-content-block {
   height: 120vh;
   background: $ui-01;
   background-clip: content-box;
 }
 
-.page-header-stories__dummy-content-text {
+.#{$story-class}__dummy-content-text {
   padding: $spacing-05;
 }
 
-.page-header-stories__status-icon {
+.#{$story-class}__status-icon {
   vertical-align: middle;
   fill: $support-02;
 }
 
-.page-header-stories__app {
+.#{$story-class}__app {
   position: relative;
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
 
-.page-header-stories__content-container {
+.#{$story-class}__content-container {
   height: 100%;
   padding: 0;
 }

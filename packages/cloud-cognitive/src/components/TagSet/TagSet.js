@@ -16,181 +16,202 @@ import ReactResizeDetector from 'react-resize-detector';
 
 import { pkg } from '../../settings';
 const componentName = 'TagSet';
-const blockClass = `${pkg.prefix}-tag-set`;
+const blockClass = `${pkg.prefix}--tag-set`;
 
-export let TagSet = ({
-  children,
-  className,
-  maxVisibleTags,
-  rightAlign,
-  overflowAlign,
-  overflowDirection,
-  showAllModalHeading,
-  showAllSearchLabel,
-  showAllSearchPlaceHolderText,
-  showAllTagsLabel,
-}) => {
-  const [displayCount, setDisplayCount] = useState(3);
-  const [displayedTags, setDisplayedTags] = useState([]);
-  const [allTags, setAllTags] = useState([]);
-  const [hiddenSizingTags, setHiddenSizingTags] = useState([]);
-  const [showAllModalOpen, setShowAllModalOpen] = useState(false);
-  const tagSet = useRef(null);
-  const displayedArea = useRef(null);
-  const sizingTags = useRef([]);
-  const overflowTag = useRef(null);
+export let TagSet = React.forwardRef(
+  (
+    {
+      children,
+      className,
+      maxVisible,
+      rightAlign,
+      overflowAlign,
+      overflowClassName,
+      overflowDirection,
+      showAllModalHeading,
+      showAllSearchLabel,
+      showAllSearchPlaceHolderText,
+      showAllTagsLabel,
+      // Collect any other property values passed in.
+      ...rest
+    },
+    ref
+  ) => {
+    const [displayCount, setDisplayCount] = useState(3);
+    const [displayedTags, setDisplayedTags] = useState([]);
+    const [allTags, setAllTags] = useState([]);
+    const [hiddenSizingTags, setHiddenSizingTags] = useState([]);
+    const [showAllModalOpen, setShowAllModalOpen] = useState(false);
+    const localTagSetRef = useRef(null);
+    const tagSetRef = ref || localTagSetRef;
+    const displayedArea = useRef(null);
+    const [sizingTags, setSizingTags] = useState([]);
+    const overflowTag = useRef(null);
 
-  const handleShowAllClick = () => {
-    setShowAllModalOpen(true);
-  };
+    const handleShowAllClick = () => {
+      setShowAllModalOpen(true);
+    };
 
-  useEffect(() => {
-    // clone children for use in modal
-    setAllTags(
-      children && children.length > 0
-        ? children.map((child) => React.cloneElement(child))
-        : []
-    );
-
-    // use children as sizing tags
-    setHiddenSizingTags(
-      children && children.length > 0
-        ? children.map((child, index) => {
-            return (
-              <div
-                key={index}
-                className={`${blockClass}--sizing-tag`}
-                ref={(el) => (sizingTags.current[index] = el)}>
-                {child}
-              </div>
-            );
-          })
-        : []
-    );
-  }, [children]);
-
-  useEffect(() => {
-    // clone children for use as visible and overflow tags
-    let newDisplayedTags =
-      children && children.length > 0
-        ? children.map((child) => React.cloneElement(child))
-        : [];
-
-    // separate out tags for the overflow
-    const newOverflowTags = newDisplayedTags.splice(
-      displayCount,
-      newDisplayedTags.length - displayCount
-    );
-
-    // add wrapper around displayed tags
-    newDisplayedTags = newDisplayedTags.map((tag, index) => (
-      <div key={index} className={`${blockClass}--displayed-tag`}>
-        {tag}
-      </div>
-    ));
-
-    newDisplayedTags.push(
-      <TagSetOverflow
-        onShowAllClick={handleShowAllClick}
-        overflowTags={newOverflowTags}
-        overflowAlign={overflowAlign}
-        overflowDirection={overflowDirection}
-        showAllTagsLabel={showAllTagsLabel}
-        key="displayed-tag-overflow"
-        ref={overflowTag}
-      />
-    );
-
-    setDisplayedTags(newDisplayedTags);
-  }, [
-    children,
-    displayCount,
-    overflowAlign,
-    overflowDirection,
-    showAllTagsLabel,
-  ]);
-
-  const checkFullyVisibleTags = useCallback(() => {
-    // how many will fit?
-    let willFit = 0;
-    let spaceAvailable = tagSet.current.offsetWidth;
-
-    for (let i in sizingTags.current) {
-      const tagWidth = sizingTags.current[i].offsetWidth;
-      if (spaceAvailable >= tagWidth) {
-        spaceAvailable -= tagWidth;
-        willFit += 1;
-      } else {
-        break;
-      }
-    }
-
-    if (willFit < sizingTags.current.length) {
-      while (willFit > 0 && spaceAvailable < overflowTag.current.offsetWidth) {
-        // Highly unlikely any useful tag is smaller
-        willFit -= 1; // remove one tag
-        spaceAvailable += sizingTags.current[willFit].offsetWidth;
-      }
-    }
-
-    if (willFit < 1) {
-      setDisplayCount(0);
-    } else {
-      setDisplayCount(
-        maxVisibleTags ? Math.min(willFit, maxVisibleTags) : willFit
+    useEffect(() => {
+      // clone children for use in modal
+      setAllTags(
+        children && children.length > 0
+          ? children.map((child) => React.cloneElement(child))
+          : []
       );
-    }
-  }, [maxVisibleTags, sizingTags]);
 
-  useEffect(() => {
-    checkFullyVisibleTags();
-  }, [checkFullyVisibleTags, maxVisibleTags, sizingTags]);
+      const newSizingTags = [];
+      // use children as sizing tags
+      setHiddenSizingTags(
+        /* istanbul ignore next */
+        children && children.length > 0
+          ? children.map((child, index) => {
+              return (
+                <div
+                  key={index}
+                  className={`${blockClass}__sizing-tag`}
+                  ref={(el) => (newSizingTags[index] = el)}>
+                  {child}
+                </div>
+              );
+            })
+          : []
+      );
+      setSizingTags(newSizingTags);
+    }, [children]);
 
-  const handleResize = () => {
-    checkFullyVisibleTags();
-  };
+    useEffect(() => {
+      // clone children for use as visible and overflow tags
+      let newDisplayedTags =
+        children && children.length > 0
+          ? children.map((child) => React.cloneElement(child))
+          : [];
 
-  const handleSizerTagsResize = () => {
-    checkFullyVisibleTags();
-  };
+      // separate out tags for the overflow
+      const newOverflowTags = newDisplayedTags.splice(
+        displayCount,
+        newDisplayedTags.length - displayCount
+      );
 
-  const handleModalClose = () => {
-    setShowAllModalOpen(false);
-  };
-
-  return (
-    <ReactResizeDetector onResize={handleResize}>
-      <div className={cx([blockClass, className])} ref={tagSet}>
-        <div
-          className={cx([
-            `${blockClass}--space`,
-            { [`${blockClass}--space--right`]: rightAlign },
-          ])}>
-          <ReactResizeDetector onResize={handleSizerTagsResize}>
-            <div
-              className={`${blockClass}--tag-container ${blockClass}--tag-container--hidden`}
-              aria-hidden={true}>
-              {hiddenSizingTags}
-            </div>
-          </ReactResizeDetector>
-
-          <div className={`${blockClass}--tag-container`} ref={displayedArea}>
-            {displayedTags}
-          </div>
+      // add wrapper around displayed tags
+      newDisplayedTags = newDisplayedTags.map((tag, index) => (
+        <div key={index} className={`${blockClass}__displayed-tag`}>
+          {tag}
         </div>
+      ));
 
-        <TagSetModal
-          allTags={allTags}
-          open={showAllModalOpen}
-          heading={showAllModalHeading}
-          onClose={handleModalClose}
-          searchLabel={showAllSearchLabel}
-          searchPlaceholder={showAllSearchPlaceHolderText}
+      newDisplayedTags.push(
+        <TagSetOverflow
+          className={overflowClassName}
+          onShowAllClick={handleShowAllClick}
+          overflowTags={newOverflowTags}
+          overflowAlign={overflowAlign}
+          overflowDirection={overflowDirection}
+          showAllTagsLabel={showAllTagsLabel}
+          key="displayed-tag-overflow"
+          ref={overflowTag}
         />
-      </div>
-    </ReactResizeDetector>
-  );
-};
+      );
+
+      setDisplayedTags(newDisplayedTags);
+    }, [
+      children,
+      displayCount,
+      overflowAlign,
+      overflowClassName,
+      overflowDirection,
+      showAllTagsLabel,
+    ]);
+
+    const checkFullyVisibleTags = useCallback(() => {
+      // how many will fit?
+      let willFit = 0;
+
+      if (sizingTags.length > 0) {
+        let spaceAvailable = tagSetRef.current.offsetWidth;
+
+        for (let i in sizingTags) {
+          const tagWidth = sizingTags[i].offsetWidth;
+
+          if (spaceAvailable >= tagWidth) {
+            spaceAvailable -= tagWidth;
+            willFit += 1;
+          } else {
+            break;
+          }
+        }
+
+        if (willFit < sizingTags.length) {
+          while (
+            willFit > 0 &&
+            spaceAvailable < overflowTag.current.offsetWidth
+          ) {
+            // Highly unlikely any useful tag is smaller
+            willFit -= 1; // remove one tag
+            spaceAvailable += sizingTags[willFit].offsetWidth;
+          }
+        }
+      }
+
+      if (willFit < 1) {
+        setDisplayCount(0);
+      } else {
+        setDisplayCount(maxVisible ? Math.min(willFit, maxVisible) : willFit);
+      }
+    }, [maxVisible, sizingTags, tagSetRef]);
+
+    useEffect(() => {
+      checkFullyVisibleTags();
+    }, [checkFullyVisibleTags, maxVisible, sizingTags]);
+
+    const handleResize = () => {
+      /* istanbul ignore next */ // not sure how to test resize
+      checkFullyVisibleTags();
+    };
+
+    const handleSizerTagsResize = () => {
+      /* istanbul ignore next */ // not sure how to test resize
+      checkFullyVisibleTags();
+    };
+
+    const handleModalClose = () => {
+      setShowAllModalOpen(false);
+    };
+
+    return (
+      <ReactResizeDetector onResize={handleResize}>
+        <div {...rest} className={cx([blockClass, className])} ref={tagSetRef}>
+          <div
+            className={cx([
+              `${blockClass}__space`,
+              { [`${blockClass}__space--right`]: rightAlign },
+            ])}>
+            <ReactResizeDetector onResize={handleSizerTagsResize}>
+              <div
+                className={`${blockClass}__tag-container ${blockClass}__tag-container--hidden`}
+                aria-hidden={true}>
+                {hiddenSizingTags}
+              </div>
+            </ReactResizeDetector>
+
+            <div className={`${blockClass}__tag-container`} ref={displayedArea}>
+              {displayedTags}
+            </div>
+          </div>
+
+          <TagSetModal
+            allTags={allTags}
+            open={showAllModalOpen}
+            heading={showAllModalHeading}
+            onClose={handleModalClose}
+            searchLabel={showAllSearchLabel}
+            searchPlaceholder={showAllSearchPlaceHolderText}
+          />
+        </div>
+      </ReactResizeDetector>
+    );
+  }
+);
 
 // Return a placeholder if not released and not enabled by feature flag
 TagSet = pkg.checkComponentEnabled(TagSet, componentName);
@@ -207,11 +228,15 @@ TagSet.propTypes = {
   /**
    * maximum visible tags
    */
-  maxVisibleTags: PropTypes.number,
+  maxVisible: PropTypes.number,
   /**
    * overflowAlign from the standard tooltip
    */
   overflowAlign: PropTypes.oneOf(['start', 'center', 'end']),
+  /**
+   * overflowClassName for the tooltip popup
+   */
+  overflowClassName: PropTypes.bool,
   /**
    * overflowDirection from the standard tooltip
    */

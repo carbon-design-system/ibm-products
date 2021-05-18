@@ -7,8 +7,10 @@
 
 export { AboutModal } from './AboutModal';
 export { ActionBarItem } from './ActionBar';
+export { ButtonMenu, ButtonMenuItem } from './ButtonMenu';
 export { ContextHeader } from './ContextHeader';
 export { CreateModal } from './CreateModal';
+export { CreateSidePanel } from './CreateSidePanel';
 export {
   EmptyState,
   ErrorEmptyState,
@@ -19,16 +21,16 @@ export {
   UnauthorizedEmptyState,
 } from './EmptyStates';
 export { ExampleComponent } from './ExampleComponent';
+export { ExportModal } from './ExportModal';
 export { HTTPError403, HTTPError404, HTTPErrorOther } from './HTTPErrors';
 export { ImportModal } from './ImportModal';
 export { ModifiedTabs } from './ModifiedTabs';
 export { NotificationsPanel } from './NotificationsPanel';
-export { PageHeader, PageActionItem } from './PageHeader';
+export { PageHeader } from './PageHeader';
 export { RemoveDeleteModal } from './RemoveDeleteModal';
 export { Saving } from './Saving';
 export { SidePanel } from './SidePanel';
 export { StatusIcon } from './StatusIcon';
-export { TagSet } from './TagSet';
 export { Tearsheet, TearsheetNarrow } from './Tearsheet';
 export { UserProfileImage } from './UserProfileImage';
 export { WebTerminal } from './WebTerminal';

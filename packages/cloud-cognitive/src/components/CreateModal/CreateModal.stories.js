@@ -20,7 +20,6 @@ import {
 } from 'carbon-components-react';
 
 import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
 import { CreateModal } from '.';
 import mdx from './CreateModal.mdx';
@@ -33,8 +32,14 @@ export default {
   component: CreateModal,
   parameters: {
     styles,
-    docs: {
-      page: mdx,
+    docs: { page: mdx },
+    controls: { sort: 'requiredFirst' },
+  },
+  argTypes: {
+    open: {
+      control: {
+        disable: true,
+      },
     },
   },
 };
@@ -45,8 +50,8 @@ const Template = ({ storyInitiallyOpen = true, story, children, ...args }) => {
     <>
       <Button onClick={() => setOpen(true)}>Open {story?.storyName}</Button>
 
-      <style>{`.${pkg.prefix}-about-modal { opacity: 0 }`};</style>
-      <CreateModal open={open} onClose={() => setOpen(false)} {...args}>
+      <style>{`.${pkg.prefix}--create-modal { opacity: 0 }`};</style>
+      <CreateModal open={open} onRequestClose={() => setOpen(false)} {...args}>
         {children}
       </CreateModal>
     </>
@@ -65,13 +70,13 @@ const TemplateWithFormValidation = ({
   return (
     <>
       <Button onClick={() => setOpen(true)}>Open {story?.storyName}</Button>
-      <style>{`.${pkg.prefix}-create-modal { opacity: 0 }`};</style>
+      <style>{`.${pkg.prefix}--create-modal { opacity: 0 }`};</style>
       <CreateModal
         {...args}
         open={open}
-        onClose={() => setOpen(false)}
+        onRequestClose={() => setOpen(false)}
         disableSubmit={textInput.length === 0 ? true : false}
-        primaryFocus=".bx--text-input">
+        selectorPrimaryFocus=".bx--text-input">
         <TextInput
           id="1"
           key="form-field-1"
@@ -117,7 +122,9 @@ const defaultProps = {
   subtitle: 'Your subtitle text will appear here',
   description:
     'This is example description text that will appear here in your modal ',
-  primaryFocus: '.bx--text-input',
+  selectorPrimaryFocus: '.bx--text-input',
+  primaryButtonText: 'Create',
+  secondaryButtonText: 'Cancel',
 };
 
 Template.propTypes = {

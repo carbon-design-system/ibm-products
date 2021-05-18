@@ -27,13 +27,13 @@ const componentName = 'CreateModal';
 const blockClass = `${pkg.prefix}--create-modal`;
 
 // Custom PropType validator which checks and ensures that the children property has no more than 4 nodes
-const isValidChildren = () => (props) => {
-  let child = props.children.props.children;
-  if (child && child.length > 4) {
+const isValidChildren = () => ({ children }) => {
+  if (children && children.length > 4) {
     throw new Error(
       'The `CreateModal` component does not take more than 4 nodes as children. This is to ensure that the modal does not overflow. Please remove 1 or more nodes.'
     );
-  } else return;
+  }
+  return;
 };
 
 export let CreateModal = React.forwardRef(
@@ -41,8 +41,8 @@ export let CreateModal = React.forwardRef(
     {
       className,
       children,
-      onClose,
-      onSubmit,
+      onRequestClose,
+      onRequestSubmit,
       open,
       title,
       subtitle,
@@ -50,7 +50,7 @@ export let CreateModal = React.forwardRef(
       secondaryButtonText,
       primaryButtonText,
       disableSubmit,
-      primaryFocus,
+      selectorPrimaryFocus,
       ...rest
     },
     ref
@@ -58,41 +58,29 @@ export let CreateModal = React.forwardRef(
     return (
       <ComposedModal
         {...rest}
-        selectorPrimaryFocus={primaryFocus}
-        className={cx(blockClass, {
-          [className]: className,
-        })}
+        selectorPrimaryFocus={selectorPrimaryFocus}
+        className={cx(blockClass, className)}
         {...{ open, ref }}
-        aria-label="modal"
+        aria-label={title}
         size="sm"
         preventCloseOnClickOutside>
-        <ModalHeader
-          title={title}
-          titleClassName={`${blockClass}__title bx--modal-content__regular-content`}>
-          {subtitle && (
-            <p
-              className={`${blockClass}__subtitle bx--modal-content__regular-content`}>
-              {subtitle}
-            </p>
-          )}
+        <ModalHeader title={title} titleClassName={`${blockClass}__title`}>
+          {subtitle && <p className={`${blockClass}__subtitle`}>{subtitle}</p>}
         </ModalHeader>
         <ModalBody hasForm>
           {description && (
-            <p
-              className={`${blockClass}__description bx--modal-content__regular-content`}>
-              {description}
-            </p>
+            <p className={`${blockClass}__description`}>{description}</p>
           )}
-          <Form className={cx(`${blockClass}__form`)}>{children}</Form>
+          <Form className={`${blockClass}__form`}>{children}</Form>
         </ModalBody>
         <ModalFooter>
-          <Button type="button" kind="secondary" onClick={onClose}>
+          <Button type="button" kind="secondary" onClick={onRequestClose}>
             {secondaryButtonText}
           </Button>
           <Button
             type="submit"
             kind="primary"
-            onClick={onSubmit}
+            onClick={onRequestSubmit}
             disabled={disableSubmit}>
             {primaryButtonText}
           </Button>
@@ -125,30 +113,30 @@ CreateModal.propTypes = {
   disableSubmit: PropTypes.bool,
   /**
    * Specifies an optional handler which is called when the CreateModal
-   * is closed. Returning `false` prevents the modal from closing.
+   * is closed.
    */
-  onClose: PropTypes.func,
+  onRequestClose: PropTypes.func,
   /**
    * Specifies an optional handler which is called when the CreateModal
    * primary button is pressed.
    */
-  onSubmit: PropTypes.func,
+  onRequestSubmit: PropTypes.func,
   /**
    * Specifies whether the CreateModal is open or not.
    */
-  open: PropTypes.bool.isRequired,
+  open: PropTypes.bool,
   /**
    * Specifies the primary button's text in the modal.
    */
   primaryButtonText: PropTypes.string.isRequired,
   /**
-   * Specifies which DOM element in the form should be focused.
-   */
-  primaryFocus: PropTypes.node.isRequired,
-  /**
    * Specifies the secondary button's text in the modal.
    */
   secondaryButtonText: PropTypes.string.isRequired,
+  /**
+   * Specifies which DOM element in the form should be focused.
+   */
+  selectorPrimaryFocus: PropTypes.node.isRequired,
   /**
    * The subtitle of the CreateModal is optional and serves to provide more information about the modal.
    */
@@ -162,6 +150,4 @@ CreateModal.propTypes = {
 CreateModal.displayName = componentName;
 CreateModal.defaultProps = {
   disableSubmit: false,
-  primaryButtonText: 'Create',
-  secondaryButtonText: 'Cancel',
 };

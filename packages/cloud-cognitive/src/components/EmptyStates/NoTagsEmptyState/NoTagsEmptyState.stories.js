@@ -8,7 +8,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add20 } from '@carbon/icons-react';
-import '../../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import mdx from './NoTagsEmptyState.mdx';
 import { pkg } from '../../../settings';
 import { getStorybookPrefix } from '../../../../config';
@@ -33,8 +32,8 @@ export default {
 const Template = (args) => {
   return (
     <NoTagsEmptyState
-      heading="Start by adding data assets"
-      subtext={
+      title="Start by adding data assets"
+      subtitle={
         <p>
           Click <span>Upload assets</span> to upload your data
         </p>

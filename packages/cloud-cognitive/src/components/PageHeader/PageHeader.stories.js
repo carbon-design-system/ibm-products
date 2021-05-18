@@ -11,7 +11,6 @@ import React from 'react';
 import {
   BreadcrumbItem,
   Column,
-  Content,
   Grid,
   Header,
   HeaderName,
@@ -24,27 +23,25 @@ import { CheckmarkFilled16 } from '@carbon/icons-react';
 import { Lightning16, Bee24 } from '@carbon/icons-react';
 
 import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
 import { ActionBarItem } from '../ActionBar';
-import { PageActionItem } from './PageActionItem';
 import { PageHeader } from '.';
 const storybookPrefix = getStorybookPrefix(pkg, PageHeader.displayName);
 
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-
 import mdx from './PageHeader.mdx';
+
+const storyClass = 'page-header-stories';
 
 export default {
   title: `${storybookPrefix}/${PageHeader.displayName}`,
   component: PageHeader,
   subcomponents: {
     ActionBarItem,
-    PageActionItem,
   },
   parameters: { styles, layout: 'fullscreen', docs: { page: mdx } },
   decorators: [
-    (story) => <div className="page-header-stories__viewport">{story()}</div>,
+    (story) => <div className={`${storyClass}__viewport`}>{story()}</div>,
   ],
 };
 
@@ -52,12 +49,12 @@ export default {
 
 const actionBarItems = [1, 2, 3, 4].map((item) => ({
   renderIcon: Lightning16,
-  label: `Action ${item}`,
+  iconDescription: `Action ${item}`,
 }));
 
 const manyActionBarItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
   renderIcon: Lightning16,
-  label: `Action ${item}`,
+  iconDescription: `Action ${item}`,
 }));
 
 const breadcrumbItems = (
@@ -81,56 +78,79 @@ const manyBreadcrumbItems = (
 );
 const className = 'client-class-1 client-class-2';
 const dummyPageContent = (
-  <Grid className="page-header-stories__dummy-content" narrow={true}>
+  <Grid className={`${storyClass}__dummy-content`} narrow={true}>
     <Row>
       <Column
         sm={1}
         md={2}
         lg={4}
-        className="page-header-stories__dummy-content-block">
-        <div className="page-header-stories__dummy-content-text">Column #1</div>
+        className={`${storyClass}__dummy-content-block`}>
+        <div className={`${storyClass}__dummy-content-text`}>Column #1</div>
       </Column>
       <Column
         sm={1}
         md={2}
         lg={4}
-        className="page-header-stories__dummy-content-block">
-        <div className="page-header-stories__dummy-content-text">Column #2</div>
+        className={`${storyClass}__dummy-content-block`}>
+        <div className={`${storyClass}__dummy-content-text`}>Column #2</div>
       </Column>
       <Column
         sm={2}
         md={4}
         lg={8}
-        className="page-header-stories__dummy-content-block">
-        <div className="page-header-stories__dummy-content-text">Column #3</div>
+        className={`${storyClass}__dummy-content-block`}>
+        <div className={`${storyClass}__dummy-content-text`}>Column #3</div>
       </Column>
     </Row>
   </Grid>
 );
-const pageActions = (
-  <>
-    <PageActionItem kind="secondary">Secondary button</PageActionItem>
-    <PageActionItem kind="primary">Primary button</PageActionItem>
-  </>
-);
-const manyPageActions = (
-  <>
-    <PageActionItem kind="secondary">Secondary button 1</PageActionItem>
-    <PageActionItem kind="secondary">Secondary button 2</PageActionItem>
-    <PageActionItem kind="primary">Primary button</PageActionItem>
-  </>
-);
+const pageActions = [
+  {
+    kind: 'secondary',
+    label: 'Secondary button',
+    onClick: () => {},
+  },
+  {
+    kind: 'primary',
+    label: 'Primary button',
+    onClick: () => {},
+  },
+];
+
+const manyPageActions = [
+  {
+    kind: 'secondary',
+    label: 'Secondary 1',
+    onClick: () => {},
+  },
+  {
+    kind: 'secondary',
+    label: 'Secondary 2',
+    onClick: () => {},
+  },
+  {
+    kind: 'primary',
+    label: 'Primary',
+    onClick: () => {},
+  },
+];
+
 const statusIndicator = (
   <>
-    <CheckmarkFilled16 className="page-header-stories__status-icon" /> Running
+    <CheckmarkFilled16 className={`${storyClass}__status-icon`} /> Running
   </>
 );
 const subtitle = 'Optional subtitle if necessary';
 const longSubtitle =
-  'Optional subtitle if necessary, which is very long in this case, but will need to be handled somehow';
+  'Optional subtitle if necessary, which is very long in this case, but will need to be handled somehow. It just keeps going on and on and on and on and on.';
 const summaryDetails = (
   <div style={{ display: 'flex' }}>
-    <p style={{ marginRight: '50px', maxWidth: '400px' }}>
+    <p
+      style={{
+        // stylelint-disable-next-line carbon/layout-token-use
+        marginRight: '50px',
+        maxWidth: '400px',
+      }}>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor <strong>incididunt ut labore</strong> et dolore magna aliqua. Ut
       enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -208,6 +228,33 @@ const manyTags = [
   </Tag>,
   <Tag type="magenta" key="magenta">
     Magenta
+  </Tag>,
+  <Tag type="blue" key="blue">
+    Blue 2
+  </Tag>,
+  <Tag type="green" key="green">
+    Green 2
+  </Tag>,
+  <Tag type="warm-gray" key="warm-gray">
+    Warm gray 2
+  </Tag>,
+  <Tag type="purple" key="purple">
+    Purple 2
+  </Tag>,
+  <Tag type="red" key="red">
+    Red 2
+  </Tag>,
+  <Tag type="teal" key="teal">
+    Teal 2
+  </Tag>,
+  <Tag type="red" key="long-one">
+    Longer ThanAPieceOfString 2
+  </Tag>,
+  <Tag type="high-contrast" key="high-contrast">
+    High contrast 2
+  </Tag>,
+  <Tag type="magenta" key="magenta">
+    Magenta 2
   </Tag>,
 ];
 
@@ -370,7 +417,7 @@ WithBackgroundBreadcrumbitemsTitlePageactionsSummarydetailsTabs.args = {
 
 export const AllAttributesSetKeepsBreadcrumbAndTabs = Template.bind({});
 AllAttributesSetKeepsBreadcrumbAndTabs.args = {
-  keepBreadcrumbAndTabs: true,
+  preventBreadcrumbScroll: true,
   background: true,
   breadcrumbItems,
   actionBarItems,
@@ -445,7 +492,7 @@ AllAttributesWithSwitches.args = {
   background: true,
   breadcrumbItems,
   breadcrumbItemsSwitchedArg: true,
-  keepBreadcrumbAndTabs: false,
+  preventBreadcrumbScroll: false,
   navigation: tabBar,
   navigationSwitchedArg: true,
   pageActions,
@@ -463,22 +510,25 @@ AllAttributesWithSwitches.args = {
 
 const TemplatePageHeaderWithCarbonHeader = (args) => {
   return (
-    <div className="page-header-stories__app">
+    <div className={`${storyClass}__app`}>
       <Header aria-label="IBM Platform Name">
         <HeaderName href="#" prefix="IBM">
           [Platform]
         </HeaderName>
       </Header>
-      <Content className="page-header-stories__content-container">
+      <div
+        className={`${storyClass}__content-container`}
+        style={{
+          // stylelint-disable-next-line carbon/layout-token-use
+          marginTop: '48px',
+        }}>
         <PageHeader
           className="example-class-name"
           {...includeTheseArgs(args)}
           pageHeaderOffset={48} // 48px is the size of the global header. A more elegant way of passing this could be found.
         />
-        <div className="page-header-stories__inner-content">
-          {dummyPageContent}
-        </div>
-      </Content>
+        <div className={`${storyClass}__inner-content`}>{dummyPageContent}</div>
+      </div>
     </div>
   );
 };
@@ -494,7 +544,7 @@ PageHeaderWithCarbonHeader.args = {
   background: true,
   breadcrumbItems,
   breadcrumbItemsSwitchedArg: true,
-  keepBreadcrumbAndTabs: false,
+  preventBreadcrumbScroll: false,
   navigation: tabBar,
   navigationSwitchedArg: true,
   pageActions,

@@ -10,11 +10,10 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { Tab, Tabs } from 'carbon-components-react';
+import { Button, ButtonSet, Tab, Tabs } from 'carbon-components-react';
 import { Tearsheet, TearsheetNarrow } from '.';
 
 const blockClass = `${pkg.prefix}--tearsheet`;
@@ -43,6 +42,12 @@ const description = (
     ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
     ex ea commodo consequat.
   </span>
+);
+const headerActionButtonLabel = `Button ${uuidv4()}`;
+const headerActions = (
+  <ButtonSet>
+    <Button>{headerActionButtonLabel}</Button>
+  </ButtonSet>
 );
 const influencerFragment = `This is a ${uuidv4()} convincing influencer`;
 const influencer = <div>{influencerFragment}</div>;
@@ -77,7 +82,7 @@ const commonTests = (Ts, name) => {
   });
 
   it('omits main content sections when no props supplied', () => {
-    render(<Ts hasCloseIcon={false} />);
+    render(<Ts />);
     expect(document.querySelector(`.${blockClass}__header`)).toBeNull();
     expect(document.querySelector(`.${blockClass}__influencer`)).toBeNull();
     expect(document.querySelector(`.${blockClass}__main`)).toBeNull();
@@ -105,7 +110,7 @@ const commonTests = (Ts, name) => {
   });
 
   it('renders closeIconDescription', () => {
-    render(<Ts {...{ closeIconDescription }} />);
+    render(<Ts hasCloseIcon {...{ closeIconDescription }} />);
     screen.getByRole('button', { name: closeIconDescription });
   });
 
@@ -115,9 +120,9 @@ const commonTests = (Ts, name) => {
   });
 
   it('responds to hasCloseIcon', () => {
-    render(<Ts hasCloseIcon={false} />);
-    expect(document.querySelector(`.${blockClass}__header`)).toBeNull();
-    expect(screen.queryByRole('button', { name: 'Close' })).toBeNull();
+    render(<Ts hasCloseIcon />);
+    expect(document.querySelector(`.${blockClass}__header`)).not.toBeNull();
+    screen.getByRole('button', { name: 'Close' });
   });
 
   it('renders label', () => {
@@ -126,7 +131,7 @@ const commonTests = (Ts, name) => {
   });
 
   it('calls onClose() when the tearsheet is closed', () => {
-    render(<Ts onClose={onCloseReturnsTrue} open />);
+    render(<Ts hasCloseIcon onClose={onCloseReturnsTrue} open />);
     const tearsheet = screen.getByRole('presentation');
     const closeButton = screen.getByRole('button', { name: 'Close' });
     expect(tearsheet).toHaveClass('is-visible');
@@ -137,7 +142,7 @@ const commonTests = (Ts, name) => {
   });
 
   it('allows veto when the tearsheet is closed', () => {
-    render(<Ts onClose={onCloseReturnsFalse} open />);
+    render(<Ts hasCloseIcon onClose={onCloseReturnsFalse} open />);
     const tearsheet = screen.getByRole('presentation');
     const closeButton = screen.getByRole('button', { name: 'Close' });
     expect(tearsheet).toHaveClass('is-visible');
@@ -187,13 +192,33 @@ const commonTests = (Ts, name) => {
     render(<Ts open />);
     expect(screen.getAllByRole('presentation')).toHaveLength(3);
     expect(warn).toBeCalledWith(
-      'Tearsheet not rendered: more than 3 levels of tearsheet stacking.'
+      'Tearsheet not rendered: maximum stacking depth exceeded.'
     );
   });
 };
 
 describe(componentName, () => {
+  const { ResizeObserver } = window;
+
+  beforeAll(() => {
+    window.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    }));
+  });
+
+  afterAll(() => {
+    jest.restoreAllMocks();
+    window.ResizeObserver = ResizeObserver;
+  });
+
   commonTests(Tearsheet, componentName);
+
+  it('renders headerActions', () => {
+    render(<Tearsheet {...{ headerActions }} />);
+    screen.getByText(headerActionButtonLabel);
+  });
 
   it('renders influencer', () => {
     render(<Tearsheet {...{ influencer }} />);
@@ -226,5 +251,20 @@ describe(componentName, () => {
 });
 
 describe(componentNameNarrow, () => {
+  const { ResizeObserver } = window;
+
+  beforeAll(() => {
+    window.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    }));
+  });
+
+  afterAll(() => {
+    jest.restoreAllMocks();
+    window.ResizeObserver = ResizeObserver;
+  });
+
   commonTests(TearsheetNarrow, componentNameNarrow);
 });

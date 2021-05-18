@@ -11,7 +11,6 @@ import styles from './_storybook-styles.scss'; // import index in case more file
 import { ArrowRight24, Cloud32 } from '@carbon/icons-react';
 import { AspectRatio } from 'carbon-components-react';
 import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
 import { ExpressiveCard } from '.';
 import mdx from './ExpressiveCard.mdx';

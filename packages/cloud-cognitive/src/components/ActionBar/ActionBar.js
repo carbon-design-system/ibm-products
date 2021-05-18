@@ -15,10 +15,17 @@ import { pkg } from '../../settings';
 import ReactResizeDetector from 'react-resize-detector';
 
 // Carbon and package components we use.
-import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
+import {
+  Button,
+  OverflowMenu,
+  OverflowMenuItem,
+} from 'carbon-components-react';
 import uuidv4 from '../../global/js/utils/uuidv4';
-import unwrapIfFragment from '../../global/js/utils/unwrap-if-fragment';
-import { deprecateProp } from '../../global/js/utils/props-helper';
+import {
+  deprecateProp,
+  extractShapesArray,
+  prepareProps,
+} from '../../global/js/utils/props-helper';
 import { ActionBarItem } from './ActionBarItem';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -98,8 +105,7 @@ export let ActionBar = React.forwardRef(
       if (actions) {
         setItemArray(actions);
       } else {
-        const unwrapped = unwrapIfFragment(children);
-        setItemArray(unwrapped.map((item) => item.props));
+        setItemArray(extractShapesArray(children));
       }
     }, [actions, children]);
 
@@ -187,16 +193,25 @@ export let ActionBar = React.forwardRef(
 ActionBar.displayName = componentName;
 ActionBar.propTypes = {
   /**
-   * Action items to be displayed in the bar.
+   * Specifies the action bar items. Each item is specified as an object
+   * with the properties of a Carbon Button in icon only form. Button kind, size, tooltipPosition,
+   * tooltipAlignment and type are ignored.
+   *
+   * Carbon Button API https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
   actions: PropTypes.oneOfType([
-    // ActionBar.validateActions(),
     PropTypes.arrayOf(
       PropTypes.shape({
+        ...prepareProps(Button.propTypes, [
+          'kind',
+          'size',
+          'tooltipPosition',
+          'tooltipAlignment',
+        ]),
         iconDescription: PropTypes.string.isRequired,
+        onClick: Button.propTypes.onClick,
         renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
           .isRequired,
-        onClick: PropTypes.func,
       })
     ),
   ]),
@@ -230,9 +245,6 @@ ActionBar.propTypes = {
    * align tags to right of available space
    */
   rightAlign: PropTypes.bool,
-  /**
-   * heading for the show all modal
-   */
 };
 
 ActionBar.defaultProps = {

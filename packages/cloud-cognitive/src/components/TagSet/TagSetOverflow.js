@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import cx from 'classnames';
@@ -14,11 +14,12 @@ import { Link, Tag, Tooltip } from 'carbon-components-react';
 
 import { pkg } from '../../settings';
 const componentName = 'TagSetOverflow';
-const blockClass = `${pkg.prefix}-tag-set`;
+const blockClass = `${pkg.prefix}--tag-set`;
 
 export const TagSetOverflow = React.forwardRef(
   (
     {
+      className,
       overflowTags,
       onShowAllClick,
       overflowAlign,
@@ -29,13 +30,11 @@ export const TagSetOverflow = React.forwardRef(
   ) => {
     const [tipOpen, setTipOpen] = useState(false);
     const overflowTagContent = useRef(null);
+    const localRef = useRef(null);
+    const overflowRef = ref || localRef;
 
-    const showTip = () => {
-      setTipOpen(true);
-    };
-
-    const hideTip = () => {
-      setTipOpen(false);
+    const handleChange = (ev, { open }) => {
+      setTipOpen(open);
     };
 
     const handleShowAllTagsClick = (ev) => {
@@ -45,60 +44,34 @@ export const TagSetOverflow = React.forwardRef(
       onShowAllClick();
     };
 
-    const handleClickOutsideCheck = useCallback(
-      (ev) => {
-        const tooltipEl =
-          overflowTagContent.current &&
-          overflowTagContent.current.parentElement.parentElement;
-        if (
-          tooltipEl &&
-          (tooltipEl === ev.target || tooltipEl.contains(ev.target))
-        ) {
-          // inside click
-          return;
-        }
-        hideTip(ev);
-      },
-      [overflowTagContent]
-    );
-
-    useEffect(() => {
-      // Check for a click outside of the tooltip
-      document.addEventListener('mousedown', handleClickOutsideCheck);
-      // remove listener on destroy
-      return () => {
-        document.removeEventListener('mousedown', handleClickOutsideCheck);
-      };
-    }, [handleClickOutsideCheck]);
-
     return (
       <span
         aria-hidden={overflowTags.length === 0}
-        className={cx(`${blockClass}--overflow`, {
-          [`${blockClass}--overflow--hidden`]: overflowTags.length === 0,
+        className={cx(`${blockClass}__overflow`, {
+          [`${blockClass}__overflow--hidden`]: overflowTags.length === 0,
         })}
-        onFocus={showTip}>
+        ref={overflowRef}>
         <Tooltip
           align={overflowAlign}
-          className={`${blockClass}--tooltip`}
+          className={cx(className, `${blockClass}__tooltip`)}
           direction={overflowDirection}
+          onChange={handleChange}
           open={tipOpen}
           triggerText={<Tag>+{overflowTags.length}</Tag>}
-          showIcon={false}
-          ref={ref}>
+          showIcon={false}>
           <div
             ref={overflowTagContent}
-            className={`${blockClass}--overflow-content`}>
-            <ul className={`${blockClass}--overflow-tag-list`}>
+            className={`${blockClass}__overflow-content`}>
+            <ul className={`${blockClass}__overflow-tag-list`}>
               {overflowTags.map((tag, index) => (
-                <li className={`${blockClass}--overflow-tag-item`} key={index}>
-                  {tag.props.children}
+                <li className={`${blockClass}__overflow-tag-item`} key={index}>
+                  {React.cloneElement(tag, { filter: false })}
                 </li>
               ))}
             </ul>
             {overflowTags.length >= 10 && (
               <Link
-                className={`${blockClass}--show-all-tags-link`}
+                className={`${blockClass}__show-all-tags-link`}
                 href=""
                 onClick={handleShowAllTagsClick}>
                 {showAllTagsLabel}
@@ -114,6 +87,10 @@ export const TagSetOverflow = React.forwardRef(
 TagSetOverflow.displayName = componentName;
 
 TagSetOverflow.propTypes = {
+  /**
+   * className
+   */
+  className: PropTypes.string,
   /**
    * function to execute on clicking show all
    */

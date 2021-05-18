@@ -69,8 +69,6 @@ export let Card = ({
       );
     }
 
-    if (actionIcons.length === 0) return;
-
     const icons = actionIcons.map(
       ({ id, icon: Icon, onClick, iconDescription, onKeyDown }) => {
         if (productive)
@@ -245,7 +243,7 @@ Card.propTypes = {
       onKeyDown: PropTypes.func,
     })
   ),
-  pictogram: PropTypes.object,
+  pictogram: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   primaryButtonKind: PropTypes.oneOf(['primary', 'ghost']),
   primaryButtonText: PropTypes.string,
   productive: PropTypes.bool,

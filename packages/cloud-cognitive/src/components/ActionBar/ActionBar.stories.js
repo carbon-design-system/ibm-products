@@ -11,7 +11,6 @@ import { action } from '@storybook/addon-actions';
 import { Bee16, Lightning16 } from '@carbon/icons-react';
 
 import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
 import { ActionBar, ActionBarItem } from '.';
 const storybookPrefix = getStorybookPrefix(pkg, ActionBar.displayName);
@@ -21,7 +20,7 @@ const blockClass = `${pkg.prefix}--action-bar`;
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 
 export default {
-  title: `${storybookPrefix}/PageHeader/${ActionBar.displayName}`,
+  title: `${storybookPrefix}/${ActionBar.displayName}`,
   component: ActionBar,
   argTypes: {
     containerWidth: {

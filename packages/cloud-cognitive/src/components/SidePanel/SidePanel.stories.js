@@ -6,6 +6,7 @@
  */
 
 import React, { useState } from 'react';
+import { action } from '@storybook/addon-actions';
 import {
   Button,
   Grid,
@@ -30,7 +31,6 @@ import {
 import { Copy20, Delete20, Settings20 } from '@carbon/icons-react';
 import styles from './_storybook-styles.scss';
 import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
 import { SidePanel } from '.';
 import mdx from './SidePanel.mdx';
@@ -71,9 +71,9 @@ export default {
 const prefix = 'side-panel-stories__';
 
 const defaultStoryProps = {
-  titleText:
+  title:
     'Incident management for your application, testing a very long title to see how this behaves with a longer title',
-  subtitleText:
+  subtitle:
     'This is some text that would talk about how you could investigate incidednt management within this side panel.',
 };
 
@@ -120,7 +120,7 @@ const rowData = [
 const actions_1 = [
   {
     label: 'Primary button',
-    onPrimaryActionClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'primary',
   },
 ];
@@ -128,7 +128,7 @@ const actions_1 = [
 const actions_2 = [
   {
     label: 'Ghost button',
-    onPrimaryActionClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'ghost',
   },
 ];
@@ -136,12 +136,12 @@ const actions_2 = [
 const actions_3 = [
   {
     label: 'Primary button',
-    onPrimaryActionClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'primary',
   },
   {
     label: 'Secondary button',
-    onPrimaryActionClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'secondary',
   },
 ];
@@ -149,17 +149,17 @@ const actions_3 = [
 const actions_4 = [
   {
     label: 'Primary button',
-    onPrimaryActionClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'primary',
   },
   {
     label: 'Secondary button',
-    onPrimaryActionClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'secondary',
   },
   {
     label: 'Ghost button',
-    onPrimaryActionClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'ghost',
   },
 ];
@@ -167,17 +167,17 @@ const actions_4 = [
 const actions_5 = [
   {
     label: 'Primary button',
-    onPrimaryActionClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'primary',
   },
   {
     label: 'Secondary button',
-    onPrimaryActionClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'secondary',
   },
   {
     label: 'Secondary button',
-    onPrimaryActionClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'secondary',
   },
 ];
@@ -227,6 +227,7 @@ const ChildrenContent = () => {
           {notesValue.length}/100
         </span>
         <TextArea
+          className={`${prefix}text-area`}
           labelText="Notes"
           value={notesValue}
           onChange={(event) => setNotesValue(event.target.value)}
@@ -320,7 +321,7 @@ const SlideOverTemplate = ({ minimalContent, actions, ...args }) => {
       <SidePanel
         {...args}
         open={open}
-        setOpen={setOpen}
+        onRequestClose={() => setOpen(false)}
         actions={actionSets[actions]}>
         {!minimalContent && <ChildrenContent />}
       </SidePanel>
@@ -340,9 +341,9 @@ const StepTemplate = (args) => {
       <SidePanel
         {...args}
         open={open}
-        setOpen={setOpen}
+        onRequestClose={() => setOpen(false)}
         currentStep={currentStep}
-        onNavigationBack={setCurrentStep}>
+        onNavigationBack={() => setCurrentStep((prev) => prev - 1)}>
         <ChildrenContentWithSteps
           currentStep={currentStep}
           setCurrentStep={setCurrentStep}
@@ -370,7 +371,7 @@ const SlideInTemplate = ({ actions, ...args }) => {
       <SidePanel
         {...args}
         open={open}
-        setOpen={setOpen}
+        onRequestClose={() => setOpen(false)}
         actions={actionSets[actions]}>
         <ChildrenContent />
       </SidePanel>
@@ -416,14 +417,6 @@ WithActionToolbar.args = {
   ...defaultStoryProps,
 };
 
-export const WithCondensedActions = SlideOverTemplate.bind({});
-WithCondensedActions.args = {
-  ...defaultStoryProps,
-  condensed: true,
-  placement: 'left',
-  actions: 0,
-};
-
 export const PanelWithSecondStep = StepTemplate.bind({});
 PanelWithSecondStep.args = {
   actions: 0,
@@ -444,4 +437,37 @@ WithMinimalContent.args = {
   ...defaultStoryProps,
   actions: 0,
   minimalContent: true,
+};
+
+export const WithStaticTitle = SlideOverTemplate.bind({});
+WithStaticTitle.args = {
+  ...defaultStoryProps,
+  actions: 0,
+  animateTitle: false,
+  includeOverlay: true,
+};
+
+export const WithStaticTitleAndActionToolbar = SlideOverTemplate.bind({});
+WithStaticTitleAndActionToolbar.args = {
+  ...defaultStoryProps,
+  actions: 0,
+  animateTitle: false,
+  includeOverlay: true,
+  actionToolbarButtons: [
+    {
+      label: 'Copy',
+      icon: Copy20,
+      onActionToolbarButtonClick: () => {},
+    },
+    {
+      label: 'Settings',
+      icon: Settings20,
+      onActionToolbarButtonClick: () => {},
+    },
+    {
+      label: 'Delete',
+      icon: Delete20,
+      onActionToolbarButtonClick: () => {},
+    },
+  ],
 };

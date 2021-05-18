@@ -19,7 +19,6 @@ import {
 import { action } from '@storybook/addon-actions';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
 import { APIKeyModal } from '.';
 import mdx from './APIKeyModal.mdx';

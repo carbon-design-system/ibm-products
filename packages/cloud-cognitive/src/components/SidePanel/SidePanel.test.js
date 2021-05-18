@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /**
  * Copyright IBM Corp. 2020, 2021
  *
@@ -6,59 +7,104 @@
  */
 
 import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import React from 'react';
+import { TextInput } from 'carbon-components-react';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { SidePanel } from '.';
 
 const blockClass = `${pkg.prefix}--side-panel`;
 const actionSetBlockClass = `${pkg.prefix}--action-set`;
+const sizes = ['xs', 'sm', 'md', 'lg', 'max'];
 
 const dataTestId = uuidv4();
 
-const renderSidePanel = ({ ...rest }, children) =>
+const onRequestCloseFn = jest.fn();
+const renderSidePanel = ({ ...rest }, children = <p>test</p>) =>
   render(
     <SidePanel
       {...{
         open: true,
-        setOpen: () => {},
+        onRequestClose: onRequestCloseFn,
         ...rest,
       }}>
       {children}
     </SidePanel>
   );
 
+const title = uuidv4();
+const subtitle = uuidv4();
+
+const SlideIn = ({
+  placement,
+  open,
+  animateTitle = true,
+  actionToolbarButtons,
+}) => (
+  <div>
+    <SidePanel
+      actionToolbarButtons={actionToolbarButtons}
+      title={title}
+      subtitle={subtitle}
+      animateTitle={animateTitle}
+      open={open}
+      onRequestClose={onRequestCloseFn}
+      slideIn
+      pageContentSelector="#side-panel-test-page-content"
+      placement={placement}>
+      Content
+    </SidePanel>
+    <div id="side-panel-test-page-content" />
+  </div>
+);
+
 describe('SidePanel', () => {
-  it('renders the side panel', () => {
-    renderSidePanel(
-      {
-        titleText: 'Test side panel',
-      },
-      'content'
-    );
-    expect(screen.queryAllByText(/Test side panel/i)).toBeTruthy();
+  const { ResizeObserver } = window;
+
+  beforeEach(() => {
+    window.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    }));
   });
 
-  it('should render a side panel with an overlay', () => {
-    const { container } = renderSidePanel(
-      {
-        includeOverlay: true,
-      },
-      'content'
-    );
+  afterEach(() => {
+    jest.restoreAllMocks();
+    window.ResizeObserver = ResizeObserver;
+  });
+
+  it('renders the side panel', () => {
+    const subtitle = uuidv4();
+    const labelText = uuidv4();
+    renderSidePanel({
+      title: 'Test side panel',
+      subtitle,
+      labelText,
+    });
+    expect(screen.queryAllByText(/Test side panel/i)).toBeTruthy();
+    expect(screen.getByText(subtitle));
+    expect(screen.getByText(labelText));
+  });
+
+  it('should render a side panel with an overlay and trigger clickOutside hook when clicked', () => {
+    const onRequestCloseFn = jest.fn();
+    const { container } = renderSidePanel({
+      includeOverlay: true,
+      onRequestClose: onRequestCloseFn,
+    });
     const overlayElement = container.querySelector(`.${blockClass}__overlay`);
     expect(overlayElement).toBeTruthy();
+    userEvent.click(overlayElement);
+    expect(onRequestCloseFn).toHaveBeenCalled();
   });
 
   it('should render a side panel from the right', () => {
-    const { container } = renderSidePanel(
-      {
-        placement: 'right',
-      },
-      'content'
-    );
+    const { container } = renderSidePanel({
+      placement: 'right',
+    });
     const sidePanelOuter = container.querySelector(
       `.${blockClass}__container-right-placement`
     );
@@ -66,170 +112,154 @@ describe('SidePanel', () => {
   });
 
   it('should render a side panel from the left', () => {
-    const { container } = renderSidePanel(
-      {
-        placement: 'left',
-      },
-      'content'
-    );
+    const { container } = renderSidePanel({
+      placement: 'left',
+    });
     const sidePanelOuter = container.querySelector(
       `.${blockClass}__container-left-placement`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
 
-  it('should render an extra small side panel', () => {
-    const { container } = renderSidePanel(
-      {
-        size: 'xs',
-      },
-      'content'
+  it('should render a left slide in panel version', async () => {
+    const { container, rerender } = render(<SlideIn placement="left" open />);
+    const pageContent = container.querySelector(
+      '#side-panel-test-page-content'
     );
-    const sidePanelOuter = container.querySelector(
-      `.${blockClass}__container--extra-small`
+    const style = getComputedStyle(pageContent);
+    expect(style.marginLeft).toBe('30rem');
+    const closeIconButton = container.querySelector(
+      `.${blockClass}__close-button`
     );
-    expect(sidePanelOuter).toBeTruthy();
+    userEvent.click(closeIconButton);
+    rerender(<SlideIn placement="left" open={false} />);
+    const updatedStyles = getComputedStyle(pageContent);
+    expect(updatedStyles.marginLeft).toBe('0px');
   });
 
-  it('should render a small side panel', () => {
-    const { container } = renderSidePanel(
-      {
-        size: 'sm',
-      },
-      'content'
+  it('should render a right slide in panel version', async () => {
+    const { container, rerender } = render(<SlideIn placement="right" open />);
+    const pageContent = container.querySelector(
+      '#side-panel-test-page-content'
     );
-    const sidePanelOuter = container.querySelector(
-      `.${blockClass}__container--small`
+    const style = getComputedStyle(pageContent);
+    expect(style.marginRight).toBe('30rem');
+    const closeIconButton = container.querySelector(
+      `.${blockClass}__close-button`
     );
-    expect(sidePanelOuter).toBeTruthy();
+    const outerElement = container.querySelector(`.${blockClass}`);
+    userEvent.click(closeIconButton);
+    fireEvent.animationStart(outerElement);
+    rerender(<SlideIn placement="right" open={false} />);
+    fireEvent.animationEnd(outerElement);
+    const updatedStyles = getComputedStyle(pageContent);
+    expect(updatedStyles.marginRight).toBe('0px');
   });
 
-  it('should render a medium side panel', () => {
-    const { container } = renderSidePanel({}, 'content');
-    const sidePanelOuter = container.querySelector(
-      `.${blockClass}__container--medium`
-    );
-    expect(sidePanelOuter).toBeTruthy();
-  });
-
-  it('should render a large side panel', () => {
-    const { container } = renderSidePanel(
-      {
-        size: 'lg',
-      },
-      'content'
-    );
-    const sidePanelOuter = container.querySelector(
-      `.${blockClass}__container--large`
-    );
-    expect(sidePanelOuter).toBeTruthy();
-  });
-
-  it('should render a max side panel', () => {
-    const { container } = renderSidePanel(
-      {
-        size: 'max',
-      },
-      'content'
-    );
-    const sidePanelOuter = container.querySelector(
-      `.${blockClass}__container--max`
-    );
-    expect(sidePanelOuter).toBeTruthy();
-  });
-
-  it('should render a slide in panel version', () => {
-    const { container } = render(
-      <div>
-        <SidePanel
-          open
-          setOpen={() => {}}
-          slideIn
-          pageContentSelector="#side-panel-test-page-content">
-          Content
-        </SidePanel>
-        <div id="side-panel-test-page-content" />
-      </div>
+  it('should render a right slide in panel version', async () => {
+    const { container, rerender } = render(
+      <SlideIn
+        animateTitle={false}
+        placement="right"
+        open
+        actionToolbarButtons={[]}
+      />
     );
     const pageContent = container.querySelector(
       '#side-panel-test-page-content'
     );
     const style = getComputedStyle(pageContent);
-
     expect(style.marginRight).toBe('30rem');
+    const closeIconButton = container.querySelector(
+      `.${blockClass}__close-button`
+    );
+    const outerElement = container.querySelector(`.${blockClass}`);
+    userEvent.click(closeIconButton);
+    fireEvent.animationStart(outerElement);
+    fireEvent.animationEnd(outerElement);
+    rerender(<SlideIn animateTitle={false} placement="right" open={false} />);
+    const updatedStyles = getComputedStyle(pageContent);
+    expect(updatedStyles.marginRight).toBe('0px');
+  });
+
+  it('should test overlay exit animation', async () => {
+    const { container, rerender } = renderSidePanel({
+      includeOverlay: true,
+    });
+    const closeIconButton = container.querySelector(
+      `.${blockClass}__close-button`
+    );
+    userEvent.click(closeIconButton);
+    rerender(
+      <SidePanel includeOverlay open={false} onRequestClose={onRequestCloseFn}>
+        Content
+      </SidePanel>
+    );
   });
 
   it('should render one primary action button', () => {
-    renderSidePanel(
-      {
-        actions: [
-          {
-            label: 'Primary button',
-            onClick: () => {},
-            kind: 'primary',
-          },
-        ],
-      },
-      'content'
-    );
+    const { container } = renderSidePanel({
+      includeOverlay: true,
+      actions: [
+        {
+          label: 'Primary button',
+          onClick: () => {},
+          kind: 'primary',
+        },
+      ],
+    });
     const submitButtons = screen.queryAllByText('Primary button');
+    const outerElement = container.querySelector(`.${blockClass}`);
+    fireEvent.animationStart(outerElement);
+    fireEvent.animationEnd(outerElement);
     expect(submitButtons).toHaveLength(1);
   });
 
   it('should render two action buttons', () => {
-    renderSidePanel(
-      {
-        actions: [
-          {
-            label: 'Action button',
-            onClick: () => {},
-            kind: 'primary',
-          },
-          {
-            label: 'Action button',
-            onClick: () => {},
-            kind: 'secondary',
-          },
-        ],
-      },
-      'content'
-    );
+    renderSidePanel({
+      actions: [
+        {
+          label: 'Action button',
+          onClick: () => {},
+          kind: 'primary',
+        },
+        {
+          label: 'Action button',
+          onClick: () => {},
+          kind: 'secondary',
+        },
+      ],
+    });
     const submitButtons = screen.queryAllByText('Action button');
     expect(submitButtons).toHaveLength(2);
   });
 
   it('should render a single ghost action button', () => {
-    const { container } = renderSidePanel(
-      {
-        actions: [
-          {
-            label: 'Ghost action button',
-            onClick: () => {},
-            kind: 'ghost',
-          },
-        ],
-      },
-      'content'
-    );
+    const { container } = renderSidePanel({
+      actions: [
+        {
+          label: 'Ghost action button',
+          onClick: () => {},
+          kind: 'ghost',
+        },
+      ],
+    });
     const sidePanelOuter = container.querySelector(
       `.${actionSetBlockClass}__action-button--ghost`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
 
-  it('should render a condensed side panel version', () => {
-    renderSidePanel(
-      {
-        condensed: true,
-        actions: [
-          {
-            label: 'Primary button',
-            onClick: () => {},
-          },
-        ],
-      },
-      'content'
-    );
+  it('should render a side panel with condensed actions', () => {
+    renderSidePanel({
+      condensedActions: true,
+      actions: [
+        {
+          label: 'Primary button',
+          onClick: () => {},
+        },
+      ],
+    });
     const sidePanelAction = screen.getByText(/Primary button/i);
     expect(
       sidePanelAction.parentElement.classList.contains(
@@ -239,12 +269,9 @@ describe('SidePanel', () => {
   });
 
   it('should render navigation button', () => {
-    const { container } = renderSidePanel(
-      {
-        currentStep: 1,
-      },
-      'content'
-    );
+    const { container } = renderSidePanel({
+      currentStep: 1,
+    });
     const navigationAction = container.querySelector(
       `.${blockClass}__navigation-back-button`
     );
@@ -253,50 +280,167 @@ describe('SidePanel', () => {
 
   it('should click the navigation button', () => {
     const { fn } = jest;
-    const { click } = fireEvent;
-    const onNavigationBack = fn();
-    const { container } = renderSidePanel(
-      {
-        currentStep: 1,
-        onNavigationBack: onNavigationBack,
-      },
-      'content'
-    );
+    const { click } = userEvent;
+    const onNavigationBackFn = fn();
+    const { container } = renderSidePanel({
+      currentStep: 1,
+      onNavigationBack: onNavigationBackFn,
+    });
     const navigationAction = container.querySelector(
       `.${blockClass}__navigation-back-button`
     );
     click(navigationAction);
-    expect(onNavigationBack).toBeCalled();
+    expect(onNavigationBackFn).toBeCalled();
   });
 
   it('should click the primary action button', () => {
-    const { fn } = jest;
-    const { click } = fireEvent;
-    const onClick = fn();
-    renderSidePanel(
-      {
-        actions: [
-          {
-            label: 'Primary button',
-            onClick,
-          },
-        ],
-      },
-      'content'
-    );
+    const { click } = userEvent;
+    const onClick = jest.fn();
+    renderSidePanel({
+      actions: [
+        {
+          label: 'Primary button',
+          onClick,
+        },
+      ],
+    });
     const sidePanelAction = screen.getByText(/Primary button/i);
     click(sidePanelAction);
     expect(onClick).toBeCalled();
   });
 
+  it('should click an action toolbar button', () => {
+    const { click } = userEvent;
+    const onActionToolbarButtonClickFn = jest.fn();
+    const { container } = renderSidePanel({
+      actionToolbarButtons: [
+        {
+          leading: true,
+          label: 'Copy 1',
+          onActionToolbarButtonClick: onActionToolbarButtonClickFn,
+        },
+        {
+          label: 'Copy 2',
+          onActionToolbarButtonClick: onActionToolbarButtonClickFn,
+        },
+      ],
+    });
+    const toolbarButton = container.querySelector(
+      `.${blockClass}__action-toolbar-button`
+    );
+    click(toolbarButton);
+    expect(onActionToolbarButtonClickFn).toHaveBeenCalled();
+  });
+
   it('adds additional properties to the containing node', () => {
-    renderSidePanel({ 'data-testid': dataTestId }, 'content');
+    renderSidePanel({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
-    renderSidePanel({ ref }, 'content');
+    renderSidePanel({ ref });
     expect(ref.current).toEqual(screen.getByRole('complementary'));
+  });
+
+  it('should call the onRequestClose event handler', () => {
+    const { click } = userEvent;
+    const { container } = renderSidePanel();
+    const closeIconButton = container.querySelector(
+      `.${blockClass}__close-button`
+    );
+    click(closeIconButton);
+    expect(onRequestCloseFn).toHaveBeenCalled();
+  });
+
+  it('should call the onNavigationBack event handler', () => {
+    const onNavigationBackFn = jest.fn();
+    const { click } = userEvent;
+    const { container } = renderSidePanel({
+      onNavigationBack: onNavigationBackFn,
+      currentStep: 1,
+    });
+    const navigationButton = container.querySelector(
+      `.${blockClass}__navigation-back-button`
+    );
+    click(navigationButton);
+    expect(onNavigationBackFn).toHaveBeenCalled();
+  });
+
+  sizes.forEach((size) => {
+    it('should render the correct size side panel', () => {
+      const { container } = renderSidePanel({
+        size,
+      });
+      const sidePanelOuter = container.querySelector(`.${blockClass}`);
+      let sizeValue;
+      switch (size) {
+        case 'xs':
+          sizeValue = 'extra-small';
+          break;
+        case 'sm':
+          sizeValue = 'small';
+          break;
+        case 'lg':
+          sizeValue = 'large';
+          break;
+        case 'max':
+          sizeValue = 'max';
+          break;
+        default:
+          sizeValue = 'medium';
+          break;
+      }
+      expect(sidePanelOuter).toHaveClass(
+        `${blockClass}__container--${sizeValue}`
+      );
+    });
+  });
+
+  it('should simulate onAnimationEnd synthetic event and set focus to specified element', async () => {
+    const { container } = renderSidePanel(
+      {
+        open: true,
+        selectorPrimaryFocus: '#test-input',
+      },
+      <TextInput labelText="Input A" id="test-input" placeholder="Test input" />
+    );
+    const outerElement = container.querySelector(`.${blockClass}`);
+    fireEvent.animationStart(outerElement);
+    fireEvent.animationEnd(outerElement);
+    const inputElement = container.querySelector(`#test-input`);
+    expect(inputElement).toHaveFocus();
+  });
+
+  it('should default focus to close button when selectorPrimaryFocus prop is not passed', () => {
+    const { container } = renderSidePanel(
+      {},
+      <TextInput labelText="Input A" id="test-input" placeholder="Test input" />
+    );
+    const outerElement = container.querySelector(`.${blockClass}`);
+    fireEvent.animationEnd(outerElement);
+    const closeIconButton = container.querySelector(
+      `.${blockClass}__close-button`
+    );
+    expect(closeIconButton).toHaveFocus();
+  });
+
+  it('should render slide in panel from left', () => {
+    const { container } = render(
+      <div>
+        <SlideIn
+          placement="left"
+          open={false}
+          pageContentSelector="#side-panel-test-page-content">
+          Content
+        </SlideIn>
+        <div id="side-panel-test-page-content" />
+      </div>
+    );
+    const pageContent = container.querySelector(
+      '#side-panel-test-page-content'
+    );
+    const style = getComputedStyle(pageContent);
+    expect(style.marginLeft).toBe('0px');
   });
 });

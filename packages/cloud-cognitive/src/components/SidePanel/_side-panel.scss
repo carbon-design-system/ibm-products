@@ -67,14 +67,21 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
 
 @mixin setDividerStyles() {
   position: absolute;
-  // stylelint-disable-next-line carbon/layout-token-use
-  bottom: -2px;
+  bottom: 0;
   left: 0;
   width: 100%;
   height: 1px;
   background-color: $decorative-01;
   opacity: var(--#{$block-class}--divider-opacity);
   content: '';
+}
+
+@mixin setCommonTitleStyles() {
+  display: -webkit-box;
+  padding-right: $spacing-07;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 @mixin side-panel {
@@ -86,7 +93,6 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     100% {
       // stylelint-disable-next-line carbon/layout-token-use
       transform: translateX(-#{$medium-panel-size});
-
       opacity: 0;
     }
   }
@@ -99,16 +105,18 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     100% {
       // stylelint-disable-next-line carbon/layout-token-use
       transform: translateX($medium-panel-size);
-
       opacity: 0;
     }
   }
 
   .#{$block-class}__container {
     --#{$block-class}--subtitle-opacity: 1;
+    --#{$block-class}--title-container-height: 0;
+    --#{$block-class}--subtitle-container-height: 0;
     --#{$block-class}--divider-opacity: 0;
-    --#{$block-class}--title-font-size: 1.25rem;
+    --#{$block-class}--title-y-position: 0;
     --#{$block-class}--content-bottom-padding: #{$spacing-10};
+    --#{$block-class}--collapsed-title-y-position: 1rem;
 
     position: fixed;
     top: $spacing-09;
@@ -159,11 +167,6 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     &.#{$block-class}__container-left-placement.#{$block-class}__container--max {
       @include sidePanelEntrance(left, $max-panel-size);
     }
-    &.#{$block-class}__with-condensed-header {
-      .#{$block-class}__title-text {
-        @include carbon--font-weight('semibold');
-      }
-    }
     &.#{$block-class}__container-with-action-toolbar.#{$block-class}__with-condensed-header {
       .#{$block-class}__title-container {
         &::before {
@@ -176,11 +179,14 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
         }
       }
     }
+    &.#{$block-class}__container-without-overlay {
+      box-shadow: 0 $spacing-01 $spacing-02 $overlay-01;
+    }
     .#{$block-class}__title-container {
       position: sticky;
       top: 0;
       z-index: 4;
-      padding: $spacing-05 $spacing-05 0 $spacing-05;
+      padding: $spacing-05 $spacing-05 $spacing-03 $spacing-05;
       background-color: $ui-01;
       &::before {
         @include setDividerStyles();
@@ -188,22 +194,23 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     }
     .#{$block-class}__title-text {
       @include carbon--type-style('productive-heading-03');
+      @include setCommonTitleStyles();
 
       position: inherit;
       z-index: 4;
-      display: -webkit-box;
-      margin-bottom: $spacing-03;
-      padding-right: $spacing-07;
-      overflow: hidden;
-      // stylelint-disable-next-line carbon/type-token-use
-      font-size: var(--#{$block-class}--title-font-size);
       background-color: $ui-01;
-      transition: font-size $duration--moderate-01,
-        font-weight $duration--moderate-02;
-      transition-timing-function: carbon--motion(standard);
+      // stylelint-disable-next-line carbon/layout-token-use
+      transform: translateY(var(--#{$block-class}--title-y-position));
+      opacity: var(--#{$block-class}--subtitle-opacity);
+    }
+    .#{$block-class}__collapsed-title-text {
+      @include setCommonTitleStyles();
 
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
+      position: absolute;
+      top: $spacing-05;
+      // stylelint-disable-next-line carbon/layout-token-use
+      transform: translateY(var(--#{$block-class}--collapsed-title-y-position));
+      opacity: var(--#{$block-class}--divider-opacity);
     }
     .#{$block-class}__subtitle-text {
       @include carbon--type-style('body-short-01');
@@ -213,6 +220,16 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       opacity: var(--#{$block-class}--subtitle-opacity);
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
+    }
+    .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation {
+      position: sticky;
+      top: var(--#{$block-class}--title-container-height);
+      z-index: 2;
+      background-color: $ui-01;
+    }
+    .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation.#{$block-class}__subtitle-text-no-animation-no-action-toolbar {
+      margin-bottom: $spacing-05;
+      border-bottom: 1px solid $decorative-01;
     }
     .#{$block-class}__label-text {
       @include carbon--type-style('label-01');
@@ -242,6 +259,14 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
           margin-right: $spacing-03;
         }
       }
+    }
+    .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation {
+      // stylelint-disable-next-line carbon/layout-token-use
+      top: calc(
+        var(--#{$block-class}--title-container-height) +
+          var(--#{$block-class}--subtitle-container-height)
+      );
+      border-bottom: 1px solid $decorative-01;
     }
     .bx--btn.#{$block-class}__navigation-back-button,
     .bx--btn.#{$block-class}__close-button {
@@ -305,6 +330,18 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
         height: $layout-04;
       }
     }
+  }
+
+  // form fields should receive correct background color
+  .#{$block-class}__container .bx--text-input,
+  .#{$block-class}__container .bx--text-area,
+  .#{$block-class}__container .bx--search-input,
+  .#{$block-class}__container .bx--select-input,
+  .#{$block-class}__container .bx--dropdown,
+  .#{$block-class}__container .bx--dropdown-list,
+  .#{$block-class}__container .bx--number input[type='number'],
+  .#{$block-class}__container .bx--date-picker__input {
+    background-color: $field-02;
   }
 
   @keyframes sidePanelOverlayEntrance {

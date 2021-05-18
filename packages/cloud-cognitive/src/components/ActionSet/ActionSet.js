@@ -55,13 +55,10 @@ const ActionSetButton = React.forwardRef(
 );
 
 ActionSetButton.propTypes = {
-  className: PropTypes.string,
-  disabled: PropTypes.bool,
+  ...Button.PropTypes,
   kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
   label: PropTypes.string,
   loading: PropTypes.bool,
-  onClick: PropTypes.func,
-  size: Button.propTypes.size,
 };
 
 const defaultKind = Button.defaultProps.kind;
@@ -215,7 +212,7 @@ ActionSet.validateActions = (sizeFn) => (props, propName, componentName) => {
 
 ActionSet.propTypes = {
   /**
-   * Specifies the action buttons to show. Each action is specified as an
+   * The action buttons to show. Each action is specified as an
    * object with optional fields 'label' to supply the button label, 'kind'
    * to select the button kind (must be 'primary', 'secondary' or 'ghost'),
    * 'loading' to display a loading indicator, and 'onClick' to receive
@@ -223,22 +220,25 @@ ActionSet.propTypes = {
    * will be passed to the Button component, and these can include 'disabled',
    * 'ref', 'className', and any other Button props. Any other fields in the
    * object will be passed through to the button element as HTML attributes.
+   *
+   * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
   actions: PropTypes.oneOfType([
     ActionSet.validateActions(),
     PropTypes.arrayOf(
       PropTypes.shape({
-        disabled: PropTypes.bool,
+        ...Button.propTypes,
         kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
         label: PropTypes.string,
         loading: PropTypes.bool,
-        onClick: PropTypes.func,
+        // we duplicate this Button prop to improve the DocGen here
+        onClick: Button.propTypes.onClick,
       })
     ),
   ]),
 
   /**
-   * Specify the size of buttons to use for the actions. The allowed values are
+   * The size of buttons to use for the actions. The allowed values are
    * those for the size prop of carbon Button. If this prop is specified, all
    * the buttons will be set to this size, overriding any 'size' values (if any)
    * supplied in the actions array (if any).
@@ -246,13 +246,13 @@ ActionSet.propTypes = {
   buttonSize: Button.propTypes.size,
 
   /**
-   * Sets an optional className to be added to the side panel outermost element.
+   * An optional class or classes to be added to the outermost element.
    */
   className: PropTypes.string,
 
   /**
-   * Sets the size of the action set. Different button arrangements are used
-   * in different sizes, to make best use of the available space.
+   * The size of the action set. Different button arrangements are used at
+   * different sizes, to make best use of the available space.
    */
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xlg', 'max']),
 };

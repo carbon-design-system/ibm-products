@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2021, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,7 +11,6 @@ import userEvent from '@testing-library/user-event';
 import { TextInput } from 'carbon-components-react';
 
 import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
@@ -25,11 +24,11 @@ const title = 'This is a test title';
 const subtitle = 'This is a test subtitle';
 const description =
   'This is a test description. It has several lines. It should render a modal.';
-const primaryFocus = '.bx--text-input';
+const selectorPrimaryFocus = '.bx--text-input';
 const dataTestId = uuidv4();
 
 // render a CreateModal with title, subtitle, description, and any other required props
-const renderComponent = ({ ...rest }) =>
+const renderComponent = ({ ...rest }, children) =>
   render(
     <CreateModal
       open
@@ -37,17 +36,13 @@ const renderComponent = ({ ...rest }) =>
         title,
         subtitle,
         description,
-        primaryFocus,
+        selectorPrimaryFocus,
         disableSubmit: false,
+        primaryButtonText: 'Create',
+        secondaryButtonText: 'Cancel',
         ...rest,
       }}>
-      <TextInput
-        key="form-field-1"
-        id="1"
-        labelText="Text input label"
-        helperText="Helper text goes here"
-        placeholder="Placeholder"
-      />
+      {children}
     </CreateModal>
   );
 
@@ -104,18 +99,19 @@ describe(componentName, () => {
     await expect(container).toHaveNoAxeViolations();
   }, 80000);
 
-  it('calls onSubmit() when primary button is clicked', () => {
+  it('calls onRequestSubmit() when primary button is clicked', () => {
     const primaryHandler = jest.fn();
-    renderComponent({ primaryButtonText: 'Create', onSubmit: primaryHandler });
+    renderComponent({
+      onRequestSubmit: primaryHandler,
+    });
     userEvent.click(screen.getByRole('button', { name: 'Create' }));
     expect(primaryHandler).toBeCalledTimes(1);
   });
 
-  it('calls onClose() when secondary button is clicked', () => {
+  it('calls onRequestClose() when secondary button is clicked', () => {
     const secondaryHandler = jest.fn();
     renderComponent({
-      secondaryButtonText: 'Cancel',
-      onClose: secondaryHandler,
+      onRequestClose: secondaryHandler,
     });
     userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
     expect(secondaryHandler).toBeCalledTimes(1);
@@ -125,8 +121,8 @@ describe(componentName, () => {
     const primaryHandler = jest.fn();
     const secondaryHandler = jest.fn();
     renderComponent({
-      onSubmit: primaryHandler,
-      onClose: secondaryHandler,
+      onRequestSubmit: primaryHandler,
+      onRequestClose: secondaryHandler,
     });
     screen.getAllByRole('button').forEach(userEvent.click);
     expect(primaryHandler).toBeCalledTimes(1);
@@ -141,8 +137,64 @@ describe(componentName, () => {
   });
 
   it('applies focus to selected element', () => {
-    const { container } = renderComponent({ primaryFocus });
-    const firstInput = container.querySelector(primaryFocus);
+    const { container } = renderComponent(
+      { selectorPrimaryFocus },
+      <TextInput
+        key="form-field-1"
+        id="1"
+        labelText="Text input label"
+        helperText="Helper text goes here"
+        placeholder="Placeholder"
+      />
+    );
+    const firstInput = container.querySelector(selectorPrimaryFocus);
     expect(firstInput === document.activeElement).toBeTruthy();
+  });
+
+  it('throws an error if there are more than 4 child nodes inside of the modal', () => {
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    const { container } = renderComponent({}, [
+      <TextInput
+        key="form-field-1"
+        id="1"
+        labelText="Text input label"
+        helperText="Helper text goes here"
+        placeholder="Placeholder"
+      />,
+      <TextInput
+        key="form-field-2"
+        id="2"
+        labelText="Text input label"
+        helperText="Helper text goes here"
+        placeholder="Placeholder"
+      />,
+      <TextInput
+        key="form-field-3"
+        id="3"
+        labelText="Text input label"
+        helperText="Helper text goes here"
+        placeholder="Placeholder"
+      />,
+      <TextInput
+        key="form-field-4"
+        id="4"
+        labelText="Text input label"
+        helperText="Helper text goes here"
+        placeholder="Placeholder"
+      />,
+      <TextInput
+        key="form-field-5"
+        id="5"
+        labelText="Text input label"
+        helperText="Helper text goes here"
+        placeholder="Placeholder"
+      />,
+    ]);
+    expect(() => {
+      render(...container);
+    }).toThrow();
+
+    error.mockRestore();
   });
 });

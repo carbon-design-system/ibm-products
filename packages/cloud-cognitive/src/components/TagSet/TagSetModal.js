@@ -12,7 +12,7 @@ import { Modal, Search } from 'carbon-components-react';
 
 import { pkg } from '../../settings';
 const componentName = 'TagSetModal';
-const blockClass = `${pkg.prefix}-tag-set`;
+const blockClass = `${pkg.prefix}--tag-set`;
 
 export const TagSetModal = ({
   allTags,
@@ -28,7 +28,7 @@ export const TagSetModal = ({
   useEffect(() => {
     const newFilteredModalTags = [];
     if (open) {
-      allTags.forEach((tag) => {
+      allTags.forEach((tag, index) => {
         const dataSearch = (tag.props['data-search'] || '').toLocaleLowerCase();
         const contentsAsString = tag.props.children
           .toString()
@@ -38,9 +38,7 @@ export const TagSetModal = ({
           contentsAsString.indexOf(search) > -1
         ) {
           newFilteredModalTags.push(
-            <span
-              key={`filtered-tag-show-all`}
-              className={`${blockClass}-show-all-tags`}>
+            <span key={index} className={`${blockClass}-show-all-tags`}>
               {React.cloneElement(tag)}
             </span>
           );
@@ -56,20 +54,21 @@ export const TagSetModal = ({
 
   return (
     <Modal
-      className={`${blockClass}--show-all-modal`}
+      className={`${blockClass}__show-all-modal`}
       open={open}
       passiveModal
       size="sm"
       modalHeading={heading}
       onRequestClose={onClose}>
       <Search
-        className={`${blockClass}--show-all-tags-search`}
+        data-modal-primary-focus
+        className={`${blockClass}__show-all-tags-search`}
         labelText={searchLabel}
         placeholder={searchPlaceholder}
         onChange={handleSearch}
         size="lg"
       />
-      <div className={`${blockClass}--show-all-tags-content`}>
+      <div className={`${blockClass}__show-all-tags-content`}>
         {filteredModalTags}
       </div>
     </Modal>

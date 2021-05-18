@@ -68,10 +68,10 @@ Components that have not yet completed the release review process are considered
 to be canary and require the consumer to enable via a feature flag in a
 `config.js` file.
 
-Create a `config.js` in your `src` directory.
+For example, create a `config.js` in your `src` directory:
 
 ```js
-import { pkg } from '@carbon/ibm-cloud-cognitive/es/settings';
+import { pkg } from '@carbon/ibm-cloud-cognitive';
 
 // Enable 'canary' (not yet reviewed/released) components
 // that we want to make use of
@@ -87,6 +87,8 @@ pkg.flags.noneJustYet = true;
 // Live dangerously: enable all pre-release features!
 pkg.setAllFeatures(true);
 ```
+
+**Note:** the above settings must happen before a component first renders.
 
 ## Building and running Locally
 

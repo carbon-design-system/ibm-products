@@ -10,8 +10,17 @@ import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
-import { Button, Tab, Tabs } from 'carbon-components-react';
+
+import {
+  Button,
+  ButtonSet,
+  Dropdown,
+  Form,
+  FormGroup,
+  Tab,
+  Tabs,
+  TextInput,
+} from 'carbon-components-react';
 
 import { Tearsheet, TearsheetNarrow } from '.';
 import {
@@ -30,67 +39,59 @@ import mdx from './Tearsheet.mdx';
 export default {
   title: `${storybookPrefix}/Tearsheets/${Tearsheet.displayName}`,
   component: Tearsheet,
-  subcomponents: {
-    TearsheetNarrow,
-  },
+  subcomponents: { TearsheetNarrow },
   parameters: { styles, docs: { page: mdx } },
   argTypes: {
     actions: {
-      control: {
-        type: 'select',
-        labels: actionsLabels,
-      },
+      control: { type: 'select', labels: actionsLabels },
       options: actionsOptions,
       mapping: actionsMapping(
         {
           primary: 'Replace',
-          secondary: 'Stop',
+          secondary: 'Back',
           secondary2: 'Keep Both',
           ghost: 'Cancel',
         },
         action
       ),
     },
-    description: {
+    description: { control: { type: 'text' } },
+    headerActions: {
       control: {
-        type: 'text',
+        type: 'select',
+        labels: {
+          0: 'none',
+          1: 'drop-down',
+          2: 'buttons',
+        },
+      },
+      options: [0, 1, 2],
+      mapping: {
+        0: null,
+        1: (
+          <Dropdown
+            label="Choose an option"
+            items={['option 1', 'option 2', 'option 3', 'option 4']}
+          />
+        ),
+        2: (
+          <ButtonSet>
+            <Button kind="secondary" size="sm" style={{ width: 'initial' }}>
+              Secondary
+            </Button>
+            <Button kind="primary" size="sm" style={{ width: 'initial' }}>
+              Primary
+            </Button>
+          </ButtonSet>
+        ),
       },
     },
-    label: {
-      control: {
-        type: 'text',
-      },
-    },
-    title: {
-      control: {
-        type: 'text',
-      },
-    },
-    children: {
-      control: {
-        disable: true,
-      },
-    },
-    influencer: {
-      control: {
-        disable: true,
-      },
-    },
-    onClose: {
-      control: {
-        disable: true,
-      },
-    },
-    navigation: {
-      control: {
-        disable: true,
-      },
-    },
-    open: {
-      control: {
-        disable: true,
-      },
-    },
+    label: { control: { type: 'text' } },
+    title: { control: { type: 'text' } },
+    influencer: { control: { disable: true } },
+    onClose: { control: { disable: true } },
+    navigation: { control: { disable: true } },
+    open: { control: { disable: true } },
   },
 };
 
@@ -98,14 +99,9 @@ export default {
 
 const closeIconDescription = 'Close the tearsheet';
 
-const description = (
-  <span>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-    tempor <strong>incididunt ut labore</strong> et dolore magna aliqua. Ut enim
-    ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-    ex ea commodo consequat.
-  </span>
-);
+const description =
+  'This is a description for the tearsheet, providing an opportunity to \
+  describe the flow.';
 
 const influencer = (
   <div className="tearsheet-stories__dummy-content-block">Influencer</div>
@@ -114,7 +110,15 @@ const influencer = (
 const label = 'The label of the tearsheet';
 
 const mainContent = (
-  <div className="tearsheet-stories__dummy-content-block">Main content</div>
+  <div className="tearsheet-stories__dummy-content-block">
+    <Form>
+      <p>Main content</p>
+      <FormGroup>
+        <TextInput labelText="Enter an important value here" />
+        <TextInput light labelText="Here is a light entry field:" />
+      </FormGroup>
+    </Form>
+  </div>
 );
 
 const tabs = (
@@ -135,13 +139,28 @@ const title = 'Title of the tearsheet';
 const Template = ({ actions, ...args }) => {
   const [open, setOpen] = useState(false);
 
+  const wiredActions = Array.prototype.map.call(actions, (action) => {
+    if (action.label === 'Cancel') {
+      const previousClick = action.onClick;
+      return {
+        ...action,
+        onClick: (evt) => {
+          setOpen(false);
+          previousClick(evt);
+        },
+      };
+    }
+    return action;
+  });
+
   return (
     <>
-      <style>{`.${pkg.prefix}-tearsheet { opacity: 0 }`};</style>
+      <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
       <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
       <Tearsheet
         {...args}
-        {...{ actions, open }}
+        actions={wiredActions}
+        open={open}
         onClose={() => setOpen(false)}>
         {mainContent}
       </Tearsheet>
@@ -149,51 +168,166 @@ const Template = ({ actions, ...args }) => {
   );
 };
 
+// eslint-disable-next-line react/prop-types
+const StackedTemplate = ({ actions, ...args }) => {
+  const [open1, setOpen1] = useState(false);
+  const [open2, setOpen2] = useState(false);
+  const [open3, setOpen3] = useState(false);
+
+  const wiredActions1 = Array.prototype.map.call(actions, (action) => {
+    if (action.label === 'Cancel') {
+      const previousClick = action.onClick;
+      return {
+        ...action,
+        onClick: (evt) => {
+          setOpen1(false);
+          previousClick(evt);
+        },
+      };
+    }
+    return action;
+  });
+
+  const wiredActions2 = Array.prototype.map.call(actions, (action) => {
+    if (action.label === 'Cancel') {
+      const previousClick = action.onClick;
+      return {
+        ...action,
+        onClick: (evt) => {
+          setOpen2(false);
+          previousClick(evt);
+        },
+      };
+    }
+    return action;
+  });
+
+  const wiredActions3 = Array.prototype.map.call(actions, (action) => {
+    if (action.label === 'Cancel') {
+      const previousClick = action.onClick;
+      return {
+        ...action,
+        onClick: (evt) => {
+          setOpen3(false);
+          previousClick(evt);
+        },
+      };
+    }
+    return action;
+  });
+
+  return (
+    <>
+      <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
+      <div
+        style={{
+          display: 'flex',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          zIndex: 10000,
+        }}>
+        <Button onClick={() => setOpen1(!open1)}>Toggle #1</Button>
+        <Button onClick={() => setOpen2(!open2)}>Toggle #2</Button>
+        <Button onClick={() => setOpen3(!open3)}>Toggle #3</Button>
+      </div>
+      <Tearsheet
+        {...args}
+        actions={wiredActions1}
+        title="Tearsheet #1"
+        open={open1}
+        onClose={() => setOpen1(false)}>
+        <div className="tearsheet-stories__dummy-content-block">
+          Main content 1
+        </div>
+      </Tearsheet>
+      <Tearsheet
+        {...args}
+        actions={wiredActions2}
+        title="Tearsheet #2"
+        open={open2}
+        onClose={() => setOpen2(false)}>
+        <div className="tearsheet-stories__dummy-content-block">
+          Main content 2
+        </div>
+      </Tearsheet>
+      <Tearsheet
+        {...args}
+        actions={wiredActions3}
+        title="Tearsheet #3"
+        open={open3}
+        onClose={() => setOpen3(false)}>
+        <div className="tearsheet-stories__dummy-content-block">
+          Main content 3
+        </div>
+      </Tearsheet>
+    </>
+  );
+};
+
 // Stories
-export const AllAttributesSet = Template.bind({});
-AllAttributesSet.args = {
+export const tearsheet = Template.bind({});
+tearsheet.storyName = 'Tearsheet';
+tearsheet.args = {
+  description,
+  onClose: action('onClose called'),
+  title,
+  actions: 6,
+};
+
+export const withAllHeaderItems = Template.bind({});
+withAllHeaderItems.storyName = 'Tearsheet with navigation';
+withAllHeaderItems.args = {
+  closeIconDescription,
+  description,
+  label,
+  navigation: tabs,
+  onClose: action('onClose called'),
+  title,
+  actions: 6,
+};
+
+export const withInfluencer = Template.bind({});
+withInfluencer.storyName = 'Tearsheet with influencer';
+withInfluencer.args = {
+  description,
+  influencer,
+  influencerPosition: 'left',
+  influencerWidth: 'narrow',
+  onClose: action('onClose called'),
+  title,
+  verticalPosition: 'normal',
+  actions: 6,
+};
+
+export const fullyLoaded = Template.bind({});
+fullyLoaded.storyName = 'Tearsheet with all header items and influencer';
+fullyLoaded.args = {
   closeIconDescription,
   description,
   hasCloseIcon: true,
+  headerActions: 2,
   influencer,
   influencerPosition: 'left',
   influencerWidth: 'narrow',
   label,
   navigation: tabs,
   onClose: action('onClose called'),
-  open: true,
-  preventCloseOnClickOutside: true,
   title,
   verticalPosition: 'normal',
-  actions: 3,
+  actions: 0,
 };
 
-export const NoAttributesSet = Template.bind({});
-NoAttributesSet.args = {};
-
-export const NoHeaderNavigation = Template.bind({});
-NoHeaderNavigation.args = {
+// eslint-disable-next-line react/prop-types
+export const stacked = StackedTemplate.bind({});
+stacked.storyName = 'Stacking tearsheets';
+stacked.args = {
+  headerActions: 2,
   closeIconDescription,
   description,
-  hasCloseIcon: true,
+  height: 'lower',
   influencer,
   label,
-  onClose: action('onClose called'),
-  open: true,
   preventCloseOnClickOutside: true,
-  title,
-  actions: 3,
-};
-
-export const NoHeaderNavigationOrInfluencer = Template.bind({});
-NoHeaderNavigationOrInfluencer.args = {
-  closeIconDescription,
-  description,
-  hasCloseIcon: true,
-  label,
-  onClose: action('onClose called'),
-  open: true,
-  preventCloseOnClickOutside: true,
-  title,
-  actions: 3,
+  actions: 6,
 };

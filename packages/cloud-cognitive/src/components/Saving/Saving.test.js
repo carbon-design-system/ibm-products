@@ -5,53 +5,57 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { Saving } from '.';
 
-const { name } = Saving;
+const componentName = Saving.displayName;
 const defaultProps = {
-  defaultText: 'Save',
-  cancelButtonText: 'Cancel',
-  inProgressText: 'Saving...',
-  failText: 'Failed to save',
-  successText: 'Saved',
-  defaultIconDescription: 'Save',
-  inProgressIconDescription: 'Saving...',
-  failIconDescription: 'Failed to save',
-  successIconDescription: 'Saved',
+  className: 'test-class',
+  defaultIconDescription: 'save icon',
+  defaultText: 'save',
+  failIconDescription: 'failed to save icon',
+  failText: 'failed to save',
+  inProgressIconDescription: 'saving icon',
+  inProgressText: 'saving...',
+  secondaryButtonText: 'cancel',
+  status: 'default',
+  successIconDescription: 'saved',
+  successText: 'saved',
+  type: 'manual',
 };
 
-describe(name, () => {
-  test('should render', async () => {
+describe(componentName, () => {
+  it('should render', () => {
     render(<Saving {...defaultProps} />);
   });
 
-  test('renders manual type', async () => {
-    const onSave = jest.fn();
-    const onCancel = jest.fn();
+  it('renders manual type', () => {
+    const { click } = userEvent;
+    const onRequestSave = jest.fn();
+    const onRequestCancel = jest.fn();
     const props = {
       ...defaultProps,
-      onSave,
-      onCancel,
+      onRequestSave,
+      onRequestCancel,
     };
 
     const { rerender, getByText } = render(<Saving {...props} />);
-    fireEvent.click(getByText(props.defaultText));
-    expect(onSave).toBeCalled();
-    fireEvent.click(getByText(props.cancelButtonText));
-    expect(onCancel).not.toBeCalled();
-    rerender(<Saving {...props} status="inprogress" />);
+    click(getByText(props.defaultText));
+    expect(onRequestSave).toBeCalled();
+    click(getByText(props.secondaryButtonText));
+    expect(onRequestCancel).not.toBeCalled();
+    rerender(<Saving {...props} status="in-progress" />);
     expect(getByText(props.inProgressText)).toBeVisible();
-    fireEvent.click(getByText(props.cancelButtonText));
-    expect(onCancel).toBeCalled();
+    click(getByText(props.secondaryButtonText));
+    expect(onRequestCancel).toBeCalled();
     rerender(<Saving {...props} status="fail" />);
     expect(getByText(props.failText)).toBeVisible();
   });
 
-  test('renders auto type', async () => {
+  it('renders auto type', () => {
     const props = {
       ...defaultProps,
       type: 'auto',
@@ -59,11 +63,33 @@ describe(name, () => {
 
     const { rerender, getByText } = render(<Saving {...props} />);
     expect(getByText(props.defaultText)).toBeVisible();
-    rerender(<Saving {...props} status="inprogress" />);
+    rerender(<Saving {...props} status="in-progress" />);
     expect(getByText(props.inProgressText)).toBeVisible();
     rerender(<Saving {...props} status="success" />);
     expect(getByText(props.successText)).toBeVisible();
     rerender(<Saving {...props} status="fail" />);
     expect(getByText(props.failText)).toBeVisible();
+  });
+
+  it('has no accessibility violations', async () => {
+    const { container } = render(<Saving {...defaultProps} />);
+    await expect(container).toBeAccessible(componentName);
+    await expect(container).toHaveNoAxeViolations();
+  });
+
+  it('applies className to the containing node', () => {
+    const { container } = render(<Saving {...defaultProps} />);
+    expect(container.firstChild).toHaveClass(defaultProps.className);
+  });
+
+  it('adds additional properties to the containing node', () => {
+    render(<Saving {...defaultProps} data-testid="test-id" />);
+    screen.getByTestId('test-id');
+  });
+
+  it('forwards a ref to an appropriate node', () => {
+    const ref = React.createRef();
+    render(<Saving {...defaultProps} ref={ref} />);
+    expect(ref.current).not.toBeNull();
   });
 });

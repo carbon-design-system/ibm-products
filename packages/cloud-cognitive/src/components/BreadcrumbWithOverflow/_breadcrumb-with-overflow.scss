@@ -33,17 +33,17 @@
       white-space: nowrap;
     }
 
-    .#{$block-class}__space--right {
-      text-align: end;
-    }
-
-    .#{$block-class}__breadcrumb-container {
-      display: inline-flex; // needed to register a width
+    .#{$block-class}__breadcrumb-container.#{$block-class}__breadcrumb-container-with-items {
+      display: none;
       width: 100%;
+      @include carbon--breakpoint(md) {
+        display: inline-flex; // needed to register a width
+      }
     }
 
     .#{$block-class}__breadcrumb-container .#{$carbon-prefix}--breadcrumb {
       flex-wrap: nowrap;
+      align-items: flex-start;
       width: 100%;
     }
 
@@ -58,8 +58,23 @@
       pointer-events: none;
     }
 
-    .#{$block-class}__displayed-breadcrumb {
+    .#{$block-class}__displayed-breadcrumb:last-child,
+    .#{$block-class}__displayed-breadcrumb:last-child .#{$carbon-prefix}--link {
       overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .#{$carbon-prefix}--link {
+      max-height: 18px; // to match breadcrumb - overflow button is 20 by default
+    }
+
+    .#{$block-class}--breadcrumb-back-button.#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only.#{$carbon-prefix}--tooltip__trigger {
+      display: inline-flex;
+      margin-top: calc(-1 * #{$spacing-04});
+
+      @include carbon--breakpoint(md) {
+        display: none;
+      }
     }
   }
 }

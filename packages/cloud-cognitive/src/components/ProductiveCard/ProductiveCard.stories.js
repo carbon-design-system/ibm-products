@@ -10,7 +10,6 @@ import cx from 'classnames';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { TrashCan16, Edit16 } from '@carbon/icons-react';
 import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
 import { ProductiveCard } from '.';
 import mdx from './ProductiveCard.mdx';

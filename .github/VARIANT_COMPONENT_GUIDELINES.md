@@ -44,24 +44,28 @@ A variant component would look something like this
 
 ```
 import { BaseComponent } from '../BaseComponent'
-import { stripUnwantedProps } from '../utils/props-helper';
+import { prepareProps } from '../utils/props-helper';
 ...
 const ProductiveComponent = (props) => {
-  const validProps = stripUnwantedProps(props, ['expressiveOnlyProp1', 'expressiveOnlyProp2']);
+  const validProps = prepareProps(props, ['expressiveOnlyProp1', 'expressiveOnlyProp2']);
   return <BaseComponent {...validProps} />
 };
 ```
 
 The important thing to remember is that variant components should only act as a
-simple wrapper. Using the utility `stripUnwantedProps` ensures that unwanted
-props don't end up being passed into the base component. This is just another
-measure to ensure a bug free experience for the consumer. Consider this code
+simple wrapper. Using the utility `prepareProps` ensures that unwanted props
+don't end up being passed into the base component. This is just another measure
+to ensure a bug free experience for the consumer. Consider this code
 `(expressiveOnlyProp && ...)` the intention is clear, but it's still possible
 for a consumer to set that prop even if they are using a productive version.
 Whether intentional or not setting one of these props would go against component
 design guidelines, which is undesirable. This is also helpful in storybook
 documentation that may still offer a control for an unwanted prop. Again, this
 is just a small measure to ensure a bug free experience.
+
+You can also use `prepareProps` to add override values for some props, and to
+provide default values to use if props are not supplied (if the relevant
+defaults have not already been set via defaultProps).
 
 Using card as a example, you should end up with a folder structure like this.
 

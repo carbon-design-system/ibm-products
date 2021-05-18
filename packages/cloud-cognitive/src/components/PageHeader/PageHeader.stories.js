@@ -260,7 +260,7 @@ const manyTags = [
 
 const title = 'Page title';
 const longTitle =
-  'A very long page title that is going to exceed fifty-six characters and get truncated';
+  'A very long page title that is going to exceed 60% of the stage width and get truncated on large screens';
 
 // Template.
 const Template = (args) => {

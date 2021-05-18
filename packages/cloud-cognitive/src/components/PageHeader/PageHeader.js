@@ -88,6 +88,9 @@ export let PageHeader = React.forwardRef(
     ] = useState(0);
     const [actionBarColumnWidth, setActionBarColumnWidth] = useState(0);
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
+    const collapseLabel = Array.isArray(collapseExpandHeaderLabel)
+      ? collapseExpandHeaderLabel
+      : [collapseExpandHeaderLabel, collapseExpandHeaderLabel];
 
     useEffect(() => {
       let newActionBarWidth = 'initial';
@@ -242,12 +245,13 @@ export let PageHeader = React.forwardRef(
       // NOTE: The buffer is used to add space between the bottom of the header and the last content
 
       // No navigation and title row not pre-collapsed
-      // and only one of tags or (subtitle or available space)
+      // and zero or one of tags or (subtitle or available space)
       setLastRowBufferActive(
-        !navigation &&
+        (!navigation &&
           !preCollapseTitleRow &&
           (title || pageActions) &&
-          !tags !== !(subtitle || availableSpace)
+          !tags) ||
+          !(subtitle || availableSpace)
       );
     }, [
       availableSpace,
@@ -335,8 +339,6 @@ export let PageHeader = React.forwardRef(
     useWindowScroll(
       // on scroll or various layout changes check updates if needed
       ({ current }) => {
-        checkUpdateVerticalSpace();
-
         const fullyCollapsed =
           current.scrollY + metrics.headerTopValue + pageHeaderOffset >= 0;
         setFullyCollapsed(fullyCollapsed);
@@ -355,6 +357,7 @@ export let PageHeader = React.forwardRef(
           `--${blockClass}--tagset-tooltip-offset`,
           `${tagsetTooltipOffset}px`
         );
+
         setScrollYValue(current.scrollY);
       },
       [
@@ -723,7 +726,9 @@ export let PageHeader = React.forwardRef(
               })}
               data-collapse={fullyCollapsed ? 'collapsed' : 'not collapsed'}
               hasIconOnly={true}
-              iconDescription={collapseExpandHeaderLabel}
+              iconDescription={
+                fullyCollapsed ? collapseLabel[0] : collapseLabel[1]
+              }
               kind="ghost"
               onClick={handleCollapseToggle}
               renderIcon={ChevronUp16}
@@ -794,8 +799,13 @@ PageHeader.propTypes = {
   className: PropTypes.string,
   /**
    * Label/assistive text for the collapse/expand chevron
+   * Single string e.g. 'toggle expand' or array ['Expand', 'Collapse']
+   * Default ['Expand', 'Collapse']
    */
-  collapseExpandHeaderLabel: PropTypes.string,
+  collapseExpandHeaderLabel: PropTypes.oneOf(
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string)
+  ),
   /**
    * The header can as a whole be collapsed, expanded or somewhere in between.
    * This setting controls the initial value, but also takes effect on change
@@ -876,9 +886,9 @@ PageHeader.propTypes = {
 };
 
 PageHeader.defaultProps = {
-  background: false,
+  background: true,
   className: '',
-  collapseExpandHeaderLabel: 'Toggle expansion',
+  collapseExpandHeaderLabel: ['Expand', 'Collapse'],
   preventBreadcrumbScroll: false,
   pageHeaderOffset: 0,
   preCollapseTitleRow: false,

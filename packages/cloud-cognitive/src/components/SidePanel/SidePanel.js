@@ -268,7 +268,8 @@ export let SidePanel = React.forwardRef(
         if (
           sidePanelRef.current &&
           sidePanelOverlayRef.current &&
-          sidePanelOverlayRef.current.contains(e.target)
+          sidePanelOverlayRef.current.contains(e.target) &&
+          onRequestClose
         ) {
           onRequestClose();
         }
@@ -642,7 +643,7 @@ SidePanel.propTypes = {
    * Specify a handler for closing the side panel.
    * This handler closes the modal, e.g. changing `open` prop.
    */
-  onRequestClose: PropTypes.func.isRequired,
+  onRequestClose: PropTypes.func,
 
   /**
    * Determines whether the side panel should render or not

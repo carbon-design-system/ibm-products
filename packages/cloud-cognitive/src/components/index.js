@@ -27,7 +27,7 @@ export { ImportModal } from './ImportModal';
 export { ModifiedTabs } from './ModifiedTabs';
 export { NotificationsPanel } from './NotificationsPanel';
 export { PageHeader } from './PageHeader';
-export { RemoveDeleteModal } from './RemoveDeleteModal';
+export { RemoveModal } from './RemoveModal';
 export { Saving } from './Saving';
 export { SidePanel } from './SidePanel';
 export { StatusIcon } from './StatusIcon';

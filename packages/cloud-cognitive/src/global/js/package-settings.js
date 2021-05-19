@@ -44,7 +44,7 @@ const defaults = {
     NotificationsEmptyState: false,
     PageHeader: false,
     ProductiveCard: false,
-    RemoveDeleteModal: false,
+    RemoveModal: false,
     SidePanel: false,
     TagSet: false,
     UnauthorizedEmptyState: false,

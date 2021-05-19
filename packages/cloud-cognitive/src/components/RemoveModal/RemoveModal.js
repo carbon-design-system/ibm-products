@@ -79,7 +79,6 @@ export let RemoveModal = forwardRef(
             />
           )}
         </ModalBody>
-
         <ModalFooter>
           <Button type="button" kind="secondary" onClick={onClose}>
             {secondaryButtonText}

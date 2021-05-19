@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.38.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.38.2...@carbon/ibm-cloud-cognitive@0.38.3) (2021-05-19)
+
+
+### Bug Fixes
+
+* **EmptyStates:** update stories and rename size prop ([#753](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/753)) ([c5e6bfb](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c5e6bfb912b5d8bc2ab143df87f2b615f35939ac))
+
+
+
+
+
 ## [0.38.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.38.1...@carbon/ibm-cloud-cognitive@0.38.2) (2021-05-18)
 
 

@@ -707,6 +707,15 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin: 0;
 }
 
+.exp--remove-modal .bx--modal-content {
+  padding-right: var(--cds-spacing-05, 1rem);
+}
+
+.exp--remove-modal__body {
+  margin-bottom: var(--cds-spacing-05, 1rem);
+  padding-right: 20%;
+}
+
 .exp--saving__message {
   display: flex;
 }

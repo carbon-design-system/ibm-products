@@ -27,11 +27,11 @@ export let NoDataEmptyState = React.forwardRef(
       actionType,
       actionIcon,
       className,
-      illustrationSize,
       illustrationTheme,
       linkText,
       linkUrl,
       onActionEvent,
+      size,
       subtitle,
       title,
       ...rest
@@ -46,7 +46,7 @@ export let NoDataEmptyState = React.forwardRef(
         }
         className={cx(blockClass, className)}
         ref={ref}>
-        <NoDataIllustration theme={illustrationTheme} size={illustrationSize} />
+        <NoDataIllustration theme={illustrationTheme} size={size} />
         <EmptyStateContent
           actionText={actionText}
           actionType={actionType}
@@ -54,6 +54,7 @@ export let NoDataEmptyState = React.forwardRef(
           linkText={linkText}
           linkUrl={linkUrl}
           onActionEvent={onActionEvent}
+          size={size}
           subtitle={subtitle}
           title={title}
         />
@@ -90,10 +91,6 @@ NoDataEmptyState.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Empty state illustration size
-   */
-  illustrationSize: PropTypes.oneOf(['lg', 'sm']),
-  /**
    * Empty state illustration theme variations.
    * To ensure you use the correct themed illustrations, you can conditionally specify light or dark
    * based on your app's current theme value. Example:
@@ -112,6 +109,10 @@ NoDataEmptyState.propTypes = {
    * Empty state action button handler
    */
   onActionEvent: PropTypes.func,
+  /**
+   * Empty state size
+   */
+  size: PropTypes.oneOf(['lg', 'sm']),
   /**
    * Empty state subtitle
    */

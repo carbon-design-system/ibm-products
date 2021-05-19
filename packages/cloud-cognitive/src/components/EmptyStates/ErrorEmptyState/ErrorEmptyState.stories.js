@@ -30,12 +30,8 @@ export default {
 };
 
 const defaultStoryProps = {
-  title: 'Start by adding data assets',
-  subtitle: (
-    <p>
-      Click <span>Upload assets</span> to upload your data
-    </p>
-  ),
+  title: 'Empty state title',
+  subtitle: 'Description text explaining why this section is empty.',
 };
 
 const Template = (args) => {

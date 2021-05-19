@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.38.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.38.4...@carbon/ibm-cloud-cognitive@0.38.5) (2021-05-19)
+
+
+### Bug Fixes
+
+* issues raised in page header design review ([#754](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/754)) ([13c5085](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/13c5085b6de50c01a942f71b66e80a9516167c42))
+
+
+
+
+
+## [0.38.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.38.3...@carbon/ibm-cloud-cognitive@0.38.4) (2021-05-19)
+
+
+### Bug Fixes
+
+* **Tearsheet:** fix background of pagination ([#747](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/747)) ([f3fd9f7](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f3fd9f72e751e8b955af854b3a3c72e5a593f01d))
+
+
+
+
+
+## [0.38.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.38.2...@carbon/ibm-cloud-cognitive@0.38.3) (2021-05-19)
+
+
+### Bug Fixes
+
+* **EmptyStates:** update stories and rename size prop ([#753](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/753)) ([c5e6bfb](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c5e6bfb912b5d8bc2ab143df87f2b615f35939ac))
+
+
+
+
+
+## [0.38.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.38.1...@carbon/ibm-cloud-cognitive@0.38.2) (2021-05-18)
+
+
+### Bug Fixes
+
+* **UserProfileImage:** updates based on release review notes ([#665](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/665)) ([7294117](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/7294117be66c99e6d1dfa4fa98810e7daf2f2ca4))
+
+
+
+
+
 ## [0.38.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.38.0...@carbon/ibm-cloud-cognitive@0.38.1) (2021-05-18)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

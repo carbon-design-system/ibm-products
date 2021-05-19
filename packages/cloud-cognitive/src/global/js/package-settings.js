@@ -18,6 +18,7 @@ const defaults = {
     StatusIcon: true,
     Tearsheet: true,
     TearsheetNarrow: true,
+    UserProfileImage: true,
 
     // other public components not yet reviewed and released:
     ActionBarItem: false,
@@ -47,7 +48,6 @@ const defaults = {
     SidePanel: false,
     TagSet: false,
     UnauthorizedEmptyState: false,
-    UserProfileImage: false,
     WebTerminal: false,
     /* new component flags here - comment used by generate CLI */
   },

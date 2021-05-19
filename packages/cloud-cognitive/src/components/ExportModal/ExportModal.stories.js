@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2020
+// Copyright IBM Corp. 2020, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -30,12 +30,13 @@ export default {
 const defaultProps = {
   filename: 'Sample02.pdf',
   inputLabel: 'File name',
-  title: 'Export',
   onRequestClose: () => {},
   onRequestSubmit: () => {},
   open: true,
+  preventCloseOnClickOutside: true,
   primaryButtonText: 'Export',
   secondaryButtonText: 'Cancel',
+  title: 'Export',
 };
 
 const Template = (args) => {
@@ -43,7 +44,7 @@ const Template = (args) => {
 };
 
 const TemplateWithState = (args) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [loading, setLoading] = useState(false);
   const [successful, setSuccessful] = useState(false);
   const [error, setError] = useState(false);

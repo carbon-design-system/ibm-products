@@ -91,19 +91,25 @@ export let PageHeader = React.forwardRef(
     ] = useState(0);
     const [actionBarColumnWidth, setActionBarColumnWidth] = useState(0);
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
-    const [titleShape, setTitleShape] = useState({});
 
+    /**
+     * * Title shape is used to allow title to be string or shape
+     */
+    const [titleShape, setTitleShape] = useState({});
     useEffect(() => {
+      // default to defaultProps
       let newShape = { ...PageHeader.defaultProps.title };
 
       if (title?.text) {
-        // already have a shape
+        // title is in shape format
         newShape = Object.assign(newShape, { ...title });
       } else {
+        // title is a string
         newShape.text = title;
       }
 
       if (!newShape.icon && titleIcon) {
+        // if no icon use titleIcon if supplied
         newShape.icon = titleIcon;
       }
 
@@ -934,7 +940,7 @@ PageHeader.defaultProps = {
   preventBreadcrumbScroll: false,
   pageHeaderOffset: 0,
   preCollapseTitleRow: false,
-  title: { text: 'test', loading: true },
+  title: { text: 'test', loading: false },
 };
 
 PageHeader.displayName = componentName;

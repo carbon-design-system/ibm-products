@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2020
+ * Copyright IBM Corp. 2020, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -36,8 +36,10 @@ describe(name, () => {
 
     const { getByText } = render(
       <EmptyState
-        actionText="Create new"
-        onActionEvent={onActionHandler}
+        action={{
+          text: 'Create new',
+          onClick: onActionHandler,
+        }}
         {...defaultProps}
       />
     );
@@ -49,8 +51,10 @@ describe(name, () => {
   it('should render a clickable link and match rendered url to linkUrl prop', () => {
     const { getByText, container } = render(
       <EmptyState
-        linkText="View documentation"
-        linkUrl="https://www.carbondesignsystem.com/"
+        link={{
+          text: 'View documentation',
+          href: 'https://www.carbondesignsystem.com/',
+        }}
         {...defaultProps}
       />
     );
@@ -68,7 +72,7 @@ describe(name, () => {
   it('should render title by passing node', () => {
     const { getByText } = render(
       <EmptyState
-        title={<h3>Custom title</h3>}
+        title={<span>Custom title</span>}
         subtitle="Empty state subtitle"
       />
     );
@@ -84,7 +88,7 @@ describe(name, () => {
     const { getByText } = render(
       <EmptyState
         title="Empty state header"
-        subtitle={<p>This is the subtitle of the empty state</p>}
+        subtitle={<span>This is the subtitle of the empty state</span>}
       />
     );
     expect(getByText('This is the subtitle of the empty state')).toBeTruthy();
@@ -92,7 +96,11 @@ describe(name, () => {
 
   it('should render a custom illustration', () => {
     const { container } = render(
-      <EmptyState illustration={CustomIllustration} {...defaultProps} />
+      <EmptyState
+        {...defaultProps}
+        illustration={CustomIllustration}
+        illustrationDescription="Test alt text"
+      />
     );
     const customIllustrationElement = container.querySelector('img');
     expect(customIllustrationElement).toBeTruthy();
@@ -100,13 +108,13 @@ describe(name, () => {
 
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
-    render(<EmptyState ref={ref} {...defaultProps} />);
+    render(<EmptyState {...defaultProps} ref={ref} />);
     expect(ref.current.classList.contains(blockClass)).toBeTruthy();
   });
 
   it('adds additional properties to the containing node', () => {
     const { container } = render(
-      <EmptyState data-testid={dataTestId} {...defaultProps} />
+      <EmptyState {...defaultProps} data-testid={dataTestId} />
     );
     expect(
       container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
@@ -166,5 +174,10 @@ describe(name, () => {
     rerender(
       <UnauthorizedEmptyState {...defaultProps} illustrationTheme="dark" />
     );
+  });
+  it('should throw a custom prop type validation error when an illustration is used without an illustrationDescription prop', () => {
+    jest.spyOn(console, 'error').mockImplementation(jest.fn());
+    render(<EmptyState {...defaultProps} illustration={CustomIllustration} />);
+    jest.spyOn(console, 'error').mockRestore();
   });
 });

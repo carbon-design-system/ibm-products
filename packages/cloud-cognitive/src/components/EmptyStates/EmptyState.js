@@ -11,6 +11,7 @@ import React from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { Button, Link } from 'carbon-components-react';
 import { pkg } from '../../settings';
 import { EmptyStateContent } from './EmptyStateContent';
 
@@ -21,18 +22,14 @@ const componentName = 'EmptyState';
 export let EmptyState = React.forwardRef(
   (
     {
-      actionIcon,
-      actionText,
-      actionType,
+      action,
       className,
-      customIllustrationAltText,
-      title,
       illustration,
-      linkText,
-      linkUrl,
-      onActionEvent,
+      illustrationDescription,
+      link,
       size,
       subtitle,
+      title,
       ...rest
     },
     ref
@@ -41,7 +38,7 @@ export let EmptyState = React.forwardRef(
       return (
         <img
           src={illustration}
-          alt={customIllustrationAltText}
+          alt={illustrationDescription}
           className={cx([
             `${blockClass}__illustration`,
             `${blockClass}__illustration--${size}`,
@@ -60,12 +57,8 @@ export let EmptyState = React.forwardRef(
         ref={ref}>
         {illustration && renderIllustration()}
         <EmptyStateContent
-          actionText={actionText}
-          actionType={actionType}
-          actionIcon={actionIcon}
-          linkText={linkText}
-          linkUrl={linkUrl}
-          onActionEvent={onActionEvent}
+          action={action}
+          link={link}
           size={size}
           subtitle={subtitle}
           title={title}
@@ -78,61 +71,72 @@ export let EmptyState = React.forwardRef(
 // Return a placeholder if not released and not enabled by feature flag
 EmptyState = pkg.checkComponentEnabled(EmptyState, componentName);
 
-export const EmptyStateProps = {
-  /**
-   * Empty state action button icon
-   */
-  actionIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-  /**
-   * Empty state action button text
-   */
-  actionText: PropTypes.string,
-  /**
-   * Empty state action button type
-   */
-  actionType: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
-  /**
-   * Provide an optional class to be applied to the containing node.
-   */
-  className: PropTypes.string,
-  /**
-   * The alt text for custom provided illustrations
-   */
-  customIllustrationAltText: PropTypes.string,
-  /**
-   * Empty state illustration, specify the `src` of a custom illustration to be displayed.
-   */
-  illustration: PropTypes.string,
-  /**
-   * Empty state link text
-   */
-  linkText: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  /**
-   * Empty state link url
-   */
-  linkUrl: PropTypes.string,
-  /**
-   * Empty state action button handler
-   */
-  onActionEvent: PropTypes.func,
-  /**
-   * Empty state size
-   */
-  size: PropTypes.oneOf(['lg', 'sm']),
-  /**
-   * Empty state subtext
-   */
-  subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
-  /**
-   * Empty state heading
-   */
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+EmptyState.validateIllustrationDescription = () => ({
+  illustration,
+  illustrationDescription,
+}) => {
+  if (illustration && !illustrationDescription) {
+    throw new Error(
+      `${componentName}: illustrationDescription is missing, this is required when using the illustration prop`
+    );
+  }
 };
 
 export const EmptyStateDefaultProps = {
   size: 'lg',
 };
 
-EmptyState.propTypes = EmptyStateProps;
+EmptyState.propTypes = {
+  /**
+   * Empty state action button
+   */
+  action: PropTypes.shape({
+    ...Button.propTypes,
+    kind: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
+    renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    onClick: Button.propTypes.onClick,
+    text: PropTypes.string,
+  }),
+
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className: PropTypes.string,
+
+  /**
+   * Empty state illustration, specify the `src` for a provided illustration to be displayed.
+   */
+  illustration: PropTypes.string,
+
+  /**
+   * The alt text for custom provided illustrations
+   */
+  illustrationDescription: EmptyState.validateIllustrationDescription(),
+
+  /**
+   * Empty state link object
+   */
+  link: PropTypes.shape({
+    ...Link.propTypes,
+    text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+    href: PropTypes.string,
+  }),
+
+  /**
+   * Empty state size
+   */
+  size: PropTypes.oneOf(['lg', 'sm']),
+
+  /**
+   * Empty state subtext
+   */
+  subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+
+  /**
+   * Empty state heading
+   */
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+};
+
 EmptyState.defaultProps = EmptyStateDefaultProps;
 EmptyState.displayName = componentName;

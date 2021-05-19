@@ -8,6 +8,7 @@
 import React, { useState, useRef, forwardRef } from 'react';
 import cx from 'classnames';
 import {
+  Button,
   ComposedModal,
   ModalHeader,
   ModalFooter,
@@ -30,7 +31,7 @@ export let RemoveModal = forwardRef(
       inputLabelText,
       inputPlaceholderText,
       label,
-      onRequestClose,
+      onClose,
       onRequestSubmit,
       open,
       preventCloseOnClickOutside,
@@ -78,14 +79,19 @@ export let RemoveModal = forwardRef(
             />
           )}
         </ModalBody>
-        <ModalFooter
-          danger
-          primaryButtonText={primaryButtonText}
-          secondaryButtonText={secondaryButtonText}
-          primaryButtonDisabled={primaryButtonDisabled}
-          onRequestClose={onRequestClose}
-          onRequestSubmit={onRequestSubmit}
-        />
+
+        <ModalFooter>
+          <Button type="button" kind="secondary" onClick={onClose}>
+            {secondaryButtonText}
+          </Button>
+          <Button
+            type="submit"
+            kind="danger"
+            onClick={onRequestSubmit}
+            disabled={primaryButtonDisabled}>
+            {primaryButtonText}
+          </Button>
+        </ModalFooter>
       </ComposedModal>
     );
   }
@@ -126,7 +132,7 @@ RemoveModal.propTypes = {
   /**
    * Callback function that runs when user closes the modal
    */
-  onRequestClose: PropTypes.func,
+  onClose: PropTypes.func,
   /**
    * Callback function that runs when user submits the modal
    */

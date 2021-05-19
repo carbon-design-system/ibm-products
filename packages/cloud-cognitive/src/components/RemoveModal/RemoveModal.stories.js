@@ -35,7 +35,7 @@ const defaultProps = {
   inputLabelText: `Type ${resourceName} to confirm`,
   inputPlaceholderText: 'Name of resourceName',
   open: true,
-  onRequestClose: () => {},
+  onClose: () => {},
   primaryButtonText: 'Delete',
   resourceName,
   secondaryButtonText: 'Close',

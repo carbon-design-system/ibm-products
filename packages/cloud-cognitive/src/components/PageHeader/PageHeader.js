@@ -97,7 +97,6 @@ export let PageHeader = React.forwardRef(
      */
     const [titleShape, setTitleShape] = useState({});
     useEffect(() => {
-      // default to defaultProps
       let newShape = { ...PageHeader.defaultProps.title };
 
       if (title?.text) {
@@ -940,7 +939,6 @@ PageHeader.defaultProps = {
   preventBreadcrumbScroll: false,
   pageHeaderOffset: 0,
   preCollapseTitleRow: false,
-  title: { text: 'test', loading: false },
 };
 
 PageHeader.displayName = componentName;

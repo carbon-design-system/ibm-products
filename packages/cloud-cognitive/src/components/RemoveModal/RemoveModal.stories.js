@@ -34,8 +34,8 @@ const defaultProps = {
   inputInvalidText: 'A valid value is required',
   inputLabelText: `Type ${resourceName} to confirm`,
   inputPlaceholderText: 'Name of resourceName',
+  onClose: () => false,
   open: true,
-  onClose: () => {},
   primaryButtonText: 'Delete',
   resourceName,
   secondaryButtonText: 'Close',
@@ -47,8 +47,8 @@ const Template = (args) => {
   return <RemoveModal {...args} />;
 };
 
-export const WithoutConfirmation = Template.bind({});
-WithoutConfirmation.args = {
+export const RemovePattern = Template.bind({});
+RemovePattern.args = {
   ...defaultProps,
   body: `Removing ${resourceName} will permanently remove the configuration. This action cannot be undone.`,
   title: 'Confirm removal',
@@ -56,8 +56,8 @@ WithoutConfirmation.args = {
   label: `Remove ${resourceName}`,
 };
 
-export const WithConfirmation = Template.bind({});
-WithConfirmation.args = {
+export const DeletePattern = Template.bind({});
+DeletePattern.args = {
   ...defaultProps,
   textConfirmation: true,
 };

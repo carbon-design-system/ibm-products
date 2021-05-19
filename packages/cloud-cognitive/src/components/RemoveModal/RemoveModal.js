@@ -55,13 +55,9 @@ export let RemoveModal = forwardRef(
     return (
       <ComposedModal
         {...rest}
-        open={open}
-        ref={ref}
-        danger
         className={cx(blockClass, className)}
         size="sm"
-        preventCloseOnClickOutside={preventCloseOnClickOutside}
-        onClose={onClose}>
+        {...{ open, ref, preventCloseOnClickOutside, onClose }}>
         <ModalHeader
           title={title}
           label={label}

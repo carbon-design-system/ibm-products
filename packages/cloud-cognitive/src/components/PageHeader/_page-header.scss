@@ -89,7 +89,7 @@ $raised-z-index: 99;
 
     .#{$block-class}__breadcrumb-row--with-actions {
       + .#{$block-class}__last-row-buffer--active {
-        height: $layout-02;
+        height: $spacing-06;
       }
     }
 
@@ -251,12 +251,12 @@ $raised-z-index: 99;
       }
 
       &.#{$block-class}__title-row--under-action-bar {
-        margin-top: $spacing-06;
+        margin-top: $spacing-05;
       }
 
       + .#{$block-class}__last-row-buffer--active {
         // only used when nothing below title
-        height: $layout-03;
+        height: $spacing-07;
       }
 
       &.#{$block-class}__title-row--spacing-below-03 {
@@ -271,11 +271,11 @@ $raised-z-index: 99;
       }
 
       &.#{$block-class}__title-row--spacing-below-06 {
-        margin-bottom: $layout-02;
+        margin-bottom: $spacing-06;
       }
 
       &.#{$block-class}__title-row--no-breadcrumb-row {
-        margin-top: $layout-03;
+        margin-top: $spacing-07;
       }
 
       &.#{$block-class}__title-row--sticky {
@@ -367,7 +367,7 @@ $raised-z-index: 99;
       }
 
       + .#{$block-class}__last-row-buffer--active {
-        height: $layout-01;
+        height: $spacing-05;
       }
     }
 
@@ -376,10 +376,12 @@ $raised-z-index: 99;
     }
 
     .#{$block-class}__available-row {
+      @include carbon--type-style('body-long-01');
+
       margin-top: $spacing-03;
 
       + .#{$block-class}__last-row-buffer--active {
-        height: $layout-03;
+        height: $spacing-07;
       }
     }
 
@@ -389,7 +391,7 @@ $raised-z-index: 99;
 
       .#{$carbon-prefix}--content-switcher {
         box-sizing: content-box;
-        padding-bottom: $layout-01;
+        padding-bottom: $spacing-05;
       }
     }
 
@@ -399,7 +401,7 @@ $raised-z-index: 99;
     }
 
     .#{$block-class}__navigation-row--spacing-above-06 {
-      margin-top: $layout-02;
+      margin-top: $spacing-06;
     }
 
     .#{$block-class}__navigation-row .#{$carbon-prefix}--tab-content {
@@ -407,7 +409,7 @@ $raised-z-index: 99;
     }
 
     .#{$block-class}__navigation-tabs {
-      margin-left: calc(-1 * #{$spacing-04});
+      margin-left: calc(-1 * #{$spacing-05});
     }
 
     .#{$block-class}__navigation-row--has-tags
@@ -422,7 +424,8 @@ $raised-z-index: 99;
       align-items: center;
       justify-content: flex-end;
       max-width: 25%;
-      padding-bottom: $spacing-02; /* design says 3 from bottom of tag, which has $spacing-02 already. 2 * $spacing-02 = $spacing-3 */
+      padding-top: $spacing-02;
+      padding-bottom: $spacing-02;
       white-space: nowrap;
       text-align: right;
     }
@@ -430,6 +433,7 @@ $raised-z-index: 99;
     .#{$block-class}__navigation-tags--tags-only {
       justify-content: flex-start;
       margin-left: calc(-1 * #{$spacing-02});
+      padding-top: 0;
       padding-bottom: $spacing-04;
       text-align: initial;
     }

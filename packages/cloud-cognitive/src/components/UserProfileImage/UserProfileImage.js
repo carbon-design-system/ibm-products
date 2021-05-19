@@ -106,15 +106,16 @@ export let UserProfileImage = React.forwardRef(
       </div>
     );
 
-    return FillItem ? (
-      tooltipText ? (
+    return (
+      FillItem &&
+      (tooltipText ? (
         <TooltipIcon tooltipText={tooltipText}>
           {renderUserProfileImage()}
         </TooltipIcon>
       ) : (
         renderUserProfileImage()
-      )
-    ) : null;
+      ))
+    );
   }
 );
 

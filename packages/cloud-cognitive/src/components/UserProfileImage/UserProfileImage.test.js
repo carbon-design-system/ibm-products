@@ -8,7 +8,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
@@ -41,7 +41,10 @@ describe(name, () => {
   });
 
   test('should render image for the avatar image', () => {
-    const { container } = renderComponent({ image: 'path_to_image.jpg' });
+    const { container } = renderComponent({
+      image: 'path_to_image.jpg',
+      imageDescription: 'test alt text',
+    });
     const imagePath = container.querySelector('img').getAttribute('src');
     expect(typeof imagePath).toBe('string');
   });
@@ -80,5 +83,29 @@ describe(name, () => {
     const { container } = renderComponent({ className: customClass });
     const element = container.querySelector(`.${blockClass}`);
     expect(element).toHaveClass(customClass);
+  });
+
+  it('should render the initials when passed the initials prop', () => {
+    renderComponent({ initials: 'Display name' });
+    expect(screen.getByText(/DN/g));
+  });
+
+  it('should render the initials when simply passing two initials to the initials prop', () => {
+    renderComponent({ initials: 'DN' });
+    expect(screen.getByText(/DN/g));
+  });
+
+  it('should render the tooltipIcon component if the tooltipText prop is passed', () => {
+    const { container } = renderComponent({ tooltipText: 'Display name' });
+    const tooltipElement = container.querySelector(
+      `.${carbon.prefix}--tooltip__trigger`
+    );
+    expect(tooltipElement).toBeTruthy();
+  });
+
+  it('should throw a custom prop type validation error when an image is used without an imageDescription prop', () => {
+    jest.spyOn(console, 'error').mockImplementation(jest.fn());
+    renderComponent({ image: 'path_to_image.jpg' });
+    jest.spyOn(console, 'error').mockRestore();
   });
 });

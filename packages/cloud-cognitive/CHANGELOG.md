@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.38.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.38.5...@carbon/ibm-cloud-cognitive@0.38.6) (2021-05-19)
+
+
+### Bug Fixes
+
+* remove modal release feedback updates ([#757](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/757)) ([f6b97ba](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f6b97babd6f98da8f08ffbc3ddc24bac8f9b059e))
+
+
+
+
+
 ## [0.38.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.38.4...@carbon/ibm-cloud-cognitive@0.38.5) (2021-05-19)
 
 

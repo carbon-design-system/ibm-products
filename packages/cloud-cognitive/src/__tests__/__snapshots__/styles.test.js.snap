@@ -1332,6 +1332,8 @@ path:nth-of-type(1),
   background: var(--cds-ui-background, #ffffff);
 }
 
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--pagination,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--pagination__control-buttons,
 .exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--text-input,
 .exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--text-area,
 .exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--search-input,

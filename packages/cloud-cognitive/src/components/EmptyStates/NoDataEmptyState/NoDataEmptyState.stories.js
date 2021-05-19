@@ -29,30 +29,29 @@ export default {
   },
 };
 
+const defaultStoryProps = {
+  title: 'Empty state title',
+  subtitle: 'Description text explaining why this section is empty.',
+};
+
 const Template = (args) => {
-  return (
-    <NoDataEmptyState
-      title="Start by adding data assets"
-      subtitle={
-        <p>
-          Click <span>Upload assets</span> to upload your data
-        </p>
-      }
-      {...args}
-    />
-  );
+  return <NoDataEmptyState {...args} />;
 };
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  ...defaultStoryProps,
+};
 
 export const WithDarkModeIllustration = Template.bind({});
 WithDarkModeIllustration.args = {
+  ...defaultStoryProps,
   illustrationTheme: 'dark',
 };
 
 export const withAction = Template.bind({});
 withAction.args = {
+  ...defaultStoryProps,
   actionText: 'Create new',
   actionType: 'tertiary',
   onActionEvent: action('actionHandler'),
@@ -60,6 +59,7 @@ withAction.args = {
 
 export const withActionIconButton = Template.bind({});
 withActionIconButton.args = {
+  ...defaultStoryProps,
   actionText: 'Create new',
   actionType: 'tertiary',
   onActionEvent: action('actionHandler'),
@@ -68,12 +68,14 @@ withActionIconButton.args = {
 
 export const withLink = Template.bind({});
 withLink.args = {
+  ...defaultStoryProps,
   linkText: 'View documentation',
   linkUrl: 'https://www.carbondesignsystem.com',
 };
 
 export const withActionAndLink = Template.bind({});
 withActionAndLink.args = {
+  ...defaultStoryProps,
   actionText: 'Create new',
   actionType: 'tertiary',
   onActionEvent: action('actionHandler'),

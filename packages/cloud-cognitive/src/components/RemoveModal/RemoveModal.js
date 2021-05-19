@@ -60,7 +60,8 @@ export let RemoveModal = forwardRef(
         danger
         className={cx(blockClass, className)}
         size="sm"
-        preventCloseOnClickOutside={preventCloseOnClickOutside}>
+        preventCloseOnClickOutside={preventCloseOnClickOutside}
+        onClose={onClose}>
         <ModalHeader
           title={title}
           label={label}

@@ -59,7 +59,7 @@ user desires to dismiss it they can click the close icon on the top right corner
 of the component.
 
 <Preview>
-  <Story id={getStorybookSlug(pkg, WebTerminal.displayName, 'default')} />
+  <Story id={getStorybookSlug(pkg, null, WebTerminal.displayName, 'default')} />
 </Preview>
 
 ### With documentation links
@@ -68,6 +68,7 @@ of the component.
   <Story
     id={getStorybookSlug(
       pkg,
+      null,
       WebTerminal.displayName,
       'with-documentation-links'
     )}

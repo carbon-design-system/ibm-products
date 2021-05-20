@@ -275,9 +275,9 @@ tearsheet.args = {
   actions: 6,
 };
 
-export const withAllHeaderItems = Template.bind({});
-withAllHeaderItems.storyName = 'Tearsheet with navigation';
-withAllHeaderItems.args = {
+export const withNavigation = Template.bind({});
+withNavigation.storyName = 'Tearsheet with navigation';
+withNavigation.args = {
   closeIconDescription,
   description,
   label,

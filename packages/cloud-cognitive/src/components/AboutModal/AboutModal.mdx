@@ -24,7 +24,12 @@ immediately apparent to the user, with a clear and obvious path to completion.
 
 <Preview>
   <Story
-    id={getStorybookSlug(pkg, AboutModal.displayName, 'with-all-props-set')}
+    id={getStorybookSlug(
+      pkg,
+      null,
+      AboutModal.displayName,
+      'with-all-props-set'
+    )}
   />
 </Preview>
 
@@ -49,7 +54,7 @@ class which is then applied to the AboutModal using the `className` prop.
 
 <Preview>
   <Story
-    id={getStorybookSlug(pkg, AboutModal.displayName, 'with-dark-theme')}
+    id={getStorybookSlug(pkg, null, AboutModal.displayName, 'with-dark-theme')}
   />
 </Preview>
 

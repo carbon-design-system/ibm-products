@@ -17,7 +17,20 @@ export const getStorybookPrefix = (pkg, componentName) => {
     : storybookPrefixInternal;
 };
 
-export const getStorybookSlug = (pkg, componentName, scenario) => {
+/**
+ * A helper function to return the slug (structure path name reduced to lower
+ * case text and hyphens) which identifies story instances.
+ * @param {string} pkg The package settings instance.
+ * @param {string} folders The names of any sub-folders being used, or
+ * null/undefined if the component appears immediately within the category. The
+ * folders should be specified as a slug (all lower case, with hyphens rather
+ * than / to separate multiple folder levels).
+ * @param {string} componentName The name of the component.
+ * @param {string} scenario The scenario name, also as a slug.
+ * @returns
+ */
+export const getStorybookSlug = (pkg, folders, componentName, scenario) => {
+  const hfolders = folders ? folders + '-' : '';
   const lcName = componentName.toLocaleLowerCase();
   const state = pkg.isComponentEnabled(componentName, true)
     ? 'released'
@@ -25,5 +38,5 @@ export const getStorybookSlug = (pkg, componentName, scenario) => {
     ? 'canary'
     : 'internal';
 
-  return `cloud-cognitive-${state}-${lcName}--${scenario}`;
+  return `cloud-cognitive-${state}-${hfolders}${lcName}--${scenario}`;
 };

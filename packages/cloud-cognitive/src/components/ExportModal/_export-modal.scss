@@ -12,12 +12,18 @@
 @import 'carbon-components/scss/components/text-input/text-input';
 @import 'carbon-components/scss/components/radio-button/radio-button';
 @import 'carbon-components/scss/components/loading/loading';
+@import 'carbon-components/scss/components/button/button';
 
 @mixin export-modal {
   $block-class: #{$pkg-prefix}--export-modal;
 
+  .#{$block-class} .bx--modal-content {
+    padding-right: $spacing-05;
+  }
+
   .#{$block-class}__body {
     margin-bottom: $spacing-05;
+    padding-right: 20%;
   }
 
   .#{$block-class}__messaging {

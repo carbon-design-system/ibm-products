@@ -15,6 +15,7 @@ const componentName = ExportModal.displayName;
 const defaultProps = {
   body: 'body content',
   className: 'test-class',
+  iconDescription: 'close',
   errorMessage: 'an error occured',
   filename: '',
   inputLabel: 'file name',
@@ -66,12 +67,11 @@ describe(componentName, () => {
     };
 
     const { container } = render(<ExportModal {...props} />);
-    const submitBtn = container.querySelector('.bx--btn--primary');
     const textInput = container.querySelector('.bx--text-input');
 
     change(textInput, { target: { value: `${props.filename}.pdf` } });
     blur(textInput);
-    click(submitBtn);
+    click(screen.getByText(props.primaryButtonText));
     expect(onRequestSubmit).toBeCalled();
   });
 
@@ -106,18 +106,17 @@ describe(componentName, () => {
     };
 
     const { container } = render(<ExportModal {...props} />);
-    const submitBtn = container.querySelector('.bx--btn--primary');
     const textInput = container.querySelector('.bx--text-input');
 
     change(textInput, { target: { value: `${props.filename}` } });
     blur(textInput);
-    click(submitBtn);
+    click(screen.getByText(props.primaryButtonText));
     expect(onRequestSubmit).not.toBeCalled();
     screen.getByText(props.invalidInputText);
 
     change(textInput, { target: { value: `${props.filename}.mp3` } });
     blur(textInput);
-    click(submitBtn);
+    click(screen.getByText(props.primaryButtonText));
     expect(onRequestSubmit).not.toBeCalled();
     screen.getByText(props.invalidInputText);
   });
@@ -126,9 +125,11 @@ describe(componentName, () => {
     const { click } = fireEvent;
     const { fn } = jest;
     const onRequestSubmit = fn();
+    const onClose = fn();
     const props = {
       ...defaultProps,
       onRequestSubmit,
+      onClose,
       filename: 'test',
       preformattedExtensions: [
         {
@@ -143,15 +144,15 @@ describe(componentName, () => {
       preformattedExtensionsLabel: 'Choose an export format',
     };
 
-    const { container, getByText, getByLabelText } = render(
-      <ExportModal {...props} />
-    );
-    const submitBtn = container.querySelector('.bx--btn--primary');
+    const { getByLabelText } = render(<ExportModal {...props} />);
 
-    getByText(props.preformattedExtensionsLabel);
+    screen.getByText(props.preformattedExtensionsLabel);
     click(getByLabelText('BAR (best for integration server)'));
-    click(submitBtn);
+    click(screen.getByText(props.primaryButtonText));
     expect(onRequestSubmit).toBeCalledWith(`${props.filename}.bar`);
+
+    click(screen.getByText(props.secondaryButtonText));
+    expect(onClose).toBeCalled();
   });
 
   it('has no accessibility violations', async () => {

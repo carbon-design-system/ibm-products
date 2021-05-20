@@ -28,6 +28,7 @@ export default {
 
 const defaultProps = {
   filename: 'Sample02.pdf',
+  iconDescription: 'close',
   inputLabel: 'File name',
   onRequestClose: () => {},
   onRequestSubmit: () => {},
@@ -67,7 +68,7 @@ const TemplateWithState = (args) => {
       <ExportModal
         {...args}
         open={open}
-        onRequestClose={onCloseHandler}
+        onClose={onCloseHandler}
         onRequestSubmit={onSubmitHandler}
         loading={loading}
         successful={successful}

@@ -7,6 +7,7 @@
 
 import React, { useState, useRef, forwardRef } from 'react';
 import {
+  Button,
   ComposedModal,
   ModalHeader,
   ModalFooter,
@@ -33,11 +34,12 @@ export let ExportModal = forwardRef(
       error,
       errorMessage,
       filename,
+      iconDescription,
       inputLabel,
       invalidInputText,
       loading,
       loadingMessage,
-      onRequestClose,
+      onClose,
       onRequestSubmit,
       open,
       preformattedExtensions,
@@ -95,15 +97,15 @@ export let ExportModal = forwardRef(
     return (
       <ComposedModal
         {...rest}
-        open={open}
-        ref={ref}
         className={cx(blockClass, className)}
-        aria-label={title}>
-        <ModalHeader title={title} />
+        aria-label={title}
+        size="sm"
+        {...{ open, ref }}>
+        <ModalHeader {...{ title, iconDescription }} />
         <ModalBody>
           {!submitted && (
             <>
-              <p className={`${blockClass}__body`}>{body}</p>
+              {body && <p className={`${blockClass}__body`}>{body}</p>}
               {preformattedExtensions.length ? (
                 <FormGroup legendText={preformattedExtensionsLabel}>
                   <RadioButtonGroup
@@ -158,13 +160,18 @@ export let ExportModal = forwardRef(
           </div>
         </ModalBody>
         {!submitted && (
-          <ModalFooter
-            primaryButtonText={primaryButtonText}
-            secondaryButtonText={secondaryButtonText}
-            primaryButtonDisabled={primaryButtonDisabled}
-            onRequestClose={onRequestClose}
-            onRequestSubmit={onSubmitHandler}
-          />
+          <ModalFooter>
+            <Button type="button" kind="secondary" onClick={onClose}>
+              {secondaryButtonText}
+            </Button>
+            <Button
+              type="submit"
+              kind="primary"
+              onClick={onSubmitHandler}
+              disabled={primaryButtonDisabled}>
+              {primaryButtonText}
+            </Button>
+          </ModalFooter>
         )}
       </ComposedModal>
     );
@@ -194,7 +201,11 @@ ExportModal.propTypes = {
   /**
    * name of the file being exported
    */
-  filename: PropTypes.string,
+  filename: PropTypes.string.isRequired,
+  /**
+   * Provide a description for "close" icon that can be read by screen readers
+   */
+  iconDescription: PropTypes.string.isRequired,
   /**
    * label for the text input
    */
@@ -214,9 +225,9 @@ ExportModal.propTypes = {
   /**
    * Specify a handler for closing modal
    */
-  onRequestClose: PropTypes.func,
+  onClose: PropTypes.func,
   /**
-   * Specify a handler for "submitting" modal. Access the imported file via `file => {}`
+   * Specify a handler for "submitting" modal. Returns the file name
    */
   onRequestSubmit: PropTypes.func,
   /**
@@ -252,7 +263,7 @@ ExportModal.propTypes = {
   /**
    * The text displayed at the top of the modal
    */
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
   /**
    * array of valid extensions the file can have
    */

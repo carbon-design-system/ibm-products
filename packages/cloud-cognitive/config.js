@@ -29,7 +29,7 @@ export const getStorybookPrefix = (pkg, componentName) => {
  * @param {string} scenario The scenario name, also as a slug.
  * @returns
  */
-export const getStorybookSlug = (pkg, folders, componentName, scenario) => {
+export const getStorybookSlug = (pkg, componentName, scenario, folders) => {
   const hfolders = folders ? folders + '-' : '';
   const lcName = componentName.toLocaleLowerCase();
   const state = pkg.isComponentEnabled(componentName, true)

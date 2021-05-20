@@ -21,13 +21,13 @@ export const getStorybookPrefix = (pkg, componentName) => {
  * A helper function to return the slug (structure path name reduced to lower
  * case text and hyphens) which identifies story instances.
  * @param {string} pkg The package settings instance.
- * @param {string} folders The names of any sub-folders being used, or
- * null/undefined if the component appears immediately within the category. The
- * folders should be specified as a slug (all lower case, with hyphens rather
- * than / to separate multiple folder levels).
  * @param {string} componentName The name of the component.
  * @param {string} scenario The scenario name, also as a slug.
- * @returns
+ * @param {string} folders The names of any sub-folders being used. This param
+ * can be omitted (or falsy) if the component appears directly within the
+ * category. Where applicable, the folders should be specified as a slug (all
+ * lower case, with hyphens rather than / to separate multiple folder levels).
+ * @returns The story id.
  */
 export const getStorybookSlug = (pkg, componentName, scenario, folders) => {
   const hfolders = folders ? folders + '-' : '';

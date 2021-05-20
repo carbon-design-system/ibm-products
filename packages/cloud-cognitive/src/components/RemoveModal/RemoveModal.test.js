@@ -66,10 +66,10 @@ describe(componentName, () => {
     const { click } = userEvent;
     const { fn } = jest;
     const onRequestSubmit = fn();
-    const onRequestClose = fn();
+    const onClose = fn();
     const props = {
       ...defaultProps,
-      onRequestClose,
+      onClose,
       onRequestSubmit,
     };
 
@@ -78,7 +78,7 @@ describe(componentName, () => {
 
     expect(onRequestSubmit).toBeCalled();
     click(screen.getByText(props.secondaryButtonText));
-    expect(onRequestClose).toBeCalled();
+    expect(onClose).toBeCalled();
   });
 
   it('renders with text confirmation functionality', () => {

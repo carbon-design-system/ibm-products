@@ -26,6 +26,7 @@ export let TagSet = React.forwardRef(
       maxVisible,
       rightAlign,
       overflowAlign,
+      overflowClassName,
       overflowDirection,
       showAllModalHeading,
       showAllSearchLabel,
@@ -101,6 +102,7 @@ export let TagSet = React.forwardRef(
 
       newDisplayedTags.push(
         <TagSetOverflow
+          className={overflowClassName}
           onShowAllClick={handleShowAllClick}
           overflowTags={newOverflowTags}
           overflowAlign={overflowAlign}
@@ -116,6 +118,7 @@ export let TagSet = React.forwardRef(
       children,
       displayCount,
       overflowAlign,
+      overflowClassName,
       overflowDirection,
       showAllTagsLabel,
     ]);
@@ -230,6 +233,10 @@ TagSet.propTypes = {
    * overflowAlign from the standard tooltip
    */
   overflowAlign: PropTypes.oneOf(['start', 'center', 'end']),
+  /**
+   * overflowClassName for the tooltip popup
+   */
+  overflowClassName: PropTypes.string,
   /**
    * overflowDirection from the standard tooltip
    */

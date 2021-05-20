@@ -28,10 +28,10 @@ export let EmptyState = React.forwardRef(
       customIllustrationAltText,
       title,
       illustration,
-      illustrationSize,
       linkText,
       linkUrl,
       onActionEvent,
+      size,
       subtitle,
       ...rest
     },
@@ -44,7 +44,7 @@ export let EmptyState = React.forwardRef(
           alt={customIllustrationAltText}
           className={cx([
             `${blockClass}__illustration`,
-            `${blockClass}__illustration--${illustrationSize}`,
+            `${blockClass}__illustration--${size}`,
           ])}
         />
       );
@@ -66,6 +66,7 @@ export let EmptyState = React.forwardRef(
           linkText={linkText}
           linkUrl={linkUrl}
           onActionEvent={onActionEvent}
+          size={size}
           subtitle={subtitle}
           title={title}
         />
@@ -103,10 +104,6 @@ export const EmptyStateProps = {
    */
   illustration: PropTypes.string,
   /**
-   * Empty state illustration size
-   */
-  illustrationSize: PropTypes.oneOf(['lg', 'sm']),
-  /**
    * Empty state link text
    */
   linkText: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
@@ -119,6 +116,10 @@ export const EmptyStateProps = {
    */
   onActionEvent: PropTypes.func,
   /**
+   * Empty state size
+   */
+  size: PropTypes.oneOf(['lg', 'sm']),
+  /**
    * Empty state subtext
    */
   subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
@@ -129,7 +130,7 @@ export const EmptyStateProps = {
 };
 
 export const EmptyStateDefaultProps = {
-  illustrationSize: 'lg',
+  size: 'lg',
 };
 
 EmptyState.propTypes = EmptyStateProps;

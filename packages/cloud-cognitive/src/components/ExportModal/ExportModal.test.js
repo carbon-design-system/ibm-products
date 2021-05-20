@@ -9,7 +9,6 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { ExportModal } from '.';
 
 const componentName = ExportModal.displayName;

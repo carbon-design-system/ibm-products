@@ -27,11 +27,11 @@ export let NotificationsEmptyState = React.forwardRef(
       actionText,
       actionType,
       className,
-      illustrationSize,
       illustrationTheme,
       linkText,
       linkUrl,
       onActionEvent,
+      size,
       subtitle,
       title,
       ...rest
@@ -46,10 +46,7 @@ export let NotificationsEmptyState = React.forwardRef(
         }
         className={cx(blockClass, className)}
         ref={ref}>
-        <NotificationsIllustration
-          size={illustrationSize}
-          theme={illustrationTheme}
-        />
+        <NotificationsIllustration size={size} theme={illustrationTheme} />
         <EmptyStateContent
           actionIcon={actionIcon}
           actionText={actionText}
@@ -57,6 +54,7 @@ export let NotificationsEmptyState = React.forwardRef(
           linkText={linkText}
           linkUrl={linkUrl}
           onActionEvent={onActionEvent}
+          size={size}
           subtitle={subtitle}
           title={title}
         />
@@ -96,10 +94,6 @@ NotificationsEmptyState.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Empty state illustration size
-   */
-  illustrationSize: PropTypes.oneOf(['lg', 'sm']),
-  /**
    * Empty state illustration theme variations.
    * To ensure you use the correct themed illustrations, you can conditionally specify light or dark
    * based on your app's current theme value. Example:
@@ -118,6 +112,10 @@ NotificationsEmptyState.propTypes = {
    * Empty state action button handler
    */
   onActionEvent: PropTypes.func,
+  /**
+   * Empty state size
+   */
+  size: PropTypes.oneOf(['lg', 'sm']),
   /**
    * Empty state subtitle
    */

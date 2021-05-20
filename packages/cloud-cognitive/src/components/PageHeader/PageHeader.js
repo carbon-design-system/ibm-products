@@ -41,14 +41,15 @@ export let PageHeader = React.forwardRef(
       background,
       breadcrumbItems,
       className,
-      collapseExpandHeaderLabel,
       collapseHeader,
+      collapseHeaderLabel,
+      expandHeaderLabel,
+      collapseHeaderToggleWanted,
       preventBreadcrumbScroll,
       navigation,
       pageActions,
       pageHeaderOffset,
       preCollapseTitleRow,
-      showCollapseHeaderButton,
       subtitle,
       tags,
       title,
@@ -242,12 +243,13 @@ export let PageHeader = React.forwardRef(
       // NOTE: The buffer is used to add space between the bottom of the header and the last content
 
       // No navigation and title row not pre-collapsed
-      // and only one of tags or (subtitle or available space)
+      // and zero or one of tags or (subtitle or available space)
       setLastRowBufferActive(
-        !navigation &&
+        (!navigation &&
           !preCollapseTitleRow &&
           (title || pageActions) &&
-          !tags !== !(subtitle || availableSpace)
+          !tags) ||
+          !(subtitle || availableSpace)
       );
     }, [
       availableSpace,
@@ -332,25 +334,39 @@ export let PageHeader = React.forwardRef(
       tags,
     ]);
 
-    useEffect(() => {
-      setFullyCollapsed(
-        scrollYValue + metrics.headerTopValue + pageHeaderOffset >= 0
-      );
-    }, [metrics.headerTopValue, pageHeaderOffset, scrollYValue]);
-
     useWindowScroll(
       // on scroll or various layout changes check updates if needed
       ({ current }) => {
-        checkUpdateVerticalSpace();
+        const fullyCollapsed =
+          current.scrollY + metrics.headerTopValue + pageHeaderOffset >= 0;
+        setFullyCollapsed(fullyCollapsed);
+
+        // set offset for tagset tooltip
+        const tagsetTooltipOffset = fullyCollapsed
+          ? metrics.headerHeight + metrics.headerTopValue + pageHeaderOffset
+          : metrics.headerHeight + pageHeaderOffset;
+
+        document.documentElement.style.setProperty(
+          `--${blockClass}--tagset-tooltip-position`,
+          fullyCollapsed ? 'fixed' : 'absolute'
+        );
+
+        document.documentElement.style.setProperty(
+          `--${blockClass}--tagset-tooltip-offset`,
+          `${tagsetTooltipOffset}px`
+        );
+
         setScrollYValue(current.scrollY);
       },
       [
         actionBarItems,
         availableSpace,
         breadcrumbItems,
-        preventBreadcrumbScroll,
+        metrics.headerHeight,
+        metrics.headerTopValue,
         navigation,
         pageActions,
+        pageHeaderOffset,
         subtitle,
         tags,
         title,
@@ -438,7 +454,7 @@ export let PageHeader = React.forwardRef(
         [`--${blockClass}--background-opacity`]: result,
       }));
       setBackgroundOpacity(result);
-      setHasCollapseButton(showCollapseHeaderButton && result > 0);
+      setHasCollapseButton(collapseHeaderToggleWanted && result > 0);
     }, [
       actionBarItems,
       background,
@@ -447,7 +463,7 @@ export let PageHeader = React.forwardRef(
       metrics.headerHeight,
       navigation,
       scrollYValue,
-      showCollapseHeaderButton,
+      collapseHeaderToggleWanted,
       tags,
     ]);
 
@@ -691,7 +707,11 @@ export let PageHeader = React.forwardRef(
                       [`${blockClass}__navigation-tags--tags-only`]:
                         navigation === undefined,
                     })}>
-                    <TagSet overflowAlign="end">{tags}</TagSet>
+                    <TagSet
+                      overflowAlign="end"
+                      overflowClassName={`${blockClass}__tagset-tooltip`}>
+                      {tags}
+                    </TagSet>
                   </Column>
                 ) : null}
               </Row>
@@ -704,7 +724,9 @@ export let PageHeader = React.forwardRef(
               })}
               data-collapse={fullyCollapsed ? 'collapsed' : 'not collapsed'}
               hasIconOnly={true}
-              iconDescription={collapseExpandHeaderLabel}
+              iconDescription={
+                fullyCollapsed ? collapseHeaderLabel : expandHeaderLabel
+              }
               kind="ghost"
               onClick={handleCollapseToggle}
               renderIcon={ChevronUp16}
@@ -774,16 +796,28 @@ PageHeader.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Label/assistive text for the collapse/expand chevron
-   */
-  collapseExpandHeaderLabel: PropTypes.string,
-  /**
    * The header can as a whole be collapsed, expanded or somewhere in between.
    * This setting controls the initial value, but also takes effect on change
    *
    * NOTE: The header is collapsed by setting the scroll position to hide part of the header. Collapsing has no effect if there is insufficient content to scroll.
    */
   collapseHeader: PropTypes.bool,
+  /**
+   * Label/assistive text for the collapse/expand button
+   * Default 'Collapse'
+   */
+  collapseHeaderLabel: PropTypes.string,
+  /**
+   * Enable the collapse header toggle.
+   *
+   * NOTE: The header is collapsed by setting the scroll position to hide part of the header. Collapsing has no effect if there is insufficient content to scroll.
+   */
+  collapseHeaderToggleWanted: PropTypes.bool,
+  /**
+   * Label/assistive text for the collapse/expand button
+   * Default 'Expand'
+   */
+  expandHeaderLabel: PropTypes.string,
   /**
    * Content for the navigation area in the PageHeader. Should
    * be a React element that is normally a Carbon Tabs component. Optional.
@@ -829,12 +863,6 @@ PageHeader.propTypes = {
    */
   preventBreadcrumbScroll: PropTypes.bool,
   /**
-   * Show the collapse header button.
-   *
-   * NOTE: The header is collapsed by setting the scroll position to hide part of the header. Collapsing has no effect if there is insufficient content to scroll.
-   */
-  showCollapseHeaderButton: PropTypes.bool,
-  /**
    * A subtitle or description that provides additional context to
    * identify the current page. Optional.
    */
@@ -857,9 +885,10 @@ PageHeader.propTypes = {
 };
 
 PageHeader.defaultProps = {
-  background: false,
+  background: true,
   className: '',
-  collapseExpandHeaderLabel: 'Toggle expansion',
+  collapseHeaderLabel: 'Collapse',
+  expandHeaderLabel: 'Expand',
   preventBreadcrumbScroll: false,
   pageHeaderOffset: 0,
   preCollapseTitleRow: false,

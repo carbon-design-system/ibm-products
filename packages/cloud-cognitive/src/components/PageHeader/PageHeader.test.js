@@ -10,7 +10,6 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { pkg, carbon } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 
 import {
   BreadcrumbItem,
@@ -250,7 +249,7 @@ describe('PageHeader', () => {
     const header = screen.getByTestId(dataTestid);
     expect(header).toHaveClass(blockClass);
 
-    expect(header).not.toHaveClass(`${blockClass}--show-background`);
+    expect(header).toHaveClass(`${blockClass}--show-background`);
 
     expect(header).not.toHaveClass(classNames[0]);
     expect(header).not.toHaveClass(classNames[1]);
@@ -390,17 +389,15 @@ describe('PageHeader', () => {
     render(
       <PageHeader
         {...testProps}
-        showCollapseHeaderButton
+        collapseHeaderLabel="Toggle collapse"
+        expandHeaderLabel="Toggle expand"
+        collapseHeaderToggleWanted={true}
         data-testid={dataTestid}
       />
     );
 
-    // console.dir(screen.getByRole('region')); // section should be a region https://fae.disability.illinois.edu/rulesets/ROLE_5/
-    // const header = screen.getByTestId(dataTestid);
-    const collapseButton = screen.getByText('Toggle expansion');
+    const collapseButton = screen.getByText('Toggle collapse');
 
-    // const prevCalls = window.scrollTo.callCount;
-    // console.dir(window.scrollTo);
     window.scrollTo.mockReset();
     expect(window.scrollTo).not.toHaveBeenCalled();
     userEvent.click(collapseButton);

@@ -19,6 +19,7 @@ const blockClass = `${pkg.prefix}--tag-set`;
 export const TagSetOverflow = React.forwardRef(
   (
     {
+      className,
       overflowTags,
       onShowAllClick,
       overflowAlign,
@@ -52,7 +53,7 @@ export const TagSetOverflow = React.forwardRef(
         ref={overflowRef}>
         <Tooltip
           align={overflowAlign}
-          className={`${blockClass}__tooltip`}
+          className={cx(className, `${blockClass}__tooltip`)}
           direction={overflowDirection}
           onChange={handleChange}
           open={tipOpen}
@@ -86,6 +87,10 @@ export const TagSetOverflow = React.forwardRef(
 TagSetOverflow.displayName = componentName;
 
 TagSetOverflow.propTypes = {
+  /**
+   * className
+   */
+  className: PropTypes.string,
   /**
    * function to execute on clicking show all
    */

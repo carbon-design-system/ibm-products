@@ -6,7 +6,6 @@
 //
 
 import React from 'react';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { UserProfileImage } from '.';
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
@@ -15,6 +14,12 @@ import image from './headshot.png';
 import styles from './_storybook.scss'; // import storybook which includes component and additional storybook styles
 
 const storybookPrefix = getStorybookPrefix(pkg, 'UserProfileImage');
+const defaultArgs = {
+  backgroundColor: 'light-cyan',
+  theme: 'light',
+  size: 'xlg',
+};
+
 export default {
   title: `${storybookPrefix}/UserProfileImage`,
   component: UserProfileImage,
@@ -31,7 +36,7 @@ export default {
         options: ['light', 'dark'],
       },
     },
-    icon: {
+    kind: {
       control: {
         type: 'radio',
         options: ['user', 'group'],
@@ -40,7 +45,7 @@ export default {
     size: {
       control: {
         type: 'radio',
-        options: ['xl', 'lg', 'md', 'sm', 'xs'],
+        options: ['xlg', 'lg', 'md'],
       },
     },
   },
@@ -56,27 +61,35 @@ const Template = (args) => {
 
 export const Default = Template.bind({});
 Default.args = {
-  backgroundColor: 'light-cyan',
-  theme: 'light',
+  ...defaultArgs,
+  kind: 'user',
+  tooltipText: 'Thomas Watson',
 };
 
 export const WithGroupIcon = Template.bind({});
 WithGroupIcon.args = {
-  backgroundColor: 'light-cyan',
-  theme: 'light',
-  icon: 'group',
+  ...defaultArgs,
+  kind: 'group',
 };
 
 export const WithInitials = Template.bind({});
 WithInitials.args = {
-  backgroundColor: 'light-cyan',
-  theme: 'light',
+  ...defaultArgs,
   initials: 'thomas j. watson',
+  tooltipText: 'Thomas Watson',
 };
 
 export const WithImage = Template.bind({});
 WithImage.args = {
-  backgroundColor: 'light-cyan',
-  theme: 'light',
+  ...defaultArgs,
   image,
+  imageDescription: 'image here',
+};
+
+export const WithImageAndTooltip = Template.bind({});
+WithImageAndTooltip.args = {
+  ...defaultArgs,
+  image,
+  imageDescription: 'image here',
+  tooltipText: 'Display Name',
 };

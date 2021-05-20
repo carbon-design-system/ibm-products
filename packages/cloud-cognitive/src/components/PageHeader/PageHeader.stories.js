@@ -23,7 +23,6 @@ import { CheckmarkFilled16 } from '@carbon/icons-react';
 import { Lightning16, Bee24 } from '@carbon/icons-react';
 
 import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
 import { ActionBarItem } from '../ActionBar';
 import { PageHeader } from '.';
@@ -230,11 +229,38 @@ const manyTags = [
   <Tag type="magenta" key="magenta">
     Magenta
   </Tag>,
+  <Tag type="blue" key="blue">
+    Blue 2
+  </Tag>,
+  <Tag type="green" key="green">
+    Green 2
+  </Tag>,
+  <Tag type="warm-gray" key="warm-gray">
+    Warm gray 2
+  </Tag>,
+  <Tag type="purple" key="purple">
+    Purple 2
+  </Tag>,
+  <Tag type="red" key="red">
+    Red 2
+  </Tag>,
+  <Tag type="teal" key="teal">
+    Teal 2
+  </Tag>,
+  <Tag type="red" key="long-one">
+    Longer ThanAPieceOfString 2
+  </Tag>,
+  <Tag type="high-contrast" key="high-contrast">
+    High contrast 2
+  </Tag>,
+  <Tag type="magenta" key="magenta">
+    Magenta 2
+  </Tag>,
 ];
 
 const title = 'Page title';
 const longTitle =
-  'A very long page title that is going to exceed fifty-six characters and get truncated';
+  'A very long page title that is going to exceed 60% of the stage width and get truncated on large screens';
 
 // Template.
 const Template = (args) => {

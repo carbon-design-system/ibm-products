@@ -104,7 +104,8 @@ EmptyState.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Empty state illustration, specify the `src` for a provided illustration to be displayed.
+   * Empty state illustration, specify the `src` for a provided illustration to be displayed. In the case of requiring a light and dark illustration of your own, simply pass the corresponding illustration based on the current theme of your application.
+   * For example: `illustration={appTheme === 'dark' ? darkIllustration : lightIllustration}`
    */
   illustration: PropTypes.string,
 

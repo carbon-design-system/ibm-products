@@ -45,6 +45,7 @@ export let SidePanel = React.forwardRef(
       navigationBackIconDescription,
       onNavigationBack,
       onRequestClose,
+      onUnmount,
       open,
       pageContentSelector,
       placement,
@@ -289,7 +290,10 @@ export let SidePanel = React.forwardRef(
 
     // initialize the side panel to close
     const onAnimationEnd = () => {
-      if (!open) setRender(false);
+      if (!open) {
+        onUnmount && onUnmount();
+        setRender(false);
+      }
       sidePanelRef.current.style.overflow = 'auto';
       sidePanelRef.current.style.overflowX = 'hidden';
       setAnimationComplete(true);
@@ -644,6 +648,12 @@ SidePanel.propTypes = {
    * This handler closes the modal, e.g. changing `open` prop.
    */
   onRequestClose: PropTypes.func,
+
+  /**
+   * Optional function called when the side panel exit animation is complete.
+   * This handler can be used for any state cleanup needed before the panel is removed from the DOM.
+   */
+  onUnmount: PropTypes.func,
 
   /**
    * Determines whether the side panel should render or not

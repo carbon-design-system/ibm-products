@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.39.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.39.1...@carbon/ibm-cloud-cognitive@0.39.2) (2021-05-21)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.39.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.39.0...@carbon/ibm-cloud-cognitive@0.39.1) (2021-05-21)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+# [0.39.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.38.7...@carbon/ibm-cloud-cognitive@0.39.0) (2021-05-20)
+
+
+### Features
+
+* **SidePanel:** add optional onUnmount prop for cleanup ([#767](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/767)) ([d135ea0](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d135ea0b2c9ae9f8e415828a1199bbc80e545551))
+
+
+
+
+
 ## [0.38.7](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.38.6...@carbon/ibm-cloud-cognitive@0.38.7) (2021-05-19)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

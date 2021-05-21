@@ -270,11 +270,10 @@ export let PageHeader = React.forwardRef(
       // No navigation and title row not pre-collapsed
       // and zero or one of tags or (subtitle or available space)
       setLastRowBufferActive(
-        (!navigation &&
-          !preCollapseTitleRow &&
-          (title || pageActions) &&
-          !tags) ||
-          !(subtitle || availableSpace)
+        !(navigation || tags) &&
+          (((title || pageActions) && !preCollapseTitleRow) ||
+            subtitle ||
+            availableSpace)
       );
     }, [
       availableSpace,
@@ -557,11 +556,9 @@ export let PageHeader = React.forwardRef(
             {hasBreadcrumbRow ? (
               <Row
                 className={cx(`${blockClass}__breadcrumb-row`, {
-                  [`${blockClass}__breadcrumb-row--with-actions`]: hasActionBar,
                   [`${blockClass}__breadcrumb-row--next-to-tabs`]: nextToTabsCheck(),
                   [`${blockClass}__breadcrumb-row--has-breadcrumbs`]: breadcrumbItems,
-                  [`${blockClass}__breadcrumb-row--has-action-bar`]:
-                    actionBarItems || pageActions,
+                  [`${blockClass}__breadcrumb-row--has-action-bar`]: hasActionBar,
                 })}>
                 <div className={`${blockClass}__breadcrumb-row--container`}>
                   <Column

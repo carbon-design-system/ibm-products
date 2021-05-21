@@ -8,6 +8,7 @@
 import React from 'react';
 
 import { Tag } from 'carbon-components-react';
+import { types as tagTypes } from 'carbon-components-react/es/components/Tag/Tag';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
@@ -40,7 +41,6 @@ const ManyTagItems = [
   {
     label: 'Two',
     type: 'red',
-    filter: true,
   },
   {
     label: 'Three',
@@ -61,7 +61,6 @@ const ManyTagItems = [
   {
     label: 'Seven',
     type: 'cyan',
-    filter: true,
   },
   {
     label: 'Eight',
@@ -74,7 +73,6 @@ const ManyTagItems = [
   {
     label: 'Ten',
     type: 'blue',
-    filter: true,
   },
   {
     label: 'Eleven',
@@ -96,12 +94,10 @@ const ManyTagItems = [
   {
     label: 'Fifteen',
     type: 'blue',
-    filter: true,
   },
   {
     label: 'Sixteen',
     type: 'high-contrast',
-    filter: true,
   },
   {
     label: 'Seventeen',
@@ -110,7 +106,6 @@ const ManyTagItems = [
   {
     label: 'Eighteen',
     type: 'cyan',
-    filter: true,
   },
   {
     label: 'Nineteen',
@@ -120,11 +115,23 @@ const ManyTagItems = [
     label: 'Twenty',
     type: 'high-contrast',
   },
-].map(({ label, type, filter, dataSearch }) => (
-  <Tag key={label} data-search={dataSearch} {...{ filter, type }}>
+].map(({ label, type, dataSearch }) => (
+  <Tag key={label} data-search={dataSearch} type={type}>
     {label}
   </Tag>
 ));
+
+const HundredsOfItems = [];
+for (let i = 0; i < 200; i++) {
+  const label = `Label_${i + 1}`;
+  const type = tagTypes[i % tagTypes.length];
+
+  HundredsOfItems.push(
+    <Tag key={label} type={type}>
+      {label}
+    </Tag>
+  );
+}
 
 export default {
   title: `${storybookPrefix}/${TagSet.displayName}`,
@@ -139,7 +146,7 @@ export default {
     (story) => (
       <>
         <style>
-          {`.${blockClass}__show-all-modal { opacity: 0; visibility: hidden; /* prevents glitch storybook modal css load */ }`}
+          {`.${blockClass}__show-all-tags-modal { opacity: 0; visibility: hidden; /* prevents glitch storybook modal css load */ }`}
           ;
         </style>
         <div className={`${blockClass}__story-viewport`}>{story()}</div>
@@ -166,6 +173,12 @@ TagArray.args = {
 export const ManyTags = Template.bind({});
 ManyTags.args = {
   children: ManyTagItems,
+  containerWidth: 500,
+};
+
+export const HundredsOfTags = Template.bind({});
+HundredsOfTags.args = {
+  children: HundredsOfItems,
   containerWidth: 500,
 };
 

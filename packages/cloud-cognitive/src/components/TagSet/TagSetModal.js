@@ -8,7 +8,12 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { Modal, Search } from 'carbon-components-react';
+import {
+  ComposedModal,
+  ModalHeader,
+  ModalBody,
+  Search,
+} from 'carbon-components-react';
 
 import { pkg } from '../../settings';
 const componentName = 'TagSetModal';
@@ -53,25 +58,31 @@ export const TagSetModal = ({
   };
 
   return (
-    <Modal
-      className={`${blockClass}__show-all-modal`}
+    <ComposedModal
+      className={`${blockClass}__show-all-tags-modal`}
       open={open}
       passiveModal
       size="sm"
-      modalHeading={heading}
-      onRequestClose={onClose}>
-      <Search
-        data-modal-primary-focus
-        className={`${blockClass}__show-all-tags-search`}
-        labelText={searchLabel}
-        placeholder={searchPlaceholder}
-        onChange={handleSearch}
-        size="lg"
-      />
-      <div className={`${blockClass}__show-all-tags-content`}>
-        {filteredModalTags}
-      </div>
-    </Modal>
+      onClose={onClose}>
+      <ModalHeader title={heading}>
+        <Search
+          data-modal-primary-focus
+          className={`${blockClass}__show-all-tags-modal-search`}
+          labelText={searchLabel}
+          placeholder={searchPlaceholder}
+          onChange={handleSearch}
+          size="lg"
+        />
+      </ModalHeader>
+      <ModalBody
+        className={`${blockClass}__show-all-tags-modal-body-2`}
+        hasForm>
+        <div className={`${blockClass}__show-all-tags-modal-content`}>
+          {filteredModalTags}
+        </div>
+      </ModalBody>
+      <div className={`${blockClass}__show-all-tags-modal-fade`} />
+    </ComposedModal>
   );
 };
 

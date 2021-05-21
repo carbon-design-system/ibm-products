@@ -6,6 +6,7 @@
 //
 @import '../../global/styles/carbon-settings'; // goes before index as it affects how carbon is used.
 @import '../../global/styles/project-settings';
+@import '../../global/styles/mixins';
 
 @import 'carbon-components/scss/components/modal/modal';
 @import 'carbon-components/scss/components/search/search';
@@ -14,91 +15,126 @@
 
 $block-class: #{$pkg-prefix}--tag-set;
 
-.#{$block-class} {
-  display: block;
-  width: 100%;
+@mixin tag-set {
+  @include block-wrap($block-class) {
+    .#{$block-class} {
+      display: block;
+      width: 100%;
+    }
+
+    .#{$block-class}__space {
+      position: relative;
+      display: block;
+      width: 100%;
+      white-space: nowrap;
+    }
+
+    .#{$block-class}__space--right {
+      text-align: end;
+    }
+
+    .#{$block-class}__tag-container {
+      display: inline-flex; // needed to register a width
+      white-space: nowrap;
+    }
+
+    .#{$block-class}__tag-container--hidden {
+      // This tag container is used to measure the width of all displayable tags
+      @include measuring-container;
+    }
+
+    .#{$block-class}__overflow {
+      display: inline-block;
+      vertical-align: bottom;
+    }
+
+    .#{$block-class}__overflow--hidden {
+      max-width: 0;
+      overflow: hidden;
+      visibility: hidden;
+    }
+
+    .#{$block-class}__overflow-tag-item,
+    .#{$block-class}__overflow-tag-item .#{$prefix}--tag {
+      @include carbon--type-style('body-short-01');
+
+      min-width: initial;
+      min-height: initial;
+      margin: 0;
+      padding: 0;
+      color: inherit;
+      white-space: nowrap;
+      vertical-align: bottom;
+      background-color: inherit;
+    }
+
+    .#{$block-class}__overflow-tag .#{$carbon-prefix}--tag__close-icon {
+      // undo override by .bx--tooltip button
+      padding: 0;
+    }
+
+    .#{$block-class}__overflow-tag .#{$carbon-prefix}--tag--high-contrast {
+      color: $text-01;
+      background-color: $ui-background;
+    }
+
+    .#{$block-class}__overflow-tag .#{$carbon-prefix}--tag__close-icon:hover {
+      background-color: $hover-ui;
+    }
+
+    .#{$block-class}__overflow-tag .#{$carbon-prefix}--tag__close-icon:focus {
+      box-shadow: inset 0 0 0 2px $focus;
+    }
+
+    .#{$block-class}__show-all-tags-modal .#{$carbon-prefix}--modal-container {
+      height: 90%;
+      max-height: 450px;
+    }
+
+    .#{$block-class}__show-all-tags-modal-search {
+      margin-top: $spacing-05;
+      margin-bottom: 0;
+    }
+
+    .#{$block-class}__show-all-tags-modal
+      .#{$block-class}__show-all-tags-modal-fade {
+      position: relative;
+      margin-right: $spacing-05;
+      margin-left: $spacing-05;
+    }
+
+    .#{$block-class}__show-all-tags-modal .#{$carbon-prefix}--modal-content {
+      padding-bottom: #{$spacing-06};
+    }
+
+    .#{$block-class}__show-all-tags-modal .#{$carbon-prefix}--modal-header {
+      margin-right: $spacing-05;
+      padding-right: 0;
+    }
+
+    .#{$block-class}__show-all-tags-modal
+      .#{$block-class}__show-all-tags-modal-fade::after {
+      position: absolute;
+      top: calc(-1 * #{$spacing-11});
+      left: 0;
+      width: 100%;
+      height: $spacing-07;
+      background: linear-gradient(to bottom, transparent, $ui-01);
+      content: '';
+    }
+  }
+
+  .#{$block-class}__tooltip.#{$block-class}__tooltip {
+    // removes the min width in Carbon
+    min-width: initial;
+  }
+
+  .#{$block-class}__tooltip .#{$block-class}__show-all-tags-link {
+    display: inline-block;
+    margin: $spacing-03 0 $spacing-02; // to match the tags
+  }
 }
 
-.#{$block-class}__space {
-  position: relative;
-  display: block;
-  width: 100%;
-  white-space: nowrap;
-}
-
-.#{$block-class}__space--right {
-  text-align: end;
-}
-
-.#{$block-class}__tag-container {
-  display: inline-flex; // needed to register a width
-  white-space: nowrap;
-}
-
-.#{$block-class}__tag-container--hidden {
-  // This tag container is used to measure the width of all displayable tags
-  position: absolute;
-  top: -100vh;
-  left: -100vw;
-  width: 100%;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.#{$block-class}__overflow {
-  display: inline-block;
-  vertical-align: bottom;
-}
-
-.#{$block-class}__overflow--hidden {
-  max-width: 0;
-  overflow: hidden;
-  visibility: hidden;
-}
-
-.#{$block-class}__overflow-tag-item,
-.#{$block-class}__overflow-tag-item .#{$prefix}--tag {
-  @include carbon--type-style('body-short-01');
-
-  min-width: initial;
-  min-height: initial;
-  margin: 0;
-  padding: 0;
-  color: inherit;
-  white-space: nowrap;
-  vertical-align: bottom;
-  background-color: inherit;
-}
-
-.#{$block-class}__overflow-tag .#{$carbon-prefix}--tag__close-icon {
-  // undo override by .bx--tooltip button
-  padding: 0;
-}
-
-.#{$block-class}__overflow-tag .#{$carbon-prefix}--tag--high-contrast {
-  color: $text-01;
-  background-color: $ui-background;
-}
-
-.#{$block-class}__overflow-tag .#{$carbon-prefix}--tag__close-icon:hover {
-  background-color: $hover-ui;
-}
-
-.#{$block-class}__overflow-tag .#{$carbon-prefix}--tag__close-icon:focus {
-  box-shadow: inset 0 0 0 2px $focus;
-}
-
-.#{$block-class}__show-all-tags-link {
-  display: block;
-  margin: $spacing-02; // to match the tags
-  margin-left: 0;
-}
-
-.#{$block-class}__show-all-tags-search {
-  margin-bottom: $layout-01;
-}
-
-.#{$block-class}__tooltip {
-  // removes the min width in Carbon
-  min-width: initial;
+@include exports('tag-set') {
+  @include tag-set;
 }

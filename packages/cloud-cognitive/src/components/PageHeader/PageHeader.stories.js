@@ -258,9 +258,13 @@ const manyTags = [
   </Tag>,
 ];
 
-const title = 'Page title';
-const longTitle =
-  'A very long page title that is going to exceed 60% of the stage width and get truncated on large screens.';
+const title = { text: 'Page title', loading: false, icon: Bee24 };
+const longTitle = {
+  text:
+    'A very long page title that is going to exceed 60% of the stage width and get truncated on large screens',
+  loading: false,
+  icon: Bee24,
+};
 
 // Template.
 const Template = (args) => {
@@ -278,8 +282,7 @@ AllAttributesSet.args = {
   background: true,
   breadcrumbItems,
   actionBarItems,
-  title,
-  titleIcon: Bee24,
+  title: { text: 'wibble' },
   pageActions,
   subtitle,
   availableSpace: summaryDetails,

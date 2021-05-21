@@ -225,6 +225,7 @@ $raised-z-index: 99;
 
     .#{$block-class}__breadcrumb-title {
       position: relative;
+      width: 100%;
 
       &:not(.#{$block-class}__breadcrumb-title--pre-collapsed) {
         // stylelint-disable-next-line carbon/layout-token-use
@@ -311,6 +312,10 @@ $raised-z-index: 99;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
+    }
+
+    .#{$block-class}__title-skeleton {
+      height: $spacing-07;
     }
 
     .#{$block-class}__title--fades {

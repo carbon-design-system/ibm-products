@@ -664,7 +664,7 @@ export let PageHeader = React.forwardRef(
                       {TitleIcon && !titleLoading ? (
                         <TitleIcon className={`${blockClass}__title-icon`} />
                       ) : null}
-                      <span title={titleText}>
+                      <span title={!titleLoading ? titleText : null}>
                         {titleLoading ? (
                           <SkeletonText
                             className={`${blockClass}__title-skeleton`}

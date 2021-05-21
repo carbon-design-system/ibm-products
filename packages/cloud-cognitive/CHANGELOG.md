@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.39.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.39.4...@carbon/ibm-cloud-cognitive@0.39.5) (2021-05-21)
+
+
+### Bug Fixes
+
+* desdign review niggles ([#765](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/765)) ([46a353b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/46a353b8ba9f30657f1b7cd3808a978e5cc3869c))
+
+
+
+
+
 ## [0.39.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.39.3...@carbon/ibm-cloud-cognitive@0.39.4) (2021-05-21)
 
 

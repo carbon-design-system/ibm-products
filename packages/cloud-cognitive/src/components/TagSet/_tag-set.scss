@@ -54,38 +54,6 @@ $block-class: #{$pkg-prefix}--tag-set;
       visibility: hidden;
     }
 
-    .#{$block-class}__overflow-tag-item,
-    .#{$block-class}__overflow-tag-item .#{$prefix}--tag {
-      @include carbon--type-style('body-short-01');
-
-      min-width: initial;
-      min-height: initial;
-      margin: 0;
-      padding: 0;
-      color: inherit;
-      white-space: nowrap;
-      vertical-align: bottom;
-      background-color: inherit;
-    }
-
-    .#{$block-class}__overflow-tag .#{$carbon-prefix}--tag__close-icon {
-      // undo override by .bx--tooltip button
-      padding: 0;
-    }
-
-    .#{$block-class}__overflow-tag .#{$carbon-prefix}--tag--high-contrast {
-      color: $text-01;
-      background-color: $ui-background;
-    }
-
-    .#{$block-class}__overflow-tag .#{$carbon-prefix}--tag__close-icon:hover {
-      background-color: $hover-ui;
-    }
-
-    .#{$block-class}__overflow-tag .#{$carbon-prefix}--tag__close-icon:focus {
-      box-shadow: inset 0 0 0 2px $focus;
-    }
-
     .#{$block-class}__show-all-tags-modal {
       // not to be overridden by use in tag set
       white-space: initial;
@@ -130,14 +98,48 @@ $block-class: #{$pkg-prefix}--tag-set;
     }
   }
 
-  .#{$block-class}__tooltip.#{$block-class}__tooltip {
-    // removes the min width in Carbon
-    min-width: initial;
-  }
+  @include block-wrap('#{$block-class}__tooltip') {
+    &.#{$block-class}__tooltip {
+      // removes the min width in Carbon
+      min-width: initial;
+    }
 
-  .#{$block-class}__tooltip .#{$block-class}__show-all-tags-link {
-    display: inline-block;
-    margin: $spacing-03 0 $spacing-02; // to match the tags
+    .#{$block-class}__show-all-tags-link {
+      display: inline-block;
+      margin: $spacing-03 0 $spacing-02; // to match the tags
+    }
+
+    .#{$block-class}__overflow-tag-item,
+    .#{$block-class}__overflow-tag-item .#{$carbon-prefix}--tag {
+      @include carbon--type-style('body-short-01');
+
+      min-width: initial;
+      min-height: initial;
+      margin: 0;
+      padding: 0;
+      color: inherit;
+      white-space: nowrap;
+      vertical-align: bottom;
+      background-color: inherit;
+    }
+
+    .#{$block-class}__overflow-tag .#{$carbon-prefix}--tag__close-icon {
+      // undo override by .bx--tooltip button
+      padding: 0;
+    }
+
+    .#{$block-class}__overflow-tag .#{$carbon-prefix}--tag--high-contrast {
+      color: $text-01;
+      background-color: $ui-background;
+    }
+
+    .#{$block-class}__overflow-tag .#{$carbon-prefix}--tag__close-icon:hover {
+      background-color: $hover-ui;
+    }
+
+    .#{$block-class}__overflow-tag .#{$carbon-prefix}--tag__close-icon:focus {
+      box-shadow: inset 0 0 0 2px $focus;
+    }
   }
 }
 

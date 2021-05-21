@@ -30,7 +30,7 @@ const defaultProps = {
   filename: 'Sample02.pdf',
   iconDescription: 'close',
   inputLabel: 'File name',
-  onRequestClose: () => {},
+  onClose: () => {},
   onRequestSubmit: () => {},
   open: true,
   preventCloseOnClickOutside: true,

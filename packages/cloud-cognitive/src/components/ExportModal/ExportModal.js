@@ -44,6 +44,7 @@ export let ExportModal = forwardRef(
       open,
       preformattedExtensions,
       preformattedExtensionsLabel,
+      preventCloseOnClickOutside,
       primaryButtonText,
       secondaryButtonText,
       successMessage,
@@ -100,7 +101,7 @@ export let ExportModal = forwardRef(
         className={cx(blockClass, className)}
         aria-label={title}
         size="sm"
-        {...{ open, ref }}>
+        {...{ open, ref, preventCloseOnClickOutside, onClose }}>
         <ModalHeader {...{ title, iconDescription }} />
         <ModalBody>
           {!submitted && (
@@ -243,7 +244,14 @@ ExportModal.propTypes = {
       description: PropTypes.string,
     })
   ),
+  /**
+   * Label for the preformatted label form group
+   */
   preformattedExtensionsLabel: PropTypes.string,
+  /**
+   * Prevent closing on click outside of modal
+   */
+  preventCloseOnClickOutside: PropTypes.bool,
   /**
    * Specify the text for the primary button
    */

@@ -22,6 +22,7 @@ const defaultProps = {
   invalidInputText: 'invalid input',
   loadingMessage: 'loading...',
   open: true,
+  preventCloseOnClickOutside: true,
   primaryButtonText: 'primary button',
   secondaryButtonText: 'secondary button',
   successMessage: 'success',

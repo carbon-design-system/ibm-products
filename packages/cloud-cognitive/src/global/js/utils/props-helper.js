@@ -73,7 +73,11 @@ const deprecatePropInner = (validator, messageFunction, additionalInfo) => {
     return null;
   };
 
-  return PropTypes.oneOfType([deprecatePropValidator, validator]);
+  // first does the deprecation check and then calls original validator
+  return (
+    PropTypes.oneOfType([deprecatePropValidator]) ||
+    PropTypes.oneOfType([validator])
+  );
 };
 
 export const deprecatePropUsage = (validator, additionalInfo) => {

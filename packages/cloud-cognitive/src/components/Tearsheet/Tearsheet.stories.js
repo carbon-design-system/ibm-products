@@ -10,7 +10,6 @@ import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 
 import {
   Button,
@@ -276,9 +275,9 @@ tearsheet.args = {
   actions: 6,
 };
 
-export const withAllHeaderItems = Template.bind({});
-withAllHeaderItems.storyName = 'Tearsheet with navigation';
-withAllHeaderItems.args = {
+export const withNavigation = Template.bind({});
+withNavigation.storyName = 'Tearsheet with navigation';
+withNavigation.args = {
   closeIconDescription,
   description,
   label,

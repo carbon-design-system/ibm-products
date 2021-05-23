@@ -7,6 +7,7 @@
 
 export { AboutModal } from './AboutModal';
 export { ActionBarItem } from './ActionBar';
+export { ButtonMenu, ButtonMenuItem } from './ButtonMenu';
 export { ContextHeader } from './ContextHeader';
 export { CreateModal } from './CreateModal';
 export { CreateSidePanel } from './CreateSidePanel';
@@ -26,7 +27,7 @@ export { ImportModal } from './ImportModal';
 export { ModifiedTabs } from './ModifiedTabs';
 export { NotificationsPanel } from './NotificationsPanel';
 export { PageHeader } from './PageHeader';
-export { RemoveDeleteModal } from './RemoveDeleteModal';
+export { RemoveModal } from './RemoveModal';
 export { Saving } from './Saving';
 export { SidePanel } from './SidePanel';
 export { StatusIcon } from './StatusIcon';

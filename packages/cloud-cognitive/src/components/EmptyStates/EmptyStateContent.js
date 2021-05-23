@@ -11,6 +11,7 @@ import React from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
+import cx from 'classnames';
 
 // Carbon and package components we use.
 import { Button, Link } from 'carbon-components-react';
@@ -26,6 +27,7 @@ export const EmptyStateContent = ({
   linkText,
   linkUrl,
   onActionEvent,
+  size,
   subtitle,
   title,
 }) => {
@@ -34,12 +36,22 @@ export const EmptyStateContent = ({
       {typeof title !== 'string' ? (
         title
       ) : (
-        <h3 className={`${blockClass}__header`}>{title}</h3>
+        <h3
+          className={cx(`${blockClass}__header`, {
+            [`${blockClass}__header--small`]: size === 'sm',
+          })}>
+          {title}
+        </h3>
       )}
       {typeof subtitle !== 'string' ? (
         subtitle
       ) : (
-        <p className={`${blockClass}__subtext`}>{subtitle}</p>
+        <p
+          className={cx(`${blockClass}__subtitle`, {
+            [`${blockClass}__subtitle--small`]: size === 'sm',
+          })}>
+          {subtitle}
+        </p>
       )}
       {actionText && onActionEvent && (
         <Button
@@ -91,6 +103,10 @@ EmptyStateContent.propTypes = {
    * Empty state action button handler
    */
   onActionEvent: PropTypes.func,
+  /**
+   * Empty state size
+   */
+  size: PropTypes.oneOf(['lg', 'sm']),
   /**
    * Empty state subtitle
    */

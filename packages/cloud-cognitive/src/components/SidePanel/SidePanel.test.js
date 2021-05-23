@@ -13,7 +13,6 @@ import React from 'react';
 import { TextInput } from 'carbon-components-react';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { SidePanel } from '.';
 
 const blockClass = `${pkg.prefix}--side-panel`;
@@ -23,6 +22,7 @@ const sizes = ['xs', 'sm', 'md', 'lg', 'max'];
 const dataTestId = uuidv4();
 
 const onRequestCloseFn = jest.fn();
+const onUnmountFn = jest.fn();
 const renderSidePanel = ({ ...rest }, children = <p>test</p>) =>
   render(
     <SidePanel
@@ -54,7 +54,8 @@ const SlideIn = ({
       onRequestClose={onRequestCloseFn}
       slideIn
       pageContentSelector="#side-panel-test-page-content"
-      placement={placement}>
+      placement={placement}
+      onUnmount={onUnmountFn}>
       Content
     </SidePanel>
     <div id="side-panel-test-page-content" />
@@ -155,6 +156,7 @@ describe('SidePanel', () => {
     fireEvent.animationEnd(outerElement);
     const updatedStyles = getComputedStyle(pageContent);
     expect(updatedStyles.marginRight).toBe('0px');
+    expect(onUnmountFn).toHaveBeenCalled();
   });
 
   it('should render a right slide in panel version', async () => {

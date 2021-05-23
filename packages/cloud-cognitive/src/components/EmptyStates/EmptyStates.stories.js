@@ -9,7 +9,6 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add20 } from '@carbon/icons-react';
 import CustomIllustration from './story_assets/empty-state-bright-magnifying-glass.svg';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 import mdx from './EmptyState.mdx';
@@ -48,6 +47,11 @@ export default {
   },
 };
 
+const emptyStateCommonProps = {
+  title: 'Empty state title',
+  subtitle: 'Description text explaining why this section is empty.',
+};
+
 const Template = (args) => {
   return (
     <EmptyState
@@ -63,15 +67,19 @@ const Template = (args) => {
 };
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  ...emptyStateCommonProps,
+};
 
 export const WithCustomIllustration = Template.bind({});
 WithCustomIllustration.args = {
+  ...emptyStateCommonProps,
   illustration: CustomIllustration,
 };
 
 export const withAction = Template.bind({});
 withAction.args = {
+  ...emptyStateCommonProps,
   actionText: 'Create new',
   actionType: 'tertiary',
   onActionEvent: action('actionHandler'),
@@ -79,6 +87,7 @@ withAction.args = {
 
 export const withActionIconButton = Template.bind({});
 withActionIconButton.args = {
+  ...emptyStateCommonProps,
   actionText: 'Create new',
   actionType: 'tertiary',
   onActionEvent: action('actionHandler'),
@@ -87,12 +96,14 @@ withActionIconButton.args = {
 
 export const withLink = Template.bind({});
 withLink.args = {
+  ...emptyStateCommonProps,
   linkText: 'View documentation',
   linkUrl: 'https://www.carbondesignsystem.com',
 };
 
 export const withActionAndLink = Template.bind({});
 withActionAndLink.args = {
+  ...emptyStateCommonProps,
   actionText: 'Create new',
   actionType: 'tertiary',
   onActionEvent: action('actionHandler'),

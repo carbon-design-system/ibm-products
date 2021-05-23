@@ -3,6 +3,185 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.39.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.39.4...@carbon/ibm-cloud-cognitive@0.39.5) (2021-05-21)
+
+
+### Bug Fixes
+
+* desdign review niggles ([#765](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/765)) ([46a353b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/46a353b8ba9f30657f1b7cd3808a978e5cc3869c))
+
+
+
+
+
+## [0.39.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.39.3...@carbon/ibm-cloud-cognitive@0.39.4) (2021-05-21)
+
+
+### Bug Fixes
+
+* forgot to add onclose to export modal ([#776](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/776)) ([c381d93](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c381d93e123c33a600e7bf8dee0f3fd8c75767e6))
+
+
+
+
+
+## [0.39.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.39.2...@carbon/ibm-cloud-cognitive@0.39.3) (2021-05-21)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.39.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.39.1...@carbon/ibm-cloud-cognitive@0.39.2) (2021-05-21)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.39.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.39.0...@carbon/ibm-cloud-cognitive@0.39.1) (2021-05-21)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+# [0.39.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.38.7...@carbon/ibm-cloud-cognitive@0.39.0) (2021-05-20)
+
+
+### Features
+
+* **SidePanel:** add optional onUnmount prop for cleanup ([#767](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/767)) ([d135ea0](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d135ea0b2c9ae9f8e415828a1199bbc80e545551))
+
+
+
+
+
+## [0.38.7](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.38.6...@carbon/ibm-cloud-cognitive@0.38.7) (2021-05-19)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.38.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.38.5...@carbon/ibm-cloud-cognitive@0.38.6) (2021-05-19)
+
+
+### Bug Fixes
+
+* remove modal release feedback updates ([#757](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/757)) ([f6b97ba](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f6b97babd6f98da8f08ffbc3ddc24bac8f9b059e))
+
+
+
+
+
+## [0.38.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.38.4...@carbon/ibm-cloud-cognitive@0.38.5) (2021-05-19)
+
+
+### Bug Fixes
+
+* issues raised in page header design review ([#754](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/754)) ([13c5085](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/13c5085b6de50c01a942f71b66e80a9516167c42))
+
+
+
+
+
+## [0.38.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.38.3...@carbon/ibm-cloud-cognitive@0.38.4) (2021-05-19)
+
+
+### Bug Fixes
+
+* **Tearsheet:** fix background of pagination ([#747](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/747)) ([f3fd9f7](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f3fd9f72e751e8b955af854b3a3c72e5a593f01d))
+
+
+
+
+
+## [0.38.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.38.2...@carbon/ibm-cloud-cognitive@0.38.3) (2021-05-19)
+
+
+### Bug Fixes
+
+* **EmptyStates:** update stories and rename size prop ([#753](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/753)) ([c5e6bfb](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c5e6bfb912b5d8bc2ab143df87f2b615f35939ac))
+
+
+
+
+
+## [0.38.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.38.1...@carbon/ibm-cloud-cognitive@0.38.2) (2021-05-18)
+
+
+### Bug Fixes
+
+* **UserProfileImage:** updates based on release review notes ([#665](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/665)) ([7294117](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/7294117be66c99e6d1dfa4fa98810e7daf2f2ca4))
+
+
+
+
+
+## [0.38.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.38.0...@carbon/ibm-cloud-cognitive@0.38.1) (2021-05-18)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+# [0.38.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.37.3...@carbon/ibm-cloud-cognitive@0.38.0) (2021-05-18)
+
+
+### Features
+
+* stop tagset overflow scrolling off screen ([#740](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/740)) ([016a3ec](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/016a3ec8ee20691de3ee0d4eb4ea44912276e67f))
+
+
+
+
+
+## [0.37.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.37.2...@carbon/ibm-cloud-cognitive@0.37.3) (2021-05-18)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.37.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.37.1...@carbon/ibm-cloud-cognitive@0.37.2) (2021-05-17)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.37.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.37.0...@carbon/ibm-cloud-cognitive@0.37.1) (2021-05-14)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+# [0.37.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.36.24...@carbon/ibm-cloud-cognitive@0.37.0) (2021-05-14)
+
+
+### Bug Fixes
+
+* title and subtitle row responsivity ([#730](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/730)) ([03e6bf2](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/03e6bf28ac2999fc5ce1d94aace6aa8926931d10))
+
+
+### Features
+
+* show collapse button if requested ([#732](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/732)) ([05d7423](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/05d74236caf2f9d5e6d834a621ab9e708a9b1abb))
+
+
+
+
+
 ## [0.36.24](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.36.23...@carbon/ibm-cloud-cognitive@0.36.24) (2021-05-13)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

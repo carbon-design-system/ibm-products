@@ -19,10 +19,16 @@
 
   .#{$block-class} {
     .#{$block-class}__header,
-    .#{$block-class}__subtext,
+    .#{$block-class}__subtitle,
     p {
       margin: 0;
       padding-bottom: $spacing-02;
+    }
+    .#{$block-class}__header--small {
+      @include carbon--type-style('productive-heading-03');
+    }
+    .#{$block-class}__subtitle--small {
+      @include carbon--type-style('body-short-01');
     }
   }
 

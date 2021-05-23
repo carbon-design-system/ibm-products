@@ -11,13 +11,13 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import ReactResizeDetector from 'react-resize-detector';
 import { ButtonSet, Button } from 'carbon-components-react';
-
-import { TempComboButton } from './TempComboButton';
+import { ButtonMenu, ButtonMenuItem } from '../ButtonMenu';
 
 import { pkg, carbon } from '../../settings';
 import {
   deprecateProp,
   extractShapesArray,
+  prepareProps,
 } from '../../global/js/utils/props-helper';
 const blockClass = `${pkg.prefix}--button-set-with-overflow`;
 const componentName = 'ButtonSetWithOverflow';
@@ -28,6 +28,7 @@ export const ButtonSetWithOverflow = ({
   className,
   onWidthChange,
   pageActionsLabel,
+  rightAlign,
   size,
 }) => {
   const [showAsOverflow, setShowAsOverflow] = useState(false);
@@ -107,23 +108,32 @@ export const ButtonSetWithOverflow = ({
       </ButtonSet>
     );
   });
-  const ATempComboButton = React.forwardRef(
-    ({ buttons, size, ...rest }, ref) => {
-      return (
-        <TempComboButton
-          {...rest}
-          buttons={buttons}
-          size={size}
-          ref={ref}
-          label={pageActionsLabel}
-        />
-      );
-    }
-  );
+  const AButtonMenu = React.forwardRef(({ buttons, ...rest }, ref) => {
+    return (
+      <ButtonMenu {...rest} ref={ref} label={pageActionsLabel}>
+        {buttons
+          .map(({ label, kind, ...other }, index) => (
+            <ButtonMenuItem
+              key={index}
+              isDelete={kind === 'danger'}
+              itemText={label}
+              {...prepareProps(other, ['iconDescription', 'renderIcon'])}
+            />
+          ))
+          .reverse()}
+      </ButtonMenu>
+    );
+  });
 
   return (
     <ReactResizeDetector handleWidth={true} onResize={handleResize}>
-      <div className={cx([blockClass, className])} ref={spaceAvailableRef}>
+      <div
+        className={cx([
+          blockClass,
+          className,
+          { [`${blockClass}--right`]: rightAlign },
+        ])}
+        ref={spaceAvailableRef}>
         <ReactResizeDetector onResize={handleButtonResize}>
           <div
             className={`${blockClass}__button-container ${blockClass}__button-container--hidden`}>
@@ -140,12 +150,12 @@ export const ButtonSetWithOverflow = ({
             ref={sizingContainerRefCombo}
             className={`${blockClass}__button-container ${blockClass}__button-container--hidden`}
             aria-hidden={true}>
-            <ATempComboButton buttons={itemArray} size={size} />
+            <AButtonMenu buttons={itemArray} size={size} />
           </div>
         </ReactResizeDetector>
 
         {showAsOverflow ? (
-          <ATempComboButton buttons={itemArray} size={size} />
+          <AButtonMenu buttons={itemArray} size={size} />
         ) : (
           <AButtonSet
             className={`${blockClass}__button-container`}
@@ -196,6 +206,10 @@ ButtonSetWithOverflow.propTypes = {
    * pageActionsLabel - used when button set is shown as combo button
    */
   pageActionsLabel: PropTypes.node,
+  /**
+   * align buttons to right of available space
+   */
+  rightAlign: PropTypes.bool,
   /**
    * Specify the size of the button, from a list of available sizes.
    * For `default` buttons, this prop can remain unspecified.

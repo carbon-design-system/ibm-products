@@ -26,7 +26,6 @@ import {
 import styles from './_storybook-styles.scss';
 
 const storybookPrefix = getStorybookPrefix(pkg, EmptyState.displayName);
-console.log(EmptyState.displayName, storybookPrefix);
 
 export default {
   title: `${storybookPrefix}/EmptyStates/EmptyState`,
@@ -75,39 +74,49 @@ export const WithCustomIllustration = Template.bind({});
 WithCustomIllustration.args = {
   ...emptyStateCommonProps,
   illustration: CustomIllustration,
+  illustrationDescription: 'Test alt text',
 };
 
 export const withAction = Template.bind({});
 withAction.args = {
   ...emptyStateCommonProps,
-  actionText: 'Create new',
-  actionType: 'tertiary',
-  onActionEvent: action('actionHandler'),
+  action: {
+    text: 'Create new',
+    onClick: action('Clicked empty state action button'),
+  },
 };
 
 export const withActionIconButton = Template.bind({});
 withActionIconButton.args = {
   ...emptyStateCommonProps,
-  actionText: 'Create new',
-  actionType: 'tertiary',
-  onActionEvent: action('actionHandler'),
-  actionIcon: Add20,
+  action: {
+    text: 'Create new',
+    onClick: action('Clicked empty state action button'),
+    renderIcon: Add20,
+    iconDescription: 'Add icon',
+  },
 };
 
 export const withLink = Template.bind({});
 withLink.args = {
   ...emptyStateCommonProps,
-  linkText: 'View documentation',
-  linkUrl: 'https://www.carbondesignsystem.com',
+  link: {
+    text: 'View documentation',
+    href: 'https://www.carbondesignsystem.com',
+  },
 };
 
 export const withActionAndLink = Template.bind({});
 withActionAndLink.args = {
   ...emptyStateCommonProps,
-  actionText: 'Create new',
-  actionType: 'tertiary',
-  onActionEvent: action('actionHandler'),
-  actionIcon: Add20,
-  linkText: 'View documentation',
-  linkUrl: 'https://www.carbondesignsystem.com',
+  action: {
+    text: 'Create new',
+    onClick: action('Clicked empty state action button'),
+    renderIcon: Add20,
+    iconDescription: 'Add icon',
+  },
+  link: {
+    text: 'View documentation',
+    href: 'https://www.carbondesignsystem.com',
+  },
 };

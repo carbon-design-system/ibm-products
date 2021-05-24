@@ -280,7 +280,7 @@ describe('SidePanel', () => {
       ],
     });
     expect(error).toBeCalledWith(
-      expect.stringContaining('`actions` supplied to `SidePanel`')
+      expect.stringContaining('`actions` supplied to `SidePanel`: you cannot')
     );
     error.mockRestore();
   });

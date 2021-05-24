@@ -60,10 +60,9 @@ export const TagSetModal = ({
   return (
     <ComposedModal
       className={`${blockClass}__show-all-tags-modal`}
-      open={open}
       passiveModal
       size="sm"
-      onClose={onClose}>
+      {...{ open, onClose }}>
       <ModalHeader title={heading}>
         <Search
           data-modal-primary-focus

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import React from 'react';
 import { APIKeyModal } from '.';
 
@@ -58,6 +58,8 @@ const standardProps = {
   open: true,
 };
 
+URL.createObjectURL = jest.fn(() => Promise.resolve('download-link'));
+
 describe(name, () => {
   it('renders with minimal setup', () => {
     const { click } = fireEvent;
@@ -67,7 +69,7 @@ describe(name, () => {
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith('123-456-789');
   });
 
-  it('renders with standard setup', () => {
+  it('renders with standard setup', async () => {
     const { click, change } = fireEvent;
     const { fn } = jest;
     const onRequestSubmit = fn();
@@ -90,6 +92,7 @@ describe(name, () => {
     rerender(<APIKeyModal {...props} loading />);
     expect(getByText(props.loadingMessage)).toBeVisible();
     rerender(<APIKeyModal {...props} apiKey="444-444-444-444" />);
+    await waitFor(() => getByText(props.downloadLinkText));
     const copyBtn = getByText('Copy');
     click(copyBtn);
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(

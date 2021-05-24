@@ -20,51 +20,34 @@ import { Button, Link } from 'carbon-components-react';
 const blockClass = `${pkg.prefix}--empty-state`;
 const componentName = 'EmptyStateContent';
 
-export const EmptyStateContent = ({
-  actionText,
-  actionType,
-  actionIcon,
-  linkText,
-  linkUrl,
-  onActionEvent,
-  size,
-  subtitle,
-  title,
-}) => {
+export const EmptyStateContent = ({ action, link, size, subtitle, title }) => {
   return (
     <>
-      {typeof title !== 'string' ? (
-        title
-      ) : (
-        <h3
-          className={cx(`${blockClass}__header`, {
-            [`${blockClass}__header--small`]: size === 'sm',
-          })}>
-          {title}
-        </h3>
-      )}
-      {typeof subtitle !== 'string' ? (
-        subtitle
-      ) : (
-        <p
-          className={cx(`${blockClass}__subtitle`, {
-            [`${blockClass}__subtitle--small`]: size === 'sm',
-          })}>
-          {subtitle}
-        </p>
-      )}
-      {actionText && onActionEvent && (
+      <h3
+        className={cx(`${blockClass}__header`, {
+          [`${blockClass}__header--small`]: size === 'sm',
+        })}>
+        {title}
+      </h3>
+      <p
+        className={cx(`${blockClass}__subtitle`, {
+          [`${blockClass}__subtitle--small`]: size === 'sm',
+        })}>
+        {subtitle}
+      </p>
+      {action?.text && action?.onClick && (
         <Button
+          {...action}
           className={`${blockClass}__action-button`}
-          kind={actionType || 'tertiary'}
-          onClick={onActionEvent}
-          renderIcon={actionIcon || null}>
-          {actionText}
+          kind={action.kind || 'tertiary'}
+          onClick={action.onClick}
+          renderIcon={action.renderIcon || null}>
+          {action.text}
         </Button>
       )}
-      {linkText && linkUrl && (
-        <Link className={`${blockClass}__link`} href={linkUrl}>
-          {linkText}
+      {link?.text && link?.href && (
+        <Link {...link} className={`${blockClass}__link`} href={link.href}>
+          {link.text}
         </Link>
       )}
     </>
@@ -80,29 +63,24 @@ EmptyStateContent.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 EmptyStateContent.propTypes = {
   /**
-   * Empty state action button icon
+   * Empty state action button
    */
-  actionIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  action: PropTypes.shape({
+    ...Button.propTypes,
+    iconDescription: PropTypes.string,
+    kind: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
+    renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    onClick: Button.propTypes.onClick,
+    text: PropTypes.string,
+  }),
   /**
-   * Empty state action button text
+   * Empty state link object
    */
-  actionText: PropTypes.string,
-  /**
-   * Empty state action button type
-   */
-  actionType: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
-  /**
-   * Empty state link text
-   */
-  linkText: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  /**
-   * Empty state link url
-   */
-  linkUrl: PropTypes.string,
-  /**
-   * Empty state action button handler
-   */
-  onActionEvent: PropTypes.func,
+  link: PropTypes.shape({
+    ...Link.propTypes,
+    text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+    href: PropTypes.string,
+  }),
   /**
    * Empty state size
    */

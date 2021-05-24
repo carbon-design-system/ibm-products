@@ -17,7 +17,7 @@ const defaultProps = {
   linkText: 'download',
 };
 
-global.URL.createObjectURL = jest.fn(() => Promise.resolve('download-link'));
+URL.createObjectURL = jest.fn(() => Promise.resolve('download-link'));
 
 describe(name, () => {
   test('renders with minimal setup', async () => {

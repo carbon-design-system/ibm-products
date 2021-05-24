@@ -81,7 +81,7 @@ describe(componentName, () => {
     expect(buttons[1].textContent).toEqual(label1);
   });
 
-  it('rejects too many buttons', () => {
+  it('rejects too many buttons using the custom validator', () => {
     const error = jest.spyOn(console, 'error').mockImplementation(() => {});
     render(
       <ActionSet

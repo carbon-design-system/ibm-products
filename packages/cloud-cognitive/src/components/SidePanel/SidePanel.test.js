@@ -268,6 +268,23 @@ describe('SidePanel', () => {
     ).toBeTruthy();
   });
 
+  it('rejects too many buttons using the custom validator', () => {
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+    renderSidePanel({
+      actions: [
+        { kind: 'primary' },
+        { kind: 'primary' },
+        { kind: 'ghost' },
+        { kind: 'ghost' },
+        { kind: 'danger' },
+      ],
+    });
+    expect(error).toBeCalledWith(
+      expect.stringContaining('`actions` supplied to `SidePanel`')
+    );
+    error.mockRestore();
+  });
+
   it('should render navigation button', () => {
     const { container } = renderSidePanel({
       currentStep: 1,

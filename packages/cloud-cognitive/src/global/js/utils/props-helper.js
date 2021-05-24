@@ -9,6 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import unwrapIfFragment from './unwrap-if-fragment';
+import pconsole from './pconsole';
 
 // helper functions for component props
 
@@ -114,3 +115,69 @@ export const extractShapesArray = (items) => {
 
   return Array.isArray(items) ? items : [];
 };
+
+/**
+ * A prop-types validation function that takes an array of type checkers and
+ * requires prop values to satisfy all of the type checkers. This can be useful
+ * to combine custom validation functions with regular prop types, or for
+ * combining inherited prop-types from another component with tighter
+ * requirements.
+ *
+ * Examples:
+ *
+ * MyComponent.propTypes = {
+ *
+ *   foo: allPropTypes([
+ *     customValidationFunction,
+ *     PropTypes.arrayOf(
+ *       PropTypes.shape({
+ *         text: PropType.string
+ *       })
+ *     )
+ *   ]),
+ *
+ *   kind: allPropTypes([
+ *     Button.propTypes.kind,
+ *     PropTypes.oneOf('primary', 'secondary')
+ *   ]),
+ *
+ * }
+ */
+export const allPropTypes = pconsole.shimIfProduction((arrayOfTypeCheckers) => {
+  if (!Array.isArray(arrayOfTypeCheckers)) {
+    pconsole.error(
+      'Warning: Invalid argument supplied to allPropTypes, expected an instance of array.'
+    );
+    return pconsole.noop;
+  }
+
+  for (let i = 0; i < arrayOfTypeCheckers.length; i++) {
+    if (typeof arrayOfTypeCheckers[i] !== 'function') {
+      pconsole.error(
+        `Invalid argument supplied to oneOfType. Expected an array of check functions, but received ${arrayOfTypeCheckers[i]} at index ${i}.`
+      );
+      return pconsole.noop;
+    }
+  }
+
+  const checkType = (...args) => {
+    let error = null;
+    arrayOfTypeCheckers.some((checker) => (error = checker(...args)));
+    return error;
+  };
+
+  checkType.isRequired = (props, propName, comp, loc, propFullName, secret) => {
+    const prop = propFullName || propName;
+    return props[prop] == null
+      ? new Error(
+          `The ${loc} \`${prop}\` is marked as required in \`${
+            comp || '<<anonymous>>'
+          }\`, but its value is \`${
+            props[prop] === null ? 'null' : 'undefined'
+          }\`.`
+        )
+      : checkType(props, prop, comp, loc, propFullName, secret);
+  };
+
+  return checkType;
+});

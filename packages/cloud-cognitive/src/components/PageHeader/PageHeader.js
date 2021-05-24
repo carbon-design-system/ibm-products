@@ -28,12 +28,17 @@ import { ChevronUp16 } from '@carbon/icons-react';
 import {
   deprecateProp,
   deprecatePropUsage,
-  extractShapesArray,
   prepareProps,
 } from '../../global/js/utils/props-helper';
 
 const componentName = 'PageHeader';
 const blockClass = `${pkg.prefix}--page-header`;
+
+import {
+  useActionBar,
+  usePageActionsItemArray,
+  useTitleShape,
+} from './usesPageHeader';
 
 export let PageHeader = React.forwardRef(
   (
@@ -60,9 +65,15 @@ export let PageHeader = React.forwardRef(
     },
     ref
   ) => {
-    const [hasActionBar, setHasActionBar] = useState(false);
-    const [actionBarItemArray, setActionBarItemArray] = useState([]);
-    const [pageActionsItemArray, setPageActionsItemArray] = useState([]);
+    const { hasActionBar, actionBarItemArray } = useActionBar(actionBarItems);
+    const pageActionsItemArray = usePageActionsItemArray(pageActions);
+    /* Title shape is used to allow title to be string or shape */
+    const titleShape = useTitleShape(
+      title,
+      titleIcon,
+      PageHeader.defaultProps.title
+    );
+
     const [metrics, setMetrics] = useState({});
     const [scrollYValue, setScrollYValue] = useState(0);
     const [componentCssCustomProps, setComponentCssCustomProps] = useState({});
@@ -91,29 +102,6 @@ export let PageHeader = React.forwardRef(
     ] = useState(0);
     const [actionBarColumnWidth, setActionBarColumnWidth] = useState(0);
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
-
-    /**
-     * * Title shape is used to allow title to be string or shape
-     */
-    const [titleShape, setTitleShape] = useState({});
-    useEffect(() => {
-      let newShape = { ...PageHeader.defaultProps.title };
-
-      if (title?.text) {
-        // title is in shape format
-        newShape = Object.assign(newShape, { ...title });
-      } else {
-        // title is a string
-        newShape.text = title;
-      }
-
-      if (!newShape.icon && titleIcon) {
-        // if no icon use titleIcon if supplied
-        newShape.icon = titleIcon;
-      }
-
-      setTitleShape(newShape);
-    }, [title, titleIcon]);
 
     useEffect(() => {
       let newActionBarWidth = 'initial';
@@ -419,19 +407,6 @@ export let PageHeader = React.forwardRef(
         !(breadcrumbItems === undefined && actionBarItems === undefined)
       );
     }, [actionBarItems, breadcrumbItems]);
-
-    useEffect(() => {
-      const newShapes = extractShapesArray(actionBarItems);
-      setHasActionBar(newShapes.length);
-      setActionBarItemArray(newShapes);
-    }, [actionBarItems]);
-
-    useEffect(() => {
-      const shapes = extractShapesArray(pageActions);
-      setPageActionsItemArray(
-        shapes?.map((shape) => ({ label: shape.children, ...shape }))
-      );
-    }, [pageActions]);
 
     useEffect(() => {
       // Determines the amount of space needed below the title

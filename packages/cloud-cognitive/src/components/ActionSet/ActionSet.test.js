@@ -89,7 +89,7 @@ describe(componentName, () => {
       />
     );
     expect(error).toBeCalledWith(
-      expect.stringContaining('`actions` supplied to `ActionSet`')
+      expect.stringContaining('`actions` supplied to `ActionSet`: you cannot')
     );
     error.mockRestore();
   });

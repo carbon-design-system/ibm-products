@@ -74,7 +74,7 @@ const deprecatePropInner = (validator, messageFunction, additionalInfo) => {
     return null;
   };
 
-  return PropTypes.oneOfType([deprecatePropValidator, validator]);
+  return allPropTypes([deprecatePropValidator, validator]);
 };
 
 export const deprecatePropUsage = (validator, additionalInfo) => {
@@ -154,7 +154,7 @@ export const allPropTypes = pconsole.shimIfProduction((arrayOfTypeCheckers) => {
   for (let i = 0; i < arrayOfTypeCheckers.length; i++) {
     if (typeof arrayOfTypeCheckers[i] !== 'function') {
       pconsole.error(
-        `Invalid argument supplied to oneOfType. Expected an array of check functions, but received ${arrayOfTypeCheckers[i]} at index ${i}.`
+        `Invalid argument supplied to allPropTypes. Expected an array of check functions, but received ${arrayOfTypeCheckers[i]} at index ${i}.`
       );
       return pconsole.noop;
     }

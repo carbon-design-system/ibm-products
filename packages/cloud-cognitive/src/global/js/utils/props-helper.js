@@ -6,7 +6,6 @@
 //
 
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import unwrapIfFragment from './unwrap-if-fragment';
 import pconsole from './pconsole';

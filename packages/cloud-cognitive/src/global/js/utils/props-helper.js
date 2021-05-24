@@ -63,7 +63,7 @@ const deprecatePropInner = (validator, messageFunction, additionalInfo) => {
     location,
     propFullName
   ) => {
-    if (props[name] !== null) {
+    if (props[name] != null) {
       const info = additionalInfo ? ` ${additionalInfo}` : '';
       console.warn(
         messageFunction(location, propFullName || name, componentName, info)

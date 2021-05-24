@@ -36,7 +36,10 @@ const blockClass = `${pkg.prefix}--page-header`;
 
 import {
   useActionBar,
+  useHasBreadcrumbRow,
+  usePageActionsInBreadcrumbRow,
   usePageActionsItemArray,
+  useSpacingBelowTitle,
   useTitleShape,
 } from './usesPageHeader';
 
@@ -66,7 +69,25 @@ export let PageHeader = React.forwardRef(
     ref
   ) => {
     const { hasActionBar, actionBarItemArray } = useActionBar(actionBarItems);
+    const hasBreadcrumbRow = useHasBreadcrumbRow(
+      actionBarItems,
+      breadcrumbItems
+    );
+    const pageActionsInBreadcrumbRow = usePageActionsInBreadcrumbRow(
+      hasActionBar,
+      metrics.breadcrumbRowSpaceBelow,
+      metrics.titleRowSpaceAbove,
+      preCollapseTitleRow,
+      scrollYValue
+    );
     const pageActionsItemArray = usePageActionsItemArray(pageActions);
+    const spacingBelowTitle = useSpacingBelowTitle(
+      availableSpace,
+      tags,
+      navigation,
+      subtitle,
+      pageActions
+    );
     /* Title shape is used to allow title to be string or shape */
     const titleShape = useTitleShape(
       title,
@@ -77,12 +98,6 @@ export let PageHeader = React.forwardRef(
     const [metrics, setMetrics] = useState({});
     const [scrollYValue, setScrollYValue] = useState(0);
     const [componentCssCustomProps, setComponentCssCustomProps] = useState({});
-    const [hasBreadcrumbRow, setHasBreadcrumbRow] = useState(false);
-    const [spacingBelowTitle, setSpacingBelowTitle] = useState('06');
-    const [
-      pageActionsInBreadcrumbRow,
-      setPageActionsInBreadcrumbRow,
-    ] = useState(false);
     const [backgroundOpacity, setBackgroundOpacity] = useState(0);
     const [hasCollapseButton, setHasCollapseButton] = useState(false);
     const [spaceForCollapseButton, setSpaceForCollapseButton] = useState(false);
@@ -275,20 +290,6 @@ export let PageHeader = React.forwardRef(
     ]);
 
     useEffect(() => {
-      // Determine the location of the pageAction buttons
-      setPageActionsInBreadcrumbRow(
-        preCollapseTitleRow ||
-          (scrollYValue > metrics.titleRowSpaceAbove && hasActionBar)
-      );
-    }, [
-      hasActionBar,
-      metrics.breadcrumbRowSpaceBelow,
-      metrics.titleRowSpaceAbove,
-      preCollapseTitleRow,
-      scrollYValue,
-    ]);
-
-    useEffect(() => {
       // Updates custom CSS props used to manage scroll behaviour
       setComponentCssCustomProps((prevCSSProps) => {
         return {
@@ -399,33 +400,6 @@ export let PageHeader = React.forwardRef(
       tags,
       title,
     ]);
-
-    useEffect(() => {
-      // Breadcrumb row only rendered if true
-      // eslint-disable-next-line
-      setHasBreadcrumbRow(
-        !(breadcrumbItems === undefined && actionBarItems === undefined)
-      );
-    }, [actionBarItems, breadcrumbItems]);
-
-    useEffect(() => {
-      // Determines the amount of space needed below the title
-      let belowTitleSpace = 'default';
-
-      if (
-        pageActions !== undefined &&
-        navigation !== undefined &&
-        subtitle === undefined &&
-        availableSpace === undefined
-      ) {
-        belowTitleSpace = '06';
-      } else if (subtitle !== undefined || availableSpace !== undefined) {
-        belowTitleSpace = '03';
-      } else if (navigation === undefined && tags !== undefined) {
-        belowTitleSpace = '05';
-      }
-      setSpacingBelowTitle(belowTitleSpace);
-    }, [availableSpace, tags, navigation, subtitle, pageActions]);
 
     useEffect(() => {
       // Determines if the background should be one based on the header height or scroll

@@ -169,7 +169,10 @@ $raised-z-index: 99;
     .#{$block-class}__breadcrumb-column {
       flex: 0 0 100%;
       max-width: 100%;
-      overflow: hidden; /* required for ellipsis in title */
+
+      @include carbon--breakpoint(md) {
+        overflow: hidden; /* required for ellipsis in title, title not visible in breadcrumb with back arrow */
+      }
     }
 
     .#{$block-class}__breadcrumb-row--has-action-bar

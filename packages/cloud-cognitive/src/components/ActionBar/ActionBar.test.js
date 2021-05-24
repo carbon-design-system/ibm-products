@@ -32,7 +32,7 @@ const ActionBarChildren = (
 );
 
 // eslint-disable-next-line react/prop-types
-const TestActionBar = ({ width, children, ...rest }) => {
+const TestActionBar = ({ width, children = null, ...rest }) => {
   return (
     <div style={{ width, height: 40 }}>
       <ActionBar {...rest}>{children}</ActionBar>

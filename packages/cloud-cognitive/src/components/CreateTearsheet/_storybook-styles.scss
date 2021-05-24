@@ -1,0 +1,30 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+
+$preview-block-class: #{$pkg-prefix}--tearsheet-wizard-preview;
+
+.#{$preview-block-class}__description {
+  @include carbon--type-style('body-short-01');
+
+  padding-bottom: $spacing-04;
+}
+
+p.#{$preview-block-class}__description:last-of-type {
+  padding-bottom: $spacing-07;
+}
+
+.#{$preview-block-class}__heading {
+  @include carbon--font-weight('semibold');
+}
+
+.#{$preview-block-class}__error--toggle {
+  position: absolute;
+  bottom: $spacing-12;
+}

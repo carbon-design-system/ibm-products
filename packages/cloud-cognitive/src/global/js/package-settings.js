@@ -28,6 +28,8 @@ const defaults = {
     ButtonMenu: false,
     ButtonMenuItem: false,
     CreateSidePanel: false,
+    CreateTearsheet: false,
+    CreateTearsheetStep: false,
     ContextHeader: false,
     EmptyState: false,
     ErrorEmptyState: false,

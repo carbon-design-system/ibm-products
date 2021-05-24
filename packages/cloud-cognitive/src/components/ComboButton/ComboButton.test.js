@@ -5,5 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { pkg } from './settings';
-export * from './components';
+import { ComboButton } from '..';
+
+describe(ComboButton.name, () => {
+  test('passes', () => {
+    expect(true).toBeTruthy();
+  });
+});

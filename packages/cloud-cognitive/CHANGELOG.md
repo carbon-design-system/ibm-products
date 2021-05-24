@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.39.9](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.39.8...@carbon/ibm-cloud-cognitive@0.39.9) (2021-05-24)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.39.8](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.39.7...@carbon/ibm-cloud-cognitive@0.39.8) (2021-05-24)
+
+
+### Bug Fixes
+
+* remove wibble from example story ([#780](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/780)) ([ca4910f](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ca4910f918fea1d65b8e9f06767a08ba72064d93))
+
+
+
+
+
 ## [0.39.7](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.39.6...@carbon/ibm-cloud-cognitive@0.39.7) (2021-05-24)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

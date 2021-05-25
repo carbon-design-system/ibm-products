@@ -32,7 +32,7 @@ const ActionBarChildren = (
 );
 
 // eslint-disable-next-line react/prop-types
-const TestActionBar = ({ width, children, ...rest }) => {
+const TestActionBar = ({ width, children = null, ...rest }) => {
   return (
     <div style={{ width, height: 40 }}>
       <ActionBar {...rest}>{children}</ActionBar>
@@ -83,7 +83,7 @@ describe(ActionBar.displayName, () => {
     screen.getByText(/Action 10/);
 
     expect(warn).toBeCalledWith(
-      "The prop 'children' of 'ActionBar' has been deprecated and will soon be removed. See documentation on the 'actions' property."
+      'The prop `children` of `ActionBar` has been deprecated and will soon be removed. See documentation on the `actions` prop.'
     );
 
     warn.mockRestore(); // Remove mock

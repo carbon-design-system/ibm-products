@@ -6,9 +6,9 @@
 //
 
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import unwrapIfFragment from './unwrap-if-fragment';
+import pconsole from './pconsole';
 
 // helper functions for component props
 
@@ -55,50 +55,49 @@ export const prepareProps = (...values) => {
   }, {});
 };
 
-const deprecatePropInner = (validator, messageFunction, additionalInfo) => {
-  const deprecatePropValidator = (
-    props,
-    name,
-    componentName,
-    location,
-    propFullName
-  ) => {
-    if (props[name] !== null) {
-      const info = additionalInfo ? ` ${additionalInfo}` : '';
-      console.warn(
-        messageFunction(location, propFullName || name, componentName, info)
-      );
-    }
+// A simple wrapper for a prop-types checker that issues a warning message if
+// the value being validated is not null/undefined.
+const deprecatePropInner = (message, validator, info) => (...args) => (
+  // args = [props, propName, componentName, location, propFullName, ...]
+  args[0][args[1]] &&
+    pconsole.warn(message(args[3], args[4] || args[1], args[2], info)),
+  validator(...args)
+);
 
-    return null;
-  };
+/**
+ * A prop-types type checker that marks a particular usage of a prop as
+ * deprecated. This can be used to deprecate an option in a oneOfType checker,
+ * and the deprecated option(s) should be listed last so that the deprecation
+ * message is only reported if none of the other type options is matched.
+ * @param {} validator The prop-types validator for the prop usage as it should
+ * be if it weren't deprecated. If this validator produces type checking
+ * errors they will be reported as usual.
+ * @param {*} additionalInfo One or more sentences to be appended to the
+ * deprecation message to explain why the prop usage is deprecated and/or what
+ * should be used instead.
+ * @returns Any type checking error reported by the validator, or null.
+ */
+export const deprecatePropUsage = deprecatePropInner.bind(
+  undefined,
+  (location, propName, componentName, info) =>
+    `The usage of the ${location} \`${propName}\` of \`${componentName}\` has been changed and support for the old usage will soon be removed. ${info}`
+);
 
-  // first does the deprecation check and then calls original validator
-  return (
-    PropTypes.oneOfType([deprecatePropValidator]) ||
-    PropTypes.oneOfType([validator])
-  );
-};
-
-export const deprecatePropUsage = (validator, additionalInfo) => {
-  return deprecatePropInner(
-    validator,
-    (location, name, componentName, info) => {
-      return `The usage of ${location} '${name}' of '${componentName}' has been changed and you should update.${info}`;
-    },
-    additionalInfo
-  );
-};
-
-export const deprecateProp = (validator, additionalInfo) => {
-  return deprecatePropInner(
-    validator,
-    (location, name, componentName, info) => {
-      return `The ${location} '${name}' of '${componentName}' has been deprecated and will soon be removed.${info}`;
-    },
-    additionalInfo
-  );
-};
+/**
+ * A prop-types type checker that marks a prop as deprecated.
+ * @param {} validator The prop-types validator for the prop as it should be
+ * used if it weren't deprecated. If this validator produces type checking
+ * errors they will be reported as usual.
+ * @param {*} additionalInfo One or more sentences to be appended to the
+ * deprecation message to explain why the prop is deprecated and/or what should
+ * be used instead.
+ * @returns Any type checking error reported by the validator, or null.
+ */
+export const deprecateProp = deprecatePropInner.bind(
+  undefined,
+  (location, propName, componentName, info) =>
+    `The ${location} \`${propName}\` of \`${componentName}\` has been deprecated and will soon be removed. ${info}`
+);
 
 /**
  * Takes items as fragment, node or array
@@ -118,3 +117,69 @@ export const extractShapesArray = (items) => {
 
   return Array.isArray(items) ? items : [];
 };
+
+/**
+ * A prop-types validation function that takes an array of type checkers and
+ * requires prop values to satisfy all of the type checkers. This can be useful
+ * to combine custom validation functions with regular prop types, or for
+ * combining inherited prop-types from another component with tighter
+ * requirements.
+ *
+ * Examples:
+ *
+ * MyComponent.propTypes = {
+ *
+ *   foo: allPropTypes([
+ *     customValidationFunction,
+ *     PropTypes.arrayOf(
+ *       PropTypes.shape({
+ *         text: PropType.string
+ *       })
+ *     )
+ *   ]),
+ *
+ *   kind: allPropTypes([
+ *     Button.propTypes.kind,
+ *     PropTypes.oneOf('primary', 'secondary')
+ *   ]),
+ *
+ * }
+ */
+export const allPropTypes = pconsole.shimIfProduction((arrayOfTypeCheckers) => {
+  if (!Array.isArray(arrayOfTypeCheckers)) {
+    pconsole.error(
+      'Warning: Invalid argument supplied to allPropTypes, expected an instance of array.'
+    );
+    return pconsole.noop;
+  }
+
+  for (let i = 0; i < arrayOfTypeCheckers.length; i++) {
+    if (typeof arrayOfTypeCheckers[i] !== 'function') {
+      pconsole.error(
+        `Invalid argument supplied to allPropTypes. Expected an array of check functions, but received ${arrayOfTypeCheckers[i]} at index ${i}.`
+      );
+      return pconsole.noop;
+    }
+  }
+
+  const checkType = (...args) => {
+    let error = null;
+    arrayOfTypeCheckers.some((checker) => (error = checker(...args)));
+    return error;
+  };
+
+  checkType.isRequired = (props, propName, comp, loc, propFullName, secret) => {
+    const prop = propFullName || propName;
+    return props[prop] == null
+      ? new Error(
+          `The ${loc} \`${prop}\` is marked as required in \`${
+            comp || '<<anonymous>>'
+          }\`, but its value is \`${
+            props[prop] === null ? 'null' : 'undefined'
+          }\`.`
+        )
+      : checkType(props, prop, comp, loc, propFullName, secret);
+  };
+
+  return checkType;
+});

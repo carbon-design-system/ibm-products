@@ -226,6 +226,8 @@
     background: $ui-background;
 
     // revert the background colour overridden by bx--modal styles
+    .#{$prefix}--pagination,
+    .#{$prefix}--pagination__control-buttons,
     .#{$prefix}--text-input,
     .#{$prefix}--text-area,
     .#{$prefix}--search-input,

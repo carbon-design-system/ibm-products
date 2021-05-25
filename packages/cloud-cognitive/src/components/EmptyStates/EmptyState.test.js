@@ -1,14 +1,13 @@
 /**
- * Copyright IBM Corp. 2020, 2020
+ * Copyright IBM Corp. 2020, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg } from '../../settings';
 import { EmptyState } from '.';
@@ -21,6 +20,7 @@ import { UnauthorizedEmptyState } from './UnauthorizedEmptyState';
 import CustomIllustration from './story_assets/empty-state-bright-magnifying-glass.svg';
 
 const dataTestId = uuidv4();
+const className = uuidv4();
 const blockClass = `${pkg.prefix}--empty-state`;
 const { name } = EmptyState;
 
@@ -37,8 +37,10 @@ describe(name, () => {
 
     const { getByText } = render(
       <EmptyState
-        actionText="Create new"
-        onActionEvent={onActionHandler}
+        action={{
+          text: 'Create new',
+          onClick: onActionHandler,
+        }}
         {...defaultProps}
       />
     );
@@ -48,66 +50,86 @@ describe(name, () => {
   });
 
   it('should render a clickable link and match rendered url to linkUrl prop', () => {
-    const { getByText, container } = render(
+    render(
       <EmptyState
-        linkText="View documentation"
-        linkUrl="https://www.carbondesignsystem.com/"
+        link={{
+          text: 'View documentation',
+          href: 'https://www.carbondesignsystem.com/',
+        }}
         {...defaultProps}
       />
     );
-    const { click } = fireEvent;
-    const link = container.querySelector('a').href;
-    click(getByText('View documentation'));
-    expect(link.length && link).toEqual('https://www.carbondesignsystem.com/');
+    const link = screen.getByRole('link', { name: 'View documentation' });
+    expect(link.href).toEqual('https://www.carbondesignsystem.com/');
   });
 
   it('should render title by passing string', () => {
-    const { getByText } = render(<EmptyState {...defaultProps} />);
-    expect(getByText('Empty state title')).toBeTruthy();
+    render(<EmptyState {...defaultProps} />);
+    screen.getByText('Empty state title');
   });
 
   it('should render title by passing node', () => {
-    const { getByText } = render(
+    render(
       <EmptyState
-        title={<h3>Custom title</h3>}
+        title={<span>Custom title</span>}
         subtitle="Empty state subtitle"
       />
     );
-    expect(getByText('Custom title')).toBeTruthy();
+    screen.getByText('Custom title');
   });
 
   it('should render subtitle by passing string', () => {
-    const { getByText } = render(<EmptyState {...defaultProps} />);
-    expect(getByText('Empty state subtitle')).toBeTruthy();
+    render(<EmptyState {...defaultProps} />);
+    screen.getByText('Empty state subtitle');
   });
 
   it('should render subtitle by passing node', () => {
-    const { getByText } = render(
+    render(
       <EmptyState
         title="Empty state header"
-        subtitle={<p>This is the subtitle of the empty state</p>}
+        subtitle={<span>This is the subtitle of the empty state</span>}
       />
     );
-    expect(getByText('This is the subtitle of the empty state')).toBeTruthy();
+    screen.getByText('This is the subtitle of the empty state');
   });
 
   it('should render a custom illustration', () => {
     const { container } = render(
-      <EmptyState illustration={CustomIllustration} {...defaultProps} />
+      <EmptyState
+        {...defaultProps}
+        illustration={CustomIllustration}
+        illustrationDescription="Test alt text"
+      />
     );
     const customIllustrationElement = container.querySelector('img');
     expect(customIllustrationElement).toBeTruthy();
+    screen.getByAltText(/Test alt text/g);
   });
 
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
-    render(<EmptyState ref={ref} {...defaultProps} />);
+    render(<EmptyState {...defaultProps} ref={ref} />);
     expect(ref.current.classList.contains(blockClass)).toBeTruthy();
+  });
+
+  it('applies className to the containing node', () => {
+    render(<EmptyState {...defaultProps} className={className} />);
+    expect(screen.getByText(/Empty state title/g).parentElement).toHaveClass(
+      className
+    );
+  });
+
+  it('renders the small size Empty state', () => {
+    render(<EmptyState {...defaultProps} size="sm" />);
+    const smallTitleClassName = `${blockClass}__header--small`;
+    expect(screen.getByText(/Empty state title/g)).toHaveClass(
+      smallTitleClassName
+    );
   });
 
   it('adds additional properties to the containing node', () => {
     const { container } = render(
-      <EmptyState data-testid={dataTestId} {...defaultProps} />
+      <EmptyState {...defaultProps} data-testid={dataTestId} />
     );
     expect(
       container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
@@ -118,54 +140,59 @@ describe(name, () => {
     const { container, rerender } = render(
       <NoDataEmptyState {...defaultProps} />
     );
-    const renderedSvg = container.querySelector('svg');
-    expect(renderedSvg).toBeTruthy();
+    expect(container.querySelector('svg')).toBeTruthy();
     rerender(<NoDataEmptyState {...defaultProps} illustrationTheme="dark" />);
+    expect(container.querySelector('svg')).toBeTruthy();
   });
 
   it('should render the ErrorEmptyState component', () => {
     const { container, rerender } = render(
       <ErrorEmptyState {...defaultProps} />
     );
-    const renderedSvg = container.querySelector('svg');
-    expect(renderedSvg).toBeTruthy();
+    expect(container.querySelector('svg')).toBeTruthy();
     rerender(<ErrorEmptyState {...defaultProps} illustrationTheme="dark" />);
+    expect(container.querySelector('svg')).toBeTruthy();
   });
 
   it('should render the NoTagsEmptyState component', () => {
     const { container, rerender } = render(
       <NoTagsEmptyState {...defaultProps} />
     );
-    const renderedSvg = container.querySelector('svg');
-    expect(renderedSvg).toBeTruthy();
+    expect(container.querySelector('svg')).toBeTruthy();
     rerender(<NoTagsEmptyState {...defaultProps} illustrationTheme="dark" />);
+    expect(container.querySelector('svg')).toBeTruthy();
   });
   it('should render the NotFoundEmptyState component', () => {
     const { container, rerender } = render(
       <NotFoundEmptyState {...defaultProps} />
     );
-    const renderedSvg = container.querySelector('svg');
-    expect(renderedSvg).toBeTruthy();
+    expect(container.querySelector('svg')).toBeTruthy();
     rerender(<NotFoundEmptyState {...defaultProps} illustrationTheme="dark" />);
+    expect(container.querySelector('svg')).toBeTruthy();
   });
   it('should render the NotificationsEmptyState component', () => {
     const { container, rerender } = render(
       <NotificationsEmptyState {...defaultProps} />
     );
-    const renderedSvg = container.querySelector('svg');
-    expect(renderedSvg).toBeTruthy();
+    expect(container.querySelector('svg')).toBeTruthy();
     rerender(
       <NotificationsEmptyState {...defaultProps} illustrationTheme="dark" />
     );
+    expect(container.querySelector('svg')).toBeTruthy();
   });
   it('should render the UnauthorizedEmptyState component', () => {
     const { container, rerender } = render(
       <UnauthorizedEmptyState {...defaultProps} />
     );
-    const renderedSvg = container.querySelector('svg');
-    expect(renderedSvg).toBeTruthy();
+    expect(container.querySelector('svg')).toBeTruthy();
     rerender(
       <UnauthorizedEmptyState {...defaultProps} illustrationTheme="dark" />
     );
+    expect(container.querySelector('svg')).toBeTruthy();
+  });
+  it('should throw a custom prop type validation error when an illustration is used without an illustrationDescription prop', () => {
+    jest.spyOn(console, 'error').mockImplementation(jest.fn());
+    render(<EmptyState {...defaultProps} illustration={CustomIllustration} />);
+    jest.spyOn(console, 'error').mockRestore();
   });
 });

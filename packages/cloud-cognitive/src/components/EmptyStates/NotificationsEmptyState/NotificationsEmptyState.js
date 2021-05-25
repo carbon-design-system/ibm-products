@@ -11,6 +11,7 @@ import React from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { Button, Link } from 'carbon-components-react';
 import { pkg } from '../../../settings';
 import { EmptyStateContent } from '../EmptyStateContent';
 import { NotificationsIllustration } from '../assets/NotificationsIllustration';
@@ -23,15 +24,11 @@ const componentName = 'NotificationsEmptyState';
 export let NotificationsEmptyState = React.forwardRef(
   (
     {
-      actionIcon,
-      actionText,
-      actionType,
+      action,
       className,
-      illustrationSize,
       illustrationTheme,
-      linkText,
-      linkUrl,
-      onActionEvent,
+      link,
+      size,
       subtitle,
       title,
       ...rest
@@ -46,17 +43,11 @@ export let NotificationsEmptyState = React.forwardRef(
         }
         className={cx(blockClass, className)}
         ref={ref}>
-        <NotificationsIllustration
-          size={illustrationSize}
-          theme={illustrationTheme}
-        />
+        <NotificationsIllustration size={size} theme={illustrationTheme} />
         <EmptyStateContent
-          actionIcon={actionIcon}
-          actionText={actionText}
-          actionType={actionType}
-          linkText={linkText}
-          linkUrl={linkUrl}
-          onActionEvent={onActionEvent}
+          action={action}
+          link={link}
+          size={size}
           subtitle={subtitle}
           title={title}
         />
@@ -80,25 +71,21 @@ NotificationsEmptyState.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 NotificationsEmptyState.propTypes = {
   /**
-   * Empty state action button icon
+   * Empty state action button
    */
-  actionIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-  /**
-   * Empty state action button text
-   */
-  actionText: PropTypes.string,
-  /**
-   * Empty state action button type
-   */
-  actionType: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
+  action: PropTypes.shape({
+    ...Button.propTypes,
+    kind: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
+    renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    onClick: Button.propTypes.onClick,
+    text: PropTypes.string,
+  }),
+
   /**
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
-  /**
-   * Empty state illustration size
-   */
-  illustrationSize: PropTypes.oneOf(['lg', 'sm']),
+
   /**
    * Empty state illustration theme variations.
    * To ensure you use the correct themed illustrations, you can conditionally specify light or dark
@@ -106,22 +93,26 @@ NotificationsEmptyState.propTypes = {
    * `illustrationTheme={appTheme === ('carbon--g100' || 'carbon--g90') ? 'dark' : 'light'}`
    */
   illustrationTheme: PropTypes.oneOf(['light', 'dark']),
+
   /**
-   * Empty state link text
+   * Empty state link object
    */
-  linkText: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  link: PropTypes.shape({
+    ...Link.propTypes,
+    text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+    href: PropTypes.string,
+  }),
+
   /**
-   * Empty state link url
+   * Empty state size
    */
-  linkUrl: PropTypes.string,
-  /**
-   * Empty state action button handler
-   */
-  onActionEvent: PropTypes.func,
+  size: PropTypes.oneOf(['lg', 'sm']),
+
   /**
    * Empty state subtitle
    */
   subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+
   /**
    * Empty state title
    */

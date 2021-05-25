@@ -11,7 +11,6 @@ import React from 'react';
 import {
   BreadcrumbItem,
   Column,
-  Content,
   Grid,
   Header,
   HeaderName,
@@ -24,7 +23,6 @@ import { CheckmarkFilled16 } from '@carbon/icons-react';
 import { Lightning16, Bee24 } from '@carbon/icons-react';
 
 import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
 import { ActionBarItem } from '../ActionBar';
 import { PageHeader } from '.';
@@ -144,10 +142,15 @@ const statusIndicator = (
 );
 const subtitle = 'Optional subtitle if necessary';
 const longSubtitle =
-  'Optional subtitle if necessary, which is very long in this case, but will need to be handled somehow';
+  'Optional subtitle if necessary, which is very long in this case, but will need to be handled somehow. It just keeps going on and on and on and on and on.';
 const summaryDetails = (
   <div style={{ display: 'flex' }}>
-    <p style={{ marginRight: '50px', maxWidth: '400px' }}>
+    <p
+      style={{
+        // stylelint-disable-next-line carbon/layout-token-use
+        marginRight: '50px',
+        maxWidth: '400px',
+      }}>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor <strong>incididunt ut labore</strong> et dolore magna aliqua. Ut
       enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -226,11 +229,42 @@ const manyTags = [
   <Tag type="magenta" key="magenta">
     Magenta
   </Tag>,
+  <Tag type="blue" key="blue">
+    Blue 2
+  </Tag>,
+  <Tag type="green" key="green">
+    Green 2
+  </Tag>,
+  <Tag type="warm-gray" key="warm-gray">
+    Warm gray 2
+  </Tag>,
+  <Tag type="purple" key="purple">
+    Purple 2
+  </Tag>,
+  <Tag type="red" key="red">
+    Red 2
+  </Tag>,
+  <Tag type="teal" key="teal">
+    Teal 2
+  </Tag>,
+  <Tag type="red" key="long-one">
+    Longer ThanAPieceOfString 2
+  </Tag>,
+  <Tag type="high-contrast" key="high-contrast">
+    High contrast 2
+  </Tag>,
+  <Tag type="magenta" key="magenta">
+    Magenta 2
+  </Tag>,
 ];
 
-const title = 'Page title';
-const longTitle =
-  'A very long page title that is going to exceed fifty-six characters and get truncated';
+const title = { text: 'Page title', loading: false, icon: Bee24 };
+const longTitle = {
+  text:
+    'A very long page title that is going to exceed 60% of the stage width and get truncated on large screens',
+  loading: false,
+  icon: Bee24,
+};
 
 // Template.
 const Template = (args) => {
@@ -249,7 +283,6 @@ AllAttributesSet.args = {
   breadcrumbItems,
   actionBarItems,
   title,
-  titleIcon: Bee24,
   pageActions,
   subtitle,
   availableSpace: summaryDetails,
@@ -260,49 +293,47 @@ AllAttributesSet.args = {
 export const NoAttributesSet = Template.bind({});
 NoAttributesSet.args = {};
 
-export const WithoutBackgroundTitle = Template.bind({});
-WithoutBackgroundTitle.args = {
+export const TitleOnly = Template.bind({});
+TitleOnly.args = {
   title,
 };
 
-export const WithoutBackgroundTitlePageactions = Template.bind({});
-WithoutBackgroundTitlePageactions.args = {
-  title,
-  pageActions,
-};
-
-export const WithoutBackgroundBreadcrumbitemsTitle = Template.bind({});
-WithoutBackgroundBreadcrumbitemsTitle.args = {
-  breadcrumbItems,
-  title,
-};
-
-export const WithoutBackgroundBreadcrumbitemsTitlePageactions = Template.bind(
-  {}
-);
-WithoutBackgroundBreadcrumbitemsTitlePageactions.args = {
-  breadcrumbItems,
+export const TitleAndPagections = Template.bind({});
+TitleAndPagections.args = {
   title,
   pageActions,
 };
 
-export const WithoutBackgroundBreadcrumbitemsTitleStatus = Template.bind({});
-WithoutBackgroundBreadcrumbitemsTitleStatus.args = {
+export const BreadcrumbItemsAndTitle = Template.bind({});
+BreadcrumbItemsAndTitle.args = {
+  breadcrumbItems,
+  title,
+};
+
+export const BreadcrumbItemsTitleAndPageActions = Template.bind({});
+BreadcrumbItemsTitleAndPageActions.args = {
+  breadcrumbItems,
+  title,
+  pageActions,
+};
+
+export const BreadcrumbItemsTitleAndStatus = Template.bind({});
+BreadcrumbItemsTitleAndStatus.args = {
   breadcrumbItems,
   title,
   availableSpace: statusIndicator,
 };
 
-export const WithBackgroundBreadcrumbitemsTitleTabs = Template.bind({});
-WithBackgroundBreadcrumbitemsTitleTabs.args = {
+export const BreadcrumbItemsTitleTabs = Template.bind({});
+BreadcrumbItemsTitleTabs.args = {
   background: true,
   breadcrumbItems,
   title,
   navigation: tabBar,
 };
 
-export const WithBackgroundBreadcrumbitemsTitleIconTabs = Template.bind({});
-WithBackgroundBreadcrumbitemsTitleIconTabs.args = {
+export const BreadcrumbItemsTitleIconTabs = Template.bind({});
+BreadcrumbItemsTitleIconTabs.args = {
   background: true,
   breadcrumbItems,
   title,
@@ -310,10 +341,8 @@ WithBackgroundBreadcrumbitemsTitleIconTabs.args = {
   navigation: tabBar,
 };
 
-export const WithBackgroundBreadcrumbitemsTitlePageactionsTabs = Template.bind(
-  {}
-);
-WithBackgroundBreadcrumbitemsTitlePageactionsTabs.args = {
+export const BreadcrumbItemsTitlePageActionsTabs = Template.bind({});
+BreadcrumbItemsTitlePageActionsTabs.args = {
   background: true,
   breadcrumbItems,
   title,
@@ -321,10 +350,8 @@ WithBackgroundBreadcrumbitemsTitlePageactionsTabs.args = {
   navigation: tabBar,
 };
 
-export const WithBackgroundBreadcrumbitemsTitlePageactionsTags = Template.bind(
-  {}
-);
-WithBackgroundBreadcrumbitemsTitlePageactionsTags.args = {
+export const BreadcrumbItemsTitlePageActionsTags = Template.bind({});
+BreadcrumbItemsTitlePageActionsTags.args = {
   background: true,
   breadcrumbItems,
   title,
@@ -332,8 +359,8 @@ WithBackgroundBreadcrumbitemsTitlePageactionsTags.args = {
   tags,
 };
 
-export const WithBackgroundBreadcrumbitemsTitleTabsTags = Template.bind({});
-WithBackgroundBreadcrumbitemsTitleTabsTags.args = {
+export const BreadcrumbItemsTitleTabsTags = Template.bind({});
+BreadcrumbItemsTitleTabsTags.args = {
   background: true,
   breadcrumbItems,
   title,
@@ -341,10 +368,10 @@ WithBackgroundBreadcrumbitemsTitleTabsTags.args = {
   tags,
 };
 
-export const WithBackgroundBreadcrumbitemsActionbarTitlePageactionsTabsTags = Template.bind(
+export const BreadcrumbItemsActionBarTitlePageActionsTabsTags = Template.bind(
   {}
 );
-WithBackgroundBreadcrumbitemsActionbarTitlePageactionsTabsTags.args = {
+BreadcrumbItemsActionBarTitlePageActionsTabsTags.args = {
   background: true,
   breadcrumbItems,
   actionBarItems,
@@ -353,8 +380,8 @@ WithBackgroundBreadcrumbitemsActionbarTitlePageactionsTabsTags.args = {
   navigation: tabBar,
 };
 
-export const WithBackgroundBreadcrumbitemsActionbar = Template.bind({});
-WithBackgroundBreadcrumbitemsActionbar.args = {
+export const BreadcrumbItemsActionBar = Template.bind({});
+BreadcrumbItemsActionBar.args = {
   background: true,
   breadcrumbItems,
   actionBarItems,
@@ -362,10 +389,8 @@ WithBackgroundBreadcrumbitemsActionbar.args = {
   title,
 };
 
-export const WithBackgroundBreadcrumbitemsTitlePageactionsSubtitle = Template.bind(
-  {}
-);
-WithBackgroundBreadcrumbitemsTitlePageactionsSubtitle.args = {
+export const BreadcrumbItemsTitlePageActionsSubtitle = Template.bind({});
+BreadcrumbItemsTitlePageActionsSubtitle.args = {
   background: true,
   breadcrumbItems,
   title,
@@ -373,10 +398,10 @@ WithBackgroundBreadcrumbitemsTitlePageactionsSubtitle.args = {
   subtitle,
 };
 
-export const WithBackgroundBreadcrumbitemsTitlePageactionsSummarydetailsTabs = Template.bind(
+export const BreadcrumbItemsTitlePageActionsSummarydetailsTabs = Template.bind(
   {}
 );
-WithBackgroundBreadcrumbitemsTitlePageactionsSummarydetailsTabs.args = {
+BreadcrumbItemsTitlePageActionsSummarydetailsTabs.args = {
   background: true,
   breadcrumbItems,
   title,
@@ -385,9 +410,9 @@ WithBackgroundBreadcrumbitemsTitlePageactionsSummarydetailsTabs.args = {
   navigation: tabBar,
 };
 
-export const AllAttributesSetKeepsBreadcrumbAndTabs = Template.bind({});
-AllAttributesSetKeepsBreadcrumbAndTabs.args = {
-  keepBreadcrumbAndTabs: true,
+export const AllAttributesSetKeepsBreadcrumbTabs = Template.bind({});
+AllAttributesSetKeepsBreadcrumbTabs.args = {
+  preventBreadcrumbScroll: true,
   background: true,
   breadcrumbItems,
   actionBarItems,
@@ -415,8 +440,8 @@ AllAttributesSetPreCollapseTitle.args = {
   tags,
 };
 
-export const LongValuesAndManyItems = Template.bind({});
-LongValuesAndManyItems.args = {
+export const LongValuesManyItems = Template.bind({});
+LongValuesManyItems.args = {
   background: true,
   breadcrumbItems: manyBreadcrumbItems,
   actionBarItems: manyActionBarItems,
@@ -462,7 +487,7 @@ AllAttributesWithSwitches.args = {
   background: true,
   breadcrumbItems,
   breadcrumbItemsSwitchedArg: true,
-  keepBreadcrumbAndTabs: false,
+  preventBreadcrumbScroll: false,
   navigation: tabBar,
   navigationSwitchedArg: true,
   pageActions,
@@ -486,14 +511,19 @@ const TemplatePageHeaderWithCarbonHeader = (args) => {
           [Platform]
         </HeaderName>
       </Header>
-      <Content className={`${storyClass}__content-container`}>
+      <div
+        className={`${storyClass}__content-container`}
+        style={{
+          // stylelint-disable-next-line carbon/layout-token-use
+          marginTop: '48px',
+        }}>
         <PageHeader
           className="example-class-name"
           {...includeTheseArgs(args)}
           pageHeaderOffset={48} // 48px is the size of the global header. A more elegant way of passing this could be found.
         />
         <div className={`${storyClass}__inner-content`}>{dummyPageContent}</div>
-      </Content>
+      </div>
     </div>
   );
 };
@@ -509,7 +539,7 @@ PageHeaderWithCarbonHeader.args = {
   background: true,
   breadcrumbItems,
   breadcrumbItemsSwitchedArg: true,
-  keepBreadcrumbAndTabs: false,
+  preventBreadcrumbScroll: false,
   navigation: tabBar,
   navigationSwitchedArg: true,
   pageActions,

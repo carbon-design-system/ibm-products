@@ -10,7 +10,6 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
@@ -29,6 +28,13 @@ const createButton = `Create ${uuidv4()}`;
 const actions = [
   { kind: 'secondary', onClick, label: 'Cancel' },
   { onClick, label: createButton },
+];
+const badactions = [
+  { kind: 'primary' },
+  { kind: 'primary' },
+  { kind: 'ghost' },
+  { kind: 'ghost' },
+  { kind: 'danger' },
 ];
 const childFragment = `Main ${uuidv4()} content`;
 const children = <div>{childFragment}</div>;
@@ -97,6 +103,15 @@ const commonTests = (Ts, name) => {
     expect(onClick).toHaveBeenCalledTimes(0);
     userEvent.click(screen.getByText(createButton));
     expect(onClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('rejects too many buttons using the custom validator', () => {
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+    render(<Ts actions={badactions} />);
+    expect(error).toBeCalledWith(
+      expect.stringContaining(`\`actions\` supplied to \`${name}\`: you cannot`)
+    );
+    error.mockRestore();
   });
 
   it('renders children', () => {

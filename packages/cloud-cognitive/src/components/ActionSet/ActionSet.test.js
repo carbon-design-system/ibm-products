@@ -10,7 +10,6 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 
 import { Loading } from 'carbon-components-react';
 
@@ -82,6 +81,19 @@ describe(componentName, () => {
     expect(buttons[1].textContent).toEqual(label1);
   });
 
+  it('rejects too many buttons using the custom validator', () => {
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+    render(
+      <ActionSet
+        actions={[action2, action2, action3, action3, { kind: 'danger' }]}
+      />
+    );
+    expect(error).toBeCalledWith(
+      expect.stringContaining('`actions` supplied to `ActionSet`: you cannot')
+    );
+    error.mockRestore();
+  });
+
   it('applies className to an action button', () => {
     render(<ActionSet actions={[{ ...action1, className }, action2]} />);
     expect(getByRoleAndLabel('button', label1)).toHaveClass(className);
@@ -132,7 +144,7 @@ describe(componentName, () => {
   });
 });
 
-const v = (size, props, propName, componentName) => () =>
+const v = (size, props, propName, componentName) =>
   ActionSet.validateActions(() => size)(props, propName, componentName);
 const prop = `prop-${uuidv4()}`;
 
@@ -167,70 +179,80 @@ const props = {
 
 describe(`${componentName}.validateActions`, () => {
   it('rejects more than three actions for an extra small size', () => {
-    expect(v('xs', props[1], prop, componentName)).not.toThrow();
-    expect(v('xs', props[2], prop, componentName)).not.toThrow();
-    expect(v('xs', props[3], prop, componentName)).not.toThrow();
-    expect(v('xs', props[4], prop, componentName)).toThrow();
+    expect(v('xs', props[1], prop, componentName)).toBeNull();
+    expect(v('xs', props[2], prop, componentName)).toBeNull();
+    expect(v('xs', props[3], prop, componentName)).toBeNull();
+    expect(v('xs', props[4], prop, componentName)).toBeInstanceOf(Error);
   });
 
   it('rejects more than three actions for a small size', () => {
-    expect(v('sm', props[1], prop, componentName)).not.toThrow();
-    expect(v('sm', props[2], prop, componentName)).not.toThrow();
-    expect(v('sm', props[3], prop, componentName)).not.toThrow();
-    expect(v('sm', props[4], prop, componentName)).toThrow();
+    expect(v('sm', props[1], prop, componentName)).toBeNull();
+    expect(v('sm', props[2], prop, componentName)).toBeNull();
+    expect(v('sm', props[3], prop, componentName)).toBeNull();
+    expect(v('sm', props[4], prop, componentName)).toBeInstanceOf(Error);
   });
 
   it('rejects more than three actions for a medium size', () => {
-    expect(v('md', props[1], prop, componentName)).not.toThrow();
-    expect(v('md', props[2], prop, componentName)).not.toThrow();
-    expect(v('md', props[3], prop, componentName)).not.toThrow();
-    expect(v('md', props[4], prop, componentName)).toThrow();
+    expect(v('md', props[1], prop, componentName)).toBeNull();
+    expect(v('md', props[2], prop, componentName)).toBeNull();
+    expect(v('md', props[3], prop, componentName)).toBeNull();
+    expect(v('md', props[4], prop, componentName)).toBeInstanceOf(Error);
   });
 
   it('rejects more than four actions for a large size', () => {
-    expect(v('lg', props[1], prop, componentName)).not.toThrow();
-    expect(v('lg', props[2], prop, componentName)).not.toThrow();
-    expect(v('lg', props[3], prop, componentName)).not.toThrow();
-    expect(v('lg', props[4], prop, componentName)).not.toThrow();
-    expect(v('lg', props[5], prop, componentName)).toThrow();
+    expect(v('lg', props[1], prop, componentName)).toBeNull();
+    expect(v('lg', props[2], prop, componentName)).toBeNull();
+    expect(v('lg', props[3], prop, componentName)).toBeNull();
+    expect(v('lg', props[4], prop, componentName)).toBeNull();
+    expect(v('lg', props[5], prop, componentName)).toBeInstanceOf(Error);
   });
 
   it('rejects more than four actions for a max size', () => {
-    expect(v('max', props[1], prop, componentName)).not.toThrow();
-    expect(v('max', props[2], prop, componentName)).not.toThrow();
-    expect(v('max', props[3], prop, componentName)).not.toThrow();
-    expect(v('max', props[4], prop, componentName)).not.toThrow();
-    expect(v('max', props[5], prop, componentName)).toThrow();
+    expect(v('max', props[1], prop, componentName)).toBeNull();
+    expect(v('max', props[2], prop, componentName)).toBeNull();
+    expect(v('max', props[3], prop, componentName)).toBeNull();
+    expect(v('max', props[4], prop, componentName)).toBeNull();
+    expect(v('max', props[5], prop, componentName)).toBeInstanceOf(Error);
   });
 
   it('rejects more than one primary kind', () => {
-    expect(v('md', props.primary, prop, componentName)).not.toThrow();
-    expect(v('md', props.twoPrimaries, prop, componentName)).toThrow();
+    expect(v('md', props.primary, prop, componentName)).toBeNull();
+    expect(v('md', props.twoPrimaries, prop, componentName)).toBeInstanceOf(
+      Error
+    );
   });
 
   it('rejects more than one ghost kind', () => {
-    expect(v('md', props.ghost, prop, componentName)).not.toThrow();
-    expect(v('md', props.twoGhosts, prop, componentName)).toThrow();
+    expect(v('md', props.ghost, prop, componentName)).toBeNull();
+    expect(v('md', props.twoGhosts, prop, componentName)).toBeInstanceOf(Error);
   });
 
   it('rejects ghost kind with other kinds for extra small, small, medium size', () => {
-    expect(v('xs', props.psg, prop, componentName)).toThrow();
-    expect(v('sm', props.psg, prop, componentName)).toThrow();
-    expect(v('md', props.psg, prop, componentName)).toThrow();
-    expect(v('lg', props.psg, prop, componentName)).not.toThrow();
-    expect(v('max', props.psg, prop, componentName)).not.toThrow();
+    expect(v('xs', props.psg, prop, componentName)).toBeInstanceOf(Error);
+    expect(v('sm', props.psg, prop, componentName)).toBeInstanceOf(Error);
+    expect(v('md', props.psg, prop, componentName)).toBeInstanceOf(Error);
+    expect(v('lg', props.psg, prop, componentName)).toBeNull();
+    expect(v('max', props.psg, prop, componentName)).toBeNull();
   });
 
   it('rejects any kind other than primary, secondary, ghost', () => {
-    expect(v('md', props.primary, prop, componentName)).not.toThrow();
-    expect(v('md', props.secondary, prop, componentName)).not.toThrow();
-    expect(v('md', props.danger, prop, componentName)).toThrow();
-    expect(v('md', props.ghost, prop, componentName)).not.toThrow();
-    expect(v('md', props.dangerPrimary, prop, componentName)).toThrow();
-    expect(v('md', props.dangerGhost, prop, componentName)).toThrow();
-    expect(v('md', props.dangerTertiary, prop, componentName)).toThrow();
-    expect(v('md', props.tertiary, prop, componentName)).toThrow();
-    expect(v('md', props.twoPrimaries, prop, componentName)).toThrow();
-    expect(v('md', props.twoGhosts, prop, componentName)).toThrow();
+    expect(v('md', props.primary, prop, componentName)).toBeNull();
+    expect(v('md', props.secondary, prop, componentName)).toBeNull();
+    expect(v('md', props.danger, prop, componentName)).toBeInstanceOf(Error);
+    expect(v('md', props.ghost, prop, componentName)).toBeNull();
+    expect(v('md', props.dangerPrimary, prop, componentName)).toBeInstanceOf(
+      Error
+    );
+    expect(v('md', props.dangerGhost, prop, componentName)).toBeInstanceOf(
+      Error
+    );
+    expect(v('md', props.dangerTertiary, prop, componentName)).toBeInstanceOf(
+      Error
+    );
+    expect(v('md', props.tertiary, prop, componentName)).toBeInstanceOf(Error);
+    expect(v('md', props.twoPrimaries, prop, componentName)).toBeInstanceOf(
+      Error
+    );
+    expect(v('md', props.twoGhosts, prop, componentName)).toBeInstanceOf(Error);
   });
 });

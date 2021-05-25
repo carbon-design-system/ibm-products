@@ -24,6 +24,7 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import {
   deprecateProp,
   extractShapesArray,
+  prepareProps,
 } from '../../global/js/utils/props-helper';
 import { ActionBarItem } from './ActionBarItem';
 
@@ -201,7 +202,12 @@ ActionBar.propTypes = {
   actions: PropTypes.oneOfType([
     PropTypes.arrayOf(
       PropTypes.shape({
-        ...Button.propTypes,
+        ...prepareProps(Button.propTypes, [
+          'kind',
+          'size',
+          'tooltipPosition',
+          'tooltipAlignment',
+        ]),
         iconDescription: PropTypes.string.isRequired,
         onClick: Button.propTypes.onClick,
         renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
@@ -217,7 +223,7 @@ ActionBar.propTypes = {
       PropTypes.arrayOf(PropTypes.element),
       PropTypes.element,
     ]),
-    "See documentation on the 'actions' property."
+    'See documentation on the `actions` prop.'
   ), // expects action bar item as array or in fragment,
   /**
    * className
@@ -239,9 +245,6 @@ ActionBar.propTypes = {
    * align tags to right of available space
    */
   rightAlign: PropTypes.bool,
-  /**
-   * heading for the show all modal
-   */
 };
 
 ActionBar.defaultProps = {

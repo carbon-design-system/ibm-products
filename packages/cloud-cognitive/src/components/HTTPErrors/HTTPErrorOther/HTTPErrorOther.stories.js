@@ -7,7 +7,6 @@
 
 import React from 'react';
 import { pkg } from '../../../settings';
-import '../../../utils/enable-all'; // must come before component is imported
 import { HTTPErrorOther } from '.';
 import { getStorybookPrefix } from '../../../../config';
 const storybookPrefix = getStorybookPrefix(pkg, HTTPErrorOther.displayName);

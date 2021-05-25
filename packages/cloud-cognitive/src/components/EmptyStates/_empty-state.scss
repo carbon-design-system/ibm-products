@@ -19,28 +19,38 @@
 
   .#{$block-class} {
     .#{$block-class}__header,
-    .#{$block-class}__subtext,
-    p {
+    .#{$block-class}__subtitle {
       margin: 0;
       padding-bottom: $spacing-02;
+    }
+    .#{$block-class}__header--small {
+      @include carbon--type-style('productive-heading-03');
+    }
+    .#{$block-class}__subtitle--small {
+      @include carbon--type-style('body-short-01');
     }
   }
 
   .#{$block-class}__illustration {
     &.#{$block-class}__illustration--lg {
-      min-width: 5rem;
-      max-width: 5rem;
+      min-width: $spacing-11;
+      max-width: $spacing-11;
     }
     &.#{$block-class}__illustration--sm {
-      min-width: 4rem;
-      max-width: 4rem;
+      min-width: $spacing-10;
+      max-width: $spacing-10;
     }
   }
 
   .#{$block-class}__action-button,
   .#{$block-class}__link {
-    display: block;
     margin-top: $spacing-06;
+  }
+  .#{$block-class}__action-button {
+    display: block;
+  }
+  .#{$block-class}__link {
+    display: inline-block;
   }
 }
 

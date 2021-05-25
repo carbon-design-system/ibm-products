@@ -8,7 +8,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add20 } from '@carbon/icons-react';
-import '../../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import mdx from './ErrorEmptyState.mdx';
 import { pkg } from '../../../settings';
 import { getStorybookPrefix } from '../../../../config';
@@ -31,12 +30,8 @@ export default {
 };
 
 const defaultStoryProps = {
-  title: 'Start by adding data assets',
-  subtitle: (
-    <p>
-      Click <span>Upload assets</span> to upload your data
-    </p>
-  ),
+  title: 'Empty state title',
+  subtitle: 'Description text explaining why this section is empty.',
 };
 
 const Template = (args) => {
@@ -57,34 +52,43 @@ WithDarkModeIllustration.args = {
 export const withAction = Template.bind({});
 withAction.args = {
   ...defaultStoryProps,
-  actionText: 'Create new',
-  actionType: 'tertiary',
-  onActionEvent: action('actionHandler'),
+  action: {
+    text: 'Create new',
+    onClick: action('Clicked empty state action button'),
+  },
 };
 
 export const withActionIconButton = Template.bind({});
 withActionIconButton.args = {
   ...defaultStoryProps,
-  actionText: 'Create new',
-  actionType: 'tertiary',
-  onActionEvent: action('actionHandler'),
-  actionIcon: Add20,
+  action: {
+    text: 'Create new',
+    onClick: action('Clicked empty state action button'),
+    renderIcon: Add20,
+    iconDescription: 'Add icon',
+  },
 };
 
 export const withLink = Template.bind({});
 withLink.args = {
   ...defaultStoryProps,
-  linkText: 'View documentation',
-  linkUrl: 'https://www.carbondesignsystem.com',
+  link: {
+    text: 'View documentation',
+    href: 'https://www.carbondesignsystem.com',
+  },
 };
 
 export const withActionAndLink = Template.bind({});
 withActionAndLink.args = {
   ...defaultStoryProps,
-  actionText: 'Create new',
-  actionType: 'tertiary',
-  onActionEvent: action('actionHandler'),
-  actionIcon: Add20,
-  linkText: 'View documentation',
-  linkUrl: 'https://www.carbondesignsystem.com',
+  action: {
+    text: 'Create new',
+    onClick: action('Clicked empty state action button'),
+    renderIcon: Add20,
+    iconDescription: 'Add icon',
+  },
+  link: {
+    text: 'View documentation',
+    href: 'https://www.carbondesignsystem.com',
+  },
 };

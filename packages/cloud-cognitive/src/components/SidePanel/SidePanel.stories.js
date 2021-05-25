@@ -6,6 +6,7 @@
  */
 
 import React, { useState } from 'react';
+import { action } from '@storybook/addon-actions';
 import {
   Button,
   Grid,
@@ -30,7 +31,6 @@ import {
 import { Copy20, Delete20, Settings20 } from '@carbon/icons-react';
 import styles from './_storybook-styles.scss';
 import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
 import { SidePanel } from '.';
 import mdx from './SidePanel.mdx';
@@ -120,7 +120,7 @@ const rowData = [
 const actions_1 = [
   {
     label: 'Primary button',
-    onPrimaryActionClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'primary',
   },
 ];
@@ -128,7 +128,7 @@ const actions_1 = [
 const actions_2 = [
   {
     label: 'Ghost button',
-    onPrimaryActionClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'ghost',
   },
 ];
@@ -136,12 +136,12 @@ const actions_2 = [
 const actions_3 = [
   {
     label: 'Primary button',
-    onPrimaryActionClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'primary',
   },
   {
     label: 'Secondary button',
-    onPrimaryActionClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'secondary',
   },
 ];
@@ -149,17 +149,17 @@ const actions_3 = [
 const actions_4 = [
   {
     label: 'Primary button',
-    onPrimaryActionClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'primary',
   },
   {
     label: 'Secondary button',
-    onPrimaryActionClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'secondary',
   },
   {
     label: 'Ghost button',
-    onPrimaryActionClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'ghost',
   },
 ];
@@ -167,17 +167,17 @@ const actions_4 = [
 const actions_5 = [
   {
     label: 'Primary button',
-    onPrimaryActionClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'primary',
   },
   {
     label: 'Secondary button',
-    onPrimaryActionClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'secondary',
   },
   {
     label: 'Secondary button',
-    onPrimaryActionClick: () => {},
+    onClick: action('Clicked action button'),
     kind: 'secondary',
   },
 ];

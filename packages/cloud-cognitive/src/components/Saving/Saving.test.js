@@ -9,7 +9,6 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { Saving } from '.';
 
 const componentName = Saving.displayName;
@@ -90,7 +89,7 @@ describe(componentName, () => {
 
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
-    const { container } = render(<Saving {...defaultProps} ref={ref} />);
-    expect(ref.current).toEqual(container.firstChild);
+    render(<Saving {...defaultProps} ref={ref} />);
+    expect(ref.current).not.toBeNull();
   });
 });

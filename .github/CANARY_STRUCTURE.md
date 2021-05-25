@@ -70,31 +70,12 @@ ExampleComponents.displayName = componentName; // displayName is used in prefere
   with a Canary placeholder.
 - Ensuring we specify a displayName for the component.
 
-### The test file (Component.test.js)
+### Tests and stories
 
-In order to test a component it will need to be enabled, regardless of whether
-it is canary or not. To do so you must import `../../utils/enable-all` prior to
-importing any Cloud and Cognitive component.
-
-E.g.
-
-```js
-import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
-import { ExampleComponent } from '.';
-```
-
-### The story file (Component.stories.js)
-
-In order to view a component in a story it needs to be enabled, regardless of
-whether it is canary or not. To do so you must import `../../utils/enable-all`
-prior to importing any Cloud and Cognitive component.
-
-```js
-import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
-import { ExampleComponent } from '.';
-```
+For tests and stories, all components are enabled regardless of whether they are
+canary or not. There is nothing further a component needs to do unless a
+different status is required for testing (which only currently happens for some
+full-package export tests).
 
 ### The index file (src/components/index.js)
 

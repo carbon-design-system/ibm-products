@@ -14,6 +14,7 @@ import cx from 'classnames';
 import ReactResizeDetector from 'react-resize-detector';
 import wrapFocus from '../../global/js/utils/wrapFocus';
 import { pkg } from '../../settings';
+import { allPropTypes } from '../../global/js/utils/props-helper';
 import { SIDE_PANEL_SIZES } from './constants';
 
 // Carbon and package components we use.
@@ -576,7 +577,7 @@ SidePanel.propTypes = {
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  actions: PropTypes.oneOfType([
+  actions: allPropTypes([
     ActionSet.validateActions(),
     PropTypes.arrayOf(
       PropTypes.shape({

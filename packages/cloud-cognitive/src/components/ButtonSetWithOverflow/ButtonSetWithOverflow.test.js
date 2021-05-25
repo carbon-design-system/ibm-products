@@ -89,7 +89,7 @@ describe(ButtonSetWithOverflow.displayName, () => {
     });
 
     expect(warn).toBeCalledWith(
-      "The prop 'children' of 'ButtonSetWithOverflow' has been deprecated and will soon be removed. See documentation on the 'buttons' property."
+      'The prop `children` of `ButtonSetWithOverflow` has been deprecated and will soon be removed. See documentation on the `buttons` property.'
     );
 
     userEvent.click(action1);

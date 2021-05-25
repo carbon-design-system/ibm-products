@@ -12,6 +12,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
+import { allPropTypes } from '../../global/js/utils/props-helper';
 
 // Carbon and package components we use.
 import { Button, ButtonSet, InlineLoading } from 'carbon-components-react';
@@ -54,6 +55,8 @@ const ActionSetButton = React.forwardRef(
   )
 );
 
+ActionSetButton.displayName = 'ActionSetButton';
+
 ActionSetButton.propTypes = {
   ...Button.PropTypes,
   kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
@@ -94,7 +97,7 @@ export const ActionSet = React.forwardRef(
     const buttons = (actions && actions.slice?.(0)) || [];
 
     // We stack the buttons in a xs/sm set, or if there are three or more in a md set.
-    const stack = willStack(size, buttons.length);
+    const stacking = willStack(size, buttons.length);
 
     // order the actions with ghost buttons first and primary buttons last
     // (and the opposite way if we're stacking)
@@ -103,11 +106,11 @@ export const ActionSet = React.forwardRef(
       const kind2 = action2.kind || defaultKind;
 
       return kind1 === 'ghost' || kind2 === 'primary'
-        ? stack
+        ? stacking
           ? 1
           : -1
         : kind1 === 'primary' || kind2 === 'ghost'
-        ? stack
+        ? stacking
           ? -1
           : 1
         : 0;
@@ -123,17 +126,17 @@ export const ActionSet = React.forwardRef(
           blockClass,
           className,
           {
-            [`${blockClass}--row-single`]: !stack && buttons.length === 1,
-            [`${blockClass}--row-double`]: !stack && buttons.length === 2,
-            [`${blockClass}--row-triple`]: !stack && buttons.length === 3,
-            [`${blockClass}--row-quadruple`]: !stack && buttons.length >= 4,
-            [`${blockClass}--stack`]: stack,
+            [`${blockClass}--row-single`]: !stacking && buttons.length === 1,
+            [`${blockClass}--row-double`]: !stacking && buttons.length === 2,
+            [`${blockClass}--row-triple`]: !stacking && buttons.length === 3,
+            [`${blockClass}--row-quadruple`]: !stacking && buttons.length >= 4,
+            [`${blockClass}--stacking`]: stacking,
           },
           `${blockClass}--${size}`
         )}
         ref={ref}
         role="presentation"
-        stacked={stack}>
+        stacked={stacking}>
         {buttons.map((action, index) => (
           <ActionSetButton
             key={action.key || index}
@@ -148,66 +151,83 @@ export const ActionSet = React.forwardRef(
 
 ActionSet.displayName = componentName;
 
-// We provide a validator function to help validate the actions supplied.
-// An optional parameter is a function which will be passed all the props
-// and returns the size that the component should be treated as being: if
-// not provided, a 'size' prop is used to determine the size of the component.
-// When the size is xs or sm, or md with three actions, the buttons will be
-// stacked and a maximum of three buttons is applied with no ghosts unless
-// the ghost is the only button. Otherwise a maximum of four buttons with a
-// maximum of one ghost is applied. In either case, a maximum of one primary
-// button is allowed.
-ActionSet.validateActions = (sizeFn) => (props, propName, componentName) => {
-  const prop = props[propName];
+/**
+ * A validator function to help validate the actions supplied for a particular
+ * size of component. When the size is xs or sm, or md with three actions, the
+ * buttons will be stacked and a maximum of three buttons is applied with no
+ * ghosts unless the ghost is the only button. Otherwise a maximum of four
+ * buttons with a maximum of one ghost is applied. In either case, a maximum
+ * of one primary button is allowed.
+ * @param sizeFn An optional function which will be passed all the props and
+ * returns the size that the component should be treated as being: if not
+ * provided, a 'size' prop is used to determine the size of the component.
+ * @returns null if the actions meet the requirements, or an Error object with
+ * an explanatory message.
+ */
+ActionSet.validateActions = (sizeFn) => (
+  props,
+  propName,
+  componentName,
+  location,
+  propFullName
+) => {
+  const name = propFullName || propName;
+  const prop = props[name];
   const actions = prop && prop?.length;
+  const problems = [];
 
   if (actions > 0) {
     const size = sizeFn ? sizeFn(props) : props.size;
-    const stack = willStack(size, prop.length);
+    const stacking = willStack(size, actions);
 
     const countActions = (kind) =>
       prop.filter((action) => (action.kind || defaultKind) === kind).length;
 
-    const check = (iftrue, problem) => {
-      if (iftrue)
-        throw new Error(`Property '${propName}' is invalid: ${problem}`);
-    };
-
-    check(
-      stack && actions > 3,
-      `you cannot have more than three actions in this size of ${componentName}.`
-    );
-
-    check(
-      actions > 4,
-      `you cannot have more than four actions in a ${componentName}.`
-    );
-
     const primaryActions = countActions('primary');
-    check(
-      primaryActions > 1,
-      `you cannot have more than one 'primary' action in a ${componentName}.`
-    );
-
-    const ghostActions = countActions('ghost');
-    check(
-      ghostActions > 1,
-      `you cannot have more than one 'ghost' action in a ${componentName}.`
-    );
-
-    check(
-      stack && actions > 1 && ghostActions > 0,
-      `you cannot have a 'ghost' button in conjunction with other action types in this size of ${componentName}. Try using a 'secondary' button instead.`
-    );
-
     const secondaryActions = countActions('secondary');
-    check(
-      prop.length > primaryActions + secondaryActions + ghostActions,
-      `you can only have 'primary', 'secondary' and 'ghost' buttons in a ${componentName}.`
-    );
+    const ghostActions = countActions('ghost');
+
+    stacking &&
+      actions > 3 &&
+      problems.push(
+        `you cannot have more than three actions in this size of ${componentName}`
+      );
+
+    actions > 4 &&
+      problems.push(
+        `you cannot have more than four actions in a ${componentName}`
+      );
+
+    primaryActions > 1 &&
+      problems.push(
+        `you cannot have more than one 'primary' action in a ${componentName}`
+      );
+
+    ghostActions > 1 &&
+      problems.push(
+        `you cannot have more than one 'ghost' action in a ${componentName}`
+      );
+
+    stacking &&
+      actions > 1 &&
+      ghostActions > 0 &&
+      problems.push(
+        `you cannot have a 'ghost' button in conjunction with other action types in this size of ${componentName}`
+      );
+
+    actions > primaryActions + secondaryActions + ghostActions &&
+      problems.push(
+        `you can only have 'primary', 'secondary' and 'ghost' buttons in a ${componentName}`
+      );
   }
 
-  return null;
+  return problems.length > 0
+    ? new Error(
+        `Invalid ${location} \`${name}\` supplied to \`${componentName}\`: ${problems.join(
+          ', and '
+        )}.`
+      )
+    : null;
 };
 
 ActionSet.propTypes = {
@@ -223,7 +243,7 @@ ActionSet.propTypes = {
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  actions: PropTypes.oneOfType([
+  actions: allPropTypes([
     ActionSet.validateActions(),
     PropTypes.arrayOf(
       PropTypes.shape({

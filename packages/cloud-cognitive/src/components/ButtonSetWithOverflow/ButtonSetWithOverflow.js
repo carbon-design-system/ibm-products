@@ -192,7 +192,7 @@ ButtonSetWithOverflow.propTypes = {
       PropTypes.arrayOf(PropTypes.element),
       PropTypes.element,
     ]),
-    "See documentation on the 'buttons' property."
+    'See documentation on the `buttons` property.'
   ), // expects action bar item as array or in fragment,
   /**
    * className

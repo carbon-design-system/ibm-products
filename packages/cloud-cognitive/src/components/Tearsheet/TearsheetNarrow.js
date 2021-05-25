@@ -11,7 +11,7 @@ import React from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
-import { prepareProps } from '../../global/js/utils/props-helper';
+import { allPropTypes, prepareProps } from '../../global/js/utils/props-helper';
 
 // Carbon and package components we use.
 import { Button } from 'carbon-components-react';
@@ -65,7 +65,7 @@ TearsheetNarrow.propTypes = {
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  actions: PropTypes.oneOfType([
+  actions: allPropTypes([
     ActionSet.validateActions(() => 'lg'),
     PropTypes.arrayOf(
       PropTypes.shape({

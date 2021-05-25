@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, useCallback, useEffect, useState } from 'react';
+import React, {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useState,
+  useRef,
+} from 'react';
 import PropTypes from 'prop-types';
 import { ProgressIndicator, ProgressStep } from 'carbon-components-react';
 import cx from 'classnames';
@@ -16,6 +22,14 @@ import { CREATE_TEARSHEET_STEP } from './constants';
 
 const componentName = 'CreateTearsheet';
 const blockClass = `${pkg.prefix}--tearsheet-create`;
+
+const usePreviousValue = (value) => {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+};
 
 export let CreateTearsheet = forwardRef(
   (
@@ -39,6 +53,7 @@ export let CreateTearsheet = forwardRef(
     const [createTearsheetActions, setCreateTearsheetActions] = useState([]);
     const [currentStep, setCurrentStep] = useState(1);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const previousStep = usePreviousValue({ currentStep });
 
     useEffect(() => {
       const createSteps = getTearsheetSteps();
@@ -237,7 +252,7 @@ export let CreateTearsheet = forwardRef(
 
     // set initial focus when the step changes
     useEffect(() => {
-      if (open) {
+      if (open && previousStep.currentStep !== currentStep) {
         const visibleStepInnerContent = document.querySelector(
           `.${pkg.prefix}--tearsheet__step.${pkg.prefix}--tearsheet-create__step--visible-section`
         );
@@ -255,7 +270,7 @@ export let CreateTearsheet = forwardRef(
           nextButton?.focus();
         }
       }
-    }, [open, currentStep, getTearsheetSteps]);
+    }, [open, currentStep, getTearsheetSteps, previousStep]);
 
     const getFocusableElements = (element) => {
       return [

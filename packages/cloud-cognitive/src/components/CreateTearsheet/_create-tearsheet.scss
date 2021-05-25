@@ -31,6 +31,20 @@
   .#{$block-class} .#{$block-class}__step {
     max-width: 50%;
   }
+
+  .#{$block-class}__step--visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    // stylelint-disable-next-line carbon/layout-token-use
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    border: 0;
+    visibility: inherit;
+    clip: rect(0, 0, 0, 0);
+  }
 }
 
 @include exports('create-tearsheet') {

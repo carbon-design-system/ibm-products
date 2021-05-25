@@ -7,13 +7,9 @@
 
 import React, { forwardRef, useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Button,
-  ProgressIndicator,
-  ProgressStep,
-} from 'carbon-components-react';
+import { ProgressIndicator, ProgressStep } from 'carbon-components-react';
 import cx from 'classnames';
-import { ActionSet } from '../ActionSet';
+import wrapFocus from '../../global/js/utils/wrapFocus';
 import { TearsheetShell } from '../Tearsheet/TearsheetShell';
 import { pkg } from '../../settings';
 import { CREATE_TEARSHEET_STEP } from './constants';
@@ -28,18 +24,12 @@ export let CreateTearsheet = forwardRef(
       cancelButtonText,
       children,
       className,
-      closeIconDescription,
       description,
-      influencerPosition,
-      influencerWidth,
       label,
-      navigation,
       nextButtonText,
       onClose,
       onRequestSubmit,
       open,
-      preventCloseOnClickOutside,
-      selectorPrimaryFocus,
       submitButtonText,
       title,
       verticalPosition,
@@ -61,6 +51,25 @@ export let CreateTearsheet = forwardRef(
     }, [getTearsheetSteps]);
 
     useEffect(() => {
+      const handleOnRequestSubmit = () => {
+        // check if onRequestSubmit returns a promise
+        const onRequestSubmitFn = onRequestSubmit();
+        if (onRequestSubmitFn instanceof Promise) {
+          onRequestSubmitFn
+            .then(() => {
+              setIsSubmitting(false);
+              onClose();
+              setCurrentStep(1);
+            })
+            .catch((error) => {
+              setIsSubmitting(false);
+              console.warn(`${componentName} submit error: ${error}`);
+            });
+        } else {
+          onClose();
+          setCurrentStep(1);
+        }
+      };
       const isSubmitDisabled = () => {
         let step = 0;
         let submitDisabled = false;
@@ -77,33 +86,39 @@ export let CreateTearsheet = forwardRef(
         setIsSubmitting(true);
         const createSteps = getTearsheetSteps();
         if (createSteps[currentStep - 1].props.onNext) {
-          createSteps[currentStep - 1].props
-            .onNext()
-            .then(() => {
-              setIsSubmitting(false);
-              setCurrentStep((prev) => prev + 1);
-            })
-            .catch((error) => {
-              setIsSubmitting(false);
-              console.warn(`${componentName} onNext error: ${error}`);
-            });
+          // check if onNext returns a promise
+          const onNextFn = createSteps[currentStep - 1].props.onNext();
+          if (onNextFn instanceof Promise) {
+            onNextFn
+              .then(() => continueToNextStep())
+              .catch((error) => {
+                setIsSubmitting(false);
+                console.warn(`${componentName} onNext error: ${error}`);
+              });
+          } else {
+            continueToNextStep();
+          }
         } else {
-          setIsSubmitting(false);
-          setCurrentStep((prev) => prev + 1);
+          continueToNextStep();
         }
       };
       const handleSubmit = () => {
         setIsSubmitting(true);
-        onRequestSubmit()
-          .then(() => {
-            setIsSubmitting(false);
-            onClose();
-            setCurrentStep(1);
-          })
-          .catch((error) => {
-            setIsSubmitting(false);
-            console.warn(`${componentName} submit error: ${error}`);
-          });
+        const createSteps = getTearsheetSteps();
+        // last step should have onNext as well
+        if (createSteps[currentStep - 1].props.onNext) {
+          const onNextFn = createSteps[currentStep - 1].props.onNext();
+          if (onNextFn instanceof Promise) {
+            onNextFn
+              .then(() => handleOnRequestSubmit())
+              .catch((error) => {
+                setIsSubmitting(false);
+                console.warn(`${componentName} onNext error: ${error}`);
+              });
+          } else {
+            handleOnRequestSubmit();
+          }
+        } else handleOnRequestSubmit();
       };
       if (getTearsheetSteps()?.length) {
         const createSteps = getTearsheetSteps();
@@ -124,17 +139,13 @@ export let CreateTearsheet = forwardRef(
           },
           kind: 'ghost',
         });
-        const currentCreateStep = createSteps[currentStep - 1];
-        let nextLabel = nextButtonText;
-        if (currentCreateStep?.props?.nextButtonText) {
-          nextLabel = currentCreateStep.props.nextButtonText;
-        }
         buttons.push({
-          label: currentStep < total ? nextLabel : submitButtonText,
+          label: currentStep < total ? nextButtonText : submitButtonText,
           onClick: currentStep < total ? handleNext : handleSubmit,
           disabled: isSubmitDisabled(),
           kind: 'primary',
           loading: isSubmitting,
+          className: `${blockClass}__create-button`,
         });
         setCreateTearsheetActions(buttons);
       }
@@ -150,6 +161,11 @@ export let CreateTearsheet = forwardRef(
       onRequestSubmit,
       isSubmitting,
     ]);
+
+    const continueToNextStep = () => {
+      setIsSubmitting(false);
+      setCurrentStep((prev) => prev + 1);
+    };
 
     const getTearsheetSteps = useCallback(() => {
       const steps = [];
@@ -181,9 +197,9 @@ export let CreateTearsheet = forwardRef(
           spaceEqually
           vertical
           className={`${blockClass}__progress-indicator`}>
-          {childrenArray.map((child, stepIndex) => {
-            return <ProgressStep label={child.props.title} key={stepIndex} />;
-          })}
+          {childrenArray.map((child, stepIndex) => (
+            <ProgressStep label={child.props.title} key={stepIndex} />
+          ))}
         </ProgressIndicator>
       );
     };
@@ -219,27 +235,78 @@ export let CreateTearsheet = forwardRef(
       return stepTitle;
     };
 
+    // set initial focus when the step changes
+    useEffect(() => {
+      if (open) {
+        const visibleStepInnerContent = document.querySelector(
+          `.${pkg.prefix}--tearsheet__step.${pkg.prefix}--tearsheet-create__step--visible-section`
+        );
+        const tearsheetSteps = getTearsheetSteps();
+        const focusableStepElements =
+          tearsheetSteps &&
+          tearsheetSteps.length &&
+          getFocusableElements(visibleStepInnerContent);
+        if (focusableStepElements && focusableStepElements.length) {
+          focusableStepElements[0].focus();
+        } else {
+          const nextButton = document.querySelector(
+            `.${blockClass}__create-button`
+          );
+          nextButton?.focus();
+        }
+      }
+    }, [open, currentStep, getTearsheetSteps]);
+
+    const getFocusableElements = (element) => {
+      return [
+        ...element.querySelectorAll(
+          'a, button, input, textarea, select, details,[tabindex]:not([tabindex="-1"])'
+        ),
+      ].filter((e) => !e.hasAttribute('disabled'));
+    };
+
+    // adds focus trap functionality
+    /* istanbul ignore next */
+    const handleBlur = ({
+      target: oldActiveNode,
+      relatedTarget: currentActiveNode,
+    }) => {
+      const visibleStepInnerContent = document.querySelector(
+        `.${pkg.prefix}--tearsheet__body`
+      );
+      let visibleStepStartMarker;
+      let visibleStepEndMarker;
+      if (open && visibleStepInnerContent) {
+        wrapFocus({
+          bodyNode: visibleStepInnerContent,
+          visibleStepStartMarker,
+          visibleStepEndMarker,
+          currentActiveNode,
+          oldActiveNode,
+        });
+      }
+    };
+
     return (
       <TearsheetShell
         actions={createTearsheetActions}
         className={cx(blockClass, className)}
-        closeIconDescription={closeIconDescription}
+        closeIconDescription={'Close icon'}
         description={description}
         hasCloseIcon={false}
         influencer={renderProgressSteps(children)}
-        influencerPosition={influencerPosition}
-        influencerWidth={influencerWidth}
+        influencerPosition="left"
+        influencerWidth="narrow"
         label={label}
-        navigation={navigation}
         onClose={onClose}
         open={open}
-        preventCloseOnClickOutside={preventCloseOnClickOutside}
-        selectorPrimaryFocus={selectorPrimaryFocus}
         size="wide"
         title={title}
         verticalPosition={verticalPosition}
         ref={ref}>
-        <div className={`${blockClass}__multi-step-panel-content`}>
+        <div
+          className={`${blockClass}__multi-step-panel-content`}
+          onBlur={handleBlur}>
           <p className={`${blockClass}__step--heading`}>{renderStepTitle()}</p>
           {renderChildren(children)}
         </div>
@@ -259,41 +326,14 @@ CreateTearsheet.displayName = componentName;
 // corresponding props for TearsheetNarrow and TearsheetShell components.
 CreateTearsheet.propTypes = {
   /**
-   * The navigation actions to be shown as buttons in the action area at the
-   * bottom of the tearsheet. Each action is specified as an object with
-   * optional fields: 'label' to supply the button label, 'kind' to select the
-   * button kind (must be 'primary', 'secondary' or 'ghost'), 'loading' to
-   * display a loading indicator, and 'onClick' to receive notifications when
-   * the button is clicked. Additional fields in the object will be passed to
-   * the Button component, and these can include 'disabled', 'ref', 'className',
-   * and any other Button props. Any other fields in the object will be passed
-   * through to the button element as HTML attributes.
-   *
-   * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
-   */
-  actions: PropTypes.oneOfType([
-    ActionSet.validateActions(() => 'max'),
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        ...Button.propTypes,
-        kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
-        label: PropTypes.string,
-        loading: PropTypes.bool,
-        // we duplicate this Button prop to improve the DocGen here
-        onClick: Button.propTypes.onClick,
-      })
-    ),
-  ]),
-
-  /**
    * The back button text
    */
-  backButtonText: PropTypes.string,
+  backButtonText: PropTypes.string.isRequired,
 
   /**
    * The cancel button text
    */
-  cancelButtonText: PropTypes.string,
+  cancelButtonText: PropTypes.string.isRequired,
 
   /**
    * The main content of the tearsheet
@@ -306,32 +346,9 @@ CreateTearsheet.propTypes = {
   className: PropTypes.string,
 
   /**
-   * The accessibility title for the close icon (if shown).
-   */
-  closeIconDescription: PropTypes.string,
-
-  /**
    * A description of the flow, displayed in the header area of the tearsheet.
    */
   description: PropTypes.node,
-
-  /**
-   * The content for the influencer section of the tearsheet, displayed
-   * alongside the main content. This is typically a menu, or filter, or
-   * progress indicator, or similar.
-   */
-  influencer: PropTypes.element,
-
-  /**
-   * The position of the influencer section, 'left' or 'right'.
-   */
-  influencerPosition: PropTypes.oneOf(['left', 'right']),
-
-  /**
-   * The width of the influencer: 'narrow' (the default) is 256px, and 'wide'
-   * is 320px.
-   */
-  influencerWidth: PropTypes.oneOf(['narrow', 'wide']),
 
   /**
    * A label for the tearsheet, displayed in the header area of the tearsheet
@@ -341,15 +358,9 @@ CreateTearsheet.propTypes = {
   label: PropTypes.node,
 
   /**
-   * Navigation content, such as a set of tabs, to be displayed at the bottom
-   * of the header area of the tearsheet.
-   */
-  navigation: PropTypes.element,
-
-  /**
    * The next button text
    */
-  nextButtonText: PropTypes.string,
+  nextButtonText: PropTypes.string.isRequired,
 
   /**
    * An optional handler that is called when the user closes the tearsheet (by
@@ -359,8 +370,8 @@ CreateTearsheet.propTypes = {
   onClose: PropTypes.func,
 
   /**
-   * Specify a handler for submitting the multi step tearsheet.
-   * This function _must_ return a promise that is either resolved or rejected.
+   * Specify a handler for submitting the multi step tearsheet (final step).
+   * This function can _optionally_ return a promise that is either resolved or rejected and the CreateTearsheet will handle the submitting state of the create button.
    */
   onRequestSubmit: PropTypes.func.isRequired,
 
@@ -370,21 +381,9 @@ CreateTearsheet.propTypes = {
   open: PropTypes.bool,
 
   /**
-   * Prevent the tearsheet from automatically closing (triggering onClose, if
-   * provided, which can be cancelled by returning 'false') if the user clicks
-   * outside it.
-   */
-  preventCloseOnClickOutside: PropTypes.bool,
-
-  /**
-   * Specifies which DOM element in the form should be focused.
-   */
-  selectorPrimaryFocus: PropTypes.node,
-
-  /**
    * The submit button text
    */
-  submitButtonText: PropTypes.string,
+  submitButtonText: PropTypes.string.isRequired,
 
   /**
    * The main title of the tearsheet, displayed in the header area.
@@ -406,8 +405,5 @@ CreateTearsheet.propTypes = {
 // 'undefined' values reasonably. Default values should be provided when the
 // component needs to make a choice or assumption when a prop is not supplied.
 CreateTearsheet.defaultProps = {
-  closeIconDescription: 'Close',
-  influencerPosition: 'left',
-  influencerWidth: 'narrow',
   verticalPosition: 'normal',
 };

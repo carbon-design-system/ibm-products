@@ -10,7 +10,6 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { pkg } from '../../settings';
-import { ActionSet } from '../ActionSet';
 import { CreateTearsheet } from './CreateTearsheet';
 import { CreateTearsheetStep } from './CreateTearsheetStep';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -19,19 +18,22 @@ const tearsheetBlockClass = `${pkg.prefix}--tearsheet-create`;
 const rejectionErrorMessage = uuidv4();
 const onCloseFn = jest.fn();
 const onRequestSubmitFn = jest.fn(() => Promise.resolve());
+const onRequestSubmitNonPromiseFn = jest.fn();
 const onRequestSubmitRejectFn = jest.fn(() =>
   Promise.reject(rejectionErrorMessage)
 );
-//  const onUnmountFn = jest.fn();
 const onNextStepFn = jest.fn(() => Promise.resolve());
+const onNextStepNonPromiseFn = jest.fn();
 const onNextStepRejectionFn = jest.fn(() =>
   Promise.reject(rejectionErrorMessage)
 );
+const finalStepOnNext = jest.fn(() => Promise.resolve());
+const finalStepOnNextNonPromise = jest.fn();
+const finalStepOnNextRejectFn = jest.fn(() => Promise.reject());
 const submitButtonText = 'Submit';
 const cancelButtonText = uuidv4();
 const backButtonText = uuidv4();
 const nextButtonText = 'Next';
-const customNextButtonText = uuidv4();
 const step3Title = uuidv4();
 const step2Title = uuidv4();
 const step1Title = uuidv4();
@@ -39,15 +41,16 @@ const title = uuidv4();
 const renderCreateTearsheet = (
   rejectOnSubmit = false,
   rejectOnNext = false,
-  customNextButtonText = null
+  submitFn = onRequestSubmitFn,
+  onNext = onNextStepFn,
+  finalOnNextFn = finalStepOnNext,
+  rejectOnSubmitNext = false
 ) =>
   render(
     <CreateTearsheet
       open={true}
       onClose={onCloseFn}
-      onRequestSubmit={
-        rejectOnSubmit ? onRequestSubmitRejectFn : onRequestSubmitFn
-      }
+      onRequestSubmit={rejectOnSubmit ? onRequestSubmitRejectFn : submitFn}
       submitButtonText={submitButtonText}
       cancelButtonText={cancelButtonText}
       backButtonText={backButtonText}
@@ -55,21 +58,26 @@ const renderCreateTearsheet = (
       title={title}>
       <p>Child element that persists across all steps</p>
       <CreateTearsheetStep
-        onNext={rejectOnNext ? onNextStepRejectionFn : onNextStepFn}
-        nextButtonText={customNextButtonText ? customNextButtonText : null}
+        onNext={rejectOnNext ? onNextStepRejectionFn : onNext}
         title={step1Title}>
         step 1 content
+        <button type="button" disabled>
+          Test
+        </button>
+        <input type="text" />
       </CreateTearsheetStep>
       <CreateTearsheetStep title={step2Title}>
         step 2 content
       </CreateTearsheetStep>
-      <CreateTearsheetStep title={step3Title}>
+      <CreateTearsheetStep
+        title={step3Title}
+        onNext={rejectOnSubmitNext ? finalStepOnNextRejectFn : finalOnNextFn}>
         step 3 content
       </CreateTearsheetStep>
     </CreateTearsheet>
   );
 
-const renderEmptyCreateTearsheet = () =>
+const renderEmptyCreateTearsheet = ({ ...rest }) =>
   render(
     <CreateTearsheet
       open={true}
@@ -79,7 +87,8 @@ const renderEmptyCreateTearsheet = () =>
       cancelButtonText={cancelButtonText}
       backButtonText={backButtonText}
       nextButtonText={nextButtonText}
-      title={title}>
+      title={title}
+      {...rest}>
       <p>Child element that persists across all steps</p>
     </CreateTearsheet>
   );
@@ -160,7 +169,7 @@ describe(CreateTearsheet.displayName, () => {
 
   it('renders the next CreateTearsheet step without onNext handler', async () => {
     const { click } = userEvent;
-    const { container } = renderCreateTearsheet();
+    const { container, rerender } = renderCreateTearsheet();
     const nextButtonElement = screen.getByText(nextButtonText);
     click(nextButtonElement);
     await waitFor(() => {
@@ -175,11 +184,27 @@ describe(CreateTearsheet.displayName, () => {
         `.${tearsheetBlockClass}__step--visible-section`
       )
     );
+    rerender(
+      <CreateTearsheet
+        open={false}
+        onClose={onCloseFn}
+        onRequestSubmit={onRequestSubmitFn}
+        submitButtonText={submitButtonText}
+        cancelButtonText={cancelButtonText}
+        backButtonText={backButtonText}
+        nextButtonText={nextButtonText}
+        title={title}>
+        <p>Child element that persists across all steps</p>
+        <CreateTearsheetStep title={step1Title}>
+          step 1 content
+        </CreateTearsheetStep>
+      </CreateTearsheet>
+    );
   });
 
-  it('should call the onRequestSubmit prop on last step submit button', async () => {
+  it('should call the onRequestSubmit prop, returning a promise on last step submit button', async () => {
     const { click } = userEvent;
-    renderCreateTearsheet();
+    renderCreateTearsheet(false, false, onRequestSubmitFn, onNextStepFn, null);
     const nextButtonElement = screen.getByText(nextButtonText);
     click(nextButtonElement);
     await waitFor(() => {
@@ -191,6 +216,53 @@ describe(CreateTearsheet.displayName, () => {
     await waitFor(() => {
       expect(onRequestSubmitFn).toHaveBeenCalled();
     });
+  });
+
+  it('should call the onRequestSubmit function, without a promise, on last step submit button', async () => {
+    const { click } = userEvent;
+    renderCreateTearsheet(
+      false,
+      false,
+      onRequestSubmitNonPromiseFn,
+      onNextStepNonPromiseFn,
+      finalStepOnNextNonPromise
+    );
+    const nextButtonElement = screen.getByText(nextButtonText);
+    click(nextButtonElement);
+    await waitFor(() => {
+      expect(onNextStepNonPromiseFn).toHaveBeenCalled();
+    });
+    click(nextButtonElement);
+    const submitButtonElement = screen.getByText(submitButtonText);
+    click(submitButtonElement);
+    await waitFor(() => {
+      expect(onRequestSubmitNonPromiseFn).toHaveBeenCalled();
+    });
+  });
+
+  it('should call the onNext function from the final step and reject the promise', async () => {
+    jest.spyOn(console, 'warn').mockImplementation(jest.fn());
+    const { click } = userEvent;
+    renderCreateTearsheet(
+      false,
+      false,
+      onRequestSubmitFn,
+      onNextStepFn,
+      null,
+      true
+    );
+    const nextButtonElement = screen.getByText(nextButtonText);
+    click(nextButtonElement);
+    await waitFor(() => {
+      expect(onNextStepFn).toHaveBeenCalled();
+    });
+    click(nextButtonElement);
+    const submitButtonElement = screen.getByText(submitButtonText);
+    click(submitButtonElement);
+    await waitFor(() => {
+      expect(finalStepOnNextRejectFn).toHaveBeenCalled();
+    });
+    jest.spyOn(console, 'warn').mockRestore();
   });
 
   it('should call the onRequestSubmit prop and reject the promise', async () => {
@@ -221,12 +293,8 @@ describe(CreateTearsheet.displayName, () => {
 
   it('should click the back button and add a custom next button label on a single step', async () => {
     const { click } = userEvent;
-    const { container } = renderCreateTearsheet(
-      false,
-      false,
-      customNextButtonText
-    );
-    const nextButtonElement = screen.getByText(customNextButtonText);
+    const { container } = renderCreateTearsheet(false, false);
+    const nextButtonElement = screen.getByText(nextButtonText);
     click(nextButtonElement);
     await waitFor(() => {
       expect(onNextStepFn).toHaveBeenCalled();
@@ -247,40 +315,5 @@ describe(CreateTearsheet.displayName, () => {
     jest.spyOn(console, 'warn').mockImplementation(jest.fn());
     renderSingleStepCreateTearsheet();
     jest.spyOn(console, 'warn').mockRestore();
-  });
-
-  const validateActions = (size, props, propName, componentName) => () =>
-    ActionSet.validateActions(() => size)(props, propName, componentName);
-
-  it('should not throw an error when building the create tearsheet actions', () => {
-    const { container } = renderCreateTearsheet();
-    const actionSetElements = Array.from(
-      container.querySelector(`.${pkg.prefix}--action-set`).children
-    );
-    const groups = [];
-    actionSetElements.forEach((element) => {
-      if (element.classList.contains('bx--btn--primary'))
-        groups.push({
-          kind: 'primary',
-        });
-      if (element.classList.contains('bx--btn--secondary'))
-        groups.push({
-          kind: 'secondary',
-        });
-      if (element.classList.contains('bx--btn--ghost'))
-        groups.push({
-          kind: 'ghost',
-        });
-    });
-    expect(
-      validateActions(
-        'max',
-        {
-          ['actions']: groups,
-        },
-        'actions',
-        CreateTearsheet.displayName
-      )
-    ).not.toThrow();
   });
 });

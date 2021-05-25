@@ -28,6 +28,8 @@ export const MultiStepTearsheet = () => {
   const [shouldReject, setShouldReject] = useState(false);
   const [hasSubmitError, setHasSubmitError] = useState(false);
   const [stepOneTextInputValue, setStepOneTextInputValue] = useState('');
+  const [topicDescriptionValue, setTopicDescriptionValue] = useState('');
+  const [topicVersionValue, setTopicVersionValue] = useState('');
   const [stepTwoTextInputValue, setStepTwoTextInputValue] = useState(1);
   const [stepThreeTextInputValue, setStepThreeTextInputValue] = useState(
     'one-day'
@@ -45,15 +47,19 @@ export const MultiStepTearsheet = () => {
 
   return (
     <div>
+      <style>{`.${blockClass} { opacity: 0 }`};</style>
       <Button onClick={() => setOpen(!open)}>
         {open ? 'Close CreateTearsheet' : 'Open CreateTearsheet'}
       </Button>
       <CreateTearsheet
-        selectorPrimaryFocus="#tearsheet-multi-step-story-text-input-multi-step-1"
+        className={blockClass}
         submitButtonText="Create"
         cancelButtonText="Cancel"
         backButtonText="Back"
         nextButtonText="Next"
+        description="Specify details for the new topic you want to create"
+        label="This is the label of the multi step tearsheet"
+        title="Create topic"
         open={open}
         onClose={clearCreateData}
         onRequestSubmit={() => {
@@ -63,13 +69,7 @@ export const MultiStepTearsheet = () => {
               resolve();
             }, simulatedDelay);
           });
-        }}
-        closeIconDescription="Close the tearsheet"
-        description="Specify details for the new topic you want to create"
-        label="This is the label of the multi step tearsheet"
-        preventCloseOnClickOutside
-        title="Create topic"
-        className={blockClass}>
+        }}>
         <CreateTearsheetStep
           onNext={() => {
             return new Promise((resolve, reject) => {
@@ -99,7 +99,7 @@ export const MultiStepTearsheet = () => {
             connection information, so make it something easy to recognize.
           </p>
           <TextInput
-            labelText="Topic name"
+            labelText="Topic name*"
             id="tearsheet-multi-step-story-text-input-multi-step-1"
             value={stepOneTextInputValue}
             placeholder="Enter topic name"
@@ -112,6 +112,20 @@ export const MultiStepTearsheet = () => {
             onBlur={() => {
               if (!stepOneTextInputValue.length) setIsInvalid(true);
             }}
+          />
+          <TextInput
+            labelText="Topic description"
+            id="tearsheet-multi-step-story-text-input-multi-step-1-input-2"
+            value={topicDescriptionValue}
+            placeholder="Enter topic description"
+            onChange={(event) => setTopicDescriptionValue(event.target.value)}
+          />
+          <TextInput
+            labelText="Topic version"
+            id="tearsheet-multi-step-story-text-input-multi-step-1-input-3"
+            value={topicVersionValue}
+            placeholder="Enter topic version"
+            onChange={(event) => setTopicVersionValue(event.target.value)}
           />
           {hasSubmitError && (
             <InlineNotification
@@ -160,7 +174,8 @@ export const MultiStepTearsheet = () => {
         </CreateTearsheetStep>
         <CreateTearsheetStep
           title="Message retention"
-          disableSubmit={!stepThreeTextInputValue}>
+          disableSubmit={!stepThreeTextInputValue}
+          onNext={() => Promise.resolve()}>
           <h6
             className={cx(
               `${blockClass}__description`,

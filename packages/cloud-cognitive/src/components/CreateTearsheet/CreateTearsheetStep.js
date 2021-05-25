@@ -11,7 +11,7 @@ import cx from 'classnames';
 import { pkg } from '../../settings';
 import { CREATE_TEARSHEET_STEP } from './constants';
 
-const componentName = 'TearsheetStep';
+const componentName = 'CreateTearsheetStep';
 const blockClass = `${pkg.prefix}--tearsheet__step`;
 
 export let CreateTearsheetStep = forwardRef(({ children, className }, ref) => {
@@ -45,14 +45,9 @@ CreateTearsheetStep.propTypes = {
   disableSubmit: PropTypes.bool,
 
   /**
-   * Sets text for the next button
-   */
-  nextButtonText: PropTypes.string,
-
-  /**
    * Optional function to be called on a step change.
    * For example, this can be used to validate input fields before proceeding to the next step.
-   * This function _must_ return a promise that is either resolved or rejected.
+   * This function can _optionally_ return a promise that is either resolved or rejected and the CreateTearsheet will handle the submitting state of the next button.
    */
   onNext: PropTypes.func,
 

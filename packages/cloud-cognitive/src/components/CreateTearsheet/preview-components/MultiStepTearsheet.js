@@ -38,6 +38,8 @@ export const MultiStepTearsheet = () => {
 
   const clearCreateData = () => {
     setStepOneTextInputValue('');
+    setTopicDescriptionValue('');
+    setTopicVersionValue('');
     setStepTwoTextInputValue(1);
     setStepThreeTextInputValue('one-day');
     setHasSubmitError(false);

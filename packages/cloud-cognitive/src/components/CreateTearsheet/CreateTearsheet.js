@@ -53,7 +53,7 @@ export let CreateTearsheet = forwardRef(
     const [createTearsheetActions, setCreateTearsheetActions] = useState([]);
     const [currentStep, setCurrentStep] = useState(1);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const previousStep = usePreviousValue({ currentStep });
+    const previousStepValue = usePreviousValue({ currentStep });
 
     useEffect(() => {
       const createSteps = getTearsheetSteps();
@@ -66,24 +66,24 @@ export let CreateTearsheet = forwardRef(
     }, [getTearsheetSteps]);
 
     useEffect(() => {
+      const onUnmount = () => {
+        onClose();
+        setTimeout(() => {
+          setCurrentStep(1);
+          setIsSubmitting(false);
+        }, 240);
+      };
       const handleOnRequestSubmit = () => {
         // check if onRequestSubmit returns a promise
         const onRequestSubmitFn = onRequestSubmit();
         if (onRequestSubmitFn instanceof Promise) {
           onRequestSubmitFn
-            .then(() => {
-              setIsSubmitting(false);
-              onClose();
-              setCurrentStep(1);
-            })
+            .then(() => onUnmount())
             .catch((error) => {
               setIsSubmitting(false);
               console.warn(`${componentName} submit error: ${error}`);
             });
-        } else {
-          onClose();
-          setCurrentStep(1);
-        }
+        } else onUnmount();
       };
       const isSubmitDisabled = () => {
         let step = 0;
@@ -148,10 +148,7 @@ export let CreateTearsheet = forwardRef(
           });
         buttons.push({
           label: cancelButtonText,
-          onClick: () => {
-            setCurrentStep(1);
-            onClose();
-          },
+          onClick: onUnmount,
           kind: 'ghost',
         });
         buttons.push({
@@ -182,6 +179,7 @@ export let CreateTearsheet = forwardRef(
       setCurrentStep((prev) => prev + 1);
     };
 
+    // returns an array of tearsheet steps
     const getTearsheetSteps = useCallback(() => {
       const steps = [];
       const childrenArray = Array.isArray(children) ? children : [children];
@@ -201,6 +199,7 @@ export let CreateTearsheet = forwardRef(
       return false;
     };
 
+    // renders the step progression components in the left influencer area
     const renderProgressSteps = (childrenElements) => {
       let childrenArray = Array.isArray(childrenElements)
         ? childrenElements
@@ -219,6 +218,7 @@ export let CreateTearsheet = forwardRef(
       );
     };
 
+    // renders all children (CreateTearsheetSteps and regular children elements)
     const renderChildren = (childrenElements) => {
       let step = 0;
       const childrenArray = Array.isArray(childrenElements)
@@ -242,6 +242,7 @@ export let CreateTearsheet = forwardRef(
       );
     };
 
+    // renders the individual step title
     const renderStepTitle = () => {
       const tearsheetSteps = getTearsheetSteps();
       const stepTitle =
@@ -250,9 +251,10 @@ export let CreateTearsheet = forwardRef(
       return stepTitle;
     };
 
-    // set initial focus when the step changes
+    // set initial focus when the step changes, if there is not an input to focus
+    // the next/create button receives focus
     useEffect(() => {
-      if (open && previousStep.currentStep !== currentStep) {
+      if (open && previousStepValue?.currentStep !== currentStep) {
         const visibleStepInnerContent = document.querySelector(
           `.${pkg.prefix}--tearsheet__step.${pkg.prefix}--tearsheet-create__step--visible-section`
         );
@@ -270,8 +272,9 @@ export let CreateTearsheet = forwardRef(
           nextButton?.focus();
         }
       }
-    }, [open, currentStep, getTearsheetSteps, previousStep]);
+    }, [open, currentStep, getTearsheetSteps, previousStepValue]);
 
+    // returns an array of focusable elements, for use in auto focusing the first input on a step
     const getFocusableElements = (element) => {
       return [
         ...element.querySelectorAll(

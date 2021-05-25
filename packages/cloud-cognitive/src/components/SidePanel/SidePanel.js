@@ -14,6 +14,7 @@ import cx from 'classnames';
 import ReactResizeDetector from 'react-resize-detector';
 import wrapFocus from '../../global/js/utils/wrapFocus';
 import { pkg } from '../../settings';
+import { allPropTypes } from '../../global/js/utils/props-helper';
 import { SIDE_PANEL_SIZES } from './constants';
 
 // Carbon and package components we use.
@@ -45,6 +46,7 @@ export let SidePanel = React.forwardRef(
       navigationBackIconDescription,
       onNavigationBack,
       onRequestClose,
+      onUnmount,
       open,
       pageContentSelector,
       placement,
@@ -289,7 +291,10 @@ export let SidePanel = React.forwardRef(
 
     // initialize the side panel to close
     const onAnimationEnd = () => {
-      if (!open) setRender(false);
+      if (!open) {
+        onUnmount && onUnmount();
+        setRender(false);
+      }
       sidePanelRef.current.style.overflow = 'auto';
       sidePanelRef.current.style.overflowX = 'hidden';
       setAnimationComplete(true);
@@ -572,7 +577,7 @@ SidePanel.propTypes = {
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  actions: PropTypes.oneOfType([
+  actions: allPropTypes([
     ActionSet.validateActions(),
     PropTypes.arrayOf(
       PropTypes.shape({
@@ -644,6 +649,12 @@ SidePanel.propTypes = {
    * This handler closes the modal, e.g. changing `open` prop.
    */
   onRequestClose: PropTypes.func,
+
+  /**
+   * Optional function called when the side panel exit animation is complete.
+   * This handler can be used for any state cleanup needed before the panel is removed from the DOM.
+   */
+  onUnmount: PropTypes.func,
 
   /**
    * Determines whether the side panel should render or not

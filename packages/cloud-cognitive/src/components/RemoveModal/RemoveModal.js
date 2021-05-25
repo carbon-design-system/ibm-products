@@ -1,6 +1,14 @@
+//
+// Copyright IBM Corp. 2020, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 import React, { useState, useRef, forwardRef } from 'react';
 import cx from 'classnames';
 import {
+  Button,
   ComposedModal,
   ModalHeader,
   ModalFooter,
@@ -11,9 +19,9 @@ import PropTypes from 'prop-types';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { pkg } from '../../settings';
-const componentName = 'RemoveDeleteModal';
+const componentName = 'RemoveModal';
 
-export let RemoveDeleteModal = forwardRef(
+export let RemoveModal = forwardRef(
   (
     {
       body,
@@ -23,11 +31,12 @@ export let RemoveDeleteModal = forwardRef(
       inputLabelText,
       inputPlaceholderText,
       label,
-      onRequestClose,
+      onClose,
       onRequestSubmit,
       open,
+      preventCloseOnClickOutside,
       primaryButtonText,
-      resource,
+      resourceName,
       secondaryButtonText,
       textConfirmation,
       title,
@@ -40,15 +49,15 @@ export let RemoveDeleteModal = forwardRef(
     const onChangeHandler = (e) => {
       setUserInput(e.target.value);
     };
-    const primaryButtonDisabled = textConfirmation && userInput !== resource;
-    const blockClass = `${pkg.prefix}--remove-delete-modal`;
+    const primaryButtonDisabled =
+      textConfirmation && userInput !== resourceName;
+    const blockClass = `${pkg.prefix}--remove-modal`;
     return (
       <ComposedModal
         {...rest}
-        open={open}
-        ref={ref}
-        danger
-        className={cx(blockClass, className)}>
+        className={cx(blockClass, className)}
+        size="sm"
+        {...{ open, ref, preventCloseOnClickOutside, onClose }}>
         <ModalHeader
           title={title}
           label={label}
@@ -59,6 +68,7 @@ export let RemoveDeleteModal = forwardRef(
           {textConfirmation && (
             <TextInput
               id={`${idRef.current}-confirmation-input`}
+              className={`${blockClass}__input`}
               invalidText={inputInvalidText}
               labelText={inputLabelText}
               placeholder={inputPlaceholderText}
@@ -66,24 +76,29 @@ export let RemoveDeleteModal = forwardRef(
             />
           )}
         </ModalBody>
-        <ModalFooter
-          primaryButtonText={primaryButtonText}
-          secondaryButtonText={secondaryButtonText}
-          primaryButtonDisabled={primaryButtonDisabled}
-          onRequestClose={onRequestClose}
-          onRequestSubmit={onRequestSubmit}
-        />
+        <ModalFooter>
+          <Button type="button" kind="secondary" onClick={onClose}>
+            {secondaryButtonText}
+          </Button>
+          <Button
+            type="submit"
+            kind="danger"
+            onClick={onRequestSubmit}
+            disabled={primaryButtonDisabled}>
+            {primaryButtonText}
+          </Button>
+        </ModalFooter>
       </ComposedModal>
     );
   }
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-RemoveDeleteModal = pkg.checkComponentEnabled(RemoveDeleteModal, componentName);
+RemoveModal = pkg.checkComponentEnabled(RemoveModal, componentName);
 
-RemoveDeleteModal.propTypes = {
+RemoveModal.propTypes = {
   /**
-   * The conent to be displayed in the body of the modal
+   * The content to be displayed in the body of the modal
    */
   body: PropTypes.string.isRequired,
   /**
@@ -93,7 +108,7 @@ RemoveDeleteModal.propTypes = {
   /**
    * Provide a description for "close" icon that can be read by screen readers
    */
-  iconDescription: PropTypes.string,
+  iconDescription: PropTypes.string.isRequired,
   /**
    * Message showed when user input fails validation
    */
@@ -113,7 +128,7 @@ RemoveDeleteModal.propTypes = {
   /**
    * Callback function that runs when user closes the modal
    */
-  onRequestClose: PropTypes.func,
+  onClose: PropTypes.func,
   /**
    * Callback function that runs when user submits the modal
    */
@@ -123,13 +138,17 @@ RemoveDeleteModal.propTypes = {
    */
   open: PropTypes.bool.isRequired,
   /**
+   * Prevent closing on click outside of modal
+   */
+  preventCloseOnClickOutside: PropTypes.bool,
+  /**
    * Specify the text for the primary button
    */
   primaryButtonText: PropTypes.string,
   /**
    * The name of the resource being acted upon
    */
-  resource: PropTypes.string.isRequired,
+  resourceName: PropTypes.string.isRequired,
   /**
    * Specify the text for the secondary button
    */
@@ -144,8 +163,8 @@ RemoveDeleteModal.propTypes = {
   title: PropTypes.string.isRequired,
 };
 
-RemoveDeleteModal.defaultProps = {
+RemoveModal.defaultProps = {
   textConfirmation: false,
 };
 
-RemoveDeleteModal.displayName = componentName;
+RemoveModal.displayName = componentName;

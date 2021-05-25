@@ -1,3 +1,10 @@
+//
+// Copyright IBM Corp. 2020, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
@@ -5,28 +12,34 @@
 @import 'carbon-components/scss/components/text-input/text-input';
 @import 'carbon-components/scss/components/radio-button/radio-button';
 @import 'carbon-components/scss/components/loading/loading';
+@import 'carbon-components/scss/components/button/button';
 
 @mixin export-modal {
   $block-class: #{$pkg-prefix}--export-modal;
 
-  .#{$block-class}-body {
-    margin-bottom: $spacing-05;
+  .#{$block-class} .bx--modal-content {
+    padding-right: $spacing-05;
   }
 
-  .#{$block-class}-messaging {
+  .#{$block-class}__body {
+    margin-bottom: $spacing-05;
+    padding-right: 20%;
+  }
+
+  .#{$block-class}__messaging {
     display: flex;
     align-items: center;
   }
 
-  .#{$block-class}-messaging p {
+  .#{$block-class}__messaging p {
     margin-left: $spacing-03;
   }
 
-  .#{$block-class}-checkmark-icon {
+  .#{$block-class}__checkmark-icon {
     fill: $interactive-01;
   }
 
-  .#{$block-class}-error-icon {
+  .#{$block-class}__error-icon {
     fill: $danger;
   }
 }

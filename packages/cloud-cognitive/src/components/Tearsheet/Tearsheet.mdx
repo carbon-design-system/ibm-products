@@ -44,8 +44,9 @@ Tearsheets may be stacked up to 3 levels deep.
   <Story
     id={getStorybookSlug(
       pkg,
-      `tearsheets-${Tearsheet.displayName}`,
-      'all-attributes-set'
+      Tearsheet.displayName,
+      'with-navigation',
+      'tearsheets'
     )}
   />
 </Preview>
@@ -56,8 +57,9 @@ Tearsheets may be stacked up to 3 levels deep.
   <Story
     id={getStorybookSlug(
       pkg,
-      `tearsheets-${TearsheetNarrow.displayName}`,
-      'all-attributes-set'
+      TearsheetNarrow.displayName,
+      'fully-loaded',
+      'tearsheets'
     )}
   />
 </Preview>

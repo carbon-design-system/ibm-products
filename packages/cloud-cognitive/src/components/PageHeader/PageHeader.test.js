@@ -107,7 +107,8 @@ const tags = [
     A tag
   </Tag>,
 ];
-const title = 'Page title';
+const titleObj = { text: 'Page title', loading: false, icon: Bee32 };
+const titleString = 'Page title';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { prepareProps } from '../../global/js/utils/props-helper';
@@ -193,7 +194,11 @@ const testProps = {
   pageActions,
   subtitle,
   tags,
-  title,
+  title: titleObj,
+};
+
+const testPropsAltTitle = {
+  title: titleString,
   titleIcon: Bee32,
 };
 
@@ -249,7 +254,7 @@ describe('PageHeader', () => {
     const header = screen.getByTestId(dataTestid);
     expect(header).toHaveClass(blockClass);
 
-    expect(header).not.toHaveClass(`${blockClass}--show-background`);
+    expect(header).toHaveClass(`${blockClass}--show-background`);
 
     expect(header).not.toHaveClass(classNames[0]);
     expect(header).not.toHaveClass(classNames[1]);
@@ -271,7 +276,7 @@ describe('PageHeader', () => {
     expect(screen.queryByText(subtitle)).toBeNull();
     expect(screen.queryAllByTestId('tags')).toHaveLength(0);
     expect(document.querySelectorAll(`.${blockClass}__title`)).toHaveLength(0);
-    expect(screen.queryByText(title)).toBeNull();
+    expect(screen.queryByText(titleObj.text)).toBeNull();
     expect(
       document.querySelectorAll(`.${blockClass}__title-icon`)
     ).toHaveLength(0);
@@ -321,7 +326,7 @@ describe('PageHeader', () => {
     ).toHaveLength(4);
     expect(document.querySelectorAll(`.${blockClass}__title`)).toHaveLength(1);
     expect(document.querySelector(`.${blockClass}__title`).textContent).toEqual(
-      title
+      titleObj.text
     );
     expect(
       document.querySelectorAll(`.${blockClass}__title-icon`)
@@ -389,17 +394,15 @@ describe('PageHeader', () => {
     render(
       <PageHeader
         {...testProps}
-        showCollapseHeaderButton
+        collapseHeaderLabel="Toggle collapse"
+        expandHeaderLabel="Toggle expand"
+        collapseHeaderToggleWanted={true}
         data-testid={dataTestid}
       />
     );
 
-    // console.dir(screen.getByRole('region')); // section should be a region https://fae.disability.illinois.edu/rulesets/ROLE_5/
-    // const header = screen.getByTestId(dataTestid);
-    const collapseButton = screen.getByText('Toggle expansion');
+    const collapseButton = screen.getByText('Toggle collapse');
 
-    // const prevCalls = window.scrollTo.callCount;
-    // console.dir(window.scrollTo);
     window.scrollTo.mockReset();
     expect(window.scrollTo).not.toHaveBeenCalled();
     userEvent.click(collapseButton);
@@ -468,5 +471,21 @@ describe('PageHeader', () => {
       `.${blockClass}__action-bar`
     );
     expect(actionBarItems).toHaveLength(1);
+  });
+
+  test('renders  title when using separate string and icon', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    render(<PageHeader {...testPropsAltTitle} />);
+
+    expect(warn).toBeCalledWith(
+      "The prop 'titleIcon' of 'PageHeader' has been deprecated and will soon be removed. Deprecated. Use title prop shape instead."
+    );
+
+    screen.getByText(titleString, { selector: `.${blockClass}__title span` });
+
+    expect(
+      document.querySelectorAll(`.${blockClass}__title-icon`)
+    ).toHaveLength(1);
   });
 });

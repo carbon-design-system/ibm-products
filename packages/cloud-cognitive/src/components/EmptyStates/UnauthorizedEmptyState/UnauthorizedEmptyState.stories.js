@@ -31,55 +31,66 @@ export default {
   },
 };
 
+const defaultStoryProps = {
+  title: 'Empty state title',
+  subtitle: 'Description text explaining why this section is empty.',
+};
+
 const Template = (args) => {
-  return (
-    <UnauthorizedEmptyState
-      title="Start by adding data assets"
-      subtitle={
-        <p>
-          Click <span>Upload assets</span> to upload your data
-        </p>
-      }
-      {...args}
-    />
-  );
+  return <UnauthorizedEmptyState {...args} />;
 };
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  ...defaultStoryProps,
+};
 
 export const WithDarkModeIllustration = Template.bind({});
 WithDarkModeIllustration.args = {
+  ...defaultStoryProps,
   illustrationTheme: 'dark',
 };
 
 export const withAction = Template.bind({});
 withAction.args = {
-  actionText: 'Create new',
-  actionType: 'tertiary',
-  onActionEvent: action('actionHandler'),
+  ...defaultStoryProps,
+  action: {
+    text: 'Create new',
+    onClick: action('Clicked empty state action button'),
+  },
 };
 
 export const withActionIconButton = Template.bind({});
 withActionIconButton.args = {
-  actionText: 'Create new',
-  actionType: 'tertiary',
-  onActionEvent: action('actionHandler'),
-  actionIcon: Add20,
+  ...defaultStoryProps,
+  action: {
+    text: 'Create new',
+    onClick: action('Clicked empty state action button'),
+    renderIcon: Add20,
+    iconDescription: 'Add icon',
+  },
 };
 
 export const withLink = Template.bind({});
 withLink.args = {
-  linkText: 'View documentation',
-  linkUrl: 'https://www.carbondesignsystem.com',
+  ...defaultStoryProps,
+  link: {
+    text: 'View documentation',
+    href: 'https://www.carbondesignsystem.com',
+  },
 };
 
 export const withActionAndLink = Template.bind({});
 withActionAndLink.args = {
-  actionText: 'Create new',
-  actionType: 'tertiary',
-  onActionEvent: action('actionHandler'),
-  actionIcon: Add20,
-  linkText: 'View documentation',
-  linkUrl: 'https://www.carbondesignsystem.com',
+  ...defaultStoryProps,
+  action: {
+    text: 'Create new',
+    onClick: action('Clicked empty state action button'),
+    renderIcon: Add20,
+    iconDescription: 'Add icon',
+  },
+  link: {
+    text: 'View documentation',
+    href: 'https://www.carbondesignsystem.com',
+  },
 };

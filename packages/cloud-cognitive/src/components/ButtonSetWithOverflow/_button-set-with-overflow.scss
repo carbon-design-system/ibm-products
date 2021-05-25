@@ -31,13 +31,7 @@ $block-class: #{$pkg-prefix}--button-set-with-overflow;
 
     .#{$block-class}__button-container--hidden {
       // This button-set container is used to measure the width of all displayable button-sets
-      position: absolute;
-      top: -100vh;
-      // stylelint-disable-next-line carbon/layout-token-use
-      left: calc(-100vw - 100%);
-      overflow: hidden;
-      visibility: hidden;
-      pointer-events: none;
+      @include measuring-container;
     }
 
     .#{$block-class}--right {

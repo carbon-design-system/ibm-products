@@ -924,7 +924,7 @@ PageHeader.propTypes = {
    */
   titleIcon: deprecateProp(
     PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-    'Deprecated. Use title prop shape instead.'
+    'Use `title` prop shape instead.'
   ),
 };
 

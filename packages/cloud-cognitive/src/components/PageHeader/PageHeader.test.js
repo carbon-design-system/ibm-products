@@ -339,7 +339,7 @@ describe('PageHeader', () => {
     render(<PageHeader actionBarItems={actionBarItemsNodes} />);
 
     expect(warn).toBeCalledWith(
-      "The usage of prop 'actionBarItems' of 'PageHeader' has been changed and you should update. Expects an array of objects with the following properties: iconDescription, renderIcon and onClick."
+      'The usage of the prop `actionBarItems` of `PageHeader` has been changed and support for the old usage will soon be removed. Expects an array of objects with the following properties: iconDescription, renderIcon and onClick.'
     );
 
     warn.mockRestore(); // Remove mock
@@ -355,7 +355,7 @@ describe('PageHeader', () => {
     });
 
     expect(warn).toBeCalledWith(
-      "The usage of prop 'pageActions' of 'PageHeader' has been changed and you should update. Expects an array of objects with the following properties: label and onClick."
+      'The usage of the prop `pageActions` of `PageHeader` has been changed and support for the old usage will soon be removed. Expects an array of objects with the following properties: label and onClick.'
     );
 
     warn.mockRestore(); // Remove mock
@@ -371,7 +371,7 @@ describe('PageHeader', () => {
     });
 
     expect(warn).toBeCalledWith(
-      "The usage of prop 'pageActions' of 'PageHeader' has been changed and you should update. Expects an array of objects with the following properties: label and onClick."
+      'The usage of the prop `pageActions` of `PageHeader` has been changed and support for the old usage will soon be removed. Expects an array of objects with the following properties: label and onClick.'
     );
 
     warn.mockRestore(); // Remove mock
@@ -479,7 +479,7 @@ describe('PageHeader', () => {
     render(<PageHeader {...testPropsAltTitle} />);
 
     expect(warn).toBeCalledWith(
-      "The prop 'titleIcon' of 'PageHeader' has been deprecated and will soon be removed. Deprecated. Use title prop shape instead."
+      'The prop `titleIcon` of `PageHeader` has been deprecated and will soon be removed. Use `title` prop shape instead.'
     );
 
     screen.getByText(titleString, { selector: `.${blockClass}__title span` });

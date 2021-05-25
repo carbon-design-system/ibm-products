@@ -223,7 +223,7 @@ ActionBar.propTypes = {
       PropTypes.arrayOf(PropTypes.element),
       PropTypes.element,
     ]),
-    "See documentation on the 'actions' property."
+    'See documentation on the `actions` prop.'
   ), // expects action bar item as array or in fragment,
   /**
    * className

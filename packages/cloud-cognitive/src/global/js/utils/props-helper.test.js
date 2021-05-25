@@ -5,7 +5,16 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import { prepareProps, allPropTypes } from './props-helper';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { render } from '@testing-library/react';
+
+import {
+  prepareProps,
+  allPropTypes,
+  deprecateProp,
+  deprecatePropUsage,
+} from './props-helper';
 
 describe('prepareProps', () => {
   const defaults = { a: 1, b: 2, c: 3, d: 4, e: 5, f: 6, g: 7, h: 8 };
@@ -48,6 +57,51 @@ describe('prepareProps', () => {
     expect(result.o).toEqual(23);
     // blocked, overridden
     expect(result.p).toEqual(24);
+  });
+});
+
+describe('deprecateProp and deprecatePropUsage', () => {
+  const Component = () => null;
+  Component.displayName = 'x';
+  Component.propTypes = {
+    a: deprecateProp(PropTypes.string, 'Explanation 1.'),
+    b: PropTypes.string,
+    c: PropTypes.oneOfType([
+      PropTypes.string,
+      deprecatePropUsage(PropTypes.number, 'Explanation 2.'),
+    ]),
+  };
+
+  it('reports prop deprecated when deprecated prop is used', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    render(<Component a="fish" />);
+    expect(warn).toBeCalledWith(
+      'The prop `a` of `x` has been deprecated and will soon be removed. Explanation 1.'
+    );
+    warn.mockRestore();
+  });
+
+  it('does not report prop deprecated when non-deprecated prop is used', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    render(<Component b="fish" />);
+    expect(warn).not.toBeCalled();
+    warn.mockRestore();
+  });
+
+  it('reports prop usage deprecated when deprecated usage is used', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    render(<Component c={42} />);
+    expect(warn).toBeCalledWith(
+      'The usage of the prop `c` of `x` has been changed and support for the old usage will soon be removed. Explanation 2.'
+    );
+    warn.mockRestore();
+  });
+
+  it('does not report prop usage deprecated when non-deprecated usage is used', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    render(<Component c="fish" />);
+    expect(warn).not.toBeCalled();
+    warn.mockRestore();
   });
 });
 

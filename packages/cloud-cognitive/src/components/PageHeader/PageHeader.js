@@ -555,8 +555,6 @@ export let PageHeader = React.forwardRef(
       loading: titleLoading,
     } = titleShape;
 
-    // console.log('hasBreadcrumbRow', hasBreadcrumbRow);
-
     return (
       <ReactResizeDetector handleHeight onResize={handleResize}>
         <section

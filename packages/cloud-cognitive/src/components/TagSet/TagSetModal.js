@@ -60,7 +60,6 @@ export const TagSetModal = ({
   return (
     <ComposedModal
       className={`${blockClass}__show-all-tags-modal`}
-      passiveModal
       size="sm"
       {...{ open, onClose }}>
       <ModalHeader title={heading}>

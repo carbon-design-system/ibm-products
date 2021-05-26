@@ -424,7 +424,9 @@ describe('PageHeader', () => {
       />
     );
 
-    const collapseButton = screen.getByText('Toggle collapse');
+    const collapseButton = screen.getByRole('button', {
+      name: 'Toggle collapse',
+    });
 
     window.scrollTo.mockReset();
     expect(window.scrollTo).not.toHaveBeenCalled();

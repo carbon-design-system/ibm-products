@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.40.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.40.4...@carbon/ibm-cloud-cognitive@0.40.5) (2021-05-26)
+
+
+### Bug Fixes
+
+* **CreateTearsheet:** fix console error in tests from timeout issue ([#793](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/793)) ([18cab39](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/18cab399c921972d5b8b3eb90222f1a744a53a54))
+
+
+
+
+
 ## [0.40.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.40.3...@carbon/ibm-cloud-cognitive@0.40.4) (2021-05-26)
 
 

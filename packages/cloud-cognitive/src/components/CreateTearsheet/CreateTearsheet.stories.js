@@ -9,6 +9,7 @@ import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 import styles from './_storybook-styles.scss';
 import { CreateTearsheet } from './CreateTearsheet';
+import { CreateTearsheetStep } from './CreateTearsheetStep';
 import { MultiStepTearsheet } from './preview-components/MultiStepTearsheet';
 import mdx from './CreateTearsheet.mdx';
 
@@ -17,6 +18,9 @@ const storybookPrefix = getStorybookPrefix(pkg, CreateTearsheet.displayName);
 export default {
   title: `${storybookPrefix}/${CreateTearsheet.displayName}`,
   component: CreateTearsheet,
+  subcomponents: {
+    CreateTearsheetStep,
+  },
   argTypes: {
     description: { control: { type: 'text' } },
     label: { control: { type: 'text' } },

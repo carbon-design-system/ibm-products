@@ -188,7 +188,9 @@ export default class IdeImporting extends React.Component {
       };
     });
     for (let fileToUpload of mappedFiles) {
-      this.handleFileAdded(fileToUpload);
+      this.handleFileAdded(fileToUpload).catch((err) => {
+        console.warn(err);
+      });
     }
   }
   handleUrlAdded(addedFiles) {

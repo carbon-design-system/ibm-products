@@ -35,6 +35,8 @@ const defaults = {
     ButtonMenu: false,
     ButtonMenuItem: false,
     CreateSidePanel: false,
+    CreateTearsheet: false,
+    CreateTearsheetStep: false,
     ContextHeader: false,
     ExampleComponent: false,
     ExportModal: false,

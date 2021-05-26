@@ -20,53 +20,55 @@ const blockClass = `${pkg.prefix}--http-errors`;
 const componentName = HTTPError404.displayName;
 
 const dataTestId = uuidv4();
+const className = 'className';
+const errorCodeLabel = uuidv4();
+const description = uuidv4();
+const ref = React.createRef();
+const title = uuidv4();
+const defaultProps = {
+  title,
+  className,
+  errorCodeLabel,
+  description,
+  links: [
+    {
+      text: 'Carbon Design System',
+      href: 'https://www.carbondesignsystem.com/',
+    },
+    {
+      text: 'IBM Cloud and Cognitive component library',
+      href: 'https://github.com/carbon-design-system/ibm-cloud-cognitive',
+    },
+  ],
+  ref,
+  'data-testid': dataTestId,
+};
 
 describe(componentName, () => {
   it('has no accessibility violations', async () => {
-    const { container } = render(<HTTPError404 title="Test heading" />);
+    const { container } = render(<HTTPError404 {...defaultProps} />);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   }, 80000);
 
   it('Renders the component `HTTPErrors` if flag is enabled', () => {
-    const { container } = render(<HTTPError404 />);
-
+    const { container } = render(<HTTPError404 {...defaultProps} />);
     expect(container.querySelector(`.${blockClass}`)).not.toBeNull();
+    expect(screen.getByText(title));
+    const link = screen.getByRole('link', { name: 'Carbon Design System' });
+    expect(link.href).toEqual('https://www.carbondesignsystem.com/');
   });
 
   it('adds a class to the containing node', () => {
-    const className = 'className';
-
     expect(
-      render(<HTTPError404 className={className} />).container.querySelector(
+      render(<HTTPError404 {...defaultProps} />).container.querySelector(
         `.${className}`
       )
     ).toBeInTheDocument();
   });
 
   it('should render the HTTPError404 component', () => {
-    const ref = React.createRef();
-    const errorCodeLabel = uuidv4();
-    const description = uuidv4();
-    const { container } = render(
-      <HTTPError404
-        title="Test title"
-        errorCodeLabel={errorCodeLabel}
-        description={description}
-        links={[
-          {
-            text: 'Carbon Design System',
-            url: 'https://www.carbondesignsystem.com',
-          },
-          {
-            text: 'IBM Cloud and Cognitive component library',
-            url: 'https://github.com/carbon-design-system/ibm-cloud-cognitive',
-          },
-        ]}
-        ref={ref}
-        data-testid={dataTestId}
-      />
-    );
+    const { container } = render(<HTTPError404 {...defaultProps} />);
     expect(screen.getByText(errorCodeLabel));
     expect(screen.getByText(description));
     expect(screen.getByText('IBM Cloud and Cognitive component library'));
@@ -76,28 +78,7 @@ describe(componentName, () => {
     ).toBeInTheDocument();
   });
   it('should render the HTTPError403 component', () => {
-    const ref = React.createRef();
-    const errorCodeLabel = uuidv4();
-    const description = uuidv4();
-    const { container } = render(
-      <HTTPError403
-        title="Test title"
-        errorCodeLabel={errorCodeLabel}
-        description={description}
-        links={[
-          {
-            text: 'Carbon Design System',
-            url: 'https://www.carbondesignsystem.com',
-          },
-          {
-            text: 'IBM Cloud and Cognitive component library',
-            url: 'https://github.com/carbon-design-system/ibm-cloud-cognitive',
-          },
-        ]}
-        ref={ref}
-        data-testid={dataTestId}
-      />
-    );
+    const { container } = render(<HTTPError403 {...defaultProps} />);
     expect(screen.getByText(errorCodeLabel));
     expect(screen.getByText(description));
     expect(screen.getByText('IBM Cloud and Cognitive component library'));
@@ -107,28 +88,7 @@ describe(componentName, () => {
     ).toBeInTheDocument();
   });
   it('should render the HTTPErrorOther component', () => {
-    const ref = React.createRef();
-    const errorCodeLabel = uuidv4();
-    const description = uuidv4();
-    const { container } = render(
-      <HTTPErrorOther
-        title="Test title"
-        errorCodeLabel={errorCodeLabel}
-        description={description}
-        links={[
-          {
-            text: 'Carbon Design System',
-            url: 'https://www.carbondesignsystem.com',
-          },
-          {
-            text: 'IBM Cloud and Cognitive component library',
-            url: 'https://github.com/carbon-design-system/ibm-cloud-cognitive',
-          },
-        ]}
-        ref={ref}
-        data-testid={dataTestId}
-      />
-    );
+    const { container } = render(<HTTPErrorOther {...defaultProps} />);
     expect(screen.getByText(errorCodeLabel));
     expect(screen.getByText(description));
     expect(screen.getByText('IBM Cloud and Cognitive component library'));

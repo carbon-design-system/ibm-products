@@ -23,12 +23,7 @@ export let HTTPError404 = React.forwardRef(
   ({ className, description, errorCodeLabel, links, title, ...rest }, ref) => {
     return (
       <div {...rest} className={cx(blockClass, className)} ref={ref}>
-        <HTTPErrorContent
-          description={description}
-          errorCodeLabel={errorCodeLabel}
-          title={title}
-          links={links}
-        />
+        <HTTPErrorContent {...{ description, errorCodeLabel, title, links }} />
         <HTTPErrorSvg404 className={`${blockClass}__image`} />
       </div>
     );
@@ -53,11 +48,11 @@ HTTPError404.propTypes = {
   /**
    * String that will provide the description for the HTTP error code
    */
-  description: string,
+  description: string.isRequired,
   /**
    * String that will describe the error that occurred
    */
-  errorCodeLabel: string,
+  errorCodeLabel: string.isRequired,
   /**
    * Links that will display for extra context when receiving particular errors
    */
@@ -70,11 +65,11 @@ HTTPError404.propTypes = {
       /**
        * The link's destination
        */
-      url: string.isRequired,
+      href: string.isRequired,
     })
   ),
   /**
    * This will be for the main title of the HTTP error component
    */
-  title: string,
+  title: string.isRequired,
 };

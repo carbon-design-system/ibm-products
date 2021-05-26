@@ -34,16 +34,18 @@ export let HTTPErrorContent = ({
       {description && (
         <p className={`${blockClass}__description`}>{description}</p>
       )}
-      {links && links.length
-        ? links.map((link) => (
-            <Link
-              url={link.url}
-              key={link.text}
-              className={`${blockClass}__link`}>
-              {link.text}
-            </Link>
-          ))
-        : null}
+      {links &&
+        links.length &&
+        links.map((link) => (
+          <Link
+            {...link}
+            role="link"
+            href={link.href}
+            key={link.text}
+            className={`${blockClass}__link`}>
+            {link.text}
+          </Link>
+        ))}
     </div>
   );
 };
@@ -62,16 +64,17 @@ HTTPErrorContent.propTypes = {
   /**
    * String that will provide the description for the HTTP error code
    */
-  description: string,
+  description: string.isRequired,
   /**
    * String that will describe the error that occurred
    */
-  errorCodeLabel: string,
+  errorCodeLabel: string.isRequired,
   /**
    * Links that will display for extra context when receiving particular errors
    */
   links: arrayOf(
     shape({
+      ...Link.propTypes,
       /**
        * The text to display for the link
        */
@@ -79,11 +82,11 @@ HTTPErrorContent.propTypes = {
       /**
        * The link's destination
        */
-      url: string.isRequired,
+      href: string.isRequired,
     })
   ),
   /**
    * This will be for the main title of the HTTP error component
    */
-  title: string,
+  title: string.isRequired,
 };

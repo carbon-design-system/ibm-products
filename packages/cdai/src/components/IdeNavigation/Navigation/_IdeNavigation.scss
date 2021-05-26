@@ -16,7 +16,7 @@
 }
 
 .#{$ide-prefix}-navigation--nav-overrides {
-  // stylelint-disable-next-line declaration-property-value-blacklist
+  // stylelint-disable-next-line declaration-property-value-disallowed-list
   height: unset; /* we will define the height */
   transition: all $duration--fast-01 cubic-bezier(0.2, 0, 1, 0.9);
 }
@@ -32,7 +32,7 @@
   background: $ui-01;
 
   // IMPORTANT - required so any fixed content renders in the correct place. Issue  raised to address. Short term, disable this as does nothing for us
-  // stylelint-disable-next-line declaration-property-value-blacklist
+  // stylelint-disable-next-line declaration-property-value-disallowed-list
   transform: unset;
   transition: all $duration--fast-01 cubic-bezier(0.2, 0, 1, 0.9);
 }
@@ -46,10 +46,10 @@
 .#{$ide-prefix}-navigation--toggle {
   .#{$prefix}--side-nav__toggle {
     .#{$prefix}--side-nav__icon {
-      // stylelint-disable-next-line declaration-property-value-blacklist
+      // stylelint-disable-next-line declaration-property-value-disallowed-list
       justify-content: unset;
       width: carbon--mini-units(6);
-      // stylelint-disable-next-line declaration-property-value-blacklist
+      // stylelint-disable-next-line declaration-property-value-disallowed-list
       margin-right: unset;
     }
   }

@@ -54,34 +54,43 @@ WithDarkModeIllustration.args = {
 export const withAction = Template.bind({});
 withAction.args = {
   ...defaultStoryProps,
-  actionText: 'Create new',
-  actionType: 'tertiary',
-  onActionEvent: action('actionHandler'),
+  action: {
+    text: 'Create new',
+    onClick: action('Clicked empty state action button'),
+  },
 };
 
 export const withActionIconButton = Template.bind({});
 withActionIconButton.args = {
   ...defaultStoryProps,
-  actionText: 'Create new',
-  actionType: 'tertiary',
-  onActionEvent: action('actionHandler'),
-  actionIcon: Add20,
+  action: {
+    text: 'Create new',
+    onClick: action('Clicked empty state action button'),
+    renderIcon: Add20,
+    iconDescription: 'Add icon',
+  },
 };
 
 export const withLink = Template.bind({});
 withLink.args = {
   ...defaultStoryProps,
-  linkText: 'View documentation',
-  linkUrl: 'https://www.carbondesignsystem.com',
+  link: {
+    text: 'View documentation',
+    href: 'https://www.carbondesignsystem.com',
+  },
 };
 
 export const withActionAndLink = Template.bind({});
 withActionAndLink.args = {
   ...defaultStoryProps,
-  actionText: 'Create new',
-  actionType: 'tertiary',
-  onActionEvent: action('actionHandler'),
-  actionIcon: Add20,
-  linkText: 'View documentation',
-  linkUrl: 'https://www.carbondesignsystem.com',
+  action: {
+    text: 'Create new',
+    onClick: action('Clicked empty state action button'),
+    renderIcon: Add20,
+    iconDescription: 'Add icon',
+  },
+  link: {
+    text: 'View documentation',
+    href: 'https://www.carbondesignsystem.com',
+  },
 };

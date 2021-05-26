@@ -17,6 +17,7 @@ import {
   Column,
   Row,
   Button,
+  SkeletonText,
 } from 'carbon-components-react';
 import { ActionBar } from '../ActionBar/';
 import { BreadcrumbWithOverflow } from '../BreadcrumbWithOverflow';
@@ -25,6 +26,7 @@ import { ButtonSetWithOverflow } from '../ButtonSetWithOverflow';
 import { pkg } from '../../settings';
 import { ChevronUp16 } from '@carbon/icons-react';
 import {
+  deprecateProp,
   deprecatePropUsage,
   extractShapesArray,
   prepareProps,
@@ -53,7 +55,7 @@ export let PageHeader = React.forwardRef(
       subtitle,
       tags,
       title,
-      titleIcon: TitleIcon,
+      titleIcon,
       ...rest
     },
     ref
@@ -89,6 +91,29 @@ export let PageHeader = React.forwardRef(
     ] = useState(0);
     const [actionBarColumnWidth, setActionBarColumnWidth] = useState(0);
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
+
+    /**
+     * * Title shape is used to allow title to be string or shape
+     */
+    const [titleShape, setTitleShape] = useState({});
+    useEffect(() => {
+      let newShape = { ...PageHeader.defaultProps.title };
+
+      if (title?.text) {
+        // title is in shape format
+        newShape = Object.assign(newShape, { ...title });
+      } else {
+        // title is a string
+        newShape.text = title;
+      }
+
+      if (!newShape.icon && titleIcon) {
+        // if no icon use titleIcon if supplied
+        newShape.icon = titleIcon;
+      }
+
+      setTitleShape(newShape);
+    }, [title, titleIcon]);
 
     useEffect(() => {
       let newActionBarWidth = 'initial';
@@ -245,11 +270,10 @@ export let PageHeader = React.forwardRef(
       // No navigation and title row not pre-collapsed
       // and zero or one of tags or (subtitle or available space)
       setLastRowBufferActive(
-        (!navigation &&
-          !preCollapseTitleRow &&
-          (title || pageActions) &&
-          !tags) ||
-          !(subtitle || availableSpace)
+        !(navigation || tags) &&
+          (((title || pageActions) && !preCollapseTitleRow) ||
+            subtitle ||
+            availableSpace)
       );
     }, [
       availableSpace,
@@ -508,6 +532,12 @@ export let PageHeader = React.forwardRef(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [collapseHeader]);
 
+    const {
+      text: titleText,
+      icon: TitleIcon,
+      loading: titleLoading,
+    } = titleShape;
+
     return (
       <ReactResizeDetector handleHeight onResize={handleResize}>
         <section
@@ -526,11 +556,9 @@ export let PageHeader = React.forwardRef(
             {hasBreadcrumbRow ? (
               <Row
                 className={cx(`${blockClass}__breadcrumb-row`, {
-                  [`${blockClass}__breadcrumb-row--with-actions`]: hasActionBar,
                   [`${blockClass}__breadcrumb-row--next-to-tabs`]: nextToTabsCheck(),
                   [`${blockClass}__breadcrumb-row--has-breadcrumbs`]: breadcrumbItems,
-                  [`${blockClass}__breadcrumb-row--has-action-bar`]:
-                    actionBarItems || pageActions,
+                  [`${blockClass}__breadcrumb-row--has-action-bar`]: hasActionBar,
                 })}>
                 <div className={`${blockClass}__breadcrumb-row--container`}>
                   <Column
@@ -555,7 +583,7 @@ export let PageHeader = React.forwardRef(
                                 [`${blockClass}__breadcrumb-title--pre-collapsed`]: preCollapseTitleRow,
                               },
                             ])}>
-                            {title}
+                            {titleLoading ? <SkeletonText /> : titleText}
                           </BreadcrumbItem>
                         ) : (
                           ''
@@ -630,12 +658,18 @@ export let PageHeader = React.forwardRef(
                       className={cx(`${blockClass}__title`, {
                         [`${blockClass}__title--fades`]: hasBreadcrumbRow,
                       })}>
-                      {TitleIcon ? (
+                      {TitleIcon && !titleLoading ? (
                         <TitleIcon className={`${blockClass}__title-icon`} />
-                      ) : (
-                        ''
-                      )}
-                      <span title={title}>{title}</span>
+                      ) : null}
+                      <span title={!titleLoading ? titleText : null}>
+                        {titleLoading ? (
+                          <SkeletonText
+                            className={`${blockClass}__title-skeleton`}
+                          />
+                        ) : (
+                          titleText
+                        )}
+                      </span>
                     </div>
                   ) : null}
                 </Column>
@@ -874,14 +908,24 @@ PageHeader.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.element),
   /**
    * The title of the page.
-   * Optional.
+   * Optional string or object with the following attributes: text, icon, loading
    */
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([
+    PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+      loading: PropTypes.bool,
+    }),
+    PropTypes.string,
+  ]),
   /**
    * An icon to be included to the left of the title text.
    * Optional.
    */
-  titleIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  titleIcon: deprecateProp(
+    PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    'Use `title` prop shape instead.'
+  ),
 };
 
 PageHeader.defaultProps = {

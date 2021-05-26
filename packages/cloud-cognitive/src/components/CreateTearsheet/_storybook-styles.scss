@@ -8,7 +8,7 @@
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
-$preview-block-class: #{$pkg-prefix}--tearsheet-wizard-preview;
+$preview-block-class: #{$pkg-prefix}--tearsheet-create-multi-step;
 
 .#{$preview-block-class}__description {
   @include carbon--type-style('body-short-01');

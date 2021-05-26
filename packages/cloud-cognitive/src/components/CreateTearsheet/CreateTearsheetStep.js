@@ -12,7 +12,7 @@ import { pkg } from '../../settings';
 import { CREATE_TEARSHEET_STEP } from './constants';
 
 const componentName = 'CreateTearsheetStep';
-const blockClass = `${pkg.prefix}--tearsheet__step`;
+const blockClass = `${pkg.prefix}--tearsheet-create__step`;
 
 export let CreateTearsheetStep = forwardRef(({ children, className }, ref) => {
   return (

@@ -20,7 +20,7 @@ import { pkg } from '../../../settings';
 import { CreateTearsheet } from '../CreateTearsheet';
 import { CreateTearsheetStep } from '../CreateTearsheetStep';
 
-const blockClass = `${pkg.prefix}--tearsheet-wizard-preview`;
+const blockClass = `${pkg.prefix}--tearsheet-create-multi-step`;
 
 export const MultiStepTearsheet = () => {
   const [simulatedDelay] = useState(750);

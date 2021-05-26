@@ -11,39 +11,25 @@
 @import 'carbon-components/scss/components/progress-indicator/progress-indicator';
 
 @mixin create-tearsheet {
-  $block-class: #{$pkg-prefix}--tearsheet;
-  .#{$block-class} .#{$block-class}-create__step--hidden-section {
+  $block-class: #{$pkg-prefix}--tearsheet-create;
+  .#{$block-class} .#{$block-class}__step--hidden-section {
     display: none;
   }
 
-  .#{$block-class} .#{$block-class}-create__multi-step-panel-content {
+  .#{$block-class} .#{$block-class}__multi-step-panel-content {
     padding: $spacing-06 $spacing-07;
   }
 
-  .#{$block-class} .#{$block-class}-create__progress-indicator {
+  .#{$block-class} .#{$block-class}__progress-indicator {
     padding: $spacing-05;
   }
 
-  .#{$block-class} .#{$block-class}-create__step--heading {
+  .#{$block-class} .#{$block-class}__step--heading {
     padding-bottom: $spacing-06;
   }
 
   .#{$block-class} .#{$block-class}__step {
     max-width: 50%;
-  }
-
-  .#{$block-class}__step--visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    // stylelint-disable-next-line carbon/layout-token-use
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    border: 0;
-    visibility: inherit;
-    clip: rect(0, 0, 0, 0);
   }
 }
 

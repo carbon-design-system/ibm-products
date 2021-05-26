@@ -38,6 +38,8 @@ const step3Title = uuidv4();
 const step2Title = uuidv4();
 const step1Title = uuidv4();
 const title = uuidv4();
+const dataTestId = uuidv4();
+const ref = React.createRef();
 const renderCreateTearsheet = (
   rejectOnSubmit = false,
   rejectOnNext = false,
@@ -55,7 +57,9 @@ const renderCreateTearsheet = (
       cancelButtonText={cancelButtonText}
       backButtonText={backButtonText}
       nextButtonText={nextButtonText}
-      title={title}>
+      title={title}
+      ref={ref}
+      data-testid={dataTestId}>
       <p>Child element that persists across all steps</p>
       <CreateTearsheetStep
         onNext={rejectOnNext ? onNextStepRejectionFn : onNext}
@@ -126,10 +130,17 @@ describe(CreateTearsheet.displayName, () => {
     jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
   });
+
   it('renders the CreateTearsheet component', () => {
     const { container } = renderCreateTearsheet();
     expect(screen.getAllByText(title));
     expect(container.querySelector(`.${tearsheetBlockClass}`)).toBeTruthy();
+    expect(ref.current).not.toBeNull();
+    expect(
+      container.querySelector(
+        `.${tearsheetBlockClass}[data-testid="${dataTestId}"]`
+      )
+    ).toBeInTheDocument();
   });
 
   it('renders the second step if clicking on the next step button with onNext optional function prop and then clicks cancel button', async () => {

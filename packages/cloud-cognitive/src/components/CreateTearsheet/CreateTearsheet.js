@@ -47,6 +47,7 @@ export let CreateTearsheet = forwardRef(
       submitButtonText,
       title,
       verticalPosition,
+      ...rest
     },
     ref
   ) => {
@@ -268,7 +269,7 @@ export let CreateTearsheet = forwardRef(
         currentStep > 0
       ) {
         const visibleStepInnerContent = document.querySelector(
-          `.${pkg.prefix}--tearsheet__step.${pkg.prefix}--tearsheet-create__step--visible-section`
+          `.${blockClass}__step.${blockClass}__step--visible-section`
         );
         const tearsheetSteps = getTearsheetSteps();
         const focusableStepElements =
@@ -319,6 +320,7 @@ export let CreateTearsheet = forwardRef(
 
     return (
       <TearsheetShell
+        {...rest}
         actions={createTearsheetActions}
         className={cx(blockClass, className)}
         closeIconDescription={'Close icon'}

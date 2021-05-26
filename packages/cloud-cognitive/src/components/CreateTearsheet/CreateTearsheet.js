@@ -51,9 +51,17 @@ export let CreateTearsheet = forwardRef(
     ref
   ) => {
     const [createTearsheetActions, setCreateTearsheetActions] = useState([]);
-    const [currentStep, setCurrentStep] = useState(1);
+    const [currentStep, setCurrentStep] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const previousStepValue = usePreviousValue({ currentStep });
+    const previousState = usePreviousValue({ currentStep, open });
+
+    // set current step to 1 upon tearsheet opening, in order
+    // to get the auto focus on the first step.
+    useEffect(() => {
+      if (!previousState?.open && open) {
+        setCurrentStep(1);
+      }
+    }, [open, previousState]);
 
     useEffect(() => {
       const createSteps = getTearsheetSteps();
@@ -69,7 +77,7 @@ export let CreateTearsheet = forwardRef(
       const onUnmount = () => {
         onClose();
         setTimeout(() => {
-          setCurrentStep(1);
+          setCurrentStep(0);
           setIsSubmitting(false);
         }, 240);
       };
@@ -254,7 +262,11 @@ export let CreateTearsheet = forwardRef(
     // set initial focus when the step changes, if there is not an input to focus
     // the next/create button receives focus
     useEffect(() => {
-      if (open && previousStepValue?.currentStep !== currentStep) {
+      if (
+        open &&
+        previousState?.currentStep !== currentStep &&
+        currentStep > 0
+      ) {
         const visibleStepInnerContent = document.querySelector(
           `.${pkg.prefix}--tearsheet__step.${pkg.prefix}--tearsheet-create__step--visible-section`
         );
@@ -272,7 +284,7 @@ export let CreateTearsheet = forwardRef(
           nextButton?.focus();
         }
       }
-    }, [open, currentStep, getTearsheetSteps, previousStepValue]);
+    }, [open, currentStep, getTearsheetSteps, previousState]);
 
     // returns an array of focusable elements, for use in auto focusing the first input on a step
     const getFocusableElements = (element) => {

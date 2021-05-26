@@ -49,13 +49,7 @@
 
     .#{$block-class}__breadcrumb-container--hidden {
       // This breadcrumb container is used to measure the width of all displayable breadcrumbs
-      position: absolute;
-      top: -100vh;
-      left: -100vw;
-      max-width: 0; // do not take up space.
-      overflow: hidden;
-      visibility: hidden;
-      pointer-events: none;
+      @include measuring-container;
     }
 
     .#{$block-class}__displayed-breadcrumb:last-child,

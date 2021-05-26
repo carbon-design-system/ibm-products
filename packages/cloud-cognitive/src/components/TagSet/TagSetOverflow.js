@@ -63,11 +63,15 @@ export const TagSetOverflow = React.forwardRef(
             ref={overflowTagContent}
             className={`${blockClass}__overflow-content`}>
             <ul className={`${blockClass}__overflow-tag-list`}>
-              {overflowTags.map((tag, index) => (
-                <li className={`${blockClass}__overflow-tag-item`} key={index}>
-                  {React.cloneElement(tag, { filter: false })}
-                </li>
-              ))}
+              {overflowTags
+                .filter((_, index) => index < 10)
+                .map((tag, index) => (
+                  <li
+                    className={`${blockClass}__overflow-tag-item`}
+                    key={index}>
+                    {React.cloneElement(tag, { filter: false })}
+                  </li>
+                ))}
             </ul>
             {overflowTags.length >= 10 && (
               <Link

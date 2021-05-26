@@ -25,6 +25,8 @@ describe('IdeFilter', () => {
     expect(wrapper.find('.ide-filter--select').at(0).text()).toBe('Search...');
   });
   it('Renders options with filter tags by default', () => {
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+
     const wrapper = mount(
       <IdeFilter
         options={untypedOptions}
@@ -41,6 +43,14 @@ describe('IdeFilter', () => {
     expect(wrapper.find('.ide-filter--tag').at(0).props().type).toEqual(
       'filter'
     );
+
+    // Known issue with invalid prop being passed to Tag component
+    expect(error).toBeCalledWith(
+      expect.stringContaining(
+        'Invalid prop `type` of value `filter` supplied to `Tag`'
+      )
+    );
+    error.mockRestore();
   });
   it('Renders options in menu', () => {
     const wrapper = mount(
@@ -190,7 +200,7 @@ describe('IdeFilter', () => {
         light
         onChange={() => {}}
         placeholderText="Search..."
-        searchIcon={(className) => (
+        searchIcon={({ className }) => (
           <span className="custom-icon">
             <Idea16 className={className} />
           </span>
@@ -198,7 +208,7 @@ describe('IdeFilter', () => {
       />
     );
     expect(wrapper).toBeDefined();
-    expect(wrapper.find('.ide-filter--search-icon')).toHaveLength(1);
+    expect(wrapper.find('svg.ide-filter--search-icon')).toHaveLength(1);
     expect(wrapper.find('.custom-icon')).toHaveLength(1);
   });
   it('Triggers on input change', () => {

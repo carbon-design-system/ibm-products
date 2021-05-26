@@ -13,6 +13,7 @@ import {
   validateFileAdded,
 } from './helpers';
 import { FileUploaderItem, TextInput } from 'carbon-components-react';
+import { waitFor } from '@testing-library/react';
 
 import React from 'react';
 // import {act} from 'react-dom/test-utils';
@@ -151,7 +152,8 @@ describe('IdeImporting unit tests', () => {
     wrapper.unmount();
   });
 
-  it('should handle errors thrown by onFileAdded', () => {
+  it('should handle errors thrown by onFileAdded', async () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
     const props = {
       validExtensions: ['png'],
       onFileAdded: jest.fn(() => {
@@ -162,7 +164,13 @@ describe('IdeImporting unit tests', () => {
     wrapper.simulateDropFiles([{ name: 'test-file.png' }]);
     expect(props.onFileAdded).toBeCalled();
     expect(props.onFileAdded).toThrow();
+    await waitFor(() => {
+      expect(warn).toBeCalledWith(
+        expect.objectContaining({ message: 'Subject: message' })
+      );
+    });
     wrapper.unmount();
+    warn.mockRestore();
   });
 
   it('should handle removing a file', () => {

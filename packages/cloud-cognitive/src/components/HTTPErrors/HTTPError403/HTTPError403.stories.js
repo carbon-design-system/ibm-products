@@ -47,11 +47,11 @@ withAllPropsSet.args = {
   links: [
     {
       text: 'Carbon Design System',
-      url: 'https://www.carbondesignsystem.com',
+      href: 'https://www.carbondesignsystem.com',
     },
     {
       text: 'IBM Cloud and Cognitive component library',
-      url: 'https://github.com/carbon-design-system/ibm-cloud-cognitive',
+      href: 'https://github.com/carbon-design-system/ibm-cloud-cognitive',
     },
   ],
 };

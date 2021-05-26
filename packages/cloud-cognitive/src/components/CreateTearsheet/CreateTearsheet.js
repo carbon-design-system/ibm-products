@@ -76,11 +76,9 @@ export let CreateTearsheet = forwardRef(
 
     useEffect(() => {
       const onUnmount = () => {
+        setCurrentStep(0);
+        setIsSubmitting(false);
         onClose();
-        setTimeout(() => {
-          setCurrentStep(0);
-          setIsSubmitting(false);
-        }, 240);
       };
       const handleOnRequestSubmit = () => {
         // check if onRequestSubmit returns a promise

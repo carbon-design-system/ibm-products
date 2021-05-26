@@ -5,12 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
- import React from 'react';
+import React from 'react';
 //import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
 
 import { pkg } from '../../settings';
-import '../../utils/enable-all'; // must come before component is imported (directly or indirectly)
 import { getStorybookPrefix } from '../../../config';
 
 import { LoadingBar } from '.';
@@ -36,7 +35,7 @@ const defaultProps = {
   active: true,
   small: false,
   ariaLabel: 'Active loading indicator',
-  className: 'some-class'
+  className: 'some-class',
 };
 
 /**
@@ -44,25 +43,21 @@ const defaultProps = {
  */
 const TemplateIndeterminate = (args) => {
   return (
-      <div className={"loading-bar-story-wrapper"}>
-          <LoadingBar
-            {...args}
-          />
-      </div>
-    )
+    <div className={'loading-bar-story-wrapper'}>
+      <LoadingBar {...args} />
+    </div>
+  );
 };
 
 const TemplateDeterminate = (args) => {
-  const percentageIndicatorText = args.percentageIndicatorText ? 
-    args.percentageIndicatorText :'Loading ' + args.percentage + '%';
+  const percentageIndicatorText = args.percentageIndicatorText
+    ? args.percentageIndicatorText
+    : 'Loading ' + args.percentage + '%';
   return (
-      <div className={"loading-bar-story-wrapper"}>
-          <LoadingBar
-            {...args}
-            percentageIndicatorText={percentageIndicatorText}
-          />
-      </div>
-    )
+    <div className={'loading-bar-story-wrapper'}>
+      <LoadingBar {...args} percentageIndicatorText={percentageIndicatorText} />
+    </div>
+  );
 };
 
 /**

@@ -68,6 +68,7 @@ export let PageHeader = React.forwardRef(
     },
     ref
   ) => {
+    const [metrics, setMetrics] = useState({});
     const { hasActionBar, actionBarItemArray } = useActionBar(actionBarItems);
     const hasBreadcrumbRow = useHasBreadcrumbRow(
       actionBarItems,
@@ -75,7 +76,6 @@ export let PageHeader = React.forwardRef(
     );
     const pageActionsInBreadcrumbRow = usePageActionsInBreadcrumbRow(
       hasActionBar,
-      metrics.breadcrumbRowSpaceBelow,
       metrics.titleRowSpaceAbove,
       preCollapseTitleRow,
       scrollYValue
@@ -95,7 +95,6 @@ export let PageHeader = React.forwardRef(
       PageHeader.defaultProps.title
     );
 
-    const [metrics, setMetrics] = useState({});
     const [scrollYValue, setScrollYValue] = useState(0);
     const [componentCssCustomProps, setComponentCssCustomProps] = useState({});
     const [backgroundOpacity, setBackgroundOpacity] = useState(0);

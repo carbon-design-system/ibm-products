@@ -14,6 +14,40 @@ export const useActionBar = (actionBarItems) => {
   return { hasActionBar, actionBarItemArray };
 };
 
+export const useHasBreadcrumbRow = (actionBarItems, breadcrumbItems) => {
+  const [hasBreadcrumbRow, setHasBreadcrumbRow] = useState(false);
+
+  useEffect(() => {
+    // Breadcrumb row only rendered if true
+    // eslint-disable-next-line
+    setHasBreadcrumbRow(
+      !(breadcrumbItems === undefined && actionBarItems === undefined)
+    );
+  }, [actionBarItems, breadcrumbItems]);
+
+  return hasBreadcrumbRow;
+};
+
+export const usePageActionsInBreadcrumbRow = (
+  hasActionBar,
+  titleRowSpaceAbove,
+  preCollapseTitleRow,
+  scrollYValue
+) => {
+  const [pageActionsInBreadcrumbRow, setPageActionsInBreadcrumbRow] = useState(
+    false
+  );
+
+  useEffect(() => {
+    // Determine the location of the pageAction buttons
+    setPageActionsInBreadcrumbRow(
+      preCollapseTitleRow || (scrollYValue > titleRowSpaceAbove && hasActionBar)
+    );
+  }, [hasActionBar, titleRowSpaceAbove, preCollapseTitleRow, scrollYValue]);
+
+  return pageActionsInBreadcrumbRow;
+};
+
 export const usePageActionsItemArray = (pageActions) => {
   const [pageActionsItemArray, setPageActionsItemArray] = useState([]);
 
@@ -25,6 +59,37 @@ export const usePageActionsItemArray = (pageActions) => {
   }, [pageActions]);
 
   return pageActionsItemArray;
+};
+
+export const useSpacingBelowTitle = (
+  availableSpace,
+  tags,
+  navigation,
+  subtitle,
+  pageActions
+) => {
+  const [spacingBelowTitle, setSpacingBelowTitle] = useState('06');
+
+  useEffect(() => {
+    // Determines the amount of space needed below the title
+    let belowTitleSpace = 'default';
+
+    if (
+      pageActions !== undefined &&
+      navigation !== undefined &&
+      subtitle === undefined &&
+      availableSpace === undefined
+    ) {
+      belowTitleSpace = '06';
+    } else if (subtitle !== undefined || availableSpace !== undefined) {
+      belowTitleSpace = '03';
+    } else if (navigation === undefined && tags !== undefined) {
+      belowTitleSpace = '05';
+    }
+    setSpacingBelowTitle(belowTitleSpace);
+  }, [availableSpace, tags, navigation, subtitle, pageActions]);
+
+  return spacingBelowTitle;
 };
 
 export const useTitleShape = (title, titleIcon, defaultTitle) => {

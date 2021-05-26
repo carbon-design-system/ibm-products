@@ -2,6 +2,8 @@ import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
 import { pkg } from '../../settings';
 import { getStorybookSlug } from '../../../config';
 import { CreateTearsheet } from '.';
+import createTearsheetGif from './storybook_assets/create_tearsheet.gif';
+import createTearsheetAnatomy from './storybook_assets/create_tearsheet_anatomy.jpg';
 
 # CreateTearsheet
 
@@ -13,14 +15,57 @@ import { CreateTearsheet } from '.';
 
 ## Overview
 
-This component is an example
+When to use
+
+- Use a wide tearsheet with creations that have two or more distinct steps.
+- Omit the progress indicator to use with single step creations that require
+  more space, such as those with interactive selections, diagrams, or tables.
+
+When not to use
+
+- Don’t use the wide tearsheet for low complexity create flows with only one
+  step.
+
+Anatomy of CreateTearsheet
+
+<img src={createTearsheetAnatomy} />
+
+1. **Tearsheet & overlay**: Wide tearsheet component with screen overlay that
+   obscures the on-page content.
+
+2. **Create title**: Title line for the create flow with an optional
+   description.
+
+3. **Progress indicator**: Vertical progress indicator lets the user know what
+   step they are on.
+
+4. **Toggle (Optional)**: Optional toggle allows the user to view all available
+   options in one scrolling page with anchor links, this capability is coming
+   soon.
+
+5. **Body**: Contains the information and/or controls needed to populate the
+   task. It can include message text and components. This will render the
+   children elements inside of a `CreateTearsheetStep`.
+
+6. **Buttons**: The primary, secondary, and ghost buttons are “Next”, “Back” and
+   “Cancel”, respectively. The “Back” button will be disabled on the first step.
+   The “Next” button will change to “Create” on the last step of creation.
+   “Cancel” closes the tearsheet and cancels the create action.
+
+Tearsheet create flow example:
+
+<img src={createTearsheetGif} />
 
 ## Example usage
 
-Here it is in use.
-
 <Preview>
-  <Story id={getStorybookSlug(pkg, CreateTearsheet.displayName, 'default')} />
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      CreateTearsheet.displayName,
+      'multi-step-tearsheet'
+    )}
+  />
 </Preview>
 
 ## Component API

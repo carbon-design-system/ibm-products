@@ -250,7 +250,7 @@ IdeFilter.propTypes = {
   ).isRequired,
   placeholderText: PropTypes.string,
   searchForText: PropTypes.string,
-  searchIcon: PropTypes.element,
+  searchIcon: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
   value: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,

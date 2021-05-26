@@ -95,7 +95,12 @@ describe(componentName, () => {
   });
 
   it('applies className to an action button', () => {
-    render(<ActionSet actions={[{ ...action1, className }, action2]} />);
+    render(
+      <ActionSet
+        wibbleWobble="42"
+        actions={[{ ...action1, className }, action2]}
+      />
+    );
     expect(getByRoleAndLabel('button', label1)).toHaveClass(className);
     expect(getByRoleAndLabel('button', label2)).not.toHaveClass(className);
   });

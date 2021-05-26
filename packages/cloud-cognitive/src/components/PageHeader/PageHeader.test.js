@@ -430,6 +430,8 @@ describe('PageHeader', () => {
     expect(window.scrollTo).not.toHaveBeenCalled();
     userEvent.click(collapseButton);
     expect(window.scrollTo).toHaveBeenCalled();
+    userEvent.click(collapseButton);
+    expect(window.scrollTo).toHaveBeenCalledTimes(2);
   });
 
   test('Navigation row renders when Navigation but no tags', () => {

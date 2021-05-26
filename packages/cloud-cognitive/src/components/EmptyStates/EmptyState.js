@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Button, Link } from 'carbon-components-react';
 import { pkg } from '../../settings';
+import { allPropTypes } from '../../global/js/utils/props-helper';
 import { EmptyStateContent } from './EmptyStateContent';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -112,7 +113,10 @@ EmptyState.propTypes = {
   /**
    * The alt text for custom provided illustrations
    */
-  illustrationDescription: EmptyState.validateIllustrationDescription(),
+  illustrationDescription: allPropTypes([
+    EmptyState.validateIllustrationDescription(),
+    PropTypes.string,
+  ]),
 
   /**
    * Empty state link object

@@ -25,7 +25,7 @@ const componentName = 'LoadingBar';
 /**
  * The LoadingBar component provides a way to communicate the loading state to users.
  * It is intended to fill the space of where it's used, and should persist until the
- * loading action is complete. Once complete, the active prop may be set to false to 
+ * loading action is complete. Once complete, the active prop may be set to false to
  * hide the LoadingBar.
  * The LoadingBar has two modes of operation: Indeterminate and Determinate.
  * If no percentage is provided to the component, the LoadingBar behaves in indeterminate
@@ -55,7 +55,8 @@ export let LoadingBar = React.forwardRef(
 
     function usePrevious(value) {
       const ref = useRef();
-      useEffect(() => { // Store current value in ref
+      useEffect(() => {
+        // Store current value in ref
         ref.current = value;
       }, [value]); // Only re-run if value changes
       // Return previous value (happens before update in useEffect above)
@@ -67,7 +68,9 @@ export let LoadingBar = React.forwardRef(
     const percProgress = isDeterminate ? percentage + '%' : 0;
     const showPercIndicator = isDeterminate && showPercentageIndicator;
     // switch classes dependant on props
-    const loadingWrapper = cx({[`${blockClass}__preload`]: !prevActive && !active});
+    const loadingWrapper = cx({
+      [`${blockClass}__preload`]: !prevActive && !active,
+    });
     const loadingClassName = cx({
       [`${blockClass}`]: true,
       [`${blockClass}__small`]: small,
@@ -77,8 +80,7 @@ export let LoadingBar = React.forwardRef(
     const animationClassName = cx({
       [`${blockClass}__linear-progress`]: isDeterminate,
       [`${blockClass}__stop-progress`]: !active && !isDeterminate,
-      [`${blockClass}__indefinite-progress`]:
-        active && !isDeterminate,
+      [`${blockClass}__indefinite-progress`]: active && !isDeterminate,
     });
     const loadingId = `loading-bar-id-${instanceId}`;
 
@@ -88,9 +90,11 @@ export let LoadingBar = React.forwardRef(
           // Pass through any other property values as HTML attributes.
           ...rest
         }
-        className={cx(loadingWrapper, 
+        className={cx(
+          loadingWrapper,
           // Apply any supplied class names to the main HTML element.
-          className)}
+          className
+        )}
         ref={ref}
         role="main">
         <div

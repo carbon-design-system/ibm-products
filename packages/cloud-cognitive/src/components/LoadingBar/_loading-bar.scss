@@ -71,7 +71,7 @@ $loading-bar__small-height: 4px;
       right: auto;
     }
   }
-  
+
   @keyframes progress-linear {
     0% {
       width: 0%;
@@ -84,7 +84,7 @@ $loading-bar__small-height: 4px;
       right: auto;
     }
   }
-  
+
   @keyframes progress-stop {
     0% {
       width: 0%;
@@ -102,7 +102,7 @@ $loading-bar__small-height: 4px;
       right: auto;
     }
   }
-  
+
   @keyframes loadingbar-stop {
     0% {
       opacity: 1;
@@ -135,7 +135,6 @@ $loading-bar__small-height: 4px;
     outline: none;
     cursor: default;
   }
-
 
   .#{$block-class}__preload {
     opacity: 0 !important;

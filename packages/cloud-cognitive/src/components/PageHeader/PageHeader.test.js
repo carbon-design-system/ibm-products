@@ -115,14 +115,22 @@ import { prepareProps } from '../../global/js/utils/props-helper';
 jest.mock('../../global/js/utils/uuidv4');
 
 const sizes = {
-  [`${carbon.prefix}--btn`]: {
-    get offsetWidth() {
-      return 200;
-    },
-  },
   [`${blockClass}`]: {
     get offsetWidth() {
       return window.innerWidth;
+    },
+    get clientHeight() {
+      return 300;
+    },
+  },
+  [`${blockClass}__available-row`]: {
+    get clientHeight() {
+      return 32;
+    },
+  },
+  [`${carbon.prefix}--btn`]: {
+    get offsetWidth() {
+      return 200;
     },
   },
   [`${blockClass}__breadcrumb-row`]: {
@@ -170,8 +178,23 @@ const sizes = {
       return window.innerWidth * 0.2;
     },
   },
+  [`${blockClass}__navigation-row`]: {
+    get clientHeight() {
+      return 48;
+    },
+  },
+  [`${blockClass}__subtitle-row`]: {
+    get clientHeight() {
+      return 32;
+    },
+  },
+  [`${blockClass}__title-row`]: {
+    get clientHeight() {
+      return 64;
+    },
+  },
 };
-const testSizes = (el, property) => {
+const testSizes = (el, property, _default) => {
   const classes = el.getAttribute('class').split(' ');
 
   for (let cls of classes) {
@@ -180,8 +203,8 @@ const testSizes = (el, property) => {
       return val;
     }
   }
-  console.log('xxx', property, el.outerHTML);
-  return -1;
+  console.log('testSizes found nothing.', property, el.outerHTML);
+  return _default;
 };
 
 const testProps = {
@@ -208,18 +231,18 @@ describe('PageHeader', () => {
   const mocks = [];
 
   window.innerWidth = 2000;
+  window.innerHeight = 1080;
 
-  beforeEach(() => {
+  beforeAll(() => {
     mockElement = mockHTMLElement({
       offsetWidth: {
         get: function () {
-          let width = testSizes(this, 'offsetWidth');
-
-          if (width < 0) {
-            width = window.innerWidth;
-          }
-
-          return width;
+          return testSizes(this, 'offsetWidth', window.innerWidth);
+        },
+      },
+      clientHeight: {
+        get: function () {
+          return testSizes(this, 'clientHeight', window.innerHeight);
         },
       },
     });
@@ -236,7 +259,7 @@ describe('PageHeader', () => {
     }));
   });
 
-  afterEach(() => {
+  afterAll(() => {
     mocks.forEach((mock) => {
       mock.mock.mockRestore();
     });
@@ -448,6 +471,15 @@ describe('PageHeader', () => {
     ).toHaveLength(1);
   });
 
+  test('Title row renders when Title with pageActions and navigation but no subtitle or available space', () => {
+    const { title } = testProps;
+    render(<PageHeader {...{ title, pageActions, navigation }} />);
+
+    expect(
+      document.querySelectorAll(`.${blockClass}__title-row--spacing-below-06`)
+    ).toHaveLength(1);
+  });
+
   test('Breadcrumb row renders when breadcrumb but no action bar items', () => {
     render(
       <PageHeader
@@ -487,5 +519,21 @@ describe('PageHeader', () => {
     expect(
       document.querySelectorAll(`.${blockClass}__title-icon`)
     ).toHaveLength(1);
+  });
+
+  test('Without background', () => {
+    const { title } = testProps;
+    render(
+      <PageHeader
+        {...{
+          title,
+          background: false,
+          breadcrumbItems,
+        }}
+        aria-label="Page header" // gives section role 'region'
+      />
+    );
+
+    screen.getByRole('region');
   });
 });

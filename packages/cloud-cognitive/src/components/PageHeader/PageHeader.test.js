@@ -24,7 +24,7 @@ import { PageHeader } from '.';
 import { ActionBarItem } from '../ActionBar';
 import { mockHTMLElement } from '../../global/js/utils/test-helper';
 
-const blockClass = `${pkg.prefix}--page-header`;
+import { blockClass } from './PageHeaderUtils';
 
 /* Test properties. */
 const actionBarItems = [1, 2, 3, 4].map((item) => ({

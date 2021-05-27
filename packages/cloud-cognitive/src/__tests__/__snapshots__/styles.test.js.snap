@@ -1033,7 +1033,7 @@ path:nth-of-type(1),
 }
 
 .exp--status-icon--light.exp--status-icon--light-in-progress {
-  animation: rotating 8s infinite linear;
+  animation: rotating 8000ms infinite linear;
   fill: #0f62fe;
 }
 
@@ -1044,7 +1044,7 @@ path:nth-of-type(1),
 }
 
 .exp--status-icon--light.exp--status-icon--dark-in-progress {
-  animation: rotating 8s infinite linear;
+  animation: rotating 8000ms infinite linear;
   fill: #0f62fe;
 }
 
@@ -1225,7 +1225,7 @@ path:nth-of-type(1),
 }
 
 .exp--status-icon--dark.exp--status-icon--light-in-progress {
-  animation: rotating 8s infinite linear;
+  animation: rotating 8000ms infinite linear;
   fill: #4589ff;
 }
 
@@ -1236,7 +1236,7 @@ path:nth-of-type(1),
 }
 
 .exp--status-icon--dark.exp--status-icon--dark-in-progress {
-  animation: rotating 8s infinite linear;
+  animation: rotating 8000ms infinite linear;
   fill: #4589ff;
 }
 

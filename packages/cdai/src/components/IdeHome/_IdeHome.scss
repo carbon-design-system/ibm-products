@@ -71,7 +71,7 @@ $ide-home-card-height: 16rem;
 // this class sets up height for all cards, and disabled carbon width and color changes
 .#{$ide-prefix}-home-tile-layout,
 .#{$ide-prefix}-home-tile-layout:hover {
-  // stylelint-disable-next-line declaration-property-value-blacklist
+  // stylelint-disable-next-line declaration-property-value-disallowed-list
   min-width: unset; /* no min width */
   height: $ide-home-card-height;
   min-height: $ide-home-card-height;

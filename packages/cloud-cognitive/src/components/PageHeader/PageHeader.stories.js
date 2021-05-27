@@ -282,7 +282,7 @@ AllAttributesSet.args = {
   background: true,
   breadcrumbItems,
   actionBarItems,
-  title,
+  title: { text: 'wibble' },
   pageActions,
   subtitle,
   availableSpace: summaryDetails,

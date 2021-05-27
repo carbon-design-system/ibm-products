@@ -33,7 +33,14 @@ import {
 } from '../../global/js/utils/props-helper';
 
 const componentName = 'PageHeader';
-const blockClass = `${pkg.prefix}--page-header`;
+
+import {
+  blockClass,
+  utilCheckUpdateVerticalSpace,
+  utilGetDynamicRef,
+  utilGetTitleShape,
+  utilCalcSpacingBelowTitle,
+} from './PageHeaderUtils';
 
 export let PageHeader = React.forwardRef(
   (
@@ -62,6 +69,29 @@ export let PageHeader = React.forwardRef(
   ) => {
     const [metrics, setMetrics] = useState({});
 
+    // utility functions
+    const calcSpacingBelowTitle = () =>
+      utilCalcSpacingBelowTitle(
+        availableSpace,
+        tags,
+        navigation,
+        subtitle,
+        pageActions
+      );
+    // Title shape is used to allow title to be string or shape
+    const getTitleShape = () =>
+      utilGetTitleShape(title, titleIcon, PageHeader.defaultProps.title);
+    const getDynamicRef = (selector) =>
+      utilGetDynamicRef(headerRef, dynamicRefs, selector);
+    const checkUpdateVerticalSpace = () =>
+      utilCheckUpdateVerticalSpace(
+        getDynamicRef,
+        headerRef,
+        navigation,
+        preventBreadcrumbScroll,
+        setMetrics
+      );
+
     // state based on props only
     const actionBarItemArray = extractShapesArray(actionBarItems);
     const hasActionBar = actionBarItemArray.length;
@@ -89,6 +119,7 @@ export let PageHeader = React.forwardRef(
       titleIcon,
       PageHeader.defaultProps.title
     );
+
     // NOTE: The buffer is used to add space between the bottom of the header and the last content
     // No navigation and title row not pre-collapsed
     // and zero or one of tags or (subtitle or available space)
@@ -162,141 +193,6 @@ export let PageHeader = React.forwardRef(
 
     const handleCollapseToggle = () => {
       toggleCollapse();
-    };
-
-    // utility functions
-    const calcSpacingBelowTitle = (
-      availableSpace,
-      tags,
-      navigation,
-      subtitle,
-      pageActions
-    ) => {
-      let belowTitleSpace = 'default';
-
-      if (
-        pageActions !== undefined &&
-        navigation !== undefined &&
-        subtitle === undefined &&
-        availableSpace === undefined
-      ) {
-        belowTitleSpace = '06';
-      } else if (subtitle !== undefined || availableSpace !== undefined) {
-        belowTitleSpace = '03';
-      } else if (navigation === undefined && tags !== undefined) {
-        belowTitleSpace = '05';
-      }
-      return belowTitleSpace;
-    };
-
-    // Title shape is used to allow title to be string or shape
-    const getTitleShape = (title, titleIcon, defaultTitle) => {
-      let newShape = { ...defaultTitle };
-
-      if (title?.text) {
-        // title is in shape format
-        newShape = Object.assign(newShape, { ...title });
-      } else {
-        // title is a string
-        newShape.text = title;
-      }
-
-      if (!newShape.icon && titleIcon) {
-        // if no icon use titleIcon if supplied
-        newShape.icon = titleIcon;
-      }
-
-      return newShape;
-    };
-
-    const getDynamicRef = (selector) => {
-      // would love to do this differently but digging in the dom seems easier
-      // than getting a ref to a conditionally rendered item
-      if (!headerRef.current) {
-        return undefined;
-      } else {
-        let dRef = dynamicRefs.current[selector];
-        if (!dRef || dRef.parentNode === null) {
-          dynamicRefs.current[selector] = headerRef.current.querySelector(
-            selector
-          );
-        }
-      }
-      return dynamicRefs.current[selector];
-    };
-
-    const checkUpdateVerticalSpace = () => {
-      // Utility function that checks the heights of various elements which are used to determine layout
-      const update = {};
-
-      const breadcrumbTitleEl = getDynamicRef(
-        `.${blockClass}__breadcrumb-title`
-      );
-      const breadcrumbRowEl = getDynamicRef(`.${blockClass}__breadcrumb-row`);
-      const titleRowEl = getDynamicRef(`.${blockClass}__title-row`);
-      const subtitleRowEl = getDynamicRef(`.${blockClass}__subtitle-row`);
-      const availableRowEl = getDynamicRef(`.${blockClass}__available-row`);
-      const navigationRowEl = getDynamicRef(`.${blockClass}__navigation-row`);
-
-      update.headerHeight = headerRef.current
-        ? headerRef.current.clientHeight
-        : 0;
-      update.headerWidth = headerRef.current
-        ? headerRef.current.offsetWidth
-        : 0;
-
-      update.breadcrumbRowHeight = breadcrumbRowEl
-        ? breadcrumbRowEl.clientHeight
-        : 0;
-      update.breadcrumbRowWidth = breadcrumbRowEl
-        ? breadcrumbRowEl.offsetWidth
-        : 0;
-
-      update.breadcrumbTitleHeight = breadcrumbTitleEl
-        ? breadcrumbTitleEl.clientHeight
-        : 1;
-
-      update.titleRowHeight = titleRowEl ? titleRowEl.clientHeight : 0;
-      update.subtitleRowHeight = subtitleRowEl ? subtitleRowEl.clientHeight : 0;
-      update.availableRowHeight = availableRowEl
-        ? availableRowEl.clientHeight
-        : 0;
-      update.navigationRowHeight = navigationRowEl
-        ? navigationRowEl.clientHeight
-        : 1;
-
-      update.breadcrumbRowSpaceBelow = 0;
-      update.titleRowSpaceAbove = 0;
-
-      update.headerTopValue = navigation
-        ? preventBreadcrumbScroll
-          ? update.navigationRowHeight +
-            update.breadcrumbRowHeight -
-            update.headerHeight
-          : update.navigationRowHeight - update.headerHeight
-        : update.breadcrumbRowHeight - update.headerHeight;
-
-      if (window) {
-        let val;
-        if (breadcrumbRowEl) {
-          val = parseFloat(
-            window
-              .getComputedStyle(breadcrumbRowEl)
-              .getPropertyValue('margin-bottom'),
-            10
-          );
-          update.breadcrumbRowSpaceBelow = isNaN(val) ? 0 : val;
-        }
-        if (titleRowEl) {
-          val = parseFloat(
-            window.getComputedStyle(titleRowEl).getPropertyValue('margin-top'),
-            10
-          );
-          update.titleRowSpaceAbove = isNaN(val) ? 0 : val;
-        }
-      }
-
-      setMetrics((previous) => ({ ...previous, ...update }));
     };
 
     // use effects

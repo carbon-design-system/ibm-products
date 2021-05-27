@@ -39,7 +39,9 @@
     "clean": "rimraf es lib css scss",
     "generate": "cross-env FORCE_COLOR=1 node scripts/generate",
     "postinstall": "carbon-telemetry collect --install",
-    "test": "bundler check 'src/**/*.scss'"
+    "test": "bundler check 'src/**/*.scss'",
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (not tested), sass (until Carbon adopts sass and fixes deprecations)",
+    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react|^sass$)/'"
   },
   "devDependencies": {
     "@babel/cli": "^7.13.14",
@@ -52,6 +54,7 @@
     "dart-sass": "^1.25.0",
     "fs-extra": "^9.1.0",
     "rimraf": "^3.0.2",
+    "sass": "^1.32.8",
     "yargs": "^16.2.0"
   },
   "dependencies": {

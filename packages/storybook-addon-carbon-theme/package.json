@@ -31,7 +31,9 @@
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm run clean && babel src --out-dir dist -s",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally)",
+    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon)/'"
   },
   "peerDependencies": {
     "react": "*",

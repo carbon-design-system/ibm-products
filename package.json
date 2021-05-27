@@ -25,14 +25,17 @@
     "format": "prettier --write '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd,coverage}/**' '!README.md'",
     "generate": "lerna run generate --loglevel success --scope \"@carbon/ibm-cloud-cognitive\" --",
-    "monorepo:npm-upgrade": "sh ./scripts/monorepo-npm-upgrade.sh",
     "lint": "yarn lint:es && yarn lint:style",
     "lint:es": "eslint 'packages/*/src/**/*.js'",
     "lint:style": "stylelint 'packages/*/src/**/*.scss' --report-needless-disables --report-invalid-scope-disables",
     "test": "lerna run test --stream && jest",
     "//storybook": "# we build dependencies, then start storybook directly because its dynamic output gets mangled by lerna",
     "storybook": "yarn build:storybook-dependencies-only && cd packages/core && yarn start",
-    "sync": "carbon-cli sync"
+    "sync": "carbon-cli sync",
+    "upgrade-carbon": "npm-check-updates -su --deep --filter '/carbon/' && yarn",
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally), husky (major change in action), jest (untested)",
+    "upgrade-dependencies": "lerna run upgrade-dependencies --stream --concurrency 1 && npm-check-updates -u --reject '/(carbon|^husky|^jest)/' && yarn",
+    "upgrade-interactive": "sh ./scripts/monorepo-npm-upgrade.sh"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.1",

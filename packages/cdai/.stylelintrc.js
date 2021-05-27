@@ -12,7 +12,8 @@ module.exports = {
       },
     ],
     'no-descending-specificity': [true, { severity: 'warning' }],
-    'declaration-property-value-blacklist': [
+    'declaration-property-value-blacklist': null,
+    'declaration-property-value-disallowed-list': [
       { '/.*/': ['unset'] },
       { severity: 'warning' },
     ],

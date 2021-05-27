@@ -7,4 +7,3 @@
 
 export { pkg } from './settings';
 export * from './components';
-export * from '@carbon/ibm-cloud-cognitive-security'; // TODO remove dependency

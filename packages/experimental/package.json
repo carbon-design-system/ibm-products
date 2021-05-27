@@ -51,7 +51,7 @@
     "react": "^16.14.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.13.10",
+    "@babel/runtime": "^7.14.0",
     "@carbon/ibm-cloud-cognitive": "^0.40.8",
     "@carbon/telemetry": "^0.0.0-alpha.6",
     "react-resize-detector": "^6.0.0"

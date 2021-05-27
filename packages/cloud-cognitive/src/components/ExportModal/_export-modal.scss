@@ -21,9 +21,13 @@
     padding-right: $spacing-05;
   }
 
+  .#{$block-class} .bx--modal-close {
+    display: none;
+  }
+
   .#{$block-class}__body {
     margin-bottom: $spacing-05;
-    padding-right: 20%;
+    padding-right: calc(20% - #{$spacing-05});
   }
 
   .#{$block-class}__messaging {

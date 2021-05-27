@@ -224,6 +224,76 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: inline-block;
 }
 
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-end-p1 {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-end-p2 {
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+/* Stroke animations */
+@keyframes init-stroke {
+  0% {
+    stroke-dashoffset: 240;
+  }
+  100% {
+    stroke-dashoffset: 16;
+  }
+}
+
+@keyframes stroke-end {
+  0% {
+    stroke-dashoffset: 16;
+  }
+  100% {
+    stroke-dashoffset: 240;
+  }
+}
+
+.exp--export-modal .bx--modal-content {
+  padding-right: var(--cds-spacing-05, 1rem);
+}
+
+.exp--export-modal .bx--modal-close {
+  display: none;
+}
+
+.exp--export-modal__body {
+  margin-bottom: var(--cds-spacing-05, 1rem);
+  padding-right: calc(20% - var(--cds-spacing-05, 1rem));
+}
+
+.exp--export-modal__messaging {
+  display: flex;
+  align-items: center;
+}
+
+.exp--export-modal__messaging p {
+  margin-left: var(--cds-spacing-03, 0.5rem);
+}
+
+.exp--export-modal__checkmark-icon {
+  fill: var(--cds-interactive-01, #0f62fe);
+}
+
+.exp--export-modal__error-icon {
+  fill: var(--cds-danger, #da1e28);
+}
+
 .exp--http-errors .exp--http-errors__content {
   position: fixed;
   top: 50%;

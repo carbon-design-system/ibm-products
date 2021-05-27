@@ -146,14 +146,18 @@ export let NotificationsPanel = React.forwardRef(
       const descriptionClassName = cx([
         `${blockClass}__notification-description`,
         {
-          [`${blockClass}__notification-long-description`]: notification.showAll,
-          [`${blockClass}__notification-short-description`]: !notification.showAll,
+          [`${blockClass}__notification-long-description`]:
+            notification.showAll,
+          [`${blockClass}__notification-short-description`]:
+            !notification.showAll,
         },
       ]);
       const showMoreButtonClassName = cx([
         {
-          [`${blockClass}__notification-read-less-button`]: notification.showAll,
-          [`${blockClass}__notification-read-more-button`]: !notification.showAll,
+          [`${blockClass}__notification-read-less-button`]:
+            notification.showAll,
+          [`${blockClass}__notification-read-more-button`]:
+            !notification.showAll,
         },
       ]);
       return (

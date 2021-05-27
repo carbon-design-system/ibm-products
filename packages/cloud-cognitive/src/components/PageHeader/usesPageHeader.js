@@ -1,6 +1,19 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
 import { useEffect, useState } from 'react';
 import { extractShapesArray } from '../../global/js/utils/props-helper';
 
+/* Reactive code extracted from the page header to to reduce the content of the page header. */
+
+/**
+ * Check actionBarItems
+ * @param {*} actionBarItems
+ * @returns {{hasActionBar, actionBarItemArray}}
+ */
 export const useActionBar = (actionBarItems) => {
   const [hasActionBar, setHasActionBar] = useState(false);
   const [actionBarItemArray, setActionBarItemArray] = useState([]);
@@ -10,6 +23,9 @@ export const useActionBar = (actionBarItems) => {
     setHasActionBar(newShapes.length);
     setActionBarItemArray(newShapes);
   }, [actionBarItems]);
+
+  // const actionBarItemArray = extractShapesArray(actionBarItems);
+  // const hasActionBar = actionBarItemArray.length;
 
   return { hasActionBar, actionBarItemArray };
 };
@@ -115,7 +131,7 @@ export const useTitleShape = (title, titleIcon, defaultTitle) => {
     }
 
     setTitleShape(newShape);
-  }, [defaultTitle, title, titleIcon, titleShape]);
+  }, [defaultTitle, title, titleIcon]);
 
   return titleShape;
 };

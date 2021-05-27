@@ -64,14 +64,14 @@ export const MultiStepTearsheet = () => {
         title="Create topic"
         open={open}
         onClose={clearCreateData}
-        onRequestSubmit={() => {
-          return new Promise((resolve) => {
+        onRequestSubmit={() =>
+          new Promise((resolve) => {
             setTimeout(() => {
               clearCreateData();
               resolve();
             }, simulatedDelay);
-          });
-        }}>
+          })
+        }>
         <CreateTearsheetStep
           onNext={() => {
             return new Promise((resolve, reject) => {

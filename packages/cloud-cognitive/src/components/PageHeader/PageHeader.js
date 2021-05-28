@@ -108,13 +108,7 @@ export let PageHeader = React.forwardRef(
       })
     );
 
-    const spacingBelowTitle = calcSpacingBelowTitle(
-      availableSpace,
-      tags,
-      navigation,
-      subtitle,
-      pageActions
-    );
+    const spacingBelowTitle = calcSpacingBelowTitle();
 
     /* Title shape is used to allow title to be string or shape */
     const titleShape = getTitleShape();

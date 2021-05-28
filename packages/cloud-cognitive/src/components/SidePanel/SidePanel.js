@@ -416,7 +416,8 @@ export let SidePanel = React.forwardRef(
               onAnimationStart={onAnimationStart}
               onBlur={handleBlur}
               ref={ref || sidePanelRef}
-              role="complementary">
+              role="complementary"
+              aria-label={title}>
               <span
                 ref={startTrapRef}
                 tabIndex="0"
@@ -461,6 +462,7 @@ export let SidePanel = React.forwardRef(
                     </h5>
                   )}
                   <Button
+                    hasIconOnly
                     kind="ghost"
                     size="small"
                     disabled={false}
@@ -696,7 +698,7 @@ SidePanel.propTypes = {
   /**
    * Sets the title text
    */
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
 };
 
 SidePanel.defaultProps = {

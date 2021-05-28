@@ -17,13 +17,21 @@
 @mixin export-modal {
   $block-class: #{$pkg-prefix}--export-modal;
 
+  .#{$block-class} .bx--modal-footer .bx--btn {
+    max-width: none;
+  }
+
   .#{$block-class} .bx--modal-content {
     padding-right: $spacing-05;
   }
 
+  .#{$block-class} .bx--modal-close {
+    display: none;
+  }
+
   .#{$block-class}__body {
     margin-bottom: $spacing-05;
-    padding-right: 20%;
+    padding-right: calc(20% - #{$spacing-05});
   }
 
   .#{$block-class}__messaging {

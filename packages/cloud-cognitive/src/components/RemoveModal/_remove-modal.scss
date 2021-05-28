@@ -15,8 +15,16 @@
 @mixin remove-modal {
   $block-class: #{$pkg-prefix}--remove-modal;
 
+  .#{$block-class} .bx--modal-footer .bx--btn {
+    max-width: none;
+  }
+
   .#{$block-class} .bx--modal-content {
     padding-right: $spacing-05;
+  }
+
+  .#{$block-class} .bx--modal-close {
+    display: none;
   }
 
   .#{$block-class}__body {

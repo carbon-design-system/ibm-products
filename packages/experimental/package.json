@@ -3,7 +3,7 @@
   "private-note": "no longer published, package deprecated in favor of @carbon/ibm-cloud-cognitive with feature flags",
   "private": true,
   "description": "Carbon for Cloud & Cognitive UI components",
-  "version": "0.34.69",
+  "version": "0.34.70",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -52,7 +52,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.14.0",
-    "@carbon/ibm-cloud-cognitive": "^0.40.12",
+    "@carbon/ibm-cloud-cognitive": "^0.40.13",
     "@carbon/telemetry": "^0.0.0-alpha.6",
     "react-resize-detector": "^6.7.2"
   },

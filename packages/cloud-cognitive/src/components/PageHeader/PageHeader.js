@@ -123,10 +123,8 @@ export let PageHeader = React.forwardRef(
         availableSpace);
 
     // state based on scroll/resize based effects
-    const [
-      pageActionsInBreadcrumbRow,
-      setPageActionsInBreadcrumbRow,
-    ] = useState(false);
+    const [pageActionsInBreadcrumbRow, setPageActionsInBreadcrumbRow] =
+      useState(false);
     const [scrollYValue, setScrollYValue] = useState(0);
     const [componentCssCustomProps, setComponentCssCustomProps] = useState({});
     const [backgroundOpacity, setBackgroundOpacity] = useState(0);
@@ -134,14 +132,10 @@ export let PageHeader = React.forwardRef(
     const [spaceForCollapseButton, setSpaceForCollapseButton] = useState(false);
     const [actionBarMaxWidth, setActionBarMaxWidth] = useState(0);
     const [actionBarMinWidth, setActionBarMinWidth] = useState(0);
-    const [
-      pageActionInBreadcrumbMaxWidth,
-      setPageActionInBreadcrumbMaxWidth,
-    ] = useState(0);
-    const [
-      pageActionInBreadcrumbMinWidth,
-      setPageActionInBreadcrumbMinWidth,
-    ] = useState(0);
+    const [pageActionInBreadcrumbMaxWidth, setPageActionInBreadcrumbMaxWidth] =
+      useState(0);
+    const [pageActionInBreadcrumbMinWidth, setPageActionInBreadcrumbMinWidth] =
+      useState(0);
     const [actionBarColumnWidth, setActionBarColumnWidth] = useState(0);
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
 
@@ -456,9 +450,12 @@ export let PageHeader = React.forwardRef(
             {hasBreadcrumbRow ? (
               <Row
                 className={cx(`${blockClass}__breadcrumb-row`, {
-                  [`${blockClass}__breadcrumb-row--next-to-tabs`]: nextToTabsCheck(),
-                  [`${blockClass}__breadcrumb-row--has-breadcrumbs`]: breadcrumbItems,
-                  [`${blockClass}__breadcrumb-row--has-action-bar`]: hasActionBar,
+                  [`${blockClass}__breadcrumb-row--next-to-tabs`]:
+                    nextToTabsCheck(),
+                  [`${blockClass}__breadcrumb-row--has-breadcrumbs`]:
+                    breadcrumbItems,
+                  [`${blockClass}__breadcrumb-row--has-action-bar`]:
+                    hasActionBar,
                 })}>
                 <div className={`${blockClass}__breadcrumb-row--container`}>
                   <Column
@@ -480,7 +477,8 @@ export let PageHeader = React.forwardRef(
                             className={cx([
                               `${blockClass}__breadcrumb-title`,
                               {
-                                [`${blockClass}__breadcrumb-title--pre-collapsed`]: preCollapseTitleRow,
+                                [`${blockClass}__breadcrumb-title--pre-collapsed`]:
+                                  preCollapseTitleRow,
                               },
                             ])}>
                             {titleLoading ? <SkeletonText /> : titleText}
@@ -497,8 +495,10 @@ export let PageHeader = React.forwardRef(
                     className={cx([
                       `${blockClass}__action-bar-column ${blockClass}__action-bar-column--background`,
                       {
-                        [`${blockClass}__action-bar-column--has-page-actions`]: pageActions,
-                        [`${blockClass}__action-bar-column--influenced-by-collapse-button`]: spaceForCollapseButton,
+                        [`${blockClass}__action-bar-column--has-page-actions`]:
+                          pageActions,
+                        [`${blockClass}__action-bar-column--influenced-by-collapse-button`]:
+                          spaceForCollapseButton,
                       },
                     ])}>
                     <ReactResizeDetector
@@ -512,7 +512,8 @@ export let PageHeader = React.forwardRef(
                             {pageActions && (
                               <div
                                 className={cx(`${blockClass}__page-actions`, {
-                                  [`${blockClass}__page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
+                                  [`${blockClass}__page-actions--in-breadcrumb`]:
+                                    pageActionsInBreadcrumbRow,
                                 })}>
                                 <ButtonSetWithOverflow
                                   className={`${blockClass}__button-set--in-breadcrumb`}
@@ -543,8 +544,10 @@ export let PageHeader = React.forwardRef(
                   `${blockClass}__title-row`,
                   `${blockClass}__title-row--spacing-below-${spacingBelowTitle}`,
                   {
-                    [`${blockClass}__title-row--no-breadcrumb-row`]: !hasBreadcrumbRow,
-                    [`${blockClass}__title-row--under-action-bar`]: hasActionBar,
+                    [`${blockClass}__title-row--no-breadcrumb-row`]:
+                      !hasBreadcrumbRow,
+                    [`${blockClass}__title-row--under-action-bar`]:
+                      hasActionBar,
                     [`${blockClass}__title-row--sticky`]:
                       pageActions !== undefined &&
                       actionBarItems === undefined &&
@@ -577,7 +580,8 @@ export let PageHeader = React.forwardRef(
                 {pageActions !== undefined ? (
                   <Column
                     className={cx(`${blockClass}__page-actions`, {
-                      [`${blockClass}__page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
+                      [`${blockClass}__page-actions--in-breadcrumb`]:
+                        pageActionsInBreadcrumbRow,
                     })}>
                     <ButtonSetWithOverflow
                       className={`${blockClass}__page-actions-container`}
@@ -618,7 +622,8 @@ export let PageHeader = React.forwardRef(
                 className={cx([
                   `${blockClass}__last-row-buffer`,
                   {
-                    [`${blockClass}__last-row-buffer--active`]: lastRowBufferActive,
+                    [`${blockClass}__last-row-buffer--active`]:
+                      lastRowBufferActive,
                   },
                 ])}></div>
             )}
@@ -654,7 +659,8 @@ export let PageHeader = React.forwardRef(
           {hasCollapseButton ? (
             <Button
               className={cx(`${blockClass}__collapse-expand-toggle`, {
-                [`${blockClass}__collapse-expand-toggle--collapsed`]: fullyCollapsed,
+                [`${blockClass}__collapse-expand-toggle--collapsed`]:
+                  fullyCollapsed,
               })}
               data-collapse={fullyCollapsed ? 'collapsed' : 'not collapsed'}
               hasIconOnly={true}

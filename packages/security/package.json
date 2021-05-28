@@ -39,10 +39,12 @@
     "clean": "rimraf css es lib scss",
     "test": "run-p test:*",
     "test:js": "jest",
-    "test:scss": "bundler check 'src/**/*.scss'"
+    "test:scss": "bundler check 'src/**/*.scss'",
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally), jest (not tested)",
+    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^jest)/'"
   },
   "dependencies": {
-    "@babel/runtime": "^7.13.10",
+    "@babel/runtime": "^7.14.0",
     "@carbon/icons-react": "^10.32.0",
     "@carbon/import-once": "^10.5.0",
     "@carbon/layout": "^10.24.0",

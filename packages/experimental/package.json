@@ -38,7 +38,9 @@
     "ci-check": "node scripts/import",
     "clean": "rimraf es lib css scss",
     "postinstall": "carbon-telemetry collect --install",
-    "test": "bundler check '**/*.scss'"
+    "test": "bundler check '**/*.scss'",
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (not tested)",
+    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react$)/'"
   },
   "peerDependencies": {
     "@carbon/icons-react": "^10.32.0",
@@ -46,13 +48,13 @@
     "carbon-components": "^10.35.0",
     "carbon-components-react": "^7.35.0",
     "carbon-icons": "^7.0.7",
-    "react": "^16.13.1"
+    "react": "^16.14.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.13.10",
+    "@babel/runtime": "^7.14.0",
     "@carbon/ibm-cloud-cognitive": "^0.40.13",
     "@carbon/telemetry": "^0.0.0-alpha.6",
-    "react-resize-detector": "^6.0.0"
+    "react-resize-detector": "^6.7.2"
   },
   "devDependencies": {
     "cross-env": "^7.0.3"

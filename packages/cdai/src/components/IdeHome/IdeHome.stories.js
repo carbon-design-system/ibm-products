@@ -100,8 +100,7 @@ storiesOf(getComponentLabel('IdeHome'), module)
   })
   .add('With core configuration', () => <IdeHome {...coreConfig} />, {
     info: {
-      text:
-        'Core/minimum configuration. Use this to enable the header elements, but then add your own content below. Useful if you do not require tiles.',
+      text: 'Core/minimum configuration. Use this to enable the header elements, but then add your own content below. Useful if you do not require tiles.',
     },
   })
   .add(
@@ -109,15 +108,13 @@ storiesOf(getComponentLabel('IdeHome'), module)
     () => <IdeHome {...coreConfig} {...configWithStorybookInteractions()} />,
     {
       info: {
-        text:
-          'Core/minimum configuration and with collapsible ability. In this scenario a Show more/Show Less button will appear which will toggle between the classic and the compressed version.',
+        text: 'Core/minimum configuration and with collapsible ability. In this scenario a Show more/Show Less button will appear which will toggle between the classic and the compressed version.',
       },
     }
   )
   .add('With one set', () => <IdeHome {...coreConfig} {...withOneSet} />, {
     info: {
-      text:
-        'Core configuration with one subsection. As there is only one section, no Tabs are rendered to select another set of tasks.',
+      text: 'Core configuration with one subsection. As there is only one section, no Tabs are rendered to select another set of tasks.',
     },
   })
   .add(
@@ -143,8 +140,7 @@ storiesOf(getComponentLabel('IdeHome'), module)
     () => <IdeHome {...coreConfig} {...withTwoSetsSecondSelected} />,
     {
       info: {
-        text:
-          'Core configuration with multiple subsections, specifying a custom initial render point. This is provided by the `startSelected` key on the set.',
+        text: 'Core configuration with multiple subsections, specifying a custom initial render point. This is provided by the `startSelected` key on the set.',
       },
     }
   )
@@ -153,8 +149,7 @@ storiesOf(getComponentLabel('IdeHome'), module)
     () => <IdeHome {...coreConfig} {...withWidthSet} />,
     {
       info: {
-        text:
-          'Core configuration with multiple tasks. These tasks specify the cardSize property, which then changes the rendered cards width. Note: small cards, called for in the pattern, have not yet been implemented.',
+        text: 'Core configuration with multiple tasks. These tasks specify the cardSize property, which then changes the rendered cards width. Note: small cards, called for in the pattern, have not yet been implemented.',
       },
     }
   )
@@ -163,8 +158,7 @@ storiesOf(getComponentLabel('IdeHome'), module)
     () => <IdeHome {...coreConfig} {...withCustomCardContentSet} />,
     {
       info: {
-        text:
-          'Core configuration with a task which has a custom render function. Passed as a callback, this allows bespoke content to appear in the card - use this to provide application specific content to the user.',
+        text: 'Core configuration with a task which has a custom render function. Passed as a callback, this allows bespoke content to appear in the card - use this to provide application specific content to the user.',
       },
     }
   )
@@ -173,8 +167,7 @@ storiesOf(getComponentLabel('IdeHome'), module)
     () => <IdeHome {...coreConfig} {...withDisabledCardSet} />,
     {
       info: {
-        text:
-          'Core configuration with a set containing a card which is disabled. Disabled flag of the task has been passed in as true and the tooltipText was also passed in to display the tooltip on the disabled link on click. ',
+        text: 'Core configuration with a set containing a card which is disabled. Disabled flag of the task has been passed in as true and the tooltipText was also passed in to display the tooltip on the disabled link on click. ',
       },
     }
   )
@@ -183,8 +176,7 @@ storiesOf(getComponentLabel('IdeHome'), module)
     () => <IdeHome {...coreConfig} {...withExternalCardSet} />,
     {
       info: {
-        text:
-          'Core configuration with a set containing a card with icon type set to "external" which forces the launch out icon to display.',
+        text: 'Core configuration with a set containing a card with icon type set to "external" which forces the launch out icon to display.',
       },
     }
   )
@@ -193,8 +185,7 @@ storiesOf(getComponentLabel('IdeHome'), module)
     () => <IdeHome {...coreConfig} {...withCustomSetTabFuncConfig} />,
     {
       info: {
-        text:
-          'Custom Tab Content using the callback renderFunc(). This function can be used to display custom user content under a tab.',
+        text: 'Custom Tab Content using the callback renderFunc(). This function can be used to display custom user content under a tab.',
       },
     }
   )
@@ -203,8 +194,7 @@ storiesOf(getComponentLabel('IdeHome'), module)
     () => <IdeHome {...coreConfig} {...withNoTasksOrRenderFuncConfig} />,
     {
       info: {
-        text:
-          'No tasks and no render function. This is to display the behaviour if the user specifies a set, but no tasks or render function.',
+        text: 'No tasks and no render function. This is to display the behaviour if the user specifies a set, but no tasks or render function.',
       },
     }
   )
@@ -213,8 +203,7 @@ storiesOf(getComponentLabel('IdeHome'), module)
     () => <IdeHome {...coreConfig} {...withAllIdeCardTypes()} />,
     {
       info: {
-        text:
-          'Shows how the provided task data changes the type of IdeCard rendered by the landing page',
+        text: 'Shows how the provided task data changes the type of IdeCard rendered by the landing page',
       },
     }
   );

@@ -71,16 +71,15 @@ export let EmptyState = React.forwardRef(
 // Return a placeholder if not released and not enabled by feature flag
 EmptyState = pkg.checkComponentEnabled(EmptyState, componentName);
 
-EmptyState.validateIllustrationDescription = () => ({
-  illustration,
-  illustrationDescription,
-}) => {
-  if (illustration && !illustrationDescription) {
-    throw new Error(
-      `${componentName}: illustrationDescription is missing, this is required when using the illustration prop`
-    );
-  }
-};
+EmptyState.validateIllustrationDescription =
+  () =>
+  ({ illustration, illustrationDescription }) => {
+    if (illustration && !illustrationDescription) {
+      throw new Error(
+        `${componentName}: illustrationDescription is missing, this is required when using the illustration prop`
+      );
+    }
+  };
 
 export const EmptyStateDefaultProps = {
   size: 'lg',

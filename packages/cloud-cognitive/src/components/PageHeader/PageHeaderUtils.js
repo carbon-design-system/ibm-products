@@ -25,9 +25,8 @@ export const utilCheckUpdateVerticalSpace = (
     } else {
       let dRef = dynamicRefs.current[selector];
       if (!dRef || dRef.parentNode === null) {
-        dynamicRefs.current[selector] = headerRef.current.querySelector(
-          selector
-        );
+        dynamicRefs.current[selector] =
+          headerRef.current.querySelector(selector);
       }
     }
     return dynamicRefs.current[selector];

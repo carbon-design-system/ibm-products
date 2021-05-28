@@ -15,11 +15,8 @@ export default async (node, label) => {
     accessibilityChecker = require('accessibility-checker');
   }
 
-  const {
-    assertCompliance,
-    getCompliance,
-    stringifyResults,
-  } = accessibilityChecker;
+  const { assertCompliance, getCompliance, stringifyResults } =
+    accessibilityChecker;
 
   const { report } = await getCompliance(node, label);
 

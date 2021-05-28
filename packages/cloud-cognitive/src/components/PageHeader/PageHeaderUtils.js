@@ -58,6 +58,8 @@ export const utilCheckUpdateVerticalSpace = (
 
   if (window) {
     let val;
+    /* don't know how to test resize */
+    /* istanbul ignore next if */
     if (breadcrumbRowEl) {
       val = parseFloat(
         window
@@ -67,6 +69,8 @@ export const utilCheckUpdateVerticalSpace = (
       );
       update.breadcrumbRowSpaceBelow = isNaN(val) ? 0 : val;
     }
+    /* don't know how to test resize */
+    /* istanbul ignore next if */
     if (titleRowEl) {
       val = parseFloat(
         window.getComputedStyle(titleRowEl).getPropertyValue('margin-top'),
@@ -89,6 +93,8 @@ export const utilCheckUpdateVerticalSpace = (
 export const utilGetDynamicRef = (headerRef, dynamicRefs, selector) => {
   // would love to do this differently but digging in the dom seems easier
   // than getting a ref to a conditionally rendered item
+  /* don't know how to test resize */
+  /* istanbul ignore next if */
   if (!headerRef.current) {
     return undefined;
   } else {

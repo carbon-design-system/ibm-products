@@ -159,16 +159,26 @@ export let PageHeader = React.forwardRef(
 
     // handlers
     const handleActionBarWidthChange = ({ minWidth, maxWidth }) => {
+      /* don't know how to test resize */
+      /* istanbul ignore next */
       setActionBarMaxWidth(maxWidth);
+      /* don't know how to test resize */
+      /* istanbul ignore next */
       setActionBarMinWidth(minWidth);
     };
 
     const handleButtonSetWidthChange = ({ minWidth, maxWidth }) => {
+      /* don't know how to test resize */
+      /* istanbul ignore next */
       setPageActionInBreadcrumbMaxWidth(maxWidth);
+      /* don't know how to test resize */
+      /* istanbul ignore next */
       setPageActionInBreadcrumbMinWidth(minWidth);
     };
 
     const handleResizeActionBarColumn = (width) => {
+      /* don't know how to test resize */
+      /* istanbul ignore next */
       setActionBarColumnWidth(width);
     };
 

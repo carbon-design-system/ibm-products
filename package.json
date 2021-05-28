@@ -35,7 +35,7 @@
     "upgrade-carbon": "npm-check-updates -su --deep --filter '/carbon/' && yarn",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally), husky (major change in action), jest (untested)",
     "upgrade-dependencies": "lerna run upgrade-dependencies --stream --concurrency 1 && npm-check-updates -u --reject '/(carbon|^husky|^jest)/' && yarn",
-    "upgrade-interactive": "sh ./scripts/monorepo-npm-upgrade.sh"
+    "upgrade-manual": "sh ./scripts/monorepo-npm-upgrade.sh"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",

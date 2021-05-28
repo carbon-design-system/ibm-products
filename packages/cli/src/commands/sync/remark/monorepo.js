@@ -383,8 +383,7 @@ function createContributing() {
         {
           type: 'link',
           title: null,
-          url:
-            'https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md',
+          url: 'https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md',
           children: [
             {
               type: 'text',

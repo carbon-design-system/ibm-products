@@ -49,8 +49,7 @@ storiesOf(`${getComponentLabel('IdeImporting')}/Uploading`, module)
     },
     {
       info: {
-        text:
-          'Minimum configuration. Use this to enable the importing of a file. Use this state if you do not require additional customizations.',
+        text: 'Minimum configuration. Use this to enable the importing of a file. Use this state if you do not require additional customizations.',
       },
     }
   )
@@ -78,8 +77,7 @@ storiesOf(`${getComponentLabel('IdeImporting')}/Uploading`, module)
     },
     {
       info: {
-        text:
-          'Minimum configuration. Use this to enable the importing of a file. Use this state if you do not require additional customizations.',
+        text: 'Minimum configuration. Use this to enable the importing of a file. Use this state if you do not require additional customizations.',
       },
     }
   )
@@ -129,8 +127,7 @@ storiesOf(`${getComponentLabel('IdeImporting')}/Uploading`, module)
     },
     {
       info: {
-        text:
-          'Minimum configuration. Use this to enable the importing of a file. Use this state if you do not require additional customizations.',
+        text: 'Minimum configuration. Use this to enable the importing of a file. Use this state if you do not require additional customizations.',
       },
     }
   )
@@ -157,8 +154,7 @@ storiesOf(`${getComponentLabel('IdeImporting')}/Uploading`, module)
     },
     {
       info: {
-        text:
-          'Minimum configuration. Use this to enable the importing of a file. Use this state if you do not require additional customizations.',
+        text: 'Minimum configuration. Use this to enable the importing of a file. Use this state if you do not require additional customizations.',
       },
     }
   )
@@ -183,8 +179,7 @@ storiesOf(`${getComponentLabel('IdeImporting')}/Uploading`, module)
     },
     {
       info: {
-        text:
-          'Minimum configuration. Use this to enable the importing of a file. Use this state if you do not require additional customizations.',
+        text: 'Minimum configuration. Use this to enable the importing of a file. Use this state if you do not require additional customizations.',
       },
     }
   )

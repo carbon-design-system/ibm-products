@@ -40,8 +40,8 @@
     "generate": "cross-env FORCE_COLOR=1 node scripts/generate",
     "postinstall": "carbon-telemetry collect --install",
     "test": "bundler check 'src/**/*.scss'",
-    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (not tested), sass (until Carbon adopts sass and fixes deprecations)",
-    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react|^sass$)/'"
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react/react-resize-detector (not tested), sass (until Carbon adopts sass and fixes deprecations)",
+    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react$|^react-resize-detector$|^sass$)/'"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.3",

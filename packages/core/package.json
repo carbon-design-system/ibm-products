@@ -20,7 +20,7 @@
     "build": "build-storybook",
     "start": "start-storybook -p 3000",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally), fast-sass-loader (until Carbon adopts sass and fixes deprecations)",
-    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^fast-sass-loader)/'"
+    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^fast-sass-loader$)/'"
   },
   "dependencies": {
     "classnames": "^2.3.1"

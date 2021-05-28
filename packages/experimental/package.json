@@ -39,8 +39,8 @@
     "clean": "rimraf es lib css scss",
     "postinstall": "carbon-telemetry collect --install",
     "test": "bundler check '**/*.scss'",
-    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (not tested)",
-    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react)/'"
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react/react-resize-detector (not tested)",
+    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react$|^react-resize-detector$)/'"
   },
   "peerDependencies": {
     "@carbon/icons-react": "^10.32.0",

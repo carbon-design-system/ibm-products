@@ -16,6 +16,10 @@
     "carbon community",
     "carbon for cloud & cognitive"
   ],
+  "scripts": {
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally)",
+    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon)/'"
+  },
   "dependencies": {
     "@babel/core": "^7.13.15",
     "@babel/plugin-proposal-class-properties": "^7.13.0",

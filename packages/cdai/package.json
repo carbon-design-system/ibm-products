@@ -29,8 +29,8 @@
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build": "node scripts/build.js",
-    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (not tested), uuid (not tested)",
-    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react)|^uuid$/'"
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react/react-dom (not tested), uuid (not tested)",
+    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react$|^react-dom$|^uuid$)/'"
   },
   "peerDependencies": {
     "@carbon/elements": "^10.34.0",

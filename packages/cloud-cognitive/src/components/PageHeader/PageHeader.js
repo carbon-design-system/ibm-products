@@ -37,7 +37,6 @@ const componentName = 'PageHeader';
 import {
   blockClass,
   utilCheckUpdateVerticalSpace,
-  utilGetDynamicRef,
   utilGetTitleShape,
   utilCalcSpacingBelowTitle,
 } from './PageHeaderUtils';
@@ -69,6 +68,11 @@ export let PageHeader = React.forwardRef(
   ) => {
     const [metrics, setMetrics] = useState({});
 
+    // refs
+    const dynamicRefs = useRef({});
+    const localHeaderRef = useRef(null);
+    const headerRef = ref || localHeaderRef;
+
     // utility functions
     const calcSpacingBelowTitle = () =>
       utilCalcSpacingBelowTitle(
@@ -81,16 +85,15 @@ export let PageHeader = React.forwardRef(
     // Title shape is used to allow title to be string or shape
     const getTitleShape = () =>
       utilGetTitleShape(title, titleIcon, PageHeader.defaultProps.title);
-    const getDynamicRef = (selector) =>
-      utilGetDynamicRef(headerRef, dynamicRefs, selector);
-    const checkUpdateVerticalSpace = () =>
-      utilCheckUpdateVerticalSpace(
-        getDynamicRef,
+    const checkUpdateVerticalSpace = function () {
+      return utilCheckUpdateVerticalSpace(
         headerRef,
         navigation,
         preventBreadcrumbScroll,
-        setMetrics
+        setMetrics,
+        dynamicRefs
       );
+    };
 
     // state based on props only
     const actionBarItemArray = extractShapesArray(actionBarItems);
@@ -114,11 +117,7 @@ export let PageHeader = React.forwardRef(
     );
 
     /* Title shape is used to allow title to be string or shape */
-    const titleShape = getTitleShape(
-      title,
-      titleIcon,
-      PageHeader.defaultProps.title
-    );
+    const titleShape = getTitleShape();
 
     // NOTE: The buffer is used to add space between the bottom of the header and the last content
     // No navigation and title row not pre-collapsed
@@ -151,11 +150,6 @@ export let PageHeader = React.forwardRef(
     ] = useState(0);
     const [actionBarColumnWidth, setActionBarColumnWidth] = useState(0);
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
-
-    // refs
-    const dynamicRefs = useRef({});
-    const localHeaderRef = useRef(null);
-    const headerRef = ref || localHeaderRef;
 
     // handlers
     const handleActionBarWidthChange = ({ minWidth, maxWidth }) => {

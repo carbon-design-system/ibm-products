@@ -2,20 +2,37 @@ import { pkg } from '../../settings';
 export const blockClass = `${pkg.prefix}--page-header`;
 
 /**
- * Assesses the vertical space and calls setMetrics with update
- * @param {()} getDynamicRef
+ * Assesses the vertical height of various elements and calls setMetrics with update
  * @param {{}} headerRef
  * @param {{}} navigation
  * @param {boolean} preventBreadcrumbScroll
  * @param {()} setMetrics
  */
 export const utilCheckUpdateVerticalSpace = (
-  getDynamicRef,
   headerRef,
   navigation,
   preventBreadcrumbScroll,
-  setMetrics
+  setMetrics,
+  dynamicRefs
 ) => {
+  const getDynamicRef = (selector) => {
+    // would love to do this differently but digging in the dom seems easier
+    // than getting a ref to a conditionally rendered item
+    /* don't know how to test resize */
+    /* istanbul ignore next if */
+    if (!headerRef.current) {
+      return undefined;
+    } else {
+      let dRef = dynamicRefs.current[selector];
+      if (!dRef || dRef.parentNode === null) {
+        dynamicRefs.current[selector] = headerRef.current.querySelector(
+          selector
+        );
+      }
+    }
+    return dynamicRefs.current[selector];
+  };
+
   // Utility function that checks the heights of various elements which are used to determine layout
   const update = {};
 
@@ -81,29 +98,6 @@ export const utilCheckUpdateVerticalSpace = (
   }
 
   setMetrics((previous) => ({ ...previous, ...update }));
-};
-
-/**
- * Reaches into the dom to find an element
- * @param {{}} headerRef
- * @param {{}} dynamicRefs
- * @param {string} selector
- * @returns {{}}
- */
-export const utilGetDynamicRef = (headerRef, dynamicRefs, selector) => {
-  // would love to do this differently but digging in the dom seems easier
-  // than getting a ref to a conditionally rendered item
-  /* don't know how to test resize */
-  /* istanbul ignore next if */
-  if (!headerRef.current) {
-    return undefined;
-  } else {
-    let dRef = dynamicRefs.current[selector];
-    if (!dRef || dRef.parentNode === null) {
-      dynamicRefs.current[selector] = headerRef.current.querySelector(selector);
-    }
-  }
-  return dynamicRefs.current[selector];
 };
 
 /**

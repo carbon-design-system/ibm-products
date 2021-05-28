@@ -152,11 +152,13 @@ export let CreateTearsheet = forwardRef(
             onClick: () => setCurrentStep((prev) => prev - 1),
             kind: 'secondary',
             disabled: currentStep === 1,
+            isExpressive: true,
           });
         buttons.push({
           label: cancelButtonText,
           onClick: onUnmount,
           kind: 'ghost',
+          isExpressive: true,
         });
         buttons.push({
           label: currentStep < total ? nextButtonText : submitButtonText,
@@ -165,6 +167,7 @@ export let CreateTearsheet = forwardRef(
           kind: 'primary',
           loading: isSubmitting,
           className: `${blockClass}__create-button`,
+          isExpressive: true,
         });
         setCreateTearsheetActions(buttons);
       }

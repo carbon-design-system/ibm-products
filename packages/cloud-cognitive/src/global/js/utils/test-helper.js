@@ -14,7 +14,11 @@ export const mockHTMLElement = (options) => {
       option
     );
 
-    Object.defineProperty(HTMLElement.prototype, option, options[option]);
+    Object.defineProperty(HTMLElement.prototype, option, {
+      value: options[option],
+      configurable: true,
+      writable: true,
+    });
   }
 
   return {
@@ -28,6 +32,7 @@ export const mockHTMLElement = (options) => {
           );
         } else {
           delete originals[option];
+          delete HTMLElement.prototype[option];
         }
       }
     },

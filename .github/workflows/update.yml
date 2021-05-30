@@ -19,8 +19,8 @@ jobs:
           COMMIT_MESSAGE: 'feat: update Carbon versions and dependencies'
           COMMIT_NAME: 'GitHub Actions'
           COMMIT_EMAIL: 'dave@dcwarwick.org.uk'
-          PR_BRANCH_PREFIX: 'PR${PR_NUMBER}-feat/'
-          PR_BRANCH_NAME: 'update-carbon-dependencies'
+          PR_BRANCH_PREFIX: 'feat/'
+          PR_BRANCH_NAME: 'PR${PR_NUMBER}-update-carbon-dependencies'
           PR_TITLE: 'Update Carbon versions and package dependencies to latest'
           PR_BODY: |
             This PR was automatically generated to update Carbon versions and other package dependencies on a regular basis. The current goal is to update Carbon versions each Wednesday, to ensure we remain up-to-date with the latest changes.

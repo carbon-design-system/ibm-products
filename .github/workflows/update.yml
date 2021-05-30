@@ -2,7 +2,7 @@ name: Update packages
 
 on:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: '0 4 * * WED'
 
 jobs:
   release:
@@ -23,24 +23,16 @@ jobs:
           PR_BRANCH_NAME: 'update-carbon-dependencies'
           PR_TITLE: 'Update Carbon versions and package dependencies to latest'
           PR_BODY: |
-            This PR was automatically generated to update Carbon versions and 
-            other package dependencies on a regular basis. The current goal is
-            to update Carbon versions each Wednesday, to ensure we remain
-            up-to-date with the latest changes.
+            This PR was automatically generated to update Carbon versions and other package dependencies on a regular basis. The current goal is to update Carbon versions each Wednesday, to ensure we remain up-to-date with the latest changes.
 
             #### What did you change?
 
             This action ran
-            * `yarn upgrade-carbon` to upgrade all carbon-related packages to
-              the latest versions.
-            * `yarn upgrade-dependencies` which upgrades most other packages,
-              though certain critical packages are intentionally excluded.
+            * `yarn upgrade-carbon` to upgrade all carbon-related packages to the latest versions.
+            * `yarn upgrade-dependencies` which upgrades most other packages, though certain critical packages are intentionally excluded.
 
             #### How did you test and verify your work?
 
-            **These updates have not been verified**, and the PR should not
-            be merged until the following checks have been made:
-            * ci-check runs cleanly and all tests pass (done automatically
-              as part of the PR checks).
-            * use the deploy-preview to ensure that storybook runs and a
-              selection of the main components render correctly.
+            **These updates have not been verified**, and the PR should not be merged until the following checks have been made:
+            * ci-check runs cleanly and all tests pass (done automatically as part of the PR checks).
+            * use the deploy-preview to ensure that storybook runs and a selection of the main components render correctly.

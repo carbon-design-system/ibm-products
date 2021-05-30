@@ -224,6 +224,137 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: inline-block;
 }
 
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-end-p1 {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-end-p2 {
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+/* Stroke animations */
+@keyframes init-stroke {
+  0% {
+    stroke-dashoffset: 240;
+  }
+  100% {
+    stroke-dashoffset: 16;
+  }
+}
+
+@keyframes stroke-end {
+  0% {
+    stroke-dashoffset: 16;
+  }
+  100% {
+    stroke-dashoffset: 240;
+  }
+}
+
+.exp--export-modal .bx--modal-footer .bx--btn {
+  max-width: none;
+}
+
+.exp--export-modal .bx--modal-content {
+  padding-right: var(--cds-spacing-05, 1rem);
+}
+
+.exp--export-modal .bx--modal-close {
+  display: none;
+}
+
+.exp--export-modal__body {
+  margin-bottom: var(--cds-spacing-05, 1rem);
+  padding-right: calc(20% - var(--cds-spacing-05, 1rem));
+}
+
+.exp--export-modal__messaging {
+  display: flex;
+  align-items: center;
+}
+
+.exp--export-modal__messaging p {
+  margin-left: var(--cds-spacing-03, 0.5rem);
+}
+
+.exp--export-modal__checkmark-icon {
+  fill: var(--cds-interactive-01, #0f62fe);
+}
+
+.exp--export-modal__error-icon {
+  fill: var(--cds-danger, #da1e28);
+}
+
+.exp--http-errors .exp--http-errors__content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  transform: translate(-50%, -150%);
+}
+
+@media (min-width: 42rem) {
+  .exp--http-errors .exp--http-errors__content {
+    transform: translate(-50%, -50%);
+  }
+}
+
+.exp--http-errors .exp--http-errors__error-code-label {
+  font-size: var(--cds-productive-heading-02-font-size, 1rem);
+  font-weight: var(--cds-productive-heading-02-font-weight, 600);
+  line-height: var(--cds-productive-heading-02-line-height, 1.375);
+  letter-spacing: var(--cds-productive-heading-02-letter-spacing, 0);
+  margin-bottom: var(--cds-spacing-02, 0.25rem);
+}
+
+.exp--http-errors .exp--http-errors__title {
+  font-size: var(--cds-productive-heading-05-font-size, 2rem);
+  font-weight: var(--cds-productive-heading-05-font-weight, 400);
+  line-height: var(--cds-productive-heading-05-line-height, 1.25);
+  letter-spacing: var(--cds-productive-heading-05-letter-spacing, 0);
+  margin-bottom: var(--cds-spacing-04, 0.75rem);
+}
+
+.exp--http-errors .exp--http-errors__description {
+  font-size: var(--cds-body-short-01-font-size, 0.875rem);
+  font-weight: var(--cds-body-short-01-font-weight, 400);
+  line-height: var(--cds-body-short-01-line-height, 1.29);
+  letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
+  margin-bottom: var(--cds-spacing-06, 1.5rem);
+}
+
+.exp--http-errors .exp--http-errors__link {
+  display: block;
+  margin-bottom: var(--cds-spacing-02, 0.25rem);
+}
+
+.exp--http-errors .exp--http-errors__image {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -40%);
+}
+
+@media (min-width: 42rem) {
+  .exp--http-errors .exp--http-errors__image {
+    transform: translate(-50%, -50%);
+  }
+}
+
 @keyframes fadeIn {
   0% {
     transform: translateY(-38.5rem);
@@ -313,6 +444,80 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-button-separator: #161616;
   --cds-skeleton-01: #353535;
   --cds-skeleton-02: #525252;
+  --cds-background: #161616;
+  --cds-layer: #262626;
+  --cds-layer-accent: #393939;
+  --cds-field: #262626;
+  --cds-background-inverse: #f4f4f4;
+  --cds-background-brand: #0f62fe;
+  --cds-interactive: #4589ff;
+  --cds-border-subtle: #393939;
+  --cds-border-strong: #6f6f6f;
+  --cds-border-inverse: #f4f4f4;
+  --cds-border-interactive: #4589ff;
+  --cds-text-primary: #f4f4f4;
+  --cds-text-secondary: #c6c6c6;
+  --cds-text-placeholder: #6f6f6f;
+  --cds-text-helper: #8d8d8d;
+  --cds-text-on-color: #ffffff;
+  --cds-text-inverse: #161616;
+  --cds-link-primary: #78a9ff;
+  --cds-link-secondary: #a6c8ff;
+  --cds-link-visited: #be95ff;
+  --cds-link-inverse: #0f62fe;
+  --cds-icon-primary: #f4f4f4;
+  --cds-icon-secondary: #c6c6c6;
+  --cds-icon-on-color: #ffffff;
+  --cds-icon-inverse: #161616;
+  --cds-support-error: #fa4d56;
+  --cds-support-success: #42be65;
+  --cds-support-warning: #f1c21b;
+  --cds-support-info: #4589ff;
+  --cds-support-error-inverse: #da1e28;
+  --cds-support-success-inverse: #24a148;
+  --cds-support-warning-inverse: #f1c21b;
+  --cds-support-info-inverse: #0f62fe;
+  --cds-overlay: rgba(22, 22, 22, 0.7);
+  --cds-toggle-off: #6f6f6f;
+  --cds-button-primary: #0f62fe;
+  --cds-button-secondary: #6f6f6f;
+  --cds-button-tertiary: #ffffff;
+  --cds-button-danger-primary: #da1e28;
+  --cds-button-danger-secondary: #fa4d56;
+  --cds-background-active: #525252;
+  --cds-layer-active: #525252;
+  --cds-button-danger-active: #750e13;
+  --cds-button-primary-active: #002d9c;
+  --cds-button-secondary-active: #393939;
+  --cds-button-tertiary-active: #c6c6c6;
+  --cds-focus-inset: #161616;
+  --cds-focus-inverse: #0f62fe;
+  --cds-background-hover: #353535;
+  --cds-layer-hover: #353535;
+  --cds-field-hover: #353535;
+  --cds-background-inverse-hover: #e5e5e5;
+  --cds-link-primary-hover: #a6c8ff;
+  --cds-button-danger-hover: #b81921;
+  --cds-button-primary-hover: #0353e9;
+  --cds-button-secondary-hover: #606060;
+  --cds-button-tertiary-hover: #f4f4f4;
+  --cds-background-selected: #393939;
+  --cds-background-selected-hover: #4c4c4c;
+  --cds-layer-selected: #393939;
+  --cds-layer-selected-hover: #4c4c4c;
+  --cds-layer-selected-inverse: #f4f4f4;
+  --cds-border-subtle-selected: #525252;
+  --cds-layer-disabled: #262626;
+  --cds-field-disabled: #262626;
+  --cds-border-disabled: #262626;
+  --cds-text-disabled: #525252;
+  --cds-button-disabled: #525252;
+  --cds-icon-disabled: #525252;
+  --cds-text-on-color-disabled: #8d8d8d;
+  --cds-icon-on-color-disabled: #8d8d8d;
+  --cds-layer-selected-disabled: #8d8d8d;
+  --cds-skeleton-background: #353535;
+  --cds-skeleton-element: #525252;
   --cds-brand-01: #0f62fe;
   --cds-brand-02: #6f6f6f;
   --cds-brand-03: #ffffff;
@@ -323,13 +528,24 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-caption-01-font-weight: 400;
   --cds-caption-01-line-height: 1.34;
   --cds-caption-01-letter-spacing: 0.32px;
+  --cds-caption-02-font-size: 0.875rem;
+  --cds-caption-02-font-weight: 400;
+  --cds-caption-02-line-height: 1.29;
+  --cds-caption-02-letter-spacing: 0.32px;
   --cds-label-01-font-size: 0.75rem;
   --cds-label-01-font-weight: 400;
   --cds-label-01-line-height: 1.34;
   --cds-label-01-letter-spacing: 0.32px;
+  --cds-label-02-font-size: 0.875rem;
+  --cds-label-02-font-weight: 400;
+  --cds-label-02-line-height: 1.29;
+  --cds-label-02-letter-spacing: 0.32px;
   --cds-helper-text-01-font-size: 0.75rem;
   --cds-helper-text-01-line-height: 1.34;
   --cds-helper-text-01-letter-spacing: 0.32px;
+  --cds-helper-text-02-font-size: 0.875rem;
+  --cds-helper-text-02-line-height: 1.29;
+  --cds-helper-text-02-letter-spacing: 0.32px;
   --cds-body-short-01-font-size: 0.875rem;
   --cds-body-short-01-font-weight: 400;
   --cds-body-short-01-line-height: 1.29;
@@ -595,7 +811,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-status-icon.exp--notifications-panel__notification-status-icon-success {
-  fill: var(--cds-support-02, #24a148);
+  fill: var(--cds-support-02, #198038);
 }
 
 .exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-status-icon.exp--notifications-panel__notification-status-icon-warning {
@@ -750,8 +966,16 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin: 0;
 }
 
+.exp--remove-modal .bx--modal-footer .bx--btn {
+  max-width: none;
+}
+
 .exp--remove-modal .bx--modal-content {
   padding-right: var(--cds-spacing-05, 1rem);
+}
+
+.exp--remove-modal .bx--modal-close {
+  display: none;
 }
 
 .exp--remove-modal__body {
@@ -948,7 +1172,7 @@ path:nth-of-type(1),
 }
 
 .exp--status-icon--light.exp--status-icon--light-in-progress {
-  animation: rotating 8s infinite linear;
+  animation: rotating 8000ms infinite linear;
   fill: #0f62fe;
 }
 
@@ -959,7 +1183,7 @@ path:nth-of-type(1),
 }
 
 .exp--status-icon--light.exp--status-icon--dark-in-progress {
-  animation: rotating 8s infinite linear;
+  animation: rotating 8000ms infinite linear;
   fill: #0f62fe;
 }
 
@@ -1140,7 +1364,7 @@ path:nth-of-type(1),
 }
 
 .exp--status-icon--dark.exp--status-icon--light-in-progress {
-  animation: rotating 8s infinite linear;
+  animation: rotating 8000ms infinite linear;
   fill: #4589ff;
 }
 
@@ -1151,7 +1375,7 @@ path:nth-of-type(1),
 }
 
 .exp--status-icon--dark.exp--status-icon--dark-in-progress {
-  animation: rotating 8s infinite linear;
+  animation: rotating 8000ms infinite linear;
   fill: #4589ff;
 }
 

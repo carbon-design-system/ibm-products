@@ -61,18 +61,17 @@ const customStyles = {
 };
 
 // custom behaviour
-const getNewOptionData = (allowPlaintext = true) => (
-  inputValue,
-  optionLabel
-) => {
-  if (allowPlaintext) {
-    return {
-      label: optionLabel,
-      value: inputValue,
-      __plaintext__: true,
-    };
-  }
-};
+const getNewOptionData =
+  (allowPlaintext = true) =>
+  (inputValue, optionLabel) => {
+    if (allowPlaintext) {
+      return {
+        label: optionLabel,
+        value: inputValue,
+        __plaintext__: true,
+      };
+    }
+  };
 const formatCreateLabel = (searchForText) => (inputValue) =>
   `${searchForText} "${inputValue}"`;
 const findCategoryForOption = (option, allOptions) => {
@@ -250,7 +249,7 @@ IdeFilter.propTypes = {
   ).isRequired,
   placeholderText: PropTypes.string,
   searchForText: PropTypes.string,
-  searchIcon: PropTypes.element,
+  searchIcon: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
   value: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,

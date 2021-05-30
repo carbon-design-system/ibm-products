@@ -13,6 +13,7 @@ jobs:
         uses: technote-space/create-pr-action@v2
         with:
           EXECUTE_COMMANDS: |
+            yarn
             yarn upgrade-carbon
             yarn upgrade-dependencies
           COMMIT_MESSAGE: 'feat: update Carbon versions and dependencies'

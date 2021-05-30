@@ -38,14 +38,14 @@ export let LoadingBar = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
-      className,
       active,
-      small,
-      percentage,
-      showPercentageIndicator,
-      percentageIndicatorText,
       ariaLabel,
+      className,
       id,
+      percentage,
+      percentageIndicatorText,
+      showPercentageIndicator,
+      small,
       // Collect any other property values passed in.
       ...rest
     },
@@ -140,14 +140,19 @@ LoadingBar.propTypes = {
   active: PropTypes.bool.isRequired,
 
   /**
+   * Specify a ariaLabel that would be used to best describe the active loading state
+   */
+  ariaLabel: PropTypes.string,
+
+  /**
    * Provide an optional className to be applied to the containing node
    */
   className: PropTypes.string,
 
   /**
-   * Specify whether you would like the small variant of this component
+   * ID for loading bar
    */
-  small: PropTypes.bool,
+  id: PropTypes.string,
 
   /**
    * Leave undefined for indetermined duration or specify percentage complete that the determinate bar should indicate (0-100).
@@ -155,19 +160,19 @@ LoadingBar.propTypes = {
   percentage: PropTypes.number,
 
   /**
-   * In determinate mode, specify whether to show the percentage indicator.
-   */
-  showPercentageIndicator: PropTypes.bool,
-
-  /**
    * In determinate mode, provide text to be shown on percentage indicator
    */
   percentageIndicatorText: PropTypes.string,
 
   /**
-   * Specify a ariaLabel that would be used to best describe the active loading state
+   * In determinate mode, specify whether to show the percentage indicator.
    */
-  ariaLabel: PropTypes.string,
+  showPercentageIndicator: PropTypes.bool,
+
+  /**
+   * Specify whether you would like the small variant of this component
+   */
+  small: PropTypes.bool,
 };
 
 // Default values for component props. Default values are not required for

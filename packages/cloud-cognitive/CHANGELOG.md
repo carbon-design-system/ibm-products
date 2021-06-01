@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.40.17](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.40.16...@carbon/ibm-cloud-cognitive@0.40.17) (2021-06-01)
+
+
+### Bug Fixes
+
+* **CreateTearsheet:** use default button separator color variable ([#802](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/802)) ([8594e69](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8594e69852c746b6108b778cdc88b7b56fbd6838))
+* **SidePanel:** add validator to side panel and allPropType helper ([#797](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/797)) ([c2262c9](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c2262c9a8ac0ac57b21232dc0e943aca7f22d4ed))
+
+
+
+
+
+## [0.40.16](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.40.15...@carbon/ibm-cloud-cognitive@0.40.16) (2021-06-01)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
 ## [0.40.15](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.40.14...@carbon/ibm-cloud-cognitive@0.40.15) (2021-05-29)
 
 

@@ -27,14 +27,16 @@ const componentName = 'CreateModal';
 const blockClass = `${pkg.prefix}--create-modal`;
 
 // Custom PropType validator which checks and ensures that the children property has no more than 4 nodes
-const isValidChildren = () => ({ children }) => {
-  if (children && children.length > 4) {
-    throw new Error(
-      'The `CreateModal` component does not take more than 4 nodes as children. This is to ensure that the modal does not overflow. Please remove 1 or more nodes.'
-    );
-  }
-  return;
-};
+const isValidChildren =
+  () =>
+  ({ children }) => {
+    if (children && children.length > 4) {
+      throw new Error(
+        'The `CreateModal` component does not take more than 4 nodes as children. This is to ensure that the modal does not overflow. Please remove 1 or more nodes.'
+      );
+    }
+    return;
+  };
 
 export let CreateModal = React.forwardRef(
   (

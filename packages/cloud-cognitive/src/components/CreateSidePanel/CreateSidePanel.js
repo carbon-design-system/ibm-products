@@ -66,18 +66,20 @@ export let CreateSidePanel = React.forwardRef(
       pageContentSelector && (
         <SidePanel
           {...rest}
-          ref={ref}
-          pageContentSelector={pageContentSelector}
+          {...{
+            open,
+            ref,
+            pageContentSelector,
+            onRequestClose,
+            title,
+            subtitle,
+            actions,
+            selectorPrimaryFocus,
+          }}
           placement="right"
           slideIn
           animateTitle={false}
           className={cx(blockClass, className)}
-          onRequestClose={onRequestClose}
-          open={open}
-          title={title}
-          subtitle={subtitle}
-          actions={actions}
-          selectorPrimaryFocus={selectorPrimaryFocus}
           size="md">
           <h3
             className={`${blockClass}__form-title-text ${blockClass}__content-text`}>

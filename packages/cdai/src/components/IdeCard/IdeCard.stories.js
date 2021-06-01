@@ -30,8 +30,7 @@ storiesOf(getComponentLabel('IdeCard'), module)
   .addParameters({ styles })
   .add('Standard card size', () => <IdeCard {...defaultProps} />, {
     info: {
-      text:
-        'Core/minimum configuration. Use this to enable the header elements, but then add your own content below. Useful if you do not require tiles.',
+      text: 'Core/minimum configuration. Use this to enable the header elements, but then add your own content below. Useful if you do not require tiles.',
     },
   })
   .add(
@@ -39,21 +38,18 @@ storiesOf(getComponentLabel('IdeCard'), module)
     () => <IdeCard {...defaultProps} cardSize={'large'} />,
     {
       info: {
-        text:
-          'Core/minimum configuration. Use this to enable the header elements, but then add your own content below. Useful if you do not require tiles.',
+        text: 'Core/minimum configuration. Use this to enable the header elements, but then add your own content below. Useful if you do not require tiles.',
       },
     }
   )
   .add('Link card', () => <IdeCard {...linkCard} />, {
     info: {
-      text:
-        'Core/minimum configuration. Use this to enable the header elements, but then add your own content below. Useful if you do not require tiles.',
+      text: 'Core/minimum configuration. Use this to enable the header elements, but then add your own content below. Useful if you do not require tiles.',
     },
   })
   .add('External link card', () => <IdeCard {...externalLinkCard} />, {
     info: {
-      text:
-        'Core/minimum configuration. Use this to enable the header elements, but then add your own content below. Useful if you do not require tiles.',
+      text: 'Core/minimum configuration. Use this to enable the header elements, but then add your own content below. Useful if you do not require tiles.',
     },
   })
   .add(
@@ -61,8 +57,7 @@ storiesOf(getComponentLabel('IdeCard'), module)
     () => <IdeCard {...showExternalLinkIconCard} />,
     {
       info: {
-        text:
-          'Core/minimum configuration. Use this to enable the header elements, but then add your own content below. Useful if you do not require tiles.',
+        text: 'Core/minimum configuration. Use this to enable the header elements, but then add your own content below. Useful if you do not require tiles.',
       },
     }
   )
@@ -71,15 +66,13 @@ storiesOf(getComponentLabel('IdeCard'), module)
     () => <IdeCard {...nodeContentCard} />,
     {
       info: {
-        text:
-          'Use this to enable the header elements, but then add your own content below. Useful if you do not require tiles.',
+        text: 'Use this to enable the header elements, but then add your own content below. Useful if you do not require tiles.',
       },
     }
   )
   .add('With custom content', () => <IdeCard {...customCard} />, {
     info: {
-      text:
-        'Core/minimum configuration. Complete removes the tile presentation.',
+      text: 'Core/minimum configuration. Complete removes the tile presentation.',
     },
   })
   .add(
@@ -91,8 +84,7 @@ storiesOf(getComponentLabel('IdeCard'), module)
     ),
     {
       info: {
-        text:
-          'Core/minimum configuration. Use this to enable the header elements, but then add your own content below. Useful if you do not require tiles.',
+        text: 'Core/minimum configuration. Use this to enable the header elements, but then add your own content below. Useful if you do not require tiles.',
       },
     }
   );

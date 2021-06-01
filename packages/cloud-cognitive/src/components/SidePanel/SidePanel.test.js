@@ -21,12 +21,16 @@ const sizes = ['xs', 'sm', 'md', 'lg', 'max'];
 
 const dataTestId = uuidv4();
 
+const title = uuidv4();
+const subtitle = uuidv4();
+
 const onRequestCloseFn = jest.fn();
 const onUnmountFn = jest.fn();
 const renderSidePanel = ({ ...rest }, children = <p>test</p>) =>
   render(
     <SidePanel
       {...{
+        title,
         open: true,
         onRequestClose: onRequestCloseFn,
         ...rest,
@@ -34,9 +38,6 @@ const renderSidePanel = ({ ...rest }, children = <p>test</p>) =>
       {children}
     </SidePanel>
   );
-
-const title = uuidv4();
-const subtitle = uuidv4();
 
 const SlideIn = ({
   placement,
@@ -139,7 +140,7 @@ describe('SidePanel', () => {
     expect(updatedStyles.marginLeft).toBe('0px');
   });
 
-  it('should render a right slide in panel version', async () => {
+  it('should render a right slide in panel version with onUnmount prop', async () => {
     const { container, rerender } = render(<SlideIn placement="right" open />);
     const pageContent = container.querySelector(
       '#side-panel-test-page-content'
@@ -194,7 +195,11 @@ describe('SidePanel', () => {
     );
     userEvent.click(closeIconButton);
     rerender(
-      <SidePanel includeOverlay open={false} onRequestClose={onRequestCloseFn}>
+      <SidePanel
+        title={title}
+        includeOverlay
+        open={false}
+        onRequestClose={onRequestCloseFn}>
         Content
       </SidePanel>
     );

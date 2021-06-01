@@ -5,7 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React from 'react';
+import React, { useState } from 'react';
+import { Button } from 'carbon-components-react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
@@ -45,6 +46,26 @@ const defaultProps = {
 
 const Template = (args) => {
   return <RemoveModal {...args} />;
+};
+
+const TemplateWithState = (args) => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <RemoveModal {...args} open={open} onClose={() => setOpen(false)} />
+      <Button onClick={() => setOpen(true)}>Launch modal</Button>
+    </>
+  );
+};
+
+export const Standard = TemplateWithState.bind({});
+Standard.args = {
+  ...defaultProps,
+  body: `Removing ${resourceName} will permanently remove the configuration. This action cannot be undone.`,
+  title: 'Confirm removal',
+  primaryButtonText: 'Remove',
+  label: `Remove ${resourceName}`,
 };
 
 export const RemovePattern = Template.bind({});

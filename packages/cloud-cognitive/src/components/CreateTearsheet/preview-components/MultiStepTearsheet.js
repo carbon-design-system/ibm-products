@@ -31,9 +31,8 @@ export const MultiStepTearsheet = () => {
   const [topicDescriptionValue, setTopicDescriptionValue] = useState('');
   const [topicVersionValue, setTopicVersionValue] = useState('');
   const [stepTwoTextInputValue, setStepTwoTextInputValue] = useState(1);
-  const [stepThreeTextInputValue, setStepThreeTextInputValue] = useState(
-    'one-day'
-  );
+  const [stepThreeTextInputValue, setStepThreeTextInputValue] =
+    useState('one-day');
   const [isInvalid, setIsInvalid] = useState(false);
 
   const clearCreateData = () => {

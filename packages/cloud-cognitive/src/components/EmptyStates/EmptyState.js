@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Button, Link } from 'carbon-components-react';
 import { pkg } from '../../settings';
+import { allPropTypes } from '../../global/js/utils/props-helper';
 import { EmptyStateContent } from './EmptyStateContent';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -71,16 +72,15 @@ export let EmptyState = React.forwardRef(
 // Return a placeholder if not released and not enabled by feature flag
 EmptyState = pkg.checkComponentEnabled(EmptyState, componentName);
 
-EmptyState.validateIllustrationDescription = () => ({
-  illustration,
-  illustrationDescription,
-}) => {
-  if (illustration && !illustrationDescription) {
-    throw new Error(
-      `${componentName}: illustrationDescription is missing, this is required when using the illustration prop`
-    );
-  }
-};
+EmptyState.validateIllustrationDescription =
+  () =>
+  ({ illustration, illustrationDescription }) => {
+    if (illustration && !illustrationDescription) {
+      throw new Error(
+        `${componentName}: illustrationDescription is missing, this is required when using the illustration prop`
+      );
+    }
+  };
 
 export const EmptyStateDefaultProps = {
   size: 'lg',
@@ -112,7 +112,10 @@ EmptyState.propTypes = {
   /**
    * The alt text for custom provided illustrations
    */
-  illustrationDescription: EmptyState.validateIllustrationDescription(),
+  illustrationDescription: allPropTypes([
+    EmptyState.validateIllustrationDescription(),
+    PropTypes.string,
+  ]),
 
   /**
    * Empty state link object

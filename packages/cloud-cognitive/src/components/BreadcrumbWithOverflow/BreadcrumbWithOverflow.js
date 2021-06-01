@@ -168,9 +168,10 @@ export let BreadcrumbWithOverflow = ({
 
       /* istanbul ignore next if */
       if (sizingContainerRef.current) {
-        const sizingBreadcrumbItems = sizingContainerRef.current.querySelectorAll(
-          `.${carbon.prefix}--breadcrumb-item`
-        );
+        const sizingBreadcrumbItems =
+          sizingContainerRef.current.querySelectorAll(
+            `.${carbon.prefix}--breadcrumb-item`
+          );
 
         const breadcrumbWidthsIncludingMargin = [];
         for (let item of sizingBreadcrumbItems) {

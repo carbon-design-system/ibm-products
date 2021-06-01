@@ -62,12 +62,19 @@ export let SidePanel = React.forwardRef(
   ) => {
     const [shouldRender, setRender] = useState(open);
     const [animationComplete, setAnimationComplete] = useState(false);
+    const [primaryActions, setPrimaryActions] = useState([]);
     const sidePanelRef = useRef();
     const sidePanelOverlayRef = useRef();
     const startTrapRef = useRef();
     const endTrapRef = useRef();
     const sidePanelInnerRef = useRef();
     const sidePanelCloseRef = useRef();
+
+    useEffect(() => {
+      let actionsClone = [...actions];
+      actionsClone.map((item) => (item.isExpressive = true));
+      setPrimaryActions(actionsClone);
+    }, [actions]);
 
     // set initial focus when side panel opens
     useEffect(() => {
@@ -92,7 +99,12 @@ export let SidePanel = React.forwardRef(
     }, [selectorPrimaryFocus, open, animationComplete]);
 
     useEffect(() => {
-      if (open && actions && actions.length && animationComplete) {
+      if (
+        open &&
+        primaryActions &&
+        primaryActions.length &&
+        animationComplete
+      ) {
         const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
         const actionsContainer = getActionsContainerElement();
         let actionsHeight = actionsContainer.offsetHeight + 16; // add additional 1rem spacing to bottom padding
@@ -105,7 +117,7 @@ export let SidePanel = React.forwardRef(
       return () => {
         setAnimationComplete(false);
       };
-    }, [actions, condensedActions, open, animationComplete]);
+    }, [primaryActions, condensedActions, open, animationComplete]);
 
     /* istanbul ignore next */
     const handleResize = () => {
@@ -518,7 +530,7 @@ export let SidePanel = React.forwardRef(
                 )}
                 <div className={`${blockClass}__body-content`}>{children}</div>
                 <ActionSet
-                  actions={actions}
+                  actions={primaryActions}
                   className={primaryActionContainerClassNames}
                   size={size}
                 />

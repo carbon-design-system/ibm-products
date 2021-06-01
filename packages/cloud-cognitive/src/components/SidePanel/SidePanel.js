@@ -478,7 +478,8 @@ export let SidePanel = React.forwardRef(
                 {subtitle && subtitle.length && (
                   <p
                     className={cx(`${blockClass}__subtitle-text`, {
-                      [`${blockClass}__subtitle-text-no-animation`]: !animateTitle,
+                      [`${blockClass}__subtitle-text-no-animation`]:
+                        !animateTitle,
                       [`${blockClass}__subtitle-text-no-animation-no-action-toolbar`]:
                         !animateTitle &&
                         (!actionToolbarButtons || !actionToolbarButtons.length),
@@ -489,7 +490,8 @@ export let SidePanel = React.forwardRef(
                 {actionToolbarButtons && actionToolbarButtons.length && (
                   <div
                     className={cx(`${blockClass}__action-toolbar`, {
-                      [`${blockClass}__action-toolbar-no-animation`]: !animateTitle,
+                      [`${blockClass}__action-toolbar-no-animation`]:
+                        !animateTitle,
                     })}>
                     {actionToolbarButtons.map((action) => (
                       <Button
@@ -504,8 +506,10 @@ export let SidePanel = React.forwardRef(
                         className={cx([
                           `${blockClass}__action-toolbar-button`,
                           {
-                            [`${blockClass}__action-toolbar-icon-only-button`]: action.icon,
-                            [`${blockClass}__action-toolbar-leading-button`]: !action.icon,
+                            [`${blockClass}__action-toolbar-icon-only-button`]:
+                              action.icon,
+                            [`${blockClass}__action-toolbar-leading-button`]:
+                              !action.icon,
                           },
                         ])}
                         onClick={() => action.onActionToolbarButtonClick()}>

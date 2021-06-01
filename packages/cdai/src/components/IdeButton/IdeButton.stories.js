@@ -433,8 +433,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
     ),
     {
       info: {
-        text:
-          'Tests the ability to add custom classes, and set the tabindex, type and role attribute of the button.',
+        text: 'Tests the ability to add custom classes, and set the tabindex, type and role attribute of the button.',
       },
     }
   )
@@ -460,8 +459,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
     ),
     {
       info: {
-        text:
-          'Tests the ability to create buttons based on <a> tags and arbitrary tags.',
+        text: 'Tests the ability to create buttons based on <a> tags and arbitrary tags.',
       },
     }
   );

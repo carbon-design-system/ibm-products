@@ -264,6 +264,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 
+.exp--export-modal .bx--modal-footer .bx--btn {
+  max-width: none;
+}
+
 .exp--export-modal .bx--modal-content {
   padding-right: var(--cds-spacing-05, 1rem);
 }
@@ -962,8 +966,16 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin: 0;
 }
 
+.exp--remove-modal .bx--modal-footer .bx--btn {
+  max-width: none;
+}
+
 .exp--remove-modal .bx--modal-content {
   padding-right: var(--cds-spacing-05, 1rem);
+}
+
+.exp--remove-modal .bx--modal-close {
+  display: none;
 }
 
 .exp--remove-modal__body {

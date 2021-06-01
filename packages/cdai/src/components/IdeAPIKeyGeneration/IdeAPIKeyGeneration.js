@@ -26,13 +26,11 @@ export default class IdeAPIKeyGeneration extends React.Component {
       descriptiveName: '',
     };
 
-    this.handleDescriptiveNameChange = this.handleDescriptiveNameChange.bind(
-      this
-    );
+    this.handleDescriptiveNameChange =
+      this.handleDescriptiveNameChange.bind(this);
     this.handleGenerateAPIKey = this.handleGenerateAPIKey.bind(this);
-    this.handleAPIKeyGenerationCompletion = this.handleAPIKeyGenerationCompletion.bind(
-      this
-    );
+    this.handleAPIKeyGenerationCompletion =
+      this.handleAPIKeyGenerationCompletion.bind(this);
     this.handleCopy = this.handleCopy.bind(this);
     this.handleDownload = this.handleDownload.bind(this);
     this.handleNext = this.handleNext.bind(this);
@@ -226,12 +224,8 @@ export default class IdeAPIKeyGeneration extends React.Component {
   }
 
   handleCopy(event) {
-    const {
-      apiKey,
-      apiKeySecret,
-      descriptiveNameStep,
-      onCopyAPIKeyData,
-    } = this.props;
+    const { apiKey, apiKeySecret, descriptiveNameStep, onCopyAPIKeyData } =
+      this.props;
 
     // If the apiKeySecret exists, copy a stringified object containing the
     // apiKey and the apiKeySecret props to the clipboard.

@@ -125,7 +125,7 @@ const sizes = {
   },
   [`${blockClass}__available-row`]: {
     get clientHeight() {
-      return 32;
+      return 40;
     },
   },
   [`${carbon.prefix}--btn`]: {
@@ -136,6 +136,9 @@ const sizes = {
   [`${blockClass}__breadcrumb-row`]: {
     get offsetWidth() {
       return window.innerWidth;
+    },
+    get clientHeight() {
+      return 40;
     },
   },
   [`${pkg.prefix}--breadcrumb-with-overflow`]: {
@@ -167,6 +170,9 @@ const sizes = {
     get offsetWidth() {
       return 200;
     },
+    get clientHeight() {
+      return 40;
+    },
   },
   [`${pkg.prefix}--action-bar__displayed-items`]: {
     get offsetWidth() {
@@ -185,7 +191,7 @@ const sizes = {
   },
   [`${blockClass}__subtitle-row`]: {
     get clientHeight() {
-      return 32;
+      return 40;
     },
   },
   [`${blockClass}__title-row`]: {
@@ -203,7 +209,7 @@ const testSizes = (el, property, _default) => {
       return val;
     }
   }
-  console.log('testSizes found nothing.', property, el.outerHTML);
+  // console.log('testSizes found nothing.', property, el.outerHTML);
   return _default;
 };
 
@@ -233,7 +239,7 @@ describe('PageHeader', () => {
   window.innerWidth = 2000;
   window.innerHeight = 1080;
 
-  beforeAll(() => {
+  beforeEach(() => {
     mockElement = mockHTMLElement({
       offsetWidth: {
         get: function () {
@@ -259,7 +265,7 @@ describe('PageHeader', () => {
     }));
   });
 
-  afterAll(() => {
+  afterEach(() => {
     mocks.forEach((mock) => {
       mock.mock.mockRestore();
     });

@@ -17,6 +17,10 @@
 @mixin export-modal {
   $block-class: #{$pkg-prefix}--export-modal;
 
+  .#{$block-class} .bx--modal-footer .bx--btn {
+    max-width: none;
+  }
+
   .#{$block-class} .bx--modal-content {
     padding-right: $spacing-05;
   }

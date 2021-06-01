@@ -140,9 +140,11 @@ export const TearsheetShell = React.forwardRef(
 
     // add isExpressive prop to action buttons
     useEffect(() => {
-      let actionsClone = [...actions];
-      actionsClone.map((item) => (item.isExpressive = true));
-      setPrimaryActions(actionsClone);
+      if (actions && actions.length) {
+        let actionsClone = [...actions];
+        actionsClone.map((item) => (item.isExpressive = true));
+        setPrimaryActions(actionsClone);
+      }
     }, [actions]);
 
     if (position <= depth) {

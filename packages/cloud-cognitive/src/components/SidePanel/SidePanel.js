@@ -71,9 +71,11 @@ export let SidePanel = React.forwardRef(
     const sidePanelCloseRef = useRef();
 
     useEffect(() => {
-      let actionsClone = [...actions];
-      actionsClone.map((item) => (item.isExpressive = true));
-      setPrimaryActions(actionsClone);
+      if (actions && actions.length) {
+        let actionsClone = [...actions];
+        actionsClone.map((item) => (item.isExpressive = true));
+        setPrimaryActions(actionsClone);
+      }
     }, [actions]);
 
     // set initial focus when side panel opens

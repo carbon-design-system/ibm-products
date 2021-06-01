@@ -57,12 +57,14 @@ export const prepareProps = (...values) => {
 
 // A simple wrapper for a prop-types checker that issues a warning message if
 // the value being validated is not null/undefined.
-const deprecatePropInner = (message, validator, info) => (...args) => (
-  // args = [props, propName, componentName, location, propFullName, ...]
-  args[0][args[1]] &&
-    pconsole.warn(message(args[3], args[4] || args[1], args[2], info)),
-  validator(...args)
-);
+const deprecatePropInner =
+  (message, validator, info) =>
+  (...args) => {
+    // args = [props, propName, componentName, location, propFullName, ...]
+    args[0][args[1]] &&
+      pconsole.warn(message(args[3], args[4] || args[1], args[2], info));
+    return validator(...args);
+  };
 
 /**
  * A prop-types type checker that marks a particular usage of a prop as

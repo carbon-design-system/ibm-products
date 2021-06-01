@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-cdai",
   "description": "Carbon for Cloud & Cognitive CD&AI UI components",
-  "version": "1.2.4",
+  "version": "1.2.6",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -28,38 +28,40 @@
   },
   "scripts": {
     "storybook": "start-storybook -p 6006",
-    "build": "node scripts/build.js"
+    "build": "node scripts/build.js",
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react/react-dom (not tested), uuid (not tested)",
+    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react$|^react-dom$|^uuid$)/'"
   },
   "peerDependencies": {
-    "@carbon/elements": "^10.11.1",
-    "@carbon/grid": "^10.17.0",
-    "@carbon/icons-react": "^10.22.0",
-    "carbon-components": "^10.11.1",
-    "carbon-components-react": "^7.17.0",
+    "@carbon/elements": "^10.34.0",
+    "@carbon/grid": "^10.27.0",
+    "@carbon/icons-react": "^10.32.0",
+    "carbon-components": "^10.35.0",
+    "carbon-components-react": "^7.35.0",
     "prop-types": "^15.7.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.11.2",
-    "focus-trap-react": "^6.0.0",
+    "@babel/runtime": "^7.14.0",
+    "focus-trap-react": "^8.5.0",
     "pluralize": "^8.0.0",
     "react-highlighter": "^0.4.3",
-    "react-select": "^3.1.0",
+    "react-select": "^4.3.1",
     "uuid": "^3.4.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.11.6",
-    "@babel/core": "^7.11.6",
-    "@babel/plugin-proposal-class-properties": "^7.10.4",
-    "@babel/plugin-transform-regenerator": "^7.10.4",
-    "@babel/plugin-transform-runtime": "^7.11.5",
-    "@babel/preset-env": "^7.11.5",
-    "@babel/preset-react": "^7.10.4",
+    "@babel/cli": "^7.14.3",
+    "@babel/core": "^7.14.3",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-transform-regenerator": "^7.13.15",
+    "@babel/plugin-transform-runtime": "^7.14.3",
+    "@babel/preset-env": "^7.14.2",
+    "@babel/preset-react": "^7.13.13",
     "cpx": "^1.5.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^6.0.0",
     "rimraf": "^3.0.2",
-    "sinon": "^7.4.2"
+    "sinon": "^11.1.1"
   },
   "babel": {
     "presets": [

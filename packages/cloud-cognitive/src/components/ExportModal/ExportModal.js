@@ -34,7 +34,6 @@ export let ExportModal = forwardRef(
       error,
       errorMessage,
       filename,
-      iconDescription,
       inputLabel,
       invalidInputText,
       loading,
@@ -44,7 +43,6 @@ export let ExportModal = forwardRef(
       open,
       preformattedExtensions,
       preformattedExtensionsLabel,
-      preventCloseOnClickOutside,
       primaryButtonText,
       secondaryButtonText,
       successMessage,
@@ -101,9 +99,10 @@ export let ExportModal = forwardRef(
         className={cx(blockClass, className)}
         aria-label={title}
         size="sm"
-        {...{ open, ref, preventCloseOnClickOutside, onClose }}>
-        <ModalHeader {...{ title, iconDescription }} />
-        <ModalBody>
+        preventCloseOnClickOutside
+        {...{ open, ref, onClose }}>
+        <ModalHeader className={`${blockClass}__header`} title={title} />
+        <ModalBody className={`${blockClass}__body-container`}>
           {!submitted && (
             <>
               {body && <p className={`${blockClass}__body`}>{body}</p>}
@@ -161,7 +160,7 @@ export let ExportModal = forwardRef(
           </div>
         </ModalBody>
         {!submitted && (
-          <ModalFooter>
+          <ModalFooter className={`${blockClass}__footer`}>
             <Button type="button" kind="secondary" onClick={onClose}>
               {secondaryButtonText}
             </Button>
@@ -204,10 +203,6 @@ ExportModal.propTypes = {
    */
   filename: PropTypes.string.isRequired,
   /**
-   * Provide a description for "close" icon that can be read by screen readers
-   */
-  iconDescription: PropTypes.string.isRequired,
-  /**
    * label for the text input
    */
   inputLabel: PropTypes.string,
@@ -249,17 +244,13 @@ ExportModal.propTypes = {
    */
   preformattedExtensionsLabel: PropTypes.string,
   /**
-   * Prevent closing on click outside of modal
-   */
-  preventCloseOnClickOutside: PropTypes.bool,
-  /**
    * Specify the text for the primary button
    */
-  primaryButtonText: PropTypes.string,
+  primaryButtonText: PropTypes.string.isRequired,
   /**
    * Specify the text for the secondary button
    */
-  secondaryButtonText: PropTypes.string,
+  secondaryButtonText: PropTypes.string.isRequired,
   /**
    * messaging to display if the export was successful
    */
@@ -279,11 +270,7 @@ ExportModal.propTypes = {
 };
 
 ExportModal.defaultProps = {
-  error: false,
-  loading: false,
-  open: false,
   preformattedExtensions: [],
-  successful: false,
   validExtensions: [],
 };
 

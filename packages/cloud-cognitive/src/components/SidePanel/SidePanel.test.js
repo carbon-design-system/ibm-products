@@ -140,7 +140,7 @@ describe('SidePanel', () => {
     expect(updatedStyles.marginLeft).toBe('0px');
   });
 
-  it('should render a right slide in panel version', async () => {
+  it('should render a right slide in panel version with onUnmount prop', async () => {
     const { container, rerender } = render(<SlideIn placement="right" open />);
     const pageContent = container.querySelector(
       '#side-panel-test-page-content'

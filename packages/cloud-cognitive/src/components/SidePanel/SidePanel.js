@@ -556,6 +556,16 @@ export let SidePanel = React.forwardRef(
 // Return a placeholder if not released and not enabled by feature flag
 SidePanel = pkg.checkComponentEnabled(SidePanel, componentName);
 
+SidePanel.validatePageContentSelector =
+  () =>
+  ({ slideIn, pageContentSelector }) => {
+    if (slideIn && !pageContentSelector) {
+      throw new Error(
+        `${componentName}: pageContentSelector prop missing, this is required when using a slideIn panel`
+      );
+    }
+  };
+
 SidePanel.propTypes = {
   /**
    * Sets the action toolbar buttons
@@ -671,7 +681,10 @@ SidePanel.propTypes = {
    * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
    * This prop is required when using the `slideIn` variant of the side panel.
    */
-  pageContentSelector: PropTypes.string,
+  pageContentSelector: allPropTypes([
+    SidePanel.validatePageContentSelector(),
+    PropTypes.string,
+  ]),
 
   /**
    * Determines if the side panel is on the right or left

@@ -83,7 +83,6 @@ export const TearsheetShell = React.forwardRef(
     // Keep track of the stack depth and our position in it (1-based, 0=closed)
     const [depth, setDepth] = useState(0);
     const [position, setPosition] = useState(0);
-    const [primaryActions, setPrimaryActions] = useState([]);
 
     // Keep a record of the previous value of depth.
     const prevDepth = useRef();
@@ -137,15 +136,6 @@ export const TearsheetShell = React.forwardRef(
         }
       };
     }, [open]);
-
-    // add isExpressive prop to action buttons
-    useEffect(() => {
-      if (actions && actions.length) {
-        let actionsClone = [...actions];
-        actionsClone.map((item) => (item.isExpressive = true));
-        setPrimaryActions(actionsClone);
-      }
-    }, [actions]);
 
     if (position <= depth) {
       // Include a modal header if and only if one or more of these is given.
@@ -229,7 +219,7 @@ export const TearsheetShell = React.forwardRef(
               </Wrap>
               {includeActions && (
                 <ActionSet
-                  actions={primaryActions}
+                  actions={actions}
                   buttonSize={size === 'wide' ? 'xl' : null}
                   className={`${bc}__buttons`}
                   size={size === 'wide' ? 'max' : 'lg'}

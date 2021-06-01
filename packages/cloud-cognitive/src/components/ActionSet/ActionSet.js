@@ -48,6 +48,7 @@ const ActionSetButton = React.forwardRef(
         { [`${blockClass}__action-button--ghost`]: kind === 'ghost' },
       ])}
       disabled={disabled || loading || false}
+      isExpressive
       {...{ kind, onClick, ref, size }}>
       {label}
       {loading && <InlineLoading />}

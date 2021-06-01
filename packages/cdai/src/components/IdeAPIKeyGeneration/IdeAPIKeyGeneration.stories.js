@@ -78,8 +78,7 @@ storiesOf(getComponentLabel('IdeAPIKeyGeneration'), module)
     },
     {
       info: {
-        text:
-          'Core/minimum configuration. Use this to enable the copy/download of an API key. Useful if you do not require additional interaction.',
+        text: 'Core/minimum configuration. Use this to enable the copy/download of an API key. Useful if you do not require additional interaction.',
       },
     }
   )

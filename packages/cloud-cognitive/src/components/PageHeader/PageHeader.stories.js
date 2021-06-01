@@ -260,8 +260,7 @@ const manyTags = [
 
 const title = { text: 'Page title', loading: false, icon: Bee24 };
 const longTitle = {
-  text:
-    'A very long page title that is going to exceed 60% of the stage width and get truncated on large screens',
+  text: 'A very long page title that is going to exceed 60% of the stage width and get truncated on large screens',
   loading: false,
   icon: Bee24,
 };
@@ -528,9 +527,8 @@ const TemplatePageHeaderWithCarbonHeader = (args) => {
   );
 };
 
-export const PageHeaderWithCarbonHeader = TemplatePageHeaderWithCarbonHeader.bind(
-  {}
-);
+export const PageHeaderWithCarbonHeader =
+  TemplatePageHeaderWithCarbonHeader.bind({});
 PageHeaderWithCarbonHeader.args = {
   actionBarItems,
   actionBarItemsSwitchedArg: true,

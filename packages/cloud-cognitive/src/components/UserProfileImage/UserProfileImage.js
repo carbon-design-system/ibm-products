@@ -125,16 +125,15 @@ UserProfileImage = pkg.checkComponentEnabled(UserProfileImage, componentName);
 
 UserProfileImage.displayName = componentName;
 
-UserProfileImage.validateImageDescription = () => ({
-  image,
-  imageDescription,
-}) => {
-  if (image && !imageDescription) {
-    throw new Error(
-      `${componentName}: imageDescription is missing, this is required when using the image prop`
-    );
-  }
-};
+UserProfileImage.validateImageDescription =
+  () =>
+  ({ image, imageDescription }) => {
+    if (image && !imageDescription) {
+      throw new Error(
+        `${componentName}: imageDescription is missing, this is required when using the image prop`
+      );
+    }
+  };
 
 UserProfileImage.propTypes = {
   /**

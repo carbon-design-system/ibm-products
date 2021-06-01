@@ -92,7 +92,8 @@ export default class IdeImporting extends React.Component {
       return onValidateUrl(url);
     }
 
-    const re = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
+    const re =
+      /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
     return !!re.exec(url);
   }
   getInvalidExtensionText() {
@@ -228,12 +229,8 @@ export default class IdeImporting extends React.Component {
     });
   }
   renderFilesToUpload(counts) {
-    const {
-      multiple,
-      singleFileLabel,
-      fileDropHeader,
-      hideImport,
-    } = this.props;
+    const { multiple, singleFileLabel, fileDropHeader, hideImport } =
+      this.props;
     return (
       <div className={`${idePrefix}--file-status`} style={{ width: '100%' }}>
         <div className={`${idePrefix}--file-list ${idePrefix}-hide-import`}>

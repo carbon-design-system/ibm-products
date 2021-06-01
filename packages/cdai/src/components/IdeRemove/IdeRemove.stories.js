@@ -94,8 +94,7 @@ storiesOf(getComponentLabel('IdeRemove'), module)
     () => <IdeRemove {...configWithStorybookInteractions(withMediumImpact)} />,
     {
       info: {
-        text:
-          'Medium impact removal. View the actions tab to see the result of clicking the various buttons etc. In this case, it is expected that you close the modal when the user interacts with one of `onClose`, `onCancel` or `onDelete` callbacks (as per the regular modal).',
+        text: 'Medium impact removal. View the actions tab to see the result of clicking the various buttons etc. In this case, it is expected that you close the modal when the user interacts with one of `onClose`, `onCancel` or `onDelete` callbacks (as per the regular modal).',
       },
     }
   )
@@ -104,8 +103,7 @@ storiesOf(getComponentLabel('IdeRemove'), module)
     () => <IdeRemove {...configWithStorybookInteractions(withHighImpact)} />,
     {
       info: {
-        text:
-          'High impact removal. View the actions tab to see the result of clicking the various buttons etc. In this case, it is expected that you close the modal when the user interacts with one of `onClose`, `onCancel` or `onDelete` callbacks (as per the regular modal).',
+        text: 'High impact removal. View the actions tab to see the result of clicking the various buttons etc. In this case, it is expected that you close the modal when the user interacts with one of `onClose`, `onCancel` or `onDelete` callbacks (as per the regular modal).',
       },
     }
   )
@@ -120,8 +118,7 @@ storiesOf(getComponentLabel('IdeRemove'), module)
     ),
     {
       info: {
-        text:
-          'Medium impact removal with optional post delete text. View the actions tab to see the result of clicking the various buttons etc. In this case, it is expected that you close the modal when the user interacts with one of `onClose`, `onCancel` callbacks (as per the regular modal), and only trigger the delete/remove via `onDelete`.',
+        text: 'Medium impact removal with optional post delete text. View the actions tab to see the result of clicking the various buttons etc. In this case, it is expected that you close the modal when the user interacts with one of `onClose`, `onCancel` callbacks (as per the regular modal), and only trigger the delete/remove via `onDelete`.',
       },
     }
   )
@@ -136,8 +133,7 @@ storiesOf(getComponentLabel('IdeRemove'), module)
     ),
     {
       info: {
-        text:
-          'High impact removal with optional post delete text. View the actions tab to see the result of clicking the various buttons etc. In this case, it is expected that you close the modal when the user interacts with one of `onClose`, `onCancel` callbacks (as per the regular modal), and only trigger the delete/remove via `onDelete`.',
+        text: 'High impact removal with optional post delete text. View the actions tab to see the result of clicking the various buttons etc. In this case, it is expected that you close the modal when the user interacts with one of `onClose`, `onCancel` callbacks (as per the regular modal), and only trigger the delete/remove via `onDelete`.',
       },
     }
   )
@@ -146,8 +142,7 @@ storiesOf(getComponentLabel('IdeRemove'), module)
     () => <IdeRemove {...configWithAllStorybookInteractions()} />,
     {
       info: {
-        text:
-          'Interactive storybook version. View the actions tab to see the result of clicking the various buttons etc.',
+        text: 'Interactive storybook version. View the actions tab to see the result of clicking the various buttons etc.',
       },
     }
   );

@@ -80,17 +80,15 @@ export let CreateTearsheet = forwardRef(
         setIsSubmitting(false);
         onClose();
       };
-      const handleOnRequestSubmit = () => {
+      const handleOnRequestSubmit = async () => {
         // check if onRequestSubmit returns a promise
-        const onRequestSubmitFn = onRequestSubmit();
-        if (onRequestSubmitFn instanceof Promise) {
-          onRequestSubmitFn
-            .then(() => onUnmount())
-            .catch((error) => {
-              setIsSubmitting(false);
-              console.warn(`${componentName} submit error: ${error}`);
-            });
-        } else onUnmount();
+        try {
+          await onRequestSubmit();
+          onUnmount();
+        } catch (error) {
+          setIsSubmitting(false);
+          console.warn(`${componentName} submit error: ${error}`);
+        }
       };
       const isSubmitDisabled = () => {
         let step = 0;
@@ -104,43 +102,32 @@ export let CreateTearsheet = forwardRef(
         });
         return submitDisabled;
       };
-      const handleNext = () => {
+      const handleNext = async () => {
         setIsSubmitting(true);
         const createSteps = getTearsheetSteps();
         if (createSteps[currentStep - 1].props.onNext) {
-          // check if onNext returns a promise
-          const onNextFn = createSteps[currentStep - 1].props.onNext();
-          if (onNextFn instanceof Promise) {
-            onNextFn
-              .then(() => continueToNextStep())
-              .catch((error) => {
-                setIsSubmitting(false);
-                console.warn(`${componentName} onNext error: ${error}`);
-              });
-          } else {
+          try {
+            await createSteps[currentStep - 1].props.onNext();
             continueToNextStep();
+          } catch (error) {
+            setIsSubmitting(false);
+            console.warn(`${componentName} onNext error: ${error}`);
           }
-        } else {
-          continueToNextStep();
-        }
+        } else continueToNextStep();
       };
-      const handleSubmit = () => {
+      const handleSubmit = async () => {
         setIsSubmitting(true);
         const createSteps = getTearsheetSteps();
         // last step should have onNext as well
         if (createSteps[currentStep - 1].props.onNext) {
-          const onNextFn = createSteps[currentStep - 1].props.onNext();
-          if (onNextFn instanceof Promise) {
-            onNextFn
-              .then(() => handleOnRequestSubmit())
-              .catch((error) => {
-                setIsSubmitting(false);
-                console.warn(`${componentName} onNext error: ${error}`);
-              });
-          } else {
-            handleOnRequestSubmit();
+          try {
+            await createSteps[currentStep - 1].props.onNext();
+            await handleOnRequestSubmit();
+          } catch (error) {
+            setIsSubmitting(false);
+            console.warn(`${componentName} onNext error: ${error}`);
           }
-        } else handleOnRequestSubmit();
+        } else await handleOnRequestSubmit();
       };
       if (getTearsheetSteps()?.length) {
         const createSteps = getTearsheetSteps();

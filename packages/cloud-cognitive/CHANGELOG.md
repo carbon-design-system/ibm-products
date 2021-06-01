@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.40.15](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.40.14...@carbon/ibm-cloud-cognitive@0.40.15) (2021-05-29)
+
+
+### Bug Fixes
+
+* html element method mock ([#833](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/833)) ([fccb061](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/fccb061fafaf42b9c91c309c9363b2e745ed1b11))
+
+
+
+
+
 ## [0.40.14](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.40.13...@carbon/ibm-cloud-cognitive@0.40.14) (2021-05-28)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

@@ -209,7 +209,7 @@ const testSizes = (el, property, _default) => {
       return val;
     }
   }
-  console.log('testSizes found nothing.', property, el.outerHTML);
+  // console.log('testSizes found nothing.', property, el.outerHTML);
   return _default;
 };
 
@@ -239,7 +239,7 @@ describe('PageHeader', () => {
   window.innerWidth = 2000;
   window.innerHeight = 1080;
 
-  beforeAll(() => {
+  beforeEach(() => {
     mockElement = mockHTMLElement({
       offsetWidth: {
         get: function () {
@@ -265,7 +265,7 @@ describe('PageHeader', () => {
     }));
   });
 
-  afterAll(() => {
+  afterEach(() => {
     mocks.forEach((mock) => {
       mock.mock.mockRestore();
     });

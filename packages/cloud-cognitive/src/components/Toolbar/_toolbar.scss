@@ -5,31 +5,57 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// Standard imports.
 @import '@carbon/import-once/scss/import-once';
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
+@import '../../global/styles/mixins';
 
+// Imports of Carbon settings and component styles and other
+// related component styles used by ExampleComponent.
 @import 'carbon-components/scss/components/button/button';
+@import 'carbon-components/scss/components/overflow-menu/overflow-menu';
+@import 'carbon-components/scss/components/tooltip/tooltip';
 
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
 @mixin toolbar {
-  // The block part of our conventional BEM class names (blockClass__E--M).
   $block-class: #{$pkg-prefix}--toolbar;
 
-  .#{$block-class} {
-    display: flex;
-    justify-content: flex-end;
-    --#{$pkg-prefix}-border-color: transparent;
+  @include block-wrap($block-class) {
+    &.#{$block-class} {
+      display: block;
+    }
+
+    .#{$block-class}__displayed-items {
+      display: inline-flex;
+      width: 100%;
+      white-space: nowrap;
+    }
+
+    .#{$block-class}__displayed-items--right {
+      justify-content: flex-end;
+    }
+
+    .#{$block-class}__overflow-menu {
+      display: inline-block;
+    }
   }
 
-  .#{$block-class}.#{$block-class}--boxed-set {
-    border: 10px solid var(--#{$pkg-prefix}-border-color);
-  }
+  @include block-wrap($block-class + '-options') {
+    .#{$block-class}__overflow-menu-item {
+      padding: 0 $spacing-03;
+    }
 
-  .#{$block-class}.#{$block-class}--shadow-set {
-    margin: $spacing-04;
-    box-shadow: 0 0 10px var(--#{$pkg-prefix}-border-color);
+    .#{$block-class}__overflow-menu-item-content {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .#{$block-class}__overflow-menu-item svg {
+      margin: 0 $spacing-02;
+    }
   }
 }
 

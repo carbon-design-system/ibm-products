@@ -556,16 +556,15 @@ export let SidePanel = React.forwardRef(
 // Return a placeholder if not released and not enabled by feature flag
 SidePanel = pkg.checkComponentEnabled(SidePanel, componentName);
 
-SidePanel.validatePageContentSelector = () => ({
-  slideIn,
-  pageContentSelector,
-}) => {
-  if (slideIn && !pageContentSelector) {
-    throw new Error(
-      `${componentName}: pageContentSelector prop missing, this is required when using a slideIn panel`
-    );
-  }
-};
+SidePanel.validatePageContentSelector =
+  () =>
+  ({ slideIn, pageContentSelector }) => {
+    if (slideIn && !pageContentSelector) {
+      throw new Error(
+        `${componentName}: pageContentSelector prop missing, this is required when using a slideIn panel`
+      );
+    }
+  };
 
 SidePanel.propTypes = {
   /**

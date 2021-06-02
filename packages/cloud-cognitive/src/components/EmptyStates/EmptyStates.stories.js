@@ -26,7 +26,6 @@ import {
 import styles from './_storybook-styles.scss';
 
 const storybookPrefix = getStorybookPrefix(pkg, EmptyState.displayName);
-console.log(EmptyState.displayName, storybookPrefix);
 
 export default {
   title: `${storybookPrefix}/EmptyStates/EmptyState`,
@@ -47,6 +46,11 @@ export default {
   },
 };
 
+const emptyStateCommonProps = {
+  title: 'Empty state title',
+  subtitle: 'Description text explaining why this section is empty.',
+};
+
 const Template = (args) => {
   return (
     <EmptyState
@@ -62,40 +66,57 @@ const Template = (args) => {
 };
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  ...emptyStateCommonProps,
+};
 
 export const WithCustomIllustration = Template.bind({});
 WithCustomIllustration.args = {
+  ...emptyStateCommonProps,
   illustration: CustomIllustration,
+  illustrationDescription: 'Test alt text',
 };
 
 export const withAction = Template.bind({});
 withAction.args = {
-  actionText: 'Create new',
-  actionType: 'tertiary',
-  onActionEvent: action('actionHandler'),
+  ...emptyStateCommonProps,
+  action: {
+    text: 'Create new',
+    onClick: action('Clicked empty state action button'),
+  },
 };
 
 export const withActionIconButton = Template.bind({});
 withActionIconButton.args = {
-  actionText: 'Create new',
-  actionType: 'tertiary',
-  onActionEvent: action('actionHandler'),
-  actionIcon: Add20,
+  ...emptyStateCommonProps,
+  action: {
+    text: 'Create new',
+    onClick: action('Clicked empty state action button'),
+    renderIcon: Add20,
+    iconDescription: 'Add icon',
+  },
 };
 
 export const withLink = Template.bind({});
 withLink.args = {
-  linkText: 'View documentation',
-  linkUrl: 'https://www.carbondesignsystem.com',
+  ...emptyStateCommonProps,
+  link: {
+    text: 'View documentation',
+    href: 'https://www.carbondesignsystem.com',
+  },
 };
 
 export const withActionAndLink = Template.bind({});
 withActionAndLink.args = {
-  actionText: 'Create new',
-  actionType: 'tertiary',
-  onActionEvent: action('actionHandler'),
-  actionIcon: Add20,
-  linkText: 'View documentation',
-  linkUrl: 'https://www.carbondesignsystem.com',
+  ...emptyStateCommonProps,
+  action: {
+    text: 'Create new',
+    onClick: action('Clicked empty state action button'),
+    renderIcon: Add20,
+    iconDescription: 'Add icon',
+  },
+  link: {
+    text: 'View documentation',
+    href: 'https://www.carbondesignsystem.com',
+  },
 };

@@ -1,80 +1,134 @@
-/**
- * Copyright IBM Corp. 2020, 2020
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
+//
+// Copyright IBM Corp. 2020, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
 
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 import { ExportModal } from '.';
 
-const { name } = ExportModal;
+const componentName = ExportModal.displayName;
 const defaultProps = {
+  body: 'body content',
+  className: 'test-class',
+  errorMessage: 'an error occured',
   filename: '',
-  inputLabel: 'File name',
-  modalHeading: 'Export',
+  inputLabel: 'file name',
+  invalidInputText: 'invalid input',
+  loadingMessage: 'loading...',
   open: true,
-  primaryButtonText: 'Export',
-  secondaryButtonText: 'Cancel',
-  validExtensions: ['pdf'],
-  invalidInputText: 'File must have valid extension .pdf',
-  successMessage: 'Success',
-  errorMessage: 'Error',
-  loadingMessage: 'Loading',
+  primaryButtonText: 'primary button',
+  secondaryButtonText: 'secondary button',
+  successMessage: 'success',
+  title: 'header content',
 };
 
-describe(name, () => {
-  it('default render with with extension validation', () => {
-    const { click, change, blur } = fireEvent;
+describe(componentName, () => {
+  it('renders body', () => {
+    render(<ExportModal {...defaultProps} />);
+    screen.getByText(defaultProps.body);
+  });
+
+  it('renders title', () => {
+    render(<ExportModal {...defaultProps} />);
+    screen.getByText(defaultProps.title);
+  });
+
+  it('renders the loading message', () => {
+    render(<ExportModal {...defaultProps} loading />);
+    screen.getByText(defaultProps.loadingMessage);
+  });
+
+  it('renders the error message', () => {
+    render(<ExportModal {...defaultProps} error />);
+    screen.getByText(defaultProps.errorMessage);
+  });
+
+  it('renders the success message', () => {
+    render(<ExportModal {...defaultProps} successful />);
+    screen.getByText(defaultProps.successMessage);
+  });
+
+  it('submits with valid extension', () => {
+    const { change, blur } = fireEvent;
+    const { click } = userEvent;
     const { fn } = jest;
     const onRequestSubmit = fn();
     const props = {
       ...defaultProps,
       onRequestSubmit,
+      validExtensions: ['pdf'],
+      invalidInputText: 'File must have valid extension .pdf',
     };
 
-    const { container, rerender, getByText } = render(
-      <ExportModal {...props} />
-    );
-
-    const submitBtn = container.querySelector('.bx--btn--primary');
+    const { container } = render(<ExportModal {...props} />);
     const textInput = container.querySelector('.bx--text-input');
 
-    click(submitBtn);
-    expect(onRequestSubmit).not.toBeCalled();
-
-    change(textInput, { target: { value: 'test' } });
+    change(textInput, { target: { value: `${props.filename}.pdf` } });
     blur(textInput);
-    click(submitBtn);
-    expect(onRequestSubmit).not.toBeCalled();
-
-    change(textInput, { target: { value: 'test.mp3' } });
-    click(submitBtn);
-    expect(onRequestSubmit).not.toBeCalled();
-
-    change(textInput, { target: { value: 'test.pdf' } });
-    click(submitBtn);
+    click(screen.getByText(props.primaryButtonText));
     expect(onRequestSubmit).toBeCalled();
-
-    rerender(<ExportModal {...props} loading />);
-    expect(getByText(props.loadingMessage)).toBeVisible();
-
-    rerender(<ExportModal {...props} error />);
-    expect(getByText(props.errorMessage)).toBeVisible();
-
-    rerender(<ExportModal {...props} successful />);
-    expect(getByText(props.successMessage)).toBeVisible();
   });
 
-  it('with preformatted extensions', () => {
+  it('does not submit without text input', () => {
+    const { click } = userEvent;
+    const { fn } = jest;
+    const onRequestSubmit = fn();
+    const props = {
+      ...defaultProps,
+      onRequestSubmit,
+      validExtensions: ['pdf'],
+      invalidInputText: 'File must have valid extension .pdf',
+    };
+
+    const { container } = render(<ExportModal {...props} />);
+    const submitBtn = container.querySelector('.bx--btn--primary');
+
+    click(submitBtn);
+    expect(onRequestSubmit).not.toBeCalled();
+  });
+
+  it('does not submit with invalid extension', () => {
+    const { change, blur } = fireEvent;
+    const { click } = userEvent;
+    const { fn } = jest;
+    const onRequestSubmit = fn();
+    const props = {
+      ...defaultProps,
+      onRequestSubmit,
+      validExtensions: ['pdf'],
+      invalidInputText: 'File must have valid extension .pdf',
+    };
+
+    const { container } = render(<ExportModal {...props} />);
+    const textInput = container.querySelector('.bx--text-input');
+
+    change(textInput, { target: { value: `${props.filename}` } });
+    blur(textInput);
+    click(screen.getByText(props.primaryButtonText));
+    expect(onRequestSubmit).not.toBeCalled();
+    screen.getByText(props.invalidInputText);
+
+    change(textInput, { target: { value: `${props.filename}.mp3` } });
+    blur(textInput);
+    click(screen.getByText(props.primaryButtonText));
+    expect(onRequestSubmit).not.toBeCalled();
+    screen.getByText(props.invalidInputText);
+  });
+
+  it('renders with preformatted extensions', () => {
     const { click } = fireEvent;
     const { fn } = jest;
     const onRequestSubmit = fn();
+    const onClose = fn();
     const props = {
       ...defaultProps,
       onRequestSubmit,
+      onClose,
       filename: 'test',
       preformattedExtensions: [
         {
@@ -89,15 +143,36 @@ describe(name, () => {
       preformattedExtensionsLabel: 'Choose an export format',
     };
 
-    const { container, getByText, getByLabelText } = render(
-      <ExportModal {...props} />
-    );
-    const submitBtn = container.querySelector('.bx--btn--primary');
+    const { getByLabelText } = render(<ExportModal {...props} />);
 
-    expect(getByText(props.preformattedExtensionsLabel)).toBeVisible();
+    screen.getByText(props.preformattedExtensionsLabel);
     click(getByLabelText('BAR (best for integration server)'));
-    click(submitBtn);
-    expect(onRequestSubmit).toBeCalled();
-    expect(onRequestSubmit).toBeCalledWith('test.bar');
+    click(screen.getByText(props.primaryButtonText));
+    expect(onRequestSubmit).toBeCalledWith(`${props.filename}.bar`);
+
+    click(screen.getByText(props.secondaryButtonText));
+    expect(onClose).toBeCalled();
+  });
+
+  it('has no accessibility violations', async () => {
+    const { container } = render(<ExportModal {...defaultProps} />);
+    await expect(container).toBeAccessible(componentName);
+    await expect(container).toHaveNoAxeViolations();
+  });
+
+  it('applies className to the containing node', () => {
+    const { container } = render(<ExportModal {...defaultProps} />);
+    expect(container.firstChild).toHaveClass(defaultProps.className);
+  });
+
+  it('adds additional properties to the containing node', () => {
+    render(<ExportModal {...defaultProps} data-testid="test-id" />);
+    screen.getByTestId('test-id');
+  });
+
+  it('forwards a ref to an appropriate node', () => {
+    const ref = React.createRef();
+    render(<ExportModal {...defaultProps} ref={ref} />);
+    expect(ref.current).not.toBeNull();
   });
 });

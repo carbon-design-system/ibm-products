@@ -1,0 +1,38 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@import '@carbon/import-once/scss/import-once';
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+
+// TODO: @import(s) of Carbon settings and component styles and other
+// related component styles used by ButtonMenu
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin button-menu {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+  $block-class: #{$pkg-prefix}--button-menu;
+
+  .#{$block-class} {
+    min-width: 160px;
+
+    .#{$block-class}__trigger {
+      width: 100%;
+      padding: 0 $spacing-05;
+    }
+  }
+
+  .#{$block-class}__options.#{$carbon-prefix}--overflow-menu-options::after {
+    content: initial;
+  }
+}
+
+@include exports('button-menu') {
+  @include button-menu;
+}

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2020
+// Copyright IBM Corp. 2020, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -12,6 +12,7 @@ import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 import { ExportModal } from '.';
 import mdx from './ExportModal.mdx';
+import wait from '../../global/js/utils/wait';
 const storybookPrefix = getStorybookPrefix(pkg, ExportModal.displayName);
 
 export default {
@@ -28,12 +29,12 @@ export default {
 const defaultProps = {
   filename: 'Sample02.pdf',
   inputLabel: 'File name',
-  modalHeading: 'Export',
-  onRequestClose: () => {},
+  onClose: () => {},
   onRequestSubmit: () => {},
   open: true,
   primaryButtonText: 'Export',
   secondaryButtonText: 'Cancel',
+  title: 'Export',
 };
 
 const Template = (args) => {
@@ -48,11 +49,9 @@ const TemplateWithState = (args) => {
 
   const onSubmitHandler = async () => {
     setLoading(true);
-    await new Promise((res) => setTimeout(res, 1000));
-
-    if (args.exportSuccessful) setSuccessful(true);
+    await wait(1000);
+    if (args.successful) setSuccessful(true);
     else setError(true);
-
     setLoading(false);
   };
 
@@ -67,7 +66,7 @@ const TemplateWithState = (args) => {
       <ExportModal
         {...args}
         open={open}
-        onRequestClose={onCloseHandler}
+        onClose={onCloseHandler}
         onRequestSubmit={onSubmitHandler}
         loading={loading}
         successful={successful}
@@ -84,13 +83,13 @@ const TemplateWithState = (args) => {
 export const WithSuccessMessage = TemplateWithState.bind({});
 WithSuccessMessage.args = {
   ...defaultProps,
-  exportSuccessful: true,
+  successful: true,
 };
 
 export const WithErrorMessage = TemplateWithState.bind({});
 WithErrorMessage.args = {
   ...defaultProps,
-  exportSuccessful: false,
+  successful: false,
 };
 
 export const Standard = Template.bind({});
@@ -104,7 +103,7 @@ WithExtensionValidation.args = {
   validExtensions: ['pdf'],
   filename: '',
   invalidInputText: 'File must have valid extension .pdf',
-  modalBody: 'File must be exported in a PDF format.',
+  body: 'File must be exported in a PDF format.',
 };
 
 export const WithPreformattedExtensions = Template.bind({});

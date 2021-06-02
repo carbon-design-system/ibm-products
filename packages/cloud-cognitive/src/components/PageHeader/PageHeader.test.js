@@ -107,26 +107,38 @@ const tags = [
     A tag
   </Tag>,
 ];
-const title = 'Page title';
+const titleObj = { text: 'Page title', loading: false, icon: Bee32 };
+const titleString = 'Page title';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { prepareProps } from '../../global/js/utils/props-helper';
 jest.mock('../../global/js/utils/uuidv4');
 
 const sizes = {
+  [`${blockClass}`]: {
+    get offsetWidth() {
+      return window.innerWidth;
+    },
+    get clientHeight() {
+      return 300;
+    },
+  },
+  [`${blockClass}__available-row`]: {
+    get clientHeight() {
+      return 40;
+    },
+  },
   [`${carbon.prefix}--btn`]: {
     get offsetWidth() {
       return 200;
     },
   },
-  [`${blockClass}`]: {
-    get offsetWidth() {
-      return window.innerWidth;
-    },
-  },
   [`${blockClass}__breadcrumb-row`]: {
     get offsetWidth() {
       return window.innerWidth;
+    },
+    get clientHeight() {
+      return 40;
     },
   },
   [`${pkg.prefix}--breadcrumb-with-overflow`]: {
@@ -158,6 +170,9 @@ const sizes = {
     get offsetWidth() {
       return 200;
     },
+    get clientHeight() {
+      return 40;
+    },
   },
   [`${pkg.prefix}--action-bar__displayed-items`]: {
     get offsetWidth() {
@@ -169,8 +184,23 @@ const sizes = {
       return window.innerWidth * 0.2;
     },
   },
+  [`${blockClass}__navigation-row`]: {
+    get clientHeight() {
+      return 48;
+    },
+  },
+  [`${blockClass}__subtitle-row`]: {
+    get clientHeight() {
+      return 40;
+    },
+  },
+  [`${blockClass}__title-row`]: {
+    get clientHeight() {
+      return 64;
+    },
+  },
 };
-const testSizes = (el, property) => {
+const testSizes = (el, property, _default) => {
   const classes = el.getAttribute('class').split(' ');
 
   for (let cls of classes) {
@@ -179,8 +209,8 @@ const testSizes = (el, property) => {
       return val;
     }
   }
-  console.log('xxx', property, el.outerHTML);
-  return -1;
+  // console.log('testSizes found nothing.', property, el.outerHTML);
+  return _default;
 };
 
 const testProps = {
@@ -193,7 +223,11 @@ const testProps = {
   pageActions,
   subtitle,
   tags,
-  title,
+  title: titleObj,
+};
+
+const testPropsAltTitle = {
+  title: titleString,
   titleIcon: Bee32,
 };
 
@@ -203,18 +237,18 @@ describe('PageHeader', () => {
   const mocks = [];
 
   window.innerWidth = 2000;
+  window.innerHeight = 1080;
 
   beforeEach(() => {
     mockElement = mockHTMLElement({
       offsetWidth: {
         get: function () {
-          let width = testSizes(this, 'offsetWidth');
-
-          if (width < 0) {
-            width = window.innerWidth;
-          }
-
-          return width;
+          return testSizes(this, 'offsetWidth', window.innerWidth);
+        },
+      },
+      clientHeight: {
+        get: function () {
+          return testSizes(this, 'clientHeight', window.innerHeight);
         },
       },
     });
@@ -249,7 +283,7 @@ describe('PageHeader', () => {
     const header = screen.getByTestId(dataTestid);
     expect(header).toHaveClass(blockClass);
 
-    expect(header).not.toHaveClass(`${blockClass}--show-background`);
+    expect(header).toHaveClass(`${blockClass}--show-background`);
 
     expect(header).not.toHaveClass(classNames[0]);
     expect(header).not.toHaveClass(classNames[1]);
@@ -271,7 +305,7 @@ describe('PageHeader', () => {
     expect(screen.queryByText(subtitle)).toBeNull();
     expect(screen.queryAllByTestId('tags')).toHaveLength(0);
     expect(document.querySelectorAll(`.${blockClass}__title`)).toHaveLength(0);
-    expect(screen.queryByText(title)).toBeNull();
+    expect(screen.queryByText(titleObj.text)).toBeNull();
     expect(
       document.querySelectorAll(`.${blockClass}__title-icon`)
     ).toHaveLength(0);
@@ -321,7 +355,7 @@ describe('PageHeader', () => {
     ).toHaveLength(4);
     expect(document.querySelectorAll(`.${blockClass}__title`)).toHaveLength(1);
     expect(document.querySelector(`.${blockClass}__title`).textContent).toEqual(
-      title
+      titleObj.text
     );
     expect(
       document.querySelectorAll(`.${blockClass}__title-icon`)
@@ -334,7 +368,7 @@ describe('PageHeader', () => {
     render(<PageHeader actionBarItems={actionBarItemsNodes} />);
 
     expect(warn).toBeCalledWith(
-      "The usage of prop 'actionBarItems' of 'PageHeader' has been changed and you should update. Expects an array of objects with the following properties: iconDescription, renderIcon and onClick."
+      'The usage of the prop `actionBarItems` of `PageHeader` has been changed and support for the old usage will soon be removed. Expects an array of objects with the following properties: iconDescription, renderIcon and onClick.'
     );
 
     warn.mockRestore(); // Remove mock
@@ -350,7 +384,7 @@ describe('PageHeader', () => {
     });
 
     expect(warn).toBeCalledWith(
-      "The usage of prop 'pageActions' of 'PageHeader' has been changed and you should update. Expects an array of objects with the following properties: label and onClick."
+      'The usage of the prop `pageActions` of `PageHeader` has been changed and support for the old usage will soon be removed. Expects an array of objects with the following properties: label and onClick.'
     );
 
     warn.mockRestore(); // Remove mock
@@ -366,7 +400,7 @@ describe('PageHeader', () => {
     });
 
     expect(warn).toBeCalledWith(
-      "The usage of prop 'pageActions' of 'PageHeader' has been changed and you should update. Expects an array of objects with the following properties: label and onClick."
+      'The usage of the prop `pageActions` of `PageHeader` has been changed and support for the old usage will soon be removed. Expects an array of objects with the following properties: label and onClick.'
     );
 
     warn.mockRestore(); // Remove mock
@@ -389,21 +423,23 @@ describe('PageHeader', () => {
     render(
       <PageHeader
         {...testProps}
-        showCollapseHeaderButton
+        collapseHeaderLabel="Toggle collapse"
+        expandHeaderLabel="Toggle expand"
+        collapseHeaderToggleWanted={true}
         data-testid={dataTestid}
       />
     );
 
-    // console.dir(screen.getByRole('region')); // section should be a region https://fae.disability.illinois.edu/rulesets/ROLE_5/
-    // const header = screen.getByTestId(dataTestid);
-    const collapseButton = screen.getByText('Toggle expansion');
+    const collapseButton = screen.getByRole('button', {
+      name: 'Toggle collapse',
+    });
 
-    // const prevCalls = window.scrollTo.callCount;
-    // console.dir(window.scrollTo);
     window.scrollTo.mockReset();
     expect(window.scrollTo).not.toHaveBeenCalled();
     userEvent.click(collapseButton);
     expect(window.scrollTo).toHaveBeenCalled();
+    userEvent.click(collapseButton);
+    expect(window.scrollTo).toHaveBeenCalledTimes(2);
   });
 
   test('Navigation row renders when Navigation but no tags', () => {
@@ -445,6 +481,15 @@ describe('PageHeader', () => {
     ).toHaveLength(1);
   });
 
+  test('Title row renders when Title with pageActions and navigation but no subtitle or available space', () => {
+    const { title } = testProps;
+    render(<PageHeader {...{ title, pageActions, navigation }} />);
+
+    expect(
+      document.querySelectorAll(`.${blockClass}__title-row--spacing-below-06`)
+    ).toHaveLength(1);
+  });
+
   test('Breadcrumb row renders when breadcrumb but no action bar items', () => {
     render(
       <PageHeader
@@ -468,5 +513,37 @@ describe('PageHeader', () => {
       `.${blockClass}__action-bar`
     );
     expect(actionBarItems).toHaveLength(1);
+  });
+
+  test('renders  title when using separate string and icon', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    render(<PageHeader {...testPropsAltTitle} />);
+
+    expect(warn).toBeCalledWith(
+      'The prop `titleIcon` of `PageHeader` has been deprecated and will soon be removed. Use `title` prop shape instead.'
+    );
+
+    screen.getByText(titleString, { selector: `.${blockClass}__title span` });
+
+    expect(
+      document.querySelectorAll(`.${blockClass}__title-icon`)
+    ).toHaveLength(1);
+  });
+
+  test('Without background', () => {
+    const { title } = testProps;
+    render(
+      <PageHeader
+        {...{
+          title,
+          background: false,
+          breadcrumbItems,
+        }}
+        aria-label="Page header" // gives section role 'region'
+      />
+    );
+
+    screen.getByRole('region');
   });
 });

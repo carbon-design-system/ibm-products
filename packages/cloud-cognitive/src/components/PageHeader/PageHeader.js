@@ -7,6 +7,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import { extractShapesArray } from '../../global/js/utils/props-helper';
 import { layout05, baseFontSize } from '@carbon/layout';
 import cx from 'classnames';
 import ReactResizeDetector from 'react-resize-detector';
@@ -17,6 +18,7 @@ import {
   Column,
   Row,
   Button,
+  SkeletonText,
 } from 'carbon-components-react';
 import { ActionBar } from '../ActionBar/';
 import { BreadcrumbWithOverflow } from '../BreadcrumbWithOverflow';
@@ -25,13 +27,19 @@ import { ButtonSetWithOverflow } from '../ButtonSetWithOverflow';
 import { pkg } from '../../settings';
 import { ChevronUp16 } from '@carbon/icons-react';
 import {
+  deprecateProp,
   deprecatePropUsage,
-  extractShapesArray,
   prepareProps,
 } from '../../global/js/utils/props-helper';
 
 const componentName = 'PageHeader';
-const blockClass = `${pkg.prefix}--page-header`;
+
+import {
+  blockClass,
+  utilCheckUpdateVerticalSpace,
+  utilGetTitleShape,
+  utilCalcSpacingBelowTitle,
+} from './PageHeaderUtils';
 
 export let PageHeader = React.forwardRef(
   (
@@ -41,58 +49,169 @@ export let PageHeader = React.forwardRef(
       background,
       breadcrumbItems,
       className,
-      collapseExpandHeaderLabel,
       collapseHeader,
+      collapseHeaderLabel,
+      expandHeaderLabel,
+      collapseHeaderToggleWanted,
       preventBreadcrumbScroll,
       navigation,
       pageActions,
       pageHeaderOffset,
       preCollapseTitleRow,
-      showCollapseHeaderButton,
       subtitle,
       tags,
       title,
-      titleIcon: TitleIcon,
+      titleIcon,
       ...rest
     },
     ref
   ) => {
-    const [hasActionBar, setHasActionBar] = useState(false);
-    const [actionBarItemArray, setActionBarItemArray] = useState([]);
-    const [pageActionsItemArray, setPageActionsItemArray] = useState([]);
     const [metrics, setMetrics] = useState({});
-    const [scrollYValue, setScrollYValue] = useState(0);
-    const [componentCssCustomProps, setComponentCssCustomProps] = useState({});
-    const [hasBreadcrumbRow, setHasBreadcrumbRow] = useState(false);
-    const [spacingBelowTitle, setSpacingBelowTitle] = useState('06');
-    const [
-      pageActionsInBreadcrumbRow,
-      setPageActionsInBreadcrumbRow,
-    ] = useState(false);
-    const [backgroundOpacity, setBackgroundOpacity] = useState(0);
-    const [hasCollapseButton, setHasCollapseButton] = useState(false);
-    const [spaceForCollapseButton, setSpaceForCollapseButton] = useState(false);
-    const [lastRowBufferActive, setLastRowBufferActive] = useState(false);
+
+    // refs
     const dynamicRefs = useRef({});
     const localHeaderRef = useRef(null);
     const headerRef = ref || localHeaderRef;
+
+    // utility functions
+    const calcSpacingBelowTitle = () =>
+      utilCalcSpacingBelowTitle(
+        availableSpace,
+        tags,
+        navigation,
+        subtitle,
+        pageActions
+      );
+    // Title shape is used to allow title to be string or shape
+    const getTitleShape = () =>
+      utilGetTitleShape(title, titleIcon, PageHeader.defaultProps.title);
+    const checkUpdateVerticalSpace = function () {
+      return utilCheckUpdateVerticalSpace(
+        headerRef,
+        navigation,
+        preventBreadcrumbScroll,
+        setMetrics,
+        dynamicRefs
+      );
+    };
+
+    // state based on props only
+    const actionBarItemArray = extractShapesArray(actionBarItems);
+    const hasActionBar = actionBarItemArray.length;
+    const hasBreadcrumbRow = !(
+      breadcrumbItems === undefined && actionBarItems === undefined
+    );
+    const pageActionsItemArray = extractShapesArray(pageActions)?.map(
+      (shape) => ({
+        label: shape.children,
+        ...shape,
+      })
+    );
+
+    const spacingBelowTitle = calcSpacingBelowTitle();
+
+    /* Title shape is used to allow title to be string or shape */
+    const titleShape = getTitleShape();
+
+    // NOTE: The buffer is used to add space between the bottom of the header and the last content
+    // No navigation and title row not pre-collapsed
+    // and zero or one of tags or (subtitle or available space)
+    const lastRowBufferActive =
+      !(navigation || tags) &&
+      (((title || pageActions) && !preCollapseTitleRow) ||
+        subtitle ||
+        availableSpace);
+
+    // state based on scroll/resize based effects
+    const [pageActionsInBreadcrumbRow, setPageActionsInBreadcrumbRow] =
+      useState(false);
+    const [scrollYValue, setScrollYValue] = useState(0);
+    const [componentCssCustomProps, setComponentCssCustomProps] = useState({});
+    const [backgroundOpacity, setBackgroundOpacity] = useState(0);
+    const [hasCollapseButton, setHasCollapseButton] = useState(false);
+    const [spaceForCollapseButton, setSpaceForCollapseButton] = useState(false);
     const [actionBarMaxWidth, setActionBarMaxWidth] = useState(0);
     const [actionBarMinWidth, setActionBarMinWidth] = useState(0);
-    const [
-      pageActionInBreadcrumbMaxWidth,
-      setPageActionInBreadcrumbMaxWidth,
-    ] = useState(0);
-    const [
-      pageActionInBreadcrumbMinWidth,
-      setPageActionInBreadcrumbMinWidth,
-    ] = useState(0);
+    const [pageActionInBreadcrumbMaxWidth, setPageActionInBreadcrumbMaxWidth] =
+      useState(0);
+    const [pageActionInBreadcrumbMinWidth, setPageActionInBreadcrumbMinWidth] =
+      useState(0);
     const [actionBarColumnWidth, setActionBarColumnWidth] = useState(0);
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
+
+    // handlers
+    const handleActionBarWidthChange = ({ minWidth, maxWidth }) => {
+      /* don't know how to test resize */
+      /* istanbul ignore next */
+      setActionBarMaxWidth(maxWidth);
+      /* don't know how to test resize */
+      /* istanbul ignore next */
+      setActionBarMinWidth(minWidth);
+    };
+
+    const handleButtonSetWidthChange = ({ minWidth, maxWidth }) => {
+      /* don't know how to test resize */
+      /* istanbul ignore next */
+      setPageActionInBreadcrumbMaxWidth(maxWidth);
+      /* don't know how to test resize */
+      /* istanbul ignore next */
+      setPageActionInBreadcrumbMinWidth(minWidth);
+    };
+
+    const handleResizeActionBarColumn = (width) => {
+      /* don't know how to test resize */
+      /* istanbul ignore next */
+      setActionBarColumnWidth(width);
+    };
+
+    const handleResize = () => {
+      // receives width and height parameters if needed
+      /* don't know how to test resize */
+      /* istanbul ignore next */
+      checkUpdateVerticalSpace();
+    };
+
+    const toggleCollapse = (forceCollapse) => {
+      const collapse =
+        typeof forceCollapse !== 'undefined' ? forceCollapse : !fullyCollapsed;
+
+      /* don't know how to test resize */
+      /* istanbul ignore next if */
+      if (collapse) {
+        window.scrollTo({
+          top: pageHeaderOffset - (metrics?.headerTopValue || 0),
+          behavior: 'smooth',
+        });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    };
+
+    const handleCollapseToggle = () => {
+      toggleCollapse();
+    };
+
+    // use effects
+    useEffect(() => {
+      // Determine the location of the pageAction buttons
+      setPageActionsInBreadcrumbRow(
+        preCollapseTitleRow ||
+          (scrollYValue > metrics.titleRowSpaceAbove && hasActionBar)
+      );
+    }, [
+      hasActionBar,
+      metrics.breadcrumbRowSpaceBelow,
+      metrics.titleRowSpaceAbove,
+      preCollapseTitleRow,
+      scrollYValue,
+    ]);
 
     useEffect(() => {
       let newActionBarWidth = 'initial';
       let newPageActionInBreadcrumbWidth = 'initial';
 
+      /* don't know how to test resize */
+      /* istanbul ignore next if */
       if (actionBarColumnWidth > 0) {
         if (
           pageActionInBreadcrumbMaxWidth > 0 &&
@@ -132,146 +251,6 @@ export let PageHeader = React.forwardRef(
       actionBarMinWidth,
       pageActionInBreadcrumbMaxWidth,
       pageActionInBreadcrumbMinWidth,
-    ]);
-
-    const handleActionBarWidthChange = ({ minWidth, maxWidth }) => {
-      setActionBarMaxWidth(maxWidth);
-      setActionBarMinWidth(minWidth);
-    };
-
-    const handleButtonSetWidthChange = ({ minWidth, maxWidth }) => {
-      setPageActionInBreadcrumbMaxWidth(maxWidth);
-      setPageActionInBreadcrumbMinWidth(minWidth);
-    };
-
-    const handleResizeActionBarColumn = (width) => {
-      setActionBarColumnWidth(width);
-    };
-
-    const getDynamicRef = (selector) => {
-      // would love to do this differently but digging in the dom seems easier
-      // than getting a ref to a conditionally rendered item
-      if (!headerRef.current) {
-        return undefined;
-      } else {
-        let dRef = dynamicRefs.current[selector];
-        if (!dRef || dRef.parentNode === null) {
-          dynamicRefs.current[selector] = headerRef.current.querySelector(
-            selector
-          );
-        }
-      }
-      return dynamicRefs.current[selector];
-    };
-
-    const checkUpdateVerticalSpace = () => {
-      // Utility function that checks the heights of various elements which are used to determine layout
-      const update = {};
-
-      const breadcrumbTitleEl = getDynamicRef(
-        `.${blockClass}__breadcrumb-title`
-      );
-      const breadcrumbRowEl = getDynamicRef(`.${blockClass}__breadcrumb-row`);
-      const titleRowEl = getDynamicRef(`.${blockClass}__title-row`);
-      const subtitleRowEl = getDynamicRef(`.${blockClass}__subtitle-row`);
-      const availableRowEl = getDynamicRef(`.${blockClass}__available-row`);
-      const navigationRowEl = getDynamicRef(`.${blockClass}__navigation-row`);
-
-      update.headerHeight = headerRef.current
-        ? headerRef.current.clientHeight
-        : 0;
-      update.headerWidth = headerRef.current
-        ? headerRef.current.offsetWidth
-        : 0;
-
-      update.breadcrumbRowHeight = breadcrumbRowEl
-        ? breadcrumbRowEl.clientHeight
-        : 0;
-      update.breadcrumbRowWidth = breadcrumbRowEl
-        ? breadcrumbRowEl.offsetWidth
-        : 0;
-
-      update.breadcrumbTitleHeight = breadcrumbTitleEl
-        ? breadcrumbTitleEl.clientHeight
-        : 1;
-
-      update.titleRowHeight = titleRowEl ? titleRowEl.clientHeight : 0;
-      update.subtitleRowHeight = subtitleRowEl ? subtitleRowEl.clientHeight : 0;
-      update.availableRowHeight = availableRowEl
-        ? availableRowEl.clientHeight
-        : 0;
-      update.navigationRowHeight = navigationRowEl
-        ? navigationRowEl.clientHeight
-        : 1;
-
-      update.breadcrumbRowSpaceBelow = 0;
-      update.titleRowSpaceAbove = 0;
-
-      update.headerTopValue = navigation
-        ? preventBreadcrumbScroll
-          ? update.navigationRowHeight +
-            update.breadcrumbRowHeight -
-            update.headerHeight
-          : update.navigationRowHeight - update.headerHeight
-        : update.breadcrumbRowHeight - update.headerHeight;
-
-      if (window) {
-        let val;
-        if (breadcrumbRowEl) {
-          val = parseFloat(
-            window
-              .getComputedStyle(breadcrumbRowEl)
-              .getPropertyValue('margin-bottom'),
-            10
-          );
-          update.breadcrumbRowSpaceBelow = isNaN(val) ? 0 : val;
-        }
-        if (titleRowEl) {
-          val = parseFloat(
-            window.getComputedStyle(titleRowEl).getPropertyValue('margin-top'),
-            10
-          );
-          update.titleRowSpaceAbove = isNaN(val) ? 0 : val;
-        }
-      }
-
-      setMetrics((previous) => ({ ...previous, ...update }));
-    };
-
-    useEffect(() => {
-      // NOTE: The buffer is used to add space between the bottom of the header and the last content
-
-      // No navigation and title row not pre-collapsed
-      // and only one of tags or (subtitle or available space)
-      setLastRowBufferActive(
-        !navigation &&
-          !preCollapseTitleRow &&
-          (title || pageActions) &&
-          !tags !== !(subtitle || availableSpace)
-      );
-    }, [
-      availableSpace,
-      navigation,
-      pageActions,
-      preCollapseTitleRow,
-      setLastRowBufferActive,
-      subtitle,
-      tags,
-      title,
-    ]);
-
-    useEffect(() => {
-      // Determine the location of the pageAction buttons
-      setPageActionsInBreadcrumbRow(
-        preCollapseTitleRow ||
-          (scrollYValue > metrics.titleRowSpaceAbove && hasActionBar)
-      );
-    }, [
-      hasActionBar,
-      metrics.breadcrumbRowSpaceBelow,
-      metrics.titleRowSpaceAbove,
-      preCollapseTitleRow,
-      scrollYValue,
     ]);
 
     useEffect(() => {
@@ -332,25 +311,39 @@ export let PageHeader = React.forwardRef(
       tags,
     ]);
 
-    useEffect(() => {
-      setFullyCollapsed(
-        scrollYValue + metrics.headerTopValue + pageHeaderOffset >= 0
-      );
-    }, [metrics.headerTopValue, pageHeaderOffset, scrollYValue]);
-
     useWindowScroll(
       // on scroll or various layout changes check updates if needed
       ({ current }) => {
-        checkUpdateVerticalSpace();
+        const fullyCollapsed =
+          current.scrollY + metrics.headerTopValue + pageHeaderOffset >= 0;
+        setFullyCollapsed(fullyCollapsed);
+
+        // set offset for tagset tooltip
+        const tagsetTooltipOffset = fullyCollapsed
+          ? metrics.headerHeight + metrics.headerTopValue + pageHeaderOffset
+          : metrics.headerHeight + pageHeaderOffset;
+
+        document.documentElement.style.setProperty(
+          `--${blockClass}--tagset-tooltip-position`,
+          fullyCollapsed ? 'fixed' : 'absolute'
+        );
+
+        document.documentElement.style.setProperty(
+          `--${blockClass}--tagset-tooltip-offset`,
+          `${tagsetTooltipOffset}px`
+        );
+
         setScrollYValue(current.scrollY);
       },
       [
         actionBarItems,
         availableSpace,
         breadcrumbItems,
-        preventBreadcrumbScroll,
+        metrics.headerHeight,
+        metrics.headerTopValue,
         navigation,
         pageActions,
+        pageHeaderOffset,
         subtitle,
         tags,
         title,
@@ -373,46 +366,6 @@ export let PageHeader = React.forwardRef(
     ]);
 
     useEffect(() => {
-      // Breadcrumb row only rendered if true
-      // eslint-disable-next-line
-      setHasBreadcrumbRow(
-        !(breadcrumbItems === undefined && actionBarItems === undefined)
-      );
-    }, [actionBarItems, breadcrumbItems]);
-
-    useEffect(() => {
-      const newShapes = extractShapesArray(actionBarItems);
-      setHasActionBar(newShapes.length);
-      setActionBarItemArray(newShapes);
-    }, [actionBarItems]);
-
-    useEffect(() => {
-      const shapes = extractShapesArray(pageActions);
-      setPageActionsItemArray(
-        shapes?.map((shape) => ({ label: shape.children, ...shape }))
-      );
-    }, [pageActions]);
-
-    useEffect(() => {
-      // Determines the amount of space needed below the title
-      let belowTitleSpace = 'default';
-
-      if (
-        pageActions !== undefined &&
-        navigation !== undefined &&
-        subtitle === undefined &&
-        availableSpace === undefined
-      ) {
-        belowTitleSpace = '06';
-      } else if (subtitle !== undefined || availableSpace !== undefined) {
-        belowTitleSpace = '03';
-      } else if (navigation === undefined && tags !== undefined) {
-        belowTitleSpace = '05';
-      }
-      setSpacingBelowTitle(belowTitleSpace);
-    }, [availableSpace, tags, navigation, subtitle, pageActions]);
-
-    useEffect(() => {
       // Determines if the background should be one based on the header height or scroll
       let result = background && 1;
 
@@ -423,6 +376,9 @@ export let PageHeader = React.forwardRef(
       ) {
         const startAddingAt = parseFloat(layout05, 10) * parseInt(baseFontSize);
         const scrollRemaining = metrics.headerHeight - scrollYValue;
+
+        /* don't know how to test resize */
+        /* istanbul ignore next if */
         if (scrollRemaining < startAddingAt) {
           const distanceAddingOver =
             startAddingAt - metrics.breadcrumbRowHeight;
@@ -438,7 +394,7 @@ export let PageHeader = React.forwardRef(
         [`--${blockClass}--background-opacity`]: result,
       }));
       setBackgroundOpacity(result);
-      setHasCollapseButton(showCollapseHeaderButton && result > 0);
+      setHasCollapseButton(collapseHeaderToggleWanted && result > 0);
     }, [
       actionBarItems,
       background,
@@ -447,20 +403,16 @@ export let PageHeader = React.forwardRef(
       metrics.headerHeight,
       navigation,
       scrollYValue,
-      showCollapseHeaderButton,
+      collapseHeaderToggleWanted,
       tags,
     ]);
 
     useEffect(() => {
+      // Determine if space is needed in the breadcrumb for a collapse button
       setSpaceForCollapseButton(
         hasCollapseButton && !(navigation || tags) && metrics.headerHeight
       );
     }, [hasCollapseButton, navigation, tags, metrics.headerHeight]);
-
-    const handleResize = () => {
-      // receives width and height parameters if needed
-      checkUpdateVerticalSpace();
-    };
 
     const nextToTabsCheck = () => {
       return (
@@ -469,28 +421,16 @@ export let PageHeader = React.forwardRef(
       );
     };
 
-    const toggleCollapse = (forceCollapse) => {
-      const collapse =
-        typeof forceCollapse !== 'undefined' ? forceCollapse : !fullyCollapsed;
-
-      if (collapse) {
-        window.scrollTo({
-          top: pageHeaderOffset - (metrics?.headerTopValue || 0),
-          behavior: 'smooth',
-        });
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    };
-
-    const handleCollapseToggle = () => {
-      toggleCollapse();
-    };
-
     useEffect(() => {
       toggleCollapse(collapseHeader);
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [collapseHeader]);
+
+    const {
+      text: titleText,
+      icon: TitleIcon,
+      loading: titleLoading,
+    } = titleShape;
 
     return (
       <ReactResizeDetector handleHeight onResize={handleResize}>
@@ -510,11 +450,12 @@ export let PageHeader = React.forwardRef(
             {hasBreadcrumbRow ? (
               <Row
                 className={cx(`${blockClass}__breadcrumb-row`, {
-                  [`${blockClass}__breadcrumb-row--with-actions`]: hasActionBar,
-                  [`${blockClass}__breadcrumb-row--next-to-tabs`]: nextToTabsCheck(),
-                  [`${blockClass}__breadcrumb-row--has-breadcrumbs`]: breadcrumbItems,
+                  [`${blockClass}__breadcrumb-row--next-to-tabs`]:
+                    nextToTabsCheck(),
+                  [`${blockClass}__breadcrumb-row--has-breadcrumbs`]:
+                    breadcrumbItems,
                   [`${blockClass}__breadcrumb-row--has-action-bar`]:
-                    actionBarItems || pageActions,
+                    hasActionBar,
                 })}>
                 <div className={`${blockClass}__breadcrumb-row--container`}>
                   <Column
@@ -536,10 +477,11 @@ export let PageHeader = React.forwardRef(
                             className={cx([
                               `${blockClass}__breadcrumb-title`,
                               {
-                                [`${blockClass}__breadcrumb-title--pre-collapsed`]: preCollapseTitleRow,
+                                [`${blockClass}__breadcrumb-title--pre-collapsed`]:
+                                  preCollapseTitleRow,
                               },
                             ])}>
-                            {title}
+                            {titleLoading ? <SkeletonText /> : titleText}
                           </BreadcrumbItem>
                         ) : (
                           ''
@@ -553,8 +495,10 @@ export let PageHeader = React.forwardRef(
                     className={cx([
                       `${blockClass}__action-bar-column ${blockClass}__action-bar-column--background`,
                       {
-                        [`${blockClass}__action-bar-column--has-page-actions`]: pageActions,
-                        [`${blockClass}__action-bar-column--influenced-by-collapse-button`]: spaceForCollapseButton,
+                        [`${blockClass}__action-bar-column--has-page-actions`]:
+                          pageActions,
+                        [`${blockClass}__action-bar-column--influenced-by-collapse-button`]:
+                          spaceForCollapseButton,
                       },
                     ])}>
                     <ReactResizeDetector
@@ -568,7 +512,8 @@ export let PageHeader = React.forwardRef(
                             {pageActions && (
                               <div
                                 className={cx(`${blockClass}__page-actions`, {
-                                  [`${blockClass}__page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
+                                  [`${blockClass}__page-actions--in-breadcrumb`]:
+                                    pageActionsInBreadcrumbRow,
                                 })}>
                                 <ButtonSetWithOverflow
                                   className={`${blockClass}__button-set--in-breadcrumb`}
@@ -599,8 +544,10 @@ export let PageHeader = React.forwardRef(
                   `${blockClass}__title-row`,
                   `${blockClass}__title-row--spacing-below-${spacingBelowTitle}`,
                   {
-                    [`${blockClass}__title-row--no-breadcrumb-row`]: !hasBreadcrumbRow,
-                    [`${blockClass}__title-row--under-action-bar`]: hasActionBar,
+                    [`${blockClass}__title-row--no-breadcrumb-row`]:
+                      !hasBreadcrumbRow,
+                    [`${blockClass}__title-row--under-action-bar`]:
+                      hasActionBar,
                     [`${blockClass}__title-row--sticky`]:
                       pageActions !== undefined &&
                       actionBarItems === undefined &&
@@ -614,12 +561,18 @@ export let PageHeader = React.forwardRef(
                       className={cx(`${blockClass}__title`, {
                         [`${blockClass}__title--fades`]: hasBreadcrumbRow,
                       })}>
-                      {TitleIcon ? (
+                      {TitleIcon && !titleLoading ? (
                         <TitleIcon className={`${blockClass}__title-icon`} />
-                      ) : (
-                        ''
-                      )}
-                      <span title={title}>{title}</span>
+                      ) : null}
+                      <span title={!titleLoading ? titleText : null}>
+                        {titleLoading ? (
+                          <SkeletonText
+                            className={`${blockClass}__title-skeleton`}
+                          />
+                        ) : (
+                          titleText
+                        )}
+                      </span>
                     </div>
                   ) : null}
                 </Column>
@@ -627,7 +580,8 @@ export let PageHeader = React.forwardRef(
                 {pageActions !== undefined ? (
                   <Column
                     className={cx(`${blockClass}__page-actions`, {
-                      [`${blockClass}__page-actions--in-breadcrumb`]: pageActionsInBreadcrumbRow,
+                      [`${blockClass}__page-actions--in-breadcrumb`]:
+                        pageActionsInBreadcrumbRow,
                     })}>
                     <ButtonSetWithOverflow
                       className={`${blockClass}__page-actions-container`}
@@ -668,7 +622,8 @@ export let PageHeader = React.forwardRef(
                 className={cx([
                   `${blockClass}__last-row-buffer`,
                   {
-                    [`${blockClass}__last-row-buffer--active`]: lastRowBufferActive,
+                    [`${blockClass}__last-row-buffer--active`]:
+                      lastRowBufferActive,
                   },
                 ])}></div>
             )}
@@ -691,7 +646,11 @@ export let PageHeader = React.forwardRef(
                       [`${blockClass}__navigation-tags--tags-only`]:
                         navigation === undefined,
                     })}>
-                    <TagSet overflowAlign="end">{tags}</TagSet>
+                    <TagSet
+                      overflowAlign="end"
+                      overflowClassName={`${blockClass}__tagset-tooltip`}>
+                      {tags}
+                    </TagSet>
                   </Column>
                 ) : null}
               </Row>
@@ -700,11 +659,14 @@ export let PageHeader = React.forwardRef(
           {hasCollapseButton ? (
             <Button
               className={cx(`${blockClass}__collapse-expand-toggle`, {
-                [`${blockClass}__collapse-expand-toggle--collapsed`]: fullyCollapsed,
+                [`${blockClass}__collapse-expand-toggle--collapsed`]:
+                  fullyCollapsed,
               })}
               data-collapse={fullyCollapsed ? 'collapsed' : 'not collapsed'}
               hasIconOnly={true}
-              iconDescription={collapseExpandHeaderLabel}
+              iconDescription={
+                fullyCollapsed ? expandHeaderLabel : collapseHeaderLabel
+              }
               kind="ghost"
               onClick={handleCollapseToggle}
               renderIcon={ChevronUp16}
@@ -774,16 +736,28 @@ PageHeader.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Label/assistive text for the collapse/expand chevron
-   */
-  collapseExpandHeaderLabel: PropTypes.string,
-  /**
    * The header can as a whole be collapsed, expanded or somewhere in between.
    * This setting controls the initial value, but also takes effect on change
    *
    * NOTE: The header is collapsed by setting the scroll position to hide part of the header. Collapsing has no effect if there is insufficient content to scroll.
    */
   collapseHeader: PropTypes.bool,
+  /**
+   * Label/assistive text for the collapse/expand button
+   * Default 'Collapse'
+   */
+  collapseHeaderLabel: PropTypes.string,
+  /**
+   * Enable the collapse header toggle.
+   *
+   * NOTE: The header is collapsed by setting the scroll position to hide part of the header. Collapsing has no effect if there is insufficient content to scroll.
+   */
+  collapseHeaderToggleWanted: PropTypes.bool,
+  /**
+   * Label/assistive text for the collapse/expand button
+   * Default 'Expand'
+   */
+  expandHeaderLabel: PropTypes.string,
   /**
    * Content for the navigation area in the PageHeader. Should
    * be a React element that is normally a Carbon Tabs component. Optional.
@@ -829,12 +803,6 @@ PageHeader.propTypes = {
    */
   preventBreadcrumbScroll: PropTypes.bool,
   /**
-   * Show the collapse header button.
-   *
-   * NOTE: The header is collapsed by setting the scroll position to hide part of the header. Collapsing has no effect if there is insufficient content to scroll.
-   */
-  showCollapseHeaderButton: PropTypes.bool,
-  /**
    * A subtitle or description that provides additional context to
    * identify the current page. Optional.
    */
@@ -846,20 +814,31 @@ PageHeader.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.element),
   /**
    * The title of the page.
-   * Optional.
+   * Optional string or object with the following attributes: text, icon, loading
    */
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([
+    PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+      loading: PropTypes.bool,
+    }),
+    PropTypes.string,
+  ]),
   /**
    * An icon to be included to the left of the title text.
    * Optional.
    */
-  titleIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  titleIcon: deprecateProp(
+    PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    'Use `title` prop shape instead.'
+  ),
 };
 
 PageHeader.defaultProps = {
-  background: false,
+  background: true,
   className: '',
-  collapseExpandHeaderLabel: 'Toggle expansion',
+  collapseHeaderLabel: 'Collapse',
+  expandHeaderLabel: 'Expand',
   preventBreadcrumbScroll: false,
   pageHeaderOffset: 0,
   preCollapseTitleRow: false,

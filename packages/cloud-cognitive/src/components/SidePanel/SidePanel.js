@@ -14,6 +14,7 @@ import cx from 'classnames';
 import ReactResizeDetector from 'react-resize-detector';
 import wrapFocus from '../../global/js/utils/wrapFocus';
 import { pkg } from '../../settings';
+import { allPropTypes } from '../../global/js/utils/props-helper';
 import { SIDE_PANEL_SIZES } from './constants';
 
 // Carbon and package components we use.
@@ -45,6 +46,7 @@ export let SidePanel = React.forwardRef(
       navigationBackIconDescription,
       onNavigationBack,
       onRequestClose,
+      onUnmount,
       open,
       pageContentSelector,
       placement,
@@ -268,7 +270,8 @@ export let SidePanel = React.forwardRef(
         if (
           sidePanelRef.current &&
           sidePanelOverlayRef.current &&
-          sidePanelOverlayRef.current.contains(e.target)
+          sidePanelOverlayRef.current.contains(e.target) &&
+          onRequestClose
         ) {
           onRequestClose();
         }
@@ -288,7 +291,10 @@ export let SidePanel = React.forwardRef(
 
     // initialize the side panel to close
     const onAnimationEnd = () => {
-      if (!open) setRender(false);
+      if (!open) {
+        onUnmount && onUnmount();
+        setRender(false);
+      }
       sidePanelRef.current.style.overflow = 'auto';
       sidePanelRef.current.style.overflowX = 'hidden';
       setAnimationComplete(true);
@@ -410,7 +416,8 @@ export let SidePanel = React.forwardRef(
               onAnimationStart={onAnimationStart}
               onBlur={handleBlur}
               ref={ref || sidePanelRef}
-              role="complementary">
+              role="complementary"
+              aria-label={title}>
               <span
                 ref={startTrapRef}
                 tabIndex="0"
@@ -455,13 +462,11 @@ export let SidePanel = React.forwardRef(
                     </h5>
                   )}
                   <Button
+                    aria-label={closeIconDescription}
                     kind="ghost"
                     size="small"
-                    disabled={false}
                     renderIcon={Close20}
                     iconDescription={closeIconDescription}
-                    tooltipPosition="bottom"
-                    tooltipAlignment="center"
                     className={`${blockClass}__close-button`}
                     onClick={onRequestClose}
                     ref={sidePanelCloseRef}
@@ -470,7 +475,8 @@ export let SidePanel = React.forwardRef(
                 {subtitle && subtitle.length && (
                   <p
                     className={cx(`${blockClass}__subtitle-text`, {
-                      [`${blockClass}__subtitle-text-no-animation`]: !animateTitle,
+                      [`${blockClass}__subtitle-text-no-animation`]:
+                        !animateTitle,
                       [`${blockClass}__subtitle-text-no-animation-no-action-toolbar`]:
                         !animateTitle &&
                         (!actionToolbarButtons || !actionToolbarButtons.length),
@@ -481,7 +487,8 @@ export let SidePanel = React.forwardRef(
                 {actionToolbarButtons && actionToolbarButtons.length && (
                   <div
                     className={cx(`${blockClass}__action-toolbar`, {
-                      [`${blockClass}__action-toolbar-no-animation`]: !animateTitle,
+                      [`${blockClass}__action-toolbar-no-animation`]:
+                        !animateTitle,
                     })}>
                     {actionToolbarButtons.map((action) => (
                       <Button
@@ -496,8 +503,10 @@ export let SidePanel = React.forwardRef(
                         className={cx([
                           `${blockClass}__action-toolbar-button`,
                           {
-                            [`${blockClass}__action-toolbar-icon-only-button`]: action.icon,
-                            [`${blockClass}__action-toolbar-leading-button`]: !action.icon,
+                            [`${blockClass}__action-toolbar-icon-only-button`]:
+                              action.icon,
+                            [`${blockClass}__action-toolbar-leading-button`]:
+                              !action.icon,
                           },
                         ])}
                         onClick={() => action.onActionToolbarButtonClick()}>
@@ -544,6 +553,16 @@ export let SidePanel = React.forwardRef(
 // Return a placeholder if not released and not enabled by feature flag
 SidePanel = pkg.checkComponentEnabled(SidePanel, componentName);
 
+SidePanel.validatePageContentSelector =
+  () =>
+  ({ slideIn, pageContentSelector }) => {
+    if (slideIn && !pageContentSelector) {
+      throw new Error(
+        `${componentName}: pageContentSelector prop missing, this is required when using a slideIn panel`
+      );
+    }
+  };
+
 SidePanel.propTypes = {
   /**
    * Sets the action toolbar buttons
@@ -571,7 +590,7 @@ SidePanel.propTypes = {
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  actions: PropTypes.oneOfType([
+  actions: allPropTypes([
     ActionSet.validateActions(),
     PropTypes.arrayOf(
       PropTypes.shape({
@@ -642,7 +661,13 @@ SidePanel.propTypes = {
    * Specify a handler for closing the side panel.
    * This handler closes the modal, e.g. changing `open` prop.
    */
-  onRequestClose: PropTypes.func.isRequired,
+  onRequestClose: PropTypes.func,
+
+  /**
+   * Optional function called when the side panel exit animation is complete.
+   * This handler can be used for any state cleanup needed before the panel is removed from the DOM.
+   */
+  onUnmount: PropTypes.func,
 
   /**
    * Determines whether the side panel should render or not
@@ -653,7 +678,10 @@ SidePanel.propTypes = {
    * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
    * This prop is required when using the `slideIn` variant of the side panel.
    */
-  pageContentSelector: PropTypes.string,
+  pageContentSelector: allPropTypes([
+    SidePanel.validatePageContentSelector(),
+    PropTypes.string,
+  ]),
 
   /**
    * Determines if the side panel is on the right or left
@@ -684,7 +712,7 @@ SidePanel.propTypes = {
   /**
    * Sets the title text
    */
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
 };
 
 SidePanel.defaultProps = {

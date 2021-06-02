@@ -47,7 +47,6 @@ $raised-z-index: 99;
       background-color: $ui-background;
 
       /* custom props */
-      --#{$block-class}--breadcrumb-min-height: #{$spacing-08};
       --#{$block-class}--breadcrumb-title-visibility: hidden;
       --#{$block-class}--breadcrumb-title-opacity: 1;
       --#{$block-class}--breadcrumb-top: 0;
@@ -67,10 +66,18 @@ $raised-z-index: 99;
       position: sticky;
       top: var(--#{$block-class}--breadcrumb-top);
       z-index: $raised-z-index;
-      min-height: var(--#{$block-class}--breadcrumb-min-height);
+      min-height: $spacing-07;
 
       + .#{$block-class}__last-row-buffer--active {
         height: $spacing-02;
+      }
+    }
+
+    .#{$block-class}__breadcrumb-row--has-action-bar {
+      min-height: $spacing-08;
+
+      + .#{$block-class}__last-row-buffer--active {
+        height: $spacing-06;
       }
     }
 
@@ -78,6 +85,11 @@ $raised-z-index: 99;
       display: flex;
       flex-wrap: nowrap;
 
+      min-width: 100%;
+    }
+
+    .#{$block-class}__breadcrumb-row--has-action-bar
+      .#{$block-class}__breadcrumb-row--container {
       min-width: calc(
         100% +
           (
@@ -86,13 +98,6 @@ $raised-z-index: 99;
           ) / 2
       );
     }
-
-    .#{$block-class}__breadcrumb-row--with-actions {
-      + .#{$block-class}__last-row-buffer--active {
-        height: $layout-02;
-      }
-    }
-
     .#{$block-class}__breadcrumb-row::after {
       position: absolute;
       bottom: 0;
@@ -109,7 +114,7 @@ $raised-z-index: 99;
     }
 
     .#{$block-class}__breadcrumb-row--next-to-tabs::after,
-    .#{$block-class}__breadcrumb-row--with-actions::after {
+    .#{$block-class}__breadcrumb-row--has-action-bar::after {
       /* creates a full width box shadow without causing scroll */
       box-shadow: 25vw 1px 0 0 $ui-03, -25vw 1px 0 0 $ui-03;
       opacity: 1;
@@ -120,11 +125,17 @@ $raised-z-index: 99;
     }
 
     .#{$block-class}__action-bar-column {
-      // @include carbon--breakpoint-up('md') {
+      display: none;
+
       .#{$block-class}__breadcrumb-row--has-breadcrumbs & {
         flex: 1 0 40%;
         max-width: 40%;
       }
+    }
+
+    .#{$block-class}__breadcrumb-row--has-action-bar
+      .#{$block-class}__action-bar-column {
+      display: initial;
     }
 
     .#{$block-class}__action-bar-column-content {
@@ -158,7 +169,10 @@ $raised-z-index: 99;
     .#{$block-class}__breadcrumb-column {
       flex: 0 0 100%;
       max-width: 100%;
-      overflow: hidden; /* required for ellipsis in title */
+
+      @include carbon--breakpoint(md) {
+        overflow: hidden; /* required for ellipsis in title, title not visible in breadcrumb with back arrow */
+      }
     }
 
     .#{$block-class}__breadcrumb-row--has-action-bar
@@ -214,6 +228,7 @@ $raised-z-index: 99;
 
     .#{$block-class}__breadcrumb-title {
       position: relative;
+      width: 100%;
 
       &:not(.#{$block-class}__breadcrumb-title--pre-collapsed) {
         // stylelint-disable-next-line carbon/layout-token-use
@@ -243,7 +258,7 @@ $raised-z-index: 99;
 
     .#{$block-class}__title-row {
       z-index: $raised-z-index + 1;
-      margin-top: $spacing-02;
+      margin-top: 0;
       margin-bottom: 0;
 
       @include carbon--breakpoint-up('md') {
@@ -251,12 +266,12 @@ $raised-z-index: 99;
       }
 
       &.#{$block-class}__title-row--under-action-bar {
-        margin-top: $spacing-06;
+        margin-top: $spacing-05;
       }
 
       + .#{$block-class}__last-row-buffer--active {
         // only used when nothing below title
-        height: $layout-03;
+        height: $spacing-07;
       }
 
       &.#{$block-class}__title-row--spacing-below-03 {
@@ -271,11 +286,11 @@ $raised-z-index: 99;
       }
 
       &.#{$block-class}__title-row--spacing-below-06 {
-        margin-bottom: $layout-02;
+        margin-bottom: $spacing-06;
       }
 
       &.#{$block-class}__title-row--no-breadcrumb-row {
-        margin-top: $layout-03;
+        margin-top: $spacing-07;
       }
 
       &.#{$block-class}__title-row--sticky {
@@ -302,17 +317,27 @@ $raised-z-index: 99;
       text-overflow: ellipsis;
     }
 
+    .#{$block-class}__title-skeleton {
+      height: $spacing-07;
+    }
+
     .#{$block-class}__title--fades {
       opacity: calc(1 - var(--#{$block-class}--breadcrumb-title-opacity));
     }
 
     .#{$block-class}__title-icon {
       margin-right: $spacing-04;
+      vertical-align: middle;
+      // stylelint-disable-next-line carbon/layout-token-use
+      transform: translateY(
+        -3px
+      ); // positional tweak requested by design review
     }
 
     .#{$block-class}__page-actions {
       flex: 0 0 100%;
       margin-top: $spacing-05;
+      margin-bottom: calc(-1 * #{$spacing-02});
       white-space: nowrap;
 
       @include carbon--breakpoint-up('md') {
@@ -367,7 +392,7 @@ $raised-z-index: 99;
       }
 
       + .#{$block-class}__last-row-buffer--active {
-        height: $layout-01;
+        height: $spacing-05;
       }
     }
 
@@ -376,11 +401,18 @@ $raised-z-index: 99;
     }
 
     .#{$block-class}__available-row {
+      @include carbon--type-style('body-long-01');
+
       margin-top: $spacing-03;
 
       + .#{$block-class}__last-row-buffer--active {
-        height: $layout-03;
+        height: $spacing-05;
       }
+    }
+
+    .#{$block-class}__available-row * {
+      // default content of available row to body-long-01
+      @include carbon--type-style('body-long-01');
     }
 
     .#{$block-class}__navigation-row {
@@ -389,7 +421,7 @@ $raised-z-index: 99;
 
       .#{$carbon-prefix}--content-switcher {
         box-sizing: content-box;
-        padding-bottom: $layout-01;
+        padding-bottom: $spacing-05;
       }
     }
 
@@ -399,7 +431,7 @@ $raised-z-index: 99;
     }
 
     .#{$block-class}__navigation-row--spacing-above-06 {
-      margin-top: $layout-02;
+      margin-top: $spacing-06;
     }
 
     .#{$block-class}__navigation-row .#{$carbon-prefix}--tab-content {
@@ -407,7 +439,7 @@ $raised-z-index: 99;
     }
 
     .#{$block-class}__navigation-tabs {
-      margin-left: calc(-1 * #{$spacing-04});
+      margin-left: calc(-1 * #{$spacing-05});
     }
 
     .#{$block-class}__navigation-row--has-tags
@@ -422,7 +454,8 @@ $raised-z-index: 99;
       align-items: center;
       justify-content: flex-end;
       max-width: 25%;
-      padding-bottom: $spacing-02; /* design says 3 from bottom of tag, which has $spacing-02 already. 2 * $spacing-02 = $spacing-3 */
+      padding-top: $spacing-02;
+      padding-bottom: $spacing-02;
       white-space: nowrap;
       text-align: right;
     }
@@ -430,6 +463,7 @@ $raised-z-index: 99;
     .#{$block-class}__navigation-tags--tags-only {
       justify-content: flex-start;
       margin-left: calc(-1 * #{$spacing-02});
+      padding-top: 0;
       padding-bottom: $spacing-04;
       text-align: initial;
     }
@@ -464,6 +498,17 @@ $raised-z-index: 99;
         padding-right: $spacing-05;
       }
     }
+  }
+
+  :root {
+    --#{$block-class}--tagset-tooltip-offset: 0;
+  }
+
+  .#{$block-class}__tagset-tooltip.#{$block-class}__tagset-tooltip {
+    // stylelint-disable-next-line
+    position: var(--#{$block-class}--tagset-tooltip-position) !important;
+    // stylelint-disable-next-line
+    top: var(--#{$block-class}--tagset-tooltip-offset) !important;
   }
 }
 

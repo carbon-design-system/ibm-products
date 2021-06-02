@@ -43,7 +43,7 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^13.1.9",
     "eslint": "^7.27.0",
-    "eslint-config-carbon": "^2.4.0",
+    "eslint-config-carbon": "2.2.0",
     "husky": "^4.3.6",
     "jest": "^25.5.4",
     "lerna": "^4.0.0",

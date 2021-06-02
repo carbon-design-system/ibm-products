@@ -26,6 +26,8 @@
   }
 
   .#{$block-class} .#{$block-class}__action-button {
+    @include carbon--type-style('body-short-01');
+
     align-items: center;
     max-width: none;
     height: $spacing-10;

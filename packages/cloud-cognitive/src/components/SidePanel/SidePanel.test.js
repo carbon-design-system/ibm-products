@@ -21,12 +21,17 @@ const sizes = ['xs', 'sm', 'md', 'lg', 'max'];
 
 const dataTestId = uuidv4();
 
+const title = uuidv4();
+const subtitle = uuidv4();
+const pageContentSelectorValue = '#side-panel-test-page-content';
+
 const onRequestCloseFn = jest.fn();
 const onUnmountFn = jest.fn();
 const renderSidePanel = ({ ...rest }, children = <p>test</p>) =>
   render(
     <SidePanel
       {...{
+        title,
         open: true,
         onRequestClose: onRequestCloseFn,
         ...rest,
@@ -35,14 +40,12 @@ const renderSidePanel = ({ ...rest }, children = <p>test</p>) =>
     </SidePanel>
   );
 
-const title = uuidv4();
-const subtitle = uuidv4();
-
 const SlideIn = ({
   placement,
   open,
   animateTitle = true,
   actionToolbarButtons,
+  pageContentSelector = pageContentSelectorValue,
 }) => (
   <div>
     <SidePanel
@@ -53,12 +56,12 @@ const SlideIn = ({
       open={open}
       onRequestClose={onRequestCloseFn}
       slideIn
-      pageContentSelector="#side-panel-test-page-content"
+      pageContentSelector={pageContentSelector}
       placement={placement}
       onUnmount={onUnmountFn}>
       Content
     </SidePanel>
-    <div id="side-panel-test-page-content" />
+    <div id={pageContentSelectorValue.slice(1)} />
   </div>
 );
 
@@ -125,9 +128,7 @@ describe('SidePanel', () => {
 
   it('should render a left slide in panel version', async () => {
     const { container, rerender } = render(<SlideIn placement="left" open />);
-    const pageContent = container.querySelector(
-      '#side-panel-test-page-content'
-    );
+    const pageContent = container.querySelector(pageContentSelectorValue);
     const style = getComputedStyle(pageContent);
     expect(style.marginLeft).toBe('30rem');
     const closeIconButton = container.querySelector(
@@ -139,11 +140,9 @@ describe('SidePanel', () => {
     expect(updatedStyles.marginLeft).toBe('0px');
   });
 
-  it('should render a right slide in panel version', async () => {
+  it('should render a right slide in panel version with onUnmount prop', async () => {
     const { container, rerender } = render(<SlideIn placement="right" open />);
-    const pageContent = container.querySelector(
-      '#side-panel-test-page-content'
-    );
+    const pageContent = container.querySelector(pageContentSelectorValue);
     const style = getComputedStyle(pageContent);
     expect(style.marginRight).toBe('30rem');
     const closeIconButton = container.querySelector(
@@ -168,9 +167,7 @@ describe('SidePanel', () => {
         actionToolbarButtons={[]}
       />
     );
-    const pageContent = container.querySelector(
-      '#side-panel-test-page-content'
-    );
+    const pageContent = container.querySelector(pageContentSelectorValue);
     const style = getComputedStyle(pageContent);
     expect(style.marginRight).toBe('30rem');
     const closeIconButton = container.querySelector(
@@ -194,7 +191,11 @@ describe('SidePanel', () => {
     );
     userEvent.click(closeIconButton);
     rerender(
-      <SidePanel includeOverlay open={false} onRequestClose={onRequestCloseFn}>
+      <SidePanel
+        title={title}
+        includeOverlay
+        open={false}
+        onRequestClose={onRequestCloseFn}>
         Content
       </SidePanel>
     );
@@ -388,7 +389,7 @@ describe('SidePanel', () => {
   });
 
   sizes.forEach((size) => {
-    it('should render the correct size side panel', () => {
+    it(`should render a ${size} size side panel`, () => {
       const { container } = renderSidePanel({
         size,
       });
@@ -447,20 +448,27 @@ describe('SidePanel', () => {
 
   it('should render slide in panel from left', () => {
     const { container } = render(
-      <div>
-        <SlideIn
-          placement="left"
-          open={false}
-          pageContentSelector="#side-panel-test-page-content">
-          Content
-        </SlideIn>
-        <div id="side-panel-test-page-content" />
-      </div>
+      <SlideIn placement="left" open={false}>
+        Content
+      </SlideIn>
     );
-    const pageContent = container.querySelector(
-      '#side-panel-test-page-content'
-    );
+    const pageContent = container.querySelector(pageContentSelectorValue);
     const style = getComputedStyle(pageContent);
     expect(style.marginLeft).toBe('0px');
+  });
+
+  it('should throw a custom prop type error when pageContentSelector is missing', () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation();
+    try {
+      render(
+        <SlideIn placement="left" open={false} pageContentSelector={null}>
+          Content
+        </SlideIn>
+      );
+    } catch (e) {
+      expect(spy).toBeCalled();
+    } finally {
+      spy.mockRestore();
+    }
   });
 });

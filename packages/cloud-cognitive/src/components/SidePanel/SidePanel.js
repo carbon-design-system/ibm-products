@@ -416,7 +416,8 @@ export let SidePanel = React.forwardRef(
               onAnimationStart={onAnimationStart}
               onBlur={handleBlur}
               ref={ref || sidePanelRef}
-              role="complementary">
+              role="complementary"
+              aria-label={title}>
               <span
                 ref={startTrapRef}
                 tabIndex="0"
@@ -461,13 +462,11 @@ export let SidePanel = React.forwardRef(
                     </h5>
                   )}
                   <Button
+                    aria-label={closeIconDescription}
                     kind="ghost"
                     size="small"
-                    disabled={false}
                     renderIcon={Close20}
                     iconDescription={closeIconDescription}
-                    tooltipPosition="bottom"
-                    tooltipAlignment="center"
                     className={`${blockClass}__close-button`}
                     onClick={onRequestClose}
                     ref={sidePanelCloseRef}
@@ -553,6 +552,16 @@ export let SidePanel = React.forwardRef(
 
 // Return a placeholder if not released and not enabled by feature flag
 SidePanel = pkg.checkComponentEnabled(SidePanel, componentName);
+
+SidePanel.validatePageContentSelector =
+  () =>
+  ({ slideIn, pageContentSelector }) => {
+    if (slideIn && !pageContentSelector) {
+      throw new Error(
+        `${componentName}: pageContentSelector prop missing, this is required when using a slideIn panel`
+      );
+    }
+  };
 
 SidePanel.propTypes = {
   /**
@@ -669,7 +678,10 @@ SidePanel.propTypes = {
    * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
    * This prop is required when using the `slideIn` variant of the side panel.
    */
-  pageContentSelector: PropTypes.string,
+  pageContentSelector: allPropTypes([
+    SidePanel.validatePageContentSelector(),
+    PropTypes.string,
+  ]),
 
   /**
    * Determines if the side panel is on the right or left
@@ -700,7 +712,7 @@ SidePanel.propTypes = {
   /**
    * Sets the title text
    */
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
 };
 
 SidePanel.defaultProps = {

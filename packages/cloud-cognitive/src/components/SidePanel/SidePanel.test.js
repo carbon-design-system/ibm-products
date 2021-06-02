@@ -45,7 +45,7 @@ const SlideIn = ({
   open,
   animateTitle = true,
   actionToolbarButtons,
-  pageContentSelector,
+  pageContentSelector = pageContentSelectorValue,
 }) => (
   <div>
     <SidePanel
@@ -61,7 +61,7 @@ const SlideIn = ({
       onUnmount={onUnmountFn}>
       Content
     </SidePanel>
-    <div id="side-panel-test-page-content" />
+    <div id={pageContentSelectorValue.slice(1)} />
   </div>
 );
 
@@ -127,44 +127,22 @@ describe('SidePanel', () => {
   });
 
   it('should render a left slide in panel version', async () => {
-    const { container, rerender } = render(
-      <SlideIn
-        placement="left"
-        open
-        pageContentSelector={pageContentSelectorValue}
-      />
-    );
-    const pageContent = container.querySelector(
-      '#side-panel-test-page-content'
-    );
+    const { container, rerender } = render(<SlideIn placement="left" open />);
+    const pageContent = container.querySelector(pageContentSelectorValue);
     const style = getComputedStyle(pageContent);
     expect(style.marginLeft).toBe('30rem');
     const closeIconButton = container.querySelector(
       `.${blockClass}__close-button`
     );
     userEvent.click(closeIconButton);
-    rerender(
-      <SlideIn
-        placement="left"
-        open={false}
-        pageContentSelector={pageContentSelectorValue}
-      />
-    );
+    rerender(<SlideIn placement="left" open={false} />);
     const updatedStyles = getComputedStyle(pageContent);
     expect(updatedStyles.marginLeft).toBe('0px');
   });
 
   it('should render a right slide in panel version with onUnmount prop', async () => {
-    const { container, rerender } = render(
-      <SlideIn
-        placement="right"
-        open
-        pageContentSelector={pageContentSelectorValue}
-      />
-    );
-    const pageContent = container.querySelector(
-      '#side-panel-test-page-content'
-    );
+    const { container, rerender } = render(<SlideIn placement="right" open />);
+    const pageContent = container.querySelector(pageContentSelectorValue);
     const style = getComputedStyle(pageContent);
     expect(style.marginRight).toBe('30rem');
     const closeIconButton = container.querySelector(
@@ -173,13 +151,7 @@ describe('SidePanel', () => {
     const outerElement = container.querySelector(`.${blockClass}`);
     userEvent.click(closeIconButton);
     fireEvent.animationStart(outerElement);
-    rerender(
-      <SlideIn
-        placement="right"
-        open={false}
-        pageContentSelector={pageContentSelectorValue}
-      />
-    );
+    rerender(<SlideIn placement="right" open={false} />);
     fireEvent.animationEnd(outerElement);
     const updatedStyles = getComputedStyle(pageContent);
     expect(updatedStyles.marginRight).toBe('0px');
@@ -193,12 +165,9 @@ describe('SidePanel', () => {
         placement="right"
         open
         actionToolbarButtons={[]}
-        pageContentSelector={pageContentSelectorValue}
       />
     );
-    const pageContent = container.querySelector(
-      '#side-panel-test-page-content'
-    );
+    const pageContent = container.querySelector(pageContentSelectorValue);
     const style = getComputedStyle(pageContent);
     expect(style.marginRight).toBe('30rem');
     const closeIconButton = container.querySelector(
@@ -208,14 +177,7 @@ describe('SidePanel', () => {
     userEvent.click(closeIconButton);
     fireEvent.animationStart(outerElement);
     fireEvent.animationEnd(outerElement);
-    rerender(
-      <SlideIn
-        animateTitle={false}
-        placement="right"
-        open={false}
-        pageContentSelector={pageContentSelectorValue}
-      />
-    );
+    rerender(<SlideIn animateTitle={false} placement="right" open={false} />);
     const updatedStyles = getComputedStyle(pageContent);
     expect(updatedStyles.marginRight).toBe('0px');
   });
@@ -486,16 +448,11 @@ describe('SidePanel', () => {
 
   it('should render slide in panel from left', () => {
     const { container } = render(
-      <SlideIn
-        placement="left"
-        open={false}
-        pageContentSelector="#side-panel-test-page-content">
+      <SlideIn placement="left" open={false}>
         Content
       </SlideIn>
     );
-    const pageContent = container.querySelector(
-      '#side-panel-test-page-content'
-    );
+    const pageContent = container.querySelector(pageContentSelectorValue);
     const style = getComputedStyle(pageContent);
     expect(style.marginLeft).toBe('0px');
   });

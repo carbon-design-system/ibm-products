@@ -462,14 +462,10 @@ export let SidePanel = React.forwardRef(
                     </h5>
                   )}
                   <Button
-                    hasIconOnly
+                    aria-label={closeIconDescription}
                     kind="ghost"
                     size="small"
-                    disabled={false}
                     renderIcon={Close20}
-                    iconDescription={closeIconDescription}
-                    tooltipPosition="bottom"
-                    tooltipAlignment="center"
                     className={`${blockClass}__close-button`}
                     onClick={onRequestClose}
                     ref={sidePanelCloseRef}

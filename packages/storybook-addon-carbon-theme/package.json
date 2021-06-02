@@ -47,7 +47,7 @@
     "@storybook/components": "6.2.9",
     "@storybook/core-events": "6.2.9",
     "@storybook/theming": "6.2.9",
-    "core-js": "^3.13.0",
+    "core-js": "^3.13.1",
     "global": "^4.4.0"
   },
   "devDependencies": {

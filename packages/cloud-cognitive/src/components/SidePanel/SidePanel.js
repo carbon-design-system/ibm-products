@@ -466,6 +466,7 @@ export let SidePanel = React.forwardRef(
                     kind="ghost"
                     size="small"
                     renderIcon={Close20}
+                    iconDescription={closeIconDescription}
                     className={`${blockClass}__close-button`}
                     onClick={onRequestClose}
                     ref={sidePanelCloseRef}

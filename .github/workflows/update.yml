@@ -19,9 +19,10 @@ jobs:
           COMMIT_MESSAGE: 'feat: update Carbon versions and dependencies'
           COMMIT_NAME: 'GitHub Actions'
           COMMIT_EMAIL: 'dave@dcwarwick.org.uk'
+          GITHUB_TOKEN: ${{ secrets.CREATE_PR_ACCESS_TOKEN }}
           PR_BRANCH_PREFIX: 'feat/'
           PR_BRANCH_NAME: 'PR${PR_NUMBER}-update-carbon-dependencies'
-          PR_TITLE: 'Update Carbon versions and package dependencies to latest'
+          PR_TITLE: 'Caution! -- update Carbon versions and package dependencies to latest'
           PR_BODY: |
             This PR was automatically generated to update Carbon versions and other package dependencies on a regular basis. The current goal is to update Carbon versions each Wednesday, to ensure we remain up-to-date with the latest changes.
 
@@ -33,6 +34,6 @@ jobs:
 
             #### How did you test and verify your work?
 
-            **These updates have not been verified**, and the PR should not be merged until the following checks have been made:
+            **These updates have not yet been verified**, and the PR should not be merged until the following checks have been made:
             * ci-check runs cleanly and all tests pass (done automatically as part of the PR checks).
             * use the deploy-preview to ensure that storybook runs and a selection of the main components render correctly.

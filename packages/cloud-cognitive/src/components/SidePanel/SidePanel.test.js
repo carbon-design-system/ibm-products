@@ -45,7 +45,7 @@ const SlideIn = ({
   open,
   animateTitle = true,
   actionToolbarButtons,
-  pageContentSelector = pageContentSelectorValue,
+  selectorPageContent = pageContentSelectorValue,
 }) => (
   <div>
     <SidePanel
@@ -56,7 +56,7 @@ const SlideIn = ({
       open={open}
       onRequestClose={onRequestCloseFn}
       slideIn
-      pageContentSelector={pageContentSelector}
+      selectorPageContent={selectorPageContent}
       placement={placement}
       onUnmount={onUnmountFn}>
       Content
@@ -189,6 +189,7 @@ describe('SidePanel', () => {
     const closeIconButton = container.querySelector(
       `.${blockClass}__close-button`
     );
+    const overlayElement = container.querySelector(`.${blockClass}__overlay`);
     userEvent.click(closeIconButton);
     rerender(
       <SidePanel
@@ -199,6 +200,9 @@ describe('SidePanel', () => {
         Content
       </SidePanel>
     );
+    setTimeout(() => {
+      expect(overlayElement).not.toBeInTheDocument();
+    }, 250);
   });
 
   it('should render one primary action button', () => {
@@ -461,7 +465,7 @@ describe('SidePanel', () => {
     const spy = jest.spyOn(console, 'error').mockImplementation();
     try {
       render(
-        <SlideIn placement="left" open={false} pageContentSelector={null}>
+        <SlideIn placement="left" open={false} selectorPageContent={null}>
           Content
         </SlideIn>
       );

@@ -245,12 +245,12 @@ const TemplateWithFormValidation = ({ ...args }) => {
 
 export const Default = DefaultTemplate.bind({});
 Default.args = {
-  pageContentSelector: '#cloud-and-cognitive-page-content',
+  selectorPageContent: '#cloud-and-cognitive-page-content',
   ...defaultStoryProps,
 };
 
 export const WithFormValidation = TemplateWithFormValidation.bind({});
 WithFormValidation.args = {
-  pageContentSelector: '#cloud-and-cognitive-page-content',
+  selectorPageContent: '#cloud-and-cognitive-page-content',
   ...defaultStoryProps,
 };

@@ -15,6 +15,14 @@
 @mixin import-modal {
   $block-class: #{$pkg-prefix}--import-modal;
 
+  .#{$block-class} .bx--modal-footer .bx--btn {
+    max-width: none;
+  }
+
+  .#{$block-class} .bx--modal-content {
+    padding-right: $spacing-05;
+  }
+
   .bx--file .bx--file-container,
   .bx--file ~ .bx--file-container {
     margin-top: 0;
@@ -28,7 +36,8 @@
     margin-left: $spacing-05;
   }
 
-  .#{$block-class}__label {
+  .#{$block-class}__file-drop-header p,
+  .#{$block-class}__label p {
     margin-bottom: $spacing-03;
     @include carbon--type-style('productive-heading-01');
   }
@@ -41,15 +50,7 @@
 
   .#{$block-class}__body {
     margin-bottom: $spacing-06;
-    padding-right: 20%;
-  }
-
-  .#{$block-class} .bx--modal-container {
-    background: $ui-01;
-  }
-
-  .#{$block-class} .bx--modal-content {
-    padding-right: $spacing-05;
+    padding-right: calc(20% - #{$spacing-05});
   }
 
   .#{$block-class} .bx--file__selected-file {

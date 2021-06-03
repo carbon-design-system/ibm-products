@@ -16,7 +16,7 @@ import wrapFocus from '../../global/js/utils/wrapFocus';
 import { pkg } from '../../settings';
 import { allPropTypes } from '../../global/js/utils/props-helper';
 import { SIDE_PANEL_SIZES } from './constants';
-import { deprecatePropUsage } from '../../global/js/utils/props-helper';
+import { deprecateProp } from '../../global/js/utils/props-helper';
 
 // Carbon and package components we use.
 import { Button } from 'carbon-components-react';
@@ -699,9 +699,9 @@ SidePanel.propTypes = {
    * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
    * This prop is required when using the `slideIn` variant of the side panel.
    */
-  pageContentSelector: deprecatePropUsage(
+  pageContentSelector: deprecateProp(
     allPropTypes([SidePanel.validatePageContentSelector(), PropTypes.string]),
-    'This prop has been renamed to `selectorPageContent`, please use this new prop name as `pageContentSelector` is now deprecated.'
+    'This prop has been renamed to `selectorPageContent`.'
   ),
 
   /**

@@ -12,6 +12,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
+import { allPropTypes } from '../../global/js/utils/props-helper';
 
 // Carbon and package components we use.
 import {
@@ -164,7 +165,10 @@ UserProfileImage.propTypes = {
   /**
    * When passing the image prop use the imageDecsription prop to describe the image for screen reader.
    */
-  imageDescription: UserProfileImage.validateImageDescription(),
+  imageDescription: allPropTypes([
+    UserProfileImage.validateImageDescription(),
+    PropTypes.string,
+  ]),
   /**
    * When passing the initials prop, either send the initials to be used or the user's display name. The first two capital letters of the display name will be used as the initials.
    */

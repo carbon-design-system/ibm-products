@@ -191,6 +191,9 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       &::before {
         @include setDividerStyles();
       }
+      &.#{$block-class}__on-detail-step .#{$block-class}__collapsed-title-text {
+        top: $spacing-09;
+      }
     }
     .#{$block-class}__title-text {
       @include carbon--type-style('productive-heading-03');
@@ -204,6 +207,7 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       opacity: var(--#{$block-class}--subtitle-opacity);
     }
     .#{$block-class}__collapsed-title-text {
+      @include carbon--type-style('productive-heading-02');
       @include setCommonTitleStyles();
 
       position: absolute;
@@ -267,6 +271,9 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
           var(--#{$block-class}--subtitle-container-height)
       );
       border-bottom: 1px solid $decorative-01;
+    }
+    .bx--btn.#{$block-class}__navigation-back-button {
+      z-index: 5;
     }
     .bx--btn.#{$block-class}__navigation-back-button,
     .bx--btn.#{$block-class}__close-button {

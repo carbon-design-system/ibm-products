@@ -28,12 +28,12 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && yarn build:js && yarn build:scss",
+    "build": "run-s clean build-all",
+    "build-all": "run-p build:*",
     "build:css": "bundler bundle:scss src/index.scss",
-    "build:js": "yarn build:js-esm && yarn build:js-cjs",
-    "build:js-esm": "cross-env BABEL_ENV=esm yarn build:js-modules -d es",
-    "build:js-cjs": "cross-env BABEL_ENV=cjs yarn build:js-modules -d lib",
-    "build:js-modules": "babel src --ignore '**/__tests__','**/*.test.js','**/*.stories.js'",
+    "build:js-esm": "cross-env BABEL_ENV=esm yarn build:js:modules -d es",
+    "build:js-cjs": "cross-env BABEL_ENV=cjs yarn build:js:modules -d lib",
+    "build:js:modules": "babel src --ignore '**/__tests__','**/*.test.js','**/*.stories.js'",
     "build:scss": "copyfiles 'src/**/*.scss' scss -u 1",
     "ci-check": "node scripts/import",
     "clean": "rimraf css es lib scss",

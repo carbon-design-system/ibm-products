@@ -29,12 +29,12 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && yarn build:js && yarn build:scss",
-    "build:js": "yarn build:js-esm && yarn build:js-cjs",
-    "build:js-esm": "cross-env BABEL_ENV=esm yarn build:js-modules src/esm -d es",
-    "build:js-cjs": "cross-env BABEL_ENV=cjs yarn build:js-modules src/cjs -d lib",
-    "build:js-modules": "babel",
-    "build:scss": "bundler bundle:scss index.scss && copyfiles '**/*.scss' scss",
+    "build": "run-s clean build-all",
+    "build-all": "run-p build:*",
+    "build:css": "bundler bundle:scss index.scss",
+    "build:js-esm": "cross-env BABEL_ENV=esm babel src/esm -d es",
+    "build:js-cjs": "cross-env BABEL_ENV=cjs babel src/cjs -d lib",
+    "build:scss": "copyfiles '**/*.scss' scss",
     "ci-check": "node scripts/import",
     "clean": "rimraf es lib css scss",
     "postinstall": "carbon-telemetry collect --install",
@@ -58,6 +58,7 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
-    "npm-check-updates": "^11.6.0"
+    "npm-check-updates": "^11.6.0",
+    "npm-run-all": "^4.1.5"
   }
 }

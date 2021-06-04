@@ -51,8 +51,6 @@ export let LoadingBar = React.forwardRef(
     },
     ref
   ) => {
-    const { current: instanceId } = useRef(id ? id : null);
-
     function usePrevious(value) {
       const ref = useRef();
       useEffect(() => {
@@ -65,14 +63,18 @@ export let LoadingBar = React.forwardRef(
     const prevActive = usePrevious(active);
 
     const isDeterminate = percentage !== undefined;
-    const percProgress = isDeterminate ? percentage + '%' : 0;
+    const percProgress = isDeterminate
+      ? percentage > 100
+        ? `100%`
+        : percentage + '%'
+      : 0;
     const showPercIndicator = isDeterminate && showPercentageIndicator;
     // switch classes dependant on props
     const loadingWrapper = cx({
       [`${blockClass}__preload`]: !prevActive && !active,
     });
     const loadingClassName = cx({
-      [`${blockClass}`]: true,
+      [`${blockClass}__inner`]: true,
       [`${blockClass}__small`]: small,
       [`${blockClass}__linear-stop`]: !active && isDeterminate,
       [`${blockClass}__indefinite-stop`]: !active && !isDeterminate,
@@ -82,7 +84,7 @@ export let LoadingBar = React.forwardRef(
       [`${blockClass}__stop-progress`]: !active && !isDeterminate,
       [`${blockClass}__indefinite-progress`]: active && !isDeterminate,
     });
-    const loadingId = `loading-bar-id-${instanceId}`;
+    const loadingId = id && `loading-bar-id-${id}`;
 
     return (
       <div
@@ -93,18 +95,17 @@ export let LoadingBar = React.forwardRef(
         className={cx(
           loadingWrapper,
           // Apply any supplied class names to the main HTML element.
-          className
+          className,
+          blockClass
         )}
         ref={ref}
-        role="main">
-        <div
-          {...rest}
-          id={loadingId}
-          aria-label={ariaLabel}
-          aria-atomic="true"
-          aria-labelledby={loadingId}
-          aria-live={active ? 'assertive' : 'off'}
-          className={loadingClassName}>
+        role="progressbar"
+        aria-label={ariaLabel}
+        aria-atomic="true"
+        aria-labelledby={loadingId}
+        aria-live={active ? 'assertive' : 'off'}
+        id={loadingId}>
+        <div className={loadingClassName}>
           <div
             {...(isDeterminate && { style: { width: percProgress } })}
             className={`${blockClass}__progress`}>

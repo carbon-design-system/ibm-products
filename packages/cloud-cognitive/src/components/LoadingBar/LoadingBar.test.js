@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, queryByAttribute, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
 import { pkg } from '../../settings';
 
@@ -23,29 +23,38 @@ const dataTestId = uuidv4();
 
 describe(componentName, () => {
   it('renders a component LoadingBar', () => {
-    render(<LoadingBar> </LoadingBar>);
-    expect(screen.getByRole('main')).toHaveClass(blockClass);
+    render(<LoadingBar />);
+    expect(screen.getByRole('progressbar')).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<LoadingBar> </LoadingBar>);
+    const { container } = render(<LoadingBar />);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', () => {
-    render(<LoadingBar className={className}> </LoadingBar>);
-    expect(screen.getByRole('main')).toHaveClass(className);
+    render(<LoadingBar className={className} />);
+    expect(screen.getByRole('progressbar')).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', () => {
-    render(<LoadingBar data-testid={dataTestId}> </LoadingBar>);
+    render(<LoadingBar data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
-    render(<LoadingBar ref={ref}> </LoadingBar>);
+    render(<LoadingBar ref={ref} />);
     expect(ref.current).toHaveClass(blockClass);
+  });
+
+  it('should add an id if provided', () => {
+    const loadingBarId = 'test-id';
+    const { container } = render(<LoadingBar id={loadingBarId} />);
+    const containerElement = container.querySelector(
+      `#loading-bar-id-${loadingBarId}`
+    );
+    expect(containerElement).toBeInTheDocument();
   });
 });

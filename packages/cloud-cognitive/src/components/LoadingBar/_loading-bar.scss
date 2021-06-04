@@ -26,80 +26,80 @@ $loading-bar__small-height: 4px;
 
   @keyframes progress-indeterminate {
     0% {
-      width: 0%;
-      left: 0;
       right: auto;
+      left: 0;
+      width: 0%;
     }
     20% {
-      width: 100%;
-      left: 0;
       right: auto;
+      left: 0;
+      width: 100%;
     }
     28% {
-      width: 100%;
-      left: auto;
       right: 0;
+      left: auto;
+      width: 100%;
     }
     51% {
-      width: 0%;
-      left: auto;
       right: 0;
+      left: auto;
+      width: 0%;
     }
     58% {
-      width: 0%;
-      left: auto;
       right: 0;
+      left: auto;
+      width: 0%;
     }
     82% {
-      width: 100%;
-      left: auto;
       right: 0;
+      left: auto;
+      width: 100%;
     }
     83% {
-      width: 100%;
-      left: 0;
       right: auto;
+      left: 0;
+      width: 100%;
     }
     96% {
-      width: 0%;
-      left: 0;
       right: auto;
+      left: 0;
+      width: 0%;
     }
     100% {
-      width: 0%;
-      left: 0;
       right: auto;
+      left: 0;
+      width: 0%;
     }
   }
 
   @keyframes progress-linear {
     0% {
-      width: 0%;
-      left: 0;
       right: auto;
+      left: 0;
+      width: 0%;
     }
     100% {
-      width: 100%;
-      left: 0;
       right: auto;
+      left: 0;
+      width: 100%;
     }
   }
 
   @keyframes progress-stop {
     0% {
-      width: 0%;
-      left: 0;
       right: auto;
+      left: 0;
+      width: 0%;
     }
     92% {
-      width: 100%;
-      left: 0;
       right: auto;
+      left: 0;
+      width: 100%;
     }
     100% {
-      width: 100%;
-      left: 0;
       right: auto;
+      left: 0;
+      width: 100%;
     }
   }
 
@@ -111,33 +111,33 @@ $loading-bar__small-height: 4px;
       opacity: 1;
     }
     100% {
-      opacity: 0;
       display: none;
+      opacity: 0;
     }
   }
 
-  .#{$block-class} {
+  .#{$block-class} .#{$block-class}__inner {
     position: relative;
-    border: none;
+    width: 100%;
+    height: $loading-bar__height;
     padding: 0;
+    background-color: $hover-ui;
+    border: none;
     -webkit-box-shadow: none;
     box-shadow: none;
     pointer-events: none;
-    background-color: $hover-ui;
-    width: 100%;
-    height: $loading-bar__height;
   }
 
-  .#{$block-class}:hover,
-  .#{$block-class}:focus,
-  .#{$block-class}:active {
+  .#{$block-class} .#{$block-class}__inner:hover,
+  .#{$block-class} .#{$block-class}__inner:focus,
+  .#{$block-class} .#{$block-class}__inner:active {
     border: none;
     outline: none;
     cursor: default;
   }
 
   .#{$block-class}__preload {
-    opacity: 0 !important;
+    opacity: 0;
   }
 
   .#{$block-class}__progress {
@@ -153,9 +153,10 @@ $loading-bar__small-height: 4px;
 
   .#{$block-class}__indicator {
     @include carbon--type-style('body-short-01');
+
+    padding-top: $spacing-05;
+    padding-bottom: $spacing-03;
     color: $text-01;
-    padding-top: 16px;
-    padding-bottom: 8px;
   }
 
   .#{$block-class}__small {
@@ -171,44 +172,44 @@ $loading-bar__small-height: 4px;
   }
 
   .#{$block-class}__indefinite-stop {
-    -webkit-animation: 1800ms ease-in-out loadingbar-stop forwards;
+    // stylelint-disable-next-line carbon/motion-token-use
     animation: 1800ms ease-in-out loadingbar-stop forwards;
   }
 
   .#{$block-class}__stop-progress:before {
-    content: '';
-    width: 0%;
-    height: 100%;
     position: absolute;
     top: 0;
     left: 0;
+    width: 0%;
+    height: 100%;
     background-color: $interactive-01;
-    -webkit-animation: 1800ms ease-in-out progress-stop forwards;
+    // stylelint-disable-next-line carbon/motion-token-use
     animation: 1800ms ease-in-out progress-stop forwards;
+    content: '';
   }
 
   .#{$block-class}__indefinite-progress:before {
-    content: '';
-    width: 0%;
-    height: 100%;
     position: absolute;
     top: 0;
     left: 0;
+    width: 0%;
+    height: 100%;
     background-color: $interactive-01;
-    -webkit-animation: 3000ms ease-in-out progress-indeterminate infinite;
+    // stylelint-disable-next-line carbon/motion-token-use
     animation: 3000ms ease-in-out progress-indeterminate infinite;
+    content: '';
   }
 
   .#{$block-class}__linear-progress:before {
-    content: '';
-    width: 0%;
-    height: 100%;
     position: absolute;
     top: 0;
     left: 0;
+    width: 0%;
+    height: 100%;
     background-color: $interactive-01;
-    -webkit-animation: 1000ms ease-in-out progress-linear forwards;
+    // stylelint-disable-next-line carbon/motion-token-use
     animation: 1000ms ease-in-out progress-linear forwards;
+    content: '';
   }
 }
 

@@ -45,13 +45,13 @@ const defaults = {
     ExampleComponent: false,
     ExpressiveCard: false,
     ImportModal: false,
+    LoadingBar: false,
     ModifiedTabs: false,
     PageHeader: false,
     ProductiveCard: false,
     SidePanel: false,
     TagSet: false,
     WebTerminal: false,
-    LoadingBar: false,
     /* new component flags here - comment used by generate CLI */
   },
 

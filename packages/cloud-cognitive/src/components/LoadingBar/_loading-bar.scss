@@ -121,8 +121,8 @@ $loading-bar__small-height: 4px;
     width: 100%;
     height: $loading-bar__height;
     padding: 0;
-    background-color: $hover-ui;
     border: none;
+    background-color: $hover-ui;
     -webkit-box-shadow: none;
     box-shadow: none;
     pointer-events: none;
@@ -132,8 +132,8 @@ $loading-bar__small-height: 4px;
   .#{$block-class} .#{$block-class}__inner:focus,
   .#{$block-class} .#{$block-class}__inner:active {
     border: none;
-    outline: none;
     cursor: default;
+    outline: none;
   }
 
   .#{$block-class}__preload {
@@ -182,9 +182,9 @@ $loading-bar__small-height: 4px;
     left: 0;
     width: 0%;
     height: 100%;
-    background-color: $interactive-01;
     // stylelint-disable-next-line carbon/motion-token-use
     animation: 1800ms ease-in-out progress-stop forwards;
+    background-color: $interactive-01;
     content: '';
   }
 
@@ -194,9 +194,9 @@ $loading-bar__small-height: 4px;
     left: 0;
     width: 0%;
     height: 100%;
-    background-color: $interactive-01;
     // stylelint-disable-next-line carbon/motion-token-use
     animation: 3000ms ease-in-out progress-indeterminate infinite;
+    background-color: $interactive-01;
     content: '';
   }
 
@@ -206,9 +206,9 @@ $loading-bar__small-height: 4px;
     left: 0;
     width: 0%;
     height: 100%;
-    background-color: $interactive-01;
     // stylelint-disable-next-line carbon/motion-token-use
     animation: 1000ms ease-in-out progress-linear forwards;
+    background-color: $interactive-01;
     content: '';
   }
 }

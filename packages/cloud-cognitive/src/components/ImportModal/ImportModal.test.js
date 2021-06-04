@@ -1,11 +1,12 @@
-/**
- * Copyright IBM Corp. 2020, 2020
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
 
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, render, waitFor, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 import { carbon } from '../../settings';
@@ -19,43 +20,79 @@ global.fetch = jest.fn(() =>
   })
 );
 
-const { name } = ImportModal;
+const componentName = ImportModal.displayName;
 const defaultProps = {
-  defaultErrorBody: 'Select a new file and try again.',
-  defaultErrorHeader: 'Import failed',
-  fetchErrorBody: 'Unable to fetch URL.',
-  fetchErrorHeader: 'Import failed',
-  fileDropHeader: 'Add files using drag and drop',
-  fileDropLabel: 'Drag and drop files here or click to upload',
-  fileUploadLabel: 'files uploaded',
-  inputButtonText: 'Add file',
-  inputHeader: 'Add a file by specifying a URL',
-  inputId: 'test-id',
-  inputPlaceholder: 'URL',
-  invalidFileTypeErrorBody: 'Invalid file type.',
-  invalidFileTypeErrorHeader: 'Import failed',
+  body: 'test content',
+  className: 'test-class',
+  defaultErrorBody: 'default error body',
+  defaultErrorHeader: 'default error header',
+  fetchErrorBody: 'fetch failed body',
+  fetchErrorHeader: 'fetch failed header',
+  fileDropHeader: 'file drop header',
+  fileDropLabel: 'file drop label',
+  fileUploadLabel: 'file upload label',
+  inputButtonText: 'input button text',
+  inputId: 'test-input-id',
+  inputLabel: 'input label',
+  inputPlaceholder: 'input placeholder',
+  invalidFileTypeErrorBody: 'invalid file error body',
+  invalidFileTypeErrorHeader: 'invalid file error header',
+  invalidIconDescription: 'invalid icon',
   maxFileSize: 500000,
-  maxFileSizeErrorBody: '500kb max file size. Select a new file and try again.',
-  maxFileSizeErrorHeader: 'Import failed',
-  modalBody:
-    'You can specify a file to import by either dragging it into the drag and drop area or by specifying a URL. (Maximum file size of 500KB; .jpg and .png file extensions only.)',
-  modalHeading: 'Import',
-  multiple: false,
-  onRequestClose: () => console.log('closed'),
-  onRequestSubmit: (file) => console.log('file contents', file),
+  maxFileSizeErrorBody: 'max file size error body',
+  maxFileSizeErrorHeader: 'max file size error header',
+  onClose: () => {},
+  onRequestSubmit: () => {},
   open: true,
-  primaryButtonText: 'Import file',
-  secondaryButtonText: 'Cancel',
+  primaryButtonText: 'primary button',
+  secondaryButtonText: 'secondary button',
+  title: 'test title',
   validFileTypes: ['image/jpeg', 'image/png'],
 };
 
-describe(name, () => {
+describe(componentName, () => {
   beforeEach(() => {
     fetch.mockClear();
   });
 
+  it('renders body', () => {
+    render(<ImportModal {...defaultProps} />);
+    screen.getByText(defaultProps.body);
+  });
+
+  it('renders title', () => {
+    render(<ImportModal {...defaultProps} />);
+    screen.getByText(defaultProps.title);
+  });
+
+  it('renders fileDropHeader', () => {
+    render(<ImportModal {...defaultProps} />);
+    screen.getByText(defaultProps.fileDropHeader);
+  });
+
+  it('renders fileDropLabel', () => {
+    render(<ImportModal {...defaultProps} />);
+    screen.getByText(defaultProps.fileDropLabel);
+  });
+
+  it('renders inputButtonText', () => {
+    render(<ImportModal {...defaultProps} />);
+    screen.getByText(defaultProps.inputButtonText);
+  });
+
+  it('renders inputLabel', () => {
+    render(<ImportModal {...defaultProps} />);
+    screen.getByText(defaultProps.inputLabel);
+  });
+
+  it('renders the input with an id', () => {
+    const { container } = render(<ImportModal {...defaultProps} />);
+    container.querySelector(defaultProps.inputId);
+  });
+
   it('renders with successful fetch file upload and submit', async () => {
-    const { click, change } = fireEvent;
+    const { change } = fireEvent;
+    const { click } = userEvent;
     const { fn } = jest;
     const onRequestSubmit = fn();
     const props = {
@@ -84,11 +121,15 @@ describe(name, () => {
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     click(getByText(props.primaryButtonText));
     expect(onRequestSubmit).toBeCalled();
+    expect(
+      screen.getByText(`1 / 1 ${defaultProps.fileUploadLabel}`)
+    ).toBeVisible();
   });
 
   it('should display the network error message when the fetch is rejected', async () => {
     fetch.mockImplementationOnce(() => Promise.reject('fetch failed'));
-    const { click, change } = fireEvent;
+    const { change } = fireEvent;
+    const { click } = userEvent;
     const { getByText, container } = render(<ImportModal {...defaultProps} />);
 
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
@@ -98,11 +139,15 @@ describe(name, () => {
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(defaultProps.fetchErrorBody)).toBeVisible();
     expect(getByText(defaultProps.fetchErrorHeader)).toBeVisible();
+    expect(
+      screen.getByText(`0 / 1 ${defaultProps.fileUploadLabel}`)
+    ).toBeVisible();
   });
 
-  it('should display the default error message when one isnt specified', async () => {
+  it('should display the default error message when the fetch is rejected', async () => {
     fetch.mockImplementationOnce(() => Promise.reject('fetch failed'));
-    const { click, change } = fireEvent;
+    const { change } = fireEvent;
+    const { click } = userEvent;
     const props = {
       ...defaultProps,
       fetchErrorBody: '',
@@ -117,15 +162,19 @@ describe(name, () => {
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(props.defaultErrorBody)).toBeVisible();
     expect(getByText(props.defaultErrorHeader)).toBeVisible();
+    expect(
+      screen.getByText(`0 / 1 ${defaultProps.fileUploadLabel}`)
+    ).toBeVisible();
   });
 
-  it('should display the network error message when the fetch isnt a 200 response', async () => {
+  it('should display the fetch error message when the fetch isnt a 200 response', async () => {
     fetch.mockImplementationOnce(() =>
       Promise.resolve({
         ok: false,
       })
     );
-    const { click, change } = fireEvent;
+    const { change } = fireEvent;
+    const { click } = userEvent;
     const { getByText, container } = render(<ImportModal {...defaultProps} />);
 
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
@@ -135,6 +184,9 @@ describe(name, () => {
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(defaultProps.fetchErrorBody)).toBeVisible();
     expect(getByText(defaultProps.fetchErrorHeader)).toBeVisible();
+    expect(
+      screen.getByText(`0 / 1 ${defaultProps.fileUploadLabel}`)
+    ).toBeVisible();
   });
 
   it('should display the invalid file type error message when an incorrect file type is uploaded', async () => {
@@ -145,7 +197,8 @@ describe(name, () => {
         blob: () => Promise.resolve({ type: 'pdf' }),
       })
     );
-    const { click, change } = fireEvent;
+    const { change } = fireEvent;
+    const { click } = userEvent;
     const { getByText, container } = render(<ImportModal {...defaultProps} />);
 
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
@@ -155,9 +208,12 @@ describe(name, () => {
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(defaultProps.invalidFileTypeErrorBody)).toBeVisible();
     expect(getByText(defaultProps.invalidFileTypeErrorHeader)).toBeVisible();
+    expect(
+      screen.getByText(`0 / 1 ${defaultProps.fileUploadLabel}`)
+    ).toBeVisible();
   });
 
-  it('should display the invalid file type error message when an incorrect file type is uploaded', async () => {
+  it('should display the default error message when an incorrect file type is uploaded', async () => {
     fetch.mockImplementationOnce(() =>
       Promise.resolve({
         ok: true,
@@ -165,7 +221,8 @@ describe(name, () => {
         blob: () => Promise.resolve({ type: 'pdf' }),
       })
     );
-    const { click, change } = fireEvent;
+    const { change } = fireEvent;
+    const { click } = userEvent;
     const props = {
       ...defaultProps,
       invalidFileTypeErrorBody: '',
@@ -180,10 +237,14 @@ describe(name, () => {
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(props.defaultErrorBody)).toBeVisible();
     expect(getByText(props.defaultErrorHeader)).toBeVisible();
+    expect(
+      screen.getByText(`0 / 1 ${defaultProps.fileUploadLabel}`)
+    ).toBeVisible();
   });
 
   it('should successfully use the drag and drop component to upload a file and then remove the file', () => {
-    const { change, click } = fireEvent;
+    const { change } = fireEvent;
+    const { click } = userEvent;
     const { getByText, container } = render(<ImportModal {...defaultProps} />);
     const files = [new File(['foo'], 'foo.jpeg', { type: 'image/jpeg' })];
 
@@ -191,10 +252,78 @@ describe(name, () => {
       target: { files },
     });
     expect(getByText('foo.jpeg')).toBeVisible();
-
+    expect(
+      screen.getByText(`1 / 1 ${defaultProps.fileUploadLabel}`)
+    ).toBeVisible();
     click(container.querySelector(`.${carbon.prefix}--file-close`));
     expect(
       container.querySelector(`.${carbon.prefix}--file-filename`)
     ).toBeNull();
+  });
+
+  it('should display max size error for file that is too big', async () => {
+    const { change } = fireEvent;
+    const { click } = userEvent;
+    const props = {
+      ...defaultProps,
+      maxFileSize: 1,
+    };
+    const { getByText, container } = render(<ImportModal {...props} />);
+
+    change(container.querySelector(`.${carbon.prefix}--text-input`), {
+      target: { value: 'test.pdf' },
+    });
+    click(getByText(defaultProps.inputButtonText));
+    await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+    expect(getByText(defaultProps.maxFileSizeErrorBody)).toBeVisible();
+    expect(getByText(defaultProps.maxFileSizeErrorHeader)).toBeVisible();
+    expect(
+      screen.getByText(`0 / 1 ${defaultProps.fileUploadLabel}`)
+    ).toBeVisible();
+  });
+
+  it('should display the default max size error for file that is too big', async () => {
+    const { change } = fireEvent;
+    const { click } = userEvent;
+    const props = {
+      ...defaultProps,
+      maxFileSizeErrorBody: '',
+      maxFileSizeErrorHeader: '',
+      maxFileSize: 1,
+    };
+    const { getByText, container } = render(<ImportModal {...props} />);
+
+    change(container.querySelector(`.${carbon.prefix}--text-input`), {
+      target: { value: 'test.pdf' },
+    });
+    click(getByText(defaultProps.inputButtonText));
+    await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+    expect(getByText(props.defaultErrorBody)).toBeVisible();
+    expect(getByText(props.defaultErrorHeader)).toBeVisible();
+    expect(
+      screen.getByText(`0 / 1 ${defaultProps.fileUploadLabel}`)
+    ).toBeVisible();
+  });
+
+  it('has no accessibility violations', async () => {
+    const { container } = render(<ImportModal {...defaultProps} />);
+    await expect(container).toBeAccessible(componentName);
+    await expect(container).toHaveNoAxeViolations();
+  });
+
+  it('applies className to the containing node', () => {
+    const { container } = render(<ImportModal {...defaultProps} />);
+    expect(container.firstChild).toHaveClass(defaultProps.className);
+  });
+
+  it('adds additional properties to the containing node', () => {
+    render(<ImportModal {...defaultProps} data-testid="test-id" />);
+    screen.getByTestId('test-id');
+  });
+
+  it('forwards a ref to an appropriate node', () => {
+    const ref = React.createRef();
+    render(<ImportModal {...defaultProps} ref={ref} />);
+    expect(ref.current).not.toBeNull();
   });
 });

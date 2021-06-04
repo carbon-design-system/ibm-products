@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.41.1...@carbon/ibm-cloud-cognitive@0.41.2) (2021-06-04)
+
+
+### Bug Fixes
+
+* **ActionSet:** ensure action set buttons have max width none ([#859](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/859)) ([5aba160](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/5aba1609193c241d86d2a2cda99ae6dfc6f43717))
+
+
+
+
+
 ## [0.41.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.41.0...@carbon/ibm-cloud-cognitive@0.41.1) (2021-06-03)
 
 

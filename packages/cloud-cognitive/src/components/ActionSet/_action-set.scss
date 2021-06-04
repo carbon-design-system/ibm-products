@@ -29,11 +29,15 @@
     @include carbon--type-style('body-short-01');
 
     align-items: center;
-    max-width: none;
     height: $spacing-10;
     margin: 0;
     padding-top: $spacing-05;
     padding-bottom: $spacing-07;
+  }
+
+  .#{$block-class}.#{$carbon-prefix}--btn-set
+    .#{$block-class}__action-button.#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--expressive {
+    max-width: none;
   }
 
   // For row-single in medium,

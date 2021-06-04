@@ -87,7 +87,6 @@ const DefaultTemplate = ({ ...args }) => {
       </Grid>
       <CreateSidePanel
         {...args}
-        slideIn={true}
         open={open}
         onRequestClose={() => setOpen(false)}
         selectorPrimaryFocus=".bx--text-input">
@@ -174,10 +173,9 @@ const TemplateWithFormValidation = ({ ...args }) => {
       </Grid>
       <CreateSidePanel
         {...args}
-        slideIn={true}
         open={open}
         onRequestClose={() => setOpen(false)}
-        disableSubmit={textInput.length === 0 ? true : false}>
+        disableSubmit={!textInput.length}>
         <TextInput
           labelText="Topic name"
           className={`${prefix}form-item`}
@@ -264,10 +262,9 @@ const TemplateWithMultipleForms = ({ ...args }) => {
       </Grid>
       <CreateSidePanel
         {...args}
-        slideIn={true}
         open={open}
         onRequestClose={() => setOpen(false)}
-        disableSubmit={textInput.length === 0 ? true : false}>
+        disableSubmit={!textInput.length}>
         <FormGroup
           className={`${blockClass}__form ${prefix}example-form-group`}
           legendText="Personal information">

@@ -99,19 +99,13 @@ export let CreateSidePanel = React.forwardRef(
   }
 );
 
-// Return a placeholder if not released and not enabled by feature flag.
 CreateSidePanel = pkg.checkComponentEnabled(CreateSidePanel, componentName);
 
-// The display name of the component, used by React. Note that displayName
-// is used in preference to relying on function.name.
 CreateSidePanel.displayName = componentName;
 
-// The types and DocGen commentary for the component props,
-// in alphabetical order (for consistency).
-// See https://www.npmjs.com/package/prop-types#usage.
 CreateSidePanel.propTypes = {
   /**
-   * Sets the body content of the side panel
+   * Sets the body content of the create side panel
    */
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
@@ -121,7 +115,6 @@ CreateSidePanel.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
-
   /**
    * The description of the CreateSidePanel serves to provide more information about the form within the panel.
    */
@@ -136,7 +129,7 @@ CreateSidePanel.propTypes = {
    */
   formDescription: PropTypes.node,
   /**
-   * Specifies a required that provides a title for a form
+   * Specifies a required field that provides a title for a form
    */
   formTitle: PropTypes.node.isRequired,
 

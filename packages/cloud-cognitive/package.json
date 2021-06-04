@@ -53,6 +53,7 @@
     "cross-env": "^7.0.3",
     "dart-sass": "^1.25.0",
     "fs-extra": "^10.0.0",
+    "npm-check-updates": "^11.6.0",
     "rimraf": "^3.0.2",
     "sass": "^1.32.8",
     "yargs": "^17.0.1"

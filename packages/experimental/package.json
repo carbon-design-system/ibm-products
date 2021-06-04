@@ -57,6 +57,7 @@
     "react-resize-detector": "^6.7.2"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "npm-check-updates": "^11.6.0"
   }
 }

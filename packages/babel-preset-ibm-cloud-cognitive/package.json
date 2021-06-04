@@ -20,6 +20,9 @@
     "//upgrade-dependencies": "# don't upgrade carbon (done globally)",
     "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon)/'"
   },
+  "devDependencies": {
+    "npm-check-updates": "^11.6.0"
+  },
   "dependencies": {
     "@babel/core": "^7.14.3",
     "@babel/plugin-proposal-class-properties": "^7.13.0",

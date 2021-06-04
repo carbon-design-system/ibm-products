@@ -48,6 +48,7 @@
     "css-loader": "^5.2.6",
     "fast-sass-loader": "^1.5.0",
     "node-sass": "^6.0.0",
+    "npm-check-updates": "^11.6.0",
     "style-loader": "^2.0.0",
     "webpack-merge": "^5.7.3"
   }

@@ -7,6 +7,7 @@
 
 import React, { useState } from 'react';
 import { Button } from 'carbon-components-react';
+import { action } from '@storybook/addon-actions';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
@@ -45,7 +46,7 @@ const defaultProps = {
   maxFileSize: 500000,
   maxFileSizeErrorBody: '500kb max file size. Select a new file and try again.',
   maxFileSizeErrorHeader: 'Import failed',
-  onClose: () => {},
+  onClose: action('onClose event'),
   onRequestSubmit: (file) => console.log('file contents', file),
   open: true,
   primaryButtonText: 'Import',

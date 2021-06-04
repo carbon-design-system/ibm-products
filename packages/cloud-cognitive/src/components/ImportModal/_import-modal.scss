@@ -15,16 +15,16 @@
 @mixin import-modal {
   $block-class: #{$pkg-prefix}--import-modal;
 
-  .#{$block-class} .bx--modal-footer .bx--btn {
+  .#{$block-class} .#{$carbon-prefix}--modal-footer .#{$carbon-prefix}--btn {
     max-width: none;
   }
 
-  .#{$block-class} .bx--modal-content {
+  .#{$block-class} .#{$carbon-prefix}--modal-content {
     padding-right: $spacing-05;
   }
 
-  .bx--file .bx--file-container,
-  .bx--file ~ .bx--file-container {
+  .#{$carbon-prefix}--file .#{$carbon-prefix}--file-container,
+  .#{$carbon-prefix}--file ~ .#{$carbon-prefix}--file-container {
     margin-top: 0;
   }
 
@@ -53,11 +53,11 @@
     padding-right: calc(20% - #{$spacing-05});
   }
 
-  .#{$block-class} .bx--file__selected-file {
+  .#{$block-class} .#{$carbon-prefix}--file__selected-file {
     max-width: none;
   }
 
-  .#{$block-class} .bx--file {
+  .#{$block-class} .#{$carbon-prefix}--file {
     margin-bottom: $spacing-05;
   }
 }

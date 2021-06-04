@@ -12,11 +12,11 @@
 .graph {
   width: 200px;
   height: 100px;
-  margin: 0 auto $spacing-06 auto;
   border: 10px solid $ui-03;
   border-right-color: $support-02;
   border-bottom: 0;
   border-left-color: $support-01;
+  margin: 0 auto $spacing-06 auto;
   border-top-left-radius: 110px;
   border-top-right-radius: 110px;
 }

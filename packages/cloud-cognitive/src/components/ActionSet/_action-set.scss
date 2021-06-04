@@ -28,11 +28,11 @@
   .#{$block-class} .#{$block-class}__action-button {
     @include carbon--type-style('body-short-01');
 
-    align-items: center;
     height: $spacing-10;
-    margin: 0;
+    align-items: center;
     padding-top: $spacing-05;
     padding-bottom: $spacing-07;
+    margin: 0;
   }
 
   .#{$block-class}.#{$carbon-prefix}--btn-set

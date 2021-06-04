@@ -13,8 +13,8 @@
   width: 100%;
   height: $spacing-07;
   padding: 0 $spacing-05;
-  background: $ui-background;
   border-bottom: carbon--mini-units(0.125) solid $ui-03;
+  background: $ui-background;
 }
 
 .#{$ide-prefix}-context-header--task,

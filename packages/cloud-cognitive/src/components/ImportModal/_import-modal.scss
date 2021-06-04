@@ -49,8 +49,8 @@
   }
 
   .#{$block-class}__body {
-    margin-bottom: $spacing-06;
     padding-right: calc(20% - #{$spacing-05});
+    margin-bottom: $spacing-06;
   }
 
   .#{$block-class} .#{$carbon-prefix}--file__selected-file {

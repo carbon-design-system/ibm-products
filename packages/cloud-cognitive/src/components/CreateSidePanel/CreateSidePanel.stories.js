@@ -269,7 +269,7 @@ const TemplateWithMultipleForms = ({ ...args }) => {
         onRequestClose={() => setOpen(false)}
         disableSubmit={textInput.length === 0 ? true : false}>
         <FormGroup
-          className={`${blockClass}__form`}
+          className={`${blockClass}__form ${prefix}example-form-group`}
           legendText="Personal information">
           <TextInput
             labelText="First name"
@@ -295,7 +295,7 @@ const TemplateWithMultipleForms = ({ ...args }) => {
           />
         </FormGroup>
         <FormGroup
-          className={`${blockClass}__form`}
+          className={`${blockClass}__form ${prefix}example-form-group`}
           legendText="Topic information">
           <TextInput
             labelText="Topic name"

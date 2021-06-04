@@ -15,8 +15,8 @@
   position: absolute;
   top: -100vh; // off screen
   left: -100vw; // off screen
-  max-width: 0; // do not take up space.
   overflow: hidden;
-  visibility: hidden;
+  max-width: 0; // do not take up space.
   pointer-events: none;
+  visibility: hidden;
 }

@@ -125,9 +125,9 @@
   }
 
   .#{$block-class}.#{$block-class}--wide .#{$block-class}__header {
-    margin: 0;
     padding: $spacing-06 $spacing-07;
     border-bottom: 1px solid $ui-03;
+    margin: 0;
   }
 
   .#{$block-class}.#{$block-class}--wide .#{$block-class}__header--with-nav {
@@ -135,14 +135,14 @@
   }
 
   .#{$block-class}.#{$block-class}--narrow .#{$block-class}__header {
-    margin: 0;
     padding: $spacing-05;
+    margin: 0;
   }
 
   .#{$block-class}.#{$block-class}--wide
     .#{$block-class}__header--with-close-icon {
-    margin-right: $spacing-09;
     padding-right: $spacing-05;
+    margin-right: $spacing-09;
   }
 
   .#{$block-class} .#{$block-class}__header-content {
@@ -187,8 +187,8 @@
   .#{$block-class} .#{$block-class}__body {
     display: flex;
     flex-grow: 1;
-    margin: 0;
     padding: 0;
+    margin: 0;
   }
 
   .#{$block-class}__resize-detector {
@@ -218,8 +218,8 @@
   }
 
   .#{$block-class} .#{$block-class}__main {
-    flex-grow: 1;
     overflow: auto;
+    flex-grow: 1;
   }
 
   .#{$block-class}.#{$block-class}--wide .#{$block-class}__main {

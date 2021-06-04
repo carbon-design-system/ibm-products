@@ -49,8 +49,8 @@
 
     .#{$block-class}__overflow-menu-item-content {
       display: flex;
-      justify-content: space-between;
       width: 100%;
+      justify-content: space-between;
     }
 
     .#{$block-class}__overflow-menu-item svg {

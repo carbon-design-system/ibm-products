@@ -33,9 +33,9 @@
   }
 
   .#{$block-class} .#{$block-class}__header {
-    grid-row: auto;
-    margin-bottom: 0;
     padding: 0 20% $spacing-03 $spacing-05;
+    margin-bottom: 0;
+    grid-row: auto;
   }
 
   .#{$block-class} .#{$block-class}__title {
@@ -47,10 +47,10 @@
   .#{$block-class} .#{$block-class}__body {
     @include carbon--type-style('body-short-02');
 
-    grid-row: auto;
     min-height: $layout-05;
-    margin-bottom: 0;
     padding: 0 20% 0 $spacing-05;
+    margin-bottom: 0;
+    grid-row: auto;
     overflow-x: hidden;
     overflow-y: auto;
   }
@@ -73,9 +73,9 @@
   }
 
   .#{$block-class} .#{$block-class}__links-container a + a {
-    margin-left: $spacing-03;
     padding-left: $spacing-03;
     border-left: 1px solid $text-01;
+    margin-left: $spacing-03;
   }
 
   .#{$block-class} .#{$block-class}__legal-text,
@@ -90,11 +90,11 @@
 
   .#{$block-class} .#{$block-class}__footer {
     position: relative;
+    height: rem(72px);
     flex-direction: column;
     justify-content: center;
-    height: rem(72px);
-    color: $inverse-01;
     background-color: $inverse-02;
+    color: $inverse-01;
   }
 
   .#{$block-class} .#{$block-class}__footer::before {

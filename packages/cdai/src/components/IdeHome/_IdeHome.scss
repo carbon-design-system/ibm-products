@@ -21,16 +21,16 @@ $ide-home-card-height: 16rem;
 
 .#{$ide-prefix}-home-header {
   height: $ide-home-header-height;
-  margin: $spacing-03 0 $spacing-05 0;
   padding: 0 $spacing-06;
+  margin: $spacing-03 0 $spacing-05 0;
   transition-duration: $duration--slow-02;
   transition-property: height;
   @include carbon--motion(standard, expressive);
 
   .#{$ide-prefix}-home-heading-container {
     display: flex;
-    flex-flow: row nowrap;
     height: 100%; /* use all height in the container */
+    flex-flow: row nowrap;
   }
 
   &.collapsed {
@@ -80,12 +80,12 @@ $ide-home-card-height: 16rem;
 }
 
 .#{$ide-prefix}-home-grid-gutter {
-  flex: 1 0 50%;
   max-width: 50%;
+  flex: 1 0 50%;
   margin-bottom: $spacing-01;
   @media (min-width: 42rem) {
-    flex: 1 0 25%;
     max-width: 25%;
+    flex: 1 0 25%;
   }
 }
 
@@ -109,9 +109,9 @@ $ide-home-card-height: 16rem;
 
 .#{$ide-prefix}-home-tile {
   display: flex;
+  height: 100%; /* use all height in the container */
   flex-flow: column nowrap;
   justify-content: space-between;
-  height: 100%; /* use all height in the container */
 }
 
 .#{$ide-prefix}-home-tile-img {

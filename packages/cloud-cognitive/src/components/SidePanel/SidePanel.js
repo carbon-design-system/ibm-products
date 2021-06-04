@@ -16,6 +16,7 @@ import wrapFocus from '../../global/js/utils/wrapFocus';
 import { pkg } from '../../settings';
 import { allPropTypes } from '../../global/js/utils/props-helper';
 import { SIDE_PANEL_SIZES } from './constants';
+import { deprecateProp } from '../../global/js/utils/props-helper';
 
 // Carbon and package components we use.
 import { Button } from 'carbon-components-react';
@@ -50,6 +51,7 @@ export let SidePanel = React.forwardRef(
       open,
       pageContentSelector,
       placement,
+      selectorPageContent,
       selectorPrimaryFocus,
       size,
       slideIn,
@@ -68,6 +70,12 @@ export let SidePanel = React.forwardRef(
     const endTrapRef = useRef();
     const sidePanelInnerRef = useRef();
     const sidePanelCloseRef = useRef();
+
+    // scroll panel to top going between steps
+    useEffect(() => {
+      const panelRef = ref || sidePanelRef;
+      if (panelRef && panelRef.current) panelRef.current.scrollTop = 0;
+    }, [currentStep, ref]);
 
     // set initial focus when side panel opens
     useEffect(() => {
@@ -309,19 +317,23 @@ export let SidePanel = React.forwardRef(
     // used to reset margins of the slide in panel when closed/closing
     useEffect(() => {
       if (!open && slideIn) {
-        const pageContentElement = document.querySelector(pageContentSelector);
+        const pageContentElement = document.querySelector(
+          selectorPageContent || pageContentSelector
+        );
         if (placement && placement === 'right') {
           pageContentElement.style.marginRight = 0;
         } else {
           pageContentElement.style.marginLeft = 0;
         }
       }
-    }, [open, placement, pageContentSelector, slideIn]);
+    }, [open, placement, selectorPageContent, pageContentSelector, slideIn]);
 
     // used to set margins of content for slide in panel version
     useEffect(() => {
       if (shouldRender && slideIn) {
-        const pageContentElement = document.querySelector(pageContentSelector);
+        const pageContentElement = document.querySelector(
+          selectorPageContent || pageContentSelector
+        );
         if (placement && placement === 'right') {
           pageContentElement.style.marginRight = 0;
           pageContentElement.style.transition = 'margin-right 250ms';
@@ -332,7 +344,14 @@ export let SidePanel = React.forwardRef(
           pageContentElement.style.marginLeft = SIDE_PANEL_SIZES[size];
         }
       }
-    }, [slideIn, pageContentSelector, placement, shouldRender, size]);
+    }, [
+      slideIn,
+      selectorPageContent,
+      pageContentSelector,
+      placement,
+      shouldRender,
+      size,
+    ]);
 
     const setSizeClassName = (panelSize) => {
       let sizeClassName = `${blockClass}__container`;
@@ -428,16 +447,18 @@ export let SidePanel = React.forwardRef(
               <div
                 ref={sidePanelInnerRef}
                 className={`${blockClass}__inner-content`}>
-                <div className={`${blockClass}__title-container`}>
+                <div
+                  className={cx(`${blockClass}__title-container`, {
+                    [`${blockClass}__on-detail-step`]: currentStep > 0,
+                  })}>
                   {currentStep > 0 && (
                     <Button
+                      aria-label={navigationBackIconDescription}
                       kind="ghost"
                       size="small"
                       disabled={false}
                       renderIcon={ArrowLeft20}
                       iconDescription={navigationBackIconDescription}
-                      tooltipPosition="right"
-                      tooltipAlignment="center"
                       className={`${blockClass}__navigation-back-button`}
                       onClick={onNavigationBack}
                     />
@@ -454,22 +475,19 @@ export let SidePanel = React.forwardRef(
                     </h2>
                   )}
                   {title && title.length && (
-                    <h5
+                    <h2
                       className={`${blockClass}__collapsed-title-text`}
                       title={title}
                       aria-hidden={true}>
                       {title}
-                    </h5>
+                    </h2>
                   )}
                   <Button
-                    hasIconOnly
+                    aria-label={closeIconDescription}
                     kind="ghost"
                     size="small"
-                    disabled={false}
                     renderIcon={Close20}
                     iconDescription={closeIconDescription}
-                    tooltipPosition="bottom"
-                    tooltipAlignment="center"
                     className={`${blockClass}__close-button`}
                     onClick={onRequestClose}
                     ref={sidePanelCloseRef}
@@ -555,6 +573,16 @@ export let SidePanel = React.forwardRef(
 
 // Return a placeholder if not released and not enabled by feature flag
 SidePanel = pkg.checkComponentEnabled(SidePanel, componentName);
+
+SidePanel.validatePageContentSelector =
+  () =>
+  ({ slideIn, selectorPageContent }) => {
+    if (slideIn && !selectorPageContent) {
+      throw new Error(
+        `${componentName}: selectorPageContent prop missing, this is required when using a slideIn panel.`
+      );
+    }
+  };
 
 SidePanel.propTypes = {
   /**
@@ -671,12 +699,21 @@ SidePanel.propTypes = {
    * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
    * This prop is required when using the `slideIn` variant of the side panel.
    */
-  pageContentSelector: PropTypes.string,
+  pageContentSelector: deprecateProp(
+    allPropTypes([SidePanel.validatePageContentSelector(), PropTypes.string]),
+    'This prop has been renamed to `selectorPageContent`.'
+  ),
 
   /**
    * Determines if the side panel is on the right or left
    */
   placement: PropTypes.oneOf(['left', 'right']),
+
+  /**
+   * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
+   * This prop is required when using the `slideIn` variant of the side panel.
+   */
+  selectorPageContent: PropTypes.string,
 
   /**
    * Specify a CSS selector that matches the DOM element that should

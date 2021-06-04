@@ -178,6 +178,7 @@ IdeSlideOverPanel.defaultProps = {
   closeButtonIconDescription: 'Close',
   focusTrapOptions: {
     initialFocus: '.ide-slide-over-panel--close',
+    fallbackFocus: '.ide-slide-over-panel--close',
   },
 };
 

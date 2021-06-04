@@ -20,8 +20,8 @@
   .#{$block-class} {
     .#{$block-class}__header,
     .#{$block-class}__subtitle {
-      margin: 0;
       padding-bottom: $spacing-02;
+      margin: 0;
     }
     .#{$block-class}__header--small {
       @include carbon--type-style('productive-heading-03');

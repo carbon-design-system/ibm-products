@@ -43,6 +43,7 @@ const ActionSetButton = React.forwardRef(
         // Pass through any other property values as HTML attributes.
         ...rest
       }
+      isExpressive
       className={cx(className, [
         `${blockClass}__action-button`,
         { [`${blockClass}__action-button--ghost`]: kind === 'ghost' },

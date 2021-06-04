@@ -15,9 +15,10 @@
     "build": "run-s 'run-all --prefix --loglevel success --npm-client yarn --include-dependencies --ignore \"@carbon/ibm-cloud-cognitive-core\" build' storybook:build:storybook",
     "ccs-coverage": "yarn test packages/cloud-cognitive/src/components --coverage --collectCoverageFrom=packages/cloud-cognitive/src/components/**/*.js --collectCoverageFrom=!packages/cloud-cognitive/src/components/**/*.stories.js",
     "ci-check": "yarn format:prettier --list-different && run-p lint 'run-all ci-check' 'test --ci'",
-    "clean": "run-p 'run-all clean' clean:*",
+    "clean": "run-s 'run-all clean' clean:*",
     "clean:cache": "yarn cache clean",
     "clean:lerna": "lerna clean --yes",
+    "clean:files": "rimraf coverage node_modules results",
     "copy-common-files": "sh ./scripts/copy-common-files.sh",
     "format": "yarn format:prettier --write",
     "format:prettier": "prettier '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd,coverage}/**' '!README.md'",
@@ -57,7 +58,8 @@
     "stylelint": "^13.13.1",
     "stylelint-config-carbon": "^1.5.0",
     "stylelint-plugin-carbon-tokens": "^0.9.0",
-    "npm-run-all": "^4.1.5"
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2"
   },
   "eslintConfig": {
     "parser": "babel-eslint",

@@ -15,40 +15,40 @@
 
 .#{$ide-prefix}-slide-over-overlay {
   position: fixed;
+  z-index: z('hidden');
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: z('hidden');
-  visibility: hidden;
   transition: background-color $duration--slow-02 motion(exit, expressive),
     opacity $duration--moderate-02 motion(exit, expressive),
     z-index $duration--slow-02 motion(exit, expressive),
     visibility $duration--moderate-02 motion(exit, expressive);
+  visibility: hidden;
 }
 
 .#{$ide-prefix}-slide-over-overlay--open {
   z-index: z('modal');
   background-color: $overlay-01;
-  visibility: visible;
   opacity: 1;
+  visibility: visible;
 }
 
 .#{$ide-prefix}-slide-over-panel {
   position: fixed;
+  z-index: 10000;
   top: 0;
   right: 0;
   bottom: 0;
-  z-index: 10000;
   display: flex;
   flex-direction: column;
   background-color: $ui-background;
   box-shadow: -2px 0 4px 0 rgba($ui-05, 0.25);
   // stylelint-disable-next-line carbon/layout-token-use
   transform: translateX(calc(100% + 6px));
-  visibility: hidden;
   // stylelint-disable-next-line carbon/motion-token-use
   transition: 0.3s ease-out;
+  visibility: hidden;
 }
 
 .#{$ide-prefix}-slide-over-panel--small {
@@ -105,12 +105,12 @@
 .#{$ide-prefix}-slide-over-panel
   .#{$ide-prefix}-slide-over-panel--footer-content
   button {
-  flex: 1;
   max-width: none;
   height: $carbon--layout-05;
-  margin: 0;
+  flex: 1;
   padding-top: $carbon--layout-01;
   padding-bottom: $carbon--layout-03;
+  margin: 0;
 }
 
 .#{$ide-prefix}-slide-over-panel .#{$ide-prefix}-slide-over-panel--footer {
@@ -140,7 +140,7 @@
 }
 
 .#{$ide-prefix}-slide-over-panel .#{$ide-prefix}-slide-over-panel--children {
+  overflow: auto;
   flex: 1;
   padding: $spacing-05;
-  overflow: auto;
 }

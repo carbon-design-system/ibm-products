@@ -80,15 +80,15 @@ $max: 1584px;
   width: carbon--mini-units(125);
   // sm
   @media (min-width: 0) and (max-width: $sm) {
+    padding-top: $layout-05;
     margin-top: -$spacing-03;
     margin-left: -$spacing-05;
-    padding-top: $layout-05;
     @include carbon--type-style('body-short-01');
   }
   // md
   @media (min-width: $sm + 1px) and (max-width: $md) {
+    padding-top: $layout-05;
     margin-top: -$spacing-03;
     margin-left: -$spacing-04;
-    padding-top: $layout-05;
   }
 }

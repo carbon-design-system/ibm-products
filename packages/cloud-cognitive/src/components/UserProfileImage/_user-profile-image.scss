@@ -68,8 +68,8 @@ $theme-keys: map-keys($themes);
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-transform: uppercase;
     border-radius: 100%;
+    text-transform: uppercase;
   }
 
   .bx--tooltip__trigger .exp-user-profile-avatar svg {

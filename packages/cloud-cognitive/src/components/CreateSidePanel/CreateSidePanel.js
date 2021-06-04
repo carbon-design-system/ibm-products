@@ -12,6 +12,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
+import { deprecateProp } from '../../global/js/utils/props-helper';
 
 // Carbon and package components we use.
 import { Form } from 'carbon-components-react';
@@ -42,6 +43,7 @@ export let CreateSidePanel = React.forwardRef(
       secondaryButtonText,
       selectorPrimaryFocus,
       pageContentSelector,
+      selectorPageContent,
       formTitle,
       formDescription,
       ...rest
@@ -63,13 +65,14 @@ export let CreateSidePanel = React.forwardRef(
     ];
 
     return (
-      pageContentSelector && (
+      (selectorPageContent || pageContentSelector) && (
         <SidePanel
           {...rest}
           {...{
             open,
             ref,
             pageContentSelector,
+            selectorPageContent,
             onRequestClose,
             title,
             subtitle,
@@ -155,7 +158,10 @@ CreateSidePanel.propTypes = {
    * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
    * This prop is required when using the `slideIn` variant of the side panel.
    */
-  pageContentSelector: PropTypes.string.isRequired,
+  pageContentSelector: deprecateProp(
+    PropTypes.string,
+    'This prop has been renamed to `selectorPageContent`.'
+  ),
   /**
    * Specifies the primary button's text in the modal.
    */
@@ -164,6 +170,11 @@ CreateSidePanel.propTypes = {
    * Specifies the secondary button's text in the modal.
    */
   secondaryButtonText: PropTypes.string.isRequired,
+  /**
+   * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
+   * This prop is required when using the `slideIn` variant of the side panel.
+   */
+  selectorPageContent: PropTypes.string.isRequired,
   /**
    * Specifies which DOM element in the form should be focused.
    */

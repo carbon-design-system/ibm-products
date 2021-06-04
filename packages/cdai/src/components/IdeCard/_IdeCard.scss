@@ -17,12 +17,12 @@ $ide-card-size: carbon--mini-units(30);
 .#{$ide-prefix}-card {
   position: relative;
   display: flex;
-  flex: 1 0 21%;
   height: calc(100% - #{carbon--mini-units(0.4)}); /* Double the margin above */
   min-height: $ide-card-size;
+  flex: 1 0 21%;
+  padding: 0;
   // stylelint-disable-next-line carbon/layout-token-use
   margin: $spacing-01 / 2;
-  padding: 0;
   background-color: $ui-background;
 
   .#{$ide-prefix}-card--card-overides {
@@ -52,8 +52,8 @@ $ide-card-size: carbon--mini-units(30);
 
 .#{$ide-prefix}-card--tile {
   display: flex;
-  flex-flow: column nowrap;
   height: 100%; /* use all height in the container */
+  flex-flow: column nowrap;
 }
 
 .#{$ide-prefix}-card--tile-img-group {
@@ -67,10 +67,10 @@ $ide-card-size: carbon--mini-units(30);
 
 .#{$ide-prefix}-card--tile-img {
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
   width: carbon--mini-units(4);
   height: carbon--mini-units(4);
+  align-items: center;
+  justify-content: flex-start;
   margin-bottom: $layout-01;
 }
 
@@ -135,8 +135,8 @@ $ide-card-size: carbon--mini-units(30);
     width: carbon--mini-units(2);
 
     /* As we're faking the toolip over the whole card, the caret points at the wrong location. Better to hide it */
-    margin-left: -$spacing-03; /* Account for the caret */
     padding-left: $layout-06;
+    margin-left: -$spacing-03; /* Account for the caret */
     .#{$prefix}--tooltip__caret {
       display: none;
     }

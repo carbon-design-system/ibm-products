@@ -12,8 +12,8 @@
 
 @keyframes rotate-180-anti {
   0% {
-    transform: rotate(0deg);
     animation-timing-function: cubic-bezier(0, 0, 0.38, 0.9);
+    transform: rotate(0deg);
   }
 
   25% {
@@ -21,8 +21,8 @@
   }
 
   50% {
-    transform: rotate(-180deg);
     animation-timing-function: cubic-bezier(0, 0, 0.38, 0.9);
+    transform: rotate(-180deg);
   }
 
   75% {
@@ -35,8 +35,8 @@
 }
 
 .#{$ide-prefix}-btn--rotate-180-anti .#{$prefix}--btn__icon {
-  animation-name: rotate-180-anti;
   // stylelint-disable-next-line carbon/motion-token-use
   animation-duration: 2000ms; /* Carbon motion does not have anything this long */
   animation-iteration-count: infinite;
+  animation-name: rotate-180-anti;
 }

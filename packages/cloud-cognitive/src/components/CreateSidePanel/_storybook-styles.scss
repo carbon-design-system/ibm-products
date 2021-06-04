@@ -11,9 +11,9 @@ $story-prefix: create-side-panel-stories__;
 
 .#{$story-prefix}example-container {
   display: grid;
+  align-items: flex-end;
   grid-gap: $spacing-04;
   grid-template-columns: 1fr 1fr;
-  align-items: flex-end;
 }
 
 .#{$story-prefix}example-form-group .bx--label {

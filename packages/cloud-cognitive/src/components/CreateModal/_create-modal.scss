@@ -31,10 +31,10 @@
   }
 
   .#{$pkg-prefix}--create-modal .bx--modal-header {
-    margin-bottom: 0;
     padding-right: 20%;
     padding-bottom: $spacing-03;
     border-bottom: 1px solid $ui-03;
+    margin-bottom: 0;
   }
 
   .#{$pkg-prefix}--create-modal .bx--modal-footer .bx--btn {
@@ -57,8 +57,8 @@
   .#{$pkg-prefix}--create-modal__description {
     @include carbon--type-style('body-long-01');
 
-    margin: $spacing-03 0 $spacing-05 0;
     padding-right: calc(20% - #{$spacing-05});
+    margin: $spacing-03 0 $spacing-05 0;
   }
 
   .#{$pkg-prefix}--create-modal__form .bx--fieldset {

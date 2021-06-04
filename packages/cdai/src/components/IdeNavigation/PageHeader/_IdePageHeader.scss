@@ -16,10 +16,10 @@
 
 .#{$ide-prefix}-page-header--breadcrumb-container {
   display: flex;
+  min-height: carbon--mini-units(5);
   flex-flow: column nowrap;
   align-content: center;
   justify-content: center;
-  min-height: carbon--mini-units(5);
 }
 
 .#{$ide-prefix}-page-header--heading-container {
@@ -47,9 +47,9 @@
 
 .#{$ide-prefix}-page-header--tabs-container {
   display: flex;
+  min-height: carbon--mini-units(6);
   flex-flow: row nowrap;
   align-items: flex-end;
-  min-height: carbon--mini-units(6);
   margin-left: -$spacing-05;
 }
 

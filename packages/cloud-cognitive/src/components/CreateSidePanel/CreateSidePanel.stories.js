@@ -13,6 +13,7 @@ import {
   TextInput,
   NumberInput,
   Dropdown,
+  FormGroup,
 } from 'carbon-components-react';
 import {
   Header,
@@ -29,6 +30,8 @@ import mdx from './CreateSidePanel.mdx';
 import styles from './_storybook-styles.scss';
 
 const storybookPrefix = getStorybookPrefix(pkg, CreateSidePanel.displayName);
+
+const blockClass = `${pkg.prefix}--create-side-panel`;
 
 export default {
   title: `${storybookPrefix}/${CreateSidePanel.displayName}`,
@@ -243,6 +246,117 @@ const TemplateWithFormValidation = ({ ...args }) => {
   );
 };
 
+const TemplateWithMultipleForms = ({ ...args }) => {
+  const [open, setOpen] = useState(false);
+  const [textInput, setTextInput] = useState('');
+  const [invalid, setInvalid] = useState(false);
+  return (
+    <>
+      {renderUIShellHeader()}
+      <Grid id="cloud-and-cognitive-page-content">
+        <Row>
+          <Column>
+            <Button onClick={() => setOpen(!open)}>
+              {open ? 'Close side panel' : 'Open side panel'}
+            </Button>
+          </Column>
+        </Row>
+      </Grid>
+      <CreateSidePanel
+        {...args}
+        slideIn={true}
+        open={open}
+        onRequestClose={() => setOpen(false)}
+        disableSubmit={textInput.length === 0 ? true : false}>
+        <FormGroup
+          className={`${blockClass}__form`}
+          legendText="Personal information">
+          <TextInput
+            labelText="First name"
+            className={`${prefix}form-item`}
+            placeholder="Enter topic name"
+            onChange={(e) => {
+              setTextInput(e.target.value);
+              setInvalid(false);
+            }}
+            onBlur={() => {
+              textInput.length === 0 && setInvalid(true);
+            }}
+            invalid={invalid}
+            invalidText="This is a required field"
+          />
+          <Dropdown
+            titleText="Business unit"
+            ariaLabel="Dropdown"
+            initialSelectedItem="IBM Cloud platform"
+            items={['IBM Cloud platform', 'AI Ops', 'Watson']}
+            label="Business unit"
+            className={`${prefix}form-item`}
+          />
+        </FormGroup>
+        <FormGroup
+          className={`${blockClass}__form`}
+          legendText="Topic information">
+          <TextInput
+            labelText="Topic name"
+            className={`${prefix}form-item`}
+            placeholder="Enter topic name"
+          />
+          <NumberInput
+            id="1"
+            className={`${prefix}form-item`}
+            label="Partitions"
+            min={0}
+            max={50}
+            value={1}
+          />
+          <NumberInput
+            id="2"
+            className={`${prefix}form-item`}
+            label="Replicas"
+            min={0}
+            max={50}
+            value={1}
+          />
+          <NumberInput
+            id="3"
+            className={`${prefix}form-item`}
+            label="Minimum in-sync replicas"
+            min={0}
+            max={50}
+            value={1}
+          />
+          <div className={`${prefix}example-container`}>
+            <NumberInput
+              id="4"
+              className={`${prefix}form-item`}
+              label="Retention time"
+              min={0}
+              max={50}
+              value={30}
+            />
+            <Dropdown
+              ariaLabel="Dropdown"
+              initialSelectedItem="Day(s)"
+              items={items}
+              label="Options"
+              className={`${prefix}form-item`}
+            />
+          </div>
+          <NumberInput
+            id="3"
+            className={`${prefix}form-item`}
+            label="Minimum in-sync replicas"
+            min={0}
+            max={50}
+            value={1}
+          />
+        </FormGroup>
+      </CreateSidePanel>
+    </>
+  );
+};
+
 export const Default = DefaultTemplate.bind({});
 Default.args = {
   selectorPageContent: '#cloud-and-cognitive-page-content',
@@ -251,6 +365,12 @@ Default.args = {
 
 export const WithFormValidation = TemplateWithFormValidation.bind({});
 WithFormValidation.args = {
+  selectorPageContent: '#cloud-and-cognitive-page-content',
+  ...defaultStoryProps,
+};
+
+export const WithMultipleForms = TemplateWithMultipleForms.bind({});
+WithMultipleForms.args = {
   selectorPageContent: '#cloud-and-cognitive-page-content',
   ...defaultStoryProps,
 };

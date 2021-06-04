@@ -13,10 +13,10 @@ $story-class: 'page-header-stories';
 
 .sbdocs .#{$story-class}__viewport {
   max-height: 500px;
-  overflow-y: auto;
-  color: $text-01;
   background-color: $ui-background;
   box-shadow: 0 0 4px 1px $ui-03;
+  color: $text-01;
+  overflow-y: auto;
 }
 
 .#{$story-class}__content-switcher {
@@ -42,15 +42,15 @@ $story-class: 'page-header-stories';
 }
 
 .#{$story-class}__status-icon {
-  vertical-align: middle;
   fill: $support-02;
+  vertical-align: middle;
 }
 
 .#{$story-class}__app {
   position: relative;
   display: flex;
-  flex-direction: column;
   height: 100vh;
+  flex-direction: column;
 }
 
 .#{$story-class}__content-container {

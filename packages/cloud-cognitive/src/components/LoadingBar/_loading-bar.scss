@@ -1,0 +1,217 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@import '@carbon/import-once/scss/import-once';
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+
+// Import(s) of Carbon settings and component styles and other
+// related component styles used by LoadingBar
+@import '@carbon/themes/scss/themes';
+@import 'carbon-components/scss/globals/scss/_vars.scss';
+
+$loading-bar__height: 8px;
+$loading-bar__small-height: 4px;
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin loading-bar {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+  $block-class: #{$pkg-prefix}--loading-bar;
+
+  @keyframes progress-indeterminate {
+    0% {
+      width: 0%;
+      left: 0;
+      right: auto;
+    }
+    20% {
+      width: 100%;
+      left: 0;
+      right: auto;
+    }
+    28% {
+      width: 100%;
+      left: auto;
+      right: 0;
+    }
+    51% {
+      width: 0%;
+      left: auto;
+      right: 0;
+    }
+    58% {
+      width: 0%;
+      left: auto;
+      right: 0;
+    }
+    82% {
+      width: 100%;
+      left: auto;
+      right: 0;
+    }
+    83% {
+      width: 100%;
+      left: 0;
+      right: auto;
+    }
+    96% {
+      width: 0%;
+      left: 0;
+      right: auto;
+    }
+    100% {
+      width: 0%;
+      left: 0;
+      right: auto;
+    }
+  }
+
+  @keyframes progress-linear {
+    0% {
+      width: 0%;
+      left: 0;
+      right: auto;
+    }
+    100% {
+      width: 100%;
+      left: 0;
+      right: auto;
+    }
+  }
+
+  @keyframes progress-stop {
+    0% {
+      width: 0%;
+      left: 0;
+      right: auto;
+    }
+    92% {
+      width: 100%;
+      left: 0;
+      right: auto;
+    }
+    100% {
+      width: 100%;
+      left: 0;
+      right: auto;
+    }
+  }
+
+  @keyframes loadingbar-stop {
+    0% {
+      opacity: 1;
+    }
+    92% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      display: none;
+    }
+  }
+
+  .#{$block-class} {
+    position: relative;
+    border: none;
+    padding: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    pointer-events: none;
+    background-color: $hover-ui;
+    width: 100%;
+    height: $loading-bar__height;
+  }
+
+  .#{$block-class}:hover,
+  .#{$block-class}:focus,
+  .#{$block-class}:active {
+    border: none;
+    outline: none;
+    cursor: default;
+  }
+
+  .#{$block-class}__preload {
+    opacity: 0 !important;
+  }
+
+  .#{$block-class}__progress {
+    position: relative;
+    height: $loading-bar__height;
+    transition: width $duration--slow-02 cubic-bezier(0.4, 0.14, 0.3, 1); // Expansion duration - carbon value from _motion.scss
+  }
+
+  .#{$block-class}__indicator-wrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .#{$block-class}__indicator {
+    @include carbon--type-style('body-short-01');
+    color: $text-01;
+    padding-top: 16px;
+    padding-bottom: 8px;
+  }
+
+  .#{$block-class}__small {
+    height: $loading-bar__small-height;
+  }
+
+  .#{$block-class}__small .#{$block-class}__progress {
+    height: $loading-bar__small-height;
+  }
+
+  .#{$block-class}__linear-stop {
+    display: none;
+  }
+
+  .#{$block-class}__indefinite-stop {
+    -webkit-animation: 1800ms ease-in-out loadingbar-stop forwards;
+    animation: 1800ms ease-in-out loadingbar-stop forwards;
+  }
+
+  .#{$block-class}__stop-progress:before {
+    content: '';
+    width: 0%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: $interactive-01;
+    -webkit-animation: 1800ms ease-in-out progress-stop forwards;
+    animation: 1800ms ease-in-out progress-stop forwards;
+  }
+
+  .#{$block-class}__indefinite-progress:before {
+    content: '';
+    width: 0%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: $interactive-01;
+    -webkit-animation: 3000ms ease-in-out progress-indeterminate infinite;
+    animation: 3000ms ease-in-out progress-indeterminate infinite;
+  }
+
+  .#{$block-class}__linear-progress:before {
+    content: '';
+    width: 0%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: $interactive-01;
+    -webkit-animation: 1000ms ease-in-out progress-linear forwards;
+    animation: 1000ms ease-in-out progress-linear forwards;
+  }
+}
+
+@include exports('loading-bar') {
+  @include loading-bar;
+}

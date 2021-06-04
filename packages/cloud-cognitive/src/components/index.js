@@ -37,3 +37,4 @@ export { StatusIcon } from './StatusIcon';
 export { Tearsheet, TearsheetNarrow } from './Tearsheet';
 export { UserProfileImage } from './UserProfileImage';
 export { WebTerminal } from './WebTerminal';
+export { LoadingBar } from './LoadingBar';

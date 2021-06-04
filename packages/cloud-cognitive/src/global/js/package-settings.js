@@ -51,6 +51,7 @@ const defaults = {
     SidePanel: false,
     TagSet: false,
     WebTerminal: false,
+    LoadingBar: false,
     /* new component flags here - comment used by generate CLI */
   },
 

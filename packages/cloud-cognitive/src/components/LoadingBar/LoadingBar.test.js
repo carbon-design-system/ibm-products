@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { render, queryByAttribute, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
 import { pkg } from '../../settings';
 

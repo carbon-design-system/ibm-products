@@ -19,13 +19,18 @@
     "carbon community",
     "carbon for cloud & cognitive"
   ],
-  "dependencies": {
+  "scripts": {
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally), jest (untested)",
+    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^jest|^babel-jest)/'"
+  },
+  "devDependencies": {
     "@commitlint/parse": "^12.1.1",
     "chalk": "^4.1.0",
     "execa": "^5.0.0",
     "fast-glob": "^3.2.5",
     "fs-extra": "^9.1.0",
     "inquirer": "^8.0.0",
+    "npm-check-updates": "^11.6.0",
     "prettier": "^2.2.1",
     "prettier-config-carbon": "^0.4.0",
     "remark": "^13.0.0",

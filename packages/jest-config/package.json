@@ -16,6 +16,13 @@
     "carbon community",
     "carbon for cloud & cognitive"
   ],
+  "scripts": {
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally), jest (untested)",
+    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^jest|^babel-jest)/'"
+  },
+  "devDependencies": {
+    "npm-check-updates": "^11.6.0"
+  },
   "peerDependencies": {
     "jest": "^26.6.3"
   },

@@ -31,14 +31,14 @@
   "scripts": {
     "build": "run-s clean build-all",
     "build-all": "run-p build:*",
-    "build:css": "bundler bundle:scss index.scss",
+    "build:css-dev": "sass --style=expanded --load-path node_modules --load-path ../../node_modules index.scss:css",
+    "build:css-min": "sass --style=compressed --no-source-map --load-path node_modules --load-path ../../node_modules index.scss:css/index.min.css",
     "build:js-esm": "cross-env BABEL_ENV=esm babel src/esm -d es",
     "build:js-cjs": "cross-env BABEL_ENV=cjs babel src/cjs -d lib",
     "build:scss": "copyfiles '**/*.scss' scss",
     "ci-check": "node scripts/import",
     "clean": "rimraf es lib css scss",
     "postinstall": "carbon-telemetry collect --install",
-    "test": "bundler check '**/*.scss'",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (not tested)",
     "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react$)/'"
   },

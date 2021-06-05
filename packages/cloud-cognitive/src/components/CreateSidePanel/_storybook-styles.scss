@@ -15,3 +15,7 @@ $story-prefix: create-side-panel-stories__;
   grid-gap: $spacing-04;
   grid-template-columns: 1fr 1fr;
 }
+
+.#{$story-prefix}example-form-group .bx--label {
+  margin-bottom: 0;
+}

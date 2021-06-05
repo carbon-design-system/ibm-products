@@ -31,7 +31,7 @@
   "scripts": {
     "build": "run-s clean build-all",
     "build-all": "run-p build:*",
-    "build:css-dev": "sass --style=expanded --load-path node_modules --load-path ../../node_modules index.scss:css",
+    "build:css-dev": "sass --style=expanded --load-path node_modules --load-path ../../node_modules index.scss:css/index.css",
     "build:css-min": "sass --style=compressed --no-source-map --load-path node_modules --load-path ../../node_modules index.scss:css/index.min.css",
     "build:js-esm": "cross-env BABEL_ENV=esm babel src/esm -d es",
     "build:js-cjs": "cross-env BABEL_ENV=cjs babel src/cjs -d lib",

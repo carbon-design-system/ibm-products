@@ -40,8 +40,8 @@
     "test": "run-p test:*",
     "test:js": "jest",
     "test:scss": "bundler check 'src/**/*.scss'",
-    "//upgrade-dependencies": "# don't upgrade carbon (done globally), jest (not tested)",
-    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^jest)/'"
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally)",
+    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon)/'"
   },
   "dependencies": {
     "@babel/runtime": "^7.14.0",

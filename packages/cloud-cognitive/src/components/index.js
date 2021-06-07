@@ -12,8 +12,7 @@ export { ComboButton, ComboButtonItem } from './ComboButton';
 export { ContextHeader } from './ContextHeader';
 export { CreateModal } from './CreateModal';
 export { CreateSidePanel } from './CreateSidePanel';
-export { CreateTearsheet } from './CreateTearsheet';
-export { CreateTearsheetStep } from './CreateTearsheet';
+export { CreateTearsheet, CreateTearsheetStep } from './CreateTearsheet';
 export {
   EmptyState,
   ErrorEmptyState,

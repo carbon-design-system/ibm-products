@@ -24,7 +24,6 @@ const selectorPrimaryFocus = '.bx--text-input';
 const formTitle = 'This is a test form title';
 const blockClass = `${pkg.prefix}--create-side-panel`;
 
-// render an ExampleComponent with button labels and any other required props
 const renderComponent = ({ ...rest }, children = <p>test</p>) =>
   render(
     <>

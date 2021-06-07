@@ -49,15 +49,15 @@ $block-class: #{$pkg-prefix}--tag-set;
     }
 
     .#{$block-class}__overflow--hidden {
-      max-width: 0;
       overflow: hidden;
+      max-width: 0;
       visibility: hidden;
     }
 
     .#{$block-class}__show-all-tags-modal {
       // not to be overridden by use in tag set
-      white-space: initial;
       text-align: initial;
+      white-space: initial;
     }
 
     .#{$block-class}__show-all-tags-modal .#{$carbon-prefix}--modal-container {
@@ -82,8 +82,8 @@ $block-class: #{$pkg-prefix}--tag-set;
     }
 
     .#{$block-class}__show-all-tags-modal .#{$carbon-prefix}--modal-header {
-      margin-right: $spacing-05;
       padding-right: 0;
+      margin-right: $spacing-05;
     }
 
     .#{$block-class}__show-all-tags-modal
@@ -115,12 +115,12 @@ $block-class: #{$pkg-prefix}--tag-set;
 
       min-width: initial;
       min-height: initial;
-      margin: 0;
       padding: 0;
-      color: inherit;
-      white-space: nowrap;
-      vertical-align: bottom;
+      margin: 0;
       background-color: inherit;
+      color: inherit;
+      vertical-align: bottom;
+      white-space: nowrap;
     }
 
     .#{$block-class}__overflow-tag .#{$carbon-prefix}--tag__close-icon {
@@ -129,8 +129,8 @@ $block-class: #{$pkg-prefix}--tag-set;
     }
 
     .#{$block-class}__overflow-tag .#{$carbon-prefix}--tag--high-contrast {
-      color: $text-01;
       background-color: $ui-background;
+      color: $text-01;
     }
 
     .#{$block-class}__overflow-tag .#{$carbon-prefix}--tag__close-icon:hover {

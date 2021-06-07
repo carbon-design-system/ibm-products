@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-module.exports = require('jest-config');
+module.exports = require('jest-config-ibm-cloud-cognitive');

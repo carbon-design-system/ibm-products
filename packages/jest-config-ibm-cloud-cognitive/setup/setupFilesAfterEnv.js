@@ -24,7 +24,7 @@ expect.extend({ toBeAccessible, toHaveNoAxeViolations });
 // to address in order for the test suite to pass.
 //
 // By default, we will throw on console.error and console.warn. In CI, we'll
-// also throw on console.log so no extraneous log statements make there way
+// also throw on console.log so no extraneous log statements make their way
 // through.
 //
 // Inspired by the following setup from facebook/react

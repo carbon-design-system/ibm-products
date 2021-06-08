@@ -45,6 +45,7 @@ const defaults = {
     ExampleComponent: false,
     ExpressiveCard: false,
     ImportModal: false,
+    LoadingBar: false,
     ModifiedTabs: false,
     PageHeader: false,
     ProductiveCard: false,

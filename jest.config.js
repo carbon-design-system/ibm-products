@@ -7,4 +7,4 @@
 
 'use strict';
 
-module.exports = require('jest-config');
+module.exports = require('jest-config-ibm-cloud-cognitive');

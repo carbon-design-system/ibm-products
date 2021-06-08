@@ -1,0 +1,44 @@
+import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
+import { pkg } from '../../settings';
+import { getStorybookSlug } from '../../../config';
+import { LoadingBar } from '.';
+
+# LoadingBar
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+The LoadingBar component provides a way to communicate the loading state to
+users. It is intended to fill the space of where it's used, and should persist
+until the loading action is complete. Once complete, the active prop may be set
+to false to hide the LoadingBar. The LoadingBar has two modes of operation:
+Indeterminate and Determinate. If no percentage is provided to the component,
+the LoadingBar behaves in indeterminate mode, with the bar moving from side to
+side, to indicate loading in progress. If a percentage prop is provided, the
+determinate mode of operation is used and the loading bar fills until the
+specified percentage to indicate current progress to the user.
+
+## Example usage
+
+<!-- One example per designed use case. -->
+
+### Indeterminate percentage
+
+<Preview>
+  <Story id={getStorybookSlug(pkg, LoadingBar.displayName, 'indeterminate')} />
+</Preview>
+
+### Determinate percentage
+
+<Preview>
+  <Story id={getStorybookSlug(pkg, LoadingBar.displayName, 'determinate')} />
+</Preview>
+
+## Component API
+
+<Props />

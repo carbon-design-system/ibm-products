@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-cdai",
   "description": "Carbon for Cloud & Cognitive CD&AI UI components",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -29,6 +29,7 @@
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build": "node scripts/build.js",
+    "clean": "rimraf es lib scss",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally), react/react-dom (not tested), uuid (not tested)",
     "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react$|^react-dom$|^uuid$)/'"
   },
@@ -60,6 +61,7 @@
     "@babel/preset-react": "^7.13.13",
     "cpx": "^1.5.0",
     "node-sass": "^6.0.0",
+    "npm-check-updates": "^11.6.0",
     "rimraf": "^3.0.2",
     "sinon": "^11.1.1"
   },

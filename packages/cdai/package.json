@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.14.0",
-    "focus-trap-react": "^8.5.0",
+    "focus-trap-react": "^8.5.1",
     "pluralize": "^8.0.0",
     "react-highlighter": "^0.4.3",
     "react-select": "^4.3.1",

@@ -12,29 +12,36 @@
   },
   "scripts": {
     "audit": "node scripts/audit.js dependencies moderate",
-    "build": "lerna run build --stream --prefix --loglevel success --npm-client yarn --include-dependencies",
-    "build:storybook-addon-carbon-theme": "yarn build --scope \"@carbon/storybook-addon-theme\"",
-    "//build:storybook": "# we build dependencies, then run storybook build directly because its dynamic output gets mangled by lerna",
-    "build:storybook": "yarn build:storybook-dependencies-only && yarn build:storybook-only",
-    "build:storybook-dependencies-only": "yarn build $(lerna ls --scope @carbon/ibm-cloud-cognitive-core --include-dependencies | grep -v '^@carbon/ibm-cloud-cognitive-core$' | xargs -n1 echo '--scope')",
-    "build:storybook-only": "cd packages/core && yarn build",
+    "build": "run-s 'run-all --include-dependencies --ignore \"@carbon/ibm-cloud-cognitive-core\" {@} build' storybook:build:storybook --",
     "ccs-coverage": "yarn test packages/cloud-cognitive/src/components --coverage --collectCoverageFrom=packages/cloud-cognitive/src/components/**/*.js --collectCoverageFrom=!packages/cloud-cognitive/src/components/**/*.stories.js",
-    "ci-check": "yarn format:diff && yarn lint && yarn test --ci && lerna run ci-check --stream",
-    "clean": "yarn cache clean && lerna run clean && lerna clean --yes",
-    "copy-common-files": "sh ./scripts/copy-common-files.sh;",
-    "format": "prettier --write '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
-    "format:diff": "prettier --list-different '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd,coverage}/**' '!README.md'",
+    "ci-check": "run-s ci-check:*",
+    "ci-check:prettier": "yarn format:prettier --list-different",
+    "ci-check:all": "run-p lint 'run-all --no-sort ci-check' test:all",
+    "ci-check:jest": "yarn test:jest --ci",
+    "clean": "run-s 'run-all clean' clean:*",
+    "clean:cache": "yarn cache clean",
+    "clean:lerna": "lerna clean --yes",
+    "clean:files": "rimraf coverage node_modules results",
+    "copy-common-files": "sh ./scripts/copy-common-files.sh",
+    "format": "yarn format:prettier --write",
+    "format:prettier": "prettier '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd,coverage}/**' '!README.md'",
     "generate": "lerna run generate --loglevel success --scope \"@carbon/ibm-cloud-cognitive\" --",
-    "lint": "yarn lint:es && yarn lint:style",
+    "lint": "run-p lint:*",
     "lint:es": "eslint 'packages/*/src/**/*.js'",
     "lint:style": "stylelint 'packages/*/src/**/*.scss' --report-needless-disables --report-invalid-scope-disables",
-    "test": "lerna run test --stream && jest",
-    "//storybook": "# we build dependencies, then start storybook directly because its dynamic output gets mangled by lerna",
-    "storybook": "yarn build:storybook-dependencies-only && cd packages/core && yarn start",
+    "run-all": "lerna run --stream --prefix --loglevel success",
+    "test": "run-s test:all 'test:jest {@}' --",
+    "test:all": "yarn run-all --no-sort test",
+    "test:jest": "jest",
+    "storybook": "run-s storybook:build:dependencies storybook:start",
+    "storybook:build": "run-s storybook:build:*",
+    "storybook:build:dependencies": "yarn run-all --include-dependencies --scope \"@carbon/storybook-addon-theme\" --scope \"@carbon/ibm-cloud-cognitive\" build",
+    "storybook:build:storybook": "cd packages/core && yarn build",
+    "storybook:start": "cd packages/core && yarn start",
     "sync": "carbon-cli sync",
     "upgrade-carbon": "npm-check-updates -su --deep --filter '/carbon/' && yarn",
-    "//upgrade-dependencies": "# don't upgrade carbon (done globally), husky (major change in action), jest (untested)",
-    "upgrade-dependencies": "lerna run upgrade-dependencies --stream --concurrency 1 && npm-check-updates -u --reject '/(carbon|^husky$|^jest)/' && yarn",
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally), husky (major change in action)",
+    "upgrade-dependencies": "yarn run-all --concurrency 1 upgrade-dependencies && npm-check-updates -u --reject '/(carbon|^husky$)/' && yarn",
     "upgrade-manual": "sh ./scripts/monorepo-npm-upgrade.sh"
   },
   "devDependencies": {
@@ -46,6 +53,7 @@
     "eslint-config-carbon": "2.2.0",
     "husky": "^4.3.6",
     "jest": "^25.5.4",
+    "jest-config-ibm-cloud-cognitive": "^0.3.12",
     "lerna": "^4.0.0",
     "lint-staged": "^11.0.0",
     "npm-check-updates": "^11.6.0",
@@ -54,7 +62,9 @@
     "prettier-config-carbon": "^0.4.0",
     "stylelint": "^13.13.1",
     "stylelint-config-carbon": "^1.5.0",
-    "stylelint-plugin-carbon-tokens": "^0.9.0"
+    "stylelint-plugin-carbon-tokens": "^0.9.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2"
   },
   "eslintConfig": {
     "parser": "babel-eslint",
@@ -70,7 +80,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
-      "pre-commit": "yarn copy-common-files;  lint-staged"
+      "pre-commit": "yarn copy-common-files; lint-staged"
     }
   },
   "commitlint": {

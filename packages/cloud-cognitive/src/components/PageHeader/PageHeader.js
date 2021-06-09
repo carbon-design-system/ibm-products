@@ -335,19 +335,7 @@ export let PageHeader = React.forwardRef(
 
         setScrollYValue(current.scrollY);
       },
-      [
-        actionBarItems,
-        availableSpace,
-        breadcrumbItems,
-        metrics.headerHeight,
-        metrics.headerTopValue,
-        navigation,
-        pageActions,
-        pageHeaderOffset,
-        subtitle,
-        tags,
-        title,
-      ]
+      [metrics.headerHeight, metrics.headerTopValue, pageHeaderOffset]
     );
 
     useWindowResize(() => {

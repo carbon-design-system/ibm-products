@@ -12,9 +12,10 @@ export const utilCheckUpdateVerticalSpace = (
   headerRef,
   navigation,
   preventBreadcrumbScroll,
-  setMetrics,
-  dynamicRefs
+  setMetrics
 ) => {
+  const dynamicRefs = {};
+
   const getDynamicRef = (selector) => {
     // would love to do this differently but digging in the dom seems easier
     // than getting a ref to a conditionally rendered item
@@ -23,13 +24,12 @@ export const utilCheckUpdateVerticalSpace = (
     if (!headerRef.current) {
       return undefined;
     } else {
-      let dRef = dynamicRefs.current[selector];
+      let dRef = dynamicRefs[selector];
       if (!dRef || dRef.parentNode === null) {
-        dynamicRefs.current[selector] =
-          headerRef.current.querySelector(selector);
+        dynamicRefs[selector] = headerRef.current.querySelector(selector);
       }
     }
-    return dynamicRefs.current[selector];
+    return dynamicRefs[selector];
   };
 
   // Utility function that checks the heights of various elements which are used to determine layout
@@ -64,13 +64,17 @@ export const utilCheckUpdateVerticalSpace = (
   update.breadcrumbRowSpaceBelow = 0;
   update.titleRowSpaceAbove = 0;
 
-  update.headerTopValue = navigation
-    ? preventBreadcrumbScroll
-      ? update.navigationRowHeight +
-        update.breadcrumbRowHeight -
-        update.headerHeight
-      : update.navigationRowHeight - update.headerHeight
-    : update.breadcrumbRowHeight - update.headerHeight;
+  // Base for calculating sticky top
+  update.headerTopValue = -update.headerHeight;
+  if (navigation) {
+    // adjust top for sticky with navigation
+    update.headerTopValue += update.navigationRowHeight;
+  }
+
+  if (preventBreadcrumbScroll || !navigation) {
+    // adjust sticky top if no navigation or breadcrumb is to stay on screen
+    update.headerTopValue += update.breadcrumbRowHeight;
+  }
 
   if (window) {
     let val;

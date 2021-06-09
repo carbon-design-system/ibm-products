@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.35.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.34.88...@carbon/ibm-cloud-cognitive-experimental@0.35.0) (2021-06-09)
+
+
+### Features
+
+* match Carbon peer deps for react ([#869](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/869)) ([8f42118](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8f42118754a904554acee9ec3af2e1fae8143817))
+
+
+
+
+
 ## [0.34.88](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-experimental@0.34.87...@carbon/ibm-cloud-cognitive-experimental@0.34.88) (2021-06-09)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-experimental

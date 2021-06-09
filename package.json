@@ -50,7 +50,7 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^13.1.9",
     "eslint": "^7.28.0",
-    "eslint-config-carbon": "2.4.0",
+    "eslint-config-carbon": "2.2.0",
     "husky": "^4.3.6",
     "jest": "^27.0.4",
     "jest-config-ibm-cloud-cognitive": "^0.3.12",

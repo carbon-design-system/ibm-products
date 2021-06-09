@@ -19,6 +19,7 @@ module.exports = {
   setupFiles: [require.resolve('./setup/setupFiles')],
   setupFilesAfterEnv: [require.resolve('./setup/setupFilesAfterEnv')],
   snapshotSerializers: [],
+  testEnvironment: 'jsdom',
   testMatch: [
     '<rootDir>/**/__tests__/**/*.js?(x)',
     '<rootDir>/**/*.(spec|test).js?(x)',

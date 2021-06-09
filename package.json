@@ -40,8 +40,8 @@
     "storybook:start": "cd packages/core && yarn start",
     "sync": "carbon-cli sync",
     "upgrade-carbon": "npm-check-updates -su --deep --filter '/carbon/' && yarn",
-    "//upgrade-dependencies": "# don't upgrade carbon (done globally), husky (major change in action), jest (untested)",
-    "upgrade-dependencies": "yarn run-all --concurrency 1 upgrade-dependencies && npm-check-updates -u --reject '/(carbon|^husky$|^jest)/' && yarn",
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally), husky (major change in action)",
+    "upgrade-dependencies": "yarn run-all --concurrency 1 upgrade-dependencies && npm-check-updates -u --reject '/(carbon|^husky$)/' && yarn",
     "upgrade-manual": "sh ./scripts/monorepo-npm-upgrade.sh"
   },
   "devDependencies": {
@@ -53,6 +53,7 @@
     "eslint-config-carbon": "2.2.0",
     "husky": "^4.3.6",
     "jest": "^25.5.4",
+    "jest-config-ibm-cloud-cognitive": "^0.3.12",
     "lerna": "^4.0.0",
     "lint-staged": "^11.0.0",
     "npm-check-updates": "^11.6.0",

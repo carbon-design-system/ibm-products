@@ -561,124 +561,148 @@ PageHeaderWithCarbonHeader.args = {
 
 const TemplateDemo = () => {
   return (
-    <>
-      <PageHeader
-        className={className}
-        breadcrumbItems={
-          <>
-            <BreadcrumbItem href="../../../hompepage">Homepage</BreadcrumbItem>
-            <BreadcrumbItem href="../../Reports">Reports</BreadcrumbItem>
-            <BreadcrumbItem href="../June2021">June 2021</BreadcrumbItem>
-          </>
+    <div className={`${storyClass}__app`}>
+      <Header aria-label="IBM Platform Name">
+        <HeaderName href="#" prefix="IBM">
+          Cloud Cognitive application
+        </HeaderName>
+      </Header>
+      <div
+        className={`${storyClass}__content-container`}
+        style={{
+          // stylelint-disable-next-line carbon/layout-token-use
+          marginTop: '48px',
+        }}>
+        <PageHeader
+          className={className}
+          breadcrumbItems={
+            <>
+              <BreadcrumbItem href="../../../hompepage">
+                Homepage
+              </BreadcrumbItem>
+              <BreadcrumbItem href="../../Reports">Reports</BreadcrumbItem>
+              <BreadcrumbItem href="../June2021">June 2021</BreadcrumbItem>
+            </>
+          }
+          actionBarItems={[
+            { renderIcon: Printer16, iconDescription: `Print` },
+            { renderIcon: Settings16, iconDescription: `Settings` },
+            { renderIcon: VolumeMute16, iconDescription: `Mute` },
+          ]}
+          title={{
+            text: 'Authentication activity',
+            loading: false,
+            icon: Security24,
+          }}
+          preventBreadcrumbScroll
+          pageHeaderOffset={48} // 48px is the size of the global header. A more elegant way of passing this could be found.
+          pageActions={[
+            {
+              kind: 'secondary',
+              label: 'Acknowledge',
+              onClick: () => {},
+            },
+            {
+              kind: 'primary',
+              label: 'Escalate',
+              onClick: () => {},
+            },
+          ]}
+          subtitle="This report details the monthly authentication failures"
+          availableSpace={
+            <>
+              <p>Severity 1: 0</p>
+              <p>Severity 1: 814</p>
+              <p>Severity 3: 3,108</p>
+            </>
+          }
+          navigation={
+            <Tabs>
+              <Tab label="Summary" />
+              <Tab label="Region 1" />
+              <Tab label="Region 2" />
+              <Tab label="Region 3" />
+            </Tabs>
+          }
+          tags={[
+            <Tag type="cyan" key="Not urgent">
+              Not urgent
+            </Tag>,
+            <Tag type="red" key="Security">
+              Security
+            </Tag>,
+          ]}
+        />
+        {
+          <Grid className={`${storyClass}__dummy-content`} narrow={true}>
+            <Row>
+              <Column
+                sm={2}
+                md={4}
+                lg={8}
+                className={`${storyClass}__dummy-content-block`}>
+                <div className={`${storyClass}__dummy-content-text`}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor <strong>incididunt ut labore</strong> et
+                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                  exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat.
+                </div>
+                <div className={`${storyClass}__dummy-content-text`}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor <strong>incididunt ut labore</strong> et
+                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                  exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat.
+                </div>
+                <div className={`${storyClass}__dummy-content-text`}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor <strong>incididunt ut labore</strong> et
+                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                  exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat.
+                </div>
+                <div className={`${storyClass}__dummy-content-text`}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor <strong>incididunt ut labore</strong> et
+                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                  exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat.
+                </div>
+                <div className={`${storyClass}__dummy-content-text`}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor <strong>incididunt ut labore</strong> et
+                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                  exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat.
+                </div>
+                <div className={`${storyClass}__dummy-content-text`}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor <strong>incididunt ut labore</strong> et
+                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                  exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat.
+                </div>
+                <div className={`${storyClass}__dummy-content-text`}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor <strong>incididunt ut labore</strong> et
+                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                  exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat.
+                </div>
+                <div className={`${storyClass}__dummy-content-text`}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor <strong>incididunt ut labore</strong> et
+                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                  exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat.
+                </div>
+              </Column>
+            </Row>
+          </Grid>
         }
-        actionBarItems={[
-          { renderIcon: Printer16, iconDescription: `Print` },
-          { renderIcon: Settings16, iconDescription: `Settings` },
-          { renderIcon: VolumeMute16, iconDescription: `Mute` },
-        ]}
-        title={{
-          text: 'Authentication activity',
-          loading: false,
-          icon: Security24,
-        }}
-        pageActions={[
-          {
-            kind: 'secondary',
-            label: 'Acknowledge',
-            onClick: () => {},
-          },
-          {
-            kind: 'primary',
-            label: 'Escalate',
-            onClick: () => {},
-          },
-        ]}
-        subtitle="This report details the monthly authentication failures"
-        availableSpace={
-          <>
-            <p>Severity 1: 0</p>
-            <p>Severity 1: 814</p>
-            <p>Severity 3: 3,108</p>
-          </>
-        }
-        navigation={
-          <Tabs>
-            <Tab label="Summary" />
-            <Tab label="Region 1" />
-            <Tab label="Region 2" />
-            <Tab label="Region 3" />
-          </Tabs>
-        }
-        tags={[
-          <Tag type="cyan" key="Not urgent">
-            Not urgent
-          </Tag>,
-          <Tag type="red" key="Security">
-            Security
-          </Tag>,
-        ]}
-      />
-      {
-        <Grid className={`${storyClass}__dummy-content`} narrow={true}>
-          <Row>
-            <Column
-              sm={2}
-              md={4}
-              lg={8}
-              className={`${storyClass}__dummy-content-block`}>
-              <div className={`${storyClass}__dummy-content-text`}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor <strong>incididunt ut labore</strong> et dolore
-                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </div>
-              <div className={`${storyClass}__dummy-content-text`}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor <strong>incididunt ut labore</strong> et dolore
-                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </div>
-              <div className={`${storyClass}__dummy-content-text`}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor <strong>incididunt ut labore</strong> et dolore
-                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </div>
-              <div className={`${storyClass}__dummy-content-text`}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor <strong>incididunt ut labore</strong> et dolore
-                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </div>
-              <div className={`${storyClass}__dummy-content-text`}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor <strong>incididunt ut labore</strong> et dolore
-                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </div>
-              <div className={`${storyClass}__dummy-content-text`}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor <strong>incididunt ut labore</strong> et dolore
-                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </div>
-              <div className={`${storyClass}__dummy-content-text`}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor <strong>incididunt ut labore</strong> et dolore
-                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </div>
-              <div className={`${storyClass}__dummy-content-text`}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor <strong>incididunt ut labore</strong> et dolore
-                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </div>
-            </Column>
-          </Row>
-        </Grid>
-      }
-    </>
+      </div>
+    </div>
   );
 };
 

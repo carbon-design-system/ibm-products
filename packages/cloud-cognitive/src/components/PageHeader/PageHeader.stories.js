@@ -19,7 +19,13 @@ import {
   Tabs,
   Tag,
 } from 'carbon-components-react';
-import { CheckmarkFilled16 } from '@carbon/icons-react';
+import {
+  CheckmarkFilled16,
+  Printer16,
+  Security24,
+  Settings16,
+  VolumeMute16,
+} from '@carbon/icons-react';
 import { Lightning16, Bee24 } from '@carbon/icons-react';
 
 import { pkg } from '../../settings';
@@ -552,3 +558,128 @@ PageHeaderWithCarbonHeader.args = {
   titleIcon: Bee24,
   titleIconSwitchedArg: true,
 };
+
+const TemplateDemo = () => {
+  return (
+    <>
+      <PageHeader
+        className={className}
+        breadcrumbItems={
+          <>
+            <BreadcrumbItem href="../../../hompepage">Homepage</BreadcrumbItem>
+            <BreadcrumbItem href="../../Reports">Reports</BreadcrumbItem>
+            <BreadcrumbItem href="../June2021">June 2021</BreadcrumbItem>
+          </>
+        }
+        actionBarItems={[
+          { renderIcon: Printer16, iconDescription: `Print` },
+          { renderIcon: Settings16, iconDescription: `Settings` },
+          { renderIcon: VolumeMute16, iconDescription: `Mute` },
+        ]}
+        title={{
+          text: 'Authentication activity',
+          loading: false,
+          icon: Security24,
+        }}
+        pageActions={[
+          {
+            kind: 'secondary',
+            label: 'Acknowledge',
+            onClick: () => {},
+          },
+          {
+            kind: 'primary',
+            label: 'Escalate',
+            onClick: () => {},
+          },
+        ]}
+        subtitle="This report details the monthly authentication failures"
+        availableSpace={
+          <>
+            <p>Severity 1: 0</p>
+            <p>Severity 1: 814</p>
+            <p>Severity 3: 3,108</p>
+          </>
+        }
+        navigation={
+          <Tabs>
+            <Tab label="Summary" />
+            <Tab label="Region 1" />
+            <Tab label="Region 2" />
+            <Tab label="Region 3" />
+          </Tabs>
+        }
+        tags={[
+          <Tag type="cyan" key="Not urgent">
+            Not urgent
+          </Tag>,
+          <Tag type="red" key="Security">
+            Security
+          </Tag>,
+        ]}
+      />
+      {
+        <Grid className={`${storyClass}__dummy-content`} narrow={true}>
+          <Row>
+            <Column
+              sm={2}
+              md={4}
+              lg={8}
+              className={`${storyClass}__dummy-content-block`}>
+              <div className={`${storyClass}__dummy-content-text`}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor <strong>incididunt ut labore</strong> et dolore
+                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              </div>
+              <div className={`${storyClass}__dummy-content-text`}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor <strong>incididunt ut labore</strong> et dolore
+                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              </div>
+              <div className={`${storyClass}__dummy-content-text`}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor <strong>incididunt ut labore</strong> et dolore
+                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              </div>
+              <div className={`${storyClass}__dummy-content-text`}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor <strong>incididunt ut labore</strong> et dolore
+                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              </div>
+              <div className={`${storyClass}__dummy-content-text`}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor <strong>incididunt ut labore</strong> et dolore
+                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              </div>
+              <div className={`${storyClass}__dummy-content-text`}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor <strong>incididunt ut labore</strong> et dolore
+                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              </div>
+              <div className={`${storyClass}__dummy-content-text`}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor <strong>incididunt ut labore</strong> et dolore
+                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              </div>
+              <div className={`${storyClass}__dummy-content-text`}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor <strong>incididunt ut labore</strong> et dolore
+                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              </div>
+            </Column>
+          </Row>
+        </Grid>
+      }
+    </>
+  );
+};
+
+export const PageHeaderDemo = TemplateDemo.bind({});

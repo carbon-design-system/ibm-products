@@ -35,7 +35,7 @@ export default {
   parameters: { styles },
 };
 
-const BreadcrumbItems = [
+const breadcrumbItems = (lastCurrent) => [
   <BreadcrumbItem key="1">
     <a
       href="/#"
@@ -75,13 +75,18 @@ const BreadcrumbItems = [
     onClick={(ev) => {
       ev.preventDefault();
       action('Breadcrumb 5 click')();
-    }}>
-    <a href="/#">Breadcrumb 5</a>
+    }}
+    isCurrentPage={lastCurrent}>
+    <a href="/#">
+      Breadcrumb 5 is a longer breadcrumb it could go on for much longer than
+      expected
+    </a>
   </BreadcrumbItem>,
 ];
 
 const Template = (argsIn) => {
   const { children, containerWidth, ...args } = { ...argsIn };
+
   return (
     <div style={{ width: containerWidth }}>
       <BreadcrumbWithOverflow {...args}>{children}</BreadcrumbWithOverflow>
@@ -89,8 +94,14 @@ const Template = (argsIn) => {
   );
 };
 
-export const BreadcrumbItemArray = Template.bind({});
-BreadcrumbItemArray.args = {
-  children: BreadcrumbItems,
+export const BreadcrumbLastCurrent = Template.bind({});
+BreadcrumbLastCurrent.args = {
+  children: breadcrumbItems(true),
+  containerWidth: 500,
+};
+
+export const BreadcrumbLastNotCurrent = Template.bind({});
+BreadcrumbLastNotCurrent.args = {
+  children: breadcrumbItems(false),
   containerWidth: 500,
 };

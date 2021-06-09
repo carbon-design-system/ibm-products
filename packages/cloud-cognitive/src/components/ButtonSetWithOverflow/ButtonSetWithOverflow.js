@@ -50,6 +50,7 @@ export const ButtonSetWithOverflow = ({
     for (let item of sizingSet) {
       sizingSetTotalSize += item.offsetWidth;
     }
+    // console.dir(sizingContainerRefCombo);
     const sizingComboSize = sizingContainerRefCombo.current?.offsetWidth
       ? sizingContainerRefCombo.current?.offsetWidth
       : 0;
@@ -147,10 +148,13 @@ export const ButtonSetWithOverflow = ({
         </ReactResizeDetector>
         <ReactResizeDetector onResize={handleButtonResize}>
           <div
-            ref={sizingContainerRefCombo}
             className={`${blockClass}__button-container ${blockClass}__button-container--hidden`}
             aria-hidden={true}>
-            <AButtonMenu buttons={itemArray} size={size} />
+            <AButtonMenu
+              ref={sizingContainerRefCombo}
+              buttons={itemArray}
+              size={size}
+            />
           </div>
         </ReactResizeDetector>
 

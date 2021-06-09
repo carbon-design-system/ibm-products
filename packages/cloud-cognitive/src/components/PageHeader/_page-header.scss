@@ -183,7 +183,6 @@ $raised-z-index: 99;
     .#{$block-class}__breadcrumb-column--background,
     .#{$block-class}__action-bar-column--background {
       position: relative;
-      background-color: $ui-background;
     }
 
     &.#{$block-class}--show-background

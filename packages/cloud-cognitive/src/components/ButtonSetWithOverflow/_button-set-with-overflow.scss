@@ -34,7 +34,7 @@ $block-class: #{$pkg-prefix}--button-set-with-overflow;
       @include measuring-container;
     }
 
-    .#{$block-class}--right {
+    &.#{$block-class}--right {
       justify-content: flex-end;
     }
   }

@@ -26,7 +26,9 @@ const unwrapIfFragment = (children) => {
     };
 
     // children is nothing, one fragment, array with one or more children, or a single item
-    if (!children) return;
+    if (!children) {
+      return;
+    }
 
     if (isFragment(children)) {
       loopOver(children.props.children);

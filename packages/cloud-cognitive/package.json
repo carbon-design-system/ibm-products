@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive",
   "description": "Carbon for Cloud & Cognitive UI components",
-  "version": "0.41.9",
+  "version": "0.42.8",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -45,6 +45,7 @@
   "devDependencies": {
     "@babel/cli": "^7.14.3",
     "@babel/core": "^7.14.3",
+    "@storybook/addon-docs": "^6.2.9",
     "babel-preset-ibm-cloud-cognitive": "^0.3.4",
     "chalk": "^4.1.1",
     "change-case": "^4.1.2",
@@ -69,6 +70,7 @@
     "carbon-components": "^10.36.0",
     "carbon-components-react": "^7.36.0",
     "carbon-icons": "^7.0.7",
-    "react": "^16.14.0"
+    "react": "^16.8.6 || ^17.0.1",
+    "react-dom": "^16.8.6 || ^17.0.1"
   }
 }

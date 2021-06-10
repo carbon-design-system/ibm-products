@@ -51,6 +51,20 @@ export let BreadcrumbWithOverflow = ({
   const internalId = useRef(uuidv4());
   const [childArray, setChildArray] = useState([]);
 
+  const getItemProps = (item) => {
+    // A standard breadcrumb contains a href prop and no children
+    // Alternative forms may contain another element often <a />
+
+    const itemProps = item?.props || {};
+    const childProps = item?.props?.children?.props | {};
+
+    // use children as title if not an array
+    const children = childProps.children || itemProps.children || [];
+    const title = Array.isArray(children) ? null : children;
+
+    return { ...childProps, ...itemProps, title };
+  };
+
   // eslint-disable-next-line react/prop-types
   const BreadcrumbOverflowMenu = ({ overflowItems }) => {
     return (
@@ -89,10 +103,6 @@ export let BreadcrumbWithOverflow = ({
       setDisplayedBreadcrumbItems([]);
       return;
     }
-    const getTitle = (item) => {
-      // This function should extract text from item.props.children
-      return item.props?.children?.props?.children;
-    };
 
     // clones of children needed as the children are used in the sizing render
     const cloneChildren = (items) =>
@@ -100,7 +110,7 @@ export let BreadcrumbWithOverflow = ({
         // likely truncated add title
         const title =
           index + 1 === childArray.length && displayCount === 1
-            ? getTitle(item)
+            ? getItemProps(item).title
             : null;
 
         const className =
@@ -246,11 +256,14 @@ export let BreadcrumbWithOverflow = ({
     checkFullyVisibleBreadcrumbItems();
   };
 
-  const buttonHrefValue =
-    displayedBreadcrumbItems[displayedBreadcrumbItems.length - 2]?.props.href;
-  const buttonTooltipValue =
-    displayedBreadcrumbItems[displayedBreadcrumbItems.length - 2]?.props
-      .children;
+  let backItem = childArray[childArray.length - 1];
+  if (backItem?.props?.isCurrentPage) {
+    backItem = childArray[childArray.length - 2];
+  }
+
+  const backItemProps = getItemProps(backItem);
+  const buttonHrefValue = backItemProps.href;
+  const buttonTooltipValue = backItemProps.title;
 
   return (
     <ReactResizeDetector onResize={handleResize}>

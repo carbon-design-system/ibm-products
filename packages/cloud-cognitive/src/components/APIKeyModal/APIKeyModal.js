@@ -47,31 +47,47 @@ export let APIKeyModal = ({
   const hasPreviousStep = hasSteps && currentStep !== 0;
 
   useEffect(() => {
-    if (inputRef.current && open) inputRef.current.focus();
+    if (inputRef.current && open) {
+      inputRef.current.focus();
+    }
   }, [open]);
 
   const isPrimaryButtonDisabled = () => {
-    if (loading) return true;
-    if (hasSteps && 'valid' in customSteps[currentStep])
+    if (loading) {
+      return true;
+    }
+    if (hasSteps && 'valid' in customSteps[currentStep]) {
       return !customSteps[currentStep].valid;
-    if (nameRequired && !name) return true;
+    }
+    if (nameRequired && !name) {
+      return true;
+    }
     return false;
   };
 
   const getPrimaryButtonText = () => {
-    if (apiKey) return copyButtonText;
-    if (hasNextStep) return nextStepButtonText;
+    if (apiKey) {
+      return copyButtonText;
+    }
+    if (hasNextStep) {
+      return nextStepButtonText;
+    }
     return createButtonText;
   };
 
   const getSecondaryButtonText = () => {
-    if (hasPreviousStep && !apiKeyLoaded) return previousStepButtonText;
+    if (hasPreviousStep && !apiKeyLoaded) {
+      return previousStepButtonText;
+    }
     return secondaryButtonText;
   };
 
   const getHeader = () => {
-    if (apiKeyLoaded) return successHeader;
-    else if (hasSteps) return stepHeaders[currentStep];
+    if (apiKeyLoaded) {
+      return successHeader;
+    } else if (hasSteps) {
+      return stepHeaders[currentStep];
+    }
     return createHeader;
   };
 
@@ -80,8 +96,9 @@ export let APIKeyModal = ({
   };
 
   const submitHandler = (evt) => {
-    if (hasNextStep) setCurrentStep(currentStep + 1);
-    else if (apiKeyLoaded) {
+    if (hasNextStep) {
+      setCurrentStep(currentStep + 1);
+    } else if (apiKeyLoaded) {
       navigator.clipboard.writeText(apiKey);
       onCloseHandler();
     } else {
@@ -97,8 +114,11 @@ export let APIKeyModal = ({
   };
 
   const onBackHandler = () => {
-    if (hasPreviousStep && !apiKeyLoaded) setCurrentStep(currentStep - 1);
-    else onCloseHandler();
+    if (hasPreviousStep && !apiKeyLoaded) {
+      setCurrentStep(currentStep - 1);
+    } else {
+      onCloseHandler();
+    }
   };
 
   return (

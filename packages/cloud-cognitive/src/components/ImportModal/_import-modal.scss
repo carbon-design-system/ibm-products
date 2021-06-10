@@ -15,6 +15,10 @@
 @mixin import-modal {
   $block-class: #{$pkg-prefix}--import-modal;
 
+  .#{$block-class} .bx--modal-close {
+    display: none;
+  }
+
   .#{$block-class} .#{$carbon-prefix}--modal-footer .#{$carbon-prefix}--btn {
     max-width: none;
   }
@@ -28,6 +32,10 @@
     margin-top: 0;
   }
 
+  .#{$carbon-prefix}--modal-container--sm .#{$carbon-prefix}--modal-header {
+    padding-right: calc(20% - #{$spacing-05});
+  }
+
   .#{$block-class}__input-group {
     display: flex;
   }
@@ -36,8 +44,12 @@
     margin-left: $spacing-05;
   }
 
-  .#{$block-class}__file-drop-header p,
-  .#{$block-class}__label p {
+  .#{$block-class}__file-container {
+    width: 100%;
+  }
+
+  .#{$block-class} .#{$block-class}__file-drop-header,
+  .#{$block-class} .#{$block-class}__label {
     margin-bottom: $spacing-03;
     @include carbon--type-style('productive-heading-01');
   }

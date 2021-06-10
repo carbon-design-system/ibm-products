@@ -1786,12 +1786,26 @@
   resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-10.26.0.tgz#efa1401d845cacbffc16ec490afdcdbbc79d3af8"
   integrity sha512-3R3mKbepxLBL5+t7Hvq3BzYw5IKkkUVvQepdE1pZWmpTI+wEjVGefifXOVIEt5BsKMq1ujrXb0LLOrO65VnLfg==
 
+"@carbon/elements@^10.35.0":
+  version "10.35.0"
+  resolved "https://registry.yarnpkg.com/@carbon/elements/-/elements-10.35.0.tgz#dddde6321e3f743b42a953518abd4d27ff017952"
+  integrity sha512-EdBDmsflLk/9LrO5Ub6eGbaioXX6rvrzKqUvsdoN1WmDz6BQgSb6c84M905XoLnavyU1j8qDh5Kk8qBcf7375Q==
+  dependencies:
+    "@carbon/colors" "^10.26.0"
+    "@carbon/grid" "^10.28.0"
+    "@carbon/icons" "^10.33.0"
+    "@carbon/import-once" "^10.6.0"
+    "@carbon/layout" "^10.25.0"
+    "@carbon/motion" "^10.19.0"
+    "@carbon/themes" "^10.35.0"
+    "@carbon/type" "^10.29.0"
+
 "@carbon/feature-flags@^0.5.0":
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/@carbon/feature-flags/-/feature-flags-0.5.0.tgz#726e9d411e7650e3f4ca0c63e1ffc527bb5e93f8"
   integrity sha512-AEmsE2bUfl7ycWIep4Yu+DFLXLTRZf9UbhfBiJTncsbnAKPpYnD9XZXi1S4EgLrGKvHyFgKDvomf4hAd3yIe5A==
 
-"@carbon/grid@10.28.0":
+"@carbon/grid@10.28.0", "@carbon/grid@^10.28.0":
   version "10.28.0"
   resolved "https://registry.yarnpkg.com/@carbon/grid/-/grid-10.28.0.tgz#6fcd8088521ae6053370b1930d49cbb38b1a01f2"
   integrity sha512-9F2Nh6w8pHa/nk3Rug0lpvpOfStV0rmRiItZVL/NDZf/KFcePjb9Kflyxlj9drWw4kNFEj11J3nGepFIsZ5vOA==
@@ -1813,6 +1827,11 @@
     "@carbon/telemetry" "0.0.0-alpha.6"
     prop-types "^15.7.2"
 
+"@carbon/icons@^10.33.0":
+  version "10.33.0"
+  resolved "https://registry.yarnpkg.com/@carbon/icons/-/icons-10.33.0.tgz#316131e4a95377ddd23df1d44aef7156ad3d29c6"
+  integrity sha512-EKzNi6h6xQid1y4uLAkjc+FVsDA0eFHFum+uqT6QWdqK8ZapXt+qQmVuy8Aedf8UhLbmyc+VnxvdJW8nA9Lt7Q==
+
 "@carbon/import-once@10.5.0", "@carbon/import-once@^10.5.0":
   version "10.5.0"
   resolved "https://registry.yarnpkg.com/@carbon/import-once/-/import-once-10.5.0.tgz#9a84b50a761aa561ae6600a6c34b9955d97b3fd8"
@@ -1833,7 +1852,7 @@
   resolved "https://registry.yarnpkg.com/@carbon/layout/-/layout-10.22.0.tgz#470833b5862be984213658c7f06f83e4c8713959"
   integrity sha512-XJ7FZzNbRtGrgC4WK7G5RF9NvlscHoW3xg0DAZZxxumqcR3t7E9ARF78aNVjsATUA7+dEN54yQ0TM7WRSTTXlg==
 
-"@carbon/motion@10.19.0":
+"@carbon/motion@10.19.0", "@carbon/motion@^10.19.0":
   version "10.19.0"
   resolved "https://registry.yarnpkg.com/@carbon/motion/-/motion-10.19.0.tgz#b016437d8a88848f5412ce9714b65aa5364c62a5"
   integrity sha512-xAV6wFKvUGEO1vCDa2fZsPmF4slotJDB0bwvy7HgSGm9Ss++eBirADrZ6XH9CLw90dI60j/COvu2P2gu1XY0/A==

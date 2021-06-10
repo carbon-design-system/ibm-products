@@ -117,7 +117,6 @@ const TemplateWithSections = ({ ...args }) => {
       </CreateFullPageStep>
       <CreateFullPageStep>
         <CreateFullPageSection
-          hasForm
           title="Core configuration"
           description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
           <TextInput
@@ -152,7 +151,6 @@ const TemplateWithSections = ({ ...args }) => {
           />
         </CreateFullPageSection>
         <CreateFullPageSection
-          hasForm
           title="Configuration 2"
           description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
           <TextInput
@@ -187,7 +185,6 @@ const TemplateWithSections = ({ ...args }) => {
           />
         </CreateFullPageSection>
         <CreateFullPageSection
-          hasForm
           title="Configuration 3"
           description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
           <TextInput

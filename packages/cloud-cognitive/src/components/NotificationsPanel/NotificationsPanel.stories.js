@@ -120,7 +120,9 @@ const Template = (args) => {
         if (notificationsData[i].unread === true) {
           hasUnreadNotificationsCheck = true;
           break;
-        } else hasUnreadNotificationsCheck = false;
+        } else {
+          hasUnreadNotificationsCheck = false;
+        }
       }
       setHasUnreadNotifications(hasUnreadNotificationsCheck);
     }

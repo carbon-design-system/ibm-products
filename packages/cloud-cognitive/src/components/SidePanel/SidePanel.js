@@ -74,7 +74,9 @@ export let SidePanel = React.forwardRef(
     // scroll panel to top going between steps
     useEffect(() => {
       const panelRef = ref || sidePanelRef;
-      if (panelRef && panelRef.current) panelRef.current.scrollTop = 0;
+      if (panelRef && panelRef.current) {
+        panelRef.current.scrollTop = 0;
+      }
     }, [currentStep, ref]);
 
     // set initial focus when side panel opens
@@ -87,7 +89,9 @@ export let SidePanel = React.forwardRef(
 
         if (primaryFocusElement) {
           return primaryFocusElement;
-        } else return sidePanelCloseRef && sidePanelCloseRef.current;
+        } else {
+          return sidePanelCloseRef && sidePanelCloseRef.current;
+        }
       };
 
       const focusButton = (focusContainerElement) => {
@@ -294,7 +298,9 @@ export let SidePanel = React.forwardRef(
 
     // initialize the side panel to open
     useEffect(() => {
-      if (open) setRender(true);
+      if (open) {
+        setRender(true);
+      }
     }, [open]);
 
     // initialize the side panel to close

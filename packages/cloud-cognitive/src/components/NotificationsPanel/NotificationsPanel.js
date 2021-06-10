@@ -87,7 +87,9 @@ export let NotificationsPanel = React.forwardRef(
 
     useEffect(() => {
       // initialize the notification panel to open
-      if (open) setRender(true);
+      if (open) {
+        setRender(true);
+      }
     }, [open]);
 
     const onAnimationEnd = () => {
@@ -96,7 +98,9 @@ export let NotificationsPanel = React.forwardRef(
     };
 
     const sortChronologically = (arr) => {
-      if (!arr || (arr && !arr.length)) return;
+      if (!arr || (arr && !arr.length)) {
+        return;
+      }
       return arr.sort((a, b) => b.timestamp - a.timestamp);
     };
 
@@ -175,10 +179,11 @@ export let NotificationsPanel = React.forwardRef(
                 event.preventDefault();
                 event.stopPropagation();
                 const newData = allNotifications.map((item) => {
-                  if (item.id === notification.id)
+                  if (item.id === notification.id) {
                     return Object.assign({}, item, {
                       showAll: !item.showAll,
                     });
+                  }
                   return item;
                 });
                 setAllNotifications(newData);
@@ -216,8 +221,9 @@ export let NotificationsPanel = React.forwardRef(
               event.target.classList.contains(
                 `${blockClass}__dismiss-single-button`
               )
-            )
+            ) {
               return;
+            }
             event.which === 13 &&
               notification.onNotificationClick(notification);
           }}>

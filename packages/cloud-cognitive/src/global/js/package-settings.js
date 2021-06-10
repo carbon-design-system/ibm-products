@@ -38,6 +38,7 @@ const defaults = {
     APIKeyModal: false,
     ButtonMenu: false,
     ButtonMenuItem: false,
+    CreateFullPage: false,
     CreateSidePanel: false,
     CreateTearsheet: false,
     CreateTearsheetStep: false,

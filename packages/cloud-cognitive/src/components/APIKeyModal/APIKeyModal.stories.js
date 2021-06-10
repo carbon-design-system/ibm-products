@@ -120,7 +120,9 @@ const MultiStepTemplate = (args) => {
   const inputRef = useRef();
 
   useEffect(() => {
-    if (inputRef.current && open) inputRef.current.focus();
+    if (inputRef.current && open) {
+      inputRef.current.focus();
+    }
   }, [open]);
 
   // multi step options

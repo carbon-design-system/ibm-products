@@ -112,8 +112,9 @@ export let ImportModal = forwardRef(
       setFiles([pendingFile]);
       try {
         const response = await fetch(importUrl);
-        if (!response.ok || response.status !== 200)
+        if (!response.ok || response.status !== 200) {
           throw new Error(response.status);
+        }
         const blob = await response.blob();
         const fetchedFile = new File([blob], fileName, { type: blob.type });
         fetchedFile.invalidFileType = isInvalidFileType(fetchedFile);

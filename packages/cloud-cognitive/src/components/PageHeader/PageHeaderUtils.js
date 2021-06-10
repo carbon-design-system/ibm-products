@@ -156,6 +156,9 @@ export const utilCalcSpacingBelowTitle = (
   return belowTitleSpace;
 };
 
+// Set css style values directly onto a node. Note that this is effective
+// immediately, rather than using the React `style` prop which goes through
+// the React DOM update optimisation.
 export const utilSetCustomCSSProps = (targetRef, kvPairs) => {
   if (targetRef.current) {
     const keys = Object.keys(kvPairs);

@@ -224,24 +224,38 @@ export let CreateTearsheet = forwardRef(
           {childrenArray.map((child, stepIndex) => {
             if (!isTearsheetStep(child)) return child;
             step++;
-            return React.cloneElement(child, {
-              className: cx(child.props.className, {
-                [`${blockClass}__step--hidden-section`]: currentStep !== step,
-                [`${blockClass}__step--visible-section`]: currentStep === step,
-              }),
-              key: `key_${stepIndex}`,
-            });
+            return React.cloneElement(
+              child,
+              {
+                className: cx(child.props.className, {
+                  [`${blockClass}__step--hidden-section`]: currentStep !== step,
+                  [`${blockClass}__step--visible-section`]:
+                    currentStep === step,
+                  [`${blockClass}__step--first-panel-step`]:
+                    !previousState?.open &&
+                    open &&
+                    previousState?.currentStep === 0 &&
+                    stepIndex === 0,
+                }),
+                key: `key_${stepIndex}`,
+              },
+              <>
+                <p className={`${blockClass}__step--heading`}>
+                  {renderStepTitle(stepIndex)}
+                </p>
+                {child.props.children}
+              </>
+            );
           })}
         </>
       );
     };
 
     // renders the individual step title
-    const renderStepTitle = () => {
+    const renderStepTitle = (stepIndex) => {
       const tearsheetSteps = getTearsheetSteps();
       const stepTitle =
-        (tearsheetSteps && tearsheetSteps[currentStep - 1]?.props.title) ||
-        null;
+        (tearsheetSteps && tearsheetSteps[stepIndex]?.props.title) || null;
       return stepTitle;
     };
 
@@ -324,7 +338,6 @@ export let CreateTearsheet = forwardRef(
         <div
           className={`${blockClass}__multi-step-panel-content`}
           onBlur={handleBlur}>
-          <p className={`${blockClass}__step--heading`}>{renderStepTitle()}</p>
           {renderChildren(children)}
         </div>
       </TearsheetShell>

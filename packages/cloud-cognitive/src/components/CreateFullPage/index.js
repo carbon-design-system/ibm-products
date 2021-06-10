@@ -6,3 +6,5 @@
  */
 
 export { CreateFullPage } from './CreateFullPage';
+export { CreateFullPageStep } from './CreateFullPageStep';
+export { CreateFullPageSection } from './CreateFullPageSection';

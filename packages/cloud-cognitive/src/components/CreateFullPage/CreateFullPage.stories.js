@@ -45,6 +45,7 @@ const defaultFullPageProps = {
     "If you cancel, the information you have entered won't be saved.",
   modalDangerButtonText: 'Cancel partition',
   modalSecondaryButtonText: 'Return to form',
+  onRequestSubmit: () => {},
 };
 
 const defaultStepProps = {
@@ -52,41 +53,6 @@ const defaultStepProps = {
   subtitle: 'This is the unique name used to recognize your topic.',
   description:
     'It will also be used by your producers and consumers as part of the connection information, so make something easy to recognize.',
-};
-
-const renderChildren = () => {
-  <>
-    <TextInput
-      id="test4"
-      invalidText="A valid value is required"
-      labelText="Topic name"
-      placeholder="Enter topic name"
-    />
-    <NumberInput
-      id="tj-input-3"
-      invalidText="Number is not valid"
-      label="Number input label"
-      max={100}
-      min={0}
-      step={10}
-      value={50}
-    />
-    <NumberInput
-      id="tj-input-2"
-      invalidText="Number is not valid"
-      label="Number input label"
-      max={100}
-      min={0}
-      step={10}
-      value={50}
-    />
-    <TextInput
-      id="test7"
-      invalidText="A valid value is required"
-      labelText="Minimum in-sync replicas"
-      placeholder="Enter topic name"
-    />
-  </>;
 };
 
 const Template = ({ ...args }) => {
@@ -101,10 +67,38 @@ const Template = ({ ...args }) => {
         />
       </CreateFullPageStep>
       <CreateFullPageStep
-        hasForm
         title="Core configuration"
         description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
-        {renderChildren()}
+        <TextInput
+          id="test4"
+          invalidText="A valid value is required"
+          labelText="Topic name"
+          placeholder="Enter topic name"
+        />
+        <NumberInput
+          id="tj-input-3"
+          invalidText="Number is not valid"
+          label="Number input label"
+          max={100}
+          min={0}
+          step={10}
+          value={50}
+        />
+        <NumberInput
+          id="tj-input-2"
+          invalidText="Number is not valid"
+          label="Number input label"
+          max={100}
+          min={0}
+          step={10}
+          value={50}
+        />
+        <TextInput
+          id="test7"
+          invalidText="A valid value is required"
+          labelText="Minimum in-sync replicas"
+          placeholder="Enter topic name"
+        />
       </CreateFullPageStep>
     </CreateFullPage>
   );
@@ -124,23 +118,108 @@ const TemplateWithSections = ({ ...args }) => {
       <CreateFullPageStep>
         <CreateFullPageSection
           hasForm
-          hasDivider
           title="Core configuration"
           description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
-          {renderChildren()}
+          <TextInput
+            id="test4"
+            invalidText="A valid value is required"
+            labelText="Topic name"
+            placeholder="Enter topic name"
+          />
+          <NumberInput
+            id="tj-input-3"
+            invalidText="Number is not valid"
+            label="Number input label"
+            max={100}
+            min={0}
+            step={10}
+            value={50}
+          />
+          <NumberInput
+            id="tj-input-2"
+            invalidText="Number is not valid"
+            label="Number input label"
+            max={100}
+            min={0}
+            step={10}
+            value={50}
+          />
+          <TextInput
+            id="test7"
+            invalidText="A valid value is required"
+            labelText="Minimum in-sync replicas"
+            placeholder="Enter topic name"
+          />
         </CreateFullPageSection>
         <CreateFullPageSection
           hasForm
-          hasDivider
           title="Configuration 2"
           description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
-          {renderChildren()}
+          <TextInput
+            id="test4"
+            invalidText="A valid value is required"
+            labelText="Topic name"
+            placeholder="Enter topic name"
+          />
+          <NumberInput
+            id="tj-input-3"
+            invalidText="Number is not valid"
+            label="Number input label"
+            max={100}
+            min={0}
+            step={10}
+            value={50}
+          />
+          <NumberInput
+            id="tj-input-2"
+            invalidText="Number is not valid"
+            label="Number input label"
+            max={100}
+            min={0}
+            step={10}
+            value={50}
+          />
+          <TextInput
+            id="test7"
+            invalidText="A valid value is required"
+            labelText="Minimum in-sync replicas"
+            placeholder="Enter topic name"
+          />
         </CreateFullPageSection>
         <CreateFullPageSection
           hasForm
           title="Configuration 3"
           description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
-          {renderChildren()}
+          <TextInput
+            id="test4"
+            invalidText="A valid value is required"
+            labelText="Topic name"
+            placeholder="Enter topic name"
+          />
+          <NumberInput
+            id="tj-input-3"
+            invalidText="Number is not valid"
+            label="Number input label"
+            max={100}
+            min={0}
+            step={10}
+            value={50}
+          />
+          <NumberInput
+            id="tj-input-2"
+            invalidText="Number is not valid"
+            label="Number input label"
+            max={100}
+            min={0}
+            step={10}
+            value={50}
+          />
+          <TextInput
+            id="test7"
+            invalidText="A valid value is required"
+            labelText="Minimum in-sync replicas"
+            placeholder="Enter topic name"
+          />
         </CreateFullPageSection>
       </CreateFullPageStep>
     </CreateFullPage>

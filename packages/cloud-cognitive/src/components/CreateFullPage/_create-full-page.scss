@@ -74,7 +74,8 @@
     display: block;
     width: calc(100vw - 16rem);
     height: 1px;
-    margin: $spacing-05 $spacing-08 $spacing-07 $spacing-08;
+    margin: $spacing-05 calc(-1 * #{$spacing-08}) $spacing-08
+      calc(-1 * #{$spacing-08});
     background-color: $ui-03;
   }
 

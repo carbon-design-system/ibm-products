@@ -14,10 +14,10 @@ export let CreateFullPageSection = forwardRef(
       children,
       className,
       hasDivider = true,
+      hasForm = true,
       title,
       subtitle,
       description,
-      hasForm = true,
     },
     ref
   ) => {

@@ -249,6 +249,8 @@ export let PageHeader = React.forwardRef(
       headerRef,
     ]);
 
+    // Update the breadcrumb position in response to vertical scroll.
+    // This can include flipping between sticky and relative position.
     const doUpdateBreadcrumbPosition = (scrollY) => {
       const breadcrumbPosition = {
         position: 'sticky',

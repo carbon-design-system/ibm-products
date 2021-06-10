@@ -13,7 +13,11 @@ import React, {
   useRef,
 } from 'react';
 import PropTypes from 'prop-types';
-import { ProgressIndicator, ProgressStep } from 'carbon-components-react';
+import {
+  ProgressIndicator,
+  ProgressStep,
+  Toggle,
+} from 'carbon-components-react';
 import cx from 'classnames';
 import wrapFocus from '../../global/js/utils/wrapFocus';
 import { TearsheetShell } from '../Tearsheet/TearsheetShell';
@@ -39,6 +43,7 @@ export let CreateTearsheet = forwardRef(
       children,
       className,
       description,
+      includeViewAllToggle,
       label,
       nextButtonText,
       onClose,
@@ -47,11 +52,15 @@ export let CreateTearsheet = forwardRef(
       submitButtonText,
       title,
       verticalPosition,
+      viewAllToggleLabelText,
+      viewAllToggleOffLabelText,
+      viewAllToggleOnLabelText,
       ...rest
     },
     ref
   ) => {
     const [createTearsheetActions, setCreateTearsheetActions] = useState([]);
+    const [shouldViewAll, setShouldViewAll] = useState(false);
     const [currentStep, setCurrentStep] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const previousState = usePreviousValue({ currentStep, open });
@@ -78,10 +87,10 @@ export let CreateTearsheet = forwardRef(
       const onUnmount = () => {
         setCurrentStep(0);
         setIsSubmitting(false);
+        setShouldViewAll(false);
         onClose();
       };
       const handleOnRequestSubmit = async () => {
-        // check if onRequestSubmit returns a promise
         try {
           await onRequestSubmit();
           onUnmount();
@@ -133,7 +142,7 @@ export let CreateTearsheet = forwardRef(
         const createSteps = getTearsheetSteps();
         const total = createSteps.length;
         const buttons = [];
-        if (total > 1)
+        if (total > 1 && !shouldViewAll)
           buttons.push({
             label: backButtonText,
             onClick: () => setCurrentStep((prev) => prev - 1),
@@ -146,8 +155,16 @@ export let CreateTearsheet = forwardRef(
           kind: 'ghost',
         });
         buttons.push({
-          label: currentStep < total ? nextButtonText : submitButtonText,
-          onClick: currentStep < total ? handleNext : handleSubmit,
+          label: shouldViewAll
+            ? submitButtonText
+            : currentStep < total
+            ? nextButtonText
+            : submitButtonText,
+          onClick: shouldViewAll
+            ? handleSubmit
+            : currentStep < total
+            ? handleNext
+            : handleSubmit,
           disabled: isSubmitDisabled(),
           kind: 'primary',
           loading: isSubmitting,
@@ -166,6 +183,7 @@ export let CreateTearsheet = forwardRef(
       submitButtonText,
       onRequestSubmit,
       isSubmitting,
+      shouldViewAll,
     ]);
 
     const continueToNextStep = () => {
@@ -317,6 +335,23 @@ export let CreateTearsheet = forwardRef(
       }
     };
 
+    const handleViewAllToggle = (toggleState) => {
+      setShouldViewAll(toggleState);
+    };
+
+    const renderViewAllToggle = () => {
+      return (
+        <Toggle
+          toggled={shouldViewAll}
+          labelText={viewAllToggleLabelText}
+          labelA={viewAllToggleOffLabelText}
+          labelB={viewAllToggleOnLabelText}
+          onToggle={(value) => handleViewAllToggle(value)}
+          className={`${blockClass}__view-all-toggle`}
+        />
+      );
+    };
+
     return (
       <TearsheetShell
         {...rest}
@@ -325,7 +360,12 @@ export let CreateTearsheet = forwardRef(
         closeIconDescription={'Close icon'}
         description={description}
         hasCloseIcon={false}
-        influencer={renderProgressSteps(children)}
+        influencer={
+          <div>
+            {renderProgressSteps(children)}
+            {includeViewAllToggle && renderViewAllToggle()}
+          </div>
+        }
         influencerPosition="left"
         influencerWidth="narrow"
         label={label}
@@ -381,6 +421,11 @@ CreateTearsheet.propTypes = {
   description: PropTypes.node,
 
   /**
+   * Used to optionally include view all toggle
+   */
+  includeViewAllToggle: PropTypes.bool,
+
+  /**
    * A label for the tearsheet, displayed in the header area of the tearsheet
    * to maintain context for the tearsheet (e.g. as the title changes from page
    * to page of a multi-page task).
@@ -428,6 +473,21 @@ CreateTearsheet.propTypes = {
    * to allow an action bar navigation or breadcrumbs to also show through.
    */
   verticalPosition: PropTypes.oneOf(['normal', 'lower']),
+
+  /**
+   * Sets the label text for the view all toggle component
+   */
+  viewAllToggleLabelText: PropTypes.string,
+
+  /**
+   * Sets the label text for the view all toggle `off` text
+   */
+  viewAllToggleOffLabelText: PropTypes.string,
+
+  /**
+   * Sets the label text for the view all toggle `on` text
+   */
+  viewAllToggleOnLabelText: PropTypes.string,
 };
 
 // Default values for component props. Default values are not required for

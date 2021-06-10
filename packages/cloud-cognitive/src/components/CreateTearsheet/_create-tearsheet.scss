@@ -65,6 +65,13 @@
     .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--disabled {
     box-shadow: -0.0625rem 0 0 0 $button-separator;
   }
+
+  .#{$block-class} .#{$block-class}__view-all-toggle {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: $spacing-05;
+  }
 }
 
 @include exports('create-tearsheet') {

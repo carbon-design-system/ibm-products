@@ -50,6 +50,7 @@ $raised-z-index: 99;
       --#{$block-class}--breadcrumb-title-visibility: hidden;
       --#{$block-class}--breadcrumb-title-opacity: 1;
       --#{$block-class}--breadcrumb-top: 0;
+      --#{$block-class}--breadcrumb-position: 0;
       --#{$block-class}--background-opacity: 1;
       --#{$block-class}--breadcrumb-title-top: initial;
       --#{$block-class}--button-set-in-breadcrumb-width-px: initial;
@@ -63,22 +64,23 @@ $raised-z-index: 99;
     }
 
     .#{$block-class}__breadcrumb-row {
-      position: sticky;
+      position: var(--#{$block-class}--breadcrumb-position);
       z-index: $raised-z-index;
       top: var(--#{$block-class}--breadcrumb-top);
-      min-height: $spacing-07;
+      min-height: $spacing-08;
 
       + .#{$block-class}__last-row-buffer--active {
         height: $spacing-02;
       }
     }
 
-    .#{$block-class}__breadcrumb-row--has-action-bar {
-      min-height: $spacing-08;
-
-      + .#{$block-class}__last-row-buffer--active {
-        height: $spacing-06;
-      }
+    :not(.#{$block-class}__breadcrumb-row--has-action-bar)
+      + .#{$block-class}__title-row {
+      // Using transform and margin-bottom as -ve margin top affects scroll opacity
+      // An alternative of making breadcrumb row min-height 32px. 0 causes it to be too small on scroll.
+      margin-bottom: calc(-1 * #{$spacing-03});
+      // stylelint-disable-next-line carbon/layout-token-use
+      transform: translateY(calc(-1 * #{$spacing-03}));
     }
 
     .#{$block-class}__breadcrumb-row--container {
@@ -125,8 +127,15 @@ $raised-z-index: 99;
 
     .#{$block-class}__action-bar-column {
       display: none;
+    }
 
-      .#{$block-class}__breadcrumb-row--has-breadcrumbs & {
+    .#{$block-class}__breadcrumb-row--has-breadcrumbs
+      .#{$block-class}__action-bar-column {
+      // back button displayed only
+      max-width: 75%;
+      flex: 0 1 75%;
+
+      @include carbon--breakpoint(md) {
         max-width: 40%;
         flex: 1 0 40%;
       }
@@ -176,8 +185,14 @@ $raised-z-index: 99;
 
     .#{$block-class}__breadcrumb-row--has-action-bar
       .#{$block-class}__breadcrumb-column {
-      max-width: 60%;
-      flex: 0 1 60%;
+      // back button displayed only
+      max-width: 25%;
+      flex: 0 1 25%;
+
+      @include carbon--breakpoint(md) {
+        max-width: 60%;
+        flex: 0 1 60%;
+      }
     }
 
     .#{$block-class}__breadcrumb-column--background,
@@ -226,7 +241,6 @@ $raised-z-index: 99;
 
     .#{$block-class}__breadcrumb-title {
       position: relative;
-      width: 100%;
 
       &:not(.#{$block-class}__breadcrumb-title--pre-collapsed) {
         opacity: var(--#{$block-class}--breadcrumb-title-opacity);
@@ -291,11 +305,17 @@ $raised-z-index: 99;
       &.#{$block-class}__title-row--no-breadcrumb-row {
         margin-top: $spacing-07;
       }
+    }
 
-      &.#{$block-class}__title-row--sticky {
-        position: sticky;
-        top: var(--#{$block-class}--breadcrumb-top);
-      }
+    .#{$block-class}__title-row--sticky {
+      position: sticky;
+      top: var(--#{$block-class}--breadcrumb-top);
+    }
+
+    .#{$block-class}__breadcrumb-row--has-breadcrumbs
+      + .#{$block-class}__title-row--sticky {
+      // stylelint-disable-next-line carbon/layout-token-use
+      top: calc(#{$spacing-03} + var(--#{$block-class}--breadcrumb-top));
     }
 
     .#{$block-class}__title-column {
@@ -328,7 +348,7 @@ $raised-z-index: 99;
       margin-right: $spacing-04;
       // stylelint-disable-next-line carbon/layout-token-use
       transform: translateY(
-        -3px
+        -2px
       ); // positional tweak requested by design review
 
       vertical-align: middle;

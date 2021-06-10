@@ -155,3 +155,12 @@ export const utilCalcSpacingBelowTitle = (
   }
   return belowTitleSpace;
 };
+
+export const utilSetCustomCSSProps = (targetRef, kvPairs) => {
+  if (targetRef.current) {
+    const keys = Object.keys(kvPairs);
+    for (let k of keys) {
+      targetRef.current.style.setProperty(k, kvPairs[k]);
+    }
+  }
+};

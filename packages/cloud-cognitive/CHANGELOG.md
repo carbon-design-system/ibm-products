@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.42.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.42.1...@carbon/ibm-cloud-cognitive@0.42.2) (2021-06-10)
+
+
+### Bug Fixes
+
+* improve AboutModal stories ([#875](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/875)) ([5faf934](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/5faf93494a33d523330e536b150013f4e339c5ec))
+
+
+
+
+
+## [0.42.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.42.0...@carbon/ibm-cloud-cognitive@0.42.1) (2021-06-10)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+# [0.42.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.41.10...@carbon/ibm-cloud-cognitive@0.42.0) (2021-06-09)
+
+
+### Features
+
+* match Carbon peer deps for react ([#869](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/869)) ([8f42118](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8f42118754a904554acee9ec3af2e1fae8143817))
+
+
+
+
+
+## [0.41.10](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.41.9...@carbon/ibm-cloud-cognitive@0.41.10) (2021-06-09)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
 ## [0.41.9](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.41.8...@carbon/ibm-cloud-cognitive@0.41.9) (2021-06-07)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

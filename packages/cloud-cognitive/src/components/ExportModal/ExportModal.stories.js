@@ -50,8 +50,11 @@ const TemplateWithState = (args) => {
   const onSubmitHandler = async () => {
     setLoading(true);
     await wait(1000);
-    if (args.successful) setSuccessful(true);
-    else setError(true);
+    if (args.successful) {
+      setSuccessful(true);
+    } else {
+      setError(true);
+    }
     setLoading(false);
   };
 

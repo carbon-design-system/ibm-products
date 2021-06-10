@@ -71,7 +71,7 @@ export let Card = ({
 
     const icons = actionIcons.map(
       ({ id, icon: Icon, onClick, iconDescription, onKeyDown }) => {
-        if (productive)
+        if (productive) {
           return (
             <Button
               key={id}
@@ -83,6 +83,7 @@ export let Card = ({
               kind="ghost"
             />
           );
+        }
         return (
           <div
             key={id}

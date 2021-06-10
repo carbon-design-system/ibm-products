@@ -17,7 +17,7 @@ $block-class: #{$pkg-prefix}--tag-set;
 
 @mixin tag-set {
   @include block-wrap($block-class) {
-    .#{$block-class} {
+    &.#{$block-class} {
       display: block;
       width: 100%;
     }

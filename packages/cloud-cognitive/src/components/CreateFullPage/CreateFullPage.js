@@ -97,7 +97,9 @@ export let CreateFullPage = React.forwardRef(
             setIsSubmitting(false);
             console.warn(`${componentName} onNext error: ${error}`);
           }
-        } else continueToNextStep();
+        } else {
+          continueToNextStep();
+        }
       };
       const handleSubmit = async () => {
         setIsSubmitting(true);
@@ -111,35 +113,38 @@ export let CreateFullPage = React.forwardRef(
             setIsSubmitting(false);
             console.warn(`${componentName} onNext error: ${error}`);
           }
-        } else await handleOnRequestSubmit();
+        } else {
+          await handleOnRequestSubmit();
+        }
       };
       if (getFullPageSteps()?.length) {
         const createSteps = getFullPageSteps();
         const total = createSteps.length;
         const buttons = [];
-        if (total > 1)
+        if (total > 1) {
           buttons.push({
             label: backButtonText,
             onClick: () => setCurrentStep((prev) => prev - 1),
             kind: 'secondary',
             disabled: currentStep === 1,
           });
-        buttons.push({
-          label: cancelButtonText,
-          onClick: () => {
-            setOpen(true);
-          },
-          kind: 'ghost',
-        });
-        buttons.push({
-          label: currentStep < total ? nextButtonText : submitButtonText,
-          onClick: currentStep < total ? handleNext : handleSubmit,
-          disabled: isSubmitDisabled(),
-          kind: 'primary',
-          loading: isSubmitting,
-          className: `${blockClass}__create-button`,
-        });
-        setCreateFullPageActions(buttons);
+          buttons.push({
+            label: cancelButtonText,
+            onClick: () => {
+              setOpen(true);
+            },
+            kind: 'ghost',
+          });
+          buttons.push({
+            label: currentStep < total ? nextButtonText : submitButtonText,
+            onClick: currentStep < total ? handleNext : handleSubmit,
+            disabled: isSubmitDisabled(),
+            kind: 'primary',
+            loading: isSubmitting,
+            className: `${blockClass}__create-button`,
+          });
+          setCreateFullPageActions(buttons);
+        }
       }
     }, [
       getFullPageSteps,
@@ -223,7 +228,9 @@ export let CreateFullPage = React.forwardRef(
       return (
         <>
           {childrenArray.map((child, stepIndex) => {
-            if (!isFullPageStep(child)) return child;
+            if (!isFullPageStep(child)) {
+              return child;
+            }
             step++;
             return React.cloneElement(child, {
               className: cx(child.props.className, {

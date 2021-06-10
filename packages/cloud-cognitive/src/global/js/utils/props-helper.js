@@ -50,7 +50,9 @@ export const prepareProps = (...values) => {
 
   // Now strip any keys whose final value is null
   return Object.entries(merged).reduce((result, [key, value]) => {
-    if (value !== null) result[key] = value;
+    if (value !== null) {
+      result[key] = value;
+    }
     return result;
   }, {});
 };

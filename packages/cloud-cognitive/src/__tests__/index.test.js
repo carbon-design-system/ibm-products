@@ -46,7 +46,9 @@ describe(name, () => {
       const TestComponent = components[key];
 
       // TODO: remove this - security components does not currently support canary
-      if (key.startsWith('ComboButton')) continue;
+      if (key.startsWith('ComboButton')) {
+        continue;
+      }
 
       if (!pkg.isComponentEnabled(key)) {
         // We check that exported components are listed in package settings.

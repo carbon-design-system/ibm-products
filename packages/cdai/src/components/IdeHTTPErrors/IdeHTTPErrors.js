@@ -130,7 +130,9 @@ export default class IdeHTTPErrors extends Component {
       props: { links: linksProp },
       renderSection,
     } = this;
-    if (!linksProp) return;
+    if (!linksProp) {
+      return;
+    }
     const links = linksPropIsObject ? [linksProp] : linksProp;
     return renderSection(
       'links',
@@ -153,8 +155,9 @@ export default class IdeHTTPErrors extends Component {
       !state ||
       (isInline && isLargeViewport) ||
       (!isInline && !isLargeViewport)
-    )
+    ) {
       return null;
+    }
     const className = 'image-container';
     const sectionClassName = isInline ? `inline-${className}` : className;
     const background = getImage(isInline);
@@ -182,7 +185,9 @@ export default class IdeHTTPErrors extends Component {
   }
   get isLargeViewport() {
     const state = this.state;
-    if (!state) return false;
+    if (!state) {
+      return false;
+    }
     const width = state.width;
     // NOTE @simon Hardcoded value 672 is per Carbon guidelines, see
     // https://www.carbondesignsystem.com/guidelines/2x-grid/basics#breakpoints
@@ -192,7 +197,9 @@ export default class IdeHTTPErrors extends Component {
 
   // Layout
   renderSection = (sectionClassName, children) => {
-    if (!sectionClassName) return null;
+    if (!sectionClassName) {
+      return null;
+    }
     const { className, gridClasses, props, renderRow } = this;
     return renderRow(
       <div className={`${className}-${sectionClassName} ${gridClasses}`}>

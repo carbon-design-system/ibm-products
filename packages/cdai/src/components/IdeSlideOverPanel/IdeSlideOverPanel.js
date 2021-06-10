@@ -119,7 +119,9 @@ const IdeSlideOverPanel = ({
         <div role="presentation" className={overlayClasses} {...interactions} />
       </>
     );
-  } else return panelContents;
+  } else {
+    return panelContents;
+  }
 };
 
 IdeSlideOverPanel.propTypes = {

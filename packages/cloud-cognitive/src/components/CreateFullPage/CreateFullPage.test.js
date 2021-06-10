@@ -7,114 +7,90 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
-import userEvent from '@testing-library/user-event';
-
-import { pkg } from '../../settings';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { CreateFullPage } from '.';
+import { CreateFullPageStep } from './CreateFullPageStep';
 
-const blockClass = `${pkg.prefix}--example-component`;
+import { TextInput, NumberInput } from 'carbon-components-react';
+
 const componentName = CreateFullPage.displayName;
 
-const borderColor = '#acefed';
-const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
-const primaryButtonLabel = `hello, world (${uuidv4()})`;
-const secondaryButtonLabel = `goodbye (${uuidv4()})`;
+
+const defaultFullPageProps = {
+  nextButtonText: 'Next',
+  backButtonText: 'Back',
+  cancelButtonText: 'Cancel',
+  submitButtonText: 'Submit',
+  modalTitle: 'Are you sure you want to cancel?',
+  modalDescription:
+    "If you cancel, the information you have entered won't be saved.",
+  modalDangerButtonText: 'Cancel partition',
+  modalSecondaryButtonText: 'Return to form',
+  onRequestSubmit: () => {},
+};
+
+const defaultStepProps = {
+  title: 'Partition',
+  subtitle: 'This is the unique name used to recognize your topic.',
+  description:
+    'It will also be used by your producers and consumers as part of the connection information, so make something easy to recognize.',
+};
 
 // render an CreateFullPage with button labels and any other required props
 const renderComponent = ({ ...rest }) =>
   render(
-    <CreateFullPage
-      {...{ primaryButtonLabel, secondaryButtonLabel, ...rest }}
-    />
+    <CreateFullPage {...rest} {...defaultFullPageProps}>
+      <CreateFullPageStep {...defaultStepProps}>
+        <TextInput
+          id="test1"
+          invalidText="A valid value is required"
+          labelText="Topic name"
+          placeholder="Enter topic name"
+        />
+      </CreateFullPageStep>
+      <CreateFullPageStep
+        title="Core configuration"
+        description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
+        <TextInput
+          id="test4"
+          invalidText="A valid value is required"
+          labelText="Topic name"
+          placeholder="Enter topic name"
+        />
+        <NumberInput
+          id="tj-input-3"
+          invalidText="Number is not valid"
+          label="Number input label"
+          max={100}
+          min={0}
+          step={10}
+          value={50}
+        />
+        <NumberInput
+          id="tj-input-2"
+          invalidText="Number is not valid"
+          label="Number input label"
+          max={100}
+          min={0}
+          step={10}
+          value={50}
+        />
+        <TextInput
+          id="test7"
+          invalidText="A valid value is required"
+          labelText="Minimum in-sync replicas"
+          placeholder="Enter topic name"
+        />
+      </CreateFullPageStep>
+    </CreateFullPage>
   );
 
 describe(componentName, () => {
-  it('renders a component CreateFullPage', () => {
-    renderComponent();
-    expect(screen.getByRole('main')).toHaveClass(blockClass);
-  });
-
-  it('has no accessibility violations', async () => {
-    const { container } = renderComponent();
-    await expect(container).toBeAccessible(componentName, 'scan_label');
-    await expect(container).toHaveNoAxeViolations();
-  });
-
-  it(`renders the borderColor property`, () => {
-    renderComponent({ borderColor });
-    const style = window.getComputedStyle(screen.getByRole('main'));
-    // We'd prefer to test the actual border color style, but jsdom does not
-    // render css custom properties (https://github.com/jsdom/jsdom/issues/1895)
-    // so testing the property is the best we can do.
-    expect(style.getPropertyValue(`--${pkg.prefix}-border-color`)).toEqual(
-      borderColor
-    );
-  });
-
-  it(`renders the boxedBorder property`, () => {
-    renderComponent({ boxedBorder: true });
-    expect(screen.getByRole('main')).toHaveClass(`${blockClass}--boxed-set`);
-  });
-
-  it('applies className to the containing node', () => {
-    renderComponent({ className });
-    expect(screen.getByRole('main')).toHaveClass(className);
-  });
-
-  it(`renders the disabled property`, () => {
-    renderComponent({ disabled: true });
-    screen
-      .getAllByRole('button')
-      .forEach((button) => expect(button).toHaveProperty('disabled', true));
-  });
-
-  it('notifies a click on each button', () => {
-    const primaryHandler = jest.fn();
-    const secondaryHandler = jest.fn();
-    renderComponent({
-      onPrimaryClick: primaryHandler,
-      onSecondaryClick: secondaryHandler,
-    });
-    screen.getAllByRole('button').forEach(userEvent.click);
-    expect(primaryHandler).toBeCalledTimes(1);
-    expect(secondaryHandler).toBeCalledTimes(1);
-  });
-
-  it('renders the primaryButtonLabel and secondaryButtonLabel properties', () => {
-    renderComponent();
-    screen.getByText(primaryButtonLabel);
-    screen.getByText(secondaryButtonLabel);
-  });
-
-  it('renders the primaryKind and secondaryKind properties', () => {
-    renderComponent({ primaryKind: 'danger', secondaryKind: 'tertiary' });
-    expect(
-      screen.getByRole('button', { name: `danger ${primaryButtonLabel}` })
-    ).toHaveClass('bx--btn--danger');
-    expect(
-      screen.getByRole('button', { name: secondaryButtonLabel })
-    ).toHaveClass('bx--btn--tertiary');
-  });
-
-  it('renders the size property', () => {
-    renderComponent({ size: 'small' });
-    screen
-      .getAllByRole('button')
-      .forEach((button) => expect(button).toHaveClass('bx--btn--sm'));
-  });
-
   it('adds additional properties to the containing node', () => {
     renderComponent({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
-  });
-
-  it('forwards a ref to an appropriate node', () => {
-    const ref = React.createRef();
-    renderComponent({ ref });
-    expect(ref.current).toEqual(screen.getByRole('main'));
   });
 });

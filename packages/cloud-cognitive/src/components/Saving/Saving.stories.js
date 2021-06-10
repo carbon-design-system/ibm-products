@@ -61,7 +61,9 @@ const AutoTemplate = (opts) => {
 
   const onChangeHandler = async (evt) => {
     const { value } = evt.target;
-    if (!dirtyInput) setDirtyInput(true);
+    if (!dirtyInput) {
+      setDirtyInput(true);
+    }
     setText(value);
   };
 

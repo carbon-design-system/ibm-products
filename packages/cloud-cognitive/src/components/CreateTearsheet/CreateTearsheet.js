@@ -113,7 +113,9 @@ export let CreateTearsheet = forwardRef(
             setIsSubmitting(false);
             console.warn(`${componentName} onNext error: ${error}`);
           }
-        } else continueToNextStep();
+        } else {
+          continueToNextStep();
+        }
       };
       const handleSubmit = async () => {
         setIsSubmitting(true);
@@ -127,19 +129,22 @@ export let CreateTearsheet = forwardRef(
             setIsSubmitting(false);
             console.warn(`${componentName} onNext error: ${error}`);
           }
-        } else await handleOnRequestSubmit();
+        } else {
+          await handleOnRequestSubmit();
+        }
       };
       if (getTearsheetSteps()?.length) {
         const createSteps = getTearsheetSteps();
         const total = createSteps.length;
         const buttons = [];
-        if (total > 1)
+        if (total > 1) {
           buttons.push({
             label: backButtonText,
             onClick: () => setCurrentStep((prev) => prev - 1),
             kind: 'secondary',
             disabled: currentStep === 1,
           });
+        }
         buttons.push({
           label: cancelButtonText,
           onClick: onUnmount,
@@ -222,7 +227,9 @@ export let CreateTearsheet = forwardRef(
         <>
           {' '}
           {childrenArray.map((child, stepIndex) => {
-            if (!isTearsheetStep(child)) return child;
+            if (!isTearsheetStep(child)) {
+              return child;
+            }
             step++;
             return React.cloneElement(child, {
               className: cx(child.props.className, {

@@ -93,12 +93,6 @@ export let PageHeader = React.forwardRef(
         setMetrics
       );
     };
-    // const setComponentCssCustomProps = useCallback(
-    //   (kvPairs) => {
-    //     return utilSetCustomCSSProps(headerRef, kvPairs);
-    //   },
-    //   [headerRef]
-    // );
 
     // state based on props only
     const actionBarItemArray = extractShapesArray(actionBarItems);

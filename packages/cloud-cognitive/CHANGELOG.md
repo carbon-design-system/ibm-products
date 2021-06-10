@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.42.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.42.5...@carbon/ibm-cloud-cognitive@0.42.6) (2021-06-10)
+
+
+### Bug Fixes
+
+* page header styling on scroll ([#881](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/881)) ([da5a472](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/da5a472e0ecef94be5d6157dcb55b640c76bbf23))
+
+
+
+
+
 ## [0.42.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.42.4...@carbon/ibm-cloud-cognitive@0.42.5) (2021-06-10)
 
 

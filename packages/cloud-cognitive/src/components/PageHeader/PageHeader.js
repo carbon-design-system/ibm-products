@@ -39,6 +39,7 @@ import {
   utilCheckUpdateVerticalSpace,
   utilGetTitleShape,
   utilCalcSpacingBelowTitle,
+  utilSetCustomCSSProps,
 } from './PageHeaderUtils';
 
 export let PageHeader = React.forwardRef(
@@ -69,7 +70,6 @@ export let PageHeader = React.forwardRef(
     const [metrics, setMetrics] = useState({});
 
     // refs
-    const dynamicRefs = useRef({});
     const localHeaderRef = useRef(null);
     const headerRef = ref || localHeaderRef;
 
@@ -90,8 +90,7 @@ export let PageHeader = React.forwardRef(
         headerRef,
         navigation,
         preventBreadcrumbScroll,
-        setMetrics,
-        dynamicRefs
+        setMetrics
       );
     };
 
@@ -126,7 +125,6 @@ export let PageHeader = React.forwardRef(
     const [pageActionsInBreadcrumbRow, setPageActionsInBreadcrumbRow] =
       useState(false);
     const [scrollYValue, setScrollYValue] = useState(0);
-    const [componentCssCustomProps, setComponentCssCustomProps] = useState({});
     const [backgroundOpacity, setBackgroundOpacity] = useState(0);
     const [hasCollapseButton, setHasCollapseButton] = useState(false);
     const [spaceForCollapseButton, setSpaceForCollapseButton] = useState(false);
@@ -238,12 +236,9 @@ export let PageHeader = React.forwardRef(
         }
       }
 
-      setComponentCssCustomProps((prevCSSProps) => {
-        return {
-          ...prevCSSProps,
-          [`--${blockClass}--max-action-bar-width-px`]: newActionBarWidth,
-          [`--${blockClass}--button-set-in-breadcrumb-width-px`]: `${newPageActionInBreadcrumbWidth}`,
-        };
+      utilSetCustomCSSProps(headerRef, {
+        [`--${blockClass}--max-action-bar-width-px`]: newActionBarWidth,
+        [`--${blockClass}--button-set-in-breadcrumb-width-px`]: `${newPageActionInBreadcrumbWidth}`,
       });
     }, [
       actionBarColumnWidth,
@@ -251,50 +246,65 @@ export let PageHeader = React.forwardRef(
       actionBarMinWidth,
       pageActionInBreadcrumbMaxWidth,
       pageActionInBreadcrumbMinWidth,
+      headerRef,
     ]);
+
+    // Update the breadcrumb position in response to vertical scroll.
+    // This can include flipping between sticky and relative position.
+    const doUpdateBreadcrumbPosition = (scrollY) => {
+      const breadcrumbPosition = {
+        position: 'sticky',
+        top: pageHeaderOffset,
+      };
+
+      if (!preventBreadcrumbScroll && navigation) {
+        const relativeTop =
+          metrics.headerHeight -
+          metrics.titleRowSpaceAbove -
+          metrics.navigationRowHeight -
+          metrics.breadcrumbRowHeight;
+
+        if (relativeTop < scrollY) {
+          breadcrumbPosition.top = relativeTop;
+          breadcrumbPosition.position = 'relative';
+        }
+      }
+
+      utilSetCustomCSSProps(headerRef, {
+        [`--${blockClass}--breadcrumb-top`]: `${breadcrumbPosition.top}px`,
+        [`--${blockClass}--breadcrumb-position`]: breadcrumbPosition.position,
+      });
+    };
 
     useEffect(() => {
       // Updates custom CSS props used to manage scroll behaviour
-      setComponentCssCustomProps((prevCSSProps) => {
-        return {
-          ...prevCSSProps,
-          [`--${blockClass}--height-px`]: `${metrics.headerHeight}px`,
-          [`--${blockClass}--width-px`]: `${metrics.headerWidth}px`,
-          [`--${blockClass}--header-top`]: `${
-            metrics.headerTopValue + pageHeaderOffset
-          }px`,
-          [`--${blockClass}--breadcrumb-title-visibility`]:
-            scrollYValue > 0 ? 'visible' : 'hidden',
-          [`--${blockClass}--scroll`]: `${scrollYValue}`,
-          [`--${blockClass}--breadcrumb-title-top`]: `${Math.max(
+      utilSetCustomCSSProps(headerRef, {
+        [`--${blockClass}--height-px`]: `${metrics.headerHeight}px`,
+        [`--${blockClass}--width-px`]: `${metrics.headerWidth}px`,
+        [`--${blockClass}--header-top`]: `${
+          metrics.headerTopValue + pageHeaderOffset
+        }px`,
+        [`--${blockClass}--breadcrumb-title-visibility`]:
+          scrollYValue > 0 ? 'visible' : 'hidden',
+        [`--${blockClass}--scroll`]: `${scrollYValue}`,
+        [`--${blockClass}--breadcrumb-title-top`]: `${Math.max(
+          0,
+          metrics.breadcrumbTitleHeight +
+            metrics.titleRowSpaceAbove -
+            scrollYValue
+        )}px`,
+        [`--${blockClass}--breadcrumb-title-opacity`]: `${Math.min(
+          1,
+          Math.max(
             0,
-            metrics.breadcrumbTitleHeight +
-              metrics.titleRowSpaceAbove -
-              scrollYValue
-          )}px`,
-          [`--${blockClass}--breadcrumb-title-opacity`]: `${Math.min(
-            1,
-            Math.max(
-              0,
-              (scrollYValue - (metrics.titleRowSpaceAbove || 0)) /
-                (metrics.breadcrumbTitleHeight || 1) // don't want to
-            )
-          )}`,
-          [`--${blockClass}--breadcrumb-row-width-px`]: `${metrics.breadcrumbRowWidth}px`,
-          [`--${blockClass}--breadcrumb-top`]: `${Math.min(
-            pageHeaderOffset,
-            !preventBreadcrumbScroll && navigation
-              ? metrics.headerHeight -
-                  metrics.titleRowSpaceAbove -
-                  metrics.navigationRowHeight -
-                  metrics.breadcrumbRowHeight -
-                  scrollYValue +
-                  pageHeaderOffset
-              : pageHeaderOffset
-          )}px`,
-        };
+            (scrollYValue - (metrics.titleRowSpaceAbove || 0)) /
+              (metrics.breadcrumbTitleHeight || 1) // don't want to divide by zero
+          )
+        )}`,
+        [`--${blockClass}--breadcrumb-row-width-px`]: `${metrics.breadcrumbRowWidth}px`,
       });
     }, [
+      headerRef,
       preventBreadcrumbScroll,
       metrics,
       metrics.breadcrumbRowHeight,
@@ -314,6 +324,8 @@ export let PageHeader = React.forwardRef(
     useWindowScroll(
       // on scroll or various layout changes check updates if needed
       ({ current }) => {
+        doUpdateBreadcrumbPosition(current.scrollY);
+
         const fullyCollapsed =
           current.scrollY + metrics.headerTopValue + pageHeaderOffset >= 0;
         setFullyCollapsed(fullyCollapsed);
@@ -377,16 +389,16 @@ export let PageHeader = React.forwardRef(
         }
       }
 
-      setComponentCssCustomProps((prevCSSProps) => ({
-        ...prevCSSProps,
+      utilSetCustomCSSProps(headerRef, {
         [`--${blockClass}--background-opacity`]: result,
-      }));
+      });
       setBackgroundOpacity(result);
       setHasCollapseButton(collapseHeaderToggleWanted && result > 0);
     }, [
       actionBarItems,
       background,
       breadcrumbItems,
+      headerRef,
       metrics.breadcrumbRowHeight,
       metrics.headerHeight,
       navigation,
@@ -404,8 +416,9 @@ export let PageHeader = React.forwardRef(
 
     const nextToTabsCheck = () => {
       return (
+        preventBreadcrumbScroll &&
         actionBarItems === undefined &&
-        scrollYValue + metrics.headerTopValue > 0
+        scrollYValue + metrics.headerTopValue >= 0
       );
     };
 
@@ -432,8 +445,7 @@ export let PageHeader = React.forwardRef(
               [`${blockClass}--show-background`]: backgroundOpacity > 0,
             },
           ])}
-          ref={headerRef}
-          style={componentCssCustomProps}>
+          ref={headerRef}>
           <Grid>
             {hasBreadcrumbRow ? (
               <Row

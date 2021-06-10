@@ -63,7 +63,9 @@ export let ImportModal = forwardRef(
       const name = file.name;
       const mimeType = file.type;
       const extension = name.split('.').pop();
-      if (acceptSet.has(mimeType) || acceptSet.has(extension)) return false;
+      if (acceptSet.has(mimeType) || acceptSet.has(extension)) {
+        return false;
+      }
       return true;
     };
 

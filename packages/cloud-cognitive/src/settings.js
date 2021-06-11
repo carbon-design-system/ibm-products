@@ -5,6 +5,20 @@ import pkgSettings from './global/js/package-settings';
 import { settings as carbonSettings } from 'carbon-components';
 import React from 'react';
 
+import { themeTokens } from './global/js/utils/getCarbonThemeTokens';
+import {
+  containerTokens,
+  fluidSpacingTokens,
+  iconSizeTokens,
+  layoutFunctions,
+  layoutTokens,
+  spacingTokens,
+} from './utils/getCarbonLayoutTokens';
+import {
+  carbonColorTokens,
+  ibmColorTokens,
+} from './utils/getCarbonColorTokens';
+
 export const carbon = {
   get prefix() {
     return carbonSettings.prefix;
@@ -15,6 +29,15 @@ export const carbon = {
   get flags() {
     return featureFlags;
   },
+  themeTokens,
+  containerTokens,
+  fluidSpacingTokens,
+  iconSizeTokens,
+  layoutFunctions,
+  layoutTokens,
+  spacingTokens,
+  carbonColorTokens,
+  ibmColorTokens,
 };
 
 // Check that a component is enabled. This function returns a stub which checks

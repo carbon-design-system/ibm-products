@@ -40,6 +40,8 @@ const defaults = {
     ButtonMenu: false,
     ButtonMenuItem: false,
     CreateFullPage: false,
+    CreateFullPageSection: false,
+    CreateFullPageStep: false,
     CreateSidePanel: false,
     CreateTearsheet: false,
     CreateTearsheetStep: false,

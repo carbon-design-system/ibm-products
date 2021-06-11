@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.42.9](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.42.8...@carbon/ibm-cloud-cognitive@0.42.9) (2021-06-11)
+
+
+### Bug Fixes
+
+* **SidePanel:** add default subtitle height value ([#889](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/889)) ([d7c61ae](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d7c61ae118e7c4eb9217f50d0d90bebef81fc4c8))
+
+
+
+
+
 ## [0.42.8](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.42.7...@carbon/ibm-cloud-cognitive@0.42.8) (2021-06-10)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

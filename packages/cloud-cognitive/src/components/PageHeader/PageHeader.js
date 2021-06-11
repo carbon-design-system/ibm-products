@@ -38,7 +38,6 @@ import {
   blockClass,
   utilCheckUpdateVerticalSpace,
   utilGetTitleShape,
-  utilCalcSpacingBelowTitle,
   utilSetCustomCSSProps,
 } from './PageHeaderUtils';
 
@@ -74,14 +73,6 @@ export let PageHeader = React.forwardRef(
     const headerRef = ref || localHeaderRef;
 
     // utility functions
-    const calcSpacingBelowTitle = () =>
-      utilCalcSpacingBelowTitle(
-        availableSpace,
-        tags,
-        navigation,
-        subtitle,
-        pageActions
-      );
     // Title shape is used to allow title to be string or shape
     const getTitleShape = () =>
       utilGetTitleShape(title, titleIcon, PageHeader.defaultProps.title);
@@ -106,8 +97,6 @@ export let PageHeader = React.forwardRef(
         ...shape,
       })
     );
-
-    const spacingBelowTitle = calcSpacingBelowTitle();
 
     /* Title shape is used to allow title to be string or shape */
     const titleShape = getTitleShape();
@@ -517,22 +506,18 @@ export let PageHeader = React.forwardRef(
               {!preCollapseTitleRow &&
               !(title === undefined && pageActions === undefined) ? (
                 <Row
-                  className={cx(
-                    `${blockClass}__title-row`,
-                    `${blockClass}__title-row--spacing-below-${spacingBelowTitle}`,
-                    {
-                      [`${blockClass}__title-row--no-breadcrumb-row`]:
-                        !hasBreadcrumbRow,
-                      [`${blockClass}__title-row--under-action-bar`]:
-                        hasActionBar,
-                      [`${blockClass}__title-row--has-page-actions`]:
-                        pageActions !== undefined,
-                      [`${blockClass}__title-row--sticky`]:
-                        pageActions !== undefined &&
-                        actionBarItems === undefined &&
-                        hasBreadcrumbRow,
-                    }
-                  )}>
+                  className={cx(`${blockClass}__title-row`, {
+                    [`${blockClass}__title-row--no-breadcrumb-row`]:
+                      !hasBreadcrumbRow,
+                    [`${blockClass}__title-row--under-action-bar`]:
+                      hasActionBar,
+                    [`${blockClass}__title-row--has-page-actions`]:
+                      pageActions !== undefined,
+                    [`${blockClass}__title-row--sticky`]:
+                      pageActions !== undefined &&
+                      actionBarItems === undefined &&
+                      hasBreadcrumbRow,
+                  })}>
                   <Column className={`${blockClass}__title-column`}>
                     {/* keeps page actions right even if empty */}
                     {title !== undefined ? (

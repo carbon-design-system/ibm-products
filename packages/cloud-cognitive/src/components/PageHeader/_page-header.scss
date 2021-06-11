@@ -78,18 +78,10 @@ $raised-z-index: 99;
       }
     }
 
-    // .#{$block-class}__breadcrumb-row:not(.#{$block-class}__breadcrumb-row--has-action-bar) {
-    //   margin-bottom: calc(-1 * #{$spacing-03});
-    // }
-
-    // .#{$block-class}__breadcrumb-row:not(.#{$block-class}__breadcrumb-row--has-action-bar)
-    //   + .#{$block-class}__title-row {
-    //   // Using transform and margin-bottom as -ve margin top affects scroll opacity
-    //   // An alternative of making breadcrumb row min-height 32px. 0 causes it to be too small on scroll.
-    //   margin-bottom: calc(-1 * #{$spacing-03});
-    //   // stylelint-disable-next-line carbon/layout-token-use
-    //   transform: translateY(calc(-1 * #{$spacing-03}));
-    // }
+    .#{$block-class}__breadcrumb-row:not(.#{$block-class}__breadcrumb-row--has-action-bar) {
+      // lifts up page title when there is no action bar
+      margin-bottom: calc(-1 * #{$spacing-03});
+    }
 
     .#{$block-class}__breadcrumb-row--container {
       display: flex;
@@ -314,7 +306,13 @@ $raised-z-index: 99;
     &.#{$block-class}--has-navigation
       .#{$block-class}__title-row
       + .#{$block-class}__last-row-buffer--active {
-      height: calc(#{$spacing-05} + #{$spacing-02});
+      height: calc(#{$spacing-06});
+    }
+
+    &.#{$block-class}--has-navigation-tags-only
+      .#{$block-class}__title-row
+      + .#{$block-class}__last-row-buffer--active {
+      height: calc(#{$spacing-05});
     }
 
     .#{$block-class}__title-row--sticky {
@@ -437,6 +435,10 @@ $raised-z-index: 99;
       + .#{$block-class}__last-row-buffer--active {
         height: $spacing-05;
       }
+    }
+
+    .#{$block-class}__title-row + .#{$block-class}__available-row {
+      margin-top: $spacing-05;
     }
 
     .#{$block-class}__available-row * {

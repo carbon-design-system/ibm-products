@@ -13,11 +13,11 @@ import {
   layoutFunctions,
   layoutTokens,
   spacingTokens,
-} from './utils/getCarbonLayoutTokens';
+} from './global/js/utils/getCarbonLayoutTokens';
 import {
   carbonColorTokens,
   ibmColorTokens,
-} from './utils/getCarbonColorTokens';
+} from './global/js/utils/getCarbonColorTokens';
 
 export const carbon = {
   get prefix() {

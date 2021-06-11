@@ -486,7 +486,12 @@ describe('PageHeader', () => {
     render(<PageHeader {...{ title, pageActions, navigation }} />);
 
     expect(
-      document.querySelectorAll(`.${blockClass}__title-row--spacing-below-06`)
+      document.querySelectorAll(
+        `.${blockClass}__title-row .${blockClass}__title`
+      )
+    ).toHaveLength(1);
+    expect(
+      document.querySelectorAll(`.${blockClass}__navigation-row`)
     ).toHaveLength(1);
   });
 

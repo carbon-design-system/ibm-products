@@ -113,13 +113,12 @@ export let PageHeader = React.forwardRef(
     const titleShape = getTitleShape();
 
     // NOTE: The buffer is used to add space between the bottom of the header and the last content
-    // No navigation and title row not pre-collapsed
+    // Not pre-collapsed
     // and zero or one of tags or (subtitle or available space)
     const lastRowBufferActive =
-      !(navigation || tags) &&
-      (((title || pageActions) && !preCollapseTitleRow) ||
-        subtitle ||
-        availableSpace);
+      ((title || pageActions) && !preCollapseTitleRow) ||
+      subtitle ||
+      availableSpace;
 
     // state based on scroll/resize based effects
     const [pageActionsInBreadcrumbRow, setPageActionsInBreadcrumbRow] =
@@ -249,33 +248,6 @@ export let PageHeader = React.forwardRef(
       headerRef,
     ]);
 
-    // Update the breadcrumb position in response to vertical scroll.
-    // This can include flipping between sticky and relative position.
-    const doUpdateBreadcrumbPosition = (scrollY) => {
-      const breadcrumbPosition = {
-        position: 'sticky',
-        top: pageHeaderOffset,
-      };
-
-      if (!preventBreadcrumbScroll && navigation) {
-        const relativeTop =
-          metrics.headerHeight -
-          metrics.titleRowSpaceAbove -
-          metrics.navigationRowHeight -
-          metrics.breadcrumbRowHeight;
-
-        if (relativeTop < scrollY) {
-          breadcrumbPosition.top = relativeTop;
-          breadcrumbPosition.position = 'relative';
-        }
-      }
-
-      utilSetCustomCSSProps(headerRef, {
-        [`--${blockClass}--breadcrumb-top`]: `${breadcrumbPosition.top}px`,
-        [`--${blockClass}--breadcrumb-position`]: breadcrumbPosition.position,
-      });
-    };
-
     useEffect(() => {
       // Updates custom CSS props used to manage scroll behaviour
       utilSetCustomCSSProps(headerRef, {
@@ -324,7 +296,9 @@ export let PageHeader = React.forwardRef(
     useWindowScroll(
       // on scroll or various layout changes check updates if needed
       ({ current }) => {
-        doUpdateBreadcrumbPosition(current.scrollY);
+        utilSetCustomCSSProps(headerRef, {
+          [`--${blockClass}--breadcrumb-top`]: `${pageHeaderOffset}px`,
+        });
 
         const fullyCollapsed =
           current.scrollY + metrics.headerTopValue + pageHeaderOffset >= 0;
@@ -443,218 +417,247 @@ export let PageHeader = React.forwardRef(
             className,
             {
               [`${blockClass}--show-background`]: backgroundOpacity > 0,
+              [`${blockClass}--has-navigation`]: navigation || tags,
+              [`${blockClass}--has-navigation-tags-only`]: !navigation && tags,
             },
           ])}
           ref={headerRef}>
           <Grid>
-            {hasBreadcrumbRow ? (
-              <Row
-                className={cx(`${blockClass}__breadcrumb-row`, {
-                  [`${blockClass}__breadcrumb-row--next-to-tabs`]:
-                    nextToTabsCheck(),
-                  [`${blockClass}__breadcrumb-row--has-breadcrumbs`]:
-                    breadcrumbItems,
-                  [`${blockClass}__breadcrumb-row--has-action-bar`]:
-                    hasActionBar,
-                })}>
-                <div className={`${blockClass}__breadcrumb-row--container`}>
-                  <Column
-                    className={cx(`${blockClass}__breadcrumb-column`, {
-                      [`${blockClass}__breadcrumb-column--background`]:
-                        breadcrumbItems !== undefined || hasActionBar,
-                    })}>
-                    {/* keeps actionBar right even if empty */}
-
-                    {breadcrumbItems !== undefined ? (
-                      <BreadcrumbWithOverflow
-                        className={`${blockClass}__breadcrumb`}
-                        noTrailingSlash={title !== undefined}>
-                        {breadcrumbItems}
-                        {title ? (
-                          <BreadcrumbItem
-                            href="#"
-                            isCurrentPage={true}
-                            className={cx([
-                              `${blockClass}__breadcrumb-title`,
-                              {
-                                [`${blockClass}__breadcrumb-title--pre-collapsed`]:
-                                  preCollapseTitleRow,
-                              },
-                            ])}>
-                            {titleLoading ? <SkeletonText /> : titleText}
-                          </BreadcrumbItem>
-                        ) : (
-                          ''
-                        )}
-                      </BreadcrumbWithOverflow>
-                    ) : (
-                      ''
-                    )}
-                  </Column>
-                  <Column
-                    className={cx([
-                      `${blockClass}__action-bar-column ${blockClass}__action-bar-column--background`,
-                      {
-                        [`${blockClass}__action-bar-column--has-page-actions`]:
-                          pageActions,
-                        [`${blockClass}__action-bar-column--influenced-by-collapse-button`]:
-                          spaceForCollapseButton,
-                      },
-                    ])}>
-                    <ReactResizeDetector
-                      handleWidth={true}
-                      onResize={handleResizeActionBarColumn}>
-                      <div
-                        className={`${blockClass}__action-bar-column-content`}>
-                        {hasActionBar ? (
-                          // Investigate the responsive  behaviour or this and the title also fix the ActionBar Item and PageAction story css
-                          <>
-                            {pageActions && (
-                              <div
-                                className={cx(`${blockClass}__page-actions`, {
-                                  [`${blockClass}__page-actions--in-breadcrumb`]:
-                                    pageActionsInBreadcrumbRow,
-                                })}>
-                                <ButtonSetWithOverflow
-                                  className={`${blockClass}__button-set--in-breadcrumb`}
-                                  onWidthChange={handleButtonSetWidthChange}
-                                  buttons={pageActionsItemArray}
-                                />
-                              </div>
-                            )}
-                            <ActionBar
-                              actions={actionBarItemArray}
-                              className={`${blockClass}__action-bar`}
-                              onWidthChange={handleActionBarWidthChange}
-                              rightAlign={true}
-                            />
-                          </>
-                        ) : null}
-                      </div>
-                    </ReactResizeDetector>
-                  </Column>
-                </div>
-              </Row>
-            ) : null}
-
-            {!preCollapseTitleRow &&
-            !(title === undefined && pageActions === undefined) ? (
-              <Row
-                className={cx(
-                  `${blockClass}__title-row`,
-                  `${blockClass}__title-row--spacing-below-${spacingBelowTitle}`,
-                  {
-                    [`${blockClass}__title-row--no-breadcrumb-row`]:
-                      !hasBreadcrumbRow,
-                    [`${blockClass}__title-row--under-action-bar`]:
+            <div className={`${blockClass}__non-navigation-row-contnet`}>
+              {hasBreadcrumbRow ? (
+                <Row
+                  className={cx(`${blockClass}__breadcrumb-row`, {
+                    [`${blockClass}__breadcrumb-row--next-to-tabs`]:
+                      nextToTabsCheck(),
+                    [`${blockClass}__breadcrumb-row--has-breadcrumbs`]:
+                      breadcrumbItems,
+                    [`${blockClass}__breadcrumb-row--has-action-bar`]:
                       hasActionBar,
-                    [`${blockClass}__title-row--sticky`]:
-                      pageActions !== undefined &&
-                      actionBarItems === undefined &&
-                      hasBreadcrumbRow,
-                  }
-                )}>
-                <Column className={`${blockClass}__title-column`}>
-                  {/* keeps page actions right even if empty */}
-                  {title !== undefined ? (
-                    <div
-                      className={cx(`${blockClass}__title`, {
-                        [`${blockClass}__title--fades`]: hasBreadcrumbRow,
+                  })}>
+                  <div className={`${blockClass}__breadcrumb-row--container`}>
+                    <Column
+                      className={cx(`${blockClass}__breadcrumb-column`, {
+                        [`${blockClass}__breadcrumb-column--background`]:
+                          breadcrumbItems !== undefined || hasActionBar,
                       })}>
-                      {TitleIcon && !titleLoading ? (
-                        <TitleIcon className={`${blockClass}__title-icon`} />
-                      ) : null}
-                      <span title={!titleLoading ? titleText : null}>
-                        {titleLoading ? (
-                          <SkeletonText
-                            className={`${blockClass}__title-skeleton`}
-                          />
-                        ) : (
-                          titleText
-                        )}
-                      </span>
-                    </div>
-                  ) : null}
-                </Column>
+                      {/* keeps actionBar right even if empty */}
 
-                {pageActions !== undefined ? (
-                  <Column
-                    className={cx(`${blockClass}__page-actions`, {
-                      [`${blockClass}__page-actions--in-breadcrumb`]:
-                        pageActionsInBreadcrumbRow,
-                    })}>
-                    <ButtonSetWithOverflow
-                      className={`${blockClass}__page-actions-container`}
-                      onWidthChange={handleButtonSetWidthChange}
-                      buttons={pageActionsItemArray}
-                    />
+                      {breadcrumbItems !== undefined ? (
+                        <BreadcrumbWithOverflow
+                          className={`${blockClass}__breadcrumb`}
+                          noTrailingSlash={title !== undefined}>
+                          {breadcrumbItems}
+                          {title ? (
+                            <BreadcrumbItem
+                              href="#"
+                              isCurrentPage={true}
+                              className={cx([
+                                `${blockClass}__breadcrumb-title`,
+                                {
+                                  [`${blockClass}__breadcrumb-title--pre-collapsed`]:
+                                    preCollapseTitleRow,
+                                },
+                              ])}>
+                              {titleLoading ? <SkeletonText /> : titleText}
+                            </BreadcrumbItem>
+                          ) : (
+                            ''
+                          )}
+                        </BreadcrumbWithOverflow>
+                      ) : (
+                        ''
+                      )}
+                    </Column>
+                    <Column
+                      className={cx([
+                        `${blockClass}__action-bar-column ${blockClass}__action-bar-column--background`,
+                        {
+                          [`${blockClass}__action-bar-column--has-page-actions`]:
+                            pageActions,
+                          [`${blockClass}__action-bar-column--influenced-by-collapse-button`]:
+                            spaceForCollapseButton,
+                        },
+                      ])}>
+                      <ReactResizeDetector
+                        handleWidth={true}
+                        onResize={handleResizeActionBarColumn}>
+                        <div
+                          className={`${blockClass}__action-bar-column-content`}>
+                          {hasActionBar ? (
+                            // Investigate the responsive  behaviour or this and the title also fix the ActionBar Item and PageAction story css
+                            <>
+                              {pageActions && (
+                                <div
+                                  className={cx(`${blockClass}__page-actions`, {
+                                    [`${blockClass}__page-actions--in-breadcrumb`]:
+                                      pageActionsInBreadcrumbRow,
+                                  })}>
+                                  <ButtonSetWithOverflow
+                                    className={`${blockClass}__button-set--in-breadcrumb`}
+                                    onWidthChange={handleButtonSetWidthChange}
+                                    buttons={pageActionsItemArray}
+                                  />
+                                </div>
+                              )}
+                              <ActionBar
+                                actions={actionBarItemArray}
+                                className={`${blockClass}__action-bar`}
+                                onWidthChange={handleActionBarWidthChange}
+                                rightAlign={true}
+                              />
+                            </>
+                          ) : null}
+                        </div>
+                      </ReactResizeDetector>
+                    </Column>
+                  </div>
+                </Row>
+              ) : null}
+
+              {!preCollapseTitleRow &&
+              !(title === undefined && pageActions === undefined) ? (
+                <Row
+                  className={cx(
+                    `${blockClass}__title-row`,
+                    `${blockClass}__title-row--spacing-below-${spacingBelowTitle}`,
+                    {
+                      [`${blockClass}__title-row--no-breadcrumb-row`]:
+                        !hasBreadcrumbRow,
+                      [`${blockClass}__title-row--under-action-bar`]:
+                        hasActionBar,
+                      [`${blockClass}__title-row--has-page-actions`]:
+                        pageActions !== undefined,
+                      [`${blockClass}__title-row--sticky`]:
+                        pageActions !== undefined &&
+                        actionBarItems === undefined &&
+                        hasBreadcrumbRow,
+                    }
+                  )}>
+                  <Column className={`${blockClass}__title-column`}>
+                    {/* keeps page actions right even if empty */}
+                    {title !== undefined ? (
+                      <div
+                        className={cx(`${blockClass}__title`, {
+                          [`${blockClass}__title--fades`]: hasBreadcrumbRow,
+                        })}>
+                        {TitleIcon && !titleLoading ? (
+                          <TitleIcon className={`${blockClass}__title-icon`} />
+                        ) : null}
+                        <span title={!titleLoading ? titleText : null}>
+                          {titleLoading ? (
+                            <SkeletonText
+                              className={`${blockClass}__title-skeleton`}
+                            />
+                          ) : (
+                            titleText
+                          )}
+                        </span>
+                      </div>
+                    ) : null}
                   </Column>
-                ) : null}
-              </Row>
-            ) : null}
 
-            {subtitle !== undefined ? (
-              <Row className={`${blockClass}__subtitle-row`}>
-                <Column className={`${blockClass}__subtitle`}>
-                  {subtitle}
-                </Column>
-              </Row>
-            ) : null}
+                  {pageActions !== undefined ? (
+                    <Column
+                      className={cx(`${blockClass}__page-actions`, {
+                        [`${blockClass}__page-actions--in-breadcrumb`]:
+                          pageActionsInBreadcrumbRow,
+                      })}>
+                      <ButtonSetWithOverflow
+                        className={`${blockClass}__page-actions-container`}
+                        onWidthChange={handleButtonSetWidthChange}
+                        buttons={pageActionsItemArray}
+                      />
+                    </Column>
+                  ) : null}
+                </Row>
+              ) : null}
 
-            {availableSpace !== undefined ? (
-              <Row className={`${blockClass}__available-row`}>
-                <Column className={`${blockClass}__available-column`}>
-                  {availableSpace}
-                </Column>
-              </Row>
-            ) : null}
+              {subtitle !== undefined ? (
+                <Row className={`${blockClass}__subtitle-row`}>
+                  <Column className={`${blockClass}__subtitle`}>
+                    {subtitle}
+                  </Column>
+                </Row>
+              ) : null}
 
-            {/* Last row margin-below causes problems for scroll behaviour when it sticks the header.
-          This buffer is used in CSS instead to add vertical space after the last row but only if there is no navigation row
-           */}
-            {(breadcrumbItems ||
-              actionBarItems ||
-              title ||
-              pageActions ||
-              availableSpace ||
-              subtitle) && (
-              <div
-                className={cx([
-                  `${blockClass}__last-row-buffer`,
-                  {
-                    [`${blockClass}__last-row-buffer--active`]:
-                      lastRowBufferActive,
-                  },
-                ])}></div>
-            )}
+              {availableSpace !== undefined ? (
+                <Row className={`${blockClass}__available-row`}>
+                  <Column className={`${blockClass}__available-column`}>
+                    {availableSpace}
+                  </Column>
+                </Row>
+              ) : null}
 
-            {navigation || tags ? (
-              <Row
-                className={cx(`${blockClass}__navigation-row`, {
-                  [`${blockClass}__navigation-row--spacing-above-06`]:
-                    navigation !== undefined,
-                  [`${blockClass}__navigation-row--has-tags`]: tags,
-                })}>
-                {navigation !== undefined ? (
+              {/* Last row margin-below causes problems for scroll behaviour when it sticks the header.
+            This buffer is used in CSS instead to add vertical space after the last row
+            */}
+              {(breadcrumbItems ||
+                actionBarItems ||
+                title ||
+                pageActions ||
+                availableSpace ||
+                subtitle) && (
+                <div
+                  className={cx([
+                    `${blockClass}__last-row-buffer`,
+                    {
+                      [`${blockClass}__last-row-buffer--active`]:
+                        lastRowBufferActive,
+                    },
+                  ])}></div>
+              )}
+
+              {
+                // this navigation row scrolls under the breadcrumb if there is one
+                tags && !navigation ? (
+                  <Row
+                    className={cx(`${blockClass}__navigation-row`, {
+                      [`${blockClass}__navigation-row--has-tags`]: tags,
+                    })}>
+                    <Column
+                      className={cx(`${blockClass}__navigation-tags`, {
+                        [`${blockClass}__navigation-tags--tags-only`]:
+                          navigation === undefined,
+                      })}>
+                      <TagSet
+                        overflowAlign="end"
+                        overflowClassName={`${blockClass}__tagset-tooltip`}>
+                        {tags}
+                      </TagSet>
+                    </Column>
+                  </Row>
+                ) : null
+              }
+            </div>
+
+            {
+              // this navigation pushes the breadcrumb off or settles underneath it depending on preventBreadcrumbScroll
+              navigation ? (
+                <Row
+                  className={cx(`${blockClass}__navigation-row`, {
+                    [`${blockClass}__navigation-row--spacing-above-06`]:
+                      navigation !== undefined,
+                    [`${blockClass}__navigation-row--has-tags`]: tags,
+                  })}>
                   <Column className={`${blockClass}__navigation-tabs`}>
                     {navigation}
                   </Column>
-                ) : null}
-                {tags !== undefined ? (
-                  <Column
-                    className={cx(`${blockClass}__navigation-tags`, {
-                      [`${blockClass}__navigation-tags--tags-only`]:
-                        navigation === undefined,
-                    })}>
-                    <TagSet
-                      overflowAlign="end"
-                      overflowClassName={`${blockClass}__tagset-tooltip`}>
-                      {tags}
-                    </TagSet>
-                  </Column>
-                ) : null}
-              </Row>
-            ) : null}
+                  {tags !== undefined ? (
+                    <Column
+                      className={cx(`${blockClass}__navigation-tags`, {
+                        [`${blockClass}__navigation-tags--tags-only`]:
+                          navigation === undefined,
+                      })}>
+                      <TagSet
+                        overflowAlign="end"
+                        overflowClassName={`${blockClass}__tagset-tooltip`}>
+                        {tags}
+                      </TagSet>
+                    </Column>
+                  ) : null}
+                </Row>
+              ) : null
+            }
           </Grid>
           {hasCollapseButton ? (
             <Button

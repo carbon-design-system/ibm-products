@@ -22,7 +22,7 @@ import {
 import { CheckmarkFilled16 } from '@carbon/icons-react';
 import { Lightning16, Bee24 } from '@carbon/icons-react';
 
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 import { ActionBarItem } from '../ActionBar';
 import { PageHeader } from '.';
@@ -269,6 +269,7 @@ const longTitle = {
 const Template = (args) => {
   return (
     <>
+      <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
       <PageHeader className={className} {...args} />
       {dummyPageContent}
     </>
@@ -504,26 +505,31 @@ AllAttributesWithSwitches.args = {
 
 const TemplatePageHeaderWithCarbonHeader = (args) => {
   return (
-    <div className={`${storyClass}__app`}>
-      <Header aria-label="IBM Platform Name">
-        <HeaderName href="#" prefix="IBM">
-          [Platform]
-        </HeaderName>
-      </Header>
-      <div
-        className={`${storyClass}__content-container`}
-        style={{
-          // stylelint-disable-next-line carbon/layout-token-use
-          marginTop: '48px',
-        }}>
-        <PageHeader
-          className="example-class-name"
-          {...includeTheseArgs(args)}
-          pageHeaderOffset={48} // 48px is the size of the global header. A more elegant way of passing this could be found.
-        />
-        <div className={`${storyClass}__inner-content`}>{dummyPageContent}</div>
+    <>
+      <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
+      <div className={`${storyClass}__app`}>
+        <Header aria-label="IBM Platform Name">
+          <HeaderName href="#" prefix="IBM">
+            [Platform]
+          </HeaderName>
+        </Header>
+        <div
+          className={`${storyClass}__content-container`}
+          style={{
+            // stylelint-disable-next-line carbon/layout-token-use
+            marginTop: '48px',
+          }}>
+          <PageHeader
+            className="example-class-name"
+            {...includeTheseArgs(args)}
+            pageHeaderOffset={48} // 48px is the size of the global header. A more elegant way of passing this could be found.
+          />
+          <div className={`${storyClass}__inner-content`}>
+            {dummyPageContent}
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

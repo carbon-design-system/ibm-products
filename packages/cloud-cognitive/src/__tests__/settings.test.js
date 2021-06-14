@@ -7,7 +7,7 @@
 
 import React from 'react';
 
-import { pkg } from '../settings';
+import { pkg, carbon } from '../settings';
 import { shallow } from 'enzyme';
 
 const name = 'settings';
@@ -32,5 +32,17 @@ describe(name, () => {
     );
 
     expect(wrapper.find('.my-prefix--example-component')).toHaveLength(1);
+  });
+
+  it('Supplies carbon theme token values', () => {
+    expect(carbon.themes.g10.text01).not.toBe(null);
+  });
+
+  it('Supplies carbon layout token values', () => {
+    expect(carbon.themes.g10.spacing01).not.toBe(null);
+  });
+
+  it('Supplies carbon type', () => {
+    expect(carbon.themes.g10.caption01).not.toBe(null);
   });
 });

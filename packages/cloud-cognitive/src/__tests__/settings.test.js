@@ -36,13 +36,19 @@ describe(name, () => {
 
   it('Supplies carbon theme token values', () => {
     expect(carbon.themes.g10.text01).not.toBe(null);
+    expect(carbon.themes.g10.text01).toMatch(/#[0-9a-fA-F]+/);
   });
 
   it('Supplies carbon layout token values', () => {
     expect(carbon.themes.g10.spacing01).not.toBe(null);
+    expect(carbon.themes.g10.spacing01).toMatch(/[0-9.]+rem/);
   });
 
   it('Supplies carbon type', () => {
     expect(carbon.themes.g10.caption01).not.toBe(null);
+    expect(carbon.themes.g10.caption01.fontSize).toMatch(/[0-9.]+rem/);
+    expect(carbon.themes.g10.caption01.fontWeight).toBeGreaterThan(0);
+    expect(carbon.themes.g10.caption01.letterSpacing).toMatch(/[0-9.]+px/);
+    expect(carbon.themes.g10.caption01.lineHeight).toBeGreaterThan(0);
   });
 });

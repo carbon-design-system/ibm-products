@@ -49,11 +49,15 @@ $raised-z-index: 99;
       /* custom props */
       --#{$block-class}--breadcrumb-title-visibility: hidden;
       --#{$block-class}--breadcrumb-title-opacity: 1;
-      --#{$block-class}--breadcrumb-top: 0;
-      --#{$block-class}--breadcrumb-position: 0;
+      --#{$block-class}--breadcrumb-top: 0; //1
       --#{$block-class}--background-opacity: 1;
       --#{$block-class}--breadcrumb-title-top: initial;
       --#{$block-class}--button-set-in-breadcrumb-width-px: initial;
+      --#{$block-class}--navigation-buffer-top: $spacing-06;
+    }
+
+    &.#{$block-class}--has-navigation-tags-only {
+      --#{$block-class}--navigation-buffer-top: $spacing-04;
     }
 
     &.#{$block-class}--show-background::before {
@@ -64,9 +68,9 @@ $raised-z-index: 99;
     }
 
     .#{$block-class}__breadcrumb-row {
-      position: var(--#{$block-class}--breadcrumb-position);
+      position: sticky;
       z-index: $raised-z-index;
-      top: var(--#{$block-class}--breadcrumb-top);
+      top: var(--#{$block-class}--breadcrumb-top); //2
       min-height: $spacing-08;
 
       + .#{$block-class}__last-row-buffer--active {
@@ -74,13 +78,9 @@ $raised-z-index: 99;
       }
     }
 
-    :not(.#{$block-class}__breadcrumb-row--has-action-bar)
-      + .#{$block-class}__title-row {
-      // Using transform and margin-bottom as -ve margin top affects scroll opacity
-      // An alternative of making breadcrumb row min-height 32px. 0 causes it to be too small on scroll.
+    .#{$block-class}__breadcrumb-row:not(.#{$block-class}__breadcrumb-row--has-action-bar) {
+      // lifts up page title when there is no action bar
       margin-bottom: calc(-1 * #{$spacing-03});
-      // stylelint-disable-next-line carbon/layout-token-use
-      transform: translateY(calc(-1 * #{$spacing-03}));
     }
 
     .#{$block-class}__breadcrumb-row--container {
@@ -183,8 +183,7 @@ $raised-z-index: 99;
       }
     }
 
-    .#{$block-class}__breadcrumb-row--has-action-bar
-      .#{$block-class}__breadcrumb-column {
+    .#{$block-class}__breadcrumb-row .#{$block-class}__breadcrumb-column {
       // back button displayed only
       max-width: 25%;
       flex: 0 1 25%;
@@ -270,7 +269,6 @@ $raised-z-index: 99;
     }
 
     .#{$block-class}__title-row {
-      z-index: $raised-z-index + 1;
       margin-top: 0;
       margin-bottom: 0;
 
@@ -283,7 +281,6 @@ $raised-z-index: 99;
       }
 
       + .#{$block-class}__last-row-buffer--active {
-        // only used when nothing below title
         height: $spacing-07;
       }
 
@@ -293,7 +290,6 @@ $raised-z-index: 99;
 
       &.#{$block-class}__title-row--spacing-below-05 {
         + .#{$block-class}__last-row-buffer--active {
-          // only used when nothing below title
           height: $spacing-05;
         }
       }
@@ -307,19 +303,30 @@ $raised-z-index: 99;
       }
     }
 
+    &.#{$block-class}--has-navigation
+      .#{$block-class}__title-row
+      + .#{$block-class}__last-row-buffer--active {
+      height: calc(#{$spacing-06});
+    }
+
+    &.#{$block-class}--has-navigation-tags-only
+      .#{$block-class}__title-row
+      + .#{$block-class}__last-row-buffer--active {
+      height: calc(#{$spacing-05});
+    }
+
     .#{$block-class}__title-row--sticky {
       position: sticky;
-      top: var(--#{$block-class}--breadcrumb-top);
     }
 
     .#{$block-class}__breadcrumb-row--has-breadcrumbs
       + .#{$block-class}__title-row--sticky {
-      // stylelint-disable-next-line carbon/layout-token-use
-      top: calc(#{$spacing-03} + var(--#{$block-class}--breadcrumb-top));
+      top: 0;
     }
 
     .#{$block-class}__title-column {
       overflow: hidden; /* required for ellipsis in title */
+      min-height: 40px;
       flex: 0 0 100%;
 
       @include carbon--breakpoint-up('md') {
@@ -430,6 +437,10 @@ $raised-z-index: 99;
       }
     }
 
+    .#{$block-class}__title-row + .#{$block-class}__available-row {
+      margin-top: $spacing-05;
+    }
+
     .#{$block-class}__available-row * {
       // default content of available row to body-long-01
       @include carbon--type-style('body-long-01');
@@ -437,21 +448,12 @@ $raised-z-index: 99;
 
     .#{$block-class}__navigation-row {
       flex-wrap: wrap-reverse;
-      margin-top: $spacing-04;
+      margin-top: 0;
 
       .#{$carbon-prefix}--content-switcher {
         box-sizing: content-box;
         padding-bottom: $spacing-05;
       }
-    }
-
-    .#{$block-class}__last-row-buffer--active
-      + .#{$block-class}__navigation-row {
-      margin-top: 0;
-    }
-
-    .#{$block-class}__navigation-row--spacing-above-06 {
-      margin-top: $spacing-06;
     }
 
     .#{$block-class}__navigation-row .#{$carbon-prefix}--tab-content {

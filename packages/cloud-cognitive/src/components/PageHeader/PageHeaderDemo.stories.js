@@ -32,7 +32,7 @@ import {
   VolumeMute16,
 } from '@carbon/icons-react';
 
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 import { ActionBarItem } from '../ActionBar';
 import { PageHeader } from '.';
@@ -771,109 +771,112 @@ const demoTableHeaders = Object.keys(demoTableData[0]);
 
 const TemplateDemo = () => {
   return (
-    <div className={`${storyClass}__app`}>
-      <Header aria-label="IBM Platform Name">
-        <HeaderName href="#" prefix="IBM">
-          Cloud Cognitive application
-        </HeaderName>
-      </Header>
-      <div
-        className={`${storyClass}__content-container`}
-        style={{
-          // stylelint-disable-next-line carbon/layout-token-use
-          marginTop: '48px',
-        }}>
-        <PageHeader
-          breadcrumbItems={
-            <>
-              <BreadcrumbItem href="../../../hompepage">
-                Homepage
-              </BreadcrumbItem>
-              <BreadcrumbItem href="../../Reports">Reports</BreadcrumbItem>
-              <BreadcrumbItem href="../June2021">June 2021</BreadcrumbItem>
-            </>
-          }
-          actionBarItems={[
-            { renderIcon: Printer16, iconDescription: `Print` },
-            { renderIcon: Settings16, iconDescription: `Settings` },
-            { renderIcon: VolumeMute16, iconDescription: `Mute` },
-          ]}
-          title={{
-            text: 'Authentication activity',
-            loading: false,
-            icon: Security24,
-          }}
-          preventBreadcrumbScroll
-          pageHeaderOffset={48} // 48px is the size of the global header. A more elegant way of passing this could be found.
-          pageActions={[
-            {
-              kind: 'secondary',
-              label: 'Acknowledge',
-              onClick: () => {},
-            },
-            {
-              kind: 'primary',
-              label: 'Escalate',
-              onClick: () => {},
-            },
-          ]}
-          subtitle="This report details the monthly authentication failures"
-          availableSpace={
-            <>
-              <p>Severity 1: 0</p>
-              <p>Severity 1: 814</p>
-              <p>Severity 3: 3,108</p>
-            </>
-          }
-          navigation={
-            <Tabs>
-              <Tab label="Summary" />
-              <Tab label="Region 1" />
-              <Tab label="Region 2" />
-              <Tab label="Region 3" />
-            </Tabs>
-          }
-          tags={[
-            <Tag type="cyan" key="Not urgent">
-              Not urgent
-            </Tag>,
-            <Tag type="red" key="Security">
-              Security
-            </Tag>,
-          ]}
-        />
-        {
-          <Grid className={`${storyClass}__dummy-content`} narrow={true}>
-            <Row>
-              <Column
-                sm={2}
-                md={4}
-                lg={{ span: 16, offset: 0 }}
-                className={`${storyClass}__dummy-content-block`}>
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      {demoTableHeaders.map((header) => (
-                        <TableHeader key={header}>{header}</TableHeader>
-                      ))}
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {demoTableData.map((row) => (
-                      <TableRow key={row.Index}>
-                        {Object.keys(row).map((key) => {
-                          return <TableCell key={key}>{row[key]}</TableCell>;
-                        })}
+    <>
+      <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
+      <div className={`${storyClass}__app`}>
+        <Header aria-label="IBM Platform Name">
+          <HeaderName href="#" prefix="IBM">
+            Cloud Cognitive application
+          </HeaderName>
+        </Header>
+        <div
+          className={`${storyClass}__content-container`}
+          style={{
+            // stylelint-disable-next-line carbon/layout-token-use
+            marginTop: '48px',
+          }}>
+          <PageHeader
+            breadcrumbItems={
+              <>
+                <BreadcrumbItem href="../../../hompepage">
+                  Homepage
+                </BreadcrumbItem>
+                <BreadcrumbItem href="../../Reports">Reports</BreadcrumbItem>
+                <BreadcrumbItem href="../June2021">June 2021</BreadcrumbItem>
+              </>
+            }
+            actionBarItems={[
+              { renderIcon: Printer16, iconDescription: `Print` },
+              { renderIcon: Settings16, iconDescription: `Settings` },
+              { renderIcon: VolumeMute16, iconDescription: `Mute` },
+            ]}
+            title={{
+              text: 'Authentication activity',
+              loading: false,
+              icon: Security24,
+            }}
+            preventBreadcrumbScroll
+            pageHeaderOffset={48} // 48px is the size of the global header. A more elegant way of passing this could be found.
+            pageActions={[
+              {
+                kind: 'secondary',
+                label: 'Acknowledge',
+                onClick: () => {},
+              },
+              {
+                kind: 'primary',
+                label: 'Escalate',
+                onClick: () => {},
+              },
+            ]}
+            subtitle="This report details the monthly authentication failures"
+            availableSpace={
+              <>
+                <p>Severity 1: 0</p>
+                <p>Severity 1: 814</p>
+                <p>Severity 3: 3,108</p>
+              </>
+            }
+            navigation={
+              <Tabs>
+                <Tab label="Summary" />
+                <Tab label="Region 1" />
+                <Tab label="Region 2" />
+                <Tab label="Region 3" />
+              </Tabs>
+            }
+            tags={[
+              <Tag type="cyan" key="Not urgent">
+                Not urgent
+              </Tag>,
+              <Tag type="red" key="Security">
+                Security
+              </Tag>,
+            ]}
+          />
+          {
+            <Grid className={`${storyClass}__dummy-content`} narrow={true}>
+              <Row>
+                <Column
+                  sm={4}
+                  md={8}
+                  lg={16}
+                  className={`${storyClass}__dummy-content-block`}>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        {demoTableHeaders.map((header) => (
+                          <TableHeader key={header}>{header}</TableHeader>
+                        ))}
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>{' '}
-              </Column>
-            </Row>
-          </Grid>
-        }
+                    </TableHead>
+                    <TableBody>
+                      {demoTableData.map((row) => (
+                        <TableRow key={row.Index}>
+                          {Object.keys(row).map((key) => {
+                            return <TableCell key={key}>{row[key]}</TableCell>;
+                          })}
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>{' '}
+                </Column>
+              </Row>
+            </Grid>
+          }
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

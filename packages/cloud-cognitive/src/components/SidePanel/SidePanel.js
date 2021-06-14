@@ -152,6 +152,9 @@ export let SidePanel = React.forwardRef(
         const sidePanelSubtitleElement = document.querySelector(
           `.${`${blockClass}__subtitle-text`}`
         );
+        const sidePanelSubtitleElementHeight = sidePanelSubtitleElement
+          ? sidePanelSubtitleElement.offsetHeight
+          : 52; // set default subtitle height if a subtitle is not provided to enable scrolling animation
         /* istanbul ignore next */
         sidePanelOuter &&
           sidePanelOuter.addEventListener('scroll', () => {
@@ -165,8 +168,8 @@ export let SidePanel = React.forwardRef(
               // as scroll progresses
               let titleOpacity = Math.min(
                 1,
-                (sidePanelSubtitleElement.offsetHeight - scrollTop) /
-                  sidePanelSubtitleElement.offsetHeight
+                (sidePanelSubtitleElementHeight - scrollTop) /
+                  sidePanelSubtitleElementHeight
               );
               titleOpacity = titleOpacity < 0 ? 0 : titleOpacity;
               sidePanelOuter.style.setProperty(
@@ -179,7 +182,7 @@ export let SidePanel = React.forwardRef(
               // This approach uses a pseudo element and sets
               // the opacity as scroll progresses.
               let dividerOpacity = Math.min(
-                scrollTop / sidePanelSubtitleElement.offsetHeight,
+                scrollTop / sidePanelSubtitleElementHeight,
                 1
               );
               sidePanelOuter.style.setProperty(
@@ -198,7 +201,7 @@ export let SidePanel = React.forwardRef(
 
               // Set title y positioning
               const titleYPosition = Math.min(
-                scrollTop / sidePanelSubtitleElement.offsetHeight,
+                scrollTop / sidePanelSubtitleElementHeight,
                 1
               );
               sidePanelOuter.style.setProperty(
@@ -218,8 +221,8 @@ export let SidePanel = React.forwardRef(
               // Set collapsed title y positioning
               let collapsedTitleYPosition = Math.min(
                 1,
-                (sidePanelSubtitleElement.offsetHeight - scrollTop) /
-                  sidePanelSubtitleElement.offsetHeight
+                (sidePanelSubtitleElementHeight - scrollTop) /
+                  sidePanelSubtitleElementHeight
               );
               collapsedTitleYPosition =
                 collapsedTitleYPosition < 0 ? 0 : collapsedTitleYPosition;
@@ -263,15 +266,17 @@ export let SidePanel = React.forwardRef(
         const sidePanelSubtitleElement = document.querySelector(
           `.${blockClass}__subtitle-text`
         );
+        const sidePanelSubtitleElementHeight = sidePanelSubtitleElement
+          ? sidePanelSubtitleElement.offsetHeight
+          : 0;
         const titleHeight = sidePanelTitleElement.offsetHeight;
-        const subtitleHeight = sidePanelSubtitleElement.offsetHeight;
         sidePanelOuter.style.setProperty(
           `--${blockClass}--title-container-height`,
           `${titleHeight}px`
         );
         sidePanelOuter.style.setProperty(
           `--${blockClass}--subtitle-container-height`,
-          `${subtitleHeight}px`
+          `${sidePanelSubtitleElementHeight}px`
         );
       }
     }, [open, animateTitle, animationComplete]);

@@ -9,28 +9,29 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
-import { CREATE_TEARSHEET_VIEW_ALL_SECTION } from './constants';
+import { CREATE_TEARSHEET_SECTION } from './constants';
 
 const componentName = 'CreateTearsheetStep';
-const blockClass = `${pkg.prefix}--tearsheet-create__view-all-section`;
+const blockClass = `${pkg.prefix}--tearsheet-create__section`;
 
-export let CreateTearsheetViewAllSection = forwardRef(
-  ({ children, className }, ref) => {
+export let CreateTearsheetSection = forwardRef(
+  ({ id, hasDivider = true, children, className }, ref) => {
     return (
-      <div className={cx(blockClass, className)} ref={ref}>
+      <div className={cx(blockClass, className)} ref={ref} id={id}>
         {children}
+        {hasDivider && <span className={`${blockClass}--divider`} />}
       </div>
     );
   }
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-CreateTearsheetViewAllSection = pkg.checkComponentEnabled(
-  CreateTearsheetViewAllSection,
+CreateTearsheetSection = pkg.checkComponentEnabled(
+  CreateTearsheetSection,
   componentName
 );
 
-CreateTearsheetViewAllSection.propTypes = {
+CreateTearsheetSection.propTypes = {
   /**
    * Content that shows in the tearsheet step
    */
@@ -42,6 +43,16 @@ CreateTearsheetViewAllSection.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Displays the section divider line below the section content
+   */
+  hasDivider: PropTypes.bool,
+
+  /**
+   * Sets the id of the CreateTearsheetSection outermost element
+   */
+  id: PropTypes.string.isRequired,
+
+  /**
    * Sets the title text for a tearsheet step
    */
   title: PropTypes.node,
@@ -51,6 +62,6 @@ CreateTearsheetViewAllSection.propTypes = {
 // props that are required, nor for props where the component can apply
 // 'undefined' values reasonably. Default values should be provided when the
 // component needs to make a choice or assumption when a prop is not supplied.
-CreateTearsheetViewAllSection.defaultProps = {
-  type: CREATE_TEARSHEET_VIEW_ALL_SECTION,
+CreateTearsheetSection.defaultProps = {
+  type: CREATE_TEARSHEET_SECTION,
 };

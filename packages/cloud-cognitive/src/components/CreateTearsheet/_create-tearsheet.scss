@@ -24,12 +24,26 @@
   }
 
   $block-class: #{$pkg-prefix}--tearsheet-create;
+  $section-block-class: #{$pkg-prefix}--tearsheet-create__section;
+  .#{$block-class} {
+    --#{$block-class}--tearsheet-header-height: 0;
+  }
+
+  .#{$block-class} .#{$block-class}__step--hidden-step,
   .#{$block-class} .#{$block-class}__step--hidden-section {
     display: none;
   }
 
+  .#{$block-class} .#{$block-class}__step--visible-section {
+    display: block;
+  }
+
+  .#{$block-class} .#{$pkg-prefix}--tearsheet__body {
+    overflow-y: hidden;
+  }
+
   .#{$block-class}
-    .#{$block-class}__step--visible-section:not(.#{$block-class}__step--first-panel-step) {
+    .#{$block-class}__step--visible-step:not(.#{$block-class}__step--first-panel-step) {
     animation: $duration--slow-01 stepContentEntrance;
     animation-fill-mode: forwards;
     animation-timing-function: $carbon--standard-easing;
@@ -38,7 +52,7 @@
 
   @media (prefers-reduced-motion) {
     .#{$block-class}
-      .#{$block-class}__step--visible-section:not(.#{$block-class}__step--first-panel-step) {
+      .#{$block-class}__step--visible-step:not(.#{$block-class}__step--first-panel-step) {
       animation: none;
       opacity: 1;
     }
@@ -68,9 +82,24 @@
 
   .#{$block-class} .#{$block-class}__view-all-toggle {
     position: absolute;
+    z-index: 8001; // UI shell side nav has z-index of 8000 and the toggle needs receive the highest stacking order
     bottom: 0;
     left: 0;
     padding: $spacing-05;
+  }
+
+  .#{$block-class} .#{$carbon-prefix}--side-nav--ux {
+    top: var(--#{$block-class}--tearsheet-header-height);
+  }
+
+  .#{$block-class} .#{$section-block-class}--divider {
+    position: relative;
+    display: none;
+    width: calc(100vw - 16rem);
+    height: 1px;
+    margin: $spacing-05 calc(-1 * #{$spacing-08}) $spacing-08
+      calc(-1 * #{$spacing-08});
+    background-color: $ui-03;
   }
 }
 

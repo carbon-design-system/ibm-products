@@ -6,5 +6,4 @@
  */
 
 export const CREATE_TEARSHEET_STEP = 'CreateTearsheetStep';
-export const CREATE_TEARSHEET_VIEW_ALL_SECTION =
-  'CreateTearsheetViewAllSection';
+export const CREATE_TEARSHEET_SECTION = 'CreateTearsheetSection';

@@ -70,11 +70,7 @@ export const MultiStepTearsheet = () => {
               resolve();
             }, simulatedDelay);
           })
-        }
-        viewAllToggleLabelText="Show all available options"
-        viewAllToggleOffLabelText="Off"
-        viewAllToggleOnLabelText="On"
-        includeViewAllToggle>
+        }>
         <CreateTearsheetStep
           onNext={() => {
             return new Promise((resolve, reject) => {

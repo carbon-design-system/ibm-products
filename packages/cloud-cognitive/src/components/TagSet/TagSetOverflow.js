@@ -77,7 +77,8 @@ export const TagSetOverflow = React.forwardRef(
               <Link
                 className={`${blockClass}__show-all-tags-link`}
                 href=""
-                onClick={handleShowAllTagsClick}>
+                onClick={handleShowAllTagsClick}
+                role="button">
                 {showAllTagsLabel}
               </Link>
             )}

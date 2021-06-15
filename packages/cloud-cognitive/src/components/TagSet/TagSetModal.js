@@ -17,7 +17,7 @@ import {
 
 import { pkg } from '../../settings';
 const componentName = 'TagSetModal';
-const blockClass = `${pkg.prefix}--tag-set`;
+const blockClass = `${pkg.prefix}--tag-set-modal`;
 
 export const TagSetModal = ({
   allTags,
@@ -63,27 +63,24 @@ export const TagSetModal = ({
 
   return (
     <ComposedModal
-      className={`${blockClass}__show-all-tags-modal`}
+      containerClassName={`${blockClass}__container`}
+      className={`${blockClass}`}
       size="sm"
       {...{ open, onClose }}>
-      <ModalHeader title={title}>
+      <ModalHeader title={title} className={`${blockClass}__header`}>
         <Search
           data-modal-primary-focus
-          className={`${blockClass}__show-all-tags-modal-search`}
+          className={`${blockClass}__search`}
           labelText={searchLabel}
           placeholder={searchPlaceholder}
           onChange={handleSearch}
           size="lg"
         />
       </ModalHeader>
-      <ModalBody
-        className={`${blockClass}__show-all-tags-modal-body-2`}
-        hasForm>
-        <div className={`${blockClass}__show-all-tags-modal-content`}>
-          {filteredModalTags}
-        </div>
+      <ModalBody className={`${blockClass}__body`} hasForm>
+        {filteredModalTags}
       </ModalBody>
-      <div className={`${blockClass}__show-all-tags-modal-fade`} />
+      <div className={`${blockClass}__fade`} />
     </ComposedModal>
   );
 };

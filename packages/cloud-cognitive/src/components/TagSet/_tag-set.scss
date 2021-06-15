@@ -15,6 +15,7 @@
 
 $block-class: #{$pkg-prefix}--tag-set;
 $block-class-overflow: #{$block-class}-overflow;
+$block-class-modal: #{$block-class}-modal;
 
 @mixin tag-set {
   @include block-wrap($block-class) {
@@ -54,41 +55,41 @@ $block-class-overflow: #{$block-class}-overflow;
       max-width: 0;
       visibility: hidden;
     }
+  }
 
-    .#{$block-class}__show-all-tags-modal {
+  @include block-wrap('#{$block-class-modal}') {
+    &.#{$block-class-modal} {
       // not to be overridden by use in tag set
       text-align: initial;
       white-space: initial;
     }
 
-    .#{$block-class}__show-all-tags-modal .#{$carbon-prefix}--modal-container {
+    .#{$block-class-modal}__container {
       height: 90%;
       max-height: 450px;
     }
 
-    .#{$block-class}__show-all-tags-modal-search {
+    .#{$block-class-modal}__search {
       margin-top: $spacing-05;
       margin-bottom: 0;
     }
 
-    .#{$block-class}__show-all-tags-modal
-      .#{$block-class}__show-all-tags-modal-fade {
+    &.#{$block-class-modal} .#{$block-class-modal}__fade {
       position: relative;
       margin-right: $spacing-05;
       margin-left: $spacing-05;
     }
 
-    .#{$block-class}__show-all-tags-modal .#{$carbon-prefix}--modal-content {
+    .#{$block-class-modal}__body {
       padding-bottom: #{$spacing-06};
     }
 
-    .#{$block-class}__show-all-tags-modal .#{$carbon-prefix}--modal-header {
+    .#{$block-class-modal}__header {
       padding-right: 0;
       margin-right: $spacing-05;
     }
 
-    .#{$block-class}__show-all-tags-modal
-      .#{$block-class}__show-all-tags-modal-fade::after {
+    &.#{$block-class-modal} .#{$block-class-modal}__fade::after {
       position: absolute;
       top: calc(-1 * #{$spacing-11});
       left: 0;

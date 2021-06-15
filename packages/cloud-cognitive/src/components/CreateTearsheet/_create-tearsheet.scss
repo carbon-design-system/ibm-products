@@ -25,9 +25,6 @@
 
   $block-class: #{$pkg-prefix}--tearsheet-create;
   $section-block-class: #{$pkg-prefix}--tearsheet-create__section;
-  .#{$block-class} {
-    --#{$block-class}--tearsheet-header-height: 0;
-  }
 
   .#{$block-class} .#{$block-class}__step--hidden-step,
   .#{$block-class} .#{$block-class}__step--hidden-section {
@@ -89,7 +86,8 @@
   }
 
   .#{$block-class} .#{$carbon-prefix}--side-nav--ux {
-    top: var(--#{$block-class}--tearsheet-header-height);
+    position: initial;
+    background-color: transparent;
   }
 
   .#{$block-class} .#{$section-block-class}--divider {

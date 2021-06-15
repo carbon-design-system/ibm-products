@@ -90,22 +90,6 @@ export let CreateTearsheet = forwardRef(
       }
     }, [getTearsheetSteps]);
 
-    // get height of tearsheet header to properly place the UI shell side nav when show all toggle is on
-    useEffect(() => {
-      if (shouldViewAll) {
-        const tearsheetHeader = document.querySelector(
-          `.${pkg.prefix}--tearsheet__header`
-        );
-        const createTearsheetRoot = document.querySelector(`.${blockClass}`);
-        if (tearsheetHeader && tearsheetHeader?.offsetHeight) {
-          createTearsheetRoot.style.setProperty(
-            `--${blockClass}--tearsheet-header-height`,
-            `${tearsheetHeader.offsetHeight}px`
-          );
-        }
-      }
-    }, [shouldViewAll]);
-
     // useEffect to handle multi step logic
     useEffect(() => {
       const onUnmount = () => {
@@ -284,7 +268,7 @@ export let CreateTearsheet = forwardRef(
       });
       if (shouldViewAll) {
         return (
-          <SideNav>
+          <SideNav expanded isFixedNav>
             <SideNavItems>
               {sectionChildElements?.length &&
                 sectionChildElements.map((sectionChild, sectionIndex) => (
@@ -297,6 +281,7 @@ export let CreateTearsheet = forwardRef(
                       const scrollTarget = document.querySelector(
                         `#${sectionChild.props.id}`
                       );
+                      console.log(scrollTarget);
                       const scrollContainer = document.querySelector(
                         `.${pkg.prefix}--tearsheet__main`
                       );

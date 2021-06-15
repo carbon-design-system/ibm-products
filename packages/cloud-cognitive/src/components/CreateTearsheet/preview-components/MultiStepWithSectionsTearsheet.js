@@ -96,8 +96,7 @@ export const MultiStepWithSectionsTearsheet = () => {
           disableSubmit={!stepOneTextInputValue}>
           <CreateTearsheetSection
             title="General"
-            id="create-tearsheet-section-general"
-            basicOnly>
+            id="create-tearsheet-section-general">
             <h6
               className={cx(
                 `${blockClass}__description`,

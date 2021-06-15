@@ -21,7 +21,7 @@ const blockClass = `${pkg.prefix}--tag-set`;
 
 export const TagSetModal = ({
   allTags,
-  heading,
+  title,
   onClose,
   open,
   searchLabel,
@@ -62,7 +62,7 @@ export const TagSetModal = ({
       className={`${blockClass}__show-all-tags-modal`}
       size="sm"
       {...{ open, onClose }}>
-      <ModalHeader title={heading}>
+      <ModalHeader title={title}>
         <Search
           data-modal-primary-focus
           className={`${blockClass}__show-all-tags-modal-search`}
@@ -86,11 +86,11 @@ export const TagSetModal = ({
 
 TagSetModal.propTypes = {
   allTags: PropTypes.arrayOf(PropTypes.object).isRequired,
-  heading: PropTypes.string,
   onClose: PropTypes.func,
   open: PropTypes.bool,
   searchLabel: PropTypes.string,
   searchPlaceholder: PropTypes.string,
+  title: PropTypes.string,
 };
 
 TagSetModal.displayName = componentName;

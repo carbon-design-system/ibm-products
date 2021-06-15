@@ -186,7 +186,7 @@ describe(TagSet.displayName, () => {
 
   describe(TagSetModal.displayName, () => {
     const args = {
-      heading: 'a-heading',
+      title: 'a-title',
       searchLabel: 'a search label',
       searchPlaceholder: 'a search placeholder',
     };

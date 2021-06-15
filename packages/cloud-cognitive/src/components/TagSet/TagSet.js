@@ -199,14 +199,16 @@ export let TagSet = React.forwardRef(
             </div>
           </div>
 
-          <TagSetModal
-            allTags={allTags}
-            open={showAllModalOpen}
-            heading={showAllModalHeading}
-            onClose={handleModalClose}
-            searchLabel={showAllSearchLabel}
-            searchPlaceholder={showAllSearchPlaceHolderText}
-          />
+          {displayCount < allTags.length ? (
+            <TagSetModal
+              allTags={allTags}
+              open={showAllModalOpen}
+              heading={showAllModalHeading}
+              onClose={handleModalClose}
+              searchLabel={showAllSearchLabel}
+              searchPlaceholder={showAllSearchPlaceHolderText}
+            />
+          ) : null}
         </div>
       </ReactResizeDetector>
     );

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.44.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.43.1...@carbon/ibm-cloud-cognitive@0.44.0) (2021-06-15)
+
+
+### Features
+
+* simplified carbon token value in js ([#894](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/894)) ([a225eee](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a225eee68364554f62f1f41889164c3f0e48e645))
+
+
+
+
+
 ## [0.43.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.43.0...@carbon/ibm-cloud-cognitive@0.43.1) (2021-06-15)
 
 

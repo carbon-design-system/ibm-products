@@ -146,7 +146,9 @@ export let CreateTearsheet = forwardRef(
             setIsSubmitting(false);
             console.warn(`${componentName} onNext error: ${error}`);
           }
-        } else continueToNextStep();
+        } else {
+          continueToNextStep();
+        }
       };
       const handleSubmit = async () => {
         setIsSubmitting(true);
@@ -160,19 +162,22 @@ export let CreateTearsheet = forwardRef(
             setIsSubmitting(false);
             console.warn(`${componentName} onNext error: ${error}`);
           }
-        } else await handleOnRequestSubmit();
+        } else {
+          await handleOnRequestSubmit();
+        }
       };
       if (getTearsheetSteps()?.length) {
         const createSteps = getTearsheetSteps();
         const total = createSteps.length;
         const buttons = [];
-        if (total > 1 && !shouldViewAll)
+        if (total > 1 && !shouldViewAll) {
           buttons.push({
             label: backButtonText,
             onClick: () => setCurrentStep((prev) => prev - 1),
             kind: 'secondary',
             disabled: currentStep === 1,
           });
+        }
         buttons.push({
           label: cancelButtonText,
           onClick: onUnmount,
@@ -261,8 +266,9 @@ export let CreateTearsheet = forwardRef(
         // a CreateTearsheetSection component before adding it to sectionChildElements
         if (child.props.children.length) {
           child.props.children.forEach((stepChild) => {
-            if (isTearsheetSection(stepChild))
+            if (isTearsheetSection(stepChild)) {
               sectionChildElements.push(stepChild);
+            }
           });
         }
         // we have received a single child element, lets check to see that it is
@@ -271,8 +277,9 @@ export let CreateTearsheet = forwardRef(
           typeof child.props.children !== 'undefined' &&
           !child.props.children.length
         ) {
-          if (isTearsheetSection(child.props.children))
+          if (isTearsheetSection(child.props.children)) {
             sectionChildElements.push(child.props.children);
+          }
         }
       });
       if (shouldViewAll) {
@@ -328,7 +335,9 @@ export let CreateTearsheet = forwardRef(
         <>
           {' '}
           {childrenArray.map((child, stepIndex) => {
-            if (!isTearsheetStep(child)) return child;
+            if (!isTearsheetStep(child)) {
+              return child;
+            }
             step++;
             return React.cloneElement(
               child,
@@ -366,7 +375,9 @@ export let CreateTearsheet = forwardRef(
       return (
         <>
           {childrenArray.map((child, index) => {
-            if (!isTearsheetSection(child)) return child;
+            if (!isTearsheetSection(child)) {
+              return child;
+            }
             return React.cloneElement(child, {
               className: cx(child.props.className, {
                 [`${blockClass}__step--hidden-section`]:

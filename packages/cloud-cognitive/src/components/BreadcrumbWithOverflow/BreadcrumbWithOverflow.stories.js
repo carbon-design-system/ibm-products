@@ -35,7 +35,7 @@ export default {
   parameters: { styles },
 };
 
-const BreadcrumbItems = [
+const breadcrumbItems = [
   <BreadcrumbItem key="1">
     <a
       href="/#"
@@ -70,18 +70,27 @@ const BreadcrumbItems = [
     }}>
     <a href="/#">Breadcrumb 4</a>
   </BreadcrumbItem>,
-  <BreadcrumbItem
-    key="5"
-    onClick={(ev) => {
-      ev.preventDefault();
-      action('Breadcrumb 5 click')();
-    }}>
-    <a href="/#">Breadcrumb 5</a>
-  </BreadcrumbItem>,
 ];
+
+const stdBreadcrumbItems = (current) =>
+  breadcrumbItems.concat([
+    <BreadcrumbItem
+      key="5"
+      onClick={(ev) => {
+        ev.preventDefault();
+        action('Breadcrumb 5 click')();
+      }}
+      isCurrentPage={current}>
+      <a href="/#">
+        Breadcrumb 5 is a longer breadcrumb it could go on for much longer than
+        expected
+      </a>
+    </BreadcrumbItem>,
+  ]);
 
 const Template = (argsIn) => {
   const { children, containerWidth, ...args } = { ...argsIn };
+
   return (
     <div style={{ width: containerWidth }}>
       <BreadcrumbWithOverflow {...args}>{children}</BreadcrumbWithOverflow>
@@ -89,8 +98,54 @@ const Template = (argsIn) => {
   );
 };
 
-export const BreadcrumbItemArray = Template.bind({});
-BreadcrumbItemArray.args = {
-  children: BreadcrumbItems,
+export const BreadcrumbLastCurrent = Template.bind({});
+BreadcrumbLastCurrent.args = {
+  children: stdBreadcrumbItems(true),
+  containerWidth: 500,
+};
+
+export const BreadcrumbLastNotCurrent = Template.bind({});
+BreadcrumbLastNotCurrent.args = {
+  children: stdBreadcrumbItems(false),
+  containerWidth: 500,
+};
+
+export const BreadcrumbWithDataTitle = Template.bind({});
+BreadcrumbWithDataTitle.args = {
+  children: breadcrumbItems.concat([
+    <BreadcrumbItem
+      key="5"
+      onClick={(ev) => {
+        ev.preventDefault();
+        action('Breadcrumb 5 click')();
+      }}
+      data-title="An alternative title"
+      isCurrentPage={true}>
+      <a href="/#">
+        Breadcrumb 5 is a longer breadcrumb it could go on for much longer than
+        expected
+      </a>
+    </BreadcrumbItem>,
+  ]),
+  containerWidth: 500,
+};
+
+export const BreadcrumbWithTitle = Template.bind({});
+BreadcrumbWithTitle.args = {
+  children: breadcrumbItems.concat([
+    <BreadcrumbItem
+      key="5"
+      onClick={(ev) => {
+        ev.preventDefault();
+        action('Breadcrumb 5 click')();
+      }}
+      title="A use of the standard title attribute"
+      isCurrentPage={true}>
+      <a href="/#">
+        Breadcrumb 5 is a longer breadcrumb it could go on for much longer than
+        expected
+      </a>
+    </BreadcrumbItem>,
+  ]),
   containerWidth: 500,
 };

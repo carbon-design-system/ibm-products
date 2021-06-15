@@ -44,11 +44,15 @@ export let WebTerminal = React.forwardRef(
     );
 
     useEffect(() => {
-      if (open) setRender(true);
+      if (open) {
+        setRender(true);
+      }
     }, [open]);
 
     const onAnimationEnd = () => {
-      if (!open) setRender(false);
+      if (!open) {
+        setRender(false);
+      }
     };
 
     return shouldRender ? (

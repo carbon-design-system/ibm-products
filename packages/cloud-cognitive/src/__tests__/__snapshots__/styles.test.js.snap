@@ -355,6 +355,109 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-end-p1 {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-end-p2 {
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+/* Stroke animations */
+@keyframes init-stroke {
+  0% {
+    stroke-dashoffset: 240;
+  }
+  100% {
+    stroke-dashoffset: 16;
+  }
+}
+
+@keyframes stroke-end {
+  0% {
+    stroke-dashoffset: 16;
+  }
+  100% {
+    stroke-dashoffset: 240;
+  }
+}
+
+.exp--import-modal .bx--modal-close {
+  display: none;
+}
+
+.exp--import-modal .bx--modal-footer .bx--btn {
+  max-width: none;
+}
+
+.exp--import-modal .bx--modal-content {
+  padding-right: var(--cds-spacing-05, 1rem);
+}
+
+.bx--file .bx--file-container,
+.bx--file ~ .bx--file-container {
+  margin-top: 0;
+}
+
+.bx--modal-container--sm .bx--modal-header {
+  padding-right: calc(20% - var(--cds-spacing-05, 1rem));
+}
+
+.exp--import-modal__input-group {
+  display: flex;
+}
+
+.exp--import-modal__import-button {
+  margin-left: var(--cds-spacing-05, 1rem);
+}
+
+.exp--import-modal__file-container {
+  width: 100%;
+}
+
+.exp--import-modal .exp--import-modal__file-drop-header,
+.exp--import-modal .exp--import-modal__label {
+  margin-bottom: var(--cds-spacing-03, 0.5rem);
+  font-size: var(--cds-productive-heading-01-font-size, 0.875rem);
+  font-weight: var(--cds-productive-heading-01-font-weight, 600);
+  line-height: var(--cds-productive-heading-01-line-height, 1.29);
+  letter-spacing: var(--cds-productive-heading-01-letter-spacing, 0.16px);
+}
+
+.exp--import-modal__helper-text {
+  margin-top: var(--cds-spacing-06, 1.5rem);
+  margin-bottom: var(--cds-spacing-03, 0.5rem);
+  font-size: var(--cds-helper-text-01-font-size, 0.75rem);
+  line-height: var(--cds-helper-text-01-line-height, 1.34);
+  letter-spacing: var(--cds-helper-text-01-letter-spacing, 0.32px);
+}
+
+.exp--import-modal__body {
+  padding-right: calc(20% - var(--cds-spacing-05, 1rem));
+  margin-bottom: var(--cds-spacing-06, 1.5rem);
+}
+
+.exp--import-modal .bx--file__selected-file {
+  max-width: none;
+}
+
+.exp--import-modal .bx--file {
+  margin-bottom: var(--cds-spacing-05, 1rem);
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;

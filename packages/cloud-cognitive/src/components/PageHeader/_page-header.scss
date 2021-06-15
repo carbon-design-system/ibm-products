@@ -162,7 +162,7 @@ $raised-z-index: 99;
       max-width: var(--#{$block-class}--button-set-in-breadcrumb-width-px);
       flex: 1 1 var(--#{$block-class}--button-set-in-breadcrumb-width-px);
       opacity: 0;
-      transition: all $duration--moderate-02
+      transition: opacity $duration--moderate-02
         carbon--motion('entrance', 'productive');
       visibility: hidden;
       white-space: nowrap;

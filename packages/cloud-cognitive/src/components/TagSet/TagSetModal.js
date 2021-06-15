@@ -31,30 +31,34 @@ export const TagSetModal = ({
   const [search, setSearch] = useState('');
 
   useEffect(() => {
-    const newFilteredModalTags = [];
+    let newFilteredModalTags = [];
     if (open) {
-      allTags.forEach((tag, index) => {
-        const dataSearch = (tag.props['data-search'] || '').toLocaleLowerCase();
-        const contentsAsString = tag.props.children
-          .toString()
-          .toLocaleLowerCase();
-        if (
-          (dataSearch && dataSearch.indexOf(search) > -1) ||
-          contentsAsString.indexOf(search) > -1
-        ) {
-          newFilteredModalTags.push(
-            <span key={index} className={`${blockClass}-show-all-tags`}>
-              {React.cloneElement(tag)}
-            </span>
-          );
-        }
-      });
+      if (search === '') {
+        newFilteredModalTags = allTags.slice(0);
+      } else {
+        const lcaseSearch = search.toLocaleLowerCase();
+
+        allTags.forEach((tag) => {
+          const dataSearch = (
+            tag.props['data-search'] || ''
+          ).toLocaleLowerCase();
+          const contentsAsString = tag.props.children
+            .toString()
+            .toLocaleLowerCase();
+          if (
+            (dataSearch && dataSearch.indexOf(lcaseSearch) > -1) ||
+            contentsAsString.indexOf(lcaseSearch) > -1
+          ) {
+            newFilteredModalTags.push(tag);
+          }
+        });
+      }
     }
     setFilteredModalTags(newFilteredModalTags);
   }, [allTags, open, search]);
 
   const handleSearch = (ev) => {
-    setSearch(ev.target.value);
+    setSearch(ev.target.value || '');
   };
 
   return (

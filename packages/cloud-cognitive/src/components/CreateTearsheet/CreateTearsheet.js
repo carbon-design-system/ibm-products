@@ -273,15 +273,14 @@ export let CreateTearsheet = forwardRef(
               {sectionChildElements?.length &&
                 sectionChildElements.map((sectionChild, sectionIndex) => (
                   <SideNavLink
+                    href="javascript:void(0)"
                     key={sectionIndex}
                     isActive={activeSectionIndex === sectionIndex}
                     onClick={() => {
-                      console.log('click', sectionChild.props.id);
                       setActiveSectionIndex(sectionIndex);
                       const scrollTarget = document.querySelector(
                         `#${sectionChild.props.id}`
                       );
-                      console.log(scrollTarget);
                       const scrollContainer = document.querySelector(
                         `.${pkg.prefix}--tearsheet__main`
                       );

@@ -12,6 +12,7 @@ import cx from 'classnames';
 
 import { TagSetOverflow } from './TagSetOverflow';
 import { TagSetModal } from './TagSetModal';
+import { Tag } from 'carbon-components-react';
 import ReactResizeDetector from 'react-resize-detector';
 
 import { pkg } from '../../settings';
@@ -28,7 +29,7 @@ export let TagSet = React.forwardRef(
       overflowAlign,
       overflowClassName,
       overflowDirection,
-      showAllModalHeading,
+      showAllModalTitle,
       showAllSearchLabel,
       showAllSearchPlaceHolderText,
       showAllTagsLabel,
@@ -203,7 +204,7 @@ export let TagSet = React.forwardRef(
             <TagSetModal
               allTags={allTags}
               open={showAllModalOpen}
-              heading={showAllModalHeading}
+              title={showAllModalTitle}
               onClose={handleModalClose}
               searchLabel={showAllSearchLabel}
               searchPlaceholder={showAllSearchPlaceHolderText}
@@ -218,11 +219,13 @@ export let TagSet = React.forwardRef(
 // Return a placeholder if not released and not enabled by feature flag
 TagSet = pkg.checkComponentEnabled(TagSet, componentName);
 
+const TagType = PropTypes.shape({ type: PropTypes.oneOf([Tag]) });
+
 TagSet.propTypes = {
   /**
    * children of the tag set (these are expected to be tags)
    */
-  children: PropTypes.arrayOf(PropTypes.element),
+  children: PropTypes.arrayOf(TagType),
   /**
    * className
    */
@@ -248,9 +251,9 @@ TagSet.propTypes = {
    */
   rightAlign: PropTypes.bool,
   /**
-   * heading for the show all modal
+   * title for the show all modal
    */
-  showAllModalHeading: PropTypes.string,
+  showAllModalTitle: PropTypes.string,
   /**
    * label text for the show all search
    */
@@ -268,7 +271,7 @@ TagSet.propTypes = {
 TagSet.defaultProps = {
   overflowAlign: 'center',
   overflowDirection: 'bottom',
-  showAllModalHeading: 'All tags',
+  showAllModalTitle: 'All tags',
   showAllSearchLabel: 'Search all tags',
   showAllSearchPlaceHolderText: 'Search all tags',
   showAllTagsLabel: 'View all tags',

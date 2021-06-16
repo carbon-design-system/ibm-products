@@ -65,8 +65,10 @@ $block-class-modal: #{$block-class}-modal;
     }
 
     .#{$block-class-modal}__container {
-      height: 90%;
-      max-height: 450px;
+      @include carbon--breakpoint(md) {
+        height: 90%;
+        max-height: 450px;
+      }
     }
 
     .#{$block-class-modal}__search {

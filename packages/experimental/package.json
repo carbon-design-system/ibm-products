@@ -39,8 +39,8 @@
     "ci-check": "node scripts/import",
     "clean": "rimraf es lib css scss",
     "postinstall": "carbon-telemetry collect --install",
-    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (not tested)",
-    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react$)/'"
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (explicit range peer dependency)",
+    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react$|^react-dom$)/'"
   },
   "peerDependencies": {
     "@carbon/icons-react": "^10.33.0",
@@ -49,7 +49,7 @@
     "carbon-components-react": "^7.37.0",
     "carbon-icons": "^7.0.7",
     "react": "^16.8.6 || ^17.0.1",
-    "react-dom": "^17.0.2"
+    "react-dom": "^16.8.6 || ^17.0.1"
   },
   "dependencies": {
     "@babel/runtime": "^7.14.6",

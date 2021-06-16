@@ -39,8 +39,8 @@
     "clean": "rimraf es lib css scss",
     "generate": "cross-env FORCE_COLOR=1 node scripts/generate",
     "postinstall": "carbon-telemetry collect --install",
-    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (not tested), sass (until Carbon adopts sass and fixes deprecations)",
-    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react$|^sass$)/'"
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (explicit range peer dependency), sass (until Carbon adopts sass and fixes deprecations)",
+    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react$|^react-dom$|^sass$)/'"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.5",
@@ -71,6 +71,6 @@
     "carbon-components-react": "^7.37.0",
     "carbon-icons": "^7.0.7",
     "react": "^16.8.6 || ^17.0.1",
-    "react-dom": "^17.0.2"
+    "react-dom": "^16.8.6 || ^17.0.1"
   }
 }

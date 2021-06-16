@@ -30,7 +30,7 @@
     "storybook": "start-storybook -p 6006",
     "build": "node scripts/build.js",
     "clean": "rimraf es lib scss",
-    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react/react-dom (not tested), uuid (not tested)",
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (explicit range peer dependency), uuid (not tested)",
     "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react$|^react-dom$|^uuid$)/'"
   },
   "peerDependencies": {

@@ -17,7 +17,7 @@ import { Link } from 'carbon-components-react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--http-errors`;
-const componentName = 'HTTPErrors';
+const componentName = 'HTTPErrorContent';
 
 export let HTTPErrorContent = ({
   description,
@@ -49,9 +49,6 @@ export let HTTPErrorContent = ({
     </div>
   );
 };
-
-// Return a placeholder if not released and not enabled by feature flag
-HTTPErrorContent = pkg.checkComponentEnabled(HTTPErrorContent, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

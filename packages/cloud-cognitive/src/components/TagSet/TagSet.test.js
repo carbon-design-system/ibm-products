@@ -1,3 +1,10 @@
+//
+// Copyright IBM Corp. 2020, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -9,6 +16,7 @@ import { mockHTMLElement } from '../../global/js/utils/test-helper';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 const blockClass = `${pkg.prefix}--tag-set`;
+const blockClassOverflow = `${pkg.prefix}--tag-set-overflow`;
 
 const tagLabel = (index) => `Tag ${index + 1}`;
 const types = ['red', 'blue', 'cyan', 'high-contrast'];
@@ -35,7 +43,7 @@ describe(TagSet.displayName, () => {
 
           if (
             this.classList.contains(`${blockClass}__sizing-tag`) ||
-            this.classList.contains(`${blockClass}__overflow`)
+            this.classList.contains(`${blockClassOverflow}`)
           ) {
             width = tagWidth; // all tags 100 in size
           } else {
@@ -91,7 +99,7 @@ describe(TagSet.displayName, () => {
 
     const overflowVisible = screen.queryAllByText(/Tag [0-9]+/, {
       // selector need to ignore sizing items
-      selector: `.${blockClass}__overflow-content *`,
+      selector: `.${blockClassOverflow}__content *`,
     });
     expect(overflowVisible.length).toEqual(tags10.length);
   });
@@ -119,7 +127,7 @@ describe(TagSet.displayName, () => {
 
     const overflowVisible = screen.queryAllByText(/Tag [0-9]+/, {
       // selector need to ignore sizing items
-      selector: `.${blockClass}__overflow-content *`,
+      selector: `.${blockClassOverflow}__content *`,
     });
     expect(overflowVisible.length + visible.length).toEqual(tags10.length);
   });
@@ -186,7 +194,7 @@ describe(TagSet.displayName, () => {
 
   describe(TagSetModal.displayName, () => {
     const args = {
-      heading: 'a-heading',
+      title: 'a-title',
       searchLabel: 'a search label',
       searchPlaceholder: 'a search placeholder',
     };

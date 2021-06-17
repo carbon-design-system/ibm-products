@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2020
+// Copyright IBM Corp. 2020, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -15,6 +15,7 @@ import { getStorybookPrefix } from '../../../config';
 import { TagSet } from '.';
 const storybookPrefix = getStorybookPrefix(pkg, TagSet.displayName);
 const blockClass = `${pkg.prefix}--tag-set`;
+const blockClassModal = `${blockClass}-modal`;
 
 const TagItems = [
   <Tag key="tag1" type="blue">
@@ -146,7 +147,7 @@ export default {
     (story) => (
       <>
         <style>
-          {`.${blockClass}__show-all-tags-modal { opacity: 0; visibility: hidden; /* prevents glitch storybook modal css load */ }`}
+          {`.${blockClassModal} { opacity: 0; visibility: hidden; /* prevents glitch storybook modal css load */ }`}
           ;
         </style>
         <div className={`${blockClass}__story-viewport`}>{story()}</div>

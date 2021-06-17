@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
 
-import { Row, Column, Form } from 'carbon-components-react';
+import { Row, Column } from 'carbon-components-react';
 
 import { CREATE_FULL_PAGE_SECTION } from './constants';
 
@@ -25,26 +25,22 @@ export let CreateFullPageSection = forwardRef(
   ) => {
     return (
       <div className={cx(blockClass, className)} ref={ref}>
-        <Row>
-          <Column>
-            <div className={`${blockClass}-text-content`}>
-              <h2 className={`${blockClass}-title`}>{title}</h2>
-              {subtitle && (
-                <h3 className={`${blockClass}-subtitle`}>{subtitle}</h3>
-              )}
-              {description && (
-                <p className={`${blockClass}-description`}>{description}</p>
-              )}
-            </div>
-          </Column>
-        </Row>
-        {hasForm && (
+        {title && (
           <Row>
             <Column>
-              <Form className={`${blockClass}-form`}>{children}</Form>
+              <div className={`${blockClass}-text-content`}>
+                <h2 className={`${blockClass}-title`}>{title}</h2>
+                {subtitle && (
+                  <h3 className={`${blockClass}-subtitle`}>{subtitle}</h3>
+                )}
+                {description && (
+                  <p className={`${blockClass}-description`}>{description}</p>
+                )}
+              </div>
             </Column>
           </Row>
         )}
+        {hasForm && <div className={`${blockClass}-form`}>{children}</div>}
         {hasDivider && <span className={`${blockClass}-divider`}></span>}
       </div>
     );

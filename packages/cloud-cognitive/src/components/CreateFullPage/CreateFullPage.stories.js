@@ -47,7 +47,6 @@ const defaultFullPageProps = {
   modalSecondaryButtonText: 'Return to form',
   onRequestSubmit: action('Submit handler called'),
   onClose: action('Close handler called'),
-  onNext: action('Next handler called'),
 };
 
 const defaultStepProps = {
@@ -55,6 +54,7 @@ const defaultStepProps = {
   subtitle: 'This is the unique name used to recognize your topic.',
   description:
     'It will also be used by your producers and consumers as part of the connection information, so make something easy to recognize.',
+  onNext: action('Next handler called'),
 };
 
 const Template = ({ ...args }) => {

@@ -31,6 +31,25 @@ import { ActionSet } from '../ActionSet';
 const blockClass = `${pkg.prefix}--create-full-page`;
 const componentName = 'CreateFullPage';
 
+// Custom PropType validator which checks and ensures that the children property has no more than 4 nodes
+const isValidChildren =
+  () =>
+  ({ children }) => {
+    children.length > 1 &&
+      children.map((child) => {
+        if (
+          child &&
+          child.props &&
+          child.props.type !== CREATE_FULL_PAGE_STEP
+        ) {
+          throw new Error(
+            'Each child of Create Full Page is required to be a `CreateFullPageStep`. Please remove the HTML element, or wrap it around the `CreateFullPageStep` component.'
+          );
+        }
+        return;
+      });
+  };
+
 export let CreateFullPage = React.forwardRef(
   (
     {
@@ -56,11 +75,10 @@ export let CreateFullPage = React.forwardRef(
     const [createFullPageActions, setCreateFullPageActions] = useState([]);
     const [currentStep, setCurrentStep] = useState(1);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [open, setOpen] = useState(false);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     useEffect(() => {
       const onUnmount = () => {
-        setCurrentStep(0);
         setIsSubmitting(false);
         onClose();
       };
@@ -131,7 +149,7 @@ export let CreateFullPage = React.forwardRef(
           buttons.push({
             label: cancelButtonText,
             onClick: () => {
-              setOpen(true);
+              setModalIsOpen(true);
             },
             kind: 'ghost',
           });
@@ -157,7 +175,7 @@ export let CreateFullPage = React.forwardRef(
       submitButtonText,
       onRequestSubmit,
       isSubmitting,
-      open,
+      modalIsOpen,
     ]);
 
     useEffect(() => {
@@ -165,7 +183,7 @@ export let CreateFullPage = React.forwardRef(
       const total = createSteps.length;
       if (total === 1) {
         console.warn(
-          `${componentName}: CreateFullPages with one step are not permitted. If you require only one step, please use either the narrow full page, CreateSidePanel, or CreateModal components.`
+          `${componentName}: CreateFullPages with one step are not permitted. If you require only one step, please use either the CreateTearsheet, CreateSidePanel, or CreateModal components.`
         );
       }
     }, [getFullPageSteps]);
@@ -207,14 +225,13 @@ export let CreateFullPage = React.forwardRef(
           vertical
           className={`${blockClass}__progress-indicator`}>
           {childrenArray.map((child, stepIndex) => (
-            <ProgressStep
-              label={
-                child.props.title
-                  ? child.props.title
-                  : child.props.children[0].props.title
-              }
-              key={stepIndex}
-            />
+            <>
+              {console.log(child)}
+              <ProgressStep
+                label={child.props.title ? child.props.title : ''}
+                key={stepIndex}
+              />
+            </>
           ))}
         </ProgressIndicator>
       );
@@ -269,7 +286,7 @@ export let CreateFullPage = React.forwardRef(
             />
           </div>
         </div>
-        <ComposedModal size="sm" open={open}>
+        <ComposedModal size="sm" open={modalIsOpen}>
           <ModalHeader title={modalTitle} />
           <ModalBody>
             <p>{modalDescription}</p>
@@ -279,7 +296,7 @@ export let CreateFullPage = React.forwardRef(
               type="button"
               kind="secondary"
               onClick={() => {
-                setOpen(!open);
+                setModalIsOpen(!modalIsOpen);
               }}>
               {modalSecondaryButtonText}
             </Button>
@@ -317,7 +334,7 @@ CreateFullPage.propTypes = {
   /**
    * The main content of the full page
    */
-  children: PropTypes.node,
+  children: isValidChildren(),
 
   /**
    * Provide an optional class to be applied to the containing node.
@@ -374,7 +391,7 @@ CreateFullPage.propTypes = {
   /**
    * The main title of the full page, displayed in the header area.
    */
-  title: PropTypes.node,
+  // title: isTitleRequired(),
 
   /**
    * The aria label applied to toggle element for accessibility purposes

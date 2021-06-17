@@ -62,12 +62,12 @@ CreateFullPageStep = pkg.checkComponentEnabled(
 
 CreateFullPageStep.propTypes = {
   /**
-   * Content that shows in the tearsheet step
+   * Content that shows in the CreateFullPage step
    */
   children: PropTypes.node,
 
   /**
-   * Sets an optional className to be added to the tearsheet step
+   * Sets an optional className to be added to the CreateFullPage step
    */
   className: PropTypes.string,
 
@@ -77,7 +77,7 @@ CreateFullPageStep.propTypes = {
   description: PropTypes.node,
 
   /**
-   * This will conditionally disable the submit button in the multi step Tearsheet
+   * This will conditionally disable the submit button in the multi step CreateFullPage
    */
   disableSubmit: PropTypes.bool,
 
@@ -89,7 +89,7 @@ CreateFullPageStep.propTypes = {
   /**
    * Optional function to be called on a step change.
    * For example, this can be used to validate input fields before proceeding to the next step.
-   * This function can _optionally_ return a promise that is either resolved or rejected and the CreateTearsheet will handle the submitting state of the next button.
+   * This function can _optionally_ return a promise that is either resolved or rejected and the CreateFullPage will handle the submitting state of the next button.
    */
   onNext: PropTypes.func,
 
@@ -101,7 +101,7 @@ CreateFullPageStep.propTypes = {
   /**
    * Sets the title text for a create full page step
    */
-  title: PropTypes.node,
+  title: PropTypes.node.isRequired,
 };
 
 // Default values for component props. Default values are not required for

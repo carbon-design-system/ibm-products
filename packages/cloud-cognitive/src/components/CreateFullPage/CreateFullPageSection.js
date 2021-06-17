@@ -5,6 +5,8 @@ import { pkg } from '../../settings';
 
 import { Row, Column, Form } from 'carbon-components-react';
 
+import { CREATE_FULL_PAGE_SECTION } from './constants';
+
 const componentName = 'CreateFullPageSection';
 const blockClass = `${pkg.prefix}--create-full-page__section`;
 
@@ -57,12 +59,12 @@ CreateFullPageSection = pkg.checkComponentEnabled(
 
 CreateFullPageSection.propTypes = {
   /**
-   * Content that shows in the tearsheet step
+   * Content that shows in the CreateFullPage step
    */
   children: PropTypes.node,
 
   /**
-   * Sets an optional className to be added to the tearsheet step
+   * Sets an optional className to be added to the CreateFullPage step
    */
   className: PropTypes.string,
 
@@ -72,7 +74,7 @@ CreateFullPageSection.propTypes = {
   description: PropTypes.node,
 
   /**
-   * This will conditionally disable the submit button in the multi step Tearsheet
+   * This will conditionally disable the submit button in the multi step CreateFullPage
    */
   disableSubmit: PropTypes.bool,
 
@@ -92,7 +94,7 @@ CreateFullPageSection.propTypes = {
   subtitle: PropTypes.node,
 
   /**
-   * Sets the title text for a tearsheet step
+   * Sets the title text for a CreateFullPage step
    */
   title: PropTypes.node,
 };
@@ -101,6 +103,6 @@ CreateFullPageSection.propTypes = {
 // props that are required, nor for props where the component can apply
 // 'undefined' values reasonably. Default values should be provided when the
 // component needs to make a choice or assumption when a prop is not supplied.
-// CreateFullPageSection.defaultProps = {
-//   type: CREATE_TEARSHEET_STEP,
-// };
+CreateFullPageSection.defaultProps = {
+  type: CREATE_FULL_PAGE_SECTION,
+};

@@ -8,7 +8,7 @@ import React from 'react';
 
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
-
+import { action } from '@storybook/addon-actions';
 import { CreateFullPage } from '.';
 import { CreateFullPageSection } from './CreateFullPageSection';
 import { CreateFullPageStep } from './CreateFullPageStep';
@@ -45,7 +45,9 @@ const defaultFullPageProps = {
     "If you cancel, the information you have entered won't be saved.",
   modalDangerButtonText: 'Cancel partition',
   modalSecondaryButtonText: 'Return to form',
-  onRequestSubmit: () => {},
+  onRequestSubmit: action('Submit handler called'),
+  onClose: action('Close handler called'),
+  onNext: action('Next handler called'),
 };
 
 const defaultStepProps = {
@@ -115,10 +117,8 @@ const TemplateWithSections = ({ ...args }) => {
           placeholder="Enter topic name"
         />
       </CreateFullPageStep>
-      <CreateFullPageStep>
-        <CreateFullPageSection
-          title="Core configuration"
-          description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
+      <CreateFullPageStep {...defaultStepProps}>
+        <CreateFullPageSection>
           <TextInput
             id="test4"
             invalidText="A valid value is required"
@@ -185,6 +185,7 @@ const TemplateWithSections = ({ ...args }) => {
           />
         </CreateFullPageSection>
         <CreateFullPageSection
+          hasDivider={false}
           title="Configuration 3"
           description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
           <TextInput

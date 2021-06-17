@@ -24,7 +24,7 @@ export const APIKeyDownloader = ({ apiKey, bodyText, fileName, linkText }) => {
   }, [apiKey, fileName]);
 
   return (
-    <p className={`${pkg.prefix}--apikey-modal-messaging-text`}>
+    <p className={`${pkg.prefix}--apikey-modal__messaging-text`}>
       {bodyText} <a {...linkProps}>{linkText}</a>
     </p>
   );

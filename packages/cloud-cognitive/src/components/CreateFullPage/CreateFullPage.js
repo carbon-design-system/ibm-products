@@ -225,13 +225,10 @@ export let CreateFullPage = React.forwardRef(
           vertical
           className={`${blockClass}__progress-indicator`}>
           {childrenArray.map((child, stepIndex) => (
-            <>
-              {console.log(child)}
-              <ProgressStep
-                label={child.props.title ? child.props.title : ''}
-                key={stepIndex}
-              />
-            </>
+            <ProgressStep
+              label={child.props.title ? child.props.title : ''}
+              key={stepIndex}
+            />
           ))}
         </ProgressIndicator>
       );

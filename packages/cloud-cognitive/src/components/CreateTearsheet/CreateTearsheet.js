@@ -278,16 +278,22 @@ export let CreateTearsheet = forwardRef(
                     isActive={activeSectionIndex === sectionIndex}
                     onClick={() => {
                       setActiveSectionIndex(sectionIndex);
-                      const scrollTarget = document.querySelector(
-                        `#${sectionChild.props.id}`
-                      );
-                      const scrollContainer = document.querySelector(
-                        `.${pkg.prefix}--tearsheet__main`
-                      );
-                      scrollContainer.scrollTo({
-                        top: scrollTarget.offsetTop,
-                        behavior: 'smooth',
-                      });
+                      if (sectionChild.props.id) {
+                        const scrollTarget = document.querySelector(
+                          `#${sectionChild.props.id}`
+                        );
+                        const scrollContainer = document.querySelector(
+                          `.${pkg.prefix}--tearsheet__main`
+                        );
+                        scrollContainer.scrollTo({
+                          top: scrollTarget.offsetTop,
+                          behavior: 'smooth',
+                        });
+                      } else {
+                        console.warn(
+                          `${componentName}: CreateTearsheetSection is missing a required prop of 'id'`
+                        );
+                      }
                     }}>
                     {sectionChild.props.title}
                   </SideNavLink>
@@ -355,7 +361,6 @@ export let CreateTearsheet = forwardRef(
       const childrenArray = Array.isArray(stepChildren)
         ? stepChildren
         : [stepChildren];
-      // console.log(childrenArray);
       return (
         <>
           {childrenArray.map((child, index) => {

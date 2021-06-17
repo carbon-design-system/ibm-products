@@ -51,18 +51,37 @@ export let BreadcrumbWithOverflow = ({
   const internalId = useRef(uuidv4());
   const [childArray, setChildArray] = useState([]);
 
-  const getItemProps = (item) => {
-    // A standard breadcrumb contains a href prop and no children
-    // Alternative forms may contain another element often <a />
+  const getHref = (item) => {
+    // This function should extract href from item
+    // It expects that the href is attached either to the item or direct child
+    // It prefers item.props.href
+    return item?.props?.href
+      ? item.props.href
+      : item?.props?.children?.props?.href;
+  };
 
-    const itemProps = item?.props || {};
-    const childProps = item?.props?.children?.props | {};
+  const getTitle = (item) => {
+    // This function should extract text based title from the item.
+    // It prefers in this order
+    // - item.props.data-title
+    // - item.props.title
+    // - item.props.children if string
+    // - item.props.children.props.children if string. This case is likely if an <a /> is used inside a BreadcrumbItem
+    let useAsTitle = null;
 
-    // use children as title if not an array
-    const children = childProps.children || itemProps.children || [];
-    const title = Array.isArray(children) ? null : children;
+    if (item?.props) {
+      if (item.props['data-title']) {
+        useAsTitle = item.props['data-title'];
+      } else if (item.props.title) {
+        useAsTitle = item.props.title;
+      } else if (typeof item.props.children === 'string') {
+        useAsTitle = item.props.children;
+      } else if (typeof item.props?.children?.props?.children === 'string') {
+        useAsTitle = item.props.children.props.children;
+      }
+    }
 
-    return { ...childProps, ...itemProps, title };
+    return useAsTitle;
   };
 
   // eslint-disable-next-line react/prop-types
@@ -110,7 +129,7 @@ export let BreadcrumbWithOverflow = ({
         // likely truncated add title
         const title =
           index + 1 === childArray.length && displayCount === 1
-            ? getItemProps(item).title
+            ? getTitle(item)
             : null;
 
         const className =
@@ -261,9 +280,8 @@ export let BreadcrumbWithOverflow = ({
     backItem = childArray[childArray.length - 2];
   }
 
-  const backItemProps = getItemProps(backItem);
-  const buttonHrefValue = backItemProps.href;
-  const buttonTooltipValue = backItemProps.title;
+  const buttonHrefValue = getHref(backItem);
+  const buttonTooltipValue = getTitle(backItem);
 
   return (
     <ReactResizeDetector onResize={handleResize}>

@@ -4,6 +4,7 @@ import featureFlags from './generated/feature-flags/feature-flags';
 import pkgSettings from './global/js/package-settings';
 import { settings as carbonSettings } from 'carbon-components';
 import React from 'react';
+import { themes } from '@carbon/themes';
 
 export const carbon = {
   get prefix() {
@@ -14,6 +15,9 @@ export const carbon = {
   },
   get flags() {
     return featureFlags;
+  },
+  get themes() {
+    return themes;
   },
 };
 

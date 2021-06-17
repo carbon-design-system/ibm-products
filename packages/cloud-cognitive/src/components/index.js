@@ -39,6 +39,7 @@ export { RemoveModal } from './RemoveModal';
 export { Saving } from './Saving';
 export { SidePanel } from './SidePanel';
 export { StatusIcon } from './StatusIcon';
+export { TagSet } from './TagSet';
 export { Tearsheet, TearsheetNarrow } from './Tearsheet';
 export { UserProfileImage } from './UserProfileImage';
 export { WebTerminal } from './WebTerminal';

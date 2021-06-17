@@ -14,7 +14,7 @@ import { Link, Tag, Tooltip } from 'carbon-components-react';
 
 import { pkg } from '../../settings';
 const componentName = 'TagSetOverflow';
-const blockClass = `${pkg.prefix}--tag-set`;
+const blockClass = `${pkg.prefix}--tag-set-overflow`;
 
 export const TagSetOverflow = React.forwardRef(
   (
@@ -47,8 +47,8 @@ export const TagSetOverflow = React.forwardRef(
     return (
       <span
         aria-hidden={overflowTags.length === 0}
-        className={cx(`${blockClass}__overflow`, {
-          [`${blockClass}__overflow--hidden`]: overflowTags.length === 0,
+        className={cx(`${blockClass}`, {
+          [`${blockClass}--hidden`]: overflowTags.length === 0,
         })}
         ref={overflowRef}>
         <Tooltip
@@ -59,16 +59,12 @@ export const TagSetOverflow = React.forwardRef(
           open={tipOpen}
           triggerText={<Tag>+{overflowTags.length}</Tag>}
           showIcon={false}>
-          <div
-            ref={overflowTagContent}
-            className={`${blockClass}__overflow-content`}>
-            <ul className={`${blockClass}__overflow-tag-list`}>
+          <div ref={overflowTagContent} className={`${blockClass}__content`}>
+            <ul className={`${blockClass}__tag-list`}>
               {overflowTags
                 .filter((_, index) => index < 10)
                 .map((tag, index) => (
-                  <li
-                    className={`${blockClass}__overflow-tag-item`}
-                    key={index}>
+                  <li className={`${blockClass}__tag-item`} key={index}>
                     {React.cloneElement(tag, { filter: false })}
                   </li>
                 ))}
@@ -77,7 +73,8 @@ export const TagSetOverflow = React.forwardRef(
               <Link
                 className={`${blockClass}__show-all-tags-link`}
                 href=""
-                onClick={handleShowAllTagsClick}>
+                onClick={handleShowAllTagsClick}
+                role="button">
                 {showAllTagsLabel}
               </Link>
             )}

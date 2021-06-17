@@ -94,4 +94,9 @@ TagSetModal.propTypes = {
   title: PropTypes.string,
 };
 
+TagSetModal.defaultProps = {
+  // marked as required by TagSet if needed, default used to satisfy <Search /> component
+  searchLabel: '',
+};
+
 TagSetModal.displayName = componentName;

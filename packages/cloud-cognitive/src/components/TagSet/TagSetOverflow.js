@@ -125,6 +125,4 @@ TagSetOverflow.defaultProps = {
   allTagsModalSearchThreshold: 10,
   overflowAlign: 'center',
   overflowDirection: 'bottom',
-  // showAllTagsLabel is marked as required by TagSet if needed
-  showAllTagsLabel: 'View all tags',
 };

@@ -95,10 +95,8 @@ TagSetModal.propTypes = {
 };
 
 TagSetModal.defaultProps = {
-  // All of these strings are marked as required by TagSet if needed
-  searchLabel: 'Search all tags',
-  searchPlaceholder: 'Search all tags',
-  title: 'All tags',
+  // marked as required by TagSet if needed, default used to satisfy <Search /> component
+  searchLabel: '',
 };
 
 TagSetModal.displayName = componentName;

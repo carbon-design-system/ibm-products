@@ -25,13 +25,12 @@ export const TagSetOverflow = React.forwardRef(
       overflowAlign,
       overflowDirection,
       showAllTagsLabel,
+      allTagsModalSearchThreshold,
     },
     ref
   ) => {
     const [tipOpen, setTipOpen] = useState(false);
     const overflowTagContent = useRef(null);
-    const localRef = useRef(null);
-    const overflowRef = ref || localRef;
 
     const handleChange = (ev, { open }) => {
       setTipOpen(open);
@@ -50,7 +49,7 @@ export const TagSetOverflow = React.forwardRef(
         className={cx(`${blockClass}`, {
           [`${blockClass}--hidden`]: overflowTags.length === 0,
         })}
-        ref={overflowRef}>
+        ref={ref}>
         <Tooltip
           align={overflowAlign}
           className={cx(className, `${blockClass}__tooltip`)}
@@ -62,14 +61,18 @@ export const TagSetOverflow = React.forwardRef(
           <div ref={overflowTagContent} className={`${blockClass}__content`}>
             <ul className={`${blockClass}__tag-list`}>
               {overflowTags
-                .filter((_, index) => index < 10)
+                .filter((_, index) =>
+                  overflowTags.length > allTagsModalSearchThreshold
+                    ? index < allTagsModalSearchThreshold
+                    : index <= allTagsModalSearchThreshold
+                )
                 .map((tag, index) => (
                   <li className={`${blockClass}__tag-item`} key={index}>
                     {React.cloneElement(tag, { filter: false })}
                   </li>
                 ))}
             </ul>
-            {overflowTags.length >= 10 && (
+            {overflowTags.length > allTagsModalSearchThreshold && (
               <Link
                 className={`${blockClass}__show-all-tags-link`}
                 href=""
@@ -88,6 +91,10 @@ export const TagSetOverflow = React.forwardRef(
 TagSetOverflow.displayName = componentName;
 
 TagSetOverflow.propTypes = {
+  /**
+   * count of overflowTags over which a modal is offered
+   */
+  allTagsModalSearchThreshold: PropTypes.number,
   /**
    * className
    */
@@ -115,7 +122,9 @@ TagSetOverflow.propTypes = {
 };
 
 TagSetOverflow.defaultProps = {
+  allTagsModalSearchThreshold: 10,
   overflowAlign: 'center',
   overflowDirection: 'bottom',
+  // showAllTagsLabel is marked as required by TagSet if needed
   showAllTagsLabel: 'View all tags',
 };

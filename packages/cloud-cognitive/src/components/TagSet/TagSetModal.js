@@ -94,4 +94,11 @@ TagSetModal.propTypes = {
   title: PropTypes.string,
 };
 
+TagSetModal.defaultProps = {
+  // All of these strings are marked as required by TagSet if needed
+  searchLabel: 'Search all tags',
+  searchPlaceholder: 'Search all tags',
+  title: 'All tags',
+};
+
 TagSetModal.displayName = componentName;

@@ -396,6 +396,14 @@ export let PageHeader = React.forwardRef(
       loading: titleLoading,
     } = titleShape;
 
+    const tempTagSetOverflowProps = {
+      // temp fix pending changes to PageHeader implementation
+      allTagsModalTile: 'All tags',
+      allTagsModalSearchLabel: 'Search all tags',
+      allTagsModalSearchPlaceholderText: 'Search all tags',
+      showAllTagsLabel: 'View all tags',
+    };
+
     return (
       <ReactResizeDetector handleHeight onResize={handleResize}>
         <section
@@ -606,7 +614,8 @@ export let PageHeader = React.forwardRef(
                       })}>
                       <TagSet
                         overflowAlign="end"
-                        overflowClassName={`${blockClass}__tagset-tooltip`}>
+                        overflowClassName={`${blockClass}__tagset-tooltip`}
+                        {...tempTagSetOverflowProps}>
                         {tags}
                       </TagSet>
                     </Column>
@@ -635,7 +644,8 @@ export let PageHeader = React.forwardRef(
                       })}>
                       <TagSet
                         overflowAlign="end"
-                        overflowClassName={`${blockClass}__tagset-tooltip`}>
+                        overflowClassName={`${blockClass}__tagset-tooltip`}
+                        {...tempTagSetOverflowProps}>
                         {tags}
                       </TagSet>
                     </Column>

@@ -31,6 +31,13 @@ const tags = Array.from({ length: 20 }, (v, k) => (
 const tags10 = tags.slice(0, 10);
 const tagWidth = 100;
 
+const overflowAndModalStrings = {
+  allTagsModalTile: 'All tags',
+  allTagsModalSearchLabel: 'Search all tags',
+  allTagsModalSearchPlaceholderText: 'Search all tags',
+  showAllTagsLabel: 'View all tags',
+};
+
 describe(TagSet.displayName, () => {
   const { ResizeObserver } = window;
   let mockElement;
@@ -137,7 +144,7 @@ describe(TagSet.displayName, () => {
     window.innerWidth = tagWidth * (visibleTags + 1) + 1; // + 1 for overflow
 
     // const { container } =
-    render(<TagSet>{tags}</TagSet>);
+    render(<TagSet {...overflowAndModalStrings}>{tags}</TagSet>);
 
     const overflow = screen.getByText(`+${tags.length - visibleTags}`);
     userEvent.click(overflow);
@@ -150,6 +157,31 @@ describe(TagSet.displayName, () => {
     const closeButton = screen.getByTitle('Close');
     userEvent.click(closeButton);
     expect(modal).not.toHaveClass('is-visible');
+  });
+
+  it('it requires strings for overflow and modal when more than ten tags supplied.', () => {
+    const visibleTags = 5;
+    window.innerWidth = tagWidth * (visibleTags + 1) + 1; // + 1 for overflow
+
+    const errorsLogged = jest
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
+
+    render(<TagSet>{tags}</TagSet>);
+
+    expect(errorsLogged).toBeCalledTimes(4);
+    expect(errorsLogged.mock.calls[0][0]).toEqual(
+      'Warning: Failed prop type: The prop `allTagsModalSearchLabel` is marked as required in `TagSet`, but its value is `undefined`.\n    in TagSet'
+    );
+    expect(errorsLogged.mock.calls[1][0]).toEqual(
+      'Warning: Failed prop type: The prop `allTagsModalSearchPlaceholderText` is marked as required in `TagSet`, but its value is `undefined`.\n    in TagSet'
+    );
+    expect(errorsLogged.mock.calls[2][0]).toEqual(
+      'Warning: Failed prop type: The prop `allTagsModalTile` is marked as required in `TagSet`, but its value is `undefined`.\n    in TagSet'
+    );
+    expect(errorsLogged.mock.calls[3][0]).toEqual(
+      'Warning: Failed prop type: The prop `showAllTagsLabel` is marked as required in `TagSet`, but its value is `undefined`.\n    in TagSet'
+    );
   });
 
   it('Obeys max visible', () => {
@@ -192,6 +224,23 @@ describe(TagSet.displayName, () => {
     expect(ref.current).not.toBeNull();
   });
 
+  it('copes with no children', () => {
+    const dataTestId = uuidv4();
+    window.innerWidth = tagWidth * 10 + 1;
+
+    render(<TagSet data-testid={dataTestId}></TagSet>);
+    screen.getByTestId(dataTestId);
+  });
+
+  it('forwards a ref to an appropriate node', () => {
+    const ref = React.createRef();
+    window.innerWidth = tagWidth * 10 + 1;
+
+    render(<TagSet ref={ref}>{tags10}</TagSet>);
+
+    expect(ref.current).not.toBeNull();
+  });
+
   describe(TagSetModal.displayName, () => {
     const args = {
       title: 'a-title',
@@ -215,6 +264,9 @@ describe(TagSet.displayName, () => {
       expect(noTags.length).toBe(0);
 
       fireEvent.change(search, { target: { value: 'red' } });
+      screen.getAllByText(/Tag [0-9]+/);
+
+      fireEvent.change(search, { target: { value: '' } });
       screen.getAllByText(/Tag [0-9]+/);
     });
   });

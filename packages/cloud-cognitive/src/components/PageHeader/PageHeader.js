@@ -102,8 +102,7 @@ export let PageHeader = React.forwardRef(
     const titleShape = getTitleShape();
 
     // NOTE: The buffer is used to add space between the bottom of the header and the last content
-    // Not pre-collapsed
-    // and zero or one of tags or (subtitle or available space)
+    // Not pre-collapsed and (subtitle or available space)
     const lastRowBufferActive =
       ((title || pageActions) && !preCollapseTitleRow) ||
       subtitle ||
@@ -614,10 +613,9 @@ export let PageHeader = React.forwardRef(
                       })}>
                       <TagSet
                         overflowAlign="end"
-                        overflowClassName={`${blockClass}__tagset-tooltip`}
-                        {...tempTagSetOverflowProps}>
-                        {tags}
-                      </TagSet>
+                        {...tempTagSetOverflowProps}
+                        tags={tags}
+                      />
                     </Column>
                   </Row>
                 ) : null
@@ -644,10 +642,9 @@ export let PageHeader = React.forwardRef(
                       })}>
                       <TagSet
                         overflowAlign="end"
-                        overflowClassName={`${blockClass}__tagset-tooltip`}
-                        {...tempTagSetOverflowProps}>
-                        {tags}
-                      </TagSet>
+                        {...tempTagSetOverflowProps}
+                        tags={tags}
+                      />
                     </Column>
                   ) : null}
                 </Row>
@@ -806,10 +803,9 @@ PageHeader.propTypes = {
    */
   subtitle: PropTypes.string,
   /**
-   * One or more tags, specified as a Carbon Tags component.
-   * Optional.
+   * An array of Carbon objects containing Carbon Tag properties plus 'label'. NOTE: 'filter' is not ignored.
    */
-  tags: PropTypes.arrayOf(PropTypes.element),
+  tags: TagSet.propTypes.tags,
   /**
    * The title of the page.
    * Optional string or object with the following attributes: text, icon, loading

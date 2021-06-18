@@ -13,9 +13,11 @@ import {
   ModalHeader,
   ModalBody,
   Search,
+  Tag,
 } from 'carbon-components-react';
 
 import { pkg } from '../../settings';
+import { prepareProps } from '../../global/js/utils/props-helper';
 const componentName = 'TagSetModal';
 const blockClass = `${pkg.prefix}--tag-set-modal`;
 
@@ -39,15 +41,10 @@ export const TagSetModal = ({
         const lcaseSearch = search.toLocaleLowerCase();
 
         allTags.forEach((tag) => {
-          const dataSearch = (
-            tag.props['data-search'] || ''
-          ).toLocaleLowerCase();
-          const contentsAsString = tag.props.children
-            .toString()
-            .toLocaleLowerCase();
+          const dataSearch = (tag['data-search'] || '').toLocaleLowerCase();
           if (
             (dataSearch && dataSearch.indexOf(lcaseSearch) > -1) ||
-            contentsAsString.indexOf(lcaseSearch) > -1
+            tag.label.indexOf(lcaseSearch) > -1
           ) {
             newFilteredModalTags.push(tag);
           }
@@ -78,7 +75,11 @@ export const TagSetModal = ({
         />
       </ModalHeader>
       <ModalBody className={`${blockClass}__body`} hasForm>
-        {filteredModalTags}
+        {filteredModalTags.map(({ label, ...other }, index) => (
+          <Tag {...other} filter={false} key={`all-tags-${index}`}>
+            {label}
+          </Tag>
+        ))}
       </ModalBody>
       <div className={`${blockClass}__fade`} />
     </ComposedModal>
@@ -86,7 +87,12 @@ export const TagSetModal = ({
 };
 
 TagSetModal.propTypes = {
-  allTags: PropTypes.arrayOf(PropTypes.object).isRequired,
+  allTags: PropTypes.arrayOf(
+    PropTypes.shape({
+      ...prepareProps(Tag.propTypes, 'filter'),
+      label: PropTypes.string.isRequired,
+    })
+  ),
   onClose: PropTypes.func,
   open: PropTypes.bool,
   searchLabel: PropTypes.string,

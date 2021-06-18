@@ -11,7 +11,6 @@ import userEvent from '@testing-library/user-event';
 import { pkg, carbon } from '../../settings';
 import { TagSet } from '.';
 import { TagSetModal } from './TagSetModal';
-import { Tag } from 'carbon-components-react';
 import { mockHTMLElement } from '../../global/js/utils/test-helper';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
@@ -20,14 +19,11 @@ const blockClassOverflow = `${pkg.prefix}--tag-set-overflow`;
 
 const tagLabel = (index) => `Tag ${index + 1}`;
 const types = ['red', 'blue', 'cyan', 'high-contrast'];
-const tags = Array.from({ length: 20 }, (v, k) => (
-  <Tag
-    key={k}
-    type={types[k % types.length]}
-    data-search={`${k % 4 ? 'red' : k % 9 ? 'Red' : ''}`}>
-    {tagLabel(k)}
-  </Tag>
-));
+const tags = Array.from({ length: 20 }, (v, k) => ({
+  type: types[k % types.length],
+  ['data-search']: `${k % 4 ? 'red' : k % 9 ? 'Red' : ''}`,
+  label: tagLabel(k),
+}));
 const tags10 = tags.slice(0, 10);
 const tagWidth = 100;
 
@@ -77,7 +73,7 @@ describe(TagSet.displayName, () => {
   it('Renders all as visible tags when space available', () => {
     window.innerWidth = tagWidth * 10 + 1;
 
-    render(<TagSet>{tags10}</TagSet>);
+    render(<TagSet tags={tags10} />);
 
     // first and last should be visible
     screen.getByText(tagLabel(0), {
@@ -93,7 +89,7 @@ describe(TagSet.displayName, () => {
   it('Renders only the overflow when very little space', () => {
     window.innerWidth = tagWidth / 2;
 
-    render(<TagSet>{tags10}</TagSet>);
+    render(<TagSet tags={tags10} />);
 
     const visible = screen.queryAllByText(/Tag [0-9]+/, {
       // selector need to ignore sizing items
@@ -115,7 +111,7 @@ describe(TagSet.displayName, () => {
     const visibleTags = 5;
     window.innerWidth = tagWidth * (visibleTags + 1) + 1; // + 1 for overflow
 
-    render(<TagSet>{tags10}</TagSet>);
+    render(<TagSet tags={tags10} />);
 
     // first and last should be visible
     screen.getByText(tagLabel(0), {
@@ -144,7 +140,7 @@ describe(TagSet.displayName, () => {
     window.innerWidth = tagWidth * (visibleTags + 1) + 1; // + 1 for overflow
 
     // const { container } =
-    render(<TagSet {...overflowAndModalStrings}>{tags}</TagSet>);
+    render(<TagSet {...overflowAndModalStrings} tags={tags} />);
 
     const overflow = screen.getByText(`+${tags.length - visibleTags}`);
     userEvent.click(overflow);
@@ -167,7 +163,7 @@ describe(TagSet.displayName, () => {
       .spyOn(console, 'error')
       .mockImplementation(() => {});
 
-    render(<TagSet>{tags}</TagSet>);
+    render(<TagSet tags={tags} />);
 
     expect(errorsLogged).toBeCalledTimes(4);
     expect(errorsLogged.mock.calls[0][0]).toEqual(
@@ -187,7 +183,7 @@ describe(TagSet.displayName, () => {
   it('Obeys max visible', () => {
     window.innerWidth = tagWidth * 10 + 1;
 
-    render(<TagSet maxVisible={5}>{tags10}</TagSet>);
+    render(<TagSet maxVisible={5} tags={tags10} />);
 
     // first and last should be visible
     screen.getByText(tagLabel(0), {
@@ -211,7 +207,7 @@ describe(TagSet.displayName, () => {
     const dataTestId = uuidv4();
     window.innerWidth = tagWidth * 10 + 1;
 
-    render(<TagSet data-testid={dataTestId}>{tags10}</TagSet>);
+    render(<TagSet data-testid={dataTestId} tags={tags10} />);
     screen.getByTestId(dataTestId);
   });
 
@@ -219,16 +215,16 @@ describe(TagSet.displayName, () => {
     const ref = React.createRef();
     window.innerWidth = tagWidth * 10 + 1;
 
-    render(<TagSet ref={ref}>{tags10}</TagSet>);
+    render(<TagSet ref={ref} tags={tags10} />);
 
     expect(ref.current).not.toBeNull();
   });
 
-  it('copes with no children', () => {
+  it('copes with no tags', () => {
     const dataTestId = uuidv4();
     window.innerWidth = tagWidth * 10 + 1;
 
-    render(<TagSet data-testid={dataTestId}></TagSet>);
+    render(<TagSet data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
@@ -236,7 +232,7 @@ describe(TagSet.displayName, () => {
     const ref = React.createRef();
     window.innerWidth = tagWidth * 10 + 1;
 
-    render(<TagSet ref={ref}>{tags10}</TagSet>);
+    render(<TagSet ref={ref} tags={tags10} />);
 
     expect(ref.current).not.toBeNull();
   });

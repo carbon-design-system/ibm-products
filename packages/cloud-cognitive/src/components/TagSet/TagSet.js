@@ -16,6 +16,7 @@ import { Tag } from 'carbon-components-react';
 import ReactResizeDetector from 'react-resize-detector';
 
 import { pkg } from '../../settings';
+import { prepareProps } from '../../global/js/utils/props-helper';
 const componentName = 'TagSet';
 const blockClass = `${pkg.prefix}--tag-set`;
 
@@ -24,7 +25,6 @@ const allTagsModalSearchThreshold = 10;
 export let TagSet = React.forwardRef(
   (
     {
-      children,
       className,
       maxVisible,
       rightAlign,
@@ -35,6 +35,7 @@ export let TagSet = React.forwardRef(
       allTagsModalSearchLabel,
       allTagsModalSearchPlaceholderText,
       showAllTagsLabel,
+      tags,
       // Collect any other property values passed in.
       ...rest
     },
@@ -42,7 +43,6 @@ export let TagSet = React.forwardRef(
   ) => {
     const [displayCount, setDisplayCount] = useState(3);
     const [displayedTags, setDisplayedTags] = useState([]);
-    const [allTags, setAllTags] = useState([]);
     const [hiddenSizingTags, setHiddenSizingTags] = useState([]);
     const [showAllModalOpen, setShowAllModalOpen] = useState(false);
     const localTagSetRef = useRef(null);
@@ -56,37 +56,36 @@ export let TagSet = React.forwardRef(
     };
 
     useEffect(() => {
-      // clone children for use in modal
-      setAllTags(
-        children && children.length > 0
-          ? children.map((child) => React.cloneElement(child))
-          : []
-      );
-
       const newSizingTags = [];
-      // use children as sizing tags
+      // create sizing tags
       setHiddenSizingTags(
-        children && children.length > 0
-          ? children.map((child, index) => {
+        tags && tags.length > 0
+          ? tags.map(({ label, ...other }, index) => {
               return (
                 <div
                   key={index}
                   className={`${blockClass}__sizing-tag`}
                   ref={(el) => (newSizingTags[index] = el)}>
-                  {child}
+                  <Tag {...other} filter={false}>
+                    {label}
+                  </Tag>
                 </div>
               );
             })
           : []
       );
       setSizingTags(newSizingTags);
-    }, [children]);
+    }, [tags]);
 
     useEffect(() => {
-      // clone children for use as visible and overflow tags
+      // create visible and overflow tags
       let newDisplayedTags =
-        children && children.length > 0
-          ? children.map((child) => React.cloneElement(child))
+        tags && tags.length > 0
+          ? tags.map(({ label, ...other }, index) => (
+              <Tag {...other} filter={false} key={`displayed-tag-${index}`}>
+                {label}
+              </Tag>
+            ))
           : [];
 
       // separate out tags for the overflow
@@ -118,12 +117,12 @@ export let TagSet = React.forwardRef(
 
       setDisplayedTags(newDisplayedTags);
     }, [
-      children,
       displayCount,
       overflowAlign,
       overflowClassName,
       overflowDirection,
       showAllTagsLabel,
+      tags,
     ]);
 
     const checkFullyVisibleTags = useCallback(() => {
@@ -206,9 +205,9 @@ export let TagSet = React.forwardRef(
             </div>
           </div>
 
-          {displayCount < allTags.length ? (
+          {tags && displayCount < tags.length ? (
             <TagSetModal
-              allTags={allTags}
+              allTags={tags}
               open={showAllModalOpen}
               title={allTagsModalTile}
               onClose={handleModalClose}
@@ -225,8 +224,6 @@ export let TagSet = React.forwardRef(
 // Return a placeholder if not released and not enabled by feature flag
 TagSet = pkg.checkComponentEnabled(TagSet, componentName);
 
-const TagType = PropTypes.shape({ type: PropTypes.oneOf([Tag]) });
-
 /**
  * The strings shown in the showAllModal are only shown if we have more than allTagsModalSearchLThreshold
  * @returns null if no problems
@@ -239,9 +236,9 @@ const string_required_if_more_than_10_tags = (
   propFullName,
   secret
 ) => {
-  const children = props['children'];
+  const tags = props['tags'];
 
-  if (children && children.length > allTagsModalSearchThreshold) {
+  if (tags && tags.length > allTagsModalSearchThreshold) {
     const error = PropTypes.string.isRequired(
       props,
       propName,
@@ -273,10 +270,6 @@ TagSet.propTypes = {
    */
   allTagsModalTile: string_required_if_more_than_10_tags,
   /**
-   * children of the tag set (these are expected to be tags)
-   */
-  children: PropTypes.arrayOf(TagType),
-  /**
    * className
    */
   className: PropTypes.string,
@@ -304,6 +297,15 @@ TagSet.propTypes = {
    * label for the overflow show all tags link. **Note: Required if more than 10 tags**
    */
   showAllTagsLabel: string_required_if_more_than_10_tags,
+  /**
+   * An array of Carbon objects containing Carbon Tag properties plus 'label'. NOTE: 'filter' is not ignored.
+   */
+  tags: PropTypes.arrayOf(
+    PropTypes.shape({
+      ...prepareProps(Tag.propTypes, 'filter'),
+      label: PropTypes.string.isRequired,
+    })
+  ),
 };
 
 TagSet.defaultProps = {

@@ -11,13 +11,7 @@ import userEvent from '@testing-library/user-event';
 
 import { pkg, carbon } from '../../settings';
 
-import {
-  BreadcrumbItem,
-  Button,
-  Tab,
-  Tabs,
-  Tag,
-} from 'carbon-components-react';
+import { BreadcrumbItem, Button, Tab, Tabs } from 'carbon-components-react';
 import { Lightning16, Bee32 } from '@carbon/icons-react';
 
 import { PageHeader } from '.';
@@ -95,11 +89,11 @@ const navigation = (
 );
 
 // supply enough tags to trigger TagSet overflow required props
-const tags = Array.from({ length: 20 }, (v, k) => (
-  <Tag key={k} data-testid="tags" type="blue">
-    A tag
-  </Tag>
-));
+const tags = Array.from({ length: 20 }, () => ({
+  'data-testid': 'tags',
+  type: 'blue',
+  label: 'A tag',
+}));
 
 const titleObj = { text: 'Page title', loading: false, icon: Bee32 };
 const titleString = 'Page title';
@@ -289,6 +283,7 @@ describe('PageHeader', () => {
     );
     expect(screen.getByText(subtitle).textContent).toEqual(subtitle);
     expect(screen.queryAllByTestId('tabs')).toHaveLength(1);
+    console.log(document.querySelector('.exp--tag-set').innerHTML);
     expect(
       screen.getAllByText('A tag', {
         // selector need to ignore sizing items

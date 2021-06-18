@@ -40,18 +40,18 @@
     "storybook:start": "cd packages/core && yarn start",
     "sync": "carbon-cli sync",
     "upgrade-carbon": "npm-check-updates -su --deep --filter '/carbon/' && yarn",
-    "//upgrade-dependencies": "# don't upgrade carbon (done globally), husky (major change in action)",
-    "upgrade-dependencies": "yarn run-all --concurrency 1 upgrade-dependencies && npm-check-updates -u --reject '/(carbon|^husky$)/' && yarn",
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (not tested), husky (major change in action)",
+    "upgrade-dependencies": "yarn run-all --concurrency 1 upgrade-dependencies && npm-check-updates -u --reject '/(carbon|^react$|^react-dom$|^husky$)/' && yarn",
     "upgrade-manual": "sh ./scripts/monorepo-npm-upgrade.sh"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
-    "@testing-library/dom": "^7.30.3",
+    "@testing-library/dom": "^7.31.2",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^13.1.9",
     "eslint": "^7.28.0",
-    "eslint-config-carbon": "^2.5.0-rc.0",
+    "eslint-config-carbon": "^2.5.0",
     "husky": "^4.3.6",
     "jest": "^27.0.4",
     "jest-config-ibm-cloud-cognitive": "^0.3.12",
@@ -66,8 +66,8 @@
     "react-dom": "^16.14.0",
     "rimraf": "^3.0.2",
     "stylelint": "^13.13.1",
-    "stylelint-config-carbon": "^1.5.0",
-    "stylelint-plugin-carbon-tokens": "^0.9.0"
+    "stylelint-config-carbon": "^1.6.0",
+    "stylelint-plugin-carbon-tokens": "^0.10.0"
   },
   "eslintConfig": {
     "parser": "babel-eslint",

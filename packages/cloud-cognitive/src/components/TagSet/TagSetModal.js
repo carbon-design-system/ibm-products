@@ -17,11 +17,11 @@ import {
 
 import { pkg } from '../../settings';
 const componentName = 'TagSetModal';
-const blockClass = `${pkg.prefix}--tag-set`;
+const blockClass = `${pkg.prefix}--tag-set-modal`;
 
 export const TagSetModal = ({
   allTags,
-  heading,
+  title,
   onClose,
   open,
   searchLabel,
@@ -31,66 +31,72 @@ export const TagSetModal = ({
   const [search, setSearch] = useState('');
 
   useEffect(() => {
-    const newFilteredModalTags = [];
+    let newFilteredModalTags = [];
     if (open) {
-      allTags.forEach((tag, index) => {
-        const dataSearch = (tag.props['data-search'] || '').toLocaleLowerCase();
-        const contentsAsString = tag.props.children
-          .toString()
-          .toLocaleLowerCase();
-        if (
-          (dataSearch && dataSearch.indexOf(search) > -1) ||
-          contentsAsString.indexOf(search) > -1
-        ) {
-          newFilteredModalTags.push(
-            <span key={index} className={`${blockClass}-show-all-tags`}>
-              {React.cloneElement(tag)}
-            </span>
-          );
-        }
-      });
+      if (search === '') {
+        newFilteredModalTags = allTags.slice(0);
+      } else {
+        const lcaseSearch = search.toLocaleLowerCase();
+
+        allTags.forEach((tag) => {
+          const dataSearch = (
+            tag.props['data-search'] || ''
+          ).toLocaleLowerCase();
+          const contentsAsString = tag.props.children
+            .toString()
+            .toLocaleLowerCase();
+          if (
+            (dataSearch && dataSearch.indexOf(lcaseSearch) > -1) ||
+            contentsAsString.indexOf(lcaseSearch) > -1
+          ) {
+            newFilteredModalTags.push(tag);
+          }
+        });
+      }
     }
     setFilteredModalTags(newFilteredModalTags);
   }, [allTags, open, search]);
 
   const handleSearch = (ev) => {
-    setSearch(ev.target.value);
+    setSearch(ev.target.value || '');
   };
 
   return (
     <ComposedModal
-      className={`${blockClass}__show-all-tags-modal`}
+      containerClassName={`${blockClass}__container`}
+      className={`${blockClass}`}
       size="sm"
       {...{ open, onClose }}>
-      <ModalHeader title={heading}>
+      <ModalHeader title={title} className={`${blockClass}__header`}>
         <Search
           data-modal-primary-focus
-          className={`${blockClass}__show-all-tags-modal-search`}
+          className={`${blockClass}__search`}
           labelText={searchLabel}
           placeholder={searchPlaceholder}
           onChange={handleSearch}
           size="lg"
         />
       </ModalHeader>
-      <ModalBody
-        className={`${blockClass}__show-all-tags-modal-body-2`}
-        hasForm>
-        <div className={`${blockClass}__show-all-tags-modal-content`}>
-          {filteredModalTags}
-        </div>
+      <ModalBody className={`${blockClass}__body`} hasForm>
+        {filteredModalTags}
       </ModalBody>
-      <div className={`${blockClass}__show-all-tags-modal-fade`} />
+      <div className={`${blockClass}__fade`} />
     </ComposedModal>
   );
 };
 
 TagSetModal.propTypes = {
   allTags: PropTypes.arrayOf(PropTypes.object).isRequired,
-  heading: PropTypes.string,
   onClose: PropTypes.func,
   open: PropTypes.bool,
   searchLabel: PropTypes.string,
   searchPlaceholder: PropTypes.string,
+  title: PropTypes.string,
+};
+
+TagSetModal.defaultProps = {
+  // marked as required by TagSet if needed, default used to satisfy <Search /> component
+  searchLabel: '',
 };
 
 TagSetModal.displayName = componentName;

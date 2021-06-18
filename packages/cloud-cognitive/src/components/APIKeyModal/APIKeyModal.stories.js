@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2020
+// Copyright IBM Corp. 2021, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -17,13 +17,13 @@ import {
   Form,
 } from 'carbon-components-react';
 import { action } from '@storybook/addon-actions';
-import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 import { APIKeyModal } from '.';
 import mdx from './APIKeyModal.mdx';
 const storybookPrefix = getStorybookPrefix(pkg, APIKeyModal.displayName);
 import wait from '../../global/js/utils/wait';
+import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 
 export default {
   title: `${storybookPrefix}/${APIKeyModal.displayName}`,
@@ -40,7 +40,7 @@ const defaultProps = {
   apiKey: '123-456-789',
   apiKeyInputId: 'apiKeyInput',
   apiKeyLabel: 'API key',
-  copyButtonText: 'Copy & close',
+  copyButtonText: 'Copy',
   open: true,
   secondaryButtonText: 'Close',
   successBody: (
@@ -52,7 +52,9 @@ const defaultProps = {
   successHeader: 'API key successully created',
 };
 
-const MinimalTemplate = (args) => {
+const blockClass = `${pkg.prefix}--apikey-modal`;
+
+const InstantTemplate = (args) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -65,37 +67,44 @@ const MinimalTemplate = (args) => {
 
   return (
     <>
-      <APIKeyModal
-        {...args}
-        onRequestClose={() => setOpen(false)}
-        open={open}
-      />
+      <APIKeyModal {...args} onClose={() => setOpen(false)} open={open} />
       {loading ? (
-        <InlineLoading description="Generating..." />
+        <Button
+          renderIcon={InlineLoading}
+          className={`${blockClass}__button-loading`}>
+          Generating...
+        </Button>
       ) : (
-        <Button onClick={generateKey}>Generate API key</Button>
+        <Button onClick={generateKey}>Generate</Button>
       )}
     </>
   );
 };
 
 const TemplateWithState = (args) => {
+  const { error } = args;
   const [open, setOpen] = useState(false);
   const [apiKey, setApiKey] = useState('');
   const [loading, setLoading] = useState(false);
+  const [fetchError, setFetchError] = useState(false);
 
   // eslint-disable-next-line
   const submitHandler = async () => {
     action('submitted');
+    setFetchError(false);
     setLoading(true);
     await wait(2000);
-    setApiKey('111-111-111-111');
+    if (error) {
+      setFetchError(true);
+    } else {
+      setApiKey('111-111-111-111');
+    }
     setLoading(false);
   };
 
   const onCloseHandler = () => {
-    setApiKey('');
     setOpen(false);
+    setApiKey('');
   };
 
   return (
@@ -104,9 +113,10 @@ const TemplateWithState = (args) => {
         {...args}
         apiKey={apiKey}
         loading={loading}
-        onRequestClose={onCloseHandler}
+        onClose={onCloseHandler}
         onRequestSubmit={submitHandler}
         open={open}
+        error={fetchError}
       />
       <Button onClick={() => setOpen(!open)}>Generate API key</Button>
     </>
@@ -141,8 +151,8 @@ const MultiStepTemplate = (args) => {
   };
 
   const onCloseHandler = () => {
-    setApiKey('');
     setOpen(false);
+    setApiKey('');
     setName('');
     setPermissions('');
     setAllResources(false);
@@ -158,11 +168,11 @@ const MultiStepTemplate = (args) => {
     {
       valid: Boolean(name && permissions),
       content: (
-        <div>
-          <p className={`${pkg.prefix}--apikey-modal-body`}>
-            Optional description text. To connect securely to product, your
-            application or tool needs an API key with permissions to access the
-            cluster and resources such as topics.
+        <>
+          <p className={`${blockClass}__body`}>
+            (Optional description text) To connect securely to [product name],
+            your application or tool needs an API key with permission to access
+            resources such as [product resource name].
           </p>
           <TextInput
             value={name}
@@ -173,25 +183,26 @@ const MultiStepTemplate = (args) => {
           />
           <FormGroup
             legendText="What do you want your application to be able to do"
-            className={`${pkg.prefix}--apikey-modal-opts`}>
+            className={`${blockClass}__permissions`}>
             <RadioButtonGroup
               onChange={(opt) => setPermissions(opt)}
               valueSelected={permissions}
-              name="permission">
+              name="permission"
+              orientation="vertical">
               <RadioButton value="Read and write" labelText="Read and write" />
               <RadioButton value="Read only" labelText="Read only" />
               <RadioButton value="Write only" labelText="Write only" />
             </RadioButtonGroup>
           </FormGroup>
-        </div>
+        </>
       ),
     },
     {
       valid: Boolean(resource),
       content: (
-        <div>
+        <>
           <Form onSubmit={formHandler}>
-            <FormGroup>
+            <FormGroup className={`${blockClass}__resource-toggle`}>
               <Toggle
                 onChange={(e) => setAllResources(e.target.checked)}
                 labelText="All resources"
@@ -203,7 +214,7 @@ const MultiStepTemplate = (args) => {
                 autoFocus
               />
             </FormGroup>
-            <FormGroup>
+            <FormGroup className={`${blockClass}__resource-name`}>
               <TextInput
                 value={resource}
                 onChange={(e) => setResource(e.target.value)}
@@ -214,7 +225,7 @@ const MultiStepTemplate = (args) => {
             </FormGroup>
           </Form>
           {loading && <InlineLoading description="Generating..." />}
-        </div>
+        </>
       ),
     },
   ];
@@ -225,7 +236,7 @@ const MultiStepTemplate = (args) => {
         {...args}
         apiKey={apiKey}
         loading={loading}
-        onRequestClose={onCloseHandler}
+        onClose={onCloseHandler}
         onRequestSubmit={submitHandler}
         open={open}
         customSteps={steps}
@@ -247,8 +258,7 @@ Standard.args = {
   downloadable: true,
   downloadableFileName: 'apikey',
   loadingMessage: 'Generating...',
-  modalBody:
-    'Optional description text. To connect securely to {{product}}, your application or tool needs an API key with permission to access the cluster and resources.',
+  body: '(Optional description text) To connect securely to [product name], your application or tool needs an API key with permission to access resources such as [product resource name].',
   nameHelperText:
     'Providing the application name will help you idenfity your API key later.',
   nameInputId: 'nameInput',
@@ -257,8 +267,31 @@ Standard.args = {
   nameRequired: true,
 };
 
-export const Minimal = MinimalTemplate.bind({});
-Minimal.args = {
+export const WithError = TemplateWithState.bind({});
+WithError.args = {
+  ...defaultProps,
+  apiKeyVisibility: true,
+  createButtonText: 'Generate API key',
+  createHeader: 'Generate an API key',
+  downloadBodyText:
+    'This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it.',
+  downloadLinkText: 'Download as JSON',
+  downloadable: true,
+  downloadableFileName: 'apikey',
+  loadingMessage: 'Generating...',
+  body: '(Optional description text) To connect securely to [product name], your application or tool needs an API key with permission to access resources such as [product resource name].',
+  nameHelperText:
+    'Providing the application name will help you idenfity your API key later.',
+  nameInputId: 'nameInput',
+  nameLabel: 'Name your application',
+  namePlaceholder: 'Application name',
+  nameRequired: true,
+  error: true,
+  errorMessage: 'An error occured.',
+};
+
+export const Instant = InstantTemplate.bind({});
+Instant.args = {
   ...defaultProps,
   apiKeyVisibility: true,
   downloadBodyText:
@@ -266,6 +299,7 @@ Minimal.args = {
   downloadLinkText: 'Download as JSON',
   downloadable: true,
   downloadableFileName: 'apikey',
+  apiKeyLabel: '',
 };
 
 export const CustomSteps = MultiStepTemplate.bind({});

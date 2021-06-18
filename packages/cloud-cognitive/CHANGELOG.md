@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.45.4...@carbon/ibm-cloud-cognitive@0.46.0) (2021-06-17)
+
+
+### Features
+
+* tagset review updates part 2 ([#907](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/907)) ([fbe3143](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/fbe3143b12abb3d87b6e79eb668014a2015cc9cc))
+
+
+
+
+
+## [0.45.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.45.3...@carbon/ibm-cloud-cognitive@0.45.4) (2021-06-17)
+
+
+### Bug Fixes
+
+* apikey modal pre release updates ([#906](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/906)) ([6ae80e4](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6ae80e4ba115acb0ed534ccdf5efe6faa15f80e5))
+
+
+
+
+
 ## [0.45.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.45.2...@carbon/ibm-cloud-cognitive@0.45.3) (2021-06-17)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

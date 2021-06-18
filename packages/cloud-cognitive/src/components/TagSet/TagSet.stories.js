@@ -13,6 +13,8 @@ import styles from './_storybook-styles.scss'; // import index in case more file
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 import { TagSet } from '.';
+import mdx from './TagSet.mdx';
+
 const storybookPrefix = getStorybookPrefix(pkg, TagSet.displayName);
 const blockClass = `${pkg.prefix}--tag-set`;
 const blockClassModal = `${blockClass}-modal`;
@@ -134,10 +136,20 @@ for (let i = 0; i < 200; i++) {
   );
 }
 
+const overflowAndModalStrings = {
+  allTagsModalTile: 'All tags',
+  allTagsModalSearchLabel: 'Search all tags',
+  allTagsModalSearchPlaceholderText: 'Search all tags',
+  showAllTagsLabel: 'View all tags',
+};
+
 export default {
   title: `${storybookPrefix}/${TagSet.displayName}`,
   component: TagSet,
-  parameters: { styles },
+  parameters: {
+    styles,
+    docs: { page: mdx },
+  },
   argTypes: {
     containerWidth: {
       control: { type: 'range', min: 20, max: 800, step: 10 },
@@ -165,8 +177,8 @@ const Template = (argsIn) => {
   );
 };
 
-export const TagArray = Template.bind({});
-TagArray.args = {
+export const FiveTags = Template.bind({});
+FiveTags.args = {
   children: TagItems,
   containerWidth: 500,
 };
@@ -175,53 +187,12 @@ export const ManyTags = Template.bind({});
 ManyTags.args = {
   children: ManyTagItems,
   containerWidth: 500,
+  ...overflowAndModalStrings,
 };
 
 export const HundredsOfTags = Template.bind({});
 HundredsOfTags.args = {
   children: HundredsOfItems,
   containerWidth: 500,
-};
-
-const Template2 = (argsIn) => {
-  const { containerWidth, ...args } = { ...argsIn };
-  return (
-    <div style={{ width: containerWidth }}>
-      <TagSet {...args}>
-        <Tag key="tag1" type="blue">
-          Tag 1
-        </Tag>
-        <Tag key="tag12">Tag 12</Tag>
-        <Tag key="tag123" type="high-contrast">
-          Tag 123
-        </Tag>
-        <Tag key="tag1234" type="cyan">
-          Tag 1234
-        </Tag>
-        <Tag key="tag12345" type="red">
-          Tag 12345
-        </Tag>
-      </TagSet>
-    </div>
-  );
-};
-
-export const AsDom = Template2.bind({});
-AsDom.args = {
-  containerWidth: 500,
-};
-
-const TemplateMin = (argsIn) => {
-  const { children, containerWidth } = { ...argsIn };
-  return (
-    <div style={{ width: containerWidth }}>
-      <TagSet>{children}</TagSet>
-    </div>
-  );
-};
-
-export const Minimal = TemplateMin.bind({});
-Minimal.args = {
-  children: TagItems,
-  containerWidth: 500,
+  ...overflowAndModalStrings,
 };

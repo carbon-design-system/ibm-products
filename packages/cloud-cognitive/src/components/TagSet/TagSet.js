@@ -19,6 +19,8 @@ import { pkg } from '../../settings';
 const componentName = 'TagSet';
 const blockClass = `${pkg.prefix}--tag-set`;
 
+const allTagsModalSearchThreshold = 10;
+
 export let TagSet = React.forwardRef(
   (
     {
@@ -29,9 +31,9 @@ export let TagSet = React.forwardRef(
       overflowAlign,
       overflowClassName,
       overflowDirection,
-      showAllModalTitle,
-      showAllSearchLabel,
-      showAllSearchPlaceHolderText,
+      allTagsModalTile,
+      allTagsModalSearchLabel,
+      allTagsModalSearchPlaceholderText,
       showAllTagsLabel,
       // Collect any other property values passed in.
       ...rest
@@ -64,7 +66,6 @@ export let TagSet = React.forwardRef(
       const newSizingTags = [];
       // use children as sizing tags
       setHiddenSizingTags(
-        /* istanbul ignore next */
         children && children.length > 0
           ? children.map((child, index) => {
               return (
@@ -103,6 +104,7 @@ export let TagSet = React.forwardRef(
 
       newDisplayedTags.push(
         <TagSetOverflow
+          allTagsModalSearchThreshold={allTagsModalSearchThreshold}
           className={overflowClassName}
           onShowAllClick={handleShowAllClick}
           overflowTags={newOverflowTags}
@@ -165,11 +167,15 @@ export let TagSet = React.forwardRef(
       checkFullyVisibleTags();
     }, [checkFullyVisibleTags, maxVisible, sizingTags]);
 
+    /* don't know how to test resize */
+    /* istanbul ignore next */
     const handleResize = () => {
       /* istanbul ignore next */ // not sure how to test resize
       checkFullyVisibleTags();
     };
 
+    /* don't know how to test resize */
+    /* istanbul ignore next */
     const handleSizerTagsResize = () => {
       /* istanbul ignore next */ // not sure how to test resize
       checkFullyVisibleTags();
@@ -204,10 +210,10 @@ export let TagSet = React.forwardRef(
             <TagSetModal
               allTags={allTags}
               open={showAllModalOpen}
-              title={showAllModalTitle}
+              title={allTagsModalTile}
               onClose={handleModalClose}
-              searchLabel={showAllSearchLabel}
-              searchPlaceholder={showAllSearchPlaceHolderText}
+              searchLabel={allTagsModalSearchLabel}
+              searchPlaceholder={allTagsModalSearchPlaceholderText}
             />
           ) : null}
         </div>
@@ -221,7 +227,51 @@ TagSet = pkg.checkComponentEnabled(TagSet, componentName);
 
 const TagType = PropTypes.shape({ type: PropTypes.oneOf([Tag]) });
 
+/**
+ * The strings shown in the showAllModal are only shown if we have more than allTagsModalSearchLThreshold
+ * @returns null if no problems
+ */
+const string_required_if_more_than_10_tags = (
+  props,
+  propName,
+  componentName,
+  location,
+  propFullName,
+  secret
+) => {
+  const children = props['children'];
+
+  if (children && children.length > allTagsModalSearchThreshold) {
+    const error = PropTypes.string.isRequired(
+      props,
+      propName,
+      componentName,
+      location,
+      propFullName,
+      secret
+    );
+
+    if (error) {
+      return error;
+    }
+  }
+
+  return null;
+};
+
 TagSet.propTypes = {
+  /**
+   * label text for the show all search. **Note: Required if more than 10 tags**
+   */
+  allTagsModalSearchLabel: string_required_if_more_than_10_tags,
+  /**
+   * placeholder text for the show all search. **Note: Required if more than 10 tags**
+   */
+  allTagsModalSearchPlaceholderText: string_required_if_more_than_10_tags,
+  /**
+   * title for the show all modal. **Note: Required if more than 10 tags**
+   */
+  allTagsModalTile: string_required_if_more_than_10_tags,
   /**
    * children of the tag set (these are expected to be tags)
    */
@@ -251,30 +301,14 @@ TagSet.propTypes = {
    */
   rightAlign: PropTypes.bool,
   /**
-   * title for the show all modal
+   * label for the overflow show all tags link. **Note: Required if more than 10 tags**
    */
-  showAllModalTitle: PropTypes.string,
-  /**
-   * label text for the show all search
-   */
-  showAllSearchLabel: PropTypes.string,
-  /**
-   * placeholder text for the show all search
-   */
-  showAllSearchPlaceHolderText: PropTypes.string,
-  /**
-   * label for the overflow show all tags link
-   */
-  showAllTagsLabel: PropTypes.string,
+  showAllTagsLabel: string_required_if_more_than_10_tags,
 };
 
 TagSet.defaultProps = {
   overflowAlign: 'center',
   overflowDirection: 'bottom',
-  showAllModalTitle: 'All tags',
-  showAllSearchLabel: 'Search all tags',
-  showAllSearchPlaceHolderText: 'Search all tags',
-  showAllTagsLabel: 'View all tags',
 };
 
 TagSet.displayName = componentName;

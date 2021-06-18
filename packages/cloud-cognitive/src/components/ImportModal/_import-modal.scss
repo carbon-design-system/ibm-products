@@ -15,7 +15,7 @@
 @mixin import-modal {
   $block-class: #{$pkg-prefix}--import-modal;
 
-  .#{$block-class} .bx--modal-close {
+  .#{$block-class} .#{$carbon-prefix}--modal-close {
     display: none;
   }
 

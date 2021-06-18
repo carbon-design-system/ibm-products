@@ -11,18 +11,26 @@ import React from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
-import { allPropTypes, prepareProps } from '../../global/js/utils/props-helper';
+import {
+  allPropTypes,
+  deprecateProp,
+  isRequiredIf,
+  prepareProps,
+} from '../../global/js/utils/props-helper';
 
 // Carbon and package components we use.
 import { Button } from 'carbon-components-react';
 import { ActionSet } from '../ActionSet';
 
 import {
+  tearsheetHasCloseIcon,
   TearsheetShell,
   tearsheetShellWideProps as blocked,
 } from './TearsheetShell';
 
 const componentName = 'TearsheetNarrow';
+
+isRequiredIf.decorate(PropTypes.string);
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
@@ -85,9 +93,13 @@ TearsheetNarrow.propTypes = {
   className: PropTypes.string,
 
   /**
-   * The accessibility title for the close icon (if shown).
+   * The accessibility title for the close icon (if shown). This prop is
+   * required if a close icon is shown, i.e. if there are a no navigation
+   * actions and/or hasCloseIcon is true.
    */
-  closeIconDescription: PropTypes.string,
+  closeIconDescription: PropTypes.string.isRequiredIf(
+    ({ actions, hasCloseIcon }) => tearsheetHasCloseIcon(actions, hasCloseIcon)
+  ),
 
   /**
    * A description of the flow, displayed in the header area of the tearsheet.
@@ -126,7 +138,10 @@ TearsheetNarrow.propTypes = {
    * provided, which can be cancelled by returning 'false') if the user clicks
    * outside it.
    */
-  preventCloseOnClickOutside: PropTypes.bool,
+  preventCloseOnClickOutside: deprecateProp(
+    PropTypes.bool,
+    'The tearsheet will close automatically if the user clicks outside it if and only if the tearsheet is passive (no navigation actions)'
+  ),
 
   /**
    * The main title of the tearsheet, displayed in the header area.
@@ -148,7 +163,5 @@ TearsheetNarrow.propTypes = {
 // 'undefined' values reasonably. Default values should be provided when the
 // component needs to make a choice or assumption when a prop is not supplied.
 TearsheetNarrow.defaultProps = {
-  closeIconDescription: 'Close',
-  hasCloseIcon: false,
   verticalPosition: 'normal',
 };

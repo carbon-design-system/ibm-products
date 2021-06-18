@@ -11,15 +11,22 @@ import React from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
-import { allPropTypes, prepareProps } from '../../global/js/utils/props-helper';
+import {
+  allPropTypes,
+  deprecateProp,
+  isRequiredIf,
+  prepareProps,
+} from '../../global/js/utils/props-helper';
 
 // Carbon and package components we use.
 import { Button } from 'carbon-components-react';
 import { ActionSet } from '../ActionSet';
 
-import { TearsheetShell } from './TearsheetShell';
+import { tearsheetHasCloseIcon, TearsheetShell } from './TearsheetShell';
 
 const componentName = 'Tearsheet';
+
+isRequiredIf.decorate(PropTypes.string);
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
@@ -86,9 +93,13 @@ Tearsheet.propTypes = {
   className: PropTypes.string,
 
   /**
-   * The accessibility title for the close icon (if shown).
+   * The accessibility title for the close icon (if shown). This prop is
+   * required if a close icon is shown, i.e. if there are a no navigation
+   * actions and/or hasCloseIcon is true.
    */
-  closeIconDescription: PropTypes.string,
+  closeIconDescription: PropTypes.string.isRequiredIf(
+    ({ actions, hasCloseIcon }) => tearsheetHasCloseIcon(actions, hasCloseIcon)
+  ),
 
   /**
    * A description of the flow, displayed in the header area of the tearsheet.
@@ -97,9 +108,11 @@ Tearsheet.propTypes = {
 
   /**
    * Enable a close icon ('x') in the header area of the tearsheet. By default,
-   * a tearsheet does not display a close icon, but one should be enabled if
-   * the tearsheet is read-only or has no navigation actions (sometimes called
-   * a "passive tearsheet").
+   * (when this prop is omitted, or undefined or null) a tearsheet does not
+   * display a close icon if there are navigation actions ("transactional
+   * tearsheet") and displays one if there are no navigation actions ("passive
+   * tearsheet"), and that behavior can be overridden if required by setting
+   * this prop to either true or false.
    */
   hasCloseIcon: PropTypes.bool,
 
@@ -151,7 +164,10 @@ Tearsheet.propTypes = {
    * provided, which can be cancelled by returning 'false') if the user clicks
    * outside it.
    */
-  preventCloseOnClickOutside: PropTypes.bool,
+  preventCloseOnClickOutside: deprecateProp(
+    PropTypes.bool,
+    'The tearsheet will close automatically if the user clicks outside it if and only if the tearsheet is passive (no navigation actions)'
+  ),
 
   /**
    * The main title of the tearsheet, displayed in the header area.
@@ -173,8 +189,6 @@ Tearsheet.propTypes = {
 // 'undefined' values reasonably. Default values should be provided when the
 // component needs to make a choice or assumption when a prop is not supplied.
 Tearsheet.defaultProps = {
-  closeIconDescription: 'Close',
-  hasCloseIcon: false,
   influencerPosition: 'left',
   influencerWidth: 'narrow',
   verticalPosition: 'normal',

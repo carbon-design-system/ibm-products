@@ -9,11 +9,13 @@
 
 @import './_Canary/canary';
 
+@import './APIKeyModal/index';
 @import './AboutModal/index';
 @import './ActionSet/index';
 @import './ButtonMenu/index';
 @import './ComboButton/index';
 @import './ContextHeader/index';
+@import './CreateFullPage/index';
 @import './CreateModal/index';
 @import './CreateSidePanel/index';
 @import './CreateTearsheet/index';
@@ -22,6 +24,7 @@
 @import './ExportModal/index';
 @import './HTTPErrors/index';
 @import './ImportModal/index';
+@import './LoadingBar/index';
 @import './ModifiedTabs/index';
 @import './NotificationsPanel/index';
 @import './PageHeader/index';

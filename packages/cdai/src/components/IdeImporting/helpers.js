@@ -44,9 +44,13 @@ const statusScore = [
 
 export function sortFiles(a, b, numFiles) {
   let aIdx = a.index / numFiles + statusScore.indexOf(a.status);
-  if (a.invalid) aIdx += statusScore.length + 1;
+  if (a.invalid) {
+    aIdx += statusScore.length + 1;
+  }
   let bIdx = b.index / numFiles + statusScore.indexOf(b.status);
-  if (b.invalid) bIdx += statusScore.length + 1;
+  if (b.invalid) {
+    bIdx += statusScore.length + 1;
+  }
   return aIdx === bIdx ? 0 : aIdx < bIdx ? 1 : -1;
 }
 

@@ -12,9 +12,10 @@ export const utilCheckUpdateVerticalSpace = (
   headerRef,
   navigation,
   preventBreadcrumbScroll,
-  setMetrics,
-  dynamicRefs
+  setMetrics
 ) => {
+  const dynamicRefs = {};
+
   const getDynamicRef = (selector) => {
     // would love to do this differently but digging in the dom seems easier
     // than getting a ref to a conditionally rendered item
@@ -23,13 +24,12 @@ export const utilCheckUpdateVerticalSpace = (
     if (!headerRef.current) {
       return undefined;
     } else {
-      let dRef = dynamicRefs.current[selector];
+      let dRef = dynamicRefs[selector];
       if (!dRef || dRef.parentNode === null) {
-        dynamicRefs.current[selector] =
-          headerRef.current.querySelector(selector);
+        dynamicRefs[selector] = headerRef.current.querySelector(selector);
       }
     }
-    return dynamicRefs.current[selector];
+    return dynamicRefs[selector];
   };
 
   // Utility function that checks the heights of various elements which are used to determine layout
@@ -64,13 +64,17 @@ export const utilCheckUpdateVerticalSpace = (
   update.breadcrumbRowSpaceBelow = 0;
   update.titleRowSpaceAbove = 0;
 
-  update.headerTopValue = navigation
-    ? preventBreadcrumbScroll
-      ? update.navigationRowHeight +
-        update.breadcrumbRowHeight -
-        update.headerHeight
-      : update.navigationRowHeight - update.headerHeight
-    : update.breadcrumbRowHeight - update.headerHeight;
+  // Base for calculating sticky top
+  update.headerTopValue = -update.headerHeight;
+  if (navigation) {
+    // adjust top for sticky with navigation
+    update.headerTopValue += update.navigationRowHeight;
+  }
+
+  if (preventBreadcrumbScroll || !navigation) {
+    // adjust sticky top if no navigation or breadcrumb is to stay on screen
+    update.headerTopValue += update.breadcrumbRowHeight;
+  }
 
   if (window) {
     let val;
@@ -128,26 +132,14 @@ export const utilGetTitleShape = (title, titleIcon, defaultTitle) => {
   return newShape;
 };
 
-export const utilCalcSpacingBelowTitle = (
-  availableSpace,
-  tags,
-  navigation,
-  subtitle,
-  pageActions
-) => {
-  let belowTitleSpace = 'default';
-
-  if (
-    pageActions !== undefined &&
-    navigation !== undefined &&
-    subtitle === undefined &&
-    availableSpace === undefined
-  ) {
-    belowTitleSpace = '06';
-  } else if (subtitle !== undefined || availableSpace !== undefined) {
-    belowTitleSpace = '03';
-  } else if (navigation === undefined && tags !== undefined) {
-    belowTitleSpace = '05';
+// Set css style values directly onto a node. Note that this is effective
+// immediately, rather than using the React `style` prop which goes through
+// the React DOM update optimisation.
+export const utilSetCustomCSSProps = (targetRef, kvPairs) => {
+  if (targetRef.current) {
+    const keys = Object.keys(kvPairs);
+    for (let k of keys) {
+      targetRef.current.style.setProperty(k, kvPairs[k]);
+    }
   }
-  return belowTitleSpace;
 };

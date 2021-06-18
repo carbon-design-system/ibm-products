@@ -222,6 +222,9 @@ describe(CreateTearsheet.displayName, () => {
       expect(onNextStepFn).toHaveBeenCalled();
     });
     click(nextButtonElement);
+    await waitFor(() => {
+      expect(onNextStepFn).toHaveBeenCalled();
+    });
     const submitButtonElement = screen.getByText(submitButtonText);
     click(submitButtonElement);
     await waitFor(() => {
@@ -244,6 +247,9 @@ describe(CreateTearsheet.displayName, () => {
       expect(onNextStepNonPromiseFn).toHaveBeenCalled();
     });
     click(nextButtonElement);
+    await waitFor(() => {
+      expect(onNextStepNonPromiseFn).toHaveBeenCalled();
+    });
     const submitButtonElement = screen.getByText(submitButtonText);
     click(submitButtonElement);
     await waitFor(() => {
@@ -268,6 +274,9 @@ describe(CreateTearsheet.displayName, () => {
       expect(onNextStepFn).toHaveBeenCalled();
     });
     click(nextButtonElement);
+    await waitFor(() => {
+      expect(onNextStepFn).toHaveBeenCalled();
+    });
     const submitButtonElement = screen.getByText(submitButtonText);
     click(submitButtonElement);
     await waitFor(() => {
@@ -286,6 +295,9 @@ describe(CreateTearsheet.displayName, () => {
       expect(onNextStepFn).toHaveBeenCalled();
     });
     click(nextButtonElement);
+    await waitFor(() => {
+      expect(onNextStepFn).toHaveBeenCalled();
+    });
     const submitButtonElement = screen.getByText(submitButtonText);
     click(submitButtonElement);
     await waitFor(() => {

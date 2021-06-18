@@ -8,6 +8,7 @@
 @import '../../global/styles/project-settings';
 
 @import 'carbon-components/scss/components/ui-shell/ui-shell';
+@import 'carbon-components/scss/components/data-table/data-table';
 
 $story-class: 'page-header-stories';
 
@@ -32,7 +33,7 @@ $story-class: 'page-header-stories';
 }
 
 .#{$story-class}__dummy-content-block {
-  height: 120vh;
+  min-height: 120vh;
   background: $ui-01;
   background-clip: content-box;
 }
@@ -49,7 +50,7 @@ $story-class: 'page-header-stories';
 .#{$story-class}__app {
   position: relative;
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   flex-direction: column;
 }
 

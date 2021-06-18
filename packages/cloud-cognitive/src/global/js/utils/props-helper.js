@@ -187,3 +187,52 @@ export const allPropTypes = pconsole.shimIfProduction((arrayOfTypeCheckers) => {
 
   return checkType;
 });
+
+/**
+ * A prop-types validation function that takes a type checkers and a condition
+ * function and invokes either the type checker or the isRequired variant of
+ * the type checker according to whether the condition function returns false
+ * or true when called with the full set of props. This can be useful to make
+ * a prop conditionally required. The function also has a decorate function
+ * which can be used to add isRequiredIf to any existing type which already has
+ * an isRequired variant.
+ *
+ * Examples:
+ *
+ * MyComponent1.propTypes = {
+ *   showFoo: PropTypes.bool,
+ *   fooLabel: isRequiredIf(PropTypes.string, ({ showFoo }) => showFoo),
+ * }
+ *
+ * isRequiredIf.decorate(PropTypes.string);
+ *
+ * MyComponent2.propTypes = {
+ *   showBar: PropTypes.bool,
+ *   barLabel: PropTypes.string.isRequiredIf(({ showBar }) => showBar),
+ * }
+ *
+ * isRequiredIf.decorate(PropTypes.string, 'isRequiredIfBazShown', ({ showBaz }) => showBaz);
+ *
+ * MyComponent3.propTypes = {
+ *   showBaz: PropTypes.bool,
+ *   bazLabel: PropTypes.string.isRequiredIfBazShown,
+ * }
+ *
+ */
+export const isRequiredIf =
+  (checker, conditionFn) =>
+  (props, propName, componentName, location, propFullName, secret) =>
+    (conditionFn(props) ? checker.isRequired : checker)(
+      props,
+      propName,
+      componentName,
+      location,
+      propFullName,
+      secret
+    );
+
+isRequiredIf.decorate = (checker, name, conditionFn) => {
+  checker[name || 'isRequiredIf'] = conditionFn
+    ? isRequiredIf(checker, conditionFn)
+    : isRequiredIf.bind(null, checker);
+};

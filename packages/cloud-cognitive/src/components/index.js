@@ -10,6 +10,11 @@ export { ActionBarItem } from './ActionBar';
 export { ButtonMenu, ButtonMenuItem } from './ButtonMenu';
 export { ComboButton, ComboButtonItem } from './ComboButton';
 export { ContextHeader } from './ContextHeader';
+export {
+  CreateFullPage,
+  CreateFullPageStep,
+  CreateFullPageSection,
+} from './CreateFullPage';
 export { CreateModal } from './CreateModal';
 export { CreateSidePanel } from './CreateSidePanel';
 export {

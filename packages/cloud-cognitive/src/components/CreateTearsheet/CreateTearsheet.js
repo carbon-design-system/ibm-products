@@ -500,7 +500,6 @@ export let CreateTearsheet = forwardRef(
         <div
           className={`${blockClass}__multi-step-panel-content`}
           onBlur={handleBlur}>
-          <p className={`${blockClass}__step--heading`}>{renderStepTitle()}</p>
           {renderChildren(children)}
         </div>
       </TearsheetShell>

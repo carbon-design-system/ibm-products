@@ -1,0 +1,135 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '@carbon/import-once/scss/import-once';
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+
+@import 'carbon-components/scss/components/button/button';
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin create-full-page {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+  $block-class: #{$pkg-prefix}--create-full-page;
+
+  .#{$block-class} .bx--grid {
+    padding-right: $spacing-08;
+    padding-left: $spacing-08;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .#{$block-class} .#{$block-class}__step--hidden-section {
+    display: none;
+  }
+
+  .#{$block-class} .bx--modal-close {
+    display: none;
+  }
+
+  .#{$block-class} {
+    display: flex;
+    height: 100vh;
+    flex-grow: 1;
+    padding: 0;
+    margin: 0;
+  }
+
+  .#{$block-class} .#{$block-class}__body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .#{$block-class} .#{$block-class}__main {
+    display: flex;
+    max-height: 100%;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .#{$block-class} .#{$block-class}__content {
+    overflow: auto;
+    flex-grow: 1;
+    padding-top: $spacing-06;
+  }
+
+  .#{$block-class} .#{$block-class}__step {
+    position: relative;
+    max-width: 50%;
+  }
+
+  .#{$block-class} .#{$block-class}__step-text-content,
+  .#{$block-class} .#{$block-class}__section-text-content {
+    margin-bottom: $spacing-06;
+  }
+
+  .#{$block-class} .#{$block-class}__section-divider {
+    position: relative;
+    display: block;
+    width: calc(100vw - 16rem);
+    height: 1px;
+    margin: $spacing-05 calc(-1 * #{$spacing-08}) $spacing-08
+      calc(-1 * #{$spacing-08});
+    background-color: $ui-03;
+  }
+
+  .#{$block-class} .#{$block-class}__step-title,
+  .#{$block-class} .#{$block-class}__section-title {
+    @include carbon--type-style('productive-heading-04');
+
+    margin-bottom: $spacing-05;
+  }
+
+  .#{$block-class} .#{$block-class}__step-subtitle,
+  .#{$block-class} .#{$block-class}__section-subtitle {
+    @include carbon--type-style('productive-heading-01');
+
+    margin-bottom: $spacing-03;
+  }
+
+  .#{$block-class} .#{$block-class}__step-description,
+  .#{$block-class} .#{$block-class}__section-description {
+    @include carbon--type-style('body-long-01');
+
+    color: $text-02;
+  }
+
+  .#{$block-class} .#{$block-class}__step-form > *,
+  .#{$block-class} .#{$block-class}__section-form > * {
+    margin-bottom: $spacing-06;
+  }
+
+  .#{$block-class} .#{$block-class}__influencer {
+    display: flex;
+    width: 16rem;
+    min-width: 16rem;
+    height: 100%;
+    flex-direction: column;
+    padding: $spacing-06 $spacing-07;
+    border-right: 1px solid $ui-03;
+    background-color: $ui-01;
+  }
+
+  .#{$block-class} .#{$block-class}__progress-indicator {
+    min-height: calc(100% - #{$spacing-10});
+  }
+
+  .#{$block-class} .#{$block-class}__influencer-toggle {
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  .#{$block-class} .#{$block-class}__buttons {
+    border-top: 1px solid $ui-03;
+  }
+}
+
+@include exports('create-full-page') {
+  @include create-full-page;
+}

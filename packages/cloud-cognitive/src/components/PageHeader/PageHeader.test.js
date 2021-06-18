@@ -283,7 +283,6 @@ describe('PageHeader', () => {
     );
     expect(screen.getByText(subtitle).textContent).toEqual(subtitle);
     expect(screen.queryAllByTestId('tabs')).toHaveLength(1);
-    console.log(document.querySelector('.exp--tag-set').innerHTML);
     expect(
       screen.getAllByText('A tag', {
         // selector need to ignore sizing items

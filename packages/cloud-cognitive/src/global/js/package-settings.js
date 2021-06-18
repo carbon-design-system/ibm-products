@@ -42,6 +42,7 @@ const defaults = {
     CreateSidePanel: false,
     CreateTearsheet: false,
     CreateTearsheetStep: false,
+    CreateTearsheetSection: false,
     ContextHeader: false,
     ExampleComponent: false,
     ExpressiveCard: false,

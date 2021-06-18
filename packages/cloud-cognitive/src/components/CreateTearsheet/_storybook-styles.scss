@@ -27,3 +27,7 @@ p.#{$preview-block-class}__description:last-of-type {
 .#{$preview-block-class} .#{$carbon-prefix}--form-item {
   margin-bottom: $spacing-05;
 }
+
+.#{$preview-block-class} .#{$carbon-prefix}--radio-button-wrapper {
+  position: relative;
+}

@@ -13,10 +13,7 @@ import { useResizeDetector } from 'react-resize-detector';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg, carbon } from '../../settings';
-import {
-  deprecateProp,
-  isRequiredIf,
-} from '../../global/js/utils/props-helper';
+import { deprecateProp } from '../../global/js/utils/props-helper';
 
 // Carbon and package components we use.
 import {
@@ -27,8 +24,6 @@ import {
 } from 'carbon-components-react';
 import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
-
-isRequiredIf.decorate(PropTypes.string);
 
 // The block part of our conventional BEM class names (bc__E--M).
 const bc = `${pkg.prefix}--tearsheet`;
@@ -299,11 +294,12 @@ TearsheetShell.propTypes = {
   className: PropTypes.string,
 
   /**
-   * The accessibility title for the close icon (if shown). This prop is
-   * required if a close icon is shown, i.e. if there are a no navigation
-   * actions and/or hasCloseIcon is true.
+   * The accessibility title for the close icon (if shown).
+   *
+   * **Note:** This prop is only required if a close icon is shown, i.e. if
+   * there are a no navigation actions and/or hasCloseIcon is true.
    */
-  closeIconDescription: PropTypes.string.isRequiredIf(
+  closeIconDescription: PropTypes.string.isRequired.if(
     ({ actions, hasCloseIcon }) => tearsheetHasCloseIcon(actions, hasCloseIcon)
   ),
 

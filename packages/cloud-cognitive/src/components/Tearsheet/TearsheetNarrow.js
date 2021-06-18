@@ -14,7 +14,6 @@ import { pkg } from '../../settings';
 import {
   allPropTypes,
   deprecateProp,
-  isRequiredIf,
   prepareProps,
 } from '../../global/js/utils/props-helper';
 
@@ -29,8 +28,6 @@ import {
 } from './TearsheetShell';
 
 const componentName = 'TearsheetNarrow';
-
-isRequiredIf.decorate(PropTypes.string);
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
@@ -93,11 +90,12 @@ TearsheetNarrow.propTypes = {
   className: PropTypes.string,
 
   /**
-   * The accessibility title for the close icon (if shown). This prop is
-   * required if a close icon is shown, i.e. if there are a no navigation
-   * actions and/or hasCloseIcon is true.
+   * The accessibility title for the close icon (if shown).
+   *
+   * **Note:** This prop is only required if a close icon is shown, i.e. if
+   * there are a no navigation actions and/or hasCloseIcon is true.
    */
-  closeIconDescription: PropTypes.string.isRequiredIf(
+  closeIconDescription: PropTypes.string.isRequired.if(
     ({ actions, hasCloseIcon }) => tearsheetHasCloseIcon(actions, hasCloseIcon)
   ),
 

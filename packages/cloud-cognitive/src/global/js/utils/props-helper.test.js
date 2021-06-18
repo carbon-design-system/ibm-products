@@ -147,16 +147,9 @@ describe('allPropTypes', () => {
 
 describe('isRequiredIf', () => {
   const Component = () => null;
-  isRequiredIf.decorate(PropTypes.string);
-  isRequiredIf.decorate(
-    PropTypes.string,
-    'isRequiredIfCtlIsC',
-    ({ ctl }) => ctl === 'c'
-  );
   Component.propTypes = {
     a: isRequiredIf(PropTypes.string, ({ ctl }) => ctl === 'a'),
-    b: PropTypes.string.isRequiredIf(({ ctl }) => ctl === 'b'),
-    c: PropTypes.string.isRequiredIfCtlIsC,
+    b: PropTypes.string.isRequired.if(({ ctl }) => ctl === 'b'),
     ctl: PropTypes.string,
   };
 
@@ -184,17 +177,6 @@ describe('isRequiredIf', () => {
     expect(error).toBeCalledWith(
       expect.stringContaining(
         'Failed prop type: The prop `b` is marked as required'
-      )
-    );
-    error.mockRestore();
-  });
-
-  it('reports required when used as a manually created decorator', () => {
-    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
-    render(<Component ctl="c" />);
-    expect(error).toBeCalledWith(
-      expect.stringContaining(
-        'Failed prop type: The prop `c` is marked as required'
       )
     );
     error.mockRestore();

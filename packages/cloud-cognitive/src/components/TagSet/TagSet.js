@@ -279,7 +279,9 @@ TagSet.propTypes = {
    */
   rightAlign: PropTypes.bool,
   /**
-   * label for the overflow show all tags link. **Note: Required if more than 10 tags**
+   * label for the overflow show all tags link.
+   *
+   * **Note:** Required if more than 10 tags
    */
   showAllTagsLabel: string_required_if_more_than_10_tags,
 };

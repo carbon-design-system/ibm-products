@@ -6,6 +6,7 @@
 //
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import unwrapIfFragment from './unwrap-if-fragment';
 import pconsole from './pconsole';
@@ -231,8 +232,14 @@ export const isRequiredIf =
       secret
     );
 
-isRequiredIf.decorate = (checker, name, conditionFn) => {
-  checker[name || 'isRequiredIf'] = conditionFn
-    ? isRequiredIf(checker, conditionFn)
+isRequiredIf.decorate = (checker) => {
+  checker.isRequired.if = pconsole.isProduction
+    ? pconsole.noop
     : isRequiredIf.bind(null, checker);
 };
+
+for (const checker in PropTypes) {
+  if (PropTypes[checker].isRequired) {
+    isRequiredIf.decorate(PropTypes[checker]);
+  }
+}

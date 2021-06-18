@@ -196,7 +196,9 @@ export const allPropTypes = pconsole.shimIfProduction((arrayOfTypeCheckers) => {
  * or true when called with the full set of props. This can be useful to make
  * a prop conditionally required. The function also has a decorate function
  * which can be used to add isRequiredIf to any existing type which already has
- * an isRequired variant.
+ * an isRequired variant, and this is automatically applied to the simple type
+ * checkers in PropTypes when this props-helper module is imported. The second
+ * example produces better results with DocGen and Storybook.
  *
  * Examples:
  *
@@ -205,18 +207,9 @@ export const allPropTypes = pconsole.shimIfProduction((arrayOfTypeCheckers) => {
  *   fooLabel: isRequiredIf(PropTypes.string, ({ showFoo }) => showFoo),
  * }
  *
- * isRequiredIf.decorate(PropTypes.string);
- *
  * MyComponent2.propTypes = {
  *   showBar: PropTypes.bool,
- *   barLabel: PropTypes.string.isRequiredIf(({ showBar }) => showBar),
- * }
- *
- * isRequiredIf.decorate(PropTypes.string, 'isRequiredIfBazShown', ({ showBaz }) => showBaz);
- *
- * MyComponent3.propTypes = {
- *   showBaz: PropTypes.bool,
- *   bazLabel: PropTypes.string.isRequiredIfBazShown,
+ *   barLabel: PropTypes.string.isRequired.if(({ showBar }) => showBar),
  * }
  *
  */

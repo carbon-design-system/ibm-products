@@ -22,10 +22,6 @@
     justify-content: flex-end;
   }
 
-  .#{$block-class}.#{$block-class}--stack {
-    align-items: stretch;
-  }
-
   .#{$block-class} .#{$block-class}__action-button {
     @include carbon--type-style('body-short-01');
 
@@ -39,6 +35,11 @@
   .#{$block-class}.#{$carbon-prefix}--btn-set
     .#{$block-class}__action-button.#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--expressive {
     max-width: none;
+  }
+
+  .#{$block-class}:not(.#{$block-class}--stacking)
+    .#{$block-class}__action-button--ghost {
+    padding-left: $spacing-07;
   }
 
   // For row-single in medium,

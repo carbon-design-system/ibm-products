@@ -46,12 +46,12 @@ export default {
         action
       ),
     },
-    closeIconDescription: {},
     description: { control: { type: 'text' } },
     label: { control: { type: 'text' } },
     title: { control: { type: 'text' } },
     onClose: { control: { disable: true } },
     open: { control: { disable: true } },
+    preventCloseOnClickOutside: { table: { disable: true } },
   },
 };
 
@@ -213,6 +213,7 @@ const StackedTemplate = ({ actions, ...args }) => {
 export const tearsheetNarrow = Template.bind({});
 tearsheetNarrow.storyName = 'Narrow tearsheet';
 tearsheetNarrow.args = {
+  closeIconDescription,
   description,
   onClose: action('onClose called'),
   title,

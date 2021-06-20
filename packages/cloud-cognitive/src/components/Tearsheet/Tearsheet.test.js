@@ -78,18 +78,20 @@ const title = `Title of the ${uuidv4()} tearsheet`;
 // These are tests than apply to both Tearsheet and TearsheetNarrow
 const commonTests = (Ts, name) => {
   it(`renders a component ${name}`, () => {
-    render(<Ts />);
+    render(<Ts {...{ closeIconDescription }} />);
     expect(screen.getByRole('presentation')).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<Ts {...{ label, title }} />);
+    const { container } = render(
+      <Ts {...{ closeIconDescription, label, title }} />
+    );
     await expect(container).toBeAccessible(name);
     await expect(container).toHaveNoAxeViolations();
   });
 
-  it('omits main content sections when no props supplied', () => {
-    render(<Ts />);
+  it('omits main content sections when no props supplied and no close icon requested', () => {
+    render(<Ts hasCloseIcon={false} />);
     expect(document.querySelector(`.${blockClass}__header`)).toBeNull();
     expect(document.querySelector(`.${blockClass}__influencer`)).toBeNull();
     expect(document.querySelector(`.${blockClass}__main`)).toBeNull();
@@ -115,41 +117,56 @@ const commonTests = (Ts, name) => {
   });
 
   it('renders children', () => {
-    render(<Ts>{children}</Ts>);
+    render(<Ts {...{ closeIconDescription }}>{children}</Ts>);
     expect(document.querySelector(`.${blockClass}__main`)).not.toBeNull();
     screen.getByText(childFragment);
   });
 
   it('applies className to the root node', () => {
-    render(<Ts {...{ className }} />);
+    render(<Ts {...{ className, closeIconDescription }} />);
     expect(screen.getByRole('presentation')).toHaveClass(className);
   });
 
-  it('renders closeIconDescription', () => {
+  it('responds to hasCloseIcon and renders closeIconDescription', () => {
     render(<Ts hasCloseIcon {...{ closeIconDescription }} />);
+    expect(document.querySelector(`.${blockClass}__header`)).not.toBeNull();
     screen.getByRole('button', { name: closeIconDescription });
   });
 
+  it('requires closeIconDescription when there are no actions', () => {
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+    render(<Ts />);
+    expect(error).toBeCalledWith(
+      expect.stringContaining(
+        `The prop \`closeIconDescription\` is marked as required`
+      )
+    );
+    error.mockRestore();
+  });
+
   it('renders description', () => {
-    render(<Ts {...{ description }} />);
+    render(<Ts {...{ closeIconDescription, description }} />);
     screen.getByText(descriptionFragment);
   });
 
-  it('responds to hasCloseIcon', () => {
-    render(<Ts hasCloseIcon />);
-    expect(document.querySelector(`.${blockClass}__header`)).not.toBeNull();
-    screen.getByRole('button', { name: 'Close' });
-  });
-
   it('renders label', () => {
-    render(<Ts {...{ label }} />);
+    render(<Ts {...{ closeIconDescription, label }} />);
     screen.getByText(label);
   });
 
   it('calls onClose() when the tearsheet is closed', () => {
-    render(<Ts hasCloseIcon onClose={onCloseReturnsTrue} open />);
+    render(
+      <Ts
+        hasCloseIcon
+        {...{ closeIconDescription }}
+        onClose={onCloseReturnsTrue}
+        open
+      />
+    );
     const tearsheet = screen.getByRole('presentation');
-    const closeButton = screen.getByRole('button', { name: 'Close' });
+    const closeButton = screen.getByRole('button', {
+      name: closeIconDescription,
+    });
     expect(tearsheet).toHaveClass('is-visible');
     expect(onCloseReturnsTrue).toHaveBeenCalledTimes(0);
     userEvent.click(closeButton);
@@ -158,9 +175,18 @@ const commonTests = (Ts, name) => {
   });
 
   it('allows veto when the tearsheet is closed', () => {
-    render(<Ts hasCloseIcon onClose={onCloseReturnsFalse} open />);
+    render(
+      <Ts
+        hasCloseIcon
+        {...{ closeIconDescription }}
+        onClose={onCloseReturnsFalse}
+        open
+      />
+    );
     const tearsheet = screen.getByRole('presentation');
-    const closeButton = screen.getByRole('button', { name: 'Close' });
+    const closeButton = screen.getByRole('button', {
+      name: closeIconDescription,
+    });
     expect(tearsheet).toHaveClass('is-visible');
     expect(onCloseReturnsFalse).toHaveBeenCalledTimes(0);
     userEvent.click(closeButton);
@@ -173,9 +199,16 @@ const commonTests = (Ts, name) => {
     expect(screen.getByRole('presentation')).toHaveClass('is-visible');
   });
 
-  // preventCloseOnClickOutside is passed directly to the ComposedModal.
-  // we do not need to test carbon-react.
-  //it('renders preventCloseOnClickOutside', () => {});
+  it('reports deprecation of preventCloseOnClickOutside', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    render(<Ts preventCloseOnClickOutside={true} />);
+    expect(warn).toBeCalledWith(
+      expect.stringContaining(
+        `The prop \`preventCloseOnClickOutside\` of \`${name}\` has been deprecated`
+      )
+    );
+    warn.mockRestore();
+  });
 
   it('renders title', () => {
     render(<Ts {...{ title }} />);
@@ -210,6 +243,7 @@ const commonTests = (Ts, name) => {
     expect(warn).toBeCalledWith(
       'Tearsheet not rendered: maximum stacking depth exceeded.'
     );
+    warn.mockRestore();
   });
 };
 

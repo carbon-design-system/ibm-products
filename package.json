@@ -39,10 +39,12 @@
     "storybook:build:storybook": "cd packages/core && yarn build",
     "storybook:start": "cd packages/core && yarn start",
     "sync": "carbon-cli sync",
-    "upgrade-carbon": "npm-check-updates -su --deep --filter '/carbon/' && yarn",
-    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (not tested), husky (major change in action)",
-    "upgrade-dependencies": "yarn run-all --concurrency 1 upgrade-dependencies && npm-check-updates -u --reject '/(carbon|^react$|^react-dom$|^husky$)/' && yarn",
-    "upgrade-manual": "sh ./scripts/monorepo-npm-upgrade.sh"
+    "upgrade:dependencies:carbon": "npm-check-updates -su --deep --filter '/carbon/'",
+    "//upgrade:dependencies:top": "# don't upgrade carbon (done globally), react/react-dom (not tested), husky (major change in action)",
+    "upgrade:dependencies:top": "npm-check-updates -u --reject '/(carbon|^react$|^react-dom$|^husky$)/'",
+    "upgrade:dependencies:packages": "yarn run-all --concurrency 1 upgrade-dependencies",
+    "upgrade:automatic": "run-s upgrade:dependencies:*",
+    "upgrade:manual": "sh ./scripts/monorepo-npm-upgrade.sh"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",

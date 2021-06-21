@@ -105,13 +105,17 @@ export const MultiStepTearsheet = () => {
             value={stepOneTextInputValue}
             placeholder="Enter topic name"
             onChange={(event) => {
-              if (event.target.value.length) setIsInvalid(false);
+              if (event.target.value.length) {
+                setIsInvalid(false);
+              }
               setStepOneTextInputValue(event.target.value);
             }}
             invalid={isInvalid}
             invalidText="This is a required field"
             onBlur={() => {
-              if (!stepOneTextInputValue.length) setIsInvalid(true);
+              if (!stepOneTextInputValue.length) {
+                setIsInvalid(true);
+              }
             }}
           />
           <TextInput

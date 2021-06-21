@@ -187,7 +187,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
 
     const visibleBreadcrumbs = screen.getAllByRole('listitem');
     // not enough room
-    expect(visibleBreadcrumbs.length).toEqual(4); // 3 + overflow
+    expect(visibleBreadcrumbs.length).toEqual(4);
 
     // last item is last breadcrumb
     expect(visibleBreadcrumbs[3]).toHaveTextContent(breadcrumbContent[4]);
@@ -206,7 +206,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
 
     const visibleBreadcrumbs = screen.getAllByRole('listitem');
     // not enough room
-    expect(visibleBreadcrumbs.length).toEqual(2); // 1 + overflow
+    expect(visibleBreadcrumbs.length).toEqual(2);
 
     // last item is last breadcrumb
     expect(visibleBreadcrumbs[1]).toHaveTextContent(breadcrumbContent[4]);

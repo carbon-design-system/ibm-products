@@ -3,8 +3,9 @@ import { useRef, useLayoutEffect } from 'react';
 const windowExists = typeof window !== `undefined`;
 
 const getWindowSize = () => {
-  if (!windowExists)
+  if (!windowExists) {
     return { innerHeight: 0, innerWidth: 0, outerHeight: 0, outerWidth: 0 };
+  }
 
   const { innerHeight, innerWidth, outerHeight, outerWidth } = { ...window };
 

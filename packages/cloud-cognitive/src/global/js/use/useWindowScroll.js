@@ -3,7 +3,9 @@ import { useRef, useLayoutEffect } from 'react';
 const windowExists = typeof window !== `undefined`;
 
 const getScrollPosition = () => {
-  if (!windowExists) return { scrollX: -1, scrollY: -1 }; //
+  if (!windowExists) {
+    return { scrollX: -1, scrollY: -1 };
+  } //
 
   const { scrollX, scrollY } = { ...window };
 

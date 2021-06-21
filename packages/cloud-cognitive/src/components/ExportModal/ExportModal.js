@@ -80,11 +80,16 @@ export let ExportModal = forwardRef(
     };
 
     const hasInvalidExtension = () => {
-      if (!dirtyInput || !validExtensions || !validExtensions.length)
+      if (!dirtyInput || !validExtensions || !validExtensions.length) {
         return false;
-      if (!name.includes('.')) return true;
+      }
+      if (!name.includes('.')) {
+        return true;
+      }
       const ext = name.split('.').pop();
-      if (!validExtensions.includes(ext)) return true;
+      if (!validExtensions.includes(ext)) {
+        return true;
+      }
       return false;
     };
 

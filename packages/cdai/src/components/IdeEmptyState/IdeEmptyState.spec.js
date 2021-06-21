@@ -29,7 +29,9 @@ describe('IdeEmptyState', () => {
 
   const rendersWhenPropIsDefined = (propName, propValue, suffix) => {
     let name = `renders when the ${propName} prop is defined`;
-    if (suffix) name += ` as ${suffix}`;
+    if (suffix) {
+      name += ` as ${suffix}`;
+    }
     it(name, () => {
       mountTestComponent({ [propName]: propValue });
       expect(component.getElements()).toMatchSnapshot();

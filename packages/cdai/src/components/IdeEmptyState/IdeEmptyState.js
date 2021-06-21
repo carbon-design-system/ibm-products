@@ -20,7 +20,9 @@ const prefix = `${idePrefix}-empty-state`;
 const IdeEmptyState = ({ body, button, format, image, links, title }) => {
   const renderImage = () => {
     const className = `${prefix}__image ${prefix}__image--format-${format}`;
-    if (typeof image === 'function') return image(className);
+    if (typeof image === 'function') {
+      return image(className);
+    }
     return (
       <img
         alt={image.alt ? image.alt : ''}
@@ -35,7 +37,9 @@ const IdeEmptyState = ({ body, button, format, image, links, title }) => {
   };
 
   const renderButton = () => {
-    if (typeof button === 'function') return button();
+    if (typeof button === 'function') {
+      return button();
+    }
     const { kind, onClick, text } = button;
     return (
       <CarbonButton

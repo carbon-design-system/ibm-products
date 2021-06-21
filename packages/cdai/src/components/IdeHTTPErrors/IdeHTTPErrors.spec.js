@@ -31,7 +31,9 @@ describe('IdeHTTPErrors', () => {
     testNameSuffix
   ) {
     let testName = `renders when the ${propName} prop is defined`;
-    if (testNameSuffix) testName += ` as ${testNameSuffix}`;
+    if (testNameSuffix) {
+      testName += ` as ${testNameSuffix}`;
+    }
     it(testName, () => {
       mountTestComponent(undefined, { [propName]: propValue });
       expect(component.instance().props[propName]).toBe(propValue);
@@ -108,7 +110,9 @@ describe('IdeHTTPErrors', () => {
       errorMessageSuffix
     ) {
       let propNameSuffix = '.';
-      if (Array.isArray(propValue)) propNameSuffix = '[n].';
+      if (Array.isArray(propValue)) {
+        propNameSuffix = '[n].';
+      }
       let testName = `throws when ${propName}${propNameSuffix}${nestedPropName} prop is ${testNameSuffix}`;
       it(testName, () => {
         expect(() =>

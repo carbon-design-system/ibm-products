@@ -186,6 +186,7 @@
 
   .#{$block-class} .#{$block-class}__body {
     display: flex;
+    flex-direction: row;
     flex-grow: 1;
     padding: 0;
     margin: 0;
@@ -197,18 +198,12 @@
   }
 
   .#{$block-class} .#{$block-class}__influencer {
-    width: 256px;
-    min-width: 256px;
+    flex: 0 0 256px;
     border-right: 1px solid $ui-03;
   }
 
-  .#{$block-class} .#{$block-class}__influencer--right {
-    order: 1;
-  }
-
   .#{$block-class} .#{$block-class}__influencer--wide {
-    width: 320px;
-    min-width: 320px;
+    flex-basis: 320px;
   }
 
   .#{$block-class} .#{$block-class}__right {
@@ -218,11 +213,22 @@
   }
 
   .#{$block-class} .#{$block-class}__main {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+  }
+
+  .#{$block-class} .#{$block-class}__main .#{$block-class}__influencer {
+    border-right: none;
+    border-left: 1px solid $ui-03;
+  }
+
+  .#{$block-class} .#{$block-class}__content {
     overflow: auto;
     flex-grow: 1;
   }
 
-  .#{$block-class}.#{$block-class}--wide .#{$block-class}__main {
+  .#{$block-class}.#{$block-class}--wide .#{$block-class}__content {
     background: $ui-background;
 
     // revert the background colour overridden by bx--modal styles

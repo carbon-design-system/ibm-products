@@ -40,11 +40,21 @@ export default {
 
 // eslint-disable-next-line react/prop-types
 const Template = ({ actions, size, ...args }) => {
+  const validationError = ActionSet.validateActions()(
+    { actions, size, ...args },
+    'actions',
+    ActionSet.displayName,
+    'prop'
+  );
+
   return (
-    <div
-      className={`${blockClass}__story-container ${blockClass}__story-container--${size}`}>
-      <ActionSet {...{ actions, size, ...args }} />
-    </div>
+    <>
+      {validationError && <p>Note: {validationError.message.split(':')[1]}</p>}
+      <div
+        className={`${blockClass}__story-container ${blockClass}__story-container--${size}`}>
+        <ActionSet {...{ actions, size, ...args }} />
+      </div>
+    </>
   );
 };
 

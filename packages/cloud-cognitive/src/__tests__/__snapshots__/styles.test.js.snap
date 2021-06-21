@@ -1804,6 +1804,7 @@ path:nth-of-type(1),
 
 .exp--tearsheet .exp--tearsheet__body {
   display: flex;
+  flex-direction: row;
   flex-grow: 1;
   padding: 0;
   margin: 0;
@@ -1815,18 +1816,12 @@ path:nth-of-type(1),
 }
 
 .exp--tearsheet .exp--tearsheet__influencer {
-  width: 256px;
-  min-width: 256px;
+  flex: 0 0 256px;
   border-right: 1px solid var(--cds-ui-03, #e0e0e0);
 }
 
-.exp--tearsheet .exp--tearsheet__influencer--right {
-  order: 1;
-}
-
 .exp--tearsheet .exp--tearsheet__influencer--wide {
-  width: 320px;
-  min-width: 320px;
+  flex-basis: 320px;
 }
 
 .exp--tearsheet .exp--tearsheet__right {
@@ -1836,35 +1831,46 @@ path:nth-of-type(1),
 }
 
 .exp--tearsheet .exp--tearsheet__main {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.exp--tearsheet .exp--tearsheet__main .exp--tearsheet__influencer {
+  border-right: none;
+  border-left: 1px solid var(--cds-ui-03, #e0e0e0);
+}
+
+.exp--tearsheet .exp--tearsheet__content {
   overflow: auto;
   flex-grow: 1;
 }
 
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main {
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content {
   background: var(--cds-ui-background, #ffffff);
 }
 
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--pagination,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--pagination__control-buttons,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--text-input,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--text-area,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--search-input,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--select-input,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--dropdown,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--dropdown-list,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--number input[type='number'],
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--date-picker__input {
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--pagination,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--pagination__control-buttons,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--text-input,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--text-area,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--search-input,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--select-input,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--dropdown,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--dropdown-list,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--number input[type='number'],
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--date-picker__input {
   background-color: var(--cds-field-01, #f4f4f4);
 }
 
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--text-input--light,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--text-area--light,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--search--light .bx--search-input,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--select--light .bx--select-input,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--dropdown--light,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--dropdown--light .bx--dropdown-list,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--number--light input[type='number'],
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--date-picker--light .bx--date-picker__input {
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--text-input--light,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--text-area--light,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--search--light .bx--search-input,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--select--light .bx--select-input,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--dropdown--light,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--dropdown--light .bx--dropdown-list,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--number--light input[type='number'],
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--date-picker--light .bx--date-picker__input {
   background-color: var(--cds-field-02, #ffffff);
 }
 

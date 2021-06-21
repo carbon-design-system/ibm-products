@@ -14,6 +14,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg, carbon } from '../../settings';
 import { deprecateProp } from '../../global/js/utils/props-helper';
+import pconsole from '../../global/js/utils/pconsole';
 
 // Carbon and package components we use.
 import {
@@ -217,14 +218,26 @@ export const TearsheetShell = React.forwardRef(
             <Wrap
               className={cx({
                 [`${bc}__influencer`]: true,
-                [`${bc}__influencer--right`]: influencerPosition === 'right',
                 [`${bc}__influencer--wide`]: influencerWidth === 'wide',
-              })}>
+              })}
+              neverRender={influencerPosition === 'right'}>
               {influencer}
             </Wrap>
             <Wrap className={`${bc}__right`}>
               <Wrap alwaysRender={includeActions} className={`${bc}__main`}>
-                {children}
+                <Wrap
+                  alwaysRender={influencer && influencerPosition === 'right'}
+                  className={`${bc}__content`}>
+                  {children}
+                </Wrap>
+                <Wrap
+                  className={cx({
+                    [`${bc}__influencer`]: true,
+                    [`${bc}__influencer--wide`]: influencerWidth === 'wide',
+                  })}
+                  neverRender={influencerPosition !== 'right'}>
+                  {influencer}
+                </Wrap>
               </Wrap>
               {includeActions && (
                 <ActionSet
@@ -240,7 +253,7 @@ export const TearsheetShell = React.forwardRef(
         </ComposedModal>
       );
     } else {
-      console.warn('Tearsheet not rendered: maximum stacking depth exceeded.');
+      pconsole.warn('Tearsheet not rendered: maximum stacking depth exceeded.');
       return null;
     }
   }

@@ -21,7 +21,7 @@ const tagLabel = (index) => `Tag ${index + 1}`;
 const types = ['red', 'blue', 'cyan', 'high-contrast'];
 const tags = Array.from({ length: 20 }, (v, k) => ({
   type: types[k % types.length],
-  ['data-search']: `${k % 4 ? 'red' : k % 9 ? 'Red' : ''}`,
+  ['data-search']: `${k === 11 ? 'dozen 1100' : Number(k + 1).toString(2)}`, // adds binary value for data-search test
   label: tagLabel(k),
 }));
 const tags10 = tags.slice(0, 10);
@@ -251,7 +251,7 @@ describe(TagSet.displayName, () => {
       const unfilteredTags = screen.getAllByText(/Tag [0-9]+/);
 
       // userEvent.type(search, '1'); // does not work
-      fireEvent.change(search, { target: { value: '1' } });
+      fireEvent.change(search, { target: { value: '2' } });
       const filteredTags = screen.getAllByText(/Tag [0-9]+/);
       expect(filteredTags.length - unfilteredTags.length).toBeLessThan(0);
 
@@ -259,8 +259,13 @@ describe(TagSet.displayName, () => {
       const noTags = screen.queryAllByText(/Tag [0-9]+/);
       expect(noTags.length).toBe(0);
 
-      fireEvent.change(search, { target: { value: 'red' } });
-      screen.getAllByText(/Tag [0-9]+/);
+      fireEvent.change(search, { target: { value: 'dozen' } });
+      screen.getAllByText(/Tag 12/);
+
+      fireEvent.change(search, { target: { value: '10' } });
+      expect(screen.getAllByText(/Tag [0-9]+/).length).toEqual(
+        16 // tags with binary 10 in value 16 of 1 to 20
+      );
 
       fireEvent.change(search, { target: { value: '' } });
       screen.getAllByText(/Tag [0-9]+/);

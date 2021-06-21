@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2020
+ * Copyright IBM Corp. 2020, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,13 +15,16 @@ module.exports = {
     '@storybook/addon-docs',
     '@storybook/addon-controls',
     '@storybook/addon-knobs',
+    '@storybook/addon-links',
     '@storybook/addon-storysource',
     '@carbon/storybook-addon-theme/register',
   ],
 
   stories: sync(resolve(__dirname, '..', '..', '**/*.stories.*')).filter(
     (story) =>
-      !story.includes('node_modules') && !story.includes('DISPLAY_NAME')
+      !story.includes('node_modules') &&
+      !story.includes('DISPLAY_NAME') &&
+      !story.includes('ibm-security')
   ),
 
   webpackFinal: async (configuration) =>

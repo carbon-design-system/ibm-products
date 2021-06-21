@@ -1,5 +1,6 @@
 # Build folders
 /build
+ibm-security
 packages/*/build/
 packages/*/examples/*/build/
 packages/*/scss

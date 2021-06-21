@@ -11,6 +11,7 @@ import styles from './_storybook-styles.scss';
 import { CreateTearsheet } from './CreateTearsheet';
 import { CreateTearsheetStep } from './CreateTearsheetStep';
 import { MultiStepTearsheet } from './preview-components/MultiStepTearsheet';
+import { MultiStepWithSectionsTearsheet } from './preview-components/MultiStepWithSectionsTearsheet';
 import mdx from './CreateTearsheet.mdx';
 
 const storybookPrefix = getStorybookPrefix(pkg, CreateTearsheet.displayName);
@@ -35,3 +36,7 @@ export default {
 export const multiStepTearsheet = MultiStepTearsheet.bind({});
 multiStepTearsheet.storyName = 'With multiple steps';
 multiStepTearsheet.args = {};
+
+export const withViewAllToggle = MultiStepWithSectionsTearsheet.bind({});
+withViewAllToggle.storyName = 'With view all toggle';
+withViewAllToggle.args = {};

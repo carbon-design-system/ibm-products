@@ -249,7 +249,7 @@ export let CreateTearsheet = forwardRef(
       stepChildren.forEach((child) => {
         // we have received an array of children, lets check to see that each child is
         // a CreateTearsheetSection component before adding it to sectionChildElements
-        if (child.props.children.length) {
+        if (shouldViewAll && child.props.children.length) {
           child.props.children.forEach((stepChild) => {
             if (isTearsheetSection(stepChild)) {
               sectionChildElements.push(stepChild);
@@ -259,6 +259,7 @@ export let CreateTearsheet = forwardRef(
         // we have received a single child element, lets check to see that it is
         // a CreateTearsheetSection component before adding it to sectionChildElements
         if (
+          shouldViewAll &&
           typeof child.props.children !== 'undefined' &&
           !child.props.children.length
         ) {

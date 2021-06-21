@@ -12,7 +12,7 @@ import { StatusStep } from '../../../..';
 import { STATUS } from '../StatusStep';
 
 describe('StatusStep', () => {
-  Object.values(STATUS).forEach(status =>
+  Object.values(STATUS).forEach((status) =>
     test(`should have no Axe or DAP violations when \`status\` is  '${status}'`, async () => {
       const { container } = renderWithinLandmark(
         <ul>

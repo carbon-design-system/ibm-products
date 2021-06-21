@@ -17,7 +17,7 @@ import * as defaultLabels from '../../../globals/nls';
 
 export const namespace = getComponentNamespace('filter-panel');
 
-const FilterPanel = props => {
+const FilterPanel = (props) => {
   const {
     title,
     filterData,
@@ -52,8 +52,8 @@ const FilterPanel = props => {
 
       <div className={`${namespace}__category-list`}>
         {getFilterCategoriesArray(filterData)
-          .filter(category => category.count > 0)
-          .map(category => (
+          .filter((category) => category.count > 0)
+          .map((category) => (
             <FilterCategory
               key={category.id}
               filterData={filterData}

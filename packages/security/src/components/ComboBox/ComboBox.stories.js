@@ -32,8 +32,7 @@ const items = [
   },
   {
     id: 'option-4',
-    text:
-      'An example option that is really long to show what should be done to handle long text',
+    text: 'An example option that is really long to show what should be done to handle long text',
   },
 ];
 
@@ -49,7 +48,7 @@ const props = () => ({
   onChange: action('onChange'),
 });
 
-const itemToElement = item => {
+const itemToElement = (item) => {
   const itemAsArray = item.text.split(' ');
   return (
     <div>
@@ -66,7 +65,7 @@ storiesOf(carbon('ComboBox'), module)
       <div style={{ width: 300 }}>
         <ComboBox
           items={items}
-          itemToString={item => (item ? item.text : '')}
+          itemToString={(item) => (item ? item.text : '')}
           {...props()}
         />
       </div>
@@ -83,7 +82,7 @@ storiesOf(carbon('ComboBox'), module)
       <div style={{ width: 300 }}>
         <ComboBox
           items={items}
-          itemToString={item => (item ? item.text : '')}
+          itemToString={(item) => (item ? item.text : '')}
           itemToElement={itemToElement}
           {...props()}
         />
@@ -103,11 +102,11 @@ storiesOf(carbon('ComboBox'), module)
           <div style={{ width: 300 }}>
             <ComboBox
               items={items}
-              itemToString={item =>
+              itemToString={(item) =>
                 item ? `${item.text} queried with ${state.inputText}` : ''
               }
               shouldFilterItem={() => true}
-              onInputChange={text => setState({ inputText: text })}
+              onInputChange={(text) => setState({ inputText: text })}
               {...props()}
             />
           </div>

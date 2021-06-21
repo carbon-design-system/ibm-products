@@ -14,7 +14,7 @@ import FilterPanelAccordionItem from '../FilterPanelAccordiontItem';
  * @param {number} length Amount of children to create.
  * @returns {React.Component[]} Array of created children.
  */
-const createChildChildren = length =>
+const createChildChildren = (length) =>
   new Array(length).fill(null).map((value, index) => (
     // eslint-disable-next-line react/no-array-index-key
     <div key={index} data-testid={`child-${index + 1}`}>

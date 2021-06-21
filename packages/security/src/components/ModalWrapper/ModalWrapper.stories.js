@@ -89,8 +89,7 @@ storiesOf(carbon('ModalWrapper'), module)
           action('onSubmit')();
           return true;
         }}
-        {...props()}
-      >
+        {...props()}>
         <p className={`${prefix}--modal-content__text`}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
           cursus fermentum risus, sit amet fringilla nunc pellentesque quis.
@@ -140,8 +139,7 @@ storiesOf(carbon('ModalWrapper'), module)
           action('onSubmit')();
           return true;
         }}
-        {...props()}
-      >
+        {...props()}>
         <TextInput
           id="test2"
           placeholder="Hint text here"
@@ -162,8 +160,7 @@ storiesOf(carbon('ModalWrapper'), module)
         <br />
         <RadioButtonGroup
           name="radio-button-group"
-          defaultSelected="default-selected"
-        >
+          defaultSelected="default-selected">
           <RadioButton
             value="default-selected"
             id="radio-1"

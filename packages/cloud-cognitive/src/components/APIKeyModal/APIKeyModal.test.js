@@ -1,9 +1,9 @@
-/**
- * Copyright IBM Corp. 2020, 2020
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
 
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import React from 'react';
@@ -45,15 +45,14 @@ const standardProps = {
   downloadableFileName: 'apikey',
   loadingMessage: 'your key is being created. please wait...',
   loading: false,
-  modalBody:
-    'Optional description text. To connect securely to {{product}}, your application or tool needs an API key with permission to access the cluster and resources.',
+  body: 'Optional description text. To connect securely to {{product}}, your application or tool needs an API key with permission to access the cluster and resources.',
   nameHelperText:
     'Providing the application name will help you idenfity your api key later.',
   nameInputId: 'nameInput',
   nameLabel: 'Name your application',
   namePlaceholder: 'Application name',
   nameRequired: true,
-  onRequestClose: () => {},
+  onClose: () => {},
   onRequestSubmit: () => {},
   open: true,
 };
@@ -100,11 +99,36 @@ describe(name, () => {
     );
   });
 
-  it('renders with steps setup', () => {
+  it('displays an error message when an error occurs', async () => {
+    const { click, change } = fireEvent;
+    const { fn } = jest;
+    const onRequestSubmit = fn();
+    const props = {
+      ...standardProps,
+      onRequestSubmit,
+      errorMessage: 'an error occured',
+    };
+
+    const { getByText, container, rerender } = render(
+      <APIKeyModal {...props} />
+    );
+
+    const nameInput = container.querySelector('.bx--text-input');
+    const generateBtn = getByText('Generate API key');
+
+    change(nameInput, { target: { value: 'testkey' } });
+    click(generateBtn);
+    expect(onRequestSubmit).toHaveBeenCalled();
+
+    rerender(<APIKeyModal {...props} error />);
+    expect(getByText(props.errorMessage)).toBeVisible();
+  });
+
+  it('should be able to properly navigate a series of custom steps', () => {
     const { click } = fireEvent;
     const { fn } = jest;
     const onRequestSubmit = fn();
-    const onRequestClose = fn();
+    const onClose = fn();
     const customSteps = [
       {
         valid: true,
@@ -122,7 +146,7 @@ describe(name, () => {
     const props = {
       ...standardProps,
       onRequestSubmit,
-      onRequestClose,
+      onClose,
       customSteps,
       previousStepButtonText: 'Previous step',
       nextStepButtonText: 'Next step',
@@ -175,6 +199,6 @@ describe(name, () => {
     rerender(<APIKeyModal {...props} apiKey="abc-123" successBody="Success" />);
     expect(getByText('Success')).toBeVisible();
     click(getByText(props.secondaryButtonText));
-    expect(onRequestClose).toHaveBeenCalled();
+    expect(onClose).toHaveBeenCalled();
   });
 });

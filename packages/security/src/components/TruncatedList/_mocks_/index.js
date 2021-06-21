@@ -11,7 +11,7 @@ import ListItem from '../../ListItem';
  * @param {number} length Amount of children to create.
  * @returns {React.Component[]} Array of created children.
  */
-export const createChildrenArray = length =>
+export const createChildrenArray = (length) =>
   new Array(length).fill(null).map((value, index) => (
     // eslint-disable-next-line react/no-array-index-key
     <ListItem key={index} data-testid={`child-${index + 1}`}>

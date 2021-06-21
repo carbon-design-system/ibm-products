@@ -78,8 +78,7 @@ const Card = ({
           href={link}
           aria-label={label}
           onClick={onClick}
-          {...other}
-        >
+          {...other}>
           {content}
         </a>
       ) : (
@@ -106,7 +105,7 @@ Card.defaultProps = {
 };
 
 Card.propTypes = {
-  /** @type {Object.<Object, *>} An object list of body props. */
+  /** @type {object.<object, *>} An object list of body props. */
   body: shape({
     children,
 
@@ -118,12 +117,12 @@ Card.propTypes = {
   className: string,
   children,
 
-  /** @type {Object.<Object, *>} An object list of footer props. */
+  /** @type {object.<object, *>} An object list of footer props. */
   footer: shape({
     children,
   }),
 
-  /** @type {Object.<Object, *>} An object list of header props. */
+  /** @type {object.<object, *>} An object list of header props. */
   header: shape({
     /** @type {string} The image of the header. */
     image: string,

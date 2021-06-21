@@ -132,26 +132,14 @@ export const utilGetTitleShape = (title, titleIcon, defaultTitle) => {
   return newShape;
 };
 
-export const utilCalcSpacingBelowTitle = (
-  availableSpace,
-  tags,
-  navigation,
-  subtitle,
-  pageActions
-) => {
-  let belowTitleSpace = 'default';
-
-  if (
-    pageActions !== undefined &&
-    navigation !== undefined &&
-    subtitle === undefined &&
-    availableSpace === undefined
-  ) {
-    belowTitleSpace = '06';
-  } else if (subtitle !== undefined || availableSpace !== undefined) {
-    belowTitleSpace = '03';
-  } else if (navigation === undefined && tags !== undefined) {
-    belowTitleSpace = '05';
+// Set css style values directly onto a node. Note that this is effective
+// immediately, rather than using the React `style` prop which goes through
+// the React DOM update optimisation.
+export const utilSetCustomCSSProps = (targetRef, kvPairs) => {
+  if (targetRef.current) {
+    const keys = Object.keys(kvPairs);
+    for (let k of keys) {
+      targetRef.current.style.setProperty(k, kvPairs[k]);
+    }
   }
-  return belowTitleSpace;
 };

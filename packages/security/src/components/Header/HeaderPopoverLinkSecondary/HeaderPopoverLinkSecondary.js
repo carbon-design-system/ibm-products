@@ -23,8 +23,7 @@ const HeaderPopoverLinkSecondary = ({ children, className, href }) => (
       appendComponentNamespace(namespace, 'popover__link--secondary'),
       className
     )}
-    href={href}
-  >
+    href={href}>
     {children}
   </Link>
 );

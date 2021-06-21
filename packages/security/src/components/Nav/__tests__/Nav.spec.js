@@ -16,16 +16,15 @@ describe('Nav', () => {
   const activeHref = url();
   const navigationLabel = label;
 
-  const navItem = key => <NavItem href={url(key)}>{navigationLabel}</NavItem>;
-  const navList = key => <NavList>{navItem(key)}</NavList>;
+  const navItem = (key) => <NavItem href={url(key)}>{navigationLabel}</NavItem>;
+  const navList = (key) => <NavList>{navItem(key)}</NavList>;
 
   const nav = () =>
     mount(
       <Nav
         className={className}
         heading={navigationLabel}
-        label={navigationLabel}
-      >
+        label={navigationLabel}>
         {navList(0)}
         {navList(1)}
         {navItem(2)}
@@ -120,10 +119,7 @@ describe('Nav', () => {
 
       expect(isNavigationListOpen()).toEqual(true);
 
-      navigation
-        .find(NavList)
-        .last()
-        .simulate('click');
+      navigation.find(NavList).last().simulate('click');
 
       expect(isNavigationListOpen()).toEqual(false);
     });

@@ -51,7 +51,7 @@ describe('IconButton', () => {
     expect(iconButton).toMatchSnapshot();
   });
 
-  sizes.forEach(size => {
+  sizes.forEach((size) => {
     it(`renders the '${size}' variation`, () => {
       iconButton.setProps({ size });
       expect(iconButton).toMatchSnapshot();
@@ -59,8 +59,8 @@ describe('IconButton', () => {
   });
 
   Object.keys(TooltipDirection)
-    .map(tooltipDirection => TooltipDirection[tooltipDirection])
-    .forEach(tooltipDirection => {
+    .map((tooltipDirection) => TooltipDirection[tooltipDirection])
+    .forEach((tooltipDirection) => {
       it(`renders the '${tooltipDirection}' tooltip`, () => {
         iconButton.setProps({ tooltipDirection });
         expect(iconButton).toMatchSnapshot();

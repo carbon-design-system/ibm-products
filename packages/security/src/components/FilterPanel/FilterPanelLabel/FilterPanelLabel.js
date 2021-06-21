@@ -27,8 +27,7 @@ const FilterPanelLabel = ({
     {!Number.isNaN(parseInt(count, 10)) && (
       <span
         className={classnames(`${namespace}__count`, countClassName)}
-        aria-label={`(${countLabel(count)})`}
-      >
+        aria-label={`(${countLabel(count)})`}>
         {count}
       </span>
     )}
@@ -70,7 +69,7 @@ FilterPanelLabel.propTypes = {
 FilterPanelLabel.defaultProps = {
   children: undefined,
   count: undefined,
-  countLabel: count => `${count} items`,
+  countLabel: (count) => `${count} items`,
   className: undefined,
   countClassName: undefined,
   title: undefined,

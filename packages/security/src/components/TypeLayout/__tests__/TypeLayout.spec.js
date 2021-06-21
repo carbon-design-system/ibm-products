@@ -104,7 +104,7 @@ describe('TypeLayout', () => {
     expect(container.firstElementChild).toHaveClass(`${namespace}--bordered`);
   });
 
-  sizes.forEach(size =>
+  sizes.forEach((size) =>
     test(`should apply correct class when \`size\` is set to '${size}'`, () => {
       const { container } = render(<TypeLayout size={size} />);
       expect(container.firstElementChild).toHaveClass(`${namespace}--${size}`);

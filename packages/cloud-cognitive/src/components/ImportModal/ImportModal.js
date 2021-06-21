@@ -25,10 +25,11 @@ const componentName = 'ImportModal';
 export let ImportModal = forwardRef(
   (
     {
-      body,
+      accept,
       className,
       defaultErrorBody,
       defaultErrorHeader,
+      description,
       fetchErrorBody,
       fetchErrorHeader,
       fileDropHeader,
@@ -50,7 +51,6 @@ export let ImportModal = forwardRef(
       primaryButtonText,
       secondaryButtonText,
       title,
-      validFileTypes,
       ...rest
     },
     ref
@@ -59,12 +59,13 @@ export let ImportModal = forwardRef(
     const [importUrl, setImportUrl] = useState('');
 
     const isInvalidFileType = (file) => {
-      const acceptedTypes = new Set(validFileTypes);
+      const acceptSet = new Set(accept);
       const name = file.name;
       const mimeType = file.type;
       const extension = name.split('.').pop();
-      if (acceptedTypes.has(mimeType) || acceptedTypes.has(extension))
+      if (acceptSet.has(mimeType) || acceptSet.has(extension)) {
         return false;
+      }
       return true;
     };
 
@@ -113,8 +114,9 @@ export let ImportModal = forwardRef(
       setFiles([pendingFile]);
       try {
         const response = await fetch(importUrl);
-        if (!response.ok || response.status !== 200)
+        if (!response.ok || response.status !== 200) {
           throw new Error(response.status);
+        }
         const blob = await response.blob();
         const fetchedFile = new File([blob], fileName, { type: blob.type });
         fetchedFile.invalidFileType = isInvalidFileType(fetchedFile);
@@ -165,19 +167,21 @@ export let ImportModal = forwardRef(
         preventCloseOnClickOutside>
         <ModalHeader className={`${blockClass}__header`} title={title} />
         <ModalBody className={`${blockClass}__body-container`}>
-          <p className={`${blockClass}__body`}>{body}</p>
-          <div className={`${blockClass}__file-drop-header`}>
-            <p>{fileDropHeader}</p>
-          </div>
+          {description && (
+            <p className={`${blockClass}__body`}>{description}</p>
+          )}
+          {fileDropHeader && (
+            <p className={`${blockClass}__file-drop-header`}>
+              {fileDropHeader}
+            </p>
+          )}
           <FileUploaderDropContainer
-            accept={validFileTypes}
+            accept={accept}
             labelText={fileDropLabel}
             onAddFiles={onAddFile}
             disabled={hasFiles}
           />
-          <div className={`${blockClass}__label`}>
-            <p>{inputLabel}</p>
-          </div>
+          {inputLabel && <p className={`${blockClass}__label`}>{inputLabel}</p>}
           <div className={`${blockClass}__input-group`}>
             <TextInput
               labelText=""
@@ -196,7 +200,7 @@ export let ImportModal = forwardRef(
               {inputButtonText}
             </Button>
           </div>
-          <div className="bx--file-container" style={{ width: '100%' }}>
+          <div className={`bx--file-container ${blockClass}__file-container`}>
             {hasFiles && (
               <p className={`${blockClass}__helper-text`}>{fileStatusString}</p>
             )}
@@ -239,9 +243,9 @@ ImportModal = pkg.checkComponentEnabled(ImportModal, componentName);
 
 ImportModal.propTypes = {
   /**
-   * Content that is displayed inside the modal
+   * Specifies the file types that are valid for importing
    */
-  body: PropTypes.string,
+  accept: PropTypes.array,
   /**
    * Optional class name
    */
@@ -254,6 +258,10 @@ ImportModal.propTypes = {
    * The default header that is displayed to show an error message
    */
   defaultErrorHeader: PropTypes.string.isRequired,
+  /**
+   * Content that is displayed inside the modal
+   */
+  description: PropTypes.string,
   /**
    * Optional error body to display specifically for a fetch error
    */
@@ -338,14 +346,10 @@ ImportModal.propTypes = {
    * The text displayed at the top of the modal
    */
   title: PropTypes.string.isRequired,
-  /**
-   * Specifies the file types that are valid for importing
-   */
-  validFileTypes: PropTypes.array,
 };
 
 ImportModal.defaultProps = {
-  validFileTypes: [],
+  accept: [],
 };
 
 ImportModal.displayName = componentName;

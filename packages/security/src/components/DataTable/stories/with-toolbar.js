@@ -28,7 +28,7 @@ import {
   rows as mockRows,
 } from '../_mocks_';
 
-const toolbarStory = props => (
+const toolbarStory = (props) => (
   <DataTable
     rows={mockRows}
     headers={mockHeaders}
@@ -69,7 +69,7 @@ const toolbarStory = props => (
         <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
-              {headers.map(header => (
+              {headers.map((header) => (
                 <TableHeader {...getHeaderProps({ header })} key={header.key}>
                   {header.header}
                 </TableHeader>
@@ -77,9 +77,9 @@ const toolbarStory = props => (
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
+            {rows.map((row) => (
               <TableRow {...getRowProps({ row })} key={row.id}>
-                {row.cells.map(cell => (
+                {row.cells.map((cell) => (
                   <TableCell key={cell.id}>
                     {cell.value ? cell.value : missingDataCharacter}
                   </TableCell>

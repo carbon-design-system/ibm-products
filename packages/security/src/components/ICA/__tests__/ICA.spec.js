@@ -79,7 +79,7 @@ describe('ICA', () => {
     expect(queryByText('%')).toBeVisible();
   });
 
-  Locales.forEach(locale =>
+  Locales.forEach((locale) =>
     test(`should accept '${locale}' locale`, () => {
       const { container } = render(
         <ICA label="test ICA" value={10} locale={locale} />

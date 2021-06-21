@@ -47,8 +47,9 @@ describe('DataTable', () => {
 
     it('removes window event listener', () => {
       const spy = jest.spyOn(window, 'removeEventListener');
-      const resizeHandler = table.find(DataTable.Table).instance()
-        .handleWindowResize;
+      const resizeHandler = table
+        .find(DataTable.Table)
+        .instance().handleWindowResize;
       table.unmount();
       expect(window.removeEventListener).toHaveBeenCalledWith(
         'resize',

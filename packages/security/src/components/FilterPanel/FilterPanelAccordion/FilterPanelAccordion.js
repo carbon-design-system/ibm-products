@@ -28,8 +28,7 @@ const FilterPanelAccordion = ({
     title={title}
     count={count}
     countLabel={countLabel}
-    heading={heading}
-  >
+    heading={heading}>
     <Accordion {...other}>{children}</Accordion>
   </FilterPanelGroup>
 );
@@ -69,7 +68,7 @@ FilterPanelAccordion.propTypes = {
 FilterPanelAccordion.defaultProps = {
   title: undefined,
   count: undefined,
-  countLabel: count => `${count} items`,
+  countLabel: (count) => `${count} items`,
   className: undefined,
   children: undefined,
   heading: undefined,

@@ -164,9 +164,8 @@ describe('TagWallFilter tests', () => {
         />
       );
       wrapper.render();
-      const {
-        available: { allItems } = { allItems: [] },
-      } = wrappedComponent.mock.calls[0][0].itemState;
+      const { available: { allItems } = { allItems: [] } } =
+        wrappedComponent.mock.calls[0][0].itemState;
       expect(allItems.length).toEqual(3);
       expect(allItems).toContainEqual({ id: 'x' });
       expect(allItems).toContainEqual({ id: 'y' });

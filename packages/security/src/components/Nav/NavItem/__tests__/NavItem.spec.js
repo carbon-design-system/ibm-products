@@ -23,8 +23,7 @@ describe('NavItem', () => {
         className={className}
         href={href()}
         onClick={onClick}
-        onKeyPress={onKeyPress}
-      >
+        onKeyPress={onKeyPress}>
         {label}
       </NavItem>
     );

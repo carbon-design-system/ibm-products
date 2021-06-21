@@ -18,7 +18,7 @@ const { defaultProps, propTypes } = Decorator;
 
 /**
  * DataDecorator component.
- * @param {Object.<string, *>} props DataDecorator props.
+ * @param {object.<string, *>} props DataDecorator props.
  * @returns {DataDecorator} DataDecorator instance.
  */
 class DataDecorator extends Component {
@@ -64,7 +64,7 @@ class DataDecorator extends Component {
     } = this.props;
 
     const onContextMenu = propOnContextMenu
-      ? event => {
+      ? (event) => {
           event.preventDefault();
           propOnContextMenu(event);
         }
@@ -101,7 +101,7 @@ class DataDecorator extends Component {
         <Decorator
           {...decoratorProps}
           active={this.state.isOpen}
-          onClick={event => {
+          onClick={(event) => {
             event.stopPropagation();
             this.toggleOpen();
           }}
@@ -109,7 +109,7 @@ class DataDecorator extends Component {
 
         <PanelV2
           closeButton={{
-            onClick: event => {
+            onClick: (event) => {
               this.close(event, type, value);
               if (closeButton && closeButton.onClick) {
                 closeButton.onClick(event, type, value);
@@ -134,7 +134,7 @@ class DataDecorator extends Component {
           primaryButton={
             primaryButton && {
               ...primaryButton,
-              onClick: event => {
+              onClick: (event) => {
                 if (
                   primaryButton.closePanel === undefined ||
                   primaryButton.closePanel
@@ -152,7 +152,7 @@ class DataDecorator extends Component {
           secondaryButton={
             secondaryButton && {
               ...secondaryButton,
-              onClick: event => {
+              onClick: (event) => {
                 if (
                   secondaryButton.closePanel === undefined ||
                   secondaryButton.closePanel
@@ -168,8 +168,7 @@ class DataDecorator extends Component {
           stopPropagation={stopPropagation}
           stopPropagationEvents={stopPropagationEvents}
           subtitle={subtitle}
-          title={value}
-        >
+          title={value}>
           {children}
         </PanelV2>
       </>
@@ -193,7 +192,7 @@ DataDecorator.propTypes = {
   /** @type {string} class name for rendered content. */
   className: PropTypes.string,
 
-  /** @type {Object<Object>} An object list of close button props. */
+  /** @type {object<object>} An object list of close button props. */
   closeButton: buttonType,
 
   /** @type {boolean} Focus trap. */
@@ -219,13 +218,13 @@ DataDecorator.propTypes = {
   /** @type {Function} The function to call when the DataDecorator Panel opens. */
   onOpen: PropTypes.func,
 
-  /** @type {Object<Object>} An object list of primary button props. */
+  /** @type {object<object>} An object list of primary button props. */
   primaryButton: deprecate(
     buttonType,
     `\nThe prop \`primaryButton\` for DataDecorator has been deprecated in favor of \`renderFooter\`.`
   ),
 
-  /** @type {function} Panel footer render prop. */
+  /** @type {Function} Panel footer render prop. */
   renderFooter: PropTypes.func,
 
   /** @type {ReactNode|any} The root node for rendering the panel */
@@ -239,7 +238,7 @@ DataDecorator.propTypes = {
     if (
       !Array.isArray(props.scoreThresholds) ||
       props.scoreThresholds.length !== 4 ||
-      !props.scoreThresholds.every(number => typeof number === 'number')
+      !props.scoreThresholds.every((number) => typeof number === 'number')
     ) {
       return new Error(
         `${propName} is required to be an array of four numbers.`
@@ -248,7 +247,7 @@ DataDecorator.propTypes = {
     return null;
   },
 
-  /** @type {Object<Object>} An object list of secondary button props. */
+  /** @type {object<object>} An object list of secondary button props. */
   secondaryButton: deprecate(
     buttonType,
     `\nThe prop \`secondaryButton\` for DataDecorator has been deprecated in favor of \`renderFooter\`.`
@@ -269,7 +268,7 @@ DataDecorator.propTypes = {
   /** @type {boolean} Stop event propagation for events that can bubble. */
   stopPropagation: PropTypes.bool,
 
-  /** @type {array} Array of event types to stop propagation. */
+  /** @type {Array} Array of event types to stop propagation. */
   stopPropagationEvents: PropTypes.arrayOf(PropTypes.oneOf(PORTAL_EVENTS)),
 
   /** @type {func} Descriptive text for screen readers that details the severity of a score. */

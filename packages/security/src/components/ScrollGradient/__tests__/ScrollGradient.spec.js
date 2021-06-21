@@ -20,8 +20,7 @@ describe('ScrollGradient', () => {
       <ScrollGradient
         className={className}
         color="blue"
-        scrollElementClassName={className}
-      >
+        scrollElementClassName={className}>
         {children}
       </ScrollGradient>
     );
@@ -44,8 +43,7 @@ describe('ScrollGradient', () => {
         <ScrollGradient
           className={className}
           color="blue"
-          getScrollElementRef={getScrollElementRef}
-        >
+          getScrollElementRef={getScrollElementRef}>
           {children}
         </ScrollGradient>
       );

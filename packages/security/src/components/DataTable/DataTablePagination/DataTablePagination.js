@@ -81,7 +81,7 @@ class DataTablePagination extends Component {
     pageText: PropTypes.func,
 
     /**
-     * @type {array<number>} The choices for `pageSize`.
+     * @type {Array<number>} The choices for `pageSize`.
      */
     pageSizes: PropTypes.arrayOf(PropTypes.number).isRequired,
 
@@ -138,7 +138,7 @@ class DataTablePagination extends Component {
     pageNumberText: 'Page Number',
     pageRangeText: (current, total) => `${current} of ${total} pages`,
     pagesUnknown: false,
-    pageText: page => `page ${page}`,
+    pageText: (page) => `page ${page}`,
   };
 
   state = {
@@ -157,9 +157,9 @@ class DataTablePagination extends Component {
 
   /**
    * Update the state with the newest view values, `page` and `pageSize`.
-   * @param {Object.<string, number>} configuration The current page and page size.
+   * @param {object.<string, number>} configuration The current page and page size.
    */
-  paginationChange = configuration => {
+  paginationChange = (configuration) => {
     const { page, pageSize } = configuration;
 
     this.setState({ page, pageSize });
@@ -171,10 +171,10 @@ class DataTablePagination extends Component {
 
   /**
    * Slice the data to only show between the range.
-   * @param {Array.<Object.<string, *>>} rows The rows to update.
-   * @returns {Array.<Object.<string, *>>} The data between the range values.
+   * @param {Array.<object.<string, *>>} rows The rows to update.
+   * @returns {Array.<object.<string, *>>} The data between the range values.
    */
-  paginateRows = rows => {
+  paginateRows = (rows) => {
     const start = this.state.pageSize * (this.state.page - 1);
     const end = start + this.state.pageSize;
     return rows.slice(start, end);

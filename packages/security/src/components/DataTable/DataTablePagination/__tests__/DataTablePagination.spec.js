@@ -51,7 +51,7 @@ describe('DataTablePagination', () => {
 
   describe('Events', () => {
     it('validates the state change for `paginationChange`', () => {
-      const updateState = state => state * 2;
+      const updateState = (state) => state * 2;
 
       const pageValue = updateState(page);
       const pageSizeValue = updateState(pageSize);
@@ -61,10 +61,8 @@ describe('DataTablePagination', () => {
         pageSize: pageSizeValue,
       });
 
-      const {
-        page: updatedPage,
-        pageSize: updatedPageSize,
-      } = dataTablePagination.state();
+      const { page: updatedPage, pageSize: updatedPageSize } =
+        dataTablePagination.state();
 
       expect(updatedPage).toEqual(pageValue);
       expect(updatedPageSize).toEqual(pageSizeValue);

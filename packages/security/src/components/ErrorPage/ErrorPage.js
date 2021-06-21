@@ -54,10 +54,11 @@ const ErrorPage = ({
   const classes = classnames(className, namespace);
 
   const errorLabels = defaultLabels.labels.ERRORS[statusCode];
-  if (!title)
+  if (!title) {
     title = errorLabels
       ? errorLabels.TITLE
       : defaultLabels.labels.ERRORS.default.TITLE;
+  }
   errorName = !errorName && errorLabels ? errorLabels.ERRORNAME : errorName;
   errorMessage =
     !errorMessage && errorLabels ? errorLabels.ERRORMESSAGE : errorMessage;
@@ -89,8 +90,7 @@ const ErrorPage = ({
                 href={href}
                 target={external ? '_blank' : '_parent'}
                 rel="noopener noreferrer"
-                className={`${namespace}__link`}
-              >
+                className={`${namespace}__link`}>
                 {icon !== undefined && (
                   <img
                     alt={text}

@@ -33,8 +33,7 @@ describe(name, () => {
     const { getByTestId, getByPlaceholderText } = render(
       <FilterPanelSearch
         labelText="search label"
-        placeholder="search placeholder"
-      >
+        placeholder="search placeholder">
         <div data-testid="result-content" />
       </FilterPanelSearch>
     );
@@ -47,8 +46,7 @@ describe(name, () => {
     const { queryByTestId, getByPlaceholderText } = render(
       <FilterPanelSearch
         labelText="search label"
-        placeholder="search placeholder"
-      >
+        placeholder="search placeholder">
         <div data-testid="result-content" />
       </FilterPanelSearch>
     );
@@ -67,8 +65,7 @@ describe(name, () => {
     const { getByTestId, getByPlaceholderText, container } = render(
       <FilterPanelSearch
         labelText="search label"
-        placeholder="search placeholder"
-      >
+        placeholder="search placeholder">
         <div data-testid="result-content">
           <Checkbox labelText="checkbox" id="checkbox" />
         </div>

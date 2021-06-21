@@ -20,8 +20,7 @@ storiesOf(carbon('OrderedList'), module)
       </OrderedList>
     ),
     {
-      info:
-        'Lists consist of related content grouped together and organized vertically. Ordered lists are used to present content in a numbered list.',
+      info: 'Lists consist of related content grouped together and organized vertically. Ordered lists are used to present content in a numbered list.',
     }
   )
   .add(
@@ -41,7 +40,6 @@ storiesOf(carbon('OrderedList'), module)
       </OrderedList>
     ),
     {
-      info:
-        'Lists consist of related content grouped together and organized vertically. Ordered lists are used to present content in a numbered list.',
+      info: 'Lists consist of related content grouped together and organized vertically. Ordered lists are used to present content in a numbered list.',
     }
   );

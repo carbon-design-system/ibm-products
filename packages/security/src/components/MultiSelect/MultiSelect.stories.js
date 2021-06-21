@@ -74,11 +74,8 @@ storiesOf(carbon('MultiSelect'), module)
   .add(
     'default',
     () => {
-      const {
-        filterable,
-        listBoxMenuIconTranslationIds,
-        ...multiSelectProps
-      } = props();
+      const { filterable, listBoxMenuIconTranslationIds, ...multiSelectProps } =
+        props();
       const ComponentToUse = !filterable ? MultiSelect : MultiSelect.Filterable;
       const placeholder = !filterable ? undefined : defaultPlaceholder;
       return (
@@ -86,9 +83,9 @@ storiesOf(carbon('MultiSelect'), module)
           <ComponentToUse
             {...multiSelectProps}
             items={items}
-            itemToString={item => (item ? item.text : '')}
+            itemToString={(item) => (item ? item.text : '')}
             placeholder={placeholder}
-            translateWithId={id => listBoxMenuIconTranslationIds[id]}
+            translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
           />
         </div>
       );
@@ -104,11 +101,8 @@ storiesOf(carbon('MultiSelect'), module)
   .add(
     'with initial selected items',
     () => {
-      const {
-        filterable,
-        listBoxMenuIconTranslationIds,
-        ...multiSelectProps
-      } = props();
+      const { filterable, listBoxMenuIconTranslationIds, ...multiSelectProps } =
+        props();
       const ComponentToUse = !filterable ? MultiSelect : MultiSelect.Filterable;
       const placeholder = !filterable ? undefined : defaultPlaceholder;
 
@@ -117,10 +111,10 @@ storiesOf(carbon('MultiSelect'), module)
           <ComponentToUse
             {...multiSelectProps}
             items={items}
-            itemToString={item => (item ? item.text : '')}
+            itemToString={(item) => (item ? item.text : '')}
             initialSelectedItems={[items[0], items[1]]}
             placeholder={placeholder}
-            translateWithId={id => listBoxMenuIconTranslationIds[id]}
+            translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
           />
         </div>
       );

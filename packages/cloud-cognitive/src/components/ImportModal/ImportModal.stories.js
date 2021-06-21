@@ -27,10 +27,12 @@ export default {
 };
 
 const defaultProps = {
-  body: 'You can specify a file to import by either dragging it into the drag and drop area or by specifying a URL. (Maximum file size of 500KB; .jpg and .png file extensions only.)',
+  accept: ['image/jpeg', 'image/png'],
   className: 'test-class',
   defaultErrorBody: 'Select a new file and try again.',
   defaultErrorHeader: 'Import failed',
+  description:
+    'You can specify a file to import by either dragging it into the drag and drop area or by specifying a URL. (Maximum file size of 500KB; .jpg and .png file extensions only.)',
   fetchErrorBody: 'Unable to fetch URL.',
   fetchErrorHeader: 'Import failed',
   fileDropHeader: 'Add files using drag and drop',
@@ -52,7 +54,6 @@ const defaultProps = {
   primaryButtonText: 'Import',
   secondaryButtonText: 'Cancel',
   title: 'Import',
-  validFileTypes: ['image/jpeg', 'image/png'],
 };
 
 const TemplateWithState = (args) => {

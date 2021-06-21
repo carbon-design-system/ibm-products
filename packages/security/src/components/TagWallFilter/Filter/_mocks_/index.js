@@ -50,6 +50,6 @@ const items = [
   },
 ];
 
-const itemToString = item => (item ? item.label : '');
+const itemToString = (item) => (item ? item.label : '');
 
 export { items, itemToString };

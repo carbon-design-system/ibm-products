@@ -6,9 +6,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class WizardStep extends Component {
-  static getPropsFromElement = stepElem => {
-    if (!React.isValidElement(stepElem) && stepElem.type !== WizardStep)
+  static getPropsFromElement = (stepElem) => {
+    if (!React.isValidElement(stepElem) && stepElem.type !== WizardStep) {
       return null;
+    }
     return stepElem.props;
   };
 
@@ -43,8 +44,8 @@ WizardStep.defaultProps = {
   // eslint-disable-next-line no-unused-vars
   renderMain: (state, setState) => <div />,
   // eslint-disable-next-line no-unused-vars
-  validate: state => true,
-  next: async state => state,
+  validate: (state) => true,
+  next: async (state) => state,
 };
 
 export default WizardStep;

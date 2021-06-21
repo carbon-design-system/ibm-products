@@ -48,8 +48,7 @@ storiesOf(carbon('Notifications'), module)
       {...notificationProps()}
       actions={
         <NotificationActionButton
-          onClick={action('NotificationActionButton onClick')}
-        >
+          onClick={action('NotificationActionButton onClick')}>
           {text('Action (NotificationActionButton > children)', 'Action')}
         </NotificationActionButton>
       }

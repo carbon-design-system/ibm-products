@@ -14,17 +14,19 @@
  * @param {Array<Function>} fns array of functions to apply to the event
  * @returns {Function}
  */
-const composeEventHandlers = fns => (event, ...args) => {
-  for (let i = 0; i < fns.length; i += 1) {
-    if (event.defaultPrevented) {
-      break;
+const composeEventHandlers =
+  (fns) =>
+  (event, ...args) => {
+    for (let i = 0; i < fns.length; i += 1) {
+      if (event.defaultPrevented) {
+        break;
+      }
+      /* eslint-disable security/detect-object-injection */
+      if (typeof fns[i] === 'function') {
+        fns[i](event, ...args);
+      }
+      /* eslint-enable security/detect-object-injection */
     }
-    /* eslint-disable security/detect-object-injection */
-    if (typeof fns[i] === 'function') {
-      fns[i](event, ...args);
-    }
-    /* eslint-enable security/detect-object-injection */
-  }
-};
+  };
 
 export default composeEventHandlers;

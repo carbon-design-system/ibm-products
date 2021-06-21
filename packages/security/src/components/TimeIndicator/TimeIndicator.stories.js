@@ -19,4 +19,4 @@ export default {
   },
 };
 
-export const Default = args => <TimeIndicator {...args} />;
+export const Default = (args) => <TimeIndicator {...args} />;

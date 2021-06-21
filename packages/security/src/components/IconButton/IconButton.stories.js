@@ -29,7 +29,9 @@ const iconButtonProps = () => ({
   tooltip: boolean('tooltip', IconButton.defaultProps.tooltip),
   tooltipDirection: select(
     'tooltipDirection',
-    Object.keys(TooltipDirection).map(direction => TooltipDirection[direction]),
+    Object.keys(TooltipDirection).map(
+      (direction) => TooltipDirection[direction]
+    ),
     IconButton.defaultProps.tooltipDirection
   ),
 });

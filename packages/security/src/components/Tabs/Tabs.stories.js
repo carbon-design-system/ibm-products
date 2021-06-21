@@ -55,7 +55,7 @@ const TabContentRenderedOnlyWhenSelected = ({ selected, children, ...other }) =>
   );
 
 storiesOf(carbon('Tabs'), module)
-  .addDecorator(story => (
+  .addDecorator((story) => (
     <div style={{ minWidth: breakpoints.md.width }}>{story()}</div>
   ))
   .add(
@@ -75,8 +75,7 @@ storiesOf(carbon('Tabs'), module)
         <Tab
           {...props.tab()}
           label="Tab label 3"
-          renderContent={TabContentRenderedOnlyWhenSelected}
-        >
+          renderContent={TabContentRenderedOnlyWhenSelected}>
           <div className="some-content" style={{ paddingLeft: 16 }}>
             Content for third tab goes here.
           </div>

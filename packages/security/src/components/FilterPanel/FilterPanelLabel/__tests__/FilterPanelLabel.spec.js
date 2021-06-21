@@ -46,7 +46,10 @@ describe('FilterPanelLabel', () => {
 
   test('adds custom count label', () => {
     const { getByLabelText } = render(
-      <FilterPanelLabel count={100} countLabel={count => `${count} chickens`} />
+      <FilterPanelLabel
+        count={100}
+        countLabel={(count) => `${count} chickens`}
+      />
     );
     expect(getByLabelText(/\(100 chickens\)/i)).toHaveTextContent('100');
   });

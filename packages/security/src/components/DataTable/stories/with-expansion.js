@@ -19,7 +19,7 @@ import {
 } from '../../..';
 import { headers, missingDataCharacter, rows } from '../_mocks_';
 
-const expansionStory = props => (
+const expansionStory = (props) => (
   <DataTable
     rows={rows}
     headers={headers}
@@ -37,7 +37,7 @@ const expansionStory = props => (
           <TableHead>
             <TableRow>
               <TableExpandHeader />
-              {headers.map(header => (
+              {headers.map((header) => (
                 <TableHeader {...getHeaderProps({ header })} key={header.key}>
                   {header.header}
                 </TableHeader>
@@ -45,10 +45,10 @@ const expansionStory = props => (
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
+            {rows.map((row) => (
               <React.Fragment key={row.id}>
                 <TableExpandRow {...getRowProps({ row })} key={row.id}>
-                  {row.cells.map(cell => (
+                  {row.cells.map((cell) => (
                     <TableCell key={cell.id}>
                       {cell.value ? cell.value : missingDataCharacter}
                     </TableCell>

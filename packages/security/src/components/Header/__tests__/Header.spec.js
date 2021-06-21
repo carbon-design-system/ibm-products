@@ -38,9 +38,9 @@ describe('Header', () => {
     />
   );
 
-  const doesElementExist = selector => header.find(selector).exists();
+  const doesElementExist = (selector) => header.find(selector).exists();
 
-  const getIconButton = label => header.find(`button[aria-label="${label}"]`);
+  const getIconButton = (label) => header.find(`button[aria-label="${label}"]`);
 
   const getNotificationsButton = () =>
     getIconButton(labels.notifications.button);
@@ -119,10 +119,10 @@ describe('Header', () => {
     });
 
     it('renders the correct items when a user is logged out', () => {
-      const doesButtonExist = text =>
+      const doesButtonExist = (text) =>
         header
           .findWhere(
-            element =>
+            (element) =>
               (element.type() === 'a' || element.type() === 'button') &&
               element.text() === text
           )
@@ -210,7 +210,7 @@ describe('Header', () => {
       getNotificationsButton().simulate('click');
 
       const { id } = notifications
-        .map(notification => ({ id: notification.id }))
+        .map((notification) => ({ id: notification.id }))
         .find((notification, index) => index === 0);
 
       header

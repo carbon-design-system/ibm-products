@@ -91,7 +91,7 @@ class ControlledPasswordInputApp extends React.Component {
 }
 
 storiesOf(carbon('TextInput'), module)
-  .addDecorator(story => <div style={{ width: '300px' }}>{story()}</div>)
+  .addDecorator((story) => <div style={{ width: '300px' }}>{story()}</div>)
   .add(
     'Default',
     () => (

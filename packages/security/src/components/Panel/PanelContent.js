@@ -13,10 +13,10 @@ const namespace = getComponentNamespace('panel');
 
 /**
  * Panel content component.
- * @param {Object.<string, *>} props Panel content props.
+ * @param {object.<string, *>} props Panel content props.
  * @returns {PanelContent} Panel content instance.
  */
-const PanelContent = props => {
+const PanelContent = (props) => {
   const classes = classnames(`${namespace}__body--content`, props.className);
   return <div className={classes}>{props.children}</div>;
 };

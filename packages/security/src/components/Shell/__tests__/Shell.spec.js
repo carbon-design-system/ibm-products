@@ -16,7 +16,7 @@ import { Shell } from '../../..';
 
 describe('Shell', () => {
   const shell = mount(<Shell header={header} toolbar={toolbar} />);
-  const getElement = element => shell.find(element);
+  const getElement = (element) => shell.find(element);
   const getToolbar = () => shell.find(Toolbar);
 
   describe('Rendering', () => {

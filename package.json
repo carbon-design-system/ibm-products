@@ -23,8 +23,8 @@
     "clean:lerna": "lerna clean --yes",
     "clean:files": "rimraf coverage node_modules results",
     "copy-common-files": "sh ./scripts/copy-common-files.sh",
-    "format": "yarn format:prettier --write",
-    "format:prettier": "prettier '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd,coverage}/**' '!README.md'",
+    "format": "run-s 'lint:es --fix' format:prettier",
+    "format:prettier": "prettier '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd,coverage}/**' '!README.md' --write",
     "generate": "lerna run generate --loglevel success --scope \"@carbon/ibm-cloud-cognitive\" --",
     "lint": "run-p lint:*",
     "lint:es": "eslint 'packages/*/src/**/*.js'",
@@ -40,19 +40,19 @@
     "storybook:start": "cd packages/core && yarn start",
     "sync": "carbon-cli sync",
     "upgrade-carbon": "npm-check-updates -su --deep --filter '/carbon/' && yarn",
-    "//upgrade-dependencies": "# don't upgrade carbon (done globally), husky (major change in action)",
-    "upgrade-dependencies": "yarn run-all --concurrency 1 upgrade-dependencies && npm-check-updates -u --reject '/(carbon|^husky$)/' && yarn",
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (not tested), husky (major change in action)",
+    "upgrade-dependencies": "yarn run-all --concurrency 1 upgrade-dependencies && npm-check-updates -u --reject '/(carbon|^react$|^react-dom$|^husky$)/' && yarn",
     "upgrade-manual": "sh ./scripts/monorepo-npm-upgrade.sh"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
-    "@testing-library/dom": "^7.30.3",
+    "@testing-library/dom": "^7.31.2",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^13.1.9",
     "copyfiles": "^2.4.1",
     "eslint": "^7.28.0",
-    "eslint-config-carbon": "2.2.0",
+    "eslint-config-carbon": "^2.5.0",
     "husky": "^4.3.6",
     "jest": "^27.0.4",
     "jest-config-ibm-cloud-cognitive": "^0.3.12",
@@ -67,8 +67,8 @@
     "react-dom": "^16.14.0",
     "rimraf": "^3.0.2",
     "stylelint": "^13.13.1",
-    "stylelint-config-carbon": "^1.5.0",
-    "stylelint-plugin-carbon-tokens": "^0.9.0",
+    "stylelint-config-carbon": "^1.6.0",
+    "stylelint-plugin-carbon-tokens": "^0.10.0",
     "yarn": "^1.22.10"
   },
   "eslintConfig": {
@@ -127,7 +127,8 @@
     }
   },
   "lint-staged": {
-    "**/*.{js,md,mdx,scss}": "yarn format",
+    "**/*.{js,md,mdx,scss}": "yarn format:prettier",
+    "**/*.js": "yarn lint:es",
     "**/*.scss": "yarn lint:style"
   }
 }

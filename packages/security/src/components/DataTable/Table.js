@@ -34,18 +34,18 @@ class Table extends Component {
   /**
    * Positions overflow menus based on the scroll position of the table container.
    */
-  positionOverflowMenus = tableWrapper => {
+  positionOverflowMenus = (tableWrapper) => {
     if (this.hasOverflowMenus(tableWrapper)) {
       const { scrollLeft, clientWidth, scrollWidth } = tableWrapper;
       [
         ...tableWrapper.querySelectorAll(
           `.${overflowCellNamespace} .${carbonPrefix}--overflow-menu`
         ),
-      ].forEach(overflow => {
+      ].forEach((overflow) => {
         // eslint-disable-next-line no-param-reassign
-        overflow.style.transform = `translateX(${scrollLeft +
-          clientWidth -
-          scrollWidth}px)`;
+        overflow.style.transform = `translateX(${
+          scrollLeft + clientWidth - scrollWidth
+        }px)`;
       });
     }
   };
@@ -76,7 +76,7 @@ class Table extends Component {
    * Checks that table contains any overflow menus.
    * @returns {boolean} Whether or not table conatins any overflow menus.
    */
-  hasOverflowMenus = tableWrapper =>
+  hasOverflowMenus = (tableWrapper) =>
     tableWrapper.querySelectorAll(`td.${overflowCellNamespace}`).length > 0;
 
   /**
@@ -88,12 +88,11 @@ class Table extends Component {
     <ScrollGradient
       className={tableWrapperNamespace}
       color={theme.ui01}
-      getScrollElementRef={element => {
+      getScrollElementRef={(element) => {
         this.scrollContainer = element;
       }}
       direction={ScrollGradient.ScrollDirection.X}
-      onScroll={this.handleScroll}
-    >
+      onScroll={this.handleScroll}>
       <CarbonTable {...this.props} />
     </ScrollGradient>
   );

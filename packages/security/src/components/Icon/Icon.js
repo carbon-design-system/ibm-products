@@ -79,7 +79,7 @@ Icon.propTypes = {
   /** @type {string} Path. */
   path: string,
 
-  /** @type {function|object} Icon to render. */
+  /** @type {Function|object} Icon to render. */
   renderIcon: renderIconPropType,
 
   /** @type {number|string} Size. */

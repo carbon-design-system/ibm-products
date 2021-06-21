@@ -2076,6 +2076,8 @@ Map {
       "id": [Function],
       "light": [Function],
       "onBeforeClick": [Function],
+      "onClick": [Function],
+      "onKeyUp": [Function],
       "tabIndex": [Function],
       "tileCollapsedIconText": [Function],
       "tileCollapsedLabel": [Function],
@@ -9544,6 +9546,16 @@ Map {
       "pageText": [Function],
       "pagesUnknown": [Function],
       "totalItems": [Function],
+    },
+  },
+  "unstable_ProgressBar" => Object {
+    "propTypes": Object {
+      "className": [Function],
+      "helperText": [Function],
+      "hideLabel": [Function],
+      "label": [Function],
+      "max": [Function],
+      "value": [Function],
     },
   },
   "unstable_Section" => Object {

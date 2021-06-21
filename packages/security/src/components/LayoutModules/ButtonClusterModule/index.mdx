@@ -9,7 +9,9 @@ import layoutConsiderations from './images/layout-considerations.png';
 
 # ButtonClusterModule
 
-The button cluster module group secondary actions that can be taken on a whole page or component. Icons are used to help describe, at a glance, the action that can be taken.
+The button cluster module group secondary actions that can be taken on a whole
+page or component. Icons are used to help describe, at a glance, the action that
+can be taken.
 
 [↳ Overview](#overview)  
 [↳ Component API](#component-api)  
@@ -22,7 +24,10 @@ The button cluster module group secondary actions that can be taken on a whole p
 
 ### Overview
 
-The button cluster module can be built using a combination of the `ButtonClusterModule` and [`Button`](https://react.carbondesignsystem.com/?path=/docs/button) components. The `ButtonClusterModule` accepts a list of `Button` components as `children`.
+The button cluster module can be built using a combination of the
+`ButtonClusterModule` and
+[`Button`](https://react.carbondesignsystem.com/?path=/docs/button) components.
+The `ButtonClusterModule` accepts a list of `Button` components as `children`.
 
 <Canvas>
   <Story
@@ -37,19 +42,26 @@ The button cluster module can be built using a combination of the `ButtonCluster
 
 _**\***Required property_
 
-Additional props passed into `ButtonClusterModule` will be forwarded along to the underlying button cluster module container.
+Additional props passed into `ButtonClusterModule` will be forwarded along to
+the underlying button cluster module container.
 
 ### Anatomy
 
 1. **Ghost buttons:** Ghost buttons stack directly below each other.
-2. **Divider lines:** Divider lines create structure and provide separation between the ghost buttons.
-3. **Bottom spacer:** The 16-pixel spacer `$spacing-05` below the last button provides the starting point for the layout module positioned directly underneath it.
+2. **Divider lines:** Divider lines create structure and provide separation
+   between the ghost buttons.
+3. **Bottom spacer:** The 16-pixel spacer `$spacing-05` below the last button
+   provides the starting point for the layout module positioned directly
+   underneath it.
 
 <img alt="`ButtonClusterModule` anatomy" src={anatomy} />
 
 ### Grid placement
 
-Button cluster modules span across 4 columns. Following the [narrow grid](https://react.carbondesignsystem.com/?path=/docs/grid--narrow) implementation, the button text aligns to the grid and the text below. The divider lines will overhang to the left by 16px.
+Button cluster modules span across 4 columns. Following the
+[narrow grid](https://react.carbondesignsystem.com/?path=/docs/grid--narrow)
+implementation, the button text aligns to the grid and the text below. The
+divider lines will overhang to the left by 16px.
 
 <Row>
   <Column>
@@ -69,7 +81,12 @@ Button cluster modules span across 4 columns. Following the [narrow grid](https:
 
 ### Layout considerations
 
-Occassionally [spacing tokens](https://carbondesignsystem.com/guidelines/spacing/overview#spacing-scale) will need to be included to offset the button cluster module to ensure it top-aligns with the adjacent layout container. If top spacing tokens are necessary, reference the layout module that sits directly above it as the starting point for placement.
+Occassionally
+[spacing tokens](https://carbondesignsystem.com/guidelines/spacing/overview#spacing-scale)
+will need to be included to offset the button cluster module to ensure it
+top-aligns with the adjacent layout container. If top spacing tokens are
+necessary, reference the layout module that sits directly above it as the
+starting point for placement.
 
 <img
   alt="`ButtonClusterModule` layout considerations"

@@ -13,7 +13,7 @@ import { TruncatedList, UnorderedList } from '../..';
 import { createChildrenArray } from './_mocks_';
 
 storiesOf(security(TruncatedList.name), module)
-  .addDecorator(story => (
+  .addDecorator((story) => (
     <div style={{ minWidth: 150, minHeight: 300 }}>{story()}</div>
   ))
   .add(
@@ -41,8 +41,7 @@ storiesOf(security(TruncatedList.name), module)
         expandedItemLimit={number(
           'Number items to show when expanded (expandedItemLimit)',
           10
-        )}
-      >
+        )}>
         {createChildrenArray(number('Number of items in list', 15))}
       </TruncatedList>
     ),

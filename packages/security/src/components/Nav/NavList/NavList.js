@@ -113,8 +113,7 @@ export default class NavList extends Component {
         tabIndex={tabIndex}
         onClick={this.toggle}
         onKeyPress={this.toggle}
-        role="menuitem"
-      >
+        role="menuitem">
         <div className={`${navItemNamespace}__link`}>
           <Icon
             className={`${navListNamespace}__icon`}
@@ -126,8 +125,7 @@ export default class NavList extends Component {
           aria-label={title}
           aria-hidden={!open}
           className={`${navListNamespace} ${navListNamespace}--nested`}
-          role="menu"
-        >
+          role="menu">
           {newChildren}
         </ul>
       </li>

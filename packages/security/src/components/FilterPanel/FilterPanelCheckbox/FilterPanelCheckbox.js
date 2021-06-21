@@ -31,8 +31,7 @@ const FilterPanelCheckbox = ({
         count={count}
         countLabel={countLabel}
         countClassName={`${namespace}__count`}
-        title={title}
-      >
+        title={title}>
         {labelText}
       </FilterPanelLabel>
     }
@@ -62,7 +61,7 @@ FilterPanelCheckbox.propTypes = {
 FilterPanelCheckbox.defaultProps = {
   ...Checkbox.defaultProps,
   count: undefined,
-  countLabel: count => `${count} items`,
+  countLabel: (count) => `${count} items`,
   title: undefined,
 };
 

@@ -16,7 +16,7 @@ const { fn } = jest;
 describe('HeaderNotification', () => {
   const clearButtonLabel = labels.notifications.clear;
   const { dateTime, description, product, timeLabel } = notifications
-    .map(notification => ({
+    .map((notification) => ({
       dateTime: notification.datetime,
       description: notification.description,
       product: notification.product,

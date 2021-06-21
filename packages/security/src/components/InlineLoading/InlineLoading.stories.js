@@ -32,8 +32,7 @@ const props = () => ({
 
 storiesOf(carbon('InlineLoading'), module)
   .add('default', () => <InlineLoading {...props()} />, {
-    info:
-      "Basic implementation of an Inline Loading component. Inline Loading spinners are used when creating, updating, or deleting an item. They help notify users that their change is underway, with different states for 'loading' and 'success'.",
+    info: "Basic implementation of an Inline Loading component. Inline Loading spinners are used when creating, updating, or deleting an item. They help notify users that their change is underway, with different states for 'loading' and 'success'.",
   })
   .add(
     'UX example',

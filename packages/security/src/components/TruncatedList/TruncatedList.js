@@ -67,9 +67,9 @@ const TruncatedList = ({
       // Calculate which item in the list is the last to show in our list. It either has to be the
       // calculate display count or the last item on the list. Whichever comes first.
       const lastItemToShow = items[Math.min(displayCount, items.length - 1)];
-      listContainer.style.height = `${lastItemToShow.offsetTop +
-        lastItemToShow.offsetHeight +
-        4}px`;
+      listContainer.style.height = `${
+        lastItemToShow.offsetTop + lastItemToShow.offsetHeight + 4
+      }px`;
     }
   };
 
@@ -85,7 +85,7 @@ const TruncatedList = ({
     // Pre-set the height of the list container to its own current height so we can smoothly
     // transition into its new height in the React Effect hook.
     updateListContainerHeight();
-    setIsExpanded(currentExpand => !currentExpand);
+    setIsExpanded((currentExpand) => !currentExpand);
   };
 
   const childrenArray = Children.toArray(children);
@@ -96,8 +96,7 @@ const TruncatedList = ({
         className={`${namespace}__scroller-container`}
         scrollElementClassName={`${namespace}__scroller`}
         color={scrollGradientColor}
-        getScrollElementRef={setListContainer}
-      >
+        getScrollElementRef={setListContainer}>
         <List className={classnames(className, namespace)} {...other}>
           {childrenArray.slice(0, displayCount)}
           {shouldTruncate && isExpanded && childrenArray.slice(displayCount)}
@@ -113,8 +112,7 @@ const TruncatedList = ({
           )}
           iconDescription=""
           size="small"
-          onClick={handleExpand}
-        >
+          onClick={handleExpand}>
           {getExpandButtonLabel(
             isExpanded,
             isExpanded ? childrenLength : displayCount,

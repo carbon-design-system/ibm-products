@@ -19,8 +19,7 @@ describe('HeaderListItem', () => {
       <HeaderListItem
         className={className}
         hasPopup={hasPopup}
-        isExpanded={isExpanded}
-      >
+        isExpanded={isExpanded}>
         {children}
       </HeaderListItem>
     );

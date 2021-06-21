@@ -30,7 +30,7 @@ const Button = ({
   size: sizeProp,
   ...other
 }) => {
-  const isSize = value => sizeProp === value;
+  const isSize = (value) => sizeProp === value;
   const size = isSize('large') || largeText || isSize('xlg') ? 'lg' : sizeProp;
 
   const isGhostDanger = kind === 'ghost-danger';

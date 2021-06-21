@@ -21,10 +21,7 @@ module.exports = {
   ],
 
   stories: sync(resolve(__dirname, '..', '..', '**/*.stories.*')).filter(
-    (story) =>
-      !story.includes('node_modules') &&
-      !story.includes('DISPLAY_NAME') &&
-      !story.includes('ibm-security')
+    (story) => !story.match(/(node_modules|DISPLAY_NAME|ibm-security)/)
   ),
 
   webpackFinal: async (configuration) =>

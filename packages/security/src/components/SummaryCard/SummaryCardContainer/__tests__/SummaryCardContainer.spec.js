@@ -35,8 +35,9 @@ describe('SummaryCardContainer', () => {
           <Fragment>
             <SummaryCardBatchActions {...getBatchActionProps()}>
               <SummaryCardBatchAction
-                tabIndex={getBatchActionProps().shouldShowBatchActions ? 0 : -1}
-              >
+                tabIndex={
+                  getBatchActionProps().shouldShowBatchActions ? 0 : -1
+                }>
                 test batch action
               </SummaryCardBatchAction>
             </SummaryCardBatchActions>
@@ -68,8 +69,9 @@ describe('SummaryCardContainer', () => {
           <Fragment>
             <SummaryCardBatchActions {...getBatchActionProps()}>
               <SummaryCardBatchAction
-                tabIndex={getBatchActionProps().shouldShowBatchActions ? 0 : -1}
-              >
+                tabIndex={
+                  getBatchActionProps().shouldShowBatchActions ? 0 : -1
+                }>
                 test batch action
               </SummaryCardBatchAction>
             </SummaryCardBatchActions>
@@ -109,8 +111,9 @@ describe('SummaryCardContainer', () => {
           <Fragment>
             <SummaryCardBatchActions {...getBatchActionProps()}>
               <SummaryCardBatchAction
-                tabIndex={getBatchActionProps().shouldShowBatchActions ? 0 : -1}
-              >
+                tabIndex={
+                  getBatchActionProps().shouldShowBatchActions ? 0 : -1
+                }>
                 test batch action
               </SummaryCardBatchAction>
             </SummaryCardBatchActions>
@@ -150,8 +153,9 @@ describe('SummaryCardContainer', () => {
           <Fragment>
             <SummaryCardBatchActions {...getBatchActionProps()}>
               <SummaryCardBatchAction
-                tabIndex={getBatchActionProps().shouldShowBatchActions ? 0 : -1}
-              >
+                tabIndex={
+                  getBatchActionProps().shouldShowBatchActions ? 0 : -1
+                }>
                 test batch action
               </SummaryCardBatchAction>
             </SummaryCardBatchActions>
@@ -214,8 +218,9 @@ describe('SummaryCardContainer', () => {
           <Fragment>
             <SummaryCardBatchActions {...getBatchActionProps()}>
               <SummaryCardBatchAction
-                tabIndex={getBatchActionProps().shouldShowBatchActions ? 0 : -1}
-              >
+                tabIndex={
+                  getBatchActionProps().shouldShowBatchActions ? 0 : -1
+                }>
                 test batch action
               </SummaryCardBatchAction>
             </SummaryCardBatchActions>
@@ -257,8 +262,9 @@ describe('SummaryCardContainer', () => {
           <Fragment>
             <SummaryCardBatchActions {...getBatchActionProps()}>
               <SummaryCardBatchAction
-                tabIndex={getBatchActionProps().shouldShowBatchActions ? 0 : -1}
-              >
+                tabIndex={
+                  getBatchActionProps().shouldShowBatchActions ? 0 : -1
+                }>
                 test batch action
               </SummaryCardBatchAction>
             </SummaryCardBatchActions>

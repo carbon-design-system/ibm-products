@@ -21,8 +21,7 @@ const renderComboButton = (overflowMenuItemCount = 0) => {
     <ComboButtonItem
       key="test-primary-item"
       id="test-primary-item"
-      renderIcon={ArrowRight20}
-    >
+      renderIcon={ArrowRight20}>
       Primary task
     </ComboButtonItem>
   );
@@ -50,7 +49,7 @@ const getComboBox = () => screen.getByTestId(COMBO_BUTTON_TESTID);
 const getOverflowMenuButton = () =>
   screen.getByLabelText('open and close list of options');
 
-const clickComboBox = overflowMenuButton => {
+const clickComboBox = (overflowMenuButton) => {
   userEvent.click(overflowMenuButton);
 };
 

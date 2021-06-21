@@ -28,7 +28,7 @@ export default {
   decorators: [withResponsive],
 };
 
-export const Default = args => <TitleBarModule {...args} />;
+export const Default = (args) => <TitleBarModule {...args} />;
 
 export const Variant = () => (
   <TitleBarModule title="Sub-section title" subsection>

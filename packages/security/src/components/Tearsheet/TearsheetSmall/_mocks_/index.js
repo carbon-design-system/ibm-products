@@ -19,7 +19,7 @@ const isDisabled = false;
 
 /**
  * Empty click handler.
- * @returns {Object} An empty object.
+ * @returns {object} An empty object.
  */
 const onClick = () => ({});
 
@@ -40,7 +40,7 @@ const buttons = {
 
 const disabledButtons = {};
 
-Object.keys(buttons).forEach(button => {
+Object.keys(buttons).forEach((button) => {
   disabledButtons[button] = {
     isDisabled: !isDisabled,
     onClick,

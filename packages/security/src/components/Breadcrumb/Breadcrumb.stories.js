@@ -60,8 +60,7 @@ storiesOf(carbon('Breadcrumb'), module)
     ),
     {
       info: {
-        text:
-          'You can specify a BreadcrumbItem component as the current page with the `isCurrentPage` prop',
+        text: 'You can specify a BreadcrumbItem component as the current page with the `isCurrentPage` prop',
       },
     }
   )
@@ -80,8 +79,7 @@ storiesOf(carbon('Breadcrumb'), module)
     ),
     {
       info: {
-        text:
-          'You can specify a BreadcrumbItem component as the current page with the `aria-current` prop by specifying `aria-current="page"`',
+        text: 'You can specify a BreadcrumbItem component as the current page with the `aria-current` prop by specifying `aria-current="page"`',
       },
     }
   );

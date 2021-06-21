@@ -21,8 +21,7 @@ storiesOf(carbon('UnorderedList'), module)
       </UnorderedList>
     ),
     {
-      info:
-        'Lists consist of related content grouped together and organized vertically. Unordered lists are used to present content of equal status or value.',
+      info: 'Lists consist of related content grouped together and organized vertically. Unordered lists are used to present content of equal status or value.',
     }
   )
   .add(
@@ -38,7 +37,6 @@ storiesOf(carbon('UnorderedList'), module)
       </UnorderedList>
     ),
     {
-      info:
-        'Lists consist of related content grouped together and organized vertically. Unordered lists are used to present content of equal status or value.',
+      info: 'Lists consist of related content grouped together and organized vertically. Unordered lists are used to present content of equal status or value.',
     }
   );

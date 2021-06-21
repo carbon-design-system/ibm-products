@@ -72,7 +72,7 @@ storiesOf(carbon('StructuredList'), module)
   .add(
     'Selection',
     () => {
-      const structuredListBodyRowGenerator = numRows => {
+      const structuredListBodyRowGenerator = (numRows) => {
         return Array(...Array(numRows)).map((n, i) => (
           <StructuredListRow label key={`row-${i}`} htmlFor={`row-${i}`}>
             <StructuredListCell>Row {i}</StructuredListCell>
@@ -94,8 +94,7 @@ storiesOf(carbon('StructuredList'), module)
             <StructuredListCell>
               <CheckmarkFilled16
                 className={`${prefix}--structured-list-svg`}
-                aria-label="select an option"
-              >
+                aria-label="select an option">
                 <title>select an option</title>
               </CheckmarkFilled16>
             </StructuredListCell>

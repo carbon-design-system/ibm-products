@@ -57,10 +57,8 @@ const storyProps = {
     })),
 };
 
-const {
-  statusIndicator: statusIndicatorProps,
-  statusSteps: statusStepsProps,
-} = storyProps;
+const { statusIndicator: statusIndicatorProps, statusSteps: statusStepsProps } =
+  storyProps;
 
 const { basic, retry: retryProps } = statusIndicatorProps;
 
@@ -90,7 +88,9 @@ storiesOf(patterns('StatusIndicator'), module)
           timer: 0,
         },
         {
-          updateTimer: ({ timer }) => () => ({ timer: timer + 1 }),
+          updateTimer:
+            ({ timer }) =>
+            () => ({ timer: timer + 1 }),
         }
       ),
       lifecycle({

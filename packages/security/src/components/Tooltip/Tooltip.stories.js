@@ -81,8 +81,7 @@ storiesOf(carbon('Tooltip'), module)
           <Link {...link()} />
           <button
             className={`${prefix}--btn ${prefix}--btn--primary`}
-            type="button"
-          >
+            type="button">
             Create
           </button>
         </div>
@@ -110,8 +109,7 @@ storiesOf(carbon('Tooltip'), module)
           <Link {...link()} />
           <button
             className={`${prefix}--btn ${prefix}--btn--primary`}
-            type="button"
-          >
+            type="button">
             Create
           </button>
         </div>
@@ -139,8 +137,7 @@ storiesOf(carbon('Tooltip'), module)
           <Link {...link()} />
           <button
             className={`${prefix}--btn ${prefix}--btn--primary`}
-            type="button"
-          >
+            type="button">
             Create
           </button>
         </div>
@@ -168,8 +165,7 @@ storiesOf(carbon('Tooltip'), module)
           <Link {...link()} />
           <button
             className={`${prefix}--btn ${prefix}--btn--primary`}
-            type="button"
-          >
+            type="button">
             Create
           </button>
         </div>

@@ -38,24 +38,21 @@ export default {
 };
 
 // TODO: Remove workaround for https://github.ibm.com/security/design-core-experience/issues/241
-const withBorder = WrappedComponent => ({
-  className,
-  direction,
-  nested,
-  ...other
-}) => {
-  const namespace = 'container__border';
+const withBorder =
+  (WrappedComponent) =>
+  ({ className, direction, nested, ...other }) => {
+    const namespace = 'container__border';
 
-  return (
-    <WrappedComponent
-      className={classnames(namespace, className, {
-        [`${namespace}--${direction}`]: direction,
-        [`${namespace}--nested`]: nested,
-      })}
-      {...other}
-    />
-  );
-};
+    return (
+      <WrappedComponent
+        className={classnames(namespace, className, {
+          [`${namespace}--${direction}`]: direction,
+          [`${namespace}--nested`]: nested,
+        })}
+        {...other}
+      />
+    );
+  };
 
 const RowWithContainer = withContainer(Row);
 const RowWithBorderContainer = withBorder(withContainer(Row));

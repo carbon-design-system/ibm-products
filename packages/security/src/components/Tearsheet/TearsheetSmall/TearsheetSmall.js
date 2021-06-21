@@ -35,18 +35,20 @@ class TearsheetSmall extends PureComponent {
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (prevState.isOpen !== nextProps.isOpen)
+    if (prevState.isOpen !== nextProps.isOpen) {
       return {
         isOpen: nextProps.isOpen,
       };
+    }
     if (
       prevState.loading !== nextProps.loading ||
       prevState.loadingMessage !== nextProps.loadingMessage
-    )
+    ) {
       return {
         loading: nextProps.loading,
         loadingMessage: nextProps.loadingMessage,
       };
+    }
     return null;
   }
 
@@ -97,12 +99,10 @@ class TearsheetSmall extends PureComponent {
             focusTrap={focusTrap}
             rootNode={rootNode}
             stopPropagation={stopPropagation}
-            stopPropagationEvents={stopPropagationEvents}
-          >
+            stopPropagationEvents={stopPropagationEvents}>
             <section
               className={classnames(namespace, className)}
-              aria-hidden={false}
-            >
+              aria-hidden={false}>
               {this.state.loading && (
                 <LoadingMessage className={`${namespace}__loading`}>
                   {this.state.loadingMessage}
@@ -117,13 +117,11 @@ class TearsheetSmall extends PureComponent {
               <section className={`${namespace}__body`}>
                 <ScrollGradient
                   className={`${namespace}__content`}
-                  color={theme.ui01}
-                >
+                  color={theme.ui01}>
                   <div
                     className={classnames({
                       [`${namespace}__scroll-gradient__content`]: !flush,
-                    })}
-                  >
+                    })}>
                     {this.renderBody()}
                   </div>
                 </ScrollGradient>
@@ -135,8 +133,7 @@ class TearsheetSmall extends PureComponent {
                     disabled={secondaryButton.isDisabled || this.state.loading}
                     kind="secondary"
                     onClick={secondaryButton.onClick}
-                    size="xl"
-                  >
+                    size="xl">
                     {componentLabels.TEARSHEET_SMALL_SECONDARY_BUTTON}
                   </Button>
                 )}
@@ -145,8 +142,7 @@ class TearsheetSmall extends PureComponent {
                     className={`${namespace}__footer__button`}
                     disabled={primaryButton.isDisabled || this.state.loading}
                     onClick={primaryButton.onClick}
-                    size="xl"
-                  >
+                    size="xl">
                     {componentLabels.TEARSHEET_SMALL_PRIMARY_BUTTON}
                   </Button>
                 )}
@@ -214,13 +210,13 @@ TearsheetSmall.propTypes = {
     `\nThe prop \`children\` for TearsheetSmall has been deprecated in favor of \`body\`.`
   ),
 
-  /** @type {Object<Object>} An object list of primary button props. */
+  /** @type {object<object>} An object list of primary button props. */
   primaryButton: buttonType.isRequired,
 
-  /** @type {Object<Object>} An object list of secondary button props. */
+  /** @type {object<object>} An object list of secondary button props. */
   secondaryButton: buttonType.isRequired,
 
-  /** @type {Object<Object>} An object list of close button props. */
+  /** @type {object<object>} An object list of close button props. */
   closeButton: buttonType.isRequired,
 
   /** @type {bool} The toggle to determine whether or not to show the loading. */
@@ -241,7 +237,7 @@ TearsheetSmall.propTypes = {
   /** @type {boolean} Stop event propagation for events that can bubble. */
   stopPropagation: PropTypes.bool,
 
-  /** @type {array} Array of event types to stop propagation. */
+  /** @type {Array} Array of event types to stop propagation. */
   stopPropagationEvents: PropTypes.arrayOf(PropTypes.oneOf(PORTAL_EVENTS)),
 };
 

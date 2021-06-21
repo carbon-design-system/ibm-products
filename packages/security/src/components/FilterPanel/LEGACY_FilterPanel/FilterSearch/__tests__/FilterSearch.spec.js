@@ -71,10 +71,7 @@ describe('FilterSearch', () => {
       const wrapper = shallow(
         <FilterSearch {...props} initialSearchValue="filter 10" />
       );
-      wrapper
-        .find('FilterSelector')
-        .at(0)
-        .simulate('change');
+      wrapper.find('FilterSelector').at(0).simulate('change');
       expect(wrapper).toMatchSnapshot();
     });
 

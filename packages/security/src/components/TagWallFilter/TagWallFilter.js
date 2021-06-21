@@ -22,7 +22,7 @@ const namespace = getComponentNamespace('tag-wall-filter');
 const defaultTo = (value, defaultVal) => (value == null ? defaultVal : value);
 
 export const noop = () => {};
-export const itemToString = item =>
+export const itemToString = (item) =>
   defaultTo(item, { text: '', label: '' }).label ||
   defaultTo(item, { text: '', label: '' }).text;
 
@@ -35,7 +35,7 @@ export const selectedItemsReducer = createReducer({
   }),
   UNSELECT_ITEM: (state = { items: [] }, { item: { id } = {} }) => ({
     ...state,
-    items: state.items.filter(item => item.id !== id),
+    items: state.items.filter((item) => item.id !== id),
   }),
   CLEAR_SELECTED_ITEMS: (state = { items: [] }) => ({ ...state, items: [] }),
 });
@@ -46,7 +46,7 @@ export const availableItemsReducer = createReducer({
     { item: { id } = {} }
   ) => ({
     ...state,
-    items: state.items.filter(item => item.id !== id),
+    items: state.items.filter((item) => item.id !== id),
   }),
   UNSELECT_ITEM: (
     state = { items: [], allItems: [] },
@@ -83,7 +83,7 @@ export const withItemReducer = withReducer(
       selected: { items: selectedItems },
       available: {
         items: availableItems,
-        allItems: allItems || Object.keys(values).map(value => values[value]),
+        allItems: allItems || Object.keys(values).map((value) => values[value]),
       },
     };
   }
@@ -95,10 +95,7 @@ export const withMappedProps = mapProps(({ itemState, ...otherProps }) => ({
   availableItems: itemState.available.items || [],
 }));
 
-export const withMappedItemReducer = compose(
-  withItemReducer,
-  withMappedProps
-);
+export const withMappedItemReducer = compose(withItemReducer, withMappedProps);
 
 export const FilterTagFragmentRender = ({
   selectedItems,
@@ -121,17 +118,16 @@ export const FilterTagFragmentRender = ({
           items={selectedItems}
           itemToString={itemToString}
           label={tagWallLabel}
-          onChange={change => dispatchItemChange(change, onChange)}
+          onChange={(change) => dispatchItemChange(change, onChange)}
           addButtonDisabled
         />
       </div>
-    )}
-  >
+    )}>
     <FilterRaw
       id={id}
       items={availableItems}
       itemToString={itemToString}
-      onChange={change => dispatchItemChange(change, onChange)}
+      onChange={(change) => dispatchItemChange(change, onChange)}
       {...otherProps}
     />
   </TearsheetSmall>
@@ -224,13 +220,13 @@ export const TagWallFilter = ({
 };
 
 TagWallFilter.propTypes = {
-  /** @type {Object<Object>} An object list of primary button props. */
+  /** @type {object<object>} An object list of primary button props. */
   primaryButton: buttonType.isRequired,
 
-  /** @type {Object<Object>} An object list of secondary button props. */
+  /** @type {object<object>} An object list of secondary button props. */
   secondaryButton: buttonType.isRequired,
 
-  /** @type {Object<Object>} An object list of close button props. */
+  /** @type {object<object>} An object list of close button props. */
   closeButton: buttonType.isRequired,
 
   /** @type {string} The view title. */

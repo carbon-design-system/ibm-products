@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 
 import { namespace } from '../ComboButton';
 
-const ComboButtonItem = props => {
+const ComboButtonItem = (props) => {
   const { ...rest } = props;
   return <span {...rest} className={`${namespace}-item`} />;
 };
@@ -44,7 +44,7 @@ ComboButtonItem.propTypes = {
     `\nThe prop \`primaryFocus\` for ComboButtonItem has been deprecated. Please use the \`selectorPrimaryFocus\` in ComboButton instead.`
   ),
 
-  /** @type {function|object} Icon to render. */
+  /** @type {Function|object} Icon to render. */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 

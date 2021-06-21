@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 /**
  * Filter category object.
- * @typedef {Object} FilterCategory
+ * @typedef {object} FilterCategory
  * @property {string} id Unique ID of object.
  * @property {string} name Display name of object.
  * @property {string[]} subcategories IDs of subcategories that belong to this object.
@@ -23,7 +23,7 @@ export const filterCategoryPropTypes = PropTypes.shape({
 
 /**
  * Filter subcategory object.
- * @typedef {Object} FilterSubcategory
+ * @typedef {object} FilterSubcategory
  * @property {string} id Unique ID of object.
  * @property {string} name Display name of object.
  * @property {string[]} filters IDs of filters that belong to this object.
@@ -41,7 +41,7 @@ export const filterSubcategoryPropTypes = PropTypes.shape({
 
 /**
  * Filter object.
- * @typedef {Object} Filter
+ * @typedef {object} Filter
  * @property {string} id Unique ID of object.
  * @property {string} name Display name of object.
  * @property {string} parent ID of parent of this object.
@@ -57,10 +57,10 @@ export const filterFiltersPropTypes = PropTypes.shape({
 
 /**
  * Filter data object.
- * @typedef {Object} FilterData
- * @property {Object<string, FilterCategory>} categories Object containing filter category objects.
- * @property {Object<string, FilterSubcategory>} subcategories Object containing filter subcategory objects.
- * @property {Object<string, Filter>} filters Object containing filters objects.
+ * @typedef {object} FilterData
+ * @property {object<string, FilterCategory>} categories Object containing filter category objects.
+ * @property {object<string, FilterSubcategory>} subcategories Object containing filter subcategory objects.
+ * @property {object<string, Filter>} filters Object containing filters objects.
  */
 /** @type {FilterData} Type defition for filter data */
 export const filterDataPropTypes = PropTypes.shape({
@@ -81,9 +81,9 @@ export const filterDataDefaultProps = {
  * @param {FilterData} filterData Filter data object containing categories to extract.
  * @returns {FilterCategory[]} Array of categories objects.
  */
-export const getFilterCategoriesArray = filterData =>
+export const getFilterCategoriesArray = (filterData) =>
   Object.keys(filterData.categories).map(
-    category => filterData.categories[category]
+    (category) => filterData.categories[category]
   );
 
 /**
@@ -91,9 +91,9 @@ export const getFilterCategoriesArray = filterData =>
  * @param {FilterData} filterData Filter data object containing subcategories to extract.
  * @returns {FilterSubcategory[]} Array of subcategories objects.
  */
-export const getFilterSubcategoriesArray = filterData =>
+export const getFilterSubcategoriesArray = (filterData) =>
   Object.keys(filterData.subcategories).map(
-    subcategory => filterData.subcategories[subcategory]
+    (subcategory) => filterData.subcategories[subcategory]
   );
 
 /**
@@ -101,13 +101,13 @@ export const getFilterSubcategoriesArray = filterData =>
  * @param {FilterData} filterData Filter data object containing filters to extract.
  * @returns {Filter[]} Array of filters objects.
  */
-export const getFiltersArray = filterData =>
-  Object.keys(filterData.filters).map(filter => filterData.filters[filter]);
+export const getFiltersArray = (filterData) =>
+  Object.keys(filterData.filters).map((filter) => filterData.filters[filter]);
 
 /**
  * Gets array of selected filters from filter data.
  * @param {FilterData} filterData Filter data object containing selected filters to extract.
  * @returns {(Filter[]|null)} Array of selected filters objects.
  */
-export const getSelectedFiltersArray = filterData =>
-  getFiltersArray(filterData).filter(filter => filter.enabled);
+export const getSelectedFiltersArray = (filterData) =>
+  getFiltersArray(filterData).filter((filter) => filter.enabled);

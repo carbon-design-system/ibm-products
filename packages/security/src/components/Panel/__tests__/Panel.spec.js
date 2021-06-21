@@ -48,8 +48,7 @@ describe('Panel', () => {
             <PanelContainer
               title={label}
               subtitle={label}
-              closeButton={{ label, onClick: toggleActive }}
-            >
+              closeButton={{ label, onClick: toggleActive }}>
               <PanelContent>{label}</PanelContent>
             </PanelContainer>
           </PanelController>
@@ -115,7 +114,7 @@ describe('Panel', () => {
     it('renders the correct body margin', () => {
       panel = mount(panelElement);
 
-      const getElement = element => panel.find(`.${namespace}__${element}`);
+      const getElement = (element) => panel.find(`.${namespace}__${element}`);
 
       selectToggleButton();
       expect(getElement('body').prop('style').marginTop).toBe(

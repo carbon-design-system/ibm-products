@@ -46,7 +46,7 @@ const props = {
       (() => {
         const icons = {};
 
-        Object.keys(iconsToUse).forEach(icon => {
+        Object.keys(iconsToUse).forEach((icon) => {
           icons[`${icon} (${icon} from '@carbon/icons-react')`] = `${icon}`;
         });
 
@@ -111,8 +111,7 @@ storiesOf(carbon('Button'), module)
             display: 'flex',
             alignItems: 'center',
             flexWrap: 'wrap',
-          }}
-        >
+          }}>
           <Button {...regularProps} className="some-class">
             Button
           </Button>
@@ -129,8 +128,7 @@ storiesOf(carbon('Button'), module)
             {...regularProps}
             as={CustomLink}
             href="#"
-            className="some-class"
-          >
+            className="some-class">
             Custom component
           </Button>
         </div>

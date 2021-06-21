@@ -29,11 +29,11 @@ class Decorator extends Component {
    * Handles when the Decorator has been clicked.
    * @param {SyntheticEvent} event The event fired when the Decorator has been clicked.
    */
-  handleClick = event => {
+  handleClick = (event) => {
     this.props.onClick(event, this.props.type, this.props.value);
   };
 
-  handleContextMenuClick = event => {
+  handleContextMenuClick = (event) => {
     this.props.onContextMenu(event, this.props.type, this.props.value);
   };
 
@@ -133,8 +133,7 @@ class Decorator extends Component {
         <button
           className={decoratorClasses}
           onClick={this.handleClick}
-          onContextMenu={this.handleContextMenuClick}
-        >
+          onContextMenu={this.handleContextMenuClick}>
           {decorator}
         </button>
       );
@@ -181,7 +180,7 @@ Decorator.propTypes = {
     if (
       !Array.isArray(props.scoreThresholds) ||
       props.scoreThresholds.length !== 4 ||
-      !props.scoreThresholds.every(number => typeof number === 'number')
+      !props.scoreThresholds.every((number) => typeof number === 'number')
     ) {
       return new Error(
         `${propName} is required to be an array of four numbers.`
@@ -236,11 +235,11 @@ Decorator.defaultProps = {
 
 /**
  * Generate exports for individual severity icon types.
- * @param {array} iconNames array of icon names
+ * @param {Array} iconNames array of icon names
  */
 function generateIconExports(...iconNames) {
   const namedExports = {};
-  iconNames.forEach(iconName => {
+  iconNames.forEach((iconName) => {
     const IconComponent = ({ className, description, size, ...other }) => (
       <Icon
         className={classnames(

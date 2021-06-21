@@ -51,7 +51,7 @@ storiesOf(carbon('NumberInput'), module)
       const { numberInputArrowTranslationIds, ...rest } = props();
       return (
         <NumberInput
-          translateWithId={id => numberInputArrowTranslationIds[id]}
+          translateWithId={(id) => numberInputArrowTranslationIds[id]}
           {...rest}
         />
       );

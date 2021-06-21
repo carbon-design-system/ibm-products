@@ -36,13 +36,11 @@ storiesOf(carbon('Accordion'), module)
     'Default',
     () => (
       <Accordion
-        align={select('Accordion heading alignment (align)', align, 'start')}
-      >
+        align={select('Accordion heading alignment (align)', align, 'start')}>
         <AccordionItem
           title={text('The title (title)', 'Section 1 title')}
           open={boolean('Open the section (open)', false)}
-          {...props}
-        >
+          {...props}>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -67,8 +65,7 @@ storiesOf(carbon('Accordion'), module)
               Section 4 title (<em>the title can be a node</em>)
             </span>
           }
-          {...props}
-        >
+          {...props}>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim

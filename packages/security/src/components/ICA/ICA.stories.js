@@ -50,8 +50,7 @@ storiesOf(security('ICA'), module)
     'in an ICA wall',
     () => (
       <div
-        className={`${carbonPrefix}--grid ${carbonPrefix}--grid--full-width`}
-      >
+        className={`${carbonPrefix}--grid ${carbonPrefix}--grid--full-width`}>
         <div className={`${carbonPrefix}--row`}>
           <div className={`${carbonPrefix}--col`}>
             <h4>4 spaced</h4>
@@ -60,11 +59,10 @@ storiesOf(security('ICA'), module)
         <div className={`${carbonPrefix}--row`}>
           {Array(4)
             .fill(0)
-            .map(item => (
+            .map((item) => (
               <div
                 key={item.id}
-                className={`${carbonPrefix}--col-sm-4 ${carbonPrefix}--col-md-2 ${carbonPrefix}--col-lg-4`}
-              >
+                className={`${carbonPrefix}--col-sm-4 ${carbonPrefix}--col-md-2 ${carbonPrefix}--col-lg-4`}>
                 <ICA {...storyProps({ total })} />
               </div>
             ))}
@@ -77,11 +75,10 @@ storiesOf(security('ICA'), module)
         <div className={`${carbonPrefix}--row`}>
           {Array(8)
             .fill(0)
-            .map(item => (
+            .map((item) => (
               <div
                 key={item.id}
-                className={`${carbonPrefix}--col-sm-2 ${carbonPrefix}--col-md-2 ${carbonPrefix}--col-lg-2`}
-              >
+                className={`${carbonPrefix}--col-sm-2 ${carbonPrefix}--col-md-2 ${carbonPrefix}--col-lg-2`}>
                 <ICA {...storyProps({ total })} />
               </div>
             ))}

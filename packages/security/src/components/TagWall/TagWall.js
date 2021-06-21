@@ -50,8 +50,7 @@ const TagWall = ({
     <section
       className={classnames(namespace, className)}
       aria-label={TAG_WALL_LABEL}
-      {...other}
-    >
+      {...other}>
       {TAG_WALL_LABEL && (
         <h2 className={`${namespace}__label`}>{TAG_WALL_LABEL}</h2>
       )}
@@ -64,7 +63,7 @@ const TagWall = ({
             id={item.id}
             key={key}
             isSelected={item.isSelected}
-            onRemove={event => {
+            onRemove={(event) => {
               event.stopPropagation();
 
               onChange({ item, type });
@@ -72,8 +71,7 @@ const TagWall = ({
             removable={!disable}
             removeBtnLabel={TAG_WALL_REMOVE_BUTTON}
             type="gray"
-            {...item.props}
-          >
+            {...item.props}>
             {itemToString(item)}
           </InteractiveTag>
         );
@@ -83,8 +81,7 @@ const TagWall = ({
           disabled={disable}
           kind="ghost"
           onClick={onAddButton}
-          size="small"
-        >
+          size="small">
           {TAG_WALL_ADD_BUTTON}
         </Button>
       )}
@@ -105,7 +102,7 @@ TagWall.propTypes = {
   /** @type {boolean} Determines whether or not tag management is enabled. */
   disable: bool,
 
-  /** @type {Array.<Object.<string,boolean>>} List of tags to be consumed. */
+  /** @type {Array.<object.<string, boolean>>} List of tags to be consumed. */
   items: arrayOf(
     shape({
       id: string.isRequired,
@@ -115,19 +112,19 @@ TagWall.propTypes = {
     })
   ).isRequired,
 
-  /** @type {function} Function that converts object to string. */
+  /** @type {Function} Function that converts object to string. */
   itemToString: func,
 
   /** @type {string} Description label. */
   label: string,
 
-  /** @type {Object.<string, *>} Default translation labels object. */
+  /** @type {object.<string, *>} Default translation labels object. */
   labels: defaultLabels.propType,
 
-  /** @type {function} Handles `onClick` for the 'add' button. */
+  /** @type {Function} Handles `onClick` for the 'add' button. */
   onAddButton: func,
 
-  /** @type {function} Communicates to the consuming component any changes to the tags. */
+  /** @type {Function} Communicates to the consuming component any changes to the tags. */
   onChange: func,
 };
 

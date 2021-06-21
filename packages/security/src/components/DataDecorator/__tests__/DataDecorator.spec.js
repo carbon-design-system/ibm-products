@@ -137,8 +137,7 @@ describe('DataDecorator', () => {
         closeButton={{
           label: 'test close',
           onClick: onCloseMock,
-        }}
-      >
+        }}>
         <Button>test content button</Button>
       </DataDecorator>
     );

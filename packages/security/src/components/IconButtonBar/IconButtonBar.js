@@ -72,7 +72,7 @@ const IconButtonBar = ({
     if (overflowMenuDirection === IconButton.TooltipDirection.TOP) {
       items.reverse();
     }
-    return items.map(action => (
+    return items.map((action) => (
       <OverflowMenuItem
         itemText={action.label}
         key={action.label}
@@ -101,18 +101,19 @@ const IconButtonBar = ({
 
   return (
     <div className={iconButtonBarClasses}>
-      {!isMaxLength && actions.map(action => renderIconButton(action))}
+      {!isMaxLength && actions.map((action) => renderIconButton(action))}
       {isMaxLength && (
         <Fragment>
-          {actions.slice(0, length - 1).map(action => renderIconButton(action))}
+          {actions
+            .slice(0, length - 1)
+            .map((action) => renderIconButton(action))}
           <OverflowMenu
             className={`${namespace}__overflow-menu`}
             direction={overflowMenuDirection}
             flipped
             menuOptionsClass={iconButtonBarMenuOptionsClasses}
             renderIcon={getOverflowMenuIcon()}
-            selectorPrimaryFocus={`.${iconButtonPrimaryFocus}`}
-          >
+            selectorPrimaryFocus={`.${iconButtonPrimaryFocus}`}>
             {renderMenuItems()}
           </OverflowMenu>
         </Fragment>

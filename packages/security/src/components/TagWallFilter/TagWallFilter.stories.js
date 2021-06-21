@@ -37,12 +37,14 @@ const itemsReducer = (items, item) => {
   items[item.id] = item;
   return [items, item];
 };
-const filterItems = selectedItemsMap => ([items, item]) => {
-  if (item.id in selectedItemsMap) {
-    delete items[item.id];
-  }
-  return [items, item];
-};
+const filterItems =
+  (selectedItemsMap) =>
+  ([items, item]) => {
+    if (item.id in selectedItemsMap) {
+      delete items[item.id];
+    }
+    return [items, item];
+  };
 const selectFirst = ([items]) => items;
 
 storiesOf(patterns('TagWallFilter'), module).add(
@@ -56,10 +58,7 @@ storiesOf(patterns('TagWallFilter'), module).add(
       },
     ]);
     const selectedItemsMap = selectedItems.reduce(
-      compose(
-        selectFirst,
-        itemsReducer
-      ),
+      compose(selectFirst, itemsReducer),
       {}
     );
     const availableItems = Object.values(
@@ -67,20 +66,12 @@ storiesOf(patterns('TagWallFilter'), module).add(
         'availableItems',
         Object.values(
           items.reduce(
-            compose(
-              selectFirst,
-              filterItems(selectedItemsMap),
-              itemsReducer
-            ),
+            compose(selectFirst, filterItems(selectedItemsMap), itemsReducer),
             {}
           )
         )
       ).reduce(
-        compose(
-          selectFirst,
-          filterItems(selectedItemsMap),
-          itemsReducer
-        ),
+        compose(selectFirst, filterItems(selectedItemsMap), itemsReducer),
         {}
       )
     );

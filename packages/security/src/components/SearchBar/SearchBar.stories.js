@@ -23,17 +23,15 @@ const SearchBarWithStateHandlers = compose(
   ),
   withState('value', 'updateValue', ({ value = '' }) => value),
   withHandlers({
-    onChange: ({
-      onChange,
-      updateSelectedScopes,
-      updateValue,
-    }) => searchObject => {
-      const { selectedScopes, value } = searchObject;
-      onChange(searchObject);
+    onChange:
+      ({ onChange, updateSelectedScopes, updateValue }) =>
+      (searchObject) => {
+        const { selectedScopes, value } = searchObject;
+        onChange(searchObject);
 
-      updateSelectedScopes(selectedScopes);
-      updateValue(value);
-    },
+        updateSelectedScopes(selectedScopes);
+        updateValue(value);
+      },
   })
 )(SearchBar);
 
@@ -93,7 +91,7 @@ storiesOf(patterns('SearchBar'), module)
     <SearchBarWithStateHandlers
       {...regular()}
       {...scopesProps()}
-      translateWithId={id => translationIds[id]}
+      translateWithId={(id) => translationIds[id]}
     />
   ))
   .add(
@@ -102,8 +100,8 @@ storiesOf(patterns('SearchBar'), module)
       <SearchBarWithStateHandlers
         {...regular()}
         {...scopesProps()}
-        translateWithId={id => translationIds[id]}
-        sortItems={items => items}
+        translateWithId={(id) => translationIds[id]}
+        sortItems={(items) => items}
       />
     ),
     {
@@ -117,6 +115,6 @@ storiesOf(patterns('SearchBar'), module)
       {...regular()}
       {...scopesProps()}
       selectedScopes={selectedScopes}
-      translateWithId={id => translationIds[id]}
+      translateWithId={(id) => translationIds[id]}
     />
   ));

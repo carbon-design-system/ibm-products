@@ -161,11 +161,10 @@ const render = ({
         <TableHead>
           <TableRow>
             <TableSelectAll {...getSelectionProps()} />
-            {headers.map(header => (
+            {headers.map((header) => (
               <TableHeader
                 key={header.id}
-                {...getHeaderProps({ header, isSortable })}
-              >
+                {...getHeaderProps({ header, isSortable })}>
                 {header.header}
               </TableHeader>
             ))}
@@ -173,10 +172,10 @@ const render = ({
         </TableHead>
       )}
       <TableBody>
-        {rows.map(row => (
+        {rows.map((row) => (
           <TableRow {...getRowProps({ row })} key={row.id}>
             <TableSelectRow {...getSelectionProps({ row })} />
-            {row.cells.map(cell => (
+            {row.cells.map((cell) => (
               <TableCell key={cell.id}>
                 {cell.value ? cell.value : missingDataCharacter}
               </TableCell>

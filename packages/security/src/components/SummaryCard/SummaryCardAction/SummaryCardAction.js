@@ -56,13 +56,12 @@ class SummaryCardAction extends Component {
           kind="ghost"
           onClick={
             expandedContent
-              ? event => {
+              ? (event) => {
                   onClick(event);
                   this.toggleOpen();
                 }
               : onClick
-          }
-        >
+          }>
           <span className={`${namespace}__text`}>{children}</span>
         </Button>
         {expandedContent && (
@@ -70,8 +69,7 @@ class SummaryCardAction extends Component {
             appearTimeout={transitionSegment * 3}
             className={`${namespace}-overlay`}
             enterTimeout={transitionSegment * 3}
-            leaveTimeout={transitionSegment * 3}
-          >
+            leaveTimeout={transitionSegment * 3}>
             {isOpen && (
               <>
                 <div className={`${namespace}-overlay`}>
@@ -116,7 +114,7 @@ SummaryCardAction.propTypes = {
   className: PropTypes.string,
 
   /** @type {string} Provide the close button with an icon description for assistive tech. */
-  closeButtonIconDescription: props => {
+  closeButtonIconDescription: (props) => {
     if (props.expandedContent && !props.closeButtonIconDescription) {
       return new Error(
         'A `closeButtonIconDescription` should be provided if using `expandedContent`.'

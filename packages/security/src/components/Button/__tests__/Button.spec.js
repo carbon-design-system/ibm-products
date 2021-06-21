@@ -58,7 +58,7 @@ describe('Button', () => {
     );
   });
 
-  ButtonKinds.forEach(kind => {
+  ButtonKinds.forEach((kind) => {
     if (kind !== 'ghost-danger') {
       test(`should add correct class when \`kind\` is ${kind}`, () => {
         const { getByText } = render(<Button kind={kind}>test button</Button>);

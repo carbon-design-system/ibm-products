@@ -21,7 +21,7 @@ import {
 
 import { headers, missingDataCharacter, rows } from '../_mocks_';
 
-const overflowStory = props => (
+const overflowStory = (props) => (
   <DataTable
     rows={rows}
     headers={headers}
@@ -38,7 +38,7 @@ const overflowStory = props => (
         <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
-              {headers.map(header => (
+              {headers.map((header) => (
                 <TableHeader {...getHeaderProps({ header })} key={header.key}>
                   {header.header}
                 </TableHeader>
@@ -46,9 +46,9 @@ const overflowStory = props => (
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
+            {rows.map((row) => (
               <TableRow {...getRowProps({ row })} key={row.id}>
-                {row.cells.map(cell => (
+                {row.cells.map((cell) => (
                   <TableCell key={cell.id}>
                     {cell.value ? cell.value : missingDataCharacter}
                   </TableCell>

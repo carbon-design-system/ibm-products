@@ -126,8 +126,7 @@ storiesOf(carbon('Tile'), module)
         <TileGroup
           defaultSelected="default-selected"
           legend="Radio Tile Group"
-          {...props.group()}
-        >
+          {...props.group()}>
           <RadioTile value="standard" {...radioProps}>
             Radio Tile
           </RadioTile>

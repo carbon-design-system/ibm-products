@@ -16,7 +16,7 @@ import { carbon } from '../../../.storybook';
 // Datepickers last argument contains an instance of flatpickr
 // and will cause action logger to enter an infinite loop. Just don't log that argument
 const datePickerOnChangeActions = decorateAction([
-  args => args.slice(0, args.length - 2),
+  (args) => args.slice(0, args.length - 2),
 ]);
 
 const patterns = {
@@ -71,8 +71,7 @@ storiesOf(carbon('DatePicker'), module)
       <DatePicker
         {...props.datePicker()}
         short={boolean('Use shorter width (short in <DatePicker>)', false)}
-        datePickerType="simple"
-      >
+        datePickerType="simple">
         <DatePickerInput {...props.datePickerInput()} />
       </DatePicker>
     ),
@@ -84,8 +83,10 @@ storiesOf(carbon('DatePicker'), module)
     <DatePicker
       {...props.datePicker()}
       datePickerType="single"
-      dateFormat={text('The date format (dateFormat in <DatePicker>)', 'm/d/Y')}
-    >
+      dateFormat={text(
+        'The date format (dateFormat in <DatePicker>)',
+        'm/d/Y'
+      )}>
       <DatePickerInput {...props.datePickerInput()} />
     </DatePicker>
   ))
@@ -100,8 +101,7 @@ storiesOf(carbon('DatePicker'), module)
           dateFormat={text(
             'The date format (dateFormat in <DatePicker>)',
             'm/d/Y'
-          )}
-        >
+          )}>
           <DatePickerInput
             {...datePickerInputProps}
             id="date-picker-input-id-start"
@@ -127,8 +127,7 @@ storiesOf(carbon('DatePicker'), module)
           minDate="1/10/2020"
           maxDate="1/20/2020"
           datePickerType="range"
-          dateFormat="m/d/Y"
-        >
+          dateFormat="m/d/Y">
           <DatePickerInput
             {...datePickerInputProps}
             id="date-picker-input-id"
@@ -141,8 +140,7 @@ storiesOf(carbon('DatePicker'), module)
       );
     },
     {
-      info:
-        'A range Date Picker consists of two input fields and a calendar, and optionally, the minDate and maxDate fields.',
+      info: 'A range Date Picker consists of two input fields and a calendar, and optionally, the minDate and maxDate fields.',
     }
   )
   .add('skeleton', () => <DatePickerSkeleton range />, {

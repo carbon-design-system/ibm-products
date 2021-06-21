@@ -141,10 +141,9 @@ export default class NavItem extends Component {
       <li
         className={classNames}
         label={label}
-        onClick={event => handleDisabled(onClick(event, href))}
-        onKeyPress={event => handleDisabled(onClick(event, href))}
-        role="menuitem"
-      >
+        onClick={(event) => handleDisabled(onClick(event, href))}
+        onKeyPress={(event) => handleDisabled(onClick(event, href))}
+        role="menuitem">
         {link ? (
           <NavItemLink
             id={navItemId}
@@ -155,8 +154,7 @@ export default class NavItem extends Component {
             href={href}
             tabIndex={navItemTabIndex}
             {...other}
-            {...externalLinkProps}
-          >
+            {...externalLinkProps}>
             {children}
             {externalLink && (
               <Icon
@@ -172,8 +170,7 @@ export default class NavItem extends Component {
             onClick={handleDisabled(handleItemSelect)}
             onKeyPress={handleDisabled(handleItemSelect)}
             role="menuitem"
-            tabIndex={navItemTabIndex}
-          >
+            tabIndex={navItemTabIndex}>
             {children}
           </div>
         )}

@@ -59,7 +59,7 @@ const actions = [
 ];
 
 describe('IconButtonBar', () => {
-  sizes.forEach(size => {
+  sizes.forEach((size) => {
     it(`renders the '${size}' variation`, () => {
       const iconButtonBar = shallow(<IconButtonBar actions={actions} />);
       iconButtonBar.setProps({ size });
@@ -67,7 +67,7 @@ describe('IconButtonBar', () => {
     });
   });
 
-  [1, 2, 3, 4, 5].forEach(length => {
+  [1, 2, 3, 4, 5].forEach((length) => {
     it(`renders the length of '${length}' variation`, () => {
       const iconButtonBar = shallow(<IconButtonBar actions={actions} />);
       iconButtonBar.setProps({ length });

@@ -14,13 +14,11 @@ import { namespace as summaryCardSelectNamespace } from '../SummaryCardSelect/Su
 const getSummaryCard = (summaryCards, selectedId) =>
   summaryCards.filter(({ id }) => id === selectedId);
 
-const resetSelectedSummaryCards = state => state([]);
+const resetSelectedSummaryCards = (state) => state([]);
 
 function SummaryCardContainer({ render, summaryCards, ...other }) {
-  const [
-    selectedSummaryCards,
-    setSelectedSummaryCards,
-  ] = resetSelectedSummaryCards(useState);
+  const [selectedSummaryCards, setSelectedSummaryCards] =
+    resetSelectedSummaryCards(useState);
 
   const { length: totalSelected } = selectedSummaryCards;
 
@@ -64,8 +62,7 @@ function SummaryCardContainer({ render, summaryCards, ...other }) {
   return (
     <div
       className={appendComponentNamespace(summaryCardNamespace, 'container')}
-      {...other}
-    >
+      {...other}>
       {render(renderProps)}
     </div>
   );

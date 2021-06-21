@@ -27,7 +27,7 @@ export default {
   },
 };
 
-export const Default = args => (
+export const Default = (args) => (
   <TypeLayout {...args}>
     <TypeLayoutBody>
       <TypeLayoutRow>

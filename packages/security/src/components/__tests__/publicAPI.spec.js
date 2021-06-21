@@ -92,7 +92,7 @@ beforeEach(() => {
     // how we used it in the primitive prop types
     for (const type of complex) {
       // eslint-disable-next-line func-names
-      PropTypes[type] = function(...args) {
+      PropTypes[type] = function (...args) {
         const value = {
           type,
           args,
@@ -127,7 +127,7 @@ describe('PublicAPI', () => {
     function mapComponentToAPI(Component) {
       const api = {};
 
-      Object.keys(Component).forEach(key => {
+      Object.keys(Component).forEach((key) => {
         // There are a couple of properties on components that we don't believe
         // are part of our API, such `_` prefixed variables, or capture details
         // that are internal to a library-specific piece of functionality. For
@@ -169,7 +169,7 @@ describe('PublicAPI', () => {
 
     Object.keys(Components)
       .sort()
-      .forEach(name => {
+      .forEach((name) => {
         const Component = Components[name];
         PublicAPI.set(name, mapComponentToAPI(Component));
       });

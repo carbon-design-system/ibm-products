@@ -55,7 +55,7 @@ describe('Decorator', () => {
         type="IP"
         value="10.0.0.0"
         score={5}
-        scoreDescription={score => `Test score ${score}`}
+        scoreDescription={(score) => `Test score ${score}`}
       />
     );
     // Expect svg's `title` text, which is in the DOM but not necessarily visible:
@@ -145,7 +145,7 @@ describe('Decorator', () => {
   });
 });
 
-Object.keys(icons).forEach(icon => {
+Object.keys(icons).forEach((icon) => {
   // Capitalize first character of icon name
   // to correctly call component name (like `Decorator.Low`, etc.)
   const formattedName = icon.charAt(0).toUpperCase() + icon.slice(1);

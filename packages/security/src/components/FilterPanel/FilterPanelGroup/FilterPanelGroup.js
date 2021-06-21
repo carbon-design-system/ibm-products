@@ -75,7 +75,7 @@ FilterPanelGroup.propTypes = {
 FilterPanelGroup.defaultProps = {
   title: undefined,
   count: undefined,
-  countLabel: count => `${count} items`,
+  countLabel: (count) => `${count} items`,
   className: undefined,
   titleClassName: undefined,
   children: undefined,

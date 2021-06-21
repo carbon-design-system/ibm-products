@@ -24,10 +24,7 @@ describe('Toolbar', () => {
   });
 
   const selectIconButton = () =>
-    toolbar
-      .find(IconButton)
-      .first()
-      .simulate('click');
+    toolbar.find(IconButton).first().simulate('click');
 
   describe('Rendering', () => {
     it('renders correctly', () => {

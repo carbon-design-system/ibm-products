@@ -15,7 +15,7 @@ const namespace = 'button-cluster';
  */
 const ButtonClusterModule = ({ children, ...other }) => (
   <LayoutModule namespace={namespace} {...other}>
-    {Children.map(children, child => (
+    {Children.map(children, (child) => (
       <LayoutModule namespace={`${namespace}__button`}>{child}</LayoutModule>
     ))}
   </LayoutModule>

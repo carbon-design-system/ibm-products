@@ -175,8 +175,7 @@ describe('Card2', () => {
         header={{
           title: 'test title',
         }}
-        link="#"
-      >
+        link="#">
         <span>test content</span>
       </Card>
     );

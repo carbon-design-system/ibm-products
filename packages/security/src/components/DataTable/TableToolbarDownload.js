@@ -21,7 +21,7 @@ const options = {
 };
 
 const TableToolbarDownload = ({ headers, rows, title, filename, label }) => {
-  const csvRows = rows.map(row => {
+  const csvRows = rows.map((row) => {
     const newRow = {};
     headers.forEach(({ key }) => {
       newRow[key] = row[key] ? row[key] : '';
@@ -45,8 +45,9 @@ const TableToolbarDownload = ({ headers, rows, title, filename, label }) => {
       renderIcon={Download16}
       label={label}
       onClick={() => {
-        if (rows.length > 0 && headers.length > 0)
+        if (rows.length > 0 && headers.length > 0) {
           csvExporter.generateCsv(csvRows);
+        }
       }}
     />
   );
@@ -54,7 +55,7 @@ const TableToolbarDownload = ({ headers, rows, title, filename, label }) => {
 
 TableToolbarDownload.propTypes = {
   /**
-   * @type {Object.<Object, *>}
+   * @type {object.<object, *>}
    * The `rows` prop is where you provide us with a list of all the rows that
    * you want to render in the table. The only hard requirement is that this
    * is an array of objects, and that each object has a unique `id` field
@@ -67,7 +68,7 @@ TableToolbarDownload.propTypes = {
   ).isRequired,
 
   /**
-   * @type {Object.<Object, *>}
+   * @type {object.<object, *>}
    * The `headers` prop represents the order in which the headers should
    * appear in the table. We expect an array of objects to be passed in, where
    * `key` is the name of the key in a row object, and `header` is the name of

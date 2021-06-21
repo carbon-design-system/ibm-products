@@ -1,3 +1,10 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
@@ -6,33 +13,47 @@
 @import 'carbon-components/scss/components/inline-loading/inline-loading';
 @import 'carbon-components/scss/components/toggle/toggle';
 
-.#{$pkg-prefix}--apikey-modal .bx--inline-loading {
-  min-height: 3rem; // increasing the height from 2 to 3 resolves an issue where the scroll bar bounces
+@mixin apikey-modal {
+  $block-class: #{$pkg-prefix}--apikey-modal;
+
+  .#{$block-class} .#{$carbon-prefix}--modal-close {
+    display: none;
+  }
+
+  .#{$block-class} .#{$carbon-prefix}--inline-loading {
+    min-height: 3rem; // increasing the height from 2 to 3 resolves an issue where the scroll bar bounces
+  }
+
+  .#{$block-class} .#{$carbon-prefix}--modal-content {
+    padding-right: $spacing-05;
+  }
+
+  .#{$block-class}__body {
+    padding-right: calc(20% - #{$spacing-05});
+    margin-bottom: $spacing-05;
+  }
+
+  .#{$block-class}__messaging {
+    display: flex;
+    padding-right: calc(20% - #{$spacing-05});
+    margin-top: $spacing-03;
+  }
+
+  .#{$block-class}__messaging-text {
+    flex: 1;
+    margin-left: $spacing-03;
+    @include carbon--type-style('label-01');
+  }
+
+  .#{$block-class}__messaging-text > * {
+    font: inherit;
+  }
+
+  .#{$block-class}__error-icon svg {
+    fill: $danger-01;
+  }
 }
 
-.#{$pkg-prefix}--apikey-modal .bx--modal-content {
-  padding-right: $spacing-05;
-}
-
-.#{$pkg-prefix}--apikey-modal .bx--text-input-wrapper {
-  margin-bottom: $spacing-03;
-}
-
-.#{$pkg-prefix}--apikey-modal-body {
-  padding-right: 20%;
-  margin-bottom: $spacing-05;
-}
-
-.#{$pkg-prefix}--apikey-modal-messaging {
-  display: flex;
-}
-
-.#{$pkg-prefix}--apikey-modal-messaging-text {
-  flex: 1;
-  margin-left: $spacing-03;
-  @include carbon--type-style('label-01');
-}
-
-.#{$pkg-prefix}--apikey-modal-messaging-text > * {
-  font: inherit;
+@include exports('apikey-modal') {
+  @include apikey-modal;
 }

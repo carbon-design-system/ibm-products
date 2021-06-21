@@ -27,8 +27,7 @@ storiesOf(carbon('ProgressIndicator'), module)
     () => (
       <ProgressIndicator
         vertical={boolean('Vertical', false)}
-        currentIndex={number('Current progress (currentIndex)', 1)}
-      >
+        currentIndex={number('Current progress (currentIndex)', 1)}>
         <ProgressStep
           label={text('Label', 'First step')}
           description="Step 1: Getting started with Carbon Design System"
@@ -43,8 +42,7 @@ storiesOf(carbon('ProgressIndicator'), module)
               showIcon={false}
               triggerClassName={`${prefix}--progress-label`}
               triggerText="Second step with tooltip"
-              tooltipId="tooltipId-0"
-            >
+              tooltipId="tooltipId-0">
               <p>Overflow tooltip content.</p>
             </Tooltip>
           )}
@@ -58,8 +56,7 @@ storiesOf(carbon('ProgressIndicator'), module)
               showIcon={false}
               triggerClassName={`${prefix}--progress-label`}
               triggerText="Third step with tooltip"
-              tooltipId="tooltipId-1"
-            >
+              tooltipId="tooltipId-1">
               <p>
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi
                 consequuntur hic ratione aliquid cupiditate, nesciunt saepe iste
@@ -97,8 +94,7 @@ storiesOf(carbon('ProgressIndicator'), module)
     () => (
       <ProgressIndicator
         currentIndex={number('Current progress (currentIndex)', 1)}
-        onChange={action('onChange')}
-      >
+        onChange={action('onChange')}>
         <ProgressStep
           label="Click me"
           description="Step 1: Register a onChange event"
@@ -116,8 +112,7 @@ storiesOf(carbon('ProgressIndicator'), module)
               showIcon={false}
               triggerClassName={`${prefix}--progress-label`}
               triggerText="Tooltip and really long label"
-              tooltipId="tooltipId-1"
-            >
+              tooltipId="tooltipId-1">
               <p>
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi
                 consequuntur hic ratione aliquid cupiditate, nesciunt saepe iste

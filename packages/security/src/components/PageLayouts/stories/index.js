@@ -22,7 +22,7 @@ export default {
     ...disableCentered(),
   },
   decorators: [
-    story => (
+    (story) => (
       <>
         <div style={{ height: layout04 }}>
           <CarbonHeader aria-label="IBM Security">
@@ -36,8 +36,7 @@ export default {
             <NotificationActionButton
               href="https://github.com/carbon-design-system/carbon/issues/7717"
               rel="noopener noreferrer"
-              target="_blank"
-            >
+              target="_blank">
               More info
             </NotificationActionButton>
           }
@@ -54,9 +53,12 @@ export default {
 };
 
 // TODO: Remove workaround for https://github.ibm.com/security/design-core-experience/issues/241
-export const withContainer = WrappedComponent => ({ className, ...other }) => (
-  <WrappedComponent
-    className={classnames('container--narrow', className)}
-    {...other}
-  />
-);
+export const withContainer =
+  (WrappedComponent) =>
+  ({ className, ...other }) =>
+    (
+      <WrappedComponent
+        className={classnames('container--narrow', className)}
+        {...other}
+      />
+    );

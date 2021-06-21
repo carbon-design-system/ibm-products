@@ -21,4 +21,4 @@ export default {
   },
 };
 
-export const Default = args => <TrendingCard {...args} />;
+export const Default = (args) => <TrendingCard {...args} />;

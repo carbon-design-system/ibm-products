@@ -39,8 +39,7 @@ describe('ExternalLink', () => {
     const { getByText } = render(
       <ExternalLink
         href="https://www.ibm.com/security"
-        className="custom-class"
-      >
+        className="custom-class">
         test link
       </ExternalLink>
     );

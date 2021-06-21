@@ -135,7 +135,7 @@ const renderMain = ({ isLoading }) => (
             text: 'Option 2',
           },
         ]}
-        itemToString={item => (item ? item.text : '')}
+        itemToString={(item) => (item ? item.text : '')}
         disabled={isLoading}
       />
     </FormGroup>

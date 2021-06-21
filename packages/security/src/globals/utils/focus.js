@@ -10,7 +10,7 @@ export const focusableElements =
 
 export const keyableElements = 'li:not([disabled])';
 
-export const focusFirstElement = element => {
+export const focusFirstElement = (element) => {
   const focusable = element.querySelector(focusableElements);
   if (focusable) {
     focusable.focus();
@@ -41,7 +41,7 @@ export const trapTabFocus = (element, event) => {
  * @param {number} [timeoutDelay=10] Millisecond delay for the blur effect to take place. This
  * should not be less than 10 to give the browser time to register the subsequent focus event first.
  *
- * @returns {{createFocusHandler: function, createBlurHandler: function }} Utility functions to
+ * @returns {{createFocusHandler: Function, createBlurHandler: Function}} Utility functions to
  * create the focus and blur handlers that apply the necessary effects or state changes.
  */
 export const useComponentFocus = (timeoutDelay = 10) => {
@@ -51,8 +51,8 @@ export const useComponentFocus = (timeoutDelay = 10) => {
   React.useEffect(() => () => clearTimeout(blurTimer), []);
 
   // Clears out the current timeout and sets the new one.
-  const setNewBlurTimer = newTimeout => {
-    setBlurTimer(currentTimeout => {
+  const setNewBlurTimer = (newTimeout) => {
+    setBlurTimer((currentTimeout) => {
       clearTimeout(currentTimeout);
       return newTimeout;
     });
@@ -60,7 +60,7 @@ export const useComponentFocus = (timeoutDelay = 10) => {
 
   // Clear out any existing timer because this focus handler call indicates that the keyboard focus
   // did not leave the component invoking this hook. Then apply the provided focus side effect.
-  const createFocusHandler = callback => event => {
+  const createFocusHandler = (callback) => (event) => {
     setNewBlurTimer(undefined);
     callback(event);
   };
@@ -68,7 +68,7 @@ export const useComponentFocus = (timeoutDelay = 10) => {
   // Set a short delay to allow the browser to detect the subsequent focus event which should
   // determine if the keyboard focus has completely left the component invoking this hook. If the
   // timeout is allowed to execute, the provided side effect is applied.
-  const createBlurHandler = callback => event => {
+  const createBlurHandler = (callback) => (event) => {
     const newTimeout = setTimeout(() => callback(event), timeoutDelay);
     setNewBlurTimer(newTimeout);
   };

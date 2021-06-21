@@ -13,7 +13,7 @@ import deprecatedProp from '../../globals/prop-types';
 
 export const namespace = getComponentNamespace('filter-panel');
 
-const FilterPanel = props => {
+const FilterPanel = (props) => {
   const { title, children, className, filterData, ...other } = props;
 
   if (filterData) {

@@ -36,31 +36,27 @@ storiesOf(patterns('ComboButton'), module).add(
           href="#"
           onClick={action(`onClick (Item 1)`)}
           renderIcon={ArrowRight20}
-          target="_blank"
-        >
+          target="_blank">
           Item 1 -- becomes primary button and text will be truncated
         </ComboButtonItem>
         <ComboButtonItem
           href="#"
           onClick={action(`onClick (Item 2)`)}
-          renderIcon={Filter20}
-        >
+          renderIcon={Filter20}>
           Item 2
         </ComboButtonItem>
         <ComboButtonItem
           href="#"
           renderIcon={Filter20}
           onClick={action(`onClick (Item 3)`)}
-          data-overflow-menu-primary-focus
-        >
+          data-overflow-menu-primary-focus>
           Item 3 -- will be selected when menu opens
         </ComboButtonItem>
         <ComboButtonItem
           href="#"
           renderIcon={Filter20}
           onClick={action(`onClick (Item 3)`)}
-          target="_blank"
-        >
+          target="_blank">
           Item 4 -- will open link in new tab when clicked
         </ComboButtonItem>
       </ComboButton>

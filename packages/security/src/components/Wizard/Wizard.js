@@ -49,7 +49,7 @@ class Wizard extends Component {
     return nextState;
   }
 
-  setNextState = async cb => {
+  setNextState = async (cb) => {
     this.setState({ loading: true });
     try {
       const changes = await this.currentStep.next(this.state.componentState);
@@ -114,7 +114,7 @@ class Wizard extends Component {
       return Children.map(
         this.props.children,
         WizardStep.getPropsFromElement
-      ).filter(props => props != null);
+      ).filter((props) => props != null);
     } else if (Array.isArray(this.props.steps)) {
       return this.props.steps;
     }
@@ -162,7 +162,7 @@ class Wizard extends Component {
   /**
    * Keeps the state in sync with the current props.
    * @param {Props} nextProps The current props passed to the component.
-   * @returns {Object.<Object, *>} The updated state for the component.
+   * @returns {object.<object, *>} The updated state for the component.
    * @static
    */
 
@@ -179,7 +179,9 @@ class Wizard extends Component {
 
   closeAction = () => {
     this.props.onClose(this.state.componentState);
-    if (!this.state.controlledOpen) this.setState({ isOpen: false });
+    if (!this.state.controlledOpen) {
+      this.setState({ isOpen: false });
+    }
   };
 
   deleteAction = async () => {
@@ -196,7 +198,7 @@ class Wizard extends Component {
     }
   };
 
-  handleItemSelect = event => {
+  handleItemSelect = (event) => {
     const { id } = event.target;
 
     this.setState(({ componentState, steps }) => ({
@@ -218,8 +220,7 @@ class Wizard extends Component {
             current={String(currentStep)}
             disabled={!valid}
             handleItemSelect={this.handleItemSelect}
-            link={false}
-          >
+            link={false}>
             {title}
           </NavItem>
         ))}
@@ -360,7 +361,7 @@ Wizard.propTypes = {
   /** @type {string} The subtitle of the Wizard. */
   subTitle: PropTypes.string,
 
-  /** @type {Array<Object>} An object list of step props. __(deprecated)__ */
+  /** @type {Array<object>} An object list of step props. __(deprecated)__ */
   steps: PropTypes.arrayOf(PropTypes.shape(WizardStep.propTypes)),
 
   /** @type {boolean} The open state.
@@ -372,7 +373,7 @@ Wizard.propTypes = {
   /** @type {function(wizardState: Object): any} This is called whenever the wizard closes (or wants to close) */
   onClose: PropTypes.func,
 
-  /** @type {Object} The initial state object of the wizard
+  /** @type {object} The initial state object of the wizard
    * (useful to prefill some values in your forms). */
   initState: PropTypes.instanceOf(Object),
 
@@ -389,7 +390,7 @@ Wizard.propTypes = {
   /** @type {boolean} Defines whether the wizard is sequential or not. */
   isSequential: PropTypes.bool,
 
-  /** @type {Object} The labels to be used with the wizard
+  /** @type {object} The labels to be used with the wizard
    * (useful to override default labels)
    */
   labels: defaultLabels.propType,

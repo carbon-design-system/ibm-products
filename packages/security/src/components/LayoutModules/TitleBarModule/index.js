@@ -23,8 +23,7 @@ const TitleBarModule = ({ children, element, subsection, title, ...other }) => (
       [`${layoutModuleNamespace}--${namespace}--subsection`]: subsection,
     })}
     namespace={namespace}
-    {...other}
-  >
+    {...other}>
     {createElement(
       element,
       {

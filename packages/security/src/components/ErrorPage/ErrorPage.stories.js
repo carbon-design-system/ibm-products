@@ -12,9 +12,9 @@ import { disableCenteredStories, patterns } from '../../../.storybook';
 import { ErrorPage } from '../..';
 
 const statusCodes = {
-  '403': 403,
-  '404': 404,
-  '500': 500,
+  403: 403,
+  404: 404,
+  500: 500,
   'Custom error': 'Custom',
 };
 

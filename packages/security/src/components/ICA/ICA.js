@@ -29,7 +29,7 @@ export const Locales = Object.keys(numeral.locales);
  * @param {number} value The value to evaluate.
  * @returns {string} Format string for numeral.
  */
-const getFormat = value => (Math.round(value) > 999 ? '0.0a' : '0a');
+const getFormat = (value) => (Math.round(value) > 999 ? '0.0a' : '0a');
 
 /**
  * Ensure that the value is formatted correctly based on whether it should be truncated or not.
@@ -52,13 +52,14 @@ const formatValue = (value, truncate) => {
  * @returns {string} Formatted string.
  */
 const truncateValue = (percentage, value, truncate) => {
-  if (percentage)
+  if (percentage) {
     return (
       <div className={`${namespace}__percentage`}>
         {value}
         <span className={`${namespace}__percentage-mark`}>%</span>
       </div>
     );
+  }
 
   return value === null ? '–' : formatValue(value, truncate);
 };
@@ -76,7 +77,7 @@ const ICA = ({
   value,
   ...other
 }) => {
-  const isSize = sizeValue => size === sizeValue;
+  const isSize = (sizeValue) => size === sizeValue;
   const isLarge = isSize('lg');
   const isXLarge = isSize('xl');
 

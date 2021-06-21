@@ -54,7 +54,7 @@ const props = () => ({
   ),
 });
 
-const itemToElement = item => {
+const itemToElement = (item) => {
   const itemAsArray = item.text.split(' ');
   return (
     <div>
@@ -72,7 +72,7 @@ storiesOf(carbon('Dropdown'), module)
         <Dropdown
           {...props()}
           items={items}
-          itemToString={item => (item ? item.text : '')}
+          itemToString={(item) => (item ? item.text : '')}
           onChange={action('onChange')}
         />
       </div>
@@ -107,7 +107,7 @@ storiesOf(carbon('Dropdown'), module)
         <Dropdown
           {...props()}
           items={items}
-          itemToString={item => (item ? item.text : '')}
+          itemToString={(item) => (item ? item.text : '')}
           itemToElement={itemToElement}
           onChange={action('onChange')}
         />

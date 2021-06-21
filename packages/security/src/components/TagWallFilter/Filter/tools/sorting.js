@@ -9,7 +9,7 @@
  *
  * @param {string} itemA
  * @param {string} itemB
- * @param {Object} options
+ * @param {object} options
  * @param {string} options.locale
  * @returns {number}
  */

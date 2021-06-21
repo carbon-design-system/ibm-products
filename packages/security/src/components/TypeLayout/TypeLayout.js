@@ -41,8 +41,7 @@ const TypeLayout = ({
       },
       className
     )}
-    {...other}
-  >
+    {...other}>
     {children}
   </StructuredListWrapper>
 );
@@ -50,8 +49,7 @@ const TypeLayout = ({
 const TypeLayoutBody = ({ children, className, ...other }) => (
   <StructuredListBody
     className={classnames(`${namespace}__body`, className)}
-    {...other}
-  >
+    {...other}>
     {children}
   </StructuredListBody>
 );
@@ -60,8 +58,7 @@ const TypeLayoutCell = ({ children, className, ...other }) => (
   <StructuredListCell
     className={classnames(`${namespace}__cell`, className)}
     tabIndex="-1"
-    {...other}
-  >
+    {...other}>
     {children}
   </StructuredListCell>
 );
@@ -70,8 +67,7 @@ const TypeLayoutRow = ({ children, className, ...other }) => (
   <StructuredListRow
     className={classnames(`${namespace}__row`, className)}
     role="row"
-    {...other}
-  >
+    {...other}>
     {children}
   </StructuredListRow>
 );

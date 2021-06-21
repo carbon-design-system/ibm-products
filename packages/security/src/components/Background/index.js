@@ -8,7 +8,7 @@ import React from 'react';
 
 import { getComponentNamespace } from '../../globals/namespace';
 
-export default WrappedComponent => {
+export default (WrappedComponent) => {
   const WithBackground = ({ className, ...other }) => (
     <WrappedComponent
       className={classnames(getComponentNamespace('background'), className)}
@@ -26,9 +26,9 @@ export default WrappedComponent => {
   WithBackground.propTypes = propTypes;
   WithBackground.defaultProps = defaultProps;
 
-  WithBackground.displayName = `withBackground(${wrappedComponentDisplayName ||
-    name ||
-    'Component'})`;
+  WithBackground.displayName = `withBackground(${
+    wrappedComponentDisplayName || name || 'Component'
+  })`;
 
   return WithBackground;
 };

@@ -53,8 +53,7 @@ const Shell = ({
           <SkipToContent
             id={`${namespace}__skip-to-content__link`}
             className={`${namespace}__skip-to-content__link`}
-            href={skipToContent.href}
-          >
+            href={skipToContent.href}>
             {skipToContent.label}
           </SkipToContent>
         </div>
@@ -69,8 +68,7 @@ const Shell = ({
               backgroundImage: `url(${dataUri(
                 '../../images/aurora-banner@2x.png'
               )})`,
-            }}
-          >
+            }}>
             <Icon
               className={`${namespace}__banner__icon`}
               renderIcon={ArrowLeft16}
@@ -87,8 +85,7 @@ const Shell = ({
         className={classnames(namespace, {
           [activeClass]: profile,
           [returnClass]: returnToBanner,
-        })}
-      >
+        })}>
         {profile && (
           <Toolbar
             className={classnames({
@@ -129,23 +126,23 @@ Shell.defaultProps = {
 };
 
 Shell.propTypes = {
-  /** @type {Object<Object.Object>} An object list of header properties. */
+  /** @type {object<object.Object>} An object list of header properties. */
   header: PropTypes.shape(headerPropTypes),
 
-  /** @type {Object<Object.Object>} An object list of profile properties. */
+  /** @type {object<object.Object>} An object list of profile properties. */
   profile: headerPropTypes.profile,
 
   /** @type {Array<{id: string, tooltip: string, render: Function: React.Element}>} An object list to render custom addon icons. */
   renderAddons: Toolbar.propTypes.renderAddons,
 
-  /** @type {Object<Object.Object>} An object list of banner properties. */
+  /** @type {object<object.Object>} An object list of banner properties. */
   returnToBanner: PropTypes.shape({
     application: PropTypes.string.isRequired,
     view: PropTypes.string,
     href: PropTypes.string.isRequired,
   }),
 
-  /** @type {Object.<string, string>} Object of 'skip-to-content' link information. */
+  /** @type {object.<string, string>} Object of 'skip-to-content' link information. */
   skipToContent: PropTypes.shape({
     /** @type {string} Label text for 'skip-to-content'. */
     label: PropTypes.string,
@@ -154,7 +151,7 @@ Shell.propTypes = {
     href: PropTypes.string,
   }),
 
-  /** @type {Object<Object.Object>} An object list of toolbar properties. */
+  /** @type {object<object.Object>} An object list of toolbar properties. */
   toolbar: PropTypes.shape(Toolbar.propTypes),
 };
 

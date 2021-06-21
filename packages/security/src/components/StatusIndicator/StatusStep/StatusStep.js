@@ -113,10 +113,11 @@ class StatusStep extends Component {
   };
 
   static getDerivedStateFromProps(nextProps, prevProps) {
-    if (nextProps.status && prevProps.status !== nextProps.status)
+    if (nextProps.status && prevProps.status !== nextProps.status) {
       return {
         status: nextProps.status,
       };
+    }
     return null;
   }
 

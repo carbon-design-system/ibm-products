@@ -92,8 +92,7 @@ describe(TruncatedList.name, () => {
     const { getByText, getAllByText } = render(
       <TruncatedList
         truncateThreshold={15}
-        getExpandButtonLabel={getExpandButtonLabel}
-      >
+        getExpandButtonLabel={getExpandButtonLabel}>
         {createChildrenArray(20)}
       </TruncatedList>
     );
@@ -105,8 +104,7 @@ describe(TruncatedList.name, () => {
     const { queryByText, getAllByText } = render(
       <TruncatedList
         truncateThreshold={30}
-        getExpandButtonLabel={getExpandButtonLabel}
-      >
+        getExpandButtonLabel={getExpandButtonLabel}>
         {createChildrenArray(30)}
       </TruncatedList>
     );
@@ -119,8 +117,7 @@ describe(TruncatedList.name, () => {
       <TruncatedList
         truncateThreshold={5}
         collapsedItemLimit={2}
-        getExpandButtonLabel={getExpandButtonLabel}
-      >
+        getExpandButtonLabel={getExpandButtonLabel}>
         {createChildrenArray(20)}
       </TruncatedList>
     );
@@ -133,8 +130,7 @@ describe(TruncatedList.name, () => {
       <TruncatedList
         truncateThreshold={2}
         collapsedItemLimit={10}
-        getExpandButtonLabel={getExpandButtonLabel}
-      >
+        getExpandButtonLabel={getExpandButtonLabel}>
         {createChildrenArray(4)}
       </TruncatedList>
     );

@@ -33,8 +33,7 @@ const InteractiveTag = ({
     filter={removable}
     onClose={onRemove}
     title={removeBtnLabel}
-    {...other}
-  >
+    {...other}>
     {children}
   </Tag>
 );
@@ -56,7 +55,7 @@ InteractiveTag.propTypes = {
   /** @type {boolean} Determines if the tag is selected. */
   isSelected: bool,
 
-  /** @type {function} Callback function to remove the tag. */
+  /** @type {Function} Callback function to remove the tag. */
   onRemove: func,
 
   /** @type {boolean} Set whether the tag is removable or not. */

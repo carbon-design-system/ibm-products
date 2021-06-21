@@ -12,7 +12,7 @@ import StatusIcon, { namespace, STATUS, SIZE } from '../StatusIcon';
 import { carbonPrefix } from '../../../globals/namespace';
 
 describe('StatusIcon', () => {
-  STATUS.forEach(status =>
+  STATUS.forEach((status) =>
     test(`should have no Axe or DAP violations when \`status\` is  '${status}'`, async () => {
       const { container } = render(
         <StatusIcon status={status} message="test message" />
@@ -34,7 +34,7 @@ describe('StatusIcon', () => {
     );
   });
 
-  SIZE.forEach(size =>
+  SIZE.forEach((size) =>
     test(`should apply correct class when \`size\` is  '${size}'`, () => {
       render(<StatusIcon size={size} />);
       expect(document.querySelector(`.${namespace}`)).toHaveClass(
@@ -43,7 +43,7 @@ describe('StatusIcon', () => {
     })
   );
 
-  STATUS.forEach(status => {
+  STATUS.forEach((status) => {
     if (status === 'complete') {
       test('should render with correct class and an icon when `status` is `complete`', () => {
         render(<StatusIcon status={status} />);

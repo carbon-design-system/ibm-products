@@ -41,12 +41,12 @@ const FilterCategory = ({
       </h2>
       <Accordion>
         {category.subcategories
-          .map(subcategoryId => filterData.subcategories[subcategoryId])
+          .map((subcategoryId) => filterData.subcategories[subcategoryId])
           .filter(
-            subcategory =>
+            (subcategory) =>
               subcategory.filters.length > 0 && subcategory.count > 0
           )
-          .map(subcategory => (
+          .map((subcategory) => (
             <FilterSubcategory
               key={subcategory.id}
               subcategory={subcategory}

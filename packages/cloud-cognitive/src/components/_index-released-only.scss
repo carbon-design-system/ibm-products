@@ -5,9 +5,11 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-// Package all scss files here for those that want them all bundled up.
+// Package scss files here used by released components, or used by components
+// which are themselves used by released components.
 
 @import './AboutModal/index';
+@import './ActionSet/index';
 @import './CreateModal/index';
 @import './EmptyStates/index';
 @import './ExportModal/index';

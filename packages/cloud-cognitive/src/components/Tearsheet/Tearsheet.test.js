@@ -280,8 +280,9 @@ describe(componentName, () => {
 
   it('responds to influencerPosition', () => {
     render(<Tearsheet {...{ influencer }} influencerPosition="right" />);
-    const influencerElt = screen.getByText(influencerFragment).parentElement;
-    expect(influencerElt).toHaveClass(`${blockClass}__influencer--right`);
+    const influencerElt =
+      screen.getByText(influencerFragment).parentElement.parentElement;
+    expect(influencerElt).toHaveClass(`${blockClass}__main`);
   });
 
   it('responds to influencerWidth', () => {

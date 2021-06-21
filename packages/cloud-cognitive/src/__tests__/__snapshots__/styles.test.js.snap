@@ -111,6 +111,131 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: 600;
 }
 
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-end-p1 {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-end-p2 {
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+/* Stroke animations */
+@keyframes init-stroke {
+  0% {
+    stroke-dashoffset: 240;
+  }
+  100% {
+    stroke-dashoffset: 16;
+  }
+}
+
+@keyframes stroke-end {
+  0% {
+    stroke-dashoffset: 16;
+  }
+  100% {
+    stroke-dashoffset: 240;
+  }
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.exp--action-set {
+  align-items: stretch;
+  justify-content: flex-end;
+}
+
+.exp--action-set .exp--action-set__action-button {
+  font-size: var(--cds-body-short-01-font-size, 0.875rem);
+  font-weight: var(--cds-body-short-01-font-weight, 400);
+  line-height: var(--cds-body-short-01-line-height, 1.29);
+  letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
+  height: var(--cds-spacing-10, 4rem);
+  align-items: center;
+  padding-top: var(--cds-spacing-05, 1rem);
+  padding-bottom: var(--cds-spacing-07, 2rem);
+  margin: 0;
+}
+
+.exp--action-set.bx--btn-set
+.exp--action-set__action-button.bx--btn.bx--btn--expressive {
+  max-width: none;
+}
+
+.exp--action-set:not(.exp--action-set--stacking)
+.exp--action-set__action-button--ghost {
+  padding-left: var(--cds-spacing-07, 2rem);
+}
+
+.exp--action-set.exp--action-set--row-single.exp--action-set--md
+.exp--action-set__action-button,
+.exp--action-set.exp--action-set--row-single
+.exp--action-set__action-button--ghost {
+  flex: 0 0 100%;
+}
+
+.exp--action-set.exp--action-set--row-double
+.exp--action-set__action-button--ghost {
+  flex: 1 0 75%;
+}
+
+.exp--action-set.exp--action-set--row-single.exp--action-set--lg
+.exp--action-set__action-button:not(.exp--action-set__action-button--ghost),
+.exp--action-set.exp--action-set--row-double.exp--action-set--md
+.exp--action-set__action-button,
+.exp--action-set.exp--action-set--row-double.exp--action-set--lg
+.exp--action-set__action-button,
+.exp--action-set.exp--action-set--row-triple
+.exp--action-set__action-button--ghost {
+  flex: 0 0 50%;
+}
+
+.exp--action-set.exp--action-set--row-triple
+.exp--action-set__action-button--ghost {
+  flex: 1 0 50%;
+}
+
+.exp--action-set.bx--btn-set.exp--action-set--row-triple.exp--action-set--lg
+.exp--action-set__action-button:not(.exp--action-set__action-button--ghost),
+.exp--action-set.bx--btn-set.exp--action-set--xlg
+.exp--action-set__action-button:not(.exp--action-set__action-button--ghost),
+.exp--action-set.bx--btn-set.exp--action-set--max
+.exp--action-set__action-button:not(.exp--action-set__action-button--ghost),
+.exp--action-set.bx--btn-set.exp--action-set--row-quadruple
+.exp--action-set__action-button:not(.exp--action-set__action-button--ghost) {
+  max-width: 14.5rem;
+  flex: 0 0 25%;
+}
+
+.exp--action-set.bx--btn-set.exp--action-set--row-quadruple
+.exp--action-set__action-button--ghost {
+  flex: 1 0 25%;
+}
+
+.exp--action-set .exp--action-set__action-button .bx--inline-loading {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: var(--cds-spacing-07, 2rem);
+}
+
 .exp--create-modal {
   background-color: var(--cds-ui-background, #ffffff);
 }
@@ -1679,6 +1804,7 @@ path:nth-of-type(1),
 
 .exp--tearsheet .exp--tearsheet__body {
   display: flex;
+  flex-direction: row;
   flex-grow: 1;
   padding: 0;
   margin: 0;
@@ -1690,18 +1816,12 @@ path:nth-of-type(1),
 }
 
 .exp--tearsheet .exp--tearsheet__influencer {
-  width: 256px;
-  min-width: 256px;
+  flex: 0 0 256px;
   border-right: 1px solid var(--cds-ui-03, #e0e0e0);
 }
 
-.exp--tearsheet .exp--tearsheet__influencer--right {
-  order: 1;
-}
-
 .exp--tearsheet .exp--tearsheet__influencer--wide {
-  width: 320px;
-  min-width: 320px;
+  flex-basis: 320px;
 }
 
 .exp--tearsheet .exp--tearsheet__right {
@@ -1711,35 +1831,46 @@ path:nth-of-type(1),
 }
 
 .exp--tearsheet .exp--tearsheet__main {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.exp--tearsheet .exp--tearsheet__main .exp--tearsheet__influencer {
+  border-right: none;
+  border-left: 1px solid var(--cds-ui-03, #e0e0e0);
+}
+
+.exp--tearsheet .exp--tearsheet__content {
   overflow: auto;
   flex-grow: 1;
 }
 
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main {
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content {
   background: var(--cds-ui-background, #ffffff);
 }
 
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--pagination,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--pagination__control-buttons,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--text-input,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--text-area,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--search-input,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--select-input,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--dropdown,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--dropdown-list,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--number input[type='number'],
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--date-picker__input {
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--pagination,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--pagination__control-buttons,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--text-input,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--text-area,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--search-input,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--select-input,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--dropdown,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--dropdown-list,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--number input[type='number'],
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--date-picker__input {
   background-color: var(--cds-field-01, #f4f4f4);
 }
 
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--text-input--light,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--text-area--light,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--search--light .bx--search-input,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--select--light .bx--select-input,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--dropdown--light,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--dropdown--light .bx--dropdown-list,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--number--light input[type='number'],
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__main .bx--date-picker--light .bx--date-picker__input {
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--text-input--light,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--text-area--light,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--search--light .bx--search-input,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--select--light .bx--select-input,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--dropdown--light,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--dropdown--light .bx--dropdown-list,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--number--light input[type='number'],
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--date-picker--light .bx--date-picker__input {
   background-color: var(--cds-field-02, #ffffff);
 }
 

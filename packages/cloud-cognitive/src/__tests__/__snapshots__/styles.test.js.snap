@@ -111,6 +111,131 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: 600;
 }
 
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-end-p1 {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-end-p2 {
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+/* Stroke animations */
+@keyframes init-stroke {
+  0% {
+    stroke-dashoffset: 240;
+  }
+  100% {
+    stroke-dashoffset: 16;
+  }
+}
+
+@keyframes stroke-end {
+  0% {
+    stroke-dashoffset: 16;
+  }
+  100% {
+    stroke-dashoffset: 240;
+  }
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.exp--action-set {
+  align-items: stretch;
+  justify-content: flex-end;
+}
+
+.exp--action-set .exp--action-set__action-button {
+  font-size: var(--cds-body-short-01-font-size, 0.875rem);
+  font-weight: var(--cds-body-short-01-font-weight, 400);
+  line-height: var(--cds-body-short-01-line-height, 1.29);
+  letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
+  height: var(--cds-spacing-10, 4rem);
+  align-items: center;
+  padding-top: var(--cds-spacing-05, 1rem);
+  padding-bottom: var(--cds-spacing-07, 2rem);
+  margin: 0;
+}
+
+.exp--action-set.bx--btn-set
+.exp--action-set__action-button.bx--btn.bx--btn--expressive {
+  max-width: none;
+}
+
+.exp--action-set:not(.exp--action-set--stacking)
+.exp--action-set__action-button--ghost {
+  padding-left: var(--cds-spacing-07, 2rem);
+}
+
+.exp--action-set.exp--action-set--row-single.exp--action-set--md
+.exp--action-set__action-button,
+.exp--action-set.exp--action-set--row-single
+.exp--action-set__action-button--ghost {
+  flex: 0 0 100%;
+}
+
+.exp--action-set.exp--action-set--row-double
+.exp--action-set__action-button--ghost {
+  flex: 1 0 75%;
+}
+
+.exp--action-set.exp--action-set--row-single.exp--action-set--lg
+.exp--action-set__action-button:not(.exp--action-set__action-button--ghost),
+.exp--action-set.exp--action-set--row-double.exp--action-set--md
+.exp--action-set__action-button,
+.exp--action-set.exp--action-set--row-double.exp--action-set--lg
+.exp--action-set__action-button,
+.exp--action-set.exp--action-set--row-triple
+.exp--action-set__action-button--ghost {
+  flex: 0 0 50%;
+}
+
+.exp--action-set.exp--action-set--row-triple
+.exp--action-set__action-button--ghost {
+  flex: 1 0 50%;
+}
+
+.exp--action-set.bx--btn-set.exp--action-set--row-triple.exp--action-set--lg
+.exp--action-set__action-button:not(.exp--action-set__action-button--ghost),
+.exp--action-set.bx--btn-set.exp--action-set--xlg
+.exp--action-set__action-button:not(.exp--action-set__action-button--ghost),
+.exp--action-set.bx--btn-set.exp--action-set--max
+.exp--action-set__action-button:not(.exp--action-set__action-button--ghost),
+.exp--action-set.bx--btn-set.exp--action-set--row-quadruple
+.exp--action-set__action-button:not(.exp--action-set__action-button--ghost) {
+  max-width: 14.5rem;
+  flex: 0 0 25%;
+}
+
+.exp--action-set.bx--btn-set.exp--action-set--row-quadruple
+.exp--action-set__action-button--ghost {
+  flex: 1 0 25%;
+}
+
+.exp--action-set .exp--action-set__action-button .bx--inline-loading {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: var(--cds-spacing-07, 2rem);
+}
+
 .exp--create-modal {
   background-color: var(--cds-ui-background, #ffffff);
 }

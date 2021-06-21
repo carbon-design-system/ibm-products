@@ -14,6 +14,7 @@ import {
   allPropTypes,
   deprecateProp,
   deprecatePropUsage,
+  isRequiredIf,
 } from './props-helper';
 
 describe('prepareProps', () => {
@@ -141,5 +142,43 @@ describe('allPropTypes', () => {
     expect(allPropTypes([p, p, p, p]).isRequired(...args1)).toBeNull();
     expect(allPropTypes([p, p, p, p]).isRequired(...args2)).toEqual(e2);
     expect(allPropTypes([f, f, f, f]).isRequired(...args3)).toEqual(e3);
+  });
+});
+
+describe('isRequiredIf', () => {
+  const Component = () => null;
+  Component.propTypes = {
+    a: isRequiredIf(PropTypes.string, ({ ctl }) => ctl === 'a'),
+    b: PropTypes.string.isRequired.if(({ ctl }) => ctl === 'b'),
+    ctl: PropTypes.string,
+  };
+
+  it('does not report required when condition false', () => {
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+    render(<Component ctl="x" />);
+    expect(error).not.toBeCalled();
+    error.mockRestore();
+  });
+
+  it('reports required when condition true', () => {
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+    render(<Component ctl="a" />);
+    expect(error).toBeCalledWith(
+      expect.stringContaining(
+        'Failed prop type: The prop `a` is marked as required'
+      )
+    );
+    error.mockRestore();
+  });
+
+  it('reports required when used as a decorator', () => {
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+    render(<Component ctl="b" />);
+    expect(error).toBeCalledWith(
+      expect.stringContaining(
+        'Failed prop type: The prop `b` is marked as required'
+      )
+    );
+    error.mockRestore();
   });
 });

@@ -92,6 +92,7 @@ export default {
     onClose: { control: { disable: true } },
     navigation: { control: { disable: true } },
     open: { control: { disable: true } },
+    preventCloseOnClickOutside: { table: { disable: true } },
   },
 };
 
@@ -269,6 +270,7 @@ const StackedTemplate = ({ actions, ...args }) => {
 export const tearsheet = Template.bind({});
 tearsheet.storyName = 'Tearsheet';
 tearsheet.args = {
+  closeIconDescription,
   description,
   onClose: action('onClose called'),
   title,
@@ -290,6 +292,7 @@ withNavigation.args = {
 export const withInfluencer = Template.bind({});
 withInfluencer.storyName = 'Tearsheet with influencer';
 withInfluencer.args = {
+  closeIconDescription,
   description,
   influencer,
   influencerPosition: 'left',

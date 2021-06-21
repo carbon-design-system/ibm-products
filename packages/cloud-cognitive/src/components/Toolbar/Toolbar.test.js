@@ -4,123 +4,115 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
-import { Toolbar, ToolbarItem } from '.';
-import { Lightning16, Bee16 } from '@carbon/icons-react';
-import { mockHTMLElement } from '../../global/js/utils/test-helper';
+import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import userEvent from '@testing-library/user-event';
 
-const actions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => ({
-  renderIcon: num % 2 ? Lightning16 : Bee16,
-  iconDescription: `Action ${num.toString().padStart(2, '0')}`,
-  onClick: () => {},
-}));
+import { pkg } from '../../settings';
 
-const ToolbarChildren = (
-  <>
-    <ToolbarItem renderIcon={Lightning16} iconDescription="Action 01" />
-    <ToolbarItem renderIcon={Lightning16} iconDescription="Action 02" />
-    <ToolbarItem renderIcon={Bee16} iconDescription="Action 03" />
-    <ToolbarItem renderIcon={Lightning16} iconDescription="Action 04" />
-    <ToolbarItem renderIcon={Lightning16} iconDescription="Action 05" />
-    <ToolbarItem renderIcon={Lightning16} iconDescription="Action 06" />
-    <ToolbarItem renderIcon={Lightning16} iconDescription="Action 07" />
-    <ToolbarItem renderIcon={Lightning16} iconDescription="Action 08" />
-    <ToolbarItem renderIcon={Lightning16} iconDescription="Action 09" />
-    <ToolbarItem renderIcon={Lightning16} iconDescription="Action 10" />
-  </>
-);
+import uuidv4 from '../../global/js/utils/uuidv4';
 
-// eslint-disable-next-line react/prop-types
-const TestToolbar = ({ width, children = null, ...rest }) => {
-  return (
-    <div style={{ width, height: 40 }}>
-      <Toolbar {...rest}>{children}</Toolbar>
-    </div>
+import { Toolbar } from '.';
+
+const blockClass = `${pkg.prefix}--toolbar`;
+const componentName = Toolbar.displayName;
+
+const borderColor = '#acefed';
+const className = `class-${uuidv4()}`;
+const dataTestId = uuidv4();
+const primaryButtonLabel = `hello, world (${uuidv4()})`;
+const secondaryButtonLabel = `goodbye (${uuidv4()})`;
+
+// render an Toolbar with button labels and any other required props
+const renderComponent = ({ ...rest }) =>
+  render(
+    <Toolbar {...{ primaryButtonLabel, secondaryButtonLabel, ...rest }} />
   );
-};
 
-describe(Toolbar.displayName, () => {
-  const { ResizeObserver } = window;
-  let mockElement;
+describe(componentName, () => {
+  it('renders a component Toolbar', () => {
+    renderComponent();
+    expect(screen.getByRole('main')).toHaveClass(blockClass);
+  });
 
-  beforeEach(() => {
-    mockElement = mockHTMLElement({
-      offsetWidth: {
-        get: function () {
-          return parseInt(this.style.width, 10) || this.parentNode.offsetWidth;
-        },
-      },
-      offsetHeight: {
-        get: function () {
-          return (
-            parseInt(this.style.height, 10) || this.parentNode.offsetHeight
-          );
-        },
-      },
+  it('has no accessibility violations', async () => {
+    const { container } = renderComponent();
+    await expect(container).toBeAccessible(componentName, 'scan_label');
+    await expect(container).toHaveNoAxeViolations();
+  });
+
+  it(`renders the borderColor property`, () => {
+    renderComponent({ borderColor });
+    const style = window.getComputedStyle(screen.getByRole('main'));
+    // We'd prefer to test the actual border color style, but jsdom does not
+    // render css custom properties (https://github.com/jsdom/jsdom/issues/1895)
+    // so testing the property is the best we can do.
+    expect(style.getPropertyValue(`--${pkg.prefix}-border-color`)).toEqual(
+      borderColor
+    );
+  });
+
+  it(`renders the boxedBorder property`, () => {
+    renderComponent({ boxedBorder: true });
+    expect(screen.getByRole('main')).toHaveClass(`${blockClass}--boxed-set`);
+  });
+
+  it('applies className to the containing node', () => {
+    renderComponent({ className });
+    expect(screen.getByRole('main')).toHaveClass(className);
+  });
+
+  it(`renders the disabled property`, () => {
+    renderComponent({ disabled: true });
+    screen
+      .getAllByRole('button')
+      .forEach((button) => expect(button).toHaveProperty('disabled', true));
+  });
+
+  it('notifies a click on each button', () => {
+    const primaryHandler = jest.fn();
+    const secondaryHandler = jest.fn();
+    renderComponent({
+      onPrimaryClick: primaryHandler,
+      onSecondaryClick: secondaryHandler,
     });
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
+    screen.getAllByRole('button').forEach(userEvent.click);
+    expect(primaryHandler).toBeCalledTimes(1);
+    expect(secondaryHandler).toBeCalledTimes(1);
   });
 
-  afterEach(() => {
-    mockElement.mockRestore();
-    jest.restoreAllMocks();
-    window.ResizeObserver = ResizeObserver;
+  it('renders the primaryButtonLabel and secondaryButtonLabel properties', () => {
+    renderComponent();
+    screen.getByText(primaryButtonLabel);
+    screen.getByText(secondaryButtonLabel);
   });
 
-  const { click } = fireEvent;
-
-  it('Works with deprecated children', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-    render(<TestToolbar width={1150}>{ToolbarChildren}</TestToolbar>);
-
-    screen.getByText(/Action 01/);
-    screen.getByText(/Action 10/);
-
-    expect(warn).toBeCalledWith(
-      'The prop `children` of `Toolbar` has been deprecated and will soon be removed. See documentation on the `actions` prop.'
-    );
-
-    warn.mockRestore(); // Remove mock
+  it('renders the primaryKind and secondaryKind properties', () => {
+    renderComponent({ primaryKind: 'danger', secondaryKind: 'tertiary' });
+    expect(
+      screen.getByRole('button', { name: `danger ${primaryButtonLabel}` })
+    ).toHaveClass('bx--btn--danger');
+    expect(
+      screen.getByRole('button', { name: secondaryButtonLabel })
+    ).toHaveClass('bx--btn--tertiary');
   });
 
-  it('Renders an action bar', () => {
-    render(<TestToolbar width={1150} actions={actions} />);
-
-    screen.getByText(/Action 01/);
-    screen.getByText(/Action 10/);
+  it('renders the size property', () => {
+    renderComponent({ size: 'small' });
+    screen
+      .getAllByRole('button')
+      .forEach((button) => expect(button).toHaveClass('bx--btn--sm'));
   });
 
-  it('Renders an action bar with overflow items', () => {
-    const overflowAriaLabel = 'Overflow aria label';
-    // not enough room so should see an overflow.
-    render(
-      <TestToolbar
-        width={200}
-        overflowAriaLabel={overflowAriaLabel}
-        actions={actions}
-      />
-    );
-
-    expect(screen.queryByText(/Action 10/)).toBeNull();
-
-    // Click overflow button and check for last action
-    const ofBtn = screen.getByLabelText(overflowAriaLabel);
-    click(ofBtn);
-    screen.getByText(/Action 10/);
+  it('adds additional properties to the containing node', () => {
+    renderComponent({ 'data-testid': dataTestId });
+    screen.getByTestId(dataTestId);
   });
 
-  it('Renders an action bar with max items set', () => {
-    render(<TestToolbar width={1150} maxVisible={2} actions={actions} />);
-
-    screen.getByText(/Action 01/);
-    screen.getByText(/Action 02/);
-
-    expect(screen.queryByText(/Action 03/)).toBeNull();
+  it('forwards a ref to an appropriate node', () => {
+    const ref = React.createRef();
+    renderComponent({ ref });
+    expect(ref.current).toEqual(screen.getByRole('main'));
   });
 });

@@ -5,57 +5,135 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-// Standard imports.
 @import '@carbon/import-once/scss/import-once';
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
-@import '../../global/styles/mixins';
 
-// Imports of Carbon settings and component styles and other
-// related component styles used by ExampleComponent.
 @import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/overflow-menu/overflow-menu';
-@import 'carbon-components/scss/components/tooltip/tooltip';
 
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
 @mixin toolbar {
+  // The block part of our conventional BEM class names (blockClass__E--M).
   $block-class: #{$pkg-prefix}--toolbar;
 
-  @include block-wrap($block-class) {
-    &.#{$block-class} {
-      display: block;
-    }
+  /*----------------------------------------------
+    Toolbar Style
+  -----------------------------------------------*/
 
-    .#{$block-class}__displayed-items {
-      display: inline-flex;
-      width: 100%;
-      white-space: nowrap;
-    }
+  .#{$block-class} {
+    background: #fff;
+    display: flex;
+  }
 
-    .#{$block-class}__displayed-items--right {
-      justify-content: flex-end;
-    }
+  .#{$block-class} .bx--dropdown__wrapper--inline {
+    grid-gap: 0;
+  }
 
-    .#{$block-class}__overflow-menu {
-      display: inline-block;
+  /*----------------------------------------------
+    ToolbarGroup Style
+  -----------------------------------------------*/
+
+  .#{$block-class}-group {
+    display: flex;
+    border-right: 1px solid #e0e0e0;
+
+    &--text-formatting {
+      .bx--dropdown__wrapper {
+        border-right: 1px solid #e0e0e0;
+
+        &:last-child {
+          border-right: none;
+        }
+      }
+
+      button {
+        border-right: 1px solid #e0e0e0;
+
+        &:last-child {
+          border-right: none;
+        }
+      }
     }
   }
 
-  @include block-wrap($block-class + '-options') {
-    .#{$block-class}__overflow-menu-item {
-      padding: 0 $spacing-03;
+  /*----------------------------------------------
+    ToolbarItem Style
+  -----------------------------------------------*/
+
+  .text-alignment-dropdown {
+    .bx--list-box__field {
+      padding: 0.6em;
+
+      &::after {
+        content: '';
+        position: absolute;
+        background: linear-gradient(
+          to right bottom,
+          transparent 50%,
+          #151515 50%
+        );
+        height: 6px;
+        width: 6px;
+        bottom: 2px;
+        right: 2px;
+      }
     }
 
-    .#{$block-class}__overflow-menu-item-content {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
+    .bx--list-box__menu-icon {
+      display: none;
     }
 
-    .#{$block-class}__overflow-menu-item svg {
-      margin: 0 $spacing-02;
+    &.bx--dropdown--inline {
+      .bx--list-box__menu {
+        display: flex;
+        min-width: 96px;
+      }
     }
+
+    &.bx--list-box--sm {
+      .bx--list-box__menu-item__option {
+        padding: 0 0.6em;
+        width: 32px;
+        margin: 0;
+        display: inline-flex;
+        align-items: center;
+
+        .bx--list-box__menu-item__selected-icon {
+          display: none;
+        }
+      }
+    }
+  }
+
+  $textColors: (black, red, green, blue);
+  // $textColors: (#000000, #6F6F6F, #005FFF, #0072C9, #00832D, #007F7A, #972EFF, #E40072, #EE0017);
+
+  .bx--overflow-menu-options__btn {
+    padding: 0;
+    justify-content: center;
+    svg {
+      fill: white;
+    }
+    &:hover svg {
+      fill: white;
+    }
+  }
+
+  .bx--overflow-menu-options {
+    width: auto;
+  }
+
+  .bx--overflow-menu-options__option {
+    width: 32px;
+  }
+
+  .bx--overflow-menu-options--open {
+    padding: 2px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-row-gap: 2px;
+    grid-column-gap: 2px;
   }
 }
 

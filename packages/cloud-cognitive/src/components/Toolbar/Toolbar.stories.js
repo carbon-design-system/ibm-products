@@ -1,116 +1,51 @@
-//
-// Copyright IBM Corp. 2020, 2021
-//
-// This source code is licensed under the Apache-2.0 license found in the
-// LICENSE file in the root directory of this source tree.
-//
-
+/**
+ * Copyright IBM Corp. 2020, 2021
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { Bee16, Lightning16 } from '@carbon/icons-react';
-
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
-import { Toolbar, ToolbarItem } from '.';
+
+import { Toolbar } from '.';
+import mdx from './Toolbar.mdx';
+
+import styles from './_storybook-styles.scss';
+
+const storyClass = 'toolbar-stories';
+
 const storybookPrefix = getStorybookPrefix(pkg, Toolbar.displayName);
-
-const blockClass = `${pkg.prefix}--action-bar`;
-
-import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 
 export default {
   title: `${storybookPrefix}/${Toolbar.displayName}`,
   component: Toolbar,
   argTypes: {
-    containerWidth: {
-      control: { type: 'range', min: 20, max: 800, step: 10 },
+    borderColor: { control: 'color' },
+  },
+  parameters: {
+    styles,
+    docs: {
+      page: mdx,
     },
   },
   decorators: [
-    (story) => <div className={`${blockClass}__story-viewport`}>{story()}</div>,
+    (story) => <div className={`${storyClass}__viewport`}>{story()}</div>,
   ],
-  parameters: { styles },
 };
 
-const actions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => ({
-  renderIcon: num % 2 ? Lightning16 : Bee16,
-  iconDescription: `Action ${num}`,
-  onClick: action(`Action ${num}`),
-}));
-
-const ToolbarItems = (
-  <>
-    <ToolbarItem
-      renderIcon={Lightning16}
-      iconDescription="Action 1"
-      onClick={action('Action 1')}
-    />
-    <ToolbarItem
-      renderIcon={Lightning16}
-      iconDescription="Action 2"
-      onClick={action('Action 2')}
-    />
-    <ToolbarItem
-      renderIcon={Lightning16}
-      iconDescription="Action 3"
-      onClick={action('Action 3')}
-    />
-    <ToolbarItem
-      renderIcon={Lightning16}
-      iconDescription="Action 4"
-      onClick={action('Action 4')}
-    />
-    <ToolbarItem
-      renderIcon={Lightning16}
-      iconDescription="Action 5"
-      onClick={action('Action 5')}
-    />
-    <ToolbarItem
-      renderIcon={Lightning16}
-      iconDescription="Action 6"
-      onClick={action('Action 6')}
-    />
-    <ToolbarItem
-      renderIcon={Lightning16}
-      iconDescription="Action 7"
-      onClick={action('Action 7')}
-    />
-    <ToolbarItem
-      renderIcon={Lightning16}
-      iconDescription="Action 8"
-      onClick={action('Action 8')}
-    />
-    <ToolbarItem
-      renderIcon={Lightning16}
-      iconDescription="Action 9"
-      onClick={action('Action 9')}
-    />
-    <ToolbarItem
-      renderIcon={Lightning16}
-      iconDescription="Action 10"
-      onClick={action('Action 10')}
-    />
-  </>
-);
-
-const Template = (argsIn) => {
-  const { children, containerWidth, ...args } = { ...argsIn };
-  return (
-    <div style={{ width: containerWidth }}>
-      <Toolbar {...args}>{children}</Toolbar>
-    </div>
-  );
+const Template = (args) => {
+  return <Toolbar {...args} />;
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  actions: actions,
-  containerWidth: 500,
-};
+export const toolbarComponent = Template.bind({});
+toolbarComponent.args = {};
 
-export const WithChildrenDEPRECATED = Template.bind({});
-WithChildrenDEPRECATED.args = {
-  children: ToolbarItems,
-  containerWidth: 500,
+export const boxedSet = Template.bind({});
+boxedSet.args = {
+  ...toolbarComponent.args,
+  borderColor: '#141414',
+  boxedBorder: true,
 };

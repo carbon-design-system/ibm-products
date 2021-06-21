@@ -5,21 +5,15 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
+@import 'carbon-components/scss/components/ui-shell/ui-shell';
 
-$block-class: #{$pkg-prefix}--action-bar;
-
-.#{$block-class}__story-viewport {
-  position: relative;
-  box-shadow: 0 0 0 $layout-02 $ui-01;
-}
-
-.#{$block-class}__story-viewport::before {
-  position: absolute;
-  top: calc(-1 * #{$layout-02});
-  left: 0;
-  margin-top: calc(-1 * #{$layout-02});
-  white-space: nowrap;
-  content: 'NOTE: Containing box only used to show extent of available space';
+$story-class: 'toolbar-stories';
+.sbdocs .#{$story-class}__viewport {
+  //   max-height: 500px;
+  height: 100vh;
+  background-color: $ui-background;
+  box-shadow: 0 0 4px 1px $ui-03;
+  color: $text-01;
+  overflow-y: auto;
 }

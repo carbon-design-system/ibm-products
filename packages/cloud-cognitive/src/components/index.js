@@ -35,6 +35,6 @@ export { Saving } from './Saving';
 export { SidePanel } from './SidePanel';
 export { StatusIcon } from './StatusIcon';
 export { Tearsheet, TearsheetNarrow } from './Tearsheet';
-export { Toolbar } from './Toolbar';
+export { Toolbar, ToolbarGroup, ToolbarItem } from './Toolbar';
 export { UserProfileImage } from './UserProfileImage';
 export { WebTerminal } from './WebTerminal';

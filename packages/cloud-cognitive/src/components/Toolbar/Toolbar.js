@@ -1,253 +1,159 @@
-//
-// Copyright IBM Corp. 2020, 2021
-//
-// This source code is licensed under the Apache-2.0 license found in the
-// LICENSE file in the root directory of this source tree.
-//
+/**
+ * Copyright IBM Corp. 2020, 2021
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 // Import portions of React that are needed.
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
-import ReactResizeDetector from 'react-resize-detector';
 
 // Carbon and package components we use.
-import {
-  Button,
-  OverflowMenu,
-  OverflowMenuItem,
-} from 'carbon-components-react';
-import uuidv4 from '../../global/js/utils/uuidv4';
-import {
-  deprecateProp,
-  extractShapesArray,
-  prepareProps,
-} from '../../global/js/utils/props-helper';
-import { ToolbarItem } from './ToolbarItem';
+import { Button, ButtonSet } from 'carbon-components-react';
+import { ToolbarGroup } from './ToolbarGroup';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-const blockClass = `${pkg.prefix}--action-bar`;
+const blockClass = `${pkg.prefix}--toolbar`;
 const componentName = 'Toolbar';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
 /**
- * The Toolbar is used internally by the PageHeader to wrap ToolbarItems.
+ * This is an example component to show relevant conventions and usage.
  */
 export let Toolbar = React.forwardRef(
   (
     {
-      actions,
-      children,
+      // The component props, in alphabetical order (for consistency).
+      borderColor,
+      boxedBorder,
       className,
-      maxVisible,
-      onWidthChange,
-      overflowAriaLabel,
-      rightAlign,
+      disabled,
+      onPrimaryClick,
+      onSecondaryClick,
+      primaryButtonLabel,
+      primaryKind,
+      secondaryButtonLabel,
+      secondaryKind,
+      size,
+      style,
       // Collect any other property values passed in.
       ...rest
     },
     ref
   ) => {
-    const [displayCount, setDisplayCount] = useState(0);
-    const [displayedItems, setDisplayedItems] = useState([]);
-    const internalId = useRef(uuidv4());
-    const [itemArray, setItemArray] = useState([]);
-    const refDisplayedItems = useRef(null);
+    const modeClass = boxedBorder
+      ? `${blockClass}--boxed-set`
+      : `${blockClass}--shadow-set`;
 
-    const ToolbarOverflowItems = ({ overflowItems }) => {
-      return (
-        <OverflowMenu
-          ariaLabel={overflowAriaLabel}
-          className={`${blockClass}__overflow-menu`}
-          direction="bottom"
-          flipped
-          menuOptionsClass={`${blockClass}-options`}>
-          {overflowItems.map((item, index) => {
-            // This uses a copy of a menu item option
-            // NOTE: Cannot use a real Tooltip icon below as it uses a <button /> the
-            // div equivalent below is based on Carbon 10.25.0
-            return (
-              <OverflowMenuItem
-                className={`${blockClass}__overflow-menu-item`}
-                key={`${blockClass}-overflow-${internalId.current}-${index}`}
-                itemText={
-                  <div
-                    className={`${blockClass}__overflow-menu-item-content`}
-                    aria-describedby={`${internalId}--overflow-menu-item-label`}>
-                    <span
-                      className={`${blockClass}__overflow-menu-item-label`}
-                      id={`${internalId}--overflow-menu-item-label`}>
-                      {item.props.iconDescription}
-                    </span>
-                    <item.props.renderIcon />
-                  </div>
-                }
-              />
-            );
-          })}
-        </OverflowMenu>
-      );
-    };
-
-    ToolbarOverflowItems.propTypes = {
-      /**
-       * overflowItems: items to bre shown in the Toolbar overflow menu
-       */
-      overflowItems: PropTypes.arrayOf(PropTypes.element),
-    };
-
-    // create child array from children which may be a fragment
-    useEffect(() => {
-      if (actions) {
-        setItemArray(actions);
-      } else {
-        setItemArray(extractShapesArray(children));
-      }
-    }, [actions, children]);
-
-    // creates displayed items based on displayCount and alignment
-    useEffect(() => {
-      const newDisplayedItems = itemArray.map((item, index) => (
-        <ToolbarItem {...item} key={`${index}`} />
-      ));
-      // extract any there are not room for to newOverflowItems
-      const newOverflowItems = newDisplayedItems.splice(displayCount);
-      // add overflow menu if needed
-      if (newOverflowItems.length) {
-        newDisplayedItems.push(
-          <ToolbarOverflowItems
-            overflowItems={newOverflowItems}
-            key={`overflow-menu-${internalId.current}`}></ToolbarOverflowItems>
-        );
-      }
-
-      setDisplayedItems(newDisplayedItems);
-    }, [itemArray, displayCount]);
-
-    // determine display count based on space available and width of pageActions
-    const checkFullyVisibleItems = () => {
-      const spaceAvailable = refDisplayedItems.current.offsetWidth;
-      const ToolbarItemWidth = refDisplayedItems.current.offsetHeight; // short cut measure width
-
-      /* istanbul ignore next if */
-      if (ToolbarItemWidth > 0) {
-        const mightFit = spaceAvailable / ToolbarItemWidth;
-        // visibleItems may include 1 overflow menu
-        const visibleItems = maxVisible
-          ? Math.min(itemArray.length, maxVisible + 1) // + 1 for overflow menu if needed
-          : itemArray.length;
-        let willFit = Math.min(Math.floor(mightFit), visibleItems);
-
-        onWidthChange &&
-          onWidthChange({
-            maxWidth: ToolbarItemWidth * visibleItems,
-            minWidth: ToolbarItemWidth,
-          });
-
-        // action bar items are a fixed width
-        if (willFit < itemArray.length) {
-          willFit -= 1; // remove one for overflow menu
-        }
-
-        if (willFit < 1) {
-          setDisplayCount(0);
-        } else {
-          setDisplayCount(willFit);
-        }
+    const handlePrimaryClick = (e) => {
+      if (onPrimaryClick) {
+        onPrimaryClick(e);
       }
     };
 
-    useEffect(() => {
-      checkFullyVisibleItems();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [maxVisible, itemArray]);
-
-    const handleResize = () => {
-      // width is the space available for all action bar items horizontally
-      // the action bar items are squares so the height should be one item wide
-      /* istanbul ignore next */ // not sure how to fake window resize
-      checkFullyVisibleItems();
+    const handleSecondaryClick = (e) => {
+      if (onSecondaryClick) {
+        onSecondaryClick(e);
+      }
     };
 
     return (
-      <ReactResizeDetector onResize={handleResize}>
-        <div {...rest} className={cx([blockClass, className])} ref={ref}>
-          <div
-            ref={refDisplayedItems}
-            className={cx([
-              `${blockClass}__displayed-items`,
-              { [`${blockClass}__displayed-items--right`]: rightAlign },
-            ])}>
-            {displayedItems}
-          </div>
-        </div>
-      </ReactResizeDetector>
+      <div
+        className={cx(blockClass, className)}
+        role="toolbar"
+        aria-label="Text Formatting"
+        aria-controls="textarea1">
+        <ToolbarGroup />
+      </div>
     );
   }
 );
 
+// Return a placeholder if not released and not enabled by feature flag.
+Toolbar = pkg.checkComponentEnabled(Toolbar, componentName);
+
+// The display name of the component, used by React. Note that displayName
+// is used in preference to relying on function.name.
 Toolbar.displayName = componentName;
+
+// The types and DocGen commentary for the component props,
+// in alphabetical order (for consistency).
+// See https://www.npmjs.com/package/prop-types#usage.
 Toolbar.propTypes = {
   /**
-   * Specifies the action bar items. Each item is specified as an object
-   * with the properties of a Carbon Button in icon only form. Button kind, size, tooltipPosition,
-   * tooltipAlignment and type are ignored.
-   *
-   * Carbon Button API https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
+   * What border color (HTML color value) to use.
    */
-  actions: PropTypes.oneOfType([
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        ...prepareProps(Button.propTypes, [
-          'kind',
-          'size',
-          'tooltipPosition',
-          'tooltipAlignment',
-        ]),
-        iconDescription: PropTypes.string.isRequired,
-        onClick: Button.propTypes.onClick,
-        renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
-          .isRequired,
-      })
-    ),
-  ]),
+  borderColor: PropTypes.string,
+
   /**
-   * children of the action bar (action bar items)
+   * If true, the border is a box, otherwise it is a shadow.
    */
-  children: deprecateProp(
-    PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.element),
-      PropTypes.element,
-    ]),
-    'See documentation on the `actions` prop.'
-  ), // expects action bar item as array or in fragment,
+  boxedBorder: PropTypes.bool,
+
   /**
-   * className
+   * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
+
   /**
-   * maxVisible : Maximum action bar items visible before going into the overflow menu
+   * If true, the buttons are disabled, otherwise they can be used.
    */
-  maxVisible: PropTypes.number,
+  disabled: PropTypes.bool,
+
   /**
-   * onItemCountChange - event reporting maxWidth
+   * An optional primary button click handler.
    */
-  onWidthChange: PropTypes.func,
+  onPrimaryClick: PropTypes.func,
+
   /**
-   * overflowAriaLabel label for open close button overflow used for action bar items that do nto fit.
+   * An optional secondary button click handler.
    */
-  overflowAriaLabel: PropTypes.string,
+  onSecondaryClick: PropTypes.func,
+
   /**
-   * align tags to right of available space
+   * The primary button label.
    */
-  rightAlign: PropTypes.bool,
+  primaryButtonLabel: PropTypes.string.isRequired,
+
+  /**
+   * The kind of button for the primary button ('primary' or 'danger').
+   */
+  primaryKind: PropTypes.oneOf(['primary', 'danger']),
+
+  /**
+   * The secondary button label.
+   */
+  secondaryButtonLabel: PropTypes.string.isRequired,
+
+  /**
+   * The kind of button for the secondary button ('secondary' or 'tertiary').
+   */
+  secondaryKind: PropTypes.oneOf(['secondary', 'tertiary']),
+
+  /**
+   * The size for the buttons ('default', 'small' or 'field').
+   */
+  size: PropTypes.oneOf(['default', 'small', 'field']),
+
+  /**
+   * Optional style settings for the containing node.
+   */
+  style: PropTypes.object,
 };
 
+// Default values for component props. Default values are not required for
+// props that are required, nor for props where the component can apply
+// 'undefined' values reasonably. Default values should be provided when the
+// component needs to make a choice or assumption when a prop is not supplied.
 Toolbar.defaultProps = {
-  overflowAriaLabel: 'Open and close additional action bar items list.',
-  rightAlign: false,
+  boxedBorder: false,
+  primaryKind: 'primary',
+  secondaryKind: 'secondary',
+  size: 'default',
 };

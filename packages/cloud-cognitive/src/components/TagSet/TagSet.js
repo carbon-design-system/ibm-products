@@ -298,7 +298,14 @@ TagSet.propTypes = {
    */
   showAllTagsLabel: string_required_if_more_than_10_tags,
   /**
-   * An array of Carbon objects containing Carbon Tag properties plus 'label'. NOTE: 'filter' is not ignored.
+   * The tags to be shown in the TagSet. Each tag is specified as an object
+   * with optional fields: 'label' to supply the tag label, and additional
+   * fields in the object will be passed to the Carbon Tag component: these
+   * can include 'type', 'filter', 'disabled', 'ref', 'className', and any
+   * other Tag props. Any other fields in the object will be passed through
+   * to the HTML element as HTML attributes.
+   *
+   * See https://react.carbondesignsystem.com/?path=/docs/components-tag--default
    */
   tags: PropTypes.arrayOf(
     PropTypes.shape({

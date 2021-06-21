@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2020
+ * Copyright IBM Corp. 2020, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -93,20 +93,14 @@ const navigation = (
     <Tab label="Tab 4" />
   </Tabs>
 );
-const tags = [
-  <Tag data-testid="tags" type="blue" key="blue">
+
+// supply enough tags to trigger TagSet overflow required props
+const tags = Array.from({ length: 20 }, (v, k) => (
+  <Tag key={k} data-testid="tags" type="blue">
     A tag
-  </Tag>,
-  <Tag data-testid="tags" type="green" key="green">
-    A tag
-  </Tag>,
-  <Tag data-testid="tags" type="warm-gray" key="warm-gray">
-    A tag
-  </Tag>,
-  <Tag data-testid="tags" type="purple" key="purple">
-    A tag
-  </Tag>,
-];
+  </Tag>
+));
+
 const titleObj = { text: 'Page title', loading: false, icon: Bee32 };
 const titleString = 'Page title';
 
@@ -114,96 +108,50 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { prepareProps } from '../../global/js/utils/props-helper';
 jest.mock('../../global/js/utils/uuidv4');
 
-const sizes = {
-  [`${blockClass}`]: {
-    get offsetWidth() {
-      return window.innerWidth;
-    },
-    get clientHeight() {
-      return 300;
-    },
+// init test sizes, in a method to take account of test window.innerWidth and window.innerHeight
+const initSizes = () => ({
+  offsetWidth: {
+    [`${blockClass}`]: window.innerWidth,
+    [`${carbon.prefix}--btn`]: 200,
+    [`${blockClass}__breadcrumb-row`]: window.innerWidth,
+    [`${pkg.prefix}--breadcrumb-with-overflow`]: window.innerWidth * 0.6,
+    [`${pkg.prefix}--tag-set`]: window.innerWidth * 0.25,
+    [`${pkg.prefix}--tag-set__sizing-tag`]: window.innerWidth * 0.05,
+    [`${pkg.prefix}--button-set-with-overflow__button-container`]:
+      window.innerWidth * 0.4,
+    [`${pkg.prefix}--button-set-with-overflow`]: window.innerWidth * 0.4,
+    [`${carbon.prefix}--breadcrumb-item`]: 200,
+    [`${pkg.prefix}--action-bar__displayed-items`]: window.innerWidth * 0.3,
+    [`${blockClass}__breadcrumb-title`]: window.innerWidth * 0.2,
+    [`${pkg.prefix}--button-menu`]: 200,
+    [`${pkg.prefix}--tag-set-overflow`]: 40,
   },
-  [`${blockClass}__available-row`]: {
-    get clientHeight() {
-      return 32;
-    },
+  clientHeight: {
+    [`${blockClass}`]: 300,
+    [`${blockClass}__available-row`]: 40,
+    [`${blockClass}__breadcrumb-row`]: 40,
+    [`${carbon.prefix}--breadcrumb-item`]: 40,
+    [`${blockClass}__navigation-row`]: 48,
+    [`${blockClass}__subtitle-row`]: 40,
+    [`${blockClass}__title-row`]: 64,
   },
-  [`${carbon.prefix}--btn`]: {
-    get offsetWidth() {
-      return 200;
-    },
-  },
-  [`${blockClass}__breadcrumb-row`]: {
-    get offsetWidth() {
-      return window.innerWidth;
-    },
-  },
-  [`${pkg.prefix}--breadcrumb-with-overflow`]: {
-    get offsetWidth() {
-      return window.innerWidth * 0.6;
-    },
-  },
-  [`${pkg.prefix}--tag-set`]: {
-    get offsetWidth() {
-      return window.innerWidth * 0.25;
-    },
-  },
-  [`${pkg.prefix}--tag-set__sizing-tag`]: {
-    get offsetWidth() {
-      return window.innerWidth * 0.05;
-    },
-  },
-  [`${pkg.prefix}--button-set-with-overflow__button-container`]: {
-    get offsetWidth() {
-      return window.innerWidth * 0.4;
-    },
-  },
-  [`${pkg.prefix}--button-set-with-overflow`]: {
-    get offsetWidth() {
-      return window.innerWidth * 0.4;
-    },
-  },
-  [`${carbon.prefix}--breadcrumb-item`]: {
-    get offsetWidth() {
-      return 200;
-    },
-  },
-  [`${pkg.prefix}--action-bar__displayed-items`]: {
-    get offsetWidth() {
-      return window.innerWidth * 0.3;
-    },
-  },
-  [`${blockClass}__breadcrumb-title`]: {
-    get offsetWidth() {
-      return window.innerWidth * 0.2;
-    },
-  },
-  [`${blockClass}__navigation-row`]: {
-    get clientHeight() {
-      return 48;
-    },
-  },
-  [`${blockClass}__subtitle-row`]: {
-    get clientHeight() {
-      return 32;
-    },
-  },
-  [`${blockClass}__title-row`]: {
-    get clientHeight() {
-      return 64;
-    },
-  },
-};
+});
 const testSizes = (el, property, _default) => {
   const classes = el.getAttribute('class').split(' ');
+  const sizes = initSizes();
 
-  for (let cls of classes) {
-    const val = sizes[cls] ? sizes[cls][property] : -1;
-    if (val >= 0) {
-      return val;
+  const propSizes = sizes[property];
+  if (propSizes) {
+    for (let cls of classes) {
+      // see if any class we check for is catered for.
+      const val = propSizes[cls] ? propSizes[cls] : -1;
+      if (val >= 0) {
+        // console.log(property, cls, val);
+        return val;
+      }
     }
   }
-  console.log('testSizes found nothing.', property, el.outerHTML);
+  // console.log('testSizes found nothing.', property, el.outerHTML);
   return _default;
 };
 
@@ -233,7 +181,7 @@ describe('PageHeader', () => {
   window.innerWidth = 2000;
   window.innerHeight = 1080;
 
-  beforeAll(() => {
+  beforeEach(() => {
     mockElement = mockHTMLElement({
       offsetWidth: {
         get: function () {
@@ -259,7 +207,7 @@ describe('PageHeader', () => {
     }));
   });
 
-  afterAll(() => {
+  afterEach(() => {
     mocks.forEach((mock) => {
       mock.mock.mockRestore();
     });
@@ -345,8 +293,8 @@ describe('PageHeader', () => {
       screen.getAllByText('A tag', {
         // selector need to ignore sizing items
         selector: `.${pkg.prefix}--tag-set__displayed-tag .${carbon.prefix}--tag span`,
-      })
-    ).toHaveLength(4);
+      }).length
+    ).toBeGreaterThan(0);
     expect(document.querySelectorAll(`.${blockClass}__title`)).toHaveLength(1);
     expect(document.querySelector(`.${blockClass}__title`).textContent).toEqual(
       titleObj.text
@@ -424,7 +372,9 @@ describe('PageHeader', () => {
       />
     );
 
-    const collapseButton = screen.getByText('Toggle collapse');
+    const collapseButton = screen.getByRole('button', {
+      name: 'Toggle collapse',
+    });
 
     window.scrollTo.mockReset();
     expect(window.scrollTo).not.toHaveBeenCalled();
@@ -449,8 +399,8 @@ describe('PageHeader', () => {
       screen.getAllByText('A tag', {
         // selector need to ignore sizing items
         selector: `.${pkg.prefix}--tag-set__displayed-tag .${carbon.prefix}--tag span`,
-      })
-    ).toHaveLength(4);
+      }).length
+    ).toBeGreaterThan(0);
   });
 
   test('Title row renders when PageActions but no Title', () => {
@@ -478,7 +428,12 @@ describe('PageHeader', () => {
     render(<PageHeader {...{ title, pageActions, navigation }} />);
 
     expect(
-      document.querySelectorAll(`.${blockClass}__title-row--spacing-below-06`)
+      document.querySelectorAll(
+        `.${blockClass}__title-row .${blockClass}__title`
+      )
+    ).toHaveLength(1);
+    expect(
+      document.querySelectorAll(`.${blockClass}__navigation-row`)
     ).toHaveLength(1);
   });
 

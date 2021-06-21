@@ -43,6 +43,7 @@ const ActionSetButton = React.forwardRef(
         // Pass through any other property values as HTML attributes.
         ...rest
       }
+      isExpressive
       className={cx(className, [
         `${blockClass}__action-button`,
         { [`${blockClass}__action-button--ghost`]: kind === 'ghost' },
@@ -164,71 +165,66 @@ ActionSet.displayName = componentName;
  * @returns null if the actions meet the requirements, or an Error object with
  * an explanatory message.
  */
-ActionSet.validateActions = (sizeFn) => (
-  props,
-  propName,
-  componentName,
-  location,
-  propFullName
-) => {
-  const name = propFullName || propName;
-  const prop = props[name];
-  const actions = prop && prop?.length;
-  const problems = [];
+ActionSet.validateActions =
+  (sizeFn) => (props, propName, componentName, location, propFullName) => {
+    const name = propFullName || propName;
+    const prop = props[name];
+    const actions = prop && prop?.length;
+    const problems = [];
 
-  if (actions > 0) {
-    const size = sizeFn ? sizeFn(props) : props.size;
-    const stacking = willStack(size, actions);
+    if (actions > 0) {
+      const size = sizeFn ? sizeFn(props) : props.size;
+      const stacking = willStack(size, actions);
 
-    const countActions = (kind) =>
-      prop.filter((action) => (action.kind || defaultKind) === kind).length;
+      const countActions = (kind) =>
+        prop.filter((action) => (action.kind || defaultKind) === kind).length;
 
-    const primaryActions = countActions('primary');
-    const secondaryActions = countActions('secondary');
-    const ghostActions = countActions('ghost');
+      const primaryActions = countActions('primary');
+      const secondaryActions = countActions('secondary');
+      const ghostActions = countActions('ghost');
 
-    stacking &&
-      actions > 3 &&
-      problems.push(
-        `you cannot have more than three actions in this size of ${componentName}`
-      );
+      stacking &&
+        actions > 3 &&
+        problems.push(
+          `you cannot have more than three actions in this size of ${componentName}`
+        );
 
-    actions > 4 &&
-      problems.push(
-        `you cannot have more than four actions in a ${componentName}`
-      );
+      actions > 4 &&
+        problems.push(
+          `you cannot have more than four actions in a ${componentName}`
+        );
 
-    primaryActions > 1 &&
-      problems.push(
-        `you cannot have more than one 'primary' action in a ${componentName}`
-      );
+      primaryActions > 1 &&
+        problems.push(
+          `you cannot have more than one 'primary' action in a ${componentName}`
+        );
 
-    ghostActions > 1 &&
-      problems.push(
-        `you cannot have more than one 'ghost' action in a ${componentName}`
-      );
+      ghostActions > 1 &&
+        problems.push(
+          `you cannot have more than one 'ghost' action in a ${componentName}`
+        );
 
-    stacking &&
-      actions > 1 &&
-      ghostActions > 0 &&
-      problems.push(
-        `you cannot have a 'ghost' button in conjunction with other action types in this size of ${componentName}`
-      );
+      stacking &&
+        actions > 1 &&
+        ghostActions > 0 &&
+        problems.push(
+          `you cannot have a 'ghost' button in conjunction with other action types in this size of ${componentName}`
+        );
 
-    actions > primaryActions + secondaryActions + ghostActions &&
-      problems.push(
-        `you can only have 'primary', 'secondary' and 'ghost' buttons in a ${componentName}`
-      );
-  }
+      actions > primaryActions + secondaryActions + ghostActions &&
+        problems.push(
+          `you can only have 'primary', 'secondary' and 'ghost' buttons in a ${componentName}`
+        );
+    }
 
-  return problems.length > 0
-    ? new Error(
-        `Invalid ${location} \`${name}\` supplied to \`${componentName}\`: ${problems.join(
-          ', and '
-        )}.`
-      )
-    : null;
-};
+    return problems.length > 0
+      ? new Error(
+          `Invalid ${location} \`${name}\` supplied to \`${componentName}\`: ${problems.join(
+            ', and '
+          )}.`
+        )
+      : null;
+  };
 
 ActionSet.propTypes = {
   /**

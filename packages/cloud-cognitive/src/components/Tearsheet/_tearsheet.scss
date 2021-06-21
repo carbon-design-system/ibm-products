@@ -125,9 +125,9 @@
   }
 
   .#{$block-class}.#{$block-class}--wide .#{$block-class}__header {
-    margin: 0;
     padding: $spacing-06 $spacing-07;
     border-bottom: 1px solid $ui-03;
+    margin: 0;
   }
 
   .#{$block-class}.#{$block-class}--wide .#{$block-class}__header--with-nav {
@@ -135,14 +135,14 @@
   }
 
   .#{$block-class}.#{$block-class}--narrow .#{$block-class}__header {
-    margin: 0;
     padding: $spacing-05;
+    margin: 0;
   }
 
   .#{$block-class}.#{$block-class}--wide
     .#{$block-class}__header--with-close-icon {
-    margin-right: $spacing-09;
     padding-right: $spacing-05;
+    margin-right: $spacing-09;
   }
 
   .#{$block-class} .#{$block-class}__header-content {
@@ -186,9 +186,10 @@
 
   .#{$block-class} .#{$block-class}__body {
     display: flex;
+    flex-direction: row;
     flex-grow: 1;
-    margin: 0;
     padding: 0;
+    margin: 0;
   }
 
   .#{$block-class}__resize-detector {
@@ -197,18 +198,12 @@
   }
 
   .#{$block-class} .#{$block-class}__influencer {
-    width: 256px;
-    min-width: 256px;
+    flex: 0 0 256px;
     border-right: 1px solid $ui-03;
   }
 
-  .#{$block-class} .#{$block-class}__influencer--right {
-    order: 1;
-  }
-
   .#{$block-class} .#{$block-class}__influencer--wide {
-    width: 320px;
-    min-width: 320px;
+    flex-basis: 320px;
   }
 
   .#{$block-class} .#{$block-class}__right {
@@ -218,11 +213,22 @@
   }
 
   .#{$block-class} .#{$block-class}__main {
+    display: flex;
+    flex-direction: row;
     flex-grow: 1;
-    overflow: auto;
   }
 
-  .#{$block-class}.#{$block-class}--wide .#{$block-class}__main {
+  .#{$block-class} .#{$block-class}__main .#{$block-class}__influencer {
+    border-right: none;
+    border-left: 1px solid $ui-03;
+  }
+
+  .#{$block-class} .#{$block-class}__content {
+    overflow: auto;
+    flex-grow: 1;
+  }
+
+  .#{$block-class}.#{$block-class}--wide .#{$block-class}__content {
     background: $ui-background;
 
     // revert the background colour overridden by bx--modal styles

@@ -42,9 +42,9 @@
     }
 
     .#{$block-class}__breadcrumb-container .#{$carbon-prefix}--breadcrumb {
+      width: 100%;
       flex-wrap: nowrap;
       align-items: flex-start;
-      width: 100%;
     }
 
     .#{$block-class}__breadcrumb-container--hidden {
@@ -52,9 +52,19 @@
       @include measuring-container;
     }
 
-    .#{$block-class}__displayed-breadcrumb:last-child,
-    .#{$block-class}__displayed-breadcrumb:last-child .#{$carbon-prefix}--link {
+    .#{$carbon-prefix}--breadcrumb-item:last-child {
+      display: inline;
+    }
+
+    .#{$block-class}__displayed-breadcrumb:last-child {
+      display: inline;
       overflow: hidden;
+    }
+
+    .#{$block-class}__displayed-breadcrumb:last-child .#{$carbon-prefix}--link {
+      display: inline-block;
+      overflow: hidden;
+      width: 100%;
       text-overflow: ellipsis;
     }
 

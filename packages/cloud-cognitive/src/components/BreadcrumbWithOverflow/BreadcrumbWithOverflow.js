@@ -51,6 +51,39 @@ export let BreadcrumbWithOverflow = ({
   const internalId = useRef(uuidv4());
   const [childArray, setChildArray] = useState([]);
 
+  const getHref = (item) => {
+    // This function should extract href from item
+    // It expects that the href is attached either to the item or direct child
+    // It prefers item.props.href
+    return item?.props?.href
+      ? item.props.href
+      : item?.props?.children?.props?.href;
+  };
+
+  const getTitle = (item) => {
+    // This function should extract text based title from the item.
+    // It prefers in this order
+    // - item.props.data-title
+    // - item.props.title
+    // - item.props.children if string
+    // - item.props.children.props.children if string. This case is likely if an <a /> is used inside a BreadcrumbItem
+    let useAsTitle = null;
+
+    if (item?.props) {
+      if (item.props['data-title']) {
+        useAsTitle = item.props['data-title'];
+      } else if (item.props.title) {
+        useAsTitle = item.props.title;
+      } else if (typeof item.props.children === 'string') {
+        useAsTitle = item.props.children;
+      } else if (typeof item.props?.children?.props?.children === 'string') {
+        useAsTitle = item.props.children.props.children;
+      }
+    }
+
+    return useAsTitle;
+  };
+
   // eslint-disable-next-line react/prop-types
   const BreadcrumbOverflowMenu = ({ overflowItems }) => {
     return (
@@ -89,10 +122,6 @@ export let BreadcrumbWithOverflow = ({
       setDisplayedBreadcrumbItems([]);
       return;
     }
-    const getTitle = (item) => {
-      // This function should extract text from item.props.children
-      return item.props?.children?.props?.children;
-    };
 
     // clones of children needed as the children are used in the sizing render
     const cloneChildren = (items) =>
@@ -168,9 +197,10 @@ export let BreadcrumbWithOverflow = ({
 
       /* istanbul ignore next if */
       if (sizingContainerRef.current) {
-        const sizingBreadcrumbItems = sizingContainerRef.current.querySelectorAll(
-          `.${carbon.prefix}--breadcrumb-item`
-        );
+        const sizingBreadcrumbItems =
+          sizingContainerRef.current.querySelectorAll(
+            `.${carbon.prefix}--breadcrumb-item`
+          );
 
         const breadcrumbWidthsIncludingMargin = [];
         for (let item of sizingBreadcrumbItems) {
@@ -245,11 +275,13 @@ export let BreadcrumbWithOverflow = ({
     checkFullyVisibleBreadcrumbItems();
   };
 
-  const buttonHrefValue =
-    displayedBreadcrumbItems[displayedBreadcrumbItems.length - 2]?.props.href;
-  const buttonTooltipValue =
-    displayedBreadcrumbItems[displayedBreadcrumbItems.length - 2]?.props
-      .children;
+  let backItem = childArray[childArray.length - 1];
+  if (backItem?.props?.isCurrentPage) {
+    backItem = childArray[childArray.length - 2];
+  }
+
+  const buttonHrefValue = getHref(backItem);
+  const buttonTooltipValue = getTitle(backItem);
 
   return (
     <ReactResizeDetector onResize={handleResize}>

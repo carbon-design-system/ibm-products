@@ -5,25 +5,25 @@ $web-terminal-width: 36.5rem;
 
 @keyframes webTerminalEntrance {
   0% {
+    opacity: 0;
     // stylelint-disable-next-line carbon/layout-token-use
     transform: translateX(#{$web-terminal-width});
-    opacity: 0;
   }
   100% {
-    transform: translateX(0);
     opacity: 1;
+    transform: translateX(0);
   }
 }
 
 @keyframes webTerminalExit {
   0% {
-    transform: translateX(0);
     opacity: 1;
+    transform: translateX(0);
   }
   100% {
+    opacity: 0;
     // stylelint-disable-next-line carbon/layout-token-use
     transform: translateX(#{$web-terminal-width});
-    opacity: 0;
   }
 }
 
@@ -46,9 +46,9 @@ $web-terminal-width: 36.5rem;
 
 .#{$pkg-prefix}-web-terminal__bar {
   display: flex;
+  height: 3rem;
   align-items: center;
   justify-content: space-between;
-  height: 3rem;
   background-color: $ui-background;
 }
 
@@ -60,8 +60,8 @@ $web-terminal-width: 36.5rem;
 .#{$pkg-prefix}-web-terminal__bar-icon-container {
   position: relative;
   padding: $spacing-04;
-  background-color: transparent;
   border: none;
+  background-color: transparent;
   cursor: pointer;
 }
 
@@ -72,40 +72,40 @@ $web-terminal-width: 36.5rem;
   width: 10rem;
   background-color: $field-01;
 
+  opacity: 0;
   /* stylelint-disable-next-line  */
   transform: translateY(calc(-1 * #{$spacing-04}));
-  visibility: hidden;
-  opacity: 0;
   transition: all carbon--motion(standard, productive) $duration--fast-02;
+  visibility: hidden;
 }
 
 .#{$pkg-prefix}-web-terminal__bar-icon-container:hover
   .#{$pkg-prefix}-web-terminal__bar-icon-dropdown,
 .#{$pkg-prefix}-web-terminal__bar-icon-container:focus
   .#{$pkg-prefix}-web-terminal__bar-icon-dropdown {
+  opacity: 1;
   transform: translateY(0);
   visibility: visible;
-  opacity: 1;
 }
 
 .#{$pkg-prefix}-web-terminal__bar-icon-dropdown-link {
   display: flex;
-  align-items: center;
   width: 100%;
   height: 2.125rem;
+  align-items: center;
   padding-left: $spacing-04;
   color: $text-02;
-  text-decoration: none;
   cursor: pointer;
+  text-decoration: none;
   @include carbon--type-style('body-short-01');
 
   transition: all carbon--motion(standard, productive) $duration--fast-02;
 }
 
 .#{$pkg-prefix}-web-terminal__bar-icon-dropdown-link:hover {
-  color: $text-01;
   //NOTE: The 4c4c4c is a theme token but not a gray value token
   background-color: $hover-ui;
+  color: $text-01;
 }
 
 .#{$pkg-prefix}-web-terminal__close-container {

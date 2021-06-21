@@ -25,13 +25,13 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
 @mixin sidePanelEntranceRight($size: $medium-panel-size) {
   @keyframes sidePanelEntranceRight {
     0% {
+      opacity: 0;
       // stylelint-disable-next-line carbon/layout-token-use
       transform: translateX(#{$size}); // the size width of the side panel
-      opacity: 0;
     }
     100% {
-      transform: translateX(0);
       opacity: 1;
+      transform: translateX(0);
     }
   }
 }
@@ -39,13 +39,13 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
 @mixin sidePanelEntranceLeft($size: $medium-panel-size) {
   @keyframes sidePanelEntranceLeft {
     0% {
+      opacity: 0;
       // stylelint-disable-next-line carbon/layout-token-use
       transform: translateX(-#{$size}); // the size width of the side panel
-      opacity: 0;
     }
     100% {
-      transform: translateX(0);
       opacity: 1;
+      transform: translateX(0);
     }
   }
 }
@@ -72,14 +72,14 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
   width: 100%;
   height: 1px;
   background-color: $decorative-01;
-  opacity: var(--#{$block-class}--divider-opacity);
   content: '';
+  opacity: var(--#{$block-class}--divider-opacity);
 }
 
 @mixin setCommonTitleStyles() {
   display: -webkit-box;
-  padding-right: $spacing-07;
   overflow: hidden;
+  padding-right: $spacing-07;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
@@ -87,25 +87,25 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
 @mixin side-panel {
   @keyframes sidePanelExitLeft {
     0% {
-      transform: translateX(0);
       opacity: 1;
+      transform: translateX(0);
     }
     100% {
+      opacity: 0;
       // stylelint-disable-next-line carbon/layout-token-use
       transform: translateX(-#{$medium-panel-size});
-      opacity: 0;
     }
   }
 
   @keyframes sidePanelExitRight {
     0% {
-      transform: translateX(0);
       opacity: 1;
+      transform: translateX(0);
     }
     100% {
+      opacity: 0;
       // stylelint-disable-next-line carbon/layout-token-use
       transform: translateX($medium-panel-size);
-      opacity: 0;
     }
   }
 
@@ -119,14 +119,14 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     --#{$block-class}--collapsed-title-y-position: 1rem;
 
     position: fixed;
-    top: $spacing-09;
     z-index: 3;
-    box-sizing: border-box;
+    top: $spacing-09;
     min-width: $medium-panel-size; // set default panel size
     max-width: $medium-panel-size; // set default panel size
     height: calc(100% - 3rem);
-    color: $text-01;
+    box-sizing: border-box;
     background-color: $ui-01;
+    color: $text-01;
     transition: transform $duration--moderate-02;
     transition-timing-function: carbon--motion(standard);
     &.#{$block-class}__container-right-placement {
@@ -184,12 +184,15 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     }
     .#{$block-class}__title-container {
       position: sticky;
-      top: 0;
       z-index: 4;
+      top: 0;
       padding: $spacing-05 $spacing-05 $spacing-03 $spacing-05;
       background-color: $ui-01;
       &::before {
         @include setDividerStyles();
+      }
+      &.#{$block-class}__on-detail-step .#{$block-class}__collapsed-title-text {
+        top: $spacing-09;
       }
     }
     .#{$block-class}__title-text {
@@ -199,50 +202,51 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       position: inherit;
       z-index: 4;
       background-color: $ui-01;
+      opacity: var(--#{$block-class}--subtitle-opacity);
       // stylelint-disable-next-line carbon/layout-token-use
       transform: translateY(var(--#{$block-class}--title-y-position));
-      opacity: var(--#{$block-class}--subtitle-opacity);
     }
     .#{$block-class}__collapsed-title-text {
+      @include carbon--type-style('productive-heading-02');
       @include setCommonTitleStyles();
 
       position: absolute;
       top: $spacing-05;
+      opacity: var(--#{$block-class}--divider-opacity);
       // stylelint-disable-next-line carbon/layout-token-use
       transform: translateY(var(--#{$block-class}--collapsed-title-y-position));
-      opacity: var(--#{$block-class}--divider-opacity);
     }
     .#{$block-class}__subtitle-text {
       @include carbon--type-style('body-short-01');
 
-      padding: 0 $spacing-05 $spacing-05 $spacing-05;
       overflow: hidden;
-      opacity: var(--#{$block-class}--subtitle-opacity);
-      -webkit-line-clamp: 3;
+      padding: 0 $spacing-05 $spacing-05 $spacing-05;
       -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      opacity: var(--#{$block-class}--subtitle-opacity);
     }
     .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation {
       position: sticky;
-      top: var(--#{$block-class}--title-container-height);
       z-index: 2;
+      top: var(--#{$block-class}--title-container-height);
       background-color: $ui-01;
     }
     .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation.#{$block-class}__subtitle-text-no-animation-no-action-toolbar {
-      margin-bottom: $spacing-05;
       border-bottom: 1px solid $decorative-01;
+      margin-bottom: $spacing-05;
     }
     .#{$block-class}__label-text {
       @include carbon--type-style('label-01');
     }
     .#{$block-class}__action-toolbar {
       position: sticky;
-      top: var(--#{$block-class}--title-height);
       z-index: 4;
+      top: var(--#{$block-class}--title-height);
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      margin-bottom: $spacing-03;
       padding: 0 $spacing-05;
+      margin-bottom: $spacing-03;
       background-color: $ui-01;
       transition: transform $duration--moderate-01;
       transition-timing-function: carbon--motion(standard);
@@ -268,6 +272,9 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       );
       border-bottom: 1px solid $decorative-01;
     }
+    .bx--btn.#{$block-class}__navigation-back-button {
+      z-index: 5;
+    }
     .bx--btn.#{$block-class}__navigation-back-button,
     .bx--btn.#{$block-class}__close-button {
       min-width: 2rem;
@@ -276,9 +283,9 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     }
     .bx--btn.#{$block-class}__close-button {
       position: absolute;
+      z-index: 5;
       top: $spacing-03;
       right: $spacing-03;
-      z-index: 5;
     }
     .#{$block-class}__body-content {
       padding: $spacing-05;
@@ -291,8 +298,8 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     .#{$block-class}__actions-container {
       position: fixed;
       bottom: 0;
-      background-color: $ui-01;
       border-top: 1px solid $decorative-01;
+      background-color: $ui-01;
       &.#{$action-set-block-class}--xs {
         @include setActionBarSize($extra-small-panel-size);
       }
@@ -318,9 +325,9 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
           }
         }
 
-        flex-direction: column;
         min-width: 75%;
         max-width: 75%;
+        flex-direction: column;
       }
       .#{$action-set-block-class}__action-button {
         height: $layout-05;
@@ -364,25 +371,25 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
 
   .#{$block-class}__visually-hidden {
     position: absolute;
+    overflow: hidden;
     width: 1px;
     height: 1px;
+    padding: 0;
+    border: 0;
     // stylelint-disable-next-line carbon/layout-token-use
     margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    border: 0;
-    visibility: inherit;
     clip: rect(0, 0, 0, 0);
+    visibility: inherit;
+    white-space: nowrap;
   }
 
   .#{$block-class}__overlay {
     position: fixed;
+    z-index: 2;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 2;
     width: 100%;
     height: 100%;
     background-color: $overlay-01;

@@ -148,7 +148,10 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     // <ul role='menu' /> but default <ul> role of list used for query
     // see https://testing-library.com/docs/queries/byrole/#api
     // const om = screen.getByRole('list');
-    const menuItems = screen.getAllByRole('menuitem'); // expected this to be listitem based on above comment
+    // const menuItems = screen.getAllByRole('menuitem');
+    // use querySelectorAll rather that getAllByRole because the drop-down
+    // never fully appears in jsdom (requires resize handler mocking)
+    const menuItems = document.querySelectorAll('[role="menuitem"]');
     expect(menuItems).toHaveLength(overflowItemsExpected);
     expect(menuItems[0]).toHaveTextContent(breadcrumbContent[1]);
     expect(menuItems[1]).toHaveTextContent(breadcrumbContent[2]);
@@ -184,7 +187,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
 
     const visibleBreadcrumbs = screen.getAllByRole('listitem');
     // not enough room
-    expect(visibleBreadcrumbs.length).toEqual(4); // 3 + overflow
+    expect(visibleBreadcrumbs.length).toEqual(4);
 
     // last item is last breadcrumb
     expect(visibleBreadcrumbs[3]).toHaveTextContent(breadcrumbContent[4]);
@@ -203,7 +206,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
 
     const visibleBreadcrumbs = screen.getAllByRole('listitem');
     // not enough room
-    expect(visibleBreadcrumbs.length).toEqual(2); // 1 + overflow
+    expect(visibleBreadcrumbs.length).toEqual(2);
 
     // last item is last breadcrumb
     expect(visibleBreadcrumbs[1]).toHaveTextContent(breadcrumbContent[4]);

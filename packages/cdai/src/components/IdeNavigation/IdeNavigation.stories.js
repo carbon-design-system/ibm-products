@@ -123,8 +123,7 @@ storiesOf(
       ),
     {
       info: {
-        text:
-          'IdeNavigation with IdeSideNavLink components (one with an icon, one without). Do note, for the blue "active" indicator needs to be provided as either the `isActive` prop, or the `active` attribute on the anchor (react router NavLinks does this for example).',
+        text: 'IdeNavigation with IdeSideNavLink components (one with an icon, one without). Do note, for the blue "active" indicator needs to be provided as either the `isActive` prop, or the `active` attribute on the anchor (react router NavLinks does this for example).',
       },
     }
   )
@@ -139,8 +138,7 @@ storiesOf(
       ),
     {
       info: {
-        text:
-          'IdeNavigation component with interactive options. See the Knobs for more.',
+        text: 'IdeNavigation component with interactive options. See the Knobs for more.',
       },
     }
   );
@@ -169,8 +167,7 @@ storiesOf(
       ),
     {
       info: {
-        text:
-          'IdeNavigation with IdeSideNavMenu components (one with an icon, one without). Currently these have no alternative hover states as per the guidelines/design. These will be implemented in a future PR.',
+        text: 'IdeNavigation with IdeSideNavMenu components (one with an icon, one without). Currently these have no alternative hover states as per the guidelines/design. These will be implemented in a future PR.',
       },
     }
   );
@@ -193,8 +190,7 @@ storiesOf(
       ),
     {
       info: {
-        text:
-          'Page header component with core common properties having been provided.',
+        text: 'Page header component with core common properties having been provided.',
       },
     }
   )
@@ -206,8 +202,7 @@ storiesOf(
       ),
     {
       info: {
-        text:
-          'Page header component with just the breadcrumb. Note that no space is reserved for other content',
+        text: 'Page header component with just the breadcrumb. Note that no space is reserved for other content',
       },
     }
   )
@@ -217,8 +212,7 @@ storiesOf(
       renderMockContent(<IdePageHeader {...withHeading} {...withClassName} />),
     {
       info: {
-        text:
-          'Page header component with just the heading. Note that space is still reserved for the breadcrumb, even if not provided, as well as a small ammount of space below the heading where the tabs would be if provided.',
+        text: 'Page header component with just the heading. Note that space is still reserved for the breadcrumb, even if not provided, as well as a small ammount of space below the heading where the tabs would be if provided.',
       },
     }
   )
@@ -230,8 +224,7 @@ storiesOf(
       ),
     {
       info: {
-        text:
-          'Page header component with a heading and subtitle. Note that space is still reserved for the breadcrumb, even if not provided, as well as a small ammount of space below the heading where the tabs would be if provided.',
+        text: 'Page header component with a heading and subtitle. Note that space is still reserved for the breadcrumb, even if not provided, as well as a small ammount of space below the heading where the tabs would be if provided.',
       },
     }
   )
@@ -247,8 +240,7 @@ storiesOf(
       ),
     {
       info: {
-        text:
-          'Page header component with a heading and custom content alongside the heading. This is achieved by render function, which you would provide. It invokes the function with one argument, being the JSX for the heading. Your render function return this heading, along with any other content you want to show, which should include any styling/layout you require. In this instance, we render a Bee icon on the left. For convience, all content in the heading is horizontally aligned.',
+        text: 'Page header component with a heading and custom content alongside the heading. This is achieved by render function, which you would provide. It invokes the function with one argument, being the JSX for the heading. Your render function return this heading, along with any other content you want to show, which should include any styling/layout you require. In this instance, we render a Bee icon on the left. For convience, all content in the heading is horizontally aligned.',
       },
     }
   )
@@ -257,8 +249,7 @@ storiesOf(
     () => renderMockContent(<IdePageHeader {...withTabs} {...withClassName} />),
     {
       info: {
-        text:
-          'Page header component with just the tabs. Note that no space is reserved for any other content in this case.',
+        text: 'Page header component with just the tabs. Note that no space is reserved for any other content in this case.',
       },
     }
   )
@@ -310,8 +301,7 @@ storiesOf(
       ),
     {
       info: {
-        text:
-          'Page header component with bespoke JSX provided. In this instance, a custom button is rendered as a part of the navigation. This is provided by the customContent prop.',
+        text: 'Page header component with bespoke JSX provided. In this instance, a custom button is rendered as a part of the navigation. This is provided by the customContent prop.',
       },
     }
   );
@@ -335,8 +325,7 @@ storiesOf(
     ),
     {
       info: {
-        text:
-          'Page content component with just children. This component adds a carbon grid wrapping the child, with some IDE specific alignment css. It is recommended you use this to keep content aligned across your/all products.',
+        text: 'Page content component with just children. This component adds a carbon grid wrapping the child, with some IDE specific alignment css. It is recommended you use this to keep content aligned across your/all products.',
       },
     }
   )
@@ -349,8 +338,7 @@ storiesOf(
     ),
     {
       info: {
-        text:
-          'Page content component with children and a bleed class. This allows a bleed effect, larger than the grid. This component adds a carbon grid wrapping the child, with some IDE specific alignment css. It is recommended you use this to keep content aligned across your/all products.',
+        text: 'Page content component with children and a bleed class. This allows a bleed effect, larger than the grid. This component adds a carbon grid wrapping the child, with some IDE specific alignment css. It is recommended you use this to keep content aligned across your/all products.',
       },
     }
   );
@@ -374,8 +362,7 @@ storiesOf(
     ),
     {
       info: {
-        text:
-          'Page content component with just children. This component adds a carbon grid wrapping the child, with some IDE specific alignment css. It is recommended you use this to keep content aligned across your/all products.',
+        text: 'Page content component with just children. This component adds a carbon grid wrapping the child, with some IDE specific alignment css. It is recommended you use this to keep content aligned across your/all products.',
       },
     }
   )
@@ -388,8 +375,7 @@ storiesOf(
     ),
     {
       info: {
-        text:
-          'Page content component with children and a bleed class. This allows a bleed effect, larger than the grid. This component adds a carbon grid wrapping the child, with some IDE specific alignment css. It is recommended you use this to keep content aligned across your/all products.',
+        text: 'Page content component with children and a bleed class. This allows a bleed effect, larger than the grid. This component adds a carbon grid wrapping the child, with some IDE specific alignment css. It is recommended you use this to keep content aligned across your/all products.',
       },
     }
   );

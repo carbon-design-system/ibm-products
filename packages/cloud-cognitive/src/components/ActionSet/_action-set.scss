@@ -18,20 +18,28 @@
   $block-class: #{$pkg-prefix}--action-set;
 
   .#{$block-class} {
+    align-items: stretch;
     justify-content: flex-end;
   }
 
-  .#{$block-class}.#{$block-class}--stack {
-    align-items: stretch;
-  }
-
   .#{$block-class} .#{$block-class}__action-button {
-    align-items: center;
-    max-width: none;
+    @include carbon--type-style('body-short-01');
+
     height: $spacing-10;
-    margin: 0;
+    align-items: center;
     padding-top: $spacing-05;
     padding-bottom: $spacing-07;
+    margin: 0;
+  }
+
+  .#{$block-class}.#{$carbon-prefix}--btn-set
+    .#{$block-class}__action-button.#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--expressive {
+    max-width: none;
+  }
+
+  .#{$block-class}:not(.#{$block-class}--stacking)
+    .#{$block-class}__action-button--ghost {
+    padding-left: $spacing-07;
   }
 
   // For row-single in medium,
@@ -41,19 +49,18 @@
     .#{$block-class}__action-button,
   .#{$block-class}.#{$block-class}--row-single
     .#{$block-class}__action-button--ghost {
-    flex: 0 1 100%;
+    flex: 0 0 100%;
   }
 
   // For ghosts in row-double,
-  // buttons are 75% width
+  // buttons are 75% width and expand to use any remaining space
   .#{$block-class}.#{$block-class}--row-double
     .#{$block-class}__action-button--ghost {
-    flex: 0 1 75%;
+    flex: 1 0 75%;
   }
 
   // For row-single in large (non-ghost),
   // or row-double in medium or large,
-  // or ghosts in row-triple,
   // buttons are 50% width
   .#{$block-class}.#{$block-class}--row-single.#{$block-class}--lg
     .#{$block-class}__action-button:not(.#{$block-class}__action-button--ghost),
@@ -63,22 +70,35 @@
     .#{$block-class}__action-button,
   .#{$block-class}.#{$block-class}--row-triple
     .#{$block-class}__action-button--ghost {
-    flex: 0 1 50%;
+    flex: 0 0 50%;
+  }
+
+  // For ghosts in row-triple,
+  // buttons are 50% width and expand to use any remaining space
+  .#{$block-class}.#{$block-class}--row-triple
+    .#{$block-class}__action-button--ghost {
+    flex: 1 0 50%;
   }
 
   // For row-triple in large (non-ghost),
   // or any non-ghosts in extra large or max,
-  // or row-quadruple,
-  // buttons are 25% width
-  .#{$block-class}.#{$block-class}--row-triple.#{$block-class}--lg
+  // or row-quadruple (non-ghost),
+  // buttons are 25% width with a max of 232px
+  .#{$block-class}.#{$carbon-prefix}--btn-set.#{$block-class}--row-triple.#{$block-class}--lg
     .#{$block-class}__action-button:not(.#{$block-class}__action-button--ghost),
-  .#{$block-class}.#{$block-class}--xlg
+  .#{$block-class}.#{$carbon-prefix}--btn-set.#{$block-class}--xlg
     .#{$block-class}__action-button:not(.#{$block-class}__action-button--ghost),
-  .#{$block-class}.#{$block-class}--max
+  .#{$block-class}.#{$carbon-prefix}--btn-set.#{$block-class}--max
     .#{$block-class}__action-button:not(.#{$block-class}__action-button--ghost),
-  .#{$block-class}.#{$block-class}--row-quadruple
-    .#{$block-class}__action-button {
-    flex: 0 1 25%;
+  .#{$block-class}.#{$carbon-prefix}--btn-set.#{$block-class}--row-quadruple
+    .#{$block-class}__action-button:not(.#{$block-class}__action-button--ghost) {
+    max-width: rem(232px);
+    flex: 0 0 25%;
+  }
+
+  .#{$block-class}.#{$carbon-prefix}--btn-set.#{$block-class}--row-quadruple
+    .#{$block-class}__action-button--ghost {
+    flex: 1 0 25%;
   }
 
   .#{$block-class} .#{$block-class}__action-button .bx--inline-loading {

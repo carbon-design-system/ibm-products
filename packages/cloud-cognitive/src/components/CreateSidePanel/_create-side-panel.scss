@@ -22,16 +22,16 @@
 
   .#{$block-class}.#{$side-panel-block-class}__container
     .#{$side-panel-block-class}__title-text {
-    margin-bottom: $spacing-02;
     padding-right: calc(20% - #{$spacing-05});
+    margin-bottom: $spacing-02;
   }
 
   .#{$block-class}.#{$side-panel-block-class}__container
     .#{$side-panel-block-class}__subtitle-text {
     padding-right: calc(20% - #{$spacing-05});
     padding-bottom: $spacing-05;
-    color: $text-02;
     border-bottom: 1px solid $ui-03;
+    color: $text-02;
   }
 
   .#{$block-class}__form {

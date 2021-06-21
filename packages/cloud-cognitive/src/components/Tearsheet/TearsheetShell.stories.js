@@ -19,7 +19,12 @@ export default {
   title: `${storybookPrefix}/Tearsheets/${TearsheetShell.displayName}`,
   component: TearsheetShell,
   parameters: { controls: { expanded: true }, styles, docs: { page: mdx } },
+  argTypes: {
+    preventCloseOnClickOutside: { table: { disable: true } },
+  },
 };
+
+const closeIconDescription = 'Close the tearsheet';
 
 const className = 'client-class-1 client-class-2';
 
@@ -41,6 +46,7 @@ const Template = (args) => {
 // Stories
 export const AllAttributesSet = Template.bind({});
 AllAttributesSet.args = {
+  closeIconDescription,
   height: 'normal',
   // onClose: () => false,
   open: true,
@@ -49,4 +55,6 @@ AllAttributesSet.args = {
 };
 
 export const NoAttributesSet = Template.bind({});
-NoAttributesSet.args = {};
+NoAttributesSet.args = {
+  size: 'wide',
+};

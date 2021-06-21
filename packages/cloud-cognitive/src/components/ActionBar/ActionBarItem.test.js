@@ -56,7 +56,7 @@ describe(ActionBarItem.displayName, () => {
 
     const btn = screen.getByText(content);
     expect(btn).not.toHaveClass(`${carbon.prefix}--btn--lg`);
-    expect(btn).toHaveClass(`${carbon.prefix}--btn--field`);
+    expect(btn).toHaveClass(`${carbon.prefix}--btn--md`);
     expect(btn).toHaveAttribute('type', 'button');
   });
 

@@ -3,6 +3,92 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.3.2...@carbon/ibm-cloud-cognitive-cdai@1.3.3) (2021-06-17)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai
+
+
+
+
+
+## [1.3.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.3.1...@carbon/ibm-cloud-cognitive-cdai@1.3.2) (2021-06-10)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai
+
+
+
+
+
+## [1.3.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.3.0...@carbon/ibm-cloud-cognitive-cdai@1.3.1) (2021-06-09)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai
+
+
+
+
+
+# [1.3.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.2.9...@carbon/ibm-cloud-cognitive-cdai@1.3.0) (2021-06-09)
+
+
+### Features
+
+* match Carbon peer deps for react ([#869](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/869)) ([8f42118](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8f42118754a904554acee9ec3af2e1fae8143817))
+
+
+
+
+
+## [1.2.9](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.2.8...@carbon/ibm-cloud-cognitive-cdai@1.2.9) (2021-06-07)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai
+
+
+
+
+
+## [1.2.8](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.2.7...@carbon/ibm-cloud-cognitive-cdai@1.2.8) (2021-06-04)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai
+
+
+
+
+
+## [1.2.7](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.2.6...@carbon/ibm-cloud-cognitive-cdai@1.2.7) (2021-06-03)
+
+
+### Bug Fixes
+
+* add fallback selector for focus trap ([#853](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/853)) ([59b23f4](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/59b23f41073fa58534202fadd3e98fbc42b248a4))
+
+
+
+
+
+## [1.2.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.2.5...@carbon/ibm-cloud-cognitive-cdai@1.2.6) (2021-05-28)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai
+
+
+
+
+
+## [1.2.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.2.4...@carbon/ibm-cloud-cognitive-cdai@1.2.5) (2021-05-27)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai
+
+
+
+
+
+## [1.2.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.2.3...@carbon/ibm-cloud-cognitive-cdai@1.2.4) (2021-05-26)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai
+
+
+
+
+
 ## [1.2.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.2.2...@carbon/ibm-cloud-cognitive-cdai@1.2.3) (2021-05-26)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai

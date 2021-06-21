@@ -15,9 +15,25 @@
 @mixin import-modal {
   $block-class: #{$pkg-prefix}--import-modal;
 
-  .bx--file .bx--file-container,
-  .bx--file ~ .bx--file-container {
+  .#{$block-class} .#{$carbon-prefix}--modal-close {
+    display: none;
+  }
+
+  .#{$block-class} .#{$carbon-prefix}--modal-footer .#{$carbon-prefix}--btn {
+    max-width: none;
+  }
+
+  .#{$block-class} .#{$carbon-prefix}--modal-content {
+    padding-right: $spacing-05;
+  }
+
+  .#{$carbon-prefix}--file .#{$carbon-prefix}--file-container,
+  .#{$carbon-prefix}--file ~ .#{$carbon-prefix}--file-container {
     margin-top: 0;
+  }
+
+  .#{$carbon-prefix}--modal-container--sm .#{$carbon-prefix}--modal-header {
+    padding-right: calc(20% - #{$spacing-05});
   }
 
   .#{$block-class}__input-group {
@@ -28,7 +44,12 @@
     margin-left: $spacing-05;
   }
 
-  .#{$block-class}__label {
+  .#{$block-class}__file-container {
+    width: 100%;
+  }
+
+  .#{$block-class} .#{$block-class}__file-drop-header,
+  .#{$block-class} .#{$block-class}__label {
     margin-bottom: $spacing-03;
     @include carbon--type-style('productive-heading-01');
   }
@@ -40,23 +61,15 @@
   }
 
   .#{$block-class}__body {
+    padding-right: calc(20% - #{$spacing-05});
     margin-bottom: $spacing-06;
-    padding-right: 20%;
   }
 
-  .#{$block-class} .bx--modal-container {
-    background: $ui-01;
-  }
-
-  .#{$block-class} .bx--modal-content {
-    padding-right: $spacing-05;
-  }
-
-  .#{$block-class} .bx--file__selected-file {
+  .#{$block-class} .#{$carbon-prefix}--file__selected-file {
     max-width: none;
   }
 
-  .#{$block-class} .bx--file {
+  .#{$block-class} .#{$carbon-prefix}--file {
     margin-bottom: $spacing-05;
   }
 }

@@ -31,9 +31,8 @@ export const MultiStepTearsheet = () => {
   const [topicDescriptionValue, setTopicDescriptionValue] = useState('');
   const [topicVersionValue, setTopicVersionValue] = useState('');
   const [stepTwoTextInputValue, setStepTwoTextInputValue] = useState(1);
-  const [stepThreeTextInputValue, setStepThreeTextInputValue] = useState(
-    'one-day'
-  );
+  const [stepThreeTextInputValue, setStepThreeTextInputValue] =
+    useState('one-day');
   const [isInvalid, setIsInvalid] = useState(false);
 
   const clearCreateData = () => {
@@ -64,14 +63,14 @@ export const MultiStepTearsheet = () => {
         title="Create topic"
         open={open}
         onClose={clearCreateData}
-        onRequestSubmit={() => {
-          return new Promise((resolve) => {
+        onRequestSubmit={() =>
+          new Promise((resolve) => {
             setTimeout(() => {
               clearCreateData();
               resolve();
             }, simulatedDelay);
-          });
-        }}>
+          })
+        }>
         <CreateTearsheetStep
           onNext={() => {
             return new Promise((resolve, reject) => {
@@ -106,13 +105,17 @@ export const MultiStepTearsheet = () => {
             value={stepOneTextInputValue}
             placeholder="Enter topic name"
             onChange={(event) => {
-              if (event.target.value.length) setIsInvalid(false);
+              if (event.target.value.length) {
+                setIsInvalid(false);
+              }
               setStepOneTextInputValue(event.target.value);
             }}
             invalid={isInvalid}
             invalidText="This is a required field"
             onBlur={() => {
-              if (!stepOneTextInputValue.length) setIsInvalid(true);
+              if (!stepOneTextInputValue.length) {
+                setIsInvalid(true);
+              }
             }}
           />
           <TextInput

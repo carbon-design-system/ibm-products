@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2021, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,6 +12,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
+import { deprecateProp } from '../../global/js/utils/props-helper';
 
 // Carbon and package components we use.
 import { Form } from 'carbon-components-react';
@@ -42,6 +43,7 @@ export let CreateSidePanel = React.forwardRef(
       secondaryButtonText,
       selectorPrimaryFocus,
       pageContentSelector,
+      selectorPageContent,
       formTitle,
       formDescription,
       ...rest
@@ -63,21 +65,24 @@ export let CreateSidePanel = React.forwardRef(
     ];
 
     return (
-      pageContentSelector && (
+      (selectorPageContent || pageContentSelector) && (
         <SidePanel
           {...rest}
-          ref={ref}
-          pageContentSelector={pageContentSelector}
+          {...{
+            open,
+            ref,
+            pageContentSelector,
+            selectorPageContent,
+            onRequestClose,
+            title,
+            subtitle,
+            actions,
+            selectorPrimaryFocus,
+          }}
           placement="right"
           slideIn
           animateTitle={false}
           className={cx(blockClass, className)}
-          onRequestClose={onRequestClose}
-          open={open}
-          title={title}
-          subtitle={subtitle}
-          actions={actions}
-          selectorPrimaryFocus={selectorPrimaryFocus}
           size="md">
           <h3
             className={`${blockClass}__form-title-text ${blockClass}__content-text`}>
@@ -94,19 +99,13 @@ export let CreateSidePanel = React.forwardRef(
   }
 );
 
-// Return a placeholder if not released and not enabled by feature flag.
 CreateSidePanel = pkg.checkComponentEnabled(CreateSidePanel, componentName);
 
-// The display name of the component, used by React. Note that displayName
-// is used in preference to relying on function.name.
 CreateSidePanel.displayName = componentName;
 
-// The types and DocGen commentary for the component props,
-// in alphabetical order (for consistency).
-// See https://www.npmjs.com/package/prop-types#usage.
 CreateSidePanel.propTypes = {
   /**
-   * Sets the body content of the side panel
+   * Sets the body content of the create side panel
    */
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
@@ -116,7 +115,6 @@ CreateSidePanel.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
-
   /**
    * The description of the CreateSidePanel serves to provide more information about the form within the panel.
    */
@@ -131,7 +129,7 @@ CreateSidePanel.propTypes = {
    */
   formDescription: PropTypes.node,
   /**
-   * Specifies a required that provides a title for a form
+   * Specifies a required field that provides a title for a form
    */
   formTitle: PropTypes.node.isRequired,
 
@@ -153,7 +151,10 @@ CreateSidePanel.propTypes = {
    * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
    * This prop is required when using the `slideIn` variant of the side panel.
    */
-  pageContentSelector: PropTypes.string.isRequired,
+  pageContentSelector: deprecateProp(
+    PropTypes.string,
+    'This prop has been renamed to `selectorPageContent`.'
+  ),
   /**
    * Specifies the primary button's text in the modal.
    */
@@ -162,6 +163,11 @@ CreateSidePanel.propTypes = {
    * Specifies the secondary button's text in the modal.
    */
   secondaryButtonText: PropTypes.string.isRequired,
+  /**
+   * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
+   * This prop is required when using the `slideIn` variant of the side panel.
+   */
+  selectorPageContent: PropTypes.string.isRequired,
   /**
    * Specifies which DOM element in the form should be focused.
    */

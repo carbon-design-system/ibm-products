@@ -38,7 +38,9 @@ describe(name, () => {
       const TestComponent = components[key];
 
       // TODO: remove this - security components does not currently support canary
-      if (key.startsWith('ComboButton')) continue;
+      if (key.startsWith('ComboButton')) {
+        continue;
+      }
 
       it(`Renders a canary for "${key}" if package flags set to disable`, () => {
         const { container } = render(<TestComponent />);

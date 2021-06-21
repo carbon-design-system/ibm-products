@@ -1,3 +1,10 @@
+//
+// Copyright IBM Corp. 2020, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -9,6 +16,7 @@ import { mockHTMLElement } from '../../global/js/utils/test-helper';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 const blockClass = `${pkg.prefix}--tag-set`;
+const blockClassOverflow = `${pkg.prefix}--tag-set-overflow`;
 
 const tagLabel = (index) => `Tag ${index + 1}`;
 const types = ['red', 'blue', 'cyan', 'high-contrast'];
@@ -23,6 +31,13 @@ const tags = Array.from({ length: 20 }, (v, k) => (
 const tags10 = tags.slice(0, 10);
 const tagWidth = 100;
 
+const overflowAndModalStrings = {
+  allTagsModalTile: 'All tags',
+  allTagsModalSearchLabel: 'Search all tags',
+  allTagsModalSearchPlaceholderText: 'Search all tags',
+  showAllTagsLabel: 'View all tags',
+};
+
 describe(TagSet.displayName, () => {
   const { ResizeObserver } = window;
   let mockElement;
@@ -35,7 +50,7 @@ describe(TagSet.displayName, () => {
 
           if (
             this.classList.contains(`${blockClass}__sizing-tag`) ||
-            this.classList.contains(`${blockClass}__overflow`)
+            this.classList.contains(`${blockClassOverflow}`)
           ) {
             width = tagWidth; // all tags 100 in size
           } else {
@@ -91,7 +106,7 @@ describe(TagSet.displayName, () => {
 
     const overflowVisible = screen.queryAllByText(/Tag [0-9]+/, {
       // selector need to ignore sizing items
-      selector: `.${blockClass}__overflow-content *`,
+      selector: `.${blockClassOverflow}__content *`,
     });
     expect(overflowVisible.length).toEqual(tags10.length);
   });
@@ -119,7 +134,7 @@ describe(TagSet.displayName, () => {
 
     const overflowVisible = screen.queryAllByText(/Tag [0-9]+/, {
       // selector need to ignore sizing items
-      selector: `.${blockClass}__overflow-content *`,
+      selector: `.${blockClassOverflow}__content *`,
     });
     expect(overflowVisible.length + visible.length).toEqual(tags10.length);
   });
@@ -129,7 +144,7 @@ describe(TagSet.displayName, () => {
     window.innerWidth = tagWidth * (visibleTags + 1) + 1; // + 1 for overflow
 
     // const { container } =
-    render(<TagSet>{tags}</TagSet>);
+    render(<TagSet {...overflowAndModalStrings}>{tags}</TagSet>);
 
     const overflow = screen.getByText(`+${tags.length - visibleTags}`);
     userEvent.click(overflow);
@@ -142,6 +157,31 @@ describe(TagSet.displayName, () => {
     const closeButton = screen.getByTitle('Close');
     userEvent.click(closeButton);
     expect(modal).not.toHaveClass('is-visible');
+  });
+
+  it('it requires strings for overflow and modal when more than ten tags supplied.', () => {
+    const visibleTags = 5;
+    window.innerWidth = tagWidth * (visibleTags + 1) + 1; // + 1 for overflow
+
+    const errorsLogged = jest
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
+
+    render(<TagSet>{tags}</TagSet>);
+
+    expect(errorsLogged).toBeCalledTimes(4);
+    expect(errorsLogged.mock.calls[0][0]).toEqual(
+      'Warning: Failed prop type: The prop `allTagsModalSearchLabel` is marked as required in `TagSet`, but its value is `undefined`.\n    in TagSet'
+    );
+    expect(errorsLogged.mock.calls[1][0]).toEqual(
+      'Warning: Failed prop type: The prop `allTagsModalSearchPlaceholderText` is marked as required in `TagSet`, but its value is `undefined`.\n    in TagSet'
+    );
+    expect(errorsLogged.mock.calls[2][0]).toEqual(
+      'Warning: Failed prop type: The prop `allTagsModalTile` is marked as required in `TagSet`, but its value is `undefined`.\n    in TagSet'
+    );
+    expect(errorsLogged.mock.calls[3][0]).toEqual(
+      'Warning: Failed prop type: The prop `showAllTagsLabel` is marked as required in `TagSet`, but its value is `undefined`.\n    in TagSet'
+    );
   });
 
   it('Obeys max visible', () => {
@@ -184,9 +224,26 @@ describe(TagSet.displayName, () => {
     expect(ref.current).not.toBeNull();
   });
 
+  it('copes with no children', () => {
+    const dataTestId = uuidv4();
+    window.innerWidth = tagWidth * 10 + 1;
+
+    render(<TagSet data-testid={dataTestId}></TagSet>);
+    screen.getByTestId(dataTestId);
+  });
+
+  it('forwards a ref to an appropriate node', () => {
+    const ref = React.createRef();
+    window.innerWidth = tagWidth * 10 + 1;
+
+    render(<TagSet ref={ref}>{tags10}</TagSet>);
+
+    expect(ref.current).not.toBeNull();
+  });
+
   describe(TagSetModal.displayName, () => {
     const args = {
-      heading: 'a-heading',
+      title: 'a-title',
       searchLabel: 'a search label',
       searchPlaceholder: 'a search placeholder',
     };
@@ -207,6 +264,9 @@ describe(TagSet.displayName, () => {
       expect(noTags.length).toBe(0);
 
       fireEvent.change(search, { target: { value: 'red' } });
+      screen.getAllByText(/Tag [0-9]+/);
+
+      fireEvent.change(search, { target: { value: '' } });
       screen.getAllByText(/Tag [0-9]+/);
     });
   });

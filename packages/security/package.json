@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-security",
   "description": "Carbon for Cloud & Cognitive IBM Security UI components",
-  "version": "0.4.20",
+  "version": "0.4.27",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -28,27 +28,29 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && yarn build:js && yarn build:scss",
+    "build": "run-s clean build-all",
+    "build-all": "run-p build:*",
     "build:css": "bundler bundle:scss src/index.scss",
-    "build:js": "yarn build:js-esm && yarn build:js-cjs",
-    "build:js-esm": "cross-env BABEL_ENV=esm yarn build:js-modules -d es",
-    "build:js-cjs": "cross-env BABEL_ENV=cjs yarn build:js-modules -d lib",
-    "build:js-modules": "babel src --ignore '**/__tests__','**/*.test.js','**/*.stories.js'",
+    "build:js-esm": "cross-env BABEL_ENV=esm yarn build:js:modules -d es",
+    "build:js-cjs": "cross-env BABEL_ENV=cjs yarn build:js:modules -d lib",
+    "build:js:modules": "babel src --ignore '**/__tests__','**/*.test.js','**/*.stories.js'",
     "build:scss": "copyfiles 'src/**/*.scss' scss -u 1",
     "ci-check": "node scripts/import",
     "clean": "rimraf css es lib scss",
     "test": "run-p test:*",
     "test:js": "jest",
-    "test:scss": "bundler check 'src/**/*.scss'"
+    "test:scss": "bundler check 'src/**/*.scss'",
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally)",
+    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon)/'"
   },
   "dependencies": {
-    "@babel/runtime": "^7.13.10",
-    "@carbon/icons-react": "^10.29.0",
+    "@babel/runtime": "^7.14.6",
+    "@carbon/icons-react": "^10.33.0",
     "@carbon/import-once": "^10.5.0",
-    "@carbon/layout": "^10.22.0",
-    "@carbon/themes": "^10.31.0",
-    "carbon-components": "^10.32.1",
-    "carbon-components-react": "^7.32.1",
+    "@carbon/layout": "^10.25.0",
+    "@carbon/themes": "^10.36.0",
+    "carbon-components": "^10.37.0",
+    "carbon-components-react": "^7.37.0",
     "carbon-icons": "^7.0.7",
     "classnames": "^2.3.1"
   },
@@ -56,8 +58,10 @@
     "@carbon/bundler": "^10.11.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
-    "jest": "^25.5.4",
-    "jest-config": "^0.3.9",
-    "npm-run-all": "^4.1.5"
+    "jest": "^27.0.4",
+    "jest-config-ibm-cloud-cognitive": "^0.3.15",
+    "npm-check-updates": "^11.6.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2"
   }
 }

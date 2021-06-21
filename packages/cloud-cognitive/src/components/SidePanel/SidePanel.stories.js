@@ -329,7 +329,8 @@ const SlideOverTemplate = ({ minimalContent, actions, ...args }) => {
   );
 };
 
-const StepTemplate = (args) => {
+// eslint-disable-next-line react/prop-types
+const StepTemplate = ({ actions, ...args }) => {
   const [open, setOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   return (
@@ -343,7 +344,8 @@ const StepTemplate = (args) => {
         open={open}
         onRequestClose={() => setOpen(false)}
         currentStep={currentStep}
-        onNavigationBack={() => setCurrentStep((prev) => prev - 1)}>
+        onNavigationBack={() => setCurrentStep((prev) => prev - 1)}
+        actions={actionSets[actions]}>
         <ChildrenContentWithSteps
           currentStep={currentStep}
           setCurrentStep={setCurrentStep}
@@ -390,7 +392,7 @@ export const SlideIn = SlideInTemplate.bind({});
 SlideIn.args = {
   placement: 'right',
   slideIn: true,
-  pageContentSelector: '#cloud-and-cognitive-page-content',
+  selectorPageContent: '#cloud-and-cognitive-page-content',
   actions: 0,
   ...defaultStoryProps,
 };

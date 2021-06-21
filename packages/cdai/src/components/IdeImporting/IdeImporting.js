@@ -92,7 +92,8 @@ export default class IdeImporting extends React.Component {
       return onValidateUrl(url);
     }
 
-    const re = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
+    const re =
+      /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
     return !!re.exec(url);
   }
   getInvalidExtensionText() {
@@ -117,16 +118,22 @@ export default class IdeImporting extends React.Component {
     );
   }
   async handleFileAdded(fileToUpload) {
-    if (!this.mounted) return;
+    if (!this.mounted) {
+      return;
+    }
 
-    if (fileToUpload.invalid) return;
+    if (fileToUpload.invalid) {
+      return;
+    }
 
     try {
       this.updateFileToUploadState(fileToUpload.uuid, {
         status: FILE_UPLOAD_STATUS.UPLOADING,
       });
       await this.props.onFileAdded(fileToUpload);
-      if (!this.mounted) return;
+      if (!this.mounted) {
+        return;
+      }
       if (
         this.props.allowValidFileEditing ||
         this.props.enableUpload === false
@@ -177,7 +184,9 @@ export default class IdeImporting extends React.Component {
   handleFilesAdded(e, { addedFiles }) {
     e.stopPropagation();
 
-    if (!this.props.multiple) addedFiles = [addedFiles[0]];
+    if (!this.props.multiple) {
+      addedFiles = [addedFiles[0]];
+    }
 
     const mappedFiles = addedFiles.map((file) =>
       this.createFileToUpload({ file })
@@ -228,12 +237,8 @@ export default class IdeImporting extends React.Component {
     });
   }
   renderFilesToUpload(counts) {
-    const {
-      multiple,
-      singleFileLabel,
-      fileDropHeader,
-      hideImport,
-    } = this.props;
+    const { multiple, singleFileLabel, fileDropHeader, hideImport } =
+      this.props;
     return (
       <div className={`${idePrefix}--file-status`} style={{ width: '100%' }}>
         <div className={`${idePrefix}--file-list ${idePrefix}-hide-import`}>
@@ -290,7 +295,9 @@ export default class IdeImporting extends React.Component {
   }
   renderFileMode() {
     const { multiple, enableFileDrop, hideImport, fileDropHeader } = this.props;
-    if (!enableFileDrop) return null;
+    if (!enableFileDrop) {
+      return null;
+    }
     const disabled = this.shouldDisableInput();
 
     const fileUploaderProps = {
@@ -327,7 +334,9 @@ export default class IdeImporting extends React.Component {
   renderUrlMode() {
     const { multiple, enableUrlInput } = this.props;
     const { urlInputIsValid } = this.state;
-    if (!enableUrlInput) return null;
+    if (!enableUrlInput) {
+      return null;
+    }
 
     const inputProps = {
       key: 'importing-input',

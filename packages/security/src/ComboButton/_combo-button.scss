@@ -36,8 +36,8 @@
   .#{$security--prefix}--combo-button__overflow-menu {
     width: carbon--mini-units($count: 6);
     height: auto;
-    background-color: $interactive-01;
     border-left: carbon--rem($px: 1px) solid $ui-03;
+    background-color: $interactive-01;
   }
 
   .#{$security--prefix}--combo-button__overflow-menu.#{$prefix}--overflow-menu:hover,
@@ -50,8 +50,8 @@
   }
 
   .#{$security--prefix}--combo-button__overflow-menu__icon {
-    pointer-events: none;
     fill: $icon-03;
+    pointer-events: none;
   }
 
   .#{$security--prefix}--combo-button__overflow-menu__list {

@@ -28,12 +28,10 @@ export default {
 
 const defaultProps = {
   filename: 'Sample02.pdf',
-  iconDescription: 'close',
   inputLabel: 'File name',
   onClose: () => {},
   onRequestSubmit: () => {},
   open: true,
-  preventCloseOnClickOutside: true,
   primaryButtonText: 'Export',
   secondaryButtonText: 'Cancel',
   title: 'Export',
@@ -44,7 +42,7 @@ const Template = (args) => {
 };
 
 const TemplateWithState = (args) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [successful, setSuccessful] = useState(false);
   const [error, setError] = useState(false);
@@ -52,8 +50,11 @@ const TemplateWithState = (args) => {
   const onSubmitHandler = async () => {
     setLoading(true);
     await wait(1000);
-    if (args.successful) setSuccessful(true);
-    else setError(true);
+    if (args.successful) {
+      setSuccessful(true);
+    } else {
+      setError(true);
+    }
     setLoading(false);
   };
 

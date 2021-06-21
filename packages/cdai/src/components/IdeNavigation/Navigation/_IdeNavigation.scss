@@ -16,23 +16,23 @@
 }
 
 .#{$ide-prefix}-navigation--nav-overrides {
-  // stylelint-disable-next-line declaration-property-value-blacklist
+  // stylelint-disable-next-line declaration-property-value-disallowed-list
   height: unset; /* we will define the height */
   transition: all $duration--fast-01 cubic-bezier(0.2, 0, 1, 0.9);
 }
 
 .#{$ide-prefix}-navigation--content {
+  overflow: auto;
   height: 100%;
-  margin: 0;
   // remove all padding from the carbon content area - leave padding bottom, as products may use this to add extra space to their content
   padding-top: 0;
   padding-right: 0;
   padding-left: 0;
-  overflow: auto;
+  margin: 0;
   background: $ui-01;
 
   // IMPORTANT - required so any fixed content renders in the correct place. Issue  raised to address. Short term, disable this as does nothing for us
-  // stylelint-disable-next-line declaration-property-value-blacklist
+  // stylelint-disable-next-line declaration-property-value-disallowed-list
   transform: unset;
   transition: all $duration--fast-01 cubic-bezier(0.2, 0, 1, 0.9);
 }
@@ -46,10 +46,10 @@
 .#{$ide-prefix}-navigation--toggle {
   .#{$prefix}--side-nav__toggle {
     .#{$prefix}--side-nav__icon {
-      // stylelint-disable-next-line declaration-property-value-blacklist
-      justify-content: unset;
       width: carbon--mini-units(6);
-      // stylelint-disable-next-line declaration-property-value-blacklist
+      // stylelint-disable-next-line declaration-property-value-disallowed-list
+      justify-content: unset;
+      // stylelint-disable-next-line declaration-property-value-disallowed-list
       margin-right: unset;
     }
   }
@@ -74,17 +74,17 @@
   .#{$prefix}--side-nav__submenu {
     background-color: $ui-05;
     &.active {
-      // stylelint-disable-next-line declaration-no-important
-      color: $active-ui !important; /* simpler/safer than overriding the carbon selector */
       // stylelint-disable-next-line declaration-no-important, carbon/theme-token-use
       background-color: $carbon--gray-90 !important; /* simpler/safer than overriding the carbon selector */
+      // stylelint-disable-next-line declaration-no-important
+      color: $active-ui !important; /* simpler/safer than overriding the carbon selector */
     }
 
     &:hover {
       // stylelint-disable-next-line declaration-no-important
-      color: $active-ui !important; /* simpler/safer than overriding the carbon selector */
-      // stylelint-disable-next-line declaration-no-important
       background-color: $inverse-02 !important; /* simpler/safer than overriding the carbon selector */
+      // stylelint-disable-next-line declaration-no-important
+      color: $active-ui !important; /* simpler/safer than overriding the carbon selector */
     }
   }
 
@@ -103,9 +103,9 @@
     background-color: $ui-05 !important; /* simpler/safer than overriding the carbon selector */
     &:hover {
       // stylelint-disable-next-line declaration-no-important
-      color: $active-ui !important; /* simpler/safer than overriding the carbon selector */
-      // stylelint-disable-next-line declaration-no-important
       background-color: $inverse-02 !important; /* simpler/safer than overriding the carbon selector */
+      // stylelint-disable-next-line declaration-no-important
+      color: $active-ui !important; /* simpler/safer than overriding the carbon selector */
     }
   }
 
@@ -132,10 +132,10 @@
     position: fixed;
     width: 0;
     height: 0;
-    margin-left: carbon--mini-units(-2.5);
     border-top: carbon--mini-units(1) solid transparent;
     border-right: carbon--mini-units(1) solid $ui-05;
     border-bottom: carbon--mini-units(1) solid transparent;
+    margin-left: carbon--mini-units(-2.5);
     content: '';
   }
 
@@ -153,10 +153,10 @@
     // flex required to get text and arrow equally spaced/aligned
     display: flex;
     align-items: center;
-    margin-left: carbon--mini-units(4.5);
     padding: carbon--mini-units(1) carbon--mini-units(2);
-    font-weight: carbon--font-weight('regular');
+    margin-left: carbon--mini-units(4.5);
     background-color: $ui-05;
     border-radius: $spacing-02;
+    font-weight: carbon--font-weight('regular');
   }
 }

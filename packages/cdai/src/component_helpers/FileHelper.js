@@ -7,12 +7,16 @@
 
 export function getExtensionFromFilename(filename) {
   // invalid input
-  if (!filename || typeof filename !== 'string') return;
+  if (!filename || typeof filename !== 'string') {
+    return;
+  }
 
   const indexOfDot = filename.lastIndexOf('.');
 
   // no extension
-  if (indexOfDot === -1) return;
+  if (indexOfDot === -1) {
+    return;
+  }
 
   return filename.substr(indexOfDot + 1);
 }

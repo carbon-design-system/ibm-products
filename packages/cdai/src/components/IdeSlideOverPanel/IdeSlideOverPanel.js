@@ -119,7 +119,9 @@ const IdeSlideOverPanel = ({
         <div role="presentation" className={overlayClasses} {...interactions} />
       </>
     );
-  } else return panelContents;
+  } else {
+    return panelContents;
+  }
 };
 
 IdeSlideOverPanel.propTypes = {
@@ -178,6 +180,7 @@ IdeSlideOverPanel.defaultProps = {
   closeButtonIconDescription: 'Close',
   focusTrapOptions: {
     initialFocus: '.ide-slide-over-panel--close',
+    fallbackFocus: '.ide-slide-over-panel--close',
   },
 };
 

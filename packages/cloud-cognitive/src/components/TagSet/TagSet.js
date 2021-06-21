@@ -256,6 +256,24 @@ const string_required_if_more_than_10_tags = (
   return null;
 };
 
+// copied from carbon-components-react/src/components/Tag/Tag.js for DocGen
+const TYPES = {
+  red: 'Red',
+  magenta: 'Magenta',
+  purple: 'Purple',
+  blue: 'Blue',
+  cyan: 'Cyan',
+  teal: 'Teal',
+  green: 'Green',
+  gray: 'Gray',
+  'cool-gray': 'Cool-Gray',
+  'warm-gray': 'Warm-Gray',
+  'high-contrast': 'High-Contrast',
+};
+const tagTypes = Object.keys(TYPES);
+
+TagSet.types = tagTypes;
+
 TagSet.propTypes = {
   /**
    * label text for the show all search. **Note: Required if more than 10 tags**
@@ -299,11 +317,11 @@ TagSet.propTypes = {
   showAllTagsLabel: string_required_if_more_than_10_tags,
   /**
    * The tags to be shown in the TagSet. Each tag is specified as an object
-   * with optional fields: 'label' to supply the tag label, and additional
-   * fields in the object will be passed to the Carbon Tag component: these
-   * can include 'type', 'filter', 'disabled', 'ref', 'className', and any
-   * other Tag props. Any other fields in the object will be passed through
-   * to the HTML element as HTML attributes.
+   * with properties: **label**\* (required) to supply the tag content, and
+   * other properties will be passed to the Carbon Tag component, such as
+   * **type**, **disabled**, **ref**, **className** , and any other Tag props.
+   * NOTE: **filter** is not supported. Any other fields in the object will be passed through to the HTML element
+   * as HTML attributes.
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-tag--default
    */
@@ -311,6 +329,8 @@ TagSet.propTypes = {
     PropTypes.shape({
       ...prepareProps(Tag.propTypes, 'filter'),
       label: PropTypes.string.isRequired,
+      // we duplicate this prop to improve the DocGen
+      type: PropTypes.oneOf(tagTypes),
     })
   ),
 };

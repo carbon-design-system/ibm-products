@@ -29,7 +29,7 @@ const manyTags = [
   {
     label: 'One',
     type: 'blue',
-    dataSearch: 'one',
+    ['data-search']: 'single',
   },
   {
     label: 'Two',
@@ -74,7 +74,7 @@ const manyTags = [
   {
     label: 'Twelve',
     type: 'high-contrast',
-    dataSearch: 'twelve',
+    ['data-search']: 'dozen',
   },
   {
     label: 'Thirteen',
@@ -108,7 +108,10 @@ const manyTags = [
     label: 'Twenty',
     type: 'high-contrast',
   },
-];
+].map((item, index) => ({
+  ...item,
+  ['data-search']: '' + (index + 1) + ' ' + item?.['data-search'],
+}));
 
 const hundredsOfTags = [];
 for (let i = 0; i < 200; i++) {

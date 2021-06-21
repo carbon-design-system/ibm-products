@@ -38,14 +38,17 @@ export const TagSetModal = ({
       if (search === '') {
         newFilteredModalTags = allTags.slice(0);
       } else {
-        const lcaseSearch = search.toLocaleLowerCase();
+        const lCaseSearch = search.toLocaleLowerCase();
 
         allTags.forEach((tag) => {
-          const dataSearch = (tag['data-search'] || '').toLocaleLowerCase();
-          if (
-            (dataSearch && dataSearch.indexOf(lcaseSearch) > -1) ||
-            tag.label.indexOf(lcaseSearch) > -1
-          ) {
+          const dataSearch = tag['data-search']
+            ?.toLocaleLowerCase()
+            ?.indexOf(lCaseSearch);
+          const labelSearch = tag.label
+            ?.toLocaleLowerCase()
+            ?.indexOf(lCaseSearch);
+
+          if (dataSearch > -1 || labelSearch > -1) {
             newFilteredModalTags.push(tag);
           }
         });

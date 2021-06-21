@@ -484,10 +484,10 @@ export let CreateTearsheet = forwardRef(
         description={description}
         hasCloseIcon={false}
         influencer={
-          <div>
+          <>
             {renderProgressSteps(children)}
             {includeViewAllToggle && renderViewAllToggle()}
-          </div>
+          </>
         }
         influencerPosition="left"
         influencerWidth="narrow"

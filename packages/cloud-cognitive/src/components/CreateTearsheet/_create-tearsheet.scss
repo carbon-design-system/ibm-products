@@ -35,10 +35,6 @@
     display: block;
   }
 
-  .#{$block-class} .#{$pkg-prefix}--tearsheet__body {
-    overflow-y: hidden;
-  }
-
   .#{$block-class}
     .#{$block-class}__step--visible-step:not(.#{$block-class}__step--first-panel-step) {
     animation: $duration--slow-01 stepContentEntrance;

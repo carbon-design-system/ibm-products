@@ -270,50 +270,54 @@ export let CreateTearsheet = forwardRef(
       });
       if (shouldViewAll) {
         return (
-          <SideNav expanded isFixedNav>
-            <SideNavItems>
-              {sectionChildElements?.length &&
-                sectionChildElements.map((sectionChild, sectionIndex) => (
-                  <SideNavLink
-                    href="javascript:void(0)"
-                    key={sectionIndex}
-                    isActive={activeSectionIndex === sectionIndex}
-                    onClick={() => {
-                      setActiveSectionIndex(sectionIndex);
-                      if (sectionChild.props.id) {
-                        const scrollTarget = document.querySelector(
-                          `#${sectionChild.props.id}`
-                        );
-                        const scrollContainer = document.querySelector(
-                          `.${pkg.prefix}--tearsheet__main`
-                        );
-                        scrollContainer.scrollTo({
-                          top: scrollTarget.offsetTop,
-                          behavior: 'smooth',
-                        });
-                      } else {
-                        console.warn(
-                          `${componentName}: CreateTearsheetSection is missing a required prop of 'id'`
-                        );
-                      }
-                    }}>
-                    {sectionChild.props.title}
-                  </SideNavLink>
-                ))}
-            </SideNavItems>
-          </SideNav>
+          <div className={`${blockClass}__left-nav`}>
+            <SideNav expanded isFixedNav>
+              <SideNavItems>
+                {sectionChildElements?.length &&
+                  sectionChildElements.map((sectionChild, sectionIndex) => (
+                    <SideNavLink
+                      href="javascript:void(0)"
+                      key={sectionIndex}
+                      isActive={activeSectionIndex === sectionIndex}
+                      onClick={() => {
+                        setActiveSectionIndex(sectionIndex);
+                        if (sectionChild.props.id) {
+                          const scrollTarget = document.querySelector(
+                            `#${sectionChild.props.id}`
+                          );
+                          const scrollContainer = document.querySelector(
+                            `.${pkg.prefix}--tearsheet__main`
+                          );
+                          scrollContainer.scrollTo({
+                            top: scrollTarget.offsetTop,
+                            behavior: 'smooth',
+                          });
+                        } else {
+                          console.warn(
+                            `${componentName}: CreateTearsheetSection is missing a required prop of 'id'`
+                          );
+                        }
+                      }}>
+                      {sectionChild.props.title}
+                    </SideNavLink>
+                  ))}
+              </SideNavItems>
+            </SideNav>
+          </div>
         );
       }
       return (
-        <ProgressIndicator
-          currentIndex={currentStep - 1}
-          spaceEqually
-          vertical
-          className={`${blockClass}__progress-indicator`}>
-          {stepChildren.map((child, stepIndex) => (
-            <ProgressStep label={child.props.title} key={stepIndex} />
-          ))}
-        </ProgressIndicator>
+        <div className={`${blockClass}__left-nav`}>
+          <ProgressIndicator
+            currentIndex={currentStep - 1}
+            spaceEqually
+            vertical
+            className={`${blockClass}__progress-indicator`}>
+            {stepChildren.map((child, stepIndex) => (
+              <ProgressStep label={child.props.title} key={stepIndex} />
+            ))}
+          </ProgressIndicator>
+        </div>
       );
     };
 

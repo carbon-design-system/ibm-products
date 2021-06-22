@@ -55,6 +55,18 @@
     padding: $spacing-06 $spacing-07;
   }
 
+  .#{$block-class} .#{$pkg-prefix}--tearsheet__influencer {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr auto;
+  }
+
+  .#{$block-class} .#{$block-class}__left-nav {
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    overflow-y: auto;
+  }
+
   .#{$block-class} .#{$block-class}__progress-indicator {
     padding: $spacing-05;
   }
@@ -74,11 +86,9 @@
   }
 
   .#{$block-class} .#{$block-class}__view-all-toggle {
-    position: absolute;
-    z-index: 8001; // UI shell side nav has z-index of 8000 and the toggle needs receive the highest stacking order
-    bottom: 0;
-    left: 0;
     padding: $spacing-05;
+    grid-column: 1 / -1;
+    grid-row: -1 / -1;
   }
 
   .#{$block-class} .#{$carbon-prefix}--side-nav--ux {

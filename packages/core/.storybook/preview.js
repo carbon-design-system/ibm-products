@@ -48,6 +48,7 @@ const decorators = [
 const order = [
   'Cloud & Cognitive/Released',
   'Cloud & Cognitive/Canary',
+  'Cloud & Cognitive/Internal',
   'Legacy',
 ];
 const toOrder = (value) => {

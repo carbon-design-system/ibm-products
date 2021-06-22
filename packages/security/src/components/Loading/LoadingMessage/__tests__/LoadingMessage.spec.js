@@ -5,7 +5,6 @@
 
 import { render } from '@testing-library/react';
 import React from 'react';
-import renderWithinLandmark from '../../../../../config/jest/helpers/renderWithinLandmark';
 
 import { LoadingMessage } from '../../../..';
 
@@ -13,7 +12,7 @@ import { carbonPrefix } from '../../../../globals/namespace';
 
 describe('LoadingMessage', () => {
   test('should have no Axe or DAP violations with overlay', async () => {
-    const { container } = renderWithinLandmark(
+    const { container } = render(
       <LoadingMessage active withOverlay>
         test message
       </LoadingMessage>
@@ -25,7 +24,7 @@ describe('LoadingMessage', () => {
   });
 
   test('should have no Axe or DAP violations without overlay', async () => {
-    const { container } = renderWithinLandmark(
+    const { container } = render(
       <LoadingMessage active withOverlay={false}>
         test message
       </LoadingMessage>
@@ -37,7 +36,7 @@ describe('LoadingMessage', () => {
   });
 
   test('should have no Axe or DAP violations when inactive', async () => {
-    const { container } = renderWithinLandmark(
+    const { container } = render(
       <LoadingMessage active={false}>test message</LoadingMessage>
     );
     await expect(container).toHaveNoAxeViolations();

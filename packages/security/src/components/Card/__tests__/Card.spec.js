@@ -1,12 +1,11 @@
 /**
  * @file Card tests.
- * @copyright IBM Security 2020
+ * @copyright IBM Security 2020 - 2021
  */
 
+import userEvent from '@testing-library/user-event';
 import { render } from '@testing-library/react';
 import React from 'react';
-import userEvent from '@testing-library/user-event';
-import renderWithinLandmark from '../../../../config/jest/helpers/renderWithinLandmark';
 
 import { Card } from '../../..';
 
@@ -14,7 +13,7 @@ import { icon } from '../../_mocks_';
 
 describe('Card2', () => {
   test('should have no Axe or DAP violations', async () => {
-    const { container } = renderWithinLandmark(
+    const { container } = render(
       <Card
         header={{
           image: icon,
@@ -35,7 +34,7 @@ describe('Card2', () => {
   });
 
   test('should have no Axe or DAP violations when rendered as a link', async () => {
-    const { container } = renderWithinLandmark(
+    const { container } = render(
       <Card
         header={{
           title: 'test title',

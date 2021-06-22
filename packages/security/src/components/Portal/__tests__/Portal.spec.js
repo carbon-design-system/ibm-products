@@ -1,19 +1,18 @@
 /**
  * @file Portal tests.
- * @copyright IBM Security 2018 - 2020
+ * @copyright IBM Security 2018 - 2021
  */
 
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 
-import renderWithinLandmark from '../../../../config/jest/helpers/renderWithinLandmark';
 import { Portal } from '../../..';
 
 const { name } = Portal;
 
 describe(name, () => {
   test('should have no Axe or DAP violations with overlay', async () => {
-    const { container } = renderWithinLandmark(
+    const { container } = render(
       <div>
         <section>
           <button>test button outside portal</button>
@@ -30,7 +29,7 @@ describe(name, () => {
   });
 
   test('should have no Axe or DAP violations without overlay', async () => {
-    const { container } = renderWithinLandmark(
+    const { container } = render(
       <div>
         <section>
           <button>test button outside portal</button>

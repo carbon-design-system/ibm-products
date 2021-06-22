@@ -8,12 +8,11 @@ import userEvent from '@testing-library/user-event';
 
 import React from 'react';
 
-import renderWithinLandmark from '../../../../config/jest/helpers/renderWithinLandmark';
 import { Button, PanelV2, PanelContent } from '../../..';
 
 describe('PanelV2', () => {
   test('should have no Axe or DAP violations with custom footer via `renderFooter`', async () => {
-    const { container } = renderWithinLandmark(
+    const { container } = render(
       <PanelV2
         title="test title"
         subtitle="test subtitle"
@@ -29,7 +28,7 @@ describe('PanelV2', () => {
   });
 
   test('should have no Axe or DAP violations with `title` or `subtitle` as a `node`', async () => {
-    const { container } = renderWithinLandmark(
+    const { container } = render(
       <PanelV2
         title={<span>test title</span>}
         subtitle={<span>test subtitle</span>}
@@ -46,7 +45,7 @@ describe('PanelV2', () => {
   });
 
   test('should have no Axe or DAP violations when there is scrolling content', async () => {
-    const { container } = renderWithinLandmark(
+    const { container } = render(
       <PanelV2
         // Note that title (or subtitle) should be provided here
         // to generate a valid `aria-labelledBy` for tabbable scrolling content:

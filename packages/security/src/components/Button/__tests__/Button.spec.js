@@ -8,7 +8,6 @@ import { render } from '@testing-library/react';
 
 import { ButtonKinds } from 'carbon-components-react/es/prop-types/types';
 import React from 'react';
-import renderWithinLandmark from '../../../../config/jest/helpers/renderWithinLandmark';
 
 import { Button } from '../../..';
 import { carbonPrefix } from '../../../globals/namespace';
@@ -16,7 +15,7 @@ import { namespace } from '../Button';
 
 describe('Button', () => {
   test('should have no Axe or DAP violations when `loading`', async () => {
-    const { container } = renderWithinLandmark(
+    const { container } = render(
       <Button loading iconDescription="test button icon description">
         test loading button
       </Button>

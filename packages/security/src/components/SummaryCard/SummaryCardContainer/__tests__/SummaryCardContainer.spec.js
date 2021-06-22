@@ -7,7 +7,6 @@ import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import React, { Fragment } from 'react';
-import renderWithinLandmark from '../../../../../config/jest/helpers/renderWithinLandmark';
 
 import {
   SummaryCard,
@@ -29,7 +28,7 @@ const summaryCards = [
 
 describe('SummaryCardContainer', () => {
   test('should have no Axe or DAP violations', async () => {
-    const { container } = renderWithinLandmark(
+    const { container } = render(
       <SummaryCardContainer
         render={({ getBatchActionProps, getSelectionProps, summaryCards }) => (
           <Fragment>

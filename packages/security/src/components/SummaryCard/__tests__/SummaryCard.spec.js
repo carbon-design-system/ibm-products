@@ -8,7 +8,6 @@ import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import React from 'react';
-import renderWithinLandmark from '../../../../config/jest/helpers/renderWithinLandmark';
 
 import {
   SummaryCard,
@@ -24,7 +23,7 @@ import { namespace as headerNamespace } from '../SummaryCardHeader/SummaryCardHe
 
 describe('SummaryCard', () => {
   test('should have no Axe or DAP violations`', async () => {
-    const { container } = renderWithinLandmark(
+    const { container } = render(
       <SummaryCard>
         <SummaryCardHeader
           title="test summary card title"
@@ -57,7 +56,7 @@ describe('SummaryCard', () => {
   });
 
   test('should have no Axe or DAP violations when the expandable content is shown`', async () => {
-    const { container, getByText } = renderWithinLandmark(
+    const { container, getByText } = render(
       <SummaryCard>
         <SummaryCardHeader title="test summary card title" />
         <SummaryCardBody>test card body content</SummaryCardBody>

@@ -1,6 +1,6 @@
 /**
  * @file Decorator tests.
- * @copyright IBM Security 2019 - 2020
+ * @copyright IBM Security 2019 - 2021
  */
 
 import userEvent from '@testing-library/user-event';
@@ -8,14 +8,13 @@ import { render } from '@testing-library/react';
 
 import React from 'react';
 
-import renderWithinLandmark from '../../../../../config/jest/helpers/renderWithinLandmark';
 import { Decorator } from '../../../..';
 
 import { namespace, icons } from '../constants';
 
 describe('Decorator', () => {
   test('should have no Axe or DAP violations when rendered as a button', async () => {
-    const { container } = renderWithinLandmark(
+    const { container } = render(
       <Decorator type="IP" value="10.0.0.0" score={0} />
     );
 
@@ -24,7 +23,7 @@ describe('Decorator', () => {
   });
 
   test('should have no Axe or DAP violations when rendered as a link', async () => {
-    const { container } = renderWithinLandmark(
+    const { container } = render(
       <Decorator type="IP" value="10.0.0.0" score={0} href="#" />
     );
 
@@ -33,7 +32,7 @@ describe('Decorator', () => {
   });
 
   test('should have no Axe or DAP violations when inert', async () => {
-    const { container } = renderWithinLandmark(
+    const { container } = render(
       <Decorator type="IP" value="10.0.0.0" score={0} invert />
     );
 
@@ -155,7 +154,7 @@ Object.keys(icons).forEach((icon) => {
 
   describe(`Decorator.${formattedName}`, () => {
     test('should have no Axe or DAP violations', async () => {
-      const { container } = renderWithinLandmark(
+      const { container } = render(
         <Component description={`${formattedName} severity`} />
       );
 

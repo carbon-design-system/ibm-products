@@ -6,8 +6,6 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import renderWithinLandmark from '../../../../config/jest/helpers/renderWithinLandmark';
-
 import {
   TypeLayout,
   TypeLayoutBody,
@@ -21,7 +19,7 @@ const sizes = ['xs', 'sm', 'md', 'lg'];
 
 describe('TypeLayout', () => {
   test('should have no Axe or DAP violations', async () => {
-    const { container } = renderWithinLandmark(
+    const { container } = render(
       <TypeLayout>
         <TypeLayoutBody>
           <TypeLayoutRow>

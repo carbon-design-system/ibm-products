@@ -1,17 +1,16 @@
 /**
  * @file ErrorPage Section tests.
- * @copyright IBM Security 2019
+ * @copyright IBM Security 2019 - 2021
  */
 
 import { render } from '@testing-library/react';
 import React from 'react';
-import renderWithinLandmark from '../../../../config/jest/helpers/renderWithinLandmark';
 
 import { ErrorPage } from '../../..';
 
 describe('ErrorPage', () => {
   test('should have no Axe or DAP violations', async () => {
-    const { container } = renderWithinLandmark(
+    const { container } = render(
       <ErrorPage
         statusCode={404}
         title="test title"

@@ -1,6 +1,6 @@
 /**
  * @file Filter panel checkbox with overflow menu tests.
- * @copyright IBM Security 2020
+ * @copyright IBM Security 2020 - 2021
  */
 
 import { fireEvent, render, screen } from '@testing-library/react';
@@ -8,13 +8,12 @@ import userEvent from '@testing-library/user-event';
 
 import React from 'react';
 
-import renderWithinLandmark from '../../../../../config/jest/helpers/renderWithinLandmark';
 import OverflowMenuItem from '../../../OverflowMenuItem';
 import FilterPanelCheckboxWithOverflowMenu from '../FilterPanelCheckboxWithOverflowMenu';
 
 describe(FilterPanelCheckboxWithOverflowMenu.name, () => {
   test('should have no Axe or DAP violations', async () => {
-    const { container } = renderWithinLandmark(
+    const { container } = render(
       <FilterPanelCheckboxWithOverflowMenu
         labelText="test checkbox"
         id="test-checkbox-id"

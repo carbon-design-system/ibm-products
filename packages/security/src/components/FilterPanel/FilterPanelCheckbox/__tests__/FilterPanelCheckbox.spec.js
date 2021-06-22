@@ -1,18 +1,17 @@
 /**
  * @file Filter panel checkbox tests.
- * @copyright IBM Security 2020
+ * @copyright IBM Security 2020 - 2021
  */
 
-import React from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import renderWithinLandmark from '../../../../../config/jest/helpers/renderWithinLandmark';
+import React from 'react';
 
 import FilterPanelCheckbox from '../FilterPanelCheckbox';
 
 describe('FilterPanelCheckbox', () => {
   test('should have no Axe or DAP violations', async () => {
-    const { container } = renderWithinLandmark(
+    const { container } = render(
       <FilterPanelCheckbox labelText="test checkbox" id="test-checkbox-id" />
     );
     await expect(container).toHaveNoAxeViolations();

@@ -1,21 +1,18 @@
 /**
  * @file Pill tests.
- * @copyright IBM Security 2020
+ * @copyright IBM Security 2020 - 2021
  */
 
 import { render } from '@testing-library/react';
-import React from 'react';
 import userEvent from '@testing-library/user-event';
-import renderWithinLandmark from '../../../../config/jest/helpers/renderWithinLandmark';
+import React from 'react';
 
 import { Pill } from '../../..';
 import { namespace } from '../Pill';
 
 describe('Pill', () => {
   test('should have no Axe or DAP violations', async () => {
-    const { container } = renderWithinLandmark(
-      <Pill value="127.0.0.1" type="IP" />
-    );
+    const { container } = render(<Pill value="127.0.0.1" type="IP" />);
     await expect(container).toHaveNoAxeViolations();
     await expect(container).toHaveNoDAPViolations('Pill');
   });

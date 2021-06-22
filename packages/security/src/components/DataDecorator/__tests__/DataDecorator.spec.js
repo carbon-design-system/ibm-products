@@ -7,14 +7,13 @@ import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import React from 'react';
-import renderWithinLandmark from '../../../../config/jest/helpers/renderWithinLandmark';
 
 import { Button, DataDecorator } from '../../..';
 import { namespace as panelNamespace } from '../../PanelV2/PanelV2';
 
 describe('DataDecorator', () => {
   test('should have no Axe or DAP violations', async () => {
-    const { container } = renderWithinLandmark(
+    const { container } = render(
       <DataDecorator type="IP" value="10.0.0.0" score={0} href="#" />
     );
 
@@ -23,7 +22,7 @@ describe('DataDecorator', () => {
   });
 
   test('should have no Axe or DAP violations with an open panel', async () => {
-    const { container, getByText } = renderWithinLandmark(
+    const { container, getByText } = render(
       <DataDecorator type="IP" value="10.0.0.0" score={0} href="#" />
     );
 

@@ -1,19 +1,16 @@
 /**
  * @file Time indicator tests.
- * @copyright IBM Security 2020
+ * @copyright IBM Security 2020 - 2021
  */
 
 import { render } from '@testing-library/react';
 import React from 'react';
-import renderWithinLandmark from '../../../../config/jest/helpers/renderWithinLandmark';
 
 import { TimeIndicator } from '../../..';
 
 describe('TimeIndicator', () => {
   test('should have no Axe or DAP violations', async () => {
-    const { container } = renderWithinLandmark(
-      <TimeIndicator>test content</TimeIndicator>
-    );
+    const { container } = render(<TimeIndicator>test content</TimeIndicator>);
     await expect(container).toHaveNoAxeViolations();
     await expect(container).toHaveNoDAPViolations('TimeIndicator');
   });

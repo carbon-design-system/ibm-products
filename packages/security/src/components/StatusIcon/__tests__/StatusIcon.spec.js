@@ -5,7 +5,6 @@
 
 import { render } from '@testing-library/react';
 import React from 'react';
-import renderWithinLandmark from '../../../../config/jest/helpers/renderWithinLandmark';
 
 import StatusIcon, { namespace, STATUS, SIZE } from '../StatusIcon';
 
@@ -25,9 +24,7 @@ describe('StatusIcon', () => {
   );
 
   test('should have no Axe or DAP violations when `status` is  `undefined`', async () => {
-    const { container } = renderWithinLandmark(
-      <StatusIcon message="test message" />
-    );
+    const { container } = render(<StatusIcon message="test message" />);
     await expect(container).toHaveNoAxeViolations();
     await expect(container).toHaveNoDAPViolations(
       'StatusIcon with `undefined` status'

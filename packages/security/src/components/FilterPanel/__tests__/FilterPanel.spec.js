@@ -1,20 +1,17 @@
 /**
  * @file Filter panel tests.
- * @copyright IBM Security 2020
+ * @copyright IBM Security 2020 - 2021
  */
 
-import React from 'react';
 import { render } from '@testing-library/react';
-import renderWithinLandmark from '../../../../config/jest/helpers/renderWithinLandmark';
+import React from 'react';
 
 import FilterPanel from '..';
 import * as mockProps from '../_mocks_';
 
 describe('FilterPanel', () => {
   test('should have no Axe or DAP violations', async () => {
-    const { container } = renderWithinLandmark(
-      <FilterPanel title="test title" />
-    );
+    const { container } = render(<FilterPanel title="test title" />);
     await expect(container).toHaveNoAxeViolations();
     await expect(container).toHaveNoDAPViolations('FilterPanel');
   });

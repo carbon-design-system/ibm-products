@@ -1,17 +1,16 @@
 /**
  * @file Trending card tests.
- * @copyright IBM Security 2020
+ * @copyright IBM Security 2020 - 2021
  */
 
 import { render } from '@testing-library/react';
 import React from 'react';
-import renderWithinLandmark from '../../../../config/jest/helpers/renderWithinLandmark';
 
 import { TrendingCard } from '../../../';
 
 describe('TrendingCard', () => {
   test('should have no Axe or DAP violations', async () => {
-    const { container } = renderWithinLandmark(
+    const { container } = render(
       <TrendingCard
         // Use an empty `href` to avoid misdirected Axe "skip-link" violation:
         href="#"

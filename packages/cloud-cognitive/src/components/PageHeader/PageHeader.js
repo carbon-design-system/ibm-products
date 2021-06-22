@@ -19,6 +19,7 @@ import {
   Row,
   Button,
   SkeletonText,
+  Tag,
 } from 'carbon-components-react';
 import { ActionBar } from '../ActionBar/';
 import { BreadcrumbWithOverflow } from '../BreadcrumbWithOverflow';
@@ -102,8 +103,7 @@ export let PageHeader = React.forwardRef(
     const titleShape = getTitleShape();
 
     // NOTE: The buffer is used to add space between the bottom of the header and the last content
-    // Not pre-collapsed
-    // and zero or one of tags or (subtitle or available space)
+    // Not pre-collapsed and (subtitle or available space)
     const lastRowBufferActive =
       ((title || pageActions) && !preCollapseTitleRow) ||
       subtitle ||
@@ -614,10 +614,9 @@ export let PageHeader = React.forwardRef(
                       })}>
                       <TagSet
                         overflowAlign="end"
-                        overflowClassName={`${blockClass}__tagset-tooltip`}
-                        {...tempTagSetOverflowProps}>
-                        {tags}
-                      </TagSet>
+                        {...tempTagSetOverflowProps}
+                        tags={tags}
+                      />
                     </Column>
                   </Row>
                 ) : null
@@ -644,10 +643,9 @@ export let PageHeader = React.forwardRef(
                       })}>
                       <TagSet
                         overflowAlign="end"
-                        overflowClassName={`${blockClass}__tagset-tooltip`}
-                        {...tempTagSetOverflowProps}>
-                        {tags}
-                      </TagSet>
+                        {...tempTagSetOverflowProps}
+                        tags={tags}
+                      />
                     </Column>
                   ) : null}
                 </Row>
@@ -682,6 +680,22 @@ export let PageHeader = React.forwardRef(
 
 // Return a placeholder if not released and not enabled by feature flag
 PageHeader = pkg.checkComponentEnabled(PageHeader, componentName);
+
+// copied from carbon-components-react/src/components/Tag/Tag.js for DocGen
+const TYPES = {
+  red: 'Red',
+  magenta: 'Magenta',
+  purple: 'Purple',
+  blue: 'Blue',
+  cyan: 'Cyan',
+  teal: 'Teal',
+  green: 'Green',
+  gray: 'Gray',
+  'cool-gray': 'Cool-Gray',
+  'warm-gray': 'Warm-Gray',
+  'high-contrast': 'High-Contrast',
+};
+const tagTypes = Object.keys(TYPES);
 
 PageHeader.propTypes = {
   /**
@@ -806,10 +820,23 @@ PageHeader.propTypes = {
    */
   subtitle: PropTypes.string,
   /**
-   * One or more tags, specified as a Carbon Tags component.
-   * Optional.
+   * The tags to be shown in the PageHeader. Each tag is specified as an object
+   * with properties: **label**\* (required) to supply the tag content, and
+   * other properties will be passed to the Carbon Tag component, such as
+   * **type**, **disabled**, **ref**, **className** , and any other Tag props.
+   * NOTE: **filter** is not supported. Any other fields in the object will be passed through to the HTML element
+   * as HTML attributes.
+   *
+   * See https://react.carbondesignsystem.com/?path=/docs/components-tag--default
    */
-  tags: PropTypes.arrayOf(PropTypes.element),
+  tags: PropTypes.arrayOf(
+    PropTypes.shape({
+      ...prepareProps(Tag.propTypes, 'filter'),
+      label: PropTypes.string.isRequired,
+      // we duplicate this prop to improve the DocGen
+      type: PropTypes.oneOf(tagTypes),
+    })
+  ),
   /**
    * The title of the page.
    * Optional string or object with the following attributes: text, icon, loading

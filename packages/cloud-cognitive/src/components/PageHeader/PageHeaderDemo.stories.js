@@ -17,7 +17,6 @@ import {
   Row,
   Tab,
   Tabs,
-  Tag,
   Table,
   TableHead,
   TableHeader,
@@ -836,12 +835,14 @@ const TemplateDemo = () => {
               </Tabs>
             }
             tags={[
-              <Tag type="cyan" key="Not urgent">
-                Not urgent
-              </Tag>,
-              <Tag type="red" key="Security">
-                Security
-              </Tag>,
+              {
+                type: 'cyan',
+                label: 'Not urgent',
+              },
+              {
+                type: 'red',
+                label: 'Security',
+              },
             ]}
           />
           {

@@ -18,7 +18,7 @@ import { namespace } from '../TypeLayout';
 const sizes = ['xs', 'sm', 'md', 'lg'];
 
 describe('TypeLayout', () => {
-  test('should have no Axe or DAP violations', async () => {
+  test('has no accessibility violations', async () => {
     const { container } = render(
       <TypeLayout>
         <TypeLayoutBody>
@@ -33,8 +33,9 @@ describe('TypeLayout', () => {
         </TypeLayoutBody>
       </TypeLayout>
     );
+
+    await expect(container).toBeAccessible('TypeLayout');
     await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations('TypeLayout');
   });
 
   test('should add a custom class to each component', () => {

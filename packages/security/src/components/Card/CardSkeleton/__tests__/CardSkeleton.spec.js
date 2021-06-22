@@ -9,9 +9,10 @@ import React from 'react';
 import { CardSkeleton } from '../../../..';
 
 describe('CardSkeleton', () => {
-  test('should have no Axe or DAP violations', async () => {
+  test('has no accessibility violations', async () => {
     const { container } = render(<CardSkeleton />);
+
+    await expect(container).toBeAccessible('CardSkeleton');
     await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations('CardSkeleton');
   });
 });

@@ -22,7 +22,7 @@ import { carbonPrefix } from '../../../globals/namespace';
 import { namespace as headerNamespace } from '../SummaryCardHeader/SummaryCardHeader';
 
 describe('SummaryCard', () => {
-  test('should have no Axe or DAP violations`', async () => {
+  test('has no accessibility violations`', async () => {
     const { container } = render(
       <SummaryCard>
         <SummaryCardHeader
@@ -51,11 +51,12 @@ describe('SummaryCard', () => {
         </SummaryCardFooter>
       </SummaryCard>
     );
+
+    await expect(container).toBeAccessible('SummaryCard');
     await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations('SummaryCard');
   });
 
-  test('should have no Axe or DAP violations when the expandable content is shown`', async () => {
+  test('has no accessibility violations when the expandable content is shown`', async () => {
     const { container, getByText } = render(
       <SummaryCard>
         <SummaryCardHeader title="test summary card title" />
@@ -73,10 +74,10 @@ describe('SummaryCard', () => {
     // Click on the action button to show expanded content.
     userEvent.click(getByText(/test button/i).closest('button'));
 
-    await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations(
+    await expect(container).toBeAccessible(
       'SummaryCard with expandable content'
     );
+    await expect(container).toHaveNoAxeViolations();
   });
 
   test('should cycle summary card elements in tab order', () => {

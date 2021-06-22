@@ -10,12 +10,13 @@ import React from 'react';
 import FilterPanelCheckbox from '../FilterPanelCheckbox';
 
 describe('FilterPanelCheckbox', () => {
-  test('should have no Axe or DAP violations', async () => {
+  test('has no accessibility violations', async () => {
     const { container } = render(
       <FilterPanelCheckbox labelText="test checkbox" id="test-checkbox-id" />
     );
+
+    await expect(container).toBeAccessible('FilterPanelCheckbox');
     await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations('FilterPanelCheckbox');
   });
 
   test('adds custom class name', () => {

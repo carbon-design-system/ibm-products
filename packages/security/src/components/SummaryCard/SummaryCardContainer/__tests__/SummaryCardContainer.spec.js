@@ -27,7 +27,7 @@ const summaryCards = [
 ];
 
 describe('SummaryCardContainer', () => {
-  test('should have no Axe or DAP violations', async () => {
+  test('has no accessibility violations', async () => {
     const { container } = render(
       <SummaryCardContainer
         render={({ getBatchActionProps, getSelectionProps, summaryCards }) => (
@@ -57,11 +57,11 @@ describe('SummaryCardContainer', () => {
       />
     );
 
+    await expect(container).toBeAccessible('SummaryCardContainer');
     await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations('SummaryCardContainer');
   });
 
-  test('should have no Axe or DAP violations when cards are selected', async () => {
+  test('has no accessibility violations when cards are selected', async () => {
     const { container, getByText } = render(
       <SummaryCardContainer
         render={({ getBatchActionProps, getSelectionProps, summaryCards }) => (
@@ -97,10 +97,10 @@ describe('SummaryCardContainer', () => {
     userEvent.click(getByText(/test select 0/i));
     userEvent.click(getByText(/test select 1/i));
 
-    await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations(
+    await expect(container).toBeAccessible(
       'SummaryCardContainer with selected cards'
     );
+    await expect(container).toHaveNoAxeViolations();
   });
 
   test('should cycle elements in tab order', () => {

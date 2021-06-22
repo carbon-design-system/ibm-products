@@ -10,7 +10,7 @@ import { icon } from '../../_mocks_';
 import { NonEntitledSection } from '../../..';
 
 describe('NonEntitledSection', () => {
-  test('should have no Axe or DAP violations', async () => {
+  test('has no accessibility violations', async () => {
     const { container } = render(
       <NonEntitledSection
         title="test title"
@@ -32,8 +32,8 @@ describe('NonEntitledSection', () => {
       />
     );
 
+    await expect(container).toBeAccessible('NonEntitledSection');
     await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations('NonEntitledSection');
   });
 
   test('should apply a title via `title`', () => {

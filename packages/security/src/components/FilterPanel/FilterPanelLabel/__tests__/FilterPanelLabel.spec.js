@@ -9,12 +9,13 @@ import React from 'react';
 import FilterPanelLabel from '../FilterPanelLabel';
 
 describe('FilterPanelLabel', () => {
-  test('should have no Axe or DAP violations', async () => {
+  test('has no accessibility violations', async () => {
     const { container } = render(
       <FilterPanelLabel count={100}>custom label</FilterPanelLabel>
     );
+
+    await expect(container).toBeAccessible('FilterPanelGroup');
     await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations('FilterPanelGroup');
   });
 
   test('renders with children', () => {

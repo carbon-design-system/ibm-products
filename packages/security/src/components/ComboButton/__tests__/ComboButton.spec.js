@@ -87,14 +87,14 @@ describe(name, () => {
     expect(getMenuItemsLength()).toEqual(0); // Menu items should not be shown again
   });
 
-  it('should have no Axe or DAP violations', async () => {
+  it('has no accessibility violations', async () => {
     renderComboButton(4);
 
     const comboButton = getComboBox();
 
     const assertHasNoViolations = async (label = name) => {
+      await expect(comboButton).toBeAccessible(label);
       await expect(comboButton).toHaveNoAxeViolations();
-      await expect(comboButton).toHaveNoDAPViolations(label);
     };
 
     await assertHasNoViolations();

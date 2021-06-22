@@ -12,7 +12,7 @@ import { StatusIndicator, StatusStep } from '../../..';
 import { STATUS } from '../StatusStep/StatusStep';
 
 describe('StatusIndicator', () => {
-  test('should have no Axe or DAP violations', async () => {
+  test('has no accessibility violations', async () => {
     const { container } = render(
       <StatusIndicator
         title="test title"
@@ -39,8 +39,9 @@ describe('StatusIndicator', () => {
         />
       </StatusIndicator>
     );
+
+    await expect(container).toBeAccessible(`StatusIndicator`);
     await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations(`StatusIndicator`);
   });
 
   test('should add a custom class', () => {

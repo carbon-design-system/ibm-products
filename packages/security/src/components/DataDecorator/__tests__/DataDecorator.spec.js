@@ -12,16 +12,16 @@ import { Button, DataDecorator } from '../../..';
 import { namespace as panelNamespace } from '../../PanelV2/PanelV2';
 
 describe('DataDecorator', () => {
-  test('should have no Axe or DAP violations', async () => {
+  test('has no accessibility violations', async () => {
     const { container } = render(
       <DataDecorator type="IP" value="10.0.0.0" score={0} href="#" />
     );
 
+    await expect(container).toBeAccessible('DataDecorator');
     await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations('DataDecorator');
   });
 
-  test('should have no Axe or DAP violations with an open panel', async () => {
+  test('has no accessibility violations with an open panel', async () => {
     const { container, getByText } = render(
       <DataDecorator type="IP" value="10.0.0.0" score={0} href="#" />
     );
@@ -29,10 +29,8 @@ describe('DataDecorator', () => {
     // Click on the data decorator to open the connected panel:
     userEvent.click(getByText(/10.0.0.0/i).closest('button'));
 
+    await expect(container).toBeAccessible('DataDecorator with open panel');
     await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations(
-      'DataDecorator with open panel'
-    );
   });
 
   test('should use the value of the data decorator to the panel title when no mid-line truncation is required due to within maxLength', () => {

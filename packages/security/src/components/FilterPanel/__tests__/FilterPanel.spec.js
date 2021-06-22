@@ -10,10 +10,11 @@ import FilterPanel from '..';
 import * as mockProps from '../_mocks_';
 
 describe('FilterPanel', () => {
-  test('should have no Axe or DAP violations', async () => {
+  test('has no accessibility violations', async () => {
     const { container } = render(<FilterPanel title="test title" />);
+
+    await expect(container).toBeAccessible('FilterPanel');
     await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations('FilterPanel');
   });
 
   test('renders without a title or content by default', () => {

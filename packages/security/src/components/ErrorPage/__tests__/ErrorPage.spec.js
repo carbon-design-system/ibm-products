@@ -9,7 +9,7 @@ import React from 'react';
 import { ErrorPage } from '../../..';
 
 describe('ErrorPage', () => {
-  test('should have no Axe or DAP violations', async () => {
+  test('has no accessibility violations', async () => {
     const { container } = render(
       <ErrorPage
         statusCode={404}
@@ -31,8 +31,8 @@ describe('ErrorPage', () => {
       />
     );
 
+    await expect(container).toBeAccessible('ErrorPage');
     await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations('ErrorPage');
   });
 
   test('should apply a title via `title`', () => {

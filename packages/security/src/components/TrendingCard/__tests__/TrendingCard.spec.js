@@ -6,10 +6,10 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import { TrendingCard } from '../../../';
+import { TrendingCard } from '../../..';
 
 describe('TrendingCard', () => {
-  test('should have no Axe or DAP violations', async () => {
+  test('has no accessibility violations', async () => {
     const { container } = render(
       <TrendingCard
         // Use an empty `href` to avoid misdirected Axe "skip-link" violation:
@@ -18,8 +18,9 @@ describe('TrendingCard', () => {
         subtitle={<span>test subtitle</span>}
       />
     );
+
+    await expect(container).toBeAccessible('TrendingCard');
     await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations('TrendingCard');
   });
 
   test('should accept a custom element', () => {

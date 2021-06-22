@@ -9,11 +9,11 @@ import React from 'react';
 import { SummaryCardSkeleton } from '../../../..';
 
 describe('SummaryCardSkeleton', () => {
-  test('should have no Axe or DAP violations', async () => {
+  test('has no accessibility violations', async () => {
     const { container } = render(<SummaryCardSkeleton />);
 
+    await expect(container).toBeAccessible('SummaryCardSkeleton');
     await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations('SummaryCardSkeleton');
   });
 
   test('adds a class to the containing node', () => {

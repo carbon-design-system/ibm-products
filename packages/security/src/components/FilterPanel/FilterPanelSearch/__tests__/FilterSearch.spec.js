@@ -12,12 +12,13 @@ import FilterPanelSearch from '../FilterPanelSearch';
 const { name } = FilterPanelSearch;
 
 describe(name, () => {
-  test('should have no Axe or DAP violations', async () => {
+  test('has no accessibility violations', async () => {
     const { container } = render(
       <FilterPanelSearch labelText="search label" />
     );
+
+    await expect(container).toBeAccessible('FilterPanelSearch');
     await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations('FilterPanelSearch');
   });
 
   test('adds custom class name', () => {

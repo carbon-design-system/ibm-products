@@ -10,7 +10,7 @@ import { StringFormatter } from '../../..';
 import { namespace } from '../StringFormatter';
 
 describe('StringFormatter', () => {
-  test('should have no Axe or DAP violations', async () => {
+  test('has no accessibility violations', async () => {
     const { container } = render(
       <StringFormatter
         value="This is a long test string that would normally be truncated."
@@ -19,8 +19,9 @@ describe('StringFormatter', () => {
         width="50px"
       />
     );
+
+    await expect(container).toBeAccessible('StringFormatter');
     await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations('StringFormatter');
   });
 
   test('should add a custom class', () => {

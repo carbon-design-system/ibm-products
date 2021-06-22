@@ -9,12 +9,13 @@ import React from 'react';
 import { ExternalLink } from '../../..';
 
 describe('ExternalLink', () => {
-  test('should have no Axe or DAP violations', async () => {
+  test('has no accessibility violations', async () => {
     const { container } = render(
       <ExternalLink href="https://www.ibm.com/security">test link</ExternalLink>
     );
+
+    await expect(container).toBeAccessible('ExternalLink');
     await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations('ExternalLink');
   });
 
   test('should add children as link text', () => {

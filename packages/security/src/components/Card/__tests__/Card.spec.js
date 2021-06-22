@@ -12,7 +12,7 @@ import { Card } from '../../..';
 import { icon } from '../../_mocks_';
 
 describe('Card2', () => {
-  test('should have no Axe or DAP violations', async () => {
+  test('has no accessibility violations', async () => {
     const { container } = render(
       <Card
         header={{
@@ -29,11 +29,12 @@ describe('Card2', () => {
         }}
       />
     );
+
+    await expect(container).toBeAccessible('Card');
     await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations('Card');
   });
 
-  test('should have no Axe or DAP violations when rendered as a link', async () => {
+  test('has no accessibility violations when rendered as a link', async () => {
     const { container } = render(
       <Card
         header={{
@@ -42,8 +43,9 @@ describe('Card2', () => {
         link="#"
       />
     );
+
+    await expect(container).toBeAccessible('Card as a link');
     await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations('Card as a link');
   });
 
   test('should invoke click mock when card is clicked', () => {

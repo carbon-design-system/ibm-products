@@ -1,6 +1,6 @@
 /**
  * @file Button cluster module tests.
- * @copyright IBM Security 2020
+ * @copyright IBM Security 2020 - 2021
  */
 
 import { render } from '@testing-library/react';
@@ -16,8 +16,8 @@ describe(name, () => {
       <ButtonClusterModule>{name}</ButtonClusterModule>
     );
 
+    await expect(container).toBeAccessible(name);
     await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations(name);
   });
 
   test(`adds content for the '${name}'`, () => {

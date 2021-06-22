@@ -11,10 +11,11 @@ import { Pill } from '../../..';
 import { namespace } from '../Pill';
 
 describe('Pill', () => {
-  test('should have no Axe or DAP violations', async () => {
+  test('has no accessibility violations', async () => {
     const { container } = render(<Pill value="127.0.0.1" type="IP" />);
+
+    await expect(container).toBeAccessible('Pill');
     await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations('Pill');
   });
 
   test('should add a custom class', () => {

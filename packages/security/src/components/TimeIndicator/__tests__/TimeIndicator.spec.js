@@ -9,10 +9,11 @@ import React from 'react';
 import { TimeIndicator } from '../../..';
 
 describe('TimeIndicator', () => {
-  test('should have no Axe or DAP violations', async () => {
+  test('has no accessibility violations', async () => {
     const { container } = render(<TimeIndicator>test content</TimeIndicator>);
+
+    await expect(container).toBeAccessible('TimeIndicator');
     await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations('TimeIndicator');
   });
 
   test('should add custom class', () => {

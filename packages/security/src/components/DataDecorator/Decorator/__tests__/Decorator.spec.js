@@ -13,31 +13,31 @@ import { Decorator } from '../../../..';
 import { namespace, icons } from '../constants';
 
 describe('Decorator', () => {
-  test('should have no Axe or DAP violations when rendered as a button', async () => {
+  test('has no accessibility violations when rendered as a button', async () => {
     const { container } = render(
       <Decorator type="IP" value="10.0.0.0" score={0} />
     );
 
+    await expect(container).toBeAccessible('Decorator as a button');
     await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations('Decorator as a button');
   });
 
-  test('should have no Axe or DAP violations when rendered as a link', async () => {
+  test('has no accessibility violations when rendered as a link', async () => {
     const { container } = render(
       <Decorator type="IP" value="10.0.0.0" score={0} href="#" />
     );
 
+    await expect(container).toBeAccessible('Decorator as a link');
     await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations('Decorator as a link');
   });
 
-  test('should have no Axe or DAP violations when inert', async () => {
+  test('has no accessibility violations when inert', async () => {
     const { container } = render(
       <Decorator type="IP" value="10.0.0.0" score={0} invert />
     );
 
+    await expect(container).toBeAccessible('Decorator as inert');
     await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations('Decorator as inert');
   });
 
   test('should apply a score', () => {
@@ -153,15 +153,13 @@ Object.keys(icons).forEach((icon) => {
   const Component = Decorator[formattedName];
 
   describe(`Decorator.${formattedName}`, () => {
-    test('should have no Axe or DAP violations', async () => {
+    test('has no accessibility violations', async () => {
       const { container } = render(
         <Component description={`${formattedName} severity`} />
       );
 
+      await expect(container).toBeAccessible(`Decorator.${formattedName}`);
       await expect(container).toHaveNoAxeViolations();
-      await expect(container).toHaveNoDAPViolations(
-        `Decorator.${formattedName}`
-      );
     });
 
     test('should apply accessible `aria-label` with `description` prop', () => {

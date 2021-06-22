@@ -22,7 +22,7 @@ const createChildChildren = (length) =>
   ));
 
 describe('FilterPanelAccordionItem', () => {
-  test('should have no Axe or DAP violations', async () => {
+  test('has no accessibility violations', async () => {
     const { container } = render(
       // `FilterPanelAccordionItem` would be
       // wrapped by `FilterPanelAccordion`, which
@@ -36,8 +36,9 @@ describe('FilterPanelAccordionItem', () => {
         </FilterPanelAccordionItem>
       </ul>
     );
+
+    await expect(container).toBeAccessible('FilterPanelAccordionItem');
     await expect(container).toHaveNoAxeViolations();
-    await expect(container).toHaveNoDAPViolations('FilterPanelAccordionItem');
   });
 
   test('renders with a title attribute', () => {

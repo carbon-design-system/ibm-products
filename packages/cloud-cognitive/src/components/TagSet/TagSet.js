@@ -231,7 +231,7 @@ TagSet = pkg.checkComponentEnabled(TagSet, componentName);
  */
 const string_required_if_more_than_10_tags = isRequiredIf(
   PropTypes.string,
-  ({ children }) => tags && tags.length > allTagsModalSearchThreshold
+  ({ tags }) => tags && tags.length > allTagsModalSearchThreshold
 );
 
 // copied from carbon-components-react/src/components/Tag/Tag.js for DocGen

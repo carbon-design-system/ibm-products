@@ -3,7 +3,6 @@
 packages/*/build/
 packages/*/examples/*/build/
 es
-ibm-security
 lib
 dist
 umd

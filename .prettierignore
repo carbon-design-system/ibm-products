@@ -2,7 +2,6 @@
 storybook-static
 build
 es
-ibm-security
 lib
 umd
 dist

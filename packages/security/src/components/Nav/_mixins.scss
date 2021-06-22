@@ -16,6 +16,14 @@
 @import '../../globals/motion/index';
 @import '../../globals/rtl/index';
 
+/// Spacing.
+/// @type Length
+$nav__spacing: $carbon--spacing-04;
+
+/// Icon spacing.
+/// @type Length
+$nav__icon__spacing: $carbon--spacing-05 + $nav__spacing;
+
 @mixin nav {
   $nav__heading: '#{&}__heading';
   $nav__list: '#{&}__list';
@@ -24,10 +32,6 @@
   /// Icon position.
   /// @type Length
   $nav__icon__position: translate3d(-50%, 0, 0);
-
-  /// Link padding.
-  /// @type Length
-  $nav__link__spacing__padding: $carbon--spacing-07;
 
   position: relative;
 
@@ -110,12 +114,8 @@
     &__icon {
       @include transition($transition-property: transform);
 
-      position: absolute;
-      top: 25%;
-      left: ($nav__link__spacing__padding / 2);
-      fill: $text-01;
+      margin-left: auto;
       transform: $nav__icon__position rotate(270deg);
-
       @include rtl {
         right: $carbon--spacing-02;
         transform: $nav__icon__position rotate(90deg);
@@ -131,6 +131,7 @@
       // Content including text and sometimes a product icon.
       &__content {
         display: flex;
+        margin-left: $nav__icon__spacing;
       }
 
       &::before {
@@ -193,8 +194,7 @@
 
         position: relative;
         display: flex;
-        justify-content: space-between;
-        padding: carbon--mini-units(0.75) $nav__link__spacing__padding;
+        padding: $carbon--spacing-02;
         color: $text-01;
         cursor: pointer;
         text-decoration: none;
@@ -264,6 +264,7 @@
       max-height: 0;
       padding-left: 0;
       margin-bottom: 0;
+      margin-left: $nav__icon__spacing;
       opacity: 0;
 
       @include rtl {

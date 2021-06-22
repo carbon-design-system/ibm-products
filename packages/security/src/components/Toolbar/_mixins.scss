@@ -16,6 +16,7 @@
 
 @import '../../platform/body/mixins';
 @import '../Header/variables';
+@import '../Nav/mixins';
 
 /// Name.
 /// @type String
@@ -200,6 +201,14 @@ $toolbar__panel__transition__timing-function: $timing-function;
   &__nav__item__icon {
     width: carbon--mini-units($count: 2);
     height: carbon--mini-units($count: 2);
+  }
+
+  &__nav__item__title {
+    margin-left: $nav__icon__spacing;
+
+    &--icon {
+      margin-left: $nav__spacing;
+    }
   }
 
   &__panel {

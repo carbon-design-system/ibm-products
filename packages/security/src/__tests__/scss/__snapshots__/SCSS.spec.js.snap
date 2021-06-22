@@ -13448,10 +13448,7 @@ li.bx--accordion__item--disabled:last-of-type {
   transition-duration: 0.2s;
   transition-property: transform;
   transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
-  position: absolute;
-  top: 25%;
-  left: 1rem;
-  fill: var(--cds-text-01, #f4f4f4);
+  margin-left: auto;
   transform: translate3d(-50%, 0, 0) rotate(270deg);
 }
 
@@ -13471,6 +13468,7 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .security--nav__list__item__content {
   display: flex;
+  margin-left: 1.75rem;
 }
 
 .security--nav__list__item::before {
@@ -13523,8 +13521,7 @@ li.bx--accordion__item--disabled:last-of-type {
   transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
   position: relative;
   display: flex;
-  justify-content: space-between;
-  padding: 0.375rem 2rem;
+  padding: 0.25rem;
   color: var(--cds-text-01, #f4f4f4);
   cursor: pointer;
   text-decoration: none;
@@ -13585,6 +13582,7 @@ li.bx--accordion__item--disabled:last-of-type {
   max-height: 0;
   padding-left: 0;
   margin-bottom: 0;
+  margin-left: 1.75rem;
   opacity: 0;
 }
 
@@ -22712,6 +22710,14 @@ li.bx--accordion__item--disabled:last-of-type {
 .security--toolbar__nav__item__icon {
   width: 1rem;
   height: 1rem;
+}
+
+.security--toolbar__nav__item__title {
+  margin-left: 1.75rem;
+}
+
+.security--toolbar__nav__item__title--icon {
+  margin-left: 0.75rem;
 }
 
 .security--toolbar__panel {

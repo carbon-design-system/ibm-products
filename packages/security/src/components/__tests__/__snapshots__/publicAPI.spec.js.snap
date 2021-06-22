@@ -812,6 +812,12 @@ Map {
               ],
               "type": "oneOfType",
             },
+            "checkCanFocusTrap": Object {
+              "type": "func",
+            },
+            "checkCanReturnFocus": Object {
+              "type": "func",
+            },
             "clickOutsideDeactivates": Object {
               "args": Array [
                 Array [
@@ -870,6 +876,12 @@ Map {
               "type": "func",
             },
             "onDeactivate": Object {
+              "type": "func",
+            },
+            "onPostActivate": Object {
+              "type": "func",
+            },
+            "onPostDeactivate": Object {
               "type": "func",
             },
             "preventScroll": Object {
@@ -4529,6 +4541,12 @@ Map {
               ],
               "type": "oneOfType",
             },
+            "checkCanFocusTrap": Object {
+              "type": "func",
+            },
+            "checkCanReturnFocus": Object {
+              "type": "func",
+            },
             "clickOutsideDeactivates": Object {
               "args": Array [
                 Array [
@@ -4587,6 +4605,12 @@ Map {
               "type": "func",
             },
             "onDeactivate": Object {
+              "type": "func",
+            },
+            "onPostActivate": Object {
+              "type": "func",
+            },
+            "onPostDeactivate": Object {
               "type": "func",
             },
             "preventScroll": Object {
@@ -4794,6 +4818,12 @@ Map {
               ],
               "type": "oneOfType",
             },
+            "checkCanFocusTrap": Object {
+              "type": "func",
+            },
+            "checkCanReturnFocus": Object {
+              "type": "func",
+            },
             "clickOutsideDeactivates": Object {
               "args": Array [
                 Array [
@@ -4852,6 +4882,12 @@ Map {
               "type": "func",
             },
             "onDeactivate": Object {
+              "type": "func",
+            },
+            "onPostActivate": Object {
+              "type": "func",
+            },
+            "onPostDeactivate": Object {
               "type": "func",
             },
             "preventScroll": Object {

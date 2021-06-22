@@ -20,6 +20,9 @@
     "//upgrade-dependencies": "# don't upgrade carbon (done globally)",
     "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon)/'"
   },
+  "devDependencies": {
+    "npm-check-updates": "^11.6.0"
+  },
   "peerDependencies": {
     "jest": "^27.0.4"
   },
@@ -31,11 +34,6 @@
     "babel-jest": "^27.0.2",
     "babel-preset-ibm-cloud-cognitive": "^0.3.5",
     "chalk": "^4.1.1",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.6",
     "jest-circus": "^27.0.4"
-  },
-  "devDependencies": {
-    "npm-check-updates": "^11.6.0"
   }
 }

@@ -1,6 +1,6 @@
 /**
  * @file Toolbar.
- * @copyright IBM Security 2019 - 2020
+ * @copyright IBM Security 2019 - 2021
  */
 
 import {
@@ -164,8 +164,10 @@ export default class Toolbar extends Component {
                 id: navigationItemId,
                 title: navigationItemTitle,
                 ...props
-              }) =>
-                children ? (
+              }) => {
+                const hasIcon = icon !== undefined;
+
+                return children ? (
                   <NavList key={navigationItemId} title={navigationItemTitle}>
                     {children.map(
                       ({
@@ -186,14 +188,14 @@ export default class Toolbar extends Component {
                           link={content === undefined}
                           handleItemSelect={() => this.toggleContent(content)}
                           {...props}>
-                          {navigationListItemTitle}
-                          {icon !== undefined && (
+                          {hasIcon && (
                             <img
                               alt={navigationListItemTitle}
                               className={`${namespace}__nav__item__icon`}
                               src={icon}
                             />
                           )}
+                          {navigationListItemTitle}
                         </NavItem>
                       )
                     )}
@@ -207,16 +209,23 @@ export default class Toolbar extends Component {
                     link={content === undefined}
                     handleItemSelect={() => this.toggleContent(content)}
                     {...props}>
-                    {navigationItemTitle}
-                    {icon !== undefined && (
+                    {hasIcon && (
                       <img
                         alt={navigationItemTitle}
                         className={`${namespace}__nav__item__icon`}
                         src={icon}
                       />
                     )}
+
+                    <div
+                      className={classnames(`${namespace}__nav__item__title`, {
+                        [`${namespace}__nav__item__title--icon`]: hasIcon,
+                      })}>
+                      {navigationItemTitle}
+                    </div>
                   </NavItem>
-                )
+                );
+              }
             )}
         </Nav>
       ))

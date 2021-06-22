@@ -154,10 +154,10 @@ export default {
 };
 
 const Template = (argsIn) => {
-  const { children, containerWidth, ...args } = { ...argsIn };
+  const { containerWidth, ...args } = { ...argsIn };
   return (
     <div style={{ width: containerWidth }}>
-      <TagSet {...args}>{children}</TagSet>
+      <TagSet {...args} />
     </div>
   );
 };

@@ -11,9 +11,48 @@
 @import 'carbon-components/scss/components/progress-indicator/progress-indicator';
 
 @mixin create-tearsheet {
+  @keyframes stepContentEntrance {
+    0% {
+      opacity: 0;
+      // stylelint-disable-next-line carbon/layout-token-use
+      transform: translateY(-0.75rem);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   $block-class: #{$pkg-prefix}--tearsheet-create;
+  $section-block-class: #{$pkg-prefix}--tearsheet-create__section;
+
+  .#{$block-class} .#{$block-class}__step--hidden-step,
   .#{$block-class} .#{$block-class}__step--hidden-section {
     display: none;
+  }
+
+  .#{$block-class} .#{$block-class}__step--visible-section {
+    display: block;
+  }
+
+  .#{$block-class} .#{$pkg-prefix}--tearsheet__body {
+    overflow-y: hidden;
+  }
+
+  .#{$block-class}
+    .#{$block-class}__step--visible-step:not(.#{$block-class}__step--first-panel-step) {
+    animation: $duration--slow-01 stepContentEntrance;
+    animation-fill-mode: forwards;
+    animation-timing-function: $carbon--standard-easing;
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion) {
+    .#{$block-class}
+      .#{$block-class}__step--visible-step:not(.#{$block-class}__step--first-panel-step) {
+      animation: none;
+      opacity: 1;
+    }
   }
 
   .#{$block-class} .#{$block-class}__multi-step-panel-content {
@@ -36,6 +75,19 @@
     .#{$carbon-prefix}--btn-set
     .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--disabled {
     box-shadow: -0.0625rem 0 0 0 $button-separator;
+  }
+
+  .#{$block-class} .#{$block-class}__view-all-toggle {
+    position: absolute;
+    z-index: 8001; // UI shell side nav has z-index of 8000 and the toggle needs receive the highest stacking order
+    bottom: 0;
+    left: 0;
+    padding: $spacing-05;
+  }
+
+  .#{$block-class} .#{$carbon-prefix}--side-nav--ux {
+    position: initial;
+    background-color: transparent;
   }
 }
 

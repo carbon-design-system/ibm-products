@@ -16,7 +16,8 @@ import { Tag } from 'carbon-components-react';
 import ReactResizeDetector from 'react-resize-detector';
 
 import { pkg } from '../../settings';
-import { prepareProps } from '../../global/js/utils/props-helper';
+import { prepareProps, isRequiredIf } from '../../global/js/utils/props-helper';
+
 const componentName = 'TagSet';
 const blockClass = `${pkg.prefix}--tag-set`;
 
@@ -228,33 +229,10 @@ TagSet = pkg.checkComponentEnabled(TagSet, componentName);
  * The strings shown in the showAllModal are only shown if we have more than allTagsModalSearchLThreshold
  * @returns null if no problems
  */
-const string_required_if_more_than_10_tags = (
-  props,
-  propName,
-  componentName,
-  location,
-  propFullName,
-  secret
-) => {
-  const tags = props['tags'];
-
-  if (tags && tags.length > allTagsModalSearchThreshold) {
-    const error = PropTypes.string.isRequired(
-      props,
-      propName,
-      componentName,
-      location,
-      propFullName,
-      secret
-    );
-
-    if (error) {
-      return error;
-    }
-  }
-
-  return null;
-};
+const string_required_if_more_than_10_tags = isRequiredIf(
+  PropTypes.string,
+  ({ children }) => tags && tags.length > allTagsModalSearchThreshold
+);
 
 // copied from carbon-components-react/src/components/Tag/Tag.js for DocGen
 const TYPES = {
@@ -312,7 +290,9 @@ TagSet.propTypes = {
    */
   rightAlign: PropTypes.bool,
   /**
-   * label for the overflow show all tags link. **Note: Required if more than 10 tags**
+   * label for the overflow show all tags link.
+   *
+   * **Note:** Required if more than 10 tags
    */
   showAllTagsLabel: string_required_if_more_than_10_tags,
   /**

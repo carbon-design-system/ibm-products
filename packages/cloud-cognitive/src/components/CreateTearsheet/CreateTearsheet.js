@@ -13,12 +13,21 @@ import React, {
   useRef,
 } from 'react';
 import PropTypes from 'prop-types';
-import { ProgressIndicator, ProgressStep } from 'carbon-components-react';
+import {
+  ProgressIndicator,
+  ProgressStep,
+  Toggle,
+} from 'carbon-components-react';
+import {
+  SideNav,
+  SideNavItems,
+  SideNavLink,
+} from 'carbon-components-react/lib/components/UIShell';
 import cx from 'classnames';
 import wrapFocus from '../../global/js/utils/wrapFocus';
 import { TearsheetShell } from '../Tearsheet/TearsheetShell';
 import { pkg } from '../../settings';
-import { CREATE_TEARSHEET_STEP } from './constants';
+import { CREATE_TEARSHEET_SECTION, CREATE_TEARSHEET_STEP } from './constants';
 
 const componentName = 'CreateTearsheet';
 const blockClass = `${pkg.prefix}--tearsheet-create`;
@@ -39,6 +48,7 @@ export let CreateTearsheet = forwardRef(
       children,
       className,
       description,
+      includeViewAllToggle,
       label,
       nextButtonText,
       onClose,
@@ -47,13 +57,18 @@ export let CreateTearsheet = forwardRef(
       submitButtonText,
       title,
       verticalPosition,
+      viewAllToggleLabelText,
+      viewAllToggleOffLabelText,
+      viewAllToggleOnLabelText,
       ...rest
     },
     ref
   ) => {
     const [createTearsheetActions, setCreateTearsheetActions] = useState([]);
+    const [shouldViewAll, setShouldViewAll] = useState(false);
     const [currentStep, setCurrentStep] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [activeSectionIndex, setActiveSectionIndex] = useState(0);
     const previousState = usePreviousValue({ currentStep, open });
 
     // set current step to 1 upon tearsheet opening, in order
@@ -64,6 +79,7 @@ export let CreateTearsheet = forwardRef(
       }
     }, [open, previousState]);
 
+    // Log a warning to the console in the event a create tearsheet is used with only one step
     useEffect(() => {
       const createSteps = getTearsheetSteps();
       const total = createSteps.length;
@@ -74,10 +90,12 @@ export let CreateTearsheet = forwardRef(
       }
     }, [getTearsheetSteps]);
 
+    // useEffect to handle multi step logic
     useEffect(() => {
       const onUnmount = () => {
         setCurrentStep(0);
         setIsSubmitting(false);
+        setShouldViewAll(false);
         onClose();
       };
       const handleOnRequestSubmit = async () => {
@@ -137,7 +155,7 @@ export let CreateTearsheet = forwardRef(
         const createSteps = getTearsheetSteps();
         const total = createSteps.length;
         const buttons = [];
-        if (total > 1) {
+        if (total > 1 && !shouldViewAll) {
           buttons.push({
             label: backButtonText,
             onClick: () => setCurrentStep((prev) => prev - 1),
@@ -151,8 +169,16 @@ export let CreateTearsheet = forwardRef(
           kind: 'ghost',
         });
         buttons.push({
-          label: currentStep < total ? nextButtonText : submitButtonText,
-          onClick: currentStep < total ? handleNext : handleSubmit,
+          label: shouldViewAll
+            ? submitButtonText
+            : currentStep < total
+            ? nextButtonText
+            : submitButtonText,
+          onClick: shouldViewAll
+            ? handleSubmit
+            : currentStep < total
+            ? handleNext
+            : handleSubmit,
           disabled: isSubmitDisabled(),
           kind: 'primary',
           loading: isSubmitting,
@@ -171,6 +197,7 @@ export let CreateTearsheet = forwardRef(
       submitButtonText,
       onRequestSubmit,
       isSubmitting,
+      shouldViewAll,
     ]);
 
     const continueToNextStep = () => {
@@ -198,19 +225,92 @@ export let CreateTearsheet = forwardRef(
       return false;
     };
 
+    // check if child is a tearsheet section component
+    const isTearsheetSection = (child) => {
+      if (
+        child &&
+        child.props &&
+        child.props.type === CREATE_TEARSHEET_SECTION
+      ) {
+        return true;
+      }
+      return false;
+    };
+
     // renders the step progression components in the left influencer area
     const renderProgressSteps = (childrenElements) => {
       let childrenArray = Array.isArray(childrenElements)
         ? childrenElements
         : [childrenElements];
-      childrenArray = childrenArray.filter((child) => isTearsheetStep(child));
+      const stepChildren = childrenArray.filter((child) =>
+        isTearsheetStep(child)
+      );
+      let sectionChildElements = [];
+      stepChildren.forEach((child) => {
+        // we have received an array of children, lets check to see that each child is
+        // a CreateTearsheetSection component before adding it to sectionChildElements
+        if (shouldViewAll && child.props.children.length) {
+          child.props.children.forEach((stepChild) => {
+            if (isTearsheetSection(stepChild)) {
+              sectionChildElements.push(stepChild);
+            }
+          });
+        }
+        // we have received a single child element, lets check to see that it is
+        // a CreateTearsheetSection component before adding it to sectionChildElements
+        if (
+          shouldViewAll &&
+          typeof child.props.children !== 'undefined' &&
+          !child.props.children.length
+        ) {
+          if (isTearsheetSection(child.props.children)) {
+            sectionChildElements.push(child.props.children);
+          }
+        }
+      });
+      if (shouldViewAll) {
+        return (
+          <SideNav expanded isFixedNav>
+            <SideNavItems>
+              {sectionChildElements?.length &&
+                sectionChildElements.map((sectionChild, sectionIndex) => (
+                  <SideNavLink
+                    href="javascript:void(0)"
+                    key={sectionIndex}
+                    isActive={activeSectionIndex === sectionIndex}
+                    onClick={() => {
+                      setActiveSectionIndex(sectionIndex);
+                      if (sectionChild.props.id) {
+                        const scrollTarget = document.querySelector(
+                          `#${sectionChild.props.id}`
+                        );
+                        const scrollContainer = document.querySelector(
+                          `.${pkg.prefix}--tearsheet__main`
+                        );
+                        scrollContainer.scrollTo({
+                          top: scrollTarget.offsetTop,
+                          behavior: 'smooth',
+                        });
+                      } else {
+                        console.warn(
+                          `${componentName}: CreateTearsheetSection is missing a required prop of 'id'`
+                        );
+                      }
+                    }}>
+                    {sectionChild.props.title}
+                  </SideNavLink>
+                ))}
+            </SideNavItems>
+          </SideNav>
+        );
+      }
       return (
         <ProgressIndicator
           currentIndex={currentStep - 1}
           spaceEqually
           vertical
           className={`${blockClass}__progress-indicator`}>
-          {childrenArray.map((child, stepIndex) => (
+          {stepChildren.map((child, stepIndex) => (
             <ProgressStep label={child.props.title} key={stepIndex} />
           ))}
         </ProgressIndicator>
@@ -231,12 +331,52 @@ export let CreateTearsheet = forwardRef(
               return child;
             }
             step++;
+            return React.cloneElement(
+              child,
+              {
+                className: cx(child.props.className, {
+                  [`${blockClass}__step--hidden-step`]:
+                    !shouldViewAll && currentStep !== step,
+                  [`${blockClass}__step--visible-step`]: currentStep === step,
+                  [`${blockClass}__step--first-panel-step`]:
+                    !previousState?.open &&
+                    open &&
+                    previousState?.currentStep === 0 &&
+                    stepIndex === 0,
+                }),
+                key: `key_${stepIndex}`,
+              },
+              <>
+                <p className={`${blockClass}__step--heading`}>
+                  {renderStepTitle(stepIndex)}
+                </p>
+                {renderStepChildren(child.props.children)}
+              </>
+            );
+          })}
+        </>
+      );
+    };
+
+    const renderStepChildren = (stepChildren) => {
+      const childrenArray = Array.isArray(stepChildren)
+        ? stepChildren
+        : [stepChildren];
+      return (
+        <>
+          {childrenArray.map((child, index) => {
+            if (!isTearsheetSection(child)) {
+              return child;
+            }
             return React.cloneElement(child, {
               className: cx(child.props.className, {
-                [`${blockClass}__step--hidden-section`]: currentStep !== step,
-                [`${blockClass}__step--visible-section`]: currentStep === step,
+                [`${blockClass}__step--hidden-section`]:
+                  child.props.viewAllOnly && !shouldViewAll,
+                [`${blockClass}__step--visible-section`]:
+                  !child.props.viewAllOnly ||
+                  (child.props.viewAllOnly && shouldViewAll),
               }),
-              key: `key_${stepIndex}`,
+              key: `key_${index}`,
             });
           })}
         </>
@@ -244,11 +384,10 @@ export let CreateTearsheet = forwardRef(
     };
 
     // renders the individual step title
-    const renderStepTitle = () => {
+    const renderStepTitle = (stepIndex) => {
       const tearsheetSteps = getTearsheetSteps();
       const stepTitle =
-        (tearsheetSteps && tearsheetSteps[currentStep - 1]?.props.title) ||
-        null;
+        (tearsheetSteps && tearsheetSteps[stepIndex]?.props.title) || null;
       return stepTitle;
     };
 
@@ -261,7 +400,7 @@ export let CreateTearsheet = forwardRef(
         currentStep > 0
       ) {
         const visibleStepInnerContent = document.querySelector(
-          `.${blockClass}__step.${blockClass}__step--visible-section`
+          `.${blockClass}__step.${blockClass}__step--visible-step`
         );
         const tearsheetSteps = getTearsheetSteps();
         const focusableStepElements =
@@ -310,6 +449,32 @@ export let CreateTearsheet = forwardRef(
       }
     };
 
+    const handleViewAllToggle = (toggleState) => {
+      setShouldViewAll(toggleState);
+      setActiveSectionIndex(0);
+      // scroll to top of tearsheet page upon toggling view all option
+      if (toggleState) {
+        const createTearsheetContainer = document.querySelector(
+          `.${blockClass}`
+        );
+        createTearsheetContainer.scrollTop = 0;
+      }
+    };
+
+    const renderViewAllToggle = () => {
+      return (
+        <Toggle
+          id={`${blockClass}__view-all-toggle`}
+          toggled={shouldViewAll}
+          labelText={viewAllToggleLabelText}
+          labelA={viewAllToggleOffLabelText}
+          labelB={viewAllToggleOnLabelText}
+          onToggle={(value) => handleViewAllToggle(value)}
+          className={`${blockClass}__view-all-toggle`}
+        />
+      );
+    };
+
     return (
       <TearsheetShell
         {...rest}
@@ -318,7 +483,12 @@ export let CreateTearsheet = forwardRef(
         closeIconDescription={'Close icon'}
         description={description}
         hasCloseIcon={false}
-        influencer={renderProgressSteps(children)}
+        influencer={
+          <>
+            {renderProgressSteps(children)}
+            {includeViewAllToggle && renderViewAllToggle()}
+          </>
+        }
         influencerPosition="left"
         influencerWidth="narrow"
         label={label}
@@ -331,7 +501,6 @@ export let CreateTearsheet = forwardRef(
         <div
           className={`${blockClass}__multi-step-panel-content`}
           onBlur={handleBlur}>
-          <p className={`${blockClass}__step--heading`}>{renderStepTitle()}</p>
           {renderChildren(children)}
         </div>
       </TearsheetShell>
@@ -373,6 +542,11 @@ CreateTearsheet.propTypes = {
    * A description of the flow, displayed in the header area of the tearsheet.
    */
   description: PropTypes.node,
+
+  /**
+   * Used to optionally include view all toggle
+   */
+  includeViewAllToggle: PropTypes.bool,
 
   /**
    * A label for the tearsheet, displayed in the header area of the tearsheet
@@ -422,6 +596,21 @@ CreateTearsheet.propTypes = {
    * to allow an action bar navigation or breadcrumbs to also show through.
    */
   verticalPosition: PropTypes.oneOf(['normal', 'lower']),
+
+  /**
+   * Sets the label text for the view all toggle component
+   */
+  viewAllToggleLabelText: PropTypes.string,
+
+  /**
+   * Sets the label text for the view all toggle `off` text
+   */
+  viewAllToggleOffLabelText: PropTypes.string,
+
+  /**
+   * Sets the label text for the view all toggle `on` text
+   */
+  viewAllToggleOnLabelText: PropTypes.string,
 };
 
 // Default values for component props. Default values are not required for

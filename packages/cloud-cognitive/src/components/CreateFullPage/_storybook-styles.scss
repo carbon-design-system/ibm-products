@@ -1,0 +1,59 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+@import '../../global/styles/project-settings';
+
+@import 'carbon-components/scss/components/ui-shell/ui-shell';
+
+$story-class: 'create-full-page-stories';
+
+.sbdocs .#{$story-class}__viewport {
+  //   max-height: 500px;
+  height: 100vh;
+  background-color: $ui-background;
+  box-shadow: 0 0 4px 1px $ui-03;
+  color: $text-01;
+  overflow-y: auto;
+}
+
+.#{$story-class}__content-switcher {
+  justify-content: flex-start;
+}
+
+.#{$story-class}__content-switcher button {
+  width: auto;
+}
+
+.#{$story-class}__dummy-content {
+  margin-top: $spacing-05;
+}
+
+.#{$story-class}__dummy-content-block {
+  height: 120vh;
+  background: $ui-01;
+  background-clip: content-box;
+}
+
+.#{$story-class}__dummy-content-text {
+  padding: $spacing-05;
+}
+
+.#{$story-class}__status-icon {
+  fill: $support-02;
+  vertical-align: middle;
+}
+
+.#{$story-class}__app {
+  position: relative;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.#{$story-class}__content-container {
+  height: 100%;
+  padding: 0;
+}

@@ -9,7 +9,9 @@
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
+@import 'carbon-components/scss/components/dropdown/dropdown';
 @import 'carbon-components/scss/components/button/button';
+@import '@carbon/colors/scss/colors';
 
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
@@ -18,11 +20,11 @@
   $block-class: #{$pkg-prefix}--toolbar;
 
   /*----------------------------------------------
-    Toolbar Style
+    Toolbar Styles
   -----------------------------------------------*/
 
   .#{$block-class} {
-    background: #fff;
+    background: $ui-02;
     display: flex;
   }
 
@@ -31,92 +33,87 @@
   }
 
   /*----------------------------------------------
-    ToolbarGroup Style
+    ToolbarGroup Styles
   -----------------------------------------------*/
 
   .#{$block-class}-group {
     display: flex;
-    border-right: 1px solid #e0e0e0;
+    border-right: 1px solid $ui-03;
+  }
 
-    &--text-formatting {
-      .bx--dropdown__wrapper {
-        border-right: 1px solid #e0e0e0;
+  .#{$block-class}-group:last-child {
+    border-right: none;
+  }
 
-        &:last-child {
-          border-right: none;
-        }
-      }
-
-      button {
-        border-right: 1px solid #e0e0e0;
-
-        &:last-child {
-          border-right: none;
-        }
-      }
+  .#{$block-class}-group--text-formatting .bx--dropdown__wrapper {
+    border-right: 1px solid $ui-03;
+    &:last-child {
+      border-right: none;
     }
   }
 
   /*----------------------------------------------
-    ToolbarItem Style
+    ToolbarItem Styles
   -----------------------------------------------*/
 
-  .text-alignment-dropdown {
-    .bx--list-box__field {
-      padding: 0.6em;
+  /*------------------
+    Text Alignment
+  ------------------*/
 
-      &::after {
-        content: '';
-        position: absolute;
-        background: linear-gradient(
-          to right bottom,
-          transparent 50%,
-          #151515 50%
-        );
-        height: 6px;
-        width: 6px;
-        bottom: 2px;
-        right: 2px;
-      }
-    }
-
-    .bx--list-box__menu-icon {
-      display: none;
-    }
-
-    &.bx--dropdown--inline {
-      .bx--list-box__menu {
-        display: flex;
-        min-width: 96px;
-      }
-    }
-
-    &.bx--list-box--sm {
-      .bx--list-box__menu-item__option {
-        padding: 0 0.6em;
-        width: 32px;
-        margin: 0;
-        display: inline-flex;
-        align-items: center;
-
-        .bx--list-box__menu-item__selected-icon {
-          display: none;
-        }
-      }
+  .text-alignment-dropdown .bx--list-box__field {
+    padding: 0.6em;
+    &:after {
+      content: '';
+      position: absolute;
+      background: linear-gradient(
+        to right bottom,
+        transparent 50%,
+        #151515 50%
+      );
+      height: 6px;
+      width: 6px;
+      bottom: 2px;
+      right: 2px;
     }
   }
 
+  .text-alignment-dropdown .bx--list-box__menu-icon {
+    display: none;
+  }
+
+  .text-alignment-dropdown.bx--dropdown--inline .bx--list-box__menu {
+    display: flex;
+    min-width: 96px;
+  }
+
+  .text-alignment-dropdown.bx--list-box--sm .bx--list-box__menu-item__option {
+    padding: 0 0.6em;
+    width: 32px;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .text-alignment-dropdown.bx--list-box--sm
+    .bx--list-box__menu-item__option
+    .bx--list-box__menu-item__selected-icon {
+    display: none;
+  }
+
+  /*------------------
+    Color Picker
+  ------------------*/
+
   $textColors: (black, red, green, blue);
-  // $textColors: (#000000, #6F6F6F, #005FFF, #0072C9, #00832D, #007F7A, #972EFF, #E40072, #EE0017);
 
   .bx--overflow-menu-options__btn {
     padding: 0;
     justify-content: center;
     svg {
-      fill: white;
+      fill: $ui-02;
     }
     &:hover svg {
-      fill: white;
+      fill: $ui-02;
     }
   }
 

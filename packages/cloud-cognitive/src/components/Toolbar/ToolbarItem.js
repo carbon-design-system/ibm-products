@@ -12,6 +12,7 @@ const componentName = 'ToolbarItem';
 export let ToolbarItem = React.forwardRef(({ ...rest }) => {
   return <Button />;
 });
+
 // const ToolbarItemColorPicker = () => {
 //   const [selectedColor, setSelectedColor] = useState('black');
 //   return (

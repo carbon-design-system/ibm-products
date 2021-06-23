@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Dropdown } from 'carbon-components-react';
-//import { ToolbarItemColorPicker, ToolbarItemPaste } from './ToolbarItem';
+// import { ToolbarItemColorPicker, ToolbarItemPaste } from './ToolbarItem';
 import {
   Save16,
   Share16,
@@ -30,6 +30,8 @@ import {
   SettingsAdjust16,
 } from '@carbon/icons-react';
 import { pkg } from '../../settings';
+
+const blockClass = `${pkg.prefix}--toolbar-group`;
 
 const componentName = 'ToolbarGroup';
 
@@ -99,8 +101,8 @@ const testItems = [
 
 export let ToolbarGroup = React.forwardRef(({ ...rest }) => {
   return (
-    <>
-      <div className="toolbar-group toolbar-group--actions">
+    <div className={blockClass}>
+      <div className={`${blockClass} ${blockClass}--actions`}>
         <Button
           renderIcon={Save16}
           size="small"
@@ -134,7 +136,7 @@ export let ToolbarGroup = React.forwardRef(({ ...rest }) => {
           onClick={null}
         />
       </div>
-      <div className="toolbar-group toolbar-group--navigation-tools">
+      <div className={`${blockClass} ${blockClass}--navigation-tools`}>
         <Button
           renderIcon={Undo16}
           size="small"
@@ -184,7 +186,7 @@ export let ToolbarGroup = React.forwardRef(({ ...rest }) => {
           onClick={null}
         />
       </div>
-      <div className="toolbar-group toolbar-group--type-formatting">
+      <div className={`${blockClass} ${blockClass}--type-formatting`}>
         <Button
           renderIcon={RulerAlt16}
           size="small"
@@ -234,7 +236,7 @@ export let ToolbarGroup = React.forwardRef(({ ...rest }) => {
           onClick={null}
         />
       </div>
-      <div className="toolbar-group toolbar-group--transformation-tools">
+      <div className={`${blockClass} ${blockClass}--transformation-tools`}>
         <Button
           renderIcon={Rotate16}
           size="small"
@@ -276,7 +278,7 @@ export let ToolbarGroup = React.forwardRef(({ ...rest }) => {
           onClick={null}
         />
       </div>
-      <div className="toolbar-group toolbar-group--text-formatting">
+      <div className={`${blockClass} ${blockClass}--text-formatting`}>
         <Dropdown
           id="inline"
           type="inline"
@@ -309,7 +311,7 @@ export let ToolbarGroup = React.forwardRef(({ ...rest }) => {
           initialSelectedItem={testItems[0]}
         />
       </div>
-      <div className="toolbar-group toolbar-group--panels">
+      <div className={`${blockClass} ${blockClass}--panels`}>
         <Button
           renderIcon={Table16}
           size="small"
@@ -327,7 +329,7 @@ export let ToolbarGroup = React.forwardRef(({ ...rest }) => {
           onClick={null}
         />
       </div>
-    </>
+    </div>
   );
 });
 

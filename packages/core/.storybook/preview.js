@@ -57,61 +57,32 @@ const toOrder = (value) => {
   return inOrder < 0 ? order.length : inOrder;
 };
 
+const makeViewport = (name, width, shadow) => ({
+  name,
+  styles: {
+    border: '1px solid #1EA7FD',
+    boxShadow: `0 0 50px 20px rgb(30 167 253 / ${shadow}%)`,
+    width,
+    // when width is fixed, leave room for a horizontal scroll bar
+    height: width === '100%' ? '100%' : 'calc(100% - 12px)',
+  },
+});
 const carbonViewports = {
-  basic: {
-    name: 'Select a Carbon breakpoint',
-    styles: {
-      border: '1px solid #1EA7FD',
-      boxShadow: '0 0 50px 20px rgb(30 167 253 / 0%)',
-      width: '100%',
-      height: '100%',
-    },
-  },
-  sm: {
-    name: 'Carbon small (sm) = 320px',
-    styles: {
-      border: '1px solid #1EA7FD',
-      boxShadow: '0 0 50px 20px rgb(30 167 253 / 25%)',
-      width: '320px',
-      height: 'calc(100% - 12px)',
-    },
-  },
-  md: {
-    name: 'Carbon medium (md) = 672px',
-    styles: {
-      border: '1px solid #1EA7FD',
-      boxShadow: '0 0 50px 20px rgb(30 167 253 / 20%)',
-      width: '672px',
-      height: 'calc(100% - 12px)',
-    },
-  },
-  lg: {
-    name: 'Carbon large (lg) = 1056px',
-    styles: {
-      border: '1px solid #1EA7FD',
-      boxShadow: '0 0 50px 20px rgb(30 167 253 / 15%)',
-      width: '1056px',
-      height: 'calc(100% - 12px)',
-    },
-  },
-  xlg: {
-    name: 'Carbon extra large xlg) = 1312px',
-    styles: {
-      border: '1px solid #1EA7FD',
-      boxShadow: '0 0 50px 20px rgb(30 167 253 / 10%)',
-      width: '1312px',
-      height: 'calc(100% - 12px)',
-    },
-  },
-  max: {
-    name: 'Carbon maximum (max) = 1584px',
-    styles: {
-      border: '1px solid #1EA7FD',
-      boxShadow: '0 0 50px 20px rgb(30 167 253 / 5%)',
-      width: '1584px',
-      height: 'calc(100% - 12px)',
-    },
-  },
+  basic: makeViewport('Select a Carbon breakpoint', '100%', 0),
+  smMin: makeViewport('sm (≥320px)', '320px', 25),
+  smMid: makeViewport('sm — mid range', '496px', 25),
+  smMax: makeViewport('sm — top of range', '671px', 25),
+  mdMin: makeViewport('md (≥672px)', '672px', 20),
+  mdMid: makeViewport('md — mid range', '864px', 20),
+  mdMax: makeViewport('md — top of range', '1055px', 20),
+  lgMin: makeViewport('lg (≥1056px)', '1056px', 15),
+  lgMid: makeViewport('lg — mid range', '1184px', 15),
+  lgMax: makeViewport('lg — top of range', '1311px', 15),
+  xlgMin: makeViewport('xlg (≥1312px)', '1312px', 10),
+  xlgMid: makeViewport('xlg — mid range', '1448px', 10),
+  xlgMax: makeViewport('xlg — top of range', '1583px', 10),
+  maxMin: makeViewport('max (≥1584px)', '1584px', 5),
+  maxMid: makeViewport('max — mid range', '2000px', 5),
 };
 
 const parameters = {

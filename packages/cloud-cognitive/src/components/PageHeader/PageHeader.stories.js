@@ -17,7 +17,6 @@ import {
   Row,
   Tab,
   Tabs,
-  Tag,
 } from 'carbon-components-react';
 import { CheckmarkFilled16 } from '@carbon/icons-react';
 import { Lightning16, Bee24 } from '@carbon/icons-react';
@@ -187,75 +186,31 @@ const longTabBar = (
 );
 
 const tags = [
-  <Tag type="blue" key="tag-1">
-    A tag
-  </Tag>,
-  <Tag type="green" key="tag-2">
-    A tag
-  </Tag>,
-  <Tag type="warm-gray" key="tag-3">
-    A tag
-  </Tag>,
-  <Tag type="purple" key="tag-4">
-    A tag
-  </Tag>,
+  { type: 'blue', label: 'A tag' },
+  { type: 'green', label: 'A tag' },
+  { type: 'warm-gray', label: 'A tag' },
+  { type: 'purple', label: 'A tag' },
 ];
 
 const manyTags = [
-  <Tag type="blue" key="blue">
-    Blue
-  </Tag>,
-  <Tag type="green" key="green">
-    Green
-  </Tag>,
-  <Tag type="warm-gray" key="warm-gray">
-    Warm gray
-  </Tag>,
-  <Tag type="purple" key="purple">
-    Purple
-  </Tag>,
-  <Tag type="red" key="red">
-    Red
-  </Tag>,
-  <Tag type="teal" key="teal">
-    Teal
-  </Tag>,
-  <Tag type="red" key="long-one">
-    Longer ThanAPieceOfString
-  </Tag>,
-  <Tag type="high-contrast" key="high-contrast">
-    High contrast
-  </Tag>,
-  <Tag type="magenta" key="magenta">
-    Magenta
-  </Tag>,
-  <Tag type="blue" key="blue">
-    Blue 2
-  </Tag>,
-  <Tag type="green" key="green">
-    Green 2
-  </Tag>,
-  <Tag type="warm-gray" key="warm-gray">
-    Warm gray 2
-  </Tag>,
-  <Tag type="purple" key="purple">
-    Purple 2
-  </Tag>,
-  <Tag type="red" key="red">
-    Red 2
-  </Tag>,
-  <Tag type="teal" key="teal">
-    Teal 2
-  </Tag>,
-  <Tag type="red" key="long-one">
-    Longer ThanAPieceOfString 2
-  </Tag>,
-  <Tag type="high-contrast" key="high-contrast">
-    High contrast 2
-  </Tag>,
-  <Tag type="magenta" key="magenta">
-    Magenta 2
-  </Tag>,
+  { type: 'blue', label: 'Blue' },
+  { type: 'green', label: 'Green' },
+  { type: 'warm-gray', label: 'Warm gray' },
+  { type: 'purple', label: 'Purple' },
+  { type: 'red', label: 'Red' },
+  { type: 'teal', label: 'Teal' },
+  { type: 'red', label: 'Longer ThanAPieceOfString' },
+  { type: 'high-contrast', label: 'High contrast' },
+  { type: 'magenta', label: 'Magenta' },
+  { type: 'blue', label: 'Blue 2' },
+  { type: 'green', label: 'Green 2' },
+  { type: 'warm-gray', label: 'Warm gray 2' },
+  { type: 'purple', label: 'Purple 2' },
+  { type: 'red', label: 'Red 2' },
+  { type: 'teal', label: 'Teal 2' },
+  { type: 'red', label: 'Longer ThanAPieceOfString 2' },
+  { type: 'high-contrast', label: 'High contrast 2' },
+  { type: 'magenta', label: 'Magenta 2' },
 ];
 
 const title = { text: 'Page title', loading: false, icon: Bee24 };

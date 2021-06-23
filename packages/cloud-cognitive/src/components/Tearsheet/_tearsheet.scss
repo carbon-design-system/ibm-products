@@ -187,7 +187,6 @@
   .#{$block-class} .#{$block-class}__body {
     display: flex;
     flex-direction: row;
-    flex-grow: 1;
     padding: 0;
     margin: 0;
   }
@@ -198,24 +197,27 @@
   }
 
   .#{$block-class} .#{$block-class}__influencer {
-    flex: 0 0 256px;
+    flex: 0 0 257px; // influencer width 256px plus 1px border
     border-right: 1px solid $ui-03;
+    overflow-y: auto;
   }
 
   .#{$block-class} .#{$block-class}__influencer--wide {
-    flex-basis: 320px;
+    flex-basis: 321px; // influencer width 320px plus 1px border
   }
 
   .#{$block-class} .#{$block-class}__right {
-    display: flex;
-    flex-direction: column;
+    display: grid;
     flex-grow: 1;
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr auto;
   }
 
   .#{$block-class} .#{$block-class}__main {
     display: flex;
     flex-direction: row;
-    flex-grow: 1;
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
   }
 
   .#{$block-class} .#{$block-class}__main .#{$block-class}__influencer {
@@ -260,6 +262,8 @@
 
   .#{$block-class} .#{$block-class}__buttons {
     border-top: 1px solid $ui-03;
+    grid-column: 1 / -1;
+    grid-row: -1 / -1;
   }
 
   .#{$block-class}.#{$block-class}--wide .#{$block-class}__buttons {

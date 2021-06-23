@@ -3,7 +3,7 @@
   "private-note": "no longer published, package deprecated in favor of @carbon/ibm-cloud-cognitive with feature flags",
   "private": true,
   "description": "Carbon for Cloud & Cognitive UI components",
-  "version": "0.35.24",
+  "version": "0.36.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -46,20 +46,20 @@
     "@carbon/icons-react": "^10.33.0",
     "@carbon/import-once": "^10.5.0",
     "carbon-components": "^10.37.0",
-    "carbon-components-react": "^7.37.0",
+    "carbon-components-react": "^7.37.1",
     "carbon-icons": "^7.0.7",
     "react": "^16.8.6 || ^17.0.1",
     "react-dom": "^16.8.6 || ^17.0.1"
   },
   "dependencies": {
     "@babel/runtime": "^7.14.6",
-    "@carbon/ibm-cloud-cognitive": "^0.47.4",
+    "@carbon/ibm-cloud-cognitive": "^0.48.0",
     "@carbon/telemetry": "^0.0.0-alpha.6",
     "react-resize-detector": "^6.7.2"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
-    "npm-check-updates": "^11.6.0",
+    "npm-check-updates": "^11.7.1",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2"
   }

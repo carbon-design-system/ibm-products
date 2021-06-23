@@ -32,7 +32,7 @@ export let TagSet = React.forwardRef(
       overflowAlign,
       overflowClassName,
       overflowDirection,
-      allTagsModalTile,
+      allTagsModalTitle,
       allTagsModalSearchLabel,
       allTagsModalSearchPlaceholderText,
       showAllTagsLabel,
@@ -210,7 +210,7 @@ export let TagSet = React.forwardRef(
             <TagSetModal
               allTags={tags}
               open={showAllModalOpen}
-              title={allTagsModalTile}
+              title={allTagsModalTitle}
               onClose={handleModalClose}
               searchLabel={allTagsModalSearchLabel}
               searchPlaceholder={allTagsModalSearchPlaceholderText}
@@ -264,7 +264,7 @@ TagSet.propTypes = {
   /**
    * title for the show all modal. **Note: Required if more than 10 tags**
    */
-  allTagsModalTile: string_required_if_more_than_10_tags,
+  allTagsModalTitle: string_required_if_more_than_10_tags,
   /**
    * className
    */

@@ -122,7 +122,7 @@ for (let i = 0; i < 200; i++) {
 }
 
 const overflowAndModalStrings = {
-  allTagsModalTile: 'All tags',
+  allTagsModalTitle: 'All tags',
   allTagsModalSearchLabel: 'Search all tags',
   allTagsModalSearchPlaceholderText: 'Search all tags',
   showAllTagsLabel: 'View all tags',

@@ -260,10 +260,15 @@
     }
   }
 
-  .#{$block-class} .#{$block-class}__buttons {
-    border-top: 1px solid $ui-03;
+  .#{$block-class} .#{$block-class}__button-container {
     grid-column: 1 / -1;
     grid-row: -1 / -1;
+    overflow-x: auto;
+  }
+
+  .#{$block-class} .#{$block-class}__buttons {
+    display: inline-flex;
+    border-top: 1px solid $ui-03;
   }
 
   .#{$block-class}.#{$block-class}--wide .#{$block-class}__buttons {

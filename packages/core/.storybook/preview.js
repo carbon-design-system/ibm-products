@@ -57,6 +57,63 @@ const toOrder = (value) => {
   return inOrder < 0 ? order.length : inOrder;
 };
 
+const carbonViewports = {
+  basic: {
+    name: 'Select a Carbon breakpoint',
+    styles: {
+      border: '1px solid #1EA7FD',
+      boxShadow: '0 0 50px 20px rgb(30 167 253 / 0%)',
+      width: '100%',
+      height: '100%',
+    },
+  },
+  sm: {
+    name: 'Carbon small (sm) = 320px',
+    styles: {
+      border: '1px solid #1EA7FD',
+      boxShadow: '0 0 50px 20px rgb(30 167 253 / 25%)',
+      width: '320px',
+      height: 'calc(100% - 12px)',
+    },
+  },
+  md: {
+    name: 'Carbon medium (md) = 672px',
+    styles: {
+      border: '1px solid #1EA7FD',
+      boxShadow: '0 0 50px 20px rgb(30 167 253 / 20%)',
+      width: '672px',
+      height: 'calc(100% - 12px)',
+    },
+  },
+  lg: {
+    name: 'Carbon large (lg) = 1056px',
+    styles: {
+      border: '1px solid #1EA7FD',
+      boxShadow: '0 0 50px 20px rgb(30 167 253 / 15%)',
+      width: '1056px',
+      height: 'calc(100% - 12px)',
+    },
+  },
+  xlg: {
+    name: 'Carbon extra large xlg) = 1312px',
+    styles: {
+      border: '1px solid #1EA7FD',
+      boxShadow: '0 0 50px 20px rgb(30 167 253 / 10%)',
+      width: '1312px',
+      height: 'calc(100% - 12px)',
+    },
+  },
+  max: {
+    name: 'Carbon maximum (max) = 1584px',
+    styles: {
+      border: '1px solid #1EA7FD',
+      boxShadow: '0 0 50px 20px rgb(30 167 253 / 5%)',
+      width: '1584px',
+      height: 'calc(100% - 12px)',
+    },
+  },
+};
+
 const parameters = {
   controls: { expanded: true, hideNoControlsWarning: true },
   layout: 'centered',
@@ -80,6 +137,12 @@ const parameters = {
   // Optional default Carbon theme.
   carbonTheme: {
     theme: 'g10',
+  },
+
+  // viewport sizes based on Carbon breakpoints
+  viewport: {
+    viewports: carbonViewports,
+    defaultViewport: 'basic',
   },
 };
 

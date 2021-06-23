@@ -1805,7 +1805,6 @@ path:nth-of-type(1),
 .exp--tearsheet .exp--tearsheet__body {
   display: flex;
   flex-direction: row;
-  flex-grow: 1;
   padding: 0;
   margin: 0;
 }
@@ -1816,24 +1815,27 @@ path:nth-of-type(1),
 }
 
 .exp--tearsheet .exp--tearsheet__influencer {
-  flex: 0 0 256px;
+  flex: 0 0 257px;
   border-right: 1px solid var(--cds-ui-03, #e0e0e0);
+  overflow-y: auto;
 }
 
 .exp--tearsheet .exp--tearsheet__influencer--wide {
-  flex-basis: 320px;
+  flex-basis: 321px;
 }
 
 .exp--tearsheet .exp--tearsheet__right {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   flex-grow: 1;
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr auto;
 }
 
 .exp--tearsheet .exp--tearsheet__main {
   display: flex;
   flex-direction: row;
-  flex-grow: 1;
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
 }
 
 .exp--tearsheet .exp--tearsheet__main .exp--tearsheet__influencer {
@@ -1876,6 +1878,8 @@ path:nth-of-type(1),
 
 .exp--tearsheet .exp--tearsheet__buttons {
   border-top: 1px solid var(--cds-ui-03, #e0e0e0);
+  grid-column: 1 / -1;
+  grid-row: -1 / -1;
 }
 
 .exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__buttons {

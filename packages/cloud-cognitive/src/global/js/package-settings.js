@@ -37,8 +37,6 @@ const defaults = {
     ActionBarItem: false,
     APIKeyDownloader: false,
     APIKeyModal: false,
-    ButtonMenu: false,
-    ButtonMenuItem: false,
     CreateFullPage: false,
     CreateFullPageSection: false,
     CreateFullPageStep: false,

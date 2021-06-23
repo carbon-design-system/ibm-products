@@ -21,19 +21,19 @@
     "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon)/'"
   },
   "devDependencies": {
-    "npm-check-updates": "^11.6.0"
+    "npm-check-updates": "^11.7.1"
   },
   "peerDependencies": {
-    "jest": "^27.0.4"
+    "jest": "^27.0.5"
   },
   "dependencies": {
     "@babel/core": "^7.14.6",
     "@testing-library/jest-dom": "^5.14.1",
-    "accessibility-checker": "^3.1.7",
-    "axe-core": "^4.2.2",
-    "babel-jest": "^27.0.2",
+    "accessibility-checker": "^3.1.8",
+    "axe-core": "^4.2.3",
+    "babel-jest": "^27.0.5",
     "babel-preset-ibm-cloud-cognitive": "^0.3.5",
     "chalk": "^4.1.1",
-    "jest-circus": "^27.0.4"
+    "jest-circus": "^27.0.5"
   }
 }

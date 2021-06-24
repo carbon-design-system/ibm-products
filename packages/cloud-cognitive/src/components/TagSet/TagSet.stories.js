@@ -8,7 +8,6 @@
 import React from 'react';
 
 import { types as tagTypes } from 'carbon-components-react/es/components/Tag/Tag';
-import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 import { TagSet } from '.';
@@ -132,7 +131,6 @@ export default {
   title: `${storybookPrefix}/${TagSet.displayName}`,
   component: TagSet,
   parameters: {
-    styles,
     docs: { page: mdx },
   },
   argTypes: {
@@ -147,7 +145,7 @@ export default {
           {`.${blockClassModal} { opacity: 0; visibility: hidden; /* prevents glitch storybook modal css load */ }`}
           ;
         </style>
-        <div className={`${blockClass}__story-viewport`}>{story()}</div>
+        <div className="ccs-sb__display-box">{story()}</div>
       </>
     ),
   ],

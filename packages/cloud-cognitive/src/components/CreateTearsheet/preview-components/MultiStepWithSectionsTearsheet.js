@@ -171,6 +171,9 @@ export const MultiStepWithSectionsTearsheet = () => {
             />
           </CreateTearsheetSection>
         </CreateTearsheetStep>
+        <CreateTearsheetStep title="Empty" secondaryLabel="Optional">
+          Empty step for demonstration purposes
+        </CreateTearsheetStep>
         <CreateTearsheetStep
           title="Partitions"
           disableSubmit={!stepTwoTextInputValue}>

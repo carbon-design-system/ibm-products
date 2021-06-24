@@ -314,7 +314,11 @@ export let CreateTearsheet = forwardRef(
             vertical
             className={`${blockClass}__progress-indicator`}>
             {stepChildren.map((child, stepIndex) => (
-              <ProgressStep label={child.props.title} key={stepIndex} />
+              <ProgressStep
+                key={stepIndex}
+                label={child.props.title}
+                secondaryLabel={child.props.secondaryLabel}
+              />
             ))}
           </ProgressIndicator>
         </div>

@@ -193,7 +193,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .exp--action-set.exp--action-set--row-double
 .exp--action-set__action-button--ghost {
-  flex: 1 0 75%;
+  flex: 1 1 75%;
 }
 
 .exp--action-set.exp--action-set--row-single.exp--action-set--lg
@@ -204,12 +204,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--action-set__action-button,
 .exp--action-set.exp--action-set--row-triple
 .exp--action-set__action-button--ghost {
-  flex: 0 0 50%;
+  flex: 0 1 50%;
 }
 
 .exp--action-set.exp--action-set--row-triple
 .exp--action-set__action-button--ghost {
-  flex: 1 0 50%;
+  flex: 1 1 50%;
 }
 
 .exp--action-set.bx--btn-set.exp--action-set--row-triple.exp--action-set--lg
@@ -221,12 +221,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--action-set.bx--btn-set.exp--action-set--row-quadruple
 .exp--action-set__action-button:not(.exp--action-set__action-button--ghost) {
   max-width: 14.5rem;
-  flex: 0 0 25%;
+  flex: 0 1 25%;
 }
 
 .exp--action-set.bx--btn-set.exp--action-set--row-quadruple
 .exp--action-set__action-button--ghost {
-  flex: 1 0 25%;
+  flex: 1 1 25%;
 }
 
 .exp--action-set .exp--action-set__action-button .bx--inline-loading {
@@ -1817,6 +1817,7 @@ path:nth-of-type(1),
 
 .exp--tearsheet .exp--tearsheet__container {
   top: auto;
+  width: 100%;
   height: 100%;
   max-height: calc(100% - var(--cds-spacing-09, 3rem));
   transform: translate3d(0, min(95vh, 500px), 0);
@@ -1851,8 +1852,10 @@ path:nth-of-type(1),
   max-height: calc( 100% - (var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem) + (2 * var(--cds-spacing-05, 1rem))));
 }
 
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__container {
-  width: calc(100% - (2 * var(--cds-spacing-07, 2rem)));
+@media (min-width: 66rem) {
+  .exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__container {
+    width: calc(100% - (2 * var(--cds-spacing-07, 2rem)));
+  }
 }
 
 .exp--tearsheet.exp--tearsheet--stacked-1-of-2.is-visible
@@ -2006,10 +2009,16 @@ path:nth-of-type(1),
   background-color: var(--cds-field-02, #ffffff);
 }
 
-.exp--tearsheet .exp--tearsheet__buttons {
-  border-top: 1px solid var(--cds-ui-03, #e0e0e0);
+.exp--tearsheet .exp--tearsheet__button-container {
   grid-column: 1 / -1;
   grid-row: -1 / -1;
+  overflow-x: auto;
+}
+
+.exp--tearsheet .exp--tearsheet__buttons {
+  display: inline-flex;
+  min-width: 100%;
+  border-top: 1px solid var(--cds-ui-03, #e0e0e0);
 }
 
 .exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__buttons {

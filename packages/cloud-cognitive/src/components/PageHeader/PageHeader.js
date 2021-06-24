@@ -398,7 +398,7 @@ export let PageHeader = React.forwardRef(
 
     const tempTagSetOverflowProps = {
       // temp fix pending changes to PageHeader implementation
-      allTagsModalTile: 'All tags',
+      allTagsModalTitle: 'All tags',
       allTagsModalSearchLabel: 'Search all tags',
       allTagsModalSearchPlaceholderText: 'Search all tags',
       showAllTagsLabel: 'View all tags',

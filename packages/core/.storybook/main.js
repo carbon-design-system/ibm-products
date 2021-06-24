@@ -16,6 +16,7 @@ module.exports = {
     '@storybook/addon-controls',
     '@storybook/addon-knobs',
     '@storybook/addon-storysource',
+    '@storybook/addon-viewport',
     '@carbon/storybook-addon-theme/register',
   ],
 

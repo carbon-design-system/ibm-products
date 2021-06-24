@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.49.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.49.2...@carbon/ibm-cloud-cognitive@0.49.3) (2021-06-24)
+
+
+### Bug Fixes
+
+* **SidePanel:** make title/subtitle fixed when no title animation ([#933](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/933)) ([18c097d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/18c097d8d590d52eb0527eed7de1c4b3786751ca))
+
+
+
+
+
 ## [0.49.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.49.1...@carbon/ibm-cloud-cognitive@0.49.2) (2021-06-24)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

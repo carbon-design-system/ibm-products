@@ -28,7 +28,7 @@ const tags10 = tags.slice(0, 10);
 const tagWidth = 100;
 
 const overflowAndModalStrings = {
-  allTagsModalTile: 'All tags',
+  allTagsModalTitle: 'All tags',
   allTagsModalSearchLabel: 'Search all tags',
   allTagsModalSearchPlaceholderText: 'Search all tags',
   showAllTagsLabel: 'View all tags',
@@ -173,7 +173,7 @@ describe(TagSet.displayName, () => {
       'Warning: Failed prop type: The prop `allTagsModalSearchPlaceholderText` is marked as required in `TagSet`, but its value is `undefined`.\n    in TagSet'
     );
     expect(errorsLogged.mock.calls[2][0]).toEqual(
-      'Warning: Failed prop type: The prop `allTagsModalTile` is marked as required in `TagSet`, but its value is `undefined`.\n    in TagSet'
+      'Warning: Failed prop type: The prop `allTagsModalTitle` is marked as required in `TagSet`, but its value is `undefined`.\n    in TagSet'
     );
     expect(errorsLogged.mock.calls[3][0]).toEqual(
       'Warning: Failed prop type: The prop `showAllTagsLabel` is marked as required in `TagSet`, but its value is `undefined`.\n    in TagSet'

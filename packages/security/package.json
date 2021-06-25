@@ -33,7 +33,7 @@
     "build:css": "bundler bundle:scss src/index.scss",
     "build:js-esm": "cross-env BABEL_ENV=esm yarn build:js:modules -d es",
     "build:js-cjs": "cross-env BABEL_ENV=cjs yarn build:js:modules -d lib",
-    "build:js:modules": "babel src --ignore '**/__tests__','**/*.test.js','**/*.stories.js'",
+    "build:js:modules": "babel src --ignore '**/_mocks_/**','**/__tests__/**','**/*-story.js'",
     "build:scss": "copyfiles 'src/**/*.scss' scss -u 1",
     "ci-check": "node scripts/import",
     "clean": "rimraf css es lib scss",

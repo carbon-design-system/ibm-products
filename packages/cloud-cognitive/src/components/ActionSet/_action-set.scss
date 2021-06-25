@@ -56,7 +56,7 @@
   // buttons are 75% width and expand to use any remaining space
   .#{$block-class}.#{$block-class}--row-double
     .#{$block-class}__action-button--ghost {
-    flex: 1 0 75%;
+    flex: 1 1 75%;
   }
 
   // For row-single in large (non-ghost),
@@ -70,14 +70,14 @@
     .#{$block-class}__action-button,
   .#{$block-class}.#{$block-class}--row-triple
     .#{$block-class}__action-button--ghost {
-    flex: 0 0 50%;
+    flex: 0 1 50%;
   }
 
   // For ghosts in row-triple,
   // buttons are 50% width and expand to use any remaining space
   .#{$block-class}.#{$block-class}--row-triple
     .#{$block-class}__action-button--ghost {
-    flex: 1 0 50%;
+    flex: 1 1 50%;
   }
 
   // For row-triple in large (non-ghost),
@@ -93,12 +93,12 @@
   .#{$block-class}.#{$carbon-prefix}--btn-set.#{$block-class}--row-quadruple
     .#{$block-class}__action-button:not(.#{$block-class}__action-button--ghost) {
     max-width: rem(232px);
-    flex: 0 0 25%;
+    flex: 0 1 25%;
   }
 
   .#{$block-class}.#{$carbon-prefix}--btn-set.#{$block-class}--row-quadruple
     .#{$block-class}__action-button--ghost {
-    flex: 1 0 25%;
+    flex: 1 1 25%;
   }
 
   .#{$block-class} .#{$block-class}__action-button .bx--inline-loading {

@@ -1,6 +1,6 @@
 /**
  * @file Portal.
- * @copyright IBM Security 2019 - 2020
+ * @copyright IBM Security 2019 - 2021
  */
 
 import FocusTrap from 'focus-trap-react';
@@ -8,8 +8,8 @@ import PropTypes from 'prop-types';
 import React, { Children, Component } from 'react';
 import { createPortal } from 'react-dom';
 
-import deprecatedProp from '../../globals/prop-types';
 import { getComponentNamespace } from '../../globals/namespace';
+import deprecatedProp from '../../globals/prop-types';
 
 import { isClient, isNode } from '../../globals/utils/capabilities';
 import composeEventHandlers from '../../globals/utils/events';
@@ -157,7 +157,6 @@ class Portal extends Component {
     const child = React.Children.only(children);
     const events = stopPropagationEvents || PORTAL_EVENTS;
 
-    /* eslint-disable security/detect-object-injection */
     events.forEach((event) => {
       if (child.props[event]) {
         childProps[event] = composeEventHandlers([
@@ -168,7 +167,6 @@ class Portal extends Component {
         childProps[event] = this.handleBubble;
       }
     });
-    /* eslint-enable security/detect-object-injection */
 
     return React.cloneElement(child, { ...childProps });
   };

@@ -240,12 +240,14 @@ export const TearsheetShell = React.forwardRef(
                 </Wrap>
               </Wrap>
               {includeActions && (
-                <ActionSet
-                  actions={actions}
-                  buttonSize={size === 'wide' ? 'xl' : null}
-                  className={`${bc}__buttons`}
-                  size={size === 'wide' ? 'max' : 'lg'}
-                />
+                <Wrap className={`${bc}__button-container`}>
+                  <ActionSet
+                    actions={actions}
+                    buttonSize={size === 'wide' ? 'xl' : null}
+                    className={`${bc}__buttons`}
+                    size={size === 'wide' ? 'max' : 'lg'}
+                  />
+                </Wrap>
               )}
             </Wrap>
           </Wrap>

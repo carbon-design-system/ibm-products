@@ -9,8 +9,8 @@
 @import '../deprecate/index';
 
 $deprecate: deprecate(
-  $actual: 'spacing.module.scss',
-  $expected: '@carbon/layout',
+  $actual: '@carbon/ibm-security/scss/globals/scss-exports/spacing.module',
+  $expected: '@carbon/layout/scss/layout',
   $url:
     'https://github.com/carbon-design-system/ibm-security/blob/master/docs/migration/carbon-for-ibm-security/layout.md#imports',
 );

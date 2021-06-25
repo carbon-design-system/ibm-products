@@ -17,10 +17,13 @@ module.exports = {
     '@storybook/addon-knobs',
     '@storybook/addon-links',
     '@storybook/addon-storysource',
+    '@storybook/addon-viewport',
     '@carbon/storybook-addon-theme/register',
   ],
 
-  stories: sync(resolve(__dirname, '..', '..', '**/*.stories.*')).filter(
+  stories: sync(
+    resolve(__dirname, '..', '..', '**/*+(-story|.stories).*')
+  ).filter(
     (story) =>
       !story.includes('node_modules') && !story.includes('DISPLAY_NAME')
   ),

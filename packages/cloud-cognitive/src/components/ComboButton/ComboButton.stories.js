@@ -8,12 +8,17 @@
 import CloudApp16 from '@carbon/icons-react/lib/cloud-app/16';
 import React from 'react';
 
+import { pkg } from '../../settings';
+import { getStorybookPrefix } from '../../../config';
+
 import { ComboButton, ComboButtonItem } from '..';
 
 import styles from './_combo-button.scss';
 
+const storybookPrefix = getStorybookPrefix(pkg, ComboButton.displayName);
+
 export default {
-  title: `Legacy/Security/${ComboButton.name}`,
+  title: `${storybookPrefix}/${ComboButton.displayName}`,
   component: ComboButton,
   subcomponents: {
     ComboButtonItem,

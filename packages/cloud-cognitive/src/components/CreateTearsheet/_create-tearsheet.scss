@@ -24,12 +24,19 @@
   }
 
   $block-class: #{$pkg-prefix}--tearsheet-create;
+  $section-block-class: #{$pkg-prefix}--tearsheet-create__section;
+
+  .#{$block-class} .#{$block-class}__step--hidden-step,
   .#{$block-class} .#{$block-class}__step--hidden-section {
     display: none;
   }
 
+  .#{$block-class} .#{$block-class}__step--visible-section {
+    display: block;
+  }
+
   .#{$block-class}
-    .#{$block-class}__step--visible-section:not(.#{$block-class}__step--first-panel-step) {
+    .#{$block-class}__step--visible-step:not(.#{$block-class}__step--first-panel-step) {
     animation: $duration--slow-01 stepContentEntrance;
     animation-fill-mode: forwards;
     animation-timing-function: $carbon--standard-easing;
@@ -38,7 +45,7 @@
 
   @media (prefers-reduced-motion) {
     .#{$block-class}
-      .#{$block-class}__step--visible-section:not(.#{$block-class}__step--first-panel-step) {
+      .#{$block-class}__step--visible-step:not(.#{$block-class}__step--first-panel-step) {
       animation: none;
       opacity: 1;
     }
@@ -46,6 +53,18 @@
 
   .#{$block-class} .#{$block-class}__multi-step-panel-content {
     padding: $spacing-06 $spacing-07;
+  }
+
+  .#{$block-class} .#{$pkg-prefix}--tearsheet__influencer {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr auto;
+  }
+
+  .#{$block-class} .#{$block-class}__left-nav {
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    overflow-y: auto;
   }
 
   .#{$block-class} .#{$block-class}__progress-indicator {
@@ -64,6 +83,17 @@
     .#{$carbon-prefix}--btn-set
     .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--disabled {
     box-shadow: -0.0625rem 0 0 0 $button-separator;
+  }
+
+  .#{$block-class} .#{$block-class}__view-all-toggle {
+    padding: $spacing-05;
+    grid-column: 1 / -1;
+    grid-row: -1 / -1;
+  }
+
+  .#{$block-class} .#{$carbon-prefix}--side-nav--ux {
+    position: initial;
+    background-color: transparent;
   }
 }
 

@@ -1,9 +1,7 @@
 /**
  * @file Wizard.
- * @copyright IBM Security 2019 - 2020
+ * @copyright IBM Security 2019 - 2021
  */
-
-/* eslint-disable compat/compat,no-nested-ternary */
 
 import classnames from 'classnames';
 import PropTypes from 'prop-types';

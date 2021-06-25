@@ -7,7 +7,6 @@
 
 export { AboutModal } from './AboutModal';
 export { ActionBarItem } from './ActionBar';
-export { ButtonMenu, ButtonMenuItem } from './ButtonMenu';
 export { ComboButton, ComboButtonItem } from './ComboButton';
 export { ContextHeader } from './ContextHeader';
 export {
@@ -17,7 +16,11 @@ export {
 } from './CreateFullPage';
 export { CreateModal } from './CreateModal';
 export { CreateSidePanel } from './CreateSidePanel';
-export { CreateTearsheet, CreateTearsheetStep } from './CreateTearsheet';
+export {
+  CreateTearsheet,
+  CreateTearsheetStep,
+  CreateTearsheetSection,
+} from './CreateTearsheet';
 export {
   EmptyState,
   ErrorEmptyState,

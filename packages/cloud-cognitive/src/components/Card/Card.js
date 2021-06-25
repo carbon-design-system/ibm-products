@@ -13,12 +13,14 @@ import {
   OverflowMenuItem,
 } from 'carbon-components-react';
 import PropTypes from 'prop-types';
+import { CardHeader } from './CardHeader';
+import { CardFooter } from './CardFooter';
 import { pkg } from '../../settings';
 const componentName = 'Card';
 
 export let Card = ({
   actionIcons,
-  actionIconsPosition,
+  actionsPlacement,
   caption,
   children,
   className,
@@ -40,26 +42,24 @@ export let Card = ({
   title,
   titleSize,
 }) => {
+  const blockClass = `${pkg.prefix}--card`;
   const hasActions = actionIcons.length > 0 || overflowActions.length > 0;
-  const hasTopActions = hasActions && actionIconsPosition === 'top';
-  const hasBottomActions = hasActions && actionIconsPosition === 'bottom';
-  const hasBottomButton = !!secondaryButtonText || !!primaryButtonText;
-  const hasBottomBar = hasBottomActions || hasBottomButton;
+  const hasFooterActions = hasActions && actionsPlacement === 'bottom';
+  const hasFooterButton = !!secondaryButtonText || !!primaryButtonText;
+  const hasBottomBar = hasFooterActions || hasFooterButton;
+  const hasClickEvent = !!onClick || !!onKeyDown;
+  const clickableProps = {
+    onClick,
+    onKeyDown,
+    role: 'button',
+    tabIndex: '0',
+  };
 
-  const headerClasses = cx(`${pkg.prefix}-card-header`, {
-    [`${pkg.prefix}-card-header--label-only`]: label && !title && !caption,
-    [`${pkg.prefix}-card-header--has-label`]: label && productive,
-    [`${pkg.prefix}-card-title--lg`]: titleSize === 'large',
-  });
-
-  const footerClasses = cx(`${pkg.prefix}-card-footer`, {
-    [`${pkg.prefix}-card-footer--no-button`]: !hasBottomButton,
-  });
-
+  // actions can either be an overflow menu or series of icons
   const getActions = () => {
-    if (overflowActions.length !== 0) {
-      const pos = actionIconsPosition === 'top' ? 'bottom' : 'top';
-      const size = actionIconsPosition === 'top' ? 'sm' : 'xl';
+    if (overflowActions.length > 0) {
+      const pos = actionsPlacement === 'top' ? 'bottom' : 'top';
+      const size = actionsPlacement === 'top' ? 'sm' : 'xl';
       return (
         <OverflowMenu size={size} direction={pos} flipped>
           {overflowActions.map(({ id, ...rest }) => (
@@ -78,7 +78,7 @@ export let Card = ({
               renderIcon={Icon}
               hasIconOnly
               onClick={onClick}
-              size={actionIconsPosition === 'top' ? 'sm' : 'field'}
+              size={actionsPlacement === 'top' ? 'sm' : 'field'}
               iconDescription={iconDescription}
               kind="ghost"
             />
@@ -87,7 +87,7 @@ export let Card = ({
         return (
           <div
             key={id}
-            className={`${pkg.prefix}-card-icon`}
+            className={`${blockClass}__icon`}
             onClick={onClick}
             onKeyDown={onKeyDown}
             role="button"
@@ -101,114 +101,90 @@ export let Card = ({
     return icons;
   };
 
-  const getClickableProps = () => ({
-    onClick,
-    onKeyDown,
-    role: 'button',
-    tabIndex: '0',
-  });
-
   const getCardProps = () => {
-    const hasClickEvent = !!onClick || !!onKeyDown;
     const clickable =
       (hasClickEvent && !productive) ||
       (hasClickEvent && productive && clickZone === 'one');
     const cardProps = {
-      className: cx(`${pkg.prefix}-card`, {
-        [`${pkg.prefix}-card--productive`]: productive,
-        [`${pkg.prefix}-card--clickable`]: clickable,
-        [`${pkg.prefix}-card--media-left`]: mediaPosition === 'left',
+      className: cx(`${blockClass}`, {
+        [`${blockClass}__productive`]: productive,
+        [`${blockClass}__clickable`]: clickable,
+        [`${blockClass}__media-left`]: mediaPosition === 'left',
         className,
       }),
-      ...(clickable && getClickableProps()),
+      ...(clickable && clickableProps),
     };
 
     return cardProps;
   };
 
+  // the only reason this is necessary is for clickzone 2
   const getHeaderBodyProps = () => {
-    const hasClickEvent = !!onClick || !!onKeyDown;
     const clickable = hasClickEvent && clickZone === 'two';
     const headerBodyProps = {
-      className: cx(`${pkg.prefix}-card-header-body-container`, {
-        [`${pkg.prefix}-card--clickable`]: clickable,
+      className: cx(`${blockClass}__header-body-container`, {
+        [`${blockClass}__clickable`]: clickable,
       }),
-      ...(clickable && getClickableProps()),
+      ...(clickable && clickableProps),
     };
 
     return headerBodyProps;
   };
 
+  const getHeaderProps = () => ({
+    actions: getActions(),
+    actionsPlacement,
+    caption,
+    hasActions: hasActions && actionsPlacement === 'top',
+    label,
+    productive,
+    title,
+    titleSize,
+  });
+
   const getBodyProps = () => {
-    const hasClickEvent = !!onClick || !!onKeyDown;
     const clickable = hasClickEvent && clickZone === 'three';
     const bodyProps = {
-      className: cx(`${pkg.prefix}-card-body`, {
-        [`${pkg.prefix}-card--clickable`]: clickable,
+      className: cx(`${blockClass}__body`, {
+        [`${blockClass}__clickable`]: clickable,
       }),
-      ...(clickable && getClickableProps()),
+      ...(clickable && clickableProps),
     };
 
     return bodyProps;
   };
 
-  const CardContent = (
+  const getFooterProps = () => ({
+    actions: getActions(),
+    actionsPlacement,
+    hasActions: hasFooterActions,
+    hasButton: hasFooterButton,
+    onPrimaryButtonClick,
+    onSecondaryButtonClick,
+    primaryButtonKind,
+    primaryButtonText,
+    productive,
+    secondaryButtonKind,
+    secondaryButtonText,
+  });
+
+  return (
     <div {...getCardProps()}>
-      {media && <div className={`${pkg.prefix}-card-media`}>{media}</div>}
+      {media && <div className={`${blockClass}__media`}>{media}</div>}
       {Pictogram && (
-        <div className={`${pkg.prefix}-card-pictogram`}>
+        <div className={`${blockClass}__pictogram`}>
           <Pictogram />
         </div>
       )}
-      <div className={`${pkg.prefix}-card-content-container`}>
+      <div className={`${blockClass}__content-container`}>
         <div {...getHeaderBodyProps()}>
-          <div className={headerClasses}>
-            <div className={`${pkg.prefix}-card-header-container`}>
-              <div className={`${pkg.prefix}-card-title-container`}>
-                {label && <p className={`${pkg.prefix}-card-label`}>{label}</p>}
-                {title && <p className={`${pkg.prefix}-card-title`}>{title}</p>}
-                {caption && (
-                  <p className={`${pkg.prefix}-card-caption`}>{caption}</p>
-                )}
-              </div>
-              {hasTopActions && (
-                <div
-                  className={`${pkg.prefix}-card-actions ${pkg.prefix}-card-actions--top`}>
-                  {getActions()}
-                </div>
-              )}
-            </div>
-          </div>
+          <CardHeader {...getHeaderProps()} />
           <div {...getBodyProps()}>{children}</div>
         </div>
-        {hasBottomBar && (
-          <div className={footerClasses}>
-            {secondaryButtonText && (
-              <Button
-                kind={secondaryButtonKind}
-                onClick={onSecondaryButtonClick}
-                size="field">
-                {secondaryButtonText}
-              </Button>
-            )}
-            {primaryButtonText && (
-              <Button
-                kind={productive ? 'ghost' : primaryButtonKind}
-                onClick={onPrimaryButtonClick}
-                size="field">
-                {primaryButtonText}
-              </Button>
-            )}
-            {hasBottomActions && (
-              <div className={`${pkg.prefix}-card-actions`}>{getActions()}</div>
-            )}
-          </div>
-        )}
+        {hasBottomBar && <CardFooter {...getFooterProps()} />}
       </div>
     </div>
   );
-
-  return CardContent;
 };
 
 // Return a placeholder if not released and not enabled by feature flag
@@ -224,7 +200,7 @@ Card.propTypes = {
       iconDescription: PropTypes.string,
     })
   ),
-  actionIconsPosition: PropTypes.oneOf(['top', 'bottom']),
+  actionsPlacement: PropTypes.oneOf(['top', 'bottom']),
   caption: PropTypes.string,
   children: PropTypes.node,
   className: PropTypes.string,
@@ -256,7 +232,7 @@ Card.propTypes = {
 
 Card.defaultProps = {
   actionIcons: [],
-  actionIconsPosition: 'bottom',
+  actionsPlacement: 'bottom',
   clickZone: 'one',
   mediaPosition: 'top',
   overflowActions: [],

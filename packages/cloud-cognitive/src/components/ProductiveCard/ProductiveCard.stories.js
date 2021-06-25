@@ -56,14 +56,14 @@ const defaultProps = {
       id: '1',
       icon: Edit16,
       onClick: () => {},
-      onkeydown: () => {},
+      onKeyDown: () => {},
       iconDescription: 'Edit',
     },
     {
       id: '2',
       icon: TrashCan16,
       onClick: () => {},
-      onkeydown: () => {},
+      onKeyDown: () => {},
       iconDescription: 'Delete',
     },
   ],
@@ -104,7 +104,7 @@ LabelOnly.args = {
   ...defaultProps,
   title: '',
   label: 'Label',
-  actionIconsPosition: 'bottom',
+  actionsPlacement: 'bottom',
   primaryButtonText: 'Ghost button',
 };
 
@@ -116,13 +116,13 @@ WithOverflow.args = {
       id: '1',
       itemText: 'Edit',
       onClick: () => {},
-      onkeydown: () => {},
+      onKeyDown: () => {},
     },
     {
       id: '2',
       itemText: 'Delete',
       onClick: () => {},
-      onkeydown: () => {},
+      onKeyDown: () => {},
     },
   ],
 };
@@ -137,14 +137,14 @@ export const ComplexBottomBar = Template.bind({});
 ComplexBottomBar.args = {
   ...defaultProps,
   primaryButtonText: 'Ghost button',
-  actionIconsPosition: 'bottom',
+  actionsPlacement: 'bottom',
 };
 
 export const Clickable = Template.bind({});
 Clickable.args = {
   ...defaultProps,
   onClick: () => {},
-  onkeydown: () => {},
+  onKeyDown: () => {},
   primaryButtonText: 'Ghost button',
   actionIcons: [],
 };

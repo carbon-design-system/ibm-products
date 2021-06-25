@@ -49,8 +49,8 @@
 
 // set default color and background for stories
 .sb-show-main {
-  color: $text-01;
   background-color: $ui-background;
+  color: $text-01;
 }
 
 /**
@@ -61,4 +61,21 @@
 */
 .preview-position-fix > div {
   position: static !important; /* stylelint-disable-line declaration-no-important */
+}
+
+/**
+  Adds a box indicating the extent of the available space to the displayed component
+*/
+.ccs-sb__display-box {
+  position: relative;
+  border: $layout-02 solid $ui-01;
+}
+
+.ccs-sb__display-box::before {
+  position: absolute;
+  top: calc(-1 * #{$layout-02});
+  left: 0;
+  margin-top: calc(-1 * #{$layout-02});
+  content: 'NOTE: Border around component shows extent of container, but not part of component.';
+  white-space: nowrap;
 }

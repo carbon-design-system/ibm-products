@@ -172,7 +172,11 @@ export const MultiStepWithSectionsTearsheet = () => {
           </CreateTearsheetSection>
         </CreateTearsheetStep>
         <CreateTearsheetStep title="Empty" secondaryLabel="Optional">
-          Empty step for demonstration purposes
+          <CreateTearsheetSection
+            title="Empty"
+            id="create-tearsheet-section-empty">
+            Empty step for demonstration purposes
+          </CreateTearsheetSection>
         </CreateTearsheetStep>
         <CreateTearsheetStep
           title="Partitions"

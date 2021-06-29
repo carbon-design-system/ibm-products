@@ -8,7 +8,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { BreadcrumbItem } from 'carbon-components-react';
 
 import { pkg } from '../../settings';
@@ -19,8 +18,6 @@ const storybookPrefix = getStorybookPrefix(
   BreadcrumbWithOverflow.displayName
 );
 
-const blockClass = `${pkg.prefix}--breadcrumb-with-overflow`;
-
 export default {
   title: `${storybookPrefix}/${BreadcrumbWithOverflow.displayName}`,
   component: BreadcrumbWithOverflow,
@@ -30,9 +27,8 @@ export default {
     },
   },
   decorators: [
-    (story) => <div className={`${blockClass}__story-viewport`}>{story()}</div>,
+    (story) => <div className={`ccs-sb__display-box`}>{story()}</div>,
   ],
-  parameters: { styles },
 };
 
 const breadcrumbItems = [

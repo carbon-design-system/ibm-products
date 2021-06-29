@@ -28,6 +28,7 @@ const defaults = {
     RemoveModal: true,
     Saving: true,
     StatusIcon: true,
+    TagSet: true,
     Tearsheet: true,
     TearsheetNarrow: true,
     UnauthorizedEmptyState: true,
@@ -52,7 +53,6 @@ const defaults = {
     PageHeader: false,
     ProductiveCard: false,
     SidePanel: false,
-    TagSet: false,
     WebTerminal: false,
     /* new component flags here - comment used by generate CLI */
   },

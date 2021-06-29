@@ -31,8 +31,12 @@ $block-class-modal: #{$block-class}-modal;
       white-space: nowrap;
     }
 
-    .#{$block-class}__space--right {
+    .#{$block-class}__space--align-end {
       text-align: end;
+    }
+
+    .#{$block-class}__space--align-center {
+      text-align: center;
     }
 
     .#{$block-class}__tag-container {

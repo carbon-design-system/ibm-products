@@ -49,7 +49,7 @@ CreateTearsheetSection.propTypes = {
   /**
    * Sets the title text for a tearsheet step
    */
-  title: PropTypes.node,
+  title: PropTypes.node.isRequired,
 };
 
 // Default values for component props. Default values are not required for

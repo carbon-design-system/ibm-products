@@ -559,9 +559,7 @@ export let CreateTearsheet = forwardRef(
     };
 
     const handleResize = (width) => {
-      console.log({ width });
       const createTearsheetOuter = document.querySelector(`.${blockClass}`);
-      console.log(createTearsheetOuter);
       const influencerWidth = 257;
       const tearsheetPadding = width < 1056 ? 0 : 64;
       const totalTearsheetWidth =

@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SCSS Bundle 1`] = `
+exports[`Styles Bundle 1`] = `
 ".security--input__background__color--light .bx--date-picker__input, .security--input__background__color--light .bx--dropdown,
-.security--input__background__color--light .bx--number input[type=\\"number\\"], .security--input__background__color--light .bx--search-input, .security--input__background__color--light .bx--select-input, .security--input__background__color--light .bx--text-area, .security--input__background__color--light .bx--text-input, .security--input__background__color--light .bx--list-box, .security--input__background__color--light .bx--list-box__menu, .security--input__background__color--light .security--button--icon:focus, .security--input__background__color--light .security--button--icon:hover, .security--card .bx--number .security--input__background__color--light input[type=\\"number\\"], .security--tearsheet--small .bx--number .security--input__background__color--light input[type=\\"number\\"], .security--tearsheet .bx--number .security--input__background__color--light input[type=\\"number\\"] {
+.security--input__background__color--light .bx--number input[type='number'], .security--input__background__color--light .bx--search-input, .security--input__background__color--light .bx--select-input, .security--input__background__color--light .bx--text-area, .security--input__background__color--light .bx--text-input, .security--input__background__color--light .bx--list-box, .security--input__background__color--light .bx--list-box__menu, .security--input__background__color--light .security--button--icon:focus, .security--input__background__color--light .security--button--icon:hover, .security--card .bx--number .security--input__background__color--light input[type='number'], .security--tearsheet--small .bx--number .security--input__background__color--light input[type='number'], .security--tearsheet .bx--number .security--input__background__color--light input[type='number'] {
   background-color: var(--cds-ui-02, #393939);
 }
 
@@ -193,12 +193,12 @@ exports[`SCSS Bundle 1`] = `
   --cds-body-long-02-font-weight: 400;
   --cds-body-long-02-line-height: 1.5;
   --cds-body-long-02-letter-spacing: 0;
-  --cds-code-01-font-family: \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace;
+  --cds-code-01-font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
   --cds-code-01-font-size: 0.75rem;
   --cds-code-01-font-weight: 400;
   --cds-code-01-line-height: 1.34;
   --cds-code-01-letter-spacing: 0.32px;
-  --cds-code-02-font-family: \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace;
+  --cds-code-02-font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
   --cds-code-02-font-size: 0.875rem;
   --cds-code-02-font-weight: 400;
   --cds-code-02-line-height: 1.43;
@@ -665,12 +665,12 @@ exports[`SCSS Bundle 1`] = `
   --cds-body-long-02-font-weight: 400;
   --cds-body-long-02-line-height: 1.5;
   --cds-body-long-02-letter-spacing: 0;
-  --cds-code-01-font-family: \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace;
+  --cds-code-01-font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
   --cds-code-01-font-size: 0.75rem;
   --cds-code-01-font-weight: 400;
   --cds-code-01-line-height: 1.34;
   --cds-code-01-letter-spacing: 0.32px;
-  --cds-code-02-font-family: \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace;
+  --cds-code-02-font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
   --cds-code-02-font-size: 0.875rem;
   --cds-code-02-font-weight: 400;
   --cds-code-02-line-height: 1.43;
@@ -1092,7 +1092,7 @@ body {
   margin-bottom: 0;
 }
 
-[class*=\\"bx-padding\\"] {
+[class*='bx-padding'] {
   box-sizing: border-box;
 }
 
@@ -1255,7 +1255,7 @@ body {
   grid-row: span 29;
 }
 
-[class*=\\"bx-grid__col--sm--\\"] {
+[class*='bx-grid__col--sm--'] {
   display: block;
 }
 
@@ -1315,7 +1315,7 @@ body {
   grid-column: span 1;
 }
 
-.bx-grid__col--sm--1.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+.bx-grid__col--sm--1.bx-grid > *:not([class*='bx-grid__col']) {
   grid-column: span 1;
 }
 
@@ -1327,7 +1327,7 @@ body {
   grid-column: span 2;
 }
 
-.bx-grid__col--sm--2.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+.bx-grid__col--sm--2.bx-grid > *:not([class*='bx-grid__col']) {
   grid-column: span 2;
 }
 
@@ -1339,7 +1339,7 @@ body {
   grid-column: span 3;
 }
 
-.bx-grid__col--sm--3.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+.bx-grid__col--sm--3.bx-grid > *:not([class*='bx-grid__col']) {
   grid-column: span 3;
 }
 
@@ -1351,7 +1351,7 @@ body {
   grid-column: span 4;
 }
 
-.bx-grid__col--sm--4.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+.bx-grid__col--sm--4.bx-grid > *:not([class*='bx-grid__col']) {
   grid-column: span 4;
 }
 
@@ -1454,7 +1454,7 @@ body {
   .bx-grid__col--sm--0--only {
     display: block;
   }
-  [class*=\\"bx-grid__col--md--\\"] {
+  [class*='bx-grid__col--md--'] {
     display: block;
   }
   .bx-grid__col--md--0,
@@ -1499,7 +1499,7 @@ body {
   .bx-grid__col--sm--1 {
     grid-column: span 2;
   }
-  .bx-grid__col--sm--1.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--sm--1.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 1;
   }
   .bx-grid--fluid-rows > .bx-grid__height--sm--1 {
@@ -1508,7 +1508,7 @@ body {
   .bx-grid__col--sm--2 {
     grid-column: span 4;
   }
-  .bx-grid__col--sm--2.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--sm--2.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 2;
   }
   .bx-grid--fluid-rows > .bx-grid__height--sm--2 {
@@ -1517,7 +1517,7 @@ body {
   .bx-grid__col--sm--3 {
     grid-column: span 6;
   }
-  .bx-grid__col--sm--3.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--sm--3.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 3;
   }
   .bx-grid--fluid-rows > .bx-grid__height--sm--3 {
@@ -1526,7 +1526,7 @@ body {
   .bx-grid__col--sm--4 {
     grid-column: span 8;
   }
-  .bx-grid__col--sm--4.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--sm--4.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 4;
   }
   .bx-grid--fluid-rows > .bx-grid__height--sm--4 {
@@ -1535,7 +1535,7 @@ body {
   .bx-grid__col--md--1 {
     grid-column: span 1;
   }
-  .bx-grid__col--md--1.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--md--1.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 1;
   }
   .bx-grid--fluid-rows > .bx-grid__height--md--1 {
@@ -1544,7 +1544,7 @@ body {
   .bx-grid__col--md--2 {
     grid-column: span 2;
   }
-  .bx-grid__col--md--2.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--md--2.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 2;
   }
   .bx-grid--fluid-rows > .bx-grid__height--md--2 {
@@ -1553,7 +1553,7 @@ body {
   .bx-grid__col--md--3 {
     grid-column: span 3;
   }
-  .bx-grid__col--md--3.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--md--3.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 3;
   }
   .bx-grid--fluid-rows > .bx-grid__height--md--3 {
@@ -1562,7 +1562,7 @@ body {
   .bx-grid__col--md--4 {
     grid-column: span 4;
   }
-  .bx-grid__col--md--4.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--md--4.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 4;
   }
   .bx-grid--fluid-rows > .bx-grid__height--md--4 {
@@ -1571,7 +1571,7 @@ body {
   .bx-grid__col--md--5 {
     grid-column: span 5;
   }
-  .bx-grid__col--md--5.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--md--5.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 5;
   }
   .bx-grid--fluid-rows > .bx-grid__height--md--5 {
@@ -1580,7 +1580,7 @@ body {
   .bx-grid__col--md--6 {
     grid-column: span 6;
   }
-  .bx-grid__col--md--6.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--md--6.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 6;
   }
   .bx-grid--fluid-rows > .bx-grid__height--md--6 {
@@ -1589,7 +1589,7 @@ body {
   .bx-grid__col--md--7 {
     grid-column: span 7;
   }
-  .bx-grid__col--md--7.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--md--7.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 7;
   }
   .bx-grid--fluid-rows > .bx-grid__height--md--7 {
@@ -1598,7 +1598,7 @@ body {
   .bx-grid__col--md--8 {
     grid-column: span 8;
   }
-  .bx-grid__col--md--8.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--md--8.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 8;
   }
   .bx-grid--fluid-rows > .bx-grid__height--md--8 {
@@ -1748,7 +1748,7 @@ body {
   .bx-grid__col--md--0--only {
     display: block;
   }
-  [class*=\\"bx-grid__col--lg--\\"] {
+  [class*='bx-grid__col--lg--'] {
     display: block;
   }
   .bx-grid__col--lg--0,
@@ -1793,7 +1793,7 @@ body {
   .bx-grid__col--sm--1 {
     grid-column: span 4;
   }
-  .bx-grid__col--sm--1.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--sm--1.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 1;
   }
   .bx-grid--fluid-rows > .bx-grid__height--sm--1 {
@@ -1802,7 +1802,7 @@ body {
   .bx-grid__col--sm--2 {
     grid-column: span 8;
   }
-  .bx-grid__col--sm--2.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--sm--2.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 2;
   }
   .bx-grid--fluid-rows > .bx-grid__height--sm--2 {
@@ -1811,7 +1811,7 @@ body {
   .bx-grid__col--sm--3 {
     grid-column: span 12;
   }
-  .bx-grid__col--sm--3.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--sm--3.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 3;
   }
   .bx-grid--fluid-rows > .bx-grid__height--sm--3 {
@@ -1820,7 +1820,7 @@ body {
   .bx-grid__col--sm--4 {
     grid-column: span 16;
   }
-  .bx-grid__col--sm--4.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--sm--4.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 4;
   }
   .bx-grid--fluid-rows > .bx-grid__height--sm--4 {
@@ -1829,7 +1829,7 @@ body {
   .bx-grid__col--md--1 {
     grid-column: span 2;
   }
-  .bx-grid__col--md--1.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--md--1.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 1;
   }
   .bx-grid--fluid-rows > .bx-grid__height--md--1 {
@@ -1838,7 +1838,7 @@ body {
   .bx-grid__col--md--2 {
     grid-column: span 4;
   }
-  .bx-grid__col--md--2.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--md--2.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 2;
   }
   .bx-grid--fluid-rows > .bx-grid__height--md--2 {
@@ -1847,7 +1847,7 @@ body {
   .bx-grid__col--md--3 {
     grid-column: span 6;
   }
-  .bx-grid__col--md--3.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--md--3.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 3;
   }
   .bx-grid--fluid-rows > .bx-grid__height--md--3 {
@@ -1856,7 +1856,7 @@ body {
   .bx-grid__col--md--4 {
     grid-column: span 8;
   }
-  .bx-grid__col--md--4.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--md--4.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 4;
   }
   .bx-grid--fluid-rows > .bx-grid__height--md--4 {
@@ -1865,7 +1865,7 @@ body {
   .bx-grid__col--md--5 {
     grid-column: span 10;
   }
-  .bx-grid__col--md--5.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--md--5.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 5;
   }
   .bx-grid--fluid-rows > .bx-grid__height--md--5 {
@@ -1874,7 +1874,7 @@ body {
   .bx-grid__col--md--6 {
     grid-column: span 12;
   }
-  .bx-grid__col--md--6.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--md--6.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 6;
   }
   .bx-grid--fluid-rows > .bx-grid__height--md--6 {
@@ -1883,7 +1883,7 @@ body {
   .bx-grid__col--md--7 {
     grid-column: span 14;
   }
-  .bx-grid__col--md--7.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--md--7.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 7;
   }
   .bx-grid--fluid-rows > .bx-grid__height--md--7 {
@@ -1892,7 +1892,7 @@ body {
   .bx-grid__col--md--8 {
     grid-column: span 16;
   }
-  .bx-grid__col--md--8.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--md--8.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 8;
   }
   .bx-grid--fluid-rows > .bx-grid__height--md--8 {
@@ -1901,7 +1901,7 @@ body {
   .bx-grid__col--lg--1 {
     grid-column: span 1;
   }
-  .bx-grid__col--lg--1.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--lg--1.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 1;
   }
   .bx-grid--fluid-rows > .bx-grid__height--lg--1 {
@@ -1910,7 +1910,7 @@ body {
   .bx-grid__col--lg--2 {
     grid-column: span 2;
   }
-  .bx-grid__col--lg--2.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--lg--2.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 2;
   }
   .bx-grid--fluid-rows > .bx-grid__height--lg--2 {
@@ -1919,7 +1919,7 @@ body {
   .bx-grid__col--lg--3 {
     grid-column: span 3;
   }
-  .bx-grid__col--lg--3.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--lg--3.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 3;
   }
   .bx-grid--fluid-rows > .bx-grid__height--lg--3 {
@@ -1928,7 +1928,7 @@ body {
   .bx-grid__col--lg--4 {
     grid-column: span 4;
   }
-  .bx-grid__col--lg--4.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--lg--4.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 4;
   }
   .bx-grid--fluid-rows > .bx-grid__height--lg--4 {
@@ -1937,7 +1937,7 @@ body {
   .bx-grid__col--lg--5 {
     grid-column: span 5;
   }
-  .bx-grid__col--lg--5.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--lg--5.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 5;
   }
   .bx-grid--fluid-rows > .bx-grid__height--lg--5 {
@@ -1946,7 +1946,7 @@ body {
   .bx-grid__col--lg--6 {
     grid-column: span 6;
   }
-  .bx-grid__col--lg--6.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--lg--6.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 6;
   }
   .bx-grid--fluid-rows > .bx-grid__height--lg--6 {
@@ -1955,7 +1955,7 @@ body {
   .bx-grid__col--lg--7 {
     grid-column: span 7;
   }
-  .bx-grid__col--lg--7.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--lg--7.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 7;
   }
   .bx-grid--fluid-rows > .bx-grid__height--lg--7 {
@@ -1964,7 +1964,7 @@ body {
   .bx-grid__col--lg--8 {
     grid-column: span 8;
   }
-  .bx-grid__col--lg--8.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--lg--8.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 8;
   }
   .bx-grid--fluid-rows > .bx-grid__height--lg--8 {
@@ -1973,7 +1973,7 @@ body {
   .bx-grid__col--lg--9 {
     grid-column: span 9;
   }
-  .bx-grid__col--lg--9.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--lg--9.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 9;
   }
   .bx-grid--fluid-rows > .bx-grid__height--lg--9 {
@@ -1982,7 +1982,7 @@ body {
   .bx-grid__col--lg--10 {
     grid-column: span 10;
   }
-  .bx-grid__col--lg--10.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--lg--10.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 10;
   }
   .bx-grid--fluid-rows > .bx-grid__height--lg--10 {
@@ -1991,7 +1991,7 @@ body {
   .bx-grid__col--lg--11 {
     grid-column: span 11;
   }
-  .bx-grid__col--lg--11.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--lg--11.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 11;
   }
   .bx-grid--fluid-rows > .bx-grid__height--lg--11 {
@@ -2000,7 +2000,7 @@ body {
   .bx-grid__col--lg--12 {
     grid-column: span 12;
   }
-  .bx-grid__col--lg--12.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--lg--12.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 12;
   }
   .bx-grid--fluid-rows > .bx-grid__height--lg--12 {
@@ -2009,7 +2009,7 @@ body {
   .bx-grid__col--lg--13 {
     grid-column: span 13;
   }
-  .bx-grid__col--lg--13.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--lg--13.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 13;
   }
   .bx-grid--fluid-rows > .bx-grid__height--lg--13 {
@@ -2018,7 +2018,7 @@ body {
   .bx-grid__col--lg--14 {
     grid-column: span 14;
   }
-  .bx-grid__col--lg--14.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--lg--14.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 14;
   }
   .bx-grid--fluid-rows > .bx-grid__height--lg--14 {
@@ -2027,7 +2027,7 @@ body {
   .bx-grid__col--lg--15 {
     grid-column: span 15;
   }
-  .bx-grid__col--lg--15.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--lg--15.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 15;
   }
   .bx-grid--fluid-rows > .bx-grid__height--lg--15 {
@@ -2036,21 +2036,21 @@ body {
   .bx-grid__col--lg--16 {
     grid-column: span 16;
   }
-  .bx-grid__col--lg--16.bx-grid > *:not([class*=\\"bx-grid__col\\"]) {
+  .bx-grid__col--lg--16.bx-grid > *:not([class*='bx-grid__col']) {
     grid-column: span 16;
   }
   .bx-grid--fluid-rows > .bx-grid__height--lg--16 {
     grid-row: span 16;
   }
-  [class^=\\"bx-container__bleed--md\\"],
-  [class^=\\"bx-container__break--md\\"] {
+  [class^='bx-container__bleed--md'],
+  [class^='bx-container__break--md'] {
     margin-left: 0;
     margin-right: 0;
     padding-left: 0;
     padding-right: 0;
   }
-  [class^=\\"bx-container__bleed--md\\"][class^=\\"bx-padding\\"],
-  [class^=\\"bx-container__break--md\\"][class^=\\"bx-padding\\"] {
+  [class^='bx-container__bleed--md'][class^='bx-padding'],
+  [class^='bx-container__break--md'][class^='bx-padding'] {
     padding-left: 1rem;
     padding-right: 1rem;
   }
@@ -2110,7 +2110,7 @@ body {
   .bx-grid__col--lg--0--only {
     display: block;
   }
-  [class*=\\"bx-grid__col--max--\\"] {
+  [class*='bx-grid__col--max--'] {
     display: block;
   }
   .bx-grid__col--max--0,
@@ -2197,16 +2197,16 @@ body {
 
 @supports (display: grid) {
   .bx-grid > *,
-  .bx-grid > [class*=\\"bx-grid__col--\\"] {
+  .bx-grid > [class*='bx-grid__col--'] {
     width: initial;
     min-width: initial;
     max-width: initial;
   }
   .bx-grid > *.bx-grid,
-  .bx-grid > [class*=\\"bx-grid__col--\\"].bx-grid {
+  .bx-grid > [class*='bx-grid__col--'].bx-grid {
     display: grid;
   }
-  .bx-grid > [class*=\\"bx-grid__height--\\"] {
+  .bx-grid > [class*='bx-grid__height--'] {
     height: unset;
     min-height: initial;
     max-height: unset;
@@ -2236,7 +2236,7 @@ body {
 
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: italic;
   font-weight: 300;
   src: local(\\"IBM Plex Mono Light Italic\\"), local(\\"IBMPlexMono-LightItalic\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1gMoW.woff) format(\\"woff\\");
@@ -2244,7 +2244,7 @@ body {
 
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: italic;
   font-weight: 400;
   src: local(\\"IBM Plex Mono Italic\\"), local(\\"IBMPlexMono-Italic\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6pfjptAgt5VM-kVkqdyU8n1ioa1Xdm.woff) format(\\"woff\\");
@@ -2252,7 +2252,7 @@ body {
 
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: italic;
   font-weight: 600;
   src: local(\\"IBM Plex Mono SemiBold Italic\\"), local(\\"IBMPlexMono-SemiBoldItalic\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1gMoW.woff) format(\\"woff\\");
@@ -2260,7 +2260,7 @@ body {
 
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: normal;
   font-weight: 300;
   src: local(\\"IBM Plex Mono Light\\"), local(\\"IBMPlexMono-Light\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3oQIwlBFhA.woff) format(\\"woff\\");
@@ -2268,7 +2268,7 @@ body {
 
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: normal;
   font-weight: 400;
   src: local(\\"IBM Plex Mono\\"), local(\\"IBMPlexMono\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F63fjptAgt5VM-kVkqdyU8n1i8q0Q.woff) format(\\"woff\\");
@@ -2276,7 +2276,7 @@ body {
 
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: normal;
   font-weight: 600;
   src: local(\\"IBM Plex Mono SemiBold\\"), local(\\"IBMPlexMono-SemiBold\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3vAOwlBFhA.woff) format(\\"woff\\");
@@ -2285,7 +2285,7 @@ body {
 /* cyrillic-ext */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: italic;
   font-weight: 300;
   src: local(\\"IBM Plex Mono Light Italic\\"), local(\\"IBMPlexMono-LightItalic\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1jcoQPttoz6Pz.woff2) format(\\"woff2\\");
@@ -2295,7 +2295,7 @@ body {
 /* cyrillic */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: italic;
   font-weight: 300;
   src: local(\\"IBM Plex Mono Light Italic\\"), local(\\"IBMPlexMono-LightItalic\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1hMoQPttoz6Pz.woff2) format(\\"woff2\\");
@@ -2305,7 +2305,7 @@ body {
 /* vietnamese */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: italic;
   font-weight: 300;
   src: local(\\"IBM Plex Mono Light Italic\\"), local(\\"IBMPlexMono-LightItalic\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1j8oQPttoz6Pz.woff2) format(\\"woff2\\");
@@ -2315,7 +2315,7 @@ body {
 /* latin-ext */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: italic;
   font-weight: 300;
   src: local(\\"IBM Plex Mono Light Italic\\"), local(\\"IBMPlexMono-LightItalic\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1jsoQPttoz6Pz.woff2) format(\\"woff2\\");
@@ -2325,7 +2325,7 @@ body {
 /* latin */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: italic;
   font-weight: 300;
   src: local(\\"IBM Plex Mono Light Italic\\"), local(\\"IBMPlexMono-LightItalic\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1gMoQPttozw.woff2) format(\\"woff2\\");
@@ -2335,7 +2335,7 @@ body {
 /* cyrillic-ext */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: italic;
   font-weight: 400;
   src: local(\\"IBM Plex Mono Italic\\"), local(\\"IBMPlexMono-Italic\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6pfjptAgt5VM-kVkqdyU8n1ioa2HdgregdFOFh.woff2) format(\\"woff2\\");
@@ -2345,7 +2345,7 @@ body {
 /* cyrillic */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: italic;
   font-weight: 400;
   src: local(\\"IBM Plex Mono Italic\\"), local(\\"IBMPlexMono-Italic\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6pfjptAgt5VM-kVkqdyU8n1ioa0XdgregdFOFh.woff2) format(\\"woff2\\");
@@ -2355,7 +2355,7 @@ body {
 /* vietnamese */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: italic;
   font-weight: 400;
   src: local(\\"IBM Plex Mono Italic\\"), local(\\"IBMPlexMono-Italic\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6pfjptAgt5VM-kVkqdyU8n1ioa2ndgregdFOFh.woff2) format(\\"woff2\\");
@@ -2365,7 +2365,7 @@ body {
 /* latin-ext */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: italic;
   font-weight: 400;
   src: local(\\"IBM Plex Mono Italic\\"), local(\\"IBMPlexMono-Italic\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6pfjptAgt5VM-kVkqdyU8n1ioa23dgregdFOFh.woff2) format(\\"woff2\\");
@@ -2375,7 +2375,7 @@ body {
 /* latin */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: italic;
   font-weight: 400;
   src: local(\\"IBM Plex Mono Italic\\"), local(\\"IBMPlexMono-Italic\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6pfjptAgt5VM-kVkqdyU8n1ioa1XdgregdFA.woff2) format(\\"woff2\\");
@@ -2385,7 +2385,7 @@ body {
 /* cyrillic-ext */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: italic;
   font-weight: 600;
   src: local(\\"IBM Plex Mono SemiBold Italic\\"), local(\\"IBMPlexMono-SemiBoldItalic\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1jcoQPttoz6Pz.woff2) format(\\"woff2\\");
@@ -2395,7 +2395,7 @@ body {
 /* cyrillic */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: italic;
   font-weight: 600;
   src: local(\\"IBM Plex Mono SemiBold Italic\\"), local(\\"IBMPlexMono-SemiBoldItalic\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1hMoQPttoz6Pz.woff2) format(\\"woff2\\");
@@ -2405,7 +2405,7 @@ body {
 /* vietnamese */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: italic;
   font-weight: 600;
   src: local(\\"IBM Plex Mono SemiBold Italic\\"), local(\\"IBMPlexMono-SemiBoldItalic\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1j8oQPttoz6Pz.woff2) format(\\"woff2\\");
@@ -2415,7 +2415,7 @@ body {
 /* latin-ext */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: italic;
   font-weight: 600;
   src: local(\\"IBM Plex Mono SemiBold Italic\\"), local(\\"IBMPlexMono-SemiBoldItalic\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1jsoQPttoz6Pz.woff2) format(\\"woff2\\");
@@ -2425,7 +2425,7 @@ body {
 /* latin */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: italic;
   font-weight: 600;
   src: local(\\"IBM Plex Mono SemiBold Italic\\"), local(\\"IBMPlexMono-SemiBoldItalic\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1gMoQPttozw.woff2) format(\\"woff2\\");
@@ -2435,7 +2435,7 @@ body {
 /* cyrillic-ext */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: normal;
   font-weight: 300;
   src: local(\\"IBM Plex Mono Light\\"), local(\\"IBMPlexMono-Light\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3oQIwl1FgsAXHNlYzg.woff2) format(\\"woff2\\");
@@ -2445,7 +2445,7 @@ body {
 /* cyrillic */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: normal;
   font-weight: 300;
   src: local(\\"IBM Plex Mono Light\\"), local(\\"IBMPlexMono-Light\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3oQIwlRFgsAXHNlYzg.woff2) format(\\"woff2\\");
@@ -2455,7 +2455,7 @@ body {
 /* vietnamese */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: normal;
   font-weight: 300;
   src: local(\\"IBM Plex Mono Light\\"), local(\\"IBMPlexMono-Light\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3oQIwl9FgsAXHNlYzg.woff2) format(\\"woff2\\");
@@ -2465,7 +2465,7 @@ body {
 /* latin-ext */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: normal;
   font-weight: 300;
   src: local(\\"IBM Plex Mono Light\\"), local(\\"IBMPlexMono-Light\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3oQIwl5FgsAXHNlYzg.woff2) format(\\"woff2\\");
@@ -2475,7 +2475,7 @@ body {
 /* latin */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: normal;
   font-weight: 300;
   src: local(\\"IBM Plex Mono Light\\"), local(\\"IBMPlexMono-Light\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3oQIwlBFgsAXHNk.woff2) format(\\"woff2\\");
@@ -2485,7 +2485,7 @@ body {
 /* cyrillic-ext */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: normal;
   font-weight: 400;
   src: local(\\"IBM Plex Mono\\"), local(\\"IBMPlexMono\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F63fjptAgt5VM-kVkqdyU8n1iIq131nj-otFQ.woff2) format(\\"woff2\\");
@@ -2495,7 +2495,7 @@ body {
 /* cyrillic */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: normal;
   font-weight: 400;
   src: local(\\"IBM Plex Mono\\"), local(\\"IBMPlexMono\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F63fjptAgt5VM-kVkqdyU8n1isq131nj-otFQ.woff2) format(\\"woff2\\");
@@ -2505,7 +2505,7 @@ body {
 /* vietnamese */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: normal;
   font-weight: 400;
   src: local(\\"IBM Plex Mono\\"), local(\\"IBMPlexMono\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F63fjptAgt5VM-kVkqdyU8n1iAq131nj-otFQ.woff2) format(\\"woff2\\");
@@ -2515,7 +2515,7 @@ body {
 /* latin-ext */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: normal;
   font-weight: 400;
   src: local(\\"IBM Plex Mono\\"), local(\\"IBMPlexMono\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F63fjptAgt5VM-kVkqdyU8n1iEq131nj-otFQ.woff2) format(\\"woff2\\");
@@ -2525,7 +2525,7 @@ body {
 /* latin */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: normal;
   font-weight: 400;
   src: local(\\"IBM Plex Mono\\"), local(\\"IBMPlexMono\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F63fjptAgt5VM-kVkqdyU8n1i8q131nj-o.woff2) format(\\"woff2\\");
@@ -2535,7 +2535,7 @@ body {
 /* cyrillic-ext */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: normal;
   font-weight: 600;
   src: local(\\"IBM Plex Mono SemiBold\\"), local(\\"IBMPlexMono-SemiBold\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3vAOwl1FgsAXHNlYzg.woff2) format(\\"woff2\\");
@@ -2545,7 +2545,7 @@ body {
 /* cyrillic */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: normal;
   font-weight: 600;
   src: local(\\"IBM Plex Mono SemiBold\\"), local(\\"IBMPlexMono-SemiBold\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3vAOwlRFgsAXHNlYzg.woff2) format(\\"woff2\\");
@@ -2555,7 +2555,7 @@ body {
 /* vietnamese */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: normal;
   font-weight: 600;
   src: local(\\"IBM Plex Mono SemiBold\\"), local(\\"IBMPlexMono-SemiBold\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3vAOwl9FgsAXHNlYzg.woff2) format(\\"woff2\\");
@@ -2565,7 +2565,7 @@ body {
 /* latin-ext */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: normal;
   font-weight: 600;
   src: local(\\"IBM Plex Mono SemiBold\\"), local(\\"IBMPlexMono-SemiBold\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3vAOwl5FgsAXHNlYzg.woff2) format(\\"woff2\\");
@@ -2575,7 +2575,7 @@ body {
 /* latin */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Mono\\";
+  font-family: 'IBM Plex Mono';
   font-style: normal;
   font-weight: 600;
   src: local(\\"IBM Plex Mono SemiBold\\"), local(\\"IBMPlexMono-SemiBold\\"), url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3vAOwlBFgsAXHNk.woff2) format(\\"woff2\\");
@@ -2584,7 +2584,7 @@ body {
 
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: italic;
   font-weight: 300;
   src: local(\\"IBM Plex Sans Light Italic\\"), local(\\"IBMPlexSans-LightItalic\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRcdvfo.woff) format(\\"woff\\");
@@ -2592,7 +2592,7 @@ body {
 
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: italic;
   font-weight: 400;
   src: local(\\"IBM Plex Sans Italic\\"), local(\\"IBMPlexSans-Italic\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuF6ZP.woff) format(\\"woff\\");
@@ -2600,7 +2600,7 @@ body {
 
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: italic;
   font-weight: 600;
   src: local(\\"IBM Plex Sans SemiBold Italic\\"), local(\\"IBMPlexSans-SemiBoldItalic\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJcdvfo.woff) format(\\"woff\\");
@@ -2608,7 +2608,7 @@ body {
 
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 300;
   src: local(\\"IBM Plex Sans Light\\"), local(\\"IBMPlexSans-Light\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AIFscg.woff) format(\\"woff\\");
@@ -2616,7 +2616,7 @@ body {
 
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 400;
   src: local(\\"IBM Plex Sans\\"), local(\\"IBMPlexSans\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhdHeEw.woff) format(\\"woff\\");
@@ -2624,7 +2624,7 @@ body {
 
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 600;
   src: local(\\"IBM Plex Sans SemiBold\\"), local(\\"IBMPlexSans-SemiBold\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AIFscg.woff) format(\\"woff\\");
@@ -2633,7 +2633,7 @@ body {
 /* cyrillic-ext */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: italic;
   font-weight: 300;
   src: local(\\"IBM Plex Sans Light Italic\\"), local(\\"IBMPlexSans-LightItalic\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRce_fuJGl18QRY.woff2) format(\\"woff2\\");
@@ -2643,7 +2643,7 @@ body {
 /* cyrillic */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: italic;
   font-weight: 300;
   src: local(\\"IBM Plex Sans Light Italic\\"), local(\\"IBMPlexSans-LightItalic\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRccvfuJGl18QRY.woff2) format(\\"woff2\\");
@@ -2653,7 +2653,7 @@ body {
 /* greek */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: italic;
   font-weight: 300;
   src: local(\\"IBM Plex Sans Light Italic\\"), local(\\"IBMPlexSans-LightItalic\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRcdffuJGl18QRY.woff2) format(\\"woff2\\");
@@ -2663,7 +2663,7 @@ body {
 /* vietnamese */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: italic;
   font-weight: 300;
   src: local(\\"IBM Plex Sans Light Italic\\"), local(\\"IBMPlexSans-LightItalic\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRceffuJGl18QRY.woff2) format(\\"woff2\\");
@@ -2673,7 +2673,7 @@ body {
 /* latin-ext */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: italic;
   font-weight: 300;
   src: local(\\"IBM Plex Sans Light Italic\\"), local(\\"IBMPlexSans-LightItalic\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRcePfuJGl18QRY.woff2) format(\\"woff2\\");
@@ -2683,7 +2683,7 @@ body {
 /* latin */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: italic;
   font-weight: 300;
   src: local(\\"IBM Plex Sans Light Italic\\"), local(\\"IBMPlexSans-LightItalic\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRcdvfuJGl18Q.woff2) format(\\"woff2\\");
@@ -2693,7 +2693,7 @@ body {
 /* cyrillic-ext */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: italic;
   font-weight: 400;
   src: local(\\"IBM Plex Sans Italic\\"), local(\\"IBMPlexSans-Italic\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuGqZJW9XjDlN8.woff2) format(\\"woff2\\");
@@ -2703,7 +2703,7 @@ body {
 /* cyrillic */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: italic;
   font-weight: 400;
   src: local(\\"IBM Plex Sans Italic\\"), local(\\"IBMPlexSans-Italic\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuE6ZJW9XjDlN8.woff2) format(\\"woff2\\");
@@ -2713,7 +2713,7 @@ body {
 /* greek */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: italic;
   font-weight: 400;
   src: local(\\"IBM Plex Sans Italic\\"), local(\\"IBMPlexSans-Italic\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuFKZJW9XjDlN8.woff2) format(\\"woff2\\");
@@ -2723,7 +2723,7 @@ body {
 /* vietnamese */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: italic;
   font-weight: 400;
   src: local(\\"IBM Plex Sans Italic\\"), local(\\"IBMPlexSans-Italic\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuGKZJW9XjDlN8.woff2) format(\\"woff2\\");
@@ -2733,7 +2733,7 @@ body {
 /* latin-ext */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: italic;
   font-weight: 400;
   src: local(\\"IBM Plex Sans Italic\\"), local(\\"IBMPlexSans-Italic\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuGaZJW9XjDlN8.woff2) format(\\"woff2\\");
@@ -2743,7 +2743,7 @@ body {
 /* latin */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: italic;
   font-weight: 400;
   src: local(\\"IBM Plex Sans Italic\\"), local(\\"IBMPlexSans-Italic\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuF6ZJW9XjDg.woff2) format(\\"woff2\\");
@@ -2753,7 +2753,7 @@ body {
 /* cyrillic-ext */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: italic;
   font-weight: 600;
   src: local(\\"IBM Plex Sans SemiBold Italic\\"), local(\\"IBMPlexSans-SemiBoldItalic\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJce_fuJGl18QRY.woff2) format(\\"woff2\\");
@@ -2763,7 +2763,7 @@ body {
 /* cyrillic */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: italic;
   font-weight: 600;
   src: local(\\"IBM Plex Sans SemiBold Italic\\"), local(\\"IBMPlexSans-SemiBoldItalic\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJccvfuJGl18QRY.woff2) format(\\"woff2\\");
@@ -2773,7 +2773,7 @@ body {
 /* greek */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: italic;
   font-weight: 600;
   src: local(\\"IBM Plex Sans SemiBold Italic\\"), local(\\"IBMPlexSans-SemiBoldItalic\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJcdffuJGl18QRY.woff2) format(\\"woff2\\");
@@ -2783,7 +2783,7 @@ body {
 /* vietnamese */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: italic;
   font-weight: 600;
   src: local(\\"IBM Plex Sans SemiBold Italic\\"), local(\\"IBMPlexSans-SemiBoldItalic\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJceffuJGl18QRY.woff2) format(\\"woff2\\");
@@ -2793,7 +2793,7 @@ body {
 /* latin-ext */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: italic;
   font-weight: 600;
   src: local(\\"IBM Plex Sans SemiBold Italic\\"), local(\\"IBMPlexSans-SemiBoldItalic\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJcePfuJGl18QRY.woff2) format(\\"woff2\\");
@@ -2803,7 +2803,7 @@ body {
 /* latin */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: italic;
   font-weight: 600;
   src: local(\\"IBM Plex Sans SemiBold Italic\\"), local(\\"IBMPlexSans-SemiBoldItalic\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJcdvfuJGl18Q.woff2) format(\\"woff2\\");
@@ -2813,7 +2813,7 @@ body {
 /* cyrillic-ext */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 300;
   src: local(\\"IBM Plex Sans Light\\"), local(\\"IBMPlexSans-Light\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AIxsdP3pBmtF8A.woff2) format(\\"woff2\\");
@@ -2823,7 +2823,7 @@ body {
 /* cyrillic */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 300;
   src: local(\\"IBM Plex Sans Light\\"), local(\\"IBMPlexSans-Light\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AIVsdP3pBmtF8A.woff2) format(\\"woff2\\");
@@ -2833,7 +2833,7 @@ body {
 /* greek */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 300;
   src: local(\\"IBM Plex Sans Light\\"), local(\\"IBMPlexSans-Light\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AIJsdP3pBmtF8A.woff2) format(\\"woff2\\");
@@ -2843,7 +2843,7 @@ body {
 /* vietnamese */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 300;
   src: local(\\"IBM Plex Sans Light\\"), local(\\"IBMPlexSans-Light\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AI5sdP3pBmtF8A.woff2) format(\\"woff2\\");
@@ -2853,7 +2853,7 @@ body {
 /* latin-ext */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 300;
   src: local(\\"IBM Plex Sans Light\\"), local(\\"IBMPlexSans-Light\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AI9sdP3pBmtF8A.woff2) format(\\"woff2\\");
@@ -2863,7 +2863,7 @@ body {
 /* latin */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 300;
   src: local(\\"IBM Plex Sans Light\\"), local(\\"IBMPlexSans-Light\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AIFsdP3pBms.woff2) format(\\"woff2\\");
@@ -2873,7 +2873,7 @@ body {
 /* cyrillic-ext */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 400;
   src: local(\\"IBM Plex Sans\\"), local(\\"IBMPlexSans\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhdzeFaxOedfTDw.woff2) format(\\"woff2\\");
@@ -2883,7 +2883,7 @@ body {
 /* cyrillic */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 400;
   src: local(\\"IBM Plex Sans\\"), local(\\"IBMPlexSans\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhdXeFaxOedfTDw.woff2) format(\\"woff2\\");
@@ -2893,7 +2893,7 @@ body {
 /* greek */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 400;
   src: local(\\"IBM Plex Sans\\"), local(\\"IBMPlexSans\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhdLeFaxOedfTDw.woff2) format(\\"woff2\\");
@@ -2903,7 +2903,7 @@ body {
 /* vietnamese */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 400;
   src: local(\\"IBM Plex Sans\\"), local(\\"IBMPlexSans\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhd7eFaxOedfTDw.woff2) format(\\"woff2\\");
@@ -2913,7 +2913,7 @@ body {
 /* latin-ext */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 400;
   src: local(\\"IBM Plex Sans\\"), local(\\"IBMPlexSans\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhd_eFaxOedfTDw.woff2) format(\\"woff2\\");
@@ -2923,7 +2923,7 @@ body {
 /* latin */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 400;
   src: local(\\"IBM Plex Sans\\"), local(\\"IBMPlexSans\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhdHeFaxOedc.woff2) format(\\"woff2\\");
@@ -2933,7 +2933,7 @@ body {
 /* cyrillic-ext */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 600;
   src: local(\\"IBM Plex Sans SemiBold\\"), local(\\"IBMPlexSans-SemiBold\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AIxsdP3pBmtF8A.woff2) format(\\"woff2\\");
@@ -2943,7 +2943,7 @@ body {
 /* cyrillic */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 600;
   src: local(\\"IBM Plex Sans SemiBold\\"), local(\\"IBMPlexSans-SemiBold\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AIVsdP3pBmtF8A.woff2) format(\\"woff2\\");
@@ -2953,7 +2953,7 @@ body {
 /* greek */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 600;
   src: local(\\"IBM Plex Sans SemiBold\\"), local(\\"IBMPlexSans-SemiBold\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AIJsdP3pBmtF8A.woff2) format(\\"woff2\\");
@@ -2963,7 +2963,7 @@ body {
 /* vietnamese */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 600;
   src: local(\\"IBM Plex Sans SemiBold\\"), local(\\"IBMPlexSans-SemiBold\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AI5sdP3pBmtF8A.woff2) format(\\"woff2\\");
@@ -2973,7 +2973,7 @@ body {
 /* latin-ext */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 600;
   src: local(\\"IBM Plex Sans SemiBold\\"), local(\\"IBMPlexSans-SemiBold\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AI9sdP3pBmtF8A.woff2) format(\\"woff2\\");
@@ -2983,19 +2983,19 @@ body {
 /* latin */
 @font-face {
   font-display: auto;
-  font-family: \\"IBM Plex Sans\\";
+  font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 600;
   src: local(\\"IBM Plex Sans SemiBold\\"), local(\\"IBMPlexSans-SemiBold\\"), url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AIFsdP3pBms.woff2) format(\\"woff2\\");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-[class*=\\"ibm-type\\"] {
+[class*='ibm-type'] {
   margin-top: 0;
 }
 
 .ibm-type {
-  font-family: \\"IBM Plex Sans\\", \\"Helvetica Neue\\", Arial, sans-serif;
+  font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 
 .ibm-type-italic {
@@ -3003,11 +3003,11 @@ body {
 }
 
 .ibm-type-mono {
-  font-family: \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace;
+  font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
 }
 
 .ibm-type-serif {
-  font-family: \\"IBM Plex Serif\\", \\"Georgia\\", Times, serif;
+  font-family: 'IBM Plex Serif', 'Georgia', Times, serif;
 }
 
 .ibm-type-light {
@@ -3379,11 +3379,11 @@ body {
 .bx--breadcrumb-item::after {
   margin-left: 0.5rem;
   color: var(--cds-text-primary, #f4f4f4);
-  content: \\"/\\";
+  content: '/';
 }
 
 .bx--breadcrumb--no-trailing-slash .bx--breadcrumb-item:last-child::after {
-  content: \\"\\";
+  content: '';
 }
 
 .bx--breadcrumb-item:last-child,
@@ -3395,13 +3395,13 @@ body {
   white-space: nowrap;
 }
 
-.bx--breadcrumb-item [aria-current=\\"page\\"],
+.bx--breadcrumb-item [aria-current='page'],
 .bx--breadcrumb-item.bx--breadcrumb-item--current .bx--link {
   color: var(--cds-text-primary, #f4f4f4);
   cursor: auto;
 }
 
-.bx--breadcrumb-item [aria-current=\\"page\\"]:hover,
+.bx--breadcrumb-item [aria-current='page']:hover,
 .bx--breadcrumb-item.bx--breadcrumb-item--current .bx--link:hover {
   text-decoration: none;
 }
@@ -3426,7 +3426,7 @@ body {
   width: 0.75rem;
   height: 1px;
   background: var(--cds-link-primary-hover, #a6c8ff);
-  content: \\"\\";
+  content: '';
   opacity: 0;
   transition: opacity 70ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
@@ -3489,7 +3489,7 @@ body {
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
   background: var(--cds-skeleton-element, #525252);
-  content: \\"\\";
+  content: '';
   will-change: transform-origin, transform, opacity;
 }
 
@@ -3546,7 +3546,7 @@ body {
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
   background: var(--cds-skeleton-element, #525252);
-  content: \\"\\";
+  content: '';
   will-change: transform-origin, transform, opacity;
 }
 
@@ -3588,8 +3588,8 @@ body {
   word-break: break-word;
 }
 
-.security--input__background__color--light .bx--number .security--card input[type=\\"number\\"], .security--card .bx--date-picker__input, .security--card .bx--dropdown,
-.security--card .bx--number input[type=\\"number\\"], .security--card .bx--search-input, .security--card .bx--select-input, .security--card .bx--text-area, .security--card .bx--text-input, .security--card .bx--list-box, .security--card .bx--list-box__menu, .security--card .security--button--icon:focus, .security--card .security--button--icon:hover, .security--tearsheet--small .bx--number .security--card input[type=\\"number\\"], .security--tearsheet .bx--number .security--card input[type=\\"number\\"] {
+.security--input__background__color--light .bx--number .security--card input[type='number'], .security--card .bx--date-picker__input, .security--card .bx--dropdown,
+.security--card .bx--number input[type='number'], .security--card .bx--search-input, .security--card .bx--select-input, .security--card .bx--text-area, .security--card .bx--text-input, .security--card .bx--list-box, .security--card .bx--list-box__menu, .security--card .security--button--icon:focus, .security--card .security--button--icon:hover, .security--tearsheet--small .bx--number .security--card input[type='number'], .security--tearsheet .bx--number .security--card input[type='number'] {
   background-color: var(--cds-ui-02, #393939);
 }
 
@@ -3777,7 +3777,7 @@ body {
 }
 
 .bx--btn--primary .bx--btn__icon,
-.bx--btn--primary .bx--btn__icon path:not([data-icon-path]):not([fill=\\"none\\"]) {
+.bx--btn--primary .bx--btn__icon path:not([data-icon-path]):not([fill='none']) {
   fill: currentColor;
 }
 
@@ -3807,7 +3807,7 @@ body {
 }
 
 .bx--btn--secondary .bx--btn__icon,
-.bx--btn--secondary .bx--btn__icon path:not([data-icon-path]):not([fill=\\"none\\"]) {
+.bx--btn--secondary .bx--btn__icon path:not([data-icon-path]):not([fill='none']) {
   fill: currentColor;
 }
 
@@ -3837,7 +3837,7 @@ body {
 }
 
 .bx--btn--tertiary .bx--btn__icon,
-.bx--btn--tertiary .bx--btn__icon path:not([data-icon-path]):not([fill=\\"none\\"]) {
+.bx--btn--tertiary .bx--btn__icon path:not([data-icon-path]):not([fill='none']) {
   fill: currentColor;
 }
 
@@ -3885,7 +3885,7 @@ body {
 }
 
 .bx--btn--ghost .bx--btn__icon,
-.bx--btn--ghost .bx--btn__icon path:not([data-icon-path]):not([fill=\\"none\\"]) {
+.bx--btn--ghost .bx--btn__icon path:not([data-icon-path]):not([fill='none']) {
   fill: currentColor;
 }
 
@@ -3980,7 +3980,7 @@ body {
   width: 0;
   height: 0;
   border-style: solid;
-  content: \\"\\";
+  content: '';
 }
 
 .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .bx--assistive-text,
@@ -4195,7 +4195,7 @@ body {
   width: 0;
   height: 0;
   border-style: solid;
-  content: \\"\\";
+  content: '';
 }
 
 .bx--tooltip__trigger.bx--btn--icon-only--top .bx--assistive-text,
@@ -4313,7 +4313,7 @@ body {
 .bx--tooltip__trigger.bx--btn--icon-only--top .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   left: 0;
   width: 100%;
   height: 0.75rem;
@@ -4345,7 +4345,7 @@ body {
 .bx--tooltip__trigger.bx--btn--icon-only--top.bx--tooltip--align-start .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   left: 0;
   width: 100%;
   height: 0.75rem;
@@ -4377,7 +4377,7 @@ body {
 .bx--tooltip__trigger.bx--btn--icon-only--top.bx--tooltip--align-center .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   left: 0;
   width: 100%;
   height: 0.75rem;
@@ -4409,7 +4409,7 @@ body {
 .bx--tooltip__trigger.bx--btn--icon-only--top.bx--tooltip--align-end .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   left: 0;
   width: 100%;
   height: 0.75rem;
@@ -4502,7 +4502,7 @@ body {
   width: 0;
   height: 0;
   border-style: solid;
-  content: \\"\\";
+  content: '';
 }
 
 .bx--tooltip__trigger.bx--btn--icon-only--right .bx--assistive-text,
@@ -4620,7 +4620,7 @@ body {
 .bx--tooltip__trigger.bx--btn--icon-only--right .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   top: 0;
   width: 0.75rem;
   height: 100%;
@@ -4651,7 +4651,7 @@ body {
 .bx--tooltip__trigger.bx--btn--icon-only--right.bx--tooltip--align-start .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   top: 0;
   width: 0.75rem;
   height: 100%;
@@ -4682,7 +4682,7 @@ body {
 .bx--tooltip__trigger.bx--btn--icon-only--right.bx--tooltip--align-center .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   top: 0;
   width: 0.75rem;
   height: 100%;
@@ -4713,7 +4713,7 @@ body {
 .bx--tooltip__trigger.bx--btn--icon-only--right.bx--tooltip--align-end .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   top: 0;
   width: 0.75rem;
   height: 100%;
@@ -4804,7 +4804,7 @@ body {
   width: 0;
   height: 0;
   border-style: solid;
-  content: \\"\\";
+  content: '';
 }
 
 .bx--tooltip__trigger.bx--btn--icon-only--bottom .bx--assistive-text,
@@ -4922,7 +4922,7 @@ body {
 .bx--tooltip__trigger.bx--btn--icon-only--bottom .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   left: 0;
   width: 100%;
   height: 0.75rem;
@@ -4953,7 +4953,7 @@ body {
 .bx--tooltip__trigger.bx--btn--icon-only--bottom.bx--tooltip--align-start .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   left: 0;
   width: 100%;
   height: 0.75rem;
@@ -4985,7 +4985,7 @@ body {
 .bx--tooltip__trigger.bx--btn--icon-only--bottom.bx--tooltip--align-center .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   left: 0;
   width: 100%;
   height: 0.75rem;
@@ -5016,7 +5016,7 @@ body {
 .bx--tooltip__trigger.bx--btn--icon-only--bottom.bx--tooltip--align-end .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   left: 0;
   width: 100%;
   height: 0.75rem;
@@ -5109,7 +5109,7 @@ body {
   width: 0;
   height: 0;
   border-style: solid;
-  content: \\"\\";
+  content: '';
 }
 
 .bx--tooltip__trigger.bx--btn--icon-only--left .bx--assistive-text,
@@ -5227,7 +5227,7 @@ body {
 .bx--tooltip__trigger.bx--btn--icon-only--left .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   top: 0;
   width: 0.75rem;
   height: 100%;
@@ -5258,7 +5258,7 @@ body {
 .bx--tooltip__trigger.bx--btn--icon-only--left.bx--tooltip--align-start .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   top: 0;
   width: 0.75rem;
   height: 100%;
@@ -5289,7 +5289,7 @@ body {
 .bx--tooltip__trigger.bx--btn--icon-only--left.bx--tooltip--align-center .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   top: 0;
   width: 0.75rem;
   height: 100%;
@@ -5320,7 +5320,7 @@ body {
 .bx--tooltip__trigger.bx--btn--icon-only--left.bx--tooltip--align-end .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   top: 0;
   width: 0.75rem;
   height: 100%;
@@ -5366,16 +5366,16 @@ body {
   background: var(--cds-background-selected, #393939);
 }
 
-.bx--btn path[data-icon-path=\\"inner-path\\"] {
+.bx--btn path[data-icon-path='inner-path'] {
   fill: none;
 }
 
-.bx--btn--ghost.bx--btn--icon-only .bx--btn__icon path:not([data-icon-path]):not([fill=\\"none\\"]),
+.bx--btn--ghost.bx--btn--icon-only .bx--btn__icon path:not([data-icon-path]):not([fill='none']),
 .bx--btn--ghost.bx--btn--icon-only .bx--btn__icon {
   fill: var(--cds-icon-primary, #f4f4f4);
 }
 
-.bx--btn--ghost.bx--btn--icon-only[disabled] .bx--btn__icon path:not([data-icon-path]):not([fill=\\"none\\"]),
+.bx--btn--ghost.bx--btn--icon-only[disabled] .bx--btn__icon path:not([data-icon-path]):not([fill='none']),
 .bx--btn--ghost.bx--btn--icon-only[disabled] .bx--btn__icon,
 .bx--btn.bx--btn--icon-only.bx--btn--ghost[disabled]:hover .bx--btn__icon {
   fill: var(--cds-icon-on-color-disabled, #8d8d8d);
@@ -5418,7 +5418,7 @@ body {
 }
 
 .bx--btn--danger .bx--btn__icon,
-.bx--btn--danger .bx--btn__icon path:not([data-icon-path]):not([fill=\\"none\\"]) {
+.bx--btn--danger .bx--btn__icon path:not([data-icon-path]):not([fill='none']) {
   fill: currentColor;
 }
 
@@ -5448,8 +5448,8 @@ body {
 }
 
 .bx--btn--danger-tertiary .bx--btn__icon,
-.bx--btn--danger-tertiary .bx--btn__icon path:not([data-icon-path]):not([fill=\\"none\\"]), .bx--btn--danger--tertiary .bx--btn__icon,
-.bx--btn--danger--tertiary .bx--btn__icon path:not([data-icon-path]):not([fill=\\"none\\"]) {
+.bx--btn--danger-tertiary .bx--btn__icon path:not([data-icon-path]):not([fill='none']), .bx--btn--danger--tertiary .bx--btn__icon,
+.bx--btn--danger--tertiary .bx--btn__icon path:not([data-icon-path]):not([fill='none']) {
   fill: currentColor;
 }
 
@@ -5497,8 +5497,8 @@ body {
 }
 
 .bx--btn--danger-ghost .bx--btn__icon,
-.bx--btn--danger-ghost .bx--btn__icon path:not([data-icon-path]):not([fill=\\"none\\"]), .bx--btn--danger--ghost .bx--btn__icon,
-.bx--btn--danger--ghost .bx--btn__icon path:not([data-icon-path]):not([fill=\\"none\\"]) {
+.bx--btn--danger-ghost .bx--btn__icon path:not([data-icon-path]):not([fill='none']), .bx--btn--danger--ghost .bx--btn__icon,
+.bx--btn--danger--ghost .bx--btn__icon path:not([data-icon-path]):not([fill='none']) {
   fill: currentColor;
 }
 
@@ -5596,7 +5596,7 @@ body {
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
   background: var(--cds-skeleton-element, #525252);
-  content: \\"\\";
+  content: '';
   will-change: transform-origin, transform, opacity;
 }
 
@@ -5877,7 +5877,7 @@ body {
   border-bottom-width: 0;
 }
 
-.bx--list-box.bx--list-box--inline.bx--list-box--expanded .bx--list-box__field[aria-expanded=\\"true\\"] {
+.bx--list-box.bx--list-box--inline.bx--list-box--expanded .bx--list-box__field[aria-expanded='true'] {
   border-width: 0;
 }
 
@@ -6206,7 +6206,7 @@ body {
   }
 }
 
-.bx--list-box .bx--list-box__field[aria-expanded=\\"false\\"] + .bx--list-box__menu {
+.bx--list-box .bx--list-box__field[aria-expanded='false'] + .bx--list-box__menu {
   max-height: 0;
 }
 
@@ -6436,8 +6436,8 @@ body {
   bottom: 3rem;
 }
 
-.bx--list-box input[role=\\"combobox\\"],
-.bx--list-box input[type=\\"text\\"] {
+.bx--list-box input[role='combobox'],
+.bx--list-box input[type='text'] {
   min-width: 0;
   background-color: inherit;
 }
@@ -6959,7 +6959,7 @@ button.bx--dropdown-text:focus {
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
   background: var(--cds-skeleton-element, #525252);
-  content: \\"\\";
+  content: '';
   will-change: transform-origin, transform, opacity;
 }
 
@@ -7139,7 +7139,7 @@ button.bx--dropdown-text:focus {
   position: absolute;
   display: block;
   background-color: var(--cds-layer, #262626);
-  content: \\"\\";
+  content: '';
   transition: background-color 110ms cubic-bezier(0, 0, 0.38, 0.9);
 }
 
@@ -7159,62 +7159,62 @@ button.bx--dropdown-text:focus {
   background-color: var(--cds-field-02, #393939);
 }
 
-.bx--overflow-menu-options[data-floating-menu-direction=\\"bottom\\"]::after {
+.bx--overflow-menu-options[data-floating-menu-direction='bottom']::after {
   top: -0.1875rem;
   left: 0;
   width: 2.5rem;
   height: 0.1875rem;
 }
 
-.bx--overflow-menu-options[data-floating-menu-direction=\\"top\\"]::after {
+.bx--overflow-menu-options[data-floating-menu-direction='top']::after {
   bottom: -0.5rem;
   left: 0;
   width: 2.5rem;
   height: 0.5rem;
 }
 
-.bx--overflow-menu-options[data-floating-menu-direction=\\"left\\"]::after {
+.bx--overflow-menu-options[data-floating-menu-direction='left']::after {
   top: 0;
   right: -0.375rem;
   width: 0.375rem;
   height: 2.5rem;
 }
 
-.bx--overflow-menu-options[data-floating-menu-direction=\\"right\\"]::after {
+.bx--overflow-menu-options[data-floating-menu-direction='right']::after {
   top: 0;
   left: -0.375rem;
   width: 0.375rem;
   height: 2.5rem;
 }
 
-.bx--overflow-menu-options--sm.bx--overflow-menu-options[data-floating-menu-direction=\\"bottom\\"]::after, .bx--overflow-menu-options--sm.bx--overflow-menu-options[data-floating-menu-direction=\\"top\\"]::after {
+.bx--overflow-menu-options--sm.bx--overflow-menu-options[data-floating-menu-direction='bottom']::after, .bx--overflow-menu-options--sm.bx--overflow-menu-options[data-floating-menu-direction='top']::after {
   width: 2rem;
 }
 
-.bx--overflow-menu-options--sm.bx--overflow-menu-options[data-floating-menu-direction=\\"left\\"]::after, .bx--overflow-menu-options--sm.bx--overflow-menu-options[data-floating-menu-direction=\\"right\\"]::after {
+.bx--overflow-menu-options--sm.bx--overflow-menu-options[data-floating-menu-direction='left']::after, .bx--overflow-menu-options--sm.bx--overflow-menu-options[data-floating-menu-direction='right']::after {
   height: 2rem;
 }
 
-.bx--overflow-menu-options--xl.bx--overflow-menu-options[data-floating-menu-direction=\\"bottom\\"]::after, .bx--overflow-menu-options--xl.bx--overflow-menu-options[data-floating-menu-direction=\\"top\\"]::after,
-.bx--overflow-menu-options--lg.bx--overflow-menu-options[data-floating-menu-direction=\\"bottom\\"]::after,
-.bx--overflow-menu-options--lg.bx--overflow-menu-options[data-floating-menu-direction=\\"top\\"]::after {
+.bx--overflow-menu-options--xl.bx--overflow-menu-options[data-floating-menu-direction='bottom']::after, .bx--overflow-menu-options--xl.bx--overflow-menu-options[data-floating-menu-direction='top']::after,
+.bx--overflow-menu-options--lg.bx--overflow-menu-options[data-floating-menu-direction='bottom']::after,
+.bx--overflow-menu-options--lg.bx--overflow-menu-options[data-floating-menu-direction='top']::after {
   width: 3rem;
 }
 
-.bx--overflow-menu-options--xl.bx--overflow-menu-options[data-floating-menu-direction=\\"left\\"]::after, .bx--overflow-menu-options--xl.bx--overflow-menu-options[data-floating-menu-direction=\\"right\\"]::after,
-.bx--overflow-menu-options--lg.bx--overflow-menu-options[data-floating-menu-direction=\\"left\\"]::after,
-.bx--overflow-menu-options--lg.bx--overflow-menu-options[data-floating-menu-direction=\\"right\\"]::after {
+.bx--overflow-menu-options--xl.bx--overflow-menu-options[data-floating-menu-direction='left']::after, .bx--overflow-menu-options--xl.bx--overflow-menu-options[data-floating-menu-direction='right']::after,
+.bx--overflow-menu-options--lg.bx--overflow-menu-options[data-floating-menu-direction='left']::after,
+.bx--overflow-menu-options--lg.bx--overflow-menu-options[data-floating-menu-direction='right']::after {
   height: 3rem;
 }
 
-.bx--overflow-menu--flip.bx--overflow-menu-options[data-floating-menu-direction=\\"top\\"]::after,
-.bx--overflow-menu--flip.bx--overflow-menu-options[data-floating-menu-direction=\\"bottom\\"]::after {
+.bx--overflow-menu--flip.bx--overflow-menu-options[data-floating-menu-direction='top']::after,
+.bx--overflow-menu--flip.bx--overflow-menu-options[data-floating-menu-direction='bottom']::after {
   right: 0;
   left: auto;
 }
 
-.bx--overflow-menu--flip.bx--overflow-menu-options[data-floating-menu-direction=\\"left\\"]::after,
-.bx--overflow-menu--flip.bx--overflow-menu-options[data-floating-menu-direction=\\"right\\"]::after {
+.bx--overflow-menu--flip.bx--overflow-menu-options[data-floating-menu-direction='left']::after,
+.bx--overflow-menu--flip.bx--overflow-menu-options[data-floating-menu-direction='right']::after {
   top: auto;
   bottom: 0;
 }
@@ -7270,7 +7270,7 @@ button.bx--dropdown-text:focus {
 a.bx--overflow-menu-options__btn::before {
   display: inline-block;
   height: 100%;
-  content: \\"\\";
+  content: '';
   vertical-align: middle;
 }
 
@@ -7635,7 +7635,7 @@ a.bx--overflow-menu-options__btn::before {
   border-width: 0.25rem;
   border-style: solid;
   border-color: transparent;
-  content: \\"\\";
+  content: '';
   opacity: 1;
   transition-duration: 0.1s;
   transition-property: opacity;
@@ -7908,12 +7908,12 @@ a.bx--overflow-menu-options__btn::before {
   --cds-body-long-02-font-weight: 400;
   --cds-body-long-02-line-height: 1.5;
   --cds-body-long-02-letter-spacing: 0;
-  --cds-code-01-font-family: \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace;
+  --cds-code-01-font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
   --cds-code-01-font-size: 0.75rem;
   --cds-code-01-font-weight: 400;
   --cds-code-01-line-height: 1.34;
   --cds-code-01-letter-spacing: 0.32px;
-  --cds-code-02-font-family: \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace;
+  --cds-code-02-font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
   --cds-code-02-font-size: 0.875rem;
   --cds-code-02-font-weight: 400;
   --cds-code-02-line-height: 1.43;
@@ -8334,7 +8334,7 @@ a.bx--overflow-menu-options__btn::before {
   border: unset;
   background-color: var(--cds-hover-ui, #353535);
   color: var(--cds-text-02, #c6c6c6);
-  font-family: \\"IBM Plex Sans\\", \\"Helvetica Neue\\", Arial, sans-serif;
+  font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
   font-stretch: normal;
   font-style: normal;
   text-align: left;
@@ -8567,7 +8567,7 @@ a.bx--overflow-menu-options__btn::before {
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
   background: var(--cds-skeleton-element, #525252);
-  content: \\"\\";
+  content: '';
   will-change: transform-origin, transform, opacity;
 }
 
@@ -8577,12 +8577,12 @@ a.bx--overflow-menu-options__btn::before {
   }
 }
 
-input[type=\\"number\\"] {
-  font-family: \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace;
+input[type='number'] {
+  font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
 }
 
 input[data-invalid]:not(:focus),
-.bx--number[data-invalid] input[type=\\"number\\"]:not(:focus),
+.bx--number[data-invalid] input[type='number']:not(:focus),
 .bx--text-input__field-wrapper[data-invalid] > .bx--text-input--invalid:not(:focus),
 .bx--text-area__wrapper[data-invalid] > .bx--text-area--invalid:not(:focus),
 .bx--select-input__wrapper[data-invalid] .bx--select-input:not(:focus),
@@ -8594,7 +8594,7 @@ input[data-invalid]:not(:focus),
 
 @media screen and (prefers-contrast) {
   input[data-invalid]:not(:focus),
-  .bx--number[data-invalid] input[type=\\"number\\"]:not(:focus),
+  .bx--number[data-invalid] input[type='number']:not(:focus),
   .bx--text-input__field-wrapper[data-invalid] > .bx--text-input--invalid:not(:focus),
   .bx--text-area__wrapper[data-invalid] > .bx--text-area--invalid:not(:focus),
   .bx--select-input__wrapper[data-invalid] .bx--select-input:not(:focus),
@@ -8785,7 +8785,7 @@ fieldset[disabled] .bx--form__helper-text {
   margin: 0.125rem 0.125rem 0.125rem 0.1875rem;
   background-color: transparent;
   border-radius: 1px;
-  content: \\"\\";
+  content: '';
 }
 
 .bx--checkbox-label::after {
@@ -8798,27 +8798,27 @@ fieldset[disabled] .bx--form__helper-text {
   border-left: 2px solid var(--cds-icon-inverse, #161616);
   margin-top: -0.1875rem /*rtl:0rem*/;
   background: none;
-  content: \\"\\";
+  content: '';
   transform: scale(0) rotate(-45deg);
   transform-origin: bottom right /*rtl:center*/;
 }
 
 .bx--checkbox:checked + .bx--checkbox-label::before,
 .bx--checkbox:indeterminate + .bx--checkbox-label::before,
-.bx--checkbox-label[data-contained-checkbox-state=\\"true\\"]::before,
-.bx--checkbox-label[data-contained-checkbox-state=\\"mixed\\"]::before {
+.bx--checkbox-label[data-contained-checkbox-state='true']::before,
+.bx--checkbox-label[data-contained-checkbox-state='mixed']::before {
   border-width: 1px;
   border-color: var(--cds-icon-primary, #f4f4f4);
   background-color: var(--cds-icon-primary, #f4f4f4);
 }
 
 .bx--checkbox:checked + .bx--checkbox-label::after,
-.bx--checkbox-label[data-contained-checkbox-state=\\"true\\"]::after {
+.bx--checkbox-label[data-contained-checkbox-state='true']::after {
   transform: scale(1) rotate(-45deg) /*rtl:scale(1.2) rotate3d(.5, 1, 0, 158deg)*/;
 }
 
 .bx--checkbox:indeterminate + .bx--checkbox-label::after,
-.bx--checkbox-label[data-contained-checkbox-state=\\"mixed\\"]::after {
+.bx--checkbox-label[data-contained-checkbox-state='mixed']::after {
   top: 0.6875rem;
   width: 0.5rem;
   border-bottom: 2px solid var(--cds-icon-inverse, #161616);
@@ -8829,28 +8829,28 @@ fieldset[disabled] .bx--form__helper-text {
 .bx--checkbox:focus + .bx--checkbox-label::before,
 .bx--checkbox-label__focus::before,
 .bx--checkbox:checked:focus + .bx--checkbox-label::before,
-.bx--checkbox-label[data-contained-checkbox-state=\\"true\\"].bx--checkbox-label__focus::before,
+.bx--checkbox-label[data-contained-checkbox-state='true'].bx--checkbox-label__focus::before,
 .bx--checkbox:indeterminate:focus + .bx--checkbox-label::before,
-.bx--checkbox-label[data-contained-checkbox-state=\\"mixed\\"].bx--checkbox-label__focus::before {
+.bx--checkbox-label[data-contained-checkbox-state='mixed'].bx--checkbox-label__focus::before {
   outline: 2px solid var(--cds-focus, #ffffff);
   outline-offset: 1px;
 }
 
 .bx--checkbox:disabled + .bx--checkbox-label,
-.bx--checkbox-label[data-contained-checkbox-disabled=\\"true\\"] {
+.bx--checkbox-label[data-contained-checkbox-disabled='true'] {
   color: var(--cds-text-disabled, #525252);
   cursor: not-allowed;
 }
 
 .bx--checkbox:disabled + .bx--checkbox-label::before,
-.bx--checkbox-label[data-contained-checkbox-disabled=\\"true\\"]::before {
+.bx--checkbox-label[data-contained-checkbox-disabled='true']::before {
   border-color: var(--cds-icon-disabled, #525252);
 }
 
 .bx--checkbox:checked:disabled + .bx--checkbox-label::before,
 .bx--checkbox:indeterminate:disabled + .bx--checkbox-label::before,
-.bx--checkbox-label[data-contained-checkbox-state=\\"true\\"][data-contained-checkbox-disabled=\\"true\\"]::before,
-.bx--checkbox-label[data-contained-checkbox-state=\\"mixed\\"][data-contained-checkbox-disabled=\\"true\\"]::before {
+.bx--checkbox-label[data-contained-checkbox-state='true'][data-contained-checkbox-disabled='true']::before,
+.bx--checkbox-label[data-contained-checkbox-state='mixed'][data-contained-checkbox-disabled='true']::before {
   background-color: var(--cds-icon-disabled, #525252);
 }
 
@@ -8878,7 +8878,7 @@ fieldset[disabled] .bx--form__helper-text {
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
   background: var(--cds-skeleton-element, #525252);
-  content: \\"\\";
+  content: '';
   will-change: transform-origin, transform, opacity;
 }
 
@@ -9124,7 +9124,7 @@ fieldset[disabled] .bx--form__helper-text {
   width: 2px;
   height: calc(100% - 2px);
   background-color: var(--cds-field, #262626);
-  content: \\"\\";
+  content: '';
   transition: background-color 110ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
 
@@ -9307,7 +9307,7 @@ fieldset[disabled] .bx--form__helper-text {
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
   background: var(--cds-skeleton-element, #525252);
-  content: \\"\\";
+  content: '';
   will-change: transform-origin, transform, opacity;
 }
 
@@ -9594,7 +9594,7 @@ fieldset[disabled] .bx--form__helper-text {
   background-color: var(--cds-field-hover, #353535);
 }
 
-.bx--toolbar-action:hover[aria-expanded=\\"true\\"] {
+.bx--toolbar-action:hover[aria-expanded='true'] {
   background-color: var(--cds-layer, #262626);
 }
 
@@ -9791,7 +9791,7 @@ fieldset[disabled] .bx--form__helper-text {
   height: var(--cds-spacing-05, 1rem);
   border: none;
   background-color: var(--cds-text-on-color, #ffffff);
-  content: \\"\\";
+  content: '';
   opacity: 1;
   transition: opacity 110ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
@@ -10045,13 +10045,13 @@ fieldset[disabled] .bx--form__helper-text {
   vertical-align: middle;
 }
 
-.bx--data-table th[align=\\"right\\"],
-.bx--data-table td[align=\\"right\\"] {
+.bx--data-table th[align='right'],
+.bx--data-table td[align='right'] {
   text-align: right;
 }
 
-.bx--data-table th[align=\\"center\\"],
-.bx--data-table td[align=\\"center\\"] {
+.bx--data-table th[align='center'],
+.bx--data-table td[align='center'] {
   text-align: center;
 }
 
@@ -10088,11 +10088,11 @@ fieldset[disabled] .bx--form__helper-text {
   }
 }
 
-.bx--data-table .bx--list-box input[role=\\"combobox\\"],
-.bx--data-table .bx--list-box input[type=\\"text\\"],
+.bx--data-table .bx--list-box input[role='combobox'],
+.bx--data-table .bx--list-box input[type='text'],
 .bx--data-table .bx--dropdown,
 .bx--data-table .bx--list-box,
-.bx--data-table .bx--number input[type=\\"number\\"],
+.bx--data-table .bx--number input[type='number'],
 .bx--data-table .bx--number__control-btn::before,
 .bx--data-table .bx--number__control-btn::after,
 .bx--data-table .bx--text-input,
@@ -10100,18 +10100,18 @@ fieldset[disabled] .bx--form__helper-text {
   background-color: var(--cds-field-02, #393939);
 }
 
-.bx--data-table td.bx--table-column-menu .bx--overflow-menu[aria-expanded=\\"false\\"]:focus {
+.bx--data-table td.bx--table-column-menu .bx--overflow-menu[aria-expanded='false']:focus {
   outline: 2px solid var(--cds-focus, #ffffff);
   outline-offset: -2px;
 }
 
 @media screen and (prefers-contrast) {
-  .bx--data-table td.bx--table-column-menu .bx--overflow-menu[aria-expanded=\\"false\\"]:focus {
+  .bx--data-table td.bx--table-column-menu .bx--overflow-menu[aria-expanded='false']:focus {
     outline-style: dotted;
   }
 }
 
-.bx--data-table td.bx--table-column-menu .bx--overflow-menu[aria-expanded=\\"true\\"]:focus {
+.bx--data-table td.bx--table-column-menu .bx--overflow-menu[aria-expanded='true']:focus {
   outline: none;
 }
 
@@ -10881,11 +10881,11 @@ tr.bx--parent-row.bx--expandable-row.bx--expandable-row--hover td:first-of-type 
   padding-right: 0;
 }
 
-.bx--data-table td.bx--table-expand[data-previous-value=\\"collapsed\\"] {
+.bx--data-table td.bx--table-expand[data-previous-value='collapsed'] {
   border-bottom: 1px solid transparent;
 }
 
-.bx--table-expand[data-previous-value=\\"collapsed\\"] .bx--table-expand__svg {
+.bx--table-expand[data-previous-value='collapsed'] .bx--table-expand__svg {
   transform: rotate(270deg);
   transition: transform 150ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
@@ -10947,7 +10947,7 @@ tr.bx--parent-row.bx--expandable-row td.bx--table-expand + td::after {
   width: 0.5rem;
   height: 0.0625rem;
   background: var(--cds-layer-accent, #393939);
-  content: \\"\\";
+  content: '';
 }
 
 tr.bx--parent-row.bx--expandable-row:hover td.bx--table-expand + td::after,
@@ -11370,7 +11370,7 @@ th .bx--table-sort__flex {
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
   background: var(--cds-skeleton-element, #525252);
-  content: \\"\\";
+  content: '';
   will-change: transform-origin, transform, opacity;
 }
 
@@ -11425,7 +11425,7 @@ th .bx--table-sort__flex {
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
   background: var(--cds-skeleton-element, #525252);
-  content: \\"\\";
+  content: '';
   will-change: transform-origin, transform, opacity;
 }
 
@@ -11459,7 +11459,7 @@ th .bx--table-sort__flex {
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
   background: var(--cds-skeleton-element, #525252);
-  content: \\"\\";
+  content: '';
   will-change: transform-origin, transform, opacity;
 }
 
@@ -11682,7 +11682,7 @@ th .bx--table-sort__flex {
   left: 0;
   width: 100%;
   height: calc(100% + 2px);
-  content: \\"\\";
+  content: '';
 }
 
 .bx--accordion__heading:hover::before {
@@ -12233,11 +12233,11 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 .security--filter-panel-checkbox__count::before {
-  content: \\"(\\";
+  content: '(';
 }
 
 .security--filter-panel-checkbox__count::after {
-  content: \\")\\";
+  content: ')';
 }
 
 .security--filter-panel-checkbox,
@@ -12343,7 +12343,7 @@ li.bx--accordion__item--disabled:last-of-type {
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
   background: var(--cds-skeleton-element, #525252);
-  content: \\"\\";
+  content: '';
   will-change: transform-origin, transform, opacity;
 }
 
@@ -12746,7 +12746,7 @@ li.bx--accordion__item--disabled:last-of-type {
   stroke: var(--cds-interactive, #4589ff);
 }
 
-/* If IE11 Don\\"t show check animation */
+/* If IE11 Don't show check animation */
 @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
   .bx--inline-loading__checkmark-container {
     top: 1px;
@@ -13074,7 +13074,7 @@ li.bx--accordion__item--disabled:last-of-type {
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
   background: var(--cds-skeleton-element, #525252);
-  content: \\"\\";
+  content: '';
   will-change: transform-origin, transform, opacity;
 }
 
@@ -13383,7 +13383,7 @@ li.bx--accordion__item--disabled:last-of-type {
   display: inline-block;
   width: auto;
   border-bottom: 0.0625rem solid var(--cds-ui-02, #393939);
-  content: \\"\\";
+  content: '';
 }
 
 .security--nav:last-of-type::before {
@@ -13483,7 +13483,7 @@ li.bx--accordion__item--disabled:last-of-type {
   width: 0.25rem;
   height: 100%;
   background-color: transparent;
-  content: \\"\\";
+  content: '';
   transform: translate3d(-100%, 0, 0);
 }
 
@@ -13638,13 +13638,13 @@ li.bx--accordion__item--disabled:last-of-type {
   margin-left: -1rem;
 }
 
-.security--ne-section .bx--row-padding [class*=\\"bx--col\\"],
+.security--ne-section .bx--row-padding [class*='bx--col'],
 .security--ne-section .bx--col-padding {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
 
-.security--ne-section .bx--grid--condensed [class*=\\"bx--col\\"] {
+.security--ne-section .bx--grid--condensed [class*='bx--col'] {
   padding-top: 0.03125rem;
   padding-bottom: 0.03125rem;
 }
@@ -15541,28 +15541,28 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 .security--ne-section .bx--no-gutter,
-.security--ne-section .bx--row.bx--no-gutter [class*=\\"bx--col\\"] {
+.security--ne-section .bx--row.bx--no-gutter [class*='bx--col'] {
   padding-right: 0;
   padding-left: 0;
 }
 
 .security--ne-section .bx--no-gutter--start,
-.security--ne-section .bx--row.bx--no-gutter--start [class*=\\"bx--col\\"] {
+.security--ne-section .bx--row.bx--no-gutter--start [class*='bx--col'] {
   padding-left: 0;
 }
 
 .security--ne-section .bx--no-gutter--end,
-.security--ne-section .bx--row.bx--no-gutter--end [class*=\\"bx--col\\"] {
+.security--ne-section .bx--row.bx--no-gutter--end [class*='bx--col'] {
   padding-right: 0;
 }
 
 .security--ne-section .bx--no-gutter--left,
-.security--ne-section .bx--row.bx--no-gutter--left [class*=\\"bx--col\\"] {
+.security--ne-section .bx--row.bx--no-gutter--left [class*='bx--col'] {
   padding-left: 0;
 }
 
 .security--ne-section .bx--no-gutter--right,
-.security--ne-section .bx--row.bx--no-gutter--right [class*=\\"bx--col\\"] {
+.security--ne-section .bx--row.bx--no-gutter--right [class*='bx--col'] {
   padding-right: 0;
 }
 
@@ -15590,14 +15590,14 @@ li.bx--accordion__item--disabled:last-of-type {
   width: 1px;
   height: 0;
   margin-left: -1px;
-  content: \\"\\";
+  content: '';
   float: left;
 }
 
 .security--ne-section .bx--aspect-ratio::after {
   display: table;
   clear: both;
-  content: \\"\\";
+  content: '';
 }
 
 .security--ne-section .bx--aspect-ratio--16x9::before {
@@ -15767,7 +15767,7 @@ li.bx--accordion__item--disabled:last-of-type {
   box-sizing: border-box;
   border-width: 1px 1px 1px 0;
   border-style: solid;
-  content: \\"\\";
+  content: '';
   filter: opacity(0.4);
   pointer-events: none;
 }
@@ -15882,7 +15882,7 @@ li.bx--accordion__item--disabled:last-of-type {
   border-color: var(--cds-support-warning, #f1c21b);
 }
 
-.bx--inline-notification--warning .bx--inline-notification__icon path[opacity=\\"0\\"] {
+.bx--inline-notification--warning .bx--inline-notification__icon path[opacity='0'] {
   fill: #000000;
   opacity: 1;
 }
@@ -16198,7 +16198,7 @@ li.bx--accordion__item--disabled:last-of-type {
   fill: var(--cds-support-warning, #f1c21b);
 }
 
-.bx--toast-notification--warning .bx--toast-notification__icon path[opacity=\\"0\\"] {
+.bx--toast-notification--warning .bx--toast-notification__icon path[opacity='0'] {
   fill: #000000;
   opacity: 1;
 }
@@ -16517,12 +16517,12 @@ li.bx--accordion__item--disabled:last-of-type {
   --cds-body-long-02-font-weight: 400;
   --cds-body-long-02-line-height: 1.5;
   --cds-body-long-02-letter-spacing: 0;
-  --cds-code-01-font-family: \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace;
+  --cds-code-01-font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
   --cds-code-01-font-size: 0.75rem;
   --cds-code-01-font-weight: 400;
   --cds-code-01-line-height: 1.34;
   --cds-code-01-letter-spacing: 0.32px;
-  --cds-code-02-font-family: \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace;
+  --cds-code-02-font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
   --cds-code-02-font-size: 0.875rem;
   --cds-code-02-font-weight: 400;
   --cds-code-02-line-height: 1.43;
@@ -17130,7 +17130,7 @@ li.bx--accordion__item--disabled:last-of-type {
   color: var(--cds-link-inverse, #0f62fe);
 }
 
-.bx--tooltip .bx--tooltip__content[tabindex=\\"-1\\"]:focus {
+.bx--tooltip .bx--tooltip__content[tabindex='-1']:focus {
   outline: none;
 }
 
@@ -17145,7 +17145,7 @@ li.bx--accordion__item--disabled:last-of-type {
   border-bottom: 0.42969rem solid var(--cds-background-inverse, #f4f4f4);
   border-left: 0.42969rem solid transparent;
   margin: 0 auto;
-  content: \\"\\";
+  content: '';
 }
 
 .bx--tooltip .bx--tooltip__footer {
@@ -17155,39 +17155,39 @@ li.bx--accordion__item--disabled:last-of-type {
   margin-top: 1rem;
 }
 
-.bx--tooltip[data-floating-menu-direction=\\"left\\"] {
+.bx--tooltip[data-floating-menu-direction='left'] {
   margin-left: calc(var(--cds-spacing-03, 0.5rem) * -1);
 }
 
-.bx--tooltip[data-floating-menu-direction=\\"left\\"] .bx--tooltip__caret {
+.bx--tooltip[data-floating-menu-direction='left'] .bx--tooltip__caret {
   top: 50%;
   right: calc(-0.42969rem + 1px);
   left: auto;
   transform: rotate(90deg) translate(50%, -50%);
 }
 
-.bx--tooltip[data-floating-menu-direction=\\"top\\"] {
+.bx--tooltip[data-floating-menu-direction='top'] {
   margin-top: calc(var(--cds-spacing-03, 0.5rem) * -1);
 }
 
-.bx--tooltip[data-floating-menu-direction=\\"top\\"] .bx--tooltip__caret {
+.bx--tooltip[data-floating-menu-direction='top'] .bx--tooltip__caret {
   top: auto;
   bottom: calc(-0.42969rem + 1px);
   transform: rotate(180deg);
 }
 
-.bx--tooltip[data-floating-menu-direction=\\"right\\"] {
+.bx--tooltip[data-floating-menu-direction='right'] {
   margin-left: var(--cds-spacing-03, 0.5rem);
 }
 
-.bx--tooltip[data-floating-menu-direction=\\"right\\"] .bx--tooltip__caret {
+.bx--tooltip[data-floating-menu-direction='right'] .bx--tooltip__caret {
   top: 50%;
   right: auto;
   left: calc(-0.42969rem + 1px);
   transform: rotate(270deg) translate(50%, -50%);
 }
 
-.bx--tooltip[data-floating-menu-direction=\\"bottom\\"] {
+.bx--tooltip[data-floating-menu-direction='bottom'] {
   margin-top: var(--cds-spacing-03, 0.5rem);
 }
 
@@ -17400,7 +17400,7 @@ li.bx--accordion__item--disabled:last-of-type {
   width: 0;
   height: 0;
   border-style: solid;
-  content: \\"\\";
+  content: '';
 }
 
 .bx--tooltip__trigger.bx--tooltip__trigger--definition.bx--tooltip--top .bx--assistive-text,
@@ -17518,7 +17518,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--tooltip__trigger.bx--tooltip__trigger--definition.bx--tooltip--top .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   left: 0;
   width: 100%;
   height: 0.75rem;
@@ -17550,7 +17550,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--tooltip__trigger.bx--tooltip__trigger--definition.bx--tooltip--top.bx--tooltip--align-start .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   left: 0;
   width: 100%;
   height: 0.75rem;
@@ -17582,7 +17582,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--tooltip__trigger.bx--tooltip__trigger--definition.bx--tooltip--top.bx--tooltip--align-center .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   left: 0;
   width: 100%;
   height: 0.75rem;
@@ -17614,7 +17614,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--tooltip__trigger.bx--tooltip__trigger--definition.bx--tooltip--top.bx--tooltip--align-end .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   left: 0;
   width: 100%;
   height: 0.75rem;
@@ -17693,7 +17693,7 @@ li.bx--accordion__item--disabled:last-of-type {
   width: 0;
   height: 0;
   border-style: solid;
-  content: \\"\\";
+  content: '';
 }
 
 .bx--tooltip__trigger.bx--tooltip__trigger--definition.bx--tooltip--bottom .bx--assistive-text,
@@ -17811,7 +17811,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--tooltip__trigger.bx--tooltip__trigger--definition.bx--tooltip--bottom .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   left: 0;
   width: 100%;
   height: 0.75rem;
@@ -17848,7 +17848,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--tooltip__trigger.bx--tooltip__trigger--definition.bx--tooltip--bottom.bx--tooltip--align-start .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   left: 0;
   width: 100%;
   height: 0.75rem;
@@ -17885,7 +17885,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--tooltip__trigger.bx--tooltip__trigger--definition.bx--tooltip--bottom.bx--tooltip--align-center .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   left: 0;
   width: 100%;
   height: 0.75rem;
@@ -17921,7 +17921,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--tooltip__trigger.bx--tooltip__trigger--definition.bx--tooltip--bottom.bx--tooltip--align-end .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   left: 0;
   width: 100%;
   height: 0.75rem;
@@ -18014,7 +18014,7 @@ li.bx--accordion__item--disabled:last-of-type {
   margin: 0 auto;
   margin-top: 1px;
   margin-left: 50%;
-  content: \\"\\";
+  content: '';
 }
 
 .bx--tooltip--icon__top::after,
@@ -18212,7 +18212,7 @@ li.bx--accordion__item--disabled:last-of-type {
   width: 0;
   height: 0;
   border-style: solid;
-  content: \\"\\";
+  content: '';
 }
 
 .bx--tooltip__trigger.bx--tooltip--top .bx--assistive-text,
@@ -18330,7 +18330,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--tooltip__trigger.bx--tooltip--top .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   left: 0;
   width: 100%;
   height: 0.75rem;
@@ -18362,7 +18362,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--tooltip__trigger.bx--tooltip--top.bx--tooltip--align-start .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   left: 0;
   width: 100%;
   height: 0.75rem;
@@ -18394,7 +18394,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--tooltip__trigger.bx--tooltip--top.bx--tooltip--align-center .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   left: 0;
   width: 100%;
   height: 0.75rem;
@@ -18426,7 +18426,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--tooltip__trigger.bx--tooltip--top.bx--tooltip--align-end .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   left: 0;
   width: 100%;
   height: 0.75rem;
@@ -18519,7 +18519,7 @@ li.bx--accordion__item--disabled:last-of-type {
   width: 0;
   height: 0;
   border-style: solid;
-  content: \\"\\";
+  content: '';
 }
 
 .bx--tooltip__trigger.bx--tooltip--right .bx--assistive-text,
@@ -18637,7 +18637,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--tooltip__trigger.bx--tooltip--right .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   top: 0;
   width: 0.75rem;
   height: 100%;
@@ -18668,7 +18668,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--tooltip__trigger.bx--tooltip--right.bx--tooltip--align-start .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   top: 0;
   width: 0.75rem;
   height: 100%;
@@ -18699,7 +18699,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--tooltip__trigger.bx--tooltip--right.bx--tooltip--align-center .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   top: 0;
   width: 0.75rem;
   height: 100%;
@@ -18730,7 +18730,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--tooltip__trigger.bx--tooltip--right.bx--tooltip--align-end .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   top: 0;
   width: 0.75rem;
   height: 100%;
@@ -18821,7 +18821,7 @@ li.bx--accordion__item--disabled:last-of-type {
   width: 0;
   height: 0;
   border-style: solid;
-  content: \\"\\";
+  content: '';
 }
 
 .bx--tooltip__trigger.bx--tooltip--bottom .bx--assistive-text,
@@ -18939,7 +18939,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--tooltip__trigger.bx--tooltip--bottom .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   left: 0;
   width: 100%;
   height: 0.75rem;
@@ -18970,7 +18970,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-start .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   left: 0;
   width: 100%;
   height: 0.75rem;
@@ -19002,7 +19002,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-center .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   left: 0;
   width: 100%;
   height: 0.75rem;
@@ -19033,7 +19033,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-end .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   left: 0;
   width: 100%;
   height: 0.75rem;
@@ -19126,7 +19126,7 @@ li.bx--accordion__item--disabled:last-of-type {
   width: 0;
   height: 0;
   border-style: solid;
-  content: \\"\\";
+  content: '';
 }
 
 .bx--tooltip__trigger.bx--tooltip--left .bx--assistive-text,
@@ -19244,7 +19244,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--tooltip__trigger.bx--tooltip--left .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   top: 0;
   width: 0.75rem;
   height: 100%;
@@ -19275,7 +19275,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--tooltip__trigger.bx--tooltip--left.bx--tooltip--align-start .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   top: 0;
   width: 0.75rem;
   height: 100%;
@@ -19306,7 +19306,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--tooltip__trigger.bx--tooltip--left.bx--tooltip--align-center .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   top: 0;
   width: 0.75rem;
   height: 100%;
@@ -19337,7 +19337,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--tooltip__trigger.bx--tooltip--left.bx--tooltip--align-end .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   top: 0;
   width: 0.75rem;
   height: 100%;
@@ -19474,7 +19474,7 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .bx--progress-label::before {
   display: block;
-  content: \\"\\";
+  content: '';
 }
 
 .bx--progress-label:hover {
@@ -19674,7 +19674,7 @@ li.bx--accordion__item--disabled:last-of-type {
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
   background: var(--cds-skeleton-element, #525252);
-  content: \\"\\";
+  content: '';
   will-change: transform-origin, transform, opacity;
 }
 
@@ -20304,7 +20304,7 @@ li.bx--accordion__item--disabled:last-of-type {
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
   background: var(--cds-skeleton-element, #525252);
-  content: \\"\\";
+  content: '';
   will-change: transform-origin, transform, opacity;
 }
 
@@ -20689,7 +20689,7 @@ li.bx--accordion__item--disabled:last-of-type {
   width: 0;
   height: 0;
   border-style: solid;
-  content: \\"\\";
+  content: '';
 }
 
 .bx--text-input--password__visibility .bx--assistive-text,
@@ -20807,7 +20807,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--text-input--password__visibility .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   left: 0;
   width: 100%;
   height: 0.75rem;
@@ -20977,7 +20977,7 @@ li.bx--accordion__item--disabled:last-of-type {
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
   background: var(--cds-skeleton-element, #525252);
-  content: \\"\\";
+  content: '';
   will-change: transform-origin, transform, opacity;
 }
 
@@ -21189,7 +21189,7 @@ li.bx--accordion__item--disabled:last-of-type {
   width: 100%;
   height: 1px;
   background: var(--cds-ui-02, #393939);
-  content: \\"\\";
+  content: '';
   transform: translateY(1px);
 }
 
@@ -21260,8 +21260,8 @@ li.bx--accordion__item--disabled:last-of-type {
   flex-direction: column;
 }
 
-.security--input__background__color--light .bx--number .security--tearsheet--small input[type=\\"number\\"], .security--card .bx--number .security--tearsheet--small input[type=\\"number\\"], .security--tearsheet--small .bx--date-picker__input, .security--tearsheet--small .bx--dropdown,
-.security--tearsheet--small .bx--number input[type=\\"number\\"], .security--tearsheet--small .bx--search-input, .security--tearsheet--small .bx--select-input, .security--tearsheet--small .bx--text-area, .security--tearsheet--small .bx--text-input, .security--tearsheet--small .bx--list-box, .security--tearsheet--small .bx--list-box__menu, .security--tearsheet--small .security--button--icon:focus, .security--tearsheet--small .security--button--icon:hover, .security--tearsheet .bx--number .security--tearsheet--small input[type=\\"number\\"] {
+.security--input__background__color--light .bx--number .security--tearsheet--small input[type='number'], .security--card .bx--number .security--tearsheet--small input[type='number'], .security--tearsheet--small .bx--date-picker__input, .security--tearsheet--small .bx--dropdown,
+.security--tearsheet--small .bx--number input[type='number'], .security--tearsheet--small .bx--search-input, .security--tearsheet--small .bx--select-input, .security--tearsheet--small .bx--text-area, .security--tearsheet--small .bx--text-input, .security--tearsheet--small .bx--list-box, .security--tearsheet--small .bx--list-box__menu, .security--tearsheet--small .security--button--icon:focus, .security--tearsheet--small .security--button--icon:hover, .security--tearsheet .bx--number .security--tearsheet--small input[type='number'] {
   background-color: var(--cds-ui-02, #393939);
 }
 
@@ -21493,8 +21493,8 @@ li.bx--accordion__item--disabled:last-of-type {
   transform: translate3d(calc( -50% - 1rem), 0, 0);
 }
 
-.security--input__background__color--light .bx--number .security--tearsheet input[type=\\"number\\"], .security--card .bx--number .security--tearsheet input[type=\\"number\\"], .security--tearsheet--small .bx--number .security--tearsheet input[type=\\"number\\"], .security--tearsheet .bx--date-picker__input, .security--tearsheet .bx--dropdown,
-.security--tearsheet .bx--number input[type=\\"number\\"], .security--tearsheet .bx--search-input, .security--tearsheet .bx--select-input, .security--tearsheet .bx--text-area, .security--tearsheet .bx--text-input, .security--tearsheet .bx--list-box, .security--tearsheet .bx--list-box__menu, .security--tearsheet .security--button--icon:focus, .security--tearsheet .security--button--icon:hover {
+.security--input__background__color--light .bx--number .security--tearsheet input[type='number'], .security--card .bx--number .security--tearsheet input[type='number'], .security--tearsheet--small .bx--number .security--tearsheet input[type='number'], .security--tearsheet .bx--date-picker__input, .security--tearsheet .bx--dropdown,
+.security--tearsheet .bx--number input[type='number'], .security--tearsheet .bx--search-input, .security--tearsheet .bx--select-input, .security--tearsheet .bx--text-area, .security--tearsheet .bx--text-input, .security--tearsheet .bx--list-box, .security--tearsheet .bx--list-box__menu, .security--tearsheet .security--button--icon:focus, .security--tearsheet .security--button--icon:hover {
   background-color: var(--cds-ui-02, #393939);
 }
 
@@ -21921,12 +21921,12 @@ li.bx--accordion__item--disabled:last-of-type {
   --cds-body-long-02-font-weight: 400;
   --cds-body-long-02-line-height: 1.5;
   --cds-body-long-02-letter-spacing: 0;
-  --cds-code-01-font-family: \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace;
+  --cds-code-01-font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
   --cds-code-01-font-size: 0.75rem;
   --cds-code-01-font-weight: 400;
   --cds-code-01-line-height: 1.34;
   --cds-code-01-letter-spacing: 0.32px;
-  --cds-code-02-font-family: \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace;
+  --cds-code-02-font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
   --cds-code-02-font-size: 0.875rem;
   --cds-code-02-font-weight: 400;
   --cds-code-02-line-height: 1.43;
@@ -22417,12 +22417,12 @@ li.bx--accordion__item--disabled:last-of-type {
   --cds-body-long-02-font-weight: 400;
   --cds-body-long-02-line-height: 1.5;
   --cds-body-long-02-letter-spacing: 0;
-  --cds-code-01-font-family: \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace;
+  --cds-code-01-font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
   --cds-code-01-font-size: 0.75rem;
   --cds-code-01-font-weight: 400;
   --cds-code-01-line-height: 1.34;
   --cds-code-01-letter-spacing: 0.32px;
-  --cds-code-02-font-family: \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace;
+  --cds-code-02-font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
   --cds-code-02-font-size: 0.875rem;
   --cds-code-02-font-weight: 400;
   --cds-code-02-line-height: 1.43;
@@ -23129,7 +23129,7 @@ li.bx--accordion__item--disabled:last-of-type {
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
   background: var(--cds-skeleton-element, #525252);
-  content: \\"\\";
+  content: '';
   will-change: transform-origin, transform, opacity;
 }
 
@@ -23551,7 +23551,7 @@ li.bx--accordion__item--disabled:last-of-type {
   border-width: 0.25rem;
   border-style: solid;
   border-color: transparent;
-  content: \\"\\";
+  content: '';
   opacity: 1;
   transition-duration: 0.1s;
   transition-property: opacity;
@@ -23757,7 +23757,7 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .security--header__button::after {
   height: 100%;
-  content: \\"\\";
+  content: '';
 }
 
 .security--header__button--active::after {
@@ -23779,7 +23779,7 @@ li.bx--accordion__item--disabled:last-of-type {
   height: 0.5rem;
   background-color: var(--cds-support-01, #fa4d56);
   border-radius: 50%;
-  content: \\"\\";
+  content: '';
 }
 
 .security--header__popover {
@@ -23961,7 +23961,7 @@ li.bx--accordion__item--disabled:last-of-type {
   border-width: 0.25rem;
   border-style: solid;
   border-color: transparent;
-  content: \\"\\";
+  content: '';
   opacity: 1;
   transition-duration: 0.1s;
   transition-property: opacity;
@@ -24282,7 +24282,7 @@ li.bx--accordion__item--disabled:last-of-type {
   display: inline-block;
   height: 0.0625rem;
   background-color: var(--cds-inverse-hover-ui, #e5e5e5);
-  content: \\"\\";
+  content: '';
   transform: translate3d(0, -0.125rem, 0);
 }
 
@@ -24592,12 +24592,12 @@ li.bx--accordion__item--disabled:last-of-type {
   --cds-body-long-02-font-weight: 400;
   --cds-body-long-02-line-height: 1.5;
   --cds-body-long-02-letter-spacing: 0;
-  --cds-code-01-font-family: \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace;
+  --cds-code-01-font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
   --cds-code-01-font-size: 0.75rem;
   --cds-code-01-font-weight: 400;
   --cds-code-01-line-height: 1.34;
   --cds-code-01-letter-spacing: 0.32px;
-  --cds-code-02-font-family: \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace;
+  --cds-code-02-font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
   --cds-code-02-font-size: 0.875rem;
   --cds-code-02-font-weight: 400;
   --cds-code-02-line-height: 1.43;
@@ -25013,7 +25013,7 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 .bx--snippet code {
-  font-family: var(--cds-code-01-font-family, \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace);
+  font-family: var(--cds-code-01-font-family, 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace);
   font-size: var(--cds-code-01-font-size, 0.75rem);
   font-weight: var(--cds-code-01-font-weight, 400);
   line-height: var(--cds-code-01-line-height, 1.34);
@@ -25063,7 +25063,7 @@ li.bx--accordion__item--disabled:last-of-type {
   width: 0;
   height: 0;
   border-style: solid;
-  content: \\"\\";
+  content: '';
   display: none;
 }
 
@@ -25119,7 +25119,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--snippet--inline .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   left: 0;
   width: 100%;
   height: 0.75rem;
@@ -25181,7 +25181,7 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 .bx--snippet--single {
-  font-family: var(--cds-code-01-font-family, \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace);
+  font-family: var(--cds-code-01-font-family, 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace);
   font-size: var(--cds-code-01-font-size, 0.75rem);
   font-weight: var(--cds-code-01-font-weight, 400);
   line-height: var(--cds-code-01-line-height, 1.34);
@@ -25225,7 +25225,7 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 .bx--snippet--single pre {
-  font-family: var(--cds-code-01-font-family, \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace);
+  font-family: var(--cds-code-01-font-family, 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace);
   font-size: var(--cds-code-01-font-size, 0.75rem);
   font-weight: var(--cds-code-01-font-weight, 400);
   line-height: var(--cds-code-01-line-height, 1.34);
@@ -25239,7 +25239,7 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 .bx--snippet--multi {
-  font-family: var(--cds-code-01-font-family, \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace);
+  font-family: var(--cds-code-01-font-family, 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace);
   font-size: var(--cds-code-01-font-size, 0.75rem);
   font-weight: var(--cds-code-01-font-weight, 400);
   line-height: var(--cds-code-01-line-height, 1.34);
@@ -25292,7 +25292,7 @@ li.bx--accordion__item--disabled:last-of-type {
   width: 1rem;
   height: 100%;
   background-image: linear-gradient(to right, rgba(var(--cds-field, #262626), 0), var(--cds-field, #262626));
-  content: \\"\\";
+  content: '';
 }
 
 .bx--snippet--multi .bx--snippet-container pre code {
@@ -25368,7 +25368,7 @@ li.bx--accordion__item--disabled:last-of-type {
   font-weight: var(--cds-body-short-01-font-weight, 400);
   line-height: var(--cds-body-short-01-line-height, 1.29);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
-  font-family: \\"IBM Plex Sans\\", \\"Helvetica Neue\\", Arial, sans-serif;
+  font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
   z-index: 6000;
   top: 0.75rem;
   right: 1.25rem;
@@ -25389,7 +25389,7 @@ li.bx--accordion__item--disabled:last-of-type {
   position: absolute;
   top: 0;
   right: 0;
-  font-family: \\"IBM Plex Sans\\", \\"Helvetica Neue\\", Arial, sans-serif;
+  font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 
 .bx--snippet-btn--expand {
@@ -25397,7 +25397,7 @@ li.bx--accordion__item--disabled:last-of-type {
   font-weight: var(--cds-body-short-01-font-weight, 400);
   line-height: var(--cds-body-short-01-line-height, 1.29);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
-  font-family: \\"IBM Plex Sans\\", \\"Helvetica Neue\\", Arial, sans-serif;
+  font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
   position: absolute;
   z-index: 10;
   right: 0;
@@ -25609,7 +25609,7 @@ li.bx--accordion__item--disabled:last-of-type {
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
   background: var(--cds-skeleton-element, #525252);
-  content: \\"\\";
+  content: '';
   will-change: transform-origin, transform, opacity;
 }
 
@@ -25721,7 +25721,7 @@ li.bx--accordion__item--disabled:last-of-type {
   height: 0.6rem;
   border-right: 1px solid var(--cds-background-inverse, #f4f4f4);
   border-bottom: 1px solid var(--cds-background-inverse, #f4f4f4);
-  content: \\"\\";
+  content: '';
   transform: rotate(-135deg);
 }
 
@@ -25776,7 +25776,7 @@ li.bx--accordion__item--disabled:last-of-type {
   width: 0;
   height: 0;
   border-style: solid;
-  content: \\"\\";
+  content: '';
   display: none;
 }
 
@@ -25832,7 +25832,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--copy-btn .bx--assistive-text::after {
   position: absolute;
   display: block;
-  content: \\"\\";
+  content: '';
   left: 0;
   width: 100%;
   height: 0.75rem;
@@ -26030,7 +26030,7 @@ li.bx--accordion__item--disabled:last-of-type {
   width: 0.0625rem;
   height: 1rem;
   background-color: var(--cds-border-subtle, #393939);
-  content: \\"\\";
+  content: '';
 }
 
 .bx--content-switcher-btn:first-of-type::before {
@@ -26395,7 +26395,7 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .numInputWrapper .numInput::-webkit-outer-spin-button, .numInputWrapper .numInput::-webkit-inner-spin-button {
   margin: 0;
-  /* <-- Apparently some margin are still there even though it\\"s hidden */
+  /* <-- Apparently some margin are still there even though it's hidden */
   -webkit-appearance: none;
 }
 
@@ -26452,7 +26452,7 @@ li.bx--accordion__item--disabled:last-of-type {
   display: block;
   border-right: 0.25rem solid transparent;
   border-left: 0.25rem solid transparent;
-  content: \\"\\";
+  content: '';
 }
 
 .numInputWrapper .arrowUp:hover::after,
@@ -26583,7 +26583,7 @@ li.bx--accordion__item--disabled:last-of-type {
   height: 0.25rem;
   background-color: var(--cds-link-01, #78a9ff);
   transform: translateX(-50%);
-  content: \\"\\";
+  content: '';
 }
 
 .flatpickr-day.today.no-border {
@@ -26756,7 +26756,7 @@ li.bx--accordion__item--disabled:last-of-type {
   font-family: inherit;
   font-size: 100%;
   vertical-align: baseline;
-  font-family: var(--cds-code-02-font-family, \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace);
+  font-family: var(--cds-code-02-font-family, 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace);
   font-size: var(--cds-code-02-font-size, 0.875rem);
   font-weight: var(--cds-code-02-font-weight, 400);
   line-height: var(--cds-code-02-line-height, 1.43);
@@ -26893,7 +26893,7 @@ li.bx--accordion__item--disabled:last-of-type {
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
   background: var(--cds-skeleton-element, #525252);
-  content: \\"\\";
+  content: '';
   will-change: transform-origin, transform, opacity;
 }
 
@@ -26932,7 +26932,7 @@ li.bx--accordion__item--disabled:last-of-type {
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
   background: var(--cds-skeleton-element, #525252);
-  content: \\"\\";
+  content: '';
   will-change: transform-origin, transform, opacity;
 }
 
@@ -27365,7 +27365,7 @@ li.bx--accordion__item--disabled:last-of-type {
   }
 }
 
-.bx--file__state-container .bx--file-complete [data-icon-path=\\"inner-path\\"] {
+.bx--file__state-container .bx--file-complete [data-icon-path='inner-path'] {
   fill: var(--cds-icon-on-color, #ffffff);
   opacity: 1;
 }
@@ -27531,12 +27531,12 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--list--unordered > .bx--list__item::before {
   position: absolute;
   left: -1rem;
-  content: \\"\\\\002013\\";
+  content: '\\\\002013';
 }
 
 .bx--list--unordered.bx--list--nested > .bx--list__item::before {
   left: -0.75rem;
-  content: \\"\\\\0025AA\\";
+  content: '\\\\0025AA';
 }
 
 @keyframes rotate {
@@ -27590,7 +27590,7 @@ li.bx--accordion__item--disabled:last-of-type {
   align-items: center;
   justify-content: center;
   background-color: var(--cds-overlay, rgba(22, 22, 22, 0.7));
-  content: \\"\\";
+  content: '';
   opacity: 0;
   transition: opacity 240ms cubic-bezier(0.4, 0.14, 1, 1), visibility 0ms linear 240ms;
   visibility: hidden;
@@ -27610,7 +27610,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--modal .bx--select-input,
 .bx--modal .bx--dropdown,
 .bx--modal .bx--dropdown-list,
-.bx--modal .bx--number input[type=\\"number\\"],
+.bx--modal .bx--number input[type='number'],
 .bx--modal .bx--date-picker__input {
   background-color: var(--cds-field-02, #393939);
 }
@@ -27855,7 +27855,7 @@ li.bx--accordion__item--disabled:last-of-type {
   width: 100%;
   height: 2rem;
   background-image: linear-gradient(to bottom, transparent, var(--cds-layer, #262626));
-  content: \\"\\";
+  content: '';
   grid-column: 1/-1;
   grid-row: 2/-2;
   pointer-events: none;
@@ -27984,7 +27984,7 @@ li.bx--accordion__item--disabled:last-of-type {
   box-sizing: inherit;
 }
 
-.bx--number input[type=\\"number\\"] {
+.bx--number input[type='number'] {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
   line-height: var(--cds-body-short-01-line-height, 1.29);
@@ -28004,50 +28004,50 @@ li.bx--accordion__item--disabled:last-of-type {
   background-color: var(--cds-field, #262626);
   border-radius: 0;
   color: var(--cds-text-primary, #f4f4f4);
-  font-family: \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace;
+  font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
   font-weight: 300;
   transition: background-color 70ms cubic-bezier(0.2, 0, 0.38, 0.9), outline 70ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
 
-.bx--number input[type=\\"number\\"]:focus {
+.bx--number input[type='number']:focus {
   outline: 2px solid var(--cds-focus, #ffffff);
   outline-offset: -2px;
 }
 
 @media screen and (prefers-contrast) {
-  .bx--number input[type=\\"number\\"]:focus {
+  .bx--number input[type='number']:focus {
     outline-style: dotted;
   }
 }
 
-.bx--number input[type=\\"number\\"]:disabled ~ .bx--number__controls {
+.bx--number input[type='number']:disabled ~ .bx--number__controls {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.bx--number input[type=\\"number\\"]:disabled ~ .bx--number__controls svg {
+.bx--number input[type='number']:disabled ~ .bx--number__controls svg {
   fill: var(--cds-icon-disabled, #525252);
 }
 
-.bx--number input[type=\\"number\\"]::-ms-clear {
+.bx--number input[type='number']::-ms-clear {
   display: none;
 }
 
-.bx--number input[type=\\"number\\"]::-webkit-inner-spin-button {
+.bx--number input[type='number']::-webkit-inner-spin-button {
   appearance: none;
 }
 
-.bx--number--xl.bx--number input[type=\\"number\\"],
-.bx--number--lg.bx--number input[type=\\"number\\"] {
+.bx--number--xl.bx--number input[type='number'],
+.bx--number--lg.bx--number input[type='number'] {
   padding-right: 9rem;
 }
 
-.bx--number--sm.bx--number input[type=\\"number\\"] {
+.bx--number--sm.bx--number input[type='number'] {
   padding-right: 7rem;
 }
 
-.bx--number input[type=\\"number\\"]:disabled,
-.bx--number--readonly input[type=\\"number\\"] {
+.bx--number input[type='number']:disabled,
+.bx--number--readonly input[type='number'] {
   border-bottom-color: transparent;
   background-color: var(--cds-field-disabled, #262626);
   color: var(--cds-text-disabled, #525252);
@@ -28127,7 +28127,7 @@ li.bx--accordion__item--disabled:last-of-type {
   width: 0.125rem;
   height: 2.25rem;
   background-color: var(--cds-field, #262626);
-  content: \\"\\";
+  content: '';
 }
 
 .bx--number__control-btn::before {
@@ -28183,47 +28183,47 @@ li.bx--accordion__item--disabled:last-of-type {
   order: 2;
 }
 
-.bx--number input[type=\\"number\\"]:focus ~ .bx--number__controls .bx--number__control-btn {
+.bx--number input[type='number']:focus ~ .bx--number__controls .bx--number__control-btn {
   border-bottom-width: 0;
 }
 
-.bx--number input[type=\\"number\\"]:focus ~ .bx--number__controls .bx--number__control-btn:hover {
+.bx--number input[type='number']:focus ~ .bx--number__controls .bx--number__control-btn:hover {
   outline: 2px solid var(--cds-focus, #ffffff);
   outline-offset: -2px;
   border: 0;
 }
 
 @media screen and (prefers-contrast) {
-  .bx--number input[type=\\"number\\"]:focus ~ .bx--number__controls .bx--number__control-btn:hover {
+  .bx--number input[type='number']:focus ~ .bx--number__controls .bx--number__control-btn:hover {
     outline-style: dotted;
   }
 }
 
-.bx--number input[type=\\"number\\"][data-invalid] ~ .bx--number__controls .bx--number__control-btn {
+.bx--number input[type='number'][data-invalid] ~ .bx--number__controls .bx--number__control-btn {
   border-bottom-width: 0;
 }
 
-.bx--number input[type=\\"number\\"][data-invalid]:not(:focus) ~ .bx--number__controls .bx--number__control-btn:hover {
+.bx--number input[type='number'][data-invalid]:not(:focus) ~ .bx--number__controls .bx--number__control-btn:hover {
   outline: 2px solid var(--cds-support-error, #fa4d56);
   outline-offset: -2px;
 }
 
 @media screen and (prefers-contrast) {
-  .bx--number input[type=\\"number\\"][data-invalid]:not(:focus) ~ .bx--number__controls .bx--number__control-btn:hover {
+  .bx--number input[type='number'][data-invalid]:not(:focus) ~ .bx--number__controls .bx--number__control-btn:hover {
     outline-style: dotted;
   }
 }
 
-.bx--number input[type=\\"number\\"]:focus ~ .bx--number__controls .bx--number__control-btn.up-icon::after {
+.bx--number input[type='number']:focus ~ .bx--number__controls .bx--number__control-btn.up-icon::after {
   background-color: transparent;
 }
 
-.bx--number input[type=\\"number\\"][data-invalid] ~ .bx--number__controls .bx--number__control-btn.up-icon::after {
+.bx--number input[type='number'][data-invalid] ~ .bx--number__controls .bx--number__control-btn.up-icon::after {
   background-color: var(--cds-support-error, #fa4d56);
 }
 
-.bx--number input[type=\\"number\\"][data-invalid]:focus ~ .bx--number__controls .bx--number__control-btn.up-icon::after,
-.bx--number input[type=\\"number\\"][data-invalid] ~ .bx--number__controls .bx--number__control-btn.up-icon:focus::after {
+.bx--number input[type='number'][data-invalid]:focus ~ .bx--number__controls .bx--number__control-btn.up-icon::after,
+.bx--number input[type='number'][data-invalid] ~ .bx--number__controls .bx--number__control-btn.up-icon:focus::after {
   background-color: var(--cds-focus, #ffffff);
 }
 
@@ -28253,11 +28253,11 @@ li.bx--accordion__item--disabled:last-of-type {
   background-color: var(--cds-decorative-01, #525252);
 }
 
-.bx--number input[type=\\"number\\"]:disabled + .bx--number__controls .bx--number__rule-divider:first-of-type {
+.bx--number input[type='number']:disabled + .bx--number__controls .bx--number__rule-divider:first-of-type {
   background-color: transparent;
 }
 
-.bx--number input[type=\\"number\\"]:disabled + .bx--number__controls .bx--number__rule-divider {
+.bx--number input[type='number']:disabled + .bx--number__controls .bx--number__rule-divider {
   background-color: var(--cds-icon-disabled, #525252);
 }
 
@@ -28314,12 +28314,12 @@ li.bx--accordion__item--disabled:last-of-type {
   opacity: 1;
 }
 
-.bx--number--light input[type=\\"number\\"] {
+.bx--number--light input[type='number'] {
   background-color: var(--cds-field-02, #393939);
 }
 
-.bx--number--light input[type=\\"number\\"]:disabled,
-.bx--number--light .bx--number--readonly input[type=\\"number\\"] {
+.bx--number--light input[type='number']:disabled,
+.bx--number--light .bx--number--readonly input[type='number'] {
   background-color: var(--cds-field-02, #393939);
 }
 
@@ -28339,8 +28339,8 @@ li.bx--accordion__item--disabled:last-of-type {
   background-color: transparent;
 }
 
-.bx--number--xl input[type=\\"number\\"],
-.bx--number--lg input[type=\\"number\\"] {
+.bx--number--xl input[type='number'],
+.bx--number--lg input[type='number'] {
   height: 3rem;
 }
 
@@ -28360,7 +28360,7 @@ li.bx--accordion__item--disabled:last-of-type {
   height: 2.75rem;
 }
 
-.bx--number--sm input[type=\\"number\\"] {
+.bx--number--sm input[type='number'] {
   height: 2rem;
 }
 
@@ -28380,7 +28380,7 @@ li.bx--accordion__item--disabled:last-of-type {
   margin-top: 0;
 }
 
-.bx--number--nosteppers input[type=\\"number\\"] {
+.bx--number--nosteppers input[type='number'] {
   padding-right: 3rem;
 }
 
@@ -28411,7 +28411,7 @@ li.bx--accordion__item--disabled:last-of-type {
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
   background: var(--cds-skeleton-element, #525252);
-  content: \\"\\";
+  content: '';
   will-change: transform-origin, transform, opacity;
 }
 
@@ -28421,7 +28421,7 @@ li.bx--accordion__item--disabled:last-of-type {
   }
 }
 
-.bx--number.bx--skeleton input[type=\\"number\\"] {
+.bx--number.bx--skeleton input[type='number'] {
   display: none;
 }
 
@@ -28944,7 +28944,7 @@ span.bx--pagination__text {
   height: 100%;
   background-color: var(--cds-icon-primary, #f4f4f4);
   border-radius: 50%;
-  content: \\"\\";
+  content: '';
   transform: scale(0.5);
 }
 
@@ -29003,7 +29003,7 @@ span.bx--pagination__text {
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
   background: var(--cds-skeleton-element, #525252);
-  content: \\"\\";
+  content: '';
   will-change: transform-origin, transform, opacity;
 }
 
@@ -29064,7 +29064,7 @@ span.bx--pagination__text {
 }
 
 .bx--slider__range-label {
-  font-family: var(--cds-code-02-font-family, \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace);
+  font-family: var(--cds-code-02-font-family, 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace);
   font-size: var(--cds-code-02-font-size, 0.875rem);
   font-weight: var(--cds-code-02-font-weight, 400);
   line-height: var(--cds-code-02-line-height, 1.43);
@@ -29094,7 +29094,7 @@ span.bx--pagination__text {
   width: 0.125rem;
   height: 0.25rem;
   background: var(--cds-border-subtle, #393939);
-  content: \\"\\";
+  content: '';
   transform: translate(-50%, 0);
 }
 
@@ -29233,7 +29233,7 @@ span.bx--pagination__text {
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
   background: var(--cds-skeleton-element, #525252);
-  content: \\"\\";
+  content: '';
   will-change: transform-origin, transform, opacity;
 }
 
@@ -29722,7 +29722,7 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
   background: var(--cds-skeleton-element, #525252);
-  content: \\"\\";
+  content: '';
   will-change: transform-origin, transform, opacity;
 }
 
@@ -29754,7 +29754,7 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
   background: var(--cds-skeleton-element, #525252);
-  content: \\"\\";
+  content: '';
   will-change: transform-origin, transform, opacity;
 }
 
@@ -30162,7 +30162,7 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
   background: var(--cds-skeleton-element, #525252);
-  content: \\"\\";
+  content: '';
   will-change: transform-origin, transform, opacity;
 }
 
@@ -30195,7 +30195,7 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
   background: var(--cds-skeleton-element, #525252);
-  content: \\"\\";
+  content: '';
   will-change: transform-origin, transform, opacity;
 }
 
@@ -30346,7 +30346,7 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
   background: var(--cds-skeleton-element, #525252);
-  content: \\"\\";
+  content: '';
   will-change: transform-origin, transform, opacity;
 }
 
@@ -30675,7 +30675,7 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
 .bx--time-picker__input-field {
   outline: 2px solid transparent;
   outline-offset: -2px;
-  font-family: var(--cds-code-02-font-family, \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace);
+  font-family: var(--cds-code-02-font-family, 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace);
   font-size: var(--cds-code-02-font-size, 0.875rem);
   font-weight: var(--cds-code-02-font-weight, 400);
   line-height: var(--cds-code-02-line-height, 1.43);
@@ -30766,7 +30766,7 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
   background-color: var(--cds-toggle-off, #6f6f6f);
   border-radius: 0.9375rem;
   box-shadow: 0 0 0 1px transparent, 0 0 0 3px transparent;
-  content: \\"\\";
+  content: '';
   cursor: pointer;
   transition: box-shadow 70ms cubic-bezier(0.2, 0, 1, 0.9), background-color 70ms cubic-bezier(0.2, 0, 1, 0.9);
   will-change: box-shadow;
@@ -30782,7 +30782,7 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
   box-sizing: border-box;
   background-color: var(--cds-icon-on-color, #ffffff);
   border-radius: 50%;
-  content: \\"\\";
+  content: '';
   cursor: pointer;
   transition: transform 70ms cubic-bezier(0.2, 0, 1, 0.9);
 }
@@ -30954,7 +30954,7 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
   background-color: var(--cds-toggle-off, #6f6f6f);
   border-radius: 0.9375rem;
   box-shadow: 0 0 0 1px transparent, 0 0 0 3px transparent;
-  content: \\"\\";
+  content: '';
   transition: box-shadow 70ms cubic-bezier(0.2, 0, 1, 0.9), background-color 70ms cubic-bezier(0.2, 0, 1, 0.9);
   will-change: box-shadow;
 }
@@ -30969,7 +30969,7 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
   box-sizing: border-box;
   background-color: var(--cds-icon-on-color, #ffffff);
   border-radius: 50%;
-  content: \\"\\";
+  content: '';
   transition: transform 70ms cubic-bezier(0.2, 0, 1, 0.9);
 }
 
@@ -31251,7 +31251,7 @@ a.bx--header__name:hover {
   width: 0.0625rem;
   height: 1.5rem;
   background-color: #393939;
-  content: \\"\\";
+  content: '';
   transform: translateY(-50%);
 }
 
@@ -31303,7 +31303,7 @@ a.bx--header__menu-item:focus > svg {
   fill: #f4f4f4;
 }
 
-a.bx--header__menu-item[aria-current=\\"page\\"]::after,
+a.bx--header__menu-item[aria-current='page']::after,
 .bx--header__menu-item--current::after {
   position: absolute;
   top: 0;
@@ -31312,15 +31312,15 @@ a.bx--header__menu-item[aria-current=\\"page\\"]::after,
   left: 0;
   width: 100%;
   border-bottom: 3px solid var(--cds-support-info-inverse, #0f62fe);
-  content: \\"\\";
+  content: '';
 }
 
-a.bx--header__menu-item[aria-current=\\"page\\"]:focus::after,
+a.bx--header__menu-item[aria-current='page']:focus::after,
 .bx--header__menu-item--current:focus::after {
   border: 0;
 }
 
-a.bx--header__menu-item[aria-current=\\"page\\"]:focus,
+a.bx--header__menu-item[aria-current='page']:focus,
 a.bx--header__menu-item.bx--header__menu-item--current:focus {
   border: 2px solid #ffffff;
 }
@@ -31329,17 +31329,17 @@ a.bx--header__menu-item.bx--header__menu-item--current:focus {
   position: relative;
 }
 
-.bx--header__menu-title[aria-haspopup=\\"true\\"] {
+.bx--header__menu-title[aria-haspopup='true'] {
   position: relative;
 }
 
-.bx--header__menu-title[aria-expanded=\\"true\\"] {
+.bx--header__menu-title[aria-expanded='true'] {
   z-index: 8001;
   background-color: #262626;
   color: #ffffff;
 }
 
-.bx--header__menu-title[aria-expanded=\\"true\\"] > .bx--header__menu-arrow {
+.bx--header__menu-title[aria-expanded='true'] > .bx--header__menu-arrow {
   transform: rotate(180deg);
 }
 
@@ -31350,7 +31350,7 @@ a.bx--header__menu-item.bx--header__menu-item--current:focus {
   list-style: none;
 }
 
-.bx--header__menu-title[aria-expanded=\\"true\\"] + .bx--header__menu {
+.bx--header__menu-title[aria-expanded='true'] + .bx--header__menu {
   position: absolute;
   z-index: 8000;
   bottom: 0;
@@ -31363,11 +31363,11 @@ a.bx--header__menu-item.bx--header__menu-item--current:focus {
   transform: translateY(100%);
 }
 
-.bx--header__menu-title[aria-expanded=\\"true\\"] + .bx--header__menu .bx--header__menu-item:hover {
+.bx--header__menu-title[aria-expanded='true'] + .bx--header__menu .bx--header__menu-item:hover {
   background-color: #353535;
 }
 
-.bx--header__menu-title[aria-expanded=\\"true\\"] + .bx--header__menu .bx--header__menu-item:active {
+.bx--header__menu-title[aria-expanded='true'] + .bx--header__menu .bx--header__menu-item:active {
   background-color: #393939;
 }
 
@@ -31925,9 +31925,9 @@ a.bx--header__menu-item.bx--header__menu-item--current:focus {
 
 .bx--side-nav__item:not(.bx--side-nav__item--active):hover .bx--side-nav__item:not(.bx--side-nav__item--active) > .bx--side-nav__submenu:hover,
 .bx--side-nav__item:not(.bx--side-nav__item--active) > .bx--side-nav__link:hover,
-.bx--side-nav__menu a.bx--side-nav__link:not(.bx--side-nav__link--current):not([aria-current=\\"page\\"]):hover,
+.bx--side-nav__menu a.bx--side-nav__link:not(.bx--side-nav__link--current):not([aria-current='page']):hover,
 .bx--side-nav a.bx--header__menu-item:hover,
-.bx--side-nav .bx--header__menu-title[aria-expanded=\\"true\\"]:hover {
+.bx--side-nav .bx--header__menu-title[aria-expanded='true']:hover {
   background-color: #e5e5e5;
   color: #161616;
 }
@@ -32022,7 +32022,7 @@ a.bx--header__menu-item.bx--header__menu-item--current:focus {
   transition: transform 110ms;
 }
 
-.bx--side-nav__submenu[aria-expanded=\\"true\\"] .bx--side-nav__submenu-chevron > svg {
+.bx--side-nav__submenu[aria-expanded='true'] .bx--side-nav__submenu-chevron > svg {
   transform: rotate(180deg);
 }
 
@@ -32035,20 +32035,20 @@ a.bx--header__menu-item.bx--header__menu-item--current:focus {
   color: #161616;
 }
 
-.bx--side-nav__item--active .bx--side-nav__submenu[aria-expanded=\\"false\\"] {
+.bx--side-nav__item--active .bx--side-nav__submenu[aria-expanded='false'] {
   position: relative;
   background-color: #e5e5e5;
   color: #161616;
 }
 
-.bx--side-nav__item--active .bx--side-nav__submenu[aria-expanded=\\"false\\"]::before {
+.bx--side-nav__item--active .bx--side-nav__submenu[aria-expanded='false']::before {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   width: 4px;
   background-color: #0f62fe;
-  content: \\"\\";
+  content: '';
 }
 
 .bx--side-nav__item--active .bx--side-nav__submenu-title {
@@ -32062,7 +32062,7 @@ a.bx--header__menu-item.bx--header__menu-item--current:focus {
   visibility: hidden;
 }
 
-.bx--side-nav__submenu[aria-expanded=\\"true\\"] + .bx--side-nav__menu {
+.bx--side-nav__submenu[aria-expanded='true'] + .bx--side-nav__menu {
   max-height: 93.75rem;
   visibility: inherit;
 }
@@ -32079,13 +32079,13 @@ a.bx--header__menu-item.bx--header__menu-item--current:focus {
 }
 
 .bx--side-nav__menu a.bx--side-nav__link--current,
-.bx--side-nav__menu a.bx--side-nav__link[aria-current=\\"page\\"],
+.bx--side-nav__menu a.bx--side-nav__link[aria-current='page'],
 a.bx--side-nav__link--current {
   background-color: #e0e0e0;
 }
 
 .bx--side-nav__menu a.bx--side-nav__link--current > span,
-.bx--side-nav__menu a.bx--side-nav__link[aria-current=\\"page\\"] > span,
+.bx--side-nav__menu a.bx--side-nav__link[aria-current='page'] > span,
 a.bx--side-nav__link--current > span {
   color: #161616;
   font-weight: 600;
@@ -32093,7 +32093,7 @@ a.bx--side-nav__link--current > span {
 
 a.bx--side-nav__link,
 .bx--side-nav a.bx--header__menu-item,
-.bx--side-nav .bx--header__menu-title[aria-expanded=\\"true\\"] + .bx--header__menu {
+.bx--side-nav .bx--header__menu-title[aria-expanded='true'] + .bx--header__menu {
   outline: 2px solid transparent;
   outline-offset: -2px;
   font-size: var(--cds-productive-heading-01-font-size, 0.875rem);
@@ -32138,18 +32138,18 @@ a.bx--side-nav__link:focus,
   }
 }
 
-a.bx--side-nav__link[aria-current=\\"page\\"],
+a.bx--side-nav__link[aria-current='page'],
 a.bx--side-nav__link--current {
   background-color: #e5e5e5;
   font-weight: 600;
 }
 
-a.bx--side-nav__link[aria-current=\\"page\\"] .bx--side-nav__link-text,
+a.bx--side-nav__link[aria-current='page'] .bx--side-nav__link-text,
 a.bx--side-nav__link--current .bx--side-nav__link-text {
   color: #161616;
 }
 
-a.bx--side-nav__link[aria-current=\\"page\\"]::before,
+a.bx--side-nav__link[aria-current='page']::before,
 a.bx--side-nav__link--current::before {
   position: absolute;
   top: 0;
@@ -32157,7 +32157,7 @@ a.bx--side-nav__link--current::before {
   left: 0;
   width: 4px;
   background-color: #0f62fe;
-  content: \\"\\";
+  content: '';
 }
 
 .bx--side-nav__icon {
@@ -32223,7 +32223,7 @@ a.bx--side-nav__link--current::before {
   width: calc(100% - 32px);
   height: 0.0625rem;
   background: #e0e0e0;
-  content: \\"\\";
+  content: '';
 }
 
 .bx--side-nav a.bx--header__menu-item {
@@ -32232,11 +32232,11 @@ a.bx--side-nav__link--current::before {
   white-space: nowrap;
 }
 
-.bx--side-nav a.bx--header__menu-item[aria-expanded=\\"true\\"] {
+.bx--side-nav a.bx--header__menu-item[aria-expanded='true'] {
   background-color: transparent;
 }
 
-.bx--side-nav .bx--header__menu-title[aria-expanded=\\"true\\"] + .bx--header__menu {
+.bx--side-nav .bx--header__menu-title[aria-expanded='true'] + .bx--header__menu {
   bottom: inherit;
   width: 100%;
   padding: 0;
@@ -32245,16 +32245,16 @@ a.bx--side-nav__link--current::before {
   transform: none;
 }
 
-.bx--side-nav .bx--header__menu-title[aria-expanded=\\"true\\"] + .bx--header__menu li {
+.bx--side-nav .bx--header__menu-title[aria-expanded='true'] + .bx--header__menu li {
   width: 100%;
 }
 
-.bx--side-nav .bx--header__menu-title[aria-expanded=\\"true\\"] + .bx--header__menu a.bx--header__menu-item {
+.bx--side-nav .bx--header__menu-title[aria-expanded='true'] + .bx--header__menu a.bx--header__menu-item {
   padding-left: 4.25rem;
   font-weight: 400;
 }
 
-.bx--side-nav .bx--header__menu-title[aria-expanded=\\"true\\"] + .bx--header__menu a.bx--header__menu-item:hover {
+.bx--side-nav .bx--header__menu-title[aria-expanded='true'] + .bx--header__menu a.bx--header__menu-item:hover {
   background-color: #e5e5e5;
   color: #161616;
 }
@@ -32304,7 +32304,7 @@ a.bx--side-nav__link--current::before {
   height: 1px;
   margin: 0 1rem;
   background-color: #393939;
-  content: \\"\\";
+  content: '';
 }
 
 .bx--navigation-item {
@@ -32326,7 +32326,7 @@ a.bx--side-nav__link--current::before {
   display: block;
   width: 4px;
   background-color: #0f62fe;
-  content: \\"\\";
+  content: '';
 }
 
 a.bx--navigation-link {
@@ -32442,7 +32442,7 @@ a.bx--navigation-link:focus {
   display: block;
   width: 4px;
   background-color: #0f62fe;
-  content: \\"\\";
+  content: '';
 }
 
 .bx--navigation__category-item--active > a.bx--navigation-link {
@@ -32554,13 +32554,13 @@ body *::after {
   margin-left: -1rem;
 }
 
-.bx--row-padding [class*=\\"bx--col\\"],
+.bx--row-padding [class*='bx--col'],
 .bx--col-padding {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
 
-.bx--grid--condensed [class*=\\"bx--col\\"] {
+.bx--grid--condensed [class*='bx--col'] {
   padding-top: 0.03125rem;
   padding-bottom: 0.03125rem;
 }
@@ -34457,28 +34457,28 @@ body *::after {
 }
 
 .bx--no-gutter,
-.bx--row.bx--no-gutter [class*=\\"bx--col\\"] {
+.bx--row.bx--no-gutter [class*='bx--col'] {
   padding-right: 0;
   padding-left: 0;
 }
 
 .bx--no-gutter--start,
-.bx--row.bx--no-gutter--start [class*=\\"bx--col\\"] {
+.bx--row.bx--no-gutter--start [class*='bx--col'] {
   padding-left: 0;
 }
 
 .bx--no-gutter--end,
-.bx--row.bx--no-gutter--end [class*=\\"bx--col\\"] {
+.bx--row.bx--no-gutter--end [class*='bx--col'] {
   padding-right: 0;
 }
 
 .bx--no-gutter--left,
-.bx--row.bx--no-gutter--left [class*=\\"bx--col\\"] {
+.bx--row.bx--no-gutter--left [class*='bx--col'] {
   padding-left: 0;
 }
 
 .bx--no-gutter--right,
-.bx--row.bx--no-gutter--right [class*=\\"bx--col\\"] {
+.bx--row.bx--no-gutter--right [class*='bx--col'] {
   padding-right: 0;
 }
 
@@ -34506,14 +34506,14 @@ body *::after {
   width: 1px;
   height: 0;
   margin-left: -1px;
-  content: \\"\\";
+  content: '';
   float: left;
 }
 
 .bx--aspect-ratio::after {
   display: table;
   clear: both;
-  content: \\"\\";
+  content: '';
 }
 
 .bx--aspect-ratio--16x9::before {
@@ -34566,14 +34566,14 @@ html {
 
 body {
   font-weight: 400;
-  font-family: \\"IBM Plex Sans\\", \\"Helvetica Neue\\", Arial, sans-serif;
+  font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 code {
-  font-family: \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace;
+  font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
 }
 
 strong {
@@ -34581,23 +34581,23 @@ strong {
 }
 
 .bx--type-mono {
-  font-family: \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace;
+  font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
 }
 
 .bx--type-sans {
-  font-family: \\"IBM Plex Sans\\", \\"Helvetica Neue\\", Arial, sans-serif;
+  font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 
 .bx--type-sans-condensed {
-  font-family: \\"IBM Plex Sans Condensed\\", \\"Helvetica Neue\\", Arial, sans-serif;
+  font-family: 'IBM Plex Sans Condensed', 'Helvetica Neue', Arial, sans-serif;
 }
 
 .bx--type-sans-hebrew {
-  font-family: \\"IBM Plex Sans Hebrew\\", \\"Helvetica Hebrew\\", \\"Arial Hebrew\\", sans-serif;
+  font-family: 'IBM Plex Sans Hebrew', 'Helvetica Hebrew', 'Arial Hebrew', sans-serif;
 }
 
 .bx--type-serif {
-  font-family: \\"IBM Plex Serif\\", \\"Georgia\\", Times, serif;
+  font-family: 'IBM Plex Serif', 'Georgia', Times, serif;
 }
 
 .bx--type-light {
@@ -34685,7 +34685,7 @@ strong {
 }
 
 .bx--type-code-01 {
-  font-family: var(--cds-code-01-font-family, \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace);
+  font-family: var(--cds-code-01-font-family, 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace);
   font-size: var(--cds-code-01-font-size, 0.75rem);
   font-weight: var(--cds-code-01-font-weight, 400);
   line-height: var(--cds-code-01-line-height, 1.34);
@@ -34693,7 +34693,7 @@ strong {
 }
 
 .bx--type-code-02 {
-  font-family: var(--cds-code-02-font-family, \\"IBM Plex Mono\\", \\"Menlo\\", \\"DejaVu Sans Mono\\", \\"Bitstream Vera Sans Mono\\", Courier, monospace);
+  font-family: var(--cds-code-02-font-family, 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace);
   font-size: var(--cds-code-02-font-size, 0.875rem);
   font-weight: var(--cds-code-02-font-weight, 400);
   line-height: var(--cds-code-02-line-height, 1.43);

@@ -1,11 +1,12 @@
 /**
- * @file Delimited List.
- * @copyright IBM Security 2019
+ * @file Delimited list.
+ * @copyright IBM Security 2019 - 2021
  */
 
-import React, { useLayoutEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
+import React, { useLayoutEffect, useRef, useState } from 'react';
+
 import { getComponentNamespace } from '../../globals/namespace';
 
 const namespace = getComponentNamespace('delimited-list');
@@ -29,7 +30,7 @@ function DelimitedList({ className, delimiter, items, truncate, ...other }) {
       return setHasOverflow(true);
     }
     return setHasOverflow(false);
-  }, [element.current, items]);
+  }, [items]);
 
   const classes = classnames(namespace, className);
   const valueClasses = classnames(`${namespace}__value`, {

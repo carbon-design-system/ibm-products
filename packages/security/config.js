@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+export const root = __dirname;
 export const sectionTitle = 'Security';

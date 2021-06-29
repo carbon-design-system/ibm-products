@@ -8,8 +8,11 @@
 module.exports = {
   extends: '../../.stylelintrc',
   rules: {
-    'carbon/layout-token-use': null,
-    'carbon/theme-token-use': null,
+    'carbon/layout-token-use': [true, { severity: 'warning' }],
+    'carbon/motion-token-use': [true, { severity: 'warning' }],
+    'carbon/theme-token-use': [true, { severity: 'warning' }],
+    'carbon/type-token-use': [true, { severity: 'warning' }],
+
     'declaration-property-value-disallowed-list': null,
     'property-no-unknown': [
       true,

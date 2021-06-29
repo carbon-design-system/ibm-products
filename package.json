@@ -69,7 +69,7 @@
     "rimraf": "^3.0.2",
     "stylelint": "^13.13.1",
     "stylelint-config-carbon": "^1.6.0",
-    "stylelint-plugin-carbon-tokens": "^0.10.0",
+    "stylelint-plugin-carbon-tokens": "^0.11.1",
     "yarn": "^1.22.10"
   },
   "eslintConfig": {

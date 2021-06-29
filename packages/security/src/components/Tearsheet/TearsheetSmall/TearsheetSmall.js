@@ -5,7 +5,6 @@
 
 import { Close20 } from '@carbon/icons-react';
 
-import deprecate from 'carbon-components-react/es/prop-types/deprecate';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
@@ -204,11 +203,8 @@ TearsheetSmall.propTypes = {
     PropTypes.element,
   ]),
 
-  /** @deprecated Deprecated. Please use `body` prop. */
-  children: deprecate(
-    PropTypes.element,
-    `\nThe prop \`children\` for TearsheetSmall has been deprecated in favor of \`body\`.`
-  ),
+  /** Provide the content for the `TearsheetSmall` */
+  children: PropTypes.element,
 
   /** @type {object<object>} An object list of primary button props. */
   primaryButton: buttonType.isRequired,

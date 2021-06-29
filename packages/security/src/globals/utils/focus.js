@@ -1,6 +1,6 @@
 /**
  * @file Helper methods for element focusing.
- * @copyright IBM Security 2018
+ * @copyright IBM Security 2018 - 2021
  */
 
 import React from 'react';
@@ -48,7 +48,7 @@ export const useComponentFocus = (timeoutDelay = 10) => {
   const [blurTimer, setBlurTimer] = React.useState(undefined);
 
   // Clear any timeouts before unmounting.
-  React.useEffect(() => () => clearTimeout(blurTimer), []);
+  React.useEffect(() => () => clearTimeout(blurTimer), [blurTimer]);
 
   // Clears out the current timeout and sets the new one.
   const setNewBlurTimer = (newTimeout) => {

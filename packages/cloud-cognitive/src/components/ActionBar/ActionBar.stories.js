@@ -15,10 +15,6 @@ import { getStorybookPrefix } from '../../../config';
 import { ActionBar, ActionBarItem } from '.';
 const storybookPrefix = getStorybookPrefix(pkg, ActionBar.displayName);
 
-const blockClass = `${pkg.prefix}--action-bar`;
-
-import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-
 export default {
   title: `${storybookPrefix}/${ActionBar.displayName}`,
   component: ActionBar,
@@ -28,9 +24,8 @@ export default {
     },
   },
   decorators: [
-    (story) => <div className={`${blockClass}__story-viewport`}>{story()}</div>,
+    (story) => <div className={`ccs-sb__display-box`}>{story()}</div>,
   ],
-  parameters: { styles },
 };
 
 const actions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => ({

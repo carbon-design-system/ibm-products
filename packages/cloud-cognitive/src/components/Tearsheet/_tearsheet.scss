@@ -67,6 +67,7 @@
 
   .#{$block-class} .#{$block-class}__container {
     top: auto;
+    width: 100%;
     height: 100%;
     max-height: calc(100% - #{$spacing-09});
     // we want the enter/leave animation to run up most of the height of the
@@ -108,8 +109,10 @@
     );
   }
 
-  .#{$block-class}.#{$block-class}--wide .#{$block-class}__container {
-    width: calc(100% - (2 * #{$spacing-07}));
+  @include carbon--breakpoint(lg) {
+    .#{$block-class}.#{$block-class}--wide .#{$block-class}__container {
+      width: calc(100% - (2 * #{$spacing-07}));
+    }
   }
 
   .#{$block-class}.#{$block-class}--stacked-1-of-2.is-visible
@@ -268,6 +271,7 @@
 
   .#{$block-class} .#{$block-class}__buttons {
     display: inline-flex;
+    min-width: 100%;
     border-top: 1px solid $ui-03;
   }
 

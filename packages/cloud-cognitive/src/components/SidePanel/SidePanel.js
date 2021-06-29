@@ -96,7 +96,7 @@ export let SidePanel = React.forwardRef(
 
       const focusButton = (focusContainerElement) => {
         const target = initialFocus(focusContainerElement);
-        target.focus();
+        target?.focus();
       };
       if (open && animationComplete) {
         focusButton(sidePanelInnerRef.current);
@@ -107,16 +107,13 @@ export let SidePanel = React.forwardRef(
       if (open && actions && actions.length && animationComplete) {
         const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
         const actionsContainer = getActionsContainerElement();
-        let actionsHeight = actionsContainer.offsetHeight + 16; // add additional 1rem spacing to bottom padding
+        let actionsHeight = actionsContainer?.offsetHeight + 16; // add additional 1rem spacing to bottom padding
         actionsHeight = `${Math.round(actionsHeight / 16)}rem`;
-        sidePanelOuter.style.setProperty(
+        sidePanelOuter?.style.setProperty(
           `--${blockClass}--content-bottom-padding`,
           actionsHeight
         );
       }
-      return () => {
-        setAnimationComplete(false);
-      };
     }, [actions, condensedActions, open, animationComplete]);
 
     /* istanbul ignore next */
@@ -258,10 +255,10 @@ export let SidePanel = React.forwardRef(
             }
           });
       }
-      if (open && !animateTitle && animationComplete) {
+      if (open && shouldRender && !animateTitle) {
         const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
         const sidePanelTitleElement = document.querySelector(
-          `.${blockClass}__title-container`
+          `.${blockClass}__title-container > .${blockClass}__title-text`
         );
         const sidePanelSubtitleElement = document.querySelector(
           `.${blockClass}__subtitle-text`
@@ -269,17 +266,17 @@ export let SidePanel = React.forwardRef(
         const sidePanelSubtitleElementHeight = sidePanelSubtitleElement
           ? sidePanelSubtitleElement.offsetHeight
           : 0;
-        const titleHeight = sidePanelTitleElement.offsetHeight;
-        sidePanelOuter.style.setProperty(
+        const titleHeight = sidePanelTitleElement?.offsetHeight + 24;
+        sidePanelOuter?.style.setProperty(
           `--${blockClass}--title-container-height`,
           `${titleHeight}px`
         );
-        sidePanelOuter.style.setProperty(
+        sidePanelOuter?.style.setProperty(
           `--${blockClass}--subtitle-container-height`,
           `${sidePanelSubtitleElementHeight}px`
         );
       }
-    }, [open, animateTitle, animationComplete]);
+    }, [open, animateTitle, animationComplete, shouldRender]);
 
     // click outside functionality if `includeOverlay` prop is set
     useEffect(() => {
@@ -461,6 +458,10 @@ export let SidePanel = React.forwardRef(
                 <div
                   className={cx(`${blockClass}__title-container`, {
                     [`${blockClass}__on-detail-step`]: currentStep > 0,
+                    [`${blockClass}__title-container--no-animation`]:
+                      !animateTitle,
+                    [`${blockClass}__title-container-is-animating`]:
+                      !animationComplete,
                   })}>
                   {currentStep > 0 && (
                     <Button
@@ -512,6 +513,8 @@ export let SidePanel = React.forwardRef(
                       [`${blockClass}__subtitle-text-no-animation-no-action-toolbar`]:
                         !animateTitle &&
                         (!actionToolbarButtons || !actionToolbarButtons.length),
+                      [`${blockClass}__subtitle-text-is-animating`]:
+                        !animationComplete,
                     })}>
                     {subtitle}
                   </p>

@@ -68,7 +68,7 @@
   }
 
   .#{$block-class} .#{$block-class}__progress-indicator {
-    padding: $spacing-05;
+    padding: $spacing-06;
   }
 
   .#{$block-class} .#{$block-class}__step--heading {
@@ -86,7 +86,7 @@
   }
 
   .#{$block-class} .#{$block-class}__view-all-toggle {
-    padding: $spacing-05;
+    padding: $spacing-06;
     grid-column: 1 / -1;
     grid-row: -1 / -1;
   }

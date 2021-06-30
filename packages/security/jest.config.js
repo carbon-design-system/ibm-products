@@ -6,8 +6,6 @@
  */
 
 module.exports = {
-  ...require('deepmerge')(require('jest-config-ibm-cloud-cognitive'), {
-    setupFilesAfterEnv: [require.resolve('./setup/setupFilesAfterEnv')],
-  }),
+  ...require('jest-config-ibm-cloud-cognitive'),
   transformIgnorePatterns: ['node_modules/(?!carbon-components-react)'],
 };

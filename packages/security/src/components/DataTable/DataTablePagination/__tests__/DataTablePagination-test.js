@@ -1,9 +1,9 @@
 /**
  * @file Data table and pagination tests.
- * @copyright IBM Security 2019
+ * @copyright IBM Security 2019, 2021
  */
 
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import React from 'react';
 import { DataTablePagination } from '../../';
 
@@ -19,57 +19,57 @@ import {
 } from '../../_mocks_';
 
 describe('DataTablePagination', () => {
-  let dataTablePagination;
-  let dataTablePaginationInstance;
+  const dataTablePaginationRef = React.createRef();
+  const onChangeHandler = jest.fn();
 
-  beforeEach(() => {
-    dataTablePagination = shallow(
-      <DataTablePagination
-        rows={rows}
-        headers={headers}
-        isSelectable={isSelectable}
-        isSortable={isSortable}
-        missingDataCharacter={missingDataCharacter}
-        page={page}
-        pageSize={pageSize}
-        pageSizes={pageSizes}
-      />
-    );
-
-    dataTablePaginationInstance = dataTablePagination.instance();
-  });
+  const DataTablePaginationElement = (
+    <DataTablePagination
+      ref={dataTablePaginationRef}
+      rows={rows}
+      headers={headers}
+      isSelectable={isSelectable}
+      isSortable={isSortable}
+      missingDataCharacter={missingDataCharacter}
+      page={page}
+      pageSize={pageSize}
+      pageSizes={pageSizes}
+      onChange={onChangeHandler}
+    />
+  );
 
   describe('Rendering', () => {
     it('renders correctly', () => {
-      expect(dataTablePagination).toMatchSnapshot();
+      const { container } = render(DataTablePaginationElement);
+      expect(container.firstChild).toMatchSnapshot();
     });
 
     it("renders the HTML of the node's subtree", () => {
-      expect(dataTablePagination.render()).toMatchSnapshot();
+      render(DataTablePaginationElement);
+      expect(dataTablePaginationRef.current.render()).toMatchSnapshot();
     });
   });
 
   describe('Events', () => {
     it('validates the state change for `paginationChange`', () => {
-      const updateState = (state) => state * 2;
+      render(DataTablePaginationElement);
 
-      const pageValue = updateState(page);
-      const pageSizeValue = updateState(pageSize);
+      const desiredPage = 2;
+      const desiredPageSize = 10;
 
-      dataTablePaginationInstance.paginationChange({
-        page: pageValue,
-        pageSize: pageSizeValue,
+      dataTablePaginationRef.current.paginationChange({
+        page: desiredPage,
+        pageSize: desiredPageSize,
       });
 
-      const { page: updatedPage, pageSize: updatedPageSize } =
-        dataTablePagination.state();
-
-      expect(updatedPage).toEqual(pageValue);
-      expect(updatedPageSize).toEqual(pageSizeValue);
+      expect(onChangeHandler).toHaveBeenCalledWith({
+        page: desiredPage,
+        pageSize: desiredPageSize,
+      });
     });
 
     it('validates data range for `paginateData`', () => {
-      expect(dataTablePaginationInstance.paginateRows(rows).length).toEqual(
+      render(DataTablePaginationElement);
+      expect(dataTablePaginationRef.current.paginateRows(rows).length).toEqual(
         pageSize
       );
     });

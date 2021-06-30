@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { sync } = require('glob');
 const { resolve } = require('path');
 const { merge } = require('webpack-merge');
 
@@ -20,14 +19,7 @@ module.exports = {
     '@storybook/addon-viewport',
     '@carbon/storybook-addon-theme/register',
   ],
-
-  stories: sync(
-    resolve(__dirname, '..', '..', '**/*+(-story|.stories).*')
-  ).filter(
-    (story) =>
-      !story.includes('node_modules') && !story.includes('DISPLAY_NAME')
-  ),
-
+  stories: ['../../**/src/**/*+(-story|.stories).*'],
   webpackFinal: async (configuration) =>
     merge(configuration, {
       module: {

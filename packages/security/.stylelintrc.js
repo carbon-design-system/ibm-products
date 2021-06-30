@@ -7,6 +7,7 @@
 
 module.exports = {
   extends: '../../.stylelintrc',
+  ignoreFiles: ['**/css-gridish/**'],
   rules: {
     'carbon/layout-token-use': [true, { severity: 'warning' }],
     'carbon/motion-token-use': [true, { severity: 'warning' }],

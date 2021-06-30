@@ -27,7 +27,7 @@ import cx from 'classnames';
 import ReactResizeDetector from 'react-resize-detector';
 import wrapFocus from '../../global/js/utils/wrapFocus';
 import { TearsheetShell } from '../Tearsheet/TearsheetShell';
-import { pkg } from '../../settings';
+import { carbon, pkg } from '../../settings';
 import { CREATE_TEARSHEET_SECTION, CREATE_TEARSHEET_STEP } from './constants';
 
 const componentName = 'CreateTearsheet';
@@ -558,48 +558,59 @@ export let CreateTearsheet = forwardRef(
       );
     };
 
-    const handleResize = (width) => {
-      const createTearsheetOuter = document.querySelector(`.${blockClass}`);
-      const influencerWidth = 257;
-      const tearsheetPadding = width < 1056 ? 0 : 64;
+    const handleResize = useCallback(() => {
+      // on resize logic
+      const createTearsheetOuterElement = document.querySelector(
+        `.${blockClass} .${carbon.prefix}--modal-container`
+      );
+      const influencerElement = document.querySelector(
+        `.${blockClass} .${pkg.prefix}--tearsheet__influencer`
+      );
       const totalTearsheetWidth =
-        createTearsheetOuter.offsetWidth - tearsheetPadding - influencerWidth;
-      createTearsheetOuter.style.setProperty(
+        createTearsheetOuterElement.offsetWidth - influencerElement.offsetWidth;
+      createTearsheetOuterElement.style.setProperty(
         `--${blockClass}--total-width`,
         `${totalTearsheetWidth}px`
       );
-    };
+    }, []);
 
     return (
       <ReactResizeDetector onResize={handleResize}>
-        <TearsheetShell
-          {...rest}
-          actions={createTearsheetActions}
-          className={cx(blockClass, className)}
-          closeIconDescription={'Close icon'}
-          description={description}
-          hasCloseIcon={false}
-          influencer={
-            <>
-              {renderProgressSteps(children)}
-              {includeViewAllToggle && renderViewAllToggle()}
-            </>
-          }
-          influencerPosition="left"
-          influencerWidth="narrow"
-          label={label}
-          onClose={onClose}
-          open={open}
-          size="wide"
-          title={title}
-          verticalPosition={verticalPosition}
-          ref={ref}>
-          <div
-            className={`${blockClass}__multi-step-panel-content`}
-            onBlur={handleBlur}>
-            {renderChildren(children)}
-          </div>
-        </TearsheetShell>
+        {/*
+          ReactResizeDetector needs the TearsheetShell to be wrapped inside a DOM
+          element to avoid `targetRef` being applied directly as an attribute to
+          TearsheetShell.
+         */}
+        <div>
+          <TearsheetShell
+            {...rest}
+            actions={createTearsheetActions}
+            className={cx(blockClass, className)}
+            closeIconDescription={'Close icon'}
+            description={description}
+            hasCloseIcon={false}
+            influencer={
+              <>
+                {renderProgressSteps(children)}
+                {includeViewAllToggle && renderViewAllToggle()}
+              </>
+            }
+            influencerPosition="left"
+            influencerWidth="narrow"
+            label={label}
+            onClose={onClose}
+            open={open}
+            size="wide"
+            title={title}
+            verticalPosition={verticalPosition}
+            ref={ref}>
+            <div
+              className={`${blockClass}__multi-step-panel-content`}
+              onBlur={handleBlur}>
+              {renderChildren(children)}
+            </div>
+          </TearsheetShell>
+        </div>
       </ReactResizeDetector>
     );
   }

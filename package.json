@@ -6,6 +6,7 @@
   "license": "Apache-2.0",
   "workspaces": {
     "packages": [
+      "config/*",
       "packages/*"
     ],
     "nohoist": []

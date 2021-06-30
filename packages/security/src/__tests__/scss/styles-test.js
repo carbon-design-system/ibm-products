@@ -12,7 +12,7 @@ describe('Styles', () => {
   test('Bundle', () => {
     expect(
       renderSync({
-        file: resolve(root, 'src/index.scss'),
+        file: resolve(__dirname, '../../index.scss'),
         includePaths: [resolve(root, 'node_modules')],
         outputStyle: 'expanded',
       }).css.toString()

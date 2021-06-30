@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.50.4...@carbon/ibm-cloud-cognitive@0.50.5) (2021-06-30)
+
+
+### Bug Fixes
+
+* **NotificationsPanel:** add prop to set defaultToggled value ([#956](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/956)) ([4f92e2a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/4f92e2a537bc210b86c2682bd8899a95e2693e5d))
+
+
+
+
+
 ## [0.50.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.50.3...@carbon/ibm-cloud-cognitive@0.50.4) (2021-06-30)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

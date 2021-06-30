@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-core",
   "private": true,
-  "version": "0.9.10",
+  "version": "0.9.11",
   "license": "Apache-2.0",
   "main": "scripts/build.js",
   "repository": {
@@ -27,12 +27,12 @@
     "@babel/core": "^7.14.6",
     "@carbon/elements": "^10.37.0",
     "@carbon/grid": "10.30.0",
-    "@carbon/ibm-cloud-cognitive": "^0.50.3",
+    "@carbon/ibm-cloud-cognitive": "^0.50.4",
     "@carbon/icons-react": "10.34.0",
     "@carbon/import-once": "10.5.0",
     "@carbon/layout": "10.26.0",
     "@carbon/motion": "10.20.0",
-    "@carbon/storybook-addon-theme": "^0.4.0",
+    "@carbon/storybook-addon-theme": "^0.4.1",
     "@carbon/themes": "10.37.0",
     "@carbon/type": "10.30.0",
     "@storybook/addon-actions": "^6.3.2",

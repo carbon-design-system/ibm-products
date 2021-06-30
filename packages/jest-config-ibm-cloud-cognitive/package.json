@@ -1,7 +1,7 @@
 {
   "name": "jest-config-ibm-cloud-cognitive",
   "private": true,
-  "version": "0.4.0",
+  "version": "0.4.1",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": {
@@ -24,16 +24,16 @@
     "npm-check-updates": "^11.7.1"
   },
   "peerDependencies": {
-    "jest": "^27.0.5"
+    "jest": "^27.0.6"
   },
   "dependencies": {
     "@babel/core": "^7.14.6",
     "@testing-library/jest-dom": "^5.14.1",
     "accessibility-checker": "^3.1.8",
     "axe-core": "^4.2.3",
-    "babel-jest": "^27.0.5",
+    "babel-jest": "^27.0.6",
     "babel-preset-ibm-cloud-cognitive": "^0.4.0",
     "chalk": "^4.1.1",
-    "jest-circus": "^27.0.5"
+    "jest-circus": "^27.0.6"
   }
 }

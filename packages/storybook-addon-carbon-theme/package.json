@@ -41,14 +41,14 @@
     "vue": "*"
   },
   "dependencies": {
-    "@storybook/addons": "6.2.9",
-    "@storybook/api": "6.2.9",
-    "@storybook/client-api": "6.2.9",
-    "@storybook/client-logger": "6.2.9",
-    "@storybook/components": "6.2.9",
-    "@storybook/core-events": "6.2.9",
-    "@storybook/theming": "6.2.9",
-    "core-js": "^3.15.1",
+    "@storybook/addons": "6.3.2",
+    "@storybook/api": "6.3.2",
+    "@storybook/client-api": "6.3.2",
+    "@storybook/client-logger": "6.3.2",
+    "@storybook/components": "6.3.2",
+    "@storybook/core-events": "6.3.2",
+    "@storybook/theming": "6.3.2",
+    "core-js": "^3.15.2",
     "global": "^4.4.0"
   },
   "devDependencies": {

@@ -45,7 +45,7 @@
   "devDependencies": {
     "@babel/cli": "^7.14.5",
     "@babel/core": "^7.14.6",
-    "@storybook/addon-docs": "^6.2.9",
+    "@storybook/addon-docs": "^6.3.2",
     "babel-preset-ibm-cloud-cognitive": "^0.4.0",
     "chalk": "^4.1.1",
     "change-case": "^4.1.2",
@@ -61,13 +61,13 @@
   "dependencies": {
     "@babel/runtime": "^7.14.6",
     "@carbon/telemetry": "^0.0.0-alpha.6",
-    "react-resize-detector": "^6.7.2"
+    "react-resize-detector": "^6.7.3"
   },
   "peerDependencies": {
-    "@carbon/icons-react": "^10.33.0",
+    "@carbon/icons-react": "^10.34.0",
     "@carbon/import-once": "^10.5.0",
-    "carbon-components": "^10.37.0",
-    "carbon-components-react": "^7.37.1",
+    "carbon-components": "^10.38.0",
+    "carbon-components-react": "^7.38.0",
     "carbon-icons": "^7.0.7",
     "react": "^16.8.6 || ^17.0.1",
     "react-dom": "^16.8.6 || ^17.0.1"

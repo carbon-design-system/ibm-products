@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.50.2...@carbon/ibm-cloud-cognitive@0.50.3) (2021-06-30)
+
+
+### Bug Fixes
+
+* **CreateTearsheet:** allow progress steps to receive a secondary label ([#945](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/945)) ([ff0ba7f](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ff0ba7fb442e879541dbb268bc6c5ba3eff46786))
+
+
+
+
+
 ## [0.50.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.50.1...@carbon/ibm-cloud-cognitive@0.50.2) (2021-06-29)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

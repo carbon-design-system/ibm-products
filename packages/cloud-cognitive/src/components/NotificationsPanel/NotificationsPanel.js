@@ -38,7 +38,7 @@ export let NotificationsPanel = React.forwardRef(
       className,
       data,
       daysAgoText,
-      defaultToggled,
+      doNotDisturbDefaultToggled,
       dismissAllLabel,
       dismissSingleNotificationIconDescription,
       doNotDisturbLabel,
@@ -352,7 +352,7 @@ export let NotificationsPanel = React.forwardRef(
             labelA={doNotDisturbLabel}
             labelB={doNotDisturbLabel}
             onToggle={(event) => onDoNotDisturbChange(event)}
-            defaultToggled={defaultToggled}
+            defaultToggled={doNotDisturbDefaultToggled}
             aria-label={doNotDisturbLabel}
           />
         </div>
@@ -465,11 +465,6 @@ NotificationsPanel.propTypes = {
   daysAgoText: PropTypes.func,
 
   /**
-   * Determines if the `Do not disturb` toggle is on or off when the component is rendered
-   */
-  defaultToggled: PropTypes.bool,
-
-  /**
    * Label for Dismiss all button
    */
   dismissAllLabel: PropTypes.string,
@@ -478,6 +473,11 @@ NotificationsPanel.propTypes = {
    * Label for Dismiss single notfication icon button
    */
   dismissSingleNotificationIconDescription: PropTypes.string,
+
+  /**
+   * Determines if the `Do not disturb` toggle is on or off when the component is rendered
+   */
+  doNotDisturbDefaultToggled: PropTypes.bool,
 
   /**
    * Label for Do not disturb toggle

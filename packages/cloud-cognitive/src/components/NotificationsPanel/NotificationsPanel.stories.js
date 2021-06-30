@@ -158,7 +158,7 @@ const EmptyNotifications = (args) => {
         {...args}
         open={open}
         onClickOutside={() => setOpen(false)}
-        defaultToggled
+        doNotDisturbDefaultToggled
       />
     </>
   );

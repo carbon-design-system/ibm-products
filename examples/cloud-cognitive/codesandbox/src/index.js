@@ -4,10 +4,6 @@ import { render } from 'react-dom';
 
 import '@carbon/ibm-cloud-cognitive/css/index.min.css';
 
-const App = () => (
-  <>
-    <ExampleComponent />
-  </>
-);
+const App = () => <ExampleComponent />;
 
 render(<App />, document.getElementById('root'));

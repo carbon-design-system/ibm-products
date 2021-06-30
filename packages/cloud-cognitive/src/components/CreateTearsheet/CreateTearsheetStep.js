@@ -52,6 +52,11 @@ CreateTearsheetStep.propTypes = {
   onNext: PropTypes.func,
 
   /**
+   * Sets the optional secondary label on the progress step component
+   */
+  secondaryLabel: PropTypes.string,
+
+  /**
    * Sets the title text for a tearsheet step
    */
   title: PropTypes.node.isRequired,

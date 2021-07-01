@@ -27,26 +27,26 @@ export default {
     backgroundColor: {
       control: {
         type: 'select',
-        options: ['light-cyan', 'dark-cyan'],
       },
+      options: ['light-cyan', 'dark-cyan'],
     },
     theme: {
       control: {
         type: 'select',
-        options: ['light', 'dark'],
       },
+      options: ['light', 'dark'],
     },
     kind: {
       control: {
         type: 'radio',
-        options: ['user', 'group'],
       },
+      options: ['user', 'group'],
     },
     size: {
       control: {
         type: 'radio',
-        options: ['xlg', 'lg', 'md'],
       },
+      options: ['xlg', 'lg', 'md'],
     },
   },
   parameters: {

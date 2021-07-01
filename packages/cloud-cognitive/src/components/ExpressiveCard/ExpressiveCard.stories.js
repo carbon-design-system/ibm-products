@@ -29,14 +29,14 @@ export default {
     columnSize: {
       control: {
         type: 'select',
-        options: [4, 8, 12, 16],
       },
+      options: [4, 8, 12, 16],
     },
     mediaRatio: {
       control: {
         type: 'select',
-        options: ['16x9', '9x16', '2x1', '1x2', '4x3', '3x4', '1x1'],
       },
+      options: ['16x9', '9x16', '2x1', '1x2', '4x3', '3x4', '1x1'],
     },
   },
   decorators: [

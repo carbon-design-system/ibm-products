@@ -14,6 +14,7 @@ import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 import { ExpressiveCard } from '.';
 import mdx from './ExpressiveCard.mdx';
+import { action } from '@storybook/addon-actions';
 const storybookPrefix = getStorybookPrefix(pkg, ExpressiveCard.displayName);
 
 export default {
@@ -120,8 +121,8 @@ WithActionIcon.args = {
     {
       id: '1',
       icon: ArrowRight24,
-      onClick: () => {},
-      onKeyDown: () => {},
+      onClick: () => action('on click'),
+      onKeyDown: () => action('on keydown'),
       iconDescription: 'Next',
     },
   ],
@@ -145,7 +146,7 @@ WithSecondaryAction.args = {
 export const Clickable = Template.bind({});
 Clickable.args = {
   ...defaultProps,
-  onClick: () => {},
-  onKeyDown: () => {},
+  onClick: () => action('on click'),
+  onKeyDown: () => action('on keydown'),
   primaryButtonText: '',
 };

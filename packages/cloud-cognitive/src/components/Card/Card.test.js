@@ -12,13 +12,14 @@ import { Card } from '.';
 import { pkg } from '../../settings';
 
 const { name } = Card;
+const blockClass = `${pkg.prefix}--card`;
 
 describe(name, () => {
   it('renders', () => {
     render(<Card />);
   });
 
-  it('expressive with primary button', () => {
+  it('renders expressive with primary button', () => {
     const onPrimaryButtonClick = jest.fn();
     const props = {
       primaryButtonText: 'Primary',
@@ -29,7 +30,7 @@ describe(name, () => {
     expect(onPrimaryButtonClick).toHaveBeenCalled();
   });
 
-  it('expressive with both buttons', () => {
+  it('renders expressive with both buttons', () => {
     const onPrimaryButtonClick = jest.fn();
     const onSecondaryButtonClick = jest.fn();
     const props = {
@@ -45,7 +46,7 @@ describe(name, () => {
     expect(onSecondaryButtonClick).toHaveBeenCalled();
   });
 
-  it('expressive with action icons', () => {
+  it('renders expressive with action icons', () => {
     const onClick = jest.fn();
     const actionIcons = [
       {
@@ -63,7 +64,7 @@ describe(name, () => {
     expect(onClick).toHaveBeenCalled();
   });
 
-  it('expressive with onClick', () => {
+  it('renders expressive with onClick', () => {
     const onClick = jest.fn();
     const props = {
       onClick,
@@ -73,7 +74,7 @@ describe(name, () => {
     expect(onClick).toHaveBeenCalled();
   });
 
-  it('expressive with media', () => {
+  it('renders expressive with media', () => {
     const mediaContent = 'media element';
     const pictogramContent = 'pictogram element';
     const props = {
@@ -85,7 +86,7 @@ describe(name, () => {
     expect(getByText(pictogramContent)).toBeVisible();
   });
 
-  it('productive', () => {
+  it('renders productive', () => {
     const iconClick = jest.fn();
     const buttonClick = jest.fn();
     const props = {
@@ -102,22 +103,16 @@ describe(name, () => {
       primaryButtonText: 'Ghost button',
       onPrimaryButtonClick: buttonClick,
     };
-    const { container, getByText, rerender } = render(<Card {...props} />);
+    const { container, getByText } = render(<Card {...props} />);
     expect(getByText(props.label)).toBeVisible();
-    expect(
-      container.querySelector(`.${pkg.prefix}-card-actions--top`)
-    ).toBeNull();
+    expect(container.querySelector(`.${blockClass}__actions-top`)).toBeNull();
     fireEvent.click(getByText('icon'));
     expect(iconClick).toHaveBeenCalled();
     fireEvent.click(getByText(props.primaryButtonText));
     expect(buttonClick).toHaveBeenCalled();
-    rerender(<Card {...props} actionIconsPosition="top" />);
-    expect(
-      container.querySelector(`.${pkg.prefix}-card-actions--top`)
-    ).toBeVisible();
   });
 
-  it('productive with overflow', () => {
+  it('renders productive with overflow', () => {
     const onClick = jest.fn();
     const props = {
       overflowActions: [
@@ -135,7 +130,7 @@ describe(name, () => {
     rerender(<Card {...props} actionIconsPosition="top" />);
   });
 
-  it('productive with click zones', () => {
+  it('renders productive with click zones', () => {
     const onClick = jest.fn();
     const props = {
       onClick,
@@ -150,13 +145,13 @@ describe(name, () => {
     const { rerender, getByText, container } = render(<Card {...props} />);
     expect(getByText(props.title)).toBeVisible();
     expect(getByText(props.caption)).toBeVisible();
-    fireEvent.click(container.querySelector(`.${pkg.prefix}-card--clickable`));
+    fireEvent.click(container.querySelector(`.${blockClass}__clickable`));
     expect(onClick).toHaveBeenCalled();
     rerender(<Card {...props} clickZone="two" />);
-    fireEvent.click(container.querySelector(`.${pkg.prefix}-card--clickable`));
+    fireEvent.click(container.querySelector(`.${blockClass}__clickable`));
     expect(onClick).toHaveBeenCalled();
     rerender(<Card {...props} clickZone="three" />);
-    fireEvent.click(container.querySelector(`.${pkg.prefix}-card--clickable`));
+    fireEvent.click(container.querySelector(`.${blockClass}__clickable`));
     expect(onClick).toHaveBeenCalled();
   });
 });

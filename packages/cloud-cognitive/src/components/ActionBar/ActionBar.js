@@ -15,11 +15,7 @@ import { pkg } from '../../settings';
 import ReactResizeDetector from 'react-resize-detector';
 
 // Carbon and package components we use.
-import {
-  Button,
-  OverflowMenu,
-  OverflowMenuItem,
-} from 'carbon-components-react';
+import { Button } from 'carbon-components-react';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import {
   deprecateProp,
@@ -27,6 +23,7 @@ import {
   prepareProps,
 } from '../../global/js/utils/props-helper';
 import { ActionBarItem } from './ActionBarItem';
+import { ActionBarOverflowItems } from './ActionBarOverflowItems';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--action-bar`;
@@ -58,48 +55,6 @@ export let ActionBar = React.forwardRef(
     const [itemArray, setItemArray] = useState([]);
     const refDisplayedItems = useRef(null);
 
-    const ActionBarOverflowItems = ({ overflowItems }) => {
-      return (
-        <OverflowMenu
-          ariaLabel={overflowAriaLabel}
-          className={`${blockClass}__overflow-menu`}
-          direction="bottom"
-          flipped
-          menuOptionsClass={`${blockClass}-options`}>
-          {overflowItems.map((item, index) => {
-            // This uses a copy of a menu item option
-            // NOTE: Cannot use a real Tooltip icon below as it uses a <button /> the
-            // div equivalent below is based on Carbon 10.25.0
-            return (
-              <OverflowMenuItem
-                className={`${blockClass}__overflow-menu-item`}
-                key={`${blockClass}-overflow-${internalId.current}-${index}`}
-                itemText={
-                  <div
-                    className={`${blockClass}__overflow-menu-item-content`}
-                    aria-describedby={`${internalId}--overflow-menu-item-label`}>
-                    <span
-                      className={`${blockClass}__overflow-menu-item-label`}
-                      id={`${internalId}--overflow-menu-item-label`}>
-                      {item.props.iconDescription}
-                    </span>
-                    <item.props.renderIcon />
-                  </div>
-                }
-              />
-            );
-          })}
-        </OverflowMenu>
-      );
-    };
-
-    ActionBarOverflowItems.propTypes = {
-      /**
-       * overflowItems: items to bre shown in the ActionBar overflow menu
-       */
-      overflowItems: PropTypes.arrayOf(PropTypes.element),
-    };
-
     // create child array from children which may be a fragment
     useEffect(() => {
       if (actions) {
@@ -111,8 +66,8 @@ export let ActionBar = React.forwardRef(
 
     // creates displayed items based on displayCount and alignment
     useEffect(() => {
-      const newDisplayedItems = itemArray.map((item, index) => (
-        <ActionBarItem {...item} key={`${index}`} />
+      const newDisplayedItems = itemArray.map(({ key, ...rest }) => (
+        <ActionBarItem {...rest} key={key} />
       ));
       // extract any there are not room for to newOverflowItems
       const newOverflowItems = newDisplayedItems.splice(displayCount);
@@ -120,13 +75,14 @@ export let ActionBar = React.forwardRef(
       if (newOverflowItems.length) {
         newDisplayedItems.push(
           <ActionBarOverflowItems
+            overflowAriaLabel={overflowAriaLabel}
             overflowItems={newOverflowItems}
             key={`overflow-menu-${internalId.current}`}></ActionBarOverflowItems>
         );
       }
 
       setDisplayedItems(newDisplayedItems);
-    }, [itemArray, displayCount]);
+    }, [itemArray, displayCount, overflowAriaLabel]);
 
     // determine display count based on space available and width of pageActions
     const checkFullyVisibleItems = () => {
@@ -209,6 +165,7 @@ ActionBar.propTypes = {
           'tooltipAlignment',
         ]),
         iconDescription: PropTypes.string.isRequired,
+        // key: Button.propTypes.string.isRequired,
         onClick: Button.propTypes.onClick,
         renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
           .isRequired,

@@ -1,5 +1,12 @@
 # @carbon/ibm-cloud-cognitive
 
+> ibm-cloud-cognitive is an open-source implementation of the closed source
+> ibm-cloud-cognitive pattern asset library (PAL). These PAL designs build on
+> the foundation of the IBMs open source Carbon Design System and React
+> implementation to offer components and patterns beyond the typical component
+> library.
+
+[![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors-)
 [![Licensed under the Apache License, Version 2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/LICENSE)
 [![Build status](https://github.com/carbon-design-system/ibm-cloud-cognitive/workflows/ci/badge.svg)](https://github.com/carbon-design-system/ibm-cloud-cognitive/actions?query=workflow%3Aci)
 [![Netlify status](https://img.shields.io/netlify/19d81e71-7987-4124-8a3a-36e051486e6b)](https://app.netlify.com/sites/ibm-cloud-cognitive/deploys)
@@ -141,6 +148,29 @@ If you're interested, definitely check out our
 and
 [Carbon's Developer Handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md)!
 👀
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/lee-chase"><img src="https://avatars0.githubusercontent.com/u/15086604?v=4" width="100px;" alt=""/><br /><sub><b>Lee Chase</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=lee-chase" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/dcwarwick"><img src="https://avatars.githubusercontent.com/u/6385315?v=4" width="100px;" alt=""/><br /><sub><b>Dave Clark</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=dcwarwick" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/sydrosa"><img src="https://avatars.githubusercontent.com/u/47571589?v=4" width="100px;" alt=""/><br /><sub><b>Syd Rosa</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=sydrosa" title="Code">💻</a></td>
+    <td align="center"><a href="http://davidmenendez.net"><img src="https://avatars1.githubusercontent.com/u/6370760?v=4" width="100px;" alt=""/><br /><sub><b>David Menendez</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=davidmenendez" title="Code">💻</a></td>
+    <td align="center"><a href="http://www.matthewdgallo.com"><img src="https://avatars0.githubusercontent.com/u/10215203?v=4" width="100px;" alt=""/><br /><sub><b>Matthew Gallo</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=matthewgallo" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="http://simonfinney.dev"><img src="https://avatars2.githubusercontent.com/u/3846874?v=4" width="100px;" alt=""/><br /><sub><b>Simon Finney</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=SimonFinney" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/moores2"><img src="https://avatars2.githubusercontent.com/u/6977424?v=4" width="100px;" alt=""/><br /><sub><b>Simon Moore</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=moores2" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/polinaouk"><img src="https://avatars2.githubusercontent.com/u/24444328?v=4" width="100px;" alt=""/><br /><sub><b>Polina Olemskaia</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=polinaouk" title="Code">💻</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## Telemetry
 

@@ -26,6 +26,10 @@
   $block-class: #{$pkg-prefix}--tearsheet-create;
   $section-block-class: #{$pkg-prefix}--tearsheet-create__section;
 
+  .#{$block-class} {
+    --#{$block-class}--total-width: 0;
+  }
+
   .#{$block-class} .#{$block-class}__step--hidden-step,
   .#{$block-class} .#{$block-class}__step--hidden-section {
     display: none;
@@ -52,7 +56,8 @@
   }
 
   .#{$block-class} .#{$block-class}__multi-step-panel-content {
-    padding: $spacing-06 $spacing-07;
+    padding: $spacing-06;
+    overflow-x: hidden;
   }
 
   .#{$block-class} .#{$pkg-prefix}--tearsheet__influencer {
@@ -68,7 +73,7 @@
   }
 
   .#{$block-class} .#{$block-class}__progress-indicator {
-    padding: $spacing-05;
+    padding: $spacing-06;
   }
 
   .#{$block-class} .#{$block-class}__step--heading {
@@ -86,7 +91,7 @@
   }
 
   .#{$block-class} .#{$block-class}__view-all-toggle {
-    padding: $spacing-05;
+    padding: $spacing-06;
     grid-column: 1 / -1;
     grid-row: -1 / -1;
   }
@@ -94,6 +99,16 @@
   .#{$block-class} .#{$carbon-prefix}--side-nav--ux {
     position: initial;
     background-color: transparent;
+  }
+
+  .#{$block-class} .#{$block-class}__section--divider {
+    position: relative;
+    display: block;
+    width: var(--#{$block-class}--total-width);
+    height: 1px;
+    margin: $spacing-06 calc(-1 * #{$spacing-08}) $spacing-07
+      calc(-1 * #{$spacing-06});
+    background-color: $ui-03;
   }
 }
 

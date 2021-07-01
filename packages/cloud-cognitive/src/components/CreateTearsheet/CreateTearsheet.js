@@ -24,9 +24,10 @@ import {
   SideNavLink,
 } from 'carbon-components-react/lib/components/UIShell';
 import cx from 'classnames';
+import ReactResizeDetector from 'react-resize-detector';
 import wrapFocus from '../../global/js/utils/wrapFocus';
 import { TearsheetShell } from '../Tearsheet/TearsheetShell';
-import { pkg } from '../../settings';
+import { carbon, pkg } from '../../settings';
 import { CREATE_TEARSHEET_SECTION, CREATE_TEARSHEET_STEP } from './constants';
 
 const componentName = 'CreateTearsheet';
@@ -89,6 +90,62 @@ export let CreateTearsheet = forwardRef(
         );
       }
     }, [getTearsheetSteps]);
+
+    // Log a warning to the console in the event there are no CreateTearsheetSection components
+    // inside of the CreateTearsheetSteps when the viewAll toggle is provided and turned on.
+    useEffect(() => {
+      if (includeViewAllToggle && shouldViewAll) {
+        let childrenArray = Array.isArray(children) ? children : [children];
+        const tearsheetStepComponents = childrenArray.filter((child) =>
+          isTearsheetStep(child)
+        );
+        let tearsheetSectionComponents = [];
+        tearsheetStepComponents.forEach((child) => {
+          // we have received an array of children, lets check to see that each child is
+          // a CreateTearsheetSection component before adding it to tearsheetSectionComponents
+          if (shouldViewAll && child.props.children.length) {
+            // only a string was provided as children of CreateTearsheetStep, this is not permitted when using view all toggle
+            if (typeof child.props.children === 'string') {
+              console.warn(
+                `${componentName}: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' prop.`
+              );
+            } else {
+              child.props.children.forEach((stepChild) => {
+                if (isTearsheetSection(stepChild)) {
+                  tearsheetSectionComponents.push(stepChild);
+                }
+              });
+              // if there are fewer CreateTearsheetSection components than CreateTearsheetStep components
+              // it means that each CreateTearsheetStep does not have at least one CreateTearsheetSection
+              // this is not permitted when using view all toggle
+              if (
+                tearsheetSectionComponents.length <
+                tearsheetStepComponents.length
+              ) {
+                console.warn(
+                  `${componentName}: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' prop.`
+                );
+              }
+            }
+          }
+          // we have received a single child element, lets check to see that it is
+          // a CreateTearsheetSection component, if it is not we should add a console
+          // warning, as each CreateTearsheetStep required at least one CreateTearsheetSection,
+          // when using the view all toggle
+          if (
+            shouldViewAll &&
+            typeof child.props.children !== 'undefined' &&
+            !child.props.children.length
+          ) {
+            if (!isTearsheetSection(child.props.children)) {
+              console.warn(
+                `${componentName}: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' prop.`
+              );
+            }
+          }
+        });
+      }
+    }, [includeViewAllToggle, shouldViewAll, children]);
 
     // useEffect to handle multi step logic
     useEffect(() => {
@@ -166,7 +223,7 @@ export let CreateTearsheet = forwardRef(
         buttons.push({
           label: cancelButtonText,
           onClick: onUnmount,
-          kind: 'ghost',
+          kind: shouldViewAll ? 'secondary' : 'ghost',
         });
         buttons.push({
           label: shouldViewAll
@@ -242,29 +299,33 @@ export let CreateTearsheet = forwardRef(
       let childrenArray = Array.isArray(childrenElements)
         ? childrenElements
         : [childrenElements];
-      const stepChildren = childrenArray.filter((child) =>
+      const tearsheetStepComponents = childrenArray.filter((child) =>
         isTearsheetStep(child)
       );
-      let sectionChildElements = [];
-      stepChildren.forEach((child) => {
+      let tearsheetSectionComponents = [];
+      tearsheetStepComponents.forEach((child) => {
         // we have received an array of children, lets check to see that each child is
-        // a CreateTearsheetSection component before adding it to sectionChildElements
-        if (shouldViewAll && child.props.children.length) {
+        // a CreateTearsheetSection component before adding it to tearsheetSectionComponents
+        if (
+          shouldViewAll &&
+          child.props.children.length &&
+          typeof child.props.children !== 'string'
+        ) {
           child.props.children.forEach((stepChild) => {
             if (isTearsheetSection(stepChild)) {
-              sectionChildElements.push(stepChild);
+              tearsheetSectionComponents.push(stepChild);
             }
           });
         }
         // we have received a single child element, lets check to see that it is
-        // a CreateTearsheetSection component before adding it to sectionChildElements
+        // a CreateTearsheetSection component before adding it to tearsheetSectionComponents
         if (
           shouldViewAll &&
           typeof child.props.children !== 'undefined' &&
           !child.props.children.length
         ) {
           if (isTearsheetSection(child.props.children)) {
-            sectionChildElements.push(child.props.children);
+            tearsheetSectionComponents.push(child.props.children);
           }
         }
       });
@@ -273,34 +334,36 @@ export let CreateTearsheet = forwardRef(
           <div className={`${blockClass}__left-nav`}>
             <SideNav expanded isFixedNav>
               <SideNavItems>
-                {sectionChildElements?.length &&
-                  sectionChildElements.map((sectionChild, sectionIndex) => (
-                    <SideNavLink
-                      href="javascript:void(0)"
-                      key={sectionIndex}
-                      isActive={activeSectionIndex === sectionIndex}
-                      onClick={() => {
-                        setActiveSectionIndex(sectionIndex);
-                        if (sectionChild.props.id) {
-                          const scrollTarget = document.querySelector(
-                            `#${sectionChild.props.id}`
-                          );
-                          const scrollContainer = document.querySelector(
-                            `.${pkg.prefix}--tearsheet__main`
-                          );
-                          scrollContainer.scrollTo({
-                            top: scrollTarget.offsetTop,
-                            behavior: 'smooth',
-                          });
-                        } else {
-                          console.warn(
-                            `${componentName}: CreateTearsheetSection is missing a required prop of 'id'`
-                          );
-                        }
-                      }}>
-                      {sectionChild.props.title}
-                    </SideNavLink>
-                  ))}
+                {tearsheetSectionComponents?.length &&
+                  tearsheetSectionComponents.map(
+                    (tearsheetSection, sectionIndex) => (
+                      <SideNavLink
+                        href="javascript:void(0)"
+                        key={sectionIndex}
+                        isActive={activeSectionIndex === sectionIndex}
+                        onClick={() => {
+                          setActiveSectionIndex(sectionIndex);
+                          if (tearsheetSection.props.id) {
+                            const scrollTarget = document.querySelector(
+                              `#${tearsheetSection.props.id}`
+                            );
+                            const scrollContainer = document.querySelector(
+                              `.${pkg.prefix}--tearsheet__content`
+                            );
+                            scrollContainer.scrollTo({
+                              top: scrollTarget.offsetTop,
+                              behavior: 'smooth',
+                            });
+                          } else {
+                            console.warn(
+                              `${componentName}: CreateTearsheetSection is missing a required prop of 'id'`
+                            );
+                          }
+                        }}>
+                        {tearsheetSection.props.title}
+                      </SideNavLink>
+                    )
+                  )}
               </SideNavItems>
             </SideNav>
           </div>
@@ -313,8 +376,12 @@ export let CreateTearsheet = forwardRef(
             spaceEqually
             vertical
             className={`${blockClass}__progress-indicator`}>
-            {stepChildren.map((child, stepIndex) => (
-              <ProgressStep label={child.props.title} key={stepIndex} />
+            {tearsheetStepComponents.map((child, stepIndex) => (
+              <ProgressStep
+                label={child.props.title}
+                key={stepIndex}
+                secondaryLabel={child.props.secondaryLabel}
+              />
             ))}
           </ProgressIndicator>
         </div>
@@ -351,9 +418,11 @@ export let CreateTearsheet = forwardRef(
                 key: `key_${stepIndex}`,
               },
               <>
-                <p className={`${blockClass}__step--heading`}>
-                  {renderStepTitle(stepIndex)}
-                </p>
+                {!shouldViewAll && (
+                  <h4 className={`${blockClass}__step--heading`}>
+                    {renderStepTitle(stepIndex)}
+                  </h4>
+                )}
                 {renderStepChildren(child.props.children)}
               </>
             );
@@ -372,16 +441,30 @@ export let CreateTearsheet = forwardRef(
             if (!isTearsheetSection(child)) {
               return child;
             }
-            return React.cloneElement(child, {
-              className: cx(child.props.className, {
-                [`${blockClass}__step--hidden-section`]:
-                  child.props.viewAllOnly && !shouldViewAll,
-                [`${blockClass}__step--visible-section`]:
-                  !child.props.viewAllOnly ||
-                  (child.props.viewAllOnly && shouldViewAll),
-              }),
-              key: `key_${index}`,
-            });
+            return React.cloneElement(
+              child,
+              {
+                className: cx(child.props.className, {
+                  [`${blockClass}__step--hidden-section`]:
+                    child.props.viewAllOnly && !shouldViewAll,
+                  [`${blockClass}__step--visible-section`]:
+                    !child.props.viewAllOnly ||
+                    (child.props.viewAllOnly && shouldViewAll),
+                }),
+                key: `key_${index}`,
+              },
+              <>
+                {shouldViewAll && (
+                  <h4 className={`${blockClass}__step--heading`}>
+                    {child.props.title}
+                  </h4>
+                )}
+                {child}
+                {shouldViewAll && (
+                  <span className={`${blockClass}__section--divider`} />
+                )}
+              </>
+            );
           })}
         </>
       );
@@ -479,35 +562,60 @@ export let CreateTearsheet = forwardRef(
       );
     };
 
+    const handleResize = useCallback(() => {
+      // on resize logic
+      const createTearsheetOuterElement = document.querySelector(
+        `.${blockClass} .${carbon.prefix}--modal-container`
+      );
+      const influencerElement = document.querySelector(
+        `.${blockClass} .${pkg.prefix}--tearsheet__influencer`
+      );
+      const totalTearsheetWidth =
+        createTearsheetOuterElement.offsetWidth - influencerElement.offsetWidth;
+      createTearsheetOuterElement.style.setProperty(
+        `--${blockClass}--total-width`,
+        `${totalTearsheetWidth}px`
+      );
+    }, []);
+
     return (
-      <TearsheetShell
-        {...rest}
-        actions={createTearsheetActions}
-        className={cx(blockClass, className)}
-        closeIconDescription={'Close icon'}
-        description={description}
-        hasCloseIcon={false}
-        influencer={
-          <>
-            {renderProgressSteps(children)}
-            {includeViewAllToggle && renderViewAllToggle()}
-          </>
-        }
-        influencerPosition="left"
-        influencerWidth="narrow"
-        label={label}
-        onClose={onClose}
-        open={open}
-        size="wide"
-        title={title}
-        verticalPosition={verticalPosition}
-        ref={ref}>
-        <div
-          className={`${blockClass}__multi-step-panel-content`}
-          onBlur={handleBlur}>
-          {renderChildren(children)}
+      <ReactResizeDetector onResize={handleResize}>
+        {/*
+          ReactResizeDetector needs the TearsheetShell to be wrapped inside a DOM
+          element to avoid `targetRef` being applied directly as an attribute to
+          TearsheetShell.
+         */}
+        <div>
+          <TearsheetShell
+            {...rest}
+            actions={createTearsheetActions}
+            className={cx(blockClass, className)}
+            closeIconDescription={'Close icon'}
+            description={description}
+            hasCloseIcon={false}
+            influencer={
+              <>
+                {renderProgressSteps(children)}
+                {includeViewAllToggle && renderViewAllToggle()}
+              </>
+            }
+            influencerPosition="left"
+            influencerWidth="narrow"
+            label={label}
+            onClose={onClose}
+            open={open}
+            size="wide"
+            title={title}
+            verticalPosition={verticalPosition}
+            ref={ref}>
+            <div
+              className={`${blockClass}__multi-step-panel-content`}
+              onBlur={handleBlur}>
+              {renderChildren(children)}
+            </div>
+          </TearsheetShell>
         </div>
-      </TearsheetShell>
+      </ReactResizeDetector>
     );
   }
 );

@@ -1,14 +1,12 @@
 # Carbon for Cloud & Cognitive
 
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+> ibm-cloud-cognitive is an open-source implementation of the closed source
+> ibm-cloud-cognitive pattern asset library (PAL). These PAL designs build on
+> the foundation of the IBMs open source Carbon Design System and React
+> implementation to offer components and patterns beyond the typical component
+> library.
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors-)
-
-> Carbon is an open-source design system built by IBM. With the IBM Design
-> Language as its foundation, the system consists of working code, design tools
-> and resources, human interface guidelines, and a vibrant community of
-> contributors.
-
 [![Licensed under the Apache License, Version 2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/LICENSE)
 [![Build status](https://github.com/carbon-design-system/ibm-cloud-cognitive/workflows/ci/badge.svg)](https://github.com/carbon-design-system/ibm-cloud-cognitive/actions?query=workflow%3Aci)
 [![Netlify status](https://img.shields.io/netlify/19d81e71-7987-4124-8a3a-36e051486e6b)](https://app.netlify.com/sites/ibm-cloud-cognitive/deploys)

@@ -26,7 +26,6 @@ export default {
   },
   argTypes: {
     columnSize: {
-      defaultValue: 4,
       control: {
         type: 'select',
         options: [4, 8, 12, 16],
@@ -44,6 +43,7 @@ export default {
 
 const defaultProps = {
   title: 'Title',
+  columnSize: 4,
   children: (
     <>
       <div className="graph" />

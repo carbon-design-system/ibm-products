@@ -1,4 +1,4 @@
-import { Story, Props, Source, Preview } from '@storybook/addon-docs';
+import { Story, Props, Source, Canvas } from '@storybook/addon-docs';
 import { pkg } from '../../settings';
 import { getStorybookSlug } from '../../../config';
 import { LoadingBar } from '.';
@@ -29,15 +29,15 @@ specified percentage to indicate current progress to the user.
 
 ### Indeterminate percentage
 
-<Preview>
+<Canvas>
   <Story id={getStorybookSlug(pkg, LoadingBar.displayName, 'indeterminate')} />
-</Preview>
+</Canvas>
 
 ### Determinate percentage
 
-<Preview>
+<Canvas>
   <Story id={getStorybookSlug(pkg, LoadingBar.displayName, 'determinate')} />
-</Preview>
+</Canvas>
 
 ## Component API
 

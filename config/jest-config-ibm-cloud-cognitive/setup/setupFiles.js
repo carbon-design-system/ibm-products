@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { pkg } from '../../cloud-cognitive/src/settings';
+import { pkg } from '../../../packages/cloud-cognitive/src/settings';
 
 pkg._silenceWarnings(true);
 pkg.setAllComponents(true);

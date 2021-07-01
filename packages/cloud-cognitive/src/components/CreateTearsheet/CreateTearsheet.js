@@ -24,9 +24,10 @@ import {
   SideNavLink,
 } from 'carbon-components-react/lib/components/UIShell';
 import cx from 'classnames';
+import ReactResizeDetector from 'react-resize-detector';
 import wrapFocus from '../../global/js/utils/wrapFocus';
 import { TearsheetShell } from '../Tearsheet/TearsheetShell';
-import { pkg } from '../../settings';
+import { carbon, pkg } from '../../settings';
 import { CREATE_TEARSHEET_SECTION, CREATE_TEARSHEET_STEP } from './constants';
 
 const componentName = 'CreateTearsheet';
@@ -376,7 +377,11 @@ export let CreateTearsheet = forwardRef(
             vertical
             className={`${blockClass}__progress-indicator`}>
             {tearsheetStepComponents.map((child, stepIndex) => (
-              <ProgressStep label={child.props.title} key={stepIndex} />
+              <ProgressStep
+                label={child.props.title}
+                key={stepIndex}
+                secondaryLabel={child.props.secondaryLabel}
+              />
             ))}
           </ProgressIndicator>
         </div>
@@ -413,9 +418,11 @@ export let CreateTearsheet = forwardRef(
                 key: `key_${stepIndex}`,
               },
               <>
-                <p className={`${blockClass}__step--heading`}>
-                  {renderStepTitle(stepIndex)}
-                </p>
+                {!shouldViewAll && (
+                  <h4 className={`${blockClass}__step--heading`}>
+                    {renderStepTitle(stepIndex)}
+                  </h4>
+                )}
                 {renderStepChildren(child.props.children)}
               </>
             );
@@ -434,16 +441,30 @@ export let CreateTearsheet = forwardRef(
             if (!isTearsheetSection(child)) {
               return child;
             }
-            return React.cloneElement(child, {
-              className: cx(child.props.className, {
-                [`${blockClass}__step--hidden-section`]:
-                  child.props.viewAllOnly && !shouldViewAll,
-                [`${blockClass}__step--visible-section`]:
-                  !child.props.viewAllOnly ||
-                  (child.props.viewAllOnly && shouldViewAll),
-              }),
-              key: `key_${index}`,
-            });
+            return React.cloneElement(
+              child,
+              {
+                className: cx(child.props.className, {
+                  [`${blockClass}__step--hidden-section`]:
+                    child.props.viewAllOnly && !shouldViewAll,
+                  [`${blockClass}__step--visible-section`]:
+                    !child.props.viewAllOnly ||
+                    (child.props.viewAllOnly && shouldViewAll),
+                }),
+                key: `key_${index}`,
+              },
+              <>
+                {shouldViewAll && (
+                  <h4 className={`${blockClass}__step--heading`}>
+                    {child.props.title}
+                  </h4>
+                )}
+                {child}
+                {shouldViewAll && (
+                  <span className={`${blockClass}__section--divider`} />
+                )}
+              </>
+            );
           })}
         </>
       );
@@ -541,35 +562,60 @@ export let CreateTearsheet = forwardRef(
       );
     };
 
+    const handleResize = useCallback(() => {
+      // on resize logic
+      const createTearsheetOuterElement = document.querySelector(
+        `.${blockClass} .${carbon.prefix}--modal-container`
+      );
+      const influencerElement = document.querySelector(
+        `.${blockClass} .${pkg.prefix}--tearsheet__influencer`
+      );
+      const totalTearsheetWidth =
+        createTearsheetOuterElement.offsetWidth - influencerElement.offsetWidth;
+      createTearsheetOuterElement.style.setProperty(
+        `--${blockClass}--total-width`,
+        `${totalTearsheetWidth}px`
+      );
+    }, []);
+
     return (
-      <TearsheetShell
-        {...rest}
-        actions={createTearsheetActions}
-        className={cx(blockClass, className)}
-        closeIconDescription={'Close icon'}
-        description={description}
-        hasCloseIcon={false}
-        influencer={
-          <>
-            {renderProgressSteps(children)}
-            {includeViewAllToggle && renderViewAllToggle()}
-          </>
-        }
-        influencerPosition="left"
-        influencerWidth="narrow"
-        label={label}
-        onClose={onClose}
-        open={open}
-        size="wide"
-        title={title}
-        verticalPosition={verticalPosition}
-        ref={ref}>
-        <div
-          className={`${blockClass}__multi-step-panel-content`}
-          onBlur={handleBlur}>
-          {renderChildren(children)}
+      <ReactResizeDetector onResize={handleResize}>
+        {/*
+          ReactResizeDetector needs the TearsheetShell to be wrapped inside a DOM
+          element to avoid `targetRef` being applied directly as an attribute to
+          TearsheetShell.
+         */}
+        <div>
+          <TearsheetShell
+            {...rest}
+            actions={createTearsheetActions}
+            className={cx(blockClass, className)}
+            closeIconDescription={'Close icon'}
+            description={description}
+            hasCloseIcon={false}
+            influencer={
+              <>
+                {renderProgressSteps(children)}
+                {includeViewAllToggle && renderViewAllToggle()}
+              </>
+            }
+            influencerPosition="left"
+            influencerWidth="narrow"
+            label={label}
+            onClose={onClose}
+            open={open}
+            size="wide"
+            title={title}
+            verticalPosition={verticalPosition}
+            ref={ref}>
+            <div
+              className={`${blockClass}__multi-step-panel-content`}
+              onBlur={handleBlur}>
+              {renderChildren(children)}
+            </div>
+          </TearsheetShell>
         </div>
-      </TearsheetShell>
+      </ReactResizeDetector>
     );
   }
 );

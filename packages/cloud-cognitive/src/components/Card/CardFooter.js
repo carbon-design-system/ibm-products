@@ -26,7 +26,7 @@ export let CardFooter = ({
 }) => {
   const blockClass = `${pkg.prefix}--card`;
   const footerClass = `${pkg.prefix}--card__footer`;
-  const footerClasses = cx(`${footerClass}`, {
+  const footerClasses = cx(footerClass, {
     [`${footerClass}-no-button`]: !hasButton,
   });
 
@@ -54,7 +54,7 @@ export let CardFooter = ({
 };
 
 CardFooter.propTypes = {
-  actions: PropTypes.array,
+  actions: PropTypes.oneOf(PropTypes.array, PropTypes.node),
   hasActions: PropTypes.bool,
   hasButton: PropTypes.bool,
   onPrimaryButtonClick: PropTypes.func,

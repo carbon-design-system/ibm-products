@@ -22,7 +22,7 @@ export let CardHeader = ({
 }) => {
   const blockClass = `${pkg.prefix}--card`;
   const headerClass = `${blockClass}__header`;
-  const headerClasses = cx(`${headerClass}`, {
+  const headerClasses = cx(headerClass, {
     [`${headerClass}-label-only`]: label && !title && !caption,
     [`${headerClass}-has-label`]: label && productive,
     [`${blockClass}__title-lg`]: titleSize === 'large',

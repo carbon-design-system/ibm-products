@@ -106,7 +106,7 @@ export let Card = ({
       (hasClickEvent && !productive) ||
       (hasClickEvent && productive && clickZone === 'one');
     const cardProps = {
-      className: cx(`${blockClass}`, {
+      className: cx(blockClass, {
         [`${blockClass}__productive`]: productive,
         [`${blockClass}__clickable`]: clickable,
         [`${blockClass}__media-left`]: mediaPosition === 'left',

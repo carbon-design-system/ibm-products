@@ -13,6 +13,7 @@ import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 import { ProductiveCard } from '.';
 import mdx from './ProductiveCard.mdx';
+import { action } from '@storybook/addon-actions';
 const storybookPrefix = getStorybookPrefix(pkg, ProductiveCard.displayName);
 
 export default {
@@ -55,15 +56,15 @@ const defaultProps = {
     {
       id: '1',
       icon: Edit16,
-      onClick: () => {},
-      onKeyDown: () => {},
+      onClick: () => action('on click'),
+      onKeyDown: () => action('on keydown'),
       iconDescription: 'Edit',
     },
     {
       id: '2',
       icon: TrashCan16,
-      onClick: () => {},
-      onKeyDown: () => {},
+      onClick: () => action('on click'),
+      onKeyDown: () => action('on keydown'),
       iconDescription: 'Delete',
     },
   ],
@@ -115,14 +116,14 @@ WithOverflow.args = {
     {
       id: '1',
       itemText: 'Edit',
-      onClick: () => {},
-      onKeyDown: () => {},
+      onClick: () => action('on click'),
+      onKeyDown: () => action('on keydown'),
     },
     {
       id: '2',
       itemText: 'Delete',
-      onClick: () => {},
-      onKeyDown: () => {},
+      onClick: () => action('on click'),
+      onKeyDown: () => action('on keydown'),
     },
   ],
 };
@@ -143,8 +144,8 @@ ComplexBottomBar.args = {
 export const Clickable = Template.bind({});
 Clickable.args = {
   ...defaultProps,
-  onClick: () => {},
-  onKeyDown: () => {},
+  onClick: () => action('on click'),
+  onKeyDown: () => action('on keydown'),
   primaryButtonText: 'Ghost button',
   actionIcons: [],
 };

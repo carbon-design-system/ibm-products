@@ -1,9 +1,14 @@
 import { Props, Preview, Story } from '@storybook/addon-docs';
+import { pkg } from '../../settings';
+import { getStorybookSlug } from '../../../config';
+import { UserProfileImage } from '.';
 
 ## User Profile Avatar
 
 <Preview>
-  <Story id="experimental-userprofileimage--with-image" />
+  <Story
+    id={getStorybookSlug(pkg, UserProfileImage.displayName, 'with-image')}
+  />
 </Preview>
 
 ## Overview
@@ -15,7 +20,7 @@ a blue background.
 ### Default Avatar
 
 <Preview>
-  <Story id="experimental-userprofileimage--default" />
+  <Story id={getStorybookSlug(pkg, UserProfileImage.displayName, 'default')} />
 </Preview>
 
 ### Avatar with Group Icons
@@ -24,7 +29,9 @@ By passing in icon prop with a value of 'group', the avatar will display the
 group icon
 
 <Preview>
-  <Story id="experimental-userprofileimage--with-group-icon" />
+  <Story
+    id={getStorybookSlug(pkg, UserProfileImage.displayName, 'with-group-icon')}
+  />
 </Preview>
 
 ### Avatar with Initials
@@ -34,7 +41,9 @@ down to the first and last initials of the display name. 'Thomas Watson' and
 'Thomas J. Watson' will both display 'TW' as the initials.
 
 <Preview>
-  <Story id="experimental-userprofileimage--with-initials" />
+  <Story
+    id={getStorybookSlug(pkg, UserProfileImage.displayName, 'with-initials')}
+  />
 </Preview>
 
 <Props />

@@ -54,7 +54,7 @@ export let CardFooter = ({
 };
 
 CardFooter.propTypes = {
-  actions: PropTypes.oneOf(PropTypes.array, PropTypes.node),
+  actions: PropTypes.oneOfType([PropTypes.array, PropTypes.node]),
   hasActions: PropTypes.bool,
   hasButton: PropTypes.bool,
   onPrimaryButtonClick: PropTypes.func,

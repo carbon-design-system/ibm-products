@@ -49,16 +49,17 @@ export default {
     actions: {
       control: {
         type: 'select',
-        options: {
-          'One button': 0,
-          'One button (ghost)': 1,
-          'Two buttons': 2,
-          'Three buttons with ghost': 3,
-          'Three buttons': 4,
-          None: 5,
+        labels: {
+          0: 'One button',
+          1: 'One button (ghost)',
+          2: 'Two buttons',
+          3: 'Three buttons with ghost',
+          4: 'Three buttons',
+          5: 'None',
         },
         default: 0,
       },
+      options: [0, 1, 2, 3, 4],
     },
     slideIn: {
       table: {

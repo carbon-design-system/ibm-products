@@ -9,15 +9,17 @@
 // shared card styles can be found in the Card folder
 @import '../Card/storybook-styles';
 
+$block-class: #{$pkg-prefix}--card;
+
 // aspect ratio box styling
-.card-story .bx--aspect-ratio {
+.card-story .#{$carbon-prefix}--aspect-ratio {
   display: flex;
   align-items: center;
   justify-content: center;
   background: $ui-03;
 }
 
-.#{$pkg-prefix}-card--media-left .#{$pkg-prefix}-card-media {
+.#{$block-class}__media-left .#{$block-class}__media {
   width: 100%;
   max-width: 300px;
 }

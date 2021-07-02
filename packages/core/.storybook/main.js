@@ -9,6 +9,10 @@ const { resolve } = require('path');
 const { merge } = require('webpack-merge');
 
 module.exports = {
+  core: {
+    builder: 'webpack5',
+  },
+
   addons: [
     '@storybook/addon-actions',
     '@storybook/addon-docs',

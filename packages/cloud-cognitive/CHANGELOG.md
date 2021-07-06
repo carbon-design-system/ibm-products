@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.51.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.50.11...@carbon/ibm-cloud-cognitive@0.51.0) (2021-07-06)
+
+
+### Features
+
+* add closeIconDescription required prop to AboutModal ([#968](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/968)) ([2619256](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/261925676ab4775fe947dc39f40701a8fbfe6779))
+
+
+
+
+
 ## [0.50.11](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.50.10...@carbon/ibm-cloud-cognitive@0.50.11) (2021-07-06)
 
 

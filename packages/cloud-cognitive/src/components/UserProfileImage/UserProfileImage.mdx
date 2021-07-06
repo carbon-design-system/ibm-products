@@ -1,15 +1,12 @@
-import { Props, Preview, Story } from '@storybook/addon-docs';
-import { pkg } from '../../settings';
-import { getStorybookSlug } from '../../../config';
-import { UserProfileImage } from '.';
+import { ArgsTable, Canvas, Story } from '@storybook/addon-docs';
 
 ## User Profile Avatar
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(pkg, UserProfileImage.displayName, 'with-image')}
   />
-</Preview>
+</Canvas>
 
 ## Overview
 
@@ -19,20 +16,20 @@ a blue background.
 
 ### Default Avatar
 
-<Preview>
+<Canvas>
   <Story id={getStorybookSlug(pkg, UserProfileImage.displayName, 'default')} />
-</Preview>
+</Canvas>
 
 ### Avatar with Group Icons
 
 By passing in icon prop with a value of 'group', the avatar will display the
 group icon
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(pkg, UserProfileImage.displayName, 'with-group-icon')}
   />
-</Preview>
+</Canvas>
 
 ### Avatar with Initials
 
@@ -40,10 +37,10 @@ When passing a display name to the component, the display name will be distilled
 down to the first and last initials of the display name. 'Thomas Watson' and
 'Thomas J. Watson' will both display 'TW' as the initials.
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(pkg, UserProfileImage.displayName, 'with-initials')}
   />
-</Preview>
+</Canvas>
 
-<Props />
+<ArgsTable />

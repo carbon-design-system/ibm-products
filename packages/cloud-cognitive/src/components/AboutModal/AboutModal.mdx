@@ -1,4 +1,4 @@
-import { Story, Props, Preview } from '@storybook/addon-docs';
+import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
 import { pkg } from '../../settings';
 import { getStorybookSlug } from '../../../config';
 import { AboutModal } from '.';
@@ -22,11 +22,9 @@ immediately apparent to the user, with a clear and obvious path to completion.
 
 ## Example usage
 
-<Preview>
-  <Story
-    id={getStorybookSlug(pkg, AboutModal.displayName, 'with-all-props-set')}
-  />
-</Preview>
+<Canvas>
+  <Story id={getStorybookSlug(pkg, AboutModal.displayName, 'fully-loaded')} />
+</Canvas>
 
 ### Overriding the Carbon theme
 
@@ -47,12 +45,12 @@ In SCSS:
 Alternatively, the required Carbon theme can be set as above in a custom CSS
 class which is then applied to the AboutModal using the `className` prop.
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(pkg, AboutModal.displayName, 'with-dark-theme')}
   />
-</Preview>
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />

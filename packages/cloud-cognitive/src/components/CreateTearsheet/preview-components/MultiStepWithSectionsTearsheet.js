@@ -76,7 +76,11 @@ export const MultiStepWithSectionsTearsheet = () => {
         viewAllToggleLabelText="Show all available options"
         viewAllToggleOffLabelText="Off"
         viewAllToggleOnLabelText="On"
-        includeViewAllToggle>
+        includeViewAllToggle
+        modalTitle="Are you sure you want to hide all available options?"
+        modalDescription="Values that were set for those options will be cleared."
+        modalSecondaryButtonText="Cancel"
+        modalDangerButtonText="Hide">
         <CreateTearsheetStep
           onNext={() => {
             return new Promise((resolve, reject) => {

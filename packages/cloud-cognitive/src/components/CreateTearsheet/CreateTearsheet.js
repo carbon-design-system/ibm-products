@@ -14,6 +14,11 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import {
+  Button,
+  ComposedModal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
   ProgressIndicator,
   ProgressStep,
   Toggle,
@@ -51,6 +56,10 @@ export let CreateTearsheet = forwardRef(
       description,
       includeViewAllToggle,
       label,
+      modalDangerButtonText,
+      modalDescription,
+      modalSecondaryButtonText,
+      modalTitle,
       nextButtonText,
       onClose,
       onRequestSubmit,
@@ -70,6 +79,7 @@ export let CreateTearsheet = forwardRef(
     const [currentStep, setCurrentStep] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [activeSectionIndex, setActiveSectionIndex] = useState(0);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
     const previousState = usePreviousValue({ currentStep, open });
 
     // set current step to 1 upon tearsheet opening, in order
@@ -459,7 +469,7 @@ export let CreateTearsheet = forwardRef(
                     {child.props.title}
                   </h4>
                 )}
-                {child}
+                {shouldViewAll ? child : child}
                 {shouldViewAll && (
                   <span className={`${blockClass}__section--divider`} />
                 )}
@@ -537,7 +547,7 @@ export let CreateTearsheet = forwardRef(
     };
 
     const handleViewAllToggle = (toggleState) => {
-      setShouldViewAll(toggleState);
+      console.log({ toggleState });
       setActiveSectionIndex(0);
       // scroll to top of tearsheet page upon toggling view all option
       if (toggleState) {
@@ -545,6 +555,13 @@ export let CreateTearsheet = forwardRef(
           `.${blockClass}`
         );
         createTearsheetContainer.scrollTop = 0;
+      }
+      if (!shouldViewAll) {
+        setShouldViewAll(toggleState);
+      }
+      if (shouldViewAll) {
+        console.log('when does this show?');
+        setModalIsOpen(true);
       }
     };
 
@@ -563,7 +580,6 @@ export let CreateTearsheet = forwardRef(
     };
 
     const handleResize = useCallback(() => {
-      // on resize logic
       const createTearsheetOuterElement = document.querySelector(
         `.${blockClass} .${carbon.prefix}--modal-container`
       );
@@ -614,6 +630,29 @@ export let CreateTearsheet = forwardRef(
               {renderChildren(children)}
             </div>
           </TearsheetShell>
+          <ComposedModal size="sm" open={modalIsOpen}>
+            <ModalHeader title={modalTitle} />
+            <ModalBody>
+              <p>{modalDescription}</p>
+            </ModalBody>
+            <ModalFooter>
+              <Button
+                type="button"
+                kind="secondary"
+                onClick={() => setModalIsOpen(false)}>
+                {modalSecondaryButtonText}
+              </Button>
+              <Button
+                type="button"
+                kind="danger"
+                onClick={() => {
+                  setModalIsOpen(false);
+                  setShouldViewAll(false);
+                }}>
+                {modalDangerButtonText}
+              </Button>
+            </ModalFooter>
+          </ComposedModal>
         </div>
       </ReactResizeDetector>
     );
@@ -666,6 +705,26 @@ CreateTearsheet.propTypes = {
    * to page of a multi-page task).
    */
   label: PropTypes.node,
+
+  /**
+   * The primary 'danger' button text in the modal
+   */
+  modalDangerButtonText: PropTypes.string.isRequired,
+
+  /**
+   * The description located below the title in the modal
+   */
+  modalDescription: PropTypes.string,
+
+  /**
+   * The secondary button text in the modal
+   */
+  modalSecondaryButtonText: PropTypes.string.isRequired,
+
+  /**
+   * The title located in the header of the modal
+   */
+  modalTitle: PropTypes.string.isRequired,
 
   /**
    * The next button text

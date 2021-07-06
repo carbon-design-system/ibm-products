@@ -144,9 +144,17 @@ const Template = (storyName, storyInitiallyOpen, props) => {
 Template.propTypes = AboutModal.propTypes;
 
 const commonArgs = {
+  closeIconDescription: 'Close',
   title: (
     <>
-      IBM <span style={{ fontWeight: '600' }}>Watson AI Ops</span>
+      IBM{' '}
+      <span
+        style={
+          // stylelint-disable-next-line carbon/type-token-use
+          { fontWeight: '600' }
+        }>
+        Watson AI Ops
+      </span>
     </>
   ),
   content: <>This is example content for an About Modal.</>,

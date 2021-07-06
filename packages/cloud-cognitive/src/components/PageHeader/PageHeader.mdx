@@ -1,4 +1,4 @@
-import { Story, Props, Source, Preview } from '@storybook/addon-docs';
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
 import { pkg } from '../../settings';
 import { getStorybookSlug } from '../../../config';
 import { PageHeader } from '.';
@@ -41,7 +41,7 @@ The simplest expression of the page header. A background-less page header should
 be used if only the breadcrumb, title, actions, and/or simple status are
 required.
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(
       pkg,
@@ -49,7 +49,7 @@ required.
       'without-background-breadcrumbitems-title-pageactions'
     )}
   />
-</Preview>
+</Canvas>
 
 ### Page header with background
 
@@ -58,7 +58,7 @@ structurality and aids in establishing hierarchy for page headers with more
 items. The page header with a background should be used if tabs, subtitles,
 and/or more global items are required.
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(
       pkg,
@@ -66,14 +66,14 @@ and/or more global items are required.
       'with-background-breadcrumbitems-title-pageactions-tabs'
     )}
   />
-</Preview>
+</Canvas>
 
 ### Page header with background (breadcrumb + actions toolbar included)
 
 If the page header contains action icons, the default state includes a toolbar
 designated for the breadcrumbs and action icons.
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(
       pkg,
@@ -81,14 +81,14 @@ designated for the breadcrumbs and action icons.
       'with-background-breadcrumbitems-actionbar-title-pageactions-tabs-tags'
     )}
   />
-</Preview>
+</Canvas>
 
 ### Page header with background (breadcrumb + actions toolbar ONLY)
 
 On occasion, a condensed page header is required. This version accommodates this
 by just displaying the breadcrumb bar only.
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(
       pkg,
@@ -96,7 +96,7 @@ by just displaying the breadcrumb bar only.
       'with-background-breadcrumbitems-actionbar'
     )}
   />
-</Preview>
+</Canvas>
 
 ## Examples
 
@@ -112,7 +112,7 @@ all other sans background page headers follow. The base is best used to
 accommodate simple requirements, including page title only, or page title +
 buttons.
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(
       pkg,
@@ -120,14 +120,14 @@ buttons.
       'without-background-title'
     )}
   />
-</Preview>
+</Canvas>
 
 #### With breadcrumbs
 
 This variant of the page header accounts for page title, buttons, breadcrumbs,
 and occasionally icons and metadata.
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(
       pkg,
@@ -135,14 +135,14 @@ and occasionally icons and metadata.
       'without-background-breadcrumbitems-title'
     )}
   />
-</Preview>
+</Canvas>
 
 #### With status indicator
 
 Structured similarly to the examples above, this variant is for the inclusion of
 a page level status indicator.
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(
       pkg,
@@ -150,7 +150,7 @@ a page level status indicator.
       'without-background-breadcrumbitems-title-status'
     )}
   />
-</Preview>
+</Canvas>
 
 ### Examples with background
 
@@ -159,7 +159,7 @@ a page level status indicator.
 Tabs are positioned underneath the page title and sit flush at the base of the
 page header background.
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(
       pkg,
@@ -167,14 +167,14 @@ page header background.
       'with-background-breadcrumbitems-title-tabs'
     )}
   />
-</Preview>
+</Canvas>
 
 #### With tags
 
 Tags are positioned underneath the page title and sit above the base of the page
 header background.
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(
       pkg,
@@ -182,14 +182,14 @@ header background.
       'with-background-breadcrumbitems-title-pageactions-tags'
     )}
   />
-</Preview>
+</Canvas>
 
 #### With tabs & tags
 
 If both tabs & tags need to be present, tabs should be remain left aligned with
 the page and tags reposition over to the right side of the screen.
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(
       pkg,
@@ -197,7 +197,7 @@ the page and tags reposition over to the right side of the screen.
       'with-background-breadcrumbitems-title-tabs-tags'
     )}
   />
-</Preview>
+</Canvas>
 
 #### With subtitle
 
@@ -205,7 +205,7 @@ Subtitles, if necessary, are placed directly below the page title. Page headers
 with subtitles use the background to create hierarchy and to separate it from
 type placed within the page.
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(
       pkg,
@@ -213,14 +213,14 @@ type placed within the page.
       'with-background-breadcrumbitems-title-pageactions-subtitle'
     )}
   />
-</Preview>
+</Canvas>
 
 #### With summary details
 
 Page content with global page hierarchy can be placed above tabs within the page
 header. **This is just an example of an allowable zone for content.**
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(
       pkg,
@@ -228,8 +228,8 @@ header. **This is just an example of an allowable zone for content.**
       'with-background-breadcrumbitems-title-pageactions-summarydetails-tabs'
     )}
   />
-</Preview>
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />

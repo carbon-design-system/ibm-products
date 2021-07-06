@@ -1,4 +1,4 @@
-import { Story, ArgsTable, Preview } from '@storybook/addon-docs';
+import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
 import { pkg } from '../../settings';
 import { getStorybookSlug } from '../../../config';
 import { WebTerminal } from '.';
@@ -58,13 +58,13 @@ The default web terminal is one which opens and the terminal loads. Then if the
 user desires to dismiss it they can click the close icon on the top right corner
 of the component.
 
-<Preview>
+<Canvas>
   <Story id={getStorybookSlug(pkg, WebTerminal.displayName, 'default')} />
-</Preview>
+</Canvas>
 
 ### With documentation links
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(
       pkg,
@@ -72,7 +72,7 @@ of the component.
       'with-documentation-links'
     )}
   />
-</Preview>
+</Canvas>
 
 ## Component API
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.11](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.50.10...@carbon/ibm-cloud-cognitive@0.50.11) (2021-07-06)
+
+
+### Bug Fixes
+
+* **SidePanel:** fix back button positioning ([#969](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/969)) ([34e7442](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/34e744254ce95c63779ca614bcaa8c2e4fe70309))
+
+
+
+
+
 ## [0.50.10](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.50.9...@carbon/ibm-cloud-cognitive@0.50.10) (2021-07-02)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

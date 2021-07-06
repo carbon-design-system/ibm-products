@@ -11,6 +11,7 @@ import { Lightning16, Bee16 } from '@carbon/icons-react';
 import { mockHTMLElement } from '../../global/js/utils/test-helper';
 
 const actions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => ({
+  key: `key is this num ${num}`,
   renderIcon: num % 2 ? Lightning16 : Bee16,
   iconDescription: `Action ${num.toString().padStart(2, '0')}`,
   onClick: () => {},

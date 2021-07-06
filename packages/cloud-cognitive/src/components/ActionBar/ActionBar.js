@@ -150,28 +150,38 @@ ActionBar.displayName = componentName;
 ActionBar.propTypes = {
   /**
    * Specifies the action bar items. Each item is specified as an object
-   * with the properties of a Carbon Button in icon only form. Button kind, size, tooltipPosition,
-   * tooltipAlignment and type are ignored.
+   * with required fields: key for array rendering, renderIcon and
+   * iconDescription to provide the icon to display,
+   * and optional 'onClick' to receive notifications when the button is clicked.
+   * Additional fields in the object will be passed to the
+   * Button component, and these can include 'disabled', 'ref', 'className',
+   * and any other Button props.
+   *
+   * Note that the Button props 'kind', 'size',
+   * 'tooltipPosition', 'tooltipAlignment' and 'type' are ignored, as these
+   * cannot be used for an action bar item.
    *
    * Carbon Button API https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  actions: PropTypes.oneOfType([
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        ...prepareProps(Button.propTypes, [
-          'kind',
-          'size',
-          'tooltipPosition',
-          'tooltipAlignment',
-        ]),
-        iconDescription: PropTypes.string.isRequired,
-        // key: Button.propTypes.string.isRequired,
-        onClick: Button.propTypes.onClick,
-        renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
-          .isRequired,
-      })
-    ),
-  ]),
+  actions: PropTypes.arrayOf(
+    PropTypes.shape({
+      ...prepareProps(Button.propTypes, [
+        // props not desired from Button.propTypes
+        'kind',
+        'size',
+        'tooltipPosition',
+        'tooltipAlignment',
+      ]),
+      // Additional props
+      key: PropTypes.string.isRequired,
+      // Redefine as form different  to Button and a key prop used by ActionBarItems
+      iconDescription: PropTypes.string.isRequired,
+      renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
+        .isRequired,
+      // We duplicate onClick here to improve DocGen in Storybook
+      onClick: PropTypes.func,
+    })
+  ),
   /**
    * children of the action bar (action bar items)
    */

@@ -6,13 +6,14 @@
  */
 
 // Import portions of React that are needed.
-import React, { useState, useRef } from 'react';
-import ReactResizeDetector from 'react-resize-detector';
+import React, { useState, useRef, useEffect } from 'react';
+import { useResizeDetector } from 'react-resize-detector';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 // Carbon and package components we use.
 import {
@@ -58,6 +59,8 @@ export let AboutModal = React.forwardRef(
   ) => {
     const [hasScrollingContent, setHasScrollingContent] = useState(true);
     const bodyRef = useRef();
+    const bodyId = uuidv4();
+    const resizeRef = useRef();
 
     const handleResize = () => {
       const bodyElement = bodyRef.current.parentNode;
@@ -71,78 +74,88 @@ export let AboutModal = React.forwardRef(
       );
     };
 
+    // We can't add a ref directly to the ModalBody, so track it in a ref
+    // as the parent of the current bodyRef element
+    useEffect(() => {
+      resizeRef.current = bodyRef.current.parentElement;
+    }, [bodyRef]);
+
+    // Detect resize of the ModalBody to recalculate whether scrolling is enabled
+    useResizeDetector({ onResize: handleResize, targetRef: resizeRef });
+
     return (
-      <ReactResizeDetector onResize={handleResize}>
-        <ComposedModal
+      <ComposedModal
+        {
+          // Pass through any other property values as HTML attributes.
+          ...rest
+        }
+        className={cx(
+          blockClass, // Apply the block class to the main HTML element
+          className, // Apply any supplied class names to the main HTML element.
           {
-            // Pass through any other property values as HTML attributes.
-            ...rest
+            [`${blockClass}--with-tabs`]:
+              additionalInfo && additionalInfo.length > 1,
           }
-          className={cx(
-            blockClass, // Apply the block class to the main HTML element
-            className, // Apply any supplied class names to the main HTML element.
-            {
-              [`${blockClass}--with-tabs`]:
-                additionalInfo && additionalInfo.length > 1,
-            }
-          )}
-          {...{ onClose, open, ref }}>
-          <div className={`${blockClass}__logo`}>{logo}</div>
-          <ModalHeader
-            className={`${blockClass}__header`}
-            iconDescription={closeIconDescription}
-            label={title}
-            labelClassName={`${blockClass}__title`}
-          />
-          <ModalBody
-            className={`${blockClass}__body`}
-            hasScrollingContent={hasScrollingContent}>
-            <div className={`${blockClass}__body-content`} ref={bodyRef}>
-              {content}
-              <div className={`${blockClass}__links-container`}>
-                {links &&
-                  links.length > 0 &&
-                  links.map((link, i) => (
-                    <React.Fragment key={i}>{link}</React.Fragment>
-                  ))}
-              </div>
-              {legalText && (
-                <p className={`${blockClass}__legal-text`}>{legalText}</p>
-              )}
-              {copyrightText && (
-                <p className={`${blockClass}__copyright-text`}>
-                  {copyrightText}
-                </p>
-              )}
+        )}
+        {...{ onClose, open, ref }}>
+        <div className={`${blockClass}__logo`}>{logo}</div>
+        <ModalHeader
+          className={`${blockClass}__header`}
+          iconDescription={closeIconDescription}
+          label={title}
+          labelClassName={`${blockClass}__title`}
+        />
+        <ModalBody
+          aria-label={hasScrollingContent ? '' : null}
+          aria-labelledby={hasScrollingContent ? bodyId : null}
+          className={`${blockClass}__body`}
+          hasScrollingContent={hasScrollingContent}>
+          <div
+            className={`${blockClass}__body-content`}
+            ref={bodyRef}
+            id={bodyId}>
+            {content}
+            <div className={`${blockClass}__links-container`}>
+              {links &&
+                links.length > 0 &&
+                links.map((link, i) => (
+                  <React.Fragment key={i}>{link}</React.Fragment>
+                ))}
             </div>
-          </ModalBody>
-          <ModalFooter className={`${blockClass}__footer`}>
-            {additionalInfo &&
-              additionalInfo.length > 0 &&
-              (additionalInfo.length === 1 ? (
-                <>
-                  <p className={`${blockClass}__version-label`}>
-                    {additionalInfo[0].label}
-                  </p>
-                  <p className={`${blockClass}__version-number`}>
-                    {additionalInfo[0].content}
-                  </p>
-                </>
-              ) : (
-                <Tabs className={`${blockClass}__tab-container`}>
-                  {additionalInfo.map((tab, i) => (
-                    <Tab
-                      id={'about-modal-tab-' + tab.label}
-                      label={tab.label}
-                      key={i}>
-                      {tab.content}
-                    </Tab>
-                  ))}
-                </Tabs>
-              ))}
-          </ModalFooter>
-        </ComposedModal>
-      </ReactResizeDetector>
+            {legalText && (
+              <p className={`${blockClass}__legal-text`}>{legalText}</p>
+            )}
+            {copyrightText && (
+              <p className={`${blockClass}__copyright-text`}>{copyrightText}</p>
+            )}
+          </div>
+        </ModalBody>
+        <ModalFooter className={`${blockClass}__footer`}>
+          {additionalInfo &&
+            additionalInfo.length > 0 &&
+            (additionalInfo.length === 1 ? (
+              <>
+                <p className={`${blockClass}__version-label`}>
+                  {additionalInfo[0].label}
+                </p>
+                <p className={`${blockClass}__version-number`}>
+                  {additionalInfo[0].content}
+                </p>
+              </>
+            ) : (
+              <Tabs className={`${blockClass}__tab-container`}>
+                {additionalInfo.map((tab, i) => (
+                  <Tab
+                    id={'about-modal-tab-' + tab.label}
+                    label={tab.label}
+                    key={i}>
+                    {tab.content}
+                  </Tab>
+                ))}
+              </Tabs>
+            ))}
+        </ModalFooter>
+      </ComposedModal>
     );
   }
 );

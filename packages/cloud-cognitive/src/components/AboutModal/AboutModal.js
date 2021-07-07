@@ -41,6 +41,7 @@ export let AboutModal = React.forwardRef(
     {
       additionalInfo,
       className,
+      closeIconDescription,
       content,
       copyrightText,
       legalText,
@@ -71,6 +72,7 @@ export let AboutModal = React.forwardRef(
       <div className={`${blockClass}__logo`}>{logo}</div>
       <ModalHeader
         className={`${blockClass}__header`}
+        iconDescription={closeIconDescription}
         label={title}
         labelClassName={`${blockClass}__title`}
       />
@@ -149,6 +151,11 @@ AboutModal.propTypes = {
    * Provide an optional class to be applied to the modal root node.
    */
   className: PropTypes.string,
+
+  /**
+   * The accessibility title for the close icon.
+   */
+  closeIconDescription: PropTypes.string.isRequired,
 
   /**
    * A summary that appears immediately beneath the title, and might

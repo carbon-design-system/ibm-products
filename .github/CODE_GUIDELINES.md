@@ -300,8 +300,8 @@ unclear.
     given useful options, for example by using a 'select' control type with a
     selection of relevant choices (including 'none').
   - Some props may require some extra controls to be included in the story in
-    order to illustrate them correctly, in which case their controls in the
-    controls panel should be disabled so as not to make conflicting changes.
+    order to illustrate them correctly, in which case they should be disabled in
+    the controls panel so as not to make conflicting changes.
   - Props that cannot usefully be modified in the story context (for example,
     handlers) should be disabled in the controls panel.
 - The stories should also expose all relevant actions and behaviors. This may

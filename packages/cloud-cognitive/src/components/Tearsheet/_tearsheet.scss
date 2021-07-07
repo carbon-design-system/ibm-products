@@ -67,7 +67,6 @@
 
   .#{$block-class} .#{$block-class}__container {
     top: auto;
-    width: 100%;
     height: 100%;
     max-height: calc(100% - #{$spacing-09});
     // we want the enter/leave animation to run up most of the height of the
@@ -107,6 +106,10 @@
     max-height: calc(
       100% - (#{$spacing-09} + #{$spacing-08} + (2 * #{$spacing-05}))
     );
+  }
+
+  .#{$block-class}.#{$block-class}--wide .#{$block-class}__container {
+    width: 100%;
   }
 
   @include carbon--breakpoint(lg) {

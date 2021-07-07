@@ -1896,7 +1896,12 @@ path:nth-of-type(1),
   justify-content: space-between;
 }
 
+.exp--tearsheet .exp--tearsheet__header-fields {
+  flex: 1 1 100%;
+}
+
 .exp--tearsheet .exp--tearsheet__header-actions {
+  flex: 0 0 auto;
   padding-left: var(--cds-spacing-06, 1.5rem);
 }
 
@@ -1920,11 +1925,22 @@ path:nth-of-type(1),
 }
 
 .exp--tearsheet .exp--tearsheet__header-description {
+  display: -webkit-box;
+  overflow: hidden;
+  max-width: 100%;
   margin-top: var(--cds-spacing-05, 1rem);
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
   line-height: var(--cds-body-short-01-line-height, 1.29);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+@media (min-width: 42rem) {
+  .exp--tearsheet .exp--tearsheet__header-description {
+    max-width: 60%;
+  }
 }
 
 .exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__header-description {

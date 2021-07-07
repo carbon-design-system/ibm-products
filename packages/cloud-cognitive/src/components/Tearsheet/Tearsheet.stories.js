@@ -116,11 +116,22 @@ const mainContent = (
     <Form>
       <p>Main content</p>
       <FormGroup legendText="">
-        <TextInput id="tss-ft1" labelText="Enter an important value here" />
+        <TextInput
+          id="tss-ft1"
+          labelText="Enter an important value here"
+          style={
+            // stylelint-disable-next-line carbon/layout-token-use
+            { marginBottom: '1em' }
+          }
+        />
         <TextInput
           id="tss-ft2"
           light
           labelText="Here is a light entry field:"
+          style={
+            // stylelint-disable-next-line carbon/layout-token-use
+            { marginBottom: '1em' }
+          }
         />
       </FormGroup>
     </Form>

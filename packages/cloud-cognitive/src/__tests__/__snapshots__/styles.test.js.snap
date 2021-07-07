@@ -30,7 +30,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   letter-spacing: var(--cds-body-short-02-letter-spacing, 0);
   min-height: var(--cds-layout-05, 4rem);
   padding: 0 20% 0 var(--cds-spacing-05, 1rem);
-  margin-bottom: 0;
   grid-row: auto;
   overflow-x: hidden;
   overflow-y: auto;
@@ -38,14 +37,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .exp--about-modal.exp--about-modal--with-tabs .exp--about-modal__body {
   min-height: calc(var(--cds-layout-05, 4rem) + var(--cds-spacing-08, 2.5rem));
-}
-
-.exp--about-modal .exp--about-modal__body-content {
-  margin-bottom: var(--cds-spacing-09, 3rem);
-}
-
-.exp--about-modal.exp--about-modal--with-tabs .exp--about-modal__body-content {
   margin-bottom: calc(var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem));
+}
+
+.exp--about-modal.exp--about-modal--with-tabs
+.bx--modal-content--overflow-indicator {
+  bottom: calc(var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem));
 }
 
 .exp--about-modal .exp--about-modal__links-container {
@@ -75,21 +72,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   justify-content: center;
   background-color: var(--cds-inverse-02, #393939);
   color: var(--cds-inverse-01, #ffffff);
-}
-
-.exp--about-modal .exp--about-modal__footer::before {
-  position: absolute;
-  top: calc(-1 * var(--cds-spacing-09, 3rem));
-  width: 80%;
-  height: var(--cds-spacing-09, 3rem);
-  background: linear-gradient(to bottom, transparent, var(--cds-ui-01, #f4f4f4) 45%);
-  content: '';
-}
-
-.exp--about-modal.exp--about-modal--with-tabs .bx--modal-footer::before {
-  top: calc(-1 * (var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem)));
-  height: calc(var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem));
-  background: linear-gradient(to bottom, transparent, var(--cds-ui-01, #f4f4f4) 25%);
 }
 
 .exp--about-modal .exp--about-modal__tab-container {

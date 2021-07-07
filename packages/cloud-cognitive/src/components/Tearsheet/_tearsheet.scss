@@ -153,7 +153,12 @@
     justify-content: space-between;
   }
 
+  .#{$block-class} .#{$block-class}__header-fields {
+    flex: 1 1 100%;
+  }
+
   .#{$block-class} .#{$block-class}__header-actions {
+    flex: 0 0 auto;
     padding-left: $spacing-06;
   }
 
@@ -175,8 +180,18 @@
   }
 
   .#{$block-class} .#{$block-class}__header-description {
+    display: -webkit-box;
+    overflow: hidden;
+    max-width: 100%;
     margin-top: $spacing-05;
     @include carbon--type-style('body-short-01');
+
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
+    @include carbon--breakpoint-up('md') {
+      max-width: 60%;
+    }
   }
 
   .#{$block-class}.#{$block-class}--wide .#{$block-class}__header-description {

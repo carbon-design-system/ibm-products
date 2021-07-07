@@ -103,7 +103,7 @@ const closeIconDescription = 'Close the tearsheet';
 
 const description =
   'This is a description for the tearsheet, providing an opportunity to \
-  describe the flow.';
+  describe the flow over a couple of lines in the header of the tearsheet.';
 
 const influencer = (
   <div className="tearsheet-stories__dummy-content-block">Influencer</div>

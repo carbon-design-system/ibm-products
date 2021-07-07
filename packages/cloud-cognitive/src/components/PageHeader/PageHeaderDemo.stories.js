@@ -795,9 +795,9 @@ const TemplateDemo = () => {
               </>
             }
             actionBarItems={[
-              { renderIcon: Printer16, iconDescription: `Print` },
-              { renderIcon: Settings16, iconDescription: `Settings` },
-              { renderIcon: VolumeMute16, iconDescription: `Mute` },
+              { key: '1', renderIcon: Printer16, iconDescription: `Print` },
+              { key: '2', renderIcon: Settings16, iconDescription: `Settings` },
+              { key: '3', renderIcon: VolumeMute16, iconDescription: `Mute` },
             ]}
             title={{
               text: 'Authentication activity',

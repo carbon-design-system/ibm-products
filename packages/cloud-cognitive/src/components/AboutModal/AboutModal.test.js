@@ -52,6 +52,7 @@ const additionalInfo = [
   },
 ];
 const className = `class-${uuidv4()}`;
+const closeIconDescription = `close ${uuidv4()}`;
 const content = `This is example content: ${uuidv4()}`;
 const copyrightText = `Copyright test text ${uuidv4()}`;
 const dataTestId = uuidv4();
@@ -82,7 +83,9 @@ const versionNumber = `1.3.${uuidv4()}`;
 
 // render an AboutModal with content, logo, title, and any other required props
 const renderComponent = ({ ...rest }) =>
-  render(<AboutModal {...{ content, logo, title, ...rest }} />);
+  render(
+    <AboutModal {...{ closeIconDescription, content, logo, title, ...rest }} />
+  );
 
 describe(componentName, () => {
   it('renders a component AboutModal', () => {
@@ -96,14 +99,11 @@ describe(componentName, () => {
     await expect(container).toHaveNoAxeViolations();
   });
 
-  it('renders title and content', () => {
+  it('renders closeIconDescription, title, logo, and content', () => {
     renderComponent();
+    screen.getByRole('button', { name: closeIconDescription });
     screen.getByText(titleText);
     screen.getByText(content);
-  });
-
-  it('renders product logo', () => {
-    renderComponent();
     screen.getByAltText(logoAltText);
   });
 
@@ -157,7 +157,9 @@ describe(componentName, () => {
   it('calls onClose() when modal is closed', () => {
     renderComponent({ open: true, onClose: onCloseReturnsTrue });
     const aboutModal = screen.getByRole('presentation');
-    const closeButton = screen.getByRole('button', { name: 'Close' });
+    const closeButton = screen.getByRole('button', {
+      name: closeIconDescription,
+    });
     expect(aboutModal).toHaveClass('is-visible');
     expect(onCloseReturnsTrue).toHaveBeenCalledTimes(0);
     userEvent.click(closeButton);
@@ -168,7 +170,9 @@ describe(componentName, () => {
   it('allows veto when modal is closed', () => {
     renderComponent({ open: true, onClose: onCloseReturnsFalse });
     const aboutModal = screen.getByRole('presentation');
-    const closeButton = screen.getByRole('button', { name: 'Close' });
+    const closeButton = screen.getByRole('button', {
+      name: closeIconDescription,
+    });
     expect(aboutModal).toHaveClass('is-visible');
     expect(onCloseReturnsFalse).toHaveBeenCalledTimes(0);
     userEvent.click(closeButton);

@@ -1,4 +1,4 @@
-import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
+import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
 import { pkg } from '../../settings';
 import { getStorybookSlug } from '../../../config';
 import { ExportModal } from '.';
@@ -13,12 +13,12 @@ import { ExportModal } from '.';
 
 ## Overview
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(pkg, ExportModal.displayName, 'with-success-message')}
   />
-</Preview>
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />

@@ -1,4 +1,4 @@
-import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
 import { pkg } from '../../settings';
 import { getStorybookSlug } from '../../../config';
 import { ButtonMenu } from '.';
@@ -19,10 +19,10 @@ import { ButtonMenu } from '.';
 
 <!-- TODO: One example per designed use case. -->
 
-<Preview>
+<Canvas>
   <Story id={getStorybookSlug(pkg, ButtonMenu.displayName, 'button-menu')} />
-</Preview>
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />

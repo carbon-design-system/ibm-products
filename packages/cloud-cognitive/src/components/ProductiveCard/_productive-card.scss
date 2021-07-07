@@ -12,52 +12,60 @@
 
 @import 'carbon-components/scss/components/overflow-menu/overflow-menu';
 
-.#{$pkg-prefix}-card--productive {
-  .#{$pkg-prefix}-card-header {
-    padding-right: 0;
-  }
+@mixin card-productive {
+  $block-class: #{$pkg-prefix}--card;
 
-  .#{$pkg-prefix}-card-title {
-    @include carbon--type-style('productive-heading-02');
-  }
+  .#{$block-class}__productive {
+    .#{$block-class}__header {
+      padding-right: 0;
+    }
 
-  .#{$pkg-prefix}-card-title--lg .#{$pkg-prefix}-card-title {
-    @include carbon--type-style('productive-heading-03');
-  }
+    .#{$block-class}__title {
+      @include carbon--type-style('productive-heading-02');
+    }
 
-  .#{$pkg-prefix}-card-body {
-    padding-top: $spacing-03;
-  }
+    .#{$block-class}__title-lg .#{$block-class}__title {
+      @include carbon--type-style('productive-heading-03');
+    }
 
-  .#{$pkg-prefix}-card-footer {
-    align-items: center;
-    justify-content: space-between;
-    border-top: 1px solid $ui-03;
-  }
+    .#{$block-class}__body {
+      padding-top: $spacing-03;
+    }
 
-  .#{$pkg-prefix}-card-footer--no-button {
-    justify-content: flex-end;
-  }
+    .#{$block-class}__footer {
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid $ui-03;
+    }
 
-  .#{$pkg-prefix}-card-actions {
-    margin: 0;
-  }
+    .#{$block-class}__footer-no-button {
+      justify-content: flex-end;
+    }
 
-  .#{$pkg-prefix}-card-actions--top {
-    margin-top: calc(-1 * #{$spacing-02});
-    margin-right: $spacing-03;
-  }
+    .#{$block-class}__actions {
+      margin: 0;
+    }
 
-  .#{$pkg-prefix}-card-title--lg .#{$pkg-prefix}-card-actions--top,
-  .#{$pkg-prefix}-card-header--has-label .#{$pkg-prefix}-card-actions--top {
-    margin-top: 0;
-  }
+    .#{$block-class}__actions-header {
+      margin-top: calc(-1 * #{$spacing-02});
+      margin-right: $spacing-03;
+    }
 
-  .#{$pkg-prefix}-card-icon {
-    margin-right: $spacing-05;
-  }
+    .#{$block-class}__title-lg .#{$block-class}__actions-header,
+    .#{$block-class}__header-has-label .#{$block-class}__actions-header {
+      margin-top: 0;
+    }
 
-  .#{$pkg-prefix}-card-header-container {
-    align-items: start;
+    .#{$block-class}__icon {
+      margin-right: $spacing-05;
+    }
+
+    .#{$block-class}__header-container {
+      align-items: start;
+    }
   }
+}
+
+@include exports('card-productive') {
+  @include card-productive;
 }

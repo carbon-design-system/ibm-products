@@ -14,6 +14,7 @@ import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 import { ExpressiveCard } from '.';
 import mdx from './ExpressiveCard.mdx';
+import { action } from '@storybook/addon-actions';
 const storybookPrefix = getStorybookPrefix(pkg, ExpressiveCard.displayName);
 
 export default {
@@ -27,18 +28,16 @@ export default {
   },
   argTypes: {
     columnSize: {
-      defaultValue: 4,
       control: {
         type: 'select',
-        options: [4, 8, 12, 16],
       },
+      options: [4, 8, 12, 16],
     },
     mediaRatio: {
-      defaultValue: '1x1',
       control: {
         type: 'select',
-        options: ['16x9', '9x16', '2x1', '1x2', '4x3', '3x4', '1x1'],
       },
+      options: ['16x9', '9x16', '2x1', '1x2', '4x3', '3x4', '1x1'],
     },
   },
   decorators: [
@@ -53,6 +52,8 @@ export default {
 const defaultProps = {
   label: 'Label',
   title: 'Title',
+  columnSize: 4,
+  mediaRatio: '1x1',
   children: (
     <p>
       expressive card body content block. description inviting the user to take
@@ -120,8 +121,8 @@ WithActionIcon.args = {
     {
       id: '1',
       icon: ArrowRight24,
-      onClick: () => {},
-      onKeyDown: () => {},
+      onClick: () => action('on click'),
+      onKeyDown: () => action('on keydown'),
       iconDescription: 'Next',
     },
   ],
@@ -145,7 +146,7 @@ WithSecondaryAction.args = {
 export const Clickable = Template.bind({});
 Clickable.args = {
   ...defaultProps,
-  onClick: () => {},
-  onKeyDown: () => {},
+  onClick: () => action('on click'),
+  onKeyDown: () => action('on keydown'),
   primaryButtonText: '',
 };

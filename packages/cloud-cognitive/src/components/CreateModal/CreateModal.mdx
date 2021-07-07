@@ -1,8 +1,7 @@
-import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
 import { pkg } from '../../settings';
 import { getStorybookSlug } from '../../../config';
 import { CreateModal } from '.';
-import { ArgsTable } from '@storybook/addon-docs/blocks';
 
 # CreateModal
 
@@ -26,11 +25,11 @@ immediately apparent to the user, with a clear and obvious path to completion.
 
 Here it is in use.
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(pkg, CreateModal.displayName, 'with-form-validation')}
   />
-</Preview>
+</Canvas>
 
 ## Form validation
 
@@ -70,4 +69,4 @@ class which is then applied to the CreateModal using the `className` prop.
 
 ## Component API
 
-<Props />
+<ArgsTable />

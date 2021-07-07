@@ -319,7 +319,10 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     }
 
     .bx--btn.#{$block-class}__navigation-back-button {
+      position: relative;
       z-index: 5;
+      top: calc(-1 * #{$spacing-03});
+      left: calc(-1 * #{$spacing-03});
     }
     .bx--btn.#{$block-class}__navigation-back-button,
     .bx--btn.#{$block-class}__close-button {

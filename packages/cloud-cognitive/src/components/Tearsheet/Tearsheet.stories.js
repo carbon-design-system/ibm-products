@@ -70,6 +70,7 @@ export default {
         0: null,
         1: (
           <Dropdown
+            id="tss-had"
             label="Choose an option"
             items={['option 1', 'option 2', 'option 3', 'option 4']}
           />
@@ -114,9 +115,13 @@ const mainContent = (
   <div className="tearsheet-stories__dummy-content-block">
     <Form>
       <p>Main content</p>
-      <FormGroup>
-        <TextInput labelText="Enter an important value here" />
-        <TextInput light labelText="Here is a light entry field:" />
+      <FormGroup legendText="">
+        <TextInput id="tss-ft1" labelText="Enter an important value here" />
+        <TextInput
+          id="tss-ft2"
+          light
+          labelText="Here is a light entry field:"
+        />
       </FormGroup>
     </Form>
   </div>

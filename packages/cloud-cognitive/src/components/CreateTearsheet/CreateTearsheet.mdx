@@ -1,4 +1,4 @@
-import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
+import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
 import { pkg } from '../../settings';
 import { getStorybookSlug } from '../../../config';
 import { CreateTearsheet } from '.';
@@ -58,7 +58,7 @@ Tearsheet create flow example:
 
 ## Example usage
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(
       pkg,
@@ -66,8 +66,8 @@ Tearsheet create flow example:
       'multi-step-tearsheet'
     )}
   />
-</Preview>
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />

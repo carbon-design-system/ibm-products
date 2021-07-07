@@ -60,6 +60,7 @@ export let APIKeyModal = forwardRef(
       open,
       previousStepButtonText,
       secondaryButtonText,
+      showPasswordLabel,
       successBody,
       successHeader,
       stepHeaders,
@@ -69,6 +70,9 @@ export let APIKeyModal = forwardRef(
   ) => {
     const [name, setName] = useState('');
     const [currentStep, setCurrentStep] = useState(0);
+    const [isPrimaryButtonDisabled, setIsPrimaryButtonDisabled] =
+      useState(false);
+    const [primaryButtonText, setPrimaryButtonText] = useState('');
     const inputRef = useRef();
     const hasSteps = Boolean(customSteps.length);
     const apiKeyLoaded = apiKey && !loading;
@@ -81,28 +85,33 @@ export let APIKeyModal = forwardRef(
       }
     }, [open]);
 
-    const isPrimaryButtonDisabled = () => {
+    useEffect(() => {
       if (loading) {
-        return true;
+        setIsPrimaryButtonDisabled(true);
+      } else if (hasSteps && 'valid' in customSteps[currentStep]) {
+        setIsPrimaryButtonDisabled(!customSteps[currentStep].valid);
+      } else if (!hasSteps && nameRequired && !name) {
+        setIsPrimaryButtonDisabled(true);
+      } else {
+        setIsPrimaryButtonDisabled(false);
       }
-      if (hasSteps && 'valid' in customSteps[currentStep]) {
-        return !customSteps[currentStep].valid;
-      }
-      if (nameRequired && !name) {
-        return true;
-      }
-      return false;
-    };
+    }, [loading, hasSteps, customSteps, currentStep, nameRequired, name]);
 
-    const getPrimaryButtonText = () => {
+    useEffect(() => {
       if (apiKey) {
-        return copyButtonText;
+        setPrimaryButtonText(copyButtonText);
+      } else if (hasNextStep) {
+        setPrimaryButtonText(nextStepButtonText);
+      } else {
+        setPrimaryButtonText(createButtonText);
       }
-      if (hasNextStep) {
-        return nextStepButtonText;
-      }
-      return createButtonText;
-    };
+    }, [
+      apiKey,
+      copyButtonText,
+      hasNextStep,
+      nextStepButtonText,
+      createButtonText,
+    ]);
 
     const getSecondaryButtonText = () => {
       if (hasPreviousStep && !apiKeyLoaded) {
@@ -175,6 +184,8 @@ export let APIKeyModal = forwardRef(
                   value={apiKey}
                   labelText={apiKeyLabel}
                   id={apiKeyInputId}
+                  showPasswordLabel={showPasswordLabel}
+                  tooltipPosition="left"
                 />
               )}
               {apiKey && !apiKeyVisibility && (
@@ -243,8 +254,8 @@ export let APIKeyModal = forwardRef(
             type="submit"
             kind="primary"
             onClick={submitHandler}
-            disabled={isPrimaryButtonDisabled()}>
-            {getPrimaryButtonText()}
+            disabled={isPrimaryButtonDisabled}>
+            {primaryButtonText}
           </Button>
         </ModalFooter>
       </ComposedModal>
@@ -256,143 +267,44 @@ export let APIKeyModal = forwardRef(
 APIKeyModal = pkg.checkComponentEnabled(APIKeyModal, componentName);
 
 APIKeyModal.propTypes = {
-  /**
-   * the api key the user receives
-   */
   apiKey: PropTypes.string,
-  /**
-   * id for the api key input field
-   */
   apiKeyInputId: PropTypes.string,
-  /**
-   * label for the api key input field
-   */
   apiKeyLabel: PropTypes.string,
-  /**
-   * specifies if the api key input should use the password type toggle
-   */
   apiKeyVisibility: PropTypes.bool,
-  /**
-   * content for modal body
-   */
   body: PropTypes.string,
-  /**
-   * Optional classname
-   */
   className: PropTypes.string,
-  /**
-   * text for the copy button
-   */
   copyButtonText: PropTypes.string.isRequired,
-  /**
-   * button text for the create key button
-   */
   createButtonText: PropTypes.string,
-  /**
-   * modal header for the create a key screen
-   */
   createHeader: PropTypes.string,
-  /**
-   * an array that contains the custom step content and if the step has passed validation
-   */
   customSteps: PropTypes.arrayOf(
     PropTypes.shape({
       valid: PropTypes.bool,
       content: PropTypes.node,
     })
   ),
-  /**
-   * text fot the download message
-   */
   downloadBodyText: PropTypes.string,
-  /**
-   * text for the download link
-   */
   downloadLinkText: PropTypes.string,
-  /**
-   * specifies if the api key is downloadable or not
-   */
   downloadable: PropTypes.bool,
-  /**
-   * specifies the filename for downloadable api keys
-   */
   downloadableFileName: PropTypes.string,
-  /**
-   * specifices if an error has occured
-   */
   error: PropTypes.bool,
-  /**
-   * message to display when modal in an error state
-   */
   errorMessage: PropTypes.string,
-  /**
-   * specifies if the api key creation is loading
-   */
   loading: PropTypes.bool,
-  /**
-   * loading message for when the api key is loading
-   */
   loadingMessage: PropTypes.string,
-  /**
-   * Label for modal
-   */
   modalLabel: PropTypes.string,
-  /**
-   * helper text for name input
-   */
   nameHelperText: PropTypes.string,
-  /**
-   * id for name input
-   */
   nameInputId: PropTypes.string,
-  /**
-   * label for name input
-   */
   nameLabel: PropTypes.string,
-  /**
-   * placeholder for name input
-   */
   namePlaceholder: PropTypes.string,
-  /**
-   * specifices if a name is required. If you are using custom steps DO NOT use this for validation.
-   * use the `valid` prop in the `customSteps` prop array for validation. see `customSteps` for additional information.
-   */
   nameRequired: PropTypes.bool,
-  /**
-   * Specifies text for next step button
-   */
   nextStepButtonText: PropTypes.string,
-  /**
-   * function to close the modal
-   */
   onClose: PropTypes.func,
-  /**
-   * function that is called to create the api key
-   */
   onRequestSubmit: PropTypes.func,
-  /**
-   * specifies if the modal is open or not
-   */
   open: PropTypes.bool,
-  /**
-   * Specifices text for previous step button
-   */
   previousStepButtonText: PropTypes.string,
-  /**
-   * text for the close button
-   */
   secondaryButtonText: PropTypes.string,
-  /**
-   * Modal header for individual steps
-   */
+  showPasswordLabel: PropTypes.string,
   stepHeaders: PropTypes.arrayOf(PropTypes.string),
-  /**
-   * content for when an api key is created successfully
-   */
   successBody: PropTypes.node.isRequired,
-  /**
-   * modal header for a successful api key creation
-   */
   successHeader: PropTypes.string.isRequired,
 };
 

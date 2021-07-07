@@ -39,7 +39,7 @@ describe(name, () => {
       titleSize: 'large',
     };
     const { container } = render(<CardHeader {...props} />);
-    expect(container.querySelector(`${blockClass}__title-lg`)).toBeVisible();
+    expect(container.querySelector(`.${blockClass}__title-lg`)).toBeVisible();
   });
 
   it('renders actions', () => {

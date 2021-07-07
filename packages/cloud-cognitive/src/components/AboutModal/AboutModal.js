@@ -6,7 +6,8 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { useState, useRef } from 'react';
+import ReactResizeDetector from 'react-resize-detector';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -54,73 +55,96 @@ export let AboutModal = React.forwardRef(
       ...rest
     },
     ref
-  ) => (
-    <ComposedModal
-      {
-        // Pass through any other property values as HTML attributes.
-        ...rest
-      }
-      className={cx(
-        blockClass, // Apply the block class to the main HTML element
-        className, // Apply any supplied class names to the main HTML element.
-        {
-          [`${blockClass}--with-tabs`]:
-            additionalInfo && additionalInfo.length > 1,
-        }
-      )}
-      {...{ onClose, open, ref }}>
-      <div className={`${blockClass}__logo`}>{logo}</div>
-      <ModalHeader
-        className={`${blockClass}__header`}
-        iconDescription={closeIconDescription}
-        label={title}
-        labelClassName={`${blockClass}__title`}
-      />
-      <ModalBody className={`${blockClass}__body`}>
-        <div className={`${blockClass}__body-content`}>
-          {content}
-          <div className={`${blockClass}__links-container`}>
-            {links &&
-              links.length > 0 &&
-              links.map((link, i) => (
-                <React.Fragment key={i}>{link}</React.Fragment>
-              ))}
-          </div>
-          {legalText && (
-            <p className={`${blockClass}__legal-text`}>{legalText}</p>
+  ) => {
+    const [hasScrollingContent, setHasScrollingContent] = useState(true);
+    const bodyRef = useRef();
+
+    const handleResize = () => {
+      const bodyElement = bodyRef.current.parentNode;
+      setHasScrollingContent(
+        // if our scroll height exceeds the client height enable scrolling
+        bodyElement.clientHeight <
+          (hasScrollingContent
+            ? // Carbon modal adds 32px bottom margin when scrolling content is enabled
+              bodyElement.scrollHeight - 32
+            : bodyElement.scrollHeight)
+      );
+    };
+
+    return (
+      <ReactResizeDetector onResize={handleResize}>
+        <ComposedModal
+          {
+            // Pass through any other property values as HTML attributes.
+            ...rest
+          }
+          className={cx(
+            blockClass, // Apply the block class to the main HTML element
+            className, // Apply any supplied class names to the main HTML element.
+            {
+              [`${blockClass}--with-tabs`]:
+                additionalInfo && additionalInfo.length > 1,
+            }
           )}
-          {copyrightText && (
-            <p className={`${blockClass}__copyright-text`}>{copyrightText}</p>
-          )}
-        </div>
-      </ModalBody>
-      <ModalFooter className={`${blockClass}__footer`}>
-        {additionalInfo &&
-          additionalInfo.length > 0 &&
-          (additionalInfo.length === 1 ? (
-            <>
-              <p className={`${blockClass}__version-label`}>
-                {additionalInfo[0].label}
-              </p>
-              <p className={`${blockClass}__version-number`}>
-                {additionalInfo[0].content}
-              </p>
-            </>
-          ) : (
-            <Tabs className={`${blockClass}__tab-container`}>
-              {additionalInfo.map((tab, i) => (
-                <Tab
-                  id={'about-modal-tab-' + tab.label}
-                  label={tab.label}
-                  key={i}>
-                  {tab.content}
-                </Tab>
+          {...{ onClose, open, ref }}>
+          <div className={`${blockClass}__logo`}>{logo}</div>
+          <ModalHeader
+            className={`${blockClass}__header`}
+            iconDescription={closeIconDescription}
+            label={title}
+            labelClassName={`${blockClass}__title`}
+          />
+          <ModalBody
+            className={`${blockClass}__body`}
+            hasScrollingContent={hasScrollingContent}>
+            <div className={`${blockClass}__body-content`} ref={bodyRef}>
+              {content}
+              <div className={`${blockClass}__links-container`}>
+                {links &&
+                  links.length > 0 &&
+                  links.map((link, i) => (
+                    <React.Fragment key={i}>{link}</React.Fragment>
+                  ))}
+              </div>
+              {legalText && (
+                <p className={`${blockClass}__legal-text`}>{legalText}</p>
+              )}
+              {copyrightText && (
+                <p className={`${blockClass}__copyright-text`}>
+                  {copyrightText}
+                </p>
+              )}
+            </div>
+          </ModalBody>
+          <ModalFooter className={`${blockClass}__footer`}>
+            {additionalInfo &&
+              additionalInfo.length > 0 &&
+              (additionalInfo.length === 1 ? (
+                <>
+                  <p className={`${blockClass}__version-label`}>
+                    {additionalInfo[0].label}
+                  </p>
+                  <p className={`${blockClass}__version-number`}>
+                    {additionalInfo[0].content}
+                  </p>
+                </>
+              ) : (
+                <Tabs className={`${blockClass}__tab-container`}>
+                  {additionalInfo.map((tab, i) => (
+                    <Tab
+                      id={'about-modal-tab-' + tab.label}
+                      label={tab.label}
+                      key={i}>
+                      {tab.content}
+                    </Tab>
+                  ))}
+                </Tabs>
               ))}
-            </Tabs>
-          ))}
-      </ModalFooter>
-    </ComposedModal>
-  )
+          </ModalFooter>
+        </ComposedModal>
+      </ReactResizeDetector>
+    );
+  }
 );
 
 // Return a placeholder if not released and not enabled by feature flag

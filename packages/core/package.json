@@ -53,15 +53,15 @@
     "css-loader": "^5.2.6",
     "fast-sass-loader": "^1.5.0",
     "node-sass": "^6.0.1",
-    "npm-check-updates": "^11.7.1",
+    "npm-check-updates": "^11.8.1",
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "regenerator-runtime": "^0.13.7",
     "rimraf": "^3.0.2",
     "style-loader": "^3.0.0",
-    "typescript": "^4.3.4",
-    "webpack": "^5.41.1",
+    "typescript": "^4.3.5",
+    "webpack": "^5.43.0",
     "webpack-merge": "^5.8.0"
   }
 }

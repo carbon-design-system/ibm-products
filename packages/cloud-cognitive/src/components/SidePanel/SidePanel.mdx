@@ -1,4 +1,4 @@
-import { Story, Props, Preview } from '@storybook/addon-docs';
+import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
 import { pkg } from '../../settings';
 import { getStorybookSlug } from '../../../config';
 import { SidePanel } from '.';
@@ -21,12 +21,12 @@ within them.
 
 ### Default SidePanel component
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(pkg, SidePanel.displayName, 'slide-over-medium')}
   />
-</Preview>
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />

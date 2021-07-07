@@ -1,4 +1,4 @@
-import { Story, Props, Preview } from '@storybook/addon-docs';
+import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
 import { pkg } from '../../settings';
 import { getStorybookSlug } from '../../../config';
 import { EmptyState } from '.';
@@ -18,15 +18,15 @@ guidelines and documentation please refer to the links above.
 
 ### Default Empty state
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(pkg, EmptyState.displayName, 'default', 'emptystates')}
   />
-</Preview>
+</Canvas>
 
 ### Empty state with action
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(
       pkg,
@@ -35,11 +35,11 @@ guidelines and documentation please refer to the links above.
       'emptystates'
     )}
   />
-</Preview>
+</Canvas>
 
 ### Empty state with action (Button with icon)
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(
       pkg,
@@ -48,11 +48,11 @@ guidelines and documentation please refer to the links above.
       'emptystates'
     )}
   />
-</Preview>
+</Canvas>
 
 ### Empty state with link
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(
       pkg,
@@ -61,11 +61,11 @@ guidelines and documentation please refer to the links above.
       'emptystates'
     )}
   />
-</Preview>
+</Canvas>
 
 ### Empty state with action and link
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(
       pkg,
@@ -74,8 +74,8 @@ guidelines and documentation please refer to the links above.
       'emptystates'
     )}
   />
-</Preview>
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />

@@ -22,6 +22,7 @@ const blockClass = `${pkg.prefix}--page-header`;
 
 /* Test properties. */
 const actionBarItems = [1, 2, 3, 4].map((item) => ({
+  key: `a-key-${item}`,
   renderIcon: Lightning16,
   iconDescription: `Action ${item}`,
   onClick: () => {},

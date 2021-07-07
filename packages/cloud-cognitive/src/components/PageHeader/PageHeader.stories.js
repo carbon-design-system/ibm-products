@@ -47,11 +47,13 @@ export default {
 // Test values for props.
 
 const actionBarItems = [1, 2, 3, 4].map((item) => ({
+  keuy: `a-key-${item}`,
   renderIcon: Lightning16,
   iconDescription: `Action ${item}`,
 }));
 
 const manyActionBarItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
+  keuy: `a-key-${item}`,
   renderIcon: Lightning16,
   iconDescription: `Action ${item}`,
 }));

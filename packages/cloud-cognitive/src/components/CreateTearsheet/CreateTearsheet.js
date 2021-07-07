@@ -590,8 +590,12 @@ export let CreateTearsheet = forwardRef(
           rootMargin: '0px',
           threshold: 0,
         };
-        const viewAllSections = document.querySelectorAll(
-          `.${pkg.prefix}--tearsheet-create__section.${pkg.prefix}--tearsheet-create__step--visible-section`
+        // Convert NodeList to array so we can find the index
+        // of the section that should be marked as `active`.
+        const viewAllSections = Array.from(
+          document.querySelectorAll(
+            `.${pkg.prefix}--tearsheet-create__section.${pkg.prefix}--tearsheet-create__step--visible-section`
+          )
         );
         const observer = new IntersectionObserver((entries) => {
           // isIntersecting is true when element and viewport/options.root are overlapping
@@ -599,11 +603,8 @@ export let CreateTearsheet = forwardRef(
           if (entries[0].isIntersecting) {
             // DOM element that is intersecting
             const visibleTarget = entries[0].target;
-            // Convert NodeList to array so we can find the index
-            // of the section that should be marked as `active`.
-            const arrayOfSectionElements = Array.from(viewAllSections);
             // Get visible element index
-            const visibleTargetIndex = arrayOfSectionElements.findIndex(
+            const visibleTargetIndex = viewAllSections.findIndex(
               (item) => item.id === visibleTarget.id
             );
             setActiveSectionIndex(visibleTargetIndex);

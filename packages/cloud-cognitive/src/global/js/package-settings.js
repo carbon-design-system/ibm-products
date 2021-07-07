@@ -27,6 +27,7 @@ const defaults = {
     NotificationsEmptyState: true,
     RemoveModal: true,
     Saving: true,
+    SidePanel: true,
     StatusIcon: true,
     TagSet: true,
     Tearsheet: true,
@@ -52,7 +53,6 @@ const defaults = {
     ModifiedTabs: false,
     PageHeader: false,
     ProductiveCard: false,
-    SidePanel: false,
     WebTerminal: false,
     /* new component flags here - comment used by generate CLI */
   },

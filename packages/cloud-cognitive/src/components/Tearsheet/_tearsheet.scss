@@ -67,7 +67,6 @@
 
   .#{$block-class} .#{$block-class}__container {
     top: auto;
-    width: 100%;
     height: 100%;
     max-height: calc(100% - #{$spacing-09});
     // we want the enter/leave animation to run up most of the height of the
@@ -107,6 +106,10 @@
     max-height: calc(
       100% - (#{$spacing-09} + #{$spacing-08} + (2 * #{$spacing-05}))
     );
+  }
+
+  .#{$block-class}.#{$block-class}--wide .#{$block-class}__container {
+    width: 100%;
   }
 
   @include carbon--breakpoint(lg) {
@@ -153,7 +156,12 @@
     justify-content: space-between;
   }
 
+  .#{$block-class} .#{$block-class}__header-fields {
+    flex: 1 1 100%;
+  }
+
   .#{$block-class} .#{$block-class}__header-actions {
+    flex: 0 0 auto;
     padding-left: $spacing-06;
   }
 
@@ -175,8 +183,18 @@
   }
 
   .#{$block-class} .#{$block-class}__header-description {
+    display: -webkit-box;
+    overflow: hidden;
+    max-width: 100%;
     margin-top: $spacing-05;
     @include carbon--type-style('body-short-01');
+
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
+    @include carbon--breakpoint-up('md') {
+      max-width: 60%;
+    }
   }
 
   .#{$block-class}.#{$block-class}--wide .#{$block-class}__header-description {

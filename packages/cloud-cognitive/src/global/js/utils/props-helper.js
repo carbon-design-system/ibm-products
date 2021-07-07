@@ -117,7 +117,9 @@ export const extractShapesArray = (items) => {
       items?.[0]?.type === React.Fragment ||
       items.type === React.Fragment)
   ) {
-    return unwrapIfFragment(items).map((item) => ({ ...item.props }));
+    const unwrappedItems = unwrapIfFragment(items);
+
+    return unwrappedItems.map((item) => ({ key: item.key, ...item.props }));
   }
 
   return Array.isArray(items) ? items : [];

@@ -149,9 +149,28 @@ export let SidePanel = React.forwardRef(
         const sidePanelSubtitleElement = document.querySelector(
           `.${`${blockClass}__subtitle-text`}`
         );
-        const sidePanelSubtitleElementHeight = sidePanelSubtitleElement
-          ? sidePanelSubtitleElement.offsetHeight
-          : 52; // set default subtitle height if a subtitle is not provided to enable scrolling animation
+        let sidePanelSubtitleElementHeight =
+          sidePanelSubtitleElement?.offsetHeight || 0; // set default subtitle height if a subtitle is not provided to enable scrolling animation
+
+        const panelOuterHeight = sidePanelOuter?.offsetHeight;
+        const scrollSectionHeight = document.querySelector(
+          `.${blockClass}__body-content`
+        )?.offsetHeight;
+        const titleHeight = document.querySelector(
+          `.${blockClass}__title-container`
+        )?.offsetHeight;
+        const totalScrollingContentHeight =
+          titleHeight + sidePanelSubtitleElementHeight + scrollSectionHeight;
+        // if the difference between the total scrolling height and the panel height is less than
+        // the subtitleElement height OR if the subtitle element height is 0, use that difference
+        // as the length of the scroll animation (otherwise the animation will not be able to complete
+        // because there is not enough scrolling distance to complete it).
+        sidePanelSubtitleElementHeight =
+          totalScrollingContentHeight - panelOuterHeight <
+            sidePanelSubtitleElementHeight ||
+          sidePanelSubtitleElementHeight === 0
+            ? totalScrollingContentHeight - panelOuterHeight
+            : sidePanelSubtitleElementHeight;
         /* istanbul ignore next */
         sidePanelOuter &&
           sidePanelOuter.addEventListener('scroll', () => {
@@ -263,9 +282,8 @@ export let SidePanel = React.forwardRef(
         const sidePanelSubtitleElement = document.querySelector(
           `.${blockClass}__subtitle-text`
         );
-        const sidePanelSubtitleElementHeight = sidePanelSubtitleElement
-          ? sidePanelSubtitleElement.offsetHeight
-          : 0;
+        const sidePanelSubtitleElementHeight =
+          sidePanelSubtitleElement?.offsetHeight || 0;
         const titleHeight = sidePanelTitleElement?.offsetHeight + 24;
         sidePanelOuter?.style.setProperty(
           `--${blockClass}--title-container-height`,

@@ -21,6 +21,7 @@
 // the Carbon import-once mechanism.
 @mixin action-bar {
   $block-class: #{$pkg-prefix}--action-bar;
+  $block-class-overflow-items: #{$block-class}-overflow-items;
 
   @include block-wrap($block-class) {
     &.#{$block-class} {
@@ -37,23 +38,23 @@
       justify-content: flex-end;
     }
 
-    .#{$block-class}__overflow-menu {
+    .#{$block-class-overflow-items} {
       display: inline-block;
     }
   }
 
-  @include block-wrap($block-class + '-options') {
-    .#{$block-class}__overflow-menu-item {
+  @include block-wrap($block-class-overflow-items + '__options') {
+    .#{$block-class-overflow-items}__item {
       padding: 0 $spacing-03;
     }
 
-    .#{$block-class}__overflow-menu-item-content {
+    .#{$block-class-overflow-items}__item-content {
       display: flex;
       width: 100%;
       justify-content: space-between;
     }
 
-    .#{$block-class}__overflow-menu-item svg {
+    .#{$block-class-overflow-items}__item svg {
       margin: 0 $spacing-02;
     }
   }

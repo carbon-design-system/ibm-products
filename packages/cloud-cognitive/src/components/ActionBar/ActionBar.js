@@ -51,26 +51,55 @@ export let ActionBar = React.forwardRef(
   ) => {
     const [displayCount, setDisplayCount] = useState(0);
     const [displayedItems, setDisplayedItems] = useState([]);
+    const [hiddenSizingItems, setHiddenSizingItems] = useState([]);
     const internalId = useRef(uuidv4());
     const [itemArray, setItemArray] = useState([]);
     const refDisplayedItems = useRef(null);
+    const sizingRef = useRef(null);
 
-    // create child array from children which may be a fragment
+    // create child array from children which may be a fragment and create hidden sizing items
     useEffect(() => {
+      // NOTE: setting item Array inside useEffect prevents looping renders as a result of setting hiddenSizingItems
+      let newItemArray;
       if (actions) {
-        setItemArray(actions);
+        newItemArray = actions;
       } else {
-        setItemArray(extractShapesArray(children));
+        newItemArray = extractShapesArray(children);
       }
+      setItemArray(newItemArray);
+
+      // Hidden action bar and items used to calculate sizes
+      setHiddenSizingItems(
+        <div
+          className={`${blockClass}__hidden-sizing-items`}
+          aria-hidden={true}
+          ref={sizingRef}>
+          <ActionBarOverflowItems
+            className={`${blockClass}__hidden-sizing-item`}
+            overflowAriaLabel="hidden sizing overflow items"
+            overflowItems={[]}
+            key="hidden-overflow-menu"></ActionBarOverflowItems>
+          {newItemArray.map(({ key, ...rest }) => (
+            <ActionBarItem
+              {...rest}
+              key={`hidden-item-${key}`}
+              className={`${blockClass}__hidden-sizing-item`}
+            />
+          ))}
+        </div>
+      );
     }, [actions, children]);
 
-    // creates displayed items based on displayCount and alignment
+    // creates displayed items based on itemArray, displayCount and alignment
     useEffect(() => {
+      // Calculate the displayed items
       const newDisplayedItems = itemArray.map(({ key, ...rest }) => (
         <ActionBarItem {...rest} key={key} />
       ));
-      // extract any there are not room for to newOverflowItems
+
+      // extract any there is not enough room for into newOverflowItems
       const newOverflowItems = newDisplayedItems.splice(displayCount);
+
       // add overflow menu if needed
       if (newOverflowItems.length) {
         newDisplayedItems.push(
@@ -86,28 +115,58 @@ export let ActionBar = React.forwardRef(
 
     // determine display count based on space available and width of pageActions
     const checkFullyVisibleItems = () => {
-      const spaceAvailable = refDisplayedItems.current.offsetWidth;
-      const actionBarItemWidth = refDisplayedItems.current.offsetHeight; // short cut measure width
-
       /* istanbul ignore next if */
-      if (actionBarItemWidth > 0) {
-        const mightFit = spaceAvailable / actionBarItemWidth;
-        // visibleItems may include 1 overflow menu
-        const visibleItems = maxVisible
-          ? Math.min(itemArray.length, maxVisible + 1) // + 1 for overflow menu if needed
-          : itemArray.length;
-        let willFit = Math.min(Math.floor(mightFit), visibleItems);
+      if (sizingRef.current) {
+        let sizingItems = Array.from(
+          sizingRef.current.querySelectorAll(
+            `.${blockClass}__hidden-sizing-item`
+          )
+        );
 
+        // first item is always the overflow even if nothing else is rendered
+        const overflowItem = sizingItems.shift();
+
+        // determine how many will fit
+        let spaceAvailable = refDisplayedItems.current.offsetWidth;
+        let willFit = 0;
+        let maxVisibleWidth = 0;
+        let fitLimit = maxVisible
+          ? Math.min(maxVisible, sizingItems.length)
+          : sizingItems.length;
+
+        // loop checking the space available
+        for (let i = 0; i < fitLimit; i++) {
+          const newSpaceAvailable = spaceAvailable - sizingItems[i].offsetWidth;
+
+          // update maxVisibleWidth for later use by onWidthChange
+          maxVisibleWidth += sizingItems[i].offsetWidth;
+
+          if (newSpaceAvailable >= 0) {
+            spaceAvailable = newSpaceAvailable;
+            willFit += 1;
+          }
+        }
+
+        // if not enough space for all items then make room for the overflow
+        const overflowWidth = overflowItem.offsetWidth;
+        if (willFit < sizingItems.length) {
+          // Check space for overflow
+          while (willFit > 0 && spaceAvailable < overflowWidth) {
+            willFit -= 1;
+
+            // Highly unlikely that any action bar item is narrower than the overflow item
+
+            // Make sure by removing items in reverse order
+            spaceAvailable += sizingItems[willFit].offsetWidth;
+          }
+        }
+
+        // emit onWidthChange
         onWidthChange &&
           onWidthChange({
-            maxWidth: actionBarItemWidth * visibleItems,
-            minWidth: actionBarItemWidth,
+            maxWidth: maxVisibleWidth,
+            minWidth: overflowWidth,
           });
-
-        // action bar items are a fixed width
-        if (willFit < itemArray.length) {
-          willFit -= 1; // remove one for overflow menu
-        }
 
         if (willFit < 1) {
           setDisplayCount(0);
@@ -129,9 +188,20 @@ export let ActionBar = React.forwardRef(
       checkFullyVisibleItems();
     };
 
+    const handleActionBarItemsResize = () => {
+      // when the hidden sizing items change size
+      checkFullyVisibleItems();
+    };
+
     return (
       <ReactResizeDetector onResize={handleResize}>
         <div {...rest} className={cx([blockClass, className])} ref={ref}>
+          <ReactResizeDetector
+            onResize={handleActionBarItemsResize}
+            key="banana">
+            {hiddenSizingItems}
+          </ReactResizeDetector>
+
           <div
             ref={refDisplayedItems}
             className={cx([
@@ -191,7 +261,8 @@ ActionBar.propTypes = {
       PropTypes.element,
     ]),
     'See documentation on the `actions` prop.'
-  ), // expects action bar item as array or in fragment,
+  ),
+  // expects action bar item as array or in fragment,
   /**
    * className
    */

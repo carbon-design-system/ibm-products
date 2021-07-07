@@ -60,7 +60,7 @@ const InstantTemplate = (args) => {
 
   const generateKey = async () => {
     setLoading(true);
-    await wait(1000);
+    await wait(2000);
     setOpen(true);
     setLoading(false);
   };
@@ -93,7 +93,7 @@ const TemplateWithState = (args) => {
     action('submitted');
     setFetchError(false);
     setLoading(true);
-    await wait(1000);
+    await wait(2000);
     if (error) {
       setFetchError(true);
     } else {
@@ -145,7 +145,7 @@ const MultiStepTemplate = (args) => {
   const submitHandler = async () => {
     action('submitted');
     setLoading(true);
-    await wait(1000);
+    await wait(2000);
     setApiKey('111-111-111-111');
     setLoading(false);
   };
@@ -162,14 +162,6 @@ const MultiStepTemplate = (args) => {
   const formHandler = (evt) => {
     evt.preventDefault();
     submitHandler();
-  };
-
-  const allResourcesHandler = (e) => {
-    const { checked } = e.target;
-    if (checked && resource) {
-      setResource('');
-    }
-    setAllResources(checked);
   };
 
   const steps = [
@@ -206,13 +198,13 @@ const MultiStepTemplate = (args) => {
       ),
     },
     {
-      valid: allResources || (!allResources && !!resource),
+      valid: Boolean(resource),
       content: (
         <>
           <Form onSubmit={formHandler}>
             <FormGroup className={`${blockClass}__resource-toggle`}>
               <Toggle
-                onChange={allResourcesHandler}
+                onChange={(e) => setAllResources(e.target.checked)}
                 labelText="All resources"
                 labelA="Off"
                 labelB="On"
@@ -228,7 +220,7 @@ const MultiStepTemplate = (args) => {
                 onChange={(e) => setResource(e.target.value)}
                 labelText="Which resource?"
                 placeholder="Resources name"
-                disabled={loading || allResources}
+                disabled={loading}
               />
             </FormGroup>
           </Form>
@@ -248,7 +240,6 @@ const MultiStepTemplate = (args) => {
         onRequestSubmit={submitHandler}
         open={open}
         customSteps={steps}
-        nameRequired={false}
       />
       <Button onClick={() => setOpen(!open)}>Generate API key</Button>
     </>
@@ -274,7 +265,6 @@ Standard.args = {
   nameLabel: 'Name your application',
   namePlaceholder: 'Application name',
   nameRequired: true,
-  showPasswordLabel: 'Show password',
 };
 
 export const WithError = TemplateWithState.bind({});
@@ -298,7 +288,6 @@ WithError.args = {
   nameRequired: true,
   error: true,
   errorMessage: 'An error occured.',
-  showPasswordLabel: 'Show password',
 };
 
 export const Instant = InstantTemplate.bind({});
@@ -311,7 +300,6 @@ Instant.args = {
   downloadable: true,
   downloadableFileName: 'apikey',
   apiKeyLabel: '',
-  showPasswordLabel: 'Show password',
 };
 
 export const CustomSteps = MultiStepTemplate.bind({});
@@ -331,5 +319,4 @@ CustomSteps.args = {
   downloadLinkText: 'Download as JSON',
   downloadable: true,
   downloadableFileName: 'apikey',
-  showPasswordLabel: 'Show password',
 };

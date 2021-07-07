@@ -59,29 +59,28 @@ export let AboutModal = React.forwardRef(
   ) => {
     const [hasScrollingContent, setHasScrollingContent] = useState(true);
     const bodyRef = useRef();
-    const bodyId = uuidv4();
-    const resizeRef = useRef();
+    const contentRef = useRef();
+    const contentId = uuidv4();
 
     const handleResize = () => {
-      const bodyElement = bodyRef.current.parentNode;
       setHasScrollingContent(
         // if our scroll height exceeds the client height enable scrolling
-        bodyElement.clientHeight <
+        bodyRef.current.clientHeight <
           (hasScrollingContent
             ? // Carbon modal adds 32px bottom margin when scrolling content is enabled
-              bodyElement.scrollHeight - 32
-            : bodyElement.scrollHeight)
+              bodyRef.current.scrollHeight - 32
+            : bodyRef.current.scrollHeight)
       );
     };
 
     // We can't add a ref directly to the ModalBody, so track it in a ref
     // as the parent of the current bodyRef element
     useEffect(() => {
-      resizeRef.current = bodyRef.current.parentElement;
+      bodyRef.current = contentRef.current.parentElement;
     }, [bodyRef]);
 
     // Detect resize of the ModalBody to recalculate whether scrolling is enabled
-    useResizeDetector({ onResize: handleResize, targetRef: resizeRef });
+    useResizeDetector({ onResize: handleResize, targetRef: bodyRef });
 
     return (
       <ComposedModal
@@ -107,13 +106,13 @@ export let AboutModal = React.forwardRef(
         />
         <ModalBody
           aria-label={hasScrollingContent ? '' : null}
-          aria-labelledby={hasScrollingContent ? bodyId : null}
+          aria-labelledby={hasScrollingContent ? contentId : null}
           className={`${blockClass}__body`}
           hasScrollingContent={hasScrollingContent}>
           <div
             className={`${blockClass}__body-content`}
-            ref={bodyRef}
-            id={bodyId}>
+            ref={contentRef}
+            id={contentId}>
             {content}
             <div className={`${blockClass}__links-container`}>
               {links &&

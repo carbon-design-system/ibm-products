@@ -91,6 +91,7 @@ const DefaultTemplate = ({ ...args }) => {
         onRequestClose={() => setOpen(false)}
         selectorPrimaryFocus=".bx--text-input">
         <TextInput
+          id="create-side-panel-topic-name-a"
           labelText="Topic name"
           className={`${prefix}form-item`}
           placeholder="Enter topic name"
@@ -135,6 +136,7 @@ const DefaultTemplate = ({ ...args }) => {
             value={30}
           />
           <Dropdown
+            id="create-side-panel-dropdown-options-a"
             ariaLabel="Dropdown"
             items={items}
             initialSelectedItem="Day(s)"
@@ -177,6 +179,7 @@ const TemplateWithFormValidation = ({ ...args }) => {
         onRequestClose={() => setOpen(false)}
         disableSubmit={!textInput.length}>
         <TextInput
+          id="create-side-panel-topic-name-b"
           labelText="Topic name"
           className={`${prefix}form-item`}
           placeholder="Enter topic name"
@@ -224,6 +227,7 @@ const TemplateWithFormValidation = ({ ...args }) => {
             value={30}
           />
           <Dropdown
+            id="create-side-panel-dropdown-options-b"
             ariaLabel="Dropdown"
             initialSelectedItem="Day(s)"
             items={items}
@@ -269,6 +273,7 @@ const TemplateWithMultipleForms = ({ ...args }) => {
           className={`${blockClass}__form ${prefix}example-form-group`}
           legendText="Personal information">
           <TextInput
+            id="create-side-panel-first-name"
             labelText="First name"
             className={`${prefix}form-item`}
             placeholder="Enter topic name"
@@ -283,6 +288,7 @@ const TemplateWithMultipleForms = ({ ...args }) => {
             invalidText="This is a required field"
           />
           <Dropdown
+            id="create-side-panel-dropdown-bu"
             titleText="Business unit"
             ariaLabel="Dropdown"
             initialSelectedItem="IBM Cloud platform"
@@ -295,6 +301,7 @@ const TemplateWithMultipleForms = ({ ...args }) => {
           className={`${blockClass}__form ${prefix}example-form-group`}
           legendText="Topic information">
           <TextInput
+            id="create-side-panel-topic-name-c"
             labelText="Topic name"
             className={`${prefix}form-item`}
             placeholder="Enter topic name"
@@ -333,6 +340,7 @@ const TemplateWithMultipleForms = ({ ...args }) => {
               value={30}
             />
             <Dropdown
+              id="create-side-panel-dropdown-options-c"
               ariaLabel="Dropdown"
               initialSelectedItem="Day(s)"
               items={items}

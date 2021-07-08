@@ -196,9 +196,7 @@ export let ActionBar = React.forwardRef(
     return (
       <ReactResizeDetector onResize={handleResize}>
         <div {...rest} className={cx([blockClass, className])} ref={ref}>
-          <ReactResizeDetector
-            onResize={handleActionBarItemsResize}
-            key="banana">
+          <ReactResizeDetector onResize={handleActionBarItemsResize}>
             {hiddenSizingItems}
           </ReactResizeDetector>
 
@@ -278,7 +276,7 @@ ActionBar.propTypes = {
   /**
    * overflowAriaLabel label for open close button overflow used for action bar items that do nto fit.
    */
-  overflowAriaLabel: PropTypes.string,
+  overflowAriaLabel: PropTypes.string.isRequired,
   /**
    * align tags to right of available space
    */
@@ -286,6 +284,5 @@ ActionBar.propTypes = {
 };
 
 ActionBar.defaultProps = {
-  overflowAriaLabel: 'Open and close additional action bar items list.',
   rightAlign: false,
 };

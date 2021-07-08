@@ -85,11 +85,12 @@ const TestActionBar = ({ width, children = null, ...rest }) => {
 
 const sizes = (base) => ({
   offsetWidth: {
-    [`exp--action-bar__displayed-items`]: base,
-    [`exp--action-bar-overflow-items`]: 40, // The overflow menu button
-    [`exp--action-bar`]: base,
-    [`exp--action-bar-item`]: 40, // standard icon button width
-    [`exp--action-bar__hidden-sizing-items`]: 1000000, // very large so as to be unconstrained
+    [`${blockClass}__displayed-items`]: base,
+    [`${blockClass}-overflow-items`]: 40, // The overflow menu button
+    [`${blockClass}-overflow-items__options`]: 200, // width of item in overflow menu
+    [`${blockClass}`]: base,
+    [`${blockClass}-item`]: 40, // standard icon button width
+    [`${blockClass}__hidden-sizing-items`]: 1000000, // very large so as to be unconstrained
   },
 });
 

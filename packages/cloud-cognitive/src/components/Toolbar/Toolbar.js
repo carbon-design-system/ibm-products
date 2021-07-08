@@ -33,7 +33,7 @@ export let Toolbar = React.forwardRef(
       borderColor,
       boxedBorder,
       className,
-      disabled,
+      children,
       onPrimaryClick,
       onSecondaryClick,
       primaryButtonLabel,

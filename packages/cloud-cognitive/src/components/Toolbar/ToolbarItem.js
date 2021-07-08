@@ -5,12 +5,33 @@ import {
   Button,
 } from 'carbon-components-react';
 import { Checkmark16 } from '@carbon/icons-react';
+
+// Other standard imports.
+import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { pkg } from '../../settings';
+import { prepareProps } from '../../global/js/utils/props-helper';
 
+// The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'ToolbarItem';
+const blockClass = `${pkg.prefix}--toolbar-item`;
 
-export let ToolbarItem = React.forwardRef(({ ...rest }) => {
-  return <Button />;
+export let ToolbarItem = React.forwardRef(({ className, ...rest }, ref) => {
+  return (
+    <Button
+      {...{
+        ...rest,
+        ref,
+        className: cx(blockClass, className),
+        hasIconOnly: true,
+        kind: 'ghost',
+        size: 'field',
+        tooltipPosition: 'bottom',
+        tooltipAlignment: 'end',
+        type: 'button',
+      }}
+    />
+  );
 });
 
 // const ToolbarItemColorPicker = () => {
@@ -58,4 +79,58 @@ export let ToolbarItem = React.forwardRef(({ ...rest }) => {
 
 ToolbarItem = pkg.checkComponentEnabled(ToolbarItem, componentName);
 
+// Props the user cannot change
+const reservedProps = [
+  'hasIconOnly',
+  'kind',
+  'size',
+  'tooltipPosition',
+  'tooltipAlignment',
+  'type',
+];
+// Base props on Carbon Button
+const propTypes = prepareProps(Button.propTypes, reservedProps);
+const defaultProps = prepareProps(Button.defaultProps, reservedProps);
+
 ToolbarItem.displayName = componentName;
+
+ToolbarItem.propTypes = {
+  /**
+   * The ...propTypes are copies of those from Button minus the props reserved for use by this component
+   */
+  ...propTypes,
+  /* ***************************************
+  /
+  /  The declarations below allow storybook & DocGen to produce documentation.
+  /  Some or all of them may be inherited from the underlying Carbon component.
+  /
+  / ****************************************/
+  /**
+   * Specify an optional className to be added to your Button
+   *
+   * (inherited from Carbon Button)
+   */
+  className: PropTypes.string,
+  /**
+   * If specifying the `renderIcon` prop, provide a description for that icon that can
+   * be read by screen readers
+   *
+   * (inherited from Carbon Button)
+   */
+  iconDescription: PropTypes.string,
+  /**
+   * Optional click handler
+   *
+   * (inherited from Carbon Button)
+   */
+  onClick: PropTypes.func,
+  /**
+   * Optional prop to allow overriding the icon rendering.
+   * Can be a React component class
+   *
+   * (inherited from Carbon Button)
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+};
+
+ToolbarItem.defaultProps = { ...defaultProps };

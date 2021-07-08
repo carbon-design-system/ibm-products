@@ -152,11 +152,6 @@ storiesOf(getComponentLabel('IdeSlideOverPanel'), module)
       {mockContent}
     </IdeSlideOverPanel>
   ))
-  .add('with controls', () => (
-    <IdeSlideOverPanel size="medium" controls title="Edit Asset metadata" open>
-      {mockContent}
-    </IdeSlideOverPanel>
-  ))
   .add('with controls - icon buttons switching content', () => {
     return <DummyMultiPageSlideComponent />;
   });

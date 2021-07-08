@@ -73,6 +73,7 @@ export const MultiStepWithSectionsTearsheet = () => {
             }, simulatedDelay);
           })
         }
+        sideNavAriaLabel="Create topic side nav"
         viewAllToggleLabelText="Show all available options"
         viewAllToggleOffLabelText="Off"
         viewAllToggleOnLabelText="On"

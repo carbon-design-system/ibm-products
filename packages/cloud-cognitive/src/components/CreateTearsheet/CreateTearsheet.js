@@ -628,7 +628,6 @@ export let CreateTearsheet = forwardRef(
             {...rest}
             actions={createTearsheetActions}
             className={cx(blockClass, className)}
-            closeIconDescription={'Close icon'}
             description={description}
             hasCloseIcon={false}
             influencer={

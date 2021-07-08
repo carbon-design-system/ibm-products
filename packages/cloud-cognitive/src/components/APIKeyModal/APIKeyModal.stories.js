@@ -38,9 +38,9 @@ export default {
 
 const defaultProps = {
   apiKey: '123-456-789',
-  apiKeyInputId: 'apiKeyInput',
   apiKeyLabel: 'API key',
   copyButtonText: 'Copy',
+  copyIconDescription: 'Copy',
   open: true,
   secondaryButtonText: 'Close',
   successBody: (
@@ -49,7 +49,7 @@ const defaultProps = {
       key, you will have to reset it.
     </p>
   ),
-  successHeader: 'API key successully created',
+  successTitle: 'API key successully created',
 };
 
 const blockClass = `${pkg.prefix}--apikey-modal`;
@@ -60,7 +60,7 @@ const InstantTemplate = (args) => {
 
   const generateKey = async () => {
     setLoading(true);
-    await wait(2000);
+    await wait(1000);
     setOpen(true);
     setLoading(false);
   };
@@ -90,10 +90,10 @@ const TemplateWithState = (args) => {
 
   // eslint-disable-next-line
   const submitHandler = async () => {
-    action('submitted');
+    action('submitted')();
     setFetchError(false);
     setLoading(true);
-    await wait(2000);
+    await wait(1000);
     if (error) {
       setFetchError(true);
     } else {
@@ -143,9 +143,9 @@ const MultiStepTemplate = (args) => {
 
   // eslint-disable-next-line
   const submitHandler = async () => {
-    action('submitted');
+    action('submitted')();
     setLoading(true);
-    await wait(2000);
+    await wait(1000);
     setApiKey('111-111-111-111');
     setLoading(false);
   };
@@ -164,9 +164,18 @@ const MultiStepTemplate = (args) => {
     submitHandler();
   };
 
+  const allResourcesHandler = (e) => {
+    const { checked } = e.target;
+    if (checked && resource) {
+      setResource('');
+    }
+    setAllResources(checked);
+  };
+
   const steps = [
     {
       valid: Boolean(name && permissions),
+      title: 'Generate API key',
       content: (
         <>
           <p className={`${blockClass}__body`}>
@@ -198,18 +207,20 @@ const MultiStepTemplate = (args) => {
       ),
     },
     {
-      valid: Boolean(resource),
+      valid: allResources || (!allResources && !!resource),
+      title: 'Choose which resources the API will have access to',
       content: (
         <>
           <Form onSubmit={formHandler}>
             <FormGroup className={`${blockClass}__resource-toggle`}>
               <Toggle
-                onChange={(e) => setAllResources(e.target.checked)}
+                onChange={allResourcesHandler}
                 labelText="All resources"
                 labelA="Off"
                 labelB="On"
                 toggled={allResources}
                 disabled={loading}
+                id="toggle1"
                 // eslint-disable-next-line jsx-a11y/no-autofocus
                 autoFocus
               />
@@ -220,7 +231,7 @@ const MultiStepTemplate = (args) => {
                 onChange={(e) => setResource(e.target.value)}
                 labelText="Which resource?"
                 placeholder="Resources name"
-                disabled={loading}
+                disabled={loading || allResources}
               />
             </FormGroup>
           </Form>
@@ -240,6 +251,7 @@ const MultiStepTemplate = (args) => {
         onRequestSubmit={submitHandler}
         open={open}
         customSteps={steps}
+        nameRequired={false}
       />
       <Button onClick={() => setOpen(!open)}>Generate API key</Button>
     </>
@@ -249,57 +261,56 @@ const MultiStepTemplate = (args) => {
 export const Standard = TemplateWithState.bind({});
 Standard.args = {
   ...defaultProps,
-  apiKeyVisibility: true,
+  visibilityToggle: true,
   createButtonText: 'Generate API key',
-  createHeader: 'Generate an API key',
+  createTitle: 'Generate an API key',
   downloadBodyText:
     'This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it.',
   downloadLinkText: 'Download as JSON',
-  downloadable: true,
-  downloadableFileName: 'apikey',
+  hasDownloadLink: true,
+  downloadFileName: 'apikey',
   loadingMessage: 'Generating...',
   body: '(Optional description text) To connect securely to [product name], your application or tool needs an API key with permission to access resources such as [product resource name].',
   nameHelperText:
     'Providing the application name will help you idenfity your API key later.',
-  nameInputId: 'nameInput',
   nameLabel: 'Name your application',
   namePlaceholder: 'Application name',
   nameRequired: true,
+  showPasswordLabel: 'Show password',
 };
 
 export const WithError = TemplateWithState.bind({});
 WithError.args = {
   ...defaultProps,
-  apiKeyVisibility: true,
+  visibilityToggle: true,
   createButtonText: 'Generate API key',
-  createHeader: 'Generate an API key',
+  createTitle: 'Generate an API key',
   downloadBodyText:
     'This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it.',
   downloadLinkText: 'Download as JSON',
-  downloadable: true,
-  downloadableFileName: 'apikey',
+  hasDownloadLink: true,
+  downloadFileName: 'apikey',
   loadingMessage: 'Generating...',
   body: '(Optional description text) To connect securely to [product name], your application or tool needs an API key with permission to access resources such as [product resource name].',
   nameHelperText:
     'Providing the application name will help you idenfity your API key later.',
-  nameInputId: 'nameInput',
   nameLabel: 'Name your application',
   namePlaceholder: 'Application name',
   nameRequired: true,
   error: true,
-  errorMessage: 'An error occured.',
 };
 
 export const Instant = InstantTemplate.bind({});
 Instant.args = {
   ...defaultProps,
-  apiKeyVisibility: true,
+  visibilityToggle: true,
   downloadBodyText:
     'This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it.',
   downloadLinkText: 'Download as JSON',
-  downloadable: true,
-  downloadableFileName: 'apikey',
+  hasDownloadLink: true,
+  downloadFileName: 'apikey',
   apiKeyLabel: '',
+  showPasswordLabel: 'Show password',
 };
 
 export const CustomSteps = MultiStepTemplate.bind({});
@@ -307,16 +318,13 @@ CustomSteps.args = {
   ...defaultProps,
   createButtonText: 'Generate',
   modalLabel: 'Genreate API key',
-  stepHeaders: [
-    'Generate API key',
-    'Choose which resources the API will have access to',
-  ],
   nextStepButtonText: 'Next',
   previousStepButtonText: 'Previous',
-  apiKeyVisibility: true,
+  visibilityToggle: true,
   downloadBodyText:
     'This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it.',
   downloadLinkText: 'Download as JSON',
-  downloadable: true,
-  downloadableFileName: 'apikey',
+  hasDownloadLink: true,
+  downloadFileName: 'apikey',
+  showPasswordLabel: 'Show password',
 };

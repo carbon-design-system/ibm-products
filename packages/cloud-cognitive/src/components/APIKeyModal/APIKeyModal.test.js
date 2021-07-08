@@ -18,9 +18,9 @@ Object.assign(navigator, {
 const { name } = APIKeyModal;
 const defaultProps = {
   apiKey: '123-456-789',
-  apiKeyInputId: 'apiKeyInput',
   apiKeyLabel: 'API key',
   copyButtonText: 'Copy',
+  copyIconDescription: 'Copy',
   open: true,
   secondaryButtonText: 'Close',
   successBody: (
@@ -29,32 +29,30 @@ const defaultProps = {
       key, you will have to reset it.
     </p>
   ),
-  successHeader: 'API key successully created',
+  successTitle: 'API key successully created',
 };
 
 const standardProps = {
   ...defaultProps,
   apiKey: '',
-  apiKeyVisibility: true,
   createButtonText: 'Generate API key',
-  createHeader: 'Generate an API key',
+  createTitle: 'Generate an API key',
   downloadBodyText:
     'This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it.',
   downloadLinkText: 'Download as JSON',
-  downloadable: true,
-  downloadableFileName: 'apikey',
+  downloadFileName: 'apikey',
+  hasDownloadLink: true,
   loadingMessage: 'your key is being created. please wait...',
   loading: false,
   body: 'Optional description text. To connect securely to {{product}}, your application or tool needs an API key with permission to access the cluster and resources.',
   nameHelperText:
     'Providing the application name will help you idenfity your api key later.',
-  nameInputId: 'nameInput',
   nameLabel: 'Name your application',
   namePlaceholder: 'Application name',
   nameRequired: true,
   onClose: () => {},
   onRequestSubmit: () => {},
-  open: true,
+  visibilityToggle: true,
 };
 
 URL.createObjectURL = jest.fn(() => Promise.resolve('download-link'));
@@ -124,7 +122,7 @@ describe(name, () => {
     expect(getByText(props.errorMessage)).toBeVisible();
   });
 
-  it('should be able to properly navigate a series of custom steps', () => {
+  it('should be able to properly navigate a series of custom steps', async () => {
     const { click } = fireEvent;
     const { fn } = jest;
     const onRequestSubmit = fn();
@@ -133,14 +131,17 @@ describe(name, () => {
       {
         valid: true,
         content: <input type="text" value="a" placeholder="input a" readOnly />,
+        title: 'step 1',
       },
       {
         valid: true,
         content: <input type="text" value="b" placeholder="input b" readOnly />,
+        title: 'step 2',
       },
       {
         valid: false,
         content: <input type="text" value="c" placeholder="input c" readOnly />,
+        title: 'step 3',
       },
     ];
     const props = {
@@ -150,7 +151,7 @@ describe(name, () => {
       customSteps,
       previousStepButtonText: 'Previous step',
       nextStepButtonText: 'Next step',
-      downloadable: false,
+      hasDownloadLink: false,
     };
 
     const { rerender, getByPlaceholderText, getByText } = render(
@@ -193,6 +194,14 @@ describe(name, () => {
     // submit valid form
     customSteps[2].valid = true;
     rerender(<APIKeyModal {...props} customSteps={customSteps} />);
+    /**
+     * the logic behind setting the create button to disabled is set in
+     * a useEffect (setIsPrimaryButtonDisabled). rerender doesn't trigger
+     * useEffect though, so to cause the useEffect to trigger i'm going
+     * to the previous step and back before trying to click the button
+     */
+    click(getByText(props.previousStepButtonText));
+    click(getByText(props.nextStepButtonText));
     click(getByText(props.createButtonText));
     expect(onRequestSubmit).toHaveBeenCalled();
     rerender(<APIKeyModal {...props} />);

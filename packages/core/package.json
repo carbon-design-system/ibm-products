@@ -20,8 +20,8 @@
     "build": "build-storybook",
     "clean": "rimraf storybook-static",
     "start": "start-storybook -p 3000",
-    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (not tested), fast-sass-loader (until Carbon adopts sass and fixes deprecations)",
-    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react$|^react-dom$|^fast-sass-loader$)/'"
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (not tested), sass (until Carbon fixes deprecation warnings)",
+    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react$|^react-dom$|^sass$)/'"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
@@ -56,7 +56,7 @@
     "carbon-components-react": "^7.38.0",
     "carbon-icons": "^7.0.7",
     "css-loader": "^5.2.6",
-    "fast-sass-loader": "^1.5.0",
+    "fast-sass-loader": "^2.0.0",
     "node-sass": "^6.0.1",
     "npm-check-updates": "^11.8.1",
     "prop-types": "^15.7.2",
@@ -64,6 +64,7 @@
     "react-dom": "^16.14.0",
     "regenerator-runtime": "^0.13.7",
     "rimraf": "^3.0.2",
+    "sass": "1.32.x",
     "style-loader": "^3.0.0",
     "typescript": "^4.3.5",
     "webpack": "^5.43.0",

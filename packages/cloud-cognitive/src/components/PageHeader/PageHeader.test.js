@@ -21,6 +21,8 @@ import { mockHTMLElement } from '../../global/js/utils/test-helper';
 const blockClass = `${pkg.prefix}--page-header`;
 
 /* Test properties. */
+const actionBarOverflowLabel = 'Show additional action bar items';
+
 const actionBarItems = [1, 2, 3, 4].map((item) => ({
   key: `a-key-${item}`,
   renderIcon: Lightning16,
@@ -152,6 +154,7 @@ const testSizes = (el, property, _default) => {
 
 const testProps = {
   actionBarItems,
+  actionBarOverflowLabel,
   availableSpace,
   background: true,
   breadcrumbItems,
@@ -302,7 +305,12 @@ describe('PageHeader', () => {
   test('copes with actionBarItems as nodes', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
-    render(<PageHeader actionBarItems={actionBarItemsNodes} />);
+    render(
+      <PageHeader
+        actionBarItems={actionBarItemsNodes}
+        actionBarOverflowLabel={actionBarOverflowLabel}
+      />
+    );
 
     expect(warn).toBeCalledWith(
       'The usage of the prop `actionBarItems` of `PageHeader` has been changed and support for the old usage will soon be removed. Expects an array of objects with the following properties: iconDescription, renderIcon and onClick.'
@@ -487,5 +495,28 @@ describe('PageHeader', () => {
     );
 
     screen.getByRole('region');
+  });
+
+  test('Actionbar without overflow aria label', () => {
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    const { title } = testProps;
+    render(
+      <PageHeader
+        {...{
+          title,
+          actionBarItems,
+        }}
+        aria-label="Page header" // gives section role 'region'
+      />
+    );
+
+    expect(error).toBeCalledWith(
+      expect.stringMatching(
+        /^Warning: Failed prop type: The prop `actionBarOverflowLabel` is marked as required in `PageHeader`/
+      )
+    );
+
+    jest.spyOn(console, 'error').mockRestore();
   });
 });

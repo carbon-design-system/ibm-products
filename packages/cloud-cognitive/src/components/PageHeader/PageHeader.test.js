@@ -42,6 +42,8 @@ const actionBarItemsNodes = (
 );
 
 const availableSpace = <span className="page-header-test--available-space" />;
+const breadcrumbWithOverflowAriaLabel =
+  'Open and close additional breadcrumb item list.';
 const breadcrumbItems = (
   <>
     <BreadcrumbItem href="#">Breadcrumb 1</BreadcrumbItem>
@@ -154,6 +156,7 @@ const testProps = {
   actionBarItems,
   availableSpace,
   background: true,
+  breadcrumbWithOverflowAriaLabel,
   breadcrumbItems,
   className: classNames.join(' '),
   navigation,
@@ -475,11 +478,13 @@ describe('PageHeader', () => {
 
   test('Without background', () => {
     const { title } = testProps;
+
     render(
       <PageHeader
         {...{
           title,
           background: false,
+          breadcrumbWithOverflowAriaLabel: 'Show the breadcrumb overflow',
           breadcrumbItems,
         }}
         aria-label="Page header" // gives section role 'region'
@@ -487,5 +492,28 @@ describe('PageHeader', () => {
     );
 
     screen.getByRole('region');
+  });
+
+  test('Breadcrumb without overflow aria label', () => {
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    const { title } = testProps;
+    render(
+      <PageHeader
+        {...{
+          title,
+          breadcrumbItems,
+        }}
+        aria-label="Page header" // gives section role 'region'
+      />
+    );
+
+    expect(error).toBeCalledWith(
+      expect.stringMatching(
+        /^Warning: Failed prop type: The prop `overflowAriaLabel` is marked as required in `BreadcrumbWithOverflow`/
+      )
+    );
+
+    jest.spyOn(console, 'error').mockRestore();
   });
 });

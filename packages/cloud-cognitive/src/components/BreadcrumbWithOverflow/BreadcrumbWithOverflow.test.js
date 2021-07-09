@@ -104,7 +104,9 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     const plentyOfSpace = (breadcrumbItems.length + 1) * sizes.breadcrumbWidth;
 
     render(
-      <TestBreadcrumbWithOverflow width={plentyOfSpace}>
+      <TestBreadcrumbWithOverflow
+        width={plentyOfSpace}
+        overflowAriaLabel="Open and close additional breadcrumb item list.">
         {breadcrumbItems}
       </TestBreadcrumbWithOverflow>
     );
@@ -124,7 +126,9 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     const overflowItemsExpected = reduceSpaceBy + 1; // + 1 as space for overflow button needed also
 
     render(
-      <TestBreadcrumbWithOverflow width={notEnoughSpace}>
+      <TestBreadcrumbWithOverflow
+        width={notEnoughSpace}
+        overflowAriaLabel="Open and close additional breadcrumb item list.">
         {breadcrumbItems}
       </TestBreadcrumbWithOverflow>
     );
@@ -161,7 +165,9 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     const notEnoughSpace = 1.1 * sizes.breadcrumbWidth;
 
     render(
-      <TestBreadcrumbWithOverflow width={notEnoughSpace}>
+      <TestBreadcrumbWithOverflow
+        width={notEnoughSpace}
+        overflowAriaLabel="Open and close additional breadcrumb item list.">
         {breadcrumbItems}
       </TestBreadcrumbWithOverflow>
     );
@@ -180,7 +186,10 @@ describe(BreadcrumbWithOverflow.displayName, () => {
 
   it('Renders just the breadcrumb obeying maxVisible', () => {
     render(
-      <TestBreadcrumbWithOverflow width={1200} maxVisible={3}>
+      <TestBreadcrumbWithOverflow
+        width={1200}
+        maxVisible={3}
+        overflowAriaLabel="Open and close additional breadcrumb item list.">
         {breadcrumbItems}
       </TestBreadcrumbWithOverflow>
     );
@@ -199,7 +208,10 @@ describe(BreadcrumbWithOverflow.displayName, () => {
 
   it('Renders just the breadcrumb obeying maxVisible', () => {
     render(
-      <TestBreadcrumbWithOverflow width={1200} maxVisible={0}>
+      <TestBreadcrumbWithOverflow
+        width={1200}
+        maxVisible={0}
+        overflowAriaLabel="Open and close additional breadcrumb item list.">
         {breadcrumbItems}
       </TestBreadcrumbWithOverflow>
     );

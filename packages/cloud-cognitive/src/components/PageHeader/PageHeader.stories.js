@@ -77,6 +77,9 @@ const manyBreadcrumbItems = (
     <BreadcrumbItem href="#">Breadcrumb 8</BreadcrumbItem>
   </>
 );
+const breadcrumbWithOverflowAriaLabel =
+  'Open and close additional breadcrumb item list.';
+
 const className = 'client-class-1 client-class-2';
 const dummyPageContent = (
   <Grid className={`${storyClass}__dummy-content`} narrow={true}>
@@ -237,6 +240,7 @@ const Template = (args) => {
 export const AllAttributesSet = Template.bind({});
 AllAttributesSet.args = {
   background: true,
+  breadcrumbWithOverflowAriaLabel,
   breadcrumbItems,
   actionBarItems,
   title,
@@ -263,12 +267,14 @@ TitleAndPagections.args = {
 
 export const BreadcrumbItemsAndTitle = Template.bind({});
 BreadcrumbItemsAndTitle.args = {
+  breadcrumbWithOverflowAriaLabel,
   breadcrumbItems,
   title,
 };
 
 export const BreadcrumbItemsTitleAndPageActions = Template.bind({});
 BreadcrumbItemsTitleAndPageActions.args = {
+  breadcrumbWithOverflowAriaLabel,
   breadcrumbItems,
   title,
   pageActions,
@@ -276,6 +282,7 @@ BreadcrumbItemsTitleAndPageActions.args = {
 
 export const BreadcrumbItemsTitleAndStatus = Template.bind({});
 BreadcrumbItemsTitleAndStatus.args = {
+  breadcrumbWithOverflowAriaLabel,
   breadcrumbItems,
   title,
   availableSpace: statusIndicator,
@@ -284,6 +291,7 @@ BreadcrumbItemsTitleAndStatus.args = {
 export const BreadcrumbItemsTitleTabs = Template.bind({});
 BreadcrumbItemsTitleTabs.args = {
   background: true,
+  breadcrumbWithOverflowAriaLabel,
   breadcrumbItems,
   title,
   navigation: tabBar,
@@ -292,6 +300,7 @@ BreadcrumbItemsTitleTabs.args = {
 export const BreadcrumbItemsTitleIconTabs = Template.bind({});
 BreadcrumbItemsTitleIconTabs.args = {
   background: true,
+  breadcrumbWithOverflowAriaLabel,
   breadcrumbItems,
   title,
   titleIcon: Bee24,
@@ -301,6 +310,7 @@ BreadcrumbItemsTitleIconTabs.args = {
 export const BreadcrumbItemsTitlePageActionsTabs = Template.bind({});
 BreadcrumbItemsTitlePageActionsTabs.args = {
   background: true,
+  breadcrumbWithOverflowAriaLabel,
   breadcrumbItems,
   title,
   pageActions,
@@ -310,6 +320,7 @@ BreadcrumbItemsTitlePageActionsTabs.args = {
 export const BreadcrumbItemsTitlePageActionsTags = Template.bind({});
 BreadcrumbItemsTitlePageActionsTags.args = {
   background: true,
+  breadcrumbWithOverflowAriaLabel,
   breadcrumbItems,
   title,
   pageActions,
@@ -319,6 +330,7 @@ BreadcrumbItemsTitlePageActionsTags.args = {
 export const BreadcrumbItemsTitleTabsTags = Template.bind({});
 BreadcrumbItemsTitleTabsTags.args = {
   background: true,
+  breadcrumbWithOverflowAriaLabel,
   breadcrumbItems,
   title,
   navigation: tabBar,
@@ -330,6 +342,7 @@ export const BreadcrumbItemsActionBarTitlePageActionsTabsTags = Template.bind(
 );
 BreadcrumbItemsActionBarTitlePageActionsTabsTags.args = {
   background: true,
+  breadcrumbWithOverflowAriaLabel,
   breadcrumbItems,
   actionBarItems,
   title,
@@ -340,6 +353,7 @@ BreadcrumbItemsActionBarTitlePageActionsTabsTags.args = {
 export const BreadcrumbItemsActionBar = Template.bind({});
 BreadcrumbItemsActionBar.args = {
   background: true,
+  breadcrumbWithOverflowAriaLabel,
   breadcrumbItems,
   actionBarItems,
   preCollapseTitleRow: true,
@@ -349,6 +363,7 @@ BreadcrumbItemsActionBar.args = {
 export const BreadcrumbItemsTitlePageActionsSubtitle = Template.bind({});
 BreadcrumbItemsTitlePageActionsSubtitle.args = {
   background: true,
+  breadcrumbWithOverflowAriaLabel,
   breadcrumbItems,
   title,
   pageActions,
@@ -360,6 +375,7 @@ export const BreadcrumbItemsTitlePageActionsSummarydetailsTabs = Template.bind(
 );
 BreadcrumbItemsTitlePageActionsSummarydetailsTabs.args = {
   background: true,
+  breadcrumbWithOverflowAriaLabel,
   breadcrumbItems,
   title,
   pageActions,
@@ -371,6 +387,7 @@ export const AllAttributesSetKeepsBreadcrumbTabs = Template.bind({});
 AllAttributesSetKeepsBreadcrumbTabs.args = {
   preventBreadcrumbScroll: true,
   background: true,
+  breadcrumbWithOverflowAriaLabel,
   breadcrumbItems,
   actionBarItems,
   title,
@@ -386,6 +403,7 @@ export const AllAttributesSetPreCollapseTitle = Template.bind({});
 AllAttributesSetPreCollapseTitle.args = {
   preCollapseTitleRow: true,
   background: true,
+  breadcrumbWithOverflowAriaLabel,
   breadcrumbItems,
   actionBarItems,
   title,

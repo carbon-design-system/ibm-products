@@ -42,7 +42,7 @@ const actionBarItemsNodes = (
 );
 
 const availableSpace = <span className="page-header-test--available-space" />;
-const breadcrumbWithOverflowAriaLabel =
+const breadcrumbOverflowLabel =
   'Open and close additional breadcrumb item list.';
 const breadcrumbItems = (
   <>
@@ -156,7 +156,7 @@ const testProps = {
   actionBarItems,
   availableSpace,
   background: true,
-  breadcrumbWithOverflowAriaLabel,
+  breadcrumbOverflowLabel,
   breadcrumbItems,
   className: classNames.join(' '),
   navigation,
@@ -484,7 +484,7 @@ describe('PageHeader', () => {
         {...{
           title,
           background: false,
-          breadcrumbWithOverflowAriaLabel: 'Show the breadcrumb overflow',
+          breadcrumbOverflowLabel: 'Show the breadcrumb overflow',
           breadcrumbItems,
         }}
         aria-label="Page header" // gives section role 'region'

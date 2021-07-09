@@ -785,7 +785,7 @@ const TemplateDemo = () => {
             marginTop: '48px',
           }}>
           <PageHeader
-            breadcrumbWithOverflowAriaLabel="Open and close additional breadcrumb item list."
+            breadcrumbOverflowLabel="Open and close additional breadcrumb item list."
             breadcrumbItems={
               <>
                 <BreadcrumbItem href="../../../hompepage">

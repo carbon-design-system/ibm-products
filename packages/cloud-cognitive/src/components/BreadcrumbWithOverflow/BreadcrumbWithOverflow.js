@@ -90,10 +90,10 @@ export let BreadcrumbWithOverflow = ({
       <BreadcrumbItem key={`breadcrumb-overflow-${internalId.current}`}>
         <OverflowMenu
           ariaLabel={null}
-          menuOffset={{ top: 10, left: 59 }} // TODO: REMOVE borrowed from https://github.com/carbon-design-system/carbon/pull/7085
+          // menuOffset={{ top: 10, left: 59 }} // TODO: REMOVE borrowed from https://github.com/carbon-design-system/carbon/pull/7085
           renderIcon={OverflowMenuHorizontal32}
           className={`${blockClass}__overflow-menu`}
-          menuOptionsClass={`${carbon.prefix}--breadcrumb-menu-options`} // TODO: REMOVE borrowed from https://github.com/carbon-design-system/carbon/pull/7085
+          // menuOptionsClass={`${carbon.prefix}--breadcrumb-menu-options`} // TODO: REMOVE borrowed from https://github.com/carbon-design-system/carbon/pull/7085
         >
           {
             // eslint-disable-next-line react/prop-types

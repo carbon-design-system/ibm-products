@@ -48,7 +48,7 @@ export let PageHeader = React.forwardRef(
       actionBarItems,
       availableSpace,
       background,
-      breadcrumbWithOverflowAriaLabel,
+      breadcrumbOverflowLabel,
       breadcrumbItems,
       className,
       collapseHeader,
@@ -444,7 +444,7 @@ export let PageHeader = React.forwardRef(
                         <BreadcrumbWithOverflow
                           className={`${blockClass}__breadcrumb`}
                           noTrailingSlash={title !== undefined}
-                          overflowAriaLabel={breadcrumbWithOverflowAriaLabel}>
+                          overflowAriaLabel={breadcrumbOverflowLabel}>
                           {breadcrumbItems}
                           {title ? (
                             <BreadcrumbItem
@@ -747,7 +747,7 @@ PageHeader.propTypes = {
   /**
    * If the user supplies breadcrumbs then they must supply an aria label for the overflow
    */
-  breadcrumbWithOverflowAriaLabel: PropTypes.string.isRequired.if(
+  breadcrumbOverflowLabel: PropTypes.string.isRequired.if(
     ({ breadcrumbItems }) => breadcrumbItems && breadcrumbItems.length > 0
   ),
   /**

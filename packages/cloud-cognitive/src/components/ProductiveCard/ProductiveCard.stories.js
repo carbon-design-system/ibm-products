@@ -139,6 +139,8 @@ ComplexBottomBar.args = {
   ...defaultProps,
   primaryButtonText: 'Ghost button',
   actionsPlacement: 'bottom',
+  title: '',
+  label: 'label',
 };
 
 export const Clickable = Template.bind({});

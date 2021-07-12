@@ -18,40 +18,41 @@ Object.assign(navigator, {
 const { name } = APIKeyModal;
 const defaultProps = {
   apiKey: '123-456-789',
-  apiKeyLabel: 'API key',
-  copyButtonText: 'Copy',
-  copyIconDescription: 'Copy',
-  open: true,
-  secondaryButtonText: 'Close',
-  successBody: (
-    <p>
-      This is your unique API key and is non-recoverable. If you lose this API
-      key, you will have to reset it.
-    </p>
-  ),
-  successTitle: 'API key successully created',
-};
-
-const standardProps = {
-  ...defaultProps,
-  apiKey: '',
-  createButtonText: 'Generate API key',
-  createTitle: 'Generate an API key',
-  downloadBodyText:
-    'This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it.',
-  downloadLinkText: 'Download as JSON',
-  downloadFileName: 'apikey',
+  apiKeyLabel: 'api key label',
+  apiKeyName: '',
+  className: 'class-test',
+  copyButtonText: 'copy',
+  copyIconDescription: 'copy',
+  createButtonText: 'create button',
+  createSuccessBody: 'created successfully body',
+  createSuccessTitle: 'created successfully title',
+  customSteps: [],
+  createTitle: 'created title',
+  downloadBodyText: 'download body',
+  downloadFileName: 'filename',
+  downloadLinkText: 'download link text',
+  editButtonText: 'edit button',
+  editSuccess: false,
+  editSuccessTitle: 'edited successfully',
+  editing: false,
+  error: false,
+  errorMessage: 'an error occured',
   hasDownloadLink: true,
-  loadingMessage: 'your key is being created. please wait...',
   loading: false,
-  body: 'Optional description text. To connect securely to {{product}}, your application or tool needs an API key with permission to access the cluster and resources.',
-  nameHelperText:
-    'Providing the application name will help you idenfity your api key later.',
-  nameLabel: 'Name your application',
-  namePlaceholder: 'Application name',
+  loadingMessage: 'loading',
+  body: 'modal body',
+  modalLabel: 'modal label',
+  nameHelperText: 'name helper',
+  nameLabel: 'name label',
+  namePlaceholder: 'name placeholder',
   nameRequired: true,
+  nextStepButtonText: 'next step',
   onClose: () => {},
   onRequestSubmit: () => {},
+  open: true,
+  previousStepButtonText: 'previous step',
+  secondaryButtonText: 'close',
+  showPasswordLabel: 'show password label',
   visibilityToggle: true,
 };
 
@@ -59,11 +60,18 @@ URL.createObjectURL = jest.fn(() => Promise.resolve('download-link'));
 
 describe(name, () => {
   it('renders with minimal setup', () => {
+    const props = {
+      ...defaultProps,
+      nameRequired: false,
+      hasDownloadLink: false,
+    };
     const { click } = fireEvent;
-    const { container } = render(<APIKeyModal {...defaultProps} />);
+    const { container } = render(<APIKeyModal {...props} />);
     const copyBtn = container.querySelector('.bx--btn--primary');
     click(copyBtn);
-    expect(navigator.clipboard.writeText).toHaveBeenCalledWith('123-456-789');
+    expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
+      defaultProps.apiKey
+    );
   });
 
   it('renders with standard setup', async () => {
@@ -71,7 +79,8 @@ describe(name, () => {
     const { fn } = jest;
     const onRequestSubmit = fn();
     const props = {
-      ...standardProps,
+      ...defaultProps,
+      apiKey: '',
       onRequestSubmit,
     };
 
@@ -80,31 +89,32 @@ describe(name, () => {
     );
 
     const nameInput = container.querySelector('.bx--text-input');
-    const generateBtn = getByText('Generate API key');
+    const createButton = getByText(props.createButtonText);
 
     change(nameInput, { target: { value: 'testkey' } });
-    click(generateBtn);
+    click(createButton);
     expect(onRequestSubmit).toHaveBeenCalled();
 
     rerender(<APIKeyModal {...props} loading />);
     expect(getByText(props.loadingMessage)).toBeVisible();
     rerender(<APIKeyModal {...props} apiKey="444-444-444-444" />);
     await waitFor(() => getByText(props.downloadLinkText));
-    const copyBtn = getByText('Copy');
+    const copyBtn = getByText(props.copyButtonText);
     click(copyBtn);
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
       '444-444-444-444'
     );
   });
 
-  it('displays an error message when an error occurs', async () => {
+  it('displays an error message when a create error occurs', async () => {
     const { click, change } = fireEvent;
     const { fn } = jest;
     const onRequestSubmit = fn();
     const props = {
-      ...standardProps,
+      ...defaultProps,
       onRequestSubmit,
       errorMessage: 'an error occured',
+      apiKey: '',
     };
 
     const { getByText, container, rerender } = render(
@@ -112,10 +122,10 @@ describe(name, () => {
     );
 
     const nameInput = container.querySelector('.bx--text-input');
-    const generateBtn = getByText('Generate API key');
+    const createButton = getByText(props.createButtonText);
 
     change(nameInput, { target: { value: 'testkey' } });
-    click(generateBtn);
+    click(createButton);
     expect(onRequestSubmit).toHaveBeenCalled();
 
     rerender(<APIKeyModal {...props} error />);
@@ -145,13 +155,12 @@ describe(name, () => {
       },
     ];
     const props = {
-      ...standardProps,
+      ...defaultProps,
       onRequestSubmit,
       onClose,
       customSteps,
-      previousStepButtonText: 'Previous step',
-      nextStepButtonText: 'Next step',
       hasDownloadLink: false,
+      apiKey: '',
     };
 
     const { rerender, getByPlaceholderText, getByText } = render(
@@ -160,11 +169,11 @@ describe(name, () => {
 
     // step 1
     expect(getByPlaceholderText('input a')).toBeVisible();
-    expect(getByText('Next step')).toBeVisible();
-    expect(getByText('Close')).toBeVisible();
+    expect(getByText(props.nextStepButtonText)).toBeVisible();
+    expect(getByText(props.secondaryButtonText)).toBeVisible();
 
     // advance to step 2
-    click(getByText('Next step'));
+    click(getByText(props.nextStepButtonText));
     expect(getByPlaceholderText('input b')).toBeVisible();
     expect(getByText(props.nextStepButtonText)).toBeVisible();
     expect(getByText(props.previousStepButtonText)).toBeVisible();
@@ -205,8 +214,8 @@ describe(name, () => {
     click(getByText(props.createButtonText));
     expect(onRequestSubmit).toHaveBeenCalled();
     rerender(<APIKeyModal {...props} />);
-    rerender(<APIKeyModal {...props} apiKey="abc-123" successBody="Success" />);
-    expect(getByText('Success')).toBeVisible();
+    rerender(<APIKeyModal {...props} apiKey="abc-123" />);
+    expect(getByText(props.createSuccessBody)).toBeVisible();
     click(getByText(props.secondaryButtonText));
     expect(onClose).toHaveBeenCalled();
   });

@@ -34,15 +34,22 @@ export let APIKeyModal = forwardRef(
     {
       apiKey,
       apiKeyLabel,
+      apiKeyName,
       className,
       copyButtonText,
       copyIconDescription,
       createButtonText,
+      createSuccessBody,
+      createSuccessTitle,
       customSteps,
       createTitle,
       downloadBodyText,
       downloadFileName,
       downloadLinkText,
+      editButtonText,
+      editSuccess,
+      editSuccessTitle,
+      editing,
       error,
       errorMessage,
       hasDownloadLink,
@@ -61,14 +68,12 @@ export let APIKeyModal = forwardRef(
       previousStepButtonText,
       secondaryButtonText: closeButtonText,
       showPasswordLabel,
-      successBody,
-      successTitle,
       visibilityToggle,
       ...rest
     },
     ref
   ) => {
-    const [name, setName] = useState('');
+    const [name, setName] = useState(apiKeyName);
     const [currentStep, setCurrentStep] = useState(0);
     const [isPrimaryButtonDisabled, setIsPrimaryButtonDisabled] =
       useState(false);
@@ -107,7 +112,9 @@ export let APIKeyModal = forwardRef(
     }, [loading, hasSteps, customSteps, currentStep, nameRequired, name]);
 
     useEffect(() => {
-      if (apiKey) {
+      if (editing && !hasNextStep) {
+        setPrimaryButtonText(editButtonText);
+      } else if (apiKey) {
         setPrimaryButtonText(copyButtonText);
       } else if (hasNextStep) {
         setPrimaryButtonText(nextStepButtonText);
@@ -116,6 +123,8 @@ export let APIKeyModal = forwardRef(
       }
     }, [
       apiKey,
+      editing,
+      editButtonText,
       copyButtonText,
       hasNextStep,
       nextStepButtonText,
@@ -136,16 +145,21 @@ export let APIKeyModal = forwardRef(
     ]);
 
     useEffect(() => {
-      if (apiKeyLoaded) {
-        setTitle(successTitle);
+      if (editing && editSuccess) {
+        setTitle(editSuccessTitle);
+      } else if (apiKeyLoaded) {
+        setTitle(createSuccessTitle);
       } else if (hasSteps) {
         setTitle(customSteps[currentStep].title);
       } else {
         setTitle(createTitle);
       }
     }, [
+      editing,
+      editSuccess,
+      editSuccessTitle,
       apiKeyLoaded,
-      successTitle,
+      createSuccessTitle,
       hasSteps,
       customSteps,
       currentStep,
@@ -169,7 +183,7 @@ export let APIKeyModal = forwardRef(
         navigator.clipboard.writeText(apiKey);
       } else {
         evt.preventDefault();
-        onRequestSubmit();
+        onRequestSubmit(name);
       }
     };
 
@@ -216,13 +230,13 @@ export let APIKeyModal = forwardRef(
                   id={apiKeyInputId.current}
                 />
               )}
-              {nameRequired && !apiKeyLoaded && (
+              {(editing || (!apiKeyLoaded && nameRequired)) && (
                 <Form onSubmit={submitHandler}>
                   <TextInput
                     helperText={nameHelperText}
                     placeholder={namePlaceholder}
                     labelText={nameLabel}
-                    onChange={(evt) => setNameHandler(evt)}
+                    onChange={setNameHandler}
                     value={name}
                     id={nameInputId.current}
                     disabled={loading}
@@ -258,7 +272,7 @@ export let APIKeyModal = forwardRef(
                     />
                   ) : (
                     <div className={`${blockClass}__messaging-text`}>
-                      {successBody}
+                      {createSuccessBody}
                     </div>
                   )}
                 </div>
@@ -295,11 +309,14 @@ APIKeyModal = pkg.checkComponentEnabled(APIKeyModal, componentName);
 APIKeyModal.propTypes = {
   apiKey: PropTypes.string,
   apiKeyLabel: PropTypes.string,
+  apiKeyName: PropTypes.string,
   body: PropTypes.string,
   className: PropTypes.string,
-  copyButtonText: PropTypes.string.isRequired,
+  copyButtonText: PropTypes.string,
   copyIconDescription: PropTypes.string,
   createButtonText: PropTypes.string,
+  createSuccessBody: PropTypes.node,
+  createSuccessTitle: PropTypes.string,
   createTitle: PropTypes.string,
   customSteps: PropTypes.arrayOf(
     PropTypes.shape({
@@ -311,6 +328,10 @@ APIKeyModal.propTypes = {
   downloadBodyText: PropTypes.string,
   downloadFileName: PropTypes.string,
   downloadLinkText: PropTypes.string,
+  editButtonText: PropTypes.string,
+  editSuccess: PropTypes.bool,
+  editSuccessTitle: PropTypes.string,
+  editing: PropTypes.bool,
   error: PropTypes.bool,
   errorMessage: PropTypes.string,
   hasDownloadLink: PropTypes.bool,
@@ -328,8 +349,6 @@ APIKeyModal.propTypes = {
   previousStepButtonText: customStepsRequiredProps,
   secondaryButtonText: PropTypes.string,
   showPasswordLabel: PropTypes.string,
-  successBody: PropTypes.node.isRequired,
-  successTitle: PropTypes.string.isRequired,
   visibilityToggle: PropTypes.bool,
 };
 

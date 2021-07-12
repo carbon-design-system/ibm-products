@@ -546,6 +546,7 @@ export let CreateTearsheet = forwardRef(
     };
 
     const handleViewAllToggle = (toggleState) => {
+      setShouldViewAll(toggleState);
       setActiveSectionIndex(0);
       // scroll to top of tearsheet page upon toggling view all option
       if (toggleState) {
@@ -553,9 +554,6 @@ export let CreateTearsheet = forwardRef(
           `.${blockClass}`
         );
         createTearsheetContainer.scrollTop = 0;
-      }
-      if (!shouldViewAll) {
-        setShouldViewAll(toggleState);
       }
     };
 

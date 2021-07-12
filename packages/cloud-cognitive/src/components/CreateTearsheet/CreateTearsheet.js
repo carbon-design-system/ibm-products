@@ -468,7 +468,7 @@ export let CreateTearsheet = forwardRef(
                     {child.props.title}
                   </h4>
                 )}
-                {shouldViewAll ? child : child}
+                {child}
                 {shouldViewAll && (
                   <span className={`${blockClass}__section--divider`} />
                 )}

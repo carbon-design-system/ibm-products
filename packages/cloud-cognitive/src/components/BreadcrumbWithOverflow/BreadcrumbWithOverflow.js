@@ -70,6 +70,7 @@ export let BreadcrumbWithOverflow = ({
     let useAsTitle = null;
 
     if (item?.props) {
+      /* istanbul ignore next if */ // list represents preferred order with checks, no else case expected
       if (item.props['data-title']) {
         useAsTitle = item.props['data-title'];
       } else if (item.props.title) {
@@ -141,7 +142,7 @@ export let BreadcrumbWithOverflow = ({
             : childArray[index].props.className;
 
         return React.cloneElement(item, {
-          key: `clone-${item.key || index}`,
+          key: `clone-${item.key}`,
           title,
           className,
         });
@@ -270,11 +271,13 @@ export let BreadcrumbWithOverflow = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [maxVisible]);
 
+  /* istanbul ignore next */ // not sure how to test resize
   const handleResize = () => {
     /* istanbul ignore next */ // not sure how to test resize
     checkFullyVisibleBreadcrumbItems();
   };
 
+  /* istanbul ignore next */ // not sure how to test resize
   const handleBreadcrumbItemsResize = () => {
     /* istanbul ignore next */ // not sure how to test resize
     checkFullyVisibleBreadcrumbItems();
@@ -322,7 +325,7 @@ export let BreadcrumbWithOverflow = ({
               hasIconOnly
               iconDescription={buttonTooltipValue}
               kind="ghost"
-              href={buttonHrefValue || '#'}
+              href={buttonHrefValue}
               renderIcon={ArrowLeft16}
               size="field"
               tooltipPosition="right"

@@ -55,6 +55,7 @@ export let CreateTearsheet = forwardRef(
       onClose,
       onRequestSubmit,
       open,
+      sideNavAriaLabel,
       submitButtonText,
       title,
       verticalPosition,
@@ -332,7 +333,7 @@ export let CreateTearsheet = forwardRef(
       if (shouldViewAll) {
         return (
           <div className={`${blockClass}__left-nav`}>
-            <SideNav expanded isFixedNav>
+            <SideNav expanded isFixedNav aria-label={sideNavAriaLabel}>
               <SideNavItems>
                 {tearsheetSectionComponents?.length &&
                   tearsheetSectionComponents.map(
@@ -563,7 +564,6 @@ export let CreateTearsheet = forwardRef(
     };
 
     const handleResize = useCallback(() => {
-      // on resize logic
       const createTearsheetOuterElement = document.querySelector(
         `.${blockClass} .${carbon.prefix}--modal-container`
       );
@@ -578,8 +578,46 @@ export let CreateTearsheet = forwardRef(
       );
     }, []);
 
+    // track scrolling/intersection of create sections so that we know
+    // which section is active (updates the SideNavItems `isActive` prop)
+    useEffect(() => {
+      if (shouldViewAll) {
+        const tearsheetMainContent = document.querySelector(
+          `.${pkg.prefix}--tearsheet__content`
+        );
+        let options = {
+          root: tearsheetMainContent,
+          rootMargin: '0px',
+          threshold: 0,
+        };
+        // Convert NodeList to array so we can find the index
+        // of the section that should be marked as `active`.
+        const viewAllSections = Array.from(
+          document.querySelectorAll(
+            `.${pkg.prefix}--tearsheet-create__section.${pkg.prefix}--tearsheet-create__step--visible-section`
+          )
+        );
+        const observer = new IntersectionObserver((entries) => {
+          // isIntersecting is true when element and viewport/options.root are overlapping
+          // isIntersecting is false when element and viewport/options.root don't overlap
+          if (entries[0].isIntersecting) {
+            // DOM element that is intersecting
+            const visibleTarget = entries[0].target;
+            // Get visible element index
+            const visibleTargetIndex = viewAllSections.findIndex(
+              (item) => item.id === visibleTarget.id
+            );
+            setActiveSectionIndex(visibleTargetIndex);
+          }
+        }, options);
+        viewAllSections.forEach((section) => {
+          observer.observe(section);
+        });
+      }
+    }, [shouldViewAll]);
+
     return (
-      <ReactResizeDetector onResize={handleResize}>
+      <ReactResizeDetector handleWidth={true} onResize={handleResize}>
         {/*
           ReactResizeDetector needs the TearsheetShell to be wrapped inside a DOM
           element to avoid `targetRef` being applied directly as an attribute to
@@ -590,7 +628,6 @@ export let CreateTearsheet = forwardRef(
             {...rest}
             actions={createTearsheetActions}
             className={cx(blockClass, className)}
-            closeIconDescription={'Close icon'}
             description={description}
             hasCloseIcon={false}
             influencer={
@@ -689,6 +726,11 @@ CreateTearsheet.propTypes = {
    * Specifies whether the tearsheet is currently open.
    */
   open: PropTypes.bool,
+
+  /**
+   * The aria label to be used for the UI Shell SideNav Carbon component
+   */
+  sideNavAriaLabel: PropTypes.string,
 
   /**
    * The submit button text

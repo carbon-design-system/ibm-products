@@ -47,7 +47,7 @@ export default {
 // Test values for props.
 
 const actionBarItems = [1, 2, 3, 4].map((item) => ({
-  keuy: `a-key-${item}`,
+  key: `a-key-${item}`,
   renderIcon: Lightning16,
   iconDescription: `Action ${item}`,
 }));
@@ -119,6 +119,7 @@ const pageActions = [
     onClick: () => {},
   },
 ];
+const pageActionsOverflowLabel = 'Page actions...';
 
 const manyPageActions = [
   {
@@ -244,6 +245,7 @@ AllAttributesSet.args = {
   actionBarOverflowLabel,
   title,
   pageActions,
+  pageActionsOverflowLabel,
   subtitle,
   availableSpace: summaryDetails,
   navigation: tabBar,
@@ -262,6 +264,7 @@ export const TitleAndPagections = Template.bind({});
 TitleAndPagections.args = {
   title,
   pageActions,
+  pageActionsOverflowLabel,
 };
 
 export const BreadcrumbItemsAndTitle = Template.bind({});
@@ -275,6 +278,7 @@ BreadcrumbItemsTitleAndPageActions.args = {
   breadcrumbItems,
   title,
   pageActions,
+  pageActionsOverflowLabel,
 };
 
 export const BreadcrumbItemsTitleAndStatus = Template.bind({});
@@ -307,6 +311,7 @@ BreadcrumbItemsTitlePageActionsTabs.args = {
   breadcrumbItems,
   title,
   pageActions,
+  pageActionsOverflowLabel,
   navigation: tabBar,
 };
 
@@ -316,6 +321,7 @@ BreadcrumbItemsTitlePageActionsTags.args = {
   breadcrumbItems,
   title,
   pageActions,
+  pageActionsOverflowLabel,
   tags,
 };
 
@@ -338,6 +344,7 @@ BreadcrumbItemsActionBarTitlePageActionsTabsTags.args = {
   actionBarOverflowLabel,
   title,
   pageActions,
+  pageActionsOverflowLabel,
   navigation: tabBar,
 };
 
@@ -357,6 +364,7 @@ BreadcrumbItemsTitlePageActionsSubtitle.args = {
   breadcrumbItems,
   title,
   pageActions,
+  pageActionsOverflowLabel,
   subtitle,
 };
 
@@ -368,6 +376,7 @@ BreadcrumbItemsTitlePageActionsSummarydetailsTabs.args = {
   breadcrumbItems,
   title,
   pageActions,
+  pageActionsOverflowLabel,
   availableSpace: summaryDetails,
   navigation: tabBar,
 };
@@ -382,6 +391,7 @@ AllAttributesSetKeepsBreadcrumbTabs.args = {
   title,
   titleIcon: Bee24,
   pageActions,
+  pageActionsOverflowLabel,
   subtitle,
   availableSpace: summaryDetails,
   navigation: tabBar,
@@ -398,6 +408,7 @@ AllAttributesSetPreCollapseTitle.args = {
   title,
   titleIcon: Bee24,
   pageActions,
+  pageActionsOverflowLabel,
   subtitle,
   availableSpace: summaryDetails,
   navigation: tabBar,
@@ -412,6 +423,7 @@ LongValuesManyItems.args = {
   actionBarOverflowLabel,
   title: longTitle,
   pageActions: manyPageActions,
+  pageActionsOverflowLabel,
   subtitle: longSubtitle,
   availableSpace: summaryDetails,
   navigation: longTabBar,
@@ -458,6 +470,7 @@ AllAttributesWithSwitches.args = {
   navigationSwitchedArg: true,
   pageActions,
   pageActionsSwitchedArg: true,
+  pageActionsOverflowLabel,
   preCollapseTitleRow: false,
   subtitle,
   subtitleSwitchedArg: true,
@@ -515,6 +528,7 @@ PageHeaderWithCarbonHeader.args = {
   navigationSwitchedArg: true,
   pageActions,
   pageActionsSwitchedArg: true,
+  pageActionsOverflowLabel,
   preCollapseTitleRow: false,
   subtitle,
   subtitleSwitchedArg: true,

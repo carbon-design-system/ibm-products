@@ -460,37 +460,35 @@ export let CreateTearsheet = forwardRef(
             if (!isTearsheetSection(child)) {
               return child;
             }
-            if (isTearsheetSection(child)) {
-              // Needed to be able to not render the divider
-              // line on the last section of the last step
-              const isLastSectionOfLastStep =
-                isLastTearsheetStep &&
-                tearsheetStepComponents.length - 1 === index;
-              return React.cloneElement(
-                child,
-                {
-                  className: cx(child.props.className, {
-                    [`${blockClass}__step--hidden-section`]:
-                      child.props.viewAllOnly && !shouldViewAll,
-                    [`${blockClass}__step--visible-section`]:
-                      !child.props.viewAllOnly ||
-                      (child.props.viewAllOnly && shouldViewAll),
-                  }),
-                  key: `key_${index}`,
-                },
-                <>
-                  {shouldViewAll && (
-                    <h4 className={`${blockClass}__step--heading`}>
-                      {child.props.title}
-                    </h4>
-                  )}
-                  {child}
-                  {shouldViewAll && !isLastSectionOfLastStep && (
-                    <span className={`${blockClass}__section--divider`} />
-                  )}
-                </>
-              );
-            }
+            // Needed to be able to not render the divider
+            // line on the last section of the last step
+            const isLastSectionOfLastStep =
+              isLastTearsheetStep &&
+              tearsheetStepComponents.length - 1 === index;
+            return React.cloneElement(
+              child,
+              {
+                className: cx(child.props.className, {
+                  [`${blockClass}__step--hidden-section`]:
+                    child.props.viewAllOnly && !shouldViewAll,
+                  [`${blockClass}__step--visible-section`]:
+                    !child.props.viewAllOnly ||
+                    (child.props.viewAllOnly && shouldViewAll),
+                }),
+                key: `key_${index}`,
+              },
+              <>
+                {shouldViewAll && (
+                  <h4 className={`${blockClass}__step--heading`}>
+                    {child.props.title}
+                  </h4>
+                )}
+                {child}
+                {shouldViewAll && !isLastSectionOfLastStep && (
+                  <span className={`${blockClass}__section--divider`} />
+                )}
+              </>
+            );
           })}
         </>
       );

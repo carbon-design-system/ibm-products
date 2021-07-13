@@ -11,14 +11,14 @@ import userEvent from '@testing-library/user-event';
 import { ButtonSetWithOverflow } from '.';
 import { Bee16 } from '@carbon/icons-react';
 import { mockHTMLElement } from '../../global/js/utils/test-helper';
-import { Button } from 'carbon-components-react';
 
 const buttons = (handleClick) =>
   [1, 2, 3].map((num) => ({
     renderIcon: !(num % 3) ? Bee16 : null,
     iconDescription: !(num % 3) ? 'Busy bee' : null,
     label: `Action ${num}`,
-    kind: num === 1 ? 'primary' : 'secondary',
+    key: `key-${num}`,
+    kind: num === 1 ? null : num === 2 ? 'secondary' : 'danger',
     onClick: () => {
       handleClick(`Action ${num}`);
     },
@@ -60,42 +60,6 @@ describe(ButtonSetWithOverflow.displayName, () => {
     mockElement.mockRestore();
     jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
-  });
-
-  it('Works with deprecated children', () => {
-    window.innerWidth = buttonWidth * 3.5;
-
-    const myOnClick = jest.fn();
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-    render(
-      <ButtonSetWithOverflow buttonSetOverflowLabel="overflow label">
-        {buttons(myOnClick).map(({ label, ...rest }, index) => (
-          <Button key={index} {...rest}>
-            {label}
-          </Button>
-        ))}
-      </ButtonSetWithOverflow>
-    );
-
-    const action1 = screen.getByText(/Action 1/, {
-      selector: `.${blockClass}__button-container:not(.${blockClass}__button-container--hidden) .${carbon.prefix}--btn`,
-    });
-    screen.getByText(/Action 2/, {
-      selector: `.${blockClass}__button-container:not(.${blockClass}__button-container--hidden) .${carbon.prefix}--btn`,
-    });
-    screen.getByText(/Action 3/, {
-      selector: `.${blockClass}__button-container:not(.${blockClass}__button-container--hidden) .${carbon.prefix}--btn`,
-    });
-
-    expect(warn).toBeCalledWith(
-      'The prop `children` of `ButtonSetWithOverflow` has been deprecated and will soon be removed. See documentation on the `buttons` property.'
-    );
-
-    userEvent.click(action1);
-    expect(myOnClick).toBeCalled();
-
-    warn.mockRestore(); // Remove mock
   });
 
   it('Works with button shape array', () => {

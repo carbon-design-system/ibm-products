@@ -112,11 +112,13 @@ const dummyPageContent = (
 );
 const pageActions = [
   {
+    key: 'secondary',
     kind: 'secondary',
     label: 'Secondary button',
     onClick: () => {},
   },
   {
+    key: 'primary',
     kind: 'primary',
     label: 'Primary button',
     onClick: () => {},
@@ -126,16 +128,19 @@ const pageActionsOverflowLabel = 'Page actions...';
 
 const manyPageActions = [
   {
-    kind: 'secondary',
+    key: '1',
+    kind: 'danger',
     label: 'Secondary 1',
     onClick: () => {},
   },
   {
+    key: '2',
     kind: 'secondary',
     label: 'Secondary 2',
     onClick: () => {},
   },
   {
+    key: '3',
     kind: 'primary',
     label: 'Primary',
     onClick: () => {},

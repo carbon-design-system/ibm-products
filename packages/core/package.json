@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-core",
   "private": true,
-  "version": "0.10.5",
+  "version": "0.10.8",
   "license": "Apache-2.0",
   "main": "scripts/build.js",
   "repository": {
@@ -20,14 +20,14 @@
     "build": "build-storybook",
     "clean": "rimraf storybook-static",
     "start": "start-storybook -p 3000",
-    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (not tested), fast-sass-loader (until Carbon adopts sass and fixes deprecations)",
-    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react$|^react-dom$|^fast-sass-loader$)/'"
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (not tested), sass (until Carbon fixes deprecation warnings)",
+    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react$|^react-dom$|^sass$)/'"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "@carbon/elements": "^10.37.0",
     "@carbon/grid": "10.30.0",
-    "@carbon/ibm-cloud-cognitive": "^0.52.4",
+    "@carbon/ibm-cloud-cognitive": "^0.53.1",
     "@carbon/icons-react": "10.34.0",
     "@carbon/import-once": "10.5.0",
     "@carbon/layout": "10.26.0",
@@ -56,14 +56,14 @@
     "carbon-components-react": "^7.38.0",
     "carbon-icons": "^7.0.7",
     "css-loader": "^5.2.6",
-    "fast-sass-loader": "^1.5.0",
-    "node-sass": "^6.0.1",
+    "fast-sass-loader": "^2.0.0",
     "npm-check-updates": "^11.8.1",
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "regenerator-runtime": "^0.13.7",
     "rimraf": "^3.0.2",
+    "sass": "1.32.x",
     "style-loader": "^3.0.0",
     "typescript": "^4.3.5",
     "webpack": "^5.43.0",

@@ -52,6 +52,8 @@ const actionBarItems = [1, 2, 3, 4].map((item) => ({
   iconDescription: `Action ${item}`,
 }));
 
+const actionBarOverflowLabel = 'Show further action bar items';
+
 const manyActionBarItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
   keuy: `a-key-${item}`,
   renderIcon: Lightning16,
@@ -243,6 +245,7 @@ AllAttributesSet.args = {
   breadcrumbOverflowLabel,
   breadcrumbItems,
   actionBarItems,
+  actionBarOverflowLabel,
   title,
   pageActions,
   subtitle,
@@ -345,6 +348,7 @@ BreadcrumbItemsActionBarTitlePageActionsTabsTags.args = {
   breadcrumbOverflowLabel,
   breadcrumbItems,
   actionBarItems,
+  actionBarOverflowLabel,
   title,
   pageActions,
   navigation: tabBar,
@@ -356,6 +360,7 @@ BreadcrumbItemsActionBar.args = {
   breadcrumbOverflowLabel,
   breadcrumbItems,
   actionBarItems,
+  actionBarOverflowLabel,
   preCollapseTitleRow: true,
   title,
 };
@@ -390,6 +395,7 @@ AllAttributesSetKeepsBreadcrumbTabs.args = {
   breadcrumbOverflowLabel,
   breadcrumbItems,
   actionBarItems,
+  actionBarOverflowLabel,
   title,
   titleIcon: Bee24,
   pageActions,
@@ -406,6 +412,7 @@ AllAttributesSetPreCollapseTitle.args = {
   breadcrumbOverflowLabel,
   breadcrumbItems,
   actionBarItems,
+  actionBarOverflowLabel,
   title,
   titleIcon: Bee24,
   pageActions,
@@ -420,6 +427,7 @@ LongValuesManyItems.args = {
   background: true,
   breadcrumbItems: manyBreadcrumbItems,
   actionBarItems: manyActionBarItems,
+  actionBarOverflowLabel,
   title: longTitle,
   pageActions: manyPageActions,
   subtitle: longSubtitle,
@@ -457,6 +465,7 @@ export const AllAttributesWithSwitches = TemplateWithSwitchedArgs.bind({});
 AllAttributesWithSwitches.args = {
   actionBarItems,
   actionBarItemsSwitchedArg: true,
+  actionBarOverflowLabel,
   availableSpace: summaryDetails,
   availableSpaceSwitchedArg: true,
   background: true,
@@ -513,6 +522,7 @@ export const PageHeaderWithCarbonHeader =
 PageHeaderWithCarbonHeader.args = {
   actionBarItems,
   actionBarItemsSwitchedArg: true,
+  actionBarOverflowLabel,
   availableSpace: summaryDetails,
   availableSpaceSwitchedArg: true,
   background: true,

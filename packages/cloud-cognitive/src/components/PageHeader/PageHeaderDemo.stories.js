@@ -800,6 +800,7 @@ const TemplateDemo = () => {
               { key: '2', renderIcon: Settings16, iconDescription: `Settings` },
               { key: '3', renderIcon: VolumeMute16, iconDescription: `Mute` },
             ]}
+            actionBarOverflowLabel="Show more action bar items"
             title={{
               text: 'Authentication activity',
               loading: false,

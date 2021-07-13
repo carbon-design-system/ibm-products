@@ -137,7 +137,6 @@ export let Card = ({
     caption,
     hasActions: hasActions && actionsPlacement === 'top',
     label,
-    productive,
     title,
     titleSize,
   });

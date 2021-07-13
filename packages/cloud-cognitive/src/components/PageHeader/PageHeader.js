@@ -46,6 +46,7 @@ export let PageHeader = React.forwardRef(
   (
     {
       actionBarItems,
+      actionBarOverflowLabel,
       availableSpace,
       background,
       breadcrumbOverflowLabel,
@@ -499,6 +500,7 @@ export let PageHeader = React.forwardRef(
                                 </div>
                               )}
                               <ActionBar
+                                overflowAriaLabel={actionBarOverflowLabel}
                                 actions={actionBarItemArray}
                                 className={`${blockClass}__action-bar`}
                                 onWidthChange={handleActionBarWidthChange}
@@ -728,6 +730,12 @@ PageHeader.propTypes = {
       'Expects an array of objects with the following properties: iconDescription, renderIcon and onClick.'
     ),
   ]), // expects action bar item as array or in fragment
+  /**
+   * aria label for the action bar overflow menu
+   */
+  actionBarOverflowLabel: PropTypes.string.isRequired.if(
+    ({ actionBarItems }) => actionBarItems && actionBarItems.length > 0
+  ),
   /**
    * A zone for placing high-level, client content above the page tabs.
    * Accepts arbitrary renderable content as a React node. Optional.

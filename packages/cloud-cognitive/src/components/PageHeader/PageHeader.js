@@ -58,6 +58,7 @@ export let PageHeader = React.forwardRef(
       preventBreadcrumbScroll,
       navigation,
       pageActions,
+      pageActionsOverflowLabel,
       pageHeaderOffset,
       preCollapseTitleRow,
       subtitle,
@@ -494,6 +495,9 @@ export let PageHeader = React.forwardRef(
                                     className={`${blockClass}__button-set--in-breadcrumb`}
                                     onWidthChange={handleButtonSetWidthChange}
                                     buttons={pageActionsItemArray}
+                                    buttonSetOverflowLabel={
+                                      pageActionsOverflowLabel
+                                    }
                                   />
                                 </div>
                               )}
@@ -561,6 +565,7 @@ export let PageHeader = React.forwardRef(
                         className={`${blockClass}__page-actions-container`}
                         onWidthChange={handleButtonSetWidthChange}
                         buttons={pageActionsItemArray}
+                        buttonSetOverflowLabel={pageActionsOverflowLabel}
                       />
                     </Column>
                   ) : null}
@@ -807,6 +812,13 @@ PageHeader.propTypes = {
       'Expects an array of objects with the following properties: label and onClick.'
     ),
   ]),
+  /**
+   * Label used by the pageActions component when there is insufficient space to display
+   * the pageActions side by side. Currently the label of a dropdown button menu
+   */
+  pageActionsOverflowLabel: PropTypes.node.isRequired.if(
+    ({ pageActions }) => pageActions && pageActions.length > 0
+  ),
   /**
    * Number of pixels the page header sits from the top of the screen.
    * The nature of the pageHeader makes this hard to measure

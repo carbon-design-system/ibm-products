@@ -50,6 +50,8 @@ const buttons = [
   },
 ];
 
+const buttonSetOverflowLabel = 'Button set overflow';
+
 const Template = (argsIn) => {
   const { containerWidth, ...args } = { ...argsIn };
   return (
@@ -62,5 +64,6 @@ const Template = (argsIn) => {
 export const Default = Template.bind({});
 Default.args = {
   buttons,
-  containerWidth: 500,
+  buttonSetOverflowLabel,
+  containerWidth: 600,
 };

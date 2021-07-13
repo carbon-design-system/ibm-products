@@ -69,7 +69,7 @@ describe(ButtonSetWithOverflow.displayName, () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
     render(
-      <ButtonSetWithOverflow>
+      <ButtonSetWithOverflow buttonSetOverflowLabel="overflow label">
         {buttons(myOnClick).map(({ label, ...rest }, index) => (
           <Button key={index} {...rest}>
             {label}
@@ -104,7 +104,12 @@ describe(ButtonSetWithOverflow.displayName, () => {
     const myOnClick = jest.fn();
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
-    render(<ButtonSetWithOverflow buttons={buttons(myOnClick)} />);
+    render(
+      <ButtonSetWithOverflow
+        buttons={buttons(myOnClick)}
+        buttonSetOverflowLabel="overflow label"
+      />
+    );
 
     const action1 = screen.getByText(/Action 1/, {
       selector: `.${blockClass}__button-container:not(.${blockClass}__button-container--hidden) .${carbon.prefix}--btn`,
@@ -127,12 +132,12 @@ describe(ButtonSetWithOverflow.displayName, () => {
 
     const myOnClick = jest.fn();
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-    const comboLabel = 'combo label';
+    const buttonMenuLabel = 'button menu label';
 
     render(
       <ButtonSetWithOverflow
         buttons={buttons(myOnClick)}
-        pageActionsLabel={comboLabel}
+        buttonSetOverflowLabel={buttonMenuLabel}
       />
     );
 
@@ -141,7 +146,7 @@ describe(ButtonSetWithOverflow.displayName, () => {
     });
     expect(action1).toBeNull();
 
-    const comboButton = screen.getByText(/combo label/, {
+    const comboButton = screen.getByText(/button menu label/, {
       selector: `.${blockClass}__button-container--hidden+ .${carbon.prefix}--overflow-menu .${carbon.prefix}--btn`,
     });
     userEvent.click(comboButton);
@@ -154,5 +159,20 @@ describe(ButtonSetWithOverflow.displayName, () => {
     expect(myOnClick).toBeCalled();
 
     warn.mockRestore(); // Remove mock
+  });
+
+  it('Applies right align class when requested', () => {
+    window.innerWidth = buttonWidth * 3.5;
+    const myOnClick = jest.fn();
+
+    const { container } = render(
+      <ButtonSetWithOverflow
+        buttons={buttons(myOnClick)}
+        rightAlign={true}
+        buttonSetOverflowLabel="overflow label"
+      />
+    );
+
+    expect(container.querySelector(`.${blockClass}--right`)).not.toBeNull();
   });
 });

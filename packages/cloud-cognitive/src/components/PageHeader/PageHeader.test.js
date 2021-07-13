@@ -66,6 +66,7 @@ const pageActions = [
     onClick: () => {},
   },
 ];
+const pageActionsOverflowLabel = 'Page actions...';
 
 const pageActionsDepTest = pageActions.map(({ label, ...rest }, index) => (
   <Button {...rest} key={index}>
@@ -164,6 +165,7 @@ const testProps = {
   className: classNames.join(' '),
   navigation,
   pageActions,
+  pageActionsOverflowLabel,
   subtitle,
   tags,
   title: titleObj,
@@ -325,7 +327,12 @@ describe('PageHeader', () => {
   test('with deprecated page actions', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
-    render(<PageHeader pageActions={pageActionsDepTest} />);
+    render(
+      <PageHeader
+        pageActions={pageActionsDepTest}
+        pageActionsOverflowLabel={pageActionsOverflowLabel}
+      />
+    );
 
     screen.getByText('Primary button', {
       selector: `.${blockClass}__page-actions .${pkg.prefix}--button-set-with-overflow__button-container:not(.${pkg.prefix}--button-set-with-overflow__button-container--hidden) .${carbon.prefix}--btn`,
@@ -341,7 +348,12 @@ describe('PageHeader', () => {
   test('with deprecated page actions in a fragment', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
-    render(<PageHeader pageActions={pageActionsDepTest2} />);
+    render(
+      <PageHeader
+        pageActions={pageActionsDepTest2}
+        pageActionsOverflowLabel={pageActionsOverflowLabel}
+      />
+    );
 
     screen.getByText('Primary button', {
       selector: `.${blockClass}__page-actions .${pkg.prefix}--button-set-with-overflow__button-container:not(.${pkg.prefix}--button-set-with-overflow__button-container--hidden) .${carbon.prefix}--btn`,
@@ -410,8 +422,9 @@ describe('PageHeader', () => {
   });
 
   test('Title row renders when PageActions but no Title', () => {
-    const { pageActions } = testProps;
-    render(<PageHeader {...{ pageActions }} />);
+    const { pageActions, pageActionsOverflowLabel = pageActionsOverflowLabel } =
+      testProps;
+    render(<PageHeader {...{ pageActions, pageActionsOverflowLabel }} />);
 
     expect(
       document.querySelectorAll(`.${blockClass}__page-actions`)
@@ -431,7 +444,11 @@ describe('PageHeader', () => {
 
   test('Title row renders when Title with pageActions and navigation but no subtitle or available space', () => {
     const { title } = testProps;
-    render(<PageHeader {...{ title, pageActions, navigation }} />);
+    render(
+      <PageHeader
+        {...{ title, pageActions, pageActionsOverflowLabel, navigation }}
+      />
+    );
 
     expect(
       document.querySelectorAll(

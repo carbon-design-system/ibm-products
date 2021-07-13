@@ -41,6 +41,11 @@
     .#{$block-class-overflow-items} {
       display: inline-block;
     }
+
+    .#{$block-class}__hidden-sizing-items {
+      // This breadcrumb container is used to measure the width of all displayable breadcrumbs
+      @include measuring-container;
+    }
   }
 
   @include block-wrap($block-class-overflow-items + '__options') {

@@ -113,10 +113,12 @@ export const Default = Template.bind({});
 Default.args = {
   actions: actions,
   containerWidth: 500,
+  overflowAriaLabel: 'Open and close additional action bar items list.',
 };
 
 export const WithChildrenDEPRECATED = Template.bind({});
 WithChildrenDEPRECATED.args = {
   children: actionBarItems,
   containerWidth: 500,
+  overflowAriaLabel: 'Open and close additional action bar items list.',
 };

@@ -398,12 +398,15 @@ export let CreateTearsheet = forwardRef(
       );
     };
 
-    // renders all children (CreateTearsheetSteps and regular children elements)
+    // renders all children (CreateTearsheetSteps and regular child elements)
     const renderChildren = (childrenElements) => {
       let step = 0;
       const childrenArray = Array.isArray(childrenElements)
         ? childrenElements
         : [childrenElements];
+      const indexOfLastTearsheetStep = childrenArray
+        .map((el) => el.props.type)
+        .lastIndexOf(CREATE_TEARSHEET_STEP);
       return (
         <>
           {' '}
@@ -433,7 +436,10 @@ export let CreateTearsheet = forwardRef(
                     {renderStepTitle(stepIndex)}
                   </h4>
                 )}
-                {renderStepChildren(child.props.children)}
+                {renderStepChildren(
+                  child.props.children,
+                  indexOfLastTearsheetStep === step - 1
+                )}
               </>
             );
           })}
@@ -441,40 +447,50 @@ export let CreateTearsheet = forwardRef(
       );
     };
 
-    const renderStepChildren = (stepChildren) => {
-      const childrenArray = Array.isArray(stepChildren)
-        ? stepChildren
-        : [stepChildren];
+    const renderStepChildren = (
+      tearsheetStepComponent,
+      isLastTearsheetStep
+    ) => {
+      const tearsheetStepComponents = Array.isArray(tearsheetStepComponent)
+        ? tearsheetStepComponent
+        : [tearsheetStepComponent];
       return (
         <>
-          {childrenArray.map((child, index) => {
+          {tearsheetStepComponents.map((child, index) => {
             if (!isTearsheetSection(child)) {
               return child;
             }
-            return React.cloneElement(
-              child,
-              {
-                className: cx(child.props.className, {
-                  [`${blockClass}__step--hidden-section`]:
-                    child.props.viewAllOnly && !shouldViewAll,
-                  [`${blockClass}__step--visible-section`]:
-                    !child.props.viewAllOnly ||
-                    (child.props.viewAllOnly && shouldViewAll),
-                }),
-                key: `key_${index}`,
-              },
-              <>
-                {shouldViewAll && (
-                  <h4 className={`${blockClass}__step--heading`}>
-                    {child.props.title}
-                  </h4>
-                )}
-                {child}
-                {shouldViewAll && (
-                  <span className={`${blockClass}__section--divider`} />
-                )}
-              </>
-            );
+            if (isTearsheetSection(child)) {
+              // Needed to be able to not render the divider
+              // line on the last section of the last step
+              const isLastSectionOfLastStep =
+                isLastTearsheetStep &&
+                tearsheetStepComponents.length - 1 === index;
+              return React.cloneElement(
+                child,
+                {
+                  className: cx(child.props.className, {
+                    [`${blockClass}__step--hidden-section`]:
+                      child.props.viewAllOnly && !shouldViewAll,
+                    [`${blockClass}__step--visible-section`]:
+                      !child.props.viewAllOnly ||
+                      (child.props.viewAllOnly && shouldViewAll),
+                  }),
+                  key: `key_${index}`,
+                },
+                <>
+                  {shouldViewAll && (
+                    <h4 className={`${blockClass}__step--heading`}>
+                      {child.props.title}
+                    </h4>
+                  )}
+                  {child}
+                  {shouldViewAll && !isLastSectionOfLastStep && (
+                    <span className={`${blockClass}__section--divider`} />
+                  )}
+                </>
+              );
+            }
           })}
         </>
       );

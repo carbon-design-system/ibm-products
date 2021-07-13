@@ -49,6 +49,7 @@ export let PageHeader = React.forwardRef(
       actionBarOverflowLabel,
       availableSpace,
       background,
+      breadcrumbOverflowLabel,
       breadcrumbItems,
       className,
       collapseHeader,
@@ -90,7 +91,7 @@ export let PageHeader = React.forwardRef(
 
     // state based on props only
     const actionBarItemArray = extractShapesArray(actionBarItems);
-    const hasActionBar = actionBarItemArray.length;
+    const hasActionBar = actionBarItemArray && actionBarItemArray.length;
     const hasBreadcrumbRow = !(
       breadcrumbItems === undefined && actionBarItems === undefined
     );
@@ -444,7 +445,8 @@ export let PageHeader = React.forwardRef(
                       {breadcrumbItems !== undefined ? (
                         <BreadcrumbWithOverflow
                           className={`${blockClass}__breadcrumb`}
-                          noTrailingSlash={title !== undefined}>
+                          noTrailingSlash={title !== undefined}
+                          overflowAriaLabel={breadcrumbOverflowLabel}>
                           {breadcrumbItems}
                           {title ? (
                             <BreadcrumbItem
@@ -755,6 +757,12 @@ PageHeader.propTypes = {
    * a breadcrumb. Optional.
    */
   breadcrumbItems: PropTypes.element, // expects BreadcrumbItems,
+  /**
+   * If the user supplies breadcrumbs then they must supply an aria label for the overflow
+   */
+  breadcrumbOverflowLabel: PropTypes.string.isRequired.if(
+    ({ breadcrumbItems }) => breadcrumbItems && breadcrumbItems.length > 0
+  ),
   /**
    * Specifies class(es) to be applied to the top-level PageHeader node.
    * Optional.

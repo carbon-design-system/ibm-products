@@ -10,6 +10,7 @@ import React, { useRef } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 // Carbon and package components we use.
 import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
@@ -21,6 +22,7 @@ const blockClass = `${pkg.prefix}--action-bar-overflow-items`;
 const componentName = 'ActionBar';
 
 export const ActionBarOverflowItems = ({
+  className,
   overflowItems,
   overflowAriaLabel,
 }) => {
@@ -29,7 +31,7 @@ export const ActionBarOverflowItems = ({
   return (
     <OverflowMenu
       ariaLabel={overflowAriaLabel}
-      className={`${blockClass}`}
+      className={cx(blockClass, className)}
       direction="bottom"
       flipped
       menuOptionsClass={`${blockClass}__options`}>
@@ -62,6 +64,11 @@ export const ActionBarOverflowItems = ({
 ActionBarOverflowItems.displayName = componentName;
 
 ActionBarOverflowItems.propTypes = {
+  // expects action bar item as array or in fragment,
+  /**
+   * className
+   */
+  className: PropTypes.string,
   /**
    * overflowAriaLabel label for open close button overflow used for action bar items that do nto fit.
    */

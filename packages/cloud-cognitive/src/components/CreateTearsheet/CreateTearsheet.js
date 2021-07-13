@@ -405,7 +405,7 @@ export let CreateTearsheet = forwardRef(
         ? childrenElements
         : [childrenElements];
       const indexOfLastTearsheetStep = childrenArray
-        .map((el) => el.props.type)
+        .map((el) => el?.props?.type)
         .lastIndexOf(CREATE_TEARSHEET_STEP);
       return (
         <>

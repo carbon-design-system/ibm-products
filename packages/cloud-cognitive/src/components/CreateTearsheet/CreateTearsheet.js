@@ -24,7 +24,7 @@ import {
   SideNavLink,
 } from 'carbon-components-react/lib/components/UIShell';
 import cx from 'classnames';
-import ReactResizeDetector from 'react-resize-detector';
+import { useResizeDetector } from 'react-resize-detector';
 import wrapFocus from '../../global/js/utils/wrapFocus';
 import { TearsheetShell } from '../Tearsheet/TearsheetShell';
 import { carbon, pkg } from '../../settings';
@@ -72,6 +72,7 @@ export let CreateTearsheet = forwardRef(
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [activeSectionIndex, setActiveSectionIndex] = useState(0);
     const previousState = usePreviousValue({ currentStep, open });
+    const contentRef = useRef();
 
     // set current step to 1 upon tearsheet opening, in order
     // to get the auto focus on the first step.
@@ -624,6 +625,12 @@ export let CreateTearsheet = forwardRef(
       }
     }, [shouldViewAll]);
 
+    useResizeDetector({
+      handleWidth: true,
+      onResize: handleResize,
+      targetRef: contentRef,
+    });
+
     return (
       <TearsheetShell
         {...rest}
@@ -646,13 +653,12 @@ export let CreateTearsheet = forwardRef(
         title={title}
         verticalPosition={verticalPosition}
         ref={ref}>
-        <ReactResizeDetector handleWidth={true} onResize={handleResize}>
-          <div
-            className={`${blockClass}__multi-step-panel-content`}
-            onBlur={handleBlur}>
-            {renderChildren(children)}
-          </div>
-        </ReactResizeDetector>
+        <div
+          className={`${blockClass}__multi-step-panel-content`}
+          onBlur={handleBlur}
+          ref={contentRef}>
+          {renderChildren(children)}
+        </div>
       </TearsheetShell>
     );
   }

@@ -103,13 +103,14 @@ describe(name, () => {
       primaryButtonText: 'Ghost button',
       onPrimaryButtonClick: buttonClick,
     };
-    const { container, getByText } = render(<Card {...props} />);
+    const { container, getByText, rerender } = render(<Card {...props} />);
     expect(getByText(props.label)).toBeVisible();
     expect(container.querySelector(`.${blockClass}__actions-top`)).toBeNull();
     fireEvent.click(getByText('icon'));
     expect(iconClick).toHaveBeenCalled();
     fireEvent.click(getByText(props.primaryButtonText));
     expect(buttonClick).toHaveBeenCalled();
+    rerender(<Card {...props} actionsPlacement="top" />);
   });
 
   it('renders productive with overflow', () => {
@@ -127,7 +128,7 @@ describe(name, () => {
     fireEvent.click(container.querySelector('.bx--overflow-menu'));
     fireEvent.click(getByText('Edit'));
     expect(onClick).toHaveBeenCalled();
-    rerender(<Card {...props} actionIconsPosition="top" />);
+    rerender(<Card {...props} actionsPlacement="top" />);
   });
 
   it('renders productive with click zones', () => {

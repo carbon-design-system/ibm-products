@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.54.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.53.2...@carbon/ibm-cloud-cognitive@0.54.0) (2021-07-14)
+
+
+### Features
+
+* address review issues ([#989](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/989)) ([e3abcda](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e3abcda9f9031e553e2e9b2374bff3848b15fef4))
+* remove child support ([#992](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/992)) ([b5e4f3b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b5e4f3b3a05b09225a0da5ac8982f1391986a9af))
+
+
+
+
+
 ## [0.53.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.53.1...@carbon/ibm-cloud-cognitive@0.53.2) (2021-07-13)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

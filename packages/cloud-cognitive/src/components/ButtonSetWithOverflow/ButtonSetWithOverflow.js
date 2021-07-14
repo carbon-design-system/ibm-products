@@ -14,11 +14,7 @@ import { ButtonSet, Button } from 'carbon-components-react';
 import { ButtonMenu, ButtonMenuItem } from '../ButtonMenu';
 
 import { pkg, carbon } from '../../settings';
-import {
-  deprecateProp,
-  extractShapesArray,
-  prepareProps,
-} from '../../global/js/utils/props-helper';
+import { prepareProps } from '../../global/js/utils/props-helper';
 const blockClass = `${pkg.prefix}--button-set-with-overflow`;
 const componentName = 'ButtonSetWithOverflow';
 
@@ -26,7 +22,6 @@ const buttonSize = 'field';
 
 export const ButtonSetWithOverflow = ({
   buttons,
-  children,
   className,
   onWidthChange,
   buttonSetOverflowLabel,
@@ -36,7 +31,6 @@ export const ButtonSetWithOverflow = ({
   const spaceAvailableRef = useRef(null);
   const sizingContainerRefSet = useRef(null);
   const sizingContainerRefCombo = useRef(null);
-  const [itemArray, setItemArray] = useState([]);
 
   /**
    * checkFullyVisibleItems determines display count based on space available and width of pageActions
@@ -82,7 +76,7 @@ export const ButtonSetWithOverflow = ({
   useEffect(() => {
     checkFullyVisibleItems();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [itemArray]);
+  }, [buttons]);
 
   /* istanbul ignore next */ // not sure how to test resize
   const handleResize = () => {
@@ -98,24 +92,16 @@ export const ButtonSetWithOverflow = ({
     checkFullyVisibleItems();
   };
 
-  useEffect(() => {
-    if (buttons) {
-      setItemArray(buttons);
-    } else {
-      setItemArray(
-        extractShapesArray(children)?.map((shape) => ({
-          label: shape.children,
-          ...shape,
-        }))
-      );
-    }
-  }, [buttons, children]);
-
   const AButtonSet = React.forwardRef(({ buttons, ...rest }, ref) => {
     return (
       <ButtonSet {...rest} ref={ref}>
-        {buttons.map(({ label, ...other }, index) => (
-          <Button key={index} {...other} size={buttonSize} type="button">
+        {buttons.map(({ label, key, kind, ...other }) => (
+          <Button
+            key={`button-set-${key}`}
+            kind={kind || 'primary'}
+            {...other}
+            size={buttonSize}
+            type="button">
             {label}
           </Button>
         ))}
@@ -126,10 +112,10 @@ export const ButtonSetWithOverflow = ({
     return (
       <ButtonMenu {...rest} ref={ref} label={buttonSetOverflowLabel}>
         {buttons
-          .map(({ label, kind, ...other }, index) => (
+          .map(({ label, key, kind, ...other }) => (
             <ButtonMenuItem
-              key={index}
-              isDelete={kind === 'danger'}
+              key={`button-menu-${key}`}
+              isDelete={kind?.startsWith('danger')}
               itemText={label}
               {...prepareProps(other, ['iconDescription', 'renderIcon'])}
             />
@@ -156,7 +142,7 @@ export const ButtonSetWithOverflow = ({
               aria-hidden={true}
               ref={sizingContainerRefSet}
               size={buttonSize}
-              buttons={itemArray}
+              buttons={buttons}
             />
           </div>
         </ReactResizeDetector>
@@ -168,7 +154,7 @@ export const ButtonSetWithOverflow = ({
             aria-hidden={true}>
             <AButtonMenu
               ref={sizingContainerRefCombo}
-              buttons={itemArray}
+              buttons={buttons}
               size={buttonSize}
             />
           </div>
@@ -176,12 +162,12 @@ export const ButtonSetWithOverflow = ({
 
         {/* The displayed components */}
         {showAsOverflow ? (
-          <AButtonMenu buttons={itemArray} size={buttonSize} />
+          <AButtonMenu buttons={buttons} size={buttonSize} />
         ) : (
           <AButtonSet
             className={`${blockClass}__button-container`}
             size={buttonSize}
-            buttons={itemArray}
+            buttons={buttons}
           />
         )}
       </div>
@@ -203,21 +189,21 @@ ButtonSetWithOverflow.propTypes = {
   buttons: PropTypes.arrayOf(
     PropTypes.shape({
       ...Button.propTypes,
-      kind: Button.propTypes.kind,
+      key: PropTypes.string.isRequired,
+      kind: PropTypes.oneOf([
+        'primary',
+        'secondary',
+        'danger',
+        'ghost',
+        'danger--primary',
+        'danger--ghost',
+        'danger--tertiary',
+        'tertiary',
+      ]),
       label: PropTypes.node,
-      onClick: Button.propTypes.onClick,
+      onClick: PropTypes.func,
     })
-  ),
-  /**
-   * children of the button set
-   */
-  children: deprecateProp(
-    PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.element),
-      PropTypes.element,
-    ]),
-    'See documentation on the `buttons` property.'
-  ), // expects action bar item as array or in fragment,
+  ).isRequired,
   /**
    * className
    */
@@ -231,7 +217,5 @@ ButtonSetWithOverflow.propTypes = {
    */
   rightAlign: PropTypes.bool,
 };
-
-ButtonSetWithOverflow.defaultProps = {};
 
 ButtonSetWithOverflow.displayName = componentName;

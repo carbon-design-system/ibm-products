@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.54.1...@carbon/ibm-cloud-cognitive@0.54.2) (2021-07-14)
+
+
+### Bug Fixes
+
+* revert to buttoon kind ([#995](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/995)) ([8740afd](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8740afdb578cb7ec57eba4abfae44b2ca7c81068))
+
+
+
+
+
+## [0.54.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.54.0...@carbon/ibm-cloud-cognitive@0.54.1) (2021-07-14)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
 # [0.54.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.53.2...@carbon/ibm-cloud-cognitive@0.54.0) (2021-07-14)
 
 

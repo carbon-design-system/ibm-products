@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2020
+// Copyright IBM Corp. 2020, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -72,7 +72,7 @@
       max-height: 18px; // to match breadcrumb - overflow button is 20 by default
     }
 
-    .#{$block-class}--breadcrumb-back-button.#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only.#{$carbon-prefix}--tooltip__trigger {
+    .#{$block-class}__breadcrumb-back-button.#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only.#{$carbon-prefix}--tooltip__trigger {
       display: inline-flex;
       margin-top: calc(-1 * #{$spacing-04});
 

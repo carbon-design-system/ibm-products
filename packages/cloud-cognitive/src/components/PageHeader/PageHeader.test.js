@@ -44,6 +44,8 @@ const actionBarItemsNodes = (
 );
 
 const availableSpace = <span className="page-header-test--available-space" />;
+const breadcrumbOverflowLabel =
+  'Open and close additional breadcrumb item list.';
 const breadcrumbItems = (
   <>
     <BreadcrumbItem href="#">Breadcrumb 1</BreadcrumbItem>
@@ -54,16 +56,19 @@ const breadcrumbItems = (
 const classNames = ['client-class-1', 'client-class-2'];
 const pageActions = [
   {
+    key: '1',
     kind: 'secondary',
     label: 'Secondary button',
     onClick: () => {},
   },
   {
+    key: '2',
     kind: 'primary',
     label: 'Primary button',
     onClick: () => {},
   },
 ];
+const pageActionsOverflowLabel = 'Page actions...';
 
 const pageActionsDepTest = pageActions.map(({ label, ...rest }, index) => (
   <Button {...rest} key={index}>
@@ -157,10 +162,12 @@ const testProps = {
   actionBarOverflowLabel,
   availableSpace,
   background: true,
+  breadcrumbOverflowLabel,
   breadcrumbItems,
   className: classNames.join(' '),
   navigation,
   pageActions,
+  pageActionsOverflowLabel,
   subtitle,
   tags,
   title: titleObj,
@@ -322,7 +329,12 @@ describe('PageHeader', () => {
   test('with deprecated page actions', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
-    render(<PageHeader pageActions={pageActionsDepTest} />);
+    render(
+      <PageHeader
+        pageActions={pageActionsDepTest}
+        pageActionsOverflowLabel={pageActionsOverflowLabel}
+      />
+    );
 
     screen.getByText('Primary button', {
       selector: `.${blockClass}__page-actions .${pkg.prefix}--button-set-with-overflow__button-container:not(.${pkg.prefix}--button-set-with-overflow__button-container--hidden) .${carbon.prefix}--btn`,
@@ -338,7 +350,12 @@ describe('PageHeader', () => {
   test('with deprecated page actions in a fragment', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
-    render(<PageHeader pageActions={pageActionsDepTest2} />);
+    render(
+      <PageHeader
+        pageActions={pageActionsDepTest2}
+        pageActionsOverflowLabel={pageActionsOverflowLabel}
+      />
+    );
 
     screen.getByText('Primary button', {
       selector: `.${blockClass}__page-actions .${pkg.prefix}--button-set-with-overflow__button-container:not(.${pkg.prefix}--button-set-with-overflow__button-container--hidden) .${carbon.prefix}--btn`,
@@ -407,8 +424,9 @@ describe('PageHeader', () => {
   });
 
   test('Title row renders when PageActions but no Title', () => {
-    const { pageActions } = testProps;
-    render(<PageHeader {...{ pageActions }} />);
+    const { pageActions, pageActionsOverflowLabel = pageActionsOverflowLabel } =
+      testProps;
+    render(<PageHeader {...{ pageActions, pageActionsOverflowLabel }} />);
 
     expect(
       document.querySelectorAll(`.${blockClass}__page-actions`)
@@ -428,7 +446,11 @@ describe('PageHeader', () => {
 
   test('Title row renders when Title with pageActions and navigation but no subtitle or available space', () => {
     const { title } = testProps;
-    render(<PageHeader {...{ title, pageActions, navigation }} />);
+    render(
+      <PageHeader
+        {...{ title, pageActions, pageActionsOverflowLabel, navigation }}
+      />
+    );
 
     expect(
       document.querySelectorAll(
@@ -483,11 +505,13 @@ describe('PageHeader', () => {
 
   test('Without background', () => {
     const { title } = testProps;
+
     render(
       <PageHeader
         {...{
           title,
           background: false,
+          breadcrumbOverflowLabel: 'Show the breadcrumb overflow',
           breadcrumbItems,
         }}
         aria-label="Page header" // gives section role 'region'
@@ -514,6 +538,29 @@ describe('PageHeader', () => {
     expect(error).toBeCalledWith(
       expect.stringMatching(
         /^Warning: Failed prop type: The prop `actionBarOverflowLabel` is marked as required in `PageHeader`/
+      )
+    );
+
+    jest.spyOn(console, 'error').mockRestore();
+  });
+
+  test('Breadcrumb without overflow aria label', () => {
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    const { title } = testProps;
+    render(
+      <PageHeader
+        {...{
+          title,
+          breadcrumbItems,
+        }}
+        aria-label="Page header" // gives section role 'region'
+      />
+    );
+
+    expect(error).toBeCalledWith(
+      expect.stringMatching(
+        /^Warning: Failed prop type: The prop `overflowAriaLabel` is marked as required in `BreadcrumbWithOverflow`/
       )
     );
 

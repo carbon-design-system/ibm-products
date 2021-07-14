@@ -47,7 +47,7 @@ export default {
 // Test values for props.
 
 const actionBarItems = [1, 2, 3, 4].map((item) => ({
-  keuy: `a-key-${item}`,
+  key: `a-key-${item}`,
   renderIcon: Lightning16,
   iconDescription: `Action ${item}`,
 }));
@@ -79,6 +79,9 @@ const manyBreadcrumbItems = (
     <BreadcrumbItem href="#">Breadcrumb 8</BreadcrumbItem>
   </>
 );
+const breadcrumbOverflowLabel =
+  'Open and close additional breadcrumb item list.';
+
 const className = 'client-class-1 client-class-2';
 const dummyPageContent = (
   <Grid className={`${storyClass}__dummy-content`} narrow={true}>
@@ -109,29 +112,35 @@ const dummyPageContent = (
 );
 const pageActions = [
   {
+    key: 'secondary',
     kind: 'secondary',
     label: 'Secondary button',
     onClick: () => {},
   },
   {
+    key: 'primary',
     kind: 'primary',
     label: 'Primary button',
     onClick: () => {},
   },
 ];
+const pageActionsOverflowLabel = 'Page actions...';
 
 const manyPageActions = [
   {
-    kind: 'secondary',
+    key: '1',
+    kind: 'danger',
     label: 'Secondary 1',
     onClick: () => {},
   },
   {
+    key: '2',
     kind: 'secondary',
     label: 'Secondary 2',
     onClick: () => {},
   },
   {
+    key: '3',
     kind: 'primary',
     label: 'Primary',
     onClick: () => {},
@@ -239,11 +248,13 @@ const Template = (args) => {
 export const AllAttributesSet = Template.bind({});
 AllAttributesSet.args = {
   background: true,
+  breadcrumbOverflowLabel,
   breadcrumbItems,
   actionBarItems,
   actionBarOverflowLabel,
   title,
   pageActions,
+  pageActionsOverflowLabel,
   subtitle,
   availableSpace: summaryDetails,
   navigation: tabBar,
@@ -262,23 +273,28 @@ export const TitleAndPagections = Template.bind({});
 TitleAndPagections.args = {
   title,
   pageActions,
+  pageActionsOverflowLabel,
 };
 
 export const BreadcrumbItemsAndTitle = Template.bind({});
 BreadcrumbItemsAndTitle.args = {
+  breadcrumbOverflowLabel,
   breadcrumbItems,
   title,
 };
 
 export const BreadcrumbItemsTitleAndPageActions = Template.bind({});
 BreadcrumbItemsTitleAndPageActions.args = {
+  breadcrumbOverflowLabel,
   breadcrumbItems,
   title,
   pageActions,
+  pageActionsOverflowLabel,
 };
 
 export const BreadcrumbItemsTitleAndStatus = Template.bind({});
 BreadcrumbItemsTitleAndStatus.args = {
+  breadcrumbOverflowLabel,
   breadcrumbItems,
   title,
   availableSpace: statusIndicator,
@@ -287,6 +303,7 @@ BreadcrumbItemsTitleAndStatus.args = {
 export const BreadcrumbItemsTitleTabs = Template.bind({});
 BreadcrumbItemsTitleTabs.args = {
   background: true,
+  breadcrumbOverflowLabel,
   breadcrumbItems,
   title,
   navigation: tabBar,
@@ -295,6 +312,7 @@ BreadcrumbItemsTitleTabs.args = {
 export const BreadcrumbItemsTitleIconTabs = Template.bind({});
 BreadcrumbItemsTitleIconTabs.args = {
   background: true,
+  breadcrumbOverflowLabel,
   breadcrumbItems,
   title,
   titleIcon: Bee24,
@@ -304,24 +322,29 @@ BreadcrumbItemsTitleIconTabs.args = {
 export const BreadcrumbItemsTitlePageActionsTabs = Template.bind({});
 BreadcrumbItemsTitlePageActionsTabs.args = {
   background: true,
+  breadcrumbOverflowLabel,
   breadcrumbItems,
   title,
   pageActions,
+  pageActionsOverflowLabel,
   navigation: tabBar,
 };
 
 export const BreadcrumbItemsTitlePageActionsTags = Template.bind({});
 BreadcrumbItemsTitlePageActionsTags.args = {
   background: true,
+  breadcrumbOverflowLabel,
   breadcrumbItems,
   title,
   pageActions,
+  pageActionsOverflowLabel,
   tags,
 };
 
 export const BreadcrumbItemsTitleTabsTags = Template.bind({});
 BreadcrumbItemsTitleTabsTags.args = {
   background: true,
+  breadcrumbOverflowLabel,
   breadcrumbItems,
   title,
   navigation: tabBar,
@@ -333,17 +356,20 @@ export const BreadcrumbItemsActionBarTitlePageActionsTabsTags = Template.bind(
 );
 BreadcrumbItemsActionBarTitlePageActionsTabsTags.args = {
   background: true,
+  breadcrumbOverflowLabel,
   breadcrumbItems,
   actionBarItems,
   actionBarOverflowLabel,
   title,
   pageActions,
+  pageActionsOverflowLabel,
   navigation: tabBar,
 };
 
 export const BreadcrumbItemsActionBar = Template.bind({});
 BreadcrumbItemsActionBar.args = {
   background: true,
+  breadcrumbOverflowLabel,
   breadcrumbItems,
   actionBarItems,
   actionBarOverflowLabel,
@@ -354,9 +380,11 @@ BreadcrumbItemsActionBar.args = {
 export const BreadcrumbItemsTitlePageActionsSubtitle = Template.bind({});
 BreadcrumbItemsTitlePageActionsSubtitle.args = {
   background: true,
+  breadcrumbOverflowLabel,
   breadcrumbItems,
   title,
   pageActions,
+  pageActionsOverflowLabel,
   subtitle,
 };
 
@@ -365,9 +393,11 @@ export const BreadcrumbItemsTitlePageActionsSummarydetailsTabs = Template.bind(
 );
 BreadcrumbItemsTitlePageActionsSummarydetailsTabs.args = {
   background: true,
+  breadcrumbOverflowLabel,
   breadcrumbItems,
   title,
   pageActions,
+  pageActionsOverflowLabel,
   availableSpace: summaryDetails,
   navigation: tabBar,
 };
@@ -376,12 +406,14 @@ export const AllAttributesSetKeepsBreadcrumbTabs = Template.bind({});
 AllAttributesSetKeepsBreadcrumbTabs.args = {
   preventBreadcrumbScroll: true,
   background: true,
+  breadcrumbOverflowLabel,
   breadcrumbItems,
   actionBarItems,
   actionBarOverflowLabel,
   title,
   titleIcon: Bee24,
   pageActions,
+  pageActionsOverflowLabel,
   subtitle,
   availableSpace: summaryDetails,
   navigation: tabBar,
@@ -392,12 +424,14 @@ export const AllAttributesSetPreCollapseTitle = Template.bind({});
 AllAttributesSetPreCollapseTitle.args = {
   preCollapseTitleRow: true,
   background: true,
+  breadcrumbOverflowLabel,
   breadcrumbItems,
   actionBarItems,
   actionBarOverflowLabel,
   title,
   titleIcon: Bee24,
   pageActions,
+  pageActionsOverflowLabel,
   subtitle,
   availableSpace: summaryDetails,
   navigation: tabBar,
@@ -412,6 +446,7 @@ LongValuesManyItems.args = {
   actionBarOverflowLabel,
   title: longTitle,
   pageActions: manyPageActions,
+  pageActionsOverflowLabel,
   subtitle: longSubtitle,
   availableSpace: summaryDetails,
   navigation: longTabBar,
@@ -458,6 +493,7 @@ AllAttributesWithSwitches.args = {
   navigationSwitchedArg: true,
   pageActions,
   pageActionsSwitchedArg: true,
+  pageActionsOverflowLabel,
   preCollapseTitleRow: false,
   subtitle,
   subtitleSwitchedArg: true,
@@ -515,6 +551,7 @@ PageHeaderWithCarbonHeader.args = {
   navigationSwitchedArg: true,
   pageActions,
   pageActionsSwitchedArg: true,
+  pageActionsOverflowLabel,
   preCollapseTitleRow: false,
   subtitle,
   subtitleSwitchedArg: true,

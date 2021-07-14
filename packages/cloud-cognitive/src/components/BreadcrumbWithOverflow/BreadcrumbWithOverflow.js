@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2020
+// Copyright IBM Corp. 2020, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -70,6 +70,7 @@ export let BreadcrumbWithOverflow = ({
     let useAsTitle = null;
 
     if (item?.props) {
+      /* istanbul ignore next if */ // list represents preferred order with checks, no else case expected
       if (item.props['data-title']) {
         useAsTitle = item.props['data-title'];
       } else if (item.props.title) {
@@ -89,11 +90,11 @@ export let BreadcrumbWithOverflow = ({
     return (
       <BreadcrumbItem key={`breadcrumb-overflow-${internalId.current}`}>
         <OverflowMenu
-          ariaLabel={null}
-          menuOffset={{ top: 10, left: 59 }} // TODO: REMOVE borrowed from https://github.com/carbon-design-system/carbon/pull/7085
+          ariaLabel={overflowAriaLabel}
+          menuOffset={{ top: 10, left: 59 }} // TODO: REMOVE when this is fixed https://github.com/carbon-design-system/carbon/issues/9155
           renderIcon={OverflowMenuHorizontal32}
           className={`${blockClass}__overflow-menu`}
-          menuOptionsClass={`${carbon.prefix}--breadcrumb-menu-options`} // TODO: REMOVE borrowed from https://github.com/carbon-design-system/carbon/pull/7085
+          menuOptionsClass={`${carbon.prefix}--breadcrumb-menu-options`} // TODO: REMOVE when this is fixed https://github.com/carbon-design-system/carbon/issues/9155
         >
           {
             // eslint-disable-next-line react/prop-types
@@ -124,8 +125,8 @@ export let BreadcrumbWithOverflow = ({
     }
 
     // clones of children needed as the children are used in the sizing render
-    const cloneChildren = (items) =>
-      items.map((item, index) => {
+    const cloneChildren = (items) => {
+      return items.map((item, index) => {
         // likely truncated add title
         const title =
           index + 1 === childArray.length && displayCount === 1
@@ -140,8 +141,13 @@ export let BreadcrumbWithOverflow = ({
               ])
             : childArray[index].props.className;
 
-        return React.cloneElement(item, { key: index, title, className });
+        return React.cloneElement(item, {
+          key: `clone-${item.key}`,
+          title,
+          className,
+        });
       });
+    };
 
     const newDisplayedBreadcrumbItems = cloneChildren(childArray);
 
@@ -165,7 +171,7 @@ export let BreadcrumbWithOverflow = ({
         0,
         <BreadcrumbOverflowMenu
           overflowItems={newOverflowBreadcrumbItems}
-          key={`$displayed-breadcrumb-${internalId}-overflow`}
+          key={`displayed-breadcrumb-${internalId}-overflow`}
         />
       );
     }
@@ -265,17 +271,20 @@ export let BreadcrumbWithOverflow = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [maxVisible]);
 
+  /* istanbul ignore next */ // not sure how to test resize
   const handleResize = () => {
     /* istanbul ignore next */ // not sure how to test resize
     checkFullyVisibleBreadcrumbItems();
   };
 
+  /* istanbul ignore next */ // not sure how to test resize
   const handleBreadcrumbItemsResize = () => {
     /* istanbul ignore next */ // not sure how to test resize
     checkFullyVisibleBreadcrumbItems();
   };
 
   let backItem = childArray[childArray.length - 1];
+  /* istanbul ignore next if */ // not sure how to test media queries
   if (backItem?.props?.isCurrentPage) {
     backItem = childArray[childArray.length - 2];
   }
@@ -312,11 +321,11 @@ export let BreadcrumbWithOverflow = ({
 
           {buttonHrefValue && buttonTooltipValue && (
             <Button
-              className={`${blockClass}--breadcrumb-back-button`}
+              className={`${blockClass}__breadcrumb-back-button`}
               hasIconOnly
               iconDescription={buttonTooltipValue}
               kind="ghost"
-              href={buttonHrefValue || '#'}
+              href={buttonHrefValue}
               renderIcon={ArrowLeft16}
               size="field"
               tooltipPosition="right"
@@ -364,11 +373,10 @@ BreadcrumbWithOverflow.propTypes = {
   /**
    * overflowAriaLabel label for open close button overflow used for action bar items that do nto fit.
    */
-  overflowAriaLabel: PropTypes.string,
+  overflowAriaLabel: PropTypes.string.isRequired,
 };
 
 BreadcrumbWithOverflow.defaultProps = {
-  overflowAriaLabel: 'Open and close additional breadcrumb item list.',
   noTrailingSlash: false,
 };
 BreadcrumbWithOverflow.displayName = componentName;

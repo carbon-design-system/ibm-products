@@ -34,21 +34,22 @@ export default {
 
 const buttons = [
   {
-    kind: 'secondary',
-    onClick: action('Secondary 1'),
-    label: 'Secondary 1',
+    kind: 'danger',
+    onClick: action('Danger'),
+    label: 'Danger',
   },
   {
     kind: 'secondary',
-    onClick: action('Secondary 2'),
-    label: 'Secondary 2',
+    onClick: action('Secondary'),
+    label: 'Secondary',
   },
   {
-    kind: 'primary',
     onClick: action('Primary'),
     label: 'Primary',
   },
 ];
+
+const buttonSetOverflowLabel = 'Button set overflow';
 
 const Template = (argsIn) => {
   const { containerWidth, ...args } = { ...argsIn };
@@ -62,5 +63,6 @@ const Template = (argsIn) => {
 export const Default = Template.bind({});
 Default.args = {
   buttons,
-  containerWidth: 500,
+  buttonSetOverflowLabel,
+  containerWidth: 600,
 };

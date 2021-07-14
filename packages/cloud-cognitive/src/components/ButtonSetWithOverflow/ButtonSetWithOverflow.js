@@ -190,16 +190,7 @@ ButtonSetWithOverflow.propTypes = {
     PropTypes.shape({
       ...Button.propTypes,
       key: PropTypes.string.isRequired,
-      kind: PropTypes.oneOf([
-        'primary',
-        'secondary',
-        'danger',
-        'ghost',
-        'danger--primary',
-        'danger--ghost',
-        'danger--tertiary',
-        'tertiary',
-      ]),
+      kind: Button.propTypes.kind,
       label: PropTypes.node,
       onClick: PropTypes.func,
     })

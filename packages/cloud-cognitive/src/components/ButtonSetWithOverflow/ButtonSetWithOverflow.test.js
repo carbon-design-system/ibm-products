@@ -18,7 +18,7 @@ const buttons = (handleClick) =>
     iconDescription: !(num % 3) ? 'Busy bee' : null,
     label: `Action ${num}`,
     key: `key-${num}`,
-    kind: num === 1 ? null : num === 2 ? 'secondary' : 'danger',
+    kind: num === 1 ? 'primary' : num === 2 ? 'secondary' : 'danger',
     onClick: () => {
       handleClick(`Action ${num}`);
     },

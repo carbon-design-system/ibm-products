@@ -44,6 +44,7 @@ const buttons = [
     label: 'Secondary',
   },
   {
+    kind: 'primary',
     onClick: action('Primary'),
     label: 'Primary',
   },

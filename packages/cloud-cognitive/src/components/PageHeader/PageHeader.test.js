@@ -56,11 +56,13 @@ const breadcrumbItems = (
 const classNames = ['client-class-1', 'client-class-2'];
 const pageActions = [
   {
+    key: '1',
     kind: 'secondary',
     label: 'Secondary button',
     onClick: () => {},
   },
   {
+    key: '2',
     kind: 'primary',
     label: 'Primary button',
     onClick: () => {},
@@ -541,7 +543,7 @@ describe('PageHeader', () => {
 
     jest.spyOn(console, 'error').mockRestore();
   });
-  
+
   test('Breadcrumb without overflow aria label', () => {
     const error = jest.spyOn(console, 'error').mockImplementation(() => {});
 
@@ -563,5 +565,5 @@ describe('PageHeader', () => {
     );
 
     jest.spyOn(console, 'error').mockRestore();
-  });  
+  });
 });

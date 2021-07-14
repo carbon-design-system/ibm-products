@@ -737,6 +737,8 @@ PageHeader.propTypes = {
   ]), // expects action bar item as array or in fragment
   /**
    * aria label for the action bar overflow menu
+   *
+   * NOTE: This prop is only required if actionBarItems are supplied
    */
   actionBarOverflowLabel: PropTypes.string.isRequired.if(
     ({ actionBarItems }) => actionBarItems && actionBarItems.length > 0
@@ -807,9 +809,19 @@ PageHeader.propTypes = {
     PropTypes.arrayOf(
       PropTypes.shape({
         ...Button.propTypes,
-        kind: Button.propTypes.kind,
-        label: PropTypes.node.isRequired,
-        onClick: Button.propTypes.onClick,
+        key: PropTypes.string.isRequired,
+        kind: PropTypes.oneOf([
+          'primary',
+          'secondary',
+          'danger',
+          'ghost',
+          'danger--primary',
+          'danger--ghost',
+          'danger--tertiary',
+          'tertiary',
+        ]),
+        label: PropTypes.node,
+        onClick: PropTypes.func,
       })
     ),
     deprecatePropUsage(
@@ -823,6 +835,8 @@ PageHeader.propTypes = {
   /**
    * Label used by the pageActions component when there is insufficient space to display
    * the pageActions side by side. Currently the label of a dropdown button menu
+   *
+   * NOTE: This prop is only required if pageActions are supplied
    */
   pageActionsOverflowLabel: PropTypes.node.isRequired.if(
     ({ pageActions }) => pageActions && pageActions.length > 0

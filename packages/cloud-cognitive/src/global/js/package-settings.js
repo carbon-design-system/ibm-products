@@ -46,6 +46,7 @@ const defaults = {
     CreateTearsheet: false,
     CreateTearsheetStep: false,
     CreateTearsheetSection: false,
+    CreateTearsheetNarrow: false,
     ContextHeader: false,
     ExampleComponent: false,
     ExpressiveCard: false,

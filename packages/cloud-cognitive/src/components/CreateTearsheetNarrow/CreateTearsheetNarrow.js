@@ -151,7 +151,7 @@ CreateTearsheetNarrow.propTypes = {
   onRequestClose: PropTypes.func,
 
   /**
-   * Specifies an optional handler which is called when the CreateSidePanel
+   * Specifies an optional handler which is called when the CreateTearsheetNarrow
    * primary button is pressed.
    */
   onRequestSubmit: PropTypes.func,
@@ -162,12 +162,12 @@ CreateTearsheetNarrow.propTypes = {
   open: PropTypes.bool,
 
   /**
-   * Specifies the primary button's text in the modal.
+   * Specifies the primary button's text in the CreateTearsheetNarrow.
    */
   primaryButtonText: PropTypes.string.isRequired,
 
   /**
-   * Specifies the secondary button's text in the modal.
+   * Specifies the secondary button's text in the CreateTearsheetNarrow.
    */
   secondaryButtonText: PropTypes.string.isRequired,
 

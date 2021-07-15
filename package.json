@@ -34,7 +34,7 @@
     "test": "run-s test:all 'test:jest {@}' --",
     "test:all": "yarn run-all --no-sort test",
     "test:jest": "jest",
-    "spellcheck": "cspell packages/**/*.*",
+    "spellcheck": "cspell lint --relative --no-progress --show-context '**/*'",
     "storybook": "run-s storybook:build:dependencies storybook:start",
     "storybook:build": "run-s storybook:build:*",
     "storybook:build:dependencies": "yarn run-all --include-dependencies --scope \"@carbon/storybook-addon-theme\" --scope \"@carbon/ibm-cloud-cognitive\" build",

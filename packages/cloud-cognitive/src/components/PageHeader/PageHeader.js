@@ -806,15 +806,7 @@ PageHeader.propTypes = {
    * Carbon Button API https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
   pageActions: PropTypes.oneOfType([
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        ...Button.propTypes,
-        key: PropTypes.string.isRequired,
-        kind: Button.propTypes.kind,
-        label: PropTypes.node,
-        onClick: PropTypes.func,
-      })
-    ),
+    ActionBar.propTypes.actions,
     deprecatePropUsage(
       PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.element),

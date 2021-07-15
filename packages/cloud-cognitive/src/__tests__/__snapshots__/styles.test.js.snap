@@ -1815,7 +1815,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .exp--status-icon--light.exp--status-icon--light-minor-warning,
 .exp--status-icon--dark.exp--status-icon--dark-minor-warning {
-  fill: #fdd13a;
+  fill: #fddc69;
 }
 
 .exp--status-icon--light.exp--status-icon--light-minor-warning

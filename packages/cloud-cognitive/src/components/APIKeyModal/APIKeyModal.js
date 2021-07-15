@@ -332,6 +332,7 @@ APIKeyModal.defaultProps = {
   loading: false,
   nameRequired: false,
   open: false,
+  apiKeyName: '',
 };
 
 APIKeyModal.displayName = componentName;

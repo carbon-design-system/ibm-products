@@ -93,7 +93,7 @@ describe(name, () => {
 
     change(nameInput, { target: { value: 'testkey' } });
     click(createButton);
-    expect(onRequestSubmit).toHaveBeenCalled();
+    expect(onRequestSubmit).toHaveBeenCalledWith('testkey');
 
     rerender(<APIKeyModal {...props} loading />);
     expect(getByText(props.loadingMessage)).toBeVisible();
@@ -203,14 +203,6 @@ describe(name, () => {
     // submit valid form
     customSteps[2].valid = true;
     rerender(<APIKeyModal {...props} customSteps={customSteps} />);
-    /**
-     * the logic behind setting the create button to disabled is set in
-     * a useEffect (setIsPrimaryButtonDisabled). rerender doesn't trigger
-     * useEffect though, so to cause the useEffect to trigger i'm going
-     * to the previous step and back before trying to click the button
-     */
-    click(getByText(props.previousStepButtonText));
-    click(getByText(props.nextStepButtonText));
     click(getByText(props.createButtonText));
     expect(onRequestSubmit).toHaveBeenCalled();
     rerender(<APIKeyModal {...props} />);

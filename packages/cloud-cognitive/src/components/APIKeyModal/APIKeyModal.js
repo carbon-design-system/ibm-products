@@ -75,11 +75,6 @@ export let APIKeyModal = forwardRef(
   ) => {
     const [name, setName] = useState(apiKeyName);
     const [currentStep, setCurrentStep] = useState(0);
-    const [isPrimaryButtonDisabled, setIsPrimaryButtonDisabled] =
-      useState(false);
-    const [primaryButtonText, setPrimaryButtonText] = useState('');
-    const [secondaryButtonText, setSecondaryButtonText] = useState('');
-    const [title, setTitle] = useState('');
     const inputRef = useRef();
     const apiKeyInputId = useRef(uuidv4());
     const nameInputId = useRef(uuidv4());
@@ -99,72 +94,51 @@ export let APIKeyModal = forwardRef(
       }
     }, [open]);
 
-    useEffect(() => {
+    const isPrimaryButtonDisabled = () => {
       if (loading) {
-        setIsPrimaryButtonDisabled(true);
-      } else if (hasSteps && 'valid' in customSteps[currentStep]) {
-        setIsPrimaryButtonDisabled(!customSteps[currentStep].valid);
-      } else if (!hasSteps && nameRequired && !name) {
-        setIsPrimaryButtonDisabled(true);
-      } else {
-        setIsPrimaryButtonDisabled(false);
+        return true;
       }
-    }, [loading, hasSteps, customSteps, currentStep, nameRequired, name]);
+      if (hasSteps && 'valid' in customSteps[currentStep]) {
+        return !customSteps[currentStep].valid;
+      }
+      if (!hasSteps && nameRequired && !name) {
+        return true;
+      }
+      return false;
+    };
 
-    useEffect(() => {
+    const getPrimaryButtonText = () => {
       if (editing && !hasNextStep) {
-        setPrimaryButtonText(editButtonText);
-      } else if (apiKey) {
-        setPrimaryButtonText(copyButtonText);
-      } else if (hasNextStep) {
-        setPrimaryButtonText(nextStepButtonText);
-      } else {
-        setPrimaryButtonText(createButtonText);
+        return editButtonText;
       }
-    }, [
-      apiKey,
-      editing,
-      editButtonText,
-      copyButtonText,
-      hasNextStep,
-      nextStepButtonText,
-      createButtonText,
-    ]);
+      if (apiKey) {
+        return copyButtonText;
+      }
+      if (hasNextStep) {
+        return nextStepButtonText;
+      }
+      return createButtonText;
+    };
 
-    useEffect(() => {
+    const getSecondaryButtonText = () => {
       if (hasPreviousStep && !apiKeyLoaded) {
-        setSecondaryButtonText(previousStepButtonText);
-      } else {
-        setSecondaryButtonText(closeButtonText);
+        return previousStepButtonText;
       }
-    }, [
-      hasPreviousStep,
-      apiKeyLoaded,
-      previousStepButtonText,
-      closeButtonText,
-    ]);
+      return closeButtonText;
+    };
 
-    useEffect(() => {
+    const getTitle = () => {
       if (editing && editSuccess) {
-        setTitle(editSuccessTitle);
-      } else if (apiKeyLoaded) {
-        setTitle(createSuccessTitle);
-      } else if (hasSteps) {
-        setTitle(customSteps[currentStep].title);
-      } else {
-        setTitle(createTitle);
+        return editSuccessTitle;
       }
-    }, [
-      editing,
-      editSuccess,
-      editSuccessTitle,
-      apiKeyLoaded,
-      createSuccessTitle,
-      hasSteps,
-      customSteps,
-      currentStep,
-      createTitle,
-    ]);
+      if (apiKeyLoaded) {
+        return createSuccessTitle;
+      }
+      if (hasSteps) {
+        return customSteps[currentStep].title;
+      }
+      return createTitle;
+    };
 
     const setNameHandler = (evt) => {
       setName(evt.target.value);
@@ -176,13 +150,12 @@ export let APIKeyModal = forwardRef(
       onClose();
     };
 
-    const submitHandler = (evt) => {
+    const submitHandler = () => {
       if (hasNextStep) {
         setCurrentStep(currentStep + 1);
       } else if (apiKeyLoaded) {
         navigator.clipboard.writeText(apiKey);
       } else {
-        evt.preventDefault();
         onRequestSubmit(name);
       }
     };
@@ -205,7 +178,7 @@ export let APIKeyModal = forwardRef(
         preventCloseOnClickOutside>
         <ModalHeader
           className={`${blockClass}__header`}
-          title={title}
+          title={getTitle()}
           label={hasPreviousStep ? modalLabel : ''}
         />
         <ModalBody className={`${blockClass}__body-container`}>
@@ -282,15 +255,15 @@ export let APIKeyModal = forwardRef(
         </ModalBody>
         <ModalFooter className={`${blockClass}__footer`}>
           <Button type="button" kind="secondary" onClick={onBackHandler}>
-            {secondaryButtonText}
+            {getSecondaryButtonText()}
           </Button>
           <Button
             {...(apiKeyLoaded ? copyButtonProps : {})}
             type="submit"
             kind="primary"
             onClick={submitHandler}
-            disabled={isPrimaryButtonDisabled}>
-            {primaryButtonText}
+            disabled={isPrimaryButtonDisabled()}>
+            {getPrimaryButtonText()}
           </Button>
         </ModalFooter>
       </ComposedModal>

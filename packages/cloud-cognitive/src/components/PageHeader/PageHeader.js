@@ -46,15 +46,15 @@ export let PageHeader = React.forwardRef(
   (
     {
       actionBarItems,
-      actionBarOverflowLabel,
+      actionBarOverflowAriaLabel,
       availableSpace,
       background,
-      breadcrumbOverflowLabel,
+      breadcrumbOverflowAriaLabel,
       breadcrumbItems,
       className,
       collapseHeader,
-      collapseHeaderLabel,
-      expandHeaderLabel,
+      collapseHeaderIconDescription,
+      expandHeaderIconDescription,
       collapseHeaderToggleWanted,
       preventBreadcrumbScroll,
       navigation,
@@ -446,7 +446,7 @@ export let PageHeader = React.forwardRef(
                         <BreadcrumbWithOverflow
                           className={`${blockClass}__breadcrumb`}
                           noTrailingSlash={title !== undefined}
-                          overflowAriaLabel={breadcrumbOverflowLabel}>
+                          overflowAriaLabel={breadcrumbOverflowAriaLabel}>
                           {breadcrumbItems}
                           {title ? (
                             <BreadcrumbItem
@@ -504,7 +504,7 @@ export let PageHeader = React.forwardRef(
                                 </div>
                               )}
                               <ActionBar
-                                overflowAriaLabel={actionBarOverflowLabel}
+                                overflowAriaLabel={actionBarOverflowAriaLabel}
                                 actions={actionBarItemArray}
                                 className={`${blockClass}__action-bar`}
                                 onWidthChange={handleActionBarWidthChange}
@@ -670,7 +670,9 @@ export let PageHeader = React.forwardRef(
               data-collapse={fullyCollapsed ? 'collapsed' : 'not collapsed'}
               hasIconOnly={true}
               iconDescription={
-                fullyCollapsed ? expandHeaderLabel : collapseHeaderLabel
+                fullyCollapsed
+                  ? expandHeaderIconDescription
+                  : collapseHeaderIconDescription
               }
               kind="ghost"
               onClick={handleCollapseToggle}
@@ -740,7 +742,7 @@ PageHeader.propTypes = {
    *
    * NOTE: This prop is only required if actionBarItems are supplied
    */
-  actionBarOverflowLabel: PropTypes.string.isRequired.if(
+  actionBarOverflowAriaLabel: PropTypes.string.isRequired.if(
     ({ actionBarItems }) => actionBarItems && actionBarItems.length > 0
   ),
   /**
@@ -762,7 +764,7 @@ PageHeader.propTypes = {
   /**
    * If the user supplies breadcrumbs then they must supply an aria label for the overflow
    */
-  breadcrumbOverflowLabel: PropTypes.string.isRequired.if(
+  breadcrumbOverflowAriaLabel: PropTypes.string.isRequired.if(
     ({ breadcrumbItems }) => breadcrumbItems && breadcrumbItems.length > 0
   ),
   /**
@@ -781,7 +783,7 @@ PageHeader.propTypes = {
    * Label/assistive text for the collapse/expand button
    * Default 'Collapse'
    */
-  collapseHeaderLabel: PropTypes.string,
+  collapseHeaderIconDescription: PropTypes.string,
   /**
    * Enable the collapse header toggle.
    *
@@ -792,7 +794,7 @@ PageHeader.propTypes = {
    * Label/assistive text for the collapse/expand button
    * Default 'Expand'
    */
-  expandHeaderLabel: PropTypes.string,
+  expandHeaderIconDescription: PropTypes.string,
   /**
    * Content for the navigation area in the PageHeader. Should
    * be a React element that is normally a Carbon Tabs component. Optional.
@@ -895,8 +897,8 @@ PageHeader.propTypes = {
 PageHeader.defaultProps = {
   background: true,
   className: '',
-  collapseHeaderLabel: 'Collapse',
-  expandHeaderLabel: 'Expand',
+  collapseHeaderIconDescription: 'Collapse',
+  expandHeaderIconDescription: 'Expand',
   preventBreadcrumbScroll: false,
   pageHeaderOffset: 0,
   preCollapseTitleRow: false,

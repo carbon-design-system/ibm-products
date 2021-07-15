@@ -21,7 +21,7 @@ import { mockHTMLElement } from '../../global/js/utils/test-helper';
 const blockClass = `${pkg.prefix}--page-header`;
 
 /* Test properties. */
-const actionBarOverflowLabel = 'Show additional action bar items';
+const actionBarOverflowAriaLabel = 'Show additional action bar items';
 
 const actionBarItems = [1, 2, 3, 4].map((item) => ({
   key: `a-key-${item}`,
@@ -44,7 +44,7 @@ const actionBarItemsNodes = (
 );
 
 const availableSpace = <span className="page-header-test--available-space" />;
-const breadcrumbOverflowLabel =
+const breadcrumbOverflowAriaLabel =
   'Open and close additional breadcrumb item list.';
 const breadcrumbItems = (
   <>
@@ -159,10 +159,10 @@ const testSizes = (el, property, _default) => {
 
 const testProps = {
   actionBarItems,
-  actionBarOverflowLabel,
+  actionBarOverflowAriaLabel,
   availableSpace,
   background: true,
-  breadcrumbOverflowLabel,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   className: classNames.join(' '),
   navigation,
@@ -315,7 +315,7 @@ describe('PageHeader', () => {
     render(
       <PageHeader
         actionBarItems={actionBarItemsNodes}
-        actionBarOverflowLabel={actionBarOverflowLabel}
+        actionBarOverflowAriaLabel={actionBarOverflowAriaLabel}
       />
     );
 
@@ -385,8 +385,8 @@ describe('PageHeader', () => {
     render(
       <PageHeader
         {...testProps}
-        collapseHeaderLabel="Toggle collapse"
-        expandHeaderLabel="Toggle expand"
+        collapseHeaderIconDescription="Toggle collapse"
+        expandHeaderIconDescription="Toggle expand"
         collapseHeaderToggleWanted={true}
         data-testid={dataTestid}
       />
@@ -511,7 +511,7 @@ describe('PageHeader', () => {
         {...{
           title,
           background: false,
-          breadcrumbOverflowLabel: 'Show the breadcrumb overflow',
+          breadcrumbOverflowAriaLabel: 'Show the breadcrumb overflow',
           breadcrumbItems,
         }}
         aria-label="Page header" // gives section role 'region'
@@ -537,7 +537,7 @@ describe('PageHeader', () => {
 
     expect(error).toBeCalledWith(
       expect.stringMatching(
-        /^Warning: Failed prop type: The prop `actionBarOverflowLabel` is marked as required in `PageHeader`/
+        /^Warning: Failed prop type: The prop `actionBarOverflowAriaLabel` is marked as required in `PageHeader`/
       )
     );
 

@@ -787,7 +787,7 @@ const TemplateDemo = () => {
             marginTop: '48px',
           }}>
           <PageHeader
-            breadcrumbOverflowLabel="Open and close additional breadcrumb item list."
+            breadcrumbOverflowAriaLabel="Open and close additional breadcrumb item list."
             breadcrumbItems={
               <>
                 <BreadcrumbItem href="../../../hompepage">
@@ -802,7 +802,7 @@ const TemplateDemo = () => {
               { key: '2', renderIcon: Settings16, iconDescription: `Settings` },
               { key: '3', renderIcon: VolumeMute16, iconDescription: `Mute` },
             ]}
-            actionBarOverflowLabel="Show more action bar items"
+            actionBarOverflowAriaLabel="Show more action bar items"
             title={{
               text: 'Authentication activity',
               loading: false,

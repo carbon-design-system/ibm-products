@@ -52,7 +52,7 @@ const actionBarItems = [1, 2, 3, 4].map((item) => ({
   iconDescription: `Action ${item}`,
 }));
 
-const actionBarOverflowLabel = 'Show further action bar items';
+const actionBarOverflowAriaLabel = 'Show further action bar items';
 
 const manyActionBarItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
   keuy: `a-key-${item}`,
@@ -79,7 +79,7 @@ const manyBreadcrumbItems = (
     <BreadcrumbItem href="#">Breadcrumb 8</BreadcrumbItem>
   </>
 );
-const breadcrumbOverflowLabel =
+const breadcrumbOverflowAriaLabel =
   'Open and close additional breadcrumb item list.';
 
 const className = 'client-class-1 client-class-2';
@@ -248,10 +248,10 @@ const Template = (args) => {
 export const AllAttributesSet = Template.bind({});
 AllAttributesSet.args = {
   background: true,
-  breadcrumbOverflowLabel,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   actionBarItems,
-  actionBarOverflowLabel,
+  actionBarOverflowAriaLabel,
   title,
   pageActions,
   pageActionsOverflowLabel,
@@ -278,14 +278,14 @@ TitleAndPagections.args = {
 
 export const BreadcrumbItemsAndTitle = Template.bind({});
 BreadcrumbItemsAndTitle.args = {
-  breadcrumbOverflowLabel,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
 };
 
 export const BreadcrumbItemsTitleAndPageActions = Template.bind({});
 BreadcrumbItemsTitleAndPageActions.args = {
-  breadcrumbOverflowLabel,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
   pageActions,
@@ -294,7 +294,7 @@ BreadcrumbItemsTitleAndPageActions.args = {
 
 export const BreadcrumbItemsTitleAndStatus = Template.bind({});
 BreadcrumbItemsTitleAndStatus.args = {
-  breadcrumbOverflowLabel,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
   availableSpace: statusIndicator,
@@ -303,7 +303,7 @@ BreadcrumbItemsTitleAndStatus.args = {
 export const BreadcrumbItemsTitleTabs = Template.bind({});
 BreadcrumbItemsTitleTabs.args = {
   background: true,
-  breadcrumbOverflowLabel,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
   navigation: tabBar,
@@ -312,7 +312,7 @@ BreadcrumbItemsTitleTabs.args = {
 export const BreadcrumbItemsTitleIconTabs = Template.bind({});
 BreadcrumbItemsTitleIconTabs.args = {
   background: true,
-  breadcrumbOverflowLabel,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
   titleIcon: Bee24,
@@ -322,7 +322,7 @@ BreadcrumbItemsTitleIconTabs.args = {
 export const BreadcrumbItemsTitlePageActionsTabs = Template.bind({});
 BreadcrumbItemsTitlePageActionsTabs.args = {
   background: true,
-  breadcrumbOverflowLabel,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
   pageActions,
@@ -333,7 +333,7 @@ BreadcrumbItemsTitlePageActionsTabs.args = {
 export const BreadcrumbItemsTitlePageActionsTags = Template.bind({});
 BreadcrumbItemsTitlePageActionsTags.args = {
   background: true,
-  breadcrumbOverflowLabel,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
   pageActions,
@@ -344,7 +344,7 @@ BreadcrumbItemsTitlePageActionsTags.args = {
 export const BreadcrumbItemsTitleTabsTags = Template.bind({});
 BreadcrumbItemsTitleTabsTags.args = {
   background: true,
-  breadcrumbOverflowLabel,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
   navigation: tabBar,
@@ -356,10 +356,10 @@ export const BreadcrumbItemsActionBarTitlePageActionsTabsTags = Template.bind(
 );
 BreadcrumbItemsActionBarTitlePageActionsTabsTags.args = {
   background: true,
-  breadcrumbOverflowLabel,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   actionBarItems,
-  actionBarOverflowLabel,
+  actionBarOverflowAriaLabel,
   title,
   pageActions,
   pageActionsOverflowLabel,
@@ -369,10 +369,10 @@ BreadcrumbItemsActionBarTitlePageActionsTabsTags.args = {
 export const BreadcrumbItemsActionBar = Template.bind({});
 BreadcrumbItemsActionBar.args = {
   background: true,
-  breadcrumbOverflowLabel,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   actionBarItems,
-  actionBarOverflowLabel,
+  actionBarOverflowAriaLabel,
   preCollapseTitleRow: true,
   title,
 };
@@ -380,7 +380,7 @@ BreadcrumbItemsActionBar.args = {
 export const BreadcrumbItemsTitlePageActionsSubtitle = Template.bind({});
 BreadcrumbItemsTitlePageActionsSubtitle.args = {
   background: true,
-  breadcrumbOverflowLabel,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
   pageActions,
@@ -393,7 +393,7 @@ export const BreadcrumbItemsTitlePageActionsSummarydetailsTabs = Template.bind(
 );
 BreadcrumbItemsTitlePageActionsSummarydetailsTabs.args = {
   background: true,
-  breadcrumbOverflowLabel,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
   pageActions,
@@ -406,10 +406,10 @@ export const AllAttributesSetKeepsBreadcrumbTabs = Template.bind({});
 AllAttributesSetKeepsBreadcrumbTabs.args = {
   preventBreadcrumbScroll: true,
   background: true,
-  breadcrumbOverflowLabel,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   actionBarItems,
-  actionBarOverflowLabel,
+  actionBarOverflowAriaLabel,
   title,
   titleIcon: Bee24,
   pageActions,
@@ -424,10 +424,10 @@ export const AllAttributesSetPreCollapseTitle = Template.bind({});
 AllAttributesSetPreCollapseTitle.args = {
   preCollapseTitleRow: true,
   background: true,
-  breadcrumbOverflowLabel,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   actionBarItems,
-  actionBarOverflowLabel,
+  actionBarOverflowAriaLabel,
   title,
   titleIcon: Bee24,
   pageActions,
@@ -443,7 +443,7 @@ LongValuesManyItems.args = {
   background: true,
   breadcrumbItems: manyBreadcrumbItems,
   actionBarItems: manyActionBarItems,
-  actionBarOverflowLabel,
+  actionBarOverflowAriaLabel,
   title: longTitle,
   pageActions: manyPageActions,
   pageActionsOverflowLabel,
@@ -482,7 +482,7 @@ export const AllAttributesWithSwitches = TemplateWithSwitchedArgs.bind({});
 AllAttributesWithSwitches.args = {
   actionBarItems,
   actionBarItemsSwitchedArg: true,
-  actionBarOverflowLabel,
+  actionBarOverflowAriaLabel,
   availableSpace: summaryDetails,
   availableSpaceSwitchedArg: true,
   background: true,
@@ -540,7 +540,7 @@ export const PageHeaderWithCarbonHeader =
 PageHeaderWithCarbonHeader.args = {
   actionBarItems,
   actionBarItemsSwitchedArg: true,
-  actionBarOverflowLabel,
+  actionBarOverflowAriaLabel,
   availableSpace: summaryDetails,
   availableSpaceSwitchedArg: true,
   background: true,

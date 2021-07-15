@@ -174,7 +174,7 @@ CreateTearsheetNarrow.propTypes = {
   /**
    * Specifies which DOM element in the form should be focused.
    */
-  selectorPrimaryFocus: PropTypes.node.isRequired,
+  selectorPrimaryFocus: PropTypes.node,
 
   /**
    * The main title of the tearsheet, displayed in the header area.

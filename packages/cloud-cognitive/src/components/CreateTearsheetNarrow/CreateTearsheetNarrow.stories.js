@@ -54,6 +54,7 @@ const defaultStoryProps = {
   primaryButtonText: 'Create',
   secondaryButtonText: 'Cancel',
   label: 'Test label',
+  selectorPrimaryFocus: '#tearsheet-narrow-story-text-input--1',
 };
 
 /**
@@ -79,7 +80,6 @@ const Template = (args) => {
         onRequestClose={() => setOpen(false)}
         onRequestSubmit={action('onRequestSubmit action called')}
         disableSubmit={!topicName}
-        selectorPrimaryFocus="#tearsheet-narrow-story-text-input--1"
         {...args}>
         <TextInput
           labelText="Topic name*"

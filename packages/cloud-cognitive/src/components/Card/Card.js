@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React from 'react';
+import React, { forwardRef } from 'react';
 import cx from 'classnames';
 import {
   Button,
@@ -18,173 +18,184 @@ import { CardFooter } from './CardFooter';
 import { pkg } from '../../settings';
 const componentName = 'Card';
 
-export let Card = ({
-  actionIcons,
-  actionsPlacement,
-  caption,
-  children,
-  className,
-  clickZone,
-  label,
-  media,
-  mediaPosition,
-  onClick,
-  onKeyDown,
-  onPrimaryButtonClick,
-  overflowActions,
-  onSecondaryButtonClick,
-  pictogram: Pictogram,
-  primaryButtonKind,
-  primaryButtonText,
-  productive,
-  secondaryButtonKind,
-  secondaryButtonText,
-  title,
-  titleSize,
-}) => {
-  const blockClass = `${pkg.prefix}--card`;
-  const hasActions = actionIcons.length > 0 || overflowActions.length > 0;
-  const hasFooterActions = hasActions && actionsPlacement === 'bottom';
-  const hasFooterButton = !!secondaryButtonText || !!primaryButtonText;
-  const hasBottomBar = hasFooterActions || hasFooterButton;
-  const hasClickEvent = !!onClick || !!onKeyDown;
-  const clickableProps = {
-    onClick,
-    onKeyDown,
-    role: 'button',
-    tabIndex: '0',
-  };
+export let Card = forwardRef(
+  (
+    {
+      actionIcons,
+      actionsPlacement,
+      caption,
+      children,
+      className,
+      clickZone,
+      label,
+      media,
+      mediaPosition,
+      onClick,
+      onKeyDown,
+      onPrimaryButtonClick,
+      overflowActions,
+      onSecondaryButtonClick,
+      pictogram: Pictogram,
+      primaryButtonKind,
+      primaryButtonText,
+      productive,
+      secondaryButtonKind,
+      secondaryButtonText,
+      title,
+      titleSize,
+      ...rest
+    },
+    ref
+  ) => {
+    const blockClass = `${pkg.prefix}--card`;
+    const hasActions = actionIcons.length > 0 || overflowActions.length > 0;
+    const hasFooterActions = hasActions && actionsPlacement === 'bottom';
+    const hasFooterButton = !!secondaryButtonText || !!primaryButtonText;
+    const hasBottomBar = hasFooterActions || hasFooterButton;
+    const hasClickEvent = !!onClick || !!onKeyDown;
+    const clickableProps = {
+      onClick,
+      onKeyDown,
+      role: 'button',
+      tabIndex: '0',
+    };
 
-  // actions can either be an overflow menu or series of icons
-  const getActions = () => {
-    if (overflowActions.length > 0) {
-      const pos = actionsPlacement === 'top' ? 'bottom' : 'top';
-      const size = actionsPlacement === 'top' ? 'sm' : 'xl';
-      return (
-        <OverflowMenu size={size} direction={pos} flipped>
-          {overflowActions.map(({ id, ...rest }) => (
-            <OverflowMenuItem key={id} {...rest} />
-          ))}
-        </OverflowMenu>
-      );
-    }
-
-    const icons = actionIcons.map(
-      ({ id, icon: Icon, onClick, iconDescription, onKeyDown }) => {
-        if (productive) {
-          return (
-            <Button
-              key={id}
-              renderIcon={Icon}
-              hasIconOnly
-              onClick={onClick}
-              size={actionsPlacement === 'top' ? 'sm' : 'field'}
-              iconDescription={iconDescription}
-              kind="ghost"
-            />
-          );
-        }
+    // actions can either be an overflow menu or series of icons
+    const getActions = () => {
+      if (overflowActions.length > 0) {
+        const pos = actionsPlacement === 'top' ? 'bottom' : 'top';
+        const size = actionsPlacement === 'top' ? 'sm' : 'xl';
         return (
-          <div
-            key={id}
-            className={`${blockClass}__icon`}
-            onClick={onClick}
-            onKeyDown={onKeyDown}
-            role="button"
-            tabIndex="0">
-            <Icon aria-label={iconDescription} />
-          </div>
+          <OverflowMenu size={size} direction={pos} flipped>
+            {overflowActions.map(({ id, ...rest }) => (
+              <OverflowMenuItem key={id} {...rest} />
+            ))}
+          </OverflowMenu>
         );
       }
-    );
 
-    return icons;
-  };
+      const icons = actionIcons.map(
+        ({ id, icon: Icon, onClick, iconDescription, onKeyDown }) => {
+          if (productive) {
+            return (
+              <Button
+                key={id}
+                renderIcon={Icon}
+                hasIconOnly
+                onClick={onClick}
+                size={actionsPlacement === 'top' ? 'sm' : 'field'}
+                iconDescription={iconDescription}
+                kind="ghost"
+              />
+            );
+          }
+          return (
+            <div
+              key={id}
+              className={`${blockClass}__icon`}
+              onClick={onClick}
+              onKeyDown={onKeyDown}
+              role="button"
+              tabIndex="0">
+              <Icon aria-label={iconDescription} />
+            </div>
+          );
+        }
+      );
 
-  const getCardProps = () => {
-    const clickable =
-      (hasClickEvent && !productive) ||
-      (hasClickEvent && productive && clickZone === 'one');
-    const cardProps = {
-      className: cx(blockClass, {
-        [`${blockClass}__productive`]: productive,
-        [`${blockClass}__clickable`]: clickable,
-        [`${blockClass}__media-left`]: mediaPosition === 'left',
-        className,
-      }),
-      ...(clickable && clickableProps),
+      return icons;
     };
 
-    return cardProps;
-  };
+    const getCardProps = () => {
+      const clickable =
+        (hasClickEvent && !productive) ||
+        (hasClickEvent && productive && clickZone === 'one');
+      const cardProps = {
+        ...rest,
+        ref,
+        className: cx(
+          blockClass,
+          {
+            [`${blockClass}__productive`]: productive,
+            [`${blockClass}__clickable`]: clickable,
+            [`${blockClass}__media-left`]: mediaPosition === 'left',
+          },
+          className
+        ),
+        ...(clickable && clickableProps),
+      };
 
-  // the only reason this is necessary is for clickzone 2
-  const getHeaderBodyProps = () => {
-    const clickable = hasClickEvent && clickZone === 'two';
-    const headerBodyProps = {
-      className: cx(`${blockClass}__header-body-container`, {
-        [`${blockClass}__clickable`]: clickable,
-      }),
-      ...(clickable && clickableProps),
+      return cardProps;
     };
 
-    return headerBodyProps;
-  };
+    // the only reason this is necessary is for clickzone 2
+    const getHeaderBodyProps = () => {
+      const clickable = hasClickEvent && clickZone === 'two';
+      const headerBodyProps = {
+        className: cx(`${blockClass}__header-body-container`, {
+          [`${blockClass}__clickable`]: clickable,
+        }),
+        ...(clickable && clickableProps),
+      };
 
-  const getHeaderProps = () => ({
-    actions: getActions(),
-    actionsPlacement,
-    caption,
-    hasActions: hasActions && actionsPlacement === 'top',
-    label,
-    title,
-    titleSize,
-  });
-
-  const getBodyProps = () => {
-    const clickable = hasClickEvent && clickZone === 'three';
-    const bodyProps = {
-      className: cx(`${blockClass}__body`, {
-        [`${blockClass}__clickable`]: clickable,
-      }),
-      ...(clickable && clickableProps),
+      return headerBodyProps;
     };
 
-    return bodyProps;
-  };
+    const getHeaderProps = () => ({
+      actions: getActions(),
+      actionsPlacement,
+      caption,
+      hasActions: hasActions && actionsPlacement === 'top',
+      label,
+      title,
+      titleSize,
+    });
 
-  const getFooterProps = () => ({
-    actions: getActions(),
-    actionsPlacement,
-    hasActions: hasFooterActions,
-    hasButton: hasFooterButton,
-    onPrimaryButtonClick,
-    onSecondaryButtonClick,
-    primaryButtonKind,
-    primaryButtonText,
-    productive,
-    secondaryButtonKind,
-    secondaryButtonText,
-  });
+    const getBodyProps = () => {
+      const clickable = hasClickEvent && clickZone === 'three';
+      const bodyProps = {
+        className: cx(`${blockClass}__body`, {
+          [`${blockClass}__clickable`]: clickable,
+        }),
+        ...(clickable && clickableProps),
+      };
 
-  return (
-    <div {...getCardProps()}>
-      {media && <div className={`${blockClass}__media`}>{media}</div>}
-      {Pictogram && (
-        <div className={`${blockClass}__pictogram`}>
-          <Pictogram />
+      return bodyProps;
+    };
+
+    const getFooterProps = () => ({
+      actions: getActions(),
+      actionsPlacement,
+      hasActions: hasFooterActions,
+      hasButton: hasFooterButton,
+      onPrimaryButtonClick,
+      onSecondaryButtonClick,
+      primaryButtonKind,
+      primaryButtonText,
+      productive,
+      secondaryButtonKind,
+      secondaryButtonText,
+    });
+
+    return (
+      <div {...getCardProps()}>
+        {media && <div className={`${blockClass}__media`}>{media}</div>}
+        {Pictogram && (
+          <div className={`${blockClass}__pictogram`}>
+            <Pictogram />
+          </div>
+        )}
+        <div className={`${blockClass}__content-container`}>
+          <div {...getHeaderBodyProps()}>
+            <CardHeader {...getHeaderProps()} />
+            <div {...getBodyProps()}>{children}</div>
+          </div>
+          {hasBottomBar && <CardFooter {...getFooterProps()} />}
         </div>
-      )}
-      <div className={`${blockClass}__content-container`}>
-        <div {...getHeaderBodyProps()}>
-          <CardHeader {...getHeaderProps()} />
-          <div {...getBodyProps()}>{children}</div>
-        </div>
-        {hasBottomBar && <CardFooter {...getFooterProps()} />}
       </div>
-    </div>
-  );
-};
+    );
+  }
+);
 
 // Return a placeholder if not released and not enabled by feature flag
 Card = pkg.checkComponentEnabled(Card, componentName);

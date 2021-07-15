@@ -25,7 +25,7 @@
         "css",
         "es",
         "lib",
-        "node_modules", // this will ignore anything the node_modules directory
+        "node_modules",
         "**/node_modules", // the same for this one
         "**/node_modules/**", // the same for this one
         "package.json",

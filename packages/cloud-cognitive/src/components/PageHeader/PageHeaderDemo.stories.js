@@ -790,7 +790,6 @@ const TemplateDemo = () => {
             breadcrumbOverflowLabel="Open and close additional breadcrumb item list."
             breadcrumbItems={
               <>
-                {/* cSpell:disable-next-line */}
                 <BreadcrumbItem href="../../../hompepage">
                   Homepage
                 </BreadcrumbItem>

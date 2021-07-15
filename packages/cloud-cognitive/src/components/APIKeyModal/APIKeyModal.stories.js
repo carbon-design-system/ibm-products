@@ -41,7 +41,7 @@ const defaultProps = {
   apiKeyLabel: 'API key',
   copyButtonText: 'Copy',
   copyIconDescription: 'Copy',
-  visibilityToggle: true,
+  hasAPIKeyVisibilityToggle: true,
   downloadBodyText:
     'This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it.',
   downloadLinkText: 'Download as JSON',
@@ -352,7 +352,7 @@ Create.args = {
 export const CreateWithError = TemplateWithState.bind({});
 CreateWithError.args = {
   ...defaultProps,
-  visibilityToggle: true,
+  hasAPIKeyVisibilityToggle: true,
   createButtonText: 'Generate API key',
   createTitle: 'Generate an API key',
   body: '(Optional description text) To connect securely to [product name], your application or tool needs an API key with permission to access resources such as [product resource name].',

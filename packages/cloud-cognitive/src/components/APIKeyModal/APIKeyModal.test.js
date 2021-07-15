@@ -53,7 +53,7 @@ const defaultProps = {
   previousStepButtonText: 'previous step',
   secondaryButtonText: 'close',
   showPasswordLabel: 'show password label',
-  visibilityToggle: true,
+  hasAPIKeyVisibilityToggle: true,
 };
 
 URL.createObjectURL = jest.fn(() => Promise.resolve('download-link'));

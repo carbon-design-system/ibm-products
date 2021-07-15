@@ -52,6 +52,7 @@ export let APIKeyModal = forwardRef(
       editing,
       error,
       errorMessage,
+      hasAPIKeyVisibilityToggle,
       hasDownloadLink,
       loading,
       loadingMessage,
@@ -68,7 +69,6 @@ export let APIKeyModal = forwardRef(
       previousStepButtonText,
       secondaryButtonText: closeButtonText,
       showPasswordLabel,
-      visibilityToggle,
       ...rest
     },
     ref
@@ -214,7 +214,7 @@ export let APIKeyModal = forwardRef(
           ) : (
             <>
               {body && <p className={`${blockClass}__body`}>{body}</p>}
-              {apiKey && visibilityToggle && (
+              {apiKey && hasAPIKeyVisibilityToggle && (
                 <TextInput.PasswordInput
                   value={apiKey}
                   labelText={apiKeyLabel}
@@ -223,7 +223,7 @@ export let APIKeyModal = forwardRef(
                   tooltipPosition="left"
                 />
               )}
-              {apiKey && !visibilityToggle && (
+              {apiKey && !hasAPIKeyVisibilityToggle && (
                 <TextInput
                   value={apiKey}
                   labelText={apiKeyLabel}
@@ -300,7 +300,7 @@ export let APIKeyModal = forwardRef(
 
 const customStepsRequiredProps = isRequiredIf(
   PropTypes.string,
-  ({ customSteps }) => customSteps.length > 1
+  ({ customSteps }) => customSteps && customSteps.length > 1
 );
 
 // Return a placeholder if not released and not enabled by feature flag
@@ -334,6 +334,7 @@ APIKeyModal.propTypes = {
   editing: PropTypes.bool,
   error: PropTypes.bool,
   errorMessage: PropTypes.string,
+  hasAPIKeyVisibilityToggle: PropTypes.bool,
   hasDownloadLink: PropTypes.bool,
   loading: PropTypes.bool,
   loadingMessage: PropTypes.string,
@@ -349,11 +350,10 @@ APIKeyModal.propTypes = {
   previousStepButtonText: customStepsRequiredProps,
   secondaryButtonText: PropTypes.string,
   showPasswordLabel: PropTypes.string,
-  visibilityToggle: PropTypes.bool,
 };
 
 APIKeyModal.defaultProps = {
-  visibilityToggle: false,
+  hasAPIKeyVisibilityToggle: false,
   customSteps: [],
   hasDownloadLink: false,
   loading: false,

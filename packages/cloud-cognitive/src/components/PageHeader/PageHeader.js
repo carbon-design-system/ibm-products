@@ -713,20 +713,7 @@ PageHeader.propTypes = {
    * tooltipAlignment and type are ignored.
    */
   actionBarItems: PropTypes.oneOfType([
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        ...prepareProps(Button.propTypes, [
-          'kind',
-          'size',
-          'tooltipPosition',
-          'tooltipAlignment',
-        ]),
-        iconDescription: PropTypes.string.isRequired,
-        onClick: Button.propTypes.onClick,
-        renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
-          .isRequired,
-      })
-    ),
+    ActionBar.propTypes.actions,
     deprecatePropUsage(
       PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.element),
@@ -806,7 +793,15 @@ PageHeader.propTypes = {
    * Carbon Button API https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
   pageActions: PropTypes.oneOfType([
-    ActionBar.propTypes.actions,
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        ...Button.propTypes,
+        key: PropTypes.string.isRequired,
+        kind: Button.propTypes.kind,
+        label: PropTypes.node,
+        onClick: PropTypes.func,
+      })
+    ),
     deprecatePropUsage(
       PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.element),

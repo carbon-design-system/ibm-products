@@ -54,6 +54,7 @@ export default {
   ],
 };
 
+/* cSpell:disable */
 const demoTableData = [
   {
     Index: 'C8205413-BD94-0B62-DB0A-BE26CF8C60CD',
@@ -767,6 +768,7 @@ const demoTableData = [
   },
 ];
 const demoTableHeaders = Object.keys(demoTableData[0]);
+/* cSpell:enable */
 
 const TemplateDemo = () => {
   return (

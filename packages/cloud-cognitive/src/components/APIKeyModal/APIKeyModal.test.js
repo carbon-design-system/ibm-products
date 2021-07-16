@@ -29,7 +29,7 @@ const defaultProps = {
       key, you will have to reset it.
     </p>
   ),
-  successHeader: 'API key successully created',
+  successHeader: 'API key successfully created',
 };
 
 const standardProps = {
@@ -47,7 +47,7 @@ const standardProps = {
   loading: false,
   body: 'Optional description text. To connect securely to {{product}}, your application or tool needs an API key with permission to access the cluster and resources.',
   nameHelperText:
-    'Providing the application name will help you idenfity your api key later.',
+    'Providing the application name will help you identify your api key later.',
   nameInputId: 'nameInput',
   nameLabel: 'Name your application',
   namePlaceholder: 'Application name',
@@ -84,7 +84,7 @@ describe(name, () => {
     const nameInput = container.querySelector('.bx--text-input');
     const generateBtn = getByText('Generate API key');
 
-    change(nameInput, { target: { value: 'testkey' } });
+    change(nameInput, { target: { value: 'test-key' } });
     click(generateBtn);
     expect(onRequestSubmit).toHaveBeenCalled();
 
@@ -106,7 +106,7 @@ describe(name, () => {
     const props = {
       ...standardProps,
       onRequestSubmit,
-      errorMessage: 'an error occured',
+      errorMessage: 'an error occurred',
     };
 
     const { getByText, container, rerender } = render(
@@ -116,7 +116,7 @@ describe(name, () => {
     const nameInput = container.querySelector('.bx--text-input');
     const generateBtn = getByText('Generate API key');
 
-    change(nameInput, { target: { value: 'testkey' } });
+    change(nameInput, { target: { value: 'test-key' } });
     click(generateBtn);
     expect(onRequestSubmit).toHaveBeenCalled();
 

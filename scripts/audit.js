@@ -7,6 +7,8 @@
 
 'use strict';
 
+// cspell:words ENOAUDIT
+
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const argv = process.argv.slice(2);

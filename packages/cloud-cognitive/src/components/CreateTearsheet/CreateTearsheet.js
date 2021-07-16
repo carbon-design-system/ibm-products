@@ -108,7 +108,7 @@ export let CreateTearsheet = forwardRef(
             // Only a string was provided as children of CreateTearsheetStep, this is not permitted when using view all toggle
             if (typeof child.props.children === 'string') {
               console.warn(
-                `${componentName}: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' propz.`
+                `${componentName}: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' prop.`
               );
             } else {
               // The TearsheetStep has an array of children, lets check each one to see if it is a TearsheetSection
@@ -135,7 +135,7 @@ export let CreateTearsheet = forwardRef(
             index === tearsheetStepComponents.length - 1 // wait until we've finished checking each TearsheetStep before giving a warning
           ) {
             console.warn(
-              `${componentName}: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' propq.`
+              `${componentName}: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' prop.`
             );
           }
           // We have received a single child element, lets check to see that it is

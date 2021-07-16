@@ -77,7 +77,7 @@ describe(componentName, () => {
   });
 
   it('adds additional properties to the containing node', () => {
-    renderComponent({ 'data-testid': dataTestId });
+    renderComponent({ 'data-test-id': dataTestId });
     screen.getByTestId(dataTestId);
   });
 
@@ -100,7 +100,7 @@ describe(componentName, () => {
   });
 
   iconTypes.forEach((label) => {
-    it(`applies the proper title element when icon laebl of ${label} is passed`, () => {
+    it(`applies the proper title element when icon label of ${label} is passed`, () => {
       const { container } = render(
         <StatusIcon
           kind={label}

@@ -88,7 +88,7 @@ const pageActionsDepTest2 = (
 
 const subtitle = 'Optional subtitle if necessary';
 const navigation = (
-  <Tabs data-testid="tabs">
+  <Tabs data-test-id="tabs">
     <Tab label="Tab 1" />
     <Tab label="Tab 2" />
     <Tab label="Tab 3" />
@@ -98,7 +98,7 @@ const navigation = (
 
 // supply enough tags to trigger TagSet overflow required props
 const tags = Array.from({ length: 20 }, () => ({
-  'data-testid': 'tags',
+  'data-test-id': 'tags',
   type: 'blue',
   label: 'A tag',
 }));
@@ -202,7 +202,7 @@ describe('PageHeader', () => {
 
     mocks.push({
       id: 'uuidv4',
-      mock: uuidv4.mockImplementation(() => 'testid'),
+      mock: uuidv4.mockImplementation(() => 'test-id'),
     });
     window.scrollTo = jest.spyOn(window, 'scrollTo').mockImplementation();
     window.ResizeObserver = jest.fn().mockImplementation(() => ({
@@ -223,11 +223,11 @@ describe('PageHeader', () => {
   });
 
   test('renders an empty header when no props are set', () => {
-    const dataTestid = uuidv4();
-    render(<PageHeader data-testid={dataTestid} />);
+    const dataTestId = uuidv4();
+    render(<PageHeader data-test-id={dataTestId} />);
 
     // console.dir(screen.getByRole('region')); // section should be a region https://fae.disability.illinois.edu/rulesets/ROLE_5/
-    const header = screen.getByTestId(dataTestid);
+    const header = screen.getByTestId(dataTestId);
     expect(header).toHaveClass(blockClass);
 
     expect(header).toHaveClass(`${blockClass}--show-background`);
@@ -259,11 +259,11 @@ describe('PageHeader', () => {
   });
 
   test('renders all the appropriate content when all props are set', () => {
-    const dataTestid = uuidv4();
-    render(<PageHeader {...testProps} data-testid={dataTestid} />);
+    const dataTestId = uuidv4();
+    render(<PageHeader {...testProps} data-test-id={dataTestId} />);
 
     // console.dir(screen.getByRole('region')); // section should be a region https://fae.disability.illinois.edu/rulesets/ROLE_5/
-    const header = screen.getByTestId(dataTestid);
+    const header = screen.getByTestId(dataTestId);
     expect(header).toHaveClass(blockClass);
 
     expect(header).toHaveClass(`${blockClass}--show-background`);
@@ -369,9 +369,9 @@ describe('PageHeader', () => {
   });
 
   it('adds additional properties to the containing node', () => {
-    const dataTestid = uuidv4();
-    render(<PageHeader data-testid={dataTestid} />);
-    screen.getByTestId(dataTestid);
+    const dataTestId = uuidv4();
+    render(<PageHeader data-test-id={dataTestId} />);
+    screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', () => {
@@ -381,14 +381,14 @@ describe('PageHeader', () => {
   });
 
   test('collapse button works', () => {
-    const dataTestid = uuidv4();
+    const dataTestId = uuidv4();
     render(
       <PageHeader
         {...testProps}
         collapseHeaderLabel="Toggle collapse"
         expandHeaderLabel="Toggle expand"
         collapseHeaderToggleWanted={true}
-        data-testid={dataTestid}
+        data-test-id={dataTestId}
       />
     );
 
@@ -521,7 +521,7 @@ describe('PageHeader', () => {
     screen.getByRole('region');
   });
 
-  test('Actionbar without overflow aria label', () => {
+  test('ActionBar without overflow aria label', () => {
     const error = jest.spyOn(console, 'error').mockImplementation(() => {});
 
     const { title } = testProps;

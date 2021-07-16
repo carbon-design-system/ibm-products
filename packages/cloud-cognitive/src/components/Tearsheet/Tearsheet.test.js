@@ -29,7 +29,7 @@ const actions = [
   { kind: 'secondary', onClick, label: 'Cancel' },
   { onClick, label: createButton },
 ];
-const badactions = [
+const badActions = [
   { kind: 'primary' },
   { kind: 'primary' },
   { kind: 'ghost' },
@@ -41,6 +41,7 @@ const children = <div>{childFragment}</div>;
 const className = `class-${uuidv4()}`;
 const closeIconDescription = `Close the ${uuidv4()} tearsheet`;
 const dataTestId = uuidv4();
+// cspell: disable
 const descriptionFragment = `Lorem ipsum ${uuidv4()} dolor sit amet`;
 const description = (
   <span>
@@ -50,6 +51,7 @@ const description = (
     ex ea commodo consequat.
   </span>
 );
+// cspell: enable
 const headerActionButtonLabel = `Button ${uuidv4()}`;
 const headerActions = (
   <ButtonSet>
@@ -65,7 +67,7 @@ const tabLabel3 = `Tab ${uuidv4()} 3`;
 const tabLabel4 = `Tab ${uuidv4()} 4`;
 const navigation = (
   <div>
-    <Tabs data-testid="tabs">
+    <Tabs data-test-id="tabs">
       <Tab label={tabLabel1} />
       <Tab label={tabLabel2} />
       <Tab label={tabLabel3} />
@@ -109,7 +111,7 @@ const commonTests = (Ts, name) => {
 
   it('rejects too many buttons using the custom validator', () => {
     const error = jest.spyOn(console, 'error').mockImplementation(() => {});
-    render(<Ts actions={badactions} />);
+    render(<Ts actions={badActions} />);
     expect(error).toBeCalledWith(
       expect.stringContaining(`\`actions\` supplied to \`${name}\`: you cannot`)
     );
@@ -223,7 +225,7 @@ const commonTests = (Ts, name) => {
   });
 
   it('adds additional properties to the containing node', () => {
-    render(<Ts data-testid={dataTestId} />);
+    render(<Ts data-test-id={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 

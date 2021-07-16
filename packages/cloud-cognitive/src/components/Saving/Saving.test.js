@@ -83,7 +83,7 @@ describe(componentName, () => {
   });
 
   it('adds additional properties to the containing node', () => {
-    render(<Saving {...defaultProps} data-testid="test-id" />);
+    render(<Saving {...defaultProps} data-test-id="test-id" />);
     screen.getByTestId('test-id');
   });
 

@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Button } from 'carbon-components-react';
 import { pkg, carbon } from '../../settings';
-import ReactResizeDetector from 'react-resize-detector';
+import { useResizeDetector } from 'react-resize-detector';
 import { ArrowLeft16 } from '@carbon/icons-react';
 
 // Carbon and package components we use.
@@ -292,58 +292,63 @@ export let BreadcrumbWithOverflow = ({
   const buttonHrefValue = getHref(backItem);
   const buttonTooltipValue = getTitle(backItem);
 
-  return (
-    <ReactResizeDetector onResize={handleResize}>
-      <div
-        className={cx(blockClass, className, {
-          [`${blockClass}__with-items`]: displayedBreadcrumbItems.length > 1,
-        })}
-        ref={breadcrumbItemWithOverflow}>
-        <div className={cx([`${blockClass}__space`])}>
-          {/* This next element is purely here to measure the size of the breadcrumb items */}
-          <ReactResizeDetector onResize={handleBreadcrumbItemsResize}>
-            <div
-              className={`${blockClass}__breadcrumb-container ${blockClass}__breadcrumb-container--hidden`}
-              aria-hidden={true}
-              ref={sizingContainerRef}>
-              <Breadcrumb>
-                <BreadcrumbItem
-                  key={`${blockClass}-hidden-overflow-${internalId}`}>
-                  <OverflowMenu
-                    ariaLabel={overflowAriaLabel}
-                    renderIcon={OverflowMenuHorizontal32}
-                  />
-                </BreadcrumbItem>
-                {children}
-              </Breadcrumb>
-            </div>
-          </ReactResizeDetector>
+  useResizeDetector({
+    onResize: handleBreadcrumbItemsResize,
+    targetRef: sizingContainerRef,
+  });
 
-          {buttonHrefValue && buttonTooltipValue && (
-            <Button
-              className={`${blockClass}__breadcrumb-back-button`}
-              hasIconOnly
-              iconDescription={buttonTooltipValue}
-              kind="ghost"
-              href={buttonHrefValue}
-              renderIcon={ArrowLeft16}
-              size="field"
-              tooltipPosition="right"
-              type="button"
-            />
-          )}
-          <Breadcrumb
-            className={cx(`${blockClass}__breadcrumb-container`, {
-              [`${blockClass}__breadcrumb-container-with-items`]:
-                displayedBreadcrumbItems.length > 1,
-            })}
-            noTrailingSlash={noTrailingSlash}
-            {...other}>
-            {displayedBreadcrumbItems}
+  useResizeDetector({
+    onResize: handleResize,
+    targetRef: breadcrumbItemWithOverflow,
+  });
+
+  return (
+    <div
+      className={cx(blockClass, className, {
+        [`${blockClass}__with-items`]: displayedBreadcrumbItems.length > 1,
+      })}
+      ref={breadcrumbItemWithOverflow}>
+      <div className={cx([`${blockClass}__space`])}>
+        {/* This next element is purely here to measure the size of the breadcrumb items */}
+        <div
+          className={`${blockClass}__breadcrumb-container ${blockClass}__breadcrumb-container--hidden`}
+          aria-hidden={true}
+          ref={sizingContainerRef}>
+          <Breadcrumb>
+            <BreadcrumbItem key={`${blockClass}-hidden-overflow-${internalId}`}>
+              <OverflowMenu
+                ariaLabel={overflowAriaLabel}
+                renderIcon={OverflowMenuHorizontal32}
+              />
+            </BreadcrumbItem>
+            {children}
           </Breadcrumb>
         </div>
+
+        {buttonHrefValue && buttonTooltipValue && (
+          <Button
+            className={`${blockClass}__breadcrumb-back-button`}
+            hasIconOnly
+            iconDescription={buttonTooltipValue}
+            kind="ghost"
+            href={buttonHrefValue}
+            renderIcon={ArrowLeft16}
+            size="field"
+            tooltipPosition="right"
+            type="button"
+          />
+        )}
+        <Breadcrumb
+          className={cx(`${blockClass}__breadcrumb-container`, {
+            [`${blockClass}__breadcrumb-container-with-items`]:
+              displayedBreadcrumbItems.length > 1,
+          })}
+          noTrailingSlash={noTrailingSlash}
+          {...other}>
+          {displayedBreadcrumbItems}
+        </Breadcrumb>
       </div>
-    </ReactResizeDetector>
+    </div>
   );
 };
 
@@ -363,7 +368,7 @@ BreadcrumbWithOverflow.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * maxVisble: maximum visible breadcrumb-items before overflow is used (values less than 1 are treated as 1)
+   * maxVisible: maximum visible breadcrumb-items before overflow is used (values less than 1 are treated as 1)
    */
   maxVisible: PropTypes.number,
   /**

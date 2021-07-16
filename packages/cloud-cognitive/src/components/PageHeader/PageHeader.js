@@ -713,7 +713,19 @@ PageHeader.propTypes = {
    * tooltipAlignment and type are ignored.
    */
   actionBarItems: PropTypes.oneOfType([
-    ActionBar.propTypes.actions,
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        ...prepareProps(Button.propTypes, [
+          'kind',
+          'size',
+          'tooltipPosition',
+          'tooltipAlignment',
+        ]),
+        iconDescription: PropTypes.string.isRequired,
+        onClick: Button.propTypes.onClick,
+        renderIcon: Button.propTypes.renderIcon.isRequired,
+      })
+    ),
     deprecatePropUsage(
       PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.element),

@@ -216,7 +216,7 @@ export let ImportModal = forwardRef(
                 invalid={file.invalid}
                 errorBody={file.errorBody}
                 errorSubject={file.errorSubject}
-                fileSize={file.fileSize}
+                filesize={file.fileSize /* cspell:disable-line */}
               />
             ))}
           </div>

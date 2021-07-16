@@ -117,7 +117,9 @@ describe(componentName, () => {
   });
 
   it('adds additional properties to an action button', () => {
-    render(<ActionSet actions={[{ ...action1, 'data-testid': dataTestId }]} />);
+    render(
+      <ActionSet actions={[{ ...action1, 'data-test-id': dataTestId }]} />
+    );
     screen.getByTestId(dataTestId);
   });
 
@@ -133,7 +135,7 @@ describe(componentName, () => {
   });
 
   it('adds additional properties to the containing node', () => {
-    render(<ActionSet data-testid={dataTestId} />);
+    render(<ActionSet data-test-id={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 

@@ -41,7 +41,7 @@ const defaultProps = {
     },
   ],
   ref,
-  'data-testid': dataTestId,
+  'data-test-id': dataTestId,
 };
 
 describe(componentName, () => {
@@ -74,7 +74,7 @@ describe(componentName, () => {
     expect(screen.getByText('IBM Cloud and Cognitive component library'));
     expect(ref.current.classList.contains(blockClass)).toBeTruthy();
     expect(
-      container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
+      container.querySelector(`.${blockClass}[data-test-id="${dataTestId}"]`)
     ).toBeInTheDocument();
   });
   it('should render the HTTPError403 component', () => {
@@ -84,7 +84,7 @@ describe(componentName, () => {
     expect(screen.getByText('IBM Cloud and Cognitive component library'));
     expect(ref.current.classList.contains(blockClass)).toBeTruthy();
     expect(
-      container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
+      container.querySelector(`.${blockClass}[data-test-id="${dataTestId}"]`)
     ).toBeInTheDocument();
   });
   it('should render the HTTPErrorOther component', () => {
@@ -94,7 +94,7 @@ describe(componentName, () => {
     expect(screen.getByText('IBM Cloud and Cognitive component library'));
     expect(ref.current.classList.contains(blockClass)).toBeTruthy();
     expect(
-      container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
+      container.querySelector(`.${blockClass}[data-test-id="${dataTestId}"]`)
     ).toBeInTheDocument();
   });
 });

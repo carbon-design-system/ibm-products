@@ -49,7 +49,7 @@ const defaultProps = {
       key, you will have to reset it.
     </p>
   ),
-  successHeader: 'API key successully created',
+  successHeader: 'API key successfully created',
 };
 
 const blockClass = `${pkg.prefix}--apikey-modal`;
@@ -260,7 +260,7 @@ Standard.args = {
   loadingMessage: 'Generating...',
   body: '(Optional description text) To connect securely to [product name], your application or tool needs an API key with permission to access resources such as [product resource name].',
   nameHelperText:
-    'Providing the application name will help you idenfity your API key later.',
+    'Providing the application name will help you identify your API key later.',
   nameInputId: 'nameInput',
   nameLabel: 'Name your application',
   namePlaceholder: 'Application name',
@@ -281,13 +281,13 @@ WithError.args = {
   loadingMessage: 'Generating...',
   body: '(Optional description text) To connect securely to [product name], your application or tool needs an API key with permission to access resources such as [product resource name].',
   nameHelperText:
-    'Providing the application name will help you idenfity your API key later.',
+    'Providing the application name will help you identify your API key later.',
   nameInputId: 'nameInput',
   nameLabel: 'Name your application',
   namePlaceholder: 'Application name',
   nameRequired: true,
   error: true,
-  errorMessage: 'An error occured.',
+  errorMessage: 'An error occurred.',
 };
 
 export const Instant = InstantTemplate.bind({});
@@ -306,7 +306,7 @@ export const CustomSteps = MultiStepTemplate.bind({});
 CustomSteps.args = {
   ...defaultProps,
   createButtonText: 'Generate',
-  modalLabel: 'Genreate API key',
+  modalLabel: 'Generate API key',
   stepHeaders: [
     'Generate API key',
     'Choose which resources the API will have access to',

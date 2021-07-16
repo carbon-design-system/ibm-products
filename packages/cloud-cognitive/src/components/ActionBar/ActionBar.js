@@ -250,8 +250,7 @@ ActionBar.propTypes = {
       key: PropTypes.string.isRequired,
       // Redefine as form different  to Button and a key prop used by ActionBarItems
       iconDescription: PropTypes.string.isRequired,
-      renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
-        .isRequired,
+      renderIcon: Button.propTypes.renderIcon.isRequired,
       // We duplicate onClick here to improve DocGen in Storybook
       onClick: PropTypes.func,
     })

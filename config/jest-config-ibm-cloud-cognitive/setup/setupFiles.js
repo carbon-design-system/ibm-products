@@ -41,7 +41,7 @@ if (global.HTMLElement) {
 }
 
 // jsdom does not support the second argument to getComputedStyle, but some
-// components use it, so mock it to just use the first arument and return the
-// computed style for that regardless of a pseudoelement being supplied
+// components use it, so mock it to just use the first argument and return the
+// computed style for that regardless of a pseudo-element being supplied
 const oldGetComputedStyle = global.getComputedStyle;
 global.getComputedStyle = jest.fn((elt) => oldGetComputedStyle(elt));

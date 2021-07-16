@@ -9,7 +9,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import cx from 'classnames';
-import ReactResizeDetector from 'react-resize-detector';
+import { useResizeDetector } from 'react-resize-detector';
 import { ButtonSet, Button } from 'carbon-components-react';
 import { ButtonMenu, ButtonMenuItem } from '../ButtonMenu';
 
@@ -78,20 +78,6 @@ export const ButtonSetWithOverflow = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [buttons]);
 
-  /* istanbul ignore next */ // not sure how to test resize
-  const handleResize = () => {
-    // width is the space available for all action bar items horizontally
-    // the action bar items are squares so the height should be one item wide
-    /* istanbul ignore next */ // not sure how to test resize
-    checkFullyVisibleItems();
-  };
-
-  /* istanbul ignore next */ // not sure how to test resize
-  const handleButtonResize = () => {
-    /* istanbul ignore next */ // not sure how to test resize
-    checkFullyVisibleItems();
-  };
-
   const AButtonSet = React.forwardRef(({ buttons, ...rest }, ref) => {
     return (
       <ButtonSet {...rest} ref={ref}>
@@ -125,53 +111,61 @@ export const ButtonSetWithOverflow = ({
     );
   });
 
-  return (
-    <ReactResizeDetector handleWidth={true} onResize={handleResize}>
-      <div
-        className={cx([
-          blockClass,
-          className,
-          { [`${blockClass}--right`]: rightAlign },
-        ])}
-        ref={spaceAvailableRef}>
-        <ReactResizeDetector onResize={handleButtonResize}>
-          {/* Hidden button set use to determine if space is available for a button set */}
-          <div
-            className={`${blockClass}__button-container ${blockClass}__button-container--hidden`}>
-            <AButtonSet
-              aria-hidden={true}
-              ref={sizingContainerRefSet}
-              size={buttonSize}
-              buttons={buttons}
-            />
-          </div>
-        </ReactResizeDetector>
-        <ReactResizeDetector onResize={handleButtonResize}>
-          {/* Hidden ButtonMenu used to report min size to host via onWidthChange
-           */}
-          <div
-            className={`${blockClass}__button-container ${blockClass}__button-container--hidden`}
-            aria-hidden={true}>
-            <AButtonMenu
-              ref={sizingContainerRefCombo}
-              buttons={buttons}
-              size={buttonSize}
-            />
-          </div>
-        </ReactResizeDetector>
+  useResizeDetector({
+    onResize: checkFullyVisibleItems,
+    targetRef: sizingContainerRefSet,
+  });
 
-        {/* The displayed components */}
-        {showAsOverflow ? (
-          <AButtonMenu buttons={buttons} size={buttonSize} />
-        ) : (
-          <AButtonSet
-            className={`${blockClass}__button-container`}
-            size={buttonSize}
-            buttons={buttons}
-          />
-        )}
+  useResizeDetector({
+    onResize: checkFullyVisibleItems,
+    targetRef: sizingContainerRefCombo,
+  });
+
+  useResizeDetector({
+    onResize: checkFullyVisibleItems,
+    targetRef: spaceAvailableRef,
+  });
+
+  return (
+    <div
+      className={cx([
+        blockClass,
+        className,
+        { [`${blockClass}--right`]: rightAlign },
+      ])}
+      ref={spaceAvailableRef}>
+      {/* Hidden button set used to determine if space is available for a button set */}
+      <div
+        className={`${blockClass}__button-container ${blockClass}__button-container--hidden`}>
+        <AButtonSet
+          aria-hidden={true}
+          ref={sizingContainerRefSet}
+          size={buttonSize}
+          buttons={buttons}
+        />
       </div>
-    </ReactResizeDetector>
+      {/* Hidden ButtonMenu used to report min size to host via onWidthChange */}
+      <div
+        className={`${blockClass}__button-container ${blockClass}__button-container--hidden`}
+        aria-hidden={true}>
+        <AButtonMenu
+          ref={sizingContainerRefCombo}
+          buttons={buttons}
+          size={buttonSize}
+        />
+      </div>
+
+      {/* The displayed components */}
+      {showAsOverflow ? (
+        <AButtonMenu buttons={buttons} size={buttonSize} />
+      ) : (
+        <AButtonSet
+          className={`${blockClass}__button-container`}
+          size={buttonSize}
+          buttons={buttons}
+        />
+      )}
+    </div>
   );
 };
 

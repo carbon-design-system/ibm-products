@@ -124,6 +124,7 @@ export const ButtonSetWithOverflow = ({
   useResizeDetector({
     onResize: checkFullyVisibleItems,
     targetRef: spaceAvailableRef,
+    handleWidth: true,
   });
 
   return (

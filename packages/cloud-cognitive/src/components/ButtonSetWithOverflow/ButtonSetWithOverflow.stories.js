@@ -34,16 +34,20 @@ export default {
 
 const buttons = [
   {
+    key: 'danger-button',
     kind: 'danger',
     onClick: action('Danger'),
     label: 'Danger',
   },
   {
+    key: 'secondary-button',
     kind: 'secondary',
     onClick: action('Secondary'),
     label: 'Secondary',
   },
   {
+    key: 'primary-button',
+    kind: 'primary',
     onClick: action('Primary'),
     label: 'Primary',
   },

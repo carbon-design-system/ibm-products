@@ -44,7 +44,7 @@ describe(componentName, () => {
   });
 
   it('adds additional props to the containing node', () => {
-    render(<DISPLAY_NAME data-testid={dataTestId}> </DISPLAY_NAME>);
+    render(<DISPLAY_NAME data-test-id={dataTestId}> </DISPLAY_NAME>);
     screen.getByTestId(dataTestId);
   });
 

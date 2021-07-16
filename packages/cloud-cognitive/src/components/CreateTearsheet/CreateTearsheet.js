@@ -108,7 +108,7 @@ export let CreateTearsheet = forwardRef(
             // Only a string was provided as children of CreateTearsheetStep, this is not permitted when using view all toggle
             if (typeof child.props.children === 'string') {
               console.warn(
-                `${componentName}: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' propz.`
+                `${componentName}: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' prop.`
               );
             } else {
               // The TearsheetStep has an array of children, lets check each one to see if it is a TearsheetSection
@@ -135,7 +135,7 @@ export let CreateTearsheet = forwardRef(
             index === tearsheetStepComponents.length - 1 // wait until we've finished checking each TearsheetStep before giving a warning
           ) {
             console.warn(
-              `${componentName}: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' propq.`
+              `${componentName}: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' prop.`
             );
           }
           // We have received a single child element, lets check to see that it is
@@ -178,14 +178,21 @@ export let CreateTearsheet = forwardRef(
       const isSubmitDisabled = () => {
         let step = 0;
         let submitDisabled = false;
+        let viewAllSubmitDisabled = false;
         const tearsheetSteps = getTearsheetSteps();
         tearsheetSteps.forEach((child) => {
           step++;
           if (currentStep === step) {
             submitDisabled = child.props.disableSubmit;
           }
+          if (shouldViewAll && child.props.disableSubmit) {
+            viewAllSubmitDisabled = true;
+          }
         });
-        return submitDisabled;
+        if (!shouldViewAll) {
+          return submitDisabled;
+        }
+        return viewAllSubmitDisabled;
       };
       const handleNext = async () => {
         setIsSubmitting(true);
@@ -224,6 +231,7 @@ export let CreateTearsheet = forwardRef(
         const buttons = [];
         if (total > 1 && !shouldViewAll) {
           buttons.push({
+            key: 'create-tearsheet-action-button-back',
             label: backButtonText,
             onClick: () => setCurrentStep((prev) => prev - 1),
             kind: 'secondary',
@@ -231,11 +239,13 @@ export let CreateTearsheet = forwardRef(
           });
         }
         buttons.push({
+          key: 'create-tearsheet-action-button-cancel',
           label: cancelButtonText,
           onClick: onUnmount,
           kind: shouldViewAll ? 'secondary' : 'ghost',
         });
         buttons.push({
+          key: 'create-tearsheet-action-button-submit',
           label: shouldViewAll
             ? submitButtonText
             : currentStep < total
@@ -398,12 +408,15 @@ export let CreateTearsheet = forwardRef(
       );
     };
 
-    // renders all children (CreateTearsheetSteps and regular children elements)
+    // renders all children (CreateTearsheetSteps and regular child elements)
     const renderChildren = (childrenElements) => {
       let step = 0;
       const childrenArray = Array.isArray(childrenElements)
         ? childrenElements
         : [childrenElements];
+      const indexOfLastTearsheetStep = childrenArray
+        .map((el) => el?.props?.type)
+        .lastIndexOf(CREATE_TEARSHEET_STEP);
       return (
         <>
           {' '}
@@ -433,7 +446,10 @@ export let CreateTearsheet = forwardRef(
                     {renderStepTitle(stepIndex)}
                   </h4>
                 )}
-                {renderStepChildren(child.props.children)}
+                {renderStepChildren(
+                  child.props.children,
+                  indexOfLastTearsheetStep === step - 1
+                )}
               </>
             );
           })}
@@ -441,16 +457,24 @@ export let CreateTearsheet = forwardRef(
       );
     };
 
-    const renderStepChildren = (stepChildren) => {
-      const childrenArray = Array.isArray(stepChildren)
-        ? stepChildren
-        : [stepChildren];
+    const renderStepChildren = (
+      tearsheetStepComponent,
+      isLastTearsheetStep
+    ) => {
+      const tearsheetStepComponents = Array.isArray(tearsheetStepComponent)
+        ? tearsheetStepComponent
+        : [tearsheetStepComponent];
       return (
         <>
-          {childrenArray.map((child, index) => {
+          {tearsheetStepComponents.map((child, index) => {
             if (!isTearsheetSection(child)) {
               return child;
             }
+            // Needed to be able to not render the divider
+            // line on the last section of the last step
+            const isLastSectionOfLastStep =
+              isLastTearsheetStep &&
+              tearsheetStepComponents.length - 1 === index;
             return React.cloneElement(
               child,
               {
@@ -470,7 +494,7 @@ export let CreateTearsheet = forwardRef(
                   </h4>
                 )}
                 {child}
-                {shouldViewAll && (
+                {shouldViewAll && !isLastSectionOfLastStep && (
                   <span className={`${blockClass}__section--divider`} />
                 )}
               </>

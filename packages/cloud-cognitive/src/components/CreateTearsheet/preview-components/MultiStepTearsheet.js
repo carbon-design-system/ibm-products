@@ -76,7 +76,7 @@ export const MultiStepTearsheet = () => {
             return new Promise((resolve, reject) => {
               setTimeout(() => {
                 // Example usage of how to prevent the next step if some kind
-                // of error occured during the `onNext` handler.
+                // of error occurred during the `onNext` handler.
                 if (shouldReject) {
                   setHasSubmitError(true);
                   reject();

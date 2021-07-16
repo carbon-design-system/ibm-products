@@ -318,7 +318,7 @@ APIKeyModal.propTypes = {
    */
   downloadableFileName: PropTypes.string,
   /**
-   * specifices if an error has occured
+   * specifies if an error has occurred
    */
   error: PropTypes.bool,
   /**
@@ -354,7 +354,7 @@ APIKeyModal.propTypes = {
    */
   namePlaceholder: PropTypes.string,
   /**
-   * specifices if a name is required. If you are using custom steps DO NOT use this for validation.
+   * specifies if a name is required. If you are using custom steps DO NOT use this for validation.
    * use the `valid` prop in the `customSteps` prop array for validation. see `customSteps` for additional information.
    */
   nameRequired: PropTypes.bool,
@@ -375,7 +375,7 @@ APIKeyModal.propTypes = {
    */
   open: PropTypes.bool,
   /**
-   * Specifices text for previous step button
+   * Specifies text for previous step button
    */
   previousStepButtonText: PropTypes.string,
   /**

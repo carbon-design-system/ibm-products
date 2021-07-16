@@ -26,7 +26,7 @@ MAIN_COMMON_FILES="$PWD/packages/cloud-cognitive/src/generated";
 
 PACKAGES=($CDAI_COMMON_FILES $CORE_COMMON_FILES $MAIN_COMMON_FILES);
 
-echo "Cleaning common files from packagese..."
+echo "Cleaning common files from packages..."
 i=0
 while [ $i -lt ${#PACKAGES[@]} ]
 do

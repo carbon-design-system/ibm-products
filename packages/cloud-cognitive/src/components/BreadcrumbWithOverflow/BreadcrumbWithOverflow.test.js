@@ -143,7 +143,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     );
 
     expect(visibleBreadcrumbs[0]).toHaveTextContent(breadcrumbContent[0]);
-    // last item is last breadcrum
+    // last item is last breadcrumb
     expect(visibleBreadcrumbs[visibleBreadcrumbs.length - 1]).toHaveTextContent(
       breadcrumbContent[4]
     );
@@ -234,7 +234,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
   it('adds additional properties to an breadcrumb with overflow', () => {
     render(
       <TestBreadcrumbWithOverflow
-        data-testid={dataTestId}
+        data-test-id={dataTestId}
         width={1200}
         maxVisible={0}
         overflowAriaLabel="Open and close additional breadcrumb item list.">

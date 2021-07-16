@@ -168,7 +168,7 @@ export const Default = Template.bind({});
 Default.args = {
   onDoNotDisturbChange: action('Toggled to do not disturb'),
   onViewAllClick: action('Clicked view all button'),
-  onSettingsClick: action('Cliked settings gear'),
+  onSettingsClick: action('Clicked settings gear'),
 };
 
 export const EmptyState = EmptyNotifications.bind({});

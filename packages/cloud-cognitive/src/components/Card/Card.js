@@ -118,7 +118,7 @@ export let Card = ({
     return cardProps;
   };
 
-  // the only reason this is necessary is for clickzone 2
+  // the only reason this is necessary is for click zone 2
   const getHeaderBodyProps = () => {
     const clickable = hasClickEvent && clickZone === 'two';
     const headerBodyProps = {

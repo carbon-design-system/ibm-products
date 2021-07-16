@@ -136,7 +136,7 @@ export let SidePanel = React.forwardRef(
       );
     };
 
-    // Title and subtitle scroll animaton
+    // Title and subtitle scroll animation
     useEffect(() => {
       if (open && animateTitle && animationComplete) {
         const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
@@ -175,7 +175,7 @@ export let SidePanel = React.forwardRef(
         sidePanelOuter &&
           sidePanelOuter.addEventListener('scroll', () => {
             const scrollTop = sidePanelRef.current.scrollTop;
-            // if scrolling has occured
+            // if scrolling has occurred
             if (scrollTop > 0) {
               sidePanelOuter.classList.add(
                 `${blockClass}__with-condensed-header`

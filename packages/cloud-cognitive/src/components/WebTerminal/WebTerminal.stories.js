@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// cspell:words joebob
+
 import React, { useState, useCallback } from 'react';
 import { Navigation } from './preview-components';
 import { pkg } from '../../settings';

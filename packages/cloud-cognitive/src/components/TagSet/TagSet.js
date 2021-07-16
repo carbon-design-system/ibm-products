@@ -13,7 +13,7 @@ import cx from 'classnames';
 import { TagSetOverflow } from './TagSetOverflow';
 import { TagSetModal } from './TagSetModal';
 import { Tag } from 'carbon-components-react';
-import ReactResizeDetector from 'react-resize-detector';
+import { useResizeDetector } from 'react-resize-detector';
 
 import { pkg } from '../../settings';
 import { prepareProps, isRequiredIf } from '../../global/js/utils/props-helper';
@@ -48,6 +48,7 @@ export let TagSet = React.forwardRef(
     const [showAllModalOpen, setShowAllModalOpen] = useState(false);
     const localTagSetRef = useRef(null);
     const tagSetRef = ref || localTagSetRef;
+    const sizingContainerRef = useRef();
     const displayedArea = useRef(null);
     const [sizingTags, setSizingTags] = useState([]);
     const overflowTag = useRef(null);
@@ -185,39 +186,46 @@ export let TagSet = React.forwardRef(
       setShowAllModalOpen(false);
     };
 
-    return (
-      <ReactResizeDetector onResize={handleResize}>
-        <div {...rest} className={cx([blockClass, className])} ref={tagSetRef}>
-          <div
-            className={cx([
-              `${blockClass}__space`,
-              `${blockClass}__space--align-${align}`,
-            ])}>
-            <ReactResizeDetector onResize={handleSizerTagsResize}>
-              <div
-                className={`${blockClass}__tag-container ${blockClass}__tag-container--hidden`}
-                aria-hidden={true}>
-                {hiddenSizingTags}
-              </div>
-            </ReactResizeDetector>
+    useResizeDetector({
+      onResize: handleSizerTagsResize,
+      targetRef: sizingContainerRef,
+    });
 
-            <div className={`${blockClass}__tag-container`} ref={displayedArea}>
-              {displayedTags}
-            </div>
+    useResizeDetector({
+      onResize: handleResize,
+      targetRef: tagSetRef,
+    });
+
+    return (
+      <div {...rest} className={cx([blockClass, className])} ref={tagSetRef}>
+        <div
+          className={cx([
+            `${blockClass}__space`,
+            `${blockClass}__space--align-${align}`,
+          ])}>
+          <div
+            className={`${blockClass}__tag-container ${blockClass}__tag-container--hidden`}
+            aria-hidden={true}
+            ref={sizingContainerRef}>
+            {hiddenSizingTags}
           </div>
 
-          {tags && displayCount < tags.length ? (
-            <TagSetModal
-              allTags={tags}
-              open={showAllModalOpen}
-              title={allTagsModalTitle}
-              onClose={handleModalClose}
-              searchLabel={allTagsModalSearchLabel}
-              searchPlaceholder={allTagsModalSearchPlaceholderText}
-            />
-          ) : null}
+          <div className={`${blockClass}__tag-container`} ref={displayedArea}>
+            {displayedTags}
+          </div>
         </div>
-      </ReactResizeDetector>
+
+        {tags && displayCount < tags.length ? (
+          <TagSetModal
+            allTags={tags}
+            open={showAllModalOpen}
+            title={allTagsModalTitle}
+            onClose={handleModalClose}
+            searchLabel={allTagsModalSearchLabel}
+            searchPlaceholder={allTagsModalSearchPlaceholderText}
+          />
+        ) : null}
+      </div>
     );
   }
 );

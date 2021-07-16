@@ -196,7 +196,7 @@ ExportModal.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * specify if an error occured
+   * specify if an error occurred
    */
   error: PropTypes.bool,
   /**
@@ -220,7 +220,7 @@ ExportModal.propTypes = {
    */
   loading: PropTypes.bool,
   /**
-   * messaing to display during the loading state
+   * message to display during the loading state
    */
   loadingMessage: PropTypes.string,
   /**

@@ -21,6 +21,8 @@ import { mockHTMLElement } from '../../global/js/utils/test-helper';
 const blockClass = `${pkg.prefix}--page-header`;
 
 /* Test properties. */
+const actionBarOverflowLabel = 'Show additional action bar items';
+
 const actionBarItems = [1, 2, 3, 4].map((item) => ({
   key: `a-key-${item}`,
   renderIcon: Lightning16,
@@ -42,6 +44,8 @@ const actionBarItemsNodes = (
 );
 
 const availableSpace = <span className="page-header-test--available-space" />;
+const breadcrumbOverflowLabel =
+  'Open and close additional breadcrumb item list.';
 const breadcrumbItems = (
   <>
     <BreadcrumbItem href="#">Breadcrumb 1</BreadcrumbItem>
@@ -52,16 +56,19 @@ const breadcrumbItems = (
 const classNames = ['client-class-1', 'client-class-2'];
 const pageActions = [
   {
+    key: '1',
     kind: 'secondary',
     label: 'Secondary button',
     onClick: () => {},
   },
   {
+    key: '2',
     kind: 'primary',
     label: 'Primary button',
     onClick: () => {},
   },
 ];
+const pageActionsOverflowLabel = 'Page actions...';
 
 const pageActionsDepTest = pageActions.map(({ label, ...rest }, index) => (
   <Button {...rest} key={index}>
@@ -81,7 +88,7 @@ const pageActionsDepTest2 = (
 
 const subtitle = 'Optional subtitle if necessary';
 const navigation = (
-  <Tabs data-testid="tabs">
+  <Tabs data-test-id="tabs">
     <Tab label="Tab 1" />
     <Tab label="Tab 2" />
     <Tab label="Tab 3" />
@@ -91,7 +98,7 @@ const navigation = (
 
 // supply enough tags to trigger TagSet overflow required props
 const tags = Array.from({ length: 20 }, () => ({
-  'data-testid': 'tags',
+  'data-test-id': 'tags',
   type: 'blue',
   label: 'A tag',
 }));
@@ -152,12 +159,15 @@ const testSizes = (el, property, _default) => {
 
 const testProps = {
   actionBarItems,
+  actionBarOverflowLabel,
   availableSpace,
   background: true,
+  breadcrumbOverflowLabel,
   breadcrumbItems,
   className: classNames.join(' '),
   navigation,
   pageActions,
+  pageActionsOverflowLabel,
   subtitle,
   tags,
   title: titleObj,
@@ -192,7 +202,7 @@ describe('PageHeader', () => {
 
     mocks.push({
       id: 'uuidv4',
-      mock: uuidv4.mockImplementation(() => 'testid'),
+      mock: uuidv4.mockImplementation(() => 'test-id'),
     });
     window.scrollTo = jest.spyOn(window, 'scrollTo').mockImplementation();
     window.ResizeObserver = jest.fn().mockImplementation(() => ({
@@ -213,11 +223,11 @@ describe('PageHeader', () => {
   });
 
   test('renders an empty header when no props are set', () => {
-    const dataTestid = uuidv4();
-    render(<PageHeader data-testid={dataTestid} />);
+    const dataTestId = uuidv4();
+    render(<PageHeader data-test-id={dataTestId} />);
 
     // console.dir(screen.getByRole('region')); // section should be a region https://fae.disability.illinois.edu/rulesets/ROLE_5/
-    const header = screen.getByTestId(dataTestid);
+    const header = screen.getByTestId(dataTestId);
     expect(header).toHaveClass(blockClass);
 
     expect(header).toHaveClass(`${blockClass}--show-background`);
@@ -249,11 +259,11 @@ describe('PageHeader', () => {
   });
 
   test('renders all the appropriate content when all props are set', () => {
-    const dataTestid = uuidv4();
-    render(<PageHeader {...testProps} data-testid={dataTestid} />);
+    const dataTestId = uuidv4();
+    render(<PageHeader {...testProps} data-test-id={dataTestId} />);
 
     // console.dir(screen.getByRole('region')); // section should be a region https://fae.disability.illinois.edu/rulesets/ROLE_5/
-    const header = screen.getByTestId(dataTestid);
+    const header = screen.getByTestId(dataTestId);
     expect(header).toHaveClass(blockClass);
 
     expect(header).toHaveClass(`${blockClass}--show-background`);
@@ -302,7 +312,12 @@ describe('PageHeader', () => {
   test('copes with actionBarItems as nodes', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
-    render(<PageHeader actionBarItems={actionBarItemsNodes} />);
+    render(
+      <PageHeader
+        actionBarItems={actionBarItemsNodes}
+        actionBarOverflowLabel={actionBarOverflowLabel}
+      />
+    );
 
     expect(warn).toBeCalledWith(
       'The usage of the prop `actionBarItems` of `PageHeader` has been changed and support for the old usage will soon be removed. Expects an array of objects with the following properties: iconDescription, renderIcon and onClick.'
@@ -314,7 +329,12 @@ describe('PageHeader', () => {
   test('with deprecated page actions', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
-    render(<PageHeader pageActions={pageActionsDepTest} />);
+    render(
+      <PageHeader
+        pageActions={pageActionsDepTest}
+        pageActionsOverflowLabel={pageActionsOverflowLabel}
+      />
+    );
 
     screen.getByText('Primary button', {
       selector: `.${blockClass}__page-actions .${pkg.prefix}--button-set-with-overflow__button-container:not(.${pkg.prefix}--button-set-with-overflow__button-container--hidden) .${carbon.prefix}--btn`,
@@ -330,7 +350,12 @@ describe('PageHeader', () => {
   test('with deprecated page actions in a fragment', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
-    render(<PageHeader pageActions={pageActionsDepTest2} />);
+    render(
+      <PageHeader
+        pageActions={pageActionsDepTest2}
+        pageActionsOverflowLabel={pageActionsOverflowLabel}
+      />
+    );
 
     screen.getByText('Primary button', {
       selector: `.${blockClass}__page-actions .${pkg.prefix}--button-set-with-overflow__button-container:not(.${pkg.prefix}--button-set-with-overflow__button-container--hidden) .${carbon.prefix}--btn`,
@@ -344,9 +369,9 @@ describe('PageHeader', () => {
   });
 
   it('adds additional properties to the containing node', () => {
-    const dataTestid = uuidv4();
-    render(<PageHeader data-testid={dataTestid} />);
-    screen.getByTestId(dataTestid);
+    const dataTestId = uuidv4();
+    render(<PageHeader data-test-id={dataTestId} />);
+    screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', () => {
@@ -356,14 +381,14 @@ describe('PageHeader', () => {
   });
 
   test('collapse button works', () => {
-    const dataTestid = uuidv4();
+    const dataTestId = uuidv4();
     render(
       <PageHeader
         {...testProps}
         collapseHeaderLabel="Toggle collapse"
         expandHeaderLabel="Toggle expand"
         collapseHeaderToggleWanted={true}
-        data-testid={dataTestid}
+        data-test-id={dataTestId}
       />
     );
 
@@ -399,8 +424,9 @@ describe('PageHeader', () => {
   });
 
   test('Title row renders when PageActions but no Title', () => {
-    const { pageActions } = testProps;
-    render(<PageHeader {...{ pageActions }} />);
+    const { pageActions, pageActionsOverflowLabel = pageActionsOverflowLabel } =
+      testProps;
+    render(<PageHeader {...{ pageActions, pageActionsOverflowLabel }} />);
 
     expect(
       document.querySelectorAll(`.${blockClass}__page-actions`)
@@ -420,7 +446,11 @@ describe('PageHeader', () => {
 
   test('Title row renders when Title with pageActions and navigation but no subtitle or available space', () => {
     const { title } = testProps;
-    render(<PageHeader {...{ title, pageActions, navigation }} />);
+    render(
+      <PageHeader
+        {...{ title, pageActions, pageActionsOverflowLabel, navigation }}
+      />
+    );
 
     expect(
       document.querySelectorAll(
@@ -475,11 +505,13 @@ describe('PageHeader', () => {
 
   test('Without background', () => {
     const { title } = testProps;
+
     render(
       <PageHeader
         {...{
           title,
           background: false,
+          breadcrumbOverflowLabel: 'Show the breadcrumb overflow',
           breadcrumbItems,
         }}
         aria-label="Page header" // gives section role 'region'
@@ -487,5 +519,51 @@ describe('PageHeader', () => {
     );
 
     screen.getByRole('region');
+  });
+
+  test('ActionBar without overflow aria label', () => {
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    const { title } = testProps;
+    render(
+      <PageHeader
+        {...{
+          title,
+          actionBarItems,
+        }}
+        aria-label="Page header" // gives section role 'region'
+      />
+    );
+
+    expect(error).toBeCalledWith(
+      expect.stringMatching(
+        /^Warning: Failed prop type: The prop `actionBarOverflowLabel` is marked as required in `PageHeader`/
+      )
+    );
+
+    jest.spyOn(console, 'error').mockRestore();
+  });
+
+  test('Breadcrumb without overflow aria label', () => {
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    const { title } = testProps;
+    render(
+      <PageHeader
+        {...{
+          title,
+          breadcrumbItems,
+        }}
+        aria-label="Page header" // gives section role 'region'
+      />
+    );
+
+    expect(error).toBeCalledWith(
+      expect.stringMatching(
+        /^Warning: Failed prop type: The prop `overflowAriaLabel` is marked as required in `BreadcrumbWithOverflow`/
+      )
+    );
+
+    jest.spyOn(console, 'error').mockRestore();
   });
 });

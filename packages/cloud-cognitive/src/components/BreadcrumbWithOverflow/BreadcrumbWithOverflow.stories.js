@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2020
+// Copyright IBM Corp. 2020, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -98,12 +98,14 @@ export const BreadcrumbLastCurrent = Template.bind({});
 BreadcrumbLastCurrent.args = {
   children: stdBreadcrumbItems(true),
   containerWidth: 500,
+  overflowAriaLabel: 'Open and close additional breadcrumb item list.',
 };
 
 export const BreadcrumbLastNotCurrent = Template.bind({});
 BreadcrumbLastNotCurrent.args = {
   children: stdBreadcrumbItems(false),
   containerWidth: 500,
+  overflowAriaLabel: 'Open and close additional breadcrumb item list.',
 };
 
 export const BreadcrumbWithDataTitle = Template.bind({});
@@ -124,6 +126,7 @@ BreadcrumbWithDataTitle.args = {
     </BreadcrumbItem>,
   ]),
   containerWidth: 500,
+  overflowAriaLabel: 'Open and close additional breadcrumb item list.',
 };
 
 export const BreadcrumbWithTitle = Template.bind({});
@@ -144,4 +147,5 @@ BreadcrumbWithTitle.args = {
     </BreadcrumbItem>,
   ]),
   containerWidth: 500,
+  overflowAriaLabel: 'Open and close additional breadcrumb item list.',
 };

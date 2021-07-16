@@ -46,8 +46,10 @@ export let PageHeader = React.forwardRef(
   (
     {
       actionBarItems,
+      actionBarOverflowLabel,
       availableSpace,
       background,
+      breadcrumbOverflowLabel,
       breadcrumbItems,
       className,
       collapseHeader,
@@ -57,6 +59,7 @@ export let PageHeader = React.forwardRef(
       preventBreadcrumbScroll,
       navigation,
       pageActions,
+      pageActionsOverflowLabel,
       pageHeaderOffset,
       preCollapseTitleRow,
       subtitle,
@@ -88,7 +91,7 @@ export let PageHeader = React.forwardRef(
 
     // state based on props only
     const actionBarItemArray = extractShapesArray(actionBarItems);
-    const hasActionBar = actionBarItemArray.length;
+    const hasActionBar = actionBarItemArray && actionBarItemArray.length;
     const hasBreadcrumbRow = !(
       breadcrumbItems === undefined && actionBarItems === undefined
     );
@@ -314,7 +317,7 @@ export let PageHeader = React.forwardRef(
     );
 
     useWindowResize(() => {
-      // on window resieze and other updates some values may have changed
+      // on window resize and other updates some values may have changed
       checkUpdateVerticalSpace();
     }, [
       actionBarItems,
@@ -420,7 +423,7 @@ export let PageHeader = React.forwardRef(
           ])}
           ref={headerRef}>
           <Grid>
-            <div className={`${blockClass}__non-navigation-row-contnet`}>
+            <div className={`${blockClass}__non-navigation-row-content`}>
               {hasBreadcrumbRow ? (
                 <Row
                   className={cx(`${blockClass}__breadcrumb-row`, {
@@ -442,7 +445,8 @@ export let PageHeader = React.forwardRef(
                       {breadcrumbItems !== undefined ? (
                         <BreadcrumbWithOverflow
                           className={`${blockClass}__breadcrumb`}
-                          noTrailingSlash={title !== undefined}>
+                          noTrailingSlash={title !== undefined}
+                          overflowAriaLabel={breadcrumbOverflowLabel}>
                           {breadcrumbItems}
                           {title ? (
                             <BreadcrumbItem
@@ -493,10 +497,14 @@ export let PageHeader = React.forwardRef(
                                     className={`${blockClass}__button-set--in-breadcrumb`}
                                     onWidthChange={handleButtonSetWidthChange}
                                     buttons={pageActionsItemArray}
+                                    buttonSetOverflowLabel={
+                                      pageActionsOverflowLabel
+                                    }
                                   />
                                 </div>
                               )}
                               <ActionBar
+                                overflowAriaLabel={actionBarOverflowLabel}
                                 actions={actionBarItemArray}
                                 className={`${blockClass}__action-bar`}
                                 onWidthChange={handleActionBarWidthChange}
@@ -559,6 +567,7 @@ export let PageHeader = React.forwardRef(
                         className={`${blockClass}__page-actions-container`}
                         onWidthChange={handleButtonSetWidthChange}
                         buttons={pageActionsItemArray}
+                        buttonSetOverflowLabel={pageActionsOverflowLabel}
                       />
                     </Column>
                   ) : null}
@@ -714,8 +723,7 @@ PageHeader.propTypes = {
         ]),
         iconDescription: PropTypes.string.isRequired,
         onClick: Button.propTypes.onClick,
-        renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
-          .isRequired,
+        renderIcon: Button.propTypes.renderIcon.isRequired,
       })
     ),
     deprecatePropUsage(
@@ -726,6 +734,14 @@ PageHeader.propTypes = {
       'Expects an array of objects with the following properties: iconDescription, renderIcon and onClick.'
     ),
   ]), // expects action bar item as array or in fragment
+  /**
+   * aria label for the action bar overflow menu
+   *
+   * NOTE: This prop is only required if actionBarItems are supplied
+   */
+  actionBarOverflowLabel: PropTypes.string.isRequired.if(
+    ({ actionBarItems }) => actionBarItems && actionBarItems.length > 0
+  ),
   /**
    * A zone for placing high-level, client content above the page tabs.
    * Accepts arbitrary renderable content as a React node. Optional.
@@ -742,6 +758,12 @@ PageHeader.propTypes = {
    * a breadcrumb. Optional.
    */
   breadcrumbItems: PropTypes.element, // expects BreadcrumbItems,
+  /**
+   * If the user supplies breadcrumbs then they must supply an aria label for the overflow
+   */
+  breadcrumbOverflowLabel: PropTypes.string.isRequired.if(
+    ({ breadcrumbItems }) => breadcrumbItems && breadcrumbItems.length > 0
+  ),
   /**
    * Specifies class(es) to be applied to the top-level PageHeader node.
    * Optional.
@@ -786,9 +808,10 @@ PageHeader.propTypes = {
     PropTypes.arrayOf(
       PropTypes.shape({
         ...Button.propTypes,
+        key: PropTypes.string.isRequired,
         kind: Button.propTypes.kind,
-        label: PropTypes.node.isRequired,
-        onClick: Button.propTypes.onClick,
+        label: PropTypes.node,
+        onClick: PropTypes.func,
       })
     ),
     deprecatePropUsage(
@@ -799,6 +822,15 @@ PageHeader.propTypes = {
       'Expects an array of objects with the following properties: label and onClick.'
     ),
   ]),
+  /**
+   * Label used by the pageActions component when there is insufficient space to display
+   * the pageActions side by side. Currently the label of a dropdown button menu
+   *
+   * NOTE: This prop is only required if pageActions are supplied
+   */
+  pageActionsOverflowLabel: PropTypes.node.isRequired.if(
+    ({ pageActions }) => pageActions && pageActions.length > 0
+  ),
   /**
    * Number of pixels the page header sits from the top of the screen.
    * The nature of the pageHeader makes this hard to measure

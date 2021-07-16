@@ -162,7 +162,6 @@ describe(name, () => {
       hasDownloadLink: false,
       apiKey: '',
     };
-
     const { rerender, getByPlaceholderText, getByText } = render(
       <APIKeyModal {...props} />
     );

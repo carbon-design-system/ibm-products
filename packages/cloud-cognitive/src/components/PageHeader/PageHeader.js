@@ -321,7 +321,7 @@ export let PageHeader = React.forwardRef(
     );
 
     useWindowResize(() => {
-      // on window resieze and other updates some values may have changed
+      // on window resize and other updates some values may have changed
       checkUpdateVerticalSpace();
     }, [
       actionBarItems,
@@ -427,7 +427,7 @@ export let PageHeader = React.forwardRef(
           ])}
           ref={headerRef}>
           <Grid>
-            <div className={`${blockClass}__non-navigation-row-contnet`}>
+            <div className={`${blockClass}__non-navigation-row-content`}>
               {hasBreadcrumbRow ? (
                 <Row
                   className={cx(`${blockClass}__breadcrumb-row`, {

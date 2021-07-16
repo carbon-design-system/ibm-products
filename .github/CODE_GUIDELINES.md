@@ -261,7 +261,7 @@ unclear.
     ```jsx
     const dataTestId = uuidv4();
     it('adds additional properties to the containing node', () => {
-      render(<ComponentName data-testid={dataTestId} />);
+      render(<ComponentName data-test-id={dataTestId} />);
       screen.getByTestId(dataTestId);
     });
     ```

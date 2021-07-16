@@ -207,7 +207,7 @@ describe(TagSet.displayName, () => {
     const dataTestId = uuidv4();
     window.innerWidth = tagWidth * 10 + 1;
 
-    render(<TagSet data-testid={dataTestId} tags={tags10} />);
+    render(<TagSet data-test-id={dataTestId} tags={tags10} />);
     screen.getByTestId(dataTestId);
   });
 
@@ -224,7 +224,7 @@ describe(TagSet.displayName, () => {
     const dataTestId = uuidv4();
     window.innerWidth = tagWidth * 10 + 1;
 
-    render(<TagSet data-testid={dataTestId} />);
+    render(<TagSet data-test-id={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 

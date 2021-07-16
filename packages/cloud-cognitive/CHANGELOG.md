@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.7](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.55.6...@carbon/ibm-cloud-cognitive@0.55.7) (2021-07-16)
+
+
+### Bug Fixes
+
+* renderIcon type in page header ([#1010](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1010)) ([0235762](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/0235762486382d7c8c481b58619170b98f79aec5))
+
+
+
+
+
 ## [0.55.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.55.5...@carbon/ibm-cloud-cognitive@0.55.6) (2021-07-16)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

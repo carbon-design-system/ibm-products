@@ -723,8 +723,7 @@ PageHeader.propTypes = {
         ]),
         iconDescription: PropTypes.string.isRequired,
         onClick: Button.propTypes.onClick,
-        renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
-          .isRequired,
+        renderIcon: Button.propTypes.renderIcon.isRequired,
       })
     ),
     deprecatePropUsage(

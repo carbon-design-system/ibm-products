@@ -41,10 +41,10 @@ $themes: (
 
 $theme-keys: map-keys($themes);
 
-@function get-background-color($color, $key, $contrastkey) {
+@function get-background-color($color, $key, $contrast-key) {
   @return map-get(
     $carbon-colors,
-    #{$color}#{map-get(map-get($themes, $key), #{$contrastkey}-contrast)}
+    #{$color}#{map-get(map-get($themes, $key), #{$contrast-key}-contrast)}
   );
 }
 
@@ -54,10 +54,10 @@ $theme-keys: map-keys($themes);
       color: $ui-01;
     }
     @each $color in $base-colors {
-      @each $contrastkey in $theme-keys {
-        .#{$block-class}--#{$key}.#{$block-class}--#{$contrastkey}-#{$color} {
+      @each $contrast-key in $theme-keys {
+        .#{$block-class}--#{$key}.#{$block-class}--#{$contrast-key}-#{$color} {
           // stylelint-disable-next-line carbon/theme-token-use
-          background-color: get-background-color($color, $key, $contrastkey);
+          background-color: get-background-color($color, $key, $contrast-key);
         }
       }
     }

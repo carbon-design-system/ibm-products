@@ -3,7 +3,7 @@
 This project was bootstrapped with
 [Create React App](https://github.com/facebook/create-react-app).
 
-## Stpes to create this example
+## Steps to create this example
 
 1. npx create-react-app ccs-base-react-16
 2. Downgraded react dependencies to 16.4.0 and ran yarn

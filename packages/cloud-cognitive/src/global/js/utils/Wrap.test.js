@@ -28,7 +28,7 @@ describe(componentName, () => {
   });
 
   it('adds additional properties to the containing node', () => {
-    render(<Wrap data-testid={dataTestId}>{nonemptyContent}</Wrap>);
+    render(<Wrap data-test-id={dataTestId}>{nonemptyContent}</Wrap>);
     screen.getByTestId(dataTestId);
   });
 

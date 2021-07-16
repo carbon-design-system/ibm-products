@@ -196,7 +196,7 @@ async function createAPIDoc(name, docsDir) {
   }
 
   const docs = (await fs.readdir(docsDir)).filter((name) => {
-    // Ignore dotfiles and json files
+    // Ignore dot-files and json files
     return !(name[0] === '.' || name === 'sass.json');
   });
 
@@ -273,7 +273,7 @@ async function createExamples(name, examplesDir) {
   }
 
   const examples = (await fs.readdir(examplesDir)).filter((name) => {
-    // Ignore dotfiles and special cases `codesandbox` and `storybook`
+    // Ignore dot-files and special cases `codesandbox` and `storybook`
     return !(
       name[0] === '.' ||
       name === 'codesandbox' ||

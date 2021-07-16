@@ -55,7 +55,7 @@ const actionBarItems = [1, 2, 3, 4].map((item) => ({
 const actionBarOverflowLabel = 'Show further action bar items';
 
 const manyActionBarItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
-  keuy: `a-key-${item}`,
+  key: `a-key-${item}`,
   renderIcon: Lightning16,
   iconDescription: `Action ${item}`,
 }));
@@ -155,6 +155,7 @@ const statusIndicator = (
 const subtitle = 'Optional subtitle if necessary';
 const longSubtitle =
   'Optional subtitle if necessary, which is very long in this case, but will need to be handled somehow. It just keeps going on and on and on and on and on.';
+// cspell: disable
 const summaryDetails = (
   <div style={{ display: 'flex' }}>
     <p
@@ -177,6 +178,7 @@ const summaryDetails = (
     </p>
   </div>
 );
+// cspell: enable
 const tabBar = (
   <Tabs>
     <Tab label="Tab 1" />
@@ -269,8 +271,8 @@ TitleOnly.args = {
   title,
 };
 
-export const TitleAndPagections = Template.bind({});
-TitleAndPagections.args = {
+export const TitleAndPageActions = Template.bind({});
+TitleAndPageActions.args = {
   title,
   pageActions,
   pageActionsOverflowLabel,

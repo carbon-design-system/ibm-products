@@ -8,6 +8,7 @@
 // `setupFilesAfterEnv` enables running the code immediately after the test framework has been installed in the environment - https://jestjs.io/docs/en/configuration.html#setupfilesafterenv-array
 
 import '@testing-library/jest-dom';
+import { configure } from '@testing-library/dom';
 
 import chalk from 'chalk';
 import util from 'util';
@@ -17,6 +18,8 @@ import toBeAccessible from './matchers/toBeAccessible';
 
 // `expect` can be extended using custom matchers as per https://jest-bot.github.io/jest/docs/expect.html#expectextendmatchers
 expect.extend({ toBeAccessible, toHaveNoAxeViolations });
+
+configure({ testIdAttribute: 'data-test-id' });
 
 // Our test suite will throw an error if one of the below console methods are
 // called when we are not expecting them. This is often helpful for React
@@ -31,10 +34,10 @@ expect.extend({ toBeAccessible, toHaveNoAxeViolations });
 // https://github.com/facebook/react/blob/6250462bed19c9f18a8cf3c2b5fcaf9aba1df72b/scripts/jest/setupTests.js#L69
 
 const oldConsole = {};
-['error', 'warn', process.env.CI && 'log'].filter(Boolean).forEach((mthd) => {
+['error', 'warn', process.env.CI && 'log'].filter(Boolean).forEach((method) => {
   const unexpectedConsoleCallStacks = [];
 
-  oldConsole[mthd] = console[mthd];
+  oldConsole[method] = console[method];
   const newMethod = function (format, ...args) {
     const stack = new Error().stack;
     unexpectedConsoleCallStacks.push([
@@ -42,16 +45,16 @@ const oldConsole = {};
       util.format(format, ...args),
     ]);
   };
-  console[mthd] = newMethod;
+  console[method] = newMethod;
 
   global.beforeEach(() => {
     unexpectedConsoleCallStacks.length = 0;
   });
 
   global.afterEach(() => {
-    if (console[mthd] !== newMethod) {
+    if (console[method] !== newMethod) {
       //throw new Error(
-      //  `Test did not restore a mock for ${chalk.bold(`console.${mthd}()`)}`
+      //  `Test did not restore a mock for ${chalk.bold(`console.${method}()`)}`
       //);
     }
 
@@ -65,7 +68,7 @@ const oldConsole = {};
             .join('\n')}`
       );
       const message = `Expected test not to call ${chalk.bold(
-        `console.${mthd}()`
+        `console.${method}()`
       )}`;
 
       throw new Error(`${message}\n\n${messages.join('\n\n')}`);

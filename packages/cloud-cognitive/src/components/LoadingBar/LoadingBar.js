@@ -156,7 +156,7 @@ LoadingBar.propTypes = {
   id: PropTypes.string,
 
   /**
-   * Leave undefined for indetermined duration or specify percentage complete that the determinate bar should indicate (0-100).
+   * Leave undefined for indeterminate duration or specify percentage complete that the determinate bar should indicate (0-100).
    */
   percentage: PropTypes.number,
 

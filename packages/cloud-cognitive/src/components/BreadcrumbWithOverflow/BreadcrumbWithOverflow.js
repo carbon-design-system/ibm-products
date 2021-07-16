@@ -368,7 +368,7 @@ BreadcrumbWithOverflow.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * maxVisble: maximum visible breadcrumb-items before overflow is used (values less than 1 are treated as 1)
+   * maxVisible: maximum visible breadcrumb-items before overflow is used (values less than 1 are treated as 1)
    */
   maxVisible: PropTypes.number,
   /**

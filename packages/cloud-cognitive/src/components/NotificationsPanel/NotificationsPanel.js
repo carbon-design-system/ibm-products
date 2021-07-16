@@ -470,7 +470,7 @@ NotificationsPanel.propTypes = {
   dismissAllLabel: PropTypes.string,
 
   /**
-   * Label for Dismiss single notfication icon button
+   * Label for Dismiss single notification icon button
    */
   dismissSingleNotificationIconDescription: PropTypes.string,
 

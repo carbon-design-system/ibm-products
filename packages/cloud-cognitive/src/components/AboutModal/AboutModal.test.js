@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// cspell:words grafana
+
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -196,7 +198,7 @@ describe(componentName, () => {
   });
 
   it('adds additional properties to the containing node', () => {
-    renderComponent({ 'data-testid': dataTestId });
+    renderComponent({ 'data-test-id': dataTestId });
     screen.getByTestId(dataTestId);
   });
 

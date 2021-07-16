@@ -23,7 +23,7 @@ function run(workspace) {
     packages
       .filter(({ packageJson }) => !packageJson.private)
       .map(async ({ packageFolder }) => {
-        const ignorePath = path.join(packageFolder, '.npmignore');
+        const ignorePath = path.join(packageFolder, '.npmignore'); // cspell:disable-line
         const ignorePatterns = defaultIgnorePatterns.slice();
 
         if (await fs.pathExists(ignorePath)) {

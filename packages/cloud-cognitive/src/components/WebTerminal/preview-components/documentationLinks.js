@@ -6,7 +6,7 @@ export const documentationLinks = [
     openInNewTab: false,
   },
   {
-    label: 'Kube docs',
+    label: 'Kubernetes docs',
     href: '#',
     onClick: () => console.log('clicked'),
     openInNewTab: true,

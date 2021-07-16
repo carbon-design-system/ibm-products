@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.55.5...@carbon/ibm-cloud-cognitive@0.55.6) (2021-07-16)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.55.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.55.4...@carbon/ibm-cloud-cognitive@0.55.5) (2021-07-16)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.55.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.55.3...@carbon/ibm-cloud-cognitive@0.55.4) (2021-07-16)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
 ## [0.55.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.55.2...@carbon/ibm-cloud-cognitive@0.55.3) (2021-07-15)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive
@@ -43,7 +67,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* revert to buttoon kind ([#995](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/995)) ([8740afd](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8740afdb578cb7ec57eba4abfae44b2ca7c81068))
+* revert to button kind ([#995](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/995)) ([8740afd](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8740afdb578cb7ec57eba4abfae44b2ca7c81068))
 
 
 
@@ -1023,7 +1047,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* desdign review niggles ([#765](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/765)) ([46a353b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/46a353b8ba9f30657f1b7cd3808a978e5cc3869c))
+* design review niggles ([#765](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/765)) ([46a353b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/46a353b8ba9f30657f1b7cd3808a978e5cc3869c))
 
 
 
@@ -1350,7 +1374,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* testing and blockclass for import modal ([#686](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/686)) ([42a4f39](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/42a4f396b84a19cc1db98bebb3bd9ce6d860dfc4))
+* testing and blockClass for import modal ([#686](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/686)) ([42a4f39](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/42a4f396b84a19cc1db98bebb3bd9ce6d860dfc4))
 
 
 
@@ -2001,7 +2025,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* pageheader styles either side of md breakpt ([#554](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/554)) ([6abab44](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6abab440845b9919dbdd7e4a3b2c6d021f6477b8))
+* page header styles either side of md breakpoint ([#554](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/554)) ([6abab44](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6abab440845b9919dbdd7e4a3b2c6d021f6477b8))
 
 
 
@@ -2671,7 +2695,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Bug Fixes
 
 * **PageHeader:** story previews show correctly again in docs ([#414](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/414)) ([1d58962](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/1d58962b66f5fc15c44939ee194f4b8eacbb6312))
-* actdionbar item tip and title title ([#403](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/403)) ([7ec2bc9](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/7ec2bc9c740fdb7e15c6b6ddcd8be94c8fecf0d8))
+* action bar item tip and title title ([#403](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/403)) ([7ec2bc9](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/7ec2bc9c740fdb7e15c6b6ddcd8be94c8fecf0d8))
 
 
 
@@ -2964,7 +2988,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* reiew updates ([#321](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/321)) ([fd06c3a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/fd06c3addc3a85bf29499ed64e73e15099be4def))
+* review updates ([#321](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/321)) ([fd06c3a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/fd06c3addc3a85bf29499ed64e73e15099be4def))
 
 
 
@@ -3105,7 +3129,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* design feedback updates for apikeymodal ([#297](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/297)) ([50f432a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/50f432a2ff68a1e036225ef810ef2078a04ac9a9))
+* design feedback updates for ApiKeyModal ([#297](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/297)) ([50f432a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/50f432a2ff68a1e036225ef810ef2078a04ac9a9))
 
 
 
@@ -3124,7 +3148,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* import continer disabled after file added in import modal ([#294](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/294)) ([98f1633](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/98f1633086d5e427f3c7b1dc2e8eb3a1d73cf635))
+* import container disabled after file added in import modal ([#294](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/294)) ([98f1633](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/98f1633086d5e427f3c7b1dc2e8eb3a1d73cf635))
 
 
 
@@ -3184,7 +3208,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* added multistep functionality to apikey modal ([#279](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/279)) ([13db6e1](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/13db6e12ea47e142a04fa7ad0a4c149a16d0baa4))
+* added multi-step functionality to apikey modal ([#279](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/279)) ([13db6e1](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/13db6e12ea47e142a04fa7ad0a4c149a16d0baa4))
 
 
 

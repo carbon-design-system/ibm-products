@@ -3,7 +3,7 @@
 This project was bootstrapped with
 [Create React App](https://github.com/facebook/create-react-app).
 
-## Stpes to create this example
+## Steps to create this example
 
 1. npx create-react-app ccs-base-react-17
 2. yarn add @carbon/ibm-cloud-cognitive

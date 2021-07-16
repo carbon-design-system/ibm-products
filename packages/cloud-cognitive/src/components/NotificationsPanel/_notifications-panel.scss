@@ -22,7 +22,7 @@
     0% {
       opacity: 0;
       // stylelint-disable-next-line carbon/layout-token-use
-      transform: translateY(-38.5rem); // the height of the notifcation panel
+      transform: translateY(-38.5rem); // the height of the notification panel
     }
     100% {
       opacity: 1;
@@ -38,7 +38,7 @@
     100% {
       opacity: 0;
       // stylelint-disable-next-line carbon/layout-token-use
-      transform: translateY(-38.5rem); // the height of the notifcation panel
+      transform: translateY(-38.5rem); // the height of the notification panel
     }
   }
 

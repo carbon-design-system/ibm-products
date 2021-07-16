@@ -83,7 +83,7 @@ export const ButtonSetWithOverflow = ({
       <ButtonSet {...rest} ref={ref}>
         {buttons.map(({ label, key, kind, ...other }) => (
           <Button
-            key={`button-set-${key}`}
+            key={key && `button-set-${key}`}
             kind={kind || 'primary'}
             {...other}
             size={buttonSize}
@@ -100,7 +100,7 @@ export const ButtonSetWithOverflow = ({
         {buttons
           .map(({ label, key, kind, ...other }) => (
             <ButtonMenuItem
-              key={`button-menu-${key}`}
+              key={key && `button-menu-${key}`}
               isDelete={kind?.startsWith('danger')}
               itemText={label}
               {...prepareProps(other, ['iconDescription', 'renderIcon'])}

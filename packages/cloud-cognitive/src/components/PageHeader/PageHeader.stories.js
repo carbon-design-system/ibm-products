@@ -22,6 +22,7 @@ import { CheckmarkFilled16 } from '@carbon/icons-react';
 import { Lightning16, Bee24 } from '@carbon/icons-react';
 
 import { pkg, carbon } from '../../settings';
+import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 import { getStorybookPrefix } from '../../../config';
 import { ActionBarItem } from '../ActionBar';
 import { PageHeader } from '.';
@@ -42,6 +43,7 @@ export default {
   decorators: [
     (story) => <div className={`${storyClass}__viewport`}>{story()}</div>,
   ],
+  argTypes: getDeprecatedArgTypes(PageHeader.propTypes),
 };
 
 // Test values for props.

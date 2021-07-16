@@ -566,4 +566,6 @@ describe('PageHeader', () => {
 
     jest.spyOn(console, 'error').mockRestore();
   });
+
+  test('Works for now with depreated props', () => {});
 });

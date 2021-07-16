@@ -47,14 +47,18 @@ export let PageHeader = React.forwardRef(
     {
       actionBarItems,
       actionBarOverflowAriaLabel,
+      actionBarOverflowLabel,
       availableSpace,
       background,
       breadcrumbOverflowAriaLabel,
+      breadcrumbOverflowLabel,
       breadcrumbItems,
       className,
       collapseHeader,
       collapseHeaderIconDescription,
+      collapseHeaderLabel,
       expandHeaderIconDescription,
+      expandHeaderLabel,
       collapseHeaderToggleWanted,
       preventBreadcrumbScroll,
       navigation,
@@ -446,7 +450,10 @@ export let PageHeader = React.forwardRef(
                         <BreadcrumbWithOverflow
                           className={`${blockClass}__breadcrumb`}
                           noTrailingSlash={title !== undefined}
-                          overflowAriaLabel={breadcrumbOverflowAriaLabel}>
+                          overflowAriaLabel={
+                            breadcrumbOverflowAriaLabel ||
+                            breadcrumbOverflowLabel
+                          }>
                           {breadcrumbItems}
                           {title ? (
                             <BreadcrumbItem
@@ -504,7 +511,10 @@ export let PageHeader = React.forwardRef(
                                 </div>
                               )}
                               <ActionBar
-                                overflowAriaLabel={actionBarOverflowAriaLabel}
+                                overflowAriaLabel={
+                                  actionBarOverflowAriaLabel ||
+                                  actionBarOverflowLabel
+                                }
                                 actions={actionBarItemArray}
                                 className={`${blockClass}__action-bar`}
                                 onWidthChange={handleActionBarWidthChange}
@@ -671,8 +681,8 @@ export let PageHeader = React.forwardRef(
               hasIconOnly={true}
               iconDescription={
                 fullyCollapsed
-                  ? expandHeaderIconDescription
-                  : collapseHeaderIconDescription
+                  ? expandHeaderIconDescription || expandHeaderLabel
+                  : collapseHeaderIconDescription || collapseHeaderLabel
               }
               kind="ghost"
               onClick={handleCollapseToggle}
@@ -745,6 +755,10 @@ PageHeader.propTypes = {
   actionBarOverflowAriaLabel: PropTypes.string.isRequired.if(
     ({ actionBarItems }) => actionBarItems && actionBarItems.length > 0
   ),
+  actionBarOverflowLabel: deprecateProp(
+    PropTypes.string,
+    'Property renamed to `actionBarOverflowAriaLabel`.'
+  ),
   /**
    * A zone for placing high-level, client content above the page tabs.
    * Accepts arbitrary renderable content as a React node. Optional.
@@ -767,6 +781,10 @@ PageHeader.propTypes = {
   breadcrumbOverflowAriaLabel: PropTypes.string.isRequired.if(
     ({ breadcrumbItems }) => breadcrumbItems && breadcrumbItems.length > 0
   ),
+  breadcrumbOverflowLabel: deprecateProp(
+    PropTypes.string,
+    'Property renamed to `breadcrumbOverflowAriaLabel`.'
+  ),
   /**
    * Specifies class(es) to be applied to the top-level PageHeader node.
    * Optional.
@@ -783,7 +801,11 @@ PageHeader.propTypes = {
    * Label/assistive text for the collapse/expand button
    * Default 'Collapse'
    */
-  collapseHeaderIconDescription: PropTypes.string,
+  collapseHeaderIconDescription: PropTypes.string.isRequired,
+  collapseHeaderLabel: deprecateProp(
+    PropTypes.string,
+    'Property renamed to `collapseHeaderIconDescription`.'
+  ),
   /**
    * Enable the collapse header toggle.
    *
@@ -794,7 +816,11 @@ PageHeader.propTypes = {
    * Label/assistive text for the collapse/expand button
    * Default 'Expand'
    */
-  expandHeaderIconDescription: PropTypes.string,
+  expandHeaderIconDescription: PropTypes.string.isRequired,
+  expandHeaderLabel: deprecateProp(
+    PropTypes.string,
+    'Property renamed to `expandHeaderIconDescription`.'
+  ),
   /**
    * Content for the navigation area in the PageHeader. Should
    * be a React element that is normally a Carbon Tabs component. Optional.
@@ -897,8 +923,6 @@ PageHeader.propTypes = {
 PageHeader.defaultProps = {
   background: true,
   className: '',
-  collapseHeaderIconDescription: 'Collapse',
-  expandHeaderIconDescription: 'Expand',
   preventBreadcrumbScroll: false,
   pageHeaderOffset: 0,
   preCollapseTitleRow: false,

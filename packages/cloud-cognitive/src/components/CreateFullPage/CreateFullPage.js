@@ -377,7 +377,7 @@ CreateFullPage.propTypes = {
 
   /**
    * Specify a handler for submitting the multi step full page (final step).
-   * This function can _optionally_ return a promise that is either resolved or rejected and the Createfull page will handle the submitting state of the create button.
+   * This function can _optionally_ return a promise that is either resolved or rejected and the CreateFullPage will handle the submitting state of the create button.
    */
   onRequestSubmit: PropTypes.func.isRequired,
   /**

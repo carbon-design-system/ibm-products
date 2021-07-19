@@ -47,25 +47,30 @@ export let PageHeader = React.forwardRef(
     {
       actionBarItems,
       actionBarOverflowAriaLabel,
-      actionBarOverflowLabel,
-      availableSpace,
-      background,
+      actionBarOverflowLabel: deprecated_actionBarOverflowLabel,
+      availableSpace: deprecated_availableSpace,
+      background: deprecated_background,
+      hasBackgroundAlways,
       breadcrumbOverflowAriaLabel,
-      breadcrumbOverflowLabel,
+      breadcrumbOverflowLabel: deprecated_breadcrumbOverflowLabel,
       breadcrumbItems,
+      children,
       className,
       collapseHeader,
       collapseHeaderIconDescription,
-      collapseHeaderLabel,
+      collapseHeaderLabel: deprecated_collapseHeaderLabel,
+      collapseHeaderToggleWanted: deprecated_collapseHeaderToggleWanted,
       expandHeaderIconDescription,
-      expandHeaderLabel,
-      collapseHeaderToggleWanted,
-      preventBreadcrumbScroll,
+      expandHeaderLabel: deprecated_expandHeaderLabel,
+      hasCollapseHeaderToggle,
+      preCollapseTitleRow: deprecated_preCollapseTitleRow,
+      disableBreadcrumbScroll,
+      preventBreadcrumbScroll: deprecated_preventBreadcrumbScroll,
       navigation,
       pageActions,
       pageActionsOverflowLabel,
       pageHeaderOffset,
-      preCollapseTitleRow,
+      collapseTitle,
       subtitle,
       tags,
       title,
@@ -74,6 +79,18 @@ export let PageHeader = React.forwardRef(
     },
     ref
   ) => {
+    // handle deprecated props - START
+    actionBarOverflowAriaLabel ??= deprecated_actionBarOverflowLabel;
+    breadcrumbOverflowAriaLabel ??= deprecated_breadcrumbOverflowLabel;
+    children ?? deprecated_availableSpace;
+    collapseHeaderIconDescription ??= deprecated_collapseHeaderLabel;
+    expandHeaderIconDescription ??= deprecated_expandHeaderLabel;
+    hasBackgroundAlways ??= deprecated_background;
+    hasCollapseHeaderToggle ??= deprecated_collapseHeaderToggleWanted;
+    collapseTitle ??= deprecated_preCollapseTitleRow;
+    disableBreadcrumbScroll ??= deprecated_preventBreadcrumbScroll;
+    // handle deprecated props - END
+
     const [metrics, setMetrics] = useState({});
 
     // refs
@@ -88,7 +105,7 @@ export let PageHeader = React.forwardRef(
       return utilCheckUpdateVerticalSpace(
         headerRef,
         navigation,
-        preventBreadcrumbScroll,
+        disableBreadcrumbScroll,
         setMetrics
       );
     };
@@ -110,11 +127,9 @@ export let PageHeader = React.forwardRef(
     const titleShape = getTitleShape();
 
     // NOTE: The buffer is used to add space between the bottom of the header and the last content
-    // Not pre-collapsed and (subtitle or available space)
+    // Not pre-collapsed and (subtitle or children)
     const lastRowBufferActive =
-      ((title || pageActions) && !preCollapseTitleRow) ||
-      subtitle ||
-      availableSpace;
+      ((title || pageActions) && !collapseTitle) || subtitle || children;
 
     // state based on scroll/resize based effects
     const [pageActionsInBreadcrumbRow, setPageActionsInBreadcrumbRow] =
@@ -188,14 +203,14 @@ export let PageHeader = React.forwardRef(
     useEffect(() => {
       // Determine the location of the pageAction buttons
       setPageActionsInBreadcrumbRow(
-        preCollapseTitleRow ||
+        collapseTitle ||
           (scrollYValue > metrics.titleRowSpaceAbove && hasActionBar)
       );
     }, [
       hasActionBar,
       metrics.breadcrumbRowSpaceBelow,
       metrics.titleRowSpaceAbove,
-      preCollapseTitleRow,
+      collapseTitle,
       scrollYValue,
     ]);
 
@@ -273,7 +288,7 @@ export let PageHeader = React.forwardRef(
       });
     }, [
       headerRef,
-      preventBreadcrumbScroll,
+      disableBreadcrumbScroll,
       metrics,
       metrics.breadcrumbRowHeight,
       metrics.breadcrumbRowSpaceBelow,
@@ -325,9 +340,9 @@ export let PageHeader = React.forwardRef(
       checkUpdateVerticalSpace();
     }, [
       actionBarItems,
-      availableSpace,
+      children,
       breadcrumbItems,
-      preventBreadcrumbScroll,
+      disableBreadcrumbScroll,
       navigation,
       pageActions,
       subtitle,
@@ -336,8 +351,8 @@ export let PageHeader = React.forwardRef(
     ]);
 
     useEffect(() => {
-      // Determines if the background should be one based on the header height or scroll
-      let result = background && 1;
+      // Determines if the hasBackgroundAlways should be one based on the header height or scroll
+      let result = hasBackgroundAlways && 1;
 
       if (
         !result &&
@@ -362,20 +377,27 @@ export let PageHeader = React.forwardRef(
       utilSetCustomCSSProps(headerRef, {
         [`--${blockClass}--background-opacity`]: result,
       });
+
       setBackgroundOpacity(result);
-      setHasCollapseButton(collapseHeaderToggleWanted && result > 0);
     }, [
       actionBarItems,
-      background,
+      hasBackgroundAlways,
       breadcrumbItems,
       headerRef,
       metrics.breadcrumbRowHeight,
       metrics.headerHeight,
       navigation,
       scrollYValue,
-      collapseHeaderToggleWanted,
+      hasCollapseHeaderToggle,
       tags,
     ]);
+
+    useEffect(() => {
+      // only has toggle if requested and has hasBackgroundAlways
+      // NOTE: prop-types isRequired.if for the expand and collapse
+      // icon descriptions depends on the this.
+      setHasCollapseButton(hasCollapseHeaderToggle && hasBackgroundAlways);
+    }, [hasBackgroundAlways, hasCollapseHeaderToggle]);
 
     useEffect(() => {
       // Determine if space is needed in the breadcrumb for a collapse button
@@ -386,7 +408,7 @@ export let PageHeader = React.forwardRef(
 
     const nextToTabsCheck = () => {
       return (
-        preventBreadcrumbScroll &&
+        disableBreadcrumbScroll &&
         actionBarItems === undefined &&
         scrollYValue + metrics.headerTopValue >= 0
       );
@@ -450,10 +472,7 @@ export let PageHeader = React.forwardRef(
                         <BreadcrumbWithOverflow
                           className={`${blockClass}__breadcrumb`}
                           noTrailingSlash={title !== undefined}
-                          overflowAriaLabel={
-                            breadcrumbOverflowAriaLabel ||
-                            breadcrumbOverflowLabel
-                          }>
+                          overflowAriaLabel={breadcrumbOverflowAriaLabel}>
                           {breadcrumbItems}
                           {title ? (
                             <BreadcrumbItem
@@ -463,7 +482,7 @@ export let PageHeader = React.forwardRef(
                                 `${blockClass}__breadcrumb-title`,
                                 {
                                   [`${blockClass}__breadcrumb-title--pre-collapsed`]:
-                                    preCollapseTitleRow,
+                                    collapseTitle,
                                 },
                               ])}>
                               {titleLoading ? <SkeletonText /> : titleText}
@@ -511,10 +530,7 @@ export let PageHeader = React.forwardRef(
                                 </div>
                               )}
                               <ActionBar
-                                overflowAriaLabel={
-                                  actionBarOverflowAriaLabel ||
-                                  actionBarOverflowLabel
-                                }
+                                overflowAriaLabel={actionBarOverflowAriaLabel}
                                 actions={actionBarItemArray}
                                 className={`${blockClass}__action-bar`}
                                 onWidthChange={handleActionBarWidthChange}
@@ -529,7 +545,7 @@ export let PageHeader = React.forwardRef(
                 </Row>
               ) : null}
 
-              {!preCollapseTitleRow &&
+              {!collapseTitle &&
               !(title === undefined && pageActions === undefined) ? (
                 <Row
                   className={cx(`${blockClass}__title-row`, {
@@ -592,10 +608,10 @@ export let PageHeader = React.forwardRef(
                 </Row>
               ) : null}
 
-              {availableSpace !== undefined ? (
+              {children !== undefined ? (
                 <Row className={`${blockClass}__available-row`}>
                   <Column className={`${blockClass}__available-column`}>
-                    {availableSpace}
+                    {children}
                   </Column>
                 </Row>
               ) : null}
@@ -607,7 +623,7 @@ export let PageHeader = React.forwardRef(
                 actionBarItems ||
                 title ||
                 pageActions ||
-                availableSpace ||
+                children ||
                 subtitle) && (
                 <div
                   className={cx([
@@ -643,7 +659,7 @@ export let PageHeader = React.forwardRef(
             </div>
 
             {
-              // this navigation pushes the breadcrumb off or settles underneath it depending on preventBreadcrumbScroll
+              // this navigation pushes the breadcrumb off or settles underneath it depending on disableBreadcrumbScroll
               navigation ? (
                 <Row
                   className={cx(`${blockClass}__navigation-row`, {
@@ -677,12 +693,11 @@ export let PageHeader = React.forwardRef(
                 [`${blockClass}__collapse-expand-toggle--collapsed`]:
                   fullyCollapsed,
               })}
-              data-collapse={fullyCollapsed ? 'collapsed' : 'not collapsed'}
               hasIconOnly={true}
               iconDescription={
                 fullyCollapsed
-                  ? expandHeaderIconDescription || expandHeaderLabel
-                  : collapseHeaderIconDescription || collapseHeaderLabel
+                  ? expandHeaderIconDescription
+                  : collapseHeaderIconDescription
               }
               kind="ghost"
               onClick={handleCollapseToggle}
@@ -720,9 +735,9 @@ const tagTypes = Object.keys(TYPES);
 
 PageHeader.propTypes = {
   /**
-   * Specifies the action bar items. Each item is specified as an object
-   * with the properties of a Carbon Button in icon only form. Button kind, size, tooltipPosition,
-   * tooltipAlignment and type are ignored.
+   * Specifies the action bar items which are the final items in the row top of the PageHeader.
+   * Each item is specified as an object with the properties of a Carbon Button in icon only form.
+   * Button kind, size, tooltipPosition, tooltipAlignment and type are ignored.
    */
   actionBarItems: PropTypes.oneOfType([
     PropTypes.arrayOf(
@@ -739,51 +754,60 @@ PageHeader.propTypes = {
       })
     ),
     deprecatePropUsage(
+      // expects action bar item as array or in fragment
       PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.element),
         PropTypes.element,
       ]),
       'Expects an array of objects with the following properties: iconDescription, renderIcon and onClick.'
     ),
-  ]), // expects action bar item as array or in fragment
+  ]),
   /**
-   * aria label for the action bar overflow menu
+   * When there is insufficient space for all actionBarItems to be displayed this
+   * aria label is used for the action bar overflow menu
    *
-   * NOTE: This prop is only required if actionBarItems are supplied
+   * NOTE: This prop is required if actionBarItems are supplied
    */
   actionBarOverflowAriaLabel: PropTypes.string.isRequired.if(
     ({ actionBarItems }) => actionBarItems && actionBarItems.length > 0
   ),
+  // DEPRECATED SEE actionBarOverflowAriaLabel
   actionBarOverflowLabel: deprecateProp(
     PropTypes.string,
     'Property renamed to `actionBarOverflowAriaLabel`.'
+  ),
+  // DEPRECATED SEE children
+  availableSpace: deprecateProp(
+    PropTypes.node,
+    'Make use of children instead.'
+  ),
+  // DEPRECATED SEE hasBackgroundAlways
+  background: deprecateProp(
+    PropTypes.bool,
+    'Property renamed to `hasBackgroundAlways`'
+  ),
+  /**
+   * One or more Carbon BreadcrumbItem components, passed in as React element(s).
+   * If provided, these are rendered at the top before other header content.
+   */
+  breadcrumbItems: PropTypes.element, // expects BreadcrumbItems,
+  /**
+   * If the user supplies breadcrumbItems then they this property is required.
+   * It is used in an overflow menu when there is insufficient space to display all breadcrumbs inline.
+   */
+  breadcrumbOverflowAriaLabel: PropTypes.string.isRequired.if(
+    ({ breadcrumbItems }) => breadcrumbItems && breadcrumbItems.length > 0
+  ),
+  // DEPRECATED SEE breadcrumbOverflowAriaLabel
+  breadcrumbOverflowLabel: deprecateProp(
+    PropTypes.string,
+    'Property renamed to `breadcrumbOverflowAriaLabel`.'
   ),
   /**
    * A zone for placing high-level, client content above the page tabs.
    * Accepts arbitrary renderable content as a React node. Optional.
    */
-  availableSpace: PropTypes.node,
-  /**
-   * Specifies if the PageHeader should have a background color or not.
-   * Optional.
-   */
-  background: PropTypes.bool,
-  /**
-   * One or more Carbon BreadcrumbItem components, passed in as React element(s).
-   * If provided, these are rendered at the top left of the header as
-   * a breadcrumb. Optional.
-   */
-  breadcrumbItems: PropTypes.element, // expects BreadcrumbItems,
-  /**
-   * If the user supplies breadcrumbs then they must supply an aria label for the overflow
-   */
-  breadcrumbOverflowAriaLabel: PropTypes.string.isRequired.if(
-    ({ breadcrumbItems }) => breadcrumbItems && breadcrumbItems.length > 0
-  ),
-  breadcrumbOverflowLabel: deprecateProp(
-    PropTypes.string,
-    'Property renamed to `breadcrumbOverflowAriaLabel`.'
-  ),
+  children: PropTypes.node,
   /**
    * Specifies class(es) to be applied to the top-level PageHeader node.
    * Optional.
@@ -793,41 +817,72 @@ PageHeader.propTypes = {
    * The header can as a whole be collapsed, expanded or somewhere in between.
    * This setting controls the initial value, but also takes effect on change
    *
-   * NOTE: The header is collapsed by setting the scroll position to hide part of the header. Collapsing has no effect if there is insufficient content to scroll.
+   * NOTE: The header is collapsed by setting the scroll position to hide part of the header.
+   * Collapsing has no effect if there is insufficient content to scroll.
    */
   collapseHeader: PropTypes.bool,
   /**
-   * Label/assistive text for the collapse/expand button
-   * Default 'Collapse'
+   * If `hasCollapseHeaderToggle` and `hasBackgroundAlways` are set then assistive text is required
+   * for both the expend and collapse states of the button component used.
    */
-  collapseHeaderIconDescription: PropTypes.string.isRequired,
+  collapseHeaderIconDescription: PropTypes.string.isRequired.if(
+    ({ hasBackgroundAlways, hasCollapseHeaderToggle }) =>
+      hasBackgroundAlways && hasCollapseHeaderToggle
+  ),
+  // DEPRECATED SEE collapseHeaderIconDescription
   collapseHeaderLabel: deprecateProp(
     PropTypes.string,
     'Property renamed to `collapseHeaderIconDescription`.'
   ),
+  // DEPRECATED SEE hasCollapseHeaderToggle
+  collapseHeaderToggleWanted: deprecateProp(
+    PropTypes.bool,
+    'Property renamed to `hasCollapseHeaderToggle`'
+  ),
   /**
-   * Enable the collapse header toggle.
-   *
-   * NOTE: The header is collapsed by setting the scroll position to hide part of the header. Collapsing has no effect if there is insufficient content to scroll.
+   * The title row typically starts below the breadcrumb row. This option
+   * preCollapses it into the breadcrumb row.
    */
-  collapseHeaderToggleWanted: PropTypes.bool,
+  collapseTitle: PropTypes.bool,
   /**
-   * Label/assistive text for the collapse/expand button
-   * Default 'Expand'
+   * Standard behavior scrolls the breadcrumb off to leave just tabs. This
+   * option preserves vertical space for both the breadcrumb and tabs if they're supplied.
    */
-  expandHeaderIconDescription: PropTypes.string.isRequired,
+  disableBreadcrumbScroll: PropTypes.bool,
+  /**
+   * If `hasCollapseHeaderToggle` and `hasBackgroundAlways` are set then assistive text is required
+   * for both the expend and collapse states of the button component used.
+   */
+  expandHeaderIconDescription: PropTypes.string.isRequired.if(
+    ({ hasBackgroundAlways, hasCollapseHeaderToggle }) =>
+      hasBackgroundAlways && hasCollapseHeaderToggle
+  ),
+  // DEPRECATED SEE expandHeaderIconDescription
   expandHeaderLabel: deprecateProp(
     PropTypes.string,
     'Property renamed to `expandHeaderIconDescription`.'
   ),
+  /**
+   * Specifies if the PageHeader should have a background always on and defaults to the preferred `true`.
+   * When false some parts of the header gain a background if they stick to the top of the PageHeader on scroll.
+   */
+  hasBackgroundAlways: PropTypes.bool,
+  /**
+   * Adds a button as the last element of the bottom row which collapses and expands the header.
+   *
+   * NOTE: The header is collapsed by setting the scroll position to hide part of the header.
+   * Collapsing has no effect if there is insufficient content to scroll.
+   */
+  hasCollapseHeaderToggle: PropTypes.bool,
   /**
    * Content for the navigation area in the PageHeader. Should
    * be a React element that is normally a Carbon Tabs component. Optional.
    */
   navigation: PropTypes.element, // Supports Tabs
   /**
-   * Specifies the primary page actions. Each action is specified as an object
-   * with the properties of a Carbon Button plus:
+   * Specifies the primary page actions which are placed at the same level in the page as the title.
+   *
+   * Each action is specified as an object with the properties of a Carbon Button plus:
    * - label: node
    *
    * Carbon Button API https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
@@ -851,40 +906,45 @@ PageHeader.propTypes = {
     ),
   ]),
   /**
-   * Label used by the pageActions component when there is insufficient space to display
-   * the pageActions side by side. Currently the label of a dropdown button menu
+   * When there is insufficient space to display all of hte page actions inline a dropdown button menu is shown,
+   * containing the page actions. This label is used as the display content of the dropdown button menu.
    *
-   * NOTE: This prop is only required if pageActions are supplied
+   * NOTE: This prop is required if pageActions are supplied
    */
   pageActionsOverflowLabel: PropTypes.node.isRequired.if(
     ({ pageActions }) => pageActions && pageActions.length > 0
   ),
   /**
-   * Number of pixels the page header sits from the top of the screen.
-   * The nature of the pageHeader makes this hard to measure
+   * The page header is not always the first component displayed in your page, a global header, banner or
+   * something else might be displayed first. To allow for this provide an offset in pixels for the PageHeader.
+   *
+   * NOTE: The nature of the pageHeader makes this hard to measure automatically as it would be dependant on the styling of
+   * components rendered elsewhere.
    */
   pageHeaderOffset: PropTypes.number,
+  // DEPRECATED SEE collapseTitle
+  preCollapseTitleRow: deprecateProp(
+    PropTypes.bool,
+    'Property renamed to `collapseTitle`.'
+  ),
+  // DEPRECATED SEE disableBreadcrumbScroll
+  preventBreadcrumbScroll: deprecateProp(
+    PropTypes.bool,
+    'Prop renamed to `disableBreadcrumbScroll`.'
+  ),
   /**
-   * The title row typically starts below the breadcrumb row. This option
-   * preCollapses it into the breadcrumb row.
-   */
-  preCollapseTitleRow: PropTypes.bool,
-  /**
-   * Standard behavior scrolls the breadcrumb off to leave just tabs. This
-   * option preserves vertical space for both.
-   */
-  preventBreadcrumbScroll: PropTypes.bool,
-  /**
-   * A subtitle or description that provides additional context to
-   * identify the current page. Optional.
+   * Sitting just below the title is this optional subtitle that provides additional context to
+   * identify the current page.
    */
   subtitle: PropTypes.string,
   /**
-   * The tags to be shown in the PageHeader. Each tag is specified as an object
-   * with properties: **label**\* (required) to supply the tag content, and
-   * other properties will be passed to the Carbon Tag component, such as
-   * **type**, **disabled**, **ref**, **className** , and any other Tag props.
-   * NOTE: **filter** is not supported. Any other fields in the object will be passed through to the HTML element
+   * An array of tags to be shown as the final content in the PageHeader.
+   *
+   * Each tag is specified as an object with the following properties
+   * **label**\* (required) to supply the tag content, and properties of the the Carbon Tag component,
+   * such as **type**, **disabled**, **ref**, **className** , and any other Tag props.
+   *
+   * NOTE: **filter** is not supported. Any remaining fields in the object will be passed through to the HTML element
    * as HTML attributes.
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-tag--default
@@ -898,8 +958,7 @@ PageHeader.propTypes = {
     })
   ),
   /**
-   * The title of the page.
-   * Optional string or object with the following attributes: text, icon, loading
+   * An optional page title supplied as a string or object with the following attributes: text, icon, loading
    */
   title: PropTypes.oneOfType([
     PropTypes.shape({
@@ -909,10 +968,7 @@ PageHeader.propTypes = {
     }),
     PropTypes.string,
   ]),
-  /**
-   * An icon to be included to the left of the title text.
-   * Optional.
-   */
+  // DEPRECATED SEE title object form
   titleIcon: deprecateProp(
     PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
     'Use `title` prop shape instead.'
@@ -920,11 +976,8 @@ PageHeader.propTypes = {
 };
 
 PageHeader.defaultProps = {
-  background: true,
-  className: '',
-  preventBreadcrumbScroll: false,
+  hasBackgroundAlways: true,
   pageHeaderOffset: 0,
-  preCollapseTitleRow: false,
 };
 
 PageHeader.displayName = componentName;

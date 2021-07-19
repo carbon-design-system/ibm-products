@@ -43,7 +43,7 @@ const actionBarItemsNodes = (
   </>
 );
 
-const availableSpace = <span className="page-header-test--available-space" />;
+const children = <span className="page-header-test--available-space" />;
 const breadcrumbOverflowAriaLabel =
   'Open and close additional breadcrumb item list.';
 const breadcrumbItems = (
@@ -160,8 +160,7 @@ const testSizes = (el, property, _default) => {
 const testProps = {
   actionBarItems,
   actionBarOverflowAriaLabel,
-  availableSpace,
-  background: true,
+  hasBackgroundAlways: true,
   breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   className: classNames.join(' '),
@@ -260,7 +259,11 @@ describe('PageHeader', () => {
 
   test('renders all the appropriate content when all props are set', () => {
     const dataTestId = uuidv4();
-    render(<PageHeader {...testProps} data-test-id={dataTestId} />);
+    render(
+      <PageHeader {...testProps} data-test-id={dataTestId}>
+        {children}
+      </PageHeader>
+    );
 
     // console.dir(screen.getByRole('region')); // section should be a region https://fae.disability.illinois.edu/rulesets/ROLE_5/
     const header = screen.getByTestId(dataTestId);
@@ -387,9 +390,10 @@ describe('PageHeader', () => {
         {...testProps}
         collapseHeaderIconDescription="Toggle collapse"
         expandHeaderIconDescription="Toggle expand"
-        collapseHeaderToggleWanted={true}
-        data-test-id={dataTestId}
-      />
+        hasCollapseHeaderToggle={true}
+        data-test-id={dataTestId}>
+        {children}
+      </PageHeader>
     );
 
     const collapseButton = screen.getByRole('button', {
@@ -478,7 +482,11 @@ describe('PageHeader', () => {
   });
 
   test('Breadcrumb row renders when action bar items but no breadcrumb', () => {
-    render(<PageHeader {...prepareProps(testProps, 'breadcrumbItems')} />);
+    render(
+      <PageHeader {...prepareProps(testProps, 'breadcrumbItems')}>
+        {children}
+      </PageHeader>
+    );
 
     // screen.getByText(/Action/);
     const actionBarItems = document.querySelectorAll(
@@ -503,14 +511,14 @@ describe('PageHeader', () => {
     ).toHaveLength(1);
   });
 
-  test('Without background', () => {
+  test('Without hasBackgroundAlways', () => {
     const { title } = testProps;
 
     render(
       <PageHeader
         {...{
           title,
-          background: false,
+          hasBackgroundAlways: false,
           breadcrumbOverflowAriaLabel: 'Show the breadcrumb overflow',
           breadcrumbItems,
         }}
@@ -567,5 +575,39 @@ describe('PageHeader', () => {
     jest.spyOn(console, 'error').mockRestore();
   });
 
-  test('Works for now with depreated props', () => {});
+  test.only('Works, for now, with deprecated props', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    const warnings = [
+      'The prop `actionBarOverflowLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `actionBarOverflowAriaLabel`.',
+      'The prop `availableSpace` of `PageHeader` has been deprecated and will soon be removed. Make use of children instead.',
+      'The prop `background` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `hasBackgroundAlways`',
+      'The prop `breadcrumbOverflowLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `breadcrumbOverflowAriaLabel`.',
+      'The prop `collapseHeaderLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `collapseHeaderIconDescription`.',
+      'The prop `collapseHeaderToggleWanted` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `hasCollapseHeaderToggle`',
+      'The prop `expandHeaderLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `expandHeaderIconDescription`.',
+      'The prop `preCollapseTitleRow` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `collapseTitle`.',
+      'The prop `preventBreadcrumbScroll` of `PageHeader` has been deprecated and will soon be removed. Prop renamed to `disableBreadcrumbScroll`.',
+    ];
+
+    render(
+      <PageHeader
+        actionBarOverflowLabel={testProps.actionBarOverflowAriaLabel}
+        availableSpace={children}
+        background={testProps.hasBackgroundAlways}
+        breadcrumbOverflowLabel={testProps.breadcrumbOverflowAriaLabel}
+        collapseHeaderLabel="Collapse header"
+        collapseHeaderToggleWanted={true}
+        expandHeaderLabel="Expand header"
+        preCollapseTitleRow={true}
+        preventBreadcrumbScroll={true}
+      />
+    );
+
+    for (let i = 0; i < warnings.length; i++) {
+      expect(warn).toBeCalledWith(warnings[i]);
+    }
+
+    warn.mockRestore(); // Remove mock
+  });
 });

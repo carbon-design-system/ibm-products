@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.12](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.55.11...@carbon/ibm-cloud-cognitive@0.55.12) (2021-07-19)
+
+
+### Bug Fixes
+
+* **CreateTearsheet:** toggle spacing is correct now ([#1025](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1025)) ([a662106](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a6621069d2a08c620f96c20aad4aaf431c8061bf))
+
+
+
+
+
+## [0.55.11](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.55.10...@carbon/ibm-cloud-cognitive@0.55.11) (2021-07-19)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.55.10](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.55.9...@carbon/ibm-cloud-cognitive@0.55.10) (2021-07-16)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
 ## [0.55.9](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.55.8...@carbon/ibm-cloud-cognitive@0.55.9) (2021-07-16)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive
@@ -1088,7 +1115,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* forgot to add onclose to export modal ([#776](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/776)) ([c381d93](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c381d93e123c33a600e7bf8dee0f3fd8c75767e6))
+* forgot to add onClose to export modal ([#776](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/776)) ([c381d93](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c381d93e123c33a600e7bf8dee0f3fd8c75767e6))
 
 
 

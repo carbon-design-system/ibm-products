@@ -417,8 +417,25 @@ describe('PageHeader', () => {
   });
 
   test('Navigation row renders when Tags but no Navigation', () => {
-    const { tags } = testProps;
-    render(<PageHeader {...{ tags }} />);
+    const {
+      tags,
+      allTagsModalTitle,
+      allTagsModalSearchLabel,
+      allTagsModalSearchPlaceholderText,
+      showAllTagsLabel,
+    } = testProps;
+
+    render(
+      <PageHeader
+        {...{
+          tags,
+          allTagsModalTitle,
+          allTagsModalSearchLabel,
+          allTagsModalSearchPlaceholderText,
+          showAllTagsLabel,
+        }}
+      />
+    );
 
     expect(
       screen.getAllByText('A tag', {

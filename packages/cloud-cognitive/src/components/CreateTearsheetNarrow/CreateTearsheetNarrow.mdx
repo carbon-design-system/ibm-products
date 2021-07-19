@@ -1,0 +1,46 @@
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import { pkg } from '../../settings';
+import { getStorybookSlug } from '../../../config';
+import { CreateTearsheetNarrow } from '.';
+import narrowTearsheet from './storybook_assets/NarrowTearsheetAnatomy.jpg';
+
+# CreateTearsheetNarrow
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+### When to use
+
+- Use a narrow tearsheet as an alternative to a modal when there is scrolling.
+- Use when the form fields can be broken down into sections using section
+  headers.
+
+### When not to use
+
+- Don’t use if the flow has high complexity and the user would benefit from
+  having a visible progress indicator.
+
+<img src={narrowTearsheet} alt="Example of CreateTearsheetNarrow component" />
+
+## Example usage
+
+<!-- TODO: One example per designed use case. -->
+
+<Canvas>
+  <Story
+    id={getStorybookSlug(
+      pkg,
+      CreateTearsheetNarrow.displayName,
+      'create-tearsheet-narrow'
+    )}
+  />
+</Canvas>
+
+## Component API
+
+<ArgsTable />

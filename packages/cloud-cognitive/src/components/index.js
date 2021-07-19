@@ -21,6 +21,7 @@ export {
   CreateTearsheetStep,
   CreateTearsheetSection,
 } from './CreateTearsheet';
+export { CreateTearsheetNarrow } from './CreateTearsheetNarrow';
 export {
   EmptyState,
   ErrorEmptyState,

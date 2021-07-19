@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// cspell:words grafana
+
 import React, { useEffect, useState } from 'react';
 
 import { pkg } from '../../settings';

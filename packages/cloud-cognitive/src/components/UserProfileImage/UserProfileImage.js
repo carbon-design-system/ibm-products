@@ -33,7 +33,7 @@ const componentName = 'UserProfileImage';
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
 /**
- * This is a user profile image component which displays an image, or initias or icon for a user.
+ * This is a user profile image component which displays an image, or initials or icon for a user.
  */
 export let UserProfileImage = React.forwardRef(
   (
@@ -165,7 +165,7 @@ UserProfileImage.propTypes = {
    */
   image: PropTypes.string,
   /**
-   * When passing the image prop use the imageDecsription prop to describe the image for screen reader.
+   * When passing the image prop use the imageDescription prop to describe the image for screen reader.
    */
   imageDescription: allPropTypes([
     UserProfileImage.validateImageDescription(),

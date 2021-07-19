@@ -11,7 +11,7 @@ import React, { useState, useEffect, useRef } from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import ReactResizeDetector from 'react-resize-detector';
+import { useResizeDetector } from 'react-resize-detector';
 import wrapFocus from '../../global/js/utils/wrapFocus';
 import { pkg } from '../../settings';
 import { allPropTypes } from '../../global/js/utils/props-helper';
@@ -136,7 +136,7 @@ export let SidePanel = React.forwardRef(
       );
     };
 
-    // Title and subtitle scroll animaton
+    // Title and subtitle scroll animation
     useEffect(() => {
       if (open && animateTitle && animationComplete) {
         const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
@@ -175,7 +175,7 @@ export let SidePanel = React.forwardRef(
         sidePanelOuter &&
           sidePanelOuter.addEventListener('scroll', () => {
             const scrollTop = sidePanelRef.current.scrollTop;
-            // if scrolling has occured
+            // if scrolling has occurred
             if (scrollTop > 0) {
               sidePanelOuter.classList.add(
                 `${blockClass}__with-condensed-header`
@@ -435,155 +435,161 @@ export let SidePanel = React.forwardRef(
       },
     ]);
 
+    const contentRef = ref || sidePanelRef;
+
+    useResizeDetector({
+      handleHeight: true,
+      onResize: handleResize,
+      targetRef: contentRef,
+    });
+
     return (
       shouldRender && (
         <>
-          <ReactResizeDetector onResize={handleResize}>
+          <div
+            {
+              // Pass through any other property values as HTML attributes.
+              ...rest
+            }
+            id={`${blockClass}-outer`}
+            className={mainPanelClassNames}
+            style={{
+              animation: `${
+                open
+                  ? placement === 'right'
+                    ? 'sidePanelEntranceRight 250ms'
+                    : 'sidePanelEntranceLeft 250ms'
+                  : placement === 'right'
+                  ? 'sidePanelExitRight 250ms'
+                  : 'sidePanelExitLeft 250ms'
+              }`,
+            }}
+            onAnimationEnd={onAnimationEnd}
+            onAnimationStart={onAnimationStart}
+            onBlur={handleBlur}
+            ref={contentRef}
+            role="complementary"
+            aria-label={title}>
+            <span
+              ref={startTrapRef}
+              tabIndex="0"
+              role="link"
+              className={`${blockClass}__visually-hidden`}>
+              Focus sentinel
+            </span>
             <div
-              {
-                // Pass through any other property values as HTML attributes.
-                ...rest
-              }
-              id={`${blockClass}-outer`}
-              className={mainPanelClassNames}
-              style={{
-                animation: `${
-                  open
-                    ? placement === 'right'
-                      ? 'sidePanelEntranceRight 250ms'
-                      : 'sidePanelEntranceLeft 250ms'
-                    : placement === 'right'
-                    ? 'sidePanelExitRight 250ms'
-                    : 'sidePanelExitLeft 250ms'
-                }`,
-              }}
-              onAnimationEnd={onAnimationEnd}
-              onAnimationStart={onAnimationStart}
-              onBlur={handleBlur}
-              ref={ref || sidePanelRef}
-              role="complementary"
-              aria-label={title}>
-              <span
-                ref={startTrapRef}
-                tabIndex="0"
-                role="link"
-                className={`${blockClass}__visually-hidden`}>
-                Focus sentinel
-              </span>
+              ref={sidePanelInnerRef}
+              className={`${blockClass}__inner-content`}>
               <div
-                ref={sidePanelInnerRef}
-                className={`${blockClass}__inner-content`}>
-                <div
-                  className={cx(`${blockClass}__title-container`, {
-                    [`${blockClass}__on-detail-step`]: currentStep > 0,
-                    [`${blockClass}__title-container--no-animation`]:
-                      !animateTitle,
-                    [`${blockClass}__title-container-is-animating`]:
-                      !animationComplete,
-                  })}>
-                  {currentStep > 0 && (
-                    <Button
-                      aria-label={navigationBackIconDescription}
-                      kind="ghost"
-                      size="small"
-                      disabled={false}
-                      renderIcon={ArrowLeft20}
-                      iconDescription={navigationBackIconDescription}
-                      className={`${blockClass}__navigation-back-button`}
-                      onClick={onNavigationBack}
-                    />
-                  )}
-                  {labelText && labelText.length && (
-                    <p className={`${blockClass}__label-text`}>{labelText}</p>
-                  )}
-                  {title && title.length && (
-                    <h2
-                      className={`${blockClass}__title-text`}
-                      title={title}
-                      aria-hidden={false}>
-                      {title}
-                    </h2>
-                  )}
-                  {title && title.length && (
-                    <h2
-                      className={`${blockClass}__collapsed-title-text`}
-                      title={title}
-                      aria-hidden={true}>
-                      {title}
-                    </h2>
-                  )}
+                className={cx(`${blockClass}__title-container`, {
+                  [`${blockClass}__on-detail-step`]: currentStep > 0,
+                  [`${blockClass}__title-container--no-animation`]:
+                    !animateTitle,
+                  [`${blockClass}__title-container-is-animating`]:
+                    !animationComplete,
+                })}>
+                {currentStep > 0 && (
                   <Button
-                    aria-label={closeIconDescription}
+                    aria-label={navigationBackIconDescription}
                     kind="ghost"
                     size="small"
-                    renderIcon={Close20}
-                    iconDescription={closeIconDescription}
-                    className={`${blockClass}__close-button`}
-                    onClick={onRequestClose}
-                    ref={sidePanelCloseRef}
+                    disabled={false}
+                    renderIcon={ArrowLeft20}
+                    iconDescription={navigationBackIconDescription}
+                    className={`${blockClass}__navigation-back-button`}
+                    onClick={onNavigationBack}
                   />
-                </div>
-                {subtitle && subtitle.length && (
-                  <p
-                    className={cx(`${blockClass}__subtitle-text`, {
-                      [`${blockClass}__subtitle-text-no-animation`]:
-                        !animateTitle,
-                      [`${blockClass}__subtitle-text-no-animation-no-action-toolbar`]:
-                        !animateTitle &&
-                        (!actionToolbarButtons || !actionToolbarButtons.length),
-                      [`${blockClass}__subtitle-text-is-animating`]:
-                        !animationComplete,
-                    })}>
-                    {subtitle}
-                  </p>
                 )}
-                {actionToolbarButtons && actionToolbarButtons.length && (
-                  <div
-                    className={cx(`${blockClass}__action-toolbar`, {
-                      [`${blockClass}__action-toolbar-no-animation`]:
-                        !animateTitle,
-                    })}>
-                    {actionToolbarButtons.map((action) => (
-                      <Button
-                        key={action.label}
-                        kind={action.leading ? action.kind : 'ghost'}
-                        size="small"
-                        disabled={false}
-                        renderIcon={action.icon}
-                        iconDescription={action.label}
-                        tooltipPosition="bottom"
-                        tooltipAlignment="center"
-                        className={cx([
-                          `${blockClass}__action-toolbar-button`,
-                          {
-                            [`${blockClass}__action-toolbar-icon-only-button`]:
-                              action.icon,
-                            [`${blockClass}__action-toolbar-leading-button`]:
-                              !action.icon,
-                          },
-                        ])}
-                        onClick={() => action.onActionToolbarButtonClick()}>
-                        {action.leading && action.label}
-                      </Button>
-                    ))}
-                  </div>
+                {labelText && labelText.length && (
+                  <p className={`${blockClass}__label-text`}>{labelText}</p>
                 )}
-                <div className={`${blockClass}__body-content`}>{children}</div>
-                <ActionSet
-                  actions={actions}
-                  className={primaryActionContainerClassNames}
-                  size={size}
+                {title && title.length && (
+                  <h2
+                    className={`${blockClass}__title-text`}
+                    title={title}
+                    aria-hidden={false}>
+                    {title}
+                  </h2>
+                )}
+                {title && title.length && (
+                  <h2
+                    className={`${blockClass}__collapsed-title-text`}
+                    title={title}
+                    aria-hidden={true}>
+                    {title}
+                  </h2>
+                )}
+                <Button
+                  aria-label={closeIconDescription}
+                  kind="ghost"
+                  size="small"
+                  renderIcon={Close20}
+                  iconDescription={closeIconDescription}
+                  className={`${blockClass}__close-button`}
+                  onClick={onRequestClose}
+                  ref={sidePanelCloseRef}
                 />
               </div>
-              <span
-                ref={endTrapRef}
-                tabIndex="0"
-                role="link"
-                className={`${blockClass}__visually-hidden`}>
-                Focus sentinel
-              </span>
+              {subtitle && subtitle.length && (
+                <p
+                  className={cx(`${blockClass}__subtitle-text`, {
+                    [`${blockClass}__subtitle-text-no-animation`]:
+                      !animateTitle,
+                    [`${blockClass}__subtitle-text-no-animation-no-action-toolbar`]:
+                      !animateTitle &&
+                      (!actionToolbarButtons || !actionToolbarButtons.length),
+                    [`${blockClass}__subtitle-text-is-animating`]:
+                      !animationComplete,
+                  })}>
+                  {subtitle}
+                </p>
+              )}
+              {actionToolbarButtons && actionToolbarButtons.length && (
+                <div
+                  className={cx(`${blockClass}__action-toolbar`, {
+                    [`${blockClass}__action-toolbar-no-animation`]:
+                      !animateTitle,
+                  })}>
+                  {actionToolbarButtons.map((action) => (
+                    <Button
+                      key={action.label}
+                      kind={action.leading ? action.kind : 'ghost'}
+                      size="small"
+                      disabled={false}
+                      renderIcon={action.icon}
+                      iconDescription={action.label}
+                      tooltipPosition="bottom"
+                      tooltipAlignment="center"
+                      className={cx([
+                        `${blockClass}__action-toolbar-button`,
+                        {
+                          [`${blockClass}__action-toolbar-icon-only-button`]:
+                            action.icon,
+                          [`${blockClass}__action-toolbar-leading-button`]:
+                            !action.icon,
+                        },
+                      ])}
+                      onClick={() => action.onActionToolbarButtonClick()}>
+                      {action.leading && action.label}
+                    </Button>
+                  ))}
+                </div>
+              )}
+              <div className={`${blockClass}__body-content`}>{children}</div>
+              <ActionSet
+                actions={actions}
+                className={primaryActionContainerClassNames}
+                size={size}
+              />
             </div>
-          </ReactResizeDetector>
+            <span
+              ref={endTrapRef}
+              tabIndex="0"
+              role="link"
+              className={`${blockClass}__visually-hidden`}>
+              Focus sentinel
+            </span>
+          </div>
           {includeOverlay && (
             <div
               ref={sidePanelOverlayRef}

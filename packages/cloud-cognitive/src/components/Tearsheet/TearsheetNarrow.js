@@ -36,7 +36,7 @@ const componentName = 'TearsheetNarrow';
  * that keeps users in-context and focused by bringing actionable content front
  * and center while revealing more of the UI behind it.
  *
- * A narrow earsheet comprises 3 zones: a heading area including a title, the
+ * A narrow tearsheet comprises 3 zones: a heading area including a title, the
  * main content area, and a set of action buttons.
  */
 export let TearsheetNarrow = React.forwardRef((props, ref) => (

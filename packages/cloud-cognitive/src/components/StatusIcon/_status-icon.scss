@@ -103,8 +103,8 @@ $block-class: #{$pkg-prefix}--status-icon;
 
 @each $theme in $themes {
   @each $icon in $icons {
-    @each $themekey in $themes {
-      .#{$block-class}--#{$theme}.#{$block-class}--#{$themekey}-#{$icon} {
+    @each $theme-key in $themes {
+      .#{$block-class}--#{$theme}.#{$block-class}--#{$theme-key}-#{$icon} {
         @if $icon == in-progress {
           @media (prefers-reduced-motion: reduce) {
             animation: none;
@@ -121,7 +121,7 @@ $block-class: #{$pkg-prefix}--status-icon;
           // stylelint-disable-next-line carbon/theme-token-use
           fill: clr($icon, $theme);
           @media (prefers-reduced-motion) {
-            .#{$block-class}--#{$theme}.#{$block-class}--#{$themekey}-in-progress {
+            .#{$block-class}--#{$theme}.#{$block-class}--#{$theme-key}-in-progress {
               animation: none;
             }
           }

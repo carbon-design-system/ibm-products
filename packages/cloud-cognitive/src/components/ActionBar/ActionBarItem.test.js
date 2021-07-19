@@ -62,11 +62,11 @@ describe(ActionBarItem.displayName, () => {
 
   it('adds additional properties to the containing node', () => {
     const { container } = render(
-      <ActionBarItem data-testid={dataTestId}>{content}</ActionBarItem>
+      <ActionBarItem data-test-id={dataTestId}>{content}</ActionBarItem>
     );
 
     expect(
-      container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
+      container.querySelector(`.${blockClass}[data-test-id="${dataTestId}"]`)
     ).toBeInTheDocument();
   });
 

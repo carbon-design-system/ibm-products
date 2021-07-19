@@ -1888,7 +1888,7 @@ path:nth-of-type(1),
 }
 
 .exp--status-icon--light.exp--status-icon--light-minor-warning {
-  fill: #fdd13a;
+  fill: #fddc69;
 }
 
 @media (prefers-reduced-motion) {
@@ -1898,7 +1898,7 @@ path:nth-of-type(1),
 }
 
 .exp--status-icon--light.exp--status-icon--dark-minor-warning {
-  fill: #fdd13a;
+  fill: #fddc69;
 }
 
 @media (prefers-reduced-motion) {
@@ -2100,7 +2100,7 @@ path:nth-of-type(1),
 }
 
 .exp--status-icon--dark.exp--status-icon--light-minor-warning {
-  fill: #fdd13a;
+  fill: #fddc69;
 }
 
 @media (prefers-reduced-motion) {
@@ -2110,7 +2110,7 @@ path:nth-of-type(1),
 }
 
 .exp--status-icon--dark.exp--status-icon--dark-minor-warning {
-  fill: #fdd13a;
+  fill: #fddc69;
 }
 
 @media (prefers-reduced-motion) {

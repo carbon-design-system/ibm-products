@@ -30,7 +30,7 @@ export const getStorybookPrefix = (pkg, componentName) => {
  * @returns The story id.
  */
 export const getStorybookSlug = (pkg, componentName, scenario, folders) => {
-  const hfolders = folders ? folders + '-' : '';
+  const hFolders = folders ? folders + '-' : '';
   const lcName = componentName.toLocaleLowerCase();
   const state = pkg.isComponentEnabled(componentName, true)
     ? 'released'
@@ -38,5 +38,5 @@ export const getStorybookSlug = (pkg, componentName, scenario, folders) => {
     ? 'canary'
     : 'internal';
 
-  return `cloud-cognitive-${state}-${hfolders}${lcName}--${scenario}`;
+  return `cloud-cognitive-${state}-${hFolders}${lcName}--${scenario}`;
 };

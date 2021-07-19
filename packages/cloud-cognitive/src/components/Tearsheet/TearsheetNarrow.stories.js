@@ -69,8 +69,8 @@ const mainContent = (
   <div className="tearsheet-stories__narrow-content-block">
     <Form>
       <p>Main content</p>
-      <FormGroup>
-        <TextInput labelText="Enter an important value here" />
+      <FormGroup legendText="">
+        <TextInput id="tss-ft1" labelText="Enter an important value here" />
       </FormGroup>
     </Form>
   </div>

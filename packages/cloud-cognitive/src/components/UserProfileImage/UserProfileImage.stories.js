@@ -10,7 +10,7 @@ import { UserProfileImage } from '.';
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 import mdx from './UserProfileImage.mdx';
-import image from './headshot.png';
+import image from './headshot.png'; // cspell:disable-line
 import styles from './_storybook.scss'; // import storybook which includes component and additional storybook styles
 
 const storybookPrefix = getStorybookPrefix(pkg, 'UserProfileImage');
@@ -27,26 +27,26 @@ export default {
     backgroundColor: {
       control: {
         type: 'select',
-        options: ['light-cyan', 'dark-cyan'],
       },
+      options: ['light-cyan', 'dark-cyan'],
     },
     theme: {
       control: {
         type: 'select',
-        options: ['light', 'dark'],
       },
+      options: ['light', 'dark'],
     },
     kind: {
       control: {
         type: 'radio',
-        options: ['user', 'group'],
       },
+      options: ['user', 'group'],
     },
     size: {
       control: {
         type: 'radio',
-        options: ['xlg', 'lg', 'md'],
       },
+      options: ['xlg', 'lg', 'md'],
     },
   },
   parameters: {

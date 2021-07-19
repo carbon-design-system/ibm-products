@@ -13,6 +13,7 @@ import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 import { ProductiveCard } from '.';
 import mdx from './ProductiveCard.mdx';
+import { action } from '@storybook/addon-actions';
 const storybookPrefix = getStorybookPrefix(pkg, ProductiveCard.displayName);
 
 export default {
@@ -26,7 +27,6 @@ export default {
   },
   argTypes: {
     columnSize: {
-      defaultValue: 4,
       control: {
         type: 'select',
         options: [4, 8, 12, 16],
@@ -44,6 +44,7 @@ export default {
 
 const defaultProps = {
   title: 'Title',
+  columnSize: 4,
   children: (
     <>
       <div className="graph" />
@@ -55,15 +56,15 @@ const defaultProps = {
     {
       id: '1',
       icon: Edit16,
-      onClick: () => {},
-      onkeydown: () => {},
+      onClick: () => action('on click'),
+      onKeyDown: () => action('on keydown'),
       iconDescription: 'Edit',
     },
     {
       id: '2',
       icon: TrashCan16,
-      onClick: () => {},
-      onkeydown: () => {},
+      onClick: () => action('on click'),
+      onKeyDown: () => action('on keydown'),
       iconDescription: 'Delete',
     },
   ],
@@ -104,7 +105,7 @@ LabelOnly.args = {
   ...defaultProps,
   title: '',
   label: 'Label',
-  actionIconsPosition: 'bottom',
+  actionsPlacement: 'bottom',
   primaryButtonText: 'Ghost button',
 };
 
@@ -115,14 +116,14 @@ WithOverflow.args = {
     {
       id: '1',
       itemText: 'Edit',
-      onClick: () => {},
-      onkeydown: () => {},
+      onClick: () => action('on click'),
+      onKeyDown: () => action('on keydown'),
     },
     {
       id: '2',
       itemText: 'Delete',
-      onClick: () => {},
-      onkeydown: () => {},
+      onClick: () => action('on click'),
+      onKeyDown: () => action('on keydown'),
     },
   ],
 };
@@ -137,14 +138,16 @@ export const ComplexBottomBar = Template.bind({});
 ComplexBottomBar.args = {
   ...defaultProps,
   primaryButtonText: 'Ghost button',
-  actionIconsPosition: 'bottom',
+  actionsPlacement: 'bottom',
+  title: '',
+  label: 'label',
 };
 
 export const Clickable = Template.bind({});
 Clickable.args = {
   ...defaultProps,
-  onClick: () => {},
-  onkeydown: () => {},
+  onClick: () => action('on click'),
+  onKeyDown: () => action('on keydown'),
   primaryButtonText: 'Ghost button',
   actionIcons: [],
 };

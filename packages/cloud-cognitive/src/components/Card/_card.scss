@@ -10,100 +10,108 @@
 
 @import 'carbon-components/scss/components/button/button';
 
-.#{$pkg-prefix}-card {
-  background: $ui-01;
+@mixin card {
+  $block-class: #{$pkg-prefix}--card;
+
+  .#{$block-class} {
+    background: $ui-01;
+  }
+
+  .#{$block-class}__clickable {
+    cursor: pointer;
+    transition: background $duration--fast-02;
+  }
+
+  .#{$block-class}__clickable:hover {
+    background: $hover-ui;
+  }
+
+  .#{$block-class}__media-left {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .#{$block-class}__media-left .#{$block-class}__content-container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  .#{$block-class}__media-left .#{$block-class}__footer {
+    align-self: flex-end;
+    margin-top: auto;
+  }
+
+  .#{$block-class}__media > * {
+    display: block;
+    max-width: 100%;
+  }
+
+  .#{$block-class}__header {
+    padding: $spacing-05;
+  }
+
+  .#{$block-class}__header-label-only {
+    padding-bottom: $spacing-03;
+  }
+
+  .#{$block-class}__header-label-only .#{$block-class}__label {
+    margin-bottom: 0;
+  }
+
+  .#{$block-class}__header-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .#{$block-class}__label {
+    @include carbon--type-style('label-01');
+
+    margin-bottom: $spacing-01;
+  }
+
+  .#{$block-class}__caption {
+    @include carbon--type-style('caption-01');
+
+    margin-top: $spacing-01;
+  }
+
+  .#{$block-class}__body {
+    @include carbon--type-style('body-short-01');
+
+    padding: $spacing-05;
+    padding-top: 0;
+  }
+
+  .#{$block-class}__footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .#{$block-class}__actions {
+    display: flex;
+    flex-direction: row;
+    margin: $spacing-05;
+    margin-top: 0;
+  }
+
+  .#{$block-class}__icon {
+    cursor: pointer;
+  }
+
+  .#{$block-class}__link {
+    color: inherit;
+    text-decoration: inherit;
+  }
+
+  .#{$block-class}__pictogram {
+    padding-top: $spacing-05;
+    padding-left: $spacing-05;
+  }
 }
 
-.#{$pkg-prefix}-card--clickable {
-  cursor: pointer;
-  transition: background $duration--fast-02;
-}
-
-.#{$pkg-prefix}-card--clickable:hover {
-  background: $hover-ui;
-}
-
-.#{$pkg-prefix}-card--media-left {
-  display: flex;
-  flex-direction: row;
-}
-
-.#{$pkg-prefix}-card--media-left .#{$pkg-prefix}-card-content-container {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-}
-
-.#{$pkg-prefix}-card--media-left .#{$pkg-prefix}-card-footer {
-  align-self: flex-end;
-  margin-top: auto;
-}
-
-.#{$pkg-prefix}-card-media > * {
-  display: block;
-  max-width: 100%;
-}
-
-.#{$pkg-prefix}-card-header {
-  padding: $spacing-05;
-}
-
-.#{$pkg-prefix}-card-header--label-only {
-  padding-bottom: $spacing-03;
-}
-
-.#{$pkg-prefix}-card-header--label-only .#{$pkg-prefix}-card-label {
-  margin-bottom: 0;
-}
-
-.#{$pkg-prefix}-card-header-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.#{$pkg-prefix}-card-label {
-  @include carbon--type-style('label-01');
-
-  margin-bottom: $spacing-01;
-}
-
-.#{$pkg-prefix}-card-caption {
-  @include carbon--type-style('caption-01');
-
-  margin-top: $spacing-01;
-}
-
-.#{$pkg-prefix}-card-body {
-  @include carbon--type-style('body-short-01');
-
-  padding: $spacing-05;
-  padding-top: 0;
-}
-
-.#{$pkg-prefix}-card-footer {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.#{$pkg-prefix}-card-actions {
-  display: flex;
-  flex-direction: row;
-  margin: $spacing-05;
-  margin-top: 0;
-}
-
-.#{$pkg-prefix}-card-icon {
-  cursor: pointer;
-}
-
-.#{$pkg-prefix}-card-link {
-  color: inherit;
-  text-decoration: inherit;
-}
-
-.#{$pkg-prefix}-card-pictogram {
-  padding-top: $spacing-05;
-  padding-left: $spacing-05;
+@include exports('card') {
+  @include card;
 }

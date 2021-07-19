@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2020
+// Copyright IBM Corp. 2020, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -8,7 +8,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { BreadcrumbItem } from 'carbon-components-react';
 
 import { pkg } from '../../settings';
@@ -19,8 +18,6 @@ const storybookPrefix = getStorybookPrefix(
   BreadcrumbWithOverflow.displayName
 );
 
-const blockClass = `${pkg.prefix}--breadcrumb-with-overflow`;
-
 export default {
   title: `${storybookPrefix}/${BreadcrumbWithOverflow.displayName}`,
   component: BreadcrumbWithOverflow,
@@ -30,9 +27,8 @@ export default {
     },
   },
   decorators: [
-    (story) => <div className={`${blockClass}__story-viewport`}>{story()}</div>,
+    (story) => <div className={`ccs-sb__display-box`}>{story()}</div>,
   ],
-  parameters: { styles },
 };
 
 const breadcrumbItems = [
@@ -102,12 +98,14 @@ export const BreadcrumbLastCurrent = Template.bind({});
 BreadcrumbLastCurrent.args = {
   children: stdBreadcrumbItems(true),
   containerWidth: 500,
+  overflowAriaLabel: 'Open and close additional breadcrumb item list.',
 };
 
 export const BreadcrumbLastNotCurrent = Template.bind({});
 BreadcrumbLastNotCurrent.args = {
   children: stdBreadcrumbItems(false),
   containerWidth: 500,
+  overflowAriaLabel: 'Open and close additional breadcrumb item list.',
 };
 
 export const BreadcrumbWithDataTitle = Template.bind({});
@@ -128,6 +126,7 @@ BreadcrumbWithDataTitle.args = {
     </BreadcrumbItem>,
   ]),
   containerWidth: 500,
+  overflowAriaLabel: 'Open and close additional breadcrumb item list.',
 };
 
 export const BreadcrumbWithTitle = Template.bind({});
@@ -148,4 +147,5 @@ BreadcrumbWithTitle.args = {
     </BreadcrumbItem>,
   ]),
   containerWidth: 500,
+  overflowAriaLabel: 'Open and close additional breadcrumb item list.',
 };

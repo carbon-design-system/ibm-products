@@ -54,6 +54,7 @@ export default {
   ],
 };
 
+/* cSpell:disable */
 const demoTableData = [
   {
     Index: 'C8205413-BD94-0B62-DB0A-BE26CF8C60CD',
@@ -767,6 +768,7 @@ const demoTableData = [
   },
 ];
 const demoTableHeaders = Object.keys(demoTableData[0]);
+/* cSpell:enable */
 
 const TemplateDemo = () => {
   return (
@@ -785,9 +787,10 @@ const TemplateDemo = () => {
             marginTop: '48px',
           }}>
           <PageHeader
+            breadcrumbOverflowLabel="Open and close additional breadcrumb item list."
             breadcrumbItems={
               <>
-                <BreadcrumbItem href="../../../hompepage">
+                <BreadcrumbItem href="../../../homepage">
                   Homepage
                 </BreadcrumbItem>
                 <BreadcrumbItem href="../../Reports">Reports</BreadcrumbItem>
@@ -795,10 +798,11 @@ const TemplateDemo = () => {
               </>
             }
             actionBarItems={[
-              { renderIcon: Printer16, iconDescription: `Print` },
-              { renderIcon: Settings16, iconDescription: `Settings` },
-              { renderIcon: VolumeMute16, iconDescription: `Mute` },
+              { key: '1', renderIcon: Printer16, iconDescription: `Print` },
+              { key: '2', renderIcon: Settings16, iconDescription: `Settings` },
+              { key: '3', renderIcon: VolumeMute16, iconDescription: `Mute` },
             ]}
+            actionBarOverflowLabel="Show more action bar items"
             title={{
               text: 'Authentication activity',
               loading: false,

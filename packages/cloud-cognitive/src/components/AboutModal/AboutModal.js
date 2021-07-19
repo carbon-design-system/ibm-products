@@ -6,12 +6,14 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { useResizeDetector } from 'react-resize-detector';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 // Carbon and package components we use.
 import {
@@ -41,6 +43,7 @@ export let AboutModal = React.forwardRef(
     {
       additionalInfo,
       className,
+      closeIconDescription,
       content,
       copyrightText,
       legalText,
@@ -53,72 +56,107 @@ export let AboutModal = React.forwardRef(
       ...rest
     },
     ref
-  ) => (
-    <ComposedModal
-      {
-        // Pass through any other property values as HTML attributes.
-        ...rest
-      }
-      className={cx(
-        blockClass, // Apply the block class to the main HTML element
-        className, // Apply any supplied class names to the main HTML element.
+  ) => {
+    const [hasScrollingContent, setHasScrollingContent] = useState(true);
+    const bodyRef = useRef();
+    const contentRef = useRef();
+    const contentId = uuidv4();
+
+    const handleResize = () => {
+      setHasScrollingContent(
+        // if our scroll height exceeds the client height enable scrolling
+        bodyRef.current.clientHeight <
+          (hasScrollingContent
+            ? // Carbon modal adds 32px bottom margin when scrolling content is enabled
+              bodyRef.current.scrollHeight - 32
+            : bodyRef.current.scrollHeight)
+      );
+    };
+
+    // We can't add a ref directly to the ModalBody, so track it in a ref
+    // as the parent of the current bodyRef element
+    useEffect(() => {
+      bodyRef.current = contentRef.current.parentElement;
+    }, [bodyRef]);
+
+    // Detect resize of the ModalBody to recalculate whether scrolling is enabled
+    useResizeDetector({ onResize: handleResize, targetRef: bodyRef });
+
+    return (
+      <ComposedModal
         {
-          [`${blockClass}--with-tabs`]:
-            additionalInfo && additionalInfo.length > 1,
+          // Pass through any other property values as HTML attributes.
+          ...rest
         }
-      )}
-      {...{ onClose, open, ref }}>
-      <div className={`${blockClass}__logo`}>{logo}</div>
-      <ModalHeader
-        className={`${blockClass}__header`}
-        label={title}
-        labelClassName={`${blockClass}__title`}
-      />
-      <ModalBody className={`${blockClass}__body`}>
-        <div className={`${blockClass}__body-content`}>
-          {content}
-          <div className={`${blockClass}__links-container`}>
-            {links &&
-              links.length > 0 &&
-              links.map((link, i) => (
-                <React.Fragment key={i}>{link}</React.Fragment>
-              ))}
+        className={cx(
+          blockClass, // Apply the block class to the main HTML element
+          className, // Apply any supplied class names to the main HTML element.
+          {
+            [`${blockClass}--with-tabs`]:
+              additionalInfo && additionalInfo.length > 1,
+          }
+        )}
+        {...{ onClose, open, ref }}>
+        <div className={`${blockClass}__logo`}>{logo}</div>
+        <ModalHeader
+          className={`${blockClass}__header`}
+          iconDescription={closeIconDescription}
+          label={title}
+          labelClassName={`${blockClass}__title`}
+        />
+        <ModalBody
+          aria-label={hasScrollingContent ? '' : null}
+          aria-labelledby={hasScrollingContent ? contentId : null}
+          className={`${blockClass}__body`}
+          hasScrollingContent={hasScrollingContent}>
+          <div
+            className={`${blockClass}__body-content`}
+            ref={contentRef}
+            id={contentId}>
+            {content}
+            <div className={`${blockClass}__links-container`}>
+              {links &&
+                links.length > 0 &&
+                links.map((link, i) => (
+                  <React.Fragment key={i}>{link}</React.Fragment>
+                ))}
+            </div>
+            {legalText && (
+              <p className={`${blockClass}__legal-text`}>{legalText}</p>
+            )}
+            {copyrightText && (
+              <p className={`${blockClass}__copyright-text`}>{copyrightText}</p>
+            )}
           </div>
-          {legalText && (
-            <p className={`${blockClass}__legal-text`}>{legalText}</p>
-          )}
-          {copyrightText && (
-            <p className={`${blockClass}__copyright-text`}>{copyrightText}</p>
-          )}
-        </div>
-      </ModalBody>
-      <ModalFooter className={`${blockClass}__footer`}>
-        {additionalInfo &&
-          additionalInfo.length > 0 &&
-          (additionalInfo.length === 1 ? (
-            <>
-              <p className={`${blockClass}__version-label`}>
-                {additionalInfo[0].label}
-              </p>
-              <p className={`${blockClass}__version-number`}>
-                {additionalInfo[0].content}
-              </p>
-            </>
-          ) : (
-            <Tabs className={`${blockClass}__tab-container`}>
-              {additionalInfo.map((tab, i) => (
-                <Tab
-                  id={'about-modal-tab-' + tab.label}
-                  label={tab.label}
-                  key={i}>
-                  {tab.content}
-                </Tab>
-              ))}
-            </Tabs>
-          ))}
-      </ModalFooter>
-    </ComposedModal>
-  )
+        </ModalBody>
+        <ModalFooter className={`${blockClass}__footer`}>
+          {additionalInfo &&
+            additionalInfo.length > 0 &&
+            (additionalInfo.length === 1 ? (
+              <>
+                <p className={`${blockClass}__version-label`}>
+                  {additionalInfo[0].label}
+                </p>
+                <p className={`${blockClass}__version-number`}>
+                  {additionalInfo[0].content}
+                </p>
+              </>
+            ) : (
+              <Tabs className={`${blockClass}__tab-container`}>
+                {additionalInfo.map((tab, i) => (
+                  <Tab
+                    id={'about-modal-tab-' + tab.label}
+                    label={tab.label}
+                    key={i}>
+                    {tab.content}
+                  </Tab>
+                ))}
+              </Tabs>
+            ))}
+        </ModalFooter>
+      </ComposedModal>
+    );
+  }
 );
 
 // Return a placeholder if not released and not enabled by feature flag
@@ -149,6 +187,11 @@ AboutModal.propTypes = {
    * Provide an optional class to be applied to the modal root node.
    */
   className: PropTypes.string,
+
+  /**
+   * The accessibility title for the close icon.
+   */
+  closeIconDescription: PropTypes.string.isRequired,
 
   /**
    * A summary that appears immediately beneath the title, and might

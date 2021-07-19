@@ -26,7 +26,6 @@ export default {
   },
   argTypes: {
     successful: {
-      defaultValue: true,
       control: {
         type: 'boolean',
       },
@@ -39,6 +38,7 @@ const defaultProps = {
   defaultText: 'Save',
   failText: 'Failed to save',
   inProgressText: 'Saving...',
+  successful: true,
   successText: 'Saved',
 };
 

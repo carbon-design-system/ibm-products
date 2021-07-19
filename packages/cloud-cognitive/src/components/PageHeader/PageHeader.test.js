@@ -21,7 +21,7 @@ import { mockHTMLElement } from '../../global/js/utils/test-helper';
 const blockClass = `${pkg.prefix}--page-header`;
 
 /* Test properties. */
-const actionBarOverflowLabel = 'Show additional action bar items';
+const actionBarOverflowAriaLabel = 'Show additional action bar items';
 
 const actionBarItems = [1, 2, 3, 4].map((item) => ({
   key: `a-key-${item}`,
@@ -43,8 +43,8 @@ const actionBarItemsNodes = (
   </>
 );
 
-const availableSpace = <span className="page-header-test--available-space" />;
-const breadcrumbOverflowLabel =
+const children = <span className="page-header-test--available-space" />;
+const breadcrumbOverflowAriaLabel =
   'Open and close additional breadcrumb item list.';
 const breadcrumbItems = (
   <>
@@ -159,10 +159,9 @@ const testSizes = (el, property, _default) => {
 
 const testProps = {
   actionBarItems,
-  actionBarOverflowLabel,
-  availableSpace,
-  background: true,
-  breadcrumbOverflowLabel,
+  actionBarOverflowAriaLabel,
+  hasBackgroundAlways: true,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   className: classNames.join(' '),
   navigation,
@@ -257,7 +256,11 @@ describe('PageHeader', () => {
 
   test('renders all the appropriate content when all props are set', () => {
     const dataTestId = uuidv4();
-    render(<PageHeader {...testProps} data-test-id={dataTestId} />);
+    render(
+      <PageHeader {...testProps} data-test-id={dataTestId}>
+        {children}
+      </PageHeader>
+    );
 
     // console.dir(screen.getByRole('region')); // section should be a region https://fae.disability.illinois.edu/rulesets/ROLE_5/
     const header = screen.getByTestId(dataTestId);
@@ -312,7 +315,7 @@ describe('PageHeader', () => {
     render(
       <PageHeader
         actionBarItems={actionBarItemsNodes}
-        actionBarOverflowLabel={actionBarOverflowLabel}
+        actionBarOverflowAriaLabel={actionBarOverflowAriaLabel}
       />
     );
 
@@ -382,11 +385,12 @@ describe('PageHeader', () => {
     render(
       <PageHeader
         {...testProps}
-        collapseHeaderLabel="Toggle collapse"
-        expandHeaderLabel="Toggle expand"
-        collapseHeaderToggleWanted={true}
-        data-test-id={dataTestId}
-      />
+        collapseHeaderIconDescription="Toggle collapse"
+        expandHeaderIconDescription="Toggle expand"
+        hasCollapseHeaderToggle={true}
+        data-test-id={dataTestId}>
+        {children}
+      </PageHeader>
     );
 
     const collapseButton = screen.getByRole('button', {
@@ -475,7 +479,11 @@ describe('PageHeader', () => {
   });
 
   test('Breadcrumb row renders when action bar items but no breadcrumb', () => {
-    render(<PageHeader {...prepareProps(testProps, 'breadcrumbItems')} />);
+    render(
+      <PageHeader {...prepareProps(testProps, 'breadcrumbItems')}>
+        {children}
+      </PageHeader>
+    );
 
     // screen.getByText(/Action/);
     const actionBarItems = document.querySelectorAll(
@@ -500,15 +508,15 @@ describe('PageHeader', () => {
     ).toHaveLength(1);
   });
 
-  test('Without background', () => {
+  test('Without hasBackgroundAlways', () => {
     const { title } = testProps;
 
     render(
       <PageHeader
         {...{
           title,
-          background: false,
-          breadcrumbOverflowLabel: 'Show the breadcrumb overflow',
+          hasBackgroundAlways: false,
+          breadcrumbOverflowAriaLabel: 'Show the breadcrumb overflow',
           breadcrumbItems,
         }}
         aria-label="Page header" // gives section role 'region'
@@ -534,7 +542,7 @@ describe('PageHeader', () => {
 
     expect(error).toBeCalledWith(
       expect.stringMatching(
-        /^Warning: Failed prop type: The prop `actionBarOverflowLabel` is marked as required in `PageHeader`/
+        /^Warning: Failed prop type: The prop `actionBarOverflowAriaLabel` is marked as required in `PageHeader`/
       )
     );
 
@@ -562,5 +570,41 @@ describe('PageHeader', () => {
     );
 
     jest.spyOn(console, 'error').mockRestore();
+  });
+
+  test('Works, for now, with deprecated props', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    const warnings = [
+      'The prop `actionBarOverflowLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `actionBarOverflowAriaLabel`.',
+      'The prop `availableSpace` of `PageHeader` has been deprecated and will soon be removed. Make use of children instead.',
+      'The prop `background` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `hasBackgroundAlways`',
+      'The prop `breadcrumbOverflowLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `breadcrumbOverflowAriaLabel`.',
+      'The prop `collapseHeaderLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `collapseHeaderIconDescription`.',
+      'The prop `collapseHeaderToggleWanted` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `hasCollapseHeaderToggle`',
+      'The prop `expandHeaderLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `expandHeaderIconDescription`.',
+      'The prop `preCollapseTitleRow` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `collapseTitle`.',
+      'The prop `preventBreadcrumbScroll` of `PageHeader` has been deprecated and will soon be removed. Prop renamed to `disableBreadcrumbScroll`.',
+    ];
+
+    render(
+      <PageHeader
+        actionBarOverflowLabel={testProps.actionBarOverflowAriaLabel}
+        availableSpace={children}
+        background={testProps.hasBackgroundAlways}
+        breadcrumbOverflowLabel={testProps.breadcrumbOverflowAriaLabel}
+        collapseHeaderLabel="Collapse header"
+        collapseHeaderToggleWanted={true}
+        expandHeaderLabel="Expand header"
+        preCollapseTitleRow={true}
+        preventBreadcrumbScroll={true}
+      />
+    );
+
+    for (let i = 0; i < warnings.length; i++) {
+      expect(warn).toBeCalledWith(warnings[i]);
+    }
+
+    warn.mockRestore(); // Remove mock
   });
 });

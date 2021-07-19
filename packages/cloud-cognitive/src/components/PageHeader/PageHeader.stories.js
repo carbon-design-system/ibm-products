@@ -22,6 +22,7 @@ import { CheckmarkFilled16 } from '@carbon/icons-react';
 import { Lightning16, Bee24 } from '@carbon/icons-react';
 
 import { pkg, carbon } from '../../settings';
+import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 import { getStorybookPrefix } from '../../../config';
 import { ActionBarItem } from '../ActionBar';
 import { PageHeader } from '.';
@@ -42,6 +43,7 @@ export default {
   decorators: [
     (story) => <div className={`${storyClass}__viewport`}>{story()}</div>,
   ],
+  argTypes: getDeprecatedArgTypes(PageHeader.propTypes),
 };
 
 // Test values for props.
@@ -52,7 +54,7 @@ const actionBarItems = [1, 2, 3, 4].map((item) => ({
   iconDescription: `Action ${item}`,
 }));
 
-const actionBarOverflowLabel = 'Show further action bar items';
+const actionBarOverflowAriaLabel = 'Show further action bar items';
 
 const manyActionBarItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
   key: `a-key-${item}`,
@@ -79,7 +81,7 @@ const manyBreadcrumbItems = (
     <BreadcrumbItem href="#">Breadcrumb 8</BreadcrumbItem>
   </>
 );
-const breadcrumbOverflowLabel =
+const breadcrumbOverflowAriaLabel =
   'Open and close additional breadcrumb item list.';
 
 const className = 'client-class-1 client-class-2';
@@ -237,10 +239,14 @@ const longTitle = {
 
 // Template.
 const Template = (args) => {
+  const { children, ...props } = args;
+
   return (
     <>
       <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
-      <PageHeader className={className} {...args} />
+      <PageHeader className={className} {...props}>
+        {children}
+      </PageHeader>
       {dummyPageContent}
     </>
   );
@@ -249,16 +255,16 @@ const Template = (args) => {
 // Stories
 export const AllAttributesSet = Template.bind({});
 AllAttributesSet.args = {
-  background: true,
-  breadcrumbOverflowLabel,
+  hasBackgroundAlways: true,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   actionBarItems,
-  actionBarOverflowLabel,
+  actionBarOverflowAriaLabel,
   title,
   pageActions,
   pageActionsOverflowLabel,
   subtitle,
-  availableSpace: summaryDetails,
+  children: summaryDetails,
   navigation: tabBar,
   tags,
 };
@@ -280,14 +286,14 @@ TitleAndPageActions.args = {
 
 export const BreadcrumbItemsAndTitle = Template.bind({});
 BreadcrumbItemsAndTitle.args = {
-  breadcrumbOverflowLabel,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
 };
 
 export const BreadcrumbItemsTitleAndPageActions = Template.bind({});
 BreadcrumbItemsTitleAndPageActions.args = {
-  breadcrumbOverflowLabel,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
   pageActions,
@@ -296,16 +302,16 @@ BreadcrumbItemsTitleAndPageActions.args = {
 
 export const BreadcrumbItemsTitleAndStatus = Template.bind({});
 BreadcrumbItemsTitleAndStatus.args = {
-  breadcrumbOverflowLabel,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
-  availableSpace: statusIndicator,
+  children: statusIndicator,
 };
 
 export const BreadcrumbItemsTitleTabs = Template.bind({});
 BreadcrumbItemsTitleTabs.args = {
-  background: true,
-  breadcrumbOverflowLabel,
+  hasBackgroundAlways: true,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
   navigation: tabBar,
@@ -313,8 +319,8 @@ BreadcrumbItemsTitleTabs.args = {
 
 export const BreadcrumbItemsTitleIconTabs = Template.bind({});
 BreadcrumbItemsTitleIconTabs.args = {
-  background: true,
-  breadcrumbOverflowLabel,
+  hasBackgroundAlways: true,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
   titleIcon: Bee24,
@@ -323,8 +329,8 @@ BreadcrumbItemsTitleIconTabs.args = {
 
 export const BreadcrumbItemsTitlePageActionsTabs = Template.bind({});
 BreadcrumbItemsTitlePageActionsTabs.args = {
-  background: true,
-  breadcrumbOverflowLabel,
+  hasBackgroundAlways: true,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
   pageActions,
@@ -334,8 +340,8 @@ BreadcrumbItemsTitlePageActionsTabs.args = {
 
 export const BreadcrumbItemsTitlePageActionsTags = Template.bind({});
 BreadcrumbItemsTitlePageActionsTags.args = {
-  background: true,
-  breadcrumbOverflowLabel,
+  hasBackgroundAlways: true,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
   pageActions,
@@ -345,8 +351,8 @@ BreadcrumbItemsTitlePageActionsTags.args = {
 
 export const BreadcrumbItemsTitleTabsTags = Template.bind({});
 BreadcrumbItemsTitleTabsTags.args = {
-  background: true,
-  breadcrumbOverflowLabel,
+  hasBackgroundAlways: true,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
   navigation: tabBar,
@@ -357,11 +363,11 @@ export const BreadcrumbItemsActionBarTitlePageActionsTabsTags = Template.bind(
   {}
 );
 BreadcrumbItemsActionBarTitlePageActionsTabsTags.args = {
-  background: true,
-  breadcrumbOverflowLabel,
+  hasBackgroundAlways: true,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   actionBarItems,
-  actionBarOverflowLabel,
+  actionBarOverflowAriaLabel,
   title,
   pageActions,
   pageActionsOverflowLabel,
@@ -370,19 +376,19 @@ BreadcrumbItemsActionBarTitlePageActionsTabsTags.args = {
 
 export const BreadcrumbItemsActionBar = Template.bind({});
 BreadcrumbItemsActionBar.args = {
-  background: true,
-  breadcrumbOverflowLabel,
+  hasBackgroundAlways: true,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   actionBarItems,
-  actionBarOverflowLabel,
-  preCollapseTitleRow: true,
+  actionBarOverflowAriaLabel,
+  collapseTitle: true,
   title,
 };
 
 export const BreadcrumbItemsTitlePageActionsSubtitle = Template.bind({});
 BreadcrumbItemsTitlePageActionsSubtitle.args = {
-  background: true,
-  breadcrumbOverflowLabel,
+  hasBackgroundAlways: true,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
   pageActions,
@@ -394,63 +400,63 @@ export const BreadcrumbItemsTitlePageActionsSummarydetailsTabs = Template.bind(
   {}
 );
 BreadcrumbItemsTitlePageActionsSummarydetailsTabs.args = {
-  background: true,
-  breadcrumbOverflowLabel,
+  hasBackgroundAlways: true,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
   pageActions,
   pageActionsOverflowLabel,
-  availableSpace: summaryDetails,
+  children: summaryDetails,
   navigation: tabBar,
 };
 
 export const AllAttributesSetKeepsBreadcrumbTabs = Template.bind({});
 AllAttributesSetKeepsBreadcrumbTabs.args = {
-  preventBreadcrumbScroll: true,
-  background: true,
-  breadcrumbOverflowLabel,
+  disableBreadcrumbScroll: true,
+  hasBackgroundAlways: true,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   actionBarItems,
-  actionBarOverflowLabel,
+  actionBarOverflowAriaLabel,
   title,
   titleIcon: Bee24,
   pageActions,
   pageActionsOverflowLabel,
   subtitle,
-  availableSpace: summaryDetails,
+  children: summaryDetails,
   navigation: tabBar,
   tags,
 };
 
 export const AllAttributesSetPreCollapseTitle = Template.bind({});
 AllAttributesSetPreCollapseTitle.args = {
-  preCollapseTitleRow: true,
-  background: true,
-  breadcrumbOverflowLabel,
+  collapseTitle: true,
+  hasBackgroundAlways: true,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   actionBarItems,
-  actionBarOverflowLabel,
+  actionBarOverflowAriaLabel,
   title,
   titleIcon: Bee24,
   pageActions,
   pageActionsOverflowLabel,
   subtitle,
-  availableSpace: summaryDetails,
+  children: summaryDetails,
   navigation: tabBar,
   tags,
 };
 
 export const LongValuesManyItems = Template.bind({});
 LongValuesManyItems.args = {
-  background: true,
+  hasBackgroundAlways: true,
   breadcrumbItems: manyBreadcrumbItems,
   actionBarItems: manyActionBarItems,
-  actionBarOverflowLabel,
+  actionBarOverflowAriaLabel,
   title: longTitle,
   pageActions: manyPageActions,
   pageActionsOverflowLabel,
   subtitle: longSubtitle,
-  availableSpace: summaryDetails,
+  children: summaryDetails,
   navigation: longTabBar,
   tags: manyTags,
 };
@@ -484,19 +490,19 @@ export const AllAttributesWithSwitches = TemplateWithSwitchedArgs.bind({});
 AllAttributesWithSwitches.args = {
   actionBarItems,
   actionBarItemsSwitchedArg: true,
-  actionBarOverflowLabel,
-  availableSpace: summaryDetails,
-  availableSpaceSwitchedArg: true,
-  background: true,
+  actionBarOverflowAriaLabel,
+  children: summaryDetails,
+  childrenSwitchedArg: true,
+  hasBackgroundAlways: true,
   breadcrumbItems,
   breadcrumbItemsSwitchedArg: true,
-  preventBreadcrumbScroll: false,
+  disableBreadcrumbScroll: false,
   navigation: tabBar,
   navigationSwitchedArg: true,
   pageActions,
   pageActionsSwitchedArg: true,
   pageActionsOverflowLabel,
-  preCollapseTitleRow: false,
+  collapseTitle: false,
   subtitle,
   subtitleSwitchedArg: true,
   tags,
@@ -542,19 +548,19 @@ export const PageHeaderWithCarbonHeader =
 PageHeaderWithCarbonHeader.args = {
   actionBarItems,
   actionBarItemsSwitchedArg: true,
-  actionBarOverflowLabel,
-  availableSpace: summaryDetails,
-  availableSpaceSwitchedArg: true,
-  background: true,
+  actionBarOverflowAriaLabel,
+  children: summaryDetails,
+  childrenSwitchedArg: true,
+  hasBackgroundAlways: true,
   breadcrumbItems,
   breadcrumbItemsSwitchedArg: true,
-  preventBreadcrumbScroll: false,
+  disableBreadcrumbScroll: false,
   navigation: tabBar,
   navigationSwitchedArg: true,
   pageActions,
   pageActionsSwitchedArg: true,
   pageActionsOverflowLabel,
-  preCollapseTitleRow: false,
+  collapseTitle: false,
   subtitle,
   subtitleSwitchedArg: true,
   tags,

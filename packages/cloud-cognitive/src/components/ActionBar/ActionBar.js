@@ -215,7 +215,6 @@ ActionBar.propTypes = {
       })
     ),
   ]),
-
   /**
    * children of the action bar (action bar items)
    */

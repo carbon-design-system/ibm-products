@@ -103,7 +103,7 @@ $loading-bar__small-height: 4px;
     }
   }
 
-  @keyframes loadingbar-stop {
+  @keyframes loading-bar-stop {
     0% {
       opacity: 1;
     }
@@ -173,7 +173,7 @@ $loading-bar__small-height: 4px;
 
   .#{$block-class}__indefinite-stop {
     // stylelint-disable-next-line carbon/motion-token-use
-    animation: 1800ms ease-in-out loadingbar-stop forwards;
+    animation: 1800ms ease-in-out loading-bar-stop forwards;
   }
 
   .#{$block-class}__stop-progress:before {

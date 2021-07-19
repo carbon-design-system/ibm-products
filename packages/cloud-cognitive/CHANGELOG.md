@@ -1,3 +1,7 @@
+---
+# cSpell:ignore wibble
+---
+
 # Change Log
 
 All notable changes to this project will be documented in this file.
@@ -1096,7 +1100,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* forgot to add onclose to export modal ([#776](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/776)) ([c381d93](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c381d93e123c33a600e7bf8dee0f3fd8c75767e6))
+* forgot to add onClose to export modal ([#776](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/776)) ([c381d93](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c381d93e123c33a600e7bf8dee0f3fd8c75767e6))
 
 
 

@@ -241,8 +241,6 @@ describe('PageHeader', () => {
     expect(
       document.querySelectorAll('span.page-header-test--available-space')
     ).toHaveLength(0);
-    expect(screen.queryAllByTestId('breadcrumbitem')).toHaveLength(0);
-    expect(screen.queryAllByTestId('tabs')).toHaveLength(0);
     expect(
       document.querySelectorAll(`.${blockClass}__page-actions`)
     ).toHaveLength(0);
@@ -250,7 +248,6 @@ describe('PageHeader', () => {
       0
     );
     expect(screen.queryByText(subtitle)).toBeNull();
-    expect(screen.queryAllByTestId('tags')).toHaveLength(0);
     expect(document.querySelectorAll(`.${blockClass}__title`)).toHaveLength(0);
     expect(screen.queryByText(titleObj.text)).toBeNull();
     expect(

@@ -53,7 +53,6 @@ const defaults = {
     ProductiveCard: false,
     SidePanel: false,
     TagSet: false,
-    // Toolbar: false,
     WebTerminal: false,
     /* new component flags here - comment used by generate CLI */
   },

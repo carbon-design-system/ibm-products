@@ -121,7 +121,7 @@ describe(componentName, () => {
   });
 
   it('renders with preformatted extensions', () => {
-    const { click } = fireEvent;
+    const { click } = userEvent;
     const { fn } = jest;
     const onRequestSubmit = fn();
     const onClose = fn();

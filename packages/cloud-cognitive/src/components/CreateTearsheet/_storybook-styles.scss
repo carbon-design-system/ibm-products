@@ -24,10 +24,8 @@ p.#{$preview-block-class}__description:last-of-type {
   @include carbon--font-weight('semibold');
 }
 
-.#{$preview-block-class} .#{$carbon-prefix}--form-item {
+.#{$preview-block-class}
+  .#{$pkg-prefix}--tearsheet__content
+  .#{$carbon-prefix}--form-item {
   margin-bottom: $spacing-05;
-}
-
-.#{$preview-block-class} .#{$carbon-prefix}--radio-button-wrapper {
-  position: relative;
 }

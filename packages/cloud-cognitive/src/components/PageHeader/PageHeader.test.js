@@ -575,7 +575,7 @@ describe('PageHeader', () => {
     jest.spyOn(console, 'error').mockRestore();
   });
 
-  test.only('Works, for now, with deprecated props', () => {
+  test('Works, for now, with deprecated props', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
     const warnings = [

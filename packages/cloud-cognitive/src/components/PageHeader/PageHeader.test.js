@@ -160,6 +160,9 @@ const testSizes = (el, property, _default) => {
 const testProps = {
   actionBarItems,
   actionBarOverflowAriaLabel,
+  allTagsModalTitle: 'All tags',
+  allTagsModalSearchLabel: 'Search all tags',
+  allTagsModalSearchPlaceholderText: 'Search all tags',
   hasBackgroundAlways: true,
   breadcrumbOverflowAriaLabel,
   breadcrumbItems,
@@ -167,6 +170,7 @@ const testProps = {
   navigation,
   pageActions,
   pageActionsOverflowLabel,
+  showAllTagsLabel: 'View all tags',
   subtitle,
   tags,
   title: titleObj,

@@ -44,7 +44,10 @@ const unwrapIfFragment = (children) => {
   // nothing, one fragment, array with one or more children, or a single item
   addChildren(children);
 
-  return newChildArray;
+  // wrapping with React.Children caters for any missing keys
+  const keyedChildren = React.Children.map(newChildArray, (child) => child);
+
+  return keyedChildren;
 };
 
 export default unwrapIfFragment;

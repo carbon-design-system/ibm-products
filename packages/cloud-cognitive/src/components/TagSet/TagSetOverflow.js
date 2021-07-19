@@ -13,6 +13,8 @@ import cx from 'classnames';
 import { Link, Tag, Tooltip } from 'carbon-components-react';
 
 import { pkg } from '../../settings';
+import { noop } from '../../global/js/utils/pconsole';
+
 const componentName = 'TagSetOverflow';
 const blockClass = `${pkg.prefix}--tag-set-overflow`;
 
@@ -56,7 +58,7 @@ export const TagSetOverflow = React.forwardRef(
           direction={overflowDirection}
           onChange={handleChange}
           open={tipOpen}
-          triggerText={<Tag>+{overflowTags.length}</Tag>}
+          triggerText={<Tag onClick={noop}>+{overflowTags.length}</Tag>}
           showIcon={false}>
           <div ref={overflowTagContent} className={`${blockClass}__content`}>
             <ul className={`${blockClass}__tag-list`}>

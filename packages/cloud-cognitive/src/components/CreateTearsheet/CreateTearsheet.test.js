@@ -59,7 +59,7 @@ const renderCreateTearsheet = (
       nextButtonText={nextButtonText}
       title={title}
       ref={ref}
-      data-testid={dataTestId}>
+      data-test-id={dataTestId}>
       <p>Child element that persists across all steps</p>
       <CreateTearsheetStep
         onNext={rejectOnNext ? onNextStepRejectionFn : onNext}
@@ -138,7 +138,7 @@ describe(CreateTearsheet.displayName, () => {
     expect(ref.current).not.toBeNull();
     expect(
       container.querySelector(
-        `.${tearsheetBlockClass}[data-testid="${dataTestId}"]`
+        `.${tearsheetBlockClass}[data-test-id="${dataTestId}"]`
       )
     ).toBeInTheDocument();
   });

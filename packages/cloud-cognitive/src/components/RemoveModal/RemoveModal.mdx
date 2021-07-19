@@ -1,6 +1,6 @@
 <!-- `position:fixed` cause rendering issues, so do not render the modal -->
 
-import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
+import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
 import { pkg } from '../../settings';
 import { getStorybookSlug } from '../../../config';
 import { RemoveModal } from '.';
@@ -19,9 +19,9 @@ The `RemoveModal` component is simply a wrapper of the Carbon `Modal` component.
 For additional usage guidelines and documentation please refer to the links
 above.
 
-<Preview>
+<Canvas>
   <Story id={getStorybookSlug(pkg, RemoveModal.displayName, 'standard')} />
-</Preview>
+</Canvas>
 
 ## High impact vs medium impact
 
@@ -33,4 +33,4 @@ delete / remove and low / medium / high impact please refer to the
 
 ## Component API
 
-<Props />
+<ArgsTable />

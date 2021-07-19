@@ -1,0 +1,39 @@
+{
+  "name": "jest-config-ibm-cloud-cognitive",
+  "private": true,
+  "version": "0.6.1",
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/ibm-cloud-cognitive.git",
+    "directory": "packages/jest-config-ibm-cloud-cognitive"
+  },
+  "bugs": "https://github.com/carbon-design-system/ibm-cloud-cognitive/issues",
+  "keywords": [
+    "carbon",
+    "carbon design system",
+    "carbon community",
+    "carbon for cloud & cognitive"
+  ],
+  "scripts": {
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally)",
+    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon)/'"
+  },
+  "devDependencies": {
+    "npm-check-updates": "^11.8.2"
+  },
+  "peerDependencies": {
+    "jest": "^27.0.6"
+  },
+  "dependencies": {
+    "@babel/core": "^7.14.6",
+    "@testing-library/jest-dom": "^5.14.1",
+    "accessibility-checker": "^3.1.8",
+    "axe-core": "^4.3.1",
+    "babel-jest": "^27.0.6",
+    "babel-preset-ibm-cloud-cognitive": "^0.6.0",
+    "chalk": "^4.1.1",
+    "jest-circus": "^27.0.6"
+  }
+}

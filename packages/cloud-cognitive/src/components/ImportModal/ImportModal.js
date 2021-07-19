@@ -76,7 +76,7 @@ export let ImportModal = forwardRef(
           status: 'edit',
           iconDescription: invalidIconDescription,
           name: file.name,
-          filesize: file.size,
+          fileSize: file.size,
           invalidFileType: file.invalidFileType,
           fileData: file,
           fetchError: file.fetchError,
@@ -90,7 +90,7 @@ export let ImportModal = forwardRef(
           newFile.errorSubject =
             invalidFileTypeErrorHeader || defaultErrorHeader;
           newFile.invalid = true;
-        } else if (maxFileSize && newFile.filesize > maxFileSize) {
+        } else if (maxFileSize && newFile.fileSize > maxFileSize) {
           newFile.errorBody = maxFileSizeErrorBody || defaultErrorBody;
           newFile.errorSubject = maxFileSizeErrorHeader || defaultErrorHeader;
           newFile.invalid = true;
@@ -216,7 +216,7 @@ export let ImportModal = forwardRef(
                 invalid={file.invalid}
                 errorBody={file.errorBody}
                 errorSubject={file.errorSubject}
-                filesize={file.filesize}
+                filesize={file.fileSize /* cspell:disable-line */}
               />
             ))}
           </div>

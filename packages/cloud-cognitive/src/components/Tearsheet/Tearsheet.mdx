@@ -1,4 +1,4 @@
-import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
 import { pkg } from '../../settings';
 import { getStorybookSlug } from '../../../config';
 import { Tearsheet, TearsheetNarrow } from '.';
@@ -40,7 +40,7 @@ Tearsheets may be stacked up to 3 levels deep.
 
 ### Wide tearsheet
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(
       pkg,
@@ -49,11 +49,11 @@ Tearsheets may be stacked up to 3 levels deep.
       'tearsheets'
     )}
   />
-</Preview>
+</Canvas>
 
 ### Narrow tearsheet
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(
       pkg,
@@ -62,8 +62,8 @@ Tearsheets may be stacked up to 3 levels deep.
       'tearsheets'
     )}
   />
-</Preview>
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />

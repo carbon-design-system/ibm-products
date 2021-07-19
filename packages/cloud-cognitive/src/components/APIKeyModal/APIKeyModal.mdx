@@ -1,6 +1,6 @@
 <!-- `position:fixed` cause rendering issues, so do not render the modal -->
 
-import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
+import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
 import { APIKeyModal } from './APIKeyModal';
 import { pkg } from '../../settings';
 import { getStorybookSlug } from '../../../config';
@@ -15,10 +15,10 @@ import { getStorybookSlug } from '../../../config';
 
 ## Overview
 
-<Preview>
+<Canvas>
   <Story id={getStorybookSlug(pkg, APIKeyModal.displayName, 'standard')} />
-</Preview>
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />

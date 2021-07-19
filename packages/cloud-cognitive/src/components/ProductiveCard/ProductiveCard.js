@@ -45,7 +45,7 @@ ProductiveCard.propTypes = {
   /**
    * Determines if the action icons are on the top or bottom of the card
    */
-  actionIconsPosition: PropTypes.oneOf(['top', 'bottom']),
+  actionsPlacement: PropTypes.oneOf(['top', 'bottom']),
   /**
    * Optional header caption
    */
@@ -101,7 +101,7 @@ ProductiveCard.propTypes = {
 
 ProductiveCard.defaultProps = {
   actionIcons: [],
-  actionIconsPosition: 'top',
+  actionsPlacement: 'top',
   clickZone: 'one',
   overflowActions: [],
   titleSize: 'default',

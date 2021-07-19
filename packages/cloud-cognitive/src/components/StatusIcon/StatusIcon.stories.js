@@ -39,14 +39,14 @@ export default {
     size: {
       control: {
         type: 'select',
-        options: ['sm', 'md', 'lg', 'xlg'],
       },
+      options: ['sm', 'md', 'lg', 'xlg'],
     },
     theme: {
       control: {
         type: 'radio',
-        options: ['light', 'dark'],
       },
+      options: ['light', 'dark'],
     },
   },
   parameters: {

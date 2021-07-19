@@ -32,6 +32,7 @@ export const MultiStepWithSectionsTearsheet = () => {
   const [topicDescriptionValue, setTopicDescriptionValue] = useState('');
   const [topicVersionValue, setTopicVersionValue] = useState('');
   const [topicMetaData, setTopicMetaData] = useState('');
+  const [partitionName, setPartitionName] = useState('');
   const [stepTwoTextInputValue, setStepTwoTextInputValue] = useState(1);
   const [stepThreeTextInputValue, setStepThreeTextInputValue] =
     useState('one-day');
@@ -73,6 +74,7 @@ export const MultiStepWithSectionsTearsheet = () => {
             }, simulatedDelay);
           })
         }
+        sideNavAriaLabel="Create topic side nav"
         viewAllToggleLabelText="Show all available options"
         viewAllToggleOffLabelText="Off"
         viewAllToggleOnLabelText="On"
@@ -82,7 +84,7 @@ export const MultiStepWithSectionsTearsheet = () => {
             return new Promise((resolve, reject) => {
               setTimeout(() => {
                 // Example usage of how to prevent the next step if some kind
-                // of error occured during the `onNext` handler.
+                // of error occurred during the `onNext` handler.
                 if (shouldReject) {
                   setHasSubmitError(true);
                   reject();
@@ -171,9 +173,14 @@ export const MultiStepWithSectionsTearsheet = () => {
             />
           </CreateTearsheetSection>
         </CreateTearsheetStep>
-        <CreateTearsheetStep
-          title="Partitions"
-          disableSubmit={!stepTwoTextInputValue}>
+        <CreateTearsheetStep title="Empty" secondaryLabel="Optional">
+          <CreateTearsheetSection
+            title="Empty"
+            id="create-tearsheet-section-empty">
+            Empty step for demonstration purposes
+          </CreateTearsheetSection>
+        </CreateTearsheetStep>
+        <CreateTearsheetStep title="Partitions" disableSubmit={!partitionName}>
           <CreateTearsheetSection
             title="Partitions"
             id="create-tearsheet-section-partitions">
@@ -201,6 +208,13 @@ export const MultiStepWithSectionsTearsheet = () => {
               onChange={(event) =>
                 setStepTwoTextInputValue(event.imaginaryTarget.value)
               }
+            />
+            <TextInput
+              labelText="Partition name*"
+              id="tearsheet-multi-step-story-text-input-multi-step-3-input-1"
+              value={partitionName}
+              placeholder="Enter partition name"
+              onChange={(event) => setPartitionName(event.target.value)}
             />
           </CreateTearsheetSection>
         </CreateTearsheetStep>

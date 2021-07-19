@@ -787,7 +787,7 @@ const TemplateDemo = () => {
             marginTop: '48px',
           }}>
           <PageHeader
-            breadcrumbOverflowLabel="Open and close additional breadcrumb item list."
+            breadcrumbOverflowAriaLabel="Open and close additional breadcrumb item list."
             breadcrumbItems={
               <>
                 <BreadcrumbItem href="../../../homepage">
@@ -802,13 +802,13 @@ const TemplateDemo = () => {
               { key: '2', renderIcon: Settings16, iconDescription: `Settings` },
               { key: '3', renderIcon: VolumeMute16, iconDescription: `Mute` },
             ]}
-            actionBarOverflowLabel="Show more action bar items"
+            actionBarOverflowAriaLabel="Show more action bar items"
             title={{
               text: 'Authentication activity',
               loading: false,
               icon: Security24,
             }}
-            preventBreadcrumbScroll
+            disableBreadcrumbScroll
             pageHeaderOffset={48} // 48px is the size of the global header. A more elegant way of passing this could be found.
             pageActions={[
               {
@@ -823,13 +823,6 @@ const TemplateDemo = () => {
               },
             ]}
             subtitle="This report details the monthly authentication failures"
-            availableSpace={
-              <>
-                <p>Severity 1: 0</p>
-                <p>Severity 1: 814</p>
-                <p>Severity 3: 3,108</p>
-              </>
-            }
             navigation={
               <Tabs>
                 <Tab label="Summary" />
@@ -847,8 +840,11 @@ const TemplateDemo = () => {
                 type: 'red',
                 label: 'Security',
               },
-            ]}
-          />
+            ]}>
+            <p>Severity 1: 0</p>
+            <p>Severity 1: 814</p>
+            <p>Severity 3: 3,108</p>
+          </PageHeader>
           {
             <Grid className={`${storyClass}__dummy-content`} narrow={true}>
               <Row>

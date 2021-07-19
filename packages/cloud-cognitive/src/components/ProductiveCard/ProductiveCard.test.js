@@ -23,7 +23,7 @@ describe(name, () => {
   });
 
   it('adds additional properties to the containing node', () => {
-    render(<ProductiveCard data-testid="test-id" />);
+    render(<ProductiveCard data-test-id="test-id" />);
     screen.getByTestId('test-id');
   });
 

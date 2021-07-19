@@ -1818,6 +1818,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   fill: #fddc69;
 }
 
+.exp--status-icon--light.exp--status-icon--light-major-warning
+path:nth-of-type(1),
+.exp--status-icon--dark.exp--status-icon--dark-major-warning path:nth-of-type(1),
 .exp--status-icon--light.exp--status-icon--light-minor-warning
 path:nth-of-type(1),
 .exp--status-icon--dark.exp--status-icon--dark-minor-warning path:nth-of-type(1) {
@@ -1865,7 +1868,7 @@ path:nth-of-type(1),
 }
 
 .exp--status-icon--light.exp--status-icon--light-major-warning {
-  fill: #ba4e00;
+  fill: #ff832b;
 }
 
 @media (prefers-reduced-motion) {
@@ -1875,7 +1878,7 @@ path:nth-of-type(1),
 }
 
 .exp--status-icon--light.exp--status-icon--dark-major-warning {
-  fill: #ba4e00;
+  fill: #ff832b;
 }
 
 @media (prefers-reduced-motion) {
@@ -1884,8 +1887,28 @@ path:nth-of-type(1),
   }
 }
 
+.exp--status-icon--light.exp--status-icon--light-minor-warning {
+  fill: #fddc69;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--light-minor-warning .exp--status-icon--light.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--light.exp--status-icon--dark-minor-warning {
+  fill: #fddc69;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--light.exp--status-icon--dark-minor-warning .exp--status-icon--light.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
 .exp--status-icon--light.exp--status-icon--light-undefined {
-  fill: #491d8b;
+  fill: #8a3ffc;
 }
 
 @media (prefers-reduced-motion) {
@@ -1895,7 +1918,7 @@ path:nth-of-type(1),
 }
 
 .exp--status-icon--light.exp--status-icon--dark-undefined {
-  fill: #491d8b;
+  fill: #8a3ffc;
 }
 
 @media (prefers-reduced-motion) {
@@ -2017,7 +2040,7 @@ path:nth-of-type(1),
 }
 
 .exp--status-icon--dark.exp--status-icon--light-fatal {
-  fill: #c6c6c6;
+  fill: #8d8d8d;
 }
 
 @media (prefers-reduced-motion) {
@@ -2027,7 +2050,7 @@ path:nth-of-type(1),
 }
 
 .exp--status-icon--dark.exp--status-icon--dark-fatal {
-  fill: #c6c6c6;
+  fill: #8d8d8d;
 }
 
 @media (prefers-reduced-motion) {
@@ -2076,6 +2099,26 @@ path:nth-of-type(1),
   }
 }
 
+.exp--status-icon--dark.exp--status-icon--light-minor-warning {
+  fill: #fddc69;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--light-minor-warning .exp--status-icon--dark.exp--status-icon--light-in-progress {
+    animation: none;
+  }
+}
+
+.exp--status-icon--dark.exp--status-icon--dark-minor-warning {
+  fill: #fddc69;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--status-icon--dark.exp--status-icon--dark-minor-warning .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+    animation: none;
+  }
+}
+
 .exp--status-icon--dark.exp--status-icon--light-undefined {
   fill: #a56eff;
 }
@@ -2097,7 +2140,7 @@ path:nth-of-type(1),
 }
 
 .exp--status-icon--dark.exp--status-icon--light-unknown {
-  fill: #a8a8a8;
+  fill: #8d8d8d;
 }
 
 @media (prefers-reduced-motion) {
@@ -2107,7 +2150,7 @@ path:nth-of-type(1),
 }
 
 .exp--status-icon--dark.exp--status-icon--dark-unknown {
-  fill: #a8a8a8;
+  fill: #8d8d8d;
 }
 
 @media (prefers-reduced-motion) {
@@ -2117,7 +2160,7 @@ path:nth-of-type(1),
 }
 
 .exp--status-icon--dark.exp--status-icon--light-normal {
-  fill: #42be65;
+  fill: #24a148;
 }
 
 @media (prefers-reduced-motion) {
@@ -2127,7 +2170,7 @@ path:nth-of-type(1),
 }
 
 .exp--status-icon--dark.exp--status-icon--dark-normal {
-  fill: #42be65;
+  fill: #24a148;
 }
 
 @media (prefers-reduced-motion) {
@@ -2179,17 +2222,17 @@ path:nth-of-type(1),
 }
 
 .exp--status-icon--dark.exp--status-icon--light-running {
-  fill: #42be65;
+  fill: #24a148;
   transform: scaleY(-1);
 }
 
 .exp--status-icon--dark.exp--status-icon--dark-running {
-  fill: #42be65;
+  fill: #24a148;
   transform: scaleY(-1);
 }
 
 .exp--status-icon--dark.exp--status-icon--light-pending {
-  fill: #a8a8a8;
+  fill: #8d8d8d;
 }
 
 @media (prefers-reduced-motion) {
@@ -2199,7 +2242,7 @@ path:nth-of-type(1),
 }
 
 .exp--status-icon--dark.exp--status-icon--dark-pending {
-  fill: #a8a8a8;
+  fill: #8d8d8d;
 }
 
 @media (prefers-reduced-motion) {

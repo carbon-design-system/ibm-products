@@ -346,9 +346,9 @@ export let SidePanel = React.forwardRef(
         const pageContentElement = document.querySelector(
           selectorPageContent || pageContentSelector
         );
-        if (placement && placement === 'right') {
+        if (placement && placement === 'right' && pageContentElement) {
           pageContentElement.style.marginRight = 0;
-        } else {
+        } else if (pageContentElement) {
           pageContentElement.style.marginLeft = 0;
         }
       }
@@ -360,11 +360,11 @@ export let SidePanel = React.forwardRef(
         const pageContentElement = document.querySelector(
           selectorPageContent || pageContentSelector
         );
-        if (placement && placement === 'right') {
+        if (placement && placement === 'right' && pageContentElement) {
           pageContentElement.style.marginRight = 0;
           pageContentElement.style.transition = 'margin-right 250ms';
           pageContentElement.style.marginRight = SIDE_PANEL_SIZES[size];
-        } else {
+        } else if (pageContentElement) {
           pageContentElement.style.marginLeft = 0;
           pageContentElement.style.transition = 'margin-left 250ms';
           pageContentElement.style.marginLeft = SIDE_PANEL_SIZES[size];
@@ -751,7 +751,9 @@ SidePanel.propTypes = {
    * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
    * This prop is required when using the `slideIn` variant of the side panel.
    */
-  selectorPageContent: PropTypes.string,
+  selectorPageContent: PropTypes.string.isRequired.if(
+    ({ slideIn }) => slideIn === true
+  ),
 
   /**
    * Specify a CSS selector that matches the DOM element that should

@@ -67,17 +67,17 @@ describe(name, () => {
         Body content
       </WebTerminal>
     );
-    expect(screen.getByText(/Kube docs/i));
+    expect(screen.getByText(/Kubernetes docs/i));
   });
 
   it('adds additional properties to the containing node', () => {
     const { container } = render(
-      <WebTerminal closeTerminal={jest.fn()} data-testid={dataTestId} open>
+      <WebTerminal closeTerminal={jest.fn()} data-test-id={dataTestId} open>
         Body content
       </WebTerminal>
     );
     expect(
-      container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
+      container.querySelector(`.${blockClass}[data-test-id="${dataTestId}"]`)
     ).toBeInTheDocument();
   });
 

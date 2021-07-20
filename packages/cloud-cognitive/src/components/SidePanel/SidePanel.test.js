@@ -46,24 +46,32 @@ const SlideIn = ({
   animateTitle = true,
   actionToolbarButtons,
   selectorPageContent = pageContentSelectorValue,
-}) => (
-  <div>
-    <SidePanel
-      actionToolbarButtons={actionToolbarButtons}
-      title={title}
-      subtitle={subtitle}
-      animateTitle={animateTitle}
-      open={open}
-      onRequestClose={onRequestCloseFn}
-      slideIn
-      selectorPageContent={selectorPageContent}
-      placement={placement}
-      onUnmount={onUnmountFn}>
-      Content
-    </SidePanel>
-    <div id={pageContentSelectorValue.slice(1)} />
-  </div>
-);
+  usePageContentSelector = false,
+}) => {
+  return (
+    <div>
+      <SidePanel
+        actionToolbarButtons={actionToolbarButtons}
+        title={title}
+        subtitle={subtitle}
+        animateTitle={animateTitle}
+        open={open}
+        onRequestClose={onRequestCloseFn}
+        slideIn
+        selectorPageContent={
+          usePageContentSelector ? null : selectorPageContent
+        }
+        pageContentSelector={
+          usePageContentSelector ? selectorPageContent : null
+        }
+        placement={placement}
+        onUnmount={onUnmountFn}>
+        Content
+      </SidePanel>
+      <div id={pageContentSelectorValue.slice(1)} />
+    </div>
+  );
+};
 
 describe('SidePanel', () => {
   const { ResizeObserver } = window;
@@ -358,7 +366,7 @@ describe('SidePanel', () => {
   });
 
   it('adds additional properties to the containing node', () => {
-    renderSidePanel({ 'data-testid': dataTestId });
+    renderSidePanel({ 'data-test-id': dataTestId });
     screen.getByTestId(dataTestId);
   });
 
@@ -462,17 +470,20 @@ describe('SidePanel', () => {
   });
 
   it('should throw a custom prop type error when pageContentSelector is missing', () => {
-    const spy = jest.spyOn(console, 'error').mockImplementation();
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation();
+    const warningSpy = jest.spyOn(console, 'warn').mockImplementation();
     try {
       render(
-        <SlideIn placement="left" open={false} selectorPageContent={null}>
+        <SlideIn placement="left" open={false} usePageContentSelector>
           Content
         </SlideIn>
       );
     } catch (e) {
-      expect(spy).toBeCalled();
+      expect(errorSpy).toBeCalled();
+      expect(warningSpy).toBeCalled();
     } finally {
-      spy.mockRestore();
+      errorSpy.mockRestore();
+      warningSpy.mockRestore();
     }
   });
 });

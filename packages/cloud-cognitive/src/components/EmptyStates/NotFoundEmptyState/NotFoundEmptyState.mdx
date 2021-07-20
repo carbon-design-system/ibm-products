@@ -1,7 +1,8 @@
-import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
+import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
 import { pkg } from '../../../settings';
 import { getStorybookSlug } from '../../../../config';
 import { NotFoundEmptyState } from '.';
+// cspell:words emptystates
 
 # Not Found Empty state
 
@@ -18,7 +19,7 @@ guidelines and documentation please refer to the links above.
 
 ### Default Not Found Empty state
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(
       pkg,
@@ -27,11 +28,11 @@ guidelines and documentation please refer to the links above.
       'emptystates'
     )}
   />
-</Preview>
+</Canvas>
 
 ### Not Found Empty state with dark themed illustration
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(
       pkg,
@@ -40,11 +41,11 @@ guidelines and documentation please refer to the links above.
       'emptystates'
     )}
   />
-</Preview>
+</Canvas>
 
 ### Not Found Empty state with action
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(
       pkg,
@@ -53,11 +54,11 @@ guidelines and documentation please refer to the links above.
       'emptystates'
     )}
   />
-</Preview>
+</Canvas>
 
 ### Not Found Empty state with action (Button with icon)
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(
       pkg,
@@ -66,11 +67,11 @@ guidelines and documentation please refer to the links above.
       'emptystates'
     )}
   />
-</Preview>
+</Canvas>
 
 ### Not Found Empty state with link
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(
       pkg,
@@ -79,11 +80,11 @@ guidelines and documentation please refer to the links above.
       'emptystates'
     )}
   />
-</Preview>
+</Canvas>
 
 ### Not Found Empty state with action and link
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(
       pkg,
@@ -92,8 +93,8 @@ guidelines and documentation please refer to the links above.
       'emptystates'
     )}
   />
-</Preview>
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />

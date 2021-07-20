@@ -70,6 +70,7 @@ export default {
         0: null,
         1: (
           <Dropdown
+            id="tss-had"
             label="Choose an option"
             items={['option 1', 'option 2', 'option 3', 'option 4']}
           />
@@ -102,7 +103,7 @@ const closeIconDescription = 'Close the tearsheet';
 
 const description =
   'This is a description for the tearsheet, providing an opportunity to \
-  describe the flow.';
+  describe the flow over a couple of lines in the header of the tearsheet.';
 
 const influencer = (
   <div className="tearsheet-stories__dummy-content-block">Influencer</div>
@@ -114,9 +115,24 @@ const mainContent = (
   <div className="tearsheet-stories__dummy-content-block">
     <Form>
       <p>Main content</p>
-      <FormGroup>
-        <TextInput labelText="Enter an important value here" />
-        <TextInput light labelText="Here is a light entry field:" />
+      <FormGroup legendText="">
+        <TextInput
+          id="tss-ft1"
+          labelText="Enter an important value here"
+          style={
+            // stylelint-disable-next-line carbon/layout-token-use
+            { marginBottom: '1em' }
+          }
+        />
+        <TextInput
+          id="tss-ft2"
+          light
+          labelText="Here is a light entry field:"
+          style={
+            // stylelint-disable-next-line carbon/layout-token-use
+            { marginBottom: '1em' }
+          }
+        />
       </FormGroup>
     </Form>
   </div>

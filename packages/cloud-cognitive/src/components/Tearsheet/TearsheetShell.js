@@ -196,7 +196,7 @@ export const TearsheetShell = React.forwardRef(
               })}
               iconDescription={closeIconDescription}>
               <Wrap className={`${bc}__header-content`}>
-                <Wrap>
+                <Wrap className={`${bc}__header-fields`}>
                   {/* we create the label and title here instead of passing them
                       as modal header props so we can wrap them in layout divs */}
                   <Wrap element="h2" className={`${bcModalHeader}__label`}>
@@ -240,12 +240,14 @@ export const TearsheetShell = React.forwardRef(
                 </Wrap>
               </Wrap>
               {includeActions && (
-                <ActionSet
-                  actions={actions}
-                  buttonSize={size === 'wide' ? 'xl' : null}
-                  className={`${bc}__buttons`}
-                  size={size === 'wide' ? 'max' : 'lg'}
-                />
+                <Wrap className={`${bc}__button-container`}>
+                  <ActionSet
+                    actions={actions}
+                    buttonSize={size === 'wide' ? 'xl' : null}
+                    className={`${bc}__buttons`}
+                    size={size === 'wide' ? 'max' : 'lg'}
+                  />
+                </Wrap>
               )}
             </Wrap>
           </Wrap>

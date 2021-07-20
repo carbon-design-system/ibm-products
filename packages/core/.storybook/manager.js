@@ -8,10 +8,10 @@
 import { addons } from '@storybook/addons';
 import { create } from '@storybook/theming/create';
 
-import { name } from '../package.json';
+import packageInfo from '../package.json';
 
 addons.setConfig({
   theme: create({
-    brandTitle: name,
+    brandTitle: packageInfo.name,
   }),
 });

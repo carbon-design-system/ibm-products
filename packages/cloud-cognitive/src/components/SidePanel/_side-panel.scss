@@ -60,7 +60,7 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
   }
 }
 
-@mixin setActionBarSize($size: $medium-panel-size) {
+@mixin setPanelSize($size: $medium-panel-size) {
   min-width: $size;
   max-width: $size;
 }
@@ -226,11 +226,64 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       opacity: var(--#{$block-class}--subtitle-opacity);
     }
     .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation {
-      position: sticky;
+      @include setPanelSize();
+
+      position: fixed;
       z-index: 2;
-      top: var(--#{$block-class}--title-container-height);
+      // stylelint-disable-next-line carbon/layout-token-use
+      top: calc(
+        var(--#{$block-class}--title-container-height) + #{$spacing-09}
+      );
       background-color: $ui-01;
     }
+
+    .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation.#{$block-class}__subtitle-text-is-animating {
+      top: var(--#{$block-class}--title-container-height);
+    }
+
+    .#{$block-class}__title-container.#{$block-class}__title-container--no-animation.#{$block-class}__title-container-is-animating {
+      top: 0;
+    }
+
+    .#{$block-class}__title-container.#{$block-class}__title-container--no-animation {
+      @include setPanelSize();
+
+      position: fixed;
+      top: $spacing-09;
+      height: var(--#{$block-class}--title-container-height);
+    }
+
+    .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation.#{$block-class}__subtitle-text-no-animation-no-action-toolbar
+      + .#{$block-class}__body-content {
+      // stylelint-disable-next-line carbon/layout-token-use
+      margin-top: calc(
+        var(--#{$block-class}--title-container-height) +
+          var(--#{$block-class}--subtitle-container-height) + #{$spacing-05}
+      );
+    }
+
+    .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation {
+      @include setPanelSize();
+
+      position: fixed;
+      // stylelint-disable-next-line carbon/layout-token-use
+      top: calc(
+        var(--#{$block-class}--title-container-height) +
+          var(--#{$block-class}--subtitle-container-height) + #{$spacing-09}
+      );
+      width: 100%;
+      border-bottom: 1px solid $decorative-01;
+    }
+
+    .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation
+      + .#{$block-class}__body-content {
+      // stylelint-disable-next-line carbon/layout-token-use
+      margin-top: calc(
+        var(--#{$block-class}--title-container-height) +
+          var(--#{$block-class}--subtitle-container-height) + #{$spacing-09}
+      );
+    }
+
     .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation.#{$block-class}__subtitle-text-no-animation-no-action-toolbar {
       border-bottom: 1px solid $decorative-01;
       margin-bottom: $spacing-05;
@@ -264,16 +317,12 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
         }
       }
     }
-    .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation {
-      // stylelint-disable-next-line carbon/layout-token-use
-      top: calc(
-        var(--#{$block-class}--title-container-height) +
-          var(--#{$block-class}--subtitle-container-height)
-      );
-      border-bottom: 1px solid $decorative-01;
-    }
+
     .bx--btn.#{$block-class}__navigation-back-button {
+      position: relative;
       z-index: 5;
+      top: calc(-1 * #{$spacing-03});
+      left: calc(-1 * #{$spacing-03});
     }
     .bx--btn.#{$block-class}__navigation-back-button,
     .bx--btn.#{$block-class}__close-button {
@@ -301,16 +350,16 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       border-top: 1px solid $decorative-01;
       background-color: $ui-01;
       &.#{$action-set-block-class}--xs {
-        @include setActionBarSize($extra-small-panel-size);
+        @include setPanelSize($extra-small-panel-size);
       }
       &.#{$action-set-block-class}--sm {
-        @include setActionBarSize($small-panel-size);
+        @include setPanelSize($small-panel-size);
       }
       &.#{$action-set-block-class}--md {
-        @include setActionBarSize($medium-panel-size);
+        @include setPanelSize($medium-panel-size);
       }
       &.#{$action-set-block-class}--lg {
-        @include setActionBarSize($large-panel-size);
+        @include setPanelSize($large-panel-size);
       }
       &.#{$action-set-block-class}--max {
         .#{$action-set-block-class}__action-button {

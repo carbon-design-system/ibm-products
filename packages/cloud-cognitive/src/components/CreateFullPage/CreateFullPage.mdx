@@ -1,4 +1,4 @@
-import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
 import { pkg } from '../../settings';
 import { getStorybookSlug } from '../../../config';
 import { CreateFullPage } from '.';
@@ -169,10 +169,10 @@ will tell our left navigation exactly where to scroll to upon click. We can also
 
 ```
 
-<Preview>
+<Canvas>
   <Story id={getStorybookSlug(pkg, CreateFullPage.displayName, 'boxed-set')} />
-</Preview>
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />

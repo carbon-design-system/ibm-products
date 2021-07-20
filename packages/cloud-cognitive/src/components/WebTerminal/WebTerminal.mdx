@@ -1,4 +1,4 @@
-import { Story, ArgsTable, Preview } from '@storybook/addon-docs/blocks';
+import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
 import { pkg } from '../../settings';
 import { getStorybookSlug } from '../../../config';
 import { WebTerminal } from '.';
@@ -25,7 +25,7 @@ terminal in any context like within a data table or button.
 It is very important that you pass the `closeTerminal` function setting your
 provided `open` prop to false. We didn't add the logic to close the web terminal
 from the component because we want you, the developer, to be able to pass in any
-other operations you want to do like error checks or a confimation modal before
+other operations you want to do like error checks or a confirmation modal before
 the user closes the modal.
 
 Example:
@@ -58,13 +58,13 @@ The default web terminal is one which opens and the terminal loads. Then if the
 user desires to dismiss it they can click the close icon on the top right corner
 of the component.
 
-<Preview>
+<Canvas>
   <Story id={getStorybookSlug(pkg, WebTerminal.displayName, 'default')} />
-</Preview>
+</Canvas>
 
 ### With documentation links
 
-<Preview>
+<Canvas>
   <Story
     id={getStorybookSlug(
       pkg,
@@ -72,7 +72,7 @@ of the component.
       'with-documentation-links'
     )}
   />
-</Preview>
+</Canvas>
 
 ## Component API
 

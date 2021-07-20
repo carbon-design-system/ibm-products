@@ -5,13 +5,13 @@ export const blockClass = `${pkg.prefix}--page-header`;
  * Assesses the vertical height of various elements and calls setMetrics with update
  * @param {{}} headerRef
  * @param {{}} navigation
- * @param {boolean} preventBreadcrumbScroll
+ * @param {boolean} disableBreadcrumbScroll
  * @param {()} setMetrics
  */
 export const utilCheckUpdateVerticalSpace = (
   headerRef,
   navigation,
-  preventBreadcrumbScroll,
+  disableBreadcrumbScroll,
   setMetrics
 ) => {
   const dynamicRefs = {};
@@ -71,7 +71,7 @@ export const utilCheckUpdateVerticalSpace = (
     update.headerTopValue += update.navigationRowHeight;
   }
 
-  if (preventBreadcrumbScroll || !navigation) {
+  if (disableBreadcrumbScroll || !navigation) {
     // adjust sticky top if no navigation or breadcrumb is to stay on screen
     update.headerTopValue += update.breadcrumbRowHeight;
   }
@@ -134,7 +134,7 @@ export const utilGetTitleShape = (title, titleIcon, defaultTitle) => {
 
 // Set css style values directly onto a node. Note that this is effective
 // immediately, rather than using the React `style` prop which goes through
-// the React DOM update optimisation.
+// the React DOM update optimization.
 export const utilSetCustomCSSProps = (targetRef, kvPairs) => {
   if (targetRef.current) {
     const keys = Object.keys(kvPairs);

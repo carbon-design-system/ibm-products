@@ -17,15 +17,31 @@ import {
   Row,
   Tab,
   Tabs,
+  Table,
+  TableHead,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableCell,
 } from 'carbon-components-react';
 import { CheckmarkFilled16 } from '@carbon/icons-react';
-import { Lightning16, Bee24 } from '@carbon/icons-react';
+import {
+  Lightning16,
+  Bee24,
+  Printer16,
+  Security24,
+  Settings16,
+  VolumeMute16,
+} from '@carbon/icons-react';
 
 import { pkg, carbon } from '../../settings';
+import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 import { getStorybookPrefix } from '../../../config';
 import { ActionBarItem } from '../ActionBar';
-import { PageHeader } from '.';
+import { PageHeader, deprecatedProps } from './PageHeader';
 const storybookPrefix = getStorybookPrefix(pkg, PageHeader.displayName);
+
+import { demoTableHeaders, demoTableData } from './PageHeaderDemo.data';
 
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import mdx from './PageHeader.mdx';
@@ -42,16 +58,21 @@ export default {
   decorators: [
     (story) => <div className={`${storyClass}__viewport`}>{story()}</div>,
   ],
+  argTypes: getDeprecatedArgTypes(deprecatedProps),
 };
 
 // Test values for props.
 
 const actionBarItems = [1, 2, 3, 4].map((item) => ({
+  key: `a-key-${item}`,
   renderIcon: Lightning16,
   iconDescription: `Action ${item}`,
 }));
 
+const actionBarOverflowAriaLabel = 'Show further action bar items';
+
 const manyActionBarItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
+  key: `a-key-${item}`,
   renderIcon: Lightning16,
   iconDescription: `Action ${item}`,
 }));
@@ -75,6 +96,9 @@ const manyBreadcrumbItems = (
     <BreadcrumbItem href="#">Breadcrumb 8</BreadcrumbItem>
   </>
 );
+const breadcrumbOverflowAriaLabel =
+  'Open and close additional breadcrumb item list.';
+
 const className = 'client-class-1 client-class-2';
 const dummyPageContent = (
   <Grid className={`${storyClass}__dummy-content`} narrow={true}>
@@ -105,29 +129,35 @@ const dummyPageContent = (
 );
 const pageActions = [
   {
+    key: 'secondary',
     kind: 'secondary',
     label: 'Secondary button',
     onClick: () => {},
   },
   {
+    key: 'primary',
     kind: 'primary',
     label: 'Primary button',
     onClick: () => {},
   },
 ];
+const pageActionsOverflowLabel = 'Page actions...';
 
 const manyPageActions = [
   {
-    kind: 'secondary',
+    key: '1',
+    kind: 'danger',
     label: 'Secondary 1',
     onClick: () => {},
   },
   {
+    key: '2',
     kind: 'secondary',
     label: 'Secondary 2',
     onClick: () => {},
   },
   {
+    key: '3',
     kind: 'primary',
     label: 'Primary',
     onClick: () => {},
@@ -142,6 +172,7 @@ const statusIndicator = (
 const subtitle = 'Optional subtitle if necessary';
 const longSubtitle =
   'Optional subtitle if necessary, which is very long in this case, but will need to be handled somehow. It just keeps going on and on and on and on and on.';
+// cspell: disable
 const summaryDetails = (
   <div style={{ display: 'flex' }}>
     <p
@@ -164,6 +195,7 @@ const summaryDetails = (
     </p>
   </div>
 );
+// cspell: enable
 const tabBar = (
   <Tabs>
     <Tab label="Tab 1" />
@@ -222,10 +254,14 @@ const longTitle = {
 
 // Template.
 const Template = (args) => {
+  const { children, ...props } = args;
+
   return (
     <>
       <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
-      <PageHeader className={className} {...args} />
+      <PageHeader className={className} {...props}>
+        {children}
+      </PageHeader>
       {dummyPageContent}
     </>
   );
@@ -234,13 +270,16 @@ const Template = (args) => {
 // Stories
 export const AllAttributesSet = Template.bind({});
 AllAttributesSet.args = {
-  background: true,
+  hasBackgroundAlways: true,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   actionBarItems,
+  actionBarOverflowAriaLabel,
   title,
   pageActions,
+  pageActionsOverflowLabel,
   subtitle,
-  availableSpace: summaryDetails,
+  children: summaryDetails,
   navigation: tabBar,
   tags,
 };
@@ -253,35 +292,41 @@ TitleOnly.args = {
   title,
 };
 
-export const TitleAndPagections = Template.bind({});
-TitleAndPagections.args = {
+export const TitleAndPageActions = Template.bind({});
+TitleAndPageActions.args = {
   title,
   pageActions,
+  pageActionsOverflowLabel,
 };
 
 export const BreadcrumbItemsAndTitle = Template.bind({});
 BreadcrumbItemsAndTitle.args = {
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
 };
 
 export const BreadcrumbItemsTitleAndPageActions = Template.bind({});
 BreadcrumbItemsTitleAndPageActions.args = {
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
   pageActions,
+  pageActionsOverflowLabel,
 };
 
 export const BreadcrumbItemsTitleAndStatus = Template.bind({});
 BreadcrumbItemsTitleAndStatus.args = {
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
-  availableSpace: statusIndicator,
+  children: statusIndicator,
 };
 
 export const BreadcrumbItemsTitleTabs = Template.bind({});
 BreadcrumbItemsTitleTabs.args = {
-  background: true,
+  hasBackgroundAlways: true,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
   navigation: tabBar,
@@ -289,7 +334,8 @@ BreadcrumbItemsTitleTabs.args = {
 
 export const BreadcrumbItemsTitleIconTabs = Template.bind({});
 BreadcrumbItemsTitleIconTabs.args = {
-  background: true,
+  hasBackgroundAlways: true,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
   titleIcon: Bee24,
@@ -298,25 +344,30 @@ BreadcrumbItemsTitleIconTabs.args = {
 
 export const BreadcrumbItemsTitlePageActionsTabs = Template.bind({});
 BreadcrumbItemsTitlePageActionsTabs.args = {
-  background: true,
+  hasBackgroundAlways: true,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
   pageActions,
+  pageActionsOverflowLabel,
   navigation: tabBar,
 };
 
 export const BreadcrumbItemsTitlePageActionsTags = Template.bind({});
 BreadcrumbItemsTitlePageActionsTags.args = {
-  background: true,
+  hasBackgroundAlways: true,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
   pageActions,
+  pageActionsOverflowLabel,
   tags,
 };
 
 export const BreadcrumbItemsTitleTabsTags = Template.bind({});
 BreadcrumbItemsTitleTabsTags.args = {
-  background: true,
+  hasBackgroundAlways: true,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
   navigation: tabBar,
@@ -327,29 +378,36 @@ export const BreadcrumbItemsActionBarTitlePageActionsTabsTags = Template.bind(
   {}
 );
 BreadcrumbItemsActionBarTitlePageActionsTabsTags.args = {
-  background: true,
+  hasBackgroundAlways: true,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   actionBarItems,
+  actionBarOverflowAriaLabel,
   title,
   pageActions,
+  pageActionsOverflowLabel,
   navigation: tabBar,
 };
 
 export const BreadcrumbItemsActionBar = Template.bind({});
 BreadcrumbItemsActionBar.args = {
-  background: true,
+  hasBackgroundAlways: true,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   actionBarItems,
-  preCollapseTitleRow: true,
+  actionBarOverflowAriaLabel,
+  collapseTitle: true,
   title,
 };
 
 export const BreadcrumbItemsTitlePageActionsSubtitle = Template.bind({});
 BreadcrumbItemsTitlePageActionsSubtitle.args = {
-  background: true,
+  hasBackgroundAlways: true,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
   pageActions,
+  pageActionsOverflowLabel,
   subtitle,
 };
 
@@ -357,55 +415,68 @@ export const BreadcrumbItemsTitlePageActionsSummarydetailsTabs = Template.bind(
   {}
 );
 BreadcrumbItemsTitlePageActionsSummarydetailsTabs.args = {
-  background: true,
+  hasBackgroundAlways: true,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   title,
   pageActions,
-  availableSpace: summaryDetails,
+  pageActionsOverflowLabel,
+  children: summaryDetails,
   navigation: tabBar,
 };
 
 export const AllAttributesSetKeepsBreadcrumbTabs = Template.bind({});
 AllAttributesSetKeepsBreadcrumbTabs.args = {
-  preventBreadcrumbScroll: true,
-  background: true,
+  disableBreadcrumbScroll: true,
+  hasBackgroundAlways: true,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   actionBarItems,
+  actionBarOverflowAriaLabel,
   title,
-  titleIcon: Bee24,
   pageActions,
+  pageActionsOverflowLabel,
   subtitle,
-  availableSpace: summaryDetails,
+  children: summaryDetails,
   navigation: tabBar,
   tags,
 };
 
 export const AllAttributesSetPreCollapseTitle = Template.bind({});
 AllAttributesSetPreCollapseTitle.args = {
-  preCollapseTitleRow: true,
-  background: true,
+  collapseTitle: true,
+  hasBackgroundAlways: true,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   actionBarItems,
+  actionBarOverflowAriaLabel,
   title,
-  titleIcon: Bee24,
   pageActions,
+  pageActionsOverflowLabel,
   subtitle,
-  availableSpace: summaryDetails,
+  children: summaryDetails,
   navigation: tabBar,
   tags,
 };
 
 export const LongValuesManyItems = Template.bind({});
 LongValuesManyItems.args = {
-  background: true,
+  hasBackgroundAlways: true,
   breadcrumbItems: manyBreadcrumbItems,
+  breadcrumbOverflowAriaLabel,
   actionBarItems: manyActionBarItems,
+  actionBarOverflowAriaLabel,
   title: longTitle,
   pageActions: manyPageActions,
+  pageActionsOverflowLabel,
   subtitle: longSubtitle,
-  availableSpace: summaryDetails,
+  children: summaryDetails,
   navigation: longTabBar,
   tags: manyTags,
+  allTagsModalTitle: 'All tags',
+  allTagsModalSearchLabel: 'Search all tags',
+  allTagsModalSearchPlaceholderText: 'Search all tags',
+  showAllTagsLabel: 'View all tags',
 };
 
 const includeTheseArgs = (args) => {
@@ -437,25 +508,26 @@ export const AllAttributesWithSwitches = TemplateWithSwitchedArgs.bind({});
 AllAttributesWithSwitches.args = {
   actionBarItems,
   actionBarItemsSwitchedArg: true,
-  availableSpace: summaryDetails,
-  availableSpaceSwitchedArg: true,
-  background: true,
+  actionBarOverflowAriaLabel,
+  children: summaryDetails,
+  childrenSwitchedArg: true,
+  hasBackgroundAlways: true,
   breadcrumbItems,
   breadcrumbItemsSwitchedArg: true,
-  preventBreadcrumbScroll: false,
+  breadcrumbOverflowAriaLabel,
+  disableBreadcrumbScroll: false,
   navigation: tabBar,
   navigationSwitchedArg: true,
   pageActions,
   pageActionsSwitchedArg: true,
-  preCollapseTitleRow: false,
+  pageActionsOverflowLabel,
+  collapseTitle: false,
   subtitle,
   subtitleSwitchedArg: true,
   tags,
   tagsSwitchedArg: true,
   title,
   titleSwitchedArg: true,
-  titleIcon: Bee24,
-  titleIconSwitchedArg: true,
 };
 
 const TemplatePageHeaderWithCarbonHeader = (args) => {
@@ -488,28 +560,148 @@ const TemplatePageHeaderWithCarbonHeader = (args) => {
   );
 };
 
+/**
+ * Demo template using more realistic sample data from PageHeaderDemo.data.js
+ */
 export const PageHeaderWithCarbonHeader =
   TemplatePageHeaderWithCarbonHeader.bind({});
 PageHeaderWithCarbonHeader.args = {
   actionBarItems,
   actionBarItemsSwitchedArg: true,
-  availableSpace: summaryDetails,
-  availableSpaceSwitchedArg: true,
-  background: true,
+  actionBarOverflowAriaLabel,
+  children: summaryDetails,
+  childrenSwitchedArg: true,
+  hasBackgroundAlways: true,
   breadcrumbItems,
   breadcrumbItemsSwitchedArg: true,
-  preventBreadcrumbScroll: false,
+  breadcrumbOverflowAriaLabel,
+  disableBreadcrumbScroll: false,
   navigation: tabBar,
   navigationSwitchedArg: true,
   pageActions,
   pageActionsSwitchedArg: true,
-  preCollapseTitleRow: false,
+  pageActionsOverflowLabel,
+  collapseTitle: false,
   subtitle,
   subtitleSwitchedArg: true,
   tags,
   tagsSwitchedArg: true,
   title,
   titleSwitchedArg: true,
-  titleIcon: Bee24,
-  titleIconSwitchedArg: true,
 };
+
+const TemplateDemo = () => {
+  return (
+    <>
+      <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
+      <div className={`${storyClass}__app`}>
+        <Header aria-label="IBM Platform Name">
+          <HeaderName href="#" prefix="IBM">
+            Cloud Cognitive application
+          </HeaderName>
+        </Header>
+        <div
+          className={`${storyClass}__content-container`}
+          style={{
+            // stylelint-disable-next-line carbon/layout-token-use
+            marginTop: '48px',
+          }}>
+          <PageHeader
+            breadcrumbOverflowAriaLabel="Open and close additional breadcrumb item list."
+            breadcrumbItems={
+              <>
+                <BreadcrumbItem href="../../../homepage">
+                  Homepage
+                </BreadcrumbItem>
+                <BreadcrumbItem href="../../Reports">Reports</BreadcrumbItem>
+                <BreadcrumbItem href="../June2021">June 2021</BreadcrumbItem>
+              </>
+            }
+            actionBarItems={[
+              { key: '1', renderIcon: Printer16, iconDescription: `Print` },
+              { key: '2', renderIcon: Settings16, iconDescription: `Settings` },
+              { key: '3', renderIcon: VolumeMute16, iconDescription: `Mute` },
+            ]}
+            actionBarOverflowAriaLabel="Show more action bar items"
+            title={{
+              text: 'Authentication activity',
+              loading: false,
+              icon: Security24,
+            }}
+            disableBreadcrumbScroll
+            pageHeaderOffset={48} // 48px is the size of the global header. A more elegant way of passing this could be found.
+            pageActions={[
+              {
+                key: 'acknowledge',
+                kind: 'secondary',
+                label: 'Acknowledge',
+                onClick: () => {},
+              },
+              {
+                key: 'escalate',
+                kind: 'primary',
+                label: 'Escalate',
+                onClick: () => {},
+              },
+            ]}
+            pageActionsOverflowLabel="Page actions..."
+            subtitle="This report details the monthly authentication failures"
+            navigation={
+              <Tabs>
+                <Tab label="Summary" />
+                <Tab label="Region 1" />
+                <Tab label="Region 2" />
+                <Tab label="Region 3" />
+              </Tabs>
+            }
+            tags={[
+              {
+                type: 'cyan',
+                label: 'Not urgent',
+              },
+              {
+                type: 'red',
+                label: 'Security',
+              },
+            ]}>
+            <p>Severity 1: 0</p>
+            <p>Severity 1: 814</p>
+            <p>Severity 3: 3,108</p>
+          </PageHeader>
+          {
+            <Grid className={`${storyClass}__dummy-content`} narrow={true}>
+              <Row>
+                <Column
+                  sm={4}
+                  md={8}
+                  lg={16}
+                  className={`${storyClass}__dummy-content-block`}>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        {demoTableHeaders.map((header) => (
+                          <TableHeader key={header}>{header}</TableHeader>
+                        ))}
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {demoTableData.map((row) => (
+                        <TableRow key={row.Index}>
+                          {Object.keys(row).map((key) => {
+                            return <TableCell key={key}>{row[key]}</TableCell>;
+                          })}
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>{' '}
+                </Column>
+              </Row>
+            </Grid>
+          }
+        </div>
+      </div>
+    </>
+  );
+};
+
+export const PageHeaderDemo = TemplateDemo.bind({});

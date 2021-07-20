@@ -5,22 +5,22 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { Card } from '../Card';
 import { pkg } from '../../settings';
 import { prepareProps } from '../../global/js/utils/props-helper';
 const componentName = 'ExpressiveCard';
 
-export let ExpressiveCard = (props) => {
+export let ExpressiveCard = forwardRef((props, ref) => {
   const validProps = prepareProps(props, [
     'actionIconsPosition',
     'overflowActions',
     'productive',
     'titleSize',
   ]);
-  return <Card {...validProps} />;
-};
+  return <Card ref={ref} {...validProps} />;
+});
 
 // Return a placeholder if not released and not enabled by feature flag
 ExpressiveCard = pkg.checkComponentEnabled(ExpressiveCard, componentName);

@@ -62,11 +62,10 @@ export const prepareProps = (...values) => {
 // the value being validated is not null/undefined.
 const deprecatePropInner =
   (message, validator, info) =>
-  (...args) => {
-    // args = [props, propName, componentName, location, propFullName, ...]
-    args[0][args[1]] &&
-      pconsole.warn(message(args[3], args[4] || args[1], args[2], info));
-    return validator(...args);
+  (props, propName, comp, loc, propFullName, secret) => {
+    props[propName] &&
+      pconsole.warn(message(loc, propFullName || propName, comp, info));
+    return validator(props, propName, comp, loc, propFullName, secret);
   };
 
 /**
@@ -105,6 +104,19 @@ export const deprecateProp = deprecatePropInner.bind(
 );
 
 /**
+ * A function that returns a storybook argTypes object configured to remove deprecated
+ * props from the storybook controls
+ */
+export const getDeprecatedArgTypes = (deprecatedProps) => {
+  const keys = Object.keys(deprecatedProps);
+
+  return keys.reduce(
+    (acc, cur) => ((acc[cur] = { table: { disable: true } }), acc),
+    {}
+  );
+};
+
+/**
  * Takes items as fragment, node or array
  * @param {node || array} items - which may have shape to extract
  * @returns Array of items
@@ -117,7 +129,9 @@ export const extractShapesArray = (items) => {
       items?.[0]?.type === React.Fragment ||
       items.type === React.Fragment)
   ) {
-    return unwrapIfFragment(items).map((item) => ({ ...item.props }));
+    const unwrappedItems = unwrapIfFragment(items);
+
+    return unwrappedItems.map((item) => ({ key: item.key, ...item.props }));
   }
 
   return Array.isArray(items) ? items : [];

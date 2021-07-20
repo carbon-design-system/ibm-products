@@ -21,7 +21,10 @@ import { mockHTMLElement } from '../../global/js/utils/test-helper';
 const blockClass = `${pkg.prefix}--page-header`;
 
 /* Test properties. */
+const actionBarOverflowAriaLabel = 'Show additional action bar items';
+
 const actionBarItems = [1, 2, 3, 4].map((item) => ({
+  key: `a-key-${item}`,
   renderIcon: Lightning16,
   iconDescription: `Action ${item}`,
   onClick: () => {},
@@ -40,7 +43,9 @@ const actionBarItemsNodes = (
   </>
 );
 
-const availableSpace = <span className="page-header-test--available-space" />;
+const children = <span className="page-header-test--available-space" />;
+const breadcrumbOverflowAriaLabel =
+  'Open and close additional breadcrumb item list.';
 const breadcrumbItems = (
   <>
     <BreadcrumbItem href="#">Breadcrumb 1</BreadcrumbItem>
@@ -51,16 +56,19 @@ const breadcrumbItems = (
 const classNames = ['client-class-1', 'client-class-2'];
 const pageActions = [
   {
+    key: '1',
     kind: 'secondary',
     label: 'Secondary button',
     onClick: () => {},
   },
   {
+    key: '2',
     kind: 'primary',
     label: 'Primary button',
     onClick: () => {},
   },
 ];
+const pageActionsOverflowLabel = 'Page actions...';
 
 const pageActionsDepTest = pageActions.map(({ label, ...rest }, index) => (
   <Button {...rest} key={index}>
@@ -80,7 +88,7 @@ const pageActionsDepTest2 = (
 
 const subtitle = 'Optional subtitle if necessary';
 const navigation = (
-  <Tabs data-testid="tabs">
+  <Tabs data-test-id="tabs">
     <Tab label="Tab 1" />
     <Tab label="Tab 2" />
     <Tab label="Tab 3" />
@@ -90,7 +98,7 @@ const navigation = (
 
 // supply enough tags to trigger TagSet overflow required props
 const tags = Array.from({ length: 20 }, () => ({
-  'data-testid': 'tags',
+  'data-test-id': 'tags',
   type: 'blue',
   label: 'A tag',
 }));
@@ -151,12 +159,18 @@ const testSizes = (el, property, _default) => {
 
 const testProps = {
   actionBarItems,
-  availableSpace,
-  background: true,
+  actionBarOverflowAriaLabel,
+  allTagsModalTitle: 'All tags',
+  allTagsModalSearchLabel: 'Search all tags',
+  allTagsModalSearchPlaceholderText: 'Search all tags',
+  hasBackgroundAlways: true,
+  breadcrumbOverflowAriaLabel,
   breadcrumbItems,
   className: classNames.join(' '),
   navigation,
   pageActions,
+  pageActionsOverflowLabel,
+  showAllTagsLabel: 'View all tags',
   subtitle,
   tags,
   title: titleObj,
@@ -191,7 +205,7 @@ describe('PageHeader', () => {
 
     mocks.push({
       id: 'uuidv4',
-      mock: uuidv4.mockImplementation(() => 'testid'),
+      mock: uuidv4.mockImplementation(() => 'test-id'),
     });
     window.scrollTo = jest.spyOn(window, 'scrollTo').mockImplementation();
     window.ResizeObserver = jest.fn().mockImplementation(() => ({
@@ -212,11 +226,11 @@ describe('PageHeader', () => {
   });
 
   test('renders an empty header when no props are set', () => {
-    const dataTestid = uuidv4();
-    render(<PageHeader data-testid={dataTestid} />);
+    const dataTestId = uuidv4();
+    render(<PageHeader data-test-id={dataTestId} />);
 
     // console.dir(screen.getByRole('region')); // section should be a region https://fae.disability.illinois.edu/rulesets/ROLE_5/
-    const header = screen.getByTestId(dataTestid);
+    const header = screen.getByTestId(dataTestId);
     expect(header).toHaveClass(blockClass);
 
     expect(header).toHaveClass(`${blockClass}--show-background`);
@@ -230,8 +244,6 @@ describe('PageHeader', () => {
     expect(
       document.querySelectorAll('span.page-header-test--available-space')
     ).toHaveLength(0);
-    expect(screen.queryAllByTestId('breadcrumbitem')).toHaveLength(0);
-    expect(screen.queryAllByTestId('tabs')).toHaveLength(0);
     expect(
       document.querySelectorAll(`.${blockClass}__page-actions`)
     ).toHaveLength(0);
@@ -239,7 +251,6 @@ describe('PageHeader', () => {
       0
     );
     expect(screen.queryByText(subtitle)).toBeNull();
-    expect(screen.queryAllByTestId('tags')).toHaveLength(0);
     expect(document.querySelectorAll(`.${blockClass}__title`)).toHaveLength(0);
     expect(screen.queryByText(titleObj.text)).toBeNull();
     expect(
@@ -248,11 +259,15 @@ describe('PageHeader', () => {
   });
 
   test('renders all the appropriate content when all props are set', () => {
-    const dataTestid = uuidv4();
-    render(<PageHeader {...testProps} data-testid={dataTestid} />);
+    const dataTestId = uuidv4();
+    render(
+      <PageHeader {...testProps} data-test-id={dataTestId}>
+        {children}
+      </PageHeader>
+    );
 
     // console.dir(screen.getByRole('region')); // section should be a region https://fae.disability.illinois.edu/rulesets/ROLE_5/
-    const header = screen.getByTestId(dataTestid);
+    const header = screen.getByTestId(dataTestId);
     expect(header).toHaveClass(blockClass);
 
     expect(header).toHaveClass(`${blockClass}--show-background`);
@@ -301,7 +316,12 @@ describe('PageHeader', () => {
   test('copes with actionBarItems as nodes', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
-    render(<PageHeader actionBarItems={actionBarItemsNodes} />);
+    render(
+      <PageHeader
+        actionBarItems={actionBarItemsNodes}
+        actionBarOverflowAriaLabel={actionBarOverflowAriaLabel}
+      />
+    );
 
     expect(warn).toBeCalledWith(
       'The usage of the prop `actionBarItems` of `PageHeader` has been changed and support for the old usage will soon be removed. Expects an array of objects with the following properties: iconDescription, renderIcon and onClick.'
@@ -313,7 +333,12 @@ describe('PageHeader', () => {
   test('with deprecated page actions', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
-    render(<PageHeader pageActions={pageActionsDepTest} />);
+    render(
+      <PageHeader
+        pageActions={pageActionsDepTest}
+        pageActionsOverflowLabel={pageActionsOverflowLabel}
+      />
+    );
 
     screen.getByText('Primary button', {
       selector: `.${blockClass}__page-actions .${pkg.prefix}--button-set-with-overflow__button-container:not(.${pkg.prefix}--button-set-with-overflow__button-container--hidden) .${carbon.prefix}--btn`,
@@ -329,7 +354,12 @@ describe('PageHeader', () => {
   test('with deprecated page actions in a fragment', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
-    render(<PageHeader pageActions={pageActionsDepTest2} />);
+    render(
+      <PageHeader
+        pageActions={pageActionsDepTest2}
+        pageActionsOverflowLabel={pageActionsOverflowLabel}
+      />
+    );
 
     screen.getByText('Primary button', {
       selector: `.${blockClass}__page-actions .${pkg.prefix}--button-set-with-overflow__button-container:not(.${pkg.prefix}--button-set-with-overflow__button-container--hidden) .${carbon.prefix}--btn`,
@@ -343,9 +373,9 @@ describe('PageHeader', () => {
   });
 
   it('adds additional properties to the containing node', () => {
-    const dataTestid = uuidv4();
-    render(<PageHeader data-testid={dataTestid} />);
-    screen.getByTestId(dataTestid);
+    const dataTestId = uuidv4();
+    render(<PageHeader data-test-id={dataTestId} />);
+    screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', () => {
@@ -355,15 +385,16 @@ describe('PageHeader', () => {
   });
 
   test('collapse button works', () => {
-    const dataTestid = uuidv4();
+    const dataTestId = uuidv4();
     render(
       <PageHeader
         {...testProps}
-        collapseHeaderLabel="Toggle collapse"
-        expandHeaderLabel="Toggle expand"
-        collapseHeaderToggleWanted={true}
-        data-testid={dataTestid}
-      />
+        collapseHeaderIconDescription="Toggle collapse"
+        expandHeaderIconDescription="Toggle expand"
+        hasCollapseHeaderToggle={true}
+        data-test-id={dataTestId}>
+        {children}
+      </PageHeader>
     );
 
     const collapseButton = screen.getByRole('button', {
@@ -386,8 +417,25 @@ describe('PageHeader', () => {
   });
 
   test('Navigation row renders when Tags but no Navigation', () => {
-    const { tags } = testProps;
-    render(<PageHeader {...{ tags }} />);
+    const {
+      tags,
+      allTagsModalTitle,
+      allTagsModalSearchLabel,
+      allTagsModalSearchPlaceholderText,
+      showAllTagsLabel,
+    } = testProps;
+
+    render(
+      <PageHeader
+        {...{
+          tags,
+          allTagsModalTitle,
+          allTagsModalSearchLabel,
+          allTagsModalSearchPlaceholderText,
+          showAllTagsLabel,
+        }}
+      />
+    );
 
     expect(
       screen.getAllByText('A tag', {
@@ -398,8 +446,9 @@ describe('PageHeader', () => {
   });
 
   test('Title row renders when PageActions but no Title', () => {
-    const { pageActions } = testProps;
-    render(<PageHeader {...{ pageActions }} />);
+    const { pageActions, pageActionsOverflowLabel = pageActionsOverflowLabel } =
+      testProps;
+    render(<PageHeader {...{ pageActions, pageActionsOverflowLabel }} />);
 
     expect(
       document.querySelectorAll(`.${blockClass}__page-actions`)
@@ -419,7 +468,11 @@ describe('PageHeader', () => {
 
   test('Title row renders when Title with pageActions and navigation but no subtitle or available space', () => {
     const { title } = testProps;
-    render(<PageHeader {...{ title, pageActions, navigation }} />);
+    render(
+      <PageHeader
+        {...{ title, pageActions, pageActionsOverflowLabel, navigation }}
+      />
+    );
 
     expect(
       document.querySelectorAll(
@@ -447,7 +500,11 @@ describe('PageHeader', () => {
   });
 
   test('Breadcrumb row renders when action bar items but no breadcrumb', () => {
-    render(<PageHeader {...prepareProps(testProps, 'breadcrumbItems')} />);
+    render(
+      <PageHeader {...prepareProps(testProps, 'breadcrumbItems')}>
+        {children}
+      </PageHeader>
+    );
 
     // screen.getByText(/Action/);
     const actionBarItems = document.querySelectorAll(
@@ -472,13 +529,15 @@ describe('PageHeader', () => {
     ).toHaveLength(1);
   });
 
-  test('Without background', () => {
+  test('Without hasBackgroundAlways', () => {
     const { title } = testProps;
+
     render(
       <PageHeader
         {...{
           title,
-          background: false,
+          hasBackgroundAlways: false,
+          breadcrumbOverflowAriaLabel: 'Show the breadcrumb overflow',
           breadcrumbItems,
         }}
         aria-label="Page header" // gives section role 'region'
@@ -486,5 +545,87 @@ describe('PageHeader', () => {
     );
 
     screen.getByRole('region');
+  });
+
+  test('ActionBar without overflow aria label', () => {
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    const { title } = testProps;
+    render(
+      <PageHeader
+        {...{
+          title,
+          actionBarItems,
+        }}
+        aria-label="Page header" // gives section role 'region'
+      />
+    );
+
+    expect(error).toBeCalledWith(
+      expect.stringMatching(
+        /^Warning: Failed prop type: The prop `actionBarOverflowAriaLabel` is marked as required in `PageHeader`/
+      )
+    );
+
+    jest.spyOn(console, 'error').mockRestore();
+  });
+
+  test('Breadcrumb without overflow aria label', () => {
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    const { title } = testProps;
+    render(
+      <PageHeader
+        {...{
+          title,
+          breadcrumbItems,
+        }}
+        aria-label="Page header" // gives section role 'region'
+      />
+    );
+
+    expect(error).toBeCalledWith(
+      expect.stringMatching(
+        /^Warning: Failed prop type: The prop `overflowAriaLabel` is marked as required in `BreadcrumbWithOverflow`/
+      )
+    );
+
+    jest.spyOn(console, 'error').mockRestore();
+  });
+
+  test('Works, for now, with deprecated props', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    const warnings = [
+      'The prop `actionBarOverflowLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `actionBarOverflowAriaLabel`.',
+      'The prop `availableSpace` of `PageHeader` has been deprecated and will soon be removed. Make use of children instead.',
+      'The prop `background` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `hasBackgroundAlways`',
+      'The prop `breadcrumbOverflowLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `breadcrumbOverflowAriaLabel`.',
+      'The prop `collapseHeaderLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `collapseHeaderIconDescription`.',
+      'The prop `collapseHeaderToggleWanted` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `hasCollapseHeaderToggle`',
+      'The prop `expandHeaderLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `expandHeaderIconDescription`.',
+      'The prop `preCollapseTitleRow` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `collapseTitle`.',
+      'The prop `preventBreadcrumbScroll` of `PageHeader` has been deprecated and will soon be removed. Prop renamed to `disableBreadcrumbScroll`.',
+    ];
+
+    render(
+      <PageHeader
+        actionBarOverflowLabel={testProps.actionBarOverflowAriaLabel}
+        availableSpace={children}
+        background={testProps.hasBackgroundAlways}
+        breadcrumbOverflowLabel={testProps.breadcrumbOverflowAriaLabel}
+        collapseHeaderLabel="Collapse header"
+        collapseHeaderToggleWanted={true}
+        expandHeaderLabel="Expand header"
+        preCollapseTitleRow={true}
+        preventBreadcrumbScroll={true}
+      />
+    );
+
+    for (let i = 0; i < warnings.length; i++) {
+      expect(warn).toBeCalledWith(warnings[i]);
+    }
+
+    warn.mockRestore(); // Remove mock
   });
 });

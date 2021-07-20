@@ -12,6 +12,7 @@ import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 import { TearsheetShell } from './TearsheetShell';
 const storybookPrefix = getStorybookPrefix(pkg, TearsheetShell.displayName);
+import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 
 import mdx from './TearsheetShell.mdx';
 
@@ -19,9 +20,7 @@ export default {
   title: `${storybookPrefix}/Tearsheets/${TearsheetShell.displayName}`,
   component: TearsheetShell,
   parameters: { controls: { expanded: true }, styles, docs: { page: mdx } },
-  argTypes: {
-    preventCloseOnClickOutside: { table: { disable: true } },
-  },
+  argTypes: getDeprecatedArgTypes(TearsheetShell.propTypes),
 };
 
 const closeIconDescription = 'Close the tearsheet';

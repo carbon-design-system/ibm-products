@@ -32,6 +32,7 @@ import { Copy20, Delete20, Settings20 } from '@carbon/icons-react';
 import styles from './_storybook-styles.scss';
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
+import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 import { SidePanel } from '.';
 import mdx from './SidePanel.mdx';
 const storybookPrefix = getStorybookPrefix(pkg, SidePanel.displayName);
@@ -46,6 +47,7 @@ export default {
     },
   },
   argTypes: {
+    ...getDeprecatedArgTypes(SidePanel.propTypes),
     actions: {
       control: {
         type: 'select',

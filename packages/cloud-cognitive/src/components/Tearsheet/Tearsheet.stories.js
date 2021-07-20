@@ -31,6 +31,7 @@ import {
 
 import { getStorybookPrefix } from '../../../config';
 const storybookPrefix = getStorybookPrefix(pkg, Tearsheet.displayName);
+import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 
 import styles from './_storybook-styles.scss';
 
@@ -42,6 +43,7 @@ export default {
   subcomponents: { TearsheetNarrow },
   parameters: { styles, docs: { page: mdx } },
   argTypes: {
+    ...getDeprecatedArgTypes(Tearsheet.propTypes),
     actions: {
       control: { type: 'select', labels: actionsLabels },
       options: actionsOptions,
@@ -93,7 +95,6 @@ export default {
     onClose: { control: { disable: true } },
     navigation: { control: { disable: true } },
     open: { control: { disable: true } },
-    preventCloseOnClickOutside: { table: { disable: true } },
   },
 };
 

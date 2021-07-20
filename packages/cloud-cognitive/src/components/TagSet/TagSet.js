@@ -237,7 +237,7 @@ TagSet = pkg.checkComponentEnabled(TagSet, componentName);
  * The strings shown in the showAllModal are only shown if we have more than allTagsModalSearchLThreshold
  * @returns null if no problems
  */
-const string_required_if_more_than_10_tags = isRequiredIf(
+export const string_required_if_more_than_10_tags = isRequiredIf(
   PropTypes.string,
   ({ tags }) => tags && tags.length > allTagsModalSearchThreshold
 );

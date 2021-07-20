@@ -58,6 +58,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--about-modal .exp--about-modal__legal-text,
 .exp--about-modal .exp--about-modal__copyright-text {
   margin-top: var(--cds-spacing-07, 2rem);
+  margin-bottom: 0;
   color: var(--cds-text-03, #a8a8a8);
 }
 
@@ -86,6 +87,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   line-height: var(--cds-body-short-01-line-height, 1.29);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
   padding-left: var(--cds-spacing-05, 1rem);
+  margin-top: 0;
+  margin-bottom: 0;
   color: var(--cds-inverse-01, #ffffff);
 }
 

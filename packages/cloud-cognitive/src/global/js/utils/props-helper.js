@@ -60,23 +60,13 @@ export const prepareProps = (...values) => {
 
 // A simple wrapper for a prop-types checker that issues a warning message if
 // the value being validated is not null/undefined.
-const deprecatePropInner = (message, validator, info) => {
-  const deprecatePropsValidator = (
-    props,
-    propName,
-    comp,
-    loc,
-    propFullName,
-    secret
-  ) => {
-    // args = [props, propName, componentName, location, propFullName, ...]
+const deprecatePropInner =
+  (message, validator, info) =>
+  (props, propName, comp, loc, propFullName, secret) => {
     props[propName] &&
       pconsole.warn(message(loc, propFullName || propName, comp, info));
     return validator(props, propName, comp, loc, propFullName, secret);
   };
-  deprecatePropsValidator._ccsDeprecated = true;
-  return deprecatePropsValidator;
-};
 
 /**
  * A prop-types type checker that marks a particular usage of a prop as
@@ -113,26 +103,14 @@ export const deprecateProp = deprecatePropInner.bind(
     `The ${location} \`${propName}\` of \`${componentName}\` has been deprecated and will soon be removed. ${info}`
 );
 
-// A function that returns an array of deprecated props given a component propTypes
-export const getDeprecatedProps = (propTypes) => {
-  const deprecatedProps = [];
-
-  const keys = Object.keys(propTypes);
-  for (let i = 0; i < keys.length; i++) {
-    const key = keys[i];
-    if (propTypes[key]._ccsDeprecated) {
-      deprecatedProps.push(key);
-    }
-  }
-  return deprecatedProps;
-};
-
 /**
  * A function that returns a storybook argTypes object configured to remove deprecated
  * props from the storybook controls
  */
-export const getDeprecatedArgTypes = (propTypes) => {
-  return getDeprecatedProps(propTypes).reduce(
+export const getDeprecatedArgTypes = (deprecatedProps) => {
+  const keys = Object.keys(deprecatedProps);
+
+  return keys.reduce(
     (acc, cur) => ((acc[cur] = { table: { disable: true } }), acc),
     {}
   );

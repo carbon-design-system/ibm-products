@@ -42,6 +42,59 @@ import {
   utilSetCustomCSSProps,
 } from './PageHeaderUtils';
 
+export const deprecatedProps = {
+  // DEPRECATED see actionBarOverflowAriaLabel
+  actionBarOverflowLabel: deprecateProp(
+    PropTypes.string,
+    'Property renamed to `actionBarOverflowAriaLabel`.'
+  ),
+  // DEPRECATED see children
+  availableSpace: deprecateProp(
+    PropTypes.node,
+    'Make use of children instead.'
+  ),
+  // DEPRECATED see hasBackgroundAlways
+  background: deprecateProp(
+    PropTypes.bool,
+    'Property renamed to `hasBackgroundAlways`'
+  ),
+  // DEPRECATED see breadcrumbOverflowAriaLabel
+  breadcrumbOverflowLabel: deprecateProp(
+    PropTypes.string,
+    'Property renamed to `breadcrumbOverflowAriaLabel`.'
+  ),
+  // DEPRECATED see collapseHeaderIconDescription
+  collapseHeaderLabel: deprecateProp(
+    PropTypes.string,
+    'Property renamed to `collapseHeaderIconDescription`.'
+  ),
+  // DEPRECATED see hasCollapseHeaderToggle
+  collapseHeaderToggleWanted: deprecateProp(
+    PropTypes.bool,
+    'Property renamed to `hasCollapseHeaderToggle`'
+  ),
+  // DEPRECATED see expandHeaderIconDescription
+  expandHeaderLabel: deprecateProp(
+    PropTypes.string,
+    'Property renamed to `expandHeaderIconDescription`.'
+  ),
+  // DEPRECATED see collapseTitle
+  preCollapseTitleRow: deprecateProp(
+    PropTypes.bool,
+    'Property renamed to `collapseTitle`.'
+  ),
+  // DEPRECATED see disableBreadcrumbScroll
+  preventBreadcrumbScroll: deprecateProp(
+    PropTypes.bool,
+    'Prop renamed to `disableBreadcrumbScroll`.'
+  ),
+  // DEPRECATED see title object form
+  titleIcon: deprecateProp(
+    PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    'Use `title` prop shape instead.'
+  ),
+};
+
 export let PageHeader = React.forwardRef(
   (
     {
@@ -785,11 +838,6 @@ PageHeader.propTypes = {
   actionBarOverflowAriaLabel: PropTypes.string.isRequired.if(
     ({ actionBarItems }) => actionBarItems && actionBarItems.length > 0
   ),
-  // DEPRECATED SEE actionBarOverflowAriaLabel
-  actionBarOverflowLabel: deprecateProp(
-    PropTypes.string,
-    'Property renamed to `actionBarOverflowAriaLabel`.'
-  ),
   /**
    * When tags are supplied there may not be sufficient space to display all of the tags. This results in an overflow
    * menu being shown. If in the overflow menu there is still insufficient space this label is used in a dialog showing
@@ -814,16 +862,6 @@ PageHeader.propTypes = {
    * **Note: Required if more than 10 tags**
    */
   allTagsModalTitle: string_required_if_more_than_10_tags,
-  // DEPRECATED SEE children
-  availableSpace: deprecateProp(
-    PropTypes.node,
-    'Make use of children instead.'
-  ),
-  // DEPRECATED SEE hasBackgroundAlways
-  background: deprecateProp(
-    PropTypes.bool,
-    'Property renamed to `hasBackgroundAlways`'
-  ),
   /**
    * One or more Carbon BreadcrumbItem components, passed in as React element(s).
    * If provided, these are rendered at the top before other header content.
@@ -835,11 +873,6 @@ PageHeader.propTypes = {
    */
   breadcrumbOverflowAriaLabel: PropTypes.string.isRequired.if(
     ({ breadcrumbItems }) => breadcrumbItems && breadcrumbItems.length > 0
-  ),
-  // DEPRECATED SEE breadcrumbOverflowAriaLabel
-  breadcrumbOverflowLabel: deprecateProp(
-    PropTypes.string,
-    'Property renamed to `breadcrumbOverflowAriaLabel`.'
   ),
   /**
    * A zone for placing high-level, client content above the page tabs.
@@ -867,16 +900,6 @@ PageHeader.propTypes = {
     ({ hasBackgroundAlways, hasCollapseHeaderToggle }) =>
       hasBackgroundAlways && hasCollapseHeaderToggle
   ),
-  // DEPRECATED SEE collapseHeaderIconDescription
-  collapseHeaderLabel: deprecateProp(
-    PropTypes.string,
-    'Property renamed to `collapseHeaderIconDescription`.'
-  ),
-  // DEPRECATED SEE hasCollapseHeaderToggle
-  collapseHeaderToggleWanted: deprecateProp(
-    PropTypes.bool,
-    'Property renamed to `hasCollapseHeaderToggle`'
-  ),
   /**
    * The title row typically starts below the breadcrumb row. This option
    * preCollapses it into the breadcrumb row.
@@ -894,11 +917,6 @@ PageHeader.propTypes = {
   expandHeaderIconDescription: PropTypes.string.isRequired.if(
     ({ hasBackgroundAlways, hasCollapseHeaderToggle }) =>
       hasBackgroundAlways && hasCollapseHeaderToggle
-  ),
-  // DEPRECATED SEE expandHeaderIconDescription
-  expandHeaderLabel: deprecateProp(
-    PropTypes.string,
-    'Property renamed to `expandHeaderIconDescription`.'
   ),
   /**
    * Specifies if the PageHeader should have a background always on and defaults to the preferred `true`.
@@ -960,16 +978,6 @@ PageHeader.propTypes = {
    * components rendered elsewhere.
    */
   pageHeaderOffset: PropTypes.number,
-  // DEPRECATED SEE collapseTitle
-  preCollapseTitleRow: deprecateProp(
-    PropTypes.bool,
-    'Property renamed to `collapseTitle`.'
-  ),
-  // DEPRECATED SEE disableBreadcrumbScroll
-  preventBreadcrumbScroll: deprecateProp(
-    PropTypes.bool,
-    'Prop renamed to `disableBreadcrumbScroll`.'
-  ),
   /**
    * When tags are supplied there may not be sufficient space to display all of the tags. This results in an overflow
    * menu being shown. If in the overflow menu there is still insufficient space this label is used to offer a
@@ -1014,11 +1022,7 @@ PageHeader.propTypes = {
     }),
     PropTypes.string,
   ]),
-  // DEPRECATED SEE title object form
-  titleIcon: deprecateProp(
-    PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-    'Use `title` prop shape instead.'
-  ),
+  ...deprecatedProps,
 };
 
 PageHeader.defaultProps = {

@@ -38,7 +38,7 @@ import { pkg, carbon } from '../../settings';
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 import { getStorybookPrefix } from '../../../config';
 import { ActionBarItem } from '../ActionBar';
-import { PageHeader } from '.';
+import { PageHeader, deprecatedProps } from './PageHeader';
 const storybookPrefix = getStorybookPrefix(pkg, PageHeader.displayName);
 
 import { demoTableHeaders, demoTableData } from './PageHeaderDemo.data';
@@ -58,7 +58,7 @@ export default {
   decorators: [
     (story) => <div className={`${storyClass}__viewport`}>{story()}</div>,
   ],
-  argTypes: getDeprecatedArgTypes(PageHeader.propTypes),
+  argTypes: getDeprecatedArgTypes(deprecatedProps),
 };
 
 // Test values for props.

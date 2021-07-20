@@ -60,6 +60,9 @@ export let CreateTearsheetNarrow = React.forwardRef(
         kind: 'secondary',
       },
     ];
+
+    const formTextClass = `${blockClass}__content-text`;
+
     return (
       <TearsheetNarrow
         {
@@ -77,12 +80,11 @@ export let CreateTearsheetNarrow = React.forwardRef(
         selectorPrimaryFocus={selectorPrimaryFocus}
         verticalPosition={verticalPosition}
         role="presentation">
-        <h3
-          className={`${blockClass}__form-title-text ${blockClass}__content-text`}>
+        <h3 className={cx(`${blockClass}__form-title-text`, formTextClass)}>
           {formTitle}
         </h3>
         <p
-          className={`${blockClass}__form-description-text ${blockClass}__content-text`}>
+          className={cx(`${blockClass}__form-description-text`, formTextClass)}>
           {formDescription}
         </p>
         <Form className={`${blockClass}__form`}>{children}</Form>

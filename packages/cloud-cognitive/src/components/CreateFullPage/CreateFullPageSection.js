@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
 
-import { Row, Column } from 'carbon-components-react';
+import { Row, Column, Form } from 'carbon-components-react';
 
 import { CREATE_FULL_PAGE_SECTION } from './constants';
 
@@ -17,6 +17,7 @@ export let CreateFullPageSection = forwardRef(
       className,
       hasDivider = true,
       hasForm = true,
+      id,
       title,
       subtitle,
       description,
@@ -24,23 +25,16 @@ export let CreateFullPageSection = forwardRef(
     ref
   ) => {
     return (
-      <div className={cx(blockClass, className)} ref={ref}>
-        {title && (
-          <Row>
-            <Column>
-              <div className={`${blockClass}-text-content`}>
-                <h2 className={`${blockClass}-title`}>{title}</h2>
-                {subtitle && (
-                  <h3 className={`${blockClass}-subtitle`}>{subtitle}</h3>
-                )}
-                {description && (
-                  <p className={`${blockClass}-description`}>{description}</p>
-                )}
-              </div>
-            </Column>
-          </Row>
-        )}
-        {hasForm && <div className={`${blockClass}-form`}>{children}</div>}
+      <div className={cx(blockClass, className)} ref={ref} id={id}>
+        <Row>
+          <Column>
+            {hasForm ? (
+              <Form className={`${blockClass}-form`}>{children}</Form>
+            ) : (
+              { children }
+            )}
+          </Column>
+        </Row>
         {hasDivider && <span className={`${blockClass}-divider`}></span>}
       </div>
     );
@@ -85,6 +79,11 @@ CreateFullPageSection.propTypes = {
   hasForm: PropTypes.bool,
 
   /**
+   * Sets the id of the CreateTearsheetSection outermost element
+   */
+  id: PropTypes.string.isRequired,
+
+  /**
    * Sets the subtitle text for a create full page step
    */
   subtitle: PropTypes.node,
@@ -92,7 +91,7 @@ CreateFullPageSection.propTypes = {
   /**
    * Sets the title text for a CreateFullPage step
    */
-  title: PropTypes.node,
+  title: PropTypes.node.isRequired,
 };
 
 // Default values for component props. Default values are not required for

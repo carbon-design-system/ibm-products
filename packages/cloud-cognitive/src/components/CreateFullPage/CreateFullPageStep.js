@@ -5,11 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
-import { CREATE_FULL_PAGE_STEP } from './constants.js';
+import {
+  CREATE_FULL_PAGE_STEP,
+  CREATE_FULL_PAGE_SECTION,
+} from './constants.js';
 
 const componentName = 'CreateFullPageStep';
 const blockClass = `${pkg.prefix}--create-full-page__step`;
@@ -21,34 +24,29 @@ export let CreateFullPageStep = forwardRef(
     { children, className, title, subtitle, description, hasForm = true },
     ref
   ) => {
+    const [section, setSections] = useState('');
+    const isFullPageSection = (child) => {
+      if (
+        child &&
+        child.props &&
+        child.props.type === CREATE_FULL_PAGE_SECTION
+      ) {
+        return true;
+      }
+      return false;
+    };
+
     return (
       <div className={cx(blockClass, className)} ref={ref}>
-        {title ? (
-          <>
-            <Row>
-              <Column>
-                <div className={`${blockClass}-text-content`}>
-                  <h2 className={`${blockClass}-title`}>{title}</h2>
-                  {subtitle && (
-                    <h3 className={`${blockClass}-subtitle`}>{subtitle}</h3>
-                  )}
-                  {description && (
-                    <p className={`${blockClass}-description`}>{description}</p>
-                  )}
-                </div>
-              </Column>
-            </Row>
-            {hasForm && (
-              <Row>
-                <Column>
-                  <Form className={`${blockClass}-form`}>{children}</Form>
-                </Column>
-              </Row>
+        <Row>
+          <Column>
+            {hasForm ? (
+              <Form className={`${blockClass}-form`}>{children}</Form>
+            ) : (
+              { children }
             )}
-          </>
-        ) : (
-          children
-        )}
+          </Column>
+        </Row>
       </div>
     );
   }

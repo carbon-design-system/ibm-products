@@ -24,8 +24,17 @@
     margin-left: 0;
   }
 
+  .#{$block-class} .#{$block-class}__step--hidden-step,
   .#{$block-class} .#{$block-class}__step--hidden-section {
     display: none;
+  }
+
+  .#{$block-class} .#{$block-class}__step--visible-section {
+    display: block;
+  }
+
+  .#{$block-class} .#{$block-class}__step--visible-step {
+    opacity: 1;
   }
 
   .#{$block-class} .bx--modal-close {
@@ -62,6 +71,14 @@
   .#{$block-class} .#{$block-class}__step {
     position: relative;
     max-width: 50%;
+  }
+
+  .#{$block-class} .bx--side-nav--ux {
+    top: 0;
+    overflow-x: auto;
+    border-right: 1px solid var(--cds-ui-03, #e0e0e0);
+    padding-top: 0;
+    background-color: transparent;
   }
 
   .#{$block-class} .#{$block-class}__step-text-content,
@@ -118,11 +135,13 @@
 
   .#{$block-class} .#{$block-class}__progress-indicator {
     min-height: calc(100% - #{$spacing-10});
+    overflow: auto;
   }
 
   .#{$block-class} .#{$block-class}__influencer-toggle {
     flex: 1;
     justify-content: flex-end;
+    z-index: 8001; // UI shell side nav has z-index of 8000 and the toggle needs receive the highest stacking order
   }
 
   .#{$block-class} .#{$block-class}__buttons {

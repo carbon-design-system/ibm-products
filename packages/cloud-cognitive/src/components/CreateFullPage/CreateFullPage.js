@@ -6,14 +6,13 @@
  */
 
 // Import portions of React that are needed.
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useCallback, useState, useRef } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
-import { CREATE_FULL_PAGE_STEP } from './constants';
-import uuidv4 from '../../global/js/utils/uuidv4';
+import { CREATE_FULL_PAGE_SECTION, CREATE_FULL_PAGE_STEP } from './constants';
 
 // Carbon and package components we use.
 import {
@@ -27,6 +26,11 @@ import {
   ModalBody,
   Button,
 } from 'carbon-components-react';
+import {
+  SideNav,
+  SideNavItems,
+  SideNavLink,
+} from 'carbon-components-react/lib/components/UIShell';
 import { ActionSet } from '../ActionSet';
 const blockClass = `${pkg.prefix}--create-full-page`;
 const componentName = 'CreateFullPage';
@@ -50,6 +54,14 @@ const isValidChildren =
       });
   };
 
+const usePreviousValue = (value) => {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+};
+
 export let CreateFullPage = React.forwardRef(
   (
     {
@@ -57,7 +69,7 @@ export let CreateFullPage = React.forwardRef(
       cancelButtonText,
       children,
       className,
-      hasToggle,
+      includeViewAllToggle,
       modalDangerButtonText,
       modalDescription,
       modalSecondaryButtonText,
@@ -66,20 +78,25 @@ export let CreateFullPage = React.forwardRef(
       onClose,
       onRequestSubmit,
       submitButtonText,
-      toggleAriaLabel,
-      toggleLabelText,
+      viewAllToggleLabelText,
+      viewAllToggleOffLabelText,
+      viewAllToggleOnLabelText,
       ...rest
     },
     ref
   ) => {
     const [createFullPageActions, setCreateFullPageActions] = useState([]);
+    const [shouldViewAll, setShouldViewAll] = useState(false);
     const [currentStep, setCurrentStep] = useState(1);
+    const [activeSectionIndex, setActiveSectionIndex] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const previousState = usePreviousValue({ currentStep, open });
 
     useEffect(() => {
       const onUnmount = () => {
         setIsSubmitting(false);
+        setShouldViewAll(false);
         onClose();
       };
       const handleOnRequestSubmit = async () => {
@@ -139,30 +156,38 @@ export let CreateFullPage = React.forwardRef(
         const createSteps = getFullPageSteps();
         const total = createSteps.length;
         const buttons = [];
-        if (total > 1) {
+        if (total > 1 && !shouldViewAll) {
           buttons.push({
             label: backButtonText,
             onClick: () => setCurrentStep((prev) => prev - 1),
             kind: 'secondary',
             disabled: currentStep === 1,
           });
-          buttons.push({
-            label: cancelButtonText,
-            onClick: () => {
-              setModalIsOpen(true);
-            },
-            kind: 'ghost',
-          });
-          buttons.push({
-            label: currentStep < total ? nextButtonText : submitButtonText,
-            onClick: currentStep < total ? handleNext : handleSubmit,
-            disabled: isSubmitDisabled(),
-            kind: 'primary',
-            loading: isSubmitting,
-            className: `${blockClass}__create-button`,
-          });
-          setCreateFullPageActions(buttons);
         }
+        buttons.push({
+          label: cancelButtonText,
+          onClick: () => {
+            setModalIsOpen(true);
+          },
+          kind: 'ghost',
+        });
+        buttons.push({
+          label: shouldViewAll
+            ? submitButtonText
+            : currentStep < total
+            ? nextButtonText
+            : submitButtonText,
+          onClick: shouldViewAll
+            ? handleSubmit
+            : currentStep < total
+            ? handleNext
+            : handleSubmit,
+          disabled: isSubmitDisabled(),
+          kind: 'primary',
+          loading: isSubmitting,
+          className: `${blockClass}__create-button`,
+        });
+        setCreateFullPageActions(buttons);
       }
     }, [
       getFullPageSteps,
@@ -176,6 +201,7 @@ export let CreateFullPage = React.forwardRef(
       onRequestSubmit,
       isSubmitting,
       modalIsOpen,
+      shouldViewAll,
     ]);
 
     useEffect(() => {
@@ -193,7 +219,7 @@ export let CreateFullPage = React.forwardRef(
       setCurrentStep((prev) => prev + 1);
     };
 
-    // returns an array of full page steps
+    // returns an array of tearsheet steps
     const getFullPageSteps = useCallback(() => {
       const steps = [];
       const childrenArray = Array.isArray(children) ? children : [children];
@@ -205,7 +231,7 @@ export let CreateFullPage = React.forwardRef(
       return steps;
     }, [children]);
 
-    // check if child is a full page step component
+    // check if child is a tearsheet step component
     const isFullPageStep = (child) => {
       if (child && child.props && child.props.type === CREATE_FULL_PAGE_STEP) {
         return true;
@@ -213,27 +239,157 @@ export let CreateFullPage = React.forwardRef(
       return false;
     };
 
+    // check if child is a tearsheet section component
+    const isFullPageSection = (child) => {
+      if (
+        child &&
+        child.props &&
+        child.props.type === CREATE_FULL_PAGE_SECTION
+      ) {
+        return true;
+      }
+      return false;
+    };
+
+    // renders the step progression components in the left influencer area
     const renderProgressSteps = (childrenElements) => {
       let childrenArray = Array.isArray(childrenElements)
         ? childrenElements
         : [childrenElements];
-      childrenArray = childrenArray.filter((child) => isFullPageStep(child));
+      const stepChildren = childrenArray.filter((child) =>
+        isFullPageStep(child)
+      );
+      let sectionChildElements = [];
+      stepChildren.forEach((child) => {
+        // we have received an array of children, lets check to see that each child is
+        // a CreateTearsheetSection component before adding it to sectionChildElements
+        if (shouldViewAll && child.props.children.length) {
+          child.props.children.forEach((stepChild) => {
+            if (isFullPageSection(stepChild)) {
+              sectionChildElements.push(stepChild);
+            }
+          });
+        }
+        // we have received a single child element, lets check to see that it is
+        // a CreateTearsheetSection component before adding it to sectionChildElements
+        if (
+          shouldViewAll &&
+          typeof child.props.children !== 'undefined' &&
+          !child.props.children.length
+        ) {
+          if (isFullPageSection(child.props.children)) {
+            sectionChildElements.push(child.props.children);
+          }
+        }
+      });
+      if (shouldViewAll) {
+        return (
+          <SideNav expanded isFixedNav>
+            <SideNavItems>
+              {sectionChildElements?.length &&
+                sectionChildElements.map((sectionChild, sectionIndex) => (
+                  <SideNavLink
+                    href="javascript:void(0)"
+                    key={sectionIndex}
+                    isActive={activeSectionIndex === sectionIndex}
+                    onClick={() => {
+                      setActiveSectionIndex(sectionIndex);
+                      if (sectionChild.props.id) {
+                        const scrollTarget = document.querySelector(
+                          `#${sectionChild.props.id}`
+                        );
+                        const scrollContainer = document.querySelector(
+                          `.${pkg.prefix}--tearsheet__main`
+                        );
+                        scrollContainer.scrollTo({
+                          top: scrollTarget.offsetTop,
+                          behavior: 'smooth',
+                        });
+                      } else {
+                        console.warn(
+                          `${componentName}: CreateTearsheetSection is missing a required prop of 'id'`
+                        );
+                      }
+                    }}>
+                    {sectionChild.props.title}
+                  </SideNavLink>
+                ))}
+            </SideNavItems>
+          </SideNav>
+        );
+      }
       return (
         <ProgressIndicator
           currentIndex={currentStep - 1}
           spaceEqually
           vertical
           className={`${blockClass}__progress-indicator`}>
-          {childrenArray.map((child, stepIndex) => (
-            <ProgressStep
-              label={child.props.title ? child.props.title : ''}
-              key={stepIndex}
-            />
+          {stepChildren.map((child, stepIndex) => (
+            <ProgressStep label={child.props.title} key={stepIndex} />
           ))}
         </ProgressIndicator>
       );
     };
 
+    // returns an array of focusable elements, for use in auto focusing the first input on a step
+    const getFocusableElements = (element) => {
+      return [
+        ...element.querySelectorAll(
+          'a, button, input, textarea, select, details,[tabindex]:not([tabindex="-1"])'
+        ),
+      ].filter((e) => !e.hasAttribute('disabled'));
+    };
+
+    // adds focus trap functionality
+    /* istanbul ignore next */
+    const handleBlur = ({
+      target: oldActiveNode,
+      relatedTarget: currentActiveNode,
+    }) => {
+      const visibleStepInnerContent = document.querySelector(
+        `.${pkg.prefix}--full-page__body`
+      );
+      let visibleStepStartMarker;
+      let visibleStepEndMarker;
+      if (open && visibleStepInnerContent) {
+        wrapFocus({
+          bodyNode: visibleStepInnerContent,
+          visibleStepStartMarker,
+          visibleStepEndMarker,
+          currentActiveNode,
+          oldActiveNode,
+        });
+      }
+    };
+
+    const handleViewAllToggle = (toggleState) => {
+      setShouldViewAll(toggleState);
+      setActiveSectionIndex(0);
+      // scroll to top of tearsheet page upon toggling view all option
+      if (toggleState) {
+        const createFullPageContainer = document.querySelector(
+          `.${blockClass}__body`
+        );
+        createFullPageContainer.scrollTop = 0;
+      }
+    };
+
+    const renderViewAllToggle = () => {
+      return (
+        <Toggle
+          className={`${blockClass}__influencer-toggle`}
+          toggled={shouldViewAll}
+          labelText={viewAllToggleLabelText}
+          labelA={viewAllToggleOffLabelText}
+          labelB={viewAllToggleOnLabelText}
+          onToggle={(value) => handleViewAllToggle(value)}
+          aria-label={viewAllToggleLabelText}
+          id={`${blockClass}__influencer-toggle`}
+        />
+      );
+    };
+
+    // renders all children (CreateTearsheetSteps and regular children elements)
     const renderChildren = (childrenElements) => {
       let step = 0;
       const childrenArray = Array.isArray(childrenElements)
@@ -246,30 +402,94 @@ export let CreateFullPage = React.forwardRef(
               return child;
             }
             step++;
+            return React.cloneElement(
+              child,
+              {
+                className: cx(child.props.className, {
+                  [`${blockClass}__step--hidden-step`]:
+                    !shouldViewAll && currentStep !== step,
+                  [`${blockClass}__step--visible-step`]: currentStep === step,
+                  [`${blockClass}__step--first-panel-step`]:
+                    !previousState?.open &&
+                    open &&
+                    previousState?.currentStep === 0 &&
+                    stepIndex === 0,
+                }),
+                key: `key_${stepIndex}`,
+              },
+              <>
+                <p className={`${blockClass}__step-title`}>
+                  {renderStepTitle(stepIndex)}
+                </p>
+                {renderStepChildren(child.props.children)}
+              </>
+            );
+          })}
+        </>
+      );
+    };
+
+    const renderStepChildren = (stepChildren) => {
+      const childrenArray = Array.isArray(stepChildren)
+        ? stepChildren
+        : [stepChildren];
+      return (
+        <>
+          {childrenArray.map((child, index) => {
+            if (!isFullPageSection(child)) {
+              return child;
+            }
             return React.cloneElement(child, {
               className: cx(child.props.className, {
-                [`${blockClass}__step--hidden-section`]: currentStep !== step,
-                [`${blockClass}__step--visible-section`]: currentStep === step,
+                [`${blockClass}__step--hidden-section`]:
+                  child.props.viewAllOnly && !shouldViewAll,
+                [`${blockClass}__step--visible-section`]:
+                  !child.props.viewAllOnly ||
+                  (child.props.viewAllOnly && shouldViewAll),
               }),
-              key: `key_${stepIndex}`,
+              key: `key_${index}`,
             });
           })}
         </>
       );
     };
 
+    // renders the individual step title
+    const renderStepTitle = (stepIndex) => {
+      const fullPageSteps = getFullPageSteps();
+      const stepTitle =
+        (fullPageSteps && fullPageSteps[stepIndex]?.props.title) || null;
+      return stepTitle;
+    };
+
+    // set initial focus when the step changes, if there is not an input to focus
+    // the next/create button receives focus
+    useEffect(() => {
+      if (previousState?.currentStep !== currentStep && currentStep > 0) {
+        const visibleStepInnerContent = document.querySelector(
+          `.${blockClass}__step.${blockClass}__step--visible-step`
+        );
+        const fullPageSteps = getFullPageSteps();
+        const focusableStepElements =
+          fullPageSteps &&
+          fullPageSteps.length &&
+          getFocusableElements(visibleStepInnerContent);
+        if (focusableStepElements && focusableStepElements.length) {
+          focusableStepElements[0].focus();
+        } else {
+          const nextButton = document.querySelector(
+            `.${blockClass}__create-button`
+          );
+          nextButton?.focus();
+        }
+      }
+    }, [currentStep, getFullPageSteps, previousState]);
+
     return (
       <div {...rest} ref={ref} className={cx(blockClass, className)}>
         <div className={`${blockClass}__influencer`}>
           {renderProgressSteps(children)}
-          {hasToggle && (
-            <Toggle
-              className={`${blockClass}__influencer-toggle`}
-              aria-label={toggleAriaLabel}
-              id={`toggle-${uuidv4()}`}
-              labelText={toggleLabelText}
-            />
-          )}
+          {includeViewAllToggle && renderViewAllToggle()}
         </div>
         <div className={`${blockClass}__body`}>
           <div className={`${blockClass}__main`}>
@@ -341,7 +561,7 @@ CreateFullPage.propTypes = {
   /**
    * An optional prop that provides a toggle element in the left side influencer panel
    */
-  hasToggle: PropTypes.bool,
+  includeViewAllToggle: PropTypes.bool,
 
   /**
    * The primary 'danger' button text in the modal
@@ -388,15 +608,20 @@ CreateFullPage.propTypes = {
   /**
    * The main title of the full page, displayed in the header area.
    */
-  // title: isTitleRequired(),
+  title: PropTypes.node,
 
   /**
-   * The aria label applied to toggle element for accessibility purposes
+   * Sets the label text for the view all toggle component
    */
-  toggleAriaLabel: PropTypes.string,
+  viewAllToggleLabelText: PropTypes.string,
 
   /**
-   * The text that will appear above the toggle element
+   * Sets the label text for the view all toggle `off` text
    */
-  toggleLabelText: PropTypes.string,
+  viewAllToggleOffLabelText: PropTypes.string,
+
+  /**
+   * Sets the label text for the view all toggle `on` text
+   */
+  viewAllToggleOnLabelText: PropTypes.string,
 };

@@ -39,7 +39,7 @@ const defaultFullPageProps = {
   nextButtonText: 'Next',
   backButtonText: 'Back',
   cancelButtonText: 'Cancel',
-  submitButtonText: 'Submit',
+  submitButtonText: 'Create',
   modalTitle: 'Are you sure you want to cancel?',
   modalDescription:
     "If you cancel, the information you have entered won't be saved.",
@@ -110,47 +110,50 @@ const TemplateWithSections = ({ ...args }) => {
   return (
     <CreateFullPage {...args}>
       <CreateFullPageStep {...defaultStepProps}>
-        <TextInput
-          id="test1"
-          invalidText="A valid value is required"
-          labelText="Topic name"
-          placeholder="Enter topic name"
-        />
-      </CreateFullPageStep>
-      <CreateFullPageStep {...defaultStepProps}>
-        <CreateFullPageSection>
+        <CreateFullPageSection hasDivider={false}>
           <TextInput
-            id="test4"
+            id="test1"
             invalidText="A valid value is required"
             labelText="Topic name"
             placeholder="Enter topic name"
           />
-          <NumberInput
-            id="tj-input-3"
-            invalidText="Number is not valid"
-            label="Number input label"
-            max={100}
-            min={0}
-            step={10}
-            value={50}
-          />
-          <NumberInput
-            id="tj-input-2"
-            invalidText="Number is not valid"
-            label="Number input label"
-            max={100}
-            min={0}
-            step={10}
-            value={50}
-          />
-          <TextInput
-            id="test7"
-            invalidText="A valid value is required"
-            labelText="Minimum in-sync replicas"
-            placeholder="Enter topic name"
-          />
         </CreateFullPageSection>
+      </CreateFullPageStep>
+      <CreateFullPageStep
+        title="Core configuration"
+        description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
+        <TextInput
+          id="test4"
+          invalidText="A valid value is required"
+          labelText="Topic name"
+          placeholder="Enter topic name"
+        />
+        <NumberInput
+          id="tj-input-3"
+          invalidText="Number is not valid"
+          label="Number input label"
+          max={100}
+          min={0}
+          step={10}
+          value={50}
+        />
+        <NumberInput
+          id="tj-input-2"
+          invalidText="Number is not valid"
+          label="Number input label"
+          max={100}
+          min={0}
+          step={10}
+          value={50}
+        />
+        <TextInput
+          id="test7"
+          invalidText="A valid value is required"
+          labelText="Minimum in-sync replicas"
+          placeholder="Enter topic name"
+        />
         <CreateFullPageSection
+          id="2"
           title="Configuration 2"
           description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
           <TextInput
@@ -185,6 +188,134 @@ const TemplateWithSections = ({ ...args }) => {
           />
         </CreateFullPageSection>
         <CreateFullPageSection
+          id="3"
+          hasDivider={false}
+          title="Configuration 3"
+          description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
+          <TextInput
+            id="test4"
+            invalidText="A valid value is required"
+            labelText="Topic name"
+            placeholder="Enter topic name"
+          />
+          <NumberInput
+            id="tj-input-3"
+            invalidText="Number is not valid"
+            label="Number input label"
+            max={100}
+            min={0}
+            step={10}
+            value={50}
+          />
+          <NumberInput
+            id="tj-input-2"
+            invalidText="Number is not valid"
+            label="Number input label"
+            max={100}
+            min={0}
+            step={10}
+            value={50}
+          />
+          <TextInput
+            id="test7"
+            invalidText="A valid value is required"
+            labelText="Minimum in-sync replicas"
+            placeholder="Enter topic name"
+          />
+        </CreateFullPageSection>
+      </CreateFullPageStep>
+    </CreateFullPage>
+  );
+};
+
+const TemplateWithToggle = ({ ...args }) => {
+  return (
+    <CreateFullPage {...args}>
+      <CreateFullPageStep title="Partition">
+        <CreateFullPageSection
+          title="Partition"
+          description="It will also be used by your producers and consumers as part of the connection information, so make something easy to recognize.">
+          <TextInput
+            id="test1"
+            invalidText="A valid value is required"
+            labelText="Topic name"
+            placeholder="Enter topic name"
+          />
+        </CreateFullPageSection>
+      </CreateFullPageStep>
+      <CreateFullPageStep title="Core configuration">
+        <CreateFullPageSection
+          id="1"
+          title="Core Configuration"
+          description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
+          <TextInput
+            id="test4"
+            invalidText="A valid value is required"
+            labelText="Topic name"
+            placeholder="Enter topic name"
+          />
+          <NumberInput
+            id="tj-input-3"
+            invalidText="Number is not valid"
+            label="Number input label"
+            max={100}
+            min={0}
+            step={10}
+            value={50}
+          />
+          <NumberInput
+            id="tj-input-2"
+            invalidText="Number is not valid"
+            label="Number input label"
+            max={100}
+            min={0}
+            step={10}
+            value={50}
+          />
+          <TextInput
+            id="test7"
+            invalidText="A valid value is required"
+            labelText="Minimum in-sync replicas"
+            placeholder="Enter topic name"
+          />
+        </CreateFullPageSection>
+        <CreateFullPageSection
+          id="2"
+          title="Configuration 2"
+          description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
+          <TextInput
+            id="test4"
+            invalidText="A valid value is required"
+            labelText="Topic name"
+            placeholder="Enter topic name"
+          />
+          <NumberInput
+            id="tj-input-3"
+            invalidText="Number is not valid"
+            label="Number input label"
+            max={100}
+            min={0}
+            step={10}
+            value={50}
+          />
+          <NumberInput
+            id="tj-input-2"
+            invalidText="Number is not valid"
+            label="Number input label"
+            max={100}
+            min={0}
+            step={10}
+            value={50}
+          />
+          <TextInput
+            id="test7"
+            invalidText="A valid value is required"
+            labelText="Minimum in-sync replicas"
+            placeholder="Enter topic name"
+          />
+        </CreateFullPageSection>
+        <CreateFullPageSection
+          id="3"
           hasDivider={false}
           title="Configuration 3"
           description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
@@ -234,10 +365,11 @@ createFullPageWithSections.args = {
   ...defaultFullPageProps,
 };
 
-export const createFullPageWithToggle = Template.bind({});
+export const createFullPageWithToggle = TemplateWithToggle.bind({});
 createFullPageWithToggle.args = {
   ...defaultFullPageProps,
-  hasToggle: true,
-  toggleAriaLabel: 'toggle button',
-  toggleLabelText: 'Show all available options',
+  includeViewAllToggle: true,
+  viewAllToggleLabelText: 'Show all available options',
+  viewAllToggleOffLabelText: 'Off',
+  viewAllToggleOnLabelText: 'On',
 };

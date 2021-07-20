@@ -17,16 +17,31 @@ import {
   Row,
   Tab,
   Tabs,
+  Table,
+  TableHead,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableCell,
 } from 'carbon-components-react';
 import { CheckmarkFilled16 } from '@carbon/icons-react';
-import { Lightning16, Bee24 } from '@carbon/icons-react';
+import {
+  Lightning16,
+  Bee24,
+  Printer16,
+  Security24,
+  Settings16,
+  VolumeMute16,
+} from '@carbon/icons-react';
 
 import { pkg, carbon } from '../../settings';
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 import { getStorybookPrefix } from '../../../config';
 import { ActionBarItem } from '../ActionBar';
-import { PageHeader } from '.';
+import { PageHeader, deprecatedProps } from './PageHeader';
 const storybookPrefix = getStorybookPrefix(pkg, PageHeader.displayName);
+
+import { demoTableHeaders, demoTableData } from './PageHeaderDemo.data';
 
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import mdx from './PageHeader.mdx';
@@ -43,7 +58,7 @@ export default {
   decorators: [
     (story) => <div className={`${storyClass}__viewport`}>{story()}</div>,
   ],
-  argTypes: getDeprecatedArgTypes(PageHeader.propTypes),
+  argTypes: getDeprecatedArgTypes(deprecatedProps),
 };
 
 // Test values for props.
@@ -419,7 +434,6 @@ AllAttributesSetKeepsBreadcrumbTabs.args = {
   actionBarItems,
   actionBarOverflowAriaLabel,
   title,
-  titleIcon: Bee24,
   pageActions,
   pageActionsOverflowLabel,
   subtitle,
@@ -437,7 +451,6 @@ AllAttributesSetPreCollapseTitle.args = {
   actionBarItems,
   actionBarOverflowAriaLabel,
   title,
-  titleIcon: Bee24,
   pageActions,
   pageActionsOverflowLabel,
   subtitle,
@@ -450,6 +463,7 @@ export const LongValuesManyItems = Template.bind({});
 LongValuesManyItems.args = {
   hasBackgroundAlways: true,
   breadcrumbItems: manyBreadcrumbItems,
+  breadcrumbOverflowAriaLabel,
   actionBarItems: manyActionBarItems,
   actionBarOverflowAriaLabel,
   title: longTitle,
@@ -459,6 +473,10 @@ LongValuesManyItems.args = {
   children: summaryDetails,
   navigation: longTabBar,
   tags: manyTags,
+  allTagsModalTitle: 'All tags',
+  allTagsModalSearchLabel: 'Search all tags',
+  allTagsModalSearchPlaceholderText: 'Search all tags',
+  showAllTagsLabel: 'View all tags',
 };
 
 const includeTheseArgs = (args) => {
@@ -496,6 +514,7 @@ AllAttributesWithSwitches.args = {
   hasBackgroundAlways: true,
   breadcrumbItems,
   breadcrumbItemsSwitchedArg: true,
+  breadcrumbOverflowAriaLabel,
   disableBreadcrumbScroll: false,
   navigation: tabBar,
   navigationSwitchedArg: true,
@@ -509,8 +528,6 @@ AllAttributesWithSwitches.args = {
   tagsSwitchedArg: true,
   title,
   titleSwitchedArg: true,
-  titleIcon: Bee24,
-  titleIconSwitchedArg: true,
 };
 
 const TemplatePageHeaderWithCarbonHeader = (args) => {
@@ -543,6 +560,9 @@ const TemplatePageHeaderWithCarbonHeader = (args) => {
   );
 };
 
+/**
+ * Demo template using more realistic sample data from PageHeaderDemo.data.js
+ */
 export const PageHeaderWithCarbonHeader =
   TemplatePageHeaderWithCarbonHeader.bind({});
 PageHeaderWithCarbonHeader.args = {
@@ -554,6 +574,7 @@ PageHeaderWithCarbonHeader.args = {
   hasBackgroundAlways: true,
   breadcrumbItems,
   breadcrumbItemsSwitchedArg: true,
+  breadcrumbOverflowAriaLabel,
   disableBreadcrumbScroll: false,
   navigation: tabBar,
   navigationSwitchedArg: true,
@@ -567,6 +588,120 @@ PageHeaderWithCarbonHeader.args = {
   tagsSwitchedArg: true,
   title,
   titleSwitchedArg: true,
-  titleIcon: Bee24,
-  titleIconSwitchedArg: true,
 };
+
+const TemplateDemo = () => {
+  return (
+    <>
+      <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
+      <div className={`${storyClass}__app`}>
+        <Header aria-label="IBM Platform Name">
+          <HeaderName href="#" prefix="IBM">
+            Cloud Cognitive application
+          </HeaderName>
+        </Header>
+        <div
+          className={`${storyClass}__content-container`}
+          style={{
+            // stylelint-disable-next-line carbon/layout-token-use
+            marginTop: '48px',
+          }}>
+          <PageHeader
+            breadcrumbOverflowAriaLabel="Open and close additional breadcrumb item list."
+            breadcrumbItems={
+              <>
+                <BreadcrumbItem href="../../../homepage">
+                  Homepage
+                </BreadcrumbItem>
+                <BreadcrumbItem href="../../Reports">Reports</BreadcrumbItem>
+                <BreadcrumbItem href="../June2021">June 2021</BreadcrumbItem>
+              </>
+            }
+            actionBarItems={[
+              { key: '1', renderIcon: Printer16, iconDescription: `Print` },
+              { key: '2', renderIcon: Settings16, iconDescription: `Settings` },
+              { key: '3', renderIcon: VolumeMute16, iconDescription: `Mute` },
+            ]}
+            actionBarOverflowAriaLabel="Show more action bar items"
+            title={{
+              text: 'Authentication activity',
+              loading: false,
+              icon: Security24,
+            }}
+            disableBreadcrumbScroll
+            pageHeaderOffset={48} // 48px is the size of the global header. A more elegant way of passing this could be found.
+            pageActions={[
+              {
+                key: 'acknowledge',
+                kind: 'secondary',
+                label: 'Acknowledge',
+                onClick: () => {},
+              },
+              {
+                key: 'escalate',
+                kind: 'primary',
+                label: 'Escalate',
+                onClick: () => {},
+              },
+            ]}
+            pageActionsOverflowLabel="Page actions..."
+            subtitle="This report details the monthly authentication failures"
+            navigation={
+              <Tabs>
+                <Tab label="Summary" />
+                <Tab label="Region 1" />
+                <Tab label="Region 2" />
+                <Tab label="Region 3" />
+              </Tabs>
+            }
+            tags={[
+              {
+                type: 'cyan',
+                label: 'Not urgent',
+              },
+              {
+                type: 'red',
+                label: 'Security',
+              },
+            ]}>
+            <p>Severity 1: 0</p>
+            <p>Severity 1: 814</p>
+            <p>Severity 3: 3,108</p>
+          </PageHeader>
+          {
+            <Grid className={`${storyClass}__dummy-content`} narrow={true}>
+              <Row>
+                <Column
+                  sm={4}
+                  md={8}
+                  lg={16}
+                  className={`${storyClass}__dummy-content-block`}>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        {demoTableHeaders.map((header) => (
+                          <TableHeader key={header}>{header}</TableHeader>
+                        ))}
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {demoTableData.map((row) => (
+                        <TableRow key={row.Index}>
+                          {Object.keys(row).map((key) => {
+                            return <TableCell key={key}>{row[key]}</TableCell>;
+                          })}
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>{' '}
+                </Column>
+              </Row>
+            </Grid>
+          }
+        </div>
+      </div>
+    </>
+  );
+};
+
+export const PageHeaderDemo = TemplateDemo.bind({});

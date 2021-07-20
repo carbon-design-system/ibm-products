@@ -25,7 +25,7 @@ import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 
-import { CreateSidePanel } from '.';
+import { CreateSidePanel, deprecatedProps } from './CreateSidePanel';
 import mdx from './CreateSidePanel.mdx';
 
 import styles from './_storybook-styles.scss';
@@ -37,7 +37,7 @@ const blockClass = `${pkg.prefix}--create-side-panel`;
 export default {
   title: `${storybookPrefix}/${CreateSidePanel.displayName}`,
   component: CreateSidePanel,
-  argTypes: getDeprecatedArgTypes(CreateSidePanel.propTypes),
+  argTypes: getDeprecatedArgTypes(deprecatedProps),
   parameters: {
     styles,
     docs: {

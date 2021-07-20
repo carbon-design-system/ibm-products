@@ -22,7 +22,8 @@ import {
   TextInput,
 } from 'carbon-components-react';
 
-import { Tearsheet, TearsheetNarrow } from '.';
+import { Tearsheet, deprecatedProps } from './Tearsheet';
+import { TearsheetNarrow } from '.';
 import {
   actionsOptions,
   actionsLabels,
@@ -43,7 +44,7 @@ export default {
   subcomponents: { TearsheetNarrow },
   parameters: { styles, docs: { page: mdx } },
   argTypes: {
-    ...getDeprecatedArgTypes(Tearsheet.propTypes),
+    ...getDeprecatedArgTypes(deprecatedProps),
     actions: {
       control: { type: 'select', labels: actionsLabels },
       options: actionsOptions,

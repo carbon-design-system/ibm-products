@@ -13,7 +13,9 @@ import { pkg } from '../../settings';
 
 import { Button, Form, FormGroup, TextInput } from 'carbon-components-react';
 
-import { Tearsheet, TearsheetNarrow } from '.';
+import { Tearsheet } from '.';
+import { TearsheetNarrow, deprecatedProps } from '.';
+
 import {
   actionsOptions,
   actionsLabels,
@@ -34,7 +36,7 @@ export default {
   subcomponents: { Tearsheet },
   parameters: { styles, docs: { page: mdx } },
   argTypes: {
-    ...getDeprecatedArgTypes(TearsheetNarrow.propTypes),
+    ...getDeprecatedArgTypes(deprecatedProps),
     actions: {
       control: { type: 'select', labels: actionsLabels },
       options: actionsOptions,

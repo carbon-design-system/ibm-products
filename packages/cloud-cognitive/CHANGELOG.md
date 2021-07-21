@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.57.3...@carbon/ibm-cloud-cognitive@0.57.4) (2021-07-21)
+
+
+### Bug Fixes
+
+* remove deprecated props from stories ([#1033](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1033)) ([89bc2a3](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/89bc2a3a4e4e7befe69bbe0eced3a31c005a61eb))
+
+
+
+
+
 ## [0.57.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.57.2...@carbon/ibm-cloud-cognitive@0.57.3) (2021-07-21)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

@@ -220,6 +220,21 @@ export let ActionBar = React.forwardRef(
   }
 );
 
+export const deprecatedProps = {
+  /**
+   * **Deprecated**
+   *
+   * children of the action bar (action bar items)
+   */
+  children: deprecateProp(
+    PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.element),
+      PropTypes.element,
+    ]),
+    'See documentation on the `actions` prop.'
+  ),
+};
+
 ActionBar.displayName = componentName;
 ActionBar.propTypes = {
   /**
@@ -255,16 +270,6 @@ ActionBar.propTypes = {
       onClick: PropTypes.func,
     })
   ),
-  /**
-   * children of the action bar (action bar items)
-   */
-  children: deprecateProp(
-    PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.element),
-      PropTypes.element,
-    ]),
-    'See documentation on the `actions` prop.'
-  ),
   // expects action bar item as array or in fragment,
   /**
    * className
@@ -286,6 +291,7 @@ ActionBar.propTypes = {
    * align tags to right of available space
    */
   rightAlign: PropTypes.bool,
+  ...deprecatedProps,
 };
 
 ActionBar.defaultProps = {

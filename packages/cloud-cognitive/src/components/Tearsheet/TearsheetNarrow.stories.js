@@ -13,7 +13,9 @@ import { pkg } from '../../settings';
 
 import { Button, Form, FormGroup, TextInput } from 'carbon-components-react';
 
-import { Tearsheet, TearsheetNarrow } from '.';
+import { Tearsheet } from '.';
+import { TearsheetNarrow, deprecatedProps } from './TearsheetNarrow';
+
 import {
   actionsOptions,
   actionsLabels,
@@ -22,6 +24,7 @@ import {
 
 import { getStorybookPrefix } from '../../../config';
 const storybookPrefix = getStorybookPrefix(pkg, TearsheetNarrow.displayName);
+import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 
 import styles from './_storybook-styles.scss';
 
@@ -33,6 +36,7 @@ export default {
   subcomponents: { Tearsheet },
   parameters: { styles, docs: { page: mdx } },
   argTypes: {
+    ...getDeprecatedArgTypes(deprecatedProps),
     actions: {
       control: { type: 'select', labels: actionsLabels },
       options: actionsOptions,
@@ -51,7 +55,6 @@ export default {
     title: { control: { type: 'text' } },
     onClose: { control: { disable: true } },
     open: { control: { disable: true } },
-    preventCloseOnClickOutside: { table: { disable: true } },
   },
 };
 

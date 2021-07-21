@@ -14,7 +14,7 @@ import { pkg } from '../../settings';
 import { Button, Form, FormGroup, TextInput } from 'carbon-components-react';
 
 import { Tearsheet } from '.';
-import { TearsheetNarrow, deprecatedProps } from '.';
+import { TearsheetNarrow, deprecatedProps } from './TearsheetNarrow';
 
 import {
   actionsOptions,

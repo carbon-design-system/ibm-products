@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2020
+// Copyright IBM Corp. 2020, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -139,7 +139,7 @@ export let PageHeader = React.forwardRef(
     // handle deprecated props - START
     actionBarOverflowAriaLabel ??= deprecated_actionBarOverflowLabel;
     breadcrumbOverflowAriaLabel ??= deprecated_breadcrumbOverflowLabel;
-    children ?? deprecated_availableSpace;
+    children ??= deprecated_availableSpace;
     collapseHeaderIconDescription ??= deprecated_collapseHeaderLabel;
     expandHeaderIconDescription ??= deprecated_expandHeaderLabel;
     hasBackgroundAlways ??= deprecated_background;

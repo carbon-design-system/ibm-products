@@ -12,7 +12,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
-import { allPropTypes } from '../../global/js/utils/props-helper';
+import '../../global/js/utils/props-helper';
 
 // Carbon and package components we use.
 import {
@@ -127,16 +127,6 @@ UserProfileImage = pkg.checkComponentEnabled(UserProfileImage, componentName);
 
 UserProfileImage.displayName = componentName;
 
-UserProfileImage.validateImageDescription =
-  () =>
-  ({ image, imageDescription }) => {
-    if (image && !imageDescription) {
-      throw new Error(
-        `${componentName}: imageDescription is missing, this is required when using the image prop`
-      );
-    }
-  };
-
 UserProfileImage.propTypes = {
   /**
    * The background color passed should match one of the background colors in the library documentation:
@@ -156,37 +146,42 @@ UserProfileImage.propTypes = {
     'light-teal',
     'dark-teal',
   ]),
+
   /**
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
+
   /**
    * When passing the image prop, supply a full path to the image to be displayed.
    */
   image: PropTypes.string,
+
   /**
    * When passing the image prop use the imageDescription prop to describe the image for screen reader.
    */
-  imageDescription: allPropTypes([
-    UserProfileImage.validateImageDescription(),
-    PropTypes.string,
-  ]),
+  imageDescription: PropTypes.string.isRequired.if(({ image }) => image),
+
   /**
    * When passing the initials prop, either send the initials to be used or the user's display name. The first two capital letters of the display name will be used as the initials.
    */
   initials: PropTypes.string,
+
   /**
    * When passing the kind prop, use either "user" or "group". The values match up to the Carbon Library icons.
    */
   kind: PropTypes.oneOf(['user', 'group']),
+
   /**
    * Set the size of the avatar circle
    */
   size: PropTypes.oneOf(['xlg', 'lg', 'md']).isRequired,
+
   /**
    * Set theme in which the component will be rendered
    */
   theme: PropTypes.oneOf(['light', 'dark']).isRequired,
+
   /**
    * Pass in the display name to have it shown on hover
    */

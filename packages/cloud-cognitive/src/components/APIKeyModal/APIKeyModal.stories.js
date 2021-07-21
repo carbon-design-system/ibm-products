@@ -55,8 +55,8 @@ const defaultProps = {
       key, you will have to reset it.
     </p>
   ),
-  createSuccessTitle: 'API key successully created',
-  editSuccessTitle: 'API key successully saved',
+  createSuccessTitle: 'API key successfully created',
+  editSuccessTitle: 'API key successfully saved',
   loadingMessage: 'Generating...',
 };
 
@@ -342,7 +342,7 @@ Create.args = {
   createTitle: 'Generate an API key',
   body: '(Optional description text) To connect securely to [product name], your application or tool needs an API key with permission to access resources such as [product resource name].',
   nameHelperText:
-    'Providing the application name will help you idenfity your API key later.',
+    'Providing the application name will help you identify your API key later.',
   nameLabel: 'Name your application',
   namePlaceholder: 'Application name',
   nameRequired: true,
@@ -357,7 +357,7 @@ CreateWithError.args = {
   createTitle: 'Generate an API key',
   body: '(Optional description text) To connect securely to [product name], your application or tool needs an API key with permission to access resources such as [product resource name].',
   nameHelperText:
-    'Providing the application name will help you idenfity your API key later.',
+    'Providing the application name will help you identify your API key later.',
   nameLabel: 'Name your application',
   namePlaceholder: 'Application name',
   nameRequired: true,
@@ -376,7 +376,7 @@ export const CustomCreate = MultiStepTemplate.bind({});
 CustomCreate.args = {
   ...defaultProps,
   createButtonText: 'Generate',
-  modalLabel: 'Genreate API key',
+  modalLabel: 'Generate API key',
   nextStepButtonText: 'Next',
   previousStepButtonText: 'Previous',
   downloadFileName: 'apikey',
@@ -395,7 +395,7 @@ Edit.args = {
   createTitle: 'Save an API key',
   body: '(Optional description text) To connect securely to [product name], your application or tool needs an API key with permission to access resources such as [product resource name].',
   nameHelperText:
-    'Providing the application name will help you idenfity your API key later.',
+    'Providing the application name will help you identify your API key later.',
   nameLabel: 'Name your application',
   namePlaceholder: 'Application name',
   nameRequired: true,
@@ -413,7 +413,7 @@ EditWithError.args = {
   createTitle: 'Save an API key',
   body: '(Optional description text) To connect securely to [product name], your application or tool needs an API key with permission to access resources such as [product resource name].',
   nameHelperText:
-    'Providing the application name will help you idenfity your API key later.',
+    'Providing the application name will help you identify your API key later.',
   nameLabel: 'Name your application',
   namePlaceholder: 'Application name',
   nameRequired: true,
@@ -431,7 +431,7 @@ export const CustomEdit = MultiStepTemplate.bind({});
 CustomEdit.args = {
   ...defaultProps,
   createButtonText: 'Generate',
-  modalLabel: 'Genreate API key',
+  modalLabel: 'Generate API key',
   nextStepButtonText: 'Next',
   previousStepButtonText: 'Previous',
   downloadFileName: 'apikey',

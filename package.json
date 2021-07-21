@@ -57,15 +57,15 @@
     "@commitlint/config-conventional": "^12.1.4",
     "@testing-library/dom": "^8.1.0",
     "@testing-library/react": "^12.0.0",
-    "@testing-library/user-event": "^13.1.9",
+    "@testing-library/user-event": "^13.2.0",
     "cspell": "^5.6.6",
-    "eslint": "^7.30.0",
+    "eslint": "^7.31.0",
     "eslint-config-carbon": "^2.7.0",
     "husky": "^4.3.6",
     "jest": "^27.0.6",
     "lerna": "^4.0.0",
     "lint-staged": "^11.0.1",
-    "npm-check-updates": "^11.8.2",
+    "npm-check-updates": "^11.8.3",
     "npm-run-all": "^4.1.5",
     "npm-upgrade": "^3.0.0",
     "prettier": "^2.3.2",
@@ -76,7 +76,7 @@
     "stylelint": "^13.13.1",
     "stylelint-config-carbon": "^1.7.0",
     "stylelint-plugin-carbon-tokens": "^0.11.1",
-    "webpack": "^5.44.0"
+    "webpack": "^5.45.1"
   },
   "eslintConfig": {
     "parser": "babel-eslint",

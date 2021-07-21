@@ -59,7 +59,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--about-modal .exp--about-modal__copyright-text {
   margin-top: var(--cds-spacing-07, 2rem);
   margin-bottom: 0;
-  color: var(--cds-text-03, #a8a8a8);
+  color: var(--cds-text-02, #525252);
 }
 
 .exp--about-modal .exp--about-modal__copyright-text {

@@ -11,9 +11,9 @@
 @import '../../global/styles/project-settings';
 
 // Imports of Carbon settings and component styles and other
-// related component styles used by ExampleComponent.
+// related component styles used by `AboutModal`.
 @import '@carbon/themes/scss/themes';
-@import 'carbon-components/scss/globals/scss/_vars.scss';
+@import 'carbon-components/scss/globals/scss/vars';
 @import 'carbon-components/scss/components/link/link';
 @import 'carbon-components/scss/components/modal/modal';
 @import 'carbon-components/scss/components/tabs/tabs';
@@ -79,6 +79,7 @@
   .#{$block-class} .#{$block-class}__legal-text,
   .#{$block-class} .#{$block-class}__copyright-text {
     margin-top: $spacing-07;
+    margin-bottom: 0;
     color: $text-03;
   }
 
@@ -105,6 +106,8 @@
     @include carbon--type-style('body-short-01');
 
     padding-left: $spacing-05;
+    margin-top: 0;
+    margin-bottom: 0;
     color: $inverse-01;
   }
 

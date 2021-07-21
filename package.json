@@ -25,16 +25,20 @@
     "clean:files": "rimraf coverage node_modules results",
     "copy-common-files": "sh ./scripts/copy-common-files.sh",
     "format": "run-s 'lint:es --fix' format:prettier",
-    "format:prettier": "prettier '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd,coverage}/**' '!README.md' --write",
+    "format:prettier": "yarn format:prettier:files '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd,coverage}/**' '!README.md'",
+    "format:prettier:files": "prettier --write",
     "generate": "lerna run generate --loglevel success --scope \"@carbon/ibm-cloud-cognitive\" --",
-    "lint": "run-p lint:*",
-    "lint:es": "eslint 'packages/*/src/**/*.js'",
-    "lint:style": "stylelint 'packages/*/src/**/*.scss' --report-needless-disables --report-invalid-scope-disables",
+    "lint": "run-p lint:* spellcheck",
+    "lint:es": "yarn lint:es:files 'packages/*/src/**/*.js'",
+    "lint:es:files": "eslint",
+    "lint:style": "yarn lint:style:files 'packages/*/src/**/*.scss'",
+    "lint:style:files": "stylelint --report-needless-disables --report-invalid-scope-disables",
     "run-all": "lerna run --stream --prefix --loglevel success",
     "test": "run-s test:all 'test:jest {@}' --",
     "test:all": "yarn run-all --no-sort test",
     "test:jest": "jest",
-    "spellcheck": "cspell lint --relative --no-progress --show-context '**/*'",
+    "spellcheck": "yarn spellcheck:files '**/*'",
+    "spellcheck:files": "cspell lint --relative --no-progress --show-context --no-must-find-files",
     "storybook": "run-s storybook:build:dependencies storybook:start",
     "storybook:build": "run-s storybook:build:*",
     "storybook:build:dependencies": "yarn run-all --include-dependencies --scope \"@carbon/storybook-addon-theme\" --scope \"@carbon/ibm-cloud-cognitive\" build",
@@ -130,8 +134,9 @@
     }
   },
   "lint-staged": {
-    "**/*.{js,md,mdx,scss}": "yarn format:prettier",
-    "**/*.js": "yarn lint:es",
-    "**/*.scss": "yarn lint:style"
+    "**/*.{js,md,mdx,scss}": "yarn format:prettier:files",
+    "**/*.js": "yarn lint:es:files",
+    "**/*.scss": "yarn lint:style:files",
+    "**/*": "yarn spellcheck:files"
   }
 }

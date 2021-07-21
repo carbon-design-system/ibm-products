@@ -346,9 +346,9 @@ export let SidePanel = React.forwardRef(
         const pageContentElement = document.querySelector(
           selectorPageContent || pageContentSelector
         );
-        if (placement && placement === 'right') {
+        if (placement && placement === 'right' && pageContentElement) {
           pageContentElement.style.marginRight = 0;
-        } else {
+        } else if (pageContentElement) {
           pageContentElement.style.marginLeft = 0;
         }
       }
@@ -360,11 +360,11 @@ export let SidePanel = React.forwardRef(
         const pageContentElement = document.querySelector(
           selectorPageContent || pageContentSelector
         );
-        if (placement && placement === 'right') {
+        if (placement && placement === 'right' && pageContentElement) {
           pageContentElement.style.marginRight = 0;
           pageContentElement.style.transition = 'margin-right 250ms';
           pageContentElement.style.marginRight = SIDE_PANEL_SIZES[size];
-        } else {
+        } else if (pageContentElement) {
           pageContentElement.style.marginLeft = 0;
           pageContentElement.style.transition = 'margin-left 250ms';
           pageContentElement.style.marginLeft = SIDE_PANEL_SIZES[size];
@@ -622,6 +622,19 @@ SidePanel.validatePageContentSelector =
     }
   };
 
+export const deprecatedProps = {
+  /**
+   * **Deprecated**
+   *
+   * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
+   * This prop is required when using the `slideIn` variant of the side panel.
+   */
+  pageContentSelector: deprecateProp(
+    allPropTypes([SidePanel.validatePageContentSelector(), PropTypes.string]),
+    'This prop has been renamed to `selectorPageContent`.'
+  ),
+};
+
 SidePanel.propTypes = {
   /**
    * Sets the action toolbar buttons
@@ -734,15 +747,6 @@ SidePanel.propTypes = {
   open: PropTypes.bool.isRequired,
 
   /**
-   * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
-   * This prop is required when using the `slideIn` variant of the side panel.
-   */
-  pageContentSelector: deprecateProp(
-    allPropTypes([SidePanel.validatePageContentSelector(), PropTypes.string]),
-    'This prop has been renamed to `selectorPageContent`.'
-  ),
-
-  /**
    * Determines if the side panel is on the right or left
    */
   placement: PropTypes.oneOf(['left', 'right']),
@@ -751,7 +755,9 @@ SidePanel.propTypes = {
    * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
    * This prop is required when using the `slideIn` variant of the side panel.
    */
-  selectorPageContent: PropTypes.string,
+  selectorPageContent: PropTypes.string.isRequired.if(
+    ({ slideIn }) => slideIn === true
+  ),
 
   /**
    * Specify a CSS selector that matches the DOM element that should
@@ -778,6 +784,7 @@ SidePanel.propTypes = {
    * Sets the title text
    */
   title: PropTypes.string.isRequired,
+  ...deprecatedProps,
 };
 
 SidePanel.defaultProps = {

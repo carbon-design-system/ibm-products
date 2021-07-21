@@ -36,7 +36,7 @@ const defaultProps = {
   editSuccessTitle: 'edited successfully',
   editing: false,
   error: false,
-  errorMessage: 'an error occured',
+  errorMessage: 'an error occurred',
   hasDownloadLink: true,
   loading: false,
   loadingMessage: 'loading',
@@ -91,9 +91,9 @@ describe(name, () => {
     const nameInput = container.querySelector('.bx--text-input');
     const createButton = getByText(props.createButtonText);
 
-    change(nameInput, { target: { value: 'testkey' } });
+    change(nameInput, { target: { value: 'test-key' } });
     click(createButton);
-    expect(onRequestSubmit).toHaveBeenCalledWith('testkey');
+    expect(onRequestSubmit).toHaveBeenCalledWith('test-key');
 
     rerender(<APIKeyModal {...props} loading />);
     expect(getByText(props.loadingMessage)).toBeVisible();
@@ -113,7 +113,7 @@ describe(name, () => {
     const props = {
       ...defaultProps,
       onRequestSubmit,
-      errorMessage: 'an error occured',
+      errorMessage: 'an error occurred',
       apiKey: '',
     };
 
@@ -124,7 +124,7 @@ describe(name, () => {
     const nameInput = container.querySelector('.bx--text-input');
     const createButton = getByText(props.createButtonText);
 
-    change(nameInput, { target: { value: 'testkey' } });
+    change(nameInput, { target: { value: 'test-key' } });
     click(createButton);
     expect(onRequestSubmit).toHaveBeenCalled();
 

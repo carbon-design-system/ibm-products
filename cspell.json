@@ -60,7 +60,8 @@
     "security",
     "*.snap",
     "storybook-static",
-    "yarn-error.log"
+    "yarn-error.log",
+    "CHANGELOG.md"
   ],
   "words": [
     "apikey",
@@ -86,6 +87,6 @@
     "tabbable",
     "tearsheet",
     "tearsheets",
-    "uuidv",
+    "uuidv"
   ]
 }

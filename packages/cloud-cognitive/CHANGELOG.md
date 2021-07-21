@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.57.0...@carbon/ibm-cloud-cognitive@0.57.1) (2021-07-20)
+
+
+### Bug Fixes
+
+* **about-modal:** prevent `p` browser defaults with no CSS reset ([#1034](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1034)) ([cf0ae3a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/cf0ae3a5a20295c6889b20d1023d6334b8482f6d))
+
+
+
+
+
+# [0.57.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.56.3...@carbon/ibm-cloud-cognitive@0.57.0) (2021-07-20)
+
+
+### Features
+
+* further page header review updates ([#1030](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1030)) ([a350229](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a3502291e54108e63be2919e7914525712ed65a2))
+
+
+
+
+
+## [0.56.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.56.2...@carbon/ibm-cloud-cognitive@0.56.3) (2021-07-20)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
 ## [0.56.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.56.1...@carbon/ibm-cloud-cognitive@0.56.2) (2021-07-19)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

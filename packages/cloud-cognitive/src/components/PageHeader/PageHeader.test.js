@@ -160,6 +160,9 @@ const testSizes = (el, property, _default) => {
 const testProps = {
   actionBarItems,
   actionBarOverflowAriaLabel,
+  allTagsModalTitle: 'All tags',
+  allTagsModalSearchLabel: 'Search all tags',
+  allTagsModalSearchPlaceholderText: 'Search all tags',
   hasBackgroundAlways: true,
   breadcrumbOverflowAriaLabel,
   breadcrumbItems,
@@ -167,6 +170,7 @@ const testProps = {
   navigation,
   pageActions,
   pageActionsOverflowLabel,
+  showAllTagsLabel: 'View all tags',
   subtitle,
   tags,
   title: titleObj,
@@ -413,8 +417,25 @@ describe('PageHeader', () => {
   });
 
   test('Navigation row renders when Tags but no Navigation', () => {
-    const { tags } = testProps;
-    render(<PageHeader {...{ tags }} />);
+    const {
+      tags,
+      allTagsModalTitle,
+      allTagsModalSearchLabel,
+      allTagsModalSearchPlaceholderText,
+      showAllTagsLabel,
+    } = testProps;
+
+    render(
+      <PageHeader
+        {...{
+          tags,
+          allTagsModalTitle,
+          allTagsModalSearchLabel,
+          allTagsModalSearchPlaceholderText,
+          showAllTagsLabel,
+        }}
+      />
+    );
 
     expect(
       screen.getAllByText('A tag', {

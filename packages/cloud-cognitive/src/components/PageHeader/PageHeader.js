@@ -42,59 +42,6 @@ import {
   utilSetCustomCSSProps,
 } from './PageHeaderUtils';
 
-export const deprecatedProps = {
-  // DEPRECATED see actionBarOverflowAriaLabel
-  actionBarOverflowLabel: deprecateProp(
-    PropTypes.string,
-    'Property renamed to `actionBarOverflowAriaLabel`.'
-  ),
-  // DEPRECATED see children
-  availableSpace: deprecateProp(
-    PropTypes.node,
-    'Make use of children instead.'
-  ),
-  // DEPRECATED see hasBackgroundAlways
-  background: deprecateProp(
-    PropTypes.bool,
-    'Property renamed to `hasBackgroundAlways`'
-  ),
-  // DEPRECATED see breadcrumbOverflowAriaLabel
-  breadcrumbOverflowLabel: deprecateProp(
-    PropTypes.string,
-    'Property renamed to `breadcrumbOverflowAriaLabel`.'
-  ),
-  // DEPRECATED see collapseHeaderIconDescription
-  collapseHeaderLabel: deprecateProp(
-    PropTypes.string,
-    'Property renamed to `collapseHeaderIconDescription`.'
-  ),
-  // DEPRECATED see hasCollapseHeaderToggle
-  collapseHeaderToggleWanted: deprecateProp(
-    PropTypes.bool,
-    'Property renamed to `hasCollapseHeaderToggle`'
-  ),
-  // DEPRECATED see expandHeaderIconDescription
-  expandHeaderLabel: deprecateProp(
-    PropTypes.string,
-    'Property renamed to `expandHeaderIconDescription`.'
-  ),
-  // DEPRECATED see collapseTitle
-  preCollapseTitleRow: deprecateProp(
-    PropTypes.bool,
-    'Property renamed to `collapseTitle`.'
-  ),
-  // DEPRECATED see disableBreadcrumbScroll
-  preventBreadcrumbScroll: deprecateProp(
-    PropTypes.bool,
-    'Prop renamed to `disableBreadcrumbScroll`.'
-  ),
-  // DEPRECATED see title object form
-  titleIcon: deprecateProp(
-    PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-    'Use `title` prop shape instead.'
-  ),
-};
-
 export let PageHeader = React.forwardRef(
   (
     {
@@ -799,6 +746,99 @@ const TYPES = {
   'high-contrast': 'High-Contrast',
 };
 const tagTypes = Object.keys(TYPES);
+
+export const deprecatedProps = {
+  /**
+   * **Deprecated**
+   *
+   * see `actionBarOverflowAriaLabel`
+   */
+  actionBarOverflowLabel: deprecateProp(
+    PropTypes.string,
+    'Property renamed to `actionBarOverflowAriaLabel`.'
+  ),
+  /**
+   * **Deprecated**
+   *
+   * see `children`
+   */
+  availableSpace: deprecateProp(
+    PropTypes.node,
+    'Make use of children instead.'
+  ),
+  /**
+   * **Deprecated**
+   *
+   * see `hasBackgroundAlways`
+   */
+  background: deprecateProp(
+    PropTypes.bool,
+    'Property renamed to `hasBackgroundAlways`'
+  ),
+  /**
+   * **Deprecated**
+   *
+   * see `breadcrumbOverflowAriaLabel`
+   */
+  breadcrumbOverflowLabel: deprecateProp(
+    PropTypes.string,
+    'Property renamed to `breadcrumbOverflowAriaLabel`.'
+  ),
+  /**
+   * **Deprecated**
+   *
+   * see `collapseHeaderIconDescription`
+   */
+  collapseHeaderLabel: deprecateProp(
+    PropTypes.string,
+    'Property renamed to `collapseHeaderIconDescription`.'
+  ),
+  /**
+   * **Deprecated**
+   *
+   * see `hasCollapseHeaderToggle`
+   */
+  collapseHeaderToggleWanted: deprecateProp(
+    PropTypes.bool,
+    'Property renamed to `hasCollapseHeaderToggle`'
+  ),
+  /**
+   * **Deprecated**
+   *
+   * see `expandHeaderIconDescription`
+   */
+  expandHeaderLabel: deprecateProp(
+    PropTypes.string,
+    'Property renamed to `expandHeaderIconDescription`.'
+  ),
+  /**
+   * **Deprecated**
+   *
+   * see `collapseTitle`
+   */
+  preCollapseTitleRow: deprecateProp(
+    PropTypes.bool,
+    'Property renamed to `collapseTitle`.'
+  ),
+  /**
+   * **Deprecated**
+   *
+   * see `disableBreadcrumbScroll`
+   */
+  preventBreadcrumbScroll: deprecateProp(
+    PropTypes.bool,
+    'Prop renamed to `disableBreadcrumbScroll`.'
+  ),
+  /**
+   * **Deprecated**
+   *
+   * see `title object form`
+   */
+  titleIcon: deprecateProp(
+    PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    'Use `title` prop shape instead.'
+  ),
+};
 
 PageHeader.propTypes = {
   /**

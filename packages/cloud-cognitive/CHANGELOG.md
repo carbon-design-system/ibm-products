@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.57.2...@carbon/ibm-cloud-cognitive@0.57.3) (2021-07-21)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.57.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.57.1...@carbon/ibm-cloud-cognitive@0.57.2) (2021-07-21)
+
+
+### Bug Fixes
+
+* **about-modal:** align copyright and legal text color with design ([#1038](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1038)) ([6dbd605](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6dbd605aca7f6bc0218f5a5489d2c657399f2dc0))
+
+
+
+
+
 ## [0.57.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.57.0...@carbon/ibm-cloud-cognitive@0.57.1) (2021-07-20)
 
 

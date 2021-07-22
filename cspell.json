@@ -44,6 +44,7 @@
     "mdx"
   ],
   "ignorePaths": [
+    ".vscode",
     ".yarn",
     "cdai",
     "coverage",

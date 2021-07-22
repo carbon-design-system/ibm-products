@@ -5,7 +5,7 @@ components. They are intended to be supportive rather than restrictive, and need
 to stay up-to-date, so do raise a question if anything needs changing or is
 unclear.
 
-## Organisation and files
+## Organization and files
 
 - Each component, or group of closely related components, is in its own
   directory which will normally contain the following files:
@@ -40,7 +40,7 @@ unclear.
     helper within the package, it should NOT be exported from the index.js,
     should NOT be included in \_index.scss, and should NOT have a flag in the
     package-settings.js. Instead, the JS should be imported, and the SCSS
-    included, whereever the component is needed internally.
+    included, wherever the component is needed internally.
 
 ## Component JavaScript code
 
@@ -255,7 +255,7 @@ unclear.
     });
     ```
   - A test for each input (props, slots, _etc_), verifying appropriate outputs.
-  - A test to validate each the behaviours and actions as far as is practical.
+  - A test to validate each the behaviors and actions as far as is practical.
   - A test that additional HTML attributes are passed through to an appropriate
     node. Something like:
     ```jsx

@@ -44,6 +44,7 @@
     "mdx"
   ],
   "ignorePaths": [
+    ".vscode",
     ".yarn",
     "cdai",
     "coverage",
@@ -58,13 +59,15 @@
     "*.snap",
     "storybook-static",
     "yarn-error.log",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "**/.*"
   ],
   "words": [
     "apikey",
     "checkmark",
     "classname",
     "divs",
+    "overridable",
     "pconsole",
     "readme",
     "renderable",

@@ -56,7 +56,8 @@ export let PageHeader = React.forwardRef(
       hasBackgroundAlways,
       breadcrumbOverflowAriaLabel,
       breadcrumbOverflowLabel: deprecated_breadcrumbOverflowLabel,
-      breadcrumbItems,
+      breadcrumbItems: deprecated_breadcrumbItems,
+      breadcrumbs: breadcrumbsIn,
       children,
       className,
       collapseHeader,
@@ -93,6 +94,7 @@ export let PageHeader = React.forwardRef(
     hasCollapseHeaderToggle ??= deprecated_collapseHeaderToggleWanted;
     collapseTitle ??= deprecated_preCollapseTitleRow;
     disableBreadcrumbScroll ??= deprecated_preventBreadcrumbScroll;
+    const breadcrumbs = breadcrumbsIn ?? deprecated_breadcrumbItems;
     // handle deprecated props - END
 
     const [metrics, setMetrics] = useState({});
@@ -119,7 +121,7 @@ export let PageHeader = React.forwardRef(
     const actionBarItemArray = extractShapesArray(actionBarItems);
     const hasActionBar = actionBarItemArray && actionBarItemArray.length;
     const hasBreadcrumbRow = !(
-      breadcrumbItems === undefined && actionBarItems === undefined
+      breadcrumbs === undefined && actionBarItems === undefined
     );
     const pageActionsItemArray = extractShapesArray(pageActions)?.map(
       (shape) => ({
@@ -346,7 +348,7 @@ export let PageHeader = React.forwardRef(
     }, [
       actionBarItems,
       children,
-      breadcrumbItems,
+      breadcrumbs,
       disableBreadcrumbScroll,
       navigation,
       pageActions,
@@ -362,7 +364,7 @@ export let PageHeader = React.forwardRef(
       if (
         !result &&
         metrics.headerHeight > 0 &&
-        (breadcrumbItems || actionBarItems || tags || navigation)
+        (breadcrumbs || actionBarItems || tags || navigation)
       ) {
         const startAddingAt = parseFloat(layout05, 10) * parseInt(baseFontSize);
         const scrollRemaining = metrics.headerHeight - scrollYValue;
@@ -387,7 +389,7 @@ export let PageHeader = React.forwardRef(
     }, [
       actionBarItems,
       hasBackgroundAlways,
-      breadcrumbItems,
+      breadcrumbs,
       headerRef,
       metrics.breadcrumbRowHeight,
       metrics.headerHeight,
@@ -464,7 +466,7 @@ export let PageHeader = React.forwardRef(
                   [`${blockClass}__breadcrumb-row--next-to-tabs`]:
                     nextToTabsCheck(),
                   [`${blockClass}__breadcrumb-row--has-breadcrumbs`]:
-                    breadcrumbItems,
+                    breadcrumbs,
                   [`${blockClass}__breadcrumb-row--has-action-bar`]:
                     hasActionBar,
                 })}>
@@ -472,17 +474,18 @@ export let PageHeader = React.forwardRef(
                   <Column
                     className={cx(`${blockClass}__breadcrumb-column`, {
                       [`${blockClass}__breadcrumb-column--background`]:
-                        breadcrumbItems !== undefined || hasActionBar,
+                        breadcrumbs !== undefined || hasActionBar,
                     })}>
                     {/* keeps actionBar right even if empty */}
 
-                    {breadcrumbItems !== undefined ? (
+                    {breadcrumbs !== undefined ? (
                       <BreadcrumbWithOverflow
                         className={`${blockClass}__breadcrumb`}
                         noTrailingSlash={title !== undefined}
-                        overflowAriaLabel={breadcrumbOverflowAriaLabel}>
-                        {breadcrumbItems}
-                        {title ? (
+                        overflowAriaLabel={breadcrumbOverflowAriaLabel}
+                        breadcrumbs={breadcrumbsIn}>
+                        {!breadcrumbsIn ? deprecated_breadcrumbItems : null}
+                        {!breadcrumbsIn && title ? (
                           <BreadcrumbItem
                             isCurrentPage={true}
                             className={cx([
@@ -496,13 +499,9 @@ export let PageHeader = React.forwardRef(
                               {titleLoading ? <SkeletonText /> : titleText}
                             </span>
                           </BreadcrumbItem>
-                        ) : (
-                          ''
-                        )}
+                        ) : null}
                       </BreadcrumbWithOverflow>
-                    ) : (
-                      ''
-                    )}
+                    ) : null}
                   </Column>
                   <Column
                     className={cx([
@@ -624,7 +623,7 @@ export let PageHeader = React.forwardRef(
             {/* Last row margin-below causes problems for scroll behaviour when it sticks the header.
             This buffer is used in CSS instead to add vertical space after the last row
             */}
-            {(breadcrumbItems ||
+            {(breadcrumbs ||
               actionBarItems ||
               title ||
               pageActions ||
@@ -749,90 +748,77 @@ const tagTypes = Object.keys(TYPES);
 
 export const deprecatedProps = {
   /**
-   * **Deprecated**
-   *
-   * see `actionBarOverflowAriaLabel`
+   * **Deprecated** see property `actionBarOverflowAriaLabel`
    */
   actionBarOverflowLabel: deprecateProp(
     PropTypes.string,
     'Property renamed to `actionBarOverflowAriaLabel`.'
   ),
   /**
-   * **Deprecated**
-   *
-   * see `children`
+   * **Deprecated** see property `children`
    */
   availableSpace: deprecateProp(
     PropTypes.node,
     'Make use of children instead.'
   ),
   /**
-   * **Deprecated**
-   *
-   * see `hasBackgroundAlways`
+   * **Deprecated** see property `hasBackgroundAlways`
    */
   background: deprecateProp(
     PropTypes.bool,
     'Property renamed to `hasBackgroundAlways`'
   ),
   /**
-   * **Deprecated**
-   *
-   * see `breadcrumbOverflowAriaLabel`
+   * **Deprecated** see property `breadcrumbs`
+   */
+  breadcrumbItems: deprecateProp(
+    PropTypes.element,
+    'Usage changed to expect breadcrumb item like shapes, see `breadcrumbs`.'
+  ),
+  /**
+   * **Deprecated** see property `breadcrumbOverflowAriaLabel`
    */
   breadcrumbOverflowLabel: deprecateProp(
     PropTypes.string,
     'Property renamed to `breadcrumbOverflowAriaLabel`.'
   ),
   /**
-   * **Deprecated**
-   *
-   * see `collapseHeaderIconDescription`
+   * **Deprecated** see property `collapseHeaderIconDescription`
    */
   collapseHeaderLabel: deprecateProp(
     PropTypes.string,
     'Property renamed to `collapseHeaderIconDescription`.'
   ),
   /**
-   * **Deprecated**
-   *
-   * see `hasCollapseHeaderToggle`
+   * **Deprecated** see property `hasCollapseHeaderToggle`
    */
   collapseHeaderToggleWanted: deprecateProp(
     PropTypes.bool,
     'Property renamed to `hasCollapseHeaderToggle`'
   ),
   /**
-   * **Deprecated**
-   *
-   * see `expandHeaderIconDescription`
+   * **Deprecated** see property `expandHeaderIconDescription`
    */
   expandHeaderLabel: deprecateProp(
     PropTypes.string,
     'Property renamed to `expandHeaderIconDescription`.'
   ),
   /**
-   * **Deprecated**
-   *
-   * see `collapseTitle`
+   * **Deprecated** see property `collapseTitle`
    */
   preCollapseTitleRow: deprecateProp(
     PropTypes.bool,
     'Property renamed to `collapseTitle`.'
   ),
   /**
-   * **Deprecated**
-   *
-   * see `disableBreadcrumbScroll`
+   * **Deprecated** see property `disableBreadcrumbScroll`
    */
   preventBreadcrumbScroll: deprecateProp(
     PropTypes.bool,
     'Prop renamed to `disableBreadcrumbScroll`.'
   ),
   /**
-   * **Deprecated**
-   *
-   * see `title object form`
+   * **Deprecated** see property `title object form`
    */
   titleIcon: deprecateProp(
     PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
@@ -876,7 +862,11 @@ PageHeader.propTypes = {
    * NOTE: This prop is required if actionBarItems are supplied
    */
   actionBarOverflowAriaLabel: PropTypes.string.isRequired.if(
-    ({ actionBarItems }) => actionBarItems && actionBarItems.length > 0
+    ({ actionBarItems, actionBarOverflowLabel }) =>
+      actionBarItems &&
+      actionBarItems.length > 0 &&
+      actionBarOverflowLabel &&
+      actionBarOverflowLabel.length < 1
   ),
   /**
    * When tags are supplied there may not be sufficient space to display all of the tags. This results in an overflow
@@ -903,22 +893,52 @@ PageHeader.propTypes = {
    */
   allTagsModalTitle: string_required_if_more_than_10_tags,
   /**
-   * One or more Carbon BreadcrumbItem components, passed in as React element(s).
-   * If provided, these are rendered at the top before other header content.
-   */
-  breadcrumbItems: PropTypes.element, // expects BreadcrumbItems,
-  /**
-   * If the user supplies breadcrumbItems then they this property is required.
+   * If the user supplies breadcrumbs then they this property is required.
    * It is used in an overflow menu when there is insufficient space to display all breadcrumbs inline.
    */
   breadcrumbOverflowAriaLabel: PropTypes.string.isRequired.if(
-    ({ breadcrumbItems }) => breadcrumbItems && breadcrumbItems.length > 0
+    ({ breadcrumbs, breadcrumbItems }) =>
+      (breadcrumbs && breadcrumbs.length > 0) ||
+      (breadcrumbItems && breadcrumbItems.length > 0)
+  ),
+  /**
+   * One or more Carbon BreadcrumbItem components, passed in as React element(s).
+   * If provided, these are rendered at the top before other header content.
+   */
+  breadcrumbs: PropTypes.arrayOf(
+    PropTypes.shape({
+      /**
+       * Optional string representing the link location for the BreadcrumbItem
+       */
+      href: PropTypes.string,
+
+      /**
+       * Provide if this breadcrumb item represents the current page
+       */
+      isCurrentPage: PropTypes.bool,
+
+      /**
+       * Key required to render array efficiently
+       */
+      key: PropTypes.string.isRequired,
+
+      /**
+       * Pass in content that will be inside of the BreadcrumbItem
+       */
+      label: PropTypes.node,
+
+      /**
+       * A string based alternative to the children, required only if children is not of type string.
+       */
+      title: PropTypes.string.isRequired.if(
+        ({ label }) => typeof label !== 'string'
+      ),
+    })
   ),
   /**
    * A zone for placing high-level, client content above the page tabs.
    * Accepts arbitrary renderable content as a React node. Optional.
-   */
-  children: PropTypes.node,
+   */ children: PropTypes.node,
   /**
    * Specifies class(es) to be applied to the top-level PageHeader node.
    * Optional.

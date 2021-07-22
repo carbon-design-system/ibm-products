@@ -8,12 +8,13 @@
 import React, { useState } from 'react';
 import {
   Button,
+  Dropdown,
   InlineNotification,
+  NumberInput,
   RadioButtonGroup,
   RadioButton,
   TextInput,
   Toggle,
-  NumberInput,
 } from 'carbon-components-react';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
@@ -37,6 +38,9 @@ export const MultiStepWithSectionsTearsheet = () => {
   const [stepThreeTextInputValue, setStepThreeTextInputValue] =
     useState('one-day');
   const [isInvalid, setIsInvalid] = useState(false);
+  const [allTopicOwners, setAllTopicOwners] = useState([]);
+  const [selectedTopicOwner, setSelectedTopicOwner] = useState(null);
+  const [apiFailed, setApiFailed] = useState(false);
 
   const clearCreateData = () => {
     setStepOneTextInputValue('');
@@ -47,6 +51,9 @@ export const MultiStepWithSectionsTearsheet = () => {
     setHasSubmitError(false);
     setIsInvalid(false);
     setOpen(false);
+    setAllTopicOwners([]);
+    setSelectedTopicOwner(null);
+    setApiFailed(false);
   };
 
   return (
@@ -80,6 +87,21 @@ export const MultiStepWithSectionsTearsheet = () => {
         viewAllToggleOnLabelText="On"
         includeViewAllToggle>
         <CreateTearsheetStep
+          onMount={async () => {
+            try {
+              const data = await fetch('https://randomuser.me/api/?results=5');
+              const json = await data.json();
+              if (!data.ok) {
+                throw new Error('received non 200 response');
+              }
+              setAllTopicOwners(json.results);
+            } catch (error) {
+              console.warn(
+                `CreateTearsheet [storybook example]: API request failed.`
+              );
+              setApiFailed(true);
+            }
+          }}
           onNext={() => {
             return new Promise((resolve, reject) => {
               setTimeout(() => {
@@ -143,6 +165,21 @@ export const MultiStepWithSectionsTearsheet = () => {
               value={topicVersionValue}
               placeholder="Enter topic version"
               onChange={(event) => setTopicVersionValue(event.target.value)}
+            />
+            <Dropdown
+              ariaLabel="Topic owner dropdown"
+              className="bx--form-item"
+              id="create-tearsheet-topic-owner"
+              items={allTopicOwners}
+              itemToString={(item) => (item ? item.email : '')}
+              label="Select a topic owner"
+              onChange={({ selectedItem }) =>
+                setSelectedTopicOwner(selectedItem)
+              }
+              selectedItem={selectedTopicOwner}
+              titleText="Topic owner"
+              warn={apiFailed}
+              warnText="API request failed."
             />
             {hasSubmitError && (
               <InlineNotification

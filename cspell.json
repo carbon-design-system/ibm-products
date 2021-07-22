@@ -1,11 +1,7 @@
 {
   "version": "0.1",
   "language": "en",
-  "dictionaries": [
-    "contributors",
-    "html",
-    "packages"
-  ],
+  "dictionaries": ["contributors", "html", "packages"],
   "dictionaryDefinitions": [
     { "name": "contributors", "path": "./cspell.contributors.txt" },
     { "name": "html", "path": "./cspell.html.txt" },
@@ -48,6 +44,7 @@
     "mdx"
   ],
   "ignorePaths": [
+    ".yarn",
     "cdai",
     "coverage",
     "css",

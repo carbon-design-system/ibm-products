@@ -37,7 +37,7 @@
     "test": "run-s test:all 'test:jest {@}' --",
     "test:all": "yarn run-all --no-sort test",
     "test:jest": "jest",
-    "spellcheck": "yarn spellcheck:files '**/*'",
+    "spellcheck": "yarn spellcheck:files '**/*' '.github/*'",
     "spellcheck:files": "cspell lint --relative --no-progress --show-context --no-must-find-files",
     "storybook": "run-s storybook:build:dependencies storybook:start",
     "storybook:build": "run-s storybook:build:*",

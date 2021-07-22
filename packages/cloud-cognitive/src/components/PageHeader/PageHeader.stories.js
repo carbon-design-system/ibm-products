@@ -578,6 +578,18 @@ withActionsToolbar.args = {
   actionBarOverflowAriaLabel,
 };
 
+export const withBreadcrumbActionsToolbarOnly = Template.bind({});
+withBreadcrumbActionsToolbarOnly.storyName =
+  'Reduced page header with breadcrumb bar only';
+withBreadcrumbActionsToolbarOnly.args = {
+  title: 1,
+  breadcrumbItems: 2,
+  breadcrumbOverflowAriaLabel,
+  actionBarItems: 2,
+  actionBarOverflowAriaLabel,
+  collapseTitle: true,
+};
+
 export const fullyLoaded = Template.bind({});
 fullyLoaded.storyName = 'Page header with all items, pre-collapsed';
 fullyLoaded.args = {

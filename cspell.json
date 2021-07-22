@@ -1,11 +1,7 @@
 {
   "version": "0.1",
   "language": "en",
-  "dictionaries": [
-    "contributors",
-    "html",
-    "packages"
-  ],
+  "dictionaries": ["contributors", "html", "packages"],
   "dictionaryDefinitions": [
     { "name": "contributors", "path": "./cspell.contributors.txt" },
     { "name": "html", "path": "./cspell.html.txt" },
@@ -48,6 +44,8 @@
     "mdx"
   ],
   "ignorePaths": [
+    ".vscode",
+    ".yarn",
     "cdai",
     "coverage",
     "css",
@@ -61,13 +59,15 @@
     "*.snap",
     "storybook-static",
     "yarn-error.log",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "**/.*"
   ],
   "words": [
     "apikey",
     "checkmark",
     "classname",
     "divs",
+    "overridable",
     "pconsole",
     "readme",
     "renderable",

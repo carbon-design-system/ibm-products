@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.59.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.58.1...@carbon/ibm-cloud-cognitive@0.59.0) (2021-07-22)
+
+
+### Features
+
+* change to breadcrumbs shape ([#1047](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1047)) ([1205fc8](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/1205fc88771761ef37cc8328ef7ef71e08cdeb78))
+
+
+
+
+
+## [0.58.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.58.0...@carbon/ibm-cloud-cognitive@0.58.1) (2021-07-22)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
 # [0.58.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.57.6...@carbon/ibm-cloud-cognitive@0.58.0) (2021-07-21)
 
 

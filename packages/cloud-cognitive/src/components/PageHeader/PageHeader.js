@@ -72,7 +72,7 @@ export let PageHeader = React.forwardRef(
       navigation,
       pageActions,
       pageActionsOverflowLabel,
-      pageHeaderOffset,
+      pageHeaderOffset: _deprecated_pageHeaderOffset,
       preCollapseTitleRow: deprecated_preCollapseTitleRow,
       preventBreadcrumbScroll: deprecated_preventBreadcrumbScroll,
       showAllTagsLabel,
@@ -194,7 +194,7 @@ export let PageHeader = React.forwardRef(
       /* istanbul ignore next if */
       if (collapse) {
         window.scrollTo({
-          top: pageHeaderOffset - (metrics?.headerTopValue || 0),
+          top: (metrics?.headerOffset || 0) - (metrics?.headerTopValue || 0),
           behavior: 'smooth',
         });
       } else {
@@ -272,7 +272,7 @@ export let PageHeader = React.forwardRef(
         [`--${blockClass}--height-px`]: `${metrics.headerHeight}px`,
         [`--${blockClass}--width-px`]: `${metrics.headerWidth}px`,
         [`--${blockClass}--header-top`]: `${
-          metrics.headerTopValue + pageHeaderOffset
+          metrics.headerTopValue + metrics.headerOffset
         }px`,
         [`--${blockClass}--breadcrumb-title-visibility`]:
           scrollYValue > 0 ? 'visible' : 'hidden',
@@ -303,10 +303,10 @@ export let PageHeader = React.forwardRef(
       metrics.breadcrumbRowWidth,
       metrics.headerHeight,
       metrics.headerWidth,
+      metrics.headerOffset,
       metrics.headerTopValue,
       metrics.navigationRowHeight,
       navigation,
-      pageHeaderOffset,
       scrollYValue,
       tags,
     ]);
@@ -315,17 +315,17 @@ export let PageHeader = React.forwardRef(
       // on scroll or various layout changes check updates if needed
       ({ current }) => {
         utilSetCustomCSSProps(headerRef, {
-          [`--${blockClass}--breadcrumb-top`]: `${pageHeaderOffset}px`,
+          [`--${blockClass}--breadcrumb-top`]: `${metrics.headerOffset}px`,
         });
 
         const fullyCollapsed =
-          current.scrollY + metrics.headerTopValue + pageHeaderOffset >= 0;
+          current.scrollY + metrics.headerTopValue + metrics.headerOffset >= 0;
         setFullyCollapsed(fullyCollapsed);
 
         // set offset for tagset tooltip
         const tagsetTooltipOffset = fullyCollapsed
-          ? metrics.headerHeight + metrics.headerTopValue + pageHeaderOffset
-          : metrics.headerHeight + pageHeaderOffset;
+          ? metrics.headerHeight + metrics.headerTopValue + metrics.headerOffset
+          : metrics.headerHeight + metrics.headerOffset;
 
         document.documentElement.style.setProperty(
           `--${blockClass}--tagset-tooltip-position`,
@@ -339,7 +339,7 @@ export let PageHeader = React.forwardRef(
 
         setScrollYValue(current.scrollY);
       },
-      [metrics.headerHeight, metrics.headerTopValue, pageHeaderOffset]
+      [metrics.headerHeight, metrics.headerTopValue, metrics.headerOffset]
     );
 
     useWindowResize(() => {
@@ -804,6 +804,13 @@ export const deprecatedProps = {
     'Property renamed to `expandHeaderIconDescription`.'
   ),
   /**
+   * **Deprecated** no longer required
+   */
+  pageHeaderOffset: deprecateProp(
+    PropTypes.number,
+    'Property removed as no longer required.'
+  ),
+  /**
    * **Deprecated** see property `collapseTitle`
    */
   preCollapseTitleRow: deprecateProp(
@@ -1031,14 +1038,6 @@ PageHeader.propTypes = {
     ({ pageActions }) => pageActions && pageActions.length > 0
   ),
   /**
-   * The page header is not always the first component displayed in your page, a global header, banner or
-   * something else might be displayed first. To allow for this provide an offset in pixels for the PageHeader.
-   *
-   * NOTE: The nature of the pageHeader makes this hard to measure automatically as it would be dependant on the styling of
-   * components rendered elsewhere.
-   */
-  pageHeaderOffset: PropTypes.number,
-  /**
    * When tags are supplied there may not be sufficient space to display all of the tags. This results in an overflow
    * menu being shown. If in the overflow menu there is still insufficient space this label is used to offer a
    * "View all tags" option.
@@ -1087,7 +1086,6 @@ PageHeader.propTypes = {
 
 PageHeader.defaultProps = {
   hasBackgroundAlways: true,
-  pageHeaderOffset: 0,
 };
 
 PageHeader.displayName = componentName;

@@ -534,7 +534,6 @@ const TemplatePageHeaderWithCarbonHeader = (args) => {
           <PageHeader
             className="example-class-name"
             {...includeTheseArgs(args)}
-            pageHeaderOffset={48} // 48px is the size of the global header. A more elegant way of passing this could be found.
           />
           <div className={`${storyClass}__inner-content`}>
             {dummyPageContent}
@@ -610,7 +609,6 @@ const TemplateDemo = () => {
               icon: Security24,
             }}
             disableBreadcrumbScroll
-            pageHeaderOffset={48} // 48px is the size of the global header. A more elegant way of passing this could be found.
             pageActions={[
               {
                 key: 'acknowledge',

@@ -58,7 +58,8 @@
     "*.snap",
     "storybook-static",
     "yarn-error.log",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "**/.*"
   ],
   "words": [
     "apikey",

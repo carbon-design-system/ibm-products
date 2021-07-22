@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2020
+// Copyright IBM Corp. 2020, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -42,59 +42,6 @@ import {
   utilSetCustomCSSProps,
 } from './PageHeaderUtils';
 
-export const deprecatedProps = {
-  // DEPRECATED see actionBarOverflowAriaLabel
-  actionBarOverflowLabel: deprecateProp(
-    PropTypes.string,
-    'Property renamed to `actionBarOverflowAriaLabel`.'
-  ),
-  // DEPRECATED see children
-  availableSpace: deprecateProp(
-    PropTypes.node,
-    'Make use of children instead.'
-  ),
-  // DEPRECATED see hasBackgroundAlways
-  background: deprecateProp(
-    PropTypes.bool,
-    'Property renamed to `hasBackgroundAlways`'
-  ),
-  // DEPRECATED see breadcrumbOverflowAriaLabel
-  breadcrumbOverflowLabel: deprecateProp(
-    PropTypes.string,
-    'Property renamed to `breadcrumbOverflowAriaLabel`.'
-  ),
-  // DEPRECATED see collapseHeaderIconDescription
-  collapseHeaderLabel: deprecateProp(
-    PropTypes.string,
-    'Property renamed to `collapseHeaderIconDescription`.'
-  ),
-  // DEPRECATED see hasCollapseHeaderToggle
-  collapseHeaderToggleWanted: deprecateProp(
-    PropTypes.bool,
-    'Property renamed to `hasCollapseHeaderToggle`'
-  ),
-  // DEPRECATED see expandHeaderIconDescription
-  expandHeaderLabel: deprecateProp(
-    PropTypes.string,
-    'Property renamed to `expandHeaderIconDescription`.'
-  ),
-  // DEPRECATED see collapseTitle
-  preCollapseTitleRow: deprecateProp(
-    PropTypes.bool,
-    'Property renamed to `collapseTitle`.'
-  ),
-  // DEPRECATED see disableBreadcrumbScroll
-  preventBreadcrumbScroll: deprecateProp(
-    PropTypes.bool,
-    'Prop renamed to `disableBreadcrumbScroll`.'
-  ),
-  // DEPRECATED see title object form
-  titleIcon: deprecateProp(
-    PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-    'Use `title` prop shape instead.'
-  ),
-};
-
 export let PageHeader = React.forwardRef(
   (
     {
@@ -124,7 +71,7 @@ export let PageHeader = React.forwardRef(
       navigation,
       pageActions,
       pageActionsOverflowLabel,
-      pageHeaderOffset,
+      pageHeaderOffset: _deprecated_pageHeaderOffset,
       preCollapseTitleRow: deprecated_preCollapseTitleRow,
       preventBreadcrumbScroll: deprecated_preventBreadcrumbScroll,
       showAllTagsLabel,
@@ -139,7 +86,7 @@ export let PageHeader = React.forwardRef(
     // handle deprecated props - START
     actionBarOverflowAriaLabel ??= deprecated_actionBarOverflowLabel;
     breadcrumbOverflowAriaLabel ??= deprecated_breadcrumbOverflowLabel;
-    children ?? deprecated_availableSpace;
+    children ??= deprecated_availableSpace;
     collapseHeaderIconDescription ??= deprecated_collapseHeaderLabel;
     expandHeaderIconDescription ??= deprecated_expandHeaderLabel;
     hasBackgroundAlways ??= deprecated_background;
@@ -245,7 +192,7 @@ export let PageHeader = React.forwardRef(
       /* istanbul ignore next if */
       if (collapse) {
         window.scrollTo({
-          top: pageHeaderOffset - (metrics?.headerTopValue || 0),
+          top: (metrics?.headerOffset || 0) - (metrics?.headerTopValue || 0),
           behavior: 'smooth',
         });
       } else {
@@ -323,7 +270,7 @@ export let PageHeader = React.forwardRef(
         [`--${blockClass}--height-px`]: `${metrics.headerHeight}px`,
         [`--${blockClass}--width-px`]: `${metrics.headerWidth}px`,
         [`--${blockClass}--header-top`]: `${
-          metrics.headerTopValue + pageHeaderOffset
+          metrics.headerTopValue + metrics.headerOffset
         }px`,
         [`--${blockClass}--breadcrumb-title-visibility`]:
           scrollYValue > 0 ? 'visible' : 'hidden',
@@ -354,10 +301,10 @@ export let PageHeader = React.forwardRef(
       metrics.breadcrumbRowWidth,
       metrics.headerHeight,
       metrics.headerWidth,
+      metrics.headerOffset,
       metrics.headerTopValue,
       metrics.navigationRowHeight,
       navigation,
-      pageHeaderOffset,
       scrollYValue,
       tags,
     ]);
@@ -366,17 +313,17 @@ export let PageHeader = React.forwardRef(
       // on scroll or various layout changes check updates if needed
       ({ current }) => {
         utilSetCustomCSSProps(headerRef, {
-          [`--${blockClass}--breadcrumb-top`]: `${pageHeaderOffset}px`,
+          [`--${blockClass}--breadcrumb-top`]: `${metrics.headerOffset}px`,
         });
 
         const fullyCollapsed =
-          current.scrollY + metrics.headerTopValue + pageHeaderOffset >= 0;
+          current.scrollY + metrics.headerTopValue + metrics.headerOffset >= 0;
         setFullyCollapsed(fullyCollapsed);
 
         // set offset for tagset tooltip
         const tagsetTooltipOffset = fullyCollapsed
-          ? metrics.headerHeight + metrics.headerTopValue + pageHeaderOffset
-          : metrics.headerHeight + pageHeaderOffset;
+          ? metrics.headerHeight + metrics.headerTopValue + metrics.headerOffset
+          : metrics.headerHeight + metrics.headerOffset;
 
         document.documentElement.style.setProperty(
           `--${blockClass}--tagset-tooltip-position`,
@@ -390,7 +337,7 @@ export let PageHeader = React.forwardRef(
 
         setScrollYValue(current.scrollY);
       },
-      [metrics.headerHeight, metrics.headerTopValue, pageHeaderOffset]
+      [metrics.headerHeight, metrics.headerTopValue, metrics.headerOffset]
     );
 
     useWindowResize(() => {
@@ -800,6 +747,108 @@ const TYPES = {
 };
 const tagTypes = Object.keys(TYPES);
 
+export const deprecatedProps = {
+  /**
+   * **Deprecated**
+   *
+   * see `actionBarOverflowAriaLabel`
+   */
+  actionBarOverflowLabel: deprecateProp(
+    PropTypes.string,
+    'Property renamed to `actionBarOverflowAriaLabel`.'
+  ),
+  /**
+   * **Deprecated**
+   *
+   * see `children`
+   */
+  availableSpace: deprecateProp(
+    PropTypes.node,
+    'Make use of children instead.'
+  ),
+  /**
+   * **Deprecated**
+   *
+   * see `hasBackgroundAlways`
+   */
+  background: deprecateProp(
+    PropTypes.bool,
+    'Property renamed to `hasBackgroundAlways`'
+  ),
+  /**
+   * **Deprecated**
+   *
+   * see `breadcrumbOverflowAriaLabel`
+   */
+  breadcrumbOverflowLabel: deprecateProp(
+    PropTypes.string,
+    'Property renamed to `breadcrumbOverflowAriaLabel`.'
+  ),
+  /**
+   * **Deprecated**
+   *
+   * see `collapseHeaderIconDescription`
+   */
+  collapseHeaderLabel: deprecateProp(
+    PropTypes.string,
+    'Property renamed to `collapseHeaderIconDescription`.'
+  ),
+  /**
+   * **Deprecated**
+   *
+   * see `hasCollapseHeaderToggle`
+   */
+  collapseHeaderToggleWanted: deprecateProp(
+    PropTypes.bool,
+    'Property renamed to `hasCollapseHeaderToggle`'
+  ),
+  /**
+   * **Deprecated**
+   *
+   * see `expandHeaderIconDescription`
+   */
+  expandHeaderLabel: deprecateProp(
+    PropTypes.string,
+    'Property renamed to `expandHeaderIconDescription`.'
+  ),
+  /**
+   * **Deprecated**
+   *
+   * no longer required
+   */
+  pageHeaderOffset: deprecateProp(
+    PropTypes.number,
+    'Property removed as no longer required.'
+  ),
+  /**
+   * **Deprecated**
+   *
+   * see `collapseTitle`
+   */
+  preCollapseTitleRow: deprecateProp(
+    PropTypes.bool,
+    'Property renamed to `collapseTitle`.'
+  ),
+  /**
+   * **Deprecated**
+   *
+   * see `disableBreadcrumbScroll`
+   */
+  preventBreadcrumbScroll: deprecateProp(
+    PropTypes.bool,
+    'Prop renamed to `disableBreadcrumbScroll`.'
+  ),
+  /**
+   * **Deprecated**
+   *
+   * see `title object form`
+   */
+  titleIcon: deprecateProp(
+    PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    'Use `title` prop shape instead.'
+  ),
+};
+
 PageHeader.propTypes = {
   /**
    * Specifies the action bar items which are the final items in the row top of the PageHeader.
@@ -971,14 +1020,6 @@ PageHeader.propTypes = {
     ({ pageActions }) => pageActions && pageActions.length > 0
   ),
   /**
-   * The page header is not always the first component displayed in your page, a global header, banner or
-   * something else might be displayed first. To allow for this provide an offset in pixels for the PageHeader.
-   *
-   * NOTE: The nature of the pageHeader makes this hard to measure automatically as it would be dependant on the styling of
-   * components rendered elsewhere.
-   */
-  pageHeaderOffset: PropTypes.number,
-  /**
    * When tags are supplied there may not be sufficient space to display all of the tags. This results in an overflow
    * menu being shown. If in the overflow menu there is still insufficient space this label is used to offer a
    * "View all tags" option.
@@ -1027,7 +1068,6 @@ PageHeader.propTypes = {
 
 PageHeader.defaultProps = {
   hasBackgroundAlways: true,
-  pageHeaderOffset: 0,
 };
 
 PageHeader.displayName = componentName;

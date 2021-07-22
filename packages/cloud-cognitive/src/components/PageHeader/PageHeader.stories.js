@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2020
+// Copyright IBM Corp. 2020, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -549,7 +549,6 @@ const TemplatePageHeaderWithCarbonHeader = (args) => {
           <PageHeader
             className="example-class-name"
             {...includeTheseArgs(args)}
-            pageHeaderOffset={48} // 48px is the size of the global header. A more elegant way of passing this could be found.
           />
           <div className={`${storyClass}__inner-content`}>
             {dummyPageContent}
@@ -629,7 +628,6 @@ const TemplateDemo = () => {
               icon: Security24,
             }}
             disableBreadcrumbScroll
-            pageHeaderOffset={48} // 48px is the size of the global header. A more elegant way of passing this could be found.
             pageActions={[
               {
                 key: 'acknowledge',

@@ -40,6 +40,7 @@ import {
   utilCheckUpdateVerticalSpace,
   utilGetTitleShape,
   utilSetCustomCSSProps,
+  utilSetCollapsed,
 } from './PageHeaderUtils';
 
 export let PageHeader = React.forwardRef(
@@ -184,24 +185,12 @@ export let PageHeader = React.forwardRef(
       checkUpdateVerticalSpace();
     };
 
-    const toggleCollapse = (forceCollapse) => {
-      const collapse =
-        typeof forceCollapse !== 'undefined' ? forceCollapse : !fullyCollapsed;
-
-      /* don't know how to test resize */
-      /* istanbul ignore next if */
-      if (collapse) {
-        window.scrollTo({
-          top: (metrics?.headerOffset || 0) - (metrics?.headerTopValue || 0),
-          behavior: 'smooth',
-        });
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    };
-
     const handleCollapseToggle = () => {
-      toggleCollapse();
+      utilSetCollapsed(
+        !fullyCollapsed,
+        metrics.headerOffset,
+        metrics.headerTopValue
+      );
     };
 
     // use effects
@@ -420,9 +409,14 @@ export let PageHeader = React.forwardRef(
     };
 
     useEffect(() => {
-      toggleCollapse(collapseHeader);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [collapseHeader]);
+      if (typeof collapseHeader === 'boolean') {
+        utilSetCollapsed(
+          collapseHeader,
+          metrics.headerOffset,
+          metrics.headerTopValue
+        );
+      }
+    }, [collapseHeader, metrics.headerOffset, metrics.headerTopValue]);
 
     const {
       text: titleText,

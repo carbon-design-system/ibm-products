@@ -89,9 +89,12 @@ export const MultiStepWithSectionsTearsheet = () => {
         <CreateTearsheetStep
           onMount={async () => {
             try {
-              let data = await fetch('https://randomuser.me/api/?results=5');
-              data = await data.json();
-              setAllTopicOwners(data.results);
+              const data = await fetch('https://randomuser.me/api/?results=5');
+              const json = await data.json();
+              if (!data.ok) {
+                throw new Error('received non 200 response');
+              }
+              setAllTopicOwners(json.results);
             } catch (error) {
               console.warn(
                 `CreateTearsheet [storybook example]: API request failed.`

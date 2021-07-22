@@ -3,6 +3,57 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.12.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.12.1...@carbon/ibm-cloud-cognitive-core@0.12.2) (2021-07-22)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
+
+
+
+
+
+## [0.12.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.12.0...@carbon/ibm-cloud-cognitive-core@0.12.1) (2021-07-22)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
+
+
+
+
+
+# [0.12.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.11.26...@carbon/ibm-cloud-cognitive-core@0.12.0) (2021-07-21)
+
+
+### Features
+
+* update Carbon versions and dependencies ([#1037](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1037)) ([8c5937a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8c5937a865d3a0cfbaf33b9eca13c4d3b4c1365d))
+
+
+
+
+
+## [0.11.26](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.11.25...@carbon/ibm-cloud-cognitive-core@0.11.26) (2021-07-21)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
+
+
+
+
+
+## [0.11.25](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.11.24...@carbon/ibm-cloud-cognitive-core@0.11.25) (2021-07-21)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
+
+
+
+
+
+## [0.11.24](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.11.23...@carbon/ibm-cloud-cognitive-core@0.11.24) (2021-07-21)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
+
+
+
+
+
 ## [0.11.23](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.11.22...@carbon/ibm-cloud-cognitive-core@0.11.23) (2021-07-21)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.60.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.59.0...@carbon/ibm-cloud-cognitive@0.60.0) (2021-07-22)
+
+
+### Features
+
+* **CreateTearsheet:** [#1028](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1028) create tearsheet step add onmount prop ([#1050](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1050)) ([1e6238a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/1e6238ad19e6b6fc9759faf00152852c267285b1))
+
+
+
+
+
 # [0.59.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.58.1...@carbon/ibm-cloud-cognitive@0.59.0) (2021-07-22)
 
 

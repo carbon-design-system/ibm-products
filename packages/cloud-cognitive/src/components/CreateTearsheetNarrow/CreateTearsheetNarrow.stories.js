@@ -42,7 +42,7 @@ export default {
   },
 };
 
-const createTearsheetNarrowBlockclass = `${pkg.prefix}--create-tearsheet-narrow--story`;
+const createTearsheetNarrowBlockClass = `${pkg.prefix}--create-tearsheet-narrow--story`;
 
 const defaultStoryProps = {
   title: 'Create partition',
@@ -117,7 +117,7 @@ const Template = (args) => {
             setMinimumInSyncReplicaCount(event.imaginaryTarget.value)
           }
         />
-        <div className={`${createTearsheetNarrowBlockclass}__flex-container`}>
+        <div className={`${createTearsheetNarrowBlockClass}__flex-container`}>
           <NumberInput
             id="retention-time"
             min={1}

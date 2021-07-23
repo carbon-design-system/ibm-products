@@ -908,8 +908,15 @@ PageHeader.propTypes = {
       (breadcrumbItems && breadcrumbItems.length > 0)
   ),
   /**
-   * One or more Carbon BreadcrumbItem components, passed in as React element(s).
-   * If provided, these are rendered at the top before other header content.
+   * Specifies the breadcrumb components to be shown in the breadcrumb area of
+   * the page header. Each item is specified as an object with optional fields
+   * 'label' to supply the breadcrumb label, 'href' to supply the link location,
+   * and 'isCurrentPage' to specify whether this breadcrumb component represents
+   * the current page. Each item should also include a unique 'key' field to
+   * enable efficient rendering, and if the label is not a string then a 'title'
+   * field is required to provide a text alternative for display. Any other
+   * fields in the object will be passed through to the breadcrumb element as
+   * HTML attributes.
    */
   breadcrumbs: PropTypes.arrayOf(
     PropTypes.shape({

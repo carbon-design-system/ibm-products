@@ -528,6 +528,13 @@ export let CreateTearsheet = forwardRef(
           tearsheetSteps &&
           tearsheetSteps.length &&
           getFocusableElements(visibleStepInnerContent);
+        const activeStepComponent =
+          tearsheetSteps &&
+          tearsheetSteps.length &&
+          tearsheetSteps[currentStep - 1];
+        if (activeStepComponent && activeStepComponent.props.onMount) {
+          activeStepComponent.props.onMount();
+        }
         if (focusableStepElements && focusableStepElements.length) {
           focusableStepElements[0].focus();
         } else {
@@ -681,7 +688,7 @@ export let CreateTearsheet = forwardRef(
           className={`${blockClass}__multi-step-panel-content`}
           onBlur={handleBlur}
           ref={contentRef}>
-          {renderChildren(children)}
+          {open ? renderChildren(children) : null}
         </div>
       </TearsheetShell>
     );

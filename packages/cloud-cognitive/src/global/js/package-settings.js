@@ -25,6 +25,7 @@ const defaults = {
     NoTagsEmptyState: true,
     NotFoundEmptyState: true,
     NotificationsEmptyState: true,
+    PageHeader: true,
     RemoveModal: true,
     Saving: true,
     SidePanel: true,
@@ -36,7 +37,6 @@ const defaults = {
     UserProfileImage: true,
 
     // other public components not yet reviewed and released:
-    ActionBarItem: false,
     APIKeyDownloader: false,
     APIKeyModal: false,
     CreateFullPage: false,
@@ -52,7 +52,6 @@ const defaults = {
     ExpressiveCard: false,
     LoadingBar: false,
     ModifiedTabs: false,
-    PageHeader: false,
     ProductiveCard: false,
     WebTerminal: false,
     /* new component flags here - comment used by generate CLI */

@@ -218,7 +218,7 @@ export let PageHeader = React.forwardRef(
       let newPageActionInBreadcrumbWidth = 'initial';
 
       /* don't know how to test resize */
-      /* istanbul ignore next if */
+      /* istanbul ignore if */
       if (actionBarColumnWidth > 0) {
         if (
           pageActionInBreadcrumbMaxWidth > 0 &&
@@ -365,7 +365,7 @@ export let PageHeader = React.forwardRef(
         const scrollRemaining = metrics.headerHeight - scrollYValue;
 
         /* don't know how to test resize */
-        /* istanbul ignore next if */
+        /* istanbul ignore if */
         if (scrollRemaining < startAddingAt) {
           const distanceAddingOver =
             startAddingAt - metrics.breadcrumbRowHeight;

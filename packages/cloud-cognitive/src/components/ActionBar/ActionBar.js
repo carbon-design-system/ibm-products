@@ -115,7 +115,7 @@ export let ActionBar = React.forwardRef(
 
     // determine display count based on space available and width of pageActions
     const checkFullyVisibleItems = () => {
-      /* istanbul ignore next if */
+      /* istanbul ignore if */
       if (sizingRef.current) {
         let sizingItems = Array.from(
           sizingRef.current.querySelectorAll(

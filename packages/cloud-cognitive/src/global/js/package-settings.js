@@ -37,7 +37,6 @@ const defaults = {
 
     // other public components not yet reviewed and released:
     ActionBarItem: false,
-    APIKeyDownloader: false,
     APIKeyModal: false,
     CreateFullPage: false,
     CreateFullPageSection: false,

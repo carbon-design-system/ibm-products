@@ -13,10 +13,25 @@ import { getStorybookSlug } from '../../../config';
 &nbsp;|&nbsp;
 [Carbon Modal documentation](https://react.carbondesignsystem.com/?path=/docs/modal--default)
 
-## Overview
+## Editing a key
+
+API key creation / generation is assumed to be the default mode for this modal.
+To enable key editing you have to set the `edit` prop to true and supply any
+other edit related props with the relevant input.
 
 <Canvas>
-  <Story id={getStorybookSlug(pkg, APIKeyModal.displayName, 'standard')} />
+  <Story id={getStorybookSlug(pkg, APIKeyModal.displayName, 'edit')} />
+</Canvas>
+
+## Custom steps
+
+By default generate and edit only supply a name input for your key. If you need
+additional input you should use custom steps
+
+<Canvas>
+  <Story
+    id={getStorybookSlug(pkg, APIKeyModal.displayName, 'custom-generate')}
+  />
 </Canvas>
 
 ## Component API

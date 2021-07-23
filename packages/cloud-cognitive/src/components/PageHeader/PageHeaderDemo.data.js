@@ -6,6 +6,7 @@
  */
 
 /* cSpell:disable */
+/* istanbul ignore next */
 export const demoTableData = [
   {
     Index: 'C8205413-BD94-0B62-DB0A-BE26CF8C60CD',
@@ -718,5 +719,6 @@ export const demoTableData = [
     Description: 'lorem semper',
   },
 ];
+/* istanbul ignore next */
 export const demoTableHeaders = Object.keys(demoTableData[0]);
 /* cSpell:enable */

@@ -9,7 +9,6 @@ import React from 'react';
 // import { action } from '@storybook/addon-actions';
 
 import {
-  BreadcrumbItem,
   Column,
   Grid,
   Header,
@@ -63,39 +62,25 @@ export default {
 
 // Test values for props.
 
-const actionBarItems = [1, 2, 3, 4].map((item) => ({
+const actionBarItem = (item) => ({
   key: `a-key-${item}`,
   renderIcon: Lightning16,
   iconDescription: `Action ${item}`,
-}));
+});
+const actionBarItems = [1, 2, 3, 4].map(actionBarItem);
 
 const actionBarOverflowAriaLabel = 'Show further action bar items';
 
-const manyActionBarItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
-  key: `a-key-${item}`,
-  renderIcon: Lightning16,
-  iconDescription: `Action ${item}`,
-}));
+const manyActionBarItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(actionBarItem);
 
-const breadcrumbItems = (
-  <>
-    <BreadcrumbItem href="#">Breadcrumb 1</BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
-  </>
-);
-const manyBreadcrumbItems = (
-  <>
-    <BreadcrumbItem href="#">Breadcrumb 1</BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 4</BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 5</BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 6</BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 7</BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 8</BreadcrumbItem>
-  </>
-);
+const breadcrumbItem = (item) => ({
+  href: '#',
+  key: `Breadcrumb ${item}`,
+  label: `Breadcrumb ${item}`,
+});
+const breadcrumbs = [1, 2, 3].map(breadcrumbItem);
+const manyBreadcrumbs = [1, 2, 3, 4, 5, 6, 7, 8].map(breadcrumbItem);
+
 const breadcrumbOverflowAriaLabel =
   'Open and close additional breadcrumb item list.';
 
@@ -272,7 +257,7 @@ export const AllAttributesSet = Template.bind({});
 AllAttributesSet.args = {
   hasBackgroundAlways: true,
   breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
+  breadcrumbs,
   actionBarItems,
   actionBarOverflowAriaLabel,
   title,
@@ -302,14 +287,14 @@ TitleAndPageActions.args = {
 export const BreadcrumbItemsAndTitle = Template.bind({});
 BreadcrumbItemsAndTitle.args = {
   breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
+  breadcrumbs,
   title,
 };
 
 export const BreadcrumbItemsTitleAndPageActions = Template.bind({});
 BreadcrumbItemsTitleAndPageActions.args = {
   breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
+  breadcrumbs,
   title,
   pageActions,
   pageActionsOverflowLabel,
@@ -318,7 +303,7 @@ BreadcrumbItemsTitleAndPageActions.args = {
 export const BreadcrumbItemsTitleAndStatus = Template.bind({});
 BreadcrumbItemsTitleAndStatus.args = {
   breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
+  breadcrumbs,
   title,
   children: statusIndicator,
 };
@@ -327,7 +312,7 @@ export const BreadcrumbItemsTitleTabs = Template.bind({});
 BreadcrumbItemsTitleTabs.args = {
   hasBackgroundAlways: true,
   breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
+  breadcrumbs,
   title,
   navigation: tabBar,
 };
@@ -336,7 +321,7 @@ export const BreadcrumbItemsTitleIconTabs = Template.bind({});
 BreadcrumbItemsTitleIconTabs.args = {
   hasBackgroundAlways: true,
   breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
+  breadcrumbs,
   title,
   titleIcon: Bee24,
   navigation: tabBar,
@@ -346,7 +331,7 @@ export const BreadcrumbItemsTitlePageActionsTabs = Template.bind({});
 BreadcrumbItemsTitlePageActionsTabs.args = {
   hasBackgroundAlways: true,
   breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
+  breadcrumbs,
   title,
   pageActions,
   pageActionsOverflowLabel,
@@ -357,7 +342,7 @@ export const BreadcrumbItemsTitlePageActionsTags = Template.bind({});
 BreadcrumbItemsTitlePageActionsTags.args = {
   hasBackgroundAlways: true,
   breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
+  breadcrumbs,
   title,
   pageActions,
   pageActionsOverflowLabel,
@@ -368,7 +353,7 @@ export const BreadcrumbItemsTitleTabsTags = Template.bind({});
 BreadcrumbItemsTitleTabsTags.args = {
   hasBackgroundAlways: true,
   breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
+  breadcrumbs,
   title,
   navigation: tabBar,
   tags,
@@ -380,7 +365,7 @@ export const BreadcrumbItemsActionBarTitlePageActionsTabsTags = Template.bind(
 BreadcrumbItemsActionBarTitlePageActionsTabsTags.args = {
   hasBackgroundAlways: true,
   breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
+  breadcrumbs,
   actionBarItems,
   actionBarOverflowAriaLabel,
   title,
@@ -393,7 +378,7 @@ export const BreadcrumbItemsActionBar = Template.bind({});
 BreadcrumbItemsActionBar.args = {
   hasBackgroundAlways: true,
   breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
+  breadcrumbs,
   actionBarItems,
   actionBarOverflowAriaLabel,
   collapseTitle: true,
@@ -404,7 +389,7 @@ export const BreadcrumbItemsTitlePageActionsSubtitle = Template.bind({});
 BreadcrumbItemsTitlePageActionsSubtitle.args = {
   hasBackgroundAlways: true,
   breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
+  breadcrumbs,
   title,
   pageActions,
   pageActionsOverflowLabel,
@@ -417,7 +402,7 @@ export const BreadcrumbItemsTitlePageActionsSummarydetailsTabs = Template.bind(
 BreadcrumbItemsTitlePageActionsSummarydetailsTabs.args = {
   hasBackgroundAlways: true,
   breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
+  breadcrumbs,
   title,
   pageActions,
   pageActionsOverflowLabel,
@@ -430,7 +415,7 @@ AllAttributesSetKeepsBreadcrumbTabs.args = {
   disableBreadcrumbScroll: true,
   hasBackgroundAlways: true,
   breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
+  breadcrumbs,
   actionBarItems,
   actionBarOverflowAriaLabel,
   title,
@@ -447,7 +432,7 @@ AllAttributesSetPreCollapseTitle.args = {
   collapseTitle: true,
   hasBackgroundAlways: true,
   breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
+  breadcrumbs,
   actionBarItems,
   actionBarOverflowAriaLabel,
   title,
@@ -462,7 +447,7 @@ AllAttributesSetPreCollapseTitle.args = {
 export const LongValuesManyItems = Template.bind({});
 LongValuesManyItems.args = {
   hasBackgroundAlways: true,
-  breadcrumbItems: manyBreadcrumbItems,
+  breadcrumbs: manyBreadcrumbs,
   breadcrumbOverflowAriaLabel,
   actionBarItems: manyActionBarItems,
   actionBarOverflowAriaLabel,
@@ -512,8 +497,8 @@ AllAttributesWithSwitches.args = {
   children: summaryDetails,
   childrenSwitchedArg: true,
   hasBackgroundAlways: true,
-  breadcrumbItems,
-  breadcrumbItemsSwitchedArg: true,
+  breadcrumbs,
+  breadcrumbsSwitchedArg: true,
   breadcrumbOverflowAriaLabel,
   disableBreadcrumbScroll: false,
   navigation: tabBar,
@@ -571,8 +556,8 @@ PageHeaderWithCarbonHeader.args = {
   children: summaryDetails,
   childrenSwitchedArg: true,
   hasBackgroundAlways: true,
-  breadcrumbItems,
-  breadcrumbItemsSwitchedArg: true,
+  breadcrumbs,
+  breadcrumbsSwitchedArg: true,
   breadcrumbOverflowAriaLabel,
   disableBreadcrumbScroll: false,
   navigation: tabBar,
@@ -607,15 +592,11 @@ const TemplateDemo = () => {
           }}>
           <PageHeader
             breadcrumbOverflowAriaLabel="Open and close additional breadcrumb item list."
-            breadcrumbItems={
-              <>
-                <BreadcrumbItem href="../../../homepage">
-                  Homepage
-                </BreadcrumbItem>
-                <BreadcrumbItem href="../../Reports">Reports</BreadcrumbItem>
-                <BreadcrumbItem href="../June2021">June 2021</BreadcrumbItem>
-              </>
-            }
+            breadcrumbs={[
+              { href: '../../../homepage', label: 'Homepage' },
+              { href: '../../Reports', label: 'Reports' },
+              { href: '../June2021', label: 'June 2021' },
+            ]}
             actionBarItems={[
               { key: '1', renderIcon: Printer16, iconDescription: `Print` },
               { key: '2', renderIcon: Settings16, iconDescription: `Settings` },

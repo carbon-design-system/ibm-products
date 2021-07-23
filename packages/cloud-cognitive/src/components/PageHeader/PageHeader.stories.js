@@ -10,7 +10,6 @@ import React from 'react';
 import { pkg, carbon } from '../../settings';
 
 import {
-  BreadcrumbItem,
   Column,
   Grid,
   Header,
@@ -69,10 +68,10 @@ const actionBarItems = {
   ],
 };
 
-/*const makeBreadcrumb = (item, title) => ({
+const makeBreadcrumb = (item, title) => ({
   href: '#',
   key: `Breadcrumb ${item}`,
-  label: title || `Breadcrumb ${item}`,
+  label: typeof title === 'string' ? title : `Breadcrumb ${item}`,
 });
 const now = new Date();
 const m = now.getMonth();
@@ -101,49 +100,9 @@ const breadcrumbs = {
     makeBreadcrumb(2, 'Reports', '../../Reports'),
     makeBreadcrumb(3, `${ms} ${ys}`, `../${ms}{ys}`),
   ],
-};*/
-
-const now = new Date();
-const m = now.getMonth();
-if (m === 0) {
-  now.setFullYear(now.getFullYear() - 1);
-  now.setMonth(11);
-} else {
-  now.setMonth(m - 1);
-}
-const ms = now.toLocaleString('default', { month: 'long' });
-const ys = now.toLocaleString('default', { year: 'numeric' });
-const mys = `../${ms}${ys}`;
-const my2s = `${ms} ${ys}`;
-const breadcrumbs = {
-  'No breadcrumb': null,
-  'A single breadcrumb': <BreadcrumbItem href="#">Home page</BreadcrumbItem>,
-  'Two-level breadcrumb': (
-    <>
-      <BreadcrumbItem href="#">Home page</BreadcrumbItem>
-      <BreadcrumbItem href="#">Secondary page</BreadcrumbItem>
-    </>
-  ),
-  'Many breadcrumbs': (
-    <>
-      <BreadcrumbItem href="#">Home page</BreadcrumbItem>
-      <BreadcrumbItem href="#">Secondary page</BreadcrumbItem>
-      <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
-      <BreadcrumbItem href="#">Breadcrumb 4</BreadcrumbItem>
-      <BreadcrumbItem href="#">Breadcrumb 5</BreadcrumbItem>
-      <BreadcrumbItem href="#">Breadcrumb 6</BreadcrumbItem>
-      <BreadcrumbItem href="#">Breadcrumb 7</BreadcrumbItem>
-      <BreadcrumbItem href="#">Breadcrumb 8</BreadcrumbItem>
-    </>
-  ),
-  'Custom breadcrumbs': (
-    <>
-      <BreadcrumbItem href="../../../homepage">Homepage</BreadcrumbItem>
-      <BreadcrumbItem href="../../Reports">Reports</BreadcrumbItem>
-      <BreadcrumbItem href={mys}>{my2s}</BreadcrumbItem>
-    </>
-  ),
 };
+
+console.dir(breadcrumbs);
 
 const children = {
   'Nothing in the available area': null,
@@ -346,7 +305,7 @@ export default {
       options: Object.values(actionBarItems).map((_k, i) => i),
       mapping: Object.values(actionBarItems),
     },
-    breadcrumbItems: {
+    breadcrumbs: {
       control: {
         type: 'select',
         labels: Object.keys(breadcrumbs),
@@ -500,7 +459,7 @@ export const withBreadcrumbs = Template.bind({});
 withBreadcrumbs.storyName = 'Simple page header with breadcrumb';
 withBreadcrumbs.args = {
   ...withTitle.args,
-  breadcrumbItems: 2,
+  breadcrumbs: 2,
   breadcrumbOverflowAriaLabel,
 };
 
@@ -517,7 +476,7 @@ export const withTabs = Template.bind({});
 withTabs.storyName = 'Page header with navigation tabs';
 withTabs.args = {
   title: 2,
-  breadcrumbItems: 2,
+  breadcrumbs: 2,
   breadcrumbOverflowAriaLabel,
   pageActions: 2,
   pageActionsOverflowLabel,
@@ -528,7 +487,7 @@ export const withTags = Template.bind({});
 withTags.storyName = 'Page header with tags';
 withTags.args = {
   title: 2,
-  breadcrumbItems: 2,
+  breadcrumbs: 2,
   breadcrumbOverflowAriaLabel,
   pageActions: 2,
   pageActionsOverflowLabel,
@@ -539,7 +498,7 @@ export const withTabsAndTags = Template.bind({});
 withTabsAndTags.storyName = 'Page header with tags and navigation tabs';
 withTabsAndTags.args = {
   title: 2,
-  breadcrumbItems: 2,
+  breadcrumbs: 2,
   breadcrumbOverflowAriaLabel,
   pageActions: 2,
   pageActionsOverflowLabel,
@@ -552,7 +511,7 @@ withSubtitle.storyName = 'Page header with title and subtitle';
 withSubtitle.args = {
   title: 2,
   subtitle,
-  breadcrumbItems: 2,
+  breadcrumbs: 2,
   breadcrumbOverflowAriaLabel,
   navigation: 1,
 };
@@ -561,7 +520,7 @@ export const withSummaryDetails = Template.bind({});
 withSummaryDetails.storyName = 'Page header with summary details';
 withSummaryDetails.args = {
   title: 2,
-  breadcrumbItems: 2,
+  breadcrumbs: 2,
   breadcrumbOverflowAriaLabel,
   navigation: 1,
   children: 2,
@@ -571,7 +530,7 @@ export const withActionsToolbar = Template.bind({});
 withActionsToolbar.storyName = 'Page header with actions toolbar';
 withActionsToolbar.args = {
   title: 2,
-  breadcrumbItems: 2,
+  breadcrumbs: 2,
   breadcrumbOverflowAriaLabel,
   navigation: 1,
   actionBarItems: 2,
@@ -583,7 +542,7 @@ withBreadcrumbActionsToolbarOnly.storyName =
   'Reduced page header with breadcrumb bar only';
 withBreadcrumbActionsToolbarOnly.args = {
   title: 1,
-  breadcrumbItems: 2,
+  breadcrumbs: 2,
   breadcrumbOverflowAriaLabel,
   actionBarItems: 2,
   actionBarOverflowAriaLabel,
@@ -595,7 +554,7 @@ fullyLoaded.storyName = 'Page header with all items, pre-collapsed';
 fullyLoaded.args = {
   title: 2,
   subtitle,
-  breadcrumbItems: 2,
+  breadcrumbs: 2,
   breadcrumbOverflowAriaLabel,
   pageActions: 2,
   pageActionsOverflowLabel,
@@ -612,7 +571,7 @@ fullyLoadedAndSome.storyName = 'Page header with long values and many items';
 fullyLoadedAndSome.args = {
   title: 3,
   subtitle: longSubtitle,
-  breadcrumbItems: 3,
+  breadcrumbs: 3,
   breadcrumbOverflowAriaLabel,
   pageActions: 3,
   pageActionsOverflowLabel,
@@ -661,7 +620,7 @@ demo.storyName = 'Page header in context';
 demo.args = {
   title: 5,
   subtitle: demoSubtitle,
-  breadcrumbItems: 4,
+  breadcrumbs: 4,
   breadcrumbOverflowAriaLabel,
   pageActions: 4,
   pageActionsOverflowLabel,

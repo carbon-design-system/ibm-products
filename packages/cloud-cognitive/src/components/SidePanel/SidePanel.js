@@ -170,6 +170,8 @@ export let SidePanel = React.forwardRef(
             sidePanelSubtitleElementHeight ||
           sidePanelSubtitleElementHeight === 0
             ? totalScrollingContentHeight - panelOuterHeight
+            : sidePanelSubtitleElementHeight < 0
+            ? 16
             : sidePanelSubtitleElementHeight;
         /* istanbul ignore next */
         sidePanelOuter &&

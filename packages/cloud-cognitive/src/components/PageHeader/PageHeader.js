@@ -438,6 +438,25 @@ export let PageHeader = React.forwardRef(
       handleHeight: true,
     });
 
+    let breadcrumbsInWithTitle;
+    if (breadcrumbsIn) {
+      breadcrumbsInWithTitle = !title
+        ? breadcrumbsIn
+        : breadcrumbsIn.concat({
+            isCurrentPage: true,
+            className: cx([
+              `${blockClass}__breadcrumb-title`,
+              {
+                [`${blockClass}__breadcrumb-title--pre-collapsed`]:
+                  collapseTitle,
+              },
+            ]),
+            key: `breadcrumb-title`,
+            label: <span>{titleLoading ? <SkeletonText /> : titleText}</span>,
+            title: titleText,
+          });
+    }
+
     return (
       <section
         {...rest}
@@ -477,7 +496,7 @@ export let PageHeader = React.forwardRef(
                         className={`${blockClass}__breadcrumb`}
                         noTrailingSlash={title !== undefined}
                         overflowAriaLabel={breadcrumbOverflowAriaLabel}
-                        breadcrumbs={breadcrumbsIn}>
+                        breadcrumbs={breadcrumbsInWithTitle}>
                         {!breadcrumbsIn ? deprecated_breadcrumbItems : null}
                         {!breadcrumbsIn && title ? (
                           <BreadcrumbItem

@@ -934,7 +934,7 @@ PageHeader.propTypes = {
       label: PropTypes.node,
 
       /**
-       * A string based alternative to the children, required only if children is not of type string.
+       * A text version of the `label` for display, required if `label` is not a string.
        */
       title: PropTypes.string.isRequired.if(
         ({ label }) => typeof label !== 'string'

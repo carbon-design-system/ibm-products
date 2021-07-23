@@ -41,7 +41,7 @@
     "spellcheck:files": "cspell lint --relative --no-progress --show-context --no-must-find-files",
     "storybook": "run-s storybook:build:dependencies storybook:start",
     "storybook:build": "run-s storybook:build:*",
-    "storybook:build:dependencies": "yarn run-all --include-dependencies --scope \"@carbon/storybook-addon-theme\" --scope \"@carbon/ibm-cloud-cognitive\" build",
+    "storybook:build:dependencies": "yarn run-all --include-dependencies --scope \"@carbon/storybook-addon-theme\" build",
     "storybook:build:storybook": "cd packages/core && yarn build",
     "storybook:start": "cd packages/core && yarn start",
     "sync": "carbon-cli sync",

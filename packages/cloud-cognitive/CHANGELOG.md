@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.61.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.60.0...@carbon/ibm-cloud-cognitive@0.61.0) (2021-07-23)
+
+
+### Features
+
+* **PageHeader:** update for change to BreadcrumbWithOverflow props ([#1053](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1053)) ([f6669e8](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f6669e8d80d4358b19a629a92d11161ec51536c2))
+
+
+
+
+
 # [0.60.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.59.0...@carbon/ibm-cloud-cognitive@0.60.0) (2021-07-22)
 
 

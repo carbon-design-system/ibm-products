@@ -438,6 +438,25 @@ export let PageHeader = React.forwardRef(
       handleHeight: true,
     });
 
+    let breadcrumbsInWithTitle;
+    if (breadcrumbsIn) {
+      breadcrumbsInWithTitle = !title
+        ? breadcrumbsIn
+        : breadcrumbsIn.concat({
+            isCurrentPage: true,
+            className: cx([
+              `${blockClass}__breadcrumb-title`,
+              {
+                [`${blockClass}__breadcrumb-title--pre-collapsed`]:
+                  collapseTitle,
+              },
+            ]),
+            key: `breadcrumb-title`,
+            label: <span>{titleLoading ? <SkeletonText /> : titleText}</span>,
+            title: titleText,
+          });
+    }
+
     return (
       <section
         {...rest}
@@ -477,7 +496,7 @@ export let PageHeader = React.forwardRef(
                         className={`${blockClass}__breadcrumb`}
                         noTrailingSlash={title !== undefined}
                         overflowAriaLabel={breadcrumbOverflowAriaLabel}
-                        breadcrumbs={breadcrumbsIn}>
+                        breadcrumbs={breadcrumbsInWithTitle}>
                         {!breadcrumbsIn ? deprecated_breadcrumbItems : null}
                         {!breadcrumbsIn && title ? (
                           <BreadcrumbItem
@@ -864,9 +883,7 @@ PageHeader.propTypes = {
    */
   actionBarOverflowAriaLabel: PropTypes.string.isRequired.if(
     ({ actionBarItems, actionBarOverflowLabel }) =>
-      actionBarItems &&
-      actionBarItems.length > 0 &&
-      !actionBarOverflowLabel
+      actionBarItems && actionBarItems.length > 0 && !actionBarOverflowLabel
   ),
   /**
    * When tags are supplied there may not be sufficient space to display all of the tags. This results in an overflow
@@ -946,7 +963,7 @@ PageHeader.propTypes = {
    * A zone for placing high-level, client content above the page tabs.
    * Accepts arbitrary renderable content as a React node. Optional.
    */
-   children: PropTypes.node,
+  children: PropTypes.node,
   /**
    * Specifies class(es) to be applied to the top-level PageHeader node.
    * Optional.

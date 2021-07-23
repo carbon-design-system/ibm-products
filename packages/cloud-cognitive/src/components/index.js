@@ -6,7 +6,6 @@
 //
 
 export { AboutModal } from './AboutModal';
-export { ActionBarItem } from './ActionBar';
 export { ComboButton, ComboButtonItem } from './ComboButton';
 export { ContextHeader } from './ContextHeader';
 export {

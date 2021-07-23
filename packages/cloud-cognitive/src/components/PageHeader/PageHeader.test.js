@@ -412,7 +412,7 @@ describe('PageHeader', () => {
     );
 
     const collapseButton = screen.getByRole('button', {
-      name: 'Toggle collapse',
+      name: testProps.collapseHeaderIconDescription,
     });
 
     window.scrollTo.mockReset();
@@ -577,7 +577,7 @@ describe('PageHeader', () => {
 
     expect(error).toBeCalledWith(
       expect.stringMatching(
-        /^Warning: Failed prop type: The prop `actionBarOverflowAriaLabel` is marked as required in `PageHeader`/
+        /^Warning: Failed prop type: The prop `overflowAriaLabel` is marked as required in `ActionBar`/
       )
     );
 
@@ -607,7 +607,7 @@ describe('PageHeader', () => {
     jest.spyOn(console, 'error').mockRestore();
   });
 
-  test.only('Works, for now, with deprecated props', () => {
+  test('Works, for now, with deprecated props', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
     const warnings = [

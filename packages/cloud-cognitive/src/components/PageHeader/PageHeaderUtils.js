@@ -160,3 +160,14 @@ export const utilSetCustomCSSProps = (targetRef, kvPairs) => {
     }
   }
 };
+
+// Trigger a window scroll, if necessary, to set the collapsed state.
+export const utilSetCollapsed = (collapse, headerOffset, headerTopValue) => {
+  /* don't know how to test resize */
+  /* istanbul ignore next if */
+  if (collapse) {
+    window.scrollTo({ top: headerOffset - headerTopValue, behavior: 'smooth' });
+  } else {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+};

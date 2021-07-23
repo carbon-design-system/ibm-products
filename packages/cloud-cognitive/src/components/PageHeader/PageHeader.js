@@ -899,7 +899,7 @@ PageHeader.propTypes = {
    */
   allTagsModalTitle: string_required_if_more_than_10_tags,
   /**
-   * If the user supplies breadcrumbs then they this property is required.
+   * If the user supplies breadcrumbs then this property is required.
    * It is used in an overflow menu when there is insufficient space to display all breadcrumbs inline.
    */
   breadcrumbOverflowAriaLabel: PropTypes.string.isRequired.if(

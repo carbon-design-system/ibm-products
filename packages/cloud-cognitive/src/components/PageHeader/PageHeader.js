@@ -872,8 +872,7 @@ PageHeader.propTypes = {
     ({ actionBarItems, actionBarOverflowLabel }) =>
       actionBarItems &&
       actionBarItems.length > 0 &&
-      actionBarOverflowLabel &&
-      actionBarOverflowLabel.length < 1
+      !actionBarOverflowLabel
   ),
   /**
    * When tags are supplied there may not be sufficient space to display all of the tags. This results in an overflow

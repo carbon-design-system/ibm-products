@@ -245,19 +245,19 @@ const pageActions = {
     {
       key: '1',
       kind: 'danger',
-      label: 'Secondary 1',
+      label: 'Danger button',
       onClick: () => {},
     },
     {
       key: '2',
       kind: 'secondary',
-      label: 'Secondary 2',
+      label: 'Secondary button',
       onClick: () => {},
     },
     {
       key: '3',
       kind: 'primary',
-      label: 'Primary',
+      label: 'Primary button',
       onClick: () => {},
     },
   ],

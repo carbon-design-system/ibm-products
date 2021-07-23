@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.61.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.61.1...@carbon/ibm-cloud-cognitive@0.61.2) (2021-07-23)
+
+
+### Bug Fixes
+
+* **SidePanel:** title animation bug addressed, missing default value ([#1064](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1064)) ([40cc4a6](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/40cc4a6b285c41125f4e8f85c6f38e0b25dcbd7f))
+
+
+
+
+
 ## [0.61.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.61.0...@carbon/ibm-cloud-cognitive@0.61.1) (2021-07-23)
 
 

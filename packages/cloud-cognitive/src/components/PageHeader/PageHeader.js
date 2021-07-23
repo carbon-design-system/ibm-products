@@ -864,9 +864,7 @@ PageHeader.propTypes = {
    */
   actionBarOverflowAriaLabel: PropTypes.string.isRequired.if(
     ({ actionBarItems, actionBarOverflowLabel }) =>
-      actionBarItems &&
-      actionBarItems.length > 0 &&
-      !actionBarOverflowLabel
+      actionBarItems && actionBarItems.length > 0 && !actionBarOverflowLabel
   ),
   /**
    * When tags are supplied there may not be sufficient space to display all of the tags. This results in an overflow
@@ -946,7 +944,7 @@ PageHeader.propTypes = {
    * A zone for placing high-level, client content above the page tabs.
    * Accepts arbitrary renderable content as a React node. Optional.
    */
-   children: PropTypes.node,
+  children: PropTypes.node,
   /**
    * Specifies class(es) to be applied to the top-level PageHeader node.
    * Optional.

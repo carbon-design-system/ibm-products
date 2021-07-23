@@ -174,12 +174,14 @@ export let PageHeader = React.forwardRef(
       setPageActionInBreadcrumbMinWidth(minWidth);
     };
 
+    /* istanbul ignore next */
     const handleResizeActionBarColumn = (width) => {
       /* don't know how to test resize */
       /* istanbul ignore next */
       setActionBarColumnWidth(width);
     };
 
+    /* istanbul ignore next */
     const handleResize = () => {
       // receives width and height parameters if needed
       /* don't know how to test resize */
@@ -198,6 +200,7 @@ export let PageHeader = React.forwardRef(
     // use effects
     useEffect(() => {
       // Determine the location of the pageAction buttons
+      /* istanbul ignore next */
       setPageActionsInBreadcrumbRow(
         collapseTitle ||
           (scrollYValue > metrics.titleRowSpaceAbove && hasActionBar)
@@ -257,6 +260,7 @@ export let PageHeader = React.forwardRef(
 
     useEffect(() => {
       // Updates custom CSS props used to manage scroll behaviour
+      /* istanbul ignore next */
       utilSetCustomCSSProps(headerRef, {
         [`--${blockClass}--height-px`]: `${metrics.headerHeight}px`,
         [`--${blockClass}--width-px`]: `${metrics.headerWidth}px`,
@@ -312,10 +316,12 @@ export let PageHeader = React.forwardRef(
         setFullyCollapsed(fullyCollapsed);
 
         // set offset for tagset tooltip
+        /* istanbul ignore next */
         const tagsetTooltipOffset = fullyCollapsed
           ? metrics.headerHeight + metrics.headerTopValue + metrics.headerOffset
           : metrics.headerHeight + metrics.headerOffset;
 
+        /* istanbul ignore next */
         document.documentElement.style.setProperty(
           `--${blockClass}--tagset-tooltip-position`,
           fullyCollapsed ? 'fixed' : 'absolute'
@@ -403,6 +409,7 @@ export let PageHeader = React.forwardRef(
     }, [hasCollapseButton, navigation, tags, metrics.headerHeight]);
 
     const nextToTabsCheck = () => {
+      /* istanbul ignore next */
       return (
         disableBreadcrumbScroll &&
         actionBarItems === undefined &&
@@ -722,6 +729,7 @@ export let PageHeader = React.forwardRef(
             })}
             hasIconOnly={true}
             iconDescription={
+              /* istanbul ignore next */
               fullyCollapsed
                 ? expandHeaderIconDescription
                 : collapseHeaderIconDescription

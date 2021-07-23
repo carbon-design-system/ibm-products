@@ -309,6 +309,7 @@ describe('PageHeader', () => {
     expect(
       document.querySelectorAll(`.${blockClass}__page-actions`)
     ).toHaveLength(2);
+    screen.getAllByText(testProps.pageActionsOverflowLabel);
     expect(document.querySelectorAll(`.${blockClass}__subtitle`)).toHaveLength(
       1
     );
@@ -418,14 +419,30 @@ describe('PageHeader', () => {
     window.scrollTo.mockReset();
     expect(window.scrollTo).not.toHaveBeenCalled();
     userEvent.click(collapseButton);
+    // Determine how to test this (jest dom does not do scroll events)
+    // screen.getByLabelText(testProps.expandHeaderIconDescription);
     expect(window.scrollTo).toHaveBeenCalled();
     userEvent.click(collapseButton);
     expect(window.scrollTo).toHaveBeenCalledTimes(2);
   });
 
+  test('collapseHeader prop test', () => {
+    const dataTestId = uuidv4();
+    render(
+      <PageHeader
+        {...testProps}
+        collapseHeader={true}
+        data-test-id={dataTestId}>
+        {children}
+      </PageHeader>
+    );
+
+    expect(window.scrollTo).toHaveBeenCalled();
+  });
+
   test('Navigation row renders when Navigation but no tags', () => {
     const { navigation } = testProps;
-    render(<PageHeader {...{ navigation }} />);
+    render(<PageHeader {...{ navigation, hasBackgroundAlways: false }} />);
 
     expect(screen.queryAllByTestId('tabs')).toHaveLength(1);
   });
@@ -527,7 +544,14 @@ describe('PageHeader', () => {
     expect(actionBarItems).toHaveLength(1);
   });
 
-  test('renders  title when using separate string and icon', () => {
+  test.skip('disableBreadcrumbScroll works', () => {
+    // Need to figure out how to test this
+    expect(
+      'Disabling the breadcrumb scroll stops the breadcrumb scrolling off the screen.'
+    ).toBeTruthy();
+  });
+
+  test('renders title when using separate string and icon', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
     render(<PageHeader {...testPropsAltTitle} />);
@@ -584,14 +608,29 @@ describe('PageHeader', () => {
     jest.spyOn(console, 'error').mockRestore();
   });
 
-  test('Breadcrumb without overflow aria label', () => {
-    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
-
-    const { title } = testProps;
+  test('Title shows as loading', () => {
     render(
       <PageHeader
         {...{
-          title,
+          breadcrumbs: testProps.breadcrumbs,
+          breadcrumbOverflowAriaLabel: testProps.breadcrumbOverflowAriaLabel,
+          title: { text: '', loading: true },
+        }}
+      />
+    );
+
+    const skeletons = document.querySelectorAll(
+      `.${carbon.prefix}--skeleton__text`
+    );
+    expect(skeletons).toHaveLength(3);
+  });
+
+  test('Breadcrumb without overflow aria label', () => {
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    render(
+      <PageHeader
+        {...{
           breadcrumbs,
         }}
         aria-label="Page header" // gives section role 'region'
@@ -662,14 +701,32 @@ describe('PageHeader', () => {
     screen.getByRole('button', {
       name: testProps.collapseHeaderIconDescription,
     });
-
+    // Determine how to test this
     // userEvent.click(collapseButton);
-    // console.log(collapseButton.outerHTML);
     // screen.getByLabelText(testProps.expandHeaderIconDescription);
 
     screen.getAllByText(titleString, {
       selector: `.${blockClass}__breadcrumb-title--pre-collapsed .${carbon.prefix}--link`,
     });
+
+    warn.mockRestore(); // Remove mock
+  });
+
+  test('Deprecated title skeleton with breadcrumbs', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    render(
+      <PageHeader
+        breadcrumbItems={breadcrumbItems}
+        breadcrumbOverflowLabel={testProps.breadcrumbOverflowAriaLabel}
+        title={{ text: titleString, loading: true }}
+      />
+    );
+
+    const skeletons = document.querySelectorAll(
+      `.${carbon.prefix}--skeleton__text`
+    );
+    expect(skeletons).toHaveLength(3);
 
     warn.mockRestore(); // Remove mock
   });

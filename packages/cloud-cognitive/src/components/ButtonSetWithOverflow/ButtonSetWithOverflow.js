@@ -81,16 +81,20 @@ export const ButtonSetWithOverflow = ({
   const AButtonSet = React.forwardRef(({ buttons, ...rest }, ref) => {
     return (
       <ButtonSet {...rest} ref={ref}>
-        {buttons.map(({ label, key, kind, ...other }) => (
-          <Button
-            key={key && `button-set-${key}`}
-            kind={kind || 'primary'}
-            {...other}
-            size={buttonSize}
-            type="button">
-            {label}
-          </Button>
-        ))}
+        {buttons.map(({ label, key, kind, ...other }) => {
+          /* istanbul ignore next */
+          const usedKind = kind || 'primary';
+          return (
+            <Button
+              key={key && `button-set-${key}`}
+              kind={usedKind}
+              {...other}
+              size={buttonSize}
+              type="button">
+              {label}
+            </Button>
+          );
+        })}
       </ButtonSet>
     );
   });

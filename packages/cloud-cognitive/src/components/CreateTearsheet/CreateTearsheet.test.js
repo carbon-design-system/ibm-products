@@ -31,8 +31,8 @@ const finalStepOnNext = jest.fn(() => Promise.resolve());
 const finalStepOnNextNonPromise = jest.fn();
 const finalStepOnNextRejectFn = jest.fn(() => Promise.reject());
 const submitButtonText = 'Submit';
-const cancelButtonText = uuidv4();
-const backButtonText = uuidv4();
+const cancelButtonText = 'Cancel';
+const backButtonText = 'Back';
 const nextButtonText = 'Next';
 const step3Title = uuidv4();
 const step2Title = uuidv4();
@@ -40,26 +40,29 @@ const step1Title = uuidv4();
 const title = uuidv4();
 const dataTestId = uuidv4();
 const ref = React.createRef();
-const renderCreateTearsheet = (
+const defaultProps = {
+  title,
+  submitButtonText,
+  cancelButtonText,
+  backButtonText,
+  nextButtonText,
+  ref,
+  onClose: onCloseFn,
+  open: true,
+};
+const renderCreateTearsheet = ({
   rejectOnSubmit = false,
   rejectOnNext = false,
   submitFn = onRequestSubmitFn,
   onNext = onNextStepFn,
   finalOnNextFn = finalStepOnNext,
-  rejectOnSubmitNext = false
-) =>
+  rejectOnSubmitNext = false,
+  ...rest
+}) =>
   render(
     <CreateTearsheet
-      open={true}
-      onClose={onCloseFn}
       onRequestSubmit={rejectOnSubmit ? onRequestSubmitRejectFn : submitFn}
-      submitButtonText={submitButtonText}
-      cancelButtonText={cancelButtonText}
-      backButtonText={backButtonText}
-      nextButtonText={nextButtonText}
-      title={title}
-      ref={ref}
-      data-test-id={dataTestId}>
+      {...rest}>
       <p>Child element that persists across all steps</p>
       <CreateTearsheetStep
         onNext={rejectOnNext ? onNextStepRejectionFn : onNext}
@@ -83,31 +86,14 @@ const renderCreateTearsheet = (
 
 const renderEmptyCreateTearsheet = ({ ...rest }) =>
   render(
-    <CreateTearsheet
-      open={true}
-      onClose={onCloseFn}
-      onRequestSubmit={onRequestSubmitFn}
-      submitButtonText={submitButtonText}
-      cancelButtonText={cancelButtonText}
-      backButtonText={backButtonText}
-      nextButtonText={nextButtonText}
-      title={title}
-      {...rest}>
+    <CreateTearsheet onRequestSubmit={onRequestSubmitFn} {...rest}>
       <p>Child element that persists across all steps</p>
     </CreateTearsheet>
   );
 
-const renderSingleStepCreateTearsheet = () =>
+const renderSingleStepCreateTearsheet = ({ ...rest }) =>
   render(
-    <CreateTearsheet
-      open={true}
-      onClose={onCloseFn}
-      onRequestSubmit={onRequestSubmitFn}
-      submitButtonText={submitButtonText}
-      cancelButtonText={cancelButtonText}
-      backButtonText={backButtonText}
-      nextButtonText={nextButtonText}
-      title={title}>
+    <CreateTearsheet onRequestSubmit={onRequestSubmitFn} {...rest}>
       <p>Child element that persists across all steps</p>
       <CreateTearsheetStep title={step1Title}>
         step 1 content
@@ -132,20 +118,19 @@ describe(CreateTearsheet.displayName, () => {
   });
 
   it('renders the CreateTearsheet component', () => {
-    const { container } = renderCreateTearsheet();
-    expect(screen.getAllByText(title));
+    const { container } = renderCreateTearsheet({
+      ...defaultProps,
+      'data-test-id': dataTestId,
+    });
+    screen.getByTestId(dataTestId);
+    screen.getAllByText(title);
     expect(container.querySelector(`.${tearsheetBlockClass}`)).toBeTruthy();
     expect(ref.current).not.toBeNull();
-    expect(
-      container.querySelector(
-        `.${tearsheetBlockClass}[data-test-id="${dataTestId}"]`
-      )
-    ).toBeInTheDocument();
   });
 
   it('renders the second step if clicking on the next step button with onNext optional function prop and then clicks cancel button', async () => {
     const { click } = userEvent;
-    const { container } = renderCreateTearsheet();
+    const { container } = renderCreateTearsheet(defaultProps);
     const nextButtonElement = screen.getByText(nextButtonText);
     const cancelButtonElement = screen.getByText(cancelButtonText);
     click(nextButtonElement);
@@ -168,7 +153,11 @@ describe(CreateTearsheet.displayName, () => {
   it('renders first step with onNext function prop that rejects', async () => {
     jest.spyOn(console, 'warn').mockImplementation(jest.fn());
     const { click } = userEvent;
-    renderCreateTearsheet(false, true);
+    renderCreateTearsheet({
+      ...defaultProps,
+      rejectOnSubmit: false,
+      rejectOnNext: true,
+    });
     const nextButtonElement = screen.getByText(nextButtonText);
     click(nextButtonElement);
 
@@ -180,7 +169,7 @@ describe(CreateTearsheet.displayName, () => {
 
   it('renders the next CreateTearsheet step without onNext handler', async () => {
     const { click } = userEvent;
-    const { container, rerender } = renderCreateTearsheet();
+    const { container, rerender } = renderCreateTearsheet(defaultProps);
     const nextButtonElement = screen.getByText(nextButtonText);
     click(nextButtonElement);
     await waitFor(() => {
@@ -215,7 +204,14 @@ describe(CreateTearsheet.displayName, () => {
 
   it('should call the onRequestSubmit prop, returning a promise on last step submit button', async () => {
     const { click } = userEvent;
-    renderCreateTearsheet(false, false, onRequestSubmitFn, onNextStepFn, null);
+    renderCreateTearsheet({
+      ...defaultProps,
+      rejectOnSubmit: false,
+      rejectOnNext: false,
+      submitFn: onRequestSubmitFn,
+      onNext: onNextStepFn,
+      finalOnNextFn: null,
+    });
     const nextButtonElement = screen.getByText(nextButtonText);
     click(nextButtonElement);
     await waitFor(() => {
@@ -234,13 +230,14 @@ describe(CreateTearsheet.displayName, () => {
 
   it('should call the onRequestSubmit function, without a promise, on last step submit button', async () => {
     const { click } = userEvent;
-    renderCreateTearsheet(
-      false,
-      false,
-      onRequestSubmitNonPromiseFn,
-      onNextStepNonPromiseFn,
-      finalStepOnNextNonPromise
-    );
+    renderCreateTearsheet({
+      ...defaultProps,
+      rejectOnSubmit: false,
+      rejectOnNext: false,
+      submitFn: onRequestSubmitNonPromiseFn,
+      onNext: onNextStepNonPromiseFn,
+      finalOnNextFn: finalStepOnNextNonPromise,
+    });
     const nextButtonElement = screen.getByText(nextButtonText);
     click(nextButtonElement);
     await waitFor(() => {
@@ -260,14 +257,15 @@ describe(CreateTearsheet.displayName, () => {
   it('should call the onNext function from the final step and reject the promise', async () => {
     jest.spyOn(console, 'warn').mockImplementation(jest.fn());
     const { click } = userEvent;
-    renderCreateTearsheet(
-      false,
-      false,
-      onRequestSubmitFn,
-      onNextStepFn,
-      null,
-      true
-    );
+    renderCreateTearsheet({
+      ...defaultProps,
+      rejectOnSubmit: false,
+      rejectOnNext: false,
+      submitFn: onRequestSubmitFn,
+      onNext: onNextStepFn,
+      finalOnNextFn: null,
+      rejectOnSubmitNext: true,
+    });
     const nextButtonElement = screen.getByText(nextButtonText);
     click(nextButtonElement);
     await waitFor(() => {
@@ -288,7 +286,10 @@ describe(CreateTearsheet.displayName, () => {
   it('should call the onRequestSubmit prop and reject the promise', async () => {
     jest.spyOn(console, 'warn').mockImplementation(jest.fn());
     const { click } = userEvent;
-    renderCreateTearsheet(true);
+    renderCreateTearsheet({
+      ...defaultProps,
+      rejectOnSubmit: true,
+    });
     const nextButtonElement = screen.getByText(nextButtonText);
     click(nextButtonElement);
     await waitFor(() => {
@@ -307,7 +308,7 @@ describe(CreateTearsheet.displayName, () => {
   });
 
   it('should not render any CreateTearsheet steps when there are no TearsheetStep components included', () => {
-    const { container } = renderEmptyCreateTearsheet();
+    const { container } = renderEmptyCreateTearsheet(defaultProps);
     const createTearsheetSteps = container.querySelectorAll(
       `.${tearsheetBlockClass}__step`
     );
@@ -316,7 +317,11 @@ describe(CreateTearsheet.displayName, () => {
 
   it('should click the back button and add a custom next button label on a single step', async () => {
     const { click } = userEvent;
-    const { container } = renderCreateTearsheet(false, false);
+    const { container } = renderCreateTearsheet({
+      ...defaultProps,
+      rejectOnSubmit: false,
+      rejectOnNext: false,
+    });
     const nextButtonElement = screen.getByText(nextButtonText);
     click(nextButtonElement);
     await waitFor(() => {
@@ -336,7 +341,21 @@ describe(CreateTearsheet.displayName, () => {
 
   it('should create a console warning when using CreateTearsheet with only one step', () => {
     jest.spyOn(console, 'warn').mockImplementation(jest.fn());
-    renderSingleStepCreateTearsheet();
+    renderSingleStepCreateTearsheet(defaultProps);
     jest.spyOn(console, 'warn').mockRestore();
+  });
+
+  it('should render the view all toggle and click it', () => {
+    const viewAllToggleLabelText = 'Show all available options';
+    renderCreateTearsheet({
+      ...defaultProps,
+      includeViewAllToggle: true,
+      viewAllToggleLabelText,
+      viewAllToggleOffLabelText: 'Off',
+      viewAllToggleOnLabelText: 'On',
+    });
+    const { click } = userEvent;
+    click(screen.getByText(viewAllToggleLabelText));
+    expect(screen.getByLabelText(viewAllToggleLabelText)).toBeChecked();
   });
 });

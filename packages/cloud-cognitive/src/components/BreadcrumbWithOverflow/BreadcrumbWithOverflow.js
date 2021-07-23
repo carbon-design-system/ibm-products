@@ -52,6 +52,7 @@ const getTitle = (shape) => {
   // - shape.label.props.children if string. This case is likely if an <a /> is used inside a BreadcrumbItem
   let useAsTitle = null;
 
+  /* istanbul ignore else */
   if (shape) {
     /* istanbul ignore next if */ // list represents preferred order with checks, no else case expected
     if (shape['data-title']) {

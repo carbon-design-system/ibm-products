@@ -944,7 +944,8 @@ PageHeader.propTypes = {
   /**
    * A zone for placing high-level, client content above the page tabs.
    * Accepts arbitrary renderable content as a React node. Optional.
-   */ children: PropTypes.node,
+   */
+   children: PropTypes.node,
   /**
    * Specifies class(es) to be applied to the top-level PageHeader node.
    * Optional.

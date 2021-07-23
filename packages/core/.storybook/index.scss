@@ -54,16 +54,6 @@
 }
 
 /**
-  Override used for modals in any .mdx preview block.
-  storybook generates preview blocks with a surrounding div with style="position: relative; z-index: 0;"
-  this causes style problems for modals when not using react portals.
-  modals in mdx files should now be formatted like this to prevent z-index issues
-*/
-.preview-position-fix > div {
-  position: static !important; /* stylelint-disable-line declaration-no-important */
-}
-
-/**
   Adds a box indicating the extent of the available space to the displayed component
 */
 .ccs-sb__display-box {

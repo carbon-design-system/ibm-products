@@ -89,8 +89,11 @@ const parameters = {
   controls: { expanded: true, hideNoControlsWarning: true },
   layout: 'centered',
   options: {
-    storySort: (a, b) => {
-      // const storybookOrder = ['Cloud & Cognitive', ['Released', 'Canary'], 'Legacy'];
+    storySort: {
+      order: ['Cloud & Cognitive', ['Released', 'Canary'], 'Legacy'],
+    },
+    /*storySort: (a, b) => {
+      // const storybookOrder = ['Cloud & Cognitive', ['Released', 'Canary'], 'Security', 'Legacy'];
       const aInOrder = toOrder(a[1].kind);
       const bInOrder = toOrder(b[1].kind);
 
@@ -102,7 +105,7 @@ const parameters = {
           ? 0
           : a[1].id.localeCompare(b[1].id, undefined, { numeric: true });
       }
-    },
+    },*/
   },
 
   // Optional default Carbon theme.

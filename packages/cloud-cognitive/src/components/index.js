@@ -6,6 +6,7 @@
 //
 
 export { AboutModal } from './AboutModal';
+export { APIKeyModal } from './APIKeyModal';
 export { ComboButton, ComboButtonItem } from './ComboButton';
 export { ContextHeader } from './ContextHeader';
 export {

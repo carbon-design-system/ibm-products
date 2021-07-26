@@ -37,7 +37,6 @@ const defaults = {
     UserProfileImage: true,
 
     // other public components not yet reviewed and released:
-    APIKeyDownloader: false,
     APIKeyModal: false,
     CreateFullPage: false,
     CreateFullPageSection: false,

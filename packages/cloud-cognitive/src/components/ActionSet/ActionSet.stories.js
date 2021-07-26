@@ -11,6 +11,7 @@ import { action } from '@storybook/addon-actions';
 
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { ActionSet } from '.';
 import { actionsOptions, actionsLabels, actionsMapping } from './actions.js';
@@ -58,5 +59,6 @@ const Template = ({ actions, size, ...args }) => {
   );
 };
 
-export const actionSet = Template.bind({});
-actionSet.args = { actions: 3 };
+export const actionSet = prepareStory(Template, {
+  args: { actions: 3 },
+});

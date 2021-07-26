@@ -54,7 +54,8 @@ const getTitle = (shape) => {
 
   /* istanbul ignore else */
   if (shape) {
-    /* istanbul ignore next if */ // list represents preferred order with checks, no else case expected
+    // list represents preferred order with checks, no else case expected
+    /* istanbul ignore next */
     if (shape['data-title']) {
       useAsTitle = shape['data-title'];
     } else if (shape.title) {
@@ -215,7 +216,7 @@ export let BreadcrumbWithOverflow = ({
       let willFit = 0;
       let spaceAvailable = breadcrumbItemWithOverflow.current.offsetWidth; // not sure how to test resize
 
-      /* istanbul ignore next if */
+      /* istanbul ignore next */
       if (sizingContainerRef.current) {
         const sizingBreadcrumbItems =
           sizingContainerRef.current.querySelectorAll(
@@ -298,7 +299,7 @@ export let BreadcrumbWithOverflow = ({
   };
 
   let backItem = breadcrumbs[breadcrumbs.length - 1];
-  /* istanbul ignore next if */ // not sure how to test media queries
+  /* istanbul ignore if */ // not sure how to test media queries
   if (backItem?.isCurrentPage) {
     backItem = breadcrumbs[breadcrumbs.length - 2];
   }

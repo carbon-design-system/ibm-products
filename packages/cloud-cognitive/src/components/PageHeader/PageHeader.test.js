@@ -204,7 +204,6 @@ describe('PageHeader', () => {
   window.innerHeight = 1080;
 
   beforeEach(() => {
-    jest.spyOn(console, 'warn').mockImplementation(() => {}); // TEMP: remove on updating BreadcrumbWithOverflow usage
     mockElement = mockHTMLElement({
       offsetWidth: {
         get: function () {
@@ -231,7 +230,6 @@ describe('PageHeader', () => {
   });
 
   afterEach(() => {
-    jest.spyOn(console, 'warn').mockRestore(); // TEMP: remove on updating BreadcrumbWithOverflow usage
     mocks.forEach((mock) => {
       mock.mock.mockRestore();
     });

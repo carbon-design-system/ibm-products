@@ -61,6 +61,19 @@ const defaultProps = {
 URL.createObjectURL = jest.fn(() => Promise.resolve('download-link'));
 
 describe(name, () => {
+  it('renders with standard visible props', () => {
+    const { getByText, getByPlaceholderText } = render(
+      <APIKeyModal {...defaultProps} />
+    );
+    getByText(defaultProps.body);
+    getByText(defaultProps.closeButtonText);
+    getByText(defaultProps.generateButtonText);
+    getByText(defaultProps.generateTitle);
+    getByText(defaultProps.modalLabel);
+    getByText(defaultProps.nameLabel);
+    getByPlaceholderText(defaultProps.namePlaceholder);
+  });
+
   it('renders with minimal setup', () => {
     const props = {
       ...defaultProps,
@@ -69,9 +82,10 @@ describe(name, () => {
       apiKey: '123-456-789',
     };
     const { click } = fireEvent;
-    const { container } = render(<APIKeyModal {...props} />);
-    const copyBtn = container.querySelector('.bx--btn--primary');
-    click(copyBtn);
+    const { getByText, container } = render(<APIKeyModal {...props} />);
+    expect(container.querySelector('.bx--text-input').value).toBe(props.apiKey);
+    getByText(props.apiKeyLabel);
+    click(container.querySelector('.bx--btn--primary'));
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(props.apiKey);
   });
 
@@ -96,11 +110,14 @@ describe(name, () => {
     expect(onRequestGenerate).toHaveBeenCalledWith('test-key');
 
     rerender(<APIKeyModal {...props} loading />);
-    expect(getByText(props.loadingText)).toBeVisible();
+    getByText(props.loadingText);
     rerender(<APIKeyModal {...props} apiKey="444-444-444-444" />);
     await waitFor(() => getByText(props.downloadLinkText));
-    const copyBtn = getByText(props.copyButtonText);
-    click(copyBtn);
+    getByText(props.downloadBodyText);
+    expect(container.querySelector('.bx--text-input').value).toBe(
+      '444-444-444-444'
+    );
+    click(getByText(props.copyButtonText));
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
       '444-444-444-444'
     );
@@ -128,7 +145,7 @@ describe(name, () => {
     expect(onRequestGenerate).toHaveBeenCalled();
 
     rerender(<APIKeyModal {...props} error />);
-    expect(getByText(props.errorText)).toBeVisible();
+    getByText(props.errorText);
   });
 
   it('should be able to properly navigate a series of custom steps', () => {
@@ -160,38 +177,38 @@ describe(name, () => {
       customSteps,
       hasDownloadLink: false,
     };
-    const { rerender, getByPlaceholderText, getByText } = render(
+    const { rerender, getByPlaceholderText, getByText, container } = render(
       <APIKeyModal {...props} />
     );
 
     // step 1
-    expect(getByPlaceholderText('input a')).toBeVisible();
-    expect(getByText(props.nextStepButtonText)).toBeVisible();
-    expect(getByText(props.closeButtonText)).toBeVisible();
+    getByPlaceholderText('input a');
+    getByText(props.nextStepButtonText);
+    getByText(props.closeButtonText);
 
     // advance to step 2
     click(getByText(props.nextStepButtonText));
-    expect(getByPlaceholderText('input b')).toBeVisible();
-    expect(getByText(props.nextStepButtonText)).toBeVisible();
-    expect(getByText(props.previousStepButtonText)).toBeVisible();
+    getByPlaceholderText('input b');
+    getByText(props.nextStepButtonText);
+    getByText(props.previousStepButtonText);
 
     // go back to step 1
     click(getByText(props.previousStepButtonText));
-    expect(getByPlaceholderText('input a')).toBeVisible();
-    expect(getByText(props.nextStepButtonText)).toBeVisible();
-    expect(getByText(props.closeButtonText)).toBeVisible();
+    getByPlaceholderText('input a');
+    getByText(props.nextStepButtonText);
+    getByText(props.closeButtonText);
 
     // advance to step 2
     click(getByText(props.nextStepButtonText));
-    expect(getByPlaceholderText('input b')).toBeVisible();
-    expect(getByText(props.nextStepButtonText)).toBeVisible();
-    expect(getByText(props.previousStepButtonText)).toBeVisible();
+    getByPlaceholderText('input b');
+    getByText(props.nextStepButtonText);
+    getByText(props.previousStepButtonText);
 
     // advance to step 3
     click(getByText(props.nextStepButtonText));
-    expect(getByPlaceholderText('input c')).toBeVisible();
-    expect(getByText(props.generateButtonText)).toBeVisible();
-    expect(getByText(props.previousStepButtonText)).toBeVisible();
+    getByPlaceholderText('input c');
+    getByText(props.generateButtonText);
+    getByText(props.previousStepButtonText);
 
     // submit invalid form
     click(getByText(props.generateButtonText));
@@ -204,7 +221,9 @@ describe(name, () => {
     expect(onRequestGenerate).toHaveBeenCalled();
     rerender(<APIKeyModal {...props} />);
     rerender(<APIKeyModal {...props} apiKey="abc-123" />);
-    expect(getByText(props.generateSuccessBody)).toBeVisible();
+    expect(container.querySelector('.bx--text-input').value).toBe('abc-123');
+    getByText(props.generateSuccessBody);
+    getByText(props.generateSuccessTitle);
     click(getByText(props.closeButtonText));
     expect(onClose).toHaveBeenCalled();
   });
@@ -244,11 +263,11 @@ describe(name, () => {
       <APIKeyModal {...props} />
     );
     await waitFor(() => getByText(props.downloadLinkText));
+    expect(container.querySelector('.bx--text-input').value).toBe(props.apiKey);
     expect(container.querySelector('.bx--text-input')).toHaveAttribute(
       'type',
       'password'
     );
-
     rerender(<APIKeyModal {...props} hasAPIKeyVisibilityToggle={false} />);
     await waitFor(() => getByText(props.downloadLinkText));
     expect(container.querySelector('.bx--text-input')).toHaveAttribute(

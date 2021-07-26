@@ -24,10 +24,10 @@ describe(name, () => {
   it('has json file download', async () => {
     const { getByText } = render(<APIKeyDownloader {...defaultProps} />);
     const link = getByText(defaultProps.linkText);
-
     await waitFor(() => {
       expect(link).toHaveProperty('download');
     });
+    getByText(defaultProps.body);
     expect(link).toHaveProperty('download', 'file.json');
     expect(link).toHaveProperty('href', 'http://localhost/download-link');
   });

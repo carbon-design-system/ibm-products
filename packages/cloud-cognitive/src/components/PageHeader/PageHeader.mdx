@@ -43,13 +43,7 @@ be used if only the breadcrumb, title, actions, and/or simple status are
 required.
 
 <Canvas>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      PageHeader.displayName,
-      'without-background-breadcrumbitems-title-pageactions'
-    )}
-  />
+  <Story id={getStorybookSlug(pkg, PageHeader.displayName, 'with-buttons')} />
 </Canvas>
 
 ### Page header with background
@@ -60,13 +54,7 @@ items. The page header with a background should be used if tabs, subtitles,
 and/or more global items are required.
 
 <Canvas>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      PageHeader.displayName,
-      'with-background-breadcrumbitems-title-pageactions-tabs'
-    )}
-  />
+  <Story id={getStorybookSlug(pkg, PageHeader.displayName, 'with-tabs')} />
 </Canvas>
 
 ### Page header with background (breadcrumb + actions toolbar included)
@@ -76,11 +64,7 @@ designated for the breadcrumbs and action icons.
 
 <Canvas>
   <Story
-    id={getStorybookSlug(
-      pkg,
-      PageHeader.displayName,
-      'with-background-breadcrumbitems-actionbar-title-pageactions-tabs-tags'
-    )}
+    id={getStorybookSlug(pkg, PageHeader.displayName, 'with-actions-toolbar')}
   />
 </Canvas>
 
@@ -94,7 +78,7 @@ by just displaying the breadcrumb bar only.
     id={getStorybookSlug(
       pkg,
       PageHeader.displayName,
-      'with-background-breadcrumbitems-actionbar'
+      'with-breadcrumb-actions-toolbar-only'
     )}
   />
 </Canvas>
@@ -114,13 +98,7 @@ accommodate simple requirements, including page title only, or page title +
 buttons.
 
 <Canvas>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      PageHeader.displayName,
-      'without-background-title'
-    )}
-  />
+  <Story id={getStorybookSlug(pkg, PageHeader.displayName, 'with-title')} />
 </Canvas>
 
 #### With breadcrumbs
@@ -130,11 +108,7 @@ and occasionally icons and metadata.
 
 <Canvas>
   <Story
-    id={getStorybookSlug(
-      pkg,
-      PageHeader.displayName,
-      'without-background-breadcrumbitems-title'
-    )}
+    id={getStorybookSlug(pkg, PageHeader.displayName, 'with-breadcrumbs')}
   />
 </Canvas>
 
@@ -144,13 +118,7 @@ Structured similarly to the examples above, this variant is for the inclusion of
 a page level status indicator.
 
 <Canvas>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      PageHeader.displayName,
-      'without-background-breadcrumbitems-title-status'
-    )}
-  />
+  <Story id={getStorybookSlug(pkg, PageHeader.displayName, 'with-buttons')} />
 </Canvas>
 
 ### Examples with background
@@ -161,13 +129,7 @@ Tabs are positioned underneath the page title and sit flush at the base of the
 page header background.
 
 <Canvas>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      PageHeader.displayName,
-      'with-background-breadcrumbitems-title-tabs'
-    )}
-  />
+  <Story id={getStorybookSlug(pkg, PageHeader.displayName, 'with-tabs')} />
 </Canvas>
 
 #### With tags
@@ -176,13 +138,7 @@ Tags are positioned underneath the page title and sit above the base of the page
 header background.
 
 <Canvas>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      PageHeader.displayName,
-      'with-background-breadcrumbitems-title-pageactions-tags'
-    )}
-  />
+  <Story id={getStorybookSlug(pkg, PageHeader.displayName, 'with-tags')} />
 </Canvas>
 
 #### With tabs & tags
@@ -192,11 +148,7 @@ the page and tags reposition over to the right side of the screen.
 
 <Canvas>
   <Story
-    id={getStorybookSlug(
-      pkg,
-      PageHeader.displayName,
-      'with-background-breadcrumbitems-title-tabs-tags'
-    )}
+    id={getStorybookSlug(pkg, PageHeader.displayName, 'with-tabs-and-tags')}
   />
 </Canvas>
 
@@ -207,13 +159,7 @@ with subtitles use the background to create hierarchy and to separate it from
 type placed within the page.
 
 <Canvas>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      PageHeader.displayName,
-      'with-background-breadcrumbitems-title-pageactions-subtitle'
-    )}
-  />
+  <Story id={getStorybookSlug(pkg, PageHeader.displayName, 'with-subtitle')} />
 </Canvas>
 
 #### With summary details
@@ -223,11 +169,7 @@ header. **This is just an example of an allowable zone for content.**
 
 <Canvas>
   <Story
-    id={getStorybookSlug(
-      pkg,
-      PageHeader.displayName,
-      'with-background-breadcrumbitems-title-pageactions-summarydetails-tabs'
-    )}
+    id={getStorybookSlug(pkg, PageHeader.displayName, 'with-summary-details')}
   />
 </Canvas>
 

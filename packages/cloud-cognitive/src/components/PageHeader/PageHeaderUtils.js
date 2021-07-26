@@ -49,21 +49,41 @@ export const utilCheckUpdateVerticalSpace = (
   const availableRowEl = getDynamicRef(`.${blockClass}__available-row`);
   const navigationRowEl = getDynamicRef(`.${blockClass}__navigation-row`);
 
+  /* istanbul ignore next */
   update.headerHeight = headerRef.current ? headerRef.current.clientHeight : 0;
+  /* istanbul ignore next */
   update.headerWidth = headerRef.current ? headerRef.current.offsetWidth : 0;
 
+  // The header offset is the vertical distance from the top of the document to
+  // the page header, which we obtain using getBoundingClientRect() for robust
+  // behavior. We use this offset as the scroll/fixed threshold.
+  const doc = headerRef.current?.ownerDocument;
+  /* istanbul ignore next */
+  update.headerOffset = headerRef.current
+    ? headerRef.current.getBoundingClientRect().top +
+      (doc.defaultView.pageYOffset || doc.documentElement.scrollTop) -
+      (doc.documentElement.clientTop || doc.body.clientTop || 0)
+    : 0;
+
+  /* istanbul ignore next */
   update.breadcrumbRowHeight = breadcrumbRowEl
     ? breadcrumbRowEl.clientHeight
     : 0;
+  /* istanbul ignore next */
   update.breadcrumbRowWidth = breadcrumbRowEl ? breadcrumbRowEl.offsetWidth : 0;
 
+  /* istanbul ignore next */
   update.breadcrumbTitleHeight = breadcrumbTitleEl
     ? breadcrumbTitleEl.clientHeight
     : 1;
 
+  /* istanbul ignore next */
   update.titleRowHeight = titleRowEl ? titleRowEl.clientHeight : 0;
+  /* istanbul ignore next */
   update.subtitleRowHeight = subtitleRowEl ? subtitleRowEl.clientHeight : 0;
+  /* istanbul ignore next */
   update.availableRowHeight = availableRowEl ? availableRowEl.clientHeight : 0;
+  /* istanbul ignore next */
   update.navigationRowHeight = navigationRowEl
     ? navigationRowEl.clientHeight
     : 1;
@@ -83,10 +103,11 @@ export const utilCheckUpdateVerticalSpace = (
     update.headerTopValue += update.breadcrumbRowHeight;
   }
 
+  /* istanbul ignore else */
   if (window) {
     let val;
     /* don't know how to test resize */
-    /* istanbul ignore next if */
+    /* istanbul ignore if */
     if (breadcrumbRowEl) {
       val = parseFloat(
         window
@@ -97,7 +118,7 @@ export const utilCheckUpdateVerticalSpace = (
       update.breadcrumbRowSpaceBelow = isNaN(val) ? 0 : val;
     }
     /* don't know how to test resize */
-    /* istanbul ignore next if */
+    /* istanbul ignore if */
     if (titleRowEl) {
       val = parseFloat(
         window.getComputedStyle(titleRowEl).getPropertyValue('margin-top'),
@@ -122,7 +143,7 @@ export const utilGetTitleShape = (title, titleIcon, defaultTitle) => {
   let newShape = { ...defaultTitle };
 
   if (title) {
-    if (title.text) {
+    if (typeof title !== 'string') {
       // title is in shape format
       newShape = Object.assign(newShape, { ...title });
     } else {
@@ -143,10 +164,22 @@ export const utilGetTitleShape = (title, titleIcon, defaultTitle) => {
 // immediately, rather than using the React `style` prop which goes through
 // the React DOM update optimization.
 export const utilSetCustomCSSProps = (targetRef, kvPairs) => {
+  /* istanbul ignore else */
   if (targetRef.current) {
     const keys = Object.keys(kvPairs);
     for (let k of keys) {
       targetRef.current.style.setProperty(k, kvPairs[k]);
     }
+  }
+};
+
+// Trigger a window scroll, if necessary, to set the collapsed state.
+export const utilSetCollapsed = (collapse, headerOffset, headerTopValue) => {
+  /* don't know how to test resize */
+  /* istanbul ignore next if */
+  if (collapse) {
+    window.scrollTo({ top: headerOffset - headerTopValue, behavior: 'smooth' });
+  } else {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 };

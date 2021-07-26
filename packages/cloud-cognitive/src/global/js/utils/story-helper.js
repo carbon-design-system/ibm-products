@@ -19,6 +19,7 @@ const bindTarget = {};
 export const prepareStory = (template, options) => {
   const result = Object.assign(template.bind(bindTarget), options);
   result.parameters ??= {};
-  result.parameters.ccsSettings = { sequence: sequence++ };
+  result.parameters.ccsSettings ??= {};
+  result.parameters.ccsSettings.sequence = sequence++;
   return result;
 };

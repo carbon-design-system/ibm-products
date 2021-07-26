@@ -5,7 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import { render, fireEvent, waitFor } from '@testing-library/react';
+import { render, fireEvent, waitFor, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { APIKeyModal } from '.';
 
@@ -15,7 +16,7 @@ Object.assign(navigator, {
   },
 });
 
-const { name } = APIKeyModal;
+const componentName = APIKeyModal.displayName;
 const defaultProps = {
   apiKey: '',
   apiKeyLabel: 'api key label',
@@ -60,7 +61,7 @@ const defaultProps = {
 
 URL.createObjectURL = jest.fn(() => Promise.resolve('download-link'));
 
-describe(name, () => {
+describe(componentName, () => {
   it('renders with standard visible props', () => {
     const { getByText, getByPlaceholderText } = render(
       <APIKeyModal {...defaultProps} />
@@ -81,7 +82,7 @@ describe(name, () => {
       hasDownloadLink: false,
       apiKey: '123-456-789',
     };
-    const { click } = fireEvent;
+    const { click } = userEvent;
     const { getByText, container } = render(<APIKeyModal {...props} />);
     expect(container.querySelector('.bx--text-input').value).toBe(props.apiKey);
     getByText(props.apiKeyLabel);
@@ -90,7 +91,8 @@ describe(name, () => {
   });
 
   it('renders with standard setup', async () => {
-    const { click, change } = fireEvent;
+    const { change } = fireEvent;
+    const { click } = userEvent;
     const { fn } = jest;
     const onRequestGenerate = fn();
     const props = {
@@ -124,7 +126,8 @@ describe(name, () => {
   });
 
   it('displays an error message when a create error occurs', () => {
-    const { click, change } = fireEvent;
+    const { change } = fireEvent;
+    const { click } = userEvent;
     const { fn } = jest;
     const onRequestGenerate = fn();
     const props = {
@@ -149,7 +152,7 @@ describe(name, () => {
   });
 
   it('should be able to properly navigate a series of custom steps', () => {
-    const { click } = fireEvent;
+    const { click } = userEvent;
     const { fn } = jest;
     const onRequestGenerate = fn();
     const onClose = fn();
@@ -229,7 +232,8 @@ describe(name, () => {
   });
 
   it('successfully edits', () => {
-    const { click, change } = fireEvent;
+    const { change } = fireEvent;
+    const { click } = userEvent;
     const { fn } = jest;
     const onRequestEdit = fn();
     const props = {
@@ -274,5 +278,27 @@ describe(name, () => {
       'type',
       'text'
     );
+  });
+
+  it('has no accessibility violations', async () => {
+    const { container } = render(<APIKeyModal {...defaultProps} />);
+    await expect(container).toBeAccessible(componentName);
+    await expect(container).toHaveNoAxeViolations();
+  });
+
+  it('applies className to the containing node', () => {
+    const { container } = render(<APIKeyModal {...defaultProps} />);
+    expect(container.firstChild).toHaveClass(defaultProps.className);
+  });
+
+  it('adds additional properties to the containing node', () => {
+    render(<APIKeyModal {...defaultProps} data-test-id="test-id" />);
+    screen.getByTestId('test-id');
+  });
+
+  it('forwards a ref to an appropriate node', () => {
+    const ref = React.createRef();
+    render(<APIKeyModal {...defaultProps} ref={ref} />);
+    expect(ref.current).not.toBeNull();
   });
 });

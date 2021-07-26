@@ -9,7 +9,7 @@ import { render, waitFor } from '@testing-library/react';
 import React from 'react';
 import { APIKeyDownloader } from './APIKeyDownloader';
 
-const { name } = APIKeyDownloader;
+const componentName = APIKeyDownloader.name;
 const defaultProps = {
   apiKey: '123-456-789',
   body: 'API key created',
@@ -65,5 +65,14 @@ describe(name, () => {
     });
     expect(link).toHaveProperty('download', 'apikey.json');
     expect(link).toHaveProperty('href', 'http://localhost/download-link');
+  });
+
+  it('has no accessibility violations', async () => {
+    const { getByText, container } = render(
+      <APIKeyDownloader {...defaultProps} />
+    );
+    await waitFor(() => getByText('download'));
+    await expect(container).toBeAccessible(componentName);
+    await expect(container).toHaveNoAxeViolations();
   });
 });

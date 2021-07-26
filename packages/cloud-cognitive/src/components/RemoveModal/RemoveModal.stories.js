@@ -13,6 +13,7 @@ import { getStorybookPrefix } from '../../../config';
 import { RemoveModal } from '.';
 import mdx from './RemoveModal.mdx';
 const storybookPrefix = getStorybookPrefix(pkg, RemoveModal.displayName);
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 export default {
   title: `${storybookPrefix}/${RemoveModal.displayName}`,
@@ -59,26 +60,29 @@ const TemplateWithState = (args) => {
   );
 };
 
-export const Standard = TemplateWithState.bind({});
-Standard.args = {
-  ...defaultProps,
-  body: `Removing ${resourceName} will permanently remove the configuration. This action cannot be undone.`,
-  title: 'Confirm removal',
-  primaryButtonText: 'Remove',
-  label: `Remove ${resourceName}`,
-};
+export const Standard = prepareStory(TemplateWithState, {
+  args: {
+    ...defaultProps,
+    body: `Removing ${resourceName} will permanently remove the configuration. This action cannot be undone.`,
+    title: 'Confirm removal',
+    primaryButtonText: 'Remove',
+    label: `Remove ${resourceName}`,
+  },
+});
 
-export const RemovePattern = Template.bind({});
-RemovePattern.args = {
-  ...defaultProps,
-  body: `Removing ${resourceName} will permanently remove the configuration. This action cannot be undone.`,
-  title: 'Confirm removal',
-  primaryButtonText: 'Remove',
-  label: `Remove ${resourceName}`,
-};
+export const RemovePattern = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    body: `Removing ${resourceName} will permanently remove the configuration. This action cannot be undone.`,
+    title: 'Confirm removal',
+    primaryButtonText: 'Remove',
+    label: `Remove ${resourceName}`,
+  },
+});
 
-export const DeletePattern = Template.bind({});
-DeletePattern.args = {
-  ...defaultProps,
-  textConfirmation: true,
-};
+export const DeletePattern = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    textConfirmation: true,
+  },
+});

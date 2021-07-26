@@ -24,6 +24,7 @@ import { getStorybookPrefix } from '../../../config';
 import { CreateModal } from '.';
 import mdx from './CreateModal.mdx';
 const storybookPrefix = getStorybookPrefix(pkg, CreateModal.displayName);
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import styles from './_storybook-styles.scss';
 
@@ -140,83 +141,86 @@ TemplateWithFormValidation.propTypes = {
   ...CreateModal.propTypes,
 };
 
-export const Default = Template.bind({});
-Default.storyName = 'Create Modal';
-Default.args = {
-  story: Default,
-  ...defaultProps,
-  children: (
-    <>
-      <TextInput
-        id="1"
-        key="form-field-1"
-        labelText="Text input label"
-        helperText="Helper text goes here"
-        placeholder="Placeholder"
-      />
-      <NumberInput
-        id="2"
-        className="create-modal--storybook-input"
-        label="Number input label"
-        helperText="Optional helper text goes here"
-        min={0}
-        max={50}
-        value={1}
-      />
-      <RadioButtonGroup
-        legendText="Radio button legend text goes here"
-        name="radio-button-group"
-        defaultSelected="radio-1">
-        <RadioButton labelText="Radio-1" value="radio-1" id="radio-1" />
-        <RadioButton labelText="Radio-2" value="radio-2" id="radio-2" />
-        <RadioButton labelText="Radio-3" value="radio-3" id="radio-3" />
-      </RadioButtonGroup>
-      <DatePicker datePickerType="single">
-        <DatePickerInput
-          placeholder="mm/dd/yyyy"
-          labelText="Date picker input label"
-          id="date-picker-single"
+export const Default = prepareStory(Template, {
+  storyName: 'Create Modal',
+  args: {
+    story: Default,
+    ...defaultProps,
+    children: (
+      <>
+        <TextInput
+          id="1"
+          key="form-field-1"
+          labelText="Text input label"
+          helperText="Helper text goes here"
+          placeholder="Placeholder"
         />
-      </DatePicker>
-    </>
-  ),
-};
+        <NumberInput
+          id="2"
+          className="create-modal--storybook-input"
+          label="Number input label"
+          helperText="Optional helper text goes here"
+          min={0}
+          max={50}
+          value={1}
+        />
+        <RadioButtonGroup
+          legendText="Radio button legend text goes here"
+          name="radio-button-group"
+          defaultSelected="radio-1">
+          <RadioButton labelText="Radio-1" value="radio-1" id="radio-1" />
+          <RadioButton labelText="Radio-2" value="radio-2" id="radio-2" />
+          <RadioButton labelText="Radio-3" value="radio-3" id="radio-3" />
+        </RadioButtonGroup>
+        <DatePicker datePickerType="single">
+          <DatePickerInput
+            placeholder="mm/dd/yyyy"
+            labelText="Date picker input label"
+            id="date-picker-single"
+          />
+        </DatePicker>
+      </>
+    ),
+  },
+});
 
-export const DefaultWithDarkTheme = Template.bind({});
-DefaultWithDarkTheme.storyName = 'Create Modal using dark theme';
-DefaultWithDarkTheme.args = {
-  story: DefaultWithDarkTheme,
-  className: 'sb--use-carbon-theme-g90',
-  ...defaultProps,
-  children: (
-    <>
-      <TextInput
-        id="1"
-        key="form-field-1"
-        labelText="Text input label"
-        helperText="Helper text goes here"
-        placeholder="Placeholder"
-      />
-      <Dropdown
-        id="default"
-        titleText="Dropdown label"
-        helperText="This is some helper text"
-        label="Dropdown menu options"
-        items={['Option 0', 'Option 1', 'Option 2']}
-      />
-      <TextArea
-        id="2"
-        placeholder="Placeholder text"
-        labelText="Text area label"
-        helperText="Optional helper text"
-      />
-    </>
-  ),
-};
+export const DefaultWithDarkTheme = prepareStory(Template, {
+  storyName: 'Create Modal using dark theme',
+  args: {
+    story: DefaultWithDarkTheme,
+    className: 'sb--use-carbon-theme-g90',
+    ...defaultProps,
+    children: (
+      <>
+        <TextInput
+          id="1"
+          key="form-field-1"
+          labelText="Text input label"
+          helperText="Helper text goes here"
+          placeholder="Placeholder"
+        />
+        <Dropdown
+          id="default"
+          titleText="Dropdown label"
+          helperText="This is some helper text"
+          label="Dropdown menu options"
+          items={['Option 0', 'Option 1', 'Option 2']}
+        />
+        <TextArea
+          id="2"
+          placeholder="Placeholder text"
+          labelText="Text area label"
+          helperText="Optional helper text"
+        />
+      </>
+    ),
+  },
+});
 
-export const WithFormValidation = TemplateWithFormValidation.bind({});
-WithFormValidation.storyName = 'Create Modal with form validation';
-WithFormValidation.args = {
-  story: WithFormValidation,
-  ...defaultProps,
-};
+export const WithFormValidation = prepareStory(TemplateWithFormValidation, {
+  storyName: 'Create Modal with form validation',
+  args: {
+    story: WithFormValidation,
+    ...defaultProps,
+  },
+});

@@ -33,6 +33,7 @@ import {
 import { getStorybookPrefix } from '../../../config';
 const storybookPrefix = getStorybookPrefix(pkg, Tearsheet.displayName);
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import styles from './_storybook-styles.scss';
 
@@ -285,70 +286,75 @@ const StackedTemplate = ({ actions, ...args }) => {
 };
 
 // Stories
-export const tearsheet = Template.bind({});
-tearsheet.storyName = 'Tearsheet';
-tearsheet.args = {
-  closeIconDescription,
-  description,
-  onClose: action('onClose called'),
-  title,
-  actions: 6,
-};
+export const tearsheet = prepareStory(Template, {
+  storyName: 'Tearsheet',
+  args: {
+    closeIconDescription,
+    description,
+    onClose: action('onClose called'),
+    title,
+    actions: 6,
+  },
+});
 
-export const withNavigation = Template.bind({});
-withNavigation.storyName = 'Tearsheet with navigation';
-withNavigation.args = {
-  closeIconDescription,
-  description,
-  label,
-  navigation: tabs,
-  onClose: action('onClose called'),
-  title,
-  actions: 6,
-};
+export const withNavigation = prepareStory(Template, {
+  storyName: 'Tearsheet with navigation',
+  args: {
+    closeIconDescription,
+    description,
+    label,
+    navigation: tabs,
+    onClose: action('onClose called'),
+    title,
+    actions: 6,
+  },
+});
 
-export const withInfluencer = Template.bind({});
-withInfluencer.storyName = 'Tearsheet with influencer';
-withInfluencer.args = {
-  closeIconDescription,
-  description,
-  influencer,
-  influencerPosition: 'left',
-  influencerWidth: 'narrow',
-  onClose: action('onClose called'),
-  title,
-  verticalPosition: 'normal',
-  actions: 6,
-};
+export const withInfluencer = prepareStory(Template, {
+  storyName: 'Tearsheet with influencer',
+  args: {
+    closeIconDescription,
+    description,
+    influencer,
+    influencerPosition: 'left',
+    influencerWidth: 'narrow',
+    onClose: action('onClose called'),
+    title,
+    verticalPosition: 'normal',
+    actions: 6,
+  },
+});
 
-export const fullyLoaded = Template.bind({});
-fullyLoaded.storyName = 'Tearsheet with all header items and influencer';
-fullyLoaded.args = {
-  closeIconDescription,
-  description,
-  hasCloseIcon: true,
-  headerActions: 2,
-  influencer,
-  influencerPosition: 'left',
-  influencerWidth: 'narrow',
-  label,
-  navigation: tabs,
-  onClose: action('onClose called'),
-  title,
-  verticalPosition: 'normal',
-  actions: 0,
-};
+export const fullyLoaded = prepareStory(Template, {
+  storyName: 'Tearsheet with all header items and influencer',
+  args: {
+    closeIconDescription,
+    description,
+    hasCloseIcon: true,
+    headerActions: 2,
+    influencer,
+    influencerPosition: 'left',
+    influencerWidth: 'narrow',
+    label,
+    navigation: tabs,
+    onClose: action('onClose called'),
+    title,
+    verticalPosition: 'normal',
+    actions: 0,
+  },
+});
 
 // eslint-disable-next-line react/prop-types
-export const stacked = StackedTemplate.bind({});
-stacked.storyName = 'Stacking tearsheets';
-stacked.args = {
-  headerActions: 2,
-  closeIconDescription,
-  description,
-  height: 'lower',
-  influencer,
-  label,
-  preventCloseOnClickOutside: true,
-  actions: 6,
-};
+export const stacked = prepareStory(StackedTemplate, {
+  storyName: 'Stacking tearsheets',
+  args: {
+    headerActions: 2,
+    closeIconDescription,
+    description,
+    height: 'lower',
+    influencer,
+    label,
+    preventCloseOnClickOutside: true,
+    actions: 6,
+  },
+});

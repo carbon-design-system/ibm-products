@@ -14,11 +14,11 @@
  * template, such as `args`, `storyName`, etc.
  * @returns A bound template with the option fields applied.
  */
-const sequence = 0;
+let sequence = 0;
 const bindTarget = {};
 export const prepareStory = (template, options) => {
   const result = Object.assign(template.bind(bindTarget), options);
   result.parameters ??= {};
-  result.parameters.ccsSettings = { sequence };
+  result.parameters.ccsSettings = { sequence: sequence++ };
   return result;
 };

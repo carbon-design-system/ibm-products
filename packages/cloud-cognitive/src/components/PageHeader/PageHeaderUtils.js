@@ -27,12 +27,13 @@ export const utilCheckUpdateVerticalSpace = (
     // would love to do this differently but digging in the dom seems easier
     // than getting a ref to a conditionally rendered item
     /* don't know how to test resize */
-    /* istanbul ignore next if */
+    /* istanbul ignore if */
     if (!headerRef.current) {
       return undefined;
     } else {
       let dRef = dynamicRefs[selector];
-      if (!dRef || dRef.parentNode === null) {
+      /* istanbul ignore else */
+      if (!dRef || /* istanbul ignore next */ dRef.parentNode === null) {
         dynamicRefs[selector] = headerRef.current.querySelector(selector);
       }
     }
@@ -176,7 +177,7 @@ export const utilSetCustomCSSProps = (targetRef, kvPairs) => {
 // Trigger a window scroll, if necessary, to set the collapsed state.
 export const utilSetCollapsed = (collapse, headerOffset, headerTopValue) => {
   /* don't know how to test resize */
-  /* istanbul ignore next if */
+  /* istanbul ignore else */
   if (collapse) {
     window.scrollTo({ top: headerOffset - headerTopValue, behavior: 'smooth' });
   } else {

@@ -58,12 +58,29 @@ export const prepareProps = (...values) => {
   }, {});
 };
 
+// Determine whether a named prop in a set of props has been given a value.
+// null and undefined do not count as values, but anything else does. If the
+// prop is 'children', then an array of null/undefined also does not count as
+// a value, but anything else does.
+const propHasValue = (props, propName) => {
+  let result = props[propName] !== null && props[propName] !== undefined;
+
+  if (result && propName === 'children' && Array.isArray(props[propName])) {
+    result = false;
+    for (let i = 0; !result && i < props[propName].length; i++) {
+      result = props[propName][i] !== null && props[propName][i] !== undefined;
+    }
+  }
+
+  return result;
+};
+
 // A simple wrapper for a prop-types checker that issues a warning message if
 // the value being validated is not null/undefined.
 const deprecatePropInner =
   (message, validator, info) =>
   (props, propName, comp, loc, propFullName, secret) => {
-    props[propName] &&
+    propHasValue(props, propName) &&
       pconsole.warn(message(loc, propFullName || propName, comp, info));
     return validator(props, propName, comp, loc, propFullName, secret);
   };

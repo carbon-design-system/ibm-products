@@ -115,7 +115,7 @@ export let ActionBar = React.forwardRef(
 
     // determine display count based on space available and width of pageActions
     const checkFullyVisibleItems = () => {
-      /* istanbul ignore next if */
+      /* istanbul ignore if */
       if (sizingRef.current) {
         let sizingItems = Array.from(
           sizingRef.current.querySelectorAll(
@@ -181,6 +181,7 @@ export let ActionBar = React.forwardRef(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [maxVisible, itemArray]);
 
+    /* istanbul ignore next */ // not sure how to fake window resize
     const handleResize = () => {
       // width is the space available for all action bar items horizontally
       // the action bar items are squares so the height should be one item wide
@@ -188,8 +189,10 @@ export let ActionBar = React.forwardRef(
       checkFullyVisibleItems();
     };
 
+    /* istanbul ignore next */ // not sure how to fake window resize
     const handleActionBarItemsResize = () => {
       // when the hidden sizing items change size
+      /* istanbul ignore next */ // not sure how to fake window resize
       checkFullyVisibleItems();
     };
 
@@ -219,6 +222,21 @@ export let ActionBar = React.forwardRef(
     );
   }
 );
+
+export const deprecatedProps = {
+  /**
+   * **Deprecated**
+   *
+   * children of the action bar (action bar items)
+   */
+  children: deprecateProp(
+    PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.element),
+      PropTypes.element,
+    ]),
+    'See documentation on the `actions` prop.'
+  ),
+};
 
 ActionBar.displayName = componentName;
 ActionBar.propTypes = {
@@ -255,16 +273,6 @@ ActionBar.propTypes = {
       onClick: PropTypes.func,
     })
   ),
-  /**
-   * children of the action bar (action bar items)
-   */
-  children: deprecateProp(
-    PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.element),
-      PropTypes.element,
-    ]),
-    'See documentation on the `actions` prop.'
-  ),
   // expects action bar item as array or in fragment,
   /**
    * className
@@ -286,6 +294,7 @@ ActionBar.propTypes = {
    * align tags to right of available space
    */
   rightAlign: PropTypes.bool,
+  ...deprecatedProps,
 };
 
 ActionBar.defaultProps = {

@@ -110,7 +110,7 @@ const renderSingleStepCreateTearsheet = ({ ...rest }) =>
   );
 
 describe(CreateTearsheet.displayName, () => {
-  const { ResizeObserver, scrollTo } = window;
+  const { ResizeObserver } = window;
 
   beforeEach(() => {
     window.ResizeObserver = jest.fn().mockImplementation(() => ({
@@ -127,12 +127,10 @@ describe(CreateTearsheet.displayName, () => {
       takeRecords: () => [],
       unobserve: () => null,
     }));
-    window.scrollTo = jest.spyOn(window, 'scrollTo').mockImplementation();
   });
 
   afterEach(() => {
     jest.restoreAllMocks();
-    window.scrollTo = scrollTo;
     window.ResizeObserver = ResizeObserver;
   });
 
@@ -503,9 +501,11 @@ describe(CreateTearsheet.displayName, () => {
     expect(getByText(/Submit/g)).toHaveAttribute('disabled');
   });
 
-  it('should click one of the side navigation menu items that are displayed after clicking the view all toggle', () => {
+  it('should click one of the side navigation menu items that are displayed after clicking the view all toggle and call the scrollTo fn', () => {
     const viewAllToggleLabelText = 'Show all available options';
-    expect(global.scrollTo).not.toHaveBeenCalled();
+    const scrollToFn = jest.fn();
+    const { click } = userEvent;
+    Element.prototype.scrollTo = scrollToFn;
     render(
       <CreateTearsheet
         onRequestSubmit={jest.fn()}
@@ -519,24 +519,70 @@ describe(CreateTearsheet.displayName, () => {
           onNext={jest.fn()}
           title={step1Title}
           disableSubmit>
-          <CreateTearsheetSection title="test title 1" id={uuidv4()}>
+          <CreateTearsheetSection
+            title="test title 1"
+            id={`section-id-${uuidv4()}`}>
             content
+          </CreateTearsheetSection>
+          <CreateTearsheetSection
+            viewAllOnly
+            title="Meta data"
+            id="create-tearsheet-section-meta-data">
+            hidden content, only visible when viewAllOnly toggle is on
           </CreateTearsheetSection>
         </CreateTearsheetStep>
         <CreateTearsheetStep title={step2Title}>
-          <CreateTearsheetSection title="test title 2" id={uuidv4()}>
+          <CreateTearsheetSection
+            title="test title 2"
+            id={`section-id-${uuidv4()}`}>
             content
           </CreateTearsheetSection>
         </CreateTearsheetStep>
       </CreateTearsheet>
     );
-    const { click } = userEvent;
     click(screen.getByText(viewAllToggleLabelText));
     const sideNavElement = screen.getByText(/test title 2/g, {
       selector: `.${carbon.prefix}--side-nav__link-text`,
     });
     click(sideNavElement.parentElement);
-    console.log(sideNavElement.parentElement);
-    // expect(window.scrollTo).toHaveBeenCalled();
+    expect(scrollToFn).toHaveBeenCalledTimes(1);
+  });
+
+  it("should click one of the side navigation menu items that are displayed after clicking the view all toggle and produce a warning if the section's id is missing", () => {
+    jest.spyOn(console, 'error').mockImplementation(jest.fn());
+    const warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
+    const viewAllToggleLabelText = 'Show all available options';
+    const { click } = userEvent;
+    render(
+      <CreateTearsheet
+        onRequestSubmit={jest.fn()}
+        includeViewAllToggle
+        viewAllToggleLabelText={viewAllToggleLabelText}
+        viewAllToggleOffLabelText="Off"
+        viewAllToggleOnLabelText="On"
+        sideNavAriaLabel="Side nav aria label"
+        {...defaultProps}>
+        <CreateTearsheetStep onNext={jest.fn()} disableSubmit>
+          <CreateTearsheetSection title="test title 1">
+            content
+          </CreateTearsheetSection>
+        </CreateTearsheetStep>
+        <CreateTearsheetStep title={step2Title}>
+          <CreateTearsheetSection title="test title 2">
+            content
+          </CreateTearsheetSection>
+        </CreateTearsheetStep>
+      </CreateTearsheet>
+    );
+    click(screen.getByText(viewAllToggleLabelText));
+    const sideNavElement = screen.getByText(/test title 2/g, {
+      selector: `.${carbon.prefix}--side-nav__link-text`,
+    });
+    click(sideNavElement.parentElement);
+    expect(warn).toBeCalledWith(
+      `CreateTearsheet: CreateTearsheetSection is missing a required prop of 'id'`
+    );
+    jest.spyOn(console, 'error').mockRestore();
+    warn.mockRestore();
   });
 });

@@ -371,7 +371,6 @@ export let CreateTearsheet = forwardRef(
                   tearsheetSectionComponents.map(
                     (tearsheetSection, sectionIndex) => (
                       <SideNavLink
-                        href="javascript:void(0)"
                         key={sectionIndex}
                         isActive={activeSectionIndex === sectionIndex}
                         onClick={() => {
@@ -456,11 +455,6 @@ export let CreateTearsheet = forwardRef(
                   [`${blockClass}__step--hidden-step`]:
                     !shouldViewAll && currentStep !== step,
                   [`${blockClass}__step--visible-step`]: currentStep === step,
-                  [`${blockClass}__step--first-panel-step`]:
-                    !previousState?.open &&
-                    open &&
-                    previousState?.currentStep === 0 &&
-                    stepIndex === 0,
                 }),
                 key: `key_${stepIndex}`,
               },
@@ -597,13 +591,8 @@ export let CreateTearsheet = forwardRef(
     const handleViewAllToggle = (toggleState) => {
       setShouldViewAll(toggleState);
       setActiveSectionIndex(0);
-      // scroll to top of tearsheet page upon toggling view all option
-      if (toggleState) {
-        const createTearsheetContainer = document.querySelector(
-          `.${blockClass}`
-        );
-        createTearsheetContainer.scrollTop = 0;
-      }
+      const createTearsheetContainer = document.querySelector(`.${blockClass}`);
+      createTearsheetContainer.scrollTop = 0;
     };
 
     const renderViewAllToggle = () => {
@@ -620,6 +609,7 @@ export let CreateTearsheet = forwardRef(
       );
     };
 
+    /* istanbul ignore next */
     const handleResize = () => {
       const createTearsheetOuterElement = document.querySelector(
         `.${blockClass} .${carbon.prefix}--modal-container`
@@ -654,6 +644,7 @@ export let CreateTearsheet = forwardRef(
             `.${pkg.prefix}--tearsheet-create__section.${pkg.prefix}--tearsheet-create__step--visible-section`
           )
         );
+        /* istanbul ignore next */
         const observer = new IntersectionObserver((entries) => {
           // isIntersecting is true when element and viewport/options.root are overlapping
           // isIntersecting is false when element and viewport/options.root don't overlap

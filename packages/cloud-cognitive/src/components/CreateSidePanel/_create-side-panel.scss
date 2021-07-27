@@ -8,8 +8,17 @@
 @import '@carbon/import-once/scss/import-once';
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
+@import '../SidePanel/side-panel-variables';
 
 @import 'carbon-components/scss/components/button/button';
+
+$sizes: (
+  extra-small: $extra-small-panel-size,
+  small: $small-panel-size,
+  medium: $medium-panel-size,
+  large: $large-panel-size,
+  max: $max-panel-size,
+);
 
 @mixin create-side-panel {
   $block-class: #{$pkg-prefix}--create-side-panel;
@@ -20,18 +29,23 @@
     padding-right: calc(20% - #{$spacing-05});
   }
 
-  .#{$block-class}.#{$side-panel-block-class}__container
-    .#{$side-panel-block-class}__title-text {
-    padding-right: calc(20% - #{$spacing-05});
-    margin-bottom: $spacing-02;
-  }
-
-  .#{$block-class}.#{$side-panel-block-class}__container
-    .#{$side-panel-block-class}__subtitle-text {
-    padding-right: calc(20% - #{$spacing-05});
-    padding-bottom: $spacing-05;
-    border-bottom: 1px solid $ui-03;
-    color: $text-02;
+  @each $size, $value in $sizes {
+    .#{$block-class}.#{$side-panel-block-class}__container--#{$size}
+      .#{$side-panel-block-class}__title-text {
+      width: calc(#{$value} - #{$spacing-05});
+      // stylelint-disable-next-line carbon/layout-token-use
+      padding-right: calc((#{$value} * 0.2) - #{$spacing-05});
+      margin-bottom: $spacing-02;
+    }
+    .#{$block-class}.#{$side-panel-block-class}__container--#{$size}
+      .#{$side-panel-block-class}__subtitle-text {
+      width: calc(#{$value} - #{$spacing-05});
+      // stylelint-disable-next-line carbon/layout-token-use
+      padding-right: calc((#{$value} * 0.2) - #{$spacing-05});
+      padding-bottom: $spacing-05;
+      border-bottom: 1px solid $ui-03;
+      color: $text-02;
+    }
   }
 
   .#{$block-class}__form {

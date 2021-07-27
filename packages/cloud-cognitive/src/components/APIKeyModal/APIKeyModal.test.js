@@ -5,7 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import { render, fireEvent, waitFor } from '@testing-library/react';
+import { render, fireEvent, waitFor, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { APIKeyModal } from '.';
 
@@ -15,7 +16,7 @@ Object.assign(navigator, {
   },
 });
 
-const { name } = APIKeyModal;
+const componentName = APIKeyModal.displayName;
 const defaultProps = {
   apiKey: '',
   apiKeyLabel: 'api key label',
@@ -60,7 +61,20 @@ const defaultProps = {
 
 URL.createObjectURL = jest.fn(() => Promise.resolve('download-link'));
 
-describe(name, () => {
+describe(componentName, () => {
+  it('renders with standard visible props', () => {
+    const { getByText, getByPlaceholderText } = render(
+      <APIKeyModal {...defaultProps} />
+    );
+    getByText(defaultProps.body);
+    getByText(defaultProps.closeButtonText);
+    getByText(defaultProps.generateButtonText);
+    getByText(defaultProps.generateTitle);
+    getByText(defaultProps.modalLabel);
+    getByText(defaultProps.nameLabel);
+    getByPlaceholderText(defaultProps.namePlaceholder);
+  });
+
   it('renders with minimal setup', () => {
     const props = {
       ...defaultProps,
@@ -68,15 +82,17 @@ describe(name, () => {
       hasDownloadLink: false,
       apiKey: '123-456-789',
     };
-    const { click } = fireEvent;
-    const { container } = render(<APIKeyModal {...props} />);
-    const copyBtn = container.querySelector('.bx--btn--primary');
-    click(copyBtn);
+    const { click } = userEvent;
+    const { getByText, container } = render(<APIKeyModal {...props} />);
+    expect(container.querySelector('.bx--text-input').value).toBe(props.apiKey);
+    getByText(props.apiKeyLabel);
+    click(container.querySelector('.bx--btn--primary'));
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(props.apiKey);
   });
 
   it('renders with standard setup', async () => {
-    const { click, change } = fireEvent;
+    const { change } = fireEvent;
+    const { click } = userEvent;
     const { fn } = jest;
     const onRequestGenerate = fn();
     const props = {
@@ -96,18 +112,22 @@ describe(name, () => {
     expect(onRequestGenerate).toHaveBeenCalledWith('test-key');
 
     rerender(<APIKeyModal {...props} loading />);
-    expect(getByText(props.loadingText)).toBeVisible();
+    getByText(props.loadingText);
     rerender(<APIKeyModal {...props} apiKey="444-444-444-444" />);
     await waitFor(() => getByText(props.downloadLinkText));
-    const copyBtn = getByText(props.copyButtonText);
-    click(copyBtn);
+    getByText(props.downloadBodyText);
+    expect(container.querySelector('.bx--text-input').value).toBe(
+      '444-444-444-444'
+    );
+    click(getByText(props.copyButtonText));
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
       '444-444-444-444'
     );
   });
 
   it('displays an error message when a create error occurs', () => {
-    const { click, change } = fireEvent;
+    const { change } = fireEvent;
+    const { click } = userEvent;
     const { fn } = jest;
     const onRequestGenerate = fn();
     const props = {
@@ -128,11 +148,11 @@ describe(name, () => {
     expect(onRequestGenerate).toHaveBeenCalled();
 
     rerender(<APIKeyModal {...props} error />);
-    expect(getByText(props.errorText)).toBeVisible();
+    getByText(props.errorText);
   });
 
   it('should be able to properly navigate a series of custom steps', () => {
-    const { click } = fireEvent;
+    const { click } = userEvent;
     const { fn } = jest;
     const onRequestGenerate = fn();
     const onClose = fn();
@@ -160,38 +180,38 @@ describe(name, () => {
       customSteps,
       hasDownloadLink: false,
     };
-    const { rerender, getByPlaceholderText, getByText } = render(
+    const { rerender, getByPlaceholderText, getByText, container } = render(
       <APIKeyModal {...props} />
     );
 
     // step 1
-    expect(getByPlaceholderText('input a')).toBeVisible();
-    expect(getByText(props.nextStepButtonText)).toBeVisible();
-    expect(getByText(props.closeButtonText)).toBeVisible();
+    getByPlaceholderText('input a');
+    getByText(props.nextStepButtonText);
+    getByText(props.closeButtonText);
 
     // advance to step 2
     click(getByText(props.nextStepButtonText));
-    expect(getByPlaceholderText('input b')).toBeVisible();
-    expect(getByText(props.nextStepButtonText)).toBeVisible();
-    expect(getByText(props.previousStepButtonText)).toBeVisible();
+    getByPlaceholderText('input b');
+    getByText(props.nextStepButtonText);
+    getByText(props.previousStepButtonText);
 
     // go back to step 1
     click(getByText(props.previousStepButtonText));
-    expect(getByPlaceholderText('input a')).toBeVisible();
-    expect(getByText(props.nextStepButtonText)).toBeVisible();
-    expect(getByText(props.closeButtonText)).toBeVisible();
+    getByPlaceholderText('input a');
+    getByText(props.nextStepButtonText);
+    getByText(props.closeButtonText);
 
     // advance to step 2
     click(getByText(props.nextStepButtonText));
-    expect(getByPlaceholderText('input b')).toBeVisible();
-    expect(getByText(props.nextStepButtonText)).toBeVisible();
-    expect(getByText(props.previousStepButtonText)).toBeVisible();
+    getByPlaceholderText('input b');
+    getByText(props.nextStepButtonText);
+    getByText(props.previousStepButtonText);
 
     // advance to step 3
     click(getByText(props.nextStepButtonText));
-    expect(getByPlaceholderText('input c')).toBeVisible();
-    expect(getByText(props.generateButtonText)).toBeVisible();
-    expect(getByText(props.previousStepButtonText)).toBeVisible();
+    getByPlaceholderText('input c');
+    getByText(props.generateButtonText);
+    getByText(props.previousStepButtonText);
 
     // submit invalid form
     click(getByText(props.generateButtonText));
@@ -204,13 +224,16 @@ describe(name, () => {
     expect(onRequestGenerate).toHaveBeenCalled();
     rerender(<APIKeyModal {...props} />);
     rerender(<APIKeyModal {...props} apiKey="abc-123" />);
-    expect(getByText(props.generateSuccessBody)).toBeVisible();
+    expect(container.querySelector('.bx--text-input').value).toBe('abc-123');
+    getByText(props.generateSuccessBody);
+    getByText(props.generateSuccessTitle);
     click(getByText(props.closeButtonText));
     expect(onClose).toHaveBeenCalled();
   });
 
   it('successfully edits', () => {
-    const { click, change } = fireEvent;
+    const { change } = fireEvent;
+    const { click } = userEvent;
     const { fn } = jest;
     const onRequestEdit = fn();
     const props = {
@@ -244,16 +267,38 @@ describe(name, () => {
       <APIKeyModal {...props} />
     );
     await waitFor(() => getByText(props.downloadLinkText));
+    expect(container.querySelector('.bx--text-input').value).toBe(props.apiKey);
     expect(container.querySelector('.bx--text-input')).toHaveAttribute(
       'type',
       'password'
     );
-
     rerender(<APIKeyModal {...props} hasAPIKeyVisibilityToggle={false} />);
     await waitFor(() => getByText(props.downloadLinkText));
     expect(container.querySelector('.bx--text-input')).toHaveAttribute(
       'type',
       'text'
     );
+  });
+
+  it('has no accessibility violations', async () => {
+    const { container } = render(<APIKeyModal {...defaultProps} />);
+    await expect(container).toBeAccessible(componentName);
+    await expect(container).toHaveNoAxeViolations();
+  });
+
+  it('applies className to the containing node', () => {
+    const { container } = render(<APIKeyModal {...defaultProps} />);
+    expect(container.firstChild).toHaveClass(defaultProps.className);
+  });
+
+  it('adds additional properties to the containing node', () => {
+    render(<APIKeyModal {...defaultProps} data-test-id="test-id" />);
+    screen.getByTestId('test-id');
+  });
+
+  it('forwards a ref to an appropriate node', () => {
+    const ref = React.createRef();
+    render(<APIKeyModal {...defaultProps} ref={ref} />);
+    expect(ref.current).not.toBeNull();
   });
 });

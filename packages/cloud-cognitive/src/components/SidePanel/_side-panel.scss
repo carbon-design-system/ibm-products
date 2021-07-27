@@ -9,18 +9,13 @@
 @import '../../global/styles/project-settings';
 @import 'carbon-components/scss/globals/grid/grid';
 @import '@carbon/motion/scss/motion.scss';
+@import './side-panel-variables';
 
 @import 'carbon-components/scss/components/button/button';
 @import 'carbon-components/scss/components/inline-loading/inline-loading';
 
 $block-class: #{$pkg-prefix}--side-panel;
 $action-set-block-class: #{$pkg-prefix}--action-set;
-
-$extra-small-panel-size: 16rem;
-$small-panel-size: 20rem;
-$medium-panel-size: 30rem;
-$large-panel-size: 40rem;
-$max-panel-size: 75%; // set max-width on max panels to 75%
 
 @mixin sidePanelEntranceRight($size: $medium-panel-size) {
   @keyframes sidePanelEntranceRight {

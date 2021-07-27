@@ -384,7 +384,6 @@ export const InstantGenerate = InstantTemplate.bind({});
 InstantGenerate.args = {
   ...defaultProps,
   apiKeyLabel: '',
-  apiKeyVisibilityLabel: 'Show key',
 };
 
 export const CustomGenerate = MultiStepTemplate.bind({});

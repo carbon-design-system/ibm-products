@@ -38,9 +38,16 @@ export const APIKeyDownloader = ({
   }, [apiKey, fileName, fileType]);
 
   return (
-    <p className={`${pkg.prefix}--apikey-modal__messaging-text`}>
-      {body} <a {...linkProps}>{linkText}</a>
-    </p>
+    <div className={`${pkg.prefix}--apikey-modal__download-container`}>
+      <p className={`${pkg.prefix}--apikey-modal__messaging-text`}>
+        {body}{' '}
+        <a
+          {...linkProps}
+          className={`${pkg.prefix}--apikey-modal__download-link`}>
+          {linkText}
+        </a>
+      </p>
+    </div>
   );
 };
 

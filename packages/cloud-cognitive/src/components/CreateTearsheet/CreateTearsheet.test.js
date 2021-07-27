@@ -9,9 +9,10 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 import { CreateTearsheet } from './CreateTearsheet';
 import { CreateTearsheetStep } from './CreateTearsheetStep';
+import { CreateTearsheetSection } from './CreateTearsheetSection';
 import uuidv4 from '../../global/js/utils/uuidv4';
 const tearsheetBlockClass = `${pkg.prefix}--tearsheet-create`;
 
@@ -50,19 +51,18 @@ const defaultProps = {
   onClose: onCloseFn,
   open: true,
 };
-const renderCreateTearsheet = ({
-  rejectOnSubmit = false,
-  rejectOnNext = false,
-  submitFn = onRequestSubmitFn,
-  onNext = onNextStepFn,
-  finalOnNextFn = finalStepOnNext,
-  rejectOnSubmitNext = false,
-  ...rest
-}) =>
-  render(
-    <CreateTearsheet
-      onRequestSubmit={rejectOnSubmit ? onRequestSubmitRejectFn : submitFn}
-      {...rest}>
+const renderCreateTearsheet = (
+  {
+    rejectOnSubmit = false,
+    rejectOnNext = false,
+    submitFn = onRequestSubmitFn,
+    onNext = onNextStepFn,
+    finalOnNextFn = finalStepOnNext,
+    rejectOnSubmitNext = false,
+    ...rest
+  },
+  children = (
+    <>
       <p>Child element that persists across all steps</p>
       <CreateTearsheetStep
         onNext={rejectOnNext ? onNextStepRejectionFn : onNext}
@@ -81,6 +81,14 @@ const renderCreateTearsheet = ({
         onNext={rejectOnSubmitNext ? finalStepOnNextRejectFn : finalOnNextFn}>
         step 3 content
       </CreateTearsheetStep>
+    </>
+  )
+) =>
+  render(
+    <CreateTearsheet
+      onRequestSubmit={rejectOnSubmit ? onRequestSubmitRejectFn : submitFn}
+      {...rest}>
+      {children}
     </CreateTearsheet>
   );
 
@@ -102,7 +110,7 @@ const renderSingleStepCreateTearsheet = ({ ...rest }) =>
   );
 
 describe(CreateTearsheet.displayName, () => {
-  const { ResizeObserver } = window;
+  const { ResizeObserver, scrollTo } = window;
 
   beforeEach(() => {
     window.ResizeObserver = jest.fn().mockImplementation(() => ({
@@ -110,10 +118,21 @@ describe(CreateTearsheet.displayName, () => {
       unobserve: jest.fn(),
       disconnect: jest.fn(),
     }));
+    window.IntersectionObserver = jest.fn().mockImplementation(() => ({
+      root: null,
+      rootMargin: '',
+      thresholds: [],
+      disconnect: () => null,
+      observe: () => null,
+      takeRecords: () => [],
+      unobserve: () => null,
+    }));
+    window.scrollTo = jest.spyOn(window, 'scrollTo').mockImplementation();
   });
 
   afterEach(() => {
     jest.restoreAllMocks();
+    window.scrollTo = scrollTo;
     window.ResizeObserver = ResizeObserver;
   });
 
@@ -186,17 +205,15 @@ describe(CreateTearsheet.displayName, () => {
     );
     rerender(
       <CreateTearsheet
+        {...defaultProps}
         open={false}
-        onClose={onCloseFn}
-        onRequestSubmit={onRequestSubmitFn}
-        submitButtonText={submitButtonText}
-        cancelButtonText={cancelButtonText}
-        backButtonText={backButtonText}
-        nextButtonText={nextButtonText}
-        title={title}>
+        onRequestSubmit={onRequestSubmitFn}>
         <p>Child element that persists across all steps</p>
         <CreateTearsheetStep title={step1Title}>
           step 1 content
+        </CreateTearsheetStep>
+        <CreateTearsheetStep title={step2Title}>
+          step 2 content
         </CreateTearsheetStep>
       </CreateTearsheet>
     );
@@ -345,17 +362,181 @@ describe(CreateTearsheet.displayName, () => {
     jest.spyOn(console, 'warn').mockRestore();
   });
 
-  it('should render the view all toggle and click it', () => {
+  it('should render the view all toggle and click it and console warning regarding missing section components', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
     const viewAllToggleLabelText = 'Show all available options';
-    renderCreateTearsheet({
-      ...defaultProps,
-      includeViewAllToggle: true,
-      viewAllToggleLabelText,
-      viewAllToggleOffLabelText: 'Off',
-      viewAllToggleOnLabelText: 'On',
-    });
+    const { container, rerender } = render(
+      <CreateTearsheet
+        onRequestSubmit={jest.fn()}
+        includeViewAllToggle
+        viewAllToggleLabelText={viewAllToggleLabelText}
+        viewAllToggleOffLabelText="Off"
+        viewAllToggleOnLabelText="On"
+        sideNavAriaLabel="Side nav aria label"
+        {...defaultProps}>
+        <CreateTearsheetStep onNext={jest.fn()} title={step1Title}>
+          step 1 content
+          <button type="button" disabled>
+            Test
+          </button>
+          <input type="text" />
+        </CreateTearsheetStep>
+        <CreateTearsheetStep title={step2Title}>
+          step 2 content
+        </CreateTearsheetStep>
+        <CreateTearsheetStep title={step3Title} onNext={jest.fn()}>
+          step 3 content
+        </CreateTearsheetStep>
+      </CreateTearsheet>
+    );
     const { click } = userEvent;
     click(screen.getByText(viewAllToggleLabelText));
-    expect(screen.getByLabelText(viewAllToggleLabelText)).toBeChecked();
+    const viewAllToggleElement = container.querySelector(
+      `#${tearsheetBlockClass}__view-all-toggle`
+    );
+    expect(viewAllToggleElement).toBeChecked();
+    expect(warn).toBeCalledWith(
+      `CreateTearsheet: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' prop.`
+    );
+    rerender(
+      <CreateTearsheet
+        onRequestSubmit={jest.fn()}
+        includeViewAllToggle
+        viewAllToggleLabelText={viewAllToggleLabelText}
+        viewAllToggleOffLabelText="Off"
+        viewAllToggleOnLabelText="On"
+        sideNavAriaLabel="Side nav aria label"
+        {...defaultProps}></CreateTearsheet>
+    );
+    rerender(
+      <CreateTearsheet
+        onRequestSubmit={jest.fn()}
+        includeViewAllToggle
+        viewAllToggleLabelText={viewAllToggleLabelText}
+        viewAllToggleOffLabelText="Off"
+        viewAllToggleOnLabelText="On"
+        sideNavAriaLabel="Side nav aria label"
+        {...defaultProps}>
+        <CreateTearsheetStep onNext={jest.fn()} title={step1Title} />
+      </CreateTearsheet>
+    );
+    rerender(
+      <CreateTearsheet
+        onRequestSubmit={jest.fn()}
+        includeViewAllToggle
+        viewAllToggleLabelText={viewAllToggleLabelText}
+        viewAllToggleOffLabelText="Off"
+        viewAllToggleOnLabelText="On"
+        sideNavAriaLabel="Side nav aria label"
+        {...defaultProps}>
+        <CreateTearsheetStep onNext={jest.fn()} title={step1Title}>
+          <CreateTearsheetSection title="test" id={uuidv4()}>
+            content
+          </CreateTearsheetSection>
+          <p>Non section element</p>
+        </CreateTearsheetStep>
+      </CreateTearsheet>
+    );
+    rerender(
+      <CreateTearsheet
+        onRequestSubmit={jest.fn()}
+        includeViewAllToggle
+        viewAllToggleLabelText={viewAllToggleLabelText}
+        viewAllToggleOffLabelText="Off"
+        viewAllToggleOnLabelText="On"
+        sideNavAriaLabel="Side nav aria label"
+        {...defaultProps}>
+        <CreateTearsheetStep onNext={jest.fn()} title={step1Title}>
+          <CreateTearsheetSection title="test" id={uuidv4()}>
+            content
+          </CreateTearsheetSection>
+        </CreateTearsheetStep>
+      </CreateTearsheet>
+    );
+    rerender(
+      <CreateTearsheet
+        onRequestSubmit={jest.fn()}
+        includeViewAllToggle
+        viewAllToggleLabelText={viewAllToggleLabelText}
+        viewAllToggleOffLabelText="Off"
+        viewAllToggleOnLabelText="On"
+        sideNavAriaLabel="Side nav aria label"
+        {...defaultProps}>
+        <CreateTearsheetStep onNext={jest.fn()} title={step1Title}>
+          <p>test</p>
+        </CreateTearsheetStep>
+      </CreateTearsheet>
+    );
+    warn.mockRestore();
+    error.mockRestore();
+  });
+
+  it('should render view all toggle and with a disabled submit button', () => {
+    const viewAllToggleLabelText = 'Show all available options';
+    const { getByText } = render(
+      <CreateTearsheet
+        onRequestSubmit={jest.fn()}
+        includeViewAllToggle
+        viewAllToggleLabelText={viewAllToggleLabelText}
+        viewAllToggleOffLabelText="Off"
+        viewAllToggleOnLabelText="On"
+        sideNavAriaLabel="Side nav aria label"
+        {...defaultProps}>
+        <CreateTearsheetStep
+          onNext={jest.fn()}
+          title={step1Title}
+          disableSubmit>
+          <CreateTearsheetSection title="test" id={uuidv4()}>
+            content
+          </CreateTearsheetSection>
+        </CreateTearsheetStep>
+        <CreateTearsheetStep title={step2Title}>
+          <CreateTearsheetSection title="test" id={uuidv4()}>
+            content
+          </CreateTearsheetSection>
+        </CreateTearsheetStep>
+      </CreateTearsheet>
+    );
+    const { click } = userEvent;
+    click(screen.getByText(viewAllToggleLabelText));
+    expect(getByText(/Submit/g)).toHaveAttribute('disabled');
+  });
+
+  it('should click one of the side navigation menu items that are displayed after clicking the view all toggle', () => {
+    const viewAllToggleLabelText = 'Show all available options';
+    expect(global.scrollTo).not.toHaveBeenCalled();
+    render(
+      <CreateTearsheet
+        onRequestSubmit={jest.fn()}
+        includeViewAllToggle
+        viewAllToggleLabelText={viewAllToggleLabelText}
+        viewAllToggleOffLabelText="Off"
+        viewAllToggleOnLabelText="On"
+        sideNavAriaLabel="Side nav aria label"
+        {...defaultProps}>
+        <CreateTearsheetStep
+          onNext={jest.fn()}
+          title={step1Title}
+          disableSubmit>
+          <CreateTearsheetSection title="test title 1" id={uuidv4()}>
+            content
+          </CreateTearsheetSection>
+        </CreateTearsheetStep>
+        <CreateTearsheetStep title={step2Title}>
+          <CreateTearsheetSection title="test title 2" id={uuidv4()}>
+            content
+          </CreateTearsheetSection>
+        </CreateTearsheetStep>
+      </CreateTearsheet>
+    );
+    const { click } = userEvent;
+    click(screen.getByText(viewAllToggleLabelText));
+    const sideNavElement = screen.getByText(/test title 2/g, {
+      selector: `.${carbon.prefix}--side-nav__link-text`,
+    });
+    click(sideNavElement.parentElement);
+    console.log(sideNavElement.parentElement);
+    // expect(window.scrollTo).toHaveBeenCalled();
   });
 });

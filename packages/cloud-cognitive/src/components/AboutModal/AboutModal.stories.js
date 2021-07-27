@@ -11,6 +11,7 @@ import React, { useEffect, useState } from 'react';
 
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { AboutModal } from '.';
 
@@ -27,7 +28,6 @@ import styles from './_storybook-styles.scss';
 
 const storybookPrefix = getStorybookPrefix(pkg, AboutModal.displayName);
 const blockClass = `${pkg.prefix}--about-modal`;
-import { prepareStory } from '../../global/js/utils/story-helper';
 
 export default {
   title: `${storybookPrefix}/${AboutModal.displayName}`,

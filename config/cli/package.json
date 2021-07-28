@@ -24,7 +24,7 @@
     "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon)/'"
   },
   "devDependencies": {
-    "@commitlint/parse": "^12.1.4",
+    "@commitlint/parse": "^13.1.0",
     "chalk": "^4.1.1",
     "execa": "^5.1.1",
     "fast-glob": "^3.2.7",

@@ -14,6 +14,7 @@ import { ExportModal } from '.';
 import mdx from './ExportModal.mdx';
 import wait from '../../global/js/utils/wait';
 const storybookPrefix = getStorybookPrefix(pkg, ExportModal.displayName);
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 export default {
   title: `${storybookPrefix}/${ExportModal.displayName}`,
@@ -83,45 +84,50 @@ const TemplateWithState = (args) => {
   );
 };
 
-export const WithSuccessMessage = TemplateWithState.bind({});
-WithSuccessMessage.args = {
-  ...defaultProps,
-  successful: true,
-};
+export const WithSuccessMessage = prepareStory(TemplateWithState, {
+  args: {
+    ...defaultProps,
+    successful: true,
+  },
+});
 
-export const WithErrorMessage = TemplateWithState.bind({});
-WithErrorMessage.args = {
-  ...defaultProps,
-  successful: false,
-};
+export const WithErrorMessage = prepareStory(TemplateWithState, {
+  args: {
+    ...defaultProps,
+    successful: false,
+  },
+});
 
-export const Standard = Template.bind({});
-Standard.args = {
-  ...defaultProps,
-};
+export const Standard = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+  },
+});
 
-export const WithExtensionValidation = Template.bind({});
-WithExtensionValidation.args = {
-  ...defaultProps,
-  validExtensions: ['pdf'],
-  filename: '',
-  invalidInputText: 'File must have valid extension .pdf',
-  body: 'File must be exported in a PDF format.',
-};
+export const WithExtensionValidation = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    validExtensions: ['pdf'],
+    filename: '',
+    invalidInputText: 'File must have valid extension .pdf',
+    body: 'File must be exported in a PDF format.',
+  },
+});
 
-export const WithPreformattedExtensions = Template.bind({});
-WithPreformattedExtensions.args = {
-  ...defaultProps,
-  filename: 'test',
-  preformattedExtensions: [
-    {
-      extension: 'YAML',
-      description: 'best for IBM managed cloud',
-    },
-    {
-      extension: 'BAR',
-      description: 'best for integration server',
-    },
-  ],
-  preformattedExtensionsLabel: 'Choose an export format',
-};
+export const WithPreformattedExtensions = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    filename: 'test',
+    preformattedExtensions: [
+      {
+        extension: 'YAML',
+        description: 'best for IBM managed cloud',
+      },
+      {
+        extension: 'BAR',
+        description: 'best for integration server',
+      },
+    ],
+    preformattedExtensionsLabel: 'Choose an export format',
+  },
+});

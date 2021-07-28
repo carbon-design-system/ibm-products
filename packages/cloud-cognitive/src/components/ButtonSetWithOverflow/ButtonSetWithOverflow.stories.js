@@ -12,6 +12,7 @@ import { action } from '@storybook/addon-actions';
 import { pkg } from '../../settings';
 
 import { getStorybookPrefix } from '../../../config';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { ButtonSetWithOverflow } from '.';
 
 // Carbon and package components we use.
@@ -64,9 +65,10 @@ const Template = (argsIn) => {
   );
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  buttons,
-  buttonSetOverflowLabel,
-  containerWidth: 600,
-};
+export const Default = prepareStory(Template, {
+  args: {
+    buttons,
+    buttonSetOverflowLabel,
+    containerWidth: 600,
+  },
+});

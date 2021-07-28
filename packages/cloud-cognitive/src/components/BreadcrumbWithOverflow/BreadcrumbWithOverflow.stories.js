@@ -11,6 +11,7 @@ import { action } from '@storybook/addon-actions';
 import { pkg } from '../../settings';
 import { BreadcrumbWithOverflow } from '.';
 import { getStorybookPrefix } from '../../../config';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 const storybookPrefix = getStorybookPrefix(
   pkg,
@@ -110,9 +111,10 @@ const Template = (argsIn) => {
   );
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  breadcrumbs: breadcrumbItems,
-  containerWidth: 500,
-  overflowAriaLabel: 'Open and close additional breadcrumb item list.',
-};
+export const Default = prepareStory(Template, {
+  args: {
+    breadcrumbs: breadcrumbItems,
+    containerWidth: 500,
+    overflowAriaLabel: 'Open and close additional breadcrumb item list.',
+  },
+});

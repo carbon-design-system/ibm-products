@@ -8,6 +8,7 @@ import React from 'react';
 
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { action } from '@storybook/addon-actions';
 import { CreateFullPage } from '.';
 import { CreateFullPageSection } from './CreateFullPageSection';
@@ -224,20 +225,23 @@ const TemplateWithSections = ({ ...args }) => {
   );
 };
 
-export const createFullPage = Template.bind({});
-createFullPage.args = {
-  ...defaultFullPageProps,
-};
+export const createFullPage = prepareStory(Template, {
+  args: {
+    ...defaultFullPageProps,
+  },
+});
 
-export const createFullPageWithSections = TemplateWithSections.bind({});
-createFullPageWithSections.args = {
-  ...defaultFullPageProps,
-};
+export const createFullPageWithSections = prepareStory(TemplateWithSections, {
+  args: {
+    ...defaultFullPageProps,
+  },
+});
 
-export const createFullPageWithToggle = Template.bind({});
-createFullPageWithToggle.args = {
-  ...defaultFullPageProps,
-  hasToggle: true,
-  toggleAriaLabel: 'toggle button',
-  toggleLabelText: 'Show all available options',
-};
+export const createFullPageWithToggle = prepareStory(Template, {
+  args: {
+    ...defaultFullPageProps,
+    hasToggle: true,
+    toggleAriaLabel: 'toggle button',
+    toggleLabelText: 'Show all available options',
+  },
+});

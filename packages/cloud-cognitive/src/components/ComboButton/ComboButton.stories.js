@@ -10,6 +10,7 @@ import React from 'react';
 
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { ComboButton, ComboButtonItem } from '..';
 
@@ -26,10 +27,10 @@ export default {
   parameters: { styles },
 };
 
-export const Default = () => (
+export const Default = prepareStory(() => (
   <ComboButton>
     <ComboButtonItem>ComboButtonItem 1</ComboButtonItem>
     <ComboButtonItem renderIcon={CloudApp16}>ComboButtonItem 2</ComboButtonItem>
     <ComboButtonItem>ComboButtonItem 3</ComboButtonItem>
   </ComboButton>
-);
+));

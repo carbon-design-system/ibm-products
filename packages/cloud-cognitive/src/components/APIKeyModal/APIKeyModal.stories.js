@@ -19,6 +19,7 @@ import {
 import { action } from '@storybook/addon-actions';
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { APIKeyModal } from '.';
 import mdx from './APIKeyModal.mdx';
 const storybookPrefix = getStorybookPrefix(pkg, APIKeyModal.displayName);
@@ -351,104 +352,111 @@ const EditTemplate = (args) => {
   );
 };
 
-export const Generate = TemplateWithState.bind({});
-Generate.args = {
-  ...defaultProps,
-  generateButtonText: 'Generate API key',
-  generateTitle: 'Generate an API key',
-  body: '(Optional description text) To connect securely to [product name], your application or tool needs an API key with permission to access resources such as [product resource name].',
-  nameHelperText:
-    'Providing the application name will help you identify your API key later.',
-  nameLabel: 'Name your application',
-  namePlaceholder: 'Application name',
-  nameRequired: true,
-};
+export const Generate = prepareStory(TemplateWithState, {
+  args: {
+    ...defaultProps,
+    generateButtonText: 'Generate API key',
+    generateTitle: 'Generate an API key',
+    body: '(Optional description text) To connect securely to [product name], your application or tool needs an API key with permission to access resources such as [product resource name].',
+    nameHelperText:
+      'Providing the application name will help you identify your API key later.',
+    nameLabel: 'Name your application',
+    namePlaceholder: 'Application name',
+    nameRequired: true,
+  },
+});
 
-export const GenerateWithError = TemplateWithState.bind({});
-GenerateWithError.args = {
-  ...defaultProps,
-  hasAPIKeyVisibilityToggle: true,
-  generateButtonText: 'Generate API key',
-  generateTitle: 'Generate an API key',
-  body: '(Optional description text) To connect securely to [product name], your application or tool needs an API key with permission to access resources such as [product resource name].',
-  nameHelperText:
-    'Providing the application name will help you identify your API key later.',
-  nameLabel: 'Name your application',
-  namePlaceholder: 'Application name',
-  nameRequired: true,
-  error: true,
-  errorText: 'Failed to create API key',
-};
+export const GenerateWithError = prepareStory(TemplateWithState, {
+  args: {
+    ...defaultProps,
+    hasAPIKeyVisibilityToggle: true,
+    generateButtonText: 'Generate API key',
+    generateTitle: 'Generate an API key',
+    body: '(Optional description text) To connect securely to [product name], your application or tool needs an API key with permission to access resources such as [product resource name].',
+    nameHelperText:
+      'Providing the application name will help you identify your API key later.',
+    nameLabel: 'Name your application',
+    namePlaceholder: 'Application name',
+    nameRequired: true,
+    error: true,
+    errorText: 'Failed to create API key',
+  },
+});
 
-export const InstantGenerate = InstantTemplate.bind({});
-InstantGenerate.args = {
-  ...defaultProps,
-  apiKeyLabel: '',
-};
+export const InstantGenerate = prepareStory(InstantTemplate, {
+  args: {
+    ...defaultProps,
+    apiKeyLabel: '',
+  },
+});
 
-export const CustomGenerate = MultiStepTemplate.bind({});
-CustomGenerate.args = {
-  ...defaultProps,
-  generateButtonText: 'Generate',
-  modalLabel: 'Generate API key',
-  nextStepButtonText: 'Next',
-  previousStepButtonText: 'Previous',
-  downloadFileName: 'apikey',
-  savedName: '',
-  savedAllResources: false,
-  savedResource: '',
-  savedPermissions: '',
-};
+export const CustomGenerate = prepareStory(MultiStepTemplate, {
+  args: {
+    ...defaultProps,
+    generateButtonText: 'Generate',
+    modalLabel: 'Generate API key',
+    nextStepButtonText: 'Next',
+    previousStepButtonText: 'Previous',
+    downloadFileName: 'apikey',
+    savedName: '',
+    savedAllResources: false,
+    savedResource: '',
+    savedPermissions: '',
+  },
+});
 
-export const Edit = EditTemplate.bind({});
-Edit.args = {
-  ...defaultProps,
-  editButtonText: 'Save API key',
-  generateTitle: 'Save an API key',
-  body: '(Optional description text) To connect securely to [product name], your application or tool needs an API key with permission to access resources such as [product resource name].',
-  nameHelperText:
-    'Providing the application name will help you identify your API key later.',
-  nameLabel: 'Name your application',
-  namePlaceholder: 'Application name',
-  nameRequired: true,
-  editing: true,
-  apiKey: '',
-  loadingText: 'Saving...',
-  apiKeyName: 'test_key_1',
-};
+export const Edit = prepareStory(EditTemplate, {
+  args: {
+    ...defaultProps,
+    editButtonText: 'Save API key',
+    generateTitle: 'Save an API key',
+    body: '(Optional description text) To connect securely to [product name], your application or tool needs an API key with permission to access resources such as [product resource name].',
+    nameHelperText:
+      'Providing the application name will help you identify your API key later.',
+    nameLabel: 'Name your application',
+    namePlaceholder: 'Application name',
+    nameRequired: true,
+    editing: true,
+    apiKey: '',
+    loadingText: 'Saving...',
+    apiKeyName: 'test_key_1',
+  },
+});
 
-export const EditWithError = EditTemplate.bind({});
-EditWithError.args = {
-  ...defaultProps,
-  editButtonText: 'Save API key',
-  generateTitle: 'Save an API key',
-  body: '(Optional description text) To connect securely to [product name], your application or tool needs an API key with permission to access resources such as [product resource name].',
-  nameHelperText:
-    'Providing the application name will help you identify your API key later.',
-  nameLabel: 'Name your application',
-  namePlaceholder: 'Application name',
-  nameRequired: true,
-  editing: true,
-  apiKey: '',
-  loadingText: 'Saving...',
-  generateSuccessBody: 'API Key saved.',
-  apiKeyName: 'test_key_1',
-  error: true,
-  errorText: 'Failed to edit API key',
-};
+export const EditWithError = prepareStory(EditTemplate, {
+  args: {
+    ...defaultProps,
+    editButtonText: 'Save API key',
+    generateTitle: 'Save an API key',
+    body: '(Optional description text) To connect securely to [product name], your application or tool needs an API key with permission to access resources such as [product resource name].',
+    nameHelperText:
+      'Providing the application name will help you identify your API key later.',
+    nameLabel: 'Name your application',
+    namePlaceholder: 'Application name',
+    nameRequired: true,
+    editing: true,
+    apiKey: '',
+    loadingText: 'Saving...',
+    generateSuccessBody: 'API Key saved.',
+    apiKeyName: 'test_key_1',
+    error: true,
+    errorText: 'Failed to edit API key',
+  },
+});
 
-export const CustomEdit = MultiStepTemplate.bind({});
-CustomEdit.args = {
-  ...defaultProps,
-  generateButtonText: 'Generate',
-  modalLabel: 'Generate API key',
-  nextStepButtonText: 'Next',
-  previousStepButtonText: 'Previous',
-  downloadFileName: 'apikey',
-  savedName: 'test_key_1',
-  savedAllResources: false,
-  savedResource: 'resource_1',
-  savedPermissions: 'Read only',
-  editing: true,
-  editButtonText: 'Save API key',
-};
+export const CustomEdit = prepareStory(MultiStepTemplate, {
+  args: {
+    ...defaultProps,
+    generateButtonText: 'Generate',
+    modalLabel: 'Generate API key',
+    nextStepButtonText: 'Next',
+    previousStepButtonText: 'Previous',
+    downloadFileName: 'apikey',
+    savedName: 'test_key_1',
+    savedAllResources: false,
+    savedResource: 'resource_1',
+    savedPermissions: 'Read only',
+    editing: true,
+    editButtonText: 'Save API key',
+  },
+});

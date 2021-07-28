@@ -371,16 +371,18 @@ export let CreateTearsheet = forwardRef(
                   tearsheetSectionComponents.map(
                     (tearsheetSection, sectionIndex) => (
                       <SideNavLink
+                        href={`#${tearsheetSection?.props?.id}`}
                         key={sectionIndex}
                         isActive={activeSectionIndex === sectionIndex}
-                        onClick={() => {
+                        onClick={(event) => {
+                          event.preventDefault();
                           setActiveSectionIndex(sectionIndex);
                           if (tearsheetSection.props.id) {
                             const scrollTarget = document.querySelector(
                               `#${tearsheetSection.props.id}`
                             );
                             const scrollContainer = document.querySelector(
-                              `.${pkg.prefix}--tearsheet__content`
+                              `.${blockClass}__multi-step-panel-content`
                             );
                             scrollContainer.scrollTo({
                               top: scrollTarget.offsetTop,

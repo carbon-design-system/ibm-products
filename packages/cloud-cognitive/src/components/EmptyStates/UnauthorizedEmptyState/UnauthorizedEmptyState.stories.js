@@ -19,6 +19,7 @@ const storybookPrefix = getStorybookPrefix(
   pkg,
   UnauthorizedEmptyState.displayName
 );
+import { prepareStory } from '../../../global/js/utils/story-helper';
 
 export default {
   title: `${storybookPrefix}/EmptyStates/${UnauthorizedEmptyState.displayName}`,
@@ -40,57 +41,63 @@ const Template = (args) => {
   return <UnauthorizedEmptyState {...args} />;
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  ...defaultStoryProps,
-};
-
-export const WithDarkModeIllustration = Template.bind({});
-WithDarkModeIllustration.args = {
-  ...defaultStoryProps,
-  illustrationTheme: 'dark',
-};
-
-export const withAction = Template.bind({});
-withAction.args = {
-  ...defaultStoryProps,
-  action: {
-    text: 'Create new',
-    onClick: action('Clicked empty state action button'),
+export const Default = prepareStory(Template, {
+  args: {
+    ...defaultStoryProps,
   },
-};
+});
 
-export const withActionIconButton = Template.bind({});
-withActionIconButton.args = {
-  ...defaultStoryProps,
-  action: {
-    text: 'Create new',
-    onClick: action('Clicked empty state action button'),
-    renderIcon: Add20,
-    iconDescription: 'Add icon',
+export const WithDarkModeIllustration = prepareStory(Template, {
+  args: {
+    ...defaultStoryProps,
+    illustrationTheme: 'dark',
   },
-};
+});
 
-export const withLink = Template.bind({});
-withLink.args = {
-  ...defaultStoryProps,
-  link: {
-    text: 'View documentation',
-    href: 'https://www.carbondesignsystem.com',
+export const withAction = prepareStory(Template, {
+  args: {
+    ...defaultStoryProps,
+    action: {
+      text: 'Create new',
+      onClick: action('Clicked empty state action button'),
+    },
   },
-};
+});
 
-export const withActionAndLink = Template.bind({});
-withActionAndLink.args = {
-  ...defaultStoryProps,
-  action: {
-    text: 'Create new',
-    onClick: action('Clicked empty state action button'),
-    renderIcon: Add20,
-    iconDescription: 'Add icon',
+export const withActionIconButton = prepareStory(Template, {
+  args: {
+    ...defaultStoryProps,
+    action: {
+      text: 'Create new',
+      onClick: action('Clicked empty state action button'),
+      renderIcon: Add20,
+      iconDescription: 'Add icon',
+    },
   },
-  link: {
-    text: 'View documentation',
-    href: 'https://www.carbondesignsystem.com',
+});
+
+export const withLink = prepareStory(Template, {
+  args: {
+    ...defaultStoryProps,
+    link: {
+      text: 'View documentation',
+      href: 'https://www.carbondesignsystem.com',
+    },
   },
-};
+});
+
+export const withActionAndLink = prepareStory(Template, {
+  args: {
+    ...defaultStoryProps,
+    action: {
+      text: 'Create new',
+      onClick: action('Clicked empty state action button'),
+      renderIcon: Add20,
+      iconDescription: 'Add icon',
+    },
+    link: {
+      text: 'View documentation',
+      href: 'https://www.carbondesignsystem.com',
+    },
+  },
+});

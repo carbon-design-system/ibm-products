@@ -5,52 +5,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, useEffect, useState } from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
-import {
-  CREATE_FULL_PAGE_STEP,
-  CREATE_FULL_PAGE_SECTION,
-} from './constants.js';
+import { CREATE_FULL_PAGE_STEP } from './constants.js';
 
 const componentName = 'CreateFullPageStep';
 const blockClass = `${pkg.prefix}--create-full-page__step`;
 
-import { Row, Column, Form } from 'carbon-components-react';
-
-export let CreateFullPageStep = forwardRef(
-  (
-    { children, className, title, subtitle, description, hasForm = true },
-    ref
-  ) => {
-    const [section, setSections] = useState('');
-    const isFullPageSection = (child) => {
-      if (
-        child &&
-        child.props &&
-        child.props.type === CREATE_FULL_PAGE_SECTION
-      ) {
-        return true;
-      }
-      return false;
-    };
-
-    return (
-      <div className={cx(blockClass, className)} ref={ref}>
-        <Row>
-          <Column>
-            {hasForm ? (
-              <Form className={`${blockClass}-form`}>{children}</Form>
-            ) : (
-              { children }
-            )}
-          </Column>
-        </Row>
-      </div>
-    );
-  }
-);
+export let CreateFullPageStep = forwardRef(({ children, className }, ref) => {
+  return (
+    <div className={cx(blockClass, className)} ref={ref}>
+      {children}
+    </div>
+  );
+});
 
 // Return a placeholder if not released and not enabled by feature flag
 CreateFullPageStep = pkg.checkComponentEnabled(
@@ -83,6 +53,12 @@ CreateFullPageStep.propTypes = {
    * This will conditionally render form content below the step condition. This is defaulted to true
    */
   hasForm: PropTypes.bool,
+
+  /**
+   * Optional function to be called on initial mount of a step.
+   * For example, this can be used to fetch data that is required on a particular step.
+   */
+  onMount: PropTypes.func,
 
   /**
    * Optional function to be called on a step change.

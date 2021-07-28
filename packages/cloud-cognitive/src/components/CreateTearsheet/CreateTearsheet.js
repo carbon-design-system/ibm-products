@@ -368,8 +368,9 @@ export let CreateTearsheet = forwardRef(
                               `#${tearsheetSection.props.id}`
                             );
                             const scrollContainer = document.querySelector(
-                              `.${pkg.prefix}--tearsheet__content`
+                              `.${pkg.prefix}--tearsheet-create__multi-step-panel-content`
                             );
+                            console.log(scrollTarget.offsetParent)
                             scrollContainer.scrollTo({
                               top: scrollTarget.offsetTop,
                               behavior: 'smooth',

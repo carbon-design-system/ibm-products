@@ -3,39 +3,16 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
 
-import { Row, Column, Form } from 'carbon-components-react';
-
 import { CREATE_FULL_PAGE_SECTION } from './constants';
 
 const componentName = 'CreateFullPageSection';
 const blockClass = `${pkg.prefix}--create-full-page__section`;
 
 export let CreateFullPageSection = forwardRef(
-  (
-    {
-      children,
-      className,
-      hasDivider = true,
-      hasForm = true,
-      id,
-      title,
-      subtitle,
-      description,
-    },
-    ref
-  ) => {
+  ({ children, className, id }, ref) => {
     return (
       <div className={cx(blockClass, className)} ref={ref} id={id}>
-        <Row>
-          <Column>
-            {hasForm ? (
-              <Form className={`${blockClass}-form`}>{children}</Form>
-            ) : (
-              { children }
-            )}
-          </Column>
-        </Row>
-        {hasDivider && <span className={`${blockClass}-divider`}></span>}
+        {children}
       </div>
     );
   }

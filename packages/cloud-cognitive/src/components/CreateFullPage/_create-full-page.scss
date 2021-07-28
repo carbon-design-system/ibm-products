@@ -49,6 +49,12 @@
     margin: 0;
   }
 
+  .#{$block-class} .#{$block-class}__left-nav {
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    overflow-y: auto;
+  }
+
   .#{$block-class} .#{$block-class}__body {
     display: flex;
     flex-direction: column;
@@ -65,7 +71,8 @@
   .#{$block-class} .#{$block-class}__content {
     overflow: auto;
     flex-grow: 1;
-    padding-top: $spacing-06;
+    padding: $spacing-06;
+    overflow-x: hidden;
   }
 
   .#{$block-class} .#{$block-class}__step {
@@ -79,6 +86,8 @@
     border-right: 1px solid var(--cds-ui-03, #e0e0e0);
     padding-top: 0;
     background-color: transparent;
+    grid-row: 1;
+    height: min-content;
   }
 
   .#{$block-class} .#{$block-class}__step-text-content,
@@ -123,25 +132,37 @@
   }
 
   .#{$block-class} .#{$block-class}__influencer {
-    display: flex;
-    width: 16rem;
-    min-width: 16rem;
-    height: 100%;
-    flex-direction: column;
-    padding: $spacing-06 $spacing-07;
+    // display: flex;
+    // width: 16rem;
+    // min-width: 16rem;
+    // height: 100%;
+    // flex-direction: column;
+    // padding: $spacing-06 $spacing-07;
     border-right: 1px solid $ui-03;
     background-color: $ui-01;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr auto;
+    flex: 0 0 257px;
   }
 
   .#{$block-class} .#{$block-class}__progress-indicator {
-    min-height: calc(100% - #{$spacing-10});
-    overflow: auto;
+    // min-height: calc(100% - #{$spacing-10});
+    // overflow: auto;
+    padding: $spacing-06;
   }
 
+  // .#{$block-class} .#{$block-class}__influencer-toggle {
+  //   flex: 1;
+  //   justify-content: flex-end;
+  //   z-index: 8001; // UI shell side nav has z-index of 8000 and the toggle needs receive the highest stacking order
+
+  // }
+
   .#{$block-class} .#{$block-class}__influencer-toggle {
-    flex: 1;
-    justify-content: flex-end;
-    z-index: 8001; // UI shell side nav has z-index of 8000 and the toggle needs receive the highest stacking order
+    padding: $spacing-06;
+    grid-column: 1 / -1;
+    grid-row: -1 / -1;
   }
 
   .#{$block-class} .#{$block-class}__buttons {

@@ -9,6 +9,7 @@
 @import '../../global/styles/mixins';
 
 @import 'carbon-components/scss/components/button/button';
+@import '../ButtonMenu/index';
 
 $block-class: #{$pkg-prefix}--button-set-with-overflow;
 

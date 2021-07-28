@@ -5,8 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// cspell:words unuse
+
 import React, { useEffect } from 'react';
-import { withInfo } from '@storybook/addon-info';
 import { withCarbonTheme } from '@carbon/storybook-addon-theme/react';
 
 import { pkg } from '../../cloud-cognitive/src/settings';
@@ -30,7 +31,6 @@ const Style = ({ children, styles }) => {
 };
 
 const decorators = [
-  withInfo,
   (storyFn, { parameters: { styles } }) => {
     const story = storyFn();
 

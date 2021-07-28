@@ -1,15 +1,15 @@
-//
-// Copyright IBM Corp. 2020, 2021
-//
-// This source code is licensed under the Apache-2.0 license found in the
-// LICENSE file in the root directory of this source tree.
-//
+/**
+ * Copyright IBM Corp. 2020, 2021
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 import React from 'react';
-// import { action } from '@storybook/addon-actions';
+
+import { pkg, carbon } from '../../settings';
 
 import {
-  BreadcrumbItem,
   Column,
   Grid,
   Header,
@@ -24,8 +24,8 @@ import {
   TableRow,
   TableCell,
 } from 'carbon-components-react';
-import { CheckmarkFilled16 } from '@carbon/icons-react';
 import {
+  CheckmarkFilled16,
   Lightning16,
   Bee24,
   Printer16,
@@ -34,72 +34,350 @@ import {
   VolumeMute16,
 } from '@carbon/icons-react';
 
-import { pkg, carbon } from '../../settings';
-import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
-import { getStorybookPrefix } from '../../../config';
 import { ActionBarItem } from '../ActionBar';
 import { PageHeader, deprecatedProps } from './PageHeader';
+
+import { getStorybookPrefix } from '../../../config';
 const storybookPrefix = getStorybookPrefix(pkg, PageHeader.displayName);
+import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 
 import { demoTableHeaders, demoTableData } from './PageHeaderDemo.data';
 
-import styles from './_storybook-styles.scss'; // import index in case more files are added later.
+import styles from './_storybook-styles.scss';
+
 import mdx from './PageHeader.mdx';
 
 const storyClass = 'page-header-stories';
 
+// Values for arg types
+
+const makeActionBarItem = (item) => ({
+  key: `a-key-${item}`,
+  renderIcon: Lightning16,
+  iconDescription: `Action ${item}`,
+});
+const actionBarItems = {
+  'No action bar': null,
+  'A single item': [1].map(makeActionBarItem),
+  'Four items': [1, 2, 3, 4].map(makeActionBarItem),
+  'Many items': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(makeActionBarItem),
+  'Custom items': [
+    { key: '1', renderIcon: Printer16, iconDescription: `Print` },
+    { key: '2', renderIcon: Settings16, iconDescription: `Settings` },
+    { key: '3', renderIcon: VolumeMute16, iconDescription: `Mute` },
+  ],
+};
+
+const makeBreadcrumb = (item, title) => ({
+  href: '#',
+  key: `Breadcrumb ${item}`,
+  label: typeof title === 'string' ? title : `Breadcrumb ${item}`,
+});
+const now = new Date();
+const m = now.getMonth();
+if (m === 0) {
+  now.setFullYear(now.getFullYear() - 1);
+  now.setMonth(11);
+} else {
+  now.setMonth(m - 1);
+}
+const ms = now.toLocaleString('default', { month: 'long' });
+const ys = now.toLocaleString('default', { year: 'numeric' });
+const breadcrumbs = {
+  'No breadcrumb': null,
+  'A single breadcrumb': [makeBreadcrumb(1, 'Home page')],
+  'Two-level breadcrumb': [
+    makeBreadcrumb(1, 'Home page'),
+    makeBreadcrumb(2, 'Secondary page'),
+  ],
+  'Many breadcrumbs': [
+    makeBreadcrumb(1, 'Home page'),
+    makeBreadcrumb(2, 'Secondary page'),
+    ...[3, 4, 5, 6, 7, 8].map(makeBreadcrumb),
+  ],
+  'Demo breadcrumbs': [
+    makeBreadcrumb(1, 'Home page', '../../../homepage'),
+    makeBreadcrumb(2, 'Reports', '../../Reports'),
+    makeBreadcrumb(3, `${ms} ${ys}`, `../${ms}{ys}`),
+  ],
+};
+
+console.dir(breadcrumbs);
+
+const children = {
+  'Nothing in the available area': null,
+  'A status indicator': (
+    <>
+      <CheckmarkFilled16 className={`${storyClass}__status-icon`} /> Running
+    </>
+  ),
+  // cspell: disable
+  'Summary details': (
+    <div style={{ display: 'flex' }}>
+      <p
+        style={{
+          // stylelint-disable-next-line carbon/layout-token-use
+          marginRight: '50px',
+          maxWidth: '400px',
+        }}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor <strong>incididunt ut labore</strong> et dolore magna aliqua. Ut
+        enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+        aliquip ex ea commodo consequat.
+      </p>
+      <p>
+        Property: Value
+        <br />
+        Property: Value
+        <br />
+        Property: Value
+      </p>
+    </div>
+  ),
+  // cspell: enable
+  'Custom content': (
+    <>
+      <p>Severity 1: 0</p>
+      <p>Severity 1: 814</p>
+      <p>Severity 3: 3,108</p>
+    </>
+  ),
+};
+
+const navigation = {
+  'No navigation': null,
+  'Four tabs': (
+    <Tabs>
+      <Tab label="Tab 1" />
+      <Tab label="Tab 2" />
+      <Tab label="Tab 3" />
+      <Tab label="Tab 4" />
+    </Tabs>
+  ),
+  'Many tabs': (
+    <Tabs>
+      <Tab label="Tab 1" />
+      <Tab label="Tab 2" />
+      <Tab label="Tab 3" />
+      <Tab label="Tab 4" />
+      <Tab label="Tab 5" />
+      <Tab label="Tab 6" />
+      <Tab label="Tab 7" />
+      <Tab label="Tab 8" />
+    </Tabs>
+  ),
+  'Custom tabs': (
+    <Tabs>
+      <Tab label="Summary" />
+      <Tab label="Region 1" />
+      <Tab label="Region 2" />
+      <Tab label="Region 3" />
+    </Tabs>
+  ),
+};
+
+const pageActions = {
+  'No page actions': null,
+  'A single primary page action': [
+    {
+      key: 'primary',
+      kind: 'primary',
+      label: 'Primary button',
+      onClick: () => {},
+    },
+  ],
+  'Primary and secondary page actions': [
+    {
+      key: 'secondary',
+      kind: 'secondary',
+      label: 'Secondary button',
+      onClick: () => {},
+    },
+    {
+      key: 'primary',
+      kind: 'primary',
+      label: 'Primary button',
+      onClick: () => {},
+    },
+  ],
+  'Primary and two secondary page actions': [
+    {
+      key: '1',
+      kind: 'danger',
+      label: 'Danger button',
+      onClick: () => {},
+    },
+    {
+      key: '2',
+      kind: 'secondary',
+      label: 'Secondary button',
+      onClick: () => {},
+    },
+    {
+      key: '3',
+      kind: 'primary',
+      label: 'Primary button',
+      onClick: () => {},
+    },
+  ],
+  'Custom page actions': [
+    {
+      key: 'acknowledge',
+      kind: 'secondary',
+      label: 'Acknowledge',
+      onClick: () => {},
+    },
+    {
+      key: 'escalate',
+      kind: 'primary',
+      label: 'Escalate',
+      onClick: () => {},
+    },
+  ],
+};
+
+const tags = {
+  'No tags': null,
+  'Four tags': [
+    { type: 'blue', label: 'A tag' },
+    { type: 'green', label: 'A tag' },
+    { type: 'warm-gray', label: 'A tag' },
+    { type: 'purple', label: 'A tag' },
+  ],
+  'Many tags': [
+    { type: 'blue', label: 'Blue' },
+    { type: 'green', label: 'Green' },
+    { type: 'warm-gray', label: 'Warm gray' },
+    { type: 'purple', label: 'Purple' },
+    { type: 'red', label: 'Red' },
+    { type: 'teal', label: 'Teal' },
+    { type: 'red', label: 'Longer ThanAPieceOfString' },
+    { type: 'high-contrast', label: 'High contrast' },
+    { type: 'magenta', label: 'Magenta' },
+    { type: 'blue', label: 'Blue 2' },
+    { type: 'green', label: 'Green 2' },
+    { type: 'warm-gray', label: 'Warm gray 2' },
+    { type: 'purple', label: 'Purple 2' },
+    { type: 'red', label: 'Red 2' },
+    { type: 'teal', label: 'Teal 2' },
+    { type: 'red', label: 'Longer ThanAPieceOfString 2' },
+    { type: 'high-contrast', label: 'High contrast 2' },
+    { type: 'magenta', label: 'Magenta 2' },
+  ],
+  'Custom tags': [
+    { type: 'cyan', label: 'Not urgent' },
+    { type: 'red', label: 'Security' },
+  ],
+};
+
+const title = {
+  'No title': null,
+  'Plain text title': 'Page title',
+  'Title with icon': { text: 'Page title', loading: false, icon: Bee24 },
+  'Long title with icon': {
+    text: 'A very long page title which will almost certainly have to be truncated at some point',
+    loading: false,
+    icon: Bee24,
+  },
+  'Loading title': { text: 'Patience is a virtue', loading: true },
+  'Custom title': {
+    text: 'Authentication activity',
+    loading: false,
+    icon: Security24,
+  },
+};
+
 export default {
   title: `${storybookPrefix}/${PageHeader.displayName}`,
   component: PageHeader,
-  subcomponents: {
-    ActionBarItem,
-  },
+  subcomponents: { ActionBarItem },
   parameters: { styles, layout: 'fullscreen', docs: { page: mdx } },
   decorators: [
     (story) => <div className={`${storyClass}__viewport`}>{story()}</div>,
   ],
-  argTypes: getDeprecatedArgTypes(deprecatedProps),
+  argTypes: {
+    ...getDeprecatedArgTypes(deprecatedProps),
+    actionBarItems: {
+      control: {
+        type: 'select',
+        labels: Object.keys(actionBarItems),
+      },
+      options: Object.values(actionBarItems).map((_k, i) => i),
+      mapping: Object.values(actionBarItems),
+    },
+    breadcrumbs: {
+      control: {
+        type: 'select',
+        labels: Object.keys(breadcrumbs),
+      },
+      options: Object.values(breadcrumbs).map((_k, i) => i),
+      mapping: Object.values(breadcrumbs),
+    },
+    children: {
+      control: {
+        type: 'select',
+        labels: Object.keys(children),
+      },
+      options: Object.values(children).map((_k, i) => i),
+      mapping: Object.values(children),
+    },
+    navigation: {
+      control: {
+        type: 'select',
+        labels: Object.keys(navigation),
+      },
+      options: Object.values(navigation).map((_k, i) => i),
+      mapping: Object.values(navigation),
+    },
+    pageActions: {
+      control: {
+        type: 'select',
+        labels: Object.keys(pageActions),
+      },
+      options: Object.values(pageActions).map((_k, i) => i),
+      mapping: Object.values(pageActions),
+    },
+    tags: {
+      control: {
+        type: 'select',
+        labels: Object.keys(tags),
+      },
+      options: Object.values(tags).map((_k, i) => i),
+      mapping: Object.values(tags),
+    },
+    title: {
+      control: {
+        type: 'select',
+        labels: Object.keys(title),
+      },
+      options: Object.values(title).map((_k, i) => i),
+      mapping: Object.values(title),
+    },
+  },
 };
 
 // Test values for props.
 
-const actionBarItems = [1, 2, 3, 4].map((item) => ({
-  key: `a-key-${item}`,
-  renderIcon: Lightning16,
-  iconDescription: `Action ${item}`,
-}));
-
 const actionBarOverflowAriaLabel = 'Show further action bar items';
 
-const manyActionBarItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
-  key: `a-key-${item}`,
-  renderIcon: Lightning16,
-  iconDescription: `Action ${item}`,
-}));
+const allTagsModalSearchLabel = 'Search all tags';
+const allTagsModalSearchPlaceholderText = 'Enter search string';
+const allTagsModalTitle = 'All tags';
+const showAllTagsLabel = 'View all tags';
 
-const breadcrumbItems = (
-  <>
-    <BreadcrumbItem href="#">Breadcrumb 1</BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
-  </>
-);
-const manyBreadcrumbItems = (
-  <>
-    <BreadcrumbItem href="#">Breadcrumb 1</BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 4</BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 5</BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 6</BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 7</BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 8</BreadcrumbItem>
-  </>
-);
 const breadcrumbOverflowAriaLabel =
   'Open and close additional breadcrumb item list.';
 
-const className = 'client-class-1 client-class-2';
+const collapseHeaderIconDescription = 'Collapse the page header';
+const expandHeaderIconDescription = 'Expand the page header';
+
+const pageActionsOverflowLabel = 'Page actions...';
+
+const subtitle = 'Optional subtitle if necessary';
+const longSubtitle =
+  'Optional subtitle if necessary, which is very long in this case, but will need to be handled somehow. It just keeps going on and on and on and on and on.';
+const demoSubtitle = 'This report details the monthly authentication failures';
+
 const dummyPageContent = (
   <Grid className={`${storyClass}__dummy-content`} narrow={true}>
     <Row>
@@ -127,469 +405,193 @@ const dummyPageContent = (
     </Row>
   </Grid>
 );
-const pageActions = [
-  {
-    key: 'secondary',
-    kind: 'secondary',
-    label: 'Secondary button',
-    onClick: () => {},
-  },
-  {
-    key: 'primary',
-    kind: 'primary',
-    label: 'Primary button',
-    onClick: () => {},
-  },
-];
-const pageActionsOverflowLabel = 'Page actions...';
 
-const manyPageActions = [
-  {
-    key: '1',
-    kind: 'danger',
-    label: 'Secondary 1',
-    onClick: () => {},
-  },
-  {
-    key: '2',
-    kind: 'secondary',
-    label: 'Secondary 2',
-    onClick: () => {},
-  },
-  {
-    key: '3',
-    kind: 'primary',
-    label: 'Primary',
-    onClick: () => {},
-  },
-];
-
-const statusIndicator = (
-  <>
-    <CheckmarkFilled16 className={`${storyClass}__status-icon`} /> Running
-  </>
+const demoDummyPageContent = (
+  <Grid className={`${storyClass}__dummy-content`} narrow={true}>
+    <Row>
+      <Column
+        sm={4}
+        md={8}
+        lg={16}
+        className={`${storyClass}__dummy-content-block`}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              {demoTableHeaders.map((header) => (
+                <TableHeader key={header}>{header}</TableHeader>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {demoTableData.map((row) => (
+              <TableRow key={row.Index}>
+                {Object.keys(row).map((key) => {
+                  return <TableCell key={key}>{row[key]}</TableCell>;
+                })}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>{' '}
+      </Column>
+    </Row>
+  </Grid>
 );
-const subtitle = 'Optional subtitle if necessary';
-const longSubtitle =
-  'Optional subtitle if necessary, which is very long in this case, but will need to be handled somehow. It just keeps going on and on and on and on and on.';
-// cspell: disable
-const summaryDetails = (
-  <div style={{ display: 'flex' }}>
-    <p
-      style={{
-        // stylelint-disable-next-line carbon/layout-token-use
-        marginRight: '50px',
-        maxWidth: '400px',
-      }}>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor <strong>incididunt ut labore</strong> et dolore magna aliqua. Ut
-      enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-      aliquip ex ea commodo consequat.
-    </p>
-    <p>
-      Property: Value
-      <br />
-      Property: Value
-      <br />
-      Property: Value
-    </p>
-  </div>
-);
-// cspell: enable
-const tabBar = (
-  <Tabs>
-    <Tab label="Tab 1" />
-    <Tab label="Tab 2" />
-    <Tab label="Tab 3" />
-    <Tab label="Tab 4" />
-  </Tabs>
-);
-const longTabBar = (
-  <Tabs>
-    <Tab label="Tab 1" />
-    <Tab label="Tab 2" />
-    <Tab label="Tab 3" />
-    <Tab label="Tab 4" />
-    <Tab label="Tab 5" />
-    <Tab label="Tab 6" />
-    <Tab label="Tab 7" />
-    <Tab label="Tab 8" />
-  </Tabs>
-);
-
-const tags = [
-  { type: 'blue', label: 'A tag' },
-  { type: 'green', label: 'A tag' },
-  { type: 'warm-gray', label: 'A tag' },
-  { type: 'purple', label: 'A tag' },
-];
-
-const manyTags = [
-  { type: 'blue', label: 'Blue' },
-  { type: 'green', label: 'Green' },
-  { type: 'warm-gray', label: 'Warm gray' },
-  { type: 'purple', label: 'Purple' },
-  { type: 'red', label: 'Red' },
-  { type: 'teal', label: 'Teal' },
-  { type: 'red', label: 'Longer ThanAPieceOfString' },
-  { type: 'high-contrast', label: 'High contrast' },
-  { type: 'magenta', label: 'Magenta' },
-  { type: 'blue', label: 'Blue 2' },
-  { type: 'green', label: 'Green 2' },
-  { type: 'warm-gray', label: 'Warm gray 2' },
-  { type: 'purple', label: 'Purple 2' },
-  { type: 'red', label: 'Red 2' },
-  { type: 'teal', label: 'Teal 2' },
-  { type: 'red', label: 'Longer ThanAPieceOfString 2' },
-  { type: 'high-contrast', label: 'High contrast 2' },
-  { type: 'magenta', label: 'Magenta 2' },
-];
-
-const title = { text: 'Page title', loading: false, icon: Bee24 };
-const longTitle = {
-  text: 'A very long page title that is going to exceed 60% of the stage width and get truncated on large screens',
-  loading: false,
-  icon: Bee24,
-};
 
 // Template.
-const Template = (args) => {
-  const { children, ...props } = args;
-
-  return (
-    <>
-      <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
-      <PageHeader className={className} {...props}>
-        {children}
-      </PageHeader>
-      {dummyPageContent}
-    </>
-  );
-};
+// eslint-disable-next-line react/prop-types
+const Template = ({ children, ...props }) => (
+  <>
+    <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
+    <PageHeader {...props}>{children}</PageHeader>
+    {dummyPageContent}
+  </>
+);
 
 // Stories
-export const AllAttributesSet = Template.bind({});
-AllAttributesSet.args = {
-  hasBackgroundAlways: true,
+export const withTitle = Template.bind({});
+withTitle.storyName = 'Simple page header with page title';
+withTitle.args = {
+  title: 2,
+  hasBackgroundAlways: false,
+};
+
+export const withBreadcrumbs = Template.bind({});
+withBreadcrumbs.storyName = 'Simple page header with breadcrumb';
+withBreadcrumbs.args = {
+  ...withTitle.args,
+  breadcrumbs: 2,
   breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
-  actionBarItems,
-  actionBarOverflowAriaLabel,
-  title,
-  pageActions,
+};
+
+export const withButtons = Template.bind({});
+withButtons.storyName = 'Simple page header with status and actions';
+withButtons.args = {
+  ...withBreadcrumbs.args,
+  pageActions: 2,
   pageActionsOverflowLabel,
+  children: 1,
+};
+
+export const withTabs = Template.bind({});
+withTabs.storyName = 'Page header with navigation tabs';
+withTabs.args = {
+  title: 2,
+  breadcrumbs: 2,
+  breadcrumbOverflowAriaLabel,
+  pageActions: 2,
+  pageActionsOverflowLabel,
+  navigation: 1,
+};
+
+export const withTags = Template.bind({});
+withTags.storyName = 'Page header with tags';
+withTags.args = {
+  title: 2,
+  breadcrumbs: 2,
+  breadcrumbOverflowAriaLabel,
+  pageActions: 2,
+  pageActionsOverflowLabel,
+  tags: 1,
+};
+
+export const withTabsAndTags = Template.bind({});
+withTabsAndTags.storyName = 'Page header with tags and navigation tabs';
+withTabsAndTags.args = {
+  title: 2,
+  breadcrumbs: 2,
+  breadcrumbOverflowAriaLabel,
+  pageActions: 2,
+  pageActionsOverflowLabel,
+  navigation: 1,
+  tags: 1,
+};
+
+export const withSubtitle = Template.bind({});
+withSubtitle.storyName = 'Page header with title and subtitle';
+withSubtitle.args = {
+  title: 2,
   subtitle,
-  children: summaryDetails,
-  navigation: tabBar,
-  tags,
-};
-
-export const NoAttributesSet = Template.bind({});
-NoAttributesSet.args = {};
-
-export const TitleOnly = Template.bind({});
-TitleOnly.args = {
-  title,
-};
-
-export const TitleAndPageActions = Template.bind({});
-TitleAndPageActions.args = {
-  title,
-  pageActions,
-  pageActionsOverflowLabel,
-};
-
-export const BreadcrumbItemsAndTitle = Template.bind({});
-BreadcrumbItemsAndTitle.args = {
+  breadcrumbs: 2,
   breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
-  title,
+  navigation: 1,
 };
 
-export const BreadcrumbItemsTitleAndPageActions = Template.bind({});
-BreadcrumbItemsTitleAndPageActions.args = {
+export const withSummaryDetails = Template.bind({});
+withSummaryDetails.storyName = 'Page header with summary details';
+withSummaryDetails.args = {
+  title: 2,
+  breadcrumbs: 2,
   breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
-  title,
-  pageActions,
-  pageActionsOverflowLabel,
+  navigation: 1,
+  children: 2,
 };
 
-export const BreadcrumbItemsTitleAndStatus = Template.bind({});
-BreadcrumbItemsTitleAndStatus.args = {
+export const withActionsToolbar = Template.bind({});
+withActionsToolbar.storyName = 'Page header with actions toolbar';
+withActionsToolbar.args = {
+  title: 2,
+  breadcrumbs: 2,
   breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
-  title,
-  children: statusIndicator,
-};
-
-export const BreadcrumbItemsTitleTabs = Template.bind({});
-BreadcrumbItemsTitleTabs.args = {
-  hasBackgroundAlways: true,
-  breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
-  title,
-  navigation: tabBar,
-};
-
-export const BreadcrumbItemsTitleIconTabs = Template.bind({});
-BreadcrumbItemsTitleIconTabs.args = {
-  hasBackgroundAlways: true,
-  breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
-  title,
-  titleIcon: Bee24,
-  navigation: tabBar,
-};
-
-export const BreadcrumbItemsTitlePageActionsTabs = Template.bind({});
-BreadcrumbItemsTitlePageActionsTabs.args = {
-  hasBackgroundAlways: true,
-  breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
-  title,
-  pageActions,
-  pageActionsOverflowLabel,
-  navigation: tabBar,
-};
-
-export const BreadcrumbItemsTitlePageActionsTags = Template.bind({});
-BreadcrumbItemsTitlePageActionsTags.args = {
-  hasBackgroundAlways: true,
-  breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
-  title,
-  pageActions,
-  pageActionsOverflowLabel,
-  tags,
-};
-
-export const BreadcrumbItemsTitleTabsTags = Template.bind({});
-BreadcrumbItemsTitleTabsTags.args = {
-  hasBackgroundAlways: true,
-  breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
-  title,
-  navigation: tabBar,
-  tags,
-};
-
-export const BreadcrumbItemsActionBarTitlePageActionsTabsTags = Template.bind(
-  {}
-);
-BreadcrumbItemsActionBarTitlePageActionsTabsTags.args = {
-  hasBackgroundAlways: true,
-  breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
-  actionBarItems,
+  navigation: 1,
+  actionBarItems: 2,
   actionBarOverflowAriaLabel,
-  title,
-  pageActions,
-  pageActionsOverflowLabel,
-  navigation: tabBar,
 };
 
-export const BreadcrumbItemsActionBar = Template.bind({});
-BreadcrumbItemsActionBar.args = {
-  hasBackgroundAlways: true,
+export const withBreadcrumbActionsToolbarOnly = Template.bind({});
+withBreadcrumbActionsToolbarOnly.storyName =
+  'Reduced page header with breadcrumb bar only';
+withBreadcrumbActionsToolbarOnly.args = {
+  title: 1,
+  breadcrumbs: 2,
   breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
-  actionBarItems,
+  actionBarItems: 2,
   actionBarOverflowAriaLabel,
   collapseTitle: true,
-  title,
 };
 
-export const BreadcrumbItemsTitlePageActionsSubtitle = Template.bind({});
-BreadcrumbItemsTitlePageActionsSubtitle.args = {
-  hasBackgroundAlways: true,
-  breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
-  title,
-  pageActions,
-  pageActionsOverflowLabel,
+export const fullyLoaded = Template.bind({});
+fullyLoaded.storyName = 'Page header with all items, pre-collapsed';
+fullyLoaded.args = {
+  title: 2,
   subtitle,
-};
-
-export const BreadcrumbItemsTitlePageActionsSummarydetailsTabs = Template.bind(
-  {}
-);
-BreadcrumbItemsTitlePageActionsSummarydetailsTabs.args = {
-  hasBackgroundAlways: true,
+  breadcrumbs: 2,
   breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
-  title,
-  pageActions,
+  pageActions: 2,
   pageActionsOverflowLabel,
-  children: summaryDetails,
-  navigation: tabBar,
-};
-
-export const AllAttributesSetKeepsBreadcrumbTabs = Template.bind({});
-AllAttributesSetKeepsBreadcrumbTabs.args = {
-  disableBreadcrumbScroll: true,
-  hasBackgroundAlways: true,
-  breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
-  actionBarItems,
+  children: 2,
+  navigation: 1,
+  tags: 1,
+  actionBarItems: 2,
   actionBarOverflowAriaLabel,
-  title,
-  pageActions,
-  pageActionsOverflowLabel,
-  subtitle,
-  children: summaryDetails,
-  navigation: tabBar,
-  tags,
+  collapseHeader: true,
 };
 
-export const AllAttributesSetPreCollapseTitle = Template.bind({});
-AllAttributesSetPreCollapseTitle.args = {
-  collapseTitle: true,
-  hasBackgroundAlways: true,
-  breadcrumbOverflowAriaLabel,
-  breadcrumbItems,
-  actionBarItems,
-  actionBarOverflowAriaLabel,
-  title,
-  pageActions,
-  pageActionsOverflowLabel,
-  subtitle,
-  children: summaryDetails,
-  navigation: tabBar,
-  tags,
-};
-
-export const LongValuesManyItems = Template.bind({});
-LongValuesManyItems.args = {
-  hasBackgroundAlways: true,
-  breadcrumbItems: manyBreadcrumbItems,
-  breadcrumbOverflowAriaLabel,
-  actionBarItems: manyActionBarItems,
-  actionBarOverflowAriaLabel,
-  title: longTitle,
-  pageActions: manyPageActions,
-  pageActionsOverflowLabel,
+export const fullyLoadedAndSome = Template.bind({});
+fullyLoadedAndSome.storyName = 'Page header with long values and many items';
+fullyLoadedAndSome.args = {
+  title: 3,
   subtitle: longSubtitle,
-  children: summaryDetails,
-  navigation: longTabBar,
-  tags: manyTags,
-  allTagsModalTitle: 'All tags',
-  allTagsModalSearchLabel: 'Search all tags',
-  allTagsModalSearchPlaceholderText: 'Search all tags',
-  showAllTagsLabel: 'View all tags',
-};
-
-const includeTheseArgs = (args) => {
-  const result = {};
-
-  const keys = Object.keys(args);
-  for (let i = 0; i < keys.length; i++) {
-    const key = keys[i];
-    if (!key.endsWith('SwitchedArg')) {
-      const switchedArg = args[`${key}SwitchedArg`];
-      if (switchedArg !== false) {
-        result[key] = args[key];
-      }
-    }
-  }
-  return result;
-};
-
-const TemplateWithSwitchedArgs = (args) => {
-  return (
-    <>
-      <PageHeader className="example-class-name" {...includeTheseArgs(args)} />
-      {dummyPageContent}
-    </>
-  );
-};
-
-export const AllAttributesWithSwitches = TemplateWithSwitchedArgs.bind({});
-AllAttributesWithSwitches.args = {
-  actionBarItems,
-  actionBarItemsSwitchedArg: true,
-  actionBarOverflowAriaLabel,
-  children: summaryDetails,
-  childrenSwitchedArg: true,
-  hasBackgroundAlways: true,
-  breadcrumbItems,
-  breadcrumbItemsSwitchedArg: true,
+  breadcrumbs: 3,
   breadcrumbOverflowAriaLabel,
-  disableBreadcrumbScroll: false,
-  navigation: tabBar,
-  navigationSwitchedArg: true,
-  pageActions,
-  pageActionsSwitchedArg: true,
+  pageActions: 3,
   pageActionsOverflowLabel,
-  collapseTitle: false,
-  subtitle,
-  subtitleSwitchedArg: true,
-  tags,
-  tagsSwitchedArg: true,
-  title,
-  titleSwitchedArg: true,
-};
-
-const TemplatePageHeaderWithCarbonHeader = (args) => {
-  return (
-    <>
-      <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
-      <div className={`${storyClass}__app`}>
-        <Header aria-label="IBM Platform Name">
-          <HeaderName href="#" prefix="IBM">
-            [Platform]
-          </HeaderName>
-        </Header>
-        <div
-          className={`${storyClass}__content-container`}
-          style={{
-            // stylelint-disable-next-line carbon/layout-token-use
-            marginTop: '48px',
-          }}>
-          <PageHeader
-            className="example-class-name"
-            {...includeTheseArgs(args)}
-          />
-          <div className={`${storyClass}__inner-content`}>
-            {dummyPageContent}
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
-
-/**
- * Demo template using more realistic sample data from PageHeaderDemo.data.js
- */
-export const PageHeaderWithCarbonHeader =
-  TemplatePageHeaderWithCarbonHeader.bind({});
-PageHeaderWithCarbonHeader.args = {
-  actionBarItems,
-  actionBarItemsSwitchedArg: true,
+  children: 2,
+  navigation: 2,
+  tags: 2,
+  allTagsModalSearchLabel,
+  allTagsModalSearchPlaceholderText,
+  allTagsModalTitle,
+  showAllTagsLabel,
+  actionBarItems: 3,
   actionBarOverflowAriaLabel,
-  children: summaryDetails,
-  childrenSwitchedArg: true,
-  hasBackgroundAlways: true,
-  breadcrumbItems,
-  breadcrumbItemsSwitchedArg: true,
-  breadcrumbOverflowAriaLabel,
-  disableBreadcrumbScroll: false,
-  navigation: tabBar,
-  navigationSwitchedArg: true,
-  pageActions,
-  pageActionsSwitchedArg: true,
-  pageActionsOverflowLabel,
-  collapseTitle: false,
-  subtitle,
-  subtitleSwitchedArg: true,
-  tags,
-  tagsSwitchedArg: true,
-  title,
-  titleSwitchedArg: true,
+  hasCollapseHeaderToggle: true,
+  collapseHeaderIconDescription,
+  expandHeaderIconDescription,
 };
 
-const TemplateDemo = () => {
+// Template for demo.
+// eslint-disable-next-line react/prop-types
+const TemplateDemo = ({ children, ...props }) => {
   return (
     <>
       <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
@@ -605,101 +607,27 @@ const TemplateDemo = () => {
             // stylelint-disable-next-line carbon/layout-token-use
             marginTop: '48px',
           }}>
-          <PageHeader
-            breadcrumbOverflowAriaLabel="Open and close additional breadcrumb item list."
-            breadcrumbItems={
-              <>
-                <BreadcrumbItem href="../../../homepage">
-                  Homepage
-                </BreadcrumbItem>
-                <BreadcrumbItem href="../../Reports">Reports</BreadcrumbItem>
-                <BreadcrumbItem href="../June2021">June 2021</BreadcrumbItem>
-              </>
-            }
-            actionBarItems={[
-              { key: '1', renderIcon: Printer16, iconDescription: `Print` },
-              { key: '2', renderIcon: Settings16, iconDescription: `Settings` },
-              { key: '3', renderIcon: VolumeMute16, iconDescription: `Mute` },
-            ]}
-            actionBarOverflowAriaLabel="Show more action bar items"
-            title={{
-              text: 'Authentication activity',
-              loading: false,
-              icon: Security24,
-            }}
-            disableBreadcrumbScroll
-            pageActions={[
-              {
-                key: 'acknowledge',
-                kind: 'secondary',
-                label: 'Acknowledge',
-                onClick: () => {},
-              },
-              {
-                key: 'escalate',
-                kind: 'primary',
-                label: 'Escalate',
-                onClick: () => {},
-              },
-            ]}
-            pageActionsOverflowLabel="Page actions..."
-            subtitle="This report details the monthly authentication failures"
-            navigation={
-              <Tabs>
-                <Tab label="Summary" />
-                <Tab label="Region 1" />
-                <Tab label="Region 2" />
-                <Tab label="Region 3" />
-              </Tabs>
-            }
-            tags={[
-              {
-                type: 'cyan',
-                label: 'Not urgent',
-              },
-              {
-                type: 'red',
-                label: 'Security',
-              },
-            ]}>
-            <p>Severity 1: 0</p>
-            <p>Severity 1: 814</p>
-            <p>Severity 3: 3,108</p>
-          </PageHeader>
-          {
-            <Grid className={`${storyClass}__dummy-content`} narrow={true}>
-              <Row>
-                <Column
-                  sm={4}
-                  md={8}
-                  lg={16}
-                  className={`${storyClass}__dummy-content-block`}>
-                  <Table>
-                    <TableHead>
-                      <TableRow>
-                        {demoTableHeaders.map((header) => (
-                          <TableHeader key={header}>{header}</TableHeader>
-                        ))}
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {demoTableData.map((row) => (
-                        <TableRow key={row.Index}>
-                          {Object.keys(row).map((key) => {
-                            return <TableCell key={key}>{row[key]}</TableCell>;
-                          })}
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>{' '}
-                </Column>
-              </Row>
-            </Grid>
-          }
+          <PageHeader {...props}>{children}</PageHeader>
+          {demoDummyPageContent}
         </div>
       </div>
     </>
   );
 };
 
-export const PageHeaderDemo = TemplateDemo.bind({});
+export const demo = TemplateDemo.bind({});
+demo.storyName = 'Page header in context';
+demo.args = {
+  title: 5,
+  subtitle: demoSubtitle,
+  breadcrumbs: 4,
+  breadcrumbOverflowAriaLabel,
+  pageActions: 4,
+  pageActionsOverflowLabel,
+  children: 3,
+  navigation: 3,
+  tags: 3,
+  actionBarItems: 4,
+  actionBarOverflowAriaLabel,
+  disableBreadcrumbScroll: true,
+};

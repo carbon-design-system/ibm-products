@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+/* istanbul ignore file */
 /* cSpell:disable */
 export const demoTableData = [
   {
@@ -718,5 +719,6 @@ export const demoTableData = [
     Description: 'lorem semper',
   },
 ];
-export const demoTableHeaders = Object.keys(demoTableData[0]);
 /* cSpell:enable */
+
+export const demoTableHeaders = Object.keys(demoTableData[0]);

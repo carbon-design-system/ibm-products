@@ -47,6 +47,7 @@ export const MultiStepWithSectionsTearsheet = () => {
     setHasSubmitError(false);
     setIsInvalid(false);
     setOpen(false);
+    setPartitionName('');
   };
 
   return (

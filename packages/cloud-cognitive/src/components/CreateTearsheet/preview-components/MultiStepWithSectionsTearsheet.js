@@ -51,6 +51,7 @@ export const MultiStepWithSectionsTearsheet = () => {
     setHasSubmitError(false);
     setIsInvalid(false);
     setOpen(false);
+    setPartitionName('');
     setAllTopicOwners([]);
     setSelectedTopicOwner(null);
     setApiFailed(false);

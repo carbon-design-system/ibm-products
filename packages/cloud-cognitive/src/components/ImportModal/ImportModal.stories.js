@@ -14,6 +14,7 @@ import { getStorybookPrefix } from '../../../config';
 import { ImportModal } from '.';
 import mdx from './ImportModal.mdx';
 const storybookPrefix = getStorybookPrefix(pkg, ImportModal.displayName);
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 export default {
   title: `${storybookPrefix}/${ImportModal.displayName}`,
@@ -66,7 +67,8 @@ const TemplateWithState = (args) => {
   );
 };
 
-export const Standard = TemplateWithState.bind({});
-Standard.args = {
-  ...defaultProps,
-};
+export const Standard = prepareStory(TemplateWithState, {
+  args: {
+    ...defaultProps,
+  },
+});

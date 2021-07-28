@@ -24,6 +24,7 @@ import {
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { CreateSidePanel, deprecatedProps } from './CreateSidePanel';
 import mdx from './CreateSidePanel.mdx';
@@ -364,20 +365,23 @@ const TemplateWithMultipleForms = ({ ...args }) => {
   );
 };
 
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  selectorPageContent: '#cloud-and-cognitive-page-content',
-  ...defaultStoryProps,
-};
+export const Default = prepareStory(DefaultTemplate, {
+  args: {
+    selectorPageContent: '#cloud-and-cognitive-page-content',
+    ...defaultStoryProps,
+  },
+});
 
-export const WithFormValidation = TemplateWithFormValidation.bind({});
-WithFormValidation.args = {
-  selectorPageContent: '#cloud-and-cognitive-page-content',
-  ...defaultStoryProps,
-};
+export const WithFormValidation = prepareStory(TemplateWithFormValidation, {
+  args: {
+    selectorPageContent: '#cloud-and-cognitive-page-content',
+    ...defaultStoryProps,
+  },
+});
 
-export const WithMultipleForms = TemplateWithMultipleForms.bind({});
-WithMultipleForms.args = {
-  selectorPageContent: '#cloud-and-cognitive-page-content',
-  ...defaultStoryProps,
-};
+export const WithMultipleForms = prepareStory(TemplateWithMultipleForms, {
+  args: {
+    selectorPageContent: '#cloud-and-cognitive-page-content',
+    ...defaultStoryProps,
+  },
+});

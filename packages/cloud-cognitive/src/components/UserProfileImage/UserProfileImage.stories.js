@@ -9,6 +9,7 @@ import React from 'react';
 import { UserProfileImage } from '.';
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import mdx from './UserProfileImage.mdx';
 import image from './headshot.png'; // cspell:disable-line
 import styles from './_storybook.scss'; // import storybook which includes component and additional storybook styles
@@ -59,37 +60,42 @@ const Template = (args) => {
   return <UserProfileImage {...args} />;
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  ...defaultArgs,
-  kind: 'user',
-  tooltipText: 'Thomas Watson',
-};
+export const Default = prepareStory(Template, {
+  args: {
+    ...defaultArgs,
+    kind: 'user',
+    tooltipText: 'Thomas Watson',
+  },
+});
 
-export const WithGroupIcon = Template.bind({});
-WithGroupIcon.args = {
-  ...defaultArgs,
-  kind: 'group',
-};
+export const WithGroupIcon = prepareStory(Template, {
+  args: {
+    ...defaultArgs,
+    kind: 'group',
+  },
+});
 
-export const WithInitials = Template.bind({});
-WithInitials.args = {
-  ...defaultArgs,
-  initials: 'thomas j. watson',
-  tooltipText: 'Thomas Watson',
-};
+export const WithInitials = prepareStory(Template, {
+  args: {
+    ...defaultArgs,
+    initials: 'thomas j. watson',
+    tooltipText: 'Thomas Watson',
+  },
+});
 
-export const WithImage = Template.bind({});
-WithImage.args = {
-  ...defaultArgs,
-  image,
-  imageDescription: 'image here',
-};
+export const WithImage = prepareStory(Template, {
+  args: {
+    ...defaultArgs,
+    image,
+    imageDescription: 'image here',
+  },
+});
 
-export const WithImageAndTooltip = Template.bind({});
-WithImageAndTooltip.args = {
-  ...defaultArgs,
-  image,
-  imageDescription: 'image here',
-  tooltipText: 'Display Name',
-};
+export const WithImageAndTooltip = prepareStory(Template, {
+  args: {
+    ...defaultArgs,
+    image,
+    imageDescription: 'image here',
+    tooltipText: 'Display Name',
+  },
+});

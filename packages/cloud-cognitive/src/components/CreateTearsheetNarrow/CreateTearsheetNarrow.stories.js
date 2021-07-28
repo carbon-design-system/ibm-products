@@ -16,6 +16,7 @@ import {
 } from 'carbon-components-react';
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { CreateTearsheetNarrow } from '.';
 import mdx from './CreateTearsheetNarrow.mdx';
@@ -154,7 +155,8 @@ const Template = (args) => {
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const createTearsheetNarrow = Template.bind({});
-createTearsheetNarrow.args = {
-  ...defaultStoryProps,
-};
+export const createTearsheetNarrow = prepareStory(Template, {
+  args: {
+    ...defaultStoryProps,
+  },
+});

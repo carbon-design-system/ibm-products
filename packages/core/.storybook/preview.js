@@ -99,7 +99,8 @@ const parameters = {
       } else {
         // from storybook doc example https://storybook.js.org/docs/react/writing-stories/naming-components-and-hierarchy
         return a[1].kind === b[1].kind
-          ? 0
+          ? (a[1]?.parameters?.ccsSettings?.sequence || 0) -
+              (b[1]?.parameters?.ccsSettings?.sequence || 0)
           : a[1].id.localeCompare(b[1].id, undefined, { numeric: true });
       }
     },

@@ -40,6 +40,7 @@ import { PageHeader, deprecatedProps } from './PageHeader';
 import { getStorybookPrefix } from '../../../config';
 const storybookPrefix = getStorybookPrefix(pkg, PageHeader.displayName);
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { demoTableHeaders, demoTableData } from './PageHeaderDemo.data';
 
@@ -101,8 +102,6 @@ const breadcrumbs = {
     makeBreadcrumb(3, `${ms} ${ys}`, `../${ms}{ys}`),
   ],
 };
-
-console.dir(breadcrumbs);
 
 const children = {
   'Nothing in the available area': null,
@@ -448,146 +447,157 @@ const Template = ({ children, ...props }) => (
 );
 
 // Stories
-export const withTitle = Template.bind({});
-withTitle.storyName = 'Simple page header with page title';
-withTitle.args = {
-  title: 2,
-  hasBackgroundAlways: false,
-};
+export const withTitle = prepareStory(Template, {
+  storyName: 'Simple page header with page title',
+  args: {
+    title: 2,
+    hasBackgroundAlways: false,
+  },
+});
 
-export const withBreadcrumbs = Template.bind({});
-withBreadcrumbs.storyName = 'Simple page header with breadcrumb';
-withBreadcrumbs.args = {
-  ...withTitle.args,
-  breadcrumbs: 2,
-  breadcrumbOverflowAriaLabel,
-};
+export const withBreadcrumbs = prepareStory(Template, {
+  storyName: 'Simple page header with breadcrumb',
+  args: {
+    ...withTitle.args,
+    breadcrumbs: 2,
+    breadcrumbOverflowAriaLabel,
+  },
+});
 
-export const withButtons = Template.bind({});
-withButtons.storyName = 'Simple page header with status and actions';
-withButtons.args = {
-  ...withBreadcrumbs.args,
-  pageActions: 2,
-  pageActionsOverflowLabel,
-  children: 1,
-};
+export const withButtons = prepareStory(Template, {
+  storyName: 'Simple page header with status and actions',
+  args: {
+    ...withBreadcrumbs.args,
+    pageActions: 2,
+    pageActionsOverflowLabel,
+    children: 1,
+  },
+});
 
-export const withTabs = Template.bind({});
-withTabs.storyName = 'Page header with navigation tabs';
-withTabs.args = {
-  title: 2,
-  breadcrumbs: 2,
-  breadcrumbOverflowAriaLabel,
-  pageActions: 2,
-  pageActionsOverflowLabel,
-  navigation: 1,
-};
+export const withTabs = prepareStory(Template, {
+  storyName: 'Page header with navigation tabs',
+  args: {
+    title: 2,
+    breadcrumbs: 2,
+    breadcrumbOverflowAriaLabel,
+    pageActions: 2,
+    pageActionsOverflowLabel,
+    navigation: 1,
+  },
+});
 
-export const withTags = Template.bind({});
-withTags.storyName = 'Page header with tags';
-withTags.args = {
-  title: 2,
-  breadcrumbs: 2,
-  breadcrumbOverflowAriaLabel,
-  pageActions: 2,
-  pageActionsOverflowLabel,
-  tags: 1,
-};
+export const withTags = prepareStory(Template, {
+  storyName: 'Page header with tags',
+  args: {
+    title: 2,
+    breadcrumbs: 2,
+    breadcrumbOverflowAriaLabel,
+    pageActions: 2,
+    pageActionsOverflowLabel,
+    tags: 1,
+  },
+});
 
-export const withTabsAndTags = Template.bind({});
-withTabsAndTags.storyName = 'Page header with tags and navigation tabs';
-withTabsAndTags.args = {
-  title: 2,
-  breadcrumbs: 2,
-  breadcrumbOverflowAriaLabel,
-  pageActions: 2,
-  pageActionsOverflowLabel,
-  navigation: 1,
-  tags: 1,
-};
+export const withTabsAndTags = prepareStory(Template, {
+  storyName: 'Page header with tags and navigation tabs',
+  args: {
+    title: 2,
+    breadcrumbs: 2,
+    breadcrumbOverflowAriaLabel,
+    pageActions: 2,
+    pageActionsOverflowLabel,
+    navigation: 1,
+    tags: 1,
+  },
+});
 
-export const withSubtitle = Template.bind({});
-withSubtitle.storyName = 'Page header with title and subtitle';
-withSubtitle.args = {
-  title: 2,
-  subtitle,
-  breadcrumbs: 2,
-  breadcrumbOverflowAriaLabel,
-  navigation: 1,
-};
+export const withSubtitle = prepareStory(Template, {
+  storyName: 'Page header with title and subtitle',
+  args: {
+    title: 2,
+    subtitle,
+    breadcrumbs: 2,
+    breadcrumbOverflowAriaLabel,
+    navigation: 1,
+  },
+});
 
-export const withSummaryDetails = Template.bind({});
-withSummaryDetails.storyName = 'Page header with summary details';
-withSummaryDetails.args = {
-  title: 2,
-  breadcrumbs: 2,
-  breadcrumbOverflowAriaLabel,
-  navigation: 1,
-  children: 2,
-};
+export const withSummaryDetails = prepareStory(Template, {
+  storyName: 'Page header with summary details',
+  args: {
+    title: 2,
+    breadcrumbs: 2,
+    breadcrumbOverflowAriaLabel,
+    navigation: 1,
+    children: 2,
+  },
+});
 
-export const withActionsToolbar = Template.bind({});
-withActionsToolbar.storyName = 'Page header with actions toolbar';
-withActionsToolbar.args = {
-  title: 2,
-  breadcrumbs: 2,
-  breadcrumbOverflowAriaLabel,
-  navigation: 1,
-  actionBarItems: 2,
-  actionBarOverflowAriaLabel,
-};
+export const withActionsToolbar = prepareStory(Template, {
+  storyName: 'Page header with actions toolbar',
+  args: {
+    title: 2,
+    breadcrumbs: 2,
+    breadcrumbOverflowAriaLabel,
+    navigation: 1,
+    actionBarItems: 2,
+    actionBarOverflowAriaLabel,
+  },
+});
 
-export const withBreadcrumbActionsToolbarOnly = Template.bind({});
-withBreadcrumbActionsToolbarOnly.storyName =
-  'Reduced page header with breadcrumb bar only';
-withBreadcrumbActionsToolbarOnly.args = {
-  title: 1,
-  breadcrumbs: 2,
-  breadcrumbOverflowAriaLabel,
-  actionBarItems: 2,
-  actionBarOverflowAriaLabel,
-  collapseTitle: true,
-};
+export const withBreadcrumbActionsToolbarOnly = prepareStory(Template, {
+  storyName: 'Reduced page header with breadcrumb bar only',
+  args: {
+    title: 1,
+    breadcrumbs: 2,
+    breadcrumbOverflowAriaLabel,
+    actionBarItems: 2,
+    actionBarOverflowAriaLabel,
+    collapseTitle: true,
+  },
+});
 
-export const fullyLoaded = Template.bind({});
-fullyLoaded.storyName = 'Page header with all items, pre-collapsed';
-fullyLoaded.args = {
-  title: 2,
-  subtitle,
-  breadcrumbs: 2,
-  breadcrumbOverflowAriaLabel,
-  pageActions: 2,
-  pageActionsOverflowLabel,
-  children: 2,
-  navigation: 1,
-  tags: 1,
-  actionBarItems: 2,
-  actionBarOverflowAriaLabel,
-  collapseHeader: true,
-};
+export const fullyLoaded = prepareStory(Template, {
+  storyName: 'Page header with all items, pre-collapsed',
+  args: {
+    title: 2,
+    subtitle,
+    breadcrumbs: 2,
+    breadcrumbOverflowAriaLabel,
+    pageActions: 2,
+    pageActionsOverflowLabel,
+    children: 2,
+    navigation: 1,
+    tags: 1,
+    actionBarItems: 2,
+    actionBarOverflowAriaLabel,
+    collapseHeader: true,
+  },
+});
 
-export const fullyLoadedAndSome = Template.bind({});
-fullyLoadedAndSome.storyName = 'Page header with long values and many items';
-fullyLoadedAndSome.args = {
-  title: 3,
-  subtitle: longSubtitle,
-  breadcrumbs: 3,
-  breadcrumbOverflowAriaLabel,
-  pageActions: 3,
-  pageActionsOverflowLabel,
-  children: 2,
-  navigation: 2,
-  tags: 2,
-  allTagsModalSearchLabel,
-  allTagsModalSearchPlaceholderText,
-  allTagsModalTitle,
-  showAllTagsLabel,
-  actionBarItems: 3,
-  actionBarOverflowAriaLabel,
-  hasCollapseHeaderToggle: true,
-  collapseHeaderIconDescription,
-  expandHeaderIconDescription,
-};
+export const fullyLoadedAndSome = prepareStory(Template, {
+  storyName: 'Page header with long values and many items',
+  args: {
+    title: 3,
+    subtitle: longSubtitle,
+    breadcrumbs: 3,
+    breadcrumbOverflowAriaLabel,
+    pageActions: 3,
+    pageActionsOverflowLabel,
+    children: 2,
+    navigation: 2,
+    tags: 2,
+    allTagsModalSearchLabel,
+    allTagsModalSearchPlaceholderText,
+    allTagsModalTitle,
+    showAllTagsLabel,
+    actionBarItems: 3,
+    actionBarOverflowAriaLabel,
+    hasCollapseHeaderToggle: true,
+    collapseHeaderIconDescription,
+    expandHeaderIconDescription,
+  },
+});
 
 // Template for demo.
 // eslint-disable-next-line react/prop-types
@@ -615,19 +625,20 @@ const TemplateDemo = ({ children, ...props }) => {
   );
 };
 
-export const demo = TemplateDemo.bind({});
-demo.storyName = 'Page header in context';
-demo.args = {
-  title: 5,
-  subtitle: demoSubtitle,
-  breadcrumbs: 4,
-  breadcrumbOverflowAriaLabel,
-  pageActions: 4,
-  pageActionsOverflowLabel,
-  children: 3,
-  navigation: 3,
-  tags: 3,
-  actionBarItems: 4,
-  actionBarOverflowAriaLabel,
-  disableBreadcrumbScroll: true,
-};
+export const demo = prepareStory(TemplateDemo, {
+  storyName: 'Page header in context',
+  args: {
+    title: 5,
+    subtitle: demoSubtitle,
+    breadcrumbs: 4,
+    breadcrumbOverflowAriaLabel,
+    pageActions: 4,
+    pageActionsOverflowLabel,
+    children: 3,
+    navigation: 3,
+    tags: 3,
+    actionBarItems: 4,
+    actionBarOverflowAriaLabel,
+    disableBreadcrumbScroll: true,
+  },
+});

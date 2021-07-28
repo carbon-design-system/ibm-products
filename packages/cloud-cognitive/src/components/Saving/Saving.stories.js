@@ -14,6 +14,7 @@ import mdx from './Saving.mdx';
 import wait from '../../global/js/utils/wait';
 import { TextArea } from 'carbon-components-react';
 const storybookPrefix = getStorybookPrefix(pkg, Saving.displayName);
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 export default {
   title: `${storybookPrefix}/${Saving.displayName}`,
@@ -99,16 +100,18 @@ const ManualTemplate = (opts) => {
   );
 };
 
-export const Auto = AutoTemplate.bind({});
-Auto.args = {
-  ...defaultProps,
-  type: 'auto',
-};
+export const Auto = prepareStory(AutoTemplate, {
+  args: {
+    ...defaultProps,
+    type: 'auto',
+  },
+});
 
-export const Manual = ManualTemplate.bind({});
-Manual.args = {
-  ...defaultProps,
-  type: 'manual',
-  failText: 'Failed to save. Try again?',
-  secondaryButtonText: 'Cancel',
-};
+export const Manual = prepareStory(ManualTemplate, {
+  args: {
+    ...defaultProps,
+    type: 'manual',
+    failText: 'Failed to save. Try again?',
+    secondaryButtonText: 'Cancel',
+  },
+});

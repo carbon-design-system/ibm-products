@@ -11,6 +11,7 @@ import styles from './_storybook-styles.scss'; // import index in case more file
 import { TrashCan16, Edit16 } from '@carbon/icons-react';
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { ProductiveCard } from '.';
 import mdx from './ProductiveCard.mdx';
 import { action } from '@storybook/addon-actions';
@@ -83,71 +84,79 @@ const Template = (opts) => {
   );
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  ...defaultProps,
-};
+export const Default = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+  },
+});
 
-export const WithCaption = Template.bind({});
-WithCaption.args = {
-  ...defaultProps,
-  caption: 'caption',
-};
+export const WithCaption = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    caption: 'caption',
+  },
+});
 
-export const WithLabel = Template.bind({});
-WithLabel.args = {
-  ...defaultProps,
-  label: 'Label',
-};
+export const WithLabel = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    label: 'Label',
+  },
+});
 
-export const LabelOnly = Template.bind({});
-LabelOnly.args = {
-  ...defaultProps,
-  title: '',
-  label: 'Label',
-  actionsPlacement: 'bottom',
-  primaryButtonText: 'Ghost button',
-};
+export const LabelOnly = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    title: '',
+    label: 'Label',
+    actionsPlacement: 'bottom',
+    primaryButtonText: 'Ghost button',
+  },
+});
 
-export const WithOverflow = Template.bind({});
-WithOverflow.args = {
-  ...defaultProps,
-  overflowActions: [
-    {
-      id: '1',
-      itemText: 'Edit',
-      onClick: () => action('on click'),
-      onKeyDown: () => action('on keydown'),
-    },
-    {
-      id: '2',
-      itemText: 'Delete',
-      onClick: () => action('on click'),
-      onKeyDown: () => action('on keydown'),
-    },
-  ],
-};
+export const WithOverflow = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    overflowActions: [
+      {
+        id: '1',
+        itemText: 'Edit',
+        onClick: () => action('on click'),
+        onKeyDown: () => action('on keydown'),
+      },
+      {
+        id: '2',
+        itemText: 'Delete',
+        onClick: () => action('on click'),
+        onKeyDown: () => action('on keydown'),
+      },
+    ],
+  },
+});
 
-export const SupplementalBottomBar = Template.bind({});
-SupplementalBottomBar.args = {
-  ...defaultProps,
-  primaryButtonText: 'Ghost button',
-};
+export const SupplementalBottomBar = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    primaryButtonText: 'Ghost button',
+  },
+});
 
-export const ComplexBottomBar = Template.bind({});
-ComplexBottomBar.args = {
-  ...defaultProps,
-  primaryButtonText: 'Ghost button',
-  actionsPlacement: 'bottom',
-  title: '',
-  label: 'label',
-};
+export const ComplexBottomBar = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    primaryButtonText: 'Ghost button',
+    actionsPlacement: 'bottom',
+    title: '',
+    label: 'label',
+  },
+});
 
-export const Clickable = Template.bind({});
-Clickable.args = {
-  ...defaultProps,
-  onClick: () => action('on click'),
-  onKeyDown: () => action('on keydown'),
-  primaryButtonText: 'Ghost button',
-  actionIcons: [],
-};
+export const Clickable = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    onClick: () => action('on click'),
+    onKeyDown: () => action('on keydown'),
+    primaryButtonText: 'Ghost button',
+    actionIcons: [],
+  },
+});

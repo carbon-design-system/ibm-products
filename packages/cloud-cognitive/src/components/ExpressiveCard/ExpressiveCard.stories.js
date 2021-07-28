@@ -12,6 +12,7 @@ import { ArrowRight24, Cloud32 } from '@carbon/icons-react';
 import { AspectRatio } from 'carbon-components-react';
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { ExpressiveCard } from '.';
 import mdx from './ExpressiveCard.mdx';
 import { action } from '@storybook/addon-actions';
@@ -91,62 +92,70 @@ const MediaTemplate = (opts) => {
   );
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  ...defaultProps,
-};
+export const Default = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+  },
+});
 
-export const LabelOnly = Template.bind({});
-LabelOnly.args = {
-  ...defaultProps,
-  title: '',
-};
+export const LabelOnly = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    title: '',
+  },
+});
 
-export const WithCaption = Template.bind({});
-WithCaption.args = {
-  ...defaultProps,
-  caption: 'Description or long caption',
-  label: '',
-};
+export const WithCaption = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    caption: 'Description or long caption',
+    label: '',
+  },
+});
 
-export const WithMedia = MediaTemplate.bind({});
-WithMedia.args = {
-  ...defaultProps,
-};
+export const WithMedia = prepareStory(MediaTemplate, {
+  args: {
+    ...defaultProps,
+  },
+});
 
-export const WithActionIcon = Template.bind({});
-WithActionIcon.args = {
-  ...defaultProps,
-  actionIcons: [
-    {
-      id: '1',
-      icon: ArrowRight24,
-      onClick: () => action('on click'),
-      onKeyDown: () => action('on keydown'),
-      iconDescription: 'Next',
-    },
-  ],
-  primaryButtonText: '',
-};
+export const WithActionIcon = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    actionIcons: [
+      {
+        id: '1',
+        icon: ArrowRight24,
+        onClick: () => action('on click'),
+        onKeyDown: () => action('on keydown'),
+        iconDescription: 'Next',
+      },
+    ],
+    primaryButtonText: '',
+  },
+});
 
-export const WithPictogram = Template.bind({});
-WithPictogram.args = {
-  ...defaultProps,
-  pictogram: Cloud32,
-};
+export const WithPictogram = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    pictogram: Cloud32,
+  },
+});
 
-export const WithSecondaryAction = Template.bind({});
-WithSecondaryAction.args = {
-  ...defaultProps,
-  secondaryButtonText: 'Secondary',
-  secondaryButtonKind: 'ghost',
-  columnSize: '8',
-};
+export const WithSecondaryAction = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    secondaryButtonText: 'Secondary',
+    secondaryButtonKind: 'ghost',
+    columnSize: '8',
+  },
+});
 
-export const Clickable = Template.bind({});
-Clickable.args = {
-  ...defaultProps,
-  onClick: () => action('on click'),
-  onKeyDown: () => action('on keydown'),
-  primaryButtonText: '',
-};
+export const Clickable = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    onClick: () => action('on click'),
+    onKeyDown: () => action('on keydown'),
+    primaryButtonText: '',
+  },
+});

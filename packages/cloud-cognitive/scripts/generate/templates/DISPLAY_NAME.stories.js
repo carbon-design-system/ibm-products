@@ -11,6 +11,7 @@ import React from 'react';
 
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { DISPLAY_NAME } from '.';
 import mdx from './DISPLAY_NAME.mdx';
@@ -51,8 +52,9 @@ const Template = (args) => {
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const CAMEL_NAME = Template.bind({});
-CAMEL_NAME.args = {
-  // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#DISPLAY_NAME-args
-  children: 'hello, world',
-};
+export const CAMEL_NAME = prepareStory(Template, {
+  args: {
+    // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#DISPLAY_NAME-args
+    children: 'hello, world',
+  },
+});

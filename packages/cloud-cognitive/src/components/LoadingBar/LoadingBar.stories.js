@@ -11,6 +11,7 @@ import React from 'react';
 
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { LoadingBar } from '.';
 import mdx from './LoadingBar.mdx';
@@ -64,17 +65,19 @@ const TemplateDeterminate = (args) => {
  * Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const Indeterminate = TemplateIndeterminate.bind({});
-Indeterminate.args = {
-  percentage: undefined,
-  showPercentageIndicator: false,
-  ...defaultProps,
-};
+export const Indeterminate = prepareStory(TemplateIndeterminate, {
+  args: {
+    percentage: undefined,
+    showPercentageIndicator: false,
+    ...defaultProps,
+  },
+});
 
-export const Determinate = TemplateDeterminate.bind({});
-Determinate.args = {
-  // Component args - https://storybook.js.org/docs/react/writing-stories/args#LoadingBar-args
-  percentage: 67,
-  showPercentageIndicator: true,
-  ...defaultProps,
-};
+export const Determinate = prepareStory(TemplateDeterminate, {
+  args: {
+    // Component args - https://storybook.js.org/docs/react/writing-stories/args#LoadingBar-args
+    percentage: 67,
+    showPercentageIndicator: true,
+    ...defaultProps,
+  },
+});

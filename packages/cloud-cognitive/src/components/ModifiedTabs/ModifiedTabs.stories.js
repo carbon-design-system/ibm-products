@@ -12,6 +12,7 @@ import { action } from '@storybook/addon-actions';
 import { Modal, RadioButton, RadioButtonGroup } from 'carbon-components-react';
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { ModifiedTabs } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 const storybookPrefix = getStorybookPrefix(pkg, ModifiedTabs.displayName);
@@ -84,11 +85,12 @@ const Template = (args) => {
 };
 
 // const parameters = { styles };
-export const Default = Template.bind({});
-Default.args = {
-  newTabLabel: 'Add new tab',
-  newTabContent: <div>Your new tab is being prepared...</div>,
-};
+export const Default = prepareStory(Template, {
+  args: {
+    newTabLabel: 'Add new tab',
+    newTabContent: <div>Your new tab is being prepared...</div>,
+  },
+});
 
 // Example with external save prompt
 const TemplateWithExternalSavePrompt = (args) => {
@@ -175,10 +177,14 @@ const TemplateWithExternalSavePrompt = (args) => {
   );
 };
 
-export const WithExternalSavePrompt = TemplateWithExternalSavePrompt.bind({});
-WithExternalSavePrompt.args = {
-  props: {
-    newTabLabel: 'Add new tab',
-    newTabContent: <div>Your new tab is being prepared...</div>,
-  },
-};
+export const WithExternalSavePrompt = prepareStory(
+  TemplateWithExternalSavePrompt,
+  {
+    args: {
+      props: {
+        newTabLabel: 'Add new tab',
+        newTabContent: <div>Your new tab is being prepared...</div>,
+      },
+    },
+  }
+);

@@ -248,7 +248,7 @@ export let CreateTearsheet = forwardRef(
           key: 'create-tearsheet-action-button-cancel',
           label: cancelButtonText,
           onClick: onUnmount,
-          kind: shouldViewAll ? 'secondary' : 'ghost',
+          kind: 'ghost',
         });
         buttons.push({
           key: 'create-tearsheet-action-button-submit',

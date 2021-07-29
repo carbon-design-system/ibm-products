@@ -1,6 +1,5 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import { pkg } from '../../settings';
-import { getStorybookSlug } from '../../../config';
+import { getStoryId } from '../../global/js/utils/story-helper';
 import { CreateModal } from '.';
 
 # CreateModal
@@ -26,9 +25,7 @@ immediately apparent to the user, with a clear and obvious path to completion.
 Here it is in use.
 
 <Canvas>
-  <Story
-    id={getStorybookSlug(pkg, CreateModal.displayName, 'with-form-validation')}
-  />
+  <Story id={getStoryId(CreateModal.displayName, 'with-form-validation')} />
 </Canvas>
 
 ## Form validation

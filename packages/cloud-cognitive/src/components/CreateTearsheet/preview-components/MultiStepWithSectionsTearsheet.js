@@ -70,7 +70,6 @@ export const MultiStepWithSectionsTearsheet = () => {
         backButtonText="Back"
         nextButtonText="Next"
         description="Specify details for the new topic you want to create"
-        label="This is the label of the multi step tearsheet"
         title="Create topic"
         open={open}
         onClose={clearCreateData}
@@ -135,7 +134,7 @@ export const MultiStepWithSectionsTearsheet = () => {
               recognize.
             </p>
             <TextInput
-              labelText="Topic name*"
+              labelText="Topic name"
               id="tearsheet-multi-step-story-text-input-multi-step-1"
               value={stepOneTextInputValue}
               placeholder="Enter topic name"
@@ -154,14 +153,14 @@ export const MultiStepWithSectionsTearsheet = () => {
               }}
             />
             <TextInput
-              labelText="Topic description"
+              labelText="Topic description (optional)"
               id="tearsheet-multi-step-story-text-input-multi-step-1-input-2"
               value={topicDescriptionValue}
               placeholder="Enter topic description"
               onChange={(event) => setTopicDescriptionValue(event.target.value)}
             />
             <TextInput
-              labelText="Topic version"
+              labelText="Topic version (optional)"
               id="tearsheet-multi-step-story-text-input-multi-step-1-input-3"
               value={topicVersionValue}
               placeholder="Enter topic version"
@@ -178,7 +177,7 @@ export const MultiStepWithSectionsTearsheet = () => {
                 setSelectedTopicOwner(selectedItem)
               }
               selectedItem={selectedTopicOwner}
-              titleText="Topic owner"
+              titleText="Topic owner (optional)"
               warn={apiFailed}
               warnText="API request failed."
             />
@@ -248,7 +247,7 @@ export const MultiStepWithSectionsTearsheet = () => {
               }
             />
             <TextInput
-              labelText="Partition name*"
+              labelText="Partition name"
               id="tearsheet-multi-step-story-text-input-multi-step-3-input-1"
               value={partitionName}
               placeholder="Enter partition name"

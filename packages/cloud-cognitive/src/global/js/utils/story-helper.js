@@ -5,6 +5,49 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+import { sanitize } from '@storybook/csf';
+import pkg from '../package-settings';
+
+// A set of title values, one for each component, that can be converted into
+// a structure story title or into an individual story id in slug form.
+const lib = 'Cloud & Cognitive';
+const storybookStructure = {
+  Tearsheet: `${lib}/$rci/Tearsheets/$comp$canaryTag`,
+  TearsheetNarrow: `${lib}/$rci/Tearsheets/$comp`,
+};
+
+/**
+ * A helper function to return the structured story title for a component.
+ * @param {string} componentName The name of the component.
+ * @returns The structured story title.
+ */
+export const getStoryTitle = (componentName) => {
+  const replacements = {
+    $rci: pkg.isComponentEnabled(componentName, true)
+      ? 'Released'
+      : pkg.isComponentPublic(componentName, true)
+      ? 'Canary'
+      : 'Internal',
+    $canaryTag: '',
+    $comp: componentName,
+  };
+
+  return Object.keys(replacements).reduce(
+    (result, token) => result.replaceAll(token, replacements[token]),
+    storybookStructure[componentName] || `${lib}/Lost + Found/$comp`
+  );
+};
+
+/**
+ * A helper function to return the slug (structured path name reduced to lower
+ * case text and hyphens) which identifies individual story instances.
+ * @param {string} componentName The name of the component.
+ * @param {string} scenario The scenario name, also as a slug.
+ * @returns The story id.
+ */
+export const getStoryId = (componentName, scenario) =>
+  `${sanitize(getStoryTitle(componentName))}--${scenario}`;
+
 /**
  * A helper function to prepare storybook stories for export. This function
  * binds the template, adds the supplied fields, and also inserts a sequence

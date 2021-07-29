@@ -9,20 +9,16 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add20 } from '@carbon/icons-react';
 import mdx from './UnauthorizedEmptyState.mdx';
-import { pkg } from '../../../settings';
-import { getStorybookPrefix } from '../../../../config';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../../global/js/utils/story-helper';
 import { UnauthorizedEmptyState } from '.';
 
 import styles from '../_index.scss';
 
-const storybookPrefix = getStorybookPrefix(
-  pkg,
-  UnauthorizedEmptyState.displayName
-);
-import { prepareStory } from '../../../global/js/utils/story-helper';
-
 export default {
-  title: `${storybookPrefix}/EmptyStates/${UnauthorizedEmptyState.displayName}`,
+  title: getStoryTitle(UnauthorizedEmptyState.displayName),
   component: UnauthorizedEmptyState,
   parameters: {
     styles,

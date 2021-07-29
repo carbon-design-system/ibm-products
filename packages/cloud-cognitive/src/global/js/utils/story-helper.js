@@ -12,8 +12,59 @@ import pkg from '../package-settings';
 // a structure story title or into an individual story id in slug form.
 const lib = 'Cloud & Cognitive';
 const storybookStructure = {
-  Tearsheet: `${lib}/$rci/Tearsheets/$comp$canaryTag`,
+  AboutModal: `${lib}/$rci/$comp`,
+  ActionBar: `${lib}/$rci/$comp`,
+  ActionSet: `${lib}/$rci/$comp`,
+  APIKeyModal: `${lib}/$rci/$comp`,
+  BreadcrumbWithOverflow: `${lib}/$rci/$comp`,
+  ButtonMenu: `${lib}/$rci/$comp`,
+  ButtonSetWithOverflow: `${lib}/$rci/$comp`,
+
+  // cards
+  ExpressiveCard: `${lib}/$rci/Cards/$comp`,
+  ProductiveCard: `${lib}/$rci/Cards/$comp`,
+
+  ComboButton: `${lib}/$rci/$comp`,
+  CreateFullPage: `${lib}/$rci/$comp`,
+  CreateModal: `${lib}/$rci/$comp`,
+  CreateSidePanel: `${lib}/$rci/$comp`,
+  CreateTearsheet: `${lib}/$rci/$comp`,
+  CreateTearsheetNarrow: `${lib}/$rci/$comp`,
+
+  // empty states
+  EmptyState: `${lib}/$rci/EmptyStates/$comp`,
+  ErrorEmptyState: `${lib}/$rci/EmptyStates/$comp`,
+  NoDataEmptyState: `${lib}/$rci/EmptyStates/$comp`,
+  NoTagsEmptyState: `${lib}/$rci/EmptyStates/$comp`,
+  NotFoundEmptyState: `${lib}/$rci/EmptyStates/$comp`,
+  NotificationsEmptyState: `${lib}/$rci/EmptyStates/$comp`,
+  UnauthorizedEmptyState: `${lib}/$rci/EmptyStates/$comp`,
+
+  ExampleComponent: `${lib}/$rci/$comp`,
+  ExportModal: `${lib}/$rci/$comp`,
+
+  // HTTP errors
+  HTTPError403: `${lib}/$rci/HTTPErrors/$comp`,
+  HTTPError404: `${lib}/$rci/HTTPErrors/$comp`,
+  HTTPErrorOther: `${lib}/$rci/HTTPErrors/$comp`,
+
+  ImportModal: `${lib}/$rci/$comp`,
+  LoadingBar: `${lib}/$rci/$comp`,
+  ModifiedTabs: `${lib}/$rci/$comp`,
+  NotificationsPanel: `${lib}/$rci/$comp`,
+  PageHeader: `${lib}/$rci/$comp`,
+  RemoveModal: `${lib}/$rci/$comp`,
+  Saving: `${lib}/$rci/$comp`,
+  SidePanel: `${lib}/$rci/$comp`,
+  StatusIcon: `${lib}/$rci/$comp`,
+  TagSet: `${lib}/$rci/$comp`,
+  UserProfileImage: `${lib}/$rci/$comp`,
+  WebTerminal: `${lib}/$rci/$comp`,
+
+  // tearsheets
+  Tearsheet: `${lib}/$rci/Tearsheets/$comp`,
   TearsheetNarrow: `${lib}/$rci/Tearsheets/$comp`,
+  TearsheetShell: `${lib}/$rci/$comp`,
 };
 
 /**
@@ -28,7 +79,6 @@ export const getStoryTitle = (componentName) => {
       : pkg.isComponentPublic(componentName, true)
       ? 'Canary'
       : 'Internal',
-    $canaryTag: '',
     $comp: componentName,
   };
 

@@ -20,16 +20,17 @@ import {
 } from 'carbon-components-react';
 
 import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { CreateModal } from '.';
 import mdx from './CreateModal.mdx';
-const storybookPrefix = getStorybookPrefix(pkg, CreateModal.displayName);
-import { prepareStory } from '../../global/js/utils/story-helper';
 
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: `${storybookPrefix}/${CreateModal.displayName}`,
+  title: getStoryTitle(CreateModal.displayName),
   component: CreateModal,
   parameters: {
     styles,

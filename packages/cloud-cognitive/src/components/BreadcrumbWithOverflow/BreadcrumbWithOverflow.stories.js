@@ -8,18 +8,14 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { pkg } from '../../settings';
 import { BreadcrumbWithOverflow } from '.';
-import { getStorybookPrefix } from '../../../config';
-import { prepareStory } from '../../global/js/utils/story-helper';
-
-const storybookPrefix = getStorybookPrefix(
-  pkg,
-  BreadcrumbWithOverflow.displayName
-);
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 
 export default {
-  title: `${storybookPrefix}/${BreadcrumbWithOverflow.displayName}`,
+  title: getStoryTitle(BreadcrumbWithOverflow.displayName),
   component: BreadcrumbWithOverflow,
   argTypes: {
     containerWidth: {

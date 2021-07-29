@@ -8,15 +8,15 @@
 import React from 'react';
 
 import { StatusIcon } from '.';
-import { pkg } from '../../settings';
 import mdx from './StatusIcon.mdx';
 import styles from './_storybook-styles.scss'; // import storybook which includes component and additional storybook styles
-import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, 'StatusIcon');
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 
 export default {
-  title: `${storybookPrefix}/StatusIcon`,
+  title: getStoryTitle(StatusIcon.displayName),
   component: StatusIcon,
   argTypes: {
     kind: {

@@ -6,22 +6,19 @@
  */
 
 import React from 'react';
-//import action to handle events if required.
-// import { action } from '@storybook/addon-actions';
 
-import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 
 import { LoadingBar } from '.';
 import mdx from './LoadingBar.mdx';
 
 import styles from './_storybook-styles.scss';
 
-const storybookPrefix = getStorybookPrefix(pkg, LoadingBar.displayName);
-
 export default {
-  title: `${storybookPrefix}/${LoadingBar.displayName}`,
+  title: getStoryTitle(LoadingBar.displayName),
   component: LoadingBar,
   //Define argTypes for props not represented by standard JS types.
   parameters: {

@@ -6,9 +6,10 @@
  */
 import React from 'react';
 
-import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { action } from '@storybook/addon-actions';
 import { CreateFullPage } from '.';
 import { CreateFullPageSection } from './CreateFullPageSection';
@@ -20,10 +21,8 @@ const storyClass = 'create-full-page-stories';
 
 import { TextInput, NumberInput } from 'carbon-components-react';
 
-const storybookPrefix = getStorybookPrefix(pkg, CreateFullPage.displayName);
-
 export default {
-  title: `${storybookPrefix}/${CreateFullPage.displayName}`,
+  title: getStoryTitle(CreateFullPage.displayName),
   component: CreateFullPage,
   parameters: {
     styles,

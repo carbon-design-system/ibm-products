@@ -1,6 +1,5 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import { pkg } from '../../settings';
-import { getStorybookSlug } from '../../../config';
+import { getStoryId } from '../../global/js/utils/story-helper';
 import { Tearsheet, TearsheetNarrow } from '.';
 import AnatomyImg from './_story-assets/tearsheet-anatomy.png';
 
@@ -41,27 +40,13 @@ Tearsheets may be stacked up to 3 levels deep.
 ### Wide tearsheet
 
 <Canvas>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      Tearsheet.displayName,
-      'with-navigation',
-      'tearsheets'
-    )}
-  />
+  <Story id={getStoryId(Tearsheet.displayName, 'with-navigation')} />
 </Canvas>
 
 ### Narrow tearsheet
 
 <Canvas>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      TearsheetNarrow.displayName,
-      'fully-loaded',
-      'tearsheets'
-    )}
-  />
+  <Story id={getStoryId(TearsheetNarrow.displayName, 'fully-loaded')} />
 </Canvas>
 
 ## Component API

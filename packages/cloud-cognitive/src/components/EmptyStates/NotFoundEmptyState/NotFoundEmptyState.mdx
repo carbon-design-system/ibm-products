@@ -1,6 +1,5 @@
 import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
-import { pkg } from '../../../settings';
-import { getStorybookSlug } from '../../../../config';
+import { getStoryId } from '../../../global/js/utils/story-helper';
 import { NotFoundEmptyState } from '.';
 // cspell:words emptystates
 
@@ -20,25 +19,16 @@ guidelines and documentation please refer to the links above.
 ### Default Not Found Empty state
 
 <Canvas>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      NotFoundEmptyState.displayName,
-      'default',
-      'emptystates'
-    )}
-  />
+  <Story id={getStoryId(NotFoundEmptyState.displayName, 'default')} />
 </Canvas>
 
 ### Not Found Empty state with dark themed illustration
 
 <Canvas>
   <Story
-    id={getStorybookSlug(
-      pkg,
+    id={getStoryId(
       NotFoundEmptyState.displayName,
-      'with-dark-mode-illustration',
-      'emptystates'
+      'with-dark-mode-illustration'
     )}
   />
 </Canvas>
@@ -46,52 +36,28 @@ guidelines and documentation please refer to the links above.
 ### Not Found Empty state with action
 
 <Canvas>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      NotFoundEmptyState.displayName,
-      'with-action',
-      'emptystates'
-    )}
-  />
+  <Story id={getStoryId(NotFoundEmptyState.displayName, 'with-action')} />
 </Canvas>
 
 ### Not Found Empty state with action (Button with icon)
 
 <Canvas>
   <Story
-    id={getStorybookSlug(
-      pkg,
-      NotFoundEmptyState.displayName,
-      'with-action-icon-button',
-      'emptystates'
-    )}
+    id={getStoryId(NotFoundEmptyState.displayName, 'with-action-icon-button')}
   />
 </Canvas>
 
 ### Not Found Empty state with link
 
 <Canvas>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      NotFoundEmptyState.displayName,
-      'with-link',
-      'emptystates'
-    )}
-  />
+  <Story id={getStoryId(NotFoundEmptyState.displayName, 'with-link')} />
 </Canvas>
 
 ### Not Found Empty state with action and link
 
 <Canvas>
   <Story
-    id={getStorybookSlug(
-      pkg,
-      NotFoundEmptyState.displayName,
-      'with-action-and-link',
-      'emptystates'
-    )}
+    id={getStoryId(NotFoundEmptyState.displayName, 'with-action-and-link')}
   />
 </Canvas>
 

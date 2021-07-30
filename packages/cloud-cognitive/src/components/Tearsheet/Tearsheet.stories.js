@@ -30,17 +30,18 @@ import {
   actionsMapping,
 } from '../ActionSet/actions.js';
 
-import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, Tearsheet.displayName);
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 
 import styles from './_storybook-styles.scss';
 
 import mdx from './Tearsheet.mdx';
 
 export default {
-  title: `${storybookPrefix}/Tearsheets/${Tearsheet.displayName}`,
+  title: getStoryTitle(Tearsheet.displayName),
   component: Tearsheet,
   subcomponents: { TearsheetNarrow },
   parameters: { styles, docs: { page: mdx } },

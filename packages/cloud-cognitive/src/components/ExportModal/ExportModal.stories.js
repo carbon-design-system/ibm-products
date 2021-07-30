@@ -8,16 +8,16 @@
 import React, { useState } from 'react';
 import { Button } from 'carbon-components-react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { ExportModal } from '.';
 import mdx from './ExportModal.mdx';
 import wait from '../../global/js/utils/wait';
-const storybookPrefix = getStorybookPrefix(pkg, ExportModal.displayName);
-import { prepareStory } from '../../global/js/utils/story-helper';
 
 export default {
-  title: `${storybookPrefix}/${ExportModal.displayName}`,
+  title: getStoryTitle(ExportModal.displayName),
   component: ExportModal,
   parameters: {
     styles,

@@ -18,16 +18,17 @@ import {
 } from 'carbon-components-react';
 import { action } from '@storybook/addon-actions';
 import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { APIKeyModal } from '.';
 import mdx from './APIKeyModal.mdx';
-const storybookPrefix = getStorybookPrefix(pkg, APIKeyModal.displayName);
 import wait from '../../global/js/utils/wait';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 
 export default {
-  title: `${storybookPrefix}/${APIKeyModal.displayName}`,
+  title: getStoryTitle(APIKeyModal.displayName),
   component: APIKeyModal,
   parameters: {
     styles,

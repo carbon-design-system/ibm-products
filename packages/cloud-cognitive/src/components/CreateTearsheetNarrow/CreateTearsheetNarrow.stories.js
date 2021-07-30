@@ -15,21 +15,18 @@ import {
   TextInput,
 } from 'carbon-components-react';
 import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 
 import { CreateTearsheetNarrow } from '.';
 import mdx from './CreateTearsheetNarrow.mdx';
 
 import styles from './_storybook-styles.scss';
 
-const storybookPrefix = getStorybookPrefix(
-  pkg,
-  CreateTearsheetNarrow.displayName
-);
-
 export default {
-  title: `${storybookPrefix}/${CreateTearsheetNarrow.displayName}`,
+  title: getStoryTitle(CreateTearsheetNarrow.displayName),
   component: CreateTearsheetNarrow,
   // TODO: Define argTypes for props not represented by standard JS types.
   // argTypes: {

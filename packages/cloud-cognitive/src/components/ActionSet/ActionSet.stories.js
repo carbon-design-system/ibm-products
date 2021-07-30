@@ -10,8 +10,10 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 
 import { ActionSet } from '.';
 import { actionsOptions, actionsLabels, actionsMapping } from './actions.js';
@@ -19,10 +21,9 @@ import { actionsOptions, actionsLabels, actionsMapping } from './actions.js';
 import styles from './_storybook-styles.scss';
 
 const blockClass = `${pkg.prefix}--action-set`;
-const storybookPrefix = getStorybookPrefix(pkg, ActionSet.displayName);
 
 export default {
-  title: `${storybookPrefix}/${ActionSet.displayName}`,
+  title: getStoryTitle(ActionSet.displayName),
   component: ActionSet,
   parameters: {
     styles,

@@ -10,8 +10,10 @@
 import React, { useEffect, useState } from 'react';
 
 import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 
 import { AboutModal } from '.';
 
@@ -26,11 +28,10 @@ import jsLogo from './_story-assets/js-logo.png';
 
 import styles from './_storybook-styles.scss';
 
-const storybookPrefix = getStorybookPrefix(pkg, AboutModal.displayName);
 const blockClass = `${pkg.prefix}--about-modal`;
 
 export default {
-  title: `${storybookPrefix}/${AboutModal.displayName}`,
+  title: getStoryTitle(AboutModal.displayName),
   component: AboutModal,
   parameters: {
     styles,

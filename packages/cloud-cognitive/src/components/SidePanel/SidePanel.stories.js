@@ -30,16 +30,16 @@ import {
 } from 'carbon-components-react/lib/components/UIShell';
 import { Copy20, Delete20, Settings20 } from '@carbon/icons-react';
 import styles from './_storybook-styles.scss';
-import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 import { SidePanel, deprecatedProps } from './SidePanel';
 import mdx from './SidePanel.mdx';
-const storybookPrefix = getStorybookPrefix(pkg, SidePanel.displayName);
-import { prepareStory } from '../../global/js/utils/story-helper';
 
 export default {
-  title: `${storybookPrefix}/${SidePanel.displayName}`,
+  title: getStoryTitle(SidePanel.displayName),
   component: SidePanel,
   parameters: {
     styles,

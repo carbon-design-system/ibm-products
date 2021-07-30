@@ -2,8 +2,7 @@
 
 import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
 import { APIKeyModal } from './APIKeyModal';
-import { pkg } from '../../settings';
-import { getStorybookSlug } from '../../../config';
+import { getStoryId } from '../../global/js/utils/story-helper';
 
 # APIKeyModal
 
@@ -20,7 +19,7 @@ To enable key editing you have to set the `edit` prop to true and supply any
 other edit related props with the relevant input.
 
 <Canvas>
-  <Story id={getStorybookSlug(pkg, APIKeyModal.displayName, 'edit')} />
+  <Story id={getStoryId(APIKeyModal.displayName, 'edit')} />
 </Canvas>
 
 ## Custom steps
@@ -29,9 +28,7 @@ By default generate and edit only supply a name input for your key. If you need
 additional input you should use custom steps
 
 <Canvas>
-  <Story
-    id={getStorybookSlug(pkg, APIKeyModal.displayName, 'custom-generate')}
-  />
+  <Story id={getStoryId(APIKeyModal.displayName, 'custom-generate')} />
 </Canvas>
 
 ## Component API

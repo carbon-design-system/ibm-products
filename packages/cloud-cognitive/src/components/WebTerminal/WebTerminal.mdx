@@ -1,6 +1,5 @@
 import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
-import { pkg } from '../../settings';
-import { getStorybookSlug } from '../../../config';
+import { getStoryId } from '../../global/js/utils/story-helper';
 import { WebTerminal } from '.';
 
 # WebTerminal
@@ -59,19 +58,13 @@ user desires to dismiss it they can click the close icon on the top right corner
 of the component.
 
 <Canvas>
-  <Story id={getStorybookSlug(pkg, WebTerminal.displayName, 'default')} />
+  <Story id={getStoryId(WebTerminal.displayName, 'default')} />
 </Canvas>
 
 ### With documentation links
 
 <Canvas>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      WebTerminal.displayName,
-      'with-documentation-links'
-    )}
-  />
+  <Story id={getStoryId(WebTerminal.displayName, 'with-documentation-links')} />
 </Canvas>
 
 ## Component API

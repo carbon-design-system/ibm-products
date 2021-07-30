@@ -1,6 +1,5 @@
 import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
-import { pkg } from '../../../settings';
-import { getStorybookSlug } from '../../../../config';
+import { getStoryId } from '../../../global/js/utils/story-helper';
 import { UnauthorizedEmptyState } from '.';
 // cspell:words emptystates
 
@@ -20,25 +19,16 @@ guidelines and documentation please refer to the links above.
 ### Default Unauthorized Empty state
 
 <Canvas>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      UnauthorizedEmptyState.displayName,
-      'default',
-      'emptystates'
-    )}
-  />
+  <Story id={getStoryId(UnauthorizedEmptyState.displayName, 'default')} />
 </Canvas>
 
 ### Unauthorized Empty state with dark themed illustration
 
 <Canvas>
   <Story
-    id={getStorybookSlug(
-      pkg,
+    id={getStoryId(
       UnauthorizedEmptyState.displayName,
-      'with-dark-mode-illustration',
-      'emptystates'
+      'with-dark-mode-illustration'
     )}
   />
 </Canvas>
@@ -46,25 +36,16 @@ guidelines and documentation please refer to the links above.
 ### Unauthorized Empty state with action
 
 <Canvas>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      UnauthorizedEmptyState.displayName,
-      'with-action',
-      'emptystates'
-    )}
-  />
+  <Story id={getStoryId(UnauthorizedEmptyState.displayName, 'with-action')} />
 </Canvas>
 
 ### Unauthorized Empty state with action (Button with icon)
 
 <Canvas>
   <Story
-    id={getStorybookSlug(
-      pkg,
+    id={getStoryId(
       UnauthorizedEmptyState.displayName,
-      'with-action-icon-button',
-      'emptystates'
+      'with-action-icon-button'
     )}
   />
 </Canvas>
@@ -72,26 +53,14 @@ guidelines and documentation please refer to the links above.
 ### Unauthorized Empty state with link
 
 <Canvas>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      UnauthorizedEmptyState.displayName,
-      'with-link',
-      'emptystates'
-    )}
-  />
+  <Story id={getStoryId(UnauthorizedEmptyState.displayName, 'with-link')} />
 </Canvas>
 
 ### Unauthorized Empty state with action and link
 
 <Canvas>
   <Story
-    id={getStorybookSlug(
-      pkg,
-      UnauthorizedEmptyState.displayName,
-      'with-action-and-link',
-      'emptystates'
-    )}
+    id={getStoryId(UnauthorizedEmptyState.displayName, 'with-action-and-link')}
   />
 </Canvas>
 

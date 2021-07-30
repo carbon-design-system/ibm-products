@@ -22,21 +22,21 @@ import {
 } from 'carbon-components-react/lib/components/UIShell';
 
 import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
-import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { CreateSidePanel, deprecatedProps } from './CreateSidePanel';
 import mdx from './CreateSidePanel.mdx';
 
 import styles from './_storybook-styles.scss';
 
-const storybookPrefix = getStorybookPrefix(pkg, CreateSidePanel.displayName);
-
 const blockClass = `${pkg.prefix}--create-side-panel`;
 
 export default {
-  title: `${storybookPrefix}/${CreateSidePanel.displayName}`,
+  title: getStoryTitle(CreateSidePanel.displayName),
   component: CreateSidePanel,
   argTypes: getDeprecatedArgTypes(deprecatedProps),
   parameters: {

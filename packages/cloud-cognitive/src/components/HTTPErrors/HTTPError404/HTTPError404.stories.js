@@ -6,17 +6,17 @@
  */
 
 import React from 'react';
-import { pkg } from '../../../settings';
 import { HTTPError404 } from '.';
-import { getStorybookPrefix } from '../../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, HTTPError404.displayName);
-import { prepareStory } from '../../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../../global/js/utils/story-helper';
 
 import page from './HTTPError404.mdx';
 import styles from '../_storybook-styles.scss';
 
 export default {
-  title: `${storybookPrefix}/HTTPErrors/${HTTPError404.displayName}`,
+  title: getStoryTitle(HTTPError404.displayName),
   component: HTTPError404,
   parameters: {
     docs: {

@@ -10,16 +10,16 @@ import cx from 'classnames';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { ArrowRight24, Cloud32 } from '@carbon/icons-react';
 import { AspectRatio } from 'carbon-components-react';
-import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { ExpressiveCard } from '.';
 import mdx from './ExpressiveCard.mdx';
 import { action } from '@storybook/addon-actions';
-const storybookPrefix = getStorybookPrefix(pkg, ExpressiveCard.displayName);
 
 export default {
-  title: `${storybookPrefix}/Cards/${ExpressiveCard.displayName}`,
+  title: getStoryTitle(ExpressiveCard.displayName),
   component: ExpressiveCard,
   parameters: {
     styles,

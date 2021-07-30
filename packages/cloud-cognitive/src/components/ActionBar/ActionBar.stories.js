@@ -10,16 +10,15 @@ import { action } from '@storybook/addon-actions';
 
 import { Bee16, Lightning16 } from '@carbon/icons-react';
 
-import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 import { ActionBar, deprecatedProps } from './ActionBar';
 
-const storybookPrefix = getStorybookPrefix(pkg, ActionBar.displayName);
-
 export default {
-  title: `${storybookPrefix}/${ActionBar.displayName}`,
+  title: getStoryTitle(ActionBar.displayName),
   component: ActionBar,
   argTypes: {
     ...getDeprecatedArgTypes(deprecatedProps),

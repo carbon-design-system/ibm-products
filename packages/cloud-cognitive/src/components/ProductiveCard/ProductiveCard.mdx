@@ -2,8 +2,7 @@
 
 import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
 import { ProductiveCard } from '.';
-import { pkg } from '../../settings';
-import { getStorybookSlug } from '../../../config';
+import { getStoryId } from '../../global/js/utils/story-helper';
 
 # ProductiveCard
 
@@ -17,9 +16,7 @@ match. For information on each implementation please refer to the
 [usage guidelines](https://pages.github.ibm.com/cdai-design/pal/components/card/overview).
 
 <Canvas>
-  <Story
-    id={getStorybookSlug(pkg, ProductiveCard.displayName, 'default', 'cards')}
-  />
+  <Story id={getStoryId(ProductiveCard.displayName, 'default')} />
 </Canvas>
 
 ## Component API

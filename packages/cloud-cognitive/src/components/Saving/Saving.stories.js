@@ -7,17 +7,17 @@
 
 import React, { useState, useEffect } from 'react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { Saving } from '.';
 import mdx from './Saving.mdx';
 import wait from '../../global/js/utils/wait';
 import { TextArea } from 'carbon-components-react';
-const storybookPrefix = getStorybookPrefix(pkg, Saving.displayName);
-import { prepareStory } from '../../global/js/utils/story-helper';
 
 export default {
-  title: `${storybookPrefix}/${Saving.displayName}`,
+  title: getStoryTitle(Saving.displayName),
   component: Saving,
   parameters: {
     styles,

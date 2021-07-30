@@ -9,8 +9,10 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add20 } from '@carbon/icons-react';
 import CustomIllustration from './story_assets/empty-state-bright-magnifying-glass.svg';
-import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import mdx from './EmptyState.mdx';
 
 import {
@@ -25,11 +27,8 @@ import {
 
 import styles from './_storybook-styles.scss';
 
-const storybookPrefix = getStorybookPrefix(pkg, EmptyState.displayName);
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 export default {
-  title: `${storybookPrefix}/EmptyStates/EmptyState`,
+  title: getStoryTitle(EmptyState.displayName),
   component: EmptyState,
   subcomponents: {
     ErrorEmptyState,

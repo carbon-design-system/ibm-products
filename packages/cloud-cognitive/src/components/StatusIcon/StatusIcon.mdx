@@ -1,6 +1,5 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import { pkg } from '../../settings';
-import { getStorybookSlug } from '../../../config';
+import { getStoryId } from '../../global/js/utils/story-helper';
 import { StatusIcon } from '.';
 
 # StatusIcon
@@ -27,7 +26,7 @@ users to quickly assess and identify status and respond accordingly.
 ## Example usage
 
 <Canvas>
-  <Story id={getStorybookSlug(pkg, StatusIcon.displayName, 'default')} />
+  <Story id={getStoryId(StatusIcon.displayName, 'default')} />
 </Canvas>
 
 ## Accessibility

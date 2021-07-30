@@ -24,10 +24,10 @@ Only components that are to be used directly by our package consumers, those in
 As part of these changes the following also happened.
 
 - `pkgPrefix` is gone instead now import `pkg` and use `pkg.prefix`.
-- `getStorybookSlug` was added to `../../../config.js` to make building the
-  story slug simpler in `.mdx` files.
-- `getStorybookPrefix` was added to `../../../config.js` to make building your
-  story path simpler in story files.
+- `getStoryId` was added to `../../global/js/utils/story-helper.js` to make
+  building the story slug simpler in `.mdx` files.
+- `getStoryTitle` was added to `../../global/js/utils/story-helper.js` to make
+  building your story path simpler in story files.
 
 ## Canary structure
 

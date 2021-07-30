@@ -8,18 +8,17 @@
 import CloudApp16 from '@carbon/icons-react/lib/cloud-app/16';
 import React from 'react';
 
-import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 
 import { ComboButton, ComboButtonItem } from '..';
 
 import styles from './_combo-button.scss';
 
-const storybookPrefix = getStorybookPrefix(pkg, ComboButton.displayName);
-
 export default {
-  title: `${storybookPrefix}/${ComboButton.displayName}`,
+  title: getStoryTitle(ComboButton.displayName),
   component: ComboButton,
   subcomponents: {
     ComboButtonItem,

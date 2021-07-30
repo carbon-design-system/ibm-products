@@ -10,9 +10,9 @@ import { create } from '@storybook/theming/create';
 
 import React from 'react';
 
-import packageJson from '../../cloud-cognitive/package.json';
+import packageInfo from '../../cloud-cognitive/package.json';
 
-const { description, version } = packageJson;
+const { description, version } = packageInfo;
 
 addons.setConfig({
   theme: create({

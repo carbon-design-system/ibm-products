@@ -69,7 +69,6 @@ const Template = (args) => {
     minimumInSyncReplicaCount <= 0 ||
     retentionTime <= 0 ||
     quantity <= 0;
-  console.log({ quantity });
   return (
     <div>
       <style>{`.${defaultStoryProps.className} { opacity: 0 }`};</style>

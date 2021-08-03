@@ -12,6 +12,7 @@ const defaults = {
   component: {
     // reviewed and released components:
     AboutModal: true,
+    APIKeyModal: true,
     CreateModal: true,
     EmptyState: true,
     ErrorEmptyState: true,
@@ -37,7 +38,6 @@ const defaults = {
     UserProfileImage: true,
 
     // other public components not yet reviewed and released:
-    APIKeyModal: false,
     CreateFullPage: false,
     CreateFullPageSection: false,
     CreateFullPageStep: false,

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.64.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.64.0...@carbon/ibm-cloud-cognitive@0.64.1) (2021-08-03)
+
+
+### Bug Fixes
+
+* **SidePanel:** add panel height to useEffect dependencies ([#1100](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1100)) ([fe29cc0](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/fe29cc0ebdbbdf3d66acf0a7d6bc8263b2139030))
+
+
+
+
+
 # [0.64.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.63.2...@carbon/ibm-cloud-cognitive@0.64.0) (2021-07-30)
 
 

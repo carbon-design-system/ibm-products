@@ -1,6 +1,6 @@
 {
   "name": "@carbon/ibm-cloud-cognitive",
-  "description": "Carbon for Cloud & Cognitive UI components",
+  "description": "Carbon for Cloud & Cognitive",
   "version": "0.64.2",
   "license": "Apache-2.0",
   "main": "lib/index.js",

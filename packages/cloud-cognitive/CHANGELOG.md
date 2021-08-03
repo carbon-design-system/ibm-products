@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.64.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.64.3...@carbon/ibm-cloud-cognitive@0.64.4) (2021-08-03)
+
+
+### Bug Fixes
+
+* **CreateTearsheet:** stories should receive args as expected now ([#1099](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1099)) ([ec43a08](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ec43a0891c472a554228bd2bc11bb83a0fa090ce))
+
+
+
+
+
 ## [0.64.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.64.2...@carbon/ibm-cloud-cognitive@0.64.3) (2021-08-03)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

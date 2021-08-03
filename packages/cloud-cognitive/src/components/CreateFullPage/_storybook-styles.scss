@@ -4,6 +4,7 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
+@import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
 @import 'carbon-components/scss/components/ui-shell/ui-shell';
@@ -19,6 +20,27 @@ $story-class: 'create-full-page-stories';
   color: $text-01;
   overflow-y: auto;
 }
+
+.#{$story-class}__description {
+  @include carbon--type-style('body-short-01');
+
+  padding-bottom: $spacing-04;
+}
+
+p.#{$story-class}__description:last-of-type {
+  padding-bottom: $spacing-07;
+}
+
+.#{$story-class}__heading {
+  @include carbon--font-weight('semibold');
+}
+
+.#{$story-class}
+  .#{$pkg-prefix}--tearsheet__content
+  .#{$carbon-prefix}--form-item {
+  margin-bottom: $spacing-05;
+}
+
 
 .#{$story-class}__content-switcher {
   justify-content: flex-start;

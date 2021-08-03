@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { action } from '@storybook/addon-actions';
 import { CreateFullPage } from '.';
 import { CreateFullPageSection } from './CreateFullPageSection';
@@ -15,7 +16,7 @@ import { CreateFullPageStep } from './CreateFullPageStep';
 import mdx from './CreateFullPage.mdx';
 
 // import styles from './_storybook-styles.scss';
-import styles from "./_create-full-page.scss"
+import styles from './_create-full-page.scss';
 const storyClass = 'create-full-page-stories';
 
 import {
@@ -124,7 +125,7 @@ const TemplateWithSections = ({ ...args }) => {
   return (
     <CreateFullPage {...args}>
       <CreateFullPageStep {...defaultStepProps}>
-        <CreateFullPageSection hasDivider={false}>
+        <CreateFullPageSection>
           <TextInput
             id="test1"
             invalidText="A valid value is required"
@@ -203,7 +204,6 @@ const TemplateWithSections = ({ ...args }) => {
         </CreateFullPageSection>
         <CreateFullPageSection
           id="3"
-          hasDivider={false}
           title="Configuration 3"
           description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
           <TextInput
@@ -259,19 +259,6 @@ const TemplateWithToggle = ({ ...args }) => {
   const [stepThreeTextInputValue, setStepThreeTextInputValue] =
     useState('one-day');
 
-  // const clearCreateData = () => {
-  //   setStepOneTextInputValue('');
-  //   setTopicDescriptionValue('');
-  //   setTopicVersionValue('');
-  //   setStepTwoTextInputValue(1);
-  //   setStepThreeTextInputValue('one-day');
-  //   setHasSubmitError(false);
-  //   setIsInvalid(false);
-  //   setAllTopicOwners([]);
-  //   setSelectedTopicOwner(null);
-  //   setApiFailed(false);
-  // };
-
   return (
     <CreateFullPage {...args}>
       <CreateFullPageStep
@@ -307,6 +294,7 @@ const TemplateWithToggle = ({ ...args }) => {
         title="Topic name"
         disableSubmit={!stepOneTextInputValue}>
         <CreateFullPageSection
+          hasDivider
           title="General"
           id="create-full-page-section-general">
           <h6
@@ -381,18 +369,18 @@ const TemplateWithToggle = ({ ...args }) => {
             labelText="Simulate error"
             onToggle={(event) => setShouldReject(event)}
           />
-          <CreateFullPageSection
-            viewAllOnly
-            title="Meta data"
-            id="create-full-page-section-meta-data">
-            <TextInput
-              labelText="Topic meta data"
-              id="tearsheet-multi-step-story-text-input-multi-step-1-input-4"
-              value={topicMetaData}
-              placeholder="Enter topic meta data"
-              onChange={(event) => setTopicMetaData(event.target.value)}
-            />
-          </CreateFullPageSection>
+        </CreateFullPageSection>
+        <CreateFullPageSection
+          viewAllOnly
+          title="Meta data"
+          id="create-full-page-section-meta-data">
+          <TextInput
+            labelText="Topic meta data"
+            id="tearsheet-multi-step-story-text-input-multi-step-1-input-4"
+            value={topicMetaData}
+            placeholder="Enter topic meta data"
+            onChange={(event) => setTopicMetaData(event.target.value)}
+          />
         </CreateFullPageSection>
       </CreateFullPageStep>
       <CreateFullPageStep
@@ -478,15 +466,17 @@ const TemplateWithToggle = ({ ...args }) => {
   );
 };
 
-export const createFullPage = Template.bind({});
-createFullPage.args = {
-  ...defaultFullPageProps,
-};
+export const createFullPage = prepareStory(Template, {
+  args: {
+    ...defaultFullPageProps,
+  },
+});
 
-export const createFullPageWithSections = TemplateWithSections.bind({});
-createFullPageWithSections.args = {
-  ...defaultFullPageProps,
-};
+export const createFullPageWithSections = prepareStory(TemplateWithSections, {
+  args: {
+    ...defaultFullPageProps,
+  },
+});
 
 export const createFullPageWithToggle = TemplateWithToggle.bind({});
 createFullPageWithToggle.args = {

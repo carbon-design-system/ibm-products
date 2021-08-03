@@ -210,7 +210,7 @@ export let CreateFullPage = React.forwardRef(
       const total = createSteps.length;
       if (total === 1) {
         console.warn(
-          `${componentName}: CreateFullPages with one step are not permitted. If you require only one step, please use either the CreateTearsheet, CreateSidePanel, or CreateModal components.`
+          `${componentName}: CreateFullPages with one step are not permitted. If you require only one step, please use either the CreateFullPage, CreateSidePanel, or CreateModal components.`
         );
       }
     }, [getFullPageSteps]);
@@ -220,8 +220,8 @@ export let CreateFullPage = React.forwardRef(
       setCurrentStep((prev) => prev + 1);
     };
 
-    // Log a warning to the console in the event there are no CreateTearsheetSection components
-    // inside of the CreateTearsheetSteps when the viewAll toggle is provided and turned on.
+    // Log a warning to the console in the event there are no CreateFullPageSection components
+    // inside of the CreateFullPageSteps when the viewAll toggle is provided and turned on.
     useEffect(() => {
       if (includeViewAllToggle && shouldViewAll) {
         let childrenArray = Array.isArray(children) ? children : [children];
@@ -230,15 +230,15 @@ export let CreateFullPage = React.forwardRef(
         );
         let fullPageSectionComponents = [];
         fullPageStepComponents.forEach((child, index) => {
-          // We have received children for a TearsheetStep
+          // We have received children for a FullPageStep
           if (shouldViewAll && typeof child.props.children !== 'undefined') {
-            // Only a string was provided as children of CreateTearsheetStep, this is not permitted when using view all toggle
+            // Only a string was provided as children of CreateFullPageStep, this is not permitted when using view all toggle
             if (typeof child.props.children === 'string') {
               console.warn(
-                `${componentName}: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' prop.`
+                `${componentName}: You must have at least one CreateFullPageSection component in a CreateFullPageStep when using the 'includeViewAllToggle' prop.`
               );
             } else {
-              // The TearsheetStep has an array of children, lets check each one to see if it is a TearsheetSection
+              // The FullPageStep has an array of children, lets check each one to see if it is a FullPageSection
               if (child.props.children.length) {
                 child.props.children.forEach((stepChild) => {
                   if (isFullPageSection(stepChild)) {
@@ -246,27 +246,27 @@ export let CreateFullPage = React.forwardRef(
                   }
                 });
               } else {
-                // The TearsheetStep only has a single React element as a child, lets check to see if it is a TearsheetSection
+                // The FullPageStep only has a single React element as a child, lets check to see if it is a FullPageSection
                 if (isFullPageSection(child.props.children)) {
                   fullPageSectionComponents.push(child.props.children);
                 }
               }
             }
           }
-          // If there are fewer CreateTearsheetSection components than CreateTearsheetStep components
-          // it means that each CreateTearsheetStep does not have at least one CreateTearsheetSection
+          // If there are fewer CreateFullPageSection components than CreateFullPageStep components
+          // it means that each CreateFullPageStep does not have at least one CreateFullPageSection
           // this is not permitted when using view all toggle
           if (
             fullPageSectionComponents.length < fullPageStepComponents.length &&
-            index === fullPageStepComponents.length - 1 // wait until we've finished checking each TearsheetStep before giving a warning
+            index === fullPageStepComponents.length - 1 // wait until we've finished checking each FullPageStep before giving a warning
           ) {
             console.warn(
-              `${componentName}: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' prop.`
+              `${componentName}: You must have at least one CreateFullPageSection component in a CreateFullPageStep when using the 'includeViewAllToggle' prop.`
             );
           }
           // We have received a single child element, lets check to see that it is
-          // a CreateTearsheetSection component, if it is not we should add a console
-          // warning, as each CreateTearsheetStep required at least one CreateTearsheetSection,
+          // a CreateFullPageSection component, if it is not we should add a console
+          // warning, as each CreateFullPageStep required at least one CreateFullPageSection,
           // when using the view all toggle
           if (
             shouldViewAll &&
@@ -275,7 +275,7 @@ export let CreateFullPage = React.forwardRef(
           ) {
             if (!isFullPageSection(child.props.children)) {
               console.warn(
-                `${componentName}: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' prop.`
+                `${componentName}: You must have at least one CreateFullPageSection component in a CreateFullPageStep when using the 'includeViewAllToggle' prop.`
               );
             }
           }
@@ -335,7 +335,7 @@ export let CreateFullPage = React.forwardRef(
           });
         }
         // we have received a single child element, lets check to see that it is
-        // a CreateTearsheetSection component before adding it to sectionChildElements
+        // a CreateFullPageSection component before adding it to sectionChildElements
         if (
           shouldViewAll &&
           typeof child.props.children !== 'undefined' &&
@@ -348,51 +348,43 @@ export let CreateFullPage = React.forwardRef(
       });
       if (shouldViewAll) {
         return (
-          <SideNav expanded isFixedNav aria-label={sideNavAriaLabel}>
-            <SideNavItems>
-              {sectionChildElements?.length &&
-                sectionChildElements.map((sectionChild, sectionIndex) => (
-                  <SideNavLink
-                    // href="javascript:void(0)"
-                    href={`#${sectionChild.props.id}`}
-                    key={sectionIndex}
-                    isActive={activeSectionIndex === sectionIndex}
-                    // onClick={(e) => {
-                    // e.preventDefault();
-                    //   setActiveSectionIndex(sectionIndex);
-                    //   if (!sectionChild.props.id) {
-                    //     console.warn(
-                    //       `${componentName}: CreateFullPageSection is missing a required prop of 'id'`
-                    //     );
-                    //   }
-                    // }}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setActiveSectionIndex(sectionIndex);
-                      if (sectionChild.props.id) {
-                        const scrollTarget = document.querySelector(
-                          `#${sectionChild.props.id}`
-                        );
-                        const scrollContainer = document.querySelector(
-                          `.${blockClass}__content`
-                        );
-                        console.log(scrollTarget.getBoundingClientRect());
-                        console.log(scrollTarget.offsetTop);
-                        scrollContainer.scrollTo({
-                          top: scrollTarget.getBoundingClientRect().y,
-                          behavior: 'smooth',
-                        });
-                      } else {
-                        console.warn(
-                          `${componentName}: CreateFullPageSection is missing a required prop of 'id'`
-                        );
-                      }
-                    }}>
-                    {sectionChild.props.title}
-                  </SideNavLink>
-                ))}
-            </SideNavItems>
-          </SideNav>
+          <div className={`${blockClass}__left-nav`}>
+            <SideNav expanded isFixedNav aria-label={sideNavAriaLabel}>
+              <SideNavItems>
+                {sectionChildElements?.length &&
+                  sectionChildElements.map((sectionChild, sectionIndex) => (
+                    <SideNavLink
+                      href={`#${sectionChild.props.id}`}
+                      key={sectionIndex}
+                      isActive={activeSectionIndex === sectionIndex}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setActiveSectionIndex(sectionIndex);
+                        if (sectionChild.props.id) {
+                          const scrollTarget = document.querySelector(
+                            `#${sectionChild.props.id}`
+                          );
+                          const scrollContainer = document.querySelector(
+                            `.${blockClass}__content`
+                          );
+                          scrollContainer.scrollTo({
+                            top:
+                              scrollTarget.getBoundingClientRect().y +
+                              scrollContainer.scrollTop,
+                            behavior: 'smooth',
+                          });
+                        } else {
+                          console.warn(
+                            `${componentName}: CreateFullPageSection is missing a required prop of 'id'`
+                          );
+                        }
+                      }}>
+                      {sectionChild.props.title}
+                    </SideNavLink>
+                  ))}
+              </SideNavItems>
+            </SideNav>
+          </div>
         );
       }
       return (
@@ -420,6 +412,9 @@ export let CreateFullPage = React.forwardRef(
       const childrenArray = Array.isArray(childrenElements)
         ? childrenElements
         : [childrenElements];
+      const indexOfLastFullPageStep = childrenArray
+        .map((el) => el?.props?.type)
+        .lastIndexOf(CREATE_FULL_PAGE_STEP);
       return (
         <>
           {childrenArray.map((child, stepIndex) => {
@@ -444,11 +439,14 @@ export let CreateFullPage = React.forwardRef(
               },
               <>
                 {!shouldViewAll && (
-                  <h4 className={`${blockClass}__step--title`}>
+                  <h4 className={`${blockClass}__step-title`}>
                     {renderStepTitle(stepIndex)}
                   </h4>
                 )}
-                {renderStepChildren(child.props.children)}
+                {renderStepChildren(
+                  child.props.children,
+                  indexOfLastFullPageStep === step - 1
+                )}
               </>
             );
           })}
@@ -484,13 +482,13 @@ export let CreateFullPage = React.forwardRef(
               },
               <>
                 {shouldViewAll && (
-                  <h4 className={`${blockClass}__step--heading`}>
+                  <h4 className={`${blockClass}__step-title`}>
                     {child.props.title}
                   </h4>
                 )}
                 {child}
                 {shouldViewAll && !isLastSectionOfLastStep && (
-                  <span className={`${blockClass}__section--divider`} />
+                  <span className={`${blockClass}__section-divider`} />
                 )}
               </>
             );
@@ -549,13 +547,6 @@ export let CreateFullPage = React.forwardRef(
     const handleViewAllToggle = (toggleState) => {
       setShouldViewAll(toggleState);
       setActiveSectionIndex(0);
-      // scroll to top of full page page upon toggling view all option
-      if (toggleState) {
-        const createFullPageContainer = document.querySelector(
-          `.${blockClass}`
-        );
-        createFullPageContainer.scrollTop = 0;
-      }
     };
 
     // track scrolling/intersection of create sections so that we know
@@ -563,7 +554,7 @@ export let CreateFullPage = React.forwardRef(
     useEffect(() => {
       if (shouldViewAll) {
         const fullPageMainContent = document.querySelector(
-          `.${pkg.prefix}--create-full-page__content`
+          `.${blockClass}__content`
         );
         let options = {
           root: fullPageMainContent,
@@ -574,8 +565,7 @@ export let CreateFullPage = React.forwardRef(
         // of the section that should be marked as `active`.
         const viewAllSections = Array.from(
           document.querySelectorAll(
-            // `.${pkg.prefix}--create-full-page__step`
-            `.${pkg.prefix}--create-full-page__section.${pkg.prefix}--create-full-page__step--visible-step`
+            `.${blockClass}__section.${blockClass}__step--visible-section`
           )
         );
         const observer = new IntersectionObserver((entries) => {
@@ -591,7 +581,6 @@ export let CreateFullPage = React.forwardRef(
             setActiveSectionIndex(visibleTargetIndex);
           }
         }, options);
-        // console.log(viewAllSections);
         viewAllSections.forEach((section) => {
           observer.observe(section);
         });
@@ -622,8 +611,7 @@ export let CreateFullPage = React.forwardRef(
         <div className={`${blockClass}__body`}>
           <div className={`${blockClass}__main`}>
             <div className={`${blockClass}__content`}>
-              {renderChildren(children)}
-              {/* <Grid>{renderChildren(children)}</Grid> */}
+              <Grid>{renderChildren(children)}</Grid>
             </div>
             <ActionSet
               className={`${blockClass}__buttons`}

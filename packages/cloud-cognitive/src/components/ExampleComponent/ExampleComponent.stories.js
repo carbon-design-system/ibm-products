@@ -9,6 +9,7 @@ import { action } from '@storybook/addon-actions';
 
 import { pkg } from '../../settings';
 import { getStorybookPrefix } from '../../../config';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { ExampleComponent } from '.';
 import mdx from './ExampleComponent.mdx';
@@ -43,12 +44,14 @@ const Template = (args) => {
   );
 };
 
-export const exampleComponent = Template.bind({});
-exampleComponent.args = {};
+export const exampleComponent = prepareStory(Template, {
+  args: {},
+});
 
-export const boxedSet = Template.bind({});
-boxedSet.args = {
-  ...exampleComponent.args,
-  borderColor: '#141414',
-  boxedBorder: true,
-};
+export const boxedSet = prepareStory(Template, {
+  args: {
+    ...exampleComponent.args,
+    borderColor: '#141414',
+    boxedBorder: true,
+  },
+});

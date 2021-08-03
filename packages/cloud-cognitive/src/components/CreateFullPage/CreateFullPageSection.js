@@ -46,11 +46,6 @@ CreateFullPageSection.propTypes = {
   disableSubmit: PropTypes.bool,
 
   /**
-   * This will conditionally render a 1px gray divider span. This is defaulted to true
-   */
-  hasDivider: PropTypes.bool,
-
-  /**
    * This will conditionally render form content below the step condition. This is defaulted to true
    */
   hasForm: PropTypes.bool,

@@ -18,8 +18,7 @@
   $block-class: #{$pkg-prefix}--create-full-page;
 
   .#{$block-class} .bx--grid {
-    padding-right: $spacing-08;
-    padding-left: $spacing-08;
+    padding-top: $spacing-05;
     margin-right: 0;
     margin-left: 0;
   }
@@ -71,7 +70,7 @@
   .#{$block-class} .#{$block-class}__content {
     overflow: auto;
     flex-grow: 1;
-    padding: $spacing-06;
+    // padding: $spacing-06;
     overflow-x: hidden;
   }
 
@@ -105,6 +104,10 @@
     background-color: $ui-03;
   }
 
+  .#{$block-class}__step-title {
+    margin-bottom: $spacing-05;
+  }
+
   .#{$block-class} .#{$block-class}__step-title,
   .#{$block-class} .#{$block-class}__section-title {
     @include carbon--type-style('productive-heading-04');
@@ -132,12 +135,6 @@
   }
 
   .#{$block-class} .#{$block-class}__influencer {
-    // display: flex;
-    // width: 16rem;
-    // min-width: 16rem;
-    // height: 100%;
-    // flex-direction: column;
-    // padding: $spacing-06 $spacing-07;
     border-right: 1px solid $ui-03;
     background-color: $ui-01;
     display: grid;
@@ -147,17 +144,8 @@
   }
 
   .#{$block-class} .#{$block-class}__progress-indicator {
-    // min-height: calc(100% - #{$spacing-10});
-    // overflow: auto;
     padding: $spacing-06;
   }
-
-  // .#{$block-class} .#{$block-class}__influencer-toggle {
-  //   flex: 1;
-  //   justify-content: flex-end;
-  //   z-index: 8001; // UI shell side nav has z-index of 8000 and the toggle needs receive the highest stacking order
-
-  // }
 
   .#{$block-class} .#{$block-class}__influencer-toggle {
     padding: $spacing-06;

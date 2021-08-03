@@ -33,12 +33,33 @@ export default {
   parameters: { styles, docs: { page: mdx } },
 };
 
+const createTearsheetProps = {
+  title: 'Create topic',
+  description: 'Specify details for the new topic you want to create',
+  submitButtonText: 'Create',
+  cancelButtonText: 'Cancel',
+  backButtonText: 'Back',
+  nextButtonText: 'Next',
+  className: 'test-class-name',
+  label: '',
+};
+
 export const multiStepTearsheet = prepareStory(MultiStepTearsheet, {
   storyName: 'With multiple steps',
-  args: {},
+  args: {
+    includeViewAllToggle: false,
+    ...createTearsheetProps,
+  },
 });
 
 export const withViewAllToggle = prepareStory(MultiStepWithSectionsTearsheet, {
   storyName: 'With view all toggle',
-  args: {},
+  args: {
+    includeViewAllToggle: true,
+    sideNavAriaLabel: 'Create topic side nav',
+    viewAllToggleLabelText: 'Show all available options',
+    viewAllToggleOffLabelText: 'Off',
+    viewAllToggleOnLabelText: 'On',
+    ...createTearsheetProps,
+  },
 });

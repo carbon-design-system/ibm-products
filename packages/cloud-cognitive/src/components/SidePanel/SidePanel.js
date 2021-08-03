@@ -64,6 +64,7 @@ export let SidePanel = React.forwardRef(
   ) => {
     const [shouldRender, setRender] = useState(open);
     const [animationComplete, setAnimationComplete] = useState(false);
+    const [panelHeight, setPanelHeight] = useState(0);
     const sidePanelRef = useRef();
     const sidePanelOverlayRef = useRef();
     const startTrapRef = useRef();
@@ -117,7 +118,8 @@ export let SidePanel = React.forwardRef(
     }, [actions, condensedActions, open, animationComplete]);
 
     /* istanbul ignore next */
-    const handleResize = () => {
+    const handleResize = (width, height) => {
+      setPanelHeight(height);
       const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
       const actionsContainer = getActionsContainerElement();
       let actionsHeight = actionsContainer.offsetHeight + 16; // add additional 1rem spacing to bottom padding
@@ -152,7 +154,7 @@ export let SidePanel = React.forwardRef(
         let sidePanelSubtitleElementHeight =
           sidePanelSubtitleElement?.offsetHeight || 0; // set default subtitle height if a subtitle is not provided to enable scrolling animation
 
-        const panelOuterHeight = sidePanelOuter?.offsetHeight;
+        const panelOuterHeight = panelHeight;
         const scrollSectionHeight = document.querySelector(
           `.${blockClass}__body-content`
         )?.offsetHeight;
@@ -170,7 +172,9 @@ export let SidePanel = React.forwardRef(
             sidePanelSubtitleElementHeight ||
           sidePanelSubtitleElementHeight === 0
             ? totalScrollingContentHeight - panelOuterHeight
-            : sidePanelSubtitleElementHeight < 0
+            : sidePanelSubtitleElementHeight;
+        sidePanelSubtitleElementHeight =
+          sidePanelSubtitleElementHeight < 0
             ? 16
             : sidePanelSubtitleElementHeight;
         /* istanbul ignore next */
@@ -296,7 +300,7 @@ export let SidePanel = React.forwardRef(
           `${sidePanelSubtitleElementHeight}px`
         );
       }
-    }, [open, animateTitle, animationComplete, shouldRender]);
+    }, [open, animateTitle, animationComplete, shouldRender, panelHeight]);
 
     // click outside functionality if `includeOverlay` prop is set
     useEffect(() => {

@@ -19,6 +19,9 @@ import toBeAccessible from './matchers/toBeAccessible';
 // `expect` can be extended using custom matchers as per https://jest-bot.github.io/jest/docs/expect.html#expectextendmatchers
 expect.extend({ toBeAccessible, toHaveNoAxeViolations });
 
+// Use 'data-test-id' as the attribute which the getByTestId queries look for.
+// (the default omits the second '-', but this upsets spell checkers and doesn't
+// match the camel-casing of the methods, so 'data-test-id' just seems better)
 configure({ testIdAttribute: 'data-test-id' });
 
 // Our test suite will throw an error if one of the below console methods are

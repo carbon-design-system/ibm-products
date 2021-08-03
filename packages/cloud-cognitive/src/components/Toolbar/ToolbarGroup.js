@@ -7,7 +7,6 @@
 
 import cx from 'classnames';
 import { node, string } from 'prop-types';
-
 import React, { forwardRef } from 'react';
 
 import { pkg } from '../../settings';

@@ -20,17 +20,13 @@ import {
 
 import React from 'react';
 
-import { getStorybookPrefix } from '../../../config';
-import { pkg } from '../../settings';
+import { getStoryTitle } from '../../global/js/utils/story-helper';
 
 import { Toolbar, ToolbarButton, ToolbarGroup } from '../..';
-
 import mdx from './Toolbar.mdx';
 
-const { displayName } = Toolbar;
-
 export default {
-  title: `${getStorybookPrefix(pkg, displayName)}/${displayName}`,
+  title: getStoryTitle(Toolbar.displayName),
   component: Toolbar,
   subcomponents: { ToolbarGroup, ToolbarButton },
 

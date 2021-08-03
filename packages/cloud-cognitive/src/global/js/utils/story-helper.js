@@ -58,6 +58,7 @@ const storybookStructure = {
   SidePanel: `${lib}/$rci/$comp`,
   StatusIcon: `${lib}/$rci/$comp`,
   TagSet: `${lib}/$rci/$comp`,
+  Toolbar: `${lib}/$rci/Toolbar`,
   UserProfileImage: `${lib}/$rci/$comp`,
   WebTerminal: `${lib}/$rci/$comp`,
 

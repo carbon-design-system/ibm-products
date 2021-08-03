@@ -27,9 +27,11 @@
   &--loading > .#{$prefix}--inline-loading {
     width: auto;
 
-    // Required to ensure that the loading icon
-    // does not make the button taller:
-    margin-top: carbon--mini-units(-1);
-    margin-bottom: carbon--mini-units(-1);
+    /// Loading spacing - Ensures the `Loading` component won't make the `Button` taller.
+    /// @type Length
+    $button--loading__spacing: -$carbon--spacing-03;
+
+    margin-top: $button--loading__spacing;
+    margin-bottom: $button--loading__spacing;
   }
 }

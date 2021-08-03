@@ -22,11 +22,11 @@
   & &__label {
     height: carbon--mini-units($count: 1.5);
     margin-top: 0;
-    margin-bottom: carbon--mini-units($count: 1);
+    margin-bottom: $carbon--spacing-03;
   }
 
   & &__value {
-    height: carbon--mini-units($count: 4);
+    height: $carbon--spacing-10;
     margin: 0;
   }
 }

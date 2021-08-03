@@ -24,6 +24,7 @@ LoadedCheerio {
                       "aria-expanded": "false",
                       "aria-label": "Toggle menu",
                       "class": "security--button--icon security--toolbar__button security--button--icon--tooltip security--button--icon--tooltip--right",
+                      "type": "button",
                     },
                     "children": Array [
                       Node {
@@ -101,11 +102,13 @@ LoadedCheerio {
                       "aria-expanded": undefined,
                       "aria-label": undefined,
                       "class": undefined,
+                      "type": undefined,
                     },
                     "x-attribsPrefix": Object {
                       "aria-expanded": undefined,
                       "aria-label": undefined,
                       "class": undefined,
+                      "type": undefined,
                     },
                   },
                 ],
@@ -193,6 +196,7 @@ LoadedCheerio {
                         "aria-expanded": "false",
                         "aria-label": "Toggle menu",
                         "class": "security--button--icon security--toolbar__button security--button--icon--tooltip security--button--icon--tooltip--right",
+                        "type": "button",
                       },
                       "children": Array [
                         Node {
@@ -270,11 +274,13 @@ LoadedCheerio {
                         "aria-expanded": undefined,
                         "aria-label": undefined,
                         "class": undefined,
+                        "type": undefined,
                       },
                       "x-attribsPrefix": Object {
                         "aria-expanded": undefined,
                         "aria-label": undefined,
                         "class": undefined,
+                        "type": undefined,
                       },
                     },
                   ],
@@ -453,6 +459,7 @@ LoadedCheerio {
                       "aria-expanded": "false",
                       "aria-label": "Toggle menu",
                       "class": "security--button--icon security--toolbar__button security--button--icon--tooltip security--button--icon--tooltip--right",
+                      "type": "button",
                     },
                     "children": Array [
                       Node {
@@ -530,11 +537,13 @@ LoadedCheerio {
                       "aria-expanded": undefined,
                       "aria-label": undefined,
                       "class": undefined,
+                      "type": undefined,
                     },
                     "x-attribsPrefix": Object {
                       "aria-expanded": undefined,
                       "aria-label": undefined,
                       "class": undefined,
+                      "type": undefined,
                     },
                   },
                 ],
@@ -622,6 +631,7 @@ LoadedCheerio {
                         "aria-expanded": "false",
                         "aria-label": "Toggle menu",
                         "class": "security--button--icon security--toolbar__button security--button--icon--tooltip security--button--icon--tooltip--right",
+                        "type": "button",
                       },
                       "children": Array [
                         Node {
@@ -699,11 +709,13 @@ LoadedCheerio {
                         "aria-expanded": undefined,
                         "aria-label": undefined,
                         "class": undefined,
+                        "type": undefined,
                       },
                       "x-attribsPrefix": Object {
                         "aria-expanded": undefined,
                         "aria-label": undefined,
                         "class": undefined,
+                        "type": undefined,
                       },
                     },
                   ],
@@ -1025,6 +1037,7 @@ LoadedCheerio {
                         "aria-expanded": "false",
                         "aria-label": "Toggle menu",
                         "class": "security--button--icon security--toolbar__button security--button--icon--tooltip security--button--icon--tooltip--right",
+                        "type": "button",
                       },
                       "children": Array [
                         Node {
@@ -1102,11 +1115,13 @@ LoadedCheerio {
                         "aria-expanded": undefined,
                         "aria-label": undefined,
                         "class": undefined,
+                        "type": undefined,
                       },
                       "x-attribsPrefix": Object {
                         "aria-expanded": undefined,
                         "aria-label": undefined,
                         "class": undefined,
+                        "type": undefined,
                       },
                     },
                   ],
@@ -1119,6 +1134,7 @@ LoadedCheerio {
                         "attribs": Object {
                           "aria-label": "Example addon",
                           "class": "security--button--icon security--toolbar__button",
+                          "type": "button",
                         },
                         "children": Array [
                           Node {
@@ -1247,10 +1263,12 @@ LoadedCheerio {
                         "x-attribsNamespace": Object {
                           "aria-label": undefined,
                           "class": undefined,
+                          "type": undefined,
                         },
                         "x-attribsPrefix": Object {
                           "aria-label": undefined,
                           "class": undefined,
+                          "type": undefined,
                         },
                       },
                     ],
@@ -1276,6 +1294,7 @@ LoadedCheerio {
                       "attribs": Object {
                         "aria-label": "Example addon",
                         "class": "security--button--icon security--toolbar__button",
+                        "type": "button",
                       },
                       "children": Array [
                         Node {
@@ -1404,10 +1423,12 @@ LoadedCheerio {
                       "x-attribsNamespace": Object {
                         "aria-label": undefined,
                         "class": undefined,
+                        "type": undefined,
                       },
                       "x-attribsPrefix": Object {
                         "aria-label": undefined,
                         "class": undefined,
+                        "type": undefined,
                       },
                     },
                   ],
@@ -1423,6 +1444,7 @@ LoadedCheerio {
                           "aria-expanded": "false",
                           "aria-label": "Toggle menu",
                           "class": "security--button--icon security--toolbar__button security--button--icon--tooltip security--button--icon--tooltip--right",
+                          "type": "button",
                         },
                         "children": Array [
                           Node {
@@ -1500,11 +1522,13 @@ LoadedCheerio {
                           "aria-expanded": undefined,
                           "aria-label": undefined,
                           "class": undefined,
+                          "type": undefined,
                         },
                         "x-attribsPrefix": Object {
                           "aria-expanded": undefined,
                           "aria-label": undefined,
                           "class": undefined,
+                          "type": undefined,
                         },
                       },
                     ],
@@ -1596,6 +1620,7 @@ LoadedCheerio {
                           "aria-expanded": "false",
                           "aria-label": "Toggle menu",
                           "class": "security--button--icon security--toolbar__button security--button--icon--tooltip security--button--icon--tooltip--right",
+                          "type": "button",
                         },
                         "children": Array [
                           Node {
@@ -1673,11 +1698,13 @@ LoadedCheerio {
                           "aria-expanded": undefined,
                           "aria-label": undefined,
                           "class": undefined,
+                          "type": undefined,
                         },
                         "x-attribsPrefix": Object {
                           "aria-expanded": undefined,
                           "aria-label": undefined,
                           "class": undefined,
+                          "type": undefined,
                         },
                       },
                     ],
@@ -1690,6 +1717,7 @@ LoadedCheerio {
                           "attribs": Object {
                             "aria-label": "Example addon",
                             "class": "security--button--icon security--toolbar__button",
+                            "type": "button",
                           },
                           "children": Array [
                             Node {
@@ -1818,10 +1846,12 @@ LoadedCheerio {
                           "x-attribsNamespace": Object {
                             "aria-label": undefined,
                             "class": undefined,
+                            "type": undefined,
                           },
                           "x-attribsPrefix": Object {
                             "aria-label": undefined,
                             "class": undefined,
+                            "type": undefined,
                           },
                         },
                       ],
@@ -1847,6 +1877,7 @@ LoadedCheerio {
                         "attribs": Object {
                           "aria-label": "Example addon",
                           "class": "security--button--icon security--toolbar__button",
+                          "type": "button",
                         },
                         "children": Array [
                           Node {
@@ -1975,10 +2006,12 @@ LoadedCheerio {
                         "x-attribsNamespace": Object {
                           "aria-label": undefined,
                           "class": undefined,
+                          "type": undefined,
                         },
                         "x-attribsPrefix": Object {
                           "aria-label": undefined,
                           "class": undefined,
+                          "type": undefined,
                         },
                       },
                     ],
@@ -1994,6 +2027,7 @@ LoadedCheerio {
                             "aria-expanded": "false",
                             "aria-label": "Toggle menu",
                             "class": "security--button--icon security--toolbar__button security--button--icon--tooltip security--button--icon--tooltip--right",
+                            "type": "button",
                           },
                           "children": Array [
                             Node {
@@ -2071,11 +2105,13 @@ LoadedCheerio {
                             "aria-expanded": undefined,
                             "aria-label": undefined,
                             "class": undefined,
+                            "type": undefined,
                           },
                           "x-attribsPrefix": Object {
                             "aria-expanded": undefined,
                             "aria-label": undefined,
                             "class": undefined,
+                            "type": undefined,
                           },
                         },
                       ],
@@ -2261,6 +2297,7 @@ LoadedCheerio {
                       "aria-expanded": "false",
                       "aria-label": "Toggle menu",
                       "class": "security--button--icon security--toolbar__button security--button--icon--tooltip security--button--icon--tooltip--right",
+                      "type": "button",
                     },
                     "children": Array [
                       Node {
@@ -2338,11 +2375,13 @@ LoadedCheerio {
                       "aria-expanded": undefined,
                       "aria-label": undefined,
                       "class": undefined,
+                      "type": undefined,
                     },
                     "x-attribsPrefix": Object {
                       "aria-expanded": undefined,
                       "aria-label": undefined,
                       "class": undefined,
+                      "type": undefined,
                     },
                   },
                 ],
@@ -2355,6 +2394,7 @@ LoadedCheerio {
                       "attribs": Object {
                         "aria-label": "Example addon",
                         "class": "security--button--icon security--toolbar__button",
+                        "type": "button",
                       },
                       "children": Array [
                         Node {
@@ -2483,10 +2523,12 @@ LoadedCheerio {
                       "x-attribsNamespace": Object {
                         "aria-label": undefined,
                         "class": undefined,
+                        "type": undefined,
                       },
                       "x-attribsPrefix": Object {
                         "aria-label": undefined,
                         "class": undefined,
+                        "type": undefined,
                       },
                     },
                   ],
@@ -2512,6 +2554,7 @@ LoadedCheerio {
                     "attribs": Object {
                       "aria-label": "Example addon",
                       "class": "security--button--icon security--toolbar__button",
+                      "type": "button",
                     },
                     "children": Array [
                       Node {
@@ -2640,10 +2683,12 @@ LoadedCheerio {
                     "x-attribsNamespace": Object {
                       "aria-label": undefined,
                       "class": undefined,
+                      "type": undefined,
                     },
                     "x-attribsPrefix": Object {
                       "aria-label": undefined,
                       "class": undefined,
+                      "type": undefined,
                     },
                   },
                 ],
@@ -2659,6 +2704,7 @@ LoadedCheerio {
                         "aria-expanded": "false",
                         "aria-label": "Toggle menu",
                         "class": "security--button--icon security--toolbar__button security--button--icon--tooltip security--button--icon--tooltip--right",
+                        "type": "button",
                       },
                       "children": Array [
                         Node {
@@ -2736,11 +2782,13 @@ LoadedCheerio {
                         "aria-expanded": undefined,
                         "aria-label": undefined,
                         "class": undefined,
+                        "type": undefined,
                       },
                       "x-attribsPrefix": Object {
                         "aria-expanded": undefined,
                         "aria-label": undefined,
                         "class": undefined,
+                        "type": undefined,
                       },
                     },
                   ],
@@ -2832,6 +2880,7 @@ LoadedCheerio {
                         "aria-expanded": "false",
                         "aria-label": "Toggle menu",
                         "class": "security--button--icon security--toolbar__button security--button--icon--tooltip security--button--icon--tooltip--right",
+                        "type": "button",
                       },
                       "children": Array [
                         Node {
@@ -2909,11 +2958,13 @@ LoadedCheerio {
                         "aria-expanded": undefined,
                         "aria-label": undefined,
                         "class": undefined,
+                        "type": undefined,
                       },
                       "x-attribsPrefix": Object {
                         "aria-expanded": undefined,
                         "aria-label": undefined,
                         "class": undefined,
+                        "type": undefined,
                       },
                     },
                   ],
@@ -2926,6 +2977,7 @@ LoadedCheerio {
                         "attribs": Object {
                           "aria-label": "Example addon",
                           "class": "security--button--icon security--toolbar__button",
+                          "type": "button",
                         },
                         "children": Array [
                           Node {
@@ -3054,10 +3106,12 @@ LoadedCheerio {
                         "x-attribsNamespace": Object {
                           "aria-label": undefined,
                           "class": undefined,
+                          "type": undefined,
                         },
                         "x-attribsPrefix": Object {
                           "aria-label": undefined,
                           "class": undefined,
+                          "type": undefined,
                         },
                       },
                     ],
@@ -3083,6 +3137,7 @@ LoadedCheerio {
                       "attribs": Object {
                         "aria-label": "Example addon",
                         "class": "security--button--icon security--toolbar__button",
+                        "type": "button",
                       },
                       "children": Array [
                         Node {
@@ -3211,10 +3266,12 @@ LoadedCheerio {
                       "x-attribsNamespace": Object {
                         "aria-label": undefined,
                         "class": undefined,
+                        "type": undefined,
                       },
                       "x-attribsPrefix": Object {
                         "aria-label": undefined,
                         "class": undefined,
+                        "type": undefined,
                       },
                     },
                   ],
@@ -3230,6 +3287,7 @@ LoadedCheerio {
                           "aria-expanded": "false",
                           "aria-label": "Toggle menu",
                           "class": "security--button--icon security--toolbar__button security--button--icon--tooltip security--button--icon--tooltip--right",
+                          "type": "button",
                         },
                         "children": Array [
                           Node {
@@ -3307,11 +3365,13 @@ LoadedCheerio {
                           "aria-expanded": undefined,
                           "aria-label": undefined,
                           "class": undefined,
+                          "type": undefined,
                         },
                         "x-attribsPrefix": Object {
                           "aria-expanded": undefined,
                           "aria-label": undefined,
                           "class": undefined,
+                          "type": undefined,
                         },
                       },
                     ],
@@ -3476,6 +3536,7 @@ LoadedCheerio {
     "attribs": Object {
       "aria-label": "Example addon",
       "class": "security--button--icon security--toolbar__button",
+      "type": "button",
     },
     "children": Array [
       Node {
@@ -3613,10 +3674,12 @@ LoadedCheerio {
     "x-attribsNamespace": Object {
       "aria-label": undefined,
       "class": undefined,
+      "type": undefined,
     },
     "x-attribsPrefix": Object {
       "aria-label": undefined,
       "class": undefined,
+      "type": undefined,
     },
   },
   "_root": LoadedCheerio {

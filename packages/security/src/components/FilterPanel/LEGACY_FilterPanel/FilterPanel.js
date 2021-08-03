@@ -1,6 +1,6 @@
 /**
  * @file Filter Panel.
- * @copyright IBM Security 2019
+ * @copyright IBM Security 2019, 2021
  */
 
 import React from 'react';
@@ -68,29 +68,29 @@ const FilterPanel = (props) => {
 };
 
 FilterPanel.propTypes = {
-  /** @type {string} Title on filter panel */
-  title: PropTypes.string,
-
-  /** @type {string} Label for truncated filters list to expand */
-  filtersExpandLabel: PropTypes.string,
-
-  /** @type {string} Label for expanded filters list to collapse */
-  filtersCollapseLabel: PropTypes.string,
+  /** @type {FilterData}  Filter data to used to render panel */
+  filterData: filterDataPropTypes,
 
   /** @type {string} Label for filter search input */
   filterSearchLabel: PropTypes.string,
 
-  /** @type {string} Label for filter search when no filters are found */
-  noFiltersResultsLabel: PropTypes.string,
+  /** @type {string} Label for expanded filters list to collapse */
+  filtersCollapseLabel: PropTypes.string,
+
+  /** @type {string} Label for truncated filters list to expand */
+  filtersExpandLabel: PropTypes.string,
 
   /** @type {object} Labels for FilterPanel and children */
   labels: defaultLabels.propType,
 
+  /** @type {string} Label for filter search when no filters are found */
+  noFiltersResultsLabel: PropTypes.string,
+
   /** @type {(filter: Filter) => {}} Callback function when any filter is toggled */
   onChange: PropTypes.func,
 
-  /** @type {FilterData}  Filter data to used to render panel */
-  filterData: filterDataPropTypes,
+  /** @type {string} Title on filter panel */
+  title: PropTypes.string,
 };
 
 FilterPanel.defaultProps = {

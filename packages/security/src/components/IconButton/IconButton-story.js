@@ -11,7 +11,7 @@ import { storiesOf } from '@storybook/react';
 
 import React from 'react';
 
-import { security } from '../../../.storybook';
+import { components } from '../../../.storybook';
 
 import { className, iconClassName, label, sizes } from './_mocks_';
 
@@ -36,7 +36,7 @@ const iconButtonProps = () => ({
   ),
 });
 
-storiesOf(security('IconButton'), module).add(
+storiesOf(components('IconButton'), module).add(
   'Default',
   () => <IconButton {...iconButtonProps()} />,
   {

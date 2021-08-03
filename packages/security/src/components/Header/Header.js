@@ -1,6 +1,6 @@
 /**
  * @file Header.
- * @copyright IBM Security 2019 - 2020
+ * @copyright IBM Security 2019, 2021
  */
 
 import { Close20, Notification20, Settings20 } from '@carbon/icons-react';
@@ -50,10 +50,6 @@ const renderPopover = (children, state) => (
   </Transition>
 );
 
-/**
- * Header class.
- * @className
- */
 export default class Header extends Component {
   static propTypes = {
     ...propTypes,
@@ -260,7 +256,8 @@ export default class Header extends Component {
                         <button
                           value={id}
                           onClick={onAccountClick}
-                          className={`${namespace}__popover__profile__body__account__button`}>
+                          className={`${namespace}__popover__profile__body__account__button`}
+                          type="button">
                           {name}
                         </button>
                       </li>
@@ -330,7 +327,8 @@ export default class Header extends Component {
             <button
               className={`${namespace}__popover__button`}
               aria-label={labels.notifications.clear_all}
-              onClick={() => this.clearAllNotifications()}>
+              onClick={() => this.clearAllNotifications()}
+              type="button">
               <Icon renderIcon={Close20} />
             </button>
           </div>
@@ -456,7 +454,8 @@ export default class Header extends Component {
             <button
               aria-label={labels.profile.button}
               className={profileButtonClasses}
-              onClick={() => this.toggle('profile')}>
+              onClick={() => this.toggle('profile')}
+              type="button">
               <ProfileImage profile={profile} />
             </button>
 

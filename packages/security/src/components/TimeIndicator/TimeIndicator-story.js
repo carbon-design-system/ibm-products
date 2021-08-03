@@ -5,11 +5,11 @@
 
 import React from 'react';
 
-import { getDocsParameters, security } from '../../../.storybook';
+import { components, getDocsParameters } from '../../../.storybook';
 import { TimeIndicator } from '../..';
 
 export default {
-  title: security(TimeIndicator.name),
+  title: components(TimeIndicator.name),
   component: TimeIndicator,
   args: {
     children: '10 minute setup',

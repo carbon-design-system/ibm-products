@@ -42,46 +42,42 @@ export default class SearchBar extends React.Component {
     /** @type {string} Optional additional class name. */
     className: PropTypes.string,
 
-    /** @type {string} Search query value. */
-    value: PropTypes.string,
-
-    /** @type {Function} Function handler for when the user submits a search. */
-    onSubmit: PropTypes.func,
-
-    /** @type {Function} Function handler for when the user changes their query search. */
-    onChange: PropTypes.func,
-
     /** @type {string} The label text for the search text input. */
     clearButtonLabelText: PropTypes.string.isRequired,
 
-    /** @type {string} Placeholder text to be displayed in the search input. */
-    placeHolderText: PropTypes.string.isRequired,
+    /**
+     * Whether or not the scopes MultiSelect label is visually hidden.
+     */
+    hideScopesLabel: PropTypes.bool,
 
     /** @type {string} The label text for the search text input. */
     labelText: PropTypes.string.isRequired,
 
-    /** @type {string} The label text for the search submit button. */
-    submitLabel: PropTypes.string.isRequired,
+    /** @type {Function} Function handler for when the user changes their query search. */
+    onChange: PropTypes.func,
+
+    /** @type {Function} Function handler for when the user submits a search. */
+    onSubmit: PropTypes.func,
+
+    /** @type {string} Placeholder text to be displayed in the search input. */
+    placeHolderText: PropTypes.string.isRequired,
+
+    /** @type {Function} Function to get the text for each sscope to display in dropdown. */
+    scopeToString: PropTypes.func,
 
     /** @type {Array<any>} Array of allowed search scopes. */
     scopes: PropTypes.arrayOf(
       PropTypes.oneOfType([PropTypes.string, PropTypes.object])
     ),
 
-    /** @type {Array<any> Array of initially selected search scopes. */
-    selectedScopes: PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.string, PropTypes.object])
-    ),
-
-    /** @type {Function} Function to get the text for each sscope to display in dropdown. */
-    scopeToString: PropTypes.func,
-
     /** @type {string} The name text for the search scope type. */
     // eslint-disable-next-line react/require-default-props
     scopesTypeLabel: conditionalScopePropValidator,
 
-    /** @type {func} Callback function for translating MultiSelect's child ListBoxMenuIcon SVG title. */
-    translateWithId: PropTypes.func, // eslint-disable-line react/require-default-props
+    /** @type {Array<any> Array of initially selected search scopes. */
+    selectedScopes: PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+    ),
 
     /**
      * Optional custom sorting algorithm for an array of scope items.
@@ -90,15 +86,19 @@ export default class SearchBar extends React.Component {
      */
     sortItems: PropTypes.func, // eslint-disable-line react/require-default-props
 
+    /** @type {string} The label text for the search submit button. */
+    submitLabel: PropTypes.string.isRequired,
+
     /**
      * Provide accessible label text for the scopes MultiSelect.
      */
     titleText: PropTypes.string,
 
-    /**
-     * Whether or not the scopes MultiSelect label is visually hidden.
-     */
-    hideScopesLabel: PropTypes.bool,
+    /** @type {func} Callback function for translating MultiSelect's child ListBoxMenuIcon SVG title. */
+    translateWithId: PropTypes.func, // eslint-disable-line react/require-default-props
+
+    /** @type {string} Search query value. */
+    value: PropTypes.string,
   };
 
   static defaultProps = {

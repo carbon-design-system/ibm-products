@@ -1,13 +1,11 @@
 /**
  * @file Scroll gradient tests.
- * @copyright IBM Security 2019 - 2020
+ * @copyright IBM Security 2019 - 2021
  */
 
 import React from 'react';
 import { mount } from 'enzyme';
 
-// JSDOM hasn't implemented `ResizeObserver` yet, so the mock needs to be moved into a separate file and included before the tested file - https://jestjs.io/docs/en/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom
-import { disconnectMock, observeMock } from '../__mocks__';
 import ScrollGradient, { namespace } from '../ScrollGradient';
 
 import { className, children } from '../_mocks_';
@@ -60,22 +58,25 @@ describe('ScrollGradient', () => {
     });
 
     describe('`ResizeObserver`', () => {
-      beforeEach(() => {
-        disconnectMock.mockClear();
-        observeMock.mockClear();
+      const { fn } = jest;
+
+      const disconnectMock = fn();
+      const observeMock = fn();
+
+      const { ResizeObserver } = window;
+
+      beforeAll(() => {
+        window.ResizeObserver = fn().mockImplementation(() => ({
+          disconnect: disconnectMock,
+          observe: observeMock,
+        }));
       });
 
       afterAll(() => {
-        window.ResizeObserver = undefined;
+        window.ResizeObserver = ResizeObserver;
       });
 
       it('adds `ResizeObserver` when mounted', () => {
-        scrollGradient = mount(
-          <ScrollGradient className={className} color="blue">
-            {children}
-          </ScrollGradient>
-        );
-
         expect(observeMock).toBeCalledTimes(1);
       });
 

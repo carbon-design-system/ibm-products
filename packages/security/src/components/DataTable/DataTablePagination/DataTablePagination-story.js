@@ -25,7 +25,7 @@ import {
   TableToolbarContent,
 } from '../../..';
 
-import { security } from '../../../../.storybook';
+import { components } from '../../../../.storybook';
 import Button from '../../Button';
 import IconButton from '../../IconButton';
 import Search from '../../Search';
@@ -121,7 +121,7 @@ const dataTablePaginationProps = {
   totalItems: rows.length,
 };
 
-storiesOf(security('DataTablePagination'), module)
+storiesOf(components('DataTablePagination'), module)
   .add('pagination data table', () => {
     DataTablePagination.__docgenInfo = {
       ...DataTablePagination.__docgenInfo,

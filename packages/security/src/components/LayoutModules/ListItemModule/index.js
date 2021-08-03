@@ -64,11 +64,11 @@ const ListItemModule = ({ children, as, href, onClick, ...other }) => {
 };
 
 ListItemModule.propTypes = {
-  /** Provide the content for the `ListItemModule` */
-  children: func.isRequired,
-
   /** Provide a custom element to be rendered instead of the default */
   as: elementType,
+
+  /** Provide the content for the `ListItemModule` */
+  children: func.isRequired,
 
   /**
    * Optionally specify an href for the ListItemModule to become an `<a>` element

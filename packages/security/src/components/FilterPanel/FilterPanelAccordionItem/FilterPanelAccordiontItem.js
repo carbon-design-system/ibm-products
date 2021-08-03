@@ -1,6 +1,6 @@
 /**
  * @file Filter panel accordion item component.
- * @copyright IBM Security 2020
+ * @copyright IBM Security 2020, 2021
  */
 
 import React, { Children } from 'react';
@@ -60,35 +60,19 @@ const FilterPanelAccordionItem = ({
 
 FilterPanelAccordionItem.propTypes = {
   /**
-   * Accordion item `title` attribute.
-   */
-  title: PropTypes.string,
-
-  /**
-   * Accordion item heading node.
-   * If no `heading` is provided, then the `title` prop will be used instead.
-   */
-  heading: PropTypes.node,
-
-  /**
-   * View more label for truncated content.
-   */
-  expandLabel: PropTypes.string,
-
-  /**
-   * View less label for expanded content.
-   */
-  collapseLabel: PropTypes.string,
-
-  /**
    * Accordion item content.
    */
   children: PropTypes.node,
 
   /**
-   * Optional color for the scroll gradient.
+   * Optional class name.
    */
-  scrollGradientColor: PropTypes.string,
+  className: PropTypes.string,
+
+  /**
+   * View less label for expanded content.
+   */
+  collapseLabel: PropTypes.string,
 
   /**
    * Optional count of unique values.
@@ -101,9 +85,25 @@ FilterPanelAccordionItem.propTypes = {
   countLabel: PropTypes.func,
 
   /**
-   * Optional class name.
+   * View more label for truncated content.
    */
-  className: PropTypes.string,
+  expandLabel: PropTypes.string,
+
+  /**
+   * Accordion item heading node.
+   * If no `heading` is provided, then the `title` prop will be used instead.
+   */
+  heading: PropTypes.node,
+
+  /**
+   * Optional color for the scroll gradient.
+   */
+  scrollGradientColor: PropTypes.string,
+
+  /**
+   * Accordion item `title` attribute.
+   */
+  title: PropTypes.string,
 };
 
 FilterPanelAccordionItem.defaultProps = {

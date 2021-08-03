@@ -1,6 +1,6 @@
 /**
  * @file Filter panel accordion component.
- * @copyright IBM Security 2020
+ * @copyright IBM Security 2020, 2021
  */
 
 import React from 'react';
@@ -35,14 +35,14 @@ const FilterPanelAccordion = ({
 
 FilterPanelAccordion.propTypes = {
   /**
-   * Accordion `title` attribute.
+   * Filter accordion content.
    */
-  title: PropTypes.string,
+  children: PropTypes.node,
 
   /**
-   * Accordion heading node.
+   * Optional class name.
    */
-  heading: PropTypes.node,
+  className: PropTypes.string,
 
   /**
    * Optional accordion count.
@@ -55,14 +55,14 @@ FilterPanelAccordion.propTypes = {
   countLabel: PropTypes.func,
 
   /**
-   * Optional class name.
+   * Accordion heading node.
    */
-  className: PropTypes.string,
+  heading: PropTypes.node,
 
   /**
-   * Filter accordion content.
+   * Accordion `title` attribute.
    */
-  children: PropTypes.node,
+  title: PropTypes.string,
 };
 
 FilterPanelAccordion.defaultProps = {

@@ -177,25 +177,6 @@ export const buttonType = PropTypes.shape({
 });
 
 TearsheetSmall.propTypes = {
-  /** @type {Node} The root node for rendering the modal */
-  rootNode: isNode() ? PropTypes.instanceOf(Node) : PropTypes.any,
-
-  /** Specify whether the content's padding is flush */
-  flush: PropTypes.bool,
-
-  /** @type {boolean} Focus trap. */
-  focusTrap: PropTypes.bool,
-
-  /** @type {string} The view title. */
-  heading: PropTypes.string,
-
-  /** @type {element|Function|string} The element, function, or string for the description. */
-  description: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.func,
-    PropTypes.string,
-  ]),
-
   /** @type {func|string|element} The function|string|element to render your content. */
   body: PropTypes.oneOfType([
     PropTypes.string,
@@ -206,14 +187,33 @@ TearsheetSmall.propTypes = {
   /** Provide the content for the `TearsheetSmall` */
   children: PropTypes.element,
 
-  /** @type {object<object>} An object list of primary button props. */
-  primaryButton: buttonType.isRequired,
-
-  /** @type {object<object>} An object list of secondary button props. */
-  secondaryButton: buttonType.isRequired,
+  /** @type {string} Extra classes to add. */
+  className: PropTypes.string,
 
   /** @type {object<object>} An object list of close button props. */
   closeButton: buttonType.isRequired,
+
+  /** @type {element|Function|string} The element, function, or string for the description. */
+  description: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.func,
+    PropTypes.string,
+  ]),
+
+  /** Specify whether the content's padding is flush */
+  flush: PropTypes.bool,
+
+  /** @type {boolean} Focus trap. */
+  focusTrap: PropTypes.bool,
+
+  /** @type {string} The view title. */
+  heading: PropTypes.string,
+
+  /** @type {boolean} The open state. */
+  isOpen: PropTypes.bool,
+
+  /** @type {object} Labels for the TearsheetSmall buttons */
+  labels: defaultLabels.propType,
 
   /** @type {bool} The toggle to determine whether or not to show the loading. */
   loading: PropTypes.bool,
@@ -221,14 +221,14 @@ TearsheetSmall.propTypes = {
   /** @type {string} The message to be displayed during loading. */
   loadingMessage: PropTypes.string,
 
-  /** @type {string} Extra classes to add. */
-  className: PropTypes.string,
+  /** @type {object<object>} An object list of primary button props. */
+  primaryButton: buttonType.isRequired,
 
-  /** @type {boolean} The open state. */
-  isOpen: PropTypes.bool,
+  /** @type {Node} The root node for rendering the modal */
+  rootNode: isNode() ? PropTypes.instanceOf(Node) : PropTypes.any,
 
-  /** @type {object} Labels for the TearsheetSmall buttons */
-  labels: defaultLabels.propType,
+  /** @type {object<object>} An object list of secondary button props. */
+  secondaryButton: buttonType.isRequired,
 
   /** @type {boolean} Stop event propagation for events that can bubble. */
   stopPropagation: PropTypes.bool,

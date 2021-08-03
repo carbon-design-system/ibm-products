@@ -1,6 +1,6 @@
 /**
  * @file Filter panel component.
- * @copyright IBM Security 2020
+ * @copyright IBM Security 2020, 2021
  */
 
 import React from 'react';
@@ -30,11 +30,6 @@ const FilterPanel = (props) => {
 
 FilterPanel.propTypes = {
   /**
-   * Optional title for the filter panel.
-   */
-  title: PropTypes.node,
-
-  /**
    * Filter panel content.
    */
   children: PropTypes.node,
@@ -48,6 +43,11 @@ FilterPanel.propTypes = {
    * (Deprecated) filter data object.
    */
   filterData: deprecatedProp('children', PropTypes.object),
+
+  /**
+   * Optional title for the filter panel.
+   */
+  title: PropTypes.node,
 };
 
 FilterPanel.defaultProps = {

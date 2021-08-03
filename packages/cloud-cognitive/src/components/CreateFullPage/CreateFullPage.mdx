@@ -1,6 +1,5 @@
-import { Story, Props, Source, Preview } from '@storybook/addon-docs';
-import { pkg } from '../../settings';
-import { getStorybookSlug } from '../../../config';
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import { getStoryId } from '../../global/js/utils/story-helper';
 import { CreateFullPage } from '.';
 
 # CreateFullPage
@@ -19,10 +18,10 @@ This component is an example
 
 Here it is in use.
 
-<Preview>
-  <Story id={getStorybookSlug(pkg, CreateFullPage.displayName, 'boxed-set')} />
-</Preview>
+<Canvas>
+  <Story id={getStoryId(CreateFullPage.displayName, 'boxed-set')} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />

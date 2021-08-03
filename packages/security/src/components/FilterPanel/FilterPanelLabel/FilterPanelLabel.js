@@ -1,6 +1,6 @@
 /**
  * @file Filter panel label component.
- * @copyright IBM Security 2020
+ * @copyright IBM Security 2020, 2021
  */
 
 import React from 'react';
@@ -41,24 +41,24 @@ FilterPanelLabel.propTypes = {
   children: PropTypes.node,
 
   /**
-   * Label count.
-   */
-  count: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-
-  /**
-   * Function returning a translated text labeling the count for accessibility.
-   */
-  countLabel: PropTypes.func,
-
-  /**
    * Optional class name.
    */
   className: PropTypes.string,
 
   /**
+   * Label count.
+   */
+  count: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+
+  /**
    * Optional class name for the count.
    */
   countClassName: PropTypes.string,
+
+  /**
+   * Function returning a translated text labeling the count for accessibility.
+   */
+  countLabel: PropTypes.func,
 
   /**
    * The `title` attribute that is applied to the label node.

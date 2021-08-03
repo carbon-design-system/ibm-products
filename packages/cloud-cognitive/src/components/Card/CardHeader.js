@@ -16,7 +16,6 @@ export let CardHeader = ({
   caption,
   hasActions,
   label,
-  productive,
   title,
   titleSize,
 }) => {
@@ -24,7 +23,7 @@ export let CardHeader = ({
   const headerClass = `${blockClass}__header`;
   const headerClasses = cx(headerClass, {
     [`${headerClass}-label-only`]: label && !title && !caption,
-    [`${headerClass}-has-label`]: label && productive,
+    [`${headerClass}-has-label`]: !!label,
     [`${blockClass}__title-lg`]: titleSize === 'large',
   });
 
@@ -52,13 +51,12 @@ CardHeader.propTypes = {
   caption: PropTypes.string,
   hasActions: PropTypes.bool,
   label: PropTypes.string,
-  productive: PropTypes.bool,
   title: PropTypes.string,
   titleSize: PropTypes.oneOf(['default', 'large']),
 };
 
 CardHeader.defaultProps = {
-  productive: false,
+  hasActions: false,
   titleSize: 'default',
 };
 

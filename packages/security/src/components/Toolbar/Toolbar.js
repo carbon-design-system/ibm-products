@@ -31,7 +31,7 @@ export const namespace = getComponentNamespace('toolbar');
 
 /**
  * Toolbar component.
- * @param {object.<string, *>} props Toolbar props.
+ * @param {object.<string, *>} htmlContent Toolbar props.
  * @returns {Toolbar} Toolbar instance.
  */
 export default class Toolbar extends Component {
@@ -168,13 +168,17 @@ export default class Toolbar extends Component {
                 const hasIcon = icon !== undefined;
 
                 return children ? (
-                  <NavList key={navigationItemId} title={navigationItemTitle}>
+                  <NavList
+                    renderIcon={hasIcon}
+                    icon={icon}
+                    key={navigationItemId}
+                    navigationItemTitle={navigationItemTitle}
+                    title={navigationItemTitle}>
                     {children.map(
                       ({
                         href: navigationListItemHref,
                         element: navigationListItemElement,
                         content,
-                        icon,
                         id: navigationListItemId,
                         title: navigationListItemTitle,
                         ...props
@@ -188,13 +192,6 @@ export default class Toolbar extends Component {
                           link={content === undefined}
                           handleItemSelect={() => this.toggleContent(content)}
                           {...props}>
-                          {hasIcon && (
-                            <img
-                              alt={navigationListItemTitle}
-                              className={`${namespace}__nav__item__icon`}
-                              src={icon}
-                            />
-                          )}
                           {navigationListItemTitle}
                         </NavItem>
                       )
@@ -403,6 +400,9 @@ Toolbar.propTypes = {
     }),
   }).isRequired,
 
+  // eslint-disable-next-line react/no-unused-prop-types
+  menu: panel(),
+
   /** @type {Function} Toggle handler. */
   onToggle: PropTypes.func,
 
@@ -416,9 +416,6 @@ Toolbar.propTypes = {
   ),
 
   // eslint-disable-next-line react/no-unused-prop-types
-  menu: panel(),
-
-  // eslint-disable-next-line react/no-unused-prop-types
   settings: panel(),
 
   // eslint-disable-next-line react/no-unused-prop-types
@@ -426,10 +423,10 @@ Toolbar.propTypes = {
 };
 
 Toolbar.defaultProps = {
-  renderAddons: [],
   className: null,
-  onToggle: (isToggled) => isToggled,
   menu: [],
+  onToggle: (isToggled) => isToggled,
+  renderAddons: [],
   settings: [],
   support: [],
 };

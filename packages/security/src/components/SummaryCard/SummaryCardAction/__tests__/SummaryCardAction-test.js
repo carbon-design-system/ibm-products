@@ -19,7 +19,7 @@ describe('SummaryCardAction', () => {
         {/* This button is NOT interactive: */}
         <SummaryCardAction loading>test loading button</SummaryCardAction>
         {/* This button is interactive: */}
-        <button>test example button</button>
+        <button type="button">test example button</button>
       </div>
     );
 

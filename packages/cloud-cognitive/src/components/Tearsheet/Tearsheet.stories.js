@@ -22,26 +22,31 @@ import {
   TextInput,
 } from 'carbon-components-react';
 
-import { Tearsheet, TearsheetNarrow } from '.';
+import { Tearsheet, deprecatedProps } from './Tearsheet';
+import { TearsheetNarrow } from '.';
 import {
   actionsOptions,
   actionsLabels,
   actionsMapping,
 } from '../ActionSet/actions.js';
 
-import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, Tearsheet.displayName);
+import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 
 import styles from './_storybook-styles.scss';
 
 import mdx from './Tearsheet.mdx';
 
 export default {
-  title: `${storybookPrefix}/Tearsheets/${Tearsheet.displayName}`,
+  title: getStoryTitle(Tearsheet.displayName),
   component: Tearsheet,
   subcomponents: { TearsheetNarrow },
   parameters: { styles, docs: { page: mdx } },
   argTypes: {
+    ...getDeprecatedArgTypes(deprecatedProps),
     actions: {
       control: { type: 'select', labels: actionsLabels },
       options: actionsOptions,
@@ -93,7 +98,6 @@ export default {
     onClose: { control: { disable: true } },
     navigation: { control: { disable: true } },
     open: { control: { disable: true } },
-    preventCloseOnClickOutside: { table: { disable: true } },
   },
 };
 
@@ -103,7 +107,7 @@ const closeIconDescription = 'Close the tearsheet';
 
 const description =
   'This is a description for the tearsheet, providing an opportunity to \
-  describe the flow.';
+  describe the flow over a couple of lines in the header of the tearsheet.';
 
 const influencer = (
   <div className="tearsheet-stories__dummy-content-block">Influencer</div>
@@ -116,11 +120,22 @@ const mainContent = (
     <Form>
       <p>Main content</p>
       <FormGroup legendText="">
-        <TextInput id="tss-ft1" labelText="Enter an important value here" />
+        <TextInput
+          id="tss-ft1"
+          labelText="Enter an important value here"
+          style={
+            // stylelint-disable-next-line carbon/layout-token-use
+            { marginBottom: '1em' }
+          }
+        />
         <TextInput
           id="tss-ft2"
           light
           labelText="Here is a light entry field:"
+          style={
+            // stylelint-disable-next-line carbon/layout-token-use
+            { marginBottom: '1em' }
+          }
         />
       </FormGroup>
     </Form>
@@ -272,70 +287,75 @@ const StackedTemplate = ({ actions, ...args }) => {
 };
 
 // Stories
-export const tearsheet = Template.bind({});
-tearsheet.storyName = 'Tearsheet';
-tearsheet.args = {
-  closeIconDescription,
-  description,
-  onClose: action('onClose called'),
-  title,
-  actions: 6,
-};
+export const tearsheet = prepareStory(Template, {
+  storyName: 'Tearsheet',
+  args: {
+    closeIconDescription,
+    description,
+    onClose: action('onClose called'),
+    title,
+    actions: 6,
+  },
+});
 
-export const withNavigation = Template.bind({});
-withNavigation.storyName = 'Tearsheet with navigation';
-withNavigation.args = {
-  closeIconDescription,
-  description,
-  label,
-  navigation: tabs,
-  onClose: action('onClose called'),
-  title,
-  actions: 6,
-};
+export const withNavigation = prepareStory(Template, {
+  storyName: 'Tearsheet with navigation',
+  args: {
+    closeIconDescription,
+    description,
+    label,
+    navigation: tabs,
+    onClose: action('onClose called'),
+    title,
+    actions: 6,
+  },
+});
 
-export const withInfluencer = Template.bind({});
-withInfluencer.storyName = 'Tearsheet with influencer';
-withInfluencer.args = {
-  closeIconDescription,
-  description,
-  influencer,
-  influencerPosition: 'left',
-  influencerWidth: 'narrow',
-  onClose: action('onClose called'),
-  title,
-  verticalPosition: 'normal',
-  actions: 6,
-};
+export const withInfluencer = prepareStory(Template, {
+  storyName: 'Tearsheet with influencer',
+  args: {
+    closeIconDescription,
+    description,
+    influencer,
+    influencerPosition: 'left',
+    influencerWidth: 'narrow',
+    onClose: action('onClose called'),
+    title,
+    verticalPosition: 'normal',
+    actions: 6,
+  },
+});
 
-export const fullyLoaded = Template.bind({});
-fullyLoaded.storyName = 'Tearsheet with all header items and influencer';
-fullyLoaded.args = {
-  closeIconDescription,
-  description,
-  hasCloseIcon: true,
-  headerActions: 2,
-  influencer,
-  influencerPosition: 'left',
-  influencerWidth: 'narrow',
-  label,
-  navigation: tabs,
-  onClose: action('onClose called'),
-  title,
-  verticalPosition: 'normal',
-  actions: 0,
-};
+export const fullyLoaded = prepareStory(Template, {
+  storyName: 'Tearsheet with all header items and influencer',
+  args: {
+    closeIconDescription,
+    description,
+    hasCloseIcon: true,
+    headerActions: 2,
+    influencer,
+    influencerPosition: 'left',
+    influencerWidth: 'narrow',
+    label,
+    navigation: tabs,
+    onClose: action('onClose called'),
+    title,
+    verticalPosition: 'normal',
+    actions: 0,
+  },
+});
 
 // eslint-disable-next-line react/prop-types
-export const stacked = StackedTemplate.bind({});
-stacked.storyName = 'Stacking tearsheets';
-stacked.args = {
-  headerActions: 2,
-  closeIconDescription,
-  description,
-  height: 'lower',
-  influencer,
-  label,
-  preventCloseOnClickOutside: true,
-  actions: 6,
-};
+export const stacked = prepareStory(StackedTemplate, {
+  storyName: 'Stacking tearsheets',
+  args: {
+    headerActions: 2,
+    closeIconDescription,
+    description,
+    height: 'lower',
+    influencer,
+    label,
+    preventCloseOnClickOutside: true,
+    actions: 6,
+  },
+});

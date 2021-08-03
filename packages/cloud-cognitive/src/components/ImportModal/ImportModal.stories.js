@@ -9,14 +9,15 @@ import React, { useState } from 'react';
 import { Button } from 'carbon-components-react';
 import { action } from '@storybook/addon-actions';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { ImportModal } from '.';
 import mdx from './ImportModal.mdx';
-const storybookPrefix = getStorybookPrefix(pkg, ImportModal.displayName);
 
 export default {
-  title: `${storybookPrefix}/${ImportModal.displayName}`,
+  title: getStoryTitle(ImportModal.displayName),
   component: ImportModal,
   parameters: {
     styles,
@@ -66,7 +67,8 @@ const TemplateWithState = (args) => {
   );
 };
 
-export const Standard = TemplateWithState.bind({});
-Standard.args = {
-  ...defaultProps,
-};
+export const Standard = prepareStory(TemplateWithState, {
+  args: {
+    ...defaultProps,
+  },
+});

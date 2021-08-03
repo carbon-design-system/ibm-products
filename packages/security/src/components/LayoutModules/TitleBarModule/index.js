@@ -41,17 +41,17 @@ const TitleBarModule = ({ children, element, subsection, title, ...other }) => (
 );
 
 TitleBarModule.propTypes = {
-  /** Provide the title of the `TitleBarModule` */
-  title: node.isRequired,
-
   /** Provide the items for the `TitleBarModule` */
   children: node,
+
+  /** Specify the base element to use to build the title */
+  element: elementType,
 
   /** Specify whether a subsection should be used */
   subsection: bool,
 
-  /** Specify the base element to use to build the title */
-  element: elementType,
+  /** Provide the title of the `TitleBarModule` */
+  title: node.isRequired,
 };
 
 TitleBarModule.defaultProps = {

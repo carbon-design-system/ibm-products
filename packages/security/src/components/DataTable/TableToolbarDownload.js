@@ -54,18 +54,8 @@ const TableToolbarDownload = ({ headers, rows, title, filename, label }) => {
 };
 
 TableToolbarDownload.propTypes = {
-  /**
-   * @type {object.<object, *>}
-   * The `rows` prop is where you provide us with a list of all the rows that
-   * you want to render in the table. The only hard requirement is that this
-   * is an array of objects, and that each object has a unique `id` field
-   * available on it.
-   */
-  rows: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  /** @type {string} the filename used for the generated CSV file */
+  filename: PropTypes.string,
 
   /**
    * @type {object.<object, *>}
@@ -81,14 +71,24 @@ TableToolbarDownload.propTypes = {
     })
   ).isRequired,
 
-  /** @type {string} the title used for the generated CSV table */
-  title: PropTypes.string,
-
-  /** @type {string} the filename used for the generated CSV file */
-  filename: PropTypes.string,
-
   /** @type {string} the aria-label for the button */
   label: PropTypes.string,
+
+  /**
+   * @type {object.<object, *>}
+   * The `rows` prop is where you provide us with a list of all the rows that
+   * you want to render in the table. The only hard requirement is that this
+   * is an array of objects, and that each object has a unique `id` field
+   * available on it.
+   */
+  rows: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+
+  /** @type {string} the title used for the generated CSV table */
+  title: PropTypes.string,
 };
 
 TableToolbarDownload.defaultProps = {

@@ -83,14 +83,14 @@ const propTypes = {
 TypeLayout.propTypes = {
   ...propTypes,
 
-  /** Specify the size of the type layout, from a list of available sizes */
-  size: oneOf(['xs', 'sm', 'md', 'lg']),
-
   /** Specify if the type layout has a border */
   border: bool,
 
   /** Deprecated in favor of `border` */
   bordered: deprecatedProp('border', bool),
+
+  /** Specify the size of the type layout, from a list of available sizes */
+  size: oneOf(['xs', 'sm', 'md', 'lg']),
 };
 
 const defaultProps = {
@@ -101,9 +101,9 @@ const defaultProps = {
 TypeLayout.defaultProps = {
   ...defaultProps,
 
-  size: 'md',
   border: false,
   bordered: null,
+  size: 'md',
 };
 
 TypeLayoutBody.propTypes = propTypes;

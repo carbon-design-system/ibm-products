@@ -48,6 +48,7 @@ const generateApplications = (array) =>
 const applicationsToGenerate = [
   {
     title: 'Section 1',
+    icon,
     children: generateApplications([
       { title: 'Applications' },
       { title: 'Plugins' },

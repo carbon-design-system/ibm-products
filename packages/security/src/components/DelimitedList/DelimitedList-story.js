@@ -10,7 +10,7 @@ import { storiesOf } from '@storybook/react';
 
 import React from 'react';
 
-import { info, security } from '../../../.storybook';
+import { components, info } from '../../../.storybook';
 
 import { DelimitedList } from '../..';
 
@@ -25,7 +25,7 @@ const props = () => ({
   style: { width: breakpoints.sm.width },
 });
 
-storiesOf(security('DelimitedList'), module).add(
+storiesOf(components('DelimitedList'), module).add(
   'Default',
   () => <DelimitedList {...props()} />,
 

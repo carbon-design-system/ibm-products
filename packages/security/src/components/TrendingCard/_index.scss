@@ -17,7 +17,7 @@
 @import '../Component/mixins';
 
 @include security--component($name: trending-card) {
-  @include carbon--motion($name: standard, $mode: productive);
+  @include carbon--motion($mode: productive, $name: standard);
 
   display: block;
   min-width: carbon--mini-units($count: 24);

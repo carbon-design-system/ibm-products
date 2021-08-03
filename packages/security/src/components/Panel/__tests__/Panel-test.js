@@ -16,8 +16,6 @@ import {
   PanelController,
 } from '../../..';
 
-import { namespace } from '../PanelContainer';
-
 describe('Panel', () => {
   let panelActive;
 

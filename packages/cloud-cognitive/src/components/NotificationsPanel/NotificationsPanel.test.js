@@ -187,10 +187,10 @@ describe('Notifications', () => {
   it('adds additional properties to the containing node', () => {
     const { container } = renderNotifications({
       data: [],
-      'data-testid': dataTestId,
+      'data-test-id': dataTestId,
     });
     expect(
-      container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
+      container.querySelector(`.${blockClass}[data-test-id="${dataTestId}"]`)
     ).toBeInTheDocument();
   });
 

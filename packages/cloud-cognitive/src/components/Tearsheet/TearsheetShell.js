@@ -196,7 +196,7 @@ export const TearsheetShell = React.forwardRef(
               })}
               iconDescription={closeIconDescription}>
               <Wrap className={`${bc}__header-content`}>
-                <Wrap>
+                <Wrap className={`${bc}__header-fields`}>
                   {/* we create the label and title here instead of passing them
                       as modal header props so we can wrap them in layout divs */}
                   <Wrap element="h2" className={`${bcModalHeader}__label`}>
@@ -264,6 +264,20 @@ export const TearsheetShell = React.forwardRef(
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
 TearsheetShell.displayName = componentName;
+
+export const deprecatedProps = {
+  /**
+   * **Deprecated**
+   *
+   * Prevent the tearsheet from automatically closing (triggering onClose, if
+   * provided, which can be cancelled by returning 'false') if the user clicks
+   * outside it.
+   */
+  preventCloseOnClickOutside: deprecateProp(
+    PropTypes.bool,
+    'The tearsheet will close automatically if the user clicks outside it if and only if the tearsheet is passive (no navigation actions)'
+  ),
+};
 
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
@@ -387,16 +401,6 @@ TearsheetShell.propTypes = {
   open: PropTypes.bool,
 
   /**
-   * Prevent the tearsheet from automatically closing (triggering onClose, if
-   * provided, which can be cancelled by returning 'false') if the user clicks
-   * outside it.
-   */
-  preventCloseOnClickOutside: deprecateProp(
-    PropTypes.bool,
-    'The tearsheet will close automatically if the user clicks outside it if and only if the tearsheet is passive (no navigation actions)'
-  ),
-
-  /**
    * Specifies the width of the tearsheet, 'narrow' or 'wide'.
    */
   size: PropTypes.oneOf(['narrow', 'wide']).isRequired,
@@ -414,4 +418,5 @@ TearsheetShell.propTypes = {
    * to allow an action bar navigation or breadcrumbs to also show through.
    */
   verticalPosition: PropTypes.oneOf(['normal', 'lower']),
+  ...deprecatedProps,
 };

@@ -126,23 +126,23 @@ const FilterSubcategory = ({
 };
 
 FilterSubcategory.propTypes = {
-  /** @type {string} Label for truncated filters list to expand */
-  filtersExpandLabel: PropTypes.string,
+  /** @type {FilterData}  Filter data to used to render panel */
+  filterData: filterDataPropTypes.isRequired,
 
   /** @type {string} Label for expanded filters list to collapse */
   filtersCollapseLabel: PropTypes.string,
+
+  /** @type {string} Label for truncated filters list to expand */
+  filtersExpandLabel: PropTypes.string,
+
+  /** @type {object} Labels for filter panel and search */
+  labels: defaultLabels.propType,
 
   /** @type {(filter: Filter) => {}} Callback function when any filter is toggled */
   onChange: PropTypes.func,
 
   /** @type {FilterSubcategory} Subcategory to render */
   subcategory: filterSubcategoryPropTypes.isRequired,
-
-  /** @type {FilterData}  Filter data to used to render panel */
-  filterData: filterDataPropTypes.isRequired,
-
-  /** @type {object} Labels for filter panel and search */
-  labels: defaultLabels.propType,
 };
 
 FilterSubcategory.defaultProps = {

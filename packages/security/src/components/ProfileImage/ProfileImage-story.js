@@ -8,7 +8,7 @@ import { storiesOf } from '@storybook/react';
 
 import React from 'react';
 
-import { security } from '../../../.storybook';
+import { components } from '../../../.storybook';
 
 import { ProfileImage } from '../..';
 
@@ -19,7 +19,7 @@ const profileImageProps = () => ({
   large: boolean('Large (large)', large),
 });
 
-storiesOf(security('ProfileImage'), module).add('default', () => (
+storiesOf(components('ProfileImage'), module).add('default', () => (
   <ProfileImage
     {...profileImageProps()}
     profile={object('Profile (profile)', profile)}

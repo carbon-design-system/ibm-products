@@ -102,6 +102,9 @@ TagWall.propTypes = {
   /** @type {boolean} Determines whether or not tag management is enabled. */
   disable: bool,
 
+  /** @type {Function} Function that converts object to string. */
+  itemToString: func,
+
   /** @type {Array.<object.<string, boolean>>} List of tags to be consumed. */
   items: arrayOf(
     shape({
@@ -111,9 +114,6 @@ TagWall.propTypes = {
       props: object,
     })
   ).isRequired,
-
-  /** @type {Function} Function that converts object to string. */
-  itemToString: func,
 
   /** @type {string} Description label. */
   label: string,

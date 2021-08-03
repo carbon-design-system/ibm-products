@@ -1,7 +1,7 @@
-import { Story, Props, Preview } from '@storybook/addon-docs';
-import { pkg } from '../../../settings';
-import { getStorybookSlug } from '../../../../config';
+import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
+import { getStoryId } from '../../../global/js/utils/story-helper';
 import { ErrorEmptyState } from '.';
+// cspell:words emptystates
 
 # Error Empty state
 
@@ -18,82 +18,44 @@ guidelines and documentation please refer to the links above.
 
 ### Default Error Empty state
 
-<Preview>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      ErrorEmptyState.displayName,
-      'default',
-      'emptystates'
-    )}
-  />
-</Preview>
+<Canvas>
+  <Story id={getStoryId(ErrorEmptyState.displayName, 'default')} />
+</Canvas>
 
 ### Error Empty state with dark themed illustration
 
-<Preview>
+<Canvas>
   <Story
-    id={getStorybookSlug(
-      pkg,
-      ErrorEmptyState.displayName,
-      'with-dark-mode-illustration',
-      'emptystates'
-    )}
+    id={getStoryId(ErrorEmptyState.displayName, 'with-dark-mode-illustration')}
   />
-</Preview>
+</Canvas>
 
 ### Error Empty state with action
 
-<Preview>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      ErrorEmptyState.displayName,
-      'with-action',
-      'emptystates'
-    )}
-  />
-</Preview>
+<Canvas>
+  <Story id={getStoryId(ErrorEmptyState.displayName, 'with-action')} />
+</Canvas>
 
 ### Error Empty state with action (Button with icon)
 
-<Preview>
+<Canvas>
   <Story
-    id={getStorybookSlug(
-      pkg,
-      ErrorEmptyState.displayName,
-      'with-action-icon-button',
-      'emptystates'
-    )}
+    id={getStoryId(ErrorEmptyState.displayName, 'with-action-icon-button')}
   />
-</Preview>
+</Canvas>
 
 ### Error Empty state with link
 
-<Preview>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      ErrorEmptyState.displayName,
-      'with-link',
-      'emptystates'
-    )}
-  />
-</Preview>
+<Canvas>
+  <Story id={getStoryId(ErrorEmptyState.displayName, 'with-link')} />
+</Canvas>
 
 ### Error Empty state with action and link
 
-<Preview>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      ErrorEmptyState.displayName,
-      'with-action-and-link',
-      'emptystates'
-    )}
-  />
-</Preview>
+<Canvas>
+  <Story id={getStoryId(ErrorEmptyState.displayName, 'with-action-and-link')} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />

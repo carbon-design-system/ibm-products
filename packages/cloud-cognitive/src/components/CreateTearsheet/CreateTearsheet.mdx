@@ -1,6 +1,5 @@
-import { Story, Props, Preview } from '@storybook/addon-docs';
-import { pkg } from '../../settings';
-import { getStorybookSlug } from '../../../config';
+import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
+import { getStoryId } from '../../global/js/utils/story-helper';
 import { CreateTearsheet } from '.';
 import createTearsheetGif from './storybook_assets/create_tearsheet.gif';
 import createTearsheetAnatomy from './storybook_assets/create_tearsheet_anatomy.jpg';
@@ -58,16 +57,10 @@ Tearsheet create flow example:
 
 ## Example usage
 
-<Preview>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      CreateTearsheet.displayName,
-      'multi-step-tearsheet'
-    )}
-  />
-</Preview>
+<Canvas>
+  <Story id={getStoryId(CreateTearsheet.displayName, 'multi-step-tearsheet')} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />

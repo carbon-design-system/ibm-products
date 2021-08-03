@@ -36,7 +36,7 @@ const componentName = 'TearsheetNarrow';
  * that keeps users in-context and focused by bringing actionable content front
  * and center while revealing more of the UI behind it.
  *
- * A narrow earsheet comprises 3 zones: a heading area including a title, the
+ * A narrow tearsheet comprises 3 zones: a heading area including a title, the
  * main content area, and a set of action buttons.
  */
 export let TearsheetNarrow = React.forwardRef((props, ref) => (
@@ -49,6 +49,20 @@ TearsheetNarrow = pkg.checkComponentEnabled(TearsheetNarrow, componentName);
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
 TearsheetNarrow.displayName = componentName;
+
+export const deprecatedProps = {
+  /**
+   * **Deprecated**
+   *
+   * Prevent the tearsheet from automatically closing (triggering onClose, if
+   * provided, which can be cancelled by returning 'false') if the user clicks
+   * outside it.
+   */
+  preventCloseOnClickOutside: deprecateProp(
+    PropTypes.bool,
+    'The tearsheet will close automatically if the user clicks outside it if and only if the tearsheet is passive (no navigation actions)'
+  ),
+};
 
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
@@ -132,16 +146,6 @@ TearsheetNarrow.propTypes = {
   open: PropTypes.bool,
 
   /**
-   * Prevent the tearsheet from automatically closing (triggering onClose, if
-   * provided, which can be cancelled by returning 'false') if the user clicks
-   * outside it.
-   */
-  preventCloseOnClickOutside: deprecateProp(
-    PropTypes.bool,
-    'The tearsheet will close automatically if the user clicks outside it if and only if the tearsheet is passive (no navigation actions)'
-  ),
-
-  /**
    * The main title of the tearsheet, displayed in the header area.
    */
   title: PropTypes.node,
@@ -154,6 +158,7 @@ TearsheetNarrow.propTypes = {
    * to allow an action bar navigation or breadcrumbs to also show through.
    */
   verticalPosition: PropTypes.oneOf(['normal', 'lower']),
+  ...deprecatedProps,
 };
 
 // Default values for component props. Default values are not required for

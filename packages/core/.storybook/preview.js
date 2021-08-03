@@ -5,9 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// cspell:words unuse
+
 import { withCarbonTheme } from '@carbon/storybook-addon-theme/react';
 import { ArgsTable, Canvas, Story, Source } from '@storybook/addon-docs/blocks';
-import { withInfo } from '@storybook/addon-info';
 import LinkTo from '@storybook/addon-links/react';
 
 import { Column, Row } from 'carbon-components-react';
@@ -34,7 +35,6 @@ const Style = ({ children, styles }) => {
 };
 
 const decorators = [
-  withInfo,
   (storyFn, { parameters: { styles } }) => {
     const story = storyFn();
 
@@ -114,7 +114,8 @@ const parameters = {
       } else {
         // from storybook doc example https://storybook.js.org/docs/react/writing-stories/naming-components-and-hierarchy
         return a[1].kind === b[1].kind
-          ? 0
+          ? (a[1]?.parameters?.ccsSettings?.sequence || 0) -
+              (b[1]?.parameters?.ccsSettings?.sequence || 0)
           : a[1].id.localeCompare(b[1].id, undefined, { numeric: true });
       }
     },

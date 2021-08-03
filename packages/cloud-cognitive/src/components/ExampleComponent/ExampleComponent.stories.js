@@ -7,18 +7,18 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 
 import { ExampleComponent } from '.';
 import mdx from './ExampleComponent.mdx';
 
 import styles from './_storybook-styles.scss';
 
-const storybookPrefix = getStorybookPrefix(pkg, ExampleComponent.displayName);
-
 export default {
-  title: `${storybookPrefix}/${ExampleComponent.displayName}`,
+  title: getStoryTitle(ExampleComponent.displayName),
   component: ExampleComponent,
   argTypes: {
     borderColor: { control: 'color' },
@@ -43,12 +43,14 @@ const Template = (args) => {
   );
 };
 
-export const exampleComponent = Template.bind({});
-exampleComponent.args = {};
+export const exampleComponent = prepareStory(Template, {
+  args: {},
+});
 
-export const boxedSet = Template.bind({});
-boxedSet.args = {
-  ...exampleComponent.args,
-  borderColor: '#141414',
-  boxedBorder: true,
-};
+export const boxedSet = prepareStory(Template, {
+  args: {
+    ...exampleComponent.args,
+    borderColor: '#141414',
+    boxedBorder: true,
+  },
+});

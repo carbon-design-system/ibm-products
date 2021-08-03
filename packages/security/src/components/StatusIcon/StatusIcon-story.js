@@ -9,7 +9,7 @@ import { storiesOf } from '@storybook/react';
 import { compose, getDisplayName, lifecycle } from 'recompose';
 import React from 'react';
 
-import { security } from '../../../.storybook';
+import { components } from '../../../.storybook';
 
 import { StatusIcon } from '../..';
 import { SIZE, STATUS } from './StatusIcon';
@@ -22,7 +22,7 @@ const storyProps = () => ({
 
 const status = STATUS[0];
 
-storiesOf(security('StatusIcon'), module)
+storiesOf(components('StatusIcon'), module)
   .add('Default', () => <StatusIcon {...storyProps()} />)
   .add('Status', () => (
     <StatusIcon

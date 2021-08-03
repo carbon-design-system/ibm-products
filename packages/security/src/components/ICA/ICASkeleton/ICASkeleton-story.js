@@ -7,8 +7,8 @@ import { storiesOf } from '@storybook/react';
 
 import React from 'react';
 
-import { security } from '../../../../.storybook';
+import { components } from '../../../../.storybook';
 
 import { ICASkeleton } from '../../..';
 
-storiesOf(security('ICA'), module).add('Skeleton', () => <ICASkeleton />);
+storiesOf(components('ICA'), module).add('Skeleton', () => <ICASkeleton />);

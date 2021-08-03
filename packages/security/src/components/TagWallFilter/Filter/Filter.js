@@ -240,12 +240,23 @@ Filter.propTypes = {
   /** @type {string} Extra classes to add. */
   className: PropTypes.string,
 
-  /** @type {arrayOf} Collection of data structure. */
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  /** @type {Function} Provide a compare function that is used to determine the ordering of options. */
+  compareItems: PropTypes.func,
+
+  /** @type {bool} Handle the disabled of selected items. */
+  disabled: PropTypes.bool,
+
+  /** @type {string} tooltip label for clearing all selected items */
+  filterFieldClearAllTooltip: PropTypes.string,
+
+  /** @type {string} tooltip label for clearing a selected item */
+  filterFieldClearSelectionTooltip: PropTypes.string,
+
+  /** @type {func} Handle the filter of items. */
+  filterItems: PropTypes.func,
+
+  /** @type {string} Specify a custom id. */
+  id: PropTypes.string.isRequired,
 
   /** @type {arrayOf} Arbitrary items from their collection */
   initialSelectedItems: PropTypes.arrayOf(
@@ -253,14 +264,16 @@ Filter.propTypes = {
       id: PropTypes.string.isRequired,
     })
   ),
-  selectedItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    })
-  ),
 
   /** @type {func} Render a given item to a string label */
   itemToString: PropTypes.func,
+
+  /** @type {arrayOf} Collection of data structure. */
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 
   /** @type {string} Used for sorting the list of items */
   locale: PropTypes.string,
@@ -271,26 +284,14 @@ Filter.propTypes = {
   /** @type {string} Used as the textual representation */
   placeholder: PropTypes.string.isRequired,
 
-  /** @type {Function} Provide a compare function that is used to determine the ordering of options. */
-  compareItems: PropTypes.func,
+  selectedItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    })
+  ),
 
   /** @type {func} Handle the sort logic for selected versus un-selected items. */
   sortItems: PropTypes.func,
-
-  /** @type {string} Specify a custom id. */
-  id: PropTypes.string.isRequired,
-
-  /** @type {func} Handle the filter of items. */
-  filterItems: PropTypes.func,
-
-  /** @type {bool} Handle the disabled of selected items. */
-  disabled: PropTypes.bool,
-
-  /** @type {string} tooltip label for clearing a selected item */
-  filterFieldClearSelectionTooltip: PropTypes.string,
-
-  /** @type {string} tooltip label for clearing all selected items */
-  filterFieldClearAllTooltip: PropTypes.string,
 };
 
 export default Filter;

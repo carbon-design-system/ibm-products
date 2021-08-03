@@ -1,247 +1,169 @@
+/**
+ * @file Tag wall filter test.
+ * @copyright IBM Security 2019, 2021
+ */
+
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import React from 'react';
-import { shallow, mount } from 'enzyme';
-import {
-  selectedItemsReducer,
-  availableItemsReducer,
-  withItemReducer,
-  FilterTagFragment,
-  noop,
-  TagWallFilter,
-  itemToString,
-} from '../TagWallFilter';
-import TagWall from '../../TagWall';
-import Filter from '../Filter';
 
-describe('TagWallFilter tests', () => {
-  const tearsheetProps = {
-    heading: 'TagWallFilter Heading',
-    description:
-      'What’s the secret to minced and ground doughnut? Always use small garlic.',
-    closeButton: {
-      onClick: jest.fn(),
-    },
-    secondaryButton: {
-      onClick: jest.fn(),
-    },
-    primaryButton: {
-      onClick: jest.fn(),
-    },
-  };
+import TagWallFilter, { noop, withItemReducer } from '../TagWallFilter';
 
-  it('should do nothing on noop', () => {
-    expect(noop()).toBeUndefined();
+const { fn } = jest;
+const { name } = TagWallFilter;
+
+describe(name, () => {
+  const getItem = (id) => ({
+    id,
+    label: `${name} ${id}`,
   });
-  describe('selectedItemsReducer', () => {
-    let initState;
-    beforeEach(() => {
-      initState = { items: [] };
-    });
-    it('should handle SELECT_ITEM', () => {
-      const state1 = selectedItemsReducer(initState, {
-        type: 'SELECT_ITEM',
-        item: { id: 'x', label: 'hallo' },
-      });
-      const state2 = selectedItemsReducer(state1, {
-        type: 'SELECT_ITEM',
-        item: { id: 'y', label: '!!!' },
-      });
-      expect(state1.items.length).toEqual(1);
-      expect(state2.items.length).toEqual(2);
-      expect(state1).toMatchSnapshot();
-      expect(state2).toMatchSnapshot();
-    });
-    it('should handle UNSELECT_ITEM', () => {
-      initState = selectedItemsReducer(initState, {
-        type: 'SELECT_ITEM',
-        item: { id: 'x', label: 'hallo' },
-      });
-      initState = selectedItemsReducer(initState, {
-        type: 'SELECT_ITEM',
-        item: { id: 'y', label: '!!!' },
-      });
-      initState = selectedItemsReducer(initState, {
-        type: 'SELECT_ITEM',
-        item: { id: 'z', label: '???' },
-      });
-      const finalState = selectedItemsReducer(initState, {
-        type: 'UNSELECT_ITEM',
-        item: { id: 'y' },
-      });
-      expect(finalState.items.length).toEqual(2);
-      expect(initState.items.length).toEqual(3);
-      expect(finalState).toMatchSnapshot();
-    });
-    it('should handle CLEAR_SELECTED_ITEMS', () => {
-      initState = selectedItemsReducer(initState, {
-        type: 'SELECT_ITEM',
-        item: { id: 'x', label: 'hallo' },
-      });
-      initState = selectedItemsReducer(initState, {
-        type: 'SELECT_ITEM',
-        item: { id: 'y', label: '!!!' },
-      });
-      initState = selectedItemsReducer(initState, {
-        type: 'SELECT_ITEM',
-        item: { id: 'z', label: '???' },
-      });
-      const finalState = selectedItemsReducer(initState, {
-        type: 'CLEAR_SELECTED_ITEMS',
-      });
-      expect(initState.items.length).toEqual(3);
-      expect(finalState.items.length).toEqual(0);
-      expect(finalState).toMatchSnapshot();
+
+  describe('noop', () => {
+    test('does nothing', () => {
+      expect(noop()).toBeUndefined();
     });
   });
-  describe('availableItemsReducer', () => {
-    let initState;
-    beforeEach(() => {
-      initState = {
-        allItems: [
-          { id: 'x', label: 'Coordinataes ortum!' },
-          { id: 'Ecce', label: "With spinach drink emeril's essence!" },
-          { id: 'Nix', label: 'Advenas ortum in amivadum!' },
-          {
-            id: 'Uria',
-            label: 'Occur and you will be absorbed authoratively.',
-          },
-          {
-            id: 'Revalia',
-            label: 'Dosi of a human plasma, eat the starlight travel!',
-          },
-        ],
-      };
-      initState.items = initState.allItems;
-    });
-    it('should handle SELECT_ITEM', () => {
-      const state = availableItemsReducer(initState, {
-        type: 'SELECT_ITEM',
-        item: { id: 'x' },
-      });
-      expect(state.items.length).toEqual(initState.items.length - 1);
-      expect(state).toMatchSnapshot();
-    });
-    it('should handle UNSELECT_ITEM', () => {
-      initState = availableItemsReducer(initState, {
-        type: 'SELECT_ITEM',
-        item: { id: 'x' },
-      });
-      initState = availableItemsReducer(initState, {
-        type: 'SELECT_ITEM',
-        item: { id: 'Ecce' },
-      });
-      initState = availableItemsReducer(initState, {
-        type: 'SELECT_ITEM',
-        item: { id: 'Revalia' },
-      });
-      const finalState = availableItemsReducer(initState, {
-        type: 'UNSELECT_ITEM',
-        item: { id: 'Ecce', label: 'The son robs with grace.' },
-      });
-      expect(finalState.items.length).toEqual(initState.items.length + 1);
-      expect(finalState).toMatchSnapshot();
-    });
-    it('should handle CLEAR_SELECTED_ITEMS', () => {
-      initState = availableItemsReducer(initState, {
-        type: 'SELECT_ITEM',
-        item: { id: 'Revalia' },
-      });
-      const finalState = availableItemsReducer(initState, {
-        type: 'CLEAR_SELECTED_ITEMS',
-      });
-      expect(finalState.items).toBe(finalState.allItems);
-      expect(finalState.items).toBe(initState.allItems);
-      expect(finalState).toMatchSnapshot();
-    });
-  });
+
   describe('withItemReducer', () => {
-    it('should infer allItems', () => {
-      const wrappedComponent = jest.fn(() => null);
-      const ComponentMock = withItemReducer(wrappedComponent);
-      const wrapper = shallow(
-        <ComponentMock
-          selectedItems={[{ id: 'x' }]}
-          availableItems={[{ id: 'y' }, { id: 'z' }]}
-        />
-      );
-      wrapper.render();
-      const { available: { allItems } = { allItems: [] } } =
-        wrappedComponent.mock.calls[0][0].itemState;
-      expect(allItems.length).toEqual(3);
-      expect(allItems).toContainEqual({ id: 'x' });
-      expect(allItems).toContainEqual({ id: 'y' });
-      expect(allItems).toContainEqual({ id: 'z' });
+    let state;
+
+    beforeEach(() => {
+      state = {
+        available: { items: [] },
+        selected: { items: [] },
+      };
+    });
+
+    function dispatch(type) {
+      state = withItemReducer(state, {
+        item: getItem('0'),
+        type,
+      });
+    }
+
+    describe('SELECT_ITEM', () => {
+      test('selects an item', () => {
+        dispatch('SELECT_ITEM');
+
+        expect(state.selected.items.length).toBe(1);
+        expect(state).toMatchSnapshot();
+      });
+    });
+
+    describe('UNSELECT_ITEM', () => {
+      test('unselects an item', () => {
+        dispatch('SELECT_ITEM');
+        dispatch('UNSELECT_ITEM');
+
+        const {
+          available: {
+            items: { length: available },
+          },
+          selected: {
+            items: { length: selected },
+          },
+        } = state;
+
+        expect(available).toBe(1);
+        expect(selected).toBe(0);
+
+        expect(state).toMatchSnapshot();
+      });
+    });
+
+    describe('CLEAR_SELECTED_ITEMS', () => {
+      test('clears selected items', () => {
+        function length() {
+          return state.selected.items.length;
+        }
+
+        dispatch('SELECT_ITEM');
+        dispatch('SELECT_ITEM');
+
+        expect(length()).toBe(2);
+
+        dispatch('CLEAR_SELECTED_ITEMS');
+
+        expect(length()).toBe(0);
+
+        expect(state).toMatchSnapshot();
+      });
+    });
+
+    test('infers all items', () => {
+      const available = getItem('0');
+      const selected = getItem('1');
+
+      const {
+        available: {
+          allItems,
+          items: { length: availableItems },
+        },
+        selected: {
+          items: { length: selectedItems },
+        },
+      } = withItemReducer({
+        available: { items: [available] },
+        selected: { items: [selected] },
+      });
+
+      expect(allItems.length).toBe(availableItems + selectedItems);
+
+      expect(allItems).toContainEqual(available);
+      expect(allItems).toContainEqual(selected);
     });
   });
-  describe('FilterTagFragment', () => {
-    it('should render the fragment', () => {
-      const onChangeMock = jest.fn();
-      const wrapper = mount(
-        <FilterTagFragment
-          id="test-id"
-          onChange={onChangeMock}
-          selectedItems={[{ id: 'y', label: 'Y' }]}
-          availableItems={[{ id: 'x', label: 'X' }]}
-          placeholder="placeholder"
-          itemToString={itemToString}
-          tearsheetProps={tearsheetProps}
-        />
-      );
 
-      const tagWallWrapper = wrapper.find(TagWall);
+  function Component(props) {
+    const button = () => ({ onClick: fn() });
 
-      expect(wrapper).toMatchSnapshot();
-      expect(tagWallWrapper).toMatchSnapshot();
-    });
-    it('should call the on change callback with the latest item state on change', () => {
-      const onChangeMock = jest.fn();
-      const wrapper = shallow(
-        <FilterTagFragment
-          id="test-id"
-          onChange={onChangeMock}
-          selectedItems={[{ id: 'y', label: 'Y' }]}
-          availableItems={[{ id: 'x', label: 'X' }]}
-          placeholder="placeholder"
-          itemToString={itemToString}
-          tearsheetProps={tearsheetProps}
-        />
-      );
+    return (
+      <TagWallFilter
+        availableItems={[getItem('0')]}
+        closeButton={button()}
+        heading={name}
+        primaryButton={button()}
+        secondaryButton={button()}
+        selectedItems={[getItem('1')]}
+        {...props}
+      />
+    );
+  }
 
-      const filterWrapper = wrapper
-        .first()
-        .shallow()
-        .first()
-        .shallow()
-        .find(Filter)
-        .first();
-      filterWrapper.prop('onChange')({
-        type: 'SELECT_ITEM',
-        item: { id: 'x' },
-      });
-      expect(wrapper.props()).toMatchSnapshot();
-      expect(onChangeMock).toHaveBeenCalled();
-      expect(onChangeMock).toMatchSnapshot();
-      onChangeMock.mockClear();
-      filterWrapper.prop('onChange')({
-        type: 'UNSELECT_ITEM',
-        item: { id: 'x' },
-      });
+  test('renders', () => {
+    render(<Component />);
 
-      expect(wrapper.props()).toMatchSnapshot();
-      expect(onChangeMock).toHaveBeenCalled();
-      expect(onChangeMock).toMatchSnapshot();
-    });
+    expect(document.body).toMatchSnapshot();
   });
-  describe('TagWallFilter', () => {
-    it('should mount the TagWallFilter component', () => {
-      const wrapper = mount(
-        <TagWallFilter
-          id="test-id"
-          selectedItems={[{ id: 'x', label: 'X' }]}
-          availableItems={[{ id: 'y', label: 'Y' }]}
-          {...tearsheetProps}
-        />
-      );
-      expect(wrapper).toMatchSnapshot();
-    });
+
+  test('calls `onChange` when items are selected and unselected', () => {
+    const availableItem = getItem('0');
+    const selectedItem = getItem('1');
+
+    const onChangeMock = fn();
+
+    render(
+      <Component
+        availableItems={[availableItem]}
+        onChange={onChangeMock}
+        selectedItems={[selectedItem]}
+      />
+    );
+
+    const { getByText } = screen;
+    const { click } = userEvent;
+
+    click(getByText(availableItem.label));
+
+    expect(onChangeMock).toHaveBeenCalled();
+    expect(onChangeMock).toMatchSnapshot();
+
+    onChangeMock.mockReset();
+
+    click(getByText(selectedItem.label).parentNode.querySelector('button'));
+
+    expect(onChangeMock).toHaveBeenCalled();
+    expect(onChangeMock).toMatchSnapshot();
   });
 });

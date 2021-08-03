@@ -5,16 +5,31 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 
 import { ProductiveCard } from '.';
 
 const { name } = ProductiveCard;
-const defaultProps = {};
 
 describe(name, () => {
-  test('should render', () => {
-    render(<ProductiveCard {...defaultProps} />);
+  it('renders', () => {
+    render(<ProductiveCard />);
+  });
+
+  it('applies className to the containing node', () => {
+    const { container } = render(<ProductiveCard className="test-class" />);
+    expect(container.firstChild).toHaveClass('test-class');
+  });
+
+  it('adds additional properties to the containing node', () => {
+    render(<ProductiveCard data-test-id="test-id" />);
+    screen.getByTestId('test-id');
+  });
+
+  it('forwards a ref to an appropriate node', () => {
+    const ref = React.createRef();
+    render(<ProductiveCard ref={ref} />);
+    expect(ref.current).not.toBeNull();
   });
 });

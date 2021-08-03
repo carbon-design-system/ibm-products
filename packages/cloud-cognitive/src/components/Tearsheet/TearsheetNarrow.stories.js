@@ -13,26 +13,32 @@ import { pkg } from '../../settings';
 
 import { Button, Form, FormGroup, TextInput } from 'carbon-components-react';
 
-import { Tearsheet, TearsheetNarrow } from '.';
+import { Tearsheet } from '.';
+import { TearsheetNarrow, deprecatedProps } from './TearsheetNarrow';
+
 import {
   actionsOptions,
   actionsLabels,
   actionsMapping,
 } from '../ActionSet/actions.js';
 
-import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, TearsheetNarrow.displayName);
+import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 
 import styles from './_storybook-styles.scss';
 
 import mdx from './Tearsheet.mdx';
 
 export default {
-  title: `${storybookPrefix}/Tearsheets/${TearsheetNarrow.displayName}`,
+  title: getStoryTitle(TearsheetNarrow.displayName),
   component: TearsheetNarrow,
   subcomponents: { Tearsheet },
   parameters: { styles, docs: { page: mdx } },
   argTypes: {
+    ...getDeprecatedArgTypes(deprecatedProps),
     actions: {
       control: { type: 'select', labels: actionsLabels },
       options: actionsOptions,
@@ -51,7 +57,6 @@ export default {
     title: { control: { type: 'text' } },
     onClose: { control: { disable: true } },
     open: { control: { disable: true } },
-    preventCloseOnClickOutside: { table: { disable: true } },
   },
 };
 
@@ -210,36 +215,39 @@ const StackedTemplate = ({ actions, ...args }) => {
 };
 
 // Stories
-export const tearsheetNarrow = Template.bind({});
-tearsheetNarrow.storyName = 'Narrow tearsheet';
-tearsheetNarrow.args = {
-  closeIconDescription,
-  description,
-  onClose: action('onClose called'),
-  title,
-  actions: 6,
-};
+export const tearsheetNarrow = prepareStory(Template, {
+  storyName: 'Narrow tearsheet',
+  args: {
+    closeIconDescription,
+    description,
+    onClose: action('onClose called'),
+    title,
+    actions: 6,
+  },
+});
 
-export const fullyLoaded = Template.bind({});
-fullyLoaded.storyName = 'Narrow tearsheet with all header items';
-fullyLoaded.args = {
-  closeIconDescription,
-  description,
-  hasCloseIcon: true,
-  label,
-  onClose: action('onClose called'),
-  title,
-  verticalPosition: 'normal',
-  actions: 0,
-};
+export const fullyLoaded = prepareStory(Template, {
+  storyName: 'Narrow tearsheet with all header items',
+  args: {
+    closeIconDescription,
+    description,
+    hasCloseIcon: true,
+    label,
+    onClose: action('onClose called'),
+    title,
+    verticalPosition: 'normal',
+    actions: 0,
+  },
+});
 
-export const stacked = StackedTemplate.bind({});
-stacked.storyName = 'Stacking narrow tearsheets';
-stacked.args = {
-  closeIconDescription,
-  description,
-  height: 'lower',
-  label,
-  preventCloseOnClickOutside: true,
-  actions: 6,
-};
+export const stacked = prepareStory(StackedTemplate, {
+  storyName: 'Stacking narrow tearsheets',
+  args: {
+    closeIconDescription,
+    description,
+    height: 'lower',
+    label,
+    preventCloseOnClickOutside: true,
+    actions: 6,
+  },
+});

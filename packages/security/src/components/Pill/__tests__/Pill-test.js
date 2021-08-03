@@ -51,7 +51,7 @@ describe('Pill', () => {
     const { getByText } = render(
       <div>
         <Pill value="127.0.0.1" type="IP" />
-        <button>test button</button>
+        <button type="button">test button</button>
       </div>
     );
     userEvent.tab();

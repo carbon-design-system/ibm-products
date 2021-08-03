@@ -7,12 +7,12 @@ import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 import React from 'react';
 
-import { security } from '../../../.storybook';
+import { components } from '../../../.storybook';
 import { Nav, NavItem, NavList } from '../..';
 
 const { name } = Nav;
 
-storiesOf(security(name), module).add(
+storiesOf(components(name), module).add(
   'Default',
   () => (
     <div style={{ width: '300px' }}>

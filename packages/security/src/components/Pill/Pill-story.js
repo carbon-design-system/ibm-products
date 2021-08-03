@@ -8,12 +8,12 @@ import { storiesOf } from '@storybook/react';
 
 import { text } from '@storybook/addon-knobs';
 
-import { security } from '../../../.storybook';
+import { components } from '../../../.storybook';
 import { carbonPrefix } from '../../globals/namespace';
 
 import Pill from './Pill';
 
-storiesOf(security('Pill'), module).add(`default`, () => (
+storiesOf(components('Pill'), module).add(`default`, () => (
   <div style={{ padding: '64px' }}>
     <Pill value={text('value', '127.0.0.1')} type={text('type', 'IP')} />
     <br />

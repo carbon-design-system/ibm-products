@@ -5,7 +5,7 @@
 
 import React from 'react';
 
-import { getDocsParameters, security } from '../../../.storybook';
+import { components, getDocsParameters } from '../../../.storybook';
 
 import {
   TypeLayout,
@@ -15,7 +15,7 @@ import {
 } from '../..';
 
 export default {
-  title: security(TypeLayout.name),
+  title: components(TypeLayout.name),
   component: TypeLayout,
   subcomponents: { TypeLayoutBody, TypeLayoutCell, TypeLayoutRow },
   argTypes: {

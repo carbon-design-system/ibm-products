@@ -125,35 +125,35 @@ const TruncatedList = ({
 };
 
 TruncatedList.propTypes = {
+  /** The type of list element to render. This could be a ul, ol, or a custom React component. (Optional) */
+  as: PropTypes.oneOfType([PropTypes.elementType, PropTypes.string]),
+
   /** Items to have in the list. */
   children: PropTypes.node,
 
   /** Optional list class name. */
   className: PropTypes.string,
 
-  /** Optional class name for expand button. */
-  expandButtonClassName: PropTypes.string,
-
-  /** The type of list element to render. This could be a ul, ol, or a custom React component. (Optional) */
-  as: PropTypes.oneOfType([PropTypes.elementType, PropTypes.string]),
-
-  /** Optional scroll gradient color. */
-  scrollGradientColor: PropTypes.string,
-
-  /** Function to compute the label for the expand toggle button. */
-  getExpandButtonLabel: PropTypes.func,
-
-  /** Number of items allowed in the list before the list is truncated. */
-  truncateThreshold: PropTypes.number,
-
   /** Number of items to display when the list is truncated and collapsed. */
   collapsedItemLimit: PropTypes.number,
+
+  /** Optional class name for expand button. */
+  expandButtonClassName: PropTypes.string,
 
   /**
    * Number of items to show when the list is truncated and expanded. All items are rendered when
    * the list is expanded, this prop is to limit the visual height of the list.
    */
   expandedItemLimit: PropTypes.number,
+
+  /** Function to compute the label for the expand toggle button. */
+  getExpandButtonLabel: PropTypes.func,
+
+  /** Optional scroll gradient color. */
+  scrollGradientColor: PropTypes.string,
+
+  /** Number of items allowed in the list before the list is truncated. */
+  truncateThreshold: PropTypes.number,
 };
 
 TruncatedList.defaultProps = {

@@ -1,6 +1,5 @@
-import { Story, Props, Preview } from '@storybook/addon-docs';
-import { pkg } from '../../settings';
-import { getStorybookSlug } from '../../../config';
+import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
+import { getStoryId } from '../../global/js/utils/story-helper';
 import { NotificationsPanel } from '.';
 
 # NotificationsPanel
@@ -18,12 +17,10 @@ and interact with them all in one place.
 
 See notification bell in global header above for interaction.
 
-<Preview>
-  <Story
-    id={getStorybookSlug(pkg, NotificationsPanel.displayName, 'default')}
-  />
-</Preview>
+<Canvas>
+  <Story id={getStoryId(NotificationsPanel.displayName, 'default')} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />

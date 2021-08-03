@@ -1,8 +1,7 @@
 <!-- `position:fixed` cause rendering issues, so do not render the modal -->
 
-import { Story, Props, Preview } from '@storybook/addon-docs';
-import { pkg } from '../../settings';
-import { getStorybookSlug } from '../../../config';
+import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
+import { getStoryId } from '../../global/js/utils/story-helper';
 import { ImportModal } from '.';
 
 # ImportModal
@@ -15,10 +14,10 @@ import { ImportModal } from '.';
 
 ## Overview
 
-<Preview>
-  <Story id={getStorybookSlug(pkg, ImportModal.displayName, 'standard')} />
-</Preview>
+<Canvas>
+  <Story id={getStoryId(ImportModal.displayName, 'standard')} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />

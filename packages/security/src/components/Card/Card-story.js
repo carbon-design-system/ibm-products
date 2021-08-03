@@ -9,7 +9,7 @@ import { storiesOf } from '@storybook/react';
 
 import React from 'react';
 
-import { security } from '../../../.storybook';
+import { components } from '../../../.storybook';
 
 import { Card, CardSkeleton, SearchBar, StatusIcon } from '../..';
 
@@ -42,7 +42,7 @@ const props = () => ({
 
 const searchLabelText = 'Search';
 
-storiesOf(security('Card'), module)
+storiesOf(components('Card'), module)
   .add('Default', () => <Card />)
   .add('Content', () => (
     <Card

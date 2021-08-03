@@ -30,17 +30,17 @@ const LayoutModule = ({ as, className, children, namespace, ...other }) =>
   );
 
 LayoutModule.propTypes = {
-  /** Provide the content for the `LayoutModule` */
-  children: node.isRequired,
-
-  /** Provide the style namespace for the `LayoutModule` */
-  namespace: string.isRequired,
-
   /** Provide a custom element to be rendered instead of the default */
   as: elementType,
 
+  /** Provide the content for the `LayoutModule` */
+  children: node.isRequired,
+
   /** Provide an optional class to be applied to the containing node */
   className: string,
+
+  /** Provide the style namespace for the `LayoutModule` */
+  namespace: string.isRequired,
 };
 
 LayoutModule.defaultProps = {

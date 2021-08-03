@@ -7,7 +7,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { color, boolean } from '@storybook/addon-knobs';
 
-import { security } from '../../../.storybook';
+import { components } from '../../../.storybook';
 
 import { ScrollGradient, theme } from '../..';
 import { className, children } from './_mocks_';
@@ -19,7 +19,7 @@ const style = {
   height: '300px',
 };
 
-storiesOf(security('ScrollGradient'), module)
+storiesOf(components('ScrollGradient'), module)
   .add(
     'vertical scrolling',
     () => (

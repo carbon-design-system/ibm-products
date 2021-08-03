@@ -155,23 +155,23 @@ class FilterSearch extends Component {
 }
 
 FilterSearch.propTypes = {
-  /** @type {string} Initial search value */
-  initialSearchValue: PropTypes.string,
-
-  /** @type {(filter: Filter) => {}} Callback function when any filter is toggled */
-  onChange: PropTypes.func,
-
   /** @type {FilterData}  Filter data to used to render panel */
   filterData: filterDataPropTypes.isRequired,
 
   /** @type {string} Label for filter search input */
   filterSearchLabel: PropTypes.string,
 
-  /** @type {string} Label for filter search when no filters are found */
-  noFiltersResultsLabel: PropTypes.string,
+  /** @type {string} Initial search value */
+  initialSearchValue: PropTypes.string,
 
   /** @type {object} Externalized global labels */
   labels: defaultLabels.propType,
+
+  /** @type {string} Label for filter search when no filters are found */
+  noFiltersResultsLabel: PropTypes.string,
+
+  /** @type {(filter: Filter) => {}} Callback function when any filter is toggled */
+  onChange: PropTypes.func,
 };
 
 FilterSearch.defaultProps = {

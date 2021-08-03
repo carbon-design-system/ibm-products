@@ -1,6 +1,6 @@
 /**
  * @file Icon button.
- * @copyright IBM Security 2019
+ * @copyright IBM Security 2019, 2021
  */
 
 import classnames from 'classnames';
@@ -60,6 +60,7 @@ const IconButton = ({
       })}
       aria-label={label}
       onClick={onClick}
+      type="button"
       {...other}>
       <Icon
         className={iconClassName}

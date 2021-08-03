@@ -10,15 +10,18 @@ import { action } from '@storybook/addon-actions';
 
 import { Bee16, Lightning16 } from '@carbon/icons-react';
 
-import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
-import { ActionBar, ActionBarItem } from '.';
-const storybookPrefix = getStorybookPrefix(pkg, ActionBar.displayName);
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
+import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
+import { ActionBar, deprecatedProps } from './ActionBar';
 
 export default {
-  title: `${storybookPrefix}/${ActionBar.displayName}`,
+  title: getStoryTitle(ActionBar.displayName),
   component: ActionBar,
   argTypes: {
+    ...getDeprecatedArgTypes(deprecatedProps),
     containerWidth: {
       control: { type: 'range', min: 20, max: 800, step: 10 },
     },
@@ -29,65 +32,11 @@ export default {
 };
 
 const actions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => ({
+  key: `a-key-${num}`,
   renderIcon: num % 2 ? Lightning16 : Bee16,
   iconDescription: `Action ${num}`,
   onClick: action(`Action ${num}`),
 }));
-
-const actionBarItems = (
-  <>
-    <ActionBarItem
-      renderIcon={Lightning16}
-      iconDescription="Action 1"
-      onClick={action('Action 1')}
-    />
-    <ActionBarItem
-      renderIcon={Lightning16}
-      iconDescription="Action 2"
-      onClick={action('Action 2')}
-    />
-    <ActionBarItem
-      renderIcon={Lightning16}
-      iconDescription="Action 3"
-      onClick={action('Action 3')}
-    />
-    <ActionBarItem
-      renderIcon={Lightning16}
-      iconDescription="Action 4"
-      onClick={action('Action 4')}
-    />
-    <ActionBarItem
-      renderIcon={Lightning16}
-      iconDescription="Action 5"
-      onClick={action('Action 5')}
-    />
-    <ActionBarItem
-      renderIcon={Lightning16}
-      iconDescription="Action 6"
-      onClick={action('Action 6')}
-    />
-    <ActionBarItem
-      renderIcon={Lightning16}
-      iconDescription="Action 7"
-      onClick={action('Action 7')}
-    />
-    <ActionBarItem
-      renderIcon={Lightning16}
-      iconDescription="Action 8"
-      onClick={action('Action 8')}
-    />
-    <ActionBarItem
-      renderIcon={Lightning16}
-      iconDescription="Action 9"
-      onClick={action('Action 9')}
-    />
-    <ActionBarItem
-      renderIcon={Lightning16}
-      iconDescription="Action 10"
-      onClick={action('Action 10')}
-    />
-  </>
-);
 
 const Template = (argsIn) => {
   const { children, containerWidth, ...args } = { ...argsIn };
@@ -98,14 +47,10 @@ const Template = (argsIn) => {
   );
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  actions: actions,
-  containerWidth: 500,
-};
-
-export const WithChildrenDEPRECATED = Template.bind({});
-WithChildrenDEPRECATED.args = {
-  children: actionBarItems,
-  containerWidth: 500,
-};
+export const Default = prepareStory(Template, {
+  args: {
+    actions: actions,
+    containerWidth: 500,
+    overflowAriaLabel: 'Open and close additional action bar items list.',
+  },
+});

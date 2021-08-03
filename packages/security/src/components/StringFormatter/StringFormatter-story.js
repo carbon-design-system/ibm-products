@@ -8,7 +8,7 @@ import { storiesOf } from '@storybook/react';
 
 import React from 'react';
 
-import { security } from '../../../.storybook';
+import { components } from '../../../.storybook';
 import { StringFormatter } from '../..';
 import value from './_mocks_';
 
@@ -19,6 +19,6 @@ const storyProps = () => ({
   width: text('Width (`width`)', `200px`),
 });
 
-storiesOf(security('StringFormatter'), module).add('Default', () => (
+storiesOf(components('StringFormatter'), module).add('Default', () => (
   <StringFormatter {...storyProps()} />
 ));

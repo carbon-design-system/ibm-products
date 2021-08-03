@@ -10,7 +10,7 @@ import isDevelopment from '../env';
  * @param {string} description The description to use when logging.
  * @param {string} type The property type to log.
  * @param {Array.<string>} componentKeys The component keys to filter.
- * @param {Function} condition The condition to filter the component keys.
+ * @param {Function} filterCondition The condition to filter the component keys.
  * @returns {string} The description and appropriate properties.
  */
 const logDeviations = (description, type, componentKeys, filterCondition) =>

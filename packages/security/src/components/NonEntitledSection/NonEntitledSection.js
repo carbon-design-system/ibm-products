@@ -83,12 +83,6 @@ NonEntitledSection.propTypes = {
   /** @type {string} The class name of the section. */
   className: PropTypes.string,
 
-  /** @type {string} Section heading. */
-  title: PropTypes.string.isRequired,
-
-  /** @type {string} Section description heading. */
-  subTitle: PropTypes.string.isRequired,
-
   /** @type {string} Section description. */
   description: PropTypes.string,
 
@@ -108,6 +102,15 @@ NonEntitledSection.propTypes = {
       icon: PropTypes.string,
     })
   ),
+
+  /** Optional styles */
+  style: PropTypes.object,
+
+  /** @type {string} Section description heading. */
+  subTitle: PropTypes.string.isRequired,
+
+  /** @type {string} Section heading. */
+  title: PropTypes.string.isRequired,
 };
 
 export default NonEntitledSection;

@@ -34,7 +34,7 @@ documentation and controls for a better documentation experience.
 ## Component creation
 
 In this example let's assume you're working with expressive and productive
-variants. You'll want to create three seperate components. The "base" component
+variants. You'll want to create three separate components. The "base" component
 being the main component where all the component code and styles should be. The
 "variant" components should act as simple wrappers for the base component. Their
 main purpose is to benefit from a specific named export (`Card` vs

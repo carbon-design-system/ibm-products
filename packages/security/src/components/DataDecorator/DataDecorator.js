@@ -16,11 +16,6 @@ import Portal, { PORTAL_EVENTS } from '../Portal';
 
 const { defaultProps, propTypes } = Decorator;
 
-/**
- * DataDecorator component.
- * @param {object.<string, *>} props DataDecorator props.
- * @returns {DataDecorator} DataDecorator instance.
- */
 class DataDecorator extends Component {
   state = { isOpen: false };
 
@@ -206,14 +201,22 @@ DataDecorator.propTypes = {
   /** @type {object} Labels for DataDecorator and children */
   labels: defaultLabels.propType,
 
+  /** @type {object} Mid-line truncation options applied to value of decorator if applicable. */
+  midLineTruncation: PropTypes.shape({
+    enabled: PropTypes.bool,
+    maxLength: PropTypes.number,
+    front: PropTypes.number,
+    back: PropTypes.number,
+  }),
+
   /** @type {boolean} Whether the rendered Decorator includes an icon */
   noIcon: PropTypes.bool,
 
-  /** @type {Function} The function to call when the DataDecorator is secondary-clicked */
-  onContextMenu: PropTypes.func,
-
   /** @type {Function} The function to call when the DataDecorator Panel closes. */
   onClose: PropTypes.func,
+
+  /** @type {Function} The function to call when the DataDecorator is secondary-clicked */
+  onContextMenu: PropTypes.func,
 
   /** @type {Function} The function to call when the DataDecorator Panel opens. */
   onOpen: PropTypes.func,
@@ -232,6 +235,9 @@ DataDecorator.propTypes = {
 
   /** @type {number} The score of the data. */
   score: PropTypes.number,
+
+  /** @type {func} Descriptive text for screen readers that details the severity of a score. */
+  scoreDescription: PropTypes.func,
 
   /** @type {number} The external URL. */
   scoreThresholds: (props, propName) => {
@@ -253,6 +259,12 @@ DataDecorator.propTypes = {
     `\nThe prop \`secondaryButton\` for DataDecorator has been deprecated in favor of \`renderFooter\`.`
   ),
 
+  /** @type {boolean} Stop event propagation for events that can bubble. */
+  stopPropagation: PropTypes.bool,
+
+  /** @type {Array} Array of event types to stop propagation. */
+  stopPropagationEvents: PropTypes.arrayOf(PropTypes.oneOf(PORTAL_EVENTS)),
+
   /** @type {ReactNode} Child elements for the panel's subtitle. */
   subtitle: PropTypes.node,
 
@@ -264,23 +276,6 @@ DataDecorator.propTypes = {
 
   /** @type {string} The value of the data. */
   value: PropTypes.string.isRequired,
-
-  /** @type {boolean} Stop event propagation for events that can bubble. */
-  stopPropagation: PropTypes.bool,
-
-  /** @type {Array} Array of event types to stop propagation. */
-  stopPropagationEvents: PropTypes.arrayOf(PropTypes.oneOf(PORTAL_EVENTS)),
-
-  /** @type {func} Descriptive text for screen readers that details the severity of a score. */
-  scoreDescription: PropTypes.func,
-
-  /** @type {object} Mid-line truncation options applied to value of decorator if applicable. */
-  midLineTruncation: PropTypes.shape({
-    enabled: PropTypes.bool,
-    maxLength: PropTypes.number,
-    front: PropTypes.number,
-    back: PropTypes.number,
-  }),
 };
 
 DataDecorator.defaultProps = {

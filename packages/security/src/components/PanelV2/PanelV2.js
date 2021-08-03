@@ -240,6 +240,14 @@ const buttonType = PropTypes.shape({
 });
 
 PanelV2.propTypes = {
+  /**
+   * Required props for the accessibility label of the header
+   */
+  ['aria-label']: requiredIfGivenPropIsTruthy(
+    'hasScrollingContent',
+    PropTypes.string
+  ),
+
   /** @type {ReactNode} The children of the panel container. */
   children: PropTypes.node,
 
@@ -262,11 +270,22 @@ PanelV2.propTypes = {
   /** Pass any of the options available in https://github.com/focus-trap/focus-trap#createfocustrapelement-createoptions */
   focusTrapOptions: Portal.propTypes.focusTrapOptions,
 
+  /**
+   * Specify whether the panel contains scrolling content
+   */
+  hasScrollingContent: PropTypes.bool,
+
   /** @type {boolean} The open state. */
   isOpen: PropTypes.bool,
 
   /** @type {object} Labels for Panel and children */
   labels: defaultLabels.propType,
+
+  /**
+   * Handler for all close actions such as clicking on the close button,
+   * pressing the "Escape" key, or clicking outside of the panel area.
+   */
+  onClose: PropTypes.func,
 
   /** @type {object<object>} An object list of primary button props. */
   primaryButton: deprecate(
@@ -297,25 +316,6 @@ PanelV2.propTypes = {
 
   /** @type {ReactNode} Title child elements. */
   title: PropTypes.node,
-
-  /**
-   * Specify whether the panel contains scrolling content
-   */
-  hasScrollingContent: PropTypes.bool,
-
-  /**
-   * Required props for the accessibility label of the header
-   */
-  ['aria-label']: requiredIfGivenPropIsTruthy(
-    'hasScrollingContent',
-    PropTypes.string
-  ),
-
-  /**
-   * Handler for all close actions such as clicking on the close button,
-   * pressing the "Escape" key, or clicking outside of the panel area.
-   */
-  onClose: PropTypes.func,
 };
 
 PanelV2.defaultProps = {

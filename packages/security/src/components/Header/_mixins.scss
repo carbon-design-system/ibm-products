@@ -116,6 +116,7 @@ $header__transition__timing-function: $timing-function;
   &__link {
     @include carbon--type-style($name: body-short-01);
 
+    display: inline;
     margin-left: $header__group__spacing__margin;
 
     &,

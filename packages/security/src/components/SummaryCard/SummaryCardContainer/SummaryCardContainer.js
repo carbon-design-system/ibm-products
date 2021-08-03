@@ -1,9 +1,9 @@
 /**
  * @file Summary card container.
- * @copyright IBM Security 2019
+ * @copyright IBM Security 2019, 2021
  */
 
-import { arrayOf, shape, string } from 'prop-types';
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 import { appendComponentNamespace } from '../../../globals/namespace';
@@ -69,10 +69,13 @@ function SummaryCardContainer({ render, summaryCards, ...other }) {
 }
 
 SummaryCardContainer.propTypes = {
+  /** Render function */
+  render: PropTypes.func.isRequired,
+
   /** Provide a list of all the summary cards to render in the container */
-  summaryCards: arrayOf(
-    shape({
-      id: string.isRequired,
+  summaryCards: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
     })
   ).isRequired,
 };

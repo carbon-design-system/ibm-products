@@ -4,7 +4,7 @@
 /// @copyright IBM Security 2019 - 2021
 ////
 
-@import '@carbon/layout/scss/mini-unit';
+@import '@carbon/layout/scss/convert';
 @import '@carbon/layout/scss/spacing';
 @import '@carbon/themes/scss/tokens';
 
@@ -45,7 +45,7 @@
 
   & &__overflow-menu {
     width: 3rem;
-    margin-left: 1px;
+    border-left: carbon--rem($px: 1px) solid $ui-03;
     background-color: $interactive-01;
 
     &:hover,
@@ -90,6 +90,10 @@
   & &-item__wrapper {
     @include text-overflow();
 
+    /// Item spacing.
+    /// @type Length
+    $combo-button__item__spacing: $carbon--spacing-05;
+
     display: flex;
     width: unset;
     max-width: unset;
@@ -97,13 +101,13 @@
     padding: 0;
     border-top: 1px solid $active-ui;
     border-bottom: 1px solid transparent;
-    margin: 0 1rem;
+    margin: 0 $combo-button__item__spacing;
     outline: unset;
 
     &:focus {
       @include focus-outline('outline');
 
-      padding: 0 1rem;
+      padding: 0 $combo-button__item__spacing;
       border-color: transparent;
       margin: 0;
     }

@@ -12,27 +12,31 @@
 $colors: (
   fatal: (
     light: $carbon--black-100,
-    dark: $carbon--gray-30,
+    dark: $carbon--gray-50,
   ),
   critical: (
     light: $carbon--red-60,
     dark: $carbon--red-50,
   ),
   major-warning: (
-    light: $carbon--orange-60,
+    light: $carbon--orange-40,
     dark: $carbon--orange-40,
   ),
+  minor-warning: (
+    light: $carbon--yellow-20,
+    dark: $carbon--yellow-20,
+  ),
   undefined: (
-    light: $carbon--purple-80,
+    light: $carbon--purple-60,
     dark: $carbon--purple-50,
   ),
   unknown: (
     light: $carbon--gray-60,
-    dark: $carbon--gray-40,
+    dark: $carbon--gray-50,
   ),
   normal: (
     light: $carbon--green-60,
-    dark: $carbon--green-40,
+    dark: $carbon--green-50,
   ),
   info: (
     light: $carbon--blue-60,
@@ -44,11 +48,11 @@ $colors: (
   ),
   running: (
     light: $carbon--green-60,
-    dark: $carbon--green-40,
+    dark: $carbon--green-50,
   ),
   pending: (
     light: $carbon--gray-60,
-    dark: $carbon--gray-40,
+    dark: $carbon--gray-50,
   ),
 );
 
@@ -56,6 +60,7 @@ $icons: (
   'fatal',
   'critical',
   'major-warning',
+  'minor-warning',
   'undefined',
   'unknown',
   'normal',
@@ -94,6 +99,9 @@ $block-class: #{$pkg-prefix}--status-icon;
   fill: $carbon--yellow-20;
 }
 
+.#{$block-class}--light.#{$block-class}--light-major-warning
+  path:nth-of-type(1),
+.#{$block-class}--dark.#{$block-class}--dark-major-warning path:nth-of-type(1),
 .#{$block-class}--light.#{$block-class}--light-minor-warning
   path:nth-of-type(1),
 .#{$block-class}--dark.#{$block-class}--dark-minor-warning path:nth-of-type(1) {
@@ -103,8 +111,8 @@ $block-class: #{$pkg-prefix}--status-icon;
 
 @each $theme in $themes {
   @each $icon in $icons {
-    @each $themekey in $themes {
-      .#{$block-class}--#{$theme}.#{$block-class}--#{$themekey}-#{$icon} {
+    @each $theme-key in $themes {
+      .#{$block-class}--#{$theme}.#{$block-class}--#{$theme-key}-#{$icon} {
         @if $icon == in-progress {
           @media (prefers-reduced-motion: reduce) {
             animation: none;
@@ -121,7 +129,7 @@ $block-class: #{$pkg-prefix}--status-icon;
           // stylelint-disable-next-line carbon/theme-token-use
           fill: clr($icon, $theme);
           @media (prefers-reduced-motion) {
-            .#{$block-class}--#{$theme}.#{$block-class}--#{$themekey}-in-progress {
+            .#{$block-class}--#{$theme}.#{$block-class}--#{$theme-key}-in-progress {
               animation: none;
             }
           }

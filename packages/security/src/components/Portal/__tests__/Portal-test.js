@@ -15,11 +15,11 @@ describe(name, () => {
     const { container } = render(
       <div>
         <section>
-          <button>test button outside portal</button>
+          <button type="button">test button outside portal</button>
         </section>
         <Portal>
           <section>
-            <button>test button inside portal</button>
+            <button type="button">test button inside portal</button>
           </section>
         </Portal>
       </div>
@@ -33,11 +33,11 @@ describe(name, () => {
     const { container } = render(
       <div>
         <section>
-          <button>test button outside portal</button>
+          <button type="button">test button outside portal</button>
         </section>
         <Portal hasOverlay={false}>
           <section>
-            <button>test button inside portal</button>
+            <button type="button">test button inside portal</button>
           </section>
         </Portal>
       </div>
@@ -51,7 +51,7 @@ describe(name, () => {
     const { queryByText, unmount } = render(
       <Portal>
         <section>
-          <button>test button</button>
+          <button type="button">test button</button>
         </section>
       </Portal>
     );
@@ -68,7 +68,7 @@ describe(name, () => {
       <div onCopy={copyHandler}>
         <Portal>
           <section>
-            <button data-testid="in-portal" onCopy={inPortalCopy}>
+            <button data-testid="in-portal" onCopy={inPortalCopy} type="button">
               I should call copyHandler
             </button>
           </section>
@@ -88,12 +88,18 @@ describe(name, () => {
     const { getByTestId } = render(
       /* eslint-disable jsx-a11y/mouse-events-have-key-events */
       <div onMouseOver={mouseOverHandler}>
-        <button data-testid="out-portal" onMouseOver={outPortalMouseOver}>
+        <button
+          data-testid="out-portal"
+          onMouseOver={outPortalMouseOver}
+          type="button">
           I should call mouseOverHandler
         </button>
         <Portal stopPropagation>
           <section>
-            <button data-testid="in-portal" onMouseOver={inPortalMouseOver}>
+            <button
+              data-testid="in-portal"
+              onMouseOver={inPortalMouseOver}
+              type="button">
               I should NOT call mouseOverHandler
             </button>
           </section>
@@ -125,7 +131,8 @@ describe(name, () => {
             <button
               data-testid="in-portal"
               onMouseDown={onMouseDownMock}
-              onMouseUp={onMouseUpMock}>
+              onMouseUp={onMouseUpMock}
+              type="button">
               I should call mouseDownHandler, but I should NOT call
               mouseUpHandler.
             </button>

@@ -6,6 +6,7 @@
 
 @import '@carbon/layout/scss/mini-unit';
 @import '@carbon/layout/scss/spacing';
+@import '@carbon/motion/scss/motion';
 @import '@carbon/themes/scss/tokens';
 @import '@carbon/type/scss/font-family';
 @import '@carbon/type/scss/styles';
@@ -29,12 +30,6 @@
 @mixin decorator {
   $root: &;
 
-  /// Height.
-  /// @type Length
-  $data-decorator__sizing__height: carbon--mini-units(
-    $count: 3.25,
-  );
-
   @include carbon--type-style($name: body-short-01);
   @include security--decorator__padding(
     $decorator__spacing__padding: $carbon--spacing-03
@@ -42,8 +37,9 @@
 
   display: inline-flex;
   max-width: 100%;
-  height: $data-decorator__sizing__height;
+  height: carbon--mini-units($count: 3.25);
   box-sizing: border-box;
+  align-items: center;
   padding: unset;
   border: unset;
   background-color: $hover-ui;
@@ -54,7 +50,6 @@
   text-align: left;
   text-decoration: none;
   text-transform: none;
-  vertical-align: middle;
 
   #{$root}--interactive:not(&--active) {
     #{$root}__type {
@@ -109,35 +104,25 @@
   &__icon,
   &__type,
   &__value {
+    @include carbon--motion($mode: productive, $name: standard);
+
     display: inherit;
     height: inherit;
     align-items: center;
-    transition-duration: 0.2s;
+    transition-duration: $moderate-02;
     transition-property: background-color;
-    transition-timing-function: $timing-function;
   }
 
   &#{$root}--inline {
-    /// Inline height.
-    /// @type Length
-    $data-decorator--inline__sizing__height: carbon--mini-units(
-      $count: 2.5,
-    );
-
     @include carbon--type-style($name: caption-01);
 
-    height: $data-decorator--inline__sizing__height;
+    height: carbon--mini-units($count: 2.5);
     vertical-align: middle;
 
     > #{$root} {
       @include security--decorator__padding(
         $decorator__spacing__padding: $carbon--spacing-02
       );
-
-      &__type,
-      &__value {
-        line-height: $data-decorator--inline__sizing__height;
-      }
     }
   }
 
@@ -188,6 +173,6 @@
     @include text-overflow;
 
     max-width: 30ch;
-    line-height: $data-decorator__sizing__height;
+    height: auto;
   }
 }

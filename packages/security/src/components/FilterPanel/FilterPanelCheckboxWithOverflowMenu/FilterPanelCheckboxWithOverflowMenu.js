@@ -1,6 +1,6 @@
 /**
  * @file Filter panel checkbox with overflow menu component.
- * @copyright IBM Security 2020
+ * @copyright IBM Security 2020, 2021
  */
 
 import classnames from 'classnames';
@@ -73,17 +73,17 @@ const FilterPanelCheckboxWithOverflowMenu = ({
 FilterPanelCheckboxWithOverflowMenu.propTypes = {
   ...FilterPanelCheckbox.propTypes,
 
-  /** Optional class name. */
-  className: PropTypes.string,
-
-  /** Overflow aria-label to describe the purpose of the overflow button. */
-  overflowMenuAriaLabel: PropTypes.string,
-
   /** Children containing overflow menu items. */
   children: PropTypes.node,
 
+  /** Optional class name. */
+  className: PropTypes.string,
+
   /** Whether or not the overflow menu should render as open. */
   open: PropTypes.bool,
+
+  /** Overflow aria-label to describe the purpose of the overflow button. */
+  overflowMenuAriaLabel: PropTypes.string,
 
   /**
    * Specify a CSS selector that matches the DOM element that should

@@ -6,7 +6,7 @@
 //
 
 export { AboutModal } from './AboutModal';
-export { ActionBarItem } from './ActionBar';
+export { APIKeyModal } from './APIKeyModal';
 export { ComboButton, ComboButtonItem } from './ComboButton';
 export { ContextHeader } from './ContextHeader';
 export {
@@ -21,6 +21,7 @@ export {
   CreateTearsheetStep,
   CreateTearsheetSection,
 } from './CreateTearsheet';
+export { CreateTearsheetNarrow } from './CreateTearsheetNarrow';
 export {
   EmptyState,
   ErrorEmptyState,

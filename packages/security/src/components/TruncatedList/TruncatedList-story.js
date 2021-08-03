@@ -8,11 +8,11 @@ import { storiesOf } from '@storybook/react';
 
 import React from 'react';
 
-import { security } from '../../../.storybook';
+import { components } from '../../../.storybook';
 import { TruncatedList, UnorderedList } from '../..';
 import { createChildrenArray } from './_mocks_';
 
-storiesOf(security(TruncatedList.name), module)
+storiesOf(components(TruncatedList.name), module)
   .addDecorator((story) => (
     <div style={{ minWidth: 150, minHeight: 300 }}>{story()}</div>
   ))

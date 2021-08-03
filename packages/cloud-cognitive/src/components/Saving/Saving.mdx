@@ -1,9 +1,8 @@
 <!-- `position:fixed` cause rendering issues, so do not render the modal -->
 
-import { Story, Props, Preview } from '@storybook/addon-docs';
+import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
 import { Saving } from '.';
-import { pkg } from '../../settings';
-import { getStorybookSlug } from '../../../config';
+import { getStoryId } from '../../global/js/utils/story-helper';
 
 # Saving
 
@@ -11,16 +10,16 @@ import { getStorybookSlug } from '../../../config';
 
 ## Manual type
 
-<Preview>
-  <Story id={getStorybookSlug(pkg, Saving.displayName, 'manual')} />
-</Preview>
+<Canvas>
+  <Story id={getStoryId(Saving.displayName, 'manual')} />
+</Canvas>
 
 ## Auto type
 
-<Preview>
-  <Story id={getStorybookSlug(pkg, Saving.displayName, 'auto')} />
-</Preview>
+<Canvas>
+  <Story id={getStoryId(Saving.displayName, 'auto')} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />

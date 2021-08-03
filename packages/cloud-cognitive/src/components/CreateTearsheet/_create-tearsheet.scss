@@ -39,8 +39,7 @@
     display: block;
   }
 
-  .#{$block-class}
-    .#{$block-class}__step--visible-step:not(.#{$block-class}__step--first-panel-step) {
+  .#{$block-class} .#{$block-class}__step--visible-step {
     animation: $duration--slow-01 stepContentEntrance;
     animation-fill-mode: forwards;
     animation-timing-function: $carbon--standard-easing;
@@ -48,14 +47,14 @@
   }
 
   @media (prefers-reduced-motion) {
-    .#{$block-class}
-      .#{$block-class}__step--visible-step:not(.#{$block-class}__step--first-panel-step) {
+    .#{$block-class} .#{$block-class}__step--visible-step {
       animation: none;
       opacity: 1;
     }
   }
 
   .#{$block-class} .#{$block-class}__multi-step-panel-content {
+    height: 100%;
     padding: $spacing-06;
     overflow-x: hidden;
   }

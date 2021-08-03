@@ -5,8 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import styles from './_storybook-styles.scss';
 import { CreateTearsheet } from './CreateTearsheet';
 import { CreateTearsheetStep } from './CreateTearsheetStep';
@@ -14,10 +16,8 @@ import { MultiStepTearsheet } from './preview-components/MultiStepTearsheet';
 import { MultiStepWithSectionsTearsheet } from './preview-components/MultiStepWithSectionsTearsheet';
 import mdx from './CreateTearsheet.mdx';
 
-const storybookPrefix = getStorybookPrefix(pkg, CreateTearsheet.displayName);
-
 export default {
-  title: `${storybookPrefix}/${CreateTearsheet.displayName}`,
+  title: getStoryTitle(CreateTearsheet.displayName),
   component: CreateTearsheet,
   subcomponents: {
     CreateTearsheetStep,
@@ -33,10 +33,12 @@ export default {
   parameters: { styles, docs: { page: mdx } },
 };
 
-export const multiStepTearsheet = MultiStepTearsheet.bind({});
-multiStepTearsheet.storyName = 'With multiple steps';
-multiStepTearsheet.args = {};
+export const multiStepTearsheet = prepareStory(MultiStepTearsheet, {
+  storyName: 'With multiple steps',
+  args: {},
+});
 
-export const withViewAllToggle = MultiStepWithSectionsTearsheet.bind({});
-withViewAllToggle.storyName = 'With view all toggle';
-withViewAllToggle.args = {};
+export const withViewAllToggle = prepareStory(MultiStepWithSectionsTearsheet, {
+  storyName: 'With view all toggle',
+  args: {},
+});

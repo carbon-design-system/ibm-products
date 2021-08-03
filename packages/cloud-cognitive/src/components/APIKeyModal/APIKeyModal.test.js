@@ -5,7 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import { render, fireEvent, waitFor } from '@testing-library/react';
+import { render, fireEvent, waitFor, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { APIKeyModal } from '.';
 
@@ -15,66 +16,88 @@ Object.assign(navigator, {
   },
 });
 
-const { name } = APIKeyModal;
+const componentName = APIKeyModal.displayName;
 const defaultProps = {
-  apiKey: '123-456-789',
-  apiKeyInputId: 'apiKeyInput',
-  apiKeyLabel: 'API key',
-  copyButtonText: 'Copy',
-  open: true,
-  secondaryButtonText: 'Close',
-  successBody: (
-    <p>
-      This is your unique API key and is non-recoverable. If you lose this API
-      key, you will have to reset it.
-    </p>
-  ),
-  successHeader: 'API key successully created',
-};
-
-const standardProps = {
-  ...defaultProps,
   apiKey: '',
-  apiKeyVisibility: true,
-  createButtonText: 'Generate API key',
-  createHeader: 'Generate an API key',
-  downloadBodyText:
-    'This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it.',
-  downloadLinkText: 'Download as JSON',
-  downloadable: true,
-  downloadableFileName: 'apikey',
-  loadingMessage: 'your key is being created. please wait...',
+  apiKeyLabel: 'api key label',
+  apiKeyName: '',
+  body: 'modal body',
+  className: 'class-test',
+  closeButtonText: 'close',
+  copyButtonText: 'copy',
+  copyIconDescription: 'copy',
+  customSteps: [],
+  downloadBodyText: 'download body',
+  downloadFileName: 'filename',
+  downloadFileType: 'json',
+  downloadLinkText: 'download link text',
+  editButtonText: 'edit button',
+  editSuccess: false,
+  editSuccessTitle: 'edited successfully',
+  editing: false,
+  error: false,
+  errorText: 'an error occurred',
+  generateButtonText: 'create button',
+  generateSuccessBody: 'created successfully body',
+  generateSuccessTitle: 'created successfully title',
+  generateTitle: 'create title',
+  hasAPIKeyVisibilityToggle: true,
+  hasDownloadLink: true,
+  hideAPIKeyLabel: 'hide key',
   loading: false,
-  body: 'Optional description text. To connect securely to {{product}}, your application or tool needs an API key with permission to access the cluster and resources.',
-  nameHelperText:
-    'Providing the application name will help you idenfity your api key later.',
-  nameInputId: 'nameInput',
-  nameLabel: 'Name your application',
-  namePlaceholder: 'Application name',
+  loadingText: 'loading',
+  modalLabel: 'modal label',
+  nameHelperText: 'name helper',
+  nameLabel: 'name label',
+  namePlaceholder: 'name placeholder',
   nameRequired: true,
+  nextStepButtonText: 'next step',
   onClose: () => {},
-  onRequestSubmit: () => {},
+  onRequestGenerate: () => {},
   open: true,
+  previousStepButtonText: 'previous step',
+  showAPIKeyLabel: 'show key',
 };
 
 URL.createObjectURL = jest.fn(() => Promise.resolve('download-link'));
 
-describe(name, () => {
+describe(componentName, () => {
+  it('renders with standard visible props', () => {
+    const { getByText, getByPlaceholderText } = render(
+      <APIKeyModal {...defaultProps} />
+    );
+    getByText(defaultProps.body);
+    getByText(defaultProps.closeButtonText);
+    getByText(defaultProps.generateButtonText);
+    getByText(defaultProps.generateTitle);
+    getByText(defaultProps.modalLabel);
+    getByText(defaultProps.nameLabel);
+    getByPlaceholderText(defaultProps.namePlaceholder);
+  });
+
   it('renders with minimal setup', () => {
-    const { click } = fireEvent;
-    const { container } = render(<APIKeyModal {...defaultProps} />);
-    const copyBtn = container.querySelector('.bx--btn--primary');
-    click(copyBtn);
-    expect(navigator.clipboard.writeText).toHaveBeenCalledWith('123-456-789');
+    const props = {
+      ...defaultProps,
+      nameRequired: false,
+      hasDownloadLink: false,
+      apiKey: '123-456-789',
+    };
+    const { click } = userEvent;
+    const { getByText, container } = render(<APIKeyModal {...props} />);
+    expect(container.querySelector('.bx--text-input').value).toBe(props.apiKey);
+    getByText(props.apiKeyLabel);
+    click(container.querySelector('.bx--btn--primary'));
+    expect(navigator.clipboard.writeText).toHaveBeenCalledWith(props.apiKey);
   });
 
   it('renders with standard setup', async () => {
-    const { click, change } = fireEvent;
+    const { change } = fireEvent;
+    const { click } = userEvent;
     const { fn } = jest;
-    const onRequestSubmit = fn();
+    const onRequestGenerate = fn();
     const props = {
-      ...standardProps,
-      onRequestSubmit,
+      ...defaultProps,
+      onRequestGenerate,
     };
 
     const { getByText, container, rerender } = render(
@@ -82,31 +105,35 @@ describe(name, () => {
     );
 
     const nameInput = container.querySelector('.bx--text-input');
-    const generateBtn = getByText('Generate API key');
+    const createButton = getByText(props.generateButtonText);
 
-    change(nameInput, { target: { value: 'testkey' } });
-    click(generateBtn);
-    expect(onRequestSubmit).toHaveBeenCalled();
+    change(nameInput, { target: { value: 'test-key' } });
+    click(createButton);
+    expect(onRequestGenerate).toHaveBeenCalledWith('test-key');
 
     rerender(<APIKeyModal {...props} loading />);
-    expect(getByText(props.loadingMessage)).toBeVisible();
+    getByText(props.loadingText);
     rerender(<APIKeyModal {...props} apiKey="444-444-444-444" />);
     await waitFor(() => getByText(props.downloadLinkText));
-    const copyBtn = getByText('Copy');
-    click(copyBtn);
+    getByText(props.downloadBodyText);
+    expect(container.querySelector('.bx--text-input').value).toBe(
+      '444-444-444-444'
+    );
+    click(getByText(props.copyButtonText));
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
       '444-444-444-444'
     );
   });
 
-  it('displays an error message when an error occurs', async () => {
-    const { click, change } = fireEvent;
+  it('displays an error message when a create error occurs', () => {
+    const { change } = fireEvent;
+    const { click } = userEvent;
     const { fn } = jest;
-    const onRequestSubmit = fn();
+    const onRequestGenerate = fn();
     const props = {
-      ...standardProps,
-      onRequestSubmit,
-      errorMessage: 'an error occured',
+      ...defaultProps,
+      onRequestGenerate,
+      errorText: 'an error occurred',
     };
 
     const { getByText, container, rerender } = render(
@@ -114,91 +141,164 @@ describe(name, () => {
     );
 
     const nameInput = container.querySelector('.bx--text-input');
-    const generateBtn = getByText('Generate API key');
+    const createButton = getByText(props.generateButtonText);
 
-    change(nameInput, { target: { value: 'testkey' } });
-    click(generateBtn);
-    expect(onRequestSubmit).toHaveBeenCalled();
+    change(nameInput, { target: { value: 'test-key' } });
+    click(createButton);
+    expect(onRequestGenerate).toHaveBeenCalled();
 
     rerender(<APIKeyModal {...props} error />);
-    expect(getByText(props.errorMessage)).toBeVisible();
+    getByText(props.errorText);
   });
 
   it('should be able to properly navigate a series of custom steps', () => {
-    const { click } = fireEvent;
+    const { click } = userEvent;
     const { fn } = jest;
-    const onRequestSubmit = fn();
+    const onRequestGenerate = fn();
     const onClose = fn();
     const customSteps = [
       {
         valid: true,
         content: <input type="text" value="a" placeholder="input a" readOnly />,
+        title: 'step 1',
       },
       {
         valid: true,
         content: <input type="text" value="b" placeholder="input b" readOnly />,
+        title: 'step 2',
       },
       {
         valid: false,
         content: <input type="text" value="c" placeholder="input c" readOnly />,
+        title: 'step 3',
       },
     ];
     const props = {
-      ...standardProps,
-      onRequestSubmit,
+      ...defaultProps,
+      onRequestGenerate,
       onClose,
       customSteps,
-      previousStepButtonText: 'Previous step',
-      nextStepButtonText: 'Next step',
-      downloadable: false,
+      hasDownloadLink: false,
     };
-
-    const { rerender, getByPlaceholderText, getByText } = render(
+    const { rerender, getByPlaceholderText, getByText, container } = render(
       <APIKeyModal {...props} />
     );
 
     // step 1
-    expect(getByPlaceholderText('input a')).toBeVisible();
-    expect(getByText('Next step')).toBeVisible();
-    expect(getByText('Close')).toBeVisible();
+    getByPlaceholderText('input a');
+    getByText(props.nextStepButtonText);
+    getByText(props.closeButtonText);
 
     // advance to step 2
-    click(getByText('Next step'));
-    expect(getByPlaceholderText('input b')).toBeVisible();
-    expect(getByText(props.nextStepButtonText)).toBeVisible();
-    expect(getByText(props.previousStepButtonText)).toBeVisible();
+    click(getByText(props.nextStepButtonText));
+    getByPlaceholderText('input b');
+    getByText(props.nextStepButtonText);
+    getByText(props.previousStepButtonText);
 
     // go back to step 1
     click(getByText(props.previousStepButtonText));
-    expect(getByPlaceholderText('input a')).toBeVisible();
-    expect(getByText(props.nextStepButtonText)).toBeVisible();
-    expect(getByText(props.secondaryButtonText)).toBeVisible();
+    getByPlaceholderText('input a');
+    getByText(props.nextStepButtonText);
+    getByText(props.closeButtonText);
 
     // advance to step 2
     click(getByText(props.nextStepButtonText));
-    expect(getByPlaceholderText('input b')).toBeVisible();
-    expect(getByText(props.nextStepButtonText)).toBeVisible();
-    expect(getByText(props.previousStepButtonText)).toBeVisible();
+    getByPlaceholderText('input b');
+    getByText(props.nextStepButtonText);
+    getByText(props.previousStepButtonText);
 
     // advance to step 3
     click(getByText(props.nextStepButtonText));
-    expect(getByPlaceholderText('input c')).toBeVisible();
-    expect(getByText(props.createButtonText)).toBeVisible();
-    expect(getByText(props.previousStepButtonText)).toBeVisible();
+    getByPlaceholderText('input c');
+    getByText(props.generateButtonText);
+    getByText(props.previousStepButtonText);
 
     // submit invalid form
-    click(getByText(props.createButtonText));
-    expect(onRequestSubmit).not.toHaveBeenCalled();
+    click(getByText(props.generateButtonText));
+    expect(onRequestGenerate).not.toHaveBeenCalled();
 
     // submit valid form
     customSteps[2].valid = true;
     rerender(<APIKeyModal {...props} customSteps={customSteps} />);
-    click(getByText(props.createButtonText));
-    expect(onRequestSubmit).toHaveBeenCalled();
+    click(getByText(props.generateButtonText));
+    expect(onRequestGenerate).toHaveBeenCalled();
     rerender(<APIKeyModal {...props} />);
-    rerender(<APIKeyModal {...props} apiKey="abc-123" successBody="Success" />);
-    expect(getByText('Success')).toBeVisible();
-    click(getByText(props.secondaryButtonText));
+    rerender(<APIKeyModal {...props} apiKey="abc-123" />);
+    expect(container.querySelector('.bx--text-input').value).toBe('abc-123');
+    getByText(props.generateSuccessBody);
+    getByText(props.generateSuccessTitle);
+    click(getByText(props.closeButtonText));
     expect(onClose).toHaveBeenCalled();
+  });
+
+  it('successfully edits', () => {
+    const { change } = fireEvent;
+    const { click } = userEvent;
+    const { fn } = jest;
+    const onRequestEdit = fn();
+    const props = {
+      ...defaultProps,
+      editing: true,
+      apiKeyName: 'test-key-1',
+      onRequestEdit,
+    };
+
+    const { getByText, container, rerender } = render(
+      <APIKeyModal {...props} />
+    );
+
+    const nameInput = container.querySelector('.bx--text-input');
+    const editButton = getByText(props.editButtonText);
+    expect(nameInput.value).toBe(props.apiKeyName);
+    getByText(props.editButtonText);
+    change(nameInput, { target: { value: 'new-key-name' } });
+    click(editButton);
+    expect(onRequestEdit).toHaveBeenCalledWith(nameInput.value);
+    rerender(<APIKeyModal {...props} editSuccess />);
+    getByText(props.editSuccessTitle);
+  });
+
+  it('toggles key visibility', async () => {
+    const props = {
+      ...defaultProps,
+      apiKey: 'test',
+    };
+    const { getByText, container, rerender } = render(
+      <APIKeyModal {...props} />
+    );
+    await waitFor(() => getByText(props.downloadLinkText));
+    expect(container.querySelector('.bx--text-input').value).toBe(props.apiKey);
+    expect(container.querySelector('.bx--text-input')).toHaveAttribute(
+      'type',
+      'password'
+    );
+    rerender(<APIKeyModal {...props} hasAPIKeyVisibilityToggle={false} />);
+    await waitFor(() => getByText(props.downloadLinkText));
+    expect(container.querySelector('.bx--text-input')).toHaveAttribute(
+      'type',
+      'text'
+    );
+  });
+
+  it('has no accessibility violations', async () => {
+    const { container } = render(<APIKeyModal {...defaultProps} />);
+    await expect(container).toBeAccessible(componentName);
+    await expect(container).toHaveNoAxeViolations();
+  });
+
+  it('applies className to the containing node', () => {
+    const { container } = render(<APIKeyModal {...defaultProps} />);
+    expect(container.firstChild).toHaveClass(defaultProps.className);
+  });
+
+  it('adds additional properties to the containing node', () => {
+    render(<APIKeyModal {...defaultProps} data-test-id="test-id" />);
+    screen.getByTestId('test-id');
+  });
+
+  it('forwards a ref to an appropriate node', () => {
+    const ref = React.createRef();
+    render(<APIKeyModal {...defaultProps} ref={ref} />);
+    expect(ref.current).not.toBeNull();
   });
 });

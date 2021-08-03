@@ -1,6 +1,6 @@
 /**
  * @file Filter panel group component.
- * @copyright IBM Security 2020
+ * @copyright IBM Security 2020, 2021
  */
 
 import React from 'react';
@@ -36,15 +36,14 @@ const FilterPanelGroup = ({
 
 FilterPanelGroup.propTypes = {
   /**
-   * Group `title` attribute.
+   * Group content.
    */
-  title: PropTypes.string,
+  children: PropTypes.node,
 
   /**
-   * Group heading node.
-   * If no `heading` is provided, then the `title` prop value will be used instead.
+   * Optional class name.
    */
-  heading: PropTypes.node,
+  className: PropTypes.string,
 
   /**
    * Optional group count.
@@ -57,19 +56,20 @@ FilterPanelGroup.propTypes = {
   countLabel: PropTypes.func,
 
   /**
-   * Optional class name.
+   * Group heading node.
+   * If no `heading` is provided, then the `title` prop value will be used instead.
    */
-  className: PropTypes.string,
+  heading: PropTypes.node,
+
+  /**
+   * Group `title` attribute.
+   */
+  title: PropTypes.string,
 
   /**
    * Optional class name for the title.
    */
   titleClassName: PropTypes.string,
-
-  /**
-   * Group content.
-   */
-  children: PropTypes.node,
 };
 
 FilterPanelGroup.defaultProps = {

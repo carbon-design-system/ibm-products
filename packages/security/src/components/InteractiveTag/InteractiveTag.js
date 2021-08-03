@@ -46,11 +46,8 @@ InteractiveTag.defaultProps = {
   type: 'gray',
 };
 
-const { propTypes } = Tag;
-
 InteractiveTag.propTypes = {
-  ...propTypes,
-  type: propTypes.type,
+  ...Tag.propTypes,
 
   /** @type {boolean} Determines if the tag is selected. */
   isSelected: bool,

@@ -283,6 +283,14 @@ const buttonType = PropTypes.shape({
 });
 
 PanelContainer.propTypes = {
+  /**
+   * Required props for the accessibility label of the header
+   */
+  ['aria-label']: requiredIfGivenPropIsTruthy(
+    'hasScrollingContent',
+    PropTypes.string
+  ),
+
   /** @type {ReactNode} The children of the panel container. */
   children: PropTypes.node,
 
@@ -295,8 +303,21 @@ PanelContainer.propTypes = {
   /** @type {boolean} Set to true to disable the 'Escape' key from closing the panel. */
   disableEscape: PropTypes.bool,
 
+  /**
+   * Specify whether the panel contains scrolling content
+   */
+  hasScrollingContent: PropTypes.bool,
+
+  labels: defaultLabels.propType,
+
   /** @type {object<object>} An object list of primary button props. */
   primaryButton: buttonType,
+
+  /** @type {Function} Footer render prop. */
+  renderFooter: func,
+
+  /** @type {string} Root node to attach the panel to. */
+  rootNode: isNode() ? PropTypes.instanceOf(Node) : PropTypes.any,
 
   /** @type {object<object>} An object list of secondary button props. */
   secondaryButton: buttonType,
@@ -306,27 +327,6 @@ PanelContainer.propTypes = {
 
   /** @type {string} Child elements. */
   title: PropTypes.node,
-
-  /** @type {Function} Footer render prop. */
-  renderFooter: func,
-
-  /** @type {string} Root node to attach the panel to. */
-  rootNode: isNode() ? PropTypes.instanceOf(Node) : PropTypes.any,
-
-  labels: defaultLabels.propType,
-
-  /**
-   * Specify whether the panel contains scrolling content
-   */
-  hasScrollingContent: PropTypes.bool,
-
-  /**
-   * Required props for the accessibility label of the header
-   */
-  ['aria-label']: requiredIfGivenPropIsTruthy(
-    'hasScrollingContent',
-    PropTypes.string
-  ),
 };
 
 PanelContainer.defaultProps = {

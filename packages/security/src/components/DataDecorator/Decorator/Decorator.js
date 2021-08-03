@@ -13,12 +13,6 @@ import { getDecoratorProps, namespace, icons } from './constants';
 
 import Icon from '../../Icon';
 
-/**
- * Decorator component.
- * @param {boolean} noIcon don't display icon.
- * @param {string} path svg path.
- * @returns {Decorator} Decorator instance.
- */
 class Decorator extends Component {
   constructor(props) {
     super(props);
@@ -133,7 +127,8 @@ class Decorator extends Component {
         <button
           className={decoratorClasses}
           onClick={this.handleClick}
-          onContextMenu={this.handleContextMenuClick}>
+          onContextMenu={this.handleContextMenuClick}
+          type="button">
           {decorator}
         </button>
       );
@@ -163,17 +158,28 @@ Decorator.propTypes = {
   /** @type {boolean} Whether the Decorator should be treated and styled as an inline element. */
   inline: PropTypes.bool,
 
+  /** @type {object} Mid-line truncation options applied to value of decorator if applicable. */
+  midLineTruncation: PropTypes.shape({
+    enabled: PropTypes.bool,
+    maxLength: PropTypes.number,
+    front: PropTypes.number,
+    back: PropTypes.number,
+  }),
+
+  /** @type {boolean} Whether the Decorator includes an icon */
+  noIcon: PropTypes.bool,
+
   /** @type {Function} Click handler of the Decorator. */
   onClick: PropTypes.func,
 
   /** @type {Function} Secondary click handler of the Decorator. */
   onContextMenu: PropTypes.func,
 
-  /** @type {boolean} Whether the Decorator includes an icon */
-  noIcon: PropTypes.bool,
-
   /** @type {number} The score of the data. */
   score: PropTypes.number,
+
+  /** @type {func} Descriptive text for screen readers that details the severity of a score. */
+  scoreDescription: PropTypes.func,
 
   /** @type {Array<number>} An array of four numbers indicating score thresholds for severity. */
   scoreThresholds: (props, propName) => {
@@ -197,17 +203,6 @@ Decorator.propTypes = {
 
   /** @type {string} The value of the data. */
   value: PropTypes.string.isRequired,
-
-  /** @type {func} Descriptive text for screen readers that details the severity of a score. */
-  scoreDescription: PropTypes.func,
-
-  /** @type {object} Mid-line truncation options applied to value of decorator if applicable. */
-  midLineTruncation: PropTypes.shape({
-    enabled: PropTypes.bool,
-    maxLength: PropTypes.number,
-    front: PropTypes.number,
-    back: PropTypes.number,
-  }),
 };
 
 Decorator.defaultProps = {
@@ -258,11 +253,11 @@ function generateIconExports(...iconNames) {
       /** Optional class name. */
       className: PropTypes.string,
 
-      /** Icon size. */
-      size: PropTypes.oneOf([12, 16]),
-
       /** The icon description. */
       description: PropTypes.string.isRequired,
+
+      /** Icon size. */
+      size: PropTypes.oneOf([12, 16]),
     };
 
     IconComponent.defaultProps = {

@@ -5,11 +5,11 @@
 
 import React from 'react';
 
-import { getDocsParameters, security } from '../../../.storybook';
+import { components, getDocsParameters } from '../../../.storybook';
 import { TrendingCard } from '../..';
 
 export default {
-  title: security(TrendingCard.name),
+  title: components(TrendingCard.name),
   component: TrendingCard,
   args: {
     title: 'Title',

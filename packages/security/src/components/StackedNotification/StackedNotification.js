@@ -1,6 +1,6 @@
 /**
  * @file Stacked notification.
- * @copyright IBM Security 2019
+ * @copyright IBM Security 2019, 2021
  */
 
 import { bool, func, node, string } from 'prop-types';
@@ -43,35 +43,35 @@ const StackedNotification = ({
 };
 
 StackedNotification.propTypes = {
+  /* Specify the caption. */
+  caption: node,
+
   /* 	Pass in the children that will be rendered within the notification. */
   children: node,
 
   /* Specify an optional className to be applied to the notification wrapper. */
   className: string,
 
-  /* Specify the title. */
-  title: string.isRequired,
-
-  /* 	Specify the sub-title. */
-  subtitle: node.isRequired,
-
-  /* By default, this value is "alert". You can provide an alternate role if it makes sense for accessibility. */
-  role: string,
-
-  /* Specify the caption. */
-  caption: node,
-
-  /* 	Provide a function that is called when menu is closed. */
-  onCloseButtonClick: func,
+  /* 	Specify whether the close button should be disabled. */
+  hideCloseButton: bool,
 
   /* Provide a description for "close" icon that can be read by screen readers. */
   iconDescription: string.isRequired,
 
-  /* 	Specify whether the close button should be disabled. */
-  hideCloseButton: bool,
+  /* 	Provide a function that is called when menu is closed. */
+  onCloseButtonClick: func,
+
+  /* By default, this value is "alert". You can provide an alternate role if it makes sense for accessibility. */
+  role: string,
 
   /* Provide a description for "status" icon that can be read by screen readers. */
   statusIconDescription: string,
+
+  /* 	Specify the sub-title. */
+  subtitle: node.isRequired,
+
+  /* Specify the title. */
+  title: string.isRequired,
 };
 
 StackedNotification.defaultProps = {

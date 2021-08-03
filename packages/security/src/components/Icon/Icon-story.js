@@ -9,7 +9,7 @@ import { miniUnits } from '@carbon/layout';
 import { storiesOf } from '@storybook/react';
 import React from 'react';
 
-import { security } from '../../../.storybook';
+import { components } from '../../../.storybook';
 import theme from '../../globals/theme';
 
 import { Icon } from '../..';
@@ -20,7 +20,7 @@ const iconProps = {
   style: { fill: theme.icon01, margin: miniUnits(1) },
 };
 
-storiesOf(security('Icon'), module).add(
+storiesOf(components('Icon'), module).add(
   'Default',
   () => (
     <>

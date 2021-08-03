@@ -9,9 +9,8 @@ import { sectionTitle } from '../config';
 
 const getCategory = (title) => `${sectionTitle}/${title}`;
 
-const carbon = (title) => getCategory(`Carbon/${title}`);
+const components = (title) => getCategory(`Components/${title}`);
 const deprecated = (title) => getCategory(`Deprecated/${title}`);
-const security = (title) => getCategory(`Components/${title}`);
 const layoutModules = (title) => getCategory(`Layout modules/${title}`);
 const pageLayouts = (title) => getCategory(`Page layouts (canary)/${title}`);
 const patterns = (title) => getCategory(`Patterns/${title}`);
@@ -27,7 +26,7 @@ const disableCenteredStories = (stories) =>
   stories.addParameters(disableCentered());
 
 export {
-  carbon,
+  components,
   deprecated,
   disableCentered,
   disableCenteredStories,
@@ -36,5 +35,4 @@ export {
   layoutModules,
   pageLayouts,
   patterns,
-  security,
 };

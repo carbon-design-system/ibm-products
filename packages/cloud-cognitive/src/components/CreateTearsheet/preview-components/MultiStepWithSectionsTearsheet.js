@@ -8,12 +8,13 @@
 import React, { useState } from 'react';
 import {
   Button,
+  Dropdown,
   InlineNotification,
+  NumberInput,
   RadioButtonGroup,
   RadioButton,
   TextInput,
   Toggle,
-  NumberInput,
 } from 'carbon-components-react';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
@@ -32,10 +33,14 @@ export const MultiStepWithSectionsTearsheet = () => {
   const [topicDescriptionValue, setTopicDescriptionValue] = useState('');
   const [topicVersionValue, setTopicVersionValue] = useState('');
   const [topicMetaData, setTopicMetaData] = useState('');
+  const [partitionName, setPartitionName] = useState('');
   const [stepTwoTextInputValue, setStepTwoTextInputValue] = useState(1);
   const [stepThreeTextInputValue, setStepThreeTextInputValue] =
     useState('one-day');
   const [isInvalid, setIsInvalid] = useState(false);
+  const [allTopicOwners, setAllTopicOwners] = useState([]);
+  const [selectedTopicOwner, setSelectedTopicOwner] = useState(null);
+  const [apiFailed, setApiFailed] = useState(false);
 
   const clearCreateData = () => {
     setStepOneTextInputValue('');
@@ -46,6 +51,10 @@ export const MultiStepWithSectionsTearsheet = () => {
     setHasSubmitError(false);
     setIsInvalid(false);
     setOpen(false);
+    setPartitionName('');
+    setAllTopicOwners([]);
+    setSelectedTopicOwner(null);
+    setApiFailed(false);
   };
 
   return (
@@ -61,7 +70,6 @@ export const MultiStepWithSectionsTearsheet = () => {
         backButtonText="Back"
         nextButtonText="Next"
         description="Specify details for the new topic you want to create"
-        label="This is the label of the multi step tearsheet"
         title="Create topic"
         open={open}
         onClose={clearCreateData}
@@ -73,16 +81,32 @@ export const MultiStepWithSectionsTearsheet = () => {
             }, simulatedDelay);
           })
         }
+        sideNavAriaLabel="Create topic side nav"
         viewAllToggleLabelText="Show all available options"
         viewAllToggleOffLabelText="Off"
         viewAllToggleOnLabelText="On"
         includeViewAllToggle>
         <CreateTearsheetStep
+          onMount={async () => {
+            try {
+              const data = await fetch('https://randomuser.me/api/?results=5');
+              const json = await data.json();
+              if (!data.ok) {
+                throw new Error('received non 200 response');
+              }
+              setAllTopicOwners(json.results);
+            } catch (error) {
+              console.warn(
+                `CreateTearsheet [storybook example]: API request failed.`
+              );
+              setApiFailed(true);
+            }
+          }}
           onNext={() => {
             return new Promise((resolve, reject) => {
               setTimeout(() => {
                 // Example usage of how to prevent the next step if some kind
-                // of error occured during the `onNext` handler.
+                // of error occurred during the `onNext` handler.
                 if (shouldReject) {
                   setHasSubmitError(true);
                   reject();
@@ -110,7 +134,7 @@ export const MultiStepWithSectionsTearsheet = () => {
               recognize.
             </p>
             <TextInput
-              labelText="Topic name*"
+              labelText="Topic name"
               id="tearsheet-multi-step-story-text-input-multi-step-1"
               value={stepOneTextInputValue}
               placeholder="Enter topic name"
@@ -129,18 +153,33 @@ export const MultiStepWithSectionsTearsheet = () => {
               }}
             />
             <TextInput
-              labelText="Topic description"
+              labelText="Topic description (optional)"
               id="tearsheet-multi-step-story-text-input-multi-step-1-input-2"
               value={topicDescriptionValue}
               placeholder="Enter topic description"
               onChange={(event) => setTopicDescriptionValue(event.target.value)}
             />
             <TextInput
-              labelText="Topic version"
+              labelText="Topic version (optional)"
               id="tearsheet-multi-step-story-text-input-multi-step-1-input-3"
               value={topicVersionValue}
               placeholder="Enter topic version"
               onChange={(event) => setTopicVersionValue(event.target.value)}
+            />
+            <Dropdown
+              ariaLabel="Topic owner dropdown"
+              className="bx--form-item"
+              id="create-tearsheet-topic-owner"
+              items={allTopicOwners}
+              itemToString={(item) => (item ? item.email : '')}
+              label="Select a topic owner"
+              onChange={({ selectedItem }) =>
+                setSelectedTopicOwner(selectedItem)
+              }
+              selectedItem={selectedTopicOwner}
+              titleText="Topic owner (optional)"
+              warn={apiFailed}
+              warnText="API request failed."
             />
             {hasSubmitError && (
               <InlineNotification
@@ -178,9 +217,7 @@ export const MultiStepWithSectionsTearsheet = () => {
             Empty step for demonstration purposes
           </CreateTearsheetSection>
         </CreateTearsheetStep>
-        <CreateTearsheetStep
-          title="Partitions"
-          disableSubmit={!stepTwoTextInputValue}>
+        <CreateTearsheetStep title="Partitions" disableSubmit={!partitionName}>
           <CreateTearsheetSection
             title="Partitions"
             id="create-tearsheet-section-partitions">
@@ -208,6 +245,13 @@ export const MultiStepWithSectionsTearsheet = () => {
               onChange={(event) =>
                 setStepTwoTextInputValue(event.imaginaryTarget.value)
               }
+            />
+            <TextInput
+              labelText="Partition name"
+              id="tearsheet-multi-step-story-text-input-multi-step-3-input-1"
+              value={partitionName}
+              placeholder="Enter partition name"
+              onChange={(event) => setPartitionName(event.target.value)}
             />
           </CreateTearsheetSection>
         </CreateTearsheetStep>

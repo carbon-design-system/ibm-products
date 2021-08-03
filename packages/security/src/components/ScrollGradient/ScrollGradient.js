@@ -1,14 +1,12 @@
 /**
  * @file Scroll gradient.
- * @copyright IBM Security 2019 - 2020
+ * @copyright IBM Security 2019 - 2021
  */
 
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-// https://www.npmjs.com/package/resize-observer-polyfill
-import ResizeObserver from 'resize-observer-polyfill';
 import { throttle } from 'throttle-debounce';
 
 import { getComponentNamespace } from '../../globals/namespace';
@@ -20,20 +18,23 @@ const scrollDirection = { X: 'X', Y: 'Y' };
 
 class ScrollGradient extends Component {
   static propTypes = {
-    /** @type {string} Fade out color. Any valid CSS color value works */
-    color: PropTypes.string.isRequired,
-
     /** @type {string} Scroll area children */
     children: PropTypes.oneOfType([
-      PropTypes.node,
       PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node,
     ]),
 
     /** @type {string} Optional classname */
     className: PropTypes.string,
 
+    /** @type {string} Fade out color. Any valid CSS color value works */
+    color: PropTypes.string.isRequired,
+
     /** @type {string} Scroll direction */
     direction: PropTypes.oneOf(['X', 'Y']),
+
+    /** @type {(element: HTMLElement) => {}} Optional function to get reference to scrollable DOM element */
+    getScrollElementRef: PropTypes.func,
 
     /** @type {boolean} Set to true if you want to hide gradient on the start side (top or left) of scrollable element. */
     hideStartGradient: PropTypes.bool,
@@ -43,9 +44,6 @@ class ScrollGradient extends Component {
 
     /** @type {string} Optional classname for scroll element. */
     scrollElementClassName: PropTypes.string,
-
-    /** @type {(element: HTMLElement) => {}} Optional function to get reference to scrollable DOM element */
-    getScrollElementRef: PropTypes.func,
   };
 
   static defaultProps = {

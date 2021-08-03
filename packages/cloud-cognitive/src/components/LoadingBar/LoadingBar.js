@@ -63,12 +63,13 @@ export let LoadingBar = React.forwardRef(
     const prevActive = usePrevious(active);
 
     const isDeterminate = percentage !== undefined;
-    const percProgress = isDeterminate
+    const percentProgress = isDeterminate
       ? percentage > 100
         ? `100%`
         : percentage + '%'
       : 0;
-    const showPercIndicator = isDeterminate && showPercentageIndicator;
+    const actuallyShowPercentageIndicator =
+      isDeterminate && showPercentageIndicator;
     // switch classes dependant on props
     const loadingWrapper = cx({
       [`${blockClass}__preload`]: !prevActive && !active,
@@ -107,12 +108,12 @@ export let LoadingBar = React.forwardRef(
         id={loadingId}>
         <div className={loadingClassName}>
           <div
-            {...(isDeterminate && { style: { width: percProgress } })}
+            {...(isDeterminate && { style: { width: percentProgress } })}
             className={`${blockClass}__progress`}>
             <div className={animationClassName} />
           </div>
         </div>
-        {showPercIndicator && (
+        {actuallyShowPercentageIndicator && (
           <div className={`${blockClass}__indicator-wrapper`}>
             <div className={`${blockClass}__indicator`}>
               {active && percentageIndicatorText}
@@ -156,7 +157,7 @@ LoadingBar.propTypes = {
   id: PropTypes.string,
 
   /**
-   * Leave undefined for indetermined duration or specify percentage complete that the determinate bar should indicate (0-100).
+   * Leave undefined for indeterminate duration or specify percentage complete that the determinate bar should indicate (0-100).
    */
   percentage: PropTypes.number,
 

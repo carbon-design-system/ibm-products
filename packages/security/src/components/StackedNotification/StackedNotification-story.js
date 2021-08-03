@@ -10,7 +10,7 @@ import { text, boolean } from '@storybook/addon-knobs';
 
 import { iconDescription, title, subtitle, caption } from './_mocks_';
 
-import { security } from '../../../.storybook';
+import { components } from '../../../.storybook';
 
 import { StackedNotification } from '../..';
 
@@ -22,6 +22,6 @@ const props = () => ({
   hideCloseButton: boolean('Hide close button (hideCloseButton)', false),
 });
 
-storiesOf(security('StackedNotification'), module).add('Default', () => (
+storiesOf(components('StackedNotification'), module).add('Default', () => (
   <StackedNotification {...props()} />
 ));

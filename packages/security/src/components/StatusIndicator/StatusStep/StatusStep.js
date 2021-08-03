@@ -81,14 +81,17 @@ const getStatusIcon = (status, description) => {
  */
 class StatusStep extends Component {
   static propTypes = {
-    /** @type {string} Used to create a custom key for a step. */
-    label: string.isRequired,
+    /** @type {string} Extra classes to add. */
+    className: string,
 
     /** @type {string} A description for a step. */
     description: string.isRequired,
 
-    /** @type {string} Extra classes to add. */
-    className: string,
+    /** @type {string} An error message to explain why the step failed. */
+    errorMsg: string,
+
+    /** @type {string} Used to create a custom key for a step. */
+    label: string.isRequired,
 
     /** @type {enum} A status for a step. */
     status: oneOf([
@@ -97,9 +100,6 @@ class StatusStep extends Component {
       STATUS.DEFAULT,
       STATUS.FAILED,
     ]),
-
-    /** @type {string} An error message to explain why the step failed. */
-    errorMsg: string,
   };
 
   static defaultProps = {

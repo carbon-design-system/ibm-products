@@ -1,6 +1,6 @@
 /**
  * @file Error view component.
- * @copyright IBM Security 2019
+ * @copyright IBM Security 2019, 2021
  */
 
 import classnames from 'classnames';
@@ -139,23 +139,23 @@ ErrorPage.propTypes = {
   /** @type {string} The class name of the section. */
   className: PropTypes.string,
 
-  /** @type {string} The title of the section. */
-  title: PropTypes.string,
-
-  /** @type {string} statusCode for the ErrorPage section. */
-  statusCode: PropTypes.number,
+  /** @type {string} errorMessage for the ErrorPage section. */
+  errorMessage: PropTypes.string,
 
   /** @type {string} errorName for the ErrorPage section. */
   errorName: PropTypes.string,
 
-  /** @type {string} errorMessage for the ErrorPage section. */
-  errorMessage: PropTypes.string,
+  /** @type {object} the labels used by ErrorPage */
+  labels: defaultLabels.propType,
 
   /** @type {Array<Object.*>} An array list of links. */
   links: PropTypes.arrayOf(PropTypes.shape(link)),
 
-  /** @type {object} the labels used by ErrorPage */
-  labels: defaultLabels.propType,
+  /** @type {string} statusCode for the ErrorPage section. */
+  statusCode: PropTypes.number,
+
+  /** @type {string} The title of the section. */
+  title: PropTypes.string,
 };
 
 export default ErrorPage;

@@ -8,7 +8,7 @@ import { storiesOf } from '@storybook/react';
 
 import React from 'react';
 
-import { security } from '../../../.storybook';
+import { components } from '../../../.storybook';
 import { carbonPrefix } from '../../globals/namespace';
 
 import { ExternalLink } from '../..';
@@ -22,7 +22,7 @@ const storyProps = () => ({
   children: text('Children (`children`)', href),
 });
 
-storiesOf(security('ExternalLink'), module).add('Default', () => (
+storiesOf(components('ExternalLink'), module).add('Default', () => (
   <p className={`${carbonPrefix}--type-body-long-01`}>
     This is an external link <ExternalLink {...storyProps()} /> that appears
     alongside some text.

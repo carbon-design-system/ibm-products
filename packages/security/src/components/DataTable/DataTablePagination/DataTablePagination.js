@@ -1,6 +1,6 @@
 /**
  * @file Data table pagination.
- * @copyright IBM Security 2019
+ * @copyright IBM Security 2019, 2021
  */
 
 import React, { Component } from 'react';
@@ -23,22 +23,18 @@ class DataTablePagination extends Component {
   static propTypes = {
     ...dataTablePropTypes,
 
-    /** @type {string} Additional classes applied to the wrapper. */
-    className: PropTypes.string,
-
-    /** @type {boolean} Indicates whether the component relies on a backend to paginate. */
-    useBackendPagination: PropTypes.bool,
-
     /**
      * @type {string} The description for the backward icon.
      */
     backwardText: PropTypes.string,
 
+    /** @type {string} Additional classes applied to the wrapper. */
+    className: PropTypes.string,
+
     /**
-     * @type {Function} The function returning a translatable text showing where the current page is,
-     * in a manner of the range of items.
+     * @type {boolean} `true` if the backward/forward buttons should be disabled.
      */
-    itemRangeText: PropTypes.func,
+    disabled: PropTypes.bool,
 
     /**
      * @type {string} The description for the forward icon.
@@ -51,9 +47,15 @@ class DataTablePagination extends Component {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
     /**
-     * @type {string} The translatable text indicating the number of items per page.
+     * @type {boolean} `true` if the current page should be the last page.
      */
-    itemsPerPageText: PropTypes.string,
+    isLastPage: PropTypes.bool,
+
+    /**
+     * @type {Function} The function returning a translatable text showing where the current page is,
+     * in a manner of the range of items.
+     */
+    itemRangeText: PropTypes.func,
 
     /**
      * @type {Function} A variant of `itemRangeText`, used if the total number of items is unknown.
@@ -61,9 +63,24 @@ class DataTablePagination extends Component {
     itemText: PropTypes.func,
 
     /**
+     * @type {string} The translatable text indicating the number of items per page.
+     */
+    itemsPerPageText: PropTypes.string,
+
+    /**
      * @type {string} The callback function called when the current page changes.
      */
     onChange: PropTypes.func,
+
+    /**
+     * @type {number} The current page.
+     */
+    page: PropTypes.number,
+
+    /**
+     * @type {boolean} `true` if the select box to change the page should be disabled.
+     */
+    pageInputDisabled: PropTypes.bool,
 
     /**
      * @type {string}
@@ -76,9 +93,9 @@ class DataTablePagination extends Component {
     pageRangeText: PropTypes.func,
 
     /**
-     * @type {Function} The translatable text showing the current page.
+     * @type {number} The number dictating how many items a page contains.
      */
-    pageText: PropTypes.func,
+    pageSize: PropTypes.number,
 
     /**
      * @type {Array<number>} The choices for `pageSize`.
@@ -86,24 +103,9 @@ class DataTablePagination extends Component {
     pageSizes: PropTypes.arrayOf(PropTypes.number).isRequired,
 
     /**
-     * @type {number} The total number of items.
+     * @type {Function} The translatable text showing the current page.
      */
-    totalItems: PropTypes.number,
-
-    /**
-     * @type {boolean} `true` if the backward/forward buttons should be disabled.
-     */
-    disabled: PropTypes.bool,
-
-    /**
-     * @type {number} The current page.
-     */
-    page: PropTypes.number,
-
-    /**
-     * @type {number} The number dictating how many items a page contains.
-     */
-    pageSize: PropTypes.number,
+    pageText: PropTypes.func,
 
     /**
      * @type {boolean} `true` if the total number of items is unknown.
@@ -111,14 +113,12 @@ class DataTablePagination extends Component {
     pagesUnknown: PropTypes.bool,
 
     /**
-     * @type {boolean} `true` if the current page should be the last page.
+     * @type {number} The total number of items.
      */
-    isLastPage: PropTypes.bool,
+    totalItems: PropTypes.number,
 
-    /**
-     * @type {boolean} `true` if the select box to change the page should be disabled.
-     */
-    pageInputDisabled: PropTypes.bool,
+    /** @type {boolean} Indicates whether the component relies on a backend to paginate. */
+    useBackendPagination: PropTypes.bool,
   };
 
   static defaultProps = {

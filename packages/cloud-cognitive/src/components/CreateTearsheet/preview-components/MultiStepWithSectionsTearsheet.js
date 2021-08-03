@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /**
  * Copyright IBM Corp. 2021, 2021
  *
@@ -24,7 +25,20 @@ import { CreateTearsheetSection } from '../CreateTearsheetSection';
 
 const blockClass = `${pkg.prefix}--tearsheet-create-multi-step`;
 
-export const MultiStepWithSectionsTearsheet = () => {
+export const MultiStepWithSectionsTearsheet = ({
+  backButtonText,
+  cancelButtonText,
+  className,
+  description,
+  label,
+  nextButtonText,
+  sideNavAriaLabel,
+  submitButtonText,
+  title,
+  viewAllToggleLabelText,
+  viewAllToggleOffLabelText,
+  viewAllToggleOnLabelText,
+}) => {
   const [simulatedDelay] = useState(750);
   const [open, setOpen] = useState(false);
   const [shouldReject, setShouldReject] = useState(false);
@@ -64,13 +78,14 @@ export const MultiStepWithSectionsTearsheet = () => {
         {open ? 'Close CreateTearsheet' : 'Open CreateTearsheet'}
       </Button>
       <CreateTearsheet
-        className={blockClass}
-        submitButtonText="Create"
-        cancelButtonText="Cancel"
-        backButtonText="Back"
-        nextButtonText="Next"
-        description="Specify details for the new topic you want to create"
-        title="Create topic"
+        label={label}
+        className={cx(blockClass, className)}
+        submitButtonText={submitButtonText}
+        cancelButtonText={cancelButtonText}
+        backButtonText={backButtonText}
+        nextButtonText={nextButtonText}
+        description={description}
+        title={title}
         open={open}
         onClose={clearCreateData}
         onRequestSubmit={() =>
@@ -81,10 +96,10 @@ export const MultiStepWithSectionsTearsheet = () => {
             }, simulatedDelay);
           })
         }
-        sideNavAriaLabel="Create topic side nav"
-        viewAllToggleLabelText="Show all available options"
-        viewAllToggleOffLabelText="Off"
-        viewAllToggleOnLabelText="On"
+        sideNavAriaLabel={sideNavAriaLabel}
+        viewAllToggleLabelText={viewAllToggleLabelText}
+        viewAllToggleOffLabelText={viewAllToggleOffLabelText}
+        viewAllToggleOnLabelText={viewAllToggleOnLabelText}
         includeViewAllToggle>
         <CreateTearsheetStep
           onMount={async () => {

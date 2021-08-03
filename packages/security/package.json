@@ -81,6 +81,7 @@
     "enzyme-adapter-react-16": "^1.15.6",
     "eslint-plugin-only-warn": "^1.0.3",
     "jest-config-ibm-cloud-cognitive": "^0.8.0",
-    "node-sass": "^6.0.0"
+    "node-sass": "^6.0.0",
+    "recompose": "^0.30.0"
   }
 }

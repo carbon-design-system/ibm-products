@@ -8,7 +8,7 @@
 // cspell:words unuse
 
 import { withCarbonTheme } from '@carbon/storybook-addon-theme/react';
-import { ArgsTable, Canvas, Story, Source } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Canvas, Story, Source } from '@storybook/addon-docs';
 import LinkTo from '@storybook/addon-links/react';
 
 import { Column, Row } from 'carbon-components-react';

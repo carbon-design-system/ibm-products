@@ -3,6 +3,104 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.64.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.64.5...@carbon/ibm-cloud-cognitive@0.64.6) (2021-08-03)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.64.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.64.4...@carbon/ibm-cloud-cognitive@0.64.5) (2021-08-03)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.64.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.64.3...@carbon/ibm-cloud-cognitive@0.64.4) (2021-08-03)
+
+
+### Bug Fixes
+
+* **CreateTearsheet:** stories should receive args as expected now ([#1099](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1099)) ([ec43a08](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ec43a0891c472a554228bd2bc11bb83a0fa090ce))
+
+
+
+
+
+## [0.64.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.64.2...@carbon/ibm-cloud-cognitive@0.64.3) (2021-08-03)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.64.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.64.1...@carbon/ibm-cloud-cognitive@0.64.2) (2021-08-03)
+
+
+### Bug Fixes
+
+* added additional apikeymodal tests ([#1098](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1098)) ([e680415](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e680415bbf998584910eb9ed92eff62a71913ebe))
+
+
+
+
+
+## [0.64.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.64.0...@carbon/ibm-cloud-cognitive@0.64.1) (2021-08-03)
+
+
+### Bug Fixes
+
+* **SidePanel:** add panel height to useEffect dependencies ([#1100](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1100)) ([fe29cc0](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/fe29cc0ebdbbdf3d66acf0a7d6bc8263b2139030))
+
+
+
+
+
+# [0.64.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.63.2...@carbon/ibm-cloud-cognitive@0.64.0) (2021-07-30)
+
+
+### Features
+
+* **deps:** add Carbon packages as peer dependencies ([#1089](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1089)) ([6b807ef](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6b807efa40798dd0977c76eb07bff8fb7daa170e))
+
+
+
+
+
+## [0.63.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.63.1...@carbon/ibm-cloud-cognitive@0.63.2) (2021-07-30)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.63.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.63.0...@carbon/ibm-cloud-cognitive@0.63.1) (2021-07-29)
+
+
+### Bug Fixes
+
+* **CreateTearsheet:** story component updates ([#1091](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1091)) ([62f7fbc](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/62f7fbc0b0c4d62d68cbaf288bbd5ae0170a4605))
+
+
+
+
+
+# [0.63.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.62.6...@carbon/ibm-cloud-cognitive@0.63.0) (2021-07-28)
+
+
+### Features
+
+* update Carbon versions and dependencies ([#1084](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1084)) ([3735ead](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/3735ead9a96450015ec7aeafdb25deaa93d49aaa))
+
+
+
+
+
 ## [0.62.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.62.5...@carbon/ibm-cloud-cognitive@0.62.6) (2021-07-27)
 
 

@@ -1,8 +1,7 @@
 <!-- `position:fixed` cause rendering issues, so do not render the modal -->
 
 import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
-import { pkg } from '../../settings';
-import { getStorybookSlug } from '../../../config';
+import { getStoryId } from '../../global/js/utils/story-helper';
 import { RemoveModal } from '.';
 
 # RemoveModal
@@ -20,7 +19,7 @@ For additional usage guidelines and documentation please refer to the links
 above.
 
 <Canvas>
-  <Story id={getStorybookSlug(pkg, RemoveModal.displayName, 'standard')} />
+  <Story id={getStoryId(RemoveModal.displayName, 'standard')} />
 </Canvas>
 
 ## High impact vs medium impact

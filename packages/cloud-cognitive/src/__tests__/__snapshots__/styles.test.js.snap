@@ -142,6 +142,92 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 
+.exp--apikey-modal .bx--modal-close {
+  display: none;
+}
+
+.exp--apikey-modal .bx--inline-loading {
+  min-height: 3rem;
+}
+
+.exp--apikey-modal .bx--modal-content {
+  padding-right: var(--cds-spacing-05, 1rem);
+}
+
+.exp--apikey-modal__body {
+  padding-right: calc(20% - var(--cds-spacing-05, 1rem));
+  margin-bottom: var(--cds-spacing-05, 1rem);
+}
+
+.exp--apikey-modal__messaging {
+  display: flex;
+  padding-right: calc(20% - var(--cds-spacing-05, 1rem));
+  margin-top: var(--cds-spacing-03, 0.5rem);
+}
+
+.exp--apikey-modal__messaging-text {
+  flex: 1;
+  margin-left: var(--cds-spacing-03, 0.5rem);
+  font-size: var(--cds-label-01-font-size, 0.75rem);
+  font-weight: var(--cds-label-01-font-weight, 400);
+  line-height: var(--cds-label-01-line-height, 1.34);
+  letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
+}
+
+.exp--apikey-modal__messaging-text > * {
+  font: inherit;
+}
+
+.exp--apikey-modal__error-icon svg {
+  fill: var(--cds-danger-01, #da1e28);
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-end-p1 {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-end-p2 {
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+/* Stroke animations */
+@keyframes init-stroke {
+  0% {
+    stroke-dashoffset: 240;
+  }
+  100% {
+    stroke-dashoffset: 16;
+  }
+}
+
+@keyframes stroke-end {
+  0% {
+    stroke-dashoffset: 16;
+  }
+  100% {
+    stroke-dashoffset: 240;
+  }
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
 .exp--action-set {
   align-items: stretch;
   justify-content: flex-end;

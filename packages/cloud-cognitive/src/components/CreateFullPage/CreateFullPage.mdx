@@ -1,6 +1,5 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import { pkg } from '../../settings';
-import { getStorybookSlug } from '../../../config';
+import { getStoryId } from '../../global/js/utils/story-helper';
 import { CreateFullPage } from '.';
 
 # CreateFullPage
@@ -170,7 +169,7 @@ will tell our left navigation exactly where to scroll to upon click. We can also
 ```
 
 <Canvas>
-  <Story id={getStorybookSlug(pkg, CreateFullPage.displayName, 'boxed-set')} />
+  <Story id={getStoryId(CreateFullPage.displayName, 'boxed-set')} />
 </Canvas>
 
 ## Component API

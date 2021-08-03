@@ -7,7 +7,7 @@
 
 import React from 'react';
 
-import { pkg, carbon } from '../../settings';
+import { carbon } from '../../settings';
 
 import {
   Column,
@@ -37,10 +37,11 @@ import {
 import { ActionBarItem } from '../ActionBar';
 import { PageHeader, deprecatedProps } from './PageHeader';
 
-import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, PageHeader.displayName);
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
-import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { demoTableHeaders, demoTableData } from './PageHeaderDemo.data';
 
@@ -287,7 +288,7 @@ const title = {
 };
 
 export default {
-  title: `${storybookPrefix}/${PageHeader.displayName}`,
+  title: getStoryTitle(PageHeader.displayName),
   component: PageHeader,
   subcomponents: { ActionBarItem },
   parameters: { styles, layout: 'fullscreen', docs: { page: mdx } },

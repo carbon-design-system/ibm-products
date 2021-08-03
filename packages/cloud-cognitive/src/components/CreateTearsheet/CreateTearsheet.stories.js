@@ -5,9 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import styles from './_storybook-styles.scss';
 import { CreateTearsheet } from './CreateTearsheet';
 import { CreateTearsheetStep } from './CreateTearsheetStep';
@@ -15,10 +16,8 @@ import { MultiStepTearsheet } from './preview-components/MultiStepTearsheet';
 import { MultiStepWithSectionsTearsheet } from './preview-components/MultiStepWithSectionsTearsheet';
 import mdx from './CreateTearsheet.mdx';
 
-const storybookPrefix = getStorybookPrefix(pkg, CreateTearsheet.displayName);
-
 export default {
-  title: `${storybookPrefix}/${CreateTearsheet.displayName}`,
+  title: getStoryTitle(CreateTearsheet.displayName),
   component: CreateTearsheet,
   subcomponents: {
     CreateTearsheetStep,
@@ -34,12 +33,33 @@ export default {
   parameters: { styles, docs: { page: mdx } },
 };
 
+const createTearsheetProps = {
+  title: 'Create topic',
+  description: 'Specify details for the new topic you want to create',
+  submitButtonText: 'Create',
+  cancelButtonText: 'Cancel',
+  backButtonText: 'Back',
+  nextButtonText: 'Next',
+  className: 'test-class-name',
+  label: '',
+};
+
 export const multiStepTearsheet = prepareStory(MultiStepTearsheet, {
   storyName: 'With multiple steps',
-  args: {},
+  args: {
+    includeViewAllToggle: false,
+    ...createTearsheetProps,
+  },
 });
 
 export const withViewAllToggle = prepareStory(MultiStepWithSectionsTearsheet, {
   storyName: 'With view all toggle',
-  args: {},
+  args: {
+    includeViewAllToggle: true,
+    sideNavAriaLabel: 'Create topic side nav',
+    viewAllToggleLabelText: 'Show all available options',
+    viewAllToggleOffLabelText: 'Off',
+    viewAllToggleOnLabelText: 'On',
+    ...createTearsheetProps,
+  },
 });

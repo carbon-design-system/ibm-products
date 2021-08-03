@@ -25,6 +25,7 @@ import {
 } from 'carbon-components-react/lib/components/UIShell';
 import cx from 'classnames';
 import { useResizeDetector } from 'react-resize-detector';
+import { extractShapesArray } from '../../global/js/utils/props-helper';
 import wrapFocus from '../../global/js/utils/wrapFocus';
 import { TearsheetShell } from '../Tearsheet/TearsheetShell';
 import { carbon, pkg } from '../../settings';
@@ -97,14 +98,19 @@ export let CreateTearsheet = forwardRef(
     // inside of the CreateTearsheetSteps when the viewAll toggle is provided and turned on.
     useEffect(() => {
       if (includeViewAllToggle && shouldViewAll) {
-        let childrenArray = Array.isArray(children) ? children : [children];
+        let childrenArray =
+          typeof children !== 'undefined'
+            ? children.length
+              ? [...children]
+              : [children]
+            : [];
         const tearsheetStepComponents = childrenArray.filter((child) =>
           isTearsheetStep(child)
         );
         let tearsheetSectionComponents = [];
         tearsheetStepComponents.forEach((child, index) => {
           // We have received children for a TearsheetStep
-          if (shouldViewAll && typeof child.props.children !== 'undefined') {
+          if (typeof child.props.children !== 'undefined') {
             // Only a string was provided as children of CreateTearsheetStep, this is not permitted when using view all toggle
             if (typeof child.props.children === 'string') {
               console.warn(
@@ -242,7 +248,7 @@ export let CreateTearsheet = forwardRef(
           key: 'create-tearsheet-action-button-cancel',
           label: cancelButtonText,
           onClick: onUnmount,
-          kind: shouldViewAll ? 'secondary' : 'ghost',
+          kind: 'ghost',
         });
         buttons.push({
           key: 'create-tearsheet-action-button-submit',
@@ -286,7 +292,11 @@ export let CreateTearsheet = forwardRef(
     const getTearsheetSteps = useCallback(() => {
       const steps = [];
       const childrenArray = Array.isArray(children) ? children : [children];
-      childrenArray.forEach((child) => {
+      const extractedChildren =
+        childrenArray && childrenArray[0]?.type === React.Fragment
+          ? childrenArray[0].props.children
+          : childrenArray;
+      extractedChildren.forEach((child) => {
         if (isTearsheetStep(child)) {
           steps.push(child);
         }
@@ -319,16 +329,19 @@ export let CreateTearsheet = forwardRef(
       let childrenArray = Array.isArray(childrenElements)
         ? childrenElements
         : [childrenElements];
-      const tearsheetStepComponents = childrenArray.filter((child) =>
-        isTearsheetStep(child)
-      );
+      const tearsheetStepComponents =
+        childrenArray && childrenArray[0]?.type === React.Fragment
+          ? childrenArray[0].props.children.filter((item) =>
+              isTearsheetStep(item)
+            )
+          : childrenArray.filter((item) => isTearsheetStep(item));
       let tearsheetSectionComponents = [];
       tearsheetStepComponents.forEach((child) => {
         // we have received an array of children, lets check to see that each child is
         // a CreateTearsheetSection component before adding it to tearsheetSectionComponents
         if (
           shouldViewAll &&
-          child.props.children.length &&
+          child?.props?.children?.length &&
           typeof child.props.children !== 'string'
         ) {
           child.props.children.forEach((stepChild) => {
@@ -358,17 +371,22 @@ export let CreateTearsheet = forwardRef(
                   tearsheetSectionComponents.map(
                     (tearsheetSection, sectionIndex) => (
                       <SideNavLink
-                        href="javascript:void(0)"
+                        href={`#${tearsheetSection?.props?.id}`}
                         key={sectionIndex}
                         isActive={activeSectionIndex === sectionIndex}
-                        onClick={() => {
+                        onClick={(event) => {
+                          event.preventDefault();
                           setActiveSectionIndex(sectionIndex);
                           if (tearsheetSection.props.id) {
                             const scrollTarget = document.querySelector(
                               `#${tearsheetSection.props.id}`
                             );
                             const scrollContainer = document.querySelector(
+<<<<<<< HEAD
                               `.${pkg.prefix}--tearsheet-create__multi-step-panel-content`
+=======
+                              `.${blockClass}__multi-step-panel-content`
+>>>>>>> upstream/main
                             );
                             console.log(scrollTarget.offsetParent)
                             scrollContainer.scrollTo({
@@ -415,16 +433,27 @@ export let CreateTearsheet = forwardRef(
       const childrenArray = Array.isArray(childrenElements)
         ? childrenElements
         : [childrenElements];
-      const indexOfLastTearsheetStep = childrenArray
-        .map((el) => el?.props?.type)
+      const formattedChildren = extractShapesArray(childrenElements);
+      const nonStepComponents =
+        childrenArray && childrenArray[0]?.type === React.Fragment
+          ? childrenArray[0].props.children.filter(
+              (item) => !isTearsheetStep(item)
+            )
+          : childrenArray.filter((item) => !isTearsheetStep(item));
+      const stepComponents =
+        childrenArray && childrenArray[0]?.type === React.Fragment
+          ? childrenArray[0].props.children.filter((item) =>
+              isTearsheetStep(item)
+            )
+          : childrenArray.filter((item) => isTearsheetStep(item));
+      const indexOfLastTearsheetStep = formattedChildren
+        .map((el) => el?.type)
         .lastIndexOf(CREATE_TEARSHEET_STEP);
       return (
         <>
           {' '}
-          {childrenArray.map((child, stepIndex) => {
-            if (!isTearsheetStep(child)) {
-              return child;
-            }
+          {nonStepComponents.map((item) => item)}
+          {stepComponents.map((child, stepIndex) => {
             step++;
             return React.cloneElement(
               child,
@@ -433,11 +462,6 @@ export let CreateTearsheet = forwardRef(
                   [`${blockClass}__step--hidden-step`]:
                     !shouldViewAll && currentStep !== step,
                   [`${blockClass}__step--visible-step`]: currentStep === step,
-                  [`${blockClass}__step--first-panel-step`]:
-                    !previousState?.open &&
-                    open &&
-                    previousState?.currentStep === 0 &&
-                    stepIndex === 0,
                 }),
                 key: `key_${stepIndex}`,
               },
@@ -509,7 +533,7 @@ export let CreateTearsheet = forwardRef(
     const renderStepTitle = (stepIndex) => {
       const tearsheetSteps = getTearsheetSteps();
       const stepTitle =
-        (tearsheetSteps && tearsheetSteps[stepIndex]?.props.title) || null;
+        (tearsheetSteps && tearsheetSteps[stepIndex]?.props?.title) || null;
       return stepTitle;
     };
 
@@ -581,13 +605,8 @@ export let CreateTearsheet = forwardRef(
     const handleViewAllToggle = (toggleState) => {
       setShouldViewAll(toggleState);
       setActiveSectionIndex(0);
-      // scroll to top of tearsheet page upon toggling view all option
-      if (toggleState) {
-        const createTearsheetContainer = document.querySelector(
-          `.${blockClass}`
-        );
-        createTearsheetContainer.scrollTop = 0;
-      }
+      const createTearsheetContainer = document.querySelector(`.${blockClass}`);
+      createTearsheetContainer.scrollTop = 0;
     };
 
     const renderViewAllToggle = () => {
@@ -604,6 +623,7 @@ export let CreateTearsheet = forwardRef(
       );
     };
 
+    /* istanbul ignore next */
     const handleResize = () => {
       const createTearsheetOuterElement = document.querySelector(
         `.${blockClass} .${carbon.prefix}--modal-container`
@@ -638,6 +658,7 @@ export let CreateTearsheet = forwardRef(
             `.${pkg.prefix}--tearsheet-create__section.${pkg.prefix}--tearsheet-create__step--visible-section`
           )
         );
+        /* istanbul ignore next */
         const observer = new IntersectionObserver((entries) => {
           // isIntersecting is true when element and viewport/options.root are overlapping
           // isIntersecting is false when element and viewport/options.root don't overlap
@@ -769,7 +790,9 @@ CreateTearsheet.propTypes = {
   /**
    * The aria label to be used for the UI Shell SideNav Carbon component
    */
-  sideNavAriaLabel: PropTypes.string,
+  sideNavAriaLabel: PropTypes.string.isRequired.if(
+    ({ includeViewAllToggle }) => includeViewAllToggle
+  ),
 
   /**
    * The submit button text
@@ -793,17 +816,23 @@ CreateTearsheet.propTypes = {
   /**
    * Sets the label text for the view all toggle component
    */
-  viewAllToggleLabelText: PropTypes.string,
+  viewAllToggleLabelText: PropTypes.string.isRequired.if(
+    ({ includeViewAllToggle }) => includeViewAllToggle === true
+  ),
 
   /**
    * Sets the label text for the view all toggle `off` text
    */
-  viewAllToggleOffLabelText: PropTypes.string,
+  viewAllToggleOffLabelText: PropTypes.string.isRequired.if(
+    ({ includeViewAllToggle }) => includeViewAllToggle === true
+  ),
 
   /**
    * Sets the label text for the view all toggle `on` text
    */
-  viewAllToggleOnLabelText: PropTypes.string,
+  viewAllToggleOnLabelText: PropTypes.string.isRequired.if(
+    ({ includeViewAllToggle }) => includeViewAllToggle === true
+  ),
 };
 
 // Default values for component props. Default values are not required for

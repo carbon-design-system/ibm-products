@@ -9,18 +9,17 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add20 } from '@carbon/icons-react';
 import mdx from './NoDataEmptyState.mdx';
-import { pkg } from '../../../settings';
-import { getStorybookPrefix } from '../../../../config';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../../global/js/utils/story-helper';
 
 import { NoDataEmptyState } from '.';
 
 import styles from '../_index.scss';
 
-const storybookPrefix = getStorybookPrefix(pkg, NoDataEmptyState.displayName);
-import { prepareStory } from '../../../global/js/utils/story-helper';
-
 export default {
-  title: `${storybookPrefix}/EmptyStates/${NoDataEmptyState.displayName}`,
+  title: getStoryTitle(NoDataEmptyState.displayName),
   component: NoDataEmptyState,
   parameters: {
     styles,

@@ -7,14 +7,14 @@
 
 import React from 'react';
 import { UserProfileImage } from '.';
-import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import mdx from './UserProfileImage.mdx';
 import image from './headshot.png'; // cspell:disable-line
 import styles from './_storybook.scss'; // import storybook which includes component and additional storybook styles
 
-const storybookPrefix = getStorybookPrefix(pkg, 'UserProfileImage');
 const defaultArgs = {
   backgroundColor: 'light-cyan',
   theme: 'light',
@@ -22,7 +22,7 @@ const defaultArgs = {
 };
 
 export default {
-  title: `${storybookPrefix}/UserProfileImage`,
+  title: getStoryTitle(UserProfileImage.displayName),
   component: UserProfileImage,
   argTypes: {
     backgroundColor: {

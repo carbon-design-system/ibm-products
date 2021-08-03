@@ -9,16 +9,16 @@ import React from 'react';
 import cx from 'classnames';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { TrashCan16, Edit16 } from '@carbon/icons-react';
-import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { ProductiveCard } from '.';
 import mdx from './ProductiveCard.mdx';
 import { action } from '@storybook/addon-actions';
-const storybookPrefix = getStorybookPrefix(pkg, ProductiveCard.displayName);
 
 export default {
-  title: `${storybookPrefix}/Cards/${ProductiveCard.displayName}`,
+  title: getStoryTitle(ProductiveCard.displayName),
   component: ProductiveCard,
   parameters: {
     styles,

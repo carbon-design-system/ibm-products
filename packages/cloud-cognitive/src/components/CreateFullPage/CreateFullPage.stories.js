@@ -6,9 +6,10 @@
  */
 import React, { useState } from 'react';
 
-import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { action } from '@storybook/addon-actions';
 import { CreateFullPage } from '.';
 import { CreateFullPageSection } from './CreateFullPageSection';
@@ -30,12 +31,8 @@ import {
 } from 'carbon-components-react';
 import cx from 'classnames';
 
-const storybookPrefix = getStorybookPrefix(pkg, CreateFullPage.displayName);
-
-const blockClass = `${pkg.prefix}--create-full-page`;
-
 export default {
-  title: `${storybookPrefix}/${CreateFullPage.displayName}`,
+  title: getStoryTitle(CreateFullPage.displayName),
   component: CreateFullPage,
   parameters: {
     styles,
@@ -299,12 +296,12 @@ const TemplateWithToggle = ({ ...args }) => {
           id="create-full-page-section-general">
           <h6
             className={cx(
-              `${blockClass}__description`,
-              `${blockClass}__heading`
+              `${storyClass}__description`,
+              `${storyClass}__heading`
             )}>
             This is the unique name used to recognize your topic
           </h6>
-          <p className={`${blockClass}__description`}>
+          <p className={`${storyClass}__description`}>
             It will also be used by your producers and consumers as part of the
             connection information, so make it something easy to recognize.
           </p>
@@ -363,7 +360,7 @@ const TemplateWithToggle = ({ ...args }) => {
             />
           )}
           <Toggle
-            className={`${blockClass}__error--toggle`}
+            className={`${storyClass}__error--toggle`}
             id="simulated-error-toggle"
             size="sm"
             labelText="Simulate error"
@@ -399,13 +396,13 @@ const TemplateWithToggle = ({ ...args }) => {
           id="create-full-page-section-partitions">
           <h6
             className={cx(
-              `${blockClass}__description`,
-              `${blockClass}__heading`
+              `${storyClass}__description`,
+              `${storyClass}__heading`
             )}>
             One or more partitions make up a topic. A partition is an ordered
             list of messages.
           </h6>
-          <p className={`${blockClass}__description`}>
+          <p className={`${storyClass}__description`}>
             Partitions are distributed across the brokers in order to increase
             the scalability of your topic. You can also use them to distribute
             messages across the members of a consumer group.
@@ -440,12 +437,12 @@ const TemplateWithToggle = ({ ...args }) => {
           id="create-full-page-section-messages">
           <h6
             className={cx(
-              `${blockClass}__description`,
-              `${blockClass}__heading`
+              `${storyClass}__description`,
+              `${storyClass}__heading`
             )}>
             This is how long messages are retained before they are deleted.
           </h6>
-          <p className={`${blockClass}__description`}>
+          <p className={`${storyClass}__description`}>
             If your messages are not read by a consumer within this time, they
             will be missed.
           </p>

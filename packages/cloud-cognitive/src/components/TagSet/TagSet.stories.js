@@ -9,12 +9,13 @@ import React from 'react';
 
 import { types as tagTypes } from 'carbon-components-react/es/components/Tag/Tag';
 import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { TagSet } from '.';
 import mdx from './TagSet.mdx';
 
-const storybookPrefix = getStorybookPrefix(pkg, TagSet.displayName);
 const blockClass = `${pkg.prefix}--tag-set`;
 const blockClassModal = `${blockClass}-modal`;
 
@@ -129,7 +130,7 @@ const overflowAndModalStrings = {
 };
 
 export default {
-  title: `${storybookPrefix}/${TagSet.displayName}`,
+  title: getStoryTitle(TagSet.displayName),
   component: TagSet,
   parameters: {
     docs: { page: mdx },

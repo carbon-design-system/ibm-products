@@ -18,21 +18,21 @@ import {
 import { User20, Notification20 } from '@carbon/icons-react';
 import { white } from '@carbon/colors';
 import styles from './_storybook-styles.scss';
-import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { UnreadNotificationBell } from './preview-components/UnreadNotificationBell';
 
 import { NotificationsPanel } from '.';
 
-import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, NotificationsPanel.displayName);
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 
 import mdx from './NotificationsPanel.mdx';
 import data from './NotificationsPanel_data';
 
 export default {
-  title: `${storybookPrefix}/${NotificationsPanel.displayName}`,
+  title: getStoryTitle(NotificationsPanel.displayName),
   component: NotificationsPanel,
   parameters: {
     styles,

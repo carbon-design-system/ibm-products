@@ -1,0 +1,32 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '@carbon/import-once/scss/import-once';
+@import '@carbon/layout/scss/convert';
+@import '@carbon/themes/scss/tokens';
+
+@import 'carbon-components/scss/components/button/button';
+
+@import '../../global/styles/project-settings';
+
+@include exports($name: toolbar) {
+  $block-class: #{$pkg-prefix}--toolbar;
+
+  .#{$block-class} {
+    display: flex;
+    background-color: $ui-02;
+  }
+
+  .#{$block-class}__group {
+    display: flex;
+    border-right: carbon--rem($px: 1px) solid $ui-03;
+  }
+
+  .#{$block-class}__group:last-of-type {
+    border-right-width: 0;
+  }
+}

@@ -52,6 +52,7 @@ const defaults = {
     LoadingBar: false,
     ModifiedTabs: false,
     ProductiveCard: false,
+    Toolbar: false,
     WebTerminal: false,
     /* new component flags here - comment used by generate CLI */
   },

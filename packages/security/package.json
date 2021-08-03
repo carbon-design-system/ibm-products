@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-security",
   "description": "Carbon for Cloud & Cognitive IBM Security UI components",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -80,7 +80,7 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "eslint-plugin-only-warn": "^1.0.3",
-    "jest-config-ibm-cloud-cognitive": "^0.8.0",
+    "jest-config-ibm-cloud-cognitive": "^0.8.1",
     "node-sass": "^6.0.0",
     "recompose": "^0.30.0"
   }

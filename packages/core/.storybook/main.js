@@ -23,13 +23,12 @@ module.exports = {
     '@storybook/addon-viewport',
     '@carbon/storybook-addon-theme/register',
   ],
-  stories: ['../../**/src/**/*+(-story|.stories).*'],
 
   reactOptions: {
     //fastRefresh: true, -- this option would be nice, but seems to cause errors, see https://github.com/storybookjs/storybook/issues/13745
     strictMode: true,
   },
-
+  stories: ['../../**/src/**/*+(-story|.stories).*'],
   webpackFinal: async (configuration) =>
     merge(configuration, {
       module: {

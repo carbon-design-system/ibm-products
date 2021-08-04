@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /**
  * Copyright IBM Corp. 2021, 2021
  *
@@ -22,7 +23,16 @@ import { CreateTearsheetStep } from '../CreateTearsheetStep';
 
 const blockClass = `${pkg.prefix}--tearsheet-create-multi-step`;
 
-export const MultiStepTearsheet = () => {
+export const MultiStepTearsheet = ({
+  backButtonText,
+  cancelButtonText,
+  className,
+  description,
+  label,
+  nextButtonText,
+  submitButtonText,
+  title,
+}) => {
   const [simulatedDelay] = useState(750);
   const [open, setOpen] = useState(false);
   const [shouldReject, setShouldReject] = useState(false);
@@ -53,13 +63,14 @@ export const MultiStepTearsheet = () => {
         {open ? 'Close CreateTearsheet' : 'Open CreateTearsheet'}
       </Button>
       <CreateTearsheet
-        className={blockClass}
-        submitButtonText="Create"
-        cancelButtonText="Cancel"
-        backButtonText="Back"
-        nextButtonText="Next"
-        description="Specify details for the new topic you want to create"
-        title="Create topic"
+        label={label}
+        className={cx(blockClass, className)}
+        submitButtonText={submitButtonText}
+        cancelButtonText={cancelButtonText}
+        backButtonText={backButtonText}
+        nextButtonText={nextButtonText}
+        description={description}
+        title={title}
         open={open}
         onClose={clearCreateData}
         onRequestSubmit={() =>

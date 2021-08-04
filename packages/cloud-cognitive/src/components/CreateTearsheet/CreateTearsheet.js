@@ -809,7 +809,9 @@ CreateTearsheet.propTypes = {
   /**
    * The aria label to be used for the UI Shell SideNav Carbon component
    */
-  sideNavAriaLabel: PropTypes.string,
+  sideNavAriaLabel: PropTypes.string.isRequired.if(
+    ({ includeViewAllToggle }) => includeViewAllToggle
+  ),
 
   /**
    * The submit button text
@@ -833,17 +835,23 @@ CreateTearsheet.propTypes = {
   /**
    * Sets the label text for the view all toggle component
    */
-  viewAllToggleLabelText: PropTypes.string,
+  viewAllToggleLabelText: PropTypes.string.isRequired.if(
+    ({ includeViewAllToggle }) => includeViewAllToggle === true
+  ),
 
   /**
    * Sets the label text for the view all toggle `off` text
    */
-  viewAllToggleOffLabelText: PropTypes.string,
+  viewAllToggleOffLabelText: PropTypes.string.isRequired.if(
+    ({ includeViewAllToggle }) => includeViewAllToggle === true
+  ),
 
   /**
    * Sets the label text for the view all toggle `on` text
    */
-  viewAllToggleOnLabelText: PropTypes.string,
+  viewAllToggleOnLabelText: PropTypes.string.isRequired.if(
+    ({ includeViewAllToggle }) => includeViewAllToggle === true
+  ),
 };
 
 // Default values for component props. Default values are not required for

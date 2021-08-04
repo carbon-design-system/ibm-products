@@ -11,6 +11,29 @@
 @import 'carbon-components/scss/components/progress-indicator/progress-indicator';
 
 @mixin create-tearsheet {
+  $influencerAnimationStart: calc(-1 * #{$spacing-05});
+  @keyframes influencerMenuEntrance {
+    0% {
+      opacity: 0;
+      // stylelint-disable-next-line carbon/layout-token-use
+      transform: translateX($influencerAnimationStart);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes influencerMenuExit {
+    0% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    100% {
+      opacity: 0;
+      // stylelint-disable-next-line carbon/layout-token-use
+      transform: translateX($influencerAnimationStart);
+    }
+  }
   @keyframes stepContentEntrance {
     0% {
       opacity: 0;
@@ -108,6 +131,32 @@
     margin: $spacing-06 calc(-1 * #{$spacing-08}) $spacing-07
       calc(-1 * #{$spacing-06});
     background-color: $ui-03;
+  }
+
+  .#{$block-class}__side-nav-opening,
+  .#{$block-class}__progress-indicator-opening {
+    // stylelint-disable-next-line carbon/motion-token-use
+    animation: influencerMenuEntrance $duration--moderate-02 1;
+    animation-fill-mode: forwards;
+    @include carbon--motion(entrance, productive);
+  }
+
+  .#{$block-class}__side-nav-closing,
+  .#{$block-class}__progress-indicator-closing {
+    // stylelint-disable-next-line carbon/motion-token-use
+    animation: influencerMenuExit $duration--moderate-02 1;
+    animation-fill-mode: forwards;
+    @include carbon--motion(exit, productive);
+  }
+
+  @media (prefers-reduced-motion) {
+    .#{$block-class}__side-nav-opening,
+    .#{$block-class}__progress-indicator-opening,
+    .#{$block-class}__side-nav-closing,
+    .#{$block-class}__progress-indicator-closing {
+      animation: none;
+      opacity: 1;
+    }
   }
 }
 

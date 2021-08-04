@@ -25,7 +25,7 @@ const defaultProps = {
   className: 'class-test',
   closeButtonText: 'close',
   copyButtonText: 'copy',
-  copyIconDescription: 'copy',
+  copyIconDescription: 'copy icon description',
   customSteps: [],
   downloadBodyText: 'download body',
   downloadFileName: 'filename',
@@ -73,6 +73,7 @@ describe(componentName, () => {
     getByText(defaultProps.modalLabel);
     getByText(defaultProps.nameLabel);
     getByPlaceholderText(defaultProps.namePlaceholder);
+    getByText(defaultProps.nameHelperText);
   });
 
   it('renders with minimal setup', () => {
@@ -83,11 +84,14 @@ describe(componentName, () => {
       apiKey: '123-456-789',
     };
     const { click } = userEvent;
-    const { getByText, container } = render(<APIKeyModal {...props} />);
+    const { getByText, container, getByLabelText } = render(
+      <APIKeyModal {...props} />
+    );
     expect(container.querySelector('.bx--text-input').value).toBe(props.apiKey);
     getByText(props.apiKeyLabel);
     click(container.querySelector('.bx--btn--primary'));
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(props.apiKey);
+    getByLabelText(defaultProps.copyIconDescription);
   });
 
   it('renders with standard setup', async () => {
@@ -188,30 +192,35 @@ describe(componentName, () => {
     getByPlaceholderText('input a');
     getByText(props.nextStepButtonText);
     getByText(props.closeButtonText);
+    getByText(props.customSteps[0].title);
 
     // advance to step 2
     click(getByText(props.nextStepButtonText));
     getByPlaceholderText('input b');
     getByText(props.nextStepButtonText);
     getByText(props.previousStepButtonText);
+    getByText(props.customSteps[1].title);
 
     // go back to step 1
     click(getByText(props.previousStepButtonText));
     getByPlaceholderText('input a');
     getByText(props.nextStepButtonText);
     getByText(props.closeButtonText);
+    getByText(props.customSteps[0].title);
 
     // advance to step 2
     click(getByText(props.nextStepButtonText));
     getByPlaceholderText('input b');
     getByText(props.nextStepButtonText);
     getByText(props.previousStepButtonText);
+    getByText(props.customSteps[1].title);
 
     // advance to step 3
     click(getByText(props.nextStepButtonText));
     getByPlaceholderText('input c');
     getByText(props.generateButtonText);
     getByText(props.previousStepButtonText);
+    getByText(props.customSteps[2].title);
 
     // submit invalid form
     click(getByText(props.generateButtonText));
@@ -261,8 +270,10 @@ describe(componentName, () => {
   it('toggles key visibility', async () => {
     const props = {
       ...defaultProps,
-      apiKey: 'test',
+      apiKey: '555-555-555-555',
     };
+    const { mouseOver } = fireEvent;
+    const { click } = userEvent;
     const { getByText, container, rerender } = render(
       <APIKeyModal {...props} />
     );
@@ -272,6 +283,11 @@ describe(componentName, () => {
       'type',
       'password'
     );
+    mouseOver(container.querySelector('.bx--icon-visibility-on'));
+    await waitFor(() => getByText(defaultProps.showAPIKeyLabel));
+    click(container.querySelector('.bx--icon-visibility-on'));
+    mouseOver(container.querySelector('.bx--icon-visibility-off'));
+    await waitFor(() => getByText(defaultProps.hideAPIKeyLabel));
     rerender(<APIKeyModal {...props} hasAPIKeyVisibilityToggle={false} />);
     await waitFor(() => getByText(props.downloadLinkText));
     expect(container.querySelector('.bx--text-input')).toHaveAttribute(

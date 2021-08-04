@@ -18,6 +18,7 @@ import {
   ProgressStep,
   Toggle,
 } from 'carbon-components-react';
+import { moderate02 } from '@carbon/motion';
 import {
   SideNav,
   SideNavItems,
@@ -68,6 +69,8 @@ export let CreateTearsheet = forwardRef(
     const [shouldViewAll, setShouldViewAll] = useState(false);
     const [currentStep, setCurrentStep] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [progressIndicatorState, setProgressIndicatorState] = useState('');
+    const [sideNavState, setSideNavState] = useState('');
     const [activeSectionIndex, setActiveSectionIndex] = useState(0);
     const previousState = usePreviousValue({ currentStep, open });
 
@@ -268,52 +271,73 @@ export let CreateTearsheet = forwardRef(
           }
         }
       });
-      if (shouldViewAll) {
-        return (
-          <SideNav expanded isFixedNav>
-            <SideNavItems>
-              {sectionChildElements?.length &&
-                sectionChildElements.map((sectionChild, sectionIndex) => (
-                  <SideNavLink
-                    href="javascript:void(0)"
-                    key={sectionIndex}
-                    isActive={activeSectionIndex === sectionIndex}
-                    onClick={() => {
-                      setActiveSectionIndex(sectionIndex);
-                      if (sectionChild.props.id) {
-                        const scrollTarget = document.querySelector(
-                          `#${sectionChild.props.id}`
-                        );
-                        const scrollContainer = document.querySelector(
-                          `.${pkg.prefix}--tearsheet__main`
-                        );
-                        scrollContainer.scrollTo({
-                          top: scrollTarget.offsetTop,
-                          behavior: 'smooth',
-                        });
-                      } else {
-                        console.warn(
-                          `${componentName}: CreateTearsheetSection is missing a required prop of 'id'`
-                        );
-                      }
-                    }}>
-                    {sectionChild.props.title}
-                  </SideNavLink>
-                ))}
-            </SideNavItems>
-          </SideNav>
-        );
-      }
+      
       return (
-        <ProgressIndicator
-          currentIndex={currentStep - 1}
-          spaceEqually
-          vertical
-          className={`${blockClass}__progress-indicator`}>
-          {stepChildren.map((child, stepIndex) => (
-            <ProgressStep label={child.props.title} key={stepIndex} />
-          ))}
-        </ProgressIndicator>
+        <div className={`${blockClass}__left-nav`}>
+          {!shouldViewAll ? (
+            <ProgressIndicator
+              currentIndex={currentStep - 1}
+              spaceEqually
+              vertical
+              className={cx(`${blockClass}__progress-indicator`, {
+                [`${blockClass}__progress-indicator-opening`]:
+                  progressIndicatorState === 'opening',
+                [`${blockClass}__progress-indicator-closing`]:
+                  progressIndicatorState === 'closing',
+              })}>
+              {tearsheetStepComponents.map((child, stepIndex) => (
+                <ProgressStep
+                  label={child.props.title}
+                  key={stepIndex}
+                  secondaryLabel={child.props.secondaryLabel}
+                />
+              ))}
+            </ProgressIndicator>
+          ) : (
+            <SideNav
+              expanded
+              isFixedNav
+              aria-label={sideNavAriaLabel}
+              className={cx({
+                [`${blockClass}__side-nav-opening`]: sideNavState === 'opening',
+                [`${blockClass}__side-nav-closing`]: sideNavState === 'closing',
+              })}>
+              <SideNavItems>
+                {tearsheetSectionComponents?.length &&
+                  tearsheetSectionComponents.map(
+                    (tearsheetSection, sectionIndex) => (
+                      <SideNavLink
+                        href={`#${tearsheetSection?.props?.id}`}
+                        key={sectionIndex}
+                        isActive={activeSectionIndex === sectionIndex}
+                        onClick={(event) => {
+                          event.preventDefault();
+                          setActiveSectionIndex(sectionIndex);
+                          if (tearsheetSection.props.id) {
+                            const scrollTarget = document.querySelector(
+                              `#${tearsheetSection.props.id}`
+                            );
+                            const scrollContainer = document.querySelector(
+                              `.${blockClass}__multi-step-panel-content`
+                            );
+                            scrollContainer.scrollTo({
+                              top: scrollTarget.offsetTop,
+                              behavior: 'smooth',
+                            });
+                          } else {
+                            console.warn(
+                              `${componentName}: CreateTearsheetSection is missing a required prop of 'id'`
+                            );
+                          }
+                        }}>
+                        {tearsheetSection.props.title}
+                      </SideNavLink>
+                    )
+                  )}
+              </SideNavItems>
+            </SideNav>
+          )}
+        </div>
       );
     };
 
@@ -450,7 +474,19 @@ export let CreateTearsheet = forwardRef(
     };
 
     const handleViewAllToggle = (toggleState) => {
-      setShouldViewAll(toggleState);
+      if (toggleState) {
+        setProgressIndicatorState('closing');
+        setTimeout(() => {
+          setShouldViewAll(toggleState);
+          setSideNavState('opening');
+        }, moderate02);
+      } else {
+        setSideNavState('closing');
+        setTimeout(() => {
+          setShouldViewAll(toggleState);
+          setProgressIndicatorState('opening');
+        }, moderate02);
+      }
       setActiveSectionIndex(0);
       // scroll to top of tearsheet page upon toggling view all option
       if (toggleState) {

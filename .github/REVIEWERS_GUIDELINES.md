@@ -94,14 +94,13 @@ public component has a flag in package-settings.js.
 `- [ ]` No linter warnings or errors are produced.\
 `- [ ]` Carbon tokens (theme, layout, motion) are used unless the design specifies
 otherwise.\
-`- [ ]` All components utilizing motion must include reduced-motion queries for
-accessibility purposes -
-[read more here](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion).\
-`- [ ]` Code is formatted according to prettier rules (no use of //prettier-ignore).\
+`- [ ]` All components utilizing motion must include reduced-motion queries for accessibility purposes - [read more here](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion).\
+`- [ ]` Code is formatted according to prettier rules (no use of
+//prettier-ignore).\
 `- [ ]` Code is clear, maintainable and follows standard React practices and the
 [code guidelines](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CONTRIBUTING.md).\
-`- [ ]` Copyright header in every source file (js, css, scss etc.) with the appropriate
-years.
+`- [ ]` Copyright header in every source file (js, css, scss etc.) with the
+appropriate years.
 
 `###` Testing
 

@@ -24,59 +24,17 @@ $story-class: 'create-full-page-stories';
 .#{$story-class}__description {
   @include carbon--type-style('body-short-01');
 
-  padding-bottom: $spacing-04;
+  padding-bottom: $spacing-03;
 }
 
 p.#{$story-class}__description:last-of-type {
-  padding-bottom: $spacing-07;
+  padding-bottom: $spacing-06;
 }
 
 .#{$story-class}__heading {
   @include carbon--font-weight('semibold');
 }
 
-.#{$story-class}
-  .#{$pkg-prefix}--tearsheet__content
-  .#{$carbon-prefix}--form-item {
+.#{$carbon-prefix}--form-item {
   margin-bottom: $spacing-05;
-}
-
-
-.#{$story-class}__content-switcher {
-  justify-content: flex-start;
-}
-
-.#{$story-class}__content-switcher button {
-  width: auto;
-}
-
-.#{$story-class}__dummy-content {
-  margin-top: $spacing-05;
-}
-
-.#{$story-class}__dummy-content-block {
-  height: 120vh;
-  background: $ui-01;
-  background-clip: content-box;
-}
-
-.#{$story-class}__dummy-content-text {
-  padding: $spacing-05;
-}
-
-.#{$story-class}__status-icon {
-  fill: $support-02;
-  vertical-align: middle;
-}
-
-.#{$story-class}__app {
-  position: relative;
-  display: flex;
-  height: 100vh;
-  flex-direction: column;
-}
-
-.#{$story-class}__content-container {
-  height: 100%;
-  padding: 0;
 }

@@ -36,29 +36,9 @@ CreateFullPageSection.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Sets an optional description for a create full page step
-   */
-  description: PropTypes.node,
-
-  /**
-   * This will conditionally disable the submit button in the multi step CreateFullPage
-   */
-  disableSubmit: PropTypes.bool,
-
-  /**
-   * This will conditionally render form content below the step condition. This is defaulted to true
-   */
-  hasForm: PropTypes.bool,
-
-  /**
    * Sets the id of the CreateTearsheetSection outermost element
    */
   id: PropTypes.string.isRequired,
-
-  /**
-   * Sets the subtitle text for a create full page step
-   */
-  subtitle: PropTypes.node,
 
   /**
    * Sets the title text for a CreateFullPage step

@@ -16,8 +16,7 @@ import { CreateFullPageSection } from './CreateFullPageSection';
 import { CreateFullPageStep } from './CreateFullPageStep';
 import mdx from './CreateFullPage.mdx';
 
-// import styles from './_storybook-styles.scss';
-import styles from './_create-full-page.scss';
+import styles from './_storybook-styles.scss';
 const storyClass = 'create-full-page-stories';
 
 import {
@@ -34,6 +33,10 @@ import cx from 'classnames';
 export default {
   title: getStoryTitle(CreateFullPage.displayName),
   component: CreateFullPage,
+  subcomponents: {
+    CreateFullPageStep,
+    CreateFullPageSection,
+  },
   parameters: {
     styles,
     layout: 'fullscreen',
@@ -60,29 +63,95 @@ const defaultFullPageProps = {
   sideNavAriaLabel: 'Create topic side nav',
 };
 
-const defaultStepProps = {
-  title: 'Partition',
-  subtitle: 'This is the unique name used to recognize your topic.',
-  description:
-    'It will also be used by your producers and consumers as part of the connection information, so make something easy to recognize.',
-  onNext: action('Next handler called'),
-  hasForm: true,
-};
-
 const Template = ({ ...args }) => {
+  const [textInput, setTextInput] = useState('');
+  const [hasSubmitError, setHasSubmitError] = useState(false);
+  const [shouldReject, setShouldReject] = useState(false);
+  const [isInvalid, setIsInvalid] = useState(false);
+  const [simulatedDelay] = useState(750);
+
   return (
     <CreateFullPage {...args}>
-      <CreateFullPageStep {...defaultStepProps}>
+      <CreateFullPageStep
+        title="Partition"
+        onNext={() => {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              // Example usage of how to prevent the next step if some kind
+              // of error occurred during the `onNext` handler.
+              if (shouldReject) {
+                setHasSubmitError(true);
+                reject();
+              }
+              setIsInvalid(false);
+              resolve();
+            }, simulatedDelay);
+          });
+        }}
+        disableSubmit={!textInput}>
+        <h6
+          className={cx(
+            `${storyClass}__description`,
+            `${storyClass}__heading`
+          )}>
+          One or more partitions make up a topic. A partition is an ordered list
+          of messages.
+        </h6>
+        <p className={`${storyClass}__description`}>
+          Partitions are distributed across the brokers in order to increase the
+          scalability of your topic. You can also use them to distribute
+          messages across the members of a consumer group.
+        </p>
         <TextInput
           id="test1"
           invalidText="A valid value is required"
           labelText="Topic name"
           placeholder="Enter topic name"
+          onChange={(e) => {
+            setTextInput(e.target.value);
+            setIsInvalid(false);
+          }}
+          onBlur={() => {
+            textInput.length === 0 && setIsInvalid(true);
+          }}
+          invalid={isInvalid}
+        />
+        {hasSubmitError && (
+          <InlineNotification
+            kind="error"
+            title="Error"
+            subtitle="Resolve errors to continue"
+            onClose={() => setHasSubmitError(false)}
+          />
+        )}
+        <Toggle
+          className={`${storyClass}__error--toggle`}
+          id="simulated-error-toggle"
+          size="sm"
+          labelText="Simulate error"
+          onToggle={(event) => setShouldReject(event)}
         />
       </CreateFullPageStep>
-      <CreateFullPageStep
-        title="Core configuration"
-        description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
+      <CreateFullPageStep title="Empty" secondaryLabel="Optional">
+        Empty step for demonstration purposes
+        <CreateFullPageSection id="empty-state-section-2">
+          <TextInput
+            id="input-2"
+            invalidText="A valid value is required"
+            labelText="Topic name"
+            placeholder="Enter topic name"
+          />
+        </CreateFullPageSection>
+        <CreateFullPageSection id="empty-state-section-1" viewAllOnly>
+          <TextInput
+            id="input-2"
+            invalidText="A valid value is required"
+            labelText="Topic name"
+            placeholder="Enter topic name"
+          />
+        </CreateFullPageSection>
+      </CreateFullPageStep>
+      <CreateFullPageStep title="Core configuration">
         <TextInput
           id="input-2"
           invalidText="A valid value is required"
@@ -113,127 +182,6 @@ const Template = ({ ...args }) => {
           labelText="Minimum in-sync replicas"
           placeholder="Enter topic name"
         />
-      </CreateFullPageStep>
-    </CreateFullPage>
-  );
-};
-
-const TemplateWithSections = ({ ...args }) => {
-  return (
-    <CreateFullPage {...args}>
-      <CreateFullPageStep {...defaultStepProps}>
-        <CreateFullPageSection>
-          <TextInput
-            id="test1"
-            invalidText="A valid value is required"
-            labelText="Topic name"
-            placeholder="Enter topic name"
-          />
-        </CreateFullPageSection>
-      </CreateFullPageStep>
-      <CreateFullPageStep
-        title="Core configuration"
-        description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
-        <TextInput
-          id="test41"
-          invalidText="A valid value is required"
-          labelText="Topic name"
-          placeholder="Enter topic name"
-        />
-        <NumberInput
-          id="tj-input-3"
-          invalidText="Number is not valid"
-          label="Number input label"
-          max={100}
-          min={0}
-          step={10}
-          value={50}
-        />
-        <NumberInput
-          id="tj-input-2"
-          invalidText="Number is not valid"
-          label="Number input label"
-          max={100}
-          min={0}
-          step={10}
-          value={50}
-        />
-        <TextInput
-          id="test72"
-          invalidText="A valid value is required"
-          labelText="Minimum in-sync replicas"
-          placeholder="Enter topic name"
-        />
-        <CreateFullPageSection
-          id="2"
-          title="Configuration 2"
-          description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
-          <TextInput
-            id="test4"
-            invalidText="A valid value is required"
-            labelText="Topic name"
-            placeholder="Enter topic name"
-          />
-          <NumberInput
-            id="tj-input-3"
-            invalidText="Number is not valid"
-            label="Number input label"
-            max={100}
-            min={0}
-            step={10}
-            value={50}
-          />
-          <NumberInput
-            id="tj-input-2"
-            invalidText="Number is not valid"
-            label="Number input label"
-            max={100}
-            min={0}
-            step={10}
-            value={50}
-          />
-          <TextInput
-            id="test73"
-            invalidText="A valid value is required"
-            labelText="Minimum in-sync replicas"
-            placeholder="Enter topic name"
-          />
-        </CreateFullPageSection>
-        <CreateFullPageSection
-          id="3"
-          title="Configuration 3"
-          description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
-          <TextInput
-            id="test42"
-            invalidText="A valid value is required"
-            labelText="Topic name"
-            placeholder="Enter topic name"
-          />
-          <NumberInput
-            id="tj-input-3"
-            invalidText="Number is not valid"
-            label="Number input label"
-            max={100}
-            min={0}
-            step={10}
-            value={50}
-          />
-          <NumberInput
-            id="tj-input-2"
-            invalidText="Number is not valid"
-            label="Number input label"
-            max={100}
-            min={0}
-            step={10}
-            value={50}
-          />
-          <TextInput
-            id="test74"
-            invalidText="A valid value is required"
-            labelText="Minimum in-sync replicas"
-            placeholder="Enter topic name"
-          />
-        </CreateFullPageSection>
       </CreateFullPageStep>
     </CreateFullPage>
   );
@@ -291,7 +239,6 @@ const TemplateWithToggle = ({ ...args }) => {
         title="Topic name"
         disableSubmit={!stepOneTextInputValue}>
         <CreateFullPageSection
-          hasDivider
           title="General"
           id="create-full-page-section-general">
           <h6
@@ -307,7 +254,7 @@ const TemplateWithToggle = ({ ...args }) => {
           </p>
           <TextInput
             labelText="Topic name*"
-            id="tearsheet-multi-step-story-text-input-multi-step-1"
+            id="full-page-multi-step-story-text-input-multi-step-1"
             value={stepOneTextInputValue}
             placeholder="Enter topic name"
             onChange={(event) => {
@@ -326,14 +273,14 @@ const TemplateWithToggle = ({ ...args }) => {
           />
           <TextInput
             labelText="Topic description"
-            id="tearsheet-multi-step-story-text-input-multi-step-1-input-2"
+            id="full-page-multi-step-story-text-input-multi-step-1-input-2"
             value={topicDescriptionValue}
             placeholder="Enter topic description"
             onChange={(event) => setTopicDescriptionValue(event.target.value)}
           />
           <TextInput
             labelText="Topic version"
-            id="tearsheet-multi-step-story-text-input-multi-step-1-input-3"
+            id="full-page-multi-step-story-text-input-multi-step-1-input-3"
             value={topicVersionValue}
             placeholder="Enter topic version"
             onChange={(event) => setTopicVersionValue(event.target.value)}
@@ -373,17 +320,14 @@ const TemplateWithToggle = ({ ...args }) => {
           id="create-full-page-section-meta-data">
           <TextInput
             labelText="Topic meta data"
-            id="tearsheet-multi-step-story-text-input-multi-step-1-input-4"
+            id="full-page-multi-step-story-text-input-multi-step-1-input-4"
             value={topicMetaData}
             placeholder="Enter topic meta data"
             onChange={(event) => setTopicMetaData(event.target.value)}
           />
         </CreateFullPageSection>
       </CreateFullPageStep>
-      <CreateFullPageStep
-        title="Empty"
-        secondaryLabel="Optional"
-        hasForm={false}>
+      <CreateFullPageStep title="Empty" secondaryLabel="Optional">
         <CreateFullPageSection
           title="Empty"
           id="create-full-page-section-empty">
@@ -420,9 +364,9 @@ const TemplateWithToggle = ({ ...args }) => {
             }
           />
           <TextInput
-            labelText="Partition name*"
-            id="tearsheet-multi-step-story-text-input-multi-step-3-input-1"
-            // value={partitionName}
+            labelText="Partition name"
+            id="full-page-multi-step-story-text-input-multi-step-3-input-1"
+            value={partitionName}
             placeholder="Enter partition name"
             onChange={(event) => setPartitionName(event.target.value)}
           />
@@ -464,12 +408,6 @@ const TemplateWithToggle = ({ ...args }) => {
 };
 
 export const createFullPage = prepareStory(Template, {
-  args: {
-    ...defaultFullPageProps,
-  },
-});
-
-export const createFullPageWithSections = prepareStory(TemplateWithSections, {
   args: {
     ...defaultFullPageProps,
   },

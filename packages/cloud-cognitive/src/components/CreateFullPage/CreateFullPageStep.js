@@ -40,19 +40,9 @@ CreateFullPageStep.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Sets an optional description for a create full page step
-   */
-  description: PropTypes.node,
-
-  /**
    * This will conditionally disable the submit button in the multi step CreateFullPage
    */
   disableSubmit: PropTypes.bool,
-
-  /**
-   * This will conditionally render form content below the step condition. This is defaulted to true
-   */
-  hasForm: PropTypes.bool,
 
   /**
    * Optional function to be called on initial mount of a step.
@@ -68,9 +58,9 @@ CreateFullPageStep.propTypes = {
   onNext: PropTypes.func,
 
   /**
-   * Sets the subtitle text for a create full page step
+   * Sets the optional secondary label on the progress step component
    */
-  subtitle: PropTypes.node,
+  secondaryLabel: PropTypes.string,
 
   /**
    * Sets the title text for a create full page step

@@ -326,7 +326,7 @@ export let CreateFullPage = React.forwardRef(
       let sectionChildElements = [];
       fullPageSectionComponents.forEach((child) => {
         // we have received an array of children, lets check to see that each child is
-        // a FullpageSection component before adding it to sectionChildElements
+        // a FullPageSection component before adding it to sectionChildElements
         if (shouldViewAll && child.props.children.length) {
           child.props.children.forEach((stepChild) => {
             if (isFullPageSection(stepChild)) {

@@ -18,6 +18,7 @@ import {
   ProgressStep,
   Toggle,
 } from 'carbon-components-react';
+import { moderate02 } from '@carbon/motion';
 import {
   SideNav,
   SideNavItems,
@@ -71,6 +72,8 @@ export let CreateTearsheet = forwardRef(
     const [shouldViewAll, setShouldViewAll] = useState(false);
     const [currentStep, setCurrentStep] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [progressIndicatorState, setProgressIndicatorState] = useState('');
+    const [sideNavState, setSideNavState] = useState('');
     const [activeSectionIndex, setActiveSectionIndex] = useState(0);
     const previousState = usePreviousValue({ currentStep, open });
     const contentRef = useRef();
@@ -362,10 +365,36 @@ export let CreateTearsheet = forwardRef(
           }
         }
       });
-      if (shouldViewAll) {
-        return (
-          <div className={`${blockClass}__left-nav`}>
-            <SideNav expanded isFixedNav aria-label={sideNavAriaLabel}>
+      return (
+        <div className={`${blockClass}__left-nav`}>
+          {!shouldViewAll ? (
+            <ProgressIndicator
+              currentIndex={currentStep - 1}
+              spaceEqually
+              vertical
+              className={cx(`${blockClass}__progress-indicator`, {
+                [`${blockClass}__progress-indicator-opening`]:
+                  progressIndicatorState === 'opening',
+                [`${blockClass}__progress-indicator-closing`]:
+                  progressIndicatorState === 'closing',
+              })}>
+              {tearsheetStepComponents.map((child, stepIndex) => (
+                <ProgressStep
+                  label={child.props.title}
+                  key={stepIndex}
+                  secondaryLabel={child.props.secondaryLabel}
+                />
+              ))}
+            </ProgressIndicator>
+          ) : (
+            <SideNav
+              expanded
+              isFixedNav
+              aria-label={sideNavAriaLabel}
+              className={cx({
+                [`${blockClass}__side-nav-opening`]: sideNavState === 'opening',
+                [`${blockClass}__side-nav-closing`]: sideNavState === 'closing',
+              })}>
               <SideNavItems>
                 {tearsheetSectionComponents?.length &&
                   tearsheetSectionComponents.map(
@@ -400,24 +429,7 @@ export let CreateTearsheet = forwardRef(
                   )}
               </SideNavItems>
             </SideNav>
-          </div>
-        );
-      }
-      return (
-        <div className={`${blockClass}__left-nav`}>
-          <ProgressIndicator
-            currentIndex={currentStep - 1}
-            spaceEqually
-            vertical
-            className={`${blockClass}__progress-indicator`}>
-            {tearsheetStepComponents.map((child, stepIndex) => (
-              <ProgressStep
-                label={child.props.title}
-                key={stepIndex}
-                secondaryLabel={child.props.secondaryLabel}
-              />
-            ))}
-          </ProgressIndicator>
+          )}
         </div>
       );
     };
@@ -598,7 +610,19 @@ export let CreateTearsheet = forwardRef(
     };
 
     const handleViewAllToggle = (toggleState) => {
-      setShouldViewAll(toggleState);
+      if (toggleState) {
+        setProgressIndicatorState('closing');
+        setTimeout(() => {
+          setShouldViewAll(toggleState);
+          setSideNavState('opening');
+        }, moderate02);
+      } else {
+        setSideNavState('closing');
+        setTimeout(() => {
+          setShouldViewAll(toggleState);
+          setProgressIndicatorState('opening');
+        }, moderate02);
+      }
       setActiveSectionIndex(0);
       const createTearsheetContainer = document.querySelector(`.${blockClass}`);
       createTearsheetContainer.scrollTop = 0;

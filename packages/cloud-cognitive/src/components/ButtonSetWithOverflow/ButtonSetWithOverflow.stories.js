@@ -9,20 +9,16 @@ import React from 'react';
 
 import { action } from '@storybook/addon-actions';
 
-import { pkg } from '../../settings';
-
-import { getStorybookPrefix } from '../../../config';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { ButtonSetWithOverflow } from '.';
 
 // Carbon and package components we use.
 
-const storybookPrefix = getStorybookPrefix(
-  pkg,
-  ButtonSetWithOverflow.displayName
-);
-
 export default {
-  title: `${storybookPrefix}/${ButtonSetWithOverflow.displayName}`,
+  title: getStoryTitle(ButtonSetWithOverflow.displayName),
   component: ButtonSetWithOverflow,
   argTypes: {
     containerWidth: {
@@ -64,9 +60,10 @@ const Template = (argsIn) => {
   );
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  buttons,
-  buttonSetOverflowLabel,
-  containerWidth: 600,
-};
+export const Default = prepareStory(Template, {
+  args: {
+    buttons,
+    buttonSetOverflowLabel,
+    containerWidth: 600,
+  },
+});

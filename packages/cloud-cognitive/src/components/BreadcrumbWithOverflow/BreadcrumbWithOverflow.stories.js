@@ -8,17 +8,14 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { pkg } from '../../settings';
 import { BreadcrumbWithOverflow } from '.';
-import { getStorybookPrefix } from '../../../config';
-
-const storybookPrefix = getStorybookPrefix(
-  pkg,
-  BreadcrumbWithOverflow.displayName
-);
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 
 export default {
-  title: `${storybookPrefix}/${BreadcrumbWithOverflow.displayName}`,
+  title: getStoryTitle(BreadcrumbWithOverflow.displayName),
   component: BreadcrumbWithOverflow,
   argTypes: {
     containerWidth: {
@@ -110,9 +107,10 @@ const Template = (argsIn) => {
   );
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  breadcrumbs: breadcrumbItems,
-  containerWidth: 500,
-  overflowAriaLabel: 'Open and close additional breadcrumb item list.',
-};
+export const Default = prepareStory(Template, {
+  args: {
+    breadcrumbs: breadcrumbItems,
+    containerWidth: 500,
+    overflowAriaLabel: 'Open and close additional breadcrumb item list.',
+  },
+});

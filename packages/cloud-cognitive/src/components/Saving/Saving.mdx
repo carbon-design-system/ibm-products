@@ -2,8 +2,7 @@
 
 import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
 import { Saving } from '.';
-import { pkg } from '../../settings';
-import { getStorybookSlug } from '../../../config';
+import { getStoryId } from '../../global/js/utils/story-helper';
 
 # Saving
 
@@ -12,13 +11,13 @@ import { getStorybookSlug } from '../../../config';
 ## Manual type
 
 <Canvas>
-  <Story id={getStorybookSlug(pkg, Saving.displayName, 'manual')} />
+  <Story id={getStoryId(Saving.displayName, 'manual')} />
 </Canvas>
 
 ## Auto type
 
 <Canvas>
-  <Story id={getStorybookSlug(pkg, Saving.displayName, 'auto')} />
+  <Story id={getStoryId(Saving.displayName, 'auto')} />
 </Canvas>
 
 ## Component API

@@ -1,11 +1,11 @@
 import { ArgsTable, Canvas, Story } from '@storybook/addon-docs';
+import { getStoryId } from '../../global/js/utils/story-helper';
+import { UserProfileImage } from '.';
 
 ## User Profile Avatar
 
 <Canvas>
-  <Story
-    id={getStorybookSlug(pkg, UserProfileImage.displayName, 'with-image')}
-  />
+  <Story id={getStoryId(UserProfileImage.displayName, 'with-image')} />
 </Canvas>
 
 ## Overview
@@ -17,7 +17,7 @@ a blue background.
 ### Default Avatar
 
 <Canvas>
-  <Story id={getStorybookSlug(pkg, UserProfileImage.displayName, 'default')} />
+  <Story id={getStoryId(UserProfileImage.displayName, 'default')} />
 </Canvas>
 
 ### Avatar with Group Icons
@@ -26,9 +26,7 @@ By passing in icon prop with a value of 'group', the avatar will display the
 group icon
 
 <Canvas>
-  <Story
-    id={getStorybookSlug(pkg, UserProfileImage.displayName, 'with-group-icon')}
-  />
+  <Story id={getStoryId(UserProfileImage.displayName, 'with-group-icon')} />
 </Canvas>
 
 ### Avatar with Initials
@@ -38,9 +36,7 @@ down to the first and last initials of the display name. 'Thomas Watson' and
 'Thomas J. Watson' will both display 'TW' as the initials.
 
 <Canvas>
-  <Story
-    id={getStorybookSlug(pkg, UserProfileImage.displayName, 'with-initials')}
-  />
+  <Story id={getStoryId(UserProfileImage.displayName, 'with-initials')} />
 </Canvas>
 
 <ArgsTable />

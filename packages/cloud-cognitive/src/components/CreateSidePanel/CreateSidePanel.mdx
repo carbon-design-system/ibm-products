@@ -1,6 +1,5 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import { pkg } from '../../settings';
-import { getStorybookSlug } from '../../../config';
+import { getStoryId } from '../../global/js/utils/story-helper';
 import { CreateSidePanel } from '.';
 
 # CreateSidePanel
@@ -27,7 +26,7 @@ clear and obvious path to completion.
 Here it is in use.
 
 <Canvas>
-  <Story id={getStorybookSlug(pkg, CreateSidePanel.displayName, 'default')} />
+  <Story id={getStoryId(CreateSidePanel.displayName, 'default')} />
 </Canvas>
 
 ## Form validation

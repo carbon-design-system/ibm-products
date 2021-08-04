@@ -1,6 +1,5 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import { pkg } from '../../settings';
-import { getStorybookSlug } from '../../../config';
+import { getStoryId } from '../../global/js/utils/story-helper';
 import { TagSet } from '.';
 
 # TagSet
@@ -24,20 +23,20 @@ how many additional labels exist and what they are.
 Here it is in use with no overflow. Change max-visible to see an overflow.
 
 <Canvas>
-  <Story id={getStorybookSlug(pkg, TagSet.displayName, 'five-tags')} />
+  <Story id={getStoryId(TagSet.displayName, 'five-tags')} />
 </Canvas>
 
 Here it is with more than 10 tags.
 
 <Canvas>
-  <Story id={getStorybookSlug(pkg, TagSet.displayName, 'many-tags')} />
+  <Story id={getStoryId(TagSet.displayName, 'many-tags')} />
 </Canvas>
 
 Here it is with hundreds of tags. This option offers a searchable modal to
 display all tags.
 
 <Canvas>
-  <Story id={getStorybookSlug(pkg, TagSet.displayName, 'hundreds-of-tags')} />
+  <Story id={getStoryId(TagSet.displayName, 'hundreds-of-tags')} />
 </Canvas>
 
 ## Component API

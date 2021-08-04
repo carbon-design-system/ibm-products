@@ -22,7 +22,10 @@ import {
 } from 'carbon-components-react/lib/components/UIShell';
 
 import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 
 import { CreateSidePanel, deprecatedProps } from './CreateSidePanel';
@@ -30,12 +33,10 @@ import mdx from './CreateSidePanel.mdx';
 
 import styles from './_storybook-styles.scss';
 
-const storybookPrefix = getStorybookPrefix(pkg, CreateSidePanel.displayName);
-
 const blockClass = `${pkg.prefix}--create-side-panel`;
 
 export default {
-  title: `${storybookPrefix}/${CreateSidePanel.displayName}`,
+  title: getStoryTitle(CreateSidePanel.displayName),
   component: CreateSidePanel,
   argTypes: getDeprecatedArgTypes(deprecatedProps),
   parameters: {
@@ -364,20 +365,23 @@ const TemplateWithMultipleForms = ({ ...args }) => {
   );
 };
 
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  selectorPageContent: '#cloud-and-cognitive-page-content',
-  ...defaultStoryProps,
-};
+export const Default = prepareStory(DefaultTemplate, {
+  args: {
+    selectorPageContent: '#cloud-and-cognitive-page-content',
+    ...defaultStoryProps,
+  },
+});
 
-export const WithFormValidation = TemplateWithFormValidation.bind({});
-WithFormValidation.args = {
-  selectorPageContent: '#cloud-and-cognitive-page-content',
-  ...defaultStoryProps,
-};
+export const WithFormValidation = prepareStory(TemplateWithFormValidation, {
+  args: {
+    selectorPageContent: '#cloud-and-cognitive-page-content',
+    ...defaultStoryProps,
+  },
+});
 
-export const WithMultipleForms = TemplateWithMultipleForms.bind({});
-WithMultipleForms.args = {
-  selectorPageContent: '#cloud-and-cognitive-page-content',
-  ...defaultStoryProps,
-};
+export const WithMultipleForms = prepareStory(TemplateWithMultipleForms, {
+  args: {
+    selectorPageContent: '#cloud-and-cognitive-page-content',
+    ...defaultStoryProps,
+  },
+});

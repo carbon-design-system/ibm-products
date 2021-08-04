@@ -15,25 +15,19 @@ import {
   TextInput,
 } from 'carbon-components-react';
 import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 
 import { CreateTearsheetNarrow } from '.';
 import mdx from './CreateTearsheetNarrow.mdx';
 
 import styles from './_storybook-styles.scss';
 
-const storybookPrefix = getStorybookPrefix(
-  pkg,
-  CreateTearsheetNarrow.displayName
-);
-
 export default {
-  title: `${storybookPrefix}/${CreateTearsheetNarrow.displayName}`,
+  title: getStoryTitle(CreateTearsheetNarrow.displayName),
   component: CreateTearsheetNarrow,
-  // TODO: Define argTypes for props not represented by standard JS types.
-  // argTypes: {
-  //   egProp: { control: 'color' },
-  // },
   parameters: {
     styles,
     docs: {
@@ -69,6 +63,12 @@ const Template = (args) => {
   const [retentionTime, setRetentionTime] = useState(1);
   const [quantity, setQuantity] = useState(1);
   const [items] = useState(['Day(s)', 'Month(s)', 'Year(s']);
+  const numberInputsInvalid =
+    partitionCount <= 0 ||
+    replicaCount <= 0 ||
+    minimumInSyncReplicaCount <= 0 ||
+    retentionTime <= 0 ||
+    quantity <= 0;
   return (
     <div>
       <style>{`.${defaultStoryProps.className} { opacity: 0 }`};</style>
@@ -79,10 +79,10 @@ const Template = (args) => {
         open={open}
         onRequestClose={() => setOpen(false)}
         onRequestSubmit={action('onRequestSubmit action called')}
-        disableSubmit={!topicName}
+        disableSubmit={!topicName || numberInputsInvalid}
         {...args}>
         <TextInput
-          labelText="Topic name*"
+          labelText="Topic name"
           id="tearsheet-narrow-story-text-input--1"
           value={topicName}
           placeholder="Enter topic name"
@@ -154,7 +154,8 @@ const Template = (args) => {
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const createTearsheetNarrow = Template.bind({});
-createTearsheetNarrow.args = {
-  ...defaultStoryProps,
-};
+export const createTearsheetNarrow = prepareStory(Template, {
+  args: {
+    ...defaultStoryProps,
+  },
+});

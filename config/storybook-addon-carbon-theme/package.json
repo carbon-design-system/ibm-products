@@ -1,7 +1,7 @@
 {
   "name": "@carbon/storybook-addon-theme",
   "description": "Carbon theme switcher for Storybook",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "license": "Apache-2.0",
   "main": "dist/react.js",
   "repository": {
@@ -41,13 +41,13 @@
     "vue": "*"
   },
   "dependencies": {
-    "@storybook/addons": "6.3.4",
-    "@storybook/api": "6.3.4",
-    "@storybook/client-api": "6.3.4",
-    "@storybook/client-logger": "6.3.4",
-    "@storybook/components": "6.3.4",
-    "@storybook/core-events": "6.3.4",
-    "@storybook/theming": "6.3.4",
+    "@storybook/addons": "6.3.6",
+    "@storybook/api": "6.3.6",
+    "@storybook/client-api": "6.3.6",
+    "@storybook/client-logger": "6.3.6",
+    "@storybook/components": "6.3.6",
+    "@storybook/core-events": "6.3.6",
+    "@storybook/theming": "6.3.6",
     "core-js": "^3.15.2",
     "global": "^4.4.0"
   },

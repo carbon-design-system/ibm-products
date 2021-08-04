@@ -9,12 +9,13 @@
 
 import React, { useState, useCallback } from 'react';
 import { Navigation } from './preview-components';
-import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { WebTerminal } from '.';
 import mdx from './WebTerminal.mdx';
 import { documentationLinks } from './preview-components/documentationLinks';
-const storybookPrefix = getStorybookPrefix(pkg, WebTerminal.displayName);
 
 import styles from './_storybook-styles.scss';
 
@@ -49,14 +50,16 @@ const Template = (args) => {
   );
 };
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Default = prepareStory(Template, {
+  args: {},
+});
 
-export const WithDocumentationLinks = Template.bind({});
-WithDocumentationLinks.args = { documentationLinks };
+export const WithDocumentationLinks = prepareStory(Template, {
+  args: { documentationLinks },
+});
 
 export default {
-  title: `${storybookPrefix}/${WebTerminal.displayName}`,
+  title: getStoryTitle(WebTerminal.displayName),
   parameters: {
     styles,
     docs: {

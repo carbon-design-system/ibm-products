@@ -1,6 +1,5 @@
 import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
-import { pkg } from '../../../settings';
-import { getStorybookSlug } from '../../../../config';
+import { getStoryId } from '../../../global/js/utils/story-helper';
 import { ErrorEmptyState } from '.';
 // cspell:words emptystates
 
@@ -20,79 +19,41 @@ guidelines and documentation please refer to the links above.
 ### Default Error Empty state
 
 <Canvas>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      ErrorEmptyState.displayName,
-      'default',
-      'emptystates'
-    )}
-  />
+  <Story id={getStoryId(ErrorEmptyState.displayName, 'default')} />
 </Canvas>
 
 ### Error Empty state with dark themed illustration
 
 <Canvas>
   <Story
-    id={getStorybookSlug(
-      pkg,
-      ErrorEmptyState.displayName,
-      'with-dark-mode-illustration',
-      'emptystates'
-    )}
+    id={getStoryId(ErrorEmptyState.displayName, 'with-dark-mode-illustration')}
   />
 </Canvas>
 
 ### Error Empty state with action
 
 <Canvas>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      ErrorEmptyState.displayName,
-      'with-action',
-      'emptystates'
-    )}
-  />
+  <Story id={getStoryId(ErrorEmptyState.displayName, 'with-action')} />
 </Canvas>
 
 ### Error Empty state with action (Button with icon)
 
 <Canvas>
   <Story
-    id={getStorybookSlug(
-      pkg,
-      ErrorEmptyState.displayName,
-      'with-action-icon-button',
-      'emptystates'
-    )}
+    id={getStoryId(ErrorEmptyState.displayName, 'with-action-icon-button')}
   />
 </Canvas>
 
 ### Error Empty state with link
 
 <Canvas>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      ErrorEmptyState.displayName,
-      'with-link',
-      'emptystates'
-    )}
-  />
+  <Story id={getStoryId(ErrorEmptyState.displayName, 'with-link')} />
 </Canvas>
 
 ### Error Empty state with action and link
 
 <Canvas>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      ErrorEmptyState.displayName,
-      'with-action-and-link',
-      'emptystates'
-    )}
-  />
+  <Story id={getStoryId(ErrorEmptyState.displayName, 'with-action-and-link')} />
 </Canvas>
 
 ## Component API

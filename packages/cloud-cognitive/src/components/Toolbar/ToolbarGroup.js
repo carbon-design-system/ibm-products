@@ -31,71 +31,12 @@ import {
 } from '@carbon/icons-react';
 import { pkg } from '../../settings';
 import { ToolbarItem } from './ToolbarItem';
+import { ToolbarItemColorPicker } from './ToolbarItemColorPicker';
+import { action } from '@storybook/addon-actions';
 
 const blockClass = `${pkg.prefix}--toolbar-group`;
 
 const componentName = 'ToolbarGroup';
-
-const toolbarTypes = {
-  applicationActions: (
-    <div className={`${blockClass} ${blockClass}--actions`}>
-      <ToolbarItem
-        renderIcon={Save16}
-        iconDescription="Save"
-        // onClick={action('Save')}
-      />
-      <ToolbarItem
-        renderIcon={Share16}
-        iconDescription="Share"
-        // onClick={action('Share')}
-      />
-      <ToolbarItem
-        renderIcon={Upload16}
-        iconDescription="Upload"
-        // onClick={action('Upload')}
-      />
-      <ToolbarItem
-        renderIcon={Printer16}
-        iconDescription="Print"
-        // onClick={action('Print')}
-      />
-    </div>
-  ),
-  // 'canvas-navigation-tools': (
-  //   <div className={`${blockClass} ${blockClass}--navigation-tools`}>
-  //     <ToolbarItem
-  //       renderIcon={Undo16}
-  //       iconDescription="Undo"
-  //       onClick={action('Undo')}
-  //     />
-  //     <ToolbarItem
-  //       renderIcon={Redo16}
-  //       iconDescription="Redo"
-  //       onClick={action('Redo')}
-  //     />
-  //     <ToolbarItem
-  //       renderIcon={ZoomIn16}
-  //       iconDescription="Zoom In"
-  //       onClick={action('ZoomIn')}
-  //     />
-  //     <ToolbarItem
-  //       renderIcon={ZoomOut16}
-  //       iconDescription="Zoom Out"
-  //       onClick={action('ZoomOut')}
-  //     />
-  //     <ToolbarItem
-  //       renderIcon={Minimize16}
-  //       iconDescription="Minimize"
-  //       onClick={action('Minimize')}
-  //     />
-  //     <ToolbarItem
-  //       renderIcon={AlignHorizontalCenter16}
-  //       iconDescription="Align Horizontal Center"
-  //       onClick={action('AlignHorizontalCenter')}
-  //     />
-  //   </div>
-  // ),
-};
 
 // Options for Font Dropdown
 const fontItems = [
@@ -164,6 +105,219 @@ const textAlignmentOptions = [
   },
 ];
 
+const toolbarTypes = {
+  applicationActions: (
+    <div className={`${blockClass} ${blockClass}--actions`}>
+      <ToolbarItem
+        renderIcon={Save16}
+        iconDescription="Save"
+        onClick={action('Save')}
+      />
+      <ToolbarItem
+        renderIcon={Share16}
+        iconDescription="Share"
+        onClick={action('Share')}
+      />
+      <ToolbarItem
+        renderIcon={Upload16}
+        iconDescription="Upload"
+        onClick={action('Upload')}
+      />
+      <ToolbarItem
+        renderIcon={Printer16}
+        iconDescription="Print"
+        onClick={action('Print')}
+      />
+    </div>
+  ),
+  canvasNavigationTools: (
+    <div className={`${blockClass} ${blockClass}--navigation-tools`}>
+      <ToolbarItem
+        renderIcon={Undo16}
+        iconDescription="Undo"
+        onClick={action('Undo')}
+      />
+      <ToolbarItem
+        renderIcon={Redo16}
+        iconDescription="Redo"
+        onClick={action('Redo')}
+      />
+      <ToolbarItem
+        renderIcon={ZoomIn16}
+        iconDescription="Zoom In"
+        onClick={action('ZoomIn')}
+      />
+      <ToolbarItem
+        renderIcon={ZoomOut16}
+        iconDescription="Zoom Out"
+        onClick={action('ZoomOut')}
+      />
+      <ToolbarItem
+        renderIcon={Minimize16}
+        iconDescription="Minimize"
+        onClick={action('Minimize')}
+      />
+      <ToolbarItem
+        renderIcon={AlignHorizontalCenter16}
+        iconDescription="Align Horizontal Center"
+        onClick={action('AlignHorizontalCenter')}
+      />
+    </div>
+  ),
+  typeFormatting: (
+    <div className={`${blockClass} ${blockClass}--type-formatting`}>
+      <Button
+        renderIcon={RulerAlt16}
+        size="small"
+        kind="ghost"
+        iconDescription="Ruler Button"
+        hasIconOnly
+        onClick={action('RulerButton')}
+      />
+      <Button
+        renderIcon={Pin16}
+        size="small"
+        kind="ghost"
+        iconDescription="Pin Button"
+        hasIconOnly
+        onClick={action('PinButton')}
+      />
+      <Button
+        renderIcon={CopyFile16}
+        size="small"
+        kind="ghost"
+        iconDescription="Copy Button"
+        hasIconOnly
+        onClick={action('CopyButton')}
+      />
+      <Button
+        renderIcon={ColorPalette16}
+        size="small"
+        kind="ghost"
+        iconDescription="Color Palette Button"
+        hasIconOnly
+        onClick={action('ColorPaletteButton')}
+      />
+      <Button
+        renderIcon={TextCreation16}
+        size="small"
+        kind="ghost"
+        iconDescription="Text Creation Button"
+        hasIconOnly
+        onClick={action('TextCreationButton')}
+      />
+      <Button
+        renderIcon={TrashCan16}
+        size="small"
+        kind="ghost"
+        iconDescription="Trash Button"
+        hasIconOnly
+        onClick={action('TrashButton')}
+      />
+    </div>
+  ),
+  transformationTools: (
+    <div className={`${blockClass} ${blockClass}--transformation-tools`}>
+      <Button
+        renderIcon={Rotate16}
+        size="small"
+        kind="ghost"
+        iconDescription="Rotate Button"
+        hasIconOnly
+        onClick={action('RotateButton')}
+      />
+      <Button
+        renderIcon={Cut16}
+        size="small"
+        kind="ghost"
+        iconDescription="Cut Button"
+        hasIconOnly
+        onClick={action('CutButton')}
+      />
+      <Button
+        renderIcon={Move16}
+        size="small"
+        kind="ghost"
+        iconDescription="Move Button"
+        hasIconOnly
+        onClick={action('MoveButton')}
+      />
+      <Button
+        renderIcon={Scale16}
+        size="small"
+        kind="ghost"
+        iconDescription="Scale Button"
+        hasIconOnly
+        onClick={action('ScaleButton')}
+      />
+      <Button
+        renderIcon={Crop16}
+        size="small"
+        kind="ghost"
+        iconDescription="Crop Button"
+        hasIconOnly
+        onClick={action('CropButton')}
+      />
+    </div>
+  ),
+  textFormatting: (
+    <div className={`${blockClass} ${blockClass}--text-formatting`}>
+      <Dropdown
+        id="inline"
+        type="inline"
+        size="sm"
+        items={fontItems}
+        itemToString={(item) => (item ? item.text : '')}
+        initialSelectedItem={fontItems[2]}
+        onChange={action('SelectedFont')}
+        label="Select an option..."
+      />
+      <Dropdown
+        id="inline"
+        type="inline"
+        size="sm"
+        items={fontSizeItems}
+        itemToString={(item) => (item ? item.text : '')}
+        initialSelectedItem={fontSizeItems[1]}
+        onChange={action('SelectedFontSize')}
+        label="Select an option..."
+      />
+      <ToolbarItemColorPicker />
+      <Dropdown
+        id="inline"
+        type="inline"
+        size="sm"
+        className="text-alignment-dropdown"
+        items={textAlignmentOptions}
+        itemToString={(item) => (item ? <>{item.icon()}</> : '')}
+        onChange={action('SelectedTextAlignment')}
+        label="Select an option..."
+        initialSelectedItem={textAlignmentOptions[0]}
+      />
+    </div>
+  ),
+  panelsButtons: (
+    <div className={`${blockClass} ${blockClass}--panels`}>
+      <Button
+        renderIcon={Table16}
+        size="small"
+        kind="ghost"
+        iconDescription="Table Button"
+        hasIconOnly
+        onClick={action('TableButton')}
+      />
+      <Button
+        renderIcon={SettingsAdjust16}
+        size="small"
+        kind="ghost"
+        iconDescription="Settings Adjust Button"
+        hasIconOnly
+        onClick={action('SettingsAdjustButton')}
+      />
+    </div>
+  ),
+};
+
 export let ToolbarGroup = React.forwardRef(
   (
     {
@@ -189,233 +343,12 @@ export let ToolbarGroup = React.forwardRef(
     return (
       toolbarTypes.applicationActions && (
         <div className={blockClass}>
-          <div className={`${blockClass} ${blockClass}--actions`}>
-            <Button
-              renderIcon={Save16}
-              size="small"
-              kind="ghost"
-              iconDescription="Save Button"
-              hasIconOnly
-              onClick={null}
-            />
-            <Button
-              renderIcon={Share16}
-              size="small"
-              kind="ghost"
-              iconDescription="Share Button"
-              hasIconOnly
-              onClick={null}
-            />
-            <Button
-              renderIcon={Upload16}
-              size="small"
-              kind="ghost"
-              iconDescription="Upload Button"
-              hasIconOnly
-              onClick={null}
-            />
-            <Button
-              renderIcon={Printer16}
-              size="small"
-              kind="ghost"
-              iconDescription="Printer Button"
-              hasIconOnly
-              onClick={null}
-            />
-          </div>
-          <div className={`${blockClass} ${blockClass}--navigation-tools`}>
-            <Button
-              renderIcon={Undo16}
-              size="small"
-              kind="ghost"
-              iconDescription="Undo Button"
-              hasIconOnly
-              onClick={null}
-            />
-            <Button
-              renderIcon={Redo16}
-              size="small"
-              kind="ghost"
-              iconDescription="Redo Button"
-              hasIconOnly
-              onClick={null}
-            />
-            <Button
-              renderIcon={ZoomIn16}
-              size="small"
-              kind="ghost"
-              iconDescription="Zoom In Button"
-              hasIconOnly
-              onClick={null}
-            />
-            <Button
-              renderIcon={ZoomOut16}
-              size="small"
-              kind="ghost"
-              iconDescription="Zoom Out Button"
-              hasIconOnly
-              onClick={null}
-            />
-            <Button
-              renderIcon={Minimize16}
-              size="small"
-              kind="ghost"
-              iconDescription="Minimize Button"
-              hasIconOnly
-              onClick={null}
-            />
-            <Button
-              renderIcon={AlignHorizontalCenter16}
-              size="small"
-              kind="ghost"
-              iconDescription="Align Horizontal Center Button"
-              hasIconOnly
-              onClick={null}
-            />
-          </div>
-          <div className={`${blockClass} ${blockClass}--type-formatting`}>
-            <Button
-              renderIcon={RulerAlt16}
-              size="small"
-              kind="ghost"
-              iconDescription="Ruler Button"
-              hasIconOnly
-              onClick={null}
-            />
-            <Button
-              renderIcon={Pin16}
-              size="small"
-              kind="ghost"
-              iconDescription="Pin Button"
-              hasIconOnly
-              onClick={null}
-            />
-            <Button
-              renderIcon={CopyFile16}
-              size="small"
-              kind="ghost"
-              iconDescription="Copy Button"
-              hasIconOnly
-              onClick={null}
-            />
-            <Button
-              renderIcon={ColorPalette16}
-              size="small"
-              kind="ghost"
-              iconDescription="Color Palette Button"
-              hasIconOnly
-              onClick={null}
-            />
-            <Button
-              renderIcon={TextCreation16}
-              size="small"
-              kind="ghost"
-              iconDescription="Text Creation Button"
-              hasIconOnly
-              onClick={null}
-            />
-            <Button
-              renderIcon={TrashCan16}
-              size="small"
-              kind="ghost"
-              iconDescription="Trash Button"
-              hasIconOnly
-              onClick={null}
-            />
-          </div>
-          <div className={`${blockClass} ${blockClass}--transformation-tools`}>
-            <Button
-              renderIcon={Rotate16}
-              size="small"
-              kind="ghost"
-              iconDescription="Rotate Button"
-              hasIconOnly
-              onClick={null}
-            />
-            <Button
-              renderIcon={Cut16}
-              size="small"
-              kind="ghost"
-              iconDescription="Cut Button"
-              hasIconOnly
-              onClick={null}
-            />
-            <Button
-              renderIcon={Move16}
-              size="small"
-              kind="ghost"
-              iconDescription="Move Button"
-              hasIconOnly
-              onClick={null}
-            />
-            <Button
-              renderIcon={Scale16}
-              size="small"
-              kind="ghost"
-              iconDescription="Scale Button"
-              hasIconOnly
-              onClick={null}
-            />
-            <Button
-              renderIcon={Crop16}
-              size="small"
-              kind="ghost"
-              iconDescription="Crop Button"
-              hasIconOnly
-              onClick={null}
-            />
-          </div>
-          <div className={`${blockClass} ${blockClass}--text-formatting`}>
-            <Dropdown
-              id="inline"
-              type="inline"
-              size="sm"
-              items={fontItems}
-              itemToString={(item) => (item ? item.text : '')}
-              initialSelectedItem={fontItems[2]}
-              onChange={null}
-              label="Select an option..."
-            />
-            <Dropdown
-              id="inline"
-              type="inline"
-              size="sm"
-              items={fontSizeItems}
-              itemToString={(item) => (item ? item.text : '')}
-              initialSelectedItem={fontSizeItems[1]}
-              onChange={null}
-              label="Select an option..."
-            />
-
-            <Dropdown
-              id="inline"
-              type="inline"
-              size="sm"
-              className="text-alignment-dropdown"
-              items={textAlignmentOptions}
-              itemToString={(item) => (item ? <>{item.icon()}</> : '')}
-              label="Select an option..."
-              initialSelectedItem={textAlignmentOptions[0]}
-            />
-          </div>
-          <div className={`${blockClass} ${blockClass}--panels`}>
-            <Button
-              renderIcon={Table16}
-              size="small"
-              kind="ghost"
-              iconDescription="Table Button"
-              hasIconOnly
-              onClick={null}
-            />
-            <Button
-              renderIcon={SettingsAdjust16}
-              size="small"
-              kind="ghost"
-              iconDescription="Settings Adjust Button"
-              hasIconOnly
-              onClick={null}
-            />
-          </div>
+          {toolbarTypes.applicationActions}
+          {toolbarTypes.canvasNavigationTools}
+          {toolbarTypes.typeFormatting}
+          {toolbarTypes.transformationTools}
+          {toolbarTypes.textFormatting}
+          {toolbarTypes.panelsButtons}
         </div>
       )
     );

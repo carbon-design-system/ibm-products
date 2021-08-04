@@ -28,6 +28,7 @@ import { useResizeDetector } from 'react-resize-detector';
 import { extractShapesArray } from '../../global/js/utils/props-helper';
 import wrapFocus from '../../global/js/utils/wrapFocus';
 import { TearsheetShell } from '../Tearsheet/TearsheetShell';
+import { CreateInfluencer } from '../CreateInfluencer';
 import { carbon, pkg } from '../../settings';
 import { CREATE_TEARSHEET_SECTION, CREATE_TEARSHEET_STEP } from './constants';
 
@@ -688,6 +689,7 @@ export let CreateTearsheet = forwardRef(
         hasCloseIcon={false}
         influencer={
           <>
+            <CreateInfluencer />
             {renderProgressSteps(children)}
             {includeViewAllToggle && renderViewAllToggle()}
           </>

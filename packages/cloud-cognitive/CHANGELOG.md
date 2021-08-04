@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.65.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.64.6...@carbon/ibm-cloud-cognitive@0.65.0) (2021-08-04)
+
+
+### Features
+
+* **CreateTearsheet:** add microinteraction to influencer menus ([#1104](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1104)) ([4dc051c](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/4dc051ce64434b9307d23defd84741048ca10c8e))
+
+
+
+
+
 ## [0.64.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.64.5...@carbon/ibm-cloud-cognitive@0.64.6) (2021-08-03)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

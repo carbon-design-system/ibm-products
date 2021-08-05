@@ -18,6 +18,7 @@
 
   .#{$block-class} {
     display: flex;
+    min-height: carbon--rem($px: 40px);
     background-color: $ui-02;
   }
 

@@ -18,6 +18,7 @@ import {
   ZoomOut16,
 } from '@carbon/icons-react';
 
+import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
 import React from 'react';
 
 import { getStoryTitle } from '../../global/js/utils/story-helper';
@@ -58,6 +59,15 @@ function Template(args) {
           iconDescription="Align horizontal center"
           renderIcon={AlignHorizontalCenter16}
         />
+      </ToolbarGroup>
+
+      <ToolbarGroup>
+        <OverflowMenu flipped>
+          <OverflowMenuItem itemText="Color palette" />
+          <OverflowMenuItem itemText="Text creation" />
+          <OverflowMenuItem itemText="Bulleted list" />
+          <OverflowMenuItem itemText="Delete" hasDivider isDelete />
+        </OverflowMenu>
       </ToolbarGroup>
     </Toolbar>
   );

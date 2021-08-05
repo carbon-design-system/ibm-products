@@ -15,16 +15,21 @@
 
 @include exports($name: toolbar) {
   $block-class: #{$pkg-prefix}--toolbar;
+  $border: carbon--rem(
+      $px: 1px,
+    )
+    solid $ui-03;
 
   .#{$block-class} {
     display: flex;
     min-height: carbon--rem($px: 40px);
+    border-bottom: $border;
     background-color: $ui-02;
   }
 
   .#{$block-class}__group {
     display: flex;
-    border-right: carbon--rem($px: 1px) solid $ui-03;
+    border-right: $border;
   }
 
   .#{$block-class}__group:last-of-type {

@@ -1,0 +1,32 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import './index';
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+
+// Uncomment next line (which must appear last) to test in storybook
+// that the SCSS styles for this component are sufficiently specific
+// to override Carbon whichever order the styles get loaded in.
+//@import 'carbon-components/css/carbon-components.min';
+
+$story-class: #{$pkg-prefix}--create-tearsheet-narrow--story;
+
+.#{$story-class}__flex-container {
+  display: flex;
+  align-items: baseline;
+}
+
+.#{$story-class}__flex-container .#{$carbon-prefix}--form-item {
+  margin-right: $spacing-04;
+}
+
+.#{$story-class}__flex-container .#{$carbon-prefix}--form-item,
+.#{$story-class}__flex-container
+  .#{$carbon-prefix}--dropdown__wrapper.#{$carbon-prefix}--list-box__wrapper {
+  width: 50%;
+}

@@ -9,53 +9,47 @@ import React from 'react';
 
 import { action } from '@storybook/addon-actions';
 
-import { pkg } from '../../settings';
-
-import { getStorybookPrefix } from '../../../config';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { ButtonSetWithOverflow } from '.';
 
 // Carbon and package components we use.
 
-const storybookPrefix = getStorybookPrefix(
-  pkg,
-  ButtonSetWithOverflow.displayName
-);
-
-const blockClass = `${pkg.prefix}--button-set`;
-
-import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-
 export default {
-  title: `${storybookPrefix}/${ButtonSetWithOverflow.displayName}`,
+  title: getStoryTitle(ButtonSetWithOverflow.displayName),
   component: ButtonSetWithOverflow,
   argTypes: {
     containerWidth: {
       control: { type: 'range', min: 20, max: 800, step: 10 },
     },
   },
-  decorators: [
-    (story) => <div className={`${blockClass}__story-viewport`}>{story()}</div>,
-  ],
-  parameters: { styles },
+  decorators: [(story) => <div className="ccs-sb__display-box">{story()}</div>],
 };
 
 const buttons = [
   {
-    kind: 'secondary',
-    onClick: action('Secondary 1'),
-    label: 'Secondary 1',
+    key: 'danger-button',
+    kind: 'danger',
+    onClick: action('Danger'),
+    label: 'Danger',
   },
   {
+    key: 'secondary-button',
     kind: 'secondary',
-    onClick: action('Secondary 2'),
-    label: 'Secondary 2',
+    onClick: action('Secondary'),
+    label: 'Secondary',
   },
   {
+    key: 'primary-button',
     kind: 'primary',
     onClick: action('Primary'),
     label: 'Primary',
   },
 ];
+
+const buttonSetOverflowLabel = 'Button set overflow';
 
 const Template = (argsIn) => {
   const { containerWidth, ...args } = { ...argsIn };
@@ -66,8 +60,10 @@ const Template = (argsIn) => {
   );
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  buttons,
-  containerWidth: 500,
-};
+export const Default = prepareStory(Template, {
+  args: {
+    buttons,
+    buttonSetOverflowLabel,
+    containerWidth: 600,
+  },
+});

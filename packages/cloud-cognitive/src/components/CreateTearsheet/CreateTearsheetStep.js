@@ -45,6 +45,12 @@ CreateTearsheetStep.propTypes = {
   disableSubmit: PropTypes.bool,
 
   /**
+   * Optional function to be called on initial mount of a step.
+   * For example, this can be used to fetch data that is required on a particular step.
+   */
+  onMount: PropTypes.func,
+
+  /**
    * Optional function to be called on a step change.
    * For example, this can be used to validate input fields before proceeding to the next step.
    * This function can _optionally_ return a promise that is either resolved or rejected and the CreateTearsheet will handle the submitting state of the next button.
@@ -52,9 +58,14 @@ CreateTearsheetStep.propTypes = {
   onNext: PropTypes.func,
 
   /**
+   * Sets the optional secondary label on the progress step component
+   */
+  secondaryLabel: PropTypes.string,
+
+  /**
    * Sets the title text for a tearsheet step
    */
-  title: PropTypes.node,
+  title: PropTypes.node.isRequired,
 };
 
 // Default values for component props. Default values are not required for

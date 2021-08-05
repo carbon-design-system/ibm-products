@@ -14,45 +14,13 @@ import { CREATE_FULL_PAGE_STEP } from './constants.js';
 const componentName = 'CreateFullPageStep';
 const blockClass = `${pkg.prefix}--create-full-page__step`;
 
-import { Row, Column, Form } from 'carbon-components-react';
-
-export let CreateFullPageStep = forwardRef(
-  (
-    { children, className, title, subtitle, description, hasForm = true },
-    ref
-  ) => {
-    return (
-      <div className={cx(blockClass, className)} ref={ref}>
-        {title ? (
-          <>
-            <Row>
-              <Column>
-                <div className={`${blockClass}-text-content`}>
-                  <h2 className={`${blockClass}-title`}>{title}</h2>
-                  {subtitle && (
-                    <h3 className={`${blockClass}-subtitle`}>{subtitle}</h3>
-                  )}
-                  {description && (
-                    <p className={`${blockClass}-description`}>{description}</p>
-                  )}
-                </div>
-              </Column>
-            </Row>
-            {hasForm && (
-              <Row>
-                <Column>
-                  <Form className={`${blockClass}-form`}>{children}</Form>
-                </Column>
-              </Row>
-            )}
-          </>
-        ) : (
-          children
-        )}
-      </div>
-    );
-  }
-);
+export let CreateFullPageStep = forwardRef(({ children, className }, ref) => {
+  return (
+    <div className={cx(blockClass, className)} ref={ref}>
+      {children}
+    </div>
+  );
+});
 
 // Return a placeholder if not released and not enabled by feature flag
 CreateFullPageStep = pkg.checkComponentEnabled(
@@ -72,19 +40,15 @@ CreateFullPageStep.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Sets an optional description for a create full page step
-   */
-  description: PropTypes.node,
-
-  /**
    * This will conditionally disable the submit button in the multi step CreateFullPage
    */
   disableSubmit: PropTypes.bool,
 
   /**
-   * This will conditionally render form content below the step condition. This is defaulted to true
+   * Optional function to be called on initial mount of a step.
+   * For example, this can be used to fetch data that is required on a particular step.
    */
-  hasForm: PropTypes.bool,
+  onMount: PropTypes.func,
 
   /**
    * Optional function to be called on a step change.
@@ -94,9 +58,9 @@ CreateFullPageStep.propTypes = {
   onNext: PropTypes.func,
 
   /**
-   * Sets the subtitle text for a create full page step
+   * Sets the optional secondary label on the progress step component
    */
-  subtitle: PropTypes.node,
+  secondaryLabel: PropTypes.string,
 
   /**
    * Sets the title text for a create full page step

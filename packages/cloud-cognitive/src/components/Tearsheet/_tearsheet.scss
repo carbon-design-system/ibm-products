@@ -109,7 +109,13 @@
   }
 
   .#{$block-class}.#{$block-class}--wide .#{$block-class}__container {
-    width: calc(100% - (2 * #{$spacing-07}));
+    width: 100%;
+  }
+
+  @include carbon--breakpoint(lg) {
+    .#{$block-class}.#{$block-class}--wide .#{$block-class}__container {
+      width: calc(100% - (2 * #{$spacing-07}));
+    }
   }
 
   .#{$block-class}.#{$block-class}--stacked-1-of-2.is-visible
@@ -150,7 +156,12 @@
     justify-content: space-between;
   }
 
+  .#{$block-class} .#{$block-class}__header-fields {
+    flex: 1 1 100%;
+  }
+
   .#{$block-class} .#{$block-class}__header-actions {
+    flex: 0 0 auto;
     padding-left: $spacing-06;
   }
 
@@ -172,8 +183,18 @@
   }
 
   .#{$block-class} .#{$block-class}__header-description {
+    display: -webkit-box;
+    overflow: hidden;
+    max-width: 100%;
     margin-top: $spacing-05;
     @include carbon--type-style('body-short-01');
+
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
+    @include carbon--breakpoint-up('md') {
+      max-width: 60%;
+    }
   }
 
   .#{$block-class}.#{$block-class}--wide .#{$block-class}__header-description {
@@ -187,7 +208,6 @@
   .#{$block-class} .#{$block-class}__body {
     display: flex;
     flex-direction: row;
-    flex-grow: 1;
     padding: 0;
     margin: 0;
   }
@@ -198,24 +218,27 @@
   }
 
   .#{$block-class} .#{$block-class}__influencer {
-    flex: 0 0 256px;
+    flex: 0 0 257px; // influencer width 256px plus 1px border
     border-right: 1px solid $ui-03;
+    overflow-y: auto;
   }
 
   .#{$block-class} .#{$block-class}__influencer--wide {
-    flex-basis: 320px;
+    flex-basis: 321px; // influencer width 320px plus 1px border
   }
 
   .#{$block-class} .#{$block-class}__right {
-    display: flex;
-    flex-direction: column;
+    display: grid;
     flex-grow: 1;
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr auto;
   }
 
   .#{$block-class} .#{$block-class}__main {
     display: flex;
     flex-direction: row;
-    flex-grow: 1;
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
   }
 
   .#{$block-class} .#{$block-class}__main .#{$block-class}__influencer {
@@ -258,7 +281,15 @@
     }
   }
 
+  .#{$block-class} .#{$block-class}__button-container {
+    grid-column: 1 / -1;
+    grid-row: -1 / -1;
+    overflow-x: auto;
+  }
+
   .#{$block-class} .#{$block-class}__buttons {
+    display: inline-flex;
+    min-width: 100%;
     border-top: 1px solid $ui-03;
   }
 

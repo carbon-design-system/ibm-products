@@ -18,15 +18,17 @@ import {
 } from 'carbon-components-react';
 import { action } from '@storybook/addon-actions';
 import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { APIKeyModal } from '.';
 import mdx from './APIKeyModal.mdx';
-const storybookPrefix = getStorybookPrefix(pkg, APIKeyModal.displayName);
 import wait from '../../global/js/utils/wait';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 
 export default {
-  title: `${storybookPrefix}/${APIKeyModal.displayName}`,
+  title: getStoryTitle(APIKeyModal.displayName),
   component: APIKeyModal,
   parameters: {
     styles,
@@ -38,18 +40,29 @@ export default {
 
 const defaultProps = {
   apiKey: '123-456-789',
-  apiKeyInputId: 'apiKeyInput',
   apiKeyLabel: 'API key',
+  showAPIKeyLabel: 'Show key',
+  hideAPIKeyLabel: 'Hide key',
   copyButtonText: 'Copy',
+  copyIconDescription: 'Copy',
+  hasAPIKeyVisibilityToggle: true,
+  downloadBodyText:
+    'This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it.',
+  downloadLinkText: 'Download as JSON',
+  hasDownloadLink: true,
+  downloadFileName: 'apikey',
+  downloadFileType: 'json',
   open: true,
-  secondaryButtonText: 'Close',
-  successBody: (
+  closeButtonText: 'Close',
+  generateSuccessBody: (
     <p>
       This is your unique API key and is non-recoverable. If you lose this API
       key, you will have to reset it.
     </p>
   ),
-  successHeader: 'API key successully created',
+  generateSuccessTitle: 'API key successfully created',
+  editSuccessTitle: 'API key successfully saved',
+  loadingText: 'Generating...',
 };
 
 const blockClass = `${pkg.prefix}--apikey-modal`;
@@ -60,13 +73,14 @@ const InstantTemplate = (args) => {
 
   const generateKey = async () => {
     setLoading(true);
-    await wait(2000);
+    await wait(1000);
     setOpen(true);
     setLoading(false);
   };
 
   return (
     <>
+      <style>{`.${blockClass} { opacity: 0; }`};</style>
       <APIKeyModal {...args} onClose={() => setOpen(false)} open={open} />
       {loading ? (
         <Button
@@ -89,11 +103,11 @@ const TemplateWithState = (args) => {
   const [fetchError, setFetchError] = useState(false);
 
   // eslint-disable-next-line
-  const submitHandler = async () => {
-    action('submitted');
+  const submitHandler = async (apiKeyName) => {
+    action(`submitted ${apiKeyName}`)();
     setFetchError(false);
     setLoading(true);
-    await wait(2000);
+    await wait(1000);
     if (error) {
       setFetchError(true);
     } else {
@@ -109,12 +123,13 @@ const TemplateWithState = (args) => {
 
   return (
     <>
+      <style>{`.${blockClass} { opacity: 0; }`};</style>
       <APIKeyModal
         {...args}
         apiKey={apiKey}
         loading={loading}
         onClose={onCloseHandler}
-        onRequestSubmit={submitHandler}
+        onRequestGenerate={submitHandler}
         open={open}
         error={fetchError}
       />
@@ -124,6 +139,14 @@ const TemplateWithState = (args) => {
 };
 
 const MultiStepTemplate = (args) => {
+  const { editing } = args;
+  const {
+    savedName,
+    savedPermissions,
+    savedAllResources,
+    savedResource,
+    ...finalArgs
+  } = args;
   const [open, setOpen] = useState(false);
   const [apiKey, setApiKey] = useState('');
   const [loading, setLoading] = useState(false);
@@ -136,27 +159,34 @@ const MultiStepTemplate = (args) => {
   }, [open]);
 
   // multi step options
-  const [name, setName] = useState('');
-  const [permissions, setPermissions] = useState('');
-  const [allResources, setAllResources] = useState(false);
-  const [resource, setResource] = useState('');
+  const [name, setName] = useState(savedName);
+  const [permissions, setPermissions] = useState(savedPermissions);
+  const [allResources, setAllResources] = useState(savedAllResources);
+  const [resource, setResource] = useState(savedResource);
+  const [editSuccess, setEditSuccess] = useState(false);
 
   // eslint-disable-next-line
   const submitHandler = async () => {
-    action('submitted');
+    action('submitted')();
     setLoading(true);
-    await wait(2000);
-    setApiKey('111-111-111-111');
+    await wait(1000);
+    if (editing) {
+      setEditSuccess(true);
+    } else {
+      setApiKey('111-111-111-111');
+    }
     setLoading(false);
   };
 
   const onCloseHandler = () => {
     setOpen(false);
-    setApiKey('');
-    setName('');
-    setPermissions('');
-    setAllResources(false);
-    setResource('');
+    if (!editing) {
+      setApiKey('');
+      setName('');
+      setPermissions('');
+      setAllResources(false);
+      setResource('');
+    }
   };
 
   const formHandler = (evt) => {
@@ -164,9 +194,18 @@ const MultiStepTemplate = (args) => {
     submitHandler();
   };
 
+  const allResourcesHandler = (e) => {
+    const { checked } = e.target;
+    if (checked && resource) {
+      setResource('');
+    }
+    setAllResources(checked);
+  };
+
   const steps = [
     {
       valid: Boolean(name && permissions),
+      title: editing ? 'Edit API key' : 'Generate API key',
       content: (
         <>
           <p className={`${blockClass}__body`}>
@@ -180,6 +219,7 @@ const MultiStepTemplate = (args) => {
             labelText="Name your application"
             placeholder="Application name"
             ref={inputRef}
+            id="name-input"
           />
           <FormGroup
             legendText="What do you want your application to be able to do"
@@ -198,33 +238,49 @@ const MultiStepTemplate = (args) => {
       ),
     },
     {
-      valid: Boolean(resource),
+      valid: allResources || (!allResources && !!resource),
+      title: 'Choose which resources the API will have access to',
       content: (
         <>
           <Form onSubmit={formHandler}>
-            <FormGroup className={`${blockClass}__resource-toggle`}>
+            <FormGroup
+              legendText="What do you want your application to be able to do"
+              className={`${blockClass}__resource-toggle`}>
               <Toggle
-                onChange={(e) => setAllResources(e.target.checked)}
+                onChange={allResourcesHandler}
                 labelText="All resources"
                 labelA="Off"
                 labelB="On"
                 toggled={allResources}
                 disabled={loading}
+                id="toggle1"
                 // eslint-disable-next-line jsx-a11y/no-autofocus
                 autoFocus
               />
             </FormGroup>
-            <FormGroup className={`${blockClass}__resource-name`}>
+            <FormGroup
+              legendText="What do you want your application to be able to do"
+              className={`${blockClass}__resource-name`}>
               <TextInput
                 value={resource}
                 onChange={(e) => setResource(e.target.value)}
                 labelText="Which resource?"
                 placeholder="Resources name"
-                disabled={loading}
+                disabled={loading || allResources}
+                id="resource-input"
               />
             </FormGroup>
           </Form>
-          {loading && <InlineLoading description="Generating..." />}
+          {loading && (
+            <InlineLoading
+              description={loading ? 'Saving...' : 'Generating...'}
+            />
+          )}
+          {editSuccess && (
+            <div className={`${blockClass}__messaging`}>
+              Edited successfully
+            </div>
+          )}
         </>
       ),
     },
@@ -232,91 +288,176 @@ const MultiStepTemplate = (args) => {
 
   return (
     <>
+      <style>{`.${blockClass} { opacity: 0; }`};</style>
       <APIKeyModal
-        {...args}
+        {...finalArgs}
         apiKey={apiKey}
         loading={loading}
         onClose={onCloseHandler}
-        onRequestSubmit={submitHandler}
+        onRequestEdit={submitHandler}
+        onRequestGenerate={submitHandler}
         open={open}
         customSteps={steps}
+        nameRequired={false}
+        editSuccess={editSuccess}
       />
-      <Button onClick={() => setOpen(!open)}>Generate API key</Button>
+      <Button onClick={() => setOpen(!open)}>
+        {editing ? 'Edit API key' : 'Generate API key'}
+      </Button>
     </>
   );
 };
 
-export const Standard = TemplateWithState.bind({});
-Standard.args = {
-  ...defaultProps,
-  apiKeyVisibility: true,
-  createButtonText: 'Generate API key',
-  createHeader: 'Generate an API key',
-  downloadBodyText:
-    'This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it.',
-  downloadLinkText: 'Download as JSON',
-  downloadable: true,
-  downloadableFileName: 'apikey',
-  loadingMessage: 'Generating...',
-  body: '(Optional description text) To connect securely to [product name], your application or tool needs an API key with permission to access resources such as [product resource name].',
-  nameHelperText:
-    'Providing the application name will help you idenfity your API key later.',
-  nameInputId: 'nameInput',
-  nameLabel: 'Name your application',
-  namePlaceholder: 'Application name',
-  nameRequired: true,
+const EditTemplate = (args) => {
+  const { error, apiKeyName } = args;
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [fetchError, setFetchError] = useState(false);
+  const [fetchSuccess, setFetchSuccess] = useState(false);
+
+  const submitHandler = async () => {
+    action(`submitted ${apiKeyName}`)();
+    setFetchError(false);
+    setLoading(true);
+    await wait(1000);
+    if (error) {
+      setFetchError(true);
+    } else {
+      setFetchSuccess(true);
+    }
+    setLoading(false);
+  };
+
+  const onCloseHandler = () => {
+    setOpen(false);
+  };
+
+  const onOpenHandler = () => {
+    setOpen(true);
+  };
+
+  return (
+    <>
+      <style>{`.${blockClass} { opacity: 0; }`};</style>
+      <APIKeyModal
+        {...args}
+        loading={loading}
+        onClose={onCloseHandler}
+        onRequestEdit={submitHandler}
+        open={open}
+        error={fetchError}
+        editSuccess={fetchSuccess}
+      />
+      <Button onClick={onOpenHandler}>Edit API key</Button>
+    </>
+  );
 };
 
-export const WithError = TemplateWithState.bind({});
-WithError.args = {
-  ...defaultProps,
-  apiKeyVisibility: true,
-  createButtonText: 'Generate API key',
-  createHeader: 'Generate an API key',
-  downloadBodyText:
-    'This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it.',
-  downloadLinkText: 'Download as JSON',
-  downloadable: true,
-  downloadableFileName: 'apikey',
-  loadingMessage: 'Generating...',
-  body: '(Optional description text) To connect securely to [product name], your application or tool needs an API key with permission to access resources such as [product resource name].',
-  nameHelperText:
-    'Providing the application name will help you idenfity your API key later.',
-  nameInputId: 'nameInput',
-  nameLabel: 'Name your application',
-  namePlaceholder: 'Application name',
-  nameRequired: true,
-  error: true,
-  errorMessage: 'An error occured.',
-};
+export const Generate = prepareStory(TemplateWithState, {
+  args: {
+    ...defaultProps,
+    generateButtonText: 'Generate API key',
+    generateTitle: 'Generate an API key',
+    body: '(Optional description text) To connect securely to [product name], your application or tool needs an API key with permission to access resources such as [product resource name].',
+    nameHelperText:
+      'Providing the application name will help you identify your API key later.',
+    nameLabel: 'Name your application',
+    namePlaceholder: 'Application name',
+    nameRequired: true,
+  },
+});
 
-export const Instant = InstantTemplate.bind({});
-Instant.args = {
-  ...defaultProps,
-  apiKeyVisibility: true,
-  downloadBodyText:
-    'This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it.',
-  downloadLinkText: 'Download as JSON',
-  downloadable: true,
-  downloadableFileName: 'apikey',
-  apiKeyLabel: '',
-};
+export const GenerateWithError = prepareStory(TemplateWithState, {
+  args: {
+    ...defaultProps,
+    hasAPIKeyVisibilityToggle: true,
+    generateButtonText: 'Generate API key',
+    generateTitle: 'Generate an API key',
+    body: '(Optional description text) To connect securely to [product name], your application or tool needs an API key with permission to access resources such as [product resource name].',
+    nameHelperText:
+      'Providing the application name will help you identify your API key later.',
+    nameLabel: 'Name your application',
+    namePlaceholder: 'Application name',
+    nameRequired: true,
+    error: true,
+    errorText: 'Failed to create API key',
+  },
+});
 
-export const CustomSteps = MultiStepTemplate.bind({});
-CustomSteps.args = {
-  ...defaultProps,
-  createButtonText: 'Generate',
-  modalLabel: 'Genreate API key',
-  stepHeaders: [
-    'Generate API key',
-    'Choose which resources the API will have access to',
-  ],
-  nextStepButtonText: 'Next',
-  previousStepButtonText: 'Previous',
-  apiKeyVisibility: true,
-  downloadBodyText:
-    'This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it.',
-  downloadLinkText: 'Download as JSON',
-  downloadable: true,
-  downloadableFileName: 'apikey',
-};
+export const InstantGenerate = prepareStory(InstantTemplate, {
+  args: {
+    ...defaultProps,
+    apiKeyLabel: '',
+  },
+});
+
+export const CustomGenerate = prepareStory(MultiStepTemplate, {
+  args: {
+    ...defaultProps,
+    generateButtonText: 'Generate',
+    modalLabel: 'Generate API key',
+    nextStepButtonText: 'Next',
+    previousStepButtonText: 'Previous',
+    downloadFileName: 'apikey',
+    savedName: '',
+    savedAllResources: false,
+    savedResource: '',
+    savedPermissions: '',
+  },
+});
+
+export const Edit = prepareStory(EditTemplate, {
+  args: {
+    ...defaultProps,
+    editButtonText: 'Save API key',
+    generateTitle: 'Save an API key',
+    body: '(Optional description text) To connect securely to [product name], your application or tool needs an API key with permission to access resources such as [product resource name].',
+    nameHelperText:
+      'Providing the application name will help you identify your API key later.',
+    nameLabel: 'Name your application',
+    namePlaceholder: 'Application name',
+    nameRequired: true,
+    editing: true,
+    apiKey: '',
+    loadingText: 'Saving...',
+    apiKeyName: 'test_key_1',
+  },
+});
+
+export const EditWithError = prepareStory(EditTemplate, {
+  args: {
+    ...defaultProps,
+    editButtonText: 'Save API key',
+    generateTitle: 'Save an API key',
+    body: '(Optional description text) To connect securely to [product name], your application or tool needs an API key with permission to access resources such as [product resource name].',
+    nameHelperText:
+      'Providing the application name will help you identify your API key later.',
+    nameLabel: 'Name your application',
+    namePlaceholder: 'Application name',
+    nameRequired: true,
+    editing: true,
+    apiKey: '',
+    loadingText: 'Saving...',
+    generateSuccessBody: 'API Key saved.',
+    apiKeyName: 'test_key_1',
+    error: true,
+    errorText: 'Failed to edit API key',
+  },
+});
+
+export const CustomEdit = prepareStory(MultiStepTemplate, {
+  args: {
+    ...defaultProps,
+    generateButtonText: 'Generate',
+    modalLabel: 'Generate API key',
+    nextStepButtonText: 'Next',
+    previousStepButtonText: 'Previous',
+    downloadFileName: 'apikey',
+    savedName: 'test_key_1',
+    savedAllResources: false,
+    savedResource: 'resource_1',
+    savedPermissions: 'Read only',
+    editing: true,
+    editButtonText: 'Save API key',
+  },
+});

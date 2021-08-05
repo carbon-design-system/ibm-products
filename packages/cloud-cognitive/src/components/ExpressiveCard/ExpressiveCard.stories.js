@@ -10,14 +10,16 @@ import cx from 'classnames';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { ArrowRight24, Cloud32 } from '@carbon/icons-react';
 import { AspectRatio } from 'carbon-components-react';
-import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { ExpressiveCard } from '.';
 import mdx from './ExpressiveCard.mdx';
-const storybookPrefix = getStorybookPrefix(pkg, ExpressiveCard.displayName);
+import { action } from '@storybook/addon-actions';
 
 export default {
-  title: `${storybookPrefix}/Cards/${ExpressiveCard.displayName}`,
+  title: getStoryTitle(ExpressiveCard.displayName),
   component: ExpressiveCard,
   parameters: {
     styles,
@@ -27,18 +29,16 @@ export default {
   },
   argTypes: {
     columnSize: {
-      defaultValue: 4,
       control: {
         type: 'select',
-        options: [4, 8, 12, 16],
       },
+      options: [4, 8, 12, 16],
     },
     mediaRatio: {
-      defaultValue: '1x1',
       control: {
         type: 'select',
-        options: ['16x9', '9x16', '2x1', '1x2', '4x3', '3x4', '1x1'],
       },
+      options: ['16x9', '9x16', '2x1', '1x2', '4x3', '3x4', '1x1'],
     },
   },
   decorators: [
@@ -53,6 +53,8 @@ export default {
 const defaultProps = {
   label: 'Label',
   title: 'Title',
+  columnSize: 4,
+  mediaRatio: '1x1',
   children: (
     <p>
       expressive card body content block. description inviting the user to take
@@ -90,62 +92,70 @@ const MediaTemplate = (opts) => {
   );
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  ...defaultProps,
-};
+export const Default = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+  },
+});
 
-export const LabelOnly = Template.bind({});
-LabelOnly.args = {
-  ...defaultProps,
-  title: '',
-};
+export const LabelOnly = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    title: '',
+  },
+});
 
-export const WithCaption = Template.bind({});
-WithCaption.args = {
-  ...defaultProps,
-  caption: 'Description or long caption',
-  label: '',
-};
+export const WithCaption = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    caption: 'Description or long caption',
+    label: '',
+  },
+});
 
-export const WithMedia = MediaTemplate.bind({});
-WithMedia.args = {
-  ...defaultProps,
-};
+export const WithMedia = prepareStory(MediaTemplate, {
+  args: {
+    ...defaultProps,
+  },
+});
 
-export const WithActionIcon = Template.bind({});
-WithActionIcon.args = {
-  ...defaultProps,
-  actionIcons: [
-    {
-      id: '1',
-      icon: ArrowRight24,
-      onClick: () => {},
-      onKeyDown: () => {},
-      iconDescription: 'Next',
-    },
-  ],
-  primaryButtonText: '',
-};
+export const WithActionIcon = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    actionIcons: [
+      {
+        id: '1',
+        icon: ArrowRight24,
+        onClick: () => action('on click'),
+        onKeyDown: () => action('on keydown'),
+        iconDescription: 'Next',
+      },
+    ],
+    primaryButtonText: '',
+  },
+});
 
-export const WithPictogram = Template.bind({});
-WithPictogram.args = {
-  ...defaultProps,
-  pictogram: Cloud32,
-};
+export const WithPictogram = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    pictogram: Cloud32,
+  },
+});
 
-export const WithSecondaryAction = Template.bind({});
-WithSecondaryAction.args = {
-  ...defaultProps,
-  secondaryButtonText: 'Secondary',
-  secondaryButtonKind: 'ghost',
-  columnSize: '8',
-};
+export const WithSecondaryAction = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    secondaryButtonText: 'Secondary',
+    secondaryButtonKind: 'ghost',
+    columnSize: '8',
+  },
+});
 
-export const Clickable = Template.bind({});
-Clickable.args = {
-  ...defaultProps,
-  onClick: () => {},
-  onKeyDown: () => {},
-  primaryButtonText: '',
-};
+export const Clickable = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    onClick: () => action('on click'),
+    onKeyDown: () => action('on keydown'),
+    primaryButtonText: '',
+  },
+});

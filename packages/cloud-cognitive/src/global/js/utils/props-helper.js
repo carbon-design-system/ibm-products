@@ -58,15 +58,31 @@ export const prepareProps = (...values) => {
   }, {});
 };
 
+// Determine whether a named prop in a set of props has been given a value.
+// null and undefined do not count as values, but anything else does. If the
+// prop is 'children', then an array of null/undefined also does not count as
+// a value, but anything else does.
+const propHasValue = (props, propName) => {
+  let result = props[propName] !== null && props[propName] !== undefined;
+
+  if (result && propName === 'children' && Array.isArray(props[propName])) {
+    result = false;
+    for (let i = 0; !result && i < props[propName].length; i++) {
+      result = props[propName][i] !== null && props[propName][i] !== undefined;
+    }
+  }
+
+  return result;
+};
+
 // A simple wrapper for a prop-types checker that issues a warning message if
 // the value being validated is not null/undefined.
 const deprecatePropInner =
   (message, validator, info) =>
-  (...args) => {
-    // args = [props, propName, componentName, location, propFullName, ...]
-    args[0][args[1]] &&
-      pconsole.warn(message(args[3], args[4] || args[1], args[2], info));
-    return validator(...args);
+  (props, propName, comp, loc, propFullName, secret) => {
+    propHasValue(props, propName) &&
+      pconsole.warn(message(loc, propFullName || propName, comp, info));
+    return validator(props, propName, comp, loc, propFullName, secret);
   };
 
 /**
@@ -105,6 +121,19 @@ export const deprecateProp = deprecatePropInner.bind(
 );
 
 /**
+ * A function that returns a storybook argTypes object configured to remove deprecated
+ * props from the storybook controls
+ */
+export const getDeprecatedArgTypes = (deprecatedProps) => {
+  const keys = Object.keys(deprecatedProps);
+
+  return keys.reduce(
+    (acc, cur) => ((acc[cur] = { table: { disable: true } }), acc),
+    {}
+  );
+};
+
+/**
  * Takes items as fragment, node or array
  * @param {node || array} items - which may have shape to extract
  * @returns Array of items
@@ -117,7 +146,9 @@ export const extractShapesArray = (items) => {
       items?.[0]?.type === React.Fragment ||
       items.type === React.Fragment)
   ) {
-    return unwrapIfFragment(items).map((item) => ({ ...item.props }));
+    const unwrappedItems = unwrapIfFragment(items);
+
+    return unwrappedItems.map((item) => ({ key: item.key, ...item.props }));
   }
 
   return Array.isArray(items) ? items : [];

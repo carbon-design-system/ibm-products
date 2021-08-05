@@ -11,9 +11,9 @@
 @import '../../global/styles/project-settings';
 
 // Imports of Carbon settings and component styles and other
-// related component styles used by ExampleComponent.
+// related component styles used by `AboutModal`.
 @import '@carbon/themes/scss/themes';
-@import 'carbon-components/scss/globals/scss/_vars.scss';
+@import 'carbon-components/scss/globals/scss/vars';
 @import 'carbon-components/scss/components/link/link';
 @import 'carbon-components/scss/components/modal/modal';
 @import 'carbon-components/scss/components/tabs/tabs';
@@ -49,7 +49,6 @@
 
     min-height: $layout-05;
     padding: 0 20% 0 $spacing-05;
-    margin-bottom: 0;
     grid-row: auto;
     overflow-x: hidden;
     overflow-y: auto;
@@ -57,15 +56,14 @@
 
   .#{$block-class}.#{$block-class}--with-tabs .#{$block-class}__body {
     min-height: calc(#{$layout-05} + #{$spacing-08});
-  }
-
-  .#{$block-class} .#{$block-class}__body-content {
-    margin-bottom: $spacing-09;
-  }
-
-  .#{$block-class}.#{$block-class}--with-tabs .#{$block-class}__body-content {
     // stylelint-disable-next-line carbon/layout-token-use
     margin-bottom: calc(#{$spacing-09} + #{$spacing-08});
+  }
+
+  .#{$block-class}.#{$block-class}--with-tabs
+    .bx--modal-content--overflow-indicator {
+    // stylelint-disable-next-line carbon/layout-token-use
+    bottom: calc(#{$spacing-09} + #{$spacing-08});
   }
 
   .#{$block-class} .#{$block-class}__links-container {
@@ -81,7 +79,8 @@
   .#{$block-class} .#{$block-class}__legal-text,
   .#{$block-class} .#{$block-class}__copyright-text {
     margin-top: $spacing-07;
-    color: $text-03;
+    margin-bottom: 0;
+    color: $text-02;
   }
 
   .#{$block-class} .#{$block-class}__copyright-text {
@@ -97,22 +96,6 @@
     color: $inverse-01;
   }
 
-  .#{$block-class} .#{$block-class}__footer::before {
-    position: absolute;
-    top: calc(-1 * #{$spacing-09});
-    width: 80%;
-    height: $spacing-09;
-    background: linear-gradient(to bottom, transparent, $ui-01 45%);
-    content: '';
-  }
-
-  .#{$block-class}.#{$block-class}--with-tabs .bx--modal-footer::before {
-    // stylelint-disable-next-line carbon/layout-token-use
-    top: calc(-1 * (#{$spacing-09} + #{$spacing-08}));
-    height: calc(#{$spacing-09} + #{$spacing-08});
-    background: linear-gradient(to bottom, transparent, $ui-01 25%);
-  }
-
   .#{$block-class} .#{$block-class}__tab-container {
     position: absolute;
     bottom: 100%;
@@ -123,6 +106,8 @@
     @include carbon--type-style('body-short-01');
 
     padding-left: $spacing-05;
+    margin-top: 0;
+    margin-bottom: 0;
     color: $inverse-01;
   }
 

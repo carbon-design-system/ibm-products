@@ -5,12 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { ActionBar, ActionBarItem } from '.';
 import { Lightning16, Bee16 } from '@carbon/icons-react';
 import { mockHTMLElement } from '../../global/js/utils/test-helper';
 
+import { pkg, carbon } from '../../settings';
+const blockClass = `${pkg.prefix}--action-bar`;
+
 const actions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => ({
+  key: `key is this num ${num}`,
   renderIcon: num % 2 ? Lightning16 : Bee16,
   iconDescription: `Action ${num.toString().padStart(2, '0')}`,
   onClick: () => {},
@@ -18,26 +23,114 @@ const actions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => ({
 
 const ActionBarChildren = (
   <>
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 01" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 02" />
-    <ActionBarItem renderIcon={Bee16} iconDescription="Action 03" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 04" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 05" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 06" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 07" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 08" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 09" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 10" />
+    <ActionBarItem
+      key="key-1"
+      renderIcon={Lightning16}
+      iconDescription="Action 01"
+    />
+    <ActionBarItem
+      key="key-2"
+      renderIcon={Lightning16}
+      iconDescription="Action 02"
+    />
+    <ActionBarItem key="key-3" renderIcon={Bee16} iconDescription="Action 03" />
+    <ActionBarItem
+      key="key-4"
+      renderIcon={Lightning16}
+      iconDescription="Action 04"
+    />
+    <ActionBarItem
+      key="key-5"
+      renderIcon={Lightning16}
+      iconDescription="Action 05"
+    />
+    <ActionBarItem
+      key="key-6"
+      renderIcon={Lightning16}
+      iconDescription="Action 06"
+    />
+    <ActionBarItem
+      key="key-7"
+      renderIcon={Lightning16}
+      iconDescription="Action 07"
+    />
+    <ActionBarItem
+      key="key-8"
+      renderIcon={Lightning16}
+      iconDescription="Action 08"
+    />
+    <ActionBarItem
+      key="key-9"
+      renderIcon={Lightning16}
+      iconDescription="Action 09"
+    />
+    <ActionBarItem
+      key="key-10"
+      renderIcon={Lightning16}
+      iconDescription="Action 10"
+    />
   </>
 );
+
+const overflowAriaLabel = 'overflow-label';
 
 // eslint-disable-next-line react/prop-types
 const TestActionBar = ({ width, children = null, ...rest }) => {
   return (
-    <div style={{ width, height: 40 }}>
+    <div style={{ width, height: 40 }} className="test-container">
       <ActionBar {...rest}>{children}</ActionBar>
     </div>
   );
+};
+
+const sizes = (base) => ({
+  offsetWidth: {
+    [`${blockClass}__displayed-items`]: base,
+    [`${blockClass}-overflow-items`]: 40, // The overflow menu button
+    [`${blockClass}-overflow-items__options`]: 200, // width of item in overflow menu
+    [`${blockClass}`]: base,
+    [`${blockClass}-item`]: 40, // standard icon button width
+    [`${blockClass}__hidden-sizing-items`]: 1000000, // very large so as to be unconstrained
+  },
+});
+
+const mockSizes = () => {
+  const mocks = {};
+
+  const keys = Object.keys(sizes(-1));
+  for (let i = 0; i < keys.length; i++) {
+    mocks[keys[i]] = {
+      get: function () {
+        return testSizes(this, keys[i]);
+      },
+    };
+  }
+
+  return mocks;
+};
+
+const testSizes = (el, property) => {
+  const classes = el.getAttribute('class').split(' ');
+  const container = el.closest('.test-container');
+
+  // if no container we are looking at the popup, assign something more than big enough e.g. 1001
+  const base = container ? parseInt(container.style.width, 10) : 1001;
+  const propSizes = sizes(base)[property];
+
+  if (propSizes) {
+    for (let cls of classes) {
+      const val = propSizes[cls] ? propSizes[cls] : -1;
+      if (val >= 0) {
+        // console.log(property, cls, val);
+        return val;
+      }
+    }
+  }
+
+  // The test should never get here as all cases should be catered for in setup.
+  // eslint-disable-next-line
+  console.log('testSizes found nothing.', property, el.outerHTML);
+  return base;
 };
 
 describe(ActionBar.displayName, () => {
@@ -45,20 +138,7 @@ describe(ActionBar.displayName, () => {
   let mockElement;
 
   beforeEach(() => {
-    mockElement = mockHTMLElement({
-      offsetWidth: {
-        get: function () {
-          return parseInt(this.style.width, 10) || this.parentNode.offsetWidth;
-        },
-      },
-      offsetHeight: {
-        get: function () {
-          return (
-            parseInt(this.style.height, 10) || this.parentNode.offsetHeight
-          );
-        },
-      },
-    });
+    mockElement = mockHTMLElement(mockSizes());
     window.ResizeObserver = jest.fn().mockImplementation(() => ({
       observe: jest.fn(),
       unobserve: jest.fn(),
@@ -72,15 +152,22 @@ describe(ActionBar.displayName, () => {
     window.ResizeObserver = ResizeObserver;
   });
 
-  const { click } = fireEvent;
-
   it('Works with deprecated children', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
-    render(<TestActionBar width={1150}>{ActionBarChildren}</TestActionBar>);
-
-    screen.getByText(/Action 01/);
-    screen.getByText(/Action 10/);
+    // const { container } =
+    render(
+      <TestActionBar width={1150} overflowAriaLabel={overflowAriaLabel}>
+        {ActionBarChildren}
+      </TestActionBar>
+    );
+    // console.log(container.outerHTML);
+    screen.getByText(/Action 01/, {
+      selector: `.${blockClass}__displayed-items .${carbon.prefix}--assistive-text`,
+    });
+    screen.getByText(/Action 10/, {
+      selector: `.${blockClass}__displayed-items .${carbon.prefix}--assistive-text`,
+    });
 
     expect(warn).toBeCalledWith(
       'The prop `children` of `ActionBar` has been deprecated and will soon be removed. See documentation on the `actions` prop.'
@@ -90,14 +177,23 @@ describe(ActionBar.displayName, () => {
   });
 
   it('Renders an action bar', () => {
-    render(<TestActionBar width={1150} actions={actions} />);
+    render(
+      <TestActionBar
+        width={1150}
+        actions={actions}
+        overflowAriaLabel={overflowAriaLabel}
+      />
+    );
 
-    screen.getByText(/Action 01/);
-    screen.getByText(/Action 10/);
+    screen.getByText(/Action 01/, {
+      selector: `.${blockClass}__displayed-items .${carbon.prefix}--assistive-text`,
+    });
+    screen.getByText(/Action 10/, {
+      selector: `.${blockClass}__displayed-items .${carbon.prefix}--assistive-text`,
+    });
   });
 
   it('Renders an action bar with overflow items', () => {
-    const overflowAriaLabel = 'Overflow aria label';
     // not enough room so should see an overflow.
     render(
       <TestActionBar
@@ -107,20 +203,54 @@ describe(ActionBar.displayName, () => {
       />
     );
 
-    expect(screen.queryByText(/Action 10/)).toBeNull();
+    expect(
+      screen.queryByText(/Action 10/, {
+        selector: `.${blockClass}__displayed-items .${carbon.prefix}--assistive-text`,
+      })
+    ).toBeNull();
+
+    const menuItemNotSeen = document.querySelector('[role="menuitem"]', {
+      name: 'Action 10',
+    });
+    expect(menuItemNotSeen).toBeNull();
 
     // Click overflow button and check for last action
     const ofBtn = screen.getByLabelText(overflowAriaLabel);
-    click(ofBtn);
-    screen.getByText(/Action 10/);
+    userEvent.click(ofBtn);
+
+    // <ul role='menu' /> but default <ul> role of list used for query
+    // see https://testing-library.com/docs/queries/byrole/#api
+    // const om = screen.getByRole('list');
+    // const menuItems = screen.getAllByRole('menuitem');
+    // use querySelectorAll rather that getAllByRole because the drop-down
+    // never fully appears in jsdom (requires resize handler mocking)
+    const menuItemSeen = document.querySelector('[role="menuitem"]', {
+      name: 'Action 10',
+    });
+    expect(menuItemSeen).not.toBeNull();
   });
 
   it('Renders an action bar with max items set', () => {
-    render(<TestActionBar width={1150} maxVisible={2} actions={actions} />);
+    render(
+      <TestActionBar
+        width={1150}
+        maxVisible={2}
+        actions={actions}
+        overflowAriaLabel={overflowAriaLabel}
+      />
+    );
 
-    screen.getByText(/Action 01/);
-    screen.getByText(/Action 02/);
+    screen.getByText(/Action 01/, {
+      selector: `.${blockClass}__displayed-items .${carbon.prefix}--assistive-text`,
+    });
+    screen.getByText(/Action 02/, {
+      selector: `.${blockClass}__displayed-items .${carbon.prefix}--assistive-text`,
+    });
 
-    expect(screen.queryByText(/Action 03/)).toBeNull();
+    expect(
+      screen.queryByText(/Action 03/, {
+        selector: `.${blockClass}__displayed-items .${carbon.prefix}--assistive-text`,
+      })
+    ).toBeNull();
   });
 });

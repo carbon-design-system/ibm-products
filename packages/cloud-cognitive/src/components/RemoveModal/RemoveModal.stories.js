@@ -8,14 +8,15 @@
 import React, { useState } from 'react';
 import { Button } from 'carbon-components-react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { RemoveModal } from '.';
 import mdx from './RemoveModal.mdx';
-const storybookPrefix = getStorybookPrefix(pkg, RemoveModal.displayName);
 
 export default {
-  title: `${storybookPrefix}/${RemoveModal.displayName}`,
+  title: getStoryTitle(RemoveModal.displayName),
   component: RemoveModal,
   parameters: {
     styles,
@@ -59,26 +60,29 @@ const TemplateWithState = (args) => {
   );
 };
 
-export const Standard = TemplateWithState.bind({});
-Standard.args = {
-  ...defaultProps,
-  body: `Removing ${resourceName} will permanently remove the configuration. This action cannot be undone.`,
-  title: 'Confirm removal',
-  primaryButtonText: 'Remove',
-  label: `Remove ${resourceName}`,
-};
+export const Standard = prepareStory(TemplateWithState, {
+  args: {
+    ...defaultProps,
+    body: `Removing ${resourceName} will permanently remove the configuration. This action cannot be undone.`,
+    title: 'Confirm removal',
+    primaryButtonText: 'Remove',
+    label: `Remove ${resourceName}`,
+  },
+});
 
-export const RemovePattern = Template.bind({});
-RemovePattern.args = {
-  ...defaultProps,
-  body: `Removing ${resourceName} will permanently remove the configuration. This action cannot be undone.`,
-  title: 'Confirm removal',
-  primaryButtonText: 'Remove',
-  label: `Remove ${resourceName}`,
-};
+export const RemovePattern = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    body: `Removing ${resourceName} will permanently remove the configuration. This action cannot be undone.`,
+    title: 'Confirm removal',
+    primaryButtonText: 'Remove',
+    label: `Remove ${resourceName}`,
+  },
+});
 
-export const DeletePattern = Template.bind({});
-DeletePattern.args = {
-  ...defaultProps,
-  textConfirmation: true,
-};
+export const DeletePattern = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    textConfirmation: true,
+  },
+});

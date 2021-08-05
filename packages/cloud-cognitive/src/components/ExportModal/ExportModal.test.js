@@ -15,7 +15,7 @@ const componentName = ExportModal.displayName;
 const defaultProps = {
   body: 'body content',
   className: 'test-class',
-  errorMessage: 'an error occured',
+  errorMessage: 'an error occurred',
   filename: '',
   inputLabel: 'file name',
   invalidInputText: 'invalid input',
@@ -121,7 +121,7 @@ describe(componentName, () => {
   });
 
   it('renders with preformatted extensions', () => {
-    const { click } = fireEvent;
+    const { click } = userEvent;
     const { fn } = jest;
     const onRequestSubmit = fn();
     const onClose = fn();
@@ -166,7 +166,7 @@ describe(componentName, () => {
   });
 
   it('adds additional properties to the containing node', () => {
-    render(<ExportModal {...defaultProps} data-testid="test-id" />);
+    render(<ExportModal {...defaultProps} data-test-id="test-id" />);
     screen.getByTestId('test-id');
   });
 

@@ -1,6 +1,5 @@
-import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
-import { pkg } from '../../settings';
-import { getStorybookSlug } from '../../../config';
+import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
+import { getStoryId } from '../../global/js/utils/story-helper';
 import { SidePanel } from '.';
 
 # Side Panel
@@ -21,12 +20,10 @@ within them.
 
 ### Default SidePanel component
 
-<Preview>
-  <Story
-    id={getStorybookSlug(pkg, SidePanel.displayName, 'slide-over-medium')}
-  />
-</Preview>
+<Canvas>
+  <Story id={getStoryId(SidePanel.displayName, 'slide-over-medium')} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />

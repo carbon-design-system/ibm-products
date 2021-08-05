@@ -49,16 +49,23 @@
 
 // set default color and background for stories
 .sb-show-main {
-  color: $text-01;
   background-color: $ui-background;
+  color: $text-01;
 }
 
 /**
-  Override used for modals in any .mdx preview block.
-  storybook generates preview blocks with a surrounding div with style="position: relative; z-index: 0;"
-  this causes style problems for modals when not using react portals.
-  modals in mdx files should now be formatted like this to prevent z-index issues
+  Adds a box indicating the extent of the available space to the displayed component
 */
-.preview-position-fix > div {
-  position: static !important; /* stylelint-disable-line declaration-no-important */
+.ccs-sb__display-box {
+  position: relative;
+  border: $layout-02 solid $ui-01;
+}
+
+.ccs-sb__display-box::before {
+  position: absolute;
+  top: calc(-1 * #{$layout-02});
+  left: 0;
+  margin-top: calc(-1 * #{$layout-02});
+  content: 'NOTE: Border around component shows extent of container, but not part of component.';
+  white-space: nowrap;
 }

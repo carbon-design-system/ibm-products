@@ -122,7 +122,7 @@ describe(componentName, () => {
   });
 
   it('adds additional properties to the containing node', () => {
-    render(<RemoveModal {...defaultProps} data-testid="test-id" />);
+    render(<RemoveModal {...defaultProps} data-test-id="test-id" />);
     screen.getByTestId('test-id');
   });
 

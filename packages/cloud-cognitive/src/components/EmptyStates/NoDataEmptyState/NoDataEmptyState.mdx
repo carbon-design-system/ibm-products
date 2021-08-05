@@ -1,7 +1,7 @@
-import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
-import { pkg } from '../../../settings';
-import { getStorybookSlug } from '../../../../config';
+import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
+import { getStoryId } from '../../../global/js/utils/story-helper';
 import { NoDataEmptyState } from '.';
+// cspell:words emptystates
 
 # No data Empty state
 
@@ -18,82 +18,46 @@ guidelines and documentation please refer to the links above.
 
 ### Default No data Empty state
 
-<Preview>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      NoDataEmptyState.displayName,
-      'default',
-      'emptystates'
-    )}
-  />
-</Preview>
+<Canvas>
+  <Story id={getStoryId(NoDataEmptyState.displayName, 'default')} />
+</Canvas>
 
 ### No data Empty state with dark themed illustration
 
-<Preview>
+<Canvas>
   <Story
-    id={getStorybookSlug(
-      pkg,
-      NoDataEmptyState.displayName,
-      'with-dark-mode-illustration',
-      'emptystates'
-    )}
+    id={getStoryId(NoDataEmptyState.displayName, 'with-dark-mode-illustration')}
   />
-</Preview>
+</Canvas>
 
 ### No data Empty state with action
 
-<Preview>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      NoDataEmptyState.displayName,
-      'with-action',
-      'emptystates'
-    )}
-  />
-</Preview>
+<Canvas>
+  <Story id={getStoryId(NoDataEmptyState.displayName, 'with-action')} />
+</Canvas>
 
 ### No data Empty state with action (Button with icon)
 
-<Preview>
+<Canvas>
   <Story
-    id={getStorybookSlug(
-      pkg,
-      NoDataEmptyState.displayName,
-      'with-action-icon-button',
-      'emptystates'
-    )}
+    id={getStoryId(NoDataEmptyState.displayName, 'with-action-icon-button')}
   />
-</Preview>
+</Canvas>
 
 ### No data Empty state with link
 
-<Preview>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      NoDataEmptyState.displayName,
-      'with-link',
-      'emptystates'
-    )}
-  />
-</Preview>
+<Canvas>
+  <Story id={getStoryId(NoDataEmptyState.displayName, 'with-link')} />
+</Canvas>
 
 ### No data Empty state with action and link
 
-<Preview>
+<Canvas>
   <Story
-    id={getStorybookSlug(
-      pkg,
-      NoDataEmptyState.displayName,
-      'with-action-and-link',
-      'emptystates'
-    )}
+    id={getStoryId(NoDataEmptyState.displayName, 'with-action-and-link')}
   />
-</Preview>
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />

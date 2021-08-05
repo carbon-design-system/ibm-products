@@ -5,7 +5,7 @@ components. They are intended to be supportive rather than restrictive, and need
 to stay up-to-date, so do raise a question if anything needs changing or is
 unclear.
 
-## Organisation and files
+## Organization and files
 
 - Each component, or group of closely related components, is in its own
   directory which will normally contain the following files:
@@ -40,7 +40,7 @@ unclear.
     helper within the package, it should NOT be exported from the index.js,
     should NOT be included in \_index.scss, and should NOT have a flag in the
     package-settings.js. Instead, the JS should be imported, and the SCSS
-    included, whereever the component is needed internally.
+    included, wherever the component is needed internally.
 
 ## Component JavaScript code
 
@@ -255,13 +255,13 @@ unclear.
     });
     ```
   - A test for each input (props, slots, _etc_), verifying appropriate outputs.
-  - A test to validate each the behaviours and actions as far as is practical.
+  - A test to validate each the behaviors and actions as far as is practical.
   - A test that additional HTML attributes are passed through to an appropriate
     node. Something like:
     ```jsx
     const dataTestId = uuidv4();
     it('adds additional properties to the containing node', () => {
-      render(<ComponentName data-testid={dataTestId} />);
+      render(<ComponentName data-test-id={dataTestId} />);
       screen.getByTestId(dataTestId);
     });
     ```
@@ -300,8 +300,8 @@ unclear.
     given useful options, for example by using a 'select' control type with a
     selection of relevant choices (including 'none').
   - Some props may require some extra controls to be included in the story in
-    order to illustrate them correctly, in which case their controls in the
-    controls panel should be disabled so as not to make conflicting changes.
+    order to illustrate them correctly, in which case they should be disabled in
+    the controls panel so as not to make conflicting changes.
   - Props that cannot usefully be modified in the story context (for example,
     handlers) should be disabled in the controls panel.
 - The stories should also expose all relevant actions and behaviors. This may

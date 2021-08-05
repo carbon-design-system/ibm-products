@@ -103,6 +103,19 @@ CreateSidePanel = pkg.checkComponentEnabled(CreateSidePanel, componentName);
 
 CreateSidePanel.displayName = componentName;
 
+export const deprecatedProps = {
+  /**
+   * **Deprecated**
+   *
+   * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
+   * This prop is required when using the `slideIn` variant of the side panel.
+   */
+  pageContentSelector: deprecateProp(
+    PropTypes.string,
+    'This prop has been renamed to `selectorPageContent`.'
+  ),
+};
+
 CreateSidePanel.propTypes = {
   /**
    * Sets the body content of the create side panel
@@ -148,14 +161,6 @@ CreateSidePanel.propTypes = {
    */
   open: PropTypes.bool,
   /**
-   * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
-   * This prop is required when using the `slideIn` variant of the side panel.
-   */
-  pageContentSelector: deprecateProp(
-    PropTypes.string,
-    'This prop has been renamed to `selectorPageContent`.'
-  ),
-  /**
    * Specifies the primary button's text in the modal.
    */
   primaryButtonText: PropTypes.string.isRequired,
@@ -180,4 +185,5 @@ CreateSidePanel.propTypes = {
    * The title of the CreateSidePanel is usually the product or service name.
    */
   title: PropTypes.node.isRequired,
+  ...deprecatedProps,
 };

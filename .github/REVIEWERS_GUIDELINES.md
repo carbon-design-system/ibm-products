@@ -94,6 +94,7 @@ public component has a flag in package-settings.js.
 `- [ ]` No linter warnings or errors are produced.\
 `- [ ]` Carbon tokens (theme, layout, motion) are used unless the design specifies
 otherwise.\
+`- [ ]` All components utilizing motion must include reduced-motion queries for accessibility purposes - [read more here](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion).\
 `- [ ]` Code is formatted according to prettier rules (no use of
 //prettier-ignore).\
 `- [ ]` Code is clear, maintainable and follows standard React practices and the

@@ -13,10 +13,11 @@ import cx from 'classnames';
 import { TagSetOverflow } from './TagSetOverflow';
 import { TagSetModal } from './TagSetModal';
 import { Tag } from 'carbon-components-react';
-import ReactResizeDetector from 'react-resize-detector';
+import { useResizeDetector } from 'react-resize-detector';
 
 import { pkg } from '../../settings';
-import { isRequiredIf } from '../../global/js/utils/props-helper';
+import { prepareProps, isRequiredIf } from '../../global/js/utils/props-helper';
+
 const componentName = 'TagSet';
 const blockClass = `${pkg.prefix}--tag-set`;
 
@@ -25,17 +26,17 @@ const allTagsModalSearchThreshold = 10;
 export let TagSet = React.forwardRef(
   (
     {
-      children,
+      align,
       className,
       maxVisible,
-      rightAlign,
       overflowAlign,
       overflowClassName,
       overflowDirection,
-      allTagsModalTile,
+      allTagsModalTitle,
       allTagsModalSearchLabel,
       allTagsModalSearchPlaceholderText,
       showAllTagsLabel,
+      tags,
       // Collect any other property values passed in.
       ...rest
     },
@@ -43,11 +44,11 @@ export let TagSet = React.forwardRef(
   ) => {
     const [displayCount, setDisplayCount] = useState(3);
     const [displayedTags, setDisplayedTags] = useState([]);
-    const [allTags, setAllTags] = useState([]);
     const [hiddenSizingTags, setHiddenSizingTags] = useState([]);
     const [showAllModalOpen, setShowAllModalOpen] = useState(false);
     const localTagSetRef = useRef(null);
     const tagSetRef = ref || localTagSetRef;
+    const sizingContainerRef = useRef();
     const displayedArea = useRef(null);
     const [sizingTags, setSizingTags] = useState([]);
     const overflowTag = useRef(null);
@@ -57,37 +58,36 @@ export let TagSet = React.forwardRef(
     };
 
     useEffect(() => {
-      // clone children for use in modal
-      setAllTags(
-        children && children.length > 0
-          ? children.map((child) => React.cloneElement(child))
-          : []
-      );
-
       const newSizingTags = [];
-      // use children as sizing tags
+      // create sizing tags
       setHiddenSizingTags(
-        children && children.length > 0
-          ? children.map((child, index) => {
+        tags && tags.length > 0
+          ? tags.map(({ label, ...other }, index) => {
               return (
                 <div
                   key={index}
                   className={`${blockClass}__sizing-tag`}
                   ref={(el) => (newSizingTags[index] = el)}>
-                  {child}
+                  <Tag {...other} filter={false}>
+                    {label}
+                  </Tag>
                 </div>
               );
             })
           : []
       );
       setSizingTags(newSizingTags);
-    }, [children]);
+    }, [tags]);
 
     useEffect(() => {
-      // clone children for use as visible and overflow tags
+      // create visible and overflow tags
       let newDisplayedTags =
-        children && children.length > 0
-          ? children.map((child) => React.cloneElement(child))
+        tags && tags.length > 0
+          ? tags.map(({ label, ...other }, index) => (
+              <Tag {...other} filter={false} key={`displayed-tag-${index}`}>
+                {label}
+              </Tag>
+            ))
           : [];
 
       // separate out tags for the overflow
@@ -119,12 +119,12 @@ export let TagSet = React.forwardRef(
 
       setDisplayedTags(newDisplayedTags);
     }, [
-      children,
       displayCount,
       overflowAlign,
       overflowClassName,
       overflowDirection,
       showAllTagsLabel,
+      tags,
     ]);
 
     const checkFullyVisibleTags = useCallback(() => {
@@ -186,39 +186,46 @@ export let TagSet = React.forwardRef(
       setShowAllModalOpen(false);
     };
 
-    return (
-      <ReactResizeDetector onResize={handleResize}>
-        <div {...rest} className={cx([blockClass, className])} ref={tagSetRef}>
-          <div
-            className={cx([
-              `${blockClass}__space`,
-              { [`${blockClass}__space--right`]: rightAlign },
-            ])}>
-            <ReactResizeDetector onResize={handleSizerTagsResize}>
-              <div
-                className={`${blockClass}__tag-container ${blockClass}__tag-container--hidden`}
-                aria-hidden={true}>
-                {hiddenSizingTags}
-              </div>
-            </ReactResizeDetector>
+    useResizeDetector({
+      onResize: handleSizerTagsResize,
+      targetRef: sizingContainerRef,
+    });
 
-            <div className={`${blockClass}__tag-container`} ref={displayedArea}>
-              {displayedTags}
-            </div>
+    useResizeDetector({
+      onResize: handleResize,
+      targetRef: tagSetRef,
+    });
+
+    return (
+      <div {...rest} className={cx([blockClass, className])} ref={tagSetRef}>
+        <div
+          className={cx([
+            `${blockClass}__space`,
+            `${blockClass}__space--align-${align}`,
+          ])}>
+          <div
+            className={`${blockClass}__tag-container ${blockClass}__tag-container--hidden`}
+            aria-hidden={true}
+            ref={sizingContainerRef}>
+            {hiddenSizingTags}
           </div>
 
-          {displayCount < allTags.length ? (
-            <TagSetModal
-              allTags={allTags}
-              open={showAllModalOpen}
-              title={allTagsModalTile}
-              onClose={handleModalClose}
-              searchLabel={allTagsModalSearchLabel}
-              searchPlaceholder={allTagsModalSearchPlaceholderText}
-            />
-          ) : null}
+          <div className={`${blockClass}__tag-container`} ref={displayedArea}>
+            {displayedTags}
+          </div>
         </div>
-      </ReactResizeDetector>
+
+        {tags && displayCount < tags.length ? (
+          <TagSetModal
+            allTags={tags}
+            open={showAllModalOpen}
+            title={allTagsModalTitle}
+            onClose={handleModalClose}
+            searchLabel={allTagsModalSearchLabel}
+            searchPlaceholder={allTagsModalSearchPlaceholderText}
+          />
+        ) : null}
+      </div>
     );
   }
 );
@@ -226,18 +233,38 @@ export let TagSet = React.forwardRef(
 // Return a placeholder if not released and not enabled by feature flag
 TagSet = pkg.checkComponentEnabled(TagSet, componentName);
 
-const TagType = PropTypes.shape({ type: PropTypes.oneOf([Tag]) });
-
 /**
  * The strings shown in the showAllModal are only shown if we have more than allTagsModalSearchLThreshold
  * @returns null if no problems
  */
-const string_required_if_more_than_10_tags = isRequiredIf(
+export const string_required_if_more_than_10_tags = isRequiredIf(
   PropTypes.string,
-  ({ children }) => children && children.length > allTagsModalSearchThreshold
+  ({ tags }) => tags && tags.length > allTagsModalSearchThreshold
 );
 
+// copied from carbon-components-react/src/components/Tag/Tag.js for DocGen
+const TYPES = {
+  red: 'Red',
+  magenta: 'Magenta',
+  purple: 'Purple',
+  blue: 'Blue',
+  cyan: 'Cyan',
+  teal: 'Teal',
+  green: 'Green',
+  gray: 'Gray',
+  'cool-gray': 'Cool-Gray',
+  'warm-gray': 'Warm-Gray',
+  'high-contrast': 'High-Contrast',
+};
+const tagTypes = Object.keys(TYPES);
+
+TagSet.types = tagTypes;
+
 TagSet.propTypes = {
+  /**
+   * align the Tags displayed by the TagSet. Default start.
+   */
+  align: PropTypes.oneOf(['start', 'center', 'end']),
   /**
    * label text for the show all search. **Note: Required if more than 10 tags**
    */
@@ -249,11 +276,7 @@ TagSet.propTypes = {
   /**
    * title for the show all modal. **Note: Required if more than 10 tags**
    */
-  allTagsModalTile: string_required_if_more_than_10_tags,
-  /**
-   * children of the tag set (these are expected to be tags)
-   */
-  children: PropTypes.arrayOf(TagType),
+  allTagsModalTitle: string_required_if_more_than_10_tags,
   /**
    * className
    */
@@ -263,7 +286,7 @@ TagSet.propTypes = {
    */
   maxVisible: PropTypes.number,
   /**
-   * overflowAlign from the standard tooltip
+   * overflowAlign from the standard tooltip. Default center.
    */
   overflowAlign: PropTypes.oneOf(['start', 'center', 'end']),
   /**
@@ -275,18 +298,33 @@ TagSet.propTypes = {
    */
   overflowDirection: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
   /**
-   * align tags to right of available space
-   */
-  rightAlign: PropTypes.bool,
-  /**
    * label for the overflow show all tags link.
    *
    * **Note:** Required if more than 10 tags
    */
   showAllTagsLabel: string_required_if_more_than_10_tags,
+  /**
+   * The tags to be shown in the TagSet. Each tag is specified as an object
+   * with properties: **label**\* (required) to supply the tag content, and
+   * other properties will be passed to the Carbon Tag component, such as
+   * **type**, **disabled**, **ref**, **className** , and any other Tag props.
+   * NOTE: **filter** is not supported. Any other fields in the object will be passed through to the HTML element
+   * as HTML attributes.
+   *
+   * See https://react.carbondesignsystem.com/?path=/docs/components-tag--default
+   */
+  tags: PropTypes.arrayOf(
+    PropTypes.shape({
+      ...prepareProps(Tag.propTypes, 'filter'),
+      label: PropTypes.string.isRequired,
+      // we duplicate this prop to improve the DocGen
+      type: PropTypes.oneOf(tagTypes),
+    })
+  ),
 };
 
 TagSet.defaultProps = {
+  align: 'start',
   overflowAlign: 'center',
   overflowDirection: 'bottom',
 };

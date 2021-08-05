@@ -18,14 +18,22 @@
   $block-class: #{$pkg-prefix}--create-full-page;
 
   .#{$block-class} .bx--grid {
-    padding-right: $spacing-08;
-    padding-left: $spacing-08;
+    padding-top: $spacing-05;
     margin-right: 0;
     margin-left: 0;
   }
 
+  .#{$block-class} .#{$block-class}__step--hidden-step,
   .#{$block-class} .#{$block-class}__step--hidden-section {
     display: none;
+  }
+
+  .#{$block-class} .#{$block-class}__step--visible-section {
+    display: block;
+  }
+
+  .#{$block-class} .#{$block-class}__step--visible-step {
+    opacity: 1;
   }
 
   .#{$block-class} .bx--modal-close {
@@ -38,6 +46,12 @@
     flex-grow: 1;
     padding: 0;
     margin: 0;
+  }
+
+  .#{$block-class} .#{$block-class}__left-nav {
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    overflow-y: auto;
   }
 
   .#{$block-class} .#{$block-class}__body {
@@ -56,7 +70,7 @@
   .#{$block-class} .#{$block-class}__content {
     overflow: auto;
     flex-grow: 1;
-    padding-top: $spacing-06;
+    overflow-x: hidden;
   }
 
   .#{$block-class} .#{$block-class}__step {
@@ -64,9 +78,14 @@
     max-width: 50%;
   }
 
-  .#{$block-class} .#{$block-class}__step-text-content,
-  .#{$block-class} .#{$block-class}__section-text-content {
-    margin-bottom: $spacing-06;
+  .#{$block-class} .bx--side-nav--ux {
+    top: 0;
+    height: min-content;
+    padding-top: 0;
+    border-right: 1px solid var(--cds-ui-03, #e0e0e0);
+    background-color: transparent;
+    grid-row: 1;
+    overflow-x: auto;
   }
 
   .#{$block-class} .#{$block-class}__section-divider {
@@ -74,9 +93,13 @@
     display: block;
     width: calc(100vw - 16rem);
     height: 1px;
-    margin: $spacing-05 calc(-1 * #{$spacing-08}) $spacing-08
+    margin: $spacing-07 calc(-1 * #{$spacing-08}) $spacing-07
       calc(-1 * #{$spacing-08});
     background-color: $ui-03;
+  }
+
+  .#{$block-class}__step-title {
+    margin-bottom: $spacing-05;
   }
 
   .#{$block-class} .#{$block-class}__step-title,
@@ -86,43 +109,23 @@
     margin-bottom: $spacing-05;
   }
 
-  .#{$block-class} .#{$block-class}__step-subtitle,
-  .#{$block-class} .#{$block-class}__section-subtitle {
-    @include carbon--type-style('productive-heading-01');
-
-    margin-bottom: $spacing-03;
-  }
-
-  .#{$block-class} .#{$block-class}__step-description,
-  .#{$block-class} .#{$block-class}__section-description {
-    @include carbon--type-style('body-long-01');
-
-    color: $text-02;
-  }
-
-  .#{$block-class} .#{$block-class}__step-form > *,
-  .#{$block-class} .#{$block-class}__section-form > * {
-    margin-bottom: $spacing-06;
-  }
-
   .#{$block-class} .#{$block-class}__influencer {
-    display: flex;
-    width: 16rem;
-    min-width: 16rem;
-    height: 100%;
-    flex-direction: column;
-    padding: $spacing-06 $spacing-07;
+    display: grid;
+    flex: 0 0 257px;
     border-right: 1px solid $ui-03;
     background-color: $ui-01;
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr auto;
   }
 
   .#{$block-class} .#{$block-class}__progress-indicator {
-    min-height: calc(100% - #{$spacing-10});
+    padding: $spacing-06;
   }
 
   .#{$block-class} .#{$block-class}__influencer-toggle {
-    flex: 1;
-    justify-content: flex-end;
+    padding: $spacing-06;
+    grid-column: 1 / -1;
+    grid-row: -1 / -1;
   }
 
   .#{$block-class} .#{$block-class}__buttons {

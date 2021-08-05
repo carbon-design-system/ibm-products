@@ -15,24 +15,49 @@
 
 @include exports($name: toolbar) {
   $block-class: #{$pkg-prefix}--toolbar;
+
   $border: carbon--rem(
       $px: 1px,
     )
     solid $ui-03;
 
+  $dimensions: carbon--rem(
+    $px: 40px,
+  );
+
   .#{$block-class} {
     display: flex;
-    min-height: carbon--rem($px: 40px);
-    border-bottom: $border;
+    min-width: $dimensions;
+    min-height: $dimensions;
     background-color: $ui-02;
+  }
+
+  .#{$block-class}--horizontal {
+    border-bottom: $border;
+  }
+
+  .#{$block-class}--vertical,
+  .#{$block-class}--vertical > .#{$block-class}__group {
+    flex-wrap: wrap;
+  }
+
+  .#{$block-class}--vertical {
+    max-width: $dimensions;
   }
 
   .#{$block-class}__group {
     display: flex;
+  }
+
+  .#{$block-class}--horizontal > .#{$block-class}__group {
     border-right: $border;
   }
 
+  .#{$block-class}--vertical > .#{$block-class}__group {
+    border-bottom: $border;
+  }
+
   .#{$block-class}__group:last-of-type {
-    border-right-width: 0;
+    border-width: 0;
   }
 }

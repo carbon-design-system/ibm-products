@@ -13,16 +13,6 @@ import React, {
   useRef,
 } from 'react';
 import PropTypes from 'prop-types';
-import {
-  ProgressIndicator,
-  ProgressStep,
-  Toggle,
-} from 'carbon-components-react';
-import {
-  SideNav,
-  SideNavItems,
-  SideNavLink,
-} from 'carbon-components-react/lib/components/UIShell';
 import cx from 'classnames';
 import { useResizeDetector } from 'react-resize-detector';
 import { extractShapesArray } from '../../global/js/utils/props-helper';
@@ -325,8 +315,7 @@ export let CreateTearsheet = forwardRef(
       return false;
     };
 
-    // renders the step progression components in the left influencer area
-    const renderProgressSteps = (childrenElements) => {
+    const getTearsheetComponents = (childrenElements) => {
       let childrenArray = Array.isArray(childrenElements)
         ? childrenElements
         : [childrenElements];
@@ -363,64 +352,10 @@ export let CreateTearsheet = forwardRef(
           }
         }
       });
-      if (shouldViewAll) {
-        return (
-          <div className={`${blockClass}__left-nav`}>
-            <SideNav expanded isFixedNav aria-label={sideNavAriaLabel}>
-              <SideNavItems>
-                {tearsheetSectionComponents?.length &&
-                  tearsheetSectionComponents.map(
-                    (tearsheetSection, sectionIndex) => (
-                      <SideNavLink
-                        href={`#${tearsheetSection?.props?.id}`}
-                        key={sectionIndex}
-                        isActive={activeSectionIndex === sectionIndex}
-                        onClick={(event) => {
-                          event.preventDefault();
-                          setActiveSectionIndex(sectionIndex);
-                          if (tearsheetSection.props.id) {
-                            const scrollTarget = document.querySelector(
-                              `#${tearsheetSection.props.id}`
-                            );
-                            const scrollContainer = document.querySelector(
-                              `.${blockClass}__multi-step-panel-content`
-                            );
-                            scrollContainer.scrollTo({
-                              top: scrollTarget.offsetTop,
-                              behavior: 'smooth',
-                            });
-                          } else {
-                            console.warn(
-                              `${componentName}: CreateTearsheetSection is missing a required prop of 'id'`
-                            );
-                          }
-                        }}>
-                        {tearsheetSection.props.title}
-                      </SideNavLink>
-                    )
-                  )}
-              </SideNavItems>
-            </SideNav>
-          </div>
-        );
-      }
-      return (
-        <div className={`${blockClass}__left-nav`}>
-          <ProgressIndicator
-            currentIndex={currentStep - 1}
-            spaceEqually
-            vertical
-            className={`${blockClass}__progress-indicator`}>
-            {tearsheetStepComponents.map((child, stepIndex) => (
-              <ProgressStep
-                label={child.props.title}
-                key={stepIndex}
-                secondaryLabel={child.props.secondaryLabel}
-              />
-            ))}
-          </ProgressIndicator>
-        </div>
-      );
+      return {
+        sections: tearsheetSectionComponents,
+        steps: tearsheetStepComponents,
+      };
     };
 
     // renders all children (CreateTearsheetSteps and regular child elements)
@@ -598,27 +533,6 @@ export let CreateTearsheet = forwardRef(
       }
     };
 
-    const handleViewAllToggle = (toggleState) => {
-      setShouldViewAll(toggleState);
-      setActiveSectionIndex(0);
-      const createTearsheetContainer = document.querySelector(`.${blockClass}`);
-      createTearsheetContainer.scrollTop = 0;
-    };
-
-    const renderViewAllToggle = () => {
-      return (
-        <Toggle
-          id={`${blockClass}__view-all-toggle`}
-          toggled={shouldViewAll}
-          labelText={viewAllToggleLabelText}
-          labelA={viewAllToggleOffLabelText}
-          labelB={viewAllToggleOnLabelText}
-          onToggle={(value) => handleViewAllToggle(value)}
-          className={`${blockClass}__view-all-toggle`}
-        />
-      );
-    };
-
     /* istanbul ignore next */
     const handleResize = () => {
       const createTearsheetOuterElement = document.querySelector(
@@ -688,11 +602,21 @@ export let CreateTearsheet = forwardRef(
         description={description}
         hasCloseIcon={false}
         influencer={
-          <>
-            <CreateInfluencer />
-            {renderProgressSteps(children)}
-            {includeViewAllToggle && renderViewAllToggle()}
-          </>
+          <CreateInfluencer
+            activeSectionIndex={activeSectionIndex}
+            componentBlockClass={blockClass}
+            componentName={componentName}
+            currentStep={currentStep}
+            createComponents={getTearsheetComponents(children)}
+            includeViewAllToggle
+            handleToggleState={(toggleState) => setShouldViewAll(toggleState)}
+            handleActiveSectionIndex={(index) => setActiveSectionIndex(index)}
+            sideNavAriaLabel={sideNavAriaLabel}
+            toggleState={shouldViewAll}
+            viewAllToggleLabelText={viewAllToggleLabelText}
+            viewAllToggleOffLabelText={viewAllToggleOffLabelText}
+            viewAllToggleOnLabelText={viewAllToggleOnLabelText}
+          />
         }
         influencerPosition="left"
         influencerWidth="narrow"

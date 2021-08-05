@@ -9,6 +9,7 @@
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 @import 'carbon-components/scss/components/progress-indicator/progress-indicator';
+@import '../CreateInfluencer/index';
 
 @mixin create-tearsheet {
   @keyframes stepContentEntrance {
@@ -59,22 +60,6 @@
     overflow-x: hidden;
   }
 
-  .#{$block-class} .#{$pkg-prefix}--tearsheet__influencer {
-    display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: 1fr auto;
-  }
-
-  .#{$block-class} .#{$block-class}__left-nav {
-    grid-column: 1 / -1;
-    grid-row: 1 / -1;
-    overflow-y: auto;
-  }
-
-  .#{$block-class} .#{$block-class}__progress-indicator {
-    padding: $spacing-06;
-  }
-
   .#{$block-class} .#{$block-class}__step--heading {
     padding-bottom: $spacing-06;
   }
@@ -87,12 +72,6 @@
     .#{$carbon-prefix}--btn-set
     .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--disabled {
     box-shadow: -0.0625rem 0 0 0 $button-separator;
-  }
-
-  .#{$block-class} .#{$block-class}__view-all-toggle {
-    padding: $spacing-06;
-    grid-column: 1 / -1;
-    grid-row: -1 / -1;
   }
 
   .#{$block-class} .#{$carbon-prefix}--side-nav--ux {

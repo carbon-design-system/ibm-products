@@ -38,7 +38,7 @@ export default {
   },
 };
 
-function Template(args) {
+export function _Toolbar(args) {
   return (
     <Toolbar {...args}>
       <ToolbarGroup>
@@ -72,5 +72,3 @@ function Template(args) {
     </Toolbar>
   );
 }
-
-export const _Toolbar = Template.bind({});

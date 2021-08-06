@@ -6,6 +6,7 @@
 //
 
 @import '@carbon/import-once/scss/import-once';
+@import '@carbon/layout/scss/breakpoint';
 @import '@carbon/layout/scss/convert';
 @import '@carbon/themes/scss/tokens';
 
@@ -21,10 +22,14 @@
     solid $ui-03;
 
   .#{$block-class} {
+    @include carbon--breakpoint($name: lg) {
+      justify-content: flex-end;
+    }
+
     display: flex;
     min-height: carbon--rem($px: 40px);
     border-bottom: $border;
-    background-color: $ui-02;
+    background-color: $ui-01;
   }
 
   .#{$block-class}__group {

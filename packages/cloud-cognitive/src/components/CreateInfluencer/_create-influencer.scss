@@ -36,24 +36,24 @@
       transform: translateX($influencerAnimationStart);
     }
   }
-  .#{$create-tearsheet-block-class} .#{$block-class} {
+  .#{$block-class} {
     display: grid;
     height: 100%;
     grid-template-columns: 100%;
     grid-template-rows: 1fr auto;
   }
 
-  .#{$create-tearsheet-block-class} .#{$block-class}__left-nav {
+  .#{$block-class}__left-nav {
     grid-column: 1 / -1;
     grid-row: 1 / -1;
     overflow-y: auto;
   }
 
-  .#{$create-tearsheet-block-class} .#{$block-class}__progress-indicator {
+  .#{$block-class}__progress-indicator {
     padding: $spacing-06;
   }
 
-  .#{$create-tearsheet-block-class} .#{$block-class}__view-all-toggle {
+  .#{$block-class}__view-all-toggle {
     padding: $spacing-06;
     grid-column: 1 / -1;
     grid-row: -1 / -1;

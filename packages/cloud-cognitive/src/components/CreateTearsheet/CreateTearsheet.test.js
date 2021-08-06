@@ -153,7 +153,7 @@ describe(CreateTearsheet.displayName, () => {
     const cancelButtonElement = screen.getByText(cancelButtonText);
     click(nextButtonElement);
     const createTearsheetSteps = container.querySelector(
-      `.${tearsheetBlockClass}__multi-step-panel-content`
+      `.${tearsheetBlockClass}__content`
     ).children;
     expect(
       createTearsheetSteps[1].classList.contains(
@@ -195,7 +195,7 @@ describe(CreateTearsheet.displayName, () => {
     });
     click(nextButtonElement);
     const tearsheetChildren = container.querySelector(
-      `.${tearsheetBlockClass}__multi-step-panel-content`
+      `.${tearsheetBlockClass}__content`
     ).children;
     expect(
       tearsheetChildren[2].classList.contains(
@@ -346,7 +346,7 @@ describe(CreateTearsheet.displayName, () => {
     const backButtonElement = screen.getByText(backButtonText);
     click(backButtonElement);
     const tearsheetChildren = container.querySelector(
-      `.${tearsheetBlockClass}__multi-step-panel-content`
+      `.${tearsheetBlockClass}__content`
     ).children;
     expect(
       tearsheetChildren[0].classList.contains(

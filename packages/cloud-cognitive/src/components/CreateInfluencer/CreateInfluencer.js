@@ -113,10 +113,15 @@ export let CreateInfluencer = ({
                             `#${sectionComponent.props.id}`
                           );
                           const scrollContainer = document.querySelector(
-                            `.${componentBlockClass}__multi-step-panel-content`
+                            `.${componentBlockClass}__content`
                           );
+                          const scrollTopValue =
+                            createComponentName === 'CreateFullPage'
+                              ? scrollTarget?.getBoundingClientRect()?.y +
+                                scrollContainer?.scrollTop
+                              : scrollTarget?.offsetTop;
                           scrollContainer?.scrollTo({
-                            top: scrollTarget.offsetTop,
+                            top: scrollTopValue,
                             behavior: 'smooth',
                           });
                         } else {

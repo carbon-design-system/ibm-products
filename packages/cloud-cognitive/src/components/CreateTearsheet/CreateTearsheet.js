@@ -628,7 +628,7 @@ export let CreateTearsheet = forwardRef(
         verticalPosition={verticalPosition}
         ref={ref}>
         <div
-          className={`${blockClass}__multi-step-panel-content`}
+          className={`${blockClass}__content`}
           onBlur={handleBlur}
           ref={contentRef}>
           {open ? renderChildren(children) : null}

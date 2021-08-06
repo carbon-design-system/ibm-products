@@ -10,6 +10,7 @@
 @import '../../global/styles/project-settings';
 
 @import 'carbon-components/scss/components/button/button';
+@import '../CreateInfluencer/index';
 
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.

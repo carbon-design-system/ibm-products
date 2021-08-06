@@ -9,6 +9,7 @@ import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { moderate02 } from '@carbon/motion';
 import { CreateInfluencer } from '.';
+import { CreateFullPage } from '../CreateFullPage';
 import {
   CreateTearsheet,
   CreateTearsheetSection,
@@ -141,7 +142,33 @@ describe(CreateInfluencer.displayName, () => {
     click(viewAllToggleElement);
     act(() => jest.advanceTimersByTime(timerValue));
   });
-  it('renders the CreateInfluencer with toggle on', () => {
+  it('renders the CreateInfluencer from CreateFullPage with toggle on and clicks a side nav item', () => {
+    const { click } = userEvent;
+    const viewAllToggleLabelText = 'Show all available options';
+    const sideNavAriaLabel = 'Side nav aria label';
+    const activeSectionIndexFn = jest.fn();
+    renderComponent({
+      createComponents: defaultProps.createComponents,
+      activeSectionIndex: 0,
+      componentBlockClass: 'some-test-class-name',
+      createComponentName: CreateFullPage.displayName,
+      componentName: 'TestComponent',
+      currentStep: 1,
+      includeViewAllToggle: true,
+      sideNavAriaLabel,
+      toggleState: true,
+      viewAllToggleLabelText,
+      viewAllToggleOffLabelText: 'Off',
+      viewAllToggleOnLabelText: 'On',
+      handleToggleState: jest.fn(),
+      handleActiveSectionIndex: activeSectionIndexFn,
+    });
+    expect(screen.getByLabelText(sideNavAriaLabel));
+    click(screen.getByText(section1Title));
+    expect(activeSectionIndexFn).toHaveBeenCalledTimes(1);
+  });
+
+  it('renders the CreateInfluencer from CreateTearsheet with toggle on and clicks a side nav item', () => {
     const { click } = userEvent;
     const viewAllToggleLabelText = 'Show all available options';
     const sideNavAriaLabel = 'Side nav aria label';
@@ -166,6 +193,7 @@ describe(CreateInfluencer.displayName, () => {
     click(screen.getByText(section1Title));
     expect(activeSectionIndexFn).toHaveBeenCalledTimes(1);
   });
+
   it('renders the CreateInfluencer with a missing id on the section component', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
     const viewAllToggleLabelText = 'Show all available options';

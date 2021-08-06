@@ -27,7 +27,9 @@ import {
   Dropdown,
   RadioButton,
   RadioButtonGroup,
+  TooltipIcon,
 } from 'carbon-components-react';
+import { Information16 } from '@carbon/icons-react';
 import cx from 'classnames';
 
 export default {
@@ -118,12 +120,19 @@ const Template = ({ ...args }) => {
         />
         {hasSubmitError && (
           <InlineNotification
+            lowContrast
             kind="error"
             title="Error"
             subtitle="Resolve errors to continue"
             onClose={() => setHasSubmitError(false)}
           />
         )}
+        <TooltipIcon
+          className={`${storyClass}__tooltip`}
+          direction="top"
+          tooltipText="Once toggled on, an inline error notification will appear upon clicking 'next'. This is merely a simulation of how this could appear in your own step component.">
+          <Information16 />
+        </TooltipIcon>
         <Toggle
           className={`${storyClass}__error--toggle`}
           id="simulated-error-toggle"
@@ -300,12 +309,19 @@ const TemplateWithToggle = ({ ...args }) => {
           />
           {hasSubmitError && (
             <InlineNotification
+              lowContrast
               kind="error"
               title="Error"
               subtitle="Resolve errors to continue"
               onClose={() => setHasSubmitError(false)}
             />
           )}
+          <TooltipIcon
+            className={`${storyClass}__tooltip`}
+            direction="top"
+            tooltipText="Once toggled on, an inline error notification will appear upon clicking 'next'. This is merely a simulation of how this could appear in your own step component.">
+            <Information16 />
+          </TooltipIcon>
           <Toggle
             className={`${storyClass}__error--toggle`}
             id="simulated-error-toggle"
@@ -399,7 +415,6 @@ const TemplateWithToggle = ({ ...args }) => {
             <RadioButton labelText="A day" value="one-day" id="one-day" />
             <RadioButton labelText="A week" value="one-week" id="one-week" />
             <RadioButton labelText="A month" value="one-month" id="one-month" />
-            <RadioButton labelText="Custom" value="custom" id="custom" />
           </RadioButtonGroup>
         </CreateFullPageSection>
       </CreateFullPageStep>

@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import {
@@ -19,6 +19,7 @@ import {
   SideNavItems,
   SideNavLink,
 } from 'carbon-components-react/lib/components/UIShell';
+import { moderate02 } from '@carbon/motion';
 import '../../global/js/utils/props-helper';
 
 import { pkg } from '../../settings';
@@ -31,6 +32,7 @@ export let CreateInfluencer = ({
   activeSectionIndex,
   className,
   componentBlockClass,
+  createComponentName,
   createComponents,
   currentStep,
   handleToggleState,
@@ -42,8 +44,23 @@ export let CreateInfluencer = ({
   viewAllToggleOffLabelText,
   viewAllToggleOnLabelText,
 }) => {
+  const [progressIndicatorState, setProgressIndicatorState] = useState('');
+  const [sideNavState, setSideNavState] = useState('');
+
   const handleViewAllToggle = (newToggleValue) => {
-    handleToggleState(newToggleValue);
+    if (newToggleValue) {
+      setProgressIndicatorState('closing');
+      setTimeout(() => {
+        handleToggleState(newToggleValue);
+        setSideNavState('opening');
+      }, moderate02);
+    } else {
+      setSideNavState('closing');
+      setTimeout(() => {
+        handleToggleState(newToggleValue);
+        setProgressIndicatorState('opening');
+      }, moderate02);
+    }
     handleActiveSectionIndex(0);
     const createComponentContainer = document.querySelector(
       `.${componentBlockClass}`
@@ -72,7 +89,14 @@ export let CreateInfluencer = ({
     if (toggleState) {
       return (
         <div className={`${blockClass}__left-nav`}>
-          <SideNav expanded isFixedNav aria-label={sideNavAriaLabel}>
+          <SideNav
+            expanded
+            isFixedNav
+            aria-label={sideNavAriaLabel}
+            className={cx({
+              [`${blockClass}__side-nav-opening`]: sideNavState === 'opening',
+              [`${blockClass}__side-nav-closing`]: sideNavState === 'closing',
+            })}>
             <SideNavItems>
               {createComponents.sections?.length &&
                 createComponents.sections.map(
@@ -89,7 +113,7 @@ export let CreateInfluencer = ({
                             `#${sectionComponent.props.id}`
                           );
                           const scrollContainer = document.querySelector(
-                            `.${blockClass}__multi-step-panel-content`
+                            `.${componentBlockClass}__multi-step-panel-content`
                           );
                           scrollContainer?.scrollTo({
                             top: scrollTarget.offsetTop,
@@ -97,7 +121,7 @@ export let CreateInfluencer = ({
                           });
                         } else {
                           console.warn(
-                            `${componentName}: ${componentName}Section component is missing a required prop of 'id'`
+                            `${createComponentName}: ${createComponentName}Section component is missing a required prop of 'id'`
                           );
                         }
                       }}>
@@ -116,7 +140,12 @@ export let CreateInfluencer = ({
           currentIndex={currentStep - 1}
           spaceEqually
           vertical
-          className={`${blockClass}__progress-indicator`}>
+          className={cx(`${blockClass}__progress-indicator`, {
+            [`${blockClass}__progress-indicator-opening`]:
+              progressIndicatorState === 'opening',
+            [`${blockClass}__progress-indicator-closing`]:
+              progressIndicatorState === 'closing',
+          })}>
           {createComponents.steps.map((child, stepIndex) => (
             <ProgressStep
               label={child.props.title}
@@ -154,6 +183,10 @@ CreateInfluencer.propTypes = {
    * The blockClass for the create component (Tearsheet or FullPage)
    */
   componentBlockClass: PropTypes.string.isRequired,
+  /**
+   * Used to mark the current step on the ProgressIndicator component
+   */
+  createComponentName: PropTypes.string.isRequired,
   /**
    * An object with section and step components, needed to render the progress steps. This is where the titles are retrieved from.
    */

@@ -605,10 +605,10 @@ export let CreateTearsheet = forwardRef(
           <CreateInfluencer
             activeSectionIndex={activeSectionIndex}
             componentBlockClass={blockClass}
-            componentName={componentName}
+            createComponentName={componentName}
             currentStep={currentStep}
             createComponents={getTearsheetComponents(children)}
-            includeViewAllToggle
+            includeViewAllToggle={includeViewAllToggle}
             handleToggleState={(toggleState) => setShouldViewAll(toggleState)}
             handleActiveSectionIndex={(index) => setActiveSectionIndex(index)}
             sideNavAriaLabel={sideNavAriaLabel}

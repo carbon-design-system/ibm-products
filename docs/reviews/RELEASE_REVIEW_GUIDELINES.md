@@ -1,32 +1,4 @@
-# Review Checklists
-
-## PR reviews
-
-When reviewing a PR, check that our
-[code guidelines](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CONTRIBUTING.md)
-are followed, and keep an eye on the component review checklist below.
-
-Each PR should be reviewed based on these criteria where applicable.
-
-### New production dependencies
-
-If a PR introduces new dependencies in `package.json`, paste the following
-checklist into the PR as a comment and check the items off before approving.
-
-**Tip** You should be able to copy and paste the section below directly into a
-GitHub comment, then check where criteria passed, strike out where not
-applicable.
-
-`## Review of dependencies`
-
-`- [ ]` Verify the dependency has previously been
-[pedigree reviewed](https://pedigree-service.wdc1a.cirrus.ibm.com)\
-`- [ ]` Verify the dependency [doesn't contain any vulnerabilities](https://snyk.io/vuln)\
-`- [ ]` Verify the dependency [bundle size](https://bundlephobia.com) is
-acceptable\
-`- [ ]` Verify the dependency is [actively maintained](https://www.npmtrends.com)\
-`- [ ]` Verify license conditions are met e.g. forwarding of copyright if
-necessary.
+# Release review checklists
 
 ## Component reviews for readiness
 
@@ -87,20 +59,24 @@ HTML attributes.\
 `- [ ]` No warnings, errors or log messages in the console.\
 `- [ ]` Each public component JS is exported in /src/components/index.js, each
 public component SCSS is included in /src/components/\_index.scss, and each
-public component has a flag in package-settings.js.
+public component has a flag in package-settings.js.\
+ `- [ ]` Each public component SCSS lists all of the Carbon and C&CS components
+imported and used by the JavaScript code and explicitly imports the SCSS for
+each of these components.
 
 `###` Standards
 
 `- [ ]` No linter warnings or errors are produced.\
 `- [ ]` Carbon tokens (theme, layout, motion) are used unless the design specifies
 otherwise.\
-`- [ ]` All components utilizing motion must include reduced-motion queries for accessibility purposes - [read more here](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion).\
-`- [ ]` Code is formatted according to prettier rules (no use of
-//prettier-ignore).\
+`- [ ]` All components utilizing motion must include reduced-motion queries for
+accessibility purposes -
+[read more here](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion).\
+`- [ ]` Code is formatted according to prettier rules (no use of //prettier-ignore).\
 `- [ ]` Code is clear, maintainable and follows standard React practices and the
-[code guidelines](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CONTRIBUTING.md).\
-`- [ ]` Copyright header in every source file (js, css, scss etc.) with the
-appropriate years.
+[code guidelines](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/docs/CODE_GUIDELINES.md).\
+`- [ ]` Copyright header in every source file (js, css, scss etc.) with the appropriate
+years.
 
 `###` Testing
 

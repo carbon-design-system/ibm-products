@@ -13,22 +13,12 @@ import React, {
   useRef,
 } from 'react';
 import PropTypes from 'prop-types';
-import {
-  ProgressIndicator,
-  ProgressStep,
-  Toggle,
-} from 'carbon-components-react';
-import { moderate02 } from '@carbon/motion';
-import {
-  SideNav,
-  SideNavItems,
-  SideNavLink,
-} from 'carbon-components-react/lib/components/UIShell';
 import cx from 'classnames';
 import { useResizeDetector } from 'react-resize-detector';
 import { extractShapesArray } from '../../global/js/utils/props-helper';
 import wrapFocus from '../../global/js/utils/wrapFocus';
 import { TearsheetShell } from '../Tearsheet/TearsheetShell';
+import { CreateInfluencer } from '../CreateInfluencer';
 import { carbon, pkg } from '../../settings';
 import { CREATE_TEARSHEET_SECTION, CREATE_TEARSHEET_STEP } from './constants';
 import { usePreviousValue } from '../../global/js/use/usePreviousValue';
@@ -68,8 +58,6 @@ export let CreateTearsheet = forwardRef(
     const [shouldViewAll, setShouldViewAll] = useState(false);
     const [currentStep, setCurrentStep] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [progressIndicatorState, setProgressIndicatorState] = useState('');
-    const [sideNavState, setSideNavState] = useState('');
     const [activeSectionIndex, setActiveSectionIndex] = useState(0);
     const previousState = usePreviousValue({ currentStep, open });
     const contentRef = useRef();
@@ -313,8 +301,7 @@ export let CreateTearsheet = forwardRef(
       return false;
     };
 
-    // renders the step progression components in the left influencer area
-    const renderProgressSteps = (childrenElements) => {
+    const getTearsheetComponents = (childrenElements) => {
       let childrenArray = Array.isArray(childrenElements)
         ? childrenElements
         : [childrenElements];
@@ -351,73 +338,10 @@ export let CreateTearsheet = forwardRef(
           }
         }
       });
-      return (
-        <div className={`${blockClass}__left-nav`}>
-          {!shouldViewAll ? (
-            <ProgressIndicator
-              currentIndex={currentStep - 1}
-              spaceEqually
-              vertical
-              className={cx(`${blockClass}__progress-indicator`, {
-                [`${blockClass}__progress-indicator-opening`]:
-                  progressIndicatorState === 'opening',
-                [`${blockClass}__progress-indicator-closing`]:
-                  progressIndicatorState === 'closing',
-              })}>
-              {tearsheetStepComponents.map((child, stepIndex) => (
-                <ProgressStep
-                  label={child.props.title}
-                  key={stepIndex}
-                  secondaryLabel={child.props.secondaryLabel}
-                />
-              ))}
-            </ProgressIndicator>
-          ) : (
-            <SideNav
-              expanded
-              isFixedNav
-              aria-label={sideNavAriaLabel}
-              className={cx({
-                [`${blockClass}__side-nav-opening`]: sideNavState === 'opening',
-                [`${blockClass}__side-nav-closing`]: sideNavState === 'closing',
-              })}>
-              <SideNavItems>
-                {tearsheetSectionComponents?.length &&
-                  tearsheetSectionComponents.map(
-                    (tearsheetSection, sectionIndex) => (
-                      <SideNavLink
-                        href={`#${tearsheetSection?.props?.id}`}
-                        key={sectionIndex}
-                        isActive={activeSectionIndex === sectionIndex}
-                        onClick={(event) => {
-                          event.preventDefault();
-                          setActiveSectionIndex(sectionIndex);
-                          if (tearsheetSection.props.id) {
-                            const scrollTarget = document.querySelector(
-                              `#${tearsheetSection.props.id}`
-                            );
-                            const scrollContainer = document.querySelector(
-                              `.${blockClass}__multi-step-panel-content`
-                            );
-                            scrollContainer.scrollTo({
-                              top: scrollTarget.offsetTop,
-                              behavior: 'smooth',
-                            });
-                          } else {
-                            console.warn(
-                              `${componentName}: CreateTearsheetSection is missing a required prop of 'id'`
-                            );
-                          }
-                        }}>
-                        {tearsheetSection.props.title}
-                      </SideNavLink>
-                    )
-                  )}
-              </SideNavItems>
-            </SideNav>
-          )}
-        </div>
-      );
+      return {
+        sections: tearsheetSectionComponents,
+        steps: tearsheetStepComponents,
+      };
     };
 
     // renders all children (CreateTearsheetSteps and regular child elements)
@@ -552,39 +476,6 @@ export let CreateTearsheet = forwardRef(
       }
     };
 
-    const handleViewAllToggle = (toggleState) => {
-      if (toggleState) {
-        setProgressIndicatorState('closing');
-        setTimeout(() => {
-          setShouldViewAll(toggleState);
-          setSideNavState('opening');
-        }, moderate02);
-      } else {
-        setSideNavState('closing');
-        setTimeout(() => {
-          setShouldViewAll(toggleState);
-          setProgressIndicatorState('opening');
-        }, moderate02);
-      }
-      setActiveSectionIndex(0);
-      const createTearsheetContainer = document.querySelector(`.${blockClass}`);
-      createTearsheetContainer.scrollTop = 0;
-    };
-
-    const renderViewAllToggle = () => {
-      return (
-        <Toggle
-          id={`${blockClass}__view-all-toggle`}
-          toggled={shouldViewAll}
-          labelText={viewAllToggleLabelText}
-          labelA={viewAllToggleOffLabelText}
-          labelB={viewAllToggleOnLabelText}
-          onToggle={(value) => handleViewAllToggle(value)}
-          className={`${blockClass}__view-all-toggle`}
-        />
-      );
-    };
-
     /* istanbul ignore next */
     const handleResize = () => {
       const createTearsheetOuterElement = document.querySelector(
@@ -654,10 +545,21 @@ export let CreateTearsheet = forwardRef(
         description={description}
         hasCloseIcon={false}
         influencer={
-          <>
-            {renderProgressSteps(children)}
-            {includeViewAllToggle && renderViewAllToggle()}
-          </>
+          <CreateInfluencer
+            activeSectionIndex={activeSectionIndex}
+            componentBlockClass={blockClass}
+            createComponentName={componentName}
+            currentStep={currentStep}
+            createComponents={getTearsheetComponents(children)}
+            includeViewAllToggle={includeViewAllToggle}
+            handleToggleState={(toggleState) => setShouldViewAll(toggleState)}
+            handleActiveSectionIndex={(index) => setActiveSectionIndex(index)}
+            sideNavAriaLabel={sideNavAriaLabel}
+            toggleState={shouldViewAll}
+            viewAllToggleLabelText={viewAllToggleLabelText}
+            viewAllToggleOffLabelText={viewAllToggleOffLabelText}
+            viewAllToggleOnLabelText={viewAllToggleOnLabelText}
+          />
         }
         influencerPosition="left"
         influencerWidth="narrow"
@@ -669,7 +571,7 @@ export let CreateTearsheet = forwardRef(
         verticalPosition={verticalPosition}
         ref={ref}>
         <div
-          className={`${blockClass}__multi-step-panel-content`}
+          className={`${blockClass}__content`}
           onBlur={handleBlur}
           ref={contentRef}>
           {open ? renderChildren(children) : null}

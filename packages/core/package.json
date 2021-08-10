@@ -55,6 +55,7 @@
     "carbon-components": "^10.40.2",
     "carbon-components-react": "^7.40.2",
     "carbon-icons": "^7.0.7",
+    "common-settings": "^0.0.1",
     "css-loader": "^6.2.0",
     "fast-sass-loader": "^2.0.0",
     "npm-check-updates": "^11.8.3",

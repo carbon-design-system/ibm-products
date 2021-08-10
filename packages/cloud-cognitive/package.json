@@ -48,6 +48,7 @@
     "babel-preset-ibm-cloud-cognitive": "^0.7.0",
     "chalk": "^4.1.2",
     "change-case": "^4.1.2",
+    "common-settings": "^0.0.1",
     "copyfiles": "^2.4.1",
     "cross-env": "^7.0.3",
     "fs-extra": "^10.0.0",

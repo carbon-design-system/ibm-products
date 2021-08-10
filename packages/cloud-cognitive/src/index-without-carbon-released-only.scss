@@ -5,8 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import './global/styles/imported-carbon-modules';
-
+@import 'common-settings/scss/imported-carbon-modules';
 $imported-modules: $imported-carbon-modules;
 
 @import '@carbon/import-once/scss/import-once';

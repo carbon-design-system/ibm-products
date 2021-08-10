@@ -5,7 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-/// List of Carbon style modules used.
+/// This is a complete set of the Carbon module names used by the Carbon
+/// import-once mechanism to avoid multiply loading scss definitions.
 /// @type List
 /// @access public
 $imported-carbon-modules: 'css--reset' 'css--default-type' 'skeleton'

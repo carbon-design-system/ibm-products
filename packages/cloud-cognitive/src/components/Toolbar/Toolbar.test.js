@@ -8,7 +8,7 @@
 import { render as r, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
-import { Toolbar, ToolbarGroup } from '../..';
+import { Toolbar, ToolbarButton, ToolbarGroup } from '../..';
 const { getByTestId } = screen;
 
 function test(T) {
@@ -55,4 +55,5 @@ function test(T) {
 }
 
 test(Toolbar);
+test(ToolbarButton);
 test(ToolbarGroup);

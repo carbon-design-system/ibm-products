@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.66.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.65.0...@carbon/ibm-cloud-cognitive@0.66.0) (2021-08-10)
+
+
+### Bug Fixes
+
+* export cards ([#1120](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1120)) ([7227aeb](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/7227aebcc0c31c2f9a3076692c5a3b3913a6a2e0))
+
+
+### Features
+
+* ensure all component SCSS imports all dependencies ([#1118](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1118)) ([9d9617d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9d9617dadf43120ebd95aa6a255ee71b7cbf61ca))
+* update Carbon versions and dependencies ([#1110](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1110)) ([b41f433](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b41f4331e31cbd9e41d2364b24e6ef50c7fd2d8d))
+
+
+
+
+
 # [0.65.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.64.6...@carbon/ibm-cloud-cognitive@0.65.0) (2021-08-04)
 
 

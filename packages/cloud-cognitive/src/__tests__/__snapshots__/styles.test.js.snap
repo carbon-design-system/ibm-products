@@ -494,6 +494,110 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   fill: var(--cds-danger, #da1e28);
 }
 
+.exp--card {
+  background: var(--cds-ui-01, #f4f4f4);
+}
+
+.exp--card__clickable {
+  cursor: pointer;
+  transition: background 110ms;
+}
+
+.exp--card__clickable:hover {
+  background: var(--cds-hover-ui, #e5e5e5);
+}
+
+.exp--card__media-left {
+  display: flex;
+  flex-direction: row;
+}
+
+.exp--card__media-left .exp--card__content-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.exp--card__media-left .exp--card__footer {
+  align-self: flex-end;
+  margin-top: auto;
+}
+
+.exp--card__media > * {
+  display: block;
+  max-width: 100%;
+}
+
+.exp--card__header {
+  padding: var(--cds-spacing-05, 1rem);
+}
+
+.exp--card__header-label-only {
+  padding-bottom: var(--cds-spacing-03, 0.5rem);
+}
+
+.exp--card__header-label-only .exp--card__label {
+  margin-bottom: 0;
+}
+
+.exp--card__header-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.exp--card__label {
+  font-size: var(--cds-label-01-font-size, 0.75rem);
+  font-weight: var(--cds-label-01-font-weight, 400);
+  line-height: var(--cds-label-01-line-height, 1.34);
+  letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
+  margin-bottom: var(--cds-spacing-01, 0.125rem);
+}
+
+.exp--card__description {
+  font-size: var(--cds-caption-01-font-size, 0.75rem);
+  font-weight: var(--cds-caption-01-font-weight, 400);
+  line-height: var(--cds-caption-01-line-height, 1.34);
+  letter-spacing: var(--cds-caption-01-letter-spacing, 0.32px);
+  margin-top: var(--cds-spacing-01, 0.125rem);
+}
+
+.exp--card__body {
+  font-size: var(--cds-body-short-01-font-size, 0.875rem);
+  font-weight: var(--cds-body-short-01-font-weight, 400);
+  line-height: var(--cds-body-short-01-line-height, 1.29);
+  letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
+  padding: var(--cds-spacing-05, 1rem);
+  padding-top: 0;
+}
+
+.exp--card__footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.exp--card__actions {
+  display: flex;
+  flex-direction: row;
+  margin: var(--cds-spacing-05, 1rem);
+  margin-top: 0;
+}
+
+.exp--card__icon {
+  cursor: pointer;
+}
+
+.exp--card__link {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.exp--card__pictogram {
+  padding-top: var(--cds-spacing-05, 1rem);
+  padding-left: var(--cds-spacing-05, 1rem);
+}
+
 .exp--http-errors .exp--http-errors__content {
   position: fixed;
   z-index: 2;
@@ -2077,6 +2181,60 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--page-header__tagset-tooltip.exp--page-header__tagset-tooltip {
   position: var(--exp--page-header--tagset-tooltip-position) !important;
   top: var(--exp--page-header--tagset-tooltip-offset) !important;
+}
+
+.exp--card__productive .exp--card__header {
+  padding-right: 0;
+}
+
+.exp--card__productive .exp--card__title {
+  font-size: var(--cds-productive-heading-02-font-size, 1rem);
+  font-weight: var(--cds-productive-heading-02-font-weight, 600);
+  line-height: var(--cds-productive-heading-02-line-height, 1.375);
+  letter-spacing: var(--cds-productive-heading-02-letter-spacing, 0);
+}
+
+.exp--card__productive .exp--card__title-lg .exp--card__title {
+  font-size: var(--cds-productive-heading-03-font-size, 1.25rem);
+  font-weight: var(--cds-productive-heading-03-font-weight, 400);
+  line-height: var(--cds-productive-heading-03-line-height, 1.4);
+  letter-spacing: var(--cds-productive-heading-03-letter-spacing, 0);
+}
+
+.exp--card__productive .exp--card__body {
+  padding-top: var(--cds-spacing-03, 0.5rem);
+}
+
+.exp--card__productive .exp--card__footer {
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--cds-ui-03, #e0e0e0);
+}
+
+.exp--card__productive .exp--card__footer-no-button {
+  justify-content: flex-end;
+}
+
+.exp--card__productive .exp--card__actions {
+  margin: 0;
+}
+
+.exp--card__productive .exp--card__actions-header {
+  margin-top: calc(-1 * var(--cds-spacing-02, 0.25rem));
+  margin-right: var(--cds-spacing-03, 0.5rem);
+}
+
+.exp--card__productive .exp--card__title-lg .exp--card__actions-header,
+.exp--card__productive .exp--card__header-has-label .exp--card__actions-header {
+  margin-top: 0;
+}
+
+.exp--card__productive .exp--card__icon {
+  margin-right: var(--cds-spacing-05, 1rem);
+}
+
+.exp--card__productive .exp--card__header-container {
+  align-items: start;
 }
 
 .exp--remove-modal .bx--modal-footer .bx--btn {

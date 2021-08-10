@@ -13,7 +13,7 @@ const componentName = 'CardHeader';
 
 export let CardHeader = ({
   actions,
-  caption,
+  description,
   hasActions,
   label,
   title,
@@ -22,7 +22,7 @@ export let CardHeader = ({
   const blockClass = `${pkg.prefix}--card`;
   const headerClass = `${blockClass}__header`;
   const headerClasses = cx(headerClass, {
-    [`${headerClass}-label-only`]: label && !title && !caption,
+    [`${headerClass}-label-only`]: label && !title && !description,
     [`${headerClass}-has-label`]: !!label,
     [`${blockClass}__title-lg`]: titleSize === 'large',
   });
@@ -33,7 +33,9 @@ export let CardHeader = ({
         <div className={`${blockClass}__title-container`}>
           {label && <p className={`${blockClass}__label`}>{label}</p>}
           {title && <p className={`${blockClass}__title`}>{title}</p>}
-          {caption && <p className={`${blockClass}__caption`}>{caption}</p>}
+          {description && (
+            <p className={`${blockClass}__description`}>{description}</p>
+          )}
         </div>
         {hasActions && (
           <div
@@ -48,7 +50,7 @@ export let CardHeader = ({
 
 CardHeader.propTypes = {
   actions: PropTypes.oneOfType([PropTypes.array, PropTypes.node]),
-  caption: PropTypes.string,
+  description: PropTypes.string,
   hasActions: PropTypes.bool,
   label: PropTypes.string,
   title: PropTypes.string,

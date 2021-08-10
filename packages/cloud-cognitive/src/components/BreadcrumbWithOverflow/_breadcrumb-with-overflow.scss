@@ -7,12 +7,14 @@
 
 // Standard imports.
 @import '@carbon/import-once/scss/import-once';
-@import '../../global/styles/carbon-settings'; // goes before index as it affects how carbon is used.
+@import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
+
+// Other Carbon settings.
 @import '../../global/styles/mixins';
 
-// Imports of Carbon settings and component styles and other
-// related component styles used by ExampleComponent.
+// BreadcrumbWithOverflow uses the following Carbon components:
+// Breadcrumb, BreadcrumbItem, OverflowMenu, OverflowMenuItem
 @import 'carbon-components/scss/components/breadcrumb/breadcrumb';
 @import 'carbon-components/scss/components/overflow-menu/overflow-menu';
 

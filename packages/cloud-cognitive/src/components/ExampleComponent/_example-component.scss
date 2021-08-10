@@ -5,10 +5,13 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// Standard imports.
 @import '@carbon/import-once/scss/import-once';
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
+// ExampleComponent uses the following Carbon components:
+// Button, ButtonSet
 @import 'carbon-components/scss/components/button/button';
 
 // Define all component styles in a mixin which is then exported using

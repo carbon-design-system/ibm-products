@@ -5,14 +5,23 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// Standard imports.
+@import '@carbon/import-once/scss/import-once';
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
+
+// Other Carbon settings.
 @import 'carbon-components/scss/globals/grid/grid';
 @import '@carbon/motion/scss/motion.scss';
 @import './side-panel-variables';
 
+// SidePanel uses the following Carbon components:
+// Button
 @import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/inline-loading/inline-loading';
+
+// SidePanel uses the following Cloud & Cognitive components:
+// ActionSet
+@import '../ActionSet/action-set';
 
 $block-class: #{$pkg-prefix}--side-panel;
 $action-set-block-class: #{$pkg-prefix}--action-set;

@@ -32,7 +32,7 @@ export let CardHeader = ({
       <div className={`${headerClass}-container`}>
         <div className={`${blockClass}__title-container`}>
           {label && <p className={`${blockClass}__label`}>{label}</p>}
-          {title && <p className={`${blockClass}__title`}>{title}</p>}
+          {title && <h6 className={`${blockClass}__title`}>{title}</h6>}
           {description && (
             <p className={`${blockClass}__description`}>{description}</p>
           )}

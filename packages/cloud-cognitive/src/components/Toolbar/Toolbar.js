@@ -12,14 +12,15 @@ import React, { forwardRef } from 'react';
 import { pkg } from '../../settings';
 
 const { checkComponentEnabled, prefix } = pkg;
+const blockClass = `${prefix}--toolbar`;
 
 /** Toolbars are a collection of action items that organize a program’s interaction patterns into a series of closely related commands. */
-export let Toolbar = forwardRef(({ children, className, ...rest }, ref) => {
+let Toolbar = forwardRef(({ children, className, ...rest }, ref) => {
   return (
     <div
       {...rest}
       ref={ref}
-      className={cx(`${prefix}--toolbar`, className)}
+      className={cx(blockClass, className)}
       role="toolbar">
       {children}
     </div>
@@ -38,3 +39,5 @@ Toolbar.propTypes = {
 };
 
 Toolbar = checkComponentEnabled(Toolbar, componentName);
+
+export { blockClass, Toolbar };

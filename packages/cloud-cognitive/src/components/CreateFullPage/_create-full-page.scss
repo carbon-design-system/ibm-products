@@ -5,12 +5,27 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// Standard imports.
 @import '@carbon/import-once/scss/import-once';
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
+// Other Carbon settings.
+@import 'carbon-components/scss/globals/grid/grid';
+
+// CreateFullPage uses the following Carbon components:
+// Grid, Row, Column, Form, ProgressIndicator, ProgressStep, Toggle,
+// ComposedModal, ModalHeader, ModalBody, ModalFooter, Button
+@import 'carbon-components/scss/components/form/form';
+@import 'carbon-components/scss/components/progress-indicator/progress-indicator';
+@import 'carbon-components/scss/components/toggle/toggle';
+@import 'carbon-components/scss/components/modal/modal';
 @import 'carbon-components/scss/components/button/button';
 @import '../CreateInfluencer/index';
+
+// CreateFullPage uses the following Cloud & Cognitive components:
+// ActionSet
+@import '../ActionSet/action-set';
 
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.

@@ -13,12 +13,18 @@ $story-class: 'create-full-page-stories';
 
 // cspell:disable-next-line
 .sbdocs .#{$story-class}__viewport {
-  //   max-height: 500px;
   height: 100vh;
   background-color: $ui-background;
   box-shadow: 0 0 4px 1px $ui-03;
   color: $text-01;
   overflow-y: auto;
+}
+
+.#{$story-class}__tooltip {
+  // stylelint-disable-next-line carbon/layout-token-use
+  top: calc(#{$spacing-05} + #{$spacing-01});
+  // stylelint-disable-next-line carbon/layout-token-use
+  left: calc(#{$spacing-11} + #{$spacing-03});
 }
 
 .#{$story-class}__description {

@@ -23,5 +23,5 @@
 }
 
 @include exports('card-expressive') {
-  @include card-productive;
+  @include card-expressive;
 }

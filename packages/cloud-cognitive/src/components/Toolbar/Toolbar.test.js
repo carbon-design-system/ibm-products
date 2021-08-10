@@ -11,17 +11,17 @@ import React, { createRef } from 'react';
 import { Toolbar, ToolbarGroup } from '../..';
 const { getByTestId } = screen;
 
-function test(Component) {
-  const { displayName } = Component;
+function test(T) {
+  const { displayName } = T;
 
   describe(displayName, () => {
     const dataTestId = 'dataTestId';
 
     function render(props) {
       return r(
-        <Component data-test-id={dataTestId} {...props}>
+        <T data-test-id={dataTestId} {...props}>
           {displayName}
-        </Component>
+        </T>
       );
     }
 

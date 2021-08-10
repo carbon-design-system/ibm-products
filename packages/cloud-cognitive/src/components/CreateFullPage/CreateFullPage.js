@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useEffect, useCallback, useState, useRef } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -25,6 +25,10 @@ import {
 } from 'carbon-components-react';
 import { CreateInfluencer } from '../CreateInfluencer';
 import { ActionSet } from '../ActionSet';
+import { usePreviousValue } from '../../global/js/use/usePreviousValue';
+import { useValidCreateStepCount } from '../../global/js/use/useValidCreateStepCount';
+import { useCreateComponentStepChange } from '../../global/js/use/useCreateComponentStepChange';
+
 const blockClass = `${pkg.prefix}--create-full-page`;
 const componentName = 'CreateFullPage';
 
@@ -46,14 +50,6 @@ const isValidChildren =
         return;
       });
   };
-
-const usePreviousValue = (value) => {
-  const ref = useRef();
-  useEffect(() => {
-    ref.current = value;
-  });
-  return ref.current;
-};
 
 export let CreateFullPage = React.forwardRef(
   (
@@ -87,6 +83,30 @@ export let CreateFullPage = React.forwardRef(
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const previousState = usePreviousValue({ currentStep, open });
 
+    // returns an array of full page steps
+    const getFullPageSteps = useCallback(() => {
+      const steps = [];
+      const childrenArray = Array.isArray(children) ? children : [children];
+      const extractedChildren =
+        childrenArray && childrenArray[0]?.type === React.Fragment
+          ? childrenArray[0].props.children
+          : childrenArray;
+      extractedChildren.forEach((child) => {
+        if (isFullPageStep(child)) {
+          steps.push(child);
+        }
+      });
+      return steps;
+    }, [children]);
+
+    useCreateComponentStepChange(
+      previousState,
+      currentStep,
+      getFullPageSteps,
+      blockClass
+    );
+    useValidCreateStepCount(getFullPageSteps, componentName);
+
     useEffect(() => {
       const onUnmount = () => {
         setIsSubmitting(false);
@@ -106,14 +126,21 @@ export let CreateFullPage = React.forwardRef(
       const isSubmitDisabled = () => {
         let step = 0;
         let submitDisabled = false;
+        let viewAllSubmitDisabled = false;
         const createFullPageSteps = getFullPageSteps();
         createFullPageSteps.forEach((child) => {
           step++;
           if (currentStep === step) {
             submitDisabled = child.props.disableSubmit;
           }
+          if (shouldViewAll && child.props.disableSubmit) {
+            viewAllSubmitDisabled = true;
+          }
         });
-        return submitDisabled;
+        if (!shouldViewAll) {
+          return submitDisabled;
+        }
+        return viewAllSubmitDisabled;
       };
       const handleNext = async () => {
         setIsSubmitting(true);
@@ -198,16 +225,6 @@ export let CreateFullPage = React.forwardRef(
       shouldViewAll,
     ]);
 
-    useEffect(() => {
-      const createSteps = getFullPageSteps();
-      const total = createSteps.length;
-      if (total === 1) {
-        console.warn(
-          `${componentName}: CreateFullPages with one step are not permitted. If you require only one step, please use either the CreateFullPage, CreateSidePanel, or CreateModal components.`
-        );
-      }
-    }, [getFullPageSteps]);
-
     const continueToNextStep = () => {
       setIsSubmitting(false);
       setCurrentStep((prev) => prev + 1);
@@ -275,18 +292,6 @@ export let CreateFullPage = React.forwardRef(
         });
       }
     }, [includeViewAllToggle, shouldViewAll, children]);
-
-    // returns an array of full page steps
-    const getFullPageSteps = useCallback(() => {
-      const steps = [];
-      const childrenArray = Array.isArray(children) ? children : [children];
-      childrenArray.forEach((child) => {
-        if (isFullPageStep(child)) {
-          steps.push(child);
-        }
-      });
-      return steps;
-    }, [children]);
 
     // check if child is a full page step component
     const isFullPageStep = (child) => {
@@ -368,11 +373,6 @@ export let CreateFullPage = React.forwardRef(
                   [`${blockClass}__step--hidden-step`]:
                     !shouldViewAll && currentStep !== step,
                   [`${blockClass}__step--visible-step`]: currentStep === step,
-                  [`${blockClass}__step--first-panel-step`]:
-                    !previousState?.open &&
-                    open &&
-                    previousState?.currentStep === 0 &&
-                    stepIndex === 0,
                 }),
                 key: `key_${stepIndex}`,
               },
@@ -442,45 +442,6 @@ export let CreateFullPage = React.forwardRef(
       const stepTitle =
         (fullPageSteps && fullPageSteps[stepIndex]?.props.title) || null;
       return stepTitle;
-    };
-
-    // set initial focus when the step changes, if there is not an input to focus
-    // the next/create button receives focus
-    useEffect(() => {
-      if (previousState?.currentStep !== currentStep && currentStep > 0) {
-        const visibleStepInnerContent = document.querySelector(
-          `.${blockClass}__step.${blockClass}__step--visible-step`
-        );
-        const fullPageSteps = getFullPageSteps();
-        const focusableStepElements =
-          fullPageSteps &&
-          fullPageSteps.length &&
-          getFocusableElements(visibleStepInnerContent);
-        const activeStepComponent =
-          fullPageSteps &&
-          fullPageSteps.length &&
-          fullPageSteps[currentStep - 1];
-        if (activeStepComponent && activeStepComponent.props.onMount) {
-          activeStepComponent.props.onMount();
-        }
-        if (focusableStepElements && focusableStepElements.length) {
-          focusableStepElements[0].focus();
-        } else {
-          const nextButton = document.querySelector(
-            `.${blockClass}__create-button`
-          );
-          nextButton?.focus();
-        }
-      }
-    }, [currentStep, getFullPageSteps, previousState]);
-
-    // returns an array of focusable elements, for use in auto focusing the first input on a step
-    const getFocusableElements = (element) => {
-      return [
-        ...element.querySelectorAll(
-          'a, button, input, textarea, select, details,[tabindex]:not([tabindex="-1"])'
-        ),
-      ].filter((e) => !e.hasAttribute('disabled'));
     };
 
     // track scrolling/intersection of create sections so that we know

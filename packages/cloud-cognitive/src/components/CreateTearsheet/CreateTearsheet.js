@@ -21,17 +21,13 @@ import { TearsheetShell } from '../Tearsheet/TearsheetShell';
 import { CreateInfluencer } from '../CreateInfluencer';
 import { carbon, pkg } from '../../settings';
 import { CREATE_TEARSHEET_SECTION, CREATE_TEARSHEET_STEP } from './constants';
+import { usePreviousValue } from '../../global/js/use/usePreviousValue';
+import { useValidCreateStepCount } from '../../global/js/use/useValidCreateStepCount';
+import { useResetCreateComponent } from '../../global/js/use/useResetCreateComponent';
+import { useCreateComponentStepChange } from '../../global/js/use/useCreateComponentStepChange';
 
 const componentName = 'CreateTearsheet';
 const blockClass = `${pkg.prefix}--tearsheet-create`;
-
-const usePreviousValue = (value) => {
-  const ref = useRef();
-  useEffect(() => {
-    ref.current = value;
-  });
-  return ref.current;
-};
 
 export let CreateTearsheet = forwardRef(
   (
@@ -66,24 +62,30 @@ export let CreateTearsheet = forwardRef(
     const previousState = usePreviousValue({ currentStep, open });
     const contentRef = useRef();
 
-    // set current step to 1 upon tearsheet opening, in order
-    // to get the auto focus on the first step.
-    useEffect(() => {
-      if (!previousState?.open && open) {
-        setCurrentStep(1);
-      }
-    }, [open, previousState]);
+    // returns an array of tearsheet steps
+    const getTearsheetSteps = useCallback(() => {
+      const steps = [];
+      const childrenArray = Array.isArray(children) ? children : [children];
+      const extractedChildren =
+        childrenArray && childrenArray[0]?.type === React.Fragment
+          ? childrenArray[0].props.children
+          : childrenArray;
+      extractedChildren.forEach((child) => {
+        if (isTearsheetStep(child)) {
+          steps.push(child);
+        }
+      });
+      return steps;
+    }, [children]);
 
-    // Log a warning to the console in the event a create tearsheet is used with only one step
-    useEffect(() => {
-      const createSteps = getTearsheetSteps();
-      const total = createSteps.length;
-      if (total === 1) {
-        console.warn(
-          `${componentName}: CreateTearsheets with one step are not permitted. If you require only one step, please use either the narrow tearsheet, CreateSidePanel, or CreateModal components.`
-        );
-      }
-    }, [getTearsheetSteps]);
+    useCreateComponentStepChange(
+      previousState,
+      currentStep,
+      getTearsheetSteps,
+      blockClass
+    );
+    useValidCreateStepCount(getTearsheetSteps, componentName);
+    useResetCreateComponent(previousState, open, setCurrentStep);
 
     // Log a warning to the console in the event there are no CreateTearsheetSection components
     // inside of the CreateTearsheetSteps when the viewAll toggle is provided and turned on.
@@ -279,22 +281,6 @@ export let CreateTearsheet = forwardRef(
       setCurrentStep((prev) => prev + 1);
     };
 
-    // returns an array of tearsheet steps
-    const getTearsheetSteps = useCallback(() => {
-      const steps = [];
-      const childrenArray = Array.isArray(children) ? children : [children];
-      const extractedChildren =
-        childrenArray && childrenArray[0]?.type === React.Fragment
-          ? childrenArray[0].props.children
-          : childrenArray;
-      extractedChildren.forEach((child) => {
-        if (isTearsheetStep(child)) {
-          steps.push(child);
-        }
-      });
-      return steps;
-    }, [children]);
-
     // check if child is a tearsheet step component
     const isTearsheetStep = (child) => {
       if (child && child.props && child.props.type === CREATE_TEARSHEET_STEP) {
@@ -466,49 +452,6 @@ export let CreateTearsheet = forwardRef(
       const stepTitle =
         (tearsheetSteps && tearsheetSteps[stepIndex]?.props?.title) || null;
       return stepTitle;
-    };
-
-    // set initial focus when the step changes, if there is not an input to focus
-    // the next/create button receives focus
-    useEffect(() => {
-      if (
-        open &&
-        previousState?.currentStep !== currentStep &&
-        currentStep > 0
-      ) {
-        const visibleStepInnerContent = document.querySelector(
-          `.${blockClass}__step.${blockClass}__step--visible-step`
-        );
-        const tearsheetSteps = getTearsheetSteps();
-        const focusableStepElements =
-          tearsheetSteps &&
-          tearsheetSteps.length &&
-          getFocusableElements(visibleStepInnerContent);
-        const activeStepComponent =
-          tearsheetSteps &&
-          tearsheetSteps.length &&
-          tearsheetSteps[currentStep - 1];
-        if (activeStepComponent && activeStepComponent.props.onMount) {
-          activeStepComponent.props.onMount();
-        }
-        if (focusableStepElements && focusableStepElements.length) {
-          focusableStepElements[0].focus();
-        } else {
-          const nextButton = document.querySelector(
-            `.${blockClass}__create-button`
-          );
-          nextButton?.focus();
-        }
-      }
-    }, [open, currentStep, getTearsheetSteps, previousState]);
-
-    // returns an array of focusable elements, for use in auto focusing the first input on a step
-    const getFocusableElements = (element) => {
-      return [
-        ...element.querySelectorAll(
-          'a, button, input, textarea, select, details,[tabindex]:not([tabindex="-1"])'
-        ),
-      ].filter((e) => !e.hasAttribute('disabled'));
     };
 
     // adds focus trap functionality

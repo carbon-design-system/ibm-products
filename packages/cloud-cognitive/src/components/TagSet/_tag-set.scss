@@ -4,14 +4,22 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
-@import '../../global/styles/carbon-settings'; // goes before index as it affects how carbon is used.
+
+// Standard imports.
+@import '@carbon/import-once/scss/import-once';
+@import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
+
+// Other Carbon settings.
 @import '../../global/styles/mixins';
 
+// TagSet uses the following Carbon components:
+// ComposedModal, ModalHeader, ModalBody, Search, Link, Tag, Tooltip
 @import 'carbon-components/scss/components/modal/modal';
 @import 'carbon-components/scss/components/search/search';
-@import 'carbon-components/scss/components/tooltip/tooltip';
+@import 'carbon-components/scss/components/link/link';
 @import 'carbon-components/scss/components/tag/tag';
+@import 'carbon-components/scss/components/tooltip/tooltip';
 
 $block-class: #{$pkg-prefix}--tag-set;
 $block-class-overflow: #{$block-class}-overflow;

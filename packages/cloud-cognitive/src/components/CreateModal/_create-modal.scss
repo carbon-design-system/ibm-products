@@ -5,12 +5,19 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// Standard imports.
 @import '@carbon/themes/scss/themes';
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
+
+// Other Carbon settings.
 @import 'carbon-components/scss/globals/scss/_vars.scss';
+
+// CreateModal uses the following Carbon components:
+// ComposedModal, ModalHeader, ModalFooter, ModalBody, Form, Button
 @import 'carbon-components/scss/components/modal/modal';
 @import 'carbon-components/scss/components/form/form';
+@import 'carbon-components/scss/components/button/button';
 
 @mixin create-modal {
   .#{$pkg-prefix}--create-modal {

@@ -5,12 +5,14 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// Standard imports.
+@import '@carbon/import-once/scss/import-once';
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
-// shared card styles can be found in the Card folder
-@import '../Card/card';
 
-@import 'carbon-components/scss/components/overflow-menu/overflow-menu';
+// ProductiveCard uses the following Cloud & Cognitive components:
+// Card
+@import '../Card/card';
 
 @mixin card-productive {
   $block-class: #{$pkg-prefix}--card;

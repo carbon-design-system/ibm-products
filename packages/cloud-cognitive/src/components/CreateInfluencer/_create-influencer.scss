@@ -1,0 +1,90 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '@carbon/import-once/scss/import-once';
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
+@import 'carbon-components/scss/components/progress-indicator/progress-indicator';
+
+@mixin create-influencer {
+  $block-class: #{$pkg-prefix}--create-influencer;
+  $create-tearsheet-block-class: #{$pkg-prefix}--tearsheet-create;
+  $influencerAnimationStart: calc(-1 * #{$spacing-05});
+  @keyframes influencerMenuEntrance {
+    0% {
+      opacity: 0;
+      // stylelint-disable-next-line carbon/layout-token-use
+      transform: translateX($influencerAnimationStart);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes influencerMenuExit {
+    0% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    100% {
+      opacity: 0;
+      // stylelint-disable-next-line carbon/layout-token-use
+      transform: translateX($influencerAnimationStart);
+    }
+  }
+  .#{$block-class} {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr auto;
+  }
+
+  .#{$block-class}__left-nav {
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    overflow-y: auto;
+  }
+
+  .#{$block-class}__progress-indicator {
+    padding: $spacing-06;
+  }
+
+  .#{$block-class}__view-all-toggle {
+    padding: $spacing-06;
+    grid-column: 1 / -1;
+    grid-row: -1 / -1;
+  }
+  .#{$block-class}__side-nav-opening,
+  .#{$block-class}__progress-indicator-opening {
+    // stylelint-disable-next-line carbon/motion-token-use
+    animation: influencerMenuEntrance $duration--moderate-02 1;
+    animation-fill-mode: forwards;
+    @include carbon--motion(entrance, productive);
+  }
+
+  .#{$block-class}__side-nav-closing,
+  .#{$block-class}__progress-indicator-closing {
+    // stylelint-disable-next-line carbon/motion-token-use
+    animation: influencerMenuExit $duration--moderate-02 1;
+    animation-fill-mode: forwards;
+    @include carbon--motion(exit, productive);
+  }
+
+  @media (prefers-reduced-motion) {
+    .#{$block-class}__side-nav-opening,
+    .#{$block-class}__progress-indicator-opening,
+    .#{$block-class}__side-nav-closing,
+    .#{$block-class}__progress-indicator-closing {
+      animation: none;
+      opacity: 1;
+    }
+  }
+}
+
+@include exports('create-influencer') {
+  @include create-influencer;
+}

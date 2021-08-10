@@ -5,10 +5,17 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// Standard imports.
 @import '@carbon/import-once/scss/import-once';
-@import '../../global/styles/carbon-settings'; // goes before carbon imports as it affects how carbon is used.
+@import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
+
+// Other Carbon settings.
 @import './color-map';
+
+// UserProfileImage uses the following Carbon components:
+// TooltipIcon
+@import 'carbon-components/scss/components/tooltip/tooltip';
 
 $block-class: #{$pkg-prefix}-user-profile-avatar;
 

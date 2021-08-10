@@ -9,16 +9,18 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { pkg } from '../../settings';
+import { carbon, pkg } from '../../settings';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { Button, ButtonSet, Tab, Tabs } from 'carbon-components-react';
 import { Tearsheet, TearsheetNarrow } from '.';
+import { CreateTearsheetNarrow } from '../CreateTearsheetNarrow';
 
 const blockClass = `${pkg.prefix}--tearsheet`;
 const componentName = Tearsheet.displayName;
 const componentNameNarrow = TearsheetNarrow.displayName;
+const componentNameCreateNarrow = CreateTearsheetNarrow.displayName;
 
 const onClick = jest.fn();
 const onCloseReturnsFalse = jest.fn(() => false);
@@ -78,170 +80,193 @@ const navigation = (
 const title = `Title of the ${uuidv4()} tearsheet`;
 
 // These are tests than apply to both Tearsheet and TearsheetNarrow
-const commonTests = (Ts, name) => {
+// and also (with extra props and omitting button tests) to CreateTearsheetNarrow
+const commonTests = (Ts, name, props, testActions) => {
   it(`renders a component ${name}`, () => {
-    render(<Ts {...{ closeIconDescription }} />);
-    expect(screen.getByRole('presentation')).toHaveClass(blockClass);
+    render(<Ts {...{ ...props, closeIconDescription }} />);
+    expect(document.querySelector(`.${carbon.prefix}--modal`)).toHaveClass(
+      blockClass
+    );
   });
 
   it('has no accessibility violations', async () => {
     const { container } = render(
-      <Ts {...{ closeIconDescription, label, title }} />
+      <Ts {...{ ...props, closeIconDescription, label, title }} />
     );
     await expect(container).toBeAccessible(name);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it('omits main content sections when no props supplied and no close icon requested', () => {
-    render(<Ts hasCloseIcon={false} />);
+    render(<Ts {...props} hasCloseIcon={false} />);
     expect(document.querySelector(`.${blockClass}__header`)).toBeNull();
     expect(document.querySelector(`.${blockClass}__influencer`)).toBeNull();
-    expect(document.querySelector(`.${blockClass}__main`)).toBeNull();
-    expect(document.querySelector(`.${blockClass}__buttons`)).toBeNull();
-    expect(screen.getByRole('presentation')).not.toHaveClass('is-visible');
-  });
 
-  it('renders buttons', () => {
-    render(<Ts {...{ actions }} />);
-    expect(document.querySelector(`.${blockClass}__buttons`)).not.toBeNull();
-    expect(onClick).toHaveBeenCalledTimes(0);
-    userEvent.click(screen.getByText(createButton));
-    expect(onClick).toHaveBeenCalledTimes(1);
-  });
+    if (testActions) {
+      expect(document.querySelector(`.${blockClass}__main`)).toBeNull();
+      expect(document.querySelector(`.${blockClass}__buttons`)).toBeNull();
+    }
 
-  it('rejects too many buttons using the custom validator', () => {
-    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
-    render(<Ts actions={badActions} />);
-    expect(error).toBeCalledWith(
-      expect.stringContaining(`\`actions\` supplied to \`${name}\`: you cannot`)
+    expect(document.querySelector(`.${carbon.prefix}--modal`)).not.toHaveClass(
+      'is-visible'
     );
-    error.mockRestore();
   });
+
+  if (testActions) {
+    it('renders buttons', () => {
+      render(<Ts {...{ ...props, actions }} />);
+      expect(document.querySelector(`.${blockClass}__buttons`)).not.toBeNull();
+      expect(onClick).toHaveBeenCalledTimes(0);
+      userEvent.click(screen.getByText(createButton));
+      expect(onClick).toHaveBeenCalledTimes(1);
+    });
+
+    it('rejects too many buttons using the custom validator', () => {
+      const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+      render(<Ts {...props} actions={badActions} />);
+      expect(error).toBeCalledWith(
+        expect.stringContaining(
+          `\`actions\` supplied to \`${name}\`: you cannot`
+        )
+      );
+      error.mockRestore();
+    });
+  }
 
   it('renders children', () => {
-    render(<Ts {...{ closeIconDescription }}>{children}</Ts>);
+    render(<Ts {...{ ...props, closeIconDescription }}>{children}</Ts>);
     expect(document.querySelector(`.${blockClass}__main`)).not.toBeNull();
     screen.getByText(childFragment);
   });
 
   it('applies className to the root node', () => {
-    render(<Ts {...{ className, closeIconDescription }} />);
-    expect(screen.getByRole('presentation')).toHaveClass(className);
+    render(<Ts {...{ ...props, className, closeIconDescription }} />);
+    expect(document.querySelector(`.${carbon.prefix}--modal`)).toHaveClass(
+      className
+    );
   });
 
   it('responds to hasCloseIcon and renders closeIconDescription', () => {
-    render(<Ts hasCloseIcon {...{ closeIconDescription }} />);
+    render(<Ts {...{ ...props, closeIconDescription }} hasCloseIcon />);
     expect(document.querySelector(`.${blockClass}__header`)).not.toBeNull();
     screen.getByRole('button', { name: closeIconDescription });
   });
 
-  it('requires closeIconDescription when there are no actions', () => {
-    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
-    render(<Ts />);
-    expect(error).toBeCalledWith(
-      expect.stringContaining(
-        `The prop \`closeIconDescription\` is marked as required`
-      )
-    );
-    error.mockRestore();
-  });
+  if (testActions) {
+    it('requires closeIconDescription when there are no actions', () => {
+      const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+      render(<Ts {...props} />);
+      expect(error).toBeCalledWith(
+        expect.stringContaining(
+          `The prop \`closeIconDescription\` is marked as required`
+        )
+      );
+      error.mockRestore();
+    });
+  }
 
   it('renders description', () => {
-    render(<Ts {...{ closeIconDescription, description }} />);
+    render(<Ts {...{ ...props, closeIconDescription, description }} />);
     screen.getByText(descriptionFragment);
   });
 
   it('renders label', () => {
-    render(<Ts {...{ closeIconDescription, label }} />);
+    render(<Ts {...{ ...props, closeIconDescription, label }} />);
     screen.getByText(label);
   });
 
-  it('calls onClose() when the tearsheet is closed', () => {
-    render(
-      <Ts
-        hasCloseIcon
-        {...{ closeIconDescription }}
-        onClose={onCloseReturnsTrue}
-        open
-      />
-    );
-    const tearsheet = screen.getByRole('presentation');
-    const closeButton = screen.getByRole('button', {
-      name: closeIconDescription,
+  if (testActions) {
+    it('calls onClose() when the tearsheet is closed', () => {
+      render(
+        <Ts
+          {...{ ...props, closeIconDescription }}
+          hasCloseIcon
+          onClose={onCloseReturnsTrue}
+          open
+        />
+      );
+      const tearsheet = document.querySelector(`.${carbon.prefix}--modal`);
+      const closeButton = screen.getByRole('button', {
+        name: closeIconDescription,
+      });
+      expect(tearsheet).toHaveClass('is-visible');
+      expect(onCloseReturnsTrue).toHaveBeenCalledTimes(0);
+      userEvent.click(closeButton);
+      expect(tearsheet).not.toHaveClass('is-visible');
+      expect(onCloseReturnsTrue).toHaveBeenCalledTimes(1);
     });
-    expect(tearsheet).toHaveClass('is-visible');
-    expect(onCloseReturnsTrue).toHaveBeenCalledTimes(0);
-    userEvent.click(closeButton);
-    expect(tearsheet).not.toHaveClass('is-visible');
-    expect(onCloseReturnsTrue).toHaveBeenCalledTimes(1);
-  });
 
-  it('allows veto when the tearsheet is closed', () => {
-    render(
-      <Ts
-        hasCloseIcon
-        {...{ closeIconDescription }}
-        onClose={onCloseReturnsFalse}
-        open
-      />
-    );
-    const tearsheet = screen.getByRole('presentation');
-    const closeButton = screen.getByRole('button', {
-      name: closeIconDescription,
+    it('allows veto when the tearsheet is closed', () => {
+      render(
+        <Ts
+          {...{ ...props, closeIconDescription }}
+          hasCloseIcon
+          onClose={onCloseReturnsFalse}
+          open
+        />
+      );
+      const tearsheet = document.querySelector(`.${carbon.prefix}--modal`);
+      const closeButton = screen.getByRole('button', {
+        name: closeIconDescription,
+      });
+      expect(tearsheet).toHaveClass('is-visible');
+      expect(onCloseReturnsFalse).toHaveBeenCalledTimes(0);
+      userEvent.click(closeButton);
+      expect(tearsheet).toHaveClass('is-visible');
+      expect(onCloseReturnsFalse).toHaveBeenCalledTimes(1);
     });
-    expect(tearsheet).toHaveClass('is-visible');
-    expect(onCloseReturnsFalse).toHaveBeenCalledTimes(0);
-    userEvent.click(closeButton);
-    expect(tearsheet).toHaveClass('is-visible');
-    expect(onCloseReturnsFalse).toHaveBeenCalledTimes(1);
-  });
+  }
 
   it('is visible when open is true', () => {
-    render(<Ts open />);
-    expect(screen.getByRole('presentation')).toHaveClass('is-visible');
+    render(<Ts {...props} open />);
+    expect(document.querySelector(`.${carbon.prefix}--modal`)).toHaveClass(
+      'is-visible'
+    );
   });
 
   it('reports deprecation of preventCloseOnClickOutside', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-    render(<Ts preventCloseOnClickOutside={true} />);
+    render(<Ts {...props} preventCloseOnClickOutside={true} />);
     expect(warn).toBeCalledWith(
-      expect.stringContaining(
-        `The prop \`preventCloseOnClickOutside\` of \`${name}\` has been deprecated`
+      expect.stringMatching(
+        /The prop `preventCloseOnClickOutside` of `\w*` has been deprecated/
       )
     );
     warn.mockRestore();
   });
 
   it('renders title', () => {
-    render(<Ts {...{ title }} />);
+    render(<Ts {...{ ...props, title }} />);
     screen.getByText(title);
   });
 
   it('renders verticalPosition', () => {
-    render(<Ts verticalPosition="lower" />);
+    render(<Ts {...props} verticalPosition="lower" />);
     expect(screen.getByRole('dialog')).toHaveClass(
       `${blockClass}__container--lower`
     );
   });
 
   it('adds additional properties to the containing node', () => {
-    render(<Ts data-test-id={dataTestId} />);
+    render(<Ts {...props} data-test-id={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
-    render(<Ts {...{ ref }} />);
+    render(<Ts {...{ ...props, ref }} />);
     expect(ref.current.outerModal.current).toHaveClass(blockClass);
   });
 
   it("doesn't render when stacked more than three deep", () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-    render(<Ts open />);
-    render(<Ts open />);
-    render(<Ts open />);
-    render(<Ts open />);
-    expect(screen.getAllByRole('presentation')).toHaveLength(3);
+    render(<Ts {...props} open />);
+    render(<Ts {...props} open />);
+    render(<Ts {...props} open />);
+    render(<Ts {...props} open />);
+    expect(
+      document.querySelectorAll(`.${carbon.prefix}--modal.is-visible`)
+    ).toHaveLength(3);
     expect(warn).toBeCalledWith(
       'Tearsheet not rendered: maximum stacking depth exceeded.'
     );
@@ -265,7 +290,7 @@ describe(componentName, () => {
     window.ResizeObserver = ResizeObserver;
   });
 
-  commonTests(Tearsheet, componentName);
+  commonTests(Tearsheet, componentName, {}, true);
 
   it('renders headerActions', () => {
     render(<Tearsheet {...{ headerActions }} />);
@@ -319,5 +344,34 @@ describe(componentNameNarrow, () => {
     window.ResizeObserver = ResizeObserver;
   });
 
-  commonTests(TearsheetNarrow, componentNameNarrow);
+  commonTests(TearsheetNarrow, componentNameNarrow, {}, true);
+});
+
+describe(componentNameCreateNarrow, () => {
+  const { ResizeObserver } = window;
+
+  beforeAll(() => {
+    window.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    }));
+  });
+
+  afterAll(() => {
+    jest.restoreAllMocks();
+    window.ResizeObserver = ResizeObserver;
+  });
+
+  commonTests(
+    CreateTearsheetNarrow,
+    componentNameCreateNarrow,
+    {
+      children: 'Body',
+      formTitle: 'Title',
+      primaryButtonText: 'Primary',
+      secondaryButtonText: 'Secondary',
+    },
+    false
+  );
 });

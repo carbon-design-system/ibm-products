@@ -17,7 +17,6 @@
     "carbon for cloud & cognitive"
   ],
   "scripts": {
-    "foo": "sass --no-source-map --load-path node_modules --load-path ../../node_modules scss/_imported-carbon-modules-generator.scss:out.css",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally), sass (until Carbon fixes deprecation warnings)",
     "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|sass)/'"
   },

@@ -5,10 +5,15 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// Standard imports.
+@import '@carbon/import-once/scss/import-once';
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
+// Card uses the following Carbon components:
+// Button, OverflowMenu, OverflowMenuItem
 @import 'carbon-components/scss/components/button/button';
+@import 'carbon-components/scss/components/overflow-menu/overflow-menu';
 
 @mixin card {
   $block-class: #{$pkg-prefix}--card;

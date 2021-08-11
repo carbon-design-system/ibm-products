@@ -120,19 +120,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* Stroke animations */
 @keyframes init-stroke {
   0% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
   100% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
 }
 
 @keyframes stroke-end {
   0% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
   100% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
 }
 
@@ -206,19 +206,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* Stroke animations */
 @keyframes init-stroke {
   0% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
   100% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
 }
 
 @keyframes stroke-end {
   0% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
   100% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
 }
 
@@ -444,19 +444,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* Stroke animations */
 @keyframes init-stroke {
   0% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
   100% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
 }
 
 @keyframes stroke-end {
   0% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
   100% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
 }
 
@@ -575,19 +575,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* Stroke animations */
 @keyframes init-stroke {
   0% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
   100% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
 }
 
 @keyframes stroke-end {
   0% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
   100% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
 }
 
@@ -2120,19 +2120,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* Stroke animations */
 @keyframes init-stroke {
   0% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
   100% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
 }
 
 @keyframes stroke-end {
   0% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
   100% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
 }
 
@@ -2189,19 +2189,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* Stroke animations */
 @keyframes init-stroke {
   0% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
   100% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
 }
 
 @keyframes stroke-end {
   0% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
   100% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
 }
 
@@ -3216,19 +3216,19 @@ path:nth-of-type(1),
 /* Stroke animations */
 @keyframes init-stroke {
   0% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
   100% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
 }
 
 @keyframes stroke-end {
   0% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
   100% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
 }
 

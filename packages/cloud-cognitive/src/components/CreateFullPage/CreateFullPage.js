@@ -18,19 +18,12 @@ import { CREATE_FULL_PAGE_SECTION, CREATE_FULL_PAGE_STEP } from './constants';
 import {
   Grid,
   ModalFooter,
-  ProgressIndicator,
-  ProgressStep,
-  Toggle,
   ComposedModal,
   ModalHeader,
   ModalBody,
   Button,
 } from 'carbon-components-react';
-import {
-  SideNav,
-  SideNavItems,
-  SideNavLink,
-} from 'carbon-components-react/lib/components/UIShell';
+import { CreateInfluencer } from '../CreateInfluencer';
 import { ActionSet } from '../ActionSet';
 import { usePreviousValue } from '../../global/js/use/usePreviousValue';
 import { useValidCreateStepCount } from '../../global/js/use/useValidCreateStepCount';
@@ -321,15 +314,15 @@ export let CreateFullPage = React.forwardRef(
     };
 
     // renders the step progression components in the left influencer area
-    const renderProgressSteps = (childrenElements) => {
+    const getFullPageComponents = (childrenElements) => {
       let childrenArray = Array.isArray(childrenElements)
         ? childrenElements
         : [childrenElements];
-      const fullPageSectionComponents = childrenArray.filter((child) =>
+      const fullPageStepComponents = childrenArray.filter((child) =>
         isFullPageStep(child)
       );
       let sectionChildElements = [];
-      fullPageSectionComponents.forEach((child) => {
+      fullPageStepComponents.forEach((child) => {
         // we have received an array of children, lets check to see that each child is
         // a FullPageSection component before adding it to sectionChildElements
         if (shouldViewAll && child.props.children.length) {
@@ -351,64 +344,10 @@ export let CreateFullPage = React.forwardRef(
           }
         }
       });
-      if (shouldViewAll) {
-        return (
-          <div className={`${blockClass}__left-nav`}>
-            <SideNav expanded isFixedNav aria-label={sideNavAriaLabel}>
-              <SideNavItems>
-                {sectionChildElements?.length &&
-                  sectionChildElements.map((sectionChild, sectionIndex) => (
-                    <SideNavLink
-                      href={`#${sectionChild.props.id}`}
-                      key={sectionIndex}
-                      isActive={activeSectionIndex === sectionIndex}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setActiveSectionIndex(sectionIndex);
-                        if (sectionChild.props.id) {
-                          const scrollTarget = document.querySelector(
-                            `#${sectionChild.props.id}`
-                          );
-                          const scrollContainer = document.querySelector(
-                            `.${blockClass}__content`
-                          );
-                          scrollContainer.scrollTo({
-                            top:
-                              scrollTarget.getBoundingClientRect().y +
-                              scrollContainer.scrollTop,
-                            behavior: 'smooth',
-                          });
-                        } else {
-                          console.warn(
-                            `${componentName}: CreateFullPageSection is missing a required prop of 'id'`
-                          );
-                        }
-                      }}>
-                      {sectionChild.props.title}
-                    </SideNavLink>
-                  ))}
-              </SideNavItems>
-            </SideNav>
-          </div>
-        );
-      }
-      return (
-        <div className={`${blockClass}__left-nav`}>
-          <ProgressIndicator
-            currentIndex={currentStep - 1}
-            spaceEqually
-            vertical
-            className={`${blockClass}__progress-indicator`}>
-            {fullPageSectionComponents.map((child, stepIndex) => (
-              <ProgressStep
-                label={child.props.title}
-                key={stepIndex}
-                secondaryLabel={child.props.secondaryLabel}
-              />
-            ))}
-          </ProgressIndicator>
-        </div>
-      );
+      return {
+        sections: sectionChildElements,
+        steps: fullPageStepComponents,
+      };
     };
 
     // renders all children (CreateFullPageSteps and regular children elements)
@@ -505,11 +444,6 @@ export let CreateFullPage = React.forwardRef(
       return stepTitle;
     };
 
-    const handleViewAllToggle = (toggleState) => {
-      setShouldViewAll(toggleState);
-      setActiveSectionIndex(0);
-    };
-
     // track scrolling/intersection of create sections so that we know
     // which section is active (updates the SideNavItems `isActive` prop)
     useEffect(() => {
@@ -548,26 +482,24 @@ export let CreateFullPage = React.forwardRef(
       }
     }, [shouldViewAll]);
 
-    const renderViewAllToggle = () => {
-      return (
-        <Toggle
-          className={`${blockClass}__influencer-toggle`}
-          toggled={shouldViewAll}
-          labelText={viewAllToggleLabelText}
-          labelA={viewAllToggleOffLabelText}
-          labelB={viewAllToggleOnLabelText}
-          onToggle={(value) => handleViewAllToggle(value)}
-          aria-label={viewAllToggleLabelText}
-          id={`${blockClass}__influencer-toggle`}
-        />
-      );
-    };
-
     return (
       <div {...rest} ref={ref} className={cx(blockClass, className)}>
         <div className={`${blockClass}__influencer`}>
-          {renderProgressSteps(children)}
-          {includeViewAllToggle && renderViewAllToggle()}
+          <CreateInfluencer
+            activeSectionIndex={activeSectionIndex}
+            componentBlockClass={blockClass}
+            createComponentName={componentName}
+            currentStep={currentStep}
+            createComponents={getFullPageComponents(children)}
+            includeViewAllToggle={includeViewAllToggle}
+            handleToggleState={(toggleState) => setShouldViewAll(toggleState)}
+            handleActiveSectionIndex={(index) => setActiveSectionIndex(index)}
+            sideNavAriaLabel={sideNavAriaLabel}
+            toggleState={shouldViewAll}
+            viewAllToggleLabelText={viewAllToggleLabelText}
+            viewAllToggleOffLabelText={viewAllToggleOffLabelText}
+            viewAllToggleOnLabelText={viewAllToggleOnLabelText}
+          />
         </div>
         <div className={`${blockClass}__body`}>
           <div className={`${blockClass}__main`}>

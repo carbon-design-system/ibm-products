@@ -10,6 +10,14 @@
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
+// CreateTearsheetNarrow uses the following Carbon components:
+// Form
+@import 'carbon-components/scss/components/form/form';
+
+// CreateTearsheetNarrow uses the following Cloud & Cognitive components:
+// TearsheetNarrow
+@import '../Tearsheet/tearsheet';
+
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
 @mixin create-tearsheet-narrow {

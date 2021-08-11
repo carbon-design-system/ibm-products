@@ -1273,48 +1273,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin: 0;
 }
 
-.exp--button-menu {
-  min-width: 160px;
-}
-
-.exp--button-menu .exp--button-menu__trigger {
-  width: 100%;
-  padding: 0 var(--cds-spacing-05, 1rem);
-}
-
-.exp--button-menu__options.bx--overflow-menu-options::after {
-  content: initial;
-}
-
-.exp--button-set-with-overflow.exp--button-set-with-overflow {
-  display: flex;
-}
-
-.exp--button-set-with-overflow .exp--button-set-with-overflow__space {
-  position: relative;
-  display: block;
-  width: 100%;
-  white-space: nowrap;
-}
-
-.exp--button-set-with-overflow .exp--button-set-with-overflow__button-container {
-  display: inline-flex;
-}
-
-.exp--button-set-with-overflow .exp--button-set-with-overflow__button-container--hidden {
-  position: absolute;
-  top: -100vh;
-  left: -100vw;
-  overflow: hidden;
-  max-width: 100vw;
-  pointer-events: none;
-  visibility: hidden;
-}
-
-.exp--button-set-with-overflow.exp--button-set-with-overflow--right {
-  justify-content: flex-end;
-}
-
 .exp--action-bar.exp--action-bar {
   display: block;
 }
@@ -1355,6 +1313,75 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .exp--action-bar-overflow-items__options .exp--action-bar-overflow-items__item svg {
   margin: 0 var(--cds-spacing-02, 0.25rem);
+}
+
+.exp--breadcrumb-with-overflow.exp--breadcrumb-with-overflow {
+  display: block;
+}
+
+.exp--breadcrumb-with-overflow .exp--breadcrumb-with-overflow__space {
+  position: relative;
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.exp--breadcrumb-with-overflow .exp--breadcrumb-with-overflow__breadcrumb-container.exp--breadcrumb-with-overflow__breadcrumb-container-with-items {
+  display: none;
+  width: 100%;
+}
+
+@media (min-width: 42rem) {
+  .exp--breadcrumb-with-overflow .exp--breadcrumb-with-overflow__breadcrumb-container.exp--breadcrumb-with-overflow__breadcrumb-container-with-items {
+    display: inline-flex;
+  }
+}
+
+.exp--breadcrumb-with-overflow .exp--breadcrumb-with-overflow__breadcrumb-container .bx--breadcrumb {
+  width: 100%;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+}
+
+.exp--breadcrumb-with-overflow .exp--breadcrumb-with-overflow__breadcrumb-container--hidden {
+  position: absolute;
+  top: -100vh;
+  left: -100vw;
+  overflow: hidden;
+  max-width: 100vw;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.exp--breadcrumb-with-overflow .bx--breadcrumb-item:last-child {
+  display: inline;
+}
+
+.exp--breadcrumb-with-overflow .exp--breadcrumb-with-overflow__displayed-breadcrumb:last-child {
+  display: inline;
+  overflow: hidden;
+}
+
+.exp--breadcrumb-with-overflow .exp--breadcrumb-with-overflow__displayed-breadcrumb:last-child .bx--link {
+  display: inline-block;
+  overflow: hidden;
+  width: 100%;
+  text-overflow: ellipsis;
+}
+
+.exp--breadcrumb-with-overflow .bx--link {
+  max-height: 18px;
+}
+
+.exp--breadcrumb-with-overflow .exp--breadcrumb-with-overflow__breadcrumb-back-button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
+  display: inline-flex;
+  margin-top: calc(-1 * var(--cds-spacing-04, 0.75rem));
+}
+
+@media (min-width: 42rem) {
+  .exp--breadcrumb-with-overflow .exp--breadcrumb-with-overflow__breadcrumb-back-button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
+    display: none;
+  }
 }
 
 .exp--tag-set.exp--tag-set {
@@ -1487,35 +1514,35 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   box-shadow: inset 0 0 0 var(--cds-spacing-01, 0.125rem) var(--cds-focus, #0f62fe);
 }
 
-.exp--breadcrumb-with-overflow.exp--breadcrumb-with-overflow {
-  display: block;
+.exp--button-menu {
+  min-width: 160px;
 }
 
-.exp--breadcrumb-with-overflow .exp--breadcrumb-with-overflow__space {
+.exp--button-menu .exp--button-menu__trigger {
+  width: 100%;
+  padding: 0 var(--cds-spacing-05, 1rem);
+}
+
+.exp--button-menu__options.bx--overflow-menu-options::after {
+  content: initial;
+}
+
+.exp--button-set-with-overflow.exp--button-set-with-overflow {
+  display: flex;
+}
+
+.exp--button-set-with-overflow .exp--button-set-with-overflow__space {
   position: relative;
   display: block;
   width: 100%;
   white-space: nowrap;
 }
 
-.exp--breadcrumb-with-overflow .exp--breadcrumb-with-overflow__breadcrumb-container.exp--breadcrumb-with-overflow__breadcrumb-container-with-items {
-  display: none;
-  width: 100%;
+.exp--button-set-with-overflow .exp--button-set-with-overflow__button-container {
+  display: inline-flex;
 }
 
-@media (min-width: 42rem) {
-  .exp--breadcrumb-with-overflow .exp--breadcrumb-with-overflow__breadcrumb-container.exp--breadcrumb-with-overflow__breadcrumb-container-with-items {
-    display: inline-flex;
-  }
-}
-
-.exp--breadcrumb-with-overflow .exp--breadcrumb-with-overflow__breadcrumb-container .bx--breadcrumb {
-  width: 100%;
-  flex-wrap: nowrap;
-  align-items: flex-start;
-}
-
-.exp--breadcrumb-with-overflow .exp--breadcrumb-with-overflow__breadcrumb-container--hidden {
+.exp--button-set-with-overflow .exp--button-set-with-overflow__button-container--hidden {
   position: absolute;
   top: -100vh;
   left: -100vw;
@@ -1525,35 +1552,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   visibility: hidden;
 }
 
-.exp--breadcrumb-with-overflow .bx--breadcrumb-item:last-child {
-  display: inline;
-}
-
-.exp--breadcrumb-with-overflow .exp--breadcrumb-with-overflow__displayed-breadcrumb:last-child {
-  display: inline;
-  overflow: hidden;
-}
-
-.exp--breadcrumb-with-overflow .exp--breadcrumb-with-overflow__displayed-breadcrumb:last-child .bx--link {
-  display: inline-block;
-  overflow: hidden;
-  width: 100%;
-  text-overflow: ellipsis;
-}
-
-.exp--breadcrumb-with-overflow .bx--link {
-  max-height: 18px;
-}
-
-.exp--breadcrumb-with-overflow .exp--breadcrumb-with-overflow__breadcrumb-back-button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
-  display: inline-flex;
-  margin-top: calc(-1 * var(--cds-spacing-04, 0.75rem));
-}
-
-@media (min-width: 42rem) {
-  .exp--breadcrumb-with-overflow .exp--breadcrumb-with-overflow__breadcrumb-back-button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
-    display: none;
-  }
+.exp--button-set-with-overflow.exp--button-set-with-overflow--right {
+  justify-content: flex-end;
 }
 
 .exp--page-header.exp--page-header {
@@ -2094,6 +2094,52 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--remove-modal__body {
   padding-right: 20%;
   margin-bottom: var(--cds-spacing-05, 1rem);
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-end-p1 {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-end-p2 {
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+/* Stroke animations */
+@keyframes init-stroke {
+  0% {
+    stroke-dashoffset: 240;
+  }
+  100% {
+    stroke-dashoffset: 16;
+  }
+}
+
+@keyframes stroke-end {
+  0% {
+    stroke-dashoffset: 16;
+  }
+  100% {
+    stroke-dashoffset: 240;
+  }
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
 }
 
 .exp--saving__message {
@@ -3143,6 +3189,52 @@ path:nth-of-type(1),
 @media (prefers-reduced-motion) {
   .exp--status-icon--dark.exp--status-icon--dark-pending .exp--status-icon--dark.exp--status-icon--dark-in-progress {
     animation: none;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-end-p1 {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-end-p2 {
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+/* Stroke animations */
+@keyframes init-stroke {
+  0% {
+    stroke-dashoffset: 240;
+  }
+  100% {
+    stroke-dashoffset: 16;
+  }
+}
+
+@keyframes stroke-end {
+  0% {
+    stroke-dashoffset: 16;
+  }
+  100% {
+    stroke-dashoffset: 240;
+  }
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
   }
 }
 

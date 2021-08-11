@@ -46,6 +46,7 @@
   "devDependencies": {
     "@babel/cli": "^7.14.8",
     "@babel/core": "^7.14.8",
+    "@carbon/bundler": "^10.11.0",
     "babel-preset-ibm-cloud-cognitive": "^0.8.0",
     "chalk": "^4.1.2",
     "change-case": "^4.1.2",

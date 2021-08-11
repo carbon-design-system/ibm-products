@@ -22,6 +22,7 @@ import {
   ModalHeader,
   ModalBody,
   Button,
+  Form,
 } from 'carbon-components-react';
 import { CreateInfluencer } from '../CreateInfluencer';
 import { ActionSet } from '../ActionSet';
@@ -377,11 +378,6 @@ export let CreateFullPage = React.forwardRef(
                 key: `key_${stepIndex}`,
               },
               <>
-                {!shouldViewAll && (
-                  <h4 className={`${blockClass}__step-title`}>
-                    {renderStepTitle(stepIndex)}
-                  </h4>
-                )}
                 {renderStepChildren(
                   child.props.children,
                   indexOfLastFullPageStep === step - 1
@@ -434,14 +430,6 @@ export let CreateFullPage = React.forwardRef(
           })}
         </>
       );
-    };
-
-    // renders the individual step title
-    const renderStepTitle = (stepIndex) => {
-      const fullPageSteps = getFullPageSteps();
-      const stepTitle =
-        (fullPageSteps && fullPageSteps[stepIndex]?.props.title) || null;
-      return stepTitle;
     };
 
     // track scrolling/intersection of create sections so that we know
@@ -504,7 +492,11 @@ export let CreateFullPage = React.forwardRef(
         <div className={`${blockClass}__body`}>
           <div className={`${blockClass}__main`}>
             <div className={`${blockClass}__content`}>
-              <Grid>{renderChildren(children)}</Grid>
+              <Grid>
+                <Form className={`${blockClass}__form`}>
+                  {renderChildren(children)}
+                </Form>
+              </Grid>
             </div>
             <ActionSet
               className={`${blockClass}__buttons`}

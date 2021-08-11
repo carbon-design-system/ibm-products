@@ -27,18 +27,36 @@ $story-class: 'create-full-page-stories';
   left: calc(#{$spacing-11} + #{$spacing-03});
 }
 
-.#{$story-class}__description {
-  @include carbon--type-style('body-short-01');
+.#{$story-class}__step-title {
+  @include carbon--type-style('productive-heading-04');
 
-  padding-bottom: $spacing-03;
+  margin-bottom: $spacing-05;
 }
 
-p.#{$story-class}__description:last-of-type {
-  padding-bottom: $spacing-06;
+.#{$story-class}__step-subtitle {
+  @include carbon--type-style('productive-heading-01');
+
+  margin-bottom: $spacing-03;
 }
 
-.#{$story-class}__heading {
-  @include carbon--font-weight('semibold');
+.#{$story-class}__step-description {
+  @include carbon--type-style('body-long-01');
+
+  margin-bottom: $spacing-06;
+}
+
+.#{$story-class}__step-fieldset > * {
+  margin-bottom: $spacing-05;
+}
+
+.#{$story-class}__section-divider {
+  position: relative;
+  display: block;
+  width: calc(100vw - 16rem);
+  height: 1px;
+  margin: $spacing-07 calc(-1 * #{$spacing-08}) $spacing-07
+    calc(-1 * #{$spacing-08});
+  background-color: $ui-03;
 }
 
 .#{$carbon-prefix}--form-item {

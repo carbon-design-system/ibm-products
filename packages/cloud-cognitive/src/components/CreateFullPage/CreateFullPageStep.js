@@ -14,13 +14,24 @@ import { CREATE_FULL_PAGE_STEP } from './constants.js';
 const componentName = 'CreateFullPageStep';
 const blockClass = `${pkg.prefix}--create-full-page__step`;
 
-export let CreateFullPageStep = forwardRef(({ children, className }, ref) => {
-  return (
-    <div className={cx(blockClass, className)} ref={ref}>
-      {children}
-    </div>
-  );
-});
+export let CreateFullPageStep = forwardRef(
+  ({ children, className, subtitle, description, title, hasForm }, ref) => {
+    return (
+      <div className={cx(blockClass, className)} ref={ref}>
+        <h4 className={`${blockClass}-title`}>{title}</h4>
+        {subtitle && <h6 className={`${blockClass}-subtitle`}>{subtitle}</h6>}
+        {description && (
+          <p className={`${blockClass}-description`}>{description}</p>
+        )}
+        {hasForm ? (
+          <fieldset className={`${blockClass}-fieldset`}>{children}</fieldset>
+        ) : (
+          children
+        )}
+      </div>
+    );
+  }
+);
 
 // Return a placeholder if not released and not enabled by feature flag
 CreateFullPageStep = pkg.checkComponentEnabled(
@@ -40,9 +51,21 @@ CreateFullPageStep.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Sets an optional description on the progress step component
+   */
+  description: PropTypes.string,
+
+  /**
    * This will conditionally disable the submit button in the multi step CreateFullPage
    */
   disableSubmit: PropTypes.bool,
+
+  /**
+   * This optional prop will render your form content inside of a fieldset html element
+   * and is defaulted to true.
+   * You can set this prop to `false` if you have multiple fieldset elements or want to control the children of your Full Page's step content.
+   */
+  hasForm: PropTypes.bool,
 
   /**
    * Optional function to be called on initial mount of a step.
@@ -63,6 +86,11 @@ CreateFullPageStep.propTypes = {
   secondaryLabel: PropTypes.string,
 
   /**
+   * Sets an optional subtitle on the progress step component
+   */
+  subtitle: PropTypes.string,
+
+  /**
    * Sets the title text for a create full page step
    */
   title: PropTypes.node.isRequired,
@@ -74,4 +102,5 @@ CreateFullPageStep.propTypes = {
 // component needs to make a choice or assumption when a prop is not supplied.
 CreateFullPageStep.defaultProps = {
   type: CREATE_FULL_PAGE_STEP,
+  hasForm: true,
 };

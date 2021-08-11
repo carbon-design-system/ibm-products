@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/babel-preset-ibm-cloud-cognitive@0.8.0...babel-preset-ibm-cloud-cognitive@0.9.0) (2021-08-11)
+
+
+### Features
+
+* update Carbon versions and package dependencies to latest ([#1133](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1133)) ([4dfae1a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/4dfae1a9b27f5676d0bde570e2c9ee9ce8550b52))
+
+
+
+
+
 # [0.8.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/babel-preset-ibm-cloud-cognitive@0.7.0...babel-preset-ibm-cloud-cognitive@0.8.0) (2021-08-10)
 
 

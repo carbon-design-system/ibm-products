@@ -22,61 +22,11 @@ import wrapFocus from '../../global/js/utils/wrapFocus';
 import { TearsheetShell } from '../Tearsheet/TearsheetShell';
 import { pkg } from '../../settings';
 import { CREATE_TEARSHEET_STEP } from './constants';
-// import { Tooltip } from 'carbon-components-react';
+import { Tooltip } from 'carbon-components-react';
+import stepData from './preview-components/stepDataTest';
 
 const componentName = 'CreateTearsheet';
 const blockClass = `${pkg.prefix}--tearsheet-create`;
-
-// const tooltipOne = () => {
-//   return (
-//     <Tooltip
-//       direction="bottom"
-//       showIcon={false}
-//       // triggerClassName={`${prefix}--progress-label`}
-//       triggerText={'Topic name'}
-//       tooltipId="tooltipId-1">
-//       <p>
-//         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi
-//         consequuntur hic ratione aliquid cupiditate, nesciunt saepe iste
-//         blanditiis cumque maxime tenetur veniam est illo deserunt sint quae
-//         pariatur. Laboriosam, consequatur.
-//       </p>
-//     </Tooltip>
-//   );
-// };
-
-const stepDataTest = [
-  {
-    label: 'Topic name',
-    description: 'Topic name',
-    // secondaryLabel: "Optional label"
-    // renderLabel: tooltipOne,
-  },
-  {
-    label: 'Partitions',
-    description: 'Partitions',
-  },
-  {
-    label: 'Message retention',
-    description: 'Message retention',
-   
-  },
-  {
-    label: 'Step Three',
-    description: 'Topic name',
-    // secondaryLabel: "Optional label"
-    // renderLabel: tooltipOne,
-  },
-  {
-    label: 'Step Four',
-    description: 'Partitions',
-  },
-  {
-    label: 'Step Five',
-    description: 'Message retention',
-   
-  },
-];
 
 const usePreviousValue = (value) => {
   const ref = useRef();
@@ -253,25 +203,6 @@ export let CreateTearsheet = forwardRef(
       return false;
     };
 
-    // renders the step progression components in the left influencer area
-    // const renderProgressSteps = (childrenElements) => {
-    //   let childrenArray = Array.isArray(childrenElements)
-    //     ? childrenElements
-    //     : [childrenElements];
-    //   childrenArray = childrenArray.filter((child) => isTearsheetStep(child));
-    //   return (
-    //     <ProgressIndicator
-    //       currentIndex={currentStep - 1}
-    //       spaceEqually
-    //       vertical
-    //       className={`${blockClass}__progress-indicator`}>
-    //       {childrenArray.map((child, stepIndex) => (
-    //         <ProgressStep label={child.props.title} key={stepIndex} />
-    //       ))}
-    //     </ProgressIndicator>
-    //   );
-    // };
-
     const renderProgressSteps = (stepData) => {
       return (
         <ProgressIndicator
@@ -280,50 +211,9 @@ export let CreateTearsheet = forwardRef(
           vertical
           className={`${blockClass}__progress-indicator`}
           stepData={stepData}>
-          {renderSteps(stepData)}
           );
         </ProgressIndicator>
       );
-    };
-
-    const renderSteps = (stepData) => {
-      // const { onChange } = this.props;
-
-      return stepData.map((step, index) => {
-        // only setup click handlers if onChange event is passed
-        // const onClick = onChange ? () => onChange(index) : undefined;
-
-        let isCurrent;
-        let isComplete;
-
-        if (index === currentStep) {
-         isCurrent = true
-        }
-
-        if (index < currentStep) {
-          if (step.complete != true) {
-            isComplete = true
-          }
-        }
-
-        if (index > currentStep) {
-            isComplete= step.complete || false
-        }
-
-        return (
-          <ProgressStep
-            index={index}
-            onClick={step.onClick}
-            key={index}
-            label={step.label}
-            description={step.description}
-            secondaryLabel={step.secondaryLabel}
-            renderLabel={step.renderLabel}
-            current={isCurrent}
-            complete={isComplete}
-          />
-        );
-      });
     };
 
     // renders all children (CreateTearsheetSteps and regular children elements)
@@ -340,13 +230,16 @@ export let CreateTearsheet = forwardRef(
               return child;
             }
             step++;
-            {return React.cloneElement(child, {
-              className: cx(child.props.className, {
-                [`${blockClass}__step--hidden-section`]: currentStep !== step,
-                [`${blockClass}__step--visible-section`]: currentStep === step,
-              }),
-              key: `key_${stepIndex}`,
-            });}
+            {
+              return React.cloneElement(child, {
+                className: cx(child.props.className, {
+                  [`${blockClass}__step--hidden-section`]: currentStep !== step,
+                  [`${blockClass}__step--visible-section`]:
+                    currentStep === step,
+                }),
+                key: `key_${stepIndex}`,
+              });
+            }
           })}
         </>
       );
@@ -427,8 +320,7 @@ export let CreateTearsheet = forwardRef(
         closeIconDescription={'Close icon'}
         description={description}
         hasCloseIcon={false}
-        // influencer={renderProgressSteps(children)}
-        influencer={renderProgressSteps(stepDataTest)}
+        influencer={renderProgressSteps(stepData)}
         influencerPosition="left"
         influencerWidth="narrow"
         label={label}

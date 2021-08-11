@@ -39,6 +39,9 @@ export default {
     docs: { page: mdx },
     controls: { sort: 'requiredFirst' },
   },
+  argTypes: {
+    includeViewAllToggle: { table: { disable: true } },
+  },
   decorators: [
     (story) => <div className={`${storyClass}__viewport`}>{story()}</div>,
   ],
@@ -298,7 +301,6 @@ const TemplateWithSections = ({ ...args }) => {
 export const createFullPage = prepareStory(Template, {
   args: {
     ...defaultFullPageProps,
-    includeViewAllToggle: false,
   },
 });
 

@@ -631,3 +631,7 @@ CreateFullPage.propTypes = {
    */
   viewAllToggleOnLabelText: PropTypes.string,
 };
+
+CreateFullPage.defaultProps = {
+  includeViewAllToggle: false,
+};

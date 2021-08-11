@@ -124,8 +124,9 @@ describe(componentName, () => {
       onRequestSubmit: primaryHandler,
       onRequestClose: secondaryHandler,
     });
-    screen.getAllByRole('button').forEach(userEvent.click);
+    userEvent.click(screen.getByRole('button', { name: 'Create' }));
     expect(primaryHandler).toBeCalledTimes(1);
+    userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
     expect(secondaryHandler).toBeCalledTimes(1);
   });
 

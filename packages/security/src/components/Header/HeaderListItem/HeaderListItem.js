@@ -13,13 +13,8 @@ import { defaultProps, namespace, propTypes } from './constants';
  * @param {object.<string, *>} props Header list item props.
  * @returns {HeaderListItem} Header list item instance.
  */
-const HeaderListItem = ({ children, className, hasPopup, isExpanded }) => (
-  <li
-    className={classnames(namespace, className)}
-    aria-expanded={isExpanded}
-    aria-haspopup={hasPopup}>
-    {children}
-  </li>
+const HeaderListItem = ({ children, className }) => (
+  <li className={classnames(namespace, className)}>{children}</li>
 );
 
 HeaderListItem.propTypes = propTypes;

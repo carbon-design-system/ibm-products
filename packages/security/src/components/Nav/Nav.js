@@ -123,8 +123,14 @@ export default class Nav extends Component {
   }
 
   render() {
-    const { activeHref, className, children, heading, label, ...other } =
-      this.props;
+    const {
+      activeHref: _, // Throw away.
+      className,
+      children,
+      heading,
+      label,
+      ...other
+    } = this.props;
 
     return (
       <nav

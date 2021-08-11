@@ -11,7 +11,7 @@ import React from 'react';
 import Link from '../Link';
 
 import { getComponentNamespace } from '../../globals/namespace';
-import * as defaultLabels from '../../globals/nls';
+import { labels } from '../../globals/nls';
 
 const namespace = getComponentNamespace('error-page');
 
@@ -48,16 +48,13 @@ const ErrorPage = ({
   errorName,
   errorMessage,
   links,
-  labels,
   ...other
 }) => {
   const classes = classnames(className, namespace);
 
-  const errorLabels = defaultLabels.labels.ERRORS[statusCode];
+  const errorLabels = labels.ERRORS[statusCode];
   if (!title) {
-    title = errorLabels
-      ? errorLabels.TITLE
-      : defaultLabels.labels.ERRORS.default.TITLE;
+    title = errorLabels ? errorLabels.TITLE : labels.ERRORS.default.TITLE;
   }
   errorName = !errorName && errorLabels ? errorLabels.ERRORNAME : errorName;
   errorMessage =
@@ -128,7 +125,6 @@ ErrorPage.defaultProps = {
   errorName: '',
   errorMessage: '',
   links: [],
-  labels: {},
   title: '',
 };
 
@@ -144,9 +140,6 @@ ErrorPage.propTypes = {
 
   /** @type {string} errorName for the ErrorPage section. */
   errorName: PropTypes.string,
-
-  /** @type {object} the labels used by ErrorPage */
-  labels: defaultLabels.propType,
 
   /** @type {Array<Object.*>} An array list of links. */
   links: PropTypes.arrayOf(PropTypes.shape(link)),

@@ -9,13 +9,14 @@
 @import '@carbon/import-once/scss/import-once';
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
+
+// Other Carbon settings.
 @import '../../global/styles/mixins';
 
-// Imports of Carbon settings and component styles and other
-// related component styles used by ExampleComponent.
+// ActionBar uses the following Carbon components:
+// Button, OverflowMenu, OverflowMenuItem
 @import 'carbon-components/scss/components/button/button';
 @import 'carbon-components/scss/components/overflow-menu/overflow-menu';
-@import 'carbon-components/scss/components/tooltip/tooltip';
 
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.

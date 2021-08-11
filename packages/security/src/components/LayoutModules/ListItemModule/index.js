@@ -11,14 +11,16 @@ import LayoutModule, { layoutModuleNamespace } from '../LayoutModule';
 
 const namespace = 'list-item';
 
+function Column(props) {
+  return <LayoutModule namespace={`${namespace}__column`} {...props} />;
+}
+
 /**
  * The ListItem is a module designed for flexibility. It consists of optional pieces that can be used to design & build variants with universal consistency.
  */
 const ListItemModule = ({ children, as, href, onClick, ...other }) => {
   const content = children({
-    Column: (props) => (
-      <LayoutModule namespace={`${namespace}__column`} {...props} />
-    ),
+    Column,
 
     getLayoutProps: ({ className, ...rest } = {}) => {
       const assignClassName = (type) => ({

@@ -22,7 +22,7 @@ function SummaryCardContainer({ render, summaryCards, ...other }) {
 
   const { length: totalSelected } = selectedSummaryCards;
 
-  function getBatchActionProps({ ...props }) {
+  function getBatchActionProps(props) {
     return {
       ...props,
       onCancel: () => resetSelectedSummaryCards(setSelectedSummaryCards),

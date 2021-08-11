@@ -10,10 +10,10 @@
 @import '../feature-flags/index';
 @import '../namespace/index';
 
-@import 'css-gridish/scss/functions';
-@import 'css-gridish/scss/mixins';
-@import 'css-gridish/scss/utilities';
-@import 'css-gridish/scss/variables';
+@import 'vendor/css-gridish/scss/functions';
+@import 'vendor/css-gridish/scss/mixins';
+@import 'vendor/css-gridish/scss/utilities';
+@import 'vendor/css-gridish/scss/variables';
 
 @if feature-flag-enabled($feature: $grid__name) {
   @include export-namespace($name: $grid__name) {
@@ -24,7 +24,9 @@
         'https://github.com/carbon-design-system/ibm-security/blob/master/docs/migration/carbon-for-ibm-security/grid.md#feature-flags',
     );
 
+    // https://github.com/IBM/css-gridish/blob/master/src/scss/_core.scss
     html {
+      // stylelint-disable-next-line carbon/type-token-use
       font-size: map-get($grid-values, 'rem') * 1px;
     }
 

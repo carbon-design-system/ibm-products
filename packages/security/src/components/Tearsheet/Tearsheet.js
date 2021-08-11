@@ -70,7 +70,6 @@ class Tearsheet extends Component {
       rootNode,
       stopPropagation,
       stopPropagationEvents,
-
       deleteButton: {
         icon = TrashCan20,
         label = '',
@@ -80,8 +79,8 @@ class Tearsheet extends Component {
       },
       labels,
       loading,
-      loadingMessage,
-      isOpen,
+      loadingMessage: _, // Throw away.
+      isOpen: __, // Throw away.
       ...other
     } = this.props;
 

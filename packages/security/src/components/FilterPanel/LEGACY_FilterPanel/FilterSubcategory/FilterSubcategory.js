@@ -6,7 +6,7 @@
 import { Add16, Subtract16 } from '@carbon/icons-react';
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 
 import * as defaultLabels from '../../../../globals/nls';
 import { getComponentNamespace } from '../../../../globals/namespace';
@@ -23,6 +23,8 @@ import ScrollGradient from '../../../ScrollGradient';
 
 export const namespace = getComponentNamespace('filter-subcategory');
 
+const truncateThreshold = 10;
+
 const FilterSubcategory = ({
   filterData,
   subcategory,
@@ -31,34 +33,44 @@ const FilterSubcategory = ({
   filtersExpandLabel,
   filtersCollapseLabel,
 }) => {
-  const [isExpanded, setIsExpanded] = React.useState(false);
-  const [listContainer, setListContainer] = React.useState(null);
-  const visibleChildren = React.useRef(null);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const listContainer = useRef();
+  const setListContainer = useCallback(
+    (value) => (listContainer.current = value),
+    []
+  );
+  const visibleChildren = useRef(null);
 
   const filters = subcategory.filters
     .map((filterId) => filterData.filters[filterId])
     .filter((filter) => filter.count > 0);
 
-  const shouldTruncate = filters.length > 10;
+  const shouldTruncate = filters.length > truncateThreshold;
 
-  let displayCount = shouldTruncate ? 5 : filters.length;
-  if (shouldTruncate && isExpanded) {
-    displayCount = 10;
-  }
+  const displayCount = shouldTruncate
+    ? isExpanded
+      ? truncateThreshold
+      : 5
+    : filters.length;
 
   // After the component's expanded state has changed update the height of the list container to be
   // the same as its visible children set.
   React.useEffect(() => {
-    if (shouldTruncate && listContainer && visibleChildren.current) {
-      listContainer.style.height = `${visibleChildren.current.clientHeight}px`;
+    if (
+      shouldTruncate &&
+      listContainer.current &&
+      visibleChildren.current &&
+      visibleChildren.current.clientHeight
+    ) {
+      listContainer.current.style.height = `${visibleChildren.current.clientHeight}px`;
     }
-  }, [isExpanded]);
+  }, [isExpanded, shouldTruncate]);
 
   const handleExpand = () => {
     // Pre-set the height of the list container to its own current height so we can smoothly
     // transition into its new height in the React Effect hook.
-    if (listContainer && visibleChildren.current) {
-      listContainer.style.height = `${listContainer.clientHeight}px`;
+    if (listContainer.current && visibleChildren.current) {
+      listContainer.current.style.height = `${listContainer.current.clientHeight}px`;
     }
     setIsExpanded(!isExpanded);
   };

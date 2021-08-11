@@ -246,7 +246,7 @@ class Wizard extends Component {
       title,
       subTitle,
       className,
-      navLabel, // avoid spreading with rest of props.
+      navLabel: _, // Throw away.
       ...other
     } = this.props;
     const componentLabels = {

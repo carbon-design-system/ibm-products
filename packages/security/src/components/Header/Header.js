@@ -427,40 +427,33 @@ export default class Header extends Component {
     return isUserActive ? (
       <Fragment>
         {this.props.showNotifications && (
-          <HeaderListItem
-            className={headerListItemClass}
-            hasPopup={isUserActive}
-            isExpanded={isActive.notifications}>
-            <Fragment>
-              <IconButton
-                aria-label={labels.notifications.button}
-                className={notificationsButtonClasses}
-                onClick={() => this.toggle('notifications')}
-                renderIcon={Notification20}
-                state={notifications}
-                tooltip={false}>
-                <Icon name="notification" />
-              </IconButton>
-              {this.renderNotifications()}
-            </Fragment>
+          <HeaderListItem className={headerListItemClass}>
+            <IconButton
+              aria-expanded={isActive.notifications}
+              aria-haspopup={isUserActive}
+              aria-label={labels.notifications.button}
+              className={notificationsButtonClasses}
+              onClick={() => this.toggle('notifications')}
+              renderIcon={Notification20}
+              state={notifications}
+              tooltip={false}>
+              <Icon name="notification" />
+            </IconButton>
+            {this.renderNotifications()}
           </HeaderListItem>
         )}
 
-        <HeaderListItem
-          className={headerListItemClass}
-          hasPopup={isUserActive}
-          isExpanded={isActive.profile}>
-          <Fragment>
-            <button
-              aria-label={labels.profile.button}
-              className={profileButtonClasses}
-              onClick={() => this.toggle('profile')}
-              type="button">
-              <ProfileImage profile={profile} />
-            </button>
-
-            {this.renderProfile()}
-          </Fragment>
+        <HeaderListItem className={headerListItemClass}>
+          <button
+            aria-expanded={isActive.profile}
+            aria-haspopup={isUserActive}
+            aria-label={labels.profile.button}
+            className={profileButtonClasses}
+            onClick={() => this.toggle('profile')}
+            type="button">
+            <ProfileImage profile={profile} />
+          </button>
+          {this.renderProfile()}
         </HeaderListItem>
       </Fragment>
     ) : (

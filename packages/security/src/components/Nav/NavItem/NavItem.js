@@ -59,9 +59,6 @@ export default class NavItem extends Component {
     /** @type {Function} Click handler of an item. */
     onClick: func,
 
-    /** @type {Function} Handler for keypresses on an item. */
-    onKeyPress: func,
-
     /** @type {number} `tabindex` of an item. */
     tabIndex: number,
   };
@@ -79,7 +76,6 @@ export default class NavItem extends Component {
     label: '',
     link: true,
     onClick: () => {},
-    onKeyPress: () => {},
     tabIndex: 0,
   };
 
@@ -102,10 +98,9 @@ export default class NavItem extends Component {
       disabled,
       label,
       onClick,
-      onKeyPress,
       href,
       activeHref,
-      current,
+      current: _, // Throw away.
       handleItemSelect,
       link,
       id,

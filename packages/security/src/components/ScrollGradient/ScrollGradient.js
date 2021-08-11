@@ -185,9 +185,9 @@ class ScrollGradient extends Component {
       children,
       direction,
       color,
-      onScroll,
+      onScroll: _, // Throw away.
       scrollElementClassName,
-      getScrollElementRef,
+      getScrollElementRef: __, // Throw away.
       hideStartGradient,
       ...other
     } = this.props;

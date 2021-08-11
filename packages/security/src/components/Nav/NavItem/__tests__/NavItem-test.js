@@ -15,15 +15,10 @@ const { fn } = jest;
 describe('NavItem', () => {
   let navigationItem;
   const onClick = fn();
-  const onKeyPress = fn();
 
   beforeEach(() => {
     navigationItem = shallow(
-      <NavItem
-        className={className}
-        href={href()}
-        onClick={onClick}
-        onKeyPress={onKeyPress}>
+      <NavItem className={className} href={href()} onClick={onClick}>
         {label}
       </NavItem>
     );

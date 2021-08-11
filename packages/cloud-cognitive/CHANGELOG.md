@@ -3,6 +3,72 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.68.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.67.1...@carbon/ibm-cloud-cognitive@0.68.0) (2021-08-11)
+
+
+### Features
+
+* update Carbon versions and package dependencies to latest ([#1133](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1133)) ([4dfae1a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/4dfae1a9b27f5676d0bde570e2c9ee9ce8550b52))
+
+
+
+
+
+## [0.67.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.67.0...@carbon/ibm-cloud-cognitive@0.67.1) (2021-08-10)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+# [0.67.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.66.1...@carbon/ibm-cloud-cognitive@0.67.0) (2021-08-10)
+
+
+### Features
+
+* **CreateInfluencer:** [#1107](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1107) create influencer shared component ([#1122](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1122)) ([369f466](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/369f4665c3c3b61c62c3aaa326c86738baa08e70))
+
+
+
+
+
+## [0.66.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.66.0...@carbon/ibm-cloud-cognitive@0.66.1) (2021-08-10)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+# [0.66.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.65.0...@carbon/ibm-cloud-cognitive@0.66.0) (2021-08-10)
+
+
+### Bug Fixes
+
+* export cards ([#1120](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1120)) ([7227aeb](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/7227aebcc0c31c2f9a3076692c5a3b3913a6a2e0))
+
+
+### Features
+
+* ensure all component SCSS imports all dependencies ([#1118](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1118)) ([9d9617d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9d9617dadf43120ebd95aa6a255ee71b7cbf61ca))
+* update Carbon versions and dependencies ([#1110](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1110)) ([b41f433](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b41f4331e31cbd9e41d2364b24e6ef50c7fd2d8d))
+
+
+
+
+
+# [0.65.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.64.6...@carbon/ibm-cloud-cognitive@0.65.0) (2021-08-04)
+
+
+### Features
+
+* **CreateTearsheet:** add microinteraction to influencer menus ([#1104](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1104)) ([4dc051c](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/4dc051ce64434b9307d23defd84741048ca10c8e))
+
+
+
+
+
 ## [0.64.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.64.5...@carbon/ibm-cloud-cognitive@0.64.6) (2021-08-03)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

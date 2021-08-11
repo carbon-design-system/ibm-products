@@ -146,22 +146,22 @@ class DataTablePagination extends Component {
     pageSize: this.props.pageSize,
   };
 
-  componentDidMount = () => {
+  componentDidMount() {
     const { totalItems, useBackendPagination } = this.props;
     if (useBackendPagination && !totalItems) {
       console.warn(
         'Please provide `totalItems` if `useBackendPagination` is `true`.'
       );
     }
-  };
+  }
 
   /**
    * Update the state with the newest view values, `page` and `pageSize`.
-   * @param {object.<string, number>} configuration The current page and page size.
+   * @param {object} configuration
+   * @param {number} configuration.page The current page.
+   * @param {number} configuration.pageSize The current page size.
    */
-  paginationChange = (configuration) => {
-    const { page, pageSize } = configuration;
-
+  paginationChange = ({ page, pageSize }) => {
     this.setState({ page, pageSize });
 
     if (this.props.onChange) {
@@ -174,11 +174,11 @@ class DataTablePagination extends Component {
    * @param {Array.<object.<string, *>>} rows The rows to update.
    * @returns {Array.<object.<string, *>>} The data between the range values.
    */
-  paginateRows = (rows) => {
+  paginateRows(rows) {
     const start = this.state.pageSize * (this.state.page - 1);
     const end = start + this.state.pageSize;
     return rows.slice(start, end);
-  };
+  }
 
   render() {
     const {
@@ -193,7 +193,7 @@ class DataTablePagination extends Component {
       itemsPerPageText,
       itemRangeText,
       itemText,
-      onChange,
+      onChange: _, // Throw away.
       page,
       pageInputDisabled,
       pageNumberText,

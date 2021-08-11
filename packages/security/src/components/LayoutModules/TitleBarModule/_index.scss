@@ -5,6 +5,7 @@
 ////
 
 @import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
 @import '@carbon/type/scss/styles';
 
 @import '../../Component/mixins';
@@ -13,29 +14,70 @@
 @include security--component($name: #{$layout-modules__name}--title-bar) {
   /// Spacing.
   /// @type Length
-  $title-bar__spacing: $carbon--layout-01;
+  $title-bar__spacing: $carbon--spacing-05;
 
   display: flex;
 
   &__title {
     @include carbon--type-style($name: productive-heading-03);
 
-    margin-top: $title-bar__spacing;
-    margin-bottom: $title-bar__spacing;
+    width: 100%;
+    margin-block-end: 0;
+    margin-block-start: 0;
+  }
+
+  &--label > &__title {
+    margin-top: $carbon--spacing-02;
+    margin-bottom: $carbon--spacing-02;
   }
 
   &__items {
-    margin-top: $carbon--spacing-02;
+    display: flex;
+    align-items: center;
     margin-left: auto;
   }
 
-  &--subsection > & {
+  &--label & {
+    // this offsets the icon-button-bar by 6px for better visual alignment when the label is present
+    &__items {
+      align-items: flex-end;
+      margin-bottom: $carbon--spacing-01 + $carbon--spacing-02;
+    }
+  }
+
+  &__label-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+
+    margin-top: $carbon--spacing-05;
+    margin-bottom: $carbon--spacing-05;
+  }
+
+  &__label {
+    @include carbon--type-style($name: label-01);
+
+    width: 100%;
+    color: $text-02;
+
+    &.order--top {
+      order: 0;
+      margin-bottom: $carbon--spacing-02;
+    }
+    &.order--bottom {
+      order: 2;
+      margin-top: $carbon--spacing-02;
+    }
+  }
+
+  &--subsection & {
     &__title {
       @include carbon--type-style($name: productive-heading-02);
-    }
 
+      order: 1;
+    }
     &__items {
-      margin-top: 0;
+      align-items: flex-end;
+      margin-bottom: $carbon--spacing-01 + $carbon--spacing-02;
     }
   }
 }

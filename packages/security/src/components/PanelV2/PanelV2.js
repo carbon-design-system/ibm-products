@@ -13,11 +13,11 @@ import setupGetInstanceId from 'carbon-components-react/es/tools/setupGetInstanc
 
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { createRef, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { getComponentNamespace } from '../../globals/namespace';
 import * as defaultLabels from '../../globals/nls';
-import { isClient, isNode } from '../../globals/utils/capabilities';
+import { isNode } from '../../globals/utils/capabilities';
 
 import Button from '../Button';
 import IconButton from '../IconButton';
@@ -52,39 +52,28 @@ function PanelV2({
   title,
   ...other
 }) {
-  const [bodyMargin, setBodyMargin] = useState(0);
+  const [bodyMarginTop, setBodyMarginTop] = useState(0);
+  const [bodyMarginBottom, setBodyMarginBottom] = useState(0);
 
   const panelInstanceId = `panel-${getInstanceId()}`;
   const panelTitleId = `${namespace}__title--${panelInstanceId}`;
   const panelSubtitleId = `${namespace}__subtitle--${panelInstanceId}`;
 
-  const footerRef = createRef();
-  const headerRef = createRef();
+  const footerRef = useCallback((node) => {
+    // Sets the body margin to match the height of the footer for fixed scrolling.
+    setBodyMarginBottom(node ? node.clientHeight : 0);
+  }, []);
 
-  /**
-   * Sets the body margin to match the height of the header for fixed scrolling.
-   */
-  const handleBodyMargin = () => {
-    const footerElement = footerRef.current;
-    const headerElement = headerRef.current;
-
-    setBodyMargin({
-      top: headerElement.clientHeight,
-      bottom: footerElement && footerElement.clientHeight,
-    });
-  };
+  const headerRef = useCallback((node) => {
+    // Sets the body margin to match the height of the header for fixed scrolling.
+    setBodyMarginTop(node ? node.clientHeight : 0);
+  }, []);
 
   const handleKeyDown = (event) => {
     if (isOpen && event.which === 27) {
       onClose();
     }
   };
-
-  useEffect(() => {
-    if (isClient() && isOpen) {
-      handleBodyMargin();
-    }
-  }, [isOpen]);
 
   const renderPanel = ({
     labels: {
@@ -169,8 +158,8 @@ function PanelV2({
                   [`${namespace}__body--footer`]: renderFooter,
                 })}
                 style={{
-                  marginTop: `${bodyMargin.top}px`,
-                  marginBottom: `${bodyMargin.bottom}px`,
+                  marginTop: `${bodyMarginTop}px`,
+                  marginBottom: `${bodyMarginBottom}px`,
                 }}
                 {...hasScrollingContentProps}
                 {...getAriaLabelledBy}>

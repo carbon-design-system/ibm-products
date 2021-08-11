@@ -57,15 +57,16 @@ $sizes: (
     }
   }
 
-  .#{$block-class}__form {
+  .#{$carbon-prefix}--form.#{$block-class}__form {
     padding-top: $spacing-05;
+  }
+
+  .#{$block-class}__form.#{$carbon-prefix}--fieldset {
+    padding-top: $spacing-03;
   }
 
   .#{$block-class}__form > * {
     margin-bottom: $spacing-05;
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 
   .#{$block-class}__form-title-text {

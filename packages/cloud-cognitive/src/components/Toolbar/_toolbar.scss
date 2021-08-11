@@ -11,6 +11,7 @@
 @import '@carbon/themes/scss/tokens';
 
 @import 'carbon-components/scss/components/button/button';
+@import 'carbon-components/scss/globals/scss/vars';
 
 @import '../../global/styles/project-settings';
 
@@ -30,6 +31,10 @@
     min-height: carbon--rem($px: 40px);
     border-bottom: $border;
     background-color: $ui-01;
+  }
+
+  .#{$block-class} .#{$prefix}--dropdown {
+    border-bottom-width: 0;
   }
 
   .#{$block-class}__group {

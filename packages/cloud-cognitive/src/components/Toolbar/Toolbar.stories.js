@@ -18,8 +18,13 @@ import {
   ZoomOut16,
 } from '@carbon/icons-react';
 
-import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
-import React from 'react';
+import {
+  Dropdown,
+  OverflowMenu,
+  OverflowMenuItem,
+} from 'carbon-components-react';
+
+import React, { useState } from 'react';
 
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 
@@ -39,6 +44,12 @@ export default {
 };
 
 export function _Toolbar(args) {
+  const dropdownItems = ['11', '12', '14', '16', '18'];
+
+  const [selectedDropdownItem, setSelectedDropdownItem] = useState(
+    dropdownItems[(dropdownItems.length / 2) | 0]
+  );
+
   return (
     <Toolbar {...args}>
       <ToolbarGroup>
@@ -58,6 +69,16 @@ export function _Toolbar(args) {
         <ToolbarButton
           iconDescription="Align horizontal center"
           renderIcon={AlignHorizontalCenter16}
+        />
+      </ToolbarGroup>
+
+      <ToolbarGroup>
+        <Dropdown
+          id="dropdown"
+          initialSelectedItem={selectedDropdownItem}
+          items={dropdownItems}
+          label={selectedDropdownItem}
+          onChange={({ selectedItem }) => setSelectedDropdownItem(selectedItem)}
         />
       </ToolbarGroup>
 

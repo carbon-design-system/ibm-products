@@ -10,6 +10,9 @@
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
+// Other Carbon settings.
+@import '../../global/styles/mixins';
+
 // Tearsheets use the following Carbon components:
 // Button, ComposedModal, ModalHeader, ModalBody,
 @import 'carbon-components/scss/components/modal/modal';

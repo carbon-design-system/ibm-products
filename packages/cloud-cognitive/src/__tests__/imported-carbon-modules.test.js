@@ -10,7 +10,7 @@ import { renderSync } from 'sass';
 import fs from 'fs-extra';
 
 // the sass compile of complete Carbon can take quite a while
-jest.setTimeout(180000);
+jest.setTimeout(300000);
 
 describe('imported-carbon-modules', () => {
   it('presents a complete and correct list of module names', async () => {

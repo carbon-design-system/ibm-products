@@ -10,12 +10,24 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
 import { CREATE_FULL_PAGE_STEP } from './constants.js';
+import { FormGroup } from 'carbon-components-react';
 
 const componentName = 'CreateFullPageStep';
 const blockClass = `${pkg.prefix}--create-full-page__step`;
 
 export let CreateFullPageStep = forwardRef(
-  ({ children, className, subtitle, description, title, hasForm }, ref) => {
+  (
+    {
+      children,
+      className,
+      subtitle,
+      description,
+      title,
+      hasForm,
+      formLegendText,
+    },
+    ref
+  ) => {
     return (
       <div className={cx(blockClass, className)} ref={ref}>
         <h4 className={`${blockClass}-title`}>{title}</h4>
@@ -24,7 +36,11 @@ export let CreateFullPageStep = forwardRef(
           <p className={`${blockClass}-description`}>{description}</p>
         )}
         {hasForm ? (
-          <fieldset className={`${blockClass}-fieldset`}>{children}</fieldset>
+          <FormGroup
+            legendText={formLegendText}
+            className={`${blockClass}-fieldset`}>
+            {children}
+          </FormGroup>
         ) : (
           children
         )}
@@ -59,6 +75,15 @@ CreateFullPageStep.propTypes = {
    * This will conditionally disable the submit button in the multi step CreateFullPage
    */
   disableSubmit: PropTypes.bool,
+
+  /**
+   * This is the required legend text that appears above a fieldset html element for accessibility purposes.
+   * You can set the `hasForm` prop to false if you have multiple fieldset elements or want to control the children of your Full Page's step content.
+   * Otherwise, use CSS to hide/remove this label text.
+   */
+  formLegendText: PropTypes.string.isRequired.if(
+    ({ hasForm }) => hasForm === true
+  ),
 
   /**
    * This optional prop will render your form content inside of a fieldset html element

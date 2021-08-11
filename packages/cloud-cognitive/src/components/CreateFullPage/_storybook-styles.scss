@@ -20,11 +20,21 @@ $story-class: 'create-full-page-stories';
   overflow-y: auto;
 }
 
+.#{$story-class}__step-fieldset--no-label .bx--label legend {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 .#{$story-class}__tooltip {
+  position: relative;
   // stylelint-disable-next-line carbon/layout-token-use
   top: calc(#{$spacing-05} + #{$spacing-01});
-  // stylelint-disable-next-line carbon/layout-token-use
-  left: calc(#{$spacing-11} + #{$spacing-03});
+  left: $spacing-11;
 }
 
 .#{$story-class}__step-title {
@@ -43,6 +53,16 @@ $story-class: 'create-full-page-stories';
   @include carbon--type-style('body-long-01');
 
   margin-bottom: $spacing-06;
+}
+
+.#{$story-class}__step-fieldset.#{$story-class}__step-fieldset--label.#{$carbon-prefix}--label {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .#{$story-class}__step-fieldset > * {

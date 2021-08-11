@@ -23,9 +23,11 @@ import {
   NumberInput,
   InlineNotification,
   Toggle,
-  TooltipIcon,
+  Tooltip,
+  RadioButtonGroup,
+  RadioButton,
+  FormGroup,
 } from 'carbon-components-react';
-import { Information16 } from '@carbon/icons-react';
 
 export default {
   title: getStoryTitle(CreateFullPage.displayName),
@@ -72,12 +74,14 @@ const Template = ({ ...args }) => {
   return (
     <CreateFullPage {...args}>
       <CreateFullPageStep
+        className={`${storyClass}__step-fieldset--no-label`}
         title="Partition"
         subtitle="One or more partitions make up a topic. A partition is an ordered list
         of messages."
         description="Partitions are distributed across the brokers in order to increase the
         scalability of your topic. You can also use them to distribute
         messages across the members of a consumer group."
+        formLegendText="Partition"
         onNext={() => {
           return new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -117,12 +121,16 @@ const Template = ({ ...args }) => {
           />
         )}
         <div>
-          <TooltipIcon
-            className={`${storyClass}__tooltip`}
-            direction="top"
-            tooltipText="Once toggled on, an inline error notification will appear upon clicking 'next'. This is merely a simulation of how this could appear in your own step component.">
-            <Information16 />
-          </TooltipIcon>
+          <Tooltip
+            triggerClassName={`${storyClass}__tooltip`}
+            direction="right"
+            tabIndex={0}>
+            <p>
+              Once toggled on, an inline error notification will appear upon
+              clicking next. This is an example usage of how to prevent the next
+              step if some kind of error occurred during the `onNext` handler.
+            </p>
+          </Tooltip>
           <Toggle
             className={`${storyClass}__error--toggle`}
             id="simulated-error-toggle"
@@ -136,40 +144,74 @@ const Template = ({ ...args }) => {
         title="Empty"
         secondaryLabel="Optional"
         description="Empty step for demonstration purposes"
+        hasForm={false}
       />
       <CreateFullPageStep
+        className={`${storyClass}__step-fieldset--no-label`}
         title="Core configuration"
-        description="Here is an example description for the 'Core configuration' step.">
+        description="Here is an example description for the 'Core configuration' step."
+        secondaryLabel="Optional"
+        formLegendText="Core configuration">
         <TextInput
           id="input-2"
           invalidText="A valid value is required"
-          labelText="Topic name"
+          labelText="Topic name (optional)"
           placeholder="Enter topic name"
         />
         <NumberInput
           id="tj-input-3"
           invalidText="Number is not valid"
-          label="Number input label"
+          label="Number input label (optional)"
           max={100}
           min={0}
           step={10}
-          value={50}
+          value={0}
         />
         <NumberInput
           id="tj-input-4"
           invalidText="Number is not valid"
-          label="Number input label"
+          label="Number input label (optional"
           max={100}
           min={0}
           step={10}
-          value={50}
+          value={0}
         />
         <TextInput
           id="input-5"
           invalidText="A valid value is required"
-          labelText="Minimum in-sync replicas"
+          labelText="Minimum in-sync replicas (optional)"
           placeholder="Enter topic name"
         />
+      </CreateFullPageStep>
+      <CreateFullPageStep
+        title="Message retention"
+        subtitle="This is how many copies of a topic will be made for high availability"
+        description="The partitions of each topic can be replicated across a configurable number of brokers."
+        formLegendText="Replicas">
+        <div>
+          <RadioButtonGroup
+            defaultSelected="standard"
+            legend="Group Legend"
+            name="radio-button-group"
+            valueSelected="standard"
+            orientation="vertical">
+            <RadioButton
+              id="radio-1"
+              labelText="Replication factor: 1"
+              value="standard"
+            />
+            <RadioButton
+              id="radio-2"
+              labelText="Replication factor: 2"
+              value="default-selected"
+            />
+            <RadioButton
+              id="radio-3"
+              labelText="Replication factor: 3"
+              value="disabled"
+            />
+          </RadioButtonGroup>
+        </div>
       </CreateFullPageStep>
     </CreateFullPage>
   );
@@ -207,7 +249,9 @@ const TemplateWithSections = ({ ...args }) => {
           });
         }}
         disableSubmit={!textInput}>
-        <fieldset className={`${storyClass}__step-fieldset`}>
+        <FormGroup
+          className={`${storyClass}__step-fieldset ${storyClass}__step-fieldset--label`}
+          legendText="Partition">
           <TextInput
             id="test1"
             invalidText="A valid value is required"
@@ -232,12 +276,17 @@ const TemplateWithSections = ({ ...args }) => {
             />
           )}
           <div>
-            <TooltipIcon
-              className={`${storyClass}__tooltip`}
-              direction="top"
-              tooltipText="Once toggled on, an inline error notification will appear upon clicking 'next'. This is an example usage of how to prevent the next step if some kind of error occurred during the `onNext` handler.">
-              <Information16 />
-            </TooltipIcon>
+            <Tooltip
+              triggerClassName={`${storyClass}__tooltip`}
+              direction="right"
+              tabIndex={0}>
+              <p>
+                Once toggled on, an inline error notification will appear upon
+                clicking next. This is an example usage of how to prevent the
+                next step if some kind of error occurred during the `onNext`
+                handler.
+              </p>
+            </Tooltip>
             <Toggle
               className={`${storyClass}__error--toggle`}
               id="simulated-error-toggle"
@@ -246,9 +295,11 @@ const TemplateWithSections = ({ ...args }) => {
               onToggle={(event) => setShouldReject(event)}
             />
           </div>
-        </fieldset>
+        </FormGroup>
         <span className={`${storyClass}__section-divider`} />
-        <fieldset className={`${storyClass}__step-fieldset`}>
+        <FormGroup
+          className={`${storyClass}__step-fieldset ${storyClass}__step-fieldset--label`}
+          legendText="Core configuration">
           <h4 className={`${storyClass}__step-title`}>Core configuration</h4>
           <h6 className={`${storyClass}__step-subtitle`}>
             This is how long messages are retained before they are deleted.
@@ -260,40 +311,65 @@ const TemplateWithSections = ({ ...args }) => {
           <TextInput
             id="input-2"
             invalidText="A valid value is required"
-            labelText="Topic name"
+            labelText="Topic name (optional)"
             placeholder="Enter topic name"
           />
           <NumberInput
             id="tj-input-3"
             invalidText="Number is not valid"
-            label="Number input label"
+            label="Number input label (optional)"
             max={100}
             min={0}
             step={10}
-            value={50}
+            value={0}
           />
           <NumberInput
             id="tj-input-4"
             invalidText="Number is not valid"
-            label="Number input label"
+            label="Number input label (optional"
             max={100}
             min={0}
             step={10}
-            value={50}
+            value={0}
           />
           <TextInput
             id="input-5"
             invalidText="A valid value is required"
-            labelText="Minimum in-sync replicas"
+            labelText="Minimum in-sync replicas (optional)"
             placeholder="Enter topic name"
           />
-        </fieldset>
+        </FormGroup>
       </CreateFullPageStep>
       <CreateFullPageStep
-        title="Empty"
-        secondaryLabel="Optional"
-        description="Empty step for demonstration purposes"
-      />
+        title="Message retention"
+        subtitle="This is how many copies of a topic will be made for high availability"
+        description="The partitions of each topic can be replicated across a configurable number of brokers."
+        formLegendText="Replicas">
+        <div>
+          <RadioButtonGroup
+            defaultSelected="standard"
+            legend="Group Legend"
+            name="radio-button-group"
+            valueSelected="standard"
+            orientation="vertical">
+            <RadioButton
+              id="radio-1"
+              labelText="Replication factor: 1"
+              value="standard"
+            />
+            <RadioButton
+              id="radio-2"
+              labelText="Replication factor: 2"
+              value="default-selected"
+            />
+            <RadioButton
+              id="radio-3"
+              labelText="Replication factor: 3"
+              value="disabled"
+            />
+          </RadioButtonGroup>
+        </div>
+      </CreateFullPageStep>
     </CreateFullPage>
   );
 };

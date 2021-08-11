@@ -66,6 +66,10 @@
     margin-bottom: $spacing-06;
   }
 
+  .#{$block-class} .#{$carbon-prefix}--fieldset {
+    margin-bottom: 0;
+  }
+
   .#{$block-class} .#{$block-class}__step-fieldset > * {
     margin-bottom: $spacing-05;
   }

@@ -33,25 +33,6 @@ import { useCreateComponentStepChange } from '../../global/js/use/useCreateCompo
 const blockClass = `${pkg.prefix}--create-full-page`;
 const componentName = 'CreateFullPage';
 
-// Custom PropType validator which checks and ensures that the children property has no more than 4 nodes
-const isValidChildren =
-  () =>
-  ({ children }) => {
-    children.length > 1 &&
-      children.map((child) => {
-        if (
-          child &&
-          child.props &&
-          child.props.type !== CREATE_FULL_PAGE_STEP
-        ) {
-          throw new Error(
-            'Each child of Create Full Page is required to be a `CreateFullPageStep`. Please remove the HTML element, or wrap it around the `CreateFullPageStep` component.'
-          );
-        }
-        return;
-      });
-  };
-
 export let CreateFullPage = React.forwardRef(
   (
     {
@@ -553,7 +534,7 @@ CreateFullPage.propTypes = {
   /**
    * The main content of the full page
    */
-  children: isValidChildren(),
+  children: PropTypes.node,
 
   /**
    * Provide an optional class to be applied to the containing node.

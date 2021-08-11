@@ -5,35 +5,23 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// Standard imports.
 @import '@carbon/import-once/scss/import-once';
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
+
+// CreateTearsheet uses the following Carbon components:
+// ProgressIndicator, ProgressStep, Toggle, SideNav, SideNavItems, SideNavLink
 @import 'carbon-components/scss/components/progress-indicator/progress-indicator';
+@import 'carbon-components/scss/components/toggle/toggle';
+@import 'carbon-components/scss/components/ui-shell/side-nav';
+
+// CreateTearsheet uses the following Cloud & Cognitive components:
+// TearsheetShell
+@import '../Tearsheet/tearsheet';
+@import '../CreateInfluencer/index';
 
 @mixin create-tearsheet {
-  $influencerAnimationStart: calc(-1 * #{$spacing-05});
-  @keyframes influencerMenuEntrance {
-    0% {
-      opacity: 0;
-      // stylelint-disable-next-line carbon/layout-token-use
-      transform: translateX($influencerAnimationStart);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-  @keyframes influencerMenuExit {
-    0% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    100% {
-      opacity: 0;
-      // stylelint-disable-next-line carbon/layout-token-use
-      transform: translateX($influencerAnimationStart);
-    }
-  }
   @keyframes stepContentEntrance {
     0% {
       opacity: 0;
@@ -76,26 +64,10 @@
     }
   }
 
-  .#{$block-class} .#{$block-class}__multi-step-panel-content {
+  .#{$block-class} .#{$block-class}__content {
     height: 100%;
     padding: $spacing-06;
     overflow-x: hidden;
-  }
-
-  .#{$block-class} .#{$pkg-prefix}--tearsheet__influencer {
-    display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: 1fr auto;
-  }
-
-  .#{$block-class} .#{$block-class}__left-nav {
-    grid-column: 1 / -1;
-    grid-row: 1 / -1;
-    overflow-y: auto;
-  }
-
-  .#{$block-class} .#{$block-class}__progress-indicator {
-    padding: $spacing-06;
   }
 
   .#{$block-class} .#{$block-class}__step--heading {
@@ -112,12 +84,6 @@
     box-shadow: -0.0625rem 0 0 0 $button-separator;
   }
 
-  .#{$block-class} .#{$block-class}__view-all-toggle {
-    padding: $spacing-06;
-    grid-column: 1 / -1;
-    grid-row: -1 / -1;
-  }
-
   .#{$block-class} .#{$carbon-prefix}--side-nav--ux {
     position: initial;
     background-color: transparent;
@@ -131,32 +97,6 @@
     margin: $spacing-06 calc(-1 * #{$spacing-08}) $spacing-07
       calc(-1 * #{$spacing-06});
     background-color: $ui-03;
-  }
-
-  .#{$block-class}__side-nav-opening,
-  .#{$block-class}__progress-indicator-opening {
-    // stylelint-disable-next-line carbon/motion-token-use
-    animation: influencerMenuEntrance $duration--moderate-02 1;
-    animation-fill-mode: forwards;
-    @include carbon--motion(entrance, productive);
-  }
-
-  .#{$block-class}__side-nav-closing,
-  .#{$block-class}__progress-indicator-closing {
-    // stylelint-disable-next-line carbon/motion-token-use
-    animation: influencerMenuExit $duration--moderate-02 1;
-    animation-fill-mode: forwards;
-    @include carbon--motion(exit, productive);
-  }
-
-  @media (prefers-reduced-motion) {
-    .#{$block-class}__side-nav-opening,
-    .#{$block-class}__progress-indicator-opening,
-    .#{$block-class}__side-nav-closing,
-    .#{$block-class}__progress-indicator-closing {
-      animation: none;
-      opacity: 1;
-    }
   }
 }
 

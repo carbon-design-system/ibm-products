@@ -53,6 +53,7 @@
     "upgrade:manual": "sh ./scripts/monorepo-npm-upgrade.sh"
   },
   "devDependencies": {
+    "@carbon/bundler": "^10.11.0",
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
     "@testing-library/dom": "^8.1.0",

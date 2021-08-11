@@ -5,16 +5,25 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// Standard imports.
 @import '@carbon/import-once/scss/import-once';
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
+
+// Other Carbon settings.
 @import '@carbon/themes/scss/themes';
 @import '@carbon/colors/scss/colors';
-@import '@carbon/motion/scss/motion.scss';
+@import '@carbon/motion/scss/motion';
 
+// NotificationsPanel uses the following Carbon components:
+// Button, Link, Toggle
 @import 'carbon-components/scss/components/button/button';
 @import 'carbon-components/scss/components/link/link';
 @import 'carbon-components/scss/components/toggle/toggle';
+
+// NotificationsPanel uses the following Cloud & Cognitive components:
+// NotificationsEmptyState
+@import '../EmptyStates/empty-state';
 
 @mixin notifications-panel {
   $block-class: #{$pkg-prefix}--notifications-panel;

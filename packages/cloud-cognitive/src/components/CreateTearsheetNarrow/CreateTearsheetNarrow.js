@@ -75,7 +75,10 @@ export let CreateTearsheetNarrow = React.forwardRef(
         actions={actions}
         open={open}
         ref={ref}
-        onClose={onRequestClose}
+        onClose={() => {
+          onRequestClose?.();
+          return false;
+        }}
         label={label}
         selectorPrimaryFocus={selectorPrimaryFocus}
         verticalPosition={verticalPosition}

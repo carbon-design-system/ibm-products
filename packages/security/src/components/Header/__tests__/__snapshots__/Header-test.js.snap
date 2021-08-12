@@ -1,7 +1,307 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Header Render Props tests should render labels by render prop 1`] = `ShallowWrapper {}`;
+exports[`Header Render Props tests should render labels by render prop 1`] = `
+<div
+  id="render-prop-output"
+>
+  <a
+    href="/sign/in/link"
+  >
+    Sign in
+  </a>
+  <a
+    href="/some/link"
+  >
+    Create an account
+  </a>
+</div>
+`;
 
-exports[`Header Render Props tests should render login and signup buttons via a render prop 1`] = `ShallowWrapper {}`;
+exports[`Header Render Props tests should render login and signup buttons via a render prop 1`] = `
+<div
+  id="render-prop-output"
+>
+  <a
+    href="./#"
+    id="login-link"
+  >
+    Login
+  </a>
+  <a
+    href="./#"
+    id="signup-link"
+  >
+    Signup
+  </a>
+</div>
+`;
 
-exports[`Header Rendering renders correctly 1`] = `ReactWrapper {}`;
+exports[`Header Rendering renders correctly 1`] = `
+<Header
+  accounts={
+    Array [
+      Object {
+        "id": "0",
+        "name": "Company 1",
+      },
+      Object {
+        "id": "1",
+        "name": "Company 2",
+      },
+      Object {
+        "id": "2",
+        "name": "Company 3",
+      },
+    ]
+  }
+  className="class"
+  labels={
+    Object {
+      "brand": Object {
+        "company": "IBM",
+        "domain": "Security",
+        "product": "Application",
+      },
+      "notifications": Object {
+        "button": "Toggle notifications",
+        "clear": "Clear",
+        "clear_all": "Clear all notifications",
+        "link": "View all",
+        "success": "You're all caught up!",
+        "title": "Notifications",
+        "today": "Today",
+        "via": "via",
+      },
+      "profile": Object {
+        "account": "Account",
+        "button": "Toggle profile",
+        "edit_profile": "Edit profile",
+        "link": "Profile & account",
+        "registration": "Create an account",
+        "sign_in": "Sign in",
+        "sign_out": "Sign out",
+      },
+    }
+  }
+  links={
+    Object {
+      "edit_profile": "#",
+      "notifications_preferences": "#",
+      "notifications_view_all": "#",
+      "product": "#",
+      "profile": "#",
+      "registration": "#",
+      "sign_in": "#",
+      "sign_out": "#",
+    }
+  }
+  notifications={
+    Array [
+      Object {
+        "datetime": "Fri Dec 21 2018 18:57:08 GMT-0600 (Central Standard Time)",
+        "description": "A new request requires approval.",
+        "href": "#",
+        "id": "notification__0",
+        "label": "11min ago",
+        "product": "Application 3",
+      },
+      Object {
+        "datetime": "Wed May 01 2019 22:22:52 GMT-0500 (Central Daylight Time)",
+        "description": "There have been 17 failed sign-ins in the last 3 days.",
+        "href": "#",
+        "id": "notification__1",
+        "label": "1hr ago",
+        "product": "Application 2",
+      },
+      Object {
+        "datetime": "Fri Jul 06 2018 00:17:49 GMT-0500 (Central Daylight Time)",
+        "description": "There are 3 unread messages in the queue.",
+        "href": "#",
+        "id": "notification__2",
+        "label": "3hrs ago",
+        "product": "Application 3",
+      },
+      Object {
+        "datetime": "Sun Apr 14 2019 20:32:17 GMT-0500 (Central Daylight Time)",
+        "description": "Review the results of the latest scan.",
+        "href": "#",
+        "id": "notification__3",
+        "label": "3hrs ago",
+        "product": "Application 3",
+      },
+      Object {
+        "datetime": "Sat Oct 20 2018 19:07:04 GMT-0500 (Central Daylight Time)",
+        "description": "A new administrator has been added to your account.",
+        "href": "#",
+        "id": "notification__4",
+        "label": "4hrs ago",
+        "product": "Application 1",
+      },
+      Object {
+        "datetime": "Tue Dec 25 2018 18:14:28 GMT-0600 (Central Standard Time)",
+        "description": "There are 5 items that require your review.",
+        "href": "#",
+        "id": "notification__5",
+        "label": "5hrs ago",
+        "product": "Application 2",
+      },
+      Object {
+        "datetime": "Tue Nov 25 2018 18:14:28 GMT-0600 (Central Standard Time)",
+        "description": "There are 103 threats found in the last scan. Please click to see the details.",
+        "href": "#",
+        "id": "notification__7",
+        "label": "10hrs ago",
+        "product": "Application 2",
+      },
+      Object {
+        "datetime": "Tue Oct 25 2018 18:14:28 GMT-0600 (Central Standard Time)",
+        "description": "There are 3 ongoing attacks. Please click to take actions immediately.",
+        "href": "#",
+        "id": "notification__8",
+        "label": "24hrs ago",
+        "product": "Application 2",
+      },
+    ]
+  }
+  onNotificationClear={[MockFunction]}
+  profile={null}
+  renderLoginAndSignup={[Function]}
+  showEditProfile={true}
+  showNotifications={true}
+  totalNotifications={307}
+>
+  <div
+    className="security--header__container class"
+  >
+    <header
+      className="security--header"
+      role="banner"
+    >
+      <Link
+        className="security--header__link"
+        href="#"
+      >
+        <a
+          className="bx--link security--header__link"
+          href="#"
+          rel={null}
+        >
+          IBM 
+          <span
+            className="security--header__link__title--domain"
+          >
+            Security 
+          </span>
+          <span
+            className="security--header__link__title--product"
+          >
+            Application
+          </span>
+        </a>
+      </Link>
+      <ul
+        className="security--header__group  false"
+      >
+        <HeaderListItem
+          className=""
+        >
+          <li
+            className="security--header__list__item"
+          >
+            <Button
+              dangerDescription="danger"
+              disabled={false}
+              href="#"
+              isExpressive={false}
+              kind="primary"
+              largeText={null}
+              loading={false}
+              size="default"
+              tabIndex={0}
+              tooltipAlignment="center"
+              tooltipPosition="top"
+              type="button"
+            >
+              <Button
+                className=""
+                dangerDescription="danger"
+                disabled={false}
+                href="#"
+                isExpressive={false}
+                kind="primary"
+                size="default"
+                tabIndex={0}
+                tooltipAlignment="center"
+                tooltipPosition="top"
+                type="button"
+              >
+                <a
+                  className="bx--btn bx--btn--primary"
+                  href="#"
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onFocus={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                  tabIndex={0}
+                >
+                  Create an account
+                </a>
+              </Button>
+            </Button>
+          </li>
+        </HeaderListItem>
+        <HeaderListItem
+          className=""
+        >
+          <li
+            className="security--header__list__item"
+          >
+            <Button
+              dangerDescription="danger"
+              disabled={false}
+              href="#"
+              isExpressive={false}
+              kind="secondary"
+              largeText={null}
+              loading={false}
+              size="default"
+              tabIndex={0}
+              tooltipAlignment="center"
+              tooltipPosition="top"
+              type="button"
+            >
+              <Button
+                className=""
+                dangerDescription="danger"
+                disabled={false}
+                href="#"
+                isExpressive={false}
+                kind="secondary"
+                size="default"
+                tabIndex={0}
+                tooltipAlignment="center"
+                tooltipPosition="top"
+                type="button"
+              >
+                <a
+                  className="bx--btn bx--btn--secondary"
+                  href="#"
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onFocus={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                  tabIndex={0}
+                >
+                  Sign in
+                </a>
+              </Button>
+            </Button>
+          </li>
+        </HeaderListItem>
+      </ul>
+    </header>
+  </div>
+</Header>
+`;

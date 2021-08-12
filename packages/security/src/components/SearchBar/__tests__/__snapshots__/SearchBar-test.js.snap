@@ -1,13 +1,332 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SearchBar Rendering disables the submit button with no selected scopes 1`] = `ShallowWrapper {}`;
+exports[`SearchBar Rendering disables the submit button with no selected scopes 1`] = `
+<form
+  className="security--search-bar security--search-bar--hide-scopes-label"
+  onSubmit={[Function]}
+>
+  <MultiSelect
+    className="security--search-bar__scopes"
+    clearSelectionDescription="Total items selected: "
+    clearSelectionText="To clear selection, press Delete or Backspace,"
+    compareItems={[Function]}
+    direction="bottom"
+    disabled={false}
+    id="security--search-bar__multi-select"
+    initialSelectedItems={Array []}
+    itemToString={[Function]}
+    items={
+      Array [
+        Object {
+          "id": "scope-2",
+          "name": "Scope 2",
+        },
+        Object {
+          "id": "scope-1",
+          "name": "Scope 1",
+        },
+        Object {
+          "id": "scope-3",
+          "name": "Scope 3",
+        },
+      ]
+    }
+    label="Scopes"
+    light={false}
+    locale="en"
+    name="search-scopes"
+    onChange={[Function]}
+    open={false}
+    selectionFeedback="top-after-reopen"
+    sortItems={[Function]}
+    title={false}
+    titleText="Scopes multiselect"
+    type="default"
+  />
+  <Search
+    className="security--search-bar__input"
+    closeButtonLabelText="Clear"
+    labelText="Label"
+    name="search-input"
+    onChange={[Function]}
+    placeholder="Placeholder"
+    type="text"
+    value=""
+  />
+  <Button
+    className="security--search-bar__submit"
+    dangerDescription="danger"
+    disabled={true}
+    isExpressive={false}
+    kind="primary"
+    largeText={null}
+    loading={false}
+    name="search-submit"
+    size="default"
+    tabIndex={0}
+    tooltipAlignment="center"
+    tooltipPosition="top"
+    type="submit"
+  >
+    Submit
+  </Button>
+</form>
+`;
 
-exports[`SearchBar Rendering disables the submit button with no value 1`] = `ShallowWrapper {}`;
+exports[`SearchBar Rendering disables the submit button with no value 1`] = `
+<form
+  className="security--search-bar security--search-bar--hide-scopes-label"
+  onSubmit={[Function]}
+>
+  <Search
+    className="security--search-bar__input"
+    closeButtonLabelText="Clear"
+    labelText="Label"
+    name="search-input"
+    onChange={[Function]}
+    placeholder="Placeholder"
+    type="text"
+    value={null}
+  />
+  <Button
+    className="security--search-bar__submit"
+    dangerDescription="danger"
+    disabled={true}
+    isExpressive={false}
+    kind="primary"
+    largeText={null}
+    loading={false}
+    name="search-submit"
+    size="default"
+    tabIndex={0}
+    tooltipAlignment="center"
+    tooltipPosition="top"
+    type="submit"
+  >
+    Submit
+  </Button>
+</form>
+`;
 
-exports[`SearchBar Rendering renders 1`] = `ShallowWrapper {}`;
+exports[`SearchBar Rendering renders 1`] = `
+<form
+  className="security--search-bar security--search-bar--hide-scopes-label"
+  onSubmit={[Function]}
+>
+  <Search
+    className="security--search-bar__input"
+    closeButtonLabelText="Clear"
+    labelText="Label"
+    name="search-input"
+    onChange={[Function]}
+    placeholder="Placeholder"
+    type="text"
+    value=""
+  />
+  <Button
+    className="security--search-bar__submit"
+    dangerDescription="danger"
+    disabled={true}
+    isExpressive={false}
+    kind="primary"
+    largeText={null}
+    loading={false}
+    name="search-submit"
+    size="default"
+    tabIndex={0}
+    tooltipAlignment="center"
+    tooltipPosition="top"
+    type="submit"
+  >
+    Submit
+  </Button>
+</form>
+`;
 
-exports[`SearchBar Rendering renders an initial value 1`] = `ShallowWrapper {}`;
+exports[`SearchBar Rendering renders an initial value 1`] = `
+<form
+  className="security--search-bar security--search-bar--hide-scopes-label"
+  onSubmit={[Function]}
+>
+  <Search
+    className="security--search-bar__input"
+    closeButtonLabelText="Clear"
+    labelText="Label"
+    name="search-input"
+    onChange={[Function]}
+    placeholder="Placeholder"
+    type="text"
+    value="Initial value"
+  />
+  <Button
+    className="security--search-bar__submit"
+    dangerDescription="danger"
+    disabled={false}
+    isExpressive={false}
+    kind="primary"
+    largeText={null}
+    loading={false}
+    name="search-submit"
+    size="default"
+    tabIndex={0}
+    tooltipAlignment="center"
+    tooltipPosition="top"
+    type="submit"
+  >
+    Submit
+  </Button>
+</form>
+`;
 
-exports[`SearchBar Rendering renders scopes 1`] = `ShallowWrapper {}`;
+exports[`SearchBar Rendering renders scopes 1`] = `
+<form
+  className="security--search-bar security--search-bar--hide-scopes-label"
+  onSubmit={[Function]}
+>
+  <MultiSelect
+    className="security--search-bar__scopes"
+    clearSelectionDescription="Total items selected: "
+    clearSelectionText="To clear selection, press Delete or Backspace,"
+    compareItems={[Function]}
+    direction="bottom"
+    disabled={false}
+    id="security--search-bar__multi-select"
+    initialSelectedItems={Array []}
+    itemToString={[Function]}
+    items={
+      Array [
+        Object {
+          "id": "scope-2",
+          "name": "Scope 2",
+        },
+        Object {
+          "id": "scope-1",
+          "name": "Scope 1",
+        },
+        Object {
+          "id": "scope-3",
+          "name": "Scope 3",
+        },
+      ]
+    }
+    label="Scopes"
+    light={false}
+    locale="en"
+    name="search-scopes"
+    onChange={[Function]}
+    open={false}
+    selectionFeedback="top-after-reopen"
+    sortItems={[Function]}
+    title={false}
+    titleText="Scopes multiselect"
+    type="default"
+  />
+  <Search
+    className="security--search-bar__input"
+    closeButtonLabelText="Clear"
+    labelText="Label"
+    name="search-input"
+    onChange={[Function]}
+    placeholder="Placeholder"
+    type="text"
+    value=""
+  />
+  <Button
+    className="security--search-bar__submit"
+    dangerDescription="danger"
+    disabled={true}
+    isExpressive={false}
+    kind="primary"
+    largeText={null}
+    loading={false}
+    name="search-submit"
+    size="default"
+    tabIndex={0}
+    tooltipAlignment="center"
+    tooltipPosition="top"
+    type="submit"
+  >
+    Submit
+  </Button>
+</form>
+`;
 
-exports[`SearchBar Rendering renders selected scopes 1`] = `ShallowWrapper {}`;
+exports[`SearchBar Rendering renders selected scopes 1`] = `
+<form
+  className="security--search-bar security--search-bar--hide-scopes-label"
+  onSubmit={[Function]}
+>
+  <MultiSelect
+    className="security--search-bar__scopes"
+    clearSelectionDescription="Total items selected: "
+    clearSelectionText="To clear selection, press Delete or Backspace,"
+    compareItems={[Function]}
+    direction="bottom"
+    disabled={false}
+    id="security--search-bar__multi-select"
+    initialSelectedItems={
+      Array [
+        Object {
+          "id": "scope-2",
+          "name": "Scope 2",
+        },
+      ]
+    }
+    itemToString={[Function]}
+    items={
+      Array [
+        Object {
+          "id": "scope-2",
+          "name": "Scope 2",
+        },
+        Object {
+          "id": "scope-1",
+          "name": "Scope 1",
+        },
+        Object {
+          "id": "scope-3",
+          "name": "Scope 3",
+        },
+      ]
+    }
+    label="Scopes"
+    light={false}
+    locale="en"
+    name="search-scopes"
+    onChange={[Function]}
+    open={false}
+    selectionFeedback="top-after-reopen"
+    sortItems={[Function]}
+    title={false}
+    titleText="Scopes multiselect"
+    type="default"
+  />
+  <Search
+    className="security--search-bar__input"
+    closeButtonLabelText="Clear"
+    labelText="Label"
+    name="search-input"
+    onChange={[Function]}
+    placeholder="Placeholder"
+    type="text"
+    value=""
+  />
+  <Button
+    className="security--search-bar__submit"
+    dangerDescription="danger"
+    disabled={true}
+    isExpressive={false}
+    kind="primary"
+    largeText={null}
+    loading={false}
+    name="search-submit"
+    size="default"
+    tabIndex={0}
+    tooltipAlignment="center"
+    tooltipPosition="top"
+    type="submit"
+  >
+    Submit
+  </Button>
+</form>
+`;

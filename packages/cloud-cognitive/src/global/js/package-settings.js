@@ -13,7 +13,6 @@ const defaults = {
     // reviewed and released components:
     AboutModal: true,
     APIKeyModal: true,
-    Card: true,
     CreateModal: true,
     EmptyState: true,
     ErrorEmptyState: true,

@@ -2757,6 +2757,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --exp--side-panel--subtitle-opacity: 1;
   --exp--side-panel--title-container-height: 0;
   --exp--side-panel--subtitle-container-height: 0;
+  --exp--side-panel--action-bar-container-height: 0;
   --exp--side-panel--divider-opacity: 0;
   --exp--side-panel--title-y-position: 0;
   --exp--side-panel--content-bottom-padding: var(--cds-spacing-10, 4rem);
@@ -3056,9 +3057,16 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   height: var(--exp--side-panel--title-container-height);
 }
 
-.exp--side-panel__container .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation.exp--side-panel__subtitle-text-no-animation-no-action-toolbar
-+ .exp--side-panel__body-content {
-  margin-top: calc( var(--exp--side-panel--title-container-height) + var(--exp--side-panel--subtitle-container-height) + var(--cds-spacing-05, 1rem));
+.exp--side-panel__container .exp--side-panel__inner-content {
+  overflow: auto;
+  height: calc(100vh - 3rem);
+  margin-top: calc( var(--exp--side-panel--title-container-height) + var(--exp--side-panel--subtitle-container-height) + var(--exp--side-panel--action-bar-container-height));
+  overflow-x: hidden;
+}
+
+.exp--side-panel__container .exp--side-panel__inner-content.exp--side-panel__static-inner-content {
+  height: calc( 100vh - calc( var(--exp--side-panel--title-container-height) + var(--exp--side-panel--subtitle-container-height) + var(--exp--side-panel--action-bar-container-height) ) + (calc(-1 * (var(--cds-spacing-09, 3rem) + var(--cds-spacing-10, 4rem)))));
+  padding-top: var(--cds-spacing-05, 1rem);
 }
 
 .exp--side-panel__container .exp--side-panel__action-toolbar.exp--side-panel__action-toolbar-no-animation {
@@ -3143,10 +3151,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   padding: var(--cds-spacing-05, 1rem);
   padding-top: 0;
   padding-bottom: var(--exp--side-panel--content-bottom-padding);
-}
-
-.exp--side-panel__container .exp--side-panel__inner-content {
-  height: calc(100vh - 3rem);
 }
 
 .exp--side-panel__container .exp--side-panel__actions-container {

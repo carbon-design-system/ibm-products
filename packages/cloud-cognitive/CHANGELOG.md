@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.68.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.68.1...@carbon/ibm-cloud-cognitive@0.68.2) (2021-08-12)
+
+
+### Bug Fixes
+
+* **CreateModal:** ensure closing the modal calls onRequestClose handler ([#1147](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1147)) ([73cd1a4](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/73cd1a4e99d6ad5da326b0509f115268b5696a55))
+
+
+
+
+
 ## [0.68.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.68.0...@carbon/ibm-cloud-cognitive@0.68.1) (2021-08-11)
 
 

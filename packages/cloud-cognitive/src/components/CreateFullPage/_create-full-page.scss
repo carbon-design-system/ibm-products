@@ -81,7 +81,6 @@
   .#{$block-class} {
     display: flex;
     height: 100vh;
-    flex-grow: 1;
     padding: 0;
     margin: 0;
   }
@@ -129,7 +128,7 @@
   .#{$block-class} .#{$block-class}__section-divider {
     position: relative;
     display: block;
-    width: calc(100vw - 16rem);
+    width: calc(100vw - calc(16rem + 1px));
     height: 1px;
     margin: $spacing-07 calc(-1 * #{$spacing-08}) $spacing-07
       calc(-1 * #{$spacing-08});

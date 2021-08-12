@@ -72,7 +72,7 @@ $story-class: 'create-full-page-stories';
 .#{$story-class}__section-divider {
   position: relative;
   display: block;
-  width: calc(100vw - 16rem);
+  width: calc(100vw - calc(16rem + 1px));
   height: 1px;
   margin: $spacing-07 calc(-1 * #{$spacing-08}) $spacing-07
     calc(-1 * #{$spacing-08});

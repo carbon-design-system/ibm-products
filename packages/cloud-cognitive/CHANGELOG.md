@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.69.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.69.3...@carbon/ibm-cloud-cognitive@0.69.4) (2021-08-12)
+
+
+### Bug Fixes
+
+* **CreateSidePanel:** design fixes and side panel header/scrolling work ([#1141](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1141)) ([be67abc](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/be67abc89964816d447d3f0c24cbc0fcbaf61c6f))
+
+
+
+
+
 ## [0.69.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.69.2...@carbon/ibm-cloud-cognitive@0.69.3) (2021-08-12)
 
 

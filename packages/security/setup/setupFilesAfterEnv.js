@@ -5,10 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { configure } from '@testing-library/dom';
-
-configure({ testIdAttribute: 'data-testid' });
-
 const { fn } = jest;
 
 window.ResizeObserver = fn().mockImplementation(() => ({

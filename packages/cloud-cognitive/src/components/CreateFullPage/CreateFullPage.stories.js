@@ -170,7 +170,7 @@ const Template = ({ ...args }) => {
         <NumberInput
           id="tj-input-4"
           invalidText="Number is not valid"
-          label="Number input label (optional"
+          label="Number input label (optional)"
           max={100}
           min={0}
           step={10}

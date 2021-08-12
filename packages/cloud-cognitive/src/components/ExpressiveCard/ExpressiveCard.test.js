@@ -10,11 +10,17 @@ import React from 'react';
 
 import { ExpressiveCard } from '.';
 
-const { name } = ExpressiveCard;
+const componentName = ExpressiveCard.displayName;
 
-describe(name, () => {
+describe(componentName, () => {
   it('renders', () => {
     render(<ExpressiveCard />);
+  });
+
+  it('has no accessibility violations', async () => {
+    const { container } = render(<ExpressiveCard />);
+    await expect(container).toBeAccessible(componentName);
+    await expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', () => {

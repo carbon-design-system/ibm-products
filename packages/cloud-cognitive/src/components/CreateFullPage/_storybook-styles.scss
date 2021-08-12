@@ -20,7 +20,7 @@ $story-class: 'create-full-page-stories';
   overflow-y: auto;
 }
 
-.#{$story-class}__step-fieldset--no-label .bx--label legend {
+.#{$story-class}__step-fieldset--no-label .#{$carbon-prefix}--fieldset legend {
   position: absolute;
   overflow: hidden;
   width: 1px;

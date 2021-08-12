@@ -197,9 +197,6 @@ export let Card = forwardRef(
   }
 );
 
-// Return a placeholder if not released and not enabled by feature flag
-Card = pkg.checkComponentEnabled(Card, componentName);
-
 Card.propTypes = {
   actionIcons: PropTypes.arrayOf(
     PropTypes.shape({

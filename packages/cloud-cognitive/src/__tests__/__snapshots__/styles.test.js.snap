@@ -120,19 +120,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* Stroke animations */
 @keyframes init-stroke {
   0% {
-    stroke-dashoffset: 276.4608;
+    stroke-dashoffset: 240;
   }
   100% {
-    stroke-dashoffset: 52.52755;
+    stroke-dashoffset: 16;
   }
 }
 
 @keyframes stroke-end {
   0% {
-    stroke-dashoffset: 52.52755;
+    stroke-dashoffset: 16;
   }
   100% {
-    stroke-dashoffset: 276.4608;
+    stroke-dashoffset: 240;
   }
 }
 
@@ -206,19 +206,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* Stroke animations */
 @keyframes init-stroke {
   0% {
-    stroke-dashoffset: 276.4608;
+    stroke-dashoffset: 240;
   }
   100% {
-    stroke-dashoffset: 52.52755;
+    stroke-dashoffset: 16;
   }
 }
 
 @keyframes stroke-end {
   0% {
-    stroke-dashoffset: 52.52755;
+    stroke-dashoffset: 16;
   }
   100% {
-    stroke-dashoffset: 276.4608;
+    stroke-dashoffset: 240;
   }
 }
 
@@ -444,19 +444,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* Stroke animations */
 @keyframes init-stroke {
   0% {
-    stroke-dashoffset: 276.4608;
+    stroke-dashoffset: 240;
   }
   100% {
-    stroke-dashoffset: 52.52755;
+    stroke-dashoffset: 16;
   }
 }
 
 @keyframes stroke-end {
   0% {
-    stroke-dashoffset: 52.52755;
+    stroke-dashoffset: 16;
   }
   100% {
-    stroke-dashoffset: 276.4608;
+    stroke-dashoffset: 240;
   }
 }
 
@@ -598,6 +598,13 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   padding-left: var(--cds-spacing-05, 1rem);
 }
 
+.exp--card__title {
+  font-size: var(--cds-productive-heading-03-font-size, 1.25rem);
+  font-weight: var(--cds-productive-heading-03-font-weight, 400);
+  line-height: var(--cds-productive-heading-03-line-height, 1.4);
+  letter-spacing: var(--cds-productive-heading-03-letter-spacing, 0);
+}
+
 .exp--http-errors .exp--http-errors__content {
   position: fixed;
   z-index: 2;
@@ -679,19 +686,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* Stroke animations */
 @keyframes init-stroke {
   0% {
-    stroke-dashoffset: 276.4608;
+    stroke-dashoffset: 240;
   }
   100% {
-    stroke-dashoffset: 52.52755;
+    stroke-dashoffset: 16;
   }
 }
 
 @keyframes stroke-end {
   0% {
-    stroke-dashoffset: 52.52755;
+    stroke-dashoffset: 16;
   }
   100% {
-    stroke-dashoffset: 276.4608;
+    stroke-dashoffset: 240;
   }
 }
 
@@ -2278,19 +2285,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* Stroke animations */
 @keyframes init-stroke {
   0% {
-    stroke-dashoffset: 276.4608;
+    stroke-dashoffset: 240;
   }
   100% {
-    stroke-dashoffset: 52.52755;
+    stroke-dashoffset: 16;
   }
 }
 
 @keyframes stroke-end {
   0% {
-    stroke-dashoffset: 52.52755;
+    stroke-dashoffset: 16;
   }
   100% {
-    stroke-dashoffset: 276.4608;
+    stroke-dashoffset: 240;
   }
 }
 
@@ -2347,19 +2354,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* Stroke animations */
 @keyframes init-stroke {
   0% {
-    stroke-dashoffset: 276.4608;
+    stroke-dashoffset: 240;
   }
   100% {
-    stroke-dashoffset: 52.52755;
+    stroke-dashoffset: 16;
   }
 }
 
 @keyframes stroke-end {
   0% {
-    stroke-dashoffset: 52.52755;
+    stroke-dashoffset: 16;
   }
   100% {
-    stroke-dashoffset: 276.4608;
+    stroke-dashoffset: 240;
   }
 }
 
@@ -3374,19 +3381,19 @@ path:nth-of-type(1),
 /* Stroke animations */
 @keyframes init-stroke {
   0% {
-    stroke-dashoffset: 276.4608;
+    stroke-dashoffset: 240;
   }
   100% {
-    stroke-dashoffset: 52.52755;
+    stroke-dashoffset: 16;
   }
 }
 
 @keyframes stroke-end {
   0% {
-    stroke-dashoffset: 52.52755;
+    stroke-dashoffset: 16;
   }
   100% {
-    stroke-dashoffset: 276.4608;
+    stroke-dashoffset: 240;
   }
 }
 

@@ -120,19 +120,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* Stroke animations */
 @keyframes init-stroke {
   0% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
   100% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
 }
 
 @keyframes stroke-end {
   0% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
   100% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
 }
 
@@ -206,19 +206,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* Stroke animations */
 @keyframes init-stroke {
   0% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
   100% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
 }
 
 @keyframes stroke-end {
   0% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
   100% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
 }
 
@@ -377,6 +377,361 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-bottom: 0;
 }
 
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-end-p1 {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-end-p2 {
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+/* Stroke animations */
+@keyframes init-stroke {
+  0% {
+    stroke-dashoffset: 276.4608;
+  }
+  100% {
+    stroke-dashoffset: 52.52755;
+  }
+}
+
+@keyframes stroke-end {
+  0% {
+    stroke-dashoffset: 52.52755;
+  }
+  100% {
+    stroke-dashoffset: 276.4608;
+  }
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.exp--tearsheet.exp--tearsheet {
+  z-index: 9001;
+  align-items: flex-end;
+  transition: visibility 0s linear 240ms, background-color 240ms cubic-bezier(0.4, 0.14, 1, 1), opacity 240ms cubic-bezier(0.4, 0.14, 1, 1);
+  --exp--tearsheet--stacking-scale-factor-single: 0.95;
+  --exp--tearsheet--stacking-scale-factor-double: 0.9;
+}
+
+.exp--tearsheet.is-visible {
+  z-index: 9000;
+  align-items: flex-end;
+  transition: visibility 0s linear, background-color 240ms cubic-bezier(0, 0, 0.3, 1), opacity 240ms cubic-bezier(0, 0, 0.3, 1);
+}
+
+.exp--tearsheet.exp--tearsheet--stacked-1-of-2 {
+  z-index: 8999;
+  background-color: rgba(22, 22, 22, 0.33);
+}
+
+.exp--tearsheet.exp--tearsheet--stacked-1-of-3 {
+  z-index: 8998;
+  background-color: rgba(22, 22, 22, 0.11);
+}
+
+.exp--tearsheet.exp--tearsheet--stacked-2-of-3 {
+  z-index: 8999;
+  background-color: rgba(22, 22, 22, 0.25);
+}
+
+.exp--tearsheet.exp--tearsheet--stacked-2-of-2,
+.exp--tearsheet.exp--tearsheet--stacked-3-of-3 {
+  background-color: rgba(22, 22, 22, 0.25);
+}
+
+.exp--tearsheet .exp--tearsheet__container {
+  top: auto;
+  height: 100%;
+  max-height: calc(100% - var(--cds-spacing-09, 3rem));
+  transform: translate3d(0, min(95vh, 500px), 0);
+}
+
+.exp--tearsheet.exp--tearsheet .exp--tearsheet__container {
+  transition: transform 240ms cubic-bezier(0, 0, 0.3, 1), max-height 240ms linear;
+}
+
+.exp--tearsheet.exp--tearsheet--stacked-2-of-2 .exp--tearsheet__container,
+.exp--tearsheet.exp--tearsheet--stacked-2-of-3 .exp--tearsheet__container {
+  max-height: calc(100% - (var(--cds-spacing-09, 3rem) + var(--cds-spacing-05, 1rem)));
+}
+
+.exp--tearsheet.exp--tearsheet--stacked-3-of-3 .exp--tearsheet__container {
+  max-height: calc(100% - (var(--cds-spacing-09, 3rem) + (2 * var(--cds-spacing-05, 1rem))));
+}
+
+.exp--tearsheet .exp--tearsheet__container--lower {
+  max-height: calc(100% - (var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem)));
+}
+
+.exp--tearsheet.exp--tearsheet--stacked-2-of-2
+.exp--tearsheet__container--lower,
+.exp--tearsheet.exp--tearsheet--stacked-2-of-3
+.exp--tearsheet__container--lower {
+  max-height: calc(100% - (var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem) + var(--cds-spacing-05, 1rem)));
+}
+
+.exp--tearsheet.exp--tearsheet--stacked-3-of-3
+.exp--tearsheet__container--lower {
+  max-height: calc( 100% - (var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem) + (2 * var(--cds-spacing-05, 1rem))));
+}
+
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__container {
+  width: 100%;
+}
+
+@media (min-width: 66rem) {
+  .exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__container {
+    width: calc(100% - (2 * var(--cds-spacing-07, 2rem)));
+  }
+}
+
+.exp--tearsheet.exp--tearsheet--stacked-1-of-2.is-visible
+.exp--tearsheet__container,
+.exp--tearsheet.exp--tearsheet--stacked-2-of-3.is-visible
+.exp--tearsheet__container {
+  transform: scale(var(--exp--tearsheet--stacking-scale-factor-single));
+}
+
+.exp--tearsheet.exp--tearsheet--stacked-1-of-3.is-visible
+.exp--tearsheet__container {
+  transform: scale(var(--exp--tearsheet--stacking-scale-factor-double));
+}
+
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__header {
+  padding: var(--cds-spacing-06, 1.5rem) var(--cds-spacing-07, 2rem);
+  border-bottom: 1px solid var(--cds-ui-03, #e0e0e0);
+  margin: 0;
+}
+
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__header--with-nav {
+  padding-bottom: 0;
+}
+
+.exp--tearsheet.exp--tearsheet--narrow .exp--tearsheet__header {
+  padding: var(--cds-spacing-05, 1rem);
+  margin: 0;
+}
+
+.exp--tearsheet.exp--tearsheet--wide
+.exp--tearsheet__header--with-close-icon {
+  padding-right: var(--cds-spacing-05, 1rem);
+  margin-right: var(--cds-spacing-09, 3rem);
+}
+
+.exp--tearsheet .exp--tearsheet__header-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.exp--tearsheet .exp--tearsheet__header-fields {
+  flex: 1 1 100%;
+}
+
+.exp--tearsheet .exp--tearsheet__header-actions {
+  flex: 0 0 auto;
+  padding-left: var(--cds-spacing-06, 1.5rem);
+}
+
+.exp--tearsheet
+.exp--tearsheet__header-actions
+.bx--btn-set
+.bx--btn:not(:first-of-type) {
+  margin-left: var(--cds-spacing-03, 0.5rem);
+}
+
+.exp--tearsheet .exp--tearsheet__header--no-close-icon {
+  display: none;
+}
+
+.exp--tearsheet.exp--tearsheet--wide
+.bx--modal-header__heading {
+  font-size: var(--cds-productive-heading-04-font-size, 1.75rem);
+  font-weight: var(--cds-productive-heading-04-font-weight, 400);
+  line-height: var(--cds-productive-heading-04-line-height, 1.29);
+  letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0);
+}
+
+.exp--tearsheet .exp--tearsheet__header-description {
+  display: -webkit-box;
+  overflow: hidden;
+  max-width: 100%;
+  margin-top: var(--cds-spacing-05, 1rem);
+  font-size: var(--cds-body-short-01-font-size, 0.875rem);
+  font-weight: var(--cds-body-short-01-font-weight, 400);
+  line-height: var(--cds-body-short-01-line-height, 1.29);
+  letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+@media (min-width: 42rem) {
+  .exp--tearsheet .exp--tearsheet__header-description {
+    max-width: 60%;
+  }
+}
+
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__header-description {
+  margin-top: var(--cds-spacing-03, 0.5rem);
+}
+
+.exp--tearsheet .exp--tearsheet__header-navigation {
+  margin: var(--cds-spacing-04, 0.75rem) 0 0;
+}
+
+.exp--tearsheet .exp--tearsheet__body {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  margin: 0;
+}
+
+.exp--tearsheet__resize-detector {
+  width: 100%;
+  height: 0;
+}
+
+.exp--tearsheet .exp--tearsheet__influencer {
+  flex: 0 0 257px;
+  border-right: 1px solid var(--cds-ui-03, #e0e0e0);
+  overflow-y: auto;
+}
+
+.exp--tearsheet .exp--tearsheet__influencer--wide {
+  flex-basis: 321px;
+}
+
+.exp--tearsheet .exp--tearsheet__right {
+  display: grid;
+  flex-grow: 1;
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr auto;
+}
+
+.exp--tearsheet .exp--tearsheet__main {
+  display: flex;
+  flex-direction: row;
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+}
+
+.exp--tearsheet .exp--tearsheet__main .exp--tearsheet__influencer {
+  border-right: none;
+  border-left: 1px solid var(--cds-ui-03, #e0e0e0);
+}
+
+.exp--tearsheet .exp--tearsheet__content {
+  overflow: auto;
+  flex-grow: 1;
+}
+
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content {
+  background: var(--cds-ui-background, #ffffff);
+}
+
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--pagination,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--pagination__control-buttons,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--text-input,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--text-area,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--search-input,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--select-input,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--dropdown,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--dropdown-list,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--number input[type='number'],
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--date-picker__input {
+  background-color: var(--cds-field-01, #f4f4f4);
+}
+
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--text-input--light,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--text-area--light,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--search--light .bx--search-input,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--select--light .bx--select-input,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--dropdown--light,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--dropdown--light .bx--dropdown-list,
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--number--light input[type='number'],
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--date-picker--light .bx--date-picker__input {
+  background-color: var(--cds-field-02, #ffffff);
+}
+
+.exp--tearsheet .exp--tearsheet__button-container {
+  grid-column: 1 / -1;
+  grid-row: -1 / -1;
+  overflow-x: auto;
+}
+
+.exp--tearsheet .exp--tearsheet__buttons {
+  display: inline-flex;
+  min-width: 100%;
+  border-top: 1px solid var(--cds-ui-03, #e0e0e0);
+}
+
+.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__buttons {
+  background: var(--cds-ui-background, #ffffff);
+}
+
+.exp--create-tearsheet-narrow .bx--modal-header__heading,
+.exp--create-tearsheet-narrow .bx--modal-header__label,
+.exp--create-tearsheet-narrow .exp--tearsheet__header-description {
+  max-width: 100%;
+  padding-right: calc(20% - var(--cds-spacing-05, 1rem));
+}
+
+.exp--create-tearsheet-narrow .exp--tearsheet__header-description {
+  margin-top: var(--cds-spacing-02, 0.25rem);
+}
+
+.exp--create-tearsheet-narrow .exp--tearsheet__header {
+  border-bottom: 1px solid var(--cds-decorative-01, #e0e0e0);
+}
+
+.exp--create-tearsheet-narrow .exp--tearsheet__content {
+  padding: var(--cds-spacing-05, 1rem);
+}
+
+.exp--create-tearsheet-narrow .exp--create-tearsheet-narrow__form {
+  padding-top: var(--cds-spacing-05, 1rem);
+}
+
+.exp--create-tearsheet-narrow .exp--create-tearsheet-narrow__form > * {
+  margin-bottom: var(--cds-spacing-05, 1rem);
+}
+
+.exp--create-tearsheet-narrow .exp--create-tearsheet-narrow__form > *:last-child {
+  margin-bottom: 0;
+}
+
+.exp--create-tearsheet-narrow .exp--create-tearsheet-narrow__form-title-text {
+  font-size: var(--cds-productive-heading-02-font-size, 1rem);
+  font-weight: var(--cds-productive-heading-02-font-weight, 600);
+  line-height: var(--cds-productive-heading-02-line-height, 1.375);
+  letter-spacing: var(--cds-productive-heading-02-letter-spacing, 0);
+  padding-bottom: var(--cds-spacing-03, 0.5rem);
+}
+
+.exp--create-tearsheet-narrow .exp--create-tearsheet-narrow__form-description-text {
+  font-size: var(--cds-body-long-01-font-size, 0.875rem);
+  font-weight: var(--cds-body-long-01-font-weight, 400);
+  line-height: var(--cds-body-long-01-line-height, 1.43);
+  letter-spacing: var(--cds-body-long-01-letter-spacing, 0.16px);
+}
+
 .exp--empty-state .exp--empty-state__header,
 .exp--empty-state .exp--empty-state__subtitle {
   padding-bottom: var(--cds-spacing-02, 0.25rem);
@@ -444,19 +799,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* Stroke animations */
 @keyframes init-stroke {
   0% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
   100% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
 }
 
 @keyframes stroke-end {
   0% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
   100% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
 }
 
@@ -575,19 +930,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* Stroke animations */
 @keyframes init-stroke {
   0% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
   100% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
 }
 
 @keyframes stroke-end {
   0% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
   100% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
 }
 
@@ -2120,19 +2475,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* Stroke animations */
 @keyframes init-stroke {
   0% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
   100% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
 }
 
 @keyframes stroke-end {
   0% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
   100% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
 }
 
@@ -2189,19 +2544,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* Stroke animations */
 @keyframes init-stroke {
   0% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
   100% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
 }
 
 @keyframes stroke-end {
   0% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
   100% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
 }
 
@@ -3220,19 +3575,19 @@ path:nth-of-type(1),
 /* Stroke animations */
 @keyframes init-stroke {
   0% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
   100% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
 }
 
 @keyframes stroke-end {
   0% {
-    stroke-dashoffset: 16;
+    stroke-dashoffset: 52.52755;
   }
   100% {
-    stroke-dashoffset: 240;
+    stroke-dashoffset: 276.4608;
   }
 }
 
@@ -3240,269 +3595,6 @@ path:nth-of-type(1),
   100% {
     stroke-dashoffset: 0;
   }
-}
-
-.exp--tearsheet.exp--tearsheet {
-  z-index: 9001;
-  align-items: flex-end;
-  transition: visibility 0s linear 240ms, background-color 240ms cubic-bezier(0.4, 0.14, 1, 1), opacity 240ms cubic-bezier(0.4, 0.14, 1, 1);
-  --exp--tearsheet--stacking-scale-factor-single: 0.95;
-  --exp--tearsheet--stacking-scale-factor-double: 0.9;
-}
-
-.exp--tearsheet.is-visible {
-  z-index: 9000;
-  align-items: flex-end;
-  transition: visibility 0s linear, background-color 240ms cubic-bezier(0, 0, 0.3, 1), opacity 240ms cubic-bezier(0, 0, 0.3, 1);
-}
-
-.exp--tearsheet.exp--tearsheet--stacked-1-of-2 {
-  z-index: 8999;
-  background-color: rgba(22, 22, 22, 0.33);
-}
-
-.exp--tearsheet.exp--tearsheet--stacked-1-of-3 {
-  z-index: 8998;
-  background-color: rgba(22, 22, 22, 0.11);
-}
-
-.exp--tearsheet.exp--tearsheet--stacked-2-of-3 {
-  z-index: 8999;
-  background-color: rgba(22, 22, 22, 0.25);
-}
-
-.exp--tearsheet.exp--tearsheet--stacked-2-of-2,
-.exp--tearsheet.exp--tearsheet--stacked-3-of-3 {
-  background-color: rgba(22, 22, 22, 0.25);
-}
-
-.exp--tearsheet .exp--tearsheet__container {
-  top: auto;
-  height: 100%;
-  max-height: calc(100% - var(--cds-spacing-09, 3rem));
-  transform: translate3d(0, min(95vh, 500px), 0);
-}
-
-.exp--tearsheet.exp--tearsheet .exp--tearsheet__container {
-  transition: transform 240ms cubic-bezier(0, 0, 0.3, 1), max-height 240ms linear;
-}
-
-.exp--tearsheet.exp--tearsheet--stacked-2-of-2 .exp--tearsheet__container,
-.exp--tearsheet.exp--tearsheet--stacked-2-of-3 .exp--tearsheet__container {
-  max-height: calc(100% - (var(--cds-spacing-09, 3rem) + var(--cds-spacing-05, 1rem)));
-}
-
-.exp--tearsheet.exp--tearsheet--stacked-3-of-3 .exp--tearsheet__container {
-  max-height: calc(100% - (var(--cds-spacing-09, 3rem) + (2 * var(--cds-spacing-05, 1rem))));
-}
-
-.exp--tearsheet .exp--tearsheet__container--lower {
-  max-height: calc(100% - (var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem)));
-}
-
-.exp--tearsheet.exp--tearsheet--stacked-2-of-2
-.exp--tearsheet__container--lower,
-.exp--tearsheet.exp--tearsheet--stacked-2-of-3
-.exp--tearsheet__container--lower {
-  max-height: calc(100% - (var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem) + var(--cds-spacing-05, 1rem)));
-}
-
-.exp--tearsheet.exp--tearsheet--stacked-3-of-3
-.exp--tearsheet__container--lower {
-  max-height: calc( 100% - (var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem) + (2 * var(--cds-spacing-05, 1rem))));
-}
-
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__container {
-  width: 100%;
-}
-
-@media (min-width: 66rem) {
-  .exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__container {
-    width: calc(100% - (2 * var(--cds-spacing-07, 2rem)));
-  }
-}
-
-.exp--tearsheet.exp--tearsheet--stacked-1-of-2.is-visible
-.exp--tearsheet__container,
-.exp--tearsheet.exp--tearsheet--stacked-2-of-3.is-visible
-.exp--tearsheet__container {
-  transform: scale(var(--exp--tearsheet--stacking-scale-factor-single));
-}
-
-.exp--tearsheet.exp--tearsheet--stacked-1-of-3.is-visible
-.exp--tearsheet__container {
-  transform: scale(var(--exp--tearsheet--stacking-scale-factor-double));
-}
-
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__header {
-  padding: var(--cds-spacing-06, 1.5rem) var(--cds-spacing-07, 2rem);
-  border-bottom: 1px solid var(--cds-ui-03, #e0e0e0);
-  margin: 0;
-}
-
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__header--with-nav {
-  padding-bottom: 0;
-}
-
-.exp--tearsheet.exp--tearsheet--narrow .exp--tearsheet__header {
-  padding: var(--cds-spacing-05, 1rem);
-  margin: 0;
-}
-
-.exp--tearsheet.exp--tearsheet--wide
-.exp--tearsheet__header--with-close-icon {
-  padding-right: var(--cds-spacing-05, 1rem);
-  margin-right: var(--cds-spacing-09, 3rem);
-}
-
-.exp--tearsheet .exp--tearsheet__header-content {
-  display: flex;
-  justify-content: space-between;
-}
-
-.exp--tearsheet .exp--tearsheet__header-fields {
-  flex: 1 1 100%;
-}
-
-.exp--tearsheet .exp--tearsheet__header-actions {
-  flex: 0 0 auto;
-  padding-left: var(--cds-spacing-06, 1.5rem);
-}
-
-.exp--tearsheet
-.exp--tearsheet__header-actions
-.bx--btn-set
-.bx--btn:not(:first-of-type) {
-  margin-left: var(--cds-spacing-03, 0.5rem);
-}
-
-.exp--tearsheet .exp--tearsheet__header--no-close-icon {
-  display: none;
-}
-
-.exp--tearsheet.exp--tearsheet--wide
-.bx--modal-header__heading {
-  font-size: var(--cds-productive-heading-04-font-size, 1.75rem);
-  font-weight: var(--cds-productive-heading-04-font-weight, 400);
-  line-height: var(--cds-productive-heading-04-line-height, 1.29);
-  letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0);
-}
-
-.exp--tearsheet .exp--tearsheet__header-description {
-  display: -webkit-box;
-  overflow: hidden;
-  max-width: 100%;
-  margin-top: var(--cds-spacing-05, 1rem);
-  font-size: var(--cds-body-short-01-font-size, 0.875rem);
-  font-weight: var(--cds-body-short-01-font-weight, 400);
-  line-height: var(--cds-body-short-01-line-height, 1.29);
-  letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-}
-
-@media (min-width: 42rem) {
-  .exp--tearsheet .exp--tearsheet__header-description {
-    max-width: 60%;
-  }
-}
-
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__header-description {
-  margin-top: var(--cds-spacing-03, 0.5rem);
-}
-
-.exp--tearsheet .exp--tearsheet__header-navigation {
-  margin: var(--cds-spacing-04, 0.75rem) 0 0;
-}
-
-.exp--tearsheet .exp--tearsheet__body {
-  display: flex;
-  flex-direction: row;
-  padding: 0;
-  margin: 0;
-}
-
-.exp--tearsheet__resize-detector {
-  width: 100%;
-  height: 0;
-}
-
-.exp--tearsheet .exp--tearsheet__influencer {
-  flex: 0 0 257px;
-  border-right: 1px solid var(--cds-ui-03, #e0e0e0);
-  overflow-y: auto;
-}
-
-.exp--tearsheet .exp--tearsheet__influencer--wide {
-  flex-basis: 321px;
-}
-
-.exp--tearsheet .exp--tearsheet__right {
-  display: grid;
-  flex-grow: 1;
-  grid-template-columns: 100%;
-  grid-template-rows: 1fr auto;
-}
-
-.exp--tearsheet .exp--tearsheet__main {
-  display: flex;
-  flex-direction: row;
-  grid-column: 1 / -1;
-  grid-row: 1 / -1;
-}
-
-.exp--tearsheet .exp--tearsheet__main .exp--tearsheet__influencer {
-  border-right: none;
-  border-left: 1px solid var(--cds-ui-03, #e0e0e0);
-}
-
-.exp--tearsheet .exp--tearsheet__content {
-  overflow: auto;
-  flex-grow: 1;
-}
-
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content {
-  background: var(--cds-ui-background, #ffffff);
-}
-
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--pagination,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--pagination__control-buttons,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--text-input,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--text-area,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--search-input,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--select-input,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--dropdown,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--dropdown-list,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--number input[type='number'],
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--date-picker__input {
-  background-color: var(--cds-field-01, #f4f4f4);
-}
-
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--text-input--light,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--text-area--light,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--search--light .bx--search-input,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--select--light .bx--select-input,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--dropdown--light,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--dropdown--light .bx--dropdown-list,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--number--light input[type='number'],
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--date-picker--light .bx--date-picker__input {
-  background-color: var(--cds-field-02, #ffffff);
-}
-
-.exp--tearsheet .exp--tearsheet__button-container {
-  grid-column: 1 / -1;
-  grid-row: -1 / -1;
-  overflow-x: auto;
-}
-
-.exp--tearsheet .exp--tearsheet__buttons {
-  display: inline-flex;
-  min-width: 100%;
-  border-top: 1px solid var(--cds-ui-03, #e0e0e0);
-}
-
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__buttons {
-  background: var(--cds-ui-background, #ffffff);
 }
 
 .exp-user-profile-avatar--light {

@@ -13,6 +13,7 @@ import { withCarbonTheme } from '@carbon/storybook-addon-theme/react';
 import { pkg } from '../../cloud-cognitive/src/settings';
 
 import index from './index.scss';
+import { getSectionSequence } from '../story-structure';
 
 // Enable all components, whether released or not, for storybook purposes
 pkg._silenceWarnings(true);
@@ -44,18 +45,6 @@ const decorators = [
   },
   withCarbonTheme,
 ];
-
-const order = [
-  'Cloud & Cognitive/Released',
-  'Cloud & Cognitive/Canary',
-  'Cloud & Cognitive/Internal',
-  'Legacy',
-];
-const toOrder = (value) => {
-  const inOrder = order.findIndex((item) => value.startsWith(item));
-  // length is last index + 1
-  return inOrder < 0 ? order.length : inOrder;
-};
 
 const makeViewport = (name, width, shadow) => ({
   name,
@@ -90,19 +79,18 @@ const parameters = {
   layout: 'centered',
   options: {
     storySort: (a, b) => {
-      // const storybookOrder = ['Cloud & Cognitive', ['Released', 'Canary'], 'Legacy'];
-      const aInOrder = toOrder(a[1].kind);
-      const bInOrder = toOrder(b[1].kind);
+      const aPosition = getSectionSequence(a[1].kind);
+      const bPosition = getSectionSequence(b[1].kind);
 
-      if (aInOrder !== bInOrder) {
-        return aInOrder - bInOrder;
-      } else {
-        // from storybook doc example https://storybook.js.org/docs/react/writing-stories/naming-components-and-hierarchy
-        return a[1].kind === b[1].kind
-          ? (a[1]?.parameters?.ccsSettings?.sequence || 0) -
-              (b[1]?.parameters?.ccsSettings?.sequence || 0)
-          : a[1].id.localeCompare(b[1].id, undefined, { numeric: true });
-      }
+      return aPosition !== bPosition
+        ? // if stories have different positions in the structure, sort by that
+          aPosition - bPosition
+        : a[1].kind === b[1].kind
+        ? // if they have the same kind, use their sequence numbers
+          (a[1]?.parameters?.ccsSettings?.sequence || 0) -
+          (b[1]?.parameters?.ccsSettings?.sequence || 0)
+        : // they must both be unrecognized: fall back to sorting by id (slug)
+          a[1].id.localeCompare(b[1].id, undefined, { numeric: true });
     },
   },
 

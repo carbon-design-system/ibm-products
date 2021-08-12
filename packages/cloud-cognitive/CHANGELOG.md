@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.68.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.68.0...@carbon/ibm-cloud-cognitive@0.68.1) (2021-08-11)
+
+
+### Bug Fixes
+
+* **CreateTearsheetNarrow:** add tests and address onRequestClose issue ([#1143](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1143)) ([87ed826](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/87ed826da64825cf7f1a3f860baed4cbae1b8a54))
+
+
+
+
+
 # [0.68.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.67.1...@carbon/ibm-cloud-cognitive@0.68.0) (2021-08-11)
 
 

@@ -97,18 +97,11 @@ export const MultiStepTearsheet = ({
             });
           }}
           title="Topic name"
-          disableSubmit={!stepOneTextInputValue}>
-          <h6
-            className={cx(
-              `${blockClass}__description`,
-              `${blockClass}__heading`
-            )}>
-            This is the unique name used to recognize your topic
-          </h6>
-          <p className={`${blockClass}__description`}>
-            It will also be used by your producers and consumers as part of the
-            connection information, so make it something easy to recognize.
-          </p>
+          formLegendText="Topic information"
+          disableSubmit={!stepOneTextInputValue}
+          subtitle="This is the unique name used to recognize your topic"
+          description="It will also be used by your producers and consumers as part of the
+          connection information, so make it something easy to recognize.">
           <TextInput
             labelText="Topic name"
             id="tearsheet-multi-step-story-text-input-multi-step-1"
@@ -160,20 +153,13 @@ export const MultiStepTearsheet = ({
         </CreateTearsheetStep>
         <CreateTearsheetStep
           title="Partitions"
-          disableSubmit={!stepTwoTextInputValue}>
-          <h6
-            className={cx(
-              `${blockClass}__description`,
-              `${blockClass}__heading`
-            )}>
-            One or more partitions make up a topic. A partition is an ordered
-            list of messages.
-          </h6>
-          <p className={`${blockClass}__description`}>
-            Partitions are distributed across the brokers in order to increase
-            the scalability of your topic. You can also use them to distribute
-            messages across the members of a consumer group.
-          </p>
+          disableSubmit={!stepTwoTextInputValue}
+          subtitle="One or more partitions make up a topic. A partition is an ordered
+          list of messages."
+          description="Partitions are distributed across the brokers in order to increase
+          the scalability of your topic. You can also use them to distribute
+          messages across the members of a consumer group."
+          formLegendText="Partition information">
           <NumberInput
             id="carbon-number"
             min={1}
@@ -190,18 +176,11 @@ export const MultiStepTearsheet = ({
         <CreateTearsheetStep
           title="Message retention"
           disableSubmit={!stepThreeTextInputValue}
-          onNext={() => Promise.resolve()}>
-          <h6
-            className={cx(
-              `${blockClass}__description`,
-              `${blockClass}__heading`
-            )}>
-            This is how long messages are retained before they are deleted.
-          </h6>
-          <p className={`${blockClass}__description`}>
-            If your messages are not read by a consumer within this time, they
-            will be missed.
-          </p>
+          onNext={() => Promise.resolve()}
+          subtitle="This is how long messages are retained before they are deleted."
+          description="If your messages are not read by a consumer within this time, they
+          will be missed."
+          formLegendText="Message retention scheduling">
           <RadioButtonGroup
             legendText="Message retention"
             name="radio-button-group"
@@ -211,7 +190,6 @@ export const MultiStepTearsheet = ({
             <RadioButton labelText="A day" value="one-day" id="one-day" />
             <RadioButton labelText="A week" value="one-week" id="one-week" />
             <RadioButton labelText="A month" value="one-month" id="one-month" />
-            <RadioButton labelText="Custom" value="custom" id="custom" />
           </RadioButtonGroup>
         </CreateTearsheetStep>
       </CreateTearsheet>

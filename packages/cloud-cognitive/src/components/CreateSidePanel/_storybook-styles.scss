@@ -6,7 +6,9 @@
 //
 
 @import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
 
+$block-class: #{$pkg-prefix}--create-side-panel;
 $story-prefix: create-side-panel-stories__;
 
 .#{$story-prefix}example-container {
@@ -18,4 +20,9 @@ $story-prefix: create-side-panel-stories__;
 
 .#{$story-prefix}example-form-group .bx--label {
   margin-bottom: 0;
+}
+
+.#{$block-class} .#{$carbon-prefix}--number__control-btn::before,
+.#{$block-class} .#{$carbon-prefix}--number__control-btn::after {
+  background-color: $field-02;
 }

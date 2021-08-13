@@ -37,6 +37,7 @@ const defaultStepProps = {
   subtitle: 'This is the unique name used to recognize your topic.',
   description:
     'It will also be used by your producers and consumers as part of the connection information, so make something easy to recognize.',
+  formLegendText: 'Partition',
 };
 
 // render an CreateFullPage with button labels and any other required props
@@ -53,7 +54,8 @@ const renderComponent = ({ ...rest }) =>
       </CreateFullPageStep>
       <CreateFullPageStep
         title="Core configuration"
-        description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
+        description="We recommend you fill out and evaluate these details at a minimum before deploying your topic."
+        formLegendText="Core configuration">
         <TextInput
           id="test4"
           invalidText="A valid value is required"

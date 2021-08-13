@@ -45,21 +45,16 @@ const createTearsheetProps = {
 };
 
 export const multiStepTearsheet = prepareStory(MultiStepTearsheet, {
-  storyName: 'With multiple steps',
+  storyName: 'Create tearsheet',
   args: {
     includeViewAllToggle: false,
     ...createTearsheetProps,
   },
 });
 
-export const withViewAllToggle = prepareStory(MultiStepWithSectionsTearsheet, {
-  storyName: 'With view all toggle',
+export const withSections = prepareStory(MultiStepWithSectionsTearsheet, {
+  storyName: 'Create tearsheet with sections',
   args: {
-    includeViewAllToggle: true,
-    sideNavAriaLabel: 'Create topic side nav',
-    viewAllToggleLabelText: 'Show all available options',
-    viewAllToggleOffLabelText: 'Off',
-    viewAllToggleOnLabelText: 'On',
     ...createTearsheetProps,
   },
 });

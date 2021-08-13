@@ -54,14 +54,7 @@ module.exports = {
                 },
               },
               'css-loader',
-              {
-                loader: 'fast-sass-loader',
-                options: {
-                  includePaths: [
-                    resolve(__dirname, '..', '..', '..', 'node_modules'),
-                  ],
-                },
-              },
+              'sass-loader',
             ],
           },
         ],

@@ -5,223 +5,232 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// This is the structure of the storybook navigation
-const structure = [
+// This is the structure of the storybook navigation. Each entry has a name (n)
+// and a structure (s) which is an array of items, each of which can be a
+// component name or another entry. Component names include a prefix to enable
+// name-spacing: the prefix is used when searching, but not included in
+// materialized paths.
+const s = [
   {
-    name: 'Cloud & Cognitive',
-    structure: [
+    n: 'Cloud & Cognitive',
+    s: [
       {
-        name: 'Components',
-        structure: [
-          { name: 'Cards', structure: ['ExpressiveCard', 'ProductiveCard'] },
-          { name: 'Progressive loading bar', structure: ['LoadingBar'] },
-          { name: 'Side panel', structure: ['SidePanel'] },
-          { name: 'Tag set', structure: ['TagSet'] },
-          { name: 'Tearsheet', structure: ['Tearsheet', 'TearsheetNarrow'] },
-          { name: 'Modified tabs', structure: ['ModifiedTabs'] },
-          { name: 'Page header', structure: ['PageHeader'] },
+        n: 'Components',
+        s: [
+          { n: 'Cards', s: ['c/ExpressiveCard', 'c/ProductiveCard'] },
+          { n: 'Progressive loading bar', s: ['c/LoadingBar'] },
+          { n: 'Side panel', s: ['c/SidePanel'] },
+          { n: 'Tag set', s: ['c/TagSet'] },
+          { n: 'Tearsheet', s: ['c/Tearsheet', 'c/TearsheetNarrow'] },
+          { n: 'Modified tabs', s: ['c/ModifiedTabs'] },
+          { n: 'Page header', s: ['c/PageHeader'] },
         ],
       },
       {
-        name: 'Patterns',
-        structure: [
-          { name: 'About modal', structure: ['AboutModal'] },
-          { name: 'Generating an API key', structure: ['APIKeyModal'] },
+        n: 'Patterns',
+        s: [
+          { n: 'About modal', s: ['c/AboutModal'] },
+          { n: 'Generating an API key', s: ['c/APIKeyModal'] },
           {
-            name: 'Empty state',
-            structure: [
-              'EmptyState',
-              'ErrorEmptyState',
-              'NoDataEmptyState',
-              'NoTagsEmptyState',
-              'NotFoundEmptyState',
-              'NotificationsEmptyState',
-              'UnauthorizedEmptyState',
+            n: 'Empty state',
+            s: [
+              'c/EmptyState',
+              'c/ErrorEmptyState',
+              'c/NoDataEmptyState',
+              'c/NoTagsEmptyState',
+              'c/NotFoundEmptyState',
+              'c/NotificationsEmptyState',
+              'c/UnauthorizedEmptyState',
             ],
           },
-          { name: 'Export', structure: ['ExportModal'] },
+          { n: 'Export', s: ['c/ExportModal'] },
           {
-            name: 'Create flows',
-            structure: [
-              'CreateFullPage',
-              'CreateModal',
-              'CreateTearsheet',
-              'CreateTearsheetNarrow',
-              'CreateSidePanel',
+            n: 'Create flows',
+            s: [
+              'c/CreateFullPage',
+              'c/CreateModal',
+              'c/CreateTearsheet',
+              'c/CreateTearsheetNarrow',
+              'c/CreateSidePanel',
             ],
           },
           {
-            name: 'HTTP errors',
-            structure: ['HTTPError403', 'HTTPError404', 'HTTPErrorOther'],
+            n: 'HTTP errors',
+            s: ['c/HTTPError403', 'c/HTTPError404', 'c/HTTPErrorOther'],
           },
-          { name: 'Import and upload', structure: ['ImportModal'] },
-          { name: 'Notifications', structure: ['NotificationsPanel'] },
-          { name: 'Remove', structure: ['RemoveModal'] },
-          { name: 'Saving', structure: ['Saving'] },
-          { name: 'Status icons', structure: ['StatusIcon'] },
-          { name: 'User profile images', structure: ['UserProfileImage'] },
-          { name: 'Web terminal', structure: ['WebTerminal'] },
+          { n: 'Import and upload', s: ['c/ImportModal'] },
+          { n: 'Notifications', s: ['c/NotificationsPanel'] },
+          { n: 'Remove', s: ['c/RemoveModal'] },
+          { n: 'Saving', s: ['c/Saving'] },
+          { n: 'Status icons', s: ['c/StatusIcon'] },
+          { n: 'User profile images', s: ['c/UserProfileImage'] },
+          { n: 'Web terminal', s: ['c/WebTerminal'] },
         ],
       },
       {
-        name: 'Internal',
-        structure: [
-          'ActionBar',
-          'ActionSet',
-          'BreadcrumbWithOverflow',
-          'ButtonMenu',
-          'ButtonSetWithOverflow',
-          'ComboButton',
-          'ExampleComponent',
-          'TearsheetShell',
+        n: 'Internal',
+        s: [
+          'c/ActionBar',
+          'c/ActionSet',
+          'c/BreadcrumbWithOverflow',
+          'c/ButtonMenu',
+          'c/ButtonSetWithOverflow',
+          'c/ComboButton',
+          'c/ExampleComponent',
+          'c/TearsheetShell',
         ],
       },
     ],
   },
   {
-    name: 'Carbon',
-    structure: [],
+    n: 'Carbon',
+    s: [],
   },
   {
-    name: 'Security',
-    structure: [
+    n: 'Security',
+    s: [
       {
-        name: 'Components',
-        structure: [
-          'Card',
-          'Decorator',
-          'DataTablePagination',
-          'DelimitedList',
-          'ExternalLink',
-          'ICA',
-          'Icon',
-          'IconButton',
-          'Nav',
-          'Pill',
-          'ProfileImage',
-          'ScrollGradient',
-          'StackedNotification',
-          'StatusIcon',
-          'StringFormatter',
-          'TruncatedList',
-          'TimeIndicator',
-          'TrendingCard',
-          'TypeLayout',
+        n: 'Components',
+        s: [
+          's/Card',
+          's/Decorator',
+          's/DataTablePagination',
+          's/DelimitedList',
+          's/ExternalLink',
+          's/ICA',
+          's/Icon',
+          's/IconButton',
+          's/Nav',
+          's/Pill',
+          's/ProfileImage',
+          's/ScrollGradient',
+          's/StackedNotification',
+          's/StatusIcon',
+          's/StringFormatter',
+          's/TruncatedList',
+          's/TimeIndicator',
+          's/TrendingCard',
+          's/TypeLayout',
         ],
       },
       {
-        name: 'Patterns',
-        structure: [
-          'ComboButton',
-          'DataDecorator',
-          'ErrorPage',
-          'FilterPanel',
-          'Header',
-          'IconButtonBar',
-          'NonEntitledSection',
-          'Panel',
-          'PanelV2',
-          'SearchBar',
-          'Shell',
-          'StatusIndicator',
-          'SummaryCard',
-          'TagWall',
-          'TagWallFilter',
-          'Tearsheet',
-          'TearsheetSmall',
-          'Toolbar',
-          'Wizard',
+        n: 'Patterns',
+        s: [
+          's/ComboButton',
+          's/DataDecorator',
+          's/ErrorPage',
+          's/FilterPanel',
+          's/Header',
+          's/IconButtonBar',
+          's/NonEntitledSection',
+          's/Panel',
+          's/PanelV2',
+          's/SearchBar',
+          's/Shell',
+          's/StatusIndicator',
+          's/SummaryCard',
+          's/TagWall',
+          's/TagWallFilter',
+          's/Tearsheet',
+          's/TearsheetSmall',
+          's/Toolbar',
+          's/Wizard',
         ],
       },
       {
-        name: 'Layouts',
-        structure: [],
+        n: 'Layouts',
+        s: [],
       },
     ],
   },
   {
-    name: 'CD&AI legacy',
-    structure: [
-      'ContextHeader',
-      'IdeAPIKeyGeneration',
-      'IdeButton',
-      'IdeCard',
-      'IdeCreate',
-      'IdeDataTable',
-      'IdeEmptyState',
-      'IdeFilter',
-      'IdeHome',
-      'IdeHTTPErrors',
-      'IdeImporting',
-      'IdeNavigation',
-      'IdeRemove',
-      'IdeSaving',
-      'IdeSideNavMenu',
-      'IdeSlideOverPanel',
-      'IdeTableToolbarSearch',
+    n: 'CD&AI legacy',
+    s: [
+      'a/ContextHeader',
+      'a/IdeAPIKeyGeneration',
+      'a/IdeButton',
+      'a/IdeCard',
+      'a/IdeCreate',
+      'a/IdeDataTable',
+      'a/IdeEmptyState',
+      'a/IdeFilter',
+      'a/IdeHome',
+      'a/IdeHTTPErrors',
+      'a/IdeImporting',
+      'a/IdeNavigation',
+      'a/IdeRemove',
+      'a/IdeSaving',
+      'a/IdeSideNavMenu',
+      'a/IdeSlideOverPanel',
+      'a/IdeTableToolbarSearch',
     ],
+  },
+  {
+    n: 'Getting Started',
+    s: [],
   },
 ];
 
-// This function takes a structure array and returns an array of the fully
-// materialized paths in the structure in order
-const getStructureSectionOrder = (structure) =>
-  structure
+// This function takes an s array and returns an array of the fully
+// materialized paths in the storybook structure in order
+const getSectionOrder = (sArray) =>
+  sArray
     .map((entry) =>
       typeof entry === 'string'
-        ? // if the entry is a string, return it
-          entry
+        ? // if the entry is a string, return it (without the prefix)
+          entry.match(/.*?\/(.*)/)[1]
         : // if the entry is another structure, return its name, but first get
           // the fully materialized paths it contains and add the entry name
           // to the front of each
           [
-            getStructureSectionOrder(entry.structure).map(
-              (section) => `${entry.name}/${section}`
-            ),
-            entry.name,
+            getSectionOrder(entry.s).map((path) => `${entry.n}/${path}`),
+            entry.n,
           ]
     )
     .flat(Infinity);
 
 // An array of the names of storybook sections in the desired order.
-const sectionOrder = getStructureSectionOrder(structure).concat(['']);
+const sectionOrder = getSectionOrder(s).concat(['']);
 
 /**
- * Return the sequence number of a story kind in the storybook master structure.
+ * Return the sequence number of a story kind in the storybook structure.
  * This can be used to sort stories into the required hierarchy.
  * @param {string} kind a story kind
- * @returns the sequence number for the story kind in the master structure.
+ * @returns the sequence number for the story kind in the storybook structure.
  */
 export const getSectionSequence = (kind) =>
   sectionOrder.findIndex((item) => kind.startsWith(item));
 
 const prepend = (elt, arr) => arr && [elt].concat(arr);
 
-// This function takes a structure array and component name and returns the
-// materialized path of the component name in the structure as an array of
-// the nested section names, or null if the component name is not found
-const getPath = (structure, componentName) =>
-  structure.reduce(
+// This function takes an s array and component name and returns the
+// materialized path of the component name as an array of the nested section
+// names, or null if the component name is not found
+const getPath = (s, componentAndPrefix, componentName) =>
+  s.reduce(
     (found, next) =>
-      // if a previous element has already matched, pass it forward
+      // if a previous entry has already matched, pass it forward
       found ||
       (typeof next === 'string'
-        ? // if this element is a string, and it matches the component name
+        ? // if this entry is a string, and it matches the component name
           // we're looking for, return it as an array, else return null
-          next === componentName
+          next === componentAndPrefix
           ? [componentName]
           : null
-        : // if this element is another structure, find the materialized path
-          // into it and prepend its name if found and null otherwise
-          prepend(next.name, getPath(next.structure, componentName))),
+        : // if this entry is another structure, find the materialized path
+          // into it and prepend its name if found and return null otherwise
+          prepend(next.n, getPath(next.s, componentAndPrefix, componentName))),
     null
   );
 
 /**
- * Return the storybook path for a component.
+ * Return the storybook path for a component, given the prefix and name of the
+ * component. The prefix enables different components with the same name to be
+ * included in the storybook structure.
+ * @param {string} prefix The prefix for the component.
  * @param {string} componentName The name of the component.
  * @returns The path for the component storybook entry, or null if the
- * component is not listed in the master storybook structure.
+ * component is not listed in the storybook structure.
  */
-export const getPathForComponentName = (componentName) =>
-  getPath(structure, componentName)?.join('/');
+export const getPathForComponent = (prefix, componentName) =>
+  getPath(s, `${prefix}/${componentName}`, componentName)?.join('/');

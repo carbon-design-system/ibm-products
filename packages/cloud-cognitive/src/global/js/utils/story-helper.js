@@ -7,7 +7,7 @@
 
 import { sanitize } from '@storybook/csf';
 import pkg from '../package-settings';
-import { getPathForComponentName } from '../../../../../core/story-structure';
+import { getPathForComponent } from '../../../../../core/story-structure';
 
 /**
  * A helper function to return the structured story title for a component.
@@ -17,7 +17,7 @@ import { getPathForComponentName } from '../../../../../core/story-structure';
 export const getStoryTitle = (componentName) => {
   const title =
     // if the component isn't in the master structure, put it in a lost+found section
-    getPathForComponentName(componentName) ||
+    getPathForComponent('c', componentName) ||
     `Cloud & Cognitive/Lost + found/${componentName}`;
 
   // add a canary tag if the component is public but not normally enabled

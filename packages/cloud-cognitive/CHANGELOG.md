@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.69.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.69.4...@carbon/ibm-cloud-cognitive@0.69.5) (2021-08-13)
+
+
+### Bug Fixes
+
+* **Tearsheet:** ensure tearsheet styles override carbon styles ([#1146](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1146)) ([d936f42](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d936f42b05acf3827154e8656ec90a243e9932ce))
+
+
+
+
+
 ## [0.69.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.69.3...@carbon/ibm-cloud-cognitive@0.69.4) (2021-08-12)
 
 

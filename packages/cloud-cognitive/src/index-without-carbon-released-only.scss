@@ -6,7 +6,6 @@
 //
 
 @import './global/styles/imported-carbon-modules';
-
 $imported-modules: $imported-carbon-modules;
 
 @import '@carbon/import-once/scss/import-once';

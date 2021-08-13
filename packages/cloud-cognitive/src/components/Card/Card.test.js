@@ -12,10 +12,10 @@ import React from 'react';
 import { Card } from '.';
 import { pkg } from '../../settings';
 
-const { name } = Card;
+const componentName = Card.displayName;
 const blockClass = `${pkg.prefix}--card`;
 
-describe(name, () => {
+describe(componentName, () => {
   it('renders', () => {
     render(<Card />);
   });
@@ -32,7 +32,7 @@ describe(name, () => {
     expect(onPrimaryButtonClick).toHaveBeenCalled();
   });
 
-  it('renders expressive with both buttons', () => {
+  it('Renders expressive card with action icons and ensures that each click is being called', () => {
     const { click } = userEvent;
     const onPrimaryButtonClick = jest.fn();
     const onSecondaryButtonClick = jest.fn();
@@ -108,15 +108,21 @@ describe(name, () => {
       ],
       primaryButtonText: 'Ghost button',
       onPrimaryButtonClick: buttonClick,
+      actionsPlacement: 'bottom',
     };
     const { container, getByText, rerender } = render(<Card {...props} />);
     expect(getByText(props.label)).toBeVisible();
-    expect(container.querySelector(`.${blockClass}__actions-top`)).toBeNull();
+    expect(
+      container.querySelector(`.${blockClass}__footer .${blockClass}__actions`)
+    ).toBeVisible();
     click(getByText('icon'));
     expect(iconClick).toHaveBeenCalled();
     click(getByText(props.primaryButtonText));
     expect(buttonClick).toHaveBeenCalled();
     rerender(<Card {...props} actionsPlacement="top" />);
+    expect(
+      container.querySelector(`.${blockClass}__header .${blockClass}__actions`)
+    ).toBeVisible();
   });
 
   it('renders productive with overflow', () => {
@@ -130,12 +136,19 @@ describe(name, () => {
           onClick,
         },
       ],
+      actionsPlacement: 'bottom',
     };
     const { getByText, container, rerender } = render(<Card {...props} />);
+    expect(
+      container.querySelector(`.${blockClass}__footer .${blockClass}__actions`)
+    ).toBeVisible();
     click(container.querySelector('.bx--overflow-menu'));
     click(getByText('Edit'));
     expect(onClick).toHaveBeenCalled();
     rerender(<Card {...props} actionsPlacement="top" />);
+    expect(
+      container.querySelector(`.${blockClass}__header .${blockClass}__actions`)
+    ).toBeVisible();
   });
 
   it('renders productive with click zones', () => {
@@ -145,7 +158,7 @@ describe(name, () => {
       onClick,
       clickZone: 'one',
       title: 'Title',
-      caption: 'Caption',
+      description: 'Description',
       primaryButtonText: 'Primary',
       productive: true,
       actionIcons: [],
@@ -153,7 +166,7 @@ describe(name, () => {
     };
     const { rerender, getByText, container } = render(<Card {...props} />);
     expect(getByText(props.title)).toBeVisible();
-    expect(getByText(props.caption)).toBeVisible();
+    expect(getByText(props.description)).toBeVisible();
     click(container.querySelector(`.${blockClass}__clickable`));
     expect(onClick).toHaveBeenCalled();
     rerender(<Card {...props} clickZone="two" />);
@@ -162,6 +175,12 @@ describe(name, () => {
     rerender(<Card {...props} clickZone="three" />);
     click(container.querySelector(`.${blockClass}__clickable`));
     expect(onClick).toHaveBeenCalled();
+  });
+
+  it('has no accessibility violations', async () => {
+    const { container } = render(<Card />);
+    await expect(container).toBeAccessible(componentName);
+    await expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', () => {

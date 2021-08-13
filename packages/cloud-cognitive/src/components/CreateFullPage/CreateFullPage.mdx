@@ -8,19 +8,119 @@ import { CreateFullPage } from '.';
 
 - [Overview](#overview)
 - [Example usage](#example-usage)
+- [Class names](#class-names)
 - [Component API](#component-api)
 
 ## Overview
 
-This component is an example
+When to use
+
+- In Cloud and Cognitive, the Full page create flow is the process the user must
+  complete in order to use a product or service.
+- In **IBM Cloud public**, it is the alternative to the Provisioning flow for a
+  non-billable service.
+
+When not to use
+
+- Don’t use the Full page option when the product or service is usable before
+  the current creation flow is initiated.
+- For **IBM Public Cloud**, do not use this when provisioning a service directly
+  from the Catalog, or when creating a non-billable resource that could happen
+  in a side panel/in context.
 
 ## Example usage
 
-Here it is in use.
+There are **2** components that make up a Create Full Page component, which can
+be used in unison to create the desired look, or flow. Please note, to utilize
+the Create Full Page component, you'll need to have a minimum of two steps. If
+you are looking for a one step creation flow, consider Create Tearsheet, Create
+Side Panel, or Create Modal.
 
-<Canvas>
-  <Story id={getStoryId(CreateFullPage.displayName, 'boxed-set')} />
-</Canvas>
+#### Create Full Page
+
+This is used when you have one section per step. This can be created by passing
+in the overall `<CreateFullPage />` component and the `<CreateFullPageStep />`
+component with form items as children:
+
+```
+    <CreateFullPage {...props}>
+      <CreateFullPageStep
+          title="Required title"
+          subtitle="Optional subtitle"
+          description="Optional description"
+          onNext={() => {'Optional function'}}
+          disableSubmit={}
+          >
+        <TextInput
+          id="test-1"
+          invalidText="A valid value is required"
+          labelText="Topic name"
+          placeholder="Enter topic name"
+        />
+      </CreateFullPageStep>
+    </CreateFullPage>
+```
+
+#### Create Full Page with Sections
+
+This is used when you have several sections per step. This can be created by
+passing in the overall `<CreateFullPage />` component and the
+`<CreateFullPageStep />` component for the first `section`. All additional
+`sections` must be passed in as children, as shown below:
+
+```
+      ...
+        <CreateFullPageStep
+          title="Required title"
+          subtitle="Optional subtitle"
+          description="Optional description"
+          onNext={() => {'Optional function'}}
+          disableSubmit={}
+          hasForm={false}
+          >
+          <fieldset className={`${storyClass}__step-fieldset`}>
+            <TextInput
+              id="test-1"
+              invalidText="A valid value is required"
+              labelText="Topic name"
+              placeholder="Enter topic name"
+            />
+          </fieldset>
+          <span className={`${storyClass}__section-divider`} />
+          <h5 className={`${storyClass}__step-title`}>Required title</h5>
+          <h6 className={`${storyClass}__step-subtitle`}>
+            Optional subtitle
+          </h6>
+          <p className={`${storyClass}__step-description`}>
+            Optional description
+          </p>
+          <fieldset className={`${storyClass}__step-fieldset`}>
+            <TextInput
+              id="test-2"
+              invalidText="A valid value is required"
+              labelText="Topic name"
+              placeholder="Enter topic name"
+            />
+          </fieldset>
+      </CreateFullPageStep>
+```
+
+Notice, in this example, we set the `hasForm` prop in `CreateFullPageStep`
+component to `false`. This disables the included fieldset, allowing us to pass
+in our own.
+
+## Class names
+
+Additionally, to get the preferred styling when including your own children as
+sections, you can utilize the below included class names.
+
+| Class name                                | Element     | Features                                                   |
+| ----------------------------------------- | ----------- | ---------------------------------------------------------- |
+| `exp--create-full-page__step-title`       | title       | `productive-heading-04` & `margin-bottom` of `$spacing-05` |
+| `exp--create-full-page__step-subtitle`    | subtitle    | `productive-heading-01` & `margin-bottom` of `$spacing-03` |
+| `exp--create-full-page__step-description` | description | `body-long-01` & `margin-bottom` of `$spacing-06`          |
+| `exp--create-full-page__step-fieldset`    | fieldset    | `margin-bottom` of `$spacing-05` to all children elements  |
+| `exp--create-full-page__section-divider`  | divider     | Includes a `1px` divider line inside the `main` content    |
 
 ## Component API
 

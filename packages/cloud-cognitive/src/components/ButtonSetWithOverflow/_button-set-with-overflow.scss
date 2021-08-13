@@ -4,12 +4,21 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
+// Standard imports.
+@import '@carbon/import-once/scss/import-once';
 @import '../../global/styles/carbon-settings'; // goes before index as it affects how carbon is used.
 @import '../../global/styles/project-settings';
+
+// Other Carbon settings.
 @import '../../global/styles/mixins';
 
+// ButtonSetWithOverflow uses the following Carbon components:
+// ButtonSet, Button
 @import 'carbon-components/scss/components/button/button';
-@import '../ButtonMenu/index';
+
+// ButtonSetWithOverflow uses the following Cloud & Cognitive components:
+// ButtonMenu, ButtonMenuItem
+@import '../ButtonMenu/button-menu';
 
 $block-class: #{$pkg-prefix}--button-set-with-overflow;
 

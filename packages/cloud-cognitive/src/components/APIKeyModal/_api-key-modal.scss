@@ -5,13 +5,19 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// Standard imports.
+@import '@carbon/import-once/scss/import-once';
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
+// APIKeyModal uses the following Carbon components:
+// ComposedModal, ModalHeader, ModalFooter, ModalBody, TextInput,
+// InlineLoading, Form, Button
 @import 'carbon-components/scss/components/modal/modal';
 @import 'carbon-components/scss/components/text-input/text-input';
 @import 'carbon-components/scss/components/inline-loading/inline-loading';
-@import 'carbon-components/scss/components/toggle/toggle';
+@import 'carbon-components/scss/components/form/form';
+@import 'carbon-components/scss/components/button/button';
 
 @mixin apikey-modal {
   $block-class: #{$pkg-prefix}--apikey-modal;

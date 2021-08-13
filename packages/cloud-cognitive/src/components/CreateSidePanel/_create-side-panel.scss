@@ -5,12 +5,21 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// Standard imports.
 @import '@carbon/import-once/scss/import-once';
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
+
+// Other Carbon settings.
 @import '../SidePanel/side-panel-variables';
 
-@import 'carbon-components/scss/components/button/button';
+// CreateSidePanel uses the following Carbon components:
+// Form
+@import 'carbon-components/scss/components/form/form';
+
+// CreateSidePanel uses the following Cloud & Cognitive components:
+// SidePanel
+@import '../SidePanel/side-panel';
 
 $sizes: (
   extra-small: $extra-small-panel-size,
@@ -48,15 +57,16 @@ $sizes: (
     }
   }
 
-  .#{$block-class}__form {
+  .#{$carbon-prefix}--form.#{$block-class}__form {
     padding-top: $spacing-05;
+  }
+
+  .#{$block-class}__form.#{$carbon-prefix}--fieldset {
+    padding-top: $spacing-03;
   }
 
   .#{$block-class}__form > * {
     margin-bottom: $spacing-05;
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 
   .#{$block-class}__form-title-text {

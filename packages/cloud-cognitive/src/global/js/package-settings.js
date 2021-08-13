@@ -12,10 +12,13 @@ const defaults = {
   component: {
     // reviewed and released components:
     AboutModal: true,
+    APIKeyModal: true,
     CreateModal: true,
+    CreateTearsheetNarrow: true,
     EmptyState: true,
     ErrorEmptyState: true,
     ExportModal: true,
+    ExpressiveCard: true,
     HTTPError403: true,
     HTTPError404: true,
     HTTPErrorOther: true,
@@ -26,6 +29,7 @@ const defaults = {
     NotFoundEmptyState: true,
     NotificationsEmptyState: true,
     PageHeader: true,
+    ProductiveCard: true,
     RemoveModal: true,
     Saving: true,
     SidePanel: true,
@@ -37,7 +41,6 @@ const defaults = {
     UserProfileImage: true,
 
     // other public components not yet reviewed and released:
-    APIKeyModal: false,
     CreateFullPage: false,
     CreateFullPageSection: false,
     CreateFullPageStep: false,
@@ -45,13 +48,10 @@ const defaults = {
     CreateTearsheet: false,
     CreateTearsheetStep: false,
     CreateTearsheetSection: false,
-    CreateTearsheetNarrow: false,
     ContextHeader: false,
     ExampleComponent: false,
-    ExpressiveCard: false,
     LoadingBar: false,
     ModifiedTabs: false,
-    ProductiveCard: false,
     WebTerminal: false,
     /* new component flags here - comment used by generate CLI */
   },

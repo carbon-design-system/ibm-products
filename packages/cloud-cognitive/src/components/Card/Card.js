@@ -23,10 +23,10 @@ export let Card = forwardRef(
     {
       actionIcons,
       actionsPlacement,
-      caption,
       children,
       className,
       clickZone,
+      description,
       label,
       media,
       mediaPosition,
@@ -144,7 +144,7 @@ export let Card = forwardRef(
     const getHeaderProps = () => ({
       actions: getActions(),
       actionsPlacement,
-      caption,
+      description,
       hasActions: hasActions && actionsPlacement === 'top',
       label,
       title,
@@ -197,9 +197,6 @@ export let Card = forwardRef(
   }
 );
 
-// Return a placeholder if not released and not enabled by feature flag
-Card = pkg.checkComponentEnabled(Card, componentName);
-
 Card.propTypes = {
   actionIcons: PropTypes.arrayOf(
     PropTypes.shape({
@@ -211,10 +208,10 @@ Card.propTypes = {
     })
   ),
   actionsPlacement: PropTypes.oneOf(['top', 'bottom']),
-  caption: PropTypes.string,
   children: PropTypes.node,
   className: PropTypes.string,
   clickZone: PropTypes.oneOf(['one', 'two', 'three']),
+  description: PropTypes.string,
   label: PropTypes.string,
   media: PropTypes.node,
   mediaPosition: PropTypes.oneOf(['top', 'left']),

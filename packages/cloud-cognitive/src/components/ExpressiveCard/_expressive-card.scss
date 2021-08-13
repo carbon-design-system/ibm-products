@@ -5,9 +5,23 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-// An index file is most useful when you have multiple components
+// Standard imports.
+@import '@carbon/import-once/scss/import-once';
+@import '../../global/styles/carbon-settings';
+@import '../../global/styles/project-settings';
 
-// shared card styles can be found in the Card folder
-// in this case the expressive card is considered the default Card mode
-
+// ExpressiveCard uses the following Cloud & Cognitive components:
+// Card
 @import '../Card/card';
+
+@mixin card-expressive {
+  $block-class: #{$pkg-prefix}--card;
+
+  .#{$block-class}__title {
+    @include carbon--type-style('productive-heading-03');
+  }
+}
+
+@include exports('card-expressive') {
+  @include card-expressive;
+}

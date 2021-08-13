@@ -9,6 +9,7 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { moderate02 } from '@carbon/motion';
 import { pkg, carbon } from '../../settings';
 import { CreateTearsheet } from './CreateTearsheet';
 import { CreateTearsheetStep } from './CreateTearsheetStep';
@@ -152,7 +153,7 @@ describe(CreateTearsheet.displayName, () => {
     const cancelButtonElement = screen.getByText(cancelButtonText);
     click(nextButtonElement);
     const createTearsheetSteps = container.querySelector(
-      `.${tearsheetBlockClass}__multi-step-panel-content`
+      `.${tearsheetBlockClass}__content`
     ).children;
     expect(
       createTearsheetSteps[1].classList.contains(
@@ -194,7 +195,7 @@ describe(CreateTearsheet.displayName, () => {
     });
     click(nextButtonElement);
     const tearsheetChildren = container.querySelector(
-      `.${tearsheetBlockClass}__multi-step-panel-content`
+      `.${tearsheetBlockClass}__content`
     ).children;
     expect(
       tearsheetChildren[2].classList.contains(
@@ -345,7 +346,7 @@ describe(CreateTearsheet.displayName, () => {
     const backButtonElement = screen.getByText(backButtonText);
     click(backButtonElement);
     const tearsheetChildren = container.querySelector(
-      `.${tearsheetBlockClass}__multi-step-panel-content`
+      `.${tearsheetBlockClass}__content`
     ).children;
     expect(
       tearsheetChildren[0].classList.contains(
@@ -393,10 +394,12 @@ describe(CreateTearsheet.displayName, () => {
     const viewAllToggleElement = container.querySelector(
       `#${tearsheetBlockClass}__view-all-toggle`
     );
-    expect(viewAllToggleElement).toBeChecked();
-    expect(warn).toBeCalledWith(
-      `CreateTearsheet: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' prop.`
-    );
+    setTimeout(() => {
+      expect(viewAllToggleElement).toBeChecked();
+      expect(warn).toBeCalledWith(
+        `CreateTearsheet: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' prop.`
+      );
+    }, moderate02);
     rerender(
       <CreateTearsheet
         onRequestSubmit={jest.fn()}
@@ -498,7 +501,9 @@ describe(CreateTearsheet.displayName, () => {
     );
     const { click } = userEvent;
     click(screen.getByText(viewAllToggleLabelText));
-    expect(getByText(/Submit/g)).toHaveAttribute('disabled');
+    setTimeout(() => {
+      expect(getByText(/Submit/g)).toHaveAttribute('disabled');
+    }, moderate02);
   });
 
   it('should click one of the side navigation menu items that are displayed after clicking the view all toggle and call the scrollTo fn', () => {
@@ -541,11 +546,13 @@ describe(CreateTearsheet.displayName, () => {
       </CreateTearsheet>
     );
     click(screen.getByText(viewAllToggleLabelText));
-    const sideNavElement = screen.getByText(/test title 2/g, {
-      selector: `.${carbon.prefix}--side-nav__link-text`,
-    });
-    click(sideNavElement.parentElement);
-    expect(scrollToFn).toHaveBeenCalledTimes(1);
+    setTimeout(() => {
+      const sideNavElement = screen.getByText(/test title 2/g, {
+        selector: `.${carbon.prefix}--side-nav__link-text`,
+      });
+      click(sideNavElement.parentElement);
+      expect(scrollToFn).toHaveBeenCalledTimes(1);
+    }, moderate02);
   });
 
   it("should click one of the side navigation menu items that are displayed after clicking the view all toggle and produce a warning if the section's id is missing", () => {
@@ -575,14 +582,16 @@ describe(CreateTearsheet.displayName, () => {
       </CreateTearsheet>
     );
     click(screen.getByText(viewAllToggleLabelText));
-    const sideNavElement = screen.getByText(/test title 2/g, {
-      selector: `.${carbon.prefix}--side-nav__link-text`,
-    });
-    click(sideNavElement.parentElement);
-    expect(warn).toBeCalledWith(
-      `CreateTearsheet: CreateTearsheetSection is missing a required prop of 'id'`
-    );
-    jest.spyOn(console, 'error').mockRestore();
-    warn.mockRestore();
+    setTimeout(() => {
+      const sideNavElement = screen.getByText(/test title 2/g, {
+        selector: `.${carbon.prefix}--side-nav__link-text`,
+      });
+      click(sideNavElement.parentElement);
+      expect(warn).toBeCalledWith(
+        `CreateTearsheet: CreateTearsheetSection is missing a required prop of 'id'`
+      );
+      jest.spyOn(console, 'error').mockRestore();
+      warn.mockRestore();
+    }, moderate02);
   });
 });

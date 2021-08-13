@@ -64,6 +64,7 @@ export let SidePanel = React.forwardRef(
   ) => {
     const [shouldRender, setRender] = useState(open);
     const [animationComplete, setAnimationComplete] = useState(false);
+    const [panelHeight, setPanelHeight] = useState(0);
     const sidePanelRef = useRef();
     const sidePanelOverlayRef = useRef();
     const startTrapRef = useRef();
@@ -117,7 +118,8 @@ export let SidePanel = React.forwardRef(
     }, [actions, condensedActions, open, animationComplete]);
 
     /* istanbul ignore next */
-    const handleResize = () => {
+    const handleResize = (width, height) => {
+      setPanelHeight(height);
       const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
       const actionsContainer = getActionsContainerElement();
       let actionsHeight = actionsContainer.offsetHeight + 16; // add additional 1rem spacing to bottom padding
@@ -140,6 +142,9 @@ export let SidePanel = React.forwardRef(
     useEffect(() => {
       if (open && animateTitle && animationComplete) {
         const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
+        const sidePanelScrollArea = document.querySelector(
+          `#${blockClass}-outer .${blockClass}__inner-content`
+        );
         const sidePanelTitleElement = document.querySelector(
           `.${blockClass}__title-text`
         );
@@ -152,7 +157,7 @@ export let SidePanel = React.forwardRef(
         let sidePanelSubtitleElementHeight =
           sidePanelSubtitleElement?.offsetHeight || 0; // set default subtitle height if a subtitle is not provided to enable scrolling animation
 
-        const panelOuterHeight = sidePanelOuter?.offsetHeight;
+        const panelOuterHeight = panelHeight;
         const scrollSectionHeight = document.querySelector(
           `.${blockClass}__body-content`
         )?.offsetHeight;
@@ -170,13 +175,15 @@ export let SidePanel = React.forwardRef(
             sidePanelSubtitleElementHeight ||
           sidePanelSubtitleElementHeight === 0
             ? totalScrollingContentHeight - panelOuterHeight
-            : sidePanelSubtitleElementHeight < 0
+            : sidePanelSubtitleElementHeight;
+        sidePanelSubtitleElementHeight =
+          sidePanelSubtitleElementHeight < 0
             ? 16
             : sidePanelSubtitleElementHeight;
         /* istanbul ignore next */
-        sidePanelOuter &&
-          sidePanelOuter.addEventListener('scroll', () => {
-            const scrollTop = sidePanelRef.current.scrollTop;
+        sidePanelScrollArea &&
+          sidePanelScrollArea.addEventListener('scroll', () => {
+            const scrollTop = sidePanelScrollArea.scrollTop;
             // if scrolling has occurred
             if (scrollTop > 0) {
               sidePanelOuter.classList.add(
@@ -284,8 +291,13 @@ export let SidePanel = React.forwardRef(
         const sidePanelSubtitleElement = document.querySelector(
           `.${blockClass}__subtitle-text`
         );
+        const actionToolbarElement = document.querySelector(
+          `.${blockClass}__action-toolbar`
+        );
         const sidePanelSubtitleElementHeight =
           sidePanelSubtitleElement?.offsetHeight || 0;
+        const sidePanelActionBarElementHeight =
+          actionToolbarElement?.offsetHeight || 0;
         const titleHeight = sidePanelTitleElement?.offsetHeight + 24;
         sidePanelOuter?.style.setProperty(
           `--${blockClass}--title-container-height`,
@@ -295,8 +307,12 @@ export let SidePanel = React.forwardRef(
           `--${blockClass}--subtitle-container-height`,
           `${sidePanelSubtitleElementHeight}px`
         );
+        sidePanelOuter?.style.setProperty(
+          `--${blockClass}--action-bar-container-height`,
+          `${sidePanelActionBarElementHeight}px`
+        );
       }
-    }, [open, animateTitle, animationComplete, shouldRender]);
+    }, [open, animateTitle, animationComplete, shouldRender, panelHeight]);
 
     // click outside functionality if `includeOverlay` prop is set
     useEffect(() => {
@@ -331,14 +347,11 @@ export let SidePanel = React.forwardRef(
         onUnmount && onUnmount();
         setRender(false);
       }
-      sidePanelRef.current.style.overflow = 'auto';
-      sidePanelRef.current.style.overflowX = 'hidden';
       setAnimationComplete(true);
     };
 
     // initializes the side panel to open and prevents the side panel from being scrolled during animation
     const onAnimationStart = () => {
-      sidePanelRef.current.style.overflow = 'hidden';
       setAnimationComplete(false);
     };
 
@@ -437,6 +450,107 @@ export let SidePanel = React.forwardRef(
       },
     ]);
 
+    const renderHeader = () => (
+      <>
+        <div
+          className={cx(`${blockClass}__title-container`, {
+            [`${blockClass}__on-detail-step`]: currentStep > 0,
+            [`${blockClass}__title-container--no-animation`]: !animateTitle,
+            [`${blockClass}__title-container-is-animating`]: !animationComplete,
+          })}>
+          {currentStep > 0 && (
+            <Button
+              aria-label={navigationBackIconDescription}
+              kind="ghost"
+              size="small"
+              disabled={false}
+              renderIcon={ArrowLeft20}
+              iconDescription={navigationBackIconDescription}
+              className={`${blockClass}__navigation-back-button`}
+              onClick={onNavigationBack}
+            />
+          )}
+          {labelText && labelText.length && (
+            <p className={`${blockClass}__label-text`}>{labelText}</p>
+          )}
+          {renderTitle()}
+          <Button
+            aria-label={closeIconDescription}
+            kind="ghost"
+            size="small"
+            renderIcon={Close20}
+            iconDescription={closeIconDescription}
+            className={`${blockClass}__close-button`}
+            onClick={onRequestClose}
+            ref={sidePanelCloseRef}
+          />
+        </div>
+        {subtitle && subtitle.length && (
+          <p
+            className={cx(`${blockClass}__subtitle-text`, {
+              [`${blockClass}__subtitle-text-no-animation`]: !animateTitle,
+              [`${blockClass}__subtitle-text-no-animation-no-action-toolbar`]:
+                !animateTitle &&
+                (!actionToolbarButtons || !actionToolbarButtons.length),
+              [`${blockClass}__subtitle-text-is-animating`]: !animationComplete,
+            })}>
+            {subtitle}
+          </p>
+        )}
+        {actionToolbarButtons && actionToolbarButtons.length && (
+          <div
+            className={cx(`${blockClass}__action-toolbar`, {
+              [`${blockClass}__action-toolbar-no-animation`]: !animateTitle,
+            })}>
+            {actionToolbarButtons.map((action) => (
+              <Button
+                key={action.label}
+                kind={action.leading ? action.kind : 'ghost'}
+                size="small"
+                disabled={false}
+                renderIcon={action.icon}
+                iconDescription={action.label}
+                tooltipPosition="bottom"
+                tooltipAlignment="center"
+                className={cx([
+                  `${blockClass}__action-toolbar-button`,
+                  {
+                    [`${blockClass}__action-toolbar-icon-only-button`]:
+                      action.icon,
+                    [`${blockClass}__action-toolbar-leading-button`]:
+                      !action.icon,
+                  },
+                ])}
+                onClick={() => action.onActionToolbarButtonClick()}>
+                {action.leading && action.label}
+              </Button>
+            ))}
+          </div>
+        )}
+      </>
+    );
+
+    const renderTitle = () => (
+      <>
+        {title && title.length && (
+          <h2
+            className={`${blockClass}__title-text`}
+            title={title}
+            aria-hidden={false}>
+            {title}
+          </h2>
+        )}
+        {animateTitle && title && title.length && (
+          <h2
+            className={`${blockClass}__collapsed-title-text`}
+            title={title}
+            aria-hidden={true}>
+            {title}
+          </h2>
+        )}
+      </>
+    );
+
     const contentRef = ref || sidePanelRef;
 
     useResizeDetector({
@@ -479,104 +593,13 @@ export let SidePanel = React.forwardRef(
               className={`${blockClass}__visually-hidden`}>
               Focus sentinel
             </span>
+            {!animateTitle && renderHeader()}
             <div
               ref={sidePanelInnerRef}
-              className={`${blockClass}__inner-content`}>
-              <div
-                className={cx(`${blockClass}__title-container`, {
-                  [`${blockClass}__on-detail-step`]: currentStep > 0,
-                  [`${blockClass}__title-container--no-animation`]:
-                    !animateTitle,
-                  [`${blockClass}__title-container-is-animating`]:
-                    !animationComplete,
-                })}>
-                {currentStep > 0 && (
-                  <Button
-                    aria-label={navigationBackIconDescription}
-                    kind="ghost"
-                    size="small"
-                    disabled={false}
-                    renderIcon={ArrowLeft20}
-                    iconDescription={navigationBackIconDescription}
-                    className={`${blockClass}__navigation-back-button`}
-                    onClick={onNavigationBack}
-                  />
-                )}
-                {labelText && labelText.length && (
-                  <p className={`${blockClass}__label-text`}>{labelText}</p>
-                )}
-                {title && title.length && (
-                  <h2
-                    className={`${blockClass}__title-text`}
-                    title={title}
-                    aria-hidden={false}>
-                    {title}
-                  </h2>
-                )}
-                {title && title.length && (
-                  <h2
-                    className={`${blockClass}__collapsed-title-text`}
-                    title={title}
-                    aria-hidden={true}>
-                    {title}
-                  </h2>
-                )}
-                <Button
-                  aria-label={closeIconDescription}
-                  kind="ghost"
-                  size="small"
-                  renderIcon={Close20}
-                  iconDescription={closeIconDescription}
-                  className={`${blockClass}__close-button`}
-                  onClick={onRequestClose}
-                  ref={sidePanelCloseRef}
-                />
-              </div>
-              {subtitle && subtitle.length && (
-                <p
-                  className={cx(`${blockClass}__subtitle-text`, {
-                    [`${blockClass}__subtitle-text-no-animation`]:
-                      !animateTitle,
-                    [`${blockClass}__subtitle-text-no-animation-no-action-toolbar`]:
-                      !animateTitle &&
-                      (!actionToolbarButtons || !actionToolbarButtons.length),
-                    [`${blockClass}__subtitle-text-is-animating`]:
-                      !animationComplete,
-                  })}>
-                  {subtitle}
-                </p>
-              )}
-              {actionToolbarButtons && actionToolbarButtons.length && (
-                <div
-                  className={cx(`${blockClass}__action-toolbar`, {
-                    [`${blockClass}__action-toolbar-no-animation`]:
-                      !animateTitle,
-                  })}>
-                  {actionToolbarButtons.map((action) => (
-                    <Button
-                      key={action.label}
-                      kind={action.leading ? action.kind : 'ghost'}
-                      size="small"
-                      disabled={false}
-                      renderIcon={action.icon}
-                      iconDescription={action.label}
-                      tooltipPosition="bottom"
-                      tooltipAlignment="center"
-                      className={cx([
-                        `${blockClass}__action-toolbar-button`,
-                        {
-                          [`${blockClass}__action-toolbar-icon-only-button`]:
-                            action.icon,
-                          [`${blockClass}__action-toolbar-leading-button`]:
-                            !action.icon,
-                        },
-                      ])}
-                      onClick={() => action.onActionToolbarButtonClick()}>
-                      {action.leading && action.label}
-                    </Button>
-                  ))}
-                </div>
-              )}
+              className={cx(`${blockClass}__inner-content`, {
+                [`${blockClass}__static-inner-content`]: !animateTitle,
+              })}>
+              {animateTitle && renderHeader()}
               <div className={`${blockClass}__body-content`}>{children}</div>
               <ActionSet
                 actions={actions}

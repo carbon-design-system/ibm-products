@@ -12,15 +12,130 @@ import { CreateFullPage } from '.';
 
 ## Overview
 
-This component is an example
+When to use
+
+- In Cloud and Cognitive, the Full page create flow is the process the user must
+  complete in order to use a product or service.
+- In IBM Cloud public, it is the alternative to the Provisioning flow for a
+  non-billable service.
+
+When not to use
+
+- Don’t use the Full page option when the product or service is usable before
+  the current creation flow is initiated.
+- For IBM Public Cloud, do not use this when provisioning a service directly
+  from the Catalog, or when creating a non-billable resource that could happen
+  in a side panel/in context.
 
 ## Example usage
 
-Here it is in use.
+There are **3** components that make up a Create Full Page component, which can
+be used in unison to create the desired look, or flow. Please note, to utilize
+the Create Full Page component, you'll need to have a minimum of two steps. If
+you are looking for a one step creation flow, consider Create Tearsheet, Create
+Side Panel, or Create Modal.
 
-<Canvas>
-  <Story id={getStoryId(CreateFullPage.displayName, 'boxed-set')} />
-</Canvas>
+#### Simple Create Full Page
+
+This is used when you have one section per step, and no need for the toggle
+view. This can be created by passing in the overall `<CreateFullPage />`
+component and the `<CreateFullPageStep />` component as shown below:
+
+```
+    <CreateFullPage {...args}>
+      <CreateFullPageStep title: 'Partition'>
+        <TextInput
+          id="test-1"
+          invalidText="A valid value is required"
+          labelText="Topic name"
+          placeholder="Enter topic name"
+        />
+      </CreateFullPageStep>
+      <CreateFullPageStep title="Core configuration">
+        <NumberInput
+          id="test-2"
+          invalidText="Number is not valid"
+          label="Number input label"
+          max={100}
+          min={0}
+          step={10}
+          value={50}
+        />
+      </CreateFullPageStep>
+    </CreateFullPage>
+```
+
+Note that in order for this to render correctly with the preferred styling, a
+`title` prop _must_ be supplied to the `<CreateFullPageStep />` component.
+
+#### Create Full Page with Toggle View
+
+The usage of this optional toggle will display all content, including content
+that may not have otherwise been seen, in a different view. The toggle triggers
+the `<ProgressIndicator />` component in the left side influence to switch to a
+`<SideNav />` and all content to display in a list format in the main content
+area. The setup for this varies slightly from the two simple examples provided
+above.
+
+In order to utilize both toggle views, all `CreateFullPageStep` components must
+_only_ have `CreateFullPageSection`s as children. A `title` prop must be added
+to both the `CreateFullPageStep` _and_ `CreateFullPageSection` components to
+display correctly. Your code would look like this:
+
+```
+      ...
+      <CreateFullPageStep>
+        <CreateFullPageSection
+          id="1"
+          title="Partition"
+          description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
+          <TextInput
+            id="test-1"
+            invalidText="A valid value is required"
+            labelText="Topic name"
+            placeholder="Enter topic name"
+          />
+        </CreateFullPageSection>
+        <CreateFullPageSection
+          id="2"
+          title="Partition 2"
+          description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
+          <TextInput
+            id="test-1"
+            invalidText="A valid value is required"
+            labelText="Topic name"
+            placeholder="Enter topic name"
+          />
+        </CreateFullPageSection>
+        <CreateFullPageSection
+          id="3"
+          title="Partition 3"
+          description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
+          <TextInput
+            id="test-2"
+            invalidText="A valid value is required"
+            labelText="Topic name"
+            placeholder="Enter topic name"
+          />
+        </CreateFullPageSection>
+      </CreateFullPageStep>
+```
+
+Note that each `section` has their own unique ID. This is important, because it
+will tell our left navigation exactly where to scroll to upon click. We can also
+add some additional props in our section which would allow it to only be shown
+when the toggle is switched to 'on' -- `viewAllOnly`:
+
+```
+      <CreateFullPageStep title="Empty" secondaryLabel="Optional">
+        <CreateFullPageSection
+          viewAllOnly
+          title="Empty"
+          id="create-full-page-section-empty">
+          Empty step for demonstration purposes
+        </CreateFullPageSection>
+      </CreateFullPageStep>
+```
 
 ## Component API
 

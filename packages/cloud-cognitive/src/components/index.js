@@ -33,12 +33,14 @@ export {
 } from './EmptyStates';
 export { ExampleComponent } from './ExampleComponent';
 export { ExportModal } from './ExportModal';
+export { ExpressiveCard } from './ExpressiveCard';
 export { HTTPError403, HTTPError404, HTTPErrorOther } from './HTTPErrors';
 export { ImportModal } from './ImportModal';
 export { LoadingBar } from './LoadingBar';
 export { ModifiedTabs } from './ModifiedTabs';
 export { NotificationsPanel } from './NotificationsPanel';
 export { PageHeader } from './PageHeader';
+export { ProductiveCard } from './ProductiveCard';
 export { RemoveModal } from './RemoveModal';
 export { Saving } from './Saving';
 export { SidePanel } from './SidePanel';

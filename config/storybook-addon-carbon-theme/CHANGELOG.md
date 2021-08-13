@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/storybook-addon-theme@0.8.0...@carbon/storybook-addon-theme@0.9.0) (2021-08-10)
+
+
+### Features
+
+* update Carbon versions and dependencies ([#1110](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1110)) ([b41f433](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b41f4331e31cbd9e41d2364b24e6ef50c7fd2d8d))
+
+
+
+
+
 # [0.8.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/storybook-addon-theme@0.7.0...@carbon/storybook-addon-theme@0.8.0) (2021-07-28)
 
 

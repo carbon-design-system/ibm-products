@@ -5,10 +5,15 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// Standard imports.
+@import '@carbon/import-once/scss/import-once';
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
+// Saving uses the following Carbon components:
+// Button, InlineLoading
 @import 'carbon-components/scss/components/button/button';
+@import 'carbon-components/scss/components/inline-loading/inline-loading';
 
 @mixin saving {
   $block-class: #{$pkg-prefix}--saving;

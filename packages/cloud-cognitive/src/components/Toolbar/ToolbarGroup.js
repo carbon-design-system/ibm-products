@@ -10,8 +10,7 @@ import { node, string } from 'prop-types';
 import React, { forwardRef } from 'react';
 
 import { pkg } from '../../settings';
-
-const { checkComponentEnabled, prefix } = pkg;
+import { blockClass } from './Toolbar';
 
 /** Toolbar groups organize the commands within a toolbar into related groups. */
 export let ToolbarGroup = forwardRef(
@@ -20,7 +19,7 @@ export let ToolbarGroup = forwardRef(
       <div
         {...rest}
         ref={ref}
-        className={cx(`${prefix}--toolbar__group`, className)}>
+        className={cx(`${blockClass}__group`, className)}>
         {children}
       </div>
     );
@@ -38,4 +37,4 @@ ToolbarGroup.propTypes = {
   className: string,
 };
 
-ToolbarGroup = checkComponentEnabled(ToolbarGroup, componentName);
+ToolbarGroup = pkg.checkComponentEnabled(ToolbarGroup, componentName);

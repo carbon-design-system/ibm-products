@@ -5,19 +5,28 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// Standard imports.
+@import '@carbon/import-once/scss/import-once';
 @import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
+
+// Other Carbon settings.
 @import '../../global/styles/mixins';
-
 @import 'carbon-components/scss/globals/grid/grid';
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/content-switcher/content-switcher';
-@import 'carbon-components/scss/components/tabs/tabs';
 
+// PageHeader uses the following Carbon components:
+// BreadcrumbItem, Grid, Column, Row, Button, SkeletonText, Tag
+@import 'carbon-components/scss/components/breadcrumb/breadcrumb';
+@import 'carbon-components/scss/components/button/button';
+@import 'carbon-components/scss/components/skeleton/skeleton-text';
+@import 'carbon-components/scss/components/tag/tag';
+
+// PageHeader uses the following Cloud & Cognitive components:
+// ActionBar, BreadcrumbWithOverflow, TagSet, ButtonSetWithOverflow
+@import '../ActionBar/action-bar';
+@import '../BreadcrumbWithOverflow/breadcrumb-with-overflow';
+@import '../TagSet/tag-set';
 @import '../ButtonSetWithOverflow/button-set-with-overflow';
-@import '../ActionBar/index';
-@import '../TagSet/index';
-@import '../BreadcrumbWithOverflow/index';
 
 $block-class: #{$pkg-prefix}--page-header;
 $breadcrumb-block-class: #{$pkg-prefix}--breadcrumb-with-overflow;

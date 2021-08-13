@@ -6,10 +6,12 @@
 //
 
 @import '@carbon/import-once/scss/import-once';
+@import '@carbon/layout/scss/breakpoint';
 @import '@carbon/layout/scss/convert';
 @import '@carbon/themes/scss/tokens';
 
 @import 'carbon-components/scss/components/button/button';
+@import 'carbon-components/scss/globals/scss/vars';
 
 @import '../../global/styles/project-settings';
 
@@ -26,14 +28,14 @@
   );
 
   .#{$block-class} {
+    @include carbon--breakpoint($name: lg) {
+      justify-content: flex-end;
+    }
+
     display: flex;
     min-width: $dimensions;
     min-height: $dimensions;
-    background-color: $ui-02;
-  }
-
-  .#{$block-class}--horizontal {
-    border-bottom: $border;
+    background-color: $ui-01;
   }
 
   .#{$block-class}--vertical,
@@ -47,17 +49,17 @@
 
   .#{$block-class}__group {
     display: flex;
-  }
-
-  .#{$block-class}--horizontal > .#{$block-class}__group {
     border-right: $border;
-  }
-
-  .#{$block-class}--vertical > .#{$block-class}__group {
     border-bottom: $border;
   }
 
+  .#{$block-class}--vertical > .#{$block-class}__group,
   .#{$block-class}__group:last-of-type {
-    border-width: 0;
+    border-right-width: 0;
+  }
+
+  .#{$block-class}--vertical > .#{$block-class}__group:last-of-type,
+  .#{$block-class} .#{$prefix}--dropdown {
+    border-bottom-width: 0;
   }
 }

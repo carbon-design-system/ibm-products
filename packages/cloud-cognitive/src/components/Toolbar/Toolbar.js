@@ -12,26 +12,23 @@ import React, { forwardRef } from 'react';
 import { pkg } from '../../settings';
 
 const { checkComponentEnabled, prefix } = pkg;
-
 const blockClass = `${prefix}--toolbar`;
 
 /** Toolbars are a collection of action items that organize a program’s interaction patterns into a series of closely related commands. */
-export let Toolbar = forwardRef(
-  ({ children, className, vertical, ...rest }, ref) => {
-    return (
-      <div
-        {...rest}
-        ref={ref}
-        className={cx(blockClass, className, {
-          [`${blockClass}--horizontal`]: !vertical,
-          [`${blockClass}--vertical`]: vertical,
-        })}
-        role="toolbar">
-        {children}
-      </div>
-    );
-  }
-);
+let Toolbar = forwardRef(({ children, className, vertical, ...rest }, ref) => {
+  return (
+    <div
+      {...rest}
+      ref={ref}
+      className={cx(blockClass, className, {
+        [`${blockClass}--vertical`]: vertical,
+      })}
+      {...(vertical && { 'aria-orientation': 'vertical' })}
+      role="toolbar">
+      {children}
+    </div>
+  );
+});
 
 const componentName = 'Toolbar';
 Toolbar.displayName = componentName;
@@ -48,3 +45,5 @@ Toolbar.propTypes = {
 };
 
 Toolbar = checkComponentEnabled(Toolbar, componentName);
+
+export { blockClass, Toolbar };

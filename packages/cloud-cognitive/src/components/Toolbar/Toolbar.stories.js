@@ -18,8 +18,13 @@ import {
   ZoomOut16,
 } from '@carbon/icons-react';
 
-import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
-import React from 'react';
+import {
+  Dropdown,
+  OverflowMenu,
+  OverflowMenuItem,
+} from 'carbon-components-react';
+
+import React, { useState } from 'react';
 
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 
@@ -38,7 +43,13 @@ export default {
   },
 };
 
-function Template(args) {
+export function _Toolbar(args) {
+  const dropdownItems = ['11', '12', '14', '16', '18'];
+
+  const [selectedDropdownItem, setSelectedDropdownItem] = useState(
+    dropdownItems[(dropdownItems.length / 2) | 0]
+  );
+
   return (
     <Toolbar {...args}>
       <ToolbarGroup>
@@ -62,6 +73,16 @@ function Template(args) {
       </ToolbarGroup>
 
       <ToolbarGroup>
+        <Dropdown
+          id="dropdown"
+          initialSelectedItem={selectedDropdownItem}
+          items={dropdownItems}
+          label={selectedDropdownItem}
+          onChange={({ selectedItem }) => setSelectedDropdownItem(selectedItem)}
+        />
+      </ToolbarGroup>
+
+      <ToolbarGroup>
         <OverflowMenu flipped>
           <OverflowMenuItem itemText="Color palette" />
           <OverflowMenuItem itemText="Text creation" />
@@ -72,5 +93,3 @@ function Template(args) {
     </Toolbar>
   );
 }
-
-export const _Toolbar = Template.bind({});

@@ -9,7 +9,9 @@
 // and a structure (s) which is an array of items, each of which can be a
 // component name or another entry. Component names include a prefix to enable
 // name-spacing: the prefix is used when searching, but not included in
-// materialized paths.
+// materialized paths. Component names may also be renamed for display by
+// adding the new name after a colon: the new name is used in materialized
+// paths but ignored during searching.
 const s = [
   {
     n: 'Cloud & Cognitive',
@@ -92,24 +94,24 @@ const s = [
       {
         n: 'Components',
         s: [
-          's/Card',
+          's/Card:Card#legacy',
           's/Decorator',
           's/DataTablePagination',
           's/DelimitedList',
           's/ExternalLink',
           's/ICA',
-          's/Icon',
+          's/Icon:Icon#legacy',
           's/IconButton',
-          's/Nav',
+          's/Nav:Nav#legacy',
           's/Pill',
-          's/ProfileImage',
+          's/ProfileImage:ProfileImage#legacy',
           's/ScrollGradient',
           's/StackedNotification',
-          's/StatusIcon',
+          's/StatusIcon:StatusIcon#legacy',
           's/StringFormatter',
           's/TruncatedList',
           's/TimeIndicator',
-          's/TrendingCard',
+          's/TrendingCard:TrendingCard#legacy',
           's/TypeLayout',
         ],
       },
@@ -118,23 +120,23 @@ const s = [
         s: [
           's/ComboButton',
           's/DataDecorator',
-          's/ErrorPage',
+          's/ErrorPage:ErrorPage#legacy',
           's/FilterPanel',
-          's/Header',
+          's/Header:Header#legacy',
           's/IconButtonBar',
           's/NonEntitledSection',
-          's/Panel',
-          's/PanelV2',
+          's/Panel:Panel#legacy',
+          's/PanelV2:PanelV2#legacy',
           's/SearchBar',
-          's/Shell',
-          's/StatusIndicator',
-          's/SummaryCard',
+          's/Shell:Shell#legacy',
+          's/StatusIndicator:StatusIndicator#legacy',
+          's/SummaryCard:SummaryCard#legacy',
           's/TagWall',
           's/TagWallFilter',
-          's/Tearsheet',
-          's/TearsheetSmall',
-          's/Toolbar',
-          's/Wizard',
+          's/Tearsheet:Tearsheet#legacy',
+          's/TearsheetSmall:TearsheetSmall#legacy',
+          's/Toolbar:Toolbar#legacy',
+          's/Wizard:Wizard#legacy',
         ],
       },
       {
@@ -146,23 +148,28 @@ const s = [
   {
     n: 'CD&AI legacy',
     s: [
-      'a/ContextHeader',
-      'a/IdeAPIKeyGeneration',
-      'a/IdeButton',
-      'a/IdeCard',
-      'a/IdeCreate',
-      'a/IdeDataTable',
-      'a/IdeEmptyState',
-      'a/IdeFilter',
-      'a/IdeHome',
-      'a/IdeHTTPErrors',
-      'a/IdeImporting',
-      'a/IdeNavigation',
-      'a/IdeRemove',
-      'a/IdeSaving',
-      'a/IdeSideNavMenu',
-      'a/IdeSlideOverPanel',
-      'a/IdeTableToolbarSearch',
+      {
+        n: 'Components',
+        s: [
+          'a/ContextHeader:ContextHeader#legacy',
+          'a/IdeAPIKeyGeneration:IdeAPIKeyGeneration#legacy',
+          'a/IdeButton:IdeButton#legacy',
+          'a/IdeCard:IdeCard#legacy',
+          'a/IdeCreate:IdeCreate#legacy',
+          'a/IdeDataTable:IdeDataTable#legacy',
+          'a/IdeEmptyState:IdeEmptyState#legacy',
+          'a/IdeFilter:IdeFilter#legacy',
+          'a/IdeHome:IdeHome#legacy',
+          'a/IdeHTTPErrors:IdeHTTPErrors#legacy',
+          'a/IdeImporting:IdeImporting#legacy',
+          'a/IdeNavigation:IdeNavigation#legacy',
+          'a/IdeRemove:IdeRemove#legacy',
+          'a/IdeSaving:IdeSaving#legacy',
+          'a/IdeSideNavMenu:IdeSideNavMenu#legacy',
+          'a/IdeSlideOverPanel:IdeSlideOverPanel#legacy',
+          'a/IdeTableToolbarSearch:IdeTableToolbarSearch#legacy',
+        ],
+      },
     ],
   },
   {
@@ -171,6 +178,11 @@ const s = [
   },
 ];
 
+const getEntryDisplayName = (name) => {
+  const match = name.match(/.*?\/(?:(.*):(.*)|(.*))/);
+  return match[2] ?? match[3];
+};
+
 // This function takes an s array and returns an array of the fully
 // materialized paths in the storybook structure in order
 const getSectionOrder = (sArray) =>
@@ -178,7 +190,7 @@ const getSectionOrder = (sArray) =>
     .map((entry) =>
       typeof entry === 'string'
         ? // if the entry is a string, return it (without the prefix)
-          entry.match(/.*?\/(.*)/)[1]
+          getEntryDisplayName(entry)
         : // if the entry is another structure, return its name, but first get
           // the fully materialized paths it contains and add the entry name
           // to the front of each
@@ -203,6 +215,11 @@ export const getSectionSequence = (kind) =>
 
 const prepend = (elt, arr) => arr && [elt].concat(arr);
 
+const getEntryPrefixAndComponentName = (name) => {
+  const match = name.match(/(?:(.*):(.*)|(.*?\/.*))/);
+  return match[1] ?? match[3];
+};
+
 // This function takes an s array and component name and returns the
 // materialized path of the component name as an array of the nested section
 // names, or null if the component name is not found
@@ -214,8 +231,8 @@ const getPath = (s, componentAndPrefix, componentName) =>
       (typeof next === 'string'
         ? // if this entry is a string, and it matches the component name
           // we're looking for, return it as an array, else return null
-          next === componentAndPrefix
-          ? [componentName]
+          getEntryPrefixAndComponentName(next) === componentAndPrefix
+          ? [getEntryDisplayName(next)]
           : null
         : // if this entry is another structure, find the materialized path
           // into it and prepend its name if found and return null otherwise

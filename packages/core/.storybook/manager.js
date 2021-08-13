@@ -50,6 +50,34 @@ addons.setConfig({
             </div>
           );
 
+        // if the name has #legacy then render a 'Legacy' tag on the right
+        case 'legacy':
+          return (
+            <div
+              style={{
+                flex: '1 0 auto',
+                display: 'flex',
+                alignItems: 'stretch',
+                justifyContent: 'space-between',
+              }}>
+              {parts[0]}
+              <div
+                style={{
+                  background: dark ? '#3a3a3a' : '#eeeeee',
+                  /* stylelint-disable-next-line carbon/type-token-use */
+                  fontSize: '11px',
+                  border: '.1px solid transparent',
+                  /* stylelint-disable-next-line carbon/layout-token-use */
+                  padding: '0 .5rem',
+                  /* stylelint-disable-next-line carbon/layout-token-use */
+                  margin: '0 .5em',
+                  borderRadius: '8px',
+                }}>
+                Legacy
+              </div>
+            </div>
+          );
+
         // if the name doesn't have a recognized # label, just render the name
         default:
           return parts[0];

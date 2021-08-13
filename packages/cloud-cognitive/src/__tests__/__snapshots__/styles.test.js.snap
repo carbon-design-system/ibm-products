@@ -988,6 +988,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-bottom: var(--cds-spacing-06, 1.5rem);
 }
 
+.exp--http-errors .exp--http-errors__error-code-label,
+.exp--http-errors .exp--http-errors__title,
+.exp--http-errors .exp--http-errors__description {
+  color: var(--cds-text-01, #161616);
+}
+
 .exp--http-errors .exp--http-errors__link {
   display: block;
   margin-bottom: var(--cds-spacing-02, 0.25rem);

@@ -34,13 +34,7 @@ export default {
       },
     },
   },
-  decorators: [
-    (Story) => (
-      <div className="bx--grid card-story">
-        <Story />
-      </div>
-    ),
-  ],
+  decorators: [(Story) => <div className="bx--grid card-story">{Story()}</div>],
 };
 
 const defaultProps = {
@@ -57,15 +51,15 @@ const defaultProps = {
     {
       id: '1',
       icon: Edit16,
-      onClick: () => action('on click'),
-      onKeyDown: () => action('on keydown'),
+      onClick: action('on click'),
+      onKeyDown: action('on keydown'),
       iconDescription: 'Edit',
     },
     {
       id: '2',
       icon: TrashCan16,
-      onClick: () => action('on click'),
-      onKeyDown: () => action('on keydown'),
+      onClick: action('on click'),
+      onKeyDown: action('on keydown'),
       iconDescription: 'Delete',
     },
   ],
@@ -121,14 +115,14 @@ export const WithOverflow = prepareStory(Template, {
       {
         id: '1',
         itemText: 'Edit',
-        onClick: () => action('on click'),
-        onKeyDown: () => action('on keydown'),
+        onClick: action('on click'),
+        onKeyDown: action('on keydown'),
       },
       {
         id: '2',
         itemText: 'Delete',
-        onClick: () => action('on click'),
-        onKeyDown: () => action('on keydown'),
+        onClick: action('on click'),
+        onKeyDown: action('on keydown'),
       },
     ],
   },
@@ -154,8 +148,8 @@ export const ComplexBottomBar = prepareStory(Template, {
 export const Clickable = prepareStory(Template, {
   args: {
     ...defaultProps,
-    onClick: () => action('on click'),
-    onKeyDown: () => action('on keydown'),
+    onClick: action('on click'),
+    onKeyDown: action('on keydown'),
     primaryButtonText: 'Ghost button',
     actionIcons: [],
   },

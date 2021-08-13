@@ -47,10 +47,6 @@ ProductiveCard.propTypes = {
    */
   actionsPlacement: PropTypes.oneOf(['top', 'bottom']),
   /**
-   * Optional header caption
-   */
-  caption: PropTypes.string,
-  /**
    * Content that shows in the body of the card
    */
   children: PropTypes.node,
@@ -62,6 +58,10 @@ ProductiveCard.propTypes = {
    * Designates which zones of the card are clickable. Refer to design documentation for implementation guidelines
    */
   clickZone: PropTypes.oneOf(['one', 'two', 'three']),
+  /**
+   * Optional header description
+   */
+  description: PropTypes.string,
   /**
    * Optional label for the top of the card
    */

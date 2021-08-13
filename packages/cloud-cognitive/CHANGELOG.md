@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.69.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.69.4...@carbon/ibm-cloud-cognitive@0.69.5) (2021-08-13)
+
+
+### Bug Fixes
+
+* **Tearsheet:** ensure tearsheet styles override carbon styles ([#1146](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1146)) ([d936f42](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d936f42b05acf3827154e8656ec90a243e9932ce))
+
+
+
+
+
+## [0.69.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.69.3...@carbon/ibm-cloud-cognitive@0.69.4) (2021-08-12)
+
+
+### Bug Fixes
+
+* **CreateSidePanel:** design fixes and side panel header/scrolling work ([#1141](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1141)) ([be67abc](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/be67abc89964816d447d3f0c24cbc0fcbaf61c6f))
+
+
+
+
+
+## [0.69.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.69.2...@carbon/ibm-cloud-cognitive@0.69.3) (2021-08-12)
+
+
+### Bug Fixes
+
+* review feedback for cards ([#1131](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1131)) ([aecea1c](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/aecea1c5b4453e0c3a7af28ab55d6f354c77dbd5))
+
+
+
+
+
+## [0.69.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.69.1...@carbon/ibm-cloud-cognitive@0.69.2) (2021-08-12)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
 ## [0.69.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.69.0...@carbon/ibm-cloud-cognitive@0.69.1) (2021-08-12)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

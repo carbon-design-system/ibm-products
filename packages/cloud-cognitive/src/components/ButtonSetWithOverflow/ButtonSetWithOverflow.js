@@ -81,19 +81,23 @@ export const ButtonSetWithOverflow = ({
   const AButtonSet = React.forwardRef(({ buttons, ...rest }, ref) => {
     return (
       <ButtonSet {...rest} ref={ref}>
-        {buttons.map(({ label, key, kind, ...other }) => {
-          /* istanbul ignore next */
-          const usedKind = kind || 'primary';
-          return (
-            <Button
-              key={key && `button-set-${key}`}
-              kind={usedKind}
-              {...other}
-              size={buttonSize}
-              type="button">
-              {label}
-            </Button>
-          );
+        {buttons.map(({ label, key, kind, custom, ...other }) => {
+          if (custom) {
+            return custom;
+          } else {
+            /* istanbul ignore next */
+            const usedKind = kind || 'primary';
+            return (
+              <Button
+                key={key && `button-set-${key}`}
+                kind={usedKind}
+                {...other}
+                size={buttonSize}
+                type="button">
+                {label}
+              </Button>
+            );
+          }
         })}
       </ButtonSet>
     );
@@ -102,14 +106,18 @@ export const ButtonSetWithOverflow = ({
     return (
       <ButtonMenu {...rest} ref={ref} label={buttonSetOverflowLabel}>
         {buttons
-          .map(({ label, key, kind, ...other }) => (
-            <ButtonMenuItem
-              key={key && `button-menu-${key}`}
-              isDelete={kind?.startsWith('danger')}
-              itemText={label}
-              {...prepareProps(other, ['iconDescription', 'renderIcon'])}
-            />
-          ))
+          .map(({ label, key, kind, custom, ...other }) =>
+            custom ? (
+              custom
+            ) : (
+              <ButtonMenuItem
+                key={key && `button-menu-${key}`}
+                isDelete={kind?.startsWith('danger')}
+                itemText={label}
+                {...prepareProps(other, ['iconDescription', 'renderIcon'])}
+              />
+            )
+          )
           .reverse()}
       </ButtonMenu>
     );
@@ -186,13 +194,19 @@ ButtonSetWithOverflow.propTypes = {
    * Carbon Button API https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
   buttons: PropTypes.arrayOf(
-    PropTypes.shape({
-      ...Button.propTypes,
-      key: PropTypes.string.isRequired,
-      kind: Button.propTypes.kind,
-      label: PropTypes.node,
-      onClick: PropTypes.func,
-    })
+    PropTypes.oneOfType([
+      PropTypes.shape({
+        ...Button.propTypes,
+        key: PropTypes.string.isRequired,
+        kind: Button.propTypes.kind,
+        label: PropTypes.node,
+        onClick: PropTypes.func,
+      }),
+      PropTypes.shape({
+        key: PropTypes.string.isRequired,
+        custom: PropTypes.node,
+      }),
+    ])
   ).isRequired,
   /**
    * className

@@ -1,0 +1,14 @@
+@import '../../global/styles/carbon-settings';
+
+.custom-node.custom-node {
+  min-width: 160px;
+}
+
+.custom-node.custom-node .custom-node__trigger {
+  width: 100%;
+  padding: 0 $spacing-05;
+}
+
+.custom-node__options.#{$carbon-prefix}--overflow-menu-options::after {
+  content: initial;
+}

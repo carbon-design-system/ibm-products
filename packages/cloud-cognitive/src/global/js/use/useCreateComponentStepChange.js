@@ -5,50 +5,154 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useEffect } from 'react';
-import { getFocusableElements } from '../utils/getFocusableElements';
+import { useCallback, useEffect } from 'react';
 
-/**
- * Returns the previous state values included in the param
- * @param {object} previousState
- * @param {number} currentStep
- * @param {Function} getCreateComponentSteps
- * @param {string} componentBlockClass
- */
-export const useCreateComponentStepChange = (
-  previousState,
+export const useCreateComponentStepChange = ({
+  setCurrentStep,
+  setIsSubmitting,
+  setShouldViewAll,
+  onClose,
+  onRequestSubmit,
+  componentName,
+  getComponentSteps,
   currentStep,
-  getCreateComponentSteps,
-  componentBlockClass
-) => {
+  shouldViewAll,
+  backButtonText,
+  cancelButtonText,
+  submitButtonText,
+  nextButtonText,
+  isSubmitting,
+  componentBlockClass,
+  setCreateComponentActions,
+}) => {
+  // useEffect to handle multi step logic
   useEffect(() => {
-    if (previousState?.currentStep !== currentStep && currentStep > 0) {
-      const visibleStepInnerContent = document.querySelector(
-        `.${componentBlockClass}__step.${componentBlockClass}__step--visible-step`
-      );
-      const fullPageSteps = getCreateComponentSteps();
-      const focusableStepElements =
-        fullPageSteps &&
-        fullPageSteps.length &&
-        getFocusableElements(visibleStepInnerContent);
-      const activeStepComponent =
-        fullPageSteps && fullPageSteps.length && fullPageSteps[currentStep - 1];
-      if (activeStepComponent && activeStepComponent.props.onMount) {
-        activeStepComponent.props.onMount();
+    const onUnmount = () => {
+      setCurrentStep(0);
+      setIsSubmitting(false);
+      setShouldViewAll(false);
+      onClose();
+    };
+    const handleOnRequestSubmit = async () => {
+      // check if onRequestSubmit returns a promise
+      try {
+        await onRequestSubmit();
+        onUnmount();
+      } catch (error) {
+        setIsSubmitting(false);
+        console.warn(`${componentName} submit error: ${error}`);
       }
-      if (focusableStepElements && focusableStepElements.length) {
-        focusableStepElements[0].focus();
+    };
+    const isSubmitDisabled = () => {
+      let step = 0;
+      let submitDisabled = false;
+      let viewAllSubmitDisabled = false;
+      const createComponentSteps = getComponentSteps();
+      createComponentSteps.forEach((child) => {
+        step++;
+        if (currentStep === step) {
+          submitDisabled = child.props.disableSubmit;
+        }
+        if (shouldViewAll && child.props.disableSubmit) {
+          viewAllSubmitDisabled = true;
+        }
+      });
+      if (!shouldViewAll) {
+        return submitDisabled;
+      }
+      return viewAllSubmitDisabled;
+    };
+    const handleNext = async () => {
+      setIsSubmitting(true);
+      const createSteps = getComponentSteps();
+      if (createSteps[currentStep - 1].props.onNext) {
+        try {
+          await createSteps[currentStep - 1].props.onNext();
+          continueToNextStep();
+        } catch (error) {
+          setIsSubmitting(false);
+          console.warn(`${componentName} onNext error: ${error}`);
+        }
       } else {
-        const nextButton = document.querySelector(
-          `.${componentBlockClass}__create-button`
-        );
-        nextButton?.focus();
+        continueToNextStep();
       }
+    };
+    const handleSubmit = async () => {
+      setIsSubmitting(true);
+      const createSteps = getComponentSteps();
+      // last step should have onNext as well
+      if (createSteps[currentStep - 1].props.onNext) {
+        try {
+          await createSteps[currentStep - 1].props.onNext();
+          await handleOnRequestSubmit();
+        } catch (error) {
+          setIsSubmitting(false);
+          console.warn(`${componentName} onNext error: ${error}`);
+        }
+      } else {
+        await handleOnRequestSubmit();
+      }
+    };
+    if (getComponentSteps()?.length) {
+      const createSteps = getComponentSteps();
+      const total = createSteps.length;
+      const buttons = [];
+      if (total > 1 && !shouldViewAll) {
+        buttons.push({
+          key: 'create-action-button-back',
+          label: backButtonText,
+          onClick: () => setCurrentStep((prev) => prev - 1),
+          kind: 'secondary',
+          disabled: currentStep === 1,
+        });
+      }
+      buttons.push({
+        key: 'create-action-button-cancel',
+        label: cancelButtonText,
+        onClick: onUnmount,
+        kind: 'ghost',
+      });
+      buttons.push({
+        key: 'create-action-button-submit',
+        label: shouldViewAll
+          ? submitButtonText
+          : currentStep < total
+          ? nextButtonText
+          : submitButtonText,
+        onClick: shouldViewAll
+          ? handleSubmit
+          : currentStep < total
+          ? handleNext
+          : handleSubmit,
+        disabled: isSubmitDisabled(),
+        kind: 'primary',
+        loading: isSubmitting,
+        className: `${componentBlockClass}__create-button`,
+      });
+      setCreateComponentActions(buttons);
     }
   }, [
+    getComponentSteps,
+    backButtonText,
+    cancelButtonText,
     currentStep,
-    getCreateComponentSteps,
-    previousState,
+    onClose,
+    nextButtonText,
+    submitButtonText,
+    onRequestSubmit,
+    isSubmitting,
+    shouldViewAll,
     componentBlockClass,
+    componentName,
+    continueToNextStep,
+    setCurrentStep,
+    setCreateComponentActions,
+    setIsSubmitting,
+    setShouldViewAll,
   ]);
+
+  const continueToNextStep = useCallback(() => {
+    setIsSubmitting(false);
+    setCurrentStep((prev) => prev + 1);
+  }, [setCurrentStep, setIsSubmitting]);
 };

@@ -1,8 +1,8 @@
 # Carbon for Cloud & Cognitive
 
-> ibm-cloud-cognitive is an open-source implementation of the closed source
+> IBM Cloud & Cognitive is an open-source implementation of the closed source
 > ibm-cloud-cognitive pattern asset library (PAL). These PAL designs build on
-> the foundation of the IBMs open source Carbon Design System and React
+> the foundation of IBM's open source Carbon Design System and React
 > implementation to offer components and patterns beyond the typical component
 > library.
 
@@ -18,17 +18,23 @@
 If you're just getting started and looking to browse our React components, take
 a look at [our Storybook](https://ibm-cloud-cognitive.netlify.app).
 
-This project consists of a number of packages published on npm, see table.
+This project consists of a number of component library packages published on
+npm:
 
-| Package name                                                               | Description                                                                                                       |
-| -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| [`@carbon/ibm-cloud-cognitive`](./packages/cloud-cognitive)                | A curated set of components and patterns, built on top of Carbon and designed by the IBM Cloud and Cognitive team |
-| [`@carbon/storybook-addon-theme`](./packages/storybook-addon-carbon-theme) | A storybook addon enabling Carbon theme switching                                                                 |
-| [`@carbon/ibm-cloud-cognitive-cdai`](./packages/cdai)                      | Legacy and non-curated design implementations used in application integration                                     |
-| [`@carbon/ibm-cloud-cognitive-security`](./packages/security)              | Legacy and non-curated design implementations used in security                                                    |
+| Package name                                                  | Description                                                                                                       |
+| ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| [`@carbon/ibm-cloud-cognitive`](./packages/cloud-cognitive)   | A curated set of components and patterns, built on top of Carbon and designed by the IBM Cloud and Cognitive team |
+| [`@carbon/ibm-cloud-cognitive-cdai`](./packages/cdai)         | Legacy and non-curated design implementations used in application integration                                     |
+| [`@carbon/ibm-cloud-cognitive-security`](./packages/security) | Legacy and non-curated design implementations used in security                                                    |
 
-The remaining packages are part of our project infrastructure not published on
-npm.
+Also the following additional utility packages are published on npm:
+
+| Package name                                                               | Description                                       |
+| -------------------------------------------------------------------------- | ------------------------------------------------- |
+| [`@carbon/storybook-addon-theme`](./packages/storybook-addon-carbon-theme) | A storybook addon enabling Carbon theme switching |
+
+The remaining packages are part of our project infrastructure and are not
+published on npm.
 
 ## 🙌 Contributing
 

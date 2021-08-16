@@ -237,9 +237,7 @@ CreateInfluencer.propTypes = {
   /**
    * This is the open state of the CreateComponent in which the CreateInfluencer is used from
    */
-  previousState: PropTypes.shape({
-    open: PropTypes.bool,
-  }),
+  previousState: PropTypes.object,
 
   /**
    * The aria label to be used for the UI Shell SideNav Carbon component

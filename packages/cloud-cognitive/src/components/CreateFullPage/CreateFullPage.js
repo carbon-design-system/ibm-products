@@ -426,7 +426,6 @@ export let CreateFullPage = React.forwardRef(
             includeViewAllToggle={includeViewAllToggle}
             handleToggleState={(toggleState) => setShouldViewAll(toggleState)}
             handleActiveSectionIndex={(index) => setActiveSectionIndex(index)}
-            open={open}
             previousState={previousState}
             sideNavAriaLabel={sideNavAriaLabel}
             toggleState={shouldViewAll}

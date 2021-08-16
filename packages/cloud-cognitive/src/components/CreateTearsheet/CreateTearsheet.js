@@ -42,6 +42,7 @@ export let CreateTearsheet = forwardRef(
       className,
       description,
       includeViewAllToggle,
+      influencerWidth,
       label,
       nextButtonText,
       onClose,
@@ -397,7 +398,7 @@ export let CreateTearsheet = forwardRef(
           />
         }
         influencerPosition="left"
-        influencerWidth="narrow"
+        influencerWidth={influencerWidth}
         label={label}
         onClose={onClose}
         open={open}
@@ -462,6 +463,11 @@ CreateTearsheet.propTypes = {
    * Used to optionally include view all toggle
    */
   includeViewAllToggle: PropTypes.bool,
+
+  /**
+   * Used to set the size of the influencer
+   */
+  influencerWidth: PropTypes.oneOf(['narrow', 'wide']),
 
   /**
    * A label for the tearsheet, displayed in the header area of the tearsheet
@@ -548,4 +554,5 @@ CreateTearsheet.propTypes = {
 CreateTearsheet.defaultProps = {
   verticalPosition: 'normal',
   includeViewAllToggle: false,
+  influencerWidth: 'narrow',
 };

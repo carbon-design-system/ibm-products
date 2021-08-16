@@ -30,6 +30,7 @@ export const MultiStepWithSectionsTearsheet = ({
   cancelButtonText,
   className,
   description,
+  influencerWidth,
   label,
   nextButtonText,
   submitButtonText,
@@ -70,6 +71,7 @@ export const MultiStepWithSectionsTearsheet = ({
         {open ? 'Close CreateTearsheet' : 'Open CreateTearsheet'}
       </Button>
       <CreateTearsheet
+        influencerWidth={influencerWidth}
         label={label}
         className={cx(blockClass, className)}
         submitButtonText={submitButtonText}

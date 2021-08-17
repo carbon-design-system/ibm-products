@@ -30,9 +30,9 @@ import {
   usePreviousValue,
   useValidCreateStepCount,
   useCreateComponentFocus,
+  useCreateComponentStepChange,
 } from '../../global/js/hooks';
 import { hasValidChildType } from '../../global/js/utils/hasValidChildType';
-import { useCreateComponentStepChange } from '../../global/js/hooks/useCreateComponentStepChange';
 
 const blockClass = `${pkg.prefix}--create-full-page`;
 const componentName = 'CreateFullPage';

@@ -12,7 +12,7 @@ const getWindowSize = () => {
   return { innerHeight, innerWidth, outerHeight, outerWidth };
 };
 
-export function useWindowResize(effect, deps, throttleInterval = 0) {
+export const useWindowResize = (effect, deps, throttleInterval = 0) => {
   const windowSize = useRef({});
   const throttleTimeout = useRef(null);
 
@@ -45,4 +45,4 @@ export function useWindowResize(effect, deps, throttleInterval = 0) {
     return () => window.removeEventListener('resize', handleResize);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
-}
+};

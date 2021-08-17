@@ -26,9 +26,11 @@ import {
 } from 'carbon-components-react';
 import { CreateInfluencer } from '../CreateInfluencer';
 import { ActionSet } from '../ActionSet';
-import { usePreviousValue } from '../../global/js/use/usePreviousValue';
-import { useValidCreateStepCount } from '../../global/js/use/useValidCreateStepCount';
-import { useCreateComponentFocus } from '../../global/js/use/useCreateComponentFocus';
+import {
+  usePreviousValue,
+  useValidCreateStepCount,
+  useCreateComponentFocus,
+} from '../../global/js/hooks';
 import { hasValidChildType } from '../../global/js/utils/hasValidChildType';
 
 const blockClass = `${pkg.prefix}--create-full-page`;

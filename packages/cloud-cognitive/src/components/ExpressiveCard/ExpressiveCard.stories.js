@@ -41,13 +41,7 @@ export default {
       options: ['16x9', '9x16', '2x1', '1x2', '4x3', '3x4', '1x1'],
     },
   },
-  decorators: [
-    (Story) => (
-      <div className="bx--grid card-story">
-        <Story />
-      </div>
-    ),
-  ],
+  decorators: [(Story) => <div className="bx--grid card-story">{Story()}</div>],
 };
 
 const defaultProps = {
@@ -95,6 +89,7 @@ const MediaTemplate = (opts) => {
 export const Default = prepareStory(Template, {
   args: {
     ...defaultProps,
+    mediaRatio: null,
   },
 });
 
@@ -102,6 +97,7 @@ export const LabelOnly = prepareStory(Template, {
   args: {
     ...defaultProps,
     title: '',
+    mediaRatio: null,
   },
 });
 
@@ -110,6 +106,7 @@ export const WithCaption = prepareStory(Template, {
     ...defaultProps,
     caption: 'Description or long caption',
     label: '',
+    mediaRatio: null,
   },
 });
 
@@ -126,12 +123,13 @@ export const WithActionIcon = prepareStory(Template, {
       {
         id: '1',
         icon: ArrowRight24,
-        onClick: () => action('on click'),
-        onKeyDown: () => action('on keydown'),
+        onClick: action('on click'),
+        onKeyDown: action('on keydown'),
         iconDescription: 'Next',
       },
     ],
     primaryButtonText: '',
+    mediaRatio: null,
   },
 });
 
@@ -139,6 +137,7 @@ export const WithPictogram = prepareStory(Template, {
   args: {
     ...defaultProps,
     pictogram: Cloud32,
+    mediaRatio: null,
   },
 });
 
@@ -148,14 +147,16 @@ export const WithSecondaryAction = prepareStory(Template, {
     secondaryButtonText: 'Secondary',
     secondaryButtonKind: 'ghost',
     columnSize: '8',
+    mediaRatio: null,
   },
 });
 
 export const Clickable = prepareStory(Template, {
   args: {
     ...defaultProps,
-    onClick: () => action('on click'),
-    onKeyDown: () => action('on keydown'),
+    onClick: action('on click'),
+    onKeyDown: action('on keydown'),
     primaryButtonText: '',
+    mediaRatio: null,
   },
 });

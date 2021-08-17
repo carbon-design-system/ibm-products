@@ -8,19 +8,51 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { FormGroup } from 'carbon-components-react';
 import { pkg } from '../../settings';
 import { CREATE_TEARSHEET_STEP } from './constants';
 
 const componentName = 'CreateTearsheetStep';
 const blockClass = `${pkg.prefix}--tearsheet-create__step`;
 
-export let CreateTearsheetStep = forwardRef(({ children, className }, ref) => {
-  return (
-    <div className={cx(blockClass, className)} ref={ref}>
-      {children}
-    </div>
-  );
-});
+export let CreateTearsheetStep = forwardRef(
+  (
+    {
+      children,
+      className,
+      subtitle,
+      description,
+      title,
+      hasForm,
+      formLegendText,
+      isViewingAllStepsTogether,
+    },
+    ref
+  ) => {
+    return (
+      <div className={cx(blockClass, className)} ref={ref}>
+        {!isViewingAllStepsTogether && (
+          <h4 className={`${blockClass}--title`}>{title}</h4>
+        )}
+        {!isViewingAllStepsTogether && subtitle && (
+          <h6 className={`${blockClass}--subtitle`}>{subtitle}</h6>
+        )}
+        {!isViewingAllStepsTogether && description && (
+          <p className={`${blockClass}--description`}>{description}</p>
+        )}
+        {hasForm ? (
+          <FormGroup
+            legendText={formLegendText}
+            className={`${blockClass}--fieldset`}>
+            {children}
+          </FormGroup>
+        ) : (
+          children
+        )}
+      </div>
+    );
+  }
+);
 
 // Return a placeholder if not released and not enabled by feature flag
 CreateTearsheetStep = pkg.checkComponentEnabled(
@@ -40,9 +72,35 @@ CreateTearsheetStep.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Sets an optional description on the step component
+   */
+  description: PropTypes.string,
+
+  /**
    * This will conditionally disable the submit button in the multi step Tearsheet
    */
   disableSubmit: PropTypes.bool,
+
+  /**
+   * This is the required legend text that appears above a fieldset html element for accessibility purposes.
+   * You can set the `hasForm` prop to false if you have multiple fieldset elements or want to control the children of your Full Page's step content.
+   * Otherwise, use CSS to hide/remove this label text.
+   */
+  formLegendText: PropTypes.string.isRequired.if(
+    ({ hasForm }) => hasForm === true
+  ),
+
+  /**
+   * This optional prop will render your form content inside of a fieldset html element
+   * and is defaulted to true.
+   * You can set this prop to `false` if you have multiple fieldset elements or want to control the children of your Full Page's step content.
+   */
+  hasForm: PropTypes.bool,
+
+  /**
+   * The is an internal prop set in CreateTearsheet so the step knows when to render it's title
+   */
+  isViewingAllStepsTogether: PropTypes.bool,
 
   /**
    * Optional function to be called on initial mount of a step.
@@ -63,6 +121,11 @@ CreateTearsheetStep.propTypes = {
   secondaryLabel: PropTypes.string,
 
   /**
+   * Sets an optional subtitle on the step component
+   */
+  subtitle: PropTypes.string,
+
+  /**
    * Sets the title text for a tearsheet step
    */
   title: PropTypes.node.isRequired,
@@ -74,4 +137,5 @@ CreateTearsheetStep.propTypes = {
 // component needs to make a choice or assumption when a prop is not supplied.
 CreateTearsheetStep.defaultProps = {
   type: CREATE_TEARSHEET_STEP,
+  hasForm: true,
 };

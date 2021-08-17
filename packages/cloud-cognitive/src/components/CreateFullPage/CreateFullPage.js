@@ -33,7 +33,7 @@ import { useCreateComponentStepChange } from '../../global/js/use/useCreateCompo
 const blockClass = `${pkg.prefix}--create-full-page`;
 const componentName = 'CreateFullPage';
 
-// Custom PropType validator which checks and ensures that the children property has no more than 4 nodes
+// Custom PropType validator which checks and ensures that each child of FullPage component is a step
 const isValidChildren =
   () =>
   ({ children }) => {
@@ -432,44 +432,6 @@ export let CreateFullPage = React.forwardRef(
       );
     };
 
-    // track scrolling/intersection of create sections so that we know
-    // which section is active (updates the SideNavItems `isActive` prop)
-    useEffect(() => {
-      if (shouldViewAll) {
-        const fullPageMainContent = document.querySelector(
-          `.${blockClass}__content`
-        );
-        let options = {
-          root: fullPageMainContent,
-          rootMargin: '0px',
-          threshold: 0,
-        };
-        // Convert NodeList to array so we can find the index
-        // of the section that should be marked as `active`.
-        const viewAllSections = Array.from(
-          document.querySelectorAll(
-            `.${blockClass}__section.${blockClass}__step--visible-section`
-          )
-        );
-        const observer = new IntersectionObserver((entries) => {
-          // isIntersecting is true when element and viewport/options.root are overlapping
-          // isIntersecting is false when element and viewport/options.root don't overlap
-          if (entries[0].isIntersecting) {
-            // DOM element that is intersecting
-            const visibleTarget = entries[0].target;
-            // Get visible element index
-            const visibleTargetIndex = viewAllSections.findIndex(
-              (item) => item.id === visibleTarget.id
-            );
-            setActiveSectionIndex(visibleTargetIndex);
-          }
-        }, options);
-        viewAllSections.forEach((section) => {
-          observer.observe(section);
-        });
-      }
-    }, [shouldViewAll]);
-
     return (
       <div {...rest} ref={ref} className={cx(blockClass, className)}>
         <div className={`${blockClass}__influencer`}>
@@ -505,7 +467,11 @@ export let CreateFullPage = React.forwardRef(
             />
           </div>
         </div>
-        <ComposedModal size="sm" open={modalIsOpen}>
+        <ComposedModal
+          className={`${blockClass}__modal`}
+          size="sm"
+          open={modalIsOpen}
+          aria-label={modalTitle}>
           <ModalHeader title={modalTitle} />
           <ModalBody>
             <p>{modalDescription}</p>

@@ -54,7 +54,7 @@ See example component enabled via feature flags on
 [codesandbox](https://codesandbox.io/s/example-component-canary-olif5).
 
 For more information on how this affects components see
-[CANARY_STRUCTURE.md](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CANARY_STRUCTURE.md).
+[CANARY_STRUCTURE.md](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/docs/guides/CANARY_STRUCTURE.md).
 
 ## 4. Test your JavaScript code
 

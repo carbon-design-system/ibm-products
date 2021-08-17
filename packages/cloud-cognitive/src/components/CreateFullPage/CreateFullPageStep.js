@@ -30,7 +30,7 @@ export let CreateFullPageStep = forwardRef(
   ) => {
     return (
       <div className={cx(blockClass, className)} ref={ref}>
-        <h4 className={`${blockClass}-title`}>{title}</h4>
+        <h5 className={`${blockClass}-title`}>{title}</h5>
         {subtitle && <h6 className={`${blockClass}-subtitle`}>{subtitle}</h6>}
         {description && (
           <p className={`${blockClass}-description`}>{description}</p>

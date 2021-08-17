@@ -15,6 +15,7 @@ import React, {
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { useResizeDetector } from 'react-resize-detector';
+import { Grid, Form } from 'carbon-components-react';
 import { extractShapesArray } from '../../global/js/utils/props-helper';
 import wrapFocus from '../../global/js/utils/wrapFocus';
 import { TearsheetShell } from '../Tearsheet/TearsheetShell';
@@ -28,6 +29,25 @@ import { useCreateComponentStepChange } from '../../global/js/use/useCreateCompo
 
 const componentName = 'CreateTearsheet';
 const blockClass = `${pkg.prefix}--tearsheet-create`;
+
+// Custom PropType validator which checks and ensures that the children property has no more than 4 nodes
+const isValidChildren =
+  () =>
+  ({ children }) => {
+    children.length > 1 &&
+      children.map((child) => {
+        if (
+          child &&
+          child.props &&
+          child.props.type !== CREATE_TEARSHEET_STEP
+        ) {
+          throw new Error(
+            `Each child of ${componentName} is required to be a ${CREATE_TEARSHEET_STEP}. Please remove the HTML element, or wrap it around the ${CREATE_TEARSHEET_STEP} component.`
+          );
+        }
+        return;
+      });
+  };
 
 export let CreateTearsheet = forwardRef(
   (
@@ -344,19 +364,13 @@ export let CreateTearsheet = forwardRef(
       };
     };
 
-    // renders all children (CreateTearsheetSteps and regular child elements)
+    // renders all children (CreateTearsheetSteps)
     const renderChildren = (childrenElements) => {
       let step = 0;
       const childrenArray = Array.isArray(childrenElements)
         ? childrenElements
         : [childrenElements];
       const formattedChildren = extractShapesArray(childrenElements);
-      const nonStepComponents =
-        childrenArray && childrenArray[0]?.type === React.Fragment
-          ? childrenArray[0].props.children.filter(
-              (item) => !isTearsheetStep(item)
-            )
-          : childrenArray.filter((item) => !isTearsheetStep(item));
       const stepComponents =
         childrenArray && childrenArray[0]?.type === React.Fragment
           ? childrenArray[0].props.children.filter((item) =>
@@ -369,7 +383,6 @@ export let CreateTearsheet = forwardRef(
       return (
         <>
           {' '}
-          {nonStepComponents.map((item) => item)}
           {stepComponents.map((child, stepIndex) => {
             step++;
             return React.cloneElement(
@@ -381,18 +394,12 @@ export let CreateTearsheet = forwardRef(
                   [`${blockClass}__step--visible-step`]: currentStep === step,
                 }),
                 key: `key_${stepIndex}`,
+                isViewingAllStepsTogether: shouldViewAll,
               },
-              <>
-                {!shouldViewAll && (
-                  <h4 className={`${blockClass}__step--heading`}>
-                    {renderStepTitle(stepIndex)}
-                  </h4>
-                )}
-                {renderStepChildren(
-                  child.props.children,
-                  indexOfLastTearsheetStep === step - 1
-                )}
-              </>
+              renderStepChildren(
+                child.props.children,
+                indexOfLastTearsheetStep === step - 1
+              )
             );
           })}
         </>
@@ -428,13 +435,9 @@ export let CreateTearsheet = forwardRef(
                     (child.props.viewAllOnly && shouldViewAll),
                 }),
                 key: `key_${index}`,
+                isViewingAllStepsTogether: shouldViewAll,
               },
               <>
-                {shouldViewAll && (
-                  <h4 className={`${blockClass}__step--heading`}>
-                    {child.props.title}
-                  </h4>
-                )}
                 {child}
                 {shouldViewAll && !isLastSectionOfLastStep && (
                   <span className={`${blockClass}__section--divider`} />
@@ -444,14 +447,6 @@ export let CreateTearsheet = forwardRef(
           })}
         </>
       );
-    };
-
-    // renders the individual step title
-    const renderStepTitle = (stepIndex) => {
-      const tearsheetSteps = getTearsheetSteps();
-      const stepTitle =
-        (tearsheetSteps && tearsheetSteps[stepIndex]?.props?.title) || null;
-      return stepTitle;
     };
 
     // adds focus trap functionality
@@ -574,7 +569,11 @@ export let CreateTearsheet = forwardRef(
           className={`${blockClass}__content`}
           onBlur={handleBlur}
           ref={contentRef}>
-          {open ? renderChildren(children) : null}
+          {open ? (
+            <Grid>
+              <Form>{renderChildren(children)}</Form>
+            </Grid>
+          ) : null}
         </div>
       </TearsheetShell>
     );
@@ -604,7 +603,7 @@ CreateTearsheet.propTypes = {
   /**
    * The main content of the tearsheet
    */
-  children: PropTypes.node,
+  children: isValidChildren(),
 
   /**
    * An optional class or classes to be added to the outermost element.
@@ -705,4 +704,5 @@ CreateTearsheet.propTypes = {
 // component needs to make a choice or assumption when a prop is not supplied.
 CreateTearsheet.defaultProps = {
   verticalPosition: 'normal',
+  includeViewAllToggle: false,
 };

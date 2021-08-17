@@ -65,7 +65,11 @@ export let CreateModal = React.forwardRef(
         {...{ open, ref }}
         aria-label={title}
         size="sm"
-        preventCloseOnClickOutside>
+        preventCloseOnClickOutside
+        onClose={() => {
+          onRequestClose?.();
+          return false;
+        }}>
         <ModalHeader title={title} titleClassName={`${blockClass}__title`}>
           {subtitle && <p className={`${blockClass}__subtitle`}>{subtitle}</p>}
         </ModalHeader>

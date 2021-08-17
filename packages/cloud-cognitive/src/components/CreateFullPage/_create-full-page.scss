@@ -33,8 +33,8 @@
   // The block part of our conventional BEM class names (blockClass__E--M).
   $block-class: #{$pkg-prefix}--create-full-page;
 
-  .#{$block-class} .bx--grid {
-    padding-top: $spacing-05;
+  .#{$block-class} .#{$carbon-prefix}--grid {
+    padding-top: $spacing-06;
     margin-right: 0;
     margin-left: 0;
   }
@@ -52,14 +52,35 @@
     opacity: 1;
   }
 
-  .#{$block-class} .bx--modal-close {
+  .#{$block-class} .#{$block-class}__section-subtitle,
+  .#{$block-class} .#{$block-class}__step-subtitle {
+    @include carbon--type-style('productive-heading-01');
+
+    margin-bottom: $spacing-03;
+  }
+
+  .#{$block-class} .#{$block-class}__section-description,
+  .#{$block-class} .#{$block-class}__step-description {
+    @include carbon--type-style('body-long-01');
+
+    margin-bottom: $spacing-06;
+  }
+
+  .#{$block-class} .#{$carbon-prefix}--fieldset {
+    margin-bottom: 0;
+  }
+
+  .#{$block-class} .#{$block-class}__step-fieldset > * {
+    margin-bottom: $spacing-05;
+  }
+
+  .#{$block-class} .#{$carbon-prefix}--modal-close {
     display: none;
   }
 
   .#{$block-class} {
     display: flex;
     height: 100vh;
-    flex-grow: 1;
     padding: 0;
     margin: 0;
   }
@@ -94,7 +115,7 @@
     max-width: 50%;
   }
 
-  .#{$block-class} .bx--side-nav--ux {
+  .#{$block-class} .#{$carbon-prefix}--side-nav--ux {
     top: 0;
     height: min-content;
     padding-top: 0;
@@ -107,15 +128,11 @@
   .#{$block-class} .#{$block-class}__section-divider {
     position: relative;
     display: block;
-    width: calc(100vw - 16rem);
+    width: calc(100vw - calc(16rem + 1px));
     height: 1px;
     margin: $spacing-07 calc(-1 * #{$spacing-08}) $spacing-07
       calc(-1 * #{$spacing-08});
     background-color: $ui-03;
-  }
-
-  .#{$block-class}__step-title {
-    margin-bottom: $spacing-05;
   }
 
   .#{$block-class} .#{$block-class}__step-title,

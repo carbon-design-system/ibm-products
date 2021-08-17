@@ -18,9 +18,9 @@ describe(name, () => {
     render(<CardHeader />);
   });
 
-  it('renders a caption', () => {
-    const { getByText } = render(<CardHeader caption="caption" />);
-    expect(getByText('caption')).toBeVisible();
+  it('renders a description', () => {
+    const { getByText } = render(<CardHeader description="description" />);
+    expect(getByText('description')).toBeVisible();
   });
 
   it('renders a label', () => {

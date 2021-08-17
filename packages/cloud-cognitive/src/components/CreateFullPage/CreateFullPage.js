@@ -28,29 +28,11 @@ import { CreateInfluencer } from '../CreateInfluencer';
 import { ActionSet } from '../ActionSet';
 import { usePreviousValue } from '../../global/js/use/usePreviousValue';
 import { useValidCreateStepCount } from '../../global/js/use/useValidCreateStepCount';
-import { useCreateComponentStepChange } from '../../global/js/use/useCreateComponentStepChange';
+import { useCreateComponentFocus } from '../../global/js/use/useCreateComponentFocus';
+import { hasValidChildType } from '../../global/js/utils/hasValidChildType';
 
 const blockClass = `${pkg.prefix}--create-full-page`;
 const componentName = 'CreateFullPage';
-
-// Custom PropType validator which checks and ensures that each child of FullPage component is a step
-const isValidChildren =
-  () =>
-  ({ children }) => {
-    children.length > 1 &&
-      children.map((child) => {
-        if (
-          child &&
-          child.props &&
-          child.props.type !== CREATE_FULL_PAGE_STEP
-        ) {
-          throw new Error(
-            'Each child of Create Full Page is required to be a `CreateFullPageStep`. Please remove the HTML element, or wrap it around the `CreateFullPageStep` component.'
-          );
-        }
-        return;
-      });
-  };
 
 export let CreateFullPage = React.forwardRef(
   (
@@ -100,7 +82,7 @@ export let CreateFullPage = React.forwardRef(
       return steps;
     }, [children]);
 
-    useCreateComponentStepChange(
+    useCreateComponentFocus(
       previousState,
       currentStep,
       getFullPageSteps,
@@ -444,6 +426,7 @@ export let CreateFullPage = React.forwardRef(
             includeViewAllToggle={includeViewAllToggle}
             handleToggleState={(toggleState) => setShouldViewAll(toggleState)}
             handleActiveSectionIndex={(index) => setActiveSectionIndex(index)}
+            previousState={previousState}
             sideNavAriaLabel={sideNavAriaLabel}
             toggleState={shouldViewAll}
             viewAllToggleLabelText={viewAllToggleLabelText}
@@ -519,7 +502,10 @@ CreateFullPage.propTypes = {
   /**
    * The main content of the full page
    */
-  children: isValidChildren(),
+  children: hasValidChildType({
+    componentName,
+    childType: CREATE_FULL_PAGE_STEP,
+  }),
 
   /**
    * Provide an optional class to be applied to the containing node.

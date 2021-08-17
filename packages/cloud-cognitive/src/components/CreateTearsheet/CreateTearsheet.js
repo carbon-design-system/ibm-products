@@ -23,11 +23,13 @@ import { CreateInfluencer } from '../CreateInfluencer';
 import { CreateTearsheetDivider } from './CreateTearsheetDivider';
 import { carbon, pkg } from '../../settings';
 import { CREATE_TEARSHEET_SECTION, CREATE_TEARSHEET_STEP } from './constants';
-import { usePreviousValue } from '../../global/js/use/usePreviousValue';
-import { useValidCreateStepCount } from '../../global/js/use/useValidCreateStepCount';
-import { useResetCreateComponent } from '../../global/js/use/useResetCreateComponent';
-import { useCreateComponentFocus } from '../../global/js/use/useCreateComponentFocus';
-import { useCreateComponentStepChange } from '../../global/js/use/useCreateComponentStepChange';
+import {
+  usePreviousValue,
+  useValidCreateStepCount,
+  useResetCreateComponent,
+  useCreateComponentFocus,
+  useCreateComponentStepChange,
+} from '../../global/js/hooks';
 import { hasValidChildType } from '../../global/js/utils/hasValidChildType';
 
 const componentName = 'CreateTearsheet';

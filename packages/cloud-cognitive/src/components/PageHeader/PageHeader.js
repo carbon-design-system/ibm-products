@@ -11,7 +11,7 @@ import { extractShapesArray } from '../../global/js/utils/props-helper';
 import { layout05, baseFontSize } from '@carbon/layout';
 import cx from 'classnames';
 import { useResizeDetector } from 'react-resize-detector';
-import { useWindowResize, useWindowScroll } from '../../global/js/use';
+import { useWindowResize, useWindowScroll } from '../../global/js/hooks';
 import {
   BreadcrumbItem,
   Grid,

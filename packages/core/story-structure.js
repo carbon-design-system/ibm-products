@@ -65,6 +65,7 @@ const s = [
           { n: 'Remove', s: ['c/RemoveModal'] },
           { n: 'Saving', s: ['c/Saving'] },
           { n: 'Status icons', s: ['c/StatusIcon'] },
+          { n: 'Toolbars', s: ['c/Toolbar'] },
           { n: 'User profile images', s: ['c/UserProfileImage'] },
           { n: 'Web terminal', s: ['c/WebTerminal'] },
         ],

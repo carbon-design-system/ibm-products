@@ -30,6 +30,7 @@ export const MultiStepWithSectionsTearsheet = ({
   cancelButtonText,
   className,
   description,
+  influencerWidth,
   label,
   nextButtonText,
   submitButtonText,
@@ -70,6 +71,7 @@ export const MultiStepWithSectionsTearsheet = ({
         {open ? 'Close CreateTearsheet' : 'Open CreateTearsheet'}
       </Button>
       <CreateTearsheet
+        influencerWidth={influencerWidth}
         label={label}
         className={cx(blockClass, className)}
         submitButtonText={submitButtonText}
@@ -188,7 +190,7 @@ export const MultiStepWithSectionsTearsheet = ({
           <h4 className={`${componentBlockClass}__step--title`}>Meta data</h4>
           <fieldset className={`${componentBlockClass}__step--fieldset`}>
             <TextInput
-              labelText="Topic meta data"
+              labelText="Topic meta data (optional)"
               id="tearsheet-multi-step-story-text-input-multi-step-1-input-4"
               value={topicMetaData}
               placeholder="Enter topic meta data"

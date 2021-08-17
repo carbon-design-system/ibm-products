@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.71.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.71.1...@carbon/ibm-cloud-cognitive@0.71.2) (2021-08-17)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.71.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.71.0...@carbon/ibm-cloud-cognitive@0.71.1) (2021-08-17)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+# [0.71.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.70.1...@carbon/ibm-cloud-cognitive@0.71.0) (2021-08-17)
+
+
+### Features
+
+* **toolbar:** add `Toolbar`, `ToolbarButton`, and `ToolbarGroup` components ([#1103](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1103)) ([2d5f4cf](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/2d5f4cfb1e5c650696831a5c2c660c57e6a54f85))
+
+
+
+
+
+## [0.70.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.70.0...@carbon/ibm-cloud-cognitive@0.70.1) (2021-08-17)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
 # [0.70.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.69.7...@carbon/ibm-cloud-cognitive@0.70.0) (2021-08-16)
 
 

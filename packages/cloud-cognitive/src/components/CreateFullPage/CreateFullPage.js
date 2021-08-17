@@ -29,7 +29,7 @@ import { ActionSet } from '../ActionSet';
 import { usePreviousValue } from '../../global/js/use/usePreviousValue';
 import { useValidCreateStepCount } from '../../global/js/use/useValidCreateStepCount';
 import { useCreateComponentFocus } from '../../global/js/use/useCreateComponentFocus';
-import { isValidChildren } from '../CreateTearsheet/utils/isValidChildren';
+import { hasValidChildType } from '../../global/js/utils/hasValidChildType';
 
 const blockClass = `${pkg.prefix}--create-full-page`;
 const componentName = 'CreateFullPage';
@@ -450,7 +450,11 @@ export let CreateFullPage = React.forwardRef(
             />
           </div>
         </div>
-        <ComposedModal size="sm" open={modalIsOpen}>
+        <ComposedModal
+          className={`${blockClass}__modal`}
+          size="sm"
+          open={modalIsOpen}
+          aria-label={modalTitle}>
           <ModalHeader title={modalTitle} />
           <ModalBody>
             <p>{modalDescription}</p>
@@ -498,9 +502,9 @@ CreateFullPage.propTypes = {
   /**
    * The main content of the full page
    */
-  children: isValidChildren({
+  children: hasValidChildType({
     componentName,
-    stepType: CREATE_FULL_PAGE_STEP,
+    childType: CREATE_FULL_PAGE_STEP,
   }),
 
   /**

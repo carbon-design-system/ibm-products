@@ -28,7 +28,7 @@ import { useValidCreateStepCount } from '../../global/js/use/useValidCreateStepC
 import { useResetCreateComponent } from '../../global/js/use/useResetCreateComponent';
 import { useCreateComponentFocus } from '../../global/js/use/useCreateComponentFocus';
 import { useCreateComponentStepChange } from '../../global/js/use/useCreateComponentStepChange';
-import { isValidChildren } from './utils/isValidChildren';
+import { hasValidChildType } from '../../global/js/utils/hasValidChildType';
 
 const componentName = 'CreateTearsheet';
 const blockClass = `${pkg.prefix}--tearsheet-create`;
@@ -444,9 +444,9 @@ CreateTearsheet.propTypes = {
   /**
    * The main content of the tearsheet
    */
-  children: isValidChildren({
+  children: hasValidChildType({
     componentName,
-    stepType: CREATE_TEARSHEET_STEP,
+    childType: CREATE_TEARSHEET_STEP,
   }),
 
   /**

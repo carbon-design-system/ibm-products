@@ -19,6 +19,7 @@ const storybookStructure = {
   BreadcrumbWithOverflow: `${lib}/$rci/$comp`,
   ButtonMenu: `${lib}/$rci/$comp`,
   ButtonSetWithOverflow: `${lib}/$rci/$comp`,
+  Cascade: `${lib}/$rci/$comp`,
 
   // cards
   ExpressiveCard: `${lib}/$rci/Cards/$comp`,

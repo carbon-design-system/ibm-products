@@ -6,13 +6,10 @@
 //
 
 // Standard imports.
-@import '@carbon/import-once/scss/import-once';
-@import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
 // Other Carbon settings.
 @import '@carbon/themes/scss/themes';
-@import 'carbon-components/scss/globals/scss/_vars.scss';
 
 $loading-bar__height: 8px;
 $loading-bar__small-height: 4px;

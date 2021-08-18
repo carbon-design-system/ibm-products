@@ -1,8 +1,25 @@
 //
-// Copyright IBM Corp. 2020, 2020
+// Copyright IBM Corp. 2020, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
+// set required feature flags for carbon
+@import '../../generated/feature-flags/feature-flags';
+
+// import the carbon import-once mechanism
+@import '@carbon/import-once/scss/import-once';
+
+// import carbon settings for referring to colors, spacing, theme, motion, etc
+@import 'carbon-components/scss/globals/scss/vars';
+@import '@carbon/type/scss/type';
+@import '@carbon/layout/scss/layout';
+@import '@carbon/themes/scss/themes';
+@import '@carbon/motion/scss/motion';
+
+// set up an alias variable to distinguish carbon prefix from package prefix
+$carbon-prefix: $prefix;
+
+// define variables and settings for the package
 $pkg-prefix: 'exp' !default;

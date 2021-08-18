@@ -6,13 +6,10 @@
 //
 
 // Standard imports.
-@import '@carbon/import-once/scss/import-once';
-@import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
 // Other Carbon settings.
 @import '@carbon/themes/scss/themes';
-@import 'carbon-components/scss/globals/scss/vars';
 
 // AboutModal uses the following Carbon components:
 // ComposedModal, ModalHeader, ModalFooter, ModalBody, Tabs, Tab

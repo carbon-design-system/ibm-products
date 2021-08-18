@@ -24,4 +24,27 @@ describe(name, () => {
       }).css.toString()
     ).toMatchSnapshot();
   });
+
+  // This test will fail if any generated CSS changes.
+  it.skip("doesn't change any of the generated CSS", () => {
+    expect(
+      renderSync({
+        file: resolve(__dirname, '../index.scss'),
+        includePaths: [resolve(__dirname, '../../../../node_modules')],
+        outputStyle: 'expanded',
+      }).css.toString()
+    ).toMatchSnapshot();
+  });
+
+  // This test will fail if the project settings generates any CSS, as this
+  // file should be including definitions and variables only.
+  it("doesn't generate any CSS from the project settings", () => {
+    expect(
+      renderSync({
+        file: resolve(__dirname, '../global/styles/_project-settings.scss'),
+        includePaths: [resolve(__dirname, '../../../../node_modules')],
+        outputStyle: 'expanded',
+      }).css.toString()
+    ).toHaveLength(0);
+  });
 });

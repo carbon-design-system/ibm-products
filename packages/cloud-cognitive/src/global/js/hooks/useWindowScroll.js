@@ -12,7 +12,7 @@ const getScrollPosition = () => {
   return { scrollX, scrollY };
 };
 
-export function useWindowScroll(effect, deps, throttleInterval = 0) {
+export const useWindowScroll = (effect, deps, throttleInterval = 0) => {
   const scrollPosition = useRef({});
   const throttleTimeout = useRef(null);
 
@@ -49,4 +49,4 @@ export function useWindowScroll(effect, deps, throttleInterval = 0) {
     return () => window.removeEventListener('scroll', handleScroll);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
-}
+};

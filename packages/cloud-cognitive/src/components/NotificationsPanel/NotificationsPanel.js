@@ -11,7 +11,7 @@ import React, { useEffect, useState, useRef } from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import useClickOutside from '../../global/js/use/useClickOutside';
+import { useClickOutside } from '../../global/js/hooks';
 import { pkg } from '../../settings';
 import { timeAgo } from './utils';
 import { NotificationsEmptyState } from '../EmptyStates/NotificationsEmptyState';

@@ -39,10 +39,6 @@ ExpressiveCard.propTypes = {
     })
   ),
   /**
-   * Optional header caption
-   */
-  caption: PropTypes.string,
-  /**
    * Content that shows in the body of the card
    */
   children: PropTypes.node,
@@ -50,6 +46,10 @@ ExpressiveCard.propTypes = {
    * Optional user provided class
    */
   className: PropTypes.string,
+  /**
+   * Optional header description
+   */
+  description: PropTypes.string,
   /**
    * Optional label for the top of the card
    */

@@ -15,9 +15,29 @@ const componentName = 'CreateTearsheetStep';
 const blockClass = `${pkg.prefix}--tearsheet-create__section`;
 
 export let CreateTearsheetSection = forwardRef(
-  ({ id, children, className }, ref) => {
+  (
+    {
+      id,
+      children,
+      className,
+      subtitle,
+      description,
+      title,
+      isViewingAllStepsTogether,
+    },
+    ref
+  ) => {
     return (
       <div className={cx(blockClass, className)} ref={ref} id={id}>
+        {isViewingAllStepsTogether && (
+          <h4 className={`${blockClass}--title`}>{title}</h4>
+        )}
+        {isViewingAllStepsTogether && subtitle && (
+          <h6 className={`${blockClass}--subtitle`}>{subtitle}</h6>
+        )}
+        {isViewingAllStepsTogether && description && (
+          <p className={`${blockClass}--description`}>{description}</p>
+        )}
         {children}
       </div>
     );
@@ -42,9 +62,24 @@ CreateTearsheetSection.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Sets an optional description on the section component
+   */
+  description: PropTypes.string,
+
+  /**
    * Sets the id of the CreateTearsheetSection outermost element
    */
   id: PropTypes.string.isRequired,
+
+  /**
+   * The is an internal prop set in CreateTearsheet so the section knows when to render it's title
+   */
+  isViewingAllStepsTogether: PropTypes.bool,
+
+  /**
+   * Sets an optional subtitle on the section component
+   */
+  subtitle: PropTypes.string,
 
   /**
    * Sets the title text for a tearsheet step

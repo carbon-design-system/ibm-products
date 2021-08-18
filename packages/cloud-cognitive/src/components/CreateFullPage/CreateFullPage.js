@@ -22,34 +22,20 @@ import {
   ModalHeader,
   ModalBody,
   Button,
+  Form,
 } from 'carbon-components-react';
 import { CreateInfluencer } from '../CreateInfluencer';
 import { ActionSet } from '../ActionSet';
-import { usePreviousValue } from '../../global/js/use/usePreviousValue';
-import { useValidCreateStepCount } from '../../global/js/use/useValidCreateStepCount';
-import { useCreateComponentStepChange } from '../../global/js/use/useCreateComponentStepChange';
+import {
+  usePreviousValue,
+  useValidCreateStepCount,
+  useCreateComponentFocus,
+  useCreateComponentStepChange,
+} from '../../global/js/hooks';
+import { hasValidChildType } from '../../global/js/utils/hasValidChildType';
 
 const blockClass = `${pkg.prefix}--create-full-page`;
 const componentName = 'CreateFullPage';
-
-// Custom PropType validator which checks and ensures that the children property has no more than 4 nodes
-const isValidChildren =
-  () =>
-  ({ children }) => {
-    children.length > 1 &&
-      children.map((child) => {
-        if (
-          child &&
-          child.props &&
-          child.props.type !== CREATE_FULL_PAGE_STEP
-        ) {
-          throw new Error(
-            'Each child of Create Full Page is required to be a `CreateFullPageStep`. Please remove the HTML element, or wrap it around the `CreateFullPageStep` component.'
-          );
-        }
-        return;
-      });
-  };
 
 export let CreateFullPage = React.forwardRef(
   (
@@ -99,136 +85,32 @@ export let CreateFullPage = React.forwardRef(
       return steps;
     }, [children]);
 
-    useCreateComponentStepChange(
+    useCreateComponentFocus(
       previousState,
       currentStep,
       getFullPageSteps,
       blockClass
     );
     useValidCreateStepCount(getFullPageSteps, componentName);
-
-    useEffect(() => {
-      const onUnmount = () => {
-        setIsSubmitting(false);
-        setShouldViewAll(false);
-        onClose();
-      };
-      const handleOnRequestSubmit = async () => {
-        // check if onRequestSubmit returns a promise
-        try {
-          await onRequestSubmit();
-          onUnmount();
-        } catch (error) {
-          setIsSubmitting(false);
-          console.warn(`${componentName} submit error: ${error}`);
-        }
-      };
-      const isSubmitDisabled = () => {
-        let step = 0;
-        let submitDisabled = false;
-        let viewAllSubmitDisabled = false;
-        const createFullPageSteps = getFullPageSteps();
-        createFullPageSteps.forEach((child) => {
-          step++;
-          if (currentStep === step) {
-            submitDisabled = child.props.disableSubmit;
-          }
-          if (shouldViewAll && child.props.disableSubmit) {
-            viewAllSubmitDisabled = true;
-          }
-        });
-        if (!shouldViewAll) {
-          return submitDisabled;
-        }
-        return viewAllSubmitDisabled;
-      };
-      const handleNext = async () => {
-        setIsSubmitting(true);
-        const createSteps = getFullPageSteps();
-        if (createSteps[currentStep - 1].props.onNext) {
-          try {
-            await createSteps[currentStep - 1].props.onNext();
-            continueToNextStep();
-          } catch (error) {
-            setIsSubmitting(false);
-            console.warn(`${componentName} onNext error: ${error}`);
-          }
-        } else {
-          continueToNextStep();
-        }
-      };
-      const handleSubmit = async () => {
-        setIsSubmitting(true);
-        const createSteps = getFullPageSteps();
-        // last step should have onNext as well
-        if (createSteps[currentStep - 1].props.onNext) {
-          try {
-            await createSteps[currentStep - 1].props.onNext();
-            await handleOnRequestSubmit();
-          } catch (error) {
-            setIsSubmitting(false);
-            console.warn(`${componentName} onNext error: ${error}`);
-          }
-        } else {
-          await handleOnRequestSubmit();
-        }
-      };
-      if (getFullPageSteps()?.length) {
-        const createSteps = getFullPageSteps();
-        const total = createSteps.length;
-        const buttons = [];
-        if (total > 1 && !shouldViewAll) {
-          buttons.push({
-            label: backButtonText,
-            onClick: () => setCurrentStep((prev) => prev - 1),
-            kind: 'secondary',
-            disabled: currentStep === 1,
-          });
-        }
-        buttons.push({
-          label: cancelButtonText,
-          onClick: () => {
-            setModalIsOpen(true);
-          },
-          kind: 'ghost',
-        });
-        buttons.push({
-          label: shouldViewAll
-            ? submitButtonText
-            : currentStep < total
-            ? nextButtonText
-            : submitButtonText,
-          onClick: shouldViewAll
-            ? handleSubmit
-            : currentStep < total
-            ? handleNext
-            : handleSubmit,
-          disabled: isSubmitDisabled(),
-          kind: 'primary',
-          loading: isSubmitting,
-          className: `${blockClass}__create-button`,
-        });
-        setCreateFullPageActions(buttons);
-      }
-    }, [
-      getFullPageSteps,
-      children,
+    useCreateComponentStepChange({
+      setCurrentStep,
+      setIsSubmitting,
+      setShouldViewAll,
+      onClose,
+      onRequestSubmit,
+      componentName,
+      getComponentSteps: getFullPageSteps,
+      currentStep,
+      shouldViewAll,
       backButtonText,
       cancelButtonText,
-      currentStep,
-      onClose,
-      nextButtonText,
       submitButtonText,
-      onRequestSubmit,
+      nextButtonText,
       isSubmitting,
-      modalIsOpen,
-      shouldViewAll,
-    ]);
-
-    const continueToNextStep = () => {
-      setIsSubmitting(false);
-      setCurrentStep((prev) => prev + 1);
-    };
+      componentBlockClass: blockClass,
+      setCreateComponentActions: setCreateFullPageActions,
+      setModalIsOpen,
+    });
 
     // Log a warning to the console in the event there are no CreateFullPageSection components
     // inside of the CreateFullPageSteps when the viewAll toggle is provided and turned on.
@@ -377,11 +259,6 @@ export let CreateFullPage = React.forwardRef(
                 key: `key_${stepIndex}`,
               },
               <>
-                {!shouldViewAll && (
-                  <h4 className={`${blockClass}__step-title`}>
-                    {renderStepTitle(stepIndex)}
-                  </h4>
-                )}
                 {renderStepChildren(
                   child.props.children,
                   indexOfLastFullPageStep === step - 1
@@ -436,52 +313,6 @@ export let CreateFullPage = React.forwardRef(
       );
     };
 
-    // renders the individual step title
-    const renderStepTitle = (stepIndex) => {
-      const fullPageSteps = getFullPageSteps();
-      const stepTitle =
-        (fullPageSteps && fullPageSteps[stepIndex]?.props.title) || null;
-      return stepTitle;
-    };
-
-    // track scrolling/intersection of create sections so that we know
-    // which section is active (updates the SideNavItems `isActive` prop)
-    useEffect(() => {
-      if (shouldViewAll) {
-        const fullPageMainContent = document.querySelector(
-          `.${blockClass}__content`
-        );
-        let options = {
-          root: fullPageMainContent,
-          rootMargin: '0px',
-          threshold: 0,
-        };
-        // Convert NodeList to array so we can find the index
-        // of the section that should be marked as `active`.
-        const viewAllSections = Array.from(
-          document.querySelectorAll(
-            `.${blockClass}__section.${blockClass}__step--visible-section`
-          )
-        );
-        const observer = new IntersectionObserver((entries) => {
-          // isIntersecting is true when element and viewport/options.root are overlapping
-          // isIntersecting is false when element and viewport/options.root don't overlap
-          if (entries[0].isIntersecting) {
-            // DOM element that is intersecting
-            const visibleTarget = entries[0].target;
-            // Get visible element index
-            const visibleTargetIndex = viewAllSections.findIndex(
-              (item) => item.id === visibleTarget.id
-            );
-            setActiveSectionIndex(visibleTargetIndex);
-          }
-        }, options);
-        viewAllSections.forEach((section) => {
-          observer.observe(section);
-        });
-      }
-    }, [shouldViewAll]);
-
     return (
       <div {...rest} ref={ref} className={cx(blockClass, className)}>
         <div className={`${blockClass}__influencer`}>
@@ -494,6 +325,7 @@ export let CreateFullPage = React.forwardRef(
             includeViewAllToggle={includeViewAllToggle}
             handleToggleState={(toggleState) => setShouldViewAll(toggleState)}
             handleActiveSectionIndex={(index) => setActiveSectionIndex(index)}
+            previousState={previousState}
             sideNavAriaLabel={sideNavAriaLabel}
             toggleState={shouldViewAll}
             viewAllToggleLabelText={viewAllToggleLabelText}
@@ -504,7 +336,11 @@ export let CreateFullPage = React.forwardRef(
         <div className={`${blockClass}__body`}>
           <div className={`${blockClass}__main`}>
             <div className={`${blockClass}__content`}>
-              <Grid>{renderChildren(children)}</Grid>
+              <Grid>
+                <Form className={`${blockClass}__form`}>
+                  {renderChildren(children)}
+                </Form>
+              </Grid>
             </div>
             <ActionSet
               className={`${blockClass}__buttons`}
@@ -513,7 +349,11 @@ export let CreateFullPage = React.forwardRef(
             />
           </div>
         </div>
-        <ComposedModal size="sm" open={modalIsOpen}>
+        <ComposedModal
+          className={`${blockClass}__modal`}
+          size="sm"
+          open={modalIsOpen}
+          aria-label={modalTitle}>
           <ModalHeader title={modalTitle} />
           <ModalBody>
             <p>{modalDescription}</p>
@@ -561,7 +401,10 @@ CreateFullPage.propTypes = {
   /**
    * The main content of the full page
    */
-  children: isValidChildren(),
+  children: hasValidChildType({
+    componentName,
+    childType: CREATE_FULL_PAGE_STEP,
+  }),
 
   /**
    * Provide an optional class to be applied to the containing node.
@@ -638,4 +481,8 @@ CreateFullPage.propTypes = {
    * Sets the label text for the view all toggle `on` text
    */
   viewAllToggleOnLabelText: PropTypes.string,
+};
+
+CreateFullPage.defaultProps = {
+  includeViewAllToggle: false,
 };

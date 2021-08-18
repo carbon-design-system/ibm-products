@@ -5,6 +5,21 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// Standard imports.
+@import '../../global/styles/project-settings';
+
 // ExpressiveCard uses the following Cloud & Cognitive components:
 // Card
 @import '../Card/card';
+
+@mixin card-expressive {
+  $block-class: #{$pkg-prefix}--card;
+
+  .#{$block-class}__title {
+    @include carbon--type-style('productive-heading-03');
+  }
+}
+
+@include exports('card-expressive') {
+  @include card-expressive;
+}

@@ -15,16 +15,22 @@ import React, {
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { useResizeDetector } from 'react-resize-detector';
+import { Grid, Form } from 'carbon-components-react';
 import { extractShapesArray } from '../../global/js/utils/props-helper';
 import wrapFocus from '../../global/js/utils/wrapFocus';
 import { TearsheetShell } from '../Tearsheet/TearsheetShell';
 import { CreateInfluencer } from '../CreateInfluencer';
+import { CreateTearsheetDivider } from './CreateTearsheetDivider';
 import { carbon, pkg } from '../../settings';
 import { CREATE_TEARSHEET_SECTION, CREATE_TEARSHEET_STEP } from './constants';
-import { usePreviousValue } from '../../global/js/use/usePreviousValue';
-import { useValidCreateStepCount } from '../../global/js/use/useValidCreateStepCount';
-import { useResetCreateComponent } from '../../global/js/use/useResetCreateComponent';
-import { useCreateComponentStepChange } from '../../global/js/use/useCreateComponentStepChange';
+import {
+  usePreviousValue,
+  useValidCreateStepCount,
+  useResetCreateComponent,
+  useCreateComponentFocus,
+  useCreateComponentStepChange,
+} from '../../global/js/hooks';
+import { hasValidChildType } from '../../global/js/utils/hasValidChildType';
 
 const componentName = 'CreateTearsheet';
 const blockClass = `${pkg.prefix}--tearsheet-create`;
@@ -38,6 +44,7 @@ export let CreateTearsheet = forwardRef(
       className,
       description,
       includeViewAllToggle,
+      influencerWidth,
       label,
       nextButtonText,
       onClose,
@@ -78,7 +85,7 @@ export let CreateTearsheet = forwardRef(
       return steps;
     }, [children]);
 
-    useCreateComponentStepChange(
+    useCreateComponentFocus(
       previousState,
       currentStep,
       getTearsheetSteps,
@@ -86,6 +93,24 @@ export let CreateTearsheet = forwardRef(
     );
     useValidCreateStepCount(getTearsheetSteps, componentName);
     useResetCreateComponent(previousState, open, setCurrentStep);
+    useCreateComponentStepChange({
+      setCurrentStep,
+      setIsSubmitting,
+      setShouldViewAll,
+      onClose,
+      onRequestSubmit,
+      componentName,
+      getComponentSteps: getTearsheetSteps,
+      currentStep,
+      shouldViewAll,
+      backButtonText,
+      cancelButtonText,
+      submitButtonText,
+      nextButtonText,
+      isSubmitting,
+      componentBlockClass: blockClass,
+      setCreateComponentActions: setCreateTearsheetActions,
+    });
 
     // Log a warning to the console in the event there are no CreateTearsheetSection components
     // inside of the CreateTearsheetSteps when the viewAll toggle is provided and turned on.
@@ -156,131 +181,6 @@ export let CreateTearsheet = forwardRef(
       }
     }, [includeViewAllToggle, shouldViewAll, children]);
 
-    // useEffect to handle multi step logic
-    useEffect(() => {
-      const onUnmount = () => {
-        setCurrentStep(0);
-        setIsSubmitting(false);
-        setShouldViewAll(false);
-        onClose();
-      };
-      const handleOnRequestSubmit = async () => {
-        // check if onRequestSubmit returns a promise
-        try {
-          await onRequestSubmit();
-          onUnmount();
-        } catch (error) {
-          setIsSubmitting(false);
-          console.warn(`${componentName} submit error: ${error}`);
-        }
-      };
-      const isSubmitDisabled = () => {
-        let step = 0;
-        let submitDisabled = false;
-        let viewAllSubmitDisabled = false;
-        const tearsheetSteps = getTearsheetSteps();
-        tearsheetSteps.forEach((child) => {
-          step++;
-          if (currentStep === step) {
-            submitDisabled = child.props.disableSubmit;
-          }
-          if (shouldViewAll && child.props.disableSubmit) {
-            viewAllSubmitDisabled = true;
-          }
-        });
-        if (!shouldViewAll) {
-          return submitDisabled;
-        }
-        return viewAllSubmitDisabled;
-      };
-      const handleNext = async () => {
-        setIsSubmitting(true);
-        const createSteps = getTearsheetSteps();
-        if (createSteps[currentStep - 1].props.onNext) {
-          try {
-            await createSteps[currentStep - 1].props.onNext();
-            continueToNextStep();
-          } catch (error) {
-            setIsSubmitting(false);
-            console.warn(`${componentName} onNext error: ${error}`);
-          }
-        } else {
-          continueToNextStep();
-        }
-      };
-      const handleSubmit = async () => {
-        setIsSubmitting(true);
-        const createSteps = getTearsheetSteps();
-        // last step should have onNext as well
-        if (createSteps[currentStep - 1].props.onNext) {
-          try {
-            await createSteps[currentStep - 1].props.onNext();
-            await handleOnRequestSubmit();
-          } catch (error) {
-            setIsSubmitting(false);
-            console.warn(`${componentName} onNext error: ${error}`);
-          }
-        } else {
-          await handleOnRequestSubmit();
-        }
-      };
-      if (getTearsheetSteps()?.length) {
-        const createSteps = getTearsheetSteps();
-        const total = createSteps.length;
-        const buttons = [];
-        if (total > 1 && !shouldViewAll) {
-          buttons.push({
-            key: 'create-tearsheet-action-button-back',
-            label: backButtonText,
-            onClick: () => setCurrentStep((prev) => prev - 1),
-            kind: 'secondary',
-            disabled: currentStep === 1,
-          });
-        }
-        buttons.push({
-          key: 'create-tearsheet-action-button-cancel',
-          label: cancelButtonText,
-          onClick: onUnmount,
-          kind: 'ghost',
-        });
-        buttons.push({
-          key: 'create-tearsheet-action-button-submit',
-          label: shouldViewAll
-            ? submitButtonText
-            : currentStep < total
-            ? nextButtonText
-            : submitButtonText,
-          onClick: shouldViewAll
-            ? handleSubmit
-            : currentStep < total
-            ? handleNext
-            : handleSubmit,
-          disabled: isSubmitDisabled(),
-          kind: 'primary',
-          loading: isSubmitting,
-          className: `${blockClass}__create-button`,
-        });
-        setCreateTearsheetActions(buttons);
-      }
-    }, [
-      getTearsheetSteps,
-      children,
-      backButtonText,
-      cancelButtonText,
-      currentStep,
-      onClose,
-      nextButtonText,
-      submitButtonText,
-      onRequestSubmit,
-      isSubmitting,
-      shouldViewAll,
-    ]);
-
-    const continueToNextStep = () => {
-      setIsSubmitting(false);
-      setCurrentStep((prev) => prev + 1);
-    };
-
     // check if child is a tearsheet step component
     const isTearsheetStep = (child) => {
       if (child && child.props && child.props.type === CREATE_TEARSHEET_STEP) {
@@ -344,19 +244,13 @@ export let CreateTearsheet = forwardRef(
       };
     };
 
-    // renders all children (CreateTearsheetSteps and regular child elements)
+    // renders all children (CreateTearsheetSteps)
     const renderChildren = (childrenElements) => {
       let step = 0;
       const childrenArray = Array.isArray(childrenElements)
         ? childrenElements
         : [childrenElements];
       const formattedChildren = extractShapesArray(childrenElements);
-      const nonStepComponents =
-        childrenArray && childrenArray[0]?.type === React.Fragment
-          ? childrenArray[0].props.children.filter(
-              (item) => !isTearsheetStep(item)
-            )
-          : childrenArray.filter((item) => !isTearsheetStep(item));
       const stepComponents =
         childrenArray && childrenArray[0]?.type === React.Fragment
           ? childrenArray[0].props.children.filter((item) =>
@@ -369,7 +263,6 @@ export let CreateTearsheet = forwardRef(
       return (
         <>
           {' '}
-          {nonStepComponents.map((item) => item)}
           {stepComponents.map((child, stepIndex) => {
             step++;
             return React.cloneElement(
@@ -381,18 +274,12 @@ export let CreateTearsheet = forwardRef(
                   [`${blockClass}__step--visible-step`]: currentStep === step,
                 }),
                 key: `key_${stepIndex}`,
+                isViewingAllStepsTogether: shouldViewAll,
               },
-              <>
-                {!shouldViewAll && (
-                  <h4 className={`${blockClass}__step--heading`}>
-                    {renderStepTitle(stepIndex)}
-                  </h4>
-                )}
-                {renderStepChildren(
-                  child.props.children,
-                  indexOfLastTearsheetStep === step - 1
-                )}
-              </>
+              renderStepChildren(
+                child.props.children,
+                indexOfLastTearsheetStep === step - 1
+              )
             );
           })}
         </>
@@ -428,30 +315,18 @@ export let CreateTearsheet = forwardRef(
                     (child.props.viewAllOnly && shouldViewAll),
                 }),
                 key: `key_${index}`,
+                isViewingAllStepsTogether: shouldViewAll,
               },
               <>
-                {shouldViewAll && (
-                  <h4 className={`${blockClass}__step--heading`}>
-                    {child.props.title}
-                  </h4>
-                )}
                 {child}
                 {shouldViewAll && !isLastSectionOfLastStep && (
-                  <span className={`${blockClass}__section--divider`} />
+                  <CreateTearsheetDivider />
                 )}
               </>
             );
           })}
         </>
       );
-    };
-
-    // renders the individual step title
-    const renderStepTitle = (stepIndex) => {
-      const tearsheetSteps = getTearsheetSteps();
-      const stepTitle =
-        (tearsheetSteps && tearsheetSteps[stepIndex]?.props?.title) || null;
-      return stepTitle;
     };
 
     // adds focus trap functionality
@@ -492,45 +367,6 @@ export let CreateTearsheet = forwardRef(
       );
     };
 
-    // track scrolling/intersection of create sections so that we know
-    // which section is active (updates the SideNavItems `isActive` prop)
-    useEffect(() => {
-      if (shouldViewAll) {
-        const tearsheetMainContent = document.querySelector(
-          `.${pkg.prefix}--tearsheet__content`
-        );
-        let options = {
-          root: tearsheetMainContent,
-          rootMargin: '0px',
-          threshold: 0,
-        };
-        // Convert NodeList to array so we can find the index
-        // of the section that should be marked as `active`.
-        const viewAllSections = Array.from(
-          document.querySelectorAll(
-            `.${pkg.prefix}--tearsheet-create__section.${pkg.prefix}--tearsheet-create__step--visible-section`
-          )
-        );
-        /* istanbul ignore next */
-        const observer = new IntersectionObserver((entries) => {
-          // isIntersecting is true when element and viewport/options.root are overlapping
-          // isIntersecting is false when element and viewport/options.root don't overlap
-          if (entries[0].isIntersecting) {
-            // DOM element that is intersecting
-            const visibleTarget = entries[0].target;
-            // Get visible element index
-            const visibleTargetIndex = viewAllSections.findIndex(
-              (item) => item.id === visibleTarget.id
-            );
-            setActiveSectionIndex(visibleTargetIndex);
-          }
-        }, options);
-        viewAllSections.forEach((section) => {
-          observer.observe(section);
-        });
-      }
-    }, [shouldViewAll]);
-
     useResizeDetector({
       handleWidth: true,
       onResize: handleResize,
@@ -554,6 +390,8 @@ export let CreateTearsheet = forwardRef(
             includeViewAllToggle={includeViewAllToggle}
             handleToggleState={(toggleState) => setShouldViewAll(toggleState)}
             handleActiveSectionIndex={(index) => setActiveSectionIndex(index)}
+            open={open}
+            previousState={previousState}
             sideNavAriaLabel={sideNavAriaLabel}
             toggleState={shouldViewAll}
             viewAllToggleLabelText={viewAllToggleLabelText}
@@ -562,7 +400,7 @@ export let CreateTearsheet = forwardRef(
           />
         }
         influencerPosition="left"
-        influencerWidth="narrow"
+        influencerWidth={influencerWidth}
         label={label}
         onClose={onClose}
         open={open}
@@ -574,7 +412,11 @@ export let CreateTearsheet = forwardRef(
           className={`${blockClass}__content`}
           onBlur={handleBlur}
           ref={contentRef}>
-          {open ? renderChildren(children) : null}
+          {open ? (
+            <Grid>
+              <Form>{renderChildren(children)}</Form>
+            </Grid>
+          ) : null}
         </div>
       </TearsheetShell>
     );
@@ -604,7 +446,10 @@ CreateTearsheet.propTypes = {
   /**
    * The main content of the tearsheet
    */
-  children: PropTypes.node,
+  children: hasValidChildType({
+    componentName,
+    childType: CREATE_TEARSHEET_STEP,
+  }),
 
   /**
    * An optional class or classes to be added to the outermost element.
@@ -620,6 +465,11 @@ CreateTearsheet.propTypes = {
    * Used to optionally include view all toggle
    */
   includeViewAllToggle: PropTypes.bool,
+
+  /**
+   * Used to set the size of the influencer
+   */
+  influencerWidth: PropTypes.oneOf(['narrow', 'wide']),
 
   /**
    * A label for the tearsheet, displayed in the header area of the tearsheet
@@ -705,4 +555,6 @@ CreateTearsheet.propTypes = {
 // component needs to make a choice or assumption when a prop is not supplied.
 CreateTearsheet.defaultProps = {
   verticalPosition: 'normal',
+  includeViewAllToggle: false,
+  influencerWidth: 'narrow',
 };

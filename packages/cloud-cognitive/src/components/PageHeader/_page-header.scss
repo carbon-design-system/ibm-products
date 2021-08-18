@@ -6,12 +6,10 @@
 //
 
 // Standard imports.
-@import '@carbon/import-once/scss/import-once';
-@import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
+@import '../../global/styles/mixins';
 
 // Other Carbon settings.
-@import '../../global/styles/mixins';
 @import 'carbon-components/scss/globals/grid/grid';
 
 // PageHeader uses the following Carbon components:

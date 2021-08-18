@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.71.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.71.4...@carbon/ibm-cloud-cognitive@0.71.5) (2021-08-18)
+
+
+### Bug Fixes
+
+* Ensure SCSS for all components and stories sets required carbon and project settings ([#1166](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1166)) ([5c77105](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/5c77105891df498f26d3f8f6214f8d7f7fa68267))
+
+
+
+
+
 ## [0.71.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.71.3...@carbon/ibm-cloud-cognitive@0.71.4) (2021-08-18)
 
 

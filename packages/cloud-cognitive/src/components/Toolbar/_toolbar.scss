@@ -5,15 +5,9 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '@carbon/import-once/scss/import-once';
-@import '@carbon/layout/scss/breakpoint';
-@import '@carbon/layout/scss/convert';
-@import '@carbon/themes/scss/tokens';
+@import '../../global/styles/project-settings';
 
 @import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/globals/scss/vars';
-
-@import '../../global/styles/project-settings';
 
 @include exports($name: cloud-cognitive--toolbar) {
   $block-class: #{$pkg-prefix}--toolbar;

@@ -6,12 +6,11 @@
 //
 
 // Standard imports.
-@import '@carbon/import-once/scss/import-once';
-@import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
+@import '../../global/styles/mixins';
 
 // Other Carbon settings.
-// TODO: add as required
+// TODO: @import 'carbon-components/scss/globals/grid/grid'; if needed
 
 // DISPLAY_NAME uses the following Carbon components:
 // TODO: @import(s) of Carbon component styles used by DISPLAY_NAME

@@ -13,6 +13,7 @@
 
 // import carbon settings for referring to colors, spacing, theme, motion, etc
 @import 'carbon-components/scss/globals/scss/vars';
+@import '@carbon/type/scss/styles';
 
 // set up an alias variable to distinguish carbon prefix from package prefix
 $carbon-prefix: $prefix;

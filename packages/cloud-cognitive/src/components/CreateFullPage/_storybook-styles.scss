@@ -10,7 +10,7 @@
 @import 'carbon-components/scss/components/ui-shell/ui-shell';
 
 $story-class: 'create-full-page-stories';
-
+$block-class: #{$pkg-prefix}--create-full-page;
 // cspell:disable-next-line
 .sbdocs .#{$story-class}__viewport {
   height: 100vh;
@@ -37,25 +37,7 @@ $story-class: 'create-full-page-stories';
   left: $spacing-11;
 }
 
-.#{$story-class}__step-title {
-  @include carbon--type-style('productive-heading-04');
-
-  margin-bottom: $spacing-05;
-}
-
-.#{$story-class}__step-subtitle {
-  @include carbon--type-style('productive-heading-01');
-
-  margin-bottom: $spacing-03;
-}
-
-.#{$story-class}__step-description {
-  @include carbon--type-style('body-long-01');
-
-  margin-bottom: $spacing-06;
-}
-
-.#{$story-class}__step-fieldset.#{$story-class}__step-fieldset--label.#{$carbon-prefix}--label {
+.#{$block-class}__step-fieldset.#{$story-class}__step-fieldset--label.#{$carbon-prefix}--label {
   position: absolute;
   overflow: hidden;
   width: 1px;
@@ -63,20 +45,6 @@ $story-class: 'create-full-page-stories';
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
   white-space: nowrap;
-}
-
-.#{$story-class}__step-fieldset > * {
-  margin-bottom: $spacing-05;
-}
-
-.#{$story-class}__section-divider {
-  position: relative;
-  display: block;
-  width: calc(100vw - calc(16rem + 1px));
-  height: 1px;
-  margin: $spacing-07 calc(-1 * #{$spacing-08}) $spacing-07
-    calc(-1 * #{$spacing-08});
-  background-color: $ui-03;
 }
 
 .#{$carbon-prefix}--form-item {

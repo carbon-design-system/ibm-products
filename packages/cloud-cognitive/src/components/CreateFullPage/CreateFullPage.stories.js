@@ -13,10 +13,13 @@ import {
 import { action } from '@storybook/addon-actions';
 import { CreateFullPage } from '.';
 import { CreateFullPageStep } from './CreateFullPageStep';
+import { pkg } from '../../settings';
 import mdx from './CreateFullPage.mdx';
 
 import styles from './_storybook-styles.scss';
+
 const storyClass = 'create-full-page-stories';
+const blockClass = `${pkg.prefix}--create-full-page`;
 
 import {
   TextInput,
@@ -225,7 +228,7 @@ const TemplateWithSections = ({ ...args }) => {
   const [simulatedDelay] = useState(750);
 
   return (
-    <CreateFullPage {...args}>
+    <CreateFullPage className={`${blockClass}`} {...args}>
       <CreateFullPageStep
         title="Partition"
         subtitle="One or more partitions make up a topic. A partition is an ordered list
@@ -250,7 +253,7 @@ const TemplateWithSections = ({ ...args }) => {
         }}
         disableSubmit={!textInput}>
         <FormGroup
-          className={`${storyClass}__step-fieldset ${storyClass}__step-fieldset--label`}
+          className={`${blockClass}__step-fieldset ${storyClass}__step-fieldset--label`}
           legendText="Partition">
           <TextInput
             id="test1"
@@ -296,15 +299,15 @@ const TemplateWithSections = ({ ...args }) => {
             />
           </div>
         </FormGroup>
-        <span className={`${storyClass}__section-divider`} />
+        <span className={`${blockClass}__section-divider`} />
+        <h5 className={`${blockClass}__step-title`}>Core configuration</h5>
+        <h6 className={`${blockClass}__step-subtitle`}>
+          This is how long messages are retained before they are deleted.
+        </h6>
         <FormGroup
-          className={`${storyClass}__step-fieldset ${storyClass}__step-fieldset--label`}
+          className={`${blockClass}__step-fieldset ${storyClass}__step-fieldset--label`}
           legendText="Core configuration">
-          <h4 className={`${storyClass}__step-title`}>Core configuration</h4>
-          <h6 className={`${storyClass}__step-subtitle`}>
-            This is how long messages are retained before they are deleted.
-          </h6>
-          <p className={`${storyClass}__step-description`}>
+          <p className={`${blockClass}__step-description`}>
             If your messages are not read by a consumer within this time, they
             will be missed.
           </p>

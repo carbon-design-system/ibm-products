@@ -24,11 +24,14 @@ export const useCreateComponentStepChange = ({
   isSubmitting,
   componentBlockClass,
   setCreateComponentActions,
+  setModalIsOpen,
 }) => {
   // useEffect to handle multi step logic
   useEffect(() => {
     const onUnmount = () => {
-      setCurrentStep(0);
+      if (componentName !== 'CreateFullPage') {
+        setCurrentStep(0);
+      }
       setIsSubmitting(false);
       setShouldViewAll(false);
       onClose();
@@ -109,7 +112,10 @@ export const useCreateComponentStepChange = ({
       buttons.push({
         key: 'create-action-button-cancel',
         label: cancelButtonText,
-        onClick: onUnmount,
+        onClick:
+          componentName === 'CreateFullPage'
+            ? () => setModalIsOpen(true)
+            : onUnmount,
         kind: 'ghost',
       });
       buttons.push({
@@ -149,6 +155,7 @@ export const useCreateComponentStepChange = ({
     setCreateComponentActions,
     setIsSubmitting,
     setShouldViewAll,
+    setModalIsOpen,
   ]);
 
   const continueToNextStep = useCallback(() => {

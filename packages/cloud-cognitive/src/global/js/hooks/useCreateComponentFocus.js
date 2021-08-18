@@ -15,7 +15,7 @@ import { getFocusableElements } from '../utils/getFocusableElements';
  * @param {Function} getCreateComponentSteps
  * @param {string} componentBlockClass
  */
-export const useCreateComponentStepChange = (
+export const useCreateComponentFocus = (
   previousState,
   currentStep,
   getCreateComponentSteps,

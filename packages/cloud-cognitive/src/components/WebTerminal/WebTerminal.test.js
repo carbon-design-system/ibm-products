@@ -72,12 +72,12 @@ describe(name, () => {
 
   it('adds additional properties to the containing node', () => {
     const { container } = render(
-      <WebTerminal closeTerminal={jest.fn()} data-test-id={dataTestId} open>
+      <WebTerminal closeTerminal={jest.fn()} data-testid={dataTestId} open>
         Body content
       </WebTerminal>
     );
     expect(
-      container.querySelector(`.${blockClass}[data-test-id="${dataTestId}"]`)
+      container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
     ).toBeInTheDocument();
   });
 

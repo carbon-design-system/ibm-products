@@ -308,7 +308,7 @@ describe(componentName, () => {
   });
 
   it('adds additional properties to the containing node', () => {
-    render(<APIKeyModal {...defaultProps} data-test-id="test-id" />);
+    render(<APIKeyModal {...defaultProps} data-testid="test-id" />);
     screen.getByTestId('test-id');
   });
 

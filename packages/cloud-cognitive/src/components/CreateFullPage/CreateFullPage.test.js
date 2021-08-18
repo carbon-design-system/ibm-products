@@ -141,7 +141,7 @@ const renderFullPageWithNonStepChildren = ({ ...rest }) =>
 
 describe(componentName, () => {
   it('adds additional properties to the containing node', () => {
-    renderCreateFullPage({ 'data-test-id': dataTestId });
+    renderCreateFullPage({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
   });
 

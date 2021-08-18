@@ -7,10 +7,6 @@
 
 @import '../../global/styles/project-settings';
 
-@import '@carbon/layout/scss/breakpoint';
-@import '@carbon/layout/scss/convert';
-@import '@carbon/themes/scss/tokens';
-
 @import 'carbon-components/scss/components/button/button';
 
 @include exports($name: cloud-cognitive--toolbar) {

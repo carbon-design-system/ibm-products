@@ -8,11 +8,6 @@
 // Standard imports.
 @import '../../global/styles/project-settings';
 
-// Other Carbon settings.
-@import '@carbon/themes/scss/themes';
-@import '@carbon/colors/scss/colors';
-@import '@carbon/motion/scss/motion';
-
 // NotificationsPanel uses the following Carbon components:
 // Button, Link, Toggle
 @import 'carbon-components/scss/components/button/button';

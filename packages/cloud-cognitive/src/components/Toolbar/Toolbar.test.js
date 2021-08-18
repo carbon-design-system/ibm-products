@@ -62,7 +62,10 @@ describe(Toolbar.displayName, () => {
   it('renders the vertical variant', () => {
     _render.bind(Toolbar)({ vertical: true });
 
-    expect(getByTestId(dataTestId)).toHaveClass(`${blockClass}--vertical`);
+    const toolbar = getByTestId(dataTestId);
+
+    expect(toolbar).toHaveAttribute('aria-orientation', 'vertical');
+    expect(toolbar).toHaveClass(`${blockClass}--vertical`);
   });
 });
 

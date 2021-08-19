@@ -83,6 +83,7 @@ const renderCreateFullPage = ({
       {...defaultFullPageProps}>
       <CreateFullPageStep
         title="Title 1"
+        subtitle="Subtitle 1"
         formLegendText="1"
         onNext={rejectOnNext ? onNextStepRejectionFn : onNext}>
         {stepFormField}
@@ -141,7 +142,7 @@ const renderFullPageWithNonStepChildren = ({ ...rest }) =>
 
 describe(componentName, () => {
   it('adds additional properties to the containing node', () => {
-    renderCreateFullPage({ 'data-test-id': dataTestId });
+    renderCreateFullPage({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
   });
 
@@ -154,10 +155,10 @@ describe(componentName, () => {
     const { container } = renderEmptyCreateFullPage({
       ...defaultFullPageProps,
     });
-    const createTearsheetSteps = container.querySelectorAll(
+    const createFullPageSteps = container.querySelectorAll(
       `.${blockClass}__step`
     );
-    expect(Array(...createTearsheetSteps)).toStrictEqual([]);
+    expect(Array(...createFullPageSteps)).toStrictEqual([]);
   });
 
   it('should create a console warning when using CreateFullPage with only one step', () => {
@@ -395,7 +396,7 @@ describe(componentName, () => {
       expect(onNextStepFn).toHaveBeenCalled();
     });
     const submitButtonElement = screen.getByText(submitButtonText);
-    expect(submitButtonElement.classList.contains('bx--btn--disabled'));
+    expect(submitButtonElement).toHaveAttribute('disabled');
   });
 
   it('should click the back button and add a custom next button label on a single step', async () => {

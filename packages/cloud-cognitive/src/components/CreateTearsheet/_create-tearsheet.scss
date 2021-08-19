@@ -6,8 +6,6 @@
 //
 
 // Standard imports.
-@import '@carbon/import-once/scss/import-once';
-@import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
 // CreateTearsheet uses the following Carbon components:
@@ -74,6 +72,7 @@
 
   .#{$block-class} .#{$block-class}__content .#{$carbon-prefix}--grid {
     padding: 0;
+    margin: 0;
   }
 
   .#{$block-class} .#{$block-class}__step--heading {

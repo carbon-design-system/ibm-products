@@ -13,10 +13,13 @@ import {
 import { action } from '@storybook/addon-actions';
 import { CreateFullPage } from '.';
 import { CreateFullPageStep } from './CreateFullPageStep';
+import { pkg } from '../../settings';
 import mdx from './CreateFullPage.mdx';
 
 import styles from './_storybook-styles.scss';
+
 const storyClass = 'create-full-page-stories';
+const blockClass = `${pkg.prefix}--create-full-page`;
 
 import {
   TextInput,
@@ -27,6 +30,8 @@ import {
   RadioButtonGroup,
   RadioButton,
   FormGroup,
+  Row,
+  Column,
 } from 'carbon-components-react';
 
 export default {
@@ -97,48 +102,53 @@ const Template = ({ ...args }) => {
           });
         }}
         disableSubmit={!textInput}>
-        <TextInput
-          id="test1"
-          invalidText="A valid value is required"
-          labelText="Topic name"
-          placeholder="Enter topic name"
-          onChange={(e) => {
-            setTextInput(e.target.value);
-            setIsInvalid(false);
-          }}
-          onBlur={() => {
-            textInput.length === 0 && setIsInvalid(true);
-          }}
-          invalid={isInvalid}
-        />
-        {hasSubmitError && (
-          <InlineNotification
-            lowContrast
-            kind="error"
-            title="Error"
-            subtitle="Resolve errors to continue"
-            onClose={() => setHasSubmitError(false)}
-          />
-        )}
-        <div>
-          <Tooltip
-            triggerClassName={`${storyClass}__tooltip`}
-            direction="right"
-            tabIndex={0}>
-            <p>
-              Once toggled on, an inline error notification will appear upon
-              clicking next. This is an example usage of how to prevent the next
-              step if some kind of error occurred during the `onNext` handler.
-            </p>
-          </Tooltip>
-          <Toggle
-            className={`${storyClass}__error--toggle`}
-            id="simulated-error-toggle"
-            size="sm"
-            labelText="Simulate error"
-            onToggle={(event) => setShouldReject(event)}
-          />
-        </div>
+        <Row>
+          <Column xlg={5} lg={5} md={4} sm={4}>
+            <TextInput
+              id="test1"
+              invalidText="A valid value is required"
+              labelText="Topic name"
+              placeholder="Enter topic name"
+              onChange={(e) => {
+                setTextInput(e.target.value);
+                setIsInvalid(false);
+              }}
+              onBlur={() => {
+                textInput.length === 0 && setIsInvalid(true);
+              }}
+              invalid={isInvalid}
+            />
+            {hasSubmitError && (
+              <InlineNotification
+                lowContrast
+                kind="error"
+                title="Error"
+                subtitle="Resolve errors to continue"
+                onClose={() => setHasSubmitError(false)}
+              />
+            )}
+            <div>
+              <Tooltip
+                triggerClassName={`${storyClass}__tooltip`}
+                direction="right"
+                tabIndex={0}>
+                <p>
+                  Once toggled on, an inline error notification will appear upon
+                  clicking next. This is an example usage of how to prevent the
+                  next step if some kind of error occurred during the `onNext`
+                  handler.
+                </p>
+              </Tooltip>
+              <Toggle
+                className={`${storyClass}__error--toggle`}
+                id="simulated-error-toggle"
+                size="sm"
+                labelText="Simulate error"
+                onToggle={(event) => setShouldReject(event)}
+              />
+            </div>
+          </Column>
+        </Row>
       </CreateFullPageStep>
       <CreateFullPageStep
         title="Empty"
@@ -152,41 +162,53 @@ const Template = ({ ...args }) => {
         description="Here is an example description for the 'Core configuration' step."
         secondaryLabel="Optional"
         formLegendText="Core configuration">
-        <TextInput
-          id="input-2"
-          invalidText="A valid value is required"
-          labelText="Topic name (optional)"
-          placeholder="Enter topic name"
-        />
-        <NumberInput
-          id="tj-input-3"
-          invalidText="Number is not valid"
-          label="Number input label (optional)"
-          max={100}
-          min={0}
-          step={10}
-          value={0}
-        />
-        <NumberInput
-          id="tj-input-4"
-          invalidText="Number is not valid"
-          label="Number input label (optional)"
-          max={100}
-          min={0}
-          step={10}
-          value={0}
-        />
-        <TextInput
-          id="input-5"
-          invalidText="A valid value is required"
-          labelText="Minimum in-sync replicas (optional)"
-          placeholder="Enter topic name"
-        />
+        <Row>
+          <Column xlg={5} lg={5} md={4} sm={4}>
+            <TextInput
+              id="input-2"
+              invalidText="A valid value is required"
+              labelText="Topic name (optional)"
+              placeholder="Enter topic name"
+            />
+          </Column>
+        </Row>
+        <Row>
+          <Column xlg={3} lg={3} md={3} sm={3}>
+            <NumberInput
+              id="tj-input-3"
+              invalidText="Number is not valid"
+              label="Label (optional)"
+              max={100}
+              min={0}
+              step={10}
+              value={0}
+            />
+            <NumberInput
+              id="tj-input-4"
+              invalidText="Number is not valid"
+              label="Label (optional)"
+              max={100}
+              min={0}
+              step={10}
+              value={0}
+            />
+          </Column>
+        </Row>
+        <Row>
+          <Column xlg={5} lg={5} md={4} sm={4}>
+            <TextInput
+              id="input-5"
+              invalidText="A valid value is required"
+              labelText="Minimum in-sync replicas (optional)"
+              placeholder="Enter topic name"
+            />
+          </Column>
+        </Row>
       </CreateFullPageStep>
       <CreateFullPageStep
         title="Message retention"
         subtitle="This is how many copies of a topic will be made for high availability"
-        description="The partitions of each topic can be replicated across a configurable number of brokers."
+        description="The partitions of each topic can be replicated across a configurable number of brokers"
         formLegendText="Replicas">
         <div>
           <RadioButtonGroup
@@ -225,7 +247,7 @@ const TemplateWithSections = ({ ...args }) => {
   const [simulatedDelay] = useState(750);
 
   return (
-    <CreateFullPage {...args}>
+    <CreateFullPage className={`${blockClass}`} {...args}>
       <CreateFullPageStep
         title="Partition"
         subtitle="One or more partitions make up a topic. A partition is an ordered list
@@ -249,95 +271,111 @@ const TemplateWithSections = ({ ...args }) => {
           });
         }}
         disableSubmit={!textInput}>
+        <Row>
+          <Column xlg={5} lg={5} md={4} sm={4}>
+            <FormGroup
+              className={`${blockClass}__step-fieldset ${storyClass}__step-fieldset--label`}
+              legendText="Partition">
+              <TextInput
+                id="test1"
+                invalidText="A valid value is required"
+                labelText="Topic name"
+                placeholder="Enter topic name"
+                onChange={(e) => {
+                  setTextInput(e.target.value);
+                  setIsInvalid(false);
+                }}
+                onBlur={() => {
+                  textInput.length === 0 && setIsInvalid(true);
+                }}
+                invalid={isInvalid}
+              />
+              {hasSubmitError && (
+                <InlineNotification
+                  lowContrast
+                  kind="error"
+                  title="Error"
+                  subtitle="Resolve errors to continue"
+                  onClose={() => setHasSubmitError(false)}
+                />
+              )}
+              <div>
+                <Tooltip
+                  triggerClassName={`${storyClass}__tooltip`}
+                  direction="right"
+                  tabIndex={0}>
+                  <p>
+                    Once toggled on, an inline error notification will appear
+                    upon clicking next. This is an example usage of how to
+                    prevent the next step if some kind of error occurred during
+                    the `onNext` handler.
+                  </p>
+                </Tooltip>
+                <Toggle
+                  className={`${storyClass}__error--toggle`}
+                  id="simulated-error-toggle"
+                  size="sm"
+                  labelText="Simulate error"
+                  onToggle={(event) => setShouldReject(event)}
+                />
+              </div>
+            </FormGroup>
+          </Column>
+        </Row>
+        <span className={`${blockClass}__section-divider`} />
+        <h5 className={`${blockClass}__step-title`}>Core configuration</h5>
+        <h6 className={`${blockClass}__step-subtitle`}>
+          This is how long messages are retained before they are deleted.
+        </h6>
         <FormGroup
-          className={`${storyClass}__step-fieldset ${storyClass}__step-fieldset--label`}
-          legendText="Partition">
-          <TextInput
-            id="test1"
-            invalidText="A valid value is required"
-            labelText="Topic name"
-            placeholder="Enter topic name"
-            onChange={(e) => {
-              setTextInput(e.target.value);
-              setIsInvalid(false);
-            }}
-            onBlur={() => {
-              textInput.length === 0 && setIsInvalid(true);
-            }}
-            invalid={isInvalid}
-          />
-          {hasSubmitError && (
-            <InlineNotification
-              lowContrast
-              kind="error"
-              title="Error"
-              subtitle="Resolve errors to continue"
-              onClose={() => setHasSubmitError(false)}
-            />
-          )}
-          <div>
-            <Tooltip
-              triggerClassName={`${storyClass}__tooltip`}
-              direction="right"
-              tabIndex={0}>
-              <p>
-                Once toggled on, an inline error notification will appear upon
-                clicking next. This is an example usage of how to prevent the
-                next step if some kind of error occurred during the `onNext`
-                handler.
-              </p>
-            </Tooltip>
-            <Toggle
-              className={`${storyClass}__error--toggle`}
-              id="simulated-error-toggle"
-              size="sm"
-              labelText="Simulate error"
-              onToggle={(event) => setShouldReject(event)}
-            />
-          </div>
-        </FormGroup>
-        <span className={`${storyClass}__section-divider`} />
-        <FormGroup
-          className={`${storyClass}__step-fieldset ${storyClass}__step-fieldset--label`}
+          className={`${blockClass}__step-fieldset ${storyClass}__step-fieldset--label`}
           legendText="Core configuration">
-          <h4 className={`${storyClass}__step-title`}>Core configuration</h4>
-          <h6 className={`${storyClass}__step-subtitle`}>
-            This is how long messages are retained before they are deleted.
-          </h6>
-          <p className={`${storyClass}__step-description`}>
+          <p className={`${blockClass}__step-description`}>
             If your messages are not read by a consumer within this time, they
             will be missed.
           </p>
-          <TextInput
-            id="input-2"
-            invalidText="A valid value is required"
-            labelText="Topic name (optional)"
-            placeholder="Enter topic name"
-          />
-          <NumberInput
-            id="tj-input-3"
-            invalidText="Number is not valid"
-            label="Number input label (optional)"
-            max={100}
-            min={0}
-            step={10}
-            value={0}
-          />
-          <NumberInput
-            id="tj-input-4"
-            invalidText="Number is not valid"
-            label="Number input label (optional"
-            max={100}
-            min={0}
-            step={10}
-            value={0}
-          />
-          <TextInput
-            id="input-5"
-            invalidText="A valid value is required"
-            labelText="Minimum in-sync replicas (optional)"
-            placeholder="Enter topic name"
-          />
+          <Row>
+            <Column xlg={5} lg={5} md={4} sm={4}>
+              <TextInput
+                id="input-2"
+                invalidText="A valid value is required"
+                labelText="Topic name (optional)"
+                placeholder="Enter topic name"
+              />
+            </Column>
+          </Row>
+          <Row>
+            <Column xlg={3} lg={3} md={3} sm={3}>
+              <NumberInput
+                id="tj-input-3"
+                invalidText="Number is not valid"
+                label="Label (optional)"
+                max={100}
+                min={0}
+                step={10}
+                value={0}
+              />
+              <NumberInput
+                id="tj-input-4"
+                invalidText="Number is not valid"
+                label="Label (optional)"
+                max={100}
+                min={0}
+                step={10}
+                value={0}
+              />
+            </Column>
+          </Row>
+          <Row>
+            <Column xlg={5} lg={5} md={4} sm={4}>
+              <TextInput
+                id="input-5"
+                invalidText="A valid value is required"
+                labelText="Minimum in-sync replicas (optional)"
+                placeholder="Enter topic name"
+              />
+            </Column>
+          </Row>
         </FormGroup>
       </CreateFullPageStep>
       <CreateFullPageStep

@@ -242,7 +242,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
   it('adds additional properties to an breadcrumb with overflow', () => {
     render(
       <TestBreadcrumbWithOverflow
-        data-test-id={dataTestId}
+        data-testid={dataTestId}
         width={1200}
         maxVisible={0}
         overflowAriaLabel="Open and close additional breadcrumb item list."

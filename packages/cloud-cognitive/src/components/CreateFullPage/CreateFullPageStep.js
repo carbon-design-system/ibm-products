@@ -29,7 +29,7 @@ export let CreateFullPageStep = forwardRef(
     ref
   ) => {
     return (
-      <div className={cx(blockClass, className)} ref={ref}>
+      <section className={cx(blockClass, className)} ref={ref}>
         <h5 className={`${blockClass}-title`}>{title}</h5>
         {subtitle && <h6 className={`${blockClass}-subtitle`}>{subtitle}</h6>}
         {description && (
@@ -44,7 +44,7 @@ export let CreateFullPageStep = forwardRef(
         ) : (
           children
         )}
-      </div>
+      </section>
     );
   }
 );

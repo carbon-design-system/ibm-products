@@ -14,6 +14,9 @@ const defaults = {
     AboutModal: true,
     APIKeyModal: true,
     CreateModal: true,
+    CreateFullPage: true,
+    CreateFullPageSection: true,
+    CreateFullPageStep: true,
     CreateSidePanel: true,
     CreateTearsheetNarrow: true,
     EmptyState: true,
@@ -42,9 +45,6 @@ const defaults = {
     UserProfileImage: true,
 
     // other public components not yet reviewed and released:
-    CreateFullPage: false,
-    CreateFullPageSection: false,
-    CreateFullPageStep: false,
     CreateTearsheet: false,
     CreateTearsheetStep: false,
     CreateTearsheetSection: false,
@@ -52,6 +52,9 @@ const defaults = {
     ExampleComponent: false,
     LoadingBar: false,
     ModifiedTabs: false,
+    Toolbar: false,
+    ToolbarButton: false,
+    ToolbarGroup: false,
     WebTerminal: false,
     /* new component flags here - comment used by generate CLI */
   },

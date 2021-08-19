@@ -8,13 +8,14 @@
 import CloudApp16 from '@carbon/icons-react/lib/cloud-app/16';
 import React from 'react';
 
-import { sectionTitle } from '../../config';
 import { ComboButton, ComboButtonItem } from '..';
+
+import { getPathForComponent } from '../../../core/story-structure';
 
 import styles from './_combo-button.scss';
 
 export default {
-  title: `${sectionTitle}/${ComboButton.name}`,
+  title: getPathForComponent('s', ComboButton.name),
   component: ComboButton,
   subcomponents: {
     ComboButtonItem,

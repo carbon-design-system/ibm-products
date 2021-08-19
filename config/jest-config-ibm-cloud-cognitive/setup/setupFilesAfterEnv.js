@@ -8,7 +8,6 @@
 // `setupFilesAfterEnv` enables running the code immediately after the test framework has been installed in the environment - https://jestjs.io/docs/en/configuration.html#setupfilesafterenv-array
 
 import '@testing-library/jest-dom';
-import { configure } from '@testing-library/dom';
 
 import chalk from 'chalk';
 import util from 'util';
@@ -18,11 +17,6 @@ import toBeAccessible from './matchers/toBeAccessible';
 
 // `expect` can be extended using custom matchers as per https://jest-bot.github.io/jest/docs/expect.html#expectextendmatchers
 expect.extend({ toBeAccessible, toHaveNoAxeViolations });
-
-// Use 'data-test-id' as the attribute which the getByTestId queries look for.
-// (the default omits the second '-', but this upsets spell checkers and doesn't
-// match the camel-casing of the methods, so 'data-test-id' just seems better)
-configure({ testIdAttribute: 'data-test-id' });
 
 // Our test suite will throw an error if one of the below console methods are
 // called when we are not expecting them. This is often helpful for React

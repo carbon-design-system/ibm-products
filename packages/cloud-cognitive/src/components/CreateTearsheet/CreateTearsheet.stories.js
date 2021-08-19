@@ -42,6 +42,7 @@ const createTearsheetProps = {
   nextButtonText: 'Next',
   className: 'test-class-name',
   label: '',
+  influencerWidth: 'narrow',
 };
 
 export const multiStepTearsheet = prepareStory(MultiStepTearsheet, {

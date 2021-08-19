@@ -52,6 +52,9 @@ const defaults = {
     ExampleComponent: false,
     LoadingBar: false,
     ModifiedTabs: false,
+    Toolbar: false,
+    ToolbarButton: false,
+    ToolbarGroup: false,
     WebTerminal: false,
     /* new component flags here - comment used by generate CLI */
   },

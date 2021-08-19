@@ -6,14 +6,11 @@
 //
 
 // Standard imports.
-@import '@carbon/import-once/scss/import-once';
-@import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
+@import './side-panel-variables';
 
 // Other Carbon settings.
 @import 'carbon-components/scss/globals/grid/grid';
-@import '@carbon/motion/scss/motion.scss';
-@import './side-panel-variables';
 
 // SidePanel uses the following Carbon components:
 // Button

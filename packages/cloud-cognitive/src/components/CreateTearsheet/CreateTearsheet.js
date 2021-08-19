@@ -113,13 +113,14 @@ export let CreateTearsheet = forwardRef(
       blockClass
     );
     useValidCreateStepCount(getTearsheetSteps, componentName);
-    useResetCreateComponent(
+    useResetCreateComponent({
       previousState,
       open,
       setCurrentStep,
       initialStep,
-      getTearsheetSteps().length
-    );
+      totalSteps: getTearsheetSteps().length,
+      componentName,
+    });
     useCreateComponentStepChange({
       setCurrentStep,
       setIsSubmitting,

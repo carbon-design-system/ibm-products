@@ -46,4 +46,4 @@ Toolbar.propTypes = {
 
 Toolbar = checkComponentEnabled(Toolbar, componentName);
 
-export { blockClass, Toolbar };
+export { blockClass, componentName, Toolbar };

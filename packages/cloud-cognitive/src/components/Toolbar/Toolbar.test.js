@@ -9,7 +9,7 @@ import { render as r, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
 import { Toolbar, ToolbarButton, ToolbarGroup } from '../..';
-import { blockClass } from './Toolbar';
+import { blockClass, componentName } from './Toolbar';
 
 const { getByTestId } = screen;
 
@@ -56,7 +56,7 @@ function test(Component) {
   });
 }
 
-describe(Toolbar.displayName, () => {
+describe(componentName, () => {
   test(Toolbar);
 
   it('renders the vertical variant', () => {

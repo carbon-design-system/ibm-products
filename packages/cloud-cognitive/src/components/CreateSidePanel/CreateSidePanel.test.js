@@ -133,7 +133,7 @@ describe(componentName, () => {
 
   it('adds additional properties to the containing node', () => {
     const dataTestId = uuidv4();
-    renderComponent({ 'data-test-id': dataTestId });
+    renderComponent({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
   });
 

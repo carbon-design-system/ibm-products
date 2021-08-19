@@ -88,7 +88,7 @@ describe(componentName, () => {
   });
 
   it('adds additional props to the containing node', () => {
-    renderComponent({ 'data-test-id': dataTestId });
+    renderComponent({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
   });
 

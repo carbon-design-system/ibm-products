@@ -66,6 +66,7 @@
     "apikey",
     "checkmark",
     "classname",
+    "data-testid",
     "divs",
     "overridable",
     "pconsole",

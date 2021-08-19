@@ -139,7 +139,7 @@ describe(CreateTearsheet.displayName, () => {
   it('renders the CreateTearsheet component', () => {
     const { container } = renderCreateTearsheet({
       ...defaultProps,
-      'data-test-id': dataTestId,
+      'data-testid': dataTestId,
     });
     screen.getByTestId(dataTestId);
     screen.getAllByText(title);

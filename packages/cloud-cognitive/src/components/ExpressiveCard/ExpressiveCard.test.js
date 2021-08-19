@@ -29,7 +29,7 @@ describe(componentName, () => {
   });
 
   it('adds additional properties to the containing node', () => {
-    render(<ExpressiveCard data-test-id="test-id" />);
+    render(<ExpressiveCard data-testid="test-id" />);
     screen.getByTestId('test-id');
   });
 

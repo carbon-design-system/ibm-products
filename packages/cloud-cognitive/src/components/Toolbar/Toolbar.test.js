@@ -19,7 +19,7 @@ function _render(props) {
   const Component = this;
 
   return r(
-    <Component data-test-id={dataTestId} {...props}>
+    <Component data-testid={dataTestId} {...props}>
       {Component.displayName}
     </Component>
   );

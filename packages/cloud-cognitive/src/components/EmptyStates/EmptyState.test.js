@@ -129,10 +129,10 @@ describe(name, () => {
 
   it('adds additional properties to the containing node', () => {
     const { container } = render(
-      <EmptyState {...defaultProps} data-test-id={dataTestId} />
+      <EmptyState {...defaultProps} data-testid={dataTestId} />
     );
     expect(
-      container.querySelector(`.${blockClass}[data-test-id="${dataTestId}"]`)
+      container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
     ).toBeInTheDocument();
   });
 

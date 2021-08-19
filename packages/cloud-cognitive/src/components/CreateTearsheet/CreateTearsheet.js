@@ -116,9 +116,7 @@ export let CreateTearsheet = forwardRef(
     // Log a warning to the console in the event there are no CreateTearsheetSection components
     // inside of the CreateTearsheetSteps when the viewAll toggle is provided and turned on.
     useEffect(() => {
-      console.log({ shouldViewAll });
       if (includeViewAllToggle && shouldViewAll) {
-        console.log('do we get here?');
         let childrenArray =
           typeof children !== 'undefined'
             ? children.length

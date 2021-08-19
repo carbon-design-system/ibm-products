@@ -6,12 +6,7 @@
 //
 
 // Standard imports.
-@import '@carbon/themes/scss/themes';
-@import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
-
-// Other Carbon settings.
-@import 'carbon-components/scss/globals/scss/_vars.scss';
 
 // CreateModal uses the following Carbon components:
 // ComposedModal, ModalHeader, ModalFooter, ModalBody, Form, Button

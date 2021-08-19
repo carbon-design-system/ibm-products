@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import userEvent from '@testing-library/user-event';
 
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -19,6 +20,8 @@ const componentName = CreateTearsheetNarrow.displayName;
 // values to use
 const children = `hello, world (${uuidv4()})`;
 const dataTestId = uuidv4();
+const onRequestCloseFn = jest.fn();
+const onRequestSubmitFn = jest.fn();
 
 const defaultProps = {
   title: 'Create partition',
@@ -30,6 +33,8 @@ const defaultProps = {
   primaryButtonText: 'Create action',
   secondaryButtonText: 'Cancel',
   label: 'Test label',
+  onRequestClose: onRequestCloseFn,
+  onRequestSubmit: onRequestSubmitFn,
 };
 
 // render an ExampleComponent with button labels and any other required props
@@ -59,6 +64,10 @@ describe(componentName, () => {
   it('renders a component CreateTearsheetNarrow', () => {
     renderComponent();
     expect(screen.getByText(/Create action/)).toBeVisible();
+    expect(screen.getByText(defaultProps.formDescription)).toBeVisible();
+    expect(screen.getByText(defaultProps.formTitle)).toBeVisible();
+    expect(screen.getByText(defaultProps.secondaryButtonText)).toBeVisible();
+    expect(screen.getByText(defaultProps.primaryButtonText)).toBeVisible();
   });
 
   it('has no accessibility violations', async () => {
@@ -79,7 +88,7 @@ describe(componentName, () => {
   });
 
   it('adds additional props to the containing node', () => {
-    renderComponent({ 'data-test-id': dataTestId });
+    renderComponent({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
   });
 
@@ -87,5 +96,23 @@ describe(componentName, () => {
     const ref = React.createRef();
     renderComponent({ ref });
     expect(ref.current).not.toBeNull();
+  });
+
+  it('should disable the primary action button', () => {
+    renderComponent({
+      disableSubmit: true,
+    });
+    expect(
+      screen.getByText(defaultProps.primaryButtonText).closest('button')
+    ).toBeDisabled();
+  });
+
+  it('should click on both action buttons', () => {
+    const { click } = userEvent;
+    renderComponent();
+    click(screen.getByText(defaultProps.primaryButtonText));
+    click(screen.getByText(defaultProps.secondaryButtonText));
+    expect(onRequestCloseFn).toHaveBeenCalledTimes(1);
+    expect(onRequestSubmitFn).toHaveBeenCalledTimes(1);
   });
 });

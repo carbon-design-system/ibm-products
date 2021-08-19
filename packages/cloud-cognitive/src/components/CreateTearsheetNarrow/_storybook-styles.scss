@@ -6,7 +6,6 @@
 //
 
 @import './index';
-@import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
 // Uncomment next line (which must appear last) to test in storybook
@@ -21,8 +20,9 @@ $story-class: #{$pkg-prefix}--create-tearsheet-narrow--story;
   align-items: baseline;
 }
 
-.#{$story-class}__flex-container .#{$carbon-prefix}--form-item {
-  margin-right: $spacing-04;
+.#{$story-class}__flex-container .#{$carbon-prefix}--form-item,
+.#{$story-class}__form .#{$carbon-prefix}--form-item {
+  margin-bottom: $spacing-05;
 }
 
 .#{$story-class}__flex-container .#{$carbon-prefix}--form-item,

@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.71.8](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.71.7...@carbon/ibm-cloud-cognitive@0.71.8) (2021-08-18)
+
+
+### Bug Fixes
+
+* **CreateTearsheet:** remove grid margin ([#1170](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1170)) ([75bfb54](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/75bfb5462ec364d86970fc142a99b91d0c5a185b))
+
+
+
+
+
+## [0.71.7](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.71.6...@carbon/ibm-cloud-cognitive@0.71.7) (2021-08-18)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
 ## [0.71.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.71.5...@carbon/ibm-cloud-cognitive@0.71.6) (2021-08-18)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

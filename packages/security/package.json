@@ -44,7 +44,7 @@
     "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon)/'"
   },
   "dependencies": {
-    "@babel/runtime": "^7.14.8",
+    "@babel/runtime": "^7.15.3",
     "@carbon/icons-react": "^10.37.0",
     "@carbon/import-once": "^10.5.0",
     "@carbon/layout": "^10.29.0",

@@ -44,8 +44,8 @@
     "react-dom": "^16.8.6 || ^17.0.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.14.8",
-    "focus-trap-react": "^8.7.0",
+    "@babel/runtime": "^7.15.3",
+    "focus-trap-react": "^8.7.1",
     "pluralize": "^8.0.0",
     "react-highlighter": "^0.4.3",
     "react-select": "^4.3.1",

@@ -34,7 +34,7 @@ export default {
 const Template = (args) => {
   return (
     <ExampleComponent
-      primaryButtonLabel="Primary"
+      primaryButtonLabel="Primary!"
       secondaryButtonLabel="Secondary"
       onPrimaryClick={action('onPrimaryClick')}
       onSecondaryClick={action('onSecondaryClick')}

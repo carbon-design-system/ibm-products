@@ -45,6 +45,7 @@ export let CreateTearsheet = forwardRef(
       description,
       includeViewAllToggle,
       influencerWidth,
+      initialStep,
       label,
       nextButtonText,
       onClose,
@@ -92,7 +93,7 @@ export let CreateTearsheet = forwardRef(
       blockClass
     );
     useValidCreateStepCount(getTearsheetSteps, componentName);
-    useResetCreateComponent(previousState, open, setCurrentStep);
+    useResetCreateComponent(previousState, open, setCurrentStep, initialStep);
     useCreateComponentStepChange({
       setCurrentStep,
       setIsSubmitting,
@@ -115,7 +116,9 @@ export let CreateTearsheet = forwardRef(
     // Log a warning to the console in the event there are no CreateTearsheetSection components
     // inside of the CreateTearsheetSteps when the viewAll toggle is provided and turned on.
     useEffect(() => {
+      console.log({ shouldViewAll });
       if (includeViewAllToggle && shouldViewAll) {
+        console.log('do we get here?');
         let childrenArray =
           typeof children !== 'undefined'
             ? children.length
@@ -470,6 +473,13 @@ CreateTearsheet.propTypes = {
    * Used to set the size of the influencer
    */
   influencerWidth: PropTypes.oneOf(['narrow', 'wide']),
+
+  /**
+   * This can be used to open the component to a step other than the first step.
+   * For example, a create flow was previously in progress, data was saved, and
+   * is now being completed.
+   */
+  initialStep: PropTypes.number,
 
   /**
    * A label for the tearsheet, displayed in the header area of the tearsheet

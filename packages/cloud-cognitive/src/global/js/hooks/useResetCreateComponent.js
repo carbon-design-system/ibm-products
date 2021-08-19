@@ -12,15 +12,21 @@ import { useEffect } from 'react';
  * @param {object} previousState
  * @param {boolean} open
  * @param {Function} setCurrentStep
+ * @param {number} initialStep
  */
 export const useResetCreateComponent = (
   previousState,
   open,
-  setCurrentStep
+  setCurrentStep,
+  initialStep
 ) => {
   useEffect(() => {
     if (!previousState?.open && open) {
-      setCurrentStep(1);
+      if (initialStep) {
+        setCurrentStep(initialStep);
+      } else {
+        setCurrentStep(1);
+      }
     }
-  }, [open, previousState, setCurrentStep]);
+  }, [open, previousState, setCurrentStep, initialStep]);
 };

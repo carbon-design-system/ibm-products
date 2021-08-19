@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.73.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.72.1...@carbon/ibm-cloud-cognitive@0.73.0) (2021-08-19)
+
+
+### Features
+
+* **CreateTearsheet:** [#1076](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1076) create tearsheet custom step ([#1174](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1174)) ([8d0ab04](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8d0ab046245a9b8862e351361b08068204a97f2a))
+
+
+
+
+
 ## [0.72.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.72.0...@carbon/ibm-cloud-cognitive@0.72.1) (2021-08-19)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

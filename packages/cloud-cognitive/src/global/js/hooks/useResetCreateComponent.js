@@ -9,18 +9,53 @@ import { useEffect } from 'react';
 
 /**
  * Resets the current step of the create component if it has been closed.
- * @param {object} previousState
- * @param {boolean} open
- * @param {Function} setCurrentStep
+ * @param {object} useResetCreateComponent - Create component that uses this custom hook
+ * @param {object} useResetCreateComponent.previousState
+ * @param {boolean} useResetCreateComponent.open
+ * @param {Function} useResetCreateComponent.setCurrentStep
+ * @param {number} useResetCreateComponent.initialStep
+ * @param {number} useResetCreateComponent.totalSteps
+ * @param {string} useResetCreateComponent.componentName
  */
-export const useResetCreateComponent = (
+export const useResetCreateComponent = ({
   previousState,
   open,
-  setCurrentStep
-) => {
+  setCurrentStep,
+  initialStep,
+  totalSteps,
+  componentName,
+}) => {
   useEffect(() => {
     if (!previousState?.open && open) {
-      setCurrentStep(1);
+      if (
+        initialStep &&
+        totalSteps &&
+        Number(initialStep) <= Number(totalSteps) &&
+        Number(initialStep) > 0
+      ) {
+        setCurrentStep(Number(initialStep));
+      } else {
+        setCurrentStep(1);
+      }
+
+      // An invalid initialStep value was provided, we'll default to rendering the first step in this scenario
+      if (
+        (initialStep &&
+          totalSteps &&
+          Number(initialStep) > Number(totalSteps)) ||
+        Number(initialStep) <= 0
+      ) {
+        console.warn(
+          `${componentName}: An invalid \`initialStep\` prop was supplied. The \`initialStep\` prop should be a number that is greater than 0 or less than or equal to the number of steps your ${componentName} has.`
+        );
+      }
     }
-  }, [open, previousState, setCurrentStep]);
+  }, [
+    open,
+    previousState,
+    setCurrentStep,
+    initialStep,
+    totalSteps,
+    componentName,
+  ]);
 };

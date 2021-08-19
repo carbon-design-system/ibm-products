@@ -236,7 +236,7 @@ export const fullyLoaded = prepareStory(Template, {
     onClose: action('onClose called'),
     title,
     verticalPosition: 'normal',
-    actions: 0,
+    actions: 3,
   },
 });
 

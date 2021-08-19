@@ -70,6 +70,26 @@ export let CreateTearsheet = forwardRef(
     const previousState = usePreviousValue({ currentStep, open });
     const contentRef = useRef();
 
+    // check if child is a tearsheet step component
+    const isTearsheetStep = (child) => {
+      if (child && child.props && child.props.type === CREATE_TEARSHEET_STEP) {
+        return true;
+      }
+      return false;
+    };
+
+    // check if child is a tearsheet section component
+    const isTearsheetSection = (child) => {
+      if (
+        child &&
+        child.props &&
+        child.props.type === CREATE_TEARSHEET_SECTION
+      ) {
+        return true;
+      }
+      return false;
+    };
+
     // returns an array of tearsheet steps
     const getTearsheetSteps = useCallback(() => {
       const steps = [];
@@ -93,7 +113,13 @@ export let CreateTearsheet = forwardRef(
       blockClass
     );
     useValidCreateStepCount(getTearsheetSteps, componentName);
-    useResetCreateComponent(previousState, open, setCurrentStep, initialStep);
+    useResetCreateComponent(
+      previousState,
+      open,
+      setCurrentStep,
+      initialStep,
+      getTearsheetSteps().length
+    );
     useCreateComponentStepChange({
       setCurrentStep,
       setIsSubmitting,
@@ -181,26 +207,6 @@ export let CreateTearsheet = forwardRef(
         });
       }
     }, [includeViewAllToggle, shouldViewAll, children]);
-
-    // check if child is a tearsheet step component
-    const isTearsheetStep = (child) => {
-      if (child && child.props && child.props.type === CREATE_TEARSHEET_STEP) {
-        return true;
-      }
-      return false;
-    };
-
-    // check if child is a tearsheet section component
-    const isTearsheetSection = (child) => {
-      if (
-        child &&
-        child.props &&
-        child.props.type === CREATE_TEARSHEET_SECTION
-      ) {
-        return true;
-      }
-      return false;
-    };
 
     const getTearsheetComponents = (childrenElements) => {
       let childrenArray = Array.isArray(childrenElements)

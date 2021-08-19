@@ -13,20 +13,27 @@ import { useEffect } from 'react';
  * @param {boolean} open
  * @param {Function} setCurrentStep
  * @param {number} initialStep
+ * @param {number} totalSteps
  */
 export const useResetCreateComponent = (
   previousState,
   open,
   setCurrentStep,
-  initialStep
+  initialStep,
+  totalSteps
 ) => {
   useEffect(() => {
     if (!previousState?.open && open) {
-      if (initialStep) {
+      if (
+        initialStep &&
+        totalSteps &&
+        initialStep <= totalSteps &&
+        initialStep > 0
+      ) {
         setCurrentStep(initialStep);
       } else {
         setCurrentStep(1);
       }
     }
-  }, [open, previousState, setCurrentStep, initialStep]);
+  }, [open, previousState, setCurrentStep, initialStep, totalSteps]);
 };

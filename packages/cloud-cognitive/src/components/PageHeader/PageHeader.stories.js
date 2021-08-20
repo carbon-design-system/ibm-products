@@ -33,6 +33,7 @@ import {
   Settings16,
   VolumeMute16,
 } from '@carbon/icons-react';
+import cx from 'classnames';
 
 import { ActionBarItem } from '../ActionBar';
 import { PageHeader, deprecatedProps } from './PageHeader';
@@ -602,11 +603,16 @@ export const fullyLoadedAndSome = prepareStory(Template, {
 
 // Template for demo.
 // eslint-disable-next-line react/prop-types
-const TemplateDemo = ({ children, ...props }) => {
+const TemplateDemo = ({ children, storyOptionWholePageScroll, ...props }) => {
   return (
     <>
       <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
-      <div className={`${storyClass}__app`}>
+      <div
+        className={cx(`${storyClass}__app`, {
+          [`${storyClass}__app--whole-page-scroll`]:
+            !storyOptionWholePageScroll,
+        })}
+        key={storyOptionWholePageScroll ? 'keyYes' : 'keyNo'}>
         <Header aria-label="IBM Platform Name">
           <HeaderName href="#" prefix="IBM">
             Cloud Cognitive application
@@ -629,6 +635,7 @@ const TemplateDemo = ({ children, ...props }) => {
 export const demo = prepareStory(TemplateDemo, {
   storyName: 'Page header in context',
   args: {
+    storyOptionWholePageScroll: false,
     title: 5,
     subtitle: demoSubtitle,
     breadcrumbs: 4,

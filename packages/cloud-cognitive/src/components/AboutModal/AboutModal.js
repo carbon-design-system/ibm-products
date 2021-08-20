@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Import portions of React that are needed.
+import { paramCase } from 'param-case';
 import React, { useState, useRef, useEffect } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
 
@@ -24,6 +24,18 @@ import {
   Tabs,
   Tab,
 } from 'carbon-components-react';
+
+const devtoolsAttribute = 'data-carbon-devtools-id';
+
+function getDevtoolsId(componentName) {
+  return paramCase(componentName);
+}
+
+function getDevtoolsProps(componentName) {
+  return {
+    [devtoolsAttribute]: getDevtoolsId(componentName),
+  };
+}
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--about-modal`;
@@ -96,7 +108,8 @@ export let AboutModal = React.forwardRef(
               additionalInfo && additionalInfo.length > 1,
           }
         )}
-        {...{ onClose, open, ref }}>
+        {...{ onClose, open, ref }}
+        {...getDevtoolsProps(componentName)}>
         <div className={`${blockClass}__logo`}>{logo}</div>
         <ModalHeader
           className={`${blockClass}__header`}
@@ -162,7 +175,7 @@ export let AboutModal = React.forwardRef(
 // Return a placeholder if not released and not enabled by feature flag
 AboutModal = pkg.checkComponentEnabled(AboutModal, componentName);
 
-// The display name of the component, used by React.
+AboutModal.devtoolsId = getDevtoolsId(componentName);
 AboutModal.displayName = componentName;
 
 // The types and DocGen commentary for the component props,

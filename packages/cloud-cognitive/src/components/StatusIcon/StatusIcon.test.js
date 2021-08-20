@@ -77,7 +77,7 @@ describe(componentName, () => {
   });
 
   it('adds additional properties to the containing node', () => {
-    renderComponent({ 'data-test-id': dataTestId });
+    renderComponent({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
   });
 

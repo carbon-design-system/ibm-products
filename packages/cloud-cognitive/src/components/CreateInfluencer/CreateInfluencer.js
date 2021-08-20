@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import {
@@ -38,6 +38,8 @@ export let CreateInfluencer = ({
   handleToggleState,
   handleActiveSectionIndex,
   includeViewAllToggle,
+  open,
+  previousState,
   sideNavAriaLabel,
   toggleState,
   viewAllToggleLabelText,
@@ -46,6 +48,15 @@ export let CreateInfluencer = ({
 }) => {
   const [progressIndicatorState, setProgressIndicatorState] = useState('');
   const [sideNavState, setSideNavState] = useState('');
+
+  // Animating states need to be reset here otherwise things won't render
+  // the way they should after the component mounts/unmounts
+  useEffect(() => {
+    if (!previousState?.open && open) {
+      setSideNavState('');
+      setProgressIndicatorState('');
+    }
+  }, [open, previousState]);
 
   const handleViewAllToggle = (newToggleValue) => {
     if (newToggleValue) {
@@ -80,6 +91,7 @@ export let CreateInfluencer = ({
         labelB={viewAllToggleOnLabelText}
         onToggle={(value) => handleViewAllToggle(value)}
         className={`${blockClass}__view-all-toggle`}
+        defaultToggled={false}
       />
     );
   };
@@ -217,6 +229,16 @@ CreateInfluencer.propTypes = {
    * Used to optionally include view all toggle
    */
   includeViewAllToggle: PropTypes.bool,
+
+  /**
+   * This is the open state of the CreateComponent in which the CreateInfluencer is used from
+   */
+  open: PropTypes.bool,
+
+  /**
+   * This is the open state of the CreateComponent in which the CreateInfluencer is used from
+   */
+  previousState: PropTypes.object,
 
   /**
    * The aria label to be used for the UI Shell SideNav Carbon component

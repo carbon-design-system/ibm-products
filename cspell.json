@@ -66,6 +66,7 @@
     "apikey",
     "checkmark",
     "classname",
+    "data-testid",
     "divs",
     "overridable",
     "pconsole",
@@ -87,6 +88,7 @@
     "tabbable",
     "tearsheet",
     "tearsheets",
+    "treeview",
     "uuidv",
     "viewports"
   ]

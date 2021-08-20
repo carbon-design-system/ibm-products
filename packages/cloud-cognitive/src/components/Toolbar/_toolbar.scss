@@ -1,0 +1,42 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../global/styles/project-settings';
+
+@import 'carbon-components/scss/components/button/button';
+
+@include exports($name: cloud-cognitive--toolbar) {
+  $block-class: #{$pkg-prefix}--toolbar;
+  $border: carbon--rem(
+      $px: 1px,
+    )
+    solid $ui-03;
+
+  .#{$block-class} {
+    @include carbon--breakpoint($name: lg) {
+      justify-content: flex-end;
+    }
+
+    display: flex;
+    min-height: carbon--rem($px: 40px);
+    border-bottom: $border;
+    background-color: $ui-01;
+  }
+
+  .#{$block-class} .#{$prefix}--dropdown {
+    border-bottom-width: 0;
+  }
+
+  .#{$block-class}__group {
+    display: flex;
+    border-right: $border;
+  }
+
+  .#{$block-class}__group:last-of-type {
+    border-right-width: 0;
+  }
+}

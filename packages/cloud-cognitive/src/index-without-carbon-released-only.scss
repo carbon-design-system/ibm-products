@@ -6,11 +6,8 @@
 //
 
 @import './global/styles/imported-carbon-modules';
-
 $imported-modules: $imported-carbon-modules;
 
-@import '@carbon/import-once/scss/import-once';
-@import './global/styles/carbon-settings';
 @import './global/styles/project-settings';
 
 @import './components/index-released-only';

@@ -45,6 +45,7 @@ export let CreateTearsheet = forwardRef(
       description,
       includeViewAllToggle,
       influencerWidth,
+      initialStep,
       label,
       nextButtonText,
       onClose,
@@ -69,6 +70,26 @@ export let CreateTearsheet = forwardRef(
     const previousState = usePreviousValue({ currentStep, open });
     const contentRef = useRef();
 
+    // check if child is a tearsheet step component
+    const isTearsheetStep = (child) => {
+      if (child && child.props && child.props.type === CREATE_TEARSHEET_STEP) {
+        return true;
+      }
+      return false;
+    };
+
+    // check if child is a tearsheet section component
+    const isTearsheetSection = (child) => {
+      if (
+        child &&
+        child.props &&
+        child.props.type === CREATE_TEARSHEET_SECTION
+      ) {
+        return true;
+      }
+      return false;
+    };
+
     // returns an array of tearsheet steps
     const getTearsheetSteps = useCallback(() => {
       const steps = [];
@@ -92,7 +113,14 @@ export let CreateTearsheet = forwardRef(
       blockClass
     );
     useValidCreateStepCount(getTearsheetSteps, componentName);
-    useResetCreateComponent(previousState, open, setCurrentStep);
+    useResetCreateComponent({
+      previousState,
+      open,
+      setCurrentStep,
+      initialStep,
+      totalSteps: getTearsheetSteps().length,
+      componentName,
+    });
     useCreateComponentStepChange({
       setCurrentStep,
       setIsSubmitting,
@@ -180,26 +208,6 @@ export let CreateTearsheet = forwardRef(
         });
       }
     }, [includeViewAllToggle, shouldViewAll, children]);
-
-    // check if child is a tearsheet step component
-    const isTearsheetStep = (child) => {
-      if (child && child.props && child.props.type === CREATE_TEARSHEET_STEP) {
-        return true;
-      }
-      return false;
-    };
-
-    // check if child is a tearsheet section component
-    const isTearsheetSection = (child) => {
-      if (
-        child &&
-        child.props &&
-        child.props.type === CREATE_TEARSHEET_SECTION
-      ) {
-        return true;
-      }
-      return false;
-    };
 
     const getTearsheetComponents = (childrenElements) => {
       let childrenArray = Array.isArray(childrenElements)
@@ -470,6 +478,13 @@ CreateTearsheet.propTypes = {
    * Used to set the size of the influencer
    */
   influencerWidth: PropTypes.oneOf(['narrow', 'wide']),
+
+  /**
+   * This can be used to open the component to a step other than the first step.
+   * For example, a create flow was previously in progress, data was saved, and
+   * is now being completed.
+   */
+  initialStep: PropTypes.number,
 
   /**
    * A label for the tearsheet, displayed in the header area of the tearsheet

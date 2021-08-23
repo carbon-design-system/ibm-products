@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { paramCase } from 'param-case';
+
 import { sectionTitle } from '../config';
 
 const getCategory = (title) => `${sectionTitle}/${title}`;
@@ -14,6 +16,10 @@ const deprecated = (title) => getCategory(`Deprecated/${title}`);
 const layoutModules = (title) => getCategory(`Layout modules/${title}`);
 const pageLayouts = (title) => getCategory(`Page layouts (canary)/${title}`);
 const patterns = (title) => getCategory(`Patterns/${title}`);
+
+function getDocsId(id) {
+  return `${paramCase(sectionTitle)}-${id}`;
+}
 
 let getDocsParameters, info;
 getDocsParameters = info = () => ({});
@@ -30,6 +36,7 @@ export {
   deprecated,
   disableCentered,
   disableCenteredStories,
+  getDocsId,
   getDocsParameters,
   info,
   layoutModules,

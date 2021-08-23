@@ -366,7 +366,7 @@ describe('SidePanel', () => {
   });
 
   it('adds additional properties to the containing node', () => {
-    renderSidePanel({ 'data-test-id': dataTestId });
+    renderSidePanel({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
   });
 

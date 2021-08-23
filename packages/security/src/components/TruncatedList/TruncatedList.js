@@ -5,7 +5,7 @@
 
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { Children } from 'react';
+import React, { Children, Component } from 'react';
 
 import Button from '../Button';
 import ScrollGradient from '../ScrollGradient';
@@ -15,114 +15,147 @@ import theme from '../../globals/theme';
 
 const namespace = getComponentNamespace('truncated-list');
 
-const TruncatedList = ({
-  children,
-  className,
-  expandButtonClassName,
-  as: List,
-  scrollGradientColor,
-  getExpandButtonLabel,
-  truncateThreshold,
-  collapsedItemLimit,
-  expandedItemLimit,
-  ...other
-}) => {
-  const [isExpanded, setIsExpanded] = React.useState(false);
-  const [listContainer, setListContainer] = React.useState(null);
+const { toArray } = Children;
 
-  const childrenLength = Children.count(children);
-  const shouldTruncate = childrenLength > truncateThreshold;
+class TruncatedList extends Component {
+  state = {
+    isExpanded: false,
+  };
 
   /**
-   * Defines how many items must be displayed at a time.
+   * Defines how many items must be displayed at a time and whether it should truncate.
    */
-  const getDisplayCount = () => {
+  getDisplayCount(childrenLength) {
+    const {
+      props: { collapsedItemLimit, expandedItemLimit, truncateThreshold },
+      state: { isExpanded },
+    } = this;
+
+    const shouldTruncate = childrenLength > truncateThreshold;
+
     // If we do not need to truncate, we can just show the entire list of items.
     if (!shouldTruncate) {
-      return childrenLength;
+      return [childrenLength, shouldTruncate];
     }
 
     // When the list is truncated and expanded, we use the expanded item limit.
     if (isExpanded) {
-      return expandedItemLimit;
+      return [expandedItemLimit, shouldTruncate];
     }
 
     // If the truncate threshold is lower than the collapsed item limit, and the list needs to be
     // truncated, we must display the lowest of the two counts otherwise the expand button would
     // have a negative count.
-    return Math.min(collapsedItemLimit, truncateThreshold);
-  };
-
-  const displayCount = getDisplayCount();
+    return [Math.min(collapsedItemLimit, truncateThreshold), shouldTruncate];
+  }
 
   /**
    * Adjusts the height of the list container so only the amount of items from the calculated
    * display amount can be viewed at a time.
    */
-  const updateListContainerHeight = () => {
-    if (listContainer) {
-      const list = listContainer.firstElementChild;
-      const items = list.children;
+  updateListContainerHeight() {
+    const {
+      listContainer,
+      props: { children },
+    } = this;
 
-      // Calculate which item in the list is the last to show in our list. It either has to be the
-      // calculate display count or the last item on the list. Whichever comes first.
-      const lastItemToShow = items[Math.min(displayCount, items.length - 1)];
-      listContainer.style.height = `${
-        lastItemToShow.offsetTop + lastItemToShow.offsetHeight + 4
-      }px`;
+    if (!listContainer) {
+      return;
     }
-  };
 
-  // After the component's expanded state has changed update the height of the list container to be
-  // the same as its visible children set.
-  React.useEffect(() => {
-    if (shouldTruncate) {
-      updateListContainerHeight();
+    const items = listContainer.firstElementChild.children;
+
+    // Calculate which item in the list is the last to show in our list. It either has to be the
+    // calculate display count or the last item on the list. Whichever comes first.
+    const lastItemToShow =
+      items[
+        Math.min(
+          this.getDisplayCount(toArray(children).length)[0],
+          items.length - 1
+        )
+      ];
+
+    listContainer.style.height =
+      lastItemToShow.offsetTop + lastItemToShow.offsetHeight + 4 + 'px';
+  }
+
+  componentDidUpdate(prevProps, { isExpanded }) {
+    // After the component's expanded state has changed update the height of the list container to be
+    // the same as its visible children set.
+    if (isExpanded != this.state.isExpanded) {
+      this.updateListContainerHeight();
     }
-  }, [isExpanded, displayCount]);
+  }
 
-  const handleExpand = () => {
+  handleExpand = () => {
     // Pre-set the height of the list container to its own current height so we can smoothly
     // transition into its new height in the React Effect hook.
-    updateListContainerHeight();
-    setIsExpanded((currentExpand) => !currentExpand);
+    this.updateListContainerHeight();
+
+    this.setState(({ isExpanded }) => ({
+      isExpanded: !isExpanded,
+    }));
   };
 
-  const childrenArray = Children.toArray(children);
+  listContainer = null;
+  setListContainer = (listContainer) => (this.listContainer = listContainer);
 
-  return (
-    <>
-      <ScrollGradient
-        className={`${namespace}__scroller-container`}
-        scrollElementClassName={`${namespace}__scroller`}
-        color={scrollGradientColor}
-        getScrollElementRef={setListContainer}>
-        <List className={classnames(className, namespace)} {...other}>
-          {childrenArray.slice(0, displayCount)}
-          {shouldTruncate && isExpanded && childrenArray.slice(displayCount)}
-        </List>
-      </ScrollGradient>
+  render() {
+    const {
+      props: {
+        as: List,
+        children,
+        className,
+        expandButtonClassName,
+        getExpandButtonLabel,
+        scrollGradientColor,
+        truncateThreshold: _, // Throw away.
+        collapsedItemLimit: __,
+        expandedItemLimit: ___,
+        ...other
+      },
+      state: { isExpanded },
+    } = this;
 
-      {shouldTruncate && (
-        <Button
-          className={classnames(
-            expandButtonClassName,
-            `${carbonPrefix}--link`,
-            `${namespace}__expand-button`
-          )}
-          iconDescription=""
-          size="small"
-          onClick={handleExpand}>
-          {getExpandButtonLabel(
-            isExpanded,
-            isExpanded ? childrenLength : displayCount,
-            isExpanded ? 0 : childrenLength - displayCount
-          )}
-        </Button>
-      )}
-    </>
-  );
-};
+    const childrenArray = toArray(children);
+    const childrenLength = childrenArray.length;
+
+    const [displayCount, shouldTruncate] = this.getDisplayCount(childrenLength);
+
+    return (
+      <>
+        <ScrollGradient
+          className={`${namespace}__scroller-container`}
+          scrollElementClassName={`${namespace}__scroller`}
+          color={scrollGradientColor}
+          getScrollElementRef={this.setListContainer}>
+          <List className={classnames(className, namespace)} {...other}>
+            {childrenArray.slice(0, displayCount)}
+            {shouldTruncate && isExpanded && childrenArray.slice(displayCount)}
+          </List>
+        </ScrollGradient>
+
+        {shouldTruncate && (
+          <Button
+            className={classnames(
+              expandButtonClassName,
+              `${carbonPrefix}--link`,
+              `${namespace}__expand-button`
+            )}
+            iconDescription=""
+            size="small"
+            onClick={this.handleExpand}>
+            {getExpandButtonLabel(
+              isExpanded,
+              isExpanded ? childrenLength : displayCount,
+              isExpanded ? 0 : childrenLength - displayCount
+            )}
+          </Button>
+        )}
+      </>
+    );
+  }
+}
 
 TruncatedList.propTypes = {
   /** The type of list element to render. This could be a ul, ol, or a custom React component. (Optional) */

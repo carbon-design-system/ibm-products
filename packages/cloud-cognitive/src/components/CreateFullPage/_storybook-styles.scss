@@ -4,13 +4,12 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
-@import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
 @import 'carbon-components/scss/components/ui-shell/ui-shell';
 
 $story-class: 'create-full-page-stories';
-
+$block-class: #{$pkg-prefix}--create-full-page;
 // cspell:disable-next-line
 .sbdocs .#{$story-class}__viewport {
   height: 100vh;
@@ -20,25 +19,31 @@ $story-class: 'create-full-page-stories';
   overflow-y: auto;
 }
 
+.#{$story-class}__step-fieldset--no-label .#{$carbon-prefix}--fieldset legend {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 .#{$story-class}__tooltip {
+  position: relative;
   // stylelint-disable-next-line carbon/layout-token-use
   top: calc(#{$spacing-05} + #{$spacing-01});
-  // stylelint-disable-next-line carbon/layout-token-use
-  left: calc(#{$spacing-11} + #{$spacing-03});
+  left: $spacing-11;
 }
 
-.#{$story-class}__description {
-  @include carbon--type-style('body-short-01');
-
-  padding-bottom: $spacing-03;
-}
-
-p.#{$story-class}__description:last-of-type {
-  padding-bottom: $spacing-06;
-}
-
-.#{$story-class}__heading {
-  @include carbon--font-weight('semibold');
+.#{$block-class}__step-fieldset.#{$story-class}__step-fieldset--label.#{$carbon-prefix}--label {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .#{$carbon-prefix}--form-item {

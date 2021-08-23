@@ -1,0 +1,14 @@
+////
+/// Theme.
+/// @group theme
+/// @copyright IBM Security 2021
+////
+
+@import '@carbon/themes/scss/mixins';
+@import 'variables';
+
+/// Carbon theme.
+/// @type Map<String, Color>
+$carbon--theme: $-theme;
+
+@include carbon--theme;

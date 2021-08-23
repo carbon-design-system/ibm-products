@@ -8,9 +8,10 @@
 @import '@carbon/layout/scss/spacing';
 @import '@carbon/themes/scss/tokens';
 
-@import '../../OverflowMenu/index';
-
 @import '../../Component/mixins';
+
+@import '../FilterPanelCheckbox/index';
+@import '../../OverflowMenu/index';
 
 @include security--component($name: filter-panel-checkbox-with-overflow-menu) {
   $block: &;

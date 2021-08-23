@@ -10,11 +10,17 @@ import React from 'react';
 
 import { ProductiveCard } from '.';
 
-const { name } = ProductiveCard;
+const componentName = ProductiveCard.displayName;
 
-describe(name, () => {
+describe(componentName, () => {
   it('renders', () => {
     render(<ProductiveCard />);
+  });
+
+  it('has no accessibility violations', async () => {
+    const { container } = render(<ProductiveCard />);
+    await expect(container).toBeAccessible(componentName);
+    await expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', () => {
@@ -23,7 +29,7 @@ describe(name, () => {
   });
 
   it('adds additional properties to the containing node', () => {
-    render(<ProductiveCard data-test-id="test-id" />);
+    render(<ProductiveCard data-testid="test-id" />);
     screen.getByTestId('test-id');
   });
 

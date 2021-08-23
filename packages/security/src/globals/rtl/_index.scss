@@ -1,7 +1,7 @@
 ////
 /// Right-to-left assets for internationalization.
 /// @group rtl
-/// @copyright IBM Security 2019
+/// @copyright IBM Security 2019 - 2021
 ////
 
 /// Helper mixin for right-to-left.
@@ -35,18 +35,18 @@
 /// @param {List<*>} $box-shadow The `box-shadow` to flip.
 /// @returns {List<*>} The flipped `box-shadow`.
 @function reverse-box-shadow($box-shadow) {
-  $reversed-box-shadow: ();
+  $reversed-value: ();
 
   @for $index from 1 through length($box-shadow) {
     $value: nth($box-shadow, $index);
 
-    $reversed-box-shadow: append(
-      $reversed-box-shadow,
+    $reversed-value: append(
+      $reversed-value,
       if(($index == 1), ($value * -1), $value)
     );
   }
 
-  @return $reversed-box-shadow;
+  @return $reversed-value;
 }
 
 /// Flip opposite shorthand values.

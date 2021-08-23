@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { moderate02 } from '@carbon/motion';
 import { pkg, carbon } from '../../settings';
@@ -15,7 +15,8 @@ import { CreateTearsheet } from './CreateTearsheet';
 import { CreateTearsheetStep } from './CreateTearsheetStep';
 import { CreateTearsheetSection } from './CreateTearsheetSection';
 import uuidv4 from '../../global/js/utils/uuidv4';
-const tearsheetBlockClass = `${pkg.prefix}--tearsheet-create`;
+const createTearsheetBlockClass = `${pkg.prefix}--tearsheet-create`;
+const createInfluencerBlockClass = `${pkg.prefix}--create-influencer`;
 
 const rejectionErrorMessage = uuidv4();
 const onCloseFn = jest.fn();
@@ -52,6 +53,8 @@ const defaultProps = {
   onClose: onCloseFn,
   open: true,
 };
+// Remove `ms` from moderate02 carbon motion value so we can simply pass the number of milliseconds.
+const timerValue = Number(moderate02.substring(0, moderate02.length - 2));
 const renderCreateTearsheet = (
   {
     rejectOnSubmit = false,
@@ -64,21 +67,22 @@ const renderCreateTearsheet = (
   },
   children = (
     <>
-      <p>Child element that persists across all steps</p>
       <CreateTearsheetStep
         onNext={rejectOnNext ? onNextStepRejectionFn : onNext}
-        title={step1Title}>
+        title={step1Title}
+        formLegendText={step1Title}>
         step 1 content
         <button type="button" disabled>
           Test
         </button>
         <input type="text" />
       </CreateTearsheetStep>
-      <CreateTearsheetStep title={step2Title}>
+      <CreateTearsheetStep title={step2Title} formLegendText={step2Title}>
         step 2 content
       </CreateTearsheetStep>
       <CreateTearsheetStep
         title={step3Title}
+        formLegendText={step3Title}
         onNext={rejectOnSubmitNext ? finalStepOnNextRejectFn : finalOnNextFn}>
         step 3 content
       </CreateTearsheetStep>
@@ -103,8 +107,7 @@ const renderEmptyCreateTearsheet = ({ ...rest }) =>
 const renderSingleStepCreateTearsheet = ({ ...rest }) =>
   render(
     <CreateTearsheet onRequestSubmit={onRequestSubmitFn} {...rest}>
-      <p>Child element that persists across all steps</p>
-      <CreateTearsheetStep title={step1Title}>
+      <CreateTearsheetStep title={step1Title} formLegendText={step1Title}>
         step 1 content
       </CreateTearsheetStep>
     </CreateTearsheet>
@@ -128,21 +131,25 @@ describe(CreateTearsheet.displayName, () => {
       takeRecords: () => [],
       unobserve: () => null,
     }));
+    jest.useFakeTimers();
   });
 
   afterEach(() => {
     jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
+    jest.useRealTimers();
   });
 
   it('renders the CreateTearsheet component', () => {
     const { container } = renderCreateTearsheet({
       ...defaultProps,
-      'data-test-id': dataTestId,
+      'data-testid': dataTestId,
     });
     screen.getByTestId(dataTestId);
     screen.getAllByText(title);
-    expect(container.querySelector(`.${tearsheetBlockClass}`)).toBeTruthy();
+    expect(
+      container.querySelector(`.${createTearsheetBlockClass}`)
+    ).toBeTruthy();
     expect(ref.current).not.toBeNull();
   });
 
@@ -153,11 +160,11 @@ describe(CreateTearsheet.displayName, () => {
     const cancelButtonElement = screen.getByText(cancelButtonText);
     click(nextButtonElement);
     const createTearsheetSteps = container.querySelector(
-      `.${tearsheetBlockClass}__content`
+      `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
     ).children;
     expect(
       createTearsheetSteps[1].classList.contains(
-        `.${tearsheetBlockClass}__step--visible-section`
+        `.${createTearsheetBlockClass}__step--visible-section`
       )
     );
 
@@ -195,11 +202,11 @@ describe(CreateTearsheet.displayName, () => {
     });
     click(nextButtonElement);
     const tearsheetChildren = container.querySelector(
-      `.${tearsheetBlockClass}__content`
+      `.${createTearsheetBlockClass}__content  .${carbon.prefix}--form`
     ).children;
     expect(
       tearsheetChildren[2].classList.contains(
-        `.${tearsheetBlockClass}__step--visible-section`
+        `.${createTearsheetBlockClass}__step--visible-section`
       )
     );
     rerender(
@@ -207,11 +214,10 @@ describe(CreateTearsheet.displayName, () => {
         {...defaultProps}
         open={false}
         onRequestSubmit={onRequestSubmitFn}>
-        <p>Child element that persists across all steps</p>
-        <CreateTearsheetStep title={step1Title}>
+        <CreateTearsheetStep title={step1Title} formLegendText={step1Title}>
           step 1 content
         </CreateTearsheetStep>
-        <CreateTearsheetStep title={step2Title}>
+        <CreateTearsheetStep title={step2Title} formLegendText={step2Title}>
           step 2 content
         </CreateTearsheetStep>
       </CreateTearsheet>
@@ -326,7 +332,7 @@ describe(CreateTearsheet.displayName, () => {
   it('should not render any CreateTearsheet steps when there are no TearsheetStep components included', () => {
     const { container } = renderEmptyCreateTearsheet(defaultProps);
     const createTearsheetSteps = container.querySelectorAll(
-      `.${tearsheetBlockClass}__step`
+      `.${createTearsheetBlockClass}__step`
     );
     expect(Array(...createTearsheetSteps)).toStrictEqual([]);
   });
@@ -346,11 +352,11 @@ describe(CreateTearsheet.displayName, () => {
     const backButtonElement = screen.getByText(backButtonText);
     click(backButtonElement);
     const tearsheetChildren = container.querySelector(
-      `.${tearsheetBlockClass}__content`
+      `.${createTearsheetBlockClass}__content`
     ).children;
     expect(
       tearsheetChildren[0].classList.contains(
-        `.${tearsheetBlockClass}__step--visible-section`
+        `.${createTearsheetBlockClass}__step--visible-section`
       )
     );
   });
@@ -392,14 +398,14 @@ describe(CreateTearsheet.displayName, () => {
     const { click } = userEvent;
     click(screen.getByText(viewAllToggleLabelText));
     const viewAllToggleElement = container.querySelector(
-      `#${tearsheetBlockClass}__view-all-toggle`
+      `#${createInfluencerBlockClass}__view-all-toggle`
     );
-    setTimeout(() => {
-      expect(viewAllToggleElement).toBeChecked();
-      expect(warn).toBeCalledWith(
-        `CreateTearsheet: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' prop.`
-      );
-    }, moderate02);
+
+    act(() => jest.advanceTimersByTime(timerValue));
+    expect(viewAllToggleElement).toBeChecked();
+    expect(warn).toBeCalledWith(
+      `CreateTearsheet: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' prop.`
+    );
     rerender(
       <CreateTearsheet
         onRequestSubmit={jest.fn()}
@@ -501,9 +507,8 @@ describe(CreateTearsheet.displayName, () => {
     );
     const { click } = userEvent;
     click(screen.getByText(viewAllToggleLabelText));
-    setTimeout(() => {
-      expect(getByText(/Submit/g)).toHaveAttribute('disabled');
-    }, moderate02);
+    act(() => jest.advanceTimersByTime(timerValue));
+    expect(getByText(/Submit/g)).toHaveAttribute('disabled');
   });
 
   it('should click one of the side navigation menu items that are displayed after clicking the view all toggle and call the scrollTo fn', () => {
@@ -546,13 +551,12 @@ describe(CreateTearsheet.displayName, () => {
       </CreateTearsheet>
     );
     click(screen.getByText(viewAllToggleLabelText));
-    setTimeout(() => {
-      const sideNavElement = screen.getByText(/test title 2/g, {
-        selector: `.${carbon.prefix}--side-nav__link-text`,
-      });
-      click(sideNavElement.parentElement);
-      expect(scrollToFn).toHaveBeenCalledTimes(1);
-    }, moderate02);
+    act(() => jest.advanceTimersByTime(timerValue));
+    const sideNavElement = screen.getByText(/test title 2/g, {
+      selector: `.${carbon.prefix}--side-nav__link-text`,
+    });
+    click(sideNavElement.parentElement);
+    expect(scrollToFn).toHaveBeenCalledTimes(1);
   });
 
   it("should click one of the side navigation menu items that are displayed after clicking the view all toggle and produce a warning if the section's id is missing", () => {
@@ -582,16 +586,15 @@ describe(CreateTearsheet.displayName, () => {
       </CreateTearsheet>
     );
     click(screen.getByText(viewAllToggleLabelText));
-    setTimeout(() => {
-      const sideNavElement = screen.getByText(/test title 2/g, {
-        selector: `.${carbon.prefix}--side-nav__link-text`,
-      });
-      click(sideNavElement.parentElement);
-      expect(warn).toBeCalledWith(
-        `CreateTearsheet: CreateTearsheetSection is missing a required prop of 'id'`
-      );
-      jest.spyOn(console, 'error').mockRestore();
-      warn.mockRestore();
-    }, moderate02);
+    act(() => jest.advanceTimersByTime(timerValue));
+    const sideNavElement = screen.getByText(/test title 2/g, {
+      selector: `.${carbon.prefix}--side-nav__link-text`,
+    });
+    click(sideNavElement.parentElement);
+    expect(warn).toBeCalledWith(
+      `CreateTearsheet: CreateTearsheetSection component is missing a required prop of 'id'`
+    );
+    jest.spyOn(console, 'error').mockRestore();
+    warn.mockRestore();
   });
 });

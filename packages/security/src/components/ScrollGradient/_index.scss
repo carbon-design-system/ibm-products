@@ -11,6 +11,10 @@
 
 @import '../Component/mixins';
 
+/// Layer.
+/// @type Number
+$scroll-gradient__layer: 1;
+
 @include security--component($name: scroll-gradient) {
   /// Thickness of gradient.
   /// @type Length
@@ -34,7 +38,7 @@
   &__before,
   &__after {
     position: absolute;
-    z-index: 1;
+    z-index: $scroll-gradient__layer;
     display: block;
     opacity: 0;
     pointer-events: none;

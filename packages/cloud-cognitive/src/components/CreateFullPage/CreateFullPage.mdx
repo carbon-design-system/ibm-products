@@ -8,6 +8,7 @@ import { CreateFullPage } from '.';
 
 - [Overview](#overview)
 - [Example usage](#example-usage)
+- [Class names](#class-names)
 - [Component API](#component-api)
 
 ## Overview
@@ -16,126 +17,131 @@ When to use
 
 - In Cloud and Cognitive, the Full page create flow is the process the user must
   complete in order to use a product or service.
-- In IBM Cloud public, it is the alternative to the Provisioning flow for a
+- In **IBM Cloud public**, it is the alternative to the Provisioning flow for a
   non-billable service.
 
 When not to use
 
 - Don’t use the Full page option when the product or service is usable before
   the current creation flow is initiated.
-- For IBM Public Cloud, do not use this when provisioning a service directly
+- For **IBM Public Cloud**, do not use this when provisioning a service directly
   from the Catalog, or when creating a non-billable resource that could happen
   in a side panel/in context.
 
+## Grid
+
+The `CreateFullPage` component utilizes Carbons' grid system in the inner
+content of the main section inside of the component. You can read more guidance
+on the Carbon's grid system
+[here](https://www.carbondesignsystem.com/guidelines/2x-grid/overview). You can
+include `<Row>` and `<Column>` components inside of each `CreateFullPageStep`
+component to get the desired affect.
+
 ## Example usage
 
-There are **3** components that make up a Create Full Page component, which can
+There are **2** components that make up a Create Full Page component, which can
 be used in unison to create the desired look, or flow. Please note, to utilize
 the Create Full Page component, you'll need to have a minimum of two steps. If
 you are looking for a one step creation flow, consider Create Tearsheet, Create
 Side Panel, or Create Modal.
 
-#### Simple Create Full Page
+#### Create Full Page
 
-This is used when you have one section per step, and no need for the toggle
-view. This can be created by passing in the overall `<CreateFullPage />`
-component and the `<CreateFullPageStep />` component as shown below:
+This is used when you have one section per step. This can be created by passing
+in the overall `<CreateFullPage />` component and the `<CreateFullPageStep />`
+component with form items as children:
 
 ```
-    <CreateFullPage {...args}>
-      <CreateFullPageStep title: 'Partition'>
-        <TextInput
-          id="test-1"
-          invalidText="A valid value is required"
-          labelText="Topic name"
-          placeholder="Enter topic name"
-        />
-      </CreateFullPageStep>
-      <CreateFullPageStep title="Core configuration">
-        <NumberInput
-          id="test-2"
-          invalidText="Number is not valid"
-          label="Number input label"
-          max={100}
-          min={0}
-          step={10}
-          value={50}
-        />
+    <CreateFullPage {...props}>
+      <CreateFullPageStep
+          title="Required title"
+          subtitle="Optional subtitle"
+          description="Optional description"
+          onNext={() => {'Optional function'}}
+          disableSubmit={}
+          >
+          <Row>
+            <Column xlg={5} lg={5} md={4} sm={4}>
+              <TextInput
+                id="test-1"
+                invalidText="A valid value is required"
+                labelText="Topic name"
+                placeholder="Enter topic name"
+              />
+            </Column>
+          </Row>
       </CreateFullPageStep>
     </CreateFullPage>
 ```
 
-Note that in order for this to render correctly with the preferred styling, a
-`title` prop _must_ be supplied to the `<CreateFullPageStep />` component.
+#### Create Full Page with Sections
 
-#### Create Full Page with Toggle View
-
-The usage of this optional toggle will display all content, including content
-that may not have otherwise been seen, in a different view. The toggle triggers
-the `<ProgressIndicator />` component in the left side influence to switch to a
-`<SideNav />` and all content to display in a list format in the main content
-area. The setup for this varies slightly from the two simple examples provided
-above.
-
-In order to utilize both toggle views, all `CreateFullPageStep` components must
-_only_ have `CreateFullPageSection`s as children. A `title` prop must be added
-to both the `CreateFullPageStep` _and_ `CreateFullPageSection` components to
-display correctly. Your code would look like this:
+This is used when you have several sections per step. This can be created by
+passing in the overall `<CreateFullPage />` component and the
+`<CreateFullPageStep />` component for the first `section`. All additional
+`sections` must be passed in as children, as shown below:
 
 ```
       ...
-      <CreateFullPageStep>
-        <CreateFullPageSection
-          id="1"
-          title="Partition"
-          description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
-          <TextInput
-            id="test-1"
-            invalidText="A valid value is required"
-            labelText="Topic name"
-            placeholder="Enter topic name"
-          />
-        </CreateFullPageSection>
-        <CreateFullPageSection
-          id="2"
-          title="Partition 2"
-          description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
-          <TextInput
-            id="test-1"
-            invalidText="A valid value is required"
-            labelText="Topic name"
-            placeholder="Enter topic name"
-          />
-        </CreateFullPageSection>
-        <CreateFullPageSection
-          id="3"
-          title="Partition 3"
-          description="We recommend you fill out and evaluate these details at a minimum before deploying your topic.">
-          <TextInput
-            id="test-2"
-            invalidText="A valid value is required"
-            labelText="Topic name"
-            placeholder="Enter topic name"
-          />
-        </CreateFullPageSection>
+        <CreateFullPageStep
+          title="Required title"
+          subtitle="Optional subtitle"
+          description="Optional description"
+          onNext={() => {'Optional function'}}
+          disableSubmit={}
+          hasForm={false}
+          >
+          <Row>
+            <Column xlg={5} lg={5} md={4} sm={4}>
+              <fieldset className={`exp--create-full-page__step-fieldset`}>
+                <TextInput
+                  id="test-1"
+                  invalidText="A valid value is required"
+                  labelText="Topic name"
+                  placeholder="Enter topic name"
+                />
+              </fieldset>
+            </Column>
+          </Row>
+          <span className={`exp--create-full-page__section-divider`} />
+          <h5 className={`exp--create-full-page__step-title`}>Required title</h5>
+          <h6 className={`exp--create-full-page__step-subtitle`}>
+            Optional subtitle
+          </h6>
+          <p className={`exp--create-full-page__step-description`}>
+            Optional description
+          </p>
+          <Row>
+            <Column xlg={5} lg={5} md={4} sm={4}>
+              <fieldset className={`exp--create-full-page__step-fieldset`}>
+                <TextInput
+                  id="test-2"
+                  invalidText="A valid value is required"
+                  labelText="Topic name"
+                  placeholder="Enter topic name"
+                />
+              </fieldset>
+            </Column>
+          </Row>
       </CreateFullPageStep>
 ```
 
-Note that each `section` has their own unique ID. This is important, because it
-will tell our left navigation exactly where to scroll to upon click. We can also
-add some additional props in our section which would allow it to only be shown
-when the toggle is switched to 'on' -- `viewAllOnly`:
+Notice, in this example, we set the `hasForm` prop in `CreateFullPageStep`
+component to `false`. This disables the included fieldset, allowing us to pass
+in our own.
 
-```
-      <CreateFullPageStep title="Empty" secondaryLabel="Optional">
-        <CreateFullPageSection
-          viewAllOnly
-          title="Empty"
-          id="create-full-page-section-empty">
-          Empty step for demonstration purposes
-        </CreateFullPageSection>
-      </CreateFullPageStep>
-```
+## Class names
+
+Additionally, to get the preferred styling when including your own children as
+sections, you can utilize the below included class names.
+
+| Class name                                | Element     | Features                                                   |
+| ----------------------------------------- | ----------- | ---------------------------------------------------------- |
+| `exp--create-full-page__step-title`       | title       | `productive-heading-04` & `margin-bottom` of `$spacing-05` |
+| `exp--create-full-page__step-subtitle`    | subtitle    | `productive-heading-01` & `margin-bottom` of `$spacing-03` |
+| `exp--create-full-page__step-description` | description | `body-long-01` & `margin-bottom` of `$spacing-06`          |
+| `exp--create-full-page__step-fieldset`    | fieldset    | `margin-bottom` of `$spacing-05` to all children elements  |
+| `exp--create-full-page__section-divider`  | divider     | Includes a `1px` divider line inside the `main` content    |
 
 ## Component API
 

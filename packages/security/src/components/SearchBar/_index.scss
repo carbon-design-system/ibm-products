@@ -7,6 +7,7 @@
 @import '@carbon/layout/scss/spacing';
 @import '@carbon/themes/scss/tokens';
 
+@import 'carbon-components/scss/globals/scss/helper-mixins';
 @import 'carbon-components/scss/globals/scss/vars';
 
 @import '../Button/index';
@@ -35,15 +36,6 @@
   }
 
   &--hide-scopes-label .#{$prefix}--label {
-    position: absolute;
-    overflow: hidden;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    border: 0;
-    margin: -1px;
-    clip: rect(0, 0, 0, 0);
-    visibility: inherit;
-    white-space: nowrap;
+    @include hidden;
   }
 }

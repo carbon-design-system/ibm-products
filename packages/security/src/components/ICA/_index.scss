@@ -4,6 +4,7 @@
 /// @copyright IBM Security 2019 - 2021
 ////
 
+@import '@carbon/layout/scss/spacing';
 @import '@carbon/type/scss/styles';
 @import '@carbon/themes/scss/tokens';
 
@@ -28,9 +29,12 @@
 
   &__total {
     @include carbon--type-style($name: body-short-01);
+  }
 
-    padding-top: $carbon--spacing-01 + $carbon--spacing-04;
-    margin-bottom: 0;
+  &__total,
+  &__percentage-mark {
+    margin-top: auto;
+    margin-bottom: $carbon--spacing-02;
   }
 
   &__trend {
@@ -60,8 +64,6 @@
     &__total,
     &__percentage-mark {
       @include carbon--type-style($name: productive-heading-03);
-
-      padding-top: $carbon--spacing-03 + $carbon--spacing-04;
     }
   }
 
@@ -79,8 +81,6 @@
     &__total,
     &__percentage-mark {
       @include carbon--type-style($name: productive-heading-04);
-
-      padding-top: $carbon--spacing-06;
     }
 
     &__trend {

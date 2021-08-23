@@ -6,12 +6,12 @@
 
 @import '@carbon/layout/scss/mini-unit';
 @import '@carbon/layout/scss/spacing';
+@import '@carbon/motion/scss/motion';
 @import '@carbon/themes/scss/tokens';
 @import '@carbon/type/scss/styles';
 @import 'carbon-components/scss/globals/scss/helper-mixins';
 @import 'carbon-components/scss/globals/scss/layout';
 
-@import '../../globals/motion/index';
 @import '../../globals/theme/mixins';
 
 @import '../Header/mixins';
@@ -69,7 +69,9 @@
     background-repeat: no-repeat;
     background-size: $shell__banner__background__sizing__width
       $shell__banner__background__sizing__height;
-    transition: $transition-duration background-size $timing-function;
+    transition-duration: $moderate-02;
+    transition-property: background-size;
+    transition-timing-function: carbon--motion($name: standard);
 
     &,
     &:hover,

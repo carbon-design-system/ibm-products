@@ -4,7 +4,7 @@
  */
 
 import classnames from 'classnames';
-import { bool, elementType, node, oneOf, string } from 'prop-types';
+import PropTypes from 'prop-types';
 import React, { createElement } from 'react';
 
 import LayoutModule, {
@@ -59,19 +59,22 @@ const TitleBarModule = ({
 
 TitleBarModule.propTypes = {
   /** Provide the items for the `TitleBarModule` */
-  children: node,
+  children: PropTypes.node,
+
+  /** Specify the base element to use to build the title */
+  element: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']),
 
   /** Provide the label for the `TitleBarModule` */
-  label: string,
+  label: PropTypes.string,
 
   /** Provide the labels direction for the `TitleBarModule` */
-  labelDirection: oneOf(['top', 'bottom']),
+  labelDirection: PropTypes.oneOf(['top', 'bottom']),
 
   /** Specify whether a subsection should be used */
-  subsection: bool,
+  subsection: PropTypes.bool,
 
   /** Provide the title of the `TitleBarModule` */
-  title: node.isRequired,
+  title: PropTypes.node.isRequired,
 };
 
 TitleBarModule.defaultProps = {

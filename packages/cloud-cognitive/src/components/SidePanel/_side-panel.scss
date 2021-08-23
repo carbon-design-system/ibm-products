@@ -6,14 +6,11 @@
 //
 
 // Standard imports.
-@import '@carbon/import-once/scss/import-once';
-@import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
+@import './side-panel-variables';
 
 // Other Carbon settings.
 @import 'carbon-components/scss/globals/grid/grid';
-@import '@carbon/motion/scss/motion.scss';
-@import './side-panel-variables';
 
 // SidePanel uses the following Carbon components:
 // Button
@@ -117,6 +114,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     --#{$block-class}--subtitle-opacity: 1;
     --#{$block-class}--title-container-height: 0;
     --#{$block-class}--subtitle-container-height: 0;
+    --#{$block-class}--action-bar-container-height: 0;
     --#{$block-class}--divider-opacity: 0;
     --#{$block-class}--title-y-position: 0;
     --#{$block-class}--content-bottom-padding: #{$spacing-10};
@@ -257,13 +255,28 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       height: var(--#{$block-class}--title-container-height);
     }
 
-    .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation.#{$block-class}__subtitle-text-no-animation-no-action-toolbar
-      + .#{$block-class}__body-content {
+    .#{$block-class}__inner-content {
+      overflow: auto;
+      height: calc(100vh - 3rem);
       // stylelint-disable-next-line carbon/layout-token-use
       margin-top: calc(
         var(--#{$block-class}--title-container-height) +
-          var(--#{$block-class}--subtitle-container-height) + #{$spacing-05}
+          var(--#{$block-class}--subtitle-container-height) +
+          var(--#{$block-class}--action-bar-container-height)
       );
+      overflow-x: hidden;
+    }
+
+    .#{$block-class}__inner-content.#{$block-class}__static-inner-content {
+      height: calc(
+        100vh -
+          calc(
+            var(--#{$block-class}--title-container-height) +
+              var(--#{$block-class}--subtitle-container-height) +
+              var(--#{$block-class}--action-bar-container-height)
+          ) + (calc(-1 * (#{$spacing-09} + #{$spacing-10})))
+      );
+      padding-top: $spacing-05;
     }
 
     .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation {
@@ -344,9 +357,6 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       padding: $spacing-05;
       padding-top: 0;
       padding-bottom: var(--#{$block-class}--content-bottom-padding);
-    }
-    .#{$block-class}__inner-content {
-      height: calc(100vh - 3rem);
     }
     .#{$block-class}__actions-container {
       position: fixed;

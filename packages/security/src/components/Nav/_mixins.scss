@@ -7,6 +7,7 @@
 @import '@carbon/layout/scss/mini-unit';
 @import '@carbon/layout/scss/spacing';
 @import '@carbon/themes/scss/tokens';
+@import '@carbon/type/scss/font-family';
 @import '@carbon/type/scss/styles';
 
 @import 'carbon-components/scss/globals/scss/helper-mixins';
@@ -76,7 +77,6 @@
     margin-top: unset;
     margin-bottom: unset;
     color: $text-02;
-    font-weight: 400;
   }
 
   // Navigation lists.
@@ -164,7 +164,7 @@
       }
 
       &--active {
-        font-weight: 600;
+        font-weight: carbon--font-weight($weight: semibold);
 
         @include rtl {
           &::before {
@@ -184,9 +184,8 @@
 
         position: relative;
         display: flex;
-        height: $carbon--spacing-07;
         align-items: center;
-        padding: $carbon--spacing-02 $carbon--spacing-02 $carbon--spacing-02
+        padding: $carbon--spacing-03 $carbon--spacing-02 $carbon--spacing-03
           $carbon--spacing-08;
         color: $text-01;
         cursor: pointer;
@@ -235,7 +234,6 @@
 
         > #{$nav__list}--nested {
           max-height: carbon--mini-units($count: 40);
-          margin-top: carbon--mini-units($count: 1.25);
           opacity: 1;
           transition-timing-function: $carbon--ease-in;
         }

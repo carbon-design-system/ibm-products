@@ -6,8 +6,6 @@
 //
 
 // Standard imports.
-@import '@carbon/import-once/scss/import-once';
-@import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
 // CreateTearsheet uses the following Carbon components:
@@ -36,6 +34,8 @@
 
   $block-class: #{$pkg-prefix}--tearsheet-create;
   $section-block-class: #{$pkg-prefix}--tearsheet-create__section;
+  $tearsheet-divider-class: #{$pkg-prefix}--tearsheet-create__section--divider;
+  $tearsheet-fieldset-class: #{$pkg-prefix}--tearsheet-create__step--fieldset;
 
   .#{$block-class} {
     --#{$block-class}--total-width: 0;
@@ -70,12 +70,13 @@
     overflow-x: hidden;
   }
 
-  .#{$block-class} .#{$block-class}__step--heading {
-    padding-bottom: $spacing-06;
+  .#{$block-class} .#{$block-class}__content .#{$carbon-prefix}--grid {
+    padding: 0;
+    margin: 0;
   }
 
-  .#{$block-class} .#{$block-class}__step {
-    max-width: 50%;
+  .#{$block-class} .#{$block-class}__step--heading {
+    padding-bottom: $spacing-06;
   }
 
   .#{$block-class}
@@ -97,6 +98,46 @@
     margin: $spacing-06 calc(-1 * #{$spacing-08}) $spacing-07
       calc(-1 * #{$spacing-06});
     background-color: $ui-03;
+  }
+
+  .#{$block-class} .#{$block-class}__step--title,
+  .#{$block-class} .#{$block-class}__section--title {
+    margin-bottom: $spacing-05;
+  }
+
+  .#{$block-class} .#{$block-class}__section--subtitle,
+  .#{$block-class} .#{$block-class}__step--subtitle {
+    @include carbon--type-style('productive-heading-01');
+
+    margin-bottom: $spacing-03;
+  }
+
+  .#{$block-class} .#{$block-class}__section--description,
+  .#{$block-class} .#{$block-class}__step--description {
+    @include carbon--type-style('body-long-01');
+
+    margin-bottom: $spacing-06;
+  }
+
+  .#{$block-class} .#{$block-class}__step--title,
+  .#{$block-class} .#{$block-class}__section--title,
+  .#{$block-class} .#{$block-class}__section--subtitle,
+  .#{$block-class} .#{$block-class}__step--subtitle,
+  .#{$block-class} .#{$block-class}__section--description,
+  .#{$block-class} .#{$block-class}__step--description {
+    max-width: 50%;
+  }
+
+  .#{$block-class} .#{$carbon-prefix}--fieldset {
+    margin-bottom: 0;
+  }
+
+  .#{$block-class} .#{$block-class}__step--fieldset > * {
+    &:not(.#{$tearsheet-divider-class}):not(.#{$tearsheet-fieldset-class}) {
+      width: 50%;
+    }
+
+    margin-bottom: $spacing-05;
   }
 }
 

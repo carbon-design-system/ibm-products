@@ -4,20 +4,11 @@
 /// @copyright IBM Security 2019 - 2021
 ////
 
-@import '@carbon/themes/scss/mixins';
-
 @import '../../components/Component/mixins';
 @import '../deprecate/index';
 @import '../feature-flags/index';
 
-@import 'variables';
-
-/// Carbon theme.
-/// @type Map<String, Color>
-$carbon--theme: $-theme;
-
-@include carbon--theme;
-
+@import 'theme';
 @import 'carbon-components/scss/globals/scss/theme-tokens';
 @import 'mixins';
 

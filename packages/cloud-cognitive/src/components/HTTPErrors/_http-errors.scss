@@ -6,8 +6,6 @@
 //
 
 // Standard imports.
-@import '@carbon/import-once/scss/import-once';
-@import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
 // HTTP errors use the following Carbon components:
@@ -45,6 +43,11 @@
     @include carbon--type-style('body-short-01');
 
     margin-bottom: $spacing-06;
+  }
+  .#{$block-class} .#{$block-class}__error-code-label,
+  .#{$block-class} .#{$block-class}__title,
+  .#{$block-class} .#{$block-class}__description {
+    color: $text-01;
   }
   .#{$block-class} .#{$block-class}__link {
     display: block;

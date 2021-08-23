@@ -14,6 +14,11 @@ export {
   CreateFullPageStep,
   CreateFullPageSection,
 } from './CreateFullPage';
+export {
+  CreateFullPagePrototype,
+  CreateFullPageStepPrototype,
+  CreateFullPageSectionPrototype,
+} from './CreateFullPagePrototype';
 export { CreateModal } from './CreateModal';
 export { CreateSidePanel } from './CreateSidePanel';
 export {

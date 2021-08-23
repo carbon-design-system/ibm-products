@@ -456,7 +456,8 @@ export let SidePanel = React.forwardRef(
           className={cx(`${blockClass}__title-container`, {
             [`${blockClass}__on-detail-step`]: currentStep > 0,
             [`${blockClass}__title-container--no-animation`]: !animateTitle,
-            [`${blockClass}__title-container-is-animating`]: !animationComplete,
+            [`${blockClass}__title-container-is-animating`]:
+              !animationComplete && animateTitle,
           })}>
           {currentStep > 0 && (
             <Button
@@ -492,7 +493,8 @@ export let SidePanel = React.forwardRef(
               [`${blockClass}__subtitle-text-no-animation-no-action-toolbar`]:
                 !animateTitle &&
                 (!actionToolbarButtons || !actionToolbarButtons.length),
-              [`${blockClass}__subtitle-text-is-animating`]: !animationComplete,
+              [`${blockClass}__subtitle-text-is-animating`]:
+                !animationComplete && animateTitle,
             })}>
             {subtitle}
           </p>
@@ -505,23 +507,31 @@ export let SidePanel = React.forwardRef(
             {actionToolbarButtons.map((action) => (
               <Button
                 key={action.label}
-                kind={action.leading ? action.kind : 'ghost'}
+                kind={action.kind || 'ghost'}
                 size="small"
-                disabled={false}
                 renderIcon={action.icon}
                 iconDescription={action.label}
                 tooltipPosition="bottom"
                 tooltipAlignment="center"
+                hasIconOnly={!action.leading}
+                disabled={action.disabled}
                 className={cx([
                   `${blockClass}__action-toolbar-button`,
+                  action.className,
                   {
                     [`${blockClass}__action-toolbar-icon-only-button`]:
-                      action.icon,
+                      action.icon && !action.leading,
                     [`${blockClass}__action-toolbar-leading-button`]:
-                      !action.icon,
+                      action.leading,
                   },
                 ])}
-                onClick={() => action.onActionToolbarButtonClick()}>
+                onClick={(event) =>
+                  action.onClick
+                    ? action.onClick(event)
+                    : action.onActionToolbarButtonClick
+                    ? action.onActionToolbarButtonClick(event)
+                    : null
+                }>
                 {action.leading && action.label}
               </Button>
             ))}
@@ -669,7 +679,11 @@ SidePanel.propTypes = {
       label: PropTypes.string,
       leading: PropTypes.bool,
       icon: PropTypes.object,
-      onActionToolbarButtonClick: PropTypes.func,
+      onActionToolbarButtonClick: deprecateProp(
+        PropTypes.func,
+        'This prop will be removed in the future. Please use `onClick` instead'
+      ),
+      onClick: PropTypes.func,
       kind: PropTypes.oneOf(['ghost', 'tertiary', 'secondary', 'primary']),
     })
   ),

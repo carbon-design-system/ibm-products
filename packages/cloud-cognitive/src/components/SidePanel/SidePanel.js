@@ -525,7 +525,13 @@ export let SidePanel = React.forwardRef(
                       action.leading,
                   },
                 ])}
-                onClick={() => action.onClick()}>
+                onClick={(event) =>
+                  action.onClick
+                    ? action.onClick(event)
+                    : action.onActionToolbarButtonClick
+                    ? action.onActionToolbarButtonClick(event)
+                    : null
+                }>
                 {action.leading && action.label}
               </Button>
             ))}
@@ -673,7 +679,11 @@ SidePanel.propTypes = {
       label: PropTypes.string,
       leading: PropTypes.bool,
       icon: PropTypes.object,
-      onActionToolbarButtonClick: PropTypes.func,
+      onActionToolbarButtonClick: deprecateProp(
+        PropTypes.func,
+        'This prop will be removed in the future. Please use `onClick` instead'
+      ),
+      onClick: PropTypes.func,
       kind: PropTypes.oneOf(['ghost', 'tertiary', 'secondary', 'primary']),
     })
   ),

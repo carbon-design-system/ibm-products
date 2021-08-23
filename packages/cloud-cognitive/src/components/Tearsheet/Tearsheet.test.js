@@ -69,7 +69,7 @@ const tabLabel3 = `Tab ${uuidv4()} 3`;
 const tabLabel4 = `Tab ${uuidv4()} 4`;
 const navigation = (
   <div>
-    <Tabs data-test-id="tabs">
+    <Tabs data-testid="tabs">
       <Tab label={tabLabel1} />
       <Tab label={tabLabel2} />
       <Tab label={tabLabel3} />
@@ -248,7 +248,7 @@ const commonTests = (Ts, name, props, testActions) => {
   });
 
   it('adds additional properties to the containing node', () => {
-    render(<Ts {...props} data-test-id={dataTestId} />);
+    render(<Ts {...props} data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 

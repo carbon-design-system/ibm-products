@@ -189,7 +189,7 @@ describe(componentName, () => {
   });
 
   it('adds additional properties to the containing node', () => {
-    render(<Card data-test-id="test-id" />);
+    render(<Card data-testid="test-id" />);
     screen.getByTestId('test-id');
   });
 

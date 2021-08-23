@@ -6,8 +6,6 @@
 //
 
 // Standard imports.
-@import '@carbon/import-once/scss/import-once';
-@import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
 
 // Other Carbon settings.
@@ -21,10 +19,10 @@
 @import 'carbon-components/scss/components/toggle/toggle';
 @import 'carbon-components/scss/components/modal/modal';
 @import 'carbon-components/scss/components/button/button';
-@import '../CreateInfluencer/index';
 
 // CreateFullPage uses the following Cloud & Cognitive components:
-// ActionSet
+// ActionSet, CreateInfluencer
+@import '../CreateInfluencer/index';
 @import '../ActionSet/action-set';
 
 // Define all component styles in a mixin which is then exported using
@@ -33,7 +31,7 @@
   // The block part of our conventional BEM class names (blockClass__E--M).
   $block-class: #{$pkg-prefix}--create-full-page;
 
-  .#{$block-class} .#{$carbon-prefix}--grid {
+  .#{$block-class} .#{$block-class}__content .#{$carbon-prefix}--grid {
     padding-top: $spacing-06;
     margin-right: 0;
     margin-left: 0;
@@ -56,6 +54,7 @@
   .#{$block-class} .#{$block-class}__step-subtitle {
     @include carbon--type-style('productive-heading-01');
 
+    max-width: 50%;
     margin-bottom: $spacing-03;
   }
 
@@ -63,6 +62,7 @@
   .#{$block-class} .#{$block-class}__step-description {
     @include carbon--type-style('body-long-01');
 
+    max-width: 50%;
     margin-bottom: $spacing-06;
   }
 
@@ -112,7 +112,7 @@
 
   .#{$block-class} .#{$block-class}__step {
     position: relative;
-    max-width: 50%;
+    padding-bottom: $spacing-07;
   }
 
   .#{$block-class} .#{$carbon-prefix}--side-nav--ux {
@@ -128,17 +128,27 @@
   .#{$block-class} .#{$block-class}__section-divider {
     position: relative;
     display: block;
-    width: calc(100vw - calc(16rem + 1px));
+    width: 0;
     height: 1px;
     margin: $spacing-07 calc(-1 * #{$spacing-08}) $spacing-07
       calc(-1 * #{$spacing-08});
-    background-color: $ui-03;
+
+    &::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 1px;
+      background-color: $ui-03;
+      content: '';
+    }
   }
 
   .#{$block-class} .#{$block-class}__step-title,
   .#{$block-class} .#{$block-class}__section-title {
     @include carbon--type-style('productive-heading-04');
 
+    max-width: 50%;
     margin-bottom: $spacing-05;
   }
 

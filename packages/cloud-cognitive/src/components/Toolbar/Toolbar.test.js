@@ -19,7 +19,7 @@ function test(T) {
 
     function render(props) {
       return r(
-        <T data-test-id={dataTestId} {...props}>
+        <T data-testid={dataTestId} {...props}>
           {displayName}
         </T>
       );

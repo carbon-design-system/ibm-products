@@ -100,7 +100,7 @@ const pageActionsDepTest2 = (
 
 const subtitle = 'Optional subtitle if necessary';
 const navigation = (
-  <Tabs data-test-id="tabs">
+  <Tabs data-testid="tabs">
     <Tab label="Tab 1" />
     <Tab label="Tab 2" />
     <Tab label="Tab 3" />
@@ -110,7 +110,7 @@ const navigation = (
 
 // supply enough tags to trigger TagSet overflow required props
 const tags = Array.from({ length: 20 }, () => ({
-  'data-test-id': 'tags',
+  'data-testid': 'tags',
   type: 'blue',
   label: 'A tag',
 }));
@@ -241,7 +241,7 @@ describe('PageHeader', () => {
 
   test('renders an empty header when no props are set', () => {
     const dataTestId = uuidv4();
-    render(<PageHeader data-test-id={dataTestId} />);
+    render(<PageHeader data-testid={dataTestId} />);
 
     // console.dir(screen.getByRole('region')); // section should be a region https://fae.disability.illinois.edu/rulesets/ROLE_5/
     const header = screen.getByTestId(dataTestId);
@@ -275,7 +275,7 @@ describe('PageHeader', () => {
   test('renders all the appropriate content when all props are set', () => {
     const dataTestId = uuidv4();
     render(
-      <PageHeader {...testProps} data-test-id={dataTestId}>
+      <PageHeader {...testProps} data-testid={dataTestId}>
         {children}
       </PageHeader>
     );
@@ -389,7 +389,7 @@ describe('PageHeader', () => {
 
   it('adds additional properties to the containing node', () => {
     const dataTestId = uuidv4();
-    render(<PageHeader data-test-id={dataTestId} />);
+    render(<PageHeader data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
@@ -405,7 +405,7 @@ describe('PageHeader', () => {
       <PageHeader
         {...testProps}
         hasCollapseHeaderToggle={true}
-        data-test-id={dataTestId}>
+        data-testid={dataTestId}>
         {children}
       </PageHeader>
     );
@@ -427,10 +427,7 @@ describe('PageHeader', () => {
   test('collapseHeader prop test', () => {
     const dataTestId = uuidv4();
     render(
-      <PageHeader
-        {...testProps}
-        collapseHeader={true}
-        data-test-id={dataTestId}>
+      <PageHeader {...testProps} collapseHeader={true} data-testid={dataTestId}>
         {children}
       </PageHeader>
     );
@@ -663,7 +660,7 @@ describe('PageHeader', () => {
     const dataTestId = uuidv4();
     render(
       <PageHeader
-        data-test-id={dataTestId}
+        data-testid={dataTestId}
         actionBarItems={actionBarItems}
         actionBarOverflowLabel={testProps.actionBarOverflowAriaLabel}
         availableSpace={children}

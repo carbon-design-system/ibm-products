@@ -5,9 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '@carbon/import-once/scss/import-once';
-@import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
+
 @import 'carbon-components/scss/components/progress-indicator/progress-indicator';
 
 @mixin create-influencer {

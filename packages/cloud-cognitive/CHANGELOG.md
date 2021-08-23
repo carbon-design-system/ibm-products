@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.74.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.73.2...@carbon/ibm-cloud-cognitive@0.74.0) (2021-08-20)
+
+
+### Features
+
+* fix offset and add element based scroll ([#1185](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1185)) ([e3149ae](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e3149aec52eec078eb3b77abd029131ad9365385))
+
+
+
+
+
 ## [0.73.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.73.1...@carbon/ibm-cloud-cognitive@0.73.2) (2021-08-20)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

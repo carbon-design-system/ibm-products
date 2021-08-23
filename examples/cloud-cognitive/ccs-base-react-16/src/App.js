@@ -1,6 +1,6 @@
 import './App.css';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { AboutModal } from '@carbon/ibm-cloud-cognitive';
 import { Button, Link } from 'carbon-components-react';

@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// Import portions of React that are needed.
 import React, { useState, useRef, useEffect } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
 

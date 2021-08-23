@@ -5,15 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { paramCase } from 'param-case';
 import React, { useState, useRef, useEffect } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
+import { getDevtoolsProps, getDevtoolsId } from '../../internal/devtools';
 
 // Carbon and package components we use.
 import {
@@ -24,18 +25,6 @@ import {
   Tabs,
   Tab,
 } from 'carbon-components-react';
-
-const devtoolsAttribute = 'data-carbon-devtools-id';
-
-function getDevtoolsId(componentName) {
-  return paramCase(componentName);
-}
-
-function getDevtoolsProps(componentName) {
-  return {
-    [devtoolsAttribute]: getDevtoolsId(componentName),
-  };
-}
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--about-modal`;

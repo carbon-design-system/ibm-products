@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+import { devtoolsAttribute } from '../../internal/devtools';
+
 const defaults = {
   prefix: 'exp',
 
@@ -112,6 +114,7 @@ const feature = new Proxy(
 );
 
 export default {
+  devtoolsAttribute,
   prefix: defaults.prefix,
   component: component,
   feature: feature,

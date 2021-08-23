@@ -8,7 +8,7 @@
 
 import { isValidElementType } from 'react-is';
 
-const { fn, mock, requireActual } = jest;
+const { mock, requireActual, spyOn } = jest;
 
 beforeEach(() => {
   mock('prop-types', () => {
@@ -85,10 +85,6 @@ beforeEach(() => {
 });
 
 test('Public API changes with a SemVer change', () => {
-  mock('carbon-components-react/lib/internal/deprecateFieldOnObject', () => ({
-    deprecateFieldOnObject: fn(),
-  }));
-
   function mapComponentToAPI(Component) {
     const api = {};
 
@@ -126,10 +122,13 @@ test('Public API changes with a SemVer change', () => {
   const Components = require('../..');
   const PublicAPI = new Map();
 
+  const { mockRestore } = spyOn(console, 'warn').mockImplementation();
+
   Object.keys(Components).forEach((name) => {
     const Component = Components[name];
     PublicAPI.set(name, mapComponentToAPI(Component));
   });
 
   expect(PublicAPI).toMatchSnapshot();
+  mockRestore();
 });

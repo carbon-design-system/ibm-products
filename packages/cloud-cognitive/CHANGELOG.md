@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.75.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.74.1...@carbon/ibm-cloud-cognitive@0.75.0) (2021-08-23)
+
+
+### Features
+
+* **SidePanel:** allow actionToolbarButtons to be a bit more flexible ([#1189](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1189)) ([bc84e20](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/bc84e20f9652ba0379b884e5a9e1c7542ef34601))
+
+
+
+
+
 ## [0.74.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.74.0...@carbon/ibm-cloud-cognitive@0.74.1) (2021-08-23)
 
 

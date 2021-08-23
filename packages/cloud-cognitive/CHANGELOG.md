@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.74.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.74.0...@carbon/ibm-cloud-cognitive@0.74.1) (2021-08-23)
+
+
+### Bug Fixes
+
+* **SidePanel:** center close svg in close button ([#1190](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1190)) ([fa4a688](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/fa4a68898eb74d2e5487732d27f36664de9648a1))
+
+
+
+
+
 # [0.74.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.73.2...@carbon/ibm-cloud-cognitive@0.74.0) (2021-08-20)
 
 

@@ -40,6 +40,33 @@ const DefaultTemplate = (args) => {
   );
 };
 
+const GridTemplate = (args) => {
+  const getBoxes = () => {
+    const boxes = [];
+    for (let i = 0; i < 4; i++) {
+      boxes.push(
+        <div className="bx--col-lg-4">
+          <div className="grid-box" />
+        </div>
+      );
+    }
+    return boxes;
+  };
+
+  return (
+    <Cascade {...args}>
+      <div className="bx--row">{getBoxes()}</div>
+      <div className="bx--row">{getBoxes()}</div>
+    </Cascade>
+  );
+};
+
 export const Default = prepareStory(DefaultTemplate, {
   args: {},
+});
+
+export const WithGrid = prepareStory(GridTemplate, {
+  args: {
+    grid: true,
+  },
 });

@@ -11,27 +11,44 @@ import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
 const componentName = 'Cascade';
 
-export let Cascade = forwardRef(({ children, className, ...rest }, ref) => {
-  const blockClass = `${pkg.prefix}--cascade`;
-  const props = {
-    ...rest,
-    className: cx(blockClass, className),
-    ref,
-  };
-  const modifyChildren = (child) => {
-    const className = cx(child.props.className, `${blockClass}__element`);
-    return React.cloneElement(child, { className });
-  };
-  const modifiedChildren = React.Children.map(children, (child) =>
-    modifyChildren(child)
-  );
+export let Cascade = forwardRef(
+  ({ children, className, grid, ...rest }, ref) => {
+    const blockClass = `${pkg.prefix}--cascade`;
+    const props = {
+      ...rest,
+      className: grid ? className : cx(blockClass, className),
+      ref,
+    };
+    const modifyChildren = (child) => {
+      const className = cx(child.props.className, `${blockClass}__element`);
+      return React.cloneElement(child, { className });
+    };
+    const getModifiedChildren = () => {
+      return React.Children.map(children, (child) => modifyChildren(child));
+    };
 
-  return <div {...props}>{modifiedChildren}</div>;
-});
+    if (grid) {
+      return (
+        <div {...props}>
+          <div className={`bx--grid ${pkg.prefix}--cascade`}>
+            {getModifiedChildren()}
+          </div>
+        </div>
+      );
+    }
+
+    return <div {...props}>{getModifiedChildren()}</div>;
+  }
+);
 
 Cascade.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  grid: PropTypes.bool,
+};
+
+Cascade.defaultProps = {
+  grid: false,
 };
 
 Cascade.displayName = componentName;

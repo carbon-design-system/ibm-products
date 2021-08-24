@@ -91,6 +91,7 @@ export let CreateInfluencer = ({
         labelB={viewAllToggleOnLabelText}
         onToggle={(value) => handleViewAllToggle(value)}
         className={`${blockClass}__view-all-toggle`}
+        defaultToggled={false}
       />
     );
   };

@@ -3,6 +3,74 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.75.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.74.1...@carbon/ibm-cloud-cognitive@0.75.0) (2021-08-23)
+
+
+### Features
+
+* **SidePanel:** allow actionToolbarButtons to be a bit more flexible ([#1189](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1189)) ([bc84e20](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/bc84e20f9652ba0379b884e5a9e1c7542ef34601))
+
+
+
+
+
+## [0.74.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.74.0...@carbon/ibm-cloud-cognitive@0.74.1) (2021-08-23)
+
+
+### Bug Fixes
+
+* **SidePanel:** center close svg in close button ([#1190](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1190)) ([fa4a688](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/fa4a68898eb74d2e5487732d27f36664de9648a1))
+
+
+
+
+
+# [0.74.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.73.2...@carbon/ibm-cloud-cognitive@0.74.0) (2021-08-20)
+
+
+### Features
+
+* fix offset and add element based scroll ([#1185](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1185)) ([e3149ae](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e3149aec52eec078eb3b77abd029131ad9365385))
+
+
+
+
+
+## [0.73.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.73.1...@carbon/ibm-cloud-cognitive@0.73.2) (2021-08-20)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.73.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.73.0...@carbon/ibm-cloud-cognitive@0.73.1) (2021-08-19)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+# [0.73.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.72.1...@carbon/ibm-cloud-cognitive@0.73.0) (2021-08-19)
+
+
+### Features
+
+* **CreateTearsheet:** [#1076](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1076) create tearsheet custom step ([#1174](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1174)) ([8d0ab04](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8d0ab046245a9b8862e351361b08068204a97f2a))
+
+
+
+
+
+## [0.72.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.72.0...@carbon/ibm-cloud-cognitive@0.72.1) (2021-08-19)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
 # [0.72.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.71.8...@carbon/ibm-cloud-cognitive@0.72.0) (2021-08-19)
 
 

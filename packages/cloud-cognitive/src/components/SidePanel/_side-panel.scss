@@ -335,23 +335,30 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       }
     }
 
-    .bx--btn.#{$block-class}__navigation-back-button {
+    .#{$carbon-prefix}--btn.#{$block-class}__navigation-back-button {
       position: relative;
       z-index: 5;
       top: calc(-1 * #{$spacing-03});
       left: calc(-1 * #{$spacing-03});
     }
-    .bx--btn.#{$block-class}__navigation-back-button,
-    .bx--btn.#{$block-class}__close-button {
+    .#{$carbon-prefix}--btn.#{$block-class}__navigation-back-button,
+    .#{$carbon-prefix}--btn.#{$block-class}__close-button {
       min-width: 2rem;
       padding: 0;
       color: $text-01;
     }
-    .bx--btn.#{$block-class}__close-button {
+    .#{$carbon-prefix}--btn.#{$block-class}__close-button {
       position: absolute;
       z-index: 5;
       top: $spacing-03;
       right: $spacing-03;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .#{$carbon-prefix}--btn.#{$block-class}__close-button
+      .#{$carbon-prefix}--btn__icon {
+      margin: 0;
     }
     .#{$block-class}__body-content {
       padding: $spacing-05;

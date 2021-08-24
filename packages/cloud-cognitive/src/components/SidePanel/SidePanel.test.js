@@ -350,11 +350,11 @@ describe('SidePanel', () => {
         {
           leading: true,
           label: 'Copy 1',
-          onActionToolbarButtonClick: onActionToolbarButtonClickFn,
+          onClick: onActionToolbarButtonClickFn,
         },
         {
           label: 'Copy 2',
-          onActionToolbarButtonClick: onActionToolbarButtonClickFn,
+          onClick: onActionToolbarButtonClickFn,
         },
       ],
     });

@@ -32,7 +32,7 @@ import {
 } from '../../global/js/hooks';
 import { hasValidChildType } from '../../global/js/utils/hasValidChildType';
 
-const componentName = 'CreateTearsheet';
+export const componentName = 'CreateTearsheet';
 const blockClass = `${pkg.prefix}--tearsheet-create`;
 
 export let CreateTearsheet = forwardRef(

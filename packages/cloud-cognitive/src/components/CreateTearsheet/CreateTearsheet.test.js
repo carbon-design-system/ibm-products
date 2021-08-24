@@ -11,7 +11,7 @@ import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { moderate02 } from '@carbon/motion';
 import { pkg, carbon } from '../../settings';
-import { CreateTearsheet } from './CreateTearsheet';
+import { CreateTearsheet, componentName } from './CreateTearsheet';
 import { CreateTearsheetStep } from './CreateTearsheetStep';
 import { CreateTearsheetSection } from './CreateTearsheetSection';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -43,6 +43,7 @@ const step1Title = uuidv4();
 const title = uuidv4();
 const dataTestId = uuidv4();
 const ref = React.createRef();
+const onMountFn = jest.fn();
 const defaultProps = {
   title,
   submitButtonText,
@@ -70,7 +71,8 @@ const renderCreateTearsheet = (
       <CreateTearsheetStep
         onNext={rejectOnNext ? onNextStepRejectionFn : onNext}
         title={step1Title}
-        formLegendText={step1Title}>
+        formLegendText={step1Title}
+        onMount={onMountFn}>
         step 1 content
         <button type="button" disabled>
           Test
@@ -151,6 +153,45 @@ describe(CreateTearsheet.displayName, () => {
       container.querySelector(`.${createTearsheetBlockClass}`)
     ).toBeTruthy();
     expect(ref.current).not.toBeNull();
+  });
+
+  it('should render the tearsheet on the specified initialStep prop provided', () => {
+    const { container } = renderCreateTearsheet({
+      ...defaultProps,
+      initialStep: 2,
+    });
+    const createTearsheetSteps = container.querySelector(
+      `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
+    ).children;
+    expect(
+      createTearsheetSteps[1].classList.contains(
+        `.${createTearsheetBlockClass}__step--visible-section`
+      )
+    );
+  });
+
+  it('renders the first step if an invalid initialStep value is provided', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
+    const { container } = renderCreateTearsheet({
+      ...defaultProps,
+      // Starting on 0 step is invalid since the steps start with a value of 1
+      // This will cause a console warning
+      initialStep: 0,
+    });
+    const createTearsheetSteps = container.querySelector(
+      `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
+    ).children;
+    expect(
+      createTearsheetSteps[0].classList.contains(
+        `.${createTearsheetBlockClass}__step--visible-section`
+      )
+    );
+    expect(warn).toBeCalledWith(
+      `${componentName}: An invalid \`initialStep\` prop was supplied. The \`initialStep\` prop should be a number that is greater than 0 or less than or equal to the number of steps your ${componentName} has.`
+    );
+    // The onMount prop will get called here because the first step is rendered
+    expect(onMountFn).toHaveBeenCalledTimes(1);
+    warn.mockRestore();
   });
 
   it('renders the second step if clicking on the next step button with onNext optional function prop and then clicks cancel button', async () => {

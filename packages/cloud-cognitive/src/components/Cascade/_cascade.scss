@@ -27,7 +27,7 @@
   }
 
   .#{$block-class}__element,
-  .bx--grid .#{$block-class}__element > div {
+  .#{$block-class}__col {
     @media (prefers-reduced-motion: no-preference) {
       animation: $animationProps fade;
       animation-fill-mode: forwards;
@@ -38,7 +38,7 @@
   //adds cascading delay
   @for $i from 1 through 8 {
     .#{$block-class}__element:nth-child(n + #{$i}),
-    .bx--grid .#{$block-class}__element > div:nth-child(n + #{$i}) {
+    .#{$block-class}__col-#{$i} {
       animation-delay: #{$i * 60}ms;
     }
   }

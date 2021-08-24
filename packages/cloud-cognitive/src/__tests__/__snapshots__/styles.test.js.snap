@@ -837,6 +837,14 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   z-index: 5;
   top: var(--cds-spacing-03, 0.5rem);
   right: var(--cds-spacing-03, 0.5rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.exp--side-panel__container .bx--btn.exp--side-panel__close-button
+.bx--btn__icon {
+  margin: 0;
 }
 
 .exp--side-panel__container .exp--side-panel__body-content {

@@ -9,11 +9,12 @@ import React, { forwardRef } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
+
+const blockClass = `${pkg.prefix}--cascade`;
 const componentName = 'Cascade';
 
 export let Cascade = forwardRef(
   ({ children, className, grid, ...rest }, ref) => {
-    const blockClass = `${pkg.prefix}--cascade`;
     const props = {
       ...rest,
       className: grid ? className : cx(blockClass, className),
@@ -52,6 +53,10 @@ export let Cascade = forwardRef(
   }
 );
 
+Cascade = pkg.checkComponentEnabled(Cascade, componentName);
+
+Cascade.displayName = componentName;
+
 Cascade.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
@@ -61,5 +66,3 @@ Cascade.propTypes = {
 Cascade.defaultProps = {
   grid: false,
 };
-
-Cascade.displayName = componentName;

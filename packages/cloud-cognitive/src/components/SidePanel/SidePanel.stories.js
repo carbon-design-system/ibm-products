@@ -253,9 +253,7 @@ const ChildrenContentWithSteps = ({ currentStep, setCurrentStep }) => {
           {renderDataTable()}
           <Button
             kind="tertiary"
-            onClick={() => setCurrentStep((prev) => prev + 1)}
-            // onClick={() => {}}
-          >
+            onClick={() => setCurrentStep((prev) => prev + 1)}>
             View all
           </Button>
         </div>

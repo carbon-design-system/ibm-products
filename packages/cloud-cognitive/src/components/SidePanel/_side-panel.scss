@@ -243,6 +243,11 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       top: var(--#{$block-class}--title-container-height);
     }
 
+    .#{$block-class}__subtitle-text.#{$block-class}__subtitle-without-title {
+      padding-top: $spacing-05;
+      padding-right: $spacing-07;
+    }
+
     .#{$block-class}__title-container.#{$block-class}__title-container--no-animation.#{$block-class}__title-container-is-animating {
       top: 0;
     }
@@ -351,10 +356,11 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       position: absolute;
       z-index: 5;
       top: $spacing-03;
-      right: $spacing-03;
+      right: $spacing-05;
       display: flex;
       align-items: center;
       justify-content: center;
+      background-color: $ui-01;
     }
     .#{$carbon-prefix}--btn.#{$block-class}__close-button
       .#{$carbon-prefix}--btn__icon {

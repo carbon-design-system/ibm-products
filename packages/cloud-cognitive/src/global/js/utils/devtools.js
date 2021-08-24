@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { paramCase } from 'param-case';
+import pkg from '../package-settings';
 
 const devtoolsAttribute = 'data-carbon-devtools-id';
 
 function getDevtoolsId(componentName) {
-  return paramCase(componentName);
+  return `${pkg.prefix}--${componentName}`;
 }
 
 function getDevtoolsProps(componentName) {

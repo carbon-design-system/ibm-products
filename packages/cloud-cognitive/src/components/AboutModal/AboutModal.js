@@ -15,7 +15,7 @@ import cx from 'classnames';
 
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
-import { getDevtoolsProps, getDevtoolsId } from '../../internal/devtools';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
 // Carbon and package components we use.
 import {
@@ -98,8 +98,7 @@ export let AboutModal = React.forwardRef(
               additionalInfo && additionalInfo.length > 1,
           }
         )}
-        {...{ onClose, open, ref }}
-        {...getDevtoolsProps(componentName)}>
+        {...{ onClose, open, ref, ...getDevtoolsProps(componentName) }}>
         <div className={`${blockClass}__logo`}>{logo}</div>
         <ModalHeader
           className={`${blockClass}__header`}
@@ -164,8 +163,6 @@ export let AboutModal = React.forwardRef(
 
 // Return a placeholder if not released and not enabled by feature flag
 AboutModal = pkg.checkComponentEnabled(AboutModal, componentName);
-
-AboutModal.devtoolsId = getDevtoolsId(componentName);
 AboutModal.displayName = componentName;
 
 // The types and DocGen commentary for the component props,

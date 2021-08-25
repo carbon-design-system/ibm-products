@@ -131,36 +131,21 @@ function vertical(args) {
   return (
     <Toolbar {...args}>
       <ToolbarGroup>
-        <ToolbarButton
-          iconDescription="Drag"
-          renderIcon={Draggable16}
-          tooltipPosition="right"
-        />
+        <ToolbarButton iconDescription="Drag" renderIcon={Draggable16} />
       </ToolbarGroup>
 
       <ToolbarGroup>
-        <ToolbarButton
-          iconDescription="Ruler"
-          renderIcon={RulerAlt16}
-          tooltipPosition="right"
-        />
-
-        <ToolbarButton
-          iconDescription="Pin"
-          renderIcon={Pin16}
-          tooltipPosition="right"
-        />
+        <ToolbarButton iconDescription="Ruler" renderIcon={RulerAlt16} />
+        <ToolbarButton iconDescription="Pin" renderIcon={Pin16} />
 
         <ToolbarButton
           iconDescription="Color palette"
           renderIcon={ColorPalette16}
-          tooltipPosition="right"
         />
 
         <ToolbarButton
           iconDescription="Text creation"
           renderIcon={TextCreation16}
-          tooltipPosition="right"
         />
       </ToolbarGroup>
 
@@ -168,42 +153,22 @@ function vertical(args) {
         <ToolbarButton
           iconDescription="Open panel left"
           renderIcon={OpenPanelLeft16}
-          tooltipPosition="right"
         />
 
         <ToolbarButton
           iconDescription="Open panel right"
           renderIcon={OpenPanelRight16}
-          tooltipPosition="right"
         />
       </ToolbarGroup>
 
       <ToolbarGroup>
-        <ToolbarButton
-          iconDescription="Move"
-          renderIcon={Move16}
-          tooltipPosition="right"
-        />
-
-        <ToolbarButton
-          iconDescription="Rotate"
-          renderIcon={Rotate16}
-          tooltipPosition="right"
-        />
+        <ToolbarButton iconDescription="Move" renderIcon={Move16} />
+        <ToolbarButton iconDescription="Rotate" renderIcon={Rotate16} />
       </ToolbarGroup>
 
       <ToolbarGroup>
-        <ToolbarButton
-          iconDescription="Zoom in"
-          renderIcon={ZoomIn16}
-          tooltipPosition="right"
-        />
-
-        <ToolbarButton
-          iconDescription="Zoom out"
-          renderIcon={ZoomOut16}
-          tooltipPosition="right"
-        />
+        <ToolbarButton iconDescription="Zoom in" renderIcon={ZoomIn16} />
+        <ToolbarButton iconDescription="Zoom out" renderIcon={ZoomOut16} />
       </ToolbarGroup>
     </Toolbar>
   );

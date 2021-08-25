@@ -32,36 +32,35 @@ export let CreateInfluencerPrototype = ({
   currentStep,
   handleToggleState,
   handleActiveSectionIndex,
+  getCreateComponents,
   includeViewAllToggle,
   open,
   previousState,
-  sideNavAriaLabel,
   toggleState,
   viewAllToggleLabelText,
   viewAllToggleOffLabelText,
   viewAllToggleOnLabelText,
 }) => {
   const [progressIndicatorState, setProgressIndicatorState] = useState('');
-  const [sideNavState, setSideNavState] = useState('');
+  const [firstStep, setFirstStep] = useState(currentStep);
 
   // Animating states need to be reset here otherwise things won't render
-  // the way they should after the component mounts/unmounts
+  // the way they should after the component mounts/un-mounts
   useEffect(() => {
     if (!previousState?.open && open) {
-      setSideNavState('');
       setProgressIndicatorState('');
     }
   }, [open, previousState]);
 
   const handleViewAllToggle = (newToggleValue) => {
     if (newToggleValue) {
+      setFirstStep(1)
       setProgressIndicatorState('closing');
       setTimeout(() => {
         handleToggleState(newToggleValue);
-        setSideNavState('opening');
       }, moderate02);
     } else {
-      setSideNavState('closing');
+
       setTimeout(() => {
         handleToggleState(newToggleValue);
         setProgressIndicatorState('opening');
@@ -75,6 +74,10 @@ export let CreateInfluencerPrototype = ({
       createComponentContainer.scrollTop = 0;
     }
   };
+
+  useEffect(() => {
+    console.log(currentStep - 1)
+  }, [currentStep])
 
   const renderViewAllToggle = () => {
     return (
@@ -91,13 +94,14 @@ export let CreateInfluencerPrototype = ({
     );
   };
 
+
   // renders the step progression components in the left influencer area
   const renderProgressSteps = () => {
     if (toggleState) {
       return (
         <div className={`${blockClass}__left-nav`}>
           <ProgressIndicator
-            currentIndex={currentStep - 1}
+            currentIndex={currentStep- 1}
             spaceEqually
             vertical
             className={cx(`${blockClass}__progress-indicator`)}

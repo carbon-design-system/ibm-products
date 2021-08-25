@@ -25,11 +25,12 @@ export const useCreateComponentStepChange = ({
   componentBlockClass,
   setCreateComponentActions,
   setModalIsOpen,
+  getCreateComponents,
 }) => {
   // useEffect to handle multi step logic
   useEffect(() => {
     const onUnmount = () => {
-      if (componentName !== 'CreateFullPage') {
+      if (componentName !== 'CreateFullPagePrototype') {
         setCurrentStep(0);
       }
       setIsSubmitting(false);
@@ -50,7 +51,7 @@ export const useCreateComponentStepChange = ({
       let step = 0;
       let submitDisabled = false;
       let viewAllSubmitDisabled = false;
-      const createComponentSteps = getComponentSteps();
+      const createComponentSteps = displayCorrectSteps();
       createComponentSteps.forEach((child) => {
         step++;
         if (currentStep === step) {
@@ -67,7 +68,7 @@ export const useCreateComponentStepChange = ({
     };
     const handleNext = async () => {
       setIsSubmitting(true);
-      const createSteps = getComponentSteps();
+      const createSteps = displayCorrectSteps();
       if (createSteps[currentStep - 1].props.onNext) {
         try {
           await createSteps[currentStep - 1].props.onNext();
@@ -82,7 +83,7 @@ export const useCreateComponentStepChange = ({
     };
     const handleSubmit = async () => {
       setIsSubmitting(true);
-      const createSteps = getComponentSteps();
+      const createSteps = displayCorrectSteps();
       // last step should have onNext as well
       if (createSteps[currentStep - 1].props.onNext) {
         try {
@@ -96,8 +97,17 @@ export const useCreateComponentStepChange = ({
         await handleOnRequestSubmit();
       }
     };
-    if (getComponentSteps()?.length) {
-      const createSteps = getComponentSteps();
+    const displayCorrectSteps = () => {
+      let steps = setShouldViewAll
+        ? getComponentSteps()
+        : getComponentSteps().filter((step) => !step.props.viewAllOnly);
+      // if setShouldViewAll is true, show steps
+      // if setShouldViewAll is false, show only the steps that do not have have the prop "viewallonly"
+      return steps;
+    };
+
+    if (displayCorrectSteps()?.length) {
+      const createSteps = displayCorrectSteps();
       const total = createSteps.length;
       const buttons = [];
       buttons.push({
@@ -111,7 +121,7 @@ export const useCreateComponentStepChange = ({
         key: 'create-action-button-cancel',
         label: cancelButtonText,
         onClick:
-          componentName === 'CreateFullPage'
+          componentName === 'CreateFullPagePrototype'
             ? () => setModalIsOpen(true)
             : onUnmount,
         kind: 'ghost',

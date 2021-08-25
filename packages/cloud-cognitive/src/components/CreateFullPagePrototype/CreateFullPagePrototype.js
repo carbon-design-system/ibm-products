@@ -34,7 +34,7 @@ import {
   useValidCreateStepCount,
   useCreateComponentFocus,
 } from '../../global/js/hooks';
-import { useCreateComponentStepChange } from "./useCreateComponentStepChange"
+import { useCreateComponentStepChange } from './useCreateComponentStepChange';
 import { hasValidChildType } from '../../global/js/utils/hasValidChildType';
 
 const blockClass = `${pkg.prefix}--create-full-page`;
@@ -80,14 +80,11 @@ export let CreateFullPagePrototype = React.forwardRef(
         childrenArray && childrenArray[0]?.type === React.Fragment
           ? childrenArray[0].props.children
           : childrenArray;
-          // shouldViewAll ? 
       extractedChildren.forEach((child) => {
         if (isFullPageStep(child)) {
-          console.log(child.props)
           steps.push(child);
         }
       });
-      // console.log(steps)
       return steps;
     }, [children]);
 
@@ -101,7 +98,7 @@ export let CreateFullPagePrototype = React.forwardRef(
     useCreateComponentStepChange({
       setCurrentStep,
       setIsSubmitting,
-      setShouldViewAll,
+      setShouldViewAll: shouldViewAll,
       onClose,
       onRequestSubmit,
       componentName,
@@ -130,18 +127,6 @@ export let CreateFullPagePrototype = React.forwardRef(
       return false;
     };
 
-    // check if child is a full page section component
-    const isFullPageSection = (child) => {
-      if (
-        child &&
-        child.props &&
-        child.props.type === CREATE_FULL_PAGE_SECTION_PROTOTYPE
-      ) {
-        return true;
-      }
-      return false;
-    };
-
     // renders the step progression components in the left influencer area
     const getFullPageComponents = (childrenElements) => {
       let childrenArray = Array.isArray(childrenElements)
@@ -161,24 +146,25 @@ export let CreateFullPagePrototype = React.forwardRef(
       const childrenArray = Array.isArray(childrenElements)
         ? childrenElements
         : [childrenElements];
+      const fullPageStepComponents = shouldViewAll
+        ? childrenArray.filter((child) => isFullPageStep(child))
+        : childrenArray.filter(
+            (child) => isFullPageStep(child) && !child.props.viewAllOnly
+          );
       return (
         <>
-          {childrenArray.map((child, stepIndex) => {
+          {fullPageStepComponents.map((child, stepIndex) => {
             if (!isFullPageStep(child)) {
               return child;
             }
             step++;
-            return React.cloneElement(
-              child,
-              {
-                className: cx(child.props.className, {
-                  [`${blockClass}__step--hidden-step`]:
-                     currentStep !== step,
-                  [`${blockClass}__step--visible-step`]: currentStep === step,
-                }),
-                key: `key_${stepIndex}`,
-              }
-            );
+            return React.cloneElement(child, {
+              className: cx(child.props.className, {
+                [`${blockClass}__step--hidden-step`]: currentStep !== step,
+                [`${blockClass}__step--visible-step`]: currentStep === step,
+              }),
+              key: `key_${stepIndex}`,
+            });
           })}
         </>
       );
@@ -192,6 +178,7 @@ export let CreateFullPagePrototype = React.forwardRef(
             componentBlockClass={blockClass}
             createComponentName={componentName}
             currentStep={currentStep}
+            // getCreateComponents={getFullPage}
             createComponents={getFullPageComponents(children)}
             includeViewAllToggle={includeViewAllToggle}
             handleToggleState={(toggleState) => setShouldViewAll(toggleState)}

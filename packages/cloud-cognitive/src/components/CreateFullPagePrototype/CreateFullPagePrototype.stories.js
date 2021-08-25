@@ -226,6 +226,53 @@ const TemplateWithToggle = () => {
         </FormGroup>
       </CreateFullPageStepPrototype>
       <CreateFullPageStepPrototype
+        viewAllOnly
+        title="Hidden"
+        subtitle="One or more partitions make up a topic. A partition is an ordered list
+        of messages."
+        description="Partitions are distributed across the brokers in order to increase the
+        scalability of your topic. You can also use them to distribute
+        messages across the members of a consumer group."
+        hasForm={false}
+        onNext={() => {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              // Example usage of how to prevent the next step if some kind
+              // of error occurred during the `onNext` handler.
+              if (shouldReject) {
+                setHasSubmitError(true);
+                reject();
+              }
+              setIsInvalid(false);
+              resolve();
+            }, simulatedDelay);
+          });
+        }}
+        disableSubmit={!textInput}>
+        <Row>
+          <Column xlg={5} lg={5} md={4} sm={4}>
+            <FormGroup
+              className={`${blockClass}__step-fieldset ${storyClass}__step-fieldset--label`}
+              legendText="Hidden">
+              <TextInput
+                id="test2"
+                invalidText="A valid value is required"
+                labelText="Topic name"
+                placeholder="Enter topic name"
+                onChange={(e) => {
+                  setTextInput(e.target.value);
+                  setIsInvalid(false);
+                }}
+                onBlur={() => {
+                  textInput.length === 0 && setIsInvalid(true);
+                }}
+                invalid={isInvalid}
+              />
+            </FormGroup>
+          </Column>
+        </Row>
+      </CreateFullPageStepPrototype>
+      <CreateFullPageStepPrototype
         title="Message retention"
         subtitle="This is how many copies of a topic will be made for high availability"
         description="The partitions of each topic can be replicated across a configurable number of brokers."

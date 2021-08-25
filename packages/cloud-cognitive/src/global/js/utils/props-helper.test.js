@@ -67,10 +67,13 @@ describe('deprecateProp and deprecatePropUsage', () => {
   Component.propTypes = {
     a: deprecateProp(PropTypes.string, 'Explanation 1.'),
     b: PropTypes.string,
-    c: PropTypes.oneOfType([
-      PropTypes.string,
-      deprecatePropUsage(PropTypes.number, 'Explanation 2.'),
-    ]),
+    c: deprecatePropUsage(
+      PropTypes.shape({
+        d: PropTypes.string,
+      }),
+      PropTypes.number,
+      'Explanation 2.'
+    ),
   };
 
   it('reports prop deprecated when deprecated prop is used', () => {
@@ -80,6 +83,20 @@ describe('deprecateProp and deprecatePropUsage', () => {
       'The prop `a` of `x` has been deprecated and will soon be removed. Explanation 1.'
     );
     warn.mockRestore();
+  });
+
+  it('reports prop deprecated and invalid when deprecated prop is used with invalid value', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+    render(<Component a={42} />);
+    expect(warn).toBeCalledWith(
+      'The prop `a` of `x` has been deprecated and will soon be removed. Explanation 1.'
+    );
+    expect(error).toBeCalledWith(
+      'Warning: Failed prop type: Invalid prop `a` of type `number` supplied to `x`, expected `string`.\n    in x'
+    );
+    warn.mockRestore();
+    error.mockRestore();
   });
 
   it('does not report prop deprecated when non-deprecated prop is used', () => {
@@ -100,9 +117,33 @@ describe('deprecateProp and deprecatePropUsage', () => {
 
   it('does not report prop usage deprecated when non-deprecated usage is used', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-    render(<Component c="fish" />);
+    render(<Component c={{ d: 'fish' }} />);
     expect(warn).not.toBeCalled();
     warn.mockRestore();
+  });
+
+  it('does not report prop usage deprecated when incorrect non-deprecated usage is used', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+    render(<Component c={{ d: 42 }} />);
+    expect(warn).not.toBeCalled();
+    expect(error).toBeCalledWith(
+      'Warning: Failed prop type: Invalid prop `c.d` of type `number` supplied to `x`, expected `string`.\n    in x'
+    );
+    warn.mockRestore();
+    error.mockRestore();
+  });
+
+  it('does not report prop usage deprecated when invalid but non-deprecated usage is used', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+    render(<Component c="fish" />);
+    expect(warn).not.toBeCalled();
+    expect(error).toBeCalledWith(
+      'Warning: Failed prop type: Invalid prop `c` of type `string` supplied to `x`, expected `object`.\n    in x'
+    );
+    warn.mockRestore();
+    error.mockRestore();
   });
 });
 

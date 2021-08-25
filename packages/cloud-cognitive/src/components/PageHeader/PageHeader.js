@@ -879,7 +879,7 @@ PageHeader.propTypes = {
    * Each item is specified as an object with the properties of a Carbon Button in icon only form.
    * Button kind, size, tooltipPosition, tooltipAlignment and type are ignored.
    */
-  actionBarItems: PropTypes.oneOfType([
+  actionBarItems: deprecatePropUsage(
     PropTypes.arrayOf(
       PropTypes.shape({
         ...prepareProps(Button.propTypes, [
@@ -893,15 +893,14 @@ PageHeader.propTypes = {
         renderIcon: Button.propTypes.renderIcon.isRequired,
       })
     ),
-    deprecatePropUsage(
-      // expects action bar item as array or in fragment
-      PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.element),
-        PropTypes.element,
-      ]),
-      'Expects an array of objects with the following properties: iconDescription, renderIcon and onClick.'
-    ),
-  ]),
+
+    // expects action bar item as array or in fragment
+    PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.element),
+      PropTypes.element,
+    ]),
+    'Expects an array of objects with the following properties: iconDescription, renderIcon and onClick.'
+  ),
   /**
    * When there is insufficient space for all actionBarItems to be displayed this
    * aria label is used for the action bar overflow menu
@@ -1055,7 +1054,7 @@ PageHeader.propTypes = {
    *
    * Carbon Button API https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  pageActions: PropTypes.oneOfType([
+  pageActions: deprecatePropUsage(
     PropTypes.arrayOf(
       PropTypes.shape({
         ...Button.propTypes,
@@ -1065,14 +1064,12 @@ PageHeader.propTypes = {
         onClick: PropTypes.func,
       })
     ),
-    deprecatePropUsage(
-      PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.element),
-        PropTypes.element,
-      ]),
-      'Expects an array of objects with the following properties: label and onClick.'
-    ),
-  ]),
+    PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.element),
+      PropTypes.element,
+    ]),
+    'Expects an array of objects with the following properties: label and onClick.'
+  ),
   /**
    * When there is insufficient space to display all of hte page actions inline a dropdown button menu is shown,
    * containing the page actions. This label is used as the display content of the dropdown button menu.

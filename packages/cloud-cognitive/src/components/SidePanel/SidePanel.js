@@ -342,7 +342,7 @@ export let SidePanel = React.forwardRef(
       }
     }, [open]);
 
-    // initialize the side panel to close
+    // initializes the side panel to close
     const onAnimationEnd = () => {
       if (!open) {
         onUnmount && onUnmount();
@@ -351,9 +351,13 @@ export let SidePanel = React.forwardRef(
       setAnimationComplete(true);
     };
 
-    // initializes the side panel to open and prevents the side panel from being scrolled during animation
-    const onAnimationStart = () => {
-      setAnimationComplete(false);
+    // initializes the side panel to open
+    const onAnimationStart = (event) => {
+      event.persist();
+      const isPanelTarget = event.target.id === `${blockClass}-outer`;
+      if (isPanelTarget) {
+        setAnimationComplete(false);
+      }
     };
 
     // used to reset margins of the slide in panel when closed/closing
@@ -593,7 +597,7 @@ export let SidePanel = React.forwardRef(
               }`,
             }}
             onAnimationEnd={onAnimationEnd}
-            onAnimationStart={onAnimationStart}
+            onAnimationStart={(event) => onAnimationStart(event)}
             onBlur={handleBlur}
             ref={contentRef}
             role="complementary"
@@ -634,8 +638,8 @@ export let SidePanel = React.forwardRef(
               style={{
                 animation: `${
                   open
-                    ? 'sidePanelOverlayEntrance 250ms'
-                    : 'sidePanelOverlayExit 250ms'
+                    ? `sidePanelOverlayEntrance ${moderate02}`
+                    : `sidePanelOverlayExit ${moderate02}`
                 }`,
               }}
             />

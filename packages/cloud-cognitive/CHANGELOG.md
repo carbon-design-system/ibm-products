@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.76.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.75.1...@carbon/ibm-cloud-cognitive@0.76.0) (2021-08-25)
+
+
+### Features
+
+* **toolbar:** add vertical variant ([#1173](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1173)) ([574a2c5](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/574a2c55fd965be4de163ea8d9d9fae0baf1e7ba))
+
+
+
+
+
 ## [0.75.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.75.0...@carbon/ibm-cloud-cognitive@0.75.1) (2021-08-25)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

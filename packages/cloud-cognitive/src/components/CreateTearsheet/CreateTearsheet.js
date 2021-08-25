@@ -30,7 +30,10 @@ import {
   useCreateComponentFocus,
   useCreateComponentStepChange,
 } from '../../global/js/hooks';
-import { hasValidChildType } from '../../global/js/utils/hasValidChildType';
+import {
+  hasValidChildrenType,
+  hasValidChildType,
+} from '../../global/js/utils/hasValidType';
 
 const componentName = 'CreateTearsheet';
 const blockClass = `${pkg.prefix}--tearsheet-create`;
@@ -70,26 +73,6 @@ export let CreateTearsheet = forwardRef(
     const previousState = usePreviousValue({ currentStep, open });
     const contentRef = useRef();
 
-    // check if child is a tearsheet step component
-    const isTearsheetStep = (child) => {
-      if (child && child.props && child.props.type === CREATE_TEARSHEET_STEP) {
-        return true;
-      }
-      return false;
-    };
-
-    // check if child is a tearsheet section component
-    const isTearsheetSection = (child) => {
-      if (
-        child &&
-        child.props &&
-        child.props.type === CREATE_TEARSHEET_SECTION
-      ) {
-        return true;
-      }
-      return false;
-    };
-
     // returns an array of tearsheet steps
     const getTearsheetSteps = useCallback(() => {
       const steps = [];
@@ -99,7 +82,7 @@ export let CreateTearsheet = forwardRef(
           ? childrenArray[0].props.children
           : childrenArray;
       extractedChildren.forEach((child) => {
-        if (isTearsheetStep(child)) {
+        if (hasValidChildType({ child, type: CREATE_TEARSHEET_STEP })) {
           steps.push(child);
         }
       });
@@ -151,7 +134,7 @@ export let CreateTearsheet = forwardRef(
               : [children]
             : [];
         const tearsheetStepComponents = childrenArray.filter((child) =>
-          isTearsheetStep(child)
+          hasValidChildType({ child, type: CREATE_TEARSHEET_STEP })
         );
         let tearsheetSectionComponents = [];
         tearsheetStepComponents.forEach((child, index) => {
@@ -166,13 +149,23 @@ export let CreateTearsheet = forwardRef(
               // The TearsheetStep has an array of children, lets check each one to see if it is a TearsheetSection
               if (child.props.children.length) {
                 child.props.children.forEach((stepChild) => {
-                  if (isTearsheetSection(stepChild)) {
+                  if (
+                    hasValidChildType({
+                      child: stepChild,
+                      type: CREATE_TEARSHEET_SECTION,
+                    })
+                  ) {
                     tearsheetSectionComponents.push(stepChild);
                   }
                 });
               } else {
                 // The TearsheetStep only has a single React element as a child, lets check to see if it is a TearsheetSection
-                if (isTearsheetSection(child.props.children)) {
+                if (
+                  hasValidChildType({
+                    child: child.props.children,
+                    type: CREATE_TEARSHEET_SECTION,
+                  })
+                ) {
                   tearsheetSectionComponents.push(child.props.children);
                 }
               }
@@ -199,7 +192,12 @@ export let CreateTearsheet = forwardRef(
             typeof child.props.children !== 'undefined' &&
             !child.props.children.length
           ) {
-            if (!isTearsheetSection(child.props.children)) {
+            if (
+              !hasValidChildType({
+                child: child.props.children,
+                type: CREATE_TEARSHEET_SECTION,
+              })
+            ) {
               console.warn(
                 `${componentName}: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' prop.`
               );
@@ -216,9 +214,11 @@ export let CreateTearsheet = forwardRef(
       const tearsheetStepComponents =
         childrenArray && childrenArray[0]?.type === React.Fragment
           ? childrenArray[0].props.children.filter((item) =>
-              isTearsheetStep(item)
+              hasValidChildType({ child: item, type: CREATE_TEARSHEET_STEP })
             )
-          : childrenArray.filter((item) => isTearsheetStep(item));
+          : childrenArray.filter((item) =>
+              hasValidChildType({ child: item, type: CREATE_TEARSHEET_STEP })
+            );
       let tearsheetSectionComponents = [];
       tearsheetStepComponents.forEach((child) => {
         // we have received an array of children, lets check to see that each child is
@@ -229,7 +229,12 @@ export let CreateTearsheet = forwardRef(
           typeof child.props.children !== 'string'
         ) {
           child.props.children.forEach((stepChild) => {
-            if (isTearsheetSection(stepChild)) {
+            if (
+              hasValidChildType({
+                child: stepChild,
+                type: CREATE_TEARSHEET_SECTION,
+              })
+            ) {
               tearsheetSectionComponents.push(stepChild);
             }
           });
@@ -241,7 +246,12 @@ export let CreateTearsheet = forwardRef(
           typeof child.props.children !== 'undefined' &&
           !child.props.children.length
         ) {
-          if (isTearsheetSection(child.props.children)) {
+          if (
+            hasValidChildType({
+              child: child.props.children,
+              type: CREATE_TEARSHEET_SECTION,
+            })
+          ) {
             tearsheetSectionComponents.push(child.props.children);
           }
         }
@@ -262,9 +272,11 @@ export let CreateTearsheet = forwardRef(
       const stepComponents =
         childrenArray && childrenArray[0]?.type === React.Fragment
           ? childrenArray[0].props.children.filter((item) =>
-              isTearsheetStep(item)
+              hasValidChildType({ child: item, type: CREATE_TEARSHEET_STEP })
             )
-          : childrenArray.filter((item) => isTearsheetStep(item));
+          : childrenArray.filter((item) =>
+              hasValidChildType({ child: item, type: CREATE_TEARSHEET_STEP })
+            );
       const indexOfLastTearsheetStep = formattedChildren
         .map((el) => el?.type)
         .lastIndexOf(CREATE_TEARSHEET_STEP);
@@ -304,7 +316,7 @@ export let CreateTearsheet = forwardRef(
       return (
         <>
           {tearsheetStepComponents.map((child, index) => {
-            if (!isTearsheetSection(child)) {
+            if (!hasValidChildType({ child, type: CREATE_TEARSHEET_SECTION })) {
               return child;
             }
             // Needed to be able to not render the divider
@@ -454,7 +466,7 @@ CreateTearsheet.propTypes = {
   /**
    * The main content of the tearsheet
    */
-  children: hasValidChildType({
+  children: hasValidChildrenType({
     componentName,
     childType: CREATE_TEARSHEET_STEP,
   }),

@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Custom PropType validator which checks and ensures that the children of the create component are indeed all CreateStep components.
-export const hasValidChildType =
+// Custom PropType validator which checks and ensures that all children of the create component are indeed all CreateStep components.
+export const hasValidChildrenType =
   ({ componentName, childType }) =>
   ({ children }) => {
     children.length > 1 &&
@@ -19,3 +19,11 @@ export const hasValidChildType =
         return;
       });
   };
+
+// Utility for check the `type` of a child component
+export const hasValidChildType = ({ child, type }) => {
+  if (child && child.props && child.props.type === type) {
+    return true;
+  }
+  return false;
+};

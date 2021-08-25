@@ -10,7 +10,7 @@
 
 @mixin cascade {
   $block-class: #{$pkg-prefix}--cascade;
-  $animationProps: 300ms cubic-bezier(0.2, 0, 0.38, 0.9) 0s 1;
+  $animationProps: $duration--moderate-02 motion(standard, productive) 0s 1;
   $fadeStart: translateY(3rem);
   $fadeEnd: translateY(0);
 

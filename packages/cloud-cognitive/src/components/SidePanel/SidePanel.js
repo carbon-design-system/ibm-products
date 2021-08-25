@@ -76,7 +76,10 @@ export let SidePanel = React.forwardRef(
     useEffect(() => {
       const panelRef = ref || sidePanelRef;
       if (panelRef && panelRef.current) {
-        panelRef.current.scrollTop = 0;
+        const scrollableSection = panelRef.current.querySelector(
+          `.${blockClass}__inner-content`
+        );
+        scrollableSection.scrollTop = 0;
       }
     }, [currentStep, ref]);
 
@@ -116,6 +119,16 @@ export let SidePanel = React.forwardRef(
         );
       }
     }, [actions, condensedActions, open, animationComplete]);
+
+    // Add console warning if labelText is provided without a title.
+    // This combination is not allowed.
+    useEffect(() => {
+      if (!title && labelText) {
+        console.warn(
+          `${componentName}: The prop \`labelText\` was provided without a \`title\`. It is required to have a \`title\` when using the \`labelText\` prop.`
+        );
+      }
+    }, [labelText, title]);
 
     /* istanbul ignore next */
     const handleResize = (width, height) => {
@@ -459,32 +472,33 @@ export let SidePanel = React.forwardRef(
 
     const renderHeader = () => (
       <>
-        {title && title.length && (
-          <div
-            className={cx(`${blockClass}__title-container`, {
-              [`${blockClass}__on-detail-step`]: currentStep > 0,
-              [`${blockClass}__title-container--no-animation`]: !animateTitle,
-              [`${blockClass}__title-container-is-animating`]:
-                !animationComplete && animateTitle,
-            })}>
-            {currentStep > 0 && (
-              <Button
-                aria-label={navigationBackIconDescription}
-                kind="ghost"
-                size="small"
-                disabled={false}
-                renderIcon={ArrowLeft20}
-                iconDescription={navigationBackIconDescription}
-                className={`${blockClass}__navigation-back-button`}
-                onClick={onNavigationBack}
-              />
-            )}
-            {labelText && labelText.length && (
-              <p className={`${blockClass}__label-text`}>{labelText}</p>
-            )}
-            {renderTitle()}
-          </div>
-        )}
+        <div
+          className={cx(`${blockClass}__title-container`, {
+            [`${blockClass}__on-detail-step`]: currentStep > 0,
+            [`${blockClass}__on-detail-step-without-title`]:
+              currentStep > 0 && !title,
+            [`${blockClass}__title-container--no-animation`]: !animateTitle,
+            [`${blockClass}__title-container-is-animating`]:
+              !animationComplete && animateTitle,
+            [`${blockClass}__title-container-without-title`]: !title,
+          })}>
+          {currentStep > 0 && (
+            <Button
+              aria-label={navigationBackIconDescription}
+              kind="ghost"
+              size="small"
+              disabled={false}
+              renderIcon={ArrowLeft20}
+              iconDescription={navigationBackIconDescription}
+              className={`${blockClass}__navigation-back-button`}
+              onClick={onNavigationBack}
+            />
+          )}
+          {title && title.length && labelText && labelText.length && (
+            <p className={`${blockClass}__label-text`}>{labelText}</p>
+          )}
+          {title && title.length && renderTitle()}
+        </div>
         <Button
           aria-label={closeIconDescription}
           kind="ghost"
@@ -746,7 +760,7 @@ SidePanel.propTypes = {
   /**
    * Sets the close button icon description
    */
-  closeIconDescription: PropTypes.string,
+  closeIconDescription: PropTypes.string.isRequired,
 
   /**
    * Determines whether the side panel should render the condensed version (affects action buttons primarily)

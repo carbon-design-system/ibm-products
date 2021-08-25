@@ -679,6 +679,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   top: var(--cds-spacing-09, 3rem);
 }
 
+.exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container-without-title {
+  padding: 0;
+}
+
+.exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container-without-title.exp--side-panel__on-detail-step-without-title {
+  height: calc(var(--cds-spacing-08, 2.5rem) + var(--cds-spacing-02, 0.25rem));
+  padding: var(--cds-spacing-05, 1rem) var(--cds-spacing-05, 1rem) var(--cds-spacing-03, 0.5rem) var(--cds-spacing-05, 1rem);
+}
+
+.exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container-without-title::before {
+  background-color: transparent;
+}
+
 .exp--side-panel__container .exp--side-panel__title-text {
   font-size: var(--cds-productive-heading-03-font-size, 1.25rem);
   font-weight: var(--cds-productive-heading-03-font-weight, 400);

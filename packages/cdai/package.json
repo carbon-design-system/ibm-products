@@ -30,6 +30,7 @@
     "storybook": "start-storybook -p 6006",
     "build": "node scripts/build.js",
     "clean": "rimraf es lib scss",
+    "test": "jest",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (explicit range peer dependency), uuid (not tested)",
     "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react$|^react-dom$|^uuid$)/'"
   },
@@ -60,6 +61,8 @@
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-react": "^7.14.5",
     "cpx": "^1.5.0",
+    "jest": "^27.0.6",
+    "jest-config-ibm-cloud-cognitive": "^0.10.1",
     "node-sass": "^6.0.1",
     "npm-check-updates": "^11.8.3",
     "rimraf": "^3.0.2",

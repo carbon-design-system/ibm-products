@@ -11,7 +11,7 @@ import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { moderate02 } from '@carbon/motion';
 import { pkg, carbon } from '../../settings';
-import { CreateTearsheet, componentName } from './CreateTearsheet';
+import { CreateTearsheet } from './CreateTearsheet';
 import { CreateTearsheetStep } from './CreateTearsheetStep';
 import { CreateTearsheetSection } from './CreateTearsheetSection';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -187,7 +187,7 @@ describe(CreateTearsheet.displayName, () => {
       )
     );
     expect(warn).toBeCalledWith(
-      `${componentName}: An invalid \`initialStep\` prop was supplied. The \`initialStep\` prop should be a number that is greater than 0 or less than or equal to the number of steps your ${componentName} has.`
+      `${CreateTearsheet.displayName}: An invalid \`initialStep\` prop was supplied. The \`initialStep\` prop should be a number that is greater than 0 or less than or equal to the number of steps your ${CreateTearsheet.displayName} has.`
     );
     // The onMount prop will get called here because the first step is rendered
     expect(onMountFn).toHaveBeenCalledTimes(1);

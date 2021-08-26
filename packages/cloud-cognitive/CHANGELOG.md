@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.77.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.77.5...@carbon/ibm-cloud-cognitive@0.77.6) (2021-08-26)
+
+
+### Bug Fixes
+
+* **SidePanel:** revert condensed title font weight style ([#1213](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1213)) ([9bf141d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9bf141df78325ac8b8682a647a2d27b28826dac5))
+
+
+
+
+
 ## [0.77.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.77.4...@carbon/ibm-cloud-cognitive@0.77.5) (2021-08-26)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

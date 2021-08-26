@@ -70,19 +70,19 @@ const renderCreateTearsheet = (
       <CreateTearsheetStep
         onNext={rejectOnNext ? onNextStepRejectionFn : onNext}
         title={step1Title}
-        formLegendText={step1Title}>
+        fieldsetLegendText={step1Title}>
         step 1 content
         <button type="button" disabled>
           Test
         </button>
         <input type="text" />
       </CreateTearsheetStep>
-      <CreateTearsheetStep title={step2Title} formLegendText={step2Title}>
+      <CreateTearsheetStep title={step2Title} fieldsetLegendText={step2Title}>
         step 2 content
       </CreateTearsheetStep>
       <CreateTearsheetStep
         title={step3Title}
-        formLegendText={step3Title}
+        fieldsetLegendText={step3Title}
         onNext={rejectOnSubmitNext ? finalStepOnNextRejectFn : finalOnNextFn}>
         step 3 content
       </CreateTearsheetStep>
@@ -107,7 +107,7 @@ const renderEmptyCreateTearsheet = ({ ...rest }) =>
 const renderSingleStepCreateTearsheet = ({ ...rest }) =>
   render(
     <CreateTearsheet onRequestSubmit={onRequestSubmitFn} {...rest}>
-      <CreateTearsheetStep title={step1Title} formLegendText={step1Title}>
+      <CreateTearsheetStep title={step1Title} fieldsetLegendText={step1Title}>
         step 1 content
       </CreateTearsheetStep>
     </CreateTearsheet>
@@ -214,10 +214,10 @@ describe(CreateTearsheet.displayName, () => {
         {...defaultProps}
         open={false}
         onRequestSubmit={onRequestSubmitFn}>
-        <CreateTearsheetStep title={step1Title} formLegendText={step1Title}>
+        <CreateTearsheetStep title={step1Title} fieldsetLegendText={step1Title}>
           step 1 content
         </CreateTearsheetStep>
-        <CreateTearsheetStep title={step2Title} formLegendText={step2Title}>
+        <CreateTearsheetStep title={step2Title} fieldsetLegendText={step2Title}>
           step 2 content
         </CreateTearsheetStep>
       </CreateTearsheet>
@@ -573,18 +573,33 @@ describe(CreateTearsheet.displayName, () => {
         viewAllToggleOnLabelText="On"
         sideNavAriaLabel="Side nav aria label"
         {...defaultProps}>
-        <CreateTearsheetStep onNext={jest.fn()} disableSubmit>
-          <CreateTearsheetSection title="test title 1">
+        <CreateTearsheetStep
+          hasFieldset={false}
+          title={step1Title}
+          subtitle="Step 1 subtitle"
+          description="Step 1 description"
+          onNext={jest.fn()}
+          disableSubmit>
+          <CreateTearsheetSection
+            title="test title 1"
+            subtitle="test subtitle 1"
+            description="test description 1">
             content
           </CreateTearsheetSection>
         </CreateTearsheetStep>
         <CreateTearsheetStep title={step2Title}>
-          <CreateTearsheetSection title="test title 2">
+          <CreateTearsheetSection
+            title="test title 2"
+            subtitle="test subtitle 2"
+            description="test description 2">
             content
           </CreateTearsheetSection>
         </CreateTearsheetStep>
       </CreateTearsheet>
     );
+    screen.getAllByText(step1Title);
+    screen.getByText(/Step 1 subtitle/g);
+    screen.getByText(/Step 1 description/g);
     click(screen.getByText(viewAllToggleLabelText));
     act(() => jest.advanceTimersByTime(timerValue));
     const sideNavElement = screen.getByText(/test title 2/g, {

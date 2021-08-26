@@ -48,7 +48,6 @@ const defaults = {
     CreateFullPageStep: false,
     CreateTearsheet: false,
     CreateTearsheetStep: false,
-    CreateTearsheetSection: false,
     ContextHeader: false,
     ExampleComponent: false,
     LoadingBar: false,

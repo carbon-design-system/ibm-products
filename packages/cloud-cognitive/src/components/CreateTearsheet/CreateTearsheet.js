@@ -482,6 +482,7 @@ CreateTearsheet.propTypes = {
   description: PropTypes.node,
 
   /**
+   * @ignore
    * Used to optionally include view all toggle
    */
   includeViewAllToggle: PropTypes.bool,
@@ -529,6 +530,7 @@ CreateTearsheet.propTypes = {
   open: PropTypes.bool,
 
   /**
+   * @ignore
    * The aria label to be used for the UI Shell SideNav Carbon component
    */
   sideNavAriaLabel: PropTypes.string.isRequired.if(
@@ -555,6 +557,7 @@ CreateTearsheet.propTypes = {
   verticalPosition: PropTypes.oneOf(['normal', 'lower']),
 
   /**
+   * @ignore
    * Sets the label text for the view all toggle component
    */
   viewAllToggleLabelText: PropTypes.string.isRequired.if(
@@ -562,6 +565,7 @@ CreateTearsheet.propTypes = {
   ),
 
   /**
+   * @ignore
    * Sets the label text for the view all toggle `off` text
    */
   viewAllToggleOffLabelText: PropTypes.string.isRequired.if(
@@ -569,6 +573,7 @@ CreateTearsheet.propTypes = {
   ),
 
   /**
+   * @ignore
    * Sets the label text for the view all toggle `on` text
    */
   viewAllToggleOnLabelText: PropTypes.string.isRequired.if(

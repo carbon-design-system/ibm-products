@@ -407,19 +407,21 @@ export const WithActionToolbar = prepareStory(SlideOverTemplate, {
   args: {
     actionToolbarButtons: [
       {
+        leading: true,
         label: 'Copy',
         icon: Copy20,
-        onActionToolbarButtonClick: () => {},
+        onClick: action('Toolbar button clicked: Copy'),
+        kind: 'primary',
       },
       {
         label: 'Settings',
         icon: Settings20,
-        onActionToolbarButtonClick: () => {},
+        onClick: action('Toolbar button clicked: Settings'),
       },
       {
         label: 'Delete',
         icon: Delete20,
-        onActionToolbarButtonClick: () => {},
+        onClick: action('Toolbar button clicked: Delete'),
       },
     ],
     ...defaultStoryProps,
@@ -473,17 +475,17 @@ export const WithStaticTitleAndActionToolbar = prepareStory(SlideOverTemplate, {
       {
         label: 'Copy',
         icon: Copy20,
-        onActionToolbarButtonClick: () => {},
+        onClick: action('Action toolbar button clicked: Copy'),
       },
       {
         label: 'Settings',
         icon: Settings20,
-        onActionToolbarButtonClick: () => {},
+        onClick: action('Action toolbar button clicked: Settings'),
       },
       {
         label: 'Delete',
         icon: Delete20,
-        onActionToolbarButtonClick: () => {},
+        onClick: action('Action toolbar button clicked: Delete'),
       },
     ],
   },

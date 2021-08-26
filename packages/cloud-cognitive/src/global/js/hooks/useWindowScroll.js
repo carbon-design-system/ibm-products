@@ -1,20 +1,29 @@
 import { useRef, useLayoutEffect } from 'react';
+import { scrollableAncestor } from '../utils/scrollableAncestor';
 
 const windowExists = typeof window !== `undefined`;
 
-const getScrollPosition = () => {
-  if (!windowExists) {
-    return { scrollX: -1, scrollY: -1 };
-  } //
-
-  const { scrollX, scrollY } = { ...window };
-
-  return { scrollX, scrollY };
-};
-
-export const useWindowScroll = (effect, deps, throttleInterval = 0) => {
+const useTargetScroll = function (target, effect, deps, throttleInterval) {
   const scrollPosition = useRef({});
   const throttleTimeout = useRef(null);
+
+  const getScrollPosition = () => {
+    if (!target || (!windowExists && target === window)) {
+      return { scrollX: -1, scrollY: -1 };
+    } //
+
+    let scrollX, scrollY;
+
+    if (target === window) {
+      scrollX = window.scrollX;
+      scrollY = window.scrollY;
+    } else {
+      scrollX = target.scrollLeft;
+      scrollY = target.scrollTop;
+    }
+
+    return { scrollX, scrollY };
+  };
 
   const doGetScrollPosition = () => {
     const newVal = {
@@ -43,10 +52,28 @@ export const useWindowScroll = (effect, deps, throttleInterval = 0) => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    doGetScrollPosition();
+    if (target) {
+      target.addEventListener('scroll', handleScroll);
+      doGetScrollPosition();
+    }
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => target && target.removeEventListener('scroll', handleScroll);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 };
+
+export function useWindowScroll(effect, deps, throttleInterval = 0) {
+  return useTargetScroll(window, effect, deps, throttleInterval);
+}
+
+export function useNearestScroll(ref, effect, deps, throttle = 0) {
+  let scrollableTarget = scrollableAncestor(ref.current);
+  if (
+    scrollableTarget &&
+    (document.body === scrollableTarget ||
+      scrollableTarget.contains(document.body))
+  ) {
+    scrollableTarget = window;
+  }
+  return useTargetScroll(scrollableTarget, effect, deps, throttle);
+}

@@ -466,7 +466,9 @@ CreateFullPage.propTypes = {
    * This function can _optionally_ return a promise that is either resolved or rejected and the CreateFullPage will handle the submitting state of the create button.
    */
   onRequestSubmit: PropTypes.func.isRequired,
+
   /**
+   * @ignore
    * The aria label to be used for the UI Shell SideNav Carbon component
    */
   sideNavAriaLabel: PropTypes.string,

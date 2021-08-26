@@ -14,6 +14,8 @@ const defaults = {
     AboutModal: true,
     APIKeyModal: true,
     CreateModal: true,
+    CreateFullPage: true,
+    CreateFullPageStep: true,
     CreateSidePanel: true,
     CreateTearsheetNarrow: true,
     EmptyState: true,
@@ -43,9 +45,6 @@ const defaults = {
 
     // other public components not yet reviewed and released:
     Cascade: false,
-    CreateFullPage: false,
-    CreateFullPageSection: false,
-    CreateFullPageStep: false,
     CreateTearsheet: false,
     CreateTearsheetStep: false,
     CreateTearsheetSection: false,

@@ -35,7 +35,7 @@
     "run-all": "lerna run --stream --prefix --loglevel success",
     "test": "run-s test:all 'test:jest {@}' --",
     "test:all": "yarn run-all --no-sort test",
-    "test:jest": "jest",
+    "test:jest": "jest --colors",
     "spellcheck": "yarn spellcheck:files '**/*' '.github/*'",
     "spellcheck:files": "cspell lint --relative --no-progress --show-context --no-must-find-files",
     "storybook": "run-s storybook:build:dependencies storybook:start",

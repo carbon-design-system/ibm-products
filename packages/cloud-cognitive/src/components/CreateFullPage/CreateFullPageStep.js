@@ -23,8 +23,8 @@ export let CreateFullPageStep = forwardRef(
       subtitle,
       description,
       title,
-      hasForm,
-      formLegendText,
+      hasFieldset,
+      fieldsetLegendText,
     },
     ref
   ) => {
@@ -35,9 +35,9 @@ export let CreateFullPageStep = forwardRef(
         {description && (
           <p className={`${blockClass}-description`}>{description}</p>
         )}
-        {hasForm ? (
+        {hasFieldset ? (
           <FormGroup
-            legendText={formLegendText}
+            legendText={fieldsetLegendText}
             className={`${blockClass}-fieldset`}>
             {children}
           </FormGroup>
@@ -77,20 +77,16 @@ CreateFullPageStep.propTypes = {
   disableSubmit: PropTypes.bool,
 
   /**
-   * This is the required legend text that appears above a fieldset html element for accessibility purposes.
-   * You can set the `hasForm` prop to false if you have multiple fieldset elements or want to control the children of your Full Page's step content.
-   * Otherwise, use CSS to hide/remove this label text.
+   * This is the legend text that appears above a fieldset html element for accessibility purposes. It is required when the optional `hasFieldset` prop is provided to a FullPageStep.
    */
-  formLegendText: PropTypes.string.isRequired.if(
-    ({ hasForm }) => hasForm === true
+  fieldsetLegendText: PropTypes.string.isRequired.if(
+    ({ hasFieldset }) => hasFieldset === true
   ),
 
   /**
    * This optional prop will render your form content inside of a fieldset html element
-   * and is defaulted to true.
-   * You can set this prop to `false` if you have multiple fieldset elements or want to control the children of your Full Page's step content.
    */
-  hasForm: PropTypes.bool,
+  hasFieldset: PropTypes.bool,
 
   /**
    * Optional function to be called on initial mount of a step.
@@ -127,5 +123,4 @@ CreateFullPageStep.propTypes = {
 // component needs to make a choice or assumption when a prop is not supplied.
 CreateFullPageStep.defaultProps = {
   type: CREATE_FULL_PAGE_STEP,
-  hasForm: true,
 };

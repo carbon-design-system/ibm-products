@@ -58,7 +58,6 @@ component with form items as children:
           subtitle="Optional subtitle"
           description="Optional description"
           onNext={() => {'Optional function'}}
-          disableSubmit={}
           >
           <Row>
             <Column xlg={5} lg={5} md={4} sm={4}>
@@ -88,8 +87,6 @@ passing in the overall `<CreateFullPage />` component and the
           subtitle="Optional subtitle"
           description="Optional description"
           onNext={() => {'Optional function'}}
-          disableSubmit={}
-          hasForm={false}
           >
           <Row>
             <Column xlg={5} lg={5} md={4} sm={4}>
@@ -125,10 +122,6 @@ passing in the overall `<CreateFullPage />` component and the
           </Row>
       </CreateFullPageStep>
 ```
-
-Notice, in this example, we set the `hasForm` prop in `CreateFullPageStep`
-component to `false`. This disables the included fieldset, allowing us to pass
-in our own.
 
 ## Class names
 

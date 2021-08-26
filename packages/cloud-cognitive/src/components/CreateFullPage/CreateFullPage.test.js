@@ -61,11 +61,26 @@ const defaultFullPageProps = {
 const stepFormField = (
   <TextInput
     id={uuidv4()}
-    invalidText="A valid value is required"
     labelText="Topic name"
+    invalidText="A valid value is required"
     placeholder="Enter topic name"
   />
 );
+
+const renderComponent = ({ ...rest }) =>
+  render(
+    <CreateFullPage
+      {...rest}
+      onRequestSubmit={onRequestSubmitRejectFn}
+      {...defaultFullPageProps}>
+      <CreateFullPageStep title="Title 1" subtitle="Subtitle 1">
+        <p>1</p>
+      </CreateFullPageStep>
+      <CreateFullPageStep title="Title 2" description="2">
+        <p>2</p>
+      </CreateFullPageStep>
+    </CreateFullPage>
+  );
 // render an CreateFullPage with button labels and any other required props
 const renderCreateFullPage = ({
   rejectOnSubmit = false,
@@ -84,8 +99,9 @@ const renderCreateFullPage = ({
       <CreateFullPageStep
         title="Title 1"
         subtitle="Subtitle 1"
-        formLegendText="1"
-        onNext={rejectOnNext ? onNextStepRejectionFn : onNext}>
+        onNext={rejectOnNext ? onNextStepRejectionFn : onNext}
+        hasFieldset
+        fieldsetLegendText="Title1">
         {stepFormField}
       </CreateFullPageStep>
       <CreateFullPageStep title="Title 2" description="2" formLegendText="2">
@@ -94,7 +110,6 @@ const renderCreateFullPage = ({
       <CreateFullPageStep
         title="Title 3"
         description="3"
-        formLegendText="3"
         onNext={rejectOnSubmitNext ? finalStepOnNextRejectFn : finalOnNextFn}>
         {stepFormField}
       </CreateFullPageStep>
@@ -117,9 +132,7 @@ const renderOneStepCreateFullPage = ({ ...rest }) =>
       {...rest}
       {...defaultFullPageProps}
       onRequestSubmit={onRequestSubmitFn}>
-      <CreateFullPageStep title="Title 1" formLegendText="1">
-        {stepFormField}
-      </CreateFullPageStep>
+      <CreateFullPageStep title="Title 1">{stepFormField}</CreateFullPageStep>
     </CreateFullPage>
   );
 
@@ -130,17 +143,19 @@ const renderFullPageWithNonStepChildren = ({ ...rest }) =>
       {...defaultFullPageProps}
       onRequestSubmit={onRequestSubmitFn}>
       {stepFormField}
-      <CreateFullPageStep title="Title 1" formLegendText="1">
-        {stepFormField}
-      </CreateFullPageStep>
+      <CreateFullPageStep title="Title 1">{stepFormField}</CreateFullPageStep>
       {stepFormField}
-      <CreateFullPageStep title="Title 2" formLegendText="2">
-        {stepFormField}
-      </CreateFullPageStep>
+      <CreateFullPageStep title="Title 2">{stepFormField}</CreateFullPageStep>
     </CreateFullPage>
   );
 
 describe(componentName, () => {
+  it('has no accessibility violations', async () => {
+    const { container } = renderComponent({ ...defaultFullPageProps });
+    await expect(container).toBeAccessible(componentName, 'scan_label');
+    await expect(container).toHaveNoAxeViolations();
+  }, 80000);
+
   it('adds additional properties to the containing node', () => {
     renderCreateFullPage({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
@@ -179,30 +194,6 @@ describe(componentName, () => {
       render(...container);
     }).toThrow();
     error.mockRestore();
-  });
-
-  it('should click the back button and add a custom next button label on a single step', async () => {
-    const { click } = userEvent;
-    const { container } = renderCreateFullPage({
-      ...defaultFullPageProps,
-      rejectOnSubmit: false,
-      rejectOnNext: false,
-    });
-    const nextButtonElement = screen.getByText(nextButtonText);
-    click(nextButtonElement);
-    await waitFor(() => {
-      expect(onNextStepFn).toHaveBeenCalled();
-    });
-    const backButtonElement = screen.getByText(backButtonText);
-    click(backButtonElement);
-    const fullPageChildren = container.querySelector(
-      `.${blockClass}__content`
-    ).children;
-    expect(
-      fullPageChildren[0].classList.contains(
-        `.${blockClass}__step--visible-section`
-      )
-    );
   });
 
   it('renders the second step if clicking on the next step button with onNext optional function prop', async () => {
@@ -420,6 +411,16 @@ describe(componentName, () => {
       fullPageChildren[0].classList.contains(
         `.${blockClass}__step--visible-section`
       )
+    );
+  });
+
+  it('should render a fieldset element around FullPageStep children when `hasFieldset` prop is provided', () => {
+    const { container } = renderCreateFullPage({ ...defaultFullPageProps });
+    const createFullPageSteps = container.querySelector(
+      `.${blockClass}__content`
+    ).children;
+    expect(
+      createFullPageSteps[0].classList.contains(`.${blockClass}__step-fieldset`)
     );
   });
 });

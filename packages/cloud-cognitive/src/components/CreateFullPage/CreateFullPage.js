@@ -424,6 +424,7 @@ CreateFullPage.propTypes = {
   className: PropTypes.string,
 
   /**
+   * @ignore
    * An optional prop that provides a toggle element in the left side influencer panel
    */
   includeViewAllToggle: PropTypes.bool,
@@ -480,16 +481,19 @@ CreateFullPage.propTypes = {
   title: PropTypes.node,
 
   /**
+   * @ignore
    * Sets the label text for the view all toggle component
    */
   viewAllToggleLabelText: PropTypes.string,
 
   /**
+   * @ignore
    * Sets the label text for the view all toggle `off` text
    */
   viewAllToggleOffLabelText: PropTypes.string,
 
   /**
+   * @ignore
    * Sets the label text for the view all toggle `on` text
    */
   viewAllToggleOnLabelText: PropTypes.string,

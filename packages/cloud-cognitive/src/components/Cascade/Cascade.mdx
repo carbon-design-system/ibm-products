@@ -1,0 +1,31 @@
+import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
+import { getStoryId } from '../../global/js/utils/story-helper';
+import { Cascade } from './Cascade';
+
+# Cascade
+
+[Carbon motion guidelines](https://www.carbondesignsystem.com/guidelines/motion/overview/)
+
+## Overview
+
+This pattern is intended for use with cards, tiles, or similarly styled
+components. use this patterns in areas that are the primary focus on the page to
+help the user along their journey or locate the most important information on
+the page. It should not be used on a page if it is the secondary focus of the
+page as that will distract the user.
+
+## Without Grid
+
+<Canvas>
+  <Story id={getStoryId(Cascade.displayName, 'without-grid')} />
+</Canvas>
+
+## With Grid
+
+<Canvas>
+  <Story id={getStoryId(Cascade.displayName, 'with-grid')} />
+</Canvas>
+
+## Component API
+
+<ArgsTable />

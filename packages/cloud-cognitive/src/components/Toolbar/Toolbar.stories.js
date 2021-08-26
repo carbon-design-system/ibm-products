@@ -7,13 +7,25 @@
 
 import {
   AlignHorizontalCenter16,
+  ColorPalette16,
+  CopyFile16,
+  Draggable16,
+  Move16,
   Minimize16,
+  OpenPanelLeft16,
+  OpenPanelRight16,
+  Pin16,
   Printer16,
-  Redo16,
   Save16,
   Share16,
   Undo16,
   Upload16,
+  Redo16,
+  Rotate16,
+  RulerAlt16,
+  SettingsAdjust16,
+  Table16,
+  TextCreation16,
   ZoomIn16,
   ZoomOut16,
 } from '@carbon/icons-react';
@@ -43,7 +55,7 @@ export default {
   },
 };
 
-export function _Toolbar(args) {
+function _Toolbar(args) {
   const dropdownItems = ['11', '12', '14', '16', '18'];
 
   const [selectedDropdownItem, setSelectedDropdownItem] = useState(
@@ -73,6 +85,12 @@ export function _Toolbar(args) {
       </ToolbarGroup>
 
       <ToolbarGroup>
+        <ToolbarButton iconDescription="Ruler" renderIcon={RulerAlt16} />
+        <ToolbarButton iconDescription="Pin" renderIcon={Pin16} />
+        <ToolbarButton iconDescription="Copy file" renderIcon={CopyFile16} />
+      </ToolbarGroup>
+
+      <ToolbarGroup>
         <Dropdown
           id="dropdown"
           initialSelectedItem={selectedDropdownItem}
@@ -90,6 +108,74 @@ export function _Toolbar(args) {
           <OverflowMenuItem itemText="Delete" hasDivider isDelete />
         </OverflowMenu>
       </ToolbarGroup>
+
+      <ToolbarGroup>
+        <ToolbarButton iconDescription="Table" renderIcon={Table16} />
+
+        <ToolbarButton
+          iconDescription="Settings adjust"
+          renderIcon={SettingsAdjust16}
+        />
+      </ToolbarGroup>
     </Toolbar>
   );
 }
+
+_Toolbar.argTypes = {
+  vertical: {
+    control: false,
+  },
+};
+
+function vertical(args) {
+  return (
+    <Toolbar {...args}>
+      <ToolbarGroup>
+        <ToolbarButton iconDescription="Drag" renderIcon={Draggable16} />
+      </ToolbarGroup>
+
+      <ToolbarGroup>
+        <ToolbarButton iconDescription="Ruler" renderIcon={RulerAlt16} />
+        <ToolbarButton iconDescription="Pin" renderIcon={Pin16} />
+
+        <ToolbarButton
+          iconDescription="Color palette"
+          renderIcon={ColorPalette16}
+        />
+
+        <ToolbarButton
+          iconDescription="Text creation"
+          renderIcon={TextCreation16}
+        />
+      </ToolbarGroup>
+
+      <ToolbarGroup>
+        <ToolbarButton
+          iconDescription="Open panel left"
+          renderIcon={OpenPanelLeft16}
+        />
+
+        <ToolbarButton
+          iconDescription="Open panel right"
+          renderIcon={OpenPanelRight16}
+        />
+      </ToolbarGroup>
+
+      <ToolbarGroup>
+        <ToolbarButton iconDescription="Move" renderIcon={Move16} />
+        <ToolbarButton iconDescription="Rotate" renderIcon={Rotate16} />
+      </ToolbarGroup>
+
+      <ToolbarGroup>
+        <ToolbarButton iconDescription="Zoom in" renderIcon={ZoomIn16} />
+        <ToolbarButton iconDescription="Zoom out" renderIcon={ZoomOut16} />
+      </ToolbarGroup>
+    </Toolbar>
+  );
+}
+
+vertical.args = {
+  vertical: true,
+};
+
+export { _Toolbar, vertical };

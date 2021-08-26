@@ -42,6 +42,7 @@ const defaults = {
     UserProfileImage: true,
 
     // other public components not yet reviewed and released:
+    Cascade: false,
     CreateFullPage: false,
     CreateFullPageSection: false,
     CreateFullPageStep: false,

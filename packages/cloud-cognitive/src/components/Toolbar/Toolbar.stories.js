@@ -65,7 +65,7 @@ function _Toolbar(args) {
   return (
     <Toolbar {...args}>
       <ToolbarGroup>
-        <ToolbarButton iconDescription="Save" renderIcon={Save16} active />
+        <ToolbarButton iconDescription="Save" renderIcon={Save16} />
         <ToolbarButton iconDescription="Share" renderIcon={Share16} />
         <ToolbarButton iconDescription="Upload" renderIcon={Upload16} />
         <ToolbarButton iconDescription="Print" renderIcon={Printer16} />

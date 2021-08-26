@@ -207,6 +207,25 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
         background-color: transparent;
       }
     }
+    &.#{$block-class}__container-is-animating {
+      pointer-events: none;
+    }
+    &.#{$block-class}__container-is-animating
+      .#{$block-class}__title-container.#{$block-class}__title-container--no-animation {
+      top: 0;
+    }
+    &.#{$block-class}__container-is-animating
+      .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation {
+      top: var(--#{$block-class}--title-container-height);
+    }
+    &.#{$block-class}__container-is-animating
+      .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation {
+      // stylelint-disable-next-line carbon/layout-token-use
+      top: calc(
+        var(--#{$block-class}--title-container-height) +
+          var(--#{$block-class}--subtitle-container-height)
+      );
+    }
     .#{$block-class}__title-text {
       @include carbon--type-style('productive-heading-03');
       @include setCommonTitleStyles();

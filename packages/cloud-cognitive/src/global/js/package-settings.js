@@ -15,7 +15,6 @@ const defaults = {
     APIKeyModal: true,
     CreateModal: true,
     CreateFullPage: true,
-    CreateFullPageSection: true,
     CreateFullPageStep: true,
     CreateSidePanel: true,
     CreateTearsheetNarrow: true,

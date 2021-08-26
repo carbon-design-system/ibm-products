@@ -26,13 +26,15 @@ export const useCreateComponentFocus = (
       const visibleStepInnerContent = document.querySelector(
         `.${componentBlockClass}__step.${componentBlockClass}__step--visible-step`
       );
-      const fullPageSteps = getCreateComponentSteps();
+      const createComponentSteps = getCreateComponentSteps();
       const focusableStepElements =
-        fullPageSteps &&
-        fullPageSteps.length &&
+        createComponentSteps &&
+        createComponentSteps.length &&
         getFocusableElements(visibleStepInnerContent);
       const activeStepComponent =
-        fullPageSteps && fullPageSteps.length && fullPageSteps[currentStep - 1];
+        createComponentSteps &&
+        createComponentSteps.length &&
+        createComponentSteps[currentStep - 1];
       if (activeStepComponent && activeStepComponent.props.onMount) {
         activeStepComponent.props.onMount();
       }

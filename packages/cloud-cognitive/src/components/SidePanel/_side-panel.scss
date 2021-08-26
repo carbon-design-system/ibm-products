@@ -113,12 +113,14 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
   .#{$block-class}__container {
     --#{$block-class}--subtitle-opacity: 1;
     --#{$block-class}--title-container-height: 0;
+    --#{$block-class}--title-text-height: 0;
     --#{$block-class}--subtitle-container-height: 0;
     --#{$block-class}--action-bar-container-height: 0;
     --#{$block-class}--divider-opacity: 0;
     --#{$block-class}--title-y-position: 0;
     --#{$block-class}--content-bottom-padding: #{$spacing-10};
     --#{$block-class}--collapsed-title-y-position: 1rem;
+    --#{$block-class}--label-text-height: 0;
 
     position: fixed;
     z-index: 3;
@@ -188,6 +190,10 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       position: sticky;
       z-index: 4;
       top: 0;
+      height: calc(
+        var(--#{$block-class}--title-container-height) -
+          var(--#{$block-class}--label-text-height)
+      );
       padding: $spacing-05 $spacing-05 $spacing-03 $spacing-05;
       background-color: $ui-01;
       &::before {
@@ -237,8 +243,20 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       // stylelint-disable-next-line carbon/layout-token-use
       transform: translateY(var(--#{$block-class}--title-y-position));
     }
+    .#{$block-class}__label-text {
+      @include carbon--type-style('label-01');
+
+      overflow: hidden;
+      padding-right: $spacing-05;
+      opacity: var(--#{$block-class}--subtitle-opacity);
+      text-overflow: ellipsis;
+      // stylelint-disable-next-line carbon/layout-token-use
+      transform: translateY(var(--#{$block-class}--title-y-position));
+      white-space: nowrap;
+    }
     .#{$block-class}__collapsed-title-text {
       @include carbon--type-style('productive-heading-02');
+      @include carbon--font-weight('regular');
       @include setCommonTitleStyles();
 
       position: absolute;
@@ -262,14 +280,12 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       position: fixed;
       z-index: 2;
       // stylelint-disable-next-line carbon/layout-token-use
-      top: calc(
-        var(--#{$block-class}--title-container-height) + #{$spacing-09}
-      );
+      top: calc(var(--#{$block-class}--title-text-height) + #{$spacing-09});
       background-color: $ui-01;
     }
 
     .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation.#{$block-class}__subtitle-text-is-animating {
-      top: var(--#{$block-class}--title-container-height);
+      top: var(--#{$block-class}--title-text-height);
     }
 
     .#{$block-class}__subtitle-text.#{$block-class}__subtitle-without-title {
@@ -286,7 +302,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
 
       position: fixed;
       top: $spacing-09;
-      height: var(--#{$block-class}--title-container-height);
+      height: var(--#{$block-class}--title-text-height);
     }
 
     .#{$block-class}__inner-content {
@@ -294,7 +310,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       height: calc(100vh - 3rem);
       // stylelint-disable-next-line carbon/layout-token-use
       margin-top: calc(
-        var(--#{$block-class}--title-container-height) +
+        var(--#{$block-class}--title-text-height) +
           var(--#{$block-class}--subtitle-container-height) +
           var(--#{$block-class}--action-bar-container-height)
       );
@@ -305,7 +321,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       height: calc(
         100vh -
           calc(
-            var(--#{$block-class}--title-container-height) +
+            var(--#{$block-class}--title-text-height) +
               var(--#{$block-class}--subtitle-container-height) +
               var(--#{$block-class}--action-bar-container-height)
           ) + (calc(-1 * (#{$spacing-09} + #{$spacing-10})))
@@ -319,7 +335,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       position: fixed;
       // stylelint-disable-next-line carbon/layout-token-use
       top: calc(
-        var(--#{$block-class}--title-container-height) +
+        var(--#{$block-class}--title-text-height) +
           var(--#{$block-class}--subtitle-container-height) + #{$spacing-09}
       );
       width: 100%;
@@ -330,7 +346,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       + .#{$block-class}__body-content {
       // stylelint-disable-next-line carbon/layout-token-use
       margin-top: calc(
-        var(--#{$block-class}--title-container-height) +
+        var(--#{$block-class}--title-text-height) +
           var(--#{$block-class}--subtitle-container-height) + #{$spacing-09}
       );
     }
@@ -338,9 +354,6 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation.#{$block-class}__subtitle-text-no-animation-no-action-toolbar {
       border-bottom: 1px solid $decorative-01;
       margin-bottom: $spacing-05;
-    }
-    .#{$block-class}__label-text {
-      @include carbon--type-style('label-01');
     }
     .#{$block-class}__action-toolbar {
       position: sticky;

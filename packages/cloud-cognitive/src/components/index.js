@@ -17,11 +17,7 @@ export {
 } from './CreateFullPage';
 export { CreateModal } from './CreateModal';
 export { CreateSidePanel } from './CreateSidePanel';
-export {
-  CreateTearsheet,
-  CreateTearsheetStep,
-  CreateTearsheetSection,
-} from './CreateTearsheet';
+export { CreateTearsheet, CreateTearsheetStep } from './CreateTearsheet';
 export { CreateTearsheetNarrow } from './CreateTearsheetNarrow';
 export {
   EmptyState,

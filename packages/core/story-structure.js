@@ -78,6 +78,7 @@ const s = [
           'c/BreadcrumbWithOverflow',
           'c/ButtonMenu',
           'c/ButtonSetWithOverflow',
+          'c/Cascade',
           'c/ComboButton',
           'c/ExampleComponent',
           'c/TearsheetShell',

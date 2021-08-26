@@ -75,34 +75,39 @@ const propHasValue = (props, propName) => {
   return result;
 };
 
-// A simple wrapper for a prop-types checker that issues a warning message if
-// the value being validated is not null/undefined.
-const deprecatePropInner =
-  (message, validator, info) =>
-  (props, propName, comp, loc, propFullName, secret) => {
-    propHasValue(props, propName) &&
-      pconsole.warn(message(loc, propFullName || propName, comp, info));
-    return validator(props, propName, comp, loc, propFullName, secret);
-  };
-
 /**
  * A prop-types type checker that marks a particular usage of a prop as
- * deprecated. This can be used to deprecate an option in a oneOfType checker,
- * and the deprecated option(s) should be listed last so that the deprecation
- * message is only reported if none of the other type options is matched.
- * @param {} validator The prop-types validator for the prop usage as it should
- * be if it weren't deprecated. If this validator produces type checking
- * errors they will be reported as usual.
+ * deprecated. The deprecation message is reported if the deprecated validator
+ * matches the supplied value.
+ * @param {} validator The prop-types validator for the prop usage that is
+ * currently supported. If the deprecated validator does not match the supplied
+ * value and this validator produces type checking errors they will be reported
+ * as usual.
+ * @param {} deprecated The prop-types validator for the prop usage that is
+ * now deprecated. If the deprecated validator matches the supplied value the
+ * deprecation warning message is reported but the value is considered valid.
  * @param {*} additionalInfo One or more sentences to be appended to the
  * deprecation message to explain why the prop usage is deprecated and/or what
  * should be used instead.
  * @returns Any type checking error reported by the validator, or null.
  */
-export const deprecatePropUsage = deprecatePropInner.bind(
-  undefined,
-  (location, propName, componentName, info) =>
-    `The usage of the ${location} \`${propName}\` of \`${componentName}\` has been changed and support for the old usage will soon be removed. ${info}`
-);
+export const deprecatePropUsage =
+  (validator, deprecated, additionalInfo) =>
+  (props, propName, comp, loc, propFullName, secret) => {
+    if (
+      propHasValue(props, propName) &&
+      deprecated(props, propName, comp, loc, propFullName, secret) === null
+    ) {
+      pconsole.warn(
+        `The usage of the ${loc} \`${
+          propFullName || propName
+        }\` of \`${comp}\` has been changed and support for the old usage will soon be removed. ${additionalInfo}`
+      );
+      return null;
+    } else {
+      return validator(props, propName, comp, loc, propFullName, secret);
+    }
+  };
 
 /**
  * A prop-types type checker that marks a prop as deprecated.
@@ -114,11 +119,18 @@ export const deprecatePropUsage = deprecatePropInner.bind(
  * be used instead.
  * @returns Any type checking error reported by the validator, or null.
  */
-export const deprecateProp = deprecatePropInner.bind(
-  undefined,
-  (location, propName, componentName, info) =>
-    `The ${location} \`${propName}\` of \`${componentName}\` has been deprecated and will soon be removed. ${info}`
-);
+export const deprecateProp =
+  (validator, additionalInfo) =>
+  (props, propName, comp, loc, propFullName, secret) => {
+    if (propHasValue(props, propName)) {
+      pconsole.warn(
+        `The ${loc} \`${
+          propFullName || propName
+        }\` of \`${comp}\` has been deprecated and will soon be removed. ${additionalInfo}`
+      );
+    }
+    return validator(props, propName, comp, loc, propFullName, secret);
+  };
 
 /**
  * A function that returns a storybook argTypes object configured to remove deprecated

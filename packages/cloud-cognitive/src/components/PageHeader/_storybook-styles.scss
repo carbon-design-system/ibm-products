@@ -51,11 +51,21 @@ $story-class: 'page-header-stories';
 .#{$story-class}__app {
   position: relative;
   display: flex;
+  // min and max height needed to prevent scroll off screen (verify on in context page)
   min-height: 100vh;
+  max-height: 100vh;
   flex-direction: column;
+}
+
+.#{$story-class}__app--whole-page-scroll {
+  overflow: hidden;
 }
 
 .#{$story-class}__content-container {
   height: 100%;
   padding: 0;
+}
+
+.#{$story-class}__app--whole-page-scroll .#{$story-class}__content-container {
+  overflow-y: auto;
 }

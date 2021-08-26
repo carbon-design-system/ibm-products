@@ -32,7 +32,7 @@ import {
   useCreateComponentFocus,
   useCreateComponentStepChange,
 } from '../../global/js/hooks';
-import { hasValidChildType } from '../../global/js/utils/hasValidChildType';
+import { hasValidChildrenType } from '../../global/js/utils/hasValidType';
 
 const blockClass = `${pkg.prefix}--create-full-page`;
 const componentName = 'CreateFullPage';
@@ -413,7 +413,7 @@ CreateFullPage.propTypes = {
   /**
    * The main content of the full page
    */
-  children: hasValidChildType({
+  children: hasValidChildrenType({
     componentName,
     childType: CREATE_FULL_PAGE_STEP,
   }),

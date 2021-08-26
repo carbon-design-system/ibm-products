@@ -45,6 +45,7 @@ const defaults = {
     UserProfileImage: true,
 
     // other public components not yet reviewed and released:
+    Cascade: false,
     CreateTearsheet: false,
     CreateTearsheetStep: false,
     CreateTearsheetSection: false,

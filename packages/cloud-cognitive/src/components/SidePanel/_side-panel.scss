@@ -202,6 +202,16 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       &.#{$block-class}__on-detail-step .#{$block-class}__collapsed-title-text {
         top: $spacing-09;
       }
+      &.#{$block-class}__title-container-without-title {
+        padding: 0;
+      }
+      &.#{$block-class}__title-container-without-title.#{$block-class}__on-detail-step-without-title {
+        height: calc(#{$spacing-08} + #{$spacing-02});
+        padding: $spacing-05 $spacing-05 $spacing-03 $spacing-05;
+      }
+      &.#{$block-class}__title-container-without-title::before {
+        background-color: transparent;
+      }
     }
     &.#{$block-class}__container-is-animating {
       pointer-events: none;
@@ -276,6 +286,11 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
 
     .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation.#{$block-class}__subtitle-text-is-animating {
       top: var(--#{$block-class}--title-text-height);
+    }
+
+    .#{$block-class}__subtitle-text.#{$block-class}__subtitle-without-title {
+      padding-top: $spacing-05;
+      padding-right: $spacing-07;
     }
 
     .#{$block-class}__title-container.#{$block-class}__title-container--no-animation.#{$block-class}__title-container-is-animating {
@@ -383,10 +398,11 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       position: absolute;
       z-index: 5;
       top: $spacing-03;
-      right: $spacing-03;
+      right: $spacing-05;
       display: flex;
       align-items: center;
       justify-content: center;
+      background-color: $ui-01;
     }
     .#{$carbon-prefix}--btn.#{$block-class}__close-button
       .#{$carbon-prefix}--btn__icon {

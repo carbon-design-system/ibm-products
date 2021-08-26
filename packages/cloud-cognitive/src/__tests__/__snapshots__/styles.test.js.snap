@@ -682,6 +682,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   top: var(--cds-spacing-09, 3rem);
 }
 
+.exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container-without-title {
+  padding: 0;
+}
+
+.exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container-without-title.exp--side-panel__on-detail-step-without-title {
+  height: calc(var(--cds-spacing-08, 2.5rem) + var(--cds-spacing-02, 0.25rem));
+  padding: var(--cds-spacing-05, 1rem) var(--cds-spacing-05, 1rem) var(--cds-spacing-03, 0.5rem) var(--cds-spacing-05, 1rem);
+}
+
+.exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container-without-title::before {
+  background-color: transparent;
+}
+
 .exp--side-panel__container.exp--side-panel__container-is-animating {
   pointer-events: none;
 }
@@ -768,6 +781,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .exp--side-panel__container .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation.exp--side-panel__subtitle-text-is-animating {
   top: var(--exp--side-panel--title-text-height);
+}
+
+.exp--side-panel__container .exp--side-panel__subtitle-text.exp--side-panel__subtitle-without-title {
+  padding-top: var(--cds-spacing-05, 1rem);
+  padding-right: var(--cds-spacing-07, 2rem);
 }
 
 .exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container--no-animation.exp--side-panel__title-container-is-animating {
@@ -862,10 +880,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   position: absolute;
   z-index: 5;
   top: var(--cds-spacing-03, 0.5rem);
-  right: var(--cds-spacing-03, 0.5rem);
+  right: var(--cds-spacing-05, 1rem);
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: var(--cds-ui-01, #f4f4f4);
 }
 
 .exp--side-panel__container .bx--btn.exp--side-panel__close-button

@@ -162,11 +162,16 @@ export let SidePanel = React.forwardRef(
         const scrollSectionHeight = document.querySelector(
           `.${blockClass}__body-content`
         )?.offsetHeight;
-        const titleHeight = document.querySelector(
+        const titleContainerHeight = document.querySelector(
           `.${blockClass}__title-container`
         )?.offsetHeight;
+        const labelTextHeight = document.querySelector(
+          `.${blockClass}__label-text`
+        )?.offsetHeight;
         const totalScrollingContentHeight =
-          titleHeight + sidePanelSubtitleElementHeight + scrollSectionHeight;
+          titleContainerHeight +
+          sidePanelSubtitleElementHeight +
+          scrollSectionHeight;
         // if the difference between the total scrolling height and the panel height is less than
         // the subtitleElement height OR if the subtitle element height is 0, use that difference
         // as the length of the scroll animation (otherwise the animation will not be able to complete
@@ -219,10 +224,12 @@ export let SidePanel = React.forwardRef(
               // We need to know the height of the title element
               // so that we know how far to place the action toolbar
               // from the top since it is sticky
-              const titleHeight = Math.max(sidePanelTitleElement.offsetHeight);
+              const titleTextHeight = Math.max(
+                sidePanelTitleElement.offsetHeight
+              );
               sidePanelOuter.style.setProperty(
                 `--${blockClass}--title-height`,
-                `${titleHeight + 16}px`
+                `${titleTextHeight + 16}px`
               );
 
               // Set title y positioning
@@ -256,6 +263,21 @@ export let SidePanel = React.forwardRef(
                 `--${blockClass}--collapsed-title-y-position`,
                 `${collapsedTitleYPosition}rem`
               );
+
+              // Set label text height
+              const scrollAnimationProgress = dividerOpacity;
+              const reduceTitleContainerHeightAmount =
+                ((labelTextHeight * scrollAnimationProgress) /
+                  titleContainerHeight) *
+                100;
+              sidePanelOuter.style.setProperty(
+                `--${blockClass}--label-text-height`,
+                `${Math.trunc(reduceTitleContainerHeightAmount)}px`
+              );
+              sidePanelOuter.style.setProperty(
+                `--${blockClass}--title-container-height`,
+                `${titleContainerHeight}px`
+              );
             } else {
               sidePanelTitleElement.setAttribute('aria-hidden', 'false');
               sidePanelCollapsedTitleElement.setAttribute(
@@ -281,6 +303,10 @@ export let SidePanel = React.forwardRef(
                 `--${blockClass}--collapsed-title-y-position`,
                 `1rem`
               );
+              sidePanelOuter.style.setProperty(
+                `--${blockClass}--label-text-height`,
+                `0px`
+              );
             }
           });
       }
@@ -301,7 +327,7 @@ export let SidePanel = React.forwardRef(
           actionToolbarElement?.offsetHeight || 0;
         const titleHeight = sidePanelTitleElement?.offsetHeight + 24;
         sidePanelOuter?.style.setProperty(
-          `--${blockClass}--title-container-height`,
+          `--${blockClass}--title-text-height`,
           `${titleHeight}px`
         );
         sidePanelOuter?.style.setProperty(

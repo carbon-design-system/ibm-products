@@ -400,6 +400,7 @@ export const SlideIn = prepareStory(SlideInTemplate, {
     selectorPageContent: '#cloud-and-cognitive-page-content',
     actions: 0,
     ...defaultStoryProps,
+    labelText: 'Incident management',
   },
 });
 

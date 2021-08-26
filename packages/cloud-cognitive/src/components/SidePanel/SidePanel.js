@@ -12,6 +12,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { useResizeDetector } from 'react-resize-detector';
+import { moderate02 } from '@carbon/motion';
 import wrapFocus from '../../global/js/utils/wrapFocus';
 import { pkg } from '../../settings';
 import { allPropTypes } from '../../global/js/utils/props-helper';
@@ -341,7 +342,7 @@ export let SidePanel = React.forwardRef(
       }
     }, [open]);
 
-    // initialize the side panel to close
+    // initializes the side panel to close
     const onAnimationEnd = () => {
       if (!open) {
         onUnmount && onUnmount();
@@ -350,9 +351,13 @@ export let SidePanel = React.forwardRef(
       setAnimationComplete(true);
     };
 
-    // initializes the side panel to open and prevents the side panel from being scrolled during animation
-    const onAnimationStart = () => {
-      setAnimationComplete(false);
+    // initializes the side panel to open
+    const onAnimationStart = (event) => {
+      event.persist();
+      const isPanelTarget = event.target.id === `${blockClass}-outer`;
+      if (isPanelTarget) {
+        setAnimationComplete(false);
+      }
     };
 
     // used to reset margins of the slide in panel when closed/closing
@@ -377,11 +382,11 @@ export let SidePanel = React.forwardRef(
         );
         if (placement && placement === 'right' && pageContentElement) {
           pageContentElement.style.marginRight = 0;
-          pageContentElement.style.transition = 'margin-right 250ms';
+          pageContentElement.style.transition = `margin-right ${moderate02}`;
           pageContentElement.style.marginRight = SIDE_PANEL_SIZES[size];
         } else if (pageContentElement) {
           pageContentElement.style.marginLeft = 0;
-          pageContentElement.style.transition = 'margin-left 250ms';
+          pageContentElement.style.transition = `margin-left ${moderate02}`;
           pageContentElement.style.marginLeft = SIDE_PANEL_SIZES[size];
         }
       }
@@ -447,6 +452,7 @@ export let SidePanel = React.forwardRef(
           actionToolbarButtons && actionToolbarButtons.length,
         [`${blockClass}__container-without-overlay`]:
           !includeOverlay && !slideIn,
+        [`${blockClass}__container-is-animating`]: !animationComplete,
       },
     ]);
 
@@ -583,15 +589,15 @@ export let SidePanel = React.forwardRef(
               animation: `${
                 open
                   ? placement === 'right'
-                    ? 'sidePanelEntranceRight 250ms'
-                    : 'sidePanelEntranceLeft 250ms'
+                    ? `sidePanelEntranceRight ${moderate02}`
+                    : `sidePanelEntranceLeft ${moderate02}`
                   : placement === 'right'
-                  ? 'sidePanelExitRight 250ms'
-                  : 'sidePanelExitLeft 250ms'
+                  ? `sidePanelExitRight ${moderate02}`
+                  : `sidePanelExitLeft ${moderate02}`
               }`,
             }}
             onAnimationEnd={onAnimationEnd}
-            onAnimationStart={onAnimationStart}
+            onAnimationStart={(event) => onAnimationStart(event)}
             onBlur={handleBlur}
             ref={contentRef}
             role="complementary"
@@ -632,8 +638,8 @@ export let SidePanel = React.forwardRef(
               style={{
                 animation: `${
                   open
-                    ? 'sidePanelOverlayEntrance 250ms'
-                    : 'sidePanelOverlayExit 250ms'
+                    ? `sidePanelOverlayEntrance ${moderate02}`
+                    : `sidePanelOverlayExit ${moderate02}`
                 }`,
               }}
             />

@@ -7,25 +7,27 @@
 
 import cx from 'classnames';
 import { Button } from 'carbon-components-react';
-import { bool } from 'prop-types';
+import { bool, string } from 'prop-types';
 import React, { forwardRef } from 'react';
 
 import { pkg } from '../../settings';
 import { blockClass } from './Toolbar';
 
 /** Toolbar buttons are common functions performed as part of a products interface or an open window.  */
-export let ToolbarButton = forwardRef(({ active, ...props }, ref) => {
-  return (
-    <Button
-      {...props}
-      ref={ref}
-      className={cx({ [`${blockClass}__button--active`]: active })}
-      kind="ghost"
-      size="md"
-      hasIconOnly
-    />
-  );
-});
+export let ToolbarButton = forwardRef(
+  ({ active, className, ...props }, ref) => {
+    return (
+      <Button
+        {...props}
+        ref={ref}
+        className={cx(className, { [`${blockClass}__button--active`]: active })}
+        kind="ghost"
+        size="md"
+        hasIconOnly
+      />
+    );
+  }
+);
 
 const componentName = 'ToolbarButton';
 ToolbarButton.displayName = componentName;
@@ -33,6 +35,9 @@ ToolbarButton.displayName = componentName;
 ToolbarButton.propTypes = {
   /** Determines whether the `ToolbarButton` is active */
   active: bool,
+
+  /** Provide an optional class to be applied to the containing node */
+  className: string,
 };
 
 ToolbarButton.defaultProps = {

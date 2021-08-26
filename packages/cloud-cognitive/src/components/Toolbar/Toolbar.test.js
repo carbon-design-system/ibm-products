@@ -9,51 +9,78 @@ import { render as r, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
 import { Toolbar, ToolbarButton, ToolbarGroup } from '../..';
+import { blockClass, componentName } from './Toolbar';
+
 const { getByTestId } = screen;
 
-function test(T) {
-  const { displayName } = T;
+const dataTestId = 'dataTestId';
 
-  describe(displayName, () => {
-    const dataTestId = 'dataTestId';
+function _render(props) {
+  const Component = this;
 
-    function render(props) {
-      return r(
-        <T data-testid={dataTestId} {...props}>
-          {displayName}
-        </T>
-      );
-    }
+  return r(
+    <Component data-testid={dataTestId} {...props}>
+      {Component.displayName}
+    </Component>
+  );
+}
 
-    it('has no accessibility violations', async () => {
-      const { container } = render();
+function test(Component) {
+  const render = _render.bind(Component);
 
-      await expect(container).toBeAccessible(displayName);
-      await expect(container).toHaveNoAxeViolations();
-    });
+  it('has no accessibility violations', async () => {
+    const { container } = render();
 
-    it('adds a class to the containing node', () => {
-      const className = 'class-name';
-      render({ className });
+    await expect(container).toBeAccessible(Component.displayName);
+    await expect(container).toHaveNoAxeViolations();
+  });
 
-      expect(getByTestId(dataTestId)).toHaveClass(className);
-    });
+  it('adds a class to the containing node', () => {
+    const className = 'class-name';
+    render({ className });
 
-    it('adds additional props to the containing node', () => {
-      render();
+    expect(getByTestId(dataTestId)).toHaveClass(className);
+  });
 
-      getByTestId(dataTestId);
-    });
+  it('adds additional props to the containing node', () => {
+    render();
 
-    it('forwards a reference to the appropriate DOM node', () => {
-      const ref = createRef();
-      render({ ref });
+    getByTestId(dataTestId);
+  });
 
-      expect(getByTestId(dataTestId)).toEqual(ref.current);
-    });
+  it('forwards a reference to the appropriate DOM node', () => {
+    const ref = createRef();
+    render({ ref });
+
+    expect(getByTestId(dataTestId)).toEqual(ref.current);
   });
 }
 
-test(Toolbar);
-test(ToolbarButton);
-test(ToolbarGroup);
+describe(componentName, () => {
+  test(Toolbar);
+
+  it('renders the vertical variant', () => {
+    _render.bind(Toolbar)({ vertical: true });
+
+    const toolbar = getByTestId(dataTestId);
+
+    expect(toolbar).toHaveAttribute('aria-orientation', 'vertical');
+    expect(toolbar).toHaveClass(`${blockClass}--vertical`);
+  });
+});
+
+describe(ToolbarButton.displayName, () => {
+  test(ToolbarButton);
+
+  it('renders the active variant', () => {
+    _render.bind(ToolbarButton)({ active: true });
+
+    expect(getByTestId(dataTestId)).toHaveClass(
+      `${blockClass}__button--active`
+    );
+  });
+});
+
+describe(ToolbarGroup.displayName, () => {
+  test(ToolbarGroup);
+});

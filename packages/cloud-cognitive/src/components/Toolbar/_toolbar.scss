@@ -39,4 +39,8 @@
   .#{$block-class}__group:last-of-type {
     border-right-width: 0;
   }
+
+  .#{$block-class}__button--active {
+    background-color: $active-ui;
+  }
 }

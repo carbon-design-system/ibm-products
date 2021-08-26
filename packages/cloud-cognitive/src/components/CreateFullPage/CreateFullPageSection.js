@@ -12,7 +12,6 @@ import { pkg } from '../../settings';
 
 import { CREATE_FULL_PAGE_SECTION } from './constants';
 
-const componentName = 'CreateFullPageSection';
 const blockClass = `${pkg.prefix}--create-full-page__section`;
 
 export let CreateFullPageSection = forwardRef(
@@ -25,12 +24,6 @@ export let CreateFullPageSection = forwardRef(
       </div>
     );
   }
-);
-
-// Return a placeholder if not released and not enabled by feature flag
-CreateFullPageSection = pkg.checkComponentEnabled(
-  CreateFullPageSection,
-  componentName
 );
 
 CreateFullPageSection.propTypes = {

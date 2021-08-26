@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.77.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.77.0...@carbon/ibm-cloud-cognitive@0.77.1) (2021-08-26)
+
+
+### Bug Fixes
+
+* **SidePanel:** fix animating state of panel ([#1193](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1193)) ([5a98abc](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/5a98abc93e06b021ea4851c19afc4bbb50a7660f))
+
+
+
+
+
+# [0.77.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.76.1...@carbon/ibm-cloud-cognitive@0.77.0) (2021-08-25)
+
+
+### Features
+
+* cascade component ([#1171](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1171)) ([76b8b6f](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/76b8b6f1b375e093e721ba415b53e97ec3ca2262))
+
+
+
+
+
+## [0.76.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.76.0...@carbon/ibm-cloud-cognitive@0.76.1) (2021-08-25)
+
+
+### Bug Fixes
+
+* better warnings when deprecated-usage props have invalid values ([#1198](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1198)) ([6ec8777](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6ec8777b66b4f45d47ed1060051b8bf9ec8692d8))
+
+
+
+
+
 # [0.76.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.75.1...@carbon/ibm-cloud-cognitive@0.76.0) (2021-08-25)
 
 

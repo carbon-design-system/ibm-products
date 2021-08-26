@@ -7,6 +7,7 @@
 
 export { AboutModal } from './AboutModal';
 export { APIKeyModal } from './APIKeyModal';
+export { Cascade } from './Cascade';
 export { ComboButton, ComboButtonItem } from './ComboButton';
 export { ContextHeader } from './ContextHeader';
 export {

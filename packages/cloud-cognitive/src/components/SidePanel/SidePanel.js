@@ -77,7 +77,10 @@ export let SidePanel = React.forwardRef(
     useEffect(() => {
       const panelRef = ref || sidePanelRef;
       if (panelRef && panelRef.current) {
-        panelRef.current.scrollTop = 0;
+        const scrollableSection = panelRef.current.querySelector(
+          `.${blockClass}__inner-content`
+        );
+        scrollableSection.scrollTop = 0;
       }
     }, [currentStep, ref]);
 
@@ -118,6 +121,16 @@ export let SidePanel = React.forwardRef(
       }
     }, [actions, condensedActions, open, animationComplete]);
 
+    // Add console warning if labelText is provided without a title.
+    // This combination is not allowed.
+    useEffect(() => {
+      if (!title && labelText) {
+        console.warn(
+          `${componentName}: The prop \`labelText\` was provided without a \`title\`. It is required to have a \`title\` when using the \`labelText\` prop.`
+        );
+      }
+    }, [labelText, title]);
+
     /* istanbul ignore next */
     const handleResize = (width, height) => {
       setPanelHeight(height);
@@ -141,7 +154,7 @@ export let SidePanel = React.forwardRef(
 
     // Title and subtitle scroll animation
     useEffect(() => {
-      if (open && animateTitle && animationComplete) {
+      if (open && animateTitle && animationComplete && title && title.length) {
         const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
         const sidePanelScrollArea = document.querySelector(
           `#${blockClass}-outer .${blockClass}__inner-content`
@@ -339,7 +352,14 @@ export let SidePanel = React.forwardRef(
           `${sidePanelActionBarElementHeight}px`
         );
       }
-    }, [open, animateTitle, animationComplete, shouldRender, panelHeight]);
+    }, [
+      open,
+      animateTitle,
+      animationComplete,
+      shouldRender,
+      panelHeight,
+      title,
+    ]);
 
     // click outside functionality if `includeOverlay` prop is set
     useEffect(() => {
@@ -487,9 +507,12 @@ export let SidePanel = React.forwardRef(
         <div
           className={cx(`${blockClass}__title-container`, {
             [`${blockClass}__on-detail-step`]: currentStep > 0,
+            [`${blockClass}__on-detail-step-without-title`]:
+              currentStep > 0 && !title,
             [`${blockClass}__title-container--no-animation`]: !animateTitle,
             [`${blockClass}__title-container-is-animating`]:
               !animationComplete && animateTitle,
+            [`${blockClass}__title-container-without-title`]: !title,
           })}>
           {currentStep > 0 && (
             <Button
@@ -503,21 +526,21 @@ export let SidePanel = React.forwardRef(
               onClick={onNavigationBack}
             />
           )}
-          {labelText && labelText.length && (
+          {title && title.length && labelText && labelText.length && (
             <p className={`${blockClass}__label-text`}>{labelText}</p>
           )}
-          {renderTitle()}
-          <Button
-            aria-label={closeIconDescription}
-            kind="ghost"
-            size="small"
-            renderIcon={Close20}
-            iconDescription={closeIconDescription}
-            className={`${blockClass}__close-button`}
-            onClick={onRequestClose}
-            ref={sidePanelCloseRef}
-          />
+          {title && title.length && renderTitle()}
         </div>
+        <Button
+          aria-label={closeIconDescription}
+          kind="ghost"
+          size="small"
+          renderIcon={Close20}
+          iconDescription={closeIconDescription}
+          className={`${blockClass}__close-button`}
+          onClick={onRequestClose}
+          ref={sidePanelCloseRef}
+        />
         {subtitle && subtitle.length && (
           <p
             className={cx(`${blockClass}__subtitle-text`, {
@@ -527,6 +550,7 @@ export let SidePanel = React.forwardRef(
                 (!actionToolbarButtons || !actionToolbarButtons.length),
               [`${blockClass}__subtitle-text-is-animating`]:
                 !animationComplete && animateTitle,
+              [`${blockClass}__subtitle-without-title`]: !title,
             })}>
             {subtitle}
           </p>
@@ -768,7 +792,7 @@ SidePanel.propTypes = {
   /**
    * Sets the close button icon description
    */
-  closeIconDescription: PropTypes.string,
+  closeIconDescription: PropTypes.string.isRequired,
 
   /**
    * Determines whether the side panel should render the condensed version (affects action buttons primarily)
@@ -854,7 +878,7 @@ SidePanel.propTypes = {
   /**
    * Sets the title text
    */
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   ...deprecatedProps,
 };
 

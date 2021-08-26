@@ -712,12 +712,14 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--side-panel__container {
   --exp--side-panel--subtitle-opacity: 1;
   --exp--side-panel--title-container-height: 0;
+  --exp--side-panel--title-text-height: 0;
   --exp--side-panel--subtitle-container-height: 0;
   --exp--side-panel--action-bar-container-height: 0;
   --exp--side-panel--divider-opacity: 0;
   --exp--side-panel--title-y-position: 0;
   --exp--side-panel--content-bottom-padding: var(--cds-spacing-10, 4rem);
   --exp--side-panel--collapsed-title-y-position: 1rem;
+  --exp--side-panel--label-text-height: 0;
   position: fixed;
   z-index: 3;
   top: var(--cds-spacing-09, 3rem);
@@ -924,6 +926,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   position: sticky;
   z-index: 4;
   top: 0;
+  height: calc( var(--exp--side-panel--title-container-height) - var(--exp--side-panel--label-text-height));
   padding: var(--cds-spacing-05, 1rem) var(--cds-spacing-05, 1rem) var(--cds-spacing-03, 0.5rem) var(--cds-spacing-05, 1rem);
   background-color: var(--cds-ui-01, #f4f4f4);
 }
@@ -976,11 +979,25 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   transform: translateY(var(--exp--side-panel--title-y-position));
 }
 
+.exp--side-panel__container .exp--side-panel__label-text {
+  font-size: var(--cds-label-01-font-size, 0.75rem);
+  font-weight: var(--cds-label-01-font-weight, 400);
+  line-height: var(--cds-label-01-line-height, 1.34);
+  letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
+  overflow: hidden;
+  padding-right: var(--cds-spacing-05, 1rem);
+  opacity: var(--exp--side-panel--subtitle-opacity);
+  text-overflow: ellipsis;
+  transform: translateY(var(--exp--side-panel--title-y-position));
+  white-space: nowrap;
+}
+
 .exp--side-panel__container .exp--side-panel__collapsed-title-text {
   font-size: var(--cds-productive-heading-02-font-size, 1rem);
   font-weight: var(--cds-productive-heading-02-font-weight, 600);
   line-height: var(--cds-productive-heading-02-line-height, 1.375);
   letter-spacing: var(--cds-productive-heading-02-letter-spacing, 0);
+  font-weight: 400;
   display: -webkit-box;
   overflow: hidden;
   padding-right: var(--cds-spacing-07, 2rem);
@@ -1009,12 +1026,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   max-width: 30rem;
   position: fixed;
   z-index: 2;
-  top: calc( var(--exp--side-panel--title-container-height) + var(--cds-spacing-09, 3rem));
+  top: calc(var(--exp--side-panel--title-text-height) + var(--cds-spacing-09, 3rem));
   background-color: var(--cds-ui-01, #f4f4f4);
 }
 
 .exp--side-panel__container .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation.exp--side-panel__subtitle-text-is-animating {
-  top: var(--exp--side-panel--title-container-height);
+  top: var(--exp--side-panel--title-text-height);
 }
 
 .exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container--no-animation.exp--side-panel__title-container-is-animating {
@@ -1026,18 +1043,18 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   max-width: 30rem;
   position: fixed;
   top: var(--cds-spacing-09, 3rem);
-  height: var(--exp--side-panel--title-container-height);
+  height: var(--exp--side-panel--title-text-height);
 }
 
 .exp--side-panel__container .exp--side-panel__inner-content {
   overflow: auto;
   height: calc(100vh - 3rem);
-  margin-top: calc( var(--exp--side-panel--title-container-height) + var(--exp--side-panel--subtitle-container-height) + var(--exp--side-panel--action-bar-container-height));
+  margin-top: calc( var(--exp--side-panel--title-text-height) + var(--exp--side-panel--subtitle-container-height) + var(--exp--side-panel--action-bar-container-height));
   overflow-x: hidden;
 }
 
 .exp--side-panel__container .exp--side-panel__inner-content.exp--side-panel__static-inner-content {
-  height: calc( 100vh - calc( var(--exp--side-panel--title-container-height) + var(--exp--side-panel--subtitle-container-height) + var(--exp--side-panel--action-bar-container-height) ) + (calc(-1 * (var(--cds-spacing-09, 3rem) + var(--cds-spacing-10, 4rem)))));
+  height: calc( 100vh - calc( var(--exp--side-panel--title-text-height) + var(--exp--side-panel--subtitle-container-height) + var(--exp--side-panel--action-bar-container-height) ) + (calc(-1 * (var(--cds-spacing-09, 3rem) + var(--cds-spacing-10, 4rem)))));
   padding-top: var(--cds-spacing-05, 1rem);
 }
 
@@ -1045,26 +1062,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   min-width: 30rem;
   max-width: 30rem;
   position: fixed;
-  top: calc( var(--exp--side-panel--title-container-height) + var(--exp--side-panel--subtitle-container-height) + var(--cds-spacing-09, 3rem));
+  top: calc( var(--exp--side-panel--title-text-height) + var(--exp--side-panel--subtitle-container-height) + var(--cds-spacing-09, 3rem));
   width: 100%;
   border-bottom: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
 
 .exp--side-panel__container .exp--side-panel__action-toolbar.exp--side-panel__action-toolbar-no-animation
 + .exp--side-panel__body-content {
-  margin-top: calc( var(--exp--side-panel--title-container-height) + var(--exp--side-panel--subtitle-container-height) + var(--cds-spacing-09, 3rem));
+  margin-top: calc( var(--exp--side-panel--title-text-height) + var(--exp--side-panel--subtitle-container-height) + var(--cds-spacing-09, 3rem));
 }
 
 .exp--side-panel__container .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation.exp--side-panel__subtitle-text-no-animation-no-action-toolbar {
   border-bottom: 1px solid var(--cds-decorative-01, #e0e0e0);
   margin-bottom: var(--cds-spacing-05, 1rem);
-}
-
-.exp--side-panel__container .exp--side-panel__label-text {
-  font-size: var(--cds-label-01-font-size, 0.75rem);
-  font-weight: var(--cds-label-01-font-weight, 400);
-  line-height: var(--cds-label-01-line-height, 1.34);
-  letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
 }
 
 .exp--side-panel__container .exp--side-panel__action-toolbar {

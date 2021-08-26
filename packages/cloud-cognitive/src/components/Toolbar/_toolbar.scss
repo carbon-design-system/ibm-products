@@ -5,16 +5,21 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '../../global/styles/project-settings';
-
 @import 'carbon-components/scss/components/button/button';
+
+@import '../../global/styles/project-settings';
 
 @include exports($name: cloud-cognitive--toolbar) {
   $block-class: #{$pkg-prefix}--toolbar;
+
   $border: carbon--rem(
       $px: 1px,
     )
     solid $ui-03;
+
+  $dimensions: carbon--rem(
+    $px: 40px,
+  );
 
   .#{$block-class} {
     @include carbon--breakpoint($name: lg) {
@@ -22,21 +27,33 @@
     }
 
     display: flex;
-    min-height: carbon--rem($px: 40px);
-    border-bottom: $border;
+    min-width: $dimensions;
+    min-height: $dimensions;
     background-color: $ui-01;
   }
 
-  .#{$block-class} .#{$prefix}--dropdown {
-    border-bottom-width: 0;
+  .#{$block-class}--vertical,
+  .#{$block-class}--vertical > .#{$block-class}__group {
+    flex-wrap: wrap;
+  }
+
+  .#{$block-class}--vertical {
+    max-width: $dimensions;
   }
 
   .#{$block-class}__group {
     display: flex;
     border-right: $border;
+    border-bottom: $border;
   }
 
+  .#{$block-class}--vertical > .#{$block-class}__group,
   .#{$block-class}__group:last-of-type {
     border-right-width: 0;
+  }
+
+  .#{$block-class}--vertical > .#{$block-class}__group:last-of-type,
+  .#{$block-class} .#{$prefix}--dropdown {
+    border-bottom-width: 0;
   }
 }

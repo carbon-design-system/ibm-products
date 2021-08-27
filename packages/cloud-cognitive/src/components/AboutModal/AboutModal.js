@@ -12,8 +12,10 @@ import { useResizeDetector } from 'react-resize-detector';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
 // Carbon and package components we use.
 import {
@@ -96,7 +98,7 @@ export let AboutModal = React.forwardRef(
               additionalInfo && additionalInfo.length > 1,
           }
         )}
-        {...{ onClose, open, ref }}>
+        {...{ onClose, open, ref, ...getDevtoolsProps(componentName) }}>
         <div className={`${blockClass}__logo`}>{logo}</div>
         <ModalHeader
           className={`${blockClass}__header`}
@@ -161,8 +163,6 @@ export let AboutModal = React.forwardRef(
 
 // Return a placeholder if not released and not enabled by feature flag
 AboutModal = pkg.checkComponentEnabled(AboutModal, componentName);
-
-// The display name of the component, used by React.
 AboutModal.displayName = componentName;
 
 // The types and DocGen commentary for the component props,

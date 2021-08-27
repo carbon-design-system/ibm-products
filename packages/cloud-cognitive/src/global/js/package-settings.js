@@ -49,7 +49,6 @@ const defaults = {
     Cascade: false,
     CreateTearsheet: false,
     CreateTearsheetStep: false,
-    CreateTearsheetSection: false,
     ContextHeader: false,
     ExampleComponent: false,
     LoadingBar: false,

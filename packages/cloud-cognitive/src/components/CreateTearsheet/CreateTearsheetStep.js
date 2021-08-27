@@ -23,8 +23,8 @@ export let CreateTearsheetStep = forwardRef(
       subtitle,
       description,
       title,
-      hasForm,
-      formLegendText,
+      hasFieldset,
+      fieldsetLegendText,
       isViewingAllStepsTogether,
     },
     ref
@@ -40,9 +40,9 @@ export let CreateTearsheetStep = forwardRef(
         {!isViewingAllStepsTogether && description && (
           <p className={`${blockClass}--description`}>{description}</p>
         )}
-        {hasForm ? (
+        {hasFieldset ? (
           <FormGroup
-            legendText={formLegendText}
+            legendText={fieldsetLegendText}
             className={`${blockClass}--fieldset`}>
             {children}
           </FormGroup>
@@ -83,11 +83,11 @@ CreateTearsheetStep.propTypes = {
 
   /**
    * This is the required legend text that appears above a fieldset html element for accessibility purposes.
-   * You can set the `hasForm` prop to false if you have multiple fieldset elements or want to control the children of your Full Page's step content.
+   * You can set the `hasFieldset` prop to false if you have multiple fieldset elements or want to control the children of your Full Page's step content.
    * Otherwise, use CSS to hide/remove this label text.
    */
-  formLegendText: PropTypes.string.isRequired.if(
-    ({ hasForm }) => hasForm === true
+  fieldsetLegendText: PropTypes.string.isRequired.if(
+    ({ hasFieldset }) => hasFieldset === true
   ),
 
   /**
@@ -95,9 +95,10 @@ CreateTearsheetStep.propTypes = {
    * and is defaulted to true.
    * You can set this prop to `false` if you have multiple fieldset elements or want to control the children of your Full Page's step content.
    */
-  hasForm: PropTypes.bool,
+  hasFieldset: PropTypes.bool,
 
   /**
+   * @ignore
    * The is an internal prop set in CreateTearsheet so the step knows when to render it's title
    */
   isViewingAllStepsTogether: PropTypes.bool,
@@ -137,5 +138,5 @@ CreateTearsheetStep.propTypes = {
 // component needs to make a choice or assumption when a prop is not supplied.
 CreateTearsheetStep.defaultProps = {
   type: CREATE_TEARSHEET_STEP,
-  hasForm: true,
+  hasFieldset: true,
 };

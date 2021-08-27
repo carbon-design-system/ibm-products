@@ -99,7 +99,7 @@ export const MultiStepTearsheet = ({
             });
           }}
           title="Topic name"
-          formLegendText="Topic information"
+          fieldsetLegendText="Topic information"
           disableSubmit={!stepOneTextInputValue}
           subtitle="This is the unique name used to recognize your topic"
           description="It will also be used by your producers and consumers as part of the
@@ -161,7 +161,7 @@ export const MultiStepTearsheet = ({
           description="Partitions are distributed across the brokers in order to increase
           the scalability of your topic. You can also use them to distribute
           messages across the members of a consumer group."
-          formLegendText="Partition information">
+          fieldsetLegendText="Partition information">
           <NumberInput
             id="carbon-number"
             min={1}
@@ -182,7 +182,7 @@ export const MultiStepTearsheet = ({
           subtitle="This is how long messages are retained before they are deleted."
           description="If your messages are not read by a consumer within this time, they
           will be missed."
-          formLegendText="Message retention scheduling">
+          fieldsetLegendText="Message retention scheduling">
           <RadioButtonGroup
             legendText="Message retention"
             name="radio-button-group"

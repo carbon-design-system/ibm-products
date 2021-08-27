@@ -2,7 +2,7 @@ name: Update packages
 
 on:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   release:
@@ -57,11 +57,10 @@ jobs:
       - name: Post reminder to Slack
         id: post-reminder
         uses: archive/github-actions-slack@v2.0.0
-        id: notify
         with:
           slack-bot-user-oauth-access-token: ${{ secrets.CREATE_PR_SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
           slack-channel: G01PUCL3V8R
-          slack-text: Hello! This is a test post. "PR number: ${{ steps.create-pr.outputs.pull-request-number }}" 🤓
+          slack-text: Hello! This is a test post. PR number: ${{ steps.create-pr.outputs.pull-request-number }} 🤓
 
       - name: Result from "Post reminder to Slack"
         run: |

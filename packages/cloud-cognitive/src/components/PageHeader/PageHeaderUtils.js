@@ -6,17 +6,21 @@
  */
 
 import { pkg } from '../../settings';
+import { scrollableAncestor } from '../../global/js/utils/scrollableAncestor';
+
 export const blockClass = `${pkg.prefix}--page-header`;
 
 /**
  * Assesses the vertical height of various elements and calls setMetrics with update
  * @param {{}} headerRef
+ * @param {{}} offsetTopMeasuringRef
  * @param {{}} navigation
  * @param {boolean} disableBreadcrumbScroll
  * @param {()} setMetrics
  */
 export const utilCheckUpdateVerticalSpace = (
   headerRef,
+  offsetTopMeasuringRef,
   navigation,
   disableBreadcrumbScroll,
   setMetrics
@@ -40,96 +44,102 @@ export const utilCheckUpdateVerticalSpace = (
     return dynamicRefs[selector];
   };
 
-  // Utility function that checks the heights of various elements which are used to determine layout
-  const update = {};
+  setMetrics((previous) => {
+    // Utility function that checks the heights of various elements which are used to determine layout
+    const update = {};
 
-  const breadcrumbTitleEl = getDynamicRef(`.${blockClass}__breadcrumb-title`);
-  const breadcrumbRowEl = getDynamicRef(`.${blockClass}__breadcrumb-row`);
-  const titleRowEl = getDynamicRef(`.${blockClass}__title-row`);
-  const subtitleRowEl = getDynamicRef(`.${blockClass}__subtitle-row`);
-  const availableRowEl = getDynamicRef(`.${blockClass}__available-row`);
-  const navigationRowEl = getDynamicRef(`.${blockClass}__navigation-row`);
+    const breadcrumbTitleEl = getDynamicRef(`.${blockClass}__breadcrumb-title`);
+    const breadcrumbRowEl = getDynamicRef(`.${blockClass}__breadcrumb-row`);
+    const titleRowEl = getDynamicRef(`.${blockClass}__title-row`);
+    const subtitleRowEl = getDynamicRef(`.${blockClass}__subtitle-row`);
+    const availableRowEl = getDynamicRef(`.${blockClass}__available-row`);
+    const navigationRowEl = getDynamicRef(`.${blockClass}__navigation-row`);
 
-  /* istanbul ignore next */
-  update.headerHeight = headerRef.current ? headerRef.current.clientHeight : 0;
-  /* istanbul ignore next */
-  update.headerWidth = headerRef.current ? headerRef.current.offsetWidth : 0;
+    /* istanbul ignore next */
+    update.headerHeight = headerRef.current
+      ? headerRef.current.clientHeight
+      : 0;
+    /* istanbul ignore next */
+    update.headerWidth = headerRef.current ? headerRef.current.offsetWidth : 0;
 
-  // The header offset is the vertical distance from the top of the document to
-  // the page header, which we obtain using getBoundingClientRect() for robust
-  // behavior. We use this offset as the scroll/fixed threshold.
-  const doc = headerRef.current?.ownerDocument;
-  /* istanbul ignore next */
-  update.headerOffset = headerRef.current
-    ? headerRef.current.getBoundingClientRect().top +
-      (doc.defaultView.pageYOffset || doc.documentElement.scrollTop) -
-      (doc.documentElement.clientTop || doc.body.clientTop || 0)
-    : 0;
+    // The header offset is the vertical distance from the top of the document to
+    // the page header, which we obtain using getBoundingClientRect() for robust
+    // behavior. We use this offset as the scroll/fixed threshold.
+    const scrollableContainer = scrollableAncestor(headerRef.current);
 
-  /* istanbul ignore next */
-  update.breadcrumbRowHeight = breadcrumbRowEl
-    ? breadcrumbRowEl.clientHeight
-    : 0;
-  /* istanbul ignore next */
-  update.breadcrumbRowWidth = breadcrumbRowEl ? breadcrumbRowEl.offsetWidth : 0;
+    /* istanbul ignore next */
+    update.headerOffset =
+      offsetTopMeasuringRef.current.getBoundingClientRect().top -
+        scrollableContainer?.getBoundingClientRect().top || 0;
 
-  /* istanbul ignore next */
-  update.breadcrumbTitleHeight = breadcrumbTitleEl
-    ? breadcrumbTitleEl.clientHeight
-    : 1;
+    /* istanbul ignore next */
+    update.breadcrumbRowHeight = breadcrumbRowEl
+      ? breadcrumbRowEl.clientHeight
+      : 0;
+    /* istanbul ignore next */
+    update.breadcrumbRowWidth = breadcrumbRowEl
+      ? breadcrumbRowEl.offsetWidth
+      : 0;
 
-  /* istanbul ignore next */
-  update.titleRowHeight = titleRowEl ? titleRowEl.clientHeight : 0;
-  /* istanbul ignore next */
-  update.subtitleRowHeight = subtitleRowEl ? subtitleRowEl.clientHeight : 0;
-  /* istanbul ignore next */
-  update.availableRowHeight = availableRowEl ? availableRowEl.clientHeight : 0;
-  /* istanbul ignore next */
-  update.navigationRowHeight = navigationRowEl
-    ? navigationRowEl.clientHeight
-    : 1;
+    /* istanbul ignore next */
+    update.breadcrumbTitleHeight = breadcrumbTitleEl
+      ? breadcrumbTitleEl.clientHeight
+      : 1;
 
-  update.breadcrumbRowSpaceBelow = 0;
-  update.titleRowSpaceAbove = 0;
+    /* istanbul ignore next */
+    update.titleRowHeight = titleRowEl ? titleRowEl.clientHeight : 0;
+    /* istanbul ignore next */
+    update.subtitleRowHeight = subtitleRowEl ? subtitleRowEl.clientHeight : 0;
+    /* istanbul ignore next */
+    update.availableRowHeight = availableRowEl
+      ? availableRowEl.clientHeight
+      : 0;
+    /* istanbul ignore next */
+    update.navigationRowHeight = navigationRowEl
+      ? navigationRowEl.clientHeight
+      : 1;
 
-  // Base for calculating sticky top
-  update.headerTopValue = -update.headerHeight;
-  if (navigation) {
-    // adjust top for sticky with navigation
-    update.headerTopValue += update.navigationRowHeight;
-  }
-
-  if (disableBreadcrumbScroll || !navigation) {
-    // adjust sticky top if no navigation or breadcrumb is to stay on screen
-    update.headerTopValue += update.breadcrumbRowHeight;
-  }
-
-  /* istanbul ignore else */
-  if (window) {
-    let val;
-    /* don't know how to test resize */
-    /* istanbul ignore if */
-    if (breadcrumbRowEl) {
-      val = parseFloat(
-        window
-          .getComputedStyle(breadcrumbRowEl)
-          .getPropertyValue('margin-bottom'),
-        10
-      );
-      update.breadcrumbRowSpaceBelow = isNaN(val) ? 0 : val;
+    // Base for calculating sticky top
+    update.headerTopValue = -update.headerHeight;
+    if (navigation) {
+      // adjust top for sticky with navigation
+      update.headerTopValue += update.navigationRowHeight;
     }
-    /* don't know how to test resize */
-    /* istanbul ignore if */
-    if (titleRowEl) {
-      val = parseFloat(
-        window.getComputedStyle(titleRowEl).getPropertyValue('margin-top'),
-        10
-      );
-      update.titleRowSpaceAbove = isNaN(val) ? 0 : val;
-    }
-  }
 
-  setMetrics((previous) => ({ ...previous, ...update }));
+    if (disableBreadcrumbScroll || !navigation) {
+      // adjust sticky top if no navigation or breadcrumb is to stay on screen
+      update.headerTopValue += update.breadcrumbRowHeight;
+    }
+
+    if (window) {
+      let val;
+      /* don't know how to test resize */
+      /* istanbul ignore if */
+      if (breadcrumbRowEl) {
+        val = parseFloat(
+          window
+            .getComputedStyle(breadcrumbRowEl)
+            .getPropertyValue('margin-bottom'),
+          10
+        );
+        update.breadcrumbRowSpaceBelow = isNaN(val) ? 0 : val;
+      }
+      /* don't know how to test resize */
+      /* istanbul ignore if */
+      if (titleRowEl) {
+        val = parseFloat(
+          window.getComputedStyle(titleRowEl).getPropertyValue('margin-top'),
+          10
+        );
+        update.titleRowSpaceAbove = isNaN(val) ? 0 : val;
+      }
+    } else {
+      update.breadcrumbRowSpaceBelow = 0;
+      update.titleRowSpaceAbove = 0;
+    }
+
+    return { ...previous, ...update };
+  });
 };
 
 /**
@@ -159,19 +169,6 @@ export const utilGetTitleShape = (title, titleIcon, defaultTitle) => {
   }
 
   return newShape;
-};
-
-// Set css style values directly onto a node. Note that this is effective
-// immediately, rather than using the React `style` prop which goes through
-// the React DOM update optimization.
-export const utilSetCustomCSSProps = (targetRef, kvPairs) => {
-  /* istanbul ignore else */
-  if (targetRef.current) {
-    const keys = Object.keys(kvPairs);
-    for (let k of keys) {
-      targetRef.current.style.setProperty(k, kvPairs[k]);
-    }
-  }
 };
 
 // Trigger a window scroll, if necessary, to set the collapsed state.

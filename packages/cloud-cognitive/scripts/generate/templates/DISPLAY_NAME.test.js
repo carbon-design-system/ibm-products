@@ -13,7 +13,9 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { DISPLAY_NAME } from '.';
 
-const blockClass = `${pkg.prefix}--STYLE_NAME`;
+const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
+
+const blockClass = `${prefix}--STYLE_NAME`;
 const componentName = DISPLAY_NAME.displayName;
 
 // values to use
@@ -52,5 +54,14 @@ describe(componentName, () => {
     const ref = React.createRef();
     render(<DISPLAY_NAME ref={ref}> </DISPLAY_NAME>);
     expect(ref.current).toHaveClass(blockClass);
+  });
+
+  it('adds the Devtools prop to the containing node', () => {
+    render(<DISPLAY_NAME data-testid={dataTestId}> </DISPLAY_NAME>);
+
+    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(componentName)
+    );
   });
 });

@@ -113,12 +113,14 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
   .#{$block-class}__container {
     --#{$block-class}--subtitle-opacity: 1;
     --#{$block-class}--title-container-height: 0;
+    --#{$block-class}--title-text-height: 0;
     --#{$block-class}--subtitle-container-height: 0;
     --#{$block-class}--action-bar-container-height: 0;
     --#{$block-class}--divider-opacity: 0;
     --#{$block-class}--title-y-position: 0;
     --#{$block-class}--content-bottom-padding: #{$spacing-10};
     --#{$block-class}--collapsed-title-y-position: 1rem;
+    --#{$block-class}--label-text-height: 0;
 
     position: fixed;
     z-index: 3;
@@ -188,6 +190,10 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       position: sticky;
       z-index: 4;
       top: 0;
+      height: calc(
+        var(--#{$block-class}--title-container-height) -
+          var(--#{$block-class}--label-text-height)
+      );
       padding: $spacing-05 $spacing-05 $spacing-03 $spacing-05;
       background-color: $ui-01;
       &::before {
@@ -196,6 +202,35 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       &.#{$block-class}__on-detail-step .#{$block-class}__collapsed-title-text {
         top: $spacing-09;
       }
+      &.#{$block-class}__title-container-without-title {
+        padding: 0;
+      }
+      &.#{$block-class}__title-container-without-title.#{$block-class}__on-detail-step-without-title {
+        height: calc(#{$spacing-08} + #{$spacing-02});
+        padding: $spacing-05 $spacing-05 $spacing-03 $spacing-05;
+      }
+      &.#{$block-class}__title-container-without-title::before {
+        background-color: transparent;
+      }
+    }
+    &.#{$block-class}__container-is-animating {
+      pointer-events: none;
+    }
+    &.#{$block-class}__container-is-animating
+      .#{$block-class}__title-container.#{$block-class}__title-container--no-animation {
+      top: 0;
+    }
+    &.#{$block-class}__container-is-animating
+      .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation {
+      top: var(--#{$block-class}--title-container-height);
+    }
+    &.#{$block-class}__container-is-animating
+      .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation {
+      // stylelint-disable-next-line carbon/layout-token-use
+      top: calc(
+        var(--#{$block-class}--title-container-height) +
+          var(--#{$block-class}--subtitle-container-height)
+      );
     }
     .#{$block-class}__title-text {
       @include carbon--type-style('productive-heading-03');
@@ -207,6 +242,17 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       opacity: var(--#{$block-class}--subtitle-opacity);
       // stylelint-disable-next-line carbon/layout-token-use
       transform: translateY(var(--#{$block-class}--title-y-position));
+    }
+    .#{$block-class}__label-text {
+      @include carbon--type-style('label-01');
+
+      overflow: hidden;
+      padding-right: $spacing-05;
+      opacity: var(--#{$block-class}--subtitle-opacity);
+      text-overflow: ellipsis;
+      // stylelint-disable-next-line carbon/layout-token-use
+      transform: translateY(var(--#{$block-class}--title-y-position));
+      white-space: nowrap;
     }
     .#{$block-class}__collapsed-title-text {
       @include carbon--type-style('productive-heading-02');
@@ -233,14 +279,17 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       position: fixed;
       z-index: 2;
       // stylelint-disable-next-line carbon/layout-token-use
-      top: calc(
-        var(--#{$block-class}--title-container-height) + #{$spacing-09}
-      );
+      top: calc(var(--#{$block-class}--title-text-height) + #{$spacing-09});
       background-color: $ui-01;
     }
 
     .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation.#{$block-class}__subtitle-text-is-animating {
-      top: var(--#{$block-class}--title-container-height);
+      top: var(--#{$block-class}--title-text-height);
+    }
+
+    .#{$block-class}__subtitle-text.#{$block-class}__subtitle-without-title {
+      padding-top: $spacing-05;
+      padding-right: $spacing-07;
     }
 
     .#{$block-class}__title-container.#{$block-class}__title-container--no-animation.#{$block-class}__title-container-is-animating {
@@ -252,7 +301,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
 
       position: fixed;
       top: $spacing-09;
-      height: var(--#{$block-class}--title-container-height);
+      height: var(--#{$block-class}--title-text-height);
     }
 
     .#{$block-class}__inner-content {
@@ -260,7 +309,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       height: calc(100vh - 3rem);
       // stylelint-disable-next-line carbon/layout-token-use
       margin-top: calc(
-        var(--#{$block-class}--title-container-height) +
+        var(--#{$block-class}--title-text-height) +
           var(--#{$block-class}--subtitle-container-height) +
           var(--#{$block-class}--action-bar-container-height)
       );
@@ -271,7 +320,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       height: calc(
         100vh -
           calc(
-            var(--#{$block-class}--title-container-height) +
+            var(--#{$block-class}--title-text-height) +
               var(--#{$block-class}--subtitle-container-height) +
               var(--#{$block-class}--action-bar-container-height)
           ) + (calc(-1 * (#{$spacing-09} + #{$spacing-10})))
@@ -285,7 +334,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       position: fixed;
       // stylelint-disable-next-line carbon/layout-token-use
       top: calc(
-        var(--#{$block-class}--title-container-height) +
+        var(--#{$block-class}--title-text-height) +
           var(--#{$block-class}--subtitle-container-height) + #{$spacing-09}
       );
       width: 100%;
@@ -296,7 +345,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       + .#{$block-class}__body-content {
       // stylelint-disable-next-line carbon/layout-token-use
       margin-top: calc(
-        var(--#{$block-class}--title-container-height) +
+        var(--#{$block-class}--title-text-height) +
           var(--#{$block-class}--subtitle-container-height) + #{$spacing-09}
       );
     }
@@ -304,9 +353,6 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation.#{$block-class}__subtitle-text-no-animation-no-action-toolbar {
       border-bottom: 1px solid $decorative-01;
       margin-bottom: $spacing-05;
-    }
-    .#{$block-class}__label-text {
-      @include carbon--type-style('label-01');
     }
     .#{$block-class}__action-toolbar {
       position: sticky;
@@ -335,23 +381,31 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       }
     }
 
-    .bx--btn.#{$block-class}__navigation-back-button {
+    .#{$carbon-prefix}--btn.#{$block-class}__navigation-back-button {
       position: relative;
       z-index: 5;
       top: calc(-1 * #{$spacing-03});
       left: calc(-1 * #{$spacing-03});
     }
-    .bx--btn.#{$block-class}__navigation-back-button,
-    .bx--btn.#{$block-class}__close-button {
+    .#{$carbon-prefix}--btn.#{$block-class}__navigation-back-button,
+    .#{$carbon-prefix}--btn.#{$block-class}__close-button {
       min-width: 2rem;
       padding: 0;
       color: $text-01;
     }
-    .bx--btn.#{$block-class}__close-button {
+    .#{$carbon-prefix}--btn.#{$block-class}__close-button {
       position: absolute;
       z-index: 5;
       top: $spacing-03;
-      right: $spacing-03;
+      right: $spacing-05;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $ui-01;
+    }
+    .#{$carbon-prefix}--btn.#{$block-class}__close-button
+      .#{$carbon-prefix}--btn__icon {
+      margin: 0;
     }
     .#{$block-class}__body-content {
       padding: $spacing-05;

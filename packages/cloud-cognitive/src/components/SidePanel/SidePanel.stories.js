@@ -249,20 +249,18 @@ const ChildrenContentWithSteps = ({ currentStep, setCurrentStep }) => {
     <>
       {currentStep === 0 && (
         <div className={`${prefix}body-content`}>
-          <h5 className={`${prefix}content-subtitle`}>Step 1</h5>
+          <h5 className={`${prefix}content-subtitle`}>Main view</h5>
           {renderDataTable()}
           <Button
             kind="tertiary"
-            onClick={() => setCurrentStep((prev) => prev + 1)}
-            // onClick={() => {}}
-          >
+            onClick={() => setCurrentStep((prev) => prev + 1)}>
             View all
           </Button>
         </div>
       )}
       {currentStep === 1 && (
         <div className={`${prefix}body-content`}>
-          <h5 className={`${prefix}content-subtitle`}>Step 2</h5>
+          <h5 className={`${prefix}content-subtitle`}>Detail view</h5>
           {renderDataTable()}
         </div>
       )}
@@ -400,6 +398,7 @@ export const SlideIn = prepareStory(SlideInTemplate, {
     selectorPageContent: '#cloud-and-cognitive-page-content',
     actions: 0,
     ...defaultStoryProps,
+    labelText: 'Incident management',
   },
 });
 
@@ -407,19 +406,21 @@ export const WithActionToolbar = prepareStory(SlideOverTemplate, {
   args: {
     actionToolbarButtons: [
       {
+        leading: true,
         label: 'Copy',
         icon: Copy20,
-        onActionToolbarButtonClick: () => {},
+        onClick: action('Toolbar button clicked: Copy'),
+        kind: 'primary',
       },
       {
         label: 'Settings',
         icon: Settings20,
-        onActionToolbarButtonClick: () => {},
+        onClick: action('Toolbar button clicked: Settings'),
       },
       {
         label: 'Delete',
         icon: Delete20,
-        onActionToolbarButtonClick: () => {},
+        onClick: action('Toolbar button clicked: Delete'),
       },
     ],
     ...defaultStoryProps,
@@ -446,14 +447,6 @@ export const SpecifyElementToHaveInitialFocus = prepareStory(
   }
 );
 
-export const WithMinimalContent = prepareStory(SlideOverTemplate, {
-  args: {
-    ...defaultStoryProps,
-    actions: 0,
-    minimalContent: true,
-  },
-});
-
 export const WithStaticTitle = prepareStory(SlideOverTemplate, {
   args: {
     ...defaultStoryProps,
@@ -473,18 +466,27 @@ export const WithStaticTitleAndActionToolbar = prepareStory(SlideOverTemplate, {
       {
         label: 'Copy',
         icon: Copy20,
-        onActionToolbarButtonClick: () => {},
+        onClick: action('Action toolbar button clicked: Copy'),
       },
       {
         label: 'Settings',
         icon: Settings20,
-        onActionToolbarButtonClick: () => {},
+        onClick: action('Action toolbar button clicked: Settings'),
       },
       {
         label: 'Delete',
         icon: Delete20,
-        onActionToolbarButtonClick: () => {},
+        onClick: action('Action toolbar button clicked: Delete'),
       },
     ],
+  },
+});
+
+export const WithoutTitle = prepareStory(SlideOverTemplate, {
+  args: {
+    ...defaultStoryProps,
+    actions: 0,
+    title: null,
+    includeOverlay: true,
   },
 });

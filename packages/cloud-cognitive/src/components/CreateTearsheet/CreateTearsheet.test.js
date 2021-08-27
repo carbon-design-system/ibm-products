@@ -43,6 +43,7 @@ const step1Title = uuidv4();
 const title = uuidv4();
 const dataTestId = uuidv4();
 const ref = React.createRef();
+const onMountFn = jest.fn();
 const defaultProps = {
   title,
   submitButtonText,
@@ -70,19 +71,20 @@ const renderCreateTearsheet = (
       <CreateTearsheetStep
         onNext={rejectOnNext ? onNextStepRejectionFn : onNext}
         title={step1Title}
-        formLegendText={step1Title}>
+        fieldsetLegendText={step1Title}
+        onMount={onMountFn}>
         step 1 content
         <button type="button" disabled>
           Test
         </button>
         <input type="text" />
       </CreateTearsheetStep>
-      <CreateTearsheetStep title={step2Title} formLegendText={step2Title}>
+      <CreateTearsheetStep title={step2Title} fieldsetLegendText={step2Title}>
         step 2 content
       </CreateTearsheetStep>
       <CreateTearsheetStep
         title={step3Title}
-        formLegendText={step3Title}
+        fieldsetLegendText={step3Title}
         onNext={rejectOnSubmitNext ? finalStepOnNextRejectFn : finalOnNextFn}>
         step 3 content
       </CreateTearsheetStep>
@@ -107,7 +109,7 @@ const renderEmptyCreateTearsheet = ({ ...rest }) =>
 const renderSingleStepCreateTearsheet = ({ ...rest }) =>
   render(
     <CreateTearsheet onRequestSubmit={onRequestSubmitFn} {...rest}>
-      <CreateTearsheetStep title={step1Title} formLegendText={step1Title}>
+      <CreateTearsheetStep title={step1Title} fieldsetLegendText={step1Title}>
         step 1 content
       </CreateTearsheetStep>
     </CreateTearsheet>
@@ -151,6 +153,45 @@ describe(CreateTearsheet.displayName, () => {
       container.querySelector(`.${createTearsheetBlockClass}`)
     ).toBeTruthy();
     expect(ref.current).not.toBeNull();
+  });
+
+  it('should render the tearsheet on the specified initialStep prop provided', () => {
+    const { container } = renderCreateTearsheet({
+      ...defaultProps,
+      initialStep: 2,
+    });
+    const createTearsheetSteps = container.querySelector(
+      `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
+    ).children;
+    expect(
+      createTearsheetSteps[1].classList.contains(
+        `.${createTearsheetBlockClass}__step--visible-section`
+      )
+    );
+  });
+
+  it('renders the first step if an invalid initialStep value is provided', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
+    const { container } = renderCreateTearsheet({
+      ...defaultProps,
+      // Starting on 0 step is invalid since the steps start with a value of 1
+      // This will cause a console warning
+      initialStep: 0,
+    });
+    const createTearsheetSteps = container.querySelector(
+      `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
+    ).children;
+    expect(
+      createTearsheetSteps[0].classList.contains(
+        `.${createTearsheetBlockClass}__step--visible-section`
+      )
+    );
+    expect(warn).toBeCalledWith(
+      `${CreateTearsheet.displayName}: An invalid \`initialStep\` prop was supplied. The \`initialStep\` prop should be a number that is greater than 0 or less than or equal to the number of steps your ${CreateTearsheet.displayName} has.`
+    );
+    // The onMount prop will get called here because the first step is rendered
+    expect(onMountFn).toHaveBeenCalledTimes(1);
+    warn.mockRestore();
   });
 
   it('renders the second step if clicking on the next step button with onNext optional function prop and then clicks cancel button', async () => {
@@ -214,10 +255,10 @@ describe(CreateTearsheet.displayName, () => {
         {...defaultProps}
         open={false}
         onRequestSubmit={onRequestSubmitFn}>
-        <CreateTearsheetStep title={step1Title} formLegendText={step1Title}>
+        <CreateTearsheetStep title={step1Title} fieldsetLegendText={step1Title}>
           step 1 content
         </CreateTearsheetStep>
-        <CreateTearsheetStep title={step2Title} formLegendText={step2Title}>
+        <CreateTearsheetStep title={step2Title} fieldsetLegendText={step2Title}>
           step 2 content
         </CreateTearsheetStep>
       </CreateTearsheet>
@@ -573,18 +614,33 @@ describe(CreateTearsheet.displayName, () => {
         viewAllToggleOnLabelText="On"
         sideNavAriaLabel="Side nav aria label"
         {...defaultProps}>
-        <CreateTearsheetStep onNext={jest.fn()} disableSubmit>
-          <CreateTearsheetSection title="test title 1">
+        <CreateTearsheetStep
+          hasFieldset={false}
+          title={step1Title}
+          subtitle="Step 1 subtitle"
+          description="Step 1 description"
+          onNext={jest.fn()}
+          disableSubmit>
+          <CreateTearsheetSection
+            title="test title 1"
+            subtitle="test subtitle 1"
+            description="test description 1">
             content
           </CreateTearsheetSection>
         </CreateTearsheetStep>
         <CreateTearsheetStep title={step2Title}>
-          <CreateTearsheetSection title="test title 2">
+          <CreateTearsheetSection
+            title="test title 2"
+            subtitle="test subtitle 2"
+            description="test description 2">
             content
           </CreateTearsheetSection>
         </CreateTearsheetStep>
       </CreateTearsheet>
     );
+    screen.getAllByText(step1Title);
+    screen.getByText(/Step 1 subtitle/g);
+    screen.getByText(/Step 1 description/g);
     click(screen.getByText(viewAllToggleLabelText));
     act(() => jest.advanceTimersByTime(timerValue));
     const sideNavElement = screen.getByText(/test title 2/g, {

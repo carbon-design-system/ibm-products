@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+import { devtoolsAttribute, getDevtoolsId } from './utils/devtools';
+
 const defaults = {
   prefix: 'exp',
 
@@ -14,6 +16,8 @@ const defaults = {
     AboutModal: true,
     APIKeyModal: true,
     CreateModal: true,
+    CreateFullPage: true,
+    CreateFullPageStep: true,
     CreateSidePanel: true,
     CreateTearsheetNarrow: true,
     EmptyState: true,
@@ -43,9 +47,6 @@ const defaults = {
 
     // other public components not yet reviewed and released:
     Cascade: false,
-    CreateFullPage: false,
-    CreateFullPageSection: false,
-    CreateFullPageStep: false,
     CreateTearsheet: false,
     CreateTearsheetStep: false,
     ContextHeader: false,
@@ -112,6 +113,8 @@ const feature = new Proxy(
 );
 
 export default {
+  devtoolsAttribute,
+  getDevtoolsId,
   prefix: defaults.prefix,
   component: component,
   feature: feature,

@@ -2,7 +2,7 @@ name: Update packages
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '*/10 * * * *'
 
 jobs:
   release:
@@ -30,7 +30,7 @@ jobs:
           committer: GitHub <noreply@github.com>
           author:
             ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          branch: 'update-packages-'
+          branch: 'update-packages'
           branch-suffix: random
           title:
             'feat: update Carbon versions and package dependencies to latest'
@@ -55,5 +55,15 @@ jobs:
             - [ ] the Netlify deploy-preview has been used to ensure that storybook runs and the main published components render correctly.
 
       - name: Post reminder to Slack
-        run:
-          echo "PR number - ${{ steps.create-pr.outputs.pull-request-number }}"
+        id: post-reminder
+        uses: archive/github-actions-slack@v2.0.0
+        id: notify
+        with:
+          slack-bot-user-oauth-access-token: ${{ secrets.CREATE_PR_SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
+          slack-channel: G01PUCL3V8R
+          slack-text: Hello! This is a test post. "PR number: ${{ steps.create-pr.outputs.pull-request-number }}" 🤓
+
+      - name: Result from "Post reminder to Slack"
+        run: |
+          echo "The PR number was ${{ steps.create-pr.outputs.pull-request-number }}"
+          echo "The result was ${{ steps.post-reminder.outputs.slack-result }}"

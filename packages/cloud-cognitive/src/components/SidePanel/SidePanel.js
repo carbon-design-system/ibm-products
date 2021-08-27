@@ -509,9 +509,9 @@ export let SidePanel = React.forwardRef(
             [`${blockClass}__on-detail-step`]: currentStep > 0,
             [`${blockClass}__on-detail-step-without-title`]:
               currentStep > 0 && !title,
-            [`${blockClass}__title-container--no-animation`]: !animateTitle,
-            [`${blockClass}__title-container-is-animating`]:
-              !animationComplete && animateTitle,
+            [`${blockClass}__title-container--no-title-animation`]:
+              !animateTitle,
+            [`${blockClass}__title-container-is-animating`]: !animationComplete,
             [`${blockClass}__title-container-without-title`]: !title,
           })}>
           {currentStep > 0 && (
@@ -664,6 +664,8 @@ export let SidePanel = React.forwardRef(
               ref={sidePanelInnerRef}
               className={cx(`${blockClass}__inner-content`, {
                 [`${blockClass}__static-inner-content`]: !animateTitle,
+                [`${blockClass}__inner-content-with-actions`]:
+                  actions && actions.length,
               })}>
               {animateTitle && renderHeader()}
               <div className={`${blockClass}__body-content`}>{children}</div>

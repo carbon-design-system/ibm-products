@@ -11,7 +11,6 @@ import cx from 'classnames';
 import { pkg } from '../../settings';
 import { CREATE_TEARSHEET_SECTION } from './constants';
 
-const componentName = 'CreateTearsheetStep';
 const blockClass = `${pkg.prefix}--tearsheet-create__section`;
 
 export let CreateTearsheetSection = forwardRef(
@@ -42,12 +41,6 @@ export let CreateTearsheetSection = forwardRef(
       </div>
     );
   }
-);
-
-// Return a placeholder if not released and not enabled by feature flag
-CreateTearsheetSection = pkg.checkComponentEnabled(
-  CreateTearsheetSection,
-  componentName
 );
 
 CreateTearsheetSection.propTypes = {

@@ -121,7 +121,7 @@ export const MultiStepWithSectionsTearsheet = ({
             });
           }}
           title="Topic name"
-          formLegendText="Topic name information"
+          fieldsetLegendText="Topic name information"
           disableSubmit={!stepOneTextInputValue}
           subtitle="This is the unique name used to recognize your topic"
           description="It will also be used by your producers and consumers as part of the connection information, so make it something easy to recognize.">
@@ -200,7 +200,7 @@ export const MultiStepWithSectionsTearsheet = ({
         </CreateTearsheetStep>
         <CreateTearsheetStep
           title="Message retention"
-          formLegendText="Message retention scheduling"
+          fieldsetLegendText="Message retention scheduling"
           disableSubmit={!stepThreeTextInputValue}
           onNext={() => Promise.resolve()}
           subtitle="This is how long messages are retained before they are deleted."

@@ -171,7 +171,7 @@ export const MultiStepTearsheet = ({
           messages across the members of a consumer group."
           fieldsetLegendText="Partition information">
           <Row>
-            <Column xlg={8} lg={8} md={8} sm={8}>
+            <Column xlg={3} lg={3}>
               <NumberInput
                 id="carbon-number"
                 min={1}

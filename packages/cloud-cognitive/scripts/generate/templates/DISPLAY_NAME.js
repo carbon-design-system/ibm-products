@@ -11,6 +11,8 @@ import React from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 
 // Carbon and package components we use.
@@ -54,7 +56,8 @@ export let DISPLAY_NAME = React.forwardRef(
           }
         )}
         ref={ref}
-        role="main">
+        role="main"
+        {...getDevtoolsProps(componentName)}>
         {children}
       </div>
     );

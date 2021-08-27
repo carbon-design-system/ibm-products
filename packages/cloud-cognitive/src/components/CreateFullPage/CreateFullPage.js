@@ -114,6 +114,8 @@ export let CreateFullPage = React.forwardRef(
 
     // Log a warning to the console in the event there are no CreateFullPageSection components
     // inside of the CreateFullPageSteps when the viewAll toggle is provided and turned on.
+    // currently, we are not supporting the use of FullPageSections -- this may be a future feature
+    /* istanbul ignore next */
     useEffect(() => {
       if (includeViewAllToggle && shouldViewAll) {
         let childrenArray = Array.isArray(children) ? children : [children];
@@ -184,6 +186,8 @@ export let CreateFullPage = React.forwardRef(
     };
 
     // check if child is a full page section component
+    // currently, we are not supporting the use of FullPageSections -- this may be a future feature
+    /* istanbul ignore next */
     const isFullPageSection = (child) => {
       if (
         child &&
@@ -207,6 +211,8 @@ export let CreateFullPage = React.forwardRef(
       fullPageStepComponents.forEach((child) => {
         // we have received an array of children, lets check to see that each child is
         // a FullPageSection component before adding it to sectionChildElements
+        // currently, we are not supporting the use of FullPageSections -- this may be a future feature
+        /* istanbul ignore next */
         if (shouldViewAll && child.props.children.length) {
           child.props.children.forEach((stepChild) => {
             if (isFullPageSection(stepChild)) {
@@ -221,6 +227,8 @@ export let CreateFullPage = React.forwardRef(
           typeof child.props.children !== 'undefined' &&
           !child.props.children.length
         ) {
+          // currently, we are not supporting the use of FullPageSections -- this may be a future feature
+          /* istanbul ignore next */
           if (isFullPageSection(child.props.children)) {
             sectionChildElements.push(child.props.children);
           }
@@ -282,8 +290,11 @@ export let CreateFullPage = React.forwardRef(
             }
             // Needed to be able to not render the divider
             // line on the last section of the last step
+            // currently, we are not supporting the use of FullPageSections -- this may be a future feature
+            /* istanbul ignore next */
             const isLastSectionOfLastStep =
               isLastFullPageStep && fullPageStepComponents.length - 1 === index;
+            /* istanbul ignore next */
             return React.cloneElement(
               child,
               {
@@ -312,7 +323,8 @@ export let CreateFullPage = React.forwardRef(
         </>
       );
     };
-
+    // currently, we are not supporting the use of 'view all' toggle state or CreateFullPageSection -- this may be a future feature
+    /* istanbul ignore next */
     return (
       <div {...rest} ref={ref} className={cx(blockClass, className)}>
         <div className={`${blockClass}__influencer`}>
@@ -412,6 +424,7 @@ CreateFullPage.propTypes = {
   className: PropTypes.string,
 
   /**
+   * @ignore
    * An optional prop that provides a toggle element in the left side influencer panel
    */
   includeViewAllToggle: PropTypes.bool,
@@ -453,7 +466,9 @@ CreateFullPage.propTypes = {
    * This function can _optionally_ return a promise that is either resolved or rejected and the CreateFullPage will handle the submitting state of the create button.
    */
   onRequestSubmit: PropTypes.func.isRequired,
+
   /**
+   * @ignore
    * The aria label to be used for the UI Shell SideNav Carbon component
    */
   sideNavAriaLabel: PropTypes.string,
@@ -468,16 +483,19 @@ CreateFullPage.propTypes = {
   title: PropTypes.node,
 
   /**
+   * @ignore
    * Sets the label text for the view all toggle component
    */
   viewAllToggleLabelText: PropTypes.string,
 
   /**
+   * @ignore
    * Sets the label text for the view all toggle `off` text
    */
   viewAllToggleOffLabelText: PropTypes.string,
 
   /**
+   * @ignore
    * Sets the label text for the view all toggle `on` text
    */
   viewAllToggleOnLabelText: PropTypes.string,

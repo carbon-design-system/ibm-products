@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.78.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.77.6...@carbon/ibm-cloud-cognitive@0.78.0) (2021-08-27)
+
+
+### Features
+
+* **devtools:** add mechanism to enable component DOM identification ([#1187](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1187)) ([c433158](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c4331581e0ec806d6a0ed65b2873d4963d3c8ac3))
+
+
+
+
+
 ## [0.77.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.77.5...@carbon/ibm-cloud-cognitive@0.77.6) (2021-08-26)
 
 

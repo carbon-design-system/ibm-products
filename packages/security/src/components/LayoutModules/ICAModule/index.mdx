@@ -1,3 +1,4 @@
+import { getDocsId } from '../../../../.storybook';
 import { parameters } from '../../../../.storybook/preview';
 import { Interaction } from './ICAModule-story';
 
@@ -38,7 +39,10 @@ Everything passed in as a
 will be rendered.
 
 <Canvas>
-  <Story id="layout-modules-icamodule--default" parameters={parameters} />
+  <Story
+    id={getDocsId('layout-modules-icamodule--default')}
+    parameters={parameters}
+  />
 </Canvas>
 
 ### Component API

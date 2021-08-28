@@ -1,3 +1,4 @@
+import { getDocsId } from '../../../../.storybook';
 import { parameters } from '../../../../.storybook/preview';
 
 import anatomy from './images/anatomy.png';
@@ -37,7 +38,10 @@ Everything passed in as a
 `CardAreaModule` will be rendered.
 
 <Canvas>
-  <Story id="layout-modules-cardareamodule--default" parameters={parameters} />
+  <Story
+    id={getDocsId('layout-modules-cardareamodule--default')}
+    parameters={parameters}
+  />
 </Canvas>
 
 ### Component API

@@ -1,3 +1,4 @@
+import { getDocsId } from '../../../../.storybook';
 import { parameters } from '../../../../.storybook/preview';
 import { Default } from './TitleBarModule-story';
 
@@ -30,7 +31,10 @@ consistent hierarchies.
 Everything passed in as a child of the title bar module will be rendered.
 
 <Canvas>
-  <Story id="layout-modules-titlebarmodule--default" parameters={parameters} />
+  <Story
+    id={getDocsId('layout-modules-titlebarmodule--default')}
+    parameters={parameters}
+  />
 </Canvas>
 
 ### Component API

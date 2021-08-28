@@ -31,6 +31,10 @@ module.exports = {
   stories: ['../../**/src/**/*+(-story|.stories).*'],
   webpackFinal: async (configuration) =>
     merge(configuration, {
+      cache: {
+        type: 'filesystem',
+        allowCollectingMemory: true,
+      },
       module: {
         rules: [
           {
@@ -49,7 +53,15 @@ module.exports = {
                 },
               },
               'css-loader',
-              'sass-loader',
+              {
+                loader: 'fast-sass-loader',
+                options: {
+                  includePaths: [
+                    resolve(__dirname, '..', 'node_modules'),
+                    resolve(__dirname, '..', '..', '..', 'node_modules'),
+                  ],
+                },
+              },
             ],
           },
         ],

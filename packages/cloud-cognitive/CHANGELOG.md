@@ -3,6 +3,156 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.78.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.78.1...@carbon/ibm-cloud-cognitive@0.78.2) (2021-08-27)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.78.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.78.0...@carbon/ibm-cloud-cognitive@0.78.1) (2021-08-27)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+# [0.78.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.77.6...@carbon/ibm-cloud-cognitive@0.78.0) (2021-08-27)
+
+
+### Features
+
+* **devtools:** add mechanism to enable component DOM identification ([#1187](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1187)) ([c433158](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c4331581e0ec806d6a0ed65b2873d4963d3c8ac3))
+
+
+
+
+
+## [0.77.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.77.5...@carbon/ibm-cloud-cognitive@0.77.6) (2021-08-26)
+
+
+### Bug Fixes
+
+* **SidePanel:** revert condensed title font weight style ([#1213](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1213)) ([9bf141d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9bf141df78325ac8b8682a647a2d27b28826dac5))
+
+
+
+
+
+## [0.77.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.77.4...@carbon/ibm-cloud-cognitive@0.77.5) (2021-08-26)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.77.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.77.3...@carbon/ibm-cloud-cognitive@0.77.4) (2021-08-26)
+
+
+### Bug Fixes
+
+* **SidePanel:** [#1191](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1191) allow side panel title to be optional ([#1202](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1202)) ([a9aa0e6](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a9aa0e6113afd40ad17d568e60629c4e03de5555))
+
+
+
+
+
+## [0.77.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.77.2...@carbon/ibm-cloud-cognitive@0.77.3) (2021-08-26)
+
+
+### Bug Fixes
+
+* **SidePanel:** fix label text layout issues on scroll animation ([#1203](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1203)) ([d1c5570](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d1c5570a56eea58157b8ad2e8faca225787f8479))
+
+
+
+
+
+## [0.77.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.77.1...@carbon/ibm-cloud-cognitive@0.77.2) (2021-08-26)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.77.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.77.0...@carbon/ibm-cloud-cognitive@0.77.1) (2021-08-26)
+
+
+### Bug Fixes
+
+* **SidePanel:** fix animating state of panel ([#1193](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1193)) ([5a98abc](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/5a98abc93e06b021ea4851c19afc4bbb50a7660f))
+
+
+
+
+
+# [0.77.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.76.1...@carbon/ibm-cloud-cognitive@0.77.0) (2021-08-25)
+
+
+### Features
+
+* cascade component ([#1171](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1171)) ([76b8b6f](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/76b8b6f1b375e093e721ba415b53e97ec3ca2262))
+
+
+
+
+
+## [0.76.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.76.0...@carbon/ibm-cloud-cognitive@0.76.1) (2021-08-25)
+
+
+### Bug Fixes
+
+* better warnings when deprecated-usage props have invalid values ([#1198](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1198)) ([6ec8777](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6ec8777b66b4f45d47ed1060051b8bf9ec8692d8))
+
+
+
+
+
+# [0.76.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.75.1...@carbon/ibm-cloud-cognitive@0.76.0) (2021-08-25)
+
+
+### Features
+
+* **toolbar:** add vertical variant ([#1173](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1173)) ([574a2c5](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/574a2c55fd965be4de163ea8d9d9fae0baf1e7ba))
+
+
+
+
+
+## [0.75.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.75.0...@carbon/ibm-cloud-cognitive@0.75.1) (2021-08-25)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+# [0.75.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.74.1...@carbon/ibm-cloud-cognitive@0.75.0) (2021-08-23)
+
+
+### Features
+
+* **SidePanel:** allow actionToolbarButtons to be a bit more flexible ([#1189](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1189)) ([bc84e20](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/bc84e20f9652ba0379b884e5a9e1c7542ef34601))
+
+
+
+
+
+## [0.74.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.74.0...@carbon/ibm-cloud-cognitive@0.74.1) (2021-08-23)
+
+
+### Bug Fixes
+
+* **SidePanel:** center close svg in close button ([#1190](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1190)) ([fa4a688](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/fa4a68898eb74d2e5487732d27f36664de9648a1))
+
+
+
+
+
 # [0.74.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.73.2...@carbon/ibm-cloud-cognitive@0.74.0) (2021-08-20)
 
 

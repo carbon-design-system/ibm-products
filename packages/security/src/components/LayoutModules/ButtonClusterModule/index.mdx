@@ -1,3 +1,4 @@
+import { getDocsId } from '../../../../.storybook';
 import { parameters } from '../../../../.storybook/preview';
 
 import anatomy from './images/anatomy.png';
@@ -31,7 +32,7 @@ The `ButtonClusterModule` accepts a list of `Button` components as `children`.
 
 <Canvas>
   <Story
-    id="layout-modules-buttonclustermodule--default"
+    id={getDocsId('layout-modules-buttonclustermodule--default')}
     parameters={parameters}
   />
 </Canvas>

@@ -1,3 +1,4 @@
+import { getDocsId } from '../../../../.storybook';
 import { parameters } from '../../../../.storybook/preview';
 
 import anatomy from './images/anatomy.png';
@@ -26,7 +27,10 @@ positioning the actions, and everything passed in as a child of
 `ActionBarModuleItems` will be rendered.
 
 <Canvas>
-  <Story id="layout-modules-actionbarmodule--default" parameters={parameters} />
+  <Story
+    id={getDocsId('layout-modules-actionbarmodule--default')}
+    parameters={parameters}
+  />
 </Canvas>
 
 ### Component API
@@ -61,7 +65,10 @@ action bar instead of the ghost button. Both are the same height as the ghost
 button and top aligned with the action button bar.
 
 <Canvas>
-  <Story id="layout-modules-actionbarmodule--variant" parameters={parameters} />
+  <Story
+    id={getDocsId('layout-modules-actionbarmodule--variant')}
+    parameters={parameters}
+  />
 </Canvas>
 
 ### Grid placement

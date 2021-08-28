@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-security",
   "description": "Carbon for Cloud & Cognitive IBM Security UI components",
-  "version": "0.12.1",
+  "version": "0.12.3",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -43,8 +43,9 @@
     "sync:clone": "git clone git@github.com:carbon-design-system/ibm-security.git --depth 1",
     "sync:copy": "copyfiles 'ibm-security/src/**/*' . -u 1",
     "test": "run-p test:*",
-    "test:js": "jest",
+    "test:js": "jest --colors",
     "test:scss": "bundler check 'src/**/*.scss' -i '**/css-gridish/**'",
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally)",
     "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon)/'"
   },
   "peerDependencies": {
@@ -86,7 +87,7 @@
     "enzyme-adapter-react-16": "^1.15.6",
     "faker": "^5.5.3",
     "jest": "^27.0.6",
-    "jest-config-ibm-cloud-cognitive": "^0.10.1",
+    "jest-config-ibm-cloud-cognitive": "^0.11.0",
     "node-sass": "^6.0.0",
     "npm-check-updates": "^11.8.3",
     "npm-run-all": "^4.1.5",

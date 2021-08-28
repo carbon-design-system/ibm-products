@@ -1,3 +1,4 @@
+import { getDocsId } from '../../../../.storybook';
 import { parameters } from '../../../../.storybook/preview';
 
 import anatomy from './images/anatomy.png';
@@ -38,7 +39,7 @@ Everything passed in as a
 
 <Canvas>
   <Story
-    id="layout-modules-descriptionmodule--default"
+    id={getDocsId('layout-modules-descriptionmodule--default')}
     parameters={parameters}
   />
 </Canvas>

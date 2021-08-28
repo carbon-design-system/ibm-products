@@ -8,4 +8,5 @@ kubernetes
 markdownlint
 plex
 stylelint
+technote
 wcag

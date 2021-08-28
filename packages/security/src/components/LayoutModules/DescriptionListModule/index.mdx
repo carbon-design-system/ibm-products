@@ -1,3 +1,4 @@
+import { getDocsId } from '../../../../.storybook';
 import { parameters } from '../../../../.storybook/preview';
 import { Default } from './DescriptionListModule-story';
 
@@ -42,7 +43,7 @@ Everything passed in as a child of `DescriptionListModule` will be rendered.
 
 <Canvas>
   <Story
-    id="layout-modules-descriptionlistmodule--default"
+    id={getDocsId('layout-modules-descriptionlistmodule--default')}
     parameters={parameters}
   />
 </Canvas>

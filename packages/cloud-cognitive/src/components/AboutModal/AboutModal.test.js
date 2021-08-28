@@ -23,7 +23,9 @@ import ansibleLogo from './_story-assets/ansible-logo.png';
 import grafanaLogo from './_story-assets/grafana-logo.png';
 import jsLogo from './_story-assets/js-logo.png';
 
-const blockClass = `${pkg.prefix}--about-modal`;
+const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
+
+const blockClass = `${prefix}--about-modal`;
 const componentName = AboutModal.displayName;
 
 const tabLabel1 = `Version number ${uuidv4()}`;
@@ -206,5 +208,14 @@ describe(componentName, () => {
     const ref = React.createRef();
     renderComponent({ ref });
     expect(ref.current.outerModal.current).toHaveClass(blockClass);
+  });
+
+  it('adds the Devtools prop to the containing node', () => {
+    renderComponent({ 'data-testid': dataTestId });
+
+    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(componentName)
+    );
   });
 });

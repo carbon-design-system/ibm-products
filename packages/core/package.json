@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-core",
   "private": true,
-  "version": "0.15.3",
+  "version": "0.17.0",
   "license": "Apache-2.0",
   "main": "scripts/build.js",
   "repository": {
@@ -17,9 +17,12 @@
     "carbon for cloud & cognitive"
   ],
   "scripts": {
-    "build": "build-storybook",
-    "clean": "rimraf storybook-static",
-    "start": "start-storybook -p 3000",
+    "build": "run-s build:carbon build:storybook",
+    "build:carbon": "sass --style=expanded --load-path node_modules --load-path ../../node_modules .storybook/carbon.scss:css/carbon.css",
+    "build:storybook": "build-storybook",
+    "clean": "rimraf storybook-static css",
+    "start": "run-s build:carbon start:storybook",
+    "start:storybook": "start-storybook -p 3000",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (not tested), sass (until Carbon fixes deprecation warnings)",
     "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react$|^react-dom$|^sass$)/'"
   },
@@ -31,7 +34,7 @@
     "@carbon/import-once": "10.5.0",
     "@carbon/layout": "10.29.0",
     "@carbon/motion": "10.22.0",
-    "@carbon/storybook-addon-theme": "^0.11.0",
+    "@carbon/storybook-addon-theme": "^0.12.0",
     "@carbon/themes": "10.40.0",
     "@carbon/type": "10.33.0",
     "@storybook/addon-actions": "^6.3.7",
@@ -59,16 +62,16 @@
     "css-loader": "^6.2.0",
     "fast-sass-loader": "^2.0.0",
     "npm-check-updates": "^11.8.3",
+    "npm-run-all": "^4.1.5",
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "regenerator-runtime": "^0.13.9",
     "rimraf": "^3.0.2",
     "sass": "1.32.x",
-    "sass-loader": "^12.1.0",
     "style-loader": "^3.2.1",
     "typescript": "^4.3.5",
-    "webpack": "^5.50.0",
+    "webpack": "^5.51.1",
     "webpack-merge": "^5.8.0"
   }
 }

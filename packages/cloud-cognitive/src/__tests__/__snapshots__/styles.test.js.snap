@@ -377,6 +377,270 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-bottom: 0;
 }
 
+@keyframes influencerMenuEntrance {
+  0% {
+    opacity: 0;
+    transform: translateX(calc(-1 * var(--cds-spacing-05, 1rem)));
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes influencerMenuExit {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(calc(-1 * var(--cds-spacing-05, 1rem)));
+  }
+}
+
+.exp--create-influencer {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr auto;
+}
+
+.exp--create-influencer__left-nav {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  overflow-y: auto;
+}
+
+.exp--create-influencer__progress-indicator {
+  padding: var(--cds-spacing-06, 1.5rem);
+}
+
+.exp--create-influencer__view-all-toggle {
+  padding: var(--cds-spacing-06, 1.5rem);
+  grid-column: 1 / -1;
+  grid-row: -1 / -1;
+}
+
+.exp--create-influencer__side-nav-opening,
+.exp--create-influencer__progress-indicator-opening {
+  animation: influencerMenuEntrance 240ms 1;
+  animation-fill-mode: forwards;
+  transition-timing-function: cubic-bezier(0, 0, 0.38, 0.9);
+}
+
+.exp--create-influencer__side-nav-closing,
+.exp--create-influencer__progress-indicator-closing {
+  animation: influencerMenuExit 240ms 1;
+  animation-fill-mode: forwards;
+  transition-timing-function: cubic-bezier(0.2, 0, 1, 0.9);
+}
+
+@media (prefers-reduced-motion) {
+  .exp--create-influencer__side-nav-opening,
+  .exp--create-influencer__progress-indicator-opening,
+  .exp--create-influencer__side-nav-closing,
+  .exp--create-influencer__progress-indicator-closing {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-end-p1 {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-end-p2 {
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+/* Stroke animations */
+@keyframes init-stroke {
+  0% {
+    stroke-dashoffset: 276.4608;
+  }
+  100% {
+    stroke-dashoffset: 52.52755;
+  }
+}
+
+@keyframes stroke-end {
+  0% {
+    stroke-dashoffset: 52.52755;
+  }
+  100% {
+    stroke-dashoffset: 276.4608;
+  }
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.exp--create-full-page .exp--create-full-page__content .bx--grid {
+  padding-top: var(--cds-spacing-06, 1.5rem);
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.exp--create-full-page .exp--create-full-page__step--hidden-step,
+.exp--create-full-page .exp--create-full-page__step--hidden-section {
+  display: none;
+}
+
+.exp--create-full-page .exp--create-full-page__step--visible-section {
+  display: block;
+}
+
+.exp--create-full-page .exp--create-full-page__step--visible-step {
+  opacity: 1;
+}
+
+.exp--create-full-page .exp--create-full-page__section-subtitle,
+.exp--create-full-page .exp--create-full-page__step-subtitle {
+  font-size: var(--cds-productive-heading-01-font-size, 0.875rem);
+  font-weight: var(--cds-productive-heading-01-font-weight, 600);
+  line-height: var(--cds-productive-heading-01-line-height, 1.29);
+  letter-spacing: var(--cds-productive-heading-01-letter-spacing, 0.16px);
+  max-width: 50%;
+  margin-bottom: var(--cds-spacing-03, 0.5rem);
+}
+
+.exp--create-full-page .exp--create-full-page__section-description,
+.exp--create-full-page .exp--create-full-page__step-description {
+  font-size: var(--cds-body-long-01-font-size, 0.875rem);
+  font-weight: var(--cds-body-long-01-font-weight, 400);
+  line-height: var(--cds-body-long-01-line-height, 1.43);
+  letter-spacing: var(--cds-body-long-01-letter-spacing, 0.16px);
+  max-width: 50%;
+  margin-bottom: var(--cds-spacing-06, 1.5rem);
+}
+
+.exp--create-full-page .bx--fieldset {
+  margin-bottom: 0;
+}
+
+.exp--create-full-page .exp--create-full-page__step-fieldset > * {
+  margin-bottom: var(--cds-spacing-05, 1rem);
+}
+
+.exp--create-full-page .bx--modal-close {
+  display: none;
+}
+
+.exp--create-full-page {
+  display: flex;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+.exp--create-full-page .exp--create-full-page__left-nav {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  overflow-y: auto;
+}
+
+.exp--create-full-page .exp--create-full-page__body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.exp--create-full-page .exp--create-full-page__main {
+  display: flex;
+  max-height: 100%;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.exp--create-full-page .exp--create-full-page__content {
+  overflow: auto;
+  flex-grow: 1;
+  overflow-x: hidden;
+}
+
+.exp--create-full-page .exp--create-full-page__step {
+  position: relative;
+  padding-bottom: var(--cds-spacing-07, 2rem);
+}
+
+.exp--create-full-page .bx--side-nav--ux {
+  top: 0;
+  height: min-content;
+  padding-top: 0;
+  border-right: 1px solid var(--cds-ui-03, #e0e0e0);
+  background-color: transparent;
+  grid-row: 1;
+  overflow-x: auto;
+}
+
+.exp--create-full-page .exp--create-full-page__section-divider {
+  position: relative;
+  display: block;
+  width: 0;
+  height: 1px;
+  margin: var(--cds-spacing-07, 2rem) calc(-1 * var(--cds-spacing-08, 2.5rem)) var(--cds-spacing-07, 2rem) calc(-1 * var(--cds-spacing-08, 2.5rem));
+}
+
+.exp--create-full-page .exp--create-full-page__section-divider::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 1px;
+  background-color: var(--cds-ui-03, #e0e0e0);
+  content: '';
+}
+
+.exp--create-full-page .exp--create-full-page__step-title,
+.exp--create-full-page .exp--create-full-page__section-title {
+  font-size: var(--cds-productive-heading-04-font-size, 1.75rem);
+  font-weight: var(--cds-productive-heading-04-font-weight, 400);
+  line-height: var(--cds-productive-heading-04-line-height, 1.29);
+  letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0);
+  max-width: 50%;
+  margin-bottom: var(--cds-spacing-05, 1rem);
+}
+
+.exp--create-full-page .exp--create-full-page__influencer {
+  display: grid;
+  flex: 0 0 257px;
+  border-right: 1px solid var(--cds-ui-03, #e0e0e0);
+  background-color: var(--cds-ui-01, #f4f4f4);
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr auto;
+}
+
+.exp--create-full-page .exp--create-full-page__progress-indicator {
+  padding: var(--cds-spacing-06, 1.5rem);
+}
+
+.exp--create-full-page .exp--create-full-page__influencer-toggle {
+  padding: var(--cds-spacing-06, 1.5rem);
+  grid-column: 1 / -1;
+  grid-row: -1 / -1;
+}
+
+.exp--create-full-page .exp--create-full-page__buttons {
+  border-top: 1px solid var(--cds-ui-03, #e0e0e0);
+}
+
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -448,12 +712,14 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--side-panel__container {
   --exp--side-panel--subtitle-opacity: 1;
   --exp--side-panel--title-container-height: 0;
+  --exp--side-panel--title-text-height: 0;
   --exp--side-panel--subtitle-container-height: 0;
   --exp--side-panel--action-bar-container-height: 0;
   --exp--side-panel--divider-opacity: 0;
   --exp--side-panel--title-y-position: 0;
   --exp--side-panel--content-bottom-padding: var(--cds-spacing-10, 4rem);
   --exp--side-panel--collapsed-title-y-position: 1rem;
+  --exp--side-panel--label-text-height: 0;
   position: fixed;
   z-index: 3;
   top: var(--cds-spacing-09, 3rem);
@@ -660,6 +926,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   position: sticky;
   z-index: 4;
   top: 0;
+  height: calc( var(--exp--side-panel--title-container-height) - var(--exp--side-panel--label-text-height));
   padding: var(--cds-spacing-05, 1rem) var(--cds-spacing-05, 1rem) var(--cds-spacing-03, 0.5rem) var(--cds-spacing-05, 1rem);
   background-color: var(--cds-ui-01, #f4f4f4);
 }
@@ -679,6 +946,35 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   top: var(--cds-spacing-09, 3rem);
 }
 
+.exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container-without-title {
+  padding: 0;
+}
+
+.exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container-without-title.exp--side-panel__on-detail-step-without-title {
+  height: calc(var(--cds-spacing-08, 2.5rem) + var(--cds-spacing-02, 0.25rem));
+  padding: var(--cds-spacing-05, 1rem) var(--cds-spacing-05, 1rem) var(--cds-spacing-03, 0.5rem) var(--cds-spacing-05, 1rem);
+}
+
+.exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container-without-title::before {
+  background-color: transparent;
+}
+
+.exp--side-panel__container.exp--side-panel__container-is-animating {
+  pointer-events: none;
+}
+
+.exp--side-panel__container.exp--side-panel__container-is-animating .exp--side-panel__title-container.exp--side-panel__title-container--no-animation {
+  top: 0;
+}
+
+.exp--side-panel__container.exp--side-panel__container-is-animating .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation {
+  top: var(--exp--side-panel--title-container-height);
+}
+
+.exp--side-panel__container.exp--side-panel__container-is-animating .exp--side-panel__action-toolbar.exp--side-panel__action-toolbar-no-animation {
+  top: calc( var(--exp--side-panel--title-container-height) + var(--exp--side-panel--subtitle-container-height));
+}
+
 .exp--side-panel__container .exp--side-panel__title-text {
   font-size: var(--cds-productive-heading-03-font-size, 1.25rem);
   font-weight: var(--cds-productive-heading-03-font-weight, 400);
@@ -694,6 +990,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   background-color: var(--cds-ui-01, #f4f4f4);
   opacity: var(--exp--side-panel--subtitle-opacity);
   transform: translateY(var(--exp--side-panel--title-y-position));
+}
+
+.exp--side-panel__container .exp--side-panel__label-text {
+  font-size: var(--cds-label-01-font-size, 0.75rem);
+  font-weight: var(--cds-label-01-font-weight, 400);
+  line-height: var(--cds-label-01-line-height, 1.34);
+  letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
+  overflow: hidden;
+  padding-right: var(--cds-spacing-05, 1rem);
+  opacity: var(--exp--side-panel--subtitle-opacity);
+  text-overflow: ellipsis;
+  transform: translateY(var(--exp--side-panel--title-y-position));
+  white-space: nowrap;
 }
 
 .exp--side-panel__container .exp--side-panel__collapsed-title-text {
@@ -729,12 +1038,17 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   max-width: 30rem;
   position: fixed;
   z-index: 2;
-  top: calc( var(--exp--side-panel--title-container-height) + var(--cds-spacing-09, 3rem));
+  top: calc(var(--exp--side-panel--title-text-height) + var(--cds-spacing-09, 3rem));
   background-color: var(--cds-ui-01, #f4f4f4);
 }
 
 .exp--side-panel__container .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation.exp--side-panel__subtitle-text-is-animating {
-  top: var(--exp--side-panel--title-container-height);
+  top: var(--exp--side-panel--title-text-height);
+}
+
+.exp--side-panel__container .exp--side-panel__subtitle-text.exp--side-panel__subtitle-without-title {
+  padding-top: var(--cds-spacing-05, 1rem);
+  padding-right: var(--cds-spacing-07, 2rem);
 }
 
 .exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container--no-animation.exp--side-panel__title-container-is-animating {
@@ -746,18 +1060,18 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   max-width: 30rem;
   position: fixed;
   top: var(--cds-spacing-09, 3rem);
-  height: var(--exp--side-panel--title-container-height);
+  height: var(--exp--side-panel--title-text-height);
 }
 
 .exp--side-panel__container .exp--side-panel__inner-content {
   overflow: auto;
   height: calc(100vh - 3rem);
-  margin-top: calc( var(--exp--side-panel--title-container-height) + var(--exp--side-panel--subtitle-container-height) + var(--exp--side-panel--action-bar-container-height));
+  margin-top: calc( var(--exp--side-panel--title-text-height) + var(--exp--side-panel--subtitle-container-height) + var(--exp--side-panel--action-bar-container-height));
   overflow-x: hidden;
 }
 
 .exp--side-panel__container .exp--side-panel__inner-content.exp--side-panel__static-inner-content {
-  height: calc( 100vh - calc( var(--exp--side-panel--title-container-height) + var(--exp--side-panel--subtitle-container-height) + var(--exp--side-panel--action-bar-container-height) ) + (calc(-1 * (var(--cds-spacing-09, 3rem) + var(--cds-spacing-10, 4rem)))));
+  height: calc( 100vh - calc( var(--exp--side-panel--title-text-height) + var(--exp--side-panel--subtitle-container-height) + var(--exp--side-panel--action-bar-container-height) ) + (calc(-1 * (var(--cds-spacing-09, 3rem) + var(--cds-spacing-10, 4rem)))));
   padding-top: var(--cds-spacing-05, 1rem);
 }
 
@@ -765,26 +1079,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   min-width: 30rem;
   max-width: 30rem;
   position: fixed;
-  top: calc( var(--exp--side-panel--title-container-height) + var(--exp--side-panel--subtitle-container-height) + var(--cds-spacing-09, 3rem));
+  top: calc( var(--exp--side-panel--title-text-height) + var(--exp--side-panel--subtitle-container-height) + var(--cds-spacing-09, 3rem));
   width: 100%;
   border-bottom: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
 
 .exp--side-panel__container .exp--side-panel__action-toolbar.exp--side-panel__action-toolbar-no-animation
 + .exp--side-panel__body-content {
-  margin-top: calc( var(--exp--side-panel--title-container-height) + var(--exp--side-panel--subtitle-container-height) + var(--cds-spacing-09, 3rem));
+  margin-top: calc( var(--exp--side-panel--title-text-height) + var(--exp--side-panel--subtitle-container-height) + var(--cds-spacing-09, 3rem));
 }
 
 .exp--side-panel__container .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation.exp--side-panel__subtitle-text-no-animation-no-action-toolbar {
   border-bottom: 1px solid var(--cds-decorative-01, #e0e0e0);
   margin-bottom: var(--cds-spacing-05, 1rem);
-}
-
-.exp--side-panel__container .exp--side-panel__label-text {
-  font-size: var(--cds-label-01-font-size, 0.75rem);
-  font-weight: var(--cds-label-01-font-weight, 400);
-  line-height: var(--cds-label-01-line-height, 1.34);
-  letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
 }
 
 .exp--side-panel__container .exp--side-panel__action-toolbar {
@@ -836,10 +1143,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   position: absolute;
   z-index: 5;
   top: var(--cds-spacing-03, 0.5rem);
-  right: var(--cds-spacing-03, 0.5rem);
+  right: var(--cds-spacing-05, 1rem);
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: var(--cds-ui-01, #f4f4f4);
 }
 
 .exp--side-panel__container .bx--btn.exp--side-panel__close-button

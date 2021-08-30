@@ -8,10 +8,10 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { Column, Row } from 'carbon-components-react';
 import { pkg } from '../../settings';
 import { CREATE_TEARSHEET_SECTION } from './constants';
 
-const componentName = 'CreateTearsheetStep';
 const blockClass = `${pkg.prefix}--tearsheet-create__section`;
 
 export let CreateTearsheetSection = forwardRef(
@@ -29,25 +29,23 @@ export let CreateTearsheetSection = forwardRef(
   ) => {
     return (
       <div className={cx(blockClass, className)} ref={ref} id={id}>
-        {isViewingAllStepsTogether && (
-          <h4 className={`${blockClass}--title`}>{title}</h4>
-        )}
-        {isViewingAllStepsTogether && subtitle && (
-          <h6 className={`${blockClass}--subtitle`}>{subtitle}</h6>
-        )}
-        {isViewingAllStepsTogether && description && (
-          <p className={`${blockClass}--description`}>{description}</p>
-        )}
+        <Row>
+          <Column xlg={12} lg={12} md={8} sm={8}>
+            {isViewingAllStepsTogether && (
+              <h4 className={`${blockClass}--title`}>{title}</h4>
+            )}
+            {isViewingAllStepsTogether && subtitle && (
+              <h6 className={`${blockClass}--subtitle`}>{subtitle}</h6>
+            )}
+            {isViewingAllStepsTogether && description && (
+              <p className={`${blockClass}--description`}>{description}</p>
+            )}
+          </Column>
+        </Row>
         {children}
       </div>
     );
   }
-);
-
-// Return a placeholder if not released and not enabled by feature flag
-CreateTearsheetSection = pkg.checkComponentEnabled(
-  CreateTearsheetSection,
-  componentName
 );
 
 CreateTearsheetSection.propTypes = {

@@ -8,7 +8,7 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { FormGroup } from 'carbon-components-react';
+import { Column, FormGroup, Row } from 'carbon-components-react';
 import { pkg } from '../../settings';
 import { CREATE_TEARSHEET_STEP } from './constants';
 
@@ -23,26 +23,30 @@ export let CreateTearsheetStep = forwardRef(
       subtitle,
       description,
       title,
-      hasForm,
-      formLegendText,
+      hasFieldset,
+      fieldsetLegendText,
       isViewingAllStepsTogether,
     },
     ref
   ) => {
     return (
       <div className={cx(blockClass, className)} ref={ref}>
-        {!isViewingAllStepsTogether && (
-          <h4 className={`${blockClass}--title`}>{title}</h4>
-        )}
-        {!isViewingAllStepsTogether && subtitle && (
-          <h6 className={`${blockClass}--subtitle`}>{subtitle}</h6>
-        )}
-        {!isViewingAllStepsTogether && description && (
-          <p className={`${blockClass}--description`}>{description}</p>
-        )}
-        {hasForm ? (
+        <Row>
+          <Column xlg={12} lg={12} md={8} sm={8}>
+            {!isViewingAllStepsTogether && (
+              <h4 className={`${blockClass}--title`}>{title}</h4>
+            )}
+            {!isViewingAllStepsTogether && subtitle && (
+              <h6 className={`${blockClass}--subtitle`}>{subtitle}</h6>
+            )}
+            {!isViewingAllStepsTogether && description && (
+              <p className={`${blockClass}--description`}>{description}</p>
+            )}
+          </Column>
+        </Row>
+        {hasFieldset ? (
           <FormGroup
-            legendText={formLegendText}
+            legendText={fieldsetLegendText}
             className={`${blockClass}--fieldset`}>
             {children}
           </FormGroup>
@@ -83,11 +87,11 @@ CreateTearsheetStep.propTypes = {
 
   /**
    * This is the required legend text that appears above a fieldset html element for accessibility purposes.
-   * You can set the `hasForm` prop to false if you have multiple fieldset elements or want to control the children of your Full Page's step content.
+   * You can set the `hasFieldset` prop to false if you have multiple fieldset elements or want to control the children of your Full Page's step content.
    * Otherwise, use CSS to hide/remove this label text.
    */
-  formLegendText: PropTypes.string.isRequired.if(
-    ({ hasForm }) => hasForm === true
+  fieldsetLegendText: PropTypes.string.isRequired.if(
+    ({ hasFieldset }) => hasFieldset === true
   ),
 
   /**
@@ -95,9 +99,10 @@ CreateTearsheetStep.propTypes = {
    * and is defaulted to true.
    * You can set this prop to `false` if you have multiple fieldset elements or want to control the children of your Full Page's step content.
    */
-  hasForm: PropTypes.bool,
+  hasFieldset: PropTypes.bool,
 
   /**
+   * @ignore
    * The is an internal prop set in CreateTearsheet so the step knows when to render it's title
    */
   isViewingAllStepsTogether: PropTypes.bool,
@@ -137,5 +142,5 @@ CreateTearsheetStep.propTypes = {
 // component needs to make a choice or assumption when a prop is not supplied.
 CreateTearsheetStep.defaultProps = {
   type: CREATE_TEARSHEET_STEP,
-  hasForm: true,
+  hasFieldset: true,
 };

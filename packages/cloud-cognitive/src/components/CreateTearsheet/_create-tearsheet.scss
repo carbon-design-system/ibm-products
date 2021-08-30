@@ -119,24 +119,11 @@
     margin-bottom: $spacing-06;
   }
 
-  .#{$block-class} .#{$block-class}__step--title,
-  .#{$block-class} .#{$block-class}__section--title,
-  .#{$block-class} .#{$block-class}__section--subtitle,
-  .#{$block-class} .#{$block-class}__step--subtitle,
-  .#{$block-class} .#{$block-class}__section--description,
-  .#{$block-class} .#{$block-class}__step--description {
-    max-width: 50%;
-  }
-
   .#{$block-class} .#{$carbon-prefix}--fieldset {
     margin-bottom: 0;
   }
 
   .#{$block-class} .#{$block-class}__step--fieldset > * {
-    &:not(.#{$tearsheet-divider-class}):not(.#{$tearsheet-fieldset-class}) {
-      width: 50%;
-    }
-
     margin-bottom: $spacing-05;
   }
 }

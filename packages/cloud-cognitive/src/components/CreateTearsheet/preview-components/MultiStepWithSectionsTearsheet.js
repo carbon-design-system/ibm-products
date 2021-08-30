@@ -9,12 +9,14 @@
 import React, { useState } from 'react';
 import {
   Button,
+  Column,
   Dropdown,
   InlineNotification,
-  TextInput,
-  Toggle,
   RadioButtonGroup,
   RadioButton,
+  Row,
+  TextInput,
+  Toggle,
 } from 'carbon-components-react';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
@@ -125,78 +127,92 @@ export const MultiStepWithSectionsTearsheet = ({
           disableSubmit={!stepOneTextInputValue}
           subtitle="This is the unique name used to recognize your topic"
           description="It will also be used by your producers and consumers as part of the connection information, so make it something easy to recognize.">
-          <TextInput
-            labelText="Topic name"
-            id="tearsheet-multi-step-story-text-input-multi-step-1"
-            value={stepOneTextInputValue}
-            placeholder="Enter topic name"
-            onChange={(event) => {
-              if (event.target.value.length) {
-                setIsInvalid(false);
-              }
-              setStepOneTextInputValue(event.target.value);
-            }}
-            invalid={isInvalid}
-            invalidText="This is a required field"
-            onBlur={() => {
-              if (!stepOneTextInputValue.length) {
-                setIsInvalid(true);
-              }
-            }}
-          />
-          <TextInput
-            labelText="Topic description (optional)"
-            id="tearsheet-multi-step-story-text-input-multi-step-1-input-2"
-            value={topicDescriptionValue}
-            placeholder="Enter topic description"
-            onChange={(event) => setTopicDescriptionValue(event.target.value)}
-          />
-          <TextInput
-            labelText="Topic version (optional)"
-            id="tearsheet-multi-step-story-text-input-multi-step-1-input-3"
-            value={topicVersionValue}
-            placeholder="Enter topic version"
-            onChange={(event) => setTopicVersionValue(event.target.value)}
-          />
-          <Dropdown
-            ariaLabel="Topic owner dropdown"
-            className="bx--form-item"
-            id="create-tearsheet-topic-owner"
-            items={allTopicOwners}
-            itemToString={(item) => (item ? item.email : '')}
-            label="Select a topic owner"
-            onChange={({ selectedItem }) => setSelectedTopicOwner(selectedItem)}
-            selectedItem={selectedTopicOwner}
-            titleText="Topic owner (optional)"
-            warn={apiFailed}
-            warnText="API request failed."
-          />
-          {hasSubmitError && (
-            <InlineNotification
-              kind="error"
-              title="Error"
-              subtitle="Resolve errors to continue"
-              onClose={() => setHasSubmitError(false)}
-            />
-          )}
-          <Toggle
-            className={`${blockClass}__error--toggle`}
-            id="simulated-error-toggle"
-            size="sm"
-            labelText="Simulate error"
-            onToggle={(event) => setShouldReject(event)}
-          />
+          <Row>
+            <Column xlg={8} lg={8} md={8} sm={8}>
+              <TextInput
+                labelText="Topic name"
+                id="tearsheet-multi-step-story-text-input-multi-step-1"
+                value={stepOneTextInputValue}
+                placeholder="Enter topic name"
+                onChange={(event) => {
+                  if (event.target.value.length) {
+                    setIsInvalid(false);
+                  }
+                  setStepOneTextInputValue(event.target.value);
+                }}
+                invalid={isInvalid}
+                invalidText="This is a required field"
+                onBlur={() => {
+                  if (!stepOneTextInputValue.length) {
+                    setIsInvalid(true);
+                  }
+                }}
+              />
+              <TextInput
+                labelText="Topic description (optional)"
+                id="tearsheet-multi-step-story-text-input-multi-step-1-input-2"
+                value={topicDescriptionValue}
+                placeholder="Enter topic description"
+                onChange={(event) =>
+                  setTopicDescriptionValue(event.target.value)
+                }
+              />
+              <TextInput
+                labelText="Topic version (optional)"
+                id="tearsheet-multi-step-story-text-input-multi-step-1-input-3"
+                value={topicVersionValue}
+                placeholder="Enter topic version"
+                onChange={(event) => setTopicVersionValue(event.target.value)}
+              />
+              <Dropdown
+                ariaLabel="Topic owner dropdown"
+                className="bx--form-item"
+                id="create-tearsheet-topic-owner"
+                items={allTopicOwners}
+                itemToString={(item) => (item ? item.email : '')}
+                label="Select a topic owner"
+                onChange={({ selectedItem }) =>
+                  setSelectedTopicOwner(selectedItem)
+                }
+                selectedItem={selectedTopicOwner}
+                titleText="Topic owner (optional)"
+                warn={apiFailed}
+                warnText="API request failed."
+              />
+              {hasSubmitError && (
+                <InlineNotification
+                  kind="error"
+                  title="Error"
+                  subtitle="Resolve errors to continue"
+                  onClose={() => setHasSubmitError(false)}
+                />
+              )}
+              <Toggle
+                className={`${blockClass}__error--toggle`}
+                id="simulated-error-toggle"
+                size="sm"
+                labelText="Simulate error"
+                onToggle={(event) => setShouldReject(event)}
+              />
+            </Column>
+          </Row>
           <CreateTearsheetDivider />
-          <h4 className={`${componentBlockClass}__step--title`}>Meta data</h4>
-          <fieldset className={`${componentBlockClass}__step--fieldset`}>
-            <TextInput
-              labelText="Topic meta data (optional)"
-              id="tearsheet-multi-step-story-text-input-multi-step-1-input-4"
-              value={topicMetaData}
-              placeholder="Enter topic meta data"
-              onChange={(event) => setTopicMetaData(event.target.value)}
-            />
-          </fieldset>
+          <Row>
+            <Column xlg={8} lg={8} md={8} sm={8}>
+              <h4 className={`${componentBlockClass}__step--title`}>
+                Meta data
+              </h4>
+              <fieldset className={`${componentBlockClass}__step--fieldset`}>
+                <TextInput
+                  labelText="Topic meta data (optional)"
+                  id="tearsheet-multi-step-story-text-input-multi-step-1-input-4"
+                  value={topicMetaData}
+                  placeholder="Enter topic meta data"
+                  onChange={(event) => setTopicMetaData(event.target.value)}
+                />
+              </fieldset>
+            </Column>
+          </Row>
         </CreateTearsheetStep>
         <CreateTearsheetStep
           title="Message retention"
@@ -206,17 +222,29 @@ export const MultiStepWithSectionsTearsheet = ({
           subtitle="This is how long messages are retained before they are deleted."
           description="If your messages are not read by a consumer within this time, they
           will be missed.">
-          <RadioButtonGroup
-            legendText="Message retention"
-            name="radio-button-group"
-            defaultSelected={stepThreeTextInputValue}
-            onChange={(value) => setStepThreeTextInputValue(value)}
-            orientation="vertical">
-            <RadioButton labelText="A day" value="one-day" id="one-day" />
-            <RadioButton labelText="A week" value="one-week" id="one-week" />
-            <RadioButton labelText="A month" value="one-month" id="one-month" />
-            <RadioButton labelText="Custom" value="custom" id="custom" />
-          </RadioButtonGroup>
+          <Row>
+            <Column xlg={8} lg={8} md={8} sm={8}>
+              <RadioButtonGroup
+                legendText="Message retention"
+                name="radio-button-group"
+                defaultSelected={stepThreeTextInputValue}
+                onChange={(value) => setStepThreeTextInputValue(value)}
+                orientation="vertical">
+                <RadioButton labelText="A day" value="one-day" id="one-day" />
+                <RadioButton
+                  labelText="A week"
+                  value="one-week"
+                  id="one-week"
+                />
+                <RadioButton
+                  labelText="A month"
+                  value="one-month"
+                  id="one-month"
+                />
+                <RadioButton labelText="Custom" value="custom" id="custom" />
+              </RadioButtonGroup>
+            </Column>
+          </Row>
         </CreateTearsheetStep>
       </CreateTearsheet>
     </div>

@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-security",
   "description": "Carbon for Cloud & Cognitive IBM Security UI components",
-  "version": "0.12.2",
+  "version": "0.12.3",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -38,7 +38,7 @@
     "ci-check": "node scripts/import",
     "clean": "rimraf css es lib scss",
     "test": "run-p test:*",
-    "test:js": "jest",
+    "test:js": "jest --colors",
     "test:scss": "bundler check 'src/**/*.scss'",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally)",
     "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon)/'"

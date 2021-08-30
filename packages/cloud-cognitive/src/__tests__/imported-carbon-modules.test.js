@@ -6,6 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { resolve } from 'path';
 import { renderSync } from 'sass';
 import fs from 'fs-extra';
 
@@ -25,7 +26,7 @@ describe('imported-carbon-modules', () => {
           content: $imported-modules;
         }
       `,
-      includePaths: ['node_modules'],
+      includePaths: [resolve(__dirname, '../../../../node_modules')],
     }).css.toString();
 
     const carbonModuleList = normalize(
@@ -33,7 +34,7 @@ describe('imported-carbon-modules', () => {
     );
 
     const file = await fs.readFile(
-      'packages/cloud-cognitive/src/global/styles/_imported-carbon-modules.scss',
+      resolve(__dirname, '../global/styles/_imported-carbon-modules.scss'),
       'utf8'
     );
 

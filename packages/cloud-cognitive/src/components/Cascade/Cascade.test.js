@@ -29,7 +29,7 @@ describe(componentName, () => {
     );
   });
 
-  it('renders without grid', () => {
+  it('renders with grid', () => {
     const { container } = render(
       <Cascade grid>
         <div className="row">
@@ -48,6 +48,16 @@ describe(componentName, () => {
     expect(container.querySelector(`.${blockClass}__col-2`)).toBeVisible();
     expect(container.querySelector(`.${blockClass}__col-3`)).toBeVisible();
     expect(container.querySelector(`.${blockClass}__col-4`)).toBeVisible();
+  });
+
+  it('renders with grid but no columns', () => {
+    const { container } = render(
+      <Cascade grid>
+        <div className="row" />
+      </Cascade>
+    );
+    expect(container.querySelector('.bx--grid')).toBeVisible();
+    expect(container.querySelectorAll(`.${blockClass}__col`)).toHaveLength(0);
   });
 
   it('has no accessibility violations', async () => {

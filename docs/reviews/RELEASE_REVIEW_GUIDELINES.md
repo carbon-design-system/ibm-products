@@ -52,17 +52,18 @@ responds to the currently set Carbon theme.\
 `- [ ]` Components are functional components using hooks.\
 `- [ ]` Public components which produce DOM structures support className.\
 `- [ ]` Public components support a ref (via React.forwardRef).\
+`- [ ]` Public component supports a [Devtools attribute](https://github.com/carbon-design-system/ibm-cloud-cognitive/search?l=JavaScript&q=devtools&type=)
+\
 `- [ ]` All significant DOM elements have meaningful classes.\
-`- [ ]` Additional attributes that are not identified as props (such as title,
-aria-\*, etc) are passed through to an appropriate DOM node of the component as
-HTML attributes.\
+`- [ ]` Additional attributes that are not identified as props (such as title, aria-\*,
+etc) are passed through to an appropriate DOM node of the component as HTML attributes.\
 `- [ ]` No warnings, errors or log messages in the console.\
-`- [ ]` Each public component JS is exported in /src/components/index.js, each
-public component SCSS is included in /src/components/\_index.scss, and each
-public component has a flag in package-settings.js.\
- `- [ ]` Each public component SCSS lists all of the Carbon and C&CS components
-imported and used by the JavaScript code and explicitly imports the SCSS for
-each of these components.
+`- [ ]` Each public component JS is exported in /src/components/index.js, each public
+component SCSS is included in /src/components/\_index.scss, and each public component
+has a flag in package-settings.js.\
+ `- [ ]` Each public component SCSS lists all of the Carbon and C&CS components imported
+and used by the JavaScript code and explicitly imports the SCSS for each of these
+components.
 
 `###` Standards
 

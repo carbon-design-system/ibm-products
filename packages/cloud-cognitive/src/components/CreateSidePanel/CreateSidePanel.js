@@ -12,6 +12,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
+
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { deprecateProp } from '../../global/js/utils/props-helper';
 
 // Carbon and package components we use.
@@ -78,6 +80,7 @@ export let CreateSidePanel = React.forwardRef(
             subtitle,
             actions,
             selectorPrimaryFocus,
+            ...getDevtoolsProps(componentName),
           }}
           placement="right"
           slideIn

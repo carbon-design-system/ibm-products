@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.78.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.78.3...@carbon/ibm-cloud-cognitive@0.78.4) (2021-08-30)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.78.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.78.2...@carbon/ibm-cloud-cognitive@0.78.3) (2021-08-30)
+
+
+### Bug Fixes
+
+* **CreateTearsheet:** add grid usage to step component and storybook ([#1214](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1214)) ([8f49008](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8f490080cda913bc099a03b1e4bd97ecd93b394c))
+
+
+
+
+
 ## [0.78.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.78.1...@carbon/ibm-cloud-cognitive@0.78.2) (2021-08-27)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

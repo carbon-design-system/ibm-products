@@ -21,8 +21,10 @@ import {
 import cx from 'classnames';
 import { ErrorFilled16, CheckmarkFilled16 } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
-import { pkg } from '../../settings';
+
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import uuidv4 from '../../global/js/utils/uuidv4';
+import { pkg } from '../../settings';
 
 const componentName = 'ExportModal';
 
@@ -105,7 +107,7 @@ export let ExportModal = forwardRef(
         aria-label={title}
         size="sm"
         preventCloseOnClickOutside
-        {...{ open, ref, onClose }}>
+        {...{ open, ref, onClose, ...getDevtoolsProps(componentName) }}>
         <ModalHeader className={`${blockClass}__header`} title={title} />
         <ModalBody className={`${blockClass}__body-container`}>
           {!submitted && (

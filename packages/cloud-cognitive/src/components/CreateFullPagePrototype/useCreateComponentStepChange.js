@@ -9,6 +9,7 @@ import { useCallback, useEffect } from 'react';
 
 export const useCreateComponentStepChange = ({
   setCurrentStep,
+  setAdvancedCurrentStep,
   setIsSubmitting,
   setShouldViewAll,
   onClose,
@@ -16,6 +17,7 @@ export const useCreateComponentStepChange = ({
   componentName,
   getComponentSteps,
   currentStep,
+  advancedCurrentStep,
   shouldViewAll,
   backButtonText,
   cancelButtonText,
@@ -25,7 +27,6 @@ export const useCreateComponentStepChange = ({
   componentBlockClass,
   setCreateComponentActions,
   setModalIsOpen,
-  getCreateComponents,
 }) => {
   // useEffect to handle multi step logic
   useEffect(() => {
@@ -54,11 +55,20 @@ export const useCreateComponentStepChange = ({
       const createComponentSteps = displayCorrectSteps();
       createComponentSteps.forEach((child) => {
         step++;
-        if (currentStep === step) {
-          submitDisabled = child.props.disableSubmit;
-        }
-        if (shouldViewAll && child.props.disableSubmit) {
-          viewAllSubmitDisabled = true;
+        if (shouldViewAll) {
+          if (advancedCurrentStep === step) {
+            submitDisabled = child.props.disableSubmit;
+          }
+          if (shouldViewAll && child.props.disableSubmit) {
+            viewAllSubmitDisabled = true;
+          }
+        } else {
+          if (currentStep === step) {
+            submitDisabled = child.props.disableSubmit;
+          }
+          if (shouldViewAll && child.props.disableSubmit) {
+            viewAllSubmitDisabled = true;
+          }
         }
       });
       if (!shouldViewAll) {
@@ -98,11 +108,9 @@ export const useCreateComponentStepChange = ({
       }
     };
     const displayCorrectSteps = () => {
-      let steps = setShouldViewAll
+      let steps = shouldViewAll
         ? getComponentSteps()
         : getComponentSteps().filter((step) => !step.props.viewAllOnly);
-      // if setShouldViewAll is true, show steps
-      // if setShouldViewAll is false, show only the steps that do not have have the prop "viewallonly"
       return steps;
     };
 
@@ -110,12 +118,16 @@ export const useCreateComponentStepChange = ({
       const createSteps = displayCorrectSteps();
       const total = createSteps.length;
       const buttons = [];
+      console.log(advancedCurrentStep + 1);
       buttons.push({
         key: 'create-action-button-back',
         label: backButtonText,
-        onClick: () => setCurrentStep((prev) => prev - 1),
+        onClick: () =>
+          shouldViewAll
+            ? setAdvancedCurrentStep((prev) => prev - 1)
+            : setCurrentStep((prev) => prev - 1),
         kind: 'secondary',
-        disabled: currentStep === 1,
+        disabled: shouldViewAll ? advancedCurrentStep === 1 : currentStep === 1,
       });
       buttons.push({
         key: 'create-action-button-cancel',
@@ -128,8 +140,20 @@ export const useCreateComponentStepChange = ({
       });
       buttons.push({
         key: 'create-action-button-submit',
-        label: currentStep < total ? nextButtonText : submitButtonText,
-        onClick: currentStep < total ? handleNext : handleSubmit,
+        label: shouldViewAll
+          ? advancedCurrentStep < total
+            ? nextButtonText
+            : submitButtonText
+          : currentStep < total
+          ? nextButtonText
+          : submitButtonText,
+        onClick: shouldViewAll
+          ? advancedCurrentStep < total
+            ? handleNext
+            : handleSubmit
+          : currentStep < total
+          ? handleNext
+          : handleSubmit,
         disabled: isSubmitDisabled(),
         kind: 'primary',
         loading: isSubmitting,
@@ -156,10 +180,16 @@ export const useCreateComponentStepChange = ({
     setIsSubmitting,
     setShouldViewAll,
     setModalIsOpen,
+    advancedCurrentStep,
+    setAdvancedCurrentStep,
   ]);
 
   const continueToNextStep = useCallback(() => {
     setIsSubmitting(false);
-    setCurrentStep((prev) => prev + 1);
-  }, [setCurrentStep, setIsSubmitting]);
+    if (shouldViewAll === true) {
+      setAdvancedCurrentStep((prev) => prev + 1);
+    } else {
+      setCurrentStep((prev) => prev + 1);
+    }
+  }, [setCurrentStep, setIsSubmitting, shouldViewAll, setAdvancedCurrentStep]);
 };

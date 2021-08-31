@@ -6,16 +6,13 @@
  */
 
 // Import portions of React that are needed.
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
-import {
-  CREATE_FULL_PAGE_SECTION_PROTOTYPE,
-  CREATE_FULL_PAGE_STEP_PROTOTYPE,
-} from './constants';
+import { CREATE_FULL_PAGE_STEP_PROTOTYPE } from './constants';
 
 // Carbon and package components we use.
 import {
@@ -30,12 +27,12 @@ import {
 import { CreateInfluencerPrototype } from '../CreateInfluencerPrototype';
 import { ActionSet } from '../ActionSet';
 import {
-  usePreviousValue,
   useValidCreateStepCount,
   useCreateComponentFocus,
 } from '../../global/js/hooks';
+import { useResetCreateComponent } from './useResetCreateComponent';
 import { useCreateComponentStepChange } from './useCreateComponentStepChange';
-import { hasValidChildType } from '../../global/js/utils/hasValidChildType';
+import { hasValidChildrenType } from '../../global/js/utils/hasValidType';
 
 const blockClass = `${pkg.prefix}--create-full-page`;
 const componentName = 'CreateFullPagePrototype';
@@ -47,6 +44,7 @@ export let CreateFullPagePrototype = React.forwardRef(
       cancelButtonText,
       children,
       className,
+      initialStep,
       includeViewAllToggle,
       modalDangerButtonText,
       modalDescription,
@@ -55,7 +53,6 @@ export let CreateFullPagePrototype = React.forwardRef(
       nextButtonText,
       onClose,
       onRequestSubmit,
-      sideNavAriaLabel,
       submitButtonText,
       viewAllToggleLabelText,
       viewAllToggleOffLabelText,
@@ -67,10 +64,18 @@ export let CreateFullPagePrototype = React.forwardRef(
     const [createFullPageActions, setCreateFullPageActions] = useState([]);
     const [shouldViewAll, setShouldViewAll] = useState(false);
     const [currentStep, setCurrentStep] = useState(1);
+    const [advancedCurrentStep, setAdvancedCurrentStep] = useState(1);
     const [activeSectionIndex, setActiveSectionIndex] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
-    const previousState = usePreviousValue({ currentStep, open });
+    const previousState = {
+      currentStep: currentStep,
+      shouldViewAll: shouldViewAll,
+    };
+    const advancedPreviousState = {
+      currentStep: advancedCurrentStep,
+      shouldViewAll: shouldViewAll,
+    };
 
     // returns an array of full page steps
     const getFullPageSteps = useCallback(() => {
@@ -95,15 +100,27 @@ export let CreateFullPagePrototype = React.forwardRef(
       blockClass
     );
     useValidCreateStepCount(getFullPageSteps, componentName);
+    useResetCreateComponent({
+      previousState,
+      advancedPreviousState,
+      shouldViewAll: shouldViewAll,
+      setCurrentStep,
+      setAdvancedCurrentStep,
+      initialStep,
+      totalSteps: getFullPageSteps,
+      componentName,
+    });
     useCreateComponentStepChange({
       setCurrentStep,
+      setAdvancedCurrentStep,
       setIsSubmitting,
-      setShouldViewAll: shouldViewAll,
+      setShouldViewAll,
       onClose,
       onRequestSubmit,
       componentName,
       getComponentSteps: getFullPageSteps,
       currentStep,
+      advancedCurrentStep,
       shouldViewAll,
       backButtonText,
       cancelButtonText,
@@ -114,7 +131,6 @@ export let CreateFullPagePrototype = React.forwardRef(
       setCreateComponentActions: setCreateFullPageActions,
       setModalIsOpen,
     });
-
     // check if child is a full page step component
     const isFullPageStep = (child) => {
       if (
@@ -160,8 +176,12 @@ export let CreateFullPagePrototype = React.forwardRef(
             step++;
             return React.cloneElement(child, {
               className: cx(child.props.className, {
-                [`${blockClass}__step--hidden-step`]: currentStep !== step,
-                [`${blockClass}__step--visible-step`]: currentStep === step,
+                [`${blockClass}__step--hidden-step`]: shouldViewAll
+                  ? advancedCurrentStep !== step
+                  : currentStep !== step,
+                [`${blockClass}__step--visible-step`]: shouldViewAll
+                  ? advancedCurrentStep === step
+                  : currentStep === step,
               }),
               key: `key_${stepIndex}`,
             });
@@ -177,14 +197,13 @@ export let CreateFullPagePrototype = React.forwardRef(
             activeSectionIndex={activeSectionIndex}
             componentBlockClass={blockClass}
             createComponentName={componentName}
-            currentStep={currentStep}
-            // getCreateComponents={getFullPage}
+            currentStep={shouldViewAll ? advancedCurrentStep : currentStep}
+            open={true}
             createComponents={getFullPageComponents(children)}
             includeViewAllToggle={includeViewAllToggle}
             handleToggleState={(toggleState) => setShouldViewAll(toggleState)}
             handleActiveSectionIndex={(index) => setActiveSectionIndex(index)}
             previousState={previousState}
-            sideNavAriaLabel={sideNavAriaLabel}
             toggleState={shouldViewAll}
             viewAllToggleLabelText={viewAllToggleLabelText}
             viewAllToggleOffLabelText={viewAllToggleOffLabelText}
@@ -262,7 +281,7 @@ CreateFullPagePrototype.propTypes = {
   /**
    * The main content of the full page
    */
-  children: hasValidChildType({
+  children: hasValidChildrenType({
     componentName,
     childType: CREATE_FULL_PAGE_STEP_PROTOTYPE,
   }),
@@ -276,6 +295,13 @@ CreateFullPagePrototype.propTypes = {
    * An optional prop that provides a toggle element in the left side influencer panel
    */
   includeViewAllToggle: PropTypes.bool,
+
+  /**
+   * This can be used to open the component to a step other than the first step.
+   * For example, a create flow was previously in progress, data was saved, and
+   * is now being completed.
+   */
+  initialStep: PropTypes.number,
 
   /**
    * The primary 'danger' button text in the modal

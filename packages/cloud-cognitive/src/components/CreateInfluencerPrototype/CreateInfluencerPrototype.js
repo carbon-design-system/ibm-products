@@ -24,15 +24,12 @@ const blockClass = `${pkg.prefix}--create-influencer`;
 const componentName = 'CreateInfluencerPrototype';
 
 export let CreateInfluencerPrototype = ({
-  activeSectionIndex,
   className,
   componentBlockClass,
-  createComponentName,
   createComponents,
   currentStep,
   handleToggleState,
   handleActiveSectionIndex,
-  getCreateComponents,
   includeViewAllToggle,
   open,
   previousState,
@@ -42,7 +39,6 @@ export let CreateInfluencerPrototype = ({
   viewAllToggleOnLabelText,
 }) => {
   const [progressIndicatorState, setProgressIndicatorState] = useState('');
-  const [firstStep, setFirstStep] = useState(currentStep);
 
   // Animating states need to be reset here otherwise things won't render
   // the way they should after the component mounts/un-mounts
@@ -54,13 +50,11 @@ export let CreateInfluencerPrototype = ({
 
   const handleViewAllToggle = (newToggleValue) => {
     if (newToggleValue) {
-      setFirstStep(1)
       setProgressIndicatorState('closing');
       setTimeout(() => {
         handleToggleState(newToggleValue);
       }, moderate02);
     } else {
-
       setTimeout(() => {
         handleToggleState(newToggleValue);
         setProgressIndicatorState('opening');
@@ -74,10 +68,6 @@ export let CreateInfluencerPrototype = ({
       createComponentContainer.scrollTop = 0;
     }
   };
-
-  useEffect(() => {
-    console.log(currentStep - 1)
-  }, [currentStep])
 
   const renderViewAllToggle = () => {
     return (
@@ -94,18 +84,16 @@ export let CreateInfluencerPrototype = ({
     );
   };
 
-
   // renders the step progression components in the left influencer area
   const renderProgressSteps = () => {
     if (toggleState) {
       return (
         <div className={`${blockClass}__left-nav`}>
           <ProgressIndicator
-            currentIndex={currentStep- 1}
+            currentIndex={currentStep - 1}
             spaceEqually
             vertical
-            className={cx(`${blockClass}__progress-indicator`)}
-          >
+            className={cx(`${blockClass}__progress-indicator`)}>
             {createComponents.steps.map((child, stepIndex) => (
               <ProgressStep
                 label={child.props.title}
@@ -206,13 +194,6 @@ CreateInfluencerPrototype.propTypes = {
    * This is the open state of the CreateComponent in which the CreateInfluencer is used from
    */
   previousState: PropTypes.object,
-
-  /**
-   * The aria label to be used for the UI Shell SideNav Carbon component
-   */
-  sideNavAriaLabel: PropTypes.string.isRequired.if(
-    ({ includeViewAllToggle }) => includeViewAllToggle
-  ),
 
   /**
    * The current toggled state to be provided to the Toggle component

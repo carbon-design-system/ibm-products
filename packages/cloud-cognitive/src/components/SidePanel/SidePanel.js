@@ -13,11 +13,18 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { useResizeDetector } from 'react-resize-detector';
 import { moderate02 } from '@carbon/motion';
+
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+
+import {
+  allPropTypes,
+  deprecateProp,
+} from '../../global/js/utils/props-helper';
+
 import wrapFocus from '../../global/js/utils/wrapFocus';
 import { pkg } from '../../settings';
-import { allPropTypes } from '../../global/js/utils/props-helper';
+
 import { SIDE_PANEL_SIZES } from './constants';
-import { deprecateProp } from '../../global/js/utils/props-helper';
 
 // Carbon and package components we use.
 import { Button } from 'carbon-components-react';
@@ -651,7 +658,8 @@ export let SidePanel = React.forwardRef(
             onBlur={handleBlur}
             ref={contentRef}
             role="complementary"
-            aria-label={title}>
+            aria-label={title}
+            {...getDevtoolsProps(componentName)}>
             <span
               ref={startTrapRef}
               tabIndex="0"

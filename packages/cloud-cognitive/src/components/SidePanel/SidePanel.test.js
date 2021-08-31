@@ -15,8 +15,10 @@ import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { SidePanel } from '.';
 
-const blockClass = `${pkg.prefix}--side-panel`;
-const actionSetBlockClass = `${pkg.prefix}--action-set`;
+const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
+
+const blockClass = `${prefix}--side-panel`;
+const actionSetBlockClass = `${prefix}--action-set`;
 const sizes = ['xs', 'sm', 'md', 'lg', 'max'];
 
 const dataTestId = uuidv4();
@@ -27,6 +29,7 @@ const pageContentSelectorValue = '#side-panel-test-page-content';
 
 const onRequestCloseFn = jest.fn();
 const onUnmountFn = jest.fn();
+
 const renderSidePanel = ({ ...rest }, children = <p>test</p>) =>
   render(
     <SidePanel
@@ -374,6 +377,15 @@ describe('SidePanel', () => {
     const ref = React.createRef();
     renderSidePanel({ ref });
     expect(ref.current).toEqual(screen.getByRole('complementary'));
+  });
+
+  it('adds the Devtools attribute to the containing node', () => {
+    renderSidePanel({ 'data-testid': dataTestId });
+
+    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(SidePanel.displayName)
+    );
   });
 
   it('should call the onRequestClose event handler', () => {

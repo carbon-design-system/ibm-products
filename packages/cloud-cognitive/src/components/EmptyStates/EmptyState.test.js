@@ -19,9 +19,11 @@ import { NotificationsEmptyState } from './NotificationsEmptyState';
 import { UnauthorizedEmptyState } from './UnauthorizedEmptyState';
 import CustomIllustration from './story_assets/empty-state-bright-magnifying-glass.svg';
 
+const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
+
 const dataTestId = uuidv4();
 const className = uuidv4();
-const blockClass = `${pkg.prefix}--empty-state`;
+const blockClass = `${prefix}--empty-state`;
 const { name } = EmptyState;
 
 const defaultProps = {
@@ -145,6 +147,15 @@ describe(name, () => {
     expect(container.querySelector('svg')).toBeTruthy();
   });
 
+  it("adds the Devtools attribute to the `NoDataEmptyState`'s containing node", () => {
+    render(<NoDataEmptyState {...defaultProps} data-testid={dataTestId} />);
+
+    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(NoDataEmptyState.displayName)
+    );
+  });
+
   it('should render the ErrorEmptyState component', () => {
     const { container, rerender } = render(
       <ErrorEmptyState {...defaultProps} />
@@ -152,6 +163,15 @@ describe(name, () => {
     expect(container.querySelector('svg')).toBeTruthy();
     rerender(<ErrorEmptyState {...defaultProps} illustrationTheme="dark" />);
     expect(container.querySelector('svg')).toBeTruthy();
+  });
+
+  it("adds the Devtools attribute to the `ErrorEmptyState`'s containing node", () => {
+    render(<ErrorEmptyState {...defaultProps} data-testid={dataTestId} />);
+
+    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(ErrorEmptyState.displayName)
+    );
   });
 
   it('should render the NoTagsEmptyState component', () => {
@@ -162,6 +182,16 @@ describe(name, () => {
     rerender(<NoTagsEmptyState {...defaultProps} illustrationTheme="dark" />);
     expect(container.querySelector('svg')).toBeTruthy();
   });
+
+  it("adds the Devtools attribute to the `NoTagsEmptyState`'s containing node", () => {
+    render(<NoTagsEmptyState {...defaultProps} data-testid={dataTestId} />);
+
+    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(NoTagsEmptyState.displayName)
+    );
+  });
+
   it('should render the NotFoundEmptyState component', () => {
     const { container, rerender } = render(
       <NotFoundEmptyState {...defaultProps} />
@@ -170,6 +200,16 @@ describe(name, () => {
     rerender(<NotFoundEmptyState {...defaultProps} illustrationTheme="dark" />);
     expect(container.querySelector('svg')).toBeTruthy();
   });
+
+  it("adds the Devtools attribute to the `NotFoundEmptyState`'s containing node", () => {
+    render(<NotFoundEmptyState {...defaultProps} data-testid={dataTestId} />);
+
+    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(NotFoundEmptyState.displayName)
+    );
+  });
+
   it('should render the NotificationsEmptyState component', () => {
     const { container, rerender } = render(
       <NotificationsEmptyState {...defaultProps} />
@@ -180,6 +220,18 @@ describe(name, () => {
     );
     expect(container.querySelector('svg')).toBeTruthy();
   });
+
+  it("adds the Devtools attribute to the `NotificationsEmptyState`'s containing node", () => {
+    render(
+      <NotificationsEmptyState {...defaultProps} data-testid={dataTestId} />
+    );
+
+    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(NotificationsEmptyState.displayName)
+    );
+  });
+
   it('should render the UnauthorizedEmptyState component', () => {
     const { container, rerender } = render(
       <UnauthorizedEmptyState {...defaultProps} />
@@ -190,6 +242,18 @@ describe(name, () => {
     );
     expect(container.querySelector('svg')).toBeTruthy();
   });
+
+  it("adds the Devtools attribute to the `UnauthorizedEmptyState`'s containing node", () => {
+    render(
+      <UnauthorizedEmptyState {...defaultProps} data-testid={dataTestId} />
+    );
+
+    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(UnauthorizedEmptyState.displayName)
+    );
+  });
+
   it('should throw a custom prop type validation error when an illustration is used without an illustrationDescription prop', () => {
     jest.spyOn(console, 'error').mockImplementation(jest.fn());
     render(<EmptyState {...defaultProps} illustration={CustomIllustration} />);

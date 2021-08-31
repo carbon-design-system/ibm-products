@@ -11,9 +11,12 @@ import React, { useEffect, useState, useRef } from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { useClickOutside } from '../../global/js/hooks';
 import { pkg } from '../../settings';
 import { timeAgo } from './utils';
+
 import { NotificationsEmptyState } from '../EmptyStates/NotificationsEmptyState';
 
 // Carbon and package components we use.
@@ -333,7 +336,8 @@ export let NotificationsPanel = React.forwardRef(
           animation: `${open ? 'fadeIn 250ms' : 'fadeOut 250ms'}`,
         }}
         onAnimationEnd={onAnimationEnd}
-        ref={ref || notificationPanelRef}>
+        ref={ref || notificationPanelRef}
+        {...getDevtoolsProps(componentName)}>
         <div className={`${blockClass}__header-container`}>
           <div className={`${blockClass}__header-flex`}>
             <h1 className={`${blockClass}__header`}>{title}</h1>

@@ -12,7 +12,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Button, Link } from 'carbon-components-react';
+
+import { getDevtoolsProps } from '../../../global/js/utils/devtools';
 import { pkg } from '../../../settings';
+
 import { EmptyStateContent } from '../EmptyStateContent';
 import { NotificationsIllustration } from '../assets/NotificationsIllustration';
 import { EmptyStateDefaultProps } from '../EmptyState';
@@ -42,7 +45,8 @@ export let NotificationsEmptyState = React.forwardRef(
           ...rest
         }
         className={cx(blockClass, className)}
-        ref={ref}>
+        ref={ref}
+        {...getDevtoolsProps(componentName)}>
         <NotificationsIllustration size={size} theme={illustrationTheme} />
         <EmptyStateContent
           action={action}

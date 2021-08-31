@@ -1841,7 +1841,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   max-width: none;
 }
 
-.exp--export-modal .bx--modal-content {
+.exp--export-modal.bx--modal .bx--modal-content {
   padding-right: var(--cds-spacing-05, 1rem);
 }
 
@@ -2093,7 +2093,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   max-width: none;
 }
 
-.exp--import-modal .bx--modal-content {
+.exp--import-modal.bx--modal .bx--modal-content {
   padding-right: var(--cds-spacing-05, 1rem);
 }
 
@@ -2110,8 +2110,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: flex;
 }
 
-.exp--import-modal__import-button {
-  margin-left: var(--cds-spacing-05, 1rem);
+.exp--import-modal__import-button.bx--btn {
+  margin-left: var(--cds-spacing-03, 0.5rem);
 }
 
 .exp--import-modal__file-container {
@@ -2142,10 +2142,15 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .exp--import-modal .bx--file__selected-file {
   max-width: none;
+  background: var(--cds-ui-02, #ffffff);
 }
 
 .exp--import-modal .bx--file {
   margin-bottom: var(--cds-spacing-05, 1rem);
+}
+
+.exp--import-modal .bx--text-input:disabled {
+  background: var(--cds-ui-02, #ffffff);
 }
 
 @keyframes fadeIn {

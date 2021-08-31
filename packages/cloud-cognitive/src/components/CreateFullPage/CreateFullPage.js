@@ -11,7 +11,10 @@ import React, { useEffect, useCallback, useState } from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
+
 import { CREATE_FULL_PAGE_SECTION, CREATE_FULL_PAGE_STEP } from './constants';
 
 // Carbon and package components we use.
@@ -326,7 +329,11 @@ export let CreateFullPage = React.forwardRef(
     // currently, we are not supporting the use of 'view all' toggle state or CreateFullPageSection -- this may be a future feature
     /* istanbul ignore next */
     return (
-      <div {...rest} ref={ref} className={cx(blockClass, className)}>
+      <div
+        {...rest}
+        ref={ref}
+        className={cx(blockClass, className)}
+        {...getDevtoolsProps(componentName)}>
         <div className={`${blockClass}__influencer`}>
           <CreateInfluencer
             activeSectionIndex={activeSectionIndex}

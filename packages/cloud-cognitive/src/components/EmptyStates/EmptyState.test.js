@@ -19,9 +19,11 @@ import { NotificationsEmptyState } from './NotificationsEmptyState';
 import { UnauthorizedEmptyState } from './UnauthorizedEmptyState';
 import CustomIllustration from './story_assets/empty-state-bright-magnifying-glass.svg';
 
+const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
+
 const dataTestId = uuidv4();
 const className = uuidv4();
-const blockClass = `${pkg.prefix}--empty-state`;
+const blockClass = `${prefix}--empty-state`;
 const { name } = EmptyState;
 
 const defaultProps = {
@@ -110,6 +112,15 @@ describe(name, () => {
     const ref = React.createRef();
     render(<EmptyState {...defaultProps} ref={ref} />);
     expect(ref.current.classList.contains(blockClass)).toBeTruthy();
+  });
+
+  it('adds the Devtools attribute to the containing node', () => {
+    render(<EmptyState {...defaultProps} data-testid={dataTestId} />);
+
+    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(EmptyState.displayName)
+    );
   });
 
   it('applies className to the containing node', () => {

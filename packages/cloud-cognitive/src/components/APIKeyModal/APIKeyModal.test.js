@@ -8,7 +8,12 @@
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
+
+import { pkg } from '../../settings';
+
 import { APIKeyModal } from '.';
+
+const { devtoolsAttribute, getDevtoolsId } = pkg;
 
 Object.assign(navigator, {
   clipboard: {
@@ -307,14 +312,25 @@ describe(componentName, () => {
     expect(container.firstChild).toHaveClass(defaultProps.className);
   });
 
+  const dataTestId = 'data-testid';
+
   it('adds additional properties to the containing node', () => {
-    render(<APIKeyModal {...defaultProps} data-testid="test-id" />);
-    screen.getByTestId('test-id');
+    render(<APIKeyModal {...defaultProps} data-testid={dataTestId} />);
+    screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
     render(<APIKeyModal {...defaultProps} ref={ref} />);
     expect(ref.current).not.toBeNull();
+  });
+
+  it('adds the Devtools attribute to the containing node', () => {
+    render(<APIKeyModal {...defaultProps} data-testid={dataTestId} />);
+
+    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(componentName)
+    );
   });
 });

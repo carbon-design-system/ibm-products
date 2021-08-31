@@ -14,6 +14,7 @@ import { TextInput } from 'carbon-components-react';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { SidePanel } from '.';
+import { Add16 } from '@carbon/icons-react';
 
 const blockClass = `${pkg.prefix}--side-panel`;
 const actionSetBlockClass = `${pkg.prefix}--action-set`;
@@ -47,6 +48,7 @@ const SlideIn = ({
   actionToolbarButtons,
   selectorPageContent = pageContentSelectorValue,
   usePageContentSelector = false,
+  ...rest
 }) => {
   return (
     <div>
@@ -65,7 +67,8 @@ const SlideIn = ({
           usePageContentSelector ? selectorPageContent : null
         }
         placement={placement}
-        onUnmount={onUnmountFn}>
+        onUnmount={onUnmountFn}
+        {...rest}>
         Content
       </SidePanel>
       <div id={pageContentSelectorValue.slice(1)} />
@@ -344,25 +347,34 @@ describe('SidePanel', () => {
 
   it('should click an action toolbar button', () => {
     const { click } = userEvent;
-    const onActionToolbarButtonClickFn = jest.fn();
+    const warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
+    const toolbarButtonFn1 = jest.fn();
+    const toolbarButtonFn2 = jest.fn();
     const { container } = renderSidePanel({
       actionToolbarButtons: [
         {
           leading: true,
           label: 'Copy 1',
-          onClick: onActionToolbarButtonClickFn,
+          onClick: toolbarButtonFn1,
         },
         {
           label: 'Copy 2',
-          onClick: onActionToolbarButtonClickFn,
+          icon: Add16,
+          onActionToolbarButtonClick: toolbarButtonFn2,
         },
       ],
     });
-    const toolbarButton = container.querySelector(
+    const toolbarButtons = container.querySelectorAll(
       `.${blockClass}__action-toolbar-button`
     );
-    click(toolbarButton);
-    expect(onActionToolbarButtonClickFn).toHaveBeenCalled();
+    expect(warn).toBeCalledWith(
+      `The prop \`actionToolbarButtons[1].onActionToolbarButtonClick\` of \`${SidePanel.displayName}\` has been deprecated and will soon be removed. This prop will be removed in the future. Please use \`onClick\` instead`
+    );
+    warn.mockRestore();
+    click(toolbarButtons[0]);
+    expect(toolbarButtonFn1).toHaveBeenCalledTimes(1);
+    click(toolbarButtons[1]);
+    expect(toolbarButtonFn2).toHaveBeenCalledTimes(1);
   });
 
   it('adds additional properties to the containing node', () => {
@@ -469,12 +481,18 @@ describe('SidePanel', () => {
     expect(style.marginLeft).toBe('0px');
   });
 
-  it('should throw a custom prop type error when pageContentSelector is missing', () => {
+  it('should throw a custom prop type error when pageContentSelector is missing and labelText is provided with a title', () => {
     const errorSpy = jest.spyOn(console, 'error').mockImplementation();
     const warningSpy = jest.spyOn(console, 'warn').mockImplementation();
+    const labelText = uuidv4();
     try {
       render(
-        <SlideIn placement="left" open={false} usePageContentSelector>
+        <SlideIn
+          title={null}
+          labelText={labelText}
+          placement="left"
+          open
+          usePageContentSelector>
           Content
         </SlideIn>
       );

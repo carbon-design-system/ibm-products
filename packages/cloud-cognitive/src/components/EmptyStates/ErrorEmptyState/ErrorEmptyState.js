@@ -12,7 +12,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Link } from 'carbon-components-react';
 import cx from 'classnames';
+
+import { getDevtoolsProps } from '../../../global/js/utils/devtools';
 import { pkg } from '../../../settings';
+
 import { EmptyStateContent } from '../EmptyStateContent';
 import { ErrorIllustration } from '../assets/ErrorIllustration';
 import { EmptyStateDefaultProps } from '../EmptyState';
@@ -42,7 +45,8 @@ export let ErrorEmptyState = React.forwardRef(
           ...rest
         }
         className={cx(blockClass, className)}
-        ref={ref}>
+        ref={ref}
+        {...getDevtoolsProps(componentName)}>
         <ErrorIllustration theme={illustrationTheme} size={size} />
         <EmptyStateContent
           action={action}

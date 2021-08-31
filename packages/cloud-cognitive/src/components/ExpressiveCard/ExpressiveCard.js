@@ -8,8 +8,11 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { Card } from '../Card';
-import { pkg } from '../../settings';
+
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { prepareProps } from '../../global/js/utils/props-helper';
+import { pkg } from '../../settings';
+
 const componentName = 'ExpressiveCard';
 
 export let ExpressiveCard = forwardRef((props, ref) => {
@@ -19,7 +22,10 @@ export let ExpressiveCard = forwardRef((props, ref) => {
     'productive',
     'titleSize',
   ]);
-  return <Card ref={ref} {...validProps} />;
+
+  return (
+    <Card ref={ref} {...validProps} {...getDevtoolsProps(componentName)} />
+  );
 });
 
 // Return a placeholder if not released and not enabled by feature flag

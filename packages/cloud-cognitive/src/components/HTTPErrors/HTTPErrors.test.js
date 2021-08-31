@@ -16,7 +16,9 @@ import { HTTPError404 } from './HTTPError404';
 import { HTTPError403 } from './HTTPError403';
 import { HTTPErrorOther } from './HTTPErrorOther';
 
-const blockClass = `${pkg.prefix}--http-errors`;
+const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
+
+const blockClass = `${prefix}--http-errors`;
 const componentName = HTTPError404.displayName;
 
 const dataTestId = uuidv4();
@@ -77,6 +79,16 @@ describe(componentName, () => {
       container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
     ).toBeInTheDocument();
   });
+
+  it("adds the Devtools attribute to the `HTTPError404`'s containing node", () => {
+    render(<HTTPError404 {...defaultProps} data-testid={dataTestId} />);
+
+    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(componentName)
+    );
+  });
+
   it('should render the HTTPError403 component', () => {
     const { container } = render(<HTTPError403 {...defaultProps} />);
     expect(screen.getByText(errorCodeLabel));
@@ -87,6 +99,16 @@ describe(componentName, () => {
       container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
     ).toBeInTheDocument();
   });
+
+  it("adds the Devtools attribute to the `HTTPError403`'s containing node", () => {
+    render(<HTTPError403 {...defaultProps} data-testid={dataTestId} />);
+
+    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(HTTPError403.displayName)
+    );
+  });
+
   it('should render the HTTPErrorOther component', () => {
     const { container } = render(<HTTPErrorOther {...defaultProps} />);
     expect(screen.getByText(errorCodeLabel));
@@ -96,5 +118,14 @@ describe(componentName, () => {
     expect(
       container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
     ).toBeInTheDocument();
+  });
+
+  it("adds the Devtools attribute to the `HTTPErrorOther`'s containing node", () => {
+    render(<HTTPErrorOther {...defaultProps} data-testid={dataTestId} />);
+
+    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(HTTPErrorOther.displayName)
+    );
   });
 });

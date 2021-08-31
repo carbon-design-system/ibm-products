@@ -56,7 +56,7 @@ describe(componentName, () => {
     expect(ref.current).toHaveClass(blockClass);
   });
 
-  it('adds the Devtools prop to the containing node', () => {
+  it('adds the Devtools attribute to the containing node', () => {
     render(<DISPLAY_NAME data-testid={dataTestId}> </DISPLAY_NAME>);
 
     expect(screen.getByTestId(dataTestId)).toHaveAttribute(

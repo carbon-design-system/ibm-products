@@ -13,6 +13,8 @@ import cx from 'classnames';
 import { arrayOf, shape, string } from 'prop-types';
 import { HTTPErrorSvg403 } from '../assets/HTTPErrorSvg403';
 import { HTTPErrorContent } from '../HTTPErrorContent';
+
+import { getDevtoolsProps } from '../../../global/js/utils/devtools';
 import { pkg } from '../../../settings';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -22,7 +24,11 @@ const componentName = 'HTTPError403';
 export let HTTPError403 = React.forwardRef(
   ({ className, description, errorCodeLabel, links, title, ...rest }, ref) => {
     return (
-      <div {...rest} className={cx(blockClass, className)} ref={ref}>
+      <div
+        {...rest}
+        className={cx(blockClass, className)}
+        ref={ref}
+        {...getDevtoolsProps(componentName)}>
         <HTTPErrorContent {...{ description, errorCodeLabel, title, links }} />
         <HTTPErrorSvg403 className={`${blockClass}__image`} />
       </div>

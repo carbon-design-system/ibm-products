@@ -726,7 +726,7 @@ describe('PageHeader', () => {
     warn.mockRestore(); // Remove mock
   });
 
-  test.only('PageHeader grid settings narrow and fullWidth', () => {
+  test('PageHeader grid settings narrow and fullWidth', () => {
     const dataTestId = uuidv4();
     const { container } = render(
       <PageHeader data-testid={dataTestId} narrowGrid fullWidthGrid />

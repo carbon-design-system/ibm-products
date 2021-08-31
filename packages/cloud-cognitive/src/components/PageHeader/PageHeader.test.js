@@ -725,4 +725,15 @@ describe('PageHeader', () => {
 
     warn.mockRestore(); // Remove mock
   });
+
+  test('PageHeader grid settings narrow and fullWidth', () => {
+    const dataTestId = uuidv4();
+    const { container } = render(
+      <PageHeader data-testid={dataTestId} narrowGrid fullWidthGrid />
+    );
+
+    const grid = container.querySelector(`.${carbon.prefix}--grid`);
+    expect(grid).toHaveClass(`${carbon.prefix}--grid--narrow`);
+    expect(grid).toHaveClass(`${carbon.prefix}--grid--full-width`);
+  });
 });

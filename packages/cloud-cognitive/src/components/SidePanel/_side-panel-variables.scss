@@ -10,3 +10,19 @@ $small-panel-size: 20rem;
 $medium-panel-size: 30rem;
 $large-panel-size: 40rem;
 $max-panel-size: 75%;
+
+$side-panel-sizes: (
+  extra-small: 16rem,
+  small: 20rem,
+  medium: 30rem,
+  large: 40rem,
+  max: 75%,
+);
+
+$action-set-sizes: (
+  xs: 16rem,
+  sm: 20rem,
+  md: 30rem,
+  lg: 40rem,
+  max: 75%,
+);

@@ -22,6 +22,7 @@
 
 $block-class: #{$pkg-prefix}--side-panel;
 $action-set-block-class: #{$pkg-prefix}--action-set;
+$sizes: extra-small, small, medium, large, max;
 
 @mixin sidePanelEntranceRight($size: $medium-panel-size) {
   @keyframes sidePanelEntranceRight {
@@ -111,6 +112,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
   }
 
   .#{$block-class}__container {
+    @include setPanelSize();
     --#{$block-class}--subtitle-opacity: 1;
     --#{$block-class}--title-container-height: 0;
     --#{$block-class}--title-text-height: 0;
@@ -125,51 +127,27 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     position: fixed;
     z-index: 3;
     top: $spacing-09;
-    min-width: $medium-panel-size; // set default panel size
-    max-width: $medium-panel-size; // set default panel size
     height: calc(100% - 3rem);
     box-sizing: border-box;
     background-color: $ui-01;
     color: $text-01;
     transition: transform $duration--moderate-02;
     transition-timing-function: carbon--motion(standard);
-    &.#{$block-class}__container-right-placement {
-      right: 0;
-      border-left: 1px solid $decorative-01;
+    @each $size, $size_value in $side-panel-sizes {
+      &.#{$block-class}__container-right-placement.#{$block-class}__container--#{$size} {
+        @include sidePanelEntrance(right, $size_value);
+
+        right: 0;
+        border-left: 1px solid $decorative-01;
+      }
     }
-    &.#{$block-class}__container-right-placement.#{$block-class}__container--extra-small {
-      @include sidePanelEntrance(right, $extra-small-panel-size);
-    }
-    &.#{$block-class}__container-right-placement.#{$block-class}__container--small {
-      @include sidePanelEntrance(right, $small-panel-size);
-    }
-    &.#{$block-class}__container-right-placement.#{$block-class}__container--medium {
-      @include sidePanelEntrance(right, $medium-panel-size);
-    }
-    &.#{$block-class}__container-right-placement.#{$block-class}__container--large {
-      @include sidePanelEntrance(right, $large-panel-size);
-    }
-    &.#{$block-class}__container-right-placement.#{$block-class}__container--max {
-      @include sidePanelEntrance(right, $max-panel-size);
-    }
-    &.#{$block-class}__container-left-placement {
-      left: 0;
-      border-right: 1px solid $decorative-01;
-    }
-    &.#{$block-class}__container-left-placement.#{$block-class}__container--extra-small {
-      @include sidePanelEntrance(left, $extra-small-panel-size);
-    }
-    &.#{$block-class}__container-left-placement.#{$block-class}__container--small {
-      @include sidePanelEntrance(left, $small-panel-size);
-    }
-    &.#{$block-class}__container-left-placement.#{$block-class}__container--medium {
-      @include sidePanelEntrance(left, $medium-panel-size);
-    }
-    &.#{$block-class}__container-left-placement.#{$block-class}__container--large {
-      @include sidePanelEntrance(left, $large-panel-size);
-    }
-    &.#{$block-class}__container-left-placement.#{$block-class}__container--max {
-      @include sidePanelEntrance(left, $max-panel-size);
+    @each $size, $size_value in $side-panel-sizes {
+      &.#{$block-class}__container-left-placement.#{$block-class}__container--#{$size} {
+        @include sidePanelEntrance(left, $size_value);
+
+        left: 0;
+        border-right: 1px solid $decorative-01;
+      }
     }
     &.#{$block-class}__container-with-action-toolbar.#{$block-class}__with-condensed-header {
       .#{$block-class}__title-container {
@@ -417,17 +395,10 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       bottom: 0;
       border-top: 1px solid $decorative-01;
       background-color: $ui-01;
-      &.#{$action-set-block-class}--xs {
-        @include setPanelSize($extra-small-panel-size);
-      }
-      &.#{$action-set-block-class}--sm {
-        @include setPanelSize($small-panel-size);
-      }
-      &.#{$action-set-block-class}--md {
-        @include setPanelSize($medium-panel-size);
-      }
-      &.#{$action-set-block-class}--lg {
-        @include setPanelSize($large-panel-size);
+      @each $size, $size_value in $action-set-sizes {
+        &.#{$action-set-block-class}--#{$size} {
+          @include setPanelSize($size_value);
+        }
       }
       &.#{$action-set-block-class}--max {
         .#{$action-set-block-class}__action-button {

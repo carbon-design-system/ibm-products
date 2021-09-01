@@ -15,8 +15,9 @@ import { TagSetModal } from './TagSetModal';
 import { Tag } from 'carbon-components-react';
 import { useResizeDetector } from 'react-resize-detector';
 
-import { pkg } from '../../settings';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { prepareProps, isRequiredIf } from '../../global/js/utils/props-helper';
+import { pkg } from '../../settings';
 
 const componentName = 'TagSet';
 const blockClass = `${pkg.prefix}--tag-set`;
@@ -197,7 +198,11 @@ export let TagSet = React.forwardRef(
     });
 
     return (
-      <div {...rest} className={cx([blockClass, className])} ref={tagSetRef}>
+      <div
+        {...rest}
+        className={cx([blockClass, className])}
+        ref={tagSetRef}
+        {...getDevtoolsProps(componentName)}>
         <div
           className={cx([
             `${blockClass}__space`,

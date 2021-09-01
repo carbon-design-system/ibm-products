@@ -7,4 +7,3 @@
 
 export { CreateFullPagePrototype } from './CreateFullPagePrototype';
 export { CreateFullPageStepPrototype } from './CreateFullPageStepPrototype';
-export { CreateFullPageSectionPrototype } from './CreateFullPageSectionPrototype';

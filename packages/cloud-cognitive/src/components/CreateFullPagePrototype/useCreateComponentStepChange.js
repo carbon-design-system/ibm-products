@@ -118,7 +118,6 @@ export const useCreateComponentStepChange = ({
       const createSteps = displayCorrectSteps();
       const total = createSteps.length;
       const buttons = [];
-      console.log(advancedCurrentStep + 1);
       buttons.push({
         key: 'create-action-button-back',
         label: backButtonText,

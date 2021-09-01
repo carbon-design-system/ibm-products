@@ -9,7 +9,7 @@
 
 @import 'carbon-components/scss/components/progress-indicator/progress-indicator';
 
-@mixin create-influencer {
+@mixin create-influencer-prototype {
   $block-class: #{$pkg-prefix}--create-influencer-prototype;
   $create-tearsheet-block-class: #{$pkg-prefix}--tearsheet-create;
   $influencerAnimationStart: calc(-1 * #{$spacing-05});

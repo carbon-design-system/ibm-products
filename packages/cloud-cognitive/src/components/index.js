@@ -10,11 +10,6 @@ export { APIKeyModal } from './APIKeyModal';
 export { Cascade } from './Cascade';
 export { ComboButton, ComboButtonItem } from './ComboButton';
 export { ContextHeader } from './ContextHeader';
-export {
-  CreateFullPagePrototype,
-  CreateFullPageStepPrototype,
-  CreateFullPageSectionPrototype,
-} from './CreateFullPagePrototype';
 export { CreateFullPage, CreateFullPageStep } from './CreateFullPage';
 export { CreateModal } from './CreateModal';
 export { CreateSidePanel } from './CreateSidePanel';

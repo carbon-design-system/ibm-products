@@ -8,7 +8,11 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
+import { pkg } from '../../settings';
+
 import { ExpressiveCard } from '.';
+
+const { devtoolsAttribute, getDevtoolsId } = pkg;
 
 const componentName = ExpressiveCard.displayName;
 
@@ -28,14 +32,25 @@ describe(componentName, () => {
     expect(container.firstChild).toHaveClass('test-class');
   });
 
+  const dataTestId = 'dataTestId';
+
   it('adds additional properties to the containing node', () => {
-    render(<ExpressiveCard data-testid="test-id" />);
-    screen.getByTestId('test-id');
+    render(<ExpressiveCard data-testid={dataTestId} />);
+    screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
     render(<ExpressiveCard ref={ref} />);
     expect(ref.current).not.toBeNull();
+  });
+
+  it('adds the Devtools attribute to the containing node', () => {
+    render(<ExpressiveCard data-testid={dataTestId} />);
+
+    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(componentName)
+    );
   });
 });

@@ -23,7 +23,6 @@ import {
 
 import wrapFocus from '../../global/js/utils/wrapFocus';
 import { pkg } from '../../settings';
-
 import { SIDE_PANEL_SIZES } from './constants';
 
 // Carbon and package components we use.
@@ -204,7 +203,8 @@ export let SidePanel = React.forwardRef(
             : sidePanelSubtitleElementHeight;
         sidePanelSubtitleElementHeight =
           sidePanelSubtitleElementHeight < 0
-            ? 16
+            ? sidePanelScrollArea?.scrollHeight -
+              sidePanelScrollArea?.clientHeight
             : sidePanelSubtitleElementHeight;
         /* istanbul ignore next */
         sidePanelScrollArea &&
@@ -505,7 +505,7 @@ export let SidePanel = React.forwardRef(
           actionToolbarButtons && actionToolbarButtons.length,
         [`${blockClass}__container-without-overlay`]:
           !includeOverlay && !slideIn,
-        [`${blockClass}__container-is-animating`]: !animationComplete,
+        [`${blockClass}__container-is-animating`]: !animationComplete || !open,
       },
     ]);
 
@@ -516,9 +516,10 @@ export let SidePanel = React.forwardRef(
             [`${blockClass}__on-detail-step`]: currentStep > 0,
             [`${blockClass}__on-detail-step-without-title`]:
               currentStep > 0 && !title,
-            [`${blockClass}__title-container--no-animation`]: !animateTitle,
+            [`${blockClass}__title-container--no-title-animation`]:
+              !animateTitle,
             [`${blockClass}__title-container-is-animating`]:
-              !animationComplete && animateTitle,
+              !animationComplete || !open,
             [`${blockClass}__title-container-without-title`]: !title,
           })}>
           {currentStep > 0 && (
@@ -591,9 +592,8 @@ export let SidePanel = React.forwardRef(
                 onClick={(event) =>
                   action.onClick
                     ? action.onClick(event)
-                    : action.onActionToolbarButtonClick
-                    ? action.onActionToolbarButtonClick(event)
-                    : null
+                    : action.onActionToolbarButtonClick &&
+                      action.onActionToolbarButtonClick(event)
                 }>
                 {action.leading && action.label}
               </Button>
@@ -636,10 +636,8 @@ export let SidePanel = React.forwardRef(
       shouldRender && (
         <>
           <div
-            {
-              // Pass through any other property values as HTML attributes.
-              ...rest
-            }
+            {...getDevtoolsProps(componentName)}
+            {...rest}
             id={`${blockClass}-outer`}
             className={mainPanelClassNames}
             style={{
@@ -658,8 +656,7 @@ export let SidePanel = React.forwardRef(
             onBlur={handleBlur}
             ref={contentRef}
             role="complementary"
-            aria-label={title}
-            {...getDevtoolsProps(componentName)}>
+            aria-label={title}>
             <span
               ref={startTrapRef}
               tabIndex="0"
@@ -672,6 +669,8 @@ export let SidePanel = React.forwardRef(
               ref={sidePanelInnerRef}
               className={cx(`${blockClass}__inner-content`, {
                 [`${blockClass}__static-inner-content`]: !animateTitle,
+                [`${blockClass}__inner-content-with-actions`]:
+                  actions && actions.length,
               })}>
               {animateTitle && renderHeader()}
               <div className={`${blockClass}__body-content`}>{children}</div>

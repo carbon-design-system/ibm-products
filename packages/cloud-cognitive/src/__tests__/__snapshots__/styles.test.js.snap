@@ -963,16 +963,16 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   pointer-events: none;
 }
 
-.exp--side-panel__container.exp--side-panel__container-is-animating .exp--side-panel__title-container.exp--side-panel__title-container--no-animation {
+.exp--side-panel__container.exp--side-panel__container-is-animating .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation {
   top: 0;
 }
 
 .exp--side-panel__container.exp--side-panel__container-is-animating .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation {
-  top: var(--exp--side-panel--title-container-height);
+  top: var(--exp--side-panel--title-text-height);
 }
 
 .exp--side-panel__container.exp--side-panel__container-is-animating .exp--side-panel__action-toolbar.exp--side-panel__action-toolbar-no-animation {
-  top: calc( var(--exp--side-panel--title-container-height) + var(--exp--side-panel--subtitle-container-height));
+  top: calc( var(--exp--side-panel--title-text-height) + var(--exp--side-panel--subtitle-container-height));
 }
 
 .exp--side-panel__container .exp--side-panel__title-text {
@@ -1051,11 +1051,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   padding-right: var(--cds-spacing-07, 2rem);
 }
 
-.exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container--no-animation.exp--side-panel__title-container-is-animating {
+.exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation.exp--side-panel__title-container-is-animating {
   top: 0;
 }
 
-.exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container--no-animation {
+.exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation {
   min-width: 30rem;
   max-width: 30rem;
   position: fixed;
@@ -1068,6 +1068,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   height: calc(100vh - 3rem);
   margin-top: calc( var(--exp--side-panel--title-text-height) + var(--exp--side-panel--subtitle-container-height) + var(--exp--side-panel--action-bar-container-height));
   overflow-x: hidden;
+}
+
+.exp--side-panel__container .exp--side-panel__inner-content-with-actions {
+  height: calc(100vh - 7rem);
 }
 
 .exp--side-panel__container .exp--side-panel__inner-content.exp--side-panel__static-inner-content {
@@ -1158,7 +1162,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--side-panel__container .exp--side-panel__body-content {
   padding: var(--cds-spacing-05, 1rem);
   padding-top: 0;
-  padding-bottom: var(--exp--side-panel--content-bottom-padding);
 }
 
 .exp--side-panel__container .exp--side-panel__actions-container {

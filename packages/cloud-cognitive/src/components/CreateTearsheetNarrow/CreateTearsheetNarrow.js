@@ -12,7 +12,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Form } from 'carbon-components-react';
+
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
+
 import { TearsheetNarrow } from '../Tearsheet/TearsheetNarrow';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -82,7 +85,8 @@ export let CreateTearsheetNarrow = React.forwardRef(
         label={label}
         selectorPrimaryFocus={selectorPrimaryFocus}
         verticalPosition={verticalPosition}
-        role="presentation">
+        role="presentation"
+        {...getDevtoolsProps(componentName)}>
         <h3 className={cx(`${blockClass}__form-title-text`, formTextClass)}>
           {formTitle}
         </h3>

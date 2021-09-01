@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.80.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.79.1...@carbon/ibm-cloud-cognitive@0.80.0) (2021-08-31)
+
+
+### Features
+
+* **devtools:** add support to released components (1 / 3) ([#1220](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1220)) ([25209f9](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/25209f9dfe4115843315e74bb6dfcf784a8b950c))
+
+
+
+
+
+## [0.79.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.79.0...@carbon/ibm-cloud-cognitive@0.79.1) (2021-08-31)
+
+
+### Bug Fixes
+
+* **SidePanel:** [#1204](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1204) side panel closing animation fix ([#1222](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1222)) ([53953a5](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/53953a52b5842e27253208cad16d52f8b106530b))
+
+
+
+
+
+# [0.79.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.78.4...@carbon/ibm-cloud-cognitive@0.79.0) (2021-08-31)
+
+
+### Features
+
+* page header props to influence grid width ([#1225](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1225)) ([c73255d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c73255d87d6a1fba94b1ce27bc826250562b915b))
+
+
+
+
+
 ## [0.78.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.78.3...@carbon/ibm-cloud-cognitive@0.78.4) (2021-08-30)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

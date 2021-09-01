@@ -114,6 +114,15 @@ describe(name, () => {
     expect(ref.current.classList.contains(blockClass)).toBeTruthy();
   });
 
+  it('adds the Devtools attribute to the containing node', () => {
+    render(<EmptyState {...defaultProps} data-testid={dataTestId} />);
+
+    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(EmptyState.displayName)
+    );
+  });
+
   it('applies className to the containing node', () => {
     render(<EmptyState {...defaultProps} className={className} />);
     expect(screen.getByText(/Empty state title/g).parentElement).toHaveClass(

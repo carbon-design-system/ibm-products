@@ -13,12 +13,16 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { useResizeDetector } from 'react-resize-detector';
 import { moderate02 } from '@carbon/motion';
-import wrapFocus from '../../global/js/utils/wrapFocus';
-import { pkg } from '../../settings';
+
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+
 import {
   allPropTypes,
   deprecateProp,
 } from '../../global/js/utils/props-helper';
+
+import wrapFocus from '../../global/js/utils/wrapFocus';
+import { pkg } from '../../settings';
 import { SIDE_PANEL_SIZES } from './constants';
 
 // Carbon and package components we use.
@@ -632,10 +636,8 @@ export let SidePanel = React.forwardRef(
       shouldRender && (
         <>
           <div
-            {
-              // Pass through any other property values as HTML attributes.
-              ...rest
-            }
+            {...getDevtoolsProps(componentName)}
+            {...rest}
             id={`${blockClass}-outer`}
             className={mainPanelClassNames}
             style={{

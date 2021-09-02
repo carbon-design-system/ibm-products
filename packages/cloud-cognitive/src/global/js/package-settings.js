@@ -20,6 +20,9 @@ const defaults = {
     CreateFullPageStep: true,
     CreateSidePanel: true,
     CreateTearsheetNarrow: true,
+    CreateTearsheet: true,
+    CreateTearsheetStep: true,
+    CreateTearsheetDivider: true,
     EmptyState: true,
     ErrorEmptyState: true,
     ExportModal: true,
@@ -47,9 +50,6 @@ const defaults = {
 
     // other public components not yet reviewed and released:
     Cascade: false,
-    CreateTearsheet: false,
-    CreateTearsheetStep: false,
-    CreateTearsheetDivider: false,
     ContextHeader: false,
     ExampleComponent: false,
     LoadingBar: false,

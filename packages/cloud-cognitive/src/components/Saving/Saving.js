@@ -15,7 +15,10 @@ import {
   ErrorFilled16,
 } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
+
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
+
 const componentName = 'Saving';
 
 export let Saving = forwardRef(
@@ -64,7 +67,11 @@ export let Saving = forwardRef(
     const blockClass = `${pkg.prefix}--saving`;
 
     return (
-      <div {...rest} ref={ref} className={cx(blockClass, className)}>
+      <div
+        {...rest}
+        ref={ref}
+        className={cx(blockClass, className)}
+        {...getDevtoolsProps(componentName)}>
         {type === 'auto' ? (
           <div className={`${blockClass}__message`}>
             {status === 'fail' && (

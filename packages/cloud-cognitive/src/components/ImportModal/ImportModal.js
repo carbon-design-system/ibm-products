@@ -18,7 +18,10 @@ import {
 } from 'carbon-components-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
+
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import uuidv4 from '../../global/js/utils/uuidv4';
+
 import { pkg } from '../../settings';
 const componentName = 'ImportModal';
 
@@ -160,7 +163,7 @@ export let ImportModal = forwardRef(
     return (
       <ComposedModal
         {...rest}
-        {...{ open, ref, onClose }}
+        {...{ open, ref, onClose, ...getDevtoolsProps(componentName) }}
         aria-label={title}
         className={cx(blockClass, className)}
         size="sm"

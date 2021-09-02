@@ -14,7 +14,9 @@ import { pkg } from '../../settings';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-const blockClass = `${pkg.prefix}--create-modal`;
+const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
+
+const blockClass = `${prefix}--create-modal`;
 
 import { CreateModal } from '.';
 const componentName = CreateModal.displayName;
@@ -91,6 +93,15 @@ describe(componentName, () => {
   it('adds additional properties to the containing node', () => {
     renderComponent({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
+  });
+
+  it('adds the Devtools attribute to the containing node', () => {
+    renderComponent({ 'data-testid': dataTestId });
+
+    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(componentName)
+    );
   });
 
   it('has no accessibility violations', async () => {

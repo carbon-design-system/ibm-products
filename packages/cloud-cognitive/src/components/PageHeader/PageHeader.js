@@ -7,11 +7,10 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { extractShapesArray } from '../../global/js/utils/props-helper';
 import { layout05, baseFontSize } from '@carbon/layout';
 import cx from 'classnames';
 import { useResizeDetector } from 'react-resize-detector';
-import { useWindowResize, useNearestScroll } from '../../global/js/hooks';
+
 import {
   BreadcrumbItem,
   Grid,
@@ -21,17 +20,24 @@ import {
   SkeletonText,
   Tag,
 } from 'carbon-components-react';
+
+import { useWindowResize, useNearestScroll } from '../../global/js/hooks';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+
+import {
+  deprecateProp,
+  deprecatePropUsage,
+  extractShapesArray,
+  prepareProps,
+} from '../../global/js/utils/props-helper';
+
+import { pkg } from '../../settings';
+
 import { ActionBar } from '../ActionBar/';
 import { BreadcrumbWithOverflow } from '../BreadcrumbWithOverflow';
 import { TagSet, string_required_if_more_than_10_tags } from '../TagSet/TagSet';
 import { ButtonSetWithOverflow } from '../ButtonSetWithOverflow';
-import { pkg } from '../../settings';
 import { ChevronUp16 } from '@carbon/icons-react';
-import {
-  deprecateProp,
-  deprecatePropUsage,
-  prepareProps,
-} from '../../global/js/utils/props-helper';
 
 const componentName = 'PageHeader';
 
@@ -68,7 +74,9 @@ export let PageHeader = React.forwardRef(
       disableBreadcrumbScroll,
       expandHeaderIconDescription,
       expandHeaderLabel: deprecated_expandHeaderLabel,
+      fullWidthGrid,
       hasCollapseHeaderToggle,
+      narrowGrid,
       navigation,
       pageActions,
       pageActionsOverflowLabel,
@@ -494,8 +502,9 @@ export let PageHeader = React.forwardRef(
             },
           ])}
           style={pageHeaderStyles}
-          ref={headerRef}>
-          <Grid>
+          ref={headerRef}
+          {...getDevtoolsProps(componentName)}>
+          <Grid fullWidth={fullWidthGrid} narrow={narrowGrid}>
             <div className={`${blockClass}__non-navigation-row-content`}>
               {hasBreadcrumbRow ? (
                 <Row
@@ -1030,6 +1039,10 @@ PageHeader.propTypes = {
       hasBackgroundAlways && hasCollapseHeaderToggle
   ),
   /**
+   * The PageHeader is hosted in a Carbon grid, this value is passed through to the Carbon grid fullWidth prop
+   */
+  fullWidthGrid: PropTypes.bool,
+  /**
    * Specifies if the PageHeader should have a background always on and defaults to the preferred `true`.
    * When false some parts of the header gain a background if they stick to the top of the PageHeader on scroll.
    */
@@ -1041,6 +1054,10 @@ PageHeader.propTypes = {
    * Collapsing has no effect if there is insufficient content to scroll.
    */
   hasCollapseHeaderToggle: PropTypes.bool,
+  /**
+   * The PageHeader is hosted in a Carbon grid, this value is passed through to the Carbon grid narrow prop
+   */
+  narrowGrid: PropTypes.bool,
   /**
    * Content for the navigation area in the PageHeader. Should
    * be a React element that is normally a Carbon Tabs component. Optional.
@@ -1127,7 +1144,9 @@ PageHeader.propTypes = {
 };
 
 PageHeader.defaultProps = {
+  fullWidthGrid: false,
   hasBackgroundAlways: true,
+  narrowGrid: false,
 };
 
 PageHeader.displayName = componentName;

@@ -27,7 +27,7 @@
     max-width: none;
   }
 
-  .#{$block-class} .#{$carbon-prefix}--modal-content {
+  .#{$block-class}.#{$carbon-prefix}--modal .#{$carbon-prefix}--modal-content {
     padding-right: $spacing-05;
   }
 
@@ -44,8 +44,8 @@
     display: flex;
   }
 
-  .#{$block-class}__import-button {
-    margin-left: $spacing-05;
+  .#{$block-class}__import-button.#{$carbon-prefix}--btn {
+    margin-left: $spacing-03;
   }
 
   .#{$block-class}__file-container {
@@ -71,10 +71,15 @@
 
   .#{$block-class} .#{$carbon-prefix}--file__selected-file {
     max-width: none;
+    background: $ui-02;
   }
 
   .#{$block-class} .#{$carbon-prefix}--file {
     margin-bottom: $spacing-05;
+  }
+
+  .#{$block-class} .#{$carbon-prefix}--text-input:disabled {
+    background: $ui-02;
   }
 }
 

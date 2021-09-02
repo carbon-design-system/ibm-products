@@ -25,7 +25,7 @@
     max-width: none;
   }
 
-  .#{$block-class} .bx--modal-content {
+  .#{$block-class}.#{$carbon-prefix}--modal .bx--modal-content {
     padding-right: $spacing-05;
   }
 

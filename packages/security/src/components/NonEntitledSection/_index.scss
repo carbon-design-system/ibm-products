@@ -1,5 +1,5 @@
 ////
-/// Non etitled section component.
+/// Non entitled section component.
 /// @group ne-section
 /// @copyright IBM Security 2019 - 2021
 ////
@@ -8,6 +8,7 @@
 @import '@carbon/layout/scss/mini-unit';
 @import '@carbon/layout/scss/spacing';
 @import '@carbon/themes/scss/tokens';
+@import '@carbon/type/scss/font-family';
 @import '@carbon/type/scss/scale';
 
 @import '../IconButton/index';
@@ -26,28 +27,30 @@
   background-size: contain;
 
   &__content-wrapper {
-    padding: carbon--mini-units($count: 12) $carbon--spacing-07
-      $carbon--spacing-09 $carbon--spacing-07;
+    padding: $carbon--spacing-12 $carbon--spacing-07 $carbon--spacing-09;
   }
 
   &__title,
   &__sub-title,
   &__description {
+    @include carbon--font-weight($weight: regular);
+
     color: $ui-05;
-    font-weight: normal;
     line-height: initial;
   }
 
   &__title {
     @include carbon--type-scale($step: 6);
 
-    margin: 0 0 carbon--mini-units($count: 6.5) 0;
+    margin-top: 0;
+    margin-bottom: $carbon--spacing-09;
   }
 
   &__sub-title {
     @include carbon--type-scale($step: 1);
 
-    margin: 0 0 $carbon--spacing-03 0;
+    margin-top: $carbon--spacing-02;
+    margin-bottom: $carbon--spacing-03;
   }
 
   &__description {

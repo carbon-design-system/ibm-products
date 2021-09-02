@@ -166,10 +166,14 @@
   }
 
   &__transition {
+    /// Transform.
+    /// @type Length
+    $panel__transform: translate3d($panel__sizing__width, 0, 0);
+
     &--appear,
     &--enter {
       opacity: 0;
-      transform: translate3d($panel__sizing__width, 0, 0);
+      transform: $panel__transform;
 
       &--active {
         opacity: 1;
@@ -188,7 +192,7 @@
 
       &--active {
         opacity: 0;
-        transform: translate3d($panel__sizing__width, 0, 0);
+        transform: $panel__transform;
         transition: all $duration--moderate-02;
         transition-timing-function: carbon--motion(
           $name: exit,

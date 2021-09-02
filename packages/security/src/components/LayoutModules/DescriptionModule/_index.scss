@@ -16,11 +16,14 @@
   &__content {
     @include carbon--type-style($name: body-long-01);
 
-    margin-top: 0;
-    margin-bottom: map-get($map: $body-long-01, $key: font-size) *
-      map-get($map: $body-long-01, $key: line-height);
+    margin-top: $carbon--spacing-02;
+    margin-bottom: $carbon--spacing-05;
 
-    &:last-child {
+    &:first-of-type {
+      margin-top: 0;
+    }
+
+    &:last-of-type {
       margin-bottom: 0;
     }
   }

@@ -5,6 +5,7 @@
 ////
 
 @import '@carbon/type/scss/classes';
+@import '@carbon/type/scss/font-family';
 @import '@carbon/type/scss/type';
 
 @import 'carbon-components/scss/globals/scss/css--font-face';
@@ -35,29 +36,11 @@ $font-family-serif: carbon--font-family(
 
 /// Font family deprecation mappings.
 /// @type Map<string, string>
-$font-family-deprecation-map: (
-  mono:
-    carbon--font-family(
-      $name: mono,
-    ),
-  serif:
-    carbon--font-family(
-      $name: serif,
-    ),
-);
+$font-family-deprecation-map: (mono, serif);
 
 /// Font weight deprecation mappings.
 /// @type Map<string, Length>
-$font-weight-deprecation-map: (
-  light:
-    carbon--font-weight(
-      $weight: light,
-    ),
-  semibold:
-    carbon--font-weight(
-      $weight: semibold,
-    ),
-);
+$font-weight-deprecation-map: (light, semibold);
 
 /// Type style deprecation mappings.
 /// @type Map<string, string>
@@ -104,25 +87,23 @@ $type-style-deprecation-map: (
     }
 
     .#{$type__name} {
-      font-family: carbon--font-family($name: sans);
+      @include carbon--font-family($name: sans);
 
       &-italic {
+        // stylelint-disable-next-line carbon/type-token-use
         font-style: italic;
       }
 
-      @each $font-family-class,
-        $font-family-value in $font-family-deprecation-map
-      {
-        &-#{$font-family-class} {
-          font-family: $font-family-value;
+      @each $font-family in $font-family-deprecation-map {
+        &-#{$font-family} {
+          @include carbon--font-family($name: $font-family);
         }
       }
     }
 
-    @each $font-weight-class, $font-weight-value in $font-weight-deprecation-map
-    {
-      .#{$type__name}-#{$font-weight-class} {
-        font-weight: $font-weight-value;
+    @each $font-weight in $font-weight-deprecation-map {
+      .#{$type__name}-#{$font-weight} {
+        @include carbon--font-weight($weight: $font-weight);
       }
     }
 

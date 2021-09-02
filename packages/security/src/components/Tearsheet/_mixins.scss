@@ -6,8 +6,9 @@
 
 @import '@carbon/layout/scss/spacing';
 @import '@carbon/layout/scss/mini-unit';
-@import '@carbon/type/scss/index';
 @import '@carbon/themes/scss/tokens';
+@import '@carbon/type/scss/index';
+
 @import 'carbon-components/scss/globals/scss/layout';
 @import 'carbon-components/scss/globals/scss/vars';
 
@@ -48,6 +49,14 @@ $tearsheet__layer: z(
   /// @type Length
   $tearsheet__sizing__dimensions: $carbon--layout-04;
 
+  /// Transform.
+  /// @type Length
+  $tearsheet__transform: translate3d($tearsheet__position, 0, 0);
+
+  /// Active transform.
+  /// @type Length
+  $tearsheet__transform--active: translate3d($tearsheet__position, 100%, 0);
+
   @include input__background-color;
 
   position: fixed;
@@ -62,7 +71,7 @@ $tearsheet__layer: z(
   margin-right: $tearsheet__sizing__margin;
   margin-left: $tearsheet__sizing__margin;
   background-color: $tearsheet__color__background;
-  transform: translate3d(#{$tearsheet__position}, 0, 0);
+  transform: $tearsheet__transform;
 
   &__transition {
     &--enter,
@@ -73,18 +82,18 @@ $tearsheet__layer: z(
     }
 
     &--enter {
-      transform: translate3d(#{$tearsheet__position}, 100%, 0);
+      transform: $tearsheet__transform--active;
 
       &--active {
-        transform: translate3d(#{$tearsheet__position}, 0, 0);
+        transform: $tearsheet__transform;
       }
     }
 
     &--leave {
-      transform: translate3d(#{$tearsheet__position}, 0, 0);
+      transform: $tearsheet__transform;
 
       &--active {
-        transform: translate3d(#{$tearsheet__position}, 100%, 0);
+        transform: $tearsheet__transform--active;
       }
     }
   }

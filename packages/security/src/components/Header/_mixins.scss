@@ -51,8 +51,9 @@ $header__transition__timing-function: $timing-function;
 
   margin-left: auto;
   color: $inverse-01;
-  transition: $header__transition__duration background-color
-    $header__transition__timing-function;
+  transition-duration: $header__transition__duration;
+  transition-property: background-color;
+  transition-timing-function: $header__transition__timing-function;
 
   &:focus,
   &:hover {
@@ -159,8 +160,9 @@ $header__transition__timing-function: $timing-function;
       width: 100%;
       height: carbon--mini-units($count: 0.5);
       background-color: $interactive-01;
-      transition: $transition-duration height
-        $button--icon__transition__timing-function;
+      transition-duration: $transition-duration;
+      transition-property: height;
+      transition-timing-function: $button--icon__transition__timing-function;
     }
 
     &--notifications::before {
@@ -172,8 +174,8 @@ $header__transition__timing-function: $timing-function;
 
       position: absolute;
       z-index: z($layer: floating);
-      top: carbon--mini-units($count: 1.5);
-      right: carbon--mini-units($count: 1);
+      top: $carbon--spacing-04;
+      right: $carbon--spacing-03;
 
       display: inline-block;
       width: $header__button__marker__sizing__dimensions;
@@ -203,7 +205,7 @@ $header__transition__timing-function: $timing-function;
     color: $inverse-01;
 
     @include carbon--breakpoint($name: md) {
-      right: carbon--mini-units($count: 1);
+      right: $carbon--spacing-03;
       width: carbon--mini-units($count: 34);
     }
 
@@ -255,8 +257,9 @@ $header__transition__timing-function: $timing-function;
       padding-left: $carbon--spacing-05;
       color: unset;
       text-decoration: initial;
-      transition: $header__transition__duration background-color
-        $header__transition__timing-function;
+      transition-duration: $header__transition__duration;
+      transition-property: background-color;
+      transition-timing-function: $header__transition__timing-function;
 
       #{$root}__notification {
         box-shadow: inset 0 -#{$header__popover__sizing__border} 0 0
@@ -485,7 +488,7 @@ $header__transition__timing-function: $timing-function;
       }
     }
     &--enter {
-      transform: translate3d(0, -#{$header__sizing__height}, 0);
+      transform: translate3d(0, -#{$carbon--spacing-09}, 0);
 
       &--active {
         transform: translate3d(0, 0, 0);

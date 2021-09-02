@@ -4,6 +4,7 @@
 /// @copyright IBM Security 2019 - 2021
 ////
 
+@import '@carbon/colors/scss/colors';
 @import '@carbon/layout/scss/mini-unit';
 @import '@carbon/layout/scss/spacing';
 @import '@carbon/motion/scss/motion';
@@ -123,32 +124,23 @@
     }
   }
 
-  &--unknown #{$root}__icon,
-  &__icon--unknown {
-    fill: $icon-02;
-  }
-
-  &--low #{$root}__icon,
-  &__icon--low {
-    fill: $support-03;
-  }
-
-  &--medium #{$root}__icon,
-  &__icon--medium {
-    fill: $carbon--orange-40;
-  }
-
-  &__icon--high,
-  &__icon--critical {
-    fill: $support-01;
+  @each $modifier,
+    $fill
+      in (
+        critical: $support-01,
+        high: $support-01,
+        low: $support-03,
+        medium: $carbon--orange-40,
+        unknown: $icon-02
+      )
+  {
+    &--#{$modifier} #{$root}__icon {
+      fill: $fill;
+    }
   }
 
   &--high,
   &--critical {
-    #{$root}__icon {
-      fill: $support-01;
-    }
-
     &--active,
     &:focus:active {
       #{$root}__icon {

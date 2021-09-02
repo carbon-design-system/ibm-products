@@ -148,17 +148,18 @@
     }
   }
 
+  /// Active transform.
+  /// @type Length
+  $summary-card__transform--active: translate3d(0, -100%, 0);
+
   &__action-overlay {
     position: absolute;
     z-index: $overlay--z-index;
-    top: -($body--height - $carbon--spacing-05);
-    right: 0;
-    bottom: $footer--height;
-    left: 0;
     display: flex;
     flex-direction: column;
     background-color: $ui-01;
     cursor: default;
+    transform: $summary-card__transform--active;
 
     &__header {
       display: flex;
@@ -204,14 +205,18 @@
     }
 
     &__transition {
+      /// Transform.
+      /// @type Length
+      $summary-card__transform: translate3d(0, 0, 0);
+
       &--appear,
       &--enter {
         opacity: 0;
-        transform: translate3d(0, $body--height, 0);
+        transform: $summary-card__transform;
 
         &--active {
           opacity: 1;
-          transform: translate3d(0, 0, 0);
+          transform: $summary-card__transform--active;
           transition: all $duration--moderate-02;
           transition-timing-function: motion(entrance, expressive);
         }
@@ -219,11 +224,11 @@
 
       &--leave {
         opacity: 1;
-        transform: translate3d(0, 0, 0);
+        transform: $summary-card__transform--active;
 
         &--active {
           opacity: 0;
-          transform: translate3d(0, $body--height, 0);
+          transform: $summary-card__transform;
           transition: all $duration--moderate-02;
           transition-timing-function: motion(exit, expressive);
         }
@@ -233,13 +238,11 @@
 
   &__action-overlay--transparent {
     position: absolute;
-
-    // Ensure that this transparent div is always beneath the overlay and actions:
     z-index: $overlay--z-index - 1;
-    top: -($body--height + $header--height);
     right: 0;
-    bottom: $footer--height;
+    bottom: 0;
     left: 0;
+    height: $body--height + $footer--height + $header--height;
     background-color: $overlay-01;
   }
 }

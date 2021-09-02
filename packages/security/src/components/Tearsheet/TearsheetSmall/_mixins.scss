@@ -6,8 +6,8 @@
 
 @import '@carbon/layout/scss/breakpoint';
 @import '@carbon/layout/scss/convert';
-@import '@carbon/layout/scss/spacing';
 @import '@carbon/layout/scss/mini-unit';
+@import '@carbon/layout/scss/spacing';
 @import '@carbon/themes/scss/tokens';
 @import '@carbon/type/scss/index';
 
@@ -46,16 +46,7 @@
         )
       )
   ) {
-    top: $tearsheet__position__base;
-    bottom: unset;
     width: carbon--mini-units($count: 128);
-    height: 50%;
-    min-height: carbon--mini-units($count: 64);
-    transform: translate3d(
-      #{$tearsheet__position},
-      -#{$tearsheet__position__base},
-      0
-    );
   }
 
   &__loading > .#{$prefix}--loading {

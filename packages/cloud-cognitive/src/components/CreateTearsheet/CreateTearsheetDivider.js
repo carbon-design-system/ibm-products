@@ -11,9 +11,11 @@ import cx from 'classnames';
 import { pkg } from '../../settings';
 
 const blockClass = `${pkg.prefix}--tearsheet-create__section--divider`;
-export let CreateTearsheetDivider = forwardRef(({ className }, ref) => {
-  return <span ref={ref} className={cx(blockClass, className)} />;
-});
+export let CreateTearsheetDivider = forwardRef(
+  ({ className, ...rest }, ref) => {
+    return <span {...rest} ref={ref} className={cx(blockClass, className)} />;
+  }
+);
 
 CreateTearsheetDivider.propTypes = {
   /**

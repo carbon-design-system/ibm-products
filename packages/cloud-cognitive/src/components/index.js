@@ -13,7 +13,11 @@ export { ContextHeader } from './ContextHeader';
 export { CreateFullPage, CreateFullPageStep } from './CreateFullPage';
 export { CreateModal } from './CreateModal';
 export { CreateSidePanel } from './CreateSidePanel';
-export { CreateTearsheet, CreateTearsheetStep } from './CreateTearsheet';
+export {
+  CreateTearsheet,
+  CreateTearsheetStep,
+  CreateTearsheetDivider,
+} from './CreateTearsheet';
 export { CreateTearsheetNarrow } from './CreateTearsheetNarrow';
 export {
   EmptyState,

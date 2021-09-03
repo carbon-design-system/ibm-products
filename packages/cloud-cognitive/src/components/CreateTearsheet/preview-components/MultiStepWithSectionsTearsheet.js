@@ -11,6 +11,7 @@ import {
   Button,
   Column,
   Dropdown,
+  FormGroup,
   InlineNotification,
   RadioButtonGroup,
   RadioButton,
@@ -202,7 +203,9 @@ export const MultiStepWithSectionsTearsheet = ({
               <h4 className={`${componentBlockClass}__step--title`}>
                 Meta data
               </h4>
-              <fieldset className={`${componentBlockClass}__step--fieldset`}>
+              <FormGroup
+                className={`${pkg.prefix}--tearsheet-create__step--fieldset`}
+                legendText="Enter any topic meta data here">
                 <TextInput
                   labelText="Topic meta data (optional)"
                   id="tearsheet-multi-step-story-text-input-multi-step-1-input-4"
@@ -210,7 +213,7 @@ export const MultiStepWithSectionsTearsheet = ({
                   placeholder="Enter topic meta data"
                   onChange={(event) => setTopicMetaData(event.target.value)}
                 />
-              </fieldset>
+              </FormGroup>
             </Column>
           </Row>
         </CreateTearsheetStep>

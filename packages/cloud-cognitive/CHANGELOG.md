@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.81.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.81.0...@carbon/ibm-cloud-cognitive@0.81.1) (2021-09-02)
+
+
+### Bug Fixes
+
+* **SidePanel:** update storyname in mdx doc file ([#1232](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1232)) ([a336e37](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a336e37d8812f4929c65fb4e74524008ff6a1278))
+
+
+
+
+
 # [0.81.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.80.1...@carbon/ibm-cloud-cognitive@0.81.0) (2021-09-02)
 
 

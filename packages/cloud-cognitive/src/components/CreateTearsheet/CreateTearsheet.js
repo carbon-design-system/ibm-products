@@ -34,6 +34,7 @@ import {
   hasValidChildrenType,
   hasValidChildType,
 } from '../../global/js/utils/hasValidType';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
 const componentName = 'CreateTearsheet';
 const blockClass = `${pkg.prefix}--tearsheet-create`;
@@ -396,6 +397,7 @@ export let CreateTearsheet = forwardRef(
     return (
       <TearsheetShell
         {...rest}
+        {...getDevtoolsProps(componentName)}
         actions={createTearsheetActions}
         className={cx(blockClass, className)}
         description={description}

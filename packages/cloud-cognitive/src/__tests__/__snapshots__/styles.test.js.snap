@@ -963,16 +963,16 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   pointer-events: none;
 }
 
-.exp--side-panel__container.exp--side-panel__container-is-animating .exp--side-panel__title-container.exp--side-panel__title-container--no-animation {
+.exp--side-panel__container.exp--side-panel__container-is-animating .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation {
   top: 0;
 }
 
 .exp--side-panel__container.exp--side-panel__container-is-animating .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation {
-  top: var(--exp--side-panel--title-container-height);
+  top: var(--exp--side-panel--title-text-height);
 }
 
 .exp--side-panel__container.exp--side-panel__container-is-animating .exp--side-panel__action-toolbar.exp--side-panel__action-toolbar-no-animation {
-  top: calc( var(--exp--side-panel--title-container-height) + var(--exp--side-panel--subtitle-container-height));
+  top: calc( var(--exp--side-panel--title-text-height) + var(--exp--side-panel--subtitle-container-height));
 }
 
 .exp--side-panel__container .exp--side-panel__title-text {
@@ -1051,11 +1051,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   padding-right: var(--cds-spacing-07, 2rem);
 }
 
-.exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container--no-animation.exp--side-panel__title-container-is-animating {
+.exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation.exp--side-panel__title-container-is-animating {
   top: 0;
 }
 
-.exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container--no-animation {
+.exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation {
   min-width: 30rem;
   max-width: 30rem;
   position: fixed;
@@ -1068,6 +1068,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   height: calc(100vh - 3rem);
   margin-top: calc( var(--exp--side-panel--title-text-height) + var(--exp--side-panel--subtitle-container-height) + var(--exp--side-panel--action-bar-container-height));
   overflow-x: hidden;
+}
+
+.exp--side-panel__container .exp--side-panel__inner-content-with-actions {
+  height: calc(100vh - 7rem);
 }
 
 .exp--side-panel__container .exp--side-panel__inner-content.exp--side-panel__static-inner-content {
@@ -1158,7 +1162,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--side-panel__container .exp--side-panel__body-content {
   padding: var(--cds-spacing-05, 1rem);
   padding-top: 0;
-  padding-bottom: var(--exp--side-panel--content-bottom-padding);
 }
 
 .exp--side-panel__container .exp--side-panel__actions-container {
@@ -1751,6 +1754,156 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   letter-spacing: var(--cds-body-long-01-letter-spacing, 0.16px);
 }
 
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-end-p1 {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-end-p2 {
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+/* Stroke animations */
+@keyframes init-stroke {
+  0% {
+    stroke-dashoffset: 276.4608;
+  }
+  100% {
+    stroke-dashoffset: 52.52755;
+  }
+}
+
+@keyframes stroke-end {
+  0% {
+    stroke-dashoffset: 52.52755;
+  }
+  100% {
+    stroke-dashoffset: 276.4608;
+  }
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes stepContentEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(-0.75rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.exp--tearsheet-create {
+  --exp--tearsheet-create--total-width: 0;
+}
+
+.exp--tearsheet-create .exp--tearsheet-create__step--hidden-step,
+.exp--tearsheet-create .exp--tearsheet-create__step--hidden-section {
+  display: none;
+}
+
+.exp--tearsheet-create .exp--tearsheet-create__step--visible-section {
+  display: block;
+}
+
+.exp--tearsheet-create .exp--tearsheet-create__step--visible-step {
+  animation: 400ms stepContentEntrance;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion) {
+  .exp--tearsheet-create .exp--tearsheet-create__step--visible-step {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+.exp--tearsheet-create .exp--tearsheet-create__content {
+  height: 100%;
+  padding: var(--cds-spacing-06, 1.5rem);
+  overflow-x: hidden;
+}
+
+.exp--tearsheet-create .exp--tearsheet-create__content .bx--grid {
+  padding: 0;
+  margin: 0;
+}
+
+.exp--tearsheet-create .exp--tearsheet-create__step--heading {
+  padding-bottom: var(--cds-spacing-06, 1.5rem);
+}
+
+.exp--tearsheet-create
+.bx--btn-set
+.bx--btn.bx--btn--disabled {
+  box-shadow: -0.0625rem 0 0 0 var(--cds-button-separator, #e0e0e0);
+}
+
+.exp--tearsheet-create .bx--side-nav--ux {
+  position: initial;
+  background-color: transparent;
+}
+
+.exp--tearsheet-create .exp--tearsheet-create__section--divider {
+  position: relative;
+  display: block;
+  width: var(--exp--tearsheet-create--total-width);
+  height: 1px;
+  margin: var(--cds-spacing-06, 1.5rem) calc(-1 * var(--cds-spacing-08, 2.5rem)) var(--cds-spacing-07, 2rem) calc(-1 * var(--cds-spacing-06, 1.5rem));
+  background-color: var(--cds-ui-03, #e0e0e0);
+}
+
+.exp--tearsheet-create .exp--tearsheet-create__step--title,
+.exp--tearsheet-create .exp--tearsheet-create__section--title {
+  margin-bottom: var(--cds-spacing-05, 1rem);
+}
+
+.exp--tearsheet-create .exp--tearsheet-create__section--subtitle,
+.exp--tearsheet-create .exp--tearsheet-create__step--subtitle {
+  font-size: var(--cds-productive-heading-01-font-size, 0.875rem);
+  font-weight: var(--cds-productive-heading-01-font-weight, 600);
+  line-height: var(--cds-productive-heading-01-line-height, 1.29);
+  letter-spacing: var(--cds-productive-heading-01-letter-spacing, 0.16px);
+  margin-bottom: var(--cds-spacing-03, 0.5rem);
+}
+
+.exp--tearsheet-create .exp--tearsheet-create__section--description,
+.exp--tearsheet-create .exp--tearsheet-create__step--description {
+  font-size: var(--cds-body-long-01-font-size, 0.875rem);
+  font-weight: var(--cds-body-long-01-font-weight, 400);
+  line-height: var(--cds-body-long-01-line-height, 1.43);
+  letter-spacing: var(--cds-body-long-01-letter-spacing, 0.16px);
+  margin-bottom: var(--cds-spacing-06, 1.5rem);
+}
+
+.exp--tearsheet-create .bx--fieldset {
+  margin-bottom: 0;
+}
+
+.exp--tearsheet-create .exp--tearsheet-create__step--fieldset > * {
+  margin-bottom: var(--cds-spacing-05, 1rem);
+}
+
 .exp--empty-state .exp--empty-state__header,
 .exp--empty-state .exp--empty-state__subtitle {
   padding-bottom: var(--cds-spacing-02, 0.25rem);
@@ -1838,7 +1991,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   max-width: none;
 }
 
-.exp--export-modal .bx--modal-content {
+.exp--export-modal.bx--modal .bx--modal-content {
   padding-right: var(--cds-spacing-05, 1rem);
 }
 
@@ -2090,7 +2243,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   max-width: none;
 }
 
-.exp--import-modal .bx--modal-content {
+.exp--import-modal.bx--modal .bx--modal-content {
   padding-right: var(--cds-spacing-05, 1rem);
 }
 
@@ -2107,8 +2260,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: flex;
 }
 
-.exp--import-modal__import-button {
-  margin-left: var(--cds-spacing-05, 1rem);
+.exp--import-modal__import-button.bx--btn {
+  margin-left: var(--cds-spacing-03, 0.5rem);
 }
 
 .exp--import-modal__file-container {
@@ -2139,10 +2292,15 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .exp--import-modal .bx--file__selected-file {
   max-width: none;
+  background: var(--cds-ui-02, #ffffff);
 }
 
 .exp--import-modal .bx--file {
   margin-bottom: var(--cds-spacing-05, 1rem);
+}
+
+.exp--import-modal .bx--text-input:disabled {
+  background: var(--cds-ui-02, #ffffff);
 }
 
 @keyframes fadeIn {

@@ -18,10 +18,11 @@ import {
   Button,
 } from 'carbon-components-react';
 
-// Other standard imports.
-import { pkg } from '../../settings';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { pkg } from '../../settings';
 
 const componentName = 'CreateModal';
 const blockClass = `${pkg.prefix}--create-modal`;
@@ -69,7 +70,8 @@ export let CreateModal = React.forwardRef(
         onClose={() => {
           onRequestClose?.();
           return false;
-        }}>
+        }}
+        {...getDevtoolsProps(componentName)}>
         <ModalHeader title={title} titleClassName={`${blockClass}__title`}>
           {subtitle && <p className={`${blockClass}__subtitle`}>{subtitle}</p>}
         </ModalHeader>

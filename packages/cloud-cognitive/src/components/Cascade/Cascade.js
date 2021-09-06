@@ -1,14 +1,16 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 20201, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
 import React, { forwardRef } from 'react';
+import { Grid } from 'carbon-components-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
 const blockClass = `${pkg.prefix}--cascade`;
 const componentName = 'Cascade';
@@ -17,8 +19,9 @@ export let Cascade = forwardRef(
   ({ children, className, grid, ...rest }, ref) => {
     const props = {
       ...rest,
-      className: grid ? className : cx(blockClass, className),
+      className: cx(blockClass, className),
       ref,
+      ...getDevtoolsProps(componentName),
     };
     const modifyChildren = (child) => {
       const className = cx(child.props.className, `${blockClass}__element`);
@@ -44,7 +47,7 @@ export let Cascade = forwardRef(
       });
       return (
         <div {...props}>
-          <div className={`bx--grid ${pkg.prefix}--cascade`}>{gridElm}</div>
+          <Grid>{gridElm}</Grid>
         </div>
       );
     }
@@ -58,8 +61,19 @@ Cascade = pkg.checkComponentEnabled(Cascade, componentName);
 Cascade.displayName = componentName;
 
 Cascade.propTypes = {
+  /**
+   * Main content that is shown.
+   */
   children: PropTypes.node,
+  /**
+   * Optional class name.
+   */
   className: PropTypes.string,
+  /**
+   * Specifies whether or not to wrap the child content in a <Grid />.
+   * If this is set to true it's important that the children are being wrapped in rows in columns.
+   * Check the documentation for additional clarification.
+   */
   grid: PropTypes.bool,
 };
 

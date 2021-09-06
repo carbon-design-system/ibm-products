@@ -26,8 +26,11 @@ import {
 } from '@carbon/icons-react';
 import { APIKeyDownloader } from './APIKeyDownloader';
 import { pkg } from '../../settings';
-import uuidv4 from '../../global/js/utils/uuidv4';
+
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { isRequiredIf } from '../../global/js/utils/props-helper';
+import uuidv4 from '../../global/js/utils/uuidv4';
+
 const componentName = 'APIKeyModal';
 
 export let APIKeyModal = forwardRef(
@@ -185,7 +188,7 @@ export let APIKeyModal = forwardRef(
     return (
       <ComposedModal
         {...rest}
-        {...{ open, ref }}
+        {...{ open, ref, ...getDevtoolsProps(componentName) }}
         className={cx(className, blockClass)}
         onClose={onCloseHandler}
         size="sm"

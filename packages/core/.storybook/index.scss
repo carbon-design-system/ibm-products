@@ -59,7 +59,7 @@
 // set default color and background for stories
 .sb-show-main {
   background-color: $ui-background;
-  color: $text-01;
+  color: initial; // reset for the story to ensure the component sets color
 }
 
 /**
@@ -68,6 +68,7 @@
 .ccs-sb__display-box {
   position: relative;
   border: $layout-02 solid $ui-01;
+  color: $text-01;
 }
 
 .ccs-sb__display-box::before {

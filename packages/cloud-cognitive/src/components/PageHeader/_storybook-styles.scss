@@ -30,7 +30,9 @@ $story-class: 'page-header-stories';
 }
 
 .#{$story-class}__dummy-content {
-  margin-top: $spacing-05;
+  padding-top: $spacing-05;
+  background-color: $ui-background;
+  color: $text-01;
 }
 
 .#{$story-class}__dummy-content-block {

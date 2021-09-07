@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 20201, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -8,9 +8,10 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { pkg } from '../../settings';
+const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
 import { Cascade } from '.';
 
-const blockClass = `${pkg.prefix}--cascade`;
+const blockClass = `${prefix}--cascade`;
 const componentName = Cascade.displayName;
 
 describe(componentName, () => {
@@ -42,7 +43,7 @@ describe(componentName, () => {
         </div>
       </Cascade>
     );
-    expect(container.querySelector('.bx--grid')).toBeVisible();
+    expect(container.querySelector(`.${blockClass}`)).toBeVisible();
     expect(container.querySelectorAll(`.${blockClass}__col`)).toHaveLength(4);
     expect(container.querySelector(`.${blockClass}__col-1`)).toBeVisible();
     expect(container.querySelector(`.${blockClass}__col-2`)).toBeVisible();
@@ -56,7 +57,7 @@ describe(componentName, () => {
         <div className="row" />
       </Cascade>
     );
-    expect(container.querySelector('.bx--grid')).toBeVisible();
+    expect(container.querySelector(`.${blockClass}`)).toBeVisible();
     expect(container.querySelectorAll(`.${blockClass}__col`)).toHaveLength(0);
   });
 
@@ -81,5 +82,13 @@ describe(componentName, () => {
     const ref = React.createRef();
     render(<Cascade ref={ref} />);
     expect(ref.current).not.toBeNull();
+  });
+
+  it('adds the Devtools attribute to the containing node', () => {
+    render(<Cascade data-testid="test-id" />);
+    expect(screen.getByTestId('test-id')).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(componentName)
+    );
   });
 });

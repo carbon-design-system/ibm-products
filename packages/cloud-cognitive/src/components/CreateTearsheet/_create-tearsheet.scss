@@ -8,6 +8,9 @@
 // Standard imports.
 @import '../../global/styles/project-settings';
 
+// Other Carbon settings.
+@import 'carbon-components/scss/globals/grid/grid';
+
 // CreateTearsheet uses the following Carbon components:
 // ProgressIndicator, ProgressStep, Toggle, SideNav, SideNavItems, SideNavLink
 @import 'carbon-components/scss/components/progress-indicator/progress-indicator';

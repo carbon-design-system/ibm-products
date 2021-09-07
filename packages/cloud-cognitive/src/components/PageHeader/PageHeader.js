@@ -7,11 +7,10 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { extractShapesArray } from '../../global/js/utils/props-helper';
 import { layout05, baseFontSize } from '@carbon/layout';
 import cx from 'classnames';
 import { useResizeDetector } from 'react-resize-detector';
-import { useWindowResize, useNearestScroll } from '../../global/js/hooks';
+
 import {
   BreadcrumbItem,
   Grid,
@@ -21,17 +20,24 @@ import {
   SkeletonText,
   Tag,
 } from 'carbon-components-react';
+
+import { useWindowResize, useNearestScroll } from '../../global/js/hooks';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+
+import {
+  deprecateProp,
+  deprecatePropUsage,
+  extractShapesArray,
+  prepareProps,
+} from '../../global/js/utils/props-helper';
+
+import { pkg } from '../../settings';
+
 import { ActionBar } from '../ActionBar/';
 import { BreadcrumbWithOverflow } from '../BreadcrumbWithOverflow';
 import { TagSet, string_required_if_more_than_10_tags } from '../TagSet/TagSet';
 import { ButtonSetWithOverflow } from '../ButtonSetWithOverflow';
-import { pkg } from '../../settings';
 import { ChevronUp16 } from '@carbon/icons-react';
-import {
-  deprecateProp,
-  deprecatePropUsage,
-  prepareProps,
-} from '../../global/js/utils/props-helper';
 
 const componentName = 'PageHeader';
 
@@ -496,7 +502,8 @@ export let PageHeader = React.forwardRef(
             },
           ])}
           style={pageHeaderStyles}
-          ref={headerRef}>
+          ref={headerRef}
+          {...getDevtoolsProps(componentName)}>
           <Grid fullWidth={fullWidthGrid} narrow={narrowGrid}>
             <div className={`${blockClass}__non-navigation-row-content`}>
               {hasBreadcrumbRow ? (

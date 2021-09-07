@@ -8,7 +8,10 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
+import { pkg } from '../../settings';
 import { ProductiveCard } from '.';
+
+const { devtoolsAttribute, getDevtoolsId } = pkg;
 
 const componentName = ProductiveCard.displayName;
 
@@ -28,14 +31,25 @@ describe(componentName, () => {
     expect(container.firstChild).toHaveClass('test-class');
   });
 
+  const dataTestId = 'data-testid';
+
   it('adds additional properties to the containing node', () => {
-    render(<ProductiveCard data-testid="test-id" />);
-    screen.getByTestId('test-id');
+    render(<ProductiveCard data-testid={dataTestId} />);
+    screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
     render(<ProductiveCard ref={ref} />);
     expect(ref.current).not.toBeNull();
+  });
+
+  it('adds the Devtools attribute to the containing node', () => {
+    render(<ProductiveCard data-testid={dataTestId} />);
+
+    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(componentName)
+    );
   });
 });

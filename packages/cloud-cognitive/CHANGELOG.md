@@ -3,6 +3,48 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.81.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.81.1...@carbon/ibm-cloud-cognitive@0.81.2) (2021-09-03)
+
+
+### Bug Fixes
+
+* **CreateTearsheet:** updates based on release review ([#1233](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1233)) ([f50e78a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f50e78ab7f7a6b12d14b779954cad5ef4f91f6eb))
+* release review updates ([#1237](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1237)) ([1880856](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/1880856c4f5f8063f94a26d7e16e89c8454b6ccc))
+
+
+
+
+
+## [0.81.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.81.0...@carbon/ibm-cloud-cognitive@0.81.1) (2021-09-02)
+
+
+### Bug Fixes
+
+* **SidePanel:** update storyname in mdx doc file ([#1232](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1232)) ([a336e37](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a336e37d8812f4929c65fb4e74524008ff6a1278))
+
+
+
+
+
+# [0.81.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.80.1...@carbon/ibm-cloud-cognitive@0.81.0) (2021-09-02)
+
+
+### Features
+
+* **devtools:** add attribute to numerous released components ([#1226](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1226)) ([783ebe9](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/783ebe923a96a268d16e9e3b832f27d950987de4))
+
+
+
+
+
+## [0.80.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.80.0...@carbon/ibm-cloud-cognitive@0.80.1) (2021-09-01)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
 # [0.80.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.79.1...@carbon/ibm-cloud-cognitive@0.80.0) (2021-08-31)
 
 

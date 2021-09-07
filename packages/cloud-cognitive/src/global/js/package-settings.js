@@ -15,6 +15,7 @@ const defaults = {
     // reviewed and released components:
     AboutModal: true,
     APIKeyModal: true,
+    Cascade: true,
     CreateModal: true,
     CreateFullPage: true,
     CreateFullPageStep: true,
@@ -49,7 +50,6 @@ const defaults = {
     UserProfileImage: true,
 
     // other public components not yet reviewed and released:
-    Cascade: false,
     ContextHeader: false,
     ExampleComponent: false,
     LoadingBar: false,

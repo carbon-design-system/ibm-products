@@ -1,11 +1,10 @@
 /**
- * Copyright IBM Corp. 2020, 2020
+ * Copyright IBM Corp. 2020, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-const { sync } = require('glob');
 const { resolve } = require('path');
 const { merge } = require('webpack-merge');
 
@@ -28,12 +27,7 @@ module.exports = {
     //fastRefresh: true, -- this option would be nice, but seems to cause errors, see https://github.com/storybookjs/storybook/issues/13745
     strictMode: true,
   },
-
-  stories: sync(resolve(__dirname, '..', '..', '**/*.stories.*')).filter(
-    (story) =>
-      !story.includes('node_modules') && !story.includes('DISPLAY_NAME')
-  ),
-
+  stories: ['../../**/+(docs|src)/**/*+(-story|.stories).*'],
   webpackFinal: async (configuration) =>
     merge(configuration, {
       cache: {

@@ -10,12 +10,16 @@ import React from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
-import { pkg } from '../../settings';
+
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+
 import {
   allPropTypes,
   deprecateProp,
   prepareProps,
 } from '../../global/js/utils/props-helper';
+
+import { pkg } from '../../settings';
 
 // Carbon and package components we use.
 import { Button } from 'carbon-components-react';
@@ -40,7 +44,10 @@ const componentName = 'Tearsheet';
  * action buttons.
  */
 export let Tearsheet = React.forwardRef((props, ref) => (
-  <TearsheetShell {...prepareProps(props, [], { ref, size: 'wide' })} />
+  <TearsheetShell
+    {...prepareProps(props, [], { ref, size: 'wide' })}
+    {...getDevtoolsProps(componentName)}
+  />
 ));
 
 // Return a placeholder if not released and not enabled by feature flag

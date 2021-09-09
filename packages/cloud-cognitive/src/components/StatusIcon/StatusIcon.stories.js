@@ -8,14 +8,15 @@
 import React from 'react';
 
 import { StatusIcon } from '.';
-import { pkg } from '../../settings';
 import mdx from './StatusIcon.mdx';
 import styles from './_storybook-styles.scss'; // import storybook which includes component and additional storybook styles
-import { getStorybookPrefix } from '../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, 'StatusIcon');
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 
 export default {
-  title: `${storybookPrefix}/StatusIcon`,
+  title: getStoryTitle(StatusIcon.displayName),
   component: StatusIcon,
   argTypes: {
     kind: {
@@ -39,14 +40,14 @@ export default {
     size: {
       control: {
         type: 'select',
-        options: ['sm', 'md', 'lg', 'xlg'],
       },
+      options: ['sm', 'md', 'lg', 'xlg'],
     },
     theme: {
       control: {
         type: 'radio',
-        options: ['light', 'dark'],
       },
+      options: ['light', 'dark'],
     },
   },
   parameters: {
@@ -68,7 +69,8 @@ const Template = (args) => {
   return <StatusIcon {...args} />;
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  ...defaultProps,
-};
+export const Default = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+  },
+});

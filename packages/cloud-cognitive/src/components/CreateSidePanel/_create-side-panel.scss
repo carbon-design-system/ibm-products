@@ -5,11 +5,25 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '@carbon/import-once/scss/import-once';
-@import '../../global/styles/carbon-settings';
+// Standard imports.
 @import '../../global/styles/project-settings';
+@import '../SidePanel/side-panel-variables';
 
-@import 'carbon-components/scss/components/button/button';
+// CreateSidePanel uses the following Carbon components:
+// Form
+@import 'carbon-components/scss/components/form/form';
+
+// CreateSidePanel uses the following Cloud & Cognitive components:
+// SidePanel
+@import '../SidePanel/side-panel';
+
+$sizes: (
+  extra-small: $extra-small-panel-size,
+  small: $small-panel-size,
+  medium: $medium-panel-size,
+  large: $large-panel-size,
+  max: $max-panel-size,
+);
 
 @mixin create-side-panel {
   $block-class: #{$pkg-prefix}--create-side-panel;
@@ -20,29 +34,35 @@
     padding-right: calc(20% - #{$spacing-05});
   }
 
-  .#{$block-class}.#{$side-panel-block-class}__container
-    .#{$side-panel-block-class}__title-text {
-    padding-right: calc(20% - #{$spacing-05});
-    margin-bottom: $spacing-02;
+  @each $size, $value in $sizes {
+    .#{$block-class}.#{$side-panel-block-class}__container--#{$size}
+      .#{$side-panel-block-class}__title-text {
+      width: calc(#{$value} - #{$spacing-05});
+      // stylelint-disable-next-line carbon/layout-token-use
+      padding-right: calc((#{$value} * 0.2) - #{$spacing-05});
+      margin-bottom: $spacing-02;
+    }
+    .#{$block-class}.#{$side-panel-block-class}__container--#{$size}
+      .#{$side-panel-block-class}__subtitle-text {
+      width: calc(#{$value} - #{$spacing-05});
+      // stylelint-disable-next-line carbon/layout-token-use
+      padding-right: calc((#{$value} * 0.2) - #{$spacing-05});
+      padding-bottom: $spacing-05;
+      border-bottom: 1px solid $ui-03;
+      color: $text-02;
+    }
   }
 
-  .#{$block-class}.#{$side-panel-block-class}__container
-    .#{$side-panel-block-class}__subtitle-text {
-    padding-right: calc(20% - #{$spacing-05});
-    padding-bottom: $spacing-05;
-    border-bottom: 1px solid $ui-03;
-    color: $text-02;
-  }
-
-  .#{$block-class}__form {
+  .#{$carbon-prefix}--form.#{$block-class}__form {
     padding-top: $spacing-05;
+  }
+
+  .#{$block-class}__form.#{$carbon-prefix}--fieldset {
+    padding-top: $spacing-03;
   }
 
   .#{$block-class}__form > * {
     margin-bottom: $spacing-05;
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 
   .#{$block-class}__form-title-text {

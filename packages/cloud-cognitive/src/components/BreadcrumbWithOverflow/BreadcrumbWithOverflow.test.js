@@ -11,12 +11,23 @@ import { BreadcrumbWithOverflow } from '.';
 import { mockHTMLElement } from '../../global/js/utils/test-helper';
 
 import { carbon } from '../../settings';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
-const breadcrumbContent = [];
-for (let i = 1; i <= 5; i++) {
-  breadcrumbContent.push(`Breadcrumb ${i}`);
-}
-const breadcrumbItems = breadcrumbContent.map((item) => (
+const dataTestId = uuidv4();
+
+const breadcrumbContent = Array.from(
+  { length: 5 },
+  (_, index) => `Breadcrumb ${index + 1}`
+);
+
+const breadcrumbItems = breadcrumbContent.map((item) => ({
+  href: '/#',
+  key: item,
+  label: item,
+  onClick: () => {},
+}));
+
+const deprecatedChildren = breadcrumbContent.map((item) => (
   <BreadcrumbItem key={item}>
     <a href="/#" onClick={() => {}}>
       {item}
@@ -104,9 +115,11 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     const plentyOfSpace = (breadcrumbItems.length + 1) * sizes.breadcrumbWidth;
 
     render(
-      <TestBreadcrumbWithOverflow width={plentyOfSpace}>
-        {breadcrumbItems}
-      </TestBreadcrumbWithOverflow>
+      <TestBreadcrumbWithOverflow
+        width={plentyOfSpace}
+        overflowAriaLabel="Open and close additional breadcrumb item list."
+        breadcrumbs={breadcrumbItems}
+      />
     );
 
     const visibleBreadcrumbs = screen.getAllByRole('listitem');
@@ -124,9 +137,11 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     const overflowItemsExpected = reduceSpaceBy + 1; // + 1 as space for overflow button needed also
 
     render(
-      <TestBreadcrumbWithOverflow width={notEnoughSpace}>
-        {breadcrumbItems}
-      </TestBreadcrumbWithOverflow>
+      <TestBreadcrumbWithOverflow
+        width={notEnoughSpace}
+        overflowAriaLabel="Open and close additional breadcrumb item list."
+        breadcrumbs={breadcrumbItems}
+      />
     );
 
     const visibleBreadcrumbs = screen.getAllByRole('listitem');
@@ -136,7 +151,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     );
 
     expect(visibleBreadcrumbs[0]).toHaveTextContent(breadcrumbContent[0]);
-    // last item is last breadcrum
+    // last item is last breadcrumb
     expect(visibleBreadcrumbs[visibleBreadcrumbs.length - 1]).toHaveTextContent(
       breadcrumbContent[4]
     );
@@ -161,9 +176,11 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     const notEnoughSpace = 1.1 * sizes.breadcrumbWidth;
 
     render(
-      <TestBreadcrumbWithOverflow width={notEnoughSpace}>
-        {breadcrumbItems}
-      </TestBreadcrumbWithOverflow>
+      <TestBreadcrumbWithOverflow
+        width={notEnoughSpace}
+        overflowAriaLabel="Open and close additional breadcrumb item list."
+        breadcrumbs={breadcrumbItems}
+      />
     );
 
     const visibleBreadcrumbs = screen.getAllByRole('listitem');
@@ -180,9 +197,12 @@ describe(BreadcrumbWithOverflow.displayName, () => {
 
   it('Renders just the breadcrumb obeying maxVisible', () => {
     render(
-      <TestBreadcrumbWithOverflow width={1200} maxVisible={3}>
-        {breadcrumbItems}
-      </TestBreadcrumbWithOverflow>
+      <TestBreadcrumbWithOverflow
+        width={1200}
+        maxVisible={3}
+        overflowAriaLabel="Open and close additional breadcrumb item list."
+        breadcrumbs={breadcrumbItems}
+      />
     );
 
     const visibleBreadcrumbs = screen.getAllByRole('listitem');
@@ -197,11 +217,14 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     expect(overflowBtn).toBeTruthy();
   });
 
-  it('Renders just the breadcrumb obeying maxVisible', () => {
+  it('Renders just the breadcrumb overflow and title using maxVisible 0', () => {
     render(
-      <TestBreadcrumbWithOverflow width={1200} maxVisible={0}>
-        {breadcrumbItems}
-      </TestBreadcrumbWithOverflow>
+      <TestBreadcrumbWithOverflow
+        width={1200}
+        maxVisible={0}
+        overflowAriaLabel="Open and close additional breadcrumb item list."
+        breadcrumbs={breadcrumbItems}
+      />
     );
 
     const visibleBreadcrumbs = screen.getAllByRole('listitem');
@@ -214,5 +237,129 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     // item 2 contains an overflow menu
     const overflowBtn = screen.getByRole('button');
     expect(overflowBtn).toBeTruthy();
+  });
+
+  it('adds additional properties to an breadcrumb with overflow', () => {
+    render(
+      <TestBreadcrumbWithOverflow
+        data-testid={dataTestId}
+        width={1200}
+        maxVisible={0}
+        overflowAriaLabel="Open and close additional breadcrumb item list."
+        breadcrumbs={breadcrumbItems}
+      />
+    );
+    screen.getByTestId(dataTestId);
+  });
+
+  it('Works with deprecated children', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const plentyOfSpace = (breadcrumbItems.length + 1) * sizes.breadcrumbWidth;
+
+    render(
+      <TestBreadcrumbWithOverflow
+        width={plentyOfSpace}
+        overflowAriaLabel="Open and close additional breadcrumb item list.">
+        {deprecatedChildren}
+      </TestBreadcrumbWithOverflow>
+    );
+
+    const visibleBreadcrumbs = screen.getAllByRole('listitem');
+    expect(visibleBreadcrumbs.length).toEqual(5); // all should be visible
+
+    breadcrumbContent.forEach((item, index) => {
+      expect(visibleBreadcrumbs[index]).toHaveTextContent(item);
+    });
+
+    expect(warn).toBeCalled();
+    jest.spyOn(console, 'warn').mockRestore();
+  });
+
+  it('Uses data-title if supplied', () => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const testTitle = 'test-title';
+
+    render(
+      <TestBreadcrumbWithOverflow
+        width={1200}
+        maxVisible={0}
+        overflowAriaLabel="Open and close additional breadcrumb item list.">
+        {[
+          <BreadcrumbItem key="k1" href="/#" data-title={testTitle}>
+            Item 1
+          </BreadcrumbItem>,
+        ]}
+      </TestBreadcrumbWithOverflow>
+    );
+    expect(screen.getByText(testTitle)).not.toBeNull();
+    jest.spyOn(console, 'warn').mockRestore();
+  });
+
+  it('Uses title if supplied', () => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const testTitle = 'test-title';
+
+    render(
+      <TestBreadcrumbWithOverflow
+        width={1200}
+        maxVisible={0}
+        overflowAriaLabel="Open and close additional breadcrumb item list.">
+        {[
+          <BreadcrumbItem key="k2" href="/#" title={testTitle}>
+            Item 2
+          </BreadcrumbItem>,
+        ]}
+      </TestBreadcrumbWithOverflow>
+    );
+    expect(screen.getByText(testTitle)).not.toBeNull();
+    jest.spyOn(console, 'warn').mockRestore();
+  });
+
+  it('Uses props.children as title if type string', () => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const testTitle = 'test-title';
+
+    render(
+      <TestBreadcrumbWithOverflow
+        width={1200}
+        maxVisible={0}
+        overflowAriaLabel="Open and close additional breadcrumb item list.">
+        {[
+          <BreadcrumbItem key="k3" href="/#">
+            {testTitle}
+          </BreadcrumbItem>,
+        ]}
+      </TestBreadcrumbWithOverflow>
+    );
+    expect(
+      screen.getByText(testTitle, {
+        selector: `.${carbon.prefix}--assistive-text`,
+      })
+    ).not.toBeNull();
+    jest.spyOn(console, 'warn').mockRestore();
+  });
+
+  it('Uses props.children.props.children type string', () => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const testTitle = 'test-title';
+
+    render(
+      <TestBreadcrumbWithOverflow
+        width={1200}
+        maxVisible={0}
+        overflowAriaLabel="Open and close additional breadcrumb item list.">
+        {[
+          <BreadcrumbItem key="k4">
+            <a href="/#">{testTitle}</a>
+          </BreadcrumbItem>,
+        ]}
+      </TestBreadcrumbWithOverflow>
+    );
+    expect(
+      screen.getByText(testTitle, {
+        selector: `.${carbon.prefix}--assistive-text`,
+      })
+    ).not.toBeNull();
+    jest.spyOn(console, 'warn').mockRestore();
   });
 });

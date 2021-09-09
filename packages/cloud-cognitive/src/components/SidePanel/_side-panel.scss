@@ -5,22 +5,23 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '../../global/styles/carbon-settings';
+// Standard imports.
 @import '../../global/styles/project-settings';
-@import 'carbon-components/scss/globals/grid/grid';
-@import '@carbon/motion/scss/motion.scss';
+@import './side-panel-variables';
 
+// Other Carbon settings.
+@import 'carbon-components/scss/globals/grid/grid';
+
+// SidePanel uses the following Carbon components:
+// Button
 @import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/inline-loading/inline-loading';
+
+// SidePanel uses the following Cloud & Cognitive components:
+// ActionSet
+@import '../ActionSet/action-set';
 
 $block-class: #{$pkg-prefix}--side-panel;
 $action-set-block-class: #{$pkg-prefix}--action-set;
-
-$extra-small-panel-size: 16rem;
-$small-panel-size: 20rem;
-$medium-panel-size: 30rem;
-$large-panel-size: 40rem;
-$max-panel-size: 75%; // set max-width on max panels to 75%
 
 @mixin sidePanelEntranceRight($size: $medium-panel-size) {
   @keyframes sidePanelEntranceRight {
@@ -60,7 +61,7 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
   }
 }
 
-@mixin setActionBarSize($size: $medium-panel-size) {
+@mixin setPanelSize($size: $medium-panel-size) {
   min-width: $size;
   max-width: $size;
 }
@@ -113,6 +114,7 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
     --#{$block-class}--subtitle-opacity: 1;
     --#{$block-class}--title-container-height: 0;
     --#{$block-class}--subtitle-container-height: 0;
+    --#{$block-class}--action-bar-container-height: 0;
     --#{$block-class}--divider-opacity: 0;
     --#{$block-class}--title-y-position: 0;
     --#{$block-class}--content-bottom-padding: #{$spacing-10};
@@ -226,11 +228,79 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       opacity: var(--#{$block-class}--subtitle-opacity);
     }
     .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation {
-      position: sticky;
+      @include setPanelSize();
+
+      position: fixed;
       z-index: 2;
-      top: var(--#{$block-class}--title-container-height);
+      // stylelint-disable-next-line carbon/layout-token-use
+      top: calc(
+        var(--#{$block-class}--title-container-height) + #{$spacing-09}
+      );
       background-color: $ui-01;
     }
+
+    .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation.#{$block-class}__subtitle-text-is-animating {
+      top: var(--#{$block-class}--title-container-height);
+    }
+
+    .#{$block-class}__title-container.#{$block-class}__title-container--no-animation.#{$block-class}__title-container-is-animating {
+      top: 0;
+    }
+
+    .#{$block-class}__title-container.#{$block-class}__title-container--no-animation {
+      @include setPanelSize();
+
+      position: fixed;
+      top: $spacing-09;
+      height: var(--#{$block-class}--title-container-height);
+    }
+
+    .#{$block-class}__inner-content {
+      overflow: auto;
+      height: calc(100vh - 3rem);
+      // stylelint-disable-next-line carbon/layout-token-use
+      margin-top: calc(
+        var(--#{$block-class}--title-container-height) +
+          var(--#{$block-class}--subtitle-container-height) +
+          var(--#{$block-class}--action-bar-container-height)
+      );
+      overflow-x: hidden;
+    }
+
+    .#{$block-class}__inner-content.#{$block-class}__static-inner-content {
+      height: calc(
+        100vh -
+          calc(
+            var(--#{$block-class}--title-container-height) +
+              var(--#{$block-class}--subtitle-container-height) +
+              var(--#{$block-class}--action-bar-container-height)
+          ) + (calc(-1 * (#{$spacing-09} + #{$spacing-10})))
+      );
+      padding-top: $spacing-05;
+    }
+
+    .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation {
+      @include setPanelSize();
+
+      position: fixed;
+      // stylelint-disable-next-line carbon/layout-token-use
+      top: calc(
+        var(--#{$block-class}--title-container-height) +
+          var(--#{$block-class}--subtitle-container-height) + #{$spacing-09}
+      );
+      width: 100%;
+      border-bottom: 1px solid $decorative-01;
+    }
+
+    .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation
+      + .#{$block-class}__body-content {
+      // stylelint-disable-next-line carbon/layout-token-use
+      margin-top: calc(
+        var(--#{$block-class}--title-container-height) +
+          var(--#{$block-class}--subtitle-container-height) + #{$spacing-09}
+      );
+    }
+
     .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation.#{$block-class}__subtitle-text-no-animation-no-action-toolbar {
       border-bottom: 1px solid $decorative-01;
       margin-bottom: $spacing-05;
@@ -264,16 +334,12 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
         }
       }
     }
-    .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation {
-      // stylelint-disable-next-line carbon/layout-token-use
-      top: calc(
-        var(--#{$block-class}--title-container-height) +
-          var(--#{$block-class}--subtitle-container-height)
-      );
-      border-bottom: 1px solid $decorative-01;
-    }
+
     .bx--btn.#{$block-class}__navigation-back-button {
+      position: relative;
       z-index: 5;
+      top: calc(-1 * #{$spacing-03});
+      left: calc(-1 * #{$spacing-03});
     }
     .bx--btn.#{$block-class}__navigation-back-button,
     .bx--btn.#{$block-class}__close-button {
@@ -292,25 +358,22 @@ $max-panel-size: 75%; // set max-width on max panels to 75%
       padding-top: 0;
       padding-bottom: var(--#{$block-class}--content-bottom-padding);
     }
-    .#{$block-class}__inner-content {
-      height: calc(100vh - 3rem);
-    }
     .#{$block-class}__actions-container {
       position: fixed;
       bottom: 0;
       border-top: 1px solid $decorative-01;
       background-color: $ui-01;
       &.#{$action-set-block-class}--xs {
-        @include setActionBarSize($extra-small-panel-size);
+        @include setPanelSize($extra-small-panel-size);
       }
       &.#{$action-set-block-class}--sm {
-        @include setActionBarSize($small-panel-size);
+        @include setPanelSize($small-panel-size);
       }
       &.#{$action-set-block-class}--md {
-        @include setActionBarSize($medium-panel-size);
+        @include setPanelSize($medium-panel-size);
       }
       &.#{$action-set-block-class}--lg {
-        @include setActionBarSize($large-panel-size);
+        @include setPanelSize($large-panel-size);
       }
       &.#{$action-set-block-class}--max {
         .#{$action-set-block-class}__action-button {

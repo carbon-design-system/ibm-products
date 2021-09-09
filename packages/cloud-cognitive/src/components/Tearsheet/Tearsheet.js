@@ -11,13 +11,17 @@ import React from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
-import { allPropTypes, prepareProps } from '../../global/js/utils/props-helper';
+import {
+  allPropTypes,
+  deprecateProp,
+  prepareProps,
+} from '../../global/js/utils/props-helper';
 
 // Carbon and package components we use.
 import { Button } from 'carbon-components-react';
 import { ActionSet } from '../ActionSet';
 
-import { TearsheetShell } from './TearsheetShell';
+import { tearsheetHasCloseIcon, TearsheetShell } from './TearsheetShell';
 
 const componentName = 'Tearsheet';
 
@@ -45,6 +49,20 @@ Tearsheet = pkg.checkComponentEnabled(Tearsheet, componentName);
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
 Tearsheet.displayName = componentName;
+
+export const deprecatedProps = {
+  /**
+   * **Deprecated**
+   *
+   * Prevent the tearsheet from automatically closing (triggering onClose, if
+   * provided, which can be cancelled by returning 'false') if the user clicks
+   * outside it.
+   */
+  preventCloseOnClickOutside: deprecateProp(
+    PropTypes.bool,
+    'The tearsheet will close automatically if the user clicks outside it if and only if the tearsheet is passive (no navigation actions)'
+  ),
+};
 
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
@@ -87,8 +105,13 @@ Tearsheet.propTypes = {
 
   /**
    * The accessibility title for the close icon (if shown).
+   *
+   * **Note:** This prop is only required if a close icon is shown, i.e. if
+   * there are a no navigation actions and/or hasCloseIcon is true.
    */
-  closeIconDescription: PropTypes.string,
+  closeIconDescription: PropTypes.string.isRequired.if(
+    ({ actions, hasCloseIcon }) => tearsheetHasCloseIcon(actions, hasCloseIcon)
+  ),
 
   /**
    * A description of the flow, displayed in the header area of the tearsheet.
@@ -97,9 +120,11 @@ Tearsheet.propTypes = {
 
   /**
    * Enable a close icon ('x') in the header area of the tearsheet. By default,
-   * a tearsheet does not display a close icon, but one should be enabled if
-   * the tearsheet is read-only or has no navigation actions (sometimes called
-   * a "passive tearsheet").
+   * (when this prop is omitted, or undefined or null) a tearsheet does not
+   * display a close icon if there are navigation actions ("transactional
+   * tearsheet") and displays one if there are no navigation actions ("passive
+   * tearsheet"), and that behavior can be overridden if required by setting
+   * this prop to either true or false.
    */
   hasCloseIcon: PropTypes.bool,
 
@@ -147,13 +172,6 @@ Tearsheet.propTypes = {
   open: PropTypes.bool,
 
   /**
-   * Prevent the tearsheet from automatically closing (triggering onClose, if
-   * provided, which can be cancelled by returning 'false') if the user clicks
-   * outside it.
-   */
-  preventCloseOnClickOutside: PropTypes.bool,
-
-  /**
    * The main title of the tearsheet, displayed in the header area.
    */
   title: PropTypes.node,
@@ -166,6 +184,7 @@ Tearsheet.propTypes = {
    * to allow an action bar navigation or breadcrumbs to also show through.
    */
   verticalPosition: PropTypes.oneOf(['normal', 'lower']),
+  ...deprecatedProps,
 };
 
 // Default values for component props. Default values are not required for
@@ -173,8 +192,6 @@ Tearsheet.propTypes = {
 // 'undefined' values reasonably. Default values should be provided when the
 // component needs to make a choice or assumption when a prop is not supplied.
 Tearsheet.defaultProps = {
-  closeIconDescription: 'Close',
-  hasCloseIcon: false,
   influencerPosition: 'left',
   influencerWidth: 'narrow',
   verticalPosition: 'normal',

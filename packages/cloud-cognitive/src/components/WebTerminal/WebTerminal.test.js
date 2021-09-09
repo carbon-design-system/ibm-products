@@ -67,7 +67,7 @@ describe(name, () => {
         Body content
       </WebTerminal>
     );
-    expect(screen.getByText(/Kube docs/i));
+    expect(screen.getByText(/Kubernetes docs/i));
   });
 
   it('adds additional properties to the containing node', () => {

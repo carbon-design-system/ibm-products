@@ -9,8 +9,10 @@ import React from 'react';
 
 import { action } from '@storybook/addon-actions';
 
-import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 
 import { ButtonMenu, ButtonMenuItem } from '.';
 import mdx from './ButtonMenu.mdx';
@@ -19,10 +21,8 @@ import styles from './_storybook-styles.scss';
 
 import { Add16 } from '@carbon/icons-react';
 
-const storybookPrefix = getStorybookPrefix(pkg, ButtonMenu.displayName);
-
 export default {
-  title: `${storybookPrefix}/${ButtonMenu.displayName}`,
+  title: getStoryTitle(ButtonMenu.displayName),
   component: ButtonMenu,
   // TODO: Define argTypes for props not represented by standard JS types.
   // argTypes: {
@@ -60,6 +60,7 @@ const Template = (args) => {
   );
 };
 
-export const buttonMenu = Template.bind({});
-buttonMenu.storyName = 'Button menu';
-buttonMenu.args = {};
+export const buttonMenu = prepareStory(Template, {
+  storyName: 'Button menu',
+  args: {},
+});

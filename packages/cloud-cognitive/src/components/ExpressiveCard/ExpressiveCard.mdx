@@ -1,9 +1,8 @@
 <!-- `position:fixed` cause rendering issues, so do not render the modal -->
 
-import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
+import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
 import { ExpressiveCard } from '.';
-import { pkg } from '../../settings';
-import { getStorybookSlug } from '../../../config';
+import { getStoryId } from '../../global/js/utils/story-helper';
 
 # ExpressiveCard
 
@@ -16,12 +15,10 @@ for different use cases and have corresponding usage and style guidelines to
 match. For information on each implementation please refer to the
 [usage guidelines](https://pages.github.ibm.com/cdai-design/pal/components/card/overview).
 
-<Preview>
-  <Story
-    id={getStorybookSlug(pkg, ExpressiveCard.displayName, 'default', 'cards')}
-  />
-</Preview>
+<Canvas>
+  <Story id={getStoryId(ExpressiveCard.displayName, 'default')} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />

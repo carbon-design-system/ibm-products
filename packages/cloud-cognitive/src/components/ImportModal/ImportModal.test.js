@@ -167,7 +167,7 @@ describe(componentName, () => {
     ).toBeVisible();
   });
 
-  it('should display the fetch error message when the fetch isnt a 200 response', async () => {
+  it("should display the fetch error message when the fetch isn't a 200 response", async () => {
     fetch.mockImplementationOnce(() =>
       Promise.resolve({
         ok: false,

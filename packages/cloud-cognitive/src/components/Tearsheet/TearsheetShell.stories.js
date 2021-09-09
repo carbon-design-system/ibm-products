@@ -8,18 +8,23 @@
 import React from 'react';
 
 import styles from './_storybook-styles.scss';
-import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
-import { TearsheetShell } from './TearsheetShell';
-const storybookPrefix = getStorybookPrefix(pkg, TearsheetShell.displayName);
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
+import { TearsheetShell, deprecatedProps } from './TearsheetShell';
+import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 
 import mdx from './TearsheetShell.mdx';
 
 export default {
-  title: `${storybookPrefix}/Tearsheets/${TearsheetShell.displayName}`,
+  title: getStoryTitle(TearsheetShell.displayName),
   component: TearsheetShell,
   parameters: { controls: { expanded: true }, styles, docs: { page: mdx } },
+  argTypes: getDeprecatedArgTypes(deprecatedProps),
 };
+
+const closeIconDescription = 'Close the tearsheet';
 
 const className = 'client-class-1 client-class-2';
 
@@ -39,14 +44,19 @@ const Template = (args) => {
 };
 
 // Stories
-export const AllAttributesSet = Template.bind({});
-AllAttributesSet.args = {
-  height: 'normal',
-  // onClose: () => false,
-  open: true,
-  preventCloseOnClickOutside: true,
-  size: 'narrow',
-};
+export const AllAttributesSet = prepareStory(Template, {
+  args: {
+    closeIconDescription,
+    height: 'normal',
+    // onClose: () => false,
+    open: true,
+    preventCloseOnClickOutside: true,
+    size: 'narrow',
+  },
+});
 
-export const NoAttributesSet = Template.bind({});
-NoAttributesSet.args = {};
+export const NoAttributesSet = prepareStory(Template, {
+  args: {
+    size: 'wide',
+  },
+});

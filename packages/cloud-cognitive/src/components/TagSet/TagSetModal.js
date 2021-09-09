@@ -13,9 +13,11 @@ import {
   ModalHeader,
   ModalBody,
   Search,
+  Tag,
 } from 'carbon-components-react';
 
 import { pkg } from '../../settings';
+import { prepareProps } from '../../global/js/utils/props-helper';
 const componentName = 'TagSetModal';
 const blockClass = `${pkg.prefix}--tag-set-modal`;
 
@@ -36,19 +38,17 @@ export const TagSetModal = ({
       if (search === '') {
         newFilteredModalTags = allTags.slice(0);
       } else {
-        const lcaseSearch = search.toLocaleLowerCase();
+        const lCaseSearch = search.toLocaleLowerCase();
 
         allTags.forEach((tag) => {
-          const dataSearch = (
-            tag.props['data-search'] || ''
-          ).toLocaleLowerCase();
-          const contentsAsString = tag.props.children
-            .toString()
-            .toLocaleLowerCase();
-          if (
-            (dataSearch && dataSearch.indexOf(lcaseSearch) > -1) ||
-            contentsAsString.indexOf(lcaseSearch) > -1
-          ) {
+          const dataSearch = tag['data-search']
+            ?.toLocaleLowerCase()
+            ?.indexOf(lCaseSearch);
+          const labelSearch = tag.label
+            ?.toLocaleLowerCase()
+            ?.indexOf(lCaseSearch);
+
+          if (dataSearch > -1 || labelSearch > -1) {
             newFilteredModalTags.push(tag);
           }
         });
@@ -78,7 +78,11 @@ export const TagSetModal = ({
         />
       </ModalHeader>
       <ModalBody className={`${blockClass}__body`} hasForm>
-        {filteredModalTags}
+        {filteredModalTags.map(({ label, ...other }, index) => (
+          <Tag {...other} filter={false} key={`all-tags-${index}`}>
+            {label}
+          </Tag>
+        ))}
       </ModalBody>
       <div className={`${blockClass}__fade`} />
     </ComposedModal>
@@ -86,12 +90,22 @@ export const TagSetModal = ({
 };
 
 TagSetModal.propTypes = {
-  allTags: PropTypes.arrayOf(PropTypes.object).isRequired,
+  allTags: PropTypes.arrayOf(
+    PropTypes.shape({
+      ...prepareProps(Tag.propTypes, 'filter'),
+      label: PropTypes.string.isRequired,
+    })
+  ),
   onClose: PropTypes.func,
   open: PropTypes.bool,
   searchLabel: PropTypes.string,
   searchPlaceholder: PropTypes.string,
   title: PropTypes.string,
+};
+
+TagSetModal.defaultProps = {
+  // marked as required by TagSet if needed, default used to satisfy <Search /> component
+  searchLabel: '',
 };
 
 TagSetModal.displayName = componentName;

@@ -5,10 +5,11 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '@carbon/import-once/scss/import-once';
-@import '../../global/styles/carbon-settings';
+// Standard imports.
 @import '../../global/styles/project-settings';
 
+// Empty states use the following Carbon components:
+// Button, Link
 @import 'carbon-components/scss/components/button/button';
 @import 'carbon-components/scss/components/link/link';
 

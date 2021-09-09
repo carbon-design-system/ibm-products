@@ -5,31 +5,35 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 import { Card } from '.';
 import { pkg } from '../../settings';
 
-const { name } = Card;
+const componentName = Card.displayName;
+const blockClass = `${pkg.prefix}--card`;
 
-describe(name, () => {
+describe(componentName, () => {
   it('renders', () => {
     render(<Card />);
   });
 
-  it('expressive with primary button', () => {
+  it('renders expressive with primary button', () => {
+    const { click } = userEvent;
     const onPrimaryButtonClick = jest.fn();
     const props = {
       primaryButtonText: 'Primary',
       onPrimaryButtonClick,
     };
     const { getByText } = render(<Card {...props} />);
-    fireEvent.click(getByText(props.primaryButtonText));
+    click(getByText(props.primaryButtonText));
     expect(onPrimaryButtonClick).toHaveBeenCalled();
   });
 
-  it('expressive with both buttons', () => {
+  it('Renders expressive card with action icons and ensures that each click is being called', () => {
+    const { click } = userEvent;
     const onPrimaryButtonClick = jest.fn();
     const onSecondaryButtonClick = jest.fn();
     const props = {
@@ -39,13 +43,14 @@ describe(name, () => {
       onSecondaryButtonClick,
     };
     const { getByText } = render(<Card {...props} />);
-    fireEvent.click(getByText(props.primaryButtonText));
+    click(getByText(props.primaryButtonText));
     expect(onPrimaryButtonClick).toHaveBeenCalled();
-    fireEvent.click(getByText(props.secondaryButtonText));
+    click(getByText(props.secondaryButtonText));
     expect(onSecondaryButtonClick).toHaveBeenCalled();
   });
 
-  it('expressive with action icons', () => {
+  it('renders expressive with action icons', () => {
+    const { click } = userEvent;
     const onClick = jest.fn();
     const actionIcons = [
       {
@@ -59,21 +64,22 @@ describe(name, () => {
       actionIcons,
     };
     const { getByText } = render(<Card {...props} />);
-    fireEvent.click(getByText('icon'));
+    click(getByText('icon'));
     expect(onClick).toHaveBeenCalled();
   });
 
-  it('expressive with onClick', () => {
+  it('renders expressive with onClick', () => {
+    const { click } = userEvent;
     const onClick = jest.fn();
     const props = {
       onClick,
     };
     const { container } = render(<Card {...props} />);
-    fireEvent.click(container.firstChild);
+    click(container.firstChild);
     expect(onClick).toHaveBeenCalled();
   });
 
-  it('expressive with media', () => {
+  it('renders expressive with media', () => {
     const mediaContent = 'media element';
     const pictogramContent = 'pictogram element';
     const props = {
@@ -85,7 +91,8 @@ describe(name, () => {
     expect(getByText(pictogramContent)).toBeVisible();
   });
 
-  it('productive', () => {
+  it('renders productive', () => {
+    const { click } = userEvent;
     const iconClick = jest.fn();
     const buttonClick = jest.fn();
     const props = {
@@ -101,23 +108,25 @@ describe(name, () => {
       ],
       primaryButtonText: 'Ghost button',
       onPrimaryButtonClick: buttonClick,
+      actionsPlacement: 'bottom',
     };
     const { container, getByText, rerender } = render(<Card {...props} />);
     expect(getByText(props.label)).toBeVisible();
     expect(
-      container.querySelector(`.${pkg.prefix}-card-actions--top`)
-    ).toBeNull();
-    fireEvent.click(getByText('icon'));
+      container.querySelector(`.${blockClass}__footer .${blockClass}__actions`)
+    ).toBeVisible();
+    click(getByText('icon'));
     expect(iconClick).toHaveBeenCalled();
-    fireEvent.click(getByText(props.primaryButtonText));
+    click(getByText(props.primaryButtonText));
     expect(buttonClick).toHaveBeenCalled();
-    rerender(<Card {...props} actionIconsPosition="top" />);
+    rerender(<Card {...props} actionsPlacement="top" />);
     expect(
-      container.querySelector(`.${pkg.prefix}-card-actions--top`)
+      container.querySelector(`.${blockClass}__header .${blockClass}__actions`)
     ).toBeVisible();
   });
 
-  it('productive with overflow', () => {
+  it('renders productive with overflow', () => {
+    const { click } = userEvent;
     const onClick = jest.fn();
     const props = {
       overflowActions: [
@@ -127,21 +136,29 @@ describe(name, () => {
           onClick,
         },
       ],
+      actionsPlacement: 'bottom',
     };
     const { getByText, container, rerender } = render(<Card {...props} />);
-    fireEvent.click(container.querySelector('.bx--overflow-menu'));
-    fireEvent.click(getByText('Edit'));
+    expect(
+      container.querySelector(`.${blockClass}__footer .${blockClass}__actions`)
+    ).toBeVisible();
+    click(container.querySelector('.bx--overflow-menu'));
+    click(getByText('Edit'));
     expect(onClick).toHaveBeenCalled();
-    rerender(<Card {...props} actionIconsPosition="top" />);
+    rerender(<Card {...props} actionsPlacement="top" />);
+    expect(
+      container.querySelector(`.${blockClass}__header .${blockClass}__actions`)
+    ).toBeVisible();
   });
 
-  it('productive with click zones', () => {
+  it('renders productive with click zones', () => {
     const onClick = jest.fn();
+    const { click } = userEvent;
     const props = {
       onClick,
       clickZone: 'one',
       title: 'Title',
-      caption: 'Caption',
+      description: 'Description',
       primaryButtonText: 'Primary',
       productive: true,
       actionIcons: [],
@@ -149,14 +166,36 @@ describe(name, () => {
     };
     const { rerender, getByText, container } = render(<Card {...props} />);
     expect(getByText(props.title)).toBeVisible();
-    expect(getByText(props.caption)).toBeVisible();
-    fireEvent.click(container.querySelector(`.${pkg.prefix}-card--clickable`));
+    expect(getByText(props.description)).toBeVisible();
+    click(container.querySelector(`.${blockClass}__clickable`));
     expect(onClick).toHaveBeenCalled();
     rerender(<Card {...props} clickZone="two" />);
-    fireEvent.click(container.querySelector(`.${pkg.prefix}-card--clickable`));
+    click(container.querySelector(`.${blockClass}__clickable`));
     expect(onClick).toHaveBeenCalled();
     rerender(<Card {...props} clickZone="three" />);
-    fireEvent.click(container.querySelector(`.${pkg.prefix}-card--clickable`));
+    click(container.querySelector(`.${blockClass}__clickable`));
     expect(onClick).toHaveBeenCalled();
+  });
+
+  it('has no accessibility violations', async () => {
+    const { container } = render(<Card />);
+    await expect(container).toBeAccessible(componentName);
+    await expect(container).toHaveNoAxeViolations();
+  });
+
+  it('applies className to the containing node', () => {
+    const { container } = render(<Card className="test-class" />);
+    expect(container.firstChild).toHaveClass('test-class');
+  });
+
+  it('adds additional properties to the containing node', () => {
+    render(<Card data-testid="test-id" />);
+    screen.getByTestId('test-id');
+  });
+
+  it('forwards a ref to an appropriate node', () => {
+    const ref = React.createRef();
+    render(<Card ref={ref} />);
+    expect(ref.current).not.toBeNull();
   });
 });

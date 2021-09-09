@@ -10,7 +10,7 @@
 
 @import '~carbon-components/scss/components/button/button';
 @import '~carbon-components/scss/components/link/link';
-@import '~carbon-components/scss/components/progress-indicator/progress-indicator';
+@import '../../../../cloud-cognitive/src/components/CreateTearsheet/preview-components/_progress-indicator.scss';
 
 .#{$ide-prefix}-create-header {
   padding-bottom: $spacing-05;

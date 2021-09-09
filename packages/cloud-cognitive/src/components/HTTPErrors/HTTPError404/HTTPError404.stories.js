@@ -6,16 +6,17 @@
  */
 
 import React from 'react';
-import { pkg } from '../../../settings';
 import { HTTPError404 } from '.';
-import { getStorybookPrefix } from '../../../../config';
-const storybookPrefix = getStorybookPrefix(pkg, HTTPError404.displayName);
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../../global/js/utils/story-helper';
 
 import page from './HTTPError404.mdx';
 import styles from '../_storybook-styles.scss';
 
 export default {
-  title: `${storybookPrefix}/HTTPErrors/${HTTPError404.displayName}`,
+  title: getStoryTitle(HTTPError404.displayName),
   component: HTTPError404,
   parameters: {
     docs: {
@@ -33,19 +34,20 @@ const Template = (args) => {
  * TODO: Declare one or more examples per template.
  * NOTE: Complete list of examples should match designed use cases
  */
-export const withAllPropsSet = Template.bind({});
-withAllPropsSet.args = {
-  errorCodeLabel: 'Error 404',
-  title: 'Page not found',
-  description: 'The page you are looking for was not found.',
-  links: [
-    {
-      text: 'Carbon Design System',
-      href: 'https://www.carbondesignsystem.com',
-    },
-    {
-      text: 'IBM Cloud and Cognitive component library',
-      href: 'https://github.com/carbon-design-system/ibm-cloud-cognitive',
-    },
-  ],
-};
+export const withAllPropsSet = prepareStory(Template, {
+  args: {
+    errorCodeLabel: 'Error 404',
+    title: 'Page not found',
+    description: 'The page you are looking for was not found.',
+    links: [
+      {
+        text: 'Carbon Design System',
+        href: 'https://www.carbondesignsystem.com',
+      },
+      {
+        text: 'IBM Cloud and Cognitive component library',
+        href: 'https://github.com/carbon-design-system/ibm-cloud-cognitive',
+      },
+    ],
+  },
+});

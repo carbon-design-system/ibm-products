@@ -6,14 +6,7 @@
 //
 
 // Standard imports.
-@import '@carbon/import-once/scss/import-once';
-@import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
-
-// Import(s) of Carbon settings and component styles and other
-// related component styles used by LoadingBar
-@import '@carbon/themes/scss/themes';
-@import 'carbon-components/scss/globals/scss/_vars.scss';
 
 $loading-bar__height: 8px;
 $loading-bar__small-height: 4px;
@@ -103,7 +96,7 @@ $loading-bar__small-height: 4px;
     }
   }
 
-  @keyframes loadingbar-stop {
+  @keyframes loading-bar-stop {
     0% {
       opacity: 1;
     }
@@ -173,7 +166,7 @@ $loading-bar__small-height: 4px;
 
   .#{$block-class}__indefinite-stop {
     // stylelint-disable-next-line carbon/motion-token-use
-    animation: 1800ms ease-in-out loadingbar-stop forwards;
+    animation: 1800ms ease-in-out loading-bar-stop forwards;
   }
 
   .#{$block-class}__stop-progress:before {

@@ -337,6 +337,7 @@ export class ProgressIndicator extends Component {
 
       return (
         <ProgressStep
+          // {...rest} ??
           className={className}
           complete={isComplete}
           current={isCurrent}

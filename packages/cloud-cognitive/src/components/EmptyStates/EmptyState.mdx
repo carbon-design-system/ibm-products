@@ -1,7 +1,7 @@
-import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
-import { pkg } from '../../settings';
-import { getStorybookSlug } from '../../../config';
+import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
+import { getStoryId } from '../../global/js/utils/story-helper';
 import { EmptyState } from '.';
+// cspell:words emptystates
 
 # Empty state
 
@@ -18,64 +18,34 @@ guidelines and documentation please refer to the links above.
 
 ### Default Empty state
 
-<Preview>
-  <Story
-    id={getStorybookSlug(pkg, EmptyState.displayName, 'default', 'emptystates')}
-  />
-</Preview>
+<Canvas>
+  <Story id={getStoryId(EmptyState.displayName, 'default')} />
+</Canvas>
 
 ### Empty state with action
 
-<Preview>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      EmptyState.displayName,
-      'with-action',
-      'emptystates'
-    )}
-  />
-</Preview>
+<Canvas>
+  <Story id={getStoryId(EmptyState.displayName, 'with-action')} />
+</Canvas>
 
 ### Empty state with action (Button with icon)
 
-<Preview>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      EmptyState.displayName,
-      'with-action-icon-button',
-      'emptystates'
-    )}
-  />
-</Preview>
+<Canvas>
+  <Story id={getStoryId(EmptyState.displayName, 'with-action-icon-button')} />
+</Canvas>
 
 ### Empty state with link
 
-<Preview>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      EmptyState.displayName,
-      'with-link',
-      'emptystates'
-    )}
-  />
-</Preview>
+<Canvas>
+  <Story id={getStoryId(EmptyState.displayName, 'with-link')} />
+</Canvas>
 
 ### Empty state with action and link
 
-<Preview>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      EmptyState.displayName,
-      'with-action-and-link',
-      'emptystates'
-    )}
-  />
-</Preview>
+<Canvas>
+  <Story id={getStoryId(EmptyState.displayName, 'with-action-and-link')} />
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />

@@ -1,7 +1,7 @@
-import { Story, Props, Preview } from '@storybook/addon-docs/blocks';
-import { pkg } from '../../../settings';
-import { getStorybookSlug } from '../../../../config';
+import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
+import { getStoryId } from '../../../global/js/utils/story-helper';
 import { NotificationsEmptyState } from '.';
+// cspell:words emptystates
 
 # Notifications Empty state
 
@@ -18,82 +18,52 @@ guidelines and documentation please refer to the links above.
 
 ### Default Notifications Empty state
 
-<Preview>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      NotificationsEmptyState.displayName,
-      'default',
-      'emptystates'
-    )}
-  />
-</Preview>
+<Canvas>
+  <Story id={getStoryId(NotificationsEmptyState.displayName, 'default')} />
+</Canvas>
 
 ### Notifications Empty state with dark themed illustration
 
-<Preview>
+<Canvas>
   <Story
-    id={getStorybookSlug(
-      pkg,
+    id={getStoryId(
       NotificationsEmptyState.displayName,
-      'with-dark-mode-illustration',
-      'emptystates'
+      'with-dark-mode-illustration'
     )}
   />
-</Preview>
+</Canvas>
 
 ### Notifications Empty state with action
 
-<Preview>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      NotificationsEmptyState.displayName,
-      'with-action',
-      'emptystates'
-    )}
-  />
-</Preview>
+<Canvas>
+  <Story id={getStoryId(NotificationsEmptyState.displayName, 'with-action')} />
+</Canvas>
 
 ### Notifications Empty state with action (Button with icon)
 
-<Preview>
+<Canvas>
   <Story
-    id={getStorybookSlug(
-      pkg,
+    id={getStoryId(
       NotificationsEmptyState.displayName,
-      'with-action-icon-button',
-      'emptystates'
+      'with-action-icon-button'
     )}
   />
-</Preview>
+</Canvas>
 
 ### Notifications Empty state with link
 
-<Preview>
-  <Story
-    id={getStorybookSlug(
-      pkg,
-      NotificationsEmptyState.displayName,
-      'with-link',
-      'emptystates'
-    )}
-  />
-</Preview>
+<Canvas>
+  <Story id={getStoryId(NotificationsEmptyState.displayName, 'with-link')} />
+</Canvas>
 
 ### Notifications Empty state with action and link
 
-<Preview>
+<Canvas>
   <Story
-    id={getStorybookSlug(
-      pkg,
-      NotificationsEmptyState.displayName,
-      'with-action-and-link',
-      'emptystates'
-    )}
+    id={getStoryId(NotificationsEmptyState.displayName, 'with-action-and-link')}
   />
-</Preview>
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />

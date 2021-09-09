@@ -6,12 +6,17 @@
 //
 
 // Standard imports.
-@import '@carbon/import-once/scss/import-once';
-@import '../../global/styles/carbon-settings';
 @import '../../global/styles/project-settings';
+@import '../../global/styles/mixins';
 
-// TODO: @import(s) of Carbon settings and component styles and other
-// related component styles used by DISPLAY_NAME
+// Other Carbon settings.
+// TODO: @import 'carbon-components/scss/globals/grid/grid'; if needed
+
+// DISPLAY_NAME uses the following Carbon components:
+// TODO: @import(s) of Carbon component styles used by DISPLAY_NAME
+
+// DISPLAY_NAME uses the following Cloud & Cognitive components:
+// TODO: @import(s) of Cloud & Cognitive component styles used by DISPLAY_NAME
 
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.

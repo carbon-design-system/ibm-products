@@ -5,14 +5,14 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { Card } from '../Card';
 import { pkg } from '../../settings';
 import { prepareProps } from '../../global/js/utils/props-helper';
 const componentName = 'ProductiveCard';
 
-export let ProductiveCard = (props) => {
+export let ProductiveCard = forwardRef((props, ref) => {
   const validProps = prepareProps(props, [
     'media',
     'mediaPosition',
@@ -23,8 +23,8 @@ export let ProductiveCard = (props) => {
     'secondaryButtonKind',
     'secondaryButtonText',
   ]);
-  return <Card {...validProps} productive />;
-};
+  return <Card {...validProps} ref={ref} productive />;
+});
 
 // Return a placeholder if not released and not enabled by feature flag
 ProductiveCard = pkg.checkComponentEnabled(ProductiveCard, componentName);
@@ -45,11 +45,7 @@ ProductiveCard.propTypes = {
   /**
    * Determines if the action icons are on the top or bottom of the card
    */
-  actionIconsPosition: PropTypes.oneOf(['top', 'bottom']),
-  /**
-   * Optional header caption
-   */
-  caption: PropTypes.string,
+  actionsPlacement: PropTypes.oneOf(['top', 'bottom']),
   /**
    * Content that shows in the body of the card
    */
@@ -62,6 +58,10 @@ ProductiveCard.propTypes = {
    * Designates which zones of the card are clickable. Refer to design documentation for implementation guidelines
    */
   clickZone: PropTypes.oneOf(['one', 'two', 'three']),
+  /**
+   * Optional header description
+   */
+  description: PropTypes.string,
   /**
    * Optional label for the top of the card
    */
@@ -101,7 +101,7 @@ ProductiveCard.propTypes = {
 
 ProductiveCard.defaultProps = {
   actionIcons: [],
-  actionIconsPosition: 'top',
+  actionsPlacement: 'top',
   clickZone: 'one',
   overflowActions: [],
   titleSize: 'default',

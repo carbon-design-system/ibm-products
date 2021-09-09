@@ -22,20 +22,23 @@ import {
 } from 'carbon-components-react/lib/components/UIShell';
 
 import { pkg } from '../../settings';
-import { getStorybookPrefix } from '../../../config';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
+import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 
-import { CreateSidePanel } from '.';
+import { CreateSidePanel, deprecatedProps } from './CreateSidePanel';
 import mdx from './CreateSidePanel.mdx';
 
 import styles from './_storybook-styles.scss';
 
-const storybookPrefix = getStorybookPrefix(pkg, CreateSidePanel.displayName);
-
 const blockClass = `${pkg.prefix}--create-side-panel`;
 
 export default {
-  title: `${storybookPrefix}/${CreateSidePanel.displayName}`,
+  title: getStoryTitle(CreateSidePanel.displayName),
   component: CreateSidePanel,
+  argTypes: getDeprecatedArgTypes(deprecatedProps),
   parameters: {
     styles,
     docs: {
@@ -91,6 +94,7 @@ const DefaultTemplate = ({ ...args }) => {
         onRequestClose={() => setOpen(false)}
         selectorPrimaryFocus=".bx--text-input">
         <TextInput
+          id="create-side-panel-topic-name-a"
           labelText="Topic name"
           className={`${prefix}form-item`}
           placeholder="Enter topic name"
@@ -135,6 +139,7 @@ const DefaultTemplate = ({ ...args }) => {
             value={30}
           />
           <Dropdown
+            id="create-side-panel-dropdown-options-a"
             ariaLabel="Dropdown"
             items={items}
             initialSelectedItem="Day(s)"
@@ -177,6 +182,7 @@ const TemplateWithFormValidation = ({ ...args }) => {
         onRequestClose={() => setOpen(false)}
         disableSubmit={!textInput.length}>
         <TextInput
+          id="create-side-panel-topic-name-b"
           labelText="Topic name"
           className={`${prefix}form-item`}
           placeholder="Enter topic name"
@@ -224,6 +230,7 @@ const TemplateWithFormValidation = ({ ...args }) => {
             value={30}
           />
           <Dropdown
+            id="create-side-panel-dropdown-options-b"
             ariaLabel="Dropdown"
             initialSelectedItem="Day(s)"
             items={items}
@@ -269,6 +276,7 @@ const TemplateWithMultipleForms = ({ ...args }) => {
           className={`${blockClass}__form ${prefix}example-form-group`}
           legendText="Personal information">
           <TextInput
+            id="create-side-panel-first-name"
             labelText="First name"
             className={`${prefix}form-item`}
             placeholder="Enter topic name"
@@ -283,6 +291,7 @@ const TemplateWithMultipleForms = ({ ...args }) => {
             invalidText="This is a required field"
           />
           <Dropdown
+            id="create-side-panel-dropdown-bu"
             titleText="Business unit"
             ariaLabel="Dropdown"
             initialSelectedItem="IBM Cloud platform"
@@ -295,6 +304,7 @@ const TemplateWithMultipleForms = ({ ...args }) => {
           className={`${blockClass}__form ${prefix}example-form-group`}
           legendText="Topic information">
           <TextInput
+            id="create-side-panel-topic-name-c"
             labelText="Topic name"
             className={`${prefix}form-item`}
             placeholder="Enter topic name"
@@ -333,6 +343,7 @@ const TemplateWithMultipleForms = ({ ...args }) => {
               value={30}
             />
             <Dropdown
+              id="create-side-panel-dropdown-options-c"
               ariaLabel="Dropdown"
               initialSelectedItem="Day(s)"
               items={items}
@@ -354,20 +365,23 @@ const TemplateWithMultipleForms = ({ ...args }) => {
   );
 };
 
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  selectorPageContent: '#cloud-and-cognitive-page-content',
-  ...defaultStoryProps,
-};
+export const Default = prepareStory(DefaultTemplate, {
+  args: {
+    selectorPageContent: '#cloud-and-cognitive-page-content',
+    ...defaultStoryProps,
+  },
+});
 
-export const WithFormValidation = TemplateWithFormValidation.bind({});
-WithFormValidation.args = {
-  selectorPageContent: '#cloud-and-cognitive-page-content',
-  ...defaultStoryProps,
-};
+export const WithFormValidation = prepareStory(TemplateWithFormValidation, {
+  args: {
+    selectorPageContent: '#cloud-and-cognitive-page-content',
+    ...defaultStoryProps,
+  },
+});
 
-export const WithMultipleForms = TemplateWithMultipleForms.bind({});
-WithMultipleForms.args = {
-  selectorPageContent: '#cloud-and-cognitive-page-content',
-  ...defaultStoryProps,
-};
+export const WithMultipleForms = prepareStory(TemplateWithMultipleForms, {
+  args: {
+    selectorPageContent: '#cloud-and-cognitive-page-content',
+    ...defaultStoryProps,
+  },
+});

@@ -13,6 +13,8 @@ import { useResizeDetector } from 'react-resize-detector';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg, carbon } from '../../settings';
+import { deprecateProp } from '../../global/js/utils/props-helper';
+import pconsole from '../../global/js/utils/pconsole';
 
 // Carbon and package components we use.
 import {
@@ -50,6 +52,10 @@ export const tearsheetShellWideProps = [
   'navigation',
 ];
 
+export const tearsheetIsPassive = (actions) => !actions || !actions?.length;
+export const tearsheetHasCloseIcon = (actions, hasCloseIcon) =>
+  hasCloseIcon ?? tearsheetIsPassive(actions);
+
 // TearSheetShell is used internally by TearSheet and TearSheetNarrow
 export const TearsheetShell = React.forwardRef(
   (
@@ -69,7 +75,6 @@ export const TearsheetShell = React.forwardRef(
       navigation,
       onClose,
       open,
-      preventCloseOnClickOutside,
       size,
       title,
       verticalPosition,
@@ -89,6 +94,10 @@ export const TearsheetShell = React.forwardRef(
     useEffect(() => {
       prevDepth.current = depth;
     });
+
+    // A "passive" tearsheet is one with no navigation actions.
+    const isPassive = tearsheetIsPassive(actions);
+    const effectiveHasCloseIcon = tearsheetHasCloseIcon(actions, hasCloseIcon);
 
     // Callback that will be called whenever the stacking order changes.
     // position is 1-based with 0 indicating closed.
@@ -147,7 +156,7 @@ export const TearsheetShell = React.forwardRef(
         description ||
         headerActions ||
         navigation ||
-        hasCloseIcon;
+        effectiveHasCloseIcon;
 
       // Include an ActionSet if and only if one or more actions is given.
       const includeActions = actions && actions?.length > 0;
@@ -173,20 +182,21 @@ export const TearsheetShell = React.forwardRef(
           containerClassName={cx(`${bc}__container`, {
             [`${bc}__container--lower`]: verticalPosition === 'lower',
           })}
-          {...{ onClose, open, preventCloseOnClickOutside, ref }}
+          {...{ onClose, open, ref }}
+          preventCloseOnClickOutside={!isPassive}
           size="sm">
           {includeHeader && (
             <ModalHeader
               className={cx(`${bc}__header`, {
-                [`${bc}__header--with-close-icon`]: hasCloseIcon,
+                [`${bc}__header--with-close-icon`]: effectiveHasCloseIcon,
                 [`${bc}__header--with-nav`]: navigation,
               })}
               closeClassName={cx({
-                [`${bc}__header--no-close-icon`]: !hasCloseIcon,
+                [`${bc}__header--no-close-icon`]: !effectiveHasCloseIcon,
               })}
               iconDescription={closeIconDescription}>
               <Wrap className={`${bc}__header-content`}>
-                <Wrap>
+                <Wrap className={`${bc}__header-fields`}>
                   {/* we create the label and title here instead of passing them
                       as modal header props so we can wrap them in layout divs */}
                   <Wrap element="h2" className={`${bcModalHeader}__label`}>
@@ -208,22 +218,36 @@ export const TearsheetShell = React.forwardRef(
             <Wrap
               className={cx({
                 [`${bc}__influencer`]: true,
-                [`${bc}__influencer--right`]: influencerPosition === 'right',
                 [`${bc}__influencer--wide`]: influencerWidth === 'wide',
-              })}>
+              })}
+              neverRender={influencerPosition === 'right'}>
               {influencer}
             </Wrap>
             <Wrap className={`${bc}__right`}>
               <Wrap alwaysRender={includeActions} className={`${bc}__main`}>
-                {children}
+                <Wrap
+                  alwaysRender={influencer && influencerPosition === 'right'}
+                  className={`${bc}__content`}>
+                  {children}
+                </Wrap>
+                <Wrap
+                  className={cx({
+                    [`${bc}__influencer`]: true,
+                    [`${bc}__influencer--wide`]: influencerWidth === 'wide',
+                  })}
+                  neverRender={influencerPosition !== 'right'}>
+                  {influencer}
+                </Wrap>
               </Wrap>
               {includeActions && (
-                <ActionSet
-                  actions={actions}
-                  buttonSize={size === 'wide' ? 'xl' : null}
-                  className={`${bc}__buttons`}
-                  size={size === 'wide' ? 'max' : 'lg'}
-                />
+                <Wrap className={`${bc}__button-container`}>
+                  <ActionSet
+                    actions={actions}
+                    buttonSize={size === 'wide' ? 'xl' : null}
+                    className={`${bc}__buttons`}
+                    size={size === 'wide' ? 'max' : 'lg'}
+                  />
+                </Wrap>
               )}
             </Wrap>
           </Wrap>
@@ -231,7 +255,7 @@ export const TearsheetShell = React.forwardRef(
         </ComposedModal>
       );
     } else {
-      console.warn('Tearsheet not rendered: maximum stacking depth exceeded.');
+      pconsole.warn('Tearsheet not rendered: maximum stacking depth exceeded.');
       return null;
     }
   }
@@ -240,6 +264,20 @@ export const TearsheetShell = React.forwardRef(
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
 TearsheetShell.displayName = componentName;
+
+export const deprecatedProps = {
+  /**
+   * **Deprecated**
+   *
+   * Prevent the tearsheet from automatically closing (triggering onClose, if
+   * provided, which can be cancelled by returning 'false') if the user clicks
+   * outside it.
+   */
+  preventCloseOnClickOutside: deprecateProp(
+    PropTypes.bool,
+    'The tearsheet will close automatically if the user clicks outside it if and only if the tearsheet is passive (no navigation actions)'
+  ),
+};
 
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
@@ -286,8 +324,13 @@ TearsheetShell.propTypes = {
 
   /**
    * The accessibility title for the close icon (if shown).
+   *
+   * **Note:** This prop is only required if a close icon is shown, i.e. if
+   * there are a no navigation actions and/or hasCloseIcon is true.
    */
-  closeIconDescription: PropTypes.string,
+  closeIconDescription: PropTypes.string.isRequired.if(
+    ({ actions, hasCloseIcon }) => tearsheetHasCloseIcon(actions, hasCloseIcon)
+  ),
 
   /**
    * A description of the flow, displayed in the header area of the tearsheet.
@@ -296,9 +339,11 @@ TearsheetShell.propTypes = {
 
   /**
    * Enable a close icon ('x') in the header area of the tearsheet. By default,
-   * a tearsheet does not display a close icon, but one should be enabled if
-   * the tearsheet is read-only or has no navigation actions (sometimes called
-   * a "passive tearsheet").
+   * (when this prop is omitted, or undefined or null) a tearsheet does not
+   * display a close icon if there are navigation actions ("transactional
+   * tearsheet") and displays one if there are no navigation actions ("passive
+   * tearsheet"), and that behavior can be overridden if required by setting
+   * this prop to either true or false.
    */
   hasCloseIcon: PropTypes.bool,
 
@@ -356,13 +401,6 @@ TearsheetShell.propTypes = {
   open: PropTypes.bool,
 
   /**
-   * Prevent the tearsheet from automatically closing (triggering onClose, if
-   * provided, which can be cancelled by returning 'false') if the user clicks
-   * outside it.
-   */
-  preventCloseOnClickOutside: PropTypes.bool,
-
-  /**
    * Specifies the width of the tearsheet, 'narrow' or 'wide'.
    */
   size: PropTypes.oneOf(['narrow', 'wide']).isRequired,
@@ -380,4 +418,5 @@ TearsheetShell.propTypes = {
    * to allow an action bar navigation or breadcrumbs to also show through.
    */
   verticalPosition: PropTypes.oneOf(['normal', 'lower']),
+  ...deprecatedProps,
 };

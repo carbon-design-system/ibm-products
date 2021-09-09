@@ -1,0 +1,26 @@
+import { ArgsTable, Preview, Story } from '@storybook/addon-docs/blocks';
+
+import { getStorybookSlug } from '../../../config';
+import { pkg } from '../../settings';
+
+import { Toolbar } from '.';
+
+# Toolbar
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+
+## Overview
+
+A toolbar is a collection of action items that organizes a program’s interaction
+patterns into a series of closely related commands.
+
+<Preview>
+  <Story id={getStorybookSlug(pkg, Toolbar.displayName, 'toolbar')} />
+</Preview>
+
+## Component API
+
+<ArgsTable />

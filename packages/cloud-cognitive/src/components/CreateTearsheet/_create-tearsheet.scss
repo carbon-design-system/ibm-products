@@ -5,37 +5,141 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '@carbon/import-once/scss/import-once';
-@import '../../global/styles/carbon-settings';
+// Standard imports.
 @import '../../global/styles/project-settings';
-@import './preview-components/progress-indicator';
+
+// CreateTearsheet uses the following Carbon components:
+// ProgressIndicator, ProgressStep, Toggle, SideNav, SideNavItems, SideNavLink
+@import 'carbon-components/scss/components/toggle/toggle';
+@import 'carbon-components/scss/components/ui-shell/side-nav';
+
+// CreateTearsheet uses the following Cloud & Cognitive components:
+// TearsheetShell
+@import '../Tearsheet/tearsheet';
+@import '../CreateInfluencer/index';
+
+// Animated progress indicator styles imported from ./preview-components instead of Carbon
+@import './preview-components/_progress-indicator.scss';
 
 @mixin create-tearsheet {
+  @keyframes stepContentEntrance {
+    0% {
+      opacity: 0;
+      // stylelint-disable-next-line carbon/layout-token-use
+      transform: translateY(-0.75rem);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   $block-class: #{$pkg-prefix}--tearsheet-create;
+  $section-block-class: #{$pkg-prefix}--tearsheet-create__section;
+  $tearsheet-divider-class: #{$pkg-prefix}--tearsheet-create__section--divider;
+  $tearsheet-fieldset-class: #{$pkg-prefix}--tearsheet-create__step--fieldset;
+
+  .#{$block-class} {
+    --#{$block-class}--total-width: 0;
+  }
+
+  .#{$block-class} .#{$block-class}__step--hidden-step,
   .#{$block-class} .#{$block-class}__step--hidden-section {
     display: none;
   }
 
-  .#{$block-class} .#{$block-class}__multi-step-panel-content {
-    padding: $spacing-06 $spacing-07;
+  .#{$block-class} .#{$block-class}__step--visible-section {
+    display: block;
   }
 
-  .#{$block-class} .#{$block-class}__progress-indicator {
-    padding: $spacing-05;
+  .#{$block-class} .#{$block-class}__step--visible-step {
+    animation: $duration--slow-01 stepContentEntrance;
+    animation-fill-mode: forwards;
+    animation-timing-function: $carbon--standard-easing;
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion) {
+    .#{$block-class} .#{$block-class}__step--visible-step {
+      animation: none;
+      opacity: 1;
+    }
+  }
+
+  .#{$block-class} .#{$block-class}__content {
+    height: 100%;
+    padding: $spacing-06;
+    overflow-x: hidden;
+  }
+
+  .#{$block-class} .#{$block-class}__content .#{$carbon-prefix}--grid {
+    padding: 0;
+    margin: 0;
   }
 
   .#{$block-class} .#{$block-class}__step--heading {
     padding-bottom: $spacing-06;
   }
 
-  .#{$block-class} .#{$block-class}__step {
-    max-width: 50%;
-  }
-
   .#{$block-class}
     .#{$carbon-prefix}--btn-set
     .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--disabled {
     box-shadow: -0.0625rem 0 0 0 $button-separator;
+  }
+
+  .#{$block-class} .#{$carbon-prefix}--side-nav--ux {
+    position: initial;
+    background-color: transparent;
+  }
+
+  .#{$block-class} .#{$block-class}__section--divider {
+    position: relative;
+    display: block;
+    width: var(--#{$block-class}--total-width);
+    height: 1px;
+    margin: $spacing-06 calc(-1 * #{$spacing-08}) $spacing-07
+      calc(-1 * #{$spacing-06});
+    background-color: $ui-03;
+  }
+
+  .#{$block-class} .#{$block-class}__step--title,
+  .#{$block-class} .#{$block-class}__section--title {
+    margin-bottom: $spacing-05;
+  }
+
+  .#{$block-class} .#{$block-class}__section--subtitle,
+  .#{$block-class} .#{$block-class}__step--subtitle {
+    @include carbon--type-style('productive-heading-01');
+
+    margin-bottom: $spacing-03;
+  }
+
+  .#{$block-class} .#{$block-class}__section--description,
+  .#{$block-class} .#{$block-class}__step--description {
+    @include carbon--type-style('body-long-01');
+
+    margin-bottom: $spacing-06;
+  }
+
+  .#{$block-class} .#{$block-class}__step--title,
+  .#{$block-class} .#{$block-class}__section--title,
+  .#{$block-class} .#{$block-class}__section--subtitle,
+  .#{$block-class} .#{$block-class}__step--subtitle,
+  .#{$block-class} .#{$block-class}__section--description,
+  .#{$block-class} .#{$block-class}__step--description {
+    max-width: 50%;
+  }
+
+  .#{$block-class} .#{$carbon-prefix}--fieldset {
+    margin-bottom: 0;
+  }
+
+  .#{$block-class} .#{$block-class}__step--fieldset > * {
+    &:not(.#{$tearsheet-divider-class}):not(.#{$tearsheet-fieldset-class}) {
+      width: 50%;
+    }
+
+    margin-bottom: $spacing-05;
   }
 }
 

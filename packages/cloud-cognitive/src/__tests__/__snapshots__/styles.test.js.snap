@@ -632,6 +632,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--create-full-page .exp--create-full-page__content {
   overflow: auto;
   flex-grow: 1;
+  background-color: var(--cds-ui-background, #ffffff);
   overflow-x: hidden;
 }
 

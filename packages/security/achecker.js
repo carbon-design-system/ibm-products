@@ -5,9 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-module.exports = require('deepmerge')(
-  require('@carbon/ibm-cloud-cognitive-core/accessibility-checker'),
-  {
-    ruleArchive: 'preview',
-  }
-);
+module.exports = require('@carbon/ibm-cloud-cognitive-core/accessibility-checker');

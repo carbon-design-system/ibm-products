@@ -149,7 +149,7 @@
       }
 
       &--active {
-        font-weight: carbon--font-weight($weight: semibold);
+        @include carbon--font-weight($weight: semibold);
 
         @include rtl {
           &::before {

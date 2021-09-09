@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { moderate02 } from '@carbon/motion';
 import { pkg, carbon } from '../../settings';
@@ -15,7 +15,10 @@ import { CreateTearsheet } from './CreateTearsheet';
 import { CreateTearsheetStep } from './CreateTearsheetStep';
 import { CreateTearsheetSection } from './CreateTearsheetSection';
 import uuidv4 from '../../global/js/utils/uuidv4';
-const createTearsheetBlockClass = `${pkg.prefix}--tearsheet-create`;
+const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
+const createTearsheetBlockClass = `${prefix}--tearsheet-create`;
+const createInfluencerBlockClass = `${prefix}--create-influencer`;
+const componentName = CreateTearsheet.displayName;
 
 const rejectionErrorMessage = uuidv4();
 const onCloseFn = jest.fn();
@@ -42,6 +45,7 @@ const step1Title = uuidv4();
 const title = uuidv4();
 const dataTestId = uuidv4();
 const ref = React.createRef();
+const onMountFn = jest.fn();
 const defaultProps = {
   title,
   submitButtonText,
@@ -52,6 +56,8 @@ const defaultProps = {
   onClose: onCloseFn,
   open: true,
 };
+// Remove `ms` from moderate02 carbon motion value so we can simply pass the number of milliseconds.
+const timerValue = Number(moderate02.substring(0, moderate02.length - 2));
 const renderCreateTearsheet = (
   {
     rejectOnSubmit = false,
@@ -64,23 +70,23 @@ const renderCreateTearsheet = (
   },
   children = (
     <>
-      <p>Child element that persists across all steps</p>
       <CreateTearsheetStep
         onNext={rejectOnNext ? onNextStepRejectionFn : onNext}
         title={step1Title}
-        formLegendText={step1Title}>
+        fieldsetLegendText={step1Title}
+        onMount={onMountFn}>
         step 1 content
         <button type="button" disabled>
           Test
         </button>
         <input type="text" />
       </CreateTearsheetStep>
-      <CreateTearsheetStep title={step2Title} formLegendText={step2Title}>
+      <CreateTearsheetStep title={step2Title} fieldsetLegendText={step2Title}>
         step 2 content
       </CreateTearsheetStep>
       <CreateTearsheetStep
         title={step3Title}
-        formLegendText={step3Title}
+        fieldsetLegendText={step3Title}
         onNext={rejectOnSubmitNext ? finalStepOnNextRejectFn : finalOnNextFn}>
         step 3 content
       </CreateTearsheetStep>
@@ -105,7 +111,7 @@ const renderEmptyCreateTearsheet = ({ ...rest }) =>
 const renderSingleStepCreateTearsheet = ({ ...rest }) =>
   render(
     <CreateTearsheet onRequestSubmit={onRequestSubmitFn} {...rest}>
-      <CreateTearsheetStep title={step1Title} formLegendText={step1Title}>
+      <CreateTearsheetStep title={step1Title} fieldsetLegendText={step1Title}>
         step 1 content
       </CreateTearsheetStep>
     </CreateTearsheet>
@@ -129,11 +135,13 @@ describe(CreateTearsheet.displayName, () => {
       takeRecords: () => [],
       unobserve: () => null,
     }));
+    jest.useFakeTimers();
   });
 
   afterEach(() => {
     jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
+    jest.useRealTimers();
   });
 
   it('renders the CreateTearsheet component', () => {
@@ -142,11 +150,54 @@ describe(CreateTearsheet.displayName, () => {
       'data-testid': dataTestId,
     });
     screen.getByTestId(dataTestId);
+    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(componentName)
+    );
     screen.getAllByText(title);
     expect(
       container.querySelector(`.${createTearsheetBlockClass}`)
     ).toBeTruthy();
     expect(ref.current).not.toBeNull();
+  });
+
+  it('should render the tearsheet on the specified initialStep prop provided', () => {
+    const { container } = renderCreateTearsheet({
+      ...defaultProps,
+      initialStep: 2,
+    });
+    const createTearsheetSteps = container.querySelector(
+      `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
+    ).children;
+    expect(
+      createTearsheetSteps[1].classList.contains(
+        `.${createTearsheetBlockClass}__step--visible-section`
+      )
+    );
+  });
+
+  it('renders the first step if an invalid initialStep value is provided', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
+    const { container } = renderCreateTearsheet({
+      ...defaultProps,
+      // Starting on 0 step is invalid since the steps start with a value of 1
+      // This will cause a console warning
+      initialStep: 0,
+    });
+    const createTearsheetSteps = container.querySelector(
+      `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
+    ).children;
+    expect(
+      createTearsheetSteps[0].classList.contains(
+        `.${createTearsheetBlockClass}__step--visible-section`
+      )
+    );
+    expect(warn).toBeCalledWith(
+      `${CreateTearsheet.displayName}: An invalid \`initialStep\` prop was supplied. The \`initialStep\` prop should be a number that is greater than 0 or less than or equal to the number of steps your ${CreateTearsheet.displayName} has.`
+    );
+    // The onMount prop will get called here because the first step is rendered
+    expect(onMountFn).toHaveBeenCalledTimes(1);
+    warn.mockRestore();
   });
 
   it('renders the second step if clicking on the next step button with onNext optional function prop and then clicks cancel button', async () => {
@@ -210,10 +261,10 @@ describe(CreateTearsheet.displayName, () => {
         {...defaultProps}
         open={false}
         onRequestSubmit={onRequestSubmitFn}>
-        <CreateTearsheetStep title={step1Title} formLegendText={step1Title}>
+        <CreateTearsheetStep title={step1Title} fieldsetLegendText={step1Title}>
           step 1 content
         </CreateTearsheetStep>
-        <CreateTearsheetStep title={step2Title} formLegendText={step2Title}>
+        <CreateTearsheetStep title={step2Title} fieldsetLegendText={step2Title}>
           step 2 content
         </CreateTearsheetStep>
       </CreateTearsheet>
@@ -394,14 +445,14 @@ describe(CreateTearsheet.displayName, () => {
     const { click } = userEvent;
     click(screen.getByText(viewAllToggleLabelText));
     const viewAllToggleElement = container.querySelector(
-      `#${createTearsheetBlockClass}__view-all-toggle`
+      `#${createInfluencerBlockClass}__view-all-toggle`
     );
-    setTimeout(() => {
-      expect(viewAllToggleElement).toBeChecked();
-      expect(warn).toBeCalledWith(
-        `CreateTearsheet: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' prop.`
-      );
-    }, moderate02);
+
+    act(() => jest.advanceTimersByTime(timerValue));
+    expect(viewAllToggleElement).toBeChecked();
+    expect(warn).toBeCalledWith(
+      `CreateTearsheet: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' prop.`
+    );
     rerender(
       <CreateTearsheet
         onRequestSubmit={jest.fn()}
@@ -503,9 +554,8 @@ describe(CreateTearsheet.displayName, () => {
     );
     const { click } = userEvent;
     click(screen.getByText(viewAllToggleLabelText));
-    setTimeout(() => {
-      expect(getByText(/Submit/g)).toHaveAttribute('disabled');
-    }, moderate02);
+    act(() => jest.advanceTimersByTime(timerValue));
+    expect(getByText(/Submit/g)).toHaveAttribute('disabled');
   });
 
   it('should click one of the side navigation menu items that are displayed after clicking the view all toggle and call the scrollTo fn', () => {
@@ -548,13 +598,12 @@ describe(CreateTearsheet.displayName, () => {
       </CreateTearsheet>
     );
     click(screen.getByText(viewAllToggleLabelText));
-    setTimeout(() => {
-      const sideNavElement = screen.getByText(/test title 2/g, {
-        selector: `.${carbon.prefix}--side-nav__link-text`,
-      });
-      click(sideNavElement.parentElement);
-      expect(scrollToFn).toHaveBeenCalledTimes(1);
-    }, moderate02);
+    act(() => jest.advanceTimersByTime(timerValue));
+    const sideNavElement = screen.getByText(/test title 2/g, {
+      selector: `.${carbon.prefix}--side-nav__link-text`,
+    });
+    click(sideNavElement.parentElement);
+    expect(scrollToFn).toHaveBeenCalledTimes(1);
   });
 
   it("should click one of the side navigation menu items that are displayed after clicking the view all toggle and produce a warning if the section's id is missing", () => {
@@ -571,29 +620,43 @@ describe(CreateTearsheet.displayName, () => {
         viewAllToggleOnLabelText="On"
         sideNavAriaLabel="Side nav aria label"
         {...defaultProps}>
-        <CreateTearsheetStep onNext={jest.fn()} disableSubmit>
-          <CreateTearsheetSection title="test title 1">
+        <CreateTearsheetStep
+          hasFieldset={false}
+          title={step1Title}
+          subtitle="Step 1 subtitle"
+          description="Step 1 description"
+          onNext={jest.fn()}
+          disableSubmit>
+          <CreateTearsheetSection
+            title="test title 1"
+            subtitle="test subtitle 1"
+            description="test description 1">
             content
           </CreateTearsheetSection>
         </CreateTearsheetStep>
         <CreateTearsheetStep title={step2Title}>
-          <CreateTearsheetSection title="test title 2">
+          <CreateTearsheetSection
+            title="test title 2"
+            subtitle="test subtitle 2"
+            description="test description 2">
             content
           </CreateTearsheetSection>
         </CreateTearsheetStep>
       </CreateTearsheet>
     );
+    screen.getAllByText(step1Title);
+    screen.getByText(/Step 1 subtitle/g);
+    screen.getByText(/Step 1 description/g);
     click(screen.getByText(viewAllToggleLabelText));
-    setTimeout(() => {
-      const sideNavElement = screen.getByText(/test title 2/g, {
-        selector: `.${carbon.prefix}--side-nav__link-text`,
-      });
-      click(sideNavElement.parentElement);
-      expect(warn).toBeCalledWith(
-        `CreateTearsheet: CreateTearsheetSection is missing a required prop of 'id'`
-      );
-      jest.spyOn(console, 'error').mockRestore();
-      warn.mockRestore();
-    }, moderate02);
+    act(() => jest.advanceTimersByTime(timerValue));
+    const sideNavElement = screen.getByText(/test title 2/g, {
+      selector: `.${carbon.prefix}--side-nav__link-text`,
+    });
+    click(sideNavElement.parentElement);
+    expect(warn).toBeCalledWith(
+      `CreateTearsheet: CreateTearsheetSection component is missing a required prop of 'id'`
+    );
+    jest.spyOn(console, 'error').mockRestore();
+    warn.mockRestore();
   });
 });

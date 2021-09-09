@@ -68,6 +68,7 @@ const s = [
           { n: 'Toolbars', s: ['c/Toolbar'] },
           { n: 'User profile images', s: ['c/UserProfileImage'] },
           { n: 'Web terminal', s: ['c/WebTerminal'] },
+          { n: 'Cascade', s: ['c/Cascade'] },
         ],
       },
       {

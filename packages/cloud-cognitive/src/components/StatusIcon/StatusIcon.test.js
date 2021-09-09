@@ -14,7 +14,9 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { StatusIcon } from '.';
 
-const blockClass = `${pkg.prefix}--status-icon`;
+const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
+
+const blockClass = `${prefix}--status-icon`;
 const componentName = StatusIcon.displayName;
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
@@ -79,6 +81,15 @@ describe(componentName, () => {
   it('adds additional properties to the containing node', () => {
     renderComponent({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
+  });
+
+  it('adds the Devtools attribute to the containing node', () => {
+    renderComponent({ 'data-testid': dataTestId });
+
+    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(componentName)
+    );
   });
 
   iconTypes.forEach((kind) => {

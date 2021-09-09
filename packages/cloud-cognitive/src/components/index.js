@@ -7,19 +7,16 @@
 
 export { AboutModal } from './AboutModal';
 export { APIKeyModal } from './APIKeyModal';
+export { Cascade } from './Cascade';
 export { ComboButton, ComboButtonItem } from './ComboButton';
 export { ContextHeader } from './ContextHeader';
-export {
-  CreateFullPage,
-  CreateFullPageStep,
-  CreateFullPageSection,
-} from './CreateFullPage';
+export { CreateFullPage, CreateFullPageStep } from './CreateFullPage';
 export { CreateModal } from './CreateModal';
 export { CreateSidePanel } from './CreateSidePanel';
 export {
   CreateTearsheet,
   CreateTearsheetStep,
-  CreateTearsheetSection,
+  CreateTearsheetDivider,
 } from './CreateTearsheet';
 export { CreateTearsheetNarrow } from './CreateTearsheetNarrow';
 export {

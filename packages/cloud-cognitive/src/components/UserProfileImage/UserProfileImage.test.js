@@ -8,13 +8,14 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import { pkg, carbon } from '../../settings';
-
 import uuidv4 from '../../global/js/utils/uuidv4';
+import { pkg, carbon } from '../../settings';
 
 import { UserProfileImage } from '.';
 
-const blockClass = `${pkg.prefix}-user-profile-avatar`;
+const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
+
+const blockClass = `${prefix}-user-profile-avatar`;
 const dataTestId = uuidv4();
 const kind = 'user';
 const size = 'xlg';
@@ -76,6 +77,15 @@ describe(name, () => {
     const ref = React.createRef();
     renderComponent({ ref });
     expect(ref.current.classList.contains(blockClass)).toBeTruthy();
+  });
+
+  it('adds the Devtools attribute to the containing node', () => {
+    renderComponent({ 'data-testid': dataTestId });
+
+    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(UserProfileImage.displayName)
+    );
   });
 
   it('applies className to the containing node', () => {

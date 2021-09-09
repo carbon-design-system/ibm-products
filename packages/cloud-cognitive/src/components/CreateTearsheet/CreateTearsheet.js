@@ -32,7 +32,11 @@ import {
   useCreateComponentFocus,
   useCreateComponentStepChange,
 } from '../../global/js/hooks';
-import { hasValidChildType } from '../../global/js/utils/hasValidChildType';
+import {
+  hasValidChildrenType,
+  hasValidChildType,
+} from '../../global/js/utils/hasValidType';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
 const componentName = 'CreateTearsheet';
 const blockClass = `${pkg.prefix}--tearsheet-create`;
@@ -47,6 +51,7 @@ export let CreateTearsheet = forwardRef(
       description,
       includeViewAllToggle,
       influencerWidth,
+      initialStep,
       label,
       nextButtonText,
       onClose,
@@ -81,7 +86,7 @@ export let CreateTearsheet = forwardRef(
           ? childrenArray[0].props.children
           : childrenArray;
       extractedChildren.forEach((child) => {
-        if (isTearsheetStep(child)) {
+        if (hasValidChildType({ child, type: CREATE_TEARSHEET_STEP })) {
           steps.push(child);
         }
       });
@@ -95,7 +100,14 @@ export let CreateTearsheet = forwardRef(
       blockClass
     );
     useValidCreateStepCount(getTearsheetSteps, componentName);
-    useResetCreateComponent(previousState, open, setCurrentStep);
+    useResetCreateComponent({
+      previousState,
+      open,
+      setCurrentStep,
+      initialStep,
+      totalSteps: getTearsheetSteps().length,
+      componentName,
+    });
     useCreateComponentStepChange({
       setCurrentStep,
       setIsSubmitting,
@@ -129,7 +141,7 @@ export let CreateTearsheet = forwardRef(
 
         // return array of tearsheetSteps -K    
         const tearsheetStepComponents = childrenArray.filter((child) =>
-          isTearsheetStep(child)
+          hasValidChildType({ child, type: CREATE_TEARSHEET_STEP })
         );
 
          // return array of tearsheetSections -K    
@@ -146,13 +158,23 @@ export let CreateTearsheet = forwardRef(
               // The TearsheetStep has an array of children, lets check each one to see if it is a TearsheetSection
               if (child.props.children.length) {
                 child.props.children.forEach((stepChild) => {
-                  if (isTearsheetSection(stepChild)) {
+                  if (
+                    hasValidChildType({
+                      child: stepChild,
+                      type: CREATE_TEARSHEET_SECTION,
+                    })
+                  ) {
                     tearsheetSectionComponents.push(stepChild);
                   }
                 });
               } else {
                 // The TearsheetStep only has a single React element as a child, lets check to see if it is a TearsheetSection
-                if (isTearsheetSection(child.props.children)) {
+                if (
+                  hasValidChildType({
+                    child: child.props.children,
+                    type: CREATE_TEARSHEET_SECTION,
+                  })
+                ) {
                   tearsheetSectionComponents.push(child.props.children);
                 }
               }
@@ -179,7 +201,12 @@ export let CreateTearsheet = forwardRef(
             typeof child.props.children !== 'undefined' &&
             !child.props.children.length
           ) {
-            if (!isTearsheetSection(child.props.children)) {
+            if (
+              !hasValidChildType({
+                child: child.props.children,
+                type: CREATE_TEARSHEET_SECTION,
+              })
+            ) {
               console.warn(
                 `${componentName}: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' prop.`
               );
@@ -189,26 +216,6 @@ export let CreateTearsheet = forwardRef(
       }
     }, [includeViewAllToggle, shouldViewAll, children]);
 
-    // check if child is a tearsheet step component
-    const isTearsheetStep = (child) => {
-      if (child && child.props && child.props.type === CREATE_TEARSHEET_STEP) {
-        return true;
-      }
-      return false;
-    };
-
-    // check if child is a tearsheet section component
-    const isTearsheetSection = (child) => {
-      if (
-        child &&
-        child.props &&
-        child.props.type === CREATE_TEARSHEET_SECTION
-      ) {
-        return true;
-      }
-      return false;
-    };
-
     const getTearsheetComponents = (childrenElements) => {
       let childrenArray = Array.isArray(childrenElements)
         ? childrenElements
@@ -216,9 +223,11 @@ export let CreateTearsheet = forwardRef(
       const tearsheetStepComponents =
         childrenArray && childrenArray[0]?.type === React.Fragment
           ? childrenArray[0].props.children.filter((item) =>
-              isTearsheetStep(item)
+              hasValidChildType({ child: item, type: CREATE_TEARSHEET_STEP })
             )
-          : childrenArray.filter((item) => isTearsheetStep(item));
+          : childrenArray.filter((item) =>
+              hasValidChildType({ child: item, type: CREATE_TEARSHEET_STEP })
+            );
       let tearsheetSectionComponents = [];
       tearsheetStepComponents.forEach((child) => {
         // we have received an array of children, lets check to see that each child is
@@ -229,7 +238,12 @@ export let CreateTearsheet = forwardRef(
           typeof child.props.children !== 'string'
         ) {
           child.props.children.forEach((stepChild) => {
-            if (isTearsheetSection(stepChild)) {
+            if (
+              hasValidChildType({
+                child: stepChild,
+                type: CREATE_TEARSHEET_SECTION,
+              })
+            ) {
               tearsheetSectionComponents.push(stepChild);
             }
           });
@@ -241,7 +255,12 @@ export let CreateTearsheet = forwardRef(
           typeof child.props.children !== 'undefined' &&
           !child.props.children.length
         ) {
-          if (isTearsheetSection(child.props.children)) {
+          if (
+            hasValidChildType({
+              child: child.props.children,
+              type: CREATE_TEARSHEET_SECTION,
+            })
+          ) {
             tearsheetSectionComponents.push(child.props.children);
           }
         }
@@ -263,9 +282,11 @@ export let CreateTearsheet = forwardRef(
       const stepComponents =
         childrenArray && childrenArray[0]?.type === React.Fragment
           ? childrenArray[0].props.children.filter((item) =>
-              isTearsheetStep(item)
+              hasValidChildType({ child: item, type: CREATE_TEARSHEET_STEP })
             )
-          : childrenArray.filter((item) => isTearsheetStep(item));
+          : childrenArray.filter((item) =>
+              hasValidChildType({ child: item, type: CREATE_TEARSHEET_STEP })
+            );
       const indexOfLastTearsheetStep = formattedChildren
         .map((el) => el?.type)
         .lastIndexOf(CREATE_TEARSHEET_STEP);
@@ -305,7 +326,7 @@ export let CreateTearsheet = forwardRef(
       return (
         <>
           {tearsheetStepComponents.map((child, index) => {
-            if (!isTearsheetSection(child)) {
+            if (!hasValidChildType({ child, type: CREATE_TEARSHEET_SECTION })) {
               return child;
             }
             // Needed to be able to not render the divider
@@ -385,6 +406,7 @@ export let CreateTearsheet = forwardRef(
     return (
       <TearsheetShell
         {...rest}
+        {...getDevtoolsProps(componentName)}
         actions={createTearsheetActions}
         className={cx(blockClass, className)}
         description={description}
@@ -455,7 +477,7 @@ CreateTearsheet.propTypes = {
   /**
    * The main content of the tearsheet
    */
-  children: hasValidChildType({
+  children: hasValidChildrenType({
     componentName,
     childType: CREATE_TEARSHEET_STEP,
   }),
@@ -471,6 +493,7 @@ CreateTearsheet.propTypes = {
   description: PropTypes.node,
 
   /**
+   * @ignore
    * Used to optionally include view all toggle
    */
   includeViewAllToggle: PropTypes.bool,
@@ -479,6 +502,13 @@ CreateTearsheet.propTypes = {
    * Used to set the size of the influencer
    */
   influencerWidth: PropTypes.oneOf(['narrow', 'wide']),
+
+  /**
+   * This can be used to open the component to a step other than the first step.
+   * For example, a create flow was previously in progress, data was saved, and
+   * is now being completed.
+   */
+  initialStep: PropTypes.number,
 
   /**
    * A label for the tearsheet, displayed in the header area of the tearsheet
@@ -511,6 +541,7 @@ CreateTearsheet.propTypes = {
   open: PropTypes.bool,
 
   /**
+   * @ignore
    * The aria label to be used for the UI Shell SideNav Carbon component
    */
   sideNavAriaLabel: PropTypes.string.isRequired.if(
@@ -537,6 +568,7 @@ CreateTearsheet.propTypes = {
   verticalPosition: PropTypes.oneOf(['normal', 'lower']),
 
   /**
+   * @ignore
    * Sets the label text for the view all toggle component
    */
   viewAllToggleLabelText: PropTypes.string.isRequired.if(
@@ -544,6 +576,7 @@ CreateTearsheet.propTypes = {
   ),
 
   /**
+   * @ignore
    * Sets the label text for the view all toggle `off` text
    */
   viewAllToggleOffLabelText: PropTypes.string.isRequired.if(
@@ -551,6 +584,7 @@ CreateTearsheet.propTypes = {
   ),
 
   /**
+   * @ignore
    * Sets the label text for the view all toggle `on` text
    */
   viewAllToggleOnLabelText: PropTypes.string.isRequired.if(

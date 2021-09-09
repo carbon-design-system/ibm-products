@@ -24,8 +24,7 @@
 @import '../CreateInfluencer/index';
 @import '../ActionSet/action-set';
 
-// Animated progress indicator styles imported from ./preview-components instead of Carbon 
-@import '../CreateTearsheet/preview-components/_progress-indicator.scss';
+@import '../CreateTearsheet/preview-components/progress-indicator';
 
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
@@ -121,7 +120,7 @@
     top: 0;
     height: min-content;
     padding-top: 0;
-    border-right: 1px solid var(--cds-ui-03, #e0e0e0);
+    border-right: 1px solid $ui-03;
     background-color: transparent;
     grid-row: 1;
     overflow-x: auto;

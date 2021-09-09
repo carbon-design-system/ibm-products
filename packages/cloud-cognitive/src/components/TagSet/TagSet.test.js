@@ -11,11 +11,14 @@ import userEvent from '@testing-library/user-event';
 import { pkg, carbon } from '../../settings';
 import { TagSet } from '.';
 import { TagSetModal } from './TagSetModal';
+
 import { mockHTMLElement } from '../../global/js/utils/test-helper';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-const blockClass = `${pkg.prefix}--tag-set`;
-const blockClassOverflow = `${pkg.prefix}--tag-set-overflow`;
+const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
+
+const blockClass = `${prefix}--tag-set`;
+const blockClassOverflow = `${prefix}--tag-set-overflow`;
 
 const tagLabel = (index) => `Tag ${index + 1}`;
 const types = ['red', 'blue', 'cyan', 'high-contrast'];
@@ -203,8 +206,9 @@ describe(TagSet.displayName, () => {
     ).toEqual(5);
   });
 
+  const dataTestId = uuidv4();
+
   it('adds additional properties to the containing node', () => {
-    const dataTestId = uuidv4();
     window.innerWidth = tagWidth * 10 + 1;
 
     render(<TagSet data-testid={dataTestId} tags={tags10} />);
@@ -220,21 +224,20 @@ describe(TagSet.displayName, () => {
     expect(ref.current).not.toBeNull();
   });
 
+  it('adds the Devtools attribute to the containing node', () => {
+    render(<TagSet data-testid={dataTestId} />);
+
+    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(TagSet.displayName)
+    );
+  });
+
   it('copes with no tags', () => {
-    const dataTestId = uuidv4();
     window.innerWidth = tagWidth * 10 + 1;
 
     render(<TagSet data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
-  });
-
-  it('forwards a ref to an appropriate node', () => {
-    const ref = React.createRef();
-    window.innerWidth = tagWidth * 10 + 1;
-
-    render(<TagSet ref={ref} tags={tags10} />);
-
-    expect(ref.current).not.toBeNull();
   });
 
   describe(TagSetModal.displayName, () => {

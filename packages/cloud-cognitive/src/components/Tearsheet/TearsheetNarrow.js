@@ -10,12 +10,16 @@ import React from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
-import { pkg } from '../../settings';
+
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+
 import {
   allPropTypes,
   deprecateProp,
   prepareProps,
 } from '../../global/js/utils/props-helper';
+
+import { pkg } from '../../settings';
 
 // Carbon and package components we use.
 import { Button } from 'carbon-components-react';
@@ -40,7 +44,10 @@ const componentName = 'TearsheetNarrow';
  * main content area, and a set of action buttons.
  */
 export let TearsheetNarrow = React.forwardRef((props, ref) => (
-  <TearsheetShell {...prepareProps(props, blocked, { ref, size: 'narrow' })} />
+  <TearsheetShell
+    {...getDevtoolsProps(componentName)}
+    {...prepareProps(props, blocked, { ref, size: 'narrow' })}
+  />
 ));
 
 // Return a placeholder if not released and not enabled by feature flag

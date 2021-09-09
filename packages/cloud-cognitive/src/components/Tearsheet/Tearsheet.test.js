@@ -9,15 +9,16 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { carbon, pkg } from '../../settings';
-
 import uuidv4 from '../../global/js/utils/uuidv4';
+import { carbon, pkg } from '../../settings';
 
 import { Button, ButtonSet, Tab, Tabs } from 'carbon-components-react';
 import { Tearsheet, TearsheetNarrow } from '.';
 import { CreateTearsheetNarrow } from '../CreateTearsheetNarrow';
 
-const blockClass = `${pkg.prefix}--tearsheet`;
+const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
+
+const blockClass = `${prefix}--tearsheet`;
 const componentName = Tearsheet.displayName;
 const componentNameNarrow = TearsheetNarrow.displayName;
 const componentNameCreateNarrow = CreateTearsheetNarrow.displayName;
@@ -256,6 +257,15 @@ const commonTests = (Ts, name, props, testActions) => {
     const ref = React.createRef();
     render(<Ts {...{ ...props, ref }} />);
     expect(ref.current.outerModal.current).toHaveClass(blockClass);
+  });
+
+  it('adds the Devtools attribute to the containing node', () => {
+    render(<Ts {...props} data-testid={dataTestId} />);
+
+    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(name)
+    );
   });
 
   it("doesn't render when stacked more than three deep", () => {

@@ -633,6 +633,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   overflow: auto;
   flex-grow: 1;
   background-color: var(--cds-ui-background, #ffffff);
+  color: var(--cds-text-01, #161616);
   overflow-x: hidden;
 }
 

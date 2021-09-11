@@ -11,6 +11,10 @@
     "directory": "packages/cloud-cognitive"
   },
   "bugs": "https://github.com/carbon-design-system/ibm-cloud-cognitive/issues",
+  "sideEffects": [
+    "**/*.css",
+    "**/*.scss"
+  ],
   "files": [
     "css",
     "es",

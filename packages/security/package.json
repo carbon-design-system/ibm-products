@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-security",
   "description": "Carbon for Cloud & Cognitive IBM Security UI components",
-  "version": "0.12.3",
+  "version": "0.13.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -33,15 +33,19 @@
     "build:css": "bundler bundle:scss src/index.scss",
     "build:js-esm": "cross-env BABEL_ENV=esm yarn build:js:modules -d es",
     "build:js-cjs": "cross-env BABEL_ENV=cjs yarn build:js:modules -d lib",
-    "build:js:modules": "babel src --ignore '**/__tests__','**/*.test.js','**/*.stories.js'",
+    "build:js:modules": "babel src --ignore '**/_mocks_','**/__tests__','**/*+(-story|.stories).*'",
     "build:scss": "copyfiles 'src/**/*.scss' scss -u 1",
     "ci-check": "node scripts/import",
     "clean": "rimraf css es lib scss",
     "test": "run-p test:*",
     "test:js": "jest --colors",
-    "test:scss": "bundler check 'src/**/*.scss'",
+    "test:scss": "bundler check 'src/**/*.scss' -i '**/css-gridish/**'",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally)",
     "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon)/'"
+  },
+  "peerDependencies": {
+    "react": "^16.8.6 || ^17.0.1",
+    "react-dom": "^16.8.6 || ^17.0.1"
   },
   "dependencies": {
     "@babel/runtime": "^7.15.3",
@@ -52,14 +56,19 @@
     "carbon-components": "^10.41.0",
     "carbon-components-react": "^7.41.0",
     "carbon-icons": "^7.0.7",
-    "classnames": "^2.3.1"
+    "classnames": "^2.3.1",
+    "prop-types": "^15.7.2"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-export-default-from": "^7.14.5",
     "@carbon/bundler": "^10.11.0",
+    "babel-plugin-macros": "^3.1.0",
+    "babel-preset-ibm-cloud-cognitive": "^0.9.0",
+    "deepmerge": "^4.2.2",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
-    "jest": "^27.0.6",
-    "jest-config-ibm-cloud-cognitive": "^0.11.0",
+    "jest": "^27.1.0",
+    "jest-config-ibm-cloud-cognitive": "^0.12.0",
     "npm-check-updates": "^11.8.3",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2"

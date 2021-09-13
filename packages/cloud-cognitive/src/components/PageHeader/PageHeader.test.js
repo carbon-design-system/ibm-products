@@ -18,7 +18,9 @@ import { PageHeader } from '.';
 import { ActionBarItem } from '../ActionBar';
 import { mockHTMLElement } from '../../global/js/utils/test-helper';
 
-const blockClass = `${pkg.prefix}--page-header`;
+const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
+
+const blockClass = `${prefix}--page-header`;
 
 /* Test properties. */
 const actionBarOverflowAriaLabel = 'Show additional action bar items';
@@ -387,8 +389,9 @@ describe('PageHeader', () => {
     warn.mockRestore(); // Remove mock
   });
 
+  const dataTestId = 'data-testid';
+
   it('adds additional properties to the containing node', () => {
-    const dataTestId = uuidv4();
     render(<PageHeader data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
@@ -397,6 +400,15 @@ describe('PageHeader', () => {
     const ref = React.createRef();
     render(<PageHeader ref={ref} />);
     expect(ref.current).not.toBeNull();
+  });
+
+  it('adds the Devtools attribute to the containing node', () => {
+    render(<PageHeader data-testid={dataTestId} />);
+
+    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(PageHeader.displayName)
+    );
   });
 
   test('collapse button works', () => {
@@ -724,5 +736,16 @@ describe('PageHeader', () => {
     expect(skeletons).toHaveLength(3);
 
     warn.mockRestore(); // Remove mock
+  });
+
+  test('PageHeader grid settings narrow and fullWidth', () => {
+    const dataTestId = uuidv4();
+    const { container } = render(
+      <PageHeader data-testid={dataTestId} narrowGrid fullWidthGrid />
+    );
+
+    const grid = container.querySelector(`.${carbon.prefix}--grid`);
+    expect(grid).toHaveClass(`${carbon.prefix}--grid--narrow`);
+    expect(grid).toHaveClass(`${carbon.prefix}--grid--full-width`);
   });
 });

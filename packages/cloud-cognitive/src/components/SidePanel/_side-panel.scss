@@ -195,18 +195,18 @@ $sizes: extra-small, small, medium, large, max;
       pointer-events: none;
     }
     &.#{$block-class}__container-is-animating
-      .#{$block-class}__title-container.#{$block-class}__title-container--no-animation {
+      .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation {
       top: 0;
     }
     &.#{$block-class}__container-is-animating
       .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation {
-      top: var(--#{$block-class}--title-container-height);
+      top: var(--#{$block-class}--title-text-height);
     }
     &.#{$block-class}__container-is-animating
       .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation {
       // stylelint-disable-next-line carbon/layout-token-use
       top: calc(
-        var(--#{$block-class}--title-container-height) +
+        var(--#{$block-class}--title-text-height) +
           var(--#{$block-class}--subtitle-container-height)
       );
     }
@@ -270,11 +270,11 @@ $sizes: extra-small, small, medium, large, max;
       padding-right: $spacing-07;
     }
 
-    .#{$block-class}__title-container.#{$block-class}__title-container--no-animation.#{$block-class}__title-container-is-animating {
+    .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation.#{$block-class}__title-container-is-animating {
       top: 0;
     }
 
-    .#{$block-class}__title-container.#{$block-class}__title-container--no-animation {
+    .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation {
       @include setPanelSize();
 
       position: fixed;
@@ -292,6 +292,10 @@ $sizes: extra-small, small, medium, large, max;
           var(--#{$block-class}--action-bar-container-height)
       );
       overflow-x: hidden;
+    }
+
+    .#{$block-class}__inner-content-with-actions {
+      height: calc(100vh - 7rem);
     }
 
     .#{$block-class}__inner-content.#{$block-class}__static-inner-content {
@@ -388,7 +392,6 @@ $sizes: extra-small, small, medium, large, max;
     .#{$block-class}__body-content {
       padding: $spacing-05;
       padding-top: 0;
-      padding-bottom: var(--#{$block-class}--content-bottom-padding);
     }
     .#{$block-class}__actions-container {
       position: fixed;

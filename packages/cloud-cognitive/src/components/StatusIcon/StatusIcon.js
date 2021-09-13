@@ -7,6 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+
 import {
   Misuse16,
   Misuse20,
@@ -49,6 +50,8 @@ import {
   Time24,
   Time32,
 } from '@carbon/icons-react';
+
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
 const icons = {
@@ -133,7 +136,11 @@ export let StatusIcon = React.forwardRef(
 
     return (
       IconComponent && (
-        <IconComponent {...rest} className={classNames} ref={ref}>
+        <IconComponent
+          {...rest}
+          className={classNames}
+          ref={ref}
+          {...getDevtoolsProps(componentName)}>
           <title>{iconDescription}</title>
         </IconComponent>
       )

@@ -12,8 +12,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Button, Link } from 'carbon-components-react';
-import { pkg } from '../../settings';
+
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import '../../global/js/utils/props-helper';
+import { pkg } from '../../settings';
+
 import { EmptyStateContent } from './EmptyStateContent';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -55,7 +58,8 @@ export let EmptyState = React.forwardRef(
           ...rest
         }
         className={cx(blockClass, className)}
-        ref={ref}>
+        ref={ref}
+        {...getDevtoolsProps(componentName)}>
         {illustration && renderIllustration()}
         <EmptyStateContent
           action={action}

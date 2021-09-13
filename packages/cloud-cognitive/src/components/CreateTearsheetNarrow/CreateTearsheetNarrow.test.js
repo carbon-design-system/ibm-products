@@ -14,7 +14,9 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { CreateTearsheetNarrow } from '.';
 
-const blockClass = `${pkg.prefix}--create-tearsheet-narrow`;
+const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
+
+const blockClass = `${prefix}--create-tearsheet-narrow`;
 const componentName = CreateTearsheetNarrow.displayName;
 
 // values to use
@@ -96,6 +98,15 @@ describe(componentName, () => {
     const ref = React.createRef();
     renderComponent({ ref });
     expect(ref.current).not.toBeNull();
+  });
+
+  it('adds the Devtools attribute to the containing node', () => {
+    renderComponent({ 'data-testid': dataTestId });
+
+    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(componentName)
+    );
   });
 
   it('should disable the primary action button', () => {

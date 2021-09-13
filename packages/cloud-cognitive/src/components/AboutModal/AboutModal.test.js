@@ -210,7 +210,7 @@ describe(componentName, () => {
     expect(ref.current.outerModal.current).toHaveClass(blockClass);
   });
 
-  it('adds the Devtools prop to the containing node', () => {
+  it('adds the Devtools attribute to the containing node', () => {
     renderComponent({ 'data-testid': dataTestId });
 
     expect(screen.getByTestId(dataTestId)).toHaveAttribute(

@@ -107,6 +107,8 @@
   .#{$block-class} .#{$block-class}__content {
     overflow: auto;
     flex-grow: 1;
+    background-color: $ui-background;
+    color: $text-01;
     overflow-x: hidden;
   }
 

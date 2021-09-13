@@ -105,6 +105,7 @@
     &__icon {
       @include transition($transition-property: transform);
 
+      margin-top: $carbon--spacing-01;
       margin-left: auto;
       transform: $nav__icon__position rotate(0deg);
       @include rtl {
@@ -169,7 +170,6 @@
 
         position: relative;
         display: flex;
-        align-items: center;
         padding: $carbon--spacing-03 $carbon--spacing-02 $carbon--spacing-03
           $carbon--spacing-08;
         color: $text-01;

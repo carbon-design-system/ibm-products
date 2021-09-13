@@ -13444,6 +13444,7 @@ li.bx--accordion__item--disabled:last-of-type {
   transition-duration: 240ms;
   transition-property: transform;
   transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
+  margin-top: 0.125rem;
   margin-left: auto;
   transform: translate3d(-50%, 0, 0) rotate(0deg);
 }
@@ -13510,7 +13511,6 @@ li.bx--accordion__item--disabled:last-of-type {
   transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
   position: relative;
   display: flex;
-  align-items: center;
   padding: 0.5rem 0.25rem 0.5rem 2.5rem;
   color: var(--cds-text-01, #f4f4f4);
   cursor: pointer;
@@ -22699,7 +22699,12 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 .security--toolbar__nav__item__title--icon {
+  padding-top: 0.03125rem;
   margin-left: 0.75rem;
+}
+
+.security--toolbar__nav__list__title--icon .security--nav__list__item__content {
+  padding-top: 0.03125rem;
 }
 
 .security--toolbar__panel {

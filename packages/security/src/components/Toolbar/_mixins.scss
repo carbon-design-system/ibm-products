@@ -44,6 +44,11 @@ $toolbar__panel__sizing__width: carbon--mini-units(
   $count: 32,
 );
 
+/// Nav list title item padding-top
+$nav__item__title__icon__padding__top: carbon--mini-units(
+  $count: 0.0625,
+);
+
 /// Panel transition timing function.
 /// @type Length
 $toolbar__panel__transition__timing-function: $timing-function;
@@ -163,7 +168,16 @@ $toolbar__panel__transition__timing-function: $timing-function;
 
   &__nav__item__title {
     &--icon {
+      padding-top: $nav__item__title__icon__padding__top;
       margin-left: $carbon--spacing-04;
+    }
+  }
+
+  &__nav__list__title {
+    &--icon {
+      #{get-component-namespace($component-name: nav)}__list__item__content {
+        padding-top: $nav__item__title__icon__padding__top;
+      }
     }
   }
 

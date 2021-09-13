@@ -169,6 +169,9 @@ export default class Toolbar extends Component {
 
                 return children ? (
                   <NavList
+                    className={classnames({
+                      [`${namespace}__nav__list__title--icon`]: hasIcon,
+                    })}
                     renderIcon={hasIcon}
                     icon={icon}
                     key={navigationItemId}

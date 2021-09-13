@@ -9,12 +9,16 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import React from 'react';
-import { pkg } from '../../settings';
+
 import uuidv4 from '../../global/js/utils/uuidv4';
+import { pkg } from '../../settings';
+
 import { NotificationsPanel } from '.';
 import data from './NotificationsPanel_data';
 
-const blockClass = `${pkg.prefix}--notifications-panel`;
+const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
+
+const blockClass = `${prefix}--notifications-panel`;
 const dataTestId = uuidv4();
 const onNotificationClickFn = jest.fn();
 const onDismissSingleNotificationFn = jest.fn();
@@ -201,6 +205,18 @@ describe('Notifications', () => {
       data: [],
     });
     expect(ref.current.classList.contains(blockClass)).toBeTruthy();
+  });
+
+  it('adds the Devtools attribute to the containing node', () => {
+    renderNotifications({
+      data: [],
+      'data-testid': dataTestId,
+    });
+
+    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(NotificationsPanel.displayName)
+    );
   });
 
   it('should close the notifications panel when click is detected outside', () => {

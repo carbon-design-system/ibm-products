@@ -12,7 +12,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Button, Link } from 'carbon-components-react';
+
+import { getDevtoolsProps } from '../../../global/js/utils/devtools';
 import { pkg } from '../../../settings';
+
 import { EmptyStateContent } from '../EmptyStateContent';
 import { NoTagsIllustration } from '../assets/NoTagsIllustration';
 import { EmptyStateDefaultProps } from '../EmptyState';
@@ -42,7 +45,8 @@ export let NoTagsEmptyState = React.forwardRef(
           ...rest
         }
         className={cx(blockClass, className)}
-        ref={ref}>
+        ref={ref}
+        {...getDevtoolsProps(componentName)}>
         <NoTagsIllustration theme={illustrationTheme} size={size} />
         <EmptyStateContent
           action={action}

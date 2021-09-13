@@ -11,8 +11,10 @@ import React from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { pkg } from '../../settings';
+
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import '../../global/js/utils/props-helper';
+import { pkg } from '../../settings';
 
 // Carbon and package components we use.
 import {
@@ -104,7 +106,8 @@ export let UserProfileImage = React.forwardRef(
           `${blockClass}--${size}`,
           `${blockClass}--${theme}`,
           `${blockClass}--${backgroundColor}`,
-        ])}>
+        ])}
+        {...getDevtoolsProps(componentName)}>
         <FillItem />
       </div>
     );

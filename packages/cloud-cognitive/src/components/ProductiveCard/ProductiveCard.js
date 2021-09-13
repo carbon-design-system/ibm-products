@@ -8,8 +8,11 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { Card } from '../Card';
-import { pkg } from '../../settings';
+
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { prepareProps } from '../../global/js/utils/props-helper';
+import { pkg } from '../../settings';
+
 const componentName = 'ProductiveCard';
 
 export let ProductiveCard = forwardRef((props, ref) => {
@@ -23,7 +26,15 @@ export let ProductiveCard = forwardRef((props, ref) => {
     'secondaryButtonKind',
     'secondaryButtonText',
   ]);
-  return <Card {...validProps} ref={ref} productive />;
+
+  return (
+    <Card
+      {...validProps}
+      ref={ref}
+      productive
+      {...getDevtoolsProps(componentName)}
+    />
+  );
 });
 
 // Return a placeholder if not released and not enabled by feature flag

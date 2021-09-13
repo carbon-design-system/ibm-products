@@ -125,6 +125,7 @@ const IdeSlideOverPanel = ({
 };
 
 IdeSlideOverPanel.propTypes = {
+  children: PropTypes.node,
   className: PropTypes.string,
   closeButtonIconDescription: PropTypes.string,
   controls: PropTypes.bool,

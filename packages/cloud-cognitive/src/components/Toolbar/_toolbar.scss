@@ -56,4 +56,24 @@
   .#{$block-class} .#{$prefix}--dropdown {
     border-bottom-width: 0;
   }
+
+  .#{$block-class}__dropdown {
+    position: relative;
+  }
+
+  .#{$block-class}__dropdown:after {
+    $dimensions: carbon--rem(
+      $px: 6px,
+    );
+
+    $position: $carbon--spacing-01;
+
+    position: absolute;
+    right: $position;
+    bottom: $position;
+    width: $dimensions;
+    height: $dimensions;
+    background: linear-gradient(to right bottom, transparent 50%, $icon-01 50%);
+    content: '';
+  }
 }

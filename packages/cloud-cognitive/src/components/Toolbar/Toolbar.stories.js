@@ -40,13 +40,13 @@ import React, { useState } from 'react';
 
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 
-import { Toolbar, ToolbarButton, ToolbarGroup } from '../..';
+import { Toolbar, ToolbarButton, ToolbarDropdown, ToolbarGroup } from '../..';
 import mdx from './Toolbar.mdx';
 
 export default {
   title: getStoryTitle(Toolbar.displayName),
   component: Toolbar,
-  subcomponents: { ToolbarGroup, ToolbarButton },
+  subcomponents: { ToolbarGroup, ToolbarButton, ToolbarDropdown },
 
   parameters: {
     docs: {
@@ -69,6 +69,8 @@ function _Toolbar(args) {
         <ToolbarButton iconDescription="Share" renderIcon={Share16} />
         <ToolbarButton iconDescription="Upload" renderIcon={Upload16} />
         <ToolbarButton iconDescription="Print" renderIcon={Printer16} />
+
+        <ToolbarDropdown>Test</ToolbarDropdown>
       </ToolbarGroup>
 
       <ToolbarGroup>

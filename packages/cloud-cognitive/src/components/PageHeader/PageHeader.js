@@ -372,6 +372,11 @@ export let PageHeader = React.forwardRef(
     ]);
 
     useEffect(() => {
+      checkUpdateVerticalSpace();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [fullWidthGrid, narrowGrid]);
+
+    useEffect(() => {
       // Determines if the hasBackgroundAlways should be one based on the header height or scroll
       let result = hasBackgroundAlways && 1;
 
@@ -504,7 +509,12 @@ export let PageHeader = React.forwardRef(
           style={pageHeaderStyles}
           ref={headerRef}
           {...getDevtoolsProps(componentName)}>
-          <Grid fullWidth={fullWidthGrid} narrow={narrowGrid}>
+          <Grid
+            fullWidth={fullWidthGrid === true || fullWidthGrid === 'xl'}
+            narrow={narrowGrid}
+            className={cx({
+              [`${blockClass}--width--xl`]: fullWidthGrid === 'xl',
+            })}>
             <div className={`${blockClass}__non-navigation-row-content`}>
               {hasBreadcrumbRow ? (
                 <Row
@@ -1039,9 +1049,10 @@ PageHeader.propTypes = {
       hasBackgroundAlways && hasCollapseHeaderToggle
   ),
   /**
-   * The PageHeader is hosted in a Carbon grid, this value is passed through to the Carbon grid fullWidth prop
+   * The PageHeader is hosted in a Carbon grid, this value is passed through to the Carbon grid fullWidth prop.
+   * 'xl' is used to override the grid width setting. Can be used with narrowGrid: true to get the largest size.
    */
-  fullWidthGrid: PropTypes.bool,
+  fullWidthGrid: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf('xl')]),
   /**
    * Specifies if the PageHeader should have a background always on and defaults to the preferred `true`.
    * When false some parts of the header gain a background if they stick to the top of the PageHeader on scroll.

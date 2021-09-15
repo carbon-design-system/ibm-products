@@ -15,8 +15,10 @@ import { CreateTearsheet } from './CreateTearsheet';
 import { CreateTearsheetStep } from './CreateTearsheetStep';
 import { CreateTearsheetSection } from './CreateTearsheetSection';
 import uuidv4 from '../../global/js/utils/uuidv4';
-const createTearsheetBlockClass = `${pkg.prefix}--tearsheet-create`;
-const createInfluencerBlockClass = `${pkg.prefix}--create-influencer`;
+const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
+const createTearsheetBlockClass = `${prefix}--tearsheet-create`;
+const createInfluencerBlockClass = `${prefix}--create-influencer`;
+const componentName = CreateTearsheet.displayName;
 
 const rejectionErrorMessage = uuidv4();
 const onCloseFn = jest.fn();
@@ -148,6 +150,10 @@ describe(CreateTearsheet.displayName, () => {
       'data-testid': dataTestId,
     });
     screen.getByTestId(dataTestId);
+    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
+      devtoolsAttribute,
+      getDevtoolsId(componentName)
+    );
     screen.getAllByText(title);
     expect(
       container.querySelector(`.${createTearsheetBlockClass}`)

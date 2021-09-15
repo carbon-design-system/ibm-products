@@ -15,11 +15,15 @@ const defaults = {
     // reviewed and released components:
     AboutModal: true,
     APIKeyModal: true,
+    Cascade: true,
     CreateModal: true,
     CreateFullPage: true,
     CreateFullPageStep: true,
     CreateSidePanel: true,
     CreateTearsheetNarrow: true,
+    CreateTearsheet: true,
+    CreateTearsheetStep: true,
+    CreateTearsheetDivider: true,
     EmptyState: true,
     ErrorEmptyState: true,
     ExportModal: true,
@@ -46,9 +50,6 @@ const defaults = {
     UserProfileImage: true,
 
     // other public components not yet reviewed and released:
-    Cascade: false,
-    CreateTearsheet: false,
-    CreateTearsheetStep: false,
     ContextHeader: false,
     ExampleComponent: false,
     LoadingBar: false,

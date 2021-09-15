@@ -74,6 +74,11 @@ $raised-z-index: 99;
       box-shadow: 0 1px 0 $ui-03;
     }
 
+    .#{$block-class}--width--xl {
+      padding-right: $spacing-07;
+      padding-left: $spacing-07;
+    }
+
     .#{$block-class}__breadcrumb-row {
       position: sticky;
       z-index: $raised-z-index;

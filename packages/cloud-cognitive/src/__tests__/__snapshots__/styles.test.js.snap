@@ -3303,6 +3303,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   box-shadow: 0 1px 0 var(--cds-ui-03, #e0e0e0);
 }
 
+.exp--page-header .exp--page-header--width--xl {
+  padding-right: var(--cds-spacing-07, 2rem);
+  padding-left: var(--cds-spacing-07, 2rem);
+}
+
 .exp--page-header .exp--page-header__breadcrumb-row {
   position: sticky;
   z-index: 99;

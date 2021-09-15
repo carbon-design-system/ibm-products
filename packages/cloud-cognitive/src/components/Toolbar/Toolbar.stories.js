@@ -25,6 +25,7 @@ import {
   RulerAlt16,
   SettingsAdjust16,
   Table16,
+  TextAlignCenter16,
   TextCreation16,
   ZoomIn16,
   ZoomOut16,
@@ -40,13 +41,14 @@ import React, { useState } from 'react';
 
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 
-import { Toolbar, ToolbarButton, ToolbarDropdown, ToolbarGroup } from '../..';
+import { Toolbar, ToolbarButton, ToolbarGroup } from '../..';
 import mdx from './Toolbar.mdx';
 
 export default {
   title: getStoryTitle(Toolbar.displayName),
   component: Toolbar,
-  subcomponents: { ToolbarGroup, ToolbarButton, ToolbarDropdown },
+
+  subcomponents: { ToolbarGroup, ToolbarButton },
 
   parameters: {
     docs: {
@@ -69,8 +71,6 @@ function _Toolbar(args) {
         <ToolbarButton iconDescription="Share" renderIcon={Share16} />
         <ToolbarButton iconDescription="Upload" renderIcon={Upload16} />
         <ToolbarButton iconDescription="Print" renderIcon={Printer16} />
-
-        <ToolbarDropdown>Test</ToolbarDropdown>
       </ToolbarGroup>
 
       <ToolbarGroup>
@@ -99,6 +99,14 @@ function _Toolbar(args) {
           items={dropdownItems}
           label={selectedDropdownItem}
           onChange={({ selectedItem }) => setSelectedDropdownItem(selectedItem)}
+        />
+      </ToolbarGroup>
+
+      <ToolbarGroup>
+        <ToolbarButton
+          iconDescription="Text align center"
+          renderIcon={TextAlignCenter16}
+          caret
         />
       </ToolbarGroup>
 

@@ -6,6 +6,8 @@
 //
 
 @import 'carbon-components/scss/components/button/button';
+@import 'carbon-components/scss/components/overflow-menu/overflow-menu';
+@import 'carbon-components/scss/globals/scss/css--reset';
 
 @import '../../global/styles/project-settings';
 
@@ -17,7 +19,7 @@
     )
     solid $ui-03;
 
-  $dimensions: carbon--rem(
+  $toolbar-dimensions: carbon--rem(
     $px: 40px,
   );
 
@@ -27,8 +29,8 @@
     }
 
     display: flex;
-    min-width: $dimensions;
-    min-height: $dimensions;
+    min-width: $toolbar-dimensions;
+    min-height: $toolbar-dimensions;
     background-color: $ui-01;
   }
 
@@ -38,7 +40,7 @@
   }
 
   .#{$block-class}--vertical {
-    max-width: $dimensions;
+    max-width: $toolbar-dimensions;
   }
 
   .#{$block-class}__group {
@@ -57,12 +59,12 @@
     border-bottom-width: 0;
   }
 
-  .#{$block-class}__dropdown {
+  .#{$block-class}__button--caret {
     position: relative;
   }
 
-  .#{$block-class}__dropdown:after {
-    $dimensions: carbon--rem(
+  .#{$block-class}__button__caret {
+    $caret-dimensions: carbon--rem(
       $px: 6px,
     );
 
@@ -71,8 +73,8 @@
     position: absolute;
     right: $position;
     bottom: $position;
-    width: $dimensions;
-    height: $dimensions;
+    width: $caret-dimensions;
+    height: $caret-dimensions;
     background: linear-gradient(to right bottom, transparent 50%, $icon-01 50%);
     content: '';
   }

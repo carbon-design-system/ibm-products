@@ -134,6 +134,7 @@
         unknown: $icon-02
       )
   {
+    &__icon--#{$modifier},
     &--#{$modifier} #{$root}__icon {
       fill: $fill;
     }

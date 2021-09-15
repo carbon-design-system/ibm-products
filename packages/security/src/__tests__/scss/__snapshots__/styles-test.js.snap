@@ -8418,22 +8418,27 @@ a.bx--overflow-menu-options__btn::before {
   padding-left: 0.25rem;
 }
 
+.security--decorator__icon--critical,
 .security--decorator--critical .security--decorator__icon {
   fill: var(--cds-support-01, #fa4d56);
 }
 
+.security--decorator__icon--high,
 .security--decorator--high .security--decorator__icon {
   fill: var(--cds-support-01, #fa4d56);
 }
 
+.security--decorator__icon--low,
 .security--decorator--low .security--decorator__icon {
   fill: var(--cds-support-03, #f1c21b);
 }
 
+.security--decorator__icon--medium,
 .security--decorator--medium .security--decorator__icon {
   fill: #ff832b;
 }
 
+.security--decorator__icon--unknown,
 .security--decorator--unknown .security--decorator__icon {
   fill: var(--cds-icon-02, #c6c6c6);
 }

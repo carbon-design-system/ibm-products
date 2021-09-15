@@ -3,8 +3,8 @@
  * @copyright IBM Security 2019 - 2021
  */
 
+import { fireEvent, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { render } from '@testing-library/react';
 
 import React from 'react';
 
@@ -141,6 +141,47 @@ describe('Decorator', () => {
     );
     // the MD5 hash -- the data decorator.
     expect(queryAllByText(/0f3deda483df…243b/i).length === 1);
+  });
+
+  test('should invoke context menu mock when a non-interactive ("span") decorator is right-clicked', () => {
+    const onContextMenuMock = jest.fn();
+    const { getByText } = render(
+      <Decorator type="IP" value="10.0.0.0" onContextMenu={onContextMenuMock} />
+    );
+
+    fireEvent.contextMenu(getByText(/10.0.0.0/i).closest('span'));
+    expect(onContextMenuMock).toHaveBeenCalledTimes(1);
+  });
+
+  test('should invoke context menu mock when an href ("a") decorator is right-clicked', () => {
+    const onContextMenuMock = jest.fn();
+    const { getByText } = render(
+      <Decorator
+        type="IP"
+        value="10.0.0.0"
+        href="#"
+        onContextMenu={onContextMenuMock}
+      />
+    );
+
+    fireEvent.contextMenu(getByText(/10.0.0.0/i).closest('a'));
+    expect(onContextMenuMock).toHaveBeenCalledTimes(1);
+  });
+
+  test('should invoke context menu mock when an interactive ("button") decorator is right-clicked', () => {
+    const onClickMock = jest.fn();
+    const onContextMenuMock = jest.fn();
+    const { getByText } = render(
+      <Decorator
+        type="IP"
+        value="10.0.0.0"
+        onClick={onClickMock}
+        onContextMenu={onContextMenuMock}
+      />
+    );
+
+    fireEvent.contextMenu(getByText(/10.0.0.0/i).closest('button'));
+    expect(onContextMenuMock).toHaveBeenCalledTimes(1);
   });
 });
 

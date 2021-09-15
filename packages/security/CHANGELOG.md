@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-security@0.13.0...@carbon/ibm-cloud-cognitive-security@0.13.1) (2021-09-14)
+
+
+### Bug Fixes
+
+* **security:** add sideEffects for tree shaking ([#1253](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1253)) ([12f9eef](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/12f9eefbdc238314dd13d6d06cc625a7658913c2))
+
+
+
+
+
 # [0.13.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-security@0.12.4...@carbon/ibm-cloud-cognitive-security@0.13.0) (2021-09-13)
 
 

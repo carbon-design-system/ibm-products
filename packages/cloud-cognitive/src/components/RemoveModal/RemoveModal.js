@@ -65,7 +65,8 @@ export let RemoveModal = forwardRef(
           preventCloseOnClickOutside,
           onClose,
           ...getDevtoolsProps(componentName),
-        }}>
+        }}
+      >
         <ModalHeader
           title={title}
           label={label}
@@ -92,7 +93,8 @@ export let RemoveModal = forwardRef(
             type="submit"
             kind="danger"
             onClick={onRequestSubmit}
-            disabled={primaryButtonDisabled}>
+            disabled={primaryButtonDisabled}
+          >
             {primaryButtonText}
           </Button>
         </ModalFooter>
@@ -124,7 +126,7 @@ RemoveModal.propTypes = {
   /**
    * Label for text box
    */
-  inputLabelText: PropTypes.string,
+  inputLabelText: PropTypes.node,
   /**
    * Placeholder for text box
    */

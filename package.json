@@ -1,7 +1,7 @@
 {
   "name": "ibm-cloud-cognitive",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "repository": "git@github.com:carbon-design-system/ibm-cloud-cognitive.git",
   "license": "Apache-2.0",
   "workspaces": {

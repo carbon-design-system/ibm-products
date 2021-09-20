@@ -71,7 +71,8 @@ export let Saving = forwardRef(
         {...rest}
         ref={ref}
         className={cx(blockClass, className)}
-        {...getDevtoolsProps(componentName)}>
+        {...getDevtoolsProps(componentName)}
+      >
         {type === 'auto' ? (
           <div className={`${blockClass}__message`}>
             {status === 'fail' && (
@@ -87,7 +88,8 @@ export let Saving = forwardRef(
               onClick={onRequestCancel}
               kind="secondary"
               disabled={status !== 'in-progress'}
-              type="button">
+              type="button"
+            >
               {secondaryButtonText}
             </Button>
             <Button
@@ -96,7 +98,8 @@ export let Saving = forwardRef(
               renderIcon={statusObj[status]?.icon}
               iconDescription={statusObj[status]?.iconDescription}
               disabled={status === 'in-progress'}
-              type="button">
+              type="button"
+            >
               {statusObj[status]?.text}
             </Button>
           </div>

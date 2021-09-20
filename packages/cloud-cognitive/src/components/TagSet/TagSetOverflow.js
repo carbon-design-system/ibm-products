@@ -51,7 +51,8 @@ export const TagSetOverflow = React.forwardRef(
         className={cx(`${blockClass}`, {
           [`${blockClass}--hidden`]: overflowTags.length === 0,
         })}
-        ref={ref}>
+        ref={ref}
+      >
         <Tooltip
           align={overflowAlign}
           className={cx(className, `${blockClass}__tooltip`)}
@@ -59,7 +60,8 @@ export const TagSetOverflow = React.forwardRef(
           onChange={handleChange}
           open={tipOpen}
           triggerText={<Tag onClick={noop}>+{overflowTags.length}</Tag>}
-          showIcon={false}>
+          showIcon={false}
+        >
           <div ref={overflowTagContent} className={`${blockClass}__content`}>
             <ul className={`${blockClass}__tag-list`}>
               {overflowTags
@@ -79,7 +81,8 @@ export const TagSetOverflow = React.forwardRef(
                 className={`${blockClass}__show-all-tags-link`}
                 href=""
                 onClick={handleShowAllTagsClick}
-                role="button">
+                role="button"
+              >
                 {showAllTagsLabel}
               </Link>
             )}

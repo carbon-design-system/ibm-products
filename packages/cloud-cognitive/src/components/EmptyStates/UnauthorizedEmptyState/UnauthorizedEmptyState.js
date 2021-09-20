@@ -46,7 +46,8 @@ export let UnauthorizedEmptyState = React.forwardRef(
         }
         className={cx(blockClass, className)}
         ref={ref}
-        {...getDevtoolsProps(componentName)}>
+        {...getDevtoolsProps(componentName)}
+      >
         <UnauthorizedIllustration size={size} theme={illustrationTheme} />
         <EmptyStateContent
           action={action}

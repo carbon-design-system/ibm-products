@@ -105,11 +105,13 @@ export let LoadingBar = React.forwardRef(
         aria-atomic="true"
         aria-labelledby={loadingId}
         aria-live={active ? 'assertive' : 'off'}
-        id={loadingId}>
+        id={loadingId}
+      >
         <div className={loadingClassName}>
           <div
             {...(isDeterminate && { style: { width: percentProgress } })}
-            className={`${blockClass}__progress`}>
+            className={`${blockClass}__progress`}
+          >
             <div className={animationClassName} />
           </div>
         </div>

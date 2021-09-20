@@ -493,7 +493,8 @@ export let PageHeader = React.forwardRef(
       <>
         <div
           className={`${blockClass}--offset-top-measuring-element`}
-          ref={offsetTopMeasuringRef}></div>
+          ref={offsetTopMeasuringRef}
+        ></div>
         <section
           {...rest}
           className={cx([
@@ -508,13 +509,15 @@ export let PageHeader = React.forwardRef(
           ])}
           style={pageHeaderStyles}
           ref={headerRef}
-          {...getDevtoolsProps(componentName)}>
+          {...getDevtoolsProps(componentName)}
+        >
           <Grid
             fullWidth={fullWidthGrid === true || fullWidthGrid === 'xl'}
             narrow={narrowGrid}
             className={cx({
               [`${blockClass}--width--xl`]: fullWidthGrid === 'xl',
-            })}>
+            })}
+          >
             <div className={`${blockClass}__non-navigation-row-content`}>
               {hasBreadcrumbRow ? (
                 <Row
@@ -525,13 +528,15 @@ export let PageHeader = React.forwardRef(
                       breadcrumbs,
                     [`${blockClass}__breadcrumb-row--has-action-bar`]:
                       hasActionBar,
-                  })}>
+                  })}
+                >
                   <div className={`${blockClass}__breadcrumb-row--container`}>
                     <Column
                       className={cx(`${blockClass}__breadcrumb-column`, {
                         [`${blockClass}__breadcrumb-column--background`]:
                           breadcrumbs !== undefined || hasActionBar,
-                      })}>
+                      })}
+                    >
                       {/* keeps actionBar right even if empty */}
 
                       {breadcrumbs !== undefined ? (
@@ -539,7 +544,8 @@ export let PageHeader = React.forwardRef(
                           className={`${blockClass}__breadcrumb`}
                           noTrailingSlash={title !== undefined}
                           overflowAriaLabel={breadcrumbOverflowAriaLabel}
-                          breadcrumbs={breadcrumbsInWithTitle}>
+                          breadcrumbs={breadcrumbsInWithTitle}
+                        >
                           {!breadcrumbsIn ? deprecated_breadcrumbItems : null}
                           {!breadcrumbsIn && title ? (
                             <BreadcrumbItem
@@ -550,7 +556,8 @@ export let PageHeader = React.forwardRef(
                                   [`${blockClass}__breadcrumb-title--pre-collapsed`]:
                                     collapseTitle,
                                 },
-                              ])}>
+                              ])}
+                            >
                               <span>
                                 {titleLoading ? <SkeletonText /> : titleText}
                               </span>
@@ -568,10 +575,12 @@ export let PageHeader = React.forwardRef(
                           [`${blockClass}__action-bar-column--influenced-by-collapse-button`]:
                             spaceForCollapseButton,
                         },
-                      ])}>
+                      ])}
+                    >
                       <div
                         className={`${blockClass}__action-bar-column-content`}
-                        ref={sizingContainerRef}>
+                        ref={sizingContainerRef}
+                      >
                         {hasActionBar ? (
                           // Investigate the responsive  behaviour or this and the title also fix the ActionBar Item and PageAction story css
                           <>
@@ -580,7 +589,8 @@ export let PageHeader = React.forwardRef(
                                 className={cx(`${blockClass}__page-actions`, {
                                   [`${blockClass}__page-actions--in-breadcrumb`]:
                                     pageActionsInBreadcrumbRow,
-                                })}>
+                                })}
+                              >
                                 <ButtonSetWithOverflow
                                   className={`${blockClass}__button-set--in-breadcrumb`}
                                   onWidthChange={handleButtonSetWidthChange}
@@ -620,14 +630,16 @@ export let PageHeader = React.forwardRef(
                       pageActions !== undefined &&
                       actionBarItems === undefined &&
                       hasBreadcrumbRow,
-                  })}>
+                  })}
+                >
                   <Column className={`${blockClass}__title-column`}>
                     {/* keeps page actions right even if empty */}
                     {title !== undefined ? (
                       <div
                         className={cx(`${blockClass}__title`, {
                           [`${blockClass}__title--fades`]: hasBreadcrumbRow,
-                        })}>
+                        })}
+                      >
                         {TitleIcon && !titleLoading ? (
                           <TitleIcon className={`${blockClass}__title-icon`} />
                         ) : null}
@@ -649,7 +661,8 @@ export let PageHeader = React.forwardRef(
                       className={cx(`${blockClass}__page-actions`, {
                         [`${blockClass}__page-actions--in-breadcrumb`]:
                           pageActionsInBreadcrumbRow,
-                      })}>
+                      })}
+                    >
                       <ButtonSetWithOverflow
                         className={`${blockClass}__page-actions-container`}
                         onWidthChange={handleButtonSetWidthChange}
@@ -693,7 +706,8 @@ export let PageHeader = React.forwardRef(
                       [`${blockClass}__last-row-buffer--active`]:
                         lastRowBufferActive,
                     },
-                  ])}></div>
+                  ])}
+                ></div>
               )}
 
               {
@@ -702,12 +716,14 @@ export let PageHeader = React.forwardRef(
                   <Row
                     className={cx(`${blockClass}__navigation-row`, {
                       [`${blockClass}__navigation-row--has-tags`]: tags,
-                    })}>
+                    })}
+                  >
                     <Column
                       className={cx(`${blockClass}__navigation-tags`, {
                         [`${blockClass}__navigation-tags--tags-only`]:
                           navigation === undefined,
-                      })}>
+                      })}
+                    >
                       <TagSet
                         overflowAlign="end"
                         {...{
@@ -732,7 +748,8 @@ export let PageHeader = React.forwardRef(
                     [`${blockClass}__navigation-row--spacing-above-06`]:
                       navigation !== undefined,
                     [`${blockClass}__navigation-row--has-tags`]: tags,
-                  })}>
+                  })}
+                >
                   <Column className={`${blockClass}__navigation-tabs`}>
                     {navigation}
                   </Column>
@@ -741,7 +758,8 @@ export let PageHeader = React.forwardRef(
                       className={cx(`${blockClass}__navigation-tags`, {
                         [`${blockClass}__navigation-tags--tags-only`]:
                           navigation === undefined,
-                      })}>
+                      })}
+                    >
                       <TagSet
                         overflowAlign="end"
                         {...{

@@ -24,7 +24,8 @@ let Toolbar = forwardRef(({ children, className, vertical, ...rest }, ref) => {
         [`${blockClass}--vertical`]: vertical,
       })}
       {...(vertical && { 'aria-orientation': 'vertical' })}
-      role="toolbar">
+      role="toolbar"
+    >
       {children}
     </div>
   );

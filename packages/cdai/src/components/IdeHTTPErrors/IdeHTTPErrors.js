@@ -108,7 +108,8 @@ export default class IdeHTTPErrors extends Component {
       <div className={className}>
         <div
           className={`${gridPrefix}--grid ${gridPrefix}--grid--full-width`}
-          ref={pageWidth}>
+          ref={pageWidth}
+        >
           {renderBackground()}
           {renderTitle()}
           {renderDescription()}
@@ -140,7 +141,8 @@ export default class IdeHTTPErrors extends Component {
         {links.map(({ text, url }) => (
           <li
             className={`${this.className}-links--link`}
-            key={`${text}:${url}`}>
+            key={`${text}:${url}`}
+          >
             <Link href={url}>{text}</Link>
           </li>
         ))}

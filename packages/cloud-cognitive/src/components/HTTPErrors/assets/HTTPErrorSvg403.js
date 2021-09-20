@@ -19,7 +19,8 @@ export const HTTPErrorSvg403 = ({ className }) => {
       width={1584}
       height={916}
       viewBox="0 0 1584 916"
-      className={className}>
+      className={className}
+    >
       <defs>
         <clipPath id="prefix__clip-path">
           <path className="prefix__cls-1" d="M412 617.45a4 4 0 114 6.93z" />
@@ -207,7 +208,8 @@ export const HTTPErrorSvg403 = ({ className }) => {
           y1={585.38}
           x2={201.66}
           y2={559.09}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#333" />
           <stop offset={0.9} stopColor="#bebebe" stopOpacity={0} />
         </linearGradient>
@@ -225,7 +227,8 @@ export const HTTPErrorSvg403 = ({ className }) => {
           y1={763.45}
           x2={1315.84}
           y2={763.45}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#e0e0e0" />
           <stop offset={0.17} stopColor="#e0e0e0" stopOpacity={0.99} />
           <stop offset={0.31} stopColor="#e2e2e2" stopOpacity={0.94} />
@@ -243,7 +246,8 @@ export const HTTPErrorSvg403 = ({ className }) => {
           y1={642.11}
           x2={450.16}
           y2={600.78}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#525252" stopOpacity={0.05} />
           <stop offset={1} stopOpacity={0.1} />
         </linearGradient>
@@ -253,7 +257,8 @@ export const HTTPErrorSvg403 = ({ className }) => {
           y1={549.96}
           x2={449.94}
           y2={491.61}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#f4f4f4" />
           <stop offset={0.78} stopColor="#e0e0e0" />
           <stop offset={1} stopColor="#c6c6c6" />
@@ -264,7 +269,8 @@ export const HTTPErrorSvg403 = ({ className }) => {
           y1={481.17}
           x2={464.73}
           y2={627.46}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#f4f4f4" />
           <stop offset={0.11} stopColor="#e0e0e0" />
           <stop offset={0.25} stopColor="#d8d8d8" />
@@ -279,7 +285,8 @@ export const HTTPErrorSvg403 = ({ className }) => {
           y1={577.88}
           x2={471.73}
           y2={577.88}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#a8a8a8" />
           <stop offset={1} stopColor="#c6c6c6" />
         </linearGradient>
@@ -297,7 +304,8 @@ export const HTTPErrorSvg403 = ({ className }) => {
           y1={561.12}
           x2={444.49}
           y2={561.12}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#e0e0e0" />
           <stop offset={1} stopColor="#c6c6c6" />
         </linearGradient>
@@ -307,7 +315,8 @@ export const HTTPErrorSvg403 = ({ className }) => {
           y1={563.28}
           x2={408.79}
           y2={553.46}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#a8a8a8" />
           <stop offset={1} stopColor="#8d8d8d" />
         </linearGradient>
@@ -317,7 +326,8 @@ export const HTTPErrorSvg403 = ({ className }) => {
           y1={494.65}
           x2={447.52}
           y2={546.33}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0.67} stopColor="#fff" />
           <stop offset={0.76} stopColor="#fff" stopOpacity={0.99} />
           <stop offset={0.8} stopColor="#fdfdfd" stopOpacity={0.96} />
@@ -339,7 +349,8 @@ export const HTTPErrorSvg403 = ({ className }) => {
       <g
         style={{
           isolation: 'isolate',
-        }}>
+        }}
+      >
         <g id="prefix__Layer_1" data-name="Layer 1">
           <g opacity={0.25}>
             <path

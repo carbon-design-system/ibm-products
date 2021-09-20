@@ -3,6 +3,58 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.84.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.84.0...@carbon/ibm-cloud-cognitive@0.84.1) (2021-09-15)
+
+
+### Bug Fixes
+
+* adds additional check for copy ([#1258](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1258)) ([b69cca1](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b69cca1314e2cca7d99351fa7f91069687d64b72))
+
+
+
+
+
+# [0.84.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.83.1...@carbon/ibm-cloud-cognitive@0.84.0) (2021-09-15)
+
+
+### Features
+
+* create an xl width for the page header ([#1236](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1236)) ([d278f85](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d278f854629f12459fd2e8e7b0ca3003083574b8))
+
+
+
+
+
+## [0.83.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.83.0...@carbon/ibm-cloud-cognitive@0.83.1) (2021-09-14)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+# [0.83.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.82.3...@carbon/ibm-cloud-cognitive@0.83.0) (2021-09-13)
+
+
+### Features
+
+* update Carbon versions and package dependencies to latest ([#1228](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1228)) ([4f5e24c](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/4f5e24cd3a36e7fa9a5cd62d1cafe75a090cf32e))
+
+
+
+
+
+## [0.82.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.82.2...@carbon/ibm-cloud-cognitive@0.82.3) (2021-09-09)
+
+
+### Bug Fixes
+
+* **CreateFullPage:** explicitly set bg color for page content ([#1249](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1249)) ([776d2d3](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/776d2d35a4549815312f5b3a89be2da045271eee))
+
+
+
+
+
 ## [0.82.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.82.1...@carbon/ibm-cloud-cognitive@0.82.2) (2021-09-07)
 
 

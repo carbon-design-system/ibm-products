@@ -314,6 +314,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--action-set {
   align-items: stretch;
   justify-content: flex-end;
+  background-color: var(--cds-ui-01, #f4f4f4);
 }
 
 .exp--action-set .exp--action-set__action-button {

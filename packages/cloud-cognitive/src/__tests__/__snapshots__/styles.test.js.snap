@@ -2419,12 +2419,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-top: var(--cds-spacing-06, 1.5rem);
 }
 
-.exp--empty-state__action-button {
+.exp--empty-state .exp--empty-state__action-button {
   display: block;
 }
 
-.exp--empty-state__link {
-  display: inline-block;
+.exp--empty-state .exp--empty-state__link {
+  display: block;
 }
 
 /* stylelint-disable number-max-precision */

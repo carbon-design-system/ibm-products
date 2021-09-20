@@ -57,6 +57,10 @@ const s = [
             ],
           },
           {
+            n: 'Edit and update flows',
+            s: ['c/EditSidePanel'],
+          },
+          {
             n: 'HTTP errors',
             s: ['c/HTTPError403', 'c/HTTPError404', 'c/HTTPErrorOther'],
           },

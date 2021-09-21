@@ -53,7 +53,8 @@ const Template = ({ actions, size, ...args }) => {
     <>
       {validationError && <p>Note: {validationError.message.split(':')[1]}</p>}
       <div
-        className={`${blockClass}__story-container ${blockClass}__story-container--${size}`}>
+        className={`${blockClass}__story-container ${blockClass}__story-container--${size}`}
+      >
         <ActionSet {...{ actions, size, ...args }} />
       </div>
     </>

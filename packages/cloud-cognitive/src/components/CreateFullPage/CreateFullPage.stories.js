@@ -97,7 +97,8 @@ const Template = ({ ...args }) => {
               }, simulatedDelay);
             });
           }}
-          disableSubmit={!textInput}>
+          disableSubmit={!textInput}
+        >
           <Row>
             <Column xlg={5} lg={5} md={4} sm={4}>
               <TextInput
@@ -127,7 +128,8 @@ const Template = ({ ...args }) => {
                 <Tooltip
                   triggerClassName={`${storyClass}__tooltip`}
                   direction="right"
-                  tabIndex={0}>
+                  tabIndex={0}
+                >
                   <p>
                     Once toggled on, an inline error notification will appear
                     upon clicking next. This is an example usage of how to
@@ -155,7 +157,8 @@ const Template = ({ ...args }) => {
           className={`${storyClass}__step-fieldset--no-label`}
           title="Core configuration"
           description="Here is an example description for the 'Core configuration' step."
-          secondaryLabel="Optional">
+          secondaryLabel="Optional"
+        >
           <Row>
             <Column xlg={5} lg={5} md={4} sm={4}>
               <TextInput
@@ -202,14 +205,16 @@ const Template = ({ ...args }) => {
         <CreateFullPageStep
           title="Message retention"
           subtitle="This is how many copies of a topic will be made for high availability"
-          description="The partitions of each topic can be replicated across a configurable number of brokers">
+          description="The partitions of each topic can be replicated across a configurable number of brokers"
+        >
           <div>
             <RadioButtonGroup
               defaultSelected="standard"
               legend="Group Legend"
               name="radio-button-group"
               valueSelected="standard"
-              orientation="vertical">
+              orientation="vertical"
+            >
               <RadioButton
                 id="radio-1"
                 labelText="Replication factor: 1"
@@ -265,12 +270,14 @@ const TemplateWithSections = ({ ...args }) => {
               }, simulatedDelay);
             });
           }}
-          disableSubmit={!textInput}>
+          disableSubmit={!textInput}
+        >
           <Row>
             <Column xlg={5} lg={5} md={4} sm={4}>
               <FormGroup
                 className={`${blockClass}__step-fieldset ${storyClass}__step-fieldset--label`}
-                legendText="Partition">
+                legendText="Partition"
+              >
                 <TextInput
                   id="test-6"
                   invalidText="A valid value is required"
@@ -298,7 +305,8 @@ const TemplateWithSections = ({ ...args }) => {
                   <Tooltip
                     triggerClassName={`${storyClass}__tooltip`}
                     direction="right"
-                    tabIndex={0}>
+                    tabIndex={0}
+                  >
                     <p>
                       Once toggled on, an inline error notification will appear
                       upon clicking next. This is an example usage of how to
@@ -324,7 +332,8 @@ const TemplateWithSections = ({ ...args }) => {
           </h6>
           <FormGroup
             className={`${blockClass}__step-fieldset ${storyClass}__step-fieldset--label`}
-            legendText="Core configuration">
+            legendText="Core configuration"
+          >
             <p className={`${blockClass}__step-description`}>
               If your messages are not read by a consumer within this time, they
               will be missed.
@@ -376,14 +385,16 @@ const TemplateWithSections = ({ ...args }) => {
         <CreateFullPageStep
           title="Message retention"
           subtitle="This is how many copies of a topic will be made for high availability"
-          description="The partitions of each topic can be replicated across a configurable number of brokers.">
+          description="The partitions of each topic can be replicated across a configurable number of brokers."
+        >
           <div>
             <RadioButtonGroup
               defaultSelected="standard"
               legend="Group Legend"
               name="radio-button-group"
               valueSelected="standard"
-              orientation="vertical">
+              orientation="vertical"
+            >
               <RadioButton
                 id="radio-4"
                 labelText="Replication factor: 1"

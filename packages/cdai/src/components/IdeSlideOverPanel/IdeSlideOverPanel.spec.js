@@ -146,7 +146,8 @@ describe('IdeSlideOverPanel', () => {
     let wrapper = shallow(
       <IdeSlideOverPanel
         withOverlay={true}
-        onClose={closeSpy}></IdeSlideOverPanel>
+        onClose={closeSpy}
+      ></IdeSlideOverPanel>
     );
 
     it('Renders an overlay', () => {
@@ -168,7 +169,8 @@ describe('IdeSlideOverPanel', () => {
       <IdeSlideOverPanel
         withOverlay={true}
         onOverlayClose={overlayCloseSpy}
-        onClose={closeSpy}></IdeSlideOverPanel>
+        onClose={closeSpy}
+      ></IdeSlideOverPanel>
     );
 
     it('Triggers onOverlayClose instead of onClose if provided', () => {
@@ -185,7 +187,8 @@ describe('IdeSlideOverPanel', () => {
         {...requiredProps}
         controls
         primaryButtonText="Primary Button"
-        secondaryButtonText="Secondary Button"></IdeSlideOverPanel>
+        secondaryButtonText="Secondary Button"
+      ></IdeSlideOverPanel>
     );
 
     describe('primary button', () => {
@@ -205,7 +208,8 @@ describe('IdeSlideOverPanel', () => {
             danger
             controls
             primaryButtonText="Primary Button"
-            secondaryButtonText="Secondary Button"></IdeSlideOverPanel>
+            secondaryButtonText="Secondary Button"
+          ></IdeSlideOverPanel>
         );
         expect(
           wrapper.find('.ide-slide-over-panel--primary').props().kind

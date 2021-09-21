@@ -86,12 +86,14 @@ export let CreateTearsheetNarrow = React.forwardRef(
         selectorPrimaryFocus={selectorPrimaryFocus}
         verticalPosition={verticalPosition}
         role="presentation"
-        {...getDevtoolsProps(componentName)}>
+        {...getDevtoolsProps(componentName)}
+      >
         <h3 className={cx(`${blockClass}__form-title-text`, formTextClass)}>
           {formTitle}
         </h3>
         <p
-          className={cx(`${blockClass}__form-description-text`, formTextClass)}>
+          className={cx(`${blockClass}__form-description-text`, formTextClass)}
+        >
           {formDescription}
         </p>
         <Form className={`${blockClass}__form`}>{children}</Form>

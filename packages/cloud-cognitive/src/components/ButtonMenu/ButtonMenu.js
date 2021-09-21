@@ -61,7 +61,8 @@ export let ButtonMenu = React.forwardRef(
             `${carbon.prefix}--btn`,
             `${carbon.prefix}--btn--primary`,
             `${carbon.prefix}--btn--${size}`,
-          ])}>
+          ])}
+        >
           {label}
           {Icon && (
             <Icon
@@ -72,7 +73,8 @@ export let ButtonMenu = React.forwardRef(
           )}
         </div>
       )}
-      ref={ref}>
+      ref={ref}
+    >
       {children}
     </OverflowMenu>
   )

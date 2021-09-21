@@ -67,7 +67,8 @@ export const bespokeJSXProp = {
   customContent: (
     <div
       className={'storybook--idepageheader-button'}
-      {...idAttribute('custom')}>
+      {...idAttribute('custom')}
+    >
       <Button>Add new topic</Button>
     </div>
   ),

@@ -27,19 +27,22 @@ const defaultProps = {
       <CreateTearsheetStep
         key="Step 1"
         title="Step 1 title"
-        secondaryLabel="Step 1 secondary label">
+        secondaryLabel="Step 1 secondary label"
+      >
         content
       </CreateTearsheetStep>,
       <CreateTearsheetStep
         key="Step 2"
         title="Step 2 title"
-        secondaryLabel="Step 2 secondary label">
+        secondaryLabel="Step 2 secondary label"
+      >
         content
       </CreateTearsheetStep>,
       <CreateTearsheetStep
         key="Step 3"
         title="Step 3 title"
-        secondaryLabel="Step 3 secondary label">
+        secondaryLabel="Step 3 secondary label"
+      >
         content
       </CreateTearsheetStep>,
     ],
@@ -47,7 +50,8 @@ const defaultProps = {
       <CreateTearsheetSection
         key="section-1"
         id="section-1"
-        title={section1Title}>
+        title={section1Title}
+      >
         section content
       </CreateTearsheetSection>,
       <CreateTearsheetSection key="section-2" id="section-2" title="Section 2">
@@ -65,19 +69,22 @@ const invalidCreateComponents = {
     <CreateTearsheetStep
       key="Step 1"
       title="Step 1 title"
-      secondaryLabel="Step 1 secondary label">
+      secondaryLabel="Step 1 secondary label"
+    >
       content
     </CreateTearsheetStep>,
     <CreateTearsheetStep
       key="Step 2"
       title="Step 2 title"
-      secondaryLabel="Step 2 secondary label">
+      secondaryLabel="Step 2 secondary label"
+    >
       content
     </CreateTearsheetStep>,
     <CreateTearsheetStep
       key="Step 3"
       title="Step 3 title"
-      secondaryLabel="Step 3 secondary label">
+      secondaryLabel="Step 3 secondary label"
+    >
       content
     </CreateTearsheetStep>,
   ],

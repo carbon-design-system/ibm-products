@@ -41,7 +41,8 @@ const renderComponent = ({ ...rest }, children = <p>test</p>) =>
           secondaryButtonText: 'Cancel',
           selectorPageContent: '#create-side-panel-test-page-content',
           ...rest,
-        }}>
+        }}
+      >
         {children}
       </CreateSidePanel>
       <div id="create-side-panel-test-page-content" />

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.13.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.12.0...@carbon/ibm-cloud-cognitive-cdai@1.13.0) (2021-09-21)
+
+
+### Features
+
+* ensure prettier linting causes ci-check to fail ([#1273](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1273)) ([ad6f347](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ad6f3479636d2b80b26338d9059429b4ae08ac6e))
+* update Carbon versions and package dependencies to latest ([#1262](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1262)) ([ed4dcbe](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ed4dcbe5b6d92baa6ec39240bda6996ec55f7bc4))
+
+
+
+
+
 # [1.12.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.11.1...@carbon/ibm-cloud-cognitive-cdai@1.12.0) (2021-09-13)
 
 

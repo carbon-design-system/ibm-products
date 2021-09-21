@@ -78,7 +78,8 @@ const MediaTemplate = (opts) => {
       <div className={getColClasses(columnSize)}>
         <ExpressiveCard
           media={<AspectRatio ratio={mediaRatio}>{mediaRatio}</AspectRatio>}
-          {...args}>
+          {...args}
+        >
           {children}
         </ExpressiveCard>
       </div>

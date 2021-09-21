@@ -46,7 +46,8 @@ export let ErrorEmptyState = React.forwardRef(
         }
         className={cx(blockClass, className)}
         ref={ref}
-        {...getDevtoolsProps(componentName)}>
+        {...getDevtoolsProps(componentName)}
+      >
         <ErrorIllustration theme={illustrationTheme} size={size} />
         <EmptyStateContent
           action={action}

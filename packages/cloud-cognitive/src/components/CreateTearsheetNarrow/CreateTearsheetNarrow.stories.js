@@ -78,7 +78,8 @@ const Template = (args) => {
         onRequestClose={() => setOpen(false)}
         onRequestSubmit={action('onRequestSubmit action called')}
         disableSubmit={!topicName || numberInputsInvalid}
-        {...args}>
+        {...args}
+      >
         <TextInput
           labelText="Topic name"
           id="tearsheet-narrow-story-text-input--1"
@@ -179,10 +180,12 @@ const WithValidationTemplate = (args) => {
         }}
         onRequestSubmit={action('onRequestSubmit action called')}
         disableSubmit={!topicName || numberInputsInvalid}
-        {...args}>
+        {...args}
+      >
         <FormGroup
           className={`${createTearsheetNarrowBlockClass}__form ${createTearsheetNarrowBlockClass}__example-form-group`}
-          legendText="Topic information">
+          legendText="Topic information"
+        >
           <TextInput
             labelText="Topic name"
             id="tearsheet-narrow-story-text-input--1"
@@ -225,7 +228,8 @@ const WithValidationTemplate = (args) => {
         </FormGroup>
         <FormGroup
           className={`${createTearsheetNarrowBlockClass}__form ${createTearsheetNarrowBlockClass}__example-form-group`}
-          legendText="Scheduling">
+          legendText="Scheduling"
+        >
           <div className={`${createTearsheetNarrowBlockClass}__flex-container`}>
             <NumberInput
               id="retention-time"

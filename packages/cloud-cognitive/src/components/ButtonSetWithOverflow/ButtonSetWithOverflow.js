@@ -90,7 +90,8 @@ export const ButtonSetWithOverflow = ({
               kind={usedKind}
               {...other}
               size={buttonSize}
-              type="button">
+              type="button"
+            >
               {label}
             </Button>
           );
@@ -138,10 +139,12 @@ export const ButtonSetWithOverflow = ({
         className,
         { [`${blockClass}--right`]: rightAlign },
       ])}
-      ref={spaceAvailableRef}>
+      ref={spaceAvailableRef}
+    >
       {/* Hidden button set used to determine if space is available for a button set */}
       <div
-        className={`${blockClass}__button-container ${blockClass}__button-container--hidden`}>
+        className={`${blockClass}__button-container ${blockClass}__button-container--hidden`}
+      >
         <AButtonSet
           aria-hidden={true}
           ref={sizingContainerRefSet}
@@ -152,7 +155,8 @@ export const ButtonSetWithOverflow = ({
       {/* Hidden ButtonMenu used to report min size to host via onWidthChange */}
       <div
         className={`${blockClass}__button-container ${blockClass}__button-container--hidden`}
-        aria-hidden={true}>
+        aria-hidden={true}
+      >
         <AButtonMenu
           ref={sizingContainerRefCombo}
           buttons={buttons}

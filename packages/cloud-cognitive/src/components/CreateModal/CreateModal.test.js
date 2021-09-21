@@ -43,7 +43,8 @@ const renderComponent = ({ ...rest }, children) =>
         primaryButtonText: 'Create',
         secondaryButtonText: 'Cancel',
         ...rest,
-      }}>
+      }}
+    >
       {children}
     </CreateModal>
   );

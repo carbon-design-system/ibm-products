@@ -20,6 +20,7 @@
 @mixin edit-side-panel {
   // The block part of our conventional BEM class names (blockClass__E--M).
   $block-class: #{$pkg-prefix}--edit-side-panel;
+  $side-panel-block-class: #{$pkg-prefix}--side-panel;
 
   .#{$block-class} {
     .#{$carbon-prefix}--form.#{$block-class}__form {
@@ -42,6 +43,11 @@
 
     .#{$block-class}__form-description-text {
       @include carbon--type-style('body-long-01');
+    }
+
+    &.#{$side-panel-block-class}
+      .#{$carbon-prefix}--btn.#{$side-panel-block-class}__close-button {
+      display: none;
     }
 
     .#{$block-class}__actions-container {

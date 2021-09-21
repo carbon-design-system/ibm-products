@@ -181,11 +181,9 @@ export const editSidePanel = prepareStory(Template, {
   args: {
     actionToolbarButtons: [
       {
-        leading: true,
         label: 'Copy platform id',
         icon: Copy20,
         onClick: action('Toolbar button clicked: Copy'),
-        kind: 'primary',
       },
       {
         label: 'Settings',

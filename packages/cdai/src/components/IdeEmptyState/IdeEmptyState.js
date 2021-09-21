@@ -47,7 +47,8 @@ const IdeEmptyState = ({ body, button, format, image, links, title }) => {
           kind,
           onClick,
           size: 'small',
-        }}>
+        }}
+      >
         {text}
       </CarbonButton>
     );
@@ -60,7 +61,8 @@ const IdeEmptyState = ({ body, button, format, image, links, title }) => {
         {finalLinks.map(({ text, url, target = '_top' }) => (
           <li
             {...{ className: `${prefix}__link`, key: `${text}:${url}` }}
-            key={`${text}:${url}`}>
+            key={`${text}:${url}`}
+          >
             <CarbonLink href={url} target={target}>
               {text}
             </CarbonLink>
@@ -77,14 +79,16 @@ const IdeEmptyState = ({ body, button, format, image, links, title }) => {
   return (
     <div className={`${prefix} ${prefix}--format-${format}`}>
       <div
-        className={`${prefix}__image-container ${prefix}__image-container--format-${format}`}>
+        className={`${prefix}__image-container ${prefix}__image-container--format-${format}`}
+      >
         {renderImage()}
       </div>
       <div
         {...{
           className: `${prefix}__content-container ${prefix}__content-container--format-${format}`,
           format,
-        }}>
+        }}
+      >
         <div className={`${prefix}__title ${prefix}__title--format-${format}`}>
           {title}
         </div>

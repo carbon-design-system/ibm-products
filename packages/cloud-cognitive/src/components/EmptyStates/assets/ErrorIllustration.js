@@ -27,7 +27,8 @@ export const ErrorIllustration = ({ theme, size, ...rest }) => {
       className={cx([
         `${blockClass}__illustration`,
         `${blockClass}__illustration--${size}`,
-      ])}>
+      ])}
+    >
       <defs>
         <linearGradient
           id="prefix__a"
@@ -35,7 +36,8 @@ export const ErrorIllustration = ({ theme, size, ...rest }) => {
           y1={77.08}
           x2={38.9}
           y2={8.15}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#262626" />
           <stop offset={1} stopColor="#393939" />
         </linearGradient>
@@ -45,7 +47,8 @@ export const ErrorIllustration = ({ theme, size, ...rest }) => {
           y1={10.8}
           x2={76.33}
           y2={47.7}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#525252" />
           <stop offset={0.52} stopColor="#393939" />
           <stop offset={0.61} stopColor="#393939" />
@@ -57,7 +60,8 @@ export const ErrorIllustration = ({ theme, size, ...rest }) => {
           y1={31.37}
           x2={52.04}
           y2={9.45}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0.11} stopColor="#6f6f6f" stopOpacity={0} />
           <stop offset={0.94} stopColor="#6f6f6f" />
         </linearGradient>
@@ -94,7 +98,8 @@ export const ErrorIllustration = ({ theme, size, ...rest }) => {
       className={cx([
         `${blockClass}__illustration`,
         `${blockClass}__illustration--${size}`,
-      ])}>
+      ])}
+    >
       <defs>
         <linearGradient
           id="prefix__a_dark"
@@ -102,7 +107,8 @@ export const ErrorIllustration = ({ theme, size, ...rest }) => {
           y1={45.68}
           x2={53.15}
           y2={85.84}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#525252" stopOpacity={0.05} />
           <stop offset={1} stopOpacity={0.1} />
         </linearGradient>
@@ -112,7 +118,8 @@ export const ErrorIllustration = ({ theme, size, ...rest }) => {
           y1={52.59}
           x2={38.9}
           y2={3.3}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#c6c6c6" />
           <stop offset={0.78} stopColor="#e0e0e0" />
         </linearGradient>
@@ -122,7 +129,8 @@ export const ErrorIllustration = ({ theme, size, ...rest }) => {
           y1={14.06}
           x2={71.64}
           y2={44.99}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#e0e0e0" />
           <stop offset={0.13} stopColor="#f4f4f4" />
           <stop offset={0.56} stopColor="#e0e0e0" />
@@ -137,7 +145,8 @@ export const ErrorIllustration = ({ theme, size, ...rest }) => {
           y1={51.19}
           x2={49.87}
           y2={13.21}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0.54} stopColor="#d0d0d0" stopOpacity={0} />
           <stop offset={0.82} stopColor="#f1f1f1" stopOpacity={0.7} />
           <stop offset={0.94} stopColor="#fff" />
@@ -148,7 +157,8 @@ export const ErrorIllustration = ({ theme, size, ...rest }) => {
           y1={26.33}
           x2={47.15}
           y2={37}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#fff" />
           <stop offset={0.05} stopColor="#fdfdfd" />
           <stop offset={0.3} stopColor="#f6f6f6" />

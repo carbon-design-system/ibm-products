@@ -98,7 +98,8 @@ export let AboutModal = React.forwardRef(
               additionalInfo && additionalInfo.length > 1,
           }
         )}
-        {...{ onClose, open, ref, ...getDevtoolsProps(componentName) }}>
+        {...{ onClose, open, ref, ...getDevtoolsProps(componentName) }}
+      >
         <div className={`${blockClass}__logo`}>{logo}</div>
         <ModalHeader
           className={`${blockClass}__header`}
@@ -110,11 +111,13 @@ export let AboutModal = React.forwardRef(
           aria-label={hasScrollingContent ? '' : null}
           aria-labelledby={hasScrollingContent ? contentId : null}
           className={`${blockClass}__body`}
-          hasScrollingContent={hasScrollingContent}>
+          hasScrollingContent={hasScrollingContent}
+        >
           <div
             className={`${blockClass}__body-content`}
             ref={contentRef}
-            id={contentId}>
+            id={contentId}
+          >
             {content}
             <div className={`${blockClass}__links-container`}>
               {links &&
@@ -149,7 +152,8 @@ export let AboutModal = React.forwardRef(
                   <Tab
                     id={'about-modal-tab-' + tab.label}
                     label={tab.label}
-                    key={i}>
+                    key={i}
+                  >
                     {tab.content}
                   </Tab>
                 ))}

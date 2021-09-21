@@ -19,7 +19,8 @@ export const HTTPErrorSvg404 = ({ className }) => {
       width={1584}
       height={916}
       viewBox="0 0 1584 916"
-      className={className}>
+      className={className}
+    >
       <defs>
         <clipPath id="prefix__clip-path">
           <path className="prefix__cls-1" d="M412 617.45a4 4 0 114 6.93z" />
@@ -207,7 +208,8 @@ export const HTTPErrorSvg404 = ({ className }) => {
           y1={580.96}
           x2={237.44}
           y2={552.99}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#333" />
           <stop offset={0.9} stopColor="#bebebe" stopOpacity={0} />
         </linearGradient>
@@ -225,7 +227,8 @@ export const HTTPErrorSvg404 = ({ className }) => {
           y1={763.45}
           x2={1315.84}
           y2={763.45}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#e0e0e0" />
           <stop offset={1} stopColor="#fff" stopOpacity={0} />
         </linearGradient>
@@ -238,7 +241,8 @@ export const HTTPErrorSvg404 = ({ className }) => {
       <g
         style={{
           isolation: 'isolate',
-        }}>
+        }}
+      >
         <g id="prefix__Layer_1" data-name="Layer 1">
           <g opacity={0.25}>
             <path

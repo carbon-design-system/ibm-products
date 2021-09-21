@@ -21,7 +21,8 @@ export const sampleNavMenus = [
   <IdeSideNavMenu
     key={'snmenu2'}
     title="Sample menu with icon"
-    renderIcon={Menu32}>
+    renderIcon={Menu32}
+  >
     <SideNavMenuItem href="javascript:void(0)">Menu item one</SideNavMenuItem>
     <SideNavMenuItem href="javascript:void(0)">Menu item two</SideNavMenuItem>
     <SideNavMenuItem href="javascript:void(0)">Menu item three</SideNavMenuItem>

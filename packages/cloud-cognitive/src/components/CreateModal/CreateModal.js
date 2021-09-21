@@ -71,7 +71,8 @@ export let CreateModal = React.forwardRef(
           onRequestClose?.();
           return false;
         }}
-        {...getDevtoolsProps(componentName)}>
+        {...getDevtoolsProps(componentName)}
+      >
         <ModalHeader title={title} titleClassName={`${blockClass}__title`}>
           {subtitle && <p className={`${blockClass}__subtitle`}>{subtitle}</p>}
         </ModalHeader>
@@ -89,7 +90,8 @@ export let CreateModal = React.forwardRef(
             type="submit"
             kind="primary"
             onClick={onRequestSubmit}
-            disabled={disableSubmit}>
+            disabled={disableSubmit}
+          >
             {primaryButtonText}
           </Button>
         </ModalFooter>

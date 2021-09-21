@@ -140,7 +140,8 @@ export let StatusIcon = React.forwardRef(
           {...rest}
           className={classNames}
           ref={ref}
-          {...getDevtoolsProps(componentName)}>
+          {...getDevtoolsProps(componentName)}
+        >
           <title>{iconDescription}</title>
         </IconComponent>
       )

@@ -46,7 +46,8 @@ export let NoDataEmptyState = React.forwardRef(
         }
         className={cx(blockClass, className)}
         ref={ref}
-        {...getDevtoolsProps(componentName)}>
+        {...getDevtoolsProps(componentName)}
+      >
         <NoDataIllustration theme={illustrationTheme} size={size} />
         <EmptyStateContent
           action={action}

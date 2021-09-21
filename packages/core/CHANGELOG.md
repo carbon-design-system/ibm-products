@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.18.1...@carbon/ibm-cloud-cognitive-core@0.19.0) (2021-09-21)
+
+
+### Features
+
+* ensure prettier linting causes ci-check to fail ([#1273](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1273)) ([ad6f347](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ad6f3479636d2b80b26338d9059429b4ae08ac6e))
+* update Carbon versions and package dependencies to latest ([#1262](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1262)) ([ed4dcbe](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ed4dcbe5b6d92baa6ec39240bda6996ec55f7bc4))
+
+
+
+
+
+## [0.18.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.18.0...@carbon/ibm-cloud-cognitive-core@0.18.1) (2021-09-14)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
+
+
+
+
+
 # [0.18.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.17.2...@carbon/ibm-cloud-cognitive-core@0.18.0) (2021-09-13)
 
 

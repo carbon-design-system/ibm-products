@@ -52,10 +52,12 @@ const renderUIShellHeader = (open, setOpen, hasUnreadNotifications) => (
         <HeaderGlobalBar
           style={{
             zIndex: 2,
-          }}>
+          }}
+        >
           <HeaderGlobalAction
             aria-label="Notifications"
-            onClick={() => setOpen(!open)}>
+            onClick={() => setOpen(!open)}
+          >
             {hasUnreadNotifications ? (
               <UnreadNotificationBell />
             ) : (

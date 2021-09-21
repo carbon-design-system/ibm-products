@@ -9,14 +9,11 @@
 @import '../../global/styles/project-settings';
 @import '../../global/styles/mixins';
 
-// Other Carbon settings.
-// TODO: @import 'carbon-components/scss/globals/grid/grid'; if needed
-
 // EditSidePanel uses the following Carbon components:
-// TODO: @import(s) of Carbon component styles used by EditSidePanel
+@import 'carbon-components/scss/components/form/form';
 
 // EditSidePanel uses the following Cloud & Cognitive components:
-// TODO: @import(s) of Cloud & Cognitive component styles used by EditSidePanel
+@import '../SidePanel/side-panel';
 
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
@@ -25,7 +22,36 @@
   $block-class: #{$pkg-prefix}--edit-side-panel;
 
   .#{$block-class} {
-    // TODO: Styles.
+    .#{$carbon-prefix}--form.#{$block-class}__form {
+      padding-top: $spacing-05;
+    }
+
+    .#{$block-class}__form.#{$carbon-prefix}--fieldset {
+      padding-top: $spacing-03;
+    }
+
+    .#{$block-class}__form > * {
+      margin-bottom: $spacing-05;
+    }
+
+    .#{$block-class}__form-title-text {
+      @include carbon--type-style('productive-heading-02');
+
+      padding-bottom: $spacing-03;
+    }
+
+    .#{$block-class}__form-description-text {
+      @include carbon--type-style('body-long-01');
+    }
+
+    .#{$block-class}__actions-container {
+      position: absolute;
+      z-index: 4;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      margin-bottom: 0;
+    }
   }
 }
 

@@ -8,6 +8,26 @@
 @import './index';
 
 // TODO: add any additional styles used by EditSidePanel.stories.js
+@import '../../global/styles/project-settings';
+
+$block-class: #{$pkg-prefix}--edit-side-panel;
+$story-prefix: edit-side-panel-stories__;
+
+.#{$story-prefix}example-container {
+  display: grid;
+  align-items: flex-end;
+  grid-gap: $spacing-04;
+  grid-template-columns: 1fr 1fr;
+}
+
+.#{$story-prefix}example-form-group .bx--label {
+  margin-bottom: 0;
+}
+
+.#{$block-class} .#{$carbon-prefix}--number__control-btn::before,
+.#{$block-class} .#{$carbon-prefix}--number__control-btn::after {
+  background-color: $field-02;
+}
 
 // Uncomment next line (which must appear last) to test in storybook
 // that the SCSS styles for this component are sufficiently specific

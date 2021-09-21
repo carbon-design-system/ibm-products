@@ -41,7 +41,8 @@ const renderComponent = ({ ...rest }, children = <p>test</p>) =>
           secondaryButtonText: 'Cancel',
           selectorPageContent: '#create-side-panel-test-page-content',
           ...rest,
-        }}>
+        }}
+      >
         {children}
       </CreateSidePanel>
       <div id="create-side-panel-test-page-content" />
@@ -153,5 +154,17 @@ describe(componentName, () => {
       devtoolsAttribute,
       getDevtoolsId(componentName)
     );
+  });
+
+  it('should still support deprecated `pageContentSelector` prop', () => {
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation();
+    const warningSpy = jest.spyOn(console, 'warn').mockImplementation();
+    renderComponent({
+      pageContentSelector: '#create-side-panel-test-page-content',
+      selectorPageContent: null,
+    });
+    expect(screen.getByRole('complementary')).toHaveClass(blockClass);
+    errorSpy.mockRestore();
+    warningSpy.mockRestore();
   });
 });

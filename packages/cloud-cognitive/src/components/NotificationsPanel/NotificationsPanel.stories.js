@@ -105,7 +105,7 @@ const Template = (args) => {
   useEffect(() => {
     let unreadTimer;
     if (open && hasUnreadNotifications) {
-      const tempData = JSON.parse(JSON.stringify(notificationsData));
+      const tempData = [...notificationsData];
       tempData.forEach((element) => {
         element.unread = false;
         // convert timestamp back to date object, otherwise this is

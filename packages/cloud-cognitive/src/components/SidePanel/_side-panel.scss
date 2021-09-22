@@ -22,9 +22,8 @@
 
 $block-class: #{$pkg-prefix}--side-panel;
 $action-set-block-class: #{$pkg-prefix}--action-set;
-$sizes: extra-small, small, medium, large, max;
 
-@mixin sidePanelEntranceRight($size: $medium-panel-size) {
+@mixin sidePanelEntranceRight($size: $md-panel-size) {
   @keyframes sidePanelEntranceRight {
     0% {
       opacity: 0;
@@ -38,7 +37,7 @@ $sizes: extra-small, small, medium, large, max;
   }
 }
 
-@mixin sidePanelEntranceLeft($size: $medium-panel-size) {
+@mixin sidePanelEntranceLeft($size: $md-panel-size) {
   @keyframes sidePanelEntranceLeft {
     0% {
       opacity: 0;
@@ -52,7 +51,7 @@ $sizes: extra-small, small, medium, large, max;
   }
 }
 
-@mixin sidePanelEntrance($placement: 'right', $size: $medium-panel-size) {
+@mixin sidePanelEntrance($placement: 'right', $size: $md-panel-size) {
   min-width: $size;
   max-width: $size;
   @if $placement == right {
@@ -62,7 +61,7 @@ $sizes: extra-small, small, medium, large, max;
   }
 }
 
-@mixin setPanelSize($size: $medium-panel-size) {
+@mixin setPanelSize($size: $md-panel-size) {
   min-width: $size;
   max-width: $size;
 }
@@ -81,7 +80,7 @@ $sizes: extra-small, small, medium, large, max;
 @mixin setCommonTitleStyles() {
   display: -webkit-box;
   overflow: hidden;
-  padding-right: $spacing-07;
+  padding-right: $spacing-09;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
@@ -95,7 +94,7 @@ $sizes: extra-small, small, medium, large, max;
     100% {
       opacity: 0;
       // stylelint-disable-next-line carbon/layout-token-use
-      transform: translateX(-#{$medium-panel-size});
+      transform: translateX(-#{$md-panel-size});
     }
   }
 
@@ -107,12 +106,11 @@ $sizes: extra-small, small, medium, large, max;
     100% {
       opacity: 0;
       // stylelint-disable-next-line carbon/layout-token-use
-      transform: translateX($medium-panel-size);
+      transform: translateX($md-panel-size);
     }
   }
 
   .#{$block-class}__container {
-    @include setPanelSize();
     --#{$block-class}--subtitle-opacity: 1;
     --#{$block-class}--title-container-height: 0;
     --#{$block-class}--title-text-height: 0;
@@ -123,6 +121,7 @@ $sizes: extra-small, small, medium, large, max;
     --#{$block-class}--content-bottom-padding: #{$spacing-10};
     --#{$block-class}--collapsed-title-y-position: 1rem;
     --#{$block-class}--label-text-height: 0;
+    --#{$block-class}--size: md;
 
     position: fixed;
     z-index: 3;
@@ -134,14 +133,21 @@ $sizes: extra-small, small, medium, large, max;
     transition: transform $duration--moderate-02;
     transition-timing-function: carbon--motion(standard);
     @each $size, $size_value in $side-panel-sizes {
+      &.#{$block-class}__container--#{$size} {
+        @include setPanelSize($size_value);
+        .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation,
+        .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation,
+        .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation,
+        .#{$block-class}__actions-container.#{$action-set-block-class}--#{$size} {
+          @include setPanelSize($size_value);
+        }
+      }
       &.#{$block-class}__container-right-placement.#{$block-class}__container--#{$size} {
         @include sidePanelEntrance(right, $size_value);
 
         right: 0;
         border-left: 1px solid $decorative-01;
       }
-    }
-    @each $size, $size_value in $side-panel-sizes {
       &.#{$block-class}__container-left-placement.#{$block-class}__container--#{$size} {
         @include sidePanelEntrance(left, $size_value);
 
@@ -246,14 +252,12 @@ $sizes: extra-small, small, medium, large, max;
       @include carbon--type-style('body-short-01');
 
       overflow: hidden;
-      padding: 0 $spacing-05 $spacing-05 $spacing-05;
+      padding: 0 $spacing-09 $spacing-05 $spacing-05;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 3;
       opacity: var(--#{$block-class}--subtitle-opacity);
     }
     .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation {
-      @include setPanelSize();
-
       position: fixed;
       z-index: 2;
       // stylelint-disable-next-line carbon/layout-token-use
@@ -267,7 +271,7 @@ $sizes: extra-small, small, medium, large, max;
 
     .#{$block-class}__subtitle-text.#{$block-class}__subtitle-without-title {
       padding-top: $spacing-05;
-      padding-right: $spacing-07;
+      padding-right: $spacing-09;
     }
 
     .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation.#{$block-class}__title-container-is-animating {
@@ -275,8 +279,6 @@ $sizes: extra-small, small, medium, large, max;
     }
 
     .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation {
-      @include setPanelSize();
-
       position: fixed;
       top: $spacing-09;
       height: var(--#{$block-class}--title-text-height);
@@ -311,8 +313,6 @@ $sizes: extra-small, small, medium, large, max;
     }
 
     .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation {
-      @include setPanelSize();
-
       position: fixed;
       // stylelint-disable-next-line carbon/layout-token-use
       top: calc(
@@ -393,16 +393,15 @@ $sizes: extra-small, small, medium, large, max;
       padding: $spacing-05;
       padding-top: 0;
     }
+    &.#{$block-class}__container-is-animating
+      .#{$block-class}__actions-container.#{$action-set-block-class}--max {
+      @include setPanelSize(100%);
+    }
     .#{$block-class}__actions-container {
       position: fixed;
       bottom: 0;
       border-top: 1px solid $decorative-01;
       background-color: $ui-01;
-      @each $size, $size_value in $action-set-sizes {
-        &.#{$action-set-block-class}--#{$size} {
-          @include setPanelSize($size_value);
-        }
-      }
       &.#{$action-set-block-class}--max {
         .#{$action-set-block-class}__action-button {
           width: 100%;
@@ -416,8 +415,6 @@ $sizes: extra-small, small, medium, large, max;
           }
         }
 
-        min-width: 75%;
-        max-width: 75%;
         flex-direction: column;
       }
       .#{$action-set-block-class}__action-button {

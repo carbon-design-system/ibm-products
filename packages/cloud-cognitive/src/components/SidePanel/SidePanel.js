@@ -112,7 +112,14 @@ export let SidePanel = React.forwardRef(
       if (open && animationComplete) {
         focusButton(sidePanelInnerRef.current);
       }
-    }, [selectorPrimaryFocus, open, animationComplete]);
+      if (open) {
+        const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
+        sidePanelOuter?.style.setProperty(
+          `--${blockClass}--size`,
+          size
+        );
+      }
+    }, [selectorPrimaryFocus, open, animationComplete, size]);
 
     useEffect(() => {
       if (open && actions && actions.length && animationComplete) {
@@ -462,15 +469,15 @@ export let SidePanel = React.forwardRef(
       let sizeClassName = `${blockClass}__container`;
       switch (panelSize) {
         case 'xs':
-          return (sizeClassName = `${sizeClassName}--extra-small`);
+          return (sizeClassName = `${sizeClassName}--xs`);
         case 'sm':
-          return (sizeClassName = `${sizeClassName}--small`);
+          return (sizeClassName = `${sizeClassName}--sm`);
         case 'lg':
-          return (sizeClassName = `${sizeClassName}--large`);
+          return (sizeClassName = `${sizeClassName}--lg`);
         case 'max':
           return (sizeClassName = `${sizeClassName}--max`);
         default:
-          return (sizeClassName = `${sizeClassName}--medium`);
+          return (sizeClassName = `${sizeClassName}--md`);
       }
     };
 

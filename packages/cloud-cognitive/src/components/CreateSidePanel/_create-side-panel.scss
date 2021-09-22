@@ -18,10 +18,10 @@
 @import '../SidePanel/side-panel';
 
 $sizes: (
-  extra-small: $extra-small-panel-size,
-  small: $small-panel-size,
-  medium: $medium-panel-size,
-  large: $large-panel-size,
+  extra-small: $xs-panel-size,
+  small: $sm-panel-size,
+  medium: $md-panel-size,
+  large: $lg-panel-size,
   max: $max-panel-size,
 );
 

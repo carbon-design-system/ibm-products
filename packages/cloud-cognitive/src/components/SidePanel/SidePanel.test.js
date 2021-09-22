@@ -433,9 +433,7 @@ describe('SidePanel', () => {
         size,
       });
       const sidePanelOuter = container.querySelector(`.${blockClass}`);
-      expect(sidePanelOuter).toHaveClass(
-        `${blockClass}__container--${size}`
-      );
+      expect(sidePanelOuter).toHaveClass(`${blockClass}__container--${size}`);
     });
   });
 

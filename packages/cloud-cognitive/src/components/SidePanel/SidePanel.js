@@ -114,10 +114,7 @@ export let SidePanel = React.forwardRef(
       }
       if (open) {
         const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
-        sidePanelOuter?.style.setProperty(
-          `--${blockClass}--size`,
-          size
-        );
+        sidePanelOuter?.style.setProperty(`--${blockClass}--size`, size);
       }
     }, [selectorPrimaryFocus, open, animationComplete, size]);
 

@@ -85,7 +85,8 @@ const InstantTemplate = (args) => {
       {loading ? (
         <Button
           renderIcon={InlineLoading}
-          className={`${blockClass}__button-loading`}>
+          className={`${blockClass}__button-loading`}
+        >
           Generating...
         </Button>
       ) : (
@@ -223,12 +224,14 @@ const MultiStepTemplate = (args) => {
           />
           <FormGroup
             legendText="What do you want your application to be able to do"
-            className={`${blockClass}__permissions`}>
+            className={`${blockClass}__permissions`}
+          >
             <RadioButtonGroup
               onChange={(opt) => setPermissions(opt)}
               valueSelected={permissions}
               name="permission"
-              orientation="vertical">
+              orientation="vertical"
+            >
               <RadioButton value="Read and write" labelText="Read and write" />
               <RadioButton value="Read only" labelText="Read only" />
               <RadioButton value="Write only" labelText="Write only" />
@@ -245,7 +248,8 @@ const MultiStepTemplate = (args) => {
           <Form onSubmit={formHandler}>
             <FormGroup
               legendText="What do you want your application to be able to do"
-              className={`${blockClass}__resource-toggle`}>
+              className={`${blockClass}__resource-toggle`}
+            >
               <Toggle
                 onChange={allResourcesHandler}
                 labelText="All resources"
@@ -260,7 +264,8 @@ const MultiStepTemplate = (args) => {
             </FormGroup>
             <FormGroup
               legendText="What do you want your application to be able to do"
-              className={`${blockClass}__resource-name`}>
+              className={`${blockClass}__resource-name`}
+            >
               <TextInput
                 value={resource}
                 onChange={(e) => setResource(e.target.value)}

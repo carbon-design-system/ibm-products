@@ -19,11 +19,13 @@ const mockContent = (
     <TextInput
       labelText="Asset name"
       value="Openapi.json"
-      id="text-id"></TextInput>
+      id="text-id"
+    ></TextInput>
     <TextArea
       id="textarea-id"
       labelText="Description"
-      placeholder="There is no description for this asset"></TextArea>
+      placeholder="There is no description for this asset"
+    ></TextArea>
   </>
 );
 
@@ -37,7 +39,8 @@ storiesOf(getComponentLabel('IdeSlideOverPanel'), module)
         <IdeSlideOverPanel
           size="small"
           title="Small panel title"
-          open={boolean('Panel open?', true)}>
+          open={boolean('Panel open?', true)}
+        >
           foo
         </IdeSlideOverPanel>
       </div>
@@ -55,7 +58,8 @@ storiesOf(getComponentLabel('IdeSlideOverPanel'), module)
         <IdeSlideOverPanel
           size="medium"
           title="Medium panel title"
-          open={boolean('Panel open?', true)}>
+          open={boolean('Panel open?', true)}
+        >
           foo
         </IdeSlideOverPanel>
       </div>
@@ -76,7 +80,8 @@ storiesOf(getComponentLabel('IdeSlideOverPanel'), module)
             size="large"
             title="Large panel title"
             open={isOpen}
-            onClose={() => (isOpen = false)}>
+            onClose={() => (isOpen = false)}
+          >
             foo
           </IdeSlideOverPanel>
         </div>
@@ -99,7 +104,8 @@ storiesOf(getComponentLabel('IdeSlideOverPanel'), module)
           size="medium"
           title="Medium panel title"
           withOverlay={boolean('with overlay?', true)}
-          open={boolean('Panel open?', true)}>
+          open={boolean('Panel open?', true)}
+        >
           foo
         </IdeSlideOverPanel>
       </div>
@@ -130,7 +136,8 @@ const DummyMultiPageSlideComponent = () => {
       secondaryButtonText="Back"
       controls
       onPrimaryClick={onPrimaryButton}
-      onSecondaryClick={onBackButton}>
+      onSecondaryClick={onBackButton}
+    >
       {pagedMockContent}
     </IdeSlideOverPanel>
   );
@@ -148,7 +155,8 @@ storiesOf(getComponentLabel('IdeSlideOverPanel'), module)
       controls
       danger
       title="Edit Asset metadata"
-      open>
+      open
+    >
       {mockContent}
     </IdeSlideOverPanel>
   ))
@@ -163,7 +171,8 @@ const SlideOverStateManager = (props) => {
       <Button
         onClick={() => {
           setOpen(!open);
-        }}>
+        }}
+      >
         Toggle Slideover
       </Button>
 
@@ -172,7 +181,8 @@ const SlideOverStateManager = (props) => {
         onClose={() => {
           setOpen(false);
         }}
-        open={open}>
+        open={open}
+      >
         foo
       </IdeSlideOverPanel>
     </>

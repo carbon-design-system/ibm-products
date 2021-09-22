@@ -249,7 +249,8 @@ export default class IdeAPIKeyGeneration extends React.Component {
     return descriptionText ? (
       <p
         className={`${idePrefix}-api-key-generation-description`}
-        {...idAttribute('IdeAPIKeyGeneration-Description')}>
+        {...idAttribute('IdeAPIKeyGeneration-Description')}
+      >
         {descriptionText}
       </p>
     ) : null;
@@ -311,13 +312,15 @@ export default class IdeAPIKeyGeneration extends React.Component {
             {descriptiveNameStep.labelText && (
               <p
                 className={`${idePrefix}-api-key-generation-descriptive-name--label`}
-                {...idAttribute('IdeAPIKeyGeneration-DescriptiveName-Label')}>
+                {...idAttribute('IdeAPIKeyGeneration-DescriptiveName-Label')}
+              >
                 {descriptiveNameStep.labelText}
               </p>
             )}
             <p
               className={`${idePrefix}-api-key-generation-descriptive-name--value`}
-              {...idAttribute('IdeAPIKeyGeneration-DescriptiveName-Value')}>
+              {...idAttribute('IdeAPIKeyGeneration-DescriptiveName-Value')}
+            >
               {this.state.descriptiveName}
             </p>
           </div>
@@ -340,21 +343,24 @@ export default class IdeAPIKeyGeneration extends React.Component {
         )}
         {apiKeyHelperText && (
           <div
-            className={`${idePrefix}-api-key-generation-helper-text-container`}>
+            className={`${idePrefix}-api-key-generation-helper-text-container`}
+          >
             <InformationFilled16
               className={`${idePrefix}-api-key-generation-helper-text-icon`}
               description={apiKeyHelperText}
             />
             <p
               className={`${idePrefix}-api-key-generation-helper-text`}
-              {...idAttribute('IdeAPIKeyGeneration-APIKey-HelperText')}>
+              {...idAttribute('IdeAPIKeyGeneration-APIKey-HelperText')}
+            >
               {apiKeyHelperText}
               {onDownload && downloadLinkText && (
                 <Link
                   className={`${idePrefix}-api-key-generation-download-link`}
                   {...idAttribute('IdeAPIKeyGeneration-APIKey-DownloadLink')}
                   href="#"
-                  onClick={this.handleDownload}>
+                  onClick={this.handleDownload}
+                >
                   {downloadLinkText}
                 </Link>
               )}

@@ -84,7 +84,8 @@ export const MultiStepTearsheet = ({
               resolve();
             }, simulatedDelay);
           })
-        }>
+        }
+      >
         <CreateTearsheetStep
           onNext={() => {
             return new Promise((resolve, reject) => {
@@ -105,7 +106,8 @@ export const MultiStepTearsheet = ({
           disableSubmit={!stepOneTextInputValue}
           subtitle="This is the unique name used to recognize your topic"
           description="It will also be used by your producers and consumers as part of the
-          connection information, so make it something easy to recognize.">
+          connection information, so make it something easy to recognize."
+        >
           <Row>
             <Column xlg={8} lg={8} md={8} sm={8}>
               <TextInput
@@ -169,7 +171,8 @@ export const MultiStepTearsheet = ({
           description="Partitions are distributed across the brokers in order to increase
           the scalability of your topic. You can also use them to distribute
           messages across the members of a consumer group."
-          fieldsetLegendText="Partition information">
+          fieldsetLegendText="Partition information"
+        >
           <Row>
             <Column xlg={3} lg={3}>
               <NumberInput
@@ -194,7 +197,8 @@ export const MultiStepTearsheet = ({
           subtitle="This is how long messages are retained before they are deleted."
           description="If your messages are not read by a consumer within this time, they
           will be missed."
-          fieldsetLegendText="Message retention scheduling">
+          fieldsetLegendText="Message retention scheduling"
+        >
           <Row>
             <Column xlg={8} lg={8} md={8} sm={8}>
               <RadioButtonGroup
@@ -202,7 +206,8 @@ export const MultiStepTearsheet = ({
                 name="radio-button-group"
                 defaultSelected={stepThreeTextInputValue}
                 onChange={(value) => setStepThreeTextInputValue(value)}
-                orientation="vertical">
+                orientation="vertical"
+              >
                 <RadioButton labelText="A day" value="one-day" id="one-day" />
                 <RadioButton
                   labelText="A week"

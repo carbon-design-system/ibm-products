@@ -63,7 +63,8 @@ describe(name, () => {
       <WebTerminal
         closeTerminal={jest.fn()}
         open
-        documentationLinks={documentationLinks}>
+        documentationLinks={documentationLinks}
+      >
         Body content
       </WebTerminal>
     );

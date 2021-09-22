@@ -19,6 +19,7 @@
   .#{$block-class} {
     align-items: stretch;
     justify-content: flex-end;
+    background-color: $ui-01;
   }
 
   .#{$block-class} .#{$block-class}__action-button {

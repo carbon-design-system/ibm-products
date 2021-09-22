@@ -27,7 +27,8 @@ export const NotFoundIllustration = ({ theme, size, ...rest }) => {
       className={cx([
         `${blockClass}__illustration`,
         `${blockClass}__illustration--${size}`,
-      ])}>
+      ])}
+    >
       <defs>
         <linearGradient
           id="prefix__a"
@@ -35,7 +36,8 @@ export const NotFoundIllustration = ({ theme, size, ...rest }) => {
           y1={-12.81}
           x2={43.48}
           y2={58}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#525252" />
           <stop offset={0.69} stopColor="#393939" />
           <stop offset={0.94} stopColor="#393939" />
@@ -47,7 +49,8 @@ export const NotFoundIllustration = ({ theme, size, ...rest }) => {
           y1={57.07}
           x2={69.51}
           y2={57.07}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#262626" />
           <stop offset={1} stopColor="#393939" />
         </linearGradient>
@@ -57,7 +60,8 @@ export const NotFoundIllustration = ({ theme, size, ...rest }) => {
           y1={10.36}
           x2={41.51}
           y2={56.09}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#525252" />
           <stop offset={1} stopColor="#262626" />
         </linearGradient>
@@ -68,7 +72,8 @@ export const NotFoundIllustration = ({ theme, size, ...rest }) => {
           x2={34.92}
           y2={97.82}
           gradientTransform="rotate(30 34.925 27.562)"
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#393939" />
           <stop offset={0.48} stopColor="#393939" stopOpacity={0.69} />
           <stop offset={1} stopColor="#262626" stopOpacity={0.1} />
@@ -79,7 +84,8 @@ export const NotFoundIllustration = ({ theme, size, ...rest }) => {
           y1={9.61}
           x2={50.36}
           y2={54.3}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#6f6f6f" stopOpacity={0} />
           <stop offset={0.17} stopColor="#6f6f6f" stopOpacity={0.03} />
           <stop offset={0.31} stopColor="#6f6f6f" stopOpacity={0.12} />
@@ -95,7 +101,8 @@ export const NotFoundIllustration = ({ theme, size, ...rest }) => {
           y1={-20.5}
           x2={56.75}
           y2={50.32}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#525252" />
           <stop offset={0.69} stopColor="#393939" />
           <stop offset={0.94} stopColor="#393939" />
@@ -149,7 +156,8 @@ export const NotFoundIllustration = ({ theme, size, ...rest }) => {
       className={cx([
         `${blockClass}__illustration`,
         `${blockClass}__illustration--${size}`,
-      ])}>
+      ])}
+    >
       <defs>
         <linearGradient
           id="prefix__a_dark"
@@ -157,7 +165,8 @@ export const NotFoundIllustration = ({ theme, size, ...rest }) => {
           y1={-12.81}
           x2={43.48}
           y2={58}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#f4f4f4" />
           <stop offset={0.69} stopColor="#e0e0e0" />
           <stop offset={0.94} stopColor="#c4c4c4" />
@@ -169,7 +178,8 @@ export const NotFoundIllustration = ({ theme, size, ...rest }) => {
           y1={57.07}
           x2={67.31}
           y2={57.07}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#a8a8a8" />
           <stop offset={1} stopColor="#c6c6c6" />
         </linearGradient>
@@ -179,7 +189,8 @@ export const NotFoundIllustration = ({ theme, size, ...rest }) => {
           y1={10.36}
           x2={41.51}
           y2={56.09}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#bdbdbd" />
           <stop offset={1} stopColor="#a3a3a3" />
         </linearGradient>
@@ -190,7 +201,8 @@ export const NotFoundIllustration = ({ theme, size, ...rest }) => {
           x2={34.92}
           y2={97.82}
           gradientTransform="rotate(30 34.925 27.562)"
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#6e6e6e" />
           <stop offset={0.48} stopColor="#787878" stopOpacity={0.69} />
           <stop offset={0.72} stopColor="#818181" stopOpacity={0.41} />
@@ -202,7 +214,8 @@ export const NotFoundIllustration = ({ theme, size, ...rest }) => {
           y1={71.67}
           x2={55.54}
           y2={54.85}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#565656" stopOpacity={0.05} />
           <stop offset={1} stopColor="#171717" stopOpacity={0.1} />
         </linearGradient>
@@ -212,7 +225,8 @@ export const NotFoundIllustration = ({ theme, size, ...rest }) => {
           y1={9.61}
           x2={50.36}
           y2={54.3}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#fff" stopOpacity={0} />
           <stop offset={0.12} stopColor="#fff" stopOpacity={0.01} />
           <stop offset={0.22} stopColor="#fff" stopOpacity={0.05} />

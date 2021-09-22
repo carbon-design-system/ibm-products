@@ -96,7 +96,8 @@ export let Card = forwardRef(
               onClick={onClick}
               onKeyDown={onKeyDown}
               role="button"
-              tabIndex="0">
+              tabIndex="0"
+            >
               <Icon aria-label={iconDescription} />
             </div>
           );

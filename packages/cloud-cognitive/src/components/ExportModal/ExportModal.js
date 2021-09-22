@@ -107,7 +107,8 @@ export let ExportModal = forwardRef(
         aria-label={title}
         size="sm"
         preventCloseOnClickOutside
-        {...{ open, ref, onClose, ...getDevtoolsProps(componentName) }}>
+        {...{ open, ref, onClose, ...getDevtoolsProps(componentName) }}
+      >
         <ModalHeader className={`${blockClass}__header`} title={title} />
         <ModalBody className={`${blockClass}__body-container`}>
           {!submitted && (
@@ -119,7 +120,8 @@ export let ExportModal = forwardRef(
                     orientation="vertical"
                     onChange={onExtensionChangeHandler}
                     valueSelected={extension}
-                    name="extensions">
+                    name="extensions"
+                  >
                     {preformattedExtensions.map((o) => (
                       <RadioButton
                         key={o.extension}
@@ -175,7 +177,8 @@ export let ExportModal = forwardRef(
               type="submit"
               kind="primary"
               onClick={onSubmitHandler}
-              disabled={primaryButtonDisabled}>
+              disabled={primaryButtonDisabled}
+            >
               {primaryButtonText}
             </Button>
           </ModalFooter>

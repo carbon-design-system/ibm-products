@@ -2369,29 +2369,29 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-bottom: var(--cds-spacing-05, 1rem);
 }
 
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 .exp--empty-state {
   color: var(--cds-text-01, #161616);
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .exp--empty-state .exp--empty-state__header,
 .exp--empty-state .exp--empty-state__subtitle {
   padding-bottom: var(--cds-spacing-02, 0.25rem);

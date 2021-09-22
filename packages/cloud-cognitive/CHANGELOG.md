@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.85.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.85.0...@carbon/ibm-cloud-cognitive@0.85.1) (2021-09-22)
+
+
+### Bug Fixes
+
+* added sideEffects field to package.json ([#1251](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1251)) ([a54554b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a54554b8b8b940e9049ad8dcca481dec6f54c354))
+
+
+
+
+
 # [0.85.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.84.1...@carbon/ibm-cloud-cognitive@0.85.0) (2021-09-21)
 
 

@@ -30,6 +30,7 @@ $story-class: 'page-header-stories';
 }
 
 .#{$story-class}__dummy-content {
+  position: relative; // used to raise the stacking context and check it still goes under the page header
   margin-top: $spacing-05;
 }
 

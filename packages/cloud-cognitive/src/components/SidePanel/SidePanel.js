@@ -58,6 +58,7 @@ export let SidePanel = React.forwardRef(
       open,
       pageContentSelector,
       placement,
+      preventCloseOnClickOutside,
       selectorPageContent,
       selectorPrimaryFocus,
       size,
@@ -386,13 +387,13 @@ export let SidePanel = React.forwardRef(
       } else if (includeOverlay && !open) {
         bodyElement.style.overflow = 'initial';
       }
-      if (includeOverlay) {
+      if (includeOverlay && !preventCloseOnClickOutside) {
         document.addEventListener('click', handleOutsideClick);
       }
       return () => {
         document.removeEventListener('click', handleOutsideClick);
       };
-    }, [includeOverlay, onRequestClose, open]);
+    }, [includeOverlay, onRequestClose, open, preventCloseOnClickOutside]);
 
     // initialize the side panel to open
     useEffect(() => {
@@ -868,6 +869,11 @@ SidePanel.propTypes = {
    * Determines if the side panel is on the right or left
    */
   placement: PropTypes.oneOf(['left', 'right']),
+
+  /**
+   * Prevent closing on click outside of the panel
+   */
+  preventCloseOnClickOutside: PropTypes.bool,
 
   /**
    * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.

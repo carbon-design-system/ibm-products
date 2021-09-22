@@ -462,22 +462,6 @@ export let SidePanel = React.forwardRef(
       size,
     ]);
 
-    const setSizeClassName = (panelSize) => {
-      let sizeClassName = `${blockClass}__container`;
-      switch (panelSize) {
-        case 'xs':
-          return (sizeClassName = `${sizeClassName}--xs`);
-        case 'sm':
-          return (sizeClassName = `${sizeClassName}--sm`);
-        case 'lg':
-          return (sizeClassName = `${sizeClassName}--lg`);
-        case 'max':
-          return (sizeClassName = `${sizeClassName}--max`);
-        default:
-          return (sizeClassName = `${sizeClassName}--md`);
-      }
-    };
-
     // adds focus trap functionality
     /* istanbul ignore next */
     const handleBlur = ({
@@ -507,7 +491,7 @@ export let SidePanel = React.forwardRef(
       blockClass,
       className,
       `${blockClass}__container`,
-      setSizeClassName(size),
+      `${blockClass}__container--${size}`,
       {
         [`${blockClass}__container-right-placement`]: placement === 'right',
         [`${blockClass}__container-left-placement`]: placement === 'left',

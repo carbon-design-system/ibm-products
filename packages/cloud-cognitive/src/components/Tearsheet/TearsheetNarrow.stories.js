@@ -110,7 +110,8 @@ const Template = ({ actions, ...args }) => {
         {...args}
         actions={wiredActions}
         open={open}
-        onClose={() => setOpen(false)}>
+        onClose={() => setOpen(false)}
+      >
         {mainContent}
       </TearsheetNarrow>
     </>
@@ -175,7 +176,8 @@ const StackedTemplate = ({ actions, ...args }) => {
           top: 0,
           left: 0,
           zIndex: 10000,
-        }}>
+        }}
+      >
         <Button onClick={() => setOpen1(!open1)}>Toggle #1</Button>
         <Button onClick={() => setOpen2(!open2)}>Toggle #2</Button>
         <Button onClick={() => setOpen3(!open3)}>Toggle #3</Button>
@@ -185,7 +187,8 @@ const StackedTemplate = ({ actions, ...args }) => {
         actions={wiredActions1}
         title="Tearsheet #1"
         open={open1}
-        onClose={() => setOpen1(false)}>
+        onClose={() => setOpen1(false)}
+      >
         <div className="tearsheet-stories__narrow-content-block">
           Main content 1
         </div>
@@ -195,7 +198,8 @@ const StackedTemplate = ({ actions, ...args }) => {
         actions={wiredActions2}
         title="Tearsheet #2"
         open={open2}
-        onClose={() => setOpen2(false)}>
+        onClose={() => setOpen2(false)}
+      >
         <div className="tearsheet-stories__narrow-content-block">
           Main content 2
         </div>
@@ -205,7 +209,8 @@ const StackedTemplate = ({ actions, ...args }) => {
         actions={wiredActions3}
         title="Tearsheet #3"
         open={open3}
-        onClose={() => setOpen3(false)}>
+        onClose={() => setOpen3(false)}
+      >
         <div className="tearsheet-stories__narrow-content-block">
           Main content 3
         </div>

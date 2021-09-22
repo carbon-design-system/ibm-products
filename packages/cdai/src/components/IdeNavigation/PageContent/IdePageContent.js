@@ -16,7 +16,8 @@ const IdePageContent = ({ bleedClassName, children, className }) => {
   let pageContentWrapper = (
     <div
       {...idAttribute(`IdePageContent-container`)}
-      className={`${className} ${idePrefix}-page-content-use-width ${prefix}--grid ${idePrefix}--content-alignment`}>
+      className={`${className} ${idePrefix}-page-content-use-width ${prefix}--grid ${idePrefix}--content-alignment`}
+    >
       {children}
     </div>
   );
@@ -24,7 +25,8 @@ const IdePageContent = ({ bleedClassName, children, className }) => {
   return bleedClassName ? (
     <div
       {...idAttribute(`IdePageContent-bleed-container`)}
-      className={`${idePrefix}-page-content-use-width ${bleedClassName}`}>
+      className={`${idePrefix}-page-content-use-width ${bleedClassName}`}
+    >
       {pageContentWrapper}
     </div>
   ) : (

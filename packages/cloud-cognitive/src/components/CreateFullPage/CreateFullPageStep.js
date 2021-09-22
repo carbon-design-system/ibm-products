@@ -38,7 +38,8 @@ export let CreateFullPageStep = forwardRef(
         {hasFieldset ? (
           <FormGroup
             legendText={fieldsetLegendText}
-            className={`${blockClass}-fieldset`}>
+            className={`${blockClass}-fieldset`}
+          >
             {children}
           </FormGroup>
         ) : (

@@ -68,7 +68,8 @@ export let TagSet = React.forwardRef(
                 <div
                   key={index}
                   className={`${blockClass}__sizing-tag`}
-                  ref={(el) => (newSizingTags[index] = el)}>
+                  ref={(el) => (newSizingTags[index] = el)}
+                >
                   <Tag {...other} filter={false}>
                     {label}
                   </Tag>
@@ -202,16 +203,19 @@ export let TagSet = React.forwardRef(
         {...rest}
         className={cx([blockClass, className])}
         ref={tagSetRef}
-        {...getDevtoolsProps(componentName)}>
+        {...getDevtoolsProps(componentName)}
+      >
         <div
           className={cx([
             `${blockClass}__space`,
             `${blockClass}__space--align-${align}`,
-          ])}>
+          ])}
+        >
           <div
             className={`${blockClass}__tag-container ${blockClass}__tag-container--hidden`}
             aria-hidden={true}
-            ref={sizingContainerRef}>
+            ref={sizingContainerRef}
+          >
             {hiddenSizingTags}
           </div>
 

@@ -259,7 +259,8 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     render(
       <TestBreadcrumbWithOverflow
         width={plentyOfSpace}
-        overflowAriaLabel="Open and close additional breadcrumb item list.">
+        overflowAriaLabel="Open and close additional breadcrumb item list."
+      >
         {deprecatedChildren}
       </TestBreadcrumbWithOverflow>
     );
@@ -283,7 +284,8 @@ describe(BreadcrumbWithOverflow.displayName, () => {
       <TestBreadcrumbWithOverflow
         width={1200}
         maxVisible={0}
-        overflowAriaLabel="Open and close additional breadcrumb item list.">
+        overflowAriaLabel="Open and close additional breadcrumb item list."
+      >
         {[
           <BreadcrumbItem key="k1" href="/#" data-title={testTitle}>
             Item 1
@@ -303,7 +305,8 @@ describe(BreadcrumbWithOverflow.displayName, () => {
       <TestBreadcrumbWithOverflow
         width={1200}
         maxVisible={0}
-        overflowAriaLabel="Open and close additional breadcrumb item list.">
+        overflowAriaLabel="Open and close additional breadcrumb item list."
+      >
         {[
           <BreadcrumbItem key="k2" href="/#" title={testTitle}>
             Item 2
@@ -323,7 +326,8 @@ describe(BreadcrumbWithOverflow.displayName, () => {
       <TestBreadcrumbWithOverflow
         width={1200}
         maxVisible={0}
-        overflowAriaLabel="Open and close additional breadcrumb item list.">
+        overflowAriaLabel="Open and close additional breadcrumb item list."
+      >
         {[
           <BreadcrumbItem key="k3" href="/#">
             {testTitle}
@@ -347,7 +351,8 @@ describe(BreadcrumbWithOverflow.displayName, () => {
       <TestBreadcrumbWithOverflow
         width={1200}
         maxVisible={0}
-        overflowAriaLabel="Open and close additional breadcrumb item list.">
+        overflowAriaLabel="Open and close additional breadcrumb item list."
+      >
         {[
           <BreadcrumbItem key="k4">
             <a href="/#">{testTitle}</a>

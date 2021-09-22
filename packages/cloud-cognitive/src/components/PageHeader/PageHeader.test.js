@@ -417,7 +417,8 @@ describe('PageHeader', () => {
       <PageHeader
         {...testProps}
         hasCollapseHeaderToggle={true}
-        data-testid={dataTestId}>
+        data-testid={dataTestId}
+      >
         {children}
       </PageHeader>
     );

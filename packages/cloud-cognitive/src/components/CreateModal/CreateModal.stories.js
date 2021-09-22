@@ -78,7 +78,8 @@ const TemplateWithFormValidation = ({
         open={open}
         onRequestClose={() => setOpen(false)}
         disableSubmit={textInput.length === 0 ? true : false}
-        selectorPrimaryFocus=".bx--text-input">
+        selectorPrimaryFocus=".bx--text-input"
+      >
         <TextInput
           id="1"
           key="form-field-1"
@@ -109,7 +110,8 @@ const TemplateWithFormValidation = ({
         <RadioButtonGroup
           legendText="Radio button legend text goes here"
           name="radio-button-group"
-          defaultSelected="radio-1">
+          defaultSelected="radio-1"
+        >
           <RadioButton labelText="Radio-1" value="radio-1" id="radio-1" />
           <RadioButton labelText="Radio-2" value="radio-2" id="radio-2" />
           <RadioButton labelText="Radio-3" value="radio-3" id="radio-3" />
@@ -168,7 +170,8 @@ export const Default = prepareStory(Template, {
         <RadioButtonGroup
           legendText="Radio button legend text goes here"
           name="radio-button-group"
-          defaultSelected="radio-1">
+          defaultSelected="radio-1"
+        >
           <RadioButton labelText="Radio-1" value="radio-1" id="radio-1" />
           <RadioButton labelText="Radio-2" value="radio-2" id="radio-2" />
           <RadioButton labelText="Radio-3" value="radio-3" id="radio-3" />

@@ -54,6 +54,7 @@ $raised-z-index: 99;
       display: inline-block; /* cause top/bottom margin to reserve space */
       width: 100%;
       background-color: $ui-background;
+      color: $text-01;
 
       /* custom props */
       --#{$block-class}--breadcrumb-title-visibility: hidden;

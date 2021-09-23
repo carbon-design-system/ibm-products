@@ -392,8 +392,14 @@ describe('PageHeader', () => {
   const dataTestId = 'data-testid';
 
   it('adds additional properties to the containing node', () => {
-    render(<PageHeader data-testid={dataTestId} />);
-    screen.getByTestId(dataTestId);
+    const testStyle = { name: '--test-this', value: 'test-value' };
+    const styles = { [`${testStyle.name}`]: testStyle.value };
+
+    render(<PageHeader data-testid={dataTestId} style={styles} />);
+    const header = screen.getByTestId(dataTestId);
+
+    // style was failing due to pageHeaderStyles not being initialized
+    expect(header.getAttribute('style')).toContain(testStyle.value);
   });
 
   it('forwards a ref to an appropriate node', () => {

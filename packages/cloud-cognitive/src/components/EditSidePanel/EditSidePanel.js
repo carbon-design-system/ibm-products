@@ -97,6 +97,7 @@ export let EditSidePanel = React.forwardRef(
         animateTitle={false}
         className={cx(blockClass, className)}
         size={size}
+        preventCloseOnClickOutside
       >
         {formTitle && (
           <h3

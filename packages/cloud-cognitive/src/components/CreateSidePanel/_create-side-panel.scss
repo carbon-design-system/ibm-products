@@ -17,14 +17,6 @@
 // SidePanel
 @import '../SidePanel/side-panel';
 
-$sizes: (
-  extra-small: $extra-small-panel-size,
-  small: $small-panel-size,
-  medium: $medium-panel-size,
-  large: $large-panel-size,
-  max: $max-panel-size,
-);
-
 @mixin create-side-panel {
   $block-class: #{$pkg-prefix}--create-side-panel;
   $side-panel-block-class: #{$pkg-prefix}--side-panel;
@@ -34,7 +26,7 @@ $sizes: (
     padding-right: calc(20% - #{$spacing-05});
   }
 
-  @each $size, $value in $sizes {
+  @each $size, $value in $side-panel-sizes {
     .#{$block-class}.#{$side-panel-block-class}__container--#{$size}
       .#{$side-panel-block-class}__title-text {
       width: calc(#{$value} - #{$spacing-05});

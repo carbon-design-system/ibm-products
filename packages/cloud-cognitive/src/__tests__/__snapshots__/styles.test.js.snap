@@ -779,6 +779,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 
+.exp--create-full-page .exp--create-full-page {
+  color: var(--cds-text-01, #161616);
+}
+
 .exp--create-full-page .exp--create-full-page__content .bx--grid {
   padding-top: var(--cds-spacing-06, 1.5rem);
   margin-right: 0;
@@ -2384,6 +2388,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* stylelint-disable number-max-precision */
 /* stylelint-disable number-max-precision */
 /* stylelint-disable number-max-precision */
+.exp--empty-state {
+  color: var(--cds-text-01, #161616);
+}
+
 .exp--empty-state .exp--empty-state__header,
 .exp--empty-state .exp--empty-state__subtitle {
   padding-bottom: var(--cds-spacing-02, 0.25rem);
@@ -2577,6 +2585,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* stylelint-disable number-max-precision */
 .exp--card {
   background: var(--cds-ui-01, #f4f4f4);
+  color: var(--cds-text-01, #161616);
 }
 
 .exp--card__clickable {
@@ -4096,11 +4105,14 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--page-header.exp--page-header {
   /* Bleed class for the background */
   position: sticky;
+  /* z-index used to raise above any position relative content as per Carbon header */
+  z-index: 8000;
   top: var(--exp--page-header--header-top);
   display: inline-block;
   /* cause top/bottom margin to reserve space */
   width: 100%;
   background-color: var(--cds-ui-background, #ffffff);
+  color: var(--cds-text-01, #161616);
   /* custom props */
   --exp--page-header--breadcrumb-title-visibility: hidden;
   --exp--page-header--breadcrumb-title-opacity: 1;

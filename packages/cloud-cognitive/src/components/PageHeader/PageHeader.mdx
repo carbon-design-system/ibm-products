@@ -33,6 +33,19 @@ The page header is comprised of 6 zones, allowing for the flexibility to include
    tabs, content switcher etc.
 6. **Actions (optional):** This zone is for placing critical page actions.
 
+## Usage Notes for Developers
+
+On scroll the PageHeader can be configured to allow the breadcrumb row and/or
+the navigation row to stick to the top of the page, with content scrolling below
+it.
+
+In order for this to be successful the following conditions must be met:
+
+1. The PageHeader should be a peer of the structure where the content is placed.
+2. The z-index of the content should not exceed that of the PageHeader. This is
+   set by a Carbon SCSS function `z('header')` which currently evaluates
+   to 8000.
+
 ## Main types
 
 ### Page header without background

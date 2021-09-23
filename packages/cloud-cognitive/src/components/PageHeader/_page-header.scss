@@ -48,10 +48,13 @@ $raised-z-index: 99;
     &.#{$block-class} {
       /* Bleed class for the background */
       position: sticky;
+      /* z-index used to raise above any position relative content as per Carbon header */
+      z-index: z('header');
       top: var(--#{$block-class}--header-top);
       display: inline-block; /* cause top/bottom margin to reserve space */
       width: 100%;
       background-color: $ui-background;
+      color: $text-01;
 
       /* custom props */
       --#{$block-class}--breadcrumb-title-visibility: hidden;

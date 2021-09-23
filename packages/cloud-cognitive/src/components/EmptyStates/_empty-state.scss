@@ -19,6 +19,8 @@
   $block-class: #{$pkg-prefix}--empty-state;
 
   .#{$block-class} {
+    color: $text-01;
+
     .#{$block-class}__header,
     .#{$block-class}__subtitle {
       padding-bottom: $spacing-02;

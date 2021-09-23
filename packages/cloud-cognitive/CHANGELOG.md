@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.87.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.86.1...@carbon/ibm-cloud-cognitive@0.87.0) (2021-09-23)
+
+
+### Features
+
+* **SidePanel:** add prop to prevent closing panel on click outside ([#1288](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1288)) ([8dfa143](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8dfa143ac88442e1a770d217298c9c95a07fe590))
+
+
+
+
+
 ## [0.86.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.86.0...@carbon/ibm-cloud-cognitive@0.86.1) (2021-09-23)
 
 

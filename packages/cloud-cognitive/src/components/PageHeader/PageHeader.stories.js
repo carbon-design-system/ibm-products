@@ -427,35 +427,37 @@ const dummyPageContent = (
 );
 
 const demoDummyPageContent = (
-  <Grid className={`${storyClass}__dummy-content`} narrow={true}>
-    <Row>
-      <Column
-        sm={4}
-        md={8}
-        lg={16}
-        className={`${storyClass}__dummy-content-block`}
-      >
-        <Table>
-          <TableHead>
-            <TableRow>
-              {demoTableHeaders.map((header) => (
-                <TableHeader key={header}>{header}</TableHeader>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {demoTableData.map((row) => (
-              <TableRow key={row.Index}>
-                {Object.keys(row).map((key) => {
-                  return <TableCell key={key}>{row[key]}</TableCell>;
-                })}
+  <section className={`${storyClass}__dummy-content`}>
+    <Grid narrow={true}>
+      <Row>
+        <Column
+          sm={4}
+          md={8}
+          lg={16}
+          className={`${storyClass}__dummy-content-block`}
+        >
+          <Table>
+            <TableHead>
+              <TableRow>
+                {demoTableHeaders.map((header) => (
+                  <TableHeader key={header}>{header}</TableHeader>
+                ))}
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>{' '}
-      </Column>
-    </Row>
-  </Grid>
+            </TableHead>
+            <TableBody>
+              {demoTableData.map((row) => (
+                <TableRow key={row.Index}>
+                  {Object.keys(row).map((key) => {
+                    return <TableCell key={key}>{row[key]}</TableCell>;
+                  })}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>{' '}
+        </Column>
+      </Row>
+    </Grid>
+  </section>
 );
 
 // Template.

@@ -4105,6 +4105,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--page-header.exp--page-header {
   /* Bleed class for the background */
   position: sticky;
+  /* z-index used to raise above any position relative content as per Carbon header */
+  z-index: 8000;
   top: var(--exp--page-header--header-top);
   display: inline-block;
   /* cause top/bottom margin to reserve space */

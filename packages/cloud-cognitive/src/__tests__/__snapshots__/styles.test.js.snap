@@ -1020,7 +1020,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
   100% {
     opacity: 0;
-    transform: translateX(calc(-1 * map-get($side-panel-sizes, md)));
+    transform: translateX(calc(-1 * 30rem));
   }
 }
 

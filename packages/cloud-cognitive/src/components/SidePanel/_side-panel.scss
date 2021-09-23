@@ -97,7 +97,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     100% {
       opacity: 0;
       // stylelint-disable-next-line carbon/layout-token-use
-      transform: translateX(calc(-1 * map-get($side-panel-sizes, md)));
+      transform: translateX(calc(-1 * #{map-get($side-panel-sizes, md)}));
     }
   }
 

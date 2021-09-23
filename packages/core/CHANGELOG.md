@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.20.0...@carbon/ibm-cloud-cognitive-core@0.20.1) (2021-09-23)
+
+
+### Bug Fixes
+
+* storybook setting masking missing component color setting ([#1241](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1241)) ([38c01ec](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/38c01ec0fa1992b358aced18b714d77eda52bf09))
+
+
+
+
+
 # [0.20.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.19.0...@carbon/ibm-cloud-cognitive-core@0.20.0) (2021-09-23)
 
 

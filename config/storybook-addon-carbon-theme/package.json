@@ -1,7 +1,7 @@
 {
   "name": "@carbon/storybook-addon-theme",
   "description": "Carbon theme switcher for Storybook",
-  "version": "0.14.0",
+  "version": "0.15.0",
   "license": "Apache-2.0",
   "main": "dist/react.js",
   "repository": {
@@ -48,11 +48,11 @@
     "@storybook/components": "6.3.8",
     "@storybook/core-events": "6.3.8",
     "@storybook/theming": "6.3.8",
-    "core-js": "^3.17.3",
+    "core-js": "^3.18.0",
     "global": "^4.4.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.15.4",
+    "@babel/cli": "^7.15.7",
     "@babel/core": "^7.15.5",
     "@babel/preset-react": "^7.14.5",
     "npm-check-updates": "^11.8.5",

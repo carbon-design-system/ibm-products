@@ -1020,7 +1020,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
   100% {
     opacity: 0;
-    transform: translateX(-30rem);
+    transform: translateX(calc(-1 * map-get($side-panel-sizes, md)));
   }
 }
 
@@ -1046,7 +1046,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --exp--side-panel--content-bottom-padding: var(--cds-spacing-10, 4rem);
   --exp--side-panel--collapsed-title-y-position: 1rem;
   --exp--side-panel--label-text-height: 0;
-  --exp--side-panel--size: md;
   position: fixed;
   z-index: 3;
   top: var(--cds-spacing-09, 3rem);
@@ -1657,14 +1656,14 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   padding-right: calc(20% - var(--cds-spacing-05, 1rem));
 }
 
-.exp--create-side-panel.exp--side-panel__container--extra-small
+.exp--create-side-panel.exp--side-panel__container--xs
 .exp--side-panel__title-text {
   width: calc(16rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((16rem * 0.2) - var(--cds-spacing-05, 1rem));
   margin-bottom: var(--cds-spacing-02, 0.25rem);
 }
 
-.exp--create-side-panel.exp--side-panel__container--extra-small
+.exp--create-side-panel.exp--side-panel__container--xs
 .exp--side-panel__subtitle-text {
   width: calc(16rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((16rem * 0.2) - var(--cds-spacing-05, 1rem));
@@ -1673,14 +1672,14 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   color: var(--cds-text-02, #525252);
 }
 
-.exp--create-side-panel.exp--side-panel__container--small
+.exp--create-side-panel.exp--side-panel__container--sm
 .exp--side-panel__title-text {
   width: calc(20rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((20rem * 0.2) - var(--cds-spacing-05, 1rem));
   margin-bottom: var(--cds-spacing-02, 0.25rem);
 }
 
-.exp--create-side-panel.exp--side-panel__container--small
+.exp--create-side-panel.exp--side-panel__container--sm
 .exp--side-panel__subtitle-text {
   width: calc(20rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((20rem * 0.2) - var(--cds-spacing-05, 1rem));
@@ -1689,14 +1688,14 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   color: var(--cds-text-02, #525252);
 }
 
-.exp--create-side-panel.exp--side-panel__container--medium
+.exp--create-side-panel.exp--side-panel__container--md
 .exp--side-panel__title-text {
   width: calc(30rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((30rem * 0.2) - var(--cds-spacing-05, 1rem));
   margin-bottom: var(--cds-spacing-02, 0.25rem);
 }
 
-.exp--create-side-panel.exp--side-panel__container--medium
+.exp--create-side-panel.exp--side-panel__container--md
 .exp--side-panel__subtitle-text {
   width: calc(30rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((30rem * 0.2) - var(--cds-spacing-05, 1rem));
@@ -1705,14 +1704,14 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   color: var(--cds-text-02, #525252);
 }
 
-.exp--create-side-panel.exp--side-panel__container--large
+.exp--create-side-panel.exp--side-panel__container--lg
 .exp--side-panel__title-text {
   width: calc(40rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((40rem * 0.2) - var(--cds-spacing-05, 1rem));
   margin-bottom: var(--cds-spacing-02, 0.25rem);
 }
 
-.exp--create-side-panel.exp--side-panel__container--large
+.exp--create-side-panel.exp--side-panel__container--lg
 .exp--side-panel__subtitle-text {
   width: calc(40rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((40rem * 0.2) - var(--cds-spacing-05, 1rem));

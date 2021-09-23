@@ -112,11 +112,7 @@ export let SidePanel = React.forwardRef(
       if (open && animationComplete) {
         focusButton(sidePanelInnerRef.current);
       }
-      if (open) {
-        const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
-        sidePanelOuter?.style.setProperty(`--${blockClass}--size`, size);
-      }
-    }, [selectorPrimaryFocus, open, animationComplete, size]);
+    }, [selectorPrimaryFocus, open, animationComplete]);
 
     useEffect(() => {
       if (open && actions && actions.length && animationComplete) {

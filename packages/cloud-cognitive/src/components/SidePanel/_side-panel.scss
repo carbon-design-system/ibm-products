@@ -23,7 +23,7 @@
 $block-class: #{$pkg-prefix}--side-panel;
 $action-set-block-class: #{$pkg-prefix}--action-set;
 
-@mixin sidePanelEntranceRight($size: $md-panel-size) {
+@mixin sidePanelEntranceRight($size: map-get($side-panel-sizes, md)) {
   @keyframes sidePanelEntranceRight {
     0% {
       opacity: 0;
@@ -37,7 +37,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
   }
 }
 
-@mixin sidePanelEntranceLeft($size: $md-panel-size) {
+@mixin sidePanelEntranceLeft($size: map-get($side-panel-sizes, md)) {
   @keyframes sidePanelEntranceLeft {
     0% {
       opacity: 0;
@@ -51,7 +51,10 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
   }
 }
 
-@mixin sidePanelEntrance($placement: 'right', $size: $md-panel-size) {
+@mixin sidePanelEntrance(
+  $placement: 'right',
+  $size: map-get($side-panel-sizes, md)
+) {
   min-width: $size;
   max-width: $size;
   @if $placement == right {
@@ -61,7 +64,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
   }
 }
 
-@mixin setPanelSize($size: $md-panel-size) {
+@mixin setPanelSize($size: map-get($side-panel-sizes, md)) {
   min-width: $size;
   max-width: $size;
 }
@@ -94,7 +97,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     100% {
       opacity: 0;
       // stylelint-disable-next-line carbon/layout-token-use
-      transform: translateX(-#{$md-panel-size});
+      transform: translateX(calc(-1 * map-get($side-panel-sizes, md)));
     }
   }
 
@@ -106,7 +109,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     100% {
       opacity: 0;
       // stylelint-disable-next-line carbon/layout-token-use
-      transform: translateX($md-panel-size);
+      transform: translateX(map-get($side-panel-sizes, md));
     }
   }
 
@@ -121,7 +124,6 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     --#{$block-class}--content-bottom-padding: #{$spacing-10};
     --#{$block-class}--collapsed-title-y-position: 1rem;
     --#{$block-class}--label-text-height: 0;
-    --#{$block-class}--size: md;
 
     position: fixed;
     z-index: 3;

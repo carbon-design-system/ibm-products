@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.87.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.87.2...@carbon/ibm-cloud-cognitive@0.87.3) (2021-09-24)
+
+
+### Bug Fixes
+
+* **EmptyStates:** give svg elements unique ids to avoid display issues ([#1290](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1290)) ([72deea8](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/72deea83d493930ba03ee938c4aa1f588662407f))
+
+
+
+
+
 ## [0.87.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.87.1...@carbon/ibm-cloud-cognitive@0.87.2) (2021-09-23)
 
 

@@ -716,7 +716,7 @@ SidePanel.validatePageContentSelector =
   ({ slideIn, selectorPageContent }) => {
     if (slideIn && !selectorPageContent) {
       throw new Error(
-        `${componentName}: selectorPageContent prop missing, this is required when using a slideIn panel.`
+        `${componentName}: selectorPageContent prop missing, this is required when using a slideIn panel. If missing, the component will display as a slide over panel.`
       );
     }
   };

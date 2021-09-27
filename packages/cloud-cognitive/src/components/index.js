@@ -47,3 +47,4 @@ export { Tearsheet, TearsheetNarrow } from './Tearsheet';
 export { Toolbar, ToolbarButton, ToolbarGroup } from './Toolbar';
 export { UserProfileImage } from './UserProfileImage';
 export { WebTerminal } from './WebTerminal';
+export { EditSidePanel } from './EditSidePanel';

@@ -1789,6 +1789,15 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   color: var(--cds-text-02, #525252);
 }
 
+.exp--create-side-panel__actions-container {
+  position: absolute;
+  z-index: 4;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin-bottom: 0;
+}
+
 /* stylelint-disable number-max-precision */
 /* stylelint-disable number-max-precision */
 /* stylelint-disable number-max-precision */

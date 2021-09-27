@@ -24,6 +24,9 @@ jobs:
       - name: Build
         run: yarn build:packages
 
+      - name: Build storybook
+        run: yarn storybook:build:storybook
+
       - name: Package CI checks
         run: yarn run-all --no-sort ci-check
 
@@ -47,24 +50,6 @@ jobs:
 
       - name: Lint
         run: yarn run lint
-
-  storybook:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: lts/fermium
-
-      - name: Install
-        run: yarn --offline
-
-      - name: Build storybook
-        run: yarn storybook:build
 
   tests:
     runs-on: ubuntu-latest

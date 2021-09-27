@@ -30,6 +30,7 @@ export let WebTerminal = React.forwardRef(
       documentationLinks,
       open,
       actions,
+      closeIconDescription,
       ...rest
     },
     ref
@@ -132,7 +133,7 @@ export let WebTerminal = React.forwardRef(
             hasIconOnly
             renderIcon={Close}
             kind="ghost"
-            iconDescription="Close terminal"
+            iconDescription={closeIconDescription}
             onClick={closeTerminal}
           />
         </header>
@@ -183,6 +184,11 @@ WebTerminal.propTypes = {
   closeTerminal: PropTypes.func.isRequired,
 
   /**
+   * Function that should set the open prop to false
+   */
+  closeIconDescription: PropTypes.string,
+
+  /**
    * Array of objects for each documentation link
    */
   documentationLinks: PropTypes.arrayOf(
@@ -206,6 +212,7 @@ WebTerminal.propTypes = {
 // component needs to make a choice or assumption when a prop is not supplied.
 WebTerminal.defaultProps = {
   actions: [],
+  closeIconDescription: 'Close terminal',
   documentationLinks: [],
   className: '',
 };

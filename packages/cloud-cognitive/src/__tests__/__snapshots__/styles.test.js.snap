@@ -779,6 +779,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 
+.exp--create-full-page .exp--create-full-page {
+  color: var(--cds-text-01, #161616);
+}
+
 .exp--create-full-page .exp--create-full-page__content .bx--grid {
   padding-top: var(--cds-spacing-06, 1.5rem);
   margin-right: 0;
@@ -1020,7 +1024,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
   100% {
     opacity: 0;
-    transform: translateX(-30rem);
+    transform: translateX(calc(-1 * 30rem));
   }
 }
 
@@ -1049,8 +1053,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   position: fixed;
   z-index: 3;
   top: var(--cds-spacing-09, 3rem);
-  min-width: 30rem;
-  max-width: 30rem;
   height: calc(100% - 3rem);
   box-sizing: border-box;
   background-color: var(--cds-ui-01, #f4f4f4);
@@ -1059,14 +1061,24 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
 }
 
-.exp--side-panel__container.exp--side-panel__container-right-placement {
-  right: 0;
-  border-left: 1px solid var(--cds-decorative-01, #e0e0e0);
-}
-
-.exp--side-panel__container.exp--side-panel__container-right-placement.exp--side-panel__container--extra-small {
+.exp--side-panel__container.exp--side-panel__container--xs {
   min-width: 16rem;
   max-width: 16rem;
+}
+
+.exp--side-panel__container.exp--side-panel__container--xs .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation,
+.exp--side-panel__container.exp--side-panel__container--xs .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation,
+.exp--side-panel__container.exp--side-panel__container--xs .exp--side-panel__action-toolbar.exp--side-panel__action-toolbar-no-animation,
+.exp--side-panel__container.exp--side-panel__container--xs .exp--side-panel__actions-container.exp--action-set--xs {
+  min-width: 16rem;
+  max-width: 16rem;
+}
+
+.exp--side-panel__container.exp--side-panel__container-right-placement.exp--side-panel__container--xs {
+  min-width: 16rem;
+  max-width: 16rem;
+  right: 0;
+  border-left: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
 
 @keyframes sidePanelEntranceRight {
@@ -1080,78 +1092,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 
-.exp--side-panel__container.exp--side-panel__container-right-placement.exp--side-panel__container--small {
-  min-width: 20rem;
-  max-width: 20rem;
-}
-
-@keyframes sidePanelEntranceRight {
-  0% {
-    opacity: 0;
-    transform: translateX(20rem);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.exp--side-panel__container.exp--side-panel__container-right-placement.exp--side-panel__container--medium {
-  min-width: 30rem;
-  max-width: 30rem;
-}
-
-@keyframes sidePanelEntranceRight {
-  0% {
-    opacity: 0;
-    transform: translateX(30rem);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.exp--side-panel__container.exp--side-panel__container-right-placement.exp--side-panel__container--large {
-  min-width: 40rem;
-  max-width: 40rem;
-}
-
-@keyframes sidePanelEntranceRight {
-  0% {
-    opacity: 0;
-    transform: translateX(40rem);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.exp--side-panel__container.exp--side-panel__container-right-placement.exp--side-panel__container--max {
-  min-width: 75%;
-  max-width: 75%;
-}
-
-@keyframes sidePanelEntranceRight {
-  0% {
-    opacity: 0;
-    transform: translateX(75%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.exp--side-panel__container.exp--side-panel__container-left-placement {
-  left: 0;
-  border-right: 1px solid var(--cds-decorative-01, #e0e0e0);
-}
-
-.exp--side-panel__container.exp--side-panel__container-left-placement.exp--side-panel__container--extra-small {
+.exp--side-panel__container.exp--side-panel__container-left-placement.exp--side-panel__container--xs {
   min-width: 16rem;
   max-width: 16rem;
+  left: 0;
+  border-right: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
 
 @keyframes sidePanelEntranceLeft {
@@ -1165,9 +1110,42 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 
-.exp--side-panel__container.exp--side-panel__container-left-placement.exp--side-panel__container--small {
+.exp--side-panel__container.exp--side-panel__container--sm {
   min-width: 20rem;
   max-width: 20rem;
+}
+
+.exp--side-panel__container.exp--side-panel__container--sm .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation,
+.exp--side-panel__container.exp--side-panel__container--sm .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation,
+.exp--side-panel__container.exp--side-panel__container--sm .exp--side-panel__action-toolbar.exp--side-panel__action-toolbar-no-animation,
+.exp--side-panel__container.exp--side-panel__container--sm .exp--side-panel__actions-container.exp--action-set--sm {
+  min-width: 20rem;
+  max-width: 20rem;
+}
+
+.exp--side-panel__container.exp--side-panel__container-right-placement.exp--side-panel__container--sm {
+  min-width: 20rem;
+  max-width: 20rem;
+  right: 0;
+  border-left: 1px solid var(--cds-decorative-01, #e0e0e0);
+}
+
+@keyframes sidePanelEntranceRight {
+  0% {
+    opacity: 0;
+    transform: translateX(20rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.exp--side-panel__container.exp--side-panel__container-left-placement.exp--side-panel__container--sm {
+  min-width: 20rem;
+  max-width: 20rem;
+  left: 0;
+  border-right: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
 
 @keyframes sidePanelEntranceLeft {
@@ -1181,9 +1159,42 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 
-.exp--side-panel__container.exp--side-panel__container-left-placement.exp--side-panel__container--medium {
+.exp--side-panel__container.exp--side-panel__container--md {
   min-width: 30rem;
   max-width: 30rem;
+}
+
+.exp--side-panel__container.exp--side-panel__container--md .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation,
+.exp--side-panel__container.exp--side-panel__container--md .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation,
+.exp--side-panel__container.exp--side-panel__container--md .exp--side-panel__action-toolbar.exp--side-panel__action-toolbar-no-animation,
+.exp--side-panel__container.exp--side-panel__container--md .exp--side-panel__actions-container.exp--action-set--md {
+  min-width: 30rem;
+  max-width: 30rem;
+}
+
+.exp--side-panel__container.exp--side-panel__container-right-placement.exp--side-panel__container--md {
+  min-width: 30rem;
+  max-width: 30rem;
+  right: 0;
+  border-left: 1px solid var(--cds-decorative-01, #e0e0e0);
+}
+
+@keyframes sidePanelEntranceRight {
+  0% {
+    opacity: 0;
+    transform: translateX(30rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.exp--side-panel__container.exp--side-panel__container-left-placement.exp--side-panel__container--md {
+  min-width: 30rem;
+  max-width: 30rem;
+  left: 0;
+  border-right: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
 
 @keyframes sidePanelEntranceLeft {
@@ -1197,9 +1208,42 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 
-.exp--side-panel__container.exp--side-panel__container-left-placement.exp--side-panel__container--large {
+.exp--side-panel__container.exp--side-panel__container--lg {
   min-width: 40rem;
   max-width: 40rem;
+}
+
+.exp--side-panel__container.exp--side-panel__container--lg .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation,
+.exp--side-panel__container.exp--side-panel__container--lg .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation,
+.exp--side-panel__container.exp--side-panel__container--lg .exp--side-panel__action-toolbar.exp--side-panel__action-toolbar-no-animation,
+.exp--side-panel__container.exp--side-panel__container--lg .exp--side-panel__actions-container.exp--action-set--lg {
+  min-width: 40rem;
+  max-width: 40rem;
+}
+
+.exp--side-panel__container.exp--side-panel__container-right-placement.exp--side-panel__container--lg {
+  min-width: 40rem;
+  max-width: 40rem;
+  right: 0;
+  border-left: 1px solid var(--cds-decorative-01, #e0e0e0);
+}
+
+@keyframes sidePanelEntranceRight {
+  0% {
+    opacity: 0;
+    transform: translateX(40rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.exp--side-panel__container.exp--side-panel__container-left-placement.exp--side-panel__container--lg {
+  min-width: 40rem;
+  max-width: 40rem;
+  left: 0;
+  border-right: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
 
 @keyframes sidePanelEntranceLeft {
@@ -1213,9 +1257,42 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 
+.exp--side-panel__container.exp--side-panel__container--max {
+  min-width: 75%;
+  max-width: 75%;
+}
+
+.exp--side-panel__container.exp--side-panel__container--max .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation,
+.exp--side-panel__container.exp--side-panel__container--max .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation,
+.exp--side-panel__container.exp--side-panel__container--max .exp--side-panel__action-toolbar.exp--side-panel__action-toolbar-no-animation,
+.exp--side-panel__container.exp--side-panel__container--max .exp--side-panel__actions-container.exp--action-set--max {
+  min-width: 75%;
+  max-width: 75%;
+}
+
+.exp--side-panel__container.exp--side-panel__container-right-placement.exp--side-panel__container--max {
+  min-width: 75%;
+  max-width: 75%;
+  right: 0;
+  border-left: 1px solid var(--cds-decorative-01, #e0e0e0);
+}
+
+@keyframes sidePanelEntranceRight {
+  0% {
+    opacity: 0;
+    transform: translateX(75%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .exp--side-panel__container.exp--side-panel__container-left-placement.exp--side-panel__container--max {
   min-width: 75%;
   max-width: 75%;
+  left: 0;
+  border-right: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
 
 @keyframes sidePanelEntranceLeft {
@@ -1308,7 +1385,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   letter-spacing: var(--cds-productive-heading-03-letter-spacing, 0);
   display: -webkit-box;
   overflow: hidden;
-  padding-right: var(--cds-spacing-07, 2rem);
+  padding-right: var(--cds-spacing-09, 3rem);
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   position: inherit;
@@ -1338,7 +1415,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   letter-spacing: var(--cds-productive-heading-02-letter-spacing, 0);
   display: -webkit-box;
   overflow: hidden;
-  padding-right: var(--cds-spacing-07, 2rem);
+  padding-right: var(--cds-spacing-09, 3rem);
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   position: absolute;
@@ -1353,15 +1430,13 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   line-height: var(--cds-body-short-01-line-height, 1.28572);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
   overflow: hidden;
-  padding: 0 var(--cds-spacing-05, 1rem) var(--cds-spacing-05, 1rem) var(--cds-spacing-05, 1rem);
+  padding: 0 var(--cds-spacing-09, 3rem) var(--cds-spacing-05, 1rem) var(--cds-spacing-05, 1rem);
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   opacity: var(--exp--side-panel--subtitle-opacity);
 }
 
 .exp--side-panel__container .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation {
-  min-width: 30rem;
-  max-width: 30rem;
   position: fixed;
   z-index: 2;
   top: calc(var(--exp--side-panel--title-text-height) + var(--cds-spacing-09, 3rem));
@@ -1374,7 +1449,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .exp--side-panel__container .exp--side-panel__subtitle-text.exp--side-panel__subtitle-without-title {
   padding-top: var(--cds-spacing-05, 1rem);
-  padding-right: var(--cds-spacing-07, 2rem);
+  padding-right: var(--cds-spacing-09, 3rem);
 }
 
 .exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation.exp--side-panel__title-container-is-animating {
@@ -1382,8 +1457,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation {
-  min-width: 30rem;
-  max-width: 30rem;
   position: fixed;
   top: var(--cds-spacing-09, 3rem);
   height: var(--exp--side-panel--title-text-height);
@@ -1406,8 +1479,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .exp--side-panel__container .exp--side-panel__action-toolbar.exp--side-panel__action-toolbar-no-animation {
-  min-width: 30rem;
-  max-width: 30rem;
   position: fixed;
   top: calc( var(--exp--side-panel--title-text-height) + var(--exp--side-panel--subtitle-container-height) + var(--cds-spacing-09, 3rem));
   width: 100%;
@@ -1490,6 +1561,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   padding-top: 0;
 }
 
+.exp--side-panel__container.exp--side-panel__container-is-animating .exp--side-panel__actions-container.exp--action-set--max {
+  min-width: 100%;
+  max-width: 100%;
+}
+
 .exp--side-panel__container .exp--side-panel__actions-container {
   position: fixed;
   bottom: 0;
@@ -1497,29 +1573,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   background-color: var(--cds-ui-01, #f4f4f4);
 }
 
-.exp--side-panel__container .exp--side-panel__actions-container.exp--action-set--xs {
-  min-width: 16rem;
-  max-width: 16rem;
-}
-
-.exp--side-panel__container .exp--side-panel__actions-container.exp--action-set--sm {
-  min-width: 20rem;
-  max-width: 20rem;
-}
-
-.exp--side-panel__container .exp--side-panel__actions-container.exp--action-set--md {
-  min-width: 30rem;
-  max-width: 30rem;
-}
-
-.exp--side-panel__container .exp--side-panel__actions-container.exp--action-set--lg {
-  min-width: 40rem;
-  max-width: 40rem;
-}
-
 .exp--side-panel__container .exp--side-panel__actions-container.exp--action-set--max {
-  min-width: 75%;
-  max-width: 75%;
   flex-direction: column;
 }
 
@@ -1606,14 +1660,14 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   padding-right: calc(20% - var(--cds-spacing-05, 1rem));
 }
 
-.exp--create-side-panel.exp--side-panel__container--extra-small
+.exp--create-side-panel.exp--side-panel__container--xs
 .exp--side-panel__title-text {
   width: calc(16rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((16rem * 0.2) - var(--cds-spacing-05, 1rem));
   margin-bottom: var(--cds-spacing-02, 0.25rem);
 }
 
-.exp--create-side-panel.exp--side-panel__container--extra-small
+.exp--create-side-panel.exp--side-panel__container--xs
 .exp--side-panel__subtitle-text {
   width: calc(16rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((16rem * 0.2) - var(--cds-spacing-05, 1rem));
@@ -1622,14 +1676,14 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   color: var(--cds-text-02, #525252);
 }
 
-.exp--create-side-panel.exp--side-panel__container--small
+.exp--create-side-panel.exp--side-panel__container--sm
 .exp--side-panel__title-text {
   width: calc(20rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((20rem * 0.2) - var(--cds-spacing-05, 1rem));
   margin-bottom: var(--cds-spacing-02, 0.25rem);
 }
 
-.exp--create-side-panel.exp--side-panel__container--small
+.exp--create-side-panel.exp--side-panel__container--sm
 .exp--side-panel__subtitle-text {
   width: calc(20rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((20rem * 0.2) - var(--cds-spacing-05, 1rem));
@@ -1638,14 +1692,14 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   color: var(--cds-text-02, #525252);
 }
 
-.exp--create-side-panel.exp--side-panel__container--medium
+.exp--create-side-panel.exp--side-panel__container--md
 .exp--side-panel__title-text {
   width: calc(30rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((30rem * 0.2) - var(--cds-spacing-05, 1rem));
   margin-bottom: var(--cds-spacing-02, 0.25rem);
 }
 
-.exp--create-side-panel.exp--side-panel__container--medium
+.exp--create-side-panel.exp--side-panel__container--md
 .exp--side-panel__subtitle-text {
   width: calc(30rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((30rem * 0.2) - var(--cds-spacing-05, 1rem));
@@ -1654,14 +1708,14 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   color: var(--cds-text-02, #525252);
 }
 
-.exp--create-side-panel.exp--side-panel__container--large
+.exp--create-side-panel.exp--side-panel__container--lg
 .exp--side-panel__title-text {
   width: calc(40rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((40rem * 0.2) - var(--cds-spacing-05, 1rem));
   margin-bottom: var(--cds-spacing-02, 0.25rem);
 }
 
-.exp--create-side-panel.exp--side-panel__container--large
+.exp--create-side-panel.exp--side-panel__container--lg
 .exp--side-panel__subtitle-text {
   width: calc(40rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((40rem * 0.2) - var(--cds-spacing-05, 1rem));
@@ -1733,6 +1787,15 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
   margin-bottom: var(--cds-spacing-03, 0.5rem);
   color: var(--cds-text-02, #525252);
+}
+
+.exp--create-side-panel__actions-container {
+  position: absolute;
+  z-index: 4;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin-bottom: 0;
 }
 
 /* stylelint-disable number-max-precision */
@@ -2384,6 +2447,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* stylelint-disable number-max-precision */
 /* stylelint-disable number-max-precision */
 /* stylelint-disable number-max-precision */
+.exp--empty-state {
+  color: var(--cds-text-01, #161616);
+}
+
 .exp--empty-state .exp--empty-state__header,
 .exp--empty-state .exp--empty-state__subtitle {
   padding-bottom: var(--cds-spacing-02, 0.25rem);
@@ -2577,6 +2644,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* stylelint-disable number-max-precision */
 .exp--card {
   background: var(--cds-ui-01, #f4f4f4);
+  color: var(--cds-text-01, #161616);
 }
 
 .exp--card__clickable {
@@ -4096,11 +4164,14 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--page-header.exp--page-header {
   /* Bleed class for the background */
   position: sticky;
+  /* z-index used to raise above any position relative content as per Carbon header */
+  z-index: 8000;
   top: var(--exp--page-header--header-top);
   display: inline-block;
   /* cause top/bottom margin to reserve space */
   width: 100%;
   background-color: var(--cds-ui-background, #ffffff);
+  color: var(--cds-text-01, #161616);
   /* custom props */
   --exp--page-header--breadcrumb-title-visibility: hidden;
   --exp--page-header--breadcrumb-title-opacity: 1;

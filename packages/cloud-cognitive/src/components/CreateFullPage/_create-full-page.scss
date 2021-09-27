@@ -31,6 +31,10 @@
   // The block part of our conventional BEM class names (blockClass__E--M).
   $block-class: #{$pkg-prefix}--create-full-page;
 
+  .#{$block-class} .#{$block-class} {
+    color: $text-01;
+  }
+
   .#{$block-class} .#{$block-class}__content .#{$carbon-prefix}--grid {
     padding-top: $spacing-06;
     margin-right: 0;

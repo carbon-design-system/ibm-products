@@ -18,10 +18,12 @@ import { deprecateProp } from '../../global/js/utils/props-helper';
 
 // Carbon and package components we use.
 import { Form } from 'carbon-components-react';
-import { SidePanel } from '../SidePanel/SidePanel';
+import { SidePanel } from '../SidePanel';
+import { ActionSet } from '../ActionSet';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--create-side-panel`;
+const sidePanelBlockClass = `${pkg.prefix}--side-panel`;
 const componentName = 'CreateSidePanel';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
@@ -34,20 +36,20 @@ export let CreateSidePanel = React.forwardRef(
     {
       // The component props, in alphabetical order (for consistency).
       className,
-      onRequestClose,
-      open,
-      title,
-      subtitle,
       children,
       disableSubmit,
-      onRequestSubmit,
-      primaryButtonText,
-      secondaryButtonText,
-      selectorPrimaryFocus,
-      pageContentSelector,
-      selectorPageContent,
       formTitle,
       formDescription,
+      onRequestClose,
+      onRequestSubmit,
+      open,
+      pageContentSelector,
+      primaryButtonText,
+      secondaryButtonText,
+      selectorPageContent,
+      selectorPrimaryFocus,
+      subtitle,
+      title,
       ...rest
     },
     ref
@@ -55,9 +57,13 @@ export let CreateSidePanel = React.forwardRef(
     const actions = [
       {
         label: primaryButtonText,
-        onClick: onRequestSubmit,
+        onClick: (event) => {
+          event.preventDefault();
+          onRequestSubmit();
+        },
         kind: 'primary',
         disabled: disableSubmit,
+        type: 'submit',
       },
       {
         label: secondaryButtonText,
@@ -65,6 +71,11 @@ export let CreateSidePanel = React.forwardRef(
         kind: 'secondary',
       },
     ];
+
+    const actionContainerClassNames = cx([
+      `${blockClass}__actions-container`,
+      `${sidePanelBlockClass}__actions-container`,
+    ]);
 
     return (
       (selectorPageContent || pageContentSelector) && (
@@ -78,7 +89,6 @@ export let CreateSidePanel = React.forwardRef(
             onRequestClose,
             title,
             subtitle,
-            actions,
             selectorPrimaryFocus,
             ...getDevtoolsProps(componentName),
           }}
@@ -95,7 +105,14 @@ export let CreateSidePanel = React.forwardRef(
             className={`${blockClass}__form-description-text ${blockClass}__content-text`}>
             {formDescription}
           </p>
-          <Form className={`${blockClass}__form`}>{children}</Form>
+          <Form className={`${blockClass}__form`}>
+            {children}
+            <ActionSet
+              actions={actions}
+              className={actionContainerClassNames}
+              size="md"
+            />
+          </Form>
         </SidePanel>
       )
     );

@@ -58,6 +58,7 @@ export let SidePanel = React.forwardRef(
       open,
       pageContentSelector,
       placement,
+      preventCloseOnClickOutside,
       selectorPageContent,
       selectorPrimaryFocus,
       size,
@@ -386,13 +387,13 @@ export let SidePanel = React.forwardRef(
       } else if (includeOverlay && !open) {
         bodyElement.style.overflow = 'initial';
       }
-      if (includeOverlay) {
+      if (includeOverlay && !preventCloseOnClickOutside) {
         document.addEventListener('click', handleOutsideClick);
       }
       return () => {
         document.removeEventListener('click', handleOutsideClick);
       };
-    }, [includeOverlay, onRequestClose, open]);
+    }, [includeOverlay, onRequestClose, open, preventCloseOnClickOutside]);
 
     // initialize the side panel to open
     useEffect(() => {
@@ -458,22 +459,6 @@ export let SidePanel = React.forwardRef(
       size,
     ]);
 
-    const setSizeClassName = (panelSize) => {
-      let sizeClassName = `${blockClass}__container`;
-      switch (panelSize) {
-        case 'xs':
-          return (sizeClassName = `${sizeClassName}--extra-small`);
-        case 'sm':
-          return (sizeClassName = `${sizeClassName}--small`);
-        case 'lg':
-          return (sizeClassName = `${sizeClassName}--large`);
-        case 'max':
-          return (sizeClassName = `${sizeClassName}--max`);
-        default:
-          return (sizeClassName = `${sizeClassName}--medium`);
-      }
-    };
-
     // adds focus trap functionality
     /* istanbul ignore next */
     const handleBlur = ({
@@ -503,7 +488,7 @@ export let SidePanel = React.forwardRef(
       blockClass,
       className,
       `${blockClass}__container`,
-      setSizeClassName(size),
+      `${blockClass}__container--${size}`,
       {
         [`${blockClass}__container-right-placement`]: placement === 'right',
         [`${blockClass}__container-left-placement`]: placement === 'left',
@@ -721,7 +706,7 @@ SidePanel.validatePageContentSelector =
   ({ slideIn, selectorPageContent }) => {
     if (slideIn && !selectorPageContent) {
       throw new Error(
-        `${componentName}: selectorPageContent prop missing, this is required when using a slideIn panel.`
+        `${componentName}: selectorPageContent prop missing, this is required when using a slideIn panel. If missing, the component will display as a slide over panel.`
       );
     }
   };
@@ -858,6 +843,11 @@ SidePanel.propTypes = {
    * Determines if the side panel is on the right or left
    */
   placement: PropTypes.oneOf(['left', 'right']),
+
+  /**
+   * Prevent closing on click outside of the panel
+   */
+  preventCloseOnClickOutside: PropTypes.bool,
 
   /**
    * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.

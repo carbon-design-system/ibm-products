@@ -154,4 +154,16 @@ describe(componentName, () => {
       getDevtoolsId(componentName)
     );
   });
+
+  it('should still support deprecated `pageContentSelector` prop', () => {
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation();
+    const warningSpy = jest.spyOn(console, 'warn').mockImplementation();
+    renderComponent({
+      pageContentSelector: '#create-side-panel-test-page-content',
+      selectorPageContent: null,
+    });
+    expect(screen.getByRole('complementary')).toHaveClass(blockClass);
+    errorSpy.mockRestore();
+    warningSpy.mockRestore();
+  });
 });

@@ -430,27 +430,7 @@ describe('SidePanel', () => {
         size,
       });
       const sidePanelOuter = container.querySelector(`.${blockClass}`);
-      let sizeValue;
-      switch (size) {
-        case 'xs':
-          sizeValue = 'extra-small';
-          break;
-        case 'sm':
-          sizeValue = 'small';
-          break;
-        case 'lg':
-          sizeValue = 'large';
-          break;
-        case 'max':
-          sizeValue = 'max';
-          break;
-        default:
-          sizeValue = 'medium';
-          break;
-      }
-      expect(sidePanelOuter).toHaveClass(
-        `${blockClass}__container--${sizeValue}`
-      );
+      expect(sidePanelOuter).toHaveClass(`${blockClass}__container--${size}`);
     });
   });
 

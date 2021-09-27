@@ -23,7 +23,7 @@
 $block-class: #{$pkg-prefix}--side-panel;
 $action-set-block-class: #{$pkg-prefix}--action-set;
 
-@mixin sidePanelEntranceRight($size: $medium-panel-size) {
+@mixin sidePanelEntranceRight($size: map-get($side-panel-sizes, md)) {
   @keyframes sidePanelEntranceRight {
     0% {
       opacity: 0;
@@ -37,7 +37,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
   }
 }
 
-@mixin sidePanelEntranceLeft($size: $medium-panel-size) {
+@mixin sidePanelEntranceLeft($size: map-get($side-panel-sizes, md)) {
   @keyframes sidePanelEntranceLeft {
     0% {
       opacity: 0;
@@ -51,7 +51,10 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
   }
 }
 
-@mixin sidePanelEntrance($placement: 'right', $size: $medium-panel-size) {
+@mixin sidePanelEntrance(
+  $placement: 'right',
+  $size: map-get($side-panel-sizes, md)
+) {
   min-width: $size;
   max-width: $size;
   @if $placement == right {
@@ -61,7 +64,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
   }
 }
 
-@mixin setPanelSize($size: $medium-panel-size) {
+@mixin setPanelSize($size: map-get($side-panel-sizes, md)) {
   min-width: $size;
   max-width: $size;
 }
@@ -80,7 +83,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
 @mixin setCommonTitleStyles() {
   display: -webkit-box;
   overflow: hidden;
-  padding-right: $spacing-07;
+  padding-right: $spacing-09;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
@@ -94,7 +97,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     100% {
       opacity: 0;
       // stylelint-disable-next-line carbon/layout-token-use
-      transform: translateX(-#{$medium-panel-size});
+      transform: translateX(calc(-1 * #{map-get($side-panel-sizes, md)}));
     }
   }
 
@@ -106,7 +109,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     100% {
       opacity: 0;
       // stylelint-disable-next-line carbon/layout-token-use
-      transform: translateX($medium-panel-size);
+      transform: translateX(map-get($side-panel-sizes, md));
     }
   }
 
@@ -125,51 +128,34 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     position: fixed;
     z-index: 3;
     top: $spacing-09;
-    min-width: $medium-panel-size; // set default panel size
-    max-width: $medium-panel-size; // set default panel size
     height: calc(100% - 3rem);
     box-sizing: border-box;
     background-color: $ui-01;
     color: $text-01;
     transition: transform $duration--moderate-02;
     transition-timing-function: carbon--motion(standard);
-    &.#{$block-class}__container-right-placement {
-      right: 0;
-      border-left: 1px solid $decorative-01;
-    }
-    &.#{$block-class}__container-right-placement.#{$block-class}__container--extra-small {
-      @include sidePanelEntrance(right, $extra-small-panel-size);
-    }
-    &.#{$block-class}__container-right-placement.#{$block-class}__container--small {
-      @include sidePanelEntrance(right, $small-panel-size);
-    }
-    &.#{$block-class}__container-right-placement.#{$block-class}__container--medium {
-      @include sidePanelEntrance(right, $medium-panel-size);
-    }
-    &.#{$block-class}__container-right-placement.#{$block-class}__container--large {
-      @include sidePanelEntrance(right, $large-panel-size);
-    }
-    &.#{$block-class}__container-right-placement.#{$block-class}__container--max {
-      @include sidePanelEntrance(right, $max-panel-size);
-    }
-    &.#{$block-class}__container-left-placement {
-      left: 0;
-      border-right: 1px solid $decorative-01;
-    }
-    &.#{$block-class}__container-left-placement.#{$block-class}__container--extra-small {
-      @include sidePanelEntrance(left, $extra-small-panel-size);
-    }
-    &.#{$block-class}__container-left-placement.#{$block-class}__container--small {
-      @include sidePanelEntrance(left, $small-panel-size);
-    }
-    &.#{$block-class}__container-left-placement.#{$block-class}__container--medium {
-      @include sidePanelEntrance(left, $medium-panel-size);
-    }
-    &.#{$block-class}__container-left-placement.#{$block-class}__container--large {
-      @include sidePanelEntrance(left, $large-panel-size);
-    }
-    &.#{$block-class}__container-left-placement.#{$block-class}__container--max {
-      @include sidePanelEntrance(left, $max-panel-size);
+    @each $size, $size_value in $side-panel-sizes {
+      &.#{$block-class}__container--#{$size} {
+        @include setPanelSize($size_value);
+        .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation,
+        .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation,
+        .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation,
+        .#{$block-class}__actions-container.#{$action-set-block-class}--#{$size} {
+          @include setPanelSize($size_value);
+        }
+      }
+      &.#{$block-class}__container-right-placement.#{$block-class}__container--#{$size} {
+        @include sidePanelEntrance(right, $size_value);
+
+        right: 0;
+        border-left: 1px solid $decorative-01;
+      }
+      &.#{$block-class}__container-left-placement.#{$block-class}__container--#{$size} {
+        @include sidePanelEntrance(left, $size_value);
+
+        left: 0;
+        border-right: 1px solid $decorative-01;
+      }
     }
     &.#{$block-class}__container-with-action-toolbar.#{$block-class}__with-condensed-header {
       .#{$block-class}__title-container {
@@ -268,14 +254,12 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       @include carbon--type-style('body-short-01');
 
       overflow: hidden;
-      padding: 0 $spacing-05 $spacing-05 $spacing-05;
+      padding: 0 $spacing-09 $spacing-05 $spacing-05;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 3;
       opacity: var(--#{$block-class}--subtitle-opacity);
     }
     .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation {
-      @include setPanelSize();
-
       position: fixed;
       z-index: 2;
       // stylelint-disable-next-line carbon/layout-token-use
@@ -289,7 +273,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
 
     .#{$block-class}__subtitle-text.#{$block-class}__subtitle-without-title {
       padding-top: $spacing-05;
-      padding-right: $spacing-07;
+      padding-right: $spacing-09;
     }
 
     .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation.#{$block-class}__title-container-is-animating {
@@ -297,8 +281,6 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     }
 
     .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation {
-      @include setPanelSize();
-
       position: fixed;
       top: $spacing-09;
       height: var(--#{$block-class}--title-text-height);
@@ -333,8 +315,6 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     }
 
     .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation {
-      @include setPanelSize();
-
       position: fixed;
       // stylelint-disable-next-line carbon/layout-token-use
       top: calc(
@@ -415,23 +395,15 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       padding: $spacing-05;
       padding-top: 0;
     }
+    &.#{$block-class}__container-is-animating
+      .#{$block-class}__actions-container.#{$action-set-block-class}--max {
+      @include setPanelSize(100%);
+    }
     .#{$block-class}__actions-container {
       position: fixed;
       bottom: 0;
       border-top: 1px solid $decorative-01;
       background-color: $ui-01;
-      &.#{$action-set-block-class}--xs {
-        @include setPanelSize($extra-small-panel-size);
-      }
-      &.#{$action-set-block-class}--sm {
-        @include setPanelSize($small-panel-size);
-      }
-      &.#{$action-set-block-class}--md {
-        @include setPanelSize($medium-panel-size);
-      }
-      &.#{$action-set-block-class}--lg {
-        @include setPanelSize($large-panel-size);
-      }
       &.#{$action-set-block-class}--max {
         .#{$action-set-block-class}__action-button {
           width: 100%;
@@ -445,8 +417,6 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
           }
         }
 
-        min-width: 75%;
-        max-width: 75%;
         flex-direction: column;
       }
       .#{$action-set-block-class}__action-button {

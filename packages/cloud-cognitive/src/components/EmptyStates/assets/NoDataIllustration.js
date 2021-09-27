@@ -12,11 +12,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
+import uuidv4 from '../../../global/js/utils/uuidv4';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--empty-state`;
 
 export const NoDataIllustration = ({ theme, size, ...rest }) => {
+  const svgId = uuidv4();
   return theme === 'dark' ? (
     <svg
       {...rest}
@@ -30,7 +32,7 @@ export const NoDataIllustration = ({ theme, size, ...rest }) => {
       ])}>
       <defs>
         <linearGradient
-          id="prefix__a"
+          id={`prefix__a_dark_${svgId}`}
           x1={11.12}
           y1={43.34}
           x2={40}
@@ -40,7 +42,7 @@ export const NoDataIllustration = ({ theme, size, ...rest }) => {
           <stop offset={1} stopColor="#262626" />
         </linearGradient>
         <linearGradient
-          id="prefix__b"
+          id={`prefix__b_dark_${svgId}`}
           x1={40}
           y1={43.34}
           x2={68.88}
@@ -50,7 +52,7 @@ export const NoDataIllustration = ({ theme, size, ...rest }) => {
           <stop offset={1} stopColor="#262626" />
         </linearGradient>
         <linearGradient
-          id="prefix__c"
+          id={`prefix__c_dark_${svgId}`}
           x1={32.78}
           y1={30.83}
           x2={47.22}
@@ -66,15 +68,15 @@ export const NoDataIllustration = ({ theme, size, ...rest }) => {
         d="M40 78.34L11.13 61.67 40 45.01l28.86 16.66L40 78.34z"
       />
       <path
-        fill="url(#prefix__a)"
+        fill={`url(#prefix__a_dark_${svgId})`}
         d="M40 68.35L11.12 51.68l.01-33.35L40 34.99v33.36z"
       />
       <path
-        fill="url(#prefix__b)"
+        fill={`url(#prefix__b_dark_${svgId})`}
         d="M68.88 51.68L40 68.35V34.99l28.87-16.66.01 33.35z"
       />
       <path
-        fill="url(#prefix__c)"
+        fill={`url(#prefix__c_dark_${svgId})`}
         d="M40 34.99L11.13 18.33 40 1.66l28.87 16.67L40 34.99z"
       />
       <path
@@ -100,7 +102,7 @@ export const NoDataIllustration = ({ theme, size, ...rest }) => {
       ])}>
       <defs>
         <linearGradient
-          id="prefix__a_dark"
+          id={`prefix__a_${svgId}`}
           x1={18.35}
           y1={74.17}
           x2={61.65}
@@ -110,7 +112,7 @@ export const NoDataIllustration = ({ theme, size, ...rest }) => {
           <stop offset={1} stopOpacity={0.1} />
         </linearGradient>
         <linearGradient
-          id="prefix__b_dark"
+          id={`prefix__b_${svgId}`}
           x1={15.16}
           y1={43.34}
           x2={40.31}
@@ -120,7 +122,7 @@ export const NoDataIllustration = ({ theme, size, ...rest }) => {
           <stop offset={1} stopColor="#c6c6c6" />
         </linearGradient>
         <linearGradient
-          id="prefix__c_dark"
+          id={`prefix__c_${svgId}`}
           x1={40}
           y1={43.34}
           x2={68.88}
@@ -130,7 +132,7 @@ export const NoDataIllustration = ({ theme, size, ...rest }) => {
           <stop offset={1} stopColor="#c6c6c6" />
         </linearGradient>
         <linearGradient
-          id="prefix__d_dark"
+          id={`prefix__d_${svgId}`}
           x1={18.35}
           y1={30.83}
           x2={61.65}
@@ -139,23 +141,23 @@ export const NoDataIllustration = ({ theme, size, ...rest }) => {
           <stop offset={0} stopColor="#f4f4f4" />
           <stop offset={1} stopColor="#e0e0e0" />
         </linearGradient>
-        <style>{'.prefix__g_dark{fill:#fff}'}</style>
+        <style>{`.prefix__g_${svgId}{fill:#fff}`}</style>
       </defs>
       <path fill="none" d="M0 0h80v80H0z" />
       <path
-        fill="url(#prefix__a_dark)"
+        fill={`url(#prefix__a_${svgId})`}
         d="M40 78.34L11.13 61.67 40 45.01l28.86 16.66L40 78.34z"
       />
       <path
-        fill="url(#prefix__b_dark)"
+        fill={`url(#prefix__b_${svgId})`}
         d="M40 68.35L11.12 51.68l.01-33.35L40 34.99v33.36z"
       />
       <path
-        fill="url(#prefix__c_dark)"
+        fill={`url(#prefix__c_${svgId})`}
         d="M68.88 51.68L40 68.35V34.99l28.87-16.66.01 33.35z"
       />
       <path
-        fill="url(#prefix__d_dark)"
+        fill={`url(#prefix__d_${svgId})`}
         d="M40 34.99L11.13 18.33 40 1.66l28.87 16.67L40 34.99z"
       />
       <path
@@ -163,7 +165,7 @@ export const NoDataIllustration = ({ theme, size, ...rest }) => {
         d="M25.97 26.67l28.67-16.55-.42-.24-28.68 16.56.43.23z"
       />
       <path
-        className="prefix__g_dark"
+        className={`prefix__g_${svgId}`}
         d="M40 35.24L11.13 18.57v-.24l.21-.12 28.87 16.67-.21.11v.25zM21.49 33.33l-8.2-4.73.01-5.69 8.19 4.74v5.68z"
       />
     </svg>

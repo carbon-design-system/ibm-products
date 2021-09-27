@@ -60,7 +60,7 @@ const defaultStoryProps = {
   selectorPrimaryFocus: '.bx--text-input',
 };
 
-const items = ['Day(s)', 'Month(s)', 'Year(s'];
+const items = ['Day(s)', 'Month(s)', 'Year(s)'];
 
 const renderUIShellHeader = () => (
   <HeaderContainer

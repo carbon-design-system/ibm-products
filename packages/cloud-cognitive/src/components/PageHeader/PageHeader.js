@@ -106,7 +106,9 @@ export let PageHeader = React.forwardRef(
     // handle deprecated props - END
 
     const [metrics, setMetrics] = useState({});
-    const [pageHeaderStyles, setPageHeaderStyles] = useState({});
+    const [pageHeaderStyles, setPageHeaderStyles] = useState({
+      ...rest.style,
+    });
 
     // refs
     const localHeaderRef = useRef(null);

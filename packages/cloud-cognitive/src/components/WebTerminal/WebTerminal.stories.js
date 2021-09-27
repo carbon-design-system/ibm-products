@@ -10,6 +10,7 @@
 import React, { useState, useCallback } from 'react';
 // Carbon and package components we use.
 import { Code16 as Code, Copy16 as Copy } from '@carbon/icons-react';
+import { action } from '@storybook/addon-actions';
 import { Navigation } from './preview-components';
 import {
   getStoryTitle,
@@ -65,12 +66,12 @@ export const WithActions = prepareStory(Template, {
     actions: [
       {
         renderIcon: Code,
-        onClick: () => alert('clicked on action'),
+        onClick: action('clicked on action'),
         iconDescription: 'Create new deployment',
       },
       {
         renderIcon: Copy,
-        onClick: () => alert('clicked on action'),
+        onClick: action('clicked on action'),
         iconDescription: 'Copy logs',
       },
     ],

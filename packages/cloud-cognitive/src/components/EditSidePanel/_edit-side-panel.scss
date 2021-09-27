@@ -1,0 +1,66 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@import '../../global/styles/project-settings';
+@import '../../global/styles/mixins';
+
+// EditSidePanel uses the following Carbon components:
+@import 'carbon-components/scss/components/form/form';
+
+// EditSidePanel uses the following Cloud & Cognitive components:
+@import '../SidePanel/side-panel';
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin edit-side-panel {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+  $block-class: #{$pkg-prefix}--edit-side-panel;
+  $side-panel-block-class: #{$pkg-prefix}--side-panel;
+
+  .#{$block-class} {
+    .#{$carbon-prefix}--form.#{$block-class}__form {
+      padding-top: $spacing-05;
+    }
+
+    .#{$block-class}__form.#{$carbon-prefix}--fieldset {
+      padding-top: $spacing-03;
+    }
+
+    .#{$block-class}__form > * {
+      margin-bottom: $spacing-05;
+    }
+
+    .#{$block-class}__form-title-text {
+      @include carbon--type-style('productive-heading-02');
+
+      padding-bottom: $spacing-03;
+    }
+
+    .#{$block-class}__form-description-text {
+      @include carbon--type-style('body-long-01');
+    }
+
+    &.#{$side-panel-block-class}
+      .#{$carbon-prefix}--btn.#{$side-panel-block-class}__close-button {
+      display: none;
+    }
+
+    .#{$block-class}__actions-container {
+      position: absolute;
+      z-index: 4;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      margin-bottom: 0;
+    }
+  }
+}
+
+@include exports('edit-side-panel') {
+  @include edit-side-panel;
+}

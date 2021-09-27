@@ -288,6 +288,13 @@ const title = {
   },
 };
 
+const fullWidthGrid = {
+  'Not supplied': null,
+  'Boolean false': false,
+  'Boolean true': true,
+  [`Extra large 'xl'`]: 'xl',
+};
+
 export default {
   title: getStoryTitle(PageHeader.displayName),
   component: PageHeader,
@@ -353,6 +360,14 @@ export default {
       },
       options: Object.values(title).map((_k, i) => i),
       mapping: Object.values(title),
+    },
+    fullWidthGrid: {
+      control: {
+        type: 'select',
+        labels: Object.keys(fullWidthGrid),
+      },
+      options: Object.values(fullWidthGrid).map((_k, i) => i),
+      mapping: Object.values(fullWidthGrid),
     },
   },
 };

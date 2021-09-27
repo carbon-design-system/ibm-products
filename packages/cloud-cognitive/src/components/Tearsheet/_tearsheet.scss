@@ -31,6 +31,7 @@
     &.#{$block-class} {
       z-index: z('modal') + 1;
       align-items: flex-end;
+      color: $text-01;
       // stylelint-disable-next-line carbon/motion-token-use
       transition: visibility 0s linear $motion-duration,
         background-color $motion-duration motion(exit, expressive),

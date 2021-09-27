@@ -47,11 +47,11 @@
   .#{$block-class}__link {
     margin-top: $spacing-06;
   }
-  .#{$block-class}__action-button {
+  .#{$block-class} .#{$block-class}__action-button {
     display: block;
   }
-  .#{$block-class}__link {
-    display: inline-block;
+  .#{$block-class} .#{$block-class}__link {
+    display: block;
   }
 }
 

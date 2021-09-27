@@ -43,6 +43,7 @@ export let APIKeyModal = forwardRef(
       className,
       closeButtonText,
       copyButtonText,
+      copyErrorText,
       copyIconDescription,
       customSteps,
       downloadBodyText,
@@ -71,6 +72,7 @@ export let APIKeyModal = forwardRef(
       nameRequired,
       nextStepButtonText,
       onClose,
+      onCopy,
       onRequestEdit,
       onRequestGenerate,
       open,
@@ -80,6 +82,7 @@ export let APIKeyModal = forwardRef(
     },
     ref
   ) => {
+    const [copyError, setCopyError] = useState(false);
     const [name, setName] = useState(apiKeyName);
     const [currentStep, setCurrentStep] = useState(0);
     const inputRef = useRef();
@@ -165,11 +168,20 @@ export let APIKeyModal = forwardRef(
       onClose();
     };
 
-    const submitHandler = () => {
+    const submitHandler = async () => {
       if (hasNextStep) {
         setCurrentStep(currentStep + 1);
       } else if (apiKeyLoaded) {
-        navigator.clipboard.writeText(apiKey);
+        if (onCopy) {
+          onCopy(apiKey);
+        } else {
+          try {
+            await navigator.clipboard.writeText(apiKey);
+          } catch (e) {
+            console.error(e);
+            setCopyError(true);
+          }
+        }
       } else if (editing) {
         onRequestEdit(name);
       } else {
@@ -192,6 +204,7 @@ export let APIKeyModal = forwardRef(
         className={cx(className, blockClass)}
         onClose={onCloseHandler}
         size="sm"
+        aria-label={modalLabel}
         preventCloseOnClickOutside>
         <ModalHeader
           className={`${blockClass}__header`}
@@ -242,12 +255,14 @@ export let APIKeyModal = forwardRef(
                   className={`${blockClass}__loader`}
                 />
               )}
-              {error && (
+              {(copyError || error) && (
                 <div className={`${blockClass}__messaging`}>
                   <div className={`${blockClass}__error-icon`}>
                     <ErrorFilled16 />
                   </div>
-                  <p className={`${blockClass}__messaging-text`}>{errorText}</p>
+                  <p className={`${blockClass}__messaging-text`}>
+                    {copyError ? copyErrorText : errorText}
+                  </p>
                 </div>
               )}
               {apiKeyLoaded && (
@@ -333,6 +348,10 @@ APIKeyModal.propTypes = {
    * text for the copy button
    */
   copyButtonText: PropTypes.string,
+  /**
+   * Error message for when the copy function fails
+   */
+  copyErrorText: PropTypes.string,
   /**
    * text description for the copy button icon
    */
@@ -463,6 +482,11 @@ APIKeyModal.propTypes = {
    */
   onClose: PropTypes.func,
   /**
+   * Optional callback if you want to use your own copy function instead of the build in one
+   * onCopy(apiKey)
+   */
+  onCopy: PropTypes.func,
+  /**
    * handler for api key edit
    */
   onRequestEdit: PropTypes.func,
@@ -485,13 +509,14 @@ APIKeyModal.propTypes = {
 };
 
 APIKeyModal.defaultProps = {
-  hasAPIKeyVisibilityToggle: false,
+  apiKeyName: '',
   customSteps: [],
+  error: false,
+  hasAPIKeyVisibilityToggle: false,
   hasDownloadLink: false,
   loading: false,
   nameRequired: false,
   open: false,
-  apiKeyName: '',
 };
 
 APIKeyModal.displayName = componentName;

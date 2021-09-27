@@ -124,7 +124,7 @@ RemoveModal.propTypes = {
   /**
    * Label for text box
    */
-  inputLabelText: PropTypes.string,
+  inputLabelText: PropTypes.node,
   /**
    * Placeholder for text box
    */

@@ -3,6 +3,65 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.85.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.85.0...@carbon/ibm-cloud-cognitive@0.85.1) (2021-09-22)
+
+
+### Bug Fixes
+
+* added sideEffects field to package.json ([#1251](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1251)) ([a54554b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a54554b8b8b940e9049ad8dcca481dec6f54c354))
+
+
+
+
+
+# [0.85.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.84.1...@carbon/ibm-cloud-cognitive@0.85.0) (2021-09-21)
+
+
+### Bug Fixes
+
+* **Tearsheet:** set text color so theming works as expected ([#1270](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1270)) ([a88e5f0](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a88e5f03d2e7d3e98809ed55cd593dfa56aee4c4))
+* use node instead of string for remove modal input label ([#1267](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1267)) ([7e7cdf8](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/7e7cdf879407d077d9d539dc7aaf9e76ffb6aaff))
+
+
+### Features
+
+* ensure prettier linting causes ci-check to fail ([#1273](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1273)) ([ad6f347](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ad6f3479636d2b80b26338d9059429b4ae08ac6e))
+* update Carbon versions and package dependencies to latest ([#1262](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1262)) ([ed4dcbe](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ed4dcbe5b6d92baa6ec39240bda6996ec55f7bc4))
+
+
+
+
+
+## [0.84.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.84.0...@carbon/ibm-cloud-cognitive@0.84.1) (2021-09-15)
+
+
+### Bug Fixes
+
+* adds additional check for copy ([#1258](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1258)) ([b69cca1](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b69cca1314e2cca7d99351fa7f91069687d64b72))
+
+
+
+
+
+# [0.84.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.83.1...@carbon/ibm-cloud-cognitive@0.84.0) (2021-09-15)
+
+
+### Features
+
+* create an xl width for the page header ([#1236](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1236)) ([d278f85](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d278f854629f12459fd2e8e7b0ca3003083574b8))
+
+
+
+
+
+## [0.83.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.83.0...@carbon/ibm-cloud-cognitive@0.83.1) (2021-09-14)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
 # [0.83.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.82.3...@carbon/ibm-cloud-cognitive@0.83.0) (2021-09-13)
 
 

@@ -29,7 +29,7 @@ export let WebTerminal = React.forwardRef(
       closeTerminal,
       documentationLinks,
       open,
-      actions = [],
+      actions,
       ...rest
     },
     ref

@@ -92,6 +92,7 @@ export let WebTerminal = React.forwardRef(
                 hasIconOnly
                 kind="ghost"
                 type="button"
+                iconDescription="Show documentation links"
                 renderIcon={Help}
                 className={`${blockClass}__bar-icon-container`}>
                 <ul className={`${blockClass}__bar-icon-dropdown`}>

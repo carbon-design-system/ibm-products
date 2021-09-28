@@ -42,6 +42,7 @@
     "storybook:build:storybook": "cd packages/core && yarn build",
     "storybook:start": "cd packages/core && yarn start",
     "sync": "carbon-cli sync",
+    "update-gallery-config": "node scripts/example-gallery-builder/index.js",
     "upgrade:dependencies:carbon": "npm-check-updates -u --packageFile '{package.json,{config/**,packages/**}/package.json}' --filter '/carbon/'",
     "//upgrade:dependencies:top": "# don't upgrade carbon (done globally), react/react-dom (not tested), husky (major change in action)",
     "upgrade:dependencies:top": "npm-check-updates -u --reject '/(carbon|^react$|^react-dom$|^husky$)/'",
@@ -90,7 +91,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
-      "pre-commit": "yarn copy-common-files; lint-staged"
+      "pre-commit": "node update-gallery-config; yarn copy-common-files; lint-staged"
     }
   },
   "commitlint": {

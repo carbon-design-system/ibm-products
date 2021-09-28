@@ -181,12 +181,12 @@ WebTerminal.propTypes = {
   /**
    * Function that should set the open prop to false
    */
-  closeTerminal: PropTypes.func.isRequired,
+  closeIconDescription: PropTypes.string,
 
   /**
    * Function that should set the open prop to false
    */
-  closeIconDescription: PropTypes.string,
+  closeTerminal: PropTypes.func.isRequired,
 
   /**
    * Array of objects for each documentation link

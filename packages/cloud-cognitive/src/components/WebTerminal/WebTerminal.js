@@ -28,6 +28,7 @@ export let WebTerminal = React.forwardRef(
       className,
       closeTerminal,
       documentationLinks,
+      documentationLinksIconDescription,
       open,
       actions,
       closeIconDescription,
@@ -93,7 +94,7 @@ export let WebTerminal = React.forwardRef(
                 hasIconOnly
                 kind="ghost"
                 type="button"
-                iconDescription="Show documentation links"
+                iconDescription={documentationLinksIconDescription}
                 renderIcon={Help}
                 className={`${blockClass}__bar-icon-container`}>
                 <ul className={`${blockClass}__bar-icon-dropdown`}>
@@ -155,7 +156,7 @@ WebTerminal.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 WebTerminal.propTypes = {
   /**
-   * Provide your own terminal component as children to show up in the web terminal
+   * An array of actions to be displayed in the web terminal header bar
    */
   actions: PropTypes.arrayOf(
     PropTypes.shape({
@@ -179,7 +180,7 @@ WebTerminal.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Function that should set the open prop to false
+   * Icon description for the close button
    */
   closeIconDescription: PropTypes.string,
 
@@ -201,6 +202,11 @@ WebTerminal.propTypes = {
   ),
 
   /**
+   * Array of objects for each documentation link
+   */
+  documentationLinksIconDescription: PropTypes.string,
+
+  /**
    * Boolean that determines if the web terminal is opened or closed
    */
   open: PropTypes.bool.isRequired,
@@ -214,5 +220,6 @@ WebTerminal.defaultProps = {
   actions: [],
   closeIconDescription: 'Close terminal',
   documentationLinks: [],
+  documentationLinksIconDescription: 'Show documentation links',
   className: '',
 };

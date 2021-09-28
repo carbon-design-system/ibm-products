@@ -22,10 +22,7 @@ jobs:
         run: yarn --offline
 
       - name: Build
-        run: yarn build:packages
-
-      - name: Build storybook
-        run: yarn storybook:build:storybook
+        run: yarn build
 
       - name: Package CI checks
         run: yarn run-all --no-sort ci-check

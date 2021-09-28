@@ -459,22 +459,6 @@ export let SidePanel = React.forwardRef(
       size,
     ]);
 
-    const setSizeClassName = (panelSize) => {
-      let sizeClassName = `${blockClass}__container`;
-      switch (panelSize) {
-        case 'xs':
-          return (sizeClassName = `${sizeClassName}--extra-small`);
-        case 'sm':
-          return (sizeClassName = `${sizeClassName}--small`);
-        case 'lg':
-          return (sizeClassName = `${sizeClassName}--large`);
-        case 'max':
-          return (sizeClassName = `${sizeClassName}--max`);
-        default:
-          return (sizeClassName = `${sizeClassName}--medium`);
-      }
-    };
-
     // adds focus trap functionality
     /* istanbul ignore next */
     const handleBlur = ({
@@ -504,7 +488,7 @@ export let SidePanel = React.forwardRef(
       blockClass,
       className,
       `${blockClass}__container`,
-      setSizeClassName(size),
+      `${blockClass}__container--${size}`,
       {
         [`${blockClass}__container-right-placement`]: placement === 'right',
         [`${blockClass}__container-left-placement`]: placement === 'left',
@@ -732,7 +716,7 @@ SidePanel.validatePageContentSelector =
   ({ slideIn, selectorPageContent }) => {
     if (slideIn && !selectorPageContent) {
       throw new Error(
-        `${componentName}: selectorPageContent prop missing, this is required when using a slideIn panel.`
+        `${componentName}: selectorPageContent prop missing, this is required when using a slideIn panel. If missing, the component will display as a slide over panel.`
       );
     }
   };

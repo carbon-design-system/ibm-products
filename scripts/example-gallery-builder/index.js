@@ -143,12 +143,15 @@ const updateGalleryConfig = () => {
 
   const writeGalleryConfig = (config) => {
     // const configString = JSON.stringify(config);
-    fs.writeFileSync(galleryConfigPath, 'const config = [');
+    fs.writeFileSync(
+      galleryConfigPath,
+      'const defaultOrNot = item => item.default || item; const config = ['
+    );
     config.forEach((item) => {
       const thumbnail =
         item.thumbnail && item.thumbnail.startsWith('url(')
           ? `'${item.thumbnail}'`
-          : "'url( ' + require('" + item.thumbnail + "').default + ')'";
+          : "'url( ' + defaultOrNot(require('" + item.thumbnail + "')) + ')'";
       fs.appendFileSync(
         galleryConfigPath,
         `{ label: '${item.label}', url: '${item.url}', thumbnail: ${thumbnail} },`

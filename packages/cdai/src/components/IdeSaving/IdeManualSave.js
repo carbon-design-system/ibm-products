@@ -19,14 +19,16 @@ const IdeManualSave = ({ state, saveText, cancelText, onSave, onCancel }) => (
       className={`${idePrefix}-manual-save__cancel-button ${idePrefix}-manual-save--button`}
       kind="secondary"
       onClick={(evt) => onCancel(evt)}
-      disabled={state === 'saved'}>
+      disabled={state === 'saved'}
+    >
       {cancelText}
     </Button>
     <Button
       className={`${idePrefix}-manual-save__save-button ${idePrefix}-manual-save--button`}
       kind="primary"
       onClick={(evt) => onSave(evt)}
-      renderIcon={state === 'saved' ? AddCheckmark16 : AddSave16}>
+      renderIcon={state === 'saved' ? AddCheckmark16 : AddSave16}
+    >
       {saveText}
     </Button>
   </div>

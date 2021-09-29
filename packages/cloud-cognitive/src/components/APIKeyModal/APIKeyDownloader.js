@@ -43,7 +43,8 @@ export const APIKeyDownloader = ({
         {body}{' '}
         <a
           {...linkProps}
-          className={`${pkg.prefix}--apikey-modal__download-link`}>
+          className={`${pkg.prefix}--apikey-modal__download-link`}
+        >
           {linkText}
         </a>
       </p>

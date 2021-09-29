@@ -429,11 +429,13 @@ export let CreateTearsheet = forwardRef(
         size="wide"
         title={title}
         verticalPosition={verticalPosition}
-        ref={ref}>
+        ref={ref}
+      >
         <div
           className={`${blockClass}__content`}
           onBlur={handleBlur}
-          ref={contentRef}>
+          ref={contentRef}
+        >
           {open ? (
             <Grid>
               <Form>{renderChildren(children)}</Form>

@@ -77,7 +77,8 @@ export class IdeCard extends React.Component {
         ${idePrefix}-card-container ${idePrefix}-card-container__${cardSize} ${idePrefix}-card-${cardType} ${prefix}--col-sm-${1} ${prefix}--col-md-${2} ${prefix}--col-lg-${4} ${prefix}--col-xlg-${4} ${prefix}--col-max-${4}`}
         {...idAttribute(`ide-card-${cardId}`)}
         onMouseEnter={this.mouseEnter}
-        onMouseLeave={this.mouseLeave}>
+        onMouseLeave={this.mouseLeave}
+      >
         <div className={`${idePrefix}-card`}>
           <ClickableTile
             tabIndex={0}
@@ -85,7 +86,8 @@ export class IdeCard extends React.Component {
             href={cardHref ? cardHref : '#'} // add an href which does nothing so a click can be registered
             target={cardType === 'externalLink' ? cardLinkTarget : undefined}
             {...idAttribute(`ide-card-${cardId}-card`)}
-            {...interactions}>
+            {...interactions}
+          >
             {this.renderCardContent(
               cardId,
               cardType,
@@ -131,7 +133,8 @@ export class IdeCard extends React.Component {
           disabledText,
           <p
             {...idAttribute(`ide-card-${cardId}-text`)}
-            className={`${idePrefix}-card--tile-text`}></p>,
+            className={`${idePrefix}-card--tile-text`}
+          ></p>,
           secondaryGraphic
         );
         break;
@@ -161,7 +164,8 @@ export class IdeCard extends React.Component {
           disabledText,
           <p
             {...idAttribute(`ide-card-${cardId}-text`)}
-            className={`${idePrefix}-card--tile-text`}></p>,
+            className={`${idePrefix}-card--tile-text`}
+          ></p>,
           secondaryGraphic
         );
         break;
@@ -182,7 +186,8 @@ export class IdeCard extends React.Component {
                 <li key={link.href}>
                   <Link
                     {...idAttribute(`ide-card-${cardId}-${link.href}-Link`)}
-                    href={link.href}>
+                    href={link.href}
+                  >
                     {link.text}
                   </Link>
                 </li>
@@ -216,7 +221,8 @@ export class IdeCard extends React.Component {
     return (
       <div
         {...idAttribute(`ide-card-${cardId}-Text-Tile`)}
-        className={`${idePrefix}-card--tile`}>
+        className={`${idePrefix}-card--tile`}
+      >
         {this.renderCardGraphicHeader(
           cardId,
           cardType,
@@ -226,14 +232,16 @@ export class IdeCard extends React.Component {
         <div className={`${idePrefix}-card--text-container`}>
           <p
             {...idAttribute(`ide-card-${cardId}-HeadingTitle`)}
-            className={`${idePrefix}-card--heading-title`}>
+            className={`${idePrefix}-card--heading-title`}
+          >
             {cardHeadingTitle}
           </p>
 
           <div className={`${idePrefix}-card-heading-container`}>
             <p
               {...idAttribute(`ide-card-${cardId}-Heading`)}
-              className={`${idePrefix}-card--heading`}>
+              className={`${idePrefix}-card--heading`}
+            >
               {cardHeading}
             </p>
             {cardDisabled && disabledText && this.state.onHover && (
@@ -241,14 +249,16 @@ export class IdeCard extends React.Component {
                 open={this.state.onHover}
                 showIcon
                 direction="bottom"
-                className={`${idePrefix}-card--card-tooltip`}>
+                className={`${idePrefix}-card--card-tooltip`}
+              >
                 {disabledText}
               </Tooltip>
             )}
           </div>
           <p
             {...idAttribute(`ide-card-${cardId}-HeadingDescription`)}
-            className={`${idePrefix}-card--heading-description`}>
+            className={`${idePrefix}-card--heading-description`}
+          >
             {cardHeadingDescription}
           </p>
           {cardBody}
@@ -270,18 +280,21 @@ export class IdeCard extends React.Component {
             `${idePrefix}-card--tile-img-group` +
             (!cardGraphic ? ` ${idePrefix}-card--tile-img-group-right` : '')
           }
-          {...idAttribute(`ide-card-${cardId}-Image-Group`)}>
+          {...idAttribute(`ide-card-${cardId}-Image-Group`)}
+        >
           {cardGraphic && (
             <div
               className={`${idePrefix}-card--tile-img`}
-              {...idAttribute(`ide-card-${cardId}-Image`)}>
+              {...idAttribute(`ide-card-${cardId}-Image`)}
+            >
               {cardGraphic && renderGraphic(cardGraphic)}
             </div>
           )}
           {(cardType === 'externalLink' || secondaryGraphic === 'external') && (
             <div
               className={`${idePrefix}-card--tile-img`}
-              {...idAttribute(`ide-card-${cardId}-launch-Image`)}>
+              {...idAttribute(`ide-card-${cardId}-launch-Image`)}
+            >
               {renderGraphic(Launch)}
             </div>
           )}

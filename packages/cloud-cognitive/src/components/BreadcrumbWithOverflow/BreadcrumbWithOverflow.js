@@ -160,7 +160,8 @@ export let BreadcrumbWithOverflow = ({
               : className
           }
           title={index + 1 === breadcrumbs.length ? title : null}
-          {...rest}>
+          {...rest}
+        >
           {label}
         </BreadcrumbItem>
       )
@@ -319,13 +320,15 @@ export let BreadcrumbWithOverflow = ({
       className={cx(blockClass, className, {
         [`${blockClass}__with-items`]: displayedBreadcrumbItems.length > 1,
       })}
-      ref={breadcrumbItemWithOverflow}>
+      ref={breadcrumbItemWithOverflow}
+    >
       <div className={cx([`${blockClass}__space`])}>
         {/* This next element is purely here to measure the size of the breadcrumb items */}
         <div
           className={`${blockClass}__breadcrumb-container ${blockClass}__breadcrumb-container--hidden`}
           aria-hidden={true}
-          ref={sizingContainerRef}>
+          ref={sizingContainerRef}
+        >
           <Breadcrumb>
             <BreadcrumbItem key={`${blockClass}-hidden-overflow-${internalId}`}>
               <OverflowMenu
@@ -360,7 +363,8 @@ export let BreadcrumbWithOverflow = ({
               displayedBreadcrumbItems.length > 1,
           })}
           noTrailingSlash={noTrailingSlash}
-          {...other}>
+          {...other}
+        >
           {displayedBreadcrumbItems}
         </Breadcrumb>
       </div>

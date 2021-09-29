@@ -333,7 +333,8 @@ export let CreateFullPage = React.forwardRef(
         {...rest}
         ref={ref}
         className={cx(blockClass, className)}
-        {...getDevtoolsProps(componentName)}>
+        {...getDevtoolsProps(componentName)}
+      >
         <div className={`${blockClass}__influencer`}>
           <CreateInfluencer
             activeSectionIndex={activeSectionIndex}
@@ -372,7 +373,8 @@ export let CreateFullPage = React.forwardRef(
           className={`${blockClass}__modal`}
           size="sm"
           open={modalIsOpen}
-          aria-label={modalTitle}>
+          aria-label={modalTitle}
+        >
           <ModalHeader title={modalTitle} />
           <ModalBody>
             <p>{modalDescription}</p>
@@ -383,7 +385,8 @@ export let CreateFullPage = React.forwardRef(
               kind="secondary"
               onClick={() => {
                 setModalIsOpen(!modalIsOpen);
-              }}>
+              }}
+            >
               {modalSecondaryButtonText}
             </Button>
             <Button type="button" kind="danger" onClick={onClose}>

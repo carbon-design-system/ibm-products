@@ -23,11 +23,11 @@
     "clean:lerna": "lerna clean --yes",
     "clean:files": "rimraf coverage node_modules results",
     "copy-common-files": "sh ./scripts/copy-common-files.sh",
-    "format": "run-s 'lint:es --fix' format:prettier",
+    "format": "run-s 'lint:es --fix' 'format:prettier --write'",
     "format:prettier": "yarn format:prettier:files '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd,coverage}/**' '!README.md'",
-    "format:prettier:files": "prettier --write",
+    "format:prettier:files": "prettier",
     "generate": "lerna run generate --loglevel success --scope \"@carbon/ibm-cloud-cognitive\" --",
-    "lint": "run-p lint:* spellcheck 'format:prettier --list-different --loglevel warn'",
+    "lint": "run-p lint:* spellcheck 'format:prettier --check --loglevel warn'",
     "lint:es": "yarn lint:es:files 'packages/*/src/**/*.js'",
     "lint:es:files": "eslint",
     "lint:style": "yarn lint:style:files 'packages/*/src/**/*.scss'",
@@ -42,6 +42,7 @@
     "storybook:build:storybook": "cd packages/core && yarn build",
     "storybook:start": "cd packages/core && yarn start",
     "sync": "carbon-cli sync",
+    "update-gallery-config": "node scripts/example-gallery-builder/index.js; yarn format:prettier:files examples/cloud-cognitive/example-gallery/src/gallery-config/index.js --write",
     "upgrade:dependencies:carbon": "npm-check-updates -u --packageFile '{package.json,{config/**,packages/**}/package.json}' --filter '/carbon/'",
     "//upgrade:dependencies:top": "# don't upgrade carbon (done globally), react/react-dom (not tested), husky (major change in action)",
     "upgrade:dependencies:top": "npm-check-updates -u --reject '/(carbon|^react$|^react-dom$|^husky$)/'",
@@ -53,20 +54,20 @@
     "@carbon/bundler": "^10.11.0",
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
-    "@testing-library/dom": "^8.1.0",
-    "@testing-library/react": "^12.0.0",
+    "@testing-library/dom": "^8.5.0",
+    "@testing-library/react": "^12.1.0",
     "@testing-library/user-event": "^13.2.1",
-    "cspell": "^5.8.1",
+    "cspell": "^5.10.1",
     "eslint": "^7.32.0",
     "eslint-config-carbon": "^2.8.0",
     "husky": "^4.3.6",
-    "jest": "^27.0.6",
+    "jest": "^27.2.1",
     "lerna": "^4.0.0",
     "lint-staged": "^11.1.2",
-    "npm-check-updates": "^11.8.3",
+    "npm-check-updates": "^11.8.5",
     "npm-run-all": "^4.1.5",
     "npm-upgrade": "^3.0.0",
-    "prettier": "^2.3.2",
+    "prettier": "^2.4.1",
     "prettier-config-carbon": "^0.4.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
@@ -74,7 +75,7 @@
     "stylelint": "^13.13.1",
     "stylelint-config-carbon": "^1.7.0",
     "stylelint-plugin-carbon-tokens": "^0.11.2",
-    "webpack": "^5.51.1"
+    "webpack": "^5.53.0"
   },
   "eslintConfig": {
     "parser": "babel-eslint",
@@ -90,7 +91,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
-      "pre-commit": "yarn copy-common-files; lint-staged"
+      "pre-commit": "node update-gallery-config; yarn copy-common-files; lint-staged"
     }
   },
   "commitlint": {

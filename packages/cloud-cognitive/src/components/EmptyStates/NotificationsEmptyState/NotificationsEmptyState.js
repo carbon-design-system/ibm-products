@@ -46,7 +46,8 @@ export let NotificationsEmptyState = React.forwardRef(
         }
         className={cx(blockClass, className)}
         ref={ref}
-        {...getDevtoolsProps(componentName)}>
+        {...getDevtoolsProps(componentName)}
+      >
         <NotificationsIllustration size={size} theme={illustrationTheme} />
         <EmptyStateContent
           action={action}

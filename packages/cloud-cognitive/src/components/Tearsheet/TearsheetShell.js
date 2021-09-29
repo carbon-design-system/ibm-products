@@ -184,7 +184,8 @@ export const TearsheetShell = React.forwardRef(
           })}
           {...{ onClose, open, ref }}
           preventCloseOnClickOutside={!isPassive}
-          size="sm">
+          size="sm"
+        >
           {includeHeader && (
             <ModalHeader
               className={cx(`${bc}__header`, {
@@ -194,7 +195,8 @@ export const TearsheetShell = React.forwardRef(
               closeClassName={cx({
                 [`${bc}__header--no-close-icon`]: !effectiveHasCloseIcon,
               })}
-              iconDescription={closeIconDescription}>
+              iconDescription={closeIconDescription}
+            >
               <Wrap className={`${bc}__header-content`}>
                 <Wrap className={`${bc}__header-fields`}>
                   {/* we create the label and title here instead of passing them
@@ -220,14 +222,16 @@ export const TearsheetShell = React.forwardRef(
                 [`${bc}__influencer`]: true,
                 [`${bc}__influencer--wide`]: influencerWidth === 'wide',
               })}
-              neverRender={influencerPosition === 'right'}>
+              neverRender={influencerPosition === 'right'}
+            >
               {influencer}
             </Wrap>
             <Wrap className={`${bc}__right`}>
               <Wrap alwaysRender={includeActions} className={`${bc}__main`}>
                 <Wrap
                   alwaysRender={influencer && influencerPosition === 'right'}
-                  className={`${bc}__content`}>
+                  className={`${bc}__content`}
+                >
                   {children}
                 </Wrap>
                 <Wrap
@@ -235,7 +239,8 @@ export const TearsheetShell = React.forwardRef(
                     [`${bc}__influencer`]: true,
                     [`${bc}__influencer--wide`]: influencerWidth === 'wide',
                   })}
-                  neverRender={influencerPosition !== 'right'}>
+                  neverRender={influencerPosition !== 'right'}
+                >
                   {influencer}
                 </Wrap>
               </Wrap>

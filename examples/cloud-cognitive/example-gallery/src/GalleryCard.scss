@@ -1,0 +1,39 @@
+// imports carbon settings
+@import './carbon-settings';
+
+@import 'carbon-components/scss/components/tile/tile';
+
+$baseClass: 'gallery-card';
+
+.#{$baseClass} {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.#{$baseClass}__thumbnail {
+  flex: 1 1 80%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.#{$baseClass}__title {
+  @include carbon--type-style('productive-heading-03');
+
+  overflow: hidden;
+  flex: 1 1 20%;
+  margin-top: $spacing-04;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// .#{$baseClass}::before {
+//   display: inline-block;
+//   padding: $pacing-08;
+//   content: '';
+// }
+
+// .#{$baseClass}::after {
+//   position: absolute;
+// }

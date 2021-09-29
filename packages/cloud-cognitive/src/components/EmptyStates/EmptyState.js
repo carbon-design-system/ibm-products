@@ -59,7 +59,8 @@ export let EmptyState = React.forwardRef(
         }
         className={cx(blockClass, className)}
         ref={ref}
-        {...getDevtoolsProps(componentName)}>
+        {...getDevtoolsProps(componentName)}
+      >
         {illustration && renderIllustration()}
         <EmptyStateContent
           action={action}

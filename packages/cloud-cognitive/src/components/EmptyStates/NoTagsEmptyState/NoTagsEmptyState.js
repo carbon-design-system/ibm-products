@@ -46,7 +46,8 @@ export let NoTagsEmptyState = React.forwardRef(
         }
         className={cx(blockClass, className)}
         ref={ref}
-        {...getDevtoolsProps(componentName)}>
+        {...getDevtoolsProps(componentName)}
+      >
         <NoTagsIllustration theme={illustrationTheme} size={size} />
         <EmptyStateContent
           action={action}

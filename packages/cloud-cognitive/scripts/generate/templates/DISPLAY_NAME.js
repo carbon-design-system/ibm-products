@@ -57,7 +57,8 @@ export let DISPLAY_NAME = React.forwardRef(
         )}
         ref={ref}
         role="main"
-        {...getDevtoolsProps(componentName)}>
+        {...getDevtoolsProps(componentName)}
+      >
         {children}
       </div>
     );

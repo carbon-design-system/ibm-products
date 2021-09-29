@@ -19,7 +19,8 @@ export const HTTPErrorSvgOther = ({ className }) => {
       width={1584}
       height={916}
       viewBox="0 0 1584 916"
-      className={className}>
+      className={className}
+    >
       <defs>
         <clipPath id="prefix__clip-path">
           <path className="prefix__cls-1" d="M412 617.45a4 4 0 114 6.93z" />
@@ -207,7 +208,8 @@ export const HTTPErrorSvgOther = ({ className }) => {
           y1={562.27}
           x2={235.8}
           y2={532.92}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#333" />
           <stop offset={0.9} stopColor="#bebebe" stopOpacity={0} />
         </linearGradient>
@@ -225,7 +227,8 @@ export const HTTPErrorSvgOther = ({ className }) => {
           y1={763.45}
           x2={1315.84}
           y2={763.45}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#e0e0e0" />
           <stop offset={0.17} stopColor="#e0e0e0" stopOpacity={0.99} />
           <stop offset={0.31} stopColor="#e2e2e2" stopOpacity={0.94} />
@@ -243,7 +246,8 @@ export const HTTPErrorSvgOther = ({ className }) => {
           y1={661.21}
           x2={437.33}
           y2={580.61}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#a4a4a4" />
           <stop offset={1} stopColor="#bebebe" />
         </linearGradient>
@@ -253,7 +257,8 @@ export const HTTPErrorSvgOther = ({ className }) => {
           y1={674.64}
           x2={460.59}
           y2={594.04}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#dcdcdc" />
           <stop offset={1} stopColor="#bebebe" />
         </linearGradient>
@@ -266,7 +271,8 @@ export const HTTPErrorSvgOther = ({ className }) => {
       <g
         style={{
           isolation: 'isolate',
-        }}>
+        }}
+      >
         <g id="prefix__Layer_1" data-name="Layer 1">
           <g opacity={0.25}>
             <path

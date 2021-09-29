@@ -147,7 +147,8 @@ storiesOf(getComponentLabel('IdeCreate'), module)
     <IdeCreate
       {...props()}
       pageTitle={'Create an instance of type X and one of type Y'}
-      subTitle="Context: very long subtitle without a link. This subtitle should wrap to improve redability and provide a better user experience.">
+      subTitle="Context: very long subtitle without a link. This subtitle should wrap to improve redability and provide a better user experience."
+    >
       <IdeCreateStep>
         <div>
           *** Render the main form inputs here (scroll page for header collapse)

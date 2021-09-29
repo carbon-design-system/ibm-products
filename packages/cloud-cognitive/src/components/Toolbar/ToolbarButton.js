@@ -24,7 +24,8 @@ export let ToolbarButton = forwardRef(
         className={cx(className, { [`${blockClass}__button--caret`]: caret })}
         kind="ghost"
         size="md"
-        hasIconOnly>
+        hasIconOnly
+      >
         <>
           {children}
 

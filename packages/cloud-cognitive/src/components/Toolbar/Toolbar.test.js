@@ -27,18 +27,19 @@ function _render(props) {
 
 function test(Component) {
   const render = _render.bind(Component);
+  const { displayName } = Component;
 
   it('has no accessibility violations', async () => {
     const { container } = render();
 
-    await expect(container).toBeAccessible(Component.displayName);
+    await expect(container).toBeAccessible(displayName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it('renders children', () => {
     render();
 
-    getByText(Component.displayName);
+    getByText(displayName);
   });
 
   it('adds a class to the containing node', () => {

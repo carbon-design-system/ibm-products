@@ -6,7 +6,7 @@
 //
 
 import React from 'react';
-import { act } from "react-dom/test-utils";
+import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 import { IdeFilter } from '../IdeFilter';
 import { options, untypedOptions } from './__fixtures__/options';

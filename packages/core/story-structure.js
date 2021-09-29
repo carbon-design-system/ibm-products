@@ -19,20 +19,29 @@ const s = [
       {
         n: 'Components',
         s: [
-          { n: 'Cards', s: ['c/ExpressiveCard', 'c/ProductiveCard'] },
-          { n: 'Progressive loading bar', s: ['c/LoadingBar'] },
-          { n: 'Side panel', s: ['c/SidePanel'] },
           { n: 'Tag set', s: ['c/TagSet'] },
-          { n: 'Tearsheet', s: ['c/Tearsheet', 'c/TearsheetNarrow'] },
+          { n: 'Cards', s: ['c/ExpressiveCard', 'c/ProductiveCard'] },
           { n: 'Modified tabs', s: ['c/ModifiedTabs'] },
           { n: 'Page header', s: ['c/PageHeader'] },
+          { n: 'Progressive loading bar', s: ['c/LoadingBar'] },
+          { n: 'Side panel', s: ['c/SidePanel'] },
+          { n: 'Tearsheet', s: ['c/Tearsheet', 'c/TearsheetNarrow'] },
         ],
       },
       {
         n: 'Patterns',
         s: [
           { n: 'About modal', s: ['c/AboutModal'] },
-          { n: 'Generating an API key', s: ['c/APIKeyModal'] },
+          {
+            n: 'Create flows',
+            s: [
+              'c/CreateFullPage',
+              'c/CreateModal',
+              'c/CreateTearsheet',
+              'c/CreateTearsheetNarrow',
+              'c/CreateSidePanel',
+            ],
+          },
           {
             n: 'Empty state',
             s: [
@@ -47,19 +56,10 @@ const s = [
           },
           { n: 'Export', s: ['c/ExportModal'] },
           {
-            n: 'Create flows',
-            s: [
-              'c/CreateFullPage',
-              'c/CreateModal',
-              'c/CreateTearsheet',
-              'c/CreateTearsheetNarrow',
-              'c/CreateSidePanel',
-            ],
-          },
-          {
             n: 'Edit and update flows',
             s: ['c/EditSidePanel'],
           },
+          { n: 'Generating an API key', s: ['c/APIKeyModal'] },
           {
             n: 'HTTP errors',
             s: ['c/HTTPError403', 'c/HTTPError404', 'c/HTTPErrorOther'],

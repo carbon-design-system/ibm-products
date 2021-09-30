@@ -91,7 +91,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
-      "pre-commit": "node update-gallery-config; yarn copy-common-files; lint-staged"
+      "pre-commit": "yarn update-gallery-config; yarn copy-common-files; lint-staged"
     }
   },
   "commitlint": {

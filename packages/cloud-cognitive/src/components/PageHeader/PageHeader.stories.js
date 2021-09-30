@@ -120,7 +120,8 @@ const children = {
           // stylelint-disable-next-line carbon/layout-token-use
           marginRight: '50px',
           maxWidth: '400px',
-        }}>
+        }}
+      >
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor <strong>incididunt ut labore</strong> et dolore magna aliqua. Ut
         enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -409,21 +410,24 @@ const dummyPageContent = (
         sm={1}
         md={2}
         lg={4}
-        className={`${storyClass}__dummy-content-block`}>
+        className={`${storyClass}__dummy-content-block`}
+      >
         <div className={`${storyClass}__dummy-content-text`}>Column #1</div>
       </Column>
       <Column
         sm={1}
         md={2}
         lg={4}
-        className={`${storyClass}__dummy-content-block`}>
+        className={`${storyClass}__dummy-content-block`}
+      >
         <div className={`${storyClass}__dummy-content-text`}>Column #2</div>
       </Column>
       <Column
         sm={2}
         md={4}
         lg={8}
-        className={`${storyClass}__dummy-content-block`}>
+        className={`${storyClass}__dummy-content-block`}
+      >
         <div className={`${storyClass}__dummy-content-text`}>Column #3</div>
       </Column>
     </Row>
@@ -438,7 +442,8 @@ const demoDummyPageContent = (
           sm={4}
           md={8}
           lg={16}
-          className={`${storyClass}__dummy-content-block`}>
+          className={`${storyClass}__dummy-content-block`}
+        >
           <Table>
             <TableHead>
               <TableRow>
@@ -637,7 +642,8 @@ const TemplateDemo = ({ children, storyOptionWholePageScroll, ...props }) => {
           [`${storyClass}__app--whole-page-scroll`]:
             !storyOptionWholePageScroll,
         })}
-        key={storyOptionWholePageScroll ? 'keyYes' : 'keyNo'}>
+        key={storyOptionWholePageScroll ? 'keyYes' : 'keyNo'}
+      >
         <Header aria-label="IBM Platform Name">
           <HeaderName href="#" prefix="IBM">
             Cloud Cognitive application
@@ -648,7 +654,8 @@ const TemplateDemo = ({ children, storyOptionWholePageScroll, ...props }) => {
           style={{
             // stylelint-disable-next-line carbon/layout-token-use
             marginTop: '48px',
-          }}>
+          }}
+        >
           <PageHeader {...props}>{children}</PageHeader>
           {demoDummyPageContent}
         </div>

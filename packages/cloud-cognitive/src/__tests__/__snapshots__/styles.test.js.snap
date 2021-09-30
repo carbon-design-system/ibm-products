@@ -4078,13 +4078,15 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: var(--cds-body-short-01-font-weight, 400);
   line-height: var(--cds-body-short-01-line-height, 1.28572);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
+  display: block;
+  overflow: hidden;
   min-width: initial;
   min-height: initial;
   padding: 0;
   margin: 0;
   background-color: inherit;
   color: inherit;
-  vertical-align: bottom;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 

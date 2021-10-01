@@ -1,20 +1,26 @@
+const defaultOrNot = (item) => item.default || item;
 const config = [
   {
     label: 'React 16 usage',
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/cloud-cognitive/ccs-base-react-16',
     thumbnail:
-      'url( ' + require('./ccs-base-react-16--thumbnail.png').default + ')',
+      'url( ' +
+      defaultOrNot(require('./ccs-base-react-16--thumbnail.png')) +
+      ')',
   },
   {
     label: 'React 17 usage',
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/cloud-cognitive/ccs-base-react-17',
     thumbnail:
-      'url( ' + require('./ccs-base-react-17--thumbnail.png').default + ')',
+      'url( ' +
+      defaultOrNot(require('./ccs-base-react-17--thumbnail.png')) +
+      ')',
   },
   {
     label: 'codesandbox',
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/cloud-cognitive/codesandbox',
-    thumbnail: 'url( ' + require('./codesandbox--thumbnail.png').default + ')',
+    thumbnail:
+      'url( ' + defaultOrNot(require('./codesandbox--thumbnail.png')) + ')',
   },
   {
     label: 'PageHeader example',

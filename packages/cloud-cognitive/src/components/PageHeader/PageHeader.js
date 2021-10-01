@@ -1072,7 +1072,7 @@ PageHeader.propTypes = {
    * The PageHeader is hosted in a Carbon grid, this value is passed through to the Carbon grid fullWidth prop.
    * 'xl' is used to override the grid width setting. Can be used with narrowGrid: true to get the largest size.
    */
-  fullWidthGrid: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf('xl')]),
+  fullWidthGrid: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['xl'])]),
   /**
    * Specifies if the PageHeader should have a background always on and defaults to the preferred `true`.
    * When false some parts of the header gain a background if they stick to the top of the PageHeader on scroll.

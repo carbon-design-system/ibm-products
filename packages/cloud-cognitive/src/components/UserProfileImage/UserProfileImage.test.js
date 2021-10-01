@@ -13,9 +13,7 @@ import { pkg, carbon } from '../../settings';
 
 import { UserProfileImage } from '.';
 
-const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
-
-const blockClass = `${prefix}-user-profile-avatar`;
+const blockClass = `${pkg.prefix}-user-profile-avatar`;
 const dataTestId = uuidv4();
 const kind = 'user';
 const size = 'xlg';
@@ -82,9 +80,8 @@ describe(name, () => {
   it('adds the Devtools attribute to the containing node', () => {
     renderComponent({ 'data-testid': dataTestId });
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(UserProfileImage.displayName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      UserProfileImage.displayName
     );
   });
 

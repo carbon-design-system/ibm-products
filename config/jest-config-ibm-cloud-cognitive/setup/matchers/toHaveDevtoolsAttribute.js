@@ -11,11 +11,11 @@ const { devtoolsAttribute, getDevtoolsId } = pkg;
 
 export default function toHaveDevtoolsAttribute(element, componentName) {
   return {
-    pass:
-      element.getAttribute(devtoolsAttribute) === getDevtoolsId(componentName),
     message: () =>
       `Expected the element to have a devtools attribute ('${devtoolsAttribute}') with the value '${getDevtoolsId(
         componentName
       )}'`,
+    pass:
+      element.getAttribute(devtoolsAttribute) === getDevtoolsId(componentName),
   };
 }

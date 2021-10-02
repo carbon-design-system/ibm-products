@@ -66,7 +66,7 @@ export class IdeCard extends React.Component {
           onInteract(cardId);
         }
       },
-      ['onKeyPress', 'handleClick']
+      ['onKeyPress', 'onClick']
     );
     let tileClasses = className || '';
 

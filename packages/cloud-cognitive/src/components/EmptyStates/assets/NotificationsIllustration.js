@@ -29,7 +29,8 @@ export const NotificationsIllustration = ({ theme, size, ...rest }) => {
       className={cx([
         `${blockClass}__illustration`,
         `${blockClass}__illustration--${size}`,
-      ])}>
+      ])}
+    >
       <defs>
         <linearGradient
           id={`prefix__a_dark_${svgId}`}
@@ -37,7 +38,8 @@ export const NotificationsIllustration = ({ theme, size, ...rest }) => {
           y1={54.31}
           x2={35.5}
           y2={54.31}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#161616" />
           <stop offset={1} stopColor="#262626" />
         </linearGradient>
@@ -47,7 +49,8 @@ export const NotificationsIllustration = ({ theme, size, ...rest }) => {
           y1={-3.97}
           x2={70.69}
           y2={68.92}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#525252" />
           <stop offset={0.52} stopColor="#393939" />
           <stop offset={0.61} stopColor="#393939" />
@@ -59,7 +62,8 @@ export const NotificationsIllustration = ({ theme, size, ...rest }) => {
           y1={69.51}
           x2={38.01}
           y2={-0.42}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#262626" />
           <stop offset={1} stopColor="#393939" />
         </linearGradient>
@@ -69,7 +73,8 @@ export const NotificationsIllustration = ({ theme, size, ...rest }) => {
           y1={5.72}
           x2={63.06}
           y2={33.52}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0.78} stopColor="#6f6f6f" />
           <stop offset={0.81} stopColor="#6c6c6c" stopOpacity={0.96} />
           <stop offset={0.85} stopColor="#636363" stopOpacity={0.84} />
@@ -116,7 +121,8 @@ export const NotificationsIllustration = ({ theme, size, ...rest }) => {
       className={cx([
         `${blockClass}__illustration`,
         `${blockClass}__illustration--${size}`,
-      ])}>
+      ])}
+    >
       <defs>
         <linearGradient
           id={`prefix__a_${svgId}`}
@@ -124,7 +130,8 @@ export const NotificationsIllustration = ({ theme, size, ...rest }) => {
           y1={66.99}
           x2={61.44}
           y2={60.01}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#c6c6c6" />
           <stop offset={0.78} stopColor="#e0e0e0" />
         </linearGradient>
@@ -134,7 +141,8 @@ export const NotificationsIllustration = ({ theme, size, ...rest }) => {
           y1={44.06}
           x2={53.04}
           y2={86.58}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#525252" stopOpacity={0.05} />
           <stop offset={1} stopOpacity={0.1} />
         </linearGradient>
@@ -144,7 +152,8 @@ export const NotificationsIllustration = ({ theme, size, ...rest }) => {
           y1={54.31}
           x2={35.5}
           y2={54.31}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#a4a4a4" />
           <stop offset={1} stopColor="#bebebe" />
         </linearGradient>
@@ -154,7 +163,8 @@ export const NotificationsIllustration = ({ theme, size, ...rest }) => {
           y1={-3.97}
           x2={70.69}
           y2={68.92}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#f4f4f4" />
           <stop offset={0.52} stopColor="#e0e0e0" />
           <stop offset={0.56} stopColor="#d8d8d8" />
@@ -176,7 +186,8 @@ export const NotificationsIllustration = ({ theme, size, ...rest }) => {
           y1={36.2}
           x2={61.39}
           y2={36.2}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#e0e0e0" />
           <stop offset={1} stopColor="#c6c6c6" />
         </linearGradient>
@@ -186,7 +197,8 @@ export const NotificationsIllustration = ({ theme, size, ...rest }) => {
           y1={15.75}
           x2={55.37}
           y2={37.5}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#fff" />
           <stop offset={0.05} stopColor="#fdfdfd" />
           <stop offset={0.3} stopColor="#f6f6f6" />
@@ -214,7 +226,8 @@ export const NotificationsIllustration = ({ theme, size, ...rest }) => {
           y1={5.72}
           x2={63.06}
           y2={33.52}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0.78} stopColor="#fff" />
           <stop offset={0.8} stopColor="#fefefe" stopOpacity={0.98} />
           <stop offset={0.82} stopColor="#fcfcfc" stopOpacity={0.93} />

@@ -29,7 +29,8 @@ export const ModifiedTabLabelWithClose = ({
         onClick={handleClose}
         // onMouseDown={handleMousedown}
         className="modified-tabs__tab-close"
-        type="button">
+        type="button"
+      >
         {unsavedContent ? <CloseFilled16 /> : <Close16 />}
       </button>
       {/* ) : (

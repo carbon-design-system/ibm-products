@@ -73,7 +73,8 @@ const Template = (args) => {
         width: '600px',
         padding: '30px',
         overflow: 'hidden',
-      }}>
+      }}
+    >
       <ModifiedTabs
         {...args}
         tabs={tabs}
@@ -144,7 +145,8 @@ const TemplateWithExternalSavePrompt = (args) => {
         width: '600px',
         padding: '30px',
         overflow: 'hidden',
-      }}>
+      }}
+    >
       <ModifiedTabs
         {...args.props}
         tabs={tabs}
@@ -161,7 +163,8 @@ const TemplateWithExternalSavePrompt = (args) => {
         secondaryButtonText="Cancel"
         onRequestClose={handleCloseRequest}
         onRequestSubmit={handleSubmitRequest}
-        onSecondarySubmit={handleSecondarySubmit}>
+        onSecondarySubmit={handleSecondarySubmit}
+      >
         <RadioButtonGroup defaultSelected="save" name="save-group">
           <RadioButton
             value="do-not-save"

@@ -86,7 +86,8 @@ export let WebTerminal = React.forwardRef(
             open ? 'webTerminalEntrance 250ms' : 'webTerminalExit 250ms'
           }`,
         }}
-        onAnimationEnd={onAnimationEnd}>
+        onAnimationEnd={onAnimationEnd}
+      >
         <header className={`${blockClass}__bar`}>
           <div className={`${blockClass}__actions`}>
             {showDocumentationLinks && (
@@ -96,13 +97,15 @@ export let WebTerminal = React.forwardRef(
                 type="button"
                 iconDescription={documentationLinksIconDescription}
                 renderIcon={Help}
-                className={`${blockClass}__bar-icon-container`}>
+                className={`${blockClass}__bar-icon-container`}
+              >
                 <ul className={`${blockClass}__bar-icon-dropdown`}>
                   {documentationLinks.map(
                     ({ label, onClick, href = null, openInNewTab = true }) => (
                       <li
                         key={label}
-                        className={`${blockClass}__bar-icon-dropdown-item`}>
+                        className={`${blockClass}__bar-icon-dropdown-item`}
+                      >
                         <a
                           className={`${blockClass}__bar-icon-dropdown-link`}
                           onClick={(event) =>
@@ -110,7 +113,8 @@ export let WebTerminal = React.forwardRef(
                           }
                           href={href}
                           target={openInNewTab ? '_blank' : null}
-                          rel="noreferrer noopener">
+                          rel="noreferrer noopener"
+                        >
                           {label}
                         </a>
                       </li>

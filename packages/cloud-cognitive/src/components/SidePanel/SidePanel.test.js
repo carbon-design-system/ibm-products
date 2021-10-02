@@ -39,7 +39,8 @@ const renderSidePanel = ({ ...rest }, children = <p>test</p>) =>
         open: true,
         onRequestClose: onRequestCloseFn,
         ...rest,
-      }}>
+      }}
+    >
       {children}
     </SidePanel>
   );
@@ -71,7 +72,8 @@ const SlideIn = ({
         }
         placement={placement}
         onUnmount={onUnmountFn}
-        {...rest}>
+        {...rest}
+      >
         Content
       </SidePanel>
       <div id={pageContentSelectorValue.slice(1)} />
@@ -210,7 +212,8 @@ describe('SidePanel', () => {
         title={title}
         includeOverlay
         open={false}
-        onRequestClose={onRequestCloseFn}>
+        onRequestClose={onRequestCloseFn}
+      >
         Content
       </SidePanel>
     );
@@ -484,7 +487,8 @@ describe('SidePanel', () => {
           labelText={labelText}
           placement="left"
           open
-          usePageContentSelector>
+          usePageContentSelector
+        >
           Content
         </SlideIn>
       );

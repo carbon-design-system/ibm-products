@@ -29,7 +29,8 @@ export const NoDataIllustration = ({ theme, size, ...rest }) => {
       className={cx([
         `${blockClass}__illustration`,
         `${blockClass}__illustration--${size}`,
-      ])}>
+      ])}
+    >
       <defs>
         <linearGradient
           id={`prefix__a_dark_${svgId}`}
@@ -37,7 +38,8 @@ export const NoDataIllustration = ({ theme, size, ...rest }) => {
           y1={43.34}
           x2={40}
           y2={43.34}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#393939" />
           <stop offset={1} stopColor="#262626" />
         </linearGradient>
@@ -47,7 +49,8 @@ export const NoDataIllustration = ({ theme, size, ...rest }) => {
           y1={43.34}
           x2={68.88}
           y2={43.34}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#161616" />
           <stop offset={1} stopColor="#262626" />
         </linearGradient>
@@ -57,7 +60,8 @@ export const NoDataIllustration = ({ theme, size, ...rest }) => {
           y1={30.83}
           x2={47.22}
           y2={5.83}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#525252" />
           <stop offset={1} stopColor="#393939" />
         </linearGradient>
@@ -99,7 +103,8 @@ export const NoDataIllustration = ({ theme, size, ...rest }) => {
       className={cx([
         `${blockClass}__illustration`,
         `${blockClass}__illustration--${size}`,
-      ])}>
+      ])}
+    >
       <defs>
         <linearGradient
           id={`prefix__a_${svgId}`}
@@ -107,7 +112,8 @@ export const NoDataIllustration = ({ theme, size, ...rest }) => {
           y1={74.17}
           x2={61.65}
           y2={49.17}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#525252" stopOpacity={0.05} />
           <stop offset={1} stopOpacity={0.1} />
         </linearGradient>
@@ -117,7 +123,8 @@ export const NoDataIllustration = ({ theme, size, ...rest }) => {
           y1={43.34}
           x2={40.31}
           y2={43.34}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#e0e0e0" />
           <stop offset={1} stopColor="#c6c6c6" />
         </linearGradient>
@@ -127,7 +134,8 @@ export const NoDataIllustration = ({ theme, size, ...rest }) => {
           y1={43.34}
           x2={68.88}
           y2={43.34}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#a8a8a8" />
           <stop offset={1} stopColor="#c6c6c6" />
         </linearGradient>
@@ -137,7 +145,8 @@ export const NoDataIllustration = ({ theme, size, ...rest }) => {
           y1={30.83}
           x2={61.65}
           y2={5.83}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#f4f4f4" />
           <stop offset={1} stopColor="#e0e0e0" />
         </linearGradient>

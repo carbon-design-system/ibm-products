@@ -44,7 +44,8 @@ const ComboButton = ({ children, className, overflowMenu, ...rest }) => {
     <div
       {...rest}
       className={classnames(blockClass, className)}
-      data-floating-menu-container>
+      data-floating-menu-container
+    >
       <Button {...primaryAction} />
 
       {restActions.length > 0 && (
@@ -59,7 +60,8 @@ const ComboButton = ({ children, className, overflowMenu, ...rest }) => {
               className: `${blockClass}__overflow-menu__icon`,
             })
           }
-          flipped>
+          flipped
+        >
           {restActions.map(
             ({ children, renderIcon: Icon, ...action }, index) => (
               <OverflowMenuItem
@@ -72,7 +74,8 @@ const ComboButton = ({ children, className, overflowMenu, ...rest }) => {
 
                     {Icon && (
                       <span
-                        className={`${blockClass}__overflow-menu__item__icon`}>
+                        className={`${blockClass}__overflow-menu__item__icon`}
+                      >
                         <Icon />
                       </span>
                     )}

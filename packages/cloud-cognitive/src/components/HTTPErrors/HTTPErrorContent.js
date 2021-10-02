@@ -42,7 +42,8 @@ export let HTTPErrorContent = ({
             role="link"
             href={link.href}
             key={link.text}
-            className={`${blockClass}__link`}>
+            className={`${blockClass}__link`}
+          >
             {link.text}
           </Link>
         ))}

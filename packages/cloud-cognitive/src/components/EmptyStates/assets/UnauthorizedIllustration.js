@@ -30,7 +30,8 @@ export const UnauthorizedIllustration = ({ theme, size, ...rest }) => {
       className={cx([
         `${blockClass}__illustration`,
         `${blockClass}__illustration--${size}`,
-      ])}>
+      ])}
+    >
       <defs>
         <linearGradient
           id={`prefix__b_dark_${svgId}`}
@@ -38,7 +39,8 @@ export const UnauthorizedIllustration = ({ theme, size, ...rest }) => {
           y1={40.68}
           x2={53.57}
           y2={19.76}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#525252" />
           <stop offset={1} stopColor="#393939" />
         </linearGradient>
@@ -48,7 +50,8 @@ export const UnauthorizedIllustration = ({ theme, size, ...rest }) => {
           y1={61.49}
           x2={71.41}
           y2={41.74}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#262626" />
           <stop offset={1} stopColor="#393939" />
         </linearGradient>
@@ -66,7 +69,8 @@ export const UnauthorizedIllustration = ({ theme, size, ...rest }) => {
           y1={44.68}
           x2={51.62}
           y2={44.68}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#393939" />
           <stop offset={1} stopColor="#262626" />
         </linearGradient>
@@ -76,7 +80,8 @@ export const UnauthorizedIllustration = ({ theme, size, ...rest }) => {
           y1={45.46}
           x2={38.82}
           y2={41.94}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#262626" />
           <stop offset={1} stopColor="#161616" />
         </linearGradient>
@@ -122,7 +127,8 @@ export const UnauthorizedIllustration = ({ theme, size, ...rest }) => {
       className={cx([
         `${blockClass}__illustration`,
         `${blockClass}__illustration--${size}`,
-      ])}>
+      ])}
+    >
       <defs>
         <linearGradient
           id="prefix__b"
@@ -130,7 +136,8 @@ export const UnauthorizedIllustration = ({ theme, size, ...rest }) => {
           y1={73.72}
           x2={53.65}
           y2={58.9}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#525252" stopOpacity={0.05} />
           <stop offset={1} stopOpacity={0.1} />
         </linearGradient>
@@ -140,7 +147,8 @@ export const UnauthorizedIllustration = ({ theme, size, ...rest }) => {
           y1={40.68}
           x2={53.57}
           y2={19.76}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#f4f4f4" />
           <stop offset={0.78} stopColor="#e0e0e0" />
           <stop offset={1} stopColor="#c6c6c6" />
@@ -151,7 +159,8 @@ export const UnauthorizedIllustration = ({ theme, size, ...rest }) => {
           y1={16.01}
           x2={58.88}
           y2={68.47}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#f4f4f4" />
           <stop offset={0.11} stopColor="#e0e0e0" />
           <stop offset={0.25} stopColor="#d8d8d8" />
@@ -166,7 +175,8 @@ export const UnauthorizedIllustration = ({ theme, size, ...rest }) => {
           y1={50.69}
           x2={61.39}
           y2={50.69}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#a8a8a8" />
           <stop offset={1} stopColor="#c6c6c6" />
         </linearGradient>
@@ -184,7 +194,8 @@ export const UnauthorizedIllustration = ({ theme, size, ...rest }) => {
           y1={44.68}
           x2={51.62}
           y2={44.68}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#e0e0e0" />
           <stop offset={1} stopColor="#c6c6c6" />
         </linearGradient>
@@ -194,7 +205,8 @@ export const UnauthorizedIllustration = ({ theme, size, ...rest }) => {
           y1={45.46}
           x2={38.82}
           y2={41.94}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#a8a8a8" />
           <stop offset={1} stopColor="#8d8d8d" />
         </linearGradient>
@@ -204,7 +216,8 @@ export const UnauthorizedIllustration = ({ theme, size, ...rest }) => {
           y1={20.85}
           x2={52.7}
           y2={39.38}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0.67} stopColor="#fff" />
           <stop offset={0.76} stopColor="#fff" stopOpacity={0.99} />
           <stop offset={0.8} stopColor="#fdfdfd" stopOpacity={0.96} />

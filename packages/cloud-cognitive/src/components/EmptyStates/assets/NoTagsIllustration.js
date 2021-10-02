@@ -30,7 +30,8 @@ export const NoTagsIllustration = ({ theme, size, ...rest }) => {
       className={cx([
         `${blockClass}__illustration`,
         `${blockClass}__illustration--${size}`,
-      ])}>
+      ])}
+    >
       <defs>
         <linearGradient
           id={`prefix__c_dark_${svgId}`}
@@ -38,7 +39,8 @@ export const NoTagsIllustration = ({ theme, size, ...rest }) => {
           y1={5.37}
           x2={48.48}
           y2={28.8}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#525252" />
           <stop offset={1} stopColor="#393939" />
         </linearGradient>
@@ -48,7 +50,8 @@ export const NoTagsIllustration = ({ theme, size, ...rest }) => {
           y1={46.54}
           x2={55.21}
           y2={46.54}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#262626" />
           <stop offset={1} stopColor="#393939" />
         </linearGradient>
@@ -66,7 +69,8 @@ export const NoTagsIllustration = ({ theme, size, ...rest }) => {
           y1={9.54}
           x2={48.15}
           y2={40.79}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0.42} stopColor="#6f6f6f" />
           <stop offset={0.51} stopColor="#6e6e6e" stopOpacity={0.98} />
           <stop offset={0.56} stopColor="#6c6c6c" stopOpacity={0.9} />
@@ -82,7 +86,8 @@ export const NoTagsIllustration = ({ theme, size, ...rest }) => {
           y1={68.32}
           x2={51.34}
           y2={68.35}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0.87} stopColor="#fff" />
           <stop offset={0.89} stopColor="#fefefe" stopOpacity={0.98} />
           <stop offset={0.9} stopColor="#fcfcfc" stopOpacity={0.93} />
@@ -116,7 +121,8 @@ export const NoTagsIllustration = ({ theme, size, ...rest }) => {
           x2={42.79}
           y2={119.46}
           gradientTransform="translate(0 -100)"
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#262626" />
           <stop offset={1} stopColor="#161616" />
         </linearGradient>
@@ -126,7 +132,8 @@ export const NoTagsIllustration = ({ theme, size, ...rest }) => {
           y1={23.46}
           x2={38.85}
           y2={17.31}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#6f6f6f" />
           <stop offset={0.09} stopColor="#6f6f6f" stopOpacity={0.9} />
           <stop offset={0.24} stopColor="#6f6f6f" stopOpacity={0.63} />
@@ -181,7 +188,8 @@ export const NoTagsIllustration = ({ theme, size, ...rest }) => {
       className={cx([
         `${blockClass}__illustration`,
         `${blockClass}__illustration--${size}`,
-      ])}>
+      ])}
+    >
       <defs>
         <linearGradient
           id={`prefix__b_${svgId}`}
@@ -190,7 +198,8 @@ export const NoTagsIllustration = ({ theme, size, ...rest }) => {
           x2={644.85}
           y2={684.56}
           gradientTransform="matrix(.87 .5 -1 .58 161.49 -640.11)"
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#525252" stopOpacity={0.05} />
           <stop offset={1} stopOpacity={0.1} />
         </linearGradient>
@@ -200,7 +209,8 @@ export const NoTagsIllustration = ({ theme, size, ...rest }) => {
           y1={7.75}
           x2={56.14}
           y2={23.3}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#f4f4f4" />
           <stop offset={0.78} stopColor="#e0e0e0" />
           <stop offset={1} stopColor="#c6c6c6" />
@@ -211,7 +221,8 @@ export const NoTagsIllustration = ({ theme, size, ...rest }) => {
           y1={46.54}
           x2={55.21}
           y2={46.54}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#a8a8a8" />
           <stop offset={1} stopColor="#c6c6c6" />
         </linearGradient>
@@ -221,7 +232,8 @@ export const NoTagsIllustration = ({ theme, size, ...rest }) => {
           y1={59.31}
           x2={38.25}
           y2={2.99}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#c6c6c6" />
           <stop offset={0.78} stopColor="#e0e0e0" />
         </linearGradient>
@@ -231,7 +243,8 @@ export const NoTagsIllustration = ({ theme, size, ...rest }) => {
           y1={9.54}
           x2={48.15}
           y2={40.79}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0.42} stopColor="#fff" />
           <stop offset={0.49} stopColor="#fff" stopOpacity={0.99} />
           <stop offset={0.53} stopColor="#fdfdfd" stopOpacity={0.96} />
@@ -250,7 +263,8 @@ export const NoTagsIllustration = ({ theme, size, ...rest }) => {
           y1={68.32}
           x2={51.34}
           y2={68.35}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0.87} stopColor="#fff" />
           <stop offset={0.89} stopColor="#fefefe" stopOpacity={0.98} />
           <stop offset={0.9} stopColor="#fcfcfc" stopOpacity={0.93} />
@@ -283,7 +297,8 @@ export const NoTagsIllustration = ({ theme, size, ...rest }) => {
           y1={19.46}
           x2={42.79}
           y2={19.46}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#a4a4a4" />
           <stop offset={1} stopColor="#8c8c8c" />
         </linearGradient>
@@ -293,7 +308,8 @@ export const NoTagsIllustration = ({ theme, size, ...rest }) => {
           y1={23.46}
           x2={38.85}
           y2={17.31}
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset={0} stopColor="#fff" />
           <stop offset={0.04} stopColor="#fdfdfd" stopOpacity={0.96} />
           <stop offset={0.12} stopColor="#f7f7f7" stopOpacity={0.84} />

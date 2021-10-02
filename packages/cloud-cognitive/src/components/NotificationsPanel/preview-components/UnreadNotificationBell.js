@@ -15,14 +15,16 @@ const UnreadNotificationBell = () => {
       viewBox="0 0 18 19"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
-      xmlnsXlink="http://www.w3.org/1999/xlink">
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+    >
       <title>Unread notification bell</title>
       <g
         id="Page-1"
         stroke="none"
         strokeWidth="1"
         fill="none"
-        fillRule="evenodd">
+        fillRule="evenodd"
+      >
         <g id="Group" transform="translate(-1.000000, 0.000000)">
           <g id="notification">
             <path

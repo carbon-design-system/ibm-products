@@ -128,7 +128,8 @@ const IdeDataTable = ({
     return (
       <TableContainer
         className={`${idePrefix}-data-table ${className}`}
-        {...others}>
+        {...others}
+      >
         {typeof renderToolbar === 'function' && (
           <TableToolbar>
             <TableToolbarContent>{renderToolbar()}</TableToolbarContent>
@@ -183,7 +184,8 @@ const IdeDataTable = ({
                       {...rowProps}
                       {...getClickableRowProps({ row })}
                       {...idAttribute(`table-row-${index}`)}
-                      key={key}>
+                      key={key}
+                    >
                       {expandable && row.disabled && <TableCell />}
                       {selectType != SelectTypes.NONE ? (
                         <TableSelectRow
@@ -206,7 +208,8 @@ const IdeDataTable = ({
                     {row.isExpanded && (
                       <TableExpandedRow
                         colSpan={headers.length + 1}
-                        key={`${key}-expanded`}>
+                        key={`${key}-expanded`}
+                      >
                         {renderExpandedRow(row)}
                       </TableExpandedRow>
                     )}

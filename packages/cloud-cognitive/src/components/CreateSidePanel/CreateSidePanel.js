@@ -96,13 +96,16 @@ export let CreateSidePanel = React.forwardRef(
           slideIn
           animateTitle={false}
           className={cx(blockClass, className)}
-          size="md">
+          size="md"
+        >
           <h3
-            className={`${blockClass}__form-title-text ${blockClass}__content-text`}>
+            className={`${blockClass}__form-title-text ${blockClass}__content-text`}
+          >
             {formTitle}
           </h3>
           <p
-            className={`${blockClass}__form-description-text ${blockClass}__content-text`}>
+            className={`${blockClass}__form-description-text ${blockClass}__content-text`}
+          >
             {formDescription}
           </p>
           <Form className={`${blockClass}__form`}>

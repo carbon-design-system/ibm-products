@@ -107,7 +107,8 @@ export let UserProfileImage = React.forwardRef(
           `${blockClass}--${theme}`,
           `${blockClass}--${backgroundColor}`,
         ])}
-        {...getDevtoolsProps(componentName)}>
+        {...getDevtoolsProps(componentName)}
+      >
         <FillItem />
       </div>
     );

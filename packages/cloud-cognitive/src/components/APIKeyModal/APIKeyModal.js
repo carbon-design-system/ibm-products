@@ -205,7 +205,8 @@ export let APIKeyModal = forwardRef(
         onClose={onCloseHandler}
         size="sm"
         aria-label={modalLabel}
-        preventCloseOnClickOutside>
+        preventCloseOnClickOutside
+      >
         <ModalHeader
           className={`${blockClass}__header`}
           title={getTitle()}
@@ -295,7 +296,8 @@ export let APIKeyModal = forwardRef(
             type="submit"
             kind="primary"
             onClick={submitHandler}
-            disabled={isPrimaryButtonDisabled()}>
+            disabled={isPrimaryButtonDisabled()}
+          >
             {getPrimaryButtonText()}
           </Button>
         </ModalFooter>

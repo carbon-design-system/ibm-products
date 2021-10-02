@@ -61,7 +61,8 @@ export default class IdeNavigation extends React.Component {
       <div
         {...idAttribute('IdeNavigation')}
         className={`${className} ${idePrefix}-navigation`}
-        {...others}>
+        {...others}
+      >
         <SideNav
           {...idAttribute('IdeNavigation--left-nav')}
           {...ariaAttributes}
@@ -69,9 +70,11 @@ export default class IdeNavigation extends React.Component {
           isRail
           expanded={toggleState}
           addFocusListeners={false}
-          addMouseListeners={false}>
+          addMouseListeners={false}
+        >
           <SideNavItems
-            {...idAttribute('IdeNavigation--left-nav-item-container')}>
+            {...idAttribute('IdeNavigation--left-nav-item-container')}
+          >
             {navigationLinks}
           </SideNavItems>
           <SideNavFooter
@@ -84,7 +87,8 @@ export default class IdeNavigation extends React.Component {
         </SideNav>
         <Content
           {...idAttribute('IdeNavigation--content')}
-          className={contentClasses}>
+          className={contentClasses}
+        >
           {children}
         </Content>
       </div>

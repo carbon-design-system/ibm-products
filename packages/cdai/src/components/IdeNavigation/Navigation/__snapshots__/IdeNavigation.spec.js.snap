@@ -6,7 +6,7 @@ Array [
     className=" ide-navigation"
     data-ui-id="IdeNavigation"
   >
-    <ForwardRef(SideNav)
+    <SideNav
       addFocusListeners={false}
       addMouseListeners={false}
       aria-label="sample aria label to describe the nav"
@@ -26,21 +26,21 @@ Array [
         <IdeSideNavMenu
           title="Sample menu"
         >
-          <ForwardRef(SideNavMenuItem)
+          <SideNavMenuItem
             href="javascript:void(0)"
           >
             Menu item one
-          </ForwardRef(SideNavMenuItem)>
-          <ForwardRef(SideNavMenuItem)
+          </SideNavMenuItem>
+          <SideNavMenuItem
             href="javascript:void(0)"
           >
             Menu item two
-          </ForwardRef(SideNavMenuItem)>
-          <ForwardRef(SideNavMenuItem)
+          </SideNavMenuItem>
+          <SideNavMenuItem
             href="javascript:void(0)"
           >
             Menu item three
-          </ForwardRef(SideNavMenuItem)>
+          </SideNavMenuItem>
         </IdeSideNavMenu>
         <IdeSideNavMenu
           renderIcon={
@@ -51,21 +51,21 @@ Array [
           }
           title="Sample menu with icon"
         >
-          <ForwardRef(SideNavMenuItem)
+          <SideNavMenuItem
             href="javascript:void(0)"
           >
             Menu item one
-          </ForwardRef(SideNavMenuItem)>
-          <ForwardRef(SideNavMenuItem)
+          </SideNavMenuItem>
+          <SideNavMenuItem
             href="javascript:void(0)"
           >
             Menu item two
-          </ForwardRef(SideNavMenuItem)>
-          <ForwardRef(SideNavMenuItem)
+          </SideNavMenuItem>
+          <SideNavMenuItem
             href="javascript:void(0)"
           >
             Menu item three
-          </ForwardRef(SideNavMenuItem)>
+          </SideNavMenuItem>
         </IdeSideNavMenu>
         <IdeSideNavLink
           href="javascript:void()"
@@ -91,7 +91,7 @@ Array [
         expanded={false}
         onToggle={[Function]}
       />
-    </ForwardRef(SideNav)>
+    </SideNav>
     <Content
       className="ide-navigation--content  "
       data-ui-id="IdeNavigation--content"
@@ -107,7 +107,7 @@ Array [
     className=" ide-navigation"
     data-ui-id="IdeNavigation"
   >
-    <ForwardRef(SideNav)
+    <SideNav
       addFocusListeners={false}
       addMouseListeners={false}
       aria-label="Example Aria Labeled"
@@ -131,7 +131,7 @@ Array [
         expanded={false}
         onToggle={[Function]}
       />
-    </ForwardRef(SideNav)>
+    </SideNav>
     <Content
       className="ide-navigation--content  "
       data-ui-id="IdeNavigation--content"

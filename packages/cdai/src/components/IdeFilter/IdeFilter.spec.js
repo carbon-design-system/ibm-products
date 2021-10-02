@@ -6,6 +6,7 @@
 //
 
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 import { IdeFilter } from '../IdeFilter';
 import { options, untypedOptions } from './__fixtures__/options';
@@ -76,7 +77,7 @@ describe('IdeFilter', () => {
     const wrapper = mount(
       <IdeFilter options={options} menuIsOpen onChange={changeSpy} />
     );
-    wrapper.find('.ide-filter__option').at(0).props().onClick();
+    act(() => wrapper.find('.ide-filter__option').at(0).props().onClick());
     expect(changeSpy).toHaveBeenCalledWith([options[0].options[0]], {
       action: 'select-option',
       name: undefined,
@@ -116,14 +117,14 @@ describe('IdeFilter', () => {
     expect(wrapper.find('.ide-filter__option').at(0).text()).toEqual(
       'Search for "something"'
     );
-    wrapper.find('.ide-filter__option').at(0).props().onClick();
+    act(() => wrapper.find('.ide-filter__option').at(0).props().onClick());
     const expectedOption = {
-      label: 'Search for "something"',
+      label: 'something',
       value: 'something',
       __plaintext__: true,
     };
     expect(changeSpy).toHaveBeenCalledWith([expectedOption], {
-      action: 'select-option',
+      action: 'create-option',
       name: undefined,
       option: expectedOption,
     });

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.90.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.89.0...@carbon/ibm-cloud-cognitive@0.90.0) (2021-10-06)
+
+
+### Features
+
+* adds actions prop to web terminal ([#1279](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1279)) ([416cb9a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/416cb9ad1e4ead91508d4b288bb98c0202d3e019))
+
+
+
+
+
 # [0.89.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.88.1...@carbon/ibm-cloud-cognitive@0.89.0) (2021-10-02)
 
 

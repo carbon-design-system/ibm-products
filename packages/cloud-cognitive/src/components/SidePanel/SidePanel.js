@@ -198,11 +198,11 @@ export let SidePanel = React.forwardRef(
         // because there is not enough scrolling distance to complete it).
         sidePanelSubtitleElementHeight =
           totalScrollingContentHeight - panelOuterHeight <
-            sidePanelSubtitleElementHeight
+          sidePanelSubtitleElementHeight
             ? totalScrollingContentHeight - panelOuterHeight
             : sidePanelSubtitleElementHeight === 0
-              ? 16
-              : sidePanelSubtitleElementHeight;
+            ? 16
+            : sidePanelSubtitleElementHeight;
         sidePanelSubtitleElementHeight =
           sidePanelSubtitleElementHeight < 0
             ? sidePanelScrollArea?.scrollHeight -

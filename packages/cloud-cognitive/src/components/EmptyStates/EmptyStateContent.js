@@ -26,13 +26,15 @@ export const EmptyStateContent = ({ action, link, size, subtitle, title }) => {
       <h3
         className={cx(`${blockClass}__header`, {
           [`${blockClass}__header--small`]: size === 'sm',
-        })}>
+        })}
+      >
         {title}
       </h3>
       <p
         className={cx(`${blockClass}__subtitle`, {
           [`${blockClass}__subtitle--small`]: size === 'sm',
-        })}>
+        })}
+      >
         {subtitle}
       </p>
       {action?.text && action?.onClick && (
@@ -41,7 +43,8 @@ export const EmptyStateContent = ({ action, link, size, subtitle, title }) => {
           className={`${blockClass}__action-button`}
           kind={action.kind || 'tertiary'}
           onClick={action.onClick}
-          renderIcon={action.renderIcon || null}>
+          renderIcon={action.renderIcon || null}
+        >
           {action.text}
         </Button>
       )}

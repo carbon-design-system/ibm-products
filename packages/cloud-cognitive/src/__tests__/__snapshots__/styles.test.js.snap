@@ -1,7 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CSS export checks doesn't change the exported CSS for released components 1`] = `
-".exp--about-modal .bx--modal-container {
+"/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+.exp--about-modal .bx--modal-container {
   grid-template-rows: auto auto 1fr auto;
 }
 
@@ -18,7 +37,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--about-modal .exp--about-modal__title {
   font-size: var(--cds-productive-heading-04-font-size, 1.75rem);
   font-weight: var(--cds-productive-heading-04-font-weight, 400);
-  line-height: var(--cds-productive-heading-04-line-height, 1.29);
+  line-height: var(--cds-productive-heading-04-line-height, 1.28572);
   letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0);
   color: var(--cds-text-01, #161616);
 }
@@ -84,7 +103,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--about-modal .exp--about-modal__version-number {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
-  line-height: var(--cds-body-short-01-line-height, 1.29);
+  line-height: var(--cds-body-short-01-line-height, 1.28572);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
   padding-left: var(--cds-spacing-05, 1rem);
   margin-top: 0;
@@ -96,6 +115,38 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: 600;
 }
 
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -142,6 +193,22 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 .exp--apikey-modal .bx--modal-close {
   display: none;
 }
@@ -170,7 +237,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-left: var(--cds-spacing-03, 0.5rem);
   font-size: var(--cds-label-01-font-size, 0.75rem);
   font-weight: var(--cds-label-01-font-weight, 400);
-  line-height: var(--cds-label-01-line-height, 1.34);
+  line-height: var(--cds-label-01-line-height, 1.33333);
   letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
 }
 
@@ -182,6 +249,22 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   fill: var(--cds-danger-01, #da1e28);
 }
 
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -231,12 +314,13 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--action-set {
   align-items: stretch;
   justify-content: flex-end;
+  background-color: var(--cds-ui-01, #f4f4f4);
 }
 
 .exp--action-set .exp--action-set__action-button {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
-  line-height: var(--cds-body-short-01-line-height, 1.29);
+  line-height: var(--cds-body-short-01-line-height, 1.28572);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
   height: var(--cds-spacing-10, 4rem);
   align-items: center;
@@ -307,6 +391,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   width: var(--cds-spacing-07, 2rem);
 }
 
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 @keyframes fade {
   0% {
     opacity: 0;
@@ -367,6 +455,38 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   animation-delay: 480ms;
 }
 
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 .exp--create-modal {
   background-color: var(--cds-ui-background, #ffffff);
 }
@@ -409,7 +529,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--create-modal__subtitle {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
-  line-height: var(--cds-body-short-01-line-height, 1.29);
+  line-height: var(--cds-body-short-01-line-height, 1.28572);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
   margin-bottom: var(--cds-spacing-03, 0.5rem);
   color: var(--cds-text-02, #525252);
@@ -418,7 +538,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--create-modal__description {
   font-size: var(--cds-body-long-01-font-size, 0.875rem);
   font-weight: var(--cds-body-long-01-font-weight, 400);
-  line-height: var(--cds-body-long-01-line-height, 1.43);
+  line-height: var(--cds-body-long-01-line-height, 1.42857);
   letter-spacing: var(--cds-body-long-01-letter-spacing, 0.16px);
   padding-right: calc(20% - var(--cds-spacing-05, 1rem));
   margin: var(--cds-spacing-03, 0.5rem) 0 var(--cds-spacing-05, 1rem) 0;
@@ -437,6 +557,97 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-bottom: 0;
 }
 
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 @keyframes influencerMenuEntrance {
   0% {
     opacity: 0;
@@ -506,6 +717,22 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -552,6 +779,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 
+.exp--create-full-page .exp--create-full-page {
+  color: var(--cds-text-01, #161616);
+}
+
 .exp--create-full-page .exp--create-full-page__content .bx--grid {
   padding-top: var(--cds-spacing-06, 1.5rem);
   margin-right: 0;
@@ -575,7 +806,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--create-full-page .exp--create-full-page__step-subtitle {
   font-size: var(--cds-productive-heading-01-font-size, 0.875rem);
   font-weight: var(--cds-productive-heading-01-font-weight, 600);
-  line-height: var(--cds-productive-heading-01-line-height, 1.29);
+  line-height: var(--cds-productive-heading-01-line-height, 1.28572);
   letter-spacing: var(--cds-productive-heading-01-letter-spacing, 0.16px);
   max-width: 50%;
   margin-bottom: var(--cds-spacing-03, 0.5rem);
@@ -585,7 +816,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--create-full-page .exp--create-full-page__step-description {
   font-size: var(--cds-body-long-01-font-size, 0.875rem);
   font-weight: var(--cds-body-long-01-font-weight, 400);
-  line-height: var(--cds-body-long-01-line-height, 1.43);
+  line-height: var(--cds-body-long-01-line-height, 1.42857);
   letter-spacing: var(--cds-body-long-01-letter-spacing, 0.16px);
   max-width: 50%;
   margin-bottom: var(--cds-spacing-06, 1.5rem);
@@ -674,7 +905,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--create-full-page .exp--create-full-page__section-title {
   font-size: var(--cds-productive-heading-04-font-size, 1.75rem);
   font-weight: var(--cds-productive-heading-04-font-weight, 400);
-  line-height: var(--cds-productive-heading-04-line-height, 1.29);
+  line-height: var(--cds-productive-heading-04-line-height, 1.28572);
   letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0);
   max-width: 50%;
   margin-bottom: var(--cds-spacing-05, 1rem);
@@ -703,6 +934,43 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   border-top: 1px solid var(--cds-ui-03, #e0e0e0);
 }
 
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -756,7 +1024,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
   100% {
     opacity: 0;
-    transform: translateX(-30rem);
+    transform: translateX(calc(-1 * 30rem));
   }
 }
 
@@ -785,8 +1053,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   position: fixed;
   z-index: 3;
   top: var(--cds-spacing-09, 3rem);
-  min-width: 30rem;
-  max-width: 30rem;
   height: calc(100% - 3rem);
   box-sizing: border-box;
   background-color: var(--cds-ui-01, #f4f4f4);
@@ -795,14 +1061,24 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
 }
 
-.exp--side-panel__container.exp--side-panel__container-right-placement {
-  right: 0;
-  border-left: 1px solid var(--cds-decorative-01, #e0e0e0);
-}
-
-.exp--side-panel__container.exp--side-panel__container-right-placement.exp--side-panel__container--extra-small {
+.exp--side-panel__container.exp--side-panel__container--xs {
   min-width: 16rem;
   max-width: 16rem;
+}
+
+.exp--side-panel__container.exp--side-panel__container--xs .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation,
+.exp--side-panel__container.exp--side-panel__container--xs .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation,
+.exp--side-panel__container.exp--side-panel__container--xs .exp--side-panel__action-toolbar.exp--side-panel__action-toolbar-no-animation,
+.exp--side-panel__container.exp--side-panel__container--xs .exp--side-panel__actions-container.exp--action-set--xs {
+  min-width: 16rem;
+  max-width: 16rem;
+}
+
+.exp--side-panel__container.exp--side-panel__container-right-placement.exp--side-panel__container--xs {
+  min-width: 16rem;
+  max-width: 16rem;
+  right: 0;
+  border-left: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
 
 @keyframes sidePanelEntranceRight {
@@ -816,78 +1092,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 
-.exp--side-panel__container.exp--side-panel__container-right-placement.exp--side-panel__container--small {
-  min-width: 20rem;
-  max-width: 20rem;
-}
-
-@keyframes sidePanelEntranceRight {
-  0% {
-    opacity: 0;
-    transform: translateX(20rem);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.exp--side-panel__container.exp--side-panel__container-right-placement.exp--side-panel__container--medium {
-  min-width: 30rem;
-  max-width: 30rem;
-}
-
-@keyframes sidePanelEntranceRight {
-  0% {
-    opacity: 0;
-    transform: translateX(30rem);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.exp--side-panel__container.exp--side-panel__container-right-placement.exp--side-panel__container--large {
-  min-width: 40rem;
-  max-width: 40rem;
-}
-
-@keyframes sidePanelEntranceRight {
-  0% {
-    opacity: 0;
-    transform: translateX(40rem);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.exp--side-panel__container.exp--side-panel__container-right-placement.exp--side-panel__container--max {
-  min-width: 75%;
-  max-width: 75%;
-}
-
-@keyframes sidePanelEntranceRight {
-  0% {
-    opacity: 0;
-    transform: translateX(75%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.exp--side-panel__container.exp--side-panel__container-left-placement {
-  left: 0;
-  border-right: 1px solid var(--cds-decorative-01, #e0e0e0);
-}
-
-.exp--side-panel__container.exp--side-panel__container-left-placement.exp--side-panel__container--extra-small {
+.exp--side-panel__container.exp--side-panel__container-left-placement.exp--side-panel__container--xs {
   min-width: 16rem;
   max-width: 16rem;
+  left: 0;
+  border-right: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
 
 @keyframes sidePanelEntranceLeft {
@@ -901,9 +1110,42 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 
-.exp--side-panel__container.exp--side-panel__container-left-placement.exp--side-panel__container--small {
+.exp--side-panel__container.exp--side-panel__container--sm {
   min-width: 20rem;
   max-width: 20rem;
+}
+
+.exp--side-panel__container.exp--side-panel__container--sm .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation,
+.exp--side-panel__container.exp--side-panel__container--sm .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation,
+.exp--side-panel__container.exp--side-panel__container--sm .exp--side-panel__action-toolbar.exp--side-panel__action-toolbar-no-animation,
+.exp--side-panel__container.exp--side-panel__container--sm .exp--side-panel__actions-container.exp--action-set--sm {
+  min-width: 20rem;
+  max-width: 20rem;
+}
+
+.exp--side-panel__container.exp--side-panel__container-right-placement.exp--side-panel__container--sm {
+  min-width: 20rem;
+  max-width: 20rem;
+  right: 0;
+  border-left: 1px solid var(--cds-decorative-01, #e0e0e0);
+}
+
+@keyframes sidePanelEntranceRight {
+  0% {
+    opacity: 0;
+    transform: translateX(20rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.exp--side-panel__container.exp--side-panel__container-left-placement.exp--side-panel__container--sm {
+  min-width: 20rem;
+  max-width: 20rem;
+  left: 0;
+  border-right: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
 
 @keyframes sidePanelEntranceLeft {
@@ -917,9 +1159,42 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 
-.exp--side-panel__container.exp--side-panel__container-left-placement.exp--side-panel__container--medium {
+.exp--side-panel__container.exp--side-panel__container--md {
   min-width: 30rem;
   max-width: 30rem;
+}
+
+.exp--side-panel__container.exp--side-panel__container--md .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation,
+.exp--side-panel__container.exp--side-panel__container--md .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation,
+.exp--side-panel__container.exp--side-panel__container--md .exp--side-panel__action-toolbar.exp--side-panel__action-toolbar-no-animation,
+.exp--side-panel__container.exp--side-panel__container--md .exp--side-panel__actions-container.exp--action-set--md {
+  min-width: 30rem;
+  max-width: 30rem;
+}
+
+.exp--side-panel__container.exp--side-panel__container-right-placement.exp--side-panel__container--md {
+  min-width: 30rem;
+  max-width: 30rem;
+  right: 0;
+  border-left: 1px solid var(--cds-decorative-01, #e0e0e0);
+}
+
+@keyframes sidePanelEntranceRight {
+  0% {
+    opacity: 0;
+    transform: translateX(30rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.exp--side-panel__container.exp--side-panel__container-left-placement.exp--side-panel__container--md {
+  min-width: 30rem;
+  max-width: 30rem;
+  left: 0;
+  border-right: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
 
 @keyframes sidePanelEntranceLeft {
@@ -933,9 +1208,42 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 
-.exp--side-panel__container.exp--side-panel__container-left-placement.exp--side-panel__container--large {
+.exp--side-panel__container.exp--side-panel__container--lg {
   min-width: 40rem;
   max-width: 40rem;
+}
+
+.exp--side-panel__container.exp--side-panel__container--lg .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation,
+.exp--side-panel__container.exp--side-panel__container--lg .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation,
+.exp--side-panel__container.exp--side-panel__container--lg .exp--side-panel__action-toolbar.exp--side-panel__action-toolbar-no-animation,
+.exp--side-panel__container.exp--side-panel__container--lg .exp--side-panel__actions-container.exp--action-set--lg {
+  min-width: 40rem;
+  max-width: 40rem;
+}
+
+.exp--side-panel__container.exp--side-panel__container-right-placement.exp--side-panel__container--lg {
+  min-width: 40rem;
+  max-width: 40rem;
+  right: 0;
+  border-left: 1px solid var(--cds-decorative-01, #e0e0e0);
+}
+
+@keyframes sidePanelEntranceRight {
+  0% {
+    opacity: 0;
+    transform: translateX(40rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.exp--side-panel__container.exp--side-panel__container-left-placement.exp--side-panel__container--lg {
+  min-width: 40rem;
+  max-width: 40rem;
+  left: 0;
+  border-right: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
 
 @keyframes sidePanelEntranceLeft {
@@ -949,9 +1257,42 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 
+.exp--side-panel__container.exp--side-panel__container--max {
+  min-width: 75%;
+  max-width: 75%;
+}
+
+.exp--side-panel__container.exp--side-panel__container--max .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation,
+.exp--side-panel__container.exp--side-panel__container--max .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation,
+.exp--side-panel__container.exp--side-panel__container--max .exp--side-panel__action-toolbar.exp--side-panel__action-toolbar-no-animation,
+.exp--side-panel__container.exp--side-panel__container--max .exp--side-panel__actions-container.exp--action-set--max {
+  min-width: 75%;
+  max-width: 75%;
+}
+
+.exp--side-panel__container.exp--side-panel__container-right-placement.exp--side-panel__container--max {
+  min-width: 75%;
+  max-width: 75%;
+  right: 0;
+  border-left: 1px solid var(--cds-decorative-01, #e0e0e0);
+}
+
+@keyframes sidePanelEntranceRight {
+  0% {
+    opacity: 0;
+    transform: translateX(75%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .exp--side-panel__container.exp--side-panel__container-left-placement.exp--side-panel__container--max {
   min-width: 75%;
   max-width: 75%;
+  left: 0;
+  border-right: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
 
 @keyframes sidePanelEntranceLeft {
@@ -1044,7 +1385,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   letter-spacing: var(--cds-productive-heading-03-letter-spacing, 0);
   display: -webkit-box;
   overflow: hidden;
-  padding-right: var(--cds-spacing-07, 2rem);
+  padding-right: var(--cds-spacing-09, 3rem);
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   position: inherit;
@@ -1057,7 +1398,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--side-panel__container .exp--side-panel__label-text {
   font-size: var(--cds-label-01-font-size, 0.75rem);
   font-weight: var(--cds-label-01-font-weight, 400);
-  line-height: var(--cds-label-01-line-height, 1.34);
+  line-height: var(--cds-label-01-line-height, 1.33333);
   letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
   overflow: hidden;
   padding-right: var(--cds-spacing-05, 1rem);
@@ -1074,7 +1415,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   letter-spacing: var(--cds-productive-heading-02-letter-spacing, 0);
   display: -webkit-box;
   overflow: hidden;
-  padding-right: var(--cds-spacing-07, 2rem);
+  padding-right: var(--cds-spacing-09, 3rem);
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   position: absolute;
@@ -1086,18 +1427,16 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--side-panel__container .exp--side-panel__subtitle-text {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
-  line-height: var(--cds-body-short-01-line-height, 1.29);
+  line-height: var(--cds-body-short-01-line-height, 1.28572);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
   overflow: hidden;
-  padding: 0 var(--cds-spacing-05, 1rem) var(--cds-spacing-05, 1rem) var(--cds-spacing-05, 1rem);
+  padding: 0 var(--cds-spacing-09, 3rem) var(--cds-spacing-05, 1rem) var(--cds-spacing-05, 1rem);
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   opacity: var(--exp--side-panel--subtitle-opacity);
 }
 
 .exp--side-panel__container .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation {
-  min-width: 30rem;
-  max-width: 30rem;
   position: fixed;
   z-index: 2;
   top: calc(var(--exp--side-panel--title-text-height) + var(--cds-spacing-09, 3rem));
@@ -1110,7 +1449,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .exp--side-panel__container .exp--side-panel__subtitle-text.exp--side-panel__subtitle-without-title {
   padding-top: var(--cds-spacing-05, 1rem);
-  padding-right: var(--cds-spacing-07, 2rem);
+  padding-right: var(--cds-spacing-09, 3rem);
 }
 
 .exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation.exp--side-panel__title-container-is-animating {
@@ -1118,8 +1457,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation {
-  min-width: 30rem;
-  max-width: 30rem;
   position: fixed;
   top: var(--cds-spacing-09, 3rem);
   height: var(--exp--side-panel--title-text-height);
@@ -1142,8 +1479,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .exp--side-panel__container .exp--side-panel__action-toolbar.exp--side-panel__action-toolbar-no-animation {
-  min-width: 30rem;
-  max-width: 30rem;
   position: fixed;
   top: calc( var(--exp--side-panel--title-text-height) + var(--exp--side-panel--subtitle-container-height) + var(--cds-spacing-09, 3rem));
   width: 100%;
@@ -1226,6 +1561,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   padding-top: 0;
 }
 
+.exp--side-panel__container.exp--side-panel__container-is-animating .exp--side-panel__actions-container.exp--action-set--max {
+  min-width: 100%;
+  max-width: 100%;
+}
+
 .exp--side-panel__container .exp--side-panel__actions-container {
   position: fixed;
   bottom: 0;
@@ -1233,29 +1573,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   background-color: var(--cds-ui-01, #f4f4f4);
 }
 
-.exp--side-panel__container .exp--side-panel__actions-container.exp--action-set--xs {
-  min-width: 16rem;
-  max-width: 16rem;
-}
-
-.exp--side-panel__container .exp--side-panel__actions-container.exp--action-set--sm {
-  min-width: 20rem;
-  max-width: 20rem;
-}
-
-.exp--side-panel__container .exp--side-panel__actions-container.exp--action-set--md {
-  min-width: 30rem;
-  max-width: 30rem;
-}
-
-.exp--side-panel__container .exp--side-panel__actions-container.exp--action-set--lg {
-  min-width: 40rem;
-  max-width: 40rem;
-}
-
 .exp--side-panel__container .exp--side-panel__actions-container.exp--action-set--max {
-  min-width: 75%;
-  max-width: 75%;
   flex-direction: column;
 }
 
@@ -1342,14 +1660,14 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   padding-right: calc(20% - var(--cds-spacing-05, 1rem));
 }
 
-.exp--create-side-panel.exp--side-panel__container--extra-small
+.exp--create-side-panel.exp--side-panel__container--xs
 .exp--side-panel__title-text {
   width: calc(16rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((16rem * 0.2) - var(--cds-spacing-05, 1rem));
   margin-bottom: var(--cds-spacing-02, 0.25rem);
 }
 
-.exp--create-side-panel.exp--side-panel__container--extra-small
+.exp--create-side-panel.exp--side-panel__container--xs
 .exp--side-panel__subtitle-text {
   width: calc(16rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((16rem * 0.2) - var(--cds-spacing-05, 1rem));
@@ -1358,14 +1676,14 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   color: var(--cds-text-02, #525252);
 }
 
-.exp--create-side-panel.exp--side-panel__container--small
+.exp--create-side-panel.exp--side-panel__container--sm
 .exp--side-panel__title-text {
   width: calc(20rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((20rem * 0.2) - var(--cds-spacing-05, 1rem));
   margin-bottom: var(--cds-spacing-02, 0.25rem);
 }
 
-.exp--create-side-panel.exp--side-panel__container--small
+.exp--create-side-panel.exp--side-panel__container--sm
 .exp--side-panel__subtitle-text {
   width: calc(20rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((20rem * 0.2) - var(--cds-spacing-05, 1rem));
@@ -1374,14 +1692,14 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   color: var(--cds-text-02, #525252);
 }
 
-.exp--create-side-panel.exp--side-panel__container--medium
+.exp--create-side-panel.exp--side-panel__container--md
 .exp--side-panel__title-text {
   width: calc(30rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((30rem * 0.2) - var(--cds-spacing-05, 1rem));
   margin-bottom: var(--cds-spacing-02, 0.25rem);
 }
 
-.exp--create-side-panel.exp--side-panel__container--medium
+.exp--create-side-panel.exp--side-panel__container--md
 .exp--side-panel__subtitle-text {
   width: calc(30rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((30rem * 0.2) - var(--cds-spacing-05, 1rem));
@@ -1390,14 +1708,14 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   color: var(--cds-text-02, #525252);
 }
 
-.exp--create-side-panel.exp--side-panel__container--large
+.exp--create-side-panel.exp--side-panel__container--lg
 .exp--side-panel__title-text {
   width: calc(40rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((40rem * 0.2) - var(--cds-spacing-05, 1rem));
   margin-bottom: var(--cds-spacing-02, 0.25rem);
 }
 
-.exp--create-side-panel.exp--side-panel__container--large
+.exp--create-side-panel.exp--side-panel__container--lg
 .exp--side-panel__subtitle-text {
   width: calc(40rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((40rem * 0.2) - var(--cds-spacing-05, 1rem));
@@ -1445,7 +1763,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--create-side-panel__form-description-text {
   font-size: var(--cds-body-long-01-font-size, 0.875rem);
   font-weight: var(--cds-body-long-01-font-weight, 400);
-  line-height: var(--cds-body-long-01-line-height, 1.43);
+  line-height: var(--cds-body-long-01-line-height, 1.42857);
   letter-spacing: var(--cds-body-long-01-letter-spacing, 0.16px);
 }
 
@@ -1465,12 +1783,58 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--create-side-panel__subtitle {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
-  line-height: var(--cds-body-short-01-line-height, 1.29);
+  line-height: var(--cds-body-short-01-line-height, 1.28572);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
   margin-bottom: var(--cds-spacing-03, 0.5rem);
   color: var(--cds-text-02, #525252);
 }
 
+.exp--create-side-panel__actions-container {
+  position: absolute;
+  z-index: 4;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -1520,6 +1884,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--tearsheet.exp--tearsheet {
   z-index: 9001;
   align-items: flex-end;
+  color: var(--cds-text-01, #161616);
   transition: visibility 0s linear 240ms, background-color 240ms cubic-bezier(0.4, 0.14, 1, 1), opacity 240ms cubic-bezier(0.4, 0.14, 1, 1);
   --exp--tearsheet--stacking-scale-factor-single: 0.95;
   --exp--tearsheet--stacking-scale-factor-double: 0.9;
@@ -1649,7 +2014,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--tearsheet.exp--tearsheet--wide .bx--modal-header__heading {
   font-size: var(--cds-productive-heading-04-font-size, 1.75rem);
   font-weight: var(--cds-productive-heading-04-font-weight, 400);
-  line-height: var(--cds-productive-heading-04-line-height, 1.29);
+  line-height: var(--cds-productive-heading-04-line-height, 1.28572);
   letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0);
 }
 
@@ -1660,7 +2025,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-top: var(--cds-spacing-05, 1rem);
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
-  line-height: var(--cds-body-short-01-line-height, 1.29);
+  line-height: var(--cds-body-short-01-line-height, 1.28572);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -1812,10 +2177,82 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--create-tearsheet-narrow .exp--create-tearsheet-narrow__form-description-text {
   font-size: var(--cds-body-long-01-font-size, 0.875rem);
   font-weight: var(--cds-body-long-01-font-weight, 400);
-  line-height: var(--cds-body-long-01-line-height, 1.43);
+  line-height: var(--cds-body-long-01-line-height, 1.42857);
   letter-spacing: var(--cds-body-long-01-letter-spacing, 0.16px);
 }
 
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -1862,6 +2299,31 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 @keyframes stepContentEntrance {
   0% {
     opacity: 0;
@@ -1944,7 +2406,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--tearsheet-create .exp--tearsheet-create__step--subtitle {
   font-size: var(--cds-productive-heading-01-font-size, 0.875rem);
   font-weight: var(--cds-productive-heading-01-font-weight, 600);
-  line-height: var(--cds-productive-heading-01-line-height, 1.29);
+  line-height: var(--cds-productive-heading-01-line-height, 1.28572);
   letter-spacing: var(--cds-productive-heading-01-letter-spacing, 0.16px);
   margin-bottom: var(--cds-spacing-03, 0.5rem);
 }
@@ -1953,7 +2415,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--tearsheet-create .exp--tearsheet-create__step--description {
   font-size: var(--cds-body-long-01-font-size, 0.875rem);
   font-weight: var(--cds-body-long-01-font-weight, 400);
-  line-height: var(--cds-body-long-01-line-height, 1.43);
+  line-height: var(--cds-body-long-01-line-height, 1.42857);
   letter-spacing: var(--cds-body-long-01-letter-spacing, 0.16px);
   margin-bottom: var(--cds-spacing-06, 1.5rem);
 }
@@ -1964,6 +2426,29 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .exp--tearsheet-create .exp--tearsheet-create__step--fieldset > * {
   margin-bottom: var(--cds-spacing-05, 1rem);
+}
+
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+.exp--empty-state {
+  color: var(--cds-text-01, #161616);
 }
 
 .exp--empty-state .exp--empty-state__header,
@@ -1982,7 +2467,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--empty-state .exp--empty-state__subtitle--small {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
-  line-height: var(--cds-body-short-01-line-height, 1.29);
+  line-height: var(--cds-body-short-01-line-height, 1.28572);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
 }
 
@@ -2001,14 +2486,68 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-top: var(--cds-spacing-06, 1.5rem);
 }
 
-.exp--empty-state__action-button {
+.exp--empty-state .exp--empty-state__action-button {
   display: block;
 }
 
-.exp--empty-state__link {
-  display: inline-block;
+.exp--empty-state .exp--empty-state__link {
+  display: block;
 }
 
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -2083,8 +2622,29 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   fill: var(--cds-danger, #da1e28);
 }
 
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 .exp--card {
   background: var(--cds-ui-01, #f4f4f4);
+  color: var(--cds-text-01, #161616);
 }
 
 .exp--card__clickable {
@@ -2139,7 +2699,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--card__label {
   font-size: var(--cds-label-01-font-size, 0.75rem);
   font-weight: var(--cds-label-01-font-weight, 400);
-  line-height: var(--cds-label-01-line-height, 1.34);
+  line-height: var(--cds-label-01-line-height, 1.33333);
   letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
   margin-bottom: var(--cds-spacing-01, 0.125rem);
 }
@@ -2147,7 +2707,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--card__description {
   font-size: var(--cds-caption-01-font-size, 0.75rem);
   font-weight: var(--cds-caption-01-font-weight, 400);
-  line-height: var(--cds-caption-01-line-height, 1.34);
+  line-height: var(--cds-caption-01-line-height, 1.33333);
   letter-spacing: var(--cds-caption-01-letter-spacing, 0.32px);
   margin-top: var(--cds-spacing-01, 0.125rem);
 }
@@ -2155,7 +2715,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--card__body {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
-  line-height: var(--cds-body-short-01-line-height, 1.29);
+  line-height: var(--cds-body-short-01-line-height, 1.28572);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
   padding: var(--cds-spacing-05, 1rem);
   padding-top: 0;
@@ -2194,6 +2754,13 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   letter-spacing: var(--cds-productive-heading-03-letter-spacing, 0);
 }
 
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 .exp--http-errors .exp--http-errors__content {
   position: fixed;
   z-index: 2;
@@ -2227,7 +2794,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--http-errors .exp--http-errors__description {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
-  line-height: var(--cds-body-short-01-line-height, 1.29);
+  line-height: var(--cds-body-short-01-line-height, 1.28572);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
   margin-bottom: var(--cds-spacing-06, 1.5rem);
 }
@@ -2257,6 +2824,42 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -2297,6 +2900,32 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 .exp--import-modal .bx--modal-close {
   display: none;
 }
@@ -2335,7 +2964,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-bottom: var(--cds-spacing-03, 0.5rem);
   font-size: var(--cds-productive-heading-01-font-size, 0.875rem);
   font-weight: var(--cds-productive-heading-01-font-weight, 600);
-  line-height: var(--cds-productive-heading-01-line-height, 1.29);
+  line-height: var(--cds-productive-heading-01-line-height, 1.28572);
   letter-spacing: var(--cds-productive-heading-01-letter-spacing, 0.16px);
 }
 
@@ -2343,7 +2972,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-top: var(--cds-spacing-06, 1.5rem);
   margin-bottom: var(--cds-spacing-03, 0.5rem);
   font-size: var(--cds-helper-text-01-font-size, 0.75rem);
-  line-height: var(--cds-helper-text-01-line-height, 1.34);
+  line-height: var(--cds-helper-text-01-line-height, 1.33333);
   letter-spacing: var(--cds-helper-text-01-letter-spacing, 0.32px);
 }
 
@@ -2365,6 +2994,51 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   background: var(--cds-ui-02, #ffffff);
 }
 
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -2538,33 +3212,33 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-danger: #da1e28;
   --cds-caption-01-font-size: 0.75rem;
   --cds-caption-01-font-weight: 400;
-  --cds-caption-01-line-height: 1.34;
+  --cds-caption-01-line-height: 1.33333;
   --cds-caption-01-letter-spacing: 0.32px;
   --cds-caption-02-font-size: 0.875rem;
   --cds-caption-02-font-weight: 400;
-  --cds-caption-02-line-height: 1.29;
+  --cds-caption-02-line-height: 1.28572;
   --cds-caption-02-letter-spacing: 0.32px;
   --cds-label-01-font-size: 0.75rem;
   --cds-label-01-font-weight: 400;
-  --cds-label-01-line-height: 1.34;
+  --cds-label-01-line-height: 1.33333;
   --cds-label-01-letter-spacing: 0.32px;
   --cds-label-02-font-size: 0.875rem;
   --cds-label-02-font-weight: 400;
-  --cds-label-02-line-height: 1.29;
-  --cds-label-02-letter-spacing: 0.32px;
+  --cds-label-02-line-height: 1.28572;
+  --cds-label-02-letter-spacing: 0.16px;
   --cds-helper-text-01-font-size: 0.75rem;
-  --cds-helper-text-01-line-height: 1.34;
+  --cds-helper-text-01-line-height: 1.33333;
   --cds-helper-text-01-letter-spacing: 0.32px;
   --cds-helper-text-02-font-size: 0.875rem;
-  --cds-helper-text-02-line-height: 1.29;
-  --cds-helper-text-02-letter-spacing: 0.32px;
+  --cds-helper-text-02-line-height: 1.28572;
+  --cds-helper-text-02-letter-spacing: 0.16px;
   --cds-body-short-01-font-size: 0.875rem;
   --cds-body-short-01-font-weight: 400;
-  --cds-body-short-01-line-height: 1.29;
+  --cds-body-short-01-line-height: 1.28572;
   --cds-body-short-01-letter-spacing: 0.16px;
   --cds-body-long-01-font-size: 0.875rem;
   --cds-body-long-01-font-weight: 400;
-  --cds-body-long-01-line-height: 1.43;
+  --cds-body-long-01-line-height: 1.42857;
   --cds-body-long-01-letter-spacing: 0.16px;
   --cds-body-short-02-font-size: 1rem;
   --cds-body-short-02-font-weight: 400;
@@ -2577,24 +3251,24 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-code-01-font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
   --cds-code-01-font-size: 0.75rem;
   --cds-code-01-font-weight: 400;
-  --cds-code-01-line-height: 1.34;
+  --cds-code-01-line-height: 1.33333;
   --cds-code-01-letter-spacing: 0.32px;
   --cds-code-02-font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
   --cds-code-02-font-size: 0.875rem;
   --cds-code-02-font-weight: 400;
-  --cds-code-02-line-height: 1.43;
+  --cds-code-02-line-height: 1.42857;
   --cds-code-02-letter-spacing: 0.32px;
   --cds-heading-01-font-size: 0.875rem;
   --cds-heading-01-font-weight: 600;
-  --cds-heading-01-line-height: 1.29;
+  --cds-heading-01-line-height: 1.42857;
   --cds-heading-01-letter-spacing: 0.16px;
   --cds-productive-heading-01-font-size: 0.875rem;
   --cds-productive-heading-01-font-weight: 600;
-  --cds-productive-heading-01-line-height: 1.29;
+  --cds-productive-heading-01-line-height: 1.28572;
   --cds-productive-heading-01-letter-spacing: 0.16px;
   --cds-heading-02-font-size: 1rem;
   --cds-heading-02-font-weight: 600;
-  --cds-heading-02-line-height: 1.375;
+  --cds-heading-02-line-height: 1.5;
   --cds-heading-02-letter-spacing: 0;
   --cds-productive-heading-02-font-size: 1rem;
   --cds-productive-heading-02-font-weight: 600;
@@ -2606,7 +3280,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-productive-heading-03-letter-spacing: 0;
   --cds-productive-heading-04-font-size: 1.75rem;
   --cds-productive-heading-04-font-weight: 400;
-  --cds-productive-heading-04-line-height: 1.29;
+  --cds-productive-heading-04-line-height: 1.28572;
   --cds-productive-heading-04-letter-spacing: 0;
   --cds-productive-heading-05-font-size: 2rem;
   --cds-productive-heading-05-font-weight: 400;
@@ -2618,7 +3292,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-productive-heading-06-letter-spacing: 0;
   --cds-productive-heading-07-font-size: 3.375rem;
   --cds-productive-heading-07-font-weight: 300;
-  --cds-productive-heading-07-line-height: 1.19;
+  --cds-productive-heading-07-line-height: 1.199;
   --cds-productive-heading-07-letter-spacing: 0;
   --cds-expressive-heading-01-font-size: 0.875rem;
   --cds-expressive-heading-01-font-weight: 600;
@@ -2634,7 +3308,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-expressive-heading-03-letter-spacing: 0;
   --cds-expressive-heading-04-font-size: 1.75rem;
   --cds-expressive-heading-04-font-weight: 400;
-  --cds-expressive-heading-04-line-height: 1.29;
+  --cds-expressive-heading-04-line-height: 1.28572;
   --cds-expressive-heading-04-letter-spacing: 0;
   --cds-expressive-heading-05-font-size: 2rem;
   --cds-expressive-heading-05-font-weight: 400;
@@ -2648,10 +3322,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-expressive-paragraph-01-font-weight: 300;
   --cds-expressive-paragraph-01-line-height: 1.334;
   --cds-expressive-paragraph-01-letter-spacing: 0;
+  --cds-quotation-01-font-family: 'IBM Plex Serif', 'Georgia', Times, serif;
   --cds-quotation-01-font-size: 1.25rem;
   --cds-quotation-01-font-weight: 400;
   --cds-quotation-01-line-height: 1.3;
   --cds-quotation-01-letter-spacing: 0;
+  --cds-quotation-02-font-family: 'IBM Plex Serif', 'Georgia', Times, serif;
   --cds-quotation-02-font-size: 2rem;
   --cds-quotation-02-font-weight: 300;
   --cds-quotation-02-line-height: 1.25;
@@ -2672,6 +3348,104 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-display-04-font-weight: 600;
   --cds-display-04-line-height: 1.19;
   --cds-display-04-letter-spacing: 0;
+  --cds-legal-01-font-size: 0.75rem;
+  --cds-legal-01-font-weight: 400;
+  --cds-legal-01-line-height: 1.33333;
+  --cds-legal-01-letter-spacing: 0.32px;
+  --cds-legal-02-font-size: 0.875rem;
+  --cds-legal-02-font-weight: 400;
+  --cds-legal-02-line-height: 1.28572;
+  --cds-legal-02-letter-spacing: 0.16px;
+  --cds-body-compact-01-font-size: 0.875rem;
+  --cds-body-compact-01-font-weight: 400;
+  --cds-body-compact-01-line-height: 1.28572;
+  --cds-body-compact-01-letter-spacing: 0.16px;
+  --cds-body-compact-02-font-size: 1rem;
+  --cds-body-compact-02-font-weight: 400;
+  --cds-body-compact-02-line-height: 1.375;
+  --cds-body-compact-02-letter-spacing: 0;
+  --cds-body-01-font-size: 0.875rem;
+  --cds-body-01-font-weight: 400;
+  --cds-body-01-line-height: 1.42857;
+  --cds-body-01-letter-spacing: 0.16px;
+  --cds-body-02-font-size: 1rem;
+  --cds-body-02-font-weight: 400;
+  --cds-body-02-line-height: 1.5;
+  --cds-body-02-letter-spacing: 0;
+  --cds-heading-compact-01-font-size: 0.875rem;
+  --cds-heading-compact-01-font-weight: 600;
+  --cds-heading-compact-01-line-height: 1.28572;
+  --cds-heading-compact-01-letter-spacing: 0.16px;
+  --cds-heading-compact-02-font-size: 1rem;
+  --cds-heading-compact-02-font-weight: 600;
+  --cds-heading-compact-02-line-height: 1.375;
+  --cds-heading-compact-02-letter-spacing: 0;
+  --cds-heading-03-font-size: 1.25rem;
+  --cds-heading-03-font-weight: 400;
+  --cds-heading-03-line-height: 1.4;
+  --cds-heading-03-letter-spacing: 0;
+  --cds-heading-04-font-size: 1.75rem;
+  --cds-heading-04-font-weight: 400;
+  --cds-heading-04-line-height: 1.28572;
+  --cds-heading-04-letter-spacing: 0;
+  --cds-heading-05-font-size: 2rem;
+  --cds-heading-05-font-weight: 400;
+  --cds-heading-05-line-height: 1.25;
+  --cds-heading-05-letter-spacing: 0;
+  --cds-heading-06-font-size: 2.625rem;
+  --cds-heading-06-font-weight: 300;
+  --cds-heading-06-line-height: 1.199;
+  --cds-heading-06-letter-spacing: 0;
+  --cds-heading-07-font-size: 3.375rem;
+  --cds-heading-07-font-weight: 300;
+  --cds-heading-07-line-height: 1.199;
+  --cds-heading-07-letter-spacing: 0;
+  --cds-fluid-heading-03-font-size: 1.25rem;
+  --cds-fluid-heading-03-font-weight: 400;
+  --cds-fluid-heading-03-line-height: 1.4;
+  --cds-fluid-heading-03-letter-spacing: 0;
+  --cds-fluid-heading-04-font-size: 1.75rem;
+  --cds-fluid-heading-04-font-weight: 400;
+  --cds-fluid-heading-04-line-height: 1.28572;
+  --cds-fluid-heading-04-letter-spacing: 0;
+  --cds-fluid-heading-05-font-size: 2rem;
+  --cds-fluid-heading-05-font-weight: 400;
+  --cds-fluid-heading-05-line-height: 1.25;
+  --cds-fluid-heading-05-letter-spacing: 0;
+  --cds-fluid-heading-06-font-size: 2rem;
+  --cds-fluid-heading-06-font-weight: 600;
+  --cds-fluid-heading-06-line-height: 1.25;
+  --cds-fluid-heading-06-letter-spacing: 0;
+  --cds-fluid-paragraph-01-font-size: 1.5rem;
+  --cds-fluid-paragraph-01-font-weight: 300;
+  --cds-fluid-paragraph-01-line-height: 1.334;
+  --cds-fluid-paragraph-01-letter-spacing: 0;
+  --cds-fluid-quotation-01-font-family: 'IBM Plex Serif', 'Georgia', Times, serif;
+  --cds-fluid-quotation-01-font-size: 1.25rem;
+  --cds-fluid-quotation-01-font-weight: 400;
+  --cds-fluid-quotation-01-line-height: 1.3;
+  --cds-fluid-quotation-01-letter-spacing: 0;
+  --cds-fluid-quotation-02-font-family: 'IBM Plex Serif', 'Georgia', Times, serif;
+  --cds-fluid-quotation-02-font-size: 2rem;
+  --cds-fluid-quotation-02-font-weight: 300;
+  --cds-fluid-quotation-02-line-height: 1.25;
+  --cds-fluid-quotation-02-letter-spacing: 0;
+  --cds-fluid-display-01-font-size: 2.625rem;
+  --cds-fluid-display-01-font-weight: 300;
+  --cds-fluid-display-01-line-height: 1.19;
+  --cds-fluid-display-01-letter-spacing: 0;
+  --cds-fluid-display-02-font-size: 2.625rem;
+  --cds-fluid-display-02-font-weight: 600;
+  --cds-fluid-display-02-line-height: 1.19;
+  --cds-fluid-display-02-letter-spacing: 0;
+  --cds-fluid-display-03-font-size: 2.625rem;
+  --cds-fluid-display-03-font-weight: 300;
+  --cds-fluid-display-03-line-height: 1.19;
+  --cds-fluid-display-03-letter-spacing: 0;
+  --cds-fluid-display-04-font-size: 2.625rem;
+  --cds-fluid-display-04-font-weight: 600;
+  --cds-fluid-display-04-line-height: 1.19;
+  --cds-fluid-display-04-letter-spacing: 0;
   --cds-spacing-01: 0.125rem;
   --cds-spacing-02: 0.25rem;
   --cds-spacing-03: 0.5rem;
@@ -2750,7 +3524,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--notifications-panel__container .exp--notifications-panel__header-container .exp--notifications-panel__header {
   font-size: var(--cds-productive-heading-01-font-size, 0.875rem);
   font-weight: var(--cds-productive-heading-01-font-weight, 600);
-  line-height: var(--cds-productive-heading-01-line-height, 1.29);
+  line-height: var(--cds-productive-heading-01-line-height, 1.28572);
   letter-spacing: var(--cds-productive-heading-01-letter-spacing, 0.16px);
   margin: 0;
 }
@@ -2758,7 +3532,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--notifications-panel__container .exp--notifications-panel__time-section-label {
   font-size: var(--cds-label-01-font-size, 0.75rem);
   font-weight: var(--cds-label-01-font-weight, 400);
-  line-height: var(--cds-label-01-line-height, 1.34);
+  line-height: var(--cds-label-01-line-height, 1.33333);
   letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
   font-weight: 600;
   position: sticky;
@@ -2815,7 +3589,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notifications-link {
   font-size: var(--cds-label-01-font-size, 0.75rem);
   font-weight: var(--cds-label-01-font-weight, 400);
-  line-height: var(--cds-label-01-line-height, 1.34);
+  line-height: var(--cds-label-01-line-height, 1.33333);
   letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
 }
 
@@ -2848,7 +3622,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-description {
   font-size: var(--cds-label-01-font-size, 0.75rem);
   font-weight: var(--cds-label-01-font-weight, 400);
-  line-height: var(--cds-label-01-line-height, 1.34);
+  line-height: var(--cds-label-01-line-height, 1.33333);
   letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
   color: var(--cds-text-02, #525252);
 }
@@ -2870,7 +3644,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-read-less-button {
   font-size: var(--cds-label-01-font-size, 0.75rem);
   font-weight: var(--cds-label-01-font-weight, 400);
-  line-height: var(--cds-label-01-line-height, 1.34);
+  line-height: var(--cds-label-01-line-height, 1.33333);
   letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
   min-width: 5.5rem;
   padding: 0;
@@ -2940,7 +3714,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--notifications-panel__container .exp--notifications-panel__main-section-empty.exp--notifications-panel__main-section .exp-subtext {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
-  line-height: var(--cds-body-short-01-line-height, 1.29);
+  line-height: var(--cds-body-short-01-line-height, 1.28572);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
 }
 
@@ -2984,6 +3758,57 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin: 0;
 }
 
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 .exp--action-bar.exp--action-bar {
   display: block;
 }
@@ -3026,6 +3851,22 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin: 0 var(--cds-spacing-02, 0.25rem);
 }
 
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 .exp--breadcrumb-with-overflow.exp--breadcrumb-with-overflow {
   display: block;
 }
@@ -3095,6 +3936,45 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 .exp--tag-set.exp--tag-set {
   display: block;
   width: 100%;
@@ -3196,7 +4076,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--tag-set-overflow__tooltip .exp--tag-set-overflow__tag-item .bx--tag {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
-  line-height: var(--cds-body-short-01-line-height, 1.29);
+  line-height: var(--cds-body-short-01-line-height, 1.28572);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
   min-width: initial;
   min-height: initial;
@@ -3225,6 +4105,20 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   box-shadow: inset 0 0 0 var(--cds-spacing-01, 0.125rem) var(--cds-focus, #0f62fe);
 }
 
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 .exp--button-menu {
   min-width: 160px;
 }
@@ -3270,11 +4164,14 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--page-header.exp--page-header {
   /* Bleed class for the background */
   position: sticky;
+  /* z-index used to raise above any position relative content as per Carbon header */
+  z-index: 8000;
   top: var(--exp--page-header--header-top);
   display: inline-block;
   /* cause top/bottom margin to reserve space */
   width: 100%;
   background-color: var(--cds-ui-background, #ffffff);
+  color: var(--cds-text-01, #161616);
   /* custom props */
   --exp--page-header--breadcrumb-title-visibility: hidden;
   --exp--page-header--breadcrumb-title-opacity: 1;
@@ -3462,7 +4359,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--page-header .exp--page-header__breadcrumb {
   font-size: var(--cds-label-01-font-size, 0.75rem);
   font-weight: var(--cds-label-01-font-weight, 400);
-  line-height: var(--cds-label-01-line-height, 1.34);
+  line-height: var(--cds-label-01-line-height, 1.33333);
   letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
   padding-top: var(--cds-spacing-04, 0.75rem);
 }
@@ -3491,7 +4388,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .bx--link {
   font-size: var(--cds-label-01-font-size, 0.75rem);
   font-weight: var(--cds-label-01-font-weight, 400);
-  line-height: var(--cds-label-01-line-height, 1.34);
+  line-height: var(--cds-label-01-line-height, 1.33333);
   letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
 }
 
@@ -3594,7 +4491,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--page-header .exp--page-header__title {
   font-size: var(--cds-productive-heading-04-font-size, 1.75rem);
   font-weight: var(--cds-productive-heading-04-font-weight, 400);
-  line-height: var(--cds-productive-heading-04-line-height, 1.29);
+  line-height: var(--cds-productive-heading-04-line-height, 1.28572);
   letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -3691,7 +4588,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--page-header .exp--page-header__available-row {
   font-size: var(--cds-body-long-01-font-size, 0.875rem);
   font-weight: var(--cds-body-long-01-font-weight, 400);
-  line-height: var(--cds-body-long-01-line-height, 1.43);
+  line-height: var(--cds-body-long-01-line-height, 1.42857);
   letter-spacing: var(--cds-body-long-01-letter-spacing, 0.16px);
   margin-top: var(--cds-spacing-03, 0.5rem);
 }
@@ -3707,7 +4604,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--page-header .exp--page-header__available-row * {
   font-size: var(--cds-body-long-01-font-size, 0.875rem);
   font-weight: var(--cds-body-long-01-font-weight, 400);
-  line-height: var(--cds-body-long-01-line-height, 1.43);
+  line-height: var(--cds-body-long-01-line-height, 1.42857);
   letter-spacing: var(--cds-body-long-01-letter-spacing, 0.16px);
 }
 
@@ -3795,6 +4692,26 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   top: var(--exp--page-header--tagset-tooltip-offset) !important;
 }
 
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 .exp--card__productive .exp--card__header {
   padding-right: 0;
 }
@@ -3849,6 +4766,47 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   align-items: start;
 }
 
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 .exp--remove-modal .bx--modal-footer .bx--btn {
   max-width: none;
 }
@@ -3866,6 +4824,22 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-bottom: var(--cds-spacing-05, 1rem);
 }
 
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -3927,7 +4901,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--saving__text {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
-  line-height: var(--cds-body-short-01-line-height, 1.29);
+  line-height: var(--cds-body-short-01-line-height, 1.28572);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
 }
 
@@ -3935,6 +4909,38 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: flex;
 }
 
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -3981,6 +4987,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 
+/* stylelint-disable number-max-precision */
 @keyframes rotating {
   0% {
     transform: scaleY(-1) rotate(360deg);
@@ -4433,6 +5440,77 @@ path:nth-of-type(1),
   }
 }
 
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -4479,6 +5557,15 @@ path:nth-of-type(1),
   }
 }
 
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
+/* stylelint-disable number-max-precision */
 .exp-user-profile-avatar--light {
   color: var(--cds-ui-01, #f4f4f4);
 }
@@ -4631,7 +5718,7 @@ path:nth-of-type(1),
   height: var(--cds-spacing-10, 4rem);
   font-size: var(--cds-productive-heading-04-font-size, 1.75rem);
   font-weight: var(--cds-productive-heading-04-font-weight, 400);
-  line-height: var(--cds-productive-heading-04-line-height, 1.29);
+  line-height: var(--cds-productive-heading-04-line-height, 1.28572);
   letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0);
 }
 
@@ -4640,7 +5727,7 @@ path:nth-of-type(1),
   height: var(--cds-spacing-07, 2rem);
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
-  line-height: var(--cds-body-short-01-line-height, 1.29);
+  line-height: var(--cds-body-short-01-line-height, 1.28572);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
 }
 
@@ -4649,7 +5736,7 @@ path:nth-of-type(1),
   height: var(--cds-spacing-06, 1.5rem);
   font-size: var(--cds-label-01-font-size, 0.75rem);
   font-weight: var(--cds-label-01-font-weight, 400);
-  line-height: var(--cds-label-01-line-height, 1.34);
+  line-height: var(--cds-label-01-line-height, 1.33333);
   letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
   font-weight: 600;
 }
@@ -4659,7 +5746,7 @@ path:nth-of-type(1),
   height: calc(var(--cds-spacing-05, 1rem) + var(--cds-spacing-02, 0.25rem));
   font-size: var(--cds-label-01-font-size, 0.75rem);
   font-weight: var(--cds-label-01-font-weight, 400);
-  line-height: var(--cds-label-01-line-height, 1.34);
+  line-height: var(--cds-label-01-line-height, 1.33333);
   letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
   font-weight: 600;
 }
@@ -4669,7 +5756,7 @@ path:nth-of-type(1),
   height: var(--cds-spacing-05, 1rem);
   font-size: var(--cds-label-01-font-size, 0.75rem);
   font-weight: var(--cds-label-01-font-weight, 400);
-  line-height: var(--cds-label-01-line-height, 1.34);
+  line-height: var(--cds-label-01-line-height, 1.33333);
   letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
   font-weight: 600;
 }

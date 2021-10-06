@@ -98,10 +98,12 @@ class TearsheetSmall extends PureComponent {
             focusTrap={focusTrap}
             rootNode={rootNode}
             stopPropagation={stopPropagation}
-            stopPropagationEvents={stopPropagationEvents}>
+            stopPropagationEvents={stopPropagationEvents}
+          >
             <section
               className={classnames(namespace, className)}
-              aria-hidden={false}>
+              aria-hidden={false}
+            >
               {this.state.loading && (
                 <LoadingMessage className={`${namespace}__loading`}>
                   {this.state.loadingMessage}
@@ -116,11 +118,13 @@ class TearsheetSmall extends PureComponent {
               <section className={`${namespace}__body`}>
                 <ScrollGradient
                   className={`${namespace}__content`}
-                  color={theme.ui01}>
+                  color={theme.ui01}
+                >
                   <div
                     className={classnames({
                       [`${namespace}__scroll-gradient__content`]: !flush,
-                    })}>
+                    })}
+                  >
                     {this.renderBody()}
                   </div>
                 </ScrollGradient>
@@ -132,7 +136,8 @@ class TearsheetSmall extends PureComponent {
                     disabled={secondaryButton.isDisabled || this.state.loading}
                     kind="secondary"
                     onClick={secondaryButton.onClick}
-                    size="xl">
+                    size="xl"
+                  >
                     {componentLabels.TEARSHEET_SMALL_SECONDARY_BUTTON}
                   </Button>
                 )}
@@ -141,7 +146,8 @@ class TearsheetSmall extends PureComponent {
                     className={`${namespace}__footer__button`}
                     disabled={primaryButton.isDisabled || this.state.loading}
                     onClick={primaryButton.onClick}
-                    size="xl">
+                    size="xl"
+                  >
                     {componentLabels.TEARSHEET_SMALL_PRIMARY_BUTTON}
                   </Button>
                 )}

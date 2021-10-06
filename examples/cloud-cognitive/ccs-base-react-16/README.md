@@ -50,17 +50,20 @@ const App = () => {
         links={[
           <Link
             href="https://ibm-cloud-cognitive.netlify.app/"
-            key="View storybook">
+            key="View storybook"
+          >
             View the components
           </Link>,
           <Link
             href="https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/main/LICENSE"
-            key="link2">
+            key="link2"
+          >
             License
           </Link>,
           <Link
             href="https://www.npmjs.com/package/@carbon/ibm-cloud-cognitive"
-            key="npm">
+            key="npm"
+          >
             Install from npm
           </Link>,
           <Link href="https://www.carbondesignsystem.com/" key="Carbon">

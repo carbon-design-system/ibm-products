@@ -31,7 +31,8 @@ const StringFormatter = ({
         maxWidth: width,
         WebkitLineClamp: lines,
       }}
-      {...other}>
+      {...other}
+    >
       {value}
     </span>
   );
@@ -41,7 +42,8 @@ const StringFormatter = ({
       className={`${namespace}__tooltip`}
       align="start"
       direction={tooltipDirection}
-      tooltipText={value}>
+      tooltipText={value}
+    >
       {content}
     </TooltipDefinition>
   ) : (

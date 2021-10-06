@@ -244,7 +244,8 @@ class IdeCreate extends React.Component {
           kind="secondary"
           disabled={this.props.disableCancelButton}
           className={`${idePrefix}-create-cancel-btn`}
-          onClick={this._handleBackButton}>
+          onClick={this._handleBackButton}
+        >
           {this.props.buttonTextStepBack}
         </Button>
       );
@@ -254,7 +255,8 @@ class IdeCreate extends React.Component {
           kind="secondary"
           disabled={this.props.disableCancelButton}
           className={`${idePrefix}-create-cancel-btn`}
-          onClick={this.props.onCancel}>
+          onClick={this.props.onCancel}
+        >
           {this.props.buttonTextFormCancel}
         </Button>
       );
@@ -266,7 +268,8 @@ class IdeCreate extends React.Component {
           <Button
             disabled={this.props.stepNextDisabled}
             onClick={this._handleNextButton}
-            className={`${idePrefix}-create-next-btn`}>
+            className={`${idePrefix}-create-next-btn`}
+          >
             {this.props.buttonTextStepNext}
           </Button>
         );
@@ -277,7 +280,8 @@ class IdeCreate extends React.Component {
           disabled={this.state.actionDisabled}
           onClick={this.props.onFormAction}
           className={`${idePrefix}-create-next-btn`}
-          renderIcon={this.props.externalLink ? Launch24 : null}>
+          renderIcon={this.props.externalLink ? Launch24 : null}
+        >
           {this.props.buttonTextFormAction}
         </Button>
       );
@@ -311,7 +315,8 @@ class IdeCreate extends React.Component {
                     ) {
                       this.props.onCancel(ev);
                     }
-                  }}>
+                  }}
+                >
                   {this.props.breadCrumbText}
                 </Link>
               )}
@@ -323,7 +328,8 @@ class IdeCreate extends React.Component {
                   onClick={(ev) => {
                     ev.preventDefault();
                     this.props.breadCrumbCallback(ev);
-                  }}>
+                  }}
+                >
                   {this.props.breadCrumbText}
                 </Link>
               )}
@@ -344,7 +350,8 @@ class IdeCreate extends React.Component {
                       this.state.fixedHeader) && (
                       <div className={`${idePrefix}-create-form-subtitle`}>
                         <span
-                          className={`${idePrefix}-create-form-subtitle-content`}>
+                          className={`${idePrefix}-create-form-subtitle-content`}
+                        >
                           {this.props.subTitle}
                         </span>
                       </div>
@@ -361,7 +368,8 @@ class IdeCreate extends React.Component {
         </div>
         <div className={contentClassName} style={this.state.style}>
           <div
-            className={`${prefix}--grid ${idePrefix}-create-progress-container`}>
+            className={`${prefix}--grid ${idePrefix}-create-progress-container`}
+          >
             {stepLabels.length > 1 &&
               (!this.props.usePreCheck || currentStep > 0) && (
                 <ProgressIndicator
@@ -373,7 +381,8 @@ class IdeCreate extends React.Component {
                     this.props.disableProgressOnChange
                       ? undefined
                       : (index) => this._onProgressChange(index, stepsDisabled)
-                  }>
+                  }
+                >
                   {stepLabels.map((child, i) => (
                     <ProgressStep
                       label={child.props.label}

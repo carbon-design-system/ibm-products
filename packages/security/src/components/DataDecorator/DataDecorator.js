@@ -163,7 +163,8 @@ class DataDecorator extends Component {
           stopPropagation={stopPropagation}
           stopPropagationEvents={stopPropagationEvents}
           subtitle={subtitle}
-          title={value}>
+          title={value}
+        >
           {children}
         </PanelV2>
       </>

@@ -19,7 +19,14 @@ module.exports = {
     '@storybook/addon-controls',
     '@storybook/addon-knobs',
     '@storybook/addon-links',
-    '@storybook/addon-storysource',
+    {
+      name: '@storybook/addon-storysource',
+      options: {
+        rule: {
+          test: /(-story|.stories).js$/,
+        },
+      },
+    },
     '@storybook/addon-viewport',
     '@carbon/storybook-addon-theme/register',
   ],

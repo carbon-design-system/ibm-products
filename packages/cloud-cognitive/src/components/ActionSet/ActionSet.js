@@ -49,7 +49,8 @@ const ActionSetButton = React.forwardRef(
         { [`${blockClass}__action-button--ghost`]: kind === 'ghost' },
       ])}
       disabled={disabled || loading || false}
-      {...{ kind, onClick, ref, size }}>
+      {...{ kind, onClick, ref, size }}
+    >
       {label}
       {loading && <InlineLoading />}
     </Button>
@@ -137,7 +138,8 @@ export const ActionSet = React.forwardRef(
         )}
         ref={ref}
         role="presentation"
-        stacked={stacking}>
+        stacked={stacking}
+      >
         {buttons.map((action, index) => (
           <ActionSetButton
             key={action.key || index}

@@ -19,7 +19,8 @@ export let ToolbarGroup = forwardRef(
       <div
         {...rest}
         ref={ref}
-        className={cx(`${blockClass}__group`, className)}>
+        className={cx(`${blockClass}__group`, className)}
+      >
         {children}
       </div>
     );

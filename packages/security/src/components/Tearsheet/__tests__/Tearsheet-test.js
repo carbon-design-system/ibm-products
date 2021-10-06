@@ -17,7 +17,8 @@ describe('Tearsheet', () => {
         position: 'relative',
         width: '100%',
         height: '100%',
-      }}>
+      }}
+    >
       Sidebar
     </div>
   );
@@ -29,7 +30,8 @@ describe('Tearsheet', () => {
         position: 'relative',
         width: '100%',
         height: '100%',
-      }}>
+      }}
+    >
       Main Section
     </div>
   );

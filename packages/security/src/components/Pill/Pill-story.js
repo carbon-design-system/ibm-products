@@ -20,7 +20,8 @@ storiesOf(components('Pill'), module).add(`default`, () => (
     <br />
     <p
       style={{ width: '400px' }}
-      className={`${carbonPrefix}--type-body-long-01`}>
+      className={`${carbonPrefix}--type-body-long-01`}
+    >
       This is an inline decorator that appears inside a paragraph, alongside
       text.
       <Pill

@@ -87,7 +87,8 @@ const ErrorPage = ({
                 href={href}
                 target={external ? '_blank' : '_parent'}
                 rel="noopener noreferrer"
-                className={`${namespace}__link`}>
+                className={`${namespace}__link`}
+              >
                 {icon !== undefined && (
                   <img
                     alt={text}

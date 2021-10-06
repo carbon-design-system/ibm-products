@@ -110,7 +110,8 @@ const formatOptionLabel = (option, context, allOptions) => {
 const MultiValueContainer = (props) => (
   <Tag
     type={props.data.type || 'filter'}
-    className={`${idePrefix}-filter--tag`}>
+    className={`${idePrefix}-filter--tag`}
+  >
     <div className={`${idePrefix}-filter--tag-container`}>{props.children}</div>
   </Tag>
 );
@@ -124,7 +125,8 @@ const MultiValueRemove = (props) => {
         type === 'filter'
           ? ` ${idePrefix}-filter--tag-filter`
           : /* istanbul ignore next */ ''
-      }`}>
+      }`}
+    >
       <Close16 description="Close" />
     </button>
   );
@@ -161,7 +163,8 @@ const IdeFilter = ({
     <div
       className={`${idePrefix}-filter${
         light ? ` ${idePrefix}-filter--light` : ''
-      }`}>
+      }`}
+    >
       {SearchIcon ? (
         <SearchIcon className={`${idePrefix}-filter--search-icon`} />
       ) : (

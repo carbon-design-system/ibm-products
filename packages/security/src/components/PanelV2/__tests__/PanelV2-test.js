@@ -19,7 +19,8 @@ describe('PanelV2', () => {
         closeButton={{
           label: 'test close',
         }}
-        renderFooter={() => <Button>test footer button</Button>}>
+        renderFooter={() => <Button>test footer button</Button>}
+      >
         <PanelContent>test content</PanelContent>
       </PanelV2>
     );
@@ -35,7 +36,8 @@ describe('PanelV2', () => {
         subtitle={<span>test subtitle</span>}
         closeButton={{
           label: 'test close',
-        }}>
+        }}
+      >
         <PanelContent>test content</PanelContent>
       </PanelV2>
     );
@@ -59,7 +61,8 @@ describe('PanelV2', () => {
         // Note that `hasScrollingContent={true}` so the `PanelContent` wrapper is tabbable:
         hasScrollingContent
         // `aria-label` provided because there is scrolling content:
-        aria-label="test aria-label">
+        aria-label="test aria-label"
+      >
         <PanelContent>
           test content text
           <Button>test content button</Button>
@@ -129,7 +132,8 @@ describe('PanelV2', () => {
         closeButton={{
           label: 'test close',
         }}
-        renderFooter={() => <Button>test footer button</Button>}>
+        renderFooter={() => <Button>test footer button</Button>}
+      >
         <PanelContent>
           test content text
           <Button>test content button</Button>
@@ -169,7 +173,8 @@ describe('PanelV2', () => {
         // Note that `hasScrollingContent={true}` so the `PanelContent` wrapper is tabbable:
         hasScrollingContent
         // `aria-label` provided because there is scrolling content:
-        aria-label="test aria-label">
+        aria-label="test aria-label"
+      >
         <PanelContent>
           test content text
           <Button>test content button</Button>

@@ -61,7 +61,8 @@ class SummaryCardAction extends Component {
                   this.toggleOpen();
                 }
               : onClick
-          }>
+          }
+        >
           <span className={`${namespace}__text`}>{children}</span>
         </Button>
         {expandedContent && (
@@ -69,7 +70,8 @@ class SummaryCardAction extends Component {
             appearTimeout={transitionSegment * 3}
             className={`${namespace}-overlay`}
             enterTimeout={transitionSegment * 3}
-            leaveTimeout={transitionSegment * 3}>
+            leaveTimeout={transitionSegment * 3}
+          >
             {isOpen && (
               <>
                 <div className={`${namespace}-overlay`}>

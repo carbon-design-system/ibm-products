@@ -32,7 +32,8 @@ const Template = (args) => {
       <WebTerminal
         open={isTerminalOpen}
         closeTerminal={closeTerminal}
-        {...args}>
+        {...args}
+      >
         <div className="example-terminal">
           <p>Connection successful.</p>
 

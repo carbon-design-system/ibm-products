@@ -34,7 +34,8 @@ export const ActionBarOverflowItems = ({
       className={cx(blockClass, className)}
       direction="bottom"
       flipped
-      menuOptionsClass={`${blockClass}__options`}>
+      menuOptionsClass={`${blockClass}__options`}
+    >
       {React.Children.map(overflowItems, (item) => {
         // This uses a copy of a menu item option
         // NOTE: Cannot use a real Tooltip icon below as it uses a <button /> the
@@ -45,10 +46,12 @@ export const ActionBarOverflowItems = ({
             itemText={
               <div
                 className={`${blockClass}__item-content`}
-                aria-describedby={`${internalId}--item-label`}>
+                aria-describedby={`${internalId}--item-label`}
+              >
                 <span
                   className={`${blockClass}__item-label`}
-                  id={`${internalId}--item-label`}>
+                  id={`${internalId}--item-label`}
+                >
                   {item.props.iconDescription}
                 </span>
                 <item.props.renderIcon />

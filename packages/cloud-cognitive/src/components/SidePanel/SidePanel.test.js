@@ -39,7 +39,8 @@ const renderSidePanel = ({ ...rest }, children = <p>test</p>) =>
         open: true,
         onRequestClose: onRequestCloseFn,
         ...rest,
-      }}>
+      }}
+    >
       {children}
     </SidePanel>
   );
@@ -71,7 +72,8 @@ const SlideIn = ({
         }
         placement={placement}
         onUnmount={onUnmountFn}
-        {...rest}>
+        {...rest}
+      >
         Content
       </SidePanel>
       <div id={pageContentSelectorValue.slice(1)} />
@@ -210,7 +212,8 @@ describe('SidePanel', () => {
         title={title}
         includeOverlay
         open={false}
-        onRequestClose={onRequestCloseFn}>
+        onRequestClose={onRequestCloseFn}
+      >
         Content
       </SidePanel>
     );
@@ -430,27 +433,7 @@ describe('SidePanel', () => {
         size,
       });
       const sidePanelOuter = container.querySelector(`.${blockClass}`);
-      let sizeValue;
-      switch (size) {
-        case 'xs':
-          sizeValue = 'extra-small';
-          break;
-        case 'sm':
-          sizeValue = 'small';
-          break;
-        case 'lg':
-          sizeValue = 'large';
-          break;
-        case 'max':
-          sizeValue = 'max';
-          break;
-        default:
-          sizeValue = 'medium';
-          break;
-      }
-      expect(sidePanelOuter).toHaveClass(
-        `${blockClass}__container--${sizeValue}`
-      );
+      expect(sidePanelOuter).toHaveClass(`${blockClass}__container--${size}`);
     });
   });
 
@@ -504,7 +487,8 @@ describe('SidePanel', () => {
           labelText={labelText}
           placement="left"
           open
-          usePageContentSelector>
+          usePageContentSelector
+        >
           Content
         </SlideIn>
       );

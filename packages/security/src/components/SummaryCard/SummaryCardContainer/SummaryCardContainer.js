@@ -62,7 +62,8 @@ function SummaryCardContainer({ render, summaryCards, ...other }) {
   return (
     <div
       className={appendComponentNamespace(summaryCardNamespace, 'container')}
-      {...other}>
+      {...other}
+    >
       {render(renderProps)}
     </div>
   );

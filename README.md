@@ -18,6 +18,10 @@
 If you're just getting started and looking to browse our React components, take
 a look at [our Storybook](https://ibm-cloud-cognitive.netlify.app).
 
+All of our source code and documentation, including this readme, can be found on [our GitHub repo](https://github.com/carbon-design-system/ibm-cloud-cognitive), which is also the place to [open issues](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new/choose) if you have a problem or find a defect or would like to request a new feature or change something.
+
+If you have access to the IBM Slack workspaces, you can join the discussion on [our slack channel](https://ibm-casdesign.slack.com/archives/C013ZTX0N6B) where you can ask questions, report problems, and get help from the team and from other users.
+
 This project consists of a number of component library packages published on
 npm:
 

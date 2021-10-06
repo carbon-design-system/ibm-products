@@ -156,7 +156,8 @@ const commonArgs = {
         style={
           // stylelint-disable-next-line carbon/type-token-use
           { fontWeight: '600' }
-        }>
+        }
+      >
         Watson AI Ops
       </span>
     </>

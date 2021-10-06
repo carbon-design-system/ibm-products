@@ -30,7 +30,7 @@ Array [
         <div
           className="ide-api-key-generation-api-key"
         >
-          <ForwardRef(TextInput)
+          <TextInput
             data-ui-id="IdeAPIKeyGeneration-APIKey"
             disabled={false}
             helperText=""

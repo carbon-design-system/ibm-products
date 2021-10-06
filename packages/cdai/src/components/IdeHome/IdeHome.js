@@ -118,7 +118,8 @@ export default class IdeHome extends React.Component {
             selected={currentSet}
             className={`${prefix}--row`}
             tabContentClassName={`${idePrefix}-home-tab-content`}
-            {...idAttribute(`IdeHome-Tabs`)}>
+            {...idAttribute(`IdeHome-Tabs`)}
+          >
             {setsToRender.map((set, index) => {
               return (
                 <Tab
@@ -129,10 +130,12 @@ export default class IdeHome extends React.Component {
                   {...createInteractionHandler(() => {
                     // on tab click/press, update the selected index
                     this.handleSetChange(index);
-                  })}>
+                  })}
+                >
                   <section
                     {...idAttribute('IdeHome-Task-Set')}
-                    className={`${prefix}--row ${idePrefix}-home-full-width`}>
+                    className={`${prefix}--row ${idePrefix}-home-full-width`}
+                  >
                     {set.tasks ? set.tasks : set.renderFunc()}
                   </section>
                 </Tab>
@@ -148,11 +151,13 @@ export default class IdeHome extends React.Component {
             <section
               key={set.id}
               {...idAttribute(`IdeHome-Section-${set.id}`)}
-              className={`${prefix}--row ${idePrefix}-home-full-width`}>
+              className={`${prefix}--row ${idePrefix}-home-full-width`}
+            >
               {set.heading && (
                 <h3
                   {...idAttribute(`IdeHome-Section-title-${set.id}`)}
-                  className={`${idePrefix}-home--section-title`}>
+                  className={`${idePrefix}-home--section-title`}
+                >
                   {set.heading}
                 </h3>
               )}
@@ -166,7 +171,8 @@ export default class IdeHome extends React.Component {
       setsJSX = (
         <section
           {...idAttribute('IdeHome-Task-Set')}
-          className={`${prefix}--row ${idePrefix}-home-full-width`}>
+          className={`${prefix}--row ${idePrefix}-home-full-width`}
+        >
           {setsToRender[0].tasks
             ? setsToRender[0].tasks
             : setsToRender[0].renderFunc()}
@@ -177,7 +183,8 @@ export default class IdeHome extends React.Component {
     return (
       <div
         {...idAttribute('IdeHome-Sets')}
-        className={`${prefix}--row ${prefix}--grid ${prefix}--grid--condensed ${idePrefix}-home-table`}>
+        className={`${prefix}--row ${prefix}--grid ${prefix}--grid--condensed ${idePrefix}-home-table`}
+      >
         {setsJSX}
       </div>
     );
@@ -203,13 +210,15 @@ export default class IdeHome extends React.Component {
       <section
         {...idAttribute('IdeHome')}
         className={`${idePrefix}-home ${className}`}
-        {...others}>
+        {...others}
+      >
         <IdePageContent>
           <div
             {...idAttribute('IdeHome-Header')}
             className={`${
               headerCollapsed ? 'collapsed' : ''
-            } ${idePrefix}-home-header ${prefix}--row`}>
+            } ${idePrefix}-home-header ${prefix}--row`}
+          >
             <div
               {...idAttribute('IdeHome-Header-Text')}
               className={`
@@ -229,7 +238,8 @@ export default class IdeHome extends React.Component {
                 ${prefix}--col-max-${
                 !headerCollapsible ? 6 : headerCollapsed ? 14 : 6
               }
-              `}>
+              `}
+            >
               <div>
                 <p className={`${idePrefix}-home-product-heading`}>
                   {headerOne}
@@ -251,7 +261,8 @@ export default class IdeHome extends React.Component {
                   ${prefix}--col-lg-${!headerCollapsible ? 10 : 8}
                   ${prefix}--col-xlg-${!headerCollapsible ? 10 : 8}
                   ${prefix}--col-max-${!headerCollapsible ? 10 : 8}
-                `}>
+                `}
+              >
                 {renderGraphic(headerGraphic)}
               </div>
             )}
@@ -266,7 +277,8 @@ export default class IdeHome extends React.Component {
                   ${prefix}--col-lg-${2}
                   ${prefix}--col-xlg-${2}
                   ${prefix}--col-max-${2}
-                `}>
+                `}
+              >
                 <Button
                   {...idAttribute('IdeHome-header-toggle')}
                   disabled={false}
@@ -274,7 +286,8 @@ export default class IdeHome extends React.Component {
                   onClick={headerHandleCollapseFunc}
                   renderIcon={undefined}
                   size="small"
-                  type="button">
+                  type="button"
+                >
                   {headerCollapsed
                     ? headerButtonTextExpand
                     : headerButtonTextCollapse}

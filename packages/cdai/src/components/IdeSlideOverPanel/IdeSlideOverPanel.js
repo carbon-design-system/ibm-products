@@ -56,7 +56,8 @@ const IdeSlideOverPanel = ({
           className={`${idePrefix}-slide-over-panel--secondary`}
           disabled={secondaryButtonDisabled}
           renderIcon={secondaryButtonIcon}
-          onClick={onSecondaryClick}>
+          onClick={onSecondaryClick}
+        >
           {secondaryButtonText}
         </Button>
         <Button
@@ -64,7 +65,8 @@ const IdeSlideOverPanel = ({
           kind={danger ? 'danger' : 'primary'}
           disabled={primaryButtonDisabled}
           renderIcon={primaryButtonIcon}
-          onClick={onPrimaryClick}>
+          onClick={onPrimaryClick}
+        >
           {primaryButtonText}
         </Button>
       </div>

@@ -19,6 +19,8 @@
   $block-class: #{$pkg-prefix}--empty-state;
 
   .#{$block-class} {
+    color: $text-01;
+
     .#{$block-class}__header,
     .#{$block-class}__subtitle {
       padding-bottom: $spacing-02;
@@ -47,11 +49,11 @@
   .#{$block-class}__link {
     margin-top: $spacing-06;
   }
-  .#{$block-class}__action-button {
+  .#{$block-class} .#{$block-class}__action-button {
     display: block;
   }
-  .#{$block-class}__link {
-    display: inline-block;
+  .#{$block-class} .#{$block-class}__link {
+    display: block;
   }
 }
 

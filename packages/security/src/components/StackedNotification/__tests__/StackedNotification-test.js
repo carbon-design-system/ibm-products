@@ -109,7 +109,8 @@ describe('StackedNotification', () => {
         title="test title"
         subtitle="test subtitle"
         iconDescription="test close button icon"
-        statusIconDescription="test status icon">
+        statusIconDescription="test status icon"
+      >
         test children
       </StackedNotification>
     );

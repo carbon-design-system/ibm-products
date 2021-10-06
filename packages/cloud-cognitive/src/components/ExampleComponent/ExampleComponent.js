@@ -82,19 +82,22 @@ export let ExampleComponent = React.forwardRef(
           ...style,
           /* stylelint-disable-next-line carbon/theme-token-use */
           [`--${pkg.prefix}-border-color`]: borderColor,
-        }}>
+        }}
+      >
         <Button
           className={`${blockClass}__secondary-button`}
           kind={secondaryKind}
           onClick={handleSecondaryClick}
-          {...{ disabled, size }}>
+          {...{ disabled, size }}
+        >
           {secondaryButtonLabel}
         </Button>
         <Button
           className={`${blockClass}__primary-button`}
           kind={primaryKind}
           onClick={handlePrimaryClick}
-          {...{ disabled, size }}>
+          {...{ disabled, size }}
+        >
           {primaryButtonLabel}
         </Button>
       </ButtonSet>

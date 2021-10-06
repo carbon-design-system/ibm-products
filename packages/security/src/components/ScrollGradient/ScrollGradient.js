@@ -204,7 +204,8 @@ class ScrollGradient extends Component {
           className
         )}
         role="presentation"
-        {...other}>
+        {...other}
+      >
         {!hideStartGradient && (
           <div
             className={`${namespace}__before`}
@@ -221,7 +222,8 @@ class ScrollGradient extends Component {
           className={classnames(
             `${namespace}__content`,
             scrollElementClassName
-          )}>
+          )}
+        >
           {children}
         </div>
         <div

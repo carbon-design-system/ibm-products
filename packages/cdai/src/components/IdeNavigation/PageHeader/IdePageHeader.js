@@ -17,7 +17,8 @@ const renderBreadcrumb = (breadcrumbContent) => (
   <div
     key={`IdePageHeader--breadcrumb-container`}
     className={`${idePrefix}-page-header--breadcrumb-container`}
-    {...idAttribute('IdePageHeader--breadcrumb-container')}>
+    {...idAttribute('IdePageHeader--breadcrumb-container')}
+  >
     {breadcrumbContent}
   </div>
 );
@@ -26,13 +27,15 @@ const renderHeader = (header, headingRenderFunction) => (
   <div
     key={`IdePageHeader--heading--container`}
     className={`${idePrefix}-page-header--heading-container`}
-    {...idAttribute('IdePageHeader--heading-container')}>
+    {...idAttribute('IdePageHeader--heading-container')}
+  >
     {header
       ? headingRenderFunction(
           <p
             key={`IdePageHeader--heading`}
             className={`${idePrefix}-page-header--heading`}
-            {...idAttribute('IdePageHeader--heading')}>
+            {...idAttribute('IdePageHeader--heading')}
+          >
             {header}
           </p>
         )
@@ -44,12 +47,14 @@ const renderSubtitle = (subtitle) => (
   <div
     key={`IdePageHeader--subtitle--container`}
     className={`${idePrefix}-page-header--subtitle-container`}
-    {...idAttribute('IdePageHeader--subtitle-container')}>
+    {...idAttribute('IdePageHeader--subtitle-container')}
+  >
     {subtitle ? (
       <p
         key={`IdePageHeader--subtitle`}
         className={`${idePrefix}-page-header--subtitle`}
-        {...idAttribute('IdePageHeader--subtitle')}>
+        {...idAttribute('IdePageHeader--subtitle')}
+      >
         {subtitle}
       </p>
     ) : null}
@@ -60,7 +65,8 @@ const renderTabs = (tabContent) =>
     <div
       key={`IdePageHeader--tabs-container`}
       className={`${idePrefix}-page-header--tabs-container`}
-      {...idAttribute('IdePageHeader--tabs-container')}>
+      {...idAttribute('IdePageHeader--tabs-container')}
+    >
       {tabContent}
     </div>
   ) : (
@@ -100,15 +106,18 @@ const IdePageHeader = ({
     <section
       {...idAttribute('IdePageHeader')}
       className={`${idePrefix}-page-header ${className}`}
-      {...others}>
+      {...others}
+    >
       <IdePageContent
-        bleedClassName={`${idePrefix}-page-header__backgroundColour`}>
+        bleedClassName={`${idePrefix}-page-header__backgroundColour`}
+      >
         <div className={`${prefix}--row`}>
           <div className={`${prefix}--col`}>{navContent}</div>
           {customContent ? (
             <div
               className={`${prefix}--col ${idePrefix}-page-header--custom-content-container`}
-              {...idAttribute('IdePageHeader--custom-content-container')}>
+              {...idAttribute('IdePageHeader--custom-content-container')}
+            >
               {customContent}
             </div>
           ) : null}

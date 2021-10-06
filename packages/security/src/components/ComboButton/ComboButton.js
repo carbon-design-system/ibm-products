@@ -48,10 +48,12 @@ const ComboButton = ({
       id={buttonProps.id}
       onClick={buttonProps.onClick}
       renderIcon={buttonProps.renderIcon}
-      type="button">
+      type="button"
+    >
       <span
         className={`${carbonPrefix}--text-truncate--end`}
-        title={buttonProps.children}>
+        title={buttonProps.children}
+      >
         {buttonProps.children}
       </span>
     </Button>
@@ -89,7 +91,8 @@ const ComboButton = ({
             <>
               <span
                 className={`${carbonPrefix}--text-truncate--end`}
-                title={children}>
+                title={children}
+              >
                 {children}
               </span>
               {Icon && <Icon aria-label={iconDescription} />}
@@ -112,7 +115,8 @@ const ComboButton = ({
   return (
     <div
       className={classnames(namespace, className)}
-      data-floating-menu-container>
+      data-floating-menu-container
+    >
       <div className={`${namespace}__group`}>
         {primaryActionWithProps}
 
@@ -137,7 +141,8 @@ const ComboButton = ({
             onClick={() => setIsOpen(!isOpen)}
             onClose={() => setIsOpen(false)}
             renderIcon={renderOverflowMenuIcon}
-            selectorPrimaryFocus={selectorPrimaryFocus}>
+            selectorPrimaryFocus={selectorPrimaryFocus}
+          >
             {overflowMenuItemWithProps}
           </OverflowMenu>
         )}

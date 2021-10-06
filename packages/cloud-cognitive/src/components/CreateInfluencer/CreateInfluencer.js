@@ -108,7 +108,8 @@ export let CreateInfluencer = ({
             className={cx({
               [`${blockClass}__side-nav-opening`]: sideNavState === 'opening',
               [`${blockClass}__side-nav-closing`]: sideNavState === 'closing',
-            })}>
+            })}
+          >
             <SideNavItems>
               {createComponents.sections?.length &&
                 createComponents.sections.map(
@@ -141,7 +142,8 @@ export let CreateInfluencer = ({
                             `${createComponentName}: ${createComponentName}Section component is missing a required prop of 'id'`
                           );
                         }
-                      }}>
+                      }}
+                    >
                       {sectionComponent.props.title}
                     </SideNavLink>
                   )
@@ -162,7 +164,8 @@ export let CreateInfluencer = ({
               progressIndicatorState === 'opening',
             [`${blockClass}__progress-indicator-closing`]:
               progressIndicatorState === 'closing',
-          })}>
+          })}
+        >
           {createComponents.steps.map((child, stepIndex) => (
             <ProgressStep
               label={child.props.title}

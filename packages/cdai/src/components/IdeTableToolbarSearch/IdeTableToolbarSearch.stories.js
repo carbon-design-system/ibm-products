@@ -47,7 +47,8 @@ storiesOf(getComponentLabel('IdeTableToolbarSearch'), module)
           <TableContainer
             title="DataTable"
             description="With toolbar"
-            {...getTableContainerProps()}>
+            {...getTableContainerProps()}
+          >
             <TableToolbar aria-label="data table toolbar">
               <TableToolbarContent>
                 <IdeTableToolbarSearch onChange={action('Filter change')} />
@@ -59,7 +60,8 @@ storiesOf(getComponentLabel('IdeTableToolbarSearch'), module)
                   {headers.map((header) => (
                     <TableHeader
                       key={header.header}
-                      {...getHeaderProps({ header })}>
+                      {...getHeaderProps({ header })}
+                    >
                       {header.header}
                     </TableHeader>
                   ))}

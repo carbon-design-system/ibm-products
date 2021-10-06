@@ -43,7 +43,7 @@ describe(name, () => {
       renderSync({
         file: resolve(__dirname, '../global/styles/_project-settings.scss'),
         includePaths: [resolve(__dirname, '../../../../node_modules')],
-        outputStyle: 'expanded',
+        outputStyle: 'compressed',
       }).css.toString()
     ).toHaveLength(0);
   });

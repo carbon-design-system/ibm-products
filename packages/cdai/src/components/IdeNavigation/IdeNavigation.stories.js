@@ -116,7 +116,8 @@ storiesOf(
       renderMockContent(
         <IdeNavigation
           {...navigationCoreProps}
-          navigationLinks={sampleNavLinks}>
+          navigationLinks={sampleNavLinks}
+        >
           {samplePageContent}
         </IdeNavigation>,
         false
@@ -160,7 +161,8 @@ storiesOf(
       renderMockContent(
         <IdeNavigation
           {...navigationCoreProps}
-          navigationLinks={sampleNavMenus}>
+          navigationLinks={sampleNavMenus}
+        >
           {samplePageContent}
         </IdeNavigation>,
         false

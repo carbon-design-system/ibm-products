@@ -92,16 +92,19 @@ const FilterSubcategory = ({
     <AccordionItem
       title={subcategory.name}
       className={namespace}
-      open={subcategory.open}>
+      open={subcategory.open}
+    >
       <ul className={`${namespace}__filter-list`}>
         <ScrollGradient
           scrollElementClassName={`${namespace}__scroller`}
           color={theme.uiBackground}
-          getScrollElementRef={setListContainer}>
+          getScrollElementRef={setListContainer}
+        >
           <div
             role="presentation"
             className={`${namespace}__filters ${namespace}__filters--visible`}
-            ref={visibleChildren}>
+            ref={visibleChildren}
+          >
             {filters.slice(0, displayCount).map((filter) => (
               <li className={`${namespace}__filter`} key={filter.id}>
                 <FilterSelector filter={filter} onChange={onChange} />
@@ -111,7 +114,8 @@ const FilterSubcategory = ({
           {shouldTruncate && isExpanded && (
             <div
               role="presentation"
-              className={`${namespace}__filters ${namespace}__filters--hidden`}>
+              className={`${namespace}__filters ${namespace}__filters--hidden`}
+            >
               {filters.slice(displayCount).map((filter) => (
                 <li className={`${namespace}__filter`} key={filter.id}>
                   <FilterSelector filter={filter} onChange={onChange} />
@@ -127,7 +131,8 @@ const FilterSubcategory = ({
           iconDescription={buttonLabel}
           kind="ghost"
           onClick={handleExpand}
-          renderIcon={isExpanded ? Subtract16 : Add16}>
+          renderIcon={isExpanded ? Subtract16 : Add16}
+        >
           {isExpanded
             ? buttonLabel
             : `${buttonLabel} (${filters.length - displayCount})`}

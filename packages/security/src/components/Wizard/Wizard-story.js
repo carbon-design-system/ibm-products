@@ -165,7 +165,8 @@ function WizardWrapper({ state, dispatch, ...otherProps }) {
             action('isOpen')(isOpen)
           )
         }
-        kind={state.isOpen ? 'secondary' : 'primary'}>
+        kind={state.isOpen ? 'secondary' : 'primary'}
+      >
         {state.isOpen ? 'Close' : 'Open'}
       </Button>
       <WizardComponent
@@ -262,7 +263,8 @@ storiesOf(patterns('Wizard'), module)
               fontWeight: 'lighter',
               marginTop: '1rem',
               marginLeft: '1.5rem',
-            }}>
+            }}
+          >
             See Knobs
           </h1>
           <WizardComponent
@@ -283,7 +285,8 @@ storiesOf(patterns('Wizard'), module)
                     })
                 : undefined
             }
-            labels={labels}>
+            labels={labels}
+          >
             <WizardStep {...steps[0]} />
             <WizardStep {...steps[1]} />
           </WizardComponent>
@@ -323,7 +326,8 @@ storiesOf(patterns('Wizard'), module)
               fontWeight: 'lighter',
               marginTop: '1rem',
               marginLeft: '1.5rem',
-            }}>
+            }}
+          >
             See Knobs
           </h1>
           <WizardComponent
@@ -339,7 +343,8 @@ storiesOf(patterns('Wizard'), module)
             isOpen={boolean('isOpen', true)}
             onClose={action('onClose')}
             labels={labels}
-            loadingMessage="Loading...">
+            loadingMessage="Loading..."
+          >
             <WizardStep
               title="First Step"
               renderMain={(state, setState) => (
@@ -350,7 +355,8 @@ storiesOf(patterns('Wizard'), module)
                     }}
                     defaultSelected={state.mealType}
                     name="radio-button-group"
-                    legend="Group Legend">
+                    legend="Group Legend"
+                  >
                     <RadioButton
                       value="breakfast"
                       labelText="Breakfast"
@@ -526,7 +532,8 @@ storiesOf(patterns('Wizard'), module)
                     })
                 : undefined
             }
-            labels={labels}>
+            labels={labels}
+          >
             {editableSteps.map((step) => (
               <WizardStep key={step.title} {...step} />
             ))}

@@ -60,7 +60,7 @@ const defaultStoryProps = {
   selectorPrimaryFocus: '.bx--text-input',
 };
 
-const items = ['Day(s)', 'Month(s)', 'Year(s'];
+const items = ['Day(s)', 'Month(s)', 'Year(s)'];
 
 const renderUIShellHeader = () => (
   <HeaderContainer
@@ -92,7 +92,8 @@ const DefaultTemplate = ({ ...args }) => {
         {...args}
         open={open}
         onRequestClose={() => setOpen(false)}
-        selectorPrimaryFocus=".bx--text-input">
+        selectorPrimaryFocus=".bx--text-input"
+      >
         <TextInput
           id="create-side-panel-topic-name-a"
           labelText="Topic name"
@@ -129,7 +130,8 @@ const DefaultTemplate = ({ ...args }) => {
             alignItems: 'flex-end',
             gridGap: '0.75rem',
             gridTemplateColumns: '1fr 1fr',
-          }}>
+          }}
+        >
           <NumberInput
             id="4"
             className={`${prefix}form-item`}
@@ -180,7 +182,8 @@ const TemplateWithFormValidation = ({ ...args }) => {
         {...args}
         open={open}
         onRequestClose={() => setOpen(false)}
-        disableSubmit={!textInput.length}>
+        disableSubmit={!textInput.length}
+      >
         <TextInput
           id="create-side-panel-topic-name-b"
           labelText="Topic name"
@@ -271,10 +274,12 @@ const TemplateWithMultipleForms = ({ ...args }) => {
         {...args}
         open={open}
         onRequestClose={() => setOpen(false)}
-        disableSubmit={!textInput.length}>
+        disableSubmit={!textInput.length}
+      >
         <FormGroup
           className={`${blockClass}__form ${prefix}example-form-group`}
-          legendText="Personal information">
+          legendText="Personal information"
+        >
           <TextInput
             id="create-side-panel-first-name"
             labelText="First name"
@@ -302,7 +307,8 @@ const TemplateWithMultipleForms = ({ ...args }) => {
         </FormGroup>
         <FormGroup
           className={`${blockClass}__form ${prefix}example-form-group`}
-          legendText="Topic information">
+          legendText="Topic information"
+        >
           <TextInput
             id="create-side-panel-topic-name-c"
             labelText="Topic name"

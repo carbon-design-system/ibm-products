@@ -30,7 +30,8 @@ storiesOf(getComponentLabel('IdeButton'), module)
         <IdeButton
           onClick={action('clicked')}
           renderIcon={AddIcon16}
-          iconDescription="Icon description">
+          iconDescription="Icon description"
+        >
           Label
         </IdeButton>
         &nbsp;
@@ -39,7 +40,8 @@ storiesOf(getComponentLabel('IdeButton'), module)
           onClick={action('clicked')}
           kind="primary"
           renderIcon={AddIcon16}
-          iconDescription="Icon description">
+          iconDescription="Icon description"
+        >
           Label
         </IdeButton>
         &nbsp;
@@ -48,7 +50,8 @@ storiesOf(getComponentLabel('IdeButton'), module)
           onClick={action('clicked')}
           kind="secondary"
           renderIcon={AddIcon16}
-          iconDescription="Icon description">
+          iconDescription="Icon description"
+        >
           Label
         </IdeButton>
         &nbsp;
@@ -57,7 +60,8 @@ storiesOf(getComponentLabel('IdeButton'), module)
           onClick={action('clicked')}
           kind="tertiary"
           renderIcon={AddIcon16}
-          iconDescription="Icon description">
+          iconDescription="Icon description"
+        >
           Label
         </IdeButton>
         &nbsp;
@@ -66,7 +70,8 @@ storiesOf(getComponentLabel('IdeButton'), module)
           onClick={action('clicked')}
           kind="danger"
           renderIcon={AddIcon16}
-          iconDescription="Icon description">
+          iconDescription="Icon description"
+        >
           Label
         </IdeButton>
         &nbsp;
@@ -75,7 +80,8 @@ storiesOf(getComponentLabel('IdeButton'), module)
           onClick={action('clicked')}
           kind="ghost"
           renderIcon={AddIcon16}
-          iconDescription="Icon description">
+          iconDescription="Icon description"
+        >
           Label
         </IdeButton>
         &nbsp;
@@ -84,7 +90,8 @@ storiesOf(getComponentLabel('IdeButton'), module)
           onClick={action('clicked')}
           renderIcon={AddIcon16}
           iconDescription="Icon description"
-          disabled>
+          disabled
+        >
           Label
         </IdeButton>
         &nbsp;
@@ -93,7 +100,8 @@ storiesOf(getComponentLabel('IdeButton'), module)
           onClick={action('clicked')}
           renderIcon={AddIcon16}
           iconDescription="Icon description"
-          small>
+          small
+        >
           Label
         </IdeButton>
       </div>
@@ -322,7 +330,8 @@ storiesOf(getComponentLabel('IdeButton'), module)
           onClick={action('clicked')}
           renderIcon={RenewIcon16}
           iconDescription="Icon description"
-          iconAnimation={text('iconAnimation', 'rotate-180-anti')}>
+          iconAnimation={text('iconAnimation', 'rotate-180-anti')}
+        >
           Label
         </IdeButton>
         &nbsp;
@@ -332,7 +341,8 @@ storiesOf(getComponentLabel('IdeButton'), module)
           kind="primary"
           renderIcon={RenewIcon16}
           iconDescription="Icon description"
-          iconAnimation={text('iconAnimation', 'rotate-180-anti')}>
+          iconAnimation={text('iconAnimation', 'rotate-180-anti')}
+        >
           Label
         </IdeButton>
         &nbsp;
@@ -342,7 +352,8 @@ storiesOf(getComponentLabel('IdeButton'), module)
           kind="secondary"
           renderIcon={RenewIcon16}
           iconDescription="Icon description"
-          iconAnimation={text('iconAnimation', 'rotate-180-anti')}>
+          iconAnimation={text('iconAnimation', 'rotate-180-anti')}
+        >
           Label
         </IdeButton>
         &nbsp;
@@ -352,7 +363,8 @@ storiesOf(getComponentLabel('IdeButton'), module)
           kind="tertiary"
           renderIcon={RenewIcon16}
           iconDescription="Icon description"
-          iconAnimation={text('iconAnimation', 'rotate-180-anti')}>
+          iconAnimation={text('iconAnimation', 'rotate-180-anti')}
+        >
           Label
         </IdeButton>
         &nbsp;
@@ -362,7 +374,8 @@ storiesOf(getComponentLabel('IdeButton'), module)
           kind="danger"
           renderIcon={RenewIcon16}
           iconDescription="Icon description"
-          iconAnimation={text('iconAnimation', 'rotate-180-anti')}>
+          iconAnimation={text('iconAnimation', 'rotate-180-anti')}
+        >
           Label
         </IdeButton>
         &nbsp;
@@ -372,7 +385,8 @@ storiesOf(getComponentLabel('IdeButton'), module)
           kind="ghost"
           renderIcon={RenewIcon16}
           iconDescription="Icon description"
-          iconAnimation={text('iconAnimation', 'rotate-180-anti')}>
+          iconAnimation={text('iconAnimation', 'rotate-180-anti')}
+        >
           Label
         </IdeButton>
         &nbsp;
@@ -382,7 +396,8 @@ storiesOf(getComponentLabel('IdeButton'), module)
           renderIcon={RenewIcon16}
           iconDescription="Icon description"
           iconAnimation={text('iconAnimation', 'rotate-180-anti')}
-          disabled>
+          disabled
+        >
           Label
         </IdeButton>
         &nbsp;
@@ -392,7 +407,8 @@ storiesOf(getComponentLabel('IdeButton'), module)
           renderIcon={RenewIcon16}
           iconDescription="Icon description"
           iconAnimation={text('iconAnimation', 'rotate-180-anti')}
-          small>
+          small
+        >
           Label
         </IdeButton>
         <br />

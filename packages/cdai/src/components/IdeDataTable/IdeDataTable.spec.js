@@ -302,7 +302,8 @@ describe('<IdeDataTable>', () => {
           <button
             type="button"
             onClick={onButtonClick}
-            {...idAttribute(prefix(row.id))}>
+            {...idAttribute(prefix(row.id))}
+          >
             Click Me
           </button>
         </td>,
@@ -405,7 +406,8 @@ describe('<IdeDataTable>', () => {
           <button
             type="button"
             onClick={actions.expandRow}
-            {...idAttribute(`expand__button-${row.id}`)}>
+            {...idAttribute(`expand__button-${row.id}`)}
+          >
             Expand
           </button>
         </td>
@@ -449,7 +451,8 @@ describe('<IdeDataTable>', () => {
           <button
             type="button"
             onClick={actions.selectRow}
-            {...idAttribute(`select__button-${row.id}`)}>
+            {...idAttribute(`select__button-${row.id}`)}
+          >
             Select
           </button>
         </td>

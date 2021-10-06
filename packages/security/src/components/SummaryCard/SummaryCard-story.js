@@ -76,7 +76,8 @@ storiesOf(patterns('SummaryCard'), module)
         </SummaryCard>
       </div>
       <div
-        className={`${carbonPrefix}--col-sm-4 ${carbonPrefix}--col-md-4 ${carbonPrefix}--col-lg-4`}>
+        className={`${carbonPrefix}--col-sm-4 ${carbonPrefix}--col-md-4 ${carbonPrefix}--col-lg-4`}
+      >
         <SummaryCard>
           <SummaryCardHeader
             title="Summary card with no footer"
@@ -90,7 +91,8 @@ storiesOf(patterns('SummaryCard'), module)
         </SummaryCard>
       </div>
       <div
-        className={`${carbonPrefix}--col-sm-4 ${carbonPrefix}--col-md-4 ${carbonPrefix}--col-lg-4`}>
+        className={`${carbonPrefix}--col-sm-4 ${carbonPrefix}--col-md-4 ${carbonPrefix}--col-lg-4`}
+      >
         <SummaryCard>
           <SummaryCardHeader title="Summary card with no status" />
           <SummaryCardBody>{lorem.repeat(3)}</SummaryCardBody>
@@ -142,7 +144,8 @@ storiesOf(patterns('SummaryCard'), module)
                 action('SummaryCardBatchAction onClick')(selectedSummaryCards)
               }
               renderIcon={Delete16}
-              tabIndex={getBatchActionProps().shouldShowBatchActions ? 0 : -1}>
+              tabIndex={getBatchActionProps().shouldShowBatchActions ? 0 : -1}
+            >
               Action
             </SummaryCardBatchAction>
           </SummaryCardBatchActions>
@@ -151,7 +154,8 @@ storiesOf(patterns('SummaryCard'), module)
             {summaryCards.map(({ id }) => (
               <div
                 key={id}
-                className={`${carbonPrefix}--col-md-4 ${carbonPrefix}--col-lg-4`}>
+                className={`${carbonPrefix}--col-md-4 ${carbonPrefix}--col-lg-4`}
+              >
                 <SummaryCard>
                   <SummaryCardHeader title={id} />
                   <SummaryCardBody>SummaryCardBody</SummaryCardBody>
@@ -173,7 +177,8 @@ storiesOf(patterns('SummaryCard'), module)
   ))
   .add('with skeleton', () => (
     <div
-      className={`${carbonPrefix}--col-sm-1 ${carbonPrefix}--col-md-2 ${carbonPrefix}--col-lg-4`}>
+      className={`${carbonPrefix}--col-sm-1 ${carbonPrefix}--col-md-2 ${carbonPrefix}--col-lg-4`}
+    >
       <SummaryCardSkeleton />
     </div>
   ));

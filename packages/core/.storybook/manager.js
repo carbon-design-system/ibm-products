@@ -34,7 +34,8 @@ addons.setConfig({
                 display: 'flex',
                 alignItems: 'stretch',
                 justifyContent: 'space-between',
-              }}>
+              }}
+            >
               {parts[0]}
               <div
                 style={{
@@ -47,7 +48,8 @@ addons.setConfig({
                   /* stylelint-disable-next-line carbon/layout-token-use */
                   margin: '0 .5em',
                   borderRadius: '8px',
-                }}>
+                }}
+              >
                 Canary
               </div>
             </div>
@@ -62,7 +64,8 @@ addons.setConfig({
                 display: 'flex',
                 alignItems: 'stretch',
                 justifyContent: 'space-between',
-              }}>
+              }}
+            >
               {parts[0]}
               <div
                 style={{
@@ -75,7 +78,8 @@ addons.setConfig({
                   /* stylelint-disable-next-line carbon/layout-token-use */
                   margin: '0 .5em',
                   borderRadius: '8px',
-                }}>
+                }}
+              >
                 Legacy
               </div>
             </div>

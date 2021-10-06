@@ -227,7 +227,8 @@ const ChildrenContent = () => {
                 ? `${prefix}allowed-characters-invalid`
                 : null
             }`,
-          ].join(' ')}>
+          ].join(' ')}
+        >
           {notesValue.length}/100
         </span>
         <TextArea
@@ -253,7 +254,8 @@ const ChildrenContentWithSteps = ({ currentStep, setCurrentStep }) => {
           {renderDataTable()}
           <Button
             kind="tertiary"
-            onClick={() => setCurrentStep((prev) => prev + 1)}>
+            onClick={() => setCurrentStep((prev) => prev + 1)}
+          >
             View all
           </Button>
         </div>
@@ -324,7 +326,8 @@ const SlideOverTemplate = ({ minimalContent, actions, ...args }) => {
         {...args}
         open={open}
         onRequestClose={() => setOpen(false)}
-        actions={actionSets[actions]}>
+        actions={actionSets[actions]}
+      >
         {!minimalContent && <ChildrenContent />}
       </SidePanel>
     </>
@@ -347,7 +350,8 @@ const StepTemplate = ({ actions, ...args }) => {
         onRequestClose={() => setOpen(false)}
         currentStep={currentStep}
         onNavigationBack={() => setCurrentStep((prev) => prev - 1)}
-        actions={actionSets[actions]}>
+        actions={actionSets[actions]}
+      >
         <ChildrenContentWithSteps
           currentStep={currentStep}
           setCurrentStep={setCurrentStep}
@@ -376,7 +380,8 @@ const SlideInTemplate = ({ actions, ...args }) => {
         {...args}
         open={open}
         onRequestClose={() => setOpen(false)}
-        actions={actionSets[actions]}>
+        actions={actionSets[actions]}
+      >
         <ChildrenContent />
       </SidePanel>
     </>

@@ -43,7 +43,8 @@ const HeaderNotification = ({
         className={`${namespace}__button`}
         aria-label={clearButtonLabel}
         onClick={onClearButtonClick}
-        type="button">
+        type="button"
+      >
         <Icon renderIcon={Close20} />
       </button>
     </div>

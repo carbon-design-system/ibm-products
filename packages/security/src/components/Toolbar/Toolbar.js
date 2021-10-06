@@ -176,7 +176,8 @@ export default class Toolbar extends Component {
                     icon={icon}
                     key={navigationItemId}
                     navigationItemTitle={navigationItemTitle}
-                    title={navigationItemTitle}>
+                    title={navigationItemTitle}
+                  >
                     {children.map(
                       ({
                         href: navigationListItemHref,
@@ -194,7 +195,8 @@ export default class Toolbar extends Component {
                           element={navigationListItemElement}
                           link={content === undefined}
                           handleItemSelect={() => this.toggleContent(content)}
-                          {...props}>
+                          {...props}
+                        >
                           {navigationListItemTitle}
                         </NavItem>
                       )
@@ -208,7 +210,8 @@ export default class Toolbar extends Component {
                     href={href}
                     link={content === undefined}
                     handleItemSelect={() => this.toggleContent(content)}
-                    {...props}>
+                    {...props}
+                  >
                     {hasIcon && (
                       <img
                         alt={navigationItemTitle}
@@ -220,7 +223,8 @@ export default class Toolbar extends Component {
                     <div
                       className={classnames(`${namespace}__nav__item__title`, {
                         [`${namespace}__nav__item__title--icon`]: hasIcon,
-                      })}>
+                      })}
+                    >
                       {navigationItemTitle}
                     </div>
                   </NavItem>
@@ -289,7 +293,8 @@ export default class Toolbar extends Component {
               role="navigation"
               aria-label={currentType}
               id={`${namespace}--toolbar--${currentType}`}
-              className={`${namespace}__panel`}>
+              className={`${namespace}__panel`}
+            >
               <IconButton
                 onClick={this.toggleContent}
                 renderIcon={ArrowLeft20}
@@ -305,12 +310,14 @@ export default class Toolbar extends Component {
                 role="navigation"
                 aria-label={currentType}
                 id={`${namespace}--toolbar--${currentType}`}
-                className={`${namespace}__panel`}>
+                className={`${namespace}__panel`}
+              >
                 {Object.keys(isActive).map((type) => (
                   <Transition
                     key={type}
                     className={`${namespace}__content`}
-                    component="span">
+                    component="span"
+                  >
                     {this.renderContent(type)}
                   </Transition>
                 ))}

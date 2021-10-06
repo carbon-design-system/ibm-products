@@ -54,7 +54,8 @@ export let ModifiedTabs = ({
               onClose={() => handleClose(tab.id)}
               unsavedContent={tab.unsavedContent}
             />
-          }>
+          }
+        >
           <div className="some-content">{tab.content}</div>
         </Tab>
       ))}
@@ -63,7 +64,8 @@ export let ModifiedTabs = ({
         label={<ModifiedTabLabelNew label={newTabLabel} />}
         onClick={handleNewTab}
         onKeyUp={(ev) => ev.keyCode === 32 && handleNewTab()}
-        role="button">
+        role="button"
+      >
         <div className="some-content">{newTabContent}</div>
       </Tab>
     </Tabs>

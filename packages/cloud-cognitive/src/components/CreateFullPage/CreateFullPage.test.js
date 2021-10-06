@@ -74,7 +74,8 @@ const renderComponent = ({ ...rest }) =>
     <CreateFullPage
       {...rest}
       onRequestSubmit={onRequestSubmitRejectFn}
-      {...defaultFullPageProps}>
+      {...defaultFullPageProps}
+    >
       <CreateFullPageStep title="Title 1" subtitle="Subtitle 1">
         <p>1</p>
       </CreateFullPageStep>
@@ -97,13 +98,15 @@ const renderCreateFullPage = ({
     <CreateFullPage
       {...rest}
       onRequestSubmit={rejectOnSubmit ? onRequestSubmitRejectFn : submitFn}
-      {...defaultFullPageProps}>
+      {...defaultFullPageProps}
+    >
       <CreateFullPageStep
         title="Title 1"
         subtitle="Subtitle 1"
         onNext={rejectOnNext ? onNextStepRejectionFn : onNext}
         hasFieldset
-        fieldsetLegendText="Title1">
+        fieldsetLegendText="Title1"
+      >
         {stepFormField}
       </CreateFullPageStep>
       <CreateFullPageStep title="Title 2" description="2" formLegendText="2">
@@ -112,7 +115,8 @@ const renderCreateFullPage = ({
       <CreateFullPageStep
         title="Title 3"
         description="3"
-        onNext={rejectOnSubmitNext ? finalStepOnNextRejectFn : finalOnNextFn}>
+        onNext={rejectOnSubmitNext ? finalStepOnNextRejectFn : finalOnNextFn}
+      >
         {stepFormField}
       </CreateFullPageStep>
     </CreateFullPage>
@@ -123,7 +127,8 @@ const renderEmptyCreateFullPage = ({ ...rest }) =>
     <CreateFullPage
       {...rest}
       {...defaultFullPageProps}
-      onRequestSubmit={onRequestSubmitFn}>
+      onRequestSubmit={onRequestSubmitFn}
+    >
       {stepFormField}
     </CreateFullPage>
   );
@@ -133,7 +138,8 @@ const renderOneStepCreateFullPage = ({ ...rest }) =>
     <CreateFullPage
       {...rest}
       {...defaultFullPageProps}
-      onRequestSubmit={onRequestSubmitFn}>
+      onRequestSubmit={onRequestSubmitFn}
+    >
       <CreateFullPageStep title="Title 1">{stepFormField}</CreateFullPageStep>
     </CreateFullPage>
   );
@@ -143,7 +149,8 @@ const renderFullPageWithNonStepChildren = ({ ...rest }) =>
     <CreateFullPage
       {...rest}
       {...defaultFullPageProps}
-      onRequestSubmit={onRequestSubmitFn}>
+      onRequestSubmit={onRequestSubmitFn}
+    >
       {stepFormField}
       <CreateFullPageStep title="Title 1">{stepFormField}</CreateFullPageStep>
       {stepFormField}
@@ -243,11 +250,13 @@ describe(componentName, () => {
     rerender(
       <CreateFullPage
         onRequestSubmit={onRequestSubmitRejectFn}
-        {...defaultFullPageProps}>
+        {...defaultFullPageProps}
+      >
         <CreateFullPageStep
           title="Title 1"
           formLegendText="1"
-          onNext={onNextStepRejectionFn}>
+          onNext={onNextStepRejectionFn}
+        >
           {stepFormField}
         </CreateFullPageStep>
         <CreateFullPageStep title="Title 2" description="2" formLegendText="2">
@@ -257,7 +266,8 @@ describe(componentName, () => {
           title="Title 3"
           description="3"
           formLegendText="3"
-          onNext={finalStepOnNextRejectFn}>
+          onNext={finalStepOnNextRejectFn}
+        >
           {stepFormField}
         </CreateFullPageStep>
       </CreateFullPage>
@@ -376,18 +386,21 @@ describe(componentName, () => {
     render(
       <CreateFullPage
         onRequestSubmit={onRequestSubmitRejectFn}
-        {...defaultFullPageProps}>
+        {...defaultFullPageProps}
+      >
         <CreateFullPageStep
           title="Title 1"
           formLegendText="1"
-          onNext={onNextStepFn}>
+          onNext={onNextStepFn}
+        >
           {stepFormField}
         </CreateFullPageStep>
         <CreateFullPageStep
           title="Title 2"
           description="2"
           formLegendText="2"
-          disableSubmit>
+          disableSubmit
+        >
           {stepFormField}
         </CreateFullPageStep>
       </CreateFullPage>

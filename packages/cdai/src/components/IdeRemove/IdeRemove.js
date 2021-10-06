@@ -71,12 +71,14 @@ class IdeRemove extends React.Component {
           primaryButtonDisabled={
             removeType === HIGH_IMPACT &&
             highImpactItemName !== this.state.itemName
-          }>
+          }
+        >
           <React.Fragment>
             <p {...idAttribute('IdeRemove-modal-body')}>{content.body}</p>
             {removeType === HIGH_IMPACT && !didDelete ? (
               <div
-                className={`${idePrefix}-remove--modal-body-textfield-container`}>
+                className={`${idePrefix}-remove--modal-body-textfield-container`}
+              >
                 <TextInput
                   {...idAttribute('IdeRemove-modal-body-high-impact-textfield')}
                   onChange={this.textFieldChange}

@@ -78,7 +78,8 @@ const Card = ({
       href={link}
       aria-label={label}
       onClick={onClick}
-      {...other}>
+      {...other}
+    >
       {content}
     </a>
   ) : (

@@ -85,7 +85,8 @@ storiesOf(patterns('FilterPanel'), module)
         placeholder={text(
           'FilterPanelSearch placeholder text (placeholder)',
           filterSearchLabel
-        )}>
+        )}
+      >
         <FilterPanelGroup title="Filter accordion item">
           <FilterPanelCheckbox
             labelText="Filter checkbox"
@@ -123,7 +124,8 @@ storiesOf(patterns('FilterPanel'), module)
           title="Filter accordion item"
           count={3}
           expandLabel="View more"
-          collapseLabel="View less">
+          collapseLabel="View less"
+        >
           <FilterPanelCheckbox
             labelText="Filter checkbox"
             id="filter-checkbox"
@@ -145,7 +147,8 @@ storiesOf(patterns('FilterPanel'), module)
           title="Truncated accordion item"
           count={12}
           expandLabel="View more"
-          collapseLabel="View less">
+          collapseLabel="View less"
+        >
           {new Array(12).fill(null).map((value, index) => (
             <FilterPanelCheckbox
               // eslint-disable-next-line react/no-array-index-key
@@ -163,7 +166,8 @@ storiesOf(patterns('FilterPanel'), module)
           title="Filter accordion item 1"
           count={4}
           expandLabel="View more"
-          collapseLabel="View less">
+          collapseLabel="View less"
+        >
           {new Array(4).fill(null).map((value, index) => (
             <FilterPanelCheckbox
               // eslint-disable-next-line react/no-array-index-key
@@ -179,7 +183,8 @@ storiesOf(patterns('FilterPanel'), module)
           title="Filter accordion item 2"
           count={6}
           expandLabel="View more"
-          collapseLabel="View less">
+          collapseLabel="View less"
+        >
           {new Array(6).fill(null).map((value, index) => (
             <FilterPanelCheckbox
               // eslint-disable-next-line react/no-array-index-key

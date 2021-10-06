@@ -67,7 +67,8 @@ export const CarbonThemesPanel = ({ api, active, channel }) => {
           name="carbon-theme"
           value={theme}
           onChange={(ev) => setTheme(ev.target.value)}
-          size="flex">
+          size="flex"
+        >
           {themes.map((option) => (
             <option key={option} value={option}>
               {option}

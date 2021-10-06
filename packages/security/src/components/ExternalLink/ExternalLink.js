@@ -25,7 +25,8 @@ const ExternalLink = ({ children, className, href, ...other }) => (
     href={href}
     rel="noopener noreferrer"
     target="_blank"
-    {...other}>
+    {...other}
+  >
     <span className={`${namespace}__title`}>{children}</span>
     <span className={`${namespace}__icon-wrapper`}>
       <Icon className={`${namespace}__icon`} renderIcon={Launch16} />

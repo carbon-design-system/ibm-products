@@ -39,7 +39,8 @@ export let CardHeader = ({
         </div>
         {hasActions && (
           <div
-            className={`${blockClass}__actions ${blockClass}__actions-header`}>
+            className={`${blockClass}__actions ${blockClass}__actions-header`}
+          >
             {actions}
           </div>
         )}

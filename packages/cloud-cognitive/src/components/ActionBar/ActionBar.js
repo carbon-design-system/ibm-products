@@ -73,12 +73,14 @@ export let ActionBar = React.forwardRef(
         <div
           className={`${blockClass}__hidden-sizing-items`}
           aria-hidden={true}
-          ref={sizingRef}>
+          ref={sizingRef}
+        >
           <ActionBarOverflowItems
             className={`${blockClass}__hidden-sizing-item`}
             overflowAriaLabel="hidden sizing overflow items"
             overflowItems={[]}
-            key="hidden-overflow-menu"></ActionBarOverflowItems>
+            key="hidden-overflow-menu"
+          ></ActionBarOverflowItems>
           {newItemArray.map(({ key, ...rest }) => (
             <ActionBarItem
               {...rest}
@@ -106,7 +108,8 @@ export let ActionBar = React.forwardRef(
           <ActionBarOverflowItems
             overflowAriaLabel={overflowAriaLabel}
             overflowItems={newOverflowItems}
-            key={`overflow-menu-${internalId.current}`}></ActionBarOverflowItems>
+            key={`overflow-menu-${internalId.current}`}
+          ></ActionBarOverflowItems>
         );
       }
 
@@ -215,7 +218,8 @@ export let ActionBar = React.forwardRef(
           className={cx([
             `${blockClass}__displayed-items`,
             { [`${blockClass}__displayed-items--right`]: rightAlign },
-          ])}>
+          ])}
+        >
           {displayedItems}
         </div>
       </div>

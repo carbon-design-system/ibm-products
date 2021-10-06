@@ -480,7 +480,7 @@ const commonArgs = {
   actionBarOverflowAriaLabel,
   collapseHeaderIconDescription,
   expandHeaderIconDescription,
-}
+};
 // Stories
 export const withTitle = prepareStory(Template, {
   storyName: 'Simple page header with page title',

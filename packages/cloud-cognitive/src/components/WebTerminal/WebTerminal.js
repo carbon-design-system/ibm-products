@@ -15,14 +15,25 @@ import { pkg } from '../../settings';
 
 // Carbon and package components we use.
 import { Close16 as Close, Help16 as Help } from '@carbon/icons-react';
+import { Button } from 'carbon-components-react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'WebTerminal';
-const blockClass = `${pkg.prefix}-web-terminal`;
+const blockClass = `${pkg.prefix}--web-terminal`;
 
 export let WebTerminal = React.forwardRef(
   (
-    { children, className, closeTerminal, documentationLinks, open, ...rest },
+    {
+      children,
+      className,
+      closeTerminal,
+      documentationLinks,
+      documentationLinksIconDescription,
+      open,
+      actions,
+      closeIconDescription,
+      ...rest
+    },
     ref
   ) => {
     const [shouldRender, setRender] = useState(open);
@@ -80,11 +91,14 @@ export let WebTerminal = React.forwardRef(
         <header className={`${blockClass}__bar`}>
           <div className={`${blockClass}__actions`}>
             {showDocumentationLinks && (
-              <button
+              <Button
+                hasIconOnly
+                kind="ghost"
                 type="button"
+                iconDescription={documentationLinksIconDescription}
+                renderIcon={Help}
                 className={`${blockClass}__bar-icon-container`}
               >
-                <Help className={`${blockClass}__bar-icon`} />
                 <ul className={`${blockClass}__bar-icon-dropdown`}>
                   {documentationLinks.map(
                     ({ label, onClick, href = null, openInNewTab = true }) => (
@@ -107,22 +121,26 @@ export let WebTerminal = React.forwardRef(
                     )
                   )}
                 </ul>
-              </button>
+              </Button>
             )}
+            {actions.map(({ renderIcon, onClick, iconDescription }) => (
+              <Button
+                key={iconDescription}
+                hasIconOnly
+                renderIcon={renderIcon}
+                onClick={onClick}
+                iconDescription={iconDescription}
+                kind="ghost"
+              />
+            ))}
           </div>
-          <button
-            type="button"
-            className={cx([
-              `${blockClass}__bar-icon-container`,
-              `${blockClass}__close-button`,
-            ])}
+          <Button
+            hasIconOnly
+            renderIcon={Close}
+            kind="ghost"
+            iconDescription={closeIconDescription}
             onClick={closeTerminal}
-            onKeyDown={closeTerminal}
-          >
-            <Close
-              className={`${blockClass}__bar-icon ${blockClass}__bar-icon--close`}
-            />
-          </button>
+          />
         </header>
         <div className={`${blockClass}__body`}>{children}</div>
       </div>
@@ -142,6 +160,17 @@ WebTerminal.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 WebTerminal.propTypes = {
   /**
+   * An array of actions to be displayed in the web terminal header bar
+   */
+  actions: PropTypes.arrayOf(
+    PropTypes.shape({
+      renderIcon: PropTypes.object.isRequired,
+      onClick: PropTypes.func.isRequired,
+      iconDescription: PropTypes.string.isRequired,
+    })
+  ),
+
+  /**
    * Provide your own terminal component as children to show up in the web terminal
    */
   children: PropTypes.oneOfType([
@@ -153,6 +182,11 @@ WebTerminal.propTypes = {
    * Custom classname for additional styling of the web terminal
    */
   className: PropTypes.string,
+
+  /**
+   * Icon description for the close button
+   */
+  closeIconDescription: PropTypes.string,
 
   /**
    * Function that should set the open prop to false
@@ -172,6 +206,11 @@ WebTerminal.propTypes = {
   ),
 
   /**
+   * Array of objects for each documentation link
+   */
+  documentationLinksIconDescription: PropTypes.string,
+
+  /**
    * Boolean that determines if the web terminal is opened or closed
    */
   open: PropTypes.bool.isRequired,
@@ -182,6 +221,9 @@ WebTerminal.propTypes = {
 // 'undefined' values reasonably. Default values should be provided when the
 // component needs to make a choice or assumption when a prop is not supplied.
 WebTerminal.defaultProps = {
+  actions: [],
+  closeIconDescription: 'Close terminal',
   documentationLinks: [],
+  documentationLinksIconDescription: 'Show documentation links',
   className: '',
 };

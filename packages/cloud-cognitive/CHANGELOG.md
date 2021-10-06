@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.90.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.90.0...@carbon/ibm-cloud-cognitive@0.90.1) (2021-10-06)
+
+
+### Bug Fixes
+
+* **SidePanel:** give default scroll height if no subtitle ([#1315](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1315)) ([b70e56b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b70e56bb78c9384d92b20596ddb8503ab2c1fb17))
+
+
+
+
+
+# [0.90.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.89.0...@carbon/ibm-cloud-cognitive@0.90.0) (2021-10-06)
+
+
+### Features
+
+* adds actions prop to web terminal ([#1279](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1279)) ([416cb9a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/416cb9ad1e4ead91508d4b288bb98c0202d3e019))
+
+
+
+
+
+# [0.89.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.88.1...@carbon/ibm-cloud-cognitive@0.89.0) (2021-10-02)
+
+
+### Features
+
+* update Carbon versions and package dependencies to latest ([#1296](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1296)) ([f1da0bd](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f1da0bd9192c4d999032df0dbe20d67b6ece89b0))
+
+
+
+
+
 ## [0.88.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.88.0...@carbon/ibm-cloud-cognitive@0.88.1) (2021-09-29)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

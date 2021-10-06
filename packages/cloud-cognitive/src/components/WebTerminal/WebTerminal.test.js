@@ -14,7 +14,7 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { documentationLinks } from './preview-components/documentationLinks';
 import { WebTerminal } from '.';
 
-const blockClass = `${pkg.prefix}-web-terminal`;
+const blockClass = `${pkg.prefix}--web-terminal`;
 const name = WebTerminal.displayName;
 const dataTestId = uuidv4();
 
@@ -49,13 +49,13 @@ describe(name, () => {
   test('should call close terminal function', () => {
     const { click } = fireEvent;
     const onCloseHandler = jest.fn();
-    const { container } = render(
+    render(
       <WebTerminal closeTerminal={onCloseHandler} open>
         Body content
       </WebTerminal>
     );
 
-    click(container.querySelector(`.${blockClass}__close-button`));
+    click(screen.getByLabelText('Close terminal'));
     expect(onCloseHandler).toBeCalled();
   });
   test('should render documentation link text', () => {

@@ -470,12 +470,24 @@ const Template = ({ children, ...props }) => (
   </>
 );
 
+const commonArgs = {
+  allTagsModalSearchLabel,
+  allTagsModalSearchPlaceholderText,
+  allTagsModalTitle,
+  showAllTagsLabel,
+  breadcrumbOverflowAriaLabel,
+  pageActionsOverflowLabel,
+  actionBarOverflowAriaLabel,
+  collapseHeaderIconDescription,
+  expandHeaderIconDescription,
+}
 // Stories
 export const withTitle = prepareStory(Template, {
   storyName: 'Simple page header with page title',
   args: {
     title: 2,
     hasBackgroundAlways: false,
+    ...commonArgs,
   },
 });
 
@@ -484,7 +496,7 @@ export const withBreadcrumbs = prepareStory(Template, {
   args: {
     ...withTitle.args,
     breadcrumbs: 2,
-    breadcrumbOverflowAriaLabel,
+    ...commonArgs,
   },
 });
 
@@ -493,8 +505,8 @@ export const withButtons = prepareStory(Template, {
   args: {
     ...withBreadcrumbs.args,
     pageActions: 2,
-    pageActionsOverflowLabel,
     children: 1,
+    ...commonArgs,
   },
 });
 
@@ -503,10 +515,9 @@ export const withTabs = prepareStory(Template, {
   args: {
     title: 2,
     breadcrumbs: 2,
-    breadcrumbOverflowAriaLabel,
     pageActions: 2,
-    pageActionsOverflowLabel,
     navigation: 1,
+    ...commonArgs,
   },
 });
 
@@ -515,10 +526,9 @@ export const withTags = prepareStory(Template, {
   args: {
     title: 2,
     breadcrumbs: 2,
-    breadcrumbOverflowAriaLabel,
     pageActions: 2,
-    pageActionsOverflowLabel,
     tags: 1,
+    ...commonArgs,
   },
 });
 
@@ -527,11 +537,10 @@ export const withTabsAndTags = prepareStory(Template, {
   args: {
     title: 2,
     breadcrumbs: 2,
-    breadcrumbOverflowAriaLabel,
     pageActions: 2,
-    pageActionsOverflowLabel,
     navigation: 1,
     tags: 1,
+    ...commonArgs,
   },
 });
 
@@ -541,8 +550,8 @@ export const withSubtitle = prepareStory(Template, {
     title: 2,
     subtitle,
     breadcrumbs: 2,
-    breadcrumbOverflowAriaLabel,
     navigation: 1,
+    ...commonArgs,
   },
 });
 
@@ -551,9 +560,9 @@ export const withSummaryDetails = prepareStory(Template, {
   args: {
     title: 2,
     breadcrumbs: 2,
-    breadcrumbOverflowAriaLabel,
     navigation: 1,
     children: 2,
+    ...commonArgs,
   },
 });
 
@@ -562,10 +571,9 @@ export const withActionsToolbar = prepareStory(Template, {
   args: {
     title: 2,
     breadcrumbs: 2,
-    breadcrumbOverflowAriaLabel,
     navigation: 1,
     actionBarItems: 2,
-    actionBarOverflowAriaLabel,
+    ...commonArgs,
   },
 });
 
@@ -574,10 +582,9 @@ export const withBreadcrumbActionsToolbarOnly = prepareStory(Template, {
   args: {
     title: 1,
     breadcrumbs: 2,
-    breadcrumbOverflowAriaLabel,
     actionBarItems: 2,
-    actionBarOverflowAriaLabel,
     collapseTitle: true,
+    ...commonArgs,
   },
 });
 
@@ -587,15 +594,13 @@ export const fullyLoaded = prepareStory(Template, {
     title: 2,
     subtitle,
     breadcrumbs: 2,
-    breadcrumbOverflowAriaLabel,
     pageActions: 2,
-    pageActionsOverflowLabel,
     children: 2,
     navigation: 1,
     tags: 1,
     actionBarItems: 2,
-    actionBarOverflowAriaLabel,
     collapseHeader: true,
+    ...commonArgs,
   },
 });
 
@@ -605,21 +610,13 @@ export const fullyLoadedAndSome = prepareStory(Template, {
     title: 3,
     subtitle: longSubtitle,
     breadcrumbs: 3,
-    breadcrumbOverflowAriaLabel,
     pageActions: 3,
-    pageActionsOverflowLabel,
     children: 2,
     navigation: 2,
     tags: 2,
-    allTagsModalSearchLabel,
-    allTagsModalSearchPlaceholderText,
-    allTagsModalTitle,
-    showAllTagsLabel,
     actionBarItems: 3,
-    actionBarOverflowAriaLabel,
     hasCollapseHeaderToggle: true,
-    collapseHeaderIconDescription,
-    expandHeaderIconDescription,
+    ...commonArgs,
   },
 });
 
@@ -663,14 +660,12 @@ export const demo = prepareStory(TemplateDemo, {
     title: 5,
     subtitle: demoSubtitle,
     breadcrumbs: 4,
-    breadcrumbOverflowAriaLabel,
     pageActions: 4,
-    pageActionsOverflowLabel,
     children: 3,
     navigation: 3,
     tags: 3,
     actionBarItems: 4,
-    actionBarOverflowAriaLabel,
     disableBreadcrumbScroll: true,
+    ...commonArgs,
   },
 });

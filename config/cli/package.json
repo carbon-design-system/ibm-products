@@ -29,7 +29,7 @@
     "execa": "^5.1.1",
     "fast-glob": "^3.2.7",
     "fs-extra": "^10.0.0",
-    "inquirer": "^8.1.5",
+    "inquirer": "^8.2.0",
     "npm-check-updates": "^11.8.5",
     "prettier": "^2.4.1",
     "prettier-config-carbon": "^0.4.0",

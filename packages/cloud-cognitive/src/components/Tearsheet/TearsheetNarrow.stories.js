@@ -240,7 +240,6 @@ export const fullyLoaded = prepareStory(Template, {
     label,
     onClose: action('onClose called'),
     title,
-    verticalPosition: 'normal',
     actions: 3,
   },
 });
@@ -252,7 +251,6 @@ export const stacked = prepareStory(StackedTemplate, {
     description,
     height: 'lower',
     label,
-    preventCloseOnClickOutside: true,
     actions: 6,
   },
 });

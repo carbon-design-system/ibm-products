@@ -1711,7 +1711,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: none;
 }
 
-.exp--tearsheet.exp--tearsheet--wide .bx--modal-header__heading {
+.exp--tearsheet.exp--tearsheet--wide .bx--modal-header__heading.exp--tearsheet__heading {
   font-size: var(--cds-productive-heading-04-font-size, 1.75rem);
   font-weight: var(--cds-productive-heading-04-font-weight, 400);
   line-height: var(--cds-productive-heading-04-line-height, 1.28572);

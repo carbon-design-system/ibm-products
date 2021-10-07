@@ -204,7 +204,13 @@ export const TearsheetShell = React.forwardRef(
                   <Wrap element="h2" className={`${bcModalHeader}__label`}>
                     {label}
                   </Wrap>
-                  <Wrap element="h3" className={cx(`${bcModalHeader}__heading`, `${bc}__heading`)}>
+                  <Wrap
+                    element="h3"
+                    className={cx(
+                      `${bcModalHeader}__heading`,
+                      `${bc}__heading`
+                    )}
+                  >
                     {title}
                   </Wrap>
                   <Wrap className={`${bc}__header-description`}>

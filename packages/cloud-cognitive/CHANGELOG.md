@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.91.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.91.1...@carbon/ibm-cloud-cognitive@0.91.2) (2021-10-07)
+
+
+### Bug Fixes
+
+* **Tearsheet:** prevent heading styles being added to modal heading ([#1319](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1319)) ([0de0f13](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/0de0f1304cc29388555e2e5d401166ab6d6d4c13))
+
+
+
+
+
 ## [0.91.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.91.0...@carbon/ibm-cloud-cognitive@0.91.1) (2021-10-07)
 
 

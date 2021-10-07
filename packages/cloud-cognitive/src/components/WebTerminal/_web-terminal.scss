@@ -2,6 +2,7 @@
 @import '../../global/styles/project-settings';
 
 $web-terminal-width: 36.5rem;
+$block-class: #{$pkg-prefix}--web-terminal;
 
 @keyframes webTerminalEntrance {
   0% {
@@ -33,7 +34,7 @@ $web-terminal-width: 36.5rem;
   despite of which carbon theme the user has.
 */
 
-.#{$pkg-prefix}-web-terminal {
+.#{$block-class} {
   @include carbon--theme($carbon--theme--g90, true);
 
   position: fixed;
@@ -44,7 +45,7 @@ $web-terminal-width: 36.5rem;
   background-color: $gray-100; /* stylelint-disable-line  */
 }
 
-.#{$pkg-prefix}-web-terminal__bar {
+.#{$block-class}__bar {
   display: flex;
   height: 3rem;
   align-items: center;
@@ -52,23 +53,14 @@ $web-terminal-width: 36.5rem;
   background-color: $ui-background;
 }
 
-.#{$pkg-prefix}-web-terminal__bar-icon {
-  cursor: pointer;
-  fill: $text-01;
+.#{$block-class}__actions {
+  display: flex;
 }
 
-.#{$pkg-prefix}-web-terminal__bar-icon-container {
-  position: relative;
-  padding: $spacing-04;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-}
-
-.#{$pkg-prefix}-web-terminal__bar-icon-dropdown {
+.#{$block-class}__bar-icon-dropdown {
   position: absolute;
-  top: 2.8125rem; /* stylelint-disable-line */
-  left: 0;
+  top: 2.9375rem; /* stylelint-disable-line */
+  left: -1px; /* stylelint-disable-line */
   width: 10rem;
   background-color: $field-01;
 
@@ -79,16 +71,14 @@ $web-terminal-width: 36.5rem;
   visibility: hidden;
 }
 
-.#{$pkg-prefix}-web-terminal__bar-icon-container:hover
-  .#{$pkg-prefix}-web-terminal__bar-icon-dropdown,
-.#{$pkg-prefix}-web-terminal__bar-icon-container:focus
-  .#{$pkg-prefix}-web-terminal__bar-icon-dropdown {
+.#{$block-class}__bar-icon-container:hover .#{$block-class}__bar-icon-dropdown,
+.#{$block-class}__bar-icon-container:focus .#{$block-class}__bar-icon-dropdown {
   opacity: 1;
   transform: translateY(0);
   visibility: visible;
 }
 
-.#{$pkg-prefix}-web-terminal__bar-icon-dropdown-link {
+.#{$block-class}__bar-icon-dropdown-link {
   display: flex;
   width: 100%;
   height: 2.125rem;
@@ -102,18 +92,12 @@ $web-terminal-width: 36.5rem;
   transition: all carbon--motion(standard, productive) $duration--fast-02;
 }
 
-.#{$pkg-prefix}-web-terminal__bar-icon-dropdown-link:hover {
-  //NOTE: The 4c4c4c is a theme token but not a gray value token
+.#{$block-class}__bar-icon-dropdown-link:hover {
   background-color: $hover-ui;
   color: $text-01;
 }
 
-.#{$pkg-prefix}-web-terminal__close-container {
-  padding: $spacing-04;
-  cursor: pointer;
-}
-
 // Terminal body styles
-.#{$pkg-prefix}-web-terminal__body {
+.#{$block-class}__body {
   height: 100%;
 }

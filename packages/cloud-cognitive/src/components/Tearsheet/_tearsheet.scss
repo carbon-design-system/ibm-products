@@ -84,6 +84,7 @@
       transform: translate3d(0, m#{i}n(95vh, 500px), 0);
     }
 
+    // extra specificity to ensure this transition overrides the carbon default
     &.#{$block-class}.#{$block-class} .#{$block-class}__container {
       transition: transform $motion-duration motion(entrance, expressive),
         max-height $motion-duration motion(entrance, expressive);

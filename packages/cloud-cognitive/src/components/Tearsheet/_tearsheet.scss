@@ -179,7 +179,8 @@
       display: none;
     }
 
-    &.#{$block-class}--wide .#{$carbon-prefix}--modal-header__heading {
+    &.#{$block-class}--wide
+      .#{$carbon-prefix}--modal-header__heading.#{$block-class}__heading {
       @include carbon--type-style('productive-heading-04');
     }
 

@@ -788,7 +788,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --exp--side-panel--collapsed-title-y-position: 1rem;
   --exp--side-panel--label-text-height: 0;
   position: fixed;
-  z-index: 3;
+  z-index: 9000;
   top: var(--cds-spacing-09, 3rem);
   height: calc(100% - 3rem);
   box-sizing: border-box;
@@ -1207,7 +1207,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .exp--side-panel__container .exp--side-panel__inner-content-with-actions {
-  height: calc(100vh - 7rem);
+  height: calc( 100vh - (var(--exp--side-panel--content-bottom-padding) + 2rem));
 }
 
 .exp--side-panel__container .exp--side-panel__inner-content.exp--side-panel__static-inner-content {
@@ -1380,7 +1380,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .exp--side-panel__overlay {
   position: fixed;
-  z-index: 2;
+  z-index: 6000;
   top: 0;
   right: 0;
   bottom: 0;
@@ -1711,7 +1711,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: none;
 }
 
-.exp--tearsheet.exp--tearsheet--wide .bx--modal-header__heading {
+.exp--tearsheet.exp--tearsheet--wide .bx--modal-header__heading.exp--tearsheet__heading {
   font-size: var(--cds-productive-heading-04-font-size, 1.75rem);
   font-weight: var(--cds-productive-heading-04-font-weight, 400);
   line-height: var(--cds-productive-heading-04-line-height, 1.28572);

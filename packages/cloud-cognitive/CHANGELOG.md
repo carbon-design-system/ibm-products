@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.91.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.91.1...@carbon/ibm-cloud-cognitive@0.91.2) (2021-10-07)
+
+
+### Bug Fixes
+
+* **Tearsheet:** prevent heading styles being added to modal heading ([#1319](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1319)) ([0de0f13](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/0de0f1304cc29388555e2e5d401166ab6d6d4c13))
+
+
+
+
+
+## [0.91.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.91.0...@carbon/ibm-cloud-cognitive@0.91.1) (2021-10-07)
+
+
+### Bug Fixes
+
+* **SidePanel:** use carbon z index mixin for side panel container ([#1317](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1317)) ([e3b6b8f](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e3b6b8fab7ddbfa56f2334c14537056b456fa4e0))
+
+
+
+
+
 # [0.91.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.90.3...@carbon/ibm-cloud-cognitive@0.91.0) (2021-10-07)
 
 

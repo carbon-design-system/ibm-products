@@ -358,7 +358,6 @@ export const stacked = prepareStory(StackedTemplate, {
     height: 'lower',
     influencer,
     label,
-    preventCloseOnClickOutside: true,
     actions: 6,
   },
 });

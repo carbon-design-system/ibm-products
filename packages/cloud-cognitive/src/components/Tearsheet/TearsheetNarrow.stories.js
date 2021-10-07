@@ -251,7 +251,6 @@ export const stacked = prepareStory(StackedTemplate, {
     description,
     height: 'lower',
     label,
-    preventCloseOnClickOutside: true,
     actions: 6,
   },
 });

@@ -50,7 +50,6 @@ export const AllAttributesSet = prepareStory(Template, {
     height: 'normal',
     // onClose: () => false,
     open: true,
-    preventCloseOnClickOutside: true,
     size: 'narrow',
   },
 });

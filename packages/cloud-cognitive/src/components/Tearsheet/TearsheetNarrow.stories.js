@@ -240,7 +240,6 @@ export const fullyLoaded = prepareStory(Template, {
     label,
     onClose: action('onClose called'),
     title,
-    verticalPosition: 'normal',
     actions: 3,
   },
 });

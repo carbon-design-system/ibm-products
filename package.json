@@ -27,9 +27,11 @@
     "format:prettier": "yarn format:prettier:files '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd,coverage}/**' '!README.md'",
     "format:prettier:files": "prettier",
     "generate": "lerna run generate --loglevel success --scope \"@carbon/ibm-cloud-cognitive\" --",
-    "lint": "run-p lint:* spellcheck 'format:prettier --check --loglevel warn'",
+    "lint": "run-p lint:* spellcheck",
     "lint:es": "yarn lint:es:files 'packages/*/src/**/*.js'",
     "lint:es:files": "eslint",
+    "lint:prettier": "yarn format:prettier --check --loglevel warn",
+    "lint:prettier:files": "yarn format:prettier:files --check --loglevel warn",
     "lint:style": "yarn lint:style:files 'packages/*/src/**/*.scss'",
     "lint:style:files": "stylelint --report-needless-disables --report-invalid-scope-disables",
     "run-all": "lerna run --stream --prefix --loglevel success",
@@ -133,7 +135,7 @@
     }
   },
   "lint-staged": {
-    "**/*.{js,md,mdx,scss}": "yarn format:prettier:files",
+    "**/*.{js,md,mdx,scss}": "yarn lint:prettier:files",
     "**/*.js": "yarn lint:es:files",
     "**/*.scss": "yarn lint:style:files",
     "**/*": "yarn spellcheck:files"

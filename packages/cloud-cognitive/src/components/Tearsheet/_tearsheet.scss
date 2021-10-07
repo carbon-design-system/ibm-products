@@ -119,9 +119,9 @@
       width: 100%;
     }
 
-    @include carbon--breakpoint(lg) {
+    @include carbon--breakpoint(md) {
       &.#{$block-class}--wide .#{$block-class}__container {
-        width: calc(100% - (2 * #{$spacing-07}));
+        width: calc(100% - (2 * #{$spacing-10}));
       }
     }
 

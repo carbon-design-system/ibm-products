@@ -1622,39 +1622,39 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   transform: translate3d(0, min(95vh, 500px), 0);
 }
 
-.exp--tearsheet.exp--tearsheet .exp--tearsheet__container {
-  transition: transform 240ms cubic-bezier(0, 0, 0.3, 1), max-height 240ms linear;
+.exp--tearsheet.exp--tearsheet.exp--tearsheet .exp--tearsheet__container {
+  transition: transform 240ms cubic-bezier(0, 0, 0.3, 1), max-height 240ms cubic-bezier(0, 0, 0.3, 1);
 }
 
-.exp--tearsheet.exp--tearsheet--stacked-2-of-2 .exp--tearsheet__container,
+.exp--tearsheet.exp--tearsheet--stacked-1-of-2 .exp--tearsheet__container,
 .exp--tearsheet.exp--tearsheet--stacked-2-of-3 .exp--tearsheet__container {
-  max-height: calc(100% - (var(--cds-spacing-09, 3rem) + var(--cds-spacing-05, 1rem)));
+  max-height: calc(100% - var(--cds-spacing-09, 3rem) + var(--cds-spacing-05, 1rem));
 }
 
-.exp--tearsheet.exp--tearsheet--stacked-3-of-3 .exp--tearsheet__container {
-  max-height: calc(100% - (var(--cds-spacing-09, 3rem) + (2 * var(--cds-spacing-05, 1rem))));
+.exp--tearsheet.exp--tearsheet--stacked-1-of-3 .exp--tearsheet__container {
+  max-height: calc(100% - var(--cds-spacing-09, 3rem) + (2 * var(--cds-spacing-05, 1rem)));
 }
 
 .exp--tearsheet .exp--tearsheet__container--lower {
   max-height: calc(100% - (var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem)));
 }
 
-.exp--tearsheet.exp--tearsheet--stacked-2-of-2 .exp--tearsheet__container--lower,
+.exp--tearsheet.exp--tearsheet--stacked-1-of-2 .exp--tearsheet__container--lower,
 .exp--tearsheet.exp--tearsheet--stacked-2-of-3 .exp--tearsheet__container--lower {
-  max-height: calc( 100% - (var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem) + var(--cds-spacing-05, 1rem)));
+  max-height: calc( 100% - (var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem)) + var(--cds-spacing-05, 1rem));
 }
 
-.exp--tearsheet.exp--tearsheet--stacked-3-of-3 .exp--tearsheet__container--lower {
-  max-height: calc( 100% - (var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem) + (2 * var(--cds-spacing-05, 1rem))));
+.exp--tearsheet.exp--tearsheet--stacked-1-of-3 .exp--tearsheet__container--lower {
+  max-height: calc( 100% - (var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem)) + (2 * var(--cds-spacing-05, 1rem)));
 }
 
 .exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__container {
   width: 100%;
 }
 
-@media (min-width: 66rem) {
+@media (min-width: 42rem) {
   .exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__container {
-    width: calc(100% - (2 * var(--cds-spacing-07, 2rem)));
+    width: calc(100% - (2 * var(--cds-spacing-10, 4rem)));
   }
 }
 

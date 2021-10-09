@@ -89,8 +89,7 @@ const DataTable = ({
                   {headers.map((header) => (
                     <TableHeader
                       {...getHeaderProps({ header, isSortable })}
-                      key={header.key}
-                    >
+                      key={header.key}>
                       {header.header}
                     </TableHeader>
                   ))}
@@ -103,8 +102,7 @@ const DataTable = ({
                     className={classnames({
                       [`${namespace}__row--selectable`]: isSelectable,
                     })}
-                    key={row.id}
-                  >
+                    key={row.id}>
                     {isSelectable && (
                       <TableSelectRow {...getSelectionProps({ row })} />
                     )}

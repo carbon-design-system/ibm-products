@@ -35,22 +35,19 @@ const FilterPanelAccordionItem = ({
           countLabel={countLabel}
           className={`${namespace}__label`}
           countClassName={`${namespace}__count`}
-          title={title}
-        >
+          title={title}>
           {heading || title}
         </FilterPanelLabel>
       }
       className={classnames(namespace, className)}
-      {...other}
-    >
+      {...other}>
       <TruncatedList
         className={`${namespace}__list`}
         expandButtonClassName={`${namespace}__list-expand-button`}
         getExpandButtonLabel={(expanded, shown, hidden) =>
           expanded ? collapseLabel : `${expandLabel} (${hidden})`
         }
-        scrollGradientColor={scrollGradientColor}
-      >
+        scrollGradientColor={scrollGradientColor}>
         {Children.map(children, (child) => (
           <li className={`${namespace}__filter`} key={child.key}>
             {child}

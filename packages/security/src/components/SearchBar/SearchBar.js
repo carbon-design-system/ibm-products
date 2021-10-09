@@ -208,8 +208,7 @@ export default class SearchBar extends React.Component {
         className={classnames(namespace, className, {
           [`${namespace}--hide-scopes-label`]: hideScopesLabel,
         })}
-        onSubmit={this.handleSubmit}
-      >
+        onSubmit={this.handleSubmit}>
         {this.renderScopeSelector()}
         <Search
           className={`${namespace}__input`}
@@ -229,8 +228,7 @@ export default class SearchBar extends React.Component {
             !value ||
             value.length === 0 ||
             (scopes.length !== 0 && selectedScopes.length === 0)
-          }
-        >
+          }>
           {submitLabel}
         </Button>
       </form>

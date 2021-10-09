@@ -41,8 +41,7 @@ const Transition = ({
             appear: appearTimeout || timeout,
             enter: enterTimeout || timeout,
             exit: leaveTimeout || timeout,
-          }}
-        >
+          }}>
           {child}
         </CSSTransition>
       ))}

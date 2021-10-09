@@ -95,6 +95,7 @@
     }
 
     &:focus {
+      outline: 0;
       outline-width: 0;
 
       > #{$list}__item__link {

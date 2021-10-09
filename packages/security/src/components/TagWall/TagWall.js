@@ -50,8 +50,7 @@ const TagWall = ({
     <section
       className={classnames(namespace, className)}
       aria-label={TAG_WALL_LABEL}
-      {...other}
-    >
+      {...other}>
       {TAG_WALL_LABEL && (
         <h2 className={`${namespace}__label`}>{TAG_WALL_LABEL}</h2>
       )}
@@ -72,8 +71,7 @@ const TagWall = ({
             removable={!disable}
             removeBtnLabel={TAG_WALL_REMOVE_BUTTON}
             type="gray"
-            {...item.props}
-          >
+            {...item.props}>
             {itemToString(item)}
           </InteractiveTag>
         );
@@ -83,8 +81,7 @@ const TagWall = ({
           disabled={disable}
           kind="ghost"
           onClick={onAddButton}
-          size="small"
-        >
+          size="small">
           {TAG_WALL_ADD_BUTTON}
         </Button>
       )}

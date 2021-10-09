@@ -5,9 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { DocsContainer } from '@storybook/addon-docs';
+import { Grid } from 'carbon-components-react';
 import { paramCase } from 'param-case';
 
+import { Style } from '../../core/.storybook/preview';
 import { sectionTitle } from '../config';
+import styles from './_docs.scss';
 
 const getCategory = (title) => `${sectionTitle}/${title}`;
 
@@ -21,15 +25,30 @@ function getDocsId(id) {
   return `${paramCase(sectionTitle)}-${id}`;
 }
 
-let getDocsParameters, info;
-getDocsParameters = info = () => ({});
+function getDocsParameters() {
+  return { viewMode: 'docs' };
+}
 
-const disableCentered = () => ({
-  layout: 'fullscreen',
-});
+function disableCentered() {
+  return {
+    layout: 'fullscreen',
+  };
+}
 
 const disableCenteredStories = (stories) =>
   stories.addParameters(disableCentered());
+
+const info = () => ({});
+
+const parameters = {
+  docs: {
+    container: (props) => (
+      <Style styles={styles}>
+        <DocsContainer {...props} />
+      </Style>
+    ),
+  },
+};
 
 export {
   components,
@@ -41,5 +60,6 @@ export {
   info,
   layoutModules,
   pageLayouts,
+  parameters,
   patterns,
 };

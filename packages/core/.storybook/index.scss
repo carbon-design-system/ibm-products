@@ -15,8 +15,8 @@
 
 // Load all Carbon styles now
 @import '../css/carbon';
-
 @import '../../security/src/index';
+@import 'docs';
 
 // Setting attribute storybook-carbon-theme="XXX" on the html element
 // will set the carbon theme used for the storybook pane.

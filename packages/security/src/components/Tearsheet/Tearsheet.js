@@ -105,14 +105,12 @@ class Tearsheet extends Component {
             initialFocus={selectorPrimaryFocus}
             stopPropagation={stopPropagation}
             stopPropagationEvents={stopPropagationEvents}
-            rootNode={rootNode}
-          >
+            rootNode={rootNode}>
             <section
               ref={this.containerSection}
               className={classnames(namespace, className)}
               aria-hidden={false}
-              {...other}
-            >
+              {...other}>
               {this.state.loading && (
                 <LoadingMessage className={`${namespace}__loading`}>
                   <div className={`${namespace}__loading__message`}>
@@ -124,8 +122,7 @@ class Tearsheet extends Component {
               {renderSidebar && (
                 <section
                   aria-hidden={this.state.loading}
-                  className={`${namespace}__sidebar`}
-                >
+                  className={`${namespace}__sidebar`}>
                   {sidebarTitle && (
                     <h1 className={`${namespace}__sidebar__title`}>
                       {sidebarTitle}
@@ -149,8 +146,7 @@ class Tearsheet extends Component {
                         }
                         kind="ghost-danger"
                         onClick={onDeleteButtonClick}
-                        renderIcon={icon}
-                      >
+                        renderIcon={icon}>
                         {componentLabels.TEARSHEET_DELETE_BUTTON}
                       </Button>
                     )}
@@ -160,8 +156,7 @@ class Tearsheet extends Component {
 
               <section
                 aria-hidden={this.state.loading}
-                className={`${namespace}__main`}
-              >
+                className={`${namespace}__main`}>
                 {!closeButton.isDisabled && (
                   <IconButton
                     className={`${namespace}__button--close`}
@@ -179,11 +174,9 @@ class Tearsheet extends Component {
                 <section className={`${namespace}__main__content`}>
                   <ScrollGradient
                     className={`${namespace}__main__scroll-gradient`}
-                    color={theme.ui01}
-                  >
+                    color={theme.ui01}>
                     <div
-                      className={`${namespace}__main__scroll-gradient__content`}
-                    >
+                      className={`${namespace}__main__scroll-gradient__content`}>
                       {renderMain({ isLoading: loading })}
                     </div>
                   </ScrollGradient>
@@ -196,13 +189,11 @@ class Tearsheet extends Component {
                         disabled={isDisabled || this.state.loading}
                         kind="ghost"
                         onClick={tertiaryButton.onClick}
-                        size="xl"
-                      >
+                        size="xl">
                         {componentLabels.TEARSHEET_TERTIARY_BUTTON}
                         {tertiaryButton.secondaryText.length > 0 && (
                           <span
-                            className={`${namespace}__button--tertiary__text`}
-                          >
+                            className={`${namespace}__button--tertiary__text`}>
                             {componentLabels.TEARSHEET_TERTIARY_SECONDARY_TEXT}
                           </span>
                         )}
@@ -218,8 +209,7 @@ class Tearsheet extends Component {
                         }
                         kind="secondary"
                         onClick={secondaryButton.onClick}
-                        size="xl"
-                      >
+                        size="xl">
                         {componentLabels.TEARSHEET_SECONDARY_BUTTON}
                       </Button>
                     )}
@@ -227,8 +217,7 @@ class Tearsheet extends Component {
                       className={`${namespace}__button`}
                       disabled={primaryButton.isDisabled || this.state.loading}
                       onClick={primaryButton.onClick}
-                      size="xl"
-                    >
+                      size="xl">
                       {componentLabels.TEARSHEET_PRIMARY_BUTTON}
                     </Button>
                   </div>

@@ -1,7 +1,7 @@
 # `Panel` component
 
-> A set of panel primitives to help teams build simple, flexible, and WAI-ARIA
-> compliant slide out panels in React.
+> A set of panel primitives to help teams build simple, flexible, and WAI-ARIA compliant
+> slide out panels in React.
 
 ## Table of Contents
 
@@ -17,16 +17,13 @@
 
 ## Usage
 
-You can include `Panel` and its components by doing the following in your
-project:
+You can include `Panel` and its components by doing the following in your project:
 
 ```js
 import { Panel } from '@carbon/ibm-security';
 ```
 
-The default export for `Panel` also includes properties for all the `Panel*`
-components that you will also want to use in your application. You can access
-them by doing either of the following:
+The default export for `Panel` also includes properties for all the `Panel*` components that you will also want to use in your application. You can access them by doing either of the following:
 
 ```js
 import { Panel } from '@carbon/ibm-security';
@@ -39,9 +36,7 @@ const { Panel, PanelContainer, PanelContent, PanelController } = Panel;
 <Panel.PanelController />
 ```
 
-The `Panel` component itself follows the `render` prop pattern, meaning that in
-order to render something to the screen you'll have to provide a `render`
-function to the `Panel` component. In practice, this looks like the following:
+The `Panel` component itself follows the `render` prop pattern, meaning that in order to render something to the screen you'll have to provide a `render` function to the `Panel` component. In practice, this looks like the following:
 
 ```jsx
 import { Panel } from '@carbon/ibm-security';
@@ -108,40 +103,28 @@ function App() {
 }
 ```
 
-In the example above, we can see that the `render` prop is just a function that
-has the following arguments:
+In the example above, we can see that the `render` prop is just a function that has the following arguments:
 
-- `active` which is the state of the `Panel`, it is used to mount/unmount the
-  `PanelContainer` when open/closed
+- `active` which is the state of the `Panel`, it is used to mount/unmount the `PanelContainer` when open/closed
 - `handleClose` which is the method to close `Panel`
 - `handleOpen` which is the method to open the `Panel`
 - `toggleActive` which is the method to change the state of the `Panel`
 
-For a full list of what is available in this `render` prop, check out the
-[Render Prop Function](#render-prop-function) section.
+For a full list of what is available in this `render` prop, check out the [Render Prop Function](#render-prop-function) section.
 
 ## Props
 
 ### `onClose`
 
-The `onClose` prop is where you provide the function to call when the `Panel` is
-closed by either the `handleClose` or `toggleActive` render prop arguments. Any
-arguments passed to those functions will be passed through to the `onClose`
-function.
+The `onClose` prop is where you provide the function to call when the `Panel` is closed by either the `handleClose` or `toggleActive` render prop arguments. Any arguments passed to those functions will be passed through to the `onClose` function.
 
 ### `onOpen`
 
-The `onOpen` prop is where you provide the function to call when the `Panel` is
-opened by either the `handleOpen` or `toggleActive` render prop arguments. Any
-arguments passed to those functions will be passed through to the `onOpen`
-function.
+The `onOpen` prop is where you provide the function to call when the `Panel` is opened by either the `handleOpen` or `toggleActive` render prop arguments. Any arguments passed to those functions will be passed through to the `onOpen` function.
 
 ## Render Prop Function
 
-The `render` prop is a function that you give to the `Panel` component that
-takes in a variety of arguments and should ultimately return a valid React
-element, or component. This could be as simple or complex as the following
-example:
+The `render` prop is a function that you give to the `Panel` component that takes in a variety of arguments and should ultimately return a valid React element, or component. This could be as simple or complex as the following example:
 
 ```jsx
 // Not very useful, but returns a valid React element
@@ -205,13 +188,9 @@ The types of arguments that this function has are as follows:
 
 ### Prop Getters
 
-> See
-> [the blog post about prop getters](https://blog.kentcdodds.com/how-to-give-rendering-control-to-users-with-prop-getters-549eaef76acf)
+> See [the blog post about prop getters](https://blog.kentcdodds.com/how-to-give-rendering-control-to-users-with-prop-getters-549eaef76acf)
 
-These functions are used to apply props to the elements that you render. The
-idea behind this is that it can allow you more flexibility when deciding when to
-render, and where, while still allowing `Panel` to help orchestrate state
-changes inside of the Panel itself.
+These functions are used to apply props to the elements that you render. The idea behind this is that it can allow you more flexibility when deciding when to render, and where, while still allowing `Panel` to help orchestrate state changes inside of the Panel itself.
 
 There are currently no available Prop Getters for the `Panel` component.
 
@@ -223,11 +202,11 @@ There are currently no available Prop Getters for the `Panel` component.
 
 These are functions you can call to change the state of the `Panel` component.
 
-| property       | type                                       | description                          |
-| -------------- | ------------------------------------------ | ------------------------------------ | --------------------------------------- | --------------------------------------------- |
-| `handleClose`  | `(...args) => this.props.onClose(...args)` | Set the state of the Panel to closed |
-| `handleOpen`   | `(...args) => this.props.onOpen(...args)`  | Set the state of the Panel to open   |
-| `toggleActive` | `handleOpen                                |                                      | handleClose` depending on current state | Toggle the state of the Panel, open or closed |
+| property       | type                                                   | description                                   |
+| -------------- | ------------------------------------------------------ | --------------------------------------------- |
+| `handleClose`  | `(...args) => this.props.onClose(...args)`             | Set the state of the Panel to closed          |
+| `handleOpen`   | `(...args) => this.props.onOpen(...args)`              | Set the state of the Panel to open            |
+| `toggleActive` | `handleOpen || handleClose` depending on current state | Toggle the state of the Panel, open or closed |
 
 ### State
 
@@ -239,5 +218,4 @@ These are values that represent the current state of the `Panel` component.
 
 ### Props
 
-As a convenience, properties can be passed through to make things easier to
-render inside your `Panel`, however, no props are currently available.
+As a convenience, properties can be passed through to make things easier to render inside your `Panel`, however, no props are currently available.

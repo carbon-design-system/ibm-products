@@ -108,8 +108,7 @@ export default class StatusIcon extends Component {
       <div
         className={classnames(namespace, className, {
           [`${namespace}--${size}`]: size,
-        })}
-      >
+        })}>
         {statusIcon}
         {message && <span className={` ${namespace}__message`}>{message}</span>}
       </div>

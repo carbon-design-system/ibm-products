@@ -144,8 +144,7 @@ disableCenteredStories(storiesOf(patterns('PanelV2'), module))
                   isDisabled: boolean('secondaryButton.isDisabled', false),
                   label: text('secondaryButton.label', 'Cancel'),
                   onClick: this.closeFirst,
-                }}
-              >
+                }}>
                 <PanelContent>
                   <Fragment>
                     {content}
@@ -175,8 +174,7 @@ disableCenteredStories(storiesOf(patterns('PanelV2'), module))
                   <ComboButton {...comboButtonProps()}>
                     <ComboButtonItem
                       onClick={action('onClick (Item 1 - primary button)')}
-                      renderIcon={ArrowRight20}
-                    >
+                      renderIcon={ArrowRight20}>
                       Item 1 (becomes primary button and text will be truncated)
                     </ComboButtonItem>
 
@@ -187,8 +185,7 @@ disableCenteredStories(storiesOf(patterns('PanelV2'), module))
                         <ComboButtonItem
                           key={key}
                           onClick={action(`onClick (${text})`)}
-                          renderIcon={Filter20}
-                        >
+                          renderIcon={Filter20}>
                           {`Item ${
                             index + 2
                           } - text may be long and will be truncated`}
@@ -196,8 +193,7 @@ disableCenteredStories(storiesOf(patterns('PanelV2'), module))
                       );
                     })}
                   </ComboButton>
-                )}
-              >
+                )}>
                 <PanelContent>
                   <Fragment>
                     {content}
@@ -222,8 +218,7 @@ disableCenteredStories(storiesOf(patterns('PanelV2'), module))
                 {...props()}
                 closeButton={{
                   label: closeButtonLabel,
-                }}
-              >
+                }}>
                 <PanelContent>
                   <Fragment>
                     {content}

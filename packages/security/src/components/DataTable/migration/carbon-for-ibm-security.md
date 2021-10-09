@@ -1,7 +1,6 @@
 # `DataTable`
 
-Also refer to
-[migration in Carbon](https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/DataTable/migrate-to-7.x.md).
+Also refer to [migration in Carbon](https://github.com/carbon-design-system/carbon/blob/main/packages/react/src/components/DataTable/migrate-to-7.x.md).
 
 ## `DataTableSkeleton`
 

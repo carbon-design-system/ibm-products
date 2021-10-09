@@ -33,8 +33,7 @@ const InteractiveTag = ({
     filter={removable}
     onClose={onRemove}
     title={removeBtnLabel}
-    {...other}
-  >
+    {...other}>
     {children}
   </Tag>
 );

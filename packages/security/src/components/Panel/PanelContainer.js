@@ -181,15 +181,13 @@ export default class PanelContainer extends Component {
             <div className={`${namespace}__header__container--title`}>
               <div
                 id={this.panelTitleId}
-                className={`${namespace}__header--title`}
-              >
+                className={`${namespace}__header--title`}>
                 {title}
               </div>
               {subtitle && (
                 <div
                   id={this.panelSubtitleId}
-                  className={`${namespace}__header--subtitle`}
-                >
+                  className={`${namespace}__header--subtitle`}>
                   {subtitle}
                 </div>
               )}
@@ -213,8 +211,7 @@ export default class PanelContainer extends Component {
             marginBottom: `${this.state.bodyMargin.bottom}px`,
           }}
           {...hasScrollingContentProps}
-          {...getAriaLabelledBy}
-        >
+          {...getAriaLabelledBy}>
           {children}
         </section>
         {hasFooter && (
@@ -231,8 +228,7 @@ export default class PanelContainer extends Component {
                     iconDescription={secondaryButton.iconDescription}
                     kind="secondary"
                     onClick={secondaryButton.onClick}
-                    renderIcon={secondaryButton.icon}
-                  >
+                    renderIcon={secondaryButton.icon}>
                     {PANEL_CONTAINER_SECONDARY_BUTTON}
                   </Button>
                 )}
@@ -242,8 +238,7 @@ export default class PanelContainer extends Component {
                   disabled={primaryButton.isDisabled}
                   iconDescription={primaryButton.iconDescription}
                   onClick={primaryButton.onClick}
-                  renderIcon={primaryButton.icon}
-                >
+                  renderIcon={primaryButton.icon}>
                   {PANEL_CONTAINER_PRIMARY_BUTTON}
                 </Button>
               </Fragment>

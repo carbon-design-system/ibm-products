@@ -200,8 +200,7 @@ class Portal extends Component {
               (isClient() ? rootNode : Children.toArray(children)[0].type),
             initialFocus,
             ...focusTrapOptions,
-          }}
-        >
+          }}>
           {stopPropagation || stopPropagationEvents
             ? this.createPropagationTrap()
             : children}
@@ -257,7 +256,6 @@ Portal.defaultProps = {
   focusTrap: true,
   focusTrapOptions: FocusTrap.defaultProps.focusTrapOptions,
   hasOverlay: true,
-  initialFocus: null,
   onOverlayClick: undefined,
   overlayOptions: {},
   rootNode: isClient() && document.body,

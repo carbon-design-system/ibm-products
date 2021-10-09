@@ -136,8 +136,7 @@ export default class Nav extends Component {
       <nav
         className={classnames(navNamespace, className)}
         aria-label={label}
-        {...other}
-      >
+        {...other}>
         {heading && <h1 className={`${navNamespace}__heading`}>{heading}</h1>}
 
         <ul className={`${navNamespace}__wrapper`} role="menubar">

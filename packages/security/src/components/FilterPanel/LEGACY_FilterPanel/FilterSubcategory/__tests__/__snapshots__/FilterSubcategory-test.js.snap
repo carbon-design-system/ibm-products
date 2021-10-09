@@ -1,19 +1,1029 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FilterSubcategory Events collapses expanded truncated list of filters 1`] = `ShallowWrapper {}`;
+exports[`FilterSubcategory Events collapses expanded truncated list of filters 1`] = `
+<AccordionItem
+  className="security--filter-subcategory"
+  open={true}
+  title="Truncated subcategory"
+>
+  <ul
+    className="security--filter-subcategory__filter-list"
+  >
+    <ScrollGradient
+      color="var(--cds-ui-background, #161616)"
+      direction="Y"
+      getScrollElementRef={[Function]}
+      hideStartGradient={false}
+      onScroll={[Function]}
+      scrollElementClassName="security--filter-subcategory__scroller"
+    >
+      <div
+        className="security--filter-subcategory__filters security--filter-subcategory__filters--visible"
+        role="presentation"
+      >
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_1"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_1",
+                "name": "Filter 1",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_2"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_2",
+                "name": "Filter 2",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_3"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_3",
+                "name": "Filter 3",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_4"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_4",
+                "name": "Filter 4",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_5"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_5",
+                "name": "Filter 5",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+      </div>
+    </ScrollGradient>
+  </ul>
+  <Button
+    className="security--filter-subcategory__button--toggle"
+    dangerDescription="danger"
+    disabled={false}
+    iconDescription="View more"
+    isExpressive={false}
+    kind="ghost"
+    largeText={null}
+    loading={false}
+    onClick={[Function]}
+    renderIcon={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      }
+    }
+    size="default"
+    tabIndex={0}
+    tooltipAlignment="center"
+    tooltipPosition="top"
+    type="button"
+  >
+    View more (15)
+  </Button>
+</AccordionItem>
+`;
 
-exports[`FilterSubcategory Events expands truncated list of filters 1`] = `ShallowWrapper {}`;
+exports[`FilterSubcategory Events expands truncated list of filters 1`] = `
+<AccordionItem
+  className="security--filter-subcategory"
+  open={true}
+  title="Truncated subcategory"
+>
+  <ul
+    className="security--filter-subcategory__filter-list"
+  >
+    <ScrollGradient
+      color="var(--cds-ui-background, #161616)"
+      direction="Y"
+      getScrollElementRef={[Function]}
+      hideStartGradient={false}
+      onScroll={[Function]}
+      scrollElementClassName="security--filter-subcategory__scroller"
+    >
+      <div
+        className="security--filter-subcategory__filters security--filter-subcategory__filters--visible"
+        role="presentation"
+      >
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_1"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_1",
+                "name": "Filter 1",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_2"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_2",
+                "name": "Filter 2",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_3"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_3",
+                "name": "Filter 3",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_4"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_4",
+                "name": "Filter 4",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_5"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_5",
+                "name": "Filter 5",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_6"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_6",
+                "name": "Filter 6",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_7"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_7",
+                "name": "Filter 7",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_8"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_8",
+                "name": "Filter 8",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_9"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_9",
+                "name": "Filter 9",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_10"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_10",
+                "name": "Filter 10",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+      </div>
+      <div
+        className="security--filter-subcategory__filters security--filter-subcategory__filters--hidden"
+        role="presentation"
+      >
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_11"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_11",
+                "name": "Filter 11",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_12"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_12",
+                "name": "Filter 12",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_13"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_13",
+                "name": "Filter 13",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_14"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_14",
+                "name": "Filter 14",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_15"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_15",
+                "name": "Filter 15",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_16"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_16",
+                "name": "Filter 16",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_17"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_17",
+                "name": "Filter 17",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_18"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_18",
+                "name": "Filter 18",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_19"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_19",
+                "name": "Filter 19",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_20"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_20",
+                "name": "Filter 20",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+      </div>
+    </ScrollGradient>
+  </ul>
+  <Button
+    className="security--filter-subcategory__button--toggle"
+    dangerDescription="danger"
+    disabled={false}
+    iconDescription="View less"
+    isExpressive={false}
+    kind="ghost"
+    largeText={null}
+    loading={false}
+    onClick={[Function]}
+    renderIcon={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      }
+    }
+    size="default"
+    tabIndex={0}
+    tooltipAlignment="center"
+    tooltipPosition="top"
+    type="button"
+  >
+    View less
+  </Button>
+</AccordionItem>
+`;
 
-exports[`FilterSubcategory Rendering does not render when count is 0 1`] = `ShallowWrapper {}`;
+exports[`FilterSubcategory Rendering does not render when count is 0 1`] = `
+<AccordionItem
+  className="security--filter-subcategory"
+  title="Subcategory with filters with no count"
+>
+  <ul
+    className="security--filter-subcategory__filter-list"
+  >
+    <ScrollGradient
+      color="var(--cds-ui-background, #161616)"
+      direction="Y"
+      getScrollElementRef={[Function]}
+      hideStartGradient={false}
+      onScroll={[Function]}
+      scrollElementClassName="security--filter-subcategory__scroller"
+    >
+      <div
+        className="security--filter-subcategory__filters security--filter-subcategory__filters--visible"
+        role="presentation"
+      />
+    </ScrollGradient>
+  </ul>
+</AccordionItem>
+`;
 
-exports[`FilterSubcategory Rendering does not render with no filters 1`] = `ShallowWrapper {}`;
+exports[`FilterSubcategory Rendering does not render with no filters 1`] = `
+<AccordionItem
+  className="security--filter-subcategory"
+  title="Subcategory with no filters"
+>
+  <ul
+    className="security--filter-subcategory__filter-list"
+  >
+    <ScrollGradient
+      color="var(--cds-ui-background, #161616)"
+      direction="Y"
+      getScrollElementRef={[Function]}
+      hideStartGradient={false}
+      onScroll={[Function]}
+      scrollElementClassName="security--filter-subcategory__scroller"
+    >
+      <div
+        className="security--filter-subcategory__filters security--filter-subcategory__filters--visible"
+        role="presentation"
+      />
+    </ScrollGradient>
+  </ul>
+</AccordionItem>
+`;
 
-exports[`FilterSubcategory Rendering does not truncate short list of filters 1`] = `ShallowWrapper {}`;
+exports[`FilterSubcategory Rendering does not truncate short list of filters 1`] = `
+<AccordionItem
+  className="security--filter-subcategory"
+  open={true}
+  title="Subcategory"
+>
+  <ul
+    className="security--filter-subcategory__filter-list"
+  >
+    <ScrollGradient
+      color="var(--cds-ui-background, #161616)"
+      direction="Y"
+      getScrollElementRef={[Function]}
+      hideStartGradient={false}
+      onScroll={[Function]}
+      scrollElementClassName="security--filter-subcategory__scroller"
+    >
+      <div
+        className="security--filter-subcategory__filters security--filter-subcategory__filters--visible"
+        role="presentation"
+      >
+        <li
+          className="security--filter-subcategory__filter"
+          key="DEFAULT"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "DEFAULT",
+                "name": "Filter",
+                "parent": "DEFAULT",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="LONG_TEXT"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "LONG_TEXT",
+                "name": "Long filter label that overflows out of panel.",
+                "parent": "DEFAULT",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="SELECTED"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": true,
+                "id": "SELECTED",
+                "name": "Selected filter",
+                "parent": "DEFAULT",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+      </div>
+    </ScrollGradient>
+  </ul>
+</AccordionItem>
+`;
 
-exports[`FilterSubcategory Rendering renders 1`] = `ShallowWrapper {}`;
+exports[`FilterSubcategory Rendering renders 1`] = `
+<AccordionItem
+  className="security--filter-subcategory"
+  title="Subcategory"
+>
+  <ul
+    className="security--filter-subcategory__filter-list"
+  >
+    <ScrollGradient
+      color="var(--cds-ui-background, #161616)"
+      direction="Y"
+      getScrollElementRef={[Function]}
+      hideStartGradient={false}
+      onScroll={[Function]}
+      scrollElementClassName="security--filter-subcategory__scroller"
+    >
+      <div
+        className="security--filter-subcategory__filters security--filter-subcategory__filters--visible"
+        role="presentation"
+      >
+        <li
+          className="security--filter-subcategory__filter"
+          key="DEFAULT"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "DEFAULT",
+                "name": "Filter",
+                "parent": "DEFAULT",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="LONG_TEXT"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "LONG_TEXT",
+                "name": "Long filter label that overflows out of panel.",
+                "parent": "DEFAULT",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="SELECTED"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": true,
+                "id": "SELECTED",
+                "name": "Selected filter",
+                "parent": "DEFAULT",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+      </div>
+    </ScrollGradient>
+  </ul>
+</AccordionItem>
+`;
 
-exports[`FilterSubcategory Rendering renders open subcategory 1`] = `ShallowWrapper {}`;
+exports[`FilterSubcategory Rendering renders open subcategory 1`] = `
+<AccordionItem
+  className="security--filter-subcategory"
+  open={true}
+  title="Open subcategory"
+>
+  <ul
+    className="security--filter-subcategory__filter-list"
+  >
+    <ScrollGradient
+      color="var(--cds-ui-background, #161616)"
+      direction="Y"
+      getScrollElementRef={[Function]}
+      hideStartGradient={false}
+      onScroll={[Function]}
+      scrollElementClassName="security--filter-subcategory__scroller"
+    >
+      <div
+        className="security--filter-subcategory__filters security--filter-subcategory__filters--visible"
+        role="presentation"
+      >
+        <li
+          className="security--filter-subcategory__filter"
+          key="OPEN:FILTER_1"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "OPEN:FILTER_1",
+                "name": "Filter 1",
+                "parent": "OPEN",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="OPEN:FILTER_2"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "OPEN:FILTER_2",
+                "name": "Filter 2",
+                "parent": "OPEN",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="OPEN:FILTER_3"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "OPEN:FILTER_3",
+                "name": "Filter 3",
+                "parent": "OPEN",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+      </div>
+    </ScrollGradient>
+  </ul>
+</AccordionItem>
+`;
 
-exports[`FilterSubcategory Rendering should not override \`labels\` if unique props are defined 1`] = `ShallowWrapper {}`;
+exports[`FilterSubcategory Rendering should not override \`labels\` if unique props are defined 1`] = `
+<AccordionItem
+  className="security--filter-subcategory"
+  title="Subcategory"
+>
+  <ul
+    className="security--filter-subcategory__filter-list"
+  >
+    <ScrollGradient
+      color="var(--cds-ui-background, #161616)"
+      direction="Y"
+      getScrollElementRef={[Function]}
+      hideStartGradient={false}
+      onScroll={[Function]}
+      scrollElementClassName="security--filter-subcategory__scroller"
+    >
+      <div
+        className="security--filter-subcategory__filters security--filter-subcategory__filters--visible"
+        role="presentation"
+      >
+        <li
+          className="security--filter-subcategory__filter"
+          key="DEFAULT"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "DEFAULT",
+                "name": "Filter",
+                "parent": "DEFAULT",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="LONG_TEXT"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "LONG_TEXT",
+                "name": "Long filter label that overflows out of panel.",
+                "parent": "DEFAULT",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="SELECTED"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": true,
+                "id": "SELECTED",
+                "name": "Selected filter",
+                "parent": "DEFAULT",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+      </div>
+    </ScrollGradient>
+  </ul>
+</AccordionItem>
+`;
 
-exports[`FilterSubcategory Rendering truncates long list of filters 1`] = `ShallowWrapper {}`;
+exports[`FilterSubcategory Rendering truncates long list of filters 1`] = `
+<AccordionItem
+  className="security--filter-subcategory"
+  open={true}
+  title="Truncated subcategory"
+>
+  <ul
+    className="security--filter-subcategory__filter-list"
+  >
+    <ScrollGradient
+      color="var(--cds-ui-background, #161616)"
+      direction="Y"
+      getScrollElementRef={[Function]}
+      hideStartGradient={false}
+      onScroll={[Function]}
+      scrollElementClassName="security--filter-subcategory__scroller"
+    >
+      <div
+        className="security--filter-subcategory__filters security--filter-subcategory__filters--visible"
+        role="presentation"
+      >
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_1"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_1",
+                "name": "Filter 1",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_2"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_2",
+                "name": "Filter 2",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_3"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_3",
+                "name": "Filter 3",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_4"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_4",
+                "name": "Filter 4",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+        <li
+          className="security--filter-subcategory__filter"
+          key="TRUNCATED:FILTER_5"
+        >
+          <FilterSelector
+            filter={
+              Object {
+                "count": 10,
+                "enabled": false,
+                "id": "TRUNCATED:FILTER_5",
+                "name": "Filter 5",
+                "parent": "TRUNCATED",
+              }
+            }
+            onChange={[Function]}
+          />
+        </li>
+      </div>
+    </ScrollGradient>
+  </ul>
+  <Button
+    className="security--filter-subcategory__button--toggle"
+    dangerDescription="danger"
+    disabled={false}
+    iconDescription="View more"
+    isExpressive={false}
+    kind="ghost"
+    largeText={null}
+    loading={false}
+    onClick={[Function]}
+    renderIcon={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      }
+    }
+    size="default"
+    tabIndex={0}
+    tooltipAlignment="center"
+    tooltipPosition="top"
+    type="button"
+  >
+    View more (15)
+  </Button>
+</AccordionItem>
+`;

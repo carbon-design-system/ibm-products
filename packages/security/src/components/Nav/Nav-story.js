@@ -29,8 +29,7 @@ storiesOf(components(name), module)
           </NavList>
           <NavList
             title="Nav list 2 expanded on page load"
-            isExpandedOnPageload
-          >
+            isExpandedOnPageload>
             <NavItem key="navitem_2-1" href="#navitem_2-1">
               Nav item 2-1
             </NavItem>
@@ -70,8 +69,7 @@ storiesOf(components(name), module)
           </NavList>
           <NavList
             title="Nav list 2 expanded on page load"
-            isExpandedOnPageload
-          >
+            isExpandedOnPageload>
             <NavItem key="navitem_2-1" href="#navitem_2-1">
               Nav item 2-1 - {commerce.productName()} - {commerce.productName()}{' '}
               - {commerce.productName()}

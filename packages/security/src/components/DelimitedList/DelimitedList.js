@@ -41,8 +41,7 @@ function DelimitedList({ className, delimiter, items, truncate, ...other }) {
     <div
       className={classes}
       title={hasOverflow ? items.join(delimiter) : undefined}
-      {...other}
-    >
+      {...other}>
       <div ref={element} className={valueClasses}>
         {items.length > 0 ? items.join(delimiter) : '–'}
       </div>

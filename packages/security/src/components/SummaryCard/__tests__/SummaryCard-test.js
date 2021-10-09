@@ -38,8 +38,7 @@ describe('SummaryCard', () => {
         <SummaryCardFooter>
           <SummaryCardAction
             expandedContent="test expanded action content"
-            renderIcon={Folder20}
-          >
+            renderIcon={Folder20}>
             test button label that is long and will be truncated
           </SummaryCardAction>
           <SummaryCardAction
@@ -65,8 +64,7 @@ describe('SummaryCard', () => {
         <SummaryCardFooter>
           <SummaryCardAction
             expandedContent="test expanded action content"
-            renderIcon={Folder20}
-          >
+            renderIcon={Folder20}>
             test button
           </SummaryCardAction>
         </SummaryCardFooter>
@@ -98,8 +96,7 @@ describe('SummaryCard', () => {
         <SummaryCardFooter>
           <SummaryCardAction
             expandedContent="test expanded action content"
-            renderIcon={Folder20}
-          >
+            renderIcon={Folder20}>
             test button label that is long and will be truncated
           </SummaryCardAction>
           <SummaryCardAction

@@ -24,8 +24,7 @@ describe('Nav', () => {
       <Nav
         className={className}
         heading={navigationLabel}
-        label={navigationLabel}
-      >
+        label={navigationLabel}>
         {navList(0)}
         {navList(1)}
         {navItem(2)}

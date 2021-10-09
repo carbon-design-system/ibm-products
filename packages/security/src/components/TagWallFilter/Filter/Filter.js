@@ -131,16 +131,13 @@ class Filter extends Component {
           onKeyDown={(e) => this.handleKeyDownChange(e, item)}
           role="button"
           tabIndex="0"
-          {...itemProps}
-        >
+          {...itemProps}>
           <div
             className={`${namespace}__list-item__entry`}
-            aria-labelledby={itemProps.id}
-          >
+            aria-labelledby={itemProps.id}>
             <span
               className={`${carbonPrefix}--text-truncate--end`}
-              title={itemText}
-            >
+              title={itemText}>
               {itemText}
             </span>
             <span className={`${namespace}__add`}>
@@ -183,8 +180,7 @@ class Filter extends Component {
         itemToString={itemToString}
         onStateChange={this.handleOnStateChange}
         clearSelection={this.handleClearSelection}
-        isOpen
-      >
+        isOpen>
         {({
           getInputProps,
           getItemProps,

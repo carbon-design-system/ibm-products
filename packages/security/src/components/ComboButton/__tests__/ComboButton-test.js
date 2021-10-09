@@ -21,8 +21,7 @@ const renderComboButton = (overflowMenuItemCount = 0) => {
     <ComboButtonItem
       key="test-primary-item"
       id="test-primary-item"
-      renderIcon={ArrowRight20}
-    >
+      renderIcon={ArrowRight20}>
       Primary task
     </ComboButtonItem>
   );

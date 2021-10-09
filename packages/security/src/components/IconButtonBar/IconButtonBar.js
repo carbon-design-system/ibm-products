@@ -113,8 +113,7 @@ const IconButtonBar = ({
             flipped
             menuOptionsClass={iconButtonBarMenuOptionsClasses}
             renderIcon={getOverflowMenuIcon()}
-            selectorPrimaryFocus={`.${iconButtonPrimaryFocus}`}
-          >
+            selectorPrimaryFocus={`.${iconButtonPrimaryFocus}`}>
             {renderMenuItems()}
           </OverflowMenu>
         </Fragment>

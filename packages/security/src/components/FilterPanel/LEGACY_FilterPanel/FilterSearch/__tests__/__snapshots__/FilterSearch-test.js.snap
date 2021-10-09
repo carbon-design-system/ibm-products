@@ -1,17 +1,1098 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FilterSearch Events displays search results when value typed in 1`] = `ShallowWrapper {}`;
+exports[`FilterSearch Events displays search results when value typed in 1`] = `
+<div
+  className="security--filter-search"
+>
+  <Search
+    className="security--filter-search__input"
+    closeButtonLabelText="Clear search"
+    labelText="Find filter..."
+    onChange={[Function]}
+    placeholder="Find filter..."
+    size="sm"
+    type="text"
+    value="filter 10"
+  />
+  <div
+    className="security--filter-search__results security--filter-search__results--visible"
+  >
+    <ul
+      className="security--filter-search__list"
+    >
+      <li
+        className="security--filter-search__subcategory"
+        key="search-subcategory-TRUNCATED"
+      >
+        <h3
+          className="security--filter-search__subcategory__title"
+        >
+          Truncated subcategory
+        </h3>
+        <ul
+          className="security--filter-search__list"
+        >
+          <li
+            key="search-filter-TRUNCATED:FILTER_10"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "TRUNCATED:FILTER_10",
+                  "name": "Filter 10",
+                  "parent": "TRUNCATED",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
 
-exports[`FilterSearch Events hides results when filter has been toggled 1`] = `ShallowWrapper {}`;
+exports[`FilterSearch Events hides results when filter has been toggled 1`] = `
+<div
+  className="security--filter-search"
+>
+  <Search
+    className="security--filter-search__input"
+    closeButtonLabelText="Clear search"
+    labelText="Find filter..."
+    onChange={[Function]}
+    placeholder="Find filter..."
+    size="sm"
+    type="text"
+    value=""
+  />
+</div>
+`;
 
-exports[`FilterSearch Rendering accepts initial search value 1`] = `ShallowWrapper {}`;
+exports[`FilterSearch Rendering accepts initial search value 1`] = `
+<div
+  className="security--filter-search"
+>
+  <Search
+    className="security--filter-search__input"
+    closeButtonLabelText="Clear search"
+    labelText="Find filter..."
+    onChange={[Function]}
+    placeholder="Find filter..."
+    size="sm"
+    type="text"
+    value="filter 10"
+  />
+  <div
+    className="security--filter-search__results security--filter-search__results--visible"
+  >
+    <ul
+      className="security--filter-search__list"
+    >
+      <li
+        className="security--filter-search__subcategory"
+        key="search-subcategory-TRUNCATED"
+      >
+        <h3
+          className="security--filter-search__subcategory__title"
+        >
+          Truncated subcategory
+        </h3>
+        <ul
+          className="security--filter-search__list"
+        >
+          <li
+            key="search-filter-TRUNCATED:FILTER_10"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "TRUNCATED:FILTER_10",
+                  "name": "Filter 10",
+                  "parent": "TRUNCATED",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
 
-exports[`FilterSearch Rendering displays message when no filters match search value 1`] = `ShallowWrapper {}`;
+exports[`FilterSearch Rendering displays message when no filters match search value 1`] = `
+<div
+  className="security--filter-search"
+>
+  <Search
+    className="security--filter-search__input"
+    closeButtonLabelText="Clear search"
+    labelText="Find filter..."
+    onChange={[Function]}
+    placeholder="Find filter..."
+    size="sm"
+    type="text"
+    value="should not match a filter"
+  />
+  <div
+    className="security--filter-search__results security--filter-search__results--visible"
+  >
+    <span
+      className="security--filter-search__results--none"
+    >
+      No filter matches your search
+    </span>
+  </div>
+</div>
+`;
 
-exports[`FilterSearch Rendering partially matches any string 1`] = `ShallowWrapper {}`;
+exports[`FilterSearch Rendering partially matches any string 1`] = `
+<div
+  className="security--filter-search"
+>
+  <Search
+    className="security--filter-search__input"
+    closeButtonLabelText="Clear search"
+    labelText="Find filter..."
+    onChange={[Function]}
+    placeholder="Find filter..."
+    size="sm"
+    type="text"
+    value="FiLTer 1"
+  />
+  <div
+    className="security--filter-search__results security--filter-search__results--visible"
+  >
+    <ul
+      className="security--filter-search__list"
+    >
+      <li
+        className="security--filter-search__subcategory"
+        key="search-subcategory-TRUNCATED"
+      >
+        <h3
+          className="security--filter-search__subcategory__title"
+        >
+          Truncated subcategory
+        </h3>
+        <ul
+          className="security--filter-search__list"
+        >
+          <li
+            key="search-filter-TRUNCATED:FILTER_1"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "TRUNCATED:FILTER_1",
+                  "name": "Filter 1",
+                  "parent": "TRUNCATED",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+          <li
+            key="search-filter-TRUNCATED:FILTER_10"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "TRUNCATED:FILTER_10",
+                  "name": "Filter 10",
+                  "parent": "TRUNCATED",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+          <li
+            key="search-filter-TRUNCATED:FILTER_11"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "TRUNCATED:FILTER_11",
+                  "name": "Filter 11",
+                  "parent": "TRUNCATED",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+          <li
+            key="search-filter-TRUNCATED:FILTER_12"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "TRUNCATED:FILTER_12",
+                  "name": "Filter 12",
+                  "parent": "TRUNCATED",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+          <li
+            key="search-filter-TRUNCATED:FILTER_13"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "TRUNCATED:FILTER_13",
+                  "name": "Filter 13",
+                  "parent": "TRUNCATED",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+          <li
+            key="search-filter-TRUNCATED:FILTER_14"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "TRUNCATED:FILTER_14",
+                  "name": "Filter 14",
+                  "parent": "TRUNCATED",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+          <li
+            key="search-filter-TRUNCATED:FILTER_15"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "TRUNCATED:FILTER_15",
+                  "name": "Filter 15",
+                  "parent": "TRUNCATED",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+          <li
+            key="search-filter-TRUNCATED:FILTER_16"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "TRUNCATED:FILTER_16",
+                  "name": "Filter 16",
+                  "parent": "TRUNCATED",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+          <li
+            key="search-filter-TRUNCATED:FILTER_17"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "TRUNCATED:FILTER_17",
+                  "name": "Filter 17",
+                  "parent": "TRUNCATED",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+          <li
+            key="search-filter-TRUNCATED:FILTER_18"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "TRUNCATED:FILTER_18",
+                  "name": "Filter 18",
+                  "parent": "TRUNCATED",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+          <li
+            key="search-filter-TRUNCATED:FILTER_19"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "TRUNCATED:FILTER_19",
+                  "name": "Filter 19",
+                  "parent": "TRUNCATED",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+        </ul>
+      </li>
+      <li
+        className="security--filter-search__subcategory"
+        key="search-subcategory-ZERO_FILTERS_COUNT"
+      >
+        <h3
+          className="security--filter-search__subcategory__title"
+        >
+          Subcategory with filters with no count
+        </h3>
+        <ul
+          className="security--filter-search__list"
+        >
+          <li
+            key="search-filter-ZERO_FILTERS_COUNT:FILTER_1"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 0,
+                  "enabled": false,
+                  "id": "ZERO_FILTERS_COUNT:FILTER_1",
+                  "name": "Filter 1",
+                  "parent": "ZERO_FILTERS_COUNT",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+        </ul>
+      </li>
+      <li
+        className="security--filter-search__subcategory"
+        key="search-subcategory-OPEN"
+      >
+        <h3
+          className="security--filter-search__subcategory__title"
+        >
+          Open subcategory
+        </h3>
+        <ul
+          className="security--filter-search__list"
+        >
+          <li
+            key="search-filter-OPEN:FILTER_1"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "OPEN:FILTER_1",
+                  "name": "Filter 1",
+                  "parent": "OPEN",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+        </ul>
+      </li>
+      <li
+        className="security--filter-search__subcategory"
+        key="search-subcategory-CATEGORY_2:SUBCATEGORY_1"
+      >
+        <h3
+          className="security--filter-search__subcategory__title"
+        >
+          Subcategory 1
+        </h3>
+        <ul
+          className="security--filter-search__list"
+        >
+          <li
+            key="search-filter-CATEGORY_2:SUBCATEGORY_1:FILTER_1"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 5,
+                  "enabled": false,
+                  "id": "CATEGORY_2:SUBCATEGORY_1:FILTER_1",
+                  "name": "Filter 1",
+                  "parent": "CATEGORY_2:SUBCATEGORY_1",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+        </ul>
+      </li>
+      <li
+        className="security--filter-search__subcategory"
+        key="search-subcategory-CATEGORY_2:SUBCATEGORY_2"
+      >
+        <h3
+          className="security--filter-search__subcategory__title"
+        >
+          Subcategory 2
+        </h3>
+        <ul
+          className="security--filter-search__list"
+        >
+          <li
+            key="search-filter-CATEGORY_2:SUBCATEGORY_2:FILTER_1"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 15,
+                  "enabled": false,
+                  "id": "CATEGORY_2:SUBCATEGORY_2:FILTER_1",
+                  "name": "Filter 1",
+                  "parent": "CATEGORY_2:SUBCATEGORY_2",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+        </ul>
+      </li>
+      <li
+        className="security--filter-search__subcategory"
+        key="search-subcategory-CATEGORY_2:SUBCATEGORY_3"
+      >
+        <h3
+          className="security--filter-search__subcategory__title"
+        >
+          Subcategory 3
+        </h3>
+        <ul
+          className="security--filter-search__list"
+        >
+          <li
+            key="search-filter-CATEGORY_2:SUBCATEGORY_3:FILTER_1"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 13,
+                  "enabled": false,
+                  "id": "CATEGORY_2:SUBCATEGORY_3:FILTER_1",
+                  "name": "Filter 1",
+                  "parent": "CATEGORY_2:SUBCATEGORY_3",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+        </ul>
+      </li>
+      <li
+        className="security--filter-search__subcategory"
+        key="search-subcategory-CATEGORY_2:SUBCATEGORY_4"
+      >
+        <h3
+          className="security--filter-search__subcategory__title"
+        >
+          Subcategory 4
+        </h3>
+        <ul
+          className="security--filter-search__list"
+        >
+          <li
+            key="search-filter-CATEGORY_2:SUBCATEGORY_4:FILTER_1"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 26,
+                  "enabled": false,
+                  "id": "CATEGORY_2:SUBCATEGORY_4:FILTER_1",
+                  "name": "Filter 1",
+                  "parent": "CATEGORY_2:SUBCATEGORY_4",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+        </ul>
+      </li>
+      <li
+        className="security--filter-search__subcategory"
+        key="search-subcategory-CATEGORY_2:SUBCATEGORY_5"
+      >
+        <h3
+          className="security--filter-search__subcategory__title"
+        >
+          Subcategory 5
+        </h3>
+        <ul
+          className="security--filter-search__list"
+        >
+          <li
+            key="search-filter-CATEGORY_2:SUBCATEGORY_5:FILTER_1"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "CATEGORY_2:SUBCATEGORY_5:FILTER_1",
+                  "name": "Filter 1",
+                  "parent": "CATEGORY_2:SUBCATEGORY_5",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+        </ul>
+      </li>
+      <li
+        className="security--filter-search__subcategory"
+        key="search-subcategory-CATEGORY_2:SUBCATEGORY_6"
+      >
+        <h3
+          className="security--filter-search__subcategory__title"
+        >
+          Subcategory 6
+        </h3>
+        <ul
+          className="security--filter-search__list"
+        >
+          <li
+            key="search-filter-CATEGORY_2:SUBCATEGORY_6:FILTER_1"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 24,
+                  "enabled": false,
+                  "id": "CATEGORY_2:SUBCATEGORY_6:FILTER_1",
+                  "name": "Filter 1",
+                  "parent": "CATEGORY_2:SUBCATEGORY_6",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
 
-exports[`FilterSearch Rendering partially matches any string 2`] = `ShallowWrapper {}`;
+exports[`FilterSearch Rendering partially matches any string 2`] = `
+<div
+  className="security--filter-search"
+>
+  <Search
+    className="security--filter-search__input"
+    closeButtonLabelText="Clear search"
+    labelText="Find filter..."
+    onChange={[Function]}
+    placeholder="Find filter..."
+    size="sm"
+    type="text"
+    value="FiLTer 1"
+  />
+  <div
+    className="security--filter-search__results security--filter-search__results--visible"
+  >
+    <ul
+      className="security--filter-search__list"
+    >
+      <li
+        className="security--filter-search__subcategory"
+        key="search-subcategory-TRUNCATED"
+      >
+        <h3
+          className="security--filter-search__subcategory__title"
+        >
+          Truncated subcategory
+        </h3>
+        <ul
+          className="security--filter-search__list"
+        >
+          <li
+            key="search-filter-TRUNCATED:FILTER_1"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "TRUNCATED:FILTER_1",
+                  "name": "Filter 1",
+                  "parent": "TRUNCATED",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+          <li
+            key="search-filter-TRUNCATED:FILTER_10"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "TRUNCATED:FILTER_10",
+                  "name": "Filter 10",
+                  "parent": "TRUNCATED",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+          <li
+            key="search-filter-TRUNCATED:FILTER_11"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "TRUNCATED:FILTER_11",
+                  "name": "Filter 11",
+                  "parent": "TRUNCATED",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+          <li
+            key="search-filter-TRUNCATED:FILTER_12"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "TRUNCATED:FILTER_12",
+                  "name": "Filter 12",
+                  "parent": "TRUNCATED",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+          <li
+            key="search-filter-TRUNCATED:FILTER_13"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "TRUNCATED:FILTER_13",
+                  "name": "Filter 13",
+                  "parent": "TRUNCATED",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+          <li
+            key="search-filter-TRUNCATED:FILTER_14"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "TRUNCATED:FILTER_14",
+                  "name": "Filter 14",
+                  "parent": "TRUNCATED",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+          <li
+            key="search-filter-TRUNCATED:FILTER_15"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "TRUNCATED:FILTER_15",
+                  "name": "Filter 15",
+                  "parent": "TRUNCATED",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+          <li
+            key="search-filter-TRUNCATED:FILTER_16"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "TRUNCATED:FILTER_16",
+                  "name": "Filter 16",
+                  "parent": "TRUNCATED",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+          <li
+            key="search-filter-TRUNCATED:FILTER_17"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "TRUNCATED:FILTER_17",
+                  "name": "Filter 17",
+                  "parent": "TRUNCATED",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+          <li
+            key="search-filter-TRUNCATED:FILTER_18"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "TRUNCATED:FILTER_18",
+                  "name": "Filter 18",
+                  "parent": "TRUNCATED",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+          <li
+            key="search-filter-TRUNCATED:FILTER_19"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "TRUNCATED:FILTER_19",
+                  "name": "Filter 19",
+                  "parent": "TRUNCATED",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+        </ul>
+      </li>
+      <li
+        className="security--filter-search__subcategory"
+        key="search-subcategory-ZERO_FILTERS_COUNT"
+      >
+        <h3
+          className="security--filter-search__subcategory__title"
+        >
+          Subcategory with filters with no count
+        </h3>
+        <ul
+          className="security--filter-search__list"
+        >
+          <li
+            key="search-filter-ZERO_FILTERS_COUNT:FILTER_1"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 0,
+                  "enabled": false,
+                  "id": "ZERO_FILTERS_COUNT:FILTER_1",
+                  "name": "Filter 1",
+                  "parent": "ZERO_FILTERS_COUNT",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+        </ul>
+      </li>
+      <li
+        className="security--filter-search__subcategory"
+        key="search-subcategory-OPEN"
+      >
+        <h3
+          className="security--filter-search__subcategory__title"
+        >
+          Open subcategory
+        </h3>
+        <ul
+          className="security--filter-search__list"
+        >
+          <li
+            key="search-filter-OPEN:FILTER_1"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "OPEN:FILTER_1",
+                  "name": "Filter 1",
+                  "parent": "OPEN",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+        </ul>
+      </li>
+      <li
+        className="security--filter-search__subcategory"
+        key="search-subcategory-CATEGORY_2:SUBCATEGORY_1"
+      >
+        <h3
+          className="security--filter-search__subcategory__title"
+        >
+          Subcategory 1
+        </h3>
+        <ul
+          className="security--filter-search__list"
+        >
+          <li
+            key="search-filter-CATEGORY_2:SUBCATEGORY_1:FILTER_1"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 5,
+                  "enabled": false,
+                  "id": "CATEGORY_2:SUBCATEGORY_1:FILTER_1",
+                  "name": "Filter 1",
+                  "parent": "CATEGORY_2:SUBCATEGORY_1",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+        </ul>
+      </li>
+      <li
+        className="security--filter-search__subcategory"
+        key="search-subcategory-CATEGORY_2:SUBCATEGORY_2"
+      >
+        <h3
+          className="security--filter-search__subcategory__title"
+        >
+          Subcategory 2
+        </h3>
+        <ul
+          className="security--filter-search__list"
+        >
+          <li
+            key="search-filter-CATEGORY_2:SUBCATEGORY_2:FILTER_1"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 15,
+                  "enabled": false,
+                  "id": "CATEGORY_2:SUBCATEGORY_2:FILTER_1",
+                  "name": "Filter 1",
+                  "parent": "CATEGORY_2:SUBCATEGORY_2",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+        </ul>
+      </li>
+      <li
+        className="security--filter-search__subcategory"
+        key="search-subcategory-CATEGORY_2:SUBCATEGORY_3"
+      >
+        <h3
+          className="security--filter-search__subcategory__title"
+        >
+          Subcategory 3
+        </h3>
+        <ul
+          className="security--filter-search__list"
+        >
+          <li
+            key="search-filter-CATEGORY_2:SUBCATEGORY_3:FILTER_1"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 13,
+                  "enabled": false,
+                  "id": "CATEGORY_2:SUBCATEGORY_3:FILTER_1",
+                  "name": "Filter 1",
+                  "parent": "CATEGORY_2:SUBCATEGORY_3",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+        </ul>
+      </li>
+      <li
+        className="security--filter-search__subcategory"
+        key="search-subcategory-CATEGORY_2:SUBCATEGORY_4"
+      >
+        <h3
+          className="security--filter-search__subcategory__title"
+        >
+          Subcategory 4
+        </h3>
+        <ul
+          className="security--filter-search__list"
+        >
+          <li
+            key="search-filter-CATEGORY_2:SUBCATEGORY_4:FILTER_1"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 26,
+                  "enabled": false,
+                  "id": "CATEGORY_2:SUBCATEGORY_4:FILTER_1",
+                  "name": "Filter 1",
+                  "parent": "CATEGORY_2:SUBCATEGORY_4",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+        </ul>
+      </li>
+      <li
+        className="security--filter-search__subcategory"
+        key="search-subcategory-CATEGORY_2:SUBCATEGORY_5"
+      >
+        <h3
+          className="security--filter-search__subcategory__title"
+        >
+          Subcategory 5
+        </h3>
+        <ul
+          className="security--filter-search__list"
+        >
+          <li
+            key="search-filter-CATEGORY_2:SUBCATEGORY_5:FILTER_1"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 10,
+                  "enabled": false,
+                  "id": "CATEGORY_2:SUBCATEGORY_5:FILTER_1",
+                  "name": "Filter 1",
+                  "parent": "CATEGORY_2:SUBCATEGORY_5",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+        </ul>
+      </li>
+      <li
+        className="security--filter-search__subcategory"
+        key="search-subcategory-CATEGORY_2:SUBCATEGORY_6"
+      >
+        <h3
+          className="security--filter-search__subcategory__title"
+        >
+          Subcategory 6
+        </h3>
+        <ul
+          className="security--filter-search__list"
+        >
+          <li
+            key="search-filter-CATEGORY_2:SUBCATEGORY_6:FILTER_1"
+          >
+            <FilterSelector
+              filter={
+                Object {
+                  "count": 24,
+                  "enabled": false,
+                  "id": "CATEGORY_2:SUBCATEGORY_6:FILTER_1",
+                  "name": "Filter 1",
+                  "parent": "CATEGORY_2:SUBCATEGORY_6",
+                }
+              }
+              onChange={[Function]}
+            />
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
 
-exports[`FilterSearch Rendering renders 1`] = `ShallowWrapper {}`;
+exports[`FilterSearch Rendering renders 1`] = `
+<div
+  className="security--filter-search"
+>
+  <Search
+    className="security--filter-search__input"
+    closeButtonLabelText="Clear search"
+    labelText="Find filter..."
+    onChange={[Function]}
+    placeholder="Find filter..."
+    size="sm"
+    type="text"
+    value=""
+  />
+</div>
+`;
 
-exports[`FilterSearch Rendering should not overwrite \`labels\` when unique props defined 1`] = `ShallowWrapper {}`;
+exports[`FilterSearch Rendering should not overwrite \`labels\` when unique props defined 1`] = `
+<div
+  className="security--filter-search"
+>
+  <Search
+    className="security--filter-search__input"
+    closeButtonLabelText="Clear search"
+    labelText="Find filter..."
+    onChange={[Function]}
+    placeholder="Find filter..."
+    size="sm"
+    type="text"
+    value=""
+  />
+</div>
+`;

@@ -3698,8 +3698,6 @@ body {
 
 .bx--breadcrumb.bx--skeleton .bx--link::before {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -3736,8 +3734,6 @@ body {
 
 .bx--skeleton__text::before {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -5800,8 +5796,6 @@ body {
 
 .bx--btn.bx--skeleton::before {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -7175,8 +7169,6 @@ button.bx--dropdown-text:focus {
 .bx--dropdown-v2.bx--skeleton::before,
 .bx--dropdown.bx--skeleton::before {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -8964,8 +8956,6 @@ a.bx--overflow-menu-options__btn::before {
 
 .bx--label.bx--skeleton::before {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -9278,8 +9268,6 @@ fieldset[disabled] .bx--form__helper-text {
 
 .bx--checkbox-label-text.bx--skeleton::before {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -9723,8 +9711,6 @@ fieldset[disabled] .bx--form__helper-text {
 .bx--search--lg.bx--skeleton .bx--search-input::before,
 .bx--search--sm.bx--skeleton .bx--search-input::before {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -10954,10 +10940,6 @@ tr.bx--data-table--selected:last-of-type td {
   width: auto;
 }
 
-.bx--data-table-container--static {
-  width: fit-content;
-}
-
 .bx--data-table_inner-container {
   background-color: var(--cds-layer-accent, #393939);
   transform: translateZ(0);
@@ -11803,8 +11785,6 @@ th .bx--table-sort__flex {
 .bx--data-table.bx--skeleton th span::before,
 .bx--data-table.bx--skeleton td span::before {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -11860,8 +11840,6 @@ th .bx--table-sort__flex {
 
 .bx--data-table-container.bx--skeleton .bx--data-table-header__title::before {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -11896,8 +11874,6 @@ th .bx--table-sort__flex {
 
 .bx--data-table-container.bx--skeleton .bx--data-table-header__description::before {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -12866,8 +12842,6 @@ li.bx--accordion__item--disabled:last-of-type {
 .security--ica-skeleton .security--ica-skeleton__label::before,
 .security--ica-skeleton .security--ica-skeleton__value::before {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -12922,6 +12896,10 @@ li.bx--accordion__item--disabled:last-of-type {
 .security--ica__total, .security--ica__percentage-mark {
   margin-top: auto;
   margin-bottom: 0.25rem;
+}
+
+.security--ica__info {
+  vertical-align: top;
 }
 
 .security--ica__trend {
@@ -13618,8 +13596,6 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .bx--tag.bx--skeleton::before {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -14034,6 +14010,7 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 .security--nav__list:focus {
+  outline: 0;
   outline-width: 0;
 }
 
@@ -20364,7 +20341,7 @@ li.bx--accordion__item--disabled:last-of-type {
   margin-right: 0.75rem;
 }
 
-.bx--tooltip__label.bx--progress-label:active {
+.bx--progress-label:active {
   box-shadow: 0 0.1875rem 0 0 var(--cds-interactive-01, #0f62fe);
   color: var(--cds-interactive-01, #0f62fe);
 }
@@ -20540,8 +20517,6 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .bx--progress.bx--skeleton .bx--progress-label::before {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -20561,17 +20536,12 @@ li.bx--accordion__item--disabled:last-of-type {
   flex-direction: column;
 }
 
-.bx--progress--vertical,
-.bx--progress-text {
-  display: flex;
-  flex-direction: column;
-}
-
 .bx--progress--vertical .bx--progress-step,
 .bx--progress--vertical .bx--progress-step-button {
   width: initial;
   min-width: initial;
   min-height: 3.625rem;
+  flex-wrap: wrap;
   align-content: flex-start;
 }
 
@@ -20597,7 +20567,8 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--progress--vertical .bx--progress-optional {
   position: static;
   width: 100%;
-  margin: auto 0;
+  margin-top: auto;
+  margin-left: 2rem;
 }
 
 .bx--progress--vertical .bx--progress-line {
@@ -21277,8 +21248,6 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .bx--select.bx--skeleton::before {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -22012,8 +21981,6 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .bx--skeleton.bx--text-input::before {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -24736,8 +24703,6 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .bx--structured-list.bx--skeleton span::before {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -27761,8 +27726,6 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .bx--snippet.bx--skeleton span::before {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -29106,8 +29069,6 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--date-picker.bx--skeleton input::before,
 .bx--date-picker__input.bx--skeleton::before {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -29147,8 +29108,6 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .bx--date-picker.bx--skeleton .bx--label::before {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -30628,8 +30587,6 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .bx--number.bx--skeleton::before {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -31331,8 +31288,6 @@ span.bx--pagination__text {
 
 .bx--radio-button__label.bx--skeleton::before {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -31424,9 +31379,7 @@ span.bx--pagination__text {
   width: 100%;
   min-width: 12.5rem;
   max-width: 40rem;
-  padding: var(--cds-spacing-05, 1rem) 0;
   margin: 0 1rem;
-  cursor: pointer;
 }
 
 .bx--slider__range-label {
@@ -31448,6 +31401,7 @@ span.bx--pagination__text {
   width: 100%;
   height: 0.125rem;
   background: var(--cds-ui-03, #393939);
+  cursor: pointer;
   transform: translate(0%, -50%);
 }
 
@@ -31477,11 +31431,13 @@ span.bx--pagination__text {
 .bx--slider__thumb {
   position: absolute;
   z-index: 3;
+  top: 0;
   width: 0.875rem;
   height: 0.875rem;
   background: var(--cds-ui-05, #f4f4f4);
   border-radius: 50%;
   box-shadow: inset 0 0 0 1px transparent, inset 0 0 0 2px transparent;
+  cursor: pointer;
   outline: none;
   transform: translate(-50%, -50%);
   transition: transform 110ms cubic-bezier(0.2, 0, 0.38, 0.9), background 110ms cubic-bezier(0.2, 0, 0.38, 0.9), box-shadow 110ms cubic-bezier(0.2, 0, 0.38, 0.9);
@@ -31520,20 +31476,12 @@ span.bx--pagination__text {
   display: none;
 }
 
-.bx--slider-text-input.bx--text-input--invalid {
-  padding-right: 1rem;
-}
-
 .bx--slider__thumb:focus ~ .bx--slider__filled-track {
   background-color: var(--cds-interactive-04, #4589ff);
 }
 
 .bx--label--disabled ~ .bx--slider-container > .bx--slider__range-label {
   color: var(--cds-disabled-02, #525252);
-}
-
-.bx--slider--disabled.bx--slider {
-  cursor: not-allowed;
 }
 
 .bx--slider--disabled .bx--slider__thumb {
@@ -31561,6 +31509,7 @@ span.bx--pagination__text {
 .bx--slider--disabled .bx--slider__filled-track,
 .bx--slider--disabled .bx--slider__thumb:focus ~ .bx--slider__filled-track {
   background-color: var(--cds-ui-03, #393939);
+  cursor: not-allowed;
 }
 
 .bx--slider--disabled ~ .bx--form-item .bx--slider-text-input,
@@ -31599,8 +31548,6 @@ span.bx--pagination__text {
 
 .bx--slider-container.bx--skeleton .bx--slider__range-label::before {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -32096,8 +32043,6 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
 
 .bx--tabs.bx--skeleton .bx--tabs__nav-link span::before {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -32130,8 +32075,6 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
 
 .bx--tabs.bx--skeleton .bx--tabs-trigger::before {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -32540,8 +32483,6 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
 
 .bx--tabs--scrollable .bx--tabs.bx--skeleton .bx--tabs--scrollable__nav-link::before {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -32575,8 +32516,6 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
 
 .bx--tabs--scrollable .bx--tabs.bx--skeleton .bx--tabs-trigger::before {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -32736,8 +32675,6 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
 
 .bx--text-area.bx--skeleton::before {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;

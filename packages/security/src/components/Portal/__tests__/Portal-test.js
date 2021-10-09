@@ -91,8 +91,7 @@ describe(name, () => {
         <button
           data-testid="out-portal"
           onMouseOver={outPortalMouseOver}
-          type="button"
-        >
+          type="button">
           I should call mouseOverHandler
         </button>
         <Portal stopPropagation>
@@ -100,8 +99,7 @@ describe(name, () => {
             <button
               data-testid="in-portal"
               onMouseOver={inPortalMouseOver}
-              type="button"
-            >
+              type="button">
               I should NOT call mouseOverHandler
             </button>
           </section>
@@ -134,8 +132,7 @@ describe(name, () => {
               data-testid="in-portal"
               onMouseDown={onMouseDownMock}
               onMouseUp={onMouseUpMock}
-              type="button"
-            >
+              type="button">
               I should call mouseDownHandler, but I should NOT call
               mouseUpHandler.
             </button>

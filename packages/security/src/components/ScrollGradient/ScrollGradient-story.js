@@ -26,8 +26,7 @@ storiesOf(components('ScrollGradient'), module)
       <ScrollGradient
         color={color('color', gradientColor)}
         style={style}
-        className={className}
-      >
+        className={className}>
         {children}
       </ScrollGradient>
     ),
@@ -46,8 +45,7 @@ storiesOf(components('ScrollGradient'), module)
         color={color('color', gradientColor)}
         style={style}
         className={className}
-        direction={ScrollGradient.ScrollDirection.X}
-      >
+        direction={ScrollGradient.ScrollDirection.X}>
         <div style={{ width: '200%' }}>{children}</div>
       </ScrollGradient>
     ),
@@ -66,8 +64,7 @@ storiesOf(components('ScrollGradient'), module)
         color={color('color', gradientColor)}
         hideStartGradient={boolean('hideStartGradient', true)}
         style={style}
-        className={className}
-      >
+        className={className}>
         {children}
       </ScrollGradient>
     ),
@@ -85,8 +82,7 @@ storiesOf(components('ScrollGradient'), module)
       <ScrollGradient
         color={color('color', gradientColor)}
         style={style}
-        className={className}
-      >
+        className={className}>
         <p>
           Content fits completely within content area, so neither scrollbar nor
           scroll gradients are necessary.
@@ -107,14 +103,12 @@ storiesOf(components('ScrollGradient'), module)
       <ScrollGradient
         color={color('color', gradientColor)}
         style={style}
-        className={className}
-      >
+        className={className}>
         <p>Content before the scrollable element.</p>
 
         <ScrollGradient
           color={color('child color (color)', gradientColor)}
-          style={{ height: '6rem', margin: '1rem 0' }}
-        >
+          style={{ height: '6rem', margin: '1rem 0' }}>
           <p>Does not need to scroll so does not have a gradient.</p>
         </ScrollGradient>
 

@@ -71,8 +71,7 @@ describe('InteractiveTag', () => {
       <InteractiveTag
         onRemove={onRemoveMock}
         removable
-        removeBtnLabel="test remove button"
-      >
+        removeBtnLabel="test remove button">
         test tag
       </InteractiveTag>
     );

@@ -32,13 +32,11 @@ const TitleBarModule = ({
       [`${layoutModuleNamespace}--${namespace}--label`]: label,
     })}
     namespace={namespace}
-    {...other}
-  >
+    {...other}>
     <div className={`${layoutModuleNamespace}--${namespace}__label-wrapper`}>
       {label && (
         <LayoutModule
-          namespace={`${namespace}__label order--${labelDirection}`}
-        >
+          namespace={`${namespace}__label order--${labelDirection}`}>
           {label}
         </LayoutModule>
       )}

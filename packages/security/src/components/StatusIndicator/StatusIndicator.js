@@ -92,8 +92,7 @@ class StatusIndicator extends Component {
                 kind="ghost"
                 onClick={this.state.retry.action}
                 onKeyPress={this.state.retry.action}
-                renderIcon={Restart20}
-              >
+                renderIcon={Restart20}>
                 {this.state.retry.label}
               </Button>
             </li>

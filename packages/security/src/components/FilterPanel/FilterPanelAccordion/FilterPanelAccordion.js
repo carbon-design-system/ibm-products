@@ -28,8 +28,7 @@ const FilterPanelAccordion = ({
     title={title}
     count={count}
     countLabel={countLabel}
-    heading={heading}
-  >
+    heading={heading}>
     <Accordion {...other}>{children}</Accordion>
   </FilterPanelGroup>
 );

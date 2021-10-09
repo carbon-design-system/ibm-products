@@ -46,8 +46,7 @@ const FilterPanelCheckboxWithOverflowMenu = ({
       onMouseOver={() => setShowOverflowButton(true)}
       onMouseLeave={() => hideOverflowButton(document.activeElement)}
       ref={containerRef}
-      data-floating-menu-container
-    >
+      data-floating-menu-container>
       <FilterPanelCheckbox
         wrapperClassName={`${namespace}__wrapper`}
         {...other}
@@ -63,8 +62,7 @@ const FilterPanelCheckboxWithOverflowMenu = ({
           onOpen={() => setOverflowIsOpen(true)}
           onClose={() => setOverflowIsOpen(false)}
           flipped
-          selectorPrimaryFocus={selectorPrimaryFocus}
-        >
+          selectorPrimaryFocus={selectorPrimaryFocus}>
           {children}
         </OverflowMenu>
       )}

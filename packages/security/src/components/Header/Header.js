@@ -208,11 +208,9 @@ export default class Header extends Component {
         onBlur={() => this.closePopover(this.userProfile)}
         role="tabpanel"
         tabIndex="0"
-        value="profile"
-      >
+        value="profile">
         <HeaderPopoverHeader
-          className={`${namespace}__popover__profile__header`}
-        >
+          className={`${namespace}__popover__profile__header`}>
           <Fragment>
             <ProfileImage
               className={`${namespace}__popover__profile__header__icon`}
@@ -222,8 +220,7 @@ export default class Header extends Component {
             <div>
               <span
                 id={popoverLabelId}
-                className={`${namespace}__popover__profile__header__title`}
-              >
+                className={`${namespace}__popover__profile__header__title`}>
                 {profile.name.first_name} {profile.name.surname}
               </span>
               <span className={`${namespace}__popover__profile__header__email`}>
@@ -242,30 +239,25 @@ export default class Header extends Component {
             className={classnames(`${namespace}__popover__profile__body`, {
               [`${namespace}__popover__profile__body--account`]:
                 !hasAccountList,
-            })}
-          >
+            })}>
             {!hasAccountList ? (
               accountElement
             ) : (
               <Accordion
-                className={`${namespace}__popover__profile__body__accordion`}
-              >
+                className={`${namespace}__popover__profile__body__accordion`}>
                 <AccordionItem
                   className={`${namespace}__popover__profile__body__accordion__item`}
-                  title={accountElement}
-                >
+                  title={accountElement}>
                   <ul className={`${namespace}__popover__profile__body__list`}>
                     {accountList.map(({ id, name }) => (
                       <li
                         key={id}
-                        className={`${namespace}__popover__profile__body__account`}
-                      >
+                        className={`${namespace}__popover__profile__body__account`}>
                         <button
                           value={id}
                           onClick={onAccountClick}
                           className={`${namespace}__popover__profile__body__account__button`}
-                          type="button"
-                        >
+                          type="button">
                           {name}
                         </button>
                       </li>
@@ -280,15 +272,13 @@ export default class Header extends Component {
           {this.props.showEditProfile && (
             <HeaderPopoverLinkSecondary
               className={`${namespace}__popover__profile__footer__edit`}
-              href={links.edit_profile}
-            >
+              href={links.edit_profile}>
               {labels.profile.edit_profile}
             </HeaderPopoverLinkSecondary>
           )}
           <HeaderPopoverLinkSecondary
             className={`${namespace}__popover__profile__footer__logout`}
-            href={links.sign_out}
-          >
+            href={links.sign_out}>
             {labels.profile.sign_out}
           </HeaderPopoverLinkSecondary>
         </section>
@@ -324,8 +314,7 @@ export default class Header extends Component {
         onBlur={() => this.closePopover(this.notifications)}
         role="tabpanel"
         tabIndex="0"
-        value="notifications"
-      >
+        value="notifications">
         <HeaderPopoverHeader
           id={popoverLabelId}
           title={labels.notifications.title}
@@ -339,8 +328,7 @@ export default class Header extends Component {
               className={`${namespace}__popover__button`}
               aria-label={labels.notifications.clear_all}
               onClick={() => this.clearAllNotifications()}
-              type="button"
-            >
+              type="button">
               <Icon renderIcon={Close20} />
             </button>
           </div>
@@ -349,8 +337,7 @@ export default class Header extends Component {
           <ul className={`${namespace}__popover__list`}>
             <Transition
               className={`${namespace}__notification`}
-              component="span"
-            >
+              component="span">
               {notifications
                 .sort(
                   (a, b) =>
@@ -449,8 +436,7 @@ export default class Header extends Component {
               onClick={() => this.toggle('notifications')}
               renderIcon={Notification20}
               state={notifications}
-              tooltip={false}
-            >
+              tooltip={false}>
               <Icon name="notification" />
             </IconButton>
             {this.renderNotifications()}
@@ -464,8 +450,7 @@ export default class Header extends Component {
             aria-label={labels.profile.button}
             className={profileButtonClasses}
             onClick={() => this.toggle('profile')}
-            type="button"
-          >
+            type="button">
             <ProfileImage profile={profile} />
           </button>
           {this.renderProfile()}
@@ -509,8 +494,7 @@ export default class Header extends Component {
           <ul
             className={`${namespace}__group  ${
               isUserActive && `${namespace}__group--active`
-            }`}
-          >
+            }`}>
             {this.renderIsUserActive()}
           </ul>
         </header>

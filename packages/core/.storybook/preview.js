@@ -10,6 +10,7 @@
 import { withCarbonTheme } from '@carbon/storybook-addon-theme/react';
 import { ArgsTable, Canvas, Story, Source } from '@storybook/addon-docs';
 import LinkTo from '@storybook/addon-links/react';
+import { themes } from '@storybook/theming';
 
 import { Column, Row } from 'carbon-components-react';
 import React, { useEffect } from 'react';
@@ -85,7 +86,13 @@ const parameters = {
       ArgsTable,
       Canvas,
       Column,
-      LinkTo,
+      LinkTo: (props) => (
+        <LinkTo
+          className="storybook__link-to"
+          style={{ color: themes.normal.colorSecondary }}
+          {...props}
+        />
+      ),
       Row,
       Source,
       Story,
@@ -121,4 +128,4 @@ const parameters = {
   },
 };
 
-export { decorators, parameters };
+export { decorators, parameters, Style };

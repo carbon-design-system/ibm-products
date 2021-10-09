@@ -29,7 +29,8 @@ const LoadingMessage = ({
     className={classnames(namespace, className, {
       [overlayNamespace]: withOverlay,
       [`${overlayNamespace}--stop`]: withOverlay && !active,
-    })}>
+    })}
+  >
     <Loading
       className={`${namespace}__loading`}
       active={active}

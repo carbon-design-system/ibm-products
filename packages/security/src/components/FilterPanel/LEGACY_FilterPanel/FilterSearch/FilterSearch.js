@@ -126,7 +126,8 @@ class FilterSearch extends Component {
                   .map((subcategory) => (
                     <li
                       key={`search-subcategory-${subcategory.id}`}
-                      className={`${namespace}__subcategory`}>
+                      className={`${namespace}__subcategory`}
+                    >
                       <h3 className={`${namespace}__subcategory__title`}>
                         {subcategory.name}
                       </h3>

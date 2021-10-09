@@ -19,7 +19,8 @@ describe('StatusIndicator', () => {
         retry={{
           label: 'test retry label',
           action: () => {},
-        }}>
+        }}
+      >
         <StatusStep label="test-label-1" description="test description 1" />
         <StatusStep
           status={STATUS.current}

@@ -2,7 +2,12 @@
 
 ## Value truncation
 
-ICA components provide a simple way to display numerical values. Even for long numbers, this component truncates these numbers so they render as short as possible. It follows different language conventions to do so and consuming developers are expected to provide the locale code for their users for the component to truncate correctly. The default locale is English (`en`) if one is not provided or if the provided one is not supported.
+ICA components provide a simple way to display numerical values. Even for long
+numbers, this component truncates these numbers so they render as short as
+possible. It follows different language conventions to do so and consuming
+developers are expected to provide the locale code for their users for the
+component to truncate correctly. The default locale is English (`en`) if one is
+not provided or if the provided one is not supported.
 
 ### Supported locales for value truncation
 

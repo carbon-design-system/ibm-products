@@ -1150,7 +1150,6 @@ exports[`Styles Bundle 1`] = `
   --danger: var(--cds-danger, #da1e28);
 }
 
-/* stylelint-disable number-max-precision */
 h1 {
   font-size: var(--cds-productive-heading-06-font-size, 2.625rem);
   font-weight: var(--cds-productive-heading-06-font-weight, 300);
@@ -1208,7 +1207,6 @@ em {
   font-style: italic;
 }
 
-/* stylelint-disable number-max-precision */
 @keyframes skeleton {
   0% {
     opacity: 0.3;
@@ -2436,8 +2434,6 @@ body {
   white-space: nowrap;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 @font-face {
   font-display: auto;
   font-family: 'IBM Plex Mono';
@@ -3417,15 +3413,6 @@ body {
   }
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--link {
   box-sizing: border-box;
   padding: 0;
@@ -3698,6 +3685,8 @@ body {
 
 .bx--breadcrumb.bx--skeleton .bx--link::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -3712,8 +3701,6 @@ body {
   }
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--skeleton__text {
   position: relative;
   padding: 0;
@@ -3734,6 +3721,8 @@ body {
 
 .bx--skeleton__text::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -3752,9 +3741,6 @@ body {
   height: 1.5rem;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--card--skeleton__wrapper {
   display: flex;
 }
@@ -3763,9 +3749,6 @@ body {
   margin-right: 0.5rem;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--card {
   display: flex;
   width: auto;
@@ -3851,13 +3834,6 @@ body {
   margin-top: auto;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--assistive-text,
 .bx--visually-hidden {
   position: absolute;
@@ -3895,13 +3871,6 @@ body {
   box-sizing: inherit;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--btn {
   box-sizing: border-box;
   padding: 0;
@@ -5796,6 +5765,8 @@ body {
 
 .bx--btn.bx--skeleton::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -5885,14 +5856,6 @@ body {
   margin-bottom: -0.5rem;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--list-box__wrapper--inline {
   display: inline-grid;
   align-items: center;
@@ -6287,7 +6250,7 @@ body {
   position: absolute;
   top: 50%;
   /* to preserve .5rem space between icons according to spec top/transform used to center the combobox clear selection icon in IE11 */
-  right: 2.25rem;
+  right: 2.5rem;
   display: flex;
   width: 1.5rem;
   height: 1.5rem;
@@ -6684,7 +6647,7 @@ body {
 .bx--dropdown__wrapper--inline {
   display: inline-grid;
   align-items: center;
-  grid-gap: 1.5rem;
+  grid-gap: 0 1.5rem;
   grid-template: auto auto / auto min-content;
 }
 
@@ -7169,6 +7132,8 @@ button.bx--dropdown-text:focus {
 .bx--dropdown-v2.bx--skeleton::before,
 .bx--dropdown.bx--skeleton::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -7202,17 +7167,6 @@ button.bx--dropdown-text:focus {
   }
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--overflow-menu,
 .bx--overflow-menu__trigger {
   box-sizing: border-box;
@@ -7746,30 +7700,6 @@ a.bx--overflow-menu-options__btn::before {
   fill: var(--cds-text-03, #6f6f6f);
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--button--icon {
   box-sizing: border-box;
   padding: 0;
@@ -7972,25 +7902,6 @@ a.bx--overflow-menu-options__btn::before {
   transform: translate(0.25rem, -50%);
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--panel--v2 {
   position: fixed;
   z-index: 9000;
@@ -8705,9 +8616,6 @@ a.bx--overflow-menu-options__btn::before {
   transition-timing-function: cubic-bezier(0.4, 0.14, 1, 1);
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--decorator {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
@@ -8865,13 +8773,6 @@ a.bx--overflow-menu-options__btn::before {
   height: auto;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--fieldset {
   box-sizing: border-box;
   padding: 0;
@@ -8956,6 +8857,8 @@ a.bx--overflow-menu-options__btn::before {
 
 .bx--label.bx--skeleton::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -9103,7 +9006,6 @@ fieldset[disabled] .bx--form__helper-text {
   color: var(--cds-disabled-02, #525252);
 }
 
-/* stylelint-disable number-max-precision */
 .bx--form-item.bx--checkbox-wrapper {
   margin-bottom: 0.25rem;
 }
@@ -9268,6 +9170,8 @@ fieldset[disabled] .bx--form__helper-text {
 
 .bx--checkbox-label-text.bx--skeleton::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -9282,12 +9186,6 @@ fieldset[disabled] .bx--form__helper-text {
   }
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--scroll-gradient {
   position: relative;
   display: flex;
@@ -9360,10 +9258,6 @@ fieldset[disabled] .bx--form__helper-text {
   transition-duration: 110ms;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--search {
   position: relative;
   display: flex;
@@ -9711,6 +9605,8 @@ fieldset[disabled] .bx--form__helper-text {
 .bx--search--lg.bx--skeleton .bx--search-input::before,
 .bx--search--sm.bx--skeleton .bx--search-input::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -9794,8 +9690,6 @@ fieldset[disabled] .bx--form__helper-text {
   }
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--table-toolbar {
   position: relative;
   display: flex;
@@ -10364,8 +10258,6 @@ fieldset[disabled] .bx--form__helper-text {
   height: 2rem;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--data-table-container {
   position: relative;
   padding-top: var(--cds-spacing-01, 0.125rem);
@@ -10940,6 +10832,10 @@ tr.bx--data-table--selected:last-of-type td {
   width: auto;
 }
 
+.bx--data-table-container--static {
+  width: fit-content;
+}
+
 .bx--data-table_inner-container {
   background-color: var(--cds-layer-accent, #393939);
   transform: translateZ(0);
@@ -11167,8 +11063,6 @@ tr.bx--data-table--selected:last-of-type td {
   }
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--data-table tr.bx--parent-row:first-of-type td {
   border-top: 1px solid var(--cds-border-subtle, #393939);
 }
@@ -11476,8 +11370,6 @@ tr.bx--parent-row.bx--data-table--selected.bx--expandable-row--hover + tr[data-c
   }
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--data-table--sort th,
 .bx--data-table th[aria-sort] {
   height: var(--cds-spacing-09, 3rem);
@@ -11673,8 +11565,6 @@ th .bx--table-sort__flex {
   }
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--inline-edit-label {
   display: flex;
   align-items: center;
@@ -11753,8 +11643,6 @@ th .bx--table-sort__flex {
   padding-left: var(--cds-spacing-04, 0.75rem);
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--data-table.bx--skeleton th {
   padding-left: 1rem;
   vertical-align: middle;
@@ -11785,6 +11673,8 @@ th .bx--table-sort__flex {
 .bx--data-table.bx--skeleton th span::before,
 .bx--data-table.bx--skeleton td span::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -11840,6 +11730,8 @@ th .bx--table-sort__flex {
 
 .bx--data-table-container.bx--skeleton .bx--data-table-header__title::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -11874,6 +11766,8 @@ th .bx--table-sort__flex {
 
 .bx--data-table-container.bx--skeleton .bx--data-table-header__description::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -11918,13 +11812,6 @@ th .bx--table-sort__flex {
   white-space: nowrap;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--error-page {
   display: flex;
   min-height: 12.5rem;
@@ -11983,13 +11870,6 @@ th .bx--table-sort__flex {
   padding-right: 0.5rem;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--link--external {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
@@ -12016,11 +11896,6 @@ th .bx--table-sort__flex {
   vertical-align: middle;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 @keyframes collapse-accordion {
   0% {
     height: 100%;
@@ -12329,11 +12204,6 @@ li.bx--accordion__item--disabled:last-of-type {
   color: var(--cds-text-02, #c6c6c6);
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--filter-search {
   position: relative;
   margin-bottom: 1rem;
@@ -12385,15 +12255,6 @@ li.bx--accordion__item--disabled:last-of-type {
   overflow-y: auto;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--filter-selector {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
@@ -12432,21 +12293,6 @@ li.bx--accordion__item--disabled:last-of-type {
   white-space: nowrap;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--filter-subcategory {
   border-top-width: 0;
 }
@@ -12523,7 +12369,6 @@ li.bx--accordion__item--disabled:last-of-type {
   color: var(--cds-text-02, #c6c6c6);
 }
 
-/* stylelint-disable number-max-precision */
 .security--filter-panel-group {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -12540,9 +12385,6 @@ li.bx--accordion__item--disabled:last-of-type {
   margin-bottom: 1rem;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 @keyframes collapse-accordion {
   0% {
     height: 100%;
@@ -12574,18 +12416,6 @@ li.bx--accordion__item--disabled:last-of-type {
   margin-bottom: 1rem;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--truncated-list {
   margin: 0;
 }
@@ -12621,9 +12451,6 @@ li.bx--accordion__item--disabled:last-of-type {
   color: var(--cds-text-01, #f4f4f4);
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--filter-panel-accordion-item {
   border-top-width: 0;
 }
@@ -12682,15 +12509,6 @@ li.bx--accordion__item--disabled:last-of-type {
   color: var(--cds-text-01, #f4f4f4);
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--filter-panel-checkbox__wrapper {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
@@ -12729,21 +12547,6 @@ li.bx--accordion__item--disabled:last-of-type {
   align-items: center;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--filter-panel-checkbox-with-overflow-menu {
   position: relative;
   display: flex;
@@ -12776,10 +12579,6 @@ li.bx--accordion__item--disabled:last-of-type {
   justify-content: flex-end;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--filter-panel-search {
   position: relative;
   margin-bottom: 1rem;
@@ -12811,11 +12610,6 @@ li.bx--accordion__item--disabled:last-of-type {
   margin-bottom: 1rem;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--ica-skeleton {
   width: 4rem;
 }
@@ -12842,6 +12636,8 @@ li.bx--accordion__item--disabled:last-of-type {
 .security--ica-skeleton .security--ica-skeleton__label::before,
 .security--ica-skeleton .security--ica-skeleton__value::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -12964,18 +12760,6 @@ li.bx--accordion__item--disabled:last-of-type {
   margin-top: 0.75rem;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--icon-button-bar {
   display: flex;
   overflow: none;
@@ -13044,15 +12828,6 @@ li.bx--accordion__item--disabled:last-of-type {
   background-color: var(--cds-ui-03, #393939);
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -13280,11 +13055,6 @@ li.bx--accordion__item--disabled:last-of-type {
   }
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--tag {
   box-sizing: border-box;
   padding: 0;
@@ -13596,6 +13366,8 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .bx--tag.bx--skeleton::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -13654,7 +13426,6 @@ li.bx--accordion__item--disabled:last-of-type {
   background-color: inherit;
 }
 
-/* stylelint-disable number-max-precision */
 .security--layout-module--action-bar {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
@@ -13703,7 +13474,6 @@ li.bx--accordion__item--disabled:last-of-type {
   margin-bottom: 0;
 }
 
-/* stylelint-disable number-max-precision */
 .security--layout-module--description {
   padding-bottom: 2rem;
 }
@@ -13743,9 +13513,6 @@ li.bx--accordion__item--disabled:last-of-type {
   background-color: var(--cds-hover-ui, #353535);
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--layout-module--list-item {
   display: flex;
   padding: 1rem;
@@ -13861,7 +13628,6 @@ li.bx--accordion__item--disabled:last-of-type {
   margin-bottom: 0;
 }
 
-/* stylelint-disable number-max-precision */
 .security--layout-module--title-bar {
   display: flex;
 }
@@ -13929,14 +13695,6 @@ li.bx--accordion__item--disabled:last-of-type {
   margin-top: 0.25rem;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--nav {
   position: relative;
 }
@@ -14175,18 +13933,6 @@ li.bx--accordion__item--disabled:last-of-type {
   margin-bottom: 0.5rem;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--ne-section {
   min-height: 12.5rem;
   background-position: center right;
@@ -16275,11 +16021,6 @@ li.bx--accordion__item--disabled:last-of-type {
   padding: 0 0.5rem 0 0;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--inline-notification {
   box-sizing: border-box;
   padding: 0;
@@ -16376,7 +16117,8 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 .bx--inline-notification--error .bx--inline-notification__icon,
-.bx--inline-notification--error .bx--toast-notification__icon {
+.bx--inline-notification--error .bx--toast-notification__icon,
+.bx--inline-notification--error .bx--actionable-notification__icon {
   fill: var(--cds-inverse-support-01, #da1e28);
 }
 
@@ -16386,7 +16128,8 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 .bx--inline-notification--low-contrast.bx--inline-notification--error .bx--inline-notification__icon,
-.bx--inline-notification--low-contrast.bx--inline-notification--error .bx--toast-notification__icon {
+.bx--inline-notification--low-contrast.bx--inline-notification--error .bx--toast-notification__icon,
+.bx--inline-notification--low-contrast.bx--inline-notification--error .bx--actionable-notification__icon {
   fill: var(--cds-support-01, #fa4d56);
 }
 
@@ -16400,7 +16143,8 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 .bx--inline-notification--success .bx--inline-notification__icon,
-.bx--inline-notification--success .bx--toast-notification__icon {
+.bx--inline-notification--success .bx--toast-notification__icon,
+.bx--inline-notification--success .bx--actionable-notification__icon {
   fill: var(--cds-inverse-support-02, #24a148);
 }
 
@@ -16410,7 +16154,8 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 .bx--inline-notification--low-contrast.bx--inline-notification--success .bx--inline-notification__icon,
-.bx--inline-notification--low-contrast.bx--inline-notification--success .bx--toast-notification__icon {
+.bx--inline-notification--low-contrast.bx--inline-notification--success .bx--toast-notification__icon,
+.bx--inline-notification--low-contrast.bx--inline-notification--success .bx--actionable-notification__icon {
   fill: var(--cds-support-02, #42be65);
 }
 
@@ -16426,8 +16171,10 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .bx--inline-notification--info .bx--inline-notification__icon,
 .bx--inline-notification--info .bx--toast-notification__icon,
+.bx--inline-notification--info .bx--actionable-notification__icon,
 .bx--inline-notification--info-square .bx--inline-notification__icon,
-.bx--inline-notification--info-square .bx--toast-notification__icon {
+.bx--inline-notification--info-square .bx--toast-notification__icon,
+.bx--inline-notification--info-square .bx--actionable-notification__icon {
   fill: var(--cds-inverse-support-04, #0f62fe);
 }
 
@@ -16439,8 +16186,10 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .bx--inline-notification--low-contrast.bx--inline-notification--info .bx--inline-notification__icon,
 .bx--inline-notification--low-contrast.bx--inline-notification--info .bx--toast-notification__icon,
+.bx--inline-notification--low-contrast.bx--inline-notification--info .bx--actionable-notification__icon,
 .bx--inline-notification--low-contrast.bx--inline-notification--info-square .bx--inline-notification__icon,
-.bx--inline-notification--low-contrast.bx--inline-notification--info-square .bx--toast-notification__icon {
+.bx--inline-notification--low-contrast.bx--inline-notification--info-square .bx--toast-notification__icon,
+.bx--inline-notification--low-contrast.bx--inline-notification--info-square .bx--actionable-notification__icon {
   fill: var(--cds-support-04, #4589ff);
 }
 
@@ -16457,8 +16206,10 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .bx--inline-notification--warning .bx--inline-notification__icon,
 .bx--inline-notification--warning .bx--toast-notification__icon,
+.bx--inline-notification--warning .bx--actionable-notification__icon,
 .bx--inline-notification--warning-alt .bx--inline-notification__icon,
-.bx--inline-notification--warning-alt .bx--toast-notification__icon {
+.bx--inline-notification--warning-alt .bx--toast-notification__icon,
+.bx--inline-notification--warning-alt .bx--actionable-notification__icon {
   fill: var(--cds-inverse-support-03, #f1c21b);
 }
 
@@ -16470,8 +16221,10 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .bx--inline-notification--low-contrast.bx--inline-notification--warning .bx--inline-notification__icon,
 .bx--inline-notification--low-contrast.bx--inline-notification--warning .bx--toast-notification__icon,
+.bx--inline-notification--low-contrast.bx--inline-notification--warning .bx--actionable-notification__icon,
 .bx--inline-notification--low-contrast.bx--inline-notification--warning-alt .bx--inline-notification__icon,
-.bx--inline-notification--low-contrast.bx--inline-notification--warning-alt .bx--toast-notification__icon {
+.bx--inline-notification--low-contrast.bx--inline-notification--warning-alt .bx--toast-notification__icon,
+.bx--inline-notification--low-contrast.bx--inline-notification--warning-alt .bx--actionable-notification__icon {
   fill: var(--cds-support-03, #f1c21b);
 }
 
@@ -16639,11 +16392,6 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 /* stylelint-enable */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--toast-notification {
   box-sizing: border-box;
   padding: 0;
@@ -16715,7 +16463,8 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 .bx--toast-notification--error .bx--inline-notification__icon,
-.bx--toast-notification--error .bx--toast-notification__icon {
+.bx--toast-notification--error .bx--toast-notification__icon,
+.bx--toast-notification--error .bx--actionable-notification__icon {
   fill: var(--cds-inverse-support-01, #da1e28);
 }
 
@@ -16725,7 +16474,8 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 .bx--toast-notification--low-contrast.bx--toast-notification--error .bx--inline-notification__icon,
-.bx--toast-notification--low-contrast.bx--toast-notification--error .bx--toast-notification__icon {
+.bx--toast-notification--low-contrast.bx--toast-notification--error .bx--toast-notification__icon,
+.bx--toast-notification--low-contrast.bx--toast-notification--error .bx--actionable-notification__icon {
   fill: var(--cds-support-01, #fa4d56);
 }
 
@@ -16735,7 +16485,8 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 .bx--toast-notification--success .bx--inline-notification__icon,
-.bx--toast-notification--success .bx--toast-notification__icon {
+.bx--toast-notification--success .bx--toast-notification__icon,
+.bx--toast-notification--success .bx--actionable-notification__icon {
   fill: var(--cds-inverse-support-02, #24a148);
 }
 
@@ -16745,7 +16496,8 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 .bx--toast-notification--low-contrast.bx--toast-notification--success .bx--inline-notification__icon,
-.bx--toast-notification--low-contrast.bx--toast-notification--success .bx--toast-notification__icon {
+.bx--toast-notification--low-contrast.bx--toast-notification--success .bx--toast-notification__icon,
+.bx--toast-notification--low-contrast.bx--toast-notification--success .bx--actionable-notification__icon {
   fill: var(--cds-support-02, #42be65);
 }
 
@@ -16757,8 +16509,10 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .bx--toast-notification--info .bx--inline-notification__icon,
 .bx--toast-notification--info .bx--toast-notification__icon,
+.bx--toast-notification--info .bx--actionable-notification__icon,
 .bx--toast-notification--info-square .bx--inline-notification__icon,
-.bx--toast-notification--info-square .bx--toast-notification__icon {
+.bx--toast-notification--info-square .bx--toast-notification__icon,
+.bx--toast-notification--info-square .bx--actionable-notification__icon {
   fill: var(--cds-inverse-support-04, #0f62fe);
 }
 
@@ -16770,8 +16524,10 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .bx--toast-notification--low-contrast.bx--toast-notification--info .bx--inline-notification__icon,
 .bx--toast-notification--low-contrast.bx--toast-notification--info .bx--toast-notification__icon,
+.bx--toast-notification--low-contrast.bx--toast-notification--info .bx--actionable-notification__icon,
 .bx--toast-notification--low-contrast.bx--toast-notification--info-square .bx--inline-notification__icon,
-.bx--toast-notification--low-contrast.bx--toast-notification--info-square .bx--toast-notification__icon {
+.bx--toast-notification--low-contrast.bx--toast-notification--info-square .bx--toast-notification__icon,
+.bx--toast-notification--low-contrast.bx--toast-notification--info-square .bx--actionable-notification__icon {
   fill: var(--cds-support-04, #4589ff);
 }
 
@@ -16783,8 +16539,10 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .bx--toast-notification--warning .bx--inline-notification__icon,
 .bx--toast-notification--warning .bx--toast-notification__icon,
+.bx--toast-notification--warning .bx--actionable-notification__icon,
 .bx--toast-notification--warning-alt .bx--inline-notification__icon,
-.bx--toast-notification--warning-alt .bx--toast-notification__icon {
+.bx--toast-notification--warning-alt .bx--toast-notification__icon,
+.bx--toast-notification--warning-alt .bx--actionable-notification__icon {
   fill: var(--cds-inverse-support-03, #f1c21b);
 }
 
@@ -16796,8 +16554,10 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .bx--toast-notification--low-contrast.bx--toast-notification--warning .bx--inline-notification__icon,
 .bx--toast-notification--low-contrast.bx--toast-notification--warning .bx--toast-notification__icon,
+.bx--toast-notification--low-contrast.bx--toast-notification--warning .bx--actionable-notification__icon,
 .bx--toast-notification--low-contrast.bx--toast-notification--warning-alt .bx--inline-notification__icon,
-.bx--toast-notification--low-contrast.bx--toast-notification--warning-alt .bx--toast-notification__icon {
+.bx--toast-notification--low-contrast.bx--toast-notification--warning-alt .bx--toast-notification__icon,
+.bx--toast-notification--low-contrast.bx--toast-notification--warning-alt .bx--actionable-notification__icon {
   fill: var(--cds-support-03, #f1c21b);
 }
 
@@ -16919,43 +16679,6 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 /* stylelint-enable */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--panel {
   position: fixed;
   z-index: 9000;
@@ -17639,89 +17362,6 @@ li.bx--accordion__item--disabled:last-of-type {
   flex-grow: 1;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--pill {
   padding: 0 0.5rem;
   border-radius: 6.25rem;
@@ -17733,7 +17373,6 @@ li.bx--accordion__item--disabled:last-of-type {
   border-radius: 3.125rem;
 }
 
-/* stylelint-disable number-max-precision */
 .security--profile-image {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
@@ -17760,30 +17399,6 @@ li.bx--accordion__item--disabled:last-of-type {
   height: 3.5rem;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--tooltip__label {
   font-size: var(--cds-label-01-font-size, 0.75rem);
   font-weight: var(--cds-label-01-font-weight, 400);
@@ -20341,7 +19956,7 @@ li.bx--accordion__item--disabled:last-of-type {
   margin-right: 0.75rem;
 }
 
-.bx--progress-label:active {
+.bx--tooltip__label.bx--progress-label:active {
   box-shadow: 0 0.1875rem 0 0 var(--cds-interactive-01, #0f62fe);
   color: var(--cds-interactive-01, #0f62fe);
 }
@@ -20517,6 +20132,8 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .bx--progress.bx--skeleton .bx--progress-label::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -20536,12 +20153,17 @@ li.bx--accordion__item--disabled:last-of-type {
   flex-direction: column;
 }
 
+.bx--progress--vertical,
+.bx--progress-text {
+  display: flex;
+  flex-direction: column;
+}
+
 .bx--progress--vertical .bx--progress-step,
 .bx--progress--vertical .bx--progress-step-button {
   width: initial;
   min-width: initial;
   min-height: 3.625rem;
-  flex-wrap: wrap;
   align-content: flex-start;
 }
 
@@ -20567,8 +20189,7 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--progress--vertical .bx--progress-optional {
   position: static;
   width: 100%;
-  margin-top: auto;
-  margin-left: 2rem;
+  margin: auto 0;
 }
 
 .bx--progress--vertical .bx--progress-line {
@@ -20579,37 +20200,6 @@ li.bx--accordion__item--disabled:last-of-type {
   height: 100%;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--multi-select .bx--tag {
   min-width: auto;
   margin: 0 0.5rem 0 0;
@@ -20687,10 +20277,6 @@ li.bx--accordion__item--disabled:last-of-type {
   background-color: transparent;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--search-bar {
   display: flex;
 }
@@ -20723,17 +20309,11 @@ li.bx--accordion__item--disabled:last-of-type {
   white-space: nowrap;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--stacked-notification {
   border-width: 0;
   box-shadow: 0.25rem 0.25rem var(--cds-ui-04, #6f6f6f), 0.5rem 0.5rem 0 var(--cds-ui-03, #393939);
 }
 
-/* stylelint-disable number-max-precision */
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -20839,19 +20419,6 @@ li.bx--accordion__item--disabled:last-of-type {
   margin-left: 0.5rem;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--status-indicator {
   display: flex;
   flex-direction: column;
@@ -20930,38 +20497,6 @@ li.bx--accordion__item--disabled:last-of-type {
   margin-top: 0.25rem;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--string-formatter {
   display: inline-block;
   text-align: left;
@@ -20983,28 +20518,6 @@ li.bx--accordion__item--disabled:last-of-type {
   line-height: inherit;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--select {
   box-sizing: border-box;
   padding: 0;
@@ -21248,6 +20761,8 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .bx--select.bx--skeleton::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -21272,19 +20787,6 @@ li.bx--accordion__item--disabled:last-of-type {
   }
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--summary-card {
   position: relative;
   display: flex;
@@ -21465,29 +20967,6 @@ li.bx--accordion__item--disabled:last-of-type {
   background-color: var(--cds-overlay-01, rgba(22, 22, 22, 0.7));
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--tag-wall__label {
   font-size: var(--cds-caption-01-font-size, 0.75rem);
   font-weight: var(--cds-caption-01-font-weight, 400);
@@ -21505,32 +20984,6 @@ li.bx--accordion__item--disabled:last-of-type {
   flex-shrink: 0;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--text-input {
   box-sizing: border-box;
   padding: 0;
@@ -21981,6 +21434,8 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .bx--skeleton.bx--text-input::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -22130,28 +21585,6 @@ li.bx--accordion__item--disabled:last-of-type {
   }
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--filter .bx--list-box__field {
   position: fixed;
   height: 2.5rem;
@@ -22238,25 +21671,6 @@ li.bx--accordion__item--disabled:last-of-type {
   justify-content: space-between;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -22297,69 +21711,6 @@ li.bx--accordion__item--disabled:last-of-type {
   }
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--tearsheet--small {
   position: fixed;
   z-index: 9000;
@@ -22497,48 +21848,6 @@ li.bx--accordion__item--disabled:last-of-type {
   margin-left: 0;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--tag-wall-filter__tag-wall {
   min-height: 1.5rem;
   margin-top: 0.75rem;
@@ -22567,38 +21876,6 @@ li.bx--accordion__item--disabled:last-of-type {
   margin-top: 2.5rem;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--portal__overlay {
   position: fixed;
   z-index: 6000;
@@ -22623,25 +21900,6 @@ li.bx--accordion__item--disabled:last-of-type {
   z-index: 9000;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -22682,89 +21940,6 @@ li.bx--accordion__item--disabled:last-of-type {
   }
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--tearsheet {
   position: fixed;
   z-index: 9000;
@@ -22942,25 +22117,6 @@ li.bx--accordion__item--disabled:last-of-type {
   flex-wrap: wrap;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -23001,70 +22157,6 @@ li.bx--accordion__item--disabled:last-of-type {
   }
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--time-indicator {
   font-size: var(--cds-label-01-font-size, 0.75rem);
   font-weight: var(--cds-label-01-font-weight, 400);
@@ -23080,18 +22172,6 @@ li.bx--accordion__item--disabled:last-of-type {
   fill: var(--cds-icon-01, #f4f4f4);
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--toolbar {
   position: fixed;
   z-index: 8002;
@@ -24421,9 +23501,6 @@ li.bx--accordion__item--disabled:last-of-type {
   transition-delay: 240ms;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--trending-card {
   transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
   display: block;
@@ -24474,24 +23551,6 @@ li.bx--accordion__item--disabled:last-of-type {
   color: var(--cds-text-02, #c6c6c6);
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--structured-list--selection .bx--structured-list-td,
 .bx--structured-list--selection .bx--structured-list-th {
   padding-right: 1rem;
@@ -24703,6 +23762,8 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .bx--structured-list.bx--skeleton span::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -24814,84 +23875,6 @@ li.bx--accordion__item--disabled:last-of-type {
   border-width: 0;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -24932,89 +23915,6 @@ li.bx--accordion__item--disabled:last-of-type {
   }
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--wizard__navItem {
   margin-left: -1.5rem;
 }
@@ -25042,9 +23942,6 @@ li.bx--accordion__item--disabled:last-of-type {
   display: none;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 @keyframes collapse-accordion {
   0% {
     height: 100%;
@@ -25071,40 +23968,6 @@ li.bx--accordion__item--disabled:last-of-type {
   }
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--header__list__item {
   height: inherit;
 }
@@ -25122,33 +23985,6 @@ li.bx--accordion__item--disabled:last-of-type {
   min-height: inherit;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--header__notification {
   display: flex;
   width: 100%;
@@ -25482,16 +24318,6 @@ li.bx--accordion__item--disabled:last-of-type {
   max-height: 0;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--header__popover__header {
   display: flex;
   flex-wrap: nowrap;
@@ -25506,15 +24332,6 @@ li.bx--accordion__item--disabled:last-of-type {
   letter-spacing: var(--cds-heading-02-letter-spacing, 0);
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--header__popover__link--secondary, .security--header__popover__link--secondary:focus, .security--header__popover__link--secondary:hover, .security--header__popover__link--secondary:visited {
   color: var(--cds-inverse-link, #0f62fe);
 }
@@ -25523,15 +24340,6 @@ li.bx--accordion__item--disabled:last-of-type {
   outline-color: var(--cds-inverse-link, #0f62fe);
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--header {
   position: fixed;
   z-index: 8000;
@@ -26188,30 +24996,6 @@ li.bx--accordion__item--disabled:last-of-type {
   user-select: text;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 @keyframes collapse-accordion {
   0% {
     height: 100%;
@@ -26238,128 +25022,6 @@ li.bx--accordion__item--disabled:last-of-type {
   }
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .security--shell--active {
   margin-left: 3rem;
 }
@@ -27018,9 +25680,6 @@ li.bx--accordion__item--disabled:last-of-type {
   color: var(--cds-text-04, #ffffff);
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 @keyframes collapse-accordion {
   0% {
     height: 100%;
@@ -27047,35 +25706,6 @@ li.bx--accordion__item--disabled:last-of-type {
   }
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 @keyframes hide-feedback {
   0% {
     opacity: 1;
@@ -27098,7 +25728,6 @@ li.bx--accordion__item--disabled:last-of-type {
   }
 }
 
-/* stylelint-disable number-max-precision */
 .bx--snippet {
   box-sizing: border-box;
   padding: 0;
@@ -27726,6 +26355,8 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .bx--snippet.bx--skeleton span::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -27778,27 +26409,6 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 /* stylelint-enable */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 @keyframes hide-feedback {
   0% {
     opacity: 1;
@@ -28033,12 +26643,6 @@ li.bx--accordion__item--disabled:last-of-type {
   font-size: 0;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--combo-box:hover {
   background-color: var(--cds-field-01, #262626);
 }
@@ -28063,10 +26667,6 @@ li.bx--accordion__item--disabled:last-of-type {
   padding: 0;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--content-switcher {
   display: flex;
   width: 100%;
@@ -28247,27 +26847,6 @@ li.bx--accordion__item--disabled:last-of-type {
   }
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 @keyframes hide-feedback {
   0% {
     opacity: 1;
@@ -28290,17 +26869,6 @@ li.bx--accordion__item--disabled:last-of-type {
   }
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 @keyframes fpFadeInDown {
   from {
     transform: translate3d(0, -20px, 0);
@@ -29069,6 +27637,8 @@ li.bx--accordion__item--disabled:last-of-type {
 .bx--date-picker.bx--skeleton input::before,
 .bx--date-picker__input.bx--skeleton::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -29108,6 +27678,8 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .bx--date-picker.bx--skeleton .bx--label::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -29128,39 +27700,6 @@ li.bx--accordion__item--disabled:last-of-type {
   }
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -29201,7 +27740,6 @@ li.bx--accordion__item--disabled:last-of-type {
   }
 }
 
-/* stylelint-disable number-max-precision */
 .bx--file {
   width: 100%;
 }
@@ -29570,18 +28108,6 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 /* stylelint-enable */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--list--nested,
 .bx--list--unordered,
 .bx--list--ordered,
@@ -29674,7 +28200,6 @@ li.bx--accordion__item--disabled:last-of-type {
   content: '\\\\0025AA';
 }
 
-/* stylelint-disable number-max-precision */
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -29715,21 +28240,6 @@ li.bx--accordion__item--disabled:last-of-type {
   }
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--modal {
   position: fixed;
   z-index: 9000;
@@ -30116,27 +28626,6 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 /* stylelint-enable */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--number {
   box-sizing: border-box;
   padding: 0;
@@ -30587,6 +29076,8 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .bx--number.bx--skeleton::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -30627,50 +29118,6 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 /* stylelint-enable */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--data-table-container + .bx--pagination {
   border-top: 0;
 }
@@ -30919,19 +29366,6 @@ span.bx--pagination__text {
   }
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--unstable-pagination {
   box-sizing: border-box;
   padding: 0;
@@ -31122,14 +29556,6 @@ span.bx--pagination__text {
   border-right: 1px solid var(--cds-ui-03, #393939);
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--radio-button-group {
   box-sizing: border-box;
   padding: 0;
@@ -31288,6 +29714,8 @@ span.bx--pagination__text {
 
 .bx--radio-button__label.bx--skeleton::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -31338,36 +29766,6 @@ span.bx--pagination__text {
   margin-left: 0.5rem;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--slider-container {
   display: flex;
   align-items: center;
@@ -31379,7 +29777,9 @@ span.bx--pagination__text {
   width: 100%;
   min-width: 12.5rem;
   max-width: 40rem;
+  padding: var(--cds-spacing-05, 1rem) 0;
   margin: 0 1rem;
+  cursor: pointer;
 }
 
 .bx--slider__range-label {
@@ -31401,7 +29801,6 @@ span.bx--pagination__text {
   width: 100%;
   height: 0.125rem;
   background: var(--cds-ui-03, #393939);
-  cursor: pointer;
   transform: translate(0%, -50%);
 }
 
@@ -31431,13 +29830,11 @@ span.bx--pagination__text {
 .bx--slider__thumb {
   position: absolute;
   z-index: 3;
-  top: 0;
   width: 0.875rem;
   height: 0.875rem;
   background: var(--cds-ui-05, #f4f4f4);
   border-radius: 50%;
   box-shadow: inset 0 0 0 1px transparent, inset 0 0 0 2px transparent;
-  cursor: pointer;
   outline: none;
   transform: translate(-50%, -50%);
   transition: transform 110ms cubic-bezier(0.2, 0, 0.38, 0.9), background 110ms cubic-bezier(0.2, 0, 0.38, 0.9), box-shadow 110ms cubic-bezier(0.2, 0, 0.38, 0.9);
@@ -31476,12 +29873,20 @@ span.bx--pagination__text {
   display: none;
 }
 
+.bx--slider-text-input.bx--text-input--invalid {
+  padding-right: 1rem;
+}
+
 .bx--slider__thumb:focus ~ .bx--slider__filled-track {
   background-color: var(--cds-interactive-04, #4589ff);
 }
 
 .bx--label--disabled ~ .bx--slider-container > .bx--slider__range-label {
   color: var(--cds-disabled-02, #525252);
+}
+
+.bx--slider--disabled.bx--slider {
+  cursor: not-allowed;
 }
 
 .bx--slider--disabled .bx--slider__thumb {
@@ -31509,7 +29914,6 @@ span.bx--pagination__text {
 .bx--slider--disabled .bx--slider__filled-track,
 .bx--slider--disabled .bx--slider__thumb:focus ~ .bx--slider__filled-track {
   background-color: var(--cds-ui-03, #393939);
-  cursor: not-allowed;
 }
 
 .bx--slider--disabled ~ .bx--form-item .bx--slider-text-input,
@@ -31548,6 +29952,8 @@ span.bx--pagination__text {
 
 .bx--slider-container.bx--skeleton .bx--slider__range-label::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -31594,12 +30000,6 @@ span.bx--pagination__text {
 }
 
 /* stylelint-enable */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--tabs {
   box-sizing: border-box;
   padding: 0;
@@ -32043,6 +30443,8 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
 
 .bx--tabs.bx--skeleton .bx--tabs__nav-link span::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -32075,6 +30477,8 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
 
 .bx--tabs.bx--skeleton .bx--tabs-trigger::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -32483,6 +30887,8 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
 
 .bx--tabs--scrollable .bx--tabs.bx--skeleton .bx--tabs--scrollable__nav-link::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -32516,6 +30922,8 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
 
 .bx--tabs--scrollable .bx--tabs.bx--skeleton .bx--tabs-trigger::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -32557,14 +30965,6 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
   }
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--text-area {
   box-sizing: border-box;
   padding: 0;
@@ -32675,6 +31075,8 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
 
 .bx--text-area.bx--skeleton::before {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation: 3000ms ease-in-out skeleton infinite;
@@ -32693,22 +31095,6 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
   color: transparent;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--tile-group {
   box-sizing: border-box;
   padding: 0;
@@ -32726,11 +31112,10 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
 }
 
 .bx--tile {
-  position: relative;
   display: block;
   min-width: 8rem;
   min-height: 4rem;
-  padding: 1rem;
+  padding: var(--cds-spacing-05, 1rem);
   background-color: var(--cds-ui-01, #262626);
   outline: 2px solid transparent;
   outline-offset: -2px;
@@ -32832,6 +31217,7 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
 }
 
 .bx--tile--selectable {
+  position: relative;
   padding-right: 3rem;
   border: 1px solid transparent;
 }
@@ -33010,10 +31396,6 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
   fill: var(--cds-disabled-02, #525252);
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--time-picker {
   display: flex;
   align-items: flex-end;
@@ -33089,13 +31471,6 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
   max-height: 3rem;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--toggle {
   position: absolute;
   overflow: hidden;
@@ -33469,17 +31844,6 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
   }
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--header {
   position: fixed;
   z-index: 8000;
@@ -33808,11 +32172,6 @@ a.bx--header__menu-item.bx--header__menu-item--current:focus {
   outline: none;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--header-panel {
   transition-timing-function: cubic-bezier(0.2, 0, 1, 0.9);
   position: fixed;
@@ -33835,7 +32194,6 @@ a.bx--header__menu-item.bx--header__menu-item--current:focus {
   border-left: 1px solid #393939;
 }
 
-/* stylelint-disable number-max-precision */
 .bx--panel--overlay {
   position: fixed;
   z-index: 1000;
@@ -33998,11 +32356,6 @@ a.bx--header__menu-item.bx--header__menu-item--current:focus {
   display: flex;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--switcher {
   display: flex;
   flex-direction: column;
@@ -34062,11 +32415,6 @@ a.bx--header__menu-item.bx--header__menu-item--current:focus {
   color: #f4f4f4;
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--side-nav {
   position: fixed;
   z-index: 8000;
@@ -34680,10 +33028,6 @@ a.bx--side-nav__link--current::before {
   }
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 .bx--navigation {
   position: fixed;
   z-index: 9100;
@@ -34902,10 +33246,6 @@ a.bx--navigation-link:focus {
   outline: 0.0625rem solid var(--cds-ui-background, #161616);
 }
 
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
-/* stylelint-disable number-max-precision */
 body {
   box-sizing: border-box;
   padding: 0;

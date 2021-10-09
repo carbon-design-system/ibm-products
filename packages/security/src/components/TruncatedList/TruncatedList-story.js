@@ -41,7 +41,8 @@ storiesOf(components(TruncatedList.name), module)
         expandedItemLimit={number(
           'Number items to show when expanded (expandedItemLimit)',
           10
-        )}>
+        )}
+      >
         {createChildrenArray(number('Number of items in list', 15))}
       </TruncatedList>
     ),

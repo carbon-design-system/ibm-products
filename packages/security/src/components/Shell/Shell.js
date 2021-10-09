@@ -53,7 +53,8 @@ const Shell = ({
           <SkipToContent
             id={`${namespace}__skip-to-content__link`}
             className={`${namespace}__skip-to-content__link`}
-            href={skipToContent.href}>
+            href={skipToContent.href}
+          >
             {skipToContent.label}
           </SkipToContent>
         </div>
@@ -68,7 +69,8 @@ const Shell = ({
               backgroundImage: `url(${dataUri(
                 '../../images/aurora-banner@2x.png'
               )})`,
-            }}>
+            }}
+          >
             <Icon
               className={`${namespace}__banner__icon`}
               renderIcon={ArrowLeft16}
@@ -85,7 +87,8 @@ const Shell = ({
         className={classnames(namespace, {
           [activeClass]: profile,
           [returnClass]: returnToBanner,
-        })}>
+        })}
+      >
         {profile && (
           <Toolbar
             className={classnames({

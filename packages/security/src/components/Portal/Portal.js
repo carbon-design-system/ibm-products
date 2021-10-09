@@ -200,7 +200,8 @@ class Portal extends Component {
               (isClient() ? rootNode : Children.toArray(children)[0].type),
             initialFocus,
             ...focusTrapOptions,
-          }}>
+          }}
+        >
           {stopPropagation || stopPropagationEvents
             ? this.createPropagationTrap()
             : children}

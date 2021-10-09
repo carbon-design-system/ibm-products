@@ -84,7 +84,7 @@
     margin-bottom: $spacing-03;
     color: $text-02;
   }
-  .#{$block-class}__actions-container {
+  .#{$side-panel-block-class} .#{$block-class}__actions-container {
     position: absolute;
     z-index: 4;
     bottom: 0;

@@ -2,4 +2,5 @@
 
 ## `PanelContainer`
 
-Also refer to [`DataDecorator`](../DataDecorator/migration/carbon-for-ibm-security.md).
+Also refer to
+[`DataDecorator`](../DataDecorator/migration/carbon-for-ibm-security.md).

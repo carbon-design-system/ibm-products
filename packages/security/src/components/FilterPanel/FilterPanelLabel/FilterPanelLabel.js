@@ -27,7 +27,8 @@ const FilterPanelLabel = ({
     {!Number.isNaN(parseInt(count, 10)) && (
       <span
         className={classnames(`${namespace}__count`, countClassName)}
-        aria-label={`(${countLabel(count)})`}>
+        aria-label={`(${countLabel(count)})`}
+      >
         {count}
       </span>
     )}

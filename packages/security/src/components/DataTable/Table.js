@@ -92,7 +92,8 @@ class Table extends Component {
         this.scrollContainer = element;
       }}
       direction={ScrollGradient.ScrollDirection.X}
-      onScroll={this.handleScroll}>
+      onScroll={this.handleScroll}
+    >
       <CarbonTable {...this.props} />
     </ScrollGradient>
   );

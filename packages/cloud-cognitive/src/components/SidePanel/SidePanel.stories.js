@@ -193,7 +193,7 @@ const ChildrenContent = () => {
   const [notesValue, setNotesValue] = useState('');
   return (
     <div className={`${prefix}body-content`}>
-      <h5>Subtitle</h5>
+      <h5>Section</h5>
       <div className={`${prefix}text-inputs`}>
         <TextInput
           labelText="Input A"
@@ -238,7 +238,7 @@ const ChildrenContent = () => {
           onChange={(event) => setNotesValue(event.target.value)}
         />
       </div>
-      <h5 className={`${prefix}content-subtitle`}>Subtitle</h5>
+      <h5 className={`${prefix}content-subtitle`}>Section</h5>
       {renderDataTable()}
     </div>
   );

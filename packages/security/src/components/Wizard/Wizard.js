@@ -218,7 +218,8 @@ class Wizard extends Component {
             current={String(currentStep)}
             disabled={!valid}
             handleItemSelect={this.handleItemSelect}
-            link={false}>
+            link={false}
+          >
             {title}
           </NavItem>
         ))}

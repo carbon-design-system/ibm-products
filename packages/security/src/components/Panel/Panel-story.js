@@ -69,7 +69,8 @@ storiesOf(patterns('Panel'), module).add(
                   isDisabled: boolean('secondaryButton.isDisabled', !disabled),
                   label: text('secondaryButton.label', 'Cancel'),
                   onClick: handleClose,
-                }}>
+                }}
+              >
                 <PanelContent>{panelContent}</PanelContent>
               </PanelContainer>
             </PanelController>
@@ -109,7 +110,8 @@ storiesOf(patterns('Panel'), module).add(
                 closeButton={{
                   onClick: toggleActive,
                   label: closeButtonLabel,
-                }}>
+                }}
+              >
                 <PanelContent>{panelContent}</PanelContent>
               </PanelContainer>
             </PanelController>

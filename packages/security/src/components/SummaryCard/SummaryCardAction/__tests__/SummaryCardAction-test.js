@@ -48,7 +48,8 @@ describe('SummaryCardAction', () => {
       <SummaryCardAction
         closeButtonIconDescription="test close button"
         expandedContent="test expanded action content"
-        data-testid="test-button-id">
+        data-testid="test-button-id"
+      >
         test button
       </SummaryCardAction>
     );
@@ -88,7 +89,8 @@ describe('SummaryCardAction', () => {
     const { getByText, getAllByLabelText } = render(
       <SummaryCardAction
         expandedContent="test content"
-        closeButtonIconDescription="test icon label">
+        closeButtonIconDescription="test icon label"
+      >
         test button
       </SummaryCardAction>
     );

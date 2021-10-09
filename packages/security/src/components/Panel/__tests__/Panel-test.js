@@ -47,7 +47,8 @@ describe('Panel', () => {
             <PanelContainer
               title={label}
               subtitle={label}
-              closeButton={{ label, onClick: toggleActive }}>
+              closeButton={{ label, onClick: toggleActive }}
+            >
               <PanelContent>Panel content</PanelContent>
             </PanelContainer>
           </PanelController>

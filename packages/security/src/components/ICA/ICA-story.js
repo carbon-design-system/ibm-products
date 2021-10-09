@@ -74,7 +74,8 @@ storiesOf(components('ICA'), module)
     'in an ICA wall',
     () => (
       <div
-        className={`${carbonPrefix}--grid ${carbonPrefix}--grid--full-width`}>
+        className={`${carbonPrefix}--grid ${carbonPrefix}--grid--full-width`}
+      >
         <div className={`${carbonPrefix}--row`}>
           <div className={`${carbonPrefix}--col`}>
             <h4>4 spaced</h4>
@@ -86,7 +87,8 @@ storiesOf(components('ICA'), module)
             .map((item) => (
               <div
                 key={item.id}
-                className={`${carbonPrefix}--col-sm-4 ${carbonPrefix}--col-md-2 ${carbonPrefix}--col-lg-4`}>
+                className={`${carbonPrefix}--col-sm-4 ${carbonPrefix}--col-md-2 ${carbonPrefix}--col-lg-4`}
+              >
                 <ICA {...storyProps({ total })} />
               </div>
             ))}
@@ -102,7 +104,8 @@ storiesOf(components('ICA'), module)
             .map((item) => (
               <div
                 key={item.id}
-                className={`${carbonPrefix}--col-sm-2 ${carbonPrefix}--col-md-2 ${carbonPrefix}--col-lg-2`}>
+                className={`${carbonPrefix}--col-sm-2 ${carbonPrefix}--col-md-2 ${carbonPrefix}--col-lg-2`}
+              >
                 <ICA {...storyProps({ total })} />
               </div>
             ))}

@@ -1,25 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FilterSelector Rendering renders checked filter 1`] = `
-<FilterPanelCheckbox
-  checked={true}
-  count={10}
-  countLabel={[Function]}
-  id="filter-selector-SELECTED"
-  indeterminate={false}
-  labelText="Selected filter"
-  onChange={[Function]}
-/>
-`;
+exports[`FilterSelector Rendering renders checked filter 1`] = `ShallowWrapper {}`;
 
-exports[`FilterSelector Rendering renders unchecked filter 1`] = `
-<FilterPanelCheckbox
-  checked={false}
-  count={10}
-  countLabel={[Function]}
-  id="filter-selector-DEFAULT"
-  indeterminate={false}
-  labelText="Filter"
-  onChange={[Function]}
-/>
-`;
+exports[`FilterSelector Rendering renders unchecked filter 1`] = `ShallowWrapper {}`;

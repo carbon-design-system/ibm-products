@@ -3,6 +3,88 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.91.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.91.2...@carbon/ibm-cloud-cognitive@0.91.3) (2021-10-07)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.91.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.91.1...@carbon/ibm-cloud-cognitive@0.91.2) (2021-10-07)
+
+
+### Bug Fixes
+
+* **Tearsheet:** prevent heading styles being added to modal heading ([#1319](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1319)) ([0de0f13](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/0de0f1304cc29388555e2e5d401166ab6d6d4c13))
+
+
+
+
+
+## [0.91.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.91.0...@carbon/ibm-cloud-cognitive@0.91.1) (2021-10-07)
+
+
+### Bug Fixes
+
+* **SidePanel:** use carbon z index mixin for side panel container ([#1317](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1317)) ([e3b6b8f](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e3b6b8fab7ddbfa56f2334c14537056b456fa4e0))
+
+
+
+
+
+# [0.91.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.90.3...@carbon/ibm-cloud-cognitive@0.91.0) (2021-10-07)
+
+
+### Features
+
+* update Carbon versions and package dependencies to latest ([#1309](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1309)) ([945bd3b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/945bd3ba5608078e961af9a04448f2abd7e7fc5e))
+
+
+
+
+
+## [0.90.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.90.2...@carbon/ibm-cloud-cognitive@0.90.3) (2021-10-07)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.90.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.90.1...@carbon/ibm-cloud-cognitive@0.90.2) (2021-10-06)
+
+
+### Bug Fixes
+
+* **CreateSidePanel:** scoping issue for create side panel ([#1303](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1303)) ([3a198ea](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/3a198eaf807af9401885c6b7841de65ce39b88e6))
+
+
+
+
+
+## [0.90.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.90.0...@carbon/ibm-cloud-cognitive@0.90.1) (2021-10-06)
+
+
+### Bug Fixes
+
+* **SidePanel:** give default scroll height if no subtitle ([#1315](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1315)) ([b70e56b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b70e56bb78c9384d92b20596ddb8503ab2c1fb17))
+
+
+
+
+
+# [0.90.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.89.0...@carbon/ibm-cloud-cognitive@0.90.0) (2021-10-06)
+
+
+### Features
+
+* adds actions prop to web terminal ([#1279](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1279)) ([416cb9a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/416cb9ad1e4ead91508d4b288bb98c0202d3e019))
+
+
+
+
+
 # [0.89.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.88.1...@carbon/ibm-cloud-cognitive@0.89.0) (2021-10-02)
 
 

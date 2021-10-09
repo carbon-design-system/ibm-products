@@ -164,7 +164,8 @@ const render = ({
             {headers.map((header) => (
               <TableHeader
                 key={header.id}
-                {...getHeaderProps({ header, isSortable })}>
+                {...getHeaderProps({ header, isSortable })}
+              >
                 {header.header}
               </TableHeader>
             ))}

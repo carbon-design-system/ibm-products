@@ -120,7 +120,8 @@ class Decorator extends Component {
           href={href}
           className={decoratorClasses}
           onContextMenu={this.handleContextMenuClick}
-          tabIndex={0}>
+          tabIndex={0}
+        >
           {decorator}
         </a>
       );
@@ -132,7 +133,8 @@ class Decorator extends Component {
           className={decoratorClasses}
           onClick={this.handleClick}
           onContextMenu={this.handleContextMenuClick}
-          type="button">
+          type="button"
+        >
           {decorator}
         </button>
       );
@@ -141,7 +143,8 @@ class Decorator extends Component {
     return (
       <span
         className={decoratorClasses}
-        onContextMenu={this.handleContextMenuClick}>
+        onContextMenu={this.handleContextMenuClick}
+      >
         {decorator}
       </span>
     );

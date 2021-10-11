@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import {
   Button,
@@ -316,6 +316,7 @@ const renderUIShellHeader = () => (
 // eslint-disable-next-line react/prop-types
 const SlideOverTemplate = ({ minimalContent, actions, ...args }) => {
   const [open, setOpen] = useState(false);
+  const testRef = useRef();
   return (
     <>
       {renderUIShellHeader()}
@@ -327,6 +328,7 @@ const SlideOverTemplate = ({ minimalContent, actions, ...args }) => {
         open={open}
         onRequestClose={() => setOpen(false)}
         actions={actionSets[actions]}
+        ref={testRef}
       >
         {!minimalContent && <ChildrenContent />}
       </SidePanel>

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.91.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.91.3...@carbon/ibm-cloud-cognitive@0.91.4) (2021-10-11)
+
+
+### Bug Fixes
+
+* **SidePanel:** fix ref handling in clickOutside useEffect ([#1322](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1322)) ([4fd8837](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/4fd8837474042529592f644390f6d5367f78e2c0))
+
+
+
+
+
 ## [0.91.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.91.2...@carbon/ibm-cloud-cognitive@0.91.3) (2021-10-07)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

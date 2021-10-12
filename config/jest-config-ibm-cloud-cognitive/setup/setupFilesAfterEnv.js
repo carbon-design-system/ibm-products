@@ -31,7 +31,8 @@ expect.extend({ toBeAccessible, toHaveNoAxeViolations });
 // https://github.com/facebook/react/blob/6250462bed19c9f18a8cf3c2b5fcaf9aba1df72b/scripts/jest/setupTests.js#L69
 
 const oldConsole = {};
-['error', 'warn', process.env.CI && 'log'].filter(Boolean).forEach((method) => {
+
+['error', process.env.CI && 'log'].filter(Boolean).forEach((method) => {
   const unexpectedConsoleCallStacks = [];
 
   oldConsole[method] = console[method];

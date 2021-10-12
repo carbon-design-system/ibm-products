@@ -46,6 +46,7 @@
     );
   }
 
+  [storybook-carbon-theme='debug'],
   :root[storybook-carbon-theme='g100'],
   .sb--use-carbon-theme-g100 {
     @include carbon--theme(
@@ -55,10 +56,8 @@
   }
 }
 
-// set default color and background for stories
-.sb-show-main {
-  background-color: $ui-background;
-  color: initial; // reset for the story to ensure the component sets color
+[storybook-carbon-theme='debug'] body {
+  color: initial;
 }
 
 /**

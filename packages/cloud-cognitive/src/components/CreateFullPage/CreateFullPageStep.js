@@ -90,6 +90,11 @@ CreateFullPageStep.propTypes = {
   hasFieldset: PropTypes.bool,
 
   /**
+   * This prop can be used on the first step to mark it as an intro step, which will not render the progress indicator steps
+   */
+  introStep: PropTypes.bool,
+
+  /**
    * Optional function to be called on initial mount of a step.
    * For example, this can be used to fetch data that is required on a particular step.
    */

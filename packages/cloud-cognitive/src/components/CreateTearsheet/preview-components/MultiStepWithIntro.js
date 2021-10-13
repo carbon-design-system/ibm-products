@@ -95,6 +95,7 @@ export const MultiStepWithIntro = ({
           title="Select a category"
           subtitle="This is the category of item you will create"
           introStep
+          hasFieldset={false}
         >
           <TileGroup
             defaultSelected="standard"

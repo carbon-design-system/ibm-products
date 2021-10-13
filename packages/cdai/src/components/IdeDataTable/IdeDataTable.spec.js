@@ -525,6 +525,8 @@ describe('<IdeDataTable>', () => {
       false
     );
     const { component } = componentUnderTest;
-    expect(component.find(DataTable).prop('useZebraStyles')).toBe(useZebraStyles);
+    expect(component.find(DataTable).prop('useZebraStyles')).toBe(
+      useZebraStyles
+    );
   });
 });

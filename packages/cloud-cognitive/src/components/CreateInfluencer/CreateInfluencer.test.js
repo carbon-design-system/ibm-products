@@ -121,6 +121,48 @@ describe(CreateInfluencer.displayName, () => {
     });
     expect(container.firstChild).toHaveClass(blockClass);
   });
+  it('renders nothing inside of the influencer when an intro step is provided', () => {
+    const steps = {
+      steps: [
+        <CreateTearsheetStep key="Intro" title="Intro title" introStep>
+          content
+        </CreateTearsheetStep>,
+        <CreateTearsheetStep
+          key="Step 1"
+          title="Step 1 title"
+          secondaryLabel="Step 1 secondary label"
+        >
+          content
+        </CreateTearsheetStep>,
+        <CreateTearsheetStep
+          key="Step 2"
+          title="Step 2 title"
+          secondaryLabel="Step 2 secondary label"
+        >
+          content
+        </CreateTearsheetStep>,
+      ],
+    };
+    const influencerClass = `${blockClass}__left-nav`;
+    const { container } = renderComponent({
+      createComponents: steps,
+      activeSectionIndex: 0,
+      componentBlockClass: 'some-test-class-name',
+      currentStep: 1,
+      createComponentName: CreateTearsheet.displayName,
+    });
+    const influencerElement = container.querySelector(`.${influencerClass}`);
+    expect(influencerElement).toBeEmptyDOMElement();
+    // Progress indicator should render after the intro step
+    renderComponent({
+      createComponents: steps,
+      activeSectionIndex: 0,
+      componentBlockClass: 'some-test-class-name',
+      currentStep: 2,
+      createComponentName: CreateTearsheet.displayName,
+    });
+    screen.getByText('Step 1 title');
+  });
   it('renders the CreateInfluencer component with the toggle', () => {
     const { click } = userEvent;
     const viewAllToggleLabelText = 'Show all available options';

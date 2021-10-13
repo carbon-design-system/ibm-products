@@ -51,6 +51,7 @@ export let CreateInfluencer = ({
 
   // Animating states need to be reset here otherwise things won't render
   // the way they should after the component mounts/unmounts
+  /* istanbul ignore next */
   useEffect(() => {
     if (!previousState?.open && open) {
       setSideNavState('');
@@ -58,6 +59,7 @@ export let CreateInfluencer = ({
     }
   }, [open, previousState]);
 
+  /* istanbul ignore next */
   const handleViewAllToggle = (newToggleValue) => {
     if (newToggleValue) {
       setProgressIndicatorState('closing');
@@ -98,6 +100,7 @@ export let CreateInfluencer = ({
 
   // renders the step progression components in the left influencer area
   const renderProgressSteps = () => {
+    /* istanbul ignore next */
     if (toggleState) {
       return (
         <div className={`${blockClass}__left-nav`}>
@@ -153,27 +156,37 @@ export let CreateInfluencer = ({
         </div>
       );
     }
+
+    const stepsWithoutIntroStep = createComponents.steps.filter(
+      (item) => !item.props.introStep
+    );
+    const introStepFound = !!createComponents.steps.filter(
+      (item) => item.props.introStep
+    ).length;
     return (
       <div className={`${blockClass}__left-nav`}>
-        <ProgressIndicator
-          currentIndex={currentStep - 1}
-          spaceEqually
-          vertical
-          className={cx(`${blockClass}__progress-indicator`, {
-            [`${blockClass}__progress-indicator-opening`]:
-              progressIndicatorState === 'opening',
-            [`${blockClass}__progress-indicator-closing`]:
-              progressIndicatorState === 'closing',
-          })}
-        >
-          {createComponents.steps.map((child, stepIndex) => (
-            <ProgressStep
-              label={child.props.title}
-              key={stepIndex}
-              secondaryLabel={child.props.secondaryLabel}
-            />
-          ))}
-        </ProgressIndicator>
+        {currentStep === 1 &&
+        createComponents.steps[0]?.props?.introStep ? null : (
+          <ProgressIndicator
+            currentIndex={introStepFound ? currentStep - 2 : currentStep - 1}
+            spaceEqually
+            vertical
+            className={cx(`${blockClass}__progress-indicator`, {
+              [`${blockClass}__progress-indicator-opening`]:
+                progressIndicatorState === 'opening',
+              [`${blockClass}__progress-indicator-closing`]:
+                progressIndicatorState === 'closing',
+            })}
+          >
+            {stepsWithoutIntroStep.map((child, stepIndex) => (
+              <ProgressStep
+                label={child.props.title}
+                key={stepIndex}
+                secondaryLabel={child.props.secondaryLabel}
+              />
+            ))}
+          </ProgressIndicator>
+        )}
       </div>
     );
   };

@@ -515,4 +515,16 @@ describe('<IdeDataTable>', () => {
     const { component } = componentUnderTest;
     expect(component.find(DataTable).prop('size')).toBe(size);
   });
+
+  it('I can provide useZebraStyles property to Carbon IdeDataTable', () => {
+    const useZebraStyles = true;
+    componentUnderTest = jth.mountComponent(
+      baseComponent({
+        useZebraStyles,
+      }),
+      false
+    );
+    const { component } = componentUnderTest;
+    expect(component.find(DataTable).prop('useZebraStyles')).toBe(useZebraStyles);
+  });
 });

@@ -52,6 +52,7 @@ const IdeDataTable = ({
   renderToolbar,
   size,
   className,
+  useZebraStyles,
   ...others
 }) => {
   const selectAll = (rows, selectedRows) => () => {
@@ -231,6 +232,7 @@ const IdeDataTable = ({
       radio={selectType === SelectTypes.SINGLE}
       translateWithId={lookupAriaLabel}
       size={size}
+      useZebraStyles={useZebraStyles}
     />
   );
 

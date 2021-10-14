@@ -85,6 +85,10 @@ ExpressiveCard.propTypes = {
    */
   pictogram: PropTypes.object,
   /**
+   * Icon for primary button
+   */
+  primaryButtonIcon: PropTypes.string,
+  /**
    * Establishes the kind of button displayed for the primary button
    */
   primaryButtonKind: PropTypes.oneOf(['primary', 'ghost']),
@@ -92,6 +96,10 @@ ExpressiveCard.propTypes = {
    * The text that's displayed in the primary button
    */
   primaryButtonText: PropTypes.string,
+  /**
+   * Icon for secondary button
+   */
+  secondaryButtonIcon: PropTypes.string,
   /**
    * Establishes the kind of button displayed for the secondary button
    */

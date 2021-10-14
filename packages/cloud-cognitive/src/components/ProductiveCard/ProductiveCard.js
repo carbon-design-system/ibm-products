@@ -97,6 +97,10 @@ ProductiveCard.propTypes = {
     })
   ),
   /**
+   * Icon for primary button
+   */
+  primaryButtonIcon: PropTypes.string,
+  /**
    * The text that's displayed in the primary button
    */
   primaryButtonText: PropTypes.string,

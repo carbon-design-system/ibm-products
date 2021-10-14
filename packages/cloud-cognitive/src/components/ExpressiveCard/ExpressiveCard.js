@@ -85,9 +85,9 @@ ExpressiveCard.propTypes = {
    */
   pictogram: PropTypes.object,
   /**
-   * Icon for primary button
+   * Optional prop to allow overriding the icon rendering. Can be a React component class
    */
-  primaryButtonIcon: PropTypes.string,
+  primaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   /**
    * Establishes the kind of button displayed for the primary button
    */
@@ -97,9 +97,9 @@ ExpressiveCard.propTypes = {
    */
   primaryButtonText: PropTypes.string,
   /**
-   * Icon for secondary button
+   * Optional prop to allow overriding the icon rendering. Can be a React component class
    */
-  secondaryButtonIcon: PropTypes.string,
+  secondaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   /**
    * Establishes the kind of button displayed for the secondary button
    */

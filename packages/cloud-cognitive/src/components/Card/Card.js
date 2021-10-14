@@ -233,11 +233,11 @@ Card.propTypes = {
     })
   ),
   pictogram: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-  primaryButtonIcon: PropTypes.string,
+  primaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   primaryButtonKind: PropTypes.oneOf(['primary', 'ghost']),
   primaryButtonText: PropTypes.string,
   productive: PropTypes.bool,
-  secondaryButtonIcon: PropTypes.string,
+  secondaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   secondaryButtonKind: PropTypes.oneOf(['secondary', 'ghost']),
   secondaryButtonText: PropTypes.string,
   title: PropTypes.string,

@@ -84,34 +84,35 @@
       transform: translate3d(0, m#{i}n(95vh, 500px), 0);
     }
 
-    &.#{$block-class} .#{$block-class}__container {
+    // extra specificity to ensure this transition overrides the carbon default
+    &.#{$block-class}.#{$block-class} .#{$block-class}__container {
       transition: transform $motion-duration motion(entrance, expressive),
-        max-height $motion-duration linear;
+        max-height $motion-duration motion(entrance, expressive);
     }
 
-    &.#{$block-class}--stacked-2-of-2 .#{$block-class}__container,
+    &.#{$block-class}--stacked-1-of-2 .#{$block-class}__container,
     &.#{$block-class}--stacked-2-of-3 .#{$block-class}__container {
-      max-height: calc(100% - (#{$spacing-09} + #{$spacing-05}));
+      max-height: calc(100% - #{$spacing-09} + #{$spacing-05});
     }
 
-    &.#{$block-class}--stacked-3-of-3 .#{$block-class}__container {
-      max-height: calc(100% - (#{$spacing-09} + (2 * #{$spacing-05})));
+    &.#{$block-class}--stacked-1-of-3 .#{$block-class}__container {
+      max-height: calc(100% - #{$spacing-09} + (2 * #{$spacing-05}));
     }
 
     .#{$block-class}__container--lower {
       max-height: calc(100% - (#{$spacing-09} + #{$spacing-08}));
     }
 
-    &.#{$block-class}--stacked-2-of-2 .#{$block-class}__container--lower,
+    &.#{$block-class}--stacked-1-of-2 .#{$block-class}__container--lower,
     &.#{$block-class}--stacked-2-of-3 .#{$block-class}__container--lower {
       max-height: calc(
-        100% - (#{$spacing-09} + #{$spacing-08} + #{$spacing-05})
+        100% - (#{$spacing-09} + #{$spacing-08}) + #{$spacing-05}
       );
     }
 
-    &.#{$block-class}--stacked-3-of-3 .#{$block-class}__container--lower {
+    &.#{$block-class}--stacked-1-of-3 .#{$block-class}__container--lower {
       max-height: calc(
-        100% - (#{$spacing-09} + #{$spacing-08} + (2 * #{$spacing-05}))
+        100% - (#{$spacing-09} + #{$spacing-08}) + (2 * #{$spacing-05})
       );
     }
 
@@ -119,9 +120,9 @@
       width: 100%;
     }
 
-    @include carbon--breakpoint(lg) {
+    @include carbon--breakpoint(md) {
       &.#{$block-class}--wide .#{$block-class}__container {
-        width: calc(100% - (2 * #{$spacing-07}));
+        width: calc(100% - (2 * #{$spacing-10}));
       }
     }
 
@@ -179,7 +180,8 @@
       display: none;
     }
 
-    &.#{$block-class}--wide .#{$carbon-prefix}--modal-header__heading {
+    &.#{$block-class}--wide
+      .#{$carbon-prefix}--modal-header__heading.#{$block-class}__heading {
       @include carbon--type-style('productive-heading-04');
     }
 

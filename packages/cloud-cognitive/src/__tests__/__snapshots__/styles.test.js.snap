@@ -1619,7 +1619,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   top: auto;
   height: 100%;
   max-height: calc(100% - var(--cds-spacing-09, 3rem));
-  transform: translate3d(0, min(95vh, 500px), 0);
+  transform: translate3d(0, calc(min(95vh, 500px)), 0);
 }
 
 .exp--tearsheet.exp--tearsheet.exp--tearsheet .exp--tearsheet__container {

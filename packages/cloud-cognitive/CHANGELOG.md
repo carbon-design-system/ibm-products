@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.93.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.93.0...@carbon/ibm-cloud-cognitive@0.93.1) (2021-10-14)
+
+
+### Bug Fixes
+
+* **Tearsheet:** change the min() workaround to support older sass implementations ([#1339](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1339)) ([8a2700c](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8a2700c6e445af9d87bc0a6d38bf3cba877d71bf))
+
+
+
+
+
 # [0.93.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.92.0...@carbon/ibm-cloud-cognitive@0.93.0) (2021-10-14)
 
 

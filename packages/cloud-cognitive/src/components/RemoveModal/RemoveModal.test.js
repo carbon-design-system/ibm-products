@@ -9,10 +9,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import { pkg } from '../../settings';
 import { RemoveModal } from '.';
-
-const { devtoolsAttribute, getDevtoolsId } = pkg;
 
 const componentName = RemoveModal.displayName;
 const resourceName = 'bx1001';
@@ -140,9 +137,8 @@ describe(componentName, () => {
   it('adds the Devtools attribute to the containing node', () => {
     render(<RemoveModal {...defaultProps} data-testid={dataTestId} />);
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(componentName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      componentName
     );
   });
 });

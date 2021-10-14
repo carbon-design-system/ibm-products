@@ -13,9 +13,7 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { EditSidePanel } from '.';
 
-const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
-
-const blockClass = `${prefix}--edit-side-panel`;
+const blockClass = `${pkg.prefix}--edit-side-panel`;
 const componentName = EditSidePanel.displayName;
 
 // values to use
@@ -110,9 +108,8 @@ describe(componentName, () => {
       'data-testid': dataTestId,
     });
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(componentName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      componentName
     );
   });
 

@@ -13,9 +13,7 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { DISPLAY_NAME } from '.';
 
-const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
-
-const blockClass = `${prefix}--STYLE_NAME`;
+const blockClass = `${pkg.prefix}--STYLE_NAME`;
 const componentName = DISPLAY_NAME.displayName;
 
 // values to use
@@ -59,9 +57,8 @@ describe(componentName, () => {
   it('adds the Devtools attribute to the containing node', () => {
     render(<DISPLAY_NAME data-testid={dataTestId}> </DISPLAY_NAME>);
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(componentName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      componentName
     );
   });
 });

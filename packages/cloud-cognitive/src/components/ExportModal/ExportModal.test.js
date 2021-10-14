@@ -9,11 +9,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import { pkg } from '../../settings';
-
 import { ExportModal } from '.';
-
-const { devtoolsAttribute, getDevtoolsId } = pkg;
 
 const componentName = ExportModal.displayName;
 
@@ -186,9 +182,8 @@ describe(componentName, () => {
   it('adds the Devtools attribute to the containing node', () => {
     render(<ExportModal {...defaultProps} data-testid={dataTestId} />);
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(componentName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      componentName
     );
   });
 });

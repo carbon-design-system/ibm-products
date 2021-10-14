@@ -15,6 +15,7 @@ import {
   CreateTearsheetSection,
   CreateTearsheetStep,
 } from '../CreateTearsheet';
+import { expectWarn } from '../../global/js/utils/test-helper';
 
 import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--create-influencer`;
@@ -201,38 +202,37 @@ describe(CreateInfluencer.displayName, () => {
     expect(activeSectionIndexFn).toHaveBeenCalledTimes(1);
   });
 
-  it('renders the CreateInfluencer with a missing id on the section component', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
-    const viewAllToggleLabelText = 'Show all available options';
-    const sideNavAriaLabel = 'Side nav aria label';
-    const activeSectionIndexFn = jest.fn();
-    const { click } = userEvent;
-    const { container } = renderComponent({
-      createComponents: invalidCreateComponents,
-      activeSectionIndex: 0,
-      componentBlockClass: 'some-test-class-name',
-      createComponentName: CreateTearsheet.displayName,
-      componentName: 'TestComponent',
-      currentStep: 1,
-      includeViewAllToggle: true,
-      sideNavAriaLabel,
-      toggleState: true,
-      viewAllToggleLabelText,
-      viewAllToggleOffLabelText: 'Off',
-      viewAllToggleOnLabelText: 'On',
-      handleToggleState: jest.fn(),
-      handleActiveSectionIndex: activeSectionIndexFn,
-    });
-    click(screen.getByText(section1Title));
-    expect(warn).toBeCalledWith(
-      `${CreateTearsheet.displayName}: ${CreateTearsheet.displayName}Section component is missing a required prop of 'id'`
-    );
-    warn.mockRestore();
-    const viewAllToggleElement = container.querySelector(
-      `#${blockClass}__view-all-toggle`
-    );
-    expect(viewAllToggleElement).toBeInTheDocument();
-    click(viewAllToggleElement);
-    act(() => jest.advanceTimersByTime(timerValue));
-  });
+  it('renders the CreateInfluencer with a missing id on the section component', () =>
+    expectWarn(
+      `${CreateTearsheet.displayName}Section component is missing a required prop of 'id'`,
+      () => {
+        const viewAllToggleLabelText = 'Show all available options';
+        const sideNavAriaLabel = 'Side nav aria label';
+        const activeSectionIndexFn = jest.fn();
+        const { click } = userEvent;
+        const { container } = renderComponent({
+          createComponents: invalidCreateComponents,
+          activeSectionIndex: 0,
+          componentBlockClass: 'some-test-class-name',
+          createComponentName: CreateTearsheet.displayName,
+          componentName: 'TestComponent',
+          currentStep: 1,
+          includeViewAllToggle: true,
+          sideNavAriaLabel,
+          toggleState: true,
+          viewAllToggleLabelText,
+          viewAllToggleOffLabelText: 'Off',
+          viewAllToggleOnLabelText: 'On',
+          handleToggleState: jest.fn(),
+          handleActiveSectionIndex: activeSectionIndexFn,
+        });
+        click(screen.getByText(section1Title));
+        const viewAllToggleElement = container.querySelector(
+          `#${blockClass}__view-all-toggle`
+        );
+        expect(viewAllToggleElement).toBeInTheDocument();
+        click(viewAllToggleElement);
+        act(() => jest.advanceTimersByTime(timerValue));
+      }
+    ));
 });

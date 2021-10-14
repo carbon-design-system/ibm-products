@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.93.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.92.0...@carbon/ibm-cloud-cognitive@0.93.0) (2021-10-14)
+
+
+### Features
+
+* **CreateTearsheet:** add introStep functionality ([#1333](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1333)) ([9a067ca](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9a067cabf019315ac48d6f2b27e762bef8d08fa4))
+
+
+
+
+
 # [0.92.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.91.4...@carbon/ibm-cloud-cognitive@0.92.0) (2021-10-14)
 
 

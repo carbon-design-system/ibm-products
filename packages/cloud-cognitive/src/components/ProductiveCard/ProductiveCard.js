@@ -99,6 +99,10 @@ ProductiveCard.propTypes = {
   /**
    * Optional prop to allow overriding the icon rendering. Can be a React component class
    */
+  primaryButtonHref: PropTypes.string,
+  /**
+   * Optional prop to allow overriding the icon rendering. Can be a React component class
+   */
   primaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   /**
    * The text that's displayed in the primary button

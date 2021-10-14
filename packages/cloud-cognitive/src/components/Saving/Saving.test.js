@@ -9,11 +9,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import { pkg } from '../../settings';
-
 import { Saving } from '.';
-
-const { devtoolsAttribute, getDevtoolsId } = pkg;
 
 const componentName = Saving.displayName;
 const defaultProps = {
@@ -102,9 +98,8 @@ describe(componentName, () => {
   it('adds the Devtools attribute to the containing node', () => {
     render(<Saving {...defaultProps} data-testid={dataTestId} />);
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(componentName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      componentName
     );
   });
 });

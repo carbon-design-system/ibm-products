@@ -9,10 +9,8 @@ import { fireEvent, render, waitFor, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import { carbon, pkg } from '../../settings';
+import { carbon } from '../../settings';
 import { ImportModal } from '.';
-
-const { devtoolsAttribute, getDevtoolsId } = pkg;
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
@@ -338,9 +336,8 @@ describe(componentName, () => {
   it('adds the Devtools attribute to the containing node', () => {
     render(<ImportModal {...defaultProps} data-testid={dataTestId} />);
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(componentName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      componentName
     );
   });
 });

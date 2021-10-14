@@ -50,7 +50,7 @@ export const MultiStepWithIntro = ({
   const [stepThreeTextInputValue, setStepThreeTextInputValue] =
     useState('one-day');
   const [isInvalid, setIsInvalid] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('standard');
 
   const clearCreateData = () => {
     setStepOneTextInputValue('');
@@ -61,7 +61,7 @@ export const MultiStepWithIntro = ({
     setHasSubmitError(false);
     setIsInvalid(false);
     setOpen(false);
-    setSelectedCategory('');
+    setSelectedCategory('standard');
   };
 
   return (
@@ -98,7 +98,7 @@ export const MultiStepWithIntro = ({
           hasFieldset={false}
         >
           <TileGroup
-            defaultSelected="standard"
+            defaultSelected={selectedCategory}
             legend="Categories"
             name="Select a category"
             onChange={(value) => setSelectedCategory(value)}
@@ -146,8 +146,14 @@ export const MultiStepWithIntro = ({
           <CreateTearsheetStep
             title="Conditional step"
             subtitle="This step will only show for plus category creation flows"
+            hasFieldset={false}
           >
             conditional step content
+          </CreateTearsheetStep>
+        )}
+        {selectedCategory === 'standard' && (
+          <CreateTearsheetStep title="Standard step only" hasFieldset={false}>
+            This step will only show for standard flows
           </CreateTearsheetStep>
         )}
         <CreateTearsheetStep

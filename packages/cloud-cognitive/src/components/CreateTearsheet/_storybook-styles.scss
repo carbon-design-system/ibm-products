@@ -31,6 +31,7 @@ p.#{$preview-block-class}__description:last-of-type {
 
 .#{$prefix}--tile-group div {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .#{$pkg-prefix}--tearsheet-create-multi-step--custom-tile {

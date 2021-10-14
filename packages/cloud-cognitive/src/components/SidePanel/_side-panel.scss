@@ -7,6 +7,7 @@
 
 // Standard imports.
 @import '../../global/styles/project-settings';
+@import '../../global/styles/mixins';
 @import './side-panel-variables';
 
 // Other Carbon settings.
@@ -126,7 +127,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     --#{$block-class}--label-text-height: 0;
 
     position: fixed;
-    z-index: 3;
+    z-index: z('modal');
     top: $spacing-09;
     height: calc(100% - 3rem);
     box-sizing: border-box;
@@ -299,7 +300,9 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     }
 
     .#{$block-class}__inner-content-with-actions {
-      height: calc(100vh - 7rem);
+      height: calc(
+        100vh - (var(--#{$block-class}--content-bottom-padding) + 2rem)
+      );
     }
 
     .#{$block-class}__inner-content.#{$block-class}__static-inner-content {
@@ -475,7 +478,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
 
   .#{$block-class}__overlay {
     position: fixed;
-    z-index: 2;
+    z-index: z('overlay');
     top: 0;
     right: 0;
     bottom: 0;

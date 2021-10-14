@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-security",
   "description": "Carbon for Cloud & Cognitive IBM Security UI components",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -49,12 +49,12 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.15.4",
-    "@carbon/icons-react": "^10.39.0",
+    "@carbon/icons-react": "^10.40.0",
     "@carbon/import-once": "^10.5.0",
-    "@carbon/layout": "^10.32.0",
-    "@carbon/themes": "^10.43.0",
-    "carbon-components": "^10.44.0",
-    "carbon-components-react": "^7.44.2",
+    "@carbon/layout": "^10.33.0",
+    "@carbon/themes": "^10.44.0",
+    "carbon-components": "^10.45.0",
+    "carbon-components-react": "^7.45.0",
     "carbon-icons": "^7.0.7",
     "classnames": "^2.3.1",
     "prop-types": "^15.7.2"
@@ -67,8 +67,8 @@
     "deepmerge": "^4.2.2",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
-    "jest": "^27.2.3",
-    "jest-config-ibm-cloud-cognitive": "^0.15.0",
+    "jest": "^27.2.5",
+    "jest-config-ibm-cloud-cognitive": "^0.16.0",
     "npm-check-updates": "^11.8.5",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2"

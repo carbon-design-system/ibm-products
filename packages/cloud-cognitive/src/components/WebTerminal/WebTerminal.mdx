@@ -67,6 +67,29 @@ of the component.
   <Story id={getStoryId(WebTerminal.displayName, 'with-documentation-links')} />
 </Canvas>
 
+### With actions
+
+<Canvas>
+  <Story id={getStoryId(WebTerminal.displayName, 'with-actions')} />
+</Canvas>
+
+Optionally you can add actions to the web terminal header bar. To add actions
+you need to pass in an array of actions with objects for each object.
+
+```jsx
+<WebTerminal
+  actions={[
+    {
+      renderIcon: Code32,
+      onClick: () => {},
+      iconDescription: 'Create new deployment',
+    },
+  ]}
+>
+  ...
+</WebTerminal>
+```
+
 ## Code sample
 
 [<img alt="Edit on CodeSandbox" src="https://codesandbox.io/static/img/play-codesandbox.svg" />](https://codesandbox.io/s/web-terminal-46k59)

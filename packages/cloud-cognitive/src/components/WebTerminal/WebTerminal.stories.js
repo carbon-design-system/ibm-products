@@ -8,6 +8,9 @@
 // cspell:words joebob
 
 import React, { useState, useCallback } from 'react';
+// Carbon and package components we use.
+import { Code16 as Code, Copy16 as Copy } from '@carbon/icons-react';
+import { action } from '@storybook/addon-actions';
 import { Navigation } from './preview-components';
 import {
   getStoryTitle,
@@ -52,11 +55,28 @@ const Template = (args) => {
 };
 
 export const Default = prepareStory(Template, {
-  args: {},
+  args: { documentationLinks },
 });
 
 export const WithDocumentationLinks = prepareStory(Template, {
   args: { documentationLinks },
+});
+
+export const WithActions = prepareStory(Template, {
+  args: {
+    actions: [
+      {
+        renderIcon: Code,
+        onClick: action('clicked on action'),
+        iconDescription: 'Create new deployment',
+      },
+      {
+        renderIcon: Copy,
+        onClick: action('clicked on action'),
+        iconDescription: 'Copy logs',
+      },
+    ],
+  },
 });
 
 export default {

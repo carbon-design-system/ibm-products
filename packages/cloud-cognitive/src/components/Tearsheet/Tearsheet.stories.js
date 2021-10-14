@@ -326,7 +326,6 @@ export const withInfluencer = prepareStory(Template, {
     influencerWidth: 'narrow',
     onClose: action('onClose called'),
     title,
-    verticalPosition: 'normal',
     actions: 6,
   },
 });
@@ -345,7 +344,6 @@ export const fullyLoaded = prepareStory(Template, {
     navigation: tabs,
     onClose: action('onClose called'),
     title,
-    verticalPosition: 'normal',
     actions: 0,
   },
 });
@@ -360,7 +358,6 @@ export const stacked = prepareStory(StackedTemplate, {
     height: 'lower',
     influencer,
     label,
-    preventCloseOnClickOutside: true,
     actions: 6,
   },
 });

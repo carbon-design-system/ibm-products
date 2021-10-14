@@ -198,9 +198,10 @@ export let SidePanel = React.forwardRef(
         // because there is not enough scrolling distance to complete it).
         sidePanelSubtitleElementHeight =
           totalScrollingContentHeight - panelOuterHeight <
-            sidePanelSubtitleElementHeight ||
-          sidePanelSubtitleElementHeight === 0
+          sidePanelSubtitleElementHeight
             ? totalScrollingContentHeight - panelOuterHeight
+            : sidePanelSubtitleElementHeight === 0
+            ? 16
             : sidePanelSubtitleElementHeight;
         sidePanelSubtitleElementHeight =
           sidePanelSubtitleElementHeight < 0
@@ -371,11 +372,12 @@ export let SidePanel = React.forwardRef(
 
     // click outside functionality if `includeOverlay` prop is set
     useEffect(() => {
-      const handleOutsideClick = (e) => {
+      const handleOutsideClick = (event) => {
+        const panelRef = ref || sidePanelRef;
         if (
-          sidePanelRef.current &&
+          panelRef.current &&
           sidePanelOverlayRef.current &&
-          sidePanelOverlayRef.current.contains(e.target) &&
+          sidePanelOverlayRef.current.contains(event.target) &&
           onRequestClose
         ) {
           onRequestClose();
@@ -393,7 +395,7 @@ export let SidePanel = React.forwardRef(
       return () => {
         document.removeEventListener('click', handleOutsideClick);
       };
-    }, [includeOverlay, onRequestClose, open, preventCloseOnClickOutside]);
+    }, [includeOverlay, onRequestClose, open, preventCloseOnClickOutside, ref]);
 
     // initialize the side panel to open
     useEffect(() => {
@@ -903,6 +905,7 @@ SidePanel.defaultProps = {
   currentStep: 0,
   navigationBackIconDescription: 'Back',
   closeIconDescription: 'Close',
+  preventCloseOnClickOutside: false,
 };
 
 SidePanel.displayName = componentName;

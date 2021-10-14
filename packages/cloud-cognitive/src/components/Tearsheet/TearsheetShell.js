@@ -204,7 +204,13 @@ export const TearsheetShell = React.forwardRef(
                   <Wrap element="h2" className={`${bcModalHeader}__label`}>
                     {label}
                   </Wrap>
-                  <Wrap element="h3" className={`${bcModalHeader}__heading`}>
+                  <Wrap
+                    element="h3"
+                    className={cx(
+                      `${bcModalHeader}__heading`,
+                      `${bc}__heading`
+                    )}
+                  >
                     {title}
                   </Wrap>
                   <Wrap className={`${bc}__header-description`}>
@@ -282,6 +288,17 @@ export const deprecatedProps = {
     PropTypes.bool,
     'The tearsheet will close automatically if the user clicks outside it if and only if the tearsheet is passive (no navigation actions)'
   ),
+
+  /**
+   * **Deprecated**
+   *
+   * The position of the top of tearsheet in the viewport. The 'normal'
+   * position is a short distance down from the top of the
+   * viewport, leaving room at the top for a global header bar to show through
+   * from below. The 'lower' position (the default) provides a little extra room at the top
+   * to allow an action bar navigation or breadcrumbs to also show through.
+   */
+  verticalPosition: PropTypes.oneOf(['normal', 'lower']),
 };
 
 // The types and DocGen commentary for the component props,
@@ -415,13 +432,5 @@ TearsheetShell.propTypes = {
    */
   title: PropTypes.node,
 
-  /**
-   * The position of the top of tearsheet in the viewport. The 'normal'
-   * position (the default) is a short distance down from the top of the
-   * viewport, leaving room at the top for a global header bar to show through
-   * from below. The 'lower' position provides a little extra room at the top
-   * to allow an action bar navigation or breadcrumbs to also show through.
-   */
-  verticalPosition: PropTypes.oneOf(['normal', 'lower']),
   ...deprecatedProps,
 };

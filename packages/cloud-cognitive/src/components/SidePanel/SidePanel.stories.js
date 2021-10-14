@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import {
   Button,
@@ -193,7 +193,7 @@ const ChildrenContent = () => {
   const [notesValue, setNotesValue] = useState('');
   return (
     <div className={`${prefix}body-content`}>
-      <h5>Subtitle</h5>
+      <h5>Section</h5>
       <div className={`${prefix}text-inputs`}>
         <TextInput
           labelText="Input A"
@@ -238,7 +238,7 @@ const ChildrenContent = () => {
           onChange={(event) => setNotesValue(event.target.value)}
         />
       </div>
-      <h5 className={`${prefix}content-subtitle`}>Subtitle</h5>
+      <h5 className={`${prefix}content-subtitle`}>Section</h5>
       {renderDataTable()}
     </div>
   );
@@ -316,6 +316,7 @@ const renderUIShellHeader = () => (
 // eslint-disable-next-line react/prop-types
 const SlideOverTemplate = ({ minimalContent, actions, ...args }) => {
   const [open, setOpen] = useState(false);
+  const testRef = useRef();
   return (
     <>
       {renderUIShellHeader()}
@@ -327,6 +328,7 @@ const SlideOverTemplate = ({ minimalContent, actions, ...args }) => {
         open={open}
         onRequestClose={() => setOpen(false)}
         actions={actionSets[actions]}
+        ref={testRef}
       >
         {!minimalContent && <ChildrenContent />}
       </SidePanel>

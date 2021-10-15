@@ -19,11 +19,9 @@ import { NotificationsEmptyState } from './NotificationsEmptyState';
 import { UnauthorizedEmptyState } from './UnauthorizedEmptyState';
 import CustomIllustration from './story_assets/empty-state-bright-magnifying-glass.svg';
 
-const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
-
 const dataTestId = uuidv4();
 const className = uuidv4();
-const blockClass = `${prefix}--empty-state`;
+const blockClass = `${pkg.prefix}--empty-state`;
 const { name } = EmptyState;
 
 const defaultProps = {
@@ -117,9 +115,8 @@ describe(name, () => {
   it('adds the Devtools attribute to the containing node', () => {
     render(<EmptyState {...defaultProps} data-testid={dataTestId} />);
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(EmptyState.displayName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      EmptyState.displayName
     );
   });
 
@@ -159,9 +156,8 @@ describe(name, () => {
   it("adds the Devtools attribute to the `NoDataEmptyState`'s containing node", () => {
     render(<NoDataEmptyState {...defaultProps} data-testid={dataTestId} />);
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(NoDataEmptyState.displayName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      NoDataEmptyState.displayName
     );
   });
 
@@ -177,9 +173,8 @@ describe(name, () => {
   it("adds the Devtools attribute to the `ErrorEmptyState`'s containing node", () => {
     render(<ErrorEmptyState {...defaultProps} data-testid={dataTestId} />);
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(ErrorEmptyState.displayName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      ErrorEmptyState.displayName
     );
   });
 
@@ -195,9 +190,8 @@ describe(name, () => {
   it("adds the Devtools attribute to the `NoTagsEmptyState`'s containing node", () => {
     render(<NoTagsEmptyState {...defaultProps} data-testid={dataTestId} />);
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(NoTagsEmptyState.displayName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      NoTagsEmptyState.displayName
     );
   });
 
@@ -213,9 +207,8 @@ describe(name, () => {
   it("adds the Devtools attribute to the `NotFoundEmptyState`'s containing node", () => {
     render(<NotFoundEmptyState {...defaultProps} data-testid={dataTestId} />);
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(NotFoundEmptyState.displayName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      NotFoundEmptyState.displayName
     );
   });
 
@@ -235,9 +228,8 @@ describe(name, () => {
       <NotificationsEmptyState {...defaultProps} data-testid={dataTestId} />
     );
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(NotificationsEmptyState.displayName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      NotificationsEmptyState.displayName
     );
   });
 
@@ -257,9 +249,8 @@ describe(name, () => {
       <UnauthorizedEmptyState {...defaultProps} data-testid={dataTestId} />
     );
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(UnauthorizedEmptyState.displayName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      UnauthorizedEmptyState.displayName
     );
   });
 

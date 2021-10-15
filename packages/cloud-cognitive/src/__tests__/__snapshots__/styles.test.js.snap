@@ -1619,7 +1619,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   top: auto;
   height: 100%;
   max-height: calc(100% - var(--cds-spacing-09, 3rem));
-  transform: translate3d(0, min(95vh, 500px), 0);
+  transform: translate3d(0, calc(min(95vh, 500px)), 0);
 }
 
 .exp--tearsheet.exp--tearsheet.exp--tearsheet .exp--tearsheet__container {
@@ -3368,13 +3368,15 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: var(--cds-body-short-01-font-weight, 400);
   line-height: var(--cds-body-short-01-line-height, 1.28572);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
+  display: block;
+  overflow: hidden;
   min-width: initial;
   min-height: initial;
   padding: 0;
   margin: 0;
   background-color: inherit;
   color: inherit;
-  vertical-align: bottom;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 

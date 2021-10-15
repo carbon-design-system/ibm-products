@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.93.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.93.1...@carbon/ibm-cloud-cognitive@0.93.2) (2021-10-15)
+
+
+### Bug Fixes
+
+* added button icon props for cards ([#1336](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1336)) ([4974632](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/4974632c7e5e691e16749a4935da2753148bfbb8))
+
+
+
+
+
 ## [0.93.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.93.0...@carbon/ibm-cloud-cognitive@0.93.1) (2021-10-14)
 
 

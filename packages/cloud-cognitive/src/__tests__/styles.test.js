@@ -10,21 +10,14 @@ const { execFileSync } = require('child_process');
 
 const name = 'CSS export checks';
 
-const r = (file) => resolve(__dirname, file);
-const includePath1 = r('../../node_modules');
-const includePath2 = r('../../../../node_modules');
-const scssReleasedOnly = r('../index-without-carbon-released-only.scss');
-const scssAll = r('../index.scss');
-const scssSettings = r('../global/styles/_project-settings.scss');
-
 const compile = (file, compressed) =>
   execFileSync('sass', [
     compressed ? '--style=compressed' : '--style=expanded',
     '--load-path',
-    includePath1,
+    resolve(__dirname, '../../node_modules'),
     '--load-path',
-    includePath2,
-    file,
+    resolve(__dirname, '../../../../node_modules'),
+    resolve(__dirname, file),
   ]).toString();
 
 describe(name, () => {
@@ -33,17 +26,20 @@ describe(name, () => {
   // intended, re-run the tests with -u to update the snapshot, and check the
   // fresh snapshot in as part of the PR.
   it("doesn't change the exported CSS for released components", () => {
-    expect(compile(scssReleasedOnly, false)).toMatchSnapshot();
+    const css = compile('../index-without-carbon-released-only.scss', false);
+    expect(css).toMatchSnapshot();
   });
 
   // This test will fail if any generated CSS changes.
   it.skip("doesn't change any of the generated CSS", () => {
-    expect(compile(scssAll, false)).toMatchSnapshot();
+    const css = compile('../index.scss', false);
+    expect(css).toMatchSnapshot();
   });
 
   // This test will fail if the project settings generates any CSS, as this
   // file should be including definitions and variables only.
   it("doesn't generate any CSS from the project settings", () => {
-    expect(compile(scssSettings, true)).toHaveLength(0);
+    const css = compile('../global/styles/_project-settings.scss', true);
+    expect(css).toHaveLength(0);
   });
 });

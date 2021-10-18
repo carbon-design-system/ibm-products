@@ -125,13 +125,15 @@ $block-class-modal: #{$block-class}-modal;
     .#{$block-class-overflow}__tag-item .#{$carbon-prefix}--tag {
       @include carbon--type-style('body-short-01');
 
+      display: block;
+      overflow: hidden;
       min-width: initial;
       min-height: initial;
       padding: 0;
       margin: 0;
       background-color: inherit;
       color: inherit;
-      vertical-align: bottom;
+      text-overflow: ellipsis;
       white-space: nowrap;
     }
 

@@ -16,9 +16,7 @@ import { HTTPError404 } from './HTTPError404';
 import { HTTPError403 } from './HTTPError403';
 import { HTTPErrorOther } from './HTTPErrorOther';
 
-const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
-
-const blockClass = `${prefix}--http-errors`;
+const blockClass = `${pkg.prefix}--http-errors`;
 const componentName = HTTPError404.displayName;
 
 const dataTestId = uuidv4();
@@ -83,9 +81,8 @@ describe(componentName, () => {
   it("adds the Devtools attribute to the `HTTPError404`'s containing node", () => {
     render(<HTTPError404 {...defaultProps} data-testid={dataTestId} />);
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(componentName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      componentName
     );
   });
 
@@ -103,9 +100,8 @@ describe(componentName, () => {
   it("adds the Devtools attribute to the `HTTPError403`'s containing node", () => {
     render(<HTTPError403 {...defaultProps} data-testid={dataTestId} />);
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(HTTPError403.displayName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      HTTPError403.displayName
     );
   });
 
@@ -123,9 +119,8 @@ describe(componentName, () => {
   it("adds the Devtools attribute to the `HTTPErrorOther`'s containing node", () => {
     render(<HTTPErrorOther {...defaultProps} data-testid={dataTestId} />);
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(HTTPErrorOther.displayName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      HTTPErrorOther.displayName
     );
   });
 });

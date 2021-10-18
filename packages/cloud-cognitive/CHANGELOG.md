@@ -3,6 +3,56 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.93.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.93.1...@carbon/ibm-cloud-cognitive@0.93.2) (2021-10-15)
+
+
+### Bug Fixes
+
+* added button icon props for cards ([#1336](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1336)) ([4974632](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/4974632c7e5e691e16749a4935da2753148bfbb8))
+
+
+
+
+
+## [0.93.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.93.0...@carbon/ibm-cloud-cognitive@0.93.1) (2021-10-14)
+
+
+### Bug Fixes
+
+* **Tearsheet:** change the min() workaround to support older sass implementations ([#1339](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1339)) ([8a2700c](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8a2700c6e445af9d87bc0a6d38bf3cba877d71bf))
+
+
+
+
+
+# [0.93.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.92.0...@carbon/ibm-cloud-cognitive@0.93.0) (2021-10-14)
+
+
+### Features
+
+* **CreateTearsheet:** add introStep functionality ([#1333](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1333)) ([9a067ca](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9a067cabf019315ac48d6f2b27e762bef8d08fa4))
+
+
+
+
+
+# [0.92.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.91.4...@carbon/ibm-cloud-cognitive@0.92.0) (2021-10-14)
+
+
+### Bug Fixes
+
+* long tag rendering in TagSet overflow ([#1301](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1301)) ([722aa8b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/722aa8bd3504b3050784daeffedff07d057f57ee))
+
+
+### Features
+
+* **toolbar:** add `caret` variant ([#1297](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1297)) ([7496c07](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/7496c07c272f51a22bdbe03aec4ab7820e968da3))
+* update Carbon versions and package dependencies to latest ([#1329](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1329)) ([fd3525e](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/fd3525ec3620b70ff19f85c300e7e0bb05577cd1))
+
+
+
+
+
 ## [0.91.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.91.3...@carbon/ibm-cloud-cognitive@0.91.4) (2021-10-11)
 
 

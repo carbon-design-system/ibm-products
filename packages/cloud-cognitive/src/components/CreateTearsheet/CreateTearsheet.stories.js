@@ -14,6 +14,7 @@ import { CreateTearsheet } from './CreateTearsheet';
 import { CreateTearsheetStep } from './CreateTearsheetStep';
 import { MultiStepTearsheet } from './preview-components/MultiStepTearsheet';
 import { MultiStepWithSectionsTearsheet } from './preview-components/MultiStepWithSectionsTearsheet';
+import { MultiStepWithIntro } from './preview-components/MultiStepWithIntro';
 import mdx from './CreateTearsheet.mdx';
 
 export default {
@@ -55,6 +56,13 @@ export const multiStepTearsheet = prepareStory(MultiStepTearsheet, {
 
 export const withSections = prepareStory(MultiStepWithSectionsTearsheet, {
   storyName: 'Create tearsheet with sections',
+  args: {
+    ...createTearsheetProps,
+  },
+});
+
+export const withIntroStep = prepareStory(MultiStepWithIntro, {
+  storyName: 'Create tearsheet with intro step',
   args: {
     ...createTearsheetProps,
   },

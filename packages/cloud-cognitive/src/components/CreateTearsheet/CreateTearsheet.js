@@ -286,10 +286,7 @@ export let CreateTearsheet = forwardRef(
         stepComponents,
         CREATE_TEARSHEET_STEP
       );
-      console.log({ extractedSteps });
 
-      // console.log(currentStep, step);
-      // console.log(stepComponents);
       return (
         <>
           {' '}

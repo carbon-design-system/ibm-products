@@ -11,7 +11,7 @@ import React, { createRef } from 'react';
 import { Toolbar, ToolbarButton, ToolbarGroup } from '../..';
 import { blockClass, componentName } from './Toolbar';
 
-const { getByTestId } = screen;
+const { getByTestId, getByText } = screen;
 
 const dataTestId = 'dataTestId';
 
@@ -27,12 +27,19 @@ function _render(props) {
 
 function test(Component) {
   const render = _render.bind(Component);
+  const { displayName } = Component;
 
   it('has no accessibility violations', async () => {
     const { container } = render();
 
-    await expect(container).toBeAccessible(Component.displayName);
+    await expect(container).toBeAccessible(displayName);
     await expect(container).toHaveNoAxeViolations();
+  });
+
+  it('renders children', () => {
+    render();
+
+    getByText(displayName);
   });
 
   it('adds a class to the containing node', () => {
@@ -71,6 +78,12 @@ describe(componentName, () => {
 
 describe(ToolbarButton.displayName, () => {
   test(ToolbarButton);
+
+  it('renders the caret variant', () => {
+    _render.bind(ToolbarButton)({ caret: true });
+
+    expect(getByTestId(dataTestId)).toHaveClass(`${blockClass}__button--caret`);
+  });
 });
 
 describe(ToolbarGroup.displayName, () => {

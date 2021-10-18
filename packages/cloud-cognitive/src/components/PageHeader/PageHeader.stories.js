@@ -253,7 +253,11 @@ const tags = {
     { type: 'purple', label: 'Purple' },
     { type: 'red', label: 'Red' },
     { type: 'teal', label: 'Teal' },
-    { type: 'red', label: 'Longer ThanAPieceOfString' },
+    {
+      type: 'red',
+      label:
+        'Longer ThanAPieceOfString it just keeps going and going and going and going',
+    },
     { type: 'high-contrast', label: 'High contrast' },
     { type: 'magenta', label: 'Magenta' },
     { type: 'blue', label: 'Blue 2' },
@@ -262,7 +266,11 @@ const tags = {
     { type: 'purple', label: 'Purple 2' },
     { type: 'red', label: 'Red 2' },
     { type: 'teal', label: 'Teal 2' },
-    { type: 'red', label: 'Longer ThanAPieceOfString 2' },
+    {
+      type: 'red',
+      label:
+        'Longer ThanAPieceOfString 2this one is even longer it is not quite a book but it is working on it. As it would be a little bit silly to be this long we should probably truncate',
+    },
     { type: 'high-contrast', label: 'High contrast 2' },
     { type: 'magenta', label: 'Magenta 2' },
   ],

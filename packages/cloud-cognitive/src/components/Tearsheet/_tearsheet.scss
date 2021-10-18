@@ -79,9 +79,10 @@
       max-height: calc(100% - #{$spacing-09});
       // we want the enter/leave animation to run up most of the height of the
       // viewport, capped at 500px to set an upper limit on the movement speed
-      // For the reason for 'm#{i}n' see https://github.com/sass/sass/issues/2849
+      // For the reason for calc() see https://github.com/sass/sass/issues/2849
+      // and https://github.com/sass/node-sass/issues/2815.
       // stylelint-disable-next-line carbon/layout-token-use
-      transform: translate3d(0, m#{i}n(95vh, 500px), 0);
+      transform: translate3d(0, calc(min(95vh, 500px)), 0);
     }
 
     // extra specificity to ensure this transition overrides the carbon default

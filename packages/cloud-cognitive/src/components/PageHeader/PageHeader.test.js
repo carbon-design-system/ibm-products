@@ -18,7 +18,7 @@ import { PageHeader } from '.';
 import { ActionBarItem } from '../ActionBar';
 import { mockHTMLElement } from '../../global/js/utils/test-helper';
 
-const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
+const { prefix } = pkg;
 
 const blockClass = `${prefix}--page-header`;
 
@@ -130,17 +130,17 @@ const initSizes = () => ({
     [`${blockClass}`]: window.innerWidth,
     [`${carbon.prefix}--btn`]: 200,
     [`${blockClass}__breadcrumb-row`]: window.innerWidth,
-    [`${pkg.prefix}--breadcrumb-with-overflow`]: window.innerWidth * 0.6,
-    [`${pkg.prefix}--tag-set`]: window.innerWidth * 0.25,
-    [`${pkg.prefix}--tag-set__sizing-tag`]: window.innerWidth * 0.05,
-    [`${pkg.prefix}--button-set-with-overflow__button-container`]:
+    [`${prefix}--breadcrumb-with-overflow`]: window.innerWidth * 0.6,
+    [`${prefix}--tag-set`]: window.innerWidth * 0.25,
+    [`${prefix}--tag-set__sizing-tag`]: window.innerWidth * 0.05,
+    [`${prefix}--button-set-with-overflow__button-container`]:
       window.innerWidth * 0.4,
-    [`${pkg.prefix}--button-set-with-overflow`]: window.innerWidth * 0.4,
+    [`${prefix}--button-set-with-overflow`]: window.innerWidth * 0.4,
     [`${carbon.prefix}--breadcrumb-item`]: 200,
-    [`${pkg.prefix}--action-bar__displayed-items`]: window.innerWidth * 0.3,
+    [`${prefix}--action-bar__displayed-items`]: window.innerWidth * 0.3,
     [`${blockClass}__breadcrumb-title`]: window.innerWidth * 0.2,
-    [`${pkg.prefix}--button-menu`]: 200,
-    [`${pkg.prefix}--tag-set-overflow`]: 40,
+    [`${prefix}--button-menu`]: 200,
+    [`${prefix}--tag-set-overflow`]: 40,
   },
   clientHeight: {
     [`${blockClass}`]: 300,
@@ -301,7 +301,7 @@ describe('PageHeader', () => {
     expect(
       screen.getAllByText(/Breadcrumb [1-3]/, {
         // selector need to ignore sizing items
-        selector: `.${pkg.prefix}--breadcrumb-with-overflow__breadcrumb-container:not(.${pkg.prefix}--breadcrumb-with-overflow__breadcrumb-container--hidden) .${carbon.prefix}--link`,
+        selector: `.${prefix}--breadcrumb-with-overflow__breadcrumb-container:not(.${prefix}--breadcrumb-with-overflow__breadcrumb-container--hidden) .${carbon.prefix}--link`,
       })
     ).toHaveLength(3);
     expect(screen.queryAllByTestId('tabs')).toHaveLength(1);
@@ -318,7 +318,7 @@ describe('PageHeader', () => {
     expect(
       screen.getAllByText('A tag', {
         // selector need to ignore sizing items
-        selector: `.${pkg.prefix}--tag-set__displayed-tag .${carbon.prefix}--tag span`,
+        selector: `.${prefix}--tag-set__displayed-tag .${carbon.prefix}--tag span`,
       }).length
     ).toBeGreaterThan(0);
     expect(document.querySelectorAll(`.${blockClass}__title`)).toHaveLength(1);
@@ -358,7 +358,7 @@ describe('PageHeader', () => {
     );
 
     screen.getByText('Primary button', {
-      selector: `.${blockClass}__page-actions .${pkg.prefix}--button-set-with-overflow__button-container:not(.${pkg.prefix}--button-set-with-overflow__button-container--hidden) .${carbon.prefix}--btn`,
+      selector: `.${blockClass}__page-actions .${prefix}--button-set-with-overflow__button-container:not(.${prefix}--button-set-with-overflow__button-container--hidden) .${carbon.prefix}--btn`,
     });
 
     expect(warn).toBeCalledWith(
@@ -379,7 +379,7 @@ describe('PageHeader', () => {
     );
 
     screen.getByText('Primary button', {
-      selector: `.${blockClass}__page-actions .${pkg.prefix}--button-set-with-overflow__button-container:not(.${pkg.prefix}--button-set-with-overflow__button-container--hidden) .${carbon.prefix}--btn`,
+      selector: `.${blockClass}__page-actions .${prefix}--button-set-with-overflow__button-container:not(.${prefix}--button-set-with-overflow__button-container--hidden) .${carbon.prefix}--btn`,
     });
 
     expect(warn).toBeCalledWith(
@@ -411,9 +411,8 @@ describe('PageHeader', () => {
   it('adds the Devtools attribute to the containing node', () => {
     render(<PageHeader data-testid={dataTestId} />);
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(PageHeader.displayName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      PageHeader.displayName
     );
   });
 
@@ -485,7 +484,7 @@ describe('PageHeader', () => {
     expect(
       screen.getAllByText('A tag', {
         // selector need to ignore sizing items
-        selector: `.${pkg.prefix}--tag-set__displayed-tag .${carbon.prefix}--tag span`,
+        selector: `.${prefix}--tag-set__displayed-tag .${carbon.prefix}--tag span`,
       }).length
     ).toBeGreaterThan(0);
   });
@@ -539,7 +538,7 @@ describe('PageHeader', () => {
     expect(
       screen.getAllByText(/Breadcrumb [1-3]/, {
         // selector need to ignore sizing items
-        selector: `.${pkg.prefix}--breadcrumb-with-overflow__breadcrumb-container:not(.${pkg.prefix}--breadcrumb-with-overflow__breadcrumb-container--hidden) .${carbon.prefix}--link`,
+        selector: `.${prefix}--breadcrumb-with-overflow__breadcrumb-container:not(.${prefix}--breadcrumb-with-overflow__breadcrumb-container--hidden) .${carbon.prefix}--link`,
       })
     ).toHaveLength(3);
   });

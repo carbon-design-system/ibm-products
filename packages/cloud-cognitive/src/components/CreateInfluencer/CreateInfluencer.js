@@ -20,9 +20,11 @@ import {
   SideNavLink,
 } from 'carbon-components-react/lib/components/UIShell';
 import { moderate02 } from '@carbon/motion';
+import { getExtractedTearsheetSteps } from '../../global/js/utils/hasValidType';
 import '../../global/js/utils/props-helper';
 
 import { pkg } from '../../settings';
+import { CREATE_TEARSHEET_STEP } from '../CreateTearsheet/constants';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--create-influencer`;
@@ -153,6 +155,10 @@ export let CreateInfluencer = ({
         </div>
       );
     }
+    const extractedSteps = getExtractedTearsheetSteps(
+      createComponents.steps,
+      CREATE_TEARSHEET_STEP
+    );
     return (
       <div className={`${blockClass}__left-nav`}>
         <ProgressIndicator
@@ -166,7 +172,7 @@ export let CreateInfluencer = ({
               progressIndicatorState === 'closing',
           })}
         >
-          {createComponents.steps.map((child, stepIndex) => (
+          {extractedSteps.map((child, stepIndex) => (
             <ProgressStep
               label={child.props.title}
               key={stepIndex}

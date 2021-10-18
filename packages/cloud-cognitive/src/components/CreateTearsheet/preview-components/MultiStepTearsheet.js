@@ -25,6 +25,12 @@ import { CreateTearsheetStep } from '../CreateTearsheetStep';
 
 const blockClass = `${pkg.prefix}--tearsheet-create-multi-step`;
 
+const CreateStep = () => (
+  <CreateTearsheetStep title="Testing step" hasFieldset={false}>
+    content
+  </CreateTearsheetStep>
+);
+
 export const MultiStepTearsheet = ({
   backButtonText,
   cancelButtonText,
@@ -59,6 +65,8 @@ export const MultiStepTearsheet = ({
     setOpen(false);
   };
 
+  // const getFirstStep = () => <CreateTearsheetStep title="Testing step" hasFieldset={false}>content</CreateTearsheetStep>;
+
   return (
     <div>
       <style>{`.${blockClass} { opacity: 0 }`};</style>
@@ -86,6 +94,7 @@ export const MultiStepTearsheet = ({
           })
         }
       >
+        <CreateStep />
         <CreateTearsheetStep
           onNext={() => {
             return new Promise((resolve, reject) => {

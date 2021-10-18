@@ -33,6 +33,7 @@ import {
 import {
   hasValidChildrenType,
   hasValidChildType,
+  getExtractedTearsheetSteps,
 } from '../../global/js/utils/hasValidType';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
@@ -281,10 +282,18 @@ export let CreateTearsheet = forwardRef(
       const indexOfLastTearsheetStep = formattedChildren
         .map((el) => el?.type)
         .lastIndexOf(CREATE_TEARSHEET_STEP);
+      const extractedSteps = getExtractedTearsheetSteps(
+        stepComponents,
+        CREATE_TEARSHEET_STEP
+      );
+      console.log({ extractedSteps });
+
+      // console.log(currentStep, step);
+      // console.log(stepComponents);
       return (
         <>
           {' '}
-          {stepComponents.map((child, stepIndex) => {
+          {extractedSteps.map((child, stepIndex) => {
             step++;
             return React.cloneElement(
               child,

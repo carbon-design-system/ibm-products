@@ -6,7 +6,7 @@
  */
 
 const { resolve } = require('path');
-const { execSync } = require('child_process');
+const { execFileSync } = require('child_process');
 
 const name = 'CSS export checks';
 
@@ -18,11 +18,14 @@ const scssAll = r('../index.scss');
 const scssSettings = r('../global/styles/_project-settings.scss');
 
 const compile = (file, compressed) =>
-  execSync(
-    `sass --style=${
-      compressed ? 'compressed' : 'expanded'
-    } --load-path ${includePath1} --load-path ${includePath2} ${file}`
-  ).toString();
+  execFileSync('sass', [
+    compressed ? '--style=compressed' : '--style=expanded',
+    '--load-path',
+    includePath1,
+    '--load-path',
+    includePath2,
+    file,
+  ]).toString();
 
 describe(name, () => {
   // This test will fail if the generated CSS changes and no longer matches

@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useCallback, useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -15,7 +15,11 @@ import { pkg } from '../../settings';
 
 // Carbon and package components we use.
 import { Close16 as Close, Help16 as Help } from '@carbon/icons-react';
-import { Button } from 'carbon-components-react';
+import {
+  Button,
+  OverflowMenu,
+  OverflowMenuItem,
+} from 'carbon-components-react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'WebTerminal';
@@ -37,17 +41,6 @@ export let WebTerminal = React.forwardRef(
     ref
   ) => {
     const [shouldRender, setRender] = useState(open);
-
-    /**
-     * Triggers whenever the user clicks on an item in the help dropdown
-     */
-    const onDocumentationLinkClick = useCallback((event, onClick) => {
-      // Runs the function provided by the user if it exists
-      if (typeof onClick === 'function') {
-        // Passes the event object incase the developer wants to event.preventDefault() the link redirect
-        onClick(event);
-      }
-    }, []);
 
     const showDocumentationLinks = useMemo(
       () => documentationLinks.length > 0,
@@ -91,37 +84,16 @@ export let WebTerminal = React.forwardRef(
         <header className={`${blockClass}__bar`}>
           <div className={`${blockClass}__actions`}>
             {showDocumentationLinks && (
-              <Button
-                hasIconOnly
-                kind="ghost"
-                type="button"
-                iconDescription={documentationLinksIconDescription}
+              <OverflowMenu
                 renderIcon={Help}
-                className={`${blockClass}__bar-icon-container`}
+                iconDescription={documentationLinksIconDescription}
+                menuOptionsClass={`${blockClass}__documentation-overflow`}
+                size="lg"
               >
-                <ul className={`${blockClass}__bar-icon-dropdown`}>
-                  {documentationLinks.map(
-                    ({ label, onClick, href = null, openInNewTab = true }) => (
-                      <li
-                        key={label}
-                        className={`${blockClass}__bar-icon-dropdown-item`}
-                      >
-                        <a
-                          className={`${blockClass}__bar-icon-dropdown-link`}
-                          onClick={(event) =>
-                            onDocumentationLinkClick(event, onClick)
-                          }
-                          href={href}
-                          target={openInNewTab ? '_blank' : null}
-                          rel="noreferrer noopener"
-                        >
-                          {label}
-                        </a>
-                      </li>
-                    )
-                  )}
-                </ul>
-              </Button>
+                {documentationLinks.map(({ ...rest }, i) => (
+                  <OverflowMenuItem key={i} {...rest} />
+                ))}
+              </OverflowMenu>
             )}
             {actions.map(({ renderIcon, onClick, iconDescription }) => (
               <Button
@@ -194,19 +166,16 @@ WebTerminal.propTypes = {
   closeTerminal: PropTypes.func.isRequired,
 
   /**
-   * Array of objects for each documentation link
+   * Array of objects for each documentation link. Each documentation link uses the prop types of OverflowMenuItems. See more: https://react.carbondesignsystem.com/?path=/docs/components-overflowmenu--default
    */
   documentationLinks: PropTypes.arrayOf(
     PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      href: PropTypes.string,
-      onClick: PropTypes.func,
-      openInNewTab: PropTypes.bool,
+      ...OverflowMenuItem.propTypes,
     })
   ),
 
   /**
-   * Array of objects for each documentation link
+   * Icon description for the documentation link overflow menu
    */
   documentationLinksIconDescription: PropTypes.string,
 
@@ -222,7 +191,6 @@ WebTerminal.propTypes = {
 // component needs to make a choice or assumption when a prop is not supplied.
 WebTerminal.defaultProps = {
   actions: [],
-  closeIconDescription: 'Close terminal',
   documentationLinks: [],
   documentationLinksIconDescription: 'Show documentation links',
   className: '',

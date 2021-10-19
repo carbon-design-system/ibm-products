@@ -1,26 +1,22 @@
 export const documentationLinks = [
   {
-    label: 'BX/ICP docs',
+    itemText: 'BX/ICP docs',
     href: '#',
     onClick: () => console.log('clicked'),
-    openInNewTab: false,
   },
   {
-    label: 'Kubernetes docs',
+    itemText: 'Kubernetes docs',
     href: '#',
     onClick: () => console.log('clicked'),
-    openInNewTab: true,
   },
   {
-    label: 'Docker docs',
+    itemText: 'Docker docs',
     href: '#',
     onClick: () => console.log('clicked'),
-    openInNewTab: true,
   },
   {
-    label: 'Helm docs',
+    itemText: 'Helm docs',
     href: '#',
     onClick: () => console.log('clicked'),
-    openInNewTab: true,
   },
 ];

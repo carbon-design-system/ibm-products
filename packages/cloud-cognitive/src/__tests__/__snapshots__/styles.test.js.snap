@@ -3443,7 +3443,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   /* Bleed class for the background */
   position: sticky;
   /* z-index used to raise above any position relative content as per Carbon header */
-  z-index: 8000;
+  /* dropped  1 below Carbon header so as not to overlay the side panel */
+  z-index: 7999;
   top: var(--exp--page-header--header-top);
   display: inline-block;
   /* cause top/bottom margin to reserve space */

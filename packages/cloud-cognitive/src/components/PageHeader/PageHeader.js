@@ -736,6 +736,7 @@ export let PageHeader = React.forwardRef(
                           allTagsModalTitle,
                           showAllTagsLabel,
                           tags,
+                          overflowClassName: `${blockClass}__navigation-tags-overflow`,
                         }}
                       />
                     </Column>
@@ -773,7 +774,6 @@ export let PageHeader = React.forwardRef(
                           showAllTagsLabel,
                           tags,
                           overflowClassName: `${blockClass}__navigation-tags-overflow`,
-                          modalOverflowClassName: `${blockClass}__navigation-tags-overflow`,
                         }}
                       />
                     </Column>

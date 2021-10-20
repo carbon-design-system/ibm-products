@@ -30,6 +30,7 @@ $block-class: #{$pkg-prefix}--page-header;
 $breadcrumb-block-class: #{$pkg-prefix}--breadcrumb-with-overflow;
 
 $raised-z-index: 99;
+$z-index-header-minus: z('header') - 1;
 
 @mixin appearingBackground() {
   position: absolute;
@@ -50,7 +51,7 @@ $raised-z-index: 99;
       position: sticky;
       /* z-index used to raise above any position relative content as per Carbon header */
       /* dropped  1 below Carbon header so as not to overlay the side panel */
-      z-index: z('header') - 1;
+      z-index: $z-index-header-minus;
       top: var(--#{$block-class}--header-top);
       display: inline-block; /* cause top/bottom margin to reserve space */
       width: 100%;
@@ -547,6 +548,10 @@ $raised-z-index: 99;
     position: var(--#{$block-class}--tagset-tooltip-position) !important;
     // stylelint-disable-next-line
     top: var(--#{$block-class}--tagset-tooltip-offset) !important;
+  }
+
+  .#{$block-class}__navigation-tags-overflow.#{$carbon-prefix}--tooltip {
+    z-index: $z-index-header-minus;
   }
 }
 

@@ -14,11 +14,11 @@ export const hasValidChildrenType =
     children.length > 1 &&
       children.map((child) => {
         if (
-          (typeof child.type !== 'function' &&
+          (typeof child?.type !== 'function' &&
             child &&
             child.props &&
             child.props.type !== childType) ||
-          (typeof child.type === 'function' &&
+          (typeof child?.type === 'function' &&
             child.type()?.props.type !== childType)
         ) {
           throw new Error(
@@ -40,7 +40,7 @@ export const getExtractedSteps = (arr, type) => {
     // If the child is a CreateTearsheetStep component
     // we can add it to our array of steps
     if (
-      typeof child.type !== 'function' &&
+      typeof child?.type !== 'function' &&
       child &&
       child.props &&
       child.props.type === type
@@ -48,7 +48,10 @@ export const getExtractedSteps = (arr, type) => {
       steps.push(child);
     }
     // Creating custom step components will follow this format
-    if (typeof child.type === 'function' && child.type()?.props.type === type) {
+    if (
+      typeof child?.type === 'function' &&
+      child.type()?.props.type === type
+    ) {
       // If the custom component does not have any props
       // ie all of the create tearsheet step props are set
       // inside of the custom component
@@ -65,7 +68,7 @@ export const getExtractedSteps = (arr, type) => {
         // We need to make sure that we catch all fragments that have
         // fragments as children, so we recursively call `validateFragmentChild`
         // again until child.type is not a `Fragment`
-        if (fragmentChild.type === Fragment) {
+        if (fragmentChild?.type === Fragment) {
           validateFragmentChild(fragmentChild);
         }
         validateChild(fragmentChild);
@@ -76,7 +79,7 @@ export const getExtractedSteps = (arr, type) => {
   };
   arr.length &&
     arr.map((child) => {
-      if (child.type === Fragment) {
+      if (child?.type === Fragment) {
         validateFragmentChild(child);
       }
       validateChild(child);

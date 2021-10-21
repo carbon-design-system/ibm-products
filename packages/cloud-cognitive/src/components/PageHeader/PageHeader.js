@@ -136,12 +136,6 @@ export let PageHeader = React.forwardRef(
     const hasBreadcrumbRow = !(
       breadcrumbs === undefined && actionBarItems === undefined
     );
-    const pageActionsItemArray = extractShapesArray(pageActions)?.map(
-      (shape) => ({
-        label: shape.children,
-        ...shape,
-      })
-    );
 
     /* Title shape is used to allow title to be string or shape */
     const titleShape = getTitleShape();
@@ -596,7 +590,7 @@ export let PageHeader = React.forwardRef(
                                 <ButtonSetWithOverflow
                                   className={`${blockClass}__button-set--in-breadcrumb`}
                                   onWidthChange={handleButtonSetWidthChange}
-                                  buttons={pageActionsItemArray}
+                                  buttons={pageActions}
                                   buttonSetOverflowLabel={
                                     pageActionsOverflowLabel
                                   }
@@ -668,7 +662,7 @@ export let PageHeader = React.forwardRef(
                       <ButtonSetWithOverflow
                         className={`${blockClass}__page-actions-container`}
                         onWidthChange={handleButtonSetWidthChange}
-                        buttons={pageActionsItemArray}
+                        buttons={pageActions}
                         buttonSetOverflowLabel={pageActionsOverflowLabel}
                       />
                     </Column>
@@ -1102,21 +1096,14 @@ PageHeader.propTypes = {
    *
    * Carbon Button API https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  pageActions: deprecatePropUsage(
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        ...Button.propTypes,
-        key: PropTypes.string.isRequired,
-        kind: Button.propTypes.kind,
-        label: PropTypes.node,
-        onClick: PropTypes.func,
-      })
-    ),
-    PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.element),
-      PropTypes.element,
-    ]),
-    'Expects an array of objects with the following properties: label and onClick.'
+  pageActions: PropTypes.arrayOf(
+    PropTypes.shape({
+      ...Button.propTypes,
+      key: PropTypes.string.isRequired,
+      kind: Button.propTypes.kind,
+      label: PropTypes.node,
+      onClick: PropTypes.func,
+    })
   ),
   /**
    * When there is insufficient space to display all of hte page actions inline a dropdown button menu is shown,

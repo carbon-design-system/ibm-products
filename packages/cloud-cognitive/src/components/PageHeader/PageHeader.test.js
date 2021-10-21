@@ -11,7 +11,7 @@ import userEvent from '@testing-library/user-event';
 
 import { pkg, carbon } from '../../settings';
 
-import { BreadcrumbItem, Button, Tab, Tabs } from 'carbon-components-react';
+import { BreadcrumbItem, Tab, Tabs } from 'carbon-components-react';
 import { Lightning16, Bee32 } from '@carbon/icons-react';
 
 import { PageHeader } from '.';
@@ -83,22 +83,6 @@ const pageActions = [
   },
 ];
 const pageActionsOverflowLabel = 'Page actions...';
-
-const pageActionsDepTest = pageActions.map(({ label, ...rest }, index) => (
-  <Button {...rest} key={index}>
-    {label}
-  </Button>
-));
-
-const pageActionsDepTest2 = (
-  <>
-    {pageActions.map(({ label, ...rest }, index) => (
-      <Button {...rest} key={index}>
-        {label}
-      </Button>
-    ))}
-  </>
-);
 
 const subtitle = 'Optional subtitle if necessary';
 const navigation = (
@@ -342,48 +326,6 @@ describe('PageHeader', () => {
 
     expect(warn).toBeCalledWith(
       'The usage of the prop `actionBarItems` of `PageHeader` has been changed and support for the old usage will soon be removed. Expects an array of objects with the following properties: iconDescription, renderIcon and onClick.'
-    );
-
-    warn.mockRestore(); // Remove mock
-  });
-
-  test('with deprecated page actions', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-    render(
-      <PageHeader
-        pageActions={pageActionsDepTest}
-        pageActionsOverflowLabel={pageActionsOverflowLabel}
-      />
-    );
-
-    screen.getByText('Primary button', {
-      selector: `.${blockClass}__page-actions .${prefix}--button-set-with-overflow__button-container:not(.${prefix}--button-set-with-overflow__button-container--hidden) .${carbon.prefix}--btn`,
-    });
-
-    expect(warn).toBeCalledWith(
-      'The usage of the prop `pageActions` of `PageHeader` has been changed and support for the old usage will soon be removed. Expects an array of objects with the following properties: label and onClick.'
-    );
-
-    warn.mockRestore(); // Remove mock
-  });
-
-  test('with deprecated page actions in a fragment', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-    render(
-      <PageHeader
-        pageActions={pageActionsDepTest2}
-        pageActionsOverflowLabel={pageActionsOverflowLabel}
-      />
-    );
-
-    screen.getByText('Primary button', {
-      selector: `.${blockClass}__page-actions .${prefix}--button-set-with-overflow__button-container:not(.${prefix}--button-set-with-overflow__button-container--hidden) .${carbon.prefix}--btn`,
-    });
-
-    expect(warn).toBeCalledWith(
-      'The usage of the prop `pageActions` of `PageHeader` has been changed and support for the old usage will soon be removed. Expects an array of objects with the following properties: label and onClick.'
     );
 
     warn.mockRestore(); // Remove mock

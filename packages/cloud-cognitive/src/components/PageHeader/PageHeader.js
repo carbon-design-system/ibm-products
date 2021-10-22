@@ -171,7 +171,7 @@ export let PageHeader = React.forwardRef(
       setActionBarMinWidth(minWidth);
     };
 
-    const handleButtonSetWidthChange = ({ minWidth, maxWidth }) => {
+    const handlePageActionWidthChange = ({ minWidth, maxWidth }) => {
       /* don't know how to test resize */
       /* istanbul ignore next */
       setPageActionInBreadcrumbMaxWidth(maxWidth);
@@ -205,6 +205,13 @@ export let PageHeader = React.forwardRef(
 
     // use effects
     useEffect(() => {
+      if (pageActions?.content) {
+        const { minWidth, maxWidth } = pageActions;
+        handlePageActionWidthChange({ minWidth, maxWidth });
+      }
+    }, [pageActions]);
+
+    useEffect(() => {
       // Determine the location of the pageAction buttons
       /* istanbul ignore next */
       setPageActionsInBreadcrumbRow(
@@ -220,6 +227,9 @@ export let PageHeader = React.forwardRef(
     ]);
 
     useEffect(() => {
+      // Assesses the size of the action bar and page action area and their required
+      // space before setting their sizes
+      //
       let newActionBarWidth = 'initial';
       let newPageActionInBreadcrumbWidth = 'initial';
 
@@ -580,23 +590,7 @@ export let PageHeader = React.forwardRef(
                         {hasActionBar ? (
                           // Investigate the responsive  behaviour or this and the title also fix the ActionBar Item and PageAction story css
                           <>
-                            {pageActions && (
-                              <div
-                                className={cx(`${blockClass}__page-actions`, {
-                                  [`${blockClass}__page-actions--in-breadcrumb`]:
-                                    pageActionsInBreadcrumbRow,
-                                })}
-                              >
-                                <ButtonSetWithOverflow
-                                  className={`${blockClass}__button-set--in-breadcrumb`}
-                                  onWidthChange={handleButtonSetWidthChange}
-                                  buttons={pageActions}
-                                  buttonSetOverflowLabel={
-                                    pageActionsOverflowLabel
-                                  }
-                                />
-                              </div>
-                            )}
+                            {thePageActions(true, pageActionsInBreadcrumbRow)}
                             <ActionBar
                               overflowAriaLabel={actionBarOverflowAriaLabel}
                               actions={actionBarItemArray}
@@ -651,22 +645,7 @@ export let PageHeader = React.forwardRef(
                       </div>
                     ) : null}
                   </Column>
-
-                  {pageActions !== undefined ? (
-                    <Column
-                      className={cx(`${blockClass}__page-actions`, {
-                        [`${blockClass}__page-actions--in-breadcrumb`]:
-                          pageActionsInBreadcrumbRow,
-                      })}
-                    >
-                      <ButtonSetWithOverflow
-                        className={`${blockClass}__page-actions-container`}
-                        onWidthChange={handleButtonSetWidthChange}
-                        buttons={pageActions}
-                        buttonSetOverflowLabel={pageActionsOverflowLabel}
-                      />
-                    </Column>
-                  ) : null}
+                  {thePageActions(false, pageActionsInBreadcrumbRow)}
                 </Row>
               ) : null}
 
@@ -797,6 +776,34 @@ export let PageHeader = React.forwardRef(
         </section>
       </>
     );
+
+    function thePageActions(isBreadcrumbRow, inBreadcrumbRow) {
+      if (pageActions) {
+        const Tag = isBreadcrumbRow ? 'div' : Column;
+        // Only report size change of version action bar is rendered as part of the breadcrumb row.
+        // and when there is an actionBar
+        const handleWidthChange =
+          isBreadcrumbRow && hasBreadcrumbRow
+            ? handlePageActionWidthChange
+            : () => {};
+        return (
+          <Tag
+            className={cx(`${blockClass}__page-actions`, {
+              [`${blockClass}__page-actions--in-breadcrumb`]: inBreadcrumbRow,
+            })}
+          >
+            {pageActions.content ?? (
+              <ButtonSetWithOverflow
+                className={`${blockClass}__button-set--in-breadcrumb`}
+                onWidthChange={handleWidthChange}
+                buttons={pageActions}
+                buttonSetOverflowLabel={pageActionsOverflowLabel}
+              />
+            )}
+          </Tag>
+        );
+      }
+    }
   }
 );
 
@@ -1091,20 +1098,38 @@ PageHeader.propTypes = {
   /**
    * Specifies the primary page actions which are placed at the same level in the page as the title.
    *
-   * Each action is specified as an object with the properties of a Carbon Button plus:
+   * Either a set of actions, each specified as an object with the properties of a Carbon Button plus:
+   *
    * - label: node
    *
+   * Or a single object
+   *
+   * - content: content to be rendered. NOTE: must be capable of restricting itself to the space provided. This 2.5rem height ($spacing-08)
+   * and either 40% width of title row or space not required by page actions when scrolled into toolbar.
+   * - minWidth: smallest number of pixel width the content will shrink
+   * - maxWidth: maximum number of pixels the content will grow to
    * Carbon Button API https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  pageActions: PropTypes.arrayOf(
+  pageActions: PropTypes.oneOfType([
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        ...Button.propTypes,
+        key: PropTypes.string.isRequired,
+        kind: Button.propTypes.kind,
+        label: PropTypes.node,
+        onClick: PropTypes.func,
+      })
+    ),
     PropTypes.shape({
-      ...Button.propTypes,
-      key: PropTypes.string.isRequired,
-      kind: Button.propTypes.kind,
-      label: PropTypes.node,
-      onClick: PropTypes.func,
-    })
-  ),
+      /**
+       * minWidth should not be more than 180
+       * The content is expected to adjust itself to fit in
+       */
+      content: PropTypes.node.isRequired,
+      minWidth: PropTypes.number.isRequired,
+      maxWidth: PropTypes.number.isRequired,
+    }),
+  ]),
   /**
    * When there is insufficient space to display all of hte page actions inline a dropdown button menu is shown,
    * containing the page actions. This label is used as the display content of the dropdown button menu.
@@ -1112,7 +1137,8 @@ PageHeader.propTypes = {
    * NOTE: This prop is required if pageActions are supplied
    */
   pageActionsOverflowLabel: PropTypes.node.isRequired.if(
-    ({ pageActions }) => pageActions && pageActions.length > 0
+    ({ pageActions }) =>
+      pageActions && pageActions.length > 0 && !pageActions.content
   ),
   /**
    * When tags are supplied there may not be sufficient space to display all of the tags. This results in an overflow

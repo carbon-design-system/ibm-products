@@ -64,7 +64,7 @@ const actionBarItems = {
   'A single item': [1].map(makeActionBarItem),
   'Four items': [1, 2, 3, 4].map(makeActionBarItem),
   'Many items': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(makeActionBarItem),
-  'Custom items': [
+  'In context items': [
     { key: '1', renderIcon: Printer16, iconDescription: `Print` },
     { key: '2', renderIcon: Settings16, iconDescription: `Settings` },
     { key: '3', renderIcon: VolumeMute16, iconDescription: `Mute` },
@@ -137,7 +137,7 @@ const children = {
     </div>
   ),
   // cspell: enable
-  'Custom content': (
+  'In context content': (
     <>
       <p>Severity 1: 0</p>
       <p>Severity 1: 814</p>
@@ -168,7 +168,7 @@ const navigation = {
       <Tab label="Tab 8" />
     </Tabs>
   ),
-  'Custom tabs': (
+  'In context tabs': (
     <Tabs>
       <Tab label="Summary" />
       <Tab label="Region 1" />
@@ -222,7 +222,7 @@ const pageActions = {
       onClick: () => {},
     },
   ],
-  'Custom page actions': [
+  'In context page actions': [
     {
       key: 'acknowledge',
       kind: 'secondary',
@@ -236,6 +236,19 @@ const pageActions = {
       onClick: () => {},
     },
   ],
+  'User defined page actions': {
+    content: (
+      <button
+        type="button"
+        className="bx--button"
+        style={{ width: '100%', height: '100%' }}
+      >
+        Custom component
+      </button>
+    ),
+    minWidth: 180,
+    maxWidth: 400,
+  },
 };
 
 const tags = {
@@ -274,7 +287,7 @@ const tags = {
     { type: 'high-contrast', label: 'High contrast 2' },
     { type: 'magenta', label: 'Magenta 2' },
   ],
-  'Custom tags': [
+  'In context tags': [
     { type: 'cyan', label: 'Not urgent' },
     { type: 'red', label: 'Security' },
   ],
@@ -290,7 +303,7 @@ const title = {
     icon: Bee24,
   },
   'Loading title': { text: 'Patience is a virtue', loading: true },
-  'Custom title': {
+  'In context title': {
     text: 'Authentication activity',
     loading: false,
     icon: Security24,

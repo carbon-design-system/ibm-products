@@ -172,6 +172,7 @@ $raised-z-index: 99;
     }
 
     .#{$block-class}__breadcrumb-row .#{$block-class}__page-actions {
+      position: relative;
       display: inline-block;
       width: 100%;
       max-width: var(--#{$block-class}--button-set-in-breadcrumb-width-px);
@@ -379,7 +380,6 @@ $raised-z-index: 99;
     .#{$block-class}__page-actions {
       flex: 0 0 100%;
       margin-top: $spacing-05;
-      margin-bottom: calc(-1 * #{$spacing-02});
       white-space: nowrap;
 
       @include carbon--breakpoint-up('md') {

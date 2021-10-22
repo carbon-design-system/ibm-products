@@ -56,6 +56,7 @@ export let ActionBar = React.forwardRef(
     const [itemArray, setItemArray] = useState([]);
     const refDisplayedItems = useRef(null);
     const sizingRef = useRef(null);
+    const sizes = useRef({});
 
     // create child array from children which may be a fragment and create hidden sizing items
     useEffect(() => {
@@ -164,13 +165,17 @@ export let ActionBar = React.forwardRef(
           }
         }
 
-        // emit onWidthChange
-        onWidthChange &&
+        if (
+          (onWidthChange && sizes.current.minWidth !== overflowWidth) ||
+          sizes.current.maxWidth !== maxVisibleWidth
+        ) {
+          sizes.current.minWidth = overflowWidth;
+          sizes.current.maxWidth = maxVisibleWidth;
+          // emit onWidthChange
           onWidthChange({
-            maxWidth: maxVisibleWidth,
-            minWidth: overflowWidth,
+            ...sizes.current,
           });
-
+        }
         if (willFit < 1) {
           setDisplayCount(0);
         } else {

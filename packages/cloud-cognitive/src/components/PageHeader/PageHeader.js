@@ -729,7 +729,7 @@ export let PageHeader = React.forwardRef(
                       })}
                     >
                       <TagSet
-                        overflowAlign="end"
+                        overflowAlign="start"
                         {...{
                           allTagsModalSearchLabel,
                           allTagsModalSearchPlaceholderText,

@@ -3989,6 +3989,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   top: var(--exp--page-header--tagset-tooltip-offset) !important;
 }
 
+.exp--page-header__navigation-tags-overflow.bx--tooltip {
+  z-index: 7999;
+}
+
 .exp--card__productive .exp--card__header {
   padding-right: 0;
 }

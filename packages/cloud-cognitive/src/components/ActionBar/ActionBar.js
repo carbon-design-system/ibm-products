@@ -166,8 +166,9 @@ export let ActionBar = React.forwardRef(
         }
 
         if (
-          (onWidthChange && sizes.current.minWidth !== overflowWidth) ||
-          sizes.current.maxWidth !== maxVisibleWidth
+          onWidthChange &&
+          (sizes.current.minWidth !== overflowWidth ||
+            sizes.current.maxWidth !== maxVisibleWidth)
         ) {
           sizes.current.minWidth = overflowWidth;
           sizes.current.maxWidth = maxVisibleWidth;

@@ -60,8 +60,9 @@ export const ButtonSetWithOverflow = ({
     const sizingComboSize = sizingContainerRefCombo.current?.offsetWidth;
 
     if (
-      (onWidthChange && sizes.current.minWidth !== sizingComboSize) ||
-      sizes.current.maxWidth !== sizingSetTotalSize
+      onWidthChange &&
+      (sizes.current.minWidth !== sizingComboSize ||
+        sizes.current.maxWidth !== sizingSetTotalSize)
     ) {
       sizes.current.minWidth = sizingComboSize;
       sizes.current.maxWidth = sizingSetTotalSize;

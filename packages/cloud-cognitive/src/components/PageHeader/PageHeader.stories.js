@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import { carbon } from '../../settings';
 
@@ -14,6 +14,10 @@ import {
   Grid,
   Header,
   HeaderName,
+  HeaderMenuButton,
+  SideNav,
+  SideNavItems,
+  SideNavLink,
   Row,
   Tab,
   Tabs,
@@ -631,6 +635,7 @@ export const fullyLoadedAndSome = prepareStory(Template, {
 // Template for demo.
 // eslint-disable-next-line react/prop-types
 const TemplateDemo = ({ children, storyOptionWholePageScroll, ...props }) => {
+  const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
   return (
     <>
       <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
@@ -642,9 +647,28 @@ const TemplateDemo = ({ children, storyOptionWholePageScroll, ...props }) => {
         key={storyOptionWholePageScroll ? 'keyYes' : 'keyNo'}
       >
         <Header aria-label="IBM Platform Name">
+          <HeaderMenuButton
+            aria-label="Open menu"
+            isCollapsible
+            onClick={() => {
+              setIsSideNavExpanded((prev) => !prev);
+            }}
+            isActive={isSideNavExpanded}
+          />
           <HeaderName href="#" prefix="IBM">
             Cloud Cognitive application
           </HeaderName>
+          <SideNav
+            aria-label="Side navigation"
+            expanded={isSideNavExpanded}
+            isFixedNav
+          >
+            <SideNavItems>
+              <SideNavLink href="javascript:void(0)">
+                Sample side bar
+              </SideNavLink>
+            </SideNavItems>
+          </SideNav>
         </Header>
         <div
           className={`${storyClass}__content-container`}

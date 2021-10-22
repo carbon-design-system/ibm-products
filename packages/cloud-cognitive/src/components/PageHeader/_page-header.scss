@@ -49,7 +49,8 @@ $raised-z-index: 99;
       /* Bleed class for the background */
       position: sticky;
       /* z-index used to raise above any position relative content as per Carbon header */
-      z-index: z('header');
+      /* dropped  1 below Carbon header so as not to overlay the side panel */
+      z-index: z('header') - 1;
       top: var(--#{$block-class}--header-top);
       display: inline-block; /* cause top/bottom margin to reserve space */
       width: 100%;

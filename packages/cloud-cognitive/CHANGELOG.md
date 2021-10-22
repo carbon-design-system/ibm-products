@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.94.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.94.1...@carbon/ibm-cloud-cognitive@0.94.2) (2021-10-22)
+
+
+### Bug Fixes
+
+* tags overflow for left side tags ([#1348](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1348)) ([fd1f436](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/fd1f436ff628c587b53518f11e5912de5c0b8799))
+
+
+
+
+
 ## [0.94.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.94.0...@carbon/ibm-cloud-cognitive@0.94.1) (2021-10-22)
 
 

@@ -3573,6 +3573,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .exp--page-header .exp--page-header__breadcrumb-row .exp--page-header__page-actions {
+  position: relative;
   display: inline-block;
   width: 100%;
   max-width: var(--exp--page-header--button-set-in-breadcrumb-width-px);
@@ -3794,7 +3795,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--page-header .exp--page-header__page-actions {
   flex: 0 0 100%;
   margin-top: var(--cds-spacing-05, 1rem);
-  margin-bottom: calc(-1 * var(--cds-spacing-02, 0.25rem));
   white-space: nowrap;
 }
 

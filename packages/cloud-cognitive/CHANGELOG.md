@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.94.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.94.0...@carbon/ibm-cloud-cognitive@0.94.1) (2021-10-22)
+
+
+### Bug Fixes
+
+* Ensure PageActions can be clicked, on scroll ([#1347](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1347)) ([96183e2](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/96183e2d1e54ef9f8b6b110fdfb731cac737c181))
+* lower page header z-index for sidenav ([#1343](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1343)) ([03d2743](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/03d2743e895c832bfb1486f1672af272510a85c8))
+
+
+
+
+
 # [0.94.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.93.2...@carbon/ibm-cloud-cognitive@0.94.0) (2021-10-20)
 
 

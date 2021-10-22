@@ -3506,6 +3506,16 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   flex-wrap: nowrap;
 }
 
+.exp--page-header .exp--page-header__has-page-actions-without-action-bar {
+  min-width: 60%;
+  max-width: 60%;
+}
+
+.exp--page-header .exp--page-header__has-page-actions-without-action-bar
+.exp--page-header__has-page-actions-without-action-bar {
+  min-width: 100%;
+}
+
 .exp--page-header .exp--page-header__breadcrumb-row--has-action-bar
 .exp--page-header__breadcrumb-row--container {
   min-width: calc( 100% + ( var(--exp--page-header--width-px) - var(--exp--page-header--breadcrumb-row-width-px) ) / 2);
@@ -3612,6 +3622,13 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     max-width: 60%;
     flex: 0 1 60%;
   }
+}
+
+.exp--page-header .exp--page-header__breadcrumb-row .exp--page-header__breadcrumb-column .exp--page-header__has-page-actions-without-action-bar
+.exp--page-header__breadcrumb-row
+.exp--page-header__breadcrumb-column {
+  max-width: 100%;
+  flex: 0 1 100%;
 }
 
 .exp--page-header .exp--page-header__breadcrumb-column--background,

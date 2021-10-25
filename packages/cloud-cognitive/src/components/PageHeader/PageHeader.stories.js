@@ -246,7 +246,7 @@ const pageActions = {
         Custom component
       </button>
     ),
-    minWidth: 180,
+    minWidth: 160,
     maxWidth: 400,
   },
 };

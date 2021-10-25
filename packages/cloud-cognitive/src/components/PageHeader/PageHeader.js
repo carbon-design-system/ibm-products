@@ -1105,8 +1105,8 @@ PageHeader.propTypes = {
    * Or a single object
    *
    * - content: content to be rendered. NOTE: must be capable of restricting itself to the space provided. This 2.5rem height ($spacing-08)
-   * and either 40% width of title row or space not required by page actions when scrolled into toolbar.
-   * - minWidth: smallest number of pixel width the content will shrink
+   * and the width not used by action bar items when scrolled into toolbar.
+   * - minWidth: smallest number of pixel width the content would like. NOTE: This is not guaranteed and may be less on small viewports.
    * - maxWidth: maximum number of pixels the content will grow to
    * Carbon Button API https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */

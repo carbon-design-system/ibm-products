@@ -85,7 +85,7 @@ ExpressiveCard.propTypes = {
    */
   pictogram: PropTypes.object,
   /**
-   * Optional prop to allow overriding the icon rendering. Can be a React component class
+   * Optionally specify an href for your Button to become an <a> element
    */
   primaryButtonHref: PropTypes.string,
   /**

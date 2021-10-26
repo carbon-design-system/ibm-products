@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-core",
   "private": true,
-  "version": "0.25.0",
+  "version": "0.25.1",
   "license": "Apache-2.0",
   "main": "scripts/build.js",
   "repository": {
@@ -19,10 +19,10 @@
   "scripts": {
     "build": "run-s build:carbon build:storybook",
     "build:carbon": "sass --style=expanded --load-path node_modules --load-path ../../node_modules .storybook/carbon.scss:css/carbon.css",
-    "build:storybook": "build-storybook",
+    "build:storybook": "build-storybook -s ./public",
     "clean": "rimraf storybook-static css",
     "start": "run-s build:carbon start:storybook",
-    "start:storybook": "start-storybook -p 3000",
+    "start:storybook": "start-storybook -s ./public -p 3000",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (not tested)",
     "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react$|^react-dom$)/'"
   },

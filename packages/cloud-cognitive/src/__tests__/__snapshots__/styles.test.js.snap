@@ -5825,7 +5825,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   /* Bleed class for the background */
   position: sticky;
   /* z-index used to raise above any position relative content as per Carbon header */
-  z-index: 8000;
+  /* dropped  1 below Carbon header so as not to overlay the side panel */
+  z-index: 7999;
   top: var(--exp--page-header--header-top);
   display: inline-block;
   /* cause top/bottom margin to reserve space */
@@ -5877,6 +5878,13 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: flex;
   min-width: 100%;
   flex-wrap: nowrap;
+}
+.exp--page-header .exp--page-header__has-page-actions-without-action-bar {
+  min-width: 60%;
+  max-width: 60%;
+}
+.exp--page-header .exp--page-header__has-page-actions-without-action-bar .exp--page-header__has-page-actions-without-action-bar {
+  min-width: 100%;
 }
 .exp--page-header .exp--page-header__breadcrumb-row--has-action-bar .exp--page-header__breadcrumb-row--container {
   min-width: calc(100% + (var(--exp--page-header--width-px) - var(--exp--page-header--breadcrumb-row-width-px)) / 2);
@@ -5964,6 +5972,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     max-width: 60%;
     flex: 0 1 60%;
   }
+}
+.exp--page-header .exp--page-header__breadcrumb-row .exp--page-header__breadcrumb-column .exp--page-header__has-page-actions-without-action-bar .exp--page-header__breadcrumb-row .exp--page-header__breadcrumb-column {
+  max-width: 100%;
+  flex: 0 1 100%;
 }
 .exp--page-header .exp--page-header__breadcrumb-column--background,
 .exp--page-header .exp--page-header__action-bar-column--background {
@@ -6251,6 +6263,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--page-header__tagset-tooltip.exp--page-header__tagset-tooltip {
   position: var(--exp--page-header--tagset-tooltip-position) !important;
   top: var(--exp--page-header--tagset-tooltip-offset) !important;
+}
+
+.exp--page-header__navigation-tags-overflow.bx--tooltip {
+  z-index: 7999;
 }
 
 /* stylelint-disable-line no-invalid-position-at-import-rule */

@@ -44,9 +44,10 @@ const componentName = 'PageHeader';
 import {
   blockClass,
   utilCheckUpdateVerticalSpace,
-  utilGetTitleShape,
+  utilGetBreadcrumbItemForTitle,
   utilSetCollapsed,
 } from './PageHeaderUtils';
+import { PageHeaderTitle } from './PageHeaderTitle';
 
 export let PageHeader = React.forwardRef(
   (
@@ -87,7 +88,6 @@ export let PageHeader = React.forwardRef(
       subtitle,
       tags,
       title,
-      titleIcon,
       ...rest
     },
     ref
@@ -117,9 +117,6 @@ export let PageHeader = React.forwardRef(
     const offsetTopMeasuringRef = useRef(null);
 
     // utility functions
-    // Title shape is used to allow title to be string or shape
-    const getTitleShape = () =>
-      utilGetTitleShape(title, titleIcon, PageHeader.defaultProps.title);
     const checkUpdateVerticalSpace = function () {
       return utilCheckUpdateVerticalSpace(
         headerRef,
@@ -142,9 +139,6 @@ export let PageHeader = React.forwardRef(
         ...shape,
       })
     );
-
-    /* Title shape is used to allow title to be string or shape */
-    const titleShape = getTitleShape();
 
     // NOTE: The buffer is used to add space between the bottom of the header and the last content
     // Not pre-collapsed and (subtitle or children)
@@ -454,12 +448,6 @@ export let PageHeader = React.forwardRef(
       }
     }, [collapseHeader, metrics.headerOffset, metrics.headerTopValue]);
 
-    const {
-      text: titleText,
-      icon: TitleIcon,
-      loading: titleLoading,
-    } = titleShape;
-
     useResizeDetector({
       onResize: handleResizeActionBarColumn,
       targetRef: sizingContainerRef,
@@ -472,24 +460,12 @@ export let PageHeader = React.forwardRef(
       handleHeight: true,
     });
 
-    let breadcrumbsInWithTitle;
-    if (breadcrumbsIn) {
-      breadcrumbsInWithTitle = !title
-        ? breadcrumbsIn
-        : breadcrumbsIn.concat({
-            isCurrentPage: true,
-            className: cx([
-              `${blockClass}__breadcrumb-title`,
-              {
-                [`${blockClass}__breadcrumb-title--pre-collapsed`]:
-                  collapseTitle,
-              },
-            ]),
-            key: `breadcrumb-title`,
-            label: <span>{titleLoading ? <SkeletonText /> : titleText}</span>,
-            title: titleText,
-          });
-    }
+    // Determine what form of title to display in the breadcrumb
+    let breadcrumbItemForTitle = utilGetBreadcrumbItemForTitle(
+      blockClass,
+      collapseTitle,
+      title
+    );
 
     return (
       <>
@@ -548,23 +524,20 @@ export let PageHeader = React.forwardRef(
                           className={`${blockClass}__breadcrumb`}
                           noTrailingSlash={title !== undefined}
                           overflowAriaLabel={breadcrumbOverflowAriaLabel}
-                          breadcrumbs={breadcrumbsInWithTitle}
+                          breadcrumbs={
+                            breadcrumbsIn
+                              ? breadcrumbItemForTitle
+                                ? breadcrumbsIn.concat(breadcrumbItemForTitle)
+                                : breadcrumbsIn
+                              : null
+                          }
                         >
                           {!breadcrumbsIn ? deprecated_breadcrumbItems : null}
-                          {!breadcrumbsIn && title ? (
+                          {!breadcrumbsIn && breadcrumbItemForTitle ? (
                             <BreadcrumbItem
-                              isCurrentPage={true}
-                              className={cx([
-                                `${blockClass}__breadcrumb-title`,
-                                {
-                                  [`${blockClass}__breadcrumb-title--pre-collapsed`]:
-                                    collapseTitle,
-                                },
-                              ])}
+                              {...prepareProps(breadcrumbItemForTitle, 'label')}
                             >
-                              <span>
-                                {titleLoading ? <SkeletonText /> : titleText}
-                              </span>
+                              {breadcrumbItemForTitle.label}
                             </BreadcrumbItem>
                           ) : null}
                         </BreadcrumbWithOverflow>
@@ -639,24 +612,11 @@ export let PageHeader = React.forwardRef(
                   <Column className={`${blockClass}__title-column`}>
                     {/* keeps page actions right even if empty */}
                     {title !== undefined ? (
-                      <div
-                        className={cx(`${blockClass}__title`, {
-                          [`${blockClass}__title--fades`]: hasBreadcrumbRow,
-                        })}
-                      >
-                        {TitleIcon && !titleLoading ? (
-                          <TitleIcon className={`${blockClass}__title-icon`} />
-                        ) : null}
-                        <span title={!titleLoading ? titleText : null}>
-                          {titleLoading ? (
-                            <SkeletonText
-                              className={`${blockClass}__title-skeleton`}
-                            />
-                          ) : (
-                            titleText
-                          )}
-                        </span>
-                      </div>
+                      <PageHeaderTitle
+                        blockClass={blockClass}
+                        hasBreadcrumbRow={hasBreadcrumbRow}
+                        title={title}
+                      />
                     ) : null}
                   </Column>
 
@@ -906,13 +866,6 @@ export const deprecatedProps = {
   preventBreadcrumbScroll: deprecateProp(
     PropTypes.bool,
     'Prop renamed to `disableBreadcrumbScroll`.'
-  ),
-  /**
-   * **Deprecated** see property `title object form`
-   */
-  titleIcon: deprecateProp(
-    PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-    'Use `title` prop shape instead.'
   ),
 };
 
@@ -1166,14 +1119,32 @@ PageHeader.propTypes = {
   ),
   /**
    * An optional page title supplied as a string or object with the following attributes: text, icon, loading
+   *
+   * Can be supplied either as:
+   * - String
+   * - Object containing
+   *    - text: title string
+   *    - icon: optional icon
+   *    - loading: boolean shows loading indicator if true
+   * - Object containing user defined contents. These must fit within the area defined for the title in both main part of the header and the breadcrumb.
+   *    - content: title or name of current location shown in main part of page header
+   *    - breadcrumbContent: version of content used in the breadcrumb on scroll. If not supplied
+   *    - asText: String based representation of the title
    */
   title: PropTypes.oneOfType([
     PropTypes.shape({
+      // Update docgen if changed
       text: PropTypes.string.isRequired,
       icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
       loading: PropTypes.bool,
+      // Update docgen if changed
     }),
     PropTypes.string,
+    PropTypes.shape({
+      content: PropTypes.node.isRequired,
+      breadcrumbContent: PropTypes.node,
+      asText: PropTypes.string.isRequired,
+    }),
   ]),
   ...deprecatedProps,
 };

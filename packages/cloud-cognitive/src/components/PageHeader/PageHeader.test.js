@@ -117,6 +117,17 @@ const tags = Array.from({ length: 20 }, () => ({
   label: 'A tag',
 }));
 
+const titleUserDefinedStrings = {
+  content: 'Page title',
+  breadcrumbContent: 'Breadcrumb title',
+  asText: 'Text title',
+};
+
+const titleUserDefined = {
+  content: <div>{titleUserDefinedStrings.content}</div>,
+  breadcrumbContent: <span>{titleUserDefinedStrings.breadcrumbContent}</span>,
+  asText: titleUserDefinedStrings.asText,
+};
 const titleObj = { text: 'Page title', loading: false, icon: Bee32 };
 const titleString = 'Page title';
 
@@ -195,6 +206,12 @@ const testProps = {
 const testPropsAltTitle = {
   title: titleString,
   titleIcon: Bee32,
+};
+
+const testPropsUserDefined = {
+  breadcrumbs, // breadcrumbs needed for title breadcrumb test
+  breadcrumbOverflowAriaLabel,
+  title: titleUserDefined,
 };
 
 describe('PageHeader', () => {
@@ -564,20 +581,32 @@ describe('PageHeader', () => {
     ).toBeTruthy();
   });
 
-  test('renders title when using separate string and icon', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+  test('renders title when using user defined title', () => {
+    render(<PageHeader {...testPropsUserDefined} />);
 
-    render(<PageHeader {...testPropsAltTitle} />);
+    screen.getByText(titleUserDefinedStrings.content);
+    screen.getByText(titleUserDefinedStrings.breadcrumbContent, {
+      // selector need to ignore sizing items
+      selector: `.${prefix}--breadcrumb-with-overflow__breadcrumb-container:not(.${prefix}--breadcrumb-with-overflow__breadcrumb-container--hidden) .${carbon.prefix}--link`,
+    });
 
-    expect(warn).toBeCalledWith(
-      'The prop `titleIcon` of `PageHeader` has been deprecated and will soon be removed. Use `title` prop shape instead.'
-    );
+    const allTitle = screen.getAllByTitle(titleUserDefinedStrings.asText);
+    expect(allTitle).toHaveLength(3); // breadcrumb sizing, breadcrumb and main title
+  });
 
-    screen.getByText(titleString, { selector: `.${blockClass}__title span` });
+  test('renders title when using user defined title without a breadcrumbContent', () => {
+    const noBreadcrumbContent = { ...testPropsUserDefined };
+    noBreadcrumbContent.title.breadcrumbContent = undefined;
 
-    expect(
-      document.querySelectorAll(`.${blockClass}__title-icon`)
-    ).toHaveLength(1);
+    render(<PageHeader {...noBreadcrumbContent} />);
+
+    screen.getByText(titleUserDefinedStrings.content, {
+      // selector need to ignore sizing items
+      selector: `.${prefix}--breadcrumb-with-overflow__breadcrumb-container:not(.${prefix}--breadcrumb-with-overflow__breadcrumb-container--hidden) .${carbon.prefix}--link`,
+    });
+
+    const allTitle = screen.getAllByTitle(titleUserDefinedStrings.asText);
+    expect(allTitle).toHaveLength(3); // breadcrumb sizing, breadcrumb and main title
   });
 
   test('Without hasBackgroundAlways', () => {
@@ -725,7 +754,7 @@ describe('PageHeader', () => {
     warn.mockRestore(); // Remove mock
   });
 
-  test('Deprecated title skeleton with breadcrumbs', () => {
+  test('Title skeleton with deprecated breadcrumbs', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
     render(

@@ -124,8 +124,7 @@ const children = {
           // stylelint-disable-next-line carbon/layout-token-use
           marginRight: '50px',
           maxWidth: '400px',
-        }}
-      >
+        }}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor <strong>incididunt ut labore</strong> et dolore magna aliqua. Ut
         enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -299,6 +298,21 @@ const title = {
     loading: false,
     icon: Security24,
   },
+  'User defined title': {
+    content: (
+      <span>
+        User <span style={{ color: 'red', fontWeight: '600' }}>defined</span>{' '}
+        title
+      </span>
+    ),
+    breadcrumbContent: (
+      <span>
+        User <span style={{ color: 'red', fontWeight: '600' }}>defined</span>{' '}
+        title
+      </span>
+    ),
+    asText: 'User defined title',
+  },
 };
 
 const fullWidthGrid = {
@@ -414,24 +428,21 @@ const dummyPageContent = (
         sm={1}
         md={2}
         lg={4}
-        className={`${storyClass}__dummy-content-block`}
-      >
+        className={`${storyClass}__dummy-content-block`}>
         <div className={`${storyClass}__dummy-content-text`}>Column #1</div>
       </Column>
       <Column
         sm={1}
         md={2}
         lg={4}
-        className={`${storyClass}__dummy-content-block`}
-      >
+        className={`${storyClass}__dummy-content-block`}>
         <div className={`${storyClass}__dummy-content-text`}>Column #2</div>
       </Column>
       <Column
         sm={2}
         md={4}
         lg={8}
-        className={`${storyClass}__dummy-content-block`}
-      >
+        className={`${storyClass}__dummy-content-block`}>
         <div className={`${storyClass}__dummy-content-text`}>Column #3</div>
       </Column>
     </Row>
@@ -446,8 +457,7 @@ const demoDummyPageContent = (
           sm={4}
           md={8}
           lg={16}
-          className={`${storyClass}__dummy-content-block`}
-        >
+          className={`${storyClass}__dummy-content-block`}>
           <Table>
             <TableHead>
               <TableRow>
@@ -644,8 +654,7 @@ const TemplateDemo = ({ children, storyOptionWholePageScroll, ...props }) => {
           [`${storyClass}__app--whole-page-scroll`]:
             !storyOptionWholePageScroll,
         })}
-        key={storyOptionWholePageScroll ? 'keyYes' : 'keyNo'}
-      >
+        key={storyOptionWholePageScroll ? 'keyYes' : 'keyNo'}>
         <Header aria-label="IBM Platform Name">
           <HeaderMenuButton
             aria-label="Open menu"
@@ -661,8 +670,7 @@ const TemplateDemo = ({ children, storyOptionWholePageScroll, ...props }) => {
           <SideNav
             aria-label="Side navigation"
             expanded={isSideNavExpanded}
-            isFixedNav
-          >
+            isFixedNav>
             <SideNavItems>
               <SideNavLink href="javascript:void(0)">
                 Sample side bar
@@ -675,8 +683,7 @@ const TemplateDemo = ({ children, storyOptionWholePageScroll, ...props }) => {
           style={{
             // stylelint-disable-next-line carbon/layout-token-use
             marginTop: '48px',
-          }}
-        >
+          }}>
           <PageHeader {...props}>{children}</PageHeader>
           {demoDummyPageContent}
         </div>

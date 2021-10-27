@@ -65,7 +65,7 @@
     "husky": "^4.3.6",
     "jest": "^27.3.1",
     "lerna": "^4.0.0",
-    "lint-staged": "^11.2.3",
+    "lint-staged": "^11.2.6",
     "npm-check-updates": "^11.8.5",
     "npm-run-all": "^4.1.5",
     "npm-upgrade": "^3.0.0",
@@ -74,10 +74,10 @@
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "rimraf": "^3.0.2",
-    "stylelint": "^13.13.1",
+    "stylelint": "^14.0.1",
     "stylelint-config-carbon": "^1.7.0",
     "stylelint-plugin-carbon-tokens": "^0.11.2",
-    "webpack": "^5.59.0"
+    "webpack": "^5.60.0"
   },
   "eslintConfig": {
     "parser": "babel-eslint",

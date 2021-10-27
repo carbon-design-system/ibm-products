@@ -577,9 +577,9 @@ describe('PageHeader', () => {
   });
 
   test('renders title as string', () => {
-    render(<PageHeader title={testProps.title} />);
+    render(<PageHeader title={testProps.title.text} />);
 
-    screen.getByText(testProps.title);
+    screen.getByText(testProps.title.text);
   });
 
   test('renders title when using user defined title', () => {

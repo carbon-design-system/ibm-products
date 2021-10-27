@@ -543,7 +543,7 @@ export let SidePanel = React.forwardRef(
           onClick={onRequestClose}
           ref={sidePanelCloseRef}
         />
-        {subtitle && subtitle.length && (
+        {subtitle && (
           <p
             className={cx(`${blockClass}__subtitle-text`, {
               [`${blockClass}__subtitle-text-no-animation`]: !animateTitle,
@@ -888,7 +888,7 @@ SidePanel.propTypes = {
   /**
    * Sets the subtitle text
    */
-  subtitle: PropTypes.string,
+  subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 
   /**
    * Sets the title text

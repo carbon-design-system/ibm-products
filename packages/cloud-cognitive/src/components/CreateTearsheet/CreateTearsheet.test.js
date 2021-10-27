@@ -9,6 +9,14 @@
 import React from 'react';
 import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import {
+  expectWarn,
+  expectWarnAsync,
+  expectMultipleWarn,
+  expectError,
+  expectMultipleError,
+  required,
+} from '../../global/js/utils/test-helper';
 import { moderate02 } from '@carbon/motion';
 import { pkg, carbon } from '../../settings';
 import { CreateTearsheet } from './CreateTearsheet';
@@ -36,7 +44,9 @@ const onNextStepRejectionFn = jest.fn(() =>
 );
 const finalStepOnNext = jest.fn(() => Promise.resolve());
 const finalStepOnNextNonPromise = jest.fn();
-const finalStepOnNextRejectFn = jest.fn(() => Promise.reject());
+const finalStepOnNextRejectFn = jest.fn(() =>
+  Promise.reject(rejectionErrorMessage)
+);
 const submitButtonText = 'Submit';
 const cancelButtonText = 'Cancel';
 const backButtonText = 'Back';
@@ -182,29 +192,28 @@ describe(CreateTearsheet.displayName, () => {
     );
   });
 
-  it('renders the first step if an invalid initialStep value is provided', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
-    const { container } = renderCreateTearsheet({
-      ...defaultProps,
-      // Starting on 0 step is invalid since the steps start with a value of 1
-      // This will cause a console warning
-      initialStep: 0,
-    });
-    const createTearsheetSteps = container.querySelector(
-      `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
-    ).children;
-    expect(
-      createTearsheetSteps[0].classList.contains(
-        `.${createTearsheetBlockClass}__step--visible-section`
-      )
-    );
-    expect(warn).toBeCalledWith(
-      `${CreateTearsheet.displayName}: An invalid \`initialStep\` prop was supplied. The \`initialStep\` prop should be a number that is greater than 0 or less than or equal to the number of steps your ${CreateTearsheet.displayName} has.`
-    );
-    // The onMount prop will get called here because the first step is rendered
-    expect(onMountFn).toHaveBeenCalledTimes(1);
-    warn.mockRestore();
-  });
+  it('renders the first step if an invalid initialStep value is provided', () =>
+    expectWarn(
+      `${CreateTearsheet.displayName}: An invalid \`initialStep\` prop was supplied. The \`initialStep\` prop should be a number that is greater than 0 or less than or equal to the number of steps your ${CreateTearsheet.displayName} has.`,
+      () => {
+        const { container } = renderCreateTearsheet({
+          ...defaultProps,
+          // Starting on 0 step is invalid since the steps start with a value of 1
+          // This will cause a console warning
+          initialStep: 0,
+        });
+        const createTearsheetSteps = container.querySelector(
+          `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
+        ).children;
+        expect(
+          createTearsheetSteps[0].classList.contains(
+            `.${createTearsheetBlockClass}__step--visible-section`
+          )
+        );
+        // The onMount prop will get called here because the first step is rendered
+        expect(onMountFn).toHaveBeenCalledTimes(1);
+      }
+    ));
 
   it('renders the second step if clicking on the next step button with onNext optional function prop and then clicks cancel button', async () => {
     const { click } = userEvent;
@@ -228,22 +237,24 @@ describe(CreateTearsheet.displayName, () => {
     expect(onCloseFn).toHaveBeenCalled();
   });
 
-  it('renders first step with onNext function prop that rejects', async () => {
-    jest.spyOn(console, 'warn').mockImplementation(jest.fn());
-    const { click } = userEvent;
-    renderCreateTearsheet({
-      ...defaultProps,
-      rejectOnSubmit: false,
-      rejectOnNext: true,
-    });
-    const nextButtonElement = screen.getByText(nextButtonText);
-    click(nextButtonElement);
+  it('renders first step with onNext function prop that rejects', async () =>
+    expectWarnAsync(
+      `CreateTearsheet onNext error: ${rejectionErrorMessage}`,
+      async () => {
+        const { click } = userEvent;
+        renderCreateTearsheet({
+          ...defaultProps,
+          rejectOnSubmit: false,
+          rejectOnNext: true,
+        });
+        const nextButtonElement = screen.getByText(nextButtonText);
+        click(nextButtonElement);
 
-    await waitFor(() => {
-      expect(onNextStepRejectionFn).toHaveBeenCalled();
-    });
-    jest.spyOn(console, 'warn').mockRestore();
-  });
+        await waitFor(() => {
+          expect(onNextStepRejectionFn).toHaveBeenCalled();
+        });
+      }
+    ));
 
   it('renders the next CreateTearsheet step without onNext handler', async () => {
     const { click } = userEvent;
@@ -330,58 +341,62 @@ describe(CreateTearsheet.displayName, () => {
     });
   });
 
-  it('should call the onNext function from the final step and reject the promise', async () => {
-    jest.spyOn(console, 'warn').mockImplementation(jest.fn());
-    const { click } = userEvent;
-    renderCreateTearsheet({
-      ...defaultProps,
-      rejectOnSubmit: false,
-      rejectOnNext: false,
-      submitFn: onRequestSubmitFn,
-      onNext: onNextStepFn,
-      finalOnNextFn: null,
-      rejectOnSubmitNext: true,
-    });
-    const nextButtonElement = screen.getByText(nextButtonText);
-    click(nextButtonElement);
-    await waitFor(() => {
-      expect(onNextStepFn).toHaveBeenCalled();
-    });
-    click(nextButtonElement);
-    await waitFor(() => {
-      expect(onNextStepFn).toHaveBeenCalled();
-    });
-    const submitButtonElement = screen.getByText(submitButtonText);
-    click(submitButtonElement);
-    await waitFor(() => {
-      expect(finalStepOnNextRejectFn).toHaveBeenCalled();
-    });
-    jest.spyOn(console, 'warn').mockRestore();
-  });
+  it('should call the onNext function from the final step and reject the promise', async () =>
+    expectWarnAsync(
+      `CreateTearsheet onNext error: ${rejectionErrorMessage}`,
+      async () => {
+        const { click } = userEvent;
+        renderCreateTearsheet({
+          ...defaultProps,
+          rejectOnSubmit: false,
+          rejectOnNext: false,
+          submitFn: onRequestSubmitFn,
+          onNext: onNextStepFn,
+          finalOnNextFn: null,
+          rejectOnSubmitNext: true,
+        });
+        const nextButtonElement = screen.getByText(nextButtonText);
+        click(nextButtonElement);
+        await waitFor(() => {
+          expect(onNextStepFn).toHaveBeenCalled();
+        });
+        click(nextButtonElement);
+        await waitFor(() => {
+          expect(onNextStepFn).toHaveBeenCalled();
+        });
+        const submitButtonElement = screen.getByText(submitButtonText);
+        click(submitButtonElement);
+        await waitFor(() => {
+          expect(finalStepOnNextRejectFn).toHaveBeenCalled();
+        });
+      }
+    ));
 
-  it('should call the onRequestSubmit prop and reject the promise', async () => {
-    jest.spyOn(console, 'warn').mockImplementation(jest.fn());
-    const { click } = userEvent;
-    renderCreateTearsheet({
-      ...defaultProps,
-      rejectOnSubmit: true,
-    });
-    const nextButtonElement = screen.getByText(nextButtonText);
-    click(nextButtonElement);
-    await waitFor(() => {
-      expect(onNextStepFn).toHaveBeenCalled();
-    });
-    click(nextButtonElement);
-    await waitFor(() => {
-      expect(onNextStepFn).toHaveBeenCalled();
-    });
-    const submitButtonElement = screen.getByText(submitButtonText);
-    click(submitButtonElement);
-    await waitFor(() => {
-      expect(onRequestSubmitRejectFn).toHaveBeenCalled();
-    });
-    jest.spyOn(console, 'warn').mockRestore();
-  });
+  it('should call the onRequestSubmit prop and reject the promise', async () =>
+    expectWarnAsync(
+      `CreateTearsheet submit error: ${rejectionErrorMessage}`,
+      async () => {
+        const { click } = userEvent;
+        renderCreateTearsheet({
+          ...defaultProps,
+          rejectOnSubmit: true,
+        });
+        const nextButtonElement = screen.getByText(nextButtonText);
+        click(nextButtonElement);
+        await waitFor(() => {
+          expect(onNextStepFn).toHaveBeenCalled();
+        });
+        click(nextButtonElement);
+        await waitFor(() => {
+          expect(onNextStepFn).toHaveBeenCalled();
+        });
+        const submitButtonElement = screen.getByText(submitButtonText);
+        click(submitButtonElement);
+        await waitFor(() => {
+          expect(onRequestSubmitRejectFn).toHaveBeenCalled();
+        });
+      }
+    ));
 
   it('should not render any CreateTearsheet steps when there are no TearsheetStep components included', () => {
     const { container } = renderEmptyCreateTearsheet(defaultProps);
@@ -415,129 +430,144 @@ describe(CreateTearsheet.displayName, () => {
     );
   });
 
-  it('should create a console warning when using CreateTearsheet with only one step', () => {
-    jest.spyOn(console, 'warn').mockImplementation(jest.fn());
-    renderSingleStepCreateTearsheet(defaultProps);
-    jest.spyOn(console, 'warn').mockRestore();
-  });
+  it('should create a console warning when using CreateTearsheet with only one step', () =>
+    expectWarn('CreateTearsheets with one step are not permitted', () => {
+      renderSingleStepCreateTearsheet(defaultProps);
+    }));
 
-  it('should render the view all toggle and click it and console warning regarding missing section components', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
-    const viewAllToggleLabelText = 'Show all available options';
-    const { container, rerender } = render(
-      <CreateTearsheet
-        onRequestSubmit={jest.fn()}
-        includeViewAllToggle
-        viewAllToggleLabelText={viewAllToggleLabelText}
-        viewAllToggleOffLabelText="Off"
-        viewAllToggleOnLabelText="On"
-        sideNavAriaLabel="Side nav aria label"
-        {...defaultProps}
-      >
-        <CreateTearsheetStep onNext={jest.fn()} title={step1Title}>
-          step 1 content
-          <button type="button" disabled>
-            Test
-          </button>
-          <input type="text" />
-        </CreateTearsheetStep>
-        <CreateTearsheetStep title={step2Title}>
-          step 2 content
-        </CreateTearsheetStep>
-        <CreateTearsheetStep title={step3Title} onNext={jest.fn()}>
-          step 3 content
-        </CreateTearsheetStep>
-      </CreateTearsheet>
-    );
-    const { click } = userEvent;
-    click(screen.getByText(viewAllToggleLabelText));
-    const viewAllToggleElement = container.querySelector(
-      `#${createInfluencerBlockClass}__view-all-toggle`
-    );
+  it('should render the view all toggle and click it and console warning regarding missing section components', () =>
+    expectMultipleError(
+      [
+        required('fieldsetLegendText', 'ForwardRef'),
+        required('legendText', 'FormGroup'),
+        "Failed prop type: Cannot read property 'length' of undefined",
+      ],
+      () =>
+        expectMultipleWarn(
+          [
+            "CreateTearsheet: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' prop.",
+            "CreateTearsheet: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' prop.",
+            "CreateTearsheet: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' prop.",
+            'CreateTearsheet: CreateTearsheets with one step are not permitted. If you require only one step, please use either the CreateTearsheetNarrow, CreateSidePanel, or CreateModal components.',
+            "CreateTearsheet: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' prop.",
+            'CreateTearsheet: CreateTearsheets with one step are not permitted. If you require only one step, please use either the CreateTearsheetNarrow, CreateSidePanel, or CreateModal components.',
+            'CreateTearsheet: CreateTearsheets with one step are not permitted. If you require only one step, please use either the CreateTearsheetNarrow, CreateSidePanel, or CreateModal components.',
+            'CreateTearsheet: CreateTearsheets with one step are not permitted. If you require only one step, please use either the CreateTearsheetNarrow, CreateSidePanel, or CreateModal components.',
+            "CreateTearsheet: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' prop.",
+            "CreateTearsheet: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' prop.",
+          ],
+          () => {
+            const viewAllToggleLabelText = 'Show all available options';
+            const { container, rerender } = render(
+              <CreateTearsheet
+                onRequestSubmit={jest.fn()}
+                includeViewAllToggle
+                viewAllToggleLabelText={viewAllToggleLabelText}
+                viewAllToggleOffLabelText="Off"
+                viewAllToggleOnLabelText="On"
+                sideNavAriaLabel="Side nav aria label"
+                {...defaultProps}
+              >
+                <CreateTearsheetStep onNext={jest.fn()} title={step1Title}>
+                  step 1 content
+                  <button type="button" disabled>
+                    Test
+                  </button>
+                  <input type="text" />
+                </CreateTearsheetStep>
+                <CreateTearsheetStep title={step2Title}>
+                  step 2 content
+                </CreateTearsheetStep>
+                <CreateTearsheetStep title={step3Title} onNext={jest.fn()}>
+                  step 3 content
+                </CreateTearsheetStep>
+              </CreateTearsheet>
+            );
+            const { click } = userEvent;
+            click(screen.getByText(viewAllToggleLabelText));
+            const viewAllToggleElement = container.querySelector(
+              `#${createInfluencerBlockClass}__view-all-toggle`
+            );
 
-    act(() => jest.advanceTimersByTime(timerValue));
-    expect(viewAllToggleElement).toBeChecked();
-    expect(warn).toBeCalledWith(
-      `CreateTearsheet: You must have at least one CreateTearsheetSection component in a CreateTearsheetStep when using the 'includeViewAllToggle' prop.`
-    );
-    rerender(
-      <CreateTearsheet
-        onRequestSubmit={jest.fn()}
-        includeViewAllToggle
-        viewAllToggleLabelText={viewAllToggleLabelText}
-        viewAllToggleOffLabelText="Off"
-        viewAllToggleOnLabelText="On"
-        sideNavAriaLabel="Side nav aria label"
-        {...defaultProps}
-      ></CreateTearsheet>
-    );
-    rerender(
-      <CreateTearsheet
-        onRequestSubmit={jest.fn()}
-        includeViewAllToggle
-        viewAllToggleLabelText={viewAllToggleLabelText}
-        viewAllToggleOffLabelText="Off"
-        viewAllToggleOnLabelText="On"
-        sideNavAriaLabel="Side nav aria label"
-        {...defaultProps}
-      >
-        <CreateTearsheetStep onNext={jest.fn()} title={step1Title} />
-      </CreateTearsheet>
-    );
-    rerender(
-      <CreateTearsheet
-        onRequestSubmit={jest.fn()}
-        includeViewAllToggle
-        viewAllToggleLabelText={viewAllToggleLabelText}
-        viewAllToggleOffLabelText="Off"
-        viewAllToggleOnLabelText="On"
-        sideNavAriaLabel="Side nav aria label"
-        {...defaultProps}
-      >
-        <CreateTearsheetStep onNext={jest.fn()} title={step1Title}>
-          <CreateTearsheetSection title="test" id={uuidv4()}>
-            content
-          </CreateTearsheetSection>
-          <p>Non section element</p>
-        </CreateTearsheetStep>
-      </CreateTearsheet>
-    );
-    rerender(
-      <CreateTearsheet
-        onRequestSubmit={jest.fn()}
-        includeViewAllToggle
-        viewAllToggleLabelText={viewAllToggleLabelText}
-        viewAllToggleOffLabelText="Off"
-        viewAllToggleOnLabelText="On"
-        sideNavAriaLabel="Side nav aria label"
-        {...defaultProps}
-      >
-        <CreateTearsheetStep onNext={jest.fn()} title={step1Title}>
-          <CreateTearsheetSection title="test" id={uuidv4()}>
-            content
-          </CreateTearsheetSection>
-        </CreateTearsheetStep>
-      </CreateTearsheet>
-    );
-    rerender(
-      <CreateTearsheet
-        onRequestSubmit={jest.fn()}
-        includeViewAllToggle
-        viewAllToggleLabelText={viewAllToggleLabelText}
-        viewAllToggleOffLabelText="Off"
-        viewAllToggleOnLabelText="On"
-        sideNavAriaLabel="Side nav aria label"
-        {...defaultProps}
-      >
-        <CreateTearsheetStep onNext={jest.fn()} title={step1Title}>
-          <p>test</p>
-        </CreateTearsheetStep>
-      </CreateTearsheet>
-    );
-    warn.mockRestore();
-    error.mockRestore();
-  });
+            act(() => jest.advanceTimersByTime(timerValue));
+            expect(viewAllToggleElement).toBeChecked();
+            rerender(
+              <CreateTearsheet
+                onRequestSubmit={jest.fn()}
+                includeViewAllToggle
+                viewAllToggleLabelText={viewAllToggleLabelText}
+                viewAllToggleOffLabelText="Off"
+                viewAllToggleOnLabelText="On"
+                sideNavAriaLabel="Side nav aria label"
+                {...defaultProps}
+              ></CreateTearsheet>
+            );
+            rerender(
+              <CreateTearsheet
+                onRequestSubmit={jest.fn()}
+                includeViewAllToggle
+                viewAllToggleLabelText={viewAllToggleLabelText}
+                viewAllToggleOffLabelText="Off"
+                viewAllToggleOnLabelText="On"
+                sideNavAriaLabel="Side nav aria label"
+                {...defaultProps}
+              >
+                <CreateTearsheetStep onNext={jest.fn()} title={step1Title} />
+              </CreateTearsheet>
+            );
+            rerender(
+              <CreateTearsheet
+                onRequestSubmit={jest.fn()}
+                includeViewAllToggle
+                viewAllToggleLabelText={viewAllToggleLabelText}
+                viewAllToggleOffLabelText="Off"
+                viewAllToggleOnLabelText="On"
+                sideNavAriaLabel="Side nav aria label"
+                {...defaultProps}
+              >
+                <CreateTearsheetStep onNext={jest.fn()} title={step1Title}>
+                  <CreateTearsheetSection title="test" id={uuidv4()}>
+                    content
+                  </CreateTearsheetSection>
+                  <p>Non section element</p>
+                </CreateTearsheetStep>
+              </CreateTearsheet>
+            );
+            rerender(
+              <CreateTearsheet
+                onRequestSubmit={jest.fn()}
+                includeViewAllToggle
+                viewAllToggleLabelText={viewAllToggleLabelText}
+                viewAllToggleOffLabelText="Off"
+                viewAllToggleOnLabelText="On"
+                sideNavAriaLabel="Side nav aria label"
+                {...defaultProps}
+              >
+                <CreateTearsheetStep onNext={jest.fn()} title={step1Title}>
+                  <CreateTearsheetSection title="test" id={uuidv4()}>
+                    content
+                  </CreateTearsheetSection>
+                </CreateTearsheetStep>
+              </CreateTearsheet>
+            );
+            rerender(
+              <CreateTearsheet
+                onRequestSubmit={jest.fn()}
+                includeViewAllToggle
+                viewAllToggleLabelText={viewAllToggleLabelText}
+                viewAllToggleOffLabelText="Off"
+                viewAllToggleOnLabelText="On"
+                sideNavAriaLabel="Side nav aria label"
+                {...defaultProps}
+              >
+                <CreateTearsheetStep onNext={jest.fn()} title={step1Title}>
+                  <p>test</p>
+                </CreateTearsheetStep>
+              </CreateTearsheet>
+            );
+          }
+        )
+    ));
 
   it('should render view all toggle and with a disabled submit button', () => {
     const viewAllToggleLabelText = 'Show all available options';
@@ -626,61 +656,60 @@ describe(CreateTearsheet.displayName, () => {
     expect(scrollToFn).toHaveBeenCalledTimes(1);
   });
 
-  it("should click one of the side navigation menu items that are displayed after clicking the view all toggle and produce a warning if the section's id is missing", () => {
-    jest.spyOn(console, 'error').mockImplementation(jest.fn());
-    const warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
-    const viewAllToggleLabelText = 'Show all available options';
-    const { click } = userEvent;
-    render(
-      <CreateTearsheet
-        onRequestSubmit={jest.fn()}
-        includeViewAllToggle
-        viewAllToggleLabelText={viewAllToggleLabelText}
-        viewAllToggleOffLabelText="Off"
-        viewAllToggleOnLabelText="On"
-        sideNavAriaLabel="Side nav aria label"
-        {...defaultProps}
-      >
-        <CreateTearsheetStep
-          hasFieldset={false}
-          title={step1Title}
-          subtitle="Step 1 subtitle"
-          description="Step 1 description"
-          onNext={jest.fn()}
-          disableSubmit
-        >
-          <CreateTearsheetSection
-            title="test title 1"
-            subtitle="test subtitle 1"
-            description="test description 1"
-          >
-            content
-          </CreateTearsheetSection>
-        </CreateTearsheetStep>
-        <CreateTearsheetStep title={step2Title}>
-          <CreateTearsheetSection
-            title="test title 2"
-            subtitle="test subtitle 2"
-            description="test description 2"
-          >
-            content
-          </CreateTearsheetSection>
-        </CreateTearsheetStep>
-      </CreateTearsheet>
-    );
-    screen.getAllByText(step1Title);
-    screen.getByText(/Step 1 subtitle/g);
-    screen.getByText(/Step 1 description/g);
-    click(screen.getByText(viewAllToggleLabelText));
-    act(() => jest.advanceTimersByTime(timerValue));
-    const sideNavElement = screen.getByText(/test title 2/g, {
-      selector: `.${carbon.prefix}--side-nav__link-text`,
-    });
-    click(sideNavElement.parentElement);
-    expect(warn).toBeCalledWith(
-      `CreateTearsheet: CreateTearsheetSection component is missing a required prop of 'id'`
-    );
-    jest.spyOn(console, 'error').mockRestore();
-    warn.mockRestore();
-  });
+  it("should click one of the side navigation menu items that are displayed after clicking the view all toggle and produce a warning if the section's id is missing", () =>
+    expectError(required('id', 'CreateTearsheetSection'), () =>
+      expectWarn(
+        `CreateTearsheet: CreateTearsheetSection component is missing a required prop of 'id'`,
+        () => {
+          const viewAllToggleLabelText = 'Show all available options';
+          const { click } = userEvent;
+          render(
+            <CreateTearsheet
+              onRequestSubmit={jest.fn()}
+              includeViewAllToggle
+              viewAllToggleLabelText={viewAllToggleLabelText}
+              viewAllToggleOffLabelText="Off"
+              viewAllToggleOnLabelText="On"
+              sideNavAriaLabel="Side nav aria label"
+              {...defaultProps}
+            >
+              <CreateTearsheetStep
+                hasFieldset={false}
+                title={step1Title}
+                subtitle="Step 1 subtitle"
+                description="Step 1 description"
+                onNext={jest.fn()}
+                disableSubmit
+              >
+                <CreateTearsheetSection
+                  title="test title 1"
+                  subtitle="test subtitle 1"
+                  description="test description 1"
+                >
+                  content
+                </CreateTearsheetSection>
+              </CreateTearsheetStep>
+              <CreateTearsheetStep title={step2Title}>
+                <CreateTearsheetSection
+                  title="test title 2"
+                  subtitle="test subtitle 2"
+                  description="test description 2"
+                >
+                  content
+                </CreateTearsheetSection>
+              </CreateTearsheetStep>
+            </CreateTearsheet>
+          );
+          screen.getAllByText(step1Title);
+          screen.getByText(/Step 1 subtitle/g);
+          screen.getByText(/Step 1 description/g);
+          click(screen.getByText(viewAllToggleLabelText));
+          act(() => jest.advanceTimersByTime(timerValue));
+          const sideNavElement = screen.getByText(/test title 2/g, {
+            selector: `.${carbon.prefix}--side-nav__link-text`,
+          });
+          click(sideNavElement.parentElement);
+        }
+      )
+    ));
 });

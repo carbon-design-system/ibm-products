@@ -66,7 +66,6 @@ describe(ButtonSetWithOverflow.displayName, () => {
     window.innerWidth = buttonWidth * 3.5;
 
     const myOnClick = jest.fn();
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
     render(
       <ButtonSetWithOverflow
@@ -87,15 +86,12 @@ describe(ButtonSetWithOverflow.displayName, () => {
 
     userEvent.click(action1);
     expect(myOnClick).toBeCalled();
-
-    warn.mockRestore(); // Remove mock
   });
 
   it('Renders as ComboButton when not enough space', () => {
     window.innerWidth = buttonWidth * 2.5;
 
     const myOnClick = jest.fn();
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
     const buttonMenuLabel = 'button menu label';
 
     render(
@@ -121,8 +117,6 @@ describe(ButtonSetWithOverflow.displayName, () => {
 
     userEvent.click(action1a);
     expect(myOnClick).toBeCalled();
-
-    warn.mockRestore(); // Remove mock
   });
 
   it('Applies right align class when requested', () => {

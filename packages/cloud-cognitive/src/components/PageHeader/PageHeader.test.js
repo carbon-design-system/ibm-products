@@ -16,7 +16,15 @@ import { Lightning16, Bee32 } from '@carbon/icons-react';
 
 import { PageHeader } from '.';
 import { ActionBarItem } from '../ActionBar';
-import { mockHTMLElement } from '../../global/js/utils/test-helper';
+import {
+  mockHTMLElement,
+  expectWarn,
+  expectMultipleWarn,
+  expectMultipleError,
+  deprecated,
+  deprecatedUsage,
+  required,
+} from '../../global/js/utils/test-helper';
 
 const { prefix } = pkg;
 
@@ -330,64 +338,43 @@ describe('PageHeader', () => {
     ).toHaveLength(1);
   });
 
-  test('copes with actionBarItems as nodes', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+  test('copes with actionBarItems as nodes', () =>
+    expectWarn(deprecatedUsage('actionBarItems', 'PageHeader'), () => {
+      render(
+        <PageHeader
+          actionBarItems={actionBarItemsNodes}
+          actionBarOverflowAriaLabel={actionBarOverflowAriaLabel}
+        />
+      );
+    }));
 
-    render(
-      <PageHeader
-        actionBarItems={actionBarItemsNodes}
-        actionBarOverflowAriaLabel={actionBarOverflowAriaLabel}
-      />
-    );
+  test('with deprecated page actions', () =>
+    expectWarn(deprecatedUsage('pageActions', 'PageHeader'), () => {
+      render(
+        <PageHeader
+          pageActions={pageActionsDepTest}
+          pageActionsOverflowLabel={pageActionsOverflowLabel}
+        />
+      );
 
-    expect(warn).toBeCalledWith(
-      'The usage of the prop `actionBarItems` of `PageHeader` has been changed and support for the old usage will soon be removed. Expects an array of objects with the following properties: iconDescription, renderIcon and onClick.'
-    );
+      screen.getByText('Primary button', {
+        selector: `.${blockClass}__page-actions .${prefix}--button-set-with-overflow__button-container:not(.${prefix}--button-set-with-overflow__button-container--hidden) .${carbon.prefix}--btn`,
+      });
+    }));
 
-    warn.mockRestore(); // Remove mock
-  });
+  test('with deprecated page actions in a fragment', () =>
+    expectWarn(deprecatedUsage('pageActions', 'PageHeader'), () => {
+      render(
+        <PageHeader
+          pageActions={pageActionsDepTest2}
+          pageActionsOverflowLabel={pageActionsOverflowLabel}
+        />
+      );
 
-  test('with deprecated page actions', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-    render(
-      <PageHeader
-        pageActions={pageActionsDepTest}
-        pageActionsOverflowLabel={pageActionsOverflowLabel}
-      />
-    );
-
-    screen.getByText('Primary button', {
-      selector: `.${blockClass}__page-actions .${prefix}--button-set-with-overflow__button-container:not(.${prefix}--button-set-with-overflow__button-container--hidden) .${carbon.prefix}--btn`,
-    });
-
-    expect(warn).toBeCalledWith(
-      'The usage of the prop `pageActions` of `PageHeader` has been changed and support for the old usage will soon be removed. Expects an array of objects with the following properties: label and onClick.'
-    );
-
-    warn.mockRestore(); // Remove mock
-  });
-
-  test('with deprecated page actions in a fragment', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-    render(
-      <PageHeader
-        pageActions={pageActionsDepTest2}
-        pageActionsOverflowLabel={pageActionsOverflowLabel}
-      />
-    );
-
-    screen.getByText('Primary button', {
-      selector: `.${blockClass}__page-actions .${prefix}--button-set-with-overflow__button-container:not(.${prefix}--button-set-with-overflow__button-container--hidden) .${carbon.prefix}--btn`,
-    });
-
-    expect(warn).toBeCalledWith(
-      'The usage of the prop `pageActions` of `PageHeader` has been changed and support for the old usage will soon be removed. Expects an array of objects with the following properties: label and onClick.'
-    );
-
-    warn.mockRestore(); // Remove mock
-  });
+      screen.getByText('Primary button', {
+        selector: `.${blockClass}__page-actions .${prefix}--button-set-with-overflow__button-container:not(.${prefix}--button-set-with-overflow__button-container--hidden) .${carbon.prefix}--btn`,
+      });
+    }));
 
   const dataTestId = 'data-testid';
 
@@ -564,21 +551,16 @@ describe('PageHeader', () => {
     ).toBeTruthy();
   });
 
-  test('renders title when using separate string and icon', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+  test('renders title when using separate string and icon', () =>
+    expectWarn(deprecated('titleIcon', 'PageHeader'), () => {
+      render(<PageHeader {...testPropsAltTitle} />);
 
-    render(<PageHeader {...testPropsAltTitle} />);
+      screen.getByText(titleString, { selector: `.${blockClass}__title span` });
 
-    expect(warn).toBeCalledWith(
-      'The prop `titleIcon` of `PageHeader` has been deprecated and will soon be removed. Use `title` prop shape instead.'
-    );
-
-    screen.getByText(titleString, { selector: `.${blockClass}__title span` });
-
-    expect(
-      document.querySelectorAll(`.${blockClass}__title-icon`)
-    ).toHaveLength(1);
-  });
+      expect(
+        document.querySelectorAll(`.${blockClass}__title-icon`)
+      ).toHaveLength(1);
+    }));
 
   test('Without hasBackgroundAlways', () => {
     const { title } = testProps;
@@ -598,28 +580,25 @@ describe('PageHeader', () => {
     screen.getByRole('region');
   });
 
-  test('ActionBar without overflow aria label', () => {
-    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
-
-    const { title } = testProps;
-    render(
-      <PageHeader
-        {...{
-          title,
-          actionBarItems,
-        }}
-        aria-label="Page header" // gives section role 'region'
-      />
-    );
-
-    expect(error).toBeCalledWith(
-      expect.stringMatching(
-        /^Warning: Failed prop type: The prop `overflowAriaLabel` is marked as required in `ActionBar`/
-      )
-    );
-
-    jest.spyOn(console, 'error').mockRestore();
-  });
+  test('ActionBar without overflow aria label', () =>
+    expectMultipleError(
+      [
+        required('actionBarOverflowAriaLabel', 'PageHeader'),
+        required('overflowAriaLabel', 'ActionBar'),
+      ],
+      () => {
+        const { title } = testProps;
+        render(
+          <PageHeader
+            {...{
+              title,
+              actionBarItems,
+            }}
+            aria-label="Page header" // gives section role 'region'
+          />
+        );
+      }
+    ));
 
   test('Title shows as loading', () => {
     render(
@@ -638,111 +617,112 @@ describe('PageHeader', () => {
     expect(skeletons).toHaveLength(3);
   });
 
-  test('Breadcrumb without overflow aria label', () => {
-    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+  test('Breadcrumb without overflow aria label', () =>
+    expectMultipleError(
+      [
+        required('breadcrumbOverflowAriaLabel', 'PageHeader'),
+        required('overflowAriaLabel', 'BreadcrumbWithOverflow'),
+      ],
+      () => {
+        render(
+          <PageHeader
+            {...{
+              breadcrumbs,
+            }}
+            aria-label="Page header" // gives section role 'region'
+          />
+        );
+      }
+    ));
 
-    render(
-      <PageHeader
-        {...{
-          breadcrumbs,
-        }}
-        aria-label="Page header" // gives section role 'region'
-      />
-    );
+  test('Works, for now, with deprecated props', () =>
+    expectMultipleWarn(
+      [
+        deprecated('actionBarOverflowLabel', 'PageHeader'),
+        deprecated('availableSpace', 'PageHeader'),
+        deprecated('background', 'PageHeader'),
+        deprecated('breadcrumbItems', 'PageHeader'),
+        deprecated('breadcrumbOverflowLabel', 'PageHeader'),
+        deprecated('collapseHeaderLabel', 'PageHeader'),
+        deprecated('collapseHeaderToggleWanted', 'PageHeader'),
+        deprecated('expandHeaderLabel', 'PageHeader'),
+        deprecated('preCollapseTitleRow', 'PageHeader'),
+        deprecated('preventBreadcrumbScroll', 'PageHeader'),
+        deprecated('children', 'BreadcrumbWithOverflow'),
+        deprecated('children', 'BreadcrumbWithOverflow'),
+        deprecated('children', 'BreadcrumbWithOverflow'),
+        deprecated('children', 'BreadcrumbWithOverflow'),
+      ],
+      () => {
+        const dataTestId = uuidv4();
+        render(
+          <PageHeader
+            data-testid={dataTestId}
+            actionBarItems={actionBarItems}
+            actionBarOverflowLabel={testProps.actionBarOverflowAriaLabel}
+            availableSpace={children}
+            background={testProps.hasBackgroundAlways}
+            breadcrumbItems={breadcrumbItems}
+            breadcrumbOverflowLabel={testProps.breadcrumbOverflowAriaLabel}
+            collapseHeaderLabel={testProps.collapseHeaderIconDescription}
+            collapseHeaderToggleWanted={true}
+            expandHeaderLabel={testProps.expandHeaderIconDescription}
+            preCollapseTitleRow={true}
+            preventBreadcrumbScroll={true}
+            title={titleString}
+          />
+        );
 
-    expect(error).toBeCalledWith(
-      expect.stringMatching(
-        /^Warning: Failed prop type: The prop `overflowAriaLabel` is marked as required in `BreadcrumbWithOverflow`/
-      )
-    );
+        const header = screen.getByTestId(dataTestId);
 
-    jest.spyOn(console, 'error').mockRestore();
-  });
+        // check for rendered items
+        screen.getByLabelText(testProps.actionBarOverflowAriaLabel);
+        screen.getByText(availableSpaceTextContent);
+        expect(header).toHaveClass(`${blockClass}--show-background`);
+        expect(
+          header.querySelectorAll(`.${blockClass}__breadcrumb`)
+        ).toHaveLength(1);
+        screen.getByLabelText(testProps.breadcrumbOverflowAriaLabel);
+        screen.getByLabelText(testProps.collapseHeaderIconDescription);
 
-  test('Works, for now, with deprecated props', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+        // const collapseButton =
+        screen.getByRole('button', {
+          name: testProps.collapseHeaderIconDescription,
+        });
+        // Determine how to test this
+        // userEvent.click(collapseButton);
+        // screen.getByLabelText(testProps.expandHeaderIconDescription);
 
-    const warnings = [
-      'The prop `actionBarOverflowLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `actionBarOverflowAriaLabel`.',
-      'The prop `availableSpace` of `PageHeader` has been deprecated and will soon be removed. Make use of children instead.',
-      'The prop `background` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `hasBackgroundAlways`',
-      'The prop `breadcrumbItems` of `PageHeader` has been deprecated and will soon be removed. Usage changed to expect breadcrumb item like shapes, see `breadcrumbs`.',
-      'The prop `breadcrumbOverflowLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `breadcrumbOverflowAriaLabel`.',
-      'The prop `collapseHeaderLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `collapseHeaderIconDescription`.',
-      'The prop `collapseHeaderToggleWanted` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `hasCollapseHeaderToggle`',
-      'The prop `expandHeaderLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `expandHeaderIconDescription`.',
-      'The prop `preCollapseTitleRow` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `collapseTitle`.',
-      'The prop `preventBreadcrumbScroll` of `PageHeader` has been deprecated and will soon be removed. Prop renamed to `disableBreadcrumbScroll`.',
-    ];
+        screen.getAllByText(titleString, {
+          selector: `.${blockClass}__breadcrumb-title--pre-collapsed .${carbon.prefix}--link`,
+        });
+      }
+    ));
 
-    const dataTestId = uuidv4();
-    render(
-      <PageHeader
-        data-testid={dataTestId}
-        actionBarItems={actionBarItems}
-        actionBarOverflowLabel={testProps.actionBarOverflowAriaLabel}
-        availableSpace={children}
-        background={testProps.hasBackgroundAlways}
-        breadcrumbItems={breadcrumbItems}
-        breadcrumbOverflowLabel={testProps.breadcrumbOverflowAriaLabel}
-        collapseHeaderLabel={testProps.collapseHeaderIconDescription}
-        collapseHeaderToggleWanted={true}
-        expandHeaderLabel={testProps.expandHeaderIconDescription}
-        preCollapseTitleRow={true}
-        preventBreadcrumbScroll={true}
-        title={titleString}
-      />
-    );
+  test('Deprecated title skeleton with breadcrumbs', () =>
+    expectMultipleWarn(
+      [
+        deprecated('breadcrumbItems', 'PageHeader'),
+        deprecated('breadcrumbOverflowLabel', 'PageHeader'),
+        deprecated('children', 'BreadcrumbWithOverflow'),
+        deprecated('children', 'BreadcrumbWithOverflow'),
+        deprecated('children', 'BreadcrumbWithOverflow'),
+      ],
+      () => {
+        render(
+          <PageHeader
+            breadcrumbItems={breadcrumbItems}
+            breadcrumbOverflowLabel={testProps.breadcrumbOverflowAriaLabel}
+            title={{ text: titleString, loading: true }}
+          />
+        );
 
-    for (let i = 0; i < warnings.length; i++) {
-      expect(warn).toBeCalledWith(warnings[i]);
-    }
-
-    const header = screen.getByTestId(dataTestId);
-
-    // check for rendered items
-    screen.getByLabelText(testProps.actionBarOverflowAriaLabel);
-    screen.getByText(availableSpaceTextContent);
-    expect(header).toHaveClass(`${blockClass}--show-background`);
-    expect(header.querySelectorAll(`.${blockClass}__breadcrumb`)).toHaveLength(
-      1
-    );
-    screen.getByLabelText(testProps.breadcrumbOverflowAriaLabel);
-    screen.getByLabelText(testProps.collapseHeaderIconDescription);
-
-    // const collapseButton =
-    screen.getByRole('button', {
-      name: testProps.collapseHeaderIconDescription,
-    });
-    // Determine how to test this
-    // userEvent.click(collapseButton);
-    // screen.getByLabelText(testProps.expandHeaderIconDescription);
-
-    screen.getAllByText(titleString, {
-      selector: `.${blockClass}__breadcrumb-title--pre-collapsed .${carbon.prefix}--link`,
-    });
-
-    warn.mockRestore(); // Remove mock
-  });
-
-  test('Deprecated title skeleton with breadcrumbs', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-    render(
-      <PageHeader
-        breadcrumbItems={breadcrumbItems}
-        breadcrumbOverflowLabel={testProps.breadcrumbOverflowAriaLabel}
-        title={{ text: titleString, loading: true }}
-      />
-    );
-
-    const skeletons = document.querySelectorAll(
-      `.${carbon.prefix}--skeleton__text`
-    );
-    expect(skeletons).toHaveLength(3);
-
-    warn.mockRestore(); // Remove mock
-  });
+        const skeletons = document.querySelectorAll(
+          `.${carbon.prefix}--skeleton__text`
+        );
+        expect(skeletons).toHaveLength(3);
+      }
+    ));
 
   test('PageHeader grid settings narrow and fullWidth', () => {
     const dataTestId = uuidv4();

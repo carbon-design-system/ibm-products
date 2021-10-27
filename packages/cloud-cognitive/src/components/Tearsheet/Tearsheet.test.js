@@ -8,6 +8,13 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import {
+  expectWarn,
+  expectMultipleWarn,
+  expectMultipleError,
+  deprecated,
+  required,
+} from '../../global/js/utils/test-helper';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { carbon, pkg } from '../../settings';
@@ -80,6 +87,8 @@ const title = `Title of the ${uuidv4()} tearsheet`;
 
 // These are tests than apply to both Tearsheet and TearsheetNarrow
 // and also (with extra props and omitting button tests) to CreateTearsheetNarrow
+let tooManyButtonsTestedAlready = false;
+let closeIconDescriptionTestedAlready = false;
 const commonTests = (Ts, name, props, testActions) => {
   it(`renders a component ${name}`, () => {
     render(<Ts {...{ ...props, closeIconDescription }} />);
@@ -120,16 +129,25 @@ const commonTests = (Ts, name, props, testActions) => {
       expect(onClick).toHaveBeenCalledTimes(1);
     });
 
-    it('rejects too many buttons using the custom validator', () => {
-      const error = jest.spyOn(console, 'error').mockImplementation(() => {});
-      render(<Ts {...props} actions={badActions} />);
-      expect(error).toBeCalledWith(
-        expect.stringContaining(
-          `\`actions\` supplied to \`${name}\`: you cannot`
-        )
-      );
-      error.mockRestore();
-    });
+    it('rejects too many buttons using the custom validator', () =>
+      expectMultipleError(
+        // prop-types only reports the first occurrence of each distinct error,
+        // which creates an unfortunate dependency between test runs
+        tooManyButtonsTestedAlready
+          ? [
+              `Invalid prop \`actions\` supplied to \`${name}\`: you cannot have more than four actions`,
+            ]
+          : [
+              `Invalid prop \`actions\` supplied to \`${name}\`: you cannot have more than four actions`,
+              'Invalid prop `actions[4].kind` of value `danger` supplied to `TearsheetShell`',
+              'Invalid prop `actions` supplied to `ActionSet`: you cannot have more than four actions',
+              'Invalid prop `kind` of value `danger` supplied to `ActionSetButton`',
+            ],
+        () => {
+          tooManyButtonsTestedAlready = true;
+          render(<Ts {...props} actions={badActions} />);
+        }
+      ));
   }
 
   it('renders children', () => {
@@ -152,16 +170,21 @@ const commonTests = (Ts, name, props, testActions) => {
   });
 
   if (testActions) {
-    it('requires closeIconDescription when there are no actions', () => {
-      const error = jest.spyOn(console, 'error').mockImplementation(() => {});
-      render(<Ts {...props} />);
-      expect(error).toBeCalledWith(
-        expect.stringContaining(
-          `The prop \`closeIconDescription\` is marked as required`
-        )
-      );
-      error.mockRestore();
-    });
+    it('requires closeIconDescription when there are no actions', () =>
+      expectMultipleError(
+        // prop-types only reports the first occurrence of each distinct error,
+        // which creates an unfortunate dependency between test runs
+        closeIconDescriptionTestedAlready
+          ? [required('closeIconDescription', name)]
+          : [
+              required('closeIconDescription', name),
+              required('closeIconDescription', 'TearsheetShell'),
+            ],
+        () => {
+          render(<Ts {...props} />);
+          closeIconDescriptionTestedAlready = true;
+        }
+      ));
   }
 
   it('renders description', () => {
@@ -223,16 +246,16 @@ const commonTests = (Ts, name, props, testActions) => {
     );
   });
 
-  it('reports deprecation of preventCloseOnClickOutside', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-    render(<Ts {...props} preventCloseOnClickOutside={true} />);
-    expect(warn).toBeCalledWith(
-      expect.stringMatching(
-        /The prop `preventCloseOnClickOutside` of `\w*` has been deprecated/
-      )
-    );
-    warn.mockRestore();
-  });
+  it('reports deprecation of preventCloseOnClickOutside', () =>
+    expectMultipleWarn(
+      [
+        deprecated('preventCloseOnClickOutside', 'Tearsheet(.*)'),
+        deprecated('preventCloseOnClickOutside', 'TearsheetShell'),
+      ],
+      () => {
+        render(<Ts {...props} preventCloseOnClickOutside={true} />);
+      }
+    ));
 
   it('renders title', () => {
     render(<Ts {...{ ...props, title }} />);
@@ -263,20 +286,19 @@ const commonTests = (Ts, name, props, testActions) => {
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(name);
   });
 
-  it("doesn't render when stacked more than three deep", () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-    render(<Ts {...props} open />);
-    render(<Ts {...props} open />);
-    render(<Ts {...props} open />);
-    render(<Ts {...props} open />);
-    expect(
-      document.querySelectorAll(`.${carbon.prefix}--modal.is-visible`)
-    ).toHaveLength(3);
-    expect(warn).toBeCalledWith(
-      'Tearsheet not rendered: maximum stacking depth exceeded.'
-    );
-    warn.mockRestore();
-  });
+  it("doesn't render when stacked more than three deep", () =>
+    expectWarn(
+      'Tearsheet not rendered: maximum stacking depth exceeded.',
+      () => {
+        render(<Ts {...props} open />);
+        render(<Ts {...props} open />);
+        render(<Ts {...props} open />);
+        render(<Ts {...props} open />);
+        expect(
+          document.querySelectorAll(`.${carbon.prefix}--modal.is-visible`)
+        ).toHaveLength(3);
+      }
+    ));
 };
 
 describe(componentName, () => {

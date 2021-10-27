@@ -29,8 +29,8 @@
   "dependencies": {
     "@babel/core": "^7.15.8",
     "@testing-library/jest-dom": "^5.14.1",
-    "accessibility-checker": "^3.1.10",
-    "axe-core": "^4.3.3",
+    "accessibility-checker": "^3.1.11",
+    "axe-core": "^4.3.4",
     "babel-jest": "^27.3.1",
     "babel-preset-ibm-cloud-cognitive": "^0.11.0",
     "chalk": "^4.1.2",

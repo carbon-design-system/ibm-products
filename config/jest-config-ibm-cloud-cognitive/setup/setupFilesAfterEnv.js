@@ -12,11 +12,10 @@ import '@testing-library/jest-dom';
 import chalk from 'chalk';
 import util from 'util';
 
-import toHaveNoAxeViolations from './matchers/toHaveNoAxeViolations';
-import toBeAccessible from './matchers/toBeAccessible';
+import * as matchers from './matchers';
 
 // `expect` can be extended using custom matchers as per https://jest-bot.github.io/jest/docs/expect.html#expectextendmatchers
-expect.extend({ toBeAccessible, toHaveNoAxeViolations });
+expect.extend(matchers);
 
 // Our test suite will throw an error if one of the below console methods are
 // called when we are not expecting them. This is often helpful for React

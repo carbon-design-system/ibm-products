@@ -14,9 +14,7 @@ import { pkg } from '../../settings';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
-
-const blockClass = `${prefix}--create-modal`;
+const blockClass = `${pkg.prefix}--create-modal`;
 
 import { CreateModal } from '.';
 import { expectError } from '../../global/js/utils/test-helper';
@@ -100,9 +98,8 @@ describe(componentName, () => {
   it('adds the Devtools attribute to the containing node', () => {
     renderComponent({ 'data-testid': dataTestId });
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(componentName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      componentName
     );
   });
 

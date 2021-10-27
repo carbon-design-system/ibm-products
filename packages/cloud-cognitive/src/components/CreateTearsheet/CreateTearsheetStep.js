@@ -103,6 +103,11 @@ CreateTearsheetStep.propTypes = {
   hasFieldset: PropTypes.bool,
 
   /**
+   * This prop can be used on the first step to mark it as an intro step, which will not render the progress indicator steps
+   */
+  introStep: PropTypes.bool,
+
+  /**
    * @ignore
    * The is an internal prop set in CreateTearsheet so the step knows when to render it's title
    */

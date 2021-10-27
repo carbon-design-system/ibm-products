@@ -24,7 +24,7 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { SidePanel } from '.';
 import { Add16 } from '@carbon/icons-react';
 
-const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
+const { prefix } = pkg;
 
 const blockClass = `${prefix}--side-panel`;
 const actionSetBlockClass = `${prefix}--action-set`;
@@ -410,9 +410,8 @@ describe('SidePanel', () => {
   it('adds the Devtools attribute to the containing node', () => {
     renderSidePanel({ 'data-testid': dataTestId });
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(SidePanel.displayName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      SidePanel.displayName
     );
   });
 

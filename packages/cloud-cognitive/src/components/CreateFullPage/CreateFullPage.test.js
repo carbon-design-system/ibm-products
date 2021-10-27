@@ -21,10 +21,8 @@ import { CreateFullPageStep } from './CreateFullPageStep';
 
 import { TextInput } from 'carbon-components-react';
 
-const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
-
 const componentName = CreateFullPage.displayName;
-const blockClass = `${prefix}--create-full-page`;
+const blockClass = `${pkg.prefix}--create-full-page`;
 const nextButtonText = 'Next';
 const backButtonText = 'Back';
 const cancelButtonText = 'Cancel';
@@ -180,9 +178,8 @@ describe(componentName, () => {
   it('adds the Devtools attribute to the containing node', () => {
     renderCreateFullPage({ 'data-testid': dataTestId });
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(componentName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      componentName
     );
   });
 

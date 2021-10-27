@@ -19,9 +19,9 @@ import {
 } from '../../global/js/utils/test-helper';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
+const { prefix } = pkg;
 
-const blockClass = `${prefix}--tag-set`;
+const blockClass = `${pkg.prefix}--tag-set`;
 const blockClassOverflow = `${prefix}--tag-set-overflow`;
 
 const tagLabel = (index) => `Tag ${index + 1}`;
@@ -222,9 +222,8 @@ describe(TagSet.displayName, () => {
   it('adds the Devtools attribute to the containing node', () => {
     render(<TagSet data-testid={dataTestId} />);
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(TagSet.displayName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      TagSet.displayName
     );
   });
 

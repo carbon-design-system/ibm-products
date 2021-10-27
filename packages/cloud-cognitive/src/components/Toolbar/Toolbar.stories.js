@@ -25,6 +25,7 @@ import {
   RulerAlt16,
   SettingsAdjust16,
   Table16,
+  TextAlignCenter16,
   TextCreation16,
   ZoomIn16,
   ZoomOut16,
@@ -46,6 +47,7 @@ import mdx from './Toolbar.mdx';
 export default {
   title: getStoryTitle(Toolbar.displayName),
   component: Toolbar,
+
   subcomponents: { ToolbarGroup, ToolbarButton },
 
   parameters: {
@@ -97,6 +99,14 @@ function _Toolbar(args) {
           items={dropdownItems}
           label={selectedDropdownItem}
           onChange={({ selectedItem }) => setSelectedDropdownItem(selectedItem)}
+        />
+      </ToolbarGroup>
+
+      <ToolbarGroup>
+        <ToolbarButton
+          iconDescription="Text align center"
+          renderIcon={TextAlignCenter16}
+          caret
         />
       </ToolbarGroup>
 

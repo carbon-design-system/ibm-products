@@ -530,6 +530,8 @@ export let PageHeader = React.forwardRef(
                       breadcrumbs,
                     [`${blockClass}__breadcrumb-row--has-action-bar`]:
                       hasActionBar,
+                    [`${blockClass}__has-page-actions-without-action-bar`]:
+                      !hasActionBar && pageActions,
                   })}
                 >
                   <div className={`${blockClass}__breadcrumb-row--container`}>
@@ -727,13 +729,14 @@ export let PageHeader = React.forwardRef(
                       })}
                     >
                       <TagSet
-                        overflowAlign="end"
+                        overflowAlign="start"
                         {...{
                           allTagsModalSearchLabel,
                           allTagsModalSearchPlaceholderText,
                           allTagsModalTitle,
                           showAllTagsLabel,
                           tags,
+                          overflowClassName: `${blockClass}__navigation-tags-overflow`,
                         }}
                       />
                     </Column>
@@ -770,6 +773,7 @@ export let PageHeader = React.forwardRef(
                           allTagsModalTitle,
                           showAllTagsLabel,
                           tags,
+                          overflowClassName: `${blockClass}__navigation-tags-overflow`,
                         }}
                       />
                     </Column>

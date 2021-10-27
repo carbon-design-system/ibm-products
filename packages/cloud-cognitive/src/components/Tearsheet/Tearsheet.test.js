@@ -23,9 +23,7 @@ import { Button, ButtonSet, Tab, Tabs } from 'carbon-components-react';
 import { Tearsheet, TearsheetNarrow } from '.';
 import { CreateTearsheetNarrow } from '../CreateTearsheetNarrow';
 
-const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
-
-const blockClass = `${prefix}--tearsheet`;
+const blockClass = `${pkg.prefix}--tearsheet`;
 const componentName = Tearsheet.displayName;
 const componentNameNarrow = TearsheetNarrow.displayName;
 const componentNameCreateNarrow = CreateTearsheetNarrow.displayName;
@@ -285,10 +283,7 @@ const commonTests = (Ts, name, props, testActions) => {
   it('adds the Devtools attribute to the containing node', () => {
     render(<Ts {...props} data-testid={dataTestId} />);
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(name)
-    );
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(name);
   });
 
   it("doesn't render when stacked more than three deep", () =>

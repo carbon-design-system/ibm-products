@@ -46,8 +46,8 @@
     "sync": "carbon-cli sync",
     "update-gallery-config": "node scripts/example-gallery-builder/index.js; yarn format:prettier:files examples/cloud-cognitive/example-gallery/src/gallery-config/index.js --write",
     "upgrade:dependencies:carbon": "npm-check-updates -u --packageFile '{package.json,{config/**,packages/**}/package.json}' --filter '/carbon/'",
-    "//upgrade:dependencies:top": "# don't upgrade carbon (done globally), react/react-dom (not tested), husky (major change in action), eslint (until eslint-config-carbon's babel-eslint supports eslint v8)",
-    "upgrade:dependencies:top": "npm-check-updates -u --reject '/(carbon|^react$|^react-dom$|^husky$|^eslint$)/'",
+    "//upgrade:dependencies:top": "# don't upgrade carbon (done globally), react/react-dom (not tested), husky (major change in action), eslint (until eslint-config-carbon's babel-eslint supports eslint v8), stylelint (until stylelint-config-carbon supports stylelint v14)",
+    "upgrade:dependencies:top": "npm-check-updates -u --reject '/(carbon|^react$|^react-dom$|^husky$|^eslint$|^stylelint$)/'",
     "upgrade:dependencies:packages": "yarn run-all --no-sort --concurrency 1 upgrade-dependencies",
     "upgrade:automatic": "run-s upgrade:dependencies:*",
     "upgrade:manual": "sh ./scripts/monorepo-npm-upgrade.sh"
@@ -74,7 +74,7 @@
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "rimraf": "^3.0.2",
-    "stylelint": "^14.0.1",
+    "stylelint": "^13.13.1",
     "stylelint-config-carbon": "^1.7.0",
     "stylelint-plugin-carbon-tokens": "^0.11.2",
     "webpack": "^5.60.0"

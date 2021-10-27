@@ -17,7 +17,6 @@ import {
   Column,
   Row,
   Button,
-  SkeletonText,
   Tag,
 } from 'carbon-components-react';
 

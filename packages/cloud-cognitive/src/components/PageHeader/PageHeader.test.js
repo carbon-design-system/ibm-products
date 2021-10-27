@@ -203,11 +203,6 @@ const testProps = {
   expandHeaderIconDescription: 'Expand header',
 };
 
-const testPropsAltTitle = {
-  title: titleString,
-  titleIcon: Bee32,
-};
-
 const testPropsUserDefined = {
   breadcrumbs, // breadcrumbs needed for title breadcrumb test
   breadcrumbOverflowAriaLabel,
@@ -579,6 +574,12 @@ describe('PageHeader', () => {
     expect(
       'Disabling the breadcrumb scroll stops the breadcrumb scrolling off the screen.'
     ).toBeTruthy();
+  });
+
+  test('renders title as string', () => {
+    render(<PageHeader title={testProps.title} />);
+
+    screen.getByText(testProps.title);
   });
 
   test('renders title when using user defined title', () => {

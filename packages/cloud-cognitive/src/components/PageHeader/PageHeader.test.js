@@ -338,6 +338,16 @@ describe('PageHeader', () => {
     ).toHaveLength(1);
   });
 
+  test('copes with actionBarItems as nodes', () =>
+    expectWarn(deprecatedUsage('actionBarItems', 'PageHeader'), () => {
+      render(
+        <PageHeader
+          actionBarItems={actionBarItemsNodes}
+          actionBarOverflowAriaLabel={actionBarOverflowAriaLabel}
+        />
+      );
+    }));
+
   test('with deprecated page actions', () =>
     expectWarn(deprecatedUsage('pageActions', 'PageHeader'), () => {
       render(

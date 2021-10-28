@@ -10,6 +10,7 @@ import React from 'react';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg } from '../../settings';
+import { expectError, required } from '../../global/js/utils/test-helper';
 import { EmptyState } from '.';
 import { NoDataEmptyState } from './NoDataEmptyState';
 import { ErrorEmptyState } from './ErrorEmptyState';
@@ -254,9 +255,10 @@ describe(name, () => {
     );
   });
 
-  it('should throw a custom prop type validation error when an illustration is used without an illustrationDescription prop', () => {
-    jest.spyOn(console, 'error').mockImplementation(jest.fn());
-    render(<EmptyState {...defaultProps} illustration={CustomIllustration} />);
-    jest.spyOn(console, 'error').mockRestore();
-  });
+  it('should throw a custom prop type validation error when an illustration is used without an illustrationDescription prop', () =>
+    expectError(required('illustrationDescription', 'EmptyState'), () => {
+      render(
+        <EmptyState {...defaultProps} illustration={CustomIllustration} />
+      );
+    }));
 });

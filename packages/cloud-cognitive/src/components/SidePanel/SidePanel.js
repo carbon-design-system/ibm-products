@@ -713,16 +713,6 @@ export let SidePanel = React.forwardRef(
 // Return a placeholder if not released and not enabled by feature flag
 SidePanel = pkg.checkComponentEnabled(SidePanel, componentName);
 
-SidePanel.validatePageContentSelector =
-  () =>
-  ({ slideIn, selectorPageContent }) => {
-    if (slideIn && !selectorPageContent) {
-      throw new Error(
-        `${componentName}: selectorPageContent prop missing, this is required when using a slideIn panel. If missing, the component will display as a slide over panel.`
-      );
-    }
-  };
-
 export const deprecatedProps = {
   /**
    * **Deprecated**
@@ -731,7 +721,7 @@ export const deprecatedProps = {
    * This prop is required when using the `slideIn` variant of the side panel.
    */
   pageContentSelector: deprecateProp(
-    allPropTypes([SidePanel.validatePageContentSelector(), PropTypes.string]),
+    PropTypes.string,
     'This prop has been renamed to `selectorPageContent`.'
   ),
 };
@@ -866,7 +856,7 @@ SidePanel.propTypes = {
    * This prop is required when using the `slideIn` variant of the side panel.
    */
   selectorPageContent: PropTypes.string.isRequired.if(
-    ({ slideIn }) => slideIn === true
+    ({ slideIn, pageContentSelector }) => slideIn && !pageContentSelector
   ),
 
   /**
@@ -893,7 +883,8 @@ SidePanel.propTypes = {
   /**
    * Sets the title text
    */
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired.if(({ labelText }) => labelText),
+
   ...deprecatedProps,
 };
 

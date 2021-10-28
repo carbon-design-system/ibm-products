@@ -332,34 +332,6 @@ describe('PageHeader', () => {
       );
     }));
 
-  test('with deprecated page actions', () =>
-    expectWarn(deprecatedUsage('pageActions', 'PageHeader'), () => {
-      render(
-        <PageHeader
-          pageActions={pageActionsDepTest}
-          pageActionsOverflowLabel={pageActionsOverflowLabel}
-        />
-      );
-
-      screen.getByText('Primary button', {
-        selector: `.${blockClass}__page-actions .${prefix}--button-set-with-overflow__button-container:not(.${prefix}--button-set-with-overflow__button-container--hidden) .${carbon.prefix}--btn`,
-      });
-    }));
-
-  test('with deprecated page actions in a fragment', () =>
-    expectWarn(deprecatedUsage('pageActions', 'PageHeader'), () => {
-      render(
-        <PageHeader
-          pageActions={pageActionsDepTest2}
-          pageActionsOverflowLabel={pageActionsOverflowLabel}
-        />
-      );
-
-      screen.getByText('Primary button', {
-        selector: `.${blockClass}__page-actions .${prefix}--button-set-with-overflow__button-container:not(.${prefix}--button-set-with-overflow__button-container--hidden) .${carbon.prefix}--btn`,
-      });
-    }));
-
   const dataTestId = 'data-testid';
 
   it('adds additional properties to the containing node', () => {

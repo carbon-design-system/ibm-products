@@ -7,6 +7,7 @@
 
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 import {
   ComposedModal,
@@ -23,6 +24,7 @@ const blockClass = `${pkg.prefix}--tag-set-modal`;
 
 export const TagSetModal = ({
   allTags,
+  className,
   title,
   onClose,
   open,
@@ -64,7 +66,7 @@ export const TagSetModal = ({
   return (
     <ComposedModal
       containerClassName={`${blockClass}__container`}
-      className={`${blockClass}`}
+      className={cx(className, `${blockClass}`)}
       size="sm"
       {...{ open, onClose }}
     >
@@ -97,6 +99,7 @@ TagSetModal.propTypes = {
       label: PropTypes.string.isRequired,
     })
   ),
+  className: PropTypes.string,
   onClose: PropTypes.func,
   open: PropTypes.bool,
   searchLabel: PropTypes.string,

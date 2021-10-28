@@ -9,6 +9,7 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { expectWarn, expectWarnAsync } from '../../global/js/utils/test-helper';
 import { pkg, carbon } from '../../settings';
 import { CreateTearsheet } from './CreateTearsheet';
 import { CreateTearsheetStep } from './CreateTearsheetStep';
@@ -33,7 +34,9 @@ const onNextStepRejectionFn = jest.fn(() =>
 );
 const finalStepOnNext = jest.fn(() => Promise.resolve());
 const finalStepOnNextNonPromise = jest.fn();
-const finalStepOnNextRejectFn = jest.fn(() => Promise.reject());
+const finalStepOnNextRejectFn = jest.fn(() =>
+  Promise.reject(rejectionErrorMessage)
+);
 const submitButtonText = 'Submit';
 const cancelButtonText = 'Cancel';
 const backButtonText = 'Back';
@@ -178,29 +181,28 @@ describe(CreateTearsheet.displayName, () => {
     );
   });
 
-  it('renders the first step if an invalid initialStep value is provided', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
-    const { container } = renderCreateTearsheet({
-      ...defaultProps,
-      // Starting on 0 step is invalid since the steps start with a value of 1
-      // This will cause a console warning
-      initialStep: 0,
-    });
-    const createTearsheetSteps = container.querySelector(
-      `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
-    ).children;
-    expect(
-      createTearsheetSteps[0].classList.contains(
-        `.${createTearsheetBlockClass}__step--visible-section`
-      )
-    );
-    expect(warn).toBeCalledWith(
-      `${CreateTearsheet.displayName}: An invalid \`initialStep\` prop was supplied. The \`initialStep\` prop should be a number that is greater than 0 or less than or equal to the number of steps your ${CreateTearsheet.displayName} has.`
-    );
-    // The onMount prop will get called here because the first step is rendered
-    expect(onMountFn).toHaveBeenCalledTimes(1);
-    warn.mockRestore();
-  });
+  it('renders the first step if an invalid initialStep value is provided', () =>
+    expectWarn(
+      `${CreateTearsheet.displayName}: An invalid \`initialStep\` prop was supplied. The \`initialStep\` prop should be a number that is greater than 0 or less than or equal to the number of steps your ${CreateTearsheet.displayName} has.`,
+      () => {
+        const { container } = renderCreateTearsheet({
+          ...defaultProps,
+          // Starting on 0 step is invalid since the steps start with a value of 1
+          // This will cause a console warning
+          initialStep: 0,
+        });
+        const createTearsheetSteps = container.querySelector(
+          `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
+        ).children;
+        expect(
+          createTearsheetSteps[0].classList.contains(
+            `.${createTearsheetBlockClass}__step--visible-section`
+          )
+        );
+        // The onMount prop will get called here because the first step is rendered
+        expect(onMountFn).toHaveBeenCalledTimes(1);
+      }
+    ));
 
   it('renders the second step if clicking on the next step button with onNext optional function prop and then clicks cancel button', async () => {
     const { click } = userEvent;
@@ -224,22 +226,24 @@ describe(CreateTearsheet.displayName, () => {
     expect(onCloseFn).toHaveBeenCalled();
   });
 
-  it('renders first step with onNext function prop that rejects', async () => {
-    jest.spyOn(console, 'warn').mockImplementation(jest.fn());
-    const { click } = userEvent;
-    renderCreateTearsheet({
-      ...defaultProps,
-      rejectOnSubmit: false,
-      rejectOnNext: true,
-    });
-    const nextButtonElement = screen.getByText(nextButtonText);
-    click(nextButtonElement);
+  it('renders first step with onNext function prop that rejects', async () =>
+    expectWarnAsync(
+      `CreateTearsheet onNext error: ${rejectionErrorMessage}`,
+      async () => {
+        const { click } = userEvent;
+        renderCreateTearsheet({
+          ...defaultProps,
+          rejectOnSubmit: false,
+          rejectOnNext: true,
+        });
+        const nextButtonElement = screen.getByText(nextButtonText);
+        click(nextButtonElement);
 
-    await waitFor(() => {
-      expect(onNextStepRejectionFn).toHaveBeenCalled();
-    });
-    jest.spyOn(console, 'warn').mockRestore();
-  });
+        await waitFor(() => {
+          expect(onNextStepRejectionFn).toHaveBeenCalled();
+        });
+      }
+    ));
 
   it('renders the next CreateTearsheet step without onNext handler', async () => {
     const { click } = userEvent;
@@ -326,58 +330,62 @@ describe(CreateTearsheet.displayName, () => {
     });
   });
 
-  it('should call the onNext function from the final step and reject the promise', async () => {
-    jest.spyOn(console, 'warn').mockImplementation(jest.fn());
-    const { click } = userEvent;
-    renderCreateTearsheet({
-      ...defaultProps,
-      rejectOnSubmit: false,
-      rejectOnNext: false,
-      submitFn: onRequestSubmitFn,
-      onNext: onNextStepFn,
-      finalOnNextFn: null,
-      rejectOnSubmitNext: true,
-    });
-    const nextButtonElement = screen.getByText(nextButtonText);
-    click(nextButtonElement);
-    await waitFor(() => {
-      expect(onNextStepFn).toHaveBeenCalled();
-    });
-    click(nextButtonElement);
-    await waitFor(() => {
-      expect(onNextStepFn).toHaveBeenCalled();
-    });
-    const submitButtonElement = screen.getByText(submitButtonText);
-    click(submitButtonElement);
-    await waitFor(() => {
-      expect(finalStepOnNextRejectFn).toHaveBeenCalled();
-    });
-    jest.spyOn(console, 'warn').mockRestore();
-  });
+  it('should call the onNext function from the final step and reject the promise', async () =>
+    expectWarnAsync(
+      `CreateTearsheet onNext error: ${rejectionErrorMessage}`,
+      async () => {
+        const { click } = userEvent;
+        renderCreateTearsheet({
+          ...defaultProps,
+          rejectOnSubmit: false,
+          rejectOnNext: false,
+          submitFn: onRequestSubmitFn,
+          onNext: onNextStepFn,
+          finalOnNextFn: null,
+          rejectOnSubmitNext: true,
+        });
+        const nextButtonElement = screen.getByText(nextButtonText);
+        click(nextButtonElement);
+        await waitFor(() => {
+          expect(onNextStepFn).toHaveBeenCalled();
+        });
+        click(nextButtonElement);
+        await waitFor(() => {
+          expect(onNextStepFn).toHaveBeenCalled();
+        });
+        const submitButtonElement = screen.getByText(submitButtonText);
+        click(submitButtonElement);
+        await waitFor(() => {
+          expect(finalStepOnNextRejectFn).toHaveBeenCalled();
+        });
+      }
+    ));
 
-  it('should call the onRequestSubmit prop and reject the promise', async () => {
-    jest.spyOn(console, 'warn').mockImplementation(jest.fn());
-    const { click } = userEvent;
-    renderCreateTearsheet({
-      ...defaultProps,
-      rejectOnSubmit: true,
-    });
-    const nextButtonElement = screen.getByText(nextButtonText);
-    click(nextButtonElement);
-    await waitFor(() => {
-      expect(onNextStepFn).toHaveBeenCalled();
-    });
-    click(nextButtonElement);
-    await waitFor(() => {
-      expect(onNextStepFn).toHaveBeenCalled();
-    });
-    const submitButtonElement = screen.getByText(submitButtonText);
-    click(submitButtonElement);
-    await waitFor(() => {
-      expect(onRequestSubmitRejectFn).toHaveBeenCalled();
-    });
-    jest.spyOn(console, 'warn').mockRestore();
-  });
+  it('should call the onRequestSubmit prop and reject the promise', async () =>
+    expectWarnAsync(
+      `CreateTearsheet submit error: ${rejectionErrorMessage}`,
+      async () => {
+        const { click } = userEvent;
+        renderCreateTearsheet({
+          ...defaultProps,
+          rejectOnSubmit: true,
+        });
+        const nextButtonElement = screen.getByText(nextButtonText);
+        click(nextButtonElement);
+        await waitFor(() => {
+          expect(onNextStepFn).toHaveBeenCalled();
+        });
+        click(nextButtonElement);
+        await waitFor(() => {
+          expect(onNextStepFn).toHaveBeenCalled();
+        });
+        const submitButtonElement = screen.getByText(submitButtonText);
+        click(submitButtonElement);
+        await waitFor(() => {
+          expect(onRequestSubmitRejectFn).toHaveBeenCalled();
+        });
+      }
+    ));
 
   it('should not render any CreateTearsheet steps when there are no TearsheetStep components included', () => {
     const { container } = renderEmptyCreateTearsheet(defaultProps);
@@ -416,4 +424,9 @@ describe(CreateTearsheet.displayName, () => {
     renderSingleStepCreateTearsheet(defaultProps);
     jest.spyOn(console, 'warn').mockRestore();
   });
+
+  it('should create a console warning when using CreateTearsheet with only one step', () =>
+    expectWarn('CreateTearsheets with one step are not permitted', () => {
+      renderSingleStepCreateTearsheet(defaultProps);
+    }));
 });

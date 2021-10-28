@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import { carbon } from '../../settings';
 
@@ -14,6 +14,10 @@ import {
   Grid,
   Header,
   HeaderName,
+  HeaderMenuButton,
+  SideNav,
+  SideNavItems,
+  SideNavLink,
   Row,
   Tab,
   Tabs,
@@ -64,7 +68,7 @@ const actionBarItems = {
   'A single item': [1].map(makeActionBarItem),
   'Four items': [1, 2, 3, 4].map(makeActionBarItem),
   'Many items': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(makeActionBarItem),
-  'Custom items': [
+  'In context items': [
     { key: '1', renderIcon: Printer16, iconDescription: `Print` },
     { key: '2', renderIcon: Settings16, iconDescription: `Settings` },
     { key: '3', renderIcon: VolumeMute16, iconDescription: `Mute` },
@@ -137,7 +141,7 @@ const children = {
     </div>
   ),
   // cspell: enable
-  'Custom content': (
+  'In context content': (
     <>
       <p>Severity 1: 0</p>
       <p>Severity 1: 814</p>
@@ -168,7 +172,7 @@ const navigation = {
       <Tab label="Tab 8" />
     </Tabs>
   ),
-  'Custom tabs': (
+  'In context tabs': (
     <Tabs>
       <Tab label="Summary" />
       <Tab label="Region 1" />
@@ -222,7 +226,7 @@ const pageActions = {
       onClick: () => {},
     },
   ],
-  'Custom page actions': [
+  'In context page actions': [
     {
       key: 'acknowledge',
       kind: 'secondary',
@@ -236,6 +240,19 @@ const pageActions = {
       onClick: () => {},
     },
   ],
+  'User defined page actions': {
+    content: (
+      <button
+        type="button"
+        className="bx--button"
+        style={{ width: '100%', height: '100%' }}
+      >
+        Custom component
+      </button>
+    ),
+    minWidth: 160,
+    maxWidth: 400,
+  },
 };
 
 const tags = {
@@ -274,7 +291,7 @@ const tags = {
     { type: 'high-contrast', label: 'High contrast 2' },
     { type: 'magenta', label: 'Magenta 2' },
   ],
-  'Custom tags': [
+  'In context tags': [
     { type: 'cyan', label: 'Not urgent' },
     { type: 'red', label: 'Security' },
   ],
@@ -290,7 +307,7 @@ const title = {
     icon: Bee24,
   },
   'Loading title': { text: 'Patience is a virtue', loading: true },
-  'Custom title': {
+  'In context title': {
     text: 'Authentication activity',
     loading: false,
     icon: Security24,
@@ -631,6 +648,7 @@ export const fullyLoadedAndSome = prepareStory(Template, {
 // Template for demo.
 // eslint-disable-next-line react/prop-types
 const TemplateDemo = ({ children, storyOptionWholePageScroll, ...props }) => {
+  const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
   return (
     <>
       <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
@@ -642,9 +660,28 @@ const TemplateDemo = ({ children, storyOptionWholePageScroll, ...props }) => {
         key={storyOptionWholePageScroll ? 'keyYes' : 'keyNo'}
       >
         <Header aria-label="IBM Platform Name">
+          <HeaderMenuButton
+            aria-label="Open menu"
+            isCollapsible
+            onClick={() => {
+              setIsSideNavExpanded((prev) => !prev);
+            }}
+            isActive={isSideNavExpanded}
+          />
           <HeaderName href="#" prefix="IBM">
             Cloud Cognitive application
           </HeaderName>
+          <SideNav
+            aria-label="Side navigation"
+            expanded={isSideNavExpanded}
+            isFixedNav
+          >
+            <SideNavItems>
+              <SideNavLink href="javascript:void(0)">
+                Sample side bar
+              </SideNavLink>
+            </SideNavItems>
+          </SideNav>
         </Header>
         <div
           className={`${storyClass}__content-container`}

@@ -8,6 +8,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { expectMultipleError } from '../../global/js/utils/test-helper';
 
 import { pkg } from '../../settings';
 
@@ -81,18 +82,20 @@ describe(componentName, () => {
     expect(buttons[1].textContent).toEqual(label1);
   });
 
-  it('rejects too many buttons using the custom validator', () => {
-    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
-    render(
-      <ActionSet
-        actions={[action2, action2, action3, action3, { kind: 'danger' }]}
-      />
-    );
-    expect(error).toBeCalledWith(
-      expect.stringContaining('`actions` supplied to `ActionSet`: you cannot')
-    );
-    error.mockRestore();
-  });
+  it('rejects too many buttons using the custom validator', () =>
+    expectMultipleError(
+      [
+        'Invalid prop `actions` supplied to `ActionSet`: you cannot have more than three actions',
+        'Invalid prop `kind` of value `danger` supplied to `ActionSetButton`',
+      ],
+      () => {
+        render(
+          <ActionSet
+            actions={[action2, action2, action3, action3, { kind: 'danger' }]}
+          />
+        );
+      }
+    ));
 
   it('applies className to an action button', () => {
     render(<ActionSet actions={[{ ...action1, className }, action2]} />);

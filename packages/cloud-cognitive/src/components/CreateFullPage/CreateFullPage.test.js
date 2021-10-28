@@ -10,6 +10,11 @@ import { render, screen, waitFor } from '@testing-library/react'; // https://tes
 import userEvent from '@testing-library/user-event';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
+import {
+  expectWarn,
+  expectWarnAsync,
+  expectMultipleError,
+} from '../../global/js/utils/test-helper';
 
 import { CreateFullPage } from '.';
 import { CreateFullPageStep } from './CreateFullPageStep';
@@ -44,7 +49,9 @@ const onNextStepRejectionFn = jest.fn(() =>
 
 const finalStepOnNext = jest.fn(() => Promise.resolve());
 const finalStepOnNextNonPromise = jest.fn();
-const finalStepOnNextRejectFn = jest.fn(() => Promise.reject());
+const finalStepOnNextRejectFn = jest.fn(() =>
+  Promise.reject(rejectionErrorMessage)
+);
 
 const defaultFullPageProps = {
   nextButtonText,
@@ -191,25 +198,34 @@ describe(componentName, () => {
     expect(Array(...createFullPageSteps)).toStrictEqual([]);
   });
 
-  it('should create a console warning when using CreateFullPage with only one step', () => {
-    const error = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
-    const { container } = renderOneStepCreateFullPage(defaultFullPageProps);
-    expect(() => {
-      render(...container);
-    }).toThrow();
-    error.mockRestore();
-  });
+  it('should create a console warning when using CreateFullPage with only one step', () =>
+    expectWarn('CreateFullPages with one step are not permitted', () => {
+      const { container } = renderOneStepCreateFullPage(defaultFullPageProps);
+      expect(() => {
+        render(...container);
+      }).toThrow();
+    }));
 
-  it('throws a console error when children of CreateFullPage are not a FullPageStep', () => {
-    const error = jest.spyOn(console, 'error').mockImplementation(jest.fn());
-    const { container } = renderFullPageWithNonStepChildren({
-      defaultFullPageProps,
-    });
-    expect(() => {
-      render(...container);
-    }).toThrow();
-    error.mockRestore();
-  });
+  it('throws a console error when children of CreateFullPage are not a FullPageStep', () =>
+    expectMultipleError(
+      [
+        'Each child of CreateFullPage is required to be a CreateFullPageStep',
+        [
+          'React does not recognize the `%s` prop on a DOM element',
+          'defaultFullPageProps',
+          /.*/,
+          /.*/,
+        ],
+      ],
+      () => {
+        const { container } = renderFullPageWithNonStepChildren({
+          defaultFullPageProps,
+        });
+        expect(() => {
+          render(...container);
+        }).toThrow();
+      }
+    ));
 
   it('renders the second step if clicking on the next step button with onNext optional function prop', async () => {
     const { click } = userEvent;
@@ -325,58 +341,62 @@ describe(componentName, () => {
     });
   });
 
-  it('should call the onNext function from the final step and reject the promise', async () => {
-    jest.spyOn(console, 'warn').mockImplementation(jest.fn());
-    const { click } = userEvent;
-    renderCreateFullPage({
-      ...defaultFullPageProps,
-      rejectOnSubmit: false,
-      rejectOnNext: false,
-      submitFn: onRequestSubmitFn,
-      onNext: onNextStepFn,
-      finalOnNextFn: null,
-      rejectOnSubmitNext: true,
-    });
-    const nextButtonElement = screen.getByText(nextButtonText);
-    click(nextButtonElement);
-    await waitFor(() => {
-      expect(onNextStepFn).toHaveBeenCalled();
-    });
-    click(nextButtonElement);
-    await waitFor(() => {
-      expect(onNextStepFn).toHaveBeenCalled();
-    });
-    const submitButtonElement = screen.getByText(submitButtonText);
-    click(submitButtonElement);
-    await waitFor(() => {
-      expect(finalStepOnNextRejectFn).toHaveBeenCalled();
-    });
-    jest.spyOn(console, 'warn').mockRestore();
-  });
+  it('should call the onNext function from the final step and reject the promise', async () =>
+    expectWarnAsync(
+      `CreateFullPage onNext error: ${rejectionErrorMessage}`,
+      async () => {
+        const { click } = userEvent;
+        renderCreateFullPage({
+          ...defaultFullPageProps,
+          rejectOnSubmit: false,
+          rejectOnNext: false,
+          submitFn: onRequestSubmitFn,
+          onNext: onNextStepFn,
+          finalOnNextFn: null,
+          rejectOnSubmitNext: true,
+        });
+        const nextButtonElement = screen.getByText(nextButtonText);
+        click(nextButtonElement);
+        await waitFor(() => {
+          expect(onNextStepFn).toHaveBeenCalled();
+        });
+        click(nextButtonElement);
+        await waitFor(() => {
+          expect(onNextStepFn).toHaveBeenCalled();
+        });
+        const submitButtonElement = screen.getByText(submitButtonText);
+        click(submitButtonElement);
+        await waitFor(() => {
+          expect(finalStepOnNextRejectFn).toHaveBeenCalled();
+        });
+      }
+    ));
 
-  it('should call the onRequestSubmit prop and reject the promise', async () => {
-    jest.spyOn(console, 'warn').mockImplementation(jest.fn());
-    const { click } = userEvent;
-    renderCreateFullPage({
-      ...defaultFullPageProps,
-      rejectOnSubmit: true,
-    });
-    const nextButtonElement = screen.getByText(nextButtonText);
-    click(nextButtonElement);
-    await waitFor(() => {
-      expect(onNextStepFn).toHaveBeenCalled();
-    });
-    click(nextButtonElement);
-    await waitFor(() => {
-      expect(onNextStepFn).toHaveBeenCalled();
-    });
-    const submitButtonElement = screen.getByText(submitButtonText);
-    click(submitButtonElement);
-    await waitFor(() => {
-      expect(onRequestSubmitRejectFn).toHaveBeenCalled();
-    });
-    jest.spyOn(console, 'warn').mockRestore();
-  });
+  it('should call the onRequestSubmit prop and reject the promise', async () =>
+    expectWarnAsync(
+      `CreateFullPage submit error: ${rejectionErrorMessage}`,
+      async () => {
+        const { click } = userEvent;
+        renderCreateFullPage({
+          ...defaultFullPageProps,
+          rejectOnSubmit: true,
+        });
+        const nextButtonElement = screen.getByText(nextButtonText);
+        click(nextButtonElement);
+        await waitFor(() => {
+          expect(onNextStepFn).toHaveBeenCalled();
+        });
+        click(nextButtonElement);
+        await waitFor(() => {
+          expect(onNextStepFn).toHaveBeenCalled();
+        });
+        const submitButtonElement = screen.getByText(submitButtonText);
+        click(submitButtonElement);
+        await waitFor(() => {
+          expect(onRequestSubmitRejectFn).toHaveBeenCalled();
+        });
+      }
+    ));
 
   it('should disable the submit button when `disableSubmit` prop is passed in FullPageStep', async () => {
     const { click } = userEvent;

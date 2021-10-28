@@ -9,4 +9,11 @@
 
 const prettierConfig = require('prettier-config-carbon');
 
+// This setting is deprecated, undo Carbon usage as this appears to cause a conflict between
+// `yarn format` and the current version of the VS Code plugin.
+//
+// https://prettier.io/docs/en/options.html#deprecated-jsx-brackets
+//
+prettierConfig.jsxBracketSameLine = false;
+
 module.exports = prettierConfig;

@@ -11,7 +11,7 @@ import userEvent from '@testing-library/user-event';
 
 import { pkg, carbon } from '../../settings';
 
-import { BreadcrumbItem, Button, Tab, Tabs } from 'carbon-components-react';
+import { BreadcrumbItem, Tab, Tabs } from 'carbon-components-react';
 import { Lightning16, Bee32 } from '@carbon/icons-react';
 
 import { PageHeader } from '.';
@@ -91,22 +91,6 @@ const pageActions = [
   },
 ];
 const pageActionsOverflowLabel = 'Page actions...';
-
-const pageActionsDepTest = pageActions.map(({ label, ...rest }, index) => (
-  <Button {...rest} key={index}>
-    {label}
-  </Button>
-));
-
-const pageActionsDepTest2 = (
-  <>
-    {pageActions.map(({ label, ...rest }, index) => (
-      <Button {...rest} key={index}>
-        {label}
-      </Button>
-    ))}
-  </>
-);
 
 const subtitle = 'Optional subtitle if necessary';
 const navigation = (
@@ -346,34 +330,6 @@ describe('PageHeader', () => {
           actionBarOverflowAriaLabel={actionBarOverflowAriaLabel}
         />
       );
-    }));
-
-  test('with deprecated page actions', () =>
-    expectWarn(deprecatedUsage('pageActions', 'PageHeader'), () => {
-      render(
-        <PageHeader
-          pageActions={pageActionsDepTest}
-          pageActionsOverflowLabel={pageActionsOverflowLabel}
-        />
-      );
-
-      screen.getByText('Primary button', {
-        selector: `.${blockClass}__page-actions .${prefix}--button-set-with-overflow__button-container:not(.${prefix}--button-set-with-overflow__button-container--hidden) .${carbon.prefix}--btn`,
-      });
-    }));
-
-  test('with deprecated page actions in a fragment', () =>
-    expectWarn(deprecatedUsage('pageActions', 'PageHeader'), () => {
-      render(
-        <PageHeader
-          pageActions={pageActionsDepTest2}
-          pageActionsOverflowLabel={pageActionsOverflowLabel}
-        />
-      );
-
-      screen.getByText('Primary button', {
-        selector: `.${blockClass}__page-actions .${prefix}--button-set-with-overflow__button-container:not(.${prefix}--button-set-with-overflow__button-container--hidden) .${carbon.prefix}--btn`,
-      });
     }));
 
   const dataTestId = 'data-testid';

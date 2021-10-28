@@ -20,9 +20,13 @@ import {
   SideNavLink,
 } from 'carbon-components-react/lib/components/UIShell';
 import { moderate02 } from '@carbon/motion';
+import { getExtractedSteps } from '../../global/js/utils/hasValidType';
 import '../../global/js/utils/props-helper';
 
 import { pkg } from '../../settings';
+import { CREATE_TEARSHEET_STEP } from '../CreateTearsheet/constants';
+import { CREATE_FULL_PAGE_STEP } from '../CreateFullPage/constants';
+import { CreateTearsheet } from '../CreateTearsheet';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--create-influencer`;
@@ -156,8 +160,13 @@ export let CreateInfluencer = ({
         </div>
       );
     }
-
-    const stepsWithoutIntroStep = createComponents.steps.filter(
+    const extractedSteps = getExtractedSteps(
+      createComponents.steps,
+      createComponentName === CreateTearsheet.displayName
+        ? CREATE_TEARSHEET_STEP
+        : CREATE_FULL_PAGE_STEP
+    );
+    const stepsWithoutIntroStep = extractedSteps.filter(
       (item) => !item.props.introStep
     );
     const introStepFound = !!createComponents.steps.filter(

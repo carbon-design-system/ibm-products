@@ -206,3 +206,18 @@ export const required = (propName, componentName) =>
       `^Warning: Failed prop type: The prop \`${propName}\` is marked as required in \`${componentName}\`, but its value is \`(.*)\`.`
     )
   );
+
+/**
+ * Return an expect matcher for an invalid prop, suitable to pass to expectError
+ * or expectMultipleError.
+ * @param {string} propName the prop name that is invalid, or a matching regex
+ * @param {string} componentName the component name on which the prop is defined, or a matching regex
+ * @param {string} suppliedType the type that is being supplied, or a matching regex
+ * @param {string} expectedType the type that is expected, or a matching regex
+ */
+export const invalid = (propName, componentName, suppliedType, expectedType) =>
+  expect.stringMatching(
+    new RegExp(
+      `^Warning: Failed prop type: Invalid prop \`${propName}\` of type \`${suppliedType}\` supplied to \`${componentName}\`, expected \`${expectedType}\`.`
+    )
+  );

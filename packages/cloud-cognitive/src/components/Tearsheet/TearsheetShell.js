@@ -113,6 +113,7 @@ export const TearsheetShell = React.forwardRef(
       // if we are now the topmost tearsheet, ensure we have focus
       if (
         position === depth &&
+        modalRef.current &&
         !modalRef.current.innerModal.current.contains(document.activeElement)
       ) {
         handleStackChange.claimFocus();
@@ -171,6 +172,8 @@ export const TearsheetShell = React.forwardRef(
     }, [open]);
 
     function handleFocus() {
+      // If something within us is receiving focus but we are not the topmost
+      // stacked tearsheet, transfer focus to the topmost tearsheet instead
       if (position < depth) {
         stack.open[stack.open.length - 1].claimFocus();
       }
@@ -216,12 +219,21 @@ export const TearsheetShell = React.forwardRef(
           onFocus={handleFocus}
           preventCloseOnClickOutside={!isPassive}
           ref={modalRef}
-          selectorsFloatingMenus={[
-            `.${carbon.prefix}--overflow-menu-options`,
-            `.${carbon.prefix}--tooltip`,
-            '.flatpickr-calendar',
-            `.${bc}__container`,
-          ]}
+          {...(depth > 1
+            ? // this shenanigans is to ensure that when depth<=1 we don't supply a selectorsFloatingMenus
+              // prop AT ALL -- not even a null -- because even null gets passed through to the div and causes a
+              // React warning. Once that is fixed (see https://github.com/carbon-design-system/carbon/issues/10000)
+              // this could revert to selectorsFloatingMenus: {depth > 1 ? [...] : null}.
+              // NB if .bx__container is added to the default value, this can be removed altogether.
+              {
+                selectorsFloatingMenus: [
+                  `.${carbon.prefix}--overflow-menu-options`,
+                  `.${carbon.prefix}--tooltip`,
+                  '.flatpickr-calendar',
+                  `.${bc}__container`,
+                ],
+              }
+            : {})}
           size="sm"
         >
           {includeHeader && (

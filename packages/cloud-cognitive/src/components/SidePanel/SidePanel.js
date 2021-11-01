@@ -564,37 +564,49 @@ export let SidePanel = React.forwardRef(
               [`${blockClass}__action-toolbar-no-animation`]: !animateTitle,
             })}
           >
-            {actionToolbarButtons.map((action) => (
-              <Button
-                key={action.label}
-                kind={action.kind || 'ghost'}
-                size="small"
-                renderIcon={action.icon}
-                iconDescription={action.label}
-                tooltipPosition="bottom"
-                tooltipAlignment="center"
-                hasIconOnly={!action.leading}
-                disabled={action.disabled}
-                className={cx([
-                  `${blockClass}__action-toolbar-button`,
-                  action.className,
-                  {
-                    [`${blockClass}__action-toolbar-icon-only-button`]:
-                      action.icon && !action.leading,
-                    [`${blockClass}__action-toolbar-leading-button`]:
-                      action.leading,
-                  },
-                ])}
-                onClick={(event) =>
-                  action.onClick
-                    ? action.onClick(event)
-                    : action.onActionToolbarButtonClick &&
-                      action.onActionToolbarButtonClick(event)
-                }
-              >
-                {action.leading && action.label}
-              </Button>
-            ))}
+            {actionToolbarButtons.map(
+              ({
+                label,
+                kind,
+                icon,
+                leading,
+                disabled,
+                className,
+                onClick,
+                onActionToolbarButtonClick,
+                ...rest
+              }) => (
+                <Button
+                  {...rest}
+                  key={label}
+                  kind={kind || 'ghost'}
+                  size="small"
+                  renderIcon={icon}
+                  iconDescription={label}
+                  tooltipPosition="bottom"
+                  tooltipAlignment="center"
+                  hasIconOnly={!leading}
+                  disabled={disabled}
+                  className={cx([
+                    `${blockClass}__action-toolbar-button`,
+                    className,
+                    {
+                      [`${blockClass}__action-toolbar-icon-only-button`]:
+                        icon && !leading,
+                      [`${blockClass}__action-toolbar-leading-button`]: leading,
+                    },
+                  ])}
+                  onClick={(event) =>
+                    onClick
+                      ? onClick(event)
+                      : onActionToolbarButtonClick &&
+                        onActionToolbarButtonClick(event)
+                  }
+                >
+                  {leading && label}
+                </Button>
+              )
+            )}
           </div>
         )}
       </>
@@ -878,7 +890,7 @@ SidePanel.propTypes = {
   /**
    * Sets the subtitle text
    */
-  subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  subtitle: PropTypes.node,
 
   /**
    * Sets the title text

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.96.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.95.2...@carbon/ibm-cloud-cognitive@0.96.0) (2021-10-28)
+
+
+### Features
+
+* **SidePanel:** allow node type for subtitle prop ([#1357](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1357)) ([0475107](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/04751075a0936da89dd38a3cf070078404bf1a06))
+
+
+
+
+
 ## [0.95.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.95.1...@carbon/ibm-cloud-cognitive@0.95.2) (2021-10-28)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive

@@ -52,6 +52,7 @@ export let PageHeader = React.forwardRef(
   (
     {
       actionBarItems,
+      actionBarMenuOptionsClass,
       actionBarOverflowAriaLabel,
       actionBarOverflowLabel: deprecated_actionBarOverflowLabel,
       allTagsModalSearchLabel,
@@ -80,6 +81,7 @@ export let PageHeader = React.forwardRef(
       navigation,
       pageActions,
       pageActionsOverflowLabel,
+      pageActionsMenuOptionsClass,
       pageHeaderOffset: _deprecated_pageHeaderOffset,
       preCollapseTitleRow: deprecated_preCollapseTitleRow,
       preventBreadcrumbScroll: deprecated_preventBreadcrumbScroll,
@@ -594,6 +596,10 @@ export let PageHeader = React.forwardRef(
                           <>
                             {thePageActions(true, pageActionsInBreadcrumbRow)}
                             <ActionBar
+                              menuOptionsClass={cx(
+                                actionBarMenuOptionsClass,
+                                `${blockClass}__action-bar-menu-options`
+                              )}
                               overflowAriaLabel={actionBarOverflowAriaLabel}
                               actions={actionBarItemArray}
                               className={`${blockClass}__action-bar`}
@@ -799,6 +805,10 @@ export let PageHeader = React.forwardRef(
             {pageActions.content ?? (
               <ButtonSetWithOverflow
                 className={`${blockClass}__button-set--in-breadcrumb`}
+                menuOptionsClass={cx(
+                  pageActionsMenuOptionsClass,
+                  `${blockClass}__button-set-menu-options`
+                )}
                 onWidthChange={handleWidthChange}
                 buttons={pageActions}
                 buttonSetOverflowLabel={pageActionsOverflowLabel}
@@ -945,6 +955,10 @@ PageHeader.propTypes = {
     ]),
     'Expects an array of objects with the following properties: iconDescription, renderIcon and onClick.'
   ),
+  /**
+   * class name applied to the action bar overflow options
+   */
+  actionBarMenuOptionsClass: PropTypes.string,
   /**
    * When there is insufficient space for all actionBarItems to be displayed this
    * aria label is used for the action bar overflow menu
@@ -1134,6 +1148,10 @@ PageHeader.propTypes = {
       maxWidth: PropTypes.number.isRequired,
     }),
   ]),
+  /**
+   * class name applied to the page actions overflow options
+   */
+  pageActionsMenuOptionsClass: PropTypes.string,
   /**
    * When there is insufficient space to display all of hte page actions inline a dropdown button menu is shown,
    * containing the page actions. This label is used as the display content of the dropdown button menu.

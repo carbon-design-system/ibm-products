@@ -241,7 +241,7 @@ const StackedTemplate = ({ actions, ...args }) => {
   return (
     <>
       <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
-      <div
+      <ButtonSet
         style={{
           display: 'flex',
           position: 'fixed',
@@ -250,41 +250,82 @@ const StackedTemplate = ({ actions, ...args }) => {
           zIndex: 10000,
         }}
       >
-        <Button onClick={() => setOpen1(!open1)}>Toggle #1</Button>
-        <Button onClick={() => setOpen2(!open2)}>Toggle #2</Button>
-        <Button onClick={() => setOpen3(!open3)}>Toggle #3</Button>
-      </div>
+        <Button onClick={() => setOpen1(!open1)}>Toggle tearsheet 1</Button>
+        <Button onClick={() => setOpen2(!open2)}>Toggle tearsheet 2</Button>
+        <Button onClick={() => setOpen3(!open3)}>Toggle tearsheet 3</Button>
+      </ButtonSet>
       <Tearsheet
         {...args}
         actions={wiredActions1}
-        title="Tearsheet #1"
+        headerActions={
+          <ButtonSet>
+            <Button
+              kind="primary"
+              size="sm"
+              style={{ width: 'initial' }}
+              onClick={() => setOpen2(true)}
+              disabled={open2}
+            >
+              Open tearsheet 2
+            </Button>
+          </ButtonSet>
+        }
+        title="Tearsheet 1"
         open={open1}
         onClose={() => setOpen1(false)}
+        selectorPrimaryFocus="#stacked-input-1"
       >
         <div className="tearsheet-stories__dummy-content-block">
           Main content 1
+          <TextInput
+            id="stacked-input-1"
+            labelText="Enter an important value here"
+          />
         </div>
       </Tearsheet>
       <Tearsheet
         {...args}
         actions={wiredActions2}
-        title="Tearsheet #2"
+        headerActions={
+          <ButtonSet>
+            <Button
+              kind="primary"
+              size="sm"
+              style={{ width: 'initial' }}
+              onClick={() => setOpen3(true)}
+              disabled={open3}
+            >
+              Open tearsheet 3
+            </Button>
+          </ButtonSet>
+        }
+        title="Tearsheet 2"
         open={open2}
         onClose={() => setOpen2(false)}
+        selectorPrimaryFocus="#stacked-input-2"
       >
         <div className="tearsheet-stories__dummy-content-block">
           Main content 2
+          <TextInput
+            id="stacked-input-2"
+            labelText="Enter an important value here"
+          />
         </div>
       </Tearsheet>
       <Tearsheet
         {...args}
         actions={wiredActions3}
-        title="Tearsheet #3"
+        title="Tearsheet 3"
         open={open3}
         onClose={() => setOpen3(false)}
+        selectorPrimaryFocus="#stacked-input-3"
       >
         <div className="tearsheet-stories__dummy-content-block">
           Main content 3
+          <TextInput
+            id="stacked-input-3"
+            labelText="Enter an important value here"
+          />
         </div>
       </Tearsheet>
     </>
@@ -352,7 +393,6 @@ export const fullyLoaded = prepareStory(Template, {
 export const stacked = prepareStory(StackedTemplate, {
   storyName: 'Stacking tearsheets',
   args: {
-    headerActions: 2,
     closeIconDescription,
     description,
     height: 'lower',

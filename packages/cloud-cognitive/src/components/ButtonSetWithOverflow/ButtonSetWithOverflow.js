@@ -31,6 +31,7 @@ export const ButtonSetWithOverflow = ({
   const spaceAvailableRef = useRef(null);
   const sizingContainerRefSet = useRef(null);
   const sizingContainerRefCombo = useRef(null);
+  const sizes = useRef({});
 
   /**
    * checkFullyVisibleItems determines display count based on space available and width of pageActions
@@ -58,12 +59,19 @@ export const ButtonSetWithOverflow = ({
     // check ButtonMenu size
     const sizingComboSize = sizingContainerRefCombo.current?.offsetWidth;
 
-    // report min and max width required to host
-    onWidthChange &&
+    if (
+      onWidthChange &&
+      (sizes.current.minWidth !== sizingComboSize ||
+        sizes.current.maxWidth !== sizingSetTotalSize)
+    ) {
+      sizes.current.minWidth = sizingComboSize;
+      sizes.current.maxWidth = sizingSetTotalSize;
+
+      // report min and max width required to host
       onWidthChange({
-        maxWidth: sizingSetTotalSize,
-        minWidth: sizingComboSize,
+        ...sizes.current,
       });
+    }
 
     // only if space available use ButtonSet.
     if (sizingSetTotalSize <= spaceAvailable) {

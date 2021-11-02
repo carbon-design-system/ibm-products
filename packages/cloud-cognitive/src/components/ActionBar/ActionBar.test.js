@@ -9,7 +9,11 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ActionBar, ActionBarItem } from '.';
 import { Lightning16, Bee16 } from '@carbon/icons-react';
-import { mockHTMLElement } from '../../global/js/utils/test-helper';
+import {
+  mockHTMLElement,
+  expectWarn,
+  deprecated,
+} from '../../global/js/utils/test-helper';
 
 import { pkg, carbon } from '../../settings';
 const blockClass = `${pkg.prefix}--action-bar`;
@@ -152,29 +156,22 @@ describe(ActionBar.displayName, () => {
     window.ResizeObserver = ResizeObserver;
   });
 
-  it('Works with deprecated children', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-    // const { container } =
-    render(
-      <TestActionBar width={1150} overflowAriaLabel={overflowAriaLabel}>
-        {ActionBarChildren}
-      </TestActionBar>
-    );
-    // console.log(container.outerHTML);
-    screen.getByText(/Action 01/, {
-      selector: `.${blockClass}__displayed-items .${carbon.prefix}--assistive-text`,
-    });
-    screen.getByText(/Action 10/, {
-      selector: `.${blockClass}__displayed-items .${carbon.prefix}--assistive-text`,
-    });
-
-    expect(warn).toBeCalledWith(
-      'The prop `children` of `ActionBar` has been deprecated and will soon be removed. See documentation on the `actions` prop.'
-    );
-
-    warn.mockRestore(); // Remove mock
-  });
+  it('Works with deprecated children', () =>
+    expectWarn(deprecated('children', 'ActionBar'), () => {
+      // const { container } =
+      render(
+        <TestActionBar width={1150} overflowAriaLabel={overflowAriaLabel}>
+          {ActionBarChildren}
+        </TestActionBar>
+      );
+      // console.log(container.outerHTML);
+      screen.getByText(/Action 01/, {
+        selector: `.${blockClass}__displayed-items .${carbon.prefix}--assistive-text`,
+      });
+      screen.getByText(/Action 10/, {
+        selector: `.${blockClass}__displayed-items .${carbon.prefix}--assistive-text`,
+      });
+    }));
 
   it('Renders an action bar', () => {
     render(

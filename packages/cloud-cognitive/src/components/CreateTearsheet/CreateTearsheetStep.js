@@ -92,7 +92,7 @@ CreateTearsheetStep.propTypes = {
    * Otherwise, use CSS to hide/remove this label text.
    */
   fieldsetLegendText: PropTypes.string.isRequired.if(
-    ({ hasFieldset }) => hasFieldset === true
+    ({ hasFieldset }) => !!hasFieldset
   ),
 
   /**

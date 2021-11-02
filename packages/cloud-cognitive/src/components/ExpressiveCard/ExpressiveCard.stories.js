@@ -161,3 +161,13 @@ export const Clickable = prepareStory(Template, {
     mediaRatio: null,
   },
 });
+
+export const WithHref = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    primaryButtonHref: '#',
+    secondaryButtonHref: '#',
+    secondaryButtonText: 'Secondary',
+    secondaryButtonKind: 'ghost',
+  },
+});

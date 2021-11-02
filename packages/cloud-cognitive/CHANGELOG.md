@@ -3,6 +3,67 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.97.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.96.0...@carbon/ibm-cloud-cognitive@0.97.0) (2021-11-01)
+
+
+### Features
+
+* create tearsheet step, with custom components ([#1342](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1342)) ([ef1e972](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ef1e9723340bfcbf8ce1bc50062ae4735b50ed2d))
+* **SidePanel:** add rest props to actionToolbarButtons prop ([#1362](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1362)) ([93eac3b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/93eac3b95b8ac67f74b4d707f935deb97090bec9))
+
+
+
+
+
+# [0.96.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.95.2...@carbon/ibm-cloud-cognitive@0.96.0) (2021-10-28)
+
+
+### Features
+
+* **SidePanel:** allow node type for subtitle prop ([#1357](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1357)) ([0475107](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/04751075a0936da89dd38a3cf070078404bf1a06))
+
+
+
+
+
+## [0.95.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.95.1...@carbon/ibm-cloud-cognitive@0.95.2) (2021-10-28)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+## [0.95.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.95.0...@carbon/ibm-cloud-cognitive@0.95.1) (2021-10-27)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive
+
+
+
+
+
+# [0.95.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.94.3...@carbon/ibm-cloud-cognitive@0.95.0) (2021-10-27)
+
+
+### Features
+
+* update Carbon versions and package dependencies to latest ([#1356](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1356)) ([946afd6](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/946afd6bd5a165f35940cc1d70fc0e42fb6a4303))
+
+
+
+
+
+## [0.94.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.94.2...@carbon/ibm-cloud-cognitive@0.94.3) (2021-10-25)
+
+
+### Bug Fixes
+
+* fixes card href support ([#1353](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1353)) ([30a89cb](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/30a89cb682189f2844a3d36c88bf9f40b3e33532))
+
+
+
+
+
 ## [0.94.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.94.1...@carbon/ibm-cloud-cognitive@0.94.2) (2021-10-22)
 
 

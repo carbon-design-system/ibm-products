@@ -9,7 +9,9 @@ import { render as r, screen } from '@testing-library/react';
 import React, { createRef } from 'react';
 
 import { Toolbar, ToolbarButton, ToolbarGroup } from '../..';
+
 import { blockClass, componentName } from './Toolbar';
+import { blockClass as toolbarButtonClass } from './ToolbarButton';
 
 const { getByTestId, getByText } = screen;
 
@@ -79,10 +81,24 @@ describe(componentName, () => {
 describe(ToolbarButton.displayName, () => {
   test(ToolbarButton);
 
-  it('renders the caret variant', () => {
-    _render.bind(ToolbarButton)({ caret: true });
+  const popoverDataTestId = 'popoverDataTestId';
 
-    expect(getByTestId(dataTestId)).toHaveClass(`${blockClass}__button--caret`);
+  const CaretToolbarButton = () =>
+    _render.bind(ToolbarButton)({
+      caret: true,
+      popover: { 'data-testid': popoverDataTestId },
+    });
+
+  it('renders the caret variant', () => {
+    CaretToolbarButton();
+
+    expect(getByTestId(dataTestId)).toHaveClass(`${toolbarButtonClass}--caret`);
+  });
+
+  it('renders the popover', () => {
+    CaretToolbarButton();
+
+    expect(getByTestId(popoverDataTestId)).not.toBeInTheDocument();
   });
 });
 

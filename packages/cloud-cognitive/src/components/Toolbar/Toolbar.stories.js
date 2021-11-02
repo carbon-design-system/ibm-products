@@ -26,8 +26,6 @@ import {
   SettingsAdjust16,
   Table16,
   TextAlignCenter16,
-  TextAlignLeft16,
-  TextAlignRight16,
   TextCreation16,
   ZoomIn16,
   ZoomOut16,
@@ -60,16 +58,6 @@ export default {
 };
 
 function _Toolbar(args) {
-  const buttons = [
-    { iconDescription: 'Text align left', renderIcon: TextAlignLeft16 },
-    { iconDescription: 'Text align center', renderIcon: TextAlignCenter16 },
-    { iconDescription: 'Text align right', renderIcon: TextAlignRight16 },
-  ];
-
-  const [selectedButton, setSelectedButton] = useState(
-    buttons[(buttons.length / 2) | 0]
-  );
-
   const dropdownItems = ['11', '12', '14', '16', '18'];
 
   const [selectedDropdownItem, setSelectedDropdownItem] = useState(
@@ -116,14 +104,9 @@ function _Toolbar(args) {
 
       <ToolbarGroup>
         <ToolbarButton
-          {...selectedButton}
-          caret={buttons.map((props, index) => (
-            <ToolbarButton
-              key={`${ToolbarButton.displayName}--${index}`}
-              {...props}
-              onClick={() => setSelectedButton(props)}
-            />
-          ))}
+          iconDescription="Text align center"
+          renderIcon={TextAlignCenter16}
+          caret
         />
       </ToolbarGroup>
 

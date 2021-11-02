@@ -6,8 +6,6 @@
 //
 
 @import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/popover/popover';
-
 @import '../../global/styles/project-settings';
 
 @include exports($name: cloud-cognitive--toolbar) {
@@ -58,7 +56,6 @@
     border-bottom-width: 0;
   }
 
-  .#{$block-class}__button__container--caret,
   .#{$block-class}__button--caret {
     position: relative;
   }

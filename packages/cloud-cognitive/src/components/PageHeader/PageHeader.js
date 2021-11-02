@@ -135,9 +135,7 @@ export let PageHeader = React.forwardRef(
     // state based on props only
     const actionBarItemArray = extractShapesArray(actionBarItems);
     const hasActionBar = actionBarItemArray && actionBarItemArray.length;
-    const hasBreadcrumbRow = !(
-      breadcrumbs === undefined && actionBarItems === undefined
-    );
+    const hasBreadcrumbRow = breadcrumbs || actionBarItems;
 
     /* Title shape is used to allow title to be string or shape */
     const titleShape = getTitleShape();
@@ -445,7 +443,7 @@ export let PageHeader = React.forwardRef(
       /* istanbul ignore next */
       return (
         disableBreadcrumbScroll &&
-        actionBarItems === undefined &&
+        !actionBarItems &&
         scrollYValue + metrics.headerTopValue >= 0
       );
     };
@@ -544,15 +542,15 @@ export let PageHeader = React.forwardRef(
                     <Column
                       className={cx(`${blockClass}__breadcrumb-column`, {
                         [`${blockClass}__breadcrumb-column--background`]:
-                          breadcrumbs !== undefined || hasActionBar,
+                          !!breadcrumbs || hasActionBar,
                       })}
                     >
                       {/* keeps actionBar right even if empty */}
 
-                      {breadcrumbs !== undefined ? (
+                      {breadcrumbs ? (
                         <BreadcrumbWithOverflow
                           className={`${blockClass}__breadcrumb`}
-                          noTrailingSlash={title !== undefined}
+                          noTrailingSlash={!!title}
                           overflowAriaLabel={breadcrumbOverflowAriaLabel}
                           breadcrumbs={breadcrumbsInWithTitle}
                         >
@@ -614,8 +612,7 @@ export let PageHeader = React.forwardRef(
                 </Row>
               ) : null}
 
-              {!collapseTitle &&
-              !(title === undefined && pageActions === undefined) ? (
+              {!collapseTitle && (title || pageActions) ? (
                 <Row
                   className={cx(`${blockClass}__title-row`, {
                     [`${blockClass}__title-row--no-breadcrumb-row`]:
@@ -623,16 +620,14 @@ export let PageHeader = React.forwardRef(
                     [`${blockClass}__title-row--under-action-bar`]:
                       hasActionBar,
                     [`${blockClass}__title-row--has-page-actions`]:
-                      pageActions !== undefined,
+                      !!pageActions,
                     [`${blockClass}__title-row--sticky`]:
-                      pageActions !== undefined &&
-                      actionBarItems === undefined &&
-                      hasBreadcrumbRow,
+                      !!pageActions && !actionBarItems && hasBreadcrumbRow,
                   })}
                 >
                   <Column className={`${blockClass}__title-column`}>
                     {/* keeps page actions right even if empty */}
-                    {title !== undefined ? (
+                    {title ? (
                       <div
                         className={cx(`${blockClass}__title`, {
                           [`${blockClass}__title--fades`]: hasBreadcrumbRow,
@@ -657,7 +652,7 @@ export let PageHeader = React.forwardRef(
                 </Row>
               ) : null}
 
-              {subtitle !== undefined ? (
+              {subtitle ? (
                 <Row className={`${blockClass}__subtitle-row`}>
                   <Column className={`${blockClass}__subtitle`}>
                     {subtitle}
@@ -665,7 +660,7 @@ export let PageHeader = React.forwardRef(
                 </Row>
               ) : null}
 
-              {children !== undefined ? (
+              {children ? (
                 <Row className={`${blockClass}__available-row`}>
                   <Column className={`${blockClass}__available-column`}>
                     {children}
@@ -704,7 +699,7 @@ export let PageHeader = React.forwardRef(
                     <Column
                       className={cx(`${blockClass}__navigation-tags`, {
                         [`${blockClass}__navigation-tags--tags-only`]:
-                          navigation === undefined,
+                          !navigation,
                       })}
                     >
                       <TagSet
@@ -730,18 +725,18 @@ export let PageHeader = React.forwardRef(
                 <Row
                   className={cx(`${blockClass}__navigation-row`, {
                     [`${blockClass}__navigation-row--spacing-above-06`]:
-                      navigation !== undefined,
+                      !!navigation,
                     [`${blockClass}__navigation-row--has-tags`]: tags,
                   })}
                 >
                   <Column className={`${blockClass}__navigation-tabs`}>
                     {navigation}
                   </Column>
-                  {tags !== undefined ? (
+                  {tags ? (
                     <Column
                       className={cx(`${blockClass}__navigation-tags`, {
                         [`${blockClass}__navigation-tags--tags-only`]:
-                          navigation === undefined,
+                          !navigation,
                       })}
                     >
                       <TagSet

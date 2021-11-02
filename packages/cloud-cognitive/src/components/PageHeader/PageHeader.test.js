@@ -19,9 +19,7 @@ import { ActionBarItem } from '../ActionBar';
 import {
   mockHTMLElement,
   expectWarn,
-  expectMultipleWarn,
   expectMultipleError,
-  deprecated,
   deprecatedUsage,
   required,
 } from '../../global/js/utils/test-helper';

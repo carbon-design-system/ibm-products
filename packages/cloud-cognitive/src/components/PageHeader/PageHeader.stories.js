@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import { carbon } from '../../settings';
 
@@ -14,6 +14,10 @@ import {
   Grid,
   Header,
   HeaderName,
+  HeaderMenuButton,
+  SideNav,
+  SideNavItems,
+  SideNavLink,
   Row,
   Tab,
   Tabs,
@@ -253,7 +257,11 @@ const tags = {
     { type: 'purple', label: 'Purple' },
     { type: 'red', label: 'Red' },
     { type: 'teal', label: 'Teal' },
-    { type: 'red', label: 'Longer ThanAPieceOfString' },
+    {
+      type: 'red',
+      label:
+        'Longer ThanAPieceOfString it just keeps going and going and going and going',
+    },
     { type: 'high-contrast', label: 'High contrast' },
     { type: 'magenta', label: 'Magenta' },
     { type: 'blue', label: 'Blue 2' },
@@ -262,7 +270,11 @@ const tags = {
     { type: 'purple', label: 'Purple 2' },
     { type: 'red', label: 'Red 2' },
     { type: 'teal', label: 'Teal 2' },
-    { type: 'red', label: 'Longer ThanAPieceOfString 2' },
+    {
+      type: 'red',
+      label:
+        'Longer ThanAPieceOfString 2this one is even longer it is not quite a book but it is working on it. As it would be a little bit silly to be this long we should probably truncate',
+    },
     { type: 'high-contrast', label: 'High contrast 2' },
     { type: 'magenta', label: 'Magenta 2' },
   ],
@@ -623,6 +635,7 @@ export const fullyLoadedAndSome = prepareStory(Template, {
 // Template for demo.
 // eslint-disable-next-line react/prop-types
 const TemplateDemo = ({ children, storyOptionWholePageScroll, ...props }) => {
+  const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
   return (
     <>
       <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
@@ -634,9 +647,28 @@ const TemplateDemo = ({ children, storyOptionWholePageScroll, ...props }) => {
         key={storyOptionWholePageScroll ? 'keyYes' : 'keyNo'}
       >
         <Header aria-label="IBM Platform Name">
+          <HeaderMenuButton
+            aria-label="Open menu"
+            isCollapsible
+            onClick={() => {
+              setIsSideNavExpanded((prev) => !prev);
+            }}
+            isActive={isSideNavExpanded}
+          />
           <HeaderName href="#" prefix="IBM">
             Cloud Cognitive application
           </HeaderName>
+          <SideNav
+            aria-label="Side navigation"
+            expanded={isSideNavExpanded}
+            isFixedNav
+          >
+            <SideNavItems>
+              <SideNavLink href="javascript:void(0)">
+                Sample side bar
+              </SideNavLink>
+            </SideNavItems>
+          </SideNav>
         </Header>
         <div
           className={`${storyClass}__content-container`}

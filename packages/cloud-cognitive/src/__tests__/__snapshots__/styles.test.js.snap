@@ -1619,7 +1619,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   top: auto;
   height: 100%;
   max-height: calc(100% - var(--cds-spacing-09, 3rem));
-  transform: translate3d(0, min(95vh, 500px), 0);
+  transform: translate3d(0, calc(min(95vh, 500px)), 0);
 }
 
 .exp--tearsheet.exp--tearsheet.exp--tearsheet .exp--tearsheet__container {
@@ -2492,7 +2492,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-inverse-support-02: #24a148;
   --cds-inverse-support-03: #f1c21b;
   --cds-inverse-support-04: #0f62fe;
-  --cds-overlay-01: rgba(22, 22, 22, 0.7);
+  --cds-overlay-01: rgba(0, 0, 0, 0.65);
   --cds-danger-01: #da1e28;
   --cds-danger-02: #fa4d56;
   --cds-focus: #ffffff;
@@ -2559,8 +2559,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-support-success-inverse: #24a148;
   --cds-support-warning-inverse: #f1c21b;
   --cds-support-info-inverse: #0f62fe;
-  --cds-overlay: rgba(22, 22, 22, 0.7);
+  --cds-overlay: rgba(0, 0, 0, 0.65);
   --cds-toggle-off: #6f6f6f;
+  --cds-shadow: rgba(0, 0, 0, 0.8);
   --cds-button-primary: #0f62fe;
   --cds-button-secondary: #6f6f6f;
   --cds-button-tertiary: #ffffff;
@@ -3368,13 +3369,15 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: var(--cds-body-short-01-font-weight, 400);
   line-height: var(--cds-body-short-01-line-height, 1.28572);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
+  display: block;
+  overflow: hidden;
   min-width: initial;
   min-height: initial;
   padding: 0;
   margin: 0;
   background-color: inherit;
   color: inherit;
-  vertical-align: bottom;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
@@ -3441,7 +3444,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   /* Bleed class for the background */
   position: sticky;
   /* z-index used to raise above any position relative content as per Carbon header */
-  z-index: 8000;
+  /* dropped  1 below Carbon header so as not to overlay the side panel */
+  z-index: 7999;
   top: var(--exp--page-header--header-top);
   display: inline-block;
   /* cause top/bottom margin to reserve space */
@@ -3500,6 +3504,16 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: flex;
   min-width: 100%;
   flex-wrap: nowrap;
+}
+
+.exp--page-header .exp--page-header__has-page-actions-without-action-bar {
+  min-width: 60%;
+  max-width: 60%;
+}
+
+.exp--page-header .exp--page-header__has-page-actions-without-action-bar
+.exp--page-header__has-page-actions-without-action-bar {
+  min-width: 100%;
 }
 
 .exp--page-header .exp--page-header__breadcrumb-row--has-action-bar
@@ -3608,6 +3622,13 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     max-width: 60%;
     flex: 0 1 60%;
   }
+}
+
+.exp--page-header .exp--page-header__breadcrumb-row .exp--page-header__breadcrumb-column .exp--page-header__has-page-actions-without-action-bar
+.exp--page-header__breadcrumb-row
+.exp--page-header__breadcrumb-column {
+  max-width: 100%;
+  flex: 0 1 100%;
 }
 
 .exp--page-header .exp--page-header__breadcrumb-column--background,
@@ -3966,6 +3987,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--page-header__tagset-tooltip.exp--page-header__tagset-tooltip {
   position: var(--exp--page-header--tagset-tooltip-position) !important;
   top: var(--exp--page-header--tagset-tooltip-offset) !important;
+}
+
+.exp--page-header__navigation-tags-overflow.bx--tooltip {
+  z-index: 7999;
 }
 
 .exp--card__productive .exp--card__header {

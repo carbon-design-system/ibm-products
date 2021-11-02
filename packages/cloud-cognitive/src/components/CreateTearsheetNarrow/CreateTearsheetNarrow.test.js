@@ -14,9 +14,7 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { CreateTearsheetNarrow } from '.';
 
-const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
-
-const blockClass = `${prefix}--create-tearsheet-narrow`;
+const blockClass = `${pkg.prefix}--create-tearsheet-narrow`;
 const componentName = CreateTearsheetNarrow.displayName;
 
 // values to use
@@ -103,9 +101,8 @@ describe(componentName, () => {
   it('adds the Devtools attribute to the containing node', () => {
     renderComponent({ 'data-testid': dataTestId });
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(componentName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      componentName
     );
   });
 

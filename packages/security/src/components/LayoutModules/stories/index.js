@@ -3,8 +3,10 @@
  * @copyright IBM Security 2020 - 2021
  */
 
-import { layoutModules } from '../../../../.storybook';
+import { parameters, layoutModules } from '../../../../.storybook';
 
-export const LIBRARY = 'Library';
+const LIBRARY = 'Library';
 
 export default (title) => layoutModules(title);
+
+export { LIBRARY, parameters };

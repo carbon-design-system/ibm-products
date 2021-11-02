@@ -8,10 +8,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { pkg } from '../../settings';
 import { ProductiveCard } from '.';
-
-const { devtoolsAttribute, getDevtoolsId } = pkg;
 
 const componentName = ProductiveCard.displayName;
 
@@ -47,9 +44,8 @@ describe(componentName, () => {
   it('adds the Devtools attribute to the containing node', () => {
     render(<ProductiveCard data-testid={dataTestId} />);
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(componentName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      componentName
     );
   });
 });

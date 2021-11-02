@@ -9,11 +9,18 @@ import React from 'react';
 
 import FilterPanelCheckbox from '../FilterPanelCheckbox';
 
+import expectWarning from '../../expect-warning';
+
 describe('FilterPanelCheckbox', () => {
+  const id = 'id';
+  const labelText = 'labelText';
+
+  const props = { id, labelText };
+
+  expectWarning(<FilterPanelCheckbox {...props} />);
+
   test('has no accessibility violations', async () => {
-    const { container } = render(
-      <FilterPanelCheckbox labelText="test checkbox" id="test-checkbox-id" />
-    );
+    const { container } = render(<FilterPanelCheckbox {...props} />);
 
     await expect(container).toBeAccessible('FilterPanelCheckbox');
     await expect(container).toHaveNoAxeViolations();
@@ -21,46 +28,36 @@ describe('FilterPanelCheckbox', () => {
 
   test('adds custom class name', () => {
     const { container } = render(
-      <FilterPanelCheckbox className="custom-class" labelText="label" id="id" />
+      <FilterPanelCheckbox {...props} className="custom-class" />
     );
     expect(container.querySelector('.custom-class')).toBeInTheDocument();
   });
 
   test('does not render a count by default', () => {
-    const { container } = render(
-      <FilterPanelCheckbox labelText="custom label" id="id" />
-    );
-    expect(container).toHaveTextContent('custom label');
+    const { container } = render(<FilterPanelCheckbox {...props} />);
+
+    expect(container).toHaveTextContent(labelText);
   });
 
   test('renders count', () => {
-    const { container } = render(
-      <FilterPanelCheckbox count={10} labelText="label" id="id" />
-    );
+    const { container } = render(<FilterPanelCheckbox {...props} count={10} />);
     expect(container).toHaveTextContent(/10/);
   });
 
   test('renders 0 count', () => {
-    const { container } = render(
-      <FilterPanelCheckbox count={0} labelText="label" id="id" />
-    );
+    const { container } = render(<FilterPanelCheckbox {...props} count={0} />);
     expect(container).toHaveTextContent(/0/);
   });
 
   test('invokes onChange when user selects checkbox', () => {
     const onChangeMock = jest.fn();
+
     const { getByLabelText } = render(
-      <FilterPanelCheckbox
-        onChange={onChangeMock}
-        labelText="checkbox label"
-        id="checkbox-id"
-      />
+      <FilterPanelCheckbox {...props} onChange={onChangeMock} />
     );
-    userEvent.click(getByLabelText(/checkbox label/i));
-    expect(onChangeMock).toHaveBeenCalledWith(
-      true,
-      'checkbox-id',
-      expect.anything()
-    );
+
+    userEvent.click(getByLabelText(labelText));
+
+    expect(onChangeMock).toHaveBeenCalledWith(true, id, expect.anything());
   });
 });

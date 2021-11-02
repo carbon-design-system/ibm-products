@@ -1,9 +1,10 @@
+import { getDocsId } from '../../../../../../.storybook';
 import overview from './images/overview.png';
 
 <Column lg={8}>
   <LinkTo
     className="storybook__link--image"
-    kind="page-layouts-canary-overview"
+    kind={getDocsId('page-layouts-canary-overview')}
   >
     <img alt="Overview page layout example" src={overview} />
   </LinkTo>

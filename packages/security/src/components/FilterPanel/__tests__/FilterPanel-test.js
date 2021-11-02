@@ -7,9 +7,13 @@ import { render } from '@testing-library/react';
 import React from 'react';
 
 import FilterPanel from '..';
-import * as mockProps from '../_mocks_';
+import { filterData } from '../_mocks_';
+
+import expectWarning from '../expect-warning';
 
 describe('FilterPanel', () => {
+  expectWarning(<FilterPanel filterData={filterData} />);
+
   test('has no accessibility violations', async () => {
     const { container } = render(<FilterPanel title="test title" />);
 
@@ -54,9 +58,8 @@ describe('FilterPanel', () => {
   });
 
   test('renders the legacy filter panel', () => {
-    const { getByTestId } = render(
-      <FilterPanel filterData={mockProps.filterData} />
-    );
+    const { getByTestId } = render(<FilterPanel filterData={filterData} />);
+
     expect(getByTestId('legacy-filter-panel')).toBeVisible();
   });
 });

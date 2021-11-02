@@ -26,12 +26,10 @@ Description modules provide a means to orderly layout short-form content.
 
 ### Overview
 
-The description module can be built using a combination of the
-
-<LinkTo kind="layout-modules-titlebarmodule" story="default">
-  `TitleBarModule`
-</LinkTo>
-component and [paragraph elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p).
+The description module can be built using a combination of the <LinkTo
+kind={getDocsId('layout-modules-titlebarmodule')}
+story="default">`TitleBarModule`</LinkTo> component and
+[paragraph elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p).
 
 Everything passed in as a
 [render prop](https://reactjs.org/docs/render-props.html) child of
@@ -66,11 +64,8 @@ getter. For example, to add a `className`:
 ### Anatomy
 
 1. **Title:** This is the title, achieved by using the `TitleBarModule`. Learn
-   more about the
-   <LinkTo kind="layout-modules-titlebarmodule" story="default">
-     TitleBarModule
-   </LinkTo>
-   and potential variants.
+   more about the <LinkTo kind={getDocsId('layout-modules-titlebarmodule')}
+   story="default">TitleBarModule</LinkTo> and potential variants.
 2. **Description:** This is the description itself, the type style is defined so
    you shouldn’t supplement your own values.
 3. **Bottom spacer:** There is a 32-pixel `$spacing-07` spacer included below
@@ -82,12 +77,9 @@ getter. For example, to add a `className`:
 
 If necessary, subsection titles can be substituted or used below section titles.
 There are values already supplied for the title type styles so you shouldn’t
-supplement your own. Learn more by reviewing the
-
-<LinkTo kind="layout-modules-titlebarmodule" story="default">
-  {' '}
-  TitleBarModule.
-</LinkTo>
+supplement your own. Learn more by reviewing the <LinkTo
+kind={getDocsId('layout-modules-titlebarmodule')}
+story="default">TitleBarModule.</LinkTo>
 
 The description module can also be created without any title.
 
@@ -139,7 +131,7 @@ starting point for placement.
 
 ### References
 
-- <LinkTo kind="layout-modules-titlebarmodule" story="default">
+- <LinkTo kind={getDocsId('layout-modules-titlebarmodule')} story="default">
     TitleBarModule
   </LinkTo>
 - [The Paragraph element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p)

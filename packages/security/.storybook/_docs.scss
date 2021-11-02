@@ -6,7 +6,16 @@
 //
 
 @import '@carbon/grid/scss/grid';
+@import '@carbon/layout/scss/breakpoint';
 @import '@carbon/layout/scss/spacing';
+
+.layout-module__decorator {
+  width: 33vw;
+  max-width: map-get(
+      $map: map-get($map: $carbon--grid-breakpoints, $key: md),
+      $key: width
+    ) * 0.66;
+}
 
 .library__row {
   margin-bottom: $carbon--spacing-07;

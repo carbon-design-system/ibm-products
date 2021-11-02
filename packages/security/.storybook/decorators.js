@@ -5,4 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default (story) => story();
+import React from 'react';
+
+export default function decorator(story) {
+  return <div className="layout-module__decorator">{story()}</div>;
+}

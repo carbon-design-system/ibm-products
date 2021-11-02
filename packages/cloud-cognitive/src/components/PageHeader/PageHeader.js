@@ -133,7 +133,7 @@ export let PageHeader = React.forwardRef(
     // state based on props only
     const actionBarItemArray = extractShapesArray(actionBarItems);
     const hasActionBar = actionBarItemArray && actionBarItemArray.length;
-    const hasBreadcrumbRow = !(!breadcrumbs && !actionBarItems);
+    const hasBreadcrumbRow = breadcrumbs || actionBarItems;
 
     /* Title shape is used to allow title to be string or shape */
     const titleShape = getTitleShape();
@@ -606,7 +606,7 @@ export let PageHeader = React.forwardRef(
                 </Row>
               ) : null}
 
-              {!collapseTitle && !(!title && !pageActions) ? (
+              {!collapseTitle && (title || pageActions) ? (
                 <Row
                   className={cx(`${blockClass}__title-row`, {
                     [`${blockClass}__title-row--no-breadcrumb-row`]:

@@ -14,6 +14,7 @@ import {
   expectMultipleError,
   deprecated,
   required,
+  invalid,
 } from '../../global/js/utils/test-helper';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -89,6 +90,7 @@ const title = `Title of the ${uuidv4()} tearsheet`;
 // and also (with extra props and omitting button tests) to CreateTearsheetNarrow
 let tooManyButtonsTestedAlready = false;
 let closeIconDescriptionTestedAlready = false;
+let selectorsFloatingMenusTestedAlready = false;
 const commonTests = (Ts, name, props, testActions) => {
   it(`renders a component ${name}`, () => {
     render(<Ts {...{ ...props, closeIconDescription }} />);
@@ -287,17 +289,37 @@ const commonTests = (Ts, name, props, testActions) => {
   });
 
   it("doesn't render when stacked more than three deep", () =>
-    expectWarn(
-      'Tearsheet not rendered: maximum stacking depth exceeded.',
-      () => {
-        render(<Ts {...props} open />);
-        render(<Ts {...props} open />);
-        render(<Ts {...props} open />);
-        render(<Ts {...props} open />);
-        expect(
-          document.querySelectorAll(`.${carbon.prefix}--modal.is-visible`)
-        ).toHaveLength(3);
-      }
+    expectMultipleError(
+      selectorsFloatingMenusTestedAlready
+        ? []
+        : [
+            invalid(
+              'selectorsFloatingMenus',
+              'ComposedModal',
+              'array',
+              'string'
+            ),
+            [
+              'Warning: React does not recognize the `%s` prop on a DOM element.',
+              'selectorsFloatingMenus',
+              'selectorsfloatingmenus', // cspell:disable-line
+              /.*/,
+            ],
+          ],
+      () =>
+        expectWarn(
+          'Tearsheet not rendered: maximum stacking depth exceeded.',
+          () => {
+            render(<Ts {...props} open />);
+            render(<Ts {...props} open />);
+            render(<Ts {...props} open />);
+            render(<Ts {...props} open />);
+            selectorsFloatingMenusTestedAlready = true;
+            expect(
+              document.querySelectorAll(`.${carbon.prefix}--modal.is-visible`)
+            ).toHaveLength(3);
+          }
+        )
     ));
 };
 

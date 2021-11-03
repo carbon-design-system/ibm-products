@@ -33,24 +33,26 @@
 
   &__items {
     display: flex;
-    align-items: center;
+    margin-top: $carbon--spacing-02;
     margin-left: auto;
+
+    &--subsection {
+      margin-top: $carbon--spacing-01;
+    }
   }
 
   &--label &__items {
     margin-top: $carbon--spacing-06;
+
+    &--subsection {
+      margin-top: $carbon--spacing-05;
+    }
   }
 
-  &--subsection & {
-    &__items {
-      margin-top: $carbon--spacing-04;
-    }
+  &--subsection &__title {
+    @include carbon--type-style($name: productive-heading-02);
 
-    &__title {
-      @include carbon--type-style($name: productive-heading-02);
-
-      order: 1;
-    }
+    order: 1;
   }
 
   &__label-wrapper {

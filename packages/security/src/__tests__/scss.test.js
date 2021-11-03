@@ -9,22 +9,28 @@ const { resolve } = require('path');
 const { execFileSync } = require('child_process');
 const { sync: glob } = require('glob');
 
-const r = (file) => resolve(__dirname, file);
-const loadPath1 = r('../../node_modules');
-const loadPath2 = r('../../../../node_modules');
+const loadPath1 = resolve(__dirname, '../../node_modules');
+const loadPath2 = resolve(__dirname, '../../../../node_modules');
 
 const g = (globString) =>
-  glob(r(globString), {
+  glob(resolve(__dirname, globString), {
     nodir: true, // cspell:disable-line
     nosort: true, // cspell:disable-line
   });
 const scssAll = g('../**/*.scss');
 
-const compile = (file, compressed, collect) =>
+// Check that an SCSS file compiles correctly. This function does not return
+// a value, but if the SCSS file does not compile it will throw an Error
+// containing details of the compilation failure.
+const compile = (file, compressed, collect) => {
+  // We use the sass cli because this is currently much faster than using
+  // the API owing to the overhead of @import resolution through the API.
+  // When the sass API is revised it may be feasible to switch back to
+  // using the API for SCSS compilation and checking.
   execFileSync(
     'sass',
     [
-      compressed ? '--style=compressed' : '--style=expanded',
+      '--style=expanded',
       '--no-source-map',
       '--load-path',
       loadPath1,
@@ -35,9 +41,10 @@ const compile = (file, compressed, collect) =>
     {
       stdio: ['ignore', collect ? 'pipe' : 'ignore', 'pipe'],
     }
-  )?.toString();
+  );
+};
 
-describe('CSS export checks', () => {
+describe('SCSS entry points', () => {
   // This test will fail for any of our SCSS entry points that does not compile.
   scssAll.forEach((file) =>
     it(`${file.match(/\/src\/(.*)/)[1]} compiles as valid SCSS`, () => {

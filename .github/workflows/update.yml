@@ -2,7 +2,7 @@ name: Update packages
 
 on:
   schedule:
-    - cron: '0 4 * * WED'
+    - cron: '0 4 * * FRI'
 
 jobs:
   release:

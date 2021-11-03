@@ -13670,16 +13670,20 @@ li.bx--accordion__item--disabled:last-of-type {
 
 .security--layout-module--title-bar__items {
   display: flex;
-  align-items: center;
+  margin-top: 0.25rem;
   margin-left: auto;
+}
+
+.security--layout-module--title-bar__items--subsection {
+  margin-top: 0.125rem;
 }
 
 .security--layout-module--title-bar--label .security--layout-module--title-bar__items {
   margin-top: 1.5rem;
 }
 
-.security--layout-module--title-bar--subsection .security--layout-module--title-bar__items {
-  margin-top: 0.75rem;
+.security--layout-module--title-bar--label .security--layout-module--title-bar__items--subsection {
+  margin-top: 1rem;
 }
 
 .security--layout-module--title-bar--subsection .security--layout-module--title-bar__title {

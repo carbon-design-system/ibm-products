@@ -37,6 +37,7 @@ export let ButtonMenu = React.forwardRef(
       className,
       iconDescription,
       label,
+      menuOptionsClass,
       renderIcon: Icon,
       size,
       // Collect any other property values passed in.
@@ -53,7 +54,7 @@ export let ButtonMenu = React.forwardRef(
         blockClass, // Apply the block class to the main HTML element
         className // Apply any supplied class names to the main HTML element.
       )}
-      menuOptionsClass={`${blockClass}__options`}
+      menuOptionsClass={cx(`${blockClass}__options`, menuOptionsClass)}
       renderIcon={() => (
         <div
           className={cx([
@@ -112,6 +113,11 @@ ButtonMenu.propTypes = {
    * The button label for the menu trigger.
    */
   label: PropTypes.node,
+
+  /**
+   * class name applied to the overflow options
+   */
+  menuOptionsClass: PropTypes.string,
 
   /**
    * Optional prop to allow overriding the icon rendering.

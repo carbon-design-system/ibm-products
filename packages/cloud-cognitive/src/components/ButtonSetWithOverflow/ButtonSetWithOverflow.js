@@ -25,6 +25,7 @@ export const ButtonSetWithOverflow = ({
   className,
   onWidthChange,
   buttonSetOverflowLabel,
+  menuOptionsClass,
   rightAlign,
 }) => {
   const [showAsOverflow, setShowAsOverflow] = useState(false);
@@ -166,6 +167,7 @@ export const ButtonSetWithOverflow = ({
         aria-hidden={true}
       >
         <AButtonMenu
+          menuOptionsClass={menuOptionsClass}
           ref={sizingContainerRefCombo}
           buttons={buttons}
           size={buttonSize}
@@ -174,7 +176,11 @@ export const ButtonSetWithOverflow = ({
 
       {/* The displayed components */}
       {showAsOverflow ? (
-        <AButtonMenu buttons={buttons} size={buttonSize} />
+        <AButtonMenu
+          buttons={buttons}
+          size={buttonSize}
+          menuOptionsClass={menuOptionsClass}
+        />
       ) : (
         <AButtonSet
           className={`${blockClass}__button-container`}
@@ -210,6 +216,10 @@ ButtonSetWithOverflow.propTypes = {
    * className
    */
   className: PropTypes.string,
+  /**
+   * class name applied to the overflow options
+   */
+  menuOptionsClass: PropTypes.string,
   /**
    * onResize reports maxSize on resize
    */

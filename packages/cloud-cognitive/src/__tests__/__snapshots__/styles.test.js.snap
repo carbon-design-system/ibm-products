@@ -6269,6 +6269,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   z-index: 7999;
 }
 
+.exp--page-header__action-bar-menu-options.bx--overflow-menu-options,
+.bx--breadcrumb-menu-options.bx--overflow-menu-options,
+.exp--page-header__button-set-menu-options.bx--overflow-menu-options {
+  z-index: 7999;
+}
+
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */

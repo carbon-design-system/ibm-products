@@ -6,20 +6,19 @@
  */
 
 import { DocsContainer } from '@storybook/addon-docs';
-import { Grid } from 'carbon-components-react';
 import { paramCase } from 'param-case';
 
 import { Style } from '../../core/.storybook/preview';
 import { sectionTitle } from '../config';
 import styles from './_docs.scss';
 
-const getCategory = (title) => `${sectionTitle}/${title}`;
+const getCategory = (category, title) => `${sectionTitle}/${category}/${title}`;
 
-const components = (title) => getCategory(`Components/${title}`);
-const deprecated = (title) => getCategory(`Deprecated/${title}`);
-const layoutModules = (title) => getCategory(`Layout modules/${title}`);
-const pageLayouts = (title) => getCategory(`Page layouts (canary)/${title}`);
-const patterns = (title) => getCategory(`Patterns/${title}`);
+const components = (title) => getCategory('Components', title);
+const deprecated = (title) => getCategory('Deprecated', title);
+const layoutModules = (title) => getCategory('Layout modules', title);
+const pageLayouts = (title) => getCategory('Layouts', title);
+const patterns = (title) => getCategory('Patterns', title);
 
 function getDocsId(id) {
   return `${paramCase(sectionTitle)}-${id}`;

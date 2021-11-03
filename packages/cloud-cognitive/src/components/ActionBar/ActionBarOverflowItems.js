@@ -23,6 +23,7 @@ const componentName = 'ActionBar';
 
 export const ActionBarOverflowItems = ({
   className,
+  menuOptionsClass,
   overflowItems,
   overflowAriaLabel,
 }) => {
@@ -34,7 +35,7 @@ export const ActionBarOverflowItems = ({
       className={cx(blockClass, className)}
       direction="bottom"
       flipped
-      menuOptionsClass={`${blockClass}__options`}
+      menuOptionsClass={cx(`${blockClass}__options`, menuOptionsClass)}
     >
       {React.Children.map(overflowItems, (item) => {
         // This uses a copy of a menu item option
@@ -72,6 +73,10 @@ ActionBarOverflowItems.propTypes = {
    * className
    */
   className: PropTypes.string,
+  /**
+   * class name applied to the overflow options
+   */
+  menuOptionsClass: PropTypes.string,
   /**
    * overflowAriaLabel label for open close button overflow used for action bar items that do nto fit.
    */

@@ -107,10 +107,8 @@ export let BreadcrumbWithOverflow = ({
       <BreadcrumbItem key={`breadcrumb-overflow-${internalId.current}`}>
         <OverflowMenu
           ariaLabel={overflowAriaLabel}
-          menuOffset={{ top: 10, left: 59 }} // TODO: REMOVE when this is fixed https://github.com/carbon-design-system/carbon/issues/9155
           renderIcon={OverflowMenuHorizontal32}
           className={`${blockClass}__overflow-menu`}
-          menuOptionsClass={`${carbon.prefix}--breadcrumb-menu-options`} // TODO: REMOVE when this is fixed https://github.com/carbon-design-system/carbon/issues/9155
         >
           {
             // eslint-disable-next-line react/prop-types

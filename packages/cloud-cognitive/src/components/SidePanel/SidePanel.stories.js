@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import {
   Button,
@@ -77,8 +77,12 @@ const prefix = 'side-panel-stories__';
 const defaultStoryProps = {
   title:
     'Incident management for your application, testing a very long title to see how this behaves with a longer title',
-  subtitle:
-    'This is some text that would talk about how you could investigate incident management within this side panel.',
+  subtitle: (
+    <>
+      This is some text that would talk about how you could{' '}
+      <strong>investigate</strong> incident management within this side panel.
+    </>
+  ),
 };
 
 const headerData = [
@@ -316,6 +320,7 @@ const renderUIShellHeader = () => (
 // eslint-disable-next-line react/prop-types
 const SlideOverTemplate = ({ minimalContent, actions, ...args }) => {
   const [open, setOpen] = useState(false);
+  const testRef = useRef();
   return (
     <>
       {renderUIShellHeader()}
@@ -327,6 +332,7 @@ const SlideOverTemplate = ({ minimalContent, actions, ...args }) => {
         open={open}
         onRequestClose={() => setOpen(false)}
         actions={actionSets[actions]}
+        ref={testRef}
       >
         {!minimalContent && <ChildrenContent />}
       </SidePanel>

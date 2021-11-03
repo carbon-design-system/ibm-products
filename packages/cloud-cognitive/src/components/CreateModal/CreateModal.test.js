@@ -14,11 +14,10 @@ import { pkg } from '../../settings';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
-
-const blockClass = `${prefix}--create-modal`;
+const blockClass = `${pkg.prefix}--create-modal`;
 
 import { CreateModal } from '.';
+import { expectError } from '../../global/js/utils/test-helper';
 const componentName = CreateModal.displayName;
 
 const className = `class-${uuidv4()}`;
@@ -99,9 +98,8 @@ describe(componentName, () => {
   it('adds the Devtools attribute to the containing node', () => {
     renderComponent({ 'data-testid': dataTestId });
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(componentName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      componentName
     );
   });
 
@@ -164,50 +162,50 @@ describe(componentName, () => {
     expect(firstInput === document.activeElement).toBeTruthy();
   });
 
-  it('throws an error if there are more than 4 child nodes inside of the modal', () => {
-    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
-
-    const { container } = renderComponent({}, [
-      <TextInput
-        key="form-field-1"
-        id="1"
-        labelText="Text input label"
-        helperText="Helper text goes here"
-        placeholder="Placeholder"
-      />,
-      <TextInput
-        key="form-field-2"
-        id="2"
-        labelText="Text input label"
-        helperText="Helper text goes here"
-        placeholder="Placeholder"
-      />,
-      <TextInput
-        key="form-field-3"
-        id="3"
-        labelText="Text input label"
-        helperText="Helper text goes here"
-        placeholder="Placeholder"
-      />,
-      <TextInput
-        key="form-field-4"
-        id="4"
-        labelText="Text input label"
-        helperText="Helper text goes here"
-        placeholder="Placeholder"
-      />,
-      <TextInput
-        key="form-field-5"
-        id="5"
-        labelText="Text input label"
-        helperText="Helper text goes here"
-        placeholder="Placeholder"
-      />,
-    ]);
-    expect(() => {
-      render(...container);
-    }).toThrow();
-
-    error.mockRestore();
-  });
+  it('throws an error if there are more than 4 child nodes inside of the modal', () =>
+    expectError(
+      'The `CreateModal` component does not take more than 4 nodes as children',
+      () => {
+        const { container } = renderComponent({}, [
+          <TextInput
+            key="form-field-1"
+            id="1"
+            labelText="Text input label"
+            helperText="Helper text goes here"
+            placeholder="Placeholder"
+          />,
+          <TextInput
+            key="form-field-2"
+            id="2"
+            labelText="Text input label"
+            helperText="Helper text goes here"
+            placeholder="Placeholder"
+          />,
+          <TextInput
+            key="form-field-3"
+            id="3"
+            labelText="Text input label"
+            helperText="Helper text goes here"
+            placeholder="Placeholder"
+          />,
+          <TextInput
+            key="form-field-4"
+            id="4"
+            labelText="Text input label"
+            helperText="Helper text goes here"
+            placeholder="Placeholder"
+          />,
+          <TextInput
+            key="form-field-5"
+            id="5"
+            labelText="Text input label"
+            helperText="Helper text goes here"
+            placeholder="Placeholder"
+          />,
+        ]);
+        expect(() => {
+          render(...container);
+        }).toThrow();
+      }
+    ));
 });

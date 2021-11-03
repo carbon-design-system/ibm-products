@@ -8,10 +8,10 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { pkg } from '../../settings';
-const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
+
 import { Cascade } from '.';
 
-const blockClass = `${prefix}--cascade`;
+const blockClass = `${pkg.prefix}--cascade`;
 const componentName = Cascade.displayName;
 
 describe(componentName, () => {
@@ -73,9 +73,11 @@ describe(componentName, () => {
     expect(container.firstChild).toHaveClass(className);
   });
 
+  const dataTestId = 'dataTestId';
+
   it('adds additional properties to the containing node', () => {
-    render(<Cascade data-testid="test-id" />);
-    screen.getByTestId('test-id');
+    render(<Cascade data-testid={dataTestId} />);
+    screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', () => {
@@ -85,10 +87,10 @@ describe(componentName, () => {
   });
 
   it('adds the Devtools attribute to the containing node', () => {
-    render(<Cascade data-testid="test-id" />);
-    expect(screen.getByTestId('test-id')).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(componentName)
+    render(<Cascade data-testid={dataTestId} />);
+
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      componentName
     );
   });
 });

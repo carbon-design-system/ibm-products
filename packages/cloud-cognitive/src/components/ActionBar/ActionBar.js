@@ -41,6 +41,7 @@ export let ActionBar = React.forwardRef(
       children,
       className,
       maxVisible,
+      menuOptionsClass,
       onWidthChange,
       overflowAriaLabel,
       rightAlign,
@@ -107,6 +108,7 @@ export let ActionBar = React.forwardRef(
       if (newOverflowItems.length) {
         newDisplayedItems.push(
           <ActionBarOverflowItems
+            menuOptionsClass={menuOptionsClass}
             overflowAriaLabel={overflowAriaLabel}
             overflowItems={newOverflowItems}
             key={`overflow-menu-${internalId.current}`}
@@ -115,7 +117,7 @@ export let ActionBar = React.forwardRef(
       }
 
       setDisplayedItems(newDisplayedItems);
-    }, [itemArray, displayCount, overflowAriaLabel]);
+    }, [itemArray, displayCount, overflowAriaLabel, menuOptionsClass]);
 
     // determine display count based on space available and width of pageActions
     const checkFullyVisibleItems = () => {
@@ -293,9 +295,12 @@ ActionBar.propTypes = {
    */
   maxVisible: PropTypes.number,
   /**
-   * onItemCountChange - event reporting maxWidth
+   * class name applied to the overflow options
    */
-  onWidthChange: PropTypes.func,
+  menuOptionsClass: PropTypes.string,
+  /**
+   * onItemCountChange - event reporting maxWidth
+   */ onWidthChange: PropTypes.func,
   /**
    * overflowAriaLabel label for open close button overflow used for action bar items that do nto fit.
    */

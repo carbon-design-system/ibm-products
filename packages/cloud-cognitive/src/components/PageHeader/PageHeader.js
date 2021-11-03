@@ -52,6 +52,7 @@ export let PageHeader = React.forwardRef(
   (
     {
       actionBarItems,
+      actionBarMenuOptionsClass,
       actionBarOverflowAriaLabel,
       actionBarOverflowLabel: deprecated_actionBarOverflowLabel,
       allTagsModalSearchLabel,
@@ -80,6 +81,7 @@ export let PageHeader = React.forwardRef(
       navigation,
       pageActions,
       pageActionsOverflowLabel,
+      pageActionsMenuOptionsClass,
       pageHeaderOffset: _deprecated_pageHeaderOffset,
       preCollapseTitleRow: deprecated_preCollapseTitleRow,
       preventBreadcrumbScroll: deprecated_preventBreadcrumbScroll,
@@ -129,9 +131,7 @@ export let PageHeader = React.forwardRef(
     // state based on props only
     const actionBarItemArray = extractShapesArray(actionBarItems);
     const hasActionBar = actionBarItemArray && actionBarItemArray.length;
-    const hasBreadcrumbRow = !(
-      breadcrumbs === undefined && actionBarItems === undefined
-    );
+    const hasBreadcrumbRow = breadcrumbs || actionBarItems;
 
     // NOTE: The buffer is used to add space between the bottom of the header and the last content
     // Not pre-collapsed and (subtitle or children)
@@ -436,7 +436,7 @@ export let PageHeader = React.forwardRef(
       /* istanbul ignore next */
       return (
         disableBreadcrumbScroll &&
-        actionBarItems === undefined &&
+        !actionBarItems &&
         scrollYValue + metrics.headerTopValue >= 0
       );
     };
@@ -517,15 +517,15 @@ export let PageHeader = React.forwardRef(
                     <Column
                       className={cx(`${blockClass}__breadcrumb-column`, {
                         [`${blockClass}__breadcrumb-column--background`]:
-                          breadcrumbs !== undefined || hasActionBar,
+                          !!breadcrumbs || hasActionBar,
                       })}
                     >
                       {/* keeps actionBar right even if empty */}
 
-                      {breadcrumbs !== undefined ? (
+                      {breadcrumbs ? (
                         <BreadcrumbWithOverflow
                           className={`${blockClass}__breadcrumb`}
-                          noTrailingSlash={title !== undefined}
+                          noTrailingSlash={!!title}
                           overflowAriaLabel={breadcrumbOverflowAriaLabel}
                           breadcrumbs={
                             breadcrumbsIn
@@ -566,6 +566,10 @@ export let PageHeader = React.forwardRef(
                           <>
                             {thePageActions(true, pageActionsInBreadcrumbRow)}
                             <ActionBar
+                              menuOptionsClass={cx(
+                                actionBarMenuOptionsClass,
+                                `${blockClass}__action-bar-menu-options`
+                              )}
                               overflowAriaLabel={actionBarOverflowAriaLabel}
                               actions={actionBarItemArray}
                               className={`${blockClass}__action-bar`}
@@ -580,8 +584,7 @@ export let PageHeader = React.forwardRef(
                 </Row>
               ) : null}
 
-              {!collapseTitle &&
-              !(title === undefined && pageActions === undefined) ? (
+              {!collapseTitle && (title || pageActions) ? (
                 <Row
                   className={cx(`${blockClass}__title-row`, {
                     [`${blockClass}__title-row--no-breadcrumb-row`]:
@@ -589,16 +592,14 @@ export let PageHeader = React.forwardRef(
                     [`${blockClass}__title-row--under-action-bar`]:
                       hasActionBar,
                     [`${blockClass}__title-row--has-page-actions`]:
-                      pageActions !== undefined,
+                      !!pageActions,
                     [`${blockClass}__title-row--sticky`]:
-                      pageActions !== undefined &&
-                      actionBarItems === undefined &&
-                      hasBreadcrumbRow,
+                      !!pageActions && !actionBarItems && hasBreadcrumbRow,
                   })}
                 >
                   <Column className={`${blockClass}__title-column`}>
                     {/* keeps page actions right even if empty */}
-                    {title !== undefined ? (
+                    {title ? (
                       <PageHeaderTitle
                         blockClass={blockClass}
                         hasBreadcrumbRow={hasBreadcrumbRow}
@@ -610,7 +611,7 @@ export let PageHeader = React.forwardRef(
                 </Row>
               ) : null}
 
-              {subtitle !== undefined ? (
+              {subtitle ? (
                 <Row className={`${blockClass}__subtitle-row`}>
                   <Column className={`${blockClass}__subtitle`}>
                     {subtitle}
@@ -618,7 +619,7 @@ export let PageHeader = React.forwardRef(
                 </Row>
               ) : null}
 
-              {children !== undefined ? (
+              {children ? (
                 <Row className={`${blockClass}__available-row`}>
                   <Column className={`${blockClass}__available-column`}>
                     {children}
@@ -657,7 +658,7 @@ export let PageHeader = React.forwardRef(
                     <Column
                       className={cx(`${blockClass}__navigation-tags`, {
                         [`${blockClass}__navigation-tags--tags-only`]:
-                          navigation === undefined,
+                          !navigation,
                       })}
                     >
                       <TagSet
@@ -683,18 +684,18 @@ export let PageHeader = React.forwardRef(
                 <Row
                   className={cx(`${blockClass}__navigation-row`, {
                     [`${blockClass}__navigation-row--spacing-above-06`]:
-                      navigation !== undefined,
+                      !!navigation,
                     [`${blockClass}__navigation-row--has-tags`]: tags,
                   })}
                 >
                   <Column className={`${blockClass}__navigation-tabs`}>
                     {navigation}
                   </Column>
-                  {tags !== undefined ? (
+                  {tags ? (
                     <Column
                       className={cx(`${blockClass}__navigation-tags`, {
                         [`${blockClass}__navigation-tags--tags-only`]:
-                          navigation === undefined,
+                          !navigation,
                       })}
                     >
                       <TagSet
@@ -758,6 +759,10 @@ export let PageHeader = React.forwardRef(
             {pageActions.content ?? (
               <ButtonSetWithOverflow
                 className={`${blockClass}__button-set--in-breadcrumb`}
+                menuOptionsClass={cx(
+                  pageActionsMenuOptionsClass,
+                  `${blockClass}__button-set-menu-options`
+                )}
                 onWidthChange={handleWidthChange}
                 buttons={pageActions}
                 buttonSetOverflowLabel={pageActionsOverflowLabel}
@@ -897,6 +902,10 @@ PageHeader.propTypes = {
     ]),
     'Expects an array of objects with the following properties: iconDescription, renderIcon and onClick.'
   ),
+  /**
+   * class name applied to the action bar overflow options
+   */
+  actionBarMenuOptionsClass: PropTypes.string,
   /**
    * When there is insufficient space for all actionBarItems to be displayed this
    * aria label is used for the action bar overflow menu
@@ -1086,6 +1095,10 @@ PageHeader.propTypes = {
       maxWidth: PropTypes.number.isRequired,
     }),
   ]),
+  /**
+   * class name applied to the page actions overflow options
+   */
+  pageActionsMenuOptionsClass: PropTypes.string,
   /**
    * When there is insufficient space to display all of hte page actions inline a dropdown button menu is shown,
    * containing the page actions. This label is used as the display content of the dropdown button menu.

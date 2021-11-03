@@ -75,6 +75,7 @@ export const TearsheetShell = React.forwardRef(
       navigation,
       onClose,
       open,
+      selectorPrimaryFocus,
       size,
       title,
       verticalPosition,
@@ -83,6 +84,8 @@ export const TearsheetShell = React.forwardRef(
     },
     ref
   ) => {
+    const localRef = useRef();
+    const modalRef = ref || localRef;
     const { width, ref: resizer } = useResizeDetector({ handleHeight: false });
 
     // Keep track of the stack depth and our position in it (1-based, 0=closed)
@@ -106,15 +109,37 @@ export const TearsheetShell = React.forwardRef(
       setPosition(newPosition);
     }
 
+    handleStackChange.checkFocus = function () {
+      // if we are now the topmost tearsheet, ensure we have focus
+      if (
+        position === depth &&
+        modalRef.current &&
+        !modalRef.current.innerModal.current.contains(document.activeElement)
+      ) {
+        handleStackChange.claimFocus();
+      }
+    };
+
+    // Callback to give the tearsheet the opportunity to claim focus
+    handleStackChange.claimFocus = function () {
+      const element = selectorPrimaryFocus
+        ? modalRef.current.innerModal.current.querySelector(
+            selectorPrimaryFocus
+          )
+        : modalRef.current.startSentinel.current;
+      setTimeout(() => element.focus(), 1);
+    };
+
     // Hook called whenever the tearsheet mounts, unmounts, or 'open' changes.
     useLayoutEffect(() => {
       const notify = () =>
-        stack.all.forEach((handler) =>
+        stack.all.forEach((handler) => {
           handler(
             Math.min(stack.open.length, maxDepth),
             stack.open.indexOf(handler) + 1
-          )
-        );
+          );
+          handler.checkFocus();
+        });
 
       // Register this tearsheet's stack change callback/listener.
       stack.all.push(handleStackChange);
@@ -145,6 +170,14 @@ export const TearsheetShell = React.forwardRef(
         }
       };
     }, [open]);
+
+    function handleFocus() {
+      // If something within us is receiving focus but we are not the topmost
+      // stacked tearsheet, transfer focus to the topmost tearsheet instead
+      if (position < depth) {
+        stack.open[stack.open.length - 1].claimFocus();
+      }
+    }
 
     if (position <= depth) {
       // Include a modal header if and only if one or more of these is given.
@@ -182,8 +215,25 @@ export const TearsheetShell = React.forwardRef(
           containerClassName={cx(`${bc}__container`, {
             [`${bc}__container--lower`]: verticalPosition === 'lower',
           })}
-          {...{ onClose, open, ref }}
+          {...{ onClose, open, selectorPrimaryFocus }}
+          onFocus={handleFocus}
           preventCloseOnClickOutside={!isPassive}
+          ref={modalRef}
+          {...(depth > 1
+            ? // this shenanigans is to ensure that when depth<=1 we don't supply a selectorsFloatingMenus
+              // prop AT ALL -- not even a null -- because even null gets passed through to the div and causes a
+              // React warning. Once that is fixed (see https://github.com/carbon-design-system/carbon/issues/10000)
+              // this could revert to selectorsFloatingMenus: {depth > 1 ? [...] : null}.
+              // NB if .bx__container is added to the default value, this can be removed altogether.
+              {
+                selectorsFloatingMenus: [
+                  `.${carbon.prefix}--overflow-menu-options`,
+                  `.${carbon.prefix}--tooltip`,
+                  '.flatpickr-calendar',
+                  `.${bc}__container`,
+                ],
+              }
+            : {})}
           size="sm"
         >
           {includeHeader && (

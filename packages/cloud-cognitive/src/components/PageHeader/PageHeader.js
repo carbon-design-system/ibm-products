@@ -52,6 +52,7 @@ export let PageHeader = React.forwardRef(
   (
     {
       actionBarItems,
+      actionBarMenuOptionsClass,
       actionBarOverflowAriaLabel,
       actionBarOverflowLabel: deprecated_actionBarOverflowLabel,
       allTagsModalSearchLabel,
@@ -80,6 +81,7 @@ export let PageHeader = React.forwardRef(
       navigation,
       pageActions,
       pageActionsOverflowLabel,
+      pageActionsMenuOptionsClass,
       pageHeaderOffset: _deprecated_pageHeaderOffset,
       preCollapseTitleRow: deprecated_preCollapseTitleRow,
       preventBreadcrumbScroll: deprecated_preventBreadcrumbScroll,
@@ -133,15 +135,7 @@ export let PageHeader = React.forwardRef(
     // state based on props only
     const actionBarItemArray = extractShapesArray(actionBarItems);
     const hasActionBar = actionBarItemArray && actionBarItemArray.length;
-    const hasBreadcrumbRow = !(
-      breadcrumbs === undefined && actionBarItems === undefined
-    );
-    const pageActionsItemArray = extractShapesArray(pageActions)?.map(
-      (shape) => ({
-        label: shape.children,
-        ...shape,
-      })
-    );
+    const hasBreadcrumbRow = breadcrumbs || actionBarItems;
 
     /* Title shape is used to allow title to be string or shape */
     const titleShape = getTitleShape();
@@ -177,7 +171,7 @@ export let PageHeader = React.forwardRef(
       setActionBarMinWidth(minWidth);
     };
 
-    const handleButtonSetWidthChange = ({ minWidth, maxWidth }) => {
+    const handlePageActionWidthChange = ({ minWidth, maxWidth }) => {
       /* don't know how to test resize */
       /* istanbul ignore next */
       setPageActionInBreadcrumbMaxWidth(maxWidth);
@@ -211,6 +205,13 @@ export let PageHeader = React.forwardRef(
 
     // use effects
     useEffect(() => {
+      if (pageActions?.content) {
+        const { minWidth, maxWidth } = pageActions;
+        handlePageActionWidthChange({ minWidth, maxWidth });
+      }
+    }, [pageActions]);
+
+    useEffect(() => {
       // Determine the location of the pageAction buttons
       /* istanbul ignore next */
       setPageActionsInBreadcrumbRow(
@@ -226,6 +227,9 @@ export let PageHeader = React.forwardRef(
     ]);
 
     useEffect(() => {
+      // Assesses the size of the action bar and page action area and their required
+      // space before setting their sizes
+      //
       let newActionBarWidth = 'initial';
       let newPageActionInBreadcrumbWidth = 'initial';
 
@@ -439,7 +443,7 @@ export let PageHeader = React.forwardRef(
       /* istanbul ignore next */
       return (
         disableBreadcrumbScroll &&
-        actionBarItems === undefined &&
+        !actionBarItems &&
         scrollYValue + metrics.headerTopValue >= 0
       );
     };
@@ -538,15 +542,15 @@ export let PageHeader = React.forwardRef(
                     <Column
                       className={cx(`${blockClass}__breadcrumb-column`, {
                         [`${blockClass}__breadcrumb-column--background`]:
-                          breadcrumbs !== undefined || hasActionBar,
+                          !!breadcrumbs || hasActionBar,
                       })}
                     >
                       {/* keeps actionBar right even if empty */}
 
-                      {breadcrumbs !== undefined ? (
+                      {breadcrumbs ? (
                         <BreadcrumbWithOverflow
                           className={`${blockClass}__breadcrumb`}
-                          noTrailingSlash={title !== undefined}
+                          noTrailingSlash={!!title}
                           overflowAriaLabel={breadcrumbOverflowAriaLabel}
                           breadcrumbs={breadcrumbsInWithTitle}
                         >
@@ -588,24 +592,12 @@ export let PageHeader = React.forwardRef(
                         {hasActionBar ? (
                           // Investigate the responsive  behaviour or this and the title also fix the ActionBar Item and PageAction story css
                           <>
-                            {pageActions && (
-                              <div
-                                className={cx(`${blockClass}__page-actions`, {
-                                  [`${blockClass}__page-actions--in-breadcrumb`]:
-                                    pageActionsInBreadcrumbRow,
-                                })}
-                              >
-                                <ButtonSetWithOverflow
-                                  className={`${blockClass}__button-set--in-breadcrumb`}
-                                  onWidthChange={handleButtonSetWidthChange}
-                                  buttons={pageActionsItemArray}
-                                  buttonSetOverflowLabel={
-                                    pageActionsOverflowLabel
-                                  }
-                                />
-                              </div>
-                            )}
+                            {thePageActions(true, pageActionsInBreadcrumbRow)}
                             <ActionBar
+                              menuOptionsClass={cx(
+                                actionBarMenuOptionsClass,
+                                `${blockClass}__action-bar-menu-options`
+                              )}
                               overflowAriaLabel={actionBarOverflowAriaLabel}
                               actions={actionBarItemArray}
                               className={`${blockClass}__action-bar`}
@@ -620,8 +612,7 @@ export let PageHeader = React.forwardRef(
                 </Row>
               ) : null}
 
-              {!collapseTitle &&
-              !(title === undefined && pageActions === undefined) ? (
+              {!collapseTitle && (title || pageActions) ? (
                 <Row
                   className={cx(`${blockClass}__title-row`, {
                     [`${blockClass}__title-row--no-breadcrumb-row`]:
@@ -629,16 +620,14 @@ export let PageHeader = React.forwardRef(
                     [`${blockClass}__title-row--under-action-bar`]:
                       hasActionBar,
                     [`${blockClass}__title-row--has-page-actions`]:
-                      pageActions !== undefined,
+                      !!pageActions,
                     [`${blockClass}__title-row--sticky`]:
-                      pageActions !== undefined &&
-                      actionBarItems === undefined &&
-                      hasBreadcrumbRow,
+                      !!pageActions && !actionBarItems && hasBreadcrumbRow,
                   })}
                 >
                   <Column className={`${blockClass}__title-column`}>
                     {/* keeps page actions right even if empty */}
-                    {title !== undefined ? (
+                    {title ? (
                       <div
                         className={cx(`${blockClass}__title`, {
                           [`${blockClass}__title--fades`]: hasBreadcrumbRow,
@@ -659,26 +648,11 @@ export let PageHeader = React.forwardRef(
                       </div>
                     ) : null}
                   </Column>
-
-                  {pageActions !== undefined ? (
-                    <Column
-                      className={cx(`${blockClass}__page-actions`, {
-                        [`${blockClass}__page-actions--in-breadcrumb`]:
-                          pageActionsInBreadcrumbRow,
-                      })}
-                    >
-                      <ButtonSetWithOverflow
-                        className={`${blockClass}__page-actions-container`}
-                        onWidthChange={handleButtonSetWidthChange}
-                        buttons={pageActionsItemArray}
-                        buttonSetOverflowLabel={pageActionsOverflowLabel}
-                      />
-                    </Column>
-                  ) : null}
+                  {thePageActions(false, pageActionsInBreadcrumbRow)}
                 </Row>
               ) : null}
 
-              {subtitle !== undefined ? (
+              {subtitle ? (
                 <Row className={`${blockClass}__subtitle-row`}>
                   <Column className={`${blockClass}__subtitle`}>
                     {subtitle}
@@ -686,7 +660,7 @@ export let PageHeader = React.forwardRef(
                 </Row>
               ) : null}
 
-              {children !== undefined ? (
+              {children ? (
                 <Row className={`${blockClass}__available-row`}>
                   <Column className={`${blockClass}__available-column`}>
                     {children}
@@ -725,7 +699,7 @@ export let PageHeader = React.forwardRef(
                     <Column
                       className={cx(`${blockClass}__navigation-tags`, {
                         [`${blockClass}__navigation-tags--tags-only`]:
-                          navigation === undefined,
+                          !navigation,
                       })}
                     >
                       <TagSet
@@ -751,18 +725,18 @@ export let PageHeader = React.forwardRef(
                 <Row
                   className={cx(`${blockClass}__navigation-row`, {
                     [`${blockClass}__navigation-row--spacing-above-06`]:
-                      navigation !== undefined,
+                      !!navigation,
                     [`${blockClass}__navigation-row--has-tags`]: tags,
                   })}
                 >
                   <Column className={`${blockClass}__navigation-tabs`}>
                     {navigation}
                   </Column>
-                  {tags !== undefined ? (
+                  {tags ? (
                     <Column
                       className={cx(`${blockClass}__navigation-tags`, {
                         [`${blockClass}__navigation-tags--tags-only`]:
-                          navigation === undefined,
+                          !navigation,
                       })}
                     >
                       <TagSet
@@ -807,6 +781,38 @@ export let PageHeader = React.forwardRef(
         </section>
       </>
     );
+
+    function thePageActions(isBreadcrumbRow, inBreadcrumbRow) {
+      if (pageActions) {
+        const Tag = isBreadcrumbRow ? 'div' : Column;
+        // Only report size change of version action bar is rendered as part of the breadcrumb row.
+        // and when there is an actionBar
+        const handleWidthChange =
+          isBreadcrumbRow && hasBreadcrumbRow
+            ? handlePageActionWidthChange
+            : () => {};
+        return (
+          <Tag
+            className={cx(`${blockClass}__page-actions`, {
+              [`${blockClass}__page-actions--in-breadcrumb`]: inBreadcrumbRow,
+            })}
+          >
+            {pageActions.content ?? (
+              <ButtonSetWithOverflow
+                className={`${blockClass}__button-set--in-breadcrumb`}
+                menuOptionsClass={cx(
+                  pageActionsMenuOptionsClass,
+                  `${blockClass}__button-set-menu-options`
+                )}
+                onWidthChange={handleWidthChange}
+                buttons={pageActions}
+                buttonSetOverflowLabel={pageActionsOverflowLabel}
+              />
+            )}
+          </Tag>
+        );
+      }
+    }
   }
 );
 
@@ -944,6 +950,10 @@ PageHeader.propTypes = {
     ]),
     'Expects an array of objects with the following properties: iconDescription, renderIcon and onClick.'
   ),
+  /**
+   * class name applied to the action bar overflow options
+   */
+  actionBarMenuOptionsClass: PropTypes.string,
   /**
    * When there is insufficient space for all actionBarItems to be displayed this
    * aria label is used for the action bar overflow menu
@@ -1101,12 +1111,19 @@ PageHeader.propTypes = {
   /**
    * Specifies the primary page actions which are placed at the same level in the page as the title.
    *
-   * Each action is specified as an object with the properties of a Carbon Button plus:
+   * Either a set of actions, each specified as an object with the properties of a Carbon Button plus:
+   *
    * - label: node
    *
+   * Or a single object
+   *
+   * - content: content to be rendered. NOTE: must be capable of restricting itself to the space provided. This 2.5rem height ($spacing-08)
+   * and the width not used by action bar items when scrolled into toolbar.
+   * - minWidth: smallest number of pixel width the content would like. NOTE: This is not guaranteed and may be less on small viewports.
+   * - maxWidth: maximum number of pixels the content will grow to
    * Carbon Button API https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  pageActions: deprecatePropUsage(
+  pageActions: PropTypes.oneOfType([
     PropTypes.arrayOf(
       PropTypes.shape({
         ...Button.propTypes,
@@ -1116,12 +1133,20 @@ PageHeader.propTypes = {
         onClick: PropTypes.func,
       })
     ),
-    PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.element),
-      PropTypes.element,
-    ]),
-    'Expects an array of objects with the following properties: label and onClick.'
-  ),
+    PropTypes.shape({
+      /**
+       * minWidth should not be more than 180
+       * The content is expected to adjust itself to fit in
+       */
+      content: PropTypes.node.isRequired,
+      minWidth: PropTypes.number.isRequired,
+      maxWidth: PropTypes.number.isRequired,
+    }),
+  ]),
+  /**
+   * class name applied to the page actions overflow options
+   */
+  pageActionsMenuOptionsClass: PropTypes.string,
   /**
    * When there is insufficient space to display all of hte page actions inline a dropdown button menu is shown,
    * containing the page actions. This label is used as the display content of the dropdown button menu.
@@ -1129,7 +1154,8 @@ PageHeader.propTypes = {
    * NOTE: This prop is required if pageActions are supplied
    */
   pageActionsOverflowLabel: PropTypes.node.isRequired.if(
-    ({ pageActions }) => pageActions && pageActions.length > 0
+    ({ pageActions }) =>
+      pageActions && pageActions.length > 0 && !pageActions.content
   ),
   /**
    * When tags are supplied there may not be sufficient space to display all of the tags. This results in an overflow

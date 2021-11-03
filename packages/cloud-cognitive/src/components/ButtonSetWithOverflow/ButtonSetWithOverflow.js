@@ -25,12 +25,14 @@ export const ButtonSetWithOverflow = ({
   className,
   onWidthChange,
   buttonSetOverflowLabel,
+  menuOptionsClass,
   rightAlign,
 }) => {
   const [showAsOverflow, setShowAsOverflow] = useState(false);
   const spaceAvailableRef = useRef(null);
   const sizingContainerRefSet = useRef(null);
   const sizingContainerRefCombo = useRef(null);
+  const sizes = useRef({});
 
   /**
    * checkFullyVisibleItems determines display count based on space available and width of pageActions
@@ -58,12 +60,19 @@ export const ButtonSetWithOverflow = ({
     // check ButtonMenu size
     const sizingComboSize = sizingContainerRefCombo.current?.offsetWidth;
 
-    // report min and max width required to host
-    onWidthChange &&
+    if (
+      onWidthChange &&
+      (sizes.current.minWidth !== sizingComboSize ||
+        sizes.current.maxWidth !== sizingSetTotalSize)
+    ) {
+      sizes.current.minWidth = sizingComboSize;
+      sizes.current.maxWidth = sizingSetTotalSize;
+
+      // report min and max width required to host
       onWidthChange({
-        maxWidth: sizingSetTotalSize,
-        minWidth: sizingComboSize,
+        ...sizes.current,
       });
+    }
 
     // only if space available use ButtonSet.
     if (sizingSetTotalSize <= spaceAvailable) {
@@ -158,6 +167,7 @@ export const ButtonSetWithOverflow = ({
         aria-hidden={true}
       >
         <AButtonMenu
+          menuOptionsClass={menuOptionsClass}
           ref={sizingContainerRefCombo}
           buttons={buttons}
           size={buttonSize}
@@ -166,7 +176,11 @@ export const ButtonSetWithOverflow = ({
 
       {/* The displayed components */}
       {showAsOverflow ? (
-        <AButtonMenu buttons={buttons} size={buttonSize} />
+        <AButtonMenu
+          buttons={buttons}
+          size={buttonSize}
+          menuOptionsClass={menuOptionsClass}
+        />
       ) : (
         <AButtonSet
           className={`${blockClass}__button-container`}
@@ -202,6 +216,10 @@ ButtonSetWithOverflow.propTypes = {
    * className
    */
   className: PropTypes.string,
+  /**
+   * class name applied to the overflow options
+   */
+  menuOptionsClass: PropTypes.string,
   /**
    * onResize reports maxSize on resize
    */

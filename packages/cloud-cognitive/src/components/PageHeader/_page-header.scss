@@ -189,6 +189,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     }
 
     .#{$block-class}__breadcrumb-row .#{$block-class}__page-actions {
+      position: relative;
       display: inline-block;
       width: 100%;
       max-width: var(--#{$block-class}--button-set-in-breadcrumb-width-px);
@@ -403,7 +404,6 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     .#{$block-class}__page-actions {
       flex: 0 0 100%;
       margin-top: $spacing-05;
-      margin-bottom: calc(-1 * #{$spacing-02});
       white-space: nowrap;
 
       @include carbon--breakpoint-up('md') {
@@ -573,6 +573,12 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   }
 
   .#{$block-class}__navigation-tags-overflow.#{$carbon-prefix}--tooltip {
+    z-index: $z-index-header-minus;
+  }
+
+  .#{$block-class}__action-bar-menu-options.#{$carbon-prefix}--overflow-menu-options,
+  .#{$carbon-prefix}--breadcrumb-menu-options.#{$carbon-prefix}--overflow-menu-options,
+  .#{$block-class}__button-set-menu-options.#{$carbon-prefix}--overflow-menu-options {
     z-index: $z-index-header-minus;
   }
 }

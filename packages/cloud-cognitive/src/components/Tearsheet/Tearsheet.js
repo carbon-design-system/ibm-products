@@ -45,8 +45,8 @@ const componentName = 'Tearsheet';
  */
 export let Tearsheet = React.forwardRef((props, ref) => (
   <TearsheetShell
-    {...prepareProps(props, [], { ref, size: 'wide' })}
     {...getDevtoolsProps(componentName)}
+    {...prepareProps(props, [], { ref, size: 'wide' })}
   />
 ));
 

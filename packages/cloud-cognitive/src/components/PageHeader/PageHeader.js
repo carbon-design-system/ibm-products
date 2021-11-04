@@ -758,7 +758,7 @@ export let PageHeader = React.forwardRef(
           >
             {pageActions.content ?? (
               <ButtonSetWithOverflow
-                className={`${blockClass}__button-set--in-breadcrumb`}
+                classname={`${blockClass}__button-set-with-overflow`}
                 menuOptionsClass={cx(
                   pageActionsMenuOptionsClass,
                   `${blockClass}__button-set-menu-options`
@@ -766,6 +766,7 @@ export let PageHeader = React.forwardRef(
                 onWidthChange={handleWidthChange}
                 buttons={pageActions}
                 buttonSetOverflowLabel={pageActionsOverflowLabel}
+                rightAlign
               />
             )}
           </Tag>

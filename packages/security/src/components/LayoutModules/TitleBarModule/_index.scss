@@ -1,0 +1,81 @@
+////
+/// Title bar module.
+/// @group title-bar-module
+/// @copyright IBM Security 2020 - 2021
+////
+
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
+@import '@carbon/type/scss/styles';
+
+@import '../../Component/mixins';
+@import '../variables';
+
+@include security--component($name: #{$layout-modules__name}--title-bar) {
+  /// Spacing.
+  /// @type Length
+  $title-bar__spacing: $carbon--spacing-05;
+
+  display: flex;
+
+  &__title {
+    @include carbon--type-style($name: productive-heading-03);
+
+    width: 100%;
+    margin-block-end: 0;
+    margin-block-start: 0;
+  }
+
+  &--label > &__title {
+    margin-top: $carbon--spacing-02;
+    margin-bottom: $carbon--spacing-02;
+  }
+
+  &__items {
+    display: flex;
+    margin-top: $carbon--spacing-02;
+    margin-left: auto;
+
+    &--subsection {
+      margin-top: $carbon--spacing-01;
+    }
+  }
+
+  &--label &__items {
+    margin-top: $carbon--spacing-06;
+
+    &--subsection {
+      margin-top: $carbon--spacing-05;
+    }
+  }
+
+  &--subsection &__title {
+    @include carbon--type-style($name: productive-heading-02);
+
+    order: 1;
+  }
+
+  &__label-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+
+    margin-top: $carbon--spacing-05;
+    margin-bottom: $carbon--spacing-05;
+  }
+
+  &__label {
+    @include carbon--type-style($name: label-01);
+
+    width: 100%;
+    color: $text-02;
+
+    &.order--top {
+      order: 0;
+      margin-bottom: $carbon--spacing-02;
+    }
+    &.order--bottom {
+      order: 2;
+      margin-top: $carbon--spacing-02;
+    }
+  }
+}

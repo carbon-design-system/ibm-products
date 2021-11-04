@@ -6084,7 +6084,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   position: sticky;
 }
 .exp--page-header .exp--page-header__breadcrumb-row--has-breadcrumbs + .exp--page-header__title-row--sticky {
-  top: 0;
+  top: var(--exp--page-header--breadcrumb-top);
 }
 .exp--page-header .exp--page-header__title-column {
   overflow: hidden;

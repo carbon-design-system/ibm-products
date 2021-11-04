@@ -7,8 +7,13 @@
 
 // cspell:words unuse
 
-import React, { useEffect } from 'react';
 import { withCarbonTheme } from '@carbon/storybook-addon-theme/react';
+import { ArgsTable, Canvas, Story, Source } from '@storybook/addon-docs';
+import LinkTo from '@storybook/addon-links/react';
+import { themes } from '@storybook/theming';
+
+import { Column, Row } from 'carbon-components-react';
+import React, { useEffect } from 'react';
 
 import { pkg } from '../../cloud-cognitive/src/settings';
 
@@ -76,6 +81,23 @@ const carbonViewports = {
 
 const parameters = {
   controls: { expanded: true, hideNoControlsWarning: true },
+  docs: {
+    components: {
+      ArgsTable,
+      Canvas,
+      Column,
+      LinkTo: (props) => (
+        <LinkTo
+          className="storybook__link-to"
+          style={{ color: themes.normal.colorSecondary }}
+          {...props}
+        />
+      ),
+      Row,
+      Source,
+      Story,
+    },
+  },
   layout: 'centered',
   options: {
     storySort: (a, b) => {
@@ -106,4 +128,4 @@ const parameters = {
   },
 };
 
-export { decorators, parameters };
+export { decorators, parameters, Style };

@@ -361,7 +361,8 @@ $right-section-alt-width: 100% - $left-section-alt-width;
 
     .#{$block-class}__breadcrumb-row--has-breadcrumbs
       + .#{$block-class}__title-row--sticky {
-      top: 0;
+      // top: 0;
+      top: var(--#{$block-class}--breadcrumb-top); //2
     }
 
     .#{$block-class}__title-column {

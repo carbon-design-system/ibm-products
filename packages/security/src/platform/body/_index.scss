@@ -1,0 +1,56 @@
+////
+/// Body entry point.
+/// @group body
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/grid/scss/mixins';
+@import '@carbon/type/scss/classes';
+@import '@carbon/type/scss/reset';
+
+@import 'carbon-components/scss/globals/scss/css--body';
+
+@import '../../globals/deprecate/index';
+@import '../../globals/feature-flags/index';
+@import '../../globals/namespace/index';
+
+@import 'mixins';
+
+@if feature-flag-enabled($feature: $platform__name) {
+  @include export-namespace($name: $platform__name) {
+    @include carbon--grid;
+    @include carbon--type-reset;
+    @include carbon--type-classes;
+
+    @include export-namespace($name: '#{$platform__name}--deprecated') {
+      $deprecate: deprecate(
+        $actual: "'@carbon/ibm-security/scss/platform' - Body style and reset",
+        $expected: 'carbon-components/scss/globals/scss/css--body',
+        $url:
+          'https://github.com/carbon-design-system/ibm-security/blob/master/docs/migration/2.x/README.md#imports',
+      );
+
+      $deprecate: deprecate(
+        $actual:
+          "'@carbon/ibm-security/scss/platform' - Grid style classes and utilities",
+        $expected: '@carbon/grid/scss/grid',
+        $url:
+          'https://github.com/carbon-design-system/ibm-security/blob/master/docs/migration/2.x/grid.md#imports',
+      );
+
+      $deprecate: deprecate(
+        $actual: "'@carbon/ibm-security/scss/platform' - Type style classes",
+        $expected: '@carbon/type/scss/classes',
+        $url:
+          'https://github.com/carbon-design-system/ibm-security/blob/master/docs/migration/2.x/type.md#classes',
+      );
+
+      $deprecate: deprecate(
+        $actual: "'@carbon/ibm-security/scss/platform' - Type style reset",
+        $expected: '@carbon/type/scss/reset',
+        $url:
+          'https://github.com/carbon-design-system/ibm-security/blob/master/docs/migration/2.x/type.md#reset',
+      );
+    }
+  }
+}

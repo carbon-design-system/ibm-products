@@ -1,0 +1,405 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TagWallFilter calls \`onChange\` when items are selected and unselected 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "available": Object {
+          "allItems": undefined,
+          "items": Array [
+            Object {
+              "id": "0",
+              "label": "TagWallFilter 0",
+            },
+          ],
+        },
+        "selected": Object {
+          "items": Array [
+            Object {
+              "id": "1",
+              "label": "TagWallFilter 1",
+            },
+          ],
+        },
+      },
+    ],
+    Array [
+      Object {
+        "available": Object {
+          "allItems": Array [
+            Object {
+              "id": "0",
+              "label": "TagWallFilter 0",
+            },
+            Object {
+              "id": "1",
+              "label": "TagWallFilter 1",
+            },
+          ],
+          "items": Array [],
+        },
+        "selected": Object {
+          "items": Array [
+            Object {
+              "id": "0",
+              "isSelected": true,
+              "label": "TagWallFilter 0",
+            },
+            Object {
+              "id": "1",
+              "label": "TagWallFilter 1",
+            },
+          ],
+        },
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`TagWallFilter calls \`onChange\` when items are selected and unselected 2`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "available": Object {
+          "allItems": Array [
+            Object {
+              "id": "0",
+              "label": "TagWallFilter 0",
+            },
+            Object {
+              "id": "1",
+              "label": "TagWallFilter 1",
+            },
+          ],
+          "items": Array [
+            Object {
+              "id": "1",
+              "label": "TagWallFilter 1",
+            },
+          ],
+        },
+        "selected": Object {
+          "items": Array [
+            Object {
+              "id": "0",
+              "isSelected": true,
+              "label": "TagWallFilter 0",
+            },
+          ],
+        },
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`TagWallFilter renders 1`] = `
+<body
+  class="security--portal__container"
+>
+  <div>
+    <span
+      class="security--transition"
+    />
+  </div>
+  <section
+    aria-hidden="false"
+    class="security--tearsheet--small security--tag-wall-filter"
+  >
+    <header
+      class="security--tearsheet--small__header"
+    >
+      <h1
+        class="security--tearsheet--small__title"
+      >
+        TagWallFilter
+      </h1>
+      <div
+        class="security--tearsheet--small__description"
+      >
+        <div
+          class="security--tag-wall-filter__description"
+        >
+          
+          <section
+            aria-label=""
+            class="security--tag-wall security--tag-wall-filter__tag-wall"
+          >
+            
+            <div
+              aria-label=" TagWallFilter 1"
+              class="bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray"
+              id="1"
+            >
+              <span
+                class="bx--tag__label"
+                title="TagWallFilter 1"
+              >
+                TagWallFilter 1
+              </span>
+              <button
+                aria-labelledby="1"
+                class="bx--tag__close-icon"
+                title=""
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 32 32"
+                  width="16"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </header>
+    <section
+      class="security--tearsheet--small__body"
+    >
+      <div
+        class="security--scroll-gradient security--scroll-gradient--none security--scroll-gradient--y security--tearsheet--small__content"
+        role="presentation"
+      >
+        <div
+          aria-hidden="true"
+          class="security--scroll-gradient__before"
+          role="presentation"
+        />
+        <div
+          class="security--scroll-gradient__content"
+        >
+          <div
+            class=""
+          >
+            <div
+              aria-expanded="true"
+              aria-haspopup="listbox"
+              aria-labelledby="downshift-0-label"
+              aria-owns="downshift-0-menu"
+              class="security--filter bx--list-box"
+              id="security--tag-wall-filter"
+              role="combobox"
+            >
+              <div
+                aria-haspopup="true"
+                aria-label="close menu"
+                class="bx--list-box__field"
+                data-toggle="true"
+                id="security--tag-wall-filter"
+                role="button"
+                tabindex="-1"
+                type="button"
+              >
+                <input
+                  aria-autocomplete="list"
+                  aria-controls="downshift-0-menu"
+                  aria-labelledby="downshift-0-label"
+                  autocomplete="off"
+                  class="security--filter__input-field bx--text-input"
+                  id="security--tag-wall-filter"
+                  placeholder=""
+                  value=""
+                />
+                <span
+                  class="security--filter__search"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="security--icon security--filter__search__icon"
+                    fill="var(--cds-icon-01, #f4f4f4)"
+                    focusable="false"
+                    height="20"
+                    preserveAspectRatio="xMidYMid meet"
+                    style="will-change: transform;"
+                    viewBox="0 0 32 32"
+                    width="20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M29,27.5859l-7.5521-7.5521a11.0177,11.0177,0,1,0-1.4141,1.4141L27.5859,29ZM4,13a9,9,0,1,1,9,9A9.01,9.01,0,0,1,4,13Z"
+                    />
+                  </svg>
+                </span>
+              </div>
+              <div
+                class="security--filter__list-container"
+                id="security--tag-wall-filter"
+                role="listbox"
+              >
+                <div
+                  aria-selected="false"
+                  class="bx--list-box__menu-item"
+                  id="downshift-0-item-0"
+                  role="option"
+                  tabindex="0"
+                >
+                  <div
+                    class="bx--list-box__menu-item__option"
+                  >
+                    <div
+                      aria-labelledby="downshift-0-item-0"
+                      class="security--filter__list-item__entry"
+                    >
+                      <span
+                        class="bx--text-truncate--end"
+                        title="TagWallFilter 0"
+                      >
+                        TagWallFilter 0
+                      </span>
+                      <span
+                        class="security--filter__add"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          class="security--icon security--filter__add__icon"
+                          fill="currentColor"
+                          focusable="false"
+                          height="20"
+                          preserveAspectRatio="xMidYMid meet"
+                          style="will-change: transform;"
+                          viewBox="0 0 32 32"
+                          width="20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"
+                          />
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          aria-hidden="true"
+          class="security--scroll-gradient__after"
+          role="presentation"
+        />
+      </div>
+    </section>
+    <footer
+      class="security--tearsheet--small__footer"
+    >
+      <button
+        class="security--tearsheet--small__footer__button security--tearsheet--small__footer__button--secondary bx--btn bx--btn--xl bx--btn--secondary"
+        tabindex="0"
+        type="button"
+      >
+        Cancel
+      </button>
+      <button
+        class="security--tearsheet--small__footer__button bx--btn bx--btn--xl bx--btn--primary"
+        tabindex="0"
+        type="button"
+      >
+        Save
+      </button>
+    </footer>
+    <button
+      aria-label="Close"
+      class="security--button--icon security--tearsheet--small__button--close security--button--icon--lg"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="security--icon"
+        fill="currentColor"
+        focusable="false"
+        height="20"
+        preserveAspectRatio="xMidYMid meet"
+        style="will-change: transform;"
+        viewBox="0 0 32 32"
+        width="20"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
+        />
+      </svg>
+    </button>
+  </section>
+  <div
+    class="security--portal__overlay"
+    tabindex="-1"
+  />
+</body>
+`;
+
+exports[`TagWallFilter withItemReducer CLEAR_SELECTED_ITEMS clears selected items 1`] = `
+Object {
+  "available": Object {
+    "allItems": Array [],
+    "items": Array [],
+  },
+  "selected": Object {
+    "items": Array [],
+  },
+}
+`;
+
+exports[`TagWallFilter withItemReducer SELECT_ITEM selects an item 1`] = `
+Object {
+  "available": Object {
+    "allItems": Array [],
+    "items": Array [],
+  },
+  "selected": Object {
+    "items": Array [
+      Object {
+        "id": "0",
+        "isSelected": true,
+        "label": "TagWallFilter 0",
+      },
+    ],
+  },
+}
+`;
+
+exports[`TagWallFilter withItemReducer UNSELECT_ITEM unselects an item 1`] = `
+Object {
+  "available": Object {
+    "allItems": Array [],
+    "items": Array [
+      Object {
+        "id": "0",
+        "label": "TagWallFilter 0",
+      },
+    ],
+  },
+  "selected": Object {
+    "items": Array [],
+  },
+}
+`;

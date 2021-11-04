@@ -59,8 +59,7 @@
     "*.snap",
     "storybook-static",
     "yarn-error.log",
-    "CHANGELOG.md",
-    "**/.*"
+    "CHANGELOG.md"
   ],
   "words": [
     "apikey",
@@ -68,6 +67,7 @@
     "classname",
     "data-testid",
     "divs",
+    "loglevel",
     "overridable",
     "pconsole",
     "readme",

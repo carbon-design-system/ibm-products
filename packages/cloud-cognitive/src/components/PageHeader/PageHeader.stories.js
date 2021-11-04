@@ -312,6 +312,21 @@ const title = {
     loading: false,
     icon: Security24,
   },
+  'User defined title': {
+    content: (
+      <span>
+        User <span style={{ color: 'red', fontWeight: '600' }}>defined</span>{' '}
+        title
+      </span>
+    ),
+    breadcrumbContent: (
+      <span>
+        User <span style={{ color: 'red', fontWeight: '600' }}>defined</span>{' '}
+        title
+      </span>
+    ),
+    asText: 'User defined title',
+  },
 };
 
 const fullWidthGrid = {

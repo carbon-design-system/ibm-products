@@ -9,8 +9,8 @@ const { resolve } = require('path');
 const { execFileSync } = require('child_process');
 const { sync: glob } = require('glob');
 
-const loadPath1 = resolve(__dirname, '../../node_modules');
-const loadPath2 = resolve(__dirname, '../../../../node_modules');
+const loadPath1 = resolve(__dirname, '../../../node_modules');
+const loadPath2 = resolve(__dirname, '../../../../../node_modules');
 
 const g = (globString) =>
   glob(resolve(__dirname, globString), {
@@ -18,7 +18,7 @@ const g = (globString) =>
     nosort: true, // cspell:disable-line
     ignore: '**/css-gridish/**/*',
   });
-const scssAll = [...g('../index.scss'), ...g('../**/_index.scss')];
+const scssAll = [...g('../../index.scss'), ...g('../../**/_index.scss')];
 
 // Check that an SCSS file compiles correctly. This function does not return
 // a value, but if the SCSS file does not compile it will throw an Error

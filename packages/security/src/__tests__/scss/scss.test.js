@@ -16,13 +16,14 @@ const g = (globString) =>
   glob(resolve(__dirname, globString), {
     nodir: true, // cspell:disable-line
     nosort: true, // cspell:disable-line
+    ignore: '**/css-gridish/**/*',
   });
-const scssAll = g('../**/*.scss');
+const scssAll = [...g('../index.scss'), ...g('../**/_index.scss')];
 
 // Check that an SCSS file compiles correctly. This function does not return
 // a value, but if the SCSS file does not compile it will throw an Error
 // containing details of the compilation failure.
-const compile = (file, compressed, collect) => {
+const scssCheck = (file) => {
   // We use the sass cli because this is currently much faster than using
   // the API owing to the overhead of @import resolution through the API.
   // When the sass API is revised it may be feasible to switch back to
@@ -39,7 +40,7 @@ const compile = (file, compressed, collect) => {
       file,
     ],
     {
-      stdio: ['ignore', collect ? 'pipe' : 'ignore', 'pipe'],
+      stdio: ['ignore', 'ignore', 'pipe'],
     }
   );
 };
@@ -48,7 +49,7 @@ describe('SCSS entry points', () => {
   // This test will fail for any of our SCSS entry points that does not compile.
   scssAll.forEach((file) =>
     it(`${file.match(/\/src\/(.*)/)[1]} compiles as valid SCSS`, () => {
-      expect(() => compile(file)).not.toThrow();
+      expect(() => scssCheck(file)).not.toThrow();
     })
   );
 });

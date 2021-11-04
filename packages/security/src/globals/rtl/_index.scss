@@ -1,0 +1,32 @@
+////
+/// Right-to-left assets for internationalization.
+/// @group rtl
+/// @copyright IBM Security 2019 - 2021
+////
+
+/// Helper mixin for right-to-left.
+/// @content
+/// @example scss
+///   .button {
+///     text-align: left;
+///
+///     @include rtl {
+///       text-align: right;
+///     }
+///   }
+/// @output css
+///   .button {
+///     text-align: left;
+///   }
+///
+///   [dir='rtl'] button {
+///     text-align: right;
+///   }
+@mixin rtl {
+  $rtl: '[dir="rtl"]';
+
+  &#{$rtl},
+  #{$rtl} & {
+    @content;
+  }
+}

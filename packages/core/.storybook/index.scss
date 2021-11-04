@@ -12,10 +12,11 @@
 // to ensure we are resilient against different CSS loading orders and our
 // styles have the specificity necessary to override Carbon styles when needed.
 @import '../../cloud-cognitive/src/index-without-carbon';
-@import '../../security/src/index';
 
 // Load all Carbon styles now
 @import '../css/carbon';
+@import '../../security/src/index';
+@import 'docs';
 
 // Setting attribute storybook-carbon-theme="XXX" on the html element
 // will set the carbon theme used for the storybook pane.

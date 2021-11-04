@@ -24,6 +24,7 @@ import {
 import wrapFocus from '../../global/js/utils/wrapFocus';
 import { pkg } from '../../settings';
 import { SIDE_PANEL_SIZES } from './constants';
+import { usePreviousValue } from '../../global/js/hooks';
 
 // Carbon and package components we use.
 import { Button } from 'carbon-components-react';
@@ -79,6 +80,7 @@ export let SidePanel = React.forwardRef(
     const endTrapRef = useRef();
     const sidePanelInnerRef = useRef();
     const sidePanelCloseRef = useRef();
+    const previousState = usePreviousValue({ size });
 
     // scroll panel to top going between steps
     useEffect(() => {
@@ -87,9 +89,23 @@ export let SidePanel = React.forwardRef(
         const scrollableSection = panelRef.current.querySelector(
           `.${blockClass}__inner-content`
         );
+        const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
+        const initialTitleHeight = document.querySelector(
+          `.${blockClass}__title-container`
+        )?.offsetHeight;
         scrollableSection.scrollTop = 0;
+        // The size of the panel has changed while it is still opened
+        // so we need to scroll it to the top and reset the title container
+        // height css custom property
+        if (previousState?.size !== size) {
+          scrollableSection.scrollTop = 0;
+          sidePanelOuter.style.setProperty(
+            `--${blockClass}--title-container-height`,
+            `${Number(initialTitleHeight)}px`
+          );
+        }
       }
-    }, [currentStep, ref]);
+    }, [currentStep, ref, size, previousState?.size]);
 
     // set initial focus when side panel opens
     useEffect(() => {
@@ -335,7 +351,7 @@ export let SidePanel = React.forwardRef(
       if (open && shouldRender && !animateTitle) {
         const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
         const sidePanelTitleElement = document.querySelector(
-          `.${blockClass}__title-container > .${blockClass}__title-text`
+          `.${blockClass}__title-container .${blockClass}__title-text`
         );
         const sidePanelSubtitleElement = document.querySelector(
           `.${blockClass}__subtitle-text`
@@ -368,6 +384,7 @@ export let SidePanel = React.forwardRef(
       shouldRender,
       panelHeight,
       title,
+      size,
     ]);
 
     // click outside functionality if `includeOverlay` prop is set

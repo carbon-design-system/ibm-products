@@ -269,7 +269,7 @@ export let PageHeader = React.forwardRef(
     ]);
 
     useEffect(() => {
-      // Updates custom CSS props used to manage scroll behaviour
+      // Updates custom CSS props used to manage scroll behavior
       /* istanbul ignore next */
       setPageHeaderStyles((prev) => ({
         ...prev,
@@ -562,7 +562,7 @@ export let PageHeader = React.forwardRef(
                         ref={sizingContainerRef}
                       >
                         {hasActionBar ? (
-                          // Investigate the responsive  behaviour or this and the title also fix the ActionBar Item and PageAction story css
+                          // Investigate the responsive behavior or this and the title also fix the ActionBar Item and PageAction story css
                           <>
                             {thePageActions(true, pageActionsInBreadcrumbRow)}
                             <ActionBar
@@ -627,7 +627,7 @@ export let PageHeader = React.forwardRef(
                 </Row>
               ) : null}
 
-              {/* Last row margin-below causes problems for scroll behaviour when it sticks the header.
+              {/* Last row margin-below causes problems for scroll behavior when it sticks the header.
             This buffer is used in CSS instead to add vertical space after the last row
             */}
               {(breadcrumbs ||

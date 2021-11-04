@@ -1,0 +1,15 @@
+////
+/// Body mixins.
+/// @group body
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/themes/scss/tokens';
+
+/// Background color.
+/// @type Color
+$body__color__background: $ui-background;
+
+/// Text color.
+/// @type Color
+$body__color__text: $text-01;

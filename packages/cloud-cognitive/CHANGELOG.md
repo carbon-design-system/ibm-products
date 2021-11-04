@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.97.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.97.0...@carbon/ibm-cloud-cognitive@0.97.1) (2021-11-03)
+
+
+### Bug Fixes
+
+* overflwo z-indexes in page header ([#1361](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1361)) ([21cc33d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/21cc33d4bde5f252d95f1e6fd3c5941031b67097))
+* **pageHeader:** breadcrumb scroll without actionbar ([#1363](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1363)) ([d9e781e](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d9e781ef1b6768e0bf4c0591507b8605aba897b4))
+
+
+
+
+
 # [0.97.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.96.0...@carbon/ibm-cloud-cognitive@0.97.0) (2021-11-01)
 
 

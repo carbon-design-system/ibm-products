@@ -19,9 +19,7 @@ import { ActionBarItem } from '../ActionBar';
 import {
   mockHTMLElement,
   expectWarn,
-  expectMultipleWarn,
   expectMultipleError,
-  deprecated,
   deprecatedUsage,
   required,
 } from '../../global/js/utils/test-helper';
@@ -109,6 +107,17 @@ const tags = Array.from({ length: 20 }, () => ({
   label: 'A tag',
 }));
 
+const titleUserDefinedStrings = {
+  content: 'Page title',
+  breadcrumbContent: 'Breadcrumb title',
+  asText: 'Text title',
+};
+
+const titleUserDefined = {
+  content: <div>{titleUserDefinedStrings.content}</div>,
+  breadcrumbContent: <span>{titleUserDefinedStrings.breadcrumbContent}</span>,
+  asText: titleUserDefinedStrings.asText,
+};
 const titleObj = { text: 'Page title', loading: false, icon: Bee32 };
 const titleString = 'Page title';
 
@@ -184,9 +193,10 @@ const testProps = {
   expandHeaderIconDescription: 'Expand header',
 };
 
-const testPropsAltTitle = {
-  title: titleString,
-  titleIcon: Bee32,
+const testPropsUserDefined = {
+  breadcrumbs, // breadcrumbs needed for title breadcrumb test
+  breadcrumbOverflowAriaLabel,
+  title: titleUserDefined,
 };
 
 describe('PageHeader', () => {
@@ -507,16 +517,39 @@ describe('PageHeader', () => {
     ).toBeTruthy();
   });
 
-  test('renders title when using separate string and icon', () =>
-    expectWarn(deprecated('titleIcon', 'PageHeader'), () => {
-      render(<PageHeader {...testPropsAltTitle} />);
+  test('renders title as string', () => {
+    render(<PageHeader title={testProps.title.text} />);
 
-      screen.getByText(titleString, { selector: `.${blockClass}__title span` });
+    screen.getByText(testProps.title.text);
+  });
 
-      expect(
-        document.querySelectorAll(`.${blockClass}__title-icon`)
-      ).toHaveLength(1);
-    }));
+  test('renders title when using user defined title', () => {
+    render(<PageHeader {...testPropsUserDefined} />);
+
+    screen.getByText(titleUserDefinedStrings.content);
+    screen.getByText(titleUserDefinedStrings.breadcrumbContent, {
+      // selector need to ignore sizing items
+      selector: `.${prefix}--breadcrumb-with-overflow__breadcrumb-container:not(.${prefix}--breadcrumb-with-overflow__breadcrumb-container--hidden) .${carbon.prefix}--link`,
+    });
+
+    const allTitle = screen.getAllByTitle(titleUserDefinedStrings.asText);
+    expect(allTitle).toHaveLength(3); // breadcrumb sizing, breadcrumb and main title
+  });
+
+  test('renders title when using user defined title without a breadcrumbContent', () => {
+    const noBreadcrumbContent = { ...testPropsUserDefined };
+    noBreadcrumbContent.title.breadcrumbContent = undefined;
+
+    render(<PageHeader {...noBreadcrumbContent} />);
+
+    screen.getByText(titleUserDefinedStrings.content, {
+      // selector need to ignore sizing items
+      selector: `.${prefix}--breadcrumb-with-overflow__breadcrumb-container:not(.${prefix}--breadcrumb-with-overflow__breadcrumb-container--hidden) .${carbon.prefix}--link`,
+    });
+
+    const allTitle = screen.getAllByTitle(titleUserDefinedStrings.asText);
+    expect(allTitle).toHaveLength(3); // breadcrumb sizing, breadcrumb and main title
+  });
 
   test('Without hasBackgroundAlways', () => {
     const { title } = testProps;
@@ -573,112 +606,111 @@ describe('PageHeader', () => {
     expect(skeletons).toHaveLength(3);
   });
 
-  test('Breadcrumb without overflow aria label', () =>
-    expectMultipleError(
-      [
-        required('breadcrumbOverflowAriaLabel', 'PageHeader'),
-        required('overflowAriaLabel', 'BreadcrumbWithOverflow'),
-      ],
-      () => {
-        render(
-          <PageHeader
-            {...{
-              breadcrumbs,
-            }}
-            aria-label="Page header" // gives section role 'region'
-          />
-        );
-      }
-    ));
+  test('Breadcrumb without overflow aria label', () => {
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
 
-  test('Works, for now, with deprecated props', () =>
-    expectMultipleWarn(
-      [
-        deprecated('actionBarOverflowLabel', 'PageHeader'),
-        deprecated('availableSpace', 'PageHeader'),
-        deprecated('background', 'PageHeader'),
-        deprecated('breadcrumbItems', 'PageHeader'),
-        deprecated('breadcrumbOverflowLabel', 'PageHeader'),
-        deprecated('collapseHeaderLabel', 'PageHeader'),
-        deprecated('collapseHeaderToggleWanted', 'PageHeader'),
-        deprecated('expandHeaderLabel', 'PageHeader'),
-        deprecated('preCollapseTitleRow', 'PageHeader'),
-        deprecated('preventBreadcrumbScroll', 'PageHeader'),
-        deprecated('children', 'BreadcrumbWithOverflow'),
-        deprecated('children', 'BreadcrumbWithOverflow'),
-        deprecated('children', 'BreadcrumbWithOverflow'),
-        deprecated('children', 'BreadcrumbWithOverflow'),
-      ],
-      () => {
-        const dataTestId = uuidv4();
-        render(
-          <PageHeader
-            data-testid={dataTestId}
-            actionBarItems={actionBarItems}
-            actionBarOverflowLabel={testProps.actionBarOverflowAriaLabel}
-            availableSpace={children}
-            background={testProps.hasBackgroundAlways}
-            breadcrumbItems={breadcrumbItems}
-            breadcrumbOverflowLabel={testProps.breadcrumbOverflowAriaLabel}
-            collapseHeaderLabel={testProps.collapseHeaderIconDescription}
-            collapseHeaderToggleWanted={true}
-            expandHeaderLabel={testProps.expandHeaderIconDescription}
-            preCollapseTitleRow={true}
-            preventBreadcrumbScroll={true}
-            title={titleString}
-          />
-        );
+    render(
+      <PageHeader
+        {...{
+          breadcrumbs,
+        }}
+        aria-label="Page header" // gives section role 'region'
+      />
+    );
 
-        const header = screen.getByTestId(dataTestId);
+    expect(error).toBeCalledWith(
+      expect.stringMatching(
+        /^Warning: Failed prop type: The prop `overflowAriaLabel` is marked as required in `BreadcrumbWithOverflow`/
+      )
+    );
 
-        // check for rendered items
-        screen.getByLabelText(testProps.actionBarOverflowAriaLabel);
-        screen.getByText(availableSpaceTextContent);
-        expect(header).toHaveClass(`${blockClass}--show-background`);
-        expect(
-          header.querySelectorAll(`.${blockClass}__breadcrumb`)
-        ).toHaveLength(1);
-        screen.getByLabelText(testProps.breadcrumbOverflowAriaLabel);
-        screen.getByLabelText(testProps.collapseHeaderIconDescription);
+    jest.spyOn(console, 'error').mockRestore();
+  });
 
-        // const collapseButton =
-        screen.getByRole('button', {
-          name: testProps.collapseHeaderIconDescription,
-        });
-        // Determine how to test this
-        // userEvent.click(collapseButton);
-        // screen.getByLabelText(testProps.expandHeaderIconDescription);
+  test('Works, for now, with deprecated props', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
-        screen.getAllByText(titleString, {
-          selector: `.${blockClass}__breadcrumb-title--pre-collapsed .${carbon.prefix}--link`,
-        });
-      }
-    ));
+    const warnings = [
+      'The prop `actionBarOverflowLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `actionBarOverflowAriaLabel`.',
+      'The prop `availableSpace` of `PageHeader` has been deprecated and will soon be removed. Make use of children instead.',
+      'The prop `background` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `hasBackgroundAlways`',
+      'The prop `breadcrumbItems` of `PageHeader` has been deprecated and will soon be removed. Usage changed to expect breadcrumb item like shapes, see `breadcrumbs`.',
+      'The prop `breadcrumbOverflowLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `breadcrumbOverflowAriaLabel`.',
+      'The prop `collapseHeaderLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `collapseHeaderIconDescription`.',
+      'The prop `collapseHeaderToggleWanted` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `hasCollapseHeaderToggle`',
+      'The prop `expandHeaderLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `expandHeaderIconDescription`.',
+      'The prop `preCollapseTitleRow` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `collapseTitle`.',
+      'The prop `preventBreadcrumbScroll` of `PageHeader` has been deprecated and will soon be removed. Prop renamed to `disableBreadcrumbScroll`.',
+    ];
 
-  test('Deprecated title skeleton with breadcrumbs', () =>
-    expectMultipleWarn(
-      [
-        deprecated('breadcrumbItems', 'PageHeader'),
-        deprecated('breadcrumbOverflowLabel', 'PageHeader'),
-        deprecated('children', 'BreadcrumbWithOverflow'),
-        deprecated('children', 'BreadcrumbWithOverflow'),
-        deprecated('children', 'BreadcrumbWithOverflow'),
-      ],
-      () => {
-        render(
-          <PageHeader
-            breadcrumbItems={breadcrumbItems}
-            breadcrumbOverflowLabel={testProps.breadcrumbOverflowAriaLabel}
-            title={{ text: titleString, loading: true }}
-          />
-        );
+    const dataTestId = uuidv4();
+    render(
+      <PageHeader
+        data-testid={dataTestId}
+        actionBarItems={actionBarItems}
+        actionBarOverflowLabel={testProps.actionBarOverflowAriaLabel}
+        availableSpace={children}
+        background={testProps.hasBackgroundAlways}
+        breadcrumbItems={breadcrumbItems}
+        breadcrumbOverflowLabel={testProps.breadcrumbOverflowAriaLabel}
+        collapseHeaderLabel={testProps.collapseHeaderIconDescription}
+        collapseHeaderToggleWanted={true}
+        expandHeaderLabel={testProps.expandHeaderIconDescription}
+        preCollapseTitleRow={true}
+        preventBreadcrumbScroll={true}
+        title={titleString}
+      />
+    );
 
-        const skeletons = document.querySelectorAll(
-          `.${carbon.prefix}--skeleton__text`
-        );
-        expect(skeletons).toHaveLength(3);
-      }
-    ));
+    for (let i = 0; i < warnings.length; i++) {
+      expect(warn).toBeCalledWith(warnings[i]);
+    }
+
+    const header = screen.getByTestId(dataTestId);
+
+    // check for rendered items
+    screen.getByLabelText(testProps.actionBarOverflowAriaLabel);
+    screen.getByText(availableSpaceTextContent);
+    expect(header).toHaveClass(`${blockClass}--show-background`);
+    expect(header.querySelectorAll(`.${blockClass}__breadcrumb`)).toHaveLength(
+      1
+    );
+    screen.getByLabelText(testProps.breadcrumbOverflowAriaLabel);
+    screen.getByLabelText(testProps.collapseHeaderIconDescription);
+
+    // const collapseButton =
+    screen.getByRole('button', {
+      name: testProps.collapseHeaderIconDescription,
+    });
+    // Determine how to test this
+    // userEvent.click(collapseButton);
+    // screen.getByLabelText(testProps.expandHeaderIconDescription);
+
+    screen.getAllByText(titleString, {
+      selector: `.${blockClass}__breadcrumb-title--pre-collapsed .${carbon.prefix}--link`,
+    });
+
+    warn.mockRestore(); // Remove mock
+  });
+
+  test('Title skeleton with deprecated breadcrumbs', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    render(
+      <PageHeader
+        breadcrumbItems={breadcrumbItems}
+        breadcrumbOverflowLabel={testProps.breadcrumbOverflowAriaLabel}
+        title={{ text: titleString, loading: true }}
+      />
+    );
+
+    const skeletons = document.querySelectorAll(
+      `.${carbon.prefix}--skeleton__text`
+    );
+    expect(skeletons).toHaveLength(3);
+
+    warn.mockRestore(); // Remove mock
+  });
 
   test('PageHeader grid settings narrow and fullWidth', () => {
     const dataTestId = uuidv4();

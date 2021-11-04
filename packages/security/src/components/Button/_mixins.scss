@@ -1,0 +1,37 @@
+////
+/// Button mixins.
+/// @group button
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
+
+@import 'carbon-components/scss/globals/scss/vars';
+
+@mixin button {
+  &--ghost-danger {
+    color: $text-01;
+
+    &:focus,
+    &:hover {
+      background-color: $hover-danger;
+      color: $text-04;
+    }
+
+    &:hover > .#{$prefix}--btn__icon > path {
+      fill: currentColor;
+    }
+  }
+
+  &--loading > .#{$prefix}--inline-loading {
+    width: auto;
+
+    /// Loading spacing - Ensures the `Loading` component won't make the `Button` taller.
+    /// @type Length
+    $button--loading__spacing: -$carbon--spacing-03;
+
+    margin-top: $button--loading__spacing;
+    margin-bottom: $button--loading__spacing;
+  }
+}

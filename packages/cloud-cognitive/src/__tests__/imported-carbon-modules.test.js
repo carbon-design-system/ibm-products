@@ -10,6 +10,8 @@ import fs from 'fs-extra';
 import { scssCompile } from '../global/js/utils/test-helper';
 
 describe('imported-carbon-modules', () => {
+  jest.setTimeout(50000);
+
   it('presents a complete and correct list of module names', async () => {
     const normalize = (str) => str.replace(/"/g, "'").replace(/\s+/g, ' ');
     const generated = scssCompile(

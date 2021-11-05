@@ -6,7 +6,7 @@
 import { renderSync } from 'node-sass';
 import { resolve } from 'path';
 
-import { root } from '../../../config';
+//import { root } from '../../../config';
 
 describe('Styles', () => {
   test('Bundle', () => {

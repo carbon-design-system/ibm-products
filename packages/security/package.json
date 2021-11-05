@@ -60,7 +60,7 @@
     "@carbon/motion": "10.26.0",
     "@carbon/themes": "10.46.0",
     "@carbon/type": "10.38.0",
-    "carbon-components": "10.47.1",
+    "carbon-components": "10.47.0",
     "carbon-components-react": "7.47.2",
     "carbon-icons": "7.0.7",
     "classnames": "^2.3.1",

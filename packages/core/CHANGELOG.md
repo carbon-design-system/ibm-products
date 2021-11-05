@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.27.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.26.0...@carbon/ibm-cloud-cognitive-core@0.27.0) (2021-11-05)
+
+
+### Features
+
+* migrate Security package ([#918](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/918)) ([08573c5](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/08573c512adc60c40071699ff040d4a14bfedf36))
+
+
+
+
+
 # [0.26.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.25.1...@carbon/ibm-cloud-cognitive-core@0.26.0) (2021-10-27)
 
 

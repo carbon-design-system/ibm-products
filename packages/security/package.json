@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-security",
   "description": "Carbon for Cloud & Cognitive IBM Security UI components",
-  "version": "2.6.0",
+  "version": "2.7.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -30,7 +30,7 @@
   "scripts": {
     "build": "run-s clean build-all",
     "build-all": "run-p build:*",
-    "build:css": "bundler bundle:scss src/index.scss",
+    "build:css": "sass --load-path node_modules --load-path ../../node_modules src:css",
     "build:js-esm": "cross-env BABEL_ENV=esm yarn build:js:modules -d es",
     "build:js-cjs": "cross-env BABEL_ENV=cjs yarn build:js:modules -d lib",
     "build:js:modules": "babel src --ignore '**/_mocks_','**/__tests__','**/*+(-story|.stories).*'",
@@ -42,9 +42,7 @@
     "sync": "run-s clean:src sync:* clean:ibm-security",
     "sync:clone": "git clone git@github.com:carbon-design-system/ibm-security.git --depth 1",
     "sync:copy": "copyfiles 'ibm-security/src/**/*' . -u 1",
-    "test": "run-p test:*",
-    "test:js": "jest --colors",
-    "test:scss": "bundler check 'src/**/*.scss' -i '**/css-gridish/**'",
+    "test": "jest --colors",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally)",
     "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon)/'"
   },
@@ -77,7 +75,6 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-export-default-from": "^7.16.0",
-    "@carbon/bundler": "^10.11.0",
     "babel-plugin-macros": "^3.1.0",
     "babel-preset-ibm-cloud-cognitive": "^0.11.0",
     "data-uri.macro": "^1.0.0",

@@ -13,7 +13,10 @@ describe('Styles', () => {
     expect(
       renderSync({
         file: resolve(__dirname, '../../index.scss'),
-        includePaths: [resolve(root, 'node_modules')],
+        includePaths: [
+          resolve(__dirname, '../../../node_modules'),
+          resolve(__dirname, '../../../../../node_modules'),
+        ],
         outputStyle: 'expanded',
       }).css.toString()
     ).toMatchSnapshot();

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.97.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.97.1...@carbon/ibm-cloud-cognitive@0.97.2) (2021-11-05)
+
+
+### Bug Fixes
+
+* **PageHeader:** pageActions scroll without actionBar but with breadcrumbs ([#1370](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1370)) ([9ecade4](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9ecade421b42b2bd05f03e13476f18c9d2210a45))
+* **SidePanel:** changing size prop within panel already open works now ([#1371](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1371)) ([d8de35b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d8de35b2bb62ca64e8210370bb5a820af99f6af9))
+
+
+
+
+
 ## [0.97.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.97.0...@carbon/ibm-cloud-cognitive@0.97.1) (2021-11-03)
 
 

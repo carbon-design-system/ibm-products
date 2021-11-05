@@ -5841,6 +5841,13 @@ body {
   }
 }
 
+@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+  .bx--btn--ghost.bx--btn--icon-only .bx--btn__icon path:not([data-icon-path]):not([fill='none']),
+  .bx--btn--ghost.bx--btn--icon-only .bx--btn__icon {
+    fill: ButtonText;
+  }
+}
+
 .security--button--ghost-danger {
   color: var(--cds-text-01, #f4f4f4);
 }
@@ -6520,6 +6527,31 @@ body {
 .bx--list-box--disabled .bx--list-box__menu-item:hover .bx--list-box__menu-item__option,
 .bx--list-box--disabled .bx--list-box__menu-item__option {
   color: var(--cds-disabled-02, #525252);
+}
+
+.bx--list-box__menu-item[disabled],
+.bx--list-box__menu-item[disabled] *,
+.bx--list-box__menu-item[disabled] .bx--list-box__menu-item__option,
+.bx--list-box__menu-item[disabled]:hover {
+  color: var(--cds-disabled-02, #525252);
+  cursor: not-allowed;
+  outline: none;
+}
+
+.bx--list-box__menu-item[disabled]:hover {
+  background-color: revert;
+}
+
+.bx--list-box__menu-item[disabled] .bx--checkbox-label::before {
+  border-color: var(--cds-disabled-02, #525252);
+}
+
+.bx--list-box__menu-item[disabled] .bx--list-box__menu-item__option {
+  border-top-color: var(--cds-ui-03, #393939);
+}
+
+.bx--list-box__menu-item[disabled]:hover + .bx--list-box__menu-item .bx--list-box__menu-item__option {
+  border-top-color: var(--cds-ui-03, #393939);
 }
 
 .bx--list-box.bx--list-box--inline .bx--list-box__menu-item__option {
@@ -9013,6 +9045,7 @@ fieldset[disabled] .bx--form__helper-text {
 }
 
 .bx--form-item.bx--checkbox-wrapper {
+  position: relative;
   margin-bottom: 0.25rem;
 }
 
@@ -17590,6 +17623,7 @@ li.bx--accordion__item--disabled:last-of-type {
   font-weight: var(--cds-body-short-01-font-weight, 400);
   line-height: var(--cds-body-short-01-line-height, 1.28572);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
+  text-align: left;
 }
 
 .bx--tooltip button {
@@ -19983,9 +20017,9 @@ li.bx--accordion__item--disabled:last-of-type {
   margin-right: 0.75rem;
 }
 
-.bx--tooltip__label.bx--progress-label:active {
-  box-shadow: 0 0.1875rem 0 0 var(--cds-interactive-01, #0f62fe);
-  color: var(--cds-interactive-01, #0f62fe);
+.bx--progress-step-button:not(.bx--progress-step-button--unclickable) .bx--progress-label:active {
+  box-shadow: 0 0.1875rem 0 0 var(--cds-interactive, #4589ff);
+  color: var(--cds-interactive, #4589ff);
 }
 
 .bx--progress-label-overflow:hover ~ .bx--tooltip,
@@ -31815,28 +31849,200 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
   fill: var(--cds-disabled-01, #262626);
 }
 
-.bx--toggle__label.bx--skeleton {
-  flex-direction: column;
-  align-items: flex-start;
+.bx--toggle.bx--skeleton + .bx--toggle-input__label .bx--toggle__switch {
+  position: relative;
+  padding: 0;
+  border: none;
+  background: var(--cds-skeleton-01, #353535);
+  box-shadow: none;
+  pointer-events: none;
+  width: 3rem;
+  margin-top: 0.5rem;
 }
 
-.bx--toggle__label.bx--skeleton .bx--toggle__label-text {
-  margin-bottom: 0.5rem;
+.bx--toggle.bx--skeleton + .bx--toggle-input__label .bx--toggle__switch:hover, .bx--toggle.bx--skeleton + .bx--toggle-input__label .bx--toggle__switch:focus, .bx--toggle.bx--skeleton + .bx--toggle-input__label .bx--toggle__switch:active {
+  border: none;
+  cursor: default;
+  outline: none;
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
-  .bx--toggle__switch::after,
-  .bx--toggle__switch::before {
-    outline: 1px solid transparent;
+.bx--toggle.bx--skeleton + .bx--toggle-input__label .bx--toggle__switch::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: 3000ms ease-in-out skeleton infinite;
+  background: var(--cds-skeleton-02, #525252);
+  content: '';
+  will-change: transform-origin, transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bx--toggle.bx--skeleton + .bx--toggle-input__label .bx--toggle__switch::before {
+    animation: none;
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
-  .bx--toggle-input:focus + .bx--toggle-input__label > .bx--toggle__switch::before,
-  .bx--toggle-input:active + .bx--toggle-input__label > .bx--toggle__switch::before {
-    color: Highlight;
-    outline: 1px solid Highlight;
+.bx--toggle.bx--skeleton + .bx--toggle-input__label > div {
+  overflow: hidden;
+  width: 1.5rem;
+  height: 0.5rem;
+  font-size: 0%;
+  line-height: 0;
+  position: relative;
+  padding: 0;
+  border: none;
+  background: var(--cds-skeleton-01, #353535);
+  box-shadow: none;
+  pointer-events: none;
+}
+
+.bx--toggle.bx--skeleton + .bx--toggle-input__label > div:hover, .bx--toggle.bx--skeleton + .bx--toggle-input__label > div:focus, .bx--toggle.bx--skeleton + .bx--toggle-input__label > div:active {
+  border: none;
+  cursor: default;
+  outline: none;
+}
+
+.bx--toggle.bx--skeleton + .bx--toggle-input__label > div::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: 3000ms ease-in-out skeleton infinite;
+  background: var(--cds-skeleton-02, #525252);
+  content: '';
+  will-change: transform-origin, transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bx--toggle.bx--skeleton + .bx--toggle-input__label > div::before {
+    animation: none;
   }
+}
+
+.bx--toggle-input--small.bx--skeleton + .bx--toggle-input__label .bx--toggle__switch {
+  position: relative;
+  padding: 0;
+  border: none;
+  background: var(--cds-skeleton-01, #353535);
+  box-shadow: none;
+  pointer-events: none;
+  width: 2rem;
+  margin-top: 0.5rem;
+}
+
+.bx--toggle-input--small.bx--skeleton + .bx--toggle-input__label .bx--toggle__switch:hover, .bx--toggle-input--small.bx--skeleton + .bx--toggle-input__label .bx--toggle__switch:focus, .bx--toggle-input--small.bx--skeleton + .bx--toggle-input__label .bx--toggle__switch:active {
+  border: none;
+  cursor: default;
+  outline: none;
+}
+
+.bx--toggle-input--small.bx--skeleton + .bx--toggle-input__label .bx--toggle__switch::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: 3000ms ease-in-out skeleton infinite;
+  background: var(--cds-skeleton-02, #525252);
+  content: '';
+  will-change: transform-origin, transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bx--toggle-input--small.bx--skeleton + .bx--toggle-input__label .bx--toggle__switch::before {
+    animation: none;
+  }
+}
+
+.bx--toggle-input--small.bx--skeleton + .bx--toggle-input__label > div {
+  overflow: hidden;
+  width: 1rem;
+  height: 0.5rem;
+  font-size: 0%;
+  line-height: 0;
+  position: relative;
+  padding: 0;
+  border: none;
+  background: var(--cds-skeleton-01, #353535);
+  box-shadow: none;
+  pointer-events: none;
+}
+
+.bx--toggle-input--small.bx--skeleton + .bx--toggle-input__label > div:hover, .bx--toggle-input--small.bx--skeleton + .bx--toggle-input__label > div:focus, .bx--toggle-input--small.bx--skeleton + .bx--toggle-input__label > div:active {
+  border: none;
+  cursor: default;
+  outline: none;
+}
+
+.bx--toggle-input--small.bx--skeleton + .bx--toggle-input__label > div::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: 3000ms ease-in-out skeleton infinite;
+  background: var(--cds-skeleton-02, #525252);
+  content: '';
+  will-change: transform-origin, transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bx--toggle-input--small.bx--skeleton + .bx--toggle-input__label > div::before {
+    animation: none;
+  }
+}
+
+.bx--toggle.bx--skeleton + .bx--toggle-input__label .bx--toggle__switch .bx--toggle__text--left {
+  position: relative;
+  padding: 0;
+  border: none;
+  background: var(--cds-skeleton-01, #353535);
+  box-shadow: none;
+  pointer-events: none;
+  position: absolute;
+  width: 1rem;
+  height: 0.5rem;
+}
+
+.bx--toggle.bx--skeleton + .bx--toggle-input__label .bx--toggle__switch .bx--toggle__text--left:hover, .bx--toggle.bx--skeleton + .bx--toggle-input__label .bx--toggle__switch .bx--toggle__text--left:focus, .bx--toggle.bx--skeleton + .bx--toggle-input__label .bx--toggle__switch .bx--toggle__text--left:active {
+  border: none;
+  cursor: default;
+  outline: none;
+}
+
+.bx--toggle.bx--skeleton + .bx--toggle-input__label .bx--toggle__switch .bx--toggle__text--left::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: 3000ms ease-in-out skeleton infinite;
+  background: var(--cds-skeleton-02, #525252);
+  content: '';
+  will-change: transform-origin, transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bx--toggle.bx--skeleton + .bx--toggle-input__label .bx--toggle__switch .bx--toggle__text--left::before {
+    animation: none;
+  }
+}
+
+.bx--toggle-input--small.bx--skeleton + .bx--toggle-input__label .bx--toggle__switch .bx--toggle__text--left {
+  left: 2rem;
+}
+
+.bx--toggle.bx--skeleton + .bx--toggle-input__label .bx--toggle__switch::after,
+.bx--toggle.bx--skeleton + .bx--toggle-input__label .bx--toggle__appearance::after,
+.bx--toggle.bx--skeleton + .bx--toggle-input__label .bx--toggle__appearance::before {
+  display: none;
+}
+
+.bx--toggle.bx--skeleton + .bx--toggle-input__label .bx--toggle__switch::before {
+  border-radius: 0;
 }
 
 .bx--header {
@@ -32072,6 +32278,25 @@ a.bx--header__menu-item.bx--header__menu-item--current:focus {
 
 .bx--header__submenu {
   position: relative;
+}
+
+.bx--header__submenu--current::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-bottom: 3px solid var(--cds-border-interactive, #4589ff);
+  content: '';
+}
+
+.bx--header__submenu--current:focus {
+  border: 2px solid var(--cds-focus, #ffffff);
+}
+
+.bx--header__submenu--current:focus::after {
+  border: 0;
 }
 
 .bx--header__menu-title[aria-haspopup='true'] {

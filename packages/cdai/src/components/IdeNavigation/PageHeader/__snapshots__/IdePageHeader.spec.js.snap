@@ -70,7 +70,6 @@ Array [
                 label="Tab one"
                 onClick={[Function]}
                 onKeyDown={[Function]}
-                role="presentation"
                 selected={false}
               />
               <Tab
@@ -78,7 +77,6 @@ Array [
                 label="Tab two"
                 onClick={[Function]}
                 onKeyDown={[Function]}
-                role="presentation"
                 selected={false}
               />
             </Tabs>
@@ -190,7 +188,6 @@ Array [
                 label="Tab one"
                 onClick={[Function]}
                 onKeyDown={[Function]}
-                role="presentation"
                 selected={false}
               />
               <Tab
@@ -198,7 +195,6 @@ Array [
                 label="Tab two"
                 onClick={[Function]}
                 onKeyDown={[Function]}
-                role="presentation"
                 selected={false}
               />
             </Tabs>

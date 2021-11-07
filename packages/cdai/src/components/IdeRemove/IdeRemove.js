@@ -32,7 +32,7 @@ class IdeRemove extends React.Component {
   render(
     {
       open,
-      closeIconDescription,
+      closeIconDescription: _unusedCloseIconDescription,
       removeType,
       cancelText,
       deleteText,
@@ -60,7 +60,6 @@ class IdeRemove extends React.Component {
           modalLabel={content.label}
           modalHeading={content.heading}
           aria-label={content.label}
-          iconDescription={closeIconDescription}
           primaryButtonText={deleteText}
           secondaryButtonText={cancelText}
           onRequestClose={onClose}
@@ -97,8 +96,8 @@ class IdeRemove extends React.Component {
 IdeRemove.propTypes = {
   /** Text which appears in the cancel button. Must be a pre translated string.  */
   cancelText: PropTypes.string.isRequired,
-  /** Label text for the modal - must be a pre translated string */
-  closeIconDescription: PropTypes.string.isRequired,
+  /** closeIconDescription is no longer used, as Carbon Modal no longer uses iconDescription prop */
+  closeIconDescription: PropTypes.string,
   /** deleteContent - the text displayed before a user clicks delete or remove. Required.  */
   deleteContent: PropTypes.shape({
     label: PropTypes.string.isRequired,
@@ -129,7 +128,6 @@ IdeRemove.propTypes = {
 
 IdeRemove.defaultProps = {
   open: false,
-  closeIconDescription: 'Close modal - provide a translated string',
   removeType: MEDIUM_IMPACT,
   cancelText: 'Cancel - provide a translated string',
   deleteText: 'Delete - provide a translated string',

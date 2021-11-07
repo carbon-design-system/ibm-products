@@ -44,30 +44,20 @@
     "mdx"
   ],
   "ignorePaths": [
-    ".vscode",
     ".yarn",
     "cdai",
-    "coverage",
-    "css",
-    "es",
-    "lib",
-    "node_modules",
-    "package.json",
-    "results",
-    "scss",
     "security",
+    "package.json",
     "*.snap",
-    "storybook-static",
-    "yarn-error.log",
+    "*.log",
     "CHANGELOG.md"
   ],
   "words": [
     "apikey",
     "checkmark",
-    "classname",
     "data-testid",
-    "divs",
     "loglevel",
+    "noreply",
     "overridable",
     "pconsole",
     "readme",
@@ -78,18 +68,15 @@
     "semibold",
     "serializers",
     "stackable",
-    "storysource",
     "structurality",
     "subcomponent",
     "subcomponents",
     "tabbable",
-    "tabindex",
     "tagset",
     "tabbable",
     "tearsheet",
     "tearsheets",
     "treeview",
-    "uuidv",
-    "viewports"
+    "uuidv"
   ]
 }

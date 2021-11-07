@@ -7,7 +7,6 @@ Array [
     className="ide-api-key-generation "
     data-ui-id="IdeAPIKeyGeneration"
     hasScrollingContent={false}
-    iconDescription="Close"
     modalAriaLabel="Generate API key"
     modalHeading="Generate API key"
     modalLabel=""

@@ -2,8 +2,8 @@ name: Release
 
 on:
   workflow_dispatch:
-#   schedule:
-#     - cron: '0 4 * * WED'
+  schedule:
+    - cron: '0 4 * * TUES'
 
 jobs:
   Release:

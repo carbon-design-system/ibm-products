@@ -1,5 +1,7 @@
+classname
 contenteditable
 describedby
+divs
 evenodd
 labelledby
 listitem
@@ -9,4 +11,5 @@ preload
 progressbar
 searchbox
 tabindex
+viewports
 xlink

@@ -28,7 +28,7 @@ let Toolbar = forwardRef(({ children, className, vertical, ...rest }, ref) => {
       {...(vertical && { 'aria-orientation': 'vertical' })}
       role="toolbar"
     >
-      <ToolbarContext.Provider value={vertical}>
+      <ToolbarContext.Provider value={{ vertical }}>
         {children}
       </ToolbarContext.Provider>
     </div>

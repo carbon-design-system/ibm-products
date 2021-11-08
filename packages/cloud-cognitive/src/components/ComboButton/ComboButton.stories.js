@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import CloudApp16 from '@carbon/icons-react/lib/cloud-app/16';
+import { CloudApp16 } from '@carbon/icons-react';
 import React from 'react';
 
 import {

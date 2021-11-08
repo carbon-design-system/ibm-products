@@ -6,7 +6,7 @@
 //
 
 import React from 'react';
-import AddIcon16 from '@carbon/icons-react/lib/add/16';
+import { Add16 } from '@carbon/icons-react';
 import { IdeButton } from '../IdeButton';
 import { shallow, mount } from 'enzyme';
 
@@ -96,7 +96,7 @@ describe('IdeButton', () => {
 
   describe('Renders icon buttons', () => {
     const iconButton = mount(
-      <IdeButton renderIcon={AddIcon16} iconDescription="Search">
+      <IdeButton renderIcon={Add16} iconDescription="Search">
         Search
       </IdeButton>
     );
@@ -109,12 +109,12 @@ describe('IdeButton', () => {
 
   describe('Renders custom icon buttons', () => {
     const iconButton = mount(
-      <IdeButton renderIcon={AddIcon16} iconDescription="Search">
+      <IdeButton renderIcon={Add16} iconDescription="Search">
         Search
       </IdeButton>
     ).childAt(0); // move past ForwardRef
 
-    const originalIcon = mount(<AddIcon16 />).find('svg');
+    const originalIcon = mount(<Add16 />).find('svg');
     const icon = iconButton.find('svg');
 
     it('should have the appropriate icon', () => {
@@ -127,7 +127,7 @@ describe('IdeButton', () => {
 
   describe('Animates icons', () => {
     const iconButton = shallow(
-      <IdeButton renderIcon={AddIcon16} iconDescription="Search">
+      <IdeButton renderIcon={Add16} iconDescription="Search">
         Search
       </IdeButton>
     );

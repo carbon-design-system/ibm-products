@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { pkg } from '../../settings';
 
@@ -21,7 +22,11 @@ const dataTestId = uuidv4();
 describe(name, () => {
   test('Renders the component `WebTerminal` if flag is enabled', () => {
     const { container } = render(
-      <WebTerminal closeTerminal={() => {}} open>
+      <WebTerminal
+        closeTerminal={() => {}}
+        open
+        closeIconDescription="Close terminal"
+      >
         Body content
       </WebTerminal>
     );
@@ -32,7 +37,12 @@ describe(name, () => {
   test('should attach a custom class to the web terminal', () => {
     const testClassName = 'test-class-name';
     const { container } = render(
-      <WebTerminal closeTerminal={() => {}} open className={testClassName}>
+      <WebTerminal
+        closeTerminal={() => {}}
+        open
+        className={testClassName}
+        closeIconDescription="Close terminal"
+      >
         Body content
       </WebTerminal>
     );
@@ -40,7 +50,11 @@ describe(name, () => {
   });
   test('should render child element content', () => {
     render(
-      <WebTerminal closeTerminal={() => {}} open>
+      <WebTerminal
+        closeTerminal={() => {}}
+        open
+        closeIconDescription="Close terminal"
+      >
         Body content
       </WebTerminal>
     );
@@ -50,7 +64,11 @@ describe(name, () => {
     const { click } = fireEvent;
     const onCloseHandler = jest.fn();
     render(
-      <WebTerminal closeTerminal={onCloseHandler} open>
+      <WebTerminal
+        closeTerminal={onCloseHandler}
+        open
+        closeIconDescription="Close terminal"
+      >
         Body content
       </WebTerminal>
     );
@@ -64,16 +82,24 @@ describe(name, () => {
         closeTerminal={jest.fn()}
         open
         documentationLinks={documentationLinks}
+        closeIconDescription="Close terminal"
       >
         Body content
       </WebTerminal>
     );
+    const { click } = userEvent;
+    click(screen.getByText(/Show documentation links/i));
     expect(screen.getByText(/Kubernetes docs/i));
   });
 
   it('adds additional properties to the containing node', () => {
     const { container } = render(
-      <WebTerminal closeTerminal={jest.fn()} data-testid={dataTestId} open>
+      <WebTerminal
+        closeTerminal={jest.fn()}
+        data-testid={dataTestId}
+        open
+        closeIconDescription="Close terminal"
+      >
         Body content
       </WebTerminal>
     );
@@ -85,7 +111,12 @@ describe(name, () => {
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
     render(
-      <WebTerminal closeTerminal={jest.fn()} open ref={ref}>
+      <WebTerminal
+        closeTerminal={jest.fn()}
+        open
+        ref={ref}
+        closeIconDescription="Close terminal"
+      >
         Body content
       </WebTerminal>
     );

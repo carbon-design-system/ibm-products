@@ -158,7 +158,7 @@ WebTerminal.propTypes = {
   /**
    * Icon description for the close button
    */
-  closeIconDescription: PropTypes.string,
+  closeIconDescription: PropTypes.string.isRequired,
 
   /**
    * Function that should set the open prop to false

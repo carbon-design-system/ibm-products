@@ -1,11 +1,24 @@
 {
   "version": "0.1",
   "language": "en",
-  "dictionaries": ["contributors", "html", "packages"],
+  "dictionaries": [
+    "contributors",
+    "html",
+    "packages"
+  ],
   "dictionaryDefinitions": [
-    { "name": "contributors", "path": "./cspell.contributors.txt" },
-    { "name": "html", "path": "./cspell.html.txt" },
-    { "name": "packages", "path": "./cspell.packages.txt" }
+    {
+      "name": "contributors",
+      "path": "./cspell.contributors.txt"
+    },
+    {
+      "name": "html",
+      "path": "./cspell.html.txt"
+    },
+    {
+      "name": "packages",
+      "path": "./cspell.packages.txt"
+    }
   ],
   "enabledLanguageIds": [
     "asciidoc",
@@ -56,15 +69,16 @@
     "apikey",
     "checkmark",
     "data-testid",
+    "homescreen",
     "loglevel",
     "noreply",
     "overridable",
     "pconsole",
     "readme",
     "renderable",
-    "responsivity",
     "rerender",
     "resizer",
+    "responsivity",
     "semibold",
     "serializers",
     "stackable",
@@ -73,10 +87,11 @@
     "subcomponents",
     "tabbable",
     "tagset",
-    "tabbable",
     "tearsheet",
     "tearsheets",
+    "timeframe",
     "treeview",
-    "uuidv"
+    "uuidv",
+    "webfonts"
   ]
 }

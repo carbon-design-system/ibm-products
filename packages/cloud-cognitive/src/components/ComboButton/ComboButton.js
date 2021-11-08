@@ -5,9 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import ChevronDown16 from '@carbon/icons-react/lib/chevron--down/16';
-import ChevronUp16 from '@carbon/icons-react/lib/chevron--up/16';
-
+import { ChevronDown16, ChevronUp16 } from '@carbon/icons-react';
 import { Button, OverflowMenuItem } from 'carbon-components-react';
 
 import { OverflowMenu } from 'carbon-components-react/lib/components/OverflowMenu/OverflowMenu';

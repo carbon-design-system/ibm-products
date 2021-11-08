@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import { carbon } from '../../settings';
 
@@ -14,6 +14,10 @@ import {
   Grid,
   Header,
   HeaderName,
+  HeaderMenuButton,
+  SideNav,
+  SideNavItems,
+  SideNavLink,
   Row,
   Tab,
   Tabs,
@@ -64,7 +68,7 @@ const actionBarItems = {
   'A single item': [1].map(makeActionBarItem),
   'Four items': [1, 2, 3, 4].map(makeActionBarItem),
   'Many items': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(makeActionBarItem),
-  'Custom items': [
+  'In context items': [
     { key: '1', renderIcon: Printer16, iconDescription: `Print` },
     { key: '2', renderIcon: Settings16, iconDescription: `Settings` },
     { key: '3', renderIcon: VolumeMute16, iconDescription: `Mute` },
@@ -137,7 +141,7 @@ const children = {
     </div>
   ),
   // cspell: enable
-  'Custom content': (
+  'In context content': (
     <>
       <p>Severity 1: 0</p>
       <p>Severity 1: 814</p>
@@ -168,7 +172,7 @@ const navigation = {
       <Tab label="Tab 8" />
     </Tabs>
   ),
-  'Custom tabs': (
+  'In context tabs': (
     <Tabs>
       <Tab label="Summary" />
       <Tab label="Region 1" />
@@ -222,7 +226,7 @@ const pageActions = {
       onClick: () => {},
     },
   ],
-  'Custom page actions': [
+  'In context page actions': [
     {
       key: 'acknowledge',
       kind: 'secondary',
@@ -236,6 +240,19 @@ const pageActions = {
       onClick: () => {},
     },
   ],
+  'User defined page actions': {
+    content: (
+      <button
+        type="button"
+        className="bx--button"
+        style={{ width: '100%', height: '100%' }}
+      >
+        Custom component
+      </button>
+    ),
+    minWidth: 160,
+    maxWidth: 400,
+  },
 };
 
 const tags = {
@@ -253,7 +270,11 @@ const tags = {
     { type: 'purple', label: 'Purple' },
     { type: 'red', label: 'Red' },
     { type: 'teal', label: 'Teal' },
-    { type: 'red', label: 'Longer ThanAPieceOfString' },
+    {
+      type: 'red',
+      label:
+        'Longer ThanAPieceOfString it just keeps going and going and going and going',
+    },
     { type: 'high-contrast', label: 'High contrast' },
     { type: 'magenta', label: 'Magenta' },
     { type: 'blue', label: 'Blue 2' },
@@ -262,11 +283,15 @@ const tags = {
     { type: 'purple', label: 'Purple 2' },
     { type: 'red', label: 'Red 2' },
     { type: 'teal', label: 'Teal 2' },
-    { type: 'red', label: 'Longer ThanAPieceOfString 2' },
+    {
+      type: 'red',
+      label:
+        'Longer ThanAPieceOfString 2this one is even longer it is not quite a book but it is working on it. As it would be a little bit silly to be this long we should probably truncate',
+    },
     { type: 'high-contrast', label: 'High contrast 2' },
     { type: 'magenta', label: 'Magenta 2' },
   ],
-  'Custom tags': [
+  'In context tags': [
     { type: 'cyan', label: 'Not urgent' },
     { type: 'red', label: 'Security' },
   ],
@@ -282,10 +307,25 @@ const title = {
     icon: Bee24,
   },
   'Loading title': { text: 'Patience is a virtue', loading: true },
-  'Custom title': {
+  'In context title': {
     text: 'Authentication activity',
     loading: false,
     icon: Security24,
+  },
+  'User defined title': {
+    content: (
+      <span>
+        User <span style={{ color: 'red', fontWeight: '600' }}>defined</span>{' '}
+        title
+      </span>
+    ),
+    breadcrumbContent: (
+      <span>
+        User <span style={{ color: 'red', fontWeight: '600' }}>defined</span>{' '}
+        title
+      </span>
+    ),
+    asText: 'User defined title',
   },
 };
 
@@ -470,12 +510,24 @@ const Template = ({ children, ...props }) => (
   </>
 );
 
+const commonArgs = {
+  allTagsModalSearchLabel,
+  allTagsModalSearchPlaceholderText,
+  allTagsModalTitle,
+  showAllTagsLabel,
+  breadcrumbOverflowAriaLabel,
+  pageActionsOverflowLabel,
+  actionBarOverflowAriaLabel,
+  collapseHeaderIconDescription,
+  expandHeaderIconDescription,
+};
 // Stories
 export const withTitle = prepareStory(Template, {
   storyName: 'Simple page header with page title',
   args: {
     title: 2,
     hasBackgroundAlways: false,
+    ...commonArgs,
   },
 });
 
@@ -484,7 +536,7 @@ export const withBreadcrumbs = prepareStory(Template, {
   args: {
     ...withTitle.args,
     breadcrumbs: 2,
-    breadcrumbOverflowAriaLabel,
+    ...commonArgs,
   },
 });
 
@@ -493,8 +545,8 @@ export const withButtons = prepareStory(Template, {
   args: {
     ...withBreadcrumbs.args,
     pageActions: 2,
-    pageActionsOverflowLabel,
     children: 1,
+    ...commonArgs,
   },
 });
 
@@ -503,10 +555,9 @@ export const withTabs = prepareStory(Template, {
   args: {
     title: 2,
     breadcrumbs: 2,
-    breadcrumbOverflowAriaLabel,
     pageActions: 2,
-    pageActionsOverflowLabel,
     navigation: 1,
+    ...commonArgs,
   },
 });
 
@@ -515,10 +566,9 @@ export const withTags = prepareStory(Template, {
   args: {
     title: 2,
     breadcrumbs: 2,
-    breadcrumbOverflowAriaLabel,
     pageActions: 2,
-    pageActionsOverflowLabel,
     tags: 1,
+    ...commonArgs,
   },
 });
 
@@ -527,11 +577,10 @@ export const withTabsAndTags = prepareStory(Template, {
   args: {
     title: 2,
     breadcrumbs: 2,
-    breadcrumbOverflowAriaLabel,
     pageActions: 2,
-    pageActionsOverflowLabel,
     navigation: 1,
     tags: 1,
+    ...commonArgs,
   },
 });
 
@@ -541,8 +590,8 @@ export const withSubtitle = prepareStory(Template, {
     title: 2,
     subtitle,
     breadcrumbs: 2,
-    breadcrumbOverflowAriaLabel,
     navigation: 1,
+    ...commonArgs,
   },
 });
 
@@ -551,9 +600,9 @@ export const withSummaryDetails = prepareStory(Template, {
   args: {
     title: 2,
     breadcrumbs: 2,
-    breadcrumbOverflowAriaLabel,
     navigation: 1,
     children: 2,
+    ...commonArgs,
   },
 });
 
@@ -562,10 +611,9 @@ export const withActionsToolbar = prepareStory(Template, {
   args: {
     title: 2,
     breadcrumbs: 2,
-    breadcrumbOverflowAriaLabel,
     navigation: 1,
     actionBarItems: 2,
-    actionBarOverflowAriaLabel,
+    ...commonArgs,
   },
 });
 
@@ -574,10 +622,9 @@ export const withBreadcrumbActionsToolbarOnly = prepareStory(Template, {
   args: {
     title: 1,
     breadcrumbs: 2,
-    breadcrumbOverflowAriaLabel,
     actionBarItems: 2,
-    actionBarOverflowAriaLabel,
     collapseTitle: true,
+    ...commonArgs,
   },
 });
 
@@ -587,15 +634,13 @@ export const fullyLoaded = prepareStory(Template, {
     title: 2,
     subtitle,
     breadcrumbs: 2,
-    breadcrumbOverflowAriaLabel,
     pageActions: 2,
-    pageActionsOverflowLabel,
     children: 2,
     navigation: 1,
     tags: 1,
     actionBarItems: 2,
-    actionBarOverflowAriaLabel,
     collapseHeader: true,
+    ...commonArgs,
   },
 });
 
@@ -605,27 +650,20 @@ export const fullyLoadedAndSome = prepareStory(Template, {
     title: 3,
     subtitle: longSubtitle,
     breadcrumbs: 3,
-    breadcrumbOverflowAriaLabel,
     pageActions: 3,
-    pageActionsOverflowLabel,
     children: 2,
     navigation: 2,
     tags: 2,
-    allTagsModalSearchLabel,
-    allTagsModalSearchPlaceholderText,
-    allTagsModalTitle,
-    showAllTagsLabel,
     actionBarItems: 3,
-    actionBarOverflowAriaLabel,
     hasCollapseHeaderToggle: true,
-    collapseHeaderIconDescription,
-    expandHeaderIconDescription,
+    ...commonArgs,
   },
 });
 
 // Template for demo.
 // eslint-disable-next-line react/prop-types
 const TemplateDemo = ({ children, storyOptionWholePageScroll, ...props }) => {
+  const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
   return (
     <>
       <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
@@ -637,9 +675,28 @@ const TemplateDemo = ({ children, storyOptionWholePageScroll, ...props }) => {
         key={storyOptionWholePageScroll ? 'keyYes' : 'keyNo'}
       >
         <Header aria-label="IBM Platform Name">
+          <HeaderMenuButton
+            aria-label="Open menu"
+            isCollapsible
+            onClick={() => {
+              setIsSideNavExpanded((prev) => !prev);
+            }}
+            isActive={isSideNavExpanded}
+          />
           <HeaderName href="#" prefix="IBM">
             Cloud Cognitive application
           </HeaderName>
+          <SideNav
+            aria-label="Side navigation"
+            expanded={isSideNavExpanded}
+            isFixedNav
+          >
+            <SideNavItems>
+              <SideNavLink href="javascript:void(0)">
+                Sample side bar
+              </SideNavLink>
+            </SideNavItems>
+          </SideNav>
         </Header>
         <div
           className={`${storyClass}__content-container`}
@@ -663,14 +720,12 @@ export const demo = prepareStory(TemplateDemo, {
     title: 5,
     subtitle: demoSubtitle,
     breadcrumbs: 4,
-    breadcrumbOverflowAriaLabel,
     pageActions: 4,
-    pageActionsOverflowLabel,
     children: 3,
     navigation: 3,
     tags: 3,
     actionBarItems: 4,
-    actionBarOverflowAriaLabel,
     disableBreadcrumbScroll: true,
+    ...commonArgs,
   },
 });

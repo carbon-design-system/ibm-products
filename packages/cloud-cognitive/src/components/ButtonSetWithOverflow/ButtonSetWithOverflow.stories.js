@@ -65,5 +65,6 @@ export const Default = prepareStory(Template, {
     buttons,
     buttonSetOverflowLabel,
     containerWidth: 600,
+    rightAlign: false,
   },
 });

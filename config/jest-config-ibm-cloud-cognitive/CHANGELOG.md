@@ -3,6 +3,61 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/jest-config-ibm-cloud-cognitive@0.18.0...jest-config-ibm-cloud-cognitive@0.19.0) (2021-10-27)
+
+
+### Features
+
+* update Carbon versions and package dependencies to latest ([#1356](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1356)) ([946afd6](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/946afd6bd5a165f35940cc1d70fc0e42fb6a4303))
+
+
+
+
+
+# [0.18.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/jest-config-ibm-cloud-cognitive@0.17.0...jest-config-ibm-cloud-cognitive@0.18.0) (2021-10-20)
+
+
+### Features
+
+* update Carbon versions and package dependencies to latest ([#1345](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1345)) ([3c7e6fe](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/3c7e6fedfc46bffc38b889568133ee6c300ddb47))
+
+
+
+
+
+# [0.17.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/jest-config-ibm-cloud-cognitive@0.16.0...jest-config-ibm-cloud-cognitive@0.17.0) (2021-10-14)
+
+
+### Features
+
+* update Carbon versions and package dependencies to latest ([#1329](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1329)) ([fd3525e](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/fd3525ec3620b70ff19f85c300e7e0bb05577cd1))
+
+
+
+
+
+# [0.16.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/jest-config-ibm-cloud-cognitive@0.15.0...jest-config-ibm-cloud-cognitive@0.16.0) (2021-10-07)
+
+
+### Features
+
+* update Carbon versions and package dependencies to latest ([#1309](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1309)) ([945bd3b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/945bd3ba5608078e961af9a04448f2abd7e7fc5e))
+
+
+
+
+
+# [0.15.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/jest-config-ibm-cloud-cognitive@0.14.0...jest-config-ibm-cloud-cognitive@0.15.0) (2021-10-02)
+
+
+### Features
+
+* update Carbon versions and package dependencies to latest ([#1296](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1296)) ([f1da0bd](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f1da0bd9192c4d999032df0dbe20d67b6ece89b0))
+
+
+
+
+
 # [0.14.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/jest-config-ibm-cloud-cognitive@0.13.0...jest-config-ibm-cloud-cognitive@0.14.0) (2021-09-23)
 
 

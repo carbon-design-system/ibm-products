@@ -16,6 +16,13 @@ import {
   deprecatePropUsage,
   isRequiredIf,
 } from './props-helper';
+import {
+  expectWarn,
+  expectError,
+  deprecated,
+  deprecatedUsage,
+  required,
+} from './test-helper';
 
 describe('prepareProps', () => {
   const defaults = { a: 1, b: 2, c: 3, d: 4, e: 5, f: 6, g: 7, h: 8 };
@@ -76,75 +83,48 @@ describe('deprecateProp and deprecatePropUsage', () => {
     ),
   };
 
-  it('reports prop deprecated when deprecated prop is used', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-    render(<Component a="fish" />);
-    expect(warn).toBeCalledWith(
-      'The prop `a` of `x` has been deprecated and will soon be removed. Explanation 1.'
-    );
-    warn.mockRestore();
-  });
+  it('reports prop deprecated when deprecated prop is used', () =>
+    expectWarn(deprecated('a', 'x', 'Explanation 1.'), () => {
+      render(<Component a="fish" />);
+    }));
 
-  it('reports prop deprecated and invalid when deprecated prop is used with invalid value', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
-    render(<Component a={42} />);
-    expect(warn).toBeCalledWith(
-      'The prop `a` of `x` has been deprecated and will soon be removed. Explanation 1.'
-    );
-    expect(error).toBeCalledWith(
-      'Warning: Failed prop type: Invalid prop `a` of type `number` supplied to `x`, expected `string`.\n    in x'
-    );
-    warn.mockRestore();
-    error.mockRestore();
-  });
+  it('reports prop deprecated and invalid when deprecated prop is used with invalid value', () =>
+    expectError(
+      'Warning: Failed prop type: Invalid prop `a` of type `number` supplied to `x`, expected `string`.\n    in x',
+      () =>
+        expectWarn(deprecated('a', 'x', 'Explanation 1.'), () => {
+          render(<Component a={42} />);
+        })
+    ));
 
   it('does not report prop deprecated when non-deprecated prop is used', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
     render(<Component b="fish" />);
-    expect(warn).not.toBeCalled();
-    warn.mockRestore();
   });
 
-  it('reports prop usage deprecated when deprecated usage is used', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-    render(<Component c={42} />);
-    expect(warn).toBeCalledWith(
-      'The usage of the prop `c` of `x` has been changed and support for the old usage will soon be removed. Explanation 2.'
-    );
-    warn.mockRestore();
-  });
+  it('reports prop usage deprecated when deprecated usage is used', () =>
+    expectWarn(deprecatedUsage('c', 'x', 'Explanation 2.'), () => {
+      render(<Component c={42} />);
+    }));
 
   it('does not report prop usage deprecated when non-deprecated usage is used', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
     render(<Component c={{ d: 'fish' }} />);
-    expect(warn).not.toBeCalled();
-    warn.mockRestore();
   });
 
-  it('does not report prop usage deprecated when incorrect non-deprecated usage is used', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
-    render(<Component c={{ d: 42 }} />);
-    expect(warn).not.toBeCalled();
-    expect(error).toBeCalledWith(
-      'Warning: Failed prop type: Invalid prop `c.d` of type `number` supplied to `x`, expected `string`.\n    in x'
-    );
-    warn.mockRestore();
-    error.mockRestore();
-  });
+  it('does not report prop usage deprecated when incorrect non-deprecated usage is used', () =>
+    expectError(
+      'Warning: Failed prop type: Invalid prop `c.d` of type `number` supplied to `x`, expected `string`.\n    in x',
+      () => {
+        render(<Component c={{ d: 42 }} />);
+      }
+    ));
 
-  it('does not report prop usage deprecated when invalid but non-deprecated usage is used', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
-    render(<Component c="fish" />);
-    expect(warn).not.toBeCalled();
-    expect(error).toBeCalledWith(
-      'Warning: Failed prop type: Invalid prop `c` of type `string` supplied to `x`, expected `object`.\n    in x'
-    );
-    warn.mockRestore();
-    error.mockRestore();
-  });
+  it('does not report prop usage deprecated when invalid but non-deprecated usage is used', () =>
+    expectError(
+      'Warning: Failed prop type: Invalid prop `c` of type `string` supplied to `x`, expected `object`.\n    in x',
+      () => {
+        render(<Component c="fish" />);
+      }
+    ));
 });
 
 describe('allPropTypes', () => {
@@ -195,31 +175,17 @@ describe('isRequiredIf', () => {
   };
 
   it('does not report required when condition false', () => {
-    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+    // any console error will cause the test to fail through global check
     render(<Component ctl="x" />);
-    expect(error).not.toBeCalled();
-    error.mockRestore();
   });
 
-  it('reports required when condition true', () => {
-    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
-    render(<Component ctl="a" />);
-    expect(error).toBeCalledWith(
-      expect.stringContaining(
-        'Failed prop type: The prop `a` is marked as required'
-      )
-    );
-    error.mockRestore();
-  });
+  it('reports required when condition true', () =>
+    expectError(required('a', 'Component'), () => {
+      render(<Component ctl="a" />);
+    }));
 
-  it('reports required when used as a decorator', () => {
-    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
-    render(<Component ctl="b" />);
-    expect(error).toBeCalledWith(
-      expect.stringContaining(
-        'Failed prop type: The prop `b` is marked as required'
-      )
-    );
-    error.mockRestore();
-  });
+  it('reports required when used as a decorator', () =>
+    expectError(required('b', 'Component'), () => {
+      render(<Component ctl="b" />);
+    }));
 });

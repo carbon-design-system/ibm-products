@@ -25,7 +25,7 @@ module.exports = {
     '<rootDir>/**/*.(spec|test).js?(x)',
     '<rootDir>/**/*-(spec|test).js?(x)',
   ],
-  testTimeout: 20000,
+  testTimeout: 120000,
   transform: {
     '^.+\\.(js|jsx)$': require.resolve('./transform/javascript.js'),
     '^.+\\.css$': require.resolve('./transform/css.js'),

@@ -188,7 +188,7 @@ export const extractShapesArray = (items) => {
  *
  *   kind: allPropTypes([
  *     Button.propTypes.kind,
- *     PropTypes.oneOf('primary', 'secondary')
+ *     PropTypes.oneOf(['primary', 'secondary'])
  *   ]),
  *
  * }

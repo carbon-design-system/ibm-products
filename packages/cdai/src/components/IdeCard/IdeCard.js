@@ -12,7 +12,7 @@ import { ClickableTile, Link, Tooltip } from 'carbon-components-react';
 import { createInteractionHandler } from '../../component_helpers/A11yHelper';
 import { idAttribute } from '../../component_helpers/IDHelper';
 import { renderGraphic } from '../../component_helpers/ReactHelper';
-import Launch from '@carbon/icons-react/lib/launch/20';
+import { Launch20 } from '@carbon/icons-react';
 import { idePrefix } from '../../globals/js/settings';
 
 export class IdeCard extends React.Component {
@@ -66,7 +66,7 @@ export class IdeCard extends React.Component {
           onInteract(cardId);
         }
       },
-      ['onKeyPress', 'handleClick']
+      ['onKeyPress', 'onClick']
     );
     let tileClasses = className || '';
 
@@ -295,7 +295,7 @@ export class IdeCard extends React.Component {
               className={`${idePrefix}-card--tile-img`}
               {...idAttribute(`ide-card-${cardId}-launch-Image`)}
             >
-              {renderGraphic(Launch)}
+              {renderGraphic(Launch20)}
             </div>
           )}
         </div>

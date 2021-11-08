@@ -1,0 +1,10 @@
+{
+  "comment": "This local config can be used to specify non-repo codesandboxes. Rename 'examples-disabled' to 'examples'",
+  "examples-disabled": [
+    {
+      "label": "PageHeader example",
+      "url": "https://codesandbox.io/s/pageheaderexample-rs5ie",
+      "thumbnail": "url(\"https://screenshots.codesandbox.io/rs5ie/210.png\")"
+    }
+  ]
+}

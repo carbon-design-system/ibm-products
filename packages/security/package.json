@@ -30,7 +30,9 @@
   "scripts": {
     "build": "run-s clean build-all",
     "build-all": "run-p build:*",
-    "build:css": "sass --load-path node_modules --load-path ../../node_modules src:css",
+    "build:css": "run-s build:css:*",
+    "build:css:compile": "sass -I ../../node_modules -I node_modules --no-source-map src/index.scss:css/index.css",
+    "build:css:minify": "cleancss -b --batch-suffix '.min' -O2 css/*.css",
     "build:js-esm": "cross-env BABEL_ENV=esm yarn build:js:modules -d es",
     "build:js-cjs": "cross-env BABEL_ENV=cjs yarn build:js:modules -d lib",
     "build:js:modules": "babel src --ignore '**/_mocks_','**/__tests__','**/*+(-story|.stories).*'",
@@ -77,6 +79,7 @@
     "@babel/plugin-proposal-export-default-from": "^7.16.0",
     "babel-plugin-macros": "^3.1.0",
     "babel-preset-ibm-cloud-cognitive": "^0.11.0",
+    "clean-css-cli": "^5.4.2",
     "data-uri.macro": "^1.0.0",
     "deepmerge": "^4.2.2",
     "enzyme": "^3.11.0",

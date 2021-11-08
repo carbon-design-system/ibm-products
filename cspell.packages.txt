@@ -1,5 +1,6 @@
 browserslist
 cdai
+codeql
 codesandbox
 codesandboxes
 docgen
@@ -9,6 +10,7 @@ kubernetes
 kube
 markdownlint
 plex
+storysource
 stylelint
 technote
 wcag

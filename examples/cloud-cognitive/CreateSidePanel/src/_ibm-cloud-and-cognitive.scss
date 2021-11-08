@@ -1,0 +1,8 @@
+@import '@carbon/ibm-cloud-cognitive/scss/components/CreateSidePanel/index';
+
+.ccs-theme-dropdown {
+  position: fixed;
+  bottom: $spacing-05;
+  left: $spacing-05;
+  min-width: 11.5rem;
+}

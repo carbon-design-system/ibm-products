@@ -10,7 +10,7 @@ import { storiesOf } from '@storybook/react';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { getComponentLabel } from '../../component_helpers/StorybookHelper';
 import { Button, TextInput, TextArea } from 'carbon-components-react';
-import RightArrowIcon16 from '@carbon/icons-react/lib/arrow--right/16';
+import { ArrowRight16 } from '@carbon/icons-react';
 import { IdeSlideOverPanel } from '.';
 import styles from './_storybook.scss';
 
@@ -132,7 +132,7 @@ const DummyMultiPageSlideComponent = () => {
       size="medium"
       open
       primaryButtonText="Next"
-      primaryButtonIcon={RightArrowIcon16}
+      primaryButtonIcon={ArrowRight16}
       secondaryButtonText="Back"
       controls
       onPrimaryClick={onPrimaryButton}

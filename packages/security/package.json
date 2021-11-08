@@ -30,7 +30,7 @@
   "scripts": {
     "build": "run-s clean build-all",
     "build-all": "run-p build:*",
-    "build:css": "sass --load-path node_modules --load-path ../../node_modules src:css",
+    "build:css": "sass --style=compressed --no-source-map --load-path node_modules --load-path ../../node_modules src/index.scss:css/index.min.css",
     "build:js-esm": "cross-env BABEL_ENV=esm yarn build:js:modules -d es",
     "build:js-cjs": "cross-env BABEL_ENV=cjs yarn build:js:modules -d lib",
     "build:js:modules": "babel src --ignore '**/_mocks_','**/__tests__','**/*+(-story|.stories).*'",

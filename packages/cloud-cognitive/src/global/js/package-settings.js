@@ -8,7 +8,7 @@
 import { devtoolsAttribute, getDevtoolsId } from './utils/devtools';
 
 const defaults = {
-  prefix: 'exp',
+  prefix: 'cip',
 
   // by default only released components are set to true
   component: {

@@ -41,7 +41,7 @@ This:
 ```js
 import { pkg } from '../../settings';
 const componentName = 'ExampleComponent';
-const blockClass = `${pkg.prefix}-example-component`;
+const blockClass = `${pkg.prefix}--example-component`;
 
 export const ExampleComponent = ({ props }) => {
   // ...
@@ -53,7 +53,7 @@ Becomes:
 ```js
 import { pkg } from '../../settings';
 const componentName = 'ExampleComponent';
-const blockClass = `${pkg.prefix}-example-component`;
+const blockClass = `${pkg.prefix}--example-component`;
 
 export let ExampleComponent = ({ props }) => {
   // ...

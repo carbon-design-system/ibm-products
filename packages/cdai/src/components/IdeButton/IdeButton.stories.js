@@ -12,9 +12,7 @@ import { withKnobs, text } from '@storybook/addon-knobs';
 import { getComponentLabel } from '../../component_helpers/StorybookHelper';
 
 import { IdeButton } from '.';
-import AddIcon16 from '@carbon/icons-react/lib/add/16';
-import BeeIcon16 from '@carbon/icons-react/lib/bee/16';
-import RenewIcon16 from '@carbon/icons-react/lib/renew/16';
+import { Add16, Bee16, Renew16 } from '@carbon/icons-react';
 
 import styles from './_storybook.scss';
 
@@ -29,7 +27,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
       <div>
         <IdeButton
           onClick={action('clicked')}
-          renderIcon={AddIcon16}
+          renderIcon={Add16}
           iconDescription="Icon description"
         >
           Label
@@ -39,7 +37,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         <IdeButton
           onClick={action('clicked')}
           kind="primary"
-          renderIcon={AddIcon16}
+          renderIcon={Add16}
           iconDescription="Icon description"
         >
           Label
@@ -49,7 +47,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         <IdeButton
           onClick={action('clicked')}
           kind="secondary"
-          renderIcon={AddIcon16}
+          renderIcon={Add16}
           iconDescription="Icon description"
         >
           Label
@@ -59,7 +57,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         <IdeButton
           onClick={action('clicked')}
           kind="tertiary"
-          renderIcon={AddIcon16}
+          renderIcon={Add16}
           iconDescription="Icon description"
         >
           Label
@@ -69,7 +67,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         <IdeButton
           onClick={action('clicked')}
           kind="danger"
-          renderIcon={AddIcon16}
+          renderIcon={Add16}
           iconDescription="Icon description"
         >
           Label
@@ -79,7 +77,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         <IdeButton
           onClick={action('clicked')}
           kind="ghost"
-          renderIcon={AddIcon16}
+          renderIcon={Add16}
           iconDescription="Icon description"
         >
           Label
@@ -88,7 +86,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         {/* Disabled. */}
         <IdeButton
           onClick={action('clicked')}
-          renderIcon={AddIcon16}
+          renderIcon={Add16}
           iconDescription="Icon description"
           disabled
         >
@@ -98,7 +96,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         {/* Small. */}
         <IdeButton
           onClick={action('clicked')}
-          renderIcon={AddIcon16}
+          renderIcon={Add16}
           iconDescription="Icon description"
           small
         >
@@ -167,7 +165,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
       <div>
         <IdeButton
           onClick={action('clicked')}
-          renderIcon={AddIcon16}
+          renderIcon={Add16}
           iconDescription="Icon description"
           hasIconOnly
         />
@@ -176,7 +174,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         <IdeButton
           onClick={action('clicked')}
           kind="primary"
-          renderIcon={AddIcon16}
+          renderIcon={Add16}
           iconDescription="Icon description"
           hasIconOnly
         />
@@ -185,7 +183,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         <IdeButton
           onClick={action('clicked')}
           kind="secondary"
-          renderIcon={AddIcon16}
+          renderIcon={Add16}
           iconDescription="Icon description"
           hasIconOnly
         />
@@ -194,7 +192,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         <IdeButton
           onClick={action('clicked')}
           kind="tertiary"
-          renderIcon={AddIcon16}
+          renderIcon={Add16}
           iconDescription="Icon description"
           hasIconOnly
         />
@@ -203,7 +201,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         <IdeButton
           onClick={action('clicked')}
           kind="danger"
-          renderIcon={AddIcon16}
+          renderIcon={Add16}
           iconDescription="Icon description"
           hasIconOnly
         />
@@ -212,7 +210,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         <IdeButton
           onClick={action('clicked')}
           kind="ghost"
-          renderIcon={AddIcon16}
+          renderIcon={Add16}
           iconDescription="Icon description"
           hasIconOnly
         />
@@ -220,7 +218,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         {/* Disabled. */}
         <IdeButton
           onClick={action('clicked')}
-          renderIcon={AddIcon16}
+          renderIcon={Add16}
           iconDescription="Icon description"
           disabled
           hasIconOnly
@@ -229,7 +227,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         {/* Small. */}
         <IdeButton
           onClick={action('clicked')}
-          renderIcon={AddIcon16}
+          renderIcon={Add16}
           iconDescription="Icon description"
           small
           hasIconOnly
@@ -249,7 +247,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
       <div>
         <IdeButton
           onClick={action('clicked')}
-          renderIcon={RenewIcon16}
+          renderIcon={Renew16}
           iconDescription="Icon description"
           hasIconOnly
           iconAnimation={text('iconAnimation', 'rotate-180-anti')}
@@ -259,7 +257,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         <IdeButton
           onClick={action('clicked')}
           kind="primary"
-          renderIcon={RenewIcon16}
+          renderIcon={Renew16}
           iconDescription="Icon description"
           hasIconOnly
           iconAnimation={text('iconAnimation', 'rotate-180-anti')}
@@ -269,7 +267,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         <IdeButton
           onClick={action('clicked')}
           kind="secondary"
-          renderIcon={RenewIcon16}
+          renderIcon={Renew16}
           iconDescription="Icon description"
           hasIconOnly
           iconAnimation={text('iconAnimation', 'rotate-180-anti')}
@@ -279,7 +277,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         <IdeButton
           onClick={action('clicked')}
           kind="tertiary"
-          renderIcon={RenewIcon16}
+          renderIcon={Renew16}
           iconDescription="Icon description"
           hasIconOnly
           iconAnimation={text('iconAnimation', 'rotate-180-anti')}
@@ -289,7 +287,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         <IdeButton
           onClick={action('clicked')}
           kind="danger"
-          renderIcon={RenewIcon16}
+          renderIcon={Renew16}
           iconDescription="Icon description"
           hasIconOnly
           iconAnimation={text('iconAnimation', 'rotate-180-anti')}
@@ -299,7 +297,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         <IdeButton
           onClick={action('clicked')}
           kind="ghost"
-          renderIcon={RenewIcon16}
+          renderIcon={Renew16}
           iconDescription="Icon description"
           hasIconOnly
           iconAnimation={text('iconAnimation', 'rotate-180-anti')}
@@ -308,7 +306,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         {/* Disabled. */}
         <IdeButton
           onClick={action('clicked')}
-          renderIcon={RenewIcon16}
+          renderIcon={Renew16}
           iconDescription="Icon description"
           disabled
           hasIconOnly
@@ -318,7 +316,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         {/* Small. */}
         <IdeButton
           onClick={action('clicked')}
-          renderIcon={RenewIcon16}
+          renderIcon={Renew16}
           iconDescription="Icon description"
           small
           hasIconOnly
@@ -328,7 +326,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         <br />
         <IdeButton
           onClick={action('clicked')}
-          renderIcon={RenewIcon16}
+          renderIcon={Renew16}
           iconDescription="Icon description"
           iconAnimation={text('iconAnimation', 'rotate-180-anti')}
         >
@@ -339,7 +337,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         <IdeButton
           onClick={action('clicked')}
           kind="primary"
-          renderIcon={RenewIcon16}
+          renderIcon={Renew16}
           iconDescription="Icon description"
           iconAnimation={text('iconAnimation', 'rotate-180-anti')}
         >
@@ -350,7 +348,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         <IdeButton
           onClick={action('clicked')}
           kind="secondary"
-          renderIcon={RenewIcon16}
+          renderIcon={Renew16}
           iconDescription="Icon description"
           iconAnimation={text('iconAnimation', 'rotate-180-anti')}
         >
@@ -361,7 +359,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         <IdeButton
           onClick={action('clicked')}
           kind="tertiary"
-          renderIcon={RenewIcon16}
+          renderIcon={Renew16}
           iconDescription="Icon description"
           iconAnimation={text('iconAnimation', 'rotate-180-anti')}
         >
@@ -372,7 +370,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         <IdeButton
           onClick={action('clicked')}
           kind="danger"
-          renderIcon={RenewIcon16}
+          renderIcon={Renew16}
           iconDescription="Icon description"
           iconAnimation={text('iconAnimation', 'rotate-180-anti')}
         >
@@ -383,7 +381,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         <IdeButton
           onClick={action('clicked')}
           kind="ghost"
-          renderIcon={RenewIcon16}
+          renderIcon={Renew16}
           iconDescription="Icon description"
           iconAnimation={text('iconAnimation', 'rotate-180-anti')}
         >
@@ -393,7 +391,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         {/* Disabled. */}
         <IdeButton
           onClick={action('clicked')}
-          renderIcon={RenewIcon16}
+          renderIcon={Renew16}
           iconDescription="Icon description"
           iconAnimation={text('iconAnimation', 'rotate-180-anti')}
           disabled
@@ -404,7 +402,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         {/* Small. */}
         <IdeButton
           onClick={action('clicked')}
-          renderIcon={RenewIcon16}
+          renderIcon={Renew16}
           iconDescription="Icon description"
           iconAnimation={text('iconAnimation', 'rotate-180-anti')}
           small
@@ -415,7 +413,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         <br />
         <IdeButton
           onClick={action('clicked')}
-          renderIcon={BeeIcon16}
+          renderIcon={Bee16}
           iconDescription="Icon description"
           hasIconOnly
           iconAnimation={text('iconAnimation', 'rotate-180-anti')}
@@ -436,7 +434,7 @@ storiesOf(getComponentLabel('IdeButton'), module)
         {/* eslint-disable jsx-a11y/tabindex-no-positive */}
         <IdeButton
           onClick={action('clicked')}
-          renderIcon={AddIcon16}
+          renderIcon={Add16}
           iconDescription="Icon description"
           className="custom-class"
           tabIndex={2}
@@ -460,14 +458,14 @@ storiesOf(getComponentLabel('IdeButton'), module)
       <div>
         {/* Link. */}
         <IdeButton
-          renderIcon={AddIcon16}
+          renderIcon={Add16}
           iconDescription="Icon description"
           href="http://www.ibm.com"
         />
         &nbsp;
         {/* As. */}
         <IdeButton
-          renderIcon={AddIcon16}
+          renderIcon={Add16}
           iconDescription="Icon description"
           as="span"
         />

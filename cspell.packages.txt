@@ -6,6 +6,7 @@ docgen
 dsag
 flatpickr
 kubernetes
+kube
 markdownlint
 plex
 stylelint

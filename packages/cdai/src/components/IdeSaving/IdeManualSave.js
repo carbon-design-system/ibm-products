@@ -9,8 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'carbon-components-react';
 
-import AddSave16 from '@carbon/icons-react/lib/save/16';
-import AddCheckmark16 from '@carbon/icons-react/lib/checkmark--outline/16';
+import { CheckmarkOutline16, Save16 } from '@carbon/icons-react';
 import { idePrefix } from '../../globals/js/settings';
 
 const IdeManualSave = ({ state, saveText, cancelText, onSave, onCancel }) => (
@@ -27,7 +26,7 @@ const IdeManualSave = ({ state, saveText, cancelText, onSave, onCancel }) => (
       className={`${idePrefix}-manual-save__save-button ${idePrefix}-manual-save--button`}
       kind="primary"
       onClick={(evt) => onSave(evt)}
-      renderIcon={state === 'saved' ? AddCheckmark16 : AddSave16}
+      renderIcon={state === 'saved' ? CheckmarkOutline16 : Save16}
     >
       {saveText}
     </Button>

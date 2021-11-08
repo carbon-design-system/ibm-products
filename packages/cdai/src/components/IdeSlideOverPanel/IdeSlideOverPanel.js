@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'carbon-components-react';
-import CloseIcon16 from '@carbon/icons-react/lib/close/16';
+import { Close16 } from '@carbon/icons-react';
 import { createInteractionHandler } from '../../component_helpers/A11yHelper';
 import FocusTrap from 'focus-trap-react';
 import { idePrefix } from '../../globals/js/settings';
@@ -85,7 +85,7 @@ const IdeSlideOverPanel = ({
             iconDescription={closeButtonIconDescription}
             kind="ghost"
             onClick={onClose}
-            renderIcon={CloseIcon16}
+            renderIcon={Close16}
             size="default"
             tooltipAlignment="center"
             tooltipPosition="bottom"

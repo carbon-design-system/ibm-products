@@ -14,7 +14,7 @@ import {
   ProgressIndicator,
   ProgressStep,
 } from 'carbon-components-react';
-import Launch24 from '@carbon/icons-react/lib/launch/24';
+import { Launch24 } from '@carbon/icons-react';
 import IdeCreateStep from './ide-create-step';
 import { idePrefix } from '../../globals/js/settings';
 const { prefix } = settings;

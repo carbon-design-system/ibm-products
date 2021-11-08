@@ -60,7 +60,7 @@ jobs:
         with:
           slack-bot-user-oauth-access-token:
             ${{ secrets.CREATE_PR_SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
-          slack-channel: G01PUCL3V8R
+          slack-channel: G01PUCL3V8R # cspell:disable-line
           slack-text: >
             Hello! This is a test post. PR number:
             ${{steps.create-pr.outputs.pull-request-number}} 🤓

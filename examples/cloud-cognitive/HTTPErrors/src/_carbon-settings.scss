@@ -1,0 +1,12 @@
+@import '@carbon/type/scss/type';
+@import '@carbon/themes/scss/themes';
+@import '@carbon/layout/scss/layout';
+@import '@carbon/motion/scss/motion';
+@import 'carbon-components/src/globals/scss/vars';
+@import 'carbon-components/src/globals/scss/mixins';
+
+$feature-flags: (
+  ui-shell: true,
+  grid-columns-16: true,
+  enable-css-custom-properties: true,
+);

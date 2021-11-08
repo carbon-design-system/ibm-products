@@ -1,0 +1,17 @@
+@import '@carbon/ibm-cloud-cognitive/scss/components/EmptyStates/index';
+
+body {
+  background-color: $ui-background;
+  color: $text-01;
+}
+
+.app {
+  padding: $spacing-05;
+}
+
+.ccs-theme-dropdown {
+  position: fixed;
+  bottom: $spacing-05;
+  left: $spacing-05;
+  min-width: 11.5rem;
+}

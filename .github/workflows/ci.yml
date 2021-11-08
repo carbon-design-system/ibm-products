@@ -6,6 +6,15 @@ on:
       - main
 
 jobs:
+  cancel:
+    name: 'Cancel all but the latest incomplete run'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          all_but_latest: true
+          access_token: ${{ secrets.GITHUB_TOKEN }}
+
   build:
     runs-on: ubuntu-latest
 

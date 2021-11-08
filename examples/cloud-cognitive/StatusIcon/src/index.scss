@@ -1,0 +1,61 @@
+// Feature flags
+$feature-flags: (
+  enable-css-custom-properties: true,
+);
+
+// @ carbon settings
+@import '@carbon/themes/scss/themes';
+@import '@carbon/layout/scss/layout';
+@import 'carbon-components/scss/components/dropdown/dropdown';
+
+// Cloud-cognitive package
+@import '@carbon/ibm-cloud-cognitive/css/index.min.css';
+@import '@carbon/ibm-cloud-cognitive/scss/global/styles/project-settings';
+
+body.carbon-theme--white {
+  @include carbon--theme($carbon--theme--white, true);
+}
+
+body.carbon-theme--g10 {
+  @include carbon--theme($carbon--theme--g10, true);
+}
+
+body.carbon-theme--g90 {
+  @include carbon--theme($carbon--theme--g90, true);
+}
+
+body.carbon-theme--g100 {
+  @include carbon--theme($carbon--theme--g100, true);
+}
+
+body {
+  background-color: $ui-background;
+  color: $text-01;
+}
+
+.app {
+  display: flex;
+  justify-content: center;
+  padding: $spacing-09;
+}
+
+.ccs-theme-dropdown {
+  position: fixed;
+  bottom: $spacing-05;
+  left: $spacing-05;
+  min-width: 11.5rem;
+}
+
+.ccs-status-dropdown {
+  position: fixed;
+  top: $spacing-05;
+  left: $spacing-05;
+  min-width: 11.5rem;
+}
+
+.#{$pkg-prefix}--status-icon {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

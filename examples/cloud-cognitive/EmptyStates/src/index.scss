@@ -1,0 +1,18 @@
+@import './carbon';
+@import './ibm-cloud-and-cognitive';
+
+.empty-state-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: $spacing-09;
+}
+
+.bx--label {
+  @include carbon--type-style('label-01');
+
+  margin-bottom: $spacing-03;
+}
+
+.bx--dropdown__wrapper {
+  max-width: 400px;
+}

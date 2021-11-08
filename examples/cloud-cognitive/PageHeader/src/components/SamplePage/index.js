@@ -1,0 +1,1 @@
+export { SamplePage } from './SamplePage';

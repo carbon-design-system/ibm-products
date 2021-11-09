@@ -75,7 +75,7 @@ $theme-keys: map-keys($themes);
     text-transform: uppercase;
   }
 
-  .bx--tooltip__trigger .exp-user-profile-avatar svg {
+  .#{$prefix}--tooltip__trigger .#{$pkg-prefix}-user-profile-avatar svg {
     fill: $ui-01;
   }
 

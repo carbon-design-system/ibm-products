@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.98.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.97.2...@carbon/ibm-cloud-cognitive@0.98.0) (2021-11-09)
+
+
+### Bug Fixes
+
+* improve tree-shaking optimisation by importing icons directly from @carbons/icons-react ([#1379](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1379)) ([9110484](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9110484d7860a95a858a5e1931015b853769c3a9))
+* **Web terminal:** a11y fix ([#1394](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1394)) ([d34fbce](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d34fbced396e56f50671016f98b22f0414777b01))
+
+
+### Features
+
+* update Carbon versions and package dependencies to latest ([#1365](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1365)) ([ea11cf7](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ea11cf7ae44b61b48142c511c16460cf7978b88c))
+
+
+
+
+
 ## [0.97.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.97.1...@carbon/ibm-cloud-cognitive@0.97.2) (2021-11-05)
 
 

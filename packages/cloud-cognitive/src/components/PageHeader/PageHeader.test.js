@@ -11,12 +11,18 @@ import userEvent from '@testing-library/user-event';
 
 import { pkg, carbon } from '../../settings';
 
-import { BreadcrumbItem, Button, Tab, Tabs } from 'carbon-components-react';
+import { BreadcrumbItem, Tab, Tabs } from 'carbon-components-react';
 import { Lightning16, Bee32 } from '@carbon/icons-react';
 
 import { PageHeader } from '.';
 import { ActionBarItem } from '../ActionBar';
-import { mockHTMLElement } from '../../global/js/utils/test-helper';
+import {
+  mockHTMLElement,
+  expectWarn,
+  expectMultipleError,
+  deprecatedUsage,
+  required,
+} from '../../global/js/utils/test-helper';
 
 const { prefix } = pkg;
 
@@ -84,22 +90,6 @@ const pageActions = [
 ];
 const pageActionsOverflowLabel = 'Page actions...';
 
-const pageActionsDepTest = pageActions.map(({ label, ...rest }, index) => (
-  <Button {...rest} key={index}>
-    {label}
-  </Button>
-));
-
-const pageActionsDepTest2 = (
-  <>
-    {pageActions.map(({ label, ...rest }, index) => (
-      <Button {...rest} key={index}>
-        {label}
-      </Button>
-    ))}
-  </>
-);
-
 const subtitle = 'Optional subtitle if necessary';
 const navigation = (
   <Tabs data-testid="tabs">
@@ -117,6 +107,17 @@ const tags = Array.from({ length: 20 }, () => ({
   label: 'A tag',
 }));
 
+const titleUserDefinedStrings = {
+  content: 'Page title',
+  breadcrumbContent: 'Breadcrumb title',
+  asText: 'Text title',
+};
+
+const titleUserDefined = {
+  content: <div>{titleUserDefinedStrings.content}</div>,
+  breadcrumbContent: <span>{titleUserDefinedStrings.breadcrumbContent}</span>,
+  asText: titleUserDefinedStrings.asText,
+};
 const titleObj = { text: 'Page title', loading: false, icon: Bee32 };
 const titleString = 'Page title';
 
@@ -192,9 +193,10 @@ const testProps = {
   expandHeaderIconDescription: 'Expand header',
 };
 
-const testPropsAltTitle = {
-  title: titleString,
-  titleIcon: Bee32,
+const testPropsUserDefined = {
+  breadcrumbs, // breadcrumbs needed for title breadcrumb test
+  breadcrumbOverflowAriaLabel,
+  title: titleUserDefined,
 };
 
 describe('PageHeader', () => {
@@ -330,64 +332,15 @@ describe('PageHeader', () => {
     ).toHaveLength(1);
   });
 
-  test('copes with actionBarItems as nodes', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-    render(
-      <PageHeader
-        actionBarItems={actionBarItemsNodes}
-        actionBarOverflowAriaLabel={actionBarOverflowAriaLabel}
-      />
-    );
-
-    expect(warn).toBeCalledWith(
-      'The usage of the prop `actionBarItems` of `PageHeader` has been changed and support for the old usage will soon be removed. Expects an array of objects with the following properties: iconDescription, renderIcon and onClick.'
-    );
-
-    warn.mockRestore(); // Remove mock
-  });
-
-  test('with deprecated page actions', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-    render(
-      <PageHeader
-        pageActions={pageActionsDepTest}
-        pageActionsOverflowLabel={pageActionsOverflowLabel}
-      />
-    );
-
-    screen.getByText('Primary button', {
-      selector: `.${blockClass}__page-actions .${prefix}--button-set-with-overflow__button-container:not(.${prefix}--button-set-with-overflow__button-container--hidden) .${carbon.prefix}--btn`,
-    });
-
-    expect(warn).toBeCalledWith(
-      'The usage of the prop `pageActions` of `PageHeader` has been changed and support for the old usage will soon be removed. Expects an array of objects with the following properties: label and onClick.'
-    );
-
-    warn.mockRestore(); // Remove mock
-  });
-
-  test('with deprecated page actions in a fragment', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-    render(
-      <PageHeader
-        pageActions={pageActionsDepTest2}
-        pageActionsOverflowLabel={pageActionsOverflowLabel}
-      />
-    );
-
-    screen.getByText('Primary button', {
-      selector: `.${blockClass}__page-actions .${prefix}--button-set-with-overflow__button-container:not(.${prefix}--button-set-with-overflow__button-container--hidden) .${carbon.prefix}--btn`,
-    });
-
-    expect(warn).toBeCalledWith(
-      'The usage of the prop `pageActions` of `PageHeader` has been changed and support for the old usage will soon be removed. Expects an array of objects with the following properties: label and onClick.'
-    );
-
-    warn.mockRestore(); // Remove mock
-  });
+  test('copes with actionBarItems as nodes', () =>
+    expectWarn(deprecatedUsage('actionBarItems', 'PageHeader'), () => {
+      render(
+        <PageHeader
+          actionBarItems={actionBarItemsNodes}
+          actionBarOverflowAriaLabel={actionBarOverflowAriaLabel}
+        />
+      );
+    }));
 
   const dataTestId = 'data-testid';
 
@@ -564,20 +517,38 @@ describe('PageHeader', () => {
     ).toBeTruthy();
   });
 
-  test('renders title when using separate string and icon', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+  test('renders title as string', () => {
+    render(<PageHeader title={testProps.title.text} />);
 
-    render(<PageHeader {...testPropsAltTitle} />);
+    screen.getByText(testProps.title.text);
+  });
 
-    expect(warn).toBeCalledWith(
-      'The prop `titleIcon` of `PageHeader` has been deprecated and will soon be removed. Use `title` prop shape instead.'
-    );
+  test('renders title when using user defined title', () => {
+    render(<PageHeader {...testPropsUserDefined} />);
 
-    screen.getByText(titleString, { selector: `.${blockClass}__title span` });
+    screen.getByText(titleUserDefinedStrings.content);
+    screen.getByText(titleUserDefinedStrings.breadcrumbContent, {
+      // selector need to ignore sizing items
+      selector: `.${prefix}--breadcrumb-with-overflow__breadcrumb-container:not(.${prefix}--breadcrumb-with-overflow__breadcrumb-container--hidden) .${carbon.prefix}--link`,
+    });
 
-    expect(
-      document.querySelectorAll(`.${blockClass}__title-icon`)
-    ).toHaveLength(1);
+    const allTitle = screen.getAllByTitle(titleUserDefinedStrings.asText);
+    expect(allTitle).toHaveLength(3); // breadcrumb sizing, breadcrumb and main title
+  });
+
+  test('renders title when using user defined title without a breadcrumbContent', () => {
+    const noBreadcrumbContent = { ...testPropsUserDefined };
+    noBreadcrumbContent.title.breadcrumbContent = undefined;
+
+    render(<PageHeader {...noBreadcrumbContent} />);
+
+    screen.getByText(titleUserDefinedStrings.content, {
+      // selector need to ignore sizing items
+      selector: `.${prefix}--breadcrumb-with-overflow__breadcrumb-container:not(.${prefix}--breadcrumb-with-overflow__breadcrumb-container--hidden) .${carbon.prefix}--link`,
+    });
+
+    const allTitle = screen.getAllByTitle(titleUserDefinedStrings.asText);
+    expect(allTitle).toHaveLength(3); // breadcrumb sizing, breadcrumb and main title
   });
 
   test('Without hasBackgroundAlways', () => {
@@ -598,28 +569,25 @@ describe('PageHeader', () => {
     screen.getByRole('region');
   });
 
-  test('ActionBar without overflow aria label', () => {
-    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
-
-    const { title } = testProps;
-    render(
-      <PageHeader
-        {...{
-          title,
-          actionBarItems,
-        }}
-        aria-label="Page header" // gives section role 'region'
-      />
-    );
-
-    expect(error).toBeCalledWith(
-      expect.stringMatching(
-        /^Warning: Failed prop type: The prop `overflowAriaLabel` is marked as required in `ActionBar`/
-      )
-    );
-
-    jest.spyOn(console, 'error').mockRestore();
-  });
+  test('ActionBar without overflow aria label', () =>
+    expectMultipleError(
+      [
+        required('actionBarOverflowAriaLabel', 'PageHeader'),
+        required('overflowAriaLabel', 'ActionBar'),
+      ],
+      () => {
+        const { title } = testProps;
+        render(
+          <PageHeader
+            {...{
+              title,
+              actionBarItems,
+            }}
+            aria-label="Page header" // gives section role 'region'
+          />
+        );
+      }
+    ));
 
   test('Title shows as loading', () => {
     render(
@@ -725,7 +693,7 @@ describe('PageHeader', () => {
     warn.mockRestore(); // Remove mock
   });
 
-  test('Deprecated title skeleton with breadcrumbs', () => {
+  test('Title skeleton with deprecated breadcrumbs', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
     render(

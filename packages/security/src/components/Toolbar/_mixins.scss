@@ -1,0 +1,255 @@
+////
+/// Toolbar mixins.
+/// @group toolbar
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/mini-unit';
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
+@import 'carbon-components/scss/globals/scss/layout';
+
+@import '../../globals/motion/index';
+@import '../../globals/namespace/index';
+@import '../../globals/rtl/index';
+@import '../../globals/theme/mixins';
+
+@import '../../platform/body/mixins';
+@import '../Header/variables';
+@import '../Nav/mixins';
+
+/// Name.
+/// @type String
+$toolbar__name: toolbar;
+
+/// Namespace.
+/// @type String
+$toolbar__namespace: get-component-namespace(
+  $component-name: $toolbar__name,
+);
+
+/// Horizontal position.
+/// @type Length
+$toolbar__spacing__position__horizontal: $carbon--spacing-02;
+
+/// Width.
+/// @type Length
+$toolbar__sizing__width: carbon--mini-units(
+  $count: 6,
+);
+
+/// Panel width.
+/// @type Length
+$toolbar__panel__sizing__width: carbon--mini-units(
+  $count: 32,
+);
+
+/// Nav list title item padding-top
+$nav__item__title__icon__padding__top: carbon--mini-units(
+  $count: 0.0625,
+);
+
+/// Panel transition timing function.
+/// @type Length
+$toolbar__panel__transition__timing-function: $timing-function;
+
+@mixin toolbar--base {
+  position: fixed;
+}
+
+@mixin toolbar__transition--transform($translation) {
+  /// Transform.
+  /// @type Length
+  $transform: translate3d(-$translation, 0, 0);
+
+  &--enter,
+  &--leave {
+    &--active {
+      transition-duration: $transition-duration--fast;
+    }
+  }
+
+  &--enter {
+    transform: $transform;
+
+    &--active {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  &--leave--active {
+    transform: $transform;
+  }
+}
+
+@mixin toolbar {
+  $toolbar: &;
+
+  /// Vertical position.
+  /// @type Length
+  $toolbar__spacing__position__vertical: $spacing-03;
+
+  /// Layer.
+  /// @type Length
+  $toolbar__layer: ($header__layer + 2);
+
+  @include toolbar--base;
+
+  z-index: $toolbar__layer;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: $toolbar__sizing__width;
+  box-sizing: border-box;
+  padding: $toolbar__spacing__position__vertical
+    $toolbar__spacing__position__horizontal;
+  background-color: $ui-background;
+
+  &__minimized {
+    bottom: unset;
+  }
+
+  @include rtl {
+    right: 0;
+    left: unset;
+    padding-right: $toolbar__spacing__position__horizontal;
+    padding-left: unset;
+  }
+
+  &,
+  &__panel {
+    @include security--theme--cg10__cg100;
+  }
+
+  &__group {
+    padding-left: unset;
+    margin-top: unset;
+    margin-bottom: unset;
+    list-style: none;
+
+    @include rtl {
+      padding-right: unset;
+    }
+  }
+
+  &__button {
+    &--active,
+    &:hover,
+    &:focus {
+      background-color: $ui-01;
+
+      #{$toolbar}__icon {
+        opacity: 1;
+      }
+    }
+
+    &:hover {
+      + #{$toolbar}__tooltip {
+        opacity: 0.95;
+      }
+    }
+
+    &::after,
+    &::before {
+      @include security--theme--cg10__cg10;
+    }
+  }
+
+  &__icon {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  &__nav__item__icon {
+    width: carbon--mini-units($count: 2.5);
+    height: carbon--mini-units($count: 2.5);
+    margin-left: -$carbon--spacing-07;
+  }
+
+  &__nav__item__title {
+    &--icon {
+      padding-top: $nav__item__title__icon__padding__top;
+      margin-left: $carbon--spacing-04;
+    }
+  }
+
+  &__nav__list__title {
+    &--icon {
+      #{get-component-namespace($component-name: nav)}__list__item__content {
+        padding-top: $nav__item__title__icon__padding__top;
+      }
+    }
+  }
+
+  &__panel {
+    @include toolbar--base;
+
+    z-index: $toolbar__layer - 1;
+    top: 0;
+    bottom: 0;
+    left: $toolbar__sizing__width;
+    width: $toolbar__panel__sizing__width;
+    box-sizing: border-box;
+    padding-top: $toolbar__spacing__position__vertical;
+    padding-bottom: $toolbar__spacing__position__vertical;
+    background-color: $ui-01;
+    box-shadow: carbon--mini-units($count: 0.25) 0 0 0 $overlay-01;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  &__content {
+    @include carbon--type-style($name: body-short-01);
+
+    overflow: hidden;
+    width: carbon--mini-units($count: 26);
+    height: 95%;
+    margin: 0 $carbon--spacing-06 0 $carbon--spacing-06;
+
+    > div:first-child {
+      overflow: auto;
+      width: 100%;
+      height: 100%;
+      padding-right: $carbon--spacing-05;
+      padding-bottom: $carbon--spacing-06;
+      margin-right: -$carbon--spacing-05;
+      margin-bottom: -$carbon--spacing-06;
+    }
+
+    a {
+      color: $link-01;
+    }
+
+    h1 {
+      @include carbon--type-style($name: productive-heading-03);
+    }
+  }
+
+  &__transition {
+    @include toolbar__transition--transform(
+      $translation: $toolbar__panel__sizing__width
+    );
+  }
+
+  &__content__transition {
+    @include toolbar__transition--transform($translation: $carbon--spacing-03);
+    @include transition--opacity;
+
+    &--enter,
+    &--leave {
+      width: 100%;
+
+      &--active {
+        transition-property: opacity, transform;
+      }
+    }
+
+    &--enter {
+      position: absolute;
+
+      &--active {
+        transition-delay: $transition-duration;
+      }
+    }
+  }
+}

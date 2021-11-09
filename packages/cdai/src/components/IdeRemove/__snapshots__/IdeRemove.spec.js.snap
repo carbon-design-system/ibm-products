@@ -10,7 +10,6 @@ Array [
       danger={true}
       data-ui-id="IdeRemove-modal"
       hasScrollingContent={false}
-      iconDescription="Close modal"
       modalHeading="[Optional]  [resource name] removed"
       modalLabel="[Optional] Confirmed"
       onKeyDown={[Function]}
@@ -36,7 +35,7 @@ Array [
 ]
 `;
 
-exports[`IdeRemove unit tests view tests IdeRemove tollerates no props being provided, and renders with defaults 1`] = `
+exports[`IdeRemove unit tests view tests IdeRemove tolerates no props being provided, and renders with defaults 1`] = `
 Array [
   <div
     data-ui-id="IdeRemove-root"
@@ -46,7 +45,6 @@ Array [
       danger={true}
       data-ui-id="IdeRemove-modal"
       hasScrollingContent={false}
-      iconDescription="Close modal - provide a translated string"
       modalHeading="Remove Heading - provide a translated string"
       modalLabel="Remove Label - provide a translated string"
       onKeyDown={[Function]}

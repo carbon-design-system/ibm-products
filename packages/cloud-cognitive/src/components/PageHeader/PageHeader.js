@@ -17,7 +17,6 @@ import {
   Column,
   Row,
   Button,
-  SkeletonText,
   Tag,
 } from 'carbon-components-react';
 
@@ -44,14 +43,16 @@ const componentName = 'PageHeader';
 import {
   blockClass,
   utilCheckUpdateVerticalSpace,
-  utilGetTitleShape,
+  utilGetBreadcrumbItemForTitle,
   utilSetCollapsed,
 } from './PageHeaderUtils';
+import { PageHeaderTitle } from './PageHeaderTitle';
 
 export let PageHeader = React.forwardRef(
   (
     {
       actionBarItems,
+      actionBarMenuOptionsClass,
       actionBarOverflowAriaLabel,
       actionBarOverflowLabel: deprecated_actionBarOverflowLabel,
       allTagsModalSearchLabel,
@@ -80,6 +81,7 @@ export let PageHeader = React.forwardRef(
       navigation,
       pageActions,
       pageActionsOverflowLabel,
+      pageActionsMenuOptionsClass,
       pageHeaderOffset: _deprecated_pageHeaderOffset,
       preCollapseTitleRow: deprecated_preCollapseTitleRow,
       preventBreadcrumbScroll: deprecated_preventBreadcrumbScroll,
@@ -87,7 +89,6 @@ export let PageHeader = React.forwardRef(
       subtitle,
       tags,
       title,
-      titleIcon,
       ...rest
     },
     ref
@@ -117,9 +118,6 @@ export let PageHeader = React.forwardRef(
     const offsetTopMeasuringRef = useRef(null);
 
     // utility functions
-    // Title shape is used to allow title to be string or shape
-    const getTitleShape = () =>
-      utilGetTitleShape(title, titleIcon, PageHeader.defaultProps.title);
     const checkUpdateVerticalSpace = function () {
       return utilCheckUpdateVerticalSpace(
         headerRef,
@@ -133,18 +131,7 @@ export let PageHeader = React.forwardRef(
     // state based on props only
     const actionBarItemArray = extractShapesArray(actionBarItems);
     const hasActionBar = actionBarItemArray && actionBarItemArray.length;
-    const hasBreadcrumbRow = !(
-      breadcrumbs === undefined && actionBarItems === undefined
-    );
-    const pageActionsItemArray = extractShapesArray(pageActions)?.map(
-      (shape) => ({
-        label: shape.children,
-        ...shape,
-      })
-    );
-
-    /* Title shape is used to allow title to be string or shape */
-    const titleShape = getTitleShape();
+    const hasBreadcrumbRow = breadcrumbs || actionBarItems;
 
     // NOTE: The buffer is used to add space between the bottom of the header and the last content
     // Not pre-collapsed and (subtitle or children)
@@ -177,7 +164,7 @@ export let PageHeader = React.forwardRef(
       setActionBarMinWidth(minWidth);
     };
 
-    const handleButtonSetWidthChange = ({ minWidth, maxWidth }) => {
+    const handlePageActionWidthChange = ({ minWidth, maxWidth }) => {
       /* don't know how to test resize */
       /* istanbul ignore next */
       setPageActionInBreadcrumbMaxWidth(maxWidth);
@@ -211,6 +198,13 @@ export let PageHeader = React.forwardRef(
 
     // use effects
     useEffect(() => {
+      if (pageActions?.content) {
+        const { minWidth, maxWidth } = pageActions;
+        handlePageActionWidthChange({ minWidth, maxWidth });
+      }
+    }, [pageActions]);
+
+    useEffect(() => {
       // Determine the location of the pageAction buttons
       /* istanbul ignore next */
       setPageActionsInBreadcrumbRow(
@@ -226,6 +220,9 @@ export let PageHeader = React.forwardRef(
     ]);
 
     useEffect(() => {
+      // Assesses the size of the action bar and page action area and their required
+      // space before setting their sizes
+      //
       let newActionBarWidth = 'initial';
       let newPageActionInBreadcrumbWidth = 'initial';
 
@@ -272,7 +269,7 @@ export let PageHeader = React.forwardRef(
     ]);
 
     useEffect(() => {
-      // Updates custom CSS props used to manage scroll behaviour
+      // Updates custom CSS props used to manage scroll behavior
       /* istanbul ignore next */
       setPageHeaderStyles((prev) => ({
         ...prev,
@@ -439,7 +436,7 @@ export let PageHeader = React.forwardRef(
       /* istanbul ignore next */
       return (
         disableBreadcrumbScroll &&
-        actionBarItems === undefined &&
+        !actionBarItems &&
         scrollYValue + metrics.headerTopValue >= 0
       );
     };
@@ -454,12 +451,6 @@ export let PageHeader = React.forwardRef(
       }
     }, [collapseHeader, metrics.headerOffset, metrics.headerTopValue]);
 
-    const {
-      text: titleText,
-      icon: TitleIcon,
-      loading: titleLoading,
-    } = titleShape;
-
     useResizeDetector({
       onResize: handleResizeActionBarColumn,
       targetRef: sizingContainerRef,
@@ -472,24 +463,12 @@ export let PageHeader = React.forwardRef(
       handleHeight: true,
     });
 
-    let breadcrumbsInWithTitle;
-    if (breadcrumbsIn) {
-      breadcrumbsInWithTitle = !title
-        ? breadcrumbsIn
-        : breadcrumbsIn.concat({
-            isCurrentPage: true,
-            className: cx([
-              `${blockClass}__breadcrumb-title`,
-              {
-                [`${blockClass}__breadcrumb-title--pre-collapsed`]:
-                  collapseTitle,
-              },
-            ]),
-            key: `breadcrumb-title`,
-            label: <span>{titleLoading ? <SkeletonText /> : titleText}</span>,
-            title: titleText,
-          });
-    }
+    // Determine what form of title to display in the breadcrumb
+    let breadcrumbItemForTitle = utilGetBreadcrumbItemForTitle(
+      blockClass,
+      collapseTitle,
+      title
+    );
 
     return (
       <>
@@ -530,39 +509,38 @@ export let PageHeader = React.forwardRef(
                       breadcrumbs,
                     [`${blockClass}__breadcrumb-row--has-action-bar`]:
                       hasActionBar,
+                    [`${blockClass}__has-page-actions-without-action-bar`]:
+                      !hasActionBar && pageActions,
                   })}
                 >
                   <div className={`${blockClass}__breadcrumb-row--container`}>
                     <Column
                       className={cx(`${blockClass}__breadcrumb-column`, {
                         [`${blockClass}__breadcrumb-column--background`]:
-                          breadcrumbs !== undefined || hasActionBar,
+                          !!breadcrumbs || hasActionBar,
                       })}
                     >
                       {/* keeps actionBar right even if empty */}
 
-                      {breadcrumbs !== undefined ? (
+                      {breadcrumbs ? (
                         <BreadcrumbWithOverflow
                           className={`${blockClass}__breadcrumb`}
-                          noTrailingSlash={title !== undefined}
+                          noTrailingSlash={!!title}
                           overflowAriaLabel={breadcrumbOverflowAriaLabel}
-                          breadcrumbs={breadcrumbsInWithTitle}
+                          breadcrumbs={
+                            breadcrumbsIn
+                              ? breadcrumbItemForTitle
+                                ? breadcrumbsIn.concat(breadcrumbItemForTitle)
+                                : breadcrumbsIn
+                              : null
+                          }
                         >
                           {!breadcrumbsIn ? deprecated_breadcrumbItems : null}
-                          {!breadcrumbsIn && title ? (
+                          {!breadcrumbsIn && breadcrumbItemForTitle ? (
                             <BreadcrumbItem
-                              isCurrentPage={true}
-                              className={cx([
-                                `${blockClass}__breadcrumb-title`,
-                                {
-                                  [`${blockClass}__breadcrumb-title--pre-collapsed`]:
-                                    collapseTitle,
-                                },
-                              ])}
+                              {...prepareProps(breadcrumbItemForTitle, 'label')}
                             >
-                              <span>
-                                {titleLoading ? <SkeletonText /> : titleText}
-                              </span>
+                              {breadcrumbItemForTitle.label}
                             </BreadcrumbItem>
                           ) : null}
                         </BreadcrumbWithOverflow>
@@ -584,26 +562,14 @@ export let PageHeader = React.forwardRef(
                         ref={sizingContainerRef}
                       >
                         {hasActionBar ? (
-                          // Investigate the responsive  behaviour or this and the title also fix the ActionBar Item and PageAction story css
+                          // Investigate the responsive behavior or this and the title also fix the ActionBar Item and PageAction story css
                           <>
-                            {pageActions && (
-                              <div
-                                className={cx(`${blockClass}__page-actions`, {
-                                  [`${blockClass}__page-actions--in-breadcrumb`]:
-                                    pageActionsInBreadcrumbRow,
-                                })}
-                              >
-                                <ButtonSetWithOverflow
-                                  className={`${blockClass}__button-set--in-breadcrumb`}
-                                  onWidthChange={handleButtonSetWidthChange}
-                                  buttons={pageActionsItemArray}
-                                  buttonSetOverflowLabel={
-                                    pageActionsOverflowLabel
-                                  }
-                                />
-                              </div>
-                            )}
+                            {thePageActions(true, pageActionsInBreadcrumbRow)}
                             <ActionBar
+                              menuOptionsClass={cx(
+                                actionBarMenuOptionsClass,
+                                `${blockClass}__action-bar-menu-options`
+                              )}
                               overflowAriaLabel={actionBarOverflowAriaLabel}
                               actions={actionBarItemArray}
                               className={`${blockClass}__action-bar`}
@@ -618,8 +584,7 @@ export let PageHeader = React.forwardRef(
                 </Row>
               ) : null}
 
-              {!collapseTitle &&
-              !(title === undefined && pageActions === undefined) ? (
+              {!collapseTitle && (title || pageActions) ? (
                 <Row
                   className={cx(`${blockClass}__title-row`, {
                     [`${blockClass}__title-row--no-breadcrumb-row`]:
@@ -627,56 +592,26 @@ export let PageHeader = React.forwardRef(
                     [`${blockClass}__title-row--under-action-bar`]:
                       hasActionBar,
                     [`${blockClass}__title-row--has-page-actions`]:
-                      pageActions !== undefined,
+                      !!pageActions,
                     [`${blockClass}__title-row--sticky`]:
-                      pageActions !== undefined &&
-                      actionBarItems === undefined &&
-                      hasBreadcrumbRow,
+                      !!pageActions && !actionBarItems && hasBreadcrumbRow,
                   })}
                 >
                   <Column className={`${blockClass}__title-column`}>
                     {/* keeps page actions right even if empty */}
-                    {title !== undefined ? (
-                      <div
-                        className={cx(`${blockClass}__title`, {
-                          [`${blockClass}__title--fades`]: hasBreadcrumbRow,
-                        })}
-                      >
-                        {TitleIcon && !titleLoading ? (
-                          <TitleIcon className={`${blockClass}__title-icon`} />
-                        ) : null}
-                        <span title={!titleLoading ? titleText : null}>
-                          {titleLoading ? (
-                            <SkeletonText
-                              className={`${blockClass}__title-skeleton`}
-                            />
-                          ) : (
-                            titleText
-                          )}
-                        </span>
-                      </div>
+                    {title ? (
+                      <PageHeaderTitle
+                        blockClass={blockClass}
+                        hasBreadcrumbRow={hasBreadcrumbRow}
+                        title={title}
+                      />
                     ) : null}
                   </Column>
-
-                  {pageActions !== undefined ? (
-                    <Column
-                      className={cx(`${blockClass}__page-actions`, {
-                        [`${blockClass}__page-actions--in-breadcrumb`]:
-                          pageActionsInBreadcrumbRow,
-                      })}
-                    >
-                      <ButtonSetWithOverflow
-                        className={`${blockClass}__page-actions-container`}
-                        onWidthChange={handleButtonSetWidthChange}
-                        buttons={pageActionsItemArray}
-                        buttonSetOverflowLabel={pageActionsOverflowLabel}
-                      />
-                    </Column>
-                  ) : null}
+                  {thePageActions(false, pageActionsInBreadcrumbRow)}
                 </Row>
               ) : null}
 
-              {subtitle !== undefined ? (
+              {subtitle ? (
                 <Row className={`${blockClass}__subtitle-row`}>
                   <Column className={`${blockClass}__subtitle`}>
                     {subtitle}
@@ -684,7 +619,7 @@ export let PageHeader = React.forwardRef(
                 </Row>
               ) : null}
 
-              {children !== undefined ? (
+              {children ? (
                 <Row className={`${blockClass}__available-row`}>
                   <Column className={`${blockClass}__available-column`}>
                     {children}
@@ -692,7 +627,7 @@ export let PageHeader = React.forwardRef(
                 </Row>
               ) : null}
 
-              {/* Last row margin-below causes problems for scroll behaviour when it sticks the header.
+              {/* Last row margin-below causes problems for scroll behavior when it sticks the header.
             This buffer is used in CSS instead to add vertical space after the last row
             */}
               {(breadcrumbs ||
@@ -723,17 +658,18 @@ export let PageHeader = React.forwardRef(
                     <Column
                       className={cx(`${blockClass}__navigation-tags`, {
                         [`${blockClass}__navigation-tags--tags-only`]:
-                          navigation === undefined,
+                          !navigation,
                       })}
                     >
                       <TagSet
-                        overflowAlign="end"
+                        overflowAlign="start"
                         {...{
                           allTagsModalSearchLabel,
                           allTagsModalSearchPlaceholderText,
                           allTagsModalTitle,
                           showAllTagsLabel,
                           tags,
+                          overflowClassName: `${blockClass}__navigation-tags-overflow`,
                         }}
                       />
                     </Column>
@@ -748,18 +684,18 @@ export let PageHeader = React.forwardRef(
                 <Row
                   className={cx(`${blockClass}__navigation-row`, {
                     [`${blockClass}__navigation-row--spacing-above-06`]:
-                      navigation !== undefined,
+                      !!navigation,
                     [`${blockClass}__navigation-row--has-tags`]: tags,
                   })}
                 >
                   <Column className={`${blockClass}__navigation-tabs`}>
                     {navigation}
                   </Column>
-                  {tags !== undefined ? (
+                  {tags ? (
                     <Column
                       className={cx(`${blockClass}__navigation-tags`, {
                         [`${blockClass}__navigation-tags--tags-only`]:
-                          navigation === undefined,
+                          !navigation,
                       })}
                     >
                       <TagSet
@@ -770,6 +706,7 @@ export let PageHeader = React.forwardRef(
                           allTagsModalTitle,
                           showAllTagsLabel,
                           tags,
+                          overflowClassName: `${blockClass}__navigation-tags-overflow`,
                         }}
                       />
                     </Column>
@@ -803,6 +740,39 @@ export let PageHeader = React.forwardRef(
         </section>
       </>
     );
+
+    function thePageActions(isBreadcrumbRow, inBreadcrumbRow) {
+      if (pageActions) {
+        const Tag = isBreadcrumbRow ? 'div' : Column;
+        // Only report size change of version action bar is rendered as part of the breadcrumb row.
+        // and when there is an actionBar
+        const handleWidthChange =
+          isBreadcrumbRow && hasBreadcrumbRow
+            ? handlePageActionWidthChange
+            : () => {};
+        return (
+          <Tag
+            className={cx(`${blockClass}__page-actions`, {
+              [`${blockClass}__page-actions--in-breadcrumb`]: inBreadcrumbRow,
+            })}
+          >
+            {pageActions.content ?? (
+              <ButtonSetWithOverflow
+                classname={`${blockClass}__button-set-with-overflow`}
+                menuOptionsClass={cx(
+                  pageActionsMenuOptionsClass,
+                  `${blockClass}__button-set-menu-options`
+                )}
+                onWidthChange={handleWidthChange}
+                buttons={pageActions}
+                buttonSetOverflowLabel={pageActionsOverflowLabel}
+                rightAlign
+              />
+            )}
+          </Tag>
+        );
+      }
+    }
   }
 );
 
@@ -903,13 +873,6 @@ export const deprecatedProps = {
     PropTypes.bool,
     'Prop renamed to `disableBreadcrumbScroll`.'
   ),
-  /**
-   * **Deprecated** see property `title object form`
-   */
-  titleIcon: deprecateProp(
-    PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-    'Use `title` prop shape instead.'
-  ),
 };
 
 PageHeader.propTypes = {
@@ -940,6 +903,10 @@ PageHeader.propTypes = {
     ]),
     'Expects an array of objects with the following properties: iconDescription, renderIcon and onClick.'
   ),
+  /**
+   * class name applied to the action bar overflow options
+   */
+  actionBarMenuOptionsClass: PropTypes.string,
   /**
    * When there is insufficient space for all actionBarItems to be displayed this
    * aria label is used for the action bar overflow menu
@@ -1097,12 +1064,19 @@ PageHeader.propTypes = {
   /**
    * Specifies the primary page actions which are placed at the same level in the page as the title.
    *
-   * Each action is specified as an object with the properties of a Carbon Button plus:
+   * Either a set of actions, each specified as an object with the properties of a Carbon Button plus:
+   *
    * - label: node
    *
+   * Or a single object
+   *
+   * - content: content to be rendered. NOTE: must be capable of restricting itself to the space provided. This 2.5rem height ($spacing-08)
+   * and the width not used by action bar items when scrolled into toolbar.
+   * - minWidth: smallest number of pixel width the content would like. NOTE: This is not guaranteed and may be less on small viewports.
+   * - maxWidth: maximum number of pixels the content will grow to
    * Carbon Button API https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  pageActions: deprecatePropUsage(
+  pageActions: PropTypes.oneOfType([
     PropTypes.arrayOf(
       PropTypes.shape({
         ...Button.propTypes,
@@ -1112,12 +1086,20 @@ PageHeader.propTypes = {
         onClick: PropTypes.func,
       })
     ),
-    PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.element),
-      PropTypes.element,
-    ]),
-    'Expects an array of objects with the following properties: label and onClick.'
-  ),
+    PropTypes.shape({
+      /**
+       * minWidth should not be more than 180
+       * The content is expected to adjust itself to fit in
+       */
+      content: PropTypes.node.isRequired,
+      minWidth: PropTypes.number.isRequired,
+      maxWidth: PropTypes.number.isRequired,
+    }),
+  ]),
+  /**
+   * class name applied to the page actions overflow options
+   */
+  pageActionsMenuOptionsClass: PropTypes.string,
   /**
    * When there is insufficient space to display all of hte page actions inline a dropdown button menu is shown,
    * containing the page actions. This label is used as the display content of the dropdown button menu.
@@ -1125,7 +1107,8 @@ PageHeader.propTypes = {
    * NOTE: This prop is required if pageActions are supplied
    */
   pageActionsOverflowLabel: PropTypes.node.isRequired.if(
-    ({ pageActions }) => pageActions && pageActions.length > 0
+    ({ pageActions }) =>
+      pageActions && pageActions.length > 0 && !pageActions.content
   ),
   /**
    * When tags are supplied there may not be sufficient space to display all of the tags. This results in an overflow
@@ -1162,14 +1145,32 @@ PageHeader.propTypes = {
   ),
   /**
    * An optional page title supplied as a string or object with the following attributes: text, icon, loading
+   *
+   * Can be supplied either as:
+   * - String
+   * - Object containing
+   *    - text: title string
+   *    - icon: optional icon
+   *    - loading: boolean shows loading indicator if true
+   * - Object containing user defined contents. These must fit within the area defined for the title in both main part of the header and the breadcrumb.
+   *    - content: title or name of current location shown in main part of page header
+   *    - breadcrumbContent: version of content used in the breadcrumb on scroll. If not supplied
+   *    - asText: String based representation of the title
    */
   title: PropTypes.oneOfType([
     PropTypes.shape({
+      // Update docgen if changed
       text: PropTypes.string.isRequired,
       icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
       loading: PropTypes.bool,
+      // Update docgen if changed
     }),
     PropTypes.string,
+    PropTypes.shape({
+      content: PropTypes.node.isRequired,
+      breadcrumbContent: PropTypes.node,
+      asText: PropTypes.string.isRequired,
+    }),
   ]),
   ...deprecatedProps,
 };

@@ -447,7 +447,6 @@ export default class IdeAPIKeyGeneration extends React.Component {
       primaryButtonDisabled:
         !apiKey || !this.state.hasAPIKeyGenerationCompleted,
       secondaryButtonText: closeLabelText,
-      iconDescription: closeLabelText,
       onRequestClose: onClose,
       onRequestSubmit: this.handleCopy,
       className: [`${idePrefix}-api-key-generation`, className].join(' '),

@@ -12,6 +12,7 @@ import { Column, Row } from 'carbon-components-react';
 import { pkg } from '../../settings';
 import { CREATE_TEARSHEET_SECTION } from './constants';
 
+const componentName = 'CreateTearsheetSection';
 const blockClass = `${pkg.prefix}--tearsheet-create__section`;
 
 export let CreateTearsheetSection = forwardRef(
@@ -47,6 +48,8 @@ export let CreateTearsheetSection = forwardRef(
     );
   }
 );
+
+CreateTearsheetSection.displayName = componentName;
 
 CreateTearsheetSection.propTypes = {
   /**

@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.19.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.18.1...@carbon/ibm-cloud-cognitive-cdai@1.19.0) (2021-11-09)
+
+
+### Bug Fixes
+
+* improve tree-shaking optimisation by importing icons directly from @carbons/icons-react ([#1379](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1379)) ([9110484](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9110484d7860a95a858a5e1931015b853769c3a9))
+
+
+### Features
+
+* update Carbon versions and package dependencies to latest ([#1365](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1365)) ([ea11cf7](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ea11cf7ae44b61b48142c511c16460cf7978b88c))
+
+
+
+
+
+## [1.18.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.18.0...@carbon/ibm-cloud-cognitive-cdai@1.18.1) (2021-10-27)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai
+
+
+
+
+
+# [1.18.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.17.1...@carbon/ibm-cloud-cognitive-cdai@1.18.0) (2021-10-20)
+
+
+### Features
+
+* update Carbon versions and package dependencies to latest ([#1345](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1345)) ([3c7e6fe](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/3c7e6fedfc46bffc38b889568133ee6c300ddb47))
+
+
+
+
+
 ## [1.17.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.17.0...@carbon/ibm-cloud-cognitive-cdai@1.17.1) (2021-10-14)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai

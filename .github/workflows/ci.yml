@@ -23,7 +23,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+          key: build-dependencies-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install
         run: yarn --offline
@@ -51,7 +51,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+          key: lint-dependencies-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install
         run: yarn --offline
@@ -79,7 +79,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+          key: tests-dependencies-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install
         run: yarn --offline

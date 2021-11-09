@@ -19,7 +19,7 @@ import pkg from '../../global/js/package-settings';
 import { CodeSnippet } from 'carbon-components-react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-const blockClass = `${pkg.prefix}-canary`;
+const blockClass = `${pkg.prefix}--canary`;
 
 /**
  *  Canary component used when the component requested is not yet production

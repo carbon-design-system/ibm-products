@@ -10,12 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Cancel incomplete runs except the latest
-        uses: styfle/cancel-workflow-action@0.9.1 # cspell:disable-line
-        with:
-          all_but_latest: true
-          access_token: ${{ secrets.GITHUB_TOKEN }}
-          
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -23,6 +17,13 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: lts/fermium
+          cache: yarn
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: build-dependencies-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install
         run: yarn --offline
@@ -44,6 +45,13 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: lts/fermium
+          cache: yarn
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: lint-dependencies-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install
         run: yarn --offline
@@ -65,6 +73,13 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: lts/fermium
+          cache: yarn
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: tests-dependencies-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install
         run: yarn --offline

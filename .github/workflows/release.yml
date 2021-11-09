@@ -3,7 +3,7 @@ name: Release
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 4 * * TUES'
+    - cron: '0 4 * * TUE'
 
 jobs:
   Release:

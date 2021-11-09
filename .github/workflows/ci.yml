@@ -10,12 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Cancel incomplete runs except the latest
-        uses: styfle/cancel-workflow-action@0.9.1 # cspell:disable-line
-        with:
-          all_but_latest: true
-          access_token: ${{ secrets.GITHUB_TOKEN }}
-          
       - name: Checkout
         uses: actions/checkout@v2
 

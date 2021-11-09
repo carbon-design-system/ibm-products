@@ -90,7 +90,7 @@ passing in the overall `<CreateFullPage />` component and the
           >
           <Row>
             <Column xlg={5} lg={5} md={4} sm={4}>
-              <fieldset className={`exp--create-full-page__step-fieldset`}>
+              <fieldset className={`#{$pkg-prefix}--create-full-page__step-fieldset`}>
                 <TextInput
                   id="test-1"
                   invalidText="A valid value is required"
@@ -100,17 +100,17 @@ passing in the overall `<CreateFullPage />` component and the
               </fieldset>
             </Column>
           </Row>
-          <span className={`exp--create-full-page__section-divider`} />
-          <h5 className={`exp--create-full-page__step-title`}>Required title</h5>
-          <h6 className={`exp--create-full-page__step-subtitle`}>
+          <span className={`#{$pkg-prefix}--create-full-page__section-divider`} />
+          <h5 className={`#{$pkg-prefix}--create-full-page__step-title`}>Required title</h5>
+          <h6 className={`#{$pkg-prefix}--create-full-page__step-subtitle`}>
             Optional subtitle
           </h6>
-          <p className={`exp--create-full-page__step-description`}>
+          <p className={`#{$pkg-prefix}--create-full-page__step-description`}>
             Optional description
           </p>
           <Row>
             <Column xlg={5} lg={5} md={4} sm={4}>
-              <fieldset className={`exp--create-full-page__step-fieldset`}>
+              <fieldset className={`#{$pkg-prefix}--create-full-page__step-fieldset`}>
                 <TextInput
                   id="test-2"
                   invalidText="A valid value is required"
@@ -128,13 +128,13 @@ passing in the overall `<CreateFullPage />` component and the
 Additionally, to get the preferred styling when including your own children as
 sections, you can utilize the below included class names.
 
-| Class name                                | Element     | Features                                                   |
-| ----------------------------------------- | ----------- | ---------------------------------------------------------- |
-| `exp--create-full-page__step-title`       | title       | `productive-heading-04` & `margin-bottom` of `$spacing-05` |
-| `exp--create-full-page__step-subtitle`    | subtitle    | `productive-heading-01` & `margin-bottom` of `$spacing-03` |
-| `exp--create-full-page__step-description` | description | `body-long-01` & `margin-bottom` of `$spacing-06`          |
-| `exp--create-full-page__step-fieldset`    | fieldset    | `margin-bottom` of `$spacing-05` to all children elements  |
-| `exp--create-full-page__section-divider`  | divider     | Includes a `1px` divider line inside the `main` content    |
+| Class name                                           | Element     | Features                                                   |
+| ---------------------------------------------------- | ----------- | ---------------------------------------------------------- |
+| `#{$pkg-prefix}--create-full-page__step-title`       | title       | `productive-heading-04` & `margin-bottom` of `$spacing-05` |
+| `#{$pkg-prefix}--create-full-page__step-subtitle`    | subtitle    | `productive-heading-01` & `margin-bottom` of `$spacing-03` |
+| `#{$pkg-prefix}--create-full-page__step-description` | description | `body-long-01` & `margin-bottom` of `$spacing-06`          |
+| `#{$pkg-prefix}--create-full-page__step-fieldset`    | fieldset    | `margin-bottom` of `$spacing-05` to all children elements  |
+| `#{$pkg-prefix}--create-full-page__section-divider`  | divider     | Includes a `1px` divider line inside the `main` content    |
 
 ## Code sample
 

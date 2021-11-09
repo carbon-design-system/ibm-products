@@ -19,6 +19,12 @@ jobs:
           node-version: lts/fermium
           cache: yarn
 
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
       - name: Install
         run: yarn --offline
 
@@ -41,6 +47,12 @@ jobs:
           node-version: lts/fermium
           cache: yarn
 
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
       - name: Install
         run: yarn --offline
 
@@ -62,6 +74,12 @@ jobs:
         with:
           node-version: lts/fermium
           cache: yarn
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install
         run: yarn --offline

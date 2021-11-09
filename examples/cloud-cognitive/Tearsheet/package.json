@@ -1,0 +1,33 @@
+{
+  "name": "tearsheet",
+  "main": "src/index.js",
+  "dependencies": {
+    "@carbon/elements": "latest",
+    "@carbon/ibm-cloud-cognitive": "latest",
+    "@carbon/icons-react": "latest",
+    "carbon-components": "latest",
+    "carbon-components-react": "latest",
+    "carbon-icons": "latest",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-scripts": "4.0.3",
+    "sass": "^1.43.4"
+  },
+  "scripts": {
+    "start": "react-scripts start"
+  },
+  "keywords": [],
+  "description": "",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

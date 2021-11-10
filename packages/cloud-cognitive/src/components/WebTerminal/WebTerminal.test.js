@@ -8,6 +8,7 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { Code16 as Code, Copy16 as Copy } from '@carbon/icons-react';
 
 import { pkg } from '../../settings';
 
@@ -121,5 +122,61 @@ describe(name, () => {
       </WebTerminal>
     );
     expect(ref.current.classList.contains(blockClass)).toBeTruthy();
+  });
+
+  it('should call the animationEnd event', () => {
+    const { animationEnd } = fireEvent;
+    const { rerender, container } = render(
+      <WebTerminal
+        closeTerminal={jest.fn()}
+        open
+        closeIconDescription="Close terminal"
+      >
+        Body content
+      </WebTerminal>
+    );
+    const outerElement = container.querySelector(`.${blockClass}`);
+    rerender(
+      <WebTerminal
+        closeTerminal={jest.fn()}
+        open={false}
+        closeIconDescription="Close terminal"
+      >
+        Body content
+      </WebTerminal>
+    );
+    animationEnd(outerElement);
+    expect(outerElement).toBeNull;
+  });
+
+  it('should render action icon buttons', () => {
+    const { click } = userEvent;
+    const deploymentButtonFn = jest.fn();
+    const copyLogsButtonFn = jest.fn();
+    render(
+      <WebTerminal
+        open
+        closeIconDescription="Close terminal"
+        closeTerminal={jest.fn()}
+        actions={[
+          {
+            renderIcon: Code,
+            onClick: deploymentButtonFn,
+            iconDescription: 'Create new deployment',
+          },
+          {
+            renderIcon: Copy,
+            onClick: copyLogsButtonFn,
+            iconDescription: 'Copy logs',
+          },
+        ]}
+      >
+        Body content
+      </WebTerminal>
+    );
+    click(screen.getByText(/Create new deployment/i));
+    expect(deploymentButtonFn).toHaveBeenCalledTimes(1);
+    click(screen.getByText(/Copy logs/i));
+    expect(copyLogsButtonFn).toHaveBeenCalledTimes(1);
   });
 });

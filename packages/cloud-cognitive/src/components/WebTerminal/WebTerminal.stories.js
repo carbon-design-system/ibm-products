@@ -48,6 +48,7 @@ const Template = (args) => {
       <WebTerminal
         open={isTerminalOpen}
         closeTerminal={closeTerminal}
+        closeIconDescription="Close terminal"
         {...args}
       >
         <div className="example-terminal">

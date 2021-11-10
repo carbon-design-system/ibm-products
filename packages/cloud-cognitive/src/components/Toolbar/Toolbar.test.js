@@ -6,6 +6,7 @@
  */
 
 import { render as r, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React, { createRef } from 'react';
 
 import { Toolbar, ToolbarButton, ToolbarGroup } from '../..';
@@ -13,7 +14,8 @@ import { Toolbar, ToolbarButton, ToolbarGroup } from '../..';
 import { blockClass, componentName } from './Toolbar';
 import { blockClass as toolbarButtonClass } from './ToolbarButton';
 
-const { getByTestId, getByText } = screen;
+const { getByTestId, getByText, queryByText } = screen;
+const { click } = userEvent;
 
 const dataTestId = 'dataTestId';
 
@@ -81,13 +83,14 @@ describe(componentName, () => {
 describe(ToolbarButton.displayName, () => {
   test(ToolbarButton);
 
-  const popoverDataTestId = 'popoverDataTestId';
+  const renderCaret = 'renderCaret';
 
-  const CaretToolbarButton = () =>
-    _render.bind(ToolbarButton)({
-      caret: true,
-      popover: { 'data-testid': popoverDataTestId },
+  function CaretToolbarButton(props) {
+    return _render.bind(ToolbarButton)({
+      renderCaret: () => renderCaret,
+      ...props,
     });
+  }
 
   it('renders the caret variant', () => {
     CaretToolbarButton();
@@ -98,7 +101,45 @@ describe(ToolbarButton.displayName, () => {
   it('renders the popover', () => {
     CaretToolbarButton();
 
-    expect(getByTestId(popoverDataTestId)).not.toBeInTheDocument();
+    expect(queryByText(renderCaret)).not.toBeInTheDocument();
+
+    click(getByTestId(dataTestId));
+
+    getByText(renderCaret);
+  });
+
+  it('adds additional props to the popover', () => {
+    const popoverDataTestId = 'popoverDataTestId';
+
+    CaretToolbarButton({
+      popover: { 'data-testid': popoverDataTestId, open: true },
+    });
+
+    getByTestId(popoverDataTestId);
+  });
+
+  function noop() {
+    expect(null).toBeNull();
+  }
+
+  // TODO: `onClick`.
+  it('`onClick`', () => {
+    noop();
+  });
+
+  // TODO: `onClickOutside`.
+  it('`onClickOutside`', () => {
+    noop();
+  });
+
+  // TODO: `onClose`.
+  it('`onClose`', () => {
+    noop();
+  });
+
+  // TODO: `onOpen`.
+  it('`onOpen`', () => {
+    noop();
   });
 });
 

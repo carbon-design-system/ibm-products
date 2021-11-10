@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-security@2.8.0...@carbon/ibm-security@2.8.1) (2021-11-10)
+
+
+### Bug Fixes
+
+* replace es imports with lib for the cjs build ([#1402](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1402)) ([f2a7013](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f2a701340a9bad876081ebd5986bb0154118ebe5))
+
+
+
+
+
 # [2.8.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-security@2.7.0...@carbon/ibm-security@2.8.0) (2021-11-09)
 
 

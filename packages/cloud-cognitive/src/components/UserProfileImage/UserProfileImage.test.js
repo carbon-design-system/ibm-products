@@ -26,9 +26,7 @@ const renderComponent = ({ ...rest }) =>
 describe(name, () => {
   test('should return a circle with background color', () => {
     const { container } = renderComponent({ backgroundColor: 'light-cyan' });
-    const element = container.querySelector(
-      `.${pkg.prefix}-user-profile-avatar`
-    );
+    const element = container.querySelector(`.${blockClass}`);
 
     const hasBackgroundColor = element.className.includes('light-cyan');
     expect(hasBackgroundColor).toBeTruthy();
@@ -51,18 +49,14 @@ describe(name, () => {
 
   test('should return appropriately size circle based on size prop', () => {
     const { container } = renderComponent();
-    const element = container.querySelector(
-      `.${pkg.prefix}-user-profile-avatar`
-    );
+    const element = container.querySelector(`.${blockClass}`);
     const hasSizeClass = element.className.includes('xlg');
     expect(hasSizeClass).toBeTruthy();
   });
 
   test('should recognize theme setting', () => {
     const { container } = renderComponent();
-    const element = container.querySelector(
-      `.${pkg.prefix}-user-profile-avatar`
-    );
+    const element = container.querySelector(`.${blockClass}`);
     const hasThemeClass = element.className.includes('light');
     expect(hasThemeClass).toBeTruthy();
   });

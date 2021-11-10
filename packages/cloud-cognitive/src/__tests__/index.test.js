@@ -12,7 +12,7 @@ import { pkg } from '../settings';
 
 import * as components from '..';
 
-const canaryClass = `${pkg.prefix}-canary`;
+const canaryClass = `${pkg.prefix}--canary`;
 const name = 'JS export checks';
 
 pkg.setAllComponents();

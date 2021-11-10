@@ -123,9 +123,9 @@ const Template = (args) => {
 const TemplateStatic = ({ enabled, ...rest }) => {
   const [liveEnabled, setLiveEnabled] = useState(enabled);
 
-  function onToggle(toggled) {
-    setLiveEnabled(toggled);
-    action('onToggle');
+  function onToggle(e) {
+    setLiveEnabled(e);
+    action('onToggle')(e);
   }
 
   return <OptionsTile onToggle={onToggle} {...rest} enabled={liveEnabled} />;

@@ -22,6 +22,19 @@ import { documentationLinks } from './preview-components/documentationLinks';
 
 import styles from './_storybook-styles.scss';
 
+const actions = [
+  {
+    renderIcon: Code,
+    onClick: action('clicked on action'),
+    iconDescription: 'Create new deployment',
+  },
+  {
+    renderIcon: Copy,
+    onClick: action('clicked on action'),
+    iconDescription: 'Copy logs',
+  },
+];
+
 const Template = (args) => {
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
 
@@ -35,6 +48,7 @@ const Template = (args) => {
       <WebTerminal
         open={isTerminalOpen}
         closeTerminal={closeTerminal}
+        closeIconDescription="Close terminal"
         {...args}
       >
         <div className="example-terminal">
@@ -55,7 +69,7 @@ const Template = (args) => {
 };
 
 export const Default = prepareStory(Template, {
-  args: { documentationLinks },
+  args: { documentationLinks, actions },
 });
 
 export const WithDocumentationLinks = prepareStory(Template, {
@@ -64,18 +78,7 @@ export const WithDocumentationLinks = prepareStory(Template, {
 
 export const WithActions = prepareStory(Template, {
   args: {
-    actions: [
-      {
-        renderIcon: Code,
-        onClick: action('clicked on action'),
-        iconDescription: 'Create new deployment',
-      },
-      {
-        renderIcon: Copy,
-        onClick: action('clicked on action'),
-        iconDescription: 'Copy logs',
-      },
-    ],
+    actions,
   },
 });
 

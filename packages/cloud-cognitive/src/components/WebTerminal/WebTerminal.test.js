@@ -7,6 +7,8 @@
 
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { Code16 as Code, Copy16 as Copy } from '@carbon/icons-react';
 
 import { pkg } from '../../settings';
 
@@ -21,7 +23,11 @@ const dataTestId = uuidv4();
 describe(name, () => {
   test('Renders the component `WebTerminal` if flag is enabled', () => {
     const { container } = render(
-      <WebTerminal closeTerminal={() => {}} open>
+      <WebTerminal
+        closeTerminal={() => {}}
+        open
+        closeIconDescription="Close terminal"
+      >
         Body content
       </WebTerminal>
     );
@@ -32,7 +38,12 @@ describe(name, () => {
   test('should attach a custom class to the web terminal', () => {
     const testClassName = 'test-class-name';
     const { container } = render(
-      <WebTerminal closeTerminal={() => {}} open className={testClassName}>
+      <WebTerminal
+        closeTerminal={() => {}}
+        open
+        className={testClassName}
+        closeIconDescription="Close terminal"
+      >
         Body content
       </WebTerminal>
     );
@@ -40,7 +51,11 @@ describe(name, () => {
   });
   test('should render child element content', () => {
     render(
-      <WebTerminal closeTerminal={() => {}} open>
+      <WebTerminal
+        closeTerminal={() => {}}
+        open
+        closeIconDescription="Close terminal"
+      >
         Body content
       </WebTerminal>
     );
@@ -50,7 +65,11 @@ describe(name, () => {
     const { click } = fireEvent;
     const onCloseHandler = jest.fn();
     render(
-      <WebTerminal closeTerminal={onCloseHandler} open>
+      <WebTerminal
+        closeTerminal={onCloseHandler}
+        open
+        closeIconDescription="Close terminal"
+      >
         Body content
       </WebTerminal>
     );
@@ -64,16 +83,24 @@ describe(name, () => {
         closeTerminal={jest.fn()}
         open
         documentationLinks={documentationLinks}
+        closeIconDescription="Close terminal"
       >
         Body content
       </WebTerminal>
     );
+    const { click } = userEvent;
+    click(screen.getByText(/Show documentation links/i));
     expect(screen.getByText(/Kubernetes docs/i));
   });
 
   it('adds additional properties to the containing node', () => {
     const { container } = render(
-      <WebTerminal closeTerminal={jest.fn()} data-testid={dataTestId} open>
+      <WebTerminal
+        closeTerminal={jest.fn()}
+        data-testid={dataTestId}
+        open
+        closeIconDescription="Close terminal"
+      >
         Body content
       </WebTerminal>
     );
@@ -85,10 +112,71 @@ describe(name, () => {
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
     render(
-      <WebTerminal closeTerminal={jest.fn()} open ref={ref}>
+      <WebTerminal
+        closeTerminal={jest.fn()}
+        open
+        ref={ref}
+        closeIconDescription="Close terminal"
+      >
         Body content
       </WebTerminal>
     );
     expect(ref.current.classList.contains(blockClass)).toBeTruthy();
+  });
+
+  it('should call the animationEnd event', () => {
+    const { animationEnd } = fireEvent;
+    const { rerender, container } = render(
+      <WebTerminal
+        closeTerminal={jest.fn()}
+        open
+        closeIconDescription="Close terminal"
+      >
+        Body content
+      </WebTerminal>
+    );
+    const outerElement = container.querySelector(`.${blockClass}`);
+    rerender(
+      <WebTerminal
+        closeTerminal={jest.fn()}
+        open={false}
+        closeIconDescription="Close terminal"
+      >
+        Body content
+      </WebTerminal>
+    );
+    animationEnd(outerElement);
+    expect(outerElement).toBeNull;
+  });
+
+  it('should render action icon buttons', () => {
+    const { click } = userEvent;
+    const deploymentButtonFn = jest.fn();
+    const copyLogsButtonFn = jest.fn();
+    render(
+      <WebTerminal
+        open
+        closeIconDescription="Close terminal"
+        closeTerminal={jest.fn()}
+        actions={[
+          {
+            renderIcon: Code,
+            onClick: deploymentButtonFn,
+            iconDescription: 'Create new deployment',
+          },
+          {
+            renderIcon: Copy,
+            onClick: copyLogsButtonFn,
+            iconDescription: 'Copy logs',
+          },
+        ]}
+      >
+        Body content
+      </WebTerminal>
+    );
+    click(screen.getByText(/Create new deployment/i));
+    expect(deploymentButtonFn).toHaveBeenCalledTimes(1);
+    click(screen.getByText(/Copy logs/i));
+    expect(copyLogsButtonFn).toHaveBeenCalledTimes(1);
   });
 });

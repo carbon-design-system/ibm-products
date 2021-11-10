@@ -42,7 +42,10 @@ $block-class: #{$pkg-prefix}--web-terminal;
   right: 0;
   width: $web-terminal-width;
   height: calc(100vh - #{$spacing-09});
-  background-color: $gray-100; /* stylelint-disable-line  */
+  border-left: 1px solid $gray-90;
+  color: $text-01;
+  /* stylelint-disable-next-line  */
+  background-color: $gray-100;
 }
 
 .#{$block-class}__bar {
@@ -57,44 +60,8 @@ $block-class: #{$pkg-prefix}--web-terminal;
   display: flex;
 }
 
-.#{$block-class}__bar-icon-dropdown {
-  position: absolute;
-  top: 2.9375rem; /* stylelint-disable-line */
-  left: -1px; /* stylelint-disable-line */
-  width: 10rem;
-  background-color: $field-01;
-
-  opacity: 0;
-  /* stylelint-disable-next-line  */
-  transform: translateY(calc(-1 * #{$spacing-04}));
-  transition: all carbon--motion(standard, productive) $duration--fast-02;
-  visibility: hidden;
-}
-
-.#{$block-class}__bar-icon-container:hover .#{$block-class}__bar-icon-dropdown,
-.#{$block-class}__bar-icon-container:focus .#{$block-class}__bar-icon-dropdown {
-  opacity: 1;
-  transform: translateY(0);
-  visibility: visible;
-}
-
-.#{$block-class}__bar-icon-dropdown-link {
-  display: flex;
-  width: 100%;
-  height: 2.125rem;
-  align-items: center;
-  padding-left: $spacing-04;
-  color: $text-02;
-  cursor: pointer;
-  text-decoration: none;
-  @include carbon--type-style('body-short-01');
-
-  transition: all carbon--motion(standard, productive) $duration--fast-02;
-}
-
-.#{$block-class}__bar-icon-dropdown-link:hover {
-  background-color: $hover-ui;
-  color: $text-01;
+.#{$block-class}__documentation-overflow {
+  @include carbon--theme($carbon--theme--g100, true);
 }
 
 // Terminal body styles

@@ -21,16 +21,16 @@
   .#{$block-class} {
     display: flex;
     justify-content: flex-end;
-    --#{$pkg-prefix}-border-color: transparent;
+    --#{$block-class}--border-color: transparent;
   }
 
   .#{$block-class}.#{$block-class}--boxed-set {
-    border: 10px solid var(--#{$pkg-prefix}-border-color);
+    border: 10px solid var(--#{$block-class}--border-color);
   }
 
   .#{$block-class}.#{$block-class}--shadow-set {
     margin: $spacing-04;
-    box-shadow: 0 0 10px var(--#{$pkg-prefix}-border-color);
+    box-shadow: 0 0 10px var(--#{$block-class}--border-color);
   }
 }
 

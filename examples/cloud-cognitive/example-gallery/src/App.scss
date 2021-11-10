@@ -1,8 +1,12 @@
 @import './carbon';
 
+body {
+  overflow-x: hidden;
+}
+
 .app.app {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background-color: $ui-background;
   color: $text-01;
 }
@@ -31,13 +35,17 @@
   margin-top: $spacing-07;
 }
 
+$item-width: 320px;
+$item-height: 240px;
+
 .app .app__gallery-item {
-  width: 320px;
-  height: 240px;
+  width: $item-width;
+  height: $item-height;
   margin-bottom: $spacing-06;
 }
 
 .app .app__gallery-item--dummy {
+  width: $item-width;
   height: 0;
   visibility: hidden;
 }

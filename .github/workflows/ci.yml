@@ -8,66 +8,101 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Cancel incomplete runs except the latest
-        uses: styfle/cancel-workflow-action@0.9.1 # cspell:disable-line
-        with:
-          all_but_latest: true
-          access_token: ${{ secrets.GITHUB_TOKEN }}
-          
       - name: Checkout
         uses: actions/checkout@v2
-
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: lts/fermium
-
+          cache: yarn
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: build-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
       - name: Install
         run: yarn --offline
-
-      - name: Build
-        run: yarn build
-
-      - name: Package CI checks
-        run: yarn run-all --no-sort ci-check
+      - name: CI build checks
+        run: yarn ci-check:build
 
   lint:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: lts/fermium
-
+          cache: yarn
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: lint-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
       - name: Install
         run: yarn --offline
+      - name: CI lint checks
+        run: yarn run ci-check:lint
 
-      - name: Audit
-        run: yarn run audit
-
-      - name: Lint
-        run: yarn run lint
-
-  tests:
+  test-cdai:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: lts/fermium
-
+          cache: yarn
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: test-cdai-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
       - name: Install
         run: yarn --offline
+      - name: CI tests for CDAI
+        run: yarn ci-check:test:cdai
 
-      - name: Tests
-        run: yarn test --ci
+  test-c4p:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: lts/fermium
+          cache: yarn
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: test-c4p-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+      - name: Install
+        run: yarn --offline
+      - name: CI tests for c4p
+        run: yarn ci-check:test:c4p
+
+  test-security:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: lts/fermium
+          cache: yarn
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key:
+            test-security-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+      - name: Install
+        run: yarn --offline
+      - name: CI tests for security
+        run: yarn ci-check:test:security

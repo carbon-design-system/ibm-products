@@ -59,6 +59,10 @@ export default {
   },
 };
 
+function middle(array) {
+  return array[Math.floor(array.length / 2)];
+}
+
 function _Toolbar(args) {
   const buttons = [
     { iconDescription: 'Text align left', renderIcon: TextAlignLeft16 },
@@ -66,14 +70,11 @@ function _Toolbar(args) {
     { iconDescription: 'Text align right', renderIcon: TextAlignRight16 },
   ];
 
-  const [selectedButton, setSelectedButton] = useState(
-    buttons[(buttons.length / 2) | 0]
-  );
-
   const dropdownItems = ['11', '12', '14', '16', '18'];
 
+  const [selectedButton, setSelectedButton] = useState(middle(buttons));
   const [selectedDropdownItem, setSelectedDropdownItem] = useState(
-    dropdownItems[(dropdownItems.length / 2) | 0]
+    middle(dropdownItems)
   );
 
   return (
@@ -117,13 +118,15 @@ function _Toolbar(args) {
       <ToolbarGroup>
         <ToolbarButton
           {...selectedButton}
-          caret={buttons.map((props, index) => (
-            <ToolbarButton
-              key={`${ToolbarButton.displayName}--${index}`}
-              {...props}
-              onClick={() => setSelectedButton(props)}
-            />
-          ))}
+          renderCaret={() =>
+            buttons.map((props, index) => (
+              <ToolbarButton
+                key={`${ToolbarButton.displayName}--${index}`}
+                {...props}
+                onClick={() => setSelectedButton(props)}
+              />
+            ))
+          }
         />
       </ToolbarGroup>
 

@@ -1,0 +1,36 @@
+{
+  "name": "emptystate",
+  "main": "src/index.js",
+  "dependencies": {
+    "@carbon/ibm-cloud-cognitive": "0.97.1",
+    "@carbon/icons-react": "10.42.0",
+    "@carbon/layout": "10.34.0",
+    "@carbon/motion": "10.26.0",
+    "@carbon/themes": "10.46.0",
+    "@carbon/type": "10.38.0",
+    "carbon-components": "10.47.0",
+    "carbon-components-react": "7.47.1",
+    "carbon-icons": "7.0.7",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-scripts": "4.0.3",
+    "sass": "^1.43.4"
+  },
+  "scripts": {
+    "start": "react-scripts start"
+  },
+  "keywords": [],
+  "description": "",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

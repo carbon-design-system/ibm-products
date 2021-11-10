@@ -129,7 +129,7 @@
     padding-right: $spacing-05;
     // spacing-05 + chevron size + spacing-05
     // stylelint-disable-next-line carbon/layout-token-use
-    padding-left: $spacing-05 * 2 + 1rem;
+    padding-left: calc(#{$spacing-05} * 2 + 1rem);
   }
 
   .#{$block-class}__content
@@ -204,13 +204,13 @@
   .#{$block-class}--lg .#{$block-class}__summary-text {
     // spacing-05 + toggle width
     // stylelint-disable-next-line carbon/layout-token-use
-    padding-right: $spacing-05 + 1rem;
+    padding-right: calc(#{$spacing-05} + 1rem);
   }
 
   .#{$block-class}--xl .#{$block-class}__summary-text {
     // spacing-05 + toggle width
     // stylelint-disable-next-line carbon/layout-token-use
-    padding-right: $spacing-05 + 2rem;
+    padding-right: calc(#{$spacing-05} + 2rem);
   }
 
   @media (prefers-reduced-motion: reduce) {

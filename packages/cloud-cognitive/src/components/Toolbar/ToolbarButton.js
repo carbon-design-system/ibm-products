@@ -14,7 +14,7 @@ import {
 } from 'carbon-components-react/es/components/Popover';
 
 import cx from 'classnames';
-import { node, shape, string } from 'prop-types';
+import { bool, func, node, shape, string } from 'prop-types';
 import React, { forwardRef, useRef, useState } from 'react';
 
 import { useClickOutside } from '../../global/js/hooks';
@@ -26,12 +26,28 @@ const blockClass = `${toolbarClass}__button`;
 
 /** Toolbar buttons are common functions performed as part of a products interface or an open window.  */
 let ToolbarButton = forwardRef(
-  ({ caret, children, className, onClick, popover, ...rest }, r) => {
+  (
+    {
+      children,
+      className,
+      onClick,
+      onClose,
+      onOpen,
+      popover,
+      renderCaret: Caret,
+      ...rest
+    },
+    r
+  ) => {
     const ref = useRef();
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(popover?.open);
 
     function toggleOpen() {
-      if (caret) {
+      if (Caret) {
+        const onToggle = open ? onClose : onOpen;
+
+        onToggle?.();
+
         setOpen(!open);
       }
     }
@@ -52,7 +68,11 @@ let ToolbarButton = forwardRef(
       <Button
         {...rest}
         ref={composeRefs(ref, r)}
-        className={cx(className, { [`${blockClass}--caret`]: caret })}
+        className={cx(className, { [`${blockClass}--caret`]: Caret })}
+        {...(Caret && {
+          'aria-expanded': open,
+          'aria-haspopup': typeof Caret !== 'undefined',
+        })}
         kind="ghost"
         onClick={handleClick}
         size="md"
@@ -61,26 +81,24 @@ let ToolbarButton = forwardRef(
         <>
           {children}
 
-          {caret && <span className={`${blockClass}__caret`} />}
+          {Caret && <span className={`${blockClass}__caret`} />}
         </>
       </Button>
     );
 
     useClickOutside(ref, onClickOutside);
 
-    return caret ? (
+    return Caret ? (
       <div className={`${blockClass}__container--caret`}>
         {button}
 
-        <Popover
-          className={`${blockClass}__popover`}
-          align="bottom-left"
-          open={open}
-          {...popover}
-          caret={false}
-        >
-          <PopoverContent>{caret}</PopoverContent>
-        </Popover>
+        {open && (
+          <Popover align="bottom-left" open={open} {...popover} caret={false}>
+            <PopoverContent>
+              <Caret />
+            </PopoverContent>
+          </Popover>
+        )}
       </div>
     ) : (
       button
@@ -92,20 +110,26 @@ const componentName = 'ToolbarButton';
 ToolbarButton.displayName = componentName;
 
 ToolbarButton.propTypes = {
-  /** Provide the content of the caret */
-  caret: node,
-
   /** Provide the content of the `ToolbarButton` */
   children: node,
 
-  /** Provide an optional class to be applied to the containing node */
+  /** Provide a class to be applied to the containing node */
   className: string,
 
-  /** Provide an optional function to be called when the [`Button` is clicked](https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api) */
+  /** Provide a function to be called when the [`Button` is clicked](https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api) */
   onClick: Button.propTypes.onClick,
 
-  /** Provide the [props of the `Popover`](https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-popover) */
-  popover: shape(Popover.propTypes),
+  /** Provide a function to be called when the caret is closed */
+  onClose: func,
+
+  /** Provide a function to be called when the caret is opened */
+  onOpen: func,
+
+  /** Provide the [props of the `Popover`](https://carbon-react-next.netlify.app/?path=/docs/experimental-unstable-popover--playground#component-api) */
+  popover: shape({ ...Popover.propTypes, open: bool }),
+
+  /** Provide the rendering content of the caret */
+  renderCaret: func,
 };
 
 ToolbarButton = pkg.checkComponentEnabled(ToolbarButton, componentName);

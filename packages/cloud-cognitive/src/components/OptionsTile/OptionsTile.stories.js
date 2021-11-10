@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { Dropdown, FormGroup } from 'carbon-components-react';
@@ -119,8 +119,16 @@ const Template = (args) => {
   );
 };
 
-const TemplateStatic = (args) => {
-  return <OptionsTile onToggle={action('onToggle')} {...args} />;
+// eslint-disable-next-line react/prop-types
+const TemplateStatic = ({ enabled, ...rest }) => {
+  const [liveEnabled, setLiveEnabled] = useState(enabled);
+
+  function onToggle(toggled) {
+    setLiveEnabled(toggled);
+    action('onToggle');
+  }
+
+  return <OptionsTile onToggle={onToggle} {...rest} enabled={liveEnabled} />;
 };
 
 export const optionsTile = prepareStory(Template, {

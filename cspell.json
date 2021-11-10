@@ -1,11 +1,24 @@
 {
   "version": "0.1",
   "language": "en",
-  "dictionaries": ["contributors", "html", "packages"],
+  "dictionaries": [
+    "contributors",
+    "html",
+    "packages"
+  ],
   "dictionaryDefinitions": [
-    { "name": "contributors", "path": "./cspell.contributors.txt" },
-    { "name": "html", "path": "./cspell.html.txt" },
-    { "name": "packages", "path": "./cspell.packages.txt" }
+    {
+      "name": "contributors",
+      "path": "./cspell.contributors.txt"
+    },
+    {
+      "name": "html",
+      "path": "./cspell.html.txt"
+    },
+    {
+      "name": "packages",
+      "path": "./cspell.packages.txt"
+    }
   ],
   "enabledLanguageIds": [
     "asciidoc",
@@ -44,52 +57,41 @@
     "mdx"
   ],
   "ignorePaths": [
-    ".vscode",
     ".yarn",
     "cdai",
-    "coverage",
-    "css",
-    "es",
-    "lib",
-    "node_modules",
-    "package.json",
-    "results",
-    "scss",
     "security",
+    "package.json",
     "*.snap",
-    "storybook-static",
-    "yarn-error.log",
+    "*.log",
     "CHANGELOG.md"
   ],
   "words": [
     "apikey",
     "checkmark",
-    "classname",
     "data-testid",
-    "divs",
+    "homescreen",
     "loglevel",
+    "noreply",
     "overridable",
     "pconsole",
     "readme",
     "renderable",
-    "responsivity",
     "rerender",
     "resizer",
+    "responsivity",
     "semibold",
     "serializers",
     "stackable",
-    "storysource",
     "structurality",
     "subcomponent",
     "subcomponents",
     "tabbable",
-    "tabindex",
     "tagset",
-    "tabbable",
     "tearsheet",
     "tearsheets",
+    "timeframe",
     "treeview",
     "uuidv",
-    "viewports"
+    "webfonts"
   ]
 }

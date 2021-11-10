@@ -7,12 +7,14 @@
 
 import cx from 'classnames';
 import { bool, node, string } from 'prop-types';
-import React, { forwardRef } from 'react';
+import React, { createContext, forwardRef } from 'react';
 
 import { pkg } from '../../settings';
 
 const { checkComponentEnabled, prefix } = pkg;
 const blockClass = `${prefix}--toolbar`;
+
+const ToolbarContext = createContext();
 
 /** Toolbars are a collection of action items that organize a program’s interaction patterns into a series of closely related commands. */
 let Toolbar = forwardRef(({ children, className, vertical, ...rest }, ref) => {
@@ -26,7 +28,9 @@ let Toolbar = forwardRef(({ children, className, vertical, ...rest }, ref) => {
       {...(vertical && { 'aria-orientation': 'vertical' })}
       role="toolbar"
     >
-      {children}
+      <ToolbarContext.Provider value={{ vertical }}>
+        {children}
+      </ToolbarContext.Provider>
     </div>
   );
 });
@@ -47,4 +51,4 @@ Toolbar.propTypes = {
 
 Toolbar = checkComponentEnabled(Toolbar, componentName);
 
-export { blockClass, componentName, Toolbar };
+export { blockClass, componentName, Toolbar, ToolbarContext };

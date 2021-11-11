@@ -10,11 +10,8 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
   expectWarn,
-  expectMultipleWarn,
-  expectError,
   expectMultipleError,
   deprecated,
-  required,
 } from '../../global/js/utils/test-helper';
 
 import React from 'react';
@@ -34,7 +31,7 @@ const dataTestId = uuidv4();
 
 const title = uuidv4();
 const subtitle = uuidv4();
-const pageContentSelectorValue = '#side-panel-test-page-content';
+const selectorPageContentValue = '#side-panel-test-page-content';
 
 const onRequestCloseFn = jest.fn();
 const onUnmountFn = jest.fn();
@@ -58,8 +55,8 @@ const SlideIn = ({
   open,
   animateTitle = true,
   actionToolbarButtons,
-  selectorPageContent = pageContentSelectorValue,
-  usePageContentSelector = false,
+  selectorPageContent = selectorPageContentValue,
+  useSelectorPageContent = false,
   ...rest
 }) => {
   return (
@@ -73,10 +70,7 @@ const SlideIn = ({
         onRequestClose={onRequestCloseFn}
         slideIn
         selectorPageContent={
-          usePageContentSelector ? null : selectorPageContent
-        }
-        pageContentSelector={
-          usePageContentSelector ? selectorPageContent : null
+          useSelectorPageContent ? null : selectorPageContent
         }
         placement={placement}
         onUnmount={onUnmountFn}
@@ -84,7 +78,7 @@ const SlideIn = ({
       >
         Content
       </SidePanel>
-      <div id={pageContentSelectorValue.slice(1)} />
+      <div id={selectorPageContentValue.slice(1)} />
     </div>
   );
 };
@@ -152,7 +146,7 @@ describe('SidePanel', () => {
 
   it('should render a left slide in panel version', async () => {
     const { container, rerender } = render(<SlideIn placement="left" open />);
-    const pageContent = container.querySelector(pageContentSelectorValue);
+    const pageContent = container.querySelector(selectorPageContentValue);
     const style = getComputedStyle(pageContent);
     expect(style.marginLeft).toBe('30rem');
     const closeIconButton = container.querySelector(
@@ -166,7 +160,7 @@ describe('SidePanel', () => {
 
   it('should render a right slide in panel version with onUnmount prop', async () => {
     const { container, rerender } = render(<SlideIn placement="right" open />);
-    const pageContent = container.querySelector(pageContentSelectorValue);
+    const pageContent = container.querySelector(selectorPageContentValue);
     const style = getComputedStyle(pageContent);
     expect(style.marginRight).toBe('30rem');
     const closeIconButton = container.querySelector(
@@ -191,7 +185,7 @@ describe('SidePanel', () => {
         actionToolbarButtons={[]}
       />
     );
-    const pageContent = container.querySelector(pageContentSelectorValue);
+    const pageContent = container.querySelector(selectorPageContentValue);
     const style = getComputedStyle(pageContent);
     expect(style.marginRight).toBe('30rem');
     const closeIconButton = container.querySelector(
@@ -483,32 +477,8 @@ describe('SidePanel', () => {
         Content
       </SlideIn>
     );
-    const pageContent = container.querySelector(pageContentSelectorValue);
+    const pageContent = container.querySelector(selectorPageContentValue);
     const style = getComputedStyle(pageContent);
     expect(style.marginLeft).toBe('0px');
   });
-
-  it('should throw a custom prop type error when pageContentSelector is used and labelText is provided without a title', () =>
-    expectError(required('title', 'SidePanel'), () =>
-      expectMultipleWarn(
-        [
-          deprecated('pageContentSelector', 'SidePanel'),
-          'prop `labelText` was provided without a `title`',
-        ],
-        () => {
-          const labelText = uuidv4();
-          render(
-            <SlideIn
-              title={null}
-              labelText={labelText}
-              placement="left"
-              open
-              usePageContentSelector
-            >
-              Content
-            </SlideIn>
-          );
-        }
-      )
-    ));
 });

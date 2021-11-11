@@ -9,12 +9,6 @@ import React from 'react';
 import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import userEvent from '@testing-library/user-event';
 import uuidv4 from '../../global/js/utils/uuidv4';
-import {
-  expectMultipleWarn,
-  expectError,
-  deprecated,
-  required,
-} from '../../global/js/utils/test-helper';
 
 import { pkg } from '../../settings';
 
@@ -158,21 +152,4 @@ describe(componentName, () => {
       componentName
     );
   });
-
-  it('should still support deprecated `pageContentSelector` prop', () =>
-    expectError(required('selectorPageContent', 'CreateSidePanel'), () =>
-      expectMultipleWarn(
-        [
-          deprecated('pageContentSelector', 'CreateSidePanel'),
-          deprecated('pageContentSelector', 'SidePanel'),
-        ],
-        () => {
-          renderComponent({
-            pageContentSelector: '#create-side-panel-test-page-content',
-            selectorPageContent: null,
-          });
-          expect(screen.getByRole('complementary')).toHaveClass(blockClass);
-        }
-      )
-    ));
 });

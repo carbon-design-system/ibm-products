@@ -15,11 +15,7 @@ import { useResizeDetector } from 'react-resize-detector';
 import { moderate02 } from '@carbon/motion';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-
-import {
-  allPropTypes,
-  deprecateProp,
-} from '../../global/js/utils/props-helper';
+import { allPropTypes } from '../../global/js/utils/props-helper';
 
 import wrapFocus from '../../global/js/utils/wrapFocus';
 import { pkg } from '../../settings';
@@ -578,7 +574,6 @@ export let SidePanel = React.forwardRef(
                 disabled,
                 className,
                 onClick,
-                onActionToolbarButtonClick,
                 ...rest
               }) => (
                 <Button
@@ -601,12 +596,7 @@ export let SidePanel = React.forwardRef(
                       [`${blockClass}__action-toolbar-leading-button`]: leading,
                     },
                   ])}
-                  onClick={(event) =>
-                    onClick
-                      ? onClick(event)
-                      : onActionToolbarButtonClick &&
-                        onActionToolbarButtonClick(event)
-                  }
+                  onClick={onClick}
                 >
                   {leading && label}
                 </Button>
@@ -739,10 +729,6 @@ SidePanel.propTypes = {
       label: PropTypes.string,
       leading: PropTypes.bool,
       icon: PropTypes.object,
-      onActionToolbarButtonClick: deprecateProp(
-        PropTypes.func,
-        'This prop will be removed in the future. Please use `onClick` instead'
-      ),
       onClick: PropTypes.func,
       kind: PropTypes.oneOf(['ghost', 'tertiary', 'secondary', 'primary']),
     })

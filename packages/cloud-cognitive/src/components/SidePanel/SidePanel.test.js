@@ -8,11 +8,7 @@
 
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {
-  expectWarn,
-  expectMultipleError,
-  deprecated,
-} from '../../global/js/utils/test-helper';
+import { expectMultipleError } from '../../global/js/utils/test-helper';
 
 import React from 'react';
 import { TextInput } from 'carbon-components-react';
@@ -356,39 +352,32 @@ describe('SidePanel', () => {
     expect(onClick).toBeCalled();
   });
 
-  it('should click an action toolbar button', () =>
-    expectWarn(
-      deprecated(
-        'actionToolbarButtons\\[1\\].onActionToolbarButtonClick',
-        'SidePanel'
-      ),
-      () => {
-        const { click } = userEvent;
-        const toolbarButtonFn1 = jest.fn();
-        const toolbarButtonFn2 = jest.fn();
-        const { container } = renderSidePanel({
-          actionToolbarButtons: [
-            {
-              leading: true,
-              label: 'Copy 1',
-              onClick: toolbarButtonFn1,
-            },
-            {
-              label: 'Copy 2',
-              icon: Add16,
-              onActionToolbarButtonClick: toolbarButtonFn2,
-            },
-          ],
-        });
-        const toolbarButtons = container.querySelectorAll(
-          `.${blockClass}__action-toolbar-button`
-        );
-        click(toolbarButtons[0]);
-        expect(toolbarButtonFn1).toHaveBeenCalledTimes(1);
-        click(toolbarButtons[1]);
-        expect(toolbarButtonFn2).toHaveBeenCalledTimes(1);
-      }
-    ));
+  it('should click an action toolbar button', () => {
+    const { click } = userEvent;
+    const toolbarButtonFn1 = jest.fn();
+    const toolbarButtonFn2 = jest.fn();
+    const { container } = renderSidePanel({
+      actionToolbarButtons: [
+        {
+          leading: true,
+          label: 'Copy 1',
+          onClick: toolbarButtonFn1,
+        },
+        {
+          label: 'Copy 2',
+          icon: Add16,
+          onClick: toolbarButtonFn2,
+        },
+      ],
+    });
+    const toolbarButtons = container.querySelectorAll(
+      `.${blockClass}__action-toolbar-button`
+    );
+    click(toolbarButtons[0]);
+    expect(toolbarButtonFn1).toHaveBeenCalledTimes(1);
+    click(toolbarButtons[1]);
+    expect(toolbarButtonFn2).toHaveBeenCalledTimes(1);
+  });
 
   it('adds additional properties to the containing node', () => {
     renderSidePanel({ 'data-testid': dataTestId });

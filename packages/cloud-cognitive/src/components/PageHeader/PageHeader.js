@@ -142,7 +142,6 @@ export let PageHeader = React.forwardRef(
     const [pageActionsInBreadcrumbRow, setPageActionsInBreadcrumbRow] =
       useState(false);
     const [scrollYValue, setScrollYValue] = useState(0);
-    const [backgroundOpacity, setBackgroundOpacity] = useState(0);
     const [hasCollapseButton, setHasCollapseButton] = useState(false);
     const [spaceForCollapseButton, setSpaceForCollapseButton] = useState(false);
     const [actionBarMaxWidth, setActionBarMaxWidth] = useState(0);
@@ -377,7 +376,7 @@ export let PageHeader = React.forwardRef(
 
     useEffect(() => {
       // Determines if the hasBackgroundAlways should be one based on the header height or scroll
-      let result = hasBackgroundAlways && 1;
+      let result = hasBackgroundAlways ? 1 : 0;
 
       if (
         !result &&
@@ -398,13 +397,10 @@ export let PageHeader = React.forwardRef(
           );
         }
       }
-
       setPageHeaderStyles((prev) => ({
         ...prev,
         [`--${blockClass}--background-opacity`]: result,
       }));
-
-      setBackgroundOpacity(result);
     }, [
       actionBarItems,
       hasBackgroundAlways,
@@ -483,7 +479,6 @@ export let PageHeader = React.forwardRef(
             `${blockClass}--no-margins-below-row`,
             className,
             {
-              [`${blockClass}--show-background`]: backgroundOpacity > 0,
               [`${blockClass}--has-navigation`]: navigation || tags,
               [`${blockClass}--has-navigation-tags-only`]: !navigation && tags,
             },

@@ -8,11 +8,7 @@
 'use strict';
 
 module.exports = {
-  collectCoverageFrom: [
-    'packages/**/src/**/*.js',
-    '!packages/**/{examples,stories}/**',
-    '!**/*.stories.js',
-  ],
+  collectCoverageFrom: ['src/**/*.js', '!**/*.stories.js'],
   coverageReporters: [['html', 'text', { skipEmpty: true }]],
   moduleFileExtensions: ['js', 'json', 'node'],
   reporters: ['default'],

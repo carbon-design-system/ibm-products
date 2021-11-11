@@ -612,7 +612,7 @@ export let SidePanel = React.forwardRef(
                       [`${blockClass}__action-toolbar-leading-button`]: leading,
                     },
                   ])}
-                  onClick={(event) => onClick(event)}
+                  onClick={onClick}
                 >
                   {leading && label}
                 </Button>

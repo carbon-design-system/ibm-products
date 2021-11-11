@@ -34,8 +34,7 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
-import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
-import { SidePanel, deprecatedProps } from './SidePanel';
+import { SidePanel } from './SidePanel';
 import mdx from './SidePanel.mdx';
 
 export default {
@@ -48,7 +47,6 @@ export default {
     },
   },
   argTypes: {
-    ...getDeprecatedArgTypes(deprecatedProps),
     actions: {
       control: {
         type: 'select',

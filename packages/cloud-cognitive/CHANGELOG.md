@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.98.0...@carbon/ibm-cloud-cognitive@1.0.0-alpha.0) (2021-11-11)
+
+
+### Bug Fixes
+
+* page header background over lays ([#1418](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1418)) ([40a3531](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/40a3531536fbe1dcda4e551bdad32f77fad440ff))
+* **WebTerminal:** color and add additional test coverage ([#1408](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1408)) ([163220b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/163220b5924068def341ada10a2f9c4af191da08))
+
+
+### Features
+
+* change block class for UserProfileImage to follow convention ([a9f540b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a9f540bcdbd48364b69166d98cb844f35ea1656d))
+* change package prefix to 'c4p' ([2e8fde7](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/2e8fde730c3c2c700eb7d9a36e1c28038cc385d9))
+* **cloud-cognitive:** use `right` `tooltipPosition` for `vertical` variant by default ([#1403](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1403)) ([6a18fa6](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6a18fa67dbd60087df6670d0d295a4093e9514ca))
+
+
+
+
+
 # [0.98.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.97.2...@carbon/ibm-cloud-cognitive@0.98.0) (2021-11-09)
 
 

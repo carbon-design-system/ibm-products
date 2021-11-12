@@ -1,0 +1,227 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@import '../../global/styles/project-settings';
+@import '../../global/styles/mixins';
+
+// Other Carbon settings.
+@import 'carbon-components/scss/globals/scss/helper-mixins';
+
+// OptionsTile uses the following Carbon components:
+// TODO: @import(s) of Carbon component styles used by OptionsTile
+
+// OptionsTile uses the following Cloud & Cognitive components:
+// TODO: @import(s) of Cloud & Cognitive component styles used by OptionsTile
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin options-tile {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+  $block-class: #{$pkg-prefix}--options-tile;
+
+  .#{$block-class} {
+    border-bottom: 1px solid $ui-03;
+    background-color: $ui-01;
+  }
+
+  .#{$block-class}__toggle-container {
+    position: relative;
+  }
+
+  .#{$block-class}__toggle {
+    position: absolute;
+    right: $spacing-05;
+  }
+
+  .#{$block-class}__toggle
+    .#{$carbon-prefix}--toggle-input__label
+    .#{$carbon-prefix}--toggle__switch {
+    margin: 0;
+  }
+
+  .#{$block-class}__header,
+  .#{$block-class}__static-content {
+    display: grid;
+    box-sizing: border-box;
+    align-items: center;
+    padding-right: $spacing-05;
+    grid-template-columns: 3rem 1fr 1rem;
+  }
+
+  .#{$block-class}__header {
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color $duration--fast-01 motion(entrance, productive);
+  }
+
+  .#{$block-class}__header:hover {
+    background-color: $hover-ui;
+  }
+
+  .#{$block-class}__header:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$block-class}__title {
+    grid-column: 2;
+  }
+
+  .#{$block-class}__heading {
+    @include carbon--type-style('productive-heading-01');
+
+    color: $text-01;
+  }
+
+  .#{$block-class}__summary {
+    @include carbon--type-style('helper-text-01');
+
+    display: grid;
+    height: $spacing-05;
+    margin-top: $spacing-02;
+    color: $text-02;
+    opacity: 1;
+    transition-duration: $duration--moderate-01;
+    transition-property: height, opacity, margin-top;
+    transition-timing-function: motion(standard, productive);
+  }
+
+  .#{$block-class}__summary--invalid,
+  .#{$block-class}__summary--warn,
+  .#{$block-class}__summary--locked {
+    column-gap: $spacing-02;
+    grid-template-columns: 1rem 1fr;
+  }
+
+  .#{$block-class}__summary--invalid {
+    color: $support-01;
+  }
+
+  .#{$block-class}__summary--warn {
+    color: $text-01;
+  }
+
+  .#{$block-class}__summary--warn svg {
+    color: $support-03;
+  }
+
+  .#{$block-class}__summary--warn svg path[fill='none'] {
+    fill: $carbon__black-100;
+  }
+
+  .#{$block-class}__summary-text {
+    overflow: hidden;
+    height: max-content;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .#{$block-class}__chevron {
+    justify-self: center;
+    transition: transform $duration--fast-02 motion(standard, productive);
+  }
+
+  .#{$block-class}__content {
+    padding-right: $spacing-05;
+    // spacing-05 + chevron size + spacing-05
+    // stylelint-disable-next-line carbon/layout-token-use
+    padding-left: calc(#{$spacing-05} * 2 + 1rem);
+  }
+
+  .#{$block-class}__content
+    > .#{$carbon-prefix}--fieldset
+    > .#{$carbon-prefix}--label:empty {
+    display: none;
+  }
+
+  .#{$block-class}--closing .#{$block-class}__content {
+    overflow: hidden;
+  }
+
+  .#{$block-class}:not(.#{$block-class}--closing)
+    > details[open]
+    .#{$block-class}__summary,
+  .#{$block-class}__summary--hidden {
+    height: 0;
+    margin-top: 0;
+    opacity: 0;
+  }
+
+  .#{$block-class}:not(.#{$block-class}--closing)
+    > details[open]
+    .#{$block-class}__chevron {
+    transform: rotate(180deg);
+  }
+
+  .#{$block-class} > details[open] .#{$block-class}__content {
+    padding-top: $spacing-03;
+    padding-bottom: $spacing-06;
+  }
+
+  .#{$block-class}__locked-text {
+    @include carbon--type-style('body-long-01');
+
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: $spacing-06;
+    color: $text-02;
+  }
+
+  .#{$block-class}__locked-text > svg {
+    margin-right: $spacing-02;
+  }
+
+  .#{$block-class}--lg .#{$block-class}__header,
+  .#{$block-class}--lg .#{$block-class}__static-content {
+    height: 3rem;
+  }
+
+  .#{$block-class}--xl .#{$block-class}__header,
+  .#{$block-class}--xl .#{$block-class}__static-content {
+    height: 4rem;
+  }
+
+  .#{$block-class}--lg .#{$block-class}__toggle {
+    // "top" shouldn't be spacing token as it depends on the toggle size
+    // stylelint-disable-next-line carbon/layout-token-use
+    top: 1rem;
+  }
+
+  .#{$block-class}--xl .#{$block-class}__toggle {
+    // "top" shouldn't be spacing token as it depends on the toggle size
+    // stylelint-disable-next-line carbon/layout-token-use
+    top: 1.5rem;
+  }
+
+  .#{$block-class}--lg .#{$block-class}__summary {
+    margin-top: $spacing-01;
+  }
+
+  .#{$block-class}--lg .#{$block-class}__summary-text {
+    // spacing-05 + toggle width
+    // stylelint-disable-next-line carbon/layout-token-use
+    padding-right: calc(#{$spacing-05} + 1rem);
+  }
+
+  .#{$block-class}--xl .#{$block-class}__summary-text {
+    // spacing-05 + toggle width
+    // stylelint-disable-next-line carbon/layout-token-use
+    padding-right: calc(#{$spacing-05} + 2rem);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .#{$block-class}__summary,
+    .#{$block-class}__chevron {
+      // stylelint-disable-next-line carbon/motion-token-use
+      transition: none;
+    }
+  }
+}
+
+@include exports('options-tile') {
+  @include options-tile;
+}

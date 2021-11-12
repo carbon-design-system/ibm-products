@@ -5,9 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { pkg } from '../../../../packages/cloud-cognitive/src/settings';
+// Avoid side effects from `Canary` in `cloud-cognitive/src/settings`.
+import settings from '../../../../packages/cloud-cognitive/src/global/js/package-settings';
 
-const { devtoolsAttribute, getDevtoolsId } = pkg;
+const { devtoolsAttribute, getDevtoolsId } = settings;
 
 export default function toHaveDevtoolsAttribute(element, componentName) {
   return {

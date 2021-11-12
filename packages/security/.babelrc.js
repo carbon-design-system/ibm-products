@@ -11,6 +11,7 @@ module.exports = require('deepmerge')(
     plugins: [
       '@babel/plugin-proposal-export-default-from',
       'babel-plugin-macros',
+      './carbon-imports.babel-plugin',
     ],
   }
 );

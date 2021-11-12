@@ -7,6 +7,7 @@
 
 import { render as r, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { settings } from 'carbon-components';
 import React, { createRef } from 'react';
 
 import { Toolbar, ToolbarButton, ToolbarGroup } from '../..';
@@ -140,6 +141,16 @@ describe(ToolbarButton.displayName, () => {
   // TODO: `onOpen`.
   it('`onOpen`', () => {
     noop();
+  });
+
+  it("renders the 'right' tooltip position for the vertical variant by default", () => {
+    expect(
+      r(
+        <Toolbar vertical>
+          <ToolbarButton data-testid={dataTestId} />
+        </Toolbar>
+      ).getByTestId(dataTestId)
+    ).toHaveClass(`${settings.prefix}--btn--icon-only--right`);
   });
 });
 

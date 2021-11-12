@@ -15,7 +15,7 @@ $baseClass: 'gallery-card';
   flex: 1 1 80%;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
 }
 
 .#{$baseClass}__title {
@@ -23,17 +23,7 @@ $baseClass: 'gallery-card';
 
   overflow: hidden;
   flex: 1 1 20%;
-  margin-top: $spacing-04;
+  margin: $spacing-04 auto 0;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
-// .#{$baseClass}::before {
-//   display: inline-block;
-//   padding: $pacing-08;
-//   content: '';
-// }
-
-// .#{$baseClass}::after {
-//   position: absolute;
-// }

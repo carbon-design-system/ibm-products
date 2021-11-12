@@ -15,12 +15,12 @@ import {
 
 import cx from 'classnames';
 import { bool, func, node, shape, string } from 'prop-types';
-import React, { forwardRef, useRef, useState } from 'react';
+import React, { forwardRef, useContext, useRef, useState } from 'react';
 
 import { useClickOutside } from '../../global/js/hooks';
 import { pkg } from '../../settings';
 
-import { blockClass as toolbarClass } from './Toolbar';
+import { blockClass as toolbarClass, ToolbarContext } from './Toolbar';
 
 const blockClass = `${toolbarClass}__button`;
 
@@ -66,6 +66,7 @@ let ToolbarButton = forwardRef(
 
     const button = (
       <Button
+        tooltipPosition={useContext(ToolbarContext)?.vertical && 'right'}
         {...rest}
         ref={composeRefs(ref, r)}
         className={cx(className, { [`${blockClass}--caret`]: Caret })}

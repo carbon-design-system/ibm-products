@@ -43,6 +43,7 @@ $block-class: #{$pkg-prefix}--web-terminal;
   width: $web-terminal-width;
   height: calc(100vh - #{$spacing-09});
   border-left: 1px solid $gray-90;
+  color: $text-01;
   /* stylelint-disable-next-line  */
   background-color: $gray-100;
 }

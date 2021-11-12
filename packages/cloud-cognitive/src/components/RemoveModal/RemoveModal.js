@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useState, useRef, forwardRef } from 'react';
+import React, { useState, useRef, forwardRef, useEffect } from 'react';
 import cx from 'classnames';
 import {
   Button,
@@ -20,6 +20,7 @@ import PropTypes from 'prop-types';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg } from '../../settings';
+import { usePreviousValue } from '../../global/js/hooks';
 
 const componentName = 'RemoveModal';
 
@@ -46,6 +47,7 @@ export let RemoveModal = forwardRef(
     },
     ref
   ) => {
+    const previousState = usePreviousValue({ open });
     const [userInput, setUserInput] = useState('');
     const idRef = useRef(uuidv4());
     const onChangeHandler = (e) => {
@@ -54,6 +56,16 @@ export let RemoveModal = forwardRef(
     const primaryButtonDisabled =
       textConfirmation && userInput !== resourceName;
     const blockClass = `${pkg.prefix}--remove-modal`;
+
+    // Clear the user input this way so that if the onRequestSubmit handler fails for some reason
+    // the value of the input will still remain, we only want to empty the input value
+    // until open is false.
+    useEffect(() => {
+      if (!open && previousState?.open) {
+        setUserInput('');
+      }
+    }, [open, previousState?.open]);
+
     return (
       <ComposedModal
         {...rest}
@@ -87,23 +99,13 @@ export let RemoveModal = forwardRef(
           )}
         </ModalBody>
         <ModalFooter>
-          <Button
-            type="button"
-            kind="secondary"
-            onClick={() => {
-              onClose();
-              setUserInput('');
-            }}
-          >
+          <Button type="button" kind="secondary" onClick={onClose}>
             {secondaryButtonText}
           </Button>
           <Button
             type="submit"
             kind="danger"
-            onClick={() => {
-              onRequestSubmit();
-              setUserInput('');
-            }}
+            onClick={onRequestSubmit}
             disabled={primaryButtonDisabled}
           >
             {primaryButtonText}

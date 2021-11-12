@@ -9801,9 +9801,8 @@ fieldset[disabled] .bx--form__helper-text {
 .bx--table-toolbar {
   position: relative;
   display: flex;
-  overflow: hidden;
   width: 100%;
-  height: var(--cds-spacing-09, 3rem);
+  min-height: var(--cds-spacing-09, 3rem);
   background-color: var(--cds-layer, #262626);
 }
 
@@ -10101,17 +10100,14 @@ fieldset[disabled] .bx--form__helper-text {
 
 .bx--batch-actions {
   position: absolute;
-  top: 0;
+  right: 0;
+  bottom: 0;
   left: 0;
   display: flex;
-  width: 100%;
-  height: 100%;
   align-items: center;
-  padding-right: var(--cds-spacing-06, 1.5rem);
-  padding-left: var(--cds-spacing-06, 1.5rem);
+  justify-content: space-between;
   background-color: var(--cds-background-brand, #0f62fe);
   clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-  overflow-x: auto;
   pointer-events: none;
   transform: translate3d(0, 48px, 0);
   transition: transform 110ms cubic-bezier(0.2, 0, 0.38, 0.9), clip-path 110ms cubic-bezier(0.2, 0, 0.38, 0.9), opacity 110ms cubic-bezier(0.2, 0, 0.38, 0.9);
@@ -10128,21 +10124,21 @@ fieldset[disabled] .bx--form__helper-text {
 }
 
 .bx--batch-actions--active {
+  overflow: auto hidden;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   pointer-events: all;
   transform: translate3d(0, 0, 0);
 }
 
 .bx--action-list {
-  position: absolute;
-  right: 0;
   display: flex;
+  align-items: center;
 }
 
 .bx--action-list .bx--btn {
-  min-width: 0;
   padding: calc(0.875rem - 3px) 16px;
   color: var(--cds-text-on-color, #ffffff);
+  white-space: nowrap;
 }
 
 .bx--action-list .bx--btn:disabled {
@@ -10199,18 +10195,20 @@ fieldset[disabled] .bx--form__helper-text {
   transition: opacity 110ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
 
-.bx--batch-summary__cancel {
-  position: relative;
-  padding-right: var(--cds-spacing-05, 1rem);
-}
-
 .bx--batch-summary {
-  position: absolute;
+  position: sticky;
+  z-index: 100000;
   left: 0;
   display: flex;
+  min-height: 3rem;
   align-items: center;
-  margin-left: var(--cds-spacing-05, 1rem);
+  padding: 0 var(--cds-spacing-05, 1rem);
+  background-color: var(--cds-background-brand, #0f62fe);
   color: var(--cds-text-on-color, #ffffff);
+}
+
+.bx--batch-summary__scroll {
+  box-shadow: 0.5px 0 0.2px var(--cds-hover-primary-text, #a6c8ff);
 }
 
 .bx--batch-summary__para {
@@ -10613,6 +10611,7 @@ fieldset[disabled] .bx--form__helper-text {
 
 .bx--data-table thead th.bx--table-column-checkbox,
 .bx--data-table tbody td.bx--table-column-checkbox {
+  width: 2.5rem;
   padding-right: 0.25rem;
   padding-left: 1rem;
 }
@@ -33359,8 +33358,8 @@ optgroup.bx--select-optgroup:disabled,
 }
 
 .bx--number--light .bx--number__control-btn:hover,
-.bx--number--light .bx--number__control-btn:hover::before,
-.bx--number--light .bx--number__control-btn:hover::after {
+.bx--number--light .bx--number__control-btn:not(:focus):hover::before,
+.bx--number--light .bx--number__control-btn:not(:focus):hover::after {
   background-color: var(--cds-hover-light-ui, #4c4c4c);
 }
 
@@ -34274,8 +34273,8 @@ span.bx--pagination__text {
 }
 
 .bx--radio-button:focus + .bx--radio-button__label .bx--radio-button__appearance {
-  box-shadow: 0 0 0 2px var(--cds-focus, #ffffff);
-  outline: 1px solid transparent;
+  outline: 2px solid var(--cds-focus, #ffffff);
+  outline-offset: 1.5px;
 }
 
 .bx--radio-button__label.bx--skeleton {
@@ -35409,8 +35408,8 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
   font-weight: var(--cds-body-short-01-font-weight, 400);
   line-height: var(--cds-body-short-01-line-height, 1.28572);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
-  overflow: hidden;
   width: 10rem;
+  overflow: hidden;
   padding: var(--cds-spacing-04, 0.75rem) var(--cds-spacing-05, 1rem) var(--cds-spacing-03, 0.5rem);
   border-bottom: 2px solid var(--cds-ui-03, #393939);
   color: var(--cds-text-02, #c6c6c6);
@@ -35963,6 +35962,7 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
 }
 
 .bx--tile--expandable {
+  position: relative;
   overflow: hidden;
   width: 100%;
   border: 0;
@@ -36461,10 +36461,10 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
   cursor: not-allowed;
 }
 .bx--toggle-input:disabled + .bx--toggle-input__label > .bx--toggle__switch::before {
-  background-color: var(--cds-disabled-01, #262626);
+  background-color: var(--cds-disabled-02, #525252);
 }
 .bx--toggle-input:disabled + .bx--toggle-input__label > .bx--toggle__switch::after {
-  background-color: var(--cds-disabled-02, #525252);
+  background-color: var(--cds-disabled-03, #8d8d8d);
 }
 .bx--toggle-input:disabled + .bx--toggle-input__label > .bx--toggle__switch::before, .bx--toggle-input:disabled + .bx--toggle-input__label > .bx--toggle__switch::after {
   cursor: not-allowed;

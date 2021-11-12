@@ -18090,6 +18090,7 @@ li.bx--accordion__item--disabled:last-of-type {
   font-weight: var(--cds-body-short-01-font-weight, 400);
   line-height: var(--cds-body-short-01-line-height, 1.28572);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
+  text-align: left;
 }
 .bx--tooltip button {
   padding-right: 2rem;

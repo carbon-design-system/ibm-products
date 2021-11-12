@@ -11,7 +11,7 @@ import userEvent from '@testing-library/user-event';
 
 import { pkg, carbon } from '../../settings';
 
-import { BreadcrumbItem, Tab, Tabs } from 'carbon-components-react';
+import { Tab, Tabs } from 'carbon-components-react';
 import { Lightning16, Bee32 } from '@carbon/icons-react';
 
 import { PageHeader } from '.';
@@ -66,13 +66,6 @@ const breadcrumbItem = (item) => ({
 const breadcrumbs = [1, 2, 3].map(breadcrumbItem);
 const breadcrumbOverflowAriaLabel =
   'Open and close additional breadcrumb item list.';
-const breadcrumbItems = (
-  <>
-    <BreadcrumbItem href="#">Breadcrumb 1</BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
-  </>
-);
 const classNames = ['client-class-1', 'client-class-2'];
 const pageActions = [
   {
@@ -631,8 +624,6 @@ describe('PageHeader', () => {
       'The prop `actionBarOverflowLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `actionBarOverflowAriaLabel`.',
       'The prop `availableSpace` of `PageHeader` has been deprecated and will soon be removed. Make use of children instead.',
       'The prop `background` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `hasBackgroundAlways`',
-      'The prop `breadcrumbItems` of `PageHeader` has been deprecated and will soon be removed. Usage changed to expect breadcrumb item like shapes, see `breadcrumbs`.',
-      'The prop `breadcrumbOverflowLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `breadcrumbOverflowAriaLabel`.',
       'The prop `collapseHeaderLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `collapseHeaderIconDescription`.',
       'The prop `collapseHeaderToggleWanted` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `hasCollapseHeaderToggle`',
       'The prop `expandHeaderLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `expandHeaderIconDescription`.',
@@ -648,8 +639,6 @@ describe('PageHeader', () => {
         actionBarOverflowLabel={testProps.actionBarOverflowAriaLabel}
         availableSpace={children}
         background={testProps.hasBackgroundAlways}
-        breadcrumbItems={breadcrumbItems}
-        breadcrumbOverflowLabel={testProps.breadcrumbOverflowAriaLabel}
         collapseHeaderLabel={testProps.collapseHeaderIconDescription}
         collapseHeaderToggleWanted={true}
         expandHeaderLabel={testProps.expandHeaderIconDescription}
@@ -663,15 +652,11 @@ describe('PageHeader', () => {
       expect(warn).toBeCalledWith(warnings[i]);
     }
 
-    const header = screen.getByTestId(dataTestId);
+    screen.getByTestId(dataTestId);
 
     // check for rendered items
     screen.getByLabelText(testProps.actionBarOverflowAriaLabel);
     screen.getByText(availableSpaceTextContent);
-    expect(header.querySelectorAll(`.${blockClass}__breadcrumb`)).toHaveLength(
-      1
-    );
-    screen.getByLabelText(testProps.breadcrumbOverflowAriaLabel);
     screen.getByLabelText(testProps.collapseHeaderIconDescription);
 
     // const collapseButton =
@@ -682,28 +667,18 @@ describe('PageHeader', () => {
     // userEvent.click(collapseButton);
     // screen.getByLabelText(testProps.expandHeaderIconDescription);
 
-    screen.getAllByText(titleString, {
-      selector: `.${blockClass}__breadcrumb-title--pre-collapsed .${carbon.prefix}--link`,
-    });
-
     warn.mockRestore(); // Remove mock
   });
 
   test('Title skeleton with deprecated breadcrumbs', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
-    render(
-      <PageHeader
-        breadcrumbItems={breadcrumbItems}
-        breadcrumbOverflowLabel={testProps.breadcrumbOverflowAriaLabel}
-        title={{ text: titleString, loading: true }}
-      />
-    );
+    render(<PageHeader title={{ text: titleString, loading: true }} />);
 
     const skeletons = document.querySelectorAll(
       `.${carbon.prefix}--skeleton__text`
     );
-    expect(skeletons).toHaveLength(3);
+    expect(skeletons).toHaveLength(1);
 
     warn.mockRestore(); // Remove mock
   });

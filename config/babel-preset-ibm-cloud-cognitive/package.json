@@ -21,7 +21,7 @@
     "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon)/'"
   },
   "devDependencies": {
-    "npm-check-updates": "^12.0.0"
+    "npm-check-updates": "^12.0.2"
   },
   "dependencies": {
     "@babel/core": "^7.16.0",

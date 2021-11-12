@@ -63,7 +63,7 @@
   "devDependencies": {
     "@commitlint/cli": "^14.1.0",
     "@commitlint/config-conventional": "^14.1.0",
-    "@testing-library/dom": "^8.11.0",
+    "@testing-library/dom": "^8.11.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "copyfiles": "^2.4.1",
@@ -74,7 +74,7 @@
     "jest": "^27.3.1",
     "lerna": "^4.0.0",
     "lint-staged": "^11.2.6",
-    "npm-check-updates": "^12.0.0",
+    "npm-check-updates": "^12.0.2",
     "npm-run-all": "^4.1.5",
     "npm-upgrade": "^3.0.0",
     "prettier": "^2.4.1",
@@ -85,7 +85,7 @@
     "stylelint": "^13.13.1",
     "stylelint-config-carbon": "^1.7.0",
     "stylelint-plugin-carbon-tokens": "^0.11.2",
-    "webpack": "^5.61.0"
+    "webpack": "^5.64.0"
   },
   "eslintConfig": {
     "parser": "babel-eslint",

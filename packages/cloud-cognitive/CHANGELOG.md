@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.98.0...@carbon/ibm-cloud-cognitive@1.0.0-rc.0) (2021-11-12)
+
+
+### Bug Fixes
+
+* correct length test ([bd65bb3](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/bd65bb34155e8a673b766ce60660c0de9eec05d8))
+* page header background over lays ([#1418](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1418)) ([40a3531](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/40a3531536fbe1dcda4e551bdad32f77fad440ff))
+* **PageHeader:** action bar location ([2bfa58d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/2bfa58d1e10b3ecb107d077d0850e74b4c8ec4b6))
+* undo merge mistake ([d488059](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d48805967ea22ef92226d577c5f43489f384ca31))
+* **WebTerminal:** color and add additional test coverage ([#1408](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1408)) ([163220b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/163220b5924068def341ada10a2f9c4af191da08))
+
+
+### Features
+
+* add options-tile component ([#1411](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1411)) ([b7dbeb7](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b7dbeb71c6343d0839d5c3ab74a5c83e1fd6d9b6))
+* change block class for UserProfileImage to follow convention ([a9f540b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a9f540bcdbd48364b69166d98cb844f35ea1656d))
+* change package prefix to 'c4p' ([2e8fde7](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/2e8fde730c3c2c700eb7d9a36e1c28038cc385d9))
+* **cloud-cognitive:** use `right` `tooltipPosition` for `vertical` variant by default ([#1403](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1403)) ([6a18fa6](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6a18fa67dbd60087df6670d0d295a4093e9514ca))
+
+
+
+
+
 # [0.98.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.97.2...@carbon/ibm-cloud-cognitive@0.98.0) (2021-11-09)
 
 

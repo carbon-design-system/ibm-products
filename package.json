@@ -15,7 +15,6 @@
     "audit": "node scripts/audit.js dependencies moderate",
     "build": "run-s build:* storybook:build:storybook",
     "build:packages": "yarn run-all --include-dependencies --ignore \"@carbon/ibm-cloud-cognitive-core\" build",
-    "ccs-coverage": "cd packages/cloud-cognitive && yarn test:js src/components --coverage --collectCoverageFrom=packages/cloud-cognitive/src/components/**/*.js --collectCoverageFrom=!packages/cloud-cognitive/src/components/**/*.stories.js",
     "ci-check": "run-s ci-check:* storybook:build",
     "ci-check:build": "run-s build:* 'run-all --no-sort ci-check'",
     "ci-check:lint": "run-p audit lint",

@@ -84,10 +84,26 @@ describe(componentName, () => {
 describe(ToolbarButton.displayName, () => {
   test(ToolbarButton);
 
+  const render = _render.bind(ToolbarButton);
+  const { fn } = jest;
+
+  it('calls `onClick` when clicked', () => {
+    const onClick = fn();
+    render({ onClick });
+
+    expect(onClick).not.toBeCalled();
+
+    click(getByTestId(dataTestId));
+
+    expect(onClick).toBeCalledTimes(1);
+  });
+
+  const popoverDataTestId = 'popoverDataTestId';
   const renderCaret = 'renderCaret';
 
-  function CaretToolbarButton(props) {
-    return _render.bind(ToolbarButton)({
+  function CaretToolbarButton({ popover, ...props } = {}) {
+    return render({
+      popover: { 'data-testid': popoverDataTestId, ...popover },
       renderCaret: () => renderCaret,
       ...props,
     });
@@ -110,47 +126,52 @@ describe(ToolbarButton.displayName, () => {
   });
 
   it('adds additional props to the popover', () => {
-    const popoverDataTestId = 'popoverDataTestId';
-
     CaretToolbarButton({
-      popover: { 'data-testid': popoverDataTestId, open: true },
+      popover: { open: true },
     });
 
     getByTestId(popoverDataTestId);
   });
 
-  function noop() {
-    expect(null).toBeNull();
-  }
-
-  // TODO: `onClick`.
-  it('`onClick`', () => {
-    noop();
-  });
-
   // TODO: `onClickOutside`.
   it('`onClickOutside`', () => {
-    noop();
+    expect(null).toBeNull();
   });
 
-  // TODO: `onClose`.
-  it('`onClose`', () => {
-    noop();
+  it('calls `onClose` when the popover is closed', () => {
+    const onClose = fn();
+    CaretToolbarButton({ onClose });
+
+    click(getByTestId(dataTestId));
+
+    expect(onClose).not.toBeCalled();
+
+    click(getByTestId(dataTestId));
+
+    expect(onClose).toBeCalledTimes(1);
   });
 
-  // TODO: `onOpen`.
-  it('`onOpen`', () => {
-    noop();
+  it('calls `onOpen` when the popover is opened', () => {
+    const onOpen = fn();
+    CaretToolbarButton({ onOpen });
+
+    expect(onOpen).not.toBeCalled();
+
+    click(getByTestId(dataTestId));
+
+    expect(onOpen).toBeCalledTimes(1);
   });
 
   it("renders the 'right' tooltip position for the vertical variant by default", () => {
-    expect(
-      r(
-        <Toolbar vertical>
-          <ToolbarButton data-testid={dataTestId} />
-        </Toolbar>
-      ).getByTestId(dataTestId)
-    ).toHaveClass(`${settings.prefix}--btn--icon-only--right`);
+    r(
+      <Toolbar vertical>
+        <ToolbarButton data-testid={dataTestId} />
+      </Toolbar>
+    );
+
+    expect(getByTestId(dataTestId)).toHaveClass(
+      `${settings.prefix}--btn--icon-only--right`
+    );
   });
 });
 

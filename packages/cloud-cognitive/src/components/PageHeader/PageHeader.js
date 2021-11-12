@@ -93,8 +93,7 @@ export let PageHeader = React.forwardRef(
     };
 
     // state based on props only
-    const actionBarItemArray = extractShapesArray(actionBarItems);
-    const hasActionBar = actionBarItemArray && actionBarItemArray.length;
+    const hasActionBar = actionBarItems && actionBarItems.length;
     const hasBreadcrumbRow = breadcrumbs || actionBarItems;
 
     // NOTE: The buffer is used to add space between the bottom of the header and the last content
@@ -752,17 +751,17 @@ PageHeader.propTypes = {
    * Button kind, size, tooltipPosition, tooltipAlignment and type are ignored.
    */
   actionBarItems: PropTypes.arrayOf(
-      PropTypes.shape({
-        ...prepareProps(Button.propTypes, [
-          'kind',
-          'size',
-          'tooltipPosition',
-          'tooltipAlignment',
-        ]),
-        iconDescription: PropTypes.string.isRequired,
-        onClick: Button.propTypes.onClick,
-        renderIcon: Button.propTypes.renderIcon.isRequired,
-      })
+    PropTypes.shape({
+      ...prepareProps(Button.propTypes, [
+        'kind',
+        'size',
+        'tooltipPosition',
+        'tooltipAlignment',
+      ]),
+      iconDescription: PropTypes.string.isRequired,
+      onClick: Button.propTypes.onClick,
+      renderIcon: Button.propTypes.renderIcon.isRequired,
+    })
   ),
   /**
    * class name applied to the action bar overflow options

@@ -8,11 +8,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Repair
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm dist-tag add @carbon/ibm-cloud-cognitive@0.98.0 latest
-
       - name: Checkout
         uses: actions/checkout@v2 # https://github.com/actions/checkout
         with:

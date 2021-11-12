@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const root = '../..';
+const roots = [__dirname, require('path').resolve(__dirname, '../..')];
 const sectionTitle = 'Security';
 
-export { root, sectionTitle };
+export { roots, sectionTitle };

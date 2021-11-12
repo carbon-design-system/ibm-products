@@ -39,5 +39,5 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: # cspell:disable-next-line
-          yarn lerna publish premajor --preid alpha --git-remote upstream
-          --create-release github --ignore-changes 'config/**/*' --yes
+          yarn lerna publish premajor --preid alpha --create-release github
+          --ignore-changes 'config/**/*' --yes

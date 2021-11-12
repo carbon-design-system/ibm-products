@@ -11,7 +11,6 @@
     ],
     "nohoist": []
   },
-  "sideEffects": "packages/cloud-cognitive/src/global/js/utils/props-helper.js",
   "scripts": {
     "audit": "node scripts/audit.js dependencies moderate",
     "build": "run-s build:* storybook:build:storybook",

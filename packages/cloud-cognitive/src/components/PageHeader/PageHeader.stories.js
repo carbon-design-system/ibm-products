@@ -40,13 +40,12 @@ import {
 import cx from 'classnames';
 
 import { ActionBarItem } from '../ActionBar';
-import { PageHeader, deprecatedProps } from './PageHeader';
+import { PageHeader } from './PageHeader';
 
 import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
-import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 
 import { demoTableHeaders, demoTableData } from './PageHeaderDemo.data';
 
@@ -297,6 +296,7 @@ const tags = {
   ],
 };
 
+const userDefinedStyle = { color: 'red', fontWeight: '600' };
 const title = {
   'No title': null,
   'Plain text title': 'Page title',
@@ -315,13 +315,13 @@ const title = {
   'User defined title': {
     content: (
       <span>
-        User <span style={{ color: 'red', fontWeight: '600' }}>defined</span>{' '}
+        User <span style={userDefinedStyle}>defined</span>
         title
       </span>
     ),
     breadcrumbContent: (
       <span>
-        User <span style={{ color: 'red', fontWeight: '600' }}>defined</span>{' '}
+        User <span style={userDefinedStyle}>defined</span>
         title
       </span>
     ),
@@ -345,7 +345,6 @@ export default {
     (story) => <div className={`${storyClass}__viewport`}>{story()}</div>,
   ],
   argTypes: {
-    ...getDeprecatedArgTypes(deprecatedProps),
     actionBarItems: {
       control: {
         type: 'select',

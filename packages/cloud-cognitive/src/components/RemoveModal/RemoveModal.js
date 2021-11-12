@@ -82,17 +82,28 @@ export let RemoveModal = forwardRef(
               labelText={inputLabelText}
               placeholder={inputPlaceholderText}
               onChange={onChangeHandler}
+              value={userInput}
             />
           )}
         </ModalBody>
         <ModalFooter>
-          <Button type="button" kind="secondary" onClick={onClose}>
+          <Button
+            type="button"
+            kind="secondary"
+            onClick={() => {
+              onClose();
+              setUserInput('');
+            }}
+          >
             {secondaryButtonText}
           </Button>
           <Button
             type="submit"
             kind="danger"
-            onClick={onRequestSubmit}
+            onClick={() => {
+              onRequestSubmit();
+              setUserInput('');
+            }}
             disabled={primaryButtonDisabled}
           >
             {primaryButtonText}

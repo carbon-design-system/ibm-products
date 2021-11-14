@@ -79,7 +79,7 @@ const DefaultTemplate = ({ ...args }) => {
   return (
     <>
       {renderUIShellHeader()}
-      <Grid id="cloud-and-cognitive-page-content">
+      <Grid id="ibm-products-page-content">
         <Row>
           <Column>
             <Button onClick={() => setOpen(!open)}>
@@ -169,7 +169,7 @@ const TemplateWithFormValidation = ({ ...args }) => {
   return (
     <>
       {renderUIShellHeader()}
-      <Grid id="cloud-and-cognitive-page-content">
+      <Grid id="ibm-products-page-content">
         <Row>
           <Column>
             <Button onClick={() => setOpen(!open)}>
@@ -261,7 +261,7 @@ const TemplateWithMultipleForms = ({ ...args }) => {
   return (
     <>
       {renderUIShellHeader()}
-      <Grid id="cloud-and-cognitive-page-content">
+      <Grid id="ibm-products-page-content">
         <Row>
           <Column>
             <Button onClick={() => setOpen(!open)}>
@@ -373,21 +373,21 @@ const TemplateWithMultipleForms = ({ ...args }) => {
 
 export const Default = prepareStory(DefaultTemplate, {
   args: {
-    selectorPageContent: '#cloud-and-cognitive-page-content',
+    selectorPageContent: '#ibm-products-page-content',
     ...defaultStoryProps,
   },
 });
 
 export const WithFormValidation = prepareStory(TemplateWithFormValidation, {
   args: {
-    selectorPageContent: '#cloud-and-cognitive-page-content',
+    selectorPageContent: '#ibm-products-page-content',
     ...defaultStoryProps,
   },
 });
 
 export const WithMultipleForms = prepareStory(TemplateWithMultipleForms, {
   args: {
-    selectorPageContent: '#cloud-and-cognitive-page-content',
+    selectorPageContent: '#ibm-products-page-content',
     ...defaultStoryProps,
   },
 });

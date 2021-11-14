@@ -8,7 +8,7 @@
 @import 'carbon-components/scss/components/button/button';
 @import '../../global/styles/project-settings';
 
-@include exports($name: cloud-cognitive--toolbar) {
+@include exports('toolbar') {
   $block-class: #{$pkg-prefix}--toolbar;
 
   $border: carbon--rem(

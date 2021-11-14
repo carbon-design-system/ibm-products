@@ -8,7 +8,7 @@ assignees: ''
 
 ## What package(s) are you using?
 
-- [ ] Cloud & Cognitive
+- [ ] Carbon for IBM Products (or Carbon for IBM Cloud & Cognitive)
 - [ ] Legacy/CDAI
 - [ ] Legacy/Security
 

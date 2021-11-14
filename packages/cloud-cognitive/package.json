@@ -1,6 +1,6 @@
 {
   "name": "@carbon/ibm-cloud-cognitive",
-  "description": "Carbon for Cloud & Cognitive",
+  "description": "Carbon for IBM Products",
   "version": "0.98.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
@@ -26,7 +26,8 @@
     "carbon",
     "carbon design system",
     "carbon community",
-    "carbon for cloud & cognitive"
+    "carbon for cloud & cognitive",
+    "carbon for ibm products"
   ],
   "publishConfig": {
     "access": "public"

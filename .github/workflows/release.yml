@@ -24,16 +24,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v1 # https://github.com/actions/setup-node
         with:
-          node-version: 12
+          node-version: lts/fermium
           registry-url: https://registry.npmjs.org
+          cache: yarn
 
       - name: Install
         run: yarn --offline
 
-      - name: Build
-        run: yarn build
-
-      - name: Continuous integration check
+      - name: Continuous integration check (includes build)
         run: yarn ci-check
 
       # Dry run - `yarn lerna version --no-git-tag-version --no-push --yes`
@@ -42,3 +40,14 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: yarn lerna publish --create-release github --yes
+
+      - name: Rename cloud-cognitive
+        run:
+          yarn json -I -f packages/cloud-cognitive/package.json -e
+          'this.name="@carbon/ibm-products"'
+
+      - name: Publish with new name
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: yarn lerna publish from-package --create-release github --yes

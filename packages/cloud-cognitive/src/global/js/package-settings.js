@@ -59,6 +59,7 @@ const defaults = {
     ToolbarGroup: false,
     WebTerminal: false,
     EditSidePanel: false,
+    OptionsTile: false,
     /* new component flags here - comment used by generate CLI */
   },
 

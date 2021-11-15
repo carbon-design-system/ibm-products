@@ -5,10 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { pkg } from '../../../packages/cloud-cognitive/src/settings';
+// Avoid side effects from `Canary` in `cloud-cognitive/src/settings`.
+import settings from '../../../packages/cloud-cognitive/src/global/js/package-settings';
 
-pkg._silenceWarnings(true);
-pkg.setAllComponents(true);
+const { _silenceWarnings, setAllComponents } = settings;
+
+_silenceWarnings(true);
+setAllComponents(true);
 
 global.__DEV__ = true;
 

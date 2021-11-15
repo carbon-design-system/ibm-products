@@ -17,9 +17,9 @@ const App = () => {
         additionalInfo={[{ label: 'Version number', content: '1.3.41' }]}
         content={
           <>
-            This is an example of the AboutModal from the ibm-cloud-cognitive
-            component library. The library is designed and built on top of the
-            Carbon Design System and Carbon Components React.
+            This is an example of the AboutModal from the Carbon for IBM
+            Products component library. The library is designed and built on top
+            of the Carbon Design System and Carbon Components React.
           </>
         }
         copyrightText={<>Copyright &copy; 2020 IBM corporation</>}
@@ -55,10 +55,7 @@ const App = () => {
         }
         title={
           <>
-            IBM{' '}
-            <span style={{ fontWeight: '600' }}>
-              Cloud and Cognitive Components
-            </span>
+            IBM <span style={{ fontWeight: '600' }}>Products components</span>
           </>
         }
         onClose={() => setOpen(false)}

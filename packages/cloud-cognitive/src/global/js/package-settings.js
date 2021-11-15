@@ -70,13 +70,13 @@ const defaults = {
 };
 
 const warningMessageComponent = (property) =>
-  `IBM Cloud Cognitive (WARNING): Component "${property}" enabled via feature flags. This component has not yet completed its review process.`;
+  `Carbon for IBM Products (WARNING): Component "${property}" enabled via feature flags. This component has not yet completed its review process.`;
 const warningMessageFeature = (property) =>
-  `IBM Cloud Cognitive (WARNING): Feature "${property}" enabled via feature flags.`;
+  `Carbon for IBM Products (WARNING): Feature "${property}" enabled via feature flags.`;
 const warningMessageAllComponents =
-  'IBM Cloud Cognitive (WARNING): All components enabled through use of setAllComponents. This includes components that have not yet completed their review process.';
+  'Carbon for IBM Products (WARNING): All components enabled through use of setAllComponents. This includes components that have not yet completed their review process.';
 const warningMessageAllFeatures =
-  'IBM Cloud Cognitive (WARNING): All features enabled through use of setAllFeatures';
+  'Carbon for IBM Products (WARNING): All features enabled through use of setAllFeatures';
 
 // Values to represent overrides for component or feature settings.
 // Each value maps the initial value to the value that should be returned.

@@ -1,10 +1,12 @@
 # @carbon/ibm-cloud-cognitive
 
-> ibm-cloud-cognitive is an open-source implementation of the closed source
-> ibm-cloud-cognitive pattern asset library (PAL). These PAL designs build on
-> the foundation of the IBMs open source Carbon Design System and React
-> implementation to offer components and patterns beyond the typical component
-> library.
+> Carbon for IBM Products is an open-source implementation of the closed source
+> [Carbon for Cloud & Cognitive pattern asset library (PAL)](https://pages.github.ibm.com/cdai-design/pal/).
+> These PAL designs build on the foundation of IBM's open source Carbon Design
+> System and React implementation to offer components and patterns beyond the
+> typical component library. Carbon for IBM Products was previously known as
+> Carbon for IBM Cloud and Cognitive, and this name can still be encountered in
+> various places and historical logs.
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors-)
 [![Licensed under the Apache License, Version 2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/LICENSE)
@@ -13,16 +15,16 @@
 [![GitHub Lerna version](https://img.shields.io/github/lerna-json/v/carbon-design-system/ibm-cloud-cognitive)](https://lerna.js.org)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CONTRIBUTING.md)
 
-> Carbon for Cloud & Cognitive common UI components
+> Carbon for IBM Products common UI components
 
 ## 🚀 Getting started
 
 If you're just getting started and looking to browse our React components, take
 a look at [our Storybook](https://ibm-cloud-cognitive.netlify.app).
 
-## 📦 Installing IBM Cloud Cognitive
+## 📦 Installing Carbon for IBM Products
 
-To use IBM Cloud Cognitive components, all you need to do is install the
+To use Carbon for IBM Products components, all you need to do is install the
 `@carbon/ibm-cloud-cognitive` package.
 
 ```shell
@@ -41,8 +43,9 @@ import '@carbon/ibm-cloud-cognitive/css/index.min.css';
 
 ### Carbon Components (Peer dependencies)
 
-@carbon/cloud-cognitive is built on top of Carbon components and has a number of
-dependencies which need to be installed. Follow the package instructions for:
+@carbon/ibm-cloud-cognitive is built on top of Carbon components and has a
+number of dependencies which need to be installed. Follow the package
+instructions for:
 
 -. Install carbon-components-react as per that packages instructions
 <https://www.npmjs.com/package/carbon-components-react> -. Install
@@ -62,11 +65,10 @@ packages.
 Examples for each released component, and some that are still not quite ready,
 can be found here on
 [Code Sandbox](https://codesandbox.io/examples/package/@carbon/ibm-cloud-cognitive).
-Or try searching code sandbox for ibm-cloud-cognitive.
 
 ### Packages
 
-You can find example projects using the components in
+You can find example projects using the components in the
 [examples folder](../../packages/examples/cloud-cognitive).
 
 ## Usage

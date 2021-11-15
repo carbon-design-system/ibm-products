@@ -27,7 +27,7 @@
  * NOTE: If no thumbnail is found then the thumbnail value is omitted from the output.
  * NOTE2: A local config file allows examples not in this repo to  be added
  *
- * The resulting IBM Cloud Cognitive package example-gallery can be seen here
+ * The resulting Carbon for IBM Products example gallery can be seen here
  * https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/cloud-cognitive/example-gallery
  */
 

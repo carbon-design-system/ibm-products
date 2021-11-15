@@ -28,7 +28,7 @@ Before starting work on this epic, please review and complete the following.
 
 - [ ] Initial review of design/existing code
 
-### Working in Cloud and Cognitive package
+### Working in Carbon for IBM Products package
 
 - [ ] Have you reviewed our
       [contribution guidelines](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CONTRIBUTING.md)?

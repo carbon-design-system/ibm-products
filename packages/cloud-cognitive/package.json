@@ -12,7 +12,7 @@
   },
   "bugs": "https://github.com/carbon-design-system/ibm-cloud-cognitive/issues",
   "sideEffects": [
-    "src/global/js/utils/props-helper.js",
+    "**/props-helper.js",
     "**/*.css",
     "**/*.scss"
   ],

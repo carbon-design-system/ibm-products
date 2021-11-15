@@ -36,7 +36,7 @@ const defaultProps = {
       href: 'https://www.carbondesignsystem.com/',
     },
     {
-      text: 'IBM Cloud and Cognitive component library',
+      text: 'Carbon for IBM Products component library',
       href: 'https://github.com/carbon-design-system/ibm-cloud-cognitive',
     },
   ],
@@ -71,7 +71,7 @@ describe(componentName, () => {
     const { container } = render(<HTTPError404 {...defaultProps} />);
     expect(screen.getByText(errorCodeLabel));
     expect(screen.getByText(description));
-    expect(screen.getByText('IBM Cloud and Cognitive component library'));
+    expect(screen.getByText('Carbon for IBM Products component library'));
     expect(ref.current.classList.contains(blockClass)).toBeTruthy();
     expect(
       container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
@@ -90,7 +90,7 @@ describe(componentName, () => {
     const { container } = render(<HTTPError403 {...defaultProps} />);
     expect(screen.getByText(errorCodeLabel));
     expect(screen.getByText(description));
-    expect(screen.getByText('IBM Cloud and Cognitive component library'));
+    expect(screen.getByText('Carbon for IBM Products component library'));
     expect(ref.current.classList.contains(blockClass)).toBeTruthy();
     expect(
       container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
@@ -109,7 +109,7 @@ describe(componentName, () => {
     const { container } = render(<HTTPErrorOther {...defaultProps} />);
     expect(screen.getByText(errorCodeLabel));
     expect(screen.getByText(description));
-    expect(screen.getByText('IBM Cloud and Cognitive component library'));
+    expect(screen.getByText('Carbon for IBM Products component library'));
     expect(ref.current.classList.contains(blockClass)).toBeTruthy();
     expect(
       container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)

@@ -14,7 +14,8 @@
     "carbon",
     "carbon design system",
     "carbon community",
-    "carbon for cloud & cognitive"
+    "carbon for cloud & cognitive",
+    "carbon for ibm products"
   ],
   "scripts": {
     "build": "run-s build:carbon build:storybook",

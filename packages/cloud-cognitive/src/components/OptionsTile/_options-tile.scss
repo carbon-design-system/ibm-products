@@ -12,12 +12,6 @@
 // Other Carbon settings.
 @import 'carbon-components/scss/globals/scss/helper-mixins';
 
-// OptionsTile uses the following Carbon components:
-// TODO: @import(s) of Carbon component styles used by OptionsTile
-
-// OptionsTile uses the following Cloud & Cognitive components:
-// TODO: @import(s) of Cloud & Cognitive component styles used by OptionsTile
-
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
 @mixin options-tile {

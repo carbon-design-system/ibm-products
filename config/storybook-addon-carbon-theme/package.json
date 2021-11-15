@@ -23,7 +23,8 @@
     "storybook",
     "carbon design system",
     "carbon community",
-    "carbon for cloud & cognitive"
+    "carbon for cloud & cognitive",
+    "carbon for ibm products"
   ],
   "publishConfig": {
     "access": "public"

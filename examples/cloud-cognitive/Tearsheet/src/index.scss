@@ -3,7 +3,7 @@ $feature-flags: (
   enable-css-custom-properties: true,
 );
 
-// @ carbon settings
+// Carbon settings
 @import '@carbon/themes/scss/themes';
 @import '@carbon/layout/scss/layout';
 
@@ -13,7 +13,7 @@ $feature-flags: (
 @import 'carbon-components/scss/components/text-input/text-input';
 @import 'carbon-components/scss/components/tabs/tabs';
 
-// Cloud-cognitive package
+// Carbon for IBM Products package
 @import '@carbon/ibm-cloud-cognitive/css/index.min.css';
 
 // Select a Carbon theme here

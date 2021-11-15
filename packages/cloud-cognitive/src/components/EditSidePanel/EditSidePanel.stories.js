@@ -86,7 +86,7 @@ const Template = (args) => {
   return (
     <>
       {renderUIShellHeader()}
-      <Grid id="cloud-and-cognitive-page-content">
+      <Grid id="ibm-products-page-content">
         <Row>
           <Column>
             <Button onClick={() => setOpen(!open)}>

@@ -17,7 +17,8 @@
     "carbon",
     "carbon design system",
     "carbon community",
-    "carbon for cloud & cognitive"
+    "carbon for cloud & cognitive",
+    "carbon for ibm products"
   ],
   "scripts": {
     "//upgrade-dependencies": "# don't upgrade carbon (done globally)",

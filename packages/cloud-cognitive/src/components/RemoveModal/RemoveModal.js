@@ -58,8 +58,8 @@ export let RemoveModal = forwardRef(
     const blockClass = `${pkg.prefix}--remove-modal`;
 
     // Clear the user input this way so that if the onRequestSubmit handler fails for some reason
-    // the value of the input will still remain, we only want to empty the input value
-    // until open is false.
+    // the value of the input will still remain: we only want to empty the input value
+    // when open actually changes to false.
     useEffect(() => {
       if (!open && previousState?.open) {
         setUserInput('');

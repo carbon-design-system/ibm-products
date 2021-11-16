@@ -13,6 +13,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2 # https://github.com/actions/checkout
         with:
+          ref: v1rc-b
           fetch-depth: 0 # https://github.com/actions/checkout/issues/217
           token: ${{ secrets.GH_TOKEN_LERNA }} # https://github.com/lerna/lerna/issues/1957
 

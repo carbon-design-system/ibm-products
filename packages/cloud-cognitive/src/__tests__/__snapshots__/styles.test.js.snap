@@ -5821,6 +5821,14 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   justify-content: flex-end;
 }
 
+@keyframes background-appear {
+  from {
+    background-color: var(--from-color);
+  }
+  to {
+    background-color: var(--to-color);
+  }
+}
 .c4p--page-header.c4p--page-header {
   /* Bleed class for the background */
   position: sticky;
@@ -5845,16 +5853,17 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--page-header.c4p--page-header--has-navigation-tags-only {
   --c4p--page-header--navigation-buffer-top: $spacing-04;
 }
-.c4p--page-header.c4p--page-header--show-background::before {
+.c4p--page-header::before {
+  --from-color: var(--cds-ui-background, #ffffff);
+  --to-color: var(--cds-ui-01, #f4f4f4);
   position: absolute;
   top: 0;
   left: 0;
   display: block;
   width: 100%;
   height: 100%;
-  animation: background-appear 1000ms calc(-1000ms * var(--exp--page-header--background-opacity)) linear paused forwards;
+  animation: background-appear 1000ms calc(-1000ms * var(--c4p--page-header--background-opacity)) linear paused forwards;
   content: \\"\\";
-  opacity: var(--c4p--page-header--background-opacity);
   z-index: -1;
   box-shadow: 0 1px 0 var(--cds-ui-03, #e0e0e0);
 }
@@ -5880,8 +5889,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   flex-wrap: nowrap;
 }
 .c4p--page-header .c4p--page-header__has-page-actions-without-action-bar {
-  min-width: 60%;
-  max-width: 60%;
+  min-width: calc(0.6 * (100% + 2 * var(--cds-spacing-05, 1rem)));
+  max-width: calc(0.6 * (100% + 2 * var(--cds-spacing-05, 1rem)));
 }
 .c4p--page-header .c4p--page-header__has-page-actions-without-action-bar .c4p--page-header__has-page-actions-without-action-bar {
   min-width: 100%;
@@ -5964,17 +5973,17 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     /* required for ellipsis in title, title not visible in breadcrumb with back arrow */
   }
 }
-.exp--page-header .exp--page-header__breadcrumb-row--has-action-bar.exp--page-header__breadcrumb-row .exp--page-header__breadcrumb-column {
+.c4p--page-header .c4p--page-header__breadcrumb-row--has-action-bar.c4p--page-header__breadcrumb-row .c4p--page-header__breadcrumb-column {
   max-width: 75%;
   flex: 0 1 75%;
 }
 @media (min-width: 42rem) {
-  .exp--page-header .exp--page-header__breadcrumb-row--has-action-bar.exp--page-header__breadcrumb-row .exp--page-header__breadcrumb-column {
+  .c4p--page-header .c4p--page-header__breadcrumb-row--has-action-bar.c4p--page-header__breadcrumb-row .c4p--page-header__breadcrumb-column {
     max-width: 60%;
     flex: 0 1 60%;
   }
 }
-.c4p--page-header .c4p--page-header__breadcrumb-row .c4p--page-header__breadcrumb-column .c4p--page-header__has-page-actions-without-action-bar .c4p--page-header__breadcrumb-row .c4p--page-header__breadcrumb-column {
+.c4p--page-header .c4p--page-header__has-page-actions-without-action-bar.c4p--page-header__breadcrumb-row .c4p--page-header__breadcrumb-column {
   max-width: 100%;
   flex: 0 1 100%;
 }
@@ -5982,16 +5991,18 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--page-header .c4p--page-header__action-bar-column--background {
   position: relative;
 }
-.c4p--page-header.c4p--page-header--show-background .c4p--page-header__breadcrumb-column--background::before, .c4p--page-header.c4p--page-header--show-background .c4p--page-header__action-bar-column--background::before {
+.c4p--page-header .c4p--page-header__breadcrumb-column--background::before,
+.c4p--page-header .c4p--page-header__action-bar-column--background::before {
+  --from-color: var(--cds-ui-background, #ffffff);
+  --to-color: var(--cds-ui-01, #f4f4f4);
   position: absolute;
   top: 0;
   left: 0;
   display: block;
   width: 100%;
   height: 100%;
-  animation: background-appear 1000ms calc(-1000ms * var(--exp--page-header--background-opacity)) linear paused forwards;
+  animation: background-appear 1000ms calc(-1000ms * var(--c4p--page-header--background-opacity)) linear paused forwards;
   content: \\"\\";
-  opacity: var(--c4p--page-header--background-opacity);
 }
 .c4p--page-header .c4p--page-header__action-bar-column--influenced-by-collapse-button {
   padding-right: var(--cds-spacing-08, 2.5rem);
@@ -6145,10 +6156,23 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 .c4p--page-header .c4p--page-header__title-row .c4p--page-header__page-actions {
+  position: relative;
   opacity: 1;
   transition: all 110ms cubic-bezier(0, 0, 0.38, 0.9);
   transition-property: opacity, visibility;
   visibility: visible;
+}
+.c4p--page-header .c4p--page-header__title-row .c4p--page-header__page-actions::before {
+  --from-color: var(--cds-ui-background, #ffffff);
+  --to-color: var(--cds-ui-01, #f4f4f4);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  animation: background-appear 1000ms calc(-1000ms * var(--c4p--page-header--background-opacity)) linear paused forwards;
+  content: \\"\\";
 }
 .c4p--page-header .c4p--page-header__title-row .c4p--page-header__page-actions--in-breadcrumb {
   opacity: 0;
@@ -6226,6 +6250,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   text-align: right;
   white-space: nowrap;
 }
+@media (min-width: 42rem) {
+  .c4p--page-header .c4p--page-header__navigation-tags {
+    padding-right: var(--cds-spacing-05, 1rem);
+  }
+}
 .c4p--page-header .c4p--page-header__navigation-tags--tags-only {
   justify-content: flex-start;
   padding-top: 0;
@@ -6247,14 +6276,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--page-header .c4p--page-header__collapse-expand-toggle--collapsed .bx--btn__icon {
   transform: scaleY(-1);
-}
-.c4p--page-header.c4p--page-header--show-background .c4p--page-header__navigation-tags {
-  padding-right: var(--cds-spacing-07, 2rem);
-}
-@media (min-width: 42rem) {
-  .c4p--page-header.c4p--page-header--show-background .c4p--page-header__navigation-tags {
-    padding-right: var(--cds-spacing-05, 1rem);
-  }
 }
 
 :root {
@@ -7594,111 +7615,111 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
-.c4p-user-profile-avatar--light {
+.c4p--user-profile-image--light {
   color: var(--cds-ui-01, #f4f4f4);
 }
 
-.c4p-user-profile-avatar--light.c4p-user-profile-avatar--light-cyan {
+.c4p--user-profile-image--light.c4p--user-profile-image--light-cyan {
   background-color: #0072c3;
 }
 
-.c4p-user-profile-avatar--light.c4p-user-profile-avatar--dark-cyan {
+.c4p--user-profile-image--light.c4p--user-profile-image--dark-cyan {
   background-color: #003a6d;
 }
 
-.c4p-user-profile-avatar--light.c4p-user-profile-avatar--light-gray {
+.c4p--user-profile-image--light.c4p--user-profile-image--light-gray {
   background-color: #6f6f6f;
 }
 
-.c4p-user-profile-avatar--light.c4p-user-profile-avatar--dark-gray {
+.c4p--user-profile-image--light.c4p--user-profile-image--dark-gray {
   background-color: #393939;
 }
 
-.c4p-user-profile-avatar--light.c4p-user-profile-avatar--light-green {
+.c4p--user-profile-image--light.c4p--user-profile-image--light-green {
   background-color: #198038;
 }
 
-.c4p-user-profile-avatar--light.c4p-user-profile-avatar--dark-green {
+.c4p--user-profile-image--light.c4p--user-profile-image--dark-green {
   background-color: #044317;
 }
 
-.c4p-user-profile-avatar--light.c4p-user-profile-avatar--light-magenta {
+.c4p--user-profile-image--light.c4p--user-profile-image--light-magenta {
   background-color: #d02670;
 }
 
-.c4p-user-profile-avatar--light.c4p-user-profile-avatar--dark-magenta {
+.c4p--user-profile-image--light.c4p--user-profile-image--dark-magenta {
   background-color: #740937;
 }
 
-.c4p-user-profile-avatar--light.c4p-user-profile-avatar--light-purple {
+.c4p--user-profile-image--light.c4p--user-profile-image--light-purple {
   background-color: #8a3ffc;
 }
 
-.c4p-user-profile-avatar--light.c4p-user-profile-avatar--dark-purple {
+.c4p--user-profile-image--light.c4p--user-profile-image--dark-purple {
   background-color: #491d8b;
 }
 
-.c4p-user-profile-avatar--light.c4p-user-profile-avatar--light-teal {
+.c4p--user-profile-image--light.c4p--user-profile-image--light-teal {
   background-color: #007d79;
 }
 
-.c4p-user-profile-avatar--light.c4p-user-profile-avatar--dark-teal {
+.c4p--user-profile-image--light.c4p--user-profile-image--dark-teal {
   background-color: #004144;
 }
 
-.c4p-user-profile-avatar--dark {
+.c4p--user-profile-image--dark {
   color: var(--cds-ui-01, #f4f4f4);
 }
 
-.c4p-user-profile-avatar--dark.c4p-user-profile-avatar--light-cyan {
+.c4p--user-profile-image--dark.c4p--user-profile-image--light-cyan {
   background-color: #1192e8;
 }
 
-.c4p-user-profile-avatar--dark.c4p-user-profile-avatar--dark-cyan {
+.c4p--user-profile-image--dark.c4p--user-profile-image--dark-cyan {
   background-color: #82cfff;
 }
 
-.c4p-user-profile-avatar--dark.c4p-user-profile-avatar--light-gray {
+.c4p--user-profile-image--dark.c4p--user-profile-image--light-gray {
   background-color: #8d8d8d;
 }
 
-.c4p-user-profile-avatar--dark.c4p-user-profile-avatar--dark-gray {
+.c4p--user-profile-image--dark.c4p--user-profile-image--dark-gray {
   background-color: #c6c6c6;
 }
 
-.c4p-user-profile-avatar--dark.c4p-user-profile-avatar--light-green {
+.c4p--user-profile-image--dark.c4p--user-profile-image--light-green {
   background-color: #24a148;
 }
 
-.c4p-user-profile-avatar--dark.c4p-user-profile-avatar--dark-green {
+.c4p--user-profile-image--dark.c4p--user-profile-image--dark-green {
   background-color: #6fdc8c;
 }
 
-.c4p-user-profile-avatar--dark.c4p-user-profile-avatar--light-magenta {
+.c4p--user-profile-image--dark.c4p--user-profile-image--light-magenta {
   background-color: #ee5396;
 }
 
-.c4p-user-profile-avatar--dark.c4p-user-profile-avatar--dark-magenta {
+.c4p--user-profile-image--dark.c4p--user-profile-image--dark-magenta {
   background-color: #ffafd2;
 }
 
-.c4p-user-profile-avatar--dark.c4p-user-profile-avatar--light-purple {
+.c4p--user-profile-image--dark.c4p--user-profile-image--light-purple {
   background-color: #a56eff;
 }
 
-.c4p-user-profile-avatar--dark.c4p-user-profile-avatar--dark-purple {
+.c4p--user-profile-image--dark.c4p--user-profile-image--dark-purple {
   background-color: #d4bbff;
 }
 
-.c4p-user-profile-avatar--dark.c4p-user-profile-avatar--light-teal {
+.c4p--user-profile-image--dark.c4p--user-profile-image--light-teal {
   background-color: #009d9a;
 }
 
-.c4p-user-profile-avatar--dark.c4p-user-profile-avatar--dark-teal {
+.c4p--user-profile-image--dark.c4p--user-profile-image--dark-teal {
   background-color: #3ddbd9;
 }
 
-.c4p-user-profile-avatar {
+.c4p--user-profile-image {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7707,41 +7728,41 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   text-transform: uppercase;
 }
 
-.bx--tooltip__trigger .c4p-user-profile-avatar svg {
+.bx--tooltip__trigger .c4p--user-profile-image svg {
   fill: var(--cds-ui-01, #f4f4f4);
 }
 
-.c4p-user-profile-avatar__photo {
+.c4p--user-profile-image__photo {
   width: 100%;
   border-radius: 100%;
 }
 
-.c4p-user-profile-avatar__photo--xlg {
+.c4p--user-profile-image__photo--xlg {
   width: var(--cds-spacing-10, 4rem);
   height: var(--cds-spacing-10, 4rem);
 }
 
-.c4p-user-profile-avatar__photo--lg {
+.c4p--user-profile-image__photo--lg {
   width: var(--cds-spacing-07, 2rem);
   height: var(--cds-spacing-07, 2rem);
 }
 
-.c4p-user-profile-avatar__photo--md {
+.c4p--user-profile-image__photo--md {
   width: var(--cds-spacing-06, 1.5rem);
   height: var(--cds-spacing-06, 1.5rem);
 }
 
-.c4p-user-profile-avatar__photo--sm {
+.c4p--user-profile-image__photo--sm {
   width: calc(var(--cds-spacing-05, 1rem) + var(--cds-spacing-02, 0.25rem));
   height: calc(var(--cds-spacing-05, 1rem) + var(--cds-spacing-02, 0.25rem));
 }
 
-.c4p-user-profile-avatar__photo--xs {
+.c4p--user-profile-image__photo--xs {
   width: var(--cds-spacing-05, 1rem);
   height: var(--cds-spacing-05, 1rem);
 }
 
-.c4p-user-profile-avatar--xlg {
+.c4p--user-profile-image--xlg {
   width: var(--cds-spacing-10, 4rem);
   height: var(--cds-spacing-10, 4rem);
   font-size: var(--cds-productive-heading-04-font-size, 1.75rem);
@@ -7750,7 +7771,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0);
 }
 
-.c4p-user-profile-avatar--lg {
+.c4p--user-profile-image--lg {
   width: var(--cds-spacing-07, 2rem);
   height: var(--cds-spacing-07, 2rem);
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
@@ -7759,7 +7780,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
 }
 
-.c4p-user-profile-avatar--md {
+.c4p--user-profile-image--md {
   width: var(--cds-spacing-06, 1.5rem);
   height: var(--cds-spacing-06, 1.5rem);
   font-size: var(--cds-label-01-font-size, 0.75rem);
@@ -7769,7 +7790,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: 600;
 }
 
-.c4p-user-profile-avatar--sm {
+.c4p--user-profile-image--sm {
   width: calc(var(--cds-spacing-05, 1rem) + var(--cds-spacing-02, 0.25rem));
   height: calc(var(--cds-spacing-05, 1rem) + var(--cds-spacing-02, 0.25rem));
   font-size: var(--cds-label-01-font-size, 0.75rem);
@@ -7779,7 +7800,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: 600;
 }
 
-.c4p-user-profile-avatar--xs {
+.c4p--user-profile-image--xs {
   width: var(--cds-spacing-05, 1rem);
   height: var(--cds-spacing-05, 1rem);
   font-size: var(--cds-label-01-font-size, 0.75rem);

@@ -35,18 +35,18 @@ jobs:
       #   run: yarn ci-check
 
       # Dry run - `yarn lerna version --ignore-changes 'config/**/*' 'packages/cdai/**/*' 'packages/core/**/*' 'packages/security/**/*' --no-git-tag-version --no-push`
-      - name: Publish
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run:
-          yarn lerna publish --create-release github --dist-tag next
-          --ignore-changes 'config/**/*' 'packages/cdai/**/*'
-          'packages/core/**/*' 'packages/security/**/*' --yes
+      # - name: Publish
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      #   run:
+      #     yarn lerna publish --create-release github --dist-tag next
+      #     --ignore-changes 'config/**/*' 'packages/cdai/**/*'
+      #     'packages/core/**/*' 'packages/security/**/*' --yes
 
       - name: Rename to ibm-cloud-cognitive for legacy publish
         run: |
-          git branch -D temp-for-legacy-publish
+          git branch -D temp-for-legacy-publish || true
           yarn json -I -f packages/cloud-cognitive/package.json -e 'this.name="@carbon/ibm-cloud-cognitive"'
           git add .
           git commit -m "chore: rename package for simultaneous publish"

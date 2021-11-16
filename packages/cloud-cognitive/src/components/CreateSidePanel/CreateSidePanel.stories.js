@@ -26,9 +26,8 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
-import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 
-import { CreateSidePanel, deprecatedProps } from './CreateSidePanel';
+import { CreateSidePanel } from './CreateSidePanel';
 import mdx from './CreateSidePanel.mdx';
 
 import styles from './_storybook-styles.scss';
@@ -38,7 +37,6 @@ const blockClass = `${pkg.prefix}--create-side-panel`;
 export default {
   title: getStoryTitle(CreateSidePanel.displayName),
   component: CreateSidePanel,
-  argTypes: getDeprecatedArgTypes(deprecatedProps),
   parameters: {
     styles,
     docs: {

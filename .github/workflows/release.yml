@@ -31,20 +31,21 @@ jobs:
       - name: Install
         run: yarn --offline
 
-      - name: Continuous integration check (includes build)
-        run: yarn ci-check
+      # - name: Continuous integration check (includes build)
+      #  run: yarn ci-check
 
       # Dry run - `yarn lerna version --no-git-tag-version --no-push --yes`
-      - name: Publish
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: yarn lerna publish --create-release github --yes
+      # - name: Publish
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      #   run: yarn lerna publish --create-release github --yes
 
       - name: Rename cloud-cognitive
-        run:
-          yarn json -I -f packages/cloud-cognitive/package.json -e
-          'this.name="@carbon/ibm-products"'
+        run: |
+          yarn json -I -f packages/cloud-cognitive/package.json -e 'this.name="@carbon/ibm-products"'
+          git add .
+          git commit -m "chore: rename package for simultaneous publish"
 
       - name: Publish with new name
         env:

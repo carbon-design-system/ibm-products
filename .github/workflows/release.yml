@@ -22,7 +22,7 @@ jobs:
           git config user.name $GITHUB_ACTOR
 
       - name: Setup Node.js
-        uses: actions/setup-node@v1 # https://github.com/actions/setup-node
+        uses: actions/setup-node@v2 # https://github.com/actions/setup-node
         with:
           node-version: lts/fermium
           registry-url: https://registry.npmjs.org

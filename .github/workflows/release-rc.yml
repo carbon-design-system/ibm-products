@@ -1,4 +1,5 @@
 name: Release RC
+# cspell:words cdai
 
 on:
   workflow_dispatch:
@@ -11,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2 # https://github.com/actions/checkout
         with:
-          ref: v1rc-a
+          ref: v1rc-c
           fetch-depth: 0 # https://github.com/actions/checkout/issues/217
           token: ${{ secrets.GH_TOKEN_LERNA }} # https://github.com/lerna/lerna/issues/1957
 
@@ -33,11 +34,24 @@ jobs:
       - name: Continuous integration check (includes build)
         run: yarn ci-check
 
-      # Dry run - `yarn lerna version --no-git-tag-version --no-push --yes`
+      # Dry run - `yarn lerna version --ignore-changes 'config/**/*' 'packages/cdai/**/*' 'packages/core/**/*' 'packages/security/**/*' --no-git-tag-version --no-push`
       - name: Publish
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: # cspell:disable-next-line
-          yarn lerna publish premajor --preid alpha --create-release github
-          --ignore-changes 'config/**/*' --yes
+        run: yarn lerna publish --create-release github --dist-tag next
+          --ignore-changes 'config/**/*' 'packages/cdai/**/*'
+          'packages/core/**/*' 'packages/security/**/*' --yes
+
+      - name: Rename to ibm-cloud-cognitive for legacy publish
+        run: |
+          git branch -D temp-for-legacy-publish
+          yarn json -I -f packages/cloud-cognitive/package.json -e 'this.name="@carbon/ibm-cloud-cognitive"'
+          git add .
+          git commit -m "chore: rename package for simultaneous publish"
+
+      - name: Publish with old name
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: yarn lerna publish from-package --create-release github --yes

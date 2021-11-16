@@ -13,7 +13,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2 # https://github.com/actions/checkout
         with:
-          ref: v1rc-b
           fetch-depth: 0 # https://github.com/actions/checkout/issues/217
           token: ${{ secrets.GH_TOKEN_LERNA }} # https://github.com/lerna/lerna/issues/1957
 
@@ -32,15 +31,15 @@ jobs:
       - name: Install
         run: yarn --offline
 
-      # - name: Continuous integration check (includes build)
-      #  run: yarn ci-check
+      - name: Continuous integration check (includes build)
+        run: yarn ci-check
 
       # Dry run - `yarn lerna version --no-git-tag-version --no-push --yes`
-      # - name: Publish
-      #   env:
-      #     GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      #   run: yarn lerna publish --create-release github --yes
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: yarn lerna publish --create-release github --yes
 
       - name: Rename cloud-cognitive
         run: |

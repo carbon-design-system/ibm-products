@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+import React from 'react';
+import PropTypes from 'prop-types';
 import { sanitize } from '@storybook/csf';
 import pkg from '../package-settings';
 import { getPathForComponent } from '../../../../../core/story-structure';
@@ -54,4 +56,25 @@ export const prepareStory = (template, options) => {
   result.parameters.ccsSettings ??= {};
   result.parameters.ccsSettings.sequence = sequence++;
   return result;
+};
+
+/**
+ * A helper component that returns a codesandbox link to the components codesandbox. The URL is based on the component
+ * name and the standard code sandbox URL for package examples.
+ */
+export const CodesandboxLink = ({ exampleDirectory }) => (
+  <a
+    href={`https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/cloud-cognitive/${exampleDirectory}`}
+  >
+    <img
+      alt="Edit on CodeSandbox"
+      src="https://codesandbox.io/static/img/play-codesandbox.svg"
+    />
+  </a>
+);
+CodesandboxLink.propTypes = {
+  /**
+   * directory withing examples codesandbox will be found
+   */
+  exampleDirectory: PropTypes.string,
 };

@@ -7615,111 +7615,111 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
-.exp-user-profile-avatar--light {
+.exp--user-profile-image--light {
   color: var(--cds-ui-01, #f4f4f4);
 }
 
-.exp-user-profile-avatar--light.exp-user-profile-avatar--light-cyan {
+.exp--user-profile-image--light.exp--user-profile-image--light-cyan {
   background-color: #0072c3;
 }
 
-.exp-user-profile-avatar--light.exp-user-profile-avatar--dark-cyan {
+.exp--user-profile-image--light.exp--user-profile-image--dark-cyan {
   background-color: #003a6d;
 }
 
-.exp-user-profile-avatar--light.exp-user-profile-avatar--light-gray {
+.exp--user-profile-image--light.exp--user-profile-image--light-gray {
   background-color: #6f6f6f;
 }
 
-.exp-user-profile-avatar--light.exp-user-profile-avatar--dark-gray {
+.exp--user-profile-image--light.exp--user-profile-image--dark-gray {
   background-color: #393939;
 }
 
-.exp-user-profile-avatar--light.exp-user-profile-avatar--light-green {
+.exp--user-profile-image--light.exp--user-profile-image--light-green {
   background-color: #198038;
 }
 
-.exp-user-profile-avatar--light.exp-user-profile-avatar--dark-green {
+.exp--user-profile-image--light.exp--user-profile-image--dark-green {
   background-color: #044317;
 }
 
-.exp-user-profile-avatar--light.exp-user-profile-avatar--light-magenta {
+.exp--user-profile-image--light.exp--user-profile-image--light-magenta {
   background-color: #d02670;
 }
 
-.exp-user-profile-avatar--light.exp-user-profile-avatar--dark-magenta {
+.exp--user-profile-image--light.exp--user-profile-image--dark-magenta {
   background-color: #740937;
 }
 
-.exp-user-profile-avatar--light.exp-user-profile-avatar--light-purple {
+.exp--user-profile-image--light.exp--user-profile-image--light-purple {
   background-color: #8a3ffc;
 }
 
-.exp-user-profile-avatar--light.exp-user-profile-avatar--dark-purple {
+.exp--user-profile-image--light.exp--user-profile-image--dark-purple {
   background-color: #491d8b;
 }
 
-.exp-user-profile-avatar--light.exp-user-profile-avatar--light-teal {
+.exp--user-profile-image--light.exp--user-profile-image--light-teal {
   background-color: #007d79;
 }
 
-.exp-user-profile-avatar--light.exp-user-profile-avatar--dark-teal {
+.exp--user-profile-image--light.exp--user-profile-image--dark-teal {
   background-color: #004144;
 }
 
-.exp-user-profile-avatar--dark {
+.exp--user-profile-image--dark {
   color: var(--cds-ui-01, #f4f4f4);
 }
 
-.exp-user-profile-avatar--dark.exp-user-profile-avatar--light-cyan {
+.exp--user-profile-image--dark.exp--user-profile-image--light-cyan {
   background-color: #1192e8;
 }
 
-.exp-user-profile-avatar--dark.exp-user-profile-avatar--dark-cyan {
+.exp--user-profile-image--dark.exp--user-profile-image--dark-cyan {
   background-color: #82cfff;
 }
 
-.exp-user-profile-avatar--dark.exp-user-profile-avatar--light-gray {
+.exp--user-profile-image--dark.exp--user-profile-image--light-gray {
   background-color: #8d8d8d;
 }
 
-.exp-user-profile-avatar--dark.exp-user-profile-avatar--dark-gray {
+.exp--user-profile-image--dark.exp--user-profile-image--dark-gray {
   background-color: #c6c6c6;
 }
 
-.exp-user-profile-avatar--dark.exp-user-profile-avatar--light-green {
+.exp--user-profile-image--dark.exp--user-profile-image--light-green {
   background-color: #24a148;
 }
 
-.exp-user-profile-avatar--dark.exp-user-profile-avatar--dark-green {
+.exp--user-profile-image--dark.exp--user-profile-image--dark-green {
   background-color: #6fdc8c;
 }
 
-.exp-user-profile-avatar--dark.exp-user-profile-avatar--light-magenta {
+.exp--user-profile-image--dark.exp--user-profile-image--light-magenta {
   background-color: #ee5396;
 }
 
-.exp-user-profile-avatar--dark.exp-user-profile-avatar--dark-magenta {
+.exp--user-profile-image--dark.exp--user-profile-image--dark-magenta {
   background-color: #ffafd2;
 }
 
-.exp-user-profile-avatar--dark.exp-user-profile-avatar--light-purple {
+.exp--user-profile-image--dark.exp--user-profile-image--light-purple {
   background-color: #a56eff;
 }
 
-.exp-user-profile-avatar--dark.exp-user-profile-avatar--dark-purple {
+.exp--user-profile-image--dark.exp--user-profile-image--dark-purple {
   background-color: #d4bbff;
 }
 
-.exp-user-profile-avatar--dark.exp-user-profile-avatar--light-teal {
+.exp--user-profile-image--dark.exp--user-profile-image--light-teal {
   background-color: #009d9a;
 }
 
-.exp-user-profile-avatar--dark.exp-user-profile-avatar--dark-teal {
+.exp--user-profile-image--dark.exp--user-profile-image--dark-teal {
   background-color: #3ddbd9;
 }
 
-.exp-user-profile-avatar {
+.exp--user-profile-image {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7728,41 +7728,41 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   text-transform: uppercase;
 }
 
-.bx--tooltip__trigger .exp-user-profile-avatar svg {
+.bx--tooltip__trigger .exp--user-profile-image svg {
   fill: var(--cds-ui-01, #f4f4f4);
 }
 
-.exp-user-profile-avatar__photo {
+.exp--user-profile-image__photo {
   width: 100%;
   border-radius: 100%;
 }
 
-.exp-user-profile-avatar__photo--xlg {
+.exp--user-profile-image__photo--xlg {
   width: var(--cds-spacing-10, 4rem);
   height: var(--cds-spacing-10, 4rem);
 }
 
-.exp-user-profile-avatar__photo--lg {
+.exp--user-profile-image__photo--lg {
   width: var(--cds-spacing-07, 2rem);
   height: var(--cds-spacing-07, 2rem);
 }
 
-.exp-user-profile-avatar__photo--md {
+.exp--user-profile-image__photo--md {
   width: var(--cds-spacing-06, 1.5rem);
   height: var(--cds-spacing-06, 1.5rem);
 }
 
-.exp-user-profile-avatar__photo--sm {
+.exp--user-profile-image__photo--sm {
   width: calc(var(--cds-spacing-05, 1rem) + var(--cds-spacing-02, 0.25rem));
   height: calc(var(--cds-spacing-05, 1rem) + var(--cds-spacing-02, 0.25rem));
 }
 
-.exp-user-profile-avatar__photo--xs {
+.exp--user-profile-image__photo--xs {
   width: var(--cds-spacing-05, 1rem);
   height: var(--cds-spacing-05, 1rem);
 }
 
-.exp-user-profile-avatar--xlg {
+.exp--user-profile-image--xlg {
   width: var(--cds-spacing-10, 4rem);
   height: var(--cds-spacing-10, 4rem);
   font-size: var(--cds-productive-heading-04-font-size, 1.75rem);
@@ -7771,7 +7771,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0);
 }
 
-.exp-user-profile-avatar--lg {
+.exp--user-profile-image--lg {
   width: var(--cds-spacing-07, 2rem);
   height: var(--cds-spacing-07, 2rem);
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
@@ -7780,7 +7780,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
 }
 
-.exp-user-profile-avatar--md {
+.exp--user-profile-image--md {
   width: var(--cds-spacing-06, 1.5rem);
   height: var(--cds-spacing-06, 1.5rem);
   font-size: var(--cds-label-01-font-size, 0.75rem);
@@ -7790,7 +7790,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: 600;
 }
 
-.exp-user-profile-avatar--sm {
+.exp--user-profile-image--sm {
   width: calc(var(--cds-spacing-05, 1rem) + var(--cds-spacing-02, 0.25rem));
   height: calc(var(--cds-spacing-05, 1rem) + var(--cds-spacing-02, 0.25rem));
   font-size: var(--cds-label-01-font-size, 0.75rem);
@@ -7800,7 +7800,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: 600;
 }
 
-.exp-user-profile-avatar--xs {
+.exp--user-profile-image--xs {
   width: var(--cds-spacing-05, 1rem);
   height: var(--cds-spacing-05, 1rem);
   font-size: var(--cds-label-01-font-size, 0.75rem);

@@ -5964,12 +5964,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     /* required for ellipsis in title, title not visible in breadcrumb with back arrow */
   }
 }
-.c4p--page-header .c4p--page-header__breadcrumb-row .c4p--page-header__breadcrumb-column {
-  max-width: 25%;
-  flex: 0 1 25%;
+.exp--page-header .exp--page-header__breadcrumb-row--has-action-bar.exp--page-header__breadcrumb-row .exp--page-header__breadcrumb-column {
+  max-width: 75%;
+  flex: 0 1 75%;
 }
 @media (min-width: 42rem) {
-  .c4p--page-header .c4p--page-header__breadcrumb-row .c4p--page-header__breadcrumb-column {
+  .exp--page-header .exp--page-header__breadcrumb-row--has-action-bar.exp--page-header__breadcrumb-row .exp--page-header__breadcrumb-column {
     max-width: 60%;
     flex: 0 1 60%;
   }

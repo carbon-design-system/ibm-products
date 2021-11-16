@@ -31,15 +31,16 @@ jobs:
       - name: Install
         run: yarn --offline
 
-      - name: Continuous integration check (includes build)
-        run: yarn ci-check
+      # - name: Continuous integration check (includes build)
+      #   run: yarn ci-check
 
       # Dry run - `yarn lerna version --ignore-changes 'config/**/*' 'packages/cdai/**/*' 'packages/core/**/*' 'packages/security/**/*' --no-git-tag-version --no-push`
       - name: Publish
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: yarn lerna publish --create-release github --dist-tag next
+        run:
+          yarn lerna publish --create-release github --dist-tag next
           --ignore-changes 'config/**/*' 'packages/cdai/**/*'
           'packages/core/**/*' 'packages/security/**/*' --yes
 

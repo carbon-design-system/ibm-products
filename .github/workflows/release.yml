@@ -41,13 +41,14 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: yarn lerna publish --create-release github --yes
 
-      - name: Rename cloud-cognitive
+      - name: Rename to ibm-cloud-cognitive for legacy publish
         run: |
-          yarn json -I -f packages/cloud-cognitive/package.json -e 'this.name="@carbon/ibm-products"'
+          git branch -D temp-for-legacy-publish
+          yarn json -I -f packages/cloud-cognitive/package.json -e 'this.name="@carbon/ibm-cloud-cognitive"'
           git add .
           git commit -m "chore: rename package for simultaneous publish"
 
-      - name: Publish with new name
+      - name: Publish with old name
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -49,7 +49,7 @@ describe(componentName, () => {
     const { container } = render(<HTTPError404 {...defaultProps} />);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
-  }, 80000);
+  });
 
   it('Renders the component `HTTPErrors` if flag is enabled', () => {
     const { container } = render(<HTTPError404 {...defaultProps} />);

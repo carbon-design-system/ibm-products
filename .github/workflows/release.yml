@@ -22,7 +22,7 @@ jobs:
           git config user.name $GITHUB_ACTOR
 
       - name: Setup Node.js
-        uses: actions/setup-node@v1 # https://github.com/actions/setup-node
+        uses: actions/setup-node@v2 # https://github.com/actions/setup-node
         with:
           node-version: lts/fermium
           registry-url: https://registry.npmjs.org
@@ -42,9 +42,10 @@ jobs:
         run: yarn lerna publish --create-release github --yes
 
       - name: Rename cloud-cognitive
-        run:
-          yarn json -I -f packages/cloud-cognitive/package.json -e
-          'this.name="@carbon/ibm-products"'
+        run: |
+          yarn json -I -f packages/cloud-cognitive/package.json -e 'this.name="@carbon/ibm-products"'
+          git add .
+          git commit -m "chore: rename package for simultaneous publish"
 
       - name: Publish with new name
         env:

@@ -465,6 +465,12 @@ $right-section-alt-width: 100% - $left-section-alt-width;
       @include appearingBackground();
     }
 
+    .#{$block-class}__page-actions-content {
+      position: relative; // ensure appears over ::before
+      width: 100%;
+      height: 100%;
+    }
+
     .#{$block-class}__title-row .#{$block-class}__page-actions--in-breadcrumb {
       opacity: 0;
       visibility: hidden;

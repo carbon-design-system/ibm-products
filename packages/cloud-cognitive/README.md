@@ -1,12 +1,12 @@
-# @carbon/ibm-cloud-cognitive
+# @carbon/ibm-products
 
 > Carbon for IBM Products is an open-source implementation of the closed source
 > [Carbon for Cloud & Cognitive pattern asset library (PAL)](https://pages.github.ibm.com/cdai-design/pal/).
 > These PAL designs build on the foundation of IBM's open source Carbon Design
 > System and React implementation to offer components and patterns beyond the
 > typical component library. Carbon for IBM Products was previously known as
-> Carbon for IBM Cloud and Cognitive, and this name can still be encountered in
-> various places and historical logs.
+> Carbon for IBM Cloud and Cognitive (@carbon/ibm-cloud-cognitive), and this
+> name can still be encountered in various places and historical logs.
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors-)
 [![Licensed under the Apache License, Version 2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/LICENSE)
@@ -25,27 +25,26 @@ a look at [our Storybook](https://ibm-cloud-cognitive.netlify.app).
 ## 📦 Installing Carbon for IBM Products
 
 To use Carbon for IBM Products components, all you need to do is install the
-`@carbon/ibm-cloud-cognitive` package.
+`@carbon/ibm-products` package.
 
 ```shell
-$ yarn add @carbon/ibm-cloud-cognitive
+$ yarn add @carbon/ibm-products
 
 # or
 
-$ npm install @carbon/ibm-cloud-cognitive
+$ npm install @carbon/ibm-products
 ```
 
 Then you can import the component styles in your `index.js`.
 
 ```js
-import '@carbon/ibm-cloud-cognitive/css/index.min.css';
+import '@carbon/ibm-products/css/index.min.css';
 ```
 
 ### Carbon Components (Peer dependencies)
 
-@carbon/ibm-cloud-cognitive is built on top of Carbon components and has a
-number of dependencies which need to be installed. Follow the package
-instructions for:
+@carbon/ibm-products is built on top of Carbon components and has a number of
+dependencies which need to be installed. Follow the package instructions for:
 
 -. Install carbon-components-react as per that packages instructions
 <https://www.npmjs.com/package/carbon-components-react> -. Install
@@ -76,7 +75,7 @@ You can find example projects using the components in the
 To start using the components
 
 ```jsx
-import { AboutModal } from '@carbon/ibm-cloud-cognitive';
+import { AboutModal } from '@carbon/ibm-products';
 
 const App = () => {
   return <AboutModal />;
@@ -92,7 +91,7 @@ to be canary and require the consumer to enable via a feature flag in a
 For example, create a `config.js` in your `src` directory:
 
 ```js
-import { pkg } from '@carbon/ibm-cloud-cognitive';
+import { pkg } from '@carbon/ibm-products';
 
 // Enable 'canary' (not yet reviewed/released) components
 // that we want to make use of

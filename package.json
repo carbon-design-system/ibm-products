@@ -29,7 +29,7 @@
     "clean:packages": "yarn run-all --no-sort clean",
     "copy-common-files": "sh ./scripts/copy-common-files.sh",
     "format": "run-s 'lint:es --fix' 'format:prettier --write'",
-    "format:prettier": "yarn format:prettier:files '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd,coverage}/**' '!README.md'",
+    "format:prettier": "yarn format:prettier:files '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd,coverage}/**'",
     "format:prettier:files": "prettier",
     "generate": "lerna run generate --loglevel success --scope \"@carbon/ibm-products\" --",
     "lint": "run-p lint:* spellcheck",

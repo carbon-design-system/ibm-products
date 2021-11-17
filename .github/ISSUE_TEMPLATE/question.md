@@ -1,6 +1,8 @@
 ---
 name: Question ❓
-about: Usage question or discussion about @carbon/ibm-cloud-cognitive components
+about:
+  Usage question or discussion about @carbon/ibm-products (or
+  @carbon/ibm-cloud-cognitive) components
 title: ''
 labels: 'type: question ❓'
 assignees: ''

@@ -59,8 +59,8 @@ export const prepareStory = (template, options) => {
 };
 
 /**
- * A helper component that returns a codesandbox link to the components codesandbox. The URL is based on the component
- * name and the standard code sandbox URL for package examples.
+ * A helper component that returns a codesandbox link to an example codesandbox for the component.
+ * The link URL is based on the example directory name and the standard codesandbox URL for package examples.
  */
 export const CodesandboxLink = ({ exampleDirectory }) => (
   <a

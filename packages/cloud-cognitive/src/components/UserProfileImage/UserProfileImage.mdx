@@ -1,5 +1,8 @@
 import { ArgsTable, Canvas, Story } from '@storybook/addon-docs';
-import { getStoryId } from '../../global/js/utils/story-helper';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
 import { UserProfileImage } from '.';
 
 ## User Profile Avatar
@@ -41,6 +44,6 @@ down to the first and last initials of the display name. 'Thomas Watson' and
 
 ## Code sample
 
-[<img alt="Edit on CodeSandbox" src="https://codesandbox.io/static/img/play-codesandbox.svg" />](https://codesandbox.io/s/userprofileimage-example-rwzi8)
+<CodesandboxLink exampleDirectory="UserProfileImage" />
 
 <ArgsTable />

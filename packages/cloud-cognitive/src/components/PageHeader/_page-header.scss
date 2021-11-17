@@ -495,7 +495,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     }
 
     .#{$block-class}__subtitle {
-      @include carbon--type-style('body-long-02');
+      @include carbon--type-style('body-long-01');
     }
 
     .#{$block-class}__available-row {

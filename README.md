@@ -35,11 +35,11 @@ other users.
 This project consists of a number of component library packages published on
 npm:
 
-| Package name                                                | Description                                                                                                       |
-| ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| [`@carbon/ibm-cloud-cognitive`](./packages/cloud-cognitive) | A curated set of components and patterns, built on top of Carbon and designed by the Carbon for IBM Products team |
-| [`@carbon/ibm-cloud-cognitive-cdai`](./packages/cdai)       | Legacy and non-curated design implementations used in application integration                                     |
-| [`@carbon/ibm-security`](./packages/security)               | Legacy and non-curated design implementations used in security                                                    |
+| Package name                                          | Description                                                                                                       |
+| ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| [`@carbon/ibm-products`](./packages/cloud-cognitive)  | A curated set of components and patterns, built on top of Carbon and designed by the Carbon for IBM Products team |
+| [`@carbon/ibm-cloud-cognitive-cdai`](./packages/cdai) | Legacy and non-curated design implementations used in application integration                                     |
+| [`@carbon/ibm-security`](./packages/security)         | Legacy and non-curated design implementations used in security                                                    |
 
 Also the following additional utility packages are published on npm:
 

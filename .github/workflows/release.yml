@@ -39,7 +39,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: yarn lerna publish patch --create-release github --yes
+        run: yarn lerna publish from-package --create-release github --yes
 
       - name: Rename to ibm-cloud-cognitive for legacy publish
         run: |

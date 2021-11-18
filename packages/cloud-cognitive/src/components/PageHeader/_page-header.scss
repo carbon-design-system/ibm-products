@@ -19,7 +19,7 @@
 @import 'carbon-components/scss/components/skeleton/skeleton-text';
 @import 'carbon-components/scss/components/tag/tag';
 
-// PageHeader uses the following Cloud & Cognitive components:
+// PageHeader uses the following IBM Products components:
 // ActionBar, BreadcrumbWithOverflow, TagSet, ButtonSetWithOverflow
 @import '../ActionBar/action-bar';
 @import '../BreadcrumbWithOverflow/breadcrumb-with-overflow';
@@ -237,8 +237,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
       }
     }
 
-    .#{$block-class}__breadcrumb-row--has-action-bar
-      .#{$block-class}__breadcrumb-row
+    .#{$block-class}__breadcrumb-row--has-action-bar.#{$block-class}__breadcrumb-row
       .#{$block-class}__breadcrumb-column {
       // back button displayed only
       max-width: $left-section-alt-width;
@@ -466,6 +465,12 @@ $right-section-alt-width: 100% - $left-section-alt-width;
       @include appearingBackground();
     }
 
+    .#{$block-class}__page-actions-content {
+      position: relative; // ensure appears over ::before
+      width: 100%;
+      height: 100%;
+    }
+
     .#{$block-class}__title-row .#{$block-class}__page-actions--in-breadcrumb {
       opacity: 0;
       visibility: hidden;
@@ -490,7 +495,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     }
 
     .#{$block-class}__subtitle {
-      @include carbon--type-style('body-long-02');
+      @include carbon--type-style('body-long-01');
     }
 
     .#{$block-class}__available-row {

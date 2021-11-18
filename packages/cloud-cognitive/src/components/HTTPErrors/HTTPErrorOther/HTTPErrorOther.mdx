@@ -1,4 +1,9 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import { HTTPErrorOther } from '.';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../../global/js/utils/story-helper';
 
 # HTTPErrorOther
 
@@ -15,9 +20,15 @@ HTTP errors are used in an attempt to access something that isn’t available or
 the user doesn’t have permission for. This HTTPError component is generic so you
 can use it when you receive an error code that isn't provided.
 
+<!--
+<Canvas>
+  <Story id={getStoryId(HTTPErrorOther.displayName, 'with-all-props-set')} />
+</Canvas>
+-->
+
 ## Code sample
 
-[<img alt="Edit on CodeSandbox" src="https://codesandbox.io/static/img/play-codesandbox.svg" />](https://codesandbox.io/s/httperror-403-sv5ud)
+<CodesandboxLink exampleDirectory="HTTPErrors" />
 
 ## Component API
 

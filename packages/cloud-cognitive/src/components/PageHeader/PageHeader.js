@@ -93,7 +93,7 @@ export let PageHeader = React.forwardRef(
     };
 
     // state based on props only
-    const hasActionBar = actionBarItems && actionBarItems.length;
+    const hasActionBar = actionBarItemArray && actionBarItemArray.length > 0;
     const hasBreadcrumbRow = breadcrumbs || actionBarItems;
 
     // NOTE: The buffer is used to add space between the bottom of the header and the last content
@@ -705,19 +705,21 @@ export let PageHeader = React.forwardRef(
               [`${blockClass}__page-actions--in-breadcrumb`]: inBreadcrumbRow,
             })}
           >
-            {pageActions.content ?? (
-              <ButtonSetWithOverflow
-                classname={`${blockClass}__button-set-with-overflow`}
-                menuOptionsClass={cx(
-                  pageActionsMenuOptionsClass,
-                  `${blockClass}__button-set-menu-options`
-                )}
-                onWidthChange={handleWidthChange}
-                buttons={pageActions}
-                buttonSetOverflowLabel={pageActionsOverflowLabel}
-                rightAlign
-              />
-            )}
+            <div className={cx(`${blockClass}__page-actions-content`)}>
+              {pageActions.content ?? (
+                <ButtonSetWithOverflow
+                  classname={`${blockClass}__button-set-with-overflow`}
+                  menuOptionsClass={cx(
+                    pageActionsMenuOptionsClass,
+                    `${blockClass}__button-set-menu-options`
+                  )}
+                  onWidthChange={handleWidthChange}
+                  buttons={pageActions}
+                  buttonSetOverflowLabel={pageActionsOverflowLabel}
+                  rightAlign
+                />
+              )}
+            </div>
           </Tag>
         );
       }

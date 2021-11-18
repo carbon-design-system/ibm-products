@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.99.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.98.0...@carbon/ibm-cloud-cognitive@0.99.0) (2021-11-16)
+
+
+### Bug Fixes
+
+* add side effect for props-helper to package.json ([#1434](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1434)) ([f9f6a65](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f9f6a656f4e1e563460a8b4159b9c13c26101a06))
+* page header background over lays ([#1418](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1418)) ([40a3531](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/40a3531536fbe1dcda4e551bdad32f77fad440ff))
+* **PageHeader:** action bar location ([#1428](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1428)) ([928cec6](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/928cec664f62d8276d043e7f6bb7d6fa5e329d45))
+* **RemoveModal:** [#1426](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1426) reset remove modal text input value ([#1433](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1433)) ([e2df543](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e2df543280cb9aa23942eebe40244f4c27197080))
+* replace "cloud & cognitive" with "Carbon for IBM Products" in docs ([#1437](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1437)) ([0a58354](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/0a58354ccbdd723173b2e6758907713938a7f163))
+* **WebTerminal:** color and add additional test coverage ([#1408](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1408)) ([163220b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/163220b5924068def341ada10a2f9c4af191da08))
+
+
+### Features
+
+* add options-tile component ([#1411](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1411)) ([b7dbeb7](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b7dbeb71c6343d0839d5c3ab74a5c83e1fd6d9b6))
+* **cloud-cognitive:** use `right` `tooltipPosition` for `vertical` variant by default ([#1403](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1403)) ([6a18fa6](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6a18fa67dbd60087df6670d0d295a4093e9514ca))
+* update Carbon versions and package dependencies to latest ([#1425](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1425)) ([4fd5883](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/4fd5883961e0f3fc6be1c87bbe084b2cf6dc5db0)), closes [#10000](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/10000)
+
+
+
+
+
 # [0.98.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive@0.97.2...@carbon/ibm-cloud-cognitive@0.98.0) (2021-11-09)
 
 

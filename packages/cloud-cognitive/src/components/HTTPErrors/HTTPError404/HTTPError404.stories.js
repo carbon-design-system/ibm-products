@@ -45,7 +45,7 @@ export const withAllPropsSet = prepareStory(Template, {
         href: 'https://www.carbondesignsystem.com',
       },
       {
-        text: 'IBM Cloud and Cognitive component library',
+        text: 'Carbon for IBM Products component library',
         href: 'https://github.com/carbon-design-system/ibm-cloud-cognitive',
       },
     ],

@@ -22,18 +22,16 @@ jobs:
           git config user.name $GITHUB_ACTOR
 
       - name: Setup Node.js
-        uses: actions/setup-node@v1 # https://github.com/actions/setup-node
+        uses: actions/setup-node@v2 # https://github.com/actions/setup-node
         with:
-          node-version: 12
+          node-version: lts/fermium
           registry-url: https://registry.npmjs.org
+          cache: yarn
 
       - name: Install
         run: yarn --offline
 
-      - name: Build
-        run: yarn build
-
-      - name: Continuous integration check
+      - name: Continuous integration check (includes build)
         run: yarn ci-check
 
       # Dry run - `yarn lerna version --no-git-tag-version --no-push --yes`
@@ -42,3 +40,16 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: yarn lerna publish --create-release github --yes
+
+      - name: Rename to ibm-cloud-cognitive for legacy publish
+        run: |
+          git branch -D temp-for-legacy-publish
+          yarn json -I -f packages/cloud-cognitive/package.json -e 'this.name="@carbon/ibm-cloud-cognitive"'
+          git add .
+          git commit -m "chore: rename package for simultaneous publish"
+
+      - name: Publish with old name
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: yarn lerna publish from-package --create-release github --yes

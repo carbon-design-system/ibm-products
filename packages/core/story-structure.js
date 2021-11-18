@@ -14,7 +14,7 @@
 // paths but ignored during searching.
 const s = [
   {
-    n: 'Cloud & Cognitive',
+    n: 'Carbon for IBM Products',
     s: [
       {
         n: 'Components',

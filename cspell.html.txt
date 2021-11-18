@@ -2,6 +2,7 @@ classname
 contenteditable
 describedby
 divs
+easings
 evenodd
 labelledby
 listitem

@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.29.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.28.0...@carbon/ibm-cloud-cognitive-core@0.29.0) (2021-11-16)
+
+
+### Bug Fixes
+
+* replace "cloud & cognitive" with "Carbon for IBM Products" in docs ([#1437](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1437)) ([0a58354](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/0a58354ccbdd723173b2e6758907713938a7f163))
+
+
+### Features
+
+* add options-tile component ([#1411](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1411)) ([b7dbeb7](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b7dbeb71c6343d0839d5c3ab74a5c83e1fd6d9b6))
+* update Carbon versions and package dependencies to latest ([#1425](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1425)) ([4fd5883](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/4fd5883961e0f3fc6be1c87bbe084b2cf6dc5db0)), closes [#10000](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/10000)
+
+
+
+
+
 # [0.28.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.27.0...@carbon/ibm-cloud-cognitive-core@0.28.0) (2021-11-09)
 
 

@@ -19,6 +19,7 @@ const DEFAULT_KEYWORDS = [
   'carbon design system',
   'carbon community',
   'carbon for cloud & cognitive',
+  'carbon for ibm products',
 ];
 
 // We're going to use this in our `sortFields` method. The idea is that we want

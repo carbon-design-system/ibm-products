@@ -684,7 +684,7 @@ const TemplateDemo = ({ children, storyOptionWholePageScroll, ...props }) => {
             isActive={isSideNavExpanded}
           />
           <HeaderName href="#" prefix="IBM">
-            Cloud Cognitive application
+            Products application
           </HeaderName>
           <SideNav
             aria-label="Side navigation"

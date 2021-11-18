@@ -1,1 +1,1 @@
-# IBM Cloud Cognitive Gallery
+# Carbon for IBM Products gallery of examples

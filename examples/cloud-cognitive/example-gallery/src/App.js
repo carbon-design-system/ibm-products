@@ -22,11 +22,11 @@ const App = () => {
     <div className="app carbon-theme--g90">
       <div className="app__container">
         <h1 className="app__title">
-          IBM Cloud Cognitive - Codesandbox Gallery
+          Carbon for IBM Products - gallery of examples
         </h1>
         <Search
           className="app__filter"
-          labelText="Find an IBM Cloud Cognitive codesandbox"
+          labelText="Find a Carbon for IBM Products example"
           onChange={handleSearch}
           placeholder="Filter sandboxes"
         />

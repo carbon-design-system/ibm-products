@@ -73,21 +73,21 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
-.exp--about-modal .bx--modal-container {
+.c4p--about-modal .bx--modal-container {
   grid-template-rows: auto auto 1fr auto;
 }
 
-.exp--about-modal .exp--about-modal__logo {
+.c4p--about-modal .c4p--about-modal__logo {
   margin: var(--cds-spacing-05, 1rem);
 }
 
-.exp--about-modal .exp--about-modal__header {
+.c4p--about-modal .c4p--about-modal__header {
   padding: 0 20% var(--cds-spacing-03, 0.5rem) var(--cds-spacing-05, 1rem);
   margin-bottom: 0;
   grid-row: auto;
 }
 
-.exp--about-modal .exp--about-modal__title {
+.c4p--about-modal .c4p--about-modal__title {
   font-size: var(--cds-productive-heading-04-font-size, 1.75rem);
   font-weight: var(--cds-productive-heading-04-font-weight, 400);
   line-height: var(--cds-productive-heading-04-line-height, 1.28572);
@@ -95,7 +95,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   color: var(--cds-text-01, #161616);
 }
 
-.exp--about-modal .exp--about-modal__body {
+.c4p--about-modal .c4p--about-modal__body {
   font-size: var(--cds-body-short-02-font-size, 1rem);
   font-weight: var(--cds-body-short-02-font-weight, 400);
   line-height: var(--cds-body-short-02-line-height, 1.375);
@@ -107,37 +107,37 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   overflow-y: auto;
 }
 
-.exp--about-modal.exp--about-modal--with-tabs .exp--about-modal__body {
+.c4p--about-modal.c4p--about-modal--with-tabs .c4p--about-modal__body {
   min-height: calc(var(--cds-layout-05, 4rem) + var(--cds-spacing-08, 2.5rem));
   margin-bottom: calc(var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem));
 }
 
-.exp--about-modal.exp--about-modal--with-tabs .bx--modal-content--overflow-indicator {
+.c4p--about-modal.c4p--about-modal--with-tabs .bx--modal-content--overflow-indicator {
   bottom: calc(var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem));
 }
 
-.exp--about-modal .exp--about-modal__links-container {
+.c4p--about-modal .c4p--about-modal__links-container {
   margin-top: var(--cds-spacing-05, 1rem);
 }
 
-.exp--about-modal .exp--about-modal__links-container a + a {
+.c4p--about-modal .c4p--about-modal__links-container a + a {
   padding-left: var(--cds-spacing-03, 0.5rem);
   border-left: 1px solid var(--cds-text-01, #161616);
   margin-left: var(--cds-spacing-03, 0.5rem);
 }
 
-.exp--about-modal .exp--about-modal__legal-text,
-.exp--about-modal .exp--about-modal__copyright-text {
+.c4p--about-modal .c4p--about-modal__legal-text,
+.c4p--about-modal .c4p--about-modal__copyright-text {
   margin-top: var(--cds-spacing-07, 2rem);
   margin-bottom: 0;
   color: var(--cds-text-02, #525252);
 }
 
-.exp--about-modal .exp--about-modal__copyright-text {
+.c4p--about-modal .c4p--about-modal__copyright-text {
   margin-top: var(--cds-spacing-05, 1rem);
 }
 
-.exp--about-modal .exp--about-modal__footer {
+.c4p--about-modal .c4p--about-modal__footer {
   position: relative;
   height: 4.5rem;
   flex-direction: column;
@@ -146,13 +146,13 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   color: var(--cds-inverse-01, #ffffff);
 }
 
-.exp--about-modal .exp--about-modal__tab-container {
+.c4p--about-modal .c4p--about-modal__tab-container {
   position: absolute;
   bottom: 100%;
 }
 
-.exp--about-modal .exp--about-modal__version-label,
-.exp--about-modal .exp--about-modal__version-number {
+.c4p--about-modal .c4p--about-modal__version-label,
+.c4p--about-modal .c4p--about-modal__version-number {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
   line-height: var(--cds-body-short-01-line-height, 1.28572);
@@ -163,7 +163,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   color: var(--cds-inverse-01, #ffffff);
 }
 
-.exp--about-modal .exp--about-modal__version-label {
+.c4p--about-modal .c4p--about-modal__version-label {
   font-weight: 600;
 }
 
@@ -384,30 +384,30 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
-.exp--apikey-modal .bx--modal-close {
+.c4p--apikey-modal .bx--modal-close {
   display: none;
 }
 
-.exp--apikey-modal .bx--inline-loading {
+.c4p--apikey-modal .bx--inline-loading {
   min-height: 3rem;
 }
 
-.exp--apikey-modal .bx--modal-content {
+.c4p--apikey-modal .bx--modal-content {
   padding-right: var(--cds-spacing-05, 1rem);
 }
 
-.exp--apikey-modal__body {
+.c4p--apikey-modal__body {
   padding-right: calc(20% - var(--cds-spacing-05, 1rem));
   margin-bottom: var(--cds-spacing-05, 1rem);
 }
 
-.exp--apikey-modal__messaging {
+.c4p--apikey-modal__messaging {
   display: flex;
   padding-right: calc(20% - var(--cds-spacing-05, 1rem));
   margin-top: var(--cds-spacing-03, 0.5rem);
 }
 
-.exp--apikey-modal__messaging-text {
+.c4p--apikey-modal__messaging-text {
   flex: 1;
   margin-left: var(--cds-spacing-03, 0.5rem);
   font-size: var(--cds-label-01-font-size, 0.75rem);
@@ -416,11 +416,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
 }
 
-.exp--apikey-modal__messaging-text > * {
+.c4p--apikey-modal__messaging-text > * {
   font: inherit;
 }
 
-.exp--apikey-modal__error-icon svg {
+.c4p--apikey-modal__error-icon svg {
   fill: var(--cds-danger-01, #da1e28);
 }
 
@@ -522,13 +522,13 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     stroke-dashoffset: 0;
   }
 }
-.exp--action-set {
+.c4p--action-set {
   align-items: stretch;
   justify-content: flex-end;
   background-color: var(--cds-ui-01, #f4f4f4);
 }
 
-.exp--action-set .exp--action-set__action-button {
+.c4p--action-set .c4p--action-set__action-button {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
   line-height: var(--cds-body-short-01-line-height, 1.28572);
@@ -540,47 +540,47 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin: 0;
 }
 
-.exp--action-set.bx--btn-set .exp--action-set__action-button.bx--btn.bx--btn--expressive {
+.c4p--action-set.bx--btn-set .c4p--action-set__action-button.bx--btn.bx--btn--expressive {
   max-width: none;
 }
 
-.exp--action-set:not(.exp--action-set--stacking) .exp--action-set__action-button--ghost {
+.c4p--action-set:not(.c4p--action-set--stacking) .c4p--action-set__action-button--ghost {
   padding-left: var(--cds-spacing-07, 2rem);
 }
 
-.exp--action-set.exp--action-set--row-single.exp--action-set--md .exp--action-set__action-button,
-.exp--action-set.exp--action-set--row-single .exp--action-set__action-button--ghost {
+.c4p--action-set.c4p--action-set--row-single.c4p--action-set--md .c4p--action-set__action-button,
+.c4p--action-set.c4p--action-set--row-single .c4p--action-set__action-button--ghost {
   flex: 0 0 100%;
 }
 
-.exp--action-set.exp--action-set--row-double .exp--action-set__action-button--ghost {
+.c4p--action-set.c4p--action-set--row-double .c4p--action-set__action-button--ghost {
   flex: 1 1 75%;
 }
 
-.exp--action-set.exp--action-set--row-single.exp--action-set--lg .exp--action-set__action-button:not(.exp--action-set__action-button--ghost),
-.exp--action-set.exp--action-set--row-double.exp--action-set--md .exp--action-set__action-button,
-.exp--action-set.exp--action-set--row-double.exp--action-set--lg .exp--action-set__action-button,
-.exp--action-set.exp--action-set--row-triple .exp--action-set__action-button--ghost {
+.c4p--action-set.c4p--action-set--row-single.c4p--action-set--lg .c4p--action-set__action-button:not(.c4p--action-set__action-button--ghost),
+.c4p--action-set.c4p--action-set--row-double.c4p--action-set--md .c4p--action-set__action-button,
+.c4p--action-set.c4p--action-set--row-double.c4p--action-set--lg .c4p--action-set__action-button,
+.c4p--action-set.c4p--action-set--row-triple .c4p--action-set__action-button--ghost {
   flex: 0 1 50%;
 }
 
-.exp--action-set.exp--action-set--row-triple .exp--action-set__action-button--ghost {
+.c4p--action-set.c4p--action-set--row-triple .c4p--action-set__action-button--ghost {
   flex: 1 1 50%;
 }
 
-.exp--action-set.bx--btn-set.exp--action-set--row-triple.exp--action-set--lg .exp--action-set__action-button:not(.exp--action-set__action-button--ghost),
-.exp--action-set.bx--btn-set.exp--action-set--xlg .exp--action-set__action-button:not(.exp--action-set__action-button--ghost),
-.exp--action-set.bx--btn-set.exp--action-set--max .exp--action-set__action-button:not(.exp--action-set__action-button--ghost),
-.exp--action-set.bx--btn-set.exp--action-set--row-quadruple .exp--action-set__action-button:not(.exp--action-set__action-button--ghost) {
+.c4p--action-set.bx--btn-set.c4p--action-set--row-triple.c4p--action-set--lg .c4p--action-set__action-button:not(.c4p--action-set__action-button--ghost),
+.c4p--action-set.bx--btn-set.c4p--action-set--xlg .c4p--action-set__action-button:not(.c4p--action-set__action-button--ghost),
+.c4p--action-set.bx--btn-set.c4p--action-set--max .c4p--action-set__action-button:not(.c4p--action-set__action-button--ghost),
+.c4p--action-set.bx--btn-set.c4p--action-set--row-quadruple .c4p--action-set__action-button:not(.c4p--action-set__action-button--ghost) {
   max-width: 14.5rem;
   flex: 0 1 25%;
 }
 
-.exp--action-set.bx--btn-set.exp--action-set--row-quadruple .exp--action-set__action-button--ghost {
+.c4p--action-set.bx--btn-set.c4p--action-set--row-quadruple .c4p--action-set__action-button--ghost {
   flex: 1 1 25%;
 }
 
-.exp--action-set .exp--action-set__action-button .bx--inline-loading {
+.c4p--action-set .c4p--action-set__action-button .bx--inline-loading {
   position: absolute;
   top: 0;
   right: 0;
@@ -614,51 +614,51 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .exp--cascade__element,
-.exp--cascade__col {
+  .c4p--cascade__element,
+.c4p--cascade__col {
     animation: 240ms cubic-bezier(0.2, 0, 0.38, 0.9) 0s 1 fade;
     animation-fill-mode: forwards;
     opacity: 0;
   }
 }
 
-.exp--cascade__element:nth-child(n+1),
-.exp--cascade__col-1 {
+.c4p--cascade__element:nth-child(n+1),
+.c4p--cascade__col-1 {
   animation-delay: 60ms;
 }
 
-.exp--cascade__element:nth-child(n+2),
-.exp--cascade__col-2 {
+.c4p--cascade__element:nth-child(n+2),
+.c4p--cascade__col-2 {
   animation-delay: 120ms;
 }
 
-.exp--cascade__element:nth-child(n+3),
-.exp--cascade__col-3 {
+.c4p--cascade__element:nth-child(n+3),
+.c4p--cascade__col-3 {
   animation-delay: 180ms;
 }
 
-.exp--cascade__element:nth-child(n+4),
-.exp--cascade__col-4 {
+.c4p--cascade__element:nth-child(n+4),
+.c4p--cascade__col-4 {
   animation-delay: 240ms;
 }
 
-.exp--cascade__element:nth-child(n+5),
-.exp--cascade__col-5 {
+.c4p--cascade__element:nth-child(n+5),
+.c4p--cascade__col-5 {
   animation-delay: 300ms;
 }
 
-.exp--cascade__element:nth-child(n+6),
-.exp--cascade__col-6 {
+.c4p--cascade__element:nth-child(n+6),
+.c4p--cascade__col-6 {
   animation-delay: 360ms;
 }
 
-.exp--cascade__element:nth-child(n+7),
-.exp--cascade__col-7 {
+.c4p--cascade__element:nth-child(n+7),
+.c4p--cascade__col-7 {
   animation-delay: 420ms;
 }
 
-.exp--cascade__element:nth-child(n+8),
-.exp--cascade__col-8 {
+.c4p--cascade__element:nth-child(n+8),
+.c4p--cascade__col-8 {
   animation-delay: 480ms;
 }
 
@@ -781,37 +781,37 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
-.exp--create-modal {
+.c4p--create-modal {
   background-color: var(--cds-ui-background, #ffffff);
 }
 
-.exp--create-modal .bx--modal-close {
+.c4p--create-modal .bx--modal-close {
   display: none;
 }
 
 @media (min-width: 42rem) {
-  .exp--create-modal .bx--modal-container {
+  .c4p--create-modal .bx--modal-container {
     max-height: 95%;
   }
 }
 @media (min-width: 66rem) {
-  .exp--create-modal .bx--modal-container {
+  .c4p--create-modal .bx--modal-container {
     max-height: 95%;
   }
 }
 
-.exp--create-modal .bx--modal-header {
+.c4p--create-modal .bx--modal-header {
   padding-right: 20%;
   padding-bottom: var(--cds-spacing-03, 0.5rem);
   border-bottom: 1px solid var(--cds-ui-03, #e0e0e0);
   margin-bottom: 0;
 }
 
-.exp--create-modal .bx--modal-footer .bx--btn {
+.c4p--create-modal .bx--modal-footer .bx--btn {
   max-width: none;
 }
 
-.exp--create-modal__title {
+.c4p--create-modal__title {
   font-size: var(--cds-productive-heading-03-font-size, 1.25rem);
   font-weight: var(--cds-productive-heading-03-font-weight, 400);
   line-height: var(--cds-productive-heading-03-line-height, 1.4);
@@ -819,7 +819,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-bottom: var(--cds-spacing-02, 0.25rem);
 }
 
-.exp--create-modal__subtitle {
+.c4p--create-modal__subtitle {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
   line-height: var(--cds-body-short-01-line-height, 1.28572);
@@ -828,7 +828,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   color: var(--cds-text-02, #525252);
 }
 
-.exp--create-modal__description {
+.c4p--create-modal__description {
   font-size: var(--cds-body-long-01-font-size, 0.875rem);
   font-weight: var(--cds-body-long-01-font-weight, 400);
   line-height: var(--cds-body-long-01-line-height, 1.42857);
@@ -837,15 +837,15 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin: var(--cds-spacing-03, 0.5rem) 0 var(--cds-spacing-05, 1rem) 0;
 }
 
-.exp--create-modal__form .bx--fieldset {
+.c4p--create-modal__form .bx--fieldset {
   min-width: 100%;
   margin-bottom: 0;
 }
 
-.exp--create-modal__form > * {
+.c4p--create-modal__form > * {
   margin-bottom: var(--cds-spacing-05, 1rem);
 }
-.exp--create-modal__form > *:last-child {
+.c4p--create-modal__form > *:last-child {
   margin-bottom: 0;
 }
 
@@ -1211,48 +1211,48 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     transform: translateX(calc(-1 * var(--cds-spacing-05, 1rem)));
   }
 }
-.exp--create-influencer {
+.c4p--create-influencer {
   display: grid;
   height: 100%;
   grid-template-columns: 100%;
   grid-template-rows: 1fr auto;
 }
 
-.exp--create-influencer__left-nav {
+.c4p--create-influencer__left-nav {
   grid-column: 1/-1;
   grid-row: 1/-1;
   overflow-y: auto;
 }
 
-.exp--create-influencer__progress-indicator {
+.c4p--create-influencer__progress-indicator {
   padding: var(--cds-spacing-06, 1.5rem);
 }
 
-.exp--create-influencer__view-all-toggle {
+.c4p--create-influencer__view-all-toggle {
   padding: var(--cds-spacing-06, 1.5rem);
   grid-column: 1/-1;
   grid-row: -1/-1;
 }
 
-.exp--create-influencer__side-nav-opening,
-.exp--create-influencer__progress-indicator-opening {
+.c4p--create-influencer__side-nav-opening,
+.c4p--create-influencer__progress-indicator-opening {
   animation: influencerMenuEntrance 240ms 1;
   animation-fill-mode: forwards;
   transition-timing-function: cubic-bezier(0, 0, 0.38, 0.9);
 }
 
-.exp--create-influencer__side-nav-closing,
-.exp--create-influencer__progress-indicator-closing {
+.c4p--create-influencer__side-nav-closing,
+.c4p--create-influencer__progress-indicator-closing {
   animation: influencerMenuExit 240ms 1;
   animation-fill-mode: forwards;
   transition-timing-function: cubic-bezier(0.2, 0, 1, 0.9);
 }
 
 @media (prefers-reduced-motion) {
-  .exp--create-influencer__side-nav-opening,
-.exp--create-influencer__progress-indicator-opening,
-.exp--create-influencer__side-nav-closing,
-.exp--create-influencer__progress-indicator-closing {
+  .c4p--create-influencer__side-nav-opening,
+.c4p--create-influencer__progress-indicator-opening,
+.c4p--create-influencer__side-nav-closing,
+.c4p--create-influencer__progress-indicator-closing {
     animation: none;
     opacity: 1;
   }
@@ -1355,31 +1355,31 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     stroke-dashoffset: 0;
   }
 }
-.exp--create-full-page .exp--create-full-page {
+.c4p--create-full-page .c4p--create-full-page {
   color: var(--cds-text-01, #161616);
 }
 
-.exp--create-full-page .exp--create-full-page__content .bx--grid {
+.c4p--create-full-page .c4p--create-full-page__content .bx--grid {
   padding-top: var(--cds-spacing-06, 1.5rem);
   margin-right: 0;
   margin-left: 0;
 }
 
-.exp--create-full-page .exp--create-full-page__step--hidden-step,
-.exp--create-full-page .exp--create-full-page__step--hidden-section {
+.c4p--create-full-page .c4p--create-full-page__step--hidden-step,
+.c4p--create-full-page .c4p--create-full-page__step--hidden-section {
   display: none;
 }
 
-.exp--create-full-page .exp--create-full-page__step--visible-section {
+.c4p--create-full-page .c4p--create-full-page__step--visible-section {
   display: block;
 }
 
-.exp--create-full-page .exp--create-full-page__step--visible-step {
+.c4p--create-full-page .c4p--create-full-page__step--visible-step {
   opacity: 1;
 }
 
-.exp--create-full-page .exp--create-full-page__section-subtitle,
-.exp--create-full-page .exp--create-full-page__step-subtitle {
+.c4p--create-full-page .c4p--create-full-page__section-subtitle,
+.c4p--create-full-page .c4p--create-full-page__step-subtitle {
   font-size: var(--cds-productive-heading-01-font-size, 0.875rem);
   font-weight: var(--cds-productive-heading-01-font-weight, 600);
   line-height: var(--cds-productive-heading-01-line-height, 1.28572);
@@ -1388,8 +1388,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-bottom: var(--cds-spacing-03, 0.5rem);
 }
 
-.exp--create-full-page .exp--create-full-page__section-description,
-.exp--create-full-page .exp--create-full-page__step-description {
+.c4p--create-full-page .c4p--create-full-page__section-description,
+.c4p--create-full-page .c4p--create-full-page__step-description {
   font-size: var(--cds-body-long-01-font-size, 0.875rem);
   font-weight: var(--cds-body-long-01-font-weight, 400);
   line-height: var(--cds-body-long-01-line-height, 1.42857);
@@ -1398,45 +1398,45 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-bottom: var(--cds-spacing-06, 1.5rem);
 }
 
-.exp--create-full-page .bx--fieldset {
+.c4p--create-full-page .bx--fieldset {
   margin-bottom: 0;
 }
 
-.exp--create-full-page .exp--create-full-page__step-fieldset > * {
+.c4p--create-full-page .c4p--create-full-page__step-fieldset > * {
   margin-bottom: var(--cds-spacing-05, 1rem);
 }
 
-.exp--create-full-page .bx--modal-close {
+.c4p--create-full-page .bx--modal-close {
   display: none;
 }
 
-.exp--create-full-page {
+.c4p--create-full-page {
   display: flex;
   height: 100vh;
   padding: 0;
   margin: 0;
 }
 
-.exp--create-full-page .exp--create-full-page__left-nav {
+.c4p--create-full-page .c4p--create-full-page__left-nav {
   grid-column: 1/-1;
   grid-row: 1/-1;
   overflow-y: auto;
 }
 
-.exp--create-full-page .exp--create-full-page__body {
+.c4p--create-full-page .c4p--create-full-page__body {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
 
-.exp--create-full-page .exp--create-full-page__main {
+.c4p--create-full-page .c4p--create-full-page__main {
   display: flex;
   max-height: 100%;
   flex-direction: column;
   flex-grow: 1;
 }
 
-.exp--create-full-page .exp--create-full-page__content {
+.c4p--create-full-page .c4p--create-full-page__content {
   overflow: auto;
   flex-grow: 1;
   background-color: var(--cds-ui-background, #ffffff);
@@ -1444,12 +1444,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   overflow-x: hidden;
 }
 
-.exp--create-full-page .exp--create-full-page__step {
+.c4p--create-full-page .c4p--create-full-page__step {
   position: relative;
   padding-bottom: var(--cds-spacing-07, 2rem);
 }
 
-.exp--create-full-page .bx--side-nav--ux {
+.c4p--create-full-page .bx--side-nav--ux {
   top: 0;
   height: min-content;
   padding-top: 0;
@@ -1459,14 +1459,14 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   overflow-x: auto;
 }
 
-.exp--create-full-page .exp--create-full-page__section-divider {
+.c4p--create-full-page .c4p--create-full-page__section-divider {
   position: relative;
   display: block;
   width: 0;
   height: 1px;
   margin: var(--cds-spacing-07, 2rem) calc(-1 * var(--cds-spacing-08, 2.5rem)) var(--cds-spacing-07, 2rem) calc(-1 * var(--cds-spacing-08, 2.5rem));
 }
-.exp--create-full-page .exp--create-full-page__section-divider::after {
+.c4p--create-full-page .c4p--create-full-page__section-divider::after {
   position: absolute;
   top: 0;
   left: 0;
@@ -1476,8 +1476,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   content: \\"\\";
 }
 
-.exp--create-full-page .exp--create-full-page__step-title,
-.exp--create-full-page .exp--create-full-page__section-title {
+.c4p--create-full-page .c4p--create-full-page__step-title,
+.c4p--create-full-page .c4p--create-full-page__section-title {
   font-size: var(--cds-productive-heading-04-font-size, 1.75rem);
   font-weight: var(--cds-productive-heading-04-font-weight, 400);
   line-height: var(--cds-productive-heading-04-line-height, 1.28572);
@@ -1486,7 +1486,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-bottom: var(--cds-spacing-05, 1rem);
 }
 
-.exp--create-full-page .exp--create-full-page__influencer {
+.c4p--create-full-page .c4p--create-full-page__influencer {
   display: grid;
   flex: 0 0 257px;
   border-right: 1px solid var(--cds-ui-03, #e0e0e0);
@@ -1495,17 +1495,17 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   grid-template-rows: 1fr auto;
 }
 
-.exp--create-full-page .exp--create-full-page__progress-indicator {
+.c4p--create-full-page .c4p--create-full-page__progress-indicator {
   padding: var(--cds-spacing-06, 1.5rem);
 }
 
-.exp--create-full-page .exp--create-full-page__influencer-toggle {
+.c4p--create-full-page .c4p--create-full-page__influencer-toggle {
   padding: var(--cds-spacing-06, 1.5rem);
   grid-column: 1/-1;
   grid-row: -1/-1;
 }
 
-.exp--create-full-page .exp--create-full-page__buttons {
+.c4p--create-full-page .c4p--create-full-page__buttons {
   border-top: 1px solid var(--cds-ui-03, #e0e0e0);
 }
 
@@ -1705,17 +1705,17 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     transform: translateX(30rem);
   }
 }
-.exp--side-panel__container {
-  --exp--side-panel--subtitle-opacity: 1;
-  --exp--side-panel--title-container-height: 0;
-  --exp--side-panel--title-text-height: 0;
-  --exp--side-panel--subtitle-container-height: 0;
-  --exp--side-panel--action-bar-container-height: 0;
-  --exp--side-panel--divider-opacity: 0;
-  --exp--side-panel--title-y-position: 0;
-  --exp--side-panel--content-bottom-padding: var(--cds-spacing-10, 4rem);
-  --exp--side-panel--collapsed-title-y-position: 1rem;
-  --exp--side-panel--label-text-height: 0;
+.c4p--side-panel__container {
+  --c4p--side-panel--subtitle-opacity: 1;
+  --c4p--side-panel--title-container-height: 0;
+  --c4p--side-panel--title-text-height: 0;
+  --c4p--side-panel--subtitle-container-height: 0;
+  --c4p--side-panel--action-bar-container-height: 0;
+  --c4p--side-panel--divider-opacity: 0;
+  --c4p--side-panel--title-y-position: 0;
+  --c4p--side-panel--content-bottom-padding: var(--cds-spacing-10, 4rem);
+  --c4p--side-panel--collapsed-title-y-position: 1rem;
+  --c4p--side-panel--label-text-height: 0;
   position: fixed;
   z-index: 9000;
   top: var(--cds-spacing-09, 3rem);
@@ -1726,18 +1726,18 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   transition: transform 240ms;
   transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
 }
-.exp--side-panel__container.exp--side-panel__container--xs {
+.c4p--side-panel__container.c4p--side-panel__container--xs {
   min-width: 16rem;
   max-width: 16rem;
 }
-.exp--side-panel__container.exp--side-panel__container--xs .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation,
-.exp--side-panel__container.exp--side-panel__container--xs .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation,
-.exp--side-panel__container.exp--side-panel__container--xs .exp--side-panel__action-toolbar.exp--side-panel__action-toolbar-no-animation,
-.exp--side-panel__container.exp--side-panel__container--xs .exp--side-panel__actions-container.exp--action-set--xs {
+.c4p--side-panel__container.c4p--side-panel__container--xs .c4p--side-panel__title-container.c4p--side-panel__title-container--no-title-animation,
+.c4p--side-panel__container.c4p--side-panel__container--xs .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation,
+.c4p--side-panel__container.c4p--side-panel__container--xs .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation,
+.c4p--side-panel__container.c4p--side-panel__container--xs .c4p--side-panel__actions-container.c4p--action-set--xs {
   min-width: 16rem;
   max-width: 16rem;
 }
-.exp--side-panel__container.exp--side-panel__container-right-placement.exp--side-panel__container--xs {
+.c4p--side-panel__container.c4p--side-panel__container-right-placement.c4p--side-panel__container--xs {
   min-width: 16rem;
   max-width: 16rem;
   right: 0;
@@ -1753,7 +1753,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     transform: translateX(0);
   }
 }
-.exp--side-panel__container.exp--side-panel__container-left-placement.exp--side-panel__container--xs {
+.c4p--side-panel__container.c4p--side-panel__container-left-placement.c4p--side-panel__container--xs {
   min-width: 16rem;
   max-width: 16rem;
   left: 0;
@@ -1769,18 +1769,18 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     transform: translateX(0);
   }
 }
-.exp--side-panel__container.exp--side-panel__container--sm {
+.c4p--side-panel__container.c4p--side-panel__container--sm {
   min-width: 20rem;
   max-width: 20rem;
 }
-.exp--side-panel__container.exp--side-panel__container--sm .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation,
-.exp--side-panel__container.exp--side-panel__container--sm .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation,
-.exp--side-panel__container.exp--side-panel__container--sm .exp--side-panel__action-toolbar.exp--side-panel__action-toolbar-no-animation,
-.exp--side-panel__container.exp--side-panel__container--sm .exp--side-panel__actions-container.exp--action-set--sm {
+.c4p--side-panel__container.c4p--side-panel__container--sm .c4p--side-panel__title-container.c4p--side-panel__title-container--no-title-animation,
+.c4p--side-panel__container.c4p--side-panel__container--sm .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation,
+.c4p--side-panel__container.c4p--side-panel__container--sm .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation,
+.c4p--side-panel__container.c4p--side-panel__container--sm .c4p--side-panel__actions-container.c4p--action-set--sm {
   min-width: 20rem;
   max-width: 20rem;
 }
-.exp--side-panel__container.exp--side-panel__container-right-placement.exp--side-panel__container--sm {
+.c4p--side-panel__container.c4p--side-panel__container-right-placement.c4p--side-panel__container--sm {
   min-width: 20rem;
   max-width: 20rem;
   right: 0;
@@ -1796,7 +1796,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     transform: translateX(0);
   }
 }
-.exp--side-panel__container.exp--side-panel__container-left-placement.exp--side-panel__container--sm {
+.c4p--side-panel__container.c4p--side-panel__container-left-placement.c4p--side-panel__container--sm {
   min-width: 20rem;
   max-width: 20rem;
   left: 0;
@@ -1812,18 +1812,18 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     transform: translateX(0);
   }
 }
-.exp--side-panel__container.exp--side-panel__container--md {
+.c4p--side-panel__container.c4p--side-panel__container--md {
   min-width: 30rem;
   max-width: 30rem;
 }
-.exp--side-panel__container.exp--side-panel__container--md .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation,
-.exp--side-panel__container.exp--side-panel__container--md .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation,
-.exp--side-panel__container.exp--side-panel__container--md .exp--side-panel__action-toolbar.exp--side-panel__action-toolbar-no-animation,
-.exp--side-panel__container.exp--side-panel__container--md .exp--side-panel__actions-container.exp--action-set--md {
+.c4p--side-panel__container.c4p--side-panel__container--md .c4p--side-panel__title-container.c4p--side-panel__title-container--no-title-animation,
+.c4p--side-panel__container.c4p--side-panel__container--md .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation,
+.c4p--side-panel__container.c4p--side-panel__container--md .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation,
+.c4p--side-panel__container.c4p--side-panel__container--md .c4p--side-panel__actions-container.c4p--action-set--md {
   min-width: 30rem;
   max-width: 30rem;
 }
-.exp--side-panel__container.exp--side-panel__container-right-placement.exp--side-panel__container--md {
+.c4p--side-panel__container.c4p--side-panel__container-right-placement.c4p--side-panel__container--md {
   min-width: 30rem;
   max-width: 30rem;
   right: 0;
@@ -1839,7 +1839,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     transform: translateX(0);
   }
 }
-.exp--side-panel__container.exp--side-panel__container-left-placement.exp--side-panel__container--md {
+.c4p--side-panel__container.c4p--side-panel__container-left-placement.c4p--side-panel__container--md {
   min-width: 30rem;
   max-width: 30rem;
   left: 0;
@@ -1855,18 +1855,18 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     transform: translateX(0);
   }
 }
-.exp--side-panel__container.exp--side-panel__container--lg {
+.c4p--side-panel__container.c4p--side-panel__container--lg {
   min-width: 40rem;
   max-width: 40rem;
 }
-.exp--side-panel__container.exp--side-panel__container--lg .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation,
-.exp--side-panel__container.exp--side-panel__container--lg .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation,
-.exp--side-panel__container.exp--side-panel__container--lg .exp--side-panel__action-toolbar.exp--side-panel__action-toolbar-no-animation,
-.exp--side-panel__container.exp--side-panel__container--lg .exp--side-panel__actions-container.exp--action-set--lg {
+.c4p--side-panel__container.c4p--side-panel__container--lg .c4p--side-panel__title-container.c4p--side-panel__title-container--no-title-animation,
+.c4p--side-panel__container.c4p--side-panel__container--lg .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation,
+.c4p--side-panel__container.c4p--side-panel__container--lg .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation,
+.c4p--side-panel__container.c4p--side-panel__container--lg .c4p--side-panel__actions-container.c4p--action-set--lg {
   min-width: 40rem;
   max-width: 40rem;
 }
-.exp--side-panel__container.exp--side-panel__container-right-placement.exp--side-panel__container--lg {
+.c4p--side-panel__container.c4p--side-panel__container-right-placement.c4p--side-panel__container--lg {
   min-width: 40rem;
   max-width: 40rem;
   right: 0;
@@ -1882,7 +1882,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     transform: translateX(0);
   }
 }
-.exp--side-panel__container.exp--side-panel__container-left-placement.exp--side-panel__container--lg {
+.c4p--side-panel__container.c4p--side-panel__container-left-placement.c4p--side-panel__container--lg {
   min-width: 40rem;
   max-width: 40rem;
   left: 0;
@@ -1898,18 +1898,18 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     transform: translateX(0);
   }
 }
-.exp--side-panel__container.exp--side-panel__container--max {
+.c4p--side-panel__container.c4p--side-panel__container--max {
   min-width: 75%;
   max-width: 75%;
 }
-.exp--side-panel__container.exp--side-panel__container--max .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation,
-.exp--side-panel__container.exp--side-panel__container--max .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation,
-.exp--side-panel__container.exp--side-panel__container--max .exp--side-panel__action-toolbar.exp--side-panel__action-toolbar-no-animation,
-.exp--side-panel__container.exp--side-panel__container--max .exp--side-panel__actions-container.exp--action-set--max {
+.c4p--side-panel__container.c4p--side-panel__container--max .c4p--side-panel__title-container.c4p--side-panel__title-container--no-title-animation,
+.c4p--side-panel__container.c4p--side-panel__container--max .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation,
+.c4p--side-panel__container.c4p--side-panel__container--max .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation,
+.c4p--side-panel__container.c4p--side-panel__container--max .c4p--side-panel__actions-container.c4p--action-set--max {
   min-width: 75%;
   max-width: 75%;
 }
-.exp--side-panel__container.exp--side-panel__container-right-placement.exp--side-panel__container--max {
+.c4p--side-panel__container.c4p--side-panel__container-right-placement.c4p--side-panel__container--max {
   min-width: 75%;
   max-width: 75%;
   right: 0;
@@ -1925,7 +1925,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     transform: translateX(0);
   }
 }
-.exp--side-panel__container.exp--side-panel__container-left-placement.exp--side-panel__container--max {
+.c4p--side-panel__container.c4p--side-panel__container-left-placement.c4p--side-panel__container--max {
   min-width: 75%;
   max-width: 75%;
   left: 0;
@@ -1941,10 +1941,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     transform: translateX(0);
   }
 }
-.exp--side-panel__container.exp--side-panel__container-with-action-toolbar.exp--side-panel__with-condensed-header .exp--side-panel__title-container::before {
+.c4p--side-panel__container.c4p--side-panel__container-with-action-toolbar.c4p--side-panel__with-condensed-header .c4p--side-panel__title-container::before {
   content: none;
 }
-.exp--side-panel__container.exp--side-panel__container-with-action-toolbar.exp--side-panel__with-condensed-header .exp--side-panel__action-toolbar::before {
+.c4p--side-panel__container.c4p--side-panel__container-with-action-toolbar.c4p--side-panel__with-condensed-header .c4p--side-panel__action-toolbar::before {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -1952,20 +1952,20 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   height: 1px;
   background-color: var(--cds-decorative-01, #e0e0e0);
   content: \\"\\";
-  opacity: var(--exp--side-panel--divider-opacity);
+  opacity: var(--c4p--side-panel--divider-opacity);
 }
-.exp--side-panel__container.exp--side-panel__container-without-overlay {
+.c4p--side-panel__container.c4p--side-panel__container-without-overlay {
   box-shadow: 0 var(--cds-spacing-01, 0.125rem) var(--cds-spacing-02, 0.25rem) var(--cds-overlay-01, rgba(22, 22, 22, 0.5));
 }
-.exp--side-panel__container .exp--side-panel__title-container {
+.c4p--side-panel__container .c4p--side-panel__title-container {
   position: sticky;
   z-index: 4;
   top: 0;
-  height: calc(var(--exp--side-panel--title-container-height) - var(--exp--side-panel--label-text-height));
+  height: calc(var(--c4p--side-panel--title-container-height) - var(--c4p--side-panel--label-text-height));
   padding: var(--cds-spacing-05, 1rem) var(--cds-spacing-05, 1rem) var(--cds-spacing-03, 0.5rem) var(--cds-spacing-05, 1rem);
   background-color: var(--cds-ui-01, #f4f4f4);
 }
-.exp--side-panel__container .exp--side-panel__title-container::before {
+.c4p--side-panel__container .c4p--side-panel__title-container::before {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -1973,34 +1973,34 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   height: 1px;
   background-color: var(--cds-decorative-01, #e0e0e0);
   content: \\"\\";
-  opacity: var(--exp--side-panel--divider-opacity);
+  opacity: var(--c4p--side-panel--divider-opacity);
 }
-.exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__on-detail-step .exp--side-panel__collapsed-title-text {
+.c4p--side-panel__container .c4p--side-panel__title-container.c4p--side-panel__on-detail-step .c4p--side-panel__collapsed-title-text {
   top: var(--cds-spacing-09, 3rem);
 }
-.exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container-without-title {
+.c4p--side-panel__container .c4p--side-panel__title-container.c4p--side-panel__title-container-without-title {
   padding: 0;
 }
-.exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container-without-title.exp--side-panel__on-detail-step-without-title {
+.c4p--side-panel__container .c4p--side-panel__title-container.c4p--side-panel__title-container-without-title.c4p--side-panel__on-detail-step-without-title {
   height: calc(var(--cds-spacing-08, 2.5rem) + var(--cds-spacing-02, 0.25rem));
   padding: var(--cds-spacing-05, 1rem) var(--cds-spacing-05, 1rem) var(--cds-spacing-03, 0.5rem) var(--cds-spacing-05, 1rem);
 }
-.exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container-without-title::before {
+.c4p--side-panel__container .c4p--side-panel__title-container.c4p--side-panel__title-container-without-title::before {
   background-color: transparent;
 }
-.exp--side-panel__container.exp--side-panel__container-is-animating {
+.c4p--side-panel__container.c4p--side-panel__container-is-animating {
   pointer-events: none;
 }
-.exp--side-panel__container.exp--side-panel__container-is-animating .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation {
+.c4p--side-panel__container.c4p--side-panel__container-is-animating .c4p--side-panel__title-container.c4p--side-panel__title-container--no-title-animation {
   top: 0;
 }
-.exp--side-panel__container.exp--side-panel__container-is-animating .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation {
-  top: var(--exp--side-panel--title-text-height);
+.c4p--side-panel__container.c4p--side-panel__container-is-animating .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation {
+  top: var(--c4p--side-panel--title-text-height);
 }
-.exp--side-panel__container.exp--side-panel__container-is-animating .exp--side-panel__action-toolbar.exp--side-panel__action-toolbar-no-animation {
-  top: calc(var(--exp--side-panel--title-text-height) + var(--exp--side-panel--subtitle-container-height));
+.c4p--side-panel__container.c4p--side-panel__container-is-animating .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation {
+  top: calc(var(--c4p--side-panel--title-text-height) + var(--c4p--side-panel--subtitle-container-height));
 }
-.exp--side-panel__container .exp--side-panel__title-text {
+.c4p--side-panel__container .c4p--side-panel__title-text {
   font-size: var(--cds-productive-heading-03-font-size, 1.25rem);
   font-weight: var(--cds-productive-heading-03-font-weight, 400);
   line-height: var(--cds-productive-heading-03-line-height, 1.4);
@@ -2013,22 +2013,22 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   position: inherit;
   z-index: 4;
   background-color: var(--cds-ui-01, #f4f4f4);
-  opacity: var(--exp--side-panel--subtitle-opacity);
-  transform: translateY(var(--exp--side-panel--title-y-position));
+  opacity: var(--c4p--side-panel--subtitle-opacity);
+  transform: translateY(var(--c4p--side-panel--title-y-position));
 }
-.exp--side-panel__container .exp--side-panel__label-text {
+.c4p--side-panel__container .c4p--side-panel__label-text {
   font-size: var(--cds-label-01-font-size, 0.75rem);
   font-weight: var(--cds-label-01-font-weight, 400);
   line-height: var(--cds-label-01-line-height, 1.33333);
   letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
   overflow: hidden;
   padding-right: var(--cds-spacing-05, 1rem);
-  opacity: var(--exp--side-panel--subtitle-opacity);
+  opacity: var(--c4p--side-panel--subtitle-opacity);
   text-overflow: ellipsis;
-  transform: translateY(var(--exp--side-panel--title-y-position));
+  transform: translateY(var(--c4p--side-panel--title-y-position));
   white-space: nowrap;
 }
-.exp--side-panel__container .exp--side-panel__collapsed-title-text {
+.c4p--side-panel__container .c4p--side-panel__collapsed-title-text {
   font-size: var(--cds-productive-heading-02-font-size, 1rem);
   font-weight: var(--cds-productive-heading-02-font-weight, 600);
   line-height: var(--cds-productive-heading-02-line-height, 1.375);
@@ -2040,10 +2040,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   -webkit-line-clamp: 2;
   position: absolute;
   top: var(--cds-spacing-05, 1rem);
-  opacity: var(--exp--side-panel--divider-opacity);
-  transform: translateY(var(--exp--side-panel--collapsed-title-y-position));
+  opacity: var(--c4p--side-panel--divider-opacity);
+  transform: translateY(var(--c4p--side-panel--collapsed-title-y-position));
 }
-.exp--side-panel__container .exp--side-panel__subtitle-text {
+.c4p--side-panel__container .c4p--side-panel__subtitle-text {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
   line-height: var(--cds-body-short-01-line-height, 1.28572);
@@ -2052,65 +2052,65 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   padding: 0 var(--cds-spacing-09, 3rem) var(--cds-spacing-05, 1rem) var(--cds-spacing-05, 1rem);
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
-  opacity: var(--exp--side-panel--subtitle-opacity);
+  opacity: var(--c4p--side-panel--subtitle-opacity);
 }
-.exp--side-panel__container .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation {
+.c4p--side-panel__container .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation {
   position: fixed;
   z-index: 2;
-  top: calc(var(--exp--side-panel--title-text-height) + var(--cds-spacing-09, 3rem));
+  top: calc(var(--c4p--side-panel--title-text-height) + var(--cds-spacing-09, 3rem));
   background-color: var(--cds-ui-01, #f4f4f4);
 }
-.exp--side-panel__container .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation.exp--side-panel__subtitle-text-is-animating {
-  top: var(--exp--side-panel--title-text-height);
+.c4p--side-panel__container .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation.c4p--side-panel__subtitle-text-is-animating {
+  top: var(--c4p--side-panel--title-text-height);
 }
-.exp--side-panel__container .exp--side-panel__subtitle-text.exp--side-panel__subtitle-without-title {
+.c4p--side-panel__container .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-without-title {
   padding-top: var(--cds-spacing-05, 1rem);
   padding-right: var(--cds-spacing-09, 3rem);
 }
-.exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation.exp--side-panel__title-container-is-animating {
+.c4p--side-panel__container .c4p--side-panel__title-container.c4p--side-panel__title-container--no-title-animation.c4p--side-panel__title-container-is-animating {
   top: 0;
 }
-.exp--side-panel__container .exp--side-panel__title-container.exp--side-panel__title-container--no-title-animation {
+.c4p--side-panel__container .c4p--side-panel__title-container.c4p--side-panel__title-container--no-title-animation {
   position: fixed;
   top: var(--cds-spacing-09, 3rem);
-  height: var(--exp--side-panel--title-text-height);
+  height: var(--c4p--side-panel--title-text-height);
 }
-.exp--side-panel__container .exp--side-panel__inner-content {
+.c4p--side-panel__container .c4p--side-panel__inner-content {
   overflow: auto;
   height: calc(100vh - 3rem);
-  margin-top: calc(var(--exp--side-panel--title-text-height) + var(--exp--side-panel--subtitle-container-height) + var(--exp--side-panel--action-bar-container-height));
+  margin-top: calc(var(--c4p--side-panel--title-text-height) + var(--c4p--side-panel--subtitle-container-height) + var(--c4p--side-panel--action-bar-container-height));
   overflow-x: hidden;
 }
-.exp--side-panel__container .exp--side-panel__inner-content-with-actions {
-  height: calc(100vh - (var(--exp--side-panel--content-bottom-padding) + 2rem));
+.c4p--side-panel__container .c4p--side-panel__inner-content-with-actions {
+  height: calc(100vh - (var(--c4p--side-panel--content-bottom-padding) + 2rem));
 }
-.exp--side-panel__container .exp--side-panel__inner-content.exp--side-panel__static-inner-content {
-  height: calc(100vh - (var(--exp--side-panel--title-text-height) + var(--exp--side-panel--subtitle-container-height) + var(--exp--side-panel--action-bar-container-height)) + -1 * (var(--cds-spacing-09, 3rem) + var(--cds-spacing-10, 4rem)));
+.c4p--side-panel__container .c4p--side-panel__inner-content.c4p--side-panel__static-inner-content {
+  height: calc(100vh - (var(--c4p--side-panel--title-text-height) + var(--c4p--side-panel--subtitle-container-height) + var(--c4p--side-panel--action-bar-container-height)) + -1 * (var(--cds-spacing-09, 3rem) + var(--cds-spacing-10, 4rem)));
   padding-top: var(--cds-spacing-05, 1rem);
 }
-.exp--side-panel__container .exp--side-panel__action-toolbar.exp--side-panel__action-toolbar-no-animation {
+.c4p--side-panel__container .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation {
   position: fixed;
   top: calc(
-        var(--exp--side-panel--title-text-height) +
-          var(--exp--side-panel--subtitle-container-height) + var(--cds-spacing-09, 3rem)
+        var(--c4p--side-panel--title-text-height) +
+          var(--c4p--side-panel--subtitle-container-height) + var(--cds-spacing-09, 3rem)
       );
   width: 100%;
   border-bottom: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
-.exp--side-panel__container .exp--side-panel__action-toolbar.exp--side-panel__action-toolbar-no-animation + .exp--side-panel__body-content {
+.c4p--side-panel__container .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation + .c4p--side-panel__body-content {
   margin-top: calc(
-        var(--exp--side-panel--title-text-height) +
-          var(--exp--side-panel--subtitle-container-height) + var(--cds-spacing-09, 3rem)
+        var(--c4p--side-panel--title-text-height) +
+          var(--c4p--side-panel--subtitle-container-height) + var(--cds-spacing-09, 3rem)
       );
 }
-.exp--side-panel__container .exp--side-panel__subtitle-text.exp--side-panel__subtitle-text-no-animation.exp--side-panel__subtitle-text-no-animation-no-action-toolbar {
+.c4p--side-panel__container .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation.c4p--side-panel__subtitle-text-no-animation-no-action-toolbar {
   border-bottom: 1px solid var(--cds-decorative-01, #e0e0e0);
   margin-bottom: var(--cds-spacing-05, 1rem);
 }
-.exp--side-panel__container .exp--side-panel__action-toolbar {
+.c4p--side-panel__container .c4p--side-panel__action-toolbar {
   position: sticky;
   z-index: 4;
-  top: var(--exp--side-panel--title-height);
+  top: var(--c4p--side-panel--title-height);
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -2120,32 +2120,32 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   transition: transform 150ms;
   transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
 }
-.exp--side-panel__container .exp--side-panel__action-toolbar .exp--side-panel__action-toolbar-button {
+.c4p--side-panel__container .c4p--side-panel__action-toolbar .c4p--side-panel__action-toolbar-button {
   min-width: 2rem;
 }
-.exp--side-panel__container .exp--side-panel__action-toolbar .exp--side-panel__action-toolbar-button.exp--side-panel__action-toolbar-icon-only-button {
+.c4p--side-panel__container .c4p--side-panel__action-toolbar .c4p--side-panel__action-toolbar-button.c4p--side-panel__action-toolbar-icon-only-button {
   padding: 0;
   color: var(--cds-text-01, #161616);
 }
-.exp--side-panel__container .exp--side-panel__action-toolbar .exp--side-panel__action-toolbar-button.exp--side-panel__action-toolbar-icon-only-button svg {
+.c4p--side-panel__container .c4p--side-panel__action-toolbar .c4p--side-panel__action-toolbar-button.c4p--side-panel__action-toolbar-icon-only-button svg {
   margin-left: var(--cds-spacing-03, 0.5rem);
 }
-.exp--side-panel__container .exp--side-panel__action-toolbar .exp--side-panel__action-toolbar-button.exp--side-panel__action-toolbar-leading-button {
+.c4p--side-panel__container .c4p--side-panel__action-toolbar .c4p--side-panel__action-toolbar-button.c4p--side-panel__action-toolbar-leading-button {
   margin-right: var(--cds-spacing-03, 0.5rem);
 }
-.exp--side-panel__container .bx--btn.exp--side-panel__navigation-back-button {
+.c4p--side-panel__container .bx--btn.c4p--side-panel__navigation-back-button {
   position: relative;
   z-index: 5;
   top: calc(-1 * var(--cds-spacing-03, 0.5rem));
   left: calc(-1 * var(--cds-spacing-03, 0.5rem));
 }
-.exp--side-panel__container .bx--btn.exp--side-panel__navigation-back-button,
-.exp--side-panel__container .bx--btn.exp--side-panel__close-button {
+.c4p--side-panel__container .bx--btn.c4p--side-panel__navigation-back-button,
+.c4p--side-panel__container .bx--btn.c4p--side-panel__close-button {
   min-width: 2rem;
   padding: 0;
   color: var(--cds-text-01, #161616);
 }
-.exp--side-panel__container .bx--btn.exp--side-panel__close-button {
+.c4p--side-panel__container .bx--btn.c4p--side-panel__close-button {
   position: absolute;
   z-index: 5;
   top: var(--cds-spacing-03, 0.5rem);
@@ -2155,53 +2155,53 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   justify-content: center;
   background-color: var(--cds-ui-01, #f4f4f4);
 }
-.exp--side-panel__container .bx--btn.exp--side-panel__close-button .bx--btn__icon {
+.c4p--side-panel__container .bx--btn.c4p--side-panel__close-button .bx--btn__icon {
   margin: 0;
 }
-.exp--side-panel__container .exp--side-panel__body-content {
+.c4p--side-panel__container .c4p--side-panel__body-content {
   padding: var(--cds-spacing-05, 1rem);
   padding-top: 0;
 }
-.exp--side-panel__container.exp--side-panel__container-is-animating .exp--side-panel__actions-container.exp--action-set--max {
+.c4p--side-panel__container.c4p--side-panel__container-is-animating .c4p--side-panel__actions-container.c4p--action-set--max {
   min-width: 100%;
   max-width: 100%;
 }
-.exp--side-panel__container .exp--side-panel__actions-container {
+.c4p--side-panel__container .c4p--side-panel__actions-container {
   position: fixed;
   bottom: 0;
   border-top: 1px solid var(--cds-decorative-01, #e0e0e0);
   background-color: var(--cds-ui-01, #f4f4f4);
 }
-.exp--side-panel__container .exp--side-panel__actions-container.exp--action-set--max {
+.c4p--side-panel__container .c4p--side-panel__actions-container.c4p--action-set--max {
   flex-direction: column;
 }
-.exp--side-panel__container .exp--side-panel__actions-container.exp--action-set--max .exp--action-set__action-button {
+.c4p--side-panel__container .c4p--side-panel__actions-container.c4p--action-set--max .c4p--action-set__action-button {
   width: 100%;
   max-width: 100%;
 }
 @media (min-width: 42rem) {
-  .exp--side-panel__container .exp--side-panel__actions-container.exp--action-set--max {
+  .c4p--side-panel__container .c4p--side-panel__actions-container.c4p--action-set--max {
     flex-direction: row;
   }
-  .exp--side-panel__container .exp--side-panel__actions-container.exp--action-set--max .exp--action-set__action-button {
+  .c4p--side-panel__container .c4p--side-panel__actions-container.c4p--action-set--max .c4p--action-set__action-button {
     width: 25%;
   }
 }
-.exp--side-panel__container .exp--side-panel__actions-container .exp--action-set__action-button {
+.c4p--side-panel__container .c4p--side-panel__actions-container .c4p--action-set__action-button {
   height: var(--cds-layout-05, 4rem);
 }
-.exp--side-panel__container .exp--side-panel__actions-container.exp--side-panel__actions-container-condensed .exp--action-set__action-button {
+.c4p--side-panel__container .c4p--side-panel__actions-container.c4p--side-panel__actions-container-condensed .c4p--action-set__action-button {
   height: var(--cds-layout-04, 3rem);
 }
 
-.exp--side-panel__container .bx--text-input,
-.exp--side-panel__container .bx--text-area,
-.exp--side-panel__container .bx--search-input,
-.exp--side-panel__container .bx--select-input,
-.exp--side-panel__container .bx--dropdown,
-.exp--side-panel__container .bx--dropdown-list,
-.exp--side-panel__container .bx--number input[type=number],
-.exp--side-panel__container .bx--date-picker__input {
+.c4p--side-panel__container .bx--text-input,
+.c4p--side-panel__container .bx--text-area,
+.c4p--side-panel__container .bx--search-input,
+.c4p--side-panel__container .bx--select-input,
+.c4p--side-panel__container .bx--dropdown,
+.c4p--side-panel__container .bx--dropdown-list,
+.c4p--side-panel__container .bx--number input[type=number],
+.c4p--side-panel__container .bx--date-picker__input {
   background-color: var(--cds-field-02, #ffffff);
 }
 
@@ -2221,7 +2221,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     opacity: 0;
   }
 }
-.exp--side-panel__visually-hidden {
+.c4p--side-panel__visually-hidden {
   position: absolute;
   overflow: hidden;
   width: 1px;
@@ -2234,7 +2234,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   white-space: nowrap;
 }
 
-.exp--side-panel__overlay {
+.c4p--side-panel__overlay {
   position: fixed;
   z-index: 6000;
   top: 0;
@@ -2248,17 +2248,17 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
 }
 
-.exp--create-side-panel.exp--side-panel__container .exp--create-side-panel__content-text {
+.c4p--create-side-panel.c4p--side-panel__container .c4p--create-side-panel__content-text {
   padding-right: calc(20% - var(--cds-spacing-05, 1rem));
 }
 
-.exp--create-side-panel.exp--side-panel__container--xs .exp--side-panel__title-text {
+.c4p--create-side-panel.c4p--side-panel__container--xs .c4p--side-panel__title-text {
   width: calc(16rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((16rem * 0.2) - var(--cds-spacing-05, 1rem));
   margin-bottom: var(--cds-spacing-02, 0.25rem);
 }
 
-.exp--create-side-panel.exp--side-panel__container--xs .exp--side-panel__subtitle-text {
+.c4p--create-side-panel.c4p--side-panel__container--xs .c4p--side-panel__subtitle-text {
   width: calc(16rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((16rem * 0.2) - var(--cds-spacing-05, 1rem));
   padding-bottom: var(--cds-spacing-05, 1rem);
@@ -2266,13 +2266,13 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   color: var(--cds-text-02, #525252);
 }
 
-.exp--create-side-panel.exp--side-panel__container--sm .exp--side-panel__title-text {
+.c4p--create-side-panel.c4p--side-panel__container--sm .c4p--side-panel__title-text {
   width: calc(20rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((20rem * 0.2) - var(--cds-spacing-05, 1rem));
   margin-bottom: var(--cds-spacing-02, 0.25rem);
 }
 
-.exp--create-side-panel.exp--side-panel__container--sm .exp--side-panel__subtitle-text {
+.c4p--create-side-panel.c4p--side-panel__container--sm .c4p--side-panel__subtitle-text {
   width: calc(20rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((20rem * 0.2) - var(--cds-spacing-05, 1rem));
   padding-bottom: var(--cds-spacing-05, 1rem);
@@ -2280,13 +2280,13 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   color: var(--cds-text-02, #525252);
 }
 
-.exp--create-side-panel.exp--side-panel__container--md .exp--side-panel__title-text {
+.c4p--create-side-panel.c4p--side-panel__container--md .c4p--side-panel__title-text {
   width: calc(30rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((30rem * 0.2) - var(--cds-spacing-05, 1rem));
   margin-bottom: var(--cds-spacing-02, 0.25rem);
 }
 
-.exp--create-side-panel.exp--side-panel__container--md .exp--side-panel__subtitle-text {
+.c4p--create-side-panel.c4p--side-panel__container--md .c4p--side-panel__subtitle-text {
   width: calc(30rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((30rem * 0.2) - var(--cds-spacing-05, 1rem));
   padding-bottom: var(--cds-spacing-05, 1rem);
@@ -2294,13 +2294,13 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   color: var(--cds-text-02, #525252);
 }
 
-.exp--create-side-panel.exp--side-panel__container--lg .exp--side-panel__title-text {
+.c4p--create-side-panel.c4p--side-panel__container--lg .c4p--side-panel__title-text {
   width: calc(40rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((40rem * 0.2) - var(--cds-spacing-05, 1rem));
   margin-bottom: var(--cds-spacing-02, 0.25rem);
 }
 
-.exp--create-side-panel.exp--side-panel__container--lg .exp--side-panel__subtitle-text {
+.c4p--create-side-panel.c4p--side-panel__container--lg .c4p--side-panel__subtitle-text {
   width: calc(40rem - var(--cds-spacing-05, 1rem));
   padding-right: calc((40rem * 0.2) - var(--cds-spacing-05, 1rem));
   padding-bottom: var(--cds-spacing-05, 1rem);
@@ -2308,13 +2308,13 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   color: var(--cds-text-02, #525252);
 }
 
-.exp--create-side-panel.exp--side-panel__container--max .exp--side-panel__title-text {
+.c4p--create-side-panel.c4p--side-panel__container--max .c4p--side-panel__title-text {
   width: calc(75% - var(--cds-spacing-05, 1rem));
   padding-right: calc((75% * 0.2) - var(--cds-spacing-05, 1rem));
   margin-bottom: var(--cds-spacing-02, 0.25rem);
 }
 
-.exp--create-side-panel.exp--side-panel__container--max .exp--side-panel__subtitle-text {
+.c4p--create-side-panel.c4p--side-panel__container--max .c4p--side-panel__subtitle-text {
   width: calc(75% - var(--cds-spacing-05, 1rem));
   padding-right: calc((75% * 0.2) - var(--cds-spacing-05, 1rem));
   padding-bottom: var(--cds-spacing-05, 1rem);
@@ -2322,19 +2322,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   color: var(--cds-text-02, #525252);
 }
 
-.bx--form.exp--create-side-panel__form {
+.bx--form.c4p--create-side-panel__form {
   padding-top: var(--cds-spacing-05, 1rem);
 }
 
-.exp--create-side-panel__form.bx--fieldset {
+.c4p--create-side-panel__form.bx--fieldset {
   padding-top: var(--cds-spacing-03, 0.5rem);
 }
 
-.exp--create-side-panel__form > * {
+.c4p--create-side-panel__form > * {
   margin-bottom: var(--cds-spacing-05, 1rem);
 }
 
-.exp--create-side-panel__form-title-text {
+.c4p--create-side-panel__form-title-text {
   font-size: var(--cds-productive-heading-02-font-size, 1rem);
   font-weight: var(--cds-productive-heading-02-font-weight, 600);
   line-height: var(--cds-productive-heading-02-line-height, 1.375);
@@ -2342,18 +2342,18 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   padding-bottom: var(--cds-spacing-03, 0.5rem);
 }
 
-.exp--create-side-panel__form-description-text {
+.c4p--create-side-panel__form-description-text {
   font-size: var(--cds-body-long-01-font-size, 0.875rem);
   font-weight: var(--cds-body-long-01-font-weight, 400);
   line-height: var(--cds-body-long-01-line-height, 1.42857);
   letter-spacing: var(--cds-body-long-01-letter-spacing, 0.16px);
 }
 
-.exp--create-side-panel.exp--side-panel .bx--btn.exp--side-panel__close-button {
+.c4p--create-side-panel.c4p--side-panel .bx--btn.c4p--side-panel__close-button {
   display: none;
 }
 
-.exp--create-side-panel__title {
+.c4p--create-side-panel__title {
   font-size: var(--cds-productive-heading-03-font-size, 1.25rem);
   font-weight: var(--cds-productive-heading-03-font-weight, 400);
   line-height: var(--cds-productive-heading-03-line-height, 1.4);
@@ -2361,7 +2361,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-bottom: var(--cds-spacing-02, 0.25rem);
 }
 
-.exp--create-side-panel__subtitle {
+.c4p--create-side-panel__subtitle {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
   line-height: var(--cds-body-short-01-line-height, 1.28572);
@@ -2370,7 +2370,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   color: var(--cds-text-02, #525252);
 }
 
-.exp--side-panel .exp--create-side-panel__actions-container {
+.c4p--side-panel .c4p--create-side-panel__actions-container {
   position: absolute;
   z-index: 4;
   bottom: 0;
@@ -2554,114 +2554,114 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     stroke-dashoffset: 0;
   }
 }
-.exp--tearsheet.exp--tearsheet {
+.c4p--tearsheet.c4p--tearsheet {
   z-index: 9001;
   align-items: flex-end;
   color: var(--cds-text-01, #161616);
   transition: visibility 0s linear 240ms, background-color 240ms cubic-bezier(0.4, 0.14, 1, 1), opacity 240ms cubic-bezier(0.4, 0.14, 1, 1);
-  --exp--tearsheet--stacking-scale-factor-single: 0.95;
-  --exp--tearsheet--stacking-scale-factor-double: 0.9;
+  --c4p--tearsheet--stacking-scale-factor-single: 0.95;
+  --c4p--tearsheet--stacking-scale-factor-double: 0.9;
 }
-.exp--tearsheet.is-visible {
+.c4p--tearsheet.is-visible {
   z-index: 9000;
   align-items: flex-end;
   transition: visibility 0s linear, background-color 240ms cubic-bezier(0, 0, 0.3, 1), opacity 240ms cubic-bezier(0, 0, 0.3, 1);
 }
-.exp--tearsheet.exp--tearsheet--stacked-1-of-2 {
+.c4p--tearsheet.c4p--tearsheet--stacked-1-of-2 {
   z-index: 8999;
   background-color: rgba(22, 22, 22, 0.33);
 }
-.exp--tearsheet.exp--tearsheet--stacked-1-of-3 {
+.c4p--tearsheet.c4p--tearsheet--stacked-1-of-3 {
   z-index: 8998;
   background-color: rgba(22, 22, 22, 0.11);
 }
-.exp--tearsheet.exp--tearsheet--stacked-2-of-3 {
+.c4p--tearsheet.c4p--tearsheet--stacked-2-of-3 {
   z-index: 8999;
   background-color: rgba(22, 22, 22, 0.25);
 }
-.exp--tearsheet.exp--tearsheet--stacked-2-of-2, .exp--tearsheet.exp--tearsheet--stacked-3-of-3 {
+.c4p--tearsheet.c4p--tearsheet--stacked-2-of-2, .c4p--tearsheet.c4p--tearsheet--stacked-3-of-3 {
   background-color: rgba(22, 22, 22, 0.25);
 }
-.exp--tearsheet .exp--tearsheet__container {
+.c4p--tearsheet .c4p--tearsheet__container {
   top: auto;
   height: 100%;
   max-height: calc(100% - var(--cds-spacing-09, 3rem));
   transform: translate3d(0, min(95vh, 500px), 0);
 }
-.exp--tearsheet.exp--tearsheet.exp--tearsheet .exp--tearsheet__container {
+.c4p--tearsheet.c4p--tearsheet.c4p--tearsheet .c4p--tearsheet__container {
   transition: transform 240ms cubic-bezier(0, 0, 0.3, 1), max-height 240ms cubic-bezier(0, 0, 0.3, 1);
 }
-.exp--tearsheet.exp--tearsheet--stacked-1-of-2 .exp--tearsheet__container, .exp--tearsheet.exp--tearsheet--stacked-2-of-3 .exp--tearsheet__container {
+.c4p--tearsheet.c4p--tearsheet--stacked-1-of-2 .c4p--tearsheet__container, .c4p--tearsheet.c4p--tearsheet--stacked-2-of-3 .c4p--tearsheet__container {
   max-height: calc(100% - var(--cds-spacing-09, 3rem) + var(--cds-spacing-05, 1rem));
 }
-.exp--tearsheet.exp--tearsheet--stacked-1-of-3 .exp--tearsheet__container {
+.c4p--tearsheet.c4p--tearsheet--stacked-1-of-3 .c4p--tearsheet__container {
   max-height: calc(100% - var(--cds-spacing-09, 3rem) + (2 * var(--cds-spacing-05, 1rem)));
 }
-.exp--tearsheet .exp--tearsheet__container--lower {
+.c4p--tearsheet .c4p--tearsheet__container--lower {
   max-height: calc(100% - (var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem)));
 }
-.exp--tearsheet.exp--tearsheet--stacked-1-of-2 .exp--tearsheet__container--lower, .exp--tearsheet.exp--tearsheet--stacked-2-of-3 .exp--tearsheet__container--lower {
+.c4p--tearsheet.c4p--tearsheet--stacked-1-of-2 .c4p--tearsheet__container--lower, .c4p--tearsheet.c4p--tearsheet--stacked-2-of-3 .c4p--tearsheet__container--lower {
   max-height: calc(
         100% - (var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem)) + var(--cds-spacing-05, 1rem)
       );
 }
-.exp--tearsheet.exp--tearsheet--stacked-1-of-3 .exp--tearsheet__container--lower {
+.c4p--tearsheet.c4p--tearsheet--stacked-1-of-3 .c4p--tearsheet__container--lower {
   max-height: calc(100% - (var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem)) + (2 * var(--cds-spacing-05, 1rem)));
 }
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__container {
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__container {
   width: 100%;
 }
 @media (min-width: 42rem) {
-  .exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__container {
+  .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__container {
     width: calc(100% - (2 * var(--cds-spacing-10, 4rem)));
   }
 }
-.exp--tearsheet.exp--tearsheet--stacked-1-of-2.is-visible .exp--tearsheet__container, .exp--tearsheet.exp--tearsheet--stacked-2-of-3.is-visible .exp--tearsheet__container {
-  transform: scale(var(--exp--tearsheet--stacking-scale-factor-single));
+.c4p--tearsheet.c4p--tearsheet--stacked-1-of-2.is-visible .c4p--tearsheet__container, .c4p--tearsheet.c4p--tearsheet--stacked-2-of-3.is-visible .c4p--tearsheet__container {
+  transform: scale(var(--c4p--tearsheet--stacking-scale-factor-single));
 }
-.exp--tearsheet.exp--tearsheet--stacked-1-of-3.is-visible .exp--tearsheet__container {
-  transform: scale(var(--exp--tearsheet--stacking-scale-factor-double));
+.c4p--tearsheet.c4p--tearsheet--stacked-1-of-3.is-visible .c4p--tearsheet__container {
+  transform: scale(var(--c4p--tearsheet--stacking-scale-factor-double));
 }
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__header {
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header {
   padding: var(--cds-spacing-06, 1.5rem) var(--cds-spacing-07, 2rem);
   border-bottom: 1px solid var(--cds-ui-03, #e0e0e0);
   margin: 0;
 }
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__header--with-nav {
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header--with-nav {
   padding-bottom: 0;
 }
-.exp--tearsheet.exp--tearsheet--narrow .exp--tearsheet__header {
+.c4p--tearsheet.c4p--tearsheet--narrow .c4p--tearsheet__header {
   padding: var(--cds-spacing-05, 1rem);
   margin: 0;
 }
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__header--with-close-icon {
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header--with-close-icon {
   padding-right: var(--cds-spacing-05, 1rem);
   margin-right: var(--cds-spacing-09, 3rem);
 }
-.exp--tearsheet .exp--tearsheet__header-content {
+.c4p--tearsheet .c4p--tearsheet__header-content {
   display: flex;
   justify-content: space-between;
 }
-.exp--tearsheet .exp--tearsheet__header-fields {
+.c4p--tearsheet .c4p--tearsheet__header-fields {
   flex: 1 1 100%;
 }
-.exp--tearsheet .exp--tearsheet__header-actions {
+.c4p--tearsheet .c4p--tearsheet__header-actions {
   flex: 0 0 auto;
   padding-left: var(--cds-spacing-06, 1.5rem);
 }
-.exp--tearsheet .exp--tearsheet__header-actions .bx--btn-set .bx--btn:not(:first-of-type) {
+.c4p--tearsheet .c4p--tearsheet__header-actions .bx--btn-set .bx--btn:not(:first-of-type) {
   margin-left: var(--cds-spacing-03, 0.5rem);
 }
-.exp--tearsheet .exp--tearsheet__header--no-close-icon {
+.c4p--tearsheet .c4p--tearsheet__header--no-close-icon {
   display: none;
 }
-.exp--tearsheet.exp--tearsheet--wide .bx--modal-header__heading.exp--tearsheet__heading {
+.c4p--tearsheet.c4p--tearsheet--wide .bx--modal-header__heading.c4p--tearsheet__heading {
   font-size: var(--cds-productive-heading-04-font-size, 1.75rem);
   font-weight: var(--cds-productive-heading-04-font-weight, 400);
   line-height: var(--cds-productive-heading-04-line-height, 1.28572);
   letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0);
 }
-.exp--tearsheet .exp--tearsheet__header-description {
+.c4p--tearsheet .c4p--tearsheet__header-description {
   display: -webkit-box;
   overflow: hidden;
   max-width: 100%;
@@ -2674,124 +2674,124 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   -webkit-line-clamp: 2;
 }
 @media (min-width: 42rem) {
-  .exp--tearsheet .exp--tearsheet__header-description {
+  .c4p--tearsheet .c4p--tearsheet__header-description {
     max-width: 60%;
   }
 }
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__header-description {
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header-description {
   margin-top: var(--cds-spacing-03, 0.5rem);
 }
-.exp--tearsheet .exp--tearsheet__header-navigation {
+.c4p--tearsheet .c4p--tearsheet__header-navigation {
   margin: var(--cds-spacing-04, 0.75rem) 0 0;
 }
-.exp--tearsheet.exp--tearsheet .exp--tearsheet__body {
+.c4p--tearsheet.c4p--tearsheet .c4p--tearsheet__body {
   display: flex;
   flex-direction: row;
   padding: 0;
   margin: 0;
 }
-.exp--tearsheet .exp--tearsheet__resize-detector {
+.c4p--tearsheet .c4p--tearsheet__resize-detector {
   width: 100%;
   height: 0;
 }
-.exp--tearsheet .exp--tearsheet__influencer {
+.c4p--tearsheet .c4p--tearsheet__influencer {
   flex: 0 0 257px;
   border-right: 1px solid var(--cds-ui-03, #e0e0e0);
   overflow-y: auto;
 }
-.exp--tearsheet .exp--tearsheet__influencer--wide {
+.c4p--tearsheet .c4p--tearsheet__influencer--wide {
   flex-basis: 321px;
 }
-.exp--tearsheet .exp--tearsheet__right {
+.c4p--tearsheet .c4p--tearsheet__right {
   display: grid;
   flex-grow: 1;
   grid-template-columns: 100%;
   grid-template-rows: 1fr auto;
 }
-.exp--tearsheet .exp--tearsheet__main {
+.c4p--tearsheet .c4p--tearsheet__main {
   display: flex;
   flex-direction: row;
   grid-column: 1/-1;
   grid-row: 1/-1;
 }
-.exp--tearsheet .exp--tearsheet__main .exp--tearsheet__influencer {
+.c4p--tearsheet .c4p--tearsheet__main .c4p--tearsheet__influencer {
   border-right: none;
   border-left: 1px solid var(--cds-ui-03, #e0e0e0);
 }
-.exp--tearsheet .exp--tearsheet__content {
+.c4p--tearsheet .c4p--tearsheet__content {
   overflow: auto;
   flex-grow: 1;
 }
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content {
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content {
   background: var(--cds-ui-background, #ffffff);
 }
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--pagination,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--pagination__control-buttons,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--text-input,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--text-area,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--search-input,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--select-input,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--dropdown,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--dropdown-list,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--number input[type=number],
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--date-picker__input {
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--pagination,
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--pagination__control-buttons,
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--text-input,
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--text-area,
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--search-input,
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--select-input,
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--dropdown,
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--dropdown-list,
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--number input[type=number],
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--date-picker__input {
   background-color: var(--cds-field-01, #f4f4f4);
 }
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--text-input--light,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--text-area--light,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--search--light .bx--search-input,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--select--light .bx--select-input,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--dropdown--light,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--dropdown--light .bx--dropdown-list,
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--number--light input[type=number],
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__content .bx--date-picker--light .bx--date-picker__input {
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--text-input--light,
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--text-area--light,
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--search--light .bx--search-input,
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--select--light .bx--select-input,
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--dropdown--light,
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--dropdown--light .bx--dropdown-list,
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--number--light input[type=number],
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--date-picker--light .bx--date-picker__input {
   background-color: var(--cds-field-02, #ffffff);
 }
-.exp--tearsheet .exp--tearsheet__button-container {
+.c4p--tearsheet .c4p--tearsheet__button-container {
   grid-column: 1/-1;
   grid-row: -1/-1;
   overflow-x: auto;
 }
-.exp--tearsheet .exp--tearsheet__buttons {
+.c4p--tearsheet .c4p--tearsheet__buttons {
   display: inline-flex;
   min-width: 100%;
   border-top: 1px solid var(--cds-ui-03, #e0e0e0);
 }
-.exp--tearsheet.exp--tearsheet--wide .exp--tearsheet__buttons {
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__buttons {
   background: var(--cds-ui-background, #ffffff);
 }
 
-.exp--create-tearsheet-narrow .bx--modal-header__heading,
-.exp--create-tearsheet-narrow .bx--modal-header__label,
-.exp--create-tearsheet-narrow .exp--tearsheet__header-description {
+.c4p--create-tearsheet-narrow .bx--modal-header__heading,
+.c4p--create-tearsheet-narrow .bx--modal-header__label,
+.c4p--create-tearsheet-narrow .c4p--tearsheet__header-description {
   max-width: 100%;
   padding-right: calc(20% - var(--cds-spacing-05, 1rem));
 }
 
-.exp--create-tearsheet-narrow .exp--tearsheet__header-description {
+.c4p--create-tearsheet-narrow .c4p--tearsheet__header-description {
   margin-top: var(--cds-spacing-02, 0.25rem);
 }
 
-.exp--create-tearsheet-narrow .exp--tearsheet__header {
+.c4p--create-tearsheet-narrow .c4p--tearsheet__header {
   border-bottom: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
 
-.exp--create-tearsheet-narrow .exp--tearsheet__content {
+.c4p--create-tearsheet-narrow .c4p--tearsheet__content {
   padding: var(--cds-spacing-05, 1rem);
 }
 
-.exp--create-tearsheet-narrow .exp--create-tearsheet-narrow__form {
+.c4p--create-tearsheet-narrow .c4p--create-tearsheet-narrow__form {
   padding-top: var(--cds-spacing-05, 1rem);
 }
 
-.exp--create-tearsheet-narrow .exp--create-tearsheet-narrow__form > * {
+.c4p--create-tearsheet-narrow .c4p--create-tearsheet-narrow__form > * {
   margin-bottom: var(--cds-spacing-05, 1rem);
 }
-.exp--create-tearsheet-narrow .exp--create-tearsheet-narrow__form > *:last-child {
+.c4p--create-tearsheet-narrow .c4p--create-tearsheet-narrow__form > *:last-child {
   margin-bottom: 0;
 }
 
-.exp--create-tearsheet-narrow .exp--create-tearsheet-narrow__form-title-text {
+.c4p--create-tearsheet-narrow .c4p--create-tearsheet-narrow__form-title-text {
   font-size: var(--cds-productive-heading-02-font-size, 1rem);
   font-weight: var(--cds-productive-heading-02-font-weight, 600);
   line-height: var(--cds-productive-heading-02-line-height, 1.375);
@@ -2799,7 +2799,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   padding-bottom: var(--cds-spacing-03, 0.5rem);
 }
 
-.exp--create-tearsheet-narrow .exp--create-tearsheet-narrow__form-description-text {
+.c4p--create-tearsheet-narrow .c4p--create-tearsheet-narrow__form-description-text {
   font-size: var(--cds-body-long-01-font-size, 0.875rem);
   font-weight: var(--cds-body-long-01-font-weight, 400);
   line-height: var(--cds-body-long-01-line-height, 1.42857);
@@ -3220,20 +3220,20 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     transform: translateY(0);
   }
 }
-.exp--tearsheet-create {
-  --exp--tearsheet-create--total-width: 0;
+.c4p--tearsheet-create {
+  --c4p--tearsheet-create--total-width: 0;
 }
 
-.exp--tearsheet-create .exp--tearsheet-create__step--hidden-step,
-.exp--tearsheet-create .exp--tearsheet-create__step--hidden-section {
+.c4p--tearsheet-create .c4p--tearsheet-create__step--hidden-step,
+.c4p--tearsheet-create .c4p--tearsheet-create__step--hidden-section {
   display: none;
 }
 
-.exp--tearsheet-create .exp--tearsheet-create__step--visible-section {
+.c4p--tearsheet-create .c4p--tearsheet-create__step--visible-section {
   display: block;
 }
 
-.exp--tearsheet-create .exp--tearsheet-create__step--visible-step {
+.c4p--tearsheet-create .c4p--tearsheet-create__step--visible-step {
   animation: 400ms stepContentEntrance;
   animation-fill-mode: forwards;
   animation-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
@@ -3241,51 +3241,51 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 @media (prefers-reduced-motion) {
-  .exp--tearsheet-create .exp--tearsheet-create__step--visible-step {
+  .c4p--tearsheet-create .c4p--tearsheet-create__step--visible-step {
     animation: none;
     opacity: 1;
   }
 }
-.exp--tearsheet-create .exp--tearsheet-create__content {
+.c4p--tearsheet-create .c4p--tearsheet-create__content {
   height: 100%;
   padding: var(--cds-spacing-06, 1.5rem);
   overflow-x: hidden;
 }
 
-.exp--tearsheet-create .exp--tearsheet-create__content .bx--grid {
+.c4p--tearsheet-create .c4p--tearsheet-create__content .bx--grid {
   padding: 0;
   margin: 0;
 }
 
-.exp--tearsheet-create .exp--tearsheet-create__step--heading {
+.c4p--tearsheet-create .c4p--tearsheet-create__step--heading {
   padding-bottom: var(--cds-spacing-06, 1.5rem);
 }
 
-.exp--tearsheet-create .bx--btn-set .bx--btn.bx--btn--disabled {
+.c4p--tearsheet-create .bx--btn-set .bx--btn.bx--btn--disabled {
   box-shadow: -0.0625rem 0 0 0 var(--cds-button-separator, #e0e0e0);
 }
 
-.exp--tearsheet-create .bx--side-nav--ux {
+.c4p--tearsheet-create .bx--side-nav--ux {
   position: initial;
   background-color: transparent;
 }
 
-.exp--tearsheet-create .exp--tearsheet-create__section--divider {
+.c4p--tearsheet-create .c4p--tearsheet-create__section--divider {
   position: relative;
   display: block;
-  width: var(--exp--tearsheet-create--total-width);
+  width: var(--c4p--tearsheet-create--total-width);
   height: 1px;
   margin: var(--cds-spacing-06, 1.5rem) calc(-1 * var(--cds-spacing-08, 2.5rem)) var(--cds-spacing-07, 2rem) calc(-1 * var(--cds-spacing-06, 1.5rem));
   background-color: var(--cds-ui-03, #e0e0e0);
 }
 
-.exp--tearsheet-create .exp--tearsheet-create__step--title,
-.exp--tearsheet-create .exp--tearsheet-create__section--title {
+.c4p--tearsheet-create .c4p--tearsheet-create__step--title,
+.c4p--tearsheet-create .c4p--tearsheet-create__section--title {
   margin-bottom: var(--cds-spacing-05, 1rem);
 }
 
-.exp--tearsheet-create .exp--tearsheet-create__section--subtitle,
-.exp--tearsheet-create .exp--tearsheet-create__step--subtitle {
+.c4p--tearsheet-create .c4p--tearsheet-create__section--subtitle,
+.c4p--tearsheet-create .c4p--tearsheet-create__step--subtitle {
   font-size: var(--cds-productive-heading-01-font-size, 0.875rem);
   font-weight: var(--cds-productive-heading-01-font-weight, 600);
   line-height: var(--cds-productive-heading-01-line-height, 1.28572);
@@ -3293,8 +3293,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-bottom: var(--cds-spacing-03, 0.5rem);
 }
 
-.exp--tearsheet-create .exp--tearsheet-create__section--description,
-.exp--tearsheet-create .exp--tearsheet-create__step--description {
+.c4p--tearsheet-create .c4p--tearsheet-create__section--description,
+.c4p--tearsheet-create .c4p--tearsheet-create__step--description {
   font-size: var(--cds-body-long-01-font-size, 0.875rem);
   font-weight: var(--cds-body-long-01-font-weight, 400);
   line-height: var(--cds-body-long-01-line-height, 1.42857);
@@ -3302,11 +3302,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-bottom: var(--cds-spacing-06, 1.5rem);
 }
 
-.exp--tearsheet-create .bx--fieldset {
+.c4p--tearsheet-create .bx--fieldset {
   margin-bottom: 0;
 }
 
-.exp--tearsheet-create .exp--tearsheet-create__step--fieldset > * {
+.c4p--tearsheet-create .c4p--tearsheet-create__step--fieldset > * {
   margin-bottom: var(--cds-spacing-05, 1rem);
 }
 
@@ -3379,46 +3379,46 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
-.exp--empty-state {
+.c4p--empty-state {
   color: var(--cds-text-01, #161616);
 }
-.exp--empty-state .exp--empty-state__header,
-.exp--empty-state .exp--empty-state__subtitle {
+.c4p--empty-state .c4p--empty-state__header,
+.c4p--empty-state .c4p--empty-state__subtitle {
   padding-bottom: var(--cds-spacing-02, 0.25rem);
   margin: 0;
 }
-.exp--empty-state .exp--empty-state__header--small {
+.c4p--empty-state .c4p--empty-state__header--small {
   font-size: var(--cds-productive-heading-03-font-size, 1.25rem);
   font-weight: var(--cds-productive-heading-03-font-weight, 400);
   line-height: var(--cds-productive-heading-03-line-height, 1.4);
   letter-spacing: var(--cds-productive-heading-03-letter-spacing, 0);
 }
-.exp--empty-state .exp--empty-state__subtitle--small {
+.c4p--empty-state .c4p--empty-state__subtitle--small {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
   line-height: var(--cds-body-short-01-line-height, 1.28572);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
 }
 
-.exp--empty-state__illustration.exp--empty-state__illustration--lg {
+.c4p--empty-state__illustration.c4p--empty-state__illustration--lg {
   min-width: var(--cds-spacing-11, 5rem);
   max-width: var(--cds-spacing-11, 5rem);
 }
-.exp--empty-state__illustration.exp--empty-state__illustration--sm {
+.c4p--empty-state__illustration.c4p--empty-state__illustration--sm {
   min-width: var(--cds-spacing-10, 4rem);
   max-width: var(--cds-spacing-10, 4rem);
 }
 
-.exp--empty-state__action-button,
-.exp--empty-state__link {
+.c4p--empty-state__action-button,
+.c4p--empty-state__link {
   margin-top: var(--cds-spacing-06, 1.5rem);
 }
 
-.exp--empty-state .exp--empty-state__action-button {
+.c4p--empty-state .c4p--empty-state__action-button {
   display: block;
 }
 
-.exp--empty-state .exp--empty-state__link {
+.c4p--empty-state .c4p--empty-state__link {
   display: block;
 }
 
@@ -3655,37 +3655,37 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     stroke-dashoffset: 276.4608;
   }
 }
-.exp--export-modal .bx--modal-footer .bx--btn {
+.c4p--export-modal .bx--modal-footer .bx--btn {
   max-width: none;
 }
 
-.exp--export-modal.bx--modal .bx--modal-content {
+.c4p--export-modal.bx--modal .bx--modal-content {
   padding-right: var(--cds-spacing-05, 1rem);
 }
 
-.exp--export-modal .bx--modal-close {
+.c4p--export-modal .bx--modal-close {
   display: none;
 }
 
-.exp--export-modal__body {
+.c4p--export-modal__body {
   padding-right: calc(20% - var(--cds-spacing-05, 1rem));
   margin-bottom: var(--cds-spacing-05, 1rem);
 }
 
-.exp--export-modal__messaging {
+.c4p--export-modal__messaging {
   display: flex;
   align-items: center;
 }
 
-.exp--export-modal__messaging p {
+.c4p--export-modal__messaging p {
   margin-left: var(--cds-spacing-03, 0.5rem);
 }
 
-.exp--export-modal__checkmark-icon {
+.c4p--export-modal__checkmark-icon {
   fill: var(--cds-interactive-01, #0f62fe);
 }
 
-.exp--export-modal__error-icon {
+.c4p--export-modal__error-icon {
   fill: var(--cds-danger, #da1e28);
 }
 
@@ -3763,61 +3763,61 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
-.exp--card {
+.c4p--card {
   background: var(--cds-ui-01, #f4f4f4);
   color: var(--cds-text-01, #161616);
 }
 
-.exp--card__clickable {
+.c4p--card__clickable {
   cursor: pointer;
   transition: background 110ms;
 }
 
-.exp--card__clickable:hover {
+.c4p--card__clickable:hover {
   background: var(--cds-hover-ui, #e5e5e5);
 }
 
-.exp--card__media-left {
+.c4p--card__media-left {
   display: flex;
   flex-direction: row;
 }
 
-.exp--card__media-left .exp--card__content-container {
+.c4p--card__media-left .c4p--card__content-container {
   display: flex;
   flex: 1;
   flex-direction: column;
 }
 
-.exp--card__media-left .exp--card__footer {
+.c4p--card__media-left .c4p--card__footer {
   align-self: flex-end;
   margin-top: auto;
 }
 
-.exp--card__media > * {
+.c4p--card__media > * {
   display: block;
   max-width: 100%;
 }
 
-.exp--card__header {
+.c4p--card__header {
   padding: var(--cds-spacing-05, 1rem);
 }
 
-.exp--card__header-label-only {
+.c4p--card__header-label-only {
   padding-bottom: var(--cds-spacing-03, 0.5rem);
 }
 
-.exp--card__header-label-only .exp--card__label {
+.c4p--card__header-label-only .c4p--card__label {
   margin-bottom: 0;
 }
 
-.exp--card__header-container {
+.c4p--card__header-container {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 }
 
-.exp--card__label {
+.c4p--card__label {
   font-size: var(--cds-label-01-font-size, 0.75rem);
   font-weight: var(--cds-label-01-font-weight, 400);
   line-height: var(--cds-label-01-line-height, 1.33333);
@@ -3825,7 +3825,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-bottom: var(--cds-spacing-01, 0.125rem);
 }
 
-.exp--card__description {
+.c4p--card__description {
   font-size: var(--cds-caption-01-font-size, 0.75rem);
   font-weight: var(--cds-caption-01-font-weight, 400);
   line-height: var(--cds-caption-01-line-height, 1.33333);
@@ -3833,7 +3833,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-top: var(--cds-spacing-01, 0.125rem);
 }
 
-.exp--card__body {
+.c4p--card__body {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
   line-height: var(--cds-body-short-01-line-height, 1.28572);
@@ -3842,33 +3842,33 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   padding-top: 0;
 }
 
-.exp--card__footer {
+.c4p--card__footer {
   display: flex;
   justify-content: flex-end;
 }
 
-.exp--card__actions {
+.c4p--card__actions {
   display: flex;
   flex-direction: row;
   margin: var(--cds-spacing-05, 1rem);
   margin-top: 0;
 }
 
-.exp--card__icon {
+.c4p--card__icon {
   cursor: pointer;
 }
 
-.exp--card__link {
+.c4p--card__link {
   color: inherit;
   text-decoration: inherit;
 }
 
-.exp--card__pictogram {
+.c4p--card__pictogram {
   padding-top: var(--cds-spacing-05, 1rem);
   padding-left: var(--cds-spacing-05, 1rem);
 }
 
-.exp--card__title {
+.c4p--card__title {
   font-size: var(--cds-productive-heading-03-font-size, 1.25rem);
   font-weight: var(--cds-productive-heading-03-font-weight, 400);
   line-height: var(--cds-productive-heading-03-line-height, 1.4);
@@ -3899,7 +3899,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
-.exp--http-errors .exp--http-errors__content {
+.c4p--http-errors .c4p--http-errors__content {
   position: fixed;
   z-index: 2;
   top: 50%;
@@ -3907,12 +3907,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   transform: translate(-50%, -150%);
 }
 @media (min-width: 42rem) {
-  .exp--http-errors .exp--http-errors__content {
+  .c4p--http-errors .c4p--http-errors__content {
     transform: translate(-50%, -50%);
   }
 }
 
-.exp--http-errors .exp--http-errors__error-code-label {
+.c4p--http-errors .c4p--http-errors__error-code-label {
   font-size: var(--cds-productive-heading-02-font-size, 1rem);
   font-weight: var(--cds-productive-heading-02-font-weight, 600);
   line-height: var(--cds-productive-heading-02-line-height, 1.375);
@@ -3920,7 +3920,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-bottom: var(--cds-spacing-02, 0.25rem);
 }
 
-.exp--http-errors .exp--http-errors__title {
+.c4p--http-errors .c4p--http-errors__title {
   font-size: var(--cds-productive-heading-05-font-size, 2rem);
   font-weight: var(--cds-productive-heading-05-font-weight, 400);
   line-height: var(--cds-productive-heading-05-line-height, 1.25);
@@ -3928,7 +3928,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-bottom: var(--cds-spacing-04, 0.75rem);
 }
 
-.exp--http-errors .exp--http-errors__description {
+.c4p--http-errors .c4p--http-errors__description {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
   line-height: var(--cds-body-short-01-line-height, 1.28572);
@@ -3936,18 +3936,18 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-bottom: var(--cds-spacing-06, 1.5rem);
 }
 
-.exp--http-errors .exp--http-errors__error-code-label,
-.exp--http-errors .exp--http-errors__title,
-.exp--http-errors .exp--http-errors__description {
+.c4p--http-errors .c4p--http-errors__error-code-label,
+.c4p--http-errors .c4p--http-errors__title,
+.c4p--http-errors .c4p--http-errors__description {
   color: var(--cds-text-01, #161616);
 }
 
-.exp--http-errors .exp--http-errors__link {
+.c4p--http-errors .c4p--http-errors__link {
   display: block;
   margin-bottom: var(--cds-spacing-02, 0.25rem);
 }
 
-.exp--http-errors .exp--http-errors__image {
+.c4p--http-errors .c4p--http-errors__image {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -3955,7 +3955,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   transform: translate(-50%, -40%);
 }
 @media (min-width: 42rem) {
-  .exp--http-errors .exp--http-errors__image {
+  .c4p--http-errors .c4p--http-errors__image {
     transform: translate(-50%, -50%);
   }
 }
@@ -4223,15 +4223,15 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
-.exp--import-modal .bx--modal-close {
+.c4p--import-modal .bx--modal-close {
   display: none;
 }
 
-.exp--import-modal .bx--modal-footer .bx--btn {
+.c4p--import-modal .bx--modal-footer .bx--btn {
   max-width: none;
 }
 
-.exp--import-modal.bx--modal .bx--modal-content {
+.c4p--import-modal.bx--modal .bx--modal-content {
   padding-right: var(--cds-spacing-05, 1rem);
 }
 
@@ -4244,20 +4244,20 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   padding-right: calc(20% - var(--cds-spacing-05, 1rem));
 }
 
-.exp--import-modal__input-group {
+.c4p--import-modal__input-group {
   display: flex;
 }
 
-.exp--import-modal__import-button.bx--btn {
+.c4p--import-modal__import-button.bx--btn {
   margin-left: var(--cds-spacing-03, 0.5rem);
 }
 
-.exp--import-modal__file-container {
+.c4p--import-modal__file-container {
   width: 100%;
 }
 
-.exp--import-modal .exp--import-modal__file-drop-header,
-.exp--import-modal .exp--import-modal__label {
+.c4p--import-modal .c4p--import-modal__file-drop-header,
+.c4p--import-modal .c4p--import-modal__label {
   margin-bottom: var(--cds-spacing-03, 0.5rem);
   font-size: var(--cds-productive-heading-01-font-size, 0.875rem);
   font-weight: var(--cds-productive-heading-01-font-weight, 600);
@@ -4265,7 +4265,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   letter-spacing: var(--cds-productive-heading-01-letter-spacing, 0.16px);
 }
 
-.exp--import-modal__helper-text {
+.c4p--import-modal__helper-text {
   margin-top: var(--cds-spacing-06, 1.5rem);
   margin-bottom: var(--cds-spacing-03, 0.5rem);
   font-size: var(--cds-helper-text-01-font-size, 0.75rem);
@@ -4273,21 +4273,21 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   letter-spacing: var(--cds-helper-text-01-letter-spacing, 0.32px);
 }
 
-.exp--import-modal__body {
+.c4p--import-modal__body {
   padding-right: calc(20% - var(--cds-spacing-05, 1rem));
   margin-bottom: var(--cds-spacing-06, 1.5rem);
 }
 
-.exp--import-modal .bx--file__selected-file {
+.c4p--import-modal .bx--file__selected-file {
   max-width: none;
   background: var(--cds-ui-02, #ffffff);
 }
 
-.exp--import-modal .bx--file {
+.c4p--import-modal .bx--file {
   margin-bottom: var(--cds-spacing-05, 1rem);
 }
 
-.exp--import-modal .bx--text-input:disabled {
+.c4p--import-modal .bx--text-input:disabled {
   background: var(--cds-ui-02, #ffffff);
 }
 
@@ -4474,7 +4474,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     transform: translateY(-38.5rem);
   }
 }
-.exp--notifications-panel__container {
+.c4p--notifications-panel__container {
   --cds-interactive-01: #0f62fe;
   --cds-interactive-02: #6f6f6f;
   --cds-interactive-03: #ffffff;
@@ -4911,7 +4911,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   transition: transform 110ms;
   transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
 }
-.exp--notifications-panel__container .exp--notifications-panel__header-container {
+.c4p--notifications-panel__container .c4p--notifications-panel__header-container {
   position: sticky;
   z-index: 2;
   top: 0;
@@ -4919,25 +4919,25 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   border-bottom: 1px solid var(--cds-ui-02, #ffffff);
   background-color: var(--cds-ui-background, #ffffff);
 }
-.exp--notifications-panel__container .exp--notifications-panel__header-container .exp--notifications-panel__header-flex {
+.c4p--notifications-panel__container .c4p--notifications-panel__header-container .c4p--notifications-panel__header-flex {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.exp--notifications-panel__container .exp--notifications-panel__header-container .exp--notifications-panel__do-not-disturb-toggle .bx--toggle__switch {
+.c4p--notifications-panel__container .c4p--notifications-panel__header-container .c4p--notifications-panel__do-not-disturb-toggle .bx--toggle__switch {
   margin-top: var(--cds-spacing-02, 0.25rem);
 }
-.exp--notifications-panel__container .exp--notifications-panel__header-container .exp--notifications-panel__dismiss-button {
+.c4p--notifications-panel__container .c4p--notifications-panel__header-container .c4p--notifications-panel__dismiss-button {
   color: var(--cds-text-01, #161616);
 }
-.exp--notifications-panel__container .exp--notifications-panel__header-container .exp--notifications-panel__header {
+.c4p--notifications-panel__container .c4p--notifications-panel__header-container .c4p--notifications-panel__header {
   font-size: var(--cds-productive-heading-01-font-size, 0.875rem);
   font-weight: var(--cds-productive-heading-01-font-weight, 600);
   line-height: var(--cds-productive-heading-01-line-height, 1.28572);
   letter-spacing: var(--cds-productive-heading-01-letter-spacing, 0.16px);
   margin: 0;
 }
-.exp--notifications-panel__container .exp--notifications-panel__time-section-label {
+.c4p--notifications-panel__container .c4p--notifications-panel__time-section-label {
   font-size: var(--cds-label-01-font-size, 0.75rem);
   font-weight: var(--cds-label-01-font-weight, 400);
   line-height: var(--cds-label-01-line-height, 1.33333);
@@ -4950,20 +4950,20 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   background-color: var(--cds-ui-01, #f4f4f4);
   color: var(--cds-text-02, #525252);
 }
-.exp--notifications-panel__container .exp--notifications-panel__notification:hover,
-.exp--notifications-panel__container .exp--notifications-panel__notification:focus {
+.c4p--notifications-panel__container .c4p--notifications-panel__notification:hover,
+.c4p--notifications-panel__container .c4p--notifications-panel__notification:focus {
   background-color: var(--cds-ui-03, #e0e0e0);
 }
-.exp--notifications-panel__container .exp--notifications-panel__notification:hover .exp--notifications-panel__dismiss-single-button,
-.exp--notifications-panel__container .exp--notifications-panel__notification:focus .exp--notifications-panel__dismiss-single-button {
+.c4p--notifications-panel__container .c4p--notifications-panel__notification:hover .c4p--notifications-panel__dismiss-single-button,
+.c4p--notifications-panel__container .c4p--notifications-panel__notification:focus .c4p--notifications-panel__dismiss-single-button {
   opacity: 1;
 }
-.exp--notifications-panel__container .exp--notifications-panel__notification:focus {
+.c4p--notifications-panel__container .c4p--notifications-panel__notification:focus {
   border-color: var(--cds-focus, #0f62fe);
   box-shadow: inset 0 0 0 2px var(--cds-focus, #0f62fe), inset 0 0 0 2px var(--cds-ui-background, #ffffff);
   outline: 0;
 }
-.exp--notifications-panel__container .exp--notifications-panel__notification {
+.c4p--notifications-panel__container .c4p--notifications-panel__notification {
   position: relative;
   display: flex;
   width: 100%;
@@ -4977,62 +4977,62 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   transition: background-color 240ms;
   transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
 }
-.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-title {
+.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-title {
   margin-bottom: var(--cds-spacing-02, 0.25rem);
   color: var(--cds-text-04, #ffffff);
   font-weight: 400;
 }
-.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-title.exp--notifications-panel__notification-title-unread {
+.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-title.c4p--notifications-panel__notification-title-unread {
   margin-bottom: var(--cds-spacing-02, 0.25rem);
   color: var(--cds-text-04, #ffffff);
   font-weight: 600;
 }
-.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notifications-link {
+.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notifications-link {
   font-size: var(--cds-label-01-font-size, 0.75rem);
   font-weight: var(--cds-label-01-font-weight, 400);
   line-height: var(--cds-label-01-line-height, 1.33333);
   letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
 }
-.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-status-icon {
+.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-status-icon {
   min-width: 1rem;
   margin-right: var(--cds-spacing-03, 0.5rem);
 }
-.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-status-icon.exp--notifications-panel__notification-status-icon-error {
+.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-status-icon.c4p--notifications-panel__notification-status-icon-error {
   fill: var(--cds-support-01, #da1e28);
 }
-.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-status-icon.exp--notifications-panel__notification-status-icon-success {
+.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-status-icon.c4p--notifications-panel__notification-status-icon-success {
   fill: var(--cds-support-02, #198038);
 }
-.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-status-icon.exp--notifications-panel__notification-status-icon-warning {
+.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-status-icon.c4p--notifications-panel__notification-status-icon-warning {
   fill: var(--cds-support-03, #f1c21b);
 }
-.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-status-icon.exp--notifications-panel__notification-status-icon-informational {
+.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-status-icon.c4p--notifications-panel__notification-status-icon-informational {
   fill: var(--cds-support-04, #0043ce);
 }
-.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-time-label {
+.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-time-label {
   margin-bottom: var(--cds-spacing-03, 0.5rem);
 }
-.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-time-label,
-.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-description {
+.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-time-label,
+.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-description {
   font-size: var(--cds-label-01-font-size, 0.75rem);
   font-weight: var(--cds-label-01-font-weight, 400);
   line-height: var(--cds-label-01-line-height, 1.33333);
   letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
   color: var(--cds-text-02, #525252);
 }
-.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-description.exp--notifications-panel__notification-short-description {
+.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-description.c4p--notifications-panel__notification-short-description {
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
-.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-description.exp--notifications-panel__notification-long-description {
+.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-description.c4p--notifications-panel__notification-long-description {
   display: block;
   overflow: initial;
   -webkit-line-clamp: initial;
 }
-.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-read-more-button,
-.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-read-less-button {
+.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-more-button,
+.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-less-button {
   font-size: var(--cds-label-01-font-size, 0.75rem);
   font-weight: var(--cds-label-01-font-weight, 400);
   line-height: var(--cds-label-01-line-height, 1.33333);
@@ -5040,19 +5040,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   min-width: 5.5rem;
   padding: 0;
 }
-.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-read-more-button .bx--btn__icon,
-.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-read-less-button .bx--btn__icon {
+.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-more-button .bx--btn__icon,
+.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-less-button .bx--btn__icon {
   transition: transform 240ms ease;
 }
-.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-read-more-button.exp--notifications-panel__notification-read-more-button .bx--btn__icon,
-.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-read-less-button.exp--notifications-panel__notification-read-more-button .bx--btn__icon {
+.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-more-button.c4p--notifications-panel__notification-read-more-button .bx--btn__icon,
+.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-less-button.c4p--notifications-panel__notification-read-more-button .bx--btn__icon {
   transform: rotate(0deg);
 }
-.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-read-more-button.exp--notifications-panel__notification-read-less-button .bx--btn__icon,
-.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__notification-content .exp--notifications-panel__notification-read-less-button.exp--notifications-panel__notification-read-less-button .bx--btn__icon {
+.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-more-button.c4p--notifications-panel__notification-read-less-button .bx--btn__icon,
+.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-less-button.c4p--notifications-panel__notification-read-less-button .bx--btn__icon {
   transform: rotate(180deg);
 }
-.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__dismiss-single-button {
+.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__dismiss-single-button {
   position: absolute;
   top: 0;
   right: 0;
@@ -5061,12 +5061,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   color: var(--cds-text-01, #161616);
   opacity: 0;
 }
-.exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__dismiss-single-button:hover, .exp--notifications-panel__container .exp--notifications-panel__notification .exp--notifications-panel__dismiss-single-button:focus {
+.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__dismiss-single-button:hover, .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__dismiss-single-button:focus {
   opacity: 1;
 }
-.exp--notifications-panel__container .exp--notifications-panel__notification-today:not(:first-of-type):before,
-.exp--notifications-panel__container .exp--notifications-panel__notification-yesterday:not(:first-of-type):before,
-.exp--notifications-panel__container .exp--notifications-panel__notification-previous:not(:first-of-type):before {
+.c4p--notifications-panel__container .c4p--notifications-panel__notification-today:not(:first-of-type):before,
+.c4p--notifications-panel__container .c4p--notifications-panel__notification-yesterday:not(:first-of-type):before,
+.c4p--notifications-panel__container .c4p--notifications-panel__notification-previous:not(:first-of-type):before {
   position: absolute;
   top: 0;
   width: calc(100% - (2 * var(--cds-spacing-05, 1rem)));
@@ -5077,12 +5077,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   transition: background-color 240ms;
   transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
 }
-.exp--notifications-panel__container .exp--notifications-panel__notification-today:hover + .exp--notifications-panel__notification-today:not(:first-of-type):before,
-.exp--notifications-panel__container .exp--notifications-panel__notification-yesterday:hover + .exp--notifications-panel__notification-yesterday:not(:first-of-type):before,
-.exp--notifications-panel__container .exp--notifications-panel__notification-previous:hover + .exp--notifications-panel__notification-previous:not(:first-of-type):before {
+.c4p--notifications-panel__container .c4p--notifications-panel__notification-today:hover + .c4p--notifications-panel__notification-today:not(:first-of-type):before,
+.c4p--notifications-panel__container .c4p--notifications-panel__notification-yesterday:hover + .c4p--notifications-panel__notification-yesterday:not(:first-of-type):before,
+.c4p--notifications-panel__container .c4p--notifications-panel__notification-previous:hover + .c4p--notifications-panel__notification-previous:not(:first-of-type):before {
   background-color: transparent;
 }
-.exp--notifications-panel__container .exp--notifications-panel__main-section-empty.exp--notifications-panel__main-section {
+.c4p--notifications-panel__container .c4p--notifications-panel__main-section-empty.c4p--notifications-panel__main-section {
   display: flex;
   height: 100%;
   min-height: initial;
@@ -5090,16 +5090,16 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   justify-content: center;
   margin-top: var(--cds-layout-07, 10rem);
 }
-.exp--notifications-panel__container .exp--notifications-panel__main-section-empty.exp--notifications-panel__main-section .exp-subtext {
+.c4p--notifications-panel__container .c4p--notifications-panel__main-section-empty.c4p--notifications-panel__main-section .c4p-subtext {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
   line-height: var(--cds-body-short-01-line-height, 1.28572);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
 }
-.exp--notifications-panel__container .exp--notifications-panel__main-section {
+.c4p--notifications-panel__container .c4p--notifications-panel__main-section {
   min-height: 498px;
 }
-.exp--notifications-panel__container .exp--notifications-panel__bottom-actions {
+.c4p--notifications-panel__container .c4p--notifications-panel__bottom-actions {
   position: sticky;
   z-index: 2;
   bottom: 0;
@@ -5110,7 +5110,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   border-top: 1px solid var(--cds-ui-02, #ffffff);
   background-color: var(--cds-ui-background, #ffffff);
 }
-.exp--notifications-panel__container .exp--notifications-panel__bottom-actions .exp--notifications-panel__view-all-button {
+.c4p--notifications-panel__container .c4p--notifications-panel__bottom-actions .c4p--notifications-panel__view-all-button {
   width: 100%;
   max-width: calc(100% - 2.5rem);
   height: 2.5rem;
@@ -5118,7 +5118,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   border-right: 1px solid var(--cds-ui-02, #ffffff);
   color: var(--cds-text-01, #161616);
 }
-.exp--notifications-panel__container .exp--notifications-panel__bottom-actions .exp--notifications-panel__settings-button {
+.c4p--notifications-panel__container .c4p--notifications-panel__bottom-actions .c4p--notifications-panel__settings-button {
   display: flex;
   min-width: 2.5rem;
   height: 2.5rem;
@@ -5128,7 +5128,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   padding: 0;
   color: var(--cds-text-01, #161616);
 }
-.exp--notifications-panel__container .exp--notifications-panel__bottom-actions .exp--notifications-panel__settings-button .bx--btn__icon {
+.c4p--notifications-panel__container .c4p--notifications-panel__bottom-actions .c4p--notifications-panel__settings-button .bx--btn__icon {
   margin: 0;
 }
 
@@ -5322,21 +5322,21 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
-.exp--action-bar.exp--action-bar {
+.c4p--action-bar.c4p--action-bar {
   display: block;
 }
-.exp--action-bar .exp--action-bar__displayed-items {
+.c4p--action-bar .c4p--action-bar__displayed-items {
   display: inline-flex;
   width: 100%;
   white-space: nowrap;
 }
-.exp--action-bar .exp--action-bar__displayed-items--right {
+.c4p--action-bar .c4p--action-bar__displayed-items--right {
   justify-content: flex-end;
 }
-.exp--action-bar .exp--action-bar-overflow-items {
+.c4p--action-bar .c4p--action-bar-overflow-items {
   display: inline-block;
 }
-.exp--action-bar .exp--action-bar__hidden-sizing-items {
+.c4p--action-bar .c4p--action-bar__hidden-sizing-items {
   position: absolute;
   top: -100vh;
   left: -100vw;
@@ -5346,15 +5346,15 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   visibility: hidden;
 }
 
-.exp--action-bar-overflow-items__options .exp--action-bar-overflow-items__item {
+.c4p--action-bar-overflow-items__options .c4p--action-bar-overflow-items__item {
   padding: 0 var(--cds-spacing-03, 0.5rem);
 }
-.exp--action-bar-overflow-items__options .exp--action-bar-overflow-items__item-content {
+.c4p--action-bar-overflow-items__options .c4p--action-bar-overflow-items__item-content {
   display: flex;
   width: 100%;
   justify-content: space-between;
 }
-.exp--action-bar-overflow-items__options .exp--action-bar-overflow-items__item svg {
+.c4p--action-bar-overflow-items__options .c4p--action-bar-overflow-items__item svg {
   margin: 0 var(--cds-spacing-02, 0.25rem);
 }
 
@@ -5417,30 +5417,30 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
-.exp--breadcrumb-with-overflow.exp--breadcrumb-with-overflow {
+.c4p--breadcrumb-with-overflow.c4p--breadcrumb-with-overflow {
   display: block;
 }
-.exp--breadcrumb-with-overflow .exp--breadcrumb-with-overflow__space {
+.c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__space {
   position: relative;
   display: block;
   width: 100%;
   white-space: nowrap;
 }
-.exp--breadcrumb-with-overflow .exp--breadcrumb-with-overflow__breadcrumb-container.exp--breadcrumb-with-overflow__breadcrumb-container-with-items {
+.c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__breadcrumb-container.c4p--breadcrumb-with-overflow__breadcrumb-container-with-items {
   display: none;
   width: 100%;
 }
 @media (min-width: 42rem) {
-  .exp--breadcrumb-with-overflow .exp--breadcrumb-with-overflow__breadcrumb-container.exp--breadcrumb-with-overflow__breadcrumb-container-with-items {
+  .c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__breadcrumb-container.c4p--breadcrumb-with-overflow__breadcrumb-container-with-items {
     display: inline-flex;
   }
 }
-.exp--breadcrumb-with-overflow .exp--breadcrumb-with-overflow__breadcrumb-container .bx--breadcrumb {
+.c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__breadcrumb-container .bx--breadcrumb {
   width: 100%;
   flex-wrap: nowrap;
   align-items: flex-start;
 }
-.exp--breadcrumb-with-overflow .exp--breadcrumb-with-overflow__breadcrumb-container--hidden {
+.c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__breadcrumb-container--hidden {
   position: absolute;
   top: -100vh;
   left: -100vw;
@@ -5449,28 +5449,28 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   pointer-events: none;
   visibility: hidden;
 }
-.exp--breadcrumb-with-overflow .bx--breadcrumb-item:last-child {
+.c4p--breadcrumb-with-overflow .bx--breadcrumb-item:last-child {
   display: inline;
 }
-.exp--breadcrumb-with-overflow .exp--breadcrumb-with-overflow__displayed-breadcrumb:last-child {
+.c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__displayed-breadcrumb:last-child {
   display: inline;
   overflow: hidden;
 }
-.exp--breadcrumb-with-overflow .exp--breadcrumb-with-overflow__displayed-breadcrumb:last-child .bx--link {
+.c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__displayed-breadcrumb:last-child .bx--link {
   display: inline-block;
   overflow: hidden;
   width: 100%;
   text-overflow: ellipsis;
 }
-.exp--breadcrumb-with-overflow .bx--link {
+.c4p--breadcrumb-with-overflow .bx--link {
   max-height: 18px;
 }
-.exp--breadcrumb-with-overflow .exp--breadcrumb-with-overflow__breadcrumb-back-button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
+.c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__breadcrumb-back-button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
   display: inline-flex;
   margin-top: calc(-1 * var(--cds-spacing-04, 0.75rem));
 }
 @media (min-width: 42rem) {
-  .exp--breadcrumb-with-overflow .exp--breadcrumb-with-overflow__breadcrumb-back-button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
+  .c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__breadcrumb-back-button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
     display: none;
   }
 }
@@ -5620,27 +5620,27 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
-.exp--tag-set.exp--tag-set {
+.c4p--tag-set.c4p--tag-set {
   display: block;
   width: 100%;
 }
-.exp--tag-set .exp--tag-set__space {
+.c4p--tag-set .c4p--tag-set__space {
   position: relative;
   display: block;
   width: 100%;
   white-space: nowrap;
 }
-.exp--tag-set .exp--tag-set__space--align-end {
+.c4p--tag-set .c4p--tag-set__space--align-end {
   text-align: end;
 }
-.exp--tag-set .exp--tag-set__space--align-center {
+.c4p--tag-set .c4p--tag-set__space--align-center {
   text-align: center;
 }
-.exp--tag-set .exp--tag-set__tag-container {
+.c4p--tag-set .c4p--tag-set__tag-container {
   display: inline-flex;
   white-space: nowrap;
 }
-.exp--tag-set .exp--tag-set__tag-container--hidden {
+.c4p--tag-set .c4p--tag-set__tag-container--hidden {
   position: absolute;
   top: -100vh;
   left: -100vw;
@@ -5649,43 +5649,43 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   pointer-events: none;
   visibility: hidden;
 }
-.exp--tag-set .exp--tag-set-overflow {
+.c4p--tag-set .c4p--tag-set-overflow {
   display: inline-block;
   vertical-align: bottom;
 }
-.exp--tag-set .exp--tag-set-overflow--hidden {
+.c4p--tag-set .c4p--tag-set-overflow--hidden {
   overflow: hidden;
   max-width: 0;
   visibility: hidden;
 }
 
-.exp--tag-set-modal.exp--tag-set-modal {
+.c4p--tag-set-modal.c4p--tag-set-modal {
   text-align: initial;
   white-space: initial;
 }
 @media (min-width: 42rem) {
-  .exp--tag-set-modal .exp--tag-set-modal__container {
+  .c4p--tag-set-modal .c4p--tag-set-modal__container {
     height: 90%;
     max-height: 450px;
   }
 }
-.exp--tag-set-modal .exp--tag-set-modal__search {
+.c4p--tag-set-modal .c4p--tag-set-modal__search {
   margin-top: var(--cds-spacing-05, 1rem);
   margin-bottom: 0;
 }
-.exp--tag-set-modal.exp--tag-set-modal .exp--tag-set-modal__fade {
+.c4p--tag-set-modal.c4p--tag-set-modal .c4p--tag-set-modal__fade {
   position: relative;
   margin-right: var(--cds-spacing-05, 1rem);
   margin-left: var(--cds-spacing-05, 1rem);
 }
-.exp--tag-set-modal .exp--tag-set-modal__body {
+.c4p--tag-set-modal .c4p--tag-set-modal__body {
   padding-bottom: var(--cds-spacing-06, 1.5rem);
 }
-.exp--tag-set-modal .exp--tag-set-modal__header {
+.c4p--tag-set-modal .c4p--tag-set-modal__header {
   padding-right: 0;
   margin-right: var(--cds-spacing-05, 1rem);
 }
-.exp--tag-set-modal.exp--tag-set-modal .exp--tag-set-modal__fade::after {
+.c4p--tag-set-modal.c4p--tag-set-modal .c4p--tag-set-modal__fade::after {
   position: absolute;
   top: calc(-1 * var(--cds-spacing-11, 5rem));
   left: 0;
@@ -5695,15 +5695,15 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   content: \\"\\";
 }
 
-.exp--tag-set-overflow__tooltip.exp--tag-set-overflow__tooltip {
+.c4p--tag-set-overflow__tooltip.c4p--tag-set-overflow__tooltip {
   min-width: initial;
 }
-.exp--tag-set-overflow__tooltip .exp--tag-set-overflow__show-all-tags-link {
+.c4p--tag-set-overflow__tooltip .c4p--tag-set-overflow__show-all-tags-link {
   display: inline-block;
   margin: var(--cds-spacing-03, 0.5rem) 0 var(--cds-spacing-02, 0.25rem);
 }
-.exp--tag-set-overflow__tooltip .exp--tag-set-overflow__tag-item,
-.exp--tag-set-overflow__tooltip .exp--tag-set-overflow__tag-item .bx--tag {
+.c4p--tag-set-overflow__tooltip .c4p--tag-set-overflow__tag-item,
+.c4p--tag-set-overflow__tooltip .c4p--tag-set-overflow__tag-item .bx--tag {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
   line-height: var(--cds-body-short-01-line-height, 1.28572);
@@ -5719,17 +5719,17 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.exp--tag-set-overflow__tooltip .exp--tag-set-overflow__tag .bx--tag__close-icon {
+.c4p--tag-set-overflow__tooltip .c4p--tag-set-overflow__tag .bx--tag__close-icon {
   padding: 0;
 }
-.exp--tag-set-overflow__tooltip .exp--tag-set-overflow__tag .bx--tag--high-contrast {
+.c4p--tag-set-overflow__tooltip .c4p--tag-set-overflow__tag .bx--tag--high-contrast {
   background-color: var(--cds-ui-background, #ffffff);
   color: var(--cds-text-01, #161616);
 }
-.exp--tag-set-overflow__tooltip .exp--tag-set-overflow__tag .bx--tag__close-icon:hover {
+.c4p--tag-set-overflow__tooltip .c4p--tag-set-overflow__tag .bx--tag__close-icon:hover {
   background-color: var(--cds-hover-ui, #e5e5e5);
 }
-.exp--tag-set-overflow__tooltip .exp--tag-set-overflow__tag .bx--tag__close-icon:focus {
+.c4p--tag-set-overflow__tooltip .c4p--tag-set-overflow__tag .bx--tag__close-icon:focus {
   box-shadow: inset 0 0 0 var(--cds-spacing-01, 0.125rem) var(--cds-focus, #0f62fe);
 }
 
@@ -5784,31 +5784,31 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
-.exp--button-menu {
+.c4p--button-menu {
   min-width: 160px;
 }
-.exp--button-menu .exp--button-menu__trigger {
+.c4p--button-menu .c4p--button-menu__trigger {
   width: 100%;
   padding: 0 var(--cds-spacing-05, 1rem);
 }
 
-.exp--button-menu__options.bx--overflow-menu-options::after {
+.c4p--button-menu__options.bx--overflow-menu-options::after {
   content: initial;
 }
 
-.exp--button-set-with-overflow.exp--button-set-with-overflow {
+.c4p--button-set-with-overflow.c4p--button-set-with-overflow {
   display: flex;
 }
-.exp--button-set-with-overflow .exp--button-set-with-overflow__space {
+.c4p--button-set-with-overflow .c4p--button-set-with-overflow__space {
   position: relative;
   display: block;
   width: 100%;
   white-space: nowrap;
 }
-.exp--button-set-with-overflow .exp--button-set-with-overflow__button-container {
+.c4p--button-set-with-overflow .c4p--button-set-with-overflow__button-container {
   display: inline-flex;
 }
-.exp--button-set-with-overflow .exp--button-set-with-overflow__button-container--hidden {
+.c4p--button-set-with-overflow .c4p--button-set-with-overflow__button-container--hidden {
   position: absolute;
   top: -100vh;
   left: -100vw;
@@ -5817,7 +5817,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   pointer-events: none;
   visibility: hidden;
 }
-.exp--button-set-with-overflow.exp--button-set-with-overflow--right {
+.c4p--button-set-with-overflow.c4p--button-set-with-overflow--right {
   justify-content: flex-end;
 }
 
@@ -5829,76 +5829,86 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     background-color: var(--to-color);
   }
 }
-.exp--page-header.exp--page-header {
+@keyframes background-and-shadow-appear {
+  from {
+    background-color: var(--from-color);
+    box-shadow: 0 1px 0 var(--from-color);
+  }
+  to {
+    background-color: var(--to-color);
+    box-shadow: 0 1px 0 var(--to-color-shadow);
+  }
+}
+.c4p--page-header.c4p--page-header {
   /* Bleed class for the background */
   position: sticky;
   /* z-index used to raise above any position relative content as per Carbon header */
   /* dropped  1 below Carbon header so as not to overlay the side panel */
   z-index: 7999;
-  top: var(--exp--page-header--header-top);
+  top: var(--c4p--page-header--header-top);
   display: inline-block;
   /* cause top/bottom margin to reserve space */
   width: 100%;
   background-color: var(--cds-ui-background, #ffffff);
   color: var(--cds-text-01, #161616);
   /* custom props */
-  --exp--page-header--breadcrumb-title-visibility: hidden;
-  --exp--page-header--breadcrumb-title-opacity: 1;
-  --exp--page-header--breadcrumb-top: 0;
-  --exp--page-header--background-opacity: 1;
-  --exp--page-header--breadcrumb-title-top: initial;
-  --exp--page-header--button-set-in-breadcrumb-width-px: initial;
-  --exp--page-header--navigation-buffer-top: $spacing-06;
+  --c4p--page-header--breadcrumb-title-visibility: hidden;
+  --c4p--page-header--breadcrumb-title-opacity: 1;
+  --c4p--page-header--breadcrumb-top: 0;
+  --c4p--page-header--background-opacity: 1;
+  --c4p--page-header--breadcrumb-title-top: initial;
+  --c4p--page-header--button-set-in-breadcrumb-width-px: initial;
+  --c4p--page-header--navigation-buffer-top: $spacing-06;
 }
-.exp--page-header.exp--page-header--has-navigation-tags-only {
-  --exp--page-header--navigation-buffer-top: $spacing-04;
+.c4p--page-header.c4p--page-header--has-navigation-tags-only {
+  --c4p--page-header--navigation-buffer-top: $spacing-04;
 }
-.exp--page-header::before {
+.c4p--page-header::before {
   --from-color: var(--cds-ui-background, #ffffff);
   --to-color: var(--cds-ui-01, #f4f4f4);
+  --to-color-shadow: var(--cds-ui-03, #e0e0e0);
   position: absolute;
   top: 0;
   left: 0;
   display: block;
   width: 100%;
   height: 100%;
-  animation: background-appear 1000ms calc(-1000ms * var(--exp--page-header--background-opacity)) linear paused forwards;
+  animation: background-and-shadow-appear 1000ms calc(-1000ms * var(--c4p--page-header--background-opacity)) linear paused forwards;
   content: \\"\\";
   z-index: -1;
-  box-shadow: 0 1px 0 var(--cds-ui-03, #e0e0e0);
 }
-.exp--page-header .exp--page-header--width--xl {
+.c4p--page-header .c4p--page-header--width--xl {
   padding-right: var(--cds-spacing-07, 2rem);
   padding-left: var(--cds-spacing-07, 2rem);
 }
-.exp--page-header .exp--page-header__breadcrumb-row {
+.c4p--page-header .c4p--page-header__breadcrumb-row {
   position: sticky;
   z-index: 99;
-  top: var(--exp--page-header--breadcrumb-top);
+  top: var(--c4p--page-header--breadcrumb-top);
   min-height: var(--cds-spacing-08, 2.5rem);
 }
-.exp--page-header .exp--page-header__breadcrumb-row + .exp--page-header__last-row-buffer--active {
+.c4p--page-header .c4p--page-header__breadcrumb-row + .c4p--page-header__last-row-buffer--active {
   height: var(--cds-spacing-02, 0.25rem);
 }
-.exp--page-header .exp--page-header__breadcrumb-row:not(.exp--page-header__breadcrumb-row--has-action-bar) {
+.c4p--page-header .c4p--page-header__breadcrumb-row:not(.c4p--page-header__breadcrumb-row--has-action-bar) {
   margin-bottom: calc(-1 * var(--cds-spacing-03, 0.5rem));
 }
-.exp--page-header .exp--page-header__breadcrumb-row--container {
+.c4p--page-header .c4p--page-header__breadcrumb-row--container {
   display: flex;
   min-width: 100%;
   flex-wrap: nowrap;
 }
-.exp--page-header .exp--page-header__has-page-actions-without-action-bar {
+.c4p--page-header .c4p--page-header__has-page-actions-without-action-bar {
   min-width: calc(0.6 * (100% + 2 * var(--cds-spacing-05, 1rem)));
   max-width: calc(0.6 * (100% + 2 * var(--cds-spacing-05, 1rem)));
 }
-.exp--page-header .exp--page-header__has-page-actions-without-action-bar .exp--page-header__has-page-actions-without-action-bar {
+.c4p--page-header .c4p--page-header__has-page-actions-without-action-bar .c4p--page-header__has-page-actions-without-action-bar {
   min-width: 100%;
 }
-.exp--page-header .exp--page-header__breadcrumb-row--has-action-bar .exp--page-header__breadcrumb-row--container {
-  min-width: calc(100% + (var(--exp--page-header--width-px) - var(--exp--page-header--breadcrumb-row-width-px)) / 2);
+.c4p--page-header .c4p--page-header__breadcrumb-row--has-action-bar .c4p--page-header__breadcrumb-row--container {
+  min-width: calc(100% + (var(--c4p--page-header--width-px) - var(--c4p--page-header--breadcrumb-row-width-px)) / 2);
 }
-.exp--page-header .exp--page-header__breadcrumb-row::after {
+.c4p--page-header .c4p--page-header__breadcrumb-row::after {
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -5912,204 +5922,205 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   transform: translateX(-50%) scaleX(1);
   transition: all 150ms ease-out;
 }
-.exp--page-header .exp--page-header__breadcrumb-row--next-to-tabs::after,
-.exp--page-header .exp--page-header__breadcrumb-row--has-action-bar::after {
+.c4p--page-header .c4p--page-header__breadcrumb-row--next-to-tabs::after,
+.c4p--page-header .c4p--page-header__breadcrumb-row--has-action-bar::after {
   /* creates a full width box shadow without causing scroll */
   box-shadow: 25vw 1px 0 0 var(--cds-ui-03, #e0e0e0), -25vw 1px 0 0 var(--cds-ui-03, #e0e0e0);
   opacity: 1;
 }
-.exp--page-header .exp--page-header__breadcrumb-container {
+.c4p--page-header .c4p--page-header__breadcrumb-container {
   width: 100%;
 }
-.exp--page-header .exp--page-header__action-bar-column {
+.c4p--page-header .c4p--page-header__action-bar-column {
   display: none;
 }
-.exp--page-header .exp--page-header__breadcrumb-row--has-breadcrumbs .exp--page-header__action-bar-column {
+.c4p--page-header .c4p--page-header__breadcrumb-row--has-breadcrumbs .c4p--page-header__action-bar-column {
   max-width: 75%;
   flex: 0 1 75%;
 }
 @media (min-width: 42rem) {
-  .exp--page-header .exp--page-header__breadcrumb-row--has-breadcrumbs .exp--page-header__action-bar-column {
+  .c4p--page-header .c4p--page-header__breadcrumb-row--has-breadcrumbs .c4p--page-header__action-bar-column {
     max-width: 40%;
     flex: 1 0 40%;
   }
 }
-.exp--page-header .exp--page-header__breadcrumb-row--has-action-bar .exp--page-header__action-bar-column {
+.c4p--page-header .c4p--page-header__breadcrumb-row--has-action-bar .c4p--page-header__action-bar-column {
   display: initial;
 }
-.exp--page-header .exp--page-header__action-bar-column-content {
+.c4p--page-header .c4p--page-header__action-bar-column-content {
   display: flex;
   justify-content: flex-end;
   white-space: nowrap;
 }
 @media (min-width: 66rem) {
-  .exp--page-header .exp--page-header__action-bar-column-content {
+  .c4p--page-header .c4p--page-header__action-bar-column-content {
     flex-wrap: nowrap;
     /* assume enough space */
   }
 }
-.exp--page-header .exp--page-header__breadcrumb-row .exp--page-header__page-actions {
+.c4p--page-header .c4p--page-header__breadcrumb-row .c4p--page-header__page-actions {
   position: relative;
   display: inline-block;
   width: 100%;
-  max-width: var(--exp--page-header--button-set-in-breadcrumb-width-px);
-  flex: 1 1 var(--exp--page-header--button-set-in-breadcrumb-width-px);
+  max-width: var(--c4p--page-header--button-set-in-breadcrumb-width-px);
+  flex: 1 1 var(--c4p--page-header--button-set-in-breadcrumb-width-px);
   opacity: 0;
   transition: opacity 240ms cubic-bezier(0, 0, 0.38, 0.9);
   visibility: hidden;
   white-space: nowrap;
 }
-.exp--page-header .exp--page-header__breadcrumb-row .exp--page-header__page-actions--in-breadcrumb {
+.c4p--page-header .c4p--page-header__breadcrumb-row .c4p--page-header__page-actions--in-breadcrumb {
   opacity: 1;
   visibility: visible;
 }
-.exp--page-header .exp--page-header__breadcrumb-column {
+.c4p--page-header .c4p--page-header__breadcrumb-column {
   max-width: 100%;
   flex: 0 0 100%;
 }
 @media (min-width: 42rem) {
-  .exp--page-header .exp--page-header__breadcrumb-column {
+  .c4p--page-header .c4p--page-header__breadcrumb-column {
     overflow: hidden;
     /* required for ellipsis in title, title not visible in breadcrumb with back arrow */
   }
 }
-.exp--page-header .exp--page-header__breadcrumb-row--has-action-bar.exp--page-header__breadcrumb-row .exp--page-header__breadcrumb-column {
+.c4p--page-header .c4p--page-header__breadcrumb-row--has-action-bar.c4p--page-header__breadcrumb-row .c4p--page-header__breadcrumb-column {
   max-width: 75%;
   flex: 0 1 75%;
 }
 @media (min-width: 42rem) {
-  .exp--page-header .exp--page-header__breadcrumb-row--has-action-bar.exp--page-header__breadcrumb-row .exp--page-header__breadcrumb-column {
+  .c4p--page-header .c4p--page-header__breadcrumb-row--has-action-bar.c4p--page-header__breadcrumb-row .c4p--page-header__breadcrumb-column {
     max-width: 60%;
     flex: 0 1 60%;
   }
 }
-.exp--page-header .exp--page-header__has-page-actions-without-action-bar.exp--page-header__breadcrumb-row .exp--page-header__breadcrumb-column {
+.c4p--page-header .c4p--page-header__has-page-actions-without-action-bar.c4p--page-header__breadcrumb-row .c4p--page-header__breadcrumb-column {
   max-width: 100%;
   flex: 0 1 100%;
 }
-.exp--page-header .exp--page-header__breadcrumb-column--background,
-.exp--page-header .exp--page-header__action-bar-column--background {
+.c4p--page-header .c4p--page-header__breadcrumb-column--background,
+.c4p--page-header .c4p--page-header__action-bar-column--background {
   position: relative;
 }
-.exp--page-header .exp--page-header__breadcrumb-column--background::before,
-.exp--page-header .exp--page-header__action-bar-column--background::before {
+.c4p--page-header .c4p--page-header__breadcrumb-column--background::before,
+.c4p--page-header .c4p--page-header__action-bar-column--background::before {
   --from-color: var(--cds-ui-background, #ffffff);
   --to-color: var(--cds-ui-01, #f4f4f4);
+  --to-color-shadow: var(--cds-ui-03, #e0e0e0);
   position: absolute;
   top: 0;
   left: 0;
   display: block;
   width: 100%;
   height: 100%;
-  animation: background-appear 1000ms calc(-1000ms * var(--exp--page-header--background-opacity)) linear paused forwards;
+  animation: background-appear 1000ms calc(-1000ms * var(--c4p--page-header--background-opacity)) linear paused forwards;
   content: \\"\\";
 }
-.exp--page-header .exp--page-header__action-bar-column--influenced-by-collapse-button {
+.c4p--page-header .c4p--page-header__action-bar-column--influenced-by-collapse-button {
   padding-right: var(--cds-spacing-08, 2.5rem);
 }
-.exp--page-header .exp--page-header__breadcrumb {
+.c4p--page-header .c4p--page-header__breadcrumb {
   font-size: var(--cds-label-01-font-size, 0.75rem);
   font-weight: var(--cds-label-01-font-weight, 400);
   line-height: var(--cds-label-01-line-height, 1.33333);
   letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
   padding-top: var(--cds-spacing-04, 0.75rem);
 }
-.exp--page-header .exp--page-header--breadcrumb.exp--breadcrumb-with-overflow__with-items {
+.c4p--page-header .c4p--page-header--breadcrumb.c4p--breadcrumb-with-overflow__with-items {
   padding-top: 0;
 }
 @media (min-width: 42rem) {
-  .exp--page-header .exp--page-header--breadcrumb.exp--breadcrumb-with-overflow__with-items {
+  .c4p--page-header .c4p--page-header--breadcrumb.c4p--breadcrumb-with-overflow__with-items {
     padding-top: var(--cds-spacing-04, 0.75rem);
   }
 }
-.exp--page-header .exp--page-header__breadcrumb .bx--breadcrumb-item {
+.c4p--page-header .c4p--page-header__breadcrumb .bx--breadcrumb-item {
   margin-right: var(--cds-spacing-02, 0.25rem);
 }
-.exp--page-header .exp--page-header__breadcrumb .bx--breadcrumb-item::after {
+.c4p--page-header .c4p--page-header__breadcrumb .bx--breadcrumb-item::after {
   margin-left: var(--cds-spacing-02, 0.25rem);
 }
-.exp--page-header .exp--page-header__breadcrumb .bx--breadcrumb-item,
-.exp--page-header .exp--page-header__breadcrumb .bx--breadcrumb-item .bx--link {
+.c4p--page-header .c4p--page-header__breadcrumb .bx--breadcrumb-item,
+.c4p--page-header .c4p--page-header__breadcrumb .bx--breadcrumb-item .bx--link {
   font-size: var(--cds-label-01-font-size, 0.75rem);
   font-weight: var(--cds-label-01-font-weight, 400);
   line-height: var(--cds-label-01-line-height, 1.33333);
   letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
 }
-.exp--page-header .exp--page-header__breadcrumb-title {
+.c4p--page-header .c4p--page-header__breadcrumb-title {
   position: relative;
 }
-.exp--page-header .exp--page-header__breadcrumb-title:not(.exp--page-header__breadcrumb-title--pre-collapsed) {
-  opacity: var(--exp--page-header--breadcrumb-title-opacity);
-  transform: translateY(var(--exp--page-header--breadcrumb-title-top));
+.c4p--page-header .c4p--page-header__breadcrumb-title:not(.c4p--page-header__breadcrumb-title--pre-collapsed) {
+  opacity: var(--c4p--page-header--breadcrumb-title-opacity);
+  transform: translateY(var(--c4p--page-header--breadcrumb-title-top));
   /* token linter does not support this form */
-  visibility: var(--exp--page-header--breadcrumb-title-visibility);
+  visibility: var(--c4p--page-header--breadcrumb-title-visibility);
 }
-.exp--page-header .exp--page-header__breadcrumb-container--hidden .exp--page-header__breadcrumb-title.exp--page-header__breadcrumb-title {
+.c4p--page-header .c4p--page-header__breadcrumb-container--hidden .c4p--page-header__breadcrumb-title.c4p--page-header__breadcrumb-title {
   overflow: initial;
 }
-.exp--page-header .exp--page-header__action-bar {
+.c4p--page-header .c4p--page-header__action-bar {
   width: 100%;
-  max-width: var(--exp--page-header--max-action-bar-width-px);
-  flex: 1 1 var(--exp--page-header--max-action-bar-width-px);
+  max-width: var(--c4p--page-header--max-action-bar-width-px);
+  flex: 1 1 var(--c4p--page-header--max-action-bar-width-px);
   padding-top: var(--cds-spacing-04, 0.75rem);
   margin-top: calc(-1 * var(--cds-spacing-04, 0.75rem));
   /* align with breadcrumb */
   vertical-align: top;
   white-space: nowrap;
 }
-.exp--page-header .exp--page-header__title-row {
+.c4p--page-header .c4p--page-header__title-row {
   margin-top: 0;
   margin-bottom: 0;
 }
 @media (min-width: 42rem) {
-  .exp--page-header .exp--page-header__title-row {
+  .c4p--page-header .c4p--page-header__title-row {
     flex-wrap: nowrap;
     /* assume enough space */
   }
 }
-.exp--page-header .exp--page-header__title-row.exp--page-header__title-row--under-action-bar {
+.c4p--page-header .c4p--page-header__title-row.c4p--page-header__title-row--under-action-bar {
   margin-top: var(--cds-spacing-05, 1rem);
 }
-.exp--page-header .exp--page-header__title-row + .exp--page-header__last-row-buffer--active {
+.c4p--page-header .c4p--page-header__title-row + .c4p--page-header__last-row-buffer--active {
   height: var(--cds-spacing-07, 2rem);
 }
-.exp--page-header .exp--page-header__title-row.exp--page-header__title-row--spacing-below-03 {
+.c4p--page-header .c4p--page-header__title-row.c4p--page-header__title-row--spacing-below-03 {
   margin-bottom: var(--cds-spacing-03, 0.5rem);
 }
-.exp--page-header .exp--page-header__title-row.exp--page-header__title-row--spacing-below-05 + .exp--page-header__last-row-buffer--active {
+.c4p--page-header .c4p--page-header__title-row.c4p--page-header__title-row--spacing-below-05 + .c4p--page-header__last-row-buffer--active {
   height: var(--cds-spacing-05, 1rem);
 }
-.exp--page-header .exp--page-header__title-row.exp--page-header__title-row--spacing-below-06 {
+.c4p--page-header .c4p--page-header__title-row.c4p--page-header__title-row--spacing-below-06 {
   margin-bottom: var(--cds-spacing-06, 1.5rem);
 }
-.exp--page-header .exp--page-header__title-row.exp--page-header__title-row--no-breadcrumb-row {
+.c4p--page-header .c4p--page-header__title-row.c4p--page-header__title-row--no-breadcrumb-row {
   margin-top: var(--cds-spacing-07, 2rem);
 }
-.exp--page-header.exp--page-header--has-navigation .exp--page-header__title-row + .exp--page-header__last-row-buffer--active {
+.c4p--page-header.c4p--page-header--has-navigation .c4p--page-header__title-row + .c4p--page-header__last-row-buffer--active {
   height: calc(var(--cds-spacing-06, 1.5rem));
 }
-.exp--page-header.exp--page-header--has-navigation-tags-only .exp--page-header__title-row + .exp--page-header__last-row-buffer--active {
+.c4p--page-header.c4p--page-header--has-navigation-tags-only .c4p--page-header__title-row + .c4p--page-header__last-row-buffer--active {
   height: calc(var(--cds-spacing-05, 1rem));
 }
-.exp--page-header .exp--page-header__title-row--sticky {
+.c4p--page-header .c4p--page-header__title-row--sticky {
   position: sticky;
 }
-.exp--page-header .exp--page-header__breadcrumb-row--has-breadcrumbs + .exp--page-header__title-row--sticky {
-  top: var(--exp--page-header--breadcrumb-top);
+.c4p--page-header .c4p--page-header__breadcrumb-row--has-breadcrumbs + .c4p--page-header__title-row--sticky {
+  top: var(--c4p--page-header--breadcrumb-top);
 }
-.exp--page-header .exp--page-header__title-column {
+.c4p--page-header .c4p--page-header__title-column {
   overflow: hidden;
   /* required for ellipsis in title */
   min-height: 40px;
   flex: 0 0 100%;
 }
 @media (min-width: 42rem) {
-  .exp--page-header .exp--page-header__title-column {
+  .c4p--page-header .c4p--page-header__title-column {
     max-width: 60%;
     flex: 1 0 60%;
   }
 }
-.exp--page-header .exp--page-header__title {
+.c4p--page-header .c4p--page-header__title {
   font-size: var(--cds-productive-heading-04-font-size, 1.75rem);
   font-weight: var(--cds-productive-heading-04-font-weight, 400);
   line-height: var(--cds-productive-heading-04-line-height, 1.28572);
@@ -6118,72 +6129,73 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.exp--page-header .exp--page-header__title-skeleton {
+.c4p--page-header .c4p--page-header__title-skeleton {
   height: var(--cds-spacing-07, 2rem);
 }
-.exp--page-header .exp--page-header__title--fades {
-  opacity: calc(1 - var(--exp--page-header--breadcrumb-title-opacity));
+.c4p--page-header .c4p--page-header__title--fades {
+  opacity: calc(1 - var(--c4p--page-header--breadcrumb-title-opacity));
 }
-.exp--page-header .exp--page-header__title-icon {
+.c4p--page-header .c4p--page-header__title-icon {
   margin-right: var(--cds-spacing-04, 0.75rem);
   transform: translateY(-2px);
   vertical-align: middle;
 }
-.exp--page-header .exp--page-header__page-actions {
+.c4p--page-header .c4p--page-header__page-actions {
   flex: 0 0 100%;
   margin-top: var(--cds-spacing-05, 1rem);
   white-space: nowrap;
 }
 @media (min-width: 42rem) {
-  .exp--page-header .exp--page-header__page-actions {
+  .c4p--page-header .c4p--page-header__page-actions {
     max-width: 40%;
     flex: 0 1 40%;
     margin-top: 0;
   }
 }
-.exp--page-header .exp--page-header__page-actions .bx--btn-set .bx--btn {
+.c4p--page-header .c4p--page-header__page-actions .bx--btn-set .bx--btn {
   width: initial;
 }
-.exp--page-header .exp--page-header__action-bar-column .exp--page-header__page-actions {
+.c4p--page-header .c4p--page-header__action-bar-column .c4p--page-header__page-actions {
   margin-top: 0;
 }
-.exp--page-header .exp--page-header__page-actions-container {
+.c4p--page-header .c4p--page-header__page-actions-container {
   justify-content: flex-start;
 }
 @media (min-width: 42rem) {
-  .exp--page-header .exp--page-header__page-actions-container {
+  .c4p--page-header .c4p--page-header__page-actions-container {
     justify-content: flex-end;
   }
 }
-.exp--page-header .exp--page-header__title-row .exp--page-header__page-actions {
+.c4p--page-header .c4p--page-header__title-row .c4p--page-header__page-actions {
   position: relative;
   opacity: 1;
   transition: all 110ms cubic-bezier(0, 0, 0.38, 0.9);
   transition-property: opacity, visibility;
   visibility: visible;
 }
-.exp--page-header .exp--page-header__title-row .exp--page-header__page-actions::before {
+.c4p--page-header .c4p--page-header__title-row .c4p--page-header__page-actions::before {
   --from-color: var(--cds-ui-background, #ffffff);
   --to-color: var(--cds-ui-01, #f4f4f4);
+  --to-color-shadow: var(--cds-ui-03, #e0e0e0);
   position: absolute;
   top: 0;
   left: 0;
   display: block;
   width: 100%;
   height: 100%;
-  animation: background-appear 1000ms calc(-1000ms * var(--exp--page-header--background-opacity)) linear paused forwards;
+  animation: background-appear 1000ms calc(-1000ms * var(--c4p--page-header--background-opacity)) linear paused forwards;
   content: \\"\\";
 }
-.exp--page-header .exp--page-header__page-actions-content {
+.c4p--page-header .c4p--page-header__page-actions-content {
   position: relative;
   width: 100%;
   height: 100%;
 }
-.exp--page-header .exp--page-header__title-row .exp--page-header__page-actions--in-breadcrumb {
+.c4p--page-header .c4p--page-header__title-row .c4p--page-header__page-actions--in-breadcrumb {
   opacity: 0;
   visibility: hidden;
 }
-.exp--page-header .exp--page-header__subtitle-row {
+.c4p--page-header .c4p--page-header__subtitle-row {
   display: -webkit-box;
   overflow: hidden;
   max-width: 100%;
@@ -6192,58 +6204,58 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   -webkit-line-clamp: 2;
 }
 @media (min-width: 42rem) {
-  .exp--page-header .exp--page-header__subtitle-row {
+  .c4p--page-header .c4p--page-header__subtitle-row {
     max-width: 60%;
   }
 }
-.exp--page-header .exp--page-header__subtitle-row + .exp--page-header__last-row-buffer--active {
+.c4p--page-header .c4p--page-header__subtitle-row + .c4p--page-header__last-row-buffer--active {
   height: var(--cds-spacing-05, 1rem);
 }
-.exp--page-header .exp--page-header__subtitle {
+.c4p--page-header .c4p--page-header__subtitle {
   font-size: var(--cds-body-long-01-font-size, 0.875rem);
   font-weight: var(--cds-body-long-01-font-weight, 400);
   line-height: var(--cds-body-long-01-line-height, 1.42857);
   letter-spacing: var(--cds-body-long-01-letter-spacing, 0.16px);
 }
-.exp--page-header .exp--page-header__available-row {
+.c4p--page-header .c4p--page-header__available-row {
   font-size: var(--cds-body-long-01-font-size, 0.875rem);
   font-weight: var(--cds-body-long-01-font-weight, 400);
   line-height: var(--cds-body-long-01-line-height, 1.42857);
   letter-spacing: var(--cds-body-long-01-letter-spacing, 0.16px);
   margin-top: var(--cds-spacing-03, 0.5rem);
 }
-.exp--page-header .exp--page-header__available-row + .exp--page-header__last-row-buffer--active {
+.c4p--page-header .c4p--page-header__available-row + .c4p--page-header__last-row-buffer--active {
   height: var(--cds-spacing-05, 1rem);
 }
-.exp--page-header .exp--page-header__title-row + .exp--page-header__available-row {
+.c4p--page-header .c4p--page-header__title-row + .c4p--page-header__available-row {
   margin-top: var(--cds-spacing-05, 1rem);
 }
-.exp--page-header .exp--page-header__available-row * {
+.c4p--page-header .c4p--page-header__available-row * {
   font-size: var(--cds-body-long-01-font-size, 0.875rem);
   font-weight: var(--cds-body-long-01-font-weight, 400);
   line-height: var(--cds-body-long-01-line-height, 1.42857);
   letter-spacing: var(--cds-body-long-01-letter-spacing, 0.16px);
 }
-.exp--page-header .exp--page-header__navigation-row {
+.c4p--page-header .c4p--page-header__navigation-row {
   flex-wrap: wrap-reverse;
   margin-top: 0;
 }
-.exp--page-header .exp--page-header__navigation-row .bx--content-switcher {
+.c4p--page-header .c4p--page-header__navigation-row .bx--content-switcher {
   box-sizing: content-box;
   padding-bottom: var(--cds-spacing-05, 1rem);
 }
-.exp--page-header .exp--page-header__navigation-row .bx--tab-content {
+.c4p--page-header .c4p--page-header__navigation-row .bx--tab-content {
   display: none;
   /* need to figure out how to handle the tab content */
 }
-.exp--page-header .exp--page-header__navigation-tabs {
+.c4p--page-header .c4p--page-header__navigation-tabs {
   margin-left: calc(-1 * var(--cds-spacing-05, 1rem));
 }
-.exp--page-header .exp--page-header__navigation-row--has-tags .exp--page-header__navigation-tabs {
+.c4p--page-header .c4p--page-header__navigation-row--has-tags .c4p--page-header__navigation-tabs {
   max-width: 75%;
   flex: 0 1 75%;
 }
-.exp--page-header .exp--page-header__navigation-tags {
+.c4p--page-header .c4p--page-header__navigation-tags {
   display: flex;
   max-width: 25%;
   flex: 1 0 25%;
@@ -6256,49 +6268,49 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   white-space: nowrap;
 }
 @media (min-width: 42rem) {
-  .exp--page-header .exp--page-header__navigation-tags {
+  .c4p--page-header .c4p--page-header__navigation-tags {
     padding-right: var(--cds-spacing-05, 1rem);
   }
 }
-.exp--page-header .exp--page-header__navigation-tags--tags-only {
+.c4p--page-header .c4p--page-header__navigation-tags--tags-only {
   justify-content: flex-start;
   padding-top: 0;
   padding-bottom: var(--cds-spacing-04, 0.75rem);
   margin-left: calc(-1 * var(--cds-spacing-02, 0.25rem));
   text-align: initial;
 }
-.exp--page-header .exp--page-header__navigation-row .bx--content-switcher-btn {
+.c4p--page-header .c4p--page-header__navigation-row .bx--content-switcher-btn {
   background-color: var(--cds-ui-background, #ffffff);
 }
-.exp--page-header .bx--btn.bx--btn--icon-only.exp--page-header__collapse-expand-toggle {
+.c4p--page-header .bx--btn.bx--btn--icon-only.c4p--page-header__collapse-expand-toggle {
   position: absolute;
   z-index: 100;
   right: 0;
   bottom: 0;
 }
-.exp--page-header .exp--page-header__collapse-expand-toggle .bx--btn__icon {
+.c4p--page-header .c4p--page-header__collapse-expand-toggle .bx--btn__icon {
   transition: all 400ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
-.exp--page-header .exp--page-header__collapse-expand-toggle--collapsed .bx--btn__icon {
+.c4p--page-header .c4p--page-header__collapse-expand-toggle--collapsed .bx--btn__icon {
   transform: scaleY(-1);
 }
 
 :root {
-  --exp--page-header--tagset-tooltip-offset: 0;
+  --c4p--page-header--tagset-tooltip-offset: 0;
 }
 
-.exp--page-header__tagset-tooltip.exp--page-header__tagset-tooltip {
-  position: var(--exp--page-header--tagset-tooltip-position) !important;
-  top: var(--exp--page-header--tagset-tooltip-offset) !important;
+.c4p--page-header__tagset-tooltip.c4p--page-header__tagset-tooltip {
+  position: var(--c4p--page-header--tagset-tooltip-position) !important;
+  top: var(--c4p--page-header--tagset-tooltip-offset) !important;
 }
 
-.exp--page-header__navigation-tags-overflow.bx--tooltip {
+.c4p--page-header__navigation-tags-overflow.bx--tooltip {
   z-index: 7999;
 }
 
-.exp--page-header__action-bar-menu-options.bx--overflow-menu-options,
+.c4p--page-header__action-bar-menu-options.bx--overflow-menu-options,
 .bx--breadcrumb-menu-options.bx--overflow-menu-options,
-.exp--page-header__button-set-menu-options.bx--overflow-menu-options {
+.c4p--page-header__button-set-menu-options.bx--overflow-menu-options {
   z-index: 7999;
 }
 
@@ -6376,47 +6388,47 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
-.exp--card__productive .exp--card__header {
+.c4p--card__productive .c4p--card__header {
   padding-right: 0;
 }
-.exp--card__productive .exp--card__title {
+.c4p--card__productive .c4p--card__title {
   font-size: var(--cds-productive-heading-02-font-size, 1rem);
   font-weight: var(--cds-productive-heading-02-font-weight, 600);
   line-height: var(--cds-productive-heading-02-line-height, 1.375);
   letter-spacing: var(--cds-productive-heading-02-letter-spacing, 0);
 }
-.exp--card__productive .exp--card__title-lg .exp--card__title {
+.c4p--card__productive .c4p--card__title-lg .c4p--card__title {
   font-size: var(--cds-productive-heading-03-font-size, 1.25rem);
   font-weight: var(--cds-productive-heading-03-font-weight, 400);
   line-height: var(--cds-productive-heading-03-line-height, 1.4);
   letter-spacing: var(--cds-productive-heading-03-letter-spacing, 0);
 }
-.exp--card__productive .exp--card__body {
+.c4p--card__productive .c4p--card__body {
   padding-top: var(--cds-spacing-03, 0.5rem);
 }
-.exp--card__productive .exp--card__footer {
+.c4p--card__productive .c4p--card__footer {
   align-items: center;
   justify-content: space-between;
   border-top: 1px solid var(--cds-ui-03, #e0e0e0);
 }
-.exp--card__productive .exp--card__footer-no-button {
+.c4p--card__productive .c4p--card__footer-no-button {
   justify-content: flex-end;
 }
-.exp--card__productive .exp--card__actions {
+.c4p--card__productive .c4p--card__actions {
   margin: 0;
 }
-.exp--card__productive .exp--card__actions-header {
+.c4p--card__productive .c4p--card__actions-header {
   margin-top: calc(-1 * var(--cds-spacing-02, 0.25rem));
   margin-right: var(--cds-spacing-03, 0.5rem);
 }
-.exp--card__productive .exp--card__title-lg .exp--card__actions-header,
-.exp--card__productive .exp--card__header-has-label .exp--card__actions-header {
+.c4p--card__productive .c4p--card__title-lg .c4p--card__actions-header,
+.c4p--card__productive .c4p--card__header-has-label .c4p--card__actions-header {
   margin-top: 0;
 }
-.exp--card__productive .exp--card__icon {
+.c4p--card__productive .c4p--card__icon {
   margin-right: var(--cds-spacing-05, 1rem);
 }
-.exp--card__productive .exp--card__header-container {
+.c4p--card__productive .c4p--card__header-container {
   align-items: start;
 }
 
@@ -6573,19 +6585,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
-.exp--remove-modal .bx--modal-footer .bx--btn {
+.c4p--remove-modal .bx--modal-footer .bx--btn {
   max-width: none;
 }
 
-.exp--remove-modal .bx--modal-content {
+.c4p--remove-modal .bx--modal-content {
   padding-right: var(--cds-spacing-05, 1rem);
 }
 
-.exp--remove-modal .bx--modal-close {
+.c4p--remove-modal .bx--modal-close {
   display: none;
 }
 
-.exp--remove-modal__body {
+.c4p--remove-modal__body {
   padding-right: 20%;
   margin-bottom: var(--cds-spacing-05, 1rem);
 }
@@ -6688,26 +6700,26 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     stroke-dashoffset: 0;
   }
 }
-.exp--saving__message {
+.c4p--saving__message {
   display: flex;
 }
 
-.exp--saving__error-icon {
+.c4p--saving__error-icon {
   margin-right: var(--cds-spacing-05, 1rem);
 }
 
-.exp--saving__error-icon svg {
+.c4p--saving__error-icon svg {
   fill: var(--cds-danger-01, #da1e28);
 }
 
-.exp--saving__text {
+.c4p--saving__text {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
   line-height: var(--cds-body-short-01-line-height, 1.28572);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
 }
 
-.exp--saving__buttons {
+.c4p--saving__buttons {
   display: flex;
 }
 
@@ -6881,403 +6893,403 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     transform: scaleY(-1) rotate(0deg);
   }
 }
-.exp--status-icon {
+.c4p--status-icon {
   display: flex;
   justify-content: flex-end;
 }
 
-.exp--status-icon--light.exp--status-icon--light-minor-warning,
-.exp--status-icon--dark.exp--status-icon--dark-minor-warning {
+.c4p--status-icon--light.c4p--status-icon--light-minor-warning,
+.c4p--status-icon--dark.c4p--status-icon--dark-minor-warning {
   fill: #fddc69;
 }
 
-.exp--status-icon--light.exp--status-icon--light-major-warning path:nth-of-type(1),
-.exp--status-icon--dark.exp--status-icon--dark-major-warning path:nth-of-type(1),
-.exp--status-icon--light.exp--status-icon--light-minor-warning path:nth-of-type(1),
-.exp--status-icon--dark.exp--status-icon--dark-minor-warning path:nth-of-type(1) {
+.c4p--status-icon--light.c4p--status-icon--light-major-warning path:nth-of-type(1),
+.c4p--status-icon--dark.c4p--status-icon--dark-major-warning path:nth-of-type(1),
+.c4p--status-icon--light.c4p--status-icon--light-minor-warning path:nth-of-type(1),
+.c4p--status-icon--dark.c4p--status-icon--dark-minor-warning path:nth-of-type(1) {
   fill: #161616;
 }
 
-.exp--status-icon--light.exp--status-icon--light-fatal {
+.c4p--status-icon--light.c4p--status-icon--light-fatal {
   fill: #000000;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--light.exp--status-icon--light-fatal .exp--status-icon--light.exp--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-fatal .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--light.exp--status-icon--dark-fatal {
+.c4p--status-icon--light.c4p--status-icon--dark-fatal {
   fill: #000000;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--light.exp--status-icon--dark-fatal .exp--status-icon--light.exp--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-fatal .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--light.exp--status-icon--light-critical {
+.c4p--status-icon--light.c4p--status-icon--light-critical {
   fill: #da1e28;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--light.exp--status-icon--light-critical .exp--status-icon--light.exp--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-critical .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--light.exp--status-icon--dark-critical {
+.c4p--status-icon--light.c4p--status-icon--dark-critical {
   fill: #da1e28;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--light.exp--status-icon--dark-critical .exp--status-icon--light.exp--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-critical .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--light.exp--status-icon--light-major-warning {
+.c4p--status-icon--light.c4p--status-icon--light-major-warning {
   fill: #ff832b;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--light.exp--status-icon--light-major-warning .exp--status-icon--light.exp--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-major-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--light.exp--status-icon--dark-major-warning {
+.c4p--status-icon--light.c4p--status-icon--dark-major-warning {
   fill: #ff832b;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--light.exp--status-icon--dark-major-warning .exp--status-icon--light.exp--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-major-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--light.exp--status-icon--light-minor-warning {
+.c4p--status-icon--light.c4p--status-icon--light-minor-warning {
   fill: #fddc69;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--light.exp--status-icon--light-minor-warning .exp--status-icon--light.exp--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-minor-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--light.exp--status-icon--dark-minor-warning {
+.c4p--status-icon--light.c4p--status-icon--dark-minor-warning {
   fill: #fddc69;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--light.exp--status-icon--dark-minor-warning .exp--status-icon--light.exp--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-minor-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--light.exp--status-icon--light-undefined {
+.c4p--status-icon--light.c4p--status-icon--light-undefined {
   fill: #8a3ffc;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--light.exp--status-icon--light-undefined .exp--status-icon--light.exp--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-undefined .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--light.exp--status-icon--dark-undefined {
+.c4p--status-icon--light.c4p--status-icon--dark-undefined {
   fill: #8a3ffc;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--light.exp--status-icon--dark-undefined .exp--status-icon--light.exp--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-undefined .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--light.exp--status-icon--light-unknown {
+.c4p--status-icon--light.c4p--status-icon--light-unknown {
   fill: #6f6f6f;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--light.exp--status-icon--light-unknown .exp--status-icon--light.exp--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-unknown .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--light.exp--status-icon--dark-unknown {
+.c4p--status-icon--light.c4p--status-icon--dark-unknown {
   fill: #6f6f6f;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--light.exp--status-icon--dark-unknown .exp--status-icon--light.exp--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-unknown .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--light.exp--status-icon--light-normal {
+.c4p--status-icon--light.c4p--status-icon--light-normal {
   fill: #198038;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--light.exp--status-icon--light-normal .exp--status-icon--light.exp--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-normal .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--light.exp--status-icon--dark-normal {
+.c4p--status-icon--light.c4p--status-icon--dark-normal {
   fill: #198038;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--light.exp--status-icon--dark-normal .exp--status-icon--light.exp--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-normal .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--light.exp--status-icon--light-info {
+.c4p--status-icon--light.c4p--status-icon--light-info {
   fill: #0f62fe;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--light.exp--status-icon--light-info .exp--status-icon--light.exp--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-info .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--light.exp--status-icon--dark-info {
+.c4p--status-icon--light.c4p--status-icon--dark-info {
   fill: #0f62fe;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--light.exp--status-icon--dark-info .exp--status-icon--light.exp--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-info .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--light.exp--status-icon--light-in-progress {
+.c4p--status-icon--light.c4p--status-icon--light-in-progress {
   animation: rotating 8000ms infinite linear;
   fill: #0f62fe;
 }
 @media (prefers-reduced-motion: reduce) {
-  .exp--status-icon--light.exp--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--light.exp--status-icon--dark-in-progress {
+.c4p--status-icon--light.c4p--status-icon--dark-in-progress {
   animation: rotating 8000ms infinite linear;
   fill: #0f62fe;
 }
 @media (prefers-reduced-motion: reduce) {
-  .exp--status-icon--light.exp--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--light.exp--status-icon--light-running {
+.c4p--status-icon--light.c4p--status-icon--light-running {
   fill: #198038;
   transform: scaleY(-1);
 }
 
-.exp--status-icon--light.exp--status-icon--dark-running {
+.c4p--status-icon--light.c4p--status-icon--dark-running {
   fill: #198038;
   transform: scaleY(-1);
 }
 
-.exp--status-icon--light.exp--status-icon--light-pending {
+.c4p--status-icon--light.c4p--status-icon--light-pending {
   fill: #6f6f6f;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--light.exp--status-icon--light-pending .exp--status-icon--light.exp--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-pending .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--light.exp--status-icon--dark-pending {
+.c4p--status-icon--light.c4p--status-icon--dark-pending {
   fill: #6f6f6f;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--light.exp--status-icon--dark-pending .exp--status-icon--light.exp--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-pending .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--dark.exp--status-icon--light-fatal {
+.c4p--status-icon--dark.c4p--status-icon--light-fatal {
   fill: #8d8d8d;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--dark.exp--status-icon--light-fatal .exp--status-icon--dark.exp--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-fatal .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--dark.exp--status-icon--dark-fatal {
+.c4p--status-icon--dark.c4p--status-icon--dark-fatal {
   fill: #8d8d8d;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--dark.exp--status-icon--dark-fatal .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-fatal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--dark.exp--status-icon--light-critical {
+.c4p--status-icon--dark.c4p--status-icon--light-critical {
   fill: #fa4d56;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--dark.exp--status-icon--light-critical .exp--status-icon--dark.exp--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-critical .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--dark.exp--status-icon--dark-critical {
+.c4p--status-icon--dark.c4p--status-icon--dark-critical {
   fill: #fa4d56;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--dark.exp--status-icon--dark-critical .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-critical .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--dark.exp--status-icon--light-major-warning {
+.c4p--status-icon--dark.c4p--status-icon--light-major-warning {
   fill: #ff832b;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--dark.exp--status-icon--light-major-warning .exp--status-icon--dark.exp--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-major-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--dark.exp--status-icon--dark-major-warning {
+.c4p--status-icon--dark.c4p--status-icon--dark-major-warning {
   fill: #ff832b;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--dark.exp--status-icon--dark-major-warning .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-major-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--dark.exp--status-icon--light-minor-warning {
+.c4p--status-icon--dark.c4p--status-icon--light-minor-warning {
   fill: #fddc69;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--dark.exp--status-icon--light-minor-warning .exp--status-icon--dark.exp--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-minor-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--dark.exp--status-icon--dark-minor-warning {
+.c4p--status-icon--dark.c4p--status-icon--dark-minor-warning {
   fill: #fddc69;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--dark.exp--status-icon--dark-minor-warning .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-minor-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--dark.exp--status-icon--light-undefined {
+.c4p--status-icon--dark.c4p--status-icon--light-undefined {
   fill: #a56eff;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--dark.exp--status-icon--light-undefined .exp--status-icon--dark.exp--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-undefined .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--dark.exp--status-icon--dark-undefined {
+.c4p--status-icon--dark.c4p--status-icon--dark-undefined {
   fill: #a56eff;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--dark.exp--status-icon--dark-undefined .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-undefined .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--dark.exp--status-icon--light-unknown {
+.c4p--status-icon--dark.c4p--status-icon--light-unknown {
   fill: #8d8d8d;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--dark.exp--status-icon--light-unknown .exp--status-icon--dark.exp--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-unknown .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--dark.exp--status-icon--dark-unknown {
+.c4p--status-icon--dark.c4p--status-icon--dark-unknown {
   fill: #8d8d8d;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--dark.exp--status-icon--dark-unknown .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-unknown .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--dark.exp--status-icon--light-normal {
+.c4p--status-icon--dark.c4p--status-icon--light-normal {
   fill: #24a148;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--dark.exp--status-icon--light-normal .exp--status-icon--dark.exp--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-normal .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--dark.exp--status-icon--dark-normal {
+.c4p--status-icon--dark.c4p--status-icon--dark-normal {
   fill: #24a148;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--dark.exp--status-icon--dark-normal .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-normal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--dark.exp--status-icon--light-info {
+.c4p--status-icon--dark.c4p--status-icon--light-info {
   fill: #4589ff;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--dark.exp--status-icon--light-info .exp--status-icon--dark.exp--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-info .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--dark.exp--status-icon--dark-info {
+.c4p--status-icon--dark.c4p--status-icon--dark-info {
   fill: #4589ff;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--dark.exp--status-icon--dark-info .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-info .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--dark.exp--status-icon--light-in-progress {
+.c4p--status-icon--dark.c4p--status-icon--light-in-progress {
   animation: rotating 8000ms infinite linear;
   fill: #4589ff;
 }
 @media (prefers-reduced-motion: reduce) {
-  .exp--status-icon--dark.exp--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--dark.exp--status-icon--dark-in-progress {
+.c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
   animation: rotating 8000ms infinite linear;
   fill: #4589ff;
 }
 @media (prefers-reduced-motion: reduce) {
-  .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--dark.exp--status-icon--light-running {
+.c4p--status-icon--dark.c4p--status-icon--light-running {
   fill: #24a148;
   transform: scaleY(-1);
 }
 
-.exp--status-icon--dark.exp--status-icon--dark-running {
+.c4p--status-icon--dark.c4p--status-icon--dark-running {
   fill: #24a148;
   transform: scaleY(-1);
 }
 
-.exp--status-icon--dark.exp--status-icon--light-pending {
+.c4p--status-icon--dark.c4p--status-icon--light-pending {
   fill: #8d8d8d;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--dark.exp--status-icon--light-pending .exp--status-icon--dark.exp--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-pending .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
-.exp--status-icon--dark.exp--status-icon--dark-pending {
+.c4p--status-icon--dark.c4p--status-icon--dark-pending {
   fill: #8d8d8d;
 }
 @media (prefers-reduced-motion) {
-  .exp--status-icon--dark.exp--status-icon--dark-pending .exp--status-icon--dark.exp--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-pending .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7620,111 +7632,111 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
-.exp-user-profile-avatar--light {
+.c4p--user-profile-image--light {
   color: var(--cds-ui-01, #f4f4f4);
 }
 
-.exp-user-profile-avatar--light.exp-user-profile-avatar--light-cyan {
+.c4p--user-profile-image--light.c4p--user-profile-image--light-cyan {
   background-color: #0072c3;
 }
 
-.exp-user-profile-avatar--light.exp-user-profile-avatar--dark-cyan {
+.c4p--user-profile-image--light.c4p--user-profile-image--dark-cyan {
   background-color: #003a6d;
 }
 
-.exp-user-profile-avatar--light.exp-user-profile-avatar--light-gray {
+.c4p--user-profile-image--light.c4p--user-profile-image--light-gray {
   background-color: #6f6f6f;
 }
 
-.exp-user-profile-avatar--light.exp-user-profile-avatar--dark-gray {
+.c4p--user-profile-image--light.c4p--user-profile-image--dark-gray {
   background-color: #393939;
 }
 
-.exp-user-profile-avatar--light.exp-user-profile-avatar--light-green {
+.c4p--user-profile-image--light.c4p--user-profile-image--light-green {
   background-color: #198038;
 }
 
-.exp-user-profile-avatar--light.exp-user-profile-avatar--dark-green {
+.c4p--user-profile-image--light.c4p--user-profile-image--dark-green {
   background-color: #044317;
 }
 
-.exp-user-profile-avatar--light.exp-user-profile-avatar--light-magenta {
+.c4p--user-profile-image--light.c4p--user-profile-image--light-magenta {
   background-color: #d02670;
 }
 
-.exp-user-profile-avatar--light.exp-user-profile-avatar--dark-magenta {
+.c4p--user-profile-image--light.c4p--user-profile-image--dark-magenta {
   background-color: #740937;
 }
 
-.exp-user-profile-avatar--light.exp-user-profile-avatar--light-purple {
+.c4p--user-profile-image--light.c4p--user-profile-image--light-purple {
   background-color: #8a3ffc;
 }
 
-.exp-user-profile-avatar--light.exp-user-profile-avatar--dark-purple {
+.c4p--user-profile-image--light.c4p--user-profile-image--dark-purple {
   background-color: #491d8b;
 }
 
-.exp-user-profile-avatar--light.exp-user-profile-avatar--light-teal {
+.c4p--user-profile-image--light.c4p--user-profile-image--light-teal {
   background-color: #007d79;
 }
 
-.exp-user-profile-avatar--light.exp-user-profile-avatar--dark-teal {
+.c4p--user-profile-image--light.c4p--user-profile-image--dark-teal {
   background-color: #004144;
 }
 
-.exp-user-profile-avatar--dark {
+.c4p--user-profile-image--dark {
   color: var(--cds-ui-01, #f4f4f4);
 }
 
-.exp-user-profile-avatar--dark.exp-user-profile-avatar--light-cyan {
+.c4p--user-profile-image--dark.c4p--user-profile-image--light-cyan {
   background-color: #1192e8;
 }
 
-.exp-user-profile-avatar--dark.exp-user-profile-avatar--dark-cyan {
+.c4p--user-profile-image--dark.c4p--user-profile-image--dark-cyan {
   background-color: #82cfff;
 }
 
-.exp-user-profile-avatar--dark.exp-user-profile-avatar--light-gray {
+.c4p--user-profile-image--dark.c4p--user-profile-image--light-gray {
   background-color: #8d8d8d;
 }
 
-.exp-user-profile-avatar--dark.exp-user-profile-avatar--dark-gray {
+.c4p--user-profile-image--dark.c4p--user-profile-image--dark-gray {
   background-color: #c6c6c6;
 }
 
-.exp-user-profile-avatar--dark.exp-user-profile-avatar--light-green {
+.c4p--user-profile-image--dark.c4p--user-profile-image--light-green {
   background-color: #24a148;
 }
 
-.exp-user-profile-avatar--dark.exp-user-profile-avatar--dark-green {
+.c4p--user-profile-image--dark.c4p--user-profile-image--dark-green {
   background-color: #6fdc8c;
 }
 
-.exp-user-profile-avatar--dark.exp-user-profile-avatar--light-magenta {
+.c4p--user-profile-image--dark.c4p--user-profile-image--light-magenta {
   background-color: #ee5396;
 }
 
-.exp-user-profile-avatar--dark.exp-user-profile-avatar--dark-magenta {
+.c4p--user-profile-image--dark.c4p--user-profile-image--dark-magenta {
   background-color: #ffafd2;
 }
 
-.exp-user-profile-avatar--dark.exp-user-profile-avatar--light-purple {
+.c4p--user-profile-image--dark.c4p--user-profile-image--light-purple {
   background-color: #a56eff;
 }
 
-.exp-user-profile-avatar--dark.exp-user-profile-avatar--dark-purple {
+.c4p--user-profile-image--dark.c4p--user-profile-image--dark-purple {
   background-color: #d4bbff;
 }
 
-.exp-user-profile-avatar--dark.exp-user-profile-avatar--light-teal {
+.c4p--user-profile-image--dark.c4p--user-profile-image--light-teal {
   background-color: #009d9a;
 }
 
-.exp-user-profile-avatar--dark.exp-user-profile-avatar--dark-teal {
+.c4p--user-profile-image--dark.c4p--user-profile-image--dark-teal {
   background-color: #3ddbd9;
 }
 
-.exp-user-profile-avatar {
+.c4p--user-profile-image {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7733,41 +7745,41 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   text-transform: uppercase;
 }
 
-.bx--tooltip__trigger .exp-user-profile-avatar svg {
+.bx--tooltip__trigger .c4p--user-profile-image svg {
   fill: var(--cds-ui-01, #f4f4f4);
 }
 
-.exp-user-profile-avatar__photo {
+.c4p--user-profile-image__photo {
   width: 100%;
   border-radius: 100%;
 }
 
-.exp-user-profile-avatar__photo--xlg {
+.c4p--user-profile-image__photo--xlg {
   width: var(--cds-spacing-10, 4rem);
   height: var(--cds-spacing-10, 4rem);
 }
 
-.exp-user-profile-avatar__photo--lg {
+.c4p--user-profile-image__photo--lg {
   width: var(--cds-spacing-07, 2rem);
   height: var(--cds-spacing-07, 2rem);
 }
 
-.exp-user-profile-avatar__photo--md {
+.c4p--user-profile-image__photo--md {
   width: var(--cds-spacing-06, 1.5rem);
   height: var(--cds-spacing-06, 1.5rem);
 }
 
-.exp-user-profile-avatar__photo--sm {
+.c4p--user-profile-image__photo--sm {
   width: calc(var(--cds-spacing-05, 1rem) + var(--cds-spacing-02, 0.25rem));
   height: calc(var(--cds-spacing-05, 1rem) + var(--cds-spacing-02, 0.25rem));
 }
 
-.exp-user-profile-avatar__photo--xs {
+.c4p--user-profile-image__photo--xs {
   width: var(--cds-spacing-05, 1rem);
   height: var(--cds-spacing-05, 1rem);
 }
 
-.exp-user-profile-avatar--xlg {
+.c4p--user-profile-image--xlg {
   width: var(--cds-spacing-10, 4rem);
   height: var(--cds-spacing-10, 4rem);
   font-size: var(--cds-productive-heading-04-font-size, 1.75rem);
@@ -7776,7 +7788,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0);
 }
 
-.exp-user-profile-avatar--lg {
+.c4p--user-profile-image--lg {
   width: var(--cds-spacing-07, 2rem);
   height: var(--cds-spacing-07, 2rem);
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
@@ -7785,7 +7797,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
 }
 
-.exp-user-profile-avatar--md {
+.c4p--user-profile-image--md {
   width: var(--cds-spacing-06, 1.5rem);
   height: var(--cds-spacing-06, 1.5rem);
   font-size: var(--cds-label-01-font-size, 0.75rem);
@@ -7795,7 +7807,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: 600;
 }
 
-.exp-user-profile-avatar--sm {
+.c4p--user-profile-image--sm {
   width: calc(var(--cds-spacing-05, 1rem) + var(--cds-spacing-02, 0.25rem));
   height: calc(var(--cds-spacing-05, 1rem) + var(--cds-spacing-02, 0.25rem));
   font-size: var(--cds-label-01-font-size, 0.75rem);
@@ -7805,7 +7817,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: 600;
 }
 
-.exp-user-profile-avatar--xs {
+.c4p--user-profile-image--xs {
   width: var(--cds-spacing-05, 1rem);
   height: var(--cds-spacing-05, 1rem);
   font-size: var(--cds-label-01-font-size, 0.75rem);

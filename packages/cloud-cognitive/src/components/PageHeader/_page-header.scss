@@ -45,12 +45,29 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     background-color: var(--to-color);
   }
 }
+@keyframes background-and-shadow-appear {
+  from {
+    background-color: var(--from-color);
+    box-shadow: 0 1px 0 var(--from-color);
+  }
+  to {
+    background-color: var(--to-color);
+    box-shadow: 0 1px 0 var(--to-color-shadow);
+  }
+}
 
-@mixin appearingBackground($from-color: $ui-background, $to-color: $ui-01) {
+@mixin appearingBackground(
+  $with-shadow: false,
+  $from-color: $ui-background,
+  $to-color: $ui-01,
+  $to-color-shadow: $ui-03
+) {
   // stylelint-disable-next-line carbon/theme-token-use
   --from-color: #{$from-color};
   // stylelint-disable-next-line carbon/theme-token-use
   --to-color: #{$to-color};
+  // stylelint-disable-next-line carbon/theme-token-use
+  --to-color-shadow: #{$to-color-shadow};
 
   position: absolute;
   top: 0;
@@ -61,8 +78,13 @@ $right-section-alt-width: 100% - $left-section-alt-width;
 
   // This transitions the background-color between from-color and to-color
   $duration: 1000ms;
-  // stylelint-disable-next-line carbon/motion-token-use
-  animation: background-appear $duration
+
+  $animation: background-appear;
+  @if ($with-shadow) {
+    $animation: background-and-shadow-appear;
+  }
+
+  animation: $animation $duration
     calc((-1 * $duration * var(--#{$block-class}--background-opacity))) linear
     paused forwards;
 
@@ -98,10 +120,9 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     }
 
     &::before {
-      @include appearingBackground();
+      @include appearingBackground(true);
 
       z-index: -1;
-      box-shadow: 0 1px 0 $ui-03;
     }
 
     .#{$block-class}--width--xl {

@@ -11,16 +11,13 @@ import userEvent from '@testing-library/user-event';
 
 import { pkg, carbon } from '../../settings';
 
-import { BreadcrumbItem, Tab, Tabs } from 'carbon-components-react';
+import { Tab, Tabs } from 'carbon-components-react';
 import { Lightning16, Bee32 } from '@carbon/icons-react';
 
 import { PageHeader } from '.';
-import { ActionBarItem } from '../ActionBar';
 import {
   mockHTMLElement,
-  expectWarn,
   expectMultipleError,
-  deprecatedUsage,
   required,
 } from '../../global/js/utils/test-helper';
 
@@ -38,19 +35,6 @@ const actionBarItems = [1, 2, 3, 4].map((item) => ({
   onClick: () => {},
 }));
 
-const actionBarItemsNodes = (
-  <>
-    <ActionBarItem
-      renderIcon={Lightning16}
-      iconDescription="Action 1"
-      onClick={() => {}}
-    />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 2" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 3" />
-    <ActionBarItem renderIcon={Lightning16} iconDescription="Action 4" />
-  </>
-);
-
 const availableSpaceTextContent = 'Some content';
 const children = (
   <span className="page-header-test--available-space">
@@ -66,13 +50,6 @@ const breadcrumbItem = (item) => ({
 const breadcrumbs = [1, 2, 3].map(breadcrumbItem);
 const breadcrumbOverflowAriaLabel =
   'Open and close additional breadcrumb item list.';
-const breadcrumbItems = (
-  <>
-    <BreadcrumbItem href="#">Breadcrumb 1</BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
-  </>
-);
 const classNames = ['client-class-1', 'client-class-2'];
 const pageActions = [
   {
@@ -119,7 +96,6 @@ const titleUserDefined = {
   asText: titleUserDefinedStrings.asText,
 };
 const titleObj = { text: 'Page title', loading: false, icon: Bee32 };
-const titleString = 'Page title';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { prepareProps } from '../../global/js/utils/props-helper';
@@ -328,16 +304,6 @@ describe('PageHeader', () => {
       document.querySelectorAll(`.${blockClass}__title-icon`)
     ).toHaveLength(1);
   });
-
-  test('copes with actionBarItems as nodes', () =>
-    expectWarn(deprecatedUsage('actionBarItems', 'PageHeader'), () => {
-      render(
-        <PageHeader
-          actionBarItems={actionBarItemsNodes}
-          actionBarOverflowAriaLabel={actionBarOverflowAriaLabel}
-        />
-      );
-    }));
 
   const dataTestId = 'data-testid';
 
@@ -622,90 +588,6 @@ describe('PageHeader', () => {
     );
 
     jest.spyOn(console, 'error').mockRestore();
-  });
-
-  test('Works, for now, with deprecated props', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-    const warnings = [
-      'The prop `actionBarOverflowLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `actionBarOverflowAriaLabel`.',
-      'The prop `availableSpace` of `PageHeader` has been deprecated and will soon be removed. Make use of children instead.',
-      'The prop `background` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `hasBackgroundAlways`',
-      'The prop `breadcrumbItems` of `PageHeader` has been deprecated and will soon be removed. Usage changed to expect breadcrumb item like shapes, see `breadcrumbs`.',
-      'The prop `breadcrumbOverflowLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `breadcrumbOverflowAriaLabel`.',
-      'The prop `collapseHeaderLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `collapseHeaderIconDescription`.',
-      'The prop `collapseHeaderToggleWanted` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `hasCollapseHeaderToggle`',
-      'The prop `expandHeaderLabel` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `expandHeaderIconDescription`.',
-      'The prop `preCollapseTitleRow` of `PageHeader` has been deprecated and will soon be removed. Property renamed to `collapseTitle`.',
-      'The prop `preventBreadcrumbScroll` of `PageHeader` has been deprecated and will soon be removed. Prop renamed to `disableBreadcrumbScroll`.',
-    ];
-
-    const dataTestId = uuidv4();
-    render(
-      <PageHeader
-        data-testid={dataTestId}
-        actionBarItems={actionBarItems}
-        actionBarOverflowLabel={testProps.actionBarOverflowAriaLabel}
-        availableSpace={children}
-        background={testProps.hasBackgroundAlways}
-        breadcrumbItems={breadcrumbItems}
-        breadcrumbOverflowLabel={testProps.breadcrumbOverflowAriaLabel}
-        collapseHeaderLabel={testProps.collapseHeaderIconDescription}
-        collapseHeaderToggleWanted={true}
-        expandHeaderLabel={testProps.expandHeaderIconDescription}
-        preCollapseTitleRow={true}
-        preventBreadcrumbScroll={true}
-        title={titleString}
-      />
-    );
-
-    for (let i = 0; i < warnings.length; i++) {
-      expect(warn).toBeCalledWith(warnings[i]);
-    }
-
-    const header = screen.getByTestId(dataTestId);
-
-    // check for rendered items
-    screen.getByLabelText(testProps.actionBarOverflowAriaLabel);
-    screen.getByText(availableSpaceTextContent);
-    expect(header.querySelectorAll(`.${blockClass}__breadcrumb`)).toHaveLength(
-      1
-    );
-    screen.getByLabelText(testProps.breadcrumbOverflowAriaLabel);
-    screen.getByLabelText(testProps.collapseHeaderIconDescription);
-
-    // const collapseButton =
-    screen.getByRole('button', {
-      name: testProps.collapseHeaderIconDescription,
-    });
-    // Determine how to test this
-    // userEvent.click(collapseButton);
-    // screen.getByLabelText(testProps.expandHeaderIconDescription);
-
-    screen.getAllByText(titleString, {
-      selector: `.${blockClass}__breadcrumb-title--pre-collapsed .${carbon.prefix}--link`,
-    });
-
-    warn.mockRestore(); // Remove mock
-  });
-
-  test('Title skeleton with deprecated breadcrumbs', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-    render(
-      <PageHeader
-        breadcrumbItems={breadcrumbItems}
-        breadcrumbOverflowLabel={testProps.breadcrumbOverflowAriaLabel}
-        title={{ text: titleString, loading: true }}
-      />
-    );
-
-    const skeletons = document.querySelectorAll(
-      `.${carbon.prefix}--skeleton__text`
-    );
-    expect(skeletons).toHaveLength(3);
-
-    warn.mockRestore(); // Remove mock
   });
 
   test('PageHeader grid settings narrow and fullWidth', () => {

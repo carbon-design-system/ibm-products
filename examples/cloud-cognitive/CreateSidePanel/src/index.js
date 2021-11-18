@@ -59,7 +59,7 @@ const App = () => {
   return (
     <div className="app">
       {renderUIShellHeader()}
-      <div id="cloud-and-cognitive-page-content">
+      <div id="ibm-products-page-content">
         <Button onClick={() => setOpen(!open)}>
           {open ? 'Close panel' : 'Open panel'}
         </Button>
@@ -69,7 +69,7 @@ const App = () => {
         open={open}
         onRequestClose={() => setOpen(false)}
         disableSubmit={!textInput.length}
-        selectorPageContent="#cloud-and-cognitive-page-content"
+        selectorPageContent="#ibm-products-page-content"
       >
         <FormGroup
           className={`${blockClass}__form ${prefix}example-form-group`}

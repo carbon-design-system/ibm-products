@@ -14,14 +14,28 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
-import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
-import { ActionBar, deprecatedProps } from './ActionBar';
+import { ActionBar } from './ActionBar';
+
+const getActions = (num) =>
+  Array.from({ length: num }, (_, num) => ({
+    key: `a-key-${num}`,
+    renderIcon: num % 2 ? Lightning16 : Bee16,
+    iconDescription: `Action ${num}`,
+    onClick: action(`Action ${num}`),
+  }));
 
 export default {
   title: getStoryTitle(ActionBar.displayName),
   component: ActionBar,
   argTypes: {
-    ...getDeprecatedArgTypes(deprecatedProps),
+    actions: {
+      control: {
+        type: 'select',
+        labels: ['None', 'A few', 'A lot'],
+      },
+      options: [0, 1, 2],
+      mapping: [[], getActions(10), getActions(20)],
+    },
     containerWidth: {
       control: { type: 'range', min: 20, max: 800, step: 10 },
     },
@@ -31,25 +45,18 @@ export default {
   ],
 };
 
-const actions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => ({
-  key: `a-key-${num}`,
-  renderIcon: num % 2 ? Lightning16 : Bee16,
-  iconDescription: `Action ${num}`,
-  onClick: action(`Action ${num}`),
-}));
-
 const Template = (argsIn) => {
-  const { children, containerWidth, ...args } = { ...argsIn };
+  const { containerWidth, ...args } = { ...argsIn };
   return (
     <div style={{ width: containerWidth }}>
-      <ActionBar {...args}>{children}</ActionBar>
+      <ActionBar {...args} />
     </div>
   );
 };
 
 export const Default = prepareStory(Template, {
   args: {
-    actions: actions,
+    actions: 1,
     containerWidth: 500,
     overflowAriaLabel: 'Open and close additional action bar items list.',
   },

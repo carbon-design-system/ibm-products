@@ -1,7 +1,10 @@
 <!-- `position:fixed` cause rendering issues, so do not render the modal -->
 
 import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
-import { getStoryId } from '../../global/js/utils/story-helper';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
 import { RemoveModal } from '.';
 
 # RemoveModal
@@ -32,7 +35,7 @@ delete / remove and low / medium / high impact please refer to the
 
 ## Code sample
 
-[<img alt="Edit on CodeSandbox" src="https://codesandbox.io/static/img/play-codesandbox.svg" />](https://codesandbox.io/s/remove-modal-3wcmu)
+<CodesandboxLink exampleDirectory="RemoveModal" />
 
 ## Component API
 

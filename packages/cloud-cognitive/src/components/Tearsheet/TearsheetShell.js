@@ -218,21 +218,12 @@ export const TearsheetShell = React.forwardRef(
           onFocus={handleFocus}
           preventCloseOnClickOutside={!isPassive}
           ref={modalRef}
-          {...(depth > 1
-            ? // this shenanigans is to ensure that when depth<=1 we don't supply a selectorsFloatingMenus
-              // prop AT ALL -- not even a null -- because even null gets passed through to the div and causes a
-              // React warning. Once that is fixed (see https://github.com/carbon-design-system/carbon/issues/10000)
-              // this could revert to selectorsFloatingMenus: {depth > 1 ? [...] : null}.
-              // NB if .bx__container is added to the default value, this can be removed altogether.
-              {
-                selectorsFloatingMenus: [
-                  `.${carbon.prefix}--overflow-menu-options`,
-                  `.${carbon.prefix}--tooltip`,
-                  '.flatpickr-calendar',
-                  `.${bc}__container`,
-                ],
-              }
-            : {})}
+          selectorsFloatingMenus={[
+            `.${carbon.prefix}--overflow-menu-options`,
+            `.${carbon.prefix}--tooltip`,
+            '.flatpickr-calendar',
+            `.${bc}__container`,
+          ]}
           size="sm"
         >
           {includeHeader && (

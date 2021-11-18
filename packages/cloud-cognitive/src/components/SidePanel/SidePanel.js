@@ -15,11 +15,7 @@ import { useResizeDetector } from 'react-resize-detector';
 import { moderate02 } from '@carbon/motion';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-
-import {
-  allPropTypes,
-  deprecateProp,
-} from '../../global/js/utils/props-helper';
+import { allPropTypes } from '../../global/js/utils/props-helper';
 
 import wrapFocus from '../../global/js/utils/wrapFocus';
 import { pkg } from '../../settings';
@@ -57,7 +53,6 @@ export let SidePanel = React.forwardRef(
       onRequestClose,
       onUnmount,
       open,
-      pageContentSelector,
       placement,
       preventCloseOnClickOutside,
       selectorPageContent,
@@ -442,23 +437,19 @@ export let SidePanel = React.forwardRef(
     // used to reset margins of the slide in panel when closed/closing
     useEffect(() => {
       if (!open && slideIn) {
-        const pageContentElement = document.querySelector(
-          selectorPageContent || pageContentSelector
-        );
+        const pageContentElement = document.querySelector(selectorPageContent);
         if (placement && placement === 'right' && pageContentElement) {
           pageContentElement.style.marginRight = 0;
         } else if (pageContentElement) {
           pageContentElement.style.marginLeft = 0;
         }
       }
-    }, [open, placement, selectorPageContent, pageContentSelector, slideIn]);
+    }, [open, placement, selectorPageContent, slideIn]);
 
     // used to set margins of content for slide in panel version
     useEffect(() => {
       if (shouldRender && slideIn) {
-        const pageContentElement = document.querySelector(
-          selectorPageContent || pageContentSelector
-        );
+        const pageContentElement = document.querySelector(selectorPageContent);
         if (placement && placement === 'right' && pageContentElement) {
           pageContentElement.style.marginRight = 0;
           pageContentElement.style.transition = `margin-right ${moderate02}`;
@@ -469,14 +460,7 @@ export let SidePanel = React.forwardRef(
           pageContentElement.style.marginLeft = SIDE_PANEL_SIZES[size];
         }
       }
-    }, [
-      slideIn,
-      selectorPageContent,
-      pageContentSelector,
-      placement,
-      shouldRender,
-      size,
-    ]);
+    }, [slideIn, selectorPageContent, placement, shouldRender, size]);
 
     // adds focus trap functionality
     /* istanbul ignore next */
@@ -590,7 +574,6 @@ export let SidePanel = React.forwardRef(
                 disabled,
                 className,
                 onClick,
-                onActionToolbarButtonClick,
                 ...rest
               }) => (
                 <Button
@@ -613,12 +596,7 @@ export let SidePanel = React.forwardRef(
                       [`${blockClass}__action-toolbar-leading-button`]: leading,
                     },
                   ])}
-                  onClick={(event) =>
-                    onClick
-                      ? onClick(event)
-                      : onActionToolbarButtonClick &&
-                        onActionToolbarButtonClick(event)
-                  }
+                  onClick={onClick}
                 >
                   {leading && label}
                 </Button>
@@ -742,19 +720,6 @@ export let SidePanel = React.forwardRef(
 // Return a placeholder if not released and not enabled by feature flag
 SidePanel = pkg.checkComponentEnabled(SidePanel, componentName);
 
-export const deprecatedProps = {
-  /**
-   * **Deprecated**
-   *
-   * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
-   * This prop is required when using the `slideIn` variant of the side panel.
-   */
-  pageContentSelector: deprecateProp(
-    PropTypes.string,
-    'This prop has been renamed to `selectorPageContent`.'
-  ),
-};
-
 SidePanel.propTypes = {
   /**
    * Sets the action toolbar buttons
@@ -764,10 +729,6 @@ SidePanel.propTypes = {
       label: PropTypes.string,
       leading: PropTypes.bool,
       icon: PropTypes.object,
-      onActionToolbarButtonClick: deprecateProp(
-        PropTypes.func,
-        'This prop will be removed in the future. Please use `onClick` instead'
-      ),
       onClick: PropTypes.func,
       kind: PropTypes.oneOf(['ghost', 'tertiary', 'secondary', 'primary']),
     })
@@ -884,9 +845,7 @@ SidePanel.propTypes = {
    * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
    * This prop is required when using the `slideIn` variant of the side panel.
    */
-  selectorPageContent: PropTypes.string.isRequired.if(
-    ({ slideIn, pageContentSelector }) => slideIn && !pageContentSelector
-  ),
+  selectorPageContent: PropTypes.string.isRequired.if(({ slideIn }) => slideIn),
 
   /**
    * Specify a CSS selector that matches the DOM element that should
@@ -913,8 +872,6 @@ SidePanel.propTypes = {
    * Sets the title text
    */
   title: PropTypes.string.isRequired.if(({ labelText }) => labelText),
-
-  ...deprecatedProps,
 };
 
 SidePanel.defaultProps = {

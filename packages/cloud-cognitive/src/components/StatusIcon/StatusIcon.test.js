@@ -63,7 +63,7 @@ describe(componentName, () => {
     const { container } = renderComponent();
     await expect(container).toBeAccessible(componentName, 'scan_label');
     await expect(container).toHaveNoAxeViolations();
-  }, 80000);
+  });
 
   it('applies className to the root node', () => {
     const { container } = renderComponent({ className });

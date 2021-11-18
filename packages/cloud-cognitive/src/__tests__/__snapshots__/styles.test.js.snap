@@ -5829,6 +5829,16 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     background-color: var(--to-color);
   }
 }
+@keyframes background-and-shadow-appear {
+  from {
+    background-color: var(--from-color);
+    box-shadow: 0 1px 0 var(--from-color);
+  }
+  to {
+    background-color: var(--to-color);
+    box-shadow: 0 1px 0 var(--to-color-shadow);
+  }
+}
 .exp--page-header.exp--page-header {
   /* Bleed class for the background */
   position: sticky;
@@ -5856,16 +5866,16 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--page-header::before {
   --from-color: var(--cds-ui-background, #ffffff);
   --to-color: var(--cds-ui-01, #f4f4f4);
+  --to-color-shadow: var(--cds-ui-03, #e0e0e0);
   position: absolute;
   top: 0;
   left: 0;
   display: block;
   width: 100%;
   height: 100%;
-  animation: background-appear 1000ms calc(-1000ms * var(--exp--page-header--background-opacity)) linear paused forwards;
+  animation: background-and-shadow-appear 1000ms calc(-1000ms * var(--exp--page-header--background-opacity)) linear paused forwards;
   content: \\"\\";
   z-index: -1;
-  box-shadow: 0 1px 0 var(--cds-ui-03, #e0e0e0);
 }
 .exp--page-header .exp--page-header--width--xl {
   padding-right: var(--cds-spacing-07, 2rem);
@@ -5995,6 +6005,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--page-header .exp--page-header__action-bar-column--background::before {
   --from-color: var(--cds-ui-background, #ffffff);
   --to-color: var(--cds-ui-01, #f4f4f4);
+  --to-color-shadow: var(--cds-ui-03, #e0e0e0);
   position: absolute;
   top: 0;
   left: 0;
@@ -6165,6 +6176,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .exp--page-header .exp--page-header__title-row .exp--page-header__page-actions::before {
   --from-color: var(--cds-ui-background, #ffffff);
   --to-color: var(--cds-ui-01, #f4f4f4);
+  --to-color-shadow: var(--cds-ui-03, #e0e0e0);
   position: absolute;
   top: 0;
   left: 0;

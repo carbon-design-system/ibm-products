@@ -1,4 +1,9 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import { HTTPError404 } from '.';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../../global/js/utils/story-helper';
 
 # HTTPError404
 
@@ -15,9 +20,15 @@ HTTP errors are used in an attempt to access something that isn’t available or
 the user doesn’t have permission for. This HTTPError component should be used in
 the event the user receives a `404` error code.
 
+<!--
+<Canvas>
+  <Story id={getStoryId(HTTPError404.displayName, 'With All Props Set')} />
+</Canvas>
+-->
+
 ## Code sample
 
-[<img alt="Edit on CodeSandbox" src="https://codesandbox.io/static/img/play-codesandbox.svg" />](https://codesandbox.io/s/httperror-403-sv5ud)
+<CodesandboxLink exampleDirectory="HTTPErrors" />
 
 ## Component API
 

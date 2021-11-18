@@ -30,6 +30,7 @@ them by doing either of the following:
 
 ```js
 import { Panel } from '@carbon/ibm-security';
+
 // De-structure `Panel` directly to get local references
 const { Panel, PanelContainer, PanelContent, PanelController } = Panel;
 
@@ -45,6 +46,7 @@ function to the `Panel` component. In practice, this looks like the following:
 
 ```jsx
 import { Panel } from '@carbon/ibm-security';
+
 const {
   Panel,
   PanelContainer,

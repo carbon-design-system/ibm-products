@@ -5,15 +5,15 @@ Also refer to
 
 ## 1. Fork the repo
 
-Go to
-[Carbon for Cloud & Cognitive's repository on GitHub](https://github.com/carbon-design-system/ibm-cloud-cognitive)
+Go to the
+[Carbon for IBM Products repository on GitHub](https://github.com/carbon-design-system/ibm-cloud-cognitive)
 and [fork the repo](https://help.github.com/articles/fork-a-repo/),
 [syncing with the original repo](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo#keep-your-fork-synced).
 
 ## 2. Work in a branch
 
-When contributing to Carbon for Cloud & Cognitive, your work should always be
-done in a
+When contributing to Carbon for IBM Products, your work should always be done in
+a
 [branch off your fork](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-and-deleting-branches-within-your-repository).
 
 ## 3. Start the development server

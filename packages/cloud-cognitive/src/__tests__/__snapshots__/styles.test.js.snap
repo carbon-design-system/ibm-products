@@ -6174,6 +6174,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   animation: background-appear 1000ms calc(-1000ms * var(--exp--page-header--background-opacity)) linear paused forwards;
   content: \\"\\";
 }
+.exp--page-header .exp--page-header__page-actions-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
 .exp--page-header .exp--page-header__title-row .exp--page-header__page-actions--in-breadcrumb {
   opacity: 0;
   visibility: hidden;
@@ -6195,10 +6200,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   height: var(--cds-spacing-05, 1rem);
 }
 .exp--page-header .exp--page-header__subtitle {
-  font-size: var(--cds-body-long-02-font-size, 1rem);
-  font-weight: var(--cds-body-long-02-font-weight, 400);
-  line-height: var(--cds-body-long-02-line-height, 1.5);
-  letter-spacing: var(--cds-body-long-02-letter-spacing, 0);
+  font-size: var(--cds-body-long-01-font-size, 0.875rem);
+  font-weight: var(--cds-body-long-01-font-weight, 400);
+  line-height: var(--cds-body-long-01-line-height, 1.42857);
+  letter-spacing: var(--cds-body-long-01-letter-spacing, 0.16px);
 }
 .exp--page-header .exp--page-header__available-row {
   font-size: var(--cds-body-long-01-font-size, 0.875rem);

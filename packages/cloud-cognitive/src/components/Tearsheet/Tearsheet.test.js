@@ -10,9 +10,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
   expectWarn,
-  expectMultipleWarn,
   expectMultipleError,
-  deprecated,
   required,
 } from '../../global/js/utils/test-helper';
 
@@ -245,17 +243,6 @@ const commonTests = (Ts, name, props, testActions) => {
       'is-visible'
     );
   });
-
-  it('reports deprecation of preventCloseOnClickOutside', () =>
-    expectMultipleWarn(
-      [
-        deprecated('preventCloseOnClickOutside', 'Tearsheet(.*)'),
-        deprecated('preventCloseOnClickOutside', 'TearsheetShell'),
-      ],
-      () => {
-        render(<Ts {...props} preventCloseOnClickOutside={true} />);
-      }
-    ));
 
   it('renders title', () => {
     render(<Ts {...{ ...props, title }} />);

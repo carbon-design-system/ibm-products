@@ -13,7 +13,6 @@ import { useResizeDetector } from 'react-resize-detector';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg, carbon } from '../../settings';
-import { deprecateProp } from '../../global/js/utils/props-helper';
 import pconsole from '../../global/js/utils/pconsole';
 
 // Carbon and package components we use.
@@ -318,18 +317,6 @@ export const TearsheetShell = React.forwardRef(
 TearsheetShell.displayName = componentName;
 
 export const deprecatedProps = {
-  /**
-   * **Deprecated**
-   *
-   * Prevent the tearsheet from automatically closing (triggering onClose, if
-   * provided, which can be cancelled by returning 'false') if the user clicks
-   * outside it.
-   */
-  preventCloseOnClickOutside: deprecateProp(
-    PropTypes.bool,
-    'The tearsheet will close automatically if the user clicks outside it if and only if the tearsheet is passive (no navigation actions)'
-  ),
-
   /**
    * **Deprecated**
    *

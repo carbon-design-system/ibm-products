@@ -14,7 +14,6 @@ import cx from 'classnames';
 import { pkg } from '../../settings';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { deprecateProp } from '../../global/js/utils/props-helper';
 
 // Carbon and package components we use.
 import { Form } from 'carbon-components-react';
@@ -43,7 +42,6 @@ export let CreateSidePanel = React.forwardRef(
       onRequestClose,
       onRequestSubmit,
       open,
-      pageContentSelector,
       primaryButtonText,
       secondaryButtonText,
       selectorPageContent,
@@ -78,13 +76,12 @@ export let CreateSidePanel = React.forwardRef(
     ]);
 
     return (
-      (selectorPageContent || pageContentSelector) && (
+      selectorPageContent && (
         <SidePanel
           {...rest}
           {...{
             open,
             ref,
-            pageContentSelector,
             selectorPageContent,
             onRequestClose,
             title,
@@ -125,19 +122,6 @@ export let CreateSidePanel = React.forwardRef(
 CreateSidePanel = pkg.checkComponentEnabled(CreateSidePanel, componentName);
 
 CreateSidePanel.displayName = componentName;
-
-export const deprecatedProps = {
-  /**
-   * **Deprecated**
-   *
-   * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
-   * This prop is required when using the `slideIn` variant of the side panel.
-   */
-  pageContentSelector: deprecateProp(
-    PropTypes.string,
-    'This prop has been renamed to `selectorPageContent`.'
-  ),
-};
 
 CreateSidePanel.propTypes = {
   /**
@@ -208,5 +192,4 @@ CreateSidePanel.propTypes = {
    * The title of the CreateSidePanel is usually the product or service name.
    */
   title: PropTypes.node.isRequired,
-  ...deprecatedProps,
 };

@@ -251,8 +251,6 @@ describe('PageHeader', () => {
     const header = screen.getByTestId(dataTestId);
     expect(header).toHaveClass(blockClass);
 
-    expect(header).toHaveClass(`${blockClass}--show-background`);
-
     expect(header).not.toHaveClass(classNames[0]);
     expect(header).not.toHaveClass(classNames[1]);
 
@@ -288,7 +286,6 @@ describe('PageHeader', () => {
     const header = screen.getByTestId(dataTestId);
     expect(header).toHaveClass(blockClass);
 
-    expect(header).toHaveClass(`${blockClass}--show-background`);
     expect(header).toHaveClass(classNames[0]);
     expect(header).toHaveClass(classNames[1]);
     expect(
@@ -671,7 +668,6 @@ describe('PageHeader', () => {
     // check for rendered items
     screen.getByLabelText(testProps.actionBarOverflowAriaLabel);
     screen.getByText(availableSpaceTextContent);
-    expect(header).toHaveClass(`${blockClass}--show-background`);
     expect(header.querySelectorAll(`.${blockClass}__breadcrumb`)).toHaveLength(
       1
     );

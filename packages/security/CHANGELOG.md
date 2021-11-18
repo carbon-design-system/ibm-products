@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.9.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-security@2.8.1...@carbon/ibm-security@2.9.0) (2021-11-16)
+
+
+### Bug Fixes
+
+* **storybook:** remove require statements from roots config ([#1431](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1431)) ([7493d59](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/7493d59fb8bbe03dfe41a0031745e3ac186b688b))
+
+
+### Features
+
+* **security:** upgrade `carbon-components`, fix public API snapshot ([#1389](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1389)) ([def48b1](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/def48b1768e187c19403660f1ec2b3af961e75bf))
+* update Carbon versions and package dependencies to latest ([#1425](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1425)) ([4fd5883](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/4fd5883961e0f3fc6be1c87bbe084b2cf6dc5db0)), closes [#10000](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/10000)
+
+
+
+
+
 ## [2.8.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-security@2.8.0...@carbon/ibm-security@2.8.1) (2021-11-10)
 
 

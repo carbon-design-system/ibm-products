@@ -1,0 +1,33 @@
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import { getStoryId } from '../../global/js/utils/story-helper';
+import { OptionsTile } from '.';
+
+# OptionsTile
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+The options tile is a disclosure widget, grouping a set of related controls or
+information while providing a summary of its contents when collapsed. It is used
+to avoid overwhelming the user with too many choices and elements when they’re
+likely not interested in all available options, but only a subset.
+
+An options tile can also be paired with a toggle to enable or disable an entire
+set of features with ease.
+
+[CD&AI Options Tile guidelines](https://pages.github.ibm.com/cdai-design/pal/components/options-tile/usage)
+
+## Example usage
+
+<Canvas>
+  <Story id={getStoryId(OptionsTile.displayName, 'options-tile')} />
+</Canvas>
+
+## Component API
+
+<ArgsTable />

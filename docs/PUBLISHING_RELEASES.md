@@ -46,12 +46,12 @@ the following should be done:
   this, but anomalous situations can still sometimes arise and cause the
   workflow to fail despite our best efforts.
 - Post a message to the `ccs-pal-dev` Slack channel to announce the new version
-  of @carbon/ibm-cloud-cognitive. To do this, post the message ":npm: new
-  version:" and then paste the initial part of the release summary from the
-  releases page on GitHub () that shows the package name, version number, and
-  any features and bug fixes but stopping before the assets (there is no need to
-  post those into the Slack message). An example is as follows: ":npm: new
-  version: @carbon/ibm-cloud-cognitive@0.97.0 Latest 0.97.0 (2021-11-01)
-  Features create tearsheet step, with custom components (#1342) (ef1e972)
-  SidePanel: add rest props to actionToolbarButtons prop (#1362) (93eac3b) Bug
-  fixes Tearsheet: avoid focus traps with stacked tearsheets (#1360) (17f48df)"
+  of @carbon/ibm-products. To do this, post the message ":npm: new version:" and
+  then paste the initial part of the release summary from the releases page on
+  GitHub () that shows the package name, version number, and any features and
+  bug fixes but stopping before the assets (there is no need to post those into
+  the Slack message). An example is as follows: ":npm: new version:
+  @carbon/ibm-products@0.97.0 Latest 0.97.0 (2021-11-01) Features create
+  tearsheet step, with custom components (#1342) (ef1e972) SidePanel: add rest
+  props to actionToolbarButtons prop (#1362) (93eac3b) Bug fixes Tearsheet:
+  avoid focus traps with stacked tearsheets (#1360) (17f48df)"

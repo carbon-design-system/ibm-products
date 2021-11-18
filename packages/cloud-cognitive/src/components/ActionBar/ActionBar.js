@@ -17,11 +17,7 @@ import { useResizeDetector } from 'react-resize-detector';
 // Carbon and package components we use.
 import { Button } from 'carbon-components-react';
 import uuidv4 from '../../global/js/utils/uuidv4';
-import {
-  deprecateProp,
-  extractShapesArray,
-  prepareProps,
-} from '../../global/js/utils/props-helper';
+import { prepareProps } from '../../global/js/utils/props-helper';
 import { ActionBarItem } from './ActionBarItem';
 import { ActionBarOverflowItems } from './ActionBarOverflowItems';
 
@@ -38,7 +34,6 @@ export let ActionBar = React.forwardRef(
   (
     {
       actions,
-      children,
       className,
       maxVisible,
       menuOptionsClass,
@@ -54,22 +49,12 @@ export let ActionBar = React.forwardRef(
     const [displayedItems, setDisplayedItems] = useState([]);
     const [hiddenSizingItems, setHiddenSizingItems] = useState([]);
     const internalId = useRef(uuidv4());
-    const [itemArray, setItemArray] = useState([]);
     const refDisplayedItems = useRef(null);
     const sizingRef = useRef(null);
     const sizes = useRef({});
 
-    // create child array from children which may be a fragment and create hidden sizing items
+    // create hidden sizing items
     useEffect(() => {
-      // NOTE: setting item Array inside useEffect prevents looping renders as a result of setting hiddenSizingItems
-      let newItemArray;
-      if (actions) {
-        newItemArray = actions;
-      } else {
-        newItemArray = extractShapesArray(children);
-      }
-      setItemArray(newItemArray);
-
       // Hidden action bar and items used to calculate sizes
       setHiddenSizingItems(
         <div
@@ -83,7 +68,7 @@ export let ActionBar = React.forwardRef(
             overflowItems={[]}
             key="hidden-overflow-menu"
           ></ActionBarOverflowItems>
-          {newItemArray.map(({ key, ...rest }) => (
+          {actions.map(({ key, ...rest }) => (
             <ActionBarItem
               {...rest}
               key={`hidden-item-${key}`}
@@ -92,12 +77,12 @@ export let ActionBar = React.forwardRef(
           ))}
         </div>
       );
-    }, [actions, children]);
+    }, [actions]);
 
-    // creates displayed items based on itemArray, displayCount and alignment
+    // creates displayed items based on actions, displayCount and alignment
     useEffect(() => {
       // Calculate the displayed items
-      const newDisplayedItems = itemArray.map(({ key, ...rest }) => (
+      const newDisplayedItems = actions.map(({ key, ...rest }) => (
         <ActionBarItem {...rest} key={key} />
       ));
 
@@ -117,7 +102,7 @@ export let ActionBar = React.forwardRef(
       }
 
       setDisplayedItems(newDisplayedItems);
-    }, [itemArray, displayCount, overflowAriaLabel, menuOptionsClass]);
+    }, [actions, displayCount, overflowAriaLabel, menuOptionsClass]);
 
     // determine display count based on space available and width of pageActions
     const checkFullyVisibleItems = () => {
@@ -190,7 +175,7 @@ export let ActionBar = React.forwardRef(
     useEffect(() => {
       checkFullyVisibleItems();
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [maxVisible, itemArray]);
+    }, [maxVisible, hiddenSizingItems]);
 
     /* istanbul ignore next */ // not sure how to fake window resize
     const handleResize = () => {
@@ -234,21 +219,6 @@ export let ActionBar = React.forwardRef(
     );
   }
 );
-
-export const deprecatedProps = {
-  /**
-   * **Deprecated**
-   *
-   * children of the action bar (action bar items)
-   */
-  children: deprecateProp(
-    PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.element),
-      PropTypes.element,
-    ]),
-    'See documentation on the `actions` prop.'
-  ),
-};
 
 ActionBar.displayName = componentName;
 ActionBar.propTypes = {
@@ -309,7 +279,6 @@ ActionBar.propTypes = {
    * align tags to right of available space
    */
   rightAlign: PropTypes.bool,
-  ...deprecatedProps,
 };
 
 ActionBar.defaultProps = {

@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-core",
   "private": true,
-  "version": "0.28.0",
+  "version": "0.29.0",
   "license": "Apache-2.0",
   "main": "scripts/build.js",
   "repository": {
@@ -14,7 +14,8 @@
     "carbon",
     "carbon design system",
     "carbon community",
-    "carbon for cloud & cognitive"
+    "carbon for cloud & cognitive",
+    "carbon for ibm products"
   ],
   "scripts": {
     "build": "run-s build:carbon build:storybook",
@@ -28,14 +29,14 @@
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
-    "@carbon/elements": "^10.46.0",
+    "@carbon/elements": "^10.47.0",
     "@carbon/grid": "10.39.0",
-    "@carbon/icons-react": "10.42.0",
+    "@carbon/icons-react": "10.43.0",
     "@carbon/import-once": "10.5.0",
     "@carbon/layout": "10.34.0",
     "@carbon/motion": "10.26.0",
-    "@carbon/storybook-addon-theme": "^0.21.0",
-    "@carbon/themes": "10.46.0",
+    "@carbon/storybook-addon-theme": "^0.22.0",
+    "@carbon/themes": "10.47.0",
     "@carbon/type": "10.38.0",
     "@storybook/addon-actions": "^6.3.12",
     "@storybook/addon-controls": "^6.3.12",
@@ -55,13 +56,13 @@
     "@storybook/react": "^6.3.12",
     "@storybook/theming": "^6.3.12",
     "babel-loader": "^8.2.3",
-    "babel-preset-ibm-cloud-cognitive": "^0.12.0",
-    "carbon-components": "^10.47.1",
-    "carbon-components-react": "^7.47.2",
+    "babel-preset-ibm-cloud-cognitive": "^0.13.0",
+    "carbon-components": "^10.48.0",
+    "carbon-components-react": "^7.48.0",
     "carbon-icons": "^7.0.7",
     "css-loader": "^6.5.1",
     "fast-sass-loader": "^2.0.0",
-    "npm-check-updates": "^12.0.0",
+    "npm-check-updates": "^12.0.2",
     "npm-run-all": "^4.1.5",
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
@@ -71,7 +72,7 @@
     "sass": "^1.43.4",
     "style-loader": "^3.3.1",
     "typescript": "^4.4.4",
-    "webpack": "^5.61.0",
+    "webpack": "^5.64.0",
     "webpack-merge": "^5.8.0"
   }
 }

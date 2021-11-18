@@ -14,7 +14,7 @@
 // paths but ignored during searching.
 const s = [
   {
-    n: 'Cloud & Cognitive',
+    n: 'Carbon for IBM Products',
     s: [
       {
         n: 'Components',
@@ -22,6 +22,7 @@ const s = [
           { n: 'Tag set', s: ['c/TagSet'] },
           { n: 'Cards', s: ['c/ExpressiveCard', 'c/ProductiveCard'] },
           { n: 'Modified tabs', s: ['c/ModifiedTabs'] },
+          { n: 'Options tile', s: ['c/OptionsTile'] },
           { n: 'Page header', s: ['c/PageHeader'] },
           { n: 'Progressive loading bar', s: ['c/LoadingBar'] },
           { n: 'Side panel', s: ['c/SidePanel'] },

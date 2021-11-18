@@ -1,5 +1,8 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import { getStoryId } from '../../global/js/utils/story-helper';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
 import { CreateFullPage } from '.';
 
 # CreateFullPage
@@ -15,8 +18,8 @@ import { CreateFullPage } from '.';
 
 When to use
 
-- In Cloud and Cognitive, the Full page create flow is the process the user must
-  complete in order to use a product or service.
+- In Carbon for IBM Products, the Full page create flow is the process the user
+  must complete in order to use a product or service.
 - In **IBM Cloud public**, it is the alternative to the Provisioning flow for a
   non-billable service.
 
@@ -138,7 +141,7 @@ sections, you can utilize the below included class names.
 
 ## Code sample
 
-[<img alt="Edit on CodeSandbox" src="https://codesandbox.io/static/img/play-codesandbox.svg" />](https://codesandbox.io/s/createfullpage-example-nj798)
+<CodesandboxLink exampleDirectory="CreateFullPage" />
 
 ## Component API
 

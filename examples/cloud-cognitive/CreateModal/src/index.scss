@@ -3,13 +3,13 @@ $feature-flags: (
   enable-css-custom-properties: true,
 );
 
-// @ carbon settings
+// Carbon settings
 @import '@carbon/themes/scss/themes';
 @import '@carbon/layout/scss/layout';
 @import 'carbon-components/scss/components/dropdown/dropdown';
 @import 'carbon-components/scss/components/text-area/text-area';
 
-// Cloud-cognitive package
+// Carbon for IBM Products package
 @import '@carbon/ibm-cloud-cognitive/css/index.min.css';
 
 :root {

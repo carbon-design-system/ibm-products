@@ -1,6 +1,8 @@
 ---
 name: Question ❓
-about: Usage question or discussion about @carbon/ibm-cloud-cognitive components
+about:
+  Usage question or discussion about @carbon/ibm-products (or
+  @carbon/ibm-cloud-cognitive) components
 title: ''
 labels: 'type: question ❓'
 assignees: ''
@@ -8,7 +10,7 @@ assignees: ''
 
 ## What package(s) are you using?
 
-- [ ] Cloud & Cognitive
+- [ ] Carbon for IBM Products (or Carbon for IBM Cloud & Cognitive)
 - [ ] Legacy/CDAI
 - [ ] Legacy/Security
 

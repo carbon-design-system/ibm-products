@@ -80,7 +80,7 @@ export const RemovePattern = prepareStory(Template, {
   },
 });
 
-export const DeletePattern = prepareStory(Template, {
+export const DeletePattern = prepareStory(TemplateWithState, {
   args: {
     ...defaultProps,
     textConfirmation: true,

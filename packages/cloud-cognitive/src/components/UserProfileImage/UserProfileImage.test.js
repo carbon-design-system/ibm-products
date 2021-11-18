@@ -14,7 +14,9 @@ import { pkg, carbon } from '../../settings';
 
 import { UserProfileImage } from '.';
 
-const blockClass = `${pkg.prefix}-user-profile-avatar`;
+const blockClass = `${pkg.prefix}--user-profile-image`;
+const componentName = UserProfileImage.displayName;
+
 const dataTestId = uuidv4();
 const kind = 'user';
 const size = 'xlg';
@@ -23,7 +25,7 @@ const theme = 'light';
 const renderComponent = ({ ...rest }) =>
   render(<UserProfileImage {...{ kind, size, theme, ...rest }} />);
 
-describe(name, () => {
+describe(componentName, () => {
   test('should return a circle with background color', () => {
     const { container } = renderComponent({ backgroundColor: 'light-cyan' });
     const element = container.querySelector(`.${blockClass}`);

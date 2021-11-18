@@ -14,7 +14,7 @@ const name = 'settings';
 
 describe(name, () => {
   it('uses the default css prefix', () => {
-    expect(pkg.prefix).toEqual('exp');
+    expect(pkg.prefix).toEqual('c4p');
   });
 
   it('can use custom prefix with a react component', async () => {

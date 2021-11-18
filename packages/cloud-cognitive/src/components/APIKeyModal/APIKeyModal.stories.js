@@ -409,6 +409,15 @@ export const CustomGenerate = prepareStory(MultiStepTemplate, {
     savedResource: '',
     savedPermissions: '',
   },
+  parameters: {
+    docs: {
+      source: {
+        // TODO provide better alternative source code, or remove this once the issue is resolved:
+        // https://github.com/storybookjs/storybook/issues/11554
+        code: 'Sorry, this feature is not currently available for this story',
+      },
+    },
+  },
 });
 
 export const Edit = prepareStory(EditTemplate, {

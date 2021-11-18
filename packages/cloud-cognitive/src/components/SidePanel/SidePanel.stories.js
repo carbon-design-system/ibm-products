@@ -28,7 +28,7 @@ import {
   HeaderContainer,
   HeaderName,
 } from 'carbon-components-react/lib/components/UIShell';
-import { Copy20, Delete20, Settings20 } from '@carbon/icons-react';
+import { Copy20, TrashCan20, Settings20 } from '@carbon/icons-react';
 import styles from './_storybook-styles.scss';
 import {
   getStoryTitle,
@@ -371,7 +371,7 @@ const SlideInTemplate = ({ actions, ...args }) => {
   return (
     <>
       {renderUIShellHeader()}
-      <Grid id="cloud-and-cognitive-page-content">
+      <Grid id="ibm-products-page-content">
         <Row>
           <Column>
             <Button onClick={() => setOpen(!open)}>
@@ -404,7 +404,7 @@ export const SlideIn = prepareStory(SlideInTemplate, {
   args: {
     placement: 'right',
     slideIn: true,
-    selectorPageContent: '#cloud-and-cognitive-page-content',
+    selectorPageContent: '#ibm-products-page-content',
     actions: 0,
     ...defaultStoryProps,
     labelText: 'Incident management',
@@ -428,7 +428,7 @@ export const WithActionToolbar = prepareStory(SlideOverTemplate, {
       },
       {
         label: 'Delete',
-        icon: Delete20,
+        icon: TrashCan20,
         onClick: action('Toolbar button clicked: Delete'),
       },
     ],
@@ -484,7 +484,7 @@ export const WithStaticTitleAndActionToolbar = prepareStory(SlideOverTemplate, {
       },
       {
         label: 'Delete',
-        icon: Delete20,
+        icon: TrashCan20,
         onClick: action('Action toolbar button clicked: Delete'),
       },
     ],

@@ -43,8 +43,7 @@ jobs:
 
       - name: Rename to ibm-cloud-cognitive for legacy publish
         run: |
-          git branch -D temp-for-legacy-publish || true
-          yarn json -I -f packages/cloud-cognitive/package.json -e 'this.name="@carbon/ibm-cloud-cognitive"'
+          yarn json -I -f packages/cloud-cognitive/package.json -e 'this.name="@carbon/ibm-products"'
           git add .
           git commit -m "chore: rename package for simultaneous publish"
 

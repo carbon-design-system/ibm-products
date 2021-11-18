@@ -93,7 +93,7 @@ export let PageHeader = React.forwardRef(
     };
 
     // state based on props only
-    const hasActionBar = actionBarItemArray && actionBarItemArray.length > 0;
+    const hasActionBar = actionBarItems && actionBarItems.length > 0;
     const hasBreadcrumbRow = breadcrumbs || actionBarItems;
 
     // NOTE: The buffer is used to add space between the bottom of the header and the last content

@@ -12,11 +12,7 @@ import {
   // SideNavMenuItem,
   SkipToContent,
 } from 'carbon-components-react';
-import {
-  Notification20,
-  UserAvatar20,
-  AppSwitcher20,
-} from '@carbon/icons-react';
+import { Notification20, UserAvatar20, Switcher20 } from '@carbon/icons-react';
 //import Fade16 from "@carbon/icons-react/lib/fade/16";
 
 // eslint-disable-next-line react/prop-types
@@ -49,7 +45,7 @@ export const CommonHeader = ({ className }) => {
           <UserAvatar20 />
         </HeaderGlobalAction>
         <HeaderGlobalAction aria-label="App Switcher">
-          <AppSwitcher20 />
+          <Switcher20 />
         </HeaderGlobalAction>
       </HeaderGlobalBar>
 

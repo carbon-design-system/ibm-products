@@ -130,7 +130,7 @@ export let PageHeader = React.forwardRef(
 
     // state based on props only
     const actionBarItemArray = extractShapesArray(actionBarItems);
-    const hasActionBar = actionBarItemArray && actionBarItemArray.length;
+    const hasActionBar = actionBarItemArray && actionBarItemArray.length > 0;
     const hasBreadcrumbRow = breadcrumbs || actionBarItems;
 
     // NOTE: The buffer is used to add space between the bottom of the header and the last content
@@ -142,7 +142,6 @@ export let PageHeader = React.forwardRef(
     const [pageActionsInBreadcrumbRow, setPageActionsInBreadcrumbRow] =
       useState(false);
     const [scrollYValue, setScrollYValue] = useState(0);
-    const [backgroundOpacity, setBackgroundOpacity] = useState(0);
     const [hasCollapseButton, setHasCollapseButton] = useState(false);
     const [spaceForCollapseButton, setSpaceForCollapseButton] = useState(false);
     const [actionBarMaxWidth, setActionBarMaxWidth] = useState(0);
@@ -377,7 +376,7 @@ export let PageHeader = React.forwardRef(
 
     useEffect(() => {
       // Determines if the hasBackgroundAlways should be one based on the header height or scroll
-      let result = hasBackgroundAlways && 1;
+      let result = hasBackgroundAlways ? 1 : 0;
 
       if (
         !result &&
@@ -398,13 +397,10 @@ export let PageHeader = React.forwardRef(
           );
         }
       }
-
       setPageHeaderStyles((prev) => ({
         ...prev,
         [`--${blockClass}--background-opacity`]: result,
       }));
-
-      setBackgroundOpacity(result);
     }, [
       actionBarItems,
       hasBackgroundAlways,
@@ -483,7 +479,6 @@ export let PageHeader = React.forwardRef(
             `${blockClass}--no-margins-below-row`,
             className,
             {
-              [`${blockClass}--show-background`]: backgroundOpacity > 0,
               [`${blockClass}--has-navigation`]: navigation || tags,
               [`${blockClass}--has-navigation-tags-only`]: !navigation && tags,
             },
@@ -756,19 +751,21 @@ export let PageHeader = React.forwardRef(
               [`${blockClass}__page-actions--in-breadcrumb`]: inBreadcrumbRow,
             })}
           >
-            {pageActions.content ?? (
-              <ButtonSetWithOverflow
-                classname={`${blockClass}__button-set-with-overflow`}
-                menuOptionsClass={cx(
-                  pageActionsMenuOptionsClass,
-                  `${blockClass}__button-set-menu-options`
-                )}
-                onWidthChange={handleWidthChange}
-                buttons={pageActions}
-                buttonSetOverflowLabel={pageActionsOverflowLabel}
-                rightAlign
-              />
-            )}
+            <div className={cx(`${blockClass}__page-actions-content`)}>
+              {pageActions.content ?? (
+                <ButtonSetWithOverflow
+                  classname={`${blockClass}__button-set-with-overflow`}
+                  menuOptionsClass={cx(
+                    pageActionsMenuOptionsClass,
+                    `${blockClass}__button-set-menu-options`
+                  )}
+                  onWidthChange={handleWidthChange}
+                  buttons={pageActions}
+                  buttonSetOverflowLabel={pageActionsOverflowLabel}
+                  rightAlign
+                />
+              )}
+            </div>
           </Tag>
         );
       }

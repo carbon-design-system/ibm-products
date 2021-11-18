@@ -776,8 +776,7 @@ PageHeader.propTypes = {
    * NOTE: This prop is required if actionBarItems are supplied
    */
   actionBarOverflowAriaLabel: PropTypes.string.isRequired.if(
-    ({ actionBarItems, actionBarOverflowLabel }) =>
-      actionBarItems && actionBarItems.length > 0 && !actionBarOverflowLabel
+    ({ actionBarItems }) => actionBarItems && actionBarItems.length > 0
   ),
   /**
    * When tags are supplied there may not be sufficient space to display all of the tags. This results in an overflow
@@ -808,9 +807,7 @@ PageHeader.propTypes = {
    * It is used in an overflow menu when there is insufficient space to display all breadcrumbs inline.
    */
   breadcrumbOverflowAriaLabel: PropTypes.string.isRequired.if(
-    ({ breadcrumbs, breadcrumbItems }) =>
-      (breadcrumbs && breadcrumbs.length > 0) ||
-      (breadcrumbItems && breadcrumbItems.length > 0)
+    ({ breadcrumbs }) => breadcrumbs && breadcrumbs.length > 0
   ),
   /**
    * Specifies the breadcrumb components to be shown in the breadcrumb area of

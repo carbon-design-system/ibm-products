@@ -154,7 +154,7 @@ const testProps = {
   allTagsModalTitle: 'All tags',
   allTagsModalSearchLabel: 'Search all tags',
   allTagsModalSearchPlaceholderText: 'Search all tags',
-  hasBackgroundAlways: true,
+  withoutBackground: false,
   breadcrumbOverflowAriaLabel,
   breadcrumbs,
   className: classNames.join(' '),
@@ -303,6 +303,11 @@ describe('PageHeader', () => {
     expect(
       document.querySelectorAll(`.${blockClass}__title-icon`)
     ).toHaveLength(1);
+
+    // When no withoutBackground is false this should result in the value 0 for opacity
+    expect(header.getAttribute('style')).toMatch(
+      /--exp--page-header--background-opacity: 1/
+    );
   });
 
   const dataTestId = 'data-testid';
@@ -371,7 +376,7 @@ describe('PageHeader', () => {
 
   test('Navigation row renders when Navigation but no tags', () => {
     const { navigation } = testProps;
-    render(<PageHeader {...{ navigation, hasBackgroundAlways: false }} />);
+    render(<PageHeader {...{ navigation, withoutBackground: true }} />);
 
     expect(screen.queryAllByTestId('tabs')).toHaveLength(1);
   });
@@ -514,14 +519,14 @@ describe('PageHeader', () => {
     expect(allTitle).toHaveLength(3); // breadcrumb sizing, breadcrumb and main title
   });
 
-  test('Without hasBackgroundAlways', () => {
+  test('Without background', () => {
     const { title } = testProps;
 
     render(
       <PageHeader
         {...{
           title,
-          hasBackgroundAlways: false,
+          withoutBackground: true,
           breadcrumbOverflowAriaLabel: 'Show the breadcrumb overflow',
           breadcrumbs,
         }}
@@ -588,6 +593,54 @@ describe('PageHeader', () => {
     );
 
     jest.spyOn(console, 'error').mockRestore();
+  });
+
+  test('Background is not there with withoutBackground is true', () => {
+    const dataTestId = uuidv4();
+    render(
+      <PageHeader
+        data-testid={dataTestId}
+        title={testProps.title}
+        withoutBackground={true}
+      />
+    );
+
+    const header = screen.getByTestId(dataTestId);
+
+    // When no withoutBackground is true this should result in the value 0 for opacity
+    expect(header.getAttribute('style')).toMatch(
+      /--exp--page-header--background-opacity: 0/
+    );
+  });
+
+  test('Works, for now, with deprecated props', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    const warnings = [
+      'The prop `hasBackgroundAlways` of `PageHeader` has been deprecated and will soon be removed. Property replaced by `withoutBackground`',
+    ];
+
+    const dataTestId = uuidv4();
+    render(
+      <PageHeader
+        data-testid={dataTestId}
+        title={testProps.title}
+        hasBackgroundAlways={false}
+      />
+    );
+
+    for (let i = 0; i < warnings.length; i++) {
+      expect(warn).toBeCalledWith(warnings[i]);
+    }
+
+    const header = screen.getByTestId(dataTestId);
+
+    // When no hasBackgroundAlways is false this should result in the value 0 for opacity
+    expect(header.getAttribute('style')).toMatch(
+      /--exp--page-header--background-opacity: 0/
+    );
+
+    warn.mockRestore(); // Remove mock
   });
 
   test('PageHeader grid settings narrow and fullWidth', () => {

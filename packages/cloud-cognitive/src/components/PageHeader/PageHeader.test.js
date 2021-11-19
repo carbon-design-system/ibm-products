@@ -305,9 +305,10 @@ describe('PageHeader', () => {
     ).toHaveLength(1);
 
     // When no withoutBackground is false this should result in the value 0 for opacity
-    expect(header.getAttribute('style')).toMatch(
-      /--exp--page-header--background-opacity: 1/
+    const regStyle = new RegExp(
+      `--${prefix}--page-header--background-opacity: 1`
     );
+    expect(header.getAttribute('style')).toMatch(regStyle);
   });
 
   const dataTestId = 'data-testid';
@@ -608,9 +609,10 @@ describe('PageHeader', () => {
     const header = screen.getByTestId(dataTestId);
 
     // When no withoutBackground is true this should result in the value 0 for opacity
-    expect(header.getAttribute('style')).toMatch(
-      /--exp--page-header--background-opacity: 0/
+    const regStyle = new RegExp(
+      `--${prefix}--page-header--background-opacity: 0`
     );
+    expect(header.getAttribute('style')).toMatch(regStyle);
   });
 
   test('Works, for now, with deprecated props', () => {
@@ -636,9 +638,10 @@ describe('PageHeader', () => {
     const header = screen.getByTestId(dataTestId);
 
     // When no hasBackgroundAlways is false this should result in the value 0 for opacity
-    expect(header.getAttribute('style')).toMatch(
-      /--exp--page-header--background-opacity: 0/
+    const regStyle = new RegExp(
+      `--${prefix}--page-header--background-opacity: 0`
     );
+    expect(header.getAttribute('style')).toMatch(regStyle);
 
     warn.mockRestore(); // Remove mock
   });

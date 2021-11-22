@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import composeRefs from '@seznam/compose-react-refs';
 import { Button } from 'carbon-components-react';
 
 import {
@@ -39,7 +38,9 @@ let ToolbarButton = forwardRef(
     },
     r
   ) => {
-    const ref = useRef();
+    const _ref = useRef();
+    const ref = r || _ref;
+
     const [open, setOpen] = useState(popover?.open);
 
     function toggleOpen() {
@@ -68,7 +69,7 @@ let ToolbarButton = forwardRef(
       <Button
         tooltipPosition={useContext(ToolbarContext)?.vertical && 'right'}
         {...rest}
-        ref={composeRefs(ref, r)}
+        ref={ref}
         className={cx(className, { [`${blockClass}--caret`]: Caret })}
         {...(Caret && {
           'aria-expanded': open,

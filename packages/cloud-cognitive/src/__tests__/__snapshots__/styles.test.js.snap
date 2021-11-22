@@ -5798,6 +5798,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .c4p--button-set-with-overflow.c4p--button-set-with-overflow {
   display: flex;
+  width: 100%;
 }
 .c4p--button-set-with-overflow .c4p--button-set-with-overflow__space {
   position: relative;
@@ -6188,8 +6189,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--page-header .c4p--page-header__page-actions-content {
   position: relative;
+  display: flex;
+  overflow: hidden;
   width: 100%;
   height: 100%;
+  justify-content: flex-end;
 }
 .c4p--page-header .c4p--page-header__title-row .c4p--page-header__page-actions--in-breadcrumb {
   opacity: 0;

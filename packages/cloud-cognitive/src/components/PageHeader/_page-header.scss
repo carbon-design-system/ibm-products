@@ -488,8 +488,11 @@ $right-section-alt-width: 100% - $left-section-alt-width;
 
     .#{$block-class}__page-actions-content {
       position: relative; // ensure appears over ::before
+      display: flex;
+      overflow: hidden;
       width: 100%;
       height: 100%;
+      justify-content: flex-end;
     }
 
     .#{$block-class}__title-row .#{$block-class}__page-actions--in-breadcrumb {

@@ -18,6 +18,8 @@ import { PageHeader } from '.';
 import {
   mockHTMLElement,
   expectMultipleError,
+  expectWarn,
+  deprecated,
   required,
 } from '../../global/js/utils/test-helper';
 
@@ -615,36 +617,25 @@ describe('PageHeader', () => {
     expect(header.getAttribute('style')).toMatch(regStyle);
   });
 
-  test('Works, for now, with deprecated props', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+  test('Works, for now, with deprecated props', () =>
+    expectWarn(deprecated('hasBackgroundAlways', 'PageHeader'), () => {
+      const dataTestId = uuidv4();
+      render(
+        <PageHeader
+          data-testid={dataTestId}
+          title={testProps.title}
+          hasBackgroundAlways={false}
+        />
+      );
 
-    const warnings = [
-      'The prop `hasBackgroundAlways` of `PageHeader` has been deprecated and will soon be removed. Property replaced by `withoutBackground`',
-    ];
+      const header = screen.getByTestId(dataTestId);
 
-    const dataTestId = uuidv4();
-    render(
-      <PageHeader
-        data-testid={dataTestId}
-        title={testProps.title}
-        hasBackgroundAlways={false}
-      />
-    );
-
-    for (let i = 0; i < warnings.length; i++) {
-      expect(warn).toBeCalledWith(warnings[i]);
-    }
-
-    const header = screen.getByTestId(dataTestId);
-
-    // When no hasBackgroundAlways is false this should result in the value 0 for opacity
-    const regStyle = new RegExp(
-      `--${prefix}--page-header--background-opacity: 0`
-    );
-    expect(header.getAttribute('style')).toMatch(regStyle);
-
-    warn.mockRestore(); // Remove mock
-  });
+      // When no hasBackgroundAlways is false this should result in the value 0 for opacity
+      const regStyle = new RegExp(
+        `--${prefix}--page-header--background-opacity: 0`
+      );
+      expect(header.getAttribute('style')).toMatch(regStyle);
+    }));
 
   test('PageHeader grid settings narrow and fullWidth', () => {
     const dataTestId = uuidv4();

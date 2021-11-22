@@ -22,6 +22,7 @@ $block-class: #{$pkg-prefix}--button-set-with-overflow;
   @include block-wrap($block-class) {
     &.#{$block-class} {
       display: flex;
+      width: 100%;
     }
 
     .#{$block-class}__space {

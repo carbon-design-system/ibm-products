@@ -5,12 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render as r, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { settings } from 'carbon-components';
 import React, { createRef } from 'react';
 
 import { Toolbar, ToolbarButton, ToolbarGroup } from '../..';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { blockClass, componentName } from './Toolbar';
 import { blockClass as toolbarButtonClass } from './ToolbarButton';
@@ -18,51 +19,55 @@ import { blockClass as toolbarButtonClass } from './ToolbarButton';
 const { getByTestId, getByText, queryByText } = screen;
 const { click } = userEvent;
 
-const dataTestId = 'dataTestId';
-
-function _render(props) {
-  const Component = this;
-
-  return r(
-    <Component data-testid={dataTestId} {...props}>
-      {Component.displayName}
-    </Component>
-  );
+function instance(prop) {
+  return `${uuidv4()}--${prop}`;
 }
 
-function test(Component) {
-  const render = _render.bind(Component);
-  const { displayName } = Component;
+function toBeAccessible(label, node, displayName) {
+  it(label, async () => {
+    const { container } = render(node);
 
-  it('has no accessibility violations', async () => {
-    const { container } = render();
-
-    await expect(container).toBeAccessible(displayName);
+    await expect(container).toBeAccessible(`${displayName} — ${label}`);
     await expect(container).toHaveNoAxeViolations();
   });
+}
+
+const children = instance('children');
+const dataTestId = instance('dataTestId');
+
+const props = { children };
+
+function test(Component) {
+  toBeAccessible(
+    'has no accessibility violations',
+    <Component {...props} />,
+    Component.displayName
+  );
 
   it('renders children', () => {
-    render();
+    render(<Component {...props} />);
 
-    getByText(displayName);
+    getByText(children);
   });
 
   it('adds a class to the containing node', () => {
-    const className = 'class-name';
-    render({ className });
+    const className = instance('class-name');
+    render(
+      <Component {...props} className={className} data-testid={dataTestId} />
+    );
 
     expect(getByTestId(dataTestId)).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', () => {
-    render();
+    render(<Component {...props} data-testid={dataTestId} />);
 
     getByTestId(dataTestId);
   });
 
   it('forwards a reference to the appropriate DOM node', () => {
     const ref = createRef();
-    render({ ref });
+    render(<Component {...props} ref={ref} data-testid={dataTestId} />);
 
     expect(getByTestId(dataTestId)).toEqual(ref.current);
   });
@@ -71,107 +76,140 @@ function test(Component) {
 describe(componentName, () => {
   test(Toolbar);
 
+  toBeAccessible(
+    'has no accessibility violations for the vertical variant',
+    <Toolbar {...props} vertical />,
+    componentName
+  );
+
   it('renders the vertical variant', () => {
-    _render.bind(Toolbar)({ vertical: true });
+    const { rerender } = render(
+      <Toolbar {...props} data-testid={dataTestId} />
+    );
 
+    const className = `${blockClass}--vertical`;
     const toolbar = getByTestId(dataTestId);
+    expect(toolbar).not.toHaveClass(className);
 
-    expect(toolbar).toHaveAttribute('aria-orientation', 'vertical');
-    expect(toolbar).toHaveClass(`${blockClass}--vertical`);
+    rerender(<Toolbar {...props} data-testid={dataTestId} vertical />);
+
+    expect(toolbar).toHaveClass(className);
   });
 });
 
 describe(ToolbarButton.displayName, () => {
   test(ToolbarButton);
 
-  const render = _render.bind(ToolbarButton);
   const { fn } = jest;
+
+  const open = { open: true };
+  const renderCaret = instance('renderCaret');
+
+  function CaretToolbarButton(rest) {
+    return (
+      <ToolbarButton
+        {...props}
+        {...{
+          renderCaret: () => renderCaret,
+          ...rest,
+        }}
+      />
+    );
+  }
 
   it('calls `onClick` when clicked', () => {
     const onClick = fn();
-    render({ onClick });
+    render(
+      <ToolbarButton {...props} data-testid={dataTestId} onClick={onClick} />
+    );
 
     expect(onClick).not.toBeCalled();
 
     click(getByTestId(dataTestId));
-
     expect(onClick).toBeCalledTimes(1);
   });
 
-  const popoverDataTestId = 'popoverDataTestId';
-  const renderCaret = 'renderCaret';
-
-  function CaretToolbarButton({ popover, ...props } = {}) {
-    return render({
-      popover: { 'data-testid': popoverDataTestId, ...popover },
-      renderCaret: () => renderCaret,
-      ...props,
-    });
-  }
+  toBeAccessible(
+    'has no accessibility violations for the caret variant',
+    <CaretToolbarButton />,
+    ToolbarButton.displayName
+  );
 
   it('renders the caret variant', () => {
-    CaretToolbarButton();
+    const { rerender } = render(<ToolbarButton data-testid={dataTestId} />);
 
-    expect(getByTestId(dataTestId)).toHaveClass(`${toolbarButtonClass}--caret`);
+    const className = `${toolbarButtonClass}--caret`;
+    expect(getByTestId(dataTestId)).not.toHaveClass(className);
+
+    rerender(<CaretToolbarButton data-testid={dataTestId} />);
+    expect(getByTestId(dataTestId)).toHaveClass(className);
   });
 
+  toBeAccessible(
+    'has no accessibility violations for the popover',
+    <CaretToolbarButton popover={open} />,
+    ToolbarButton.displayName
+  );
+
   it('renders the popover', () => {
-    CaretToolbarButton();
+    const { rerender } = render(<ToolbarButton data-testid={dataTestId} />);
+
+    rerender(<CaretToolbarButton data-testid={dataTestId} />);
 
     expect(queryByText(renderCaret)).not.toBeInTheDocument();
 
     click(getByTestId(dataTestId));
-
     getByText(renderCaret);
   });
 
   it('adds additional props to the popover', () => {
-    CaretToolbarButton({
-      popover: { open: true },
-    });
+    render(
+      <CaretToolbarButton popover={{ ...open, 'data-testid': dataTestId }} />
+    );
 
-    getByTestId(popoverDataTestId);
-  });
-
-  // TODO: `onClickOutside`.
-  it('`onClickOutside`', () => {
-    expect(null).toBeNull();
+    getByTestId(dataTestId);
   });
 
   it('calls `onClose` when the popover is closed', () => {
     const onClose = fn();
-    CaretToolbarButton({ onClose });
+    render(<CaretToolbarButton data-testid={dataTestId} onClose={onClose} />);
 
     click(getByTestId(dataTestId));
-
     expect(onClose).not.toBeCalled();
 
     click(getByTestId(dataTestId));
-
     expect(onClose).toBeCalledTimes(1);
   });
 
   it('calls `onOpen` when the popover is opened', () => {
     const onOpen = fn();
-    CaretToolbarButton({ onOpen });
+    render(<CaretToolbarButton data-testid={dataTestId} onOpen={onOpen} />);
 
     expect(onOpen).not.toBeCalled();
 
     click(getByTestId(dataTestId));
-
     expect(onOpen).toBeCalledTimes(1);
   });
 
+  it('closes the popover when clicked outside', () => {
+    render(<CaretToolbarButton popover={open} />);
+
+    click(document.body);
+    expect(queryByText(renderCaret)).not.toBeInTheDocument();
+  });
+
   it("renders the 'right' tooltip position for the vertical variant by default", () => {
-    r(
+    const { rerender } = render(<ToolbarButton data-testid={dataTestId} />);
+
+    const className = `${settings.prefix}--btn--icon-only--right`;
+    expect(getByTestId(dataTestId)).not.toHaveClass(className);
+
+    rerender(
       <Toolbar vertical>
         <ToolbarButton data-testid={dataTestId} />
       </Toolbar>
     );
-
-    expect(getByTestId(dataTestId)).toHaveClass(
-      `${settings.prefix}--btn--icon-only--right`
-    );
+    expect(getByTestId(dataTestId)).toHaveClass(className);
   });
 });
 

@@ -10,7 +10,7 @@
 
 @import '../../global/styles/project-settings';
 
-@include exports($name: cloud-cognitive--toolbar) {
+@include exports('ibm-products--toolbar') {
   $block-class: #{$pkg-prefix}--toolbar;
 
   $border: carbon--rem(

@@ -13691,7 +13691,12 @@ Map {
         "type": "string",
       },
       "selectorsFloatingMenus": Object {
-        "type": "string",
+        "args": Array [
+          Object {
+            "type": "string",
+          },
+        ],
+        "type": "arrayOf",
       },
       "size": Object {
         "args": Array [
@@ -13941,6 +13946,7 @@ Map {
       "labelText": "Add file",
       "multiple": false,
       "onAddFiles": [Function],
+      "pattern": ".[0-9a-z]+$",
       "tabIndex": 0,
     },
     "propTypes": Object {
@@ -13973,6 +13979,9 @@ Map {
       },
       "onAddFiles": Object {
         "type": "func",
+      },
+      "pattern": Object {
+        "type": "string",
       },
       "role": Object {
         "type": "string",
@@ -14952,6 +14961,51 @@ Map {
     },
   },
   "SecondaryButton" => Object {},
+  "unstable_ContainedTab" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "handleTabClick": Object {
+        "type": "func",
+      },
+      "handleTabKeyDown": Object {
+        "type": "func",
+      },
+      "id": Object {
+        "type": "string",
+      },
+      "index": Object {
+        "type": "number",
+      },
+      "label": Object {
+        "type": "node",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
+        "type": "func",
+      },
+      "renderButton": Object {
+        "type": "func",
+      },
+      "renderContent": Object {
+        "type": "func",
+      },
+      "selected": Object {
+        "type": "bool",
+      },
+      "tabIndex": Object {
+        "type": "number",
+      },
+    },
+    "render": [Function],
+  },
   "TabContent" => Object {
     "defaultProps": Object {
       "selected": false,
@@ -14967,6 +15021,55 @@ Map {
         "type": "bool",
       },
     },
+  },
+  "unstable_ContainedTabs" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "hidden": Object {
+        "type": "bool",
+      },
+      "leftOverflowButtonProps": Object {
+        "type": "object",
+      },
+      "light": [Function],
+      "onClick": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
+        "type": "func",
+      },
+      "onSelectionChange": Object {
+        "type": "func",
+      },
+      "rightOverflowButtonProps": Object {
+        "type": "object",
+      },
+      "scrollIntoView": Object {
+        "type": "bool",
+      },
+      "selected": Object {
+        "type": "number",
+      },
+      "selectionMode": Object {
+        "args": Array [
+          Array [
+            "automatic",
+            "manual",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "tabContentClassName": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
   },
   "ToolbarItem" => Object {
     "defaultProps": Object {
@@ -15664,6 +15767,9 @@ Map {
       "children": Object {
         "type": "node",
       },
+      "className": Object {
+        "type": "string",
+      },
       "id": Object {
         "type": "string",
       },
@@ -15685,6 +15791,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "target": Object {
+        "type": "element",
       },
       "x": Object {
         "args": Array [
@@ -15847,6 +15956,78 @@ Map {
     },
   },
   "unstable_usePrefix" => Object {},
+  "unstable_Popover" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "left-bottom",
+            "left-top",
+            "right",
+            "right-bottom",
+            "right-top",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "as": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "elementType",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "caret": Object {
+        "type": "bool",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "dropShadow": Object {
+        "type": "bool",
+      },
+      "highContrast": Object {
+        "type": "bool",
+      },
+      "light": Object {
+        "type": "bool",
+      },
+      "open": Object {
+        "isRequired": true,
+        "type": "bool",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable_PopoverContent" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
   "unstable_HStack" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
@@ -15907,6 +16088,50 @@ Map {
   "unstable_VStack" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
+  },
+  "unstable_Tooltip" => Object {
+    "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "left-bottom",
+            "left-top",
+            "right",
+            "right-bottom",
+            "right-top",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "defaultOpen": Object {
+        "type": "bool",
+      },
+      "description": Object {
+        "type": "node",
+      },
+      "enterDelayMs": Object {
+        "type": "number",
+      },
+      "label": Object {
+        "type": "node",
+      },
+      "leaveDelayMs": Object {
+        "type": "number",
+      },
+    },
   },
 }
 `;

@@ -11,24 +11,12 @@ import { layout05, baseFontSize } from '@carbon/layout';
 import cx from 'classnames';
 import { useResizeDetector } from 'react-resize-detector';
 
-import {
-  BreadcrumbItem,
-  Grid,
-  Column,
-  Row,
-  Button,
-  Tag,
-} from 'carbon-components-react';
+import { Grid, Column, Row, Button, Tag } from 'carbon-components-react';
 
 import { useWindowResize, useNearestScroll } from '../../global/js/hooks';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
-import {
-  deprecateProp,
-  deprecatePropUsage,
-  extractShapesArray,
-  prepareProps,
-} from '../../global/js/utils/props-helper';
+import { prepareProps } from '../../global/js/utils/props-helper';
 
 import { pkg } from '../../settings';
 
@@ -54,27 +42,19 @@ export let PageHeader = React.forwardRef(
       actionBarItems,
       actionBarMenuOptionsClass,
       actionBarOverflowAriaLabel,
-      actionBarOverflowLabel: deprecated_actionBarOverflowLabel,
       allTagsModalSearchLabel,
       allTagsModalSearchPlaceholderText,
       allTagsModalTitle,
-      availableSpace: deprecated_availableSpace,
-      background: deprecated_background,
       hasBackgroundAlways,
       breadcrumbOverflowAriaLabel,
-      breadcrumbOverflowLabel: deprecated_breadcrumbOverflowLabel,
-      breadcrumbItems: deprecated_breadcrumbItems,
-      breadcrumbs: breadcrumbsIn,
+      breadcrumbs,
       children,
       className,
       collapseHeader,
       collapseHeaderIconDescription,
-      collapseHeaderLabel: deprecated_collapseHeaderLabel,
-      collapseHeaderToggleWanted: deprecated_collapseHeaderToggleWanted,
       collapseTitle,
       disableBreadcrumbScroll,
       expandHeaderIconDescription,
-      expandHeaderLabel: deprecated_expandHeaderLabel,
       fullWidthGrid,
       hasCollapseHeaderToggle,
       narrowGrid,
@@ -82,9 +62,6 @@ export let PageHeader = React.forwardRef(
       pageActions,
       pageActionsOverflowLabel,
       pageActionsMenuOptionsClass,
-      pageHeaderOffset: _deprecated_pageHeaderOffset,
-      preCollapseTitleRow: deprecated_preCollapseTitleRow,
-      preventBreadcrumbScroll: deprecated_preventBreadcrumbScroll,
       showAllTagsLabel,
       subtitle,
       tags,
@@ -93,19 +70,6 @@ export let PageHeader = React.forwardRef(
     },
     ref
   ) => {
-    // handle deprecated props - START
-    actionBarOverflowAriaLabel ??= deprecated_actionBarOverflowLabel;
-    breadcrumbOverflowAriaLabel ??= deprecated_breadcrumbOverflowLabel;
-    children ??= deprecated_availableSpace;
-    collapseHeaderIconDescription ??= deprecated_collapseHeaderLabel;
-    expandHeaderIconDescription ??= deprecated_expandHeaderLabel;
-    hasBackgroundAlways ??= deprecated_background;
-    hasCollapseHeaderToggle ??= deprecated_collapseHeaderToggleWanted;
-    collapseTitle ??= deprecated_preCollapseTitleRow;
-    disableBreadcrumbScroll ??= deprecated_preventBreadcrumbScroll;
-    const breadcrumbs = breadcrumbsIn ?? deprecated_breadcrumbItems;
-    // handle deprecated props - END
-
     const [metrics, setMetrics] = useState({});
     const [pageHeaderStyles, setPageHeaderStyles] = useState({
       ...rest.style,
@@ -129,8 +93,7 @@ export let PageHeader = React.forwardRef(
     };
 
     // state based on props only
-    const actionBarItemArray = extractShapesArray(actionBarItems);
-    const hasActionBar = actionBarItemArray && actionBarItemArray.length;
+    const hasActionBar = actionBarItems && actionBarItems.length > 0;
     const hasBreadcrumbRow = breadcrumbs || actionBarItems;
 
     // NOTE: The buffer is used to add space between the bottom of the header and the last content
@@ -523,22 +486,13 @@ export let PageHeader = React.forwardRef(
                           noTrailingSlash={!!title}
                           overflowAriaLabel={breadcrumbOverflowAriaLabel}
                           breadcrumbs={
-                            breadcrumbsIn
+                            breadcrumbs
                               ? breadcrumbItemForTitle
-                                ? breadcrumbsIn.concat(breadcrumbItemForTitle)
-                                : breadcrumbsIn
+                                ? breadcrumbs.concat(breadcrumbItemForTitle)
+                                : breadcrumbs
                               : null
                           }
-                        >
-                          {!breadcrumbsIn ? deprecated_breadcrumbItems : null}
-                          {!breadcrumbsIn && breadcrumbItemForTitle ? (
-                            <BreadcrumbItem
-                              {...prepareProps(breadcrumbItemForTitle, 'label')}
-                            >
-                              {breadcrumbItemForTitle.label}
-                            </BreadcrumbItem>
-                          ) : null}
-                        </BreadcrumbWithOverflow>
+                        />
                       ) : null}
                     </Column>
                     <Column
@@ -566,7 +520,7 @@ export let PageHeader = React.forwardRef(
                                 `${blockClass}__action-bar-menu-options`
                               )}
                               overflowAriaLabel={actionBarOverflowAriaLabel}
-                              actions={actionBarItemArray}
+                              actions={actionBarItems}
                               className={`${blockClass}__action-bar`}
                               onWidthChange={handleActionBarWidthChange}
                               rightAlign={true}
@@ -751,19 +705,21 @@ export let PageHeader = React.forwardRef(
               [`${blockClass}__page-actions--in-breadcrumb`]: inBreadcrumbRow,
             })}
           >
-            {pageActions.content ?? (
-              <ButtonSetWithOverflow
-                classname={`${blockClass}__button-set-with-overflow`}
-                menuOptionsClass={cx(
-                  pageActionsMenuOptionsClass,
-                  `${blockClass}__button-set-menu-options`
-                )}
-                onWidthChange={handleWidthChange}
-                buttons={pageActions}
-                buttonSetOverflowLabel={pageActionsOverflowLabel}
-                rightAlign
-              />
-            )}
+            <div className={cx(`${blockClass}__page-actions-content`)}>
+              {pageActions.content ?? (
+                <ButtonSetWithOverflow
+                  classname={`${blockClass}__button-set-with-overflow`}
+                  menuOptionsClass={cx(
+                    pageActionsMenuOptionsClass,
+                    `${blockClass}__button-set-menu-options`
+                  )}
+                  onWidthChange={handleWidthChange}
+                  buttons={pageActions}
+                  buttonSetOverflowLabel={pageActionsOverflowLabel}
+                  rightAlign
+                />
+              )}
+            </div>
           </Tag>
         );
       }
@@ -790,113 +746,24 @@ const TYPES = {
 };
 const tagTypes = Object.keys(TYPES);
 
-export const deprecatedProps = {
-  /**
-   * **Deprecated** see property `actionBarOverflowAriaLabel`
-   */
-  actionBarOverflowLabel: deprecateProp(
-    PropTypes.string,
-    'Property renamed to `actionBarOverflowAriaLabel`.'
-  ),
-  /**
-   * **Deprecated** see property `children`
-   */
-  availableSpace: deprecateProp(
-    PropTypes.node,
-    'Make use of children instead.'
-  ),
-  /**
-   * **Deprecated** see property `hasBackgroundAlways`
-   */
-  background: deprecateProp(
-    PropTypes.bool,
-    'Property renamed to `hasBackgroundAlways`'
-  ),
-  /**
-   * **Deprecated** see property `breadcrumbs`
-   */
-  breadcrumbItems: deprecateProp(
-    PropTypes.element,
-    'Usage changed to expect breadcrumb item like shapes, see `breadcrumbs`.'
-  ),
-  /**
-   * **Deprecated** see property `breadcrumbOverflowAriaLabel`
-   */
-  breadcrumbOverflowLabel: deprecateProp(
-    PropTypes.string,
-    'Property renamed to `breadcrumbOverflowAriaLabel`.'
-  ),
-  /**
-   * **Deprecated** see property `collapseHeaderIconDescription`
-   */
-  collapseHeaderLabel: deprecateProp(
-    PropTypes.string,
-    'Property renamed to `collapseHeaderIconDescription`.'
-  ),
-  /**
-   * **Deprecated** see property `hasCollapseHeaderToggle`
-   */
-  collapseHeaderToggleWanted: deprecateProp(
-    PropTypes.bool,
-    'Property renamed to `hasCollapseHeaderToggle`'
-  ),
-  /**
-   * **Deprecated** see property `expandHeaderIconDescription`
-   */
-  expandHeaderLabel: deprecateProp(
-    PropTypes.string,
-    'Property renamed to `expandHeaderIconDescription`.'
-  ),
-  /**
-   * **Deprecated** no longer required
-   */
-  pageHeaderOffset: deprecateProp(
-    PropTypes.number,
-    'Property removed as no longer required.'
-  ),
-  /**
-   * **Deprecated** see property `collapseTitle`
-   */
-  preCollapseTitleRow: deprecateProp(
-    PropTypes.bool,
-    'Property renamed to `collapseTitle`.'
-  ),
-  /**
-   * **Deprecated** see property `disableBreadcrumbScroll`
-   */
-  preventBreadcrumbScroll: deprecateProp(
-    PropTypes.bool,
-    'Prop renamed to `disableBreadcrumbScroll`.'
-  ),
-};
-
 PageHeader.propTypes = {
   /**
    * Specifies the action bar items which are the final items in the row top of the PageHeader.
    * Each item is specified as an object with the properties of a Carbon Button in icon only form.
    * Button kind, size, tooltipPosition, tooltipAlignment and type are ignored.
    */
-  actionBarItems: deprecatePropUsage(
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        ...prepareProps(Button.propTypes, [
-          'kind',
-          'size',
-          'tooltipPosition',
-          'tooltipAlignment',
-        ]),
-        iconDescription: PropTypes.string.isRequired,
-        onClick: Button.propTypes.onClick,
-        renderIcon: Button.propTypes.renderIcon.isRequired,
-      })
-    ),
-
-    // expects action bar item as array or in fragment
-    PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.element),
-      PropTypes.element,
-    ]),
-    'Expects an array of objects with the following properties: iconDescription, renderIcon and onClick.'
+  actionBarItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      ...prepareProps(Button.propTypes, [
+        'kind',
+        'size',
+        'tooltipPosition',
+        'tooltipAlignment',
+      ]),
+      iconDescription: PropTypes.string.isRequired,
+      onClick: Button.propTypes.onClick,
+      renderIcon: Button.propTypes.renderIcon.isRequired,
+    })
   ),
   /**
    * class name applied to the action bar overflow options
@@ -909,8 +776,7 @@ PageHeader.propTypes = {
    * NOTE: This prop is required if actionBarItems are supplied
    */
   actionBarOverflowAriaLabel: PropTypes.string.isRequired.if(
-    ({ actionBarItems, actionBarOverflowLabel }) =>
-      actionBarItems && actionBarItems.length > 0 && !actionBarOverflowLabel
+    ({ actionBarItems }) => actionBarItems && actionBarItems.length > 0
   ),
   /**
    * When tags are supplied there may not be sufficient space to display all of the tags. This results in an overflow
@@ -941,9 +807,7 @@ PageHeader.propTypes = {
    * It is used in an overflow menu when there is insufficient space to display all breadcrumbs inline.
    */
   breadcrumbOverflowAriaLabel: PropTypes.string.isRequired.if(
-    ({ breadcrumbs, breadcrumbItems }) =>
-      (breadcrumbs && breadcrumbs.length > 0) ||
-      (breadcrumbItems && breadcrumbItems.length > 0)
+    ({ breadcrumbs }) => breadcrumbs && breadcrumbs.length > 0
   ),
   /**
    * Specifies the breadcrumb components to be shown in the breadcrumb area of
@@ -1167,7 +1031,6 @@ PageHeader.propTypes = {
       asText: PropTypes.string.isRequired,
     }),
   ]),
-  ...deprecatedProps,
 };
 
 PageHeader.defaultProps = {

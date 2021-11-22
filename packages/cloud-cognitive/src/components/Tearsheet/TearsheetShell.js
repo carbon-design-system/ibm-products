@@ -13,7 +13,6 @@ import { useResizeDetector } from 'react-resize-detector';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg, carbon } from '../../settings';
-import { deprecateProp } from '../../global/js/utils/props-helper';
 import pconsole from '../../global/js/utils/pconsole';
 
 // Carbon and package components we use.
@@ -219,21 +218,12 @@ export const TearsheetShell = React.forwardRef(
           onFocus={handleFocus}
           preventCloseOnClickOutside={!isPassive}
           ref={modalRef}
-          {...(depth > 1
-            ? // this shenanigans is to ensure that when depth<=1 we don't supply a selectorsFloatingMenus
-              // prop AT ALL -- not even a null -- because even null gets passed through to the div and causes a
-              // React warning. Once that is fixed (see https://github.com/carbon-design-system/carbon/issues/10000)
-              // this could revert to selectorsFloatingMenus: {depth > 1 ? [...] : null}.
-              // NB if .bx__container is added to the default value, this can be removed altogether.
-              {
-                selectorsFloatingMenus: [
-                  `.${carbon.prefix}--overflow-menu-options`,
-                  `.${carbon.prefix}--tooltip`,
-                  '.flatpickr-calendar',
-                  `.${bc}__container`,
-                ],
-              }
-            : {})}
+          selectorsFloatingMenus={[
+            `.${carbon.prefix}--overflow-menu-options`,
+            `.${carbon.prefix}--tooltip`,
+            '.flatpickr-calendar',
+            `.${bc}__container`,
+          ]}
           size="sm"
         >
           {includeHeader && (
@@ -327,18 +317,6 @@ export const TearsheetShell = React.forwardRef(
 TearsheetShell.displayName = componentName;
 
 export const deprecatedProps = {
-  /**
-   * **Deprecated**
-   *
-   * Prevent the tearsheet from automatically closing (triggering onClose, if
-   * provided, which can be cancelled by returning 'false') if the user clicks
-   * outside it.
-   */
-  preventCloseOnClickOutside: deprecateProp(
-    PropTypes.bool,
-    'The tearsheet will close automatically if the user clicks outside it if and only if the tearsheet is passive (no navigation actions)'
-  ),
-
   /**
    * **Deprecated**
    *

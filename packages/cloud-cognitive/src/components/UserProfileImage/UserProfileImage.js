@@ -29,7 +29,7 @@ import {
 import { TooltipIcon } from 'carbon-components-react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-const blockClass = `${pkg.prefix}-user-profile-avatar`;
+const blockClass = `${pkg.prefix}--user-profile-image`;
 const componentName = 'UserProfileImage';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.

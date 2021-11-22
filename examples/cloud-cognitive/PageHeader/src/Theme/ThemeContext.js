@@ -22,7 +22,7 @@ export const themeData = [
 export const ThemeContext = createContext();
 
 const initialState = {
-  currentTheme: themeData[0],
+  currentTheme: themeData[1],
 };
 
 const themeReducer = (state, action) => {

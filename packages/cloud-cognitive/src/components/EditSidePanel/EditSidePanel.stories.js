@@ -21,7 +21,7 @@ import {
   HeaderContainer,
   HeaderName,
 } from 'carbon-components-react/lib/components/UIShell';
-import { Copy20, Delete20, Settings20 } from '@carbon/icons-react';
+import { Copy20, TrashCan20, Settings20 } from '@carbon/icons-react';
 
 import {
   getStoryTitle,
@@ -86,7 +86,7 @@ const Template = (args) => {
   return (
     <>
       {renderUIShellHeader()}
-      <Grid id="cloud-and-cognitive-page-content">
+      <Grid id="ibm-products-page-content">
         <Row>
           <Column>
             <Button onClick={() => setOpen(!open)}>
@@ -192,7 +192,7 @@ export const editSidePanel = prepareStory(Template, {
       },
       {
         label: 'Delete',
-        icon: Delete20,
+        icon: TrashCan20,
         onClick: action('Toolbar button clicked: Delete'),
       },
     ],

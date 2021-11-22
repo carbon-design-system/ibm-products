@@ -1,7 +1,7 @@
 {
-  "name": "@carbon/ibm-cloud-cognitive",
-  "description": "Carbon for Cloud & Cognitive",
-  "version": "0.98.0",
+  "name": "@carbon/ibm-products",
+  "description": "Carbon for IBM Products",
+  "version": "1.0.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -12,7 +12,7 @@
   },
   "bugs": "https://github.com/carbon-design-system/ibm-cloud-cognitive/issues",
   "sideEffects": [
-    "src/global/js/utils/props-helper.js",
+    "**/global/js/utils/props-helper.js",
     "**/*.css",
     "**/*.scss"
   ],
@@ -26,7 +26,8 @@
     "carbon",
     "carbon design system",
     "carbon community",
-    "carbon for cloud & cognitive"
+    "carbon for cloud & cognitive",
+    "carbon for ibm products"
   ],
   "publishConfig": {
     "access": "public"
@@ -51,7 +52,7 @@
   "devDependencies": {
     "@babel/cli": "^7.16.0",
     "@babel/core": "^7.16.0",
-    "babel-preset-ibm-cloud-cognitive": "^0.12.0",
+    "babel-preset-ibm-cloud-cognitive": "^0.13.0",
     "chalk": "^4.1.2",
     "change-case": "^4.1.2",
     "copyfiles": "^2.4.1",
@@ -59,15 +60,15 @@
     "fs-extra": "^10.0.0",
     "glob": "^7.2.0",
     "jest": "^27.3.1",
-    "jest-config-ibm-cloud-cognitive": "^0.20.0",
-    "npm-check-updates": "^12.0.0",
+    "jest-config-ibm-cloud-cognitive": "^0.21.0",
+    "npm-check-updates": "^12.0.2",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
     "sass": "^1.43.4",
     "yargs": "^17.2.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.16.0",
+    "@babel/runtime": "^7.16.3",
     "@carbon/telemetry": "^0.0.0-alpha.6",
     "react-resize-detector": "^6.7.6"
   },

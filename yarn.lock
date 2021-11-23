@@ -1235,6 +1235,20 @@
   resolved "https://registry.yarnpkg.com/@carbon/motion/-/motion-10.26.0.tgz#28a997cd8cd95e57ca480b00fe6e077d9d257bc7"
   integrity sha512-xNkDoRBfNsTKsUR0Hk7FItcdCDH7Mrn0mwvV83C8srV0M4x1D9Uh6Mg7pO9YLbUDMNEmihYp5u4Lf9zJv+XEVg==
 
+"@carbon/styles@^0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@carbon/styles/-/styles-0.9.0.tgz#58be3fd9f04ded1e9dcd18c2019570eb982d5bec"
+  integrity sha512-JaY2sFUO89tOZrvlS1A/Bh7g4mjstqkdJmtCqleFH8j9SI/feZLZ/0J7hJVQDH7+91OW38HlnvS0P2BTd82MDg==
+  dependencies:
+    "@carbon/colors" "^10.34.0"
+    "@carbon/feature-flags" "^0.6.0"
+    "@carbon/grid" "^10.39.0"
+    "@carbon/layout" "^10.34.0"
+    "@carbon/motion" "^10.26.0"
+    "@carbon/themes" "^10.47.0"
+    "@carbon/type" "^10.38.0"
+    "@ibm/plex" "6.0.0-next.6"
+
 "@carbon/telemetry@0.0.0-alpha.6", "@carbon/telemetry@^0.0.0-alpha.6":
   version "0.0.0-alpha.6"
   resolved "https://registry.yarnpkg.com/@carbon/telemetry/-/telemetry-0.0.0-alpha.6.tgz#1d11e64f310e98f32c3db0c55f02e047f2398087"
@@ -1881,6 +1895,11 @@
   dependencies:
     gud "^1.0.0"
     warning "^4.0.3"
+
+"@ibm/plex@6.0.0-next.6":
+  version "6.0.0-next.6"
+  resolved "https://registry.yarnpkg.com/@ibm/plex/-/plex-6.0.0-next.6.tgz#5b4ab81a84ddb06651fdf684521927cdce135b79"
+  integrity sha512-B3uGruTn2rS5gweynLmfSe7yCawSRsJguJJQHVQiqf4rh2RNgJFu8YLE2Zd/JHV0ZXoVMOslcXP2k3hMkxKEyA==
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"

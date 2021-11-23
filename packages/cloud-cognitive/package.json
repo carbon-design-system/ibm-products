@@ -78,6 +78,7 @@
     "@carbon/import-once": "^10.5.0",
     "@carbon/layout": "^10.34.0",
     "@carbon/motion": "^10.26.0",
+    "@carbon/styles": "^0.9.0",
     "@carbon/themes": "^10.46.0",
     "@carbon/type": "^10.38.0",
     "carbon-components": "^10.47.1",

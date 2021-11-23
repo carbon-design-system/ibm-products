@@ -5,7 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-// @import '@carbon/styles/scss/components/popover/index';
+// TODO: `@carbon/styles` migration — https://github.com/carbon-design-system/carbon/tree/main/packages/styles#usage
+// @use '@carbon/styles/scss/components/popover';
 
 @import 'carbon-components/scss/components/button/button';
 

@@ -11,17 +11,20 @@ import { bool, node, string } from 'prop-types';
 import React, { forwardRef, useContext } from 'react';
 
 import { pkg } from '../../settings';
-import { blockClass, ToolbarContext } from './Toolbar';
+
+import { blockClass as toolbarClass, ToolbarContext } from './Toolbar';
+
+const blockClass = `${toolbarClass}__button`;
 
 /** Toolbar buttons are common functions performed as part of a products interface or an open window.  */
-export let ToolbarButton = forwardRef(
+let ToolbarButton = forwardRef(
   ({ caret, children, className, ...rest }, ref) => {
     return (
       <Button
         tooltipPosition={useContext(ToolbarContext)?.vertical && 'right'}
         {...rest}
         ref={ref}
-        className={cx(className, { [`${blockClass}__button--caret`]: caret })}
+        className={cx(className, { [`${blockClass}--caret`]: caret })}
         kind="ghost"
         size="md"
         hasIconOnly
@@ -29,7 +32,7 @@ export let ToolbarButton = forwardRef(
         <>
           {children}
 
-          {caret && <span className={`${blockClass}__button__caret`} />}
+          {caret && <span className={`${blockClass}__caret`} />}
         </>
       </Button>
     );
@@ -55,3 +58,5 @@ ToolbarButton.defaultProps = {
 };
 
 ToolbarButton = pkg.checkComponentEnabled(ToolbarButton, componentName);
+
+export { blockClass, ToolbarButton };

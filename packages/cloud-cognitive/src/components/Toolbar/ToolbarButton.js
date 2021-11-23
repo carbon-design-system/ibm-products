@@ -5,12 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Button } from 'carbon-components-react';
-
 import {
-  Popover,
-  PopoverContent,
-} from 'carbon-components-react/es/components/Popover';
+  Button,
+  unstable_Popover as Popover,
+  unstable_PopoverContent as PopoverContent,
+} from 'carbon-components-react';
 
 import cx from 'classnames';
 import { bool, func, node, shape, string } from 'prop-types';

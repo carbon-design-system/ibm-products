@@ -387,7 +387,7 @@ export let PageHeader = React.forwardRef(
     ]);
 
     useEffect(() => {
-      // only has toggle if requested and has withoutBackground
+      // only has toggle if requested and does not have withoutBackground
       // NOTE: prop-types isRequired.if for the expand and collapse
       // icon descriptions depends on the this.
       setHasCollapseButton(hasCollapseHeaderToggle && !withoutBackground);

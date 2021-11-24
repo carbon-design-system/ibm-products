@@ -1046,8 +1046,8 @@ PageHeader.propTypes = {
     }),
   ]),
   /**
-   * Specifies if the PageHeader should have a background always on and defaults to the preferred `true`.
-   * When false some parts of the header gain a background if they stick to the top of the PageHeader on scroll.
+   * Specifies if the PageHeader should appear without a background color, and defaults to the preferred `false` (a background color is shown).
+   * Note that when `true` some parts of the header still gain a background if and when they stick to the top of the PageHeader on scroll.
    */
   withoutBackground: PropTypes.bool,
   ...deprecatedProps,

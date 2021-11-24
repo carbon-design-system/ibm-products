@@ -347,7 +347,7 @@ export let PageHeader = React.forwardRef(
     }, [fullWidthGrid, narrowGrid]);
 
     useEffect(() => {
-      // Determines if the withoutBackground should be one based on the header height or scroll
+      // Determines the appropriate header background opacity based on the header config/height/scroll and the withoutBackground setting
       let result = withoutBackground ? 0 : 1;
 
       if (

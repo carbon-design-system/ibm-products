@@ -306,7 +306,7 @@ describe('PageHeader', () => {
       document.querySelectorAll(`.${blockClass}__title-icon`)
     ).toHaveLength(1);
 
-    // When no withoutBackground is false this should result in the value 0 for opacity
+    // When withoutBackground is false this should result in the value 1 for opacity
     const regStyle = new RegExp(
       `--${prefix}--page-header--background-opacity: 1`
     );

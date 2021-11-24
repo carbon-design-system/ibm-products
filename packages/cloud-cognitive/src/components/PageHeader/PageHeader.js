@@ -888,8 +888,8 @@ PageHeader.propTypes = {
    */
   collapseHeader: PropTypes.bool,
   /**
-   * If `hasCollapseHeaderToggle` and `withoutBackground` are set then assistive text is required
-   * for both the expend and collapse states of the button component used.
+   * If `hasCollapseHeaderToggle` is set and `withoutBackground` is unset then assistive text is
+   * required for both the expend and collapse states of the button component used.
    */
   collapseHeaderIconDescription: PropTypes.string.isRequired.if(
     ({ withoutBackground, hasCollapseHeaderToggle }) =>

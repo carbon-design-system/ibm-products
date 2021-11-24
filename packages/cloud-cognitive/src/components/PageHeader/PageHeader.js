@@ -387,7 +387,7 @@ export let PageHeader = React.forwardRef(
     ]);
 
     useEffect(() => {
-      // only has toggle if requested and does not have withoutBackground
+      // only has toggle if requested and withoutBackground is unset/falsy
       // NOTE: prop-types isRequired.if for the expand and collapse
       // icon descriptions depends on the this.
       setHasCollapseButton(hasCollapseHeaderToggle && !withoutBackground);
@@ -888,7 +888,7 @@ PageHeader.propTypes = {
    */
   collapseHeader: PropTypes.bool,
   /**
-   * If `hasCollapseHeaderToggle` is set and `withoutBackground` is unset then assistive text is
+   * If `hasCollapseHeaderToggle` is set and `withoutBackground` is unset/falsy then assistive text is
    * required for both the expend and collapse states of the button component used.
    */
   collapseHeaderIconDescription: PropTypes.string.isRequired.if(
@@ -906,7 +906,7 @@ PageHeader.propTypes = {
    */
   disableBreadcrumbScroll: PropTypes.bool,
   /**
-   * If `hasCollapseHeaderToggle` is set and `withoutBackground` is unset then assistive text is
+   * If `hasCollapseHeaderToggle` is set and `withoutBackground` is unset/falsy then assistive text is
    * required for both the expend and collapse states of the button component used.
    */
   expandHeaderIconDescription: PropTypes.string.isRequired.if(

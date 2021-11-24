@@ -630,7 +630,7 @@ describe('PageHeader', () => {
 
       const header = screen.getByTestId(dataTestId);
 
-      // When no hasBackgroundAlways is false this should result in the value 0 for opacity
+      // When hasBackgroundAlways is false this should result in the value 0 for opacity
       const regStyle = new RegExp(
         `--${prefix}--page-header--background-opacity: 0`
       );

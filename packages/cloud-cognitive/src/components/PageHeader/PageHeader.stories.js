@@ -10,6 +10,7 @@ import React, { useState } from 'react';
 import { carbon } from '../../settings';
 
 import {
+  Button,
   Column,
   Grid,
   Header,
@@ -40,13 +41,12 @@ import {
 import cx from 'classnames';
 
 import { ActionBarItem } from '../ActionBar';
-import { PageHeader, deprecatedProps } from './PageHeader';
+import { PageHeader } from './PageHeader';
 
 import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
-import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 
 import { demoTableHeaders, demoTableData } from './PageHeaderDemo.data';
 
@@ -242,13 +242,33 @@ const pageActions = {
   ],
   'User defined page actions': {
     content: (
-      <button
+      <Button
         type="button"
         className="bx--button"
-        style={{ width: '100%', height: '100%' }}
+        size="field"
+        style={{ maxWidth: '100%' }}
       >
-        Custom component
-      </button>
+        <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          Custom component
+        </span>
+      </Button>
+    ),
+    minWidth: 160,
+    maxWidth: 400,
+  },
+  'User defined page action that is long': {
+    content: (
+      <Button
+        type="button"
+        className="bx--button"
+        size="field"
+        style={{ maxWidth: '100%' }}
+        title="Custom component with long content"
+      >
+        <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          Custom content must keep within the alloted width
+        </span>
+      </Button>
     ),
     minWidth: 160,
     maxWidth: 400,
@@ -297,6 +317,7 @@ const tags = {
   ],
 };
 
+const userDefinedStyle = { color: 'red', fontWeight: '600' };
 const title = {
   'No title': null,
   'Plain text title': 'Page title',
@@ -315,13 +336,13 @@ const title = {
   'User defined title': {
     content: (
       <span>
-        User <span style={{ color: 'red', fontWeight: '600' }}>defined</span>{' '}
+        User <span style={userDefinedStyle}>defined</span>
         title
       </span>
     ),
     breadcrumbContent: (
       <span>
-        User <span style={{ color: 'red', fontWeight: '600' }}>defined</span>{' '}
+        User <span style={userDefinedStyle}>defined</span>
         title
       </span>
     ),
@@ -345,7 +366,6 @@ export default {
     (story) => <div className={`${storyClass}__viewport`}>{story()}</div>,
   ],
   argTypes: {
-    ...getDeprecatedArgTypes(deprecatedProps),
     actionBarItems: {
       control: {
         type: 'select',
@@ -526,7 +546,6 @@ export const withTitle = prepareStory(Template, {
   storyName: 'Simple page header with page title',
   args: {
     title: 2,
-    hasBackgroundAlways: false,
     ...commonArgs,
   },
 });

@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@0.99.1...@carbon/ibm-products@1.0.1) (2021-11-23)
+
+
+### Bug Fixes
+
+* page header withotu background shadow ([#1457](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1457)) ([fa4df10](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/fa4df103451adcb411e61a08c923c717bd9520be))
+* **PageHeader:** user defined page action space ([#1470](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1470)) ([e9f79e9](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e9f79e95da701b2064cca5ab5f56be93b8510a1b))
+
+
+
+
+
+# [1.0.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@0.99.1...@carbon/ibm-products@1.0.0) (2021-11-18)
+
+
+### Bug Fixes
+
+* page header withotu background shadow ([#1457](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1457)) ([fa4df10](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/fa4df103451adcb411e61a08c923c717bd9520be))
+
+
+
+
+
 ## 0.99.1 (2021-11-18)
 
 

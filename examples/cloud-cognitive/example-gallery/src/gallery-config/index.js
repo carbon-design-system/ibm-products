@@ -22,6 +22,12 @@ const config = [
       'url( ' + defaultOrNot(require('./AboutModal--thumbnail.png')) + ')',
   },
   {
+    label: 'Cascade',
+    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/cloud-cognitive/Cascade',
+    thumbnail:
+      'url( ' + defaultOrNot(require('./Cascade--thumbnail.png')) + ')',
+  },
+  {
     label: 'Create Full Page',
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/CreateFullPage',
     thumbnail:
@@ -34,8 +40,8 @@ const config = [
       'url( ' + defaultOrNot(require('./CreateModal--thumbnail.png')) + ')',
   },
   {
-    label: 'Canary Side Panel',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/CreateSidePanel',
+    label: 'Create Side Panel',
+    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/cloud-cognitive/CreateSidePanel',
     thumbnail:
       'url( ' + defaultOrNot(require('./CreateSidePanel--thumbnail.png')) + ')',
   },
@@ -113,6 +119,12 @@ const config = [
     label: 'Saving',
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/Saving',
     thumbnail: 'url( ' + defaultOrNot(require('./Saving--thumbnail.png')) + ')',
+  },
+  {
+    label: 'Side Panel',
+    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/cloud-cognitive/SidePanel',
+    thumbnail:
+      'url( ' + defaultOrNot(require('./SidePanel--thumbnail.png')) + ')',
   },
   {
     label: 'Status icon',

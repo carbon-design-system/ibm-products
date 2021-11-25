@@ -1,7 +1,7 @@
 {
   "name": "babel-preset-ibm-cloud-cognitive",
   "private": true,
-  "version": "0.13.0",
+  "version": "0.14.0",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": {
@@ -27,8 +27,8 @@
   "dependencies": {
     "@babel/core": "^7.16.0",
     "@babel/plugin-proposal-class-properties": "^7.16.0",
-    "@babel/plugin-transform-runtime": "^7.16.0",
-    "@babel/preset-env": "^7.16.0",
+    "@babel/plugin-transform-runtime": "^7.16.4",
+    "@babel/preset-env": "^7.16.4",
     "@babel/preset-react": "^7.16.0",
     "browserslist-config-carbon": "^10.6.1"
   }

@@ -546,7 +546,6 @@ export const withTitle = prepareStory(Template, {
   storyName: 'Simple page header with page title',
   args: {
     title: 2,
-    hasBackgroundAlways: false,
     ...commonArgs,
   },
 });

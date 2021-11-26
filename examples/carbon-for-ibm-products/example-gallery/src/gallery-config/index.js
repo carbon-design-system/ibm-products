@@ -23,7 +23,7 @@ const config = [
   },
   {
     label: 'Cascade',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/cloud-cognitive/Cascade',
+    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/Cascade',
     thumbnail:
       'url( ' + defaultOrNot(require('./Cascade--thumbnail.png')) + ')',
   },
@@ -41,7 +41,7 @@ const config = [
   },
   {
     label: 'Create Side Panel',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/cloud-cognitive/CreateSidePanel',
+    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/CreateSidePanel',
     thumbnail:
       'url( ' + defaultOrNot(require('./CreateSidePanel--thumbnail.png')) + ')',
   },
@@ -122,7 +122,7 @@ const config = [
   },
   {
     label: 'Side Panel',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/cloud-cognitive/SidePanel',
+    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/SidePanel',
     thumbnail:
       'url( ' + defaultOrNot(require('./SidePanel--thumbnail.png')) + ')',
   },

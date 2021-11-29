@@ -174,12 +174,6 @@ const config = [
       ')',
   },
   {
-    label: 'codesandbox',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/cloud-cognitive/codesandbox',
-    thumbnail:
-      'url( ' + defaultOrNot(require('./codesandbox--thumbnail.png')) + ')',
-  },
-  {
     label: 'Canary example',
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/cloud-cognitive/component-flag-example',
     thumbnail:

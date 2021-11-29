@@ -106,13 +106,7 @@ describe(ToolbarButton.displayName, () => {
 
   function CaretToolbarButton(rest) {
     return (
-      <ToolbarButton
-        {...props}
-        {...{
-          renderCaret: () => renderCaret,
-          ...rest,
-        }}
-      />
+      <ToolbarButton {...props} renderCaret={() => renderCaret} {...rest} />
     );
   }
 

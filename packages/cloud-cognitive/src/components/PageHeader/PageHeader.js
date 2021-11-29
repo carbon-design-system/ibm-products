@@ -16,7 +16,10 @@ import { Grid, Column, Row, Button, Tag } from 'carbon-components-react';
 import { useWindowResize, useNearestScroll } from '../../global/js/hooks';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
-import { prepareProps } from '../../global/js/utils/props-helper';
+import {
+  deprecateProp,
+  prepareProps,
+} from '../../global/js/utils/props-helper';
 
 import { pkg } from '../../settings';
 
@@ -45,7 +48,7 @@ export let PageHeader = React.forwardRef(
       allTagsModalSearchLabel,
       allTagsModalSearchPlaceholderText,
       allTagsModalTitle,
-      hasBackgroundAlways,
+      hasBackgroundAlways: deprecated_hasBackgroundAlways,
       breadcrumbOverflowAriaLabel,
       breadcrumbs,
       children,
@@ -66,10 +69,16 @@ export let PageHeader = React.forwardRef(
       subtitle,
       tags,
       title,
+      withoutBackground,
       ...rest
     },
     ref
   ) => {
+    // handle deprecated props - START
+    // if withoutBackground is null check deprecated_hasBackgroundAlways and default false
+    withoutBackground ??= !(deprecated_hasBackgroundAlways ?? true);
+    // handle deprecated props - END
+
     const [metrics, setMetrics] = useState({});
     const [pageHeaderStyles, setPageHeaderStyles] = useState({
       ...rest.style,
@@ -338,8 +347,8 @@ export let PageHeader = React.forwardRef(
     }, [fullWidthGrid, narrowGrid]);
 
     useEffect(() => {
-      // Determines if the hasBackgroundAlways should be one based on the header height or scroll
-      let result = hasBackgroundAlways ? 1 : 0;
+      // Determines the appropriate header background opacity based on the header config/height/scroll and the withoutBackground setting
+      let result = withoutBackground ? 0 : 1;
 
       if (
         !result &&
@@ -366,7 +375,7 @@ export let PageHeader = React.forwardRef(
       }));
     }, [
       actionBarItems,
-      hasBackgroundAlways,
+      withoutBackground,
       breadcrumbs,
       headerRef,
       metrics.breadcrumbRowHeight,
@@ -378,11 +387,11 @@ export let PageHeader = React.forwardRef(
     ]);
 
     useEffect(() => {
-      // only has toggle if requested and has hasBackgroundAlways
+      // only has toggle if requested and withoutBackground is unset/falsy
       // NOTE: prop-types isRequired.if for the expand and collapse
       // icon descriptions depends on the this.
-      setHasCollapseButton(hasCollapseHeaderToggle && hasBackgroundAlways);
-    }, [hasBackgroundAlways, hasCollapseHeaderToggle]);
+      setHasCollapseButton(hasCollapseHeaderToggle && !withoutBackground);
+    }, [withoutBackground, hasCollapseHeaderToggle]);
 
     useEffect(() => {
       // Determine if space is needed in the breadcrumb for a collapse button
@@ -746,6 +755,16 @@ const TYPES = {
 };
 const tagTypes = Object.keys(TYPES);
 
+export const deprecatedProps = {
+  /**
+   * **Deprecated** see property `withoutBackground`
+   */
+  hasBackgroundAlways: deprecateProp(
+    PropTypes.bool,
+    'Property replaced by `withoutBackground`'
+  ),
+};
+
 PageHeader.propTypes = {
   /**
    * Specifies the action bar items which are the final items in the row top of the PageHeader.
@@ -869,12 +888,12 @@ PageHeader.propTypes = {
    */
   collapseHeader: PropTypes.bool,
   /**
-   * If `hasCollapseHeaderToggle` and `hasBackgroundAlways` are set then assistive text is required
-   * for both the expend and collapse states of the button component used.
+   * If `hasCollapseHeaderToggle` is set and `withoutBackground` is unset/falsy then assistive text is
+   * required for both the expend and collapse states of the button component used.
    */
   collapseHeaderIconDescription: PropTypes.string.isRequired.if(
-    ({ hasBackgroundAlways, hasCollapseHeaderToggle }) =>
-      hasBackgroundAlways && hasCollapseHeaderToggle
+    ({ withoutBackground, hasCollapseHeaderToggle }) =>
+      !withoutBackground && hasCollapseHeaderToggle
   ),
   /**
    * The title row typically starts below the breadcrumb row. This option
@@ -887,23 +906,18 @@ PageHeader.propTypes = {
    */
   disableBreadcrumbScroll: PropTypes.bool,
   /**
-   * If `hasCollapseHeaderToggle` and `hasBackgroundAlways` are set then assistive text is required
-   * for both the expend and collapse states of the button component used.
+   * If `hasCollapseHeaderToggle` is set and `withoutBackground` is unset/falsy then assistive text is
+   * required for both the expend and collapse states of the button component used.
    */
   expandHeaderIconDescription: PropTypes.string.isRequired.if(
-    ({ hasBackgroundAlways, hasCollapseHeaderToggle }) =>
-      hasBackgroundAlways && hasCollapseHeaderToggle
+    ({ withoutBackground, hasCollapseHeaderToggle }) =>
+      !withoutBackground && hasCollapseHeaderToggle
   ),
   /**
    * The PageHeader is hosted in a Carbon grid, this value is passed through to the Carbon grid fullWidth prop.
    * 'xl' is used to override the grid width setting. Can be used with narrowGrid: true to get the largest size.
    */
   fullWidthGrid: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['xl'])]),
-  /**
-   * Specifies if the PageHeader should have a background always on and defaults to the preferred `true`.
-   * When false some parts of the header gain a background if they stick to the top of the PageHeader on scroll.
-   */
-  hasBackgroundAlways: PropTypes.bool,
   /**
    * Adds a button as the last element of the bottom row which collapses and expands the header.
    *
@@ -1031,11 +1045,16 @@ PageHeader.propTypes = {
       asText: PropTypes.string.isRequired,
     }),
   ]),
+  /**
+   * Specifies if the PageHeader should appear without a background color, and defaults to the preferred `false` (a background color is shown).
+   * Note that when `true` some parts of the header still gain a background if and when they stick to the top of the PageHeader on scroll.
+   */
+  withoutBackground: PropTypes.bool,
+  ...deprecatedProps,
 };
 
 PageHeader.defaultProps = {
   fullWidthGrid: false,
-  hasBackgroundAlways: true,
   narrowGrid: false,
 };
 

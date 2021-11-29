@@ -7,6 +7,7 @@
 
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+
 import { settings } from 'carbon-components';
 import React, { createRef } from 'react';
 
@@ -88,12 +89,10 @@ describe(componentName, () => {
     );
 
     const className = `${blockClass}--vertical`;
-    const toolbar = getByTestId(dataTestId);
-    expect(toolbar).not.toHaveClass(className);
+    expect(getByTestId(dataTestId)).not.toHaveClass(className);
 
     rerender(<Toolbar {...props} data-testid={dataTestId} vertical />);
-
-    expect(toolbar).toHaveClass(className);
+    expect(getByTestId(dataTestId)).toHaveClass(className);
   });
 });
 

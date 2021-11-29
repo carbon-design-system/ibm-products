@@ -10,6 +10,7 @@ import React, { useState } from 'react';
 import { carbon } from '../../settings';
 
 import {
+  Button,
   Column,
   Grid,
   Header,
@@ -241,13 +242,33 @@ const pageActions = {
   ],
   'User defined page actions': {
     content: (
-      <button
+      <Button
         type="button"
         className="bx--button"
-        style={{ width: '100%', height: '100%' }}
+        size="field"
+        style={{ maxWidth: '100%' }}
       >
-        Custom component
-      </button>
+        <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          Custom component
+        </span>
+      </Button>
+    ),
+    minWidth: 160,
+    maxWidth: 400,
+  },
+  'User defined page action that is long': {
+    content: (
+      <Button
+        type="button"
+        className="bx--button"
+        size="field"
+        style={{ maxWidth: '100%' }}
+        title="Custom component with long content"
+      >
+        <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          Custom content must keep within the alloted width
+        </span>
+      </Button>
     ),
     minWidth: 160,
     maxWidth: 400,
@@ -525,7 +546,6 @@ export const withTitle = prepareStory(Template, {
   storyName: 'Simple page header with page title',
   args: {
     title: 2,
-    hasBackgroundAlways: false,
     ...commonArgs,
   },
 });

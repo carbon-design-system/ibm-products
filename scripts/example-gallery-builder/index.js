@@ -20,7 +20,7 @@
  * By default the following mapping is made
  * {
  *   label: folder name,
- *   url: baseUrl + folder name, // baseUrl is `https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/cloud-cognitive/`
+ *   url: baseUrl + folder name, // baseUrl is `https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/`
  *   thumbnail: folder name + '/thumbnail.png'
  * }
  *
@@ -28,14 +28,17 @@
  * NOTE2: A local config file allows examples not in this repo to  be added
  *
  * The resulting Carbon for IBM Products example gallery can be seen here
- * https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/cloud-cognitive/example-gallery
+ * https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/example-gallery
  */
 
 const path = require('path');
 const fs = require('fs');
 
 const updateGalleryConfig = () => {
-  const directoryPath = path.join(__dirname, '../../examples/cloud-cognitive');
+  const directoryPath = path.join(
+    __dirname,
+    '../../examples/carbon-for-ibm-products'
+  );
   const galleryConfigDir = path.join(
     directoryPath,
     'example-gallery/src/gallery-config'
@@ -109,7 +112,7 @@ const updateGalleryConfig = () => {
         // config url or default
         const url =
           config?.url ??
-          `https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/cloud-cognitive/${dir}`;
+          `https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/${dir}`;
 
         const output = { label, url };
 

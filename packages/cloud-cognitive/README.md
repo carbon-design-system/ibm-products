@@ -68,7 +68,7 @@ can be found here on
 ### Packages
 
 You can find example projects using the components in the
-[examples folder](../../packages/examples/cloud-cognitive).
+[examples folder](../../packages/examples/carbon-for-ibm-products).
 
 ## Usage
 

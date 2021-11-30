@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.0.1...@carbon/ibm-products@1.1.0) (2021-11-30)
+
+
+### Features
+
+* **pageHeader:** rename property to withoutBackground following design review ([#1455](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1455)) ([91ab444](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/91ab444b757cc03b07a7b58bdbbb4cf2a49b74f4))
+* update Carbon versions and dependencies to latest ([#1473](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1473)) ([9cafbea](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9cafbea95226c46ff1732f9ad6b22c9c8837616e))
+
+
+
+
+
 ## [1.0.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@0.99.1...@carbon/ibm-products@1.0.1) (2021-11-23)
 
 

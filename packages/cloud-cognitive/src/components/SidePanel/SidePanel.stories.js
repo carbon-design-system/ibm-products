@@ -54,13 +54,14 @@ export default {
           0: 'One button',
           1: 'One button (ghost)',
           2: 'Two buttons',
-          3: 'Three buttons with ghost',
-          4: 'Three buttons',
-          5: 'None',
+          3: 'Two buttons with ghost',
+          4: 'Three buttons with ghost',
+          5: 'Three buttons',
+          6: 'None',
         },
         default: 0,
       },
-      options: [0, 1, 2, 3, 4],
+      options: [0, 1, 2, 3, 4, 5, 6],
     },
     slideIn: {
       table: {
@@ -154,6 +155,19 @@ const actions_3 = [
 
 const actions_4 = [
   {
+    label: 'Ghost button',
+    onClick: action('Clicked action button'),
+    kind: 'ghost',
+  },
+  {
+    label: 'Primary button',
+    onClick: action('Clicked action button'),
+    kind: 'primary',
+  },
+];
+
+const actions_5 = [
+  {
     label: 'Primary button',
     onClick: action('Clicked action button'),
     kind: 'primary',
@@ -170,7 +184,7 @@ const actions_4 = [
   },
 ];
 
-const actions_5 = [
+const actions_6 = [
   {
     label: 'Primary button',
     onClick: action('Clicked action button'),
@@ -188,7 +202,15 @@ const actions_5 = [
   },
 ];
 
-const actionSets = [actions_1, actions_2, actions_3, actions_4, actions_5, []];
+const actionSets = [
+  actions_1,
+  actions_2,
+  actions_3,
+  actions_4,
+  actions_5,
+  actions_6,
+  [],
+];
 
 // eslint-disable-next-line react/prop-types
 const ChildrenContent = () => {

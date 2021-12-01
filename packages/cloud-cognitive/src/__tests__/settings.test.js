@@ -31,7 +31,6 @@ describe(name, () => {
         iconDescription="Fatal"
       />
     );
-    console.log(wrapper.html());
     expect(wrapper.hasClass(`${prefix}--status-icon`)).toEqual(true);
   });
 

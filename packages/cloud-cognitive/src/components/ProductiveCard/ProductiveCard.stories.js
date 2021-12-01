@@ -155,7 +155,7 @@ export const Clickable = prepareStory(Template, {
   },
 });
 
-export const WithHref = prepareStory(Template, {
+export const WithButtonHref = prepareStory(Template, {
   args: {
     ...defaultProps,
     primaryButtonText: 'Ghost button',

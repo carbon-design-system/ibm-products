@@ -33,7 +33,7 @@ ExpressiveCard = pkg.checkComponentEnabled(ExpressiveCard, componentName);
 
 ExpressiveCard.propTypes = {
   /**
-   * Icons that are displayed on card. Refer to design documentation for implementation guidelines
+   * Icons that are displayed on card. Refer to design documentation for implementation guidelines. Note- href will supersede onClick
    */
   actionIcons: PropTypes.arrayOf(
     PropTypes.shape({
@@ -42,6 +42,7 @@ ExpressiveCard.propTypes = {
       onKeyDown: PropTypes.func,
       onClick: PropTypes.func,
       iconDescription: PropTypes.string,
+      href: PropTypes.string,
     })
   ),
   /**

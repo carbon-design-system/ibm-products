@@ -174,20 +174,6 @@ const config = [
       ')',
   },
   {
-    label: 'codesandbox',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/codesandbox',
-    thumbnail:
-      'url( ' + defaultOrNot(require('./codesandbox--thumbnail.png')) + ')',
-  },
-  {
-    label: 'Canary example',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/component-flag-example',
-    thumbnail:
-      'url( ' +
-      defaultOrNot(require('./component-flag-example--thumbnail.png')) +
-      ')',
-  },
-  {
     label: 'Prefix CSS/JS Example',
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/prefix-example',
     thumbnail:

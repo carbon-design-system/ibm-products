@@ -1,5 +1,5 @@
 {
-  "name": "examplecomponent-prefix-test",
+  "name": "prefix-example",
   "main": "src/index.js",
   "dependencies": {
     "@carbon/elements": "latest",

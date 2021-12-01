@@ -6418,6 +6418,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   justify-content: space-between;
   border-top: 1px solid var(--cds-ui-03, #e0e0e0);
 }
+.c4p--card__productive .c4p--card__footer .bx--btn svg {
+  margin-left: var(--cds-spacing-03, 0.5rem);
+}
 .c4p--card__productive .c4p--card__footer-no-button {
   justify-content: flex-end;
 }

@@ -18,20 +18,20 @@ describe(name, () => {
   });
 
   it('can use custom prefix with a react component', async () => {
-    pkg.prefix = 'my-prefix';
-    pkg._silenceWarnings(true);
-    pkg.component.ExampleComponent = true;
+    const prefix = 'my-prefix';
+    pkg.prefix = prefix;
 
     // dynamic import so we can modify the import on the component before using it
-    const { ExampleComponent } = await import('../components/ExampleComponent');
+    const { StatusIcon } = await import('../components/StatusIcon');
     const wrapper = shallow(
-      <ExampleComponent
-        primaryButtonLabel="primary"
-        secondaryButtonLabel="secondary"
+      <StatusIcon
+        kind="fatal"
+        size="sm"
+        theme="light"
+        iconDescription="Fatal"
       />
     );
-
-    expect(wrapper.find('.my-prefix--example-component')).toHaveLength(1);
+    expect(wrapper.hasClass(`${prefix}--status-icon`)).toEqual(true);
   });
 
   it('Supplies carbon theme token values', () => {

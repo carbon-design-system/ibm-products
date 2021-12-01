@@ -50,7 +50,6 @@ const defaults = {
     UserProfileImage: true,
 
     // other public components not yet reviewed and released:
-    ExampleComponent: false,
     LoadingBar: false,
     ModifiedTabs: false,
     Toolbar: false,

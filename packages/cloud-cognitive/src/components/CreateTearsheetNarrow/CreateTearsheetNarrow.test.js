@@ -37,7 +37,6 @@ const defaultProps = {
   onRequestSubmit: onRequestSubmitFn,
 };
 
-// render an ExampleComponent with button labels and any other required props
 const renderComponent = ({ ...rest }) =>
   render(
     <CreateTearsheetNarrow {...defaultProps} {...rest}>

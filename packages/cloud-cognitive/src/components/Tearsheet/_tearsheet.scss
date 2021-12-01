@@ -225,6 +225,12 @@
       flex: 0 0 257px; // influencer width 256px plus 1px border
       border-right: 1px solid $ui-03;
       overflow-y: auto;
+
+      // the normal 80% content width inside modals should not apply to influencer content
+      // apply the class again for higher specificity
+      &.#{$block-class}__influencer p {
+        padding-right: 0;
+      }
     }
 
     .#{$block-class}__influencer--wide {

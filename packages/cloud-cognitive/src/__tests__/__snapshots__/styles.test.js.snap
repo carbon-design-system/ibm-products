@@ -3856,6 +3856,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .c4p--card__icon {
   cursor: pointer;
+  color: inherit;
 }
 
 .c4p--card__link {

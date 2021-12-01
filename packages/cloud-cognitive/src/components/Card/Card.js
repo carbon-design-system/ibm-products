@@ -96,7 +96,12 @@ export let Card = forwardRef(
           }
           if (href) {
             return (
-              <a key={id} className={`${blockClass}__icon`} href={href}>
+              <a
+                key={id}
+                className={`${blockClass}__icon`}
+                href={href}
+                onClick={onClick}
+              >
                 <Icon aria-label={iconDescription} />
               </a>
             );

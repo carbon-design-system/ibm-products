@@ -240,7 +240,7 @@ Card.propTypes = {
   primaryButtonHref: PropTypes.string,
   primaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   primaryButtonKind: PropTypes.oneOf(['primary', 'ghost']),
-  primaryButtonText: PropTypes.string,
+  primaryButtonText: PropTypes.node,
   productive: PropTypes.bool,
   secondaryButtonHref: PropTypes.string,
   secondaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),

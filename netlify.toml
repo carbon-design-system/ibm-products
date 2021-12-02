@@ -4,7 +4,7 @@ command = "yarn storybook:build"
 publish = "packages/core/storybook-static"
 
 [[redirects]]
-  from = "https://ibm-cloud-cognitive-r.netlify.app/*"
+  from = "https://ibm-cloud-cognitive.netlify.app/*"
   to = "https://carbon-for-ibm-products.netlify.app/:splat"
   status = 301
   force = true

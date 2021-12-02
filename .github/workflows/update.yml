@@ -26,14 +26,14 @@ jobs:
         with:
           token: ${{ secrets.CREATE_PR_ACCESS_TOKEN }}
           commit-message:
-            'feat: update Carbon versions and dependencies to latest'
+            'fix: update Carbon versions and package dependencies to latest'
           committer: GitHub <noreply@github.com>
           author:
             ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           branch: 'update-packages'
           branch-suffix: random
           title:
-            'feat: update Carbon versions and package dependencies to latest'
+            'fix: update Carbon versions and package dependencies to latest'
           body: |
             This PR was automatically generated to update Carbon versions and other package dependencies on a regular basis. This is not intended to create any breaking changes, and will be reflected as a minor version bump for affected packages. NB we'll run all tests and do visual verifications, but there is always the opportunity for unexpected regressions. If you're using one of the packages in a stable or production context you may want to check this before taking the next minor version, and do let us know ASAP if you see anything problematic.
 

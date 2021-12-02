@@ -27,7 +27,6 @@ export {
   NotificationsEmptyState,
   UnauthorizedEmptyState,
 } from './EmptyStates';
-export { ExampleComponent } from './ExampleComponent';
 export { ExportModal } from './ExportModal';
 export { ExpressiveCard } from './ExpressiveCard';
 export { HTTPError403, HTTPError404, HTTPErrorOther } from './HTTPErrors';

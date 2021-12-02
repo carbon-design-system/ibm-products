@@ -27,8 +27,8 @@ describe(componentName, () => {
       primaryButtonText: 'Primary',
       onPrimaryButtonClick,
     };
-    const { getByText } = render(<Card {...props} />);
-    click(getByText(props.primaryButtonText));
+    render(<Card {...props} />);
+    click(screen.getByText(props.primaryButtonText));
     expect(onPrimaryButtonClick).toHaveBeenCalled();
   });
 
@@ -42,10 +42,10 @@ describe(componentName, () => {
       onPrimaryButtonClick,
       onSecondaryButtonClick,
     };
-    const { getByText } = render(<Card {...props} />);
-    click(getByText(props.primaryButtonText));
+    render(<Card {...props} />);
+    click(screen.getByText(props.primaryButtonText));
     expect(onPrimaryButtonClick).toHaveBeenCalled();
-    click(getByText(props.secondaryButtonText));
+    click(screen.getByText(props.secondaryButtonText));
     expect(onSecondaryButtonClick).toHaveBeenCalled();
   });
 
@@ -56,16 +56,26 @@ describe(componentName, () => {
       {
         id: '1',
         onClick,
-        icon: () => <div>icon</div>,
+        icon: () => <div>withOnClick</div>,
+        iconDescription: 'icon',
+      },
+      {
+        id: '2',
+        href: '#',
+        icon: () => <div>withHref</div>,
         iconDescription: 'icon',
       },
     ];
     const props = {
       actionIcons,
     };
-    const { getByText } = render(<Card {...props} />);
-    click(getByText('icon'));
+    render(<Card {...props} />);
+    click(screen.getByText('withOnClick'));
     expect(onClick).toHaveBeenCalled();
+    expect(screen.getByText('withHref').closest('a')).toHaveAttribute(
+      'href',
+      '#'
+    );
   });
 
   it('renders expressive with onClick', () => {
@@ -86,9 +96,9 @@ describe(componentName, () => {
       media: <p>{mediaContent}</p>,
       pictogram: () => <p>{pictogramContent}</p>,
     };
-    const { getByText } = render(<Card {...props} />);
-    expect(getByText(mediaContent)).toBeVisible();
-    expect(getByText(pictogramContent)).toBeVisible();
+    render(<Card {...props} />);
+    expect(screen.getByText(mediaContent)).toBeVisible();
+    expect(screen.getByText(pictogramContent)).toBeVisible();
   });
 
   it('renders productive', () => {
@@ -101,8 +111,14 @@ describe(componentName, () => {
       actionIcons: [
         {
           id: '1',
-          icon: () => <p>icon</p>,
+          icon: () => <p>withOnClick</p>,
           onClick: iconClick,
+          iconDescription: 'description',
+        },
+        {
+          id: '2',
+          icon: () => <p>withHref</p>,
+          href: '#',
           iconDescription: 'description',
         },
       ],
@@ -110,14 +126,18 @@ describe(componentName, () => {
       onPrimaryButtonClick: buttonClick,
       actionsPlacement: 'bottom',
     };
-    const { container, getByText, rerender } = render(<Card {...props} />);
-    expect(getByText(props.label)).toBeVisible();
+    const { container, rerender } = render(<Card {...props} />);
+    expect(screen.getByText(props.label)).toBeVisible();
     expect(
       container.querySelector(`.${blockClass}__footer .${blockClass}__actions`)
     ).toBeVisible();
-    click(getByText('icon'));
+    click(screen.getByText('withOnClick'));
     expect(iconClick).toHaveBeenCalled();
-    click(getByText(props.primaryButtonText));
+    expect(screen.getByText('withHref').closest('a')).toHaveAttribute(
+      'href',
+      '#'
+    );
+    click(screen.getByText(props.primaryButtonText));
     expect(buttonClick).toHaveBeenCalled();
     rerender(<Card {...props} actionsPlacement="top" />);
     expect(
@@ -138,12 +158,12 @@ describe(componentName, () => {
       ],
       actionsPlacement: 'bottom',
     };
-    const { getByText, container, rerender } = render(<Card {...props} />);
+    const { container, rerender } = render(<Card {...props} />);
     expect(
       container.querySelector(`.${blockClass}__footer .${blockClass}__actions`)
     ).toBeVisible();
     click(container.querySelector('.bx--overflow-menu'));
-    click(getByText('Edit'));
+    click(screen.getByText('Edit'));
     expect(onClick).toHaveBeenCalled();
     rerender(<Card {...props} actionsPlacement="top" />);
     expect(
@@ -164,9 +184,9 @@ describe(componentName, () => {
       actionIcons: [],
       children: <p>body</p>,
     };
-    const { rerender, getByText, container } = render(<Card {...props} />);
-    expect(getByText(props.title)).toBeVisible();
-    expect(getByText(props.description)).toBeVisible();
+    const { rerender, container } = render(<Card {...props} />);
+    expect(screen.getByText(props.title)).toBeVisible();
+    expect(screen.getByText(props.description)).toBeVisible();
     click(container.querySelector(`.${blockClass}__clickable`));
     expect(onClick).toHaveBeenCalled();
     rerender(<Card {...props} clickZone="two" />);

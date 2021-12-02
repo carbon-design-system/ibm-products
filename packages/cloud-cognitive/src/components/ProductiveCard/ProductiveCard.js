@@ -51,6 +51,7 @@ ProductiveCard.propTypes = {
       onKeyDown: PropTypes.func,
       onClick: PropTypes.func,
       iconDescription: PropTypes.string,
+      href: PropTypes.string,
     })
   ),
   /**

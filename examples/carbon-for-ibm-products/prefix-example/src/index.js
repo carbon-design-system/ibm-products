@@ -8,16 +8,11 @@ import './index.scss';
 // be done in an import so that it happens before all component imports.
 
 import './config'; // must come before @carbon/ibm-cloud-cognitive... imports
-import { ExampleComponent } from '@carbon/ibm-cloud-cognitive/es';
+import { TestComponent } from './components/TestComponent';
 
 const App = () => (
   <div className="app">
-    <ExampleComponent
-      boxedBorder={false}
-      borderColor="red"
-      primaryButtonLabel="canary"
-      secondaryButtonLabel="example"
-    />
+    <TestComponent />
   </div>
 );
 

@@ -2699,6 +2699,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   border-right: 1px solid var(--cds-ui-03, #e0e0e0);
   overflow-y: auto;
 }
+.c4p--tearsheet .c4p--tearsheet__influencer.c4p--tearsheet__influencer p {
+  padding-right: 0;
+}
 .c4p--tearsheet .c4p--tearsheet__influencer--wide {
   flex-basis: 321px;
 }
@@ -3855,6 +3858,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--card__icon {
+  color: inherit;
   cursor: pointer;
 }
 
@@ -6414,6 +6418,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   align-items: center;
   justify-content: space-between;
   border-top: 1px solid var(--cds-ui-03, #e0e0e0);
+}
+.c4p--card__productive .c4p--card__footer .bx--btn svg {
+  margin-left: var(--cds-spacing-03, 0.5rem);
 }
 .c4p--card__productive .c4p--card__footer-no-button {
   justify-content: flex-end;

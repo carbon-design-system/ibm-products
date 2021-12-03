@@ -51,6 +51,7 @@ ProductiveCard.propTypes = {
       onKeyDown: PropTypes.func,
       onClick: PropTypes.func,
       iconDescription: PropTypes.string,
+      href: PropTypes.string,
     })
   ),
   /**
@@ -107,7 +108,7 @@ ProductiveCard.propTypes = {
   /**
    * The text that's displayed in the primary button
    */
-  primaryButtonText: PropTypes.string,
+  primaryButtonText: PropTypes.node,
   /**
    * Title that's displayed at the top of the card
    */

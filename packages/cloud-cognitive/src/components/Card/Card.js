@@ -79,7 +79,7 @@ export let Card = forwardRef(
       }
 
       const icons = actionIcons.map(
-        ({ id, icon: Icon, onClick, iconDescription, onKeyDown }) => {
+        ({ id, icon: Icon, onClick, iconDescription, onKeyDown, href }) => {
           if (productive) {
             return (
               <Button
@@ -90,7 +90,20 @@ export let Card = forwardRef(
                 size={actionsPlacement === 'top' ? 'sm' : 'field'}
                 iconDescription={iconDescription}
                 kind="ghost"
+                href={href}
               />
+            );
+          }
+          if (href) {
+            return (
+              <a
+                key={id}
+                className={`${blockClass}__icon`}
+                href={href}
+                onClick={onClick}
+              >
+                <Icon aria-label={iconDescription} />
+              </a>
             );
           }
           return (
@@ -214,6 +227,7 @@ Card.propTypes = {
       onKeyDown: PropTypes.func,
       onClick: PropTypes.func,
       iconDescription: PropTypes.string,
+      href: PropTypes.string,
     })
   ),
   actionsPlacement: PropTypes.oneOf(['top', 'bottom']),
@@ -240,7 +254,7 @@ Card.propTypes = {
   primaryButtonHref: PropTypes.string,
   primaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   primaryButtonKind: PropTypes.oneOf(['primary', 'ghost']),
-  primaryButtonText: PropTypes.string,
+  primaryButtonText: PropTypes.node,
   productive: PropTypes.bool,
   secondaryButtonHref: PropTypes.string,
   secondaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),

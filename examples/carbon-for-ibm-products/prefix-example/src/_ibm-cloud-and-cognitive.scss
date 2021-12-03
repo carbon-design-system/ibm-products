@@ -1,0 +1,4 @@
+// set prefix prior to importing from SCSS index file
+$pkg-prefix: 'tst';
+
+@import '@carbon/ibm-cloud-cognitive/scss';

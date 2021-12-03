@@ -1,8 +1,10 @@
 import { pkg } from '@carbon/ibm-cloud-cognitive/es/settings';
 
+pkg.prefix = 'tst';
+
 // Enable all 'canary' (not yet reviewed/released) components
 // that we want to make use of
-pkg.component.ExampleComponent = true;
+// pkg.component.ExampleComponent = true;
 
 // Live dangerously: enable all components!
 // pkg.setAllComponents(true);

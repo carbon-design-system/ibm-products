@@ -1,5 +1,14 @@
 {
-  "name": "AboutModal component example",
+  "name": "aboutmodal-component-example",
+  "description": "An example showing use of the AboutModal component from the @carbon/ibm-products component library.",
+  "keywords": [
+    "carbon",
+    "ibm",
+    "ibm-products",
+    "component",
+    "aboutmodal"
+  ],
+  "license": "Apache-2.0",
   "main": "src/index.js",
   "dependencies": {
     "@carbon/elements": "latest",
@@ -9,11 +18,27 @@
     "carbon-icons": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "react-scripts": "latest"
+    "react-scripts": "latest",
+    "sass": "latest"
   },
   "scripts": {
     "start": "react-scripts start"
   },
-  "keywords": ["carbon", "ibm", "ibm-products", "component", "aboutmodal"],
-  "description": "An example showing use of the AboutModal component from the @carbon/ibm-products component library."
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  }
 }

@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { Dropdown } from 'carbon-components-react';
 import { ThemeContext, themeData } from './ThemeContext';
 
+import './_theme-dropdown.scss';
+
 export const ThemeDropdown = () => {
   const theme = useContext(ThemeContext);
 
@@ -12,7 +14,7 @@ export const ThemeDropdown = () => {
   };
 
   return (
-    <div className="ccs-theme-dropdown">
+    <div className="carbon-theme-dropdown">
       <Dropdown
         direction="top"
         ariaLabel="Theme dropdown"

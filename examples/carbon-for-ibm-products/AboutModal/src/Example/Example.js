@@ -2,27 +2,35 @@
 
 import React, { useState } from 'react';
 
-import { AboutModal } from '@carbon/ibm-cloud-cognitive';
+// ----------------------------------------------------
+// This is an example showing use of the
+// AboutModal component
+// from the @carbon/ibm-products component library.
+// ----------------------------------------------------
+
+import { AboutModal } from '@carbon/ibm-products';
 import { Button, Link } from 'carbon-components-react';
 
-import exampleLogo from '../static/media/example-logo.svg';
-import './test-component.scss';
+import exampleLogo from './media/example-logo.svg';
+import './_example.scss';
 
-export const TestComponent = () => {
-  const [isOpen, setIsOpen] = useState(false);
+export const Example = () => {
+  const [isOpen, setIsOpen] = useState(true);
+
   const handleOpenModalClick = () => {
     setIsOpen(true);
   };
+
   const handleCloseModal = () => {
     setIsOpen(false);
   };
 
   return (
     <>
-      <Button onClick={handleOpenModalClick}>
-        Open About Modal with all props set
+      <Button kind="secondary" onClick={handleOpenModalClick}>
+        Reopen the About Modal dialog
       </Button>
-      <style>{`.exp-about-modal { opacity: 0 };`}</style>
+
       <AboutModal
         open={isOpen}
         additionalInfo={[
@@ -36,23 +44,24 @@ export const TestComponent = () => {
                 <img
                   alt="Grafana"
                   className="about-modal-stories--tech-logo"
-                  src={require('../static/media/grafana-logo.png')}
+                  src={require('./media/grafana-logo.png')}
                 />
                 <img
                   alt="Ansible"
                   className="about-modal-stories--tech-logo"
-                  src={require('../static/media/ansible-logo.png')}
+                  src={require('./media/ansible-logo.png')}
                 />
                 <img
                   alt="JavaScript"
                   className="about-modal-stories--tech-logo"
-                  src={require('../static/media/js-logo.png')}
+                  src={require('./media/js-logo.png')}
                 />
               </>
             ),
             label: 'Technologies used',
           },
         ]}
+        closeIconDescription="Close"
         content={
           <>This is example content for an About Modal with all props set.</>
         }
@@ -76,7 +85,15 @@ export const TestComponent = () => {
         onClose={handleCloseModal}
         title={
           <>
-            IBM <span style={{ fontWeight: '600' }}>Watson AI Ops</span>
+            IBM{' '}
+            <span
+              style={
+                // stylelint-disable-next-line carbon/type-token-use
+                { fontWeight: '600' }
+              }
+            >
+              Watson AI Ops
+            </span>
           </>
         }
       />

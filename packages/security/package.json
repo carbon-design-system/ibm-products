@@ -85,7 +85,7 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "faker": "^5.5.3",
-    "jest": "^27.3.1",
+    "jest": "^27.4.3",
     "jest-config-ibm-cloud-cognitive": "^0.23.0",
     "node-sass": "^6.0.1",
     "npm-check-updates": "^12.0.2",

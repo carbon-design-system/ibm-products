@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.1.0...@carbon/ibm-products@1.2.0) (2021-12-03)
+
+
+### Bug Fixes
+
+* **Tearsheet:** don't apply modal 80% width limit to influencer content ([#1482](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1482)) ([ee87da6](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ee87da6b938c06e11a8928a68fef19799b36bd2d))
+
+
+### Features
+
+* adds svg support to buttons in productive card ([#1481](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1481)) ([8722de8](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8722de80fc775cfb675da12110e4efb373253a60))
+* icon href support for cards ([#1487](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1487)) ([173016e](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/173016e4894820d49a1b07a573d3ce08412617c6))
+
+
+
+
+
 # [1.1.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.0.1...@carbon/ibm-products@1.1.0) (2021-11-30)
 
 

@@ -2173,6 +2173,9 @@ Map {
         "labelText": Object {
           "type": "string",
         },
+        "onBlur": Object {
+          "type": "func",
+        },
         "onChange": Object {
           "type": "func",
         },
@@ -2180,6 +2183,9 @@ Map {
           "type": "func",
         },
         "onExpand": Object {
+          "type": "func",
+        },
+        "onFocus": Object {
           "type": "func",
         },
         "persistant": [Function],
@@ -10664,6 +10670,9 @@ Map {
       "labelText": Object {
         "type": "string",
       },
+      "onBlur": Object {
+        "type": "func",
+      },
       "onChange": Object {
         "type": "func",
       },
@@ -10671,6 +10680,9 @@ Map {
         "type": "func",
       },
       "onExpand": Object {
+        "type": "func",
+      },
+      "onFocus": Object {
         "type": "func",
       },
       "persistant": [Function],
@@ -16132,6 +16144,54 @@ Map {
         "type": "number",
       },
     },
+  },
+  "unstable_IconButton" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "right",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "defaultOpen": Object {
+        "type": "bool",
+      },
+      "enterDelayMs": Object {
+        "type": "number",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "primary",
+            "secondary",
+            "ghost",
+            "tertiary",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "label": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "leaveDelayMs": Object {
+        "type": "number",
+      },
+    },
+    "render": [Function],
   },
 }
 `;

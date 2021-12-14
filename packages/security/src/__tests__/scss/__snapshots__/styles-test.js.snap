@@ -9140,6 +9140,8 @@ fieldset[disabled] .bx--form__helper-text {
   clip: rect(0, 0, 0, 0);
   visibility: inherit;
   white-space: nowrap;
+  top: 1.25rem;
+  left: 0.7rem;
 }
 
 .bx--checkbox-label {

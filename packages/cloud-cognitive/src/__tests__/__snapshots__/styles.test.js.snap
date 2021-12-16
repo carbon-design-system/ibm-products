@@ -5878,7 +5878,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: block;
   width: 100%;
   height: 100%;
-  animation: background-and-shadow-appear 1000ms calc(-1000ms * var(--c4p--page-header--background-opacity)) linear paused forwards;
+  animation: background-and-shadow-appear 1000ms linear paused forwards;
+  animation-delay: calc(-1000ms * var(--c4p--page-header--background-opacity));
   content: \\"\\";
   z-index: -1;
 }
@@ -6017,7 +6018,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: block;
   width: 100%;
   height: 100%;
-  animation: background-appear 1000ms calc(-1000ms * var(--c4p--page-header--background-opacity)) linear paused forwards;
+  animation: background-appear 1000ms linear paused forwards;
+  animation-delay: calc(-1000ms * var(--c4p--page-header--background-opacity));
   content: \\"\\";
 }
 .c4p--page-header .c4p--page-header__action-bar-column--influenced-by-collapse-button {
@@ -6188,7 +6190,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: block;
   width: 100%;
   height: 100%;
-  animation: background-appear 1000ms calc(-1000ms * var(--c4p--page-header--background-opacity)) linear paused forwards;
+  animation: background-appear 1000ms linear paused forwards;
+  animation-delay: calc(-1000ms * var(--c4p--page-header--background-opacity));
   content: \\"\\";
 }
 .c4p--page-header .c4p--page-header__page-actions-content {

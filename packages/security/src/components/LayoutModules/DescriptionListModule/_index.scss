@@ -21,4 +21,38 @@
   > #{get-component-namespace($component-name: $type-layout__name)} {
     margin-bottom: 0;
   }
+
+  &--dense {
+    padding-bottom: $carbon--spacing-05;
+  }
+
+  &--stacked {
+    #{get-component-namespace($component-name: $type-layout__name)}__cell {
+      display: block;
+
+      &:first-of-type {
+        padding: 0 0 0 $carbon--spacing-05;
+      }
+
+      &:not(:first-of-type) {
+        padding: 0 0 $carbon--spacing-05 $carbon--spacing-05;
+      }
+    }
+  }
+
+  &--toggle {
+    @media (max-width: 320px) {
+      #{get-component-namespace($component-name: $type-layout__name)}__cell {
+        display: block;
+
+        &:first-of-type {
+          padding: 0 0 0 $carbon--spacing-05;
+        }
+
+        &:not(:first-of-type) {
+          padding: 0 0 $carbon--spacing-05 $carbon--spacing-05;
+        }
+      }
+    }
+  }
 }

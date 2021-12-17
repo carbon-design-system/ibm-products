@@ -13817,6 +13817,29 @@ li.bx--accordion__item--disabled:last-of-type {
 .security--layout-module--description-list > .security--type-layout__container {
   margin-bottom: 0;
 }
+.security--layout-module--description-list--dense {
+  padding-bottom: 1rem;
+}
+.security--layout-module--description-list--stacked .security--type-layout__container__cell {
+  display: block;
+}
+.security--layout-module--description-list--stacked .security--type-layout__container__cell:first-of-type {
+  padding: 0 0 0 1rem;
+}
+.security--layout-module--description-list--stacked .security--type-layout__container__cell:not(:first-of-type) {
+  padding: 0 0 1rem 1rem;
+}
+@media (max-width: 320px) {
+  .security--layout-module--description-list--toggle .security--type-layout__container__cell {
+    display: block;
+  }
+  .security--layout-module--description-list--toggle .security--type-layout__container__cell:first-of-type {
+    padding: 0 0 0 1rem;
+  }
+  .security--layout-module--description-list--toggle .security--type-layout__container__cell:not(:first-of-type) {
+    padding: 0 0 1rem 1rem;
+  }
+}
 
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */

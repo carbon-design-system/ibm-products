@@ -3129,6 +3129,19 @@ Map {
         "isRequired": true,
         "type": "node",
       },
+      "dense": Object {
+        "type": "bool",
+      },
+      "mode": Object {
+        "args": Array [
+          Array [
+            "default",
+            "stacked",
+            "toggle",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "DescriptionModule" => Object {

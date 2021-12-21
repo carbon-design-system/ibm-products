@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-cdai",
   "description": "Carbon for Cloud & Cognitive CD&AI UI components",
-  "version": "1.21.3",
+  "version": "1.21.4",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -62,7 +62,7 @@
     "@babel/preset-react": "^7.16.5",
     "cpx": "^1.5.0",
     "jest": "^27.4.5",
-    "jest-config-ibm-cloud-cognitive": "^0.23.2",
+    "jest-config-ibm-cloud-cognitive": "^0.23.3",
     "node-sass": "^7.0.0",
     "npm-check-updates": "^12.0.5",
     "rimraf": "^3.0.2",

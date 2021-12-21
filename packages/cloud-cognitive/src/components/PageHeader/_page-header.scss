@@ -84,11 +84,10 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     $animation: background-and-shadow-appear;
   }
 
-  animation: $animation $duration linear paused forwards;
-  // Added separately for clarity
-  animation-delay: calc(
-    -1 * $duration * var(--#{$block-class}--background-opacity)
-  );
+  animation: $animation $duration
+    calc((-1 * $duration * var(--#{$block-class}--background-opacity))) linear
+    paused forwards;
+
   content: '';
 }
 

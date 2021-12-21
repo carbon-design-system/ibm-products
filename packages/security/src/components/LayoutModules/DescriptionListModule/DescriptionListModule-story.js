@@ -31,12 +31,8 @@ export default {
 // Overrides carbon's structuredListCell padding-left
 // See: https://www.carbondesignsystem.com/components/structured-list/usage/
 
-const style = {
-  paddingLeft: '0',
-};
-
 export const Default = () => (
-  <DescriptionListModule>
+  <DescriptionListModule mode="toggle">
     <TypeLayout>
       <TypeLayoutBody>
         <TypeLayoutRow>
@@ -79,7 +75,7 @@ export const Variant = () => (
     <TypeLayout>
       <TypeLayoutBody>
         <TypeLayoutRow>
-          <TypeLayoutCell style={style}>Term 1</TypeLayoutCell>
+          <TypeLayoutCell>Term 1</TypeLayoutCell>
 
           <TypeLayoutCell>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -87,7 +83,7 @@ export const Variant = () => (
         </TypeLayoutRow>
 
         <TypeLayoutRow>
-          <TypeLayoutCell style={style}>Term 2</TypeLayoutCell>
+          <TypeLayoutCell>Term 2</TypeLayoutCell>
 
           <TypeLayoutCell>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
@@ -98,7 +94,7 @@ export const Variant = () => (
         </TypeLayoutRow>
 
         <TypeLayoutRow>
-          <TypeLayoutCell style={style}>Term 3</TypeLayoutCell>
+          <TypeLayoutCell>Term 3</TypeLayoutCell>
 
           <TypeLayoutCell>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam

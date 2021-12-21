@@ -33,8 +33,8 @@ DescriptionListModule.propTypes = {
   /** Specify whether a dense spacing should be used */
   dense: bool,
 
-  /** Specify whether the module should be side-by-side, stacked, or toggle between the two */
-  mode: oneOf(['default', 'stacked', 'toggle']),
+  /** Optionally specify if the module should be stacked or toggle between a stacked and default layout */
+  mode: oneOf(['stacked', 'toggle']),
 };
 
 export default DescriptionListModule;

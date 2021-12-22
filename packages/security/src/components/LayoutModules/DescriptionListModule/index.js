@@ -13,12 +13,13 @@ const namespace = 'description-list';
 /**
  * Description list modules provide a means to orderly layout terms and definitions.
  */
-const DescriptionListModule = ({ children, dense, mode, ...other }) => (
+const DescriptionListModule = ({ children, dense, mode, short, ...other }) => (
   <LayoutModule
     namespace={namespace}
     className={classnames({
       [`${layoutModuleNamespace}--${namespace}--dense`]: dense,
       [`${layoutModuleNamespace}--${namespace}--${mode}`]: mode,
+      [`${layoutModuleNamespace}--${namespace}--short`]: short,
     })}
     {...other}
   >
@@ -35,6 +36,9 @@ DescriptionListModule.propTypes = {
 
   /** Optionally specify if the module should be stacked or toggle between a stacked and default layout */
   mode: oneOf(['stacked', 'toggle']),
+
+  /** Specify whether a short spacing should be used */
+  short: bool,
 };
 
 export default DescriptionListModule;

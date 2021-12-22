@@ -17,6 +17,10 @@
 ) {
   padding-bottom: $carbon--layout-03;
 
+  &--dense {
+    padding-bottom: $carbon--spacing-05;
+  }
+
   // TODO: `3.x` - Remove bottom margin from the `TypeLayout` component to allow it to be handled by the layout module.
   > #{get-component-namespace($component-name: $type-layout__name)} {
     margin-bottom: 0;
@@ -26,17 +30,28 @@
     }
   }
 
-  &--dense {
+  #{get-component-namespace($component-name: $type-layout__name)}__cell {
+    padding-top: 0;
     padding-bottom: $carbon--spacing-05;
+  }
+
+  &--short {
+    #{get-component-namespace($component-name: $type-layout__name)}__cell {
+      padding-bottom: $carbon--spacing-03;
+    }
   }
 
   &--stacked {
     #{get-component-namespace($component-name: $type-layout__name)}__cell {
       display: block;
-      padding: 0;
+
+      &:first-of-type {
+        padding-right: 0;
+        padding-bottom: 0;
+      }
 
       &:not(:first-of-type) {
-        padding-bottom: $carbon--spacing-05;
+        padding-left: 0;
       }
     }
   }
@@ -45,10 +60,14 @@
     @media (max-width: 320px) {
       #{get-component-namespace($component-name: $type-layout__name)}__cell {
         display: block;
-        padding: 0;
+
+        &:first-of-type {
+          padding-right: 0;
+          padding-bottom: 0;
+        }
 
         &:not(:first-of-type) {
-          padding-bottom: $carbon--spacing-05;
+          padding-left: 0;
         }
       }
     }

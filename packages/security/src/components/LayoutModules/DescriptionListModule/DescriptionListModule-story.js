@@ -111,6 +111,47 @@ Variant.parameters = {
   viewMode: 'canvas',
 };
 
+export const Short = () => (
+  <DescriptionListModule short mode="toggle">
+    <TypeLayout>
+      <TypeLayoutBody>
+        <TypeLayoutRow>
+          <TypeLayoutCell>Term 1</TypeLayoutCell>
+
+          <TypeLayoutCell>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </TypeLayoutCell>
+        </TypeLayoutRow>
+
+        <TypeLayoutRow>
+          <TypeLayoutCell>Term 2</TypeLayoutCell>
+
+          <TypeLayoutCell>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+            accumsan, dui ut pulvinar mattis, diam est imperdiet ex, a varius
+            lacus ex at libero. Aenean euismod viverra odio, id volutpat turpis
+            commodo.
+          </TypeLayoutCell>
+        </TypeLayoutRow>
+
+        <TypeLayoutRow>
+          <TypeLayoutCell>Term 3</TypeLayoutCell>
+
+          <TypeLayoutCell>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+            accumsan, dui ut pulvinar mattis, diam est imperdiet ex, a varius
+            lacus ex at libero.
+          </TypeLayoutCell>
+        </TypeLayoutRow>
+      </TypeLayoutBody>
+    </TypeLayout>
+  </DescriptionListModule>
+);
+
+Short.parameters = {
+  viewMode: 'canvas',
+};
+
 export const DenseAndStacked = () => (
   <DescriptionListModule dense mode="stacked">
     <TypeLayout>

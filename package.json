@@ -88,8 +88,8 @@
     "stylelint-plugin-carbon-tokens": "^0.11.2",
     "webpack": "^5.65.0"
   },
+  "//resolutions": "package 'request' deprecated but still used, asks for http-signature ~1.2.0 which indirectly has vulnerabilities",
   "resolutions": {
-    "//request": "deprecated but still used, asks for http-signature ~1.2.0 which indirectly has vulnerabilities",
     "**/request/http-signature": "~1.3.0"
   },
   "eslintConfig": {

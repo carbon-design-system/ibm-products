@@ -18,6 +18,7 @@ export {
   CreateTearsheetDivider,
 } from './CreateTearsheet';
 export { CreateTearsheetNarrow } from './CreateTearsheetNarrow';
+export { EditSidePanel } from './EditSidePanel';
 export {
   EmptyState,
   ErrorEmptyState,
@@ -34,7 +35,9 @@ export { ImportModal } from './ImportModal';
 export { LoadingBar } from './LoadingBar';
 export { ModifiedTabs } from './ModifiedTabs';
 export { NotificationsPanel } from './NotificationsPanel';
+export { OptionsTile } from './OptionsTile';
 export { PageHeader } from './PageHeader';
+export { ProgressiveLoading } from './ProgressiveLoading';
 export { ProductiveCard } from './ProductiveCard';
 export { RemoveModal } from './RemoveModal';
 export { Saving } from './Saving';
@@ -45,5 +48,3 @@ export { Tearsheet, TearsheetNarrow } from './Tearsheet';
 export { Toolbar, ToolbarButton, ToolbarGroup } from './Toolbar';
 export { UserProfileImage } from './UserProfileImage';
 export { WebTerminal } from './WebTerminal';
-export { EditSidePanel } from './EditSidePanel';
-export { OptionsTile } from './OptionsTile';

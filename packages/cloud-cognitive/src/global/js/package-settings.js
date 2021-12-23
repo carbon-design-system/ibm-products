@@ -50,14 +50,15 @@ const defaults = {
     UserProfileImage: true,
 
     // other public components not yet reviewed and released:
+    EditSidePanel: false,
     LoadingBar: false,
     ModifiedTabs: false,
+    OptionsTile: false,
+    ProgressiveLoading: false,
     Toolbar: false,
     ToolbarButton: false,
     ToolbarGroup: false,
     WebTerminal: false,
-    EditSidePanel: false,
-    OptionsTile: false,
     /* new component flags here - comment used by generate CLI */
   },
 

@@ -71,7 +71,7 @@
     "focus-trap-react": "^8.9.0",
     "invariant": "^2.2.4",
     "numeral": "^2.0.6",
-    "prop-types": "^15.7.2",
+    "prop-types": "^15.8.0",
     "react-transition-group": "^4.4.2",
     "throttle-debounce": "^3.0.1"
   },

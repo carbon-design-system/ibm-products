@@ -53,7 +53,7 @@
     "react-dom": "^17.0.2"
   },
   "dependencies": {
-    "@babel/runtime": "^7.16.5",
+    "@babel/runtime": "^7.16.7",
     "@carbon/colors": "10.34.0",
     "@carbon/grid": "10.39.0",
     "@carbon/icons-react": "10.44.0",
@@ -76,7 +76,7 @@
     "throttle-debounce": "^3.0.1"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-export-default-from": "^7.16.5",
+    "@babel/plugin-proposal-export-default-from": "^7.16.7",
     "babel-plugin-macros": "^3.1.0",
     "babel-preset-ibm-cloud-cognitive": "^0.14.2",
     "clean-css-cli": "^5.5.0",
@@ -87,7 +87,7 @@
     "faker": "^5.5.3",
     "jest": "^27.4.5",
     "jest-config-ibm-cloud-cognitive": "^0.23.3",
-    "node-sass": "^7.0.0",
+    "node-sass": "^7.0.1",
     "npm-check-updates": "^12.0.5",
     "npm-run-all": "^4.1.5",
     "param-case": "^3.0.4",

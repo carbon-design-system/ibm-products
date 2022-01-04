@@ -6,7 +6,6 @@
  */
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { BreadcrumbItem } from 'carbon-components-react';
 import { BreadcrumbWithOverflow } from '.';
 import { mockHTMLElement } from '../../global/js/utils/test-helper';
 
@@ -27,14 +26,6 @@ const breadcrumbItems = breadcrumbContent.map((item) => ({
   onClick: () => {},
 }));
 
-const deprecatedChildren = breadcrumbContent.map((item) => (
-  <BreadcrumbItem key={item}>
-    <a href="/#" onClick={() => {}}>
-      {item}
-    </a>
-  </BreadcrumbItem>
-));
-
 const sizes = {
   breadcrumbWidth: 200,
   breadcrumbHeight: 40,
@@ -46,12 +37,10 @@ const isBreadCrumbItem = function () {
 };
 
 // eslint-disable-next-line react/prop-types
-const TestBreadcrumbWithOverflow = ({ width, children, ...rest }) => {
+const TestBreadcrumbWithOverflow = ({ width, ...rest }) => {
   return (
     <div style={{ width, height: 40 }}>
-      <BreadcrumbWithOverflow className="fish" {...rest}>
-        {children}
-      </BreadcrumbWithOverflow>
+      <BreadcrumbWithOverflow className="fish" {...rest} />
     </div>
   );
 };
@@ -250,121 +239,5 @@ describe(BreadcrumbWithOverflow.displayName, () => {
       />
     );
     screen.getByTestId(dataTestId);
-  });
-
-  it('Works with deprecated children', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-    const plentyOfSpace = (breadcrumbItems.length + 1) * sizes.breadcrumbWidth;
-
-    render(
-      <TestBreadcrumbWithOverflow
-        width={plentyOfSpace}
-        overflowAriaLabel="Open and close additional breadcrumb item list."
-      >
-        {deprecatedChildren}
-      </TestBreadcrumbWithOverflow>
-    );
-
-    const visibleBreadcrumbs = screen.getAllByRole('listitem');
-    expect(visibleBreadcrumbs.length).toEqual(5); // all should be visible
-
-    breadcrumbContent.forEach((item, index) => {
-      expect(visibleBreadcrumbs[index]).toHaveTextContent(item);
-    });
-
-    expect(warn).toBeCalled();
-    jest.spyOn(console, 'warn').mockRestore();
-  });
-
-  it('Uses data-title if supplied', () => {
-    jest.spyOn(console, 'warn').mockImplementation(() => {});
-    const testTitle = 'test-title';
-
-    render(
-      <TestBreadcrumbWithOverflow
-        width={1200}
-        maxVisible={0}
-        overflowAriaLabel="Open and close additional breadcrumb item list."
-      >
-        {[
-          <BreadcrumbItem key="k1" href="/#" data-title={testTitle}>
-            Item 1
-          </BreadcrumbItem>,
-        ]}
-      </TestBreadcrumbWithOverflow>
-    );
-    expect(screen.getByText(testTitle)).not.toBeNull();
-    jest.spyOn(console, 'warn').mockRestore();
-  });
-
-  it('Uses title if supplied', () => {
-    jest.spyOn(console, 'warn').mockImplementation(() => {});
-    const testTitle = 'test-title';
-
-    render(
-      <TestBreadcrumbWithOverflow
-        width={1200}
-        maxVisible={0}
-        overflowAriaLabel="Open and close additional breadcrumb item list."
-      >
-        {[
-          <BreadcrumbItem key="k2" href="/#" title={testTitle}>
-            Item 2
-          </BreadcrumbItem>,
-        ]}
-      </TestBreadcrumbWithOverflow>
-    );
-    expect(screen.getByText(testTitle)).not.toBeNull();
-    jest.spyOn(console, 'warn').mockRestore();
-  });
-
-  it('Uses props.children as title if type string', () => {
-    jest.spyOn(console, 'warn').mockImplementation(() => {});
-    const testTitle = 'test-title';
-
-    render(
-      <TestBreadcrumbWithOverflow
-        width={1200}
-        maxVisible={0}
-        overflowAriaLabel="Open and close additional breadcrumb item list."
-      >
-        {[
-          <BreadcrumbItem key="k3" href="/#">
-            {testTitle}
-          </BreadcrumbItem>,
-        ]}
-      </TestBreadcrumbWithOverflow>
-    );
-    expect(
-      screen.getByText(testTitle, {
-        selector: `.${carbon.prefix}--assistive-text`,
-      })
-    ).not.toBeNull();
-    jest.spyOn(console, 'warn').mockRestore();
-  });
-
-  it('Uses props.children.props.children type string', () => {
-    jest.spyOn(console, 'warn').mockImplementation(() => {});
-    const testTitle = 'test-title';
-
-    render(
-      <TestBreadcrumbWithOverflow
-        width={1200}
-        maxVisible={0}
-        overflowAriaLabel="Open and close additional breadcrumb item list."
-      >
-        {[
-          <BreadcrumbItem key="k4">
-            <a href="/#">{testTitle}</a>
-          </BreadcrumbItem>,
-        ]}
-      </TestBreadcrumbWithOverflow>
-    );
-    expect(
-      screen.getByText(testTitle, {
-        selector: `.${carbon.prefix}--assistive-text`,
-      })
-    ).not.toBeNull();
-    jest.spyOn(console, 'warn').mockRestore();
   });
 });

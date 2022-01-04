@@ -26,9 +26,8 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
-import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 
-import { CreateSidePanel, deprecatedProps } from './CreateSidePanel';
+import { CreateSidePanel } from './CreateSidePanel';
 import mdx from './CreateSidePanel.mdx';
 
 import styles from './_storybook-styles.scss';
@@ -38,7 +37,6 @@ const blockClass = `${pkg.prefix}--create-side-panel`;
 export default {
   title: getStoryTitle(CreateSidePanel.displayName),
   component: CreateSidePanel,
-  argTypes: getDeprecatedArgTypes(deprecatedProps),
   parameters: {
     styles,
     docs: {
@@ -79,7 +77,7 @@ const DefaultTemplate = ({ ...args }) => {
   return (
     <>
       {renderUIShellHeader()}
-      <Grid id="cloud-and-cognitive-page-content">
+      <Grid id="ibm-products-page-content">
         <Row>
           <Column>
             <Button onClick={() => setOpen(!open)}>
@@ -169,7 +167,7 @@ const TemplateWithFormValidation = ({ ...args }) => {
   return (
     <>
       {renderUIShellHeader()}
-      <Grid id="cloud-and-cognitive-page-content">
+      <Grid id="ibm-products-page-content">
         <Row>
           <Column>
             <Button onClick={() => setOpen(!open)}>
@@ -261,7 +259,7 @@ const TemplateWithMultipleForms = ({ ...args }) => {
   return (
     <>
       {renderUIShellHeader()}
-      <Grid id="cloud-and-cognitive-page-content">
+      <Grid id="ibm-products-page-content">
         <Row>
           <Column>
             <Button onClick={() => setOpen(!open)}>
@@ -373,21 +371,21 @@ const TemplateWithMultipleForms = ({ ...args }) => {
 
 export const Default = prepareStory(DefaultTemplate, {
   args: {
-    selectorPageContent: '#cloud-and-cognitive-page-content',
+    selectorPageContent: '#ibm-products-page-content',
     ...defaultStoryProps,
   },
 });
 
 export const WithFormValidation = prepareStory(TemplateWithFormValidation, {
   args: {
-    selectorPageContent: '#cloud-and-cognitive-page-content',
+    selectorPageContent: '#ibm-products-page-content',
     ...defaultStoryProps,
   },
 });
 
 export const WithMultipleForms = prepareStory(TemplateWithMultipleForms, {
   args: {
-    selectorPageContent: '#cloud-and-cognitive-page-content',
+    selectorPageContent: '#ibm-products-page-content',
     ...defaultStoryProps,
   },
 });

@@ -1,10 +1,12 @@
-# Carbon for Cloud & Cognitive
+# Carbon for IBM Products
 
-> IBM Cloud & Cognitive is an open-source implementation of the closed source
-> ibm-cloud-cognitive pattern asset library (PAL). These PAL designs build on
-> the foundation of IBM's open source Carbon Design System and React
-> implementation to offer components and patterns beyond the typical component
-> library.
+> Carbon for IBM Products is an open-source implementation of the closed source
+> [Carbon for Cloud & Cognitive pattern asset library (PAL)](https://pages.github.ibm.com/cdai-design/pal/).
+> These PAL designs build on the foundation of IBM's open source Carbon Design
+> System and React implementation to offer components and patterns beyond the
+> typical component library. Carbon for IBM Products was previously known as
+> Carbon for IBM Cloud and Cognitive, and this name can still be encountered in
+> various places and historical logs.
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors-)
 [![Licensed under the Apache License, Version 2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/LICENSE)
@@ -18,18 +20,26 @@
 If you're just getting started and looking to browse our React components, take
 a look at [our Storybook](https://ibm-cloud-cognitive.netlify.app).
 
-All of our source code and documentation, including this readme, can be found on [our GitHub repo](https://github.com/carbon-design-system/ibm-cloud-cognitive), which is also the place to [open issues](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new/choose) if you have a problem or find a defect or would like to request a new feature or change something.
+All of our source code and documentation, including this readme, can be found on
+[our GitHub repo](https://github.com/carbon-design-system/ibm-cloud-cognitive),
+which is also the place to
+[open issues](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new/choose)
+if you have a problem or find a defect or would like to request a new feature or
+change something.
 
-If you have access to the IBM Slack workspaces, you can join the discussion on [our slack channel](https://ibm-casdesign.slack.com/archives/C013ZTX0N6B) where you can ask questions, report problems, and get help from the team and from other users.
+If you have access to the IBM Slack workspaces, you can join the discussion on
+[our slack channel](https://ibm-casdesign.slack.com/archives/C013ZTX0N6B) where
+you can ask questions, report problems, and get help from the team and from
+other users.
 
 This project consists of a number of component library packages published on
 npm:
 
-| Package name                                                  | Description                                                                                                       |
-| ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| [`@carbon/ibm-cloud-cognitive`](./packages/cloud-cognitive)   | A curated set of components and patterns, built on top of Carbon and designed by the IBM Cloud and Cognitive team |
-| [`@carbon/ibm-cloud-cognitive-cdai`](./packages/cdai)         | Legacy and non-curated design implementations used in application integration                                     |
-| [`@carbon/ibm-cloud-cognitive-security`](./packages/security) | Legacy and non-curated design implementations used in security                                                    |
+| Package name                                          | Description                                                                                                       |
+| ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| [`@carbon/ibm-products`](./packages/cloud-cognitive)  | A curated set of components and patterns, built on top of Carbon and designed by the Carbon for IBM Products team |
+| [`@carbon/ibm-cloud-cognitive-cdai`](./packages/cdai) | Legacy and non-curated design implementations used in application integration                                     |
+| [`@carbon/ibm-security`](./packages/security)         | Legacy and non-curated design implementations used in security                                                    |
 
 Also the following additional utility packages are published on npm:
 

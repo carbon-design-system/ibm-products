@@ -7,15 +7,16 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { expectError, required } from '../../global/js/utils/test-helper';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg, carbon } from '../../settings';
 
 import { UserProfileImage } from '.';
 
-const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
+const blockClass = `${pkg.prefix}--user-profile-image`;
+const componentName = UserProfileImage.displayName;
 
-const blockClass = `${prefix}-user-profile-avatar`;
 const dataTestId = uuidv4();
 const kind = 'user';
 const size = 'xlg';
@@ -24,12 +25,10 @@ const theme = 'light';
 const renderComponent = ({ ...rest }) =>
   render(<UserProfileImage {...{ kind, size, theme, ...rest }} />);
 
-describe(name, () => {
+describe(componentName, () => {
   test('should return a circle with background color', () => {
     const { container } = renderComponent({ backgroundColor: 'light-cyan' });
-    const element = container.querySelector(
-      `.${pkg.prefix}-user-profile-avatar`
-    );
+    const element = container.querySelector(`.${blockClass}`);
 
     const hasBackgroundColor = element.className.includes('light-cyan');
     expect(hasBackgroundColor).toBeTruthy();
@@ -52,18 +51,14 @@ describe(name, () => {
 
   test('should return appropriately size circle based on size prop', () => {
     const { container } = renderComponent();
-    const element = container.querySelector(
-      `.${pkg.prefix}-user-profile-avatar`
-    );
+    const element = container.querySelector(`.${blockClass}`);
     const hasSizeClass = element.className.includes('xlg');
     expect(hasSizeClass).toBeTruthy();
   });
 
   test('should recognize theme setting', () => {
     const { container } = renderComponent();
-    const element = container.querySelector(
-      `.${pkg.prefix}-user-profile-avatar`
-    );
+    const element = container.querySelector(`.${blockClass}`);
     const hasThemeClass = element.className.includes('light');
     expect(hasThemeClass).toBeTruthy();
   });
@@ -82,9 +77,8 @@ describe(name, () => {
   it('adds the Devtools attribute to the containing node', () => {
     renderComponent({ 'data-testid': dataTestId });
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(UserProfileImage.displayName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      UserProfileImage.displayName
     );
   });
 
@@ -113,9 +107,8 @@ describe(name, () => {
     expect(tooltipElement).toBeTruthy();
   });
 
-  it('should throw a custom prop type validation error when an image is used without an imageDescription prop', () => {
-    jest.spyOn(console, 'error').mockImplementation(jest.fn());
-    renderComponent({ image: 'path_to_image.jpg' });
-    jest.spyOn(console, 'error').mockRestore();
-  });
+  it('should throw a custom prop type validation error when an image is used without an imageDescription prop', () =>
+    expectError(required('imageDescription', 'UserProfileImage'), () => {
+      renderComponent({ image: 'path_to_image.jpg' });
+    }));
 });

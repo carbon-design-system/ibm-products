@@ -12,12 +12,16 @@ import { pkg, carbon } from '../../settings';
 import { TagSet } from '.';
 import { TagSetModal } from './TagSetModal';
 
-import { mockHTMLElement } from '../../global/js/utils/test-helper';
+import {
+  expectMultipleError,
+  mockHTMLElement,
+  required,
+} from '../../global/js/utils/test-helper';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
+const { prefix } = pkg;
 
-const blockClass = `${prefix}--tag-set`;
+const blockClass = `${pkg.prefix}--tag-set`;
 const blockClassOverflow = `${prefix}--tag-set-overflow`;
 
 const tagLabel = (index) => `Tag ${index + 1}`;
@@ -158,30 +162,21 @@ describe(TagSet.displayName, () => {
     expect(modal).not.toHaveClass('is-visible');
   });
 
-  it('it requires strings for overflow and modal when more than ten tags supplied.', () => {
-    const visibleTags = 5;
-    window.innerWidth = tagWidth * (visibleTags + 1) + 1; // + 1 for overflow
+  it('it requires strings for overflow and modal when more than ten tags supplied.', () =>
+    expectMultipleError(
+      [
+        required('allTagsModalSearchLabel', 'TagSet'),
+        required('allTagsModalSearchPlaceholderText', 'TagSet'),
+        required('allTagsModalTitle', 'TagSet'),
+        required('showAllTagsLabel', 'TagSet'),
+      ],
+      () => {
+        const visibleTags = 5;
+        window.innerWidth = tagWidth * (visibleTags + 1) + 1; // + 1 for overflow
 
-    const errorsLogged = jest
-      .spyOn(console, 'error')
-      .mockImplementation(() => {});
-
-    render(<TagSet tags={tags} />);
-
-    expect(errorsLogged).toBeCalledTimes(4);
-    expect(errorsLogged.mock.calls[0][0]).toEqual(
-      'Warning: Failed prop type: The prop `allTagsModalSearchLabel` is marked as required in `TagSet`, but its value is `undefined`.\n    in TagSet'
-    );
-    expect(errorsLogged.mock.calls[1][0]).toEqual(
-      'Warning: Failed prop type: The prop `allTagsModalSearchPlaceholderText` is marked as required in `TagSet`, but its value is `undefined`.\n    in TagSet'
-    );
-    expect(errorsLogged.mock.calls[2][0]).toEqual(
-      'Warning: Failed prop type: The prop `allTagsModalTitle` is marked as required in `TagSet`, but its value is `undefined`.\n    in TagSet'
-    );
-    expect(errorsLogged.mock.calls[3][0]).toEqual(
-      'Warning: Failed prop type: The prop `showAllTagsLabel` is marked as required in `TagSet`, but its value is `undefined`.\n    in TagSet'
-    );
-  });
+        render(<TagSet tags={tags} />);
+      }
+    ));
 
   it('Obeys max visible', () => {
     window.innerWidth = tagWidth * 10 + 1;
@@ -227,9 +222,8 @@ describe(TagSet.displayName, () => {
   it('adds the Devtools attribute to the containing node', () => {
     render(<TagSet data-testid={dataTestId} />);
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(TagSet.displayName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      TagSet.displayName
     );
   });
 

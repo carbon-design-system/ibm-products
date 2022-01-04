@@ -1,0 +1,29 @@
+// imports carbon settings
+@import './carbon-settings';
+
+@import 'carbon-components/scss/components/tile/tile';
+
+$baseClass: 'gallery-card';
+
+.#{$baseClass} {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.#{$baseClass}__thumbnail {
+  flex: 1 1 80%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.#{$baseClass}__title {
+  @include carbon--type-style('productive-heading-03');
+
+  overflow: hidden;
+  flex: 1 1 20%;
+  margin: $spacing-04 auto 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

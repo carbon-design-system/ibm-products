@@ -15,15 +15,12 @@ import { useResizeDetector } from 'react-resize-detector';
 import { moderate02 } from '@carbon/motion';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-
-import {
-  allPropTypes,
-  deprecateProp,
-} from '../../global/js/utils/props-helper';
+import { allPropTypes } from '../../global/js/utils/props-helper';
 
 import wrapFocus from '../../global/js/utils/wrapFocus';
 import { pkg } from '../../settings';
 import { SIDE_PANEL_SIZES } from './constants';
+import { usePreviousValue } from '../../global/js/hooks';
 
 // Carbon and package components we use.
 import { Button } from 'carbon-components-react';
@@ -56,7 +53,6 @@ export let SidePanel = React.forwardRef(
       onRequestClose,
       onUnmount,
       open,
-      pageContentSelector,
       placement,
       preventCloseOnClickOutside,
       selectorPageContent,
@@ -79,6 +75,7 @@ export let SidePanel = React.forwardRef(
     const endTrapRef = useRef();
     const sidePanelInnerRef = useRef();
     const sidePanelCloseRef = useRef();
+    const previousState = usePreviousValue({ size });
 
     // scroll panel to top going between steps
     useEffect(() => {
@@ -87,9 +84,23 @@ export let SidePanel = React.forwardRef(
         const scrollableSection = panelRef.current.querySelector(
           `.${blockClass}__inner-content`
         );
+        const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
+        const initialTitleHeight = document.querySelector(
+          `.${blockClass}__title-container`
+        )?.offsetHeight;
         scrollableSection.scrollTop = 0;
+        // The size of the panel has changed while it is still opened
+        // so we need to scroll it to the top and reset the title container
+        // height css custom property
+        if (previousState?.size !== size) {
+          scrollableSection.scrollTop = 0;
+          sidePanelOuter.style.setProperty(
+            `--${blockClass}--title-container-height`,
+            `${Number(initialTitleHeight)}px`
+          );
+        }
       }
-    }, [currentStep, ref]);
+    }, [currentStep, ref, size, previousState?.size]);
 
     // set initial focus when side panel opens
     useEffect(() => {
@@ -335,7 +346,7 @@ export let SidePanel = React.forwardRef(
       if (open && shouldRender && !animateTitle) {
         const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
         const sidePanelTitleElement = document.querySelector(
-          `.${blockClass}__title-container > .${blockClass}__title-text`
+          `.${blockClass}__title-container .${blockClass}__title-text`
         );
         const sidePanelSubtitleElement = document.querySelector(
           `.${blockClass}__subtitle-text`
@@ -368,6 +379,7 @@ export let SidePanel = React.forwardRef(
       shouldRender,
       panelHeight,
       title,
+      size,
     ]);
 
     // click outside functionality if `includeOverlay` prop is set
@@ -425,23 +437,19 @@ export let SidePanel = React.forwardRef(
     // used to reset margins of the slide in panel when closed/closing
     useEffect(() => {
       if (!open && slideIn) {
-        const pageContentElement = document.querySelector(
-          selectorPageContent || pageContentSelector
-        );
+        const pageContentElement = document.querySelector(selectorPageContent);
         if (placement && placement === 'right' && pageContentElement) {
           pageContentElement.style.marginRight = 0;
         } else if (pageContentElement) {
           pageContentElement.style.marginLeft = 0;
         }
       }
-    }, [open, placement, selectorPageContent, pageContentSelector, slideIn]);
+    }, [open, placement, selectorPageContent, slideIn]);
 
     // used to set margins of content for slide in panel version
     useEffect(() => {
       if (shouldRender && slideIn) {
-        const pageContentElement = document.querySelector(
-          selectorPageContent || pageContentSelector
-        );
+        const pageContentElement = document.querySelector(selectorPageContent);
         if (placement && placement === 'right' && pageContentElement) {
           pageContentElement.style.marginRight = 0;
           pageContentElement.style.transition = `margin-right ${moderate02}`;
@@ -452,14 +460,7 @@ export let SidePanel = React.forwardRef(
           pageContentElement.style.marginLeft = SIDE_PANEL_SIZES[size];
         }
       }
-    }, [
-      slideIn,
-      selectorPageContent,
-      pageContentSelector,
-      placement,
-      shouldRender,
-      size,
-    ]);
+    }, [slideIn, selectorPageContent, placement, shouldRender, size]);
 
     // adds focus trap functionality
     /* istanbul ignore next */
@@ -543,7 +544,7 @@ export let SidePanel = React.forwardRef(
           onClick={onRequestClose}
           ref={sidePanelCloseRef}
         />
-        {subtitle && subtitle.length && (
+        {subtitle && (
           <p
             className={cx(`${blockClass}__subtitle-text`, {
               [`${blockClass}__subtitle-text-no-animation`]: !animateTitle,
@@ -564,37 +565,43 @@ export let SidePanel = React.forwardRef(
               [`${blockClass}__action-toolbar-no-animation`]: !animateTitle,
             })}
           >
-            {actionToolbarButtons.map((action) => (
-              <Button
-                key={action.label}
-                kind={action.kind || 'ghost'}
-                size="small"
-                renderIcon={action.icon}
-                iconDescription={action.label}
-                tooltipPosition="bottom"
-                tooltipAlignment="center"
-                hasIconOnly={!action.leading}
-                disabled={action.disabled}
-                className={cx([
-                  `${blockClass}__action-toolbar-button`,
-                  action.className,
-                  {
-                    [`${blockClass}__action-toolbar-icon-only-button`]:
-                      action.icon && !action.leading,
-                    [`${blockClass}__action-toolbar-leading-button`]:
-                      action.leading,
-                  },
-                ])}
-                onClick={(event) =>
-                  action.onClick
-                    ? action.onClick(event)
-                    : action.onActionToolbarButtonClick &&
-                      action.onActionToolbarButtonClick(event)
-                }
-              >
-                {action.leading && action.label}
-              </Button>
-            ))}
+            {actionToolbarButtons.map(
+              ({
+                label,
+                kind,
+                icon,
+                leading,
+                disabled,
+                className,
+                onClick,
+                ...rest
+              }) => (
+                <Button
+                  {...rest}
+                  key={label}
+                  kind={kind || 'ghost'}
+                  size="small"
+                  renderIcon={icon}
+                  iconDescription={label}
+                  tooltipPosition="bottom"
+                  tooltipAlignment="center"
+                  hasIconOnly={!leading}
+                  disabled={disabled}
+                  className={cx([
+                    `${blockClass}__action-toolbar-button`,
+                    className,
+                    {
+                      [`${blockClass}__action-toolbar-icon-only-button`]:
+                        icon && !leading,
+                      [`${blockClass}__action-toolbar-leading-button`]: leading,
+                    },
+                  ])}
+                  onClick={onClick}
+                >
+                  {leading && label}
+                </Button>
+              )
+            )}
           </div>
         )}
       </>
@@ -713,29 +720,6 @@ export let SidePanel = React.forwardRef(
 // Return a placeholder if not released and not enabled by feature flag
 SidePanel = pkg.checkComponentEnabled(SidePanel, componentName);
 
-SidePanel.validatePageContentSelector =
-  () =>
-  ({ slideIn, selectorPageContent }) => {
-    if (slideIn && !selectorPageContent) {
-      throw new Error(
-        `${componentName}: selectorPageContent prop missing, this is required when using a slideIn panel. If missing, the component will display as a slide over panel.`
-      );
-    }
-  };
-
-export const deprecatedProps = {
-  /**
-   * **Deprecated**
-   *
-   * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
-   * This prop is required when using the `slideIn` variant of the side panel.
-   */
-  pageContentSelector: deprecateProp(
-    allPropTypes([SidePanel.validatePageContentSelector(), PropTypes.string]),
-    'This prop has been renamed to `selectorPageContent`.'
-  ),
-};
-
 SidePanel.propTypes = {
   /**
    * Sets the action toolbar buttons
@@ -745,10 +729,6 @@ SidePanel.propTypes = {
       label: PropTypes.string,
       leading: PropTypes.bool,
       icon: PropTypes.object,
-      onActionToolbarButtonClick: deprecateProp(
-        PropTypes.func,
-        'This prop will be removed in the future. Please use `onClick` instead'
-      ),
       onClick: PropTypes.func,
       kind: PropTypes.oneOf(['ghost', 'tertiary', 'secondary', 'primary']),
     })
@@ -865,9 +845,7 @@ SidePanel.propTypes = {
    * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
    * This prop is required when using the `slideIn` variant of the side panel.
    */
-  selectorPageContent: PropTypes.string.isRequired.if(
-    ({ slideIn }) => slideIn === true
-  ),
+  selectorPageContent: PropTypes.string.isRequired.if(({ slideIn }) => slideIn),
 
   /**
    * Specify a CSS selector that matches the DOM element that should
@@ -888,13 +866,12 @@ SidePanel.propTypes = {
   /**
    * Sets the subtitle text
    */
-  subtitle: PropTypes.string,
+  subtitle: PropTypes.node,
 
   /**
    * Sets the title text
    */
-  title: PropTypes.string,
-  ...deprecatedProps,
+  title: PropTypes.string.isRequired.if(({ labelText }) => labelText),
 };
 
 SidePanel.defaultProps = {

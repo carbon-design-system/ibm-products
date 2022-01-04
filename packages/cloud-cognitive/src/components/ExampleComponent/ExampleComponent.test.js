@@ -50,7 +50,7 @@ describe(componentName, () => {
     // We'd prefer to test the actual border color style, but jsdom does not
     // render css custom properties (https://github.com/jsdom/jsdom/issues/1895)
     // so testing the property is the best we can do.
-    expect(style.getPropertyValue(`--${pkg.prefix}-border-color`)).toEqual(
+    expect(style.getPropertyValue(`--${blockClass}--border-color`)).toEqual(
       borderColor
     );
   });

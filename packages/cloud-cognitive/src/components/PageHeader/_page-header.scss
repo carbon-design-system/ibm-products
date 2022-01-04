@@ -19,7 +19,7 @@
 @import 'carbon-components/scss/components/skeleton/skeleton-text';
 @import 'carbon-components/scss/components/tag/tag';
 
-// PageHeader uses the following Cloud & Cognitive components:
+// PageHeader uses the following IBM Products components:
 // ActionBar, BreadcrumbWithOverflow, TagSet, ButtonSetWithOverflow
 @import '../ActionBar/action-bar';
 @import '../BreadcrumbWithOverflow/breadcrumb-with-overflow';
@@ -30,17 +30,66 @@ $block-class: #{$pkg-prefix}--page-header;
 $breadcrumb-block-class: #{$pkg-prefix}--breadcrumb-with-overflow;
 
 $raised-z-index: 99;
+$z-index-header-minus: z('header') - 1;
 
-@mixin appearingBackground() {
+$left-section-std-width: 60%;
+$right-section-std-width: 100% - $left-section-std-width;
+$left-section-alt-width: 75%;
+$right-section-alt-width: 100% - $left-section-alt-width;
+
+@keyframes background-appear {
+  from {
+    background-color: var(--from-color);
+  }
+  to {
+    background-color: var(--to-color);
+  }
+}
+@keyframes background-and-shadow-appear {
+  from {
+    background-color: var(--from-color);
+    box-shadow: 0 1px 0 var(--from-color);
+  }
+  to {
+    background-color: var(--to-color);
+    box-shadow: 0 1px 0 var(--to-color-shadow);
+  }
+}
+
+@mixin appearingBackground(
+  $with-shadow: false,
+  $from-color: $ui-background,
+  $to-color: $ui-01,
+  $to-color-shadow: $ui-03
+) {
+  // stylelint-disable-next-line carbon/theme-token-use
+  --from-color: #{$from-color};
+  // stylelint-disable-next-line carbon/theme-token-use
+  --to-color: #{$to-color};
+  // stylelint-disable-next-line carbon/theme-token-use
+  --to-color-shadow: #{$to-color-shadow};
+
   position: absolute;
   top: 0;
   left: 0;
   display: block;
   width: 100%;
   height: 100%;
-  background-color: $ui-01;
+
+  // This transitions the background-color between from-color and to-color
+  $duration: 1000ms;
+
+  $animation: background-appear;
+  @if ($with-shadow) {
+    $animation: background-and-shadow-appear;
+  }
+
+  animation: $animation $duration linear paused forwards;
+  // Added separately for clarity
+  animation-delay: calc(
+    -1 * $duration * var(--#{$block-class}--background-opacity)
+  );
   content: '';
-  opacity: var(--#{$block-class}--background-opacity);
 }
 
 @mixin page-header {
@@ -49,7 +98,8 @@ $raised-z-index: 99;
       /* Bleed class for the background */
       position: sticky;
       /* z-index used to raise above any position relative content as per Carbon header */
-      z-index: z('header');
+      /* dropped  1 below Carbon header so as not to overlay the side panel */
+      z-index: $z-index-header-minus;
       top: var(--#{$block-class}--header-top);
       display: inline-block; /* cause top/bottom margin to reserve space */
       width: 100%;
@@ -70,11 +120,10 @@ $raised-z-index: 99;
       --#{$block-class}--navigation-buffer-top: $spacing-04;
     }
 
-    &.#{$block-class}--show-background::before {
-      @include appearingBackground();
+    &::before {
+      @include appearingBackground(true);
 
       z-index: -1;
-      box-shadow: 0 1px 0 $ui-03;
     }
 
     .#{$block-class}--width--xl {
@@ -102,6 +151,17 @@ $raised-z-index: 99;
       display: flex;
       min-width: 100%;
       flex-wrap: nowrap;
+    }
+
+    .#{$block-class}__has-page-actions-without-action-bar {
+      // NOTE: the extra spacing accounts for carbon margins
+      min-width: calc(0.6 * (100% + 2 * #{$spacing-05}));
+      max-width: calc(0.6 * (100% + 2 * #{$spacing-05}));
+    }
+
+    .#{$block-class}__has-page-actions-without-action-bar
+      .#{$block-class}__has-page-actions-without-action-bar {
+      min-width: 100%;
     }
 
     .#{$block-class}__breadcrumb-row--has-action-bar
@@ -147,12 +207,12 @@ $raised-z-index: 99;
     .#{$block-class}__breadcrumb-row--has-breadcrumbs
       .#{$block-class}__action-bar-column {
       // back button displayed only
-      max-width: 75%;
-      flex: 0 1 75%;
+      max-width: $left-section-alt-width;
+      flex: 0 1 $left-section-alt-width;
 
       @include carbon--breakpoint(md) {
-        max-width: 40%;
-        flex: 1 0 40%;
+        max-width: $right-section-std-width;
+        flex: 1 0 $right-section-std-width;
       }
     }
 
@@ -172,6 +232,7 @@ $raised-z-index: 99;
     }
 
     .#{$block-class}__breadcrumb-row .#{$block-class}__page-actions {
+      position: relative;
       display: inline-block;
       width: 100%;
       max-width: var(--#{$block-class}--button-set-in-breadcrumb-width-px);
@@ -198,15 +259,23 @@ $raised-z-index: 99;
       }
     }
 
-    .#{$block-class}__breadcrumb-row .#{$block-class}__breadcrumb-column {
+    .#{$block-class}__breadcrumb-row--has-action-bar.#{$block-class}__breadcrumb-row
+      .#{$block-class}__breadcrumb-column {
       // back button displayed only
-      max-width: 25%;
-      flex: 0 1 25%;
+      max-width: $left-section-alt-width;
+      flex: 0 1 $left-section-alt-width;
 
       @include carbon--breakpoint(md) {
-        max-width: 60%;
-        flex: 0 1 60%;
+        max-width: $left-section-std-width;
+        flex: 0 1 $left-section-std-width;
       }
+    }
+
+    .#{$block-class}__has-page-actions-without-action-bar.#{$block-class}__breadcrumb-row
+      .#{$block-class}__breadcrumb-column {
+      // the width of the breadcrumb column is adjusted elsewhere to compensate
+      max-width: 100%;
+      flex: 0 1 100%;
     }
 
     .#{$block-class}__breadcrumb-column--background,
@@ -214,10 +283,8 @@ $raised-z-index: 99;
       position: relative;
     }
 
-    &.#{$block-class}--show-background
-      .#{$block-class}__breadcrumb-column--background::before,
-    &.#{$block-class}--show-background
-      .#{$block-class}__action-bar-column--background::before {
+    .#{$block-class}__breadcrumb-column--background::before,
+    .#{$block-class}__action-bar-column--background::before {
       @include appearingBackground();
     }
 
@@ -336,7 +403,8 @@ $raised-z-index: 99;
 
     .#{$block-class}__breadcrumb-row--has-breadcrumbs
       + .#{$block-class}__title-row--sticky {
-      top: 0;
+      // top: 0;
+      top: var(--#{$block-class}--breadcrumb-top); //2
     }
 
     .#{$block-class}__title-column {
@@ -345,8 +413,8 @@ $raised-z-index: 99;
       flex: 0 0 100%;
 
       @include carbon--breakpoint-up('md') {
-        max-width: 60%;
-        flex: 1 0 60%;
+        max-width: $left-section-std-width;
+        flex: 1 0 $left-section-std-width;
       }
     }
 
@@ -379,12 +447,11 @@ $raised-z-index: 99;
     .#{$block-class}__page-actions {
       flex: 0 0 100%;
       margin-top: $spacing-05;
-      margin-bottom: calc(-1 * #{$spacing-02});
       white-space: nowrap;
 
       @include carbon--breakpoint-up('md') {
-        max-width: 40%;
-        flex: 0 1 40%;
+        max-width: $right-section-std-width;
+        flex: 0 1 $right-section-std-width;
         margin-top: 0;
       }
     }
@@ -408,11 +475,25 @@ $raised-z-index: 99;
     }
 
     .#{$block-class}__title-row .#{$block-class}__page-actions {
+      position: relative;
       opacity: 1;
       transition: all $duration--fast-02
         carbon--motion('entrance', 'productive');
       transition-property: opacity, visibility;
       visibility: visible;
+    }
+
+    .#{$block-class}__title-row .#{$block-class}__page-actions::before {
+      @include appearingBackground();
+    }
+
+    .#{$block-class}__page-actions-content {
+      position: relative; // ensure appears over ::before
+      display: flex;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      justify-content: flex-end;
     }
 
     .#{$block-class}__title-row .#{$block-class}__page-actions--in-breadcrumb {
@@ -430,7 +511,7 @@ $raised-z-index: 99;
       -webkit-line-clamp: 2;
 
       @include carbon--breakpoint-up('md') {
-        max-width: 60%;
+        max-width: $left-section-std-width;
       }
 
       + .#{$block-class}__last-row-buffer--active {
@@ -439,7 +520,7 @@ $raised-z-index: 99;
     }
 
     .#{$block-class}__subtitle {
-      @include carbon--type-style('body-long-02');
+      @include carbon--type-style('body-long-01');
     }
 
     .#{$block-class}__available-row {
@@ -481,20 +562,26 @@ $raised-z-index: 99;
 
     .#{$block-class}__navigation-row--has-tags
       .#{$block-class}__navigation-tabs {
-      max-width: 75%;
-      flex: 0 1 75%;
+      max-width: $left-section-alt-width;
+      flex: 0 1 $left-section-alt-width;
     }
 
     .#{$block-class}__navigation-tags {
       display: flex;
-      max-width: 25%;
-      flex: 1 0 25%;
+      max-width: $right-section-alt-width;
+      flex: 1 0 $right-section-alt-width;
       align-items: center;
       justify-content: flex-end;
       padding-top: $spacing-02;
+      // allow space for expand/collapse if we have a background
+      padding-right: $spacing-07;
       padding-bottom: $spacing-02;
       text-align: right;
       white-space: nowrap;
+
+      @include carbon--breakpoint(md) {
+        padding-right: $spacing-05;
+      }
     }
 
     .#{$block-class}__navigation-tags--tags-only {
@@ -526,15 +613,6 @@ $raised-z-index: 99;
       // transform: rotate(90deg);
       transform: scaleY(-1);
     }
-
-    &.#{$block-class}--show-background .#{$block-class}__navigation-tags {
-      // allow space for expand/collapse if we have a background
-      padding-right: $spacing-07;
-
-      @include carbon--breakpoint(md) {
-        padding-right: $spacing-05;
-      }
-    }
   }
 
   :root {
@@ -546,6 +624,16 @@ $raised-z-index: 99;
     position: var(--#{$block-class}--tagset-tooltip-position) !important;
     // stylelint-disable-next-line
     top: var(--#{$block-class}--tagset-tooltip-offset) !important;
+  }
+
+  .#{$block-class}__navigation-tags-overflow.#{$carbon-prefix}--tooltip {
+    z-index: $z-index-header-minus;
+  }
+
+  .#{$block-class}__action-bar-menu-options.#{$carbon-prefix}--overflow-menu-options,
+  .#{$carbon-prefix}--breadcrumb-menu-options.#{$carbon-prefix}--overflow-menu-options,
+  .#{$block-class}__button-set-menu-options.#{$carbon-prefix}--overflow-menu-options {
+    z-index: $z-index-header-minus;
   }
 }
 

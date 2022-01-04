@@ -32,7 +32,7 @@ describe('IdeRemove unit tests', () => {
   });
 
   describe('view tests', () => {
-    it('IdeRemove tollerates no props being provided, and renders with defaults', () => {
+    it('IdeRemove tolerates no props being provided, and renders with defaults', () => {
       mountTestComponent();
       expect(component.getElements()).toMatchSnapshot();
     });

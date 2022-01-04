@@ -6,10 +6,9 @@
 //
 
 @import 'carbon-components/scss/components/button/button';
-
 @import '../../global/styles/project-settings';
 
-@include exports($name: cloud-cognitive--toolbar) {
+@include exports('ibm-products--toolbar') {
   $block-class: #{$pkg-prefix}--toolbar;
 
   $border: carbon--rem(
@@ -17,7 +16,7 @@
     )
     solid $ui-03;
 
-  $dimensions: carbon--rem(
+  $toolbar-dimensions: carbon--rem(
     $px: 40px,
   );
 
@@ -27,8 +26,8 @@
     }
 
     display: flex;
-    min-width: $dimensions;
-    min-height: $dimensions;
+    min-width: $toolbar-dimensions;
+    min-height: $toolbar-dimensions;
     background-color: $ui-01;
   }
 
@@ -38,7 +37,7 @@
   }
 
   .#{$block-class}--vertical {
-    max-width: $dimensions;
+    max-width: $toolbar-dimensions;
   }
 
   .#{$block-class}__group {
@@ -55,5 +54,25 @@
   .#{$block-class}--vertical > .#{$block-class}__group:last-of-type,
   .#{$block-class} .#{$prefix}--dropdown {
     border-bottom-width: 0;
+  }
+
+  .#{$block-class}__button--caret {
+    position: relative;
+  }
+
+  .#{$block-class}__button__caret {
+    $caret-dimensions: carbon--rem(
+      $px: 6px,
+    );
+
+    $position: $carbon--spacing-01;
+
+    position: absolute;
+    right: $position;
+    bottom: $position;
+    width: $caret-dimensions;
+    height: $caret-dimensions;
+    background: linear-gradient(to right bottom, transparent 50%, $icon-01 50%);
+    content: '';
   }
 }

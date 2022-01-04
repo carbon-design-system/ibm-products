@@ -16,9 +16,7 @@ import { pkg } from '../../settings';
 import { NotificationsPanel } from '.';
 import data from './NotificationsPanel_data';
 
-const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
-
-const blockClass = `${prefix}--notifications-panel`;
+const blockClass = `${pkg.prefix}--notifications-panel`;
 const dataTestId = uuidv4();
 const onNotificationClickFn = jest.fn();
 const onDismissSingleNotificationFn = jest.fn();
@@ -213,9 +211,8 @@ describe('Notifications', () => {
       'data-testid': dataTestId,
     });
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(NotificationsPanel.displayName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      NotificationsPanel.displayName
     );
   });
 

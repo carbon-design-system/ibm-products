@@ -1,0 +1,33 @@
+////
+/// Important content area skeleton component.
+/// @group ica
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/layout/scss/mini-unit';
+@import '@carbon/layout/scss/spacing';
+@import 'carbon-components/scss/globals/scss/helper-mixins';
+
+@import '../../SkeletonText/index';
+
+@import '../../Component/mixins';
+
+@include security--component($name: ica-skeleton) {
+  width: carbon--mini-units($count: 8);
+
+  & &__label,
+  & &__value {
+    @include skeleton;
+  }
+
+  & &__label {
+    height: carbon--mini-units($count: 1.5);
+    margin-top: 0;
+    margin-bottom: $carbon--spacing-03;
+  }
+
+  & &__value {
+    height: $carbon--spacing-10;
+    margin: 0;
+  }
+}

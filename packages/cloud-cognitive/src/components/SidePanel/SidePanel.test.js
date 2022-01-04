@@ -8,6 +8,7 @@
 
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { expectMultipleError } from '../../global/js/utils/test-helper';
 
 import React from 'react';
 import { TextInput } from 'carbon-components-react';
@@ -16,7 +17,7 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { SidePanel } from '.';
 import { Add16 } from '@carbon/icons-react';
 
-const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
+const { prefix } = pkg;
 
 const blockClass = `${prefix}--side-panel`;
 const actionSetBlockClass = `${prefix}--action-set`;
@@ -26,7 +27,7 @@ const dataTestId = uuidv4();
 
 const title = uuidv4();
 const subtitle = uuidv4();
-const pageContentSelectorValue = '#side-panel-test-page-content';
+const selectorPageContentValue = '#side-panel-test-page-content';
 
 const onRequestCloseFn = jest.fn();
 const onUnmountFn = jest.fn();
@@ -50,8 +51,8 @@ const SlideIn = ({
   open,
   animateTitle = true,
   actionToolbarButtons,
-  selectorPageContent = pageContentSelectorValue,
-  usePageContentSelector = false,
+  selectorPageContent = selectorPageContentValue,
+  useSelectorPageContent = false,
   ...rest
 }) => {
   return (
@@ -65,10 +66,7 @@ const SlideIn = ({
         onRequestClose={onRequestCloseFn}
         slideIn
         selectorPageContent={
-          usePageContentSelector ? null : selectorPageContent
-        }
-        pageContentSelector={
-          usePageContentSelector ? selectorPageContent : null
+          useSelectorPageContent ? null : selectorPageContent
         }
         placement={placement}
         onUnmount={onUnmountFn}
@@ -76,7 +74,7 @@ const SlideIn = ({
       >
         Content
       </SidePanel>
-      <div id={pageContentSelectorValue.slice(1)} />
+      <div id={selectorPageContentValue.slice(1)} />
     </div>
   );
 };
@@ -144,7 +142,7 @@ describe('SidePanel', () => {
 
   it('should render a left slide in panel version', async () => {
     const { container, rerender } = render(<SlideIn placement="left" open />);
-    const pageContent = container.querySelector(pageContentSelectorValue);
+    const pageContent = container.querySelector(selectorPageContentValue);
     const style = getComputedStyle(pageContent);
     expect(style.marginLeft).toBe('30rem');
     const closeIconButton = container.querySelector(
@@ -158,7 +156,7 @@ describe('SidePanel', () => {
 
   it('should render a right slide in panel version with onUnmount prop', async () => {
     const { container, rerender } = render(<SlideIn placement="right" open />);
-    const pageContent = container.querySelector(pageContentSelectorValue);
+    const pageContent = container.querySelector(selectorPageContentValue);
     const style = getComputedStyle(pageContent);
     expect(style.marginRight).toBe('30rem');
     const closeIconButton = container.querySelector(
@@ -183,7 +181,7 @@ describe('SidePanel', () => {
         actionToolbarButtons={[]}
       />
     );
-    const pageContent = container.querySelector(pageContentSelectorValue);
+    const pageContent = container.querySelector(selectorPageContentValue);
     const style = getComputedStyle(pageContent);
     expect(style.marginRight).toBe('30rem');
     const closeIconButton = container.querySelector(
@@ -293,22 +291,25 @@ describe('SidePanel', () => {
     ).toBeTruthy();
   });
 
-  it('rejects too many buttons using the custom validator', () => {
-    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
-    renderSidePanel({
-      actions: [
-        { kind: 'primary' },
-        { kind: 'primary' },
-        { kind: 'ghost' },
-        { kind: 'ghost' },
-        { kind: 'danger' },
+  it('rejects too many buttons using the custom validator', () =>
+    expectMultipleError(
+      [
+        'Invalid prop `actions` supplied to `SidePanel`: you cannot have more than three actions',
+        'Invalid prop `actions` supplied to `ActionSet`: you cannot have more than three actions',
+        'Invalid prop `kind` of value `danger` supplied to `ActionSetButton`',
       ],
-    });
-    expect(error).toBeCalledWith(
-      expect.stringContaining('`actions` supplied to `SidePanel`: you cannot')
-    );
-    error.mockRestore();
-  });
+      () => {
+        renderSidePanel({
+          actions: [
+            { kind: 'primary' },
+            { kind: 'primary' },
+            { kind: 'ghost' },
+            { kind: 'ghost' },
+            { kind: 'danger' },
+          ],
+        });
+      }
+    ));
 
   it('should render navigation button', () => {
     const { container } = renderSidePanel({
@@ -353,7 +354,6 @@ describe('SidePanel', () => {
 
   it('should click an action toolbar button', () => {
     const { click } = userEvent;
-    const warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
     const toolbarButtonFn1 = jest.fn();
     const toolbarButtonFn2 = jest.fn();
     const { container } = renderSidePanel({
@@ -366,17 +366,13 @@ describe('SidePanel', () => {
         {
           label: 'Copy 2',
           icon: Add16,
-          onActionToolbarButtonClick: toolbarButtonFn2,
+          onClick: toolbarButtonFn2,
         },
       ],
     });
     const toolbarButtons = container.querySelectorAll(
       `.${blockClass}__action-toolbar-button`
     );
-    expect(warn).toBeCalledWith(
-      `The prop \`actionToolbarButtons[1].onActionToolbarButtonClick\` of \`${SidePanel.displayName}\` has been deprecated and will soon be removed. This prop will be removed in the future. Please use \`onClick\` instead`
-    );
-    warn.mockRestore();
     click(toolbarButtons[0]);
     expect(toolbarButtonFn1).toHaveBeenCalledTimes(1);
     click(toolbarButtons[1]);
@@ -397,9 +393,8 @@ describe('SidePanel', () => {
   it('adds the Devtools attribute to the containing node', () => {
     renderSidePanel({ 'data-testid': dataTestId });
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(SidePanel.displayName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      SidePanel.displayName
     );
   });
 
@@ -471,33 +466,8 @@ describe('SidePanel', () => {
         Content
       </SlideIn>
     );
-    const pageContent = container.querySelector(pageContentSelectorValue);
+    const pageContent = container.querySelector(selectorPageContentValue);
     const style = getComputedStyle(pageContent);
     expect(style.marginLeft).toBe('0px');
-  });
-
-  it('should throw a custom prop type error when pageContentSelector is missing and labelText is provided with a title', () => {
-    const errorSpy = jest.spyOn(console, 'error').mockImplementation();
-    const warningSpy = jest.spyOn(console, 'warn').mockImplementation();
-    const labelText = uuidv4();
-    try {
-      render(
-        <SlideIn
-          title={null}
-          labelText={labelText}
-          placement="left"
-          open
-          usePageContentSelector
-        >
-          Content
-        </SlideIn>
-      );
-    } catch (e) {
-      expect(errorSpy).toBeCalled();
-      expect(warningSpy).toBeCalled();
-    } finally {
-      errorSpy.mockRestore();
-      warningSpy.mockRestore();
-    }
   });
 });

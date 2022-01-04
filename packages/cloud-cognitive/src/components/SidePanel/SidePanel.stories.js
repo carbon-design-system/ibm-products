@@ -28,14 +28,13 @@ import {
   HeaderContainer,
   HeaderName,
 } from 'carbon-components-react/lib/components/UIShell';
-import { Copy20, Delete20, Settings20 } from '@carbon/icons-react';
+import { Copy20, TrashCan20, Settings20 } from '@carbon/icons-react';
 import styles from './_storybook-styles.scss';
 import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
-import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
-import { SidePanel, deprecatedProps } from './SidePanel';
+import { SidePanel } from './SidePanel';
 import mdx from './SidePanel.mdx';
 
 export default {
@@ -48,7 +47,6 @@ export default {
     },
   },
   argTypes: {
-    ...getDeprecatedArgTypes(deprecatedProps),
     actions: {
       control: {
         type: 'select',
@@ -56,13 +54,14 @@ export default {
           0: 'One button',
           1: 'One button (ghost)',
           2: 'Two buttons',
-          3: 'Three buttons with ghost',
-          4: 'Three buttons',
-          5: 'None',
+          3: 'Two buttons with ghost',
+          4: 'Three buttons with ghost',
+          5: 'Three buttons',
+          6: 'None',
         },
         default: 0,
       },
-      options: [0, 1, 2, 3, 4],
+      options: [0, 1, 2, 3, 4, 5, 6],
     },
     slideIn: {
       table: {
@@ -77,8 +76,12 @@ const prefix = 'side-panel-stories__';
 const defaultStoryProps = {
   title:
     'Incident management for your application, testing a very long title to see how this behaves with a longer title',
-  subtitle:
-    'This is some text that would talk about how you could investigate incident management within this side panel.',
+  subtitle: (
+    <>
+      This is some text that would talk about how you could{' '}
+      <strong>investigate</strong> incident management within this side panel.
+    </>
+  ),
 };
 
 const headerData = [
@@ -152,6 +155,19 @@ const actions_3 = [
 
 const actions_4 = [
   {
+    label: 'Ghost button',
+    onClick: action('Clicked action button'),
+    kind: 'ghost',
+  },
+  {
+    label: 'Primary button',
+    onClick: action('Clicked action button'),
+    kind: 'primary',
+  },
+];
+
+const actions_5 = [
+  {
     label: 'Primary button',
     onClick: action('Clicked action button'),
     kind: 'primary',
@@ -168,7 +184,7 @@ const actions_4 = [
   },
 ];
 
-const actions_5 = [
+const actions_6 = [
   {
     label: 'Primary button',
     onClick: action('Clicked action button'),
@@ -186,7 +202,15 @@ const actions_5 = [
   },
 ];
 
-const actionSets = [actions_1, actions_2, actions_3, actions_4, actions_5, []];
+const actionSets = [
+  actions_1,
+  actions_2,
+  actions_3,
+  actions_4,
+  actions_5,
+  actions_6,
+  [],
+];
 
 // eslint-disable-next-line react/prop-types
 const ChildrenContent = () => {
@@ -369,7 +393,7 @@ const SlideInTemplate = ({ actions, ...args }) => {
   return (
     <>
       {renderUIShellHeader()}
-      <Grid id="cloud-and-cognitive-page-content">
+      <Grid id="ibm-products-page-content">
         <Row>
           <Column>
             <Button onClick={() => setOpen(!open)}>
@@ -402,7 +426,7 @@ export const SlideIn = prepareStory(SlideInTemplate, {
   args: {
     placement: 'right',
     slideIn: true,
-    selectorPageContent: '#cloud-and-cognitive-page-content',
+    selectorPageContent: '#ibm-products-page-content',
     actions: 0,
     ...defaultStoryProps,
     labelText: 'Incident management',
@@ -426,7 +450,7 @@ export const WithActionToolbar = prepareStory(SlideOverTemplate, {
       },
       {
         label: 'Delete',
-        icon: Delete20,
+        icon: TrashCan20,
         onClick: action('Toolbar button clicked: Delete'),
       },
     ],
@@ -482,7 +506,7 @@ export const WithStaticTitleAndActionToolbar = prepareStory(SlideOverTemplate, {
       },
       {
         label: 'Delete',
-        icon: Delete20,
+        icon: TrashCan20,
         onClick: action('Action toolbar button clicked: Delete'),
       },
     ],

@@ -81,7 +81,7 @@ export let ExampleComponent = React.forwardRef(
           // the prop is not supplied this contributes nothing to the object.
           ...style,
           /* stylelint-disable-next-line carbon/theme-token-use */
-          [`--${pkg.prefix}-border-color`]: borderColor,
+          [`--${blockClass}--border-color`]: borderColor,
         }}
       >
         <Button

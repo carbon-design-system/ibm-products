@@ -1,5 +1,8 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import { getStoryId } from '../../global/js/utils/story-helper';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
 import { CreateModal } from '.';
 
 # CreateModal
@@ -54,7 +57,7 @@ to the CreateModal can easily be customized as follows:
 In SCSS:
 
 ```SCSS
-  .exp-create-modal {
+  .#{$pkg-prefix}--create-modal {
     @include carbon--theme(
       $theme: $carbon--theme--g90
     );
@@ -66,7 +69,7 @@ class which is then applied to the CreateModal using the `className` prop.
 
 ## Code sample
 
-[<img alt="Edit on CodeSandbox" src="https://codesandbox.io/static/img/play-codesandbox.svg" />](https://codesandbox.io/s/createmodal-example-8lwif)
+<CodesandboxLink exampleDirectory="CreateModal" />
 
 ## Component API
 

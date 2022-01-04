@@ -9,7 +9,6 @@ export { AboutModal } from './AboutModal';
 export { APIKeyModal } from './APIKeyModal';
 export { Cascade } from './Cascade';
 export { ComboButton, ComboButtonItem } from './ComboButton';
-export { ContextHeader } from './ContextHeader';
 export { CreateFullPage, CreateFullPageStep } from './CreateFullPage';
 export { CreateModal } from './CreateModal';
 export { CreateSidePanel } from './CreateSidePanel';
@@ -28,7 +27,6 @@ export {
   NotificationsEmptyState,
   UnauthorizedEmptyState,
 } from './EmptyStates';
-export { ExampleComponent } from './ExampleComponent';
 export { ExportModal } from './ExportModal';
 export { ExpressiveCard } from './ExpressiveCard';
 export { HTTPError403, HTTPError404, HTTPErrorOther } from './HTTPErrors';
@@ -48,3 +46,4 @@ export { Toolbar, ToolbarButton, ToolbarGroup } from './Toolbar';
 export { UserProfileImage } from './UserProfileImage';
 export { WebTerminal } from './WebTerminal';
 export { EditSidePanel } from './EditSidePanel';
+export { OptionsTile } from './OptionsTile';

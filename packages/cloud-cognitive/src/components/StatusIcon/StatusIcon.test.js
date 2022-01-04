@@ -14,9 +14,7 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { StatusIcon } from '.';
 
-const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
-
-const blockClass = `${prefix}--status-icon`;
+const blockClass = `${pkg.prefix}--status-icon`;
 const componentName = StatusIcon.displayName;
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
@@ -65,7 +63,7 @@ describe(componentName, () => {
     const { container } = renderComponent();
     await expect(container).toBeAccessible(componentName, 'scan_label');
     await expect(container).toHaveNoAxeViolations();
-  }, 80000);
+  });
 
   it('applies className to the root node', () => {
     const { container } = renderComponent({ className });
@@ -86,9 +84,8 @@ describe(componentName, () => {
   it('adds the Devtools attribute to the containing node', () => {
     renderComponent({ 'data-testid': dataTestId });
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(componentName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      componentName
     );
   });
 

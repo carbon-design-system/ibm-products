@@ -134,6 +134,22 @@ export const WithActionIcon = prepareStory(Template, {
   },
 });
 
+export const WithActionIconHref = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    actionIcons: [
+      {
+        id: '1',
+        icon: ArrowRight24,
+        href: '#',
+        iconDescription: 'Next',
+      },
+    ],
+    primaryButtonText: '',
+    mediaRatio: null,
+  },
+});
+
 export const WithPictogram = prepareStory(Template, {
   args: {
     ...defaultProps,
@@ -159,5 +175,15 @@ export const Clickable = prepareStory(Template, {
     onKeyDown: action('on keydown'),
     primaryButtonText: '',
     mediaRatio: null,
+  },
+});
+
+export const WithButtonHref = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    primaryButtonHref: '#',
+    secondaryButtonHref: '#',
+    secondaryButtonText: 'Secondary',
+    secondaryButtonKind: 'ghost',
   },
 });

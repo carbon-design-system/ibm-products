@@ -33,7 +33,7 @@ ExpressiveCard = pkg.checkComponentEnabled(ExpressiveCard, componentName);
 
 ExpressiveCard.propTypes = {
   /**
-   * Icons that are displayed on card. Refer to design documentation for implementation guidelines
+   * Icons that are displayed on card. Refer to design documentation for implementation guidelines. Note- href will supersede onClick
    */
   actionIcons: PropTypes.arrayOf(
     PropTypes.shape({
@@ -42,6 +42,7 @@ ExpressiveCard.propTypes = {
       onKeyDown: PropTypes.func,
       onClick: PropTypes.func,
       iconDescription: PropTypes.string,
+      href: PropTypes.string,
     })
   ),
   /**
@@ -85,6 +86,14 @@ ExpressiveCard.propTypes = {
    */
   pictogram: PropTypes.object,
   /**
+   * Optionally specify an href for your Button to become an <a> element
+   */
+  primaryButtonHref: PropTypes.string,
+  /**
+   * Optional prop to allow overriding the icon rendering. Can be a React component class
+   */
+  primaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  /**
    * Establishes the kind of button displayed for the primary button
    */
   primaryButtonKind: PropTypes.oneOf(['primary', 'ghost']),
@@ -92,6 +101,14 @@ ExpressiveCard.propTypes = {
    * The text that's displayed in the primary button
    */
   primaryButtonText: PropTypes.string,
+  /**
+   * Optionally specify an href for your Button to become an <a> element
+   */
+  secondaryButtonHref: PropTypes.string,
+  /**
+   * Optional prop to allow overriding the icon rendering. Can be a React component class
+   */
+  secondaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   /**
    * Establishes the kind of button displayed for the secondary button
    */

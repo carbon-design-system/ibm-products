@@ -5,4 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export const sectionTitle = 'Security';
+const roots = ['.', '../..'];
+const sectionTitle = 'Security';
+
+export { roots, sectionTitle };

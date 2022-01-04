@@ -51,6 +51,7 @@ ProductiveCard.propTypes = {
       onKeyDown: PropTypes.func,
       onClick: PropTypes.func,
       iconDescription: PropTypes.string,
+      href: PropTypes.string,
     })
   ),
   /**
@@ -97,9 +98,17 @@ ProductiveCard.propTypes = {
     })
   ),
   /**
+   * Optionally specify an href for your Button to become an <a> element
+   */
+  primaryButtonHref: PropTypes.string,
+  /**
+   * Optional prop to allow overriding the icon rendering. Can be a React component class
+   */
+  primaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  /**
    * The text that's displayed in the primary button
    */
-  primaryButtonText: PropTypes.string,
+  primaryButtonText: PropTypes.node,
   /**
    * Title that's displayed at the top of the card
    */

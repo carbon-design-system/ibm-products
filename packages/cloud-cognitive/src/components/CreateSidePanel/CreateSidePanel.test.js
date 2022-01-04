@@ -14,8 +14,6 @@ import { pkg } from '../../settings';
 
 import { CreateSidePanel } from '.';
 
-const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
-
 const componentName = CreateSidePanel.displayName;
 
 const title = 'Test Create Side panel';
@@ -24,7 +22,7 @@ const formDescription =
   'This is a test description. It has several lines. It should render a side panel.';
 const selectorPrimaryFocus = '.bx--text-input';
 const formTitle = 'This is a test form title';
-const blockClass = `${prefix}--create-side-panel`;
+const blockClass = `${pkg.prefix}--create-side-panel`;
 
 const renderComponent = ({ ...rest }, children = <p>test</p>) =>
   render(
@@ -150,21 +148,8 @@ describe(componentName, () => {
   it('adds the Devtools attribute to the containing node', () => {
     renderComponent({ 'data-testid': dataTestId });
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(componentName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      componentName
     );
-  });
-
-  it('should still support deprecated `pageContentSelector` prop', () => {
-    const errorSpy = jest.spyOn(console, 'error').mockImplementation();
-    const warningSpy = jest.spyOn(console, 'warn').mockImplementation();
-    renderComponent({
-      pageContentSelector: '#create-side-panel-test-page-content',
-      selectorPageContent: null,
-    });
-    expect(screen.getByRole('complementary')).toHaveClass(blockClass);
-    errorSpy.mockRestore();
-    warningSpy.mockRestore();
   });
 });

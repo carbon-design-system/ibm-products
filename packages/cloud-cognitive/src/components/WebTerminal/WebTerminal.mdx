@@ -1,5 +1,8 @@
 import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
-import { getStoryId } from '../../global/js/utils/story-helper';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
 import { WebTerminal } from '.';
 
 # WebTerminal
@@ -15,7 +18,7 @@ manually instead of using the GUI.
 #### Why do we need an open prop?
 
 You have to pass an `open` prop which toggles from `true` to `false` or `false`
-to `true`. In this case I am using the global navigation terminal icon to
+to `true`. In this case we are using the global navigation terminal icon to
 trigger this `onClick`. It was designed this way so you can open the web
 terminal in any context like within a data table or button.
 
@@ -44,11 +47,6 @@ The `WebTerminal` is wrapper component for your own terminal component that you
 may have been using for your product. Simply pass your own terminal component as
 children.
 
-#### Help user's with helpful documentation links
-
-Optionally you can pass documentation links to help point your users to useful
-documentation for your terminal, or kubernetes commands etc.
-
 <hr />
 
 ### Default
@@ -66,6 +64,42 @@ of the component.
 <Canvas>
   <Story id={getStoryId(WebTerminal.displayName, 'with-documentation-links')} />
 </Canvas>
+
+#### Help user's with helpful documentation links
+
+Optionally you can pass documentation links to help point your users to useful
+documentation for your terminal, or kubernetes commands etc.
+
+The documentation links should reflect the same props as `OverflowMenuItem` from
+carbon.
+
+Learn more:
+https://react.carbondesignsystem.com/?path=/docs/components-overflowmenu--default
+
+```js
+const documentationLinks = [
+  {
+    itemText: 'BX/ICP docs',
+    href: '#',
+    onClick: () => console.log('clicked'),
+  },
+  {
+    itemText: 'Kubernetes docs',
+    href: '#',
+    onClick: () => console.log('clicked'),
+  },
+  {
+    itemText: 'Docker docs',
+    href: '#',
+    onClick: () => console.log('clicked'),
+  },
+  {
+    itemText: 'Helm docs',
+    href: '#',
+    onClick: () => console.log('clicked'),
+  },
+];
+```
 
 ### With actions
 
@@ -92,7 +126,7 @@ you need to pass in an array of actions with objects for each object.
 
 ## Code sample
 
-[<img alt="Edit on CodeSandbox" src="https://codesandbox.io/static/img/play-codesandbox.svg" />](https://codesandbox.io/s/web-terminal-46k59)
+<CodesandboxLink exampleDirectory="WebTerminal" />
 
 ## Component API
 

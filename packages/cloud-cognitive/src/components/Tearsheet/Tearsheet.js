@@ -13,11 +13,7 @@ import PropTypes from 'prop-types';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
-import {
-  allPropTypes,
-  deprecateProp,
-  prepareProps,
-} from '../../global/js/utils/props-helper';
+import { allPropTypes, prepareProps } from '../../global/js/utils/props-helper';
 
 import { pkg } from '../../settings';
 
@@ -45,8 +41,8 @@ const componentName = 'Tearsheet';
  */
 export let Tearsheet = React.forwardRef((props, ref) => (
   <TearsheetShell
-    {...prepareProps(props, [], { ref, size: 'wide' })}
     {...getDevtoolsProps(componentName)}
+    {...prepareProps(props, [], { ref, size: 'wide' })}
   />
 ));
 
@@ -58,18 +54,6 @@ Tearsheet = pkg.checkComponentEnabled(Tearsheet, componentName);
 Tearsheet.displayName = componentName;
 
 export const deprecatedProps = {
-  /**
-   * **Deprecated**
-   *
-   * Prevent the tearsheet from automatically closing (triggering onClose, if
-   * provided, which can be cancelled by returning 'false') if the user clicks
-   * outside it.
-   */
-  preventCloseOnClickOutside: deprecateProp(
-    PropTypes.bool,
-    'The tearsheet will close automatically if the user clicks outside it if and only if the tearsheet is passive (no navigation actions)'
-  ),
-
   /**
    * **Deprecated**
    *

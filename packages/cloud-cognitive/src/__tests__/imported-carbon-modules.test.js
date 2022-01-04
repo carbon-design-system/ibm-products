@@ -1,4 +1,3 @@
-/** @jest-environment node */
 /**
  * Copyright IBM Corp. 2021, 2021
  *
@@ -6,42 +5,25 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { resolve } from 'path';
-import { renderSync } from 'sass';
+const { resolve } = require('path');
 import fs from 'fs-extra';
-
-// the sass compile of complete Carbon can take quite a while
-jest.setTimeout(300000);
+import { scssCompile } from '../global/js/utils/test-helper';
 
 describe('imported-carbon-modules', () => {
   it('presents a complete and correct list of module names', async () => {
     const normalize = (str) => str.replace(/"/g, "'").replace(/\s+/g, ' ');
-
-    const render = renderSync({
-      data: `
-        @import '@carbon/import-once/scss/import-once';
-        @import 'carbon-components/scss/globals/scss/styles';
-        
-        .___imported-modules-output {
-          content: $imported-modules;
-        }
-      `,
-      includePaths: [resolve(__dirname, '../../../../node_modules')],
-    }).css.toString();
-
-    const carbonModuleList = normalize(
-      render.match(/\.___imported-modules-output {\s*content: (.*?);/s)[1]
+    const generated = scssCompile(
+      resolve(__dirname, '../global/styles/_generate-carbon-modules.scss')
     );
-
-    const file = await fs.readFile(
+    const current = await fs.readFile(
       resolve(__dirname, '../global/styles/_imported-carbon-modules.scss'),
       'utf8'
     );
 
-    const fileModuleList = normalize(
-      file.match(/imported-carbon-modules: (.*?);/s)[1]
-    );
-
-    expect(fileModuleList).toEqual(carbonModuleList);
+    expect(
+      normalize(
+        generated.match(/\.___imported-modules-output {\s*content: (.*?);/s)[1]
+      )
+    ).toEqual(normalize(current.match(/imported-carbon-modules: (.*?);/s)[1]));
   });
 });

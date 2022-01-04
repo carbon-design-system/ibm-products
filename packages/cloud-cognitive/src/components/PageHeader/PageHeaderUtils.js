@@ -5,8 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import React from 'react';
+import cx from 'classnames';
 import { pkg } from '../../settings';
 import { scrollableAncestor } from '../../global/js/utils/scrollableAncestor';
+import { SkeletonText } from 'carbon-components-react';
 
 export const blockClass = `${pkg.prefix}--page-header`;
 
@@ -142,35 +145,6 @@ export const utilCheckUpdateVerticalSpace = (
   });
 };
 
-/**
- * Takes the title parameters and returns a titleShape
- * @param {{} | string} title
- * @param {{}} titleIcon
- * @param {string} defaultTitle
- * @returns
- */
-export const utilGetTitleShape = (title, titleIcon, defaultTitle) => {
-  // Title shape is used to allow title to be string or shape
-  let newShape = { ...defaultTitle };
-
-  if (title) {
-    if (typeof title !== 'string') {
-      // title is in shape format
-      newShape = Object.assign(newShape, { ...title });
-    } else {
-      // title is a string
-      newShape.text = title;
-    }
-  }
-
-  if (!newShape.icon && titleIcon) {
-    // if no icon use titleIcon if supplied
-    newShape.icon = titleIcon;
-  }
-
-  return newShape;
-};
-
 // Trigger a window scroll, if necessary, to set the collapsed state.
 export const utilSetCollapsed = (collapse, headerOffset, headerTopValue) => {
   /* don't know how to test resize */
@@ -179,5 +153,45 @@ export const utilSetCollapsed = (collapse, headerOffset, headerTopValue) => {
     window.scrollTo({ top: headerOffset - headerTopValue, behavior: 'smooth' });
   } else {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+};
+
+export const utilGetBreadcrumbItemForTitle = (
+  blockClass,
+  collapseTitle,
+  title
+) => {
+  let breadcrumbTitle;
+  if (title) {
+    if (title.text !== undefined) {
+      // Shape title provided
+      breadcrumbTitle = {
+        label: <span>{title.loading ? <SkeletonText /> : title.text}</span>,
+        title: title.text,
+      };
+    } else if (title.content !== undefined) {
+      // user defined content
+      breadcrumbTitle = {
+        label: title.breadcrumbContent ?? title.content ?? title.asText,
+        title: title.asText,
+      };
+    } else {
+      breadcrumbTitle = {
+        label: title,
+        title,
+      };
+    }
+    if (breadcrumbTitle) {
+      breadcrumbTitle.key = 'breadcrumb-title';
+      breadcrumbTitle.isCurrentPage = true;
+      breadcrumbTitle.className = cx([
+        `${blockClass}__breadcrumb-title`,
+        {
+          [`${blockClass}__breadcrumb-title--pre-collapsed`]: collapseTitle,
+        },
+      ]);
+    }
+
+    return breadcrumbTitle;
   }
 };

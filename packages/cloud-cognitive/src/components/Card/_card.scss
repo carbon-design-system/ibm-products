@@ -102,6 +102,7 @@
   }
 
   .#{$block-class}__icon {
+    color: inherit;
     cursor: pointer;
   }
 

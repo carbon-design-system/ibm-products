@@ -1,13 +1,16 @@
 browserslist
 cdai
+codeql
 codesandbox
 codesandboxes
 docgen
 dsag
 flatpickr
 kubernetes
+kube
 markdownlint
 plex
+storysource
 stylelint
 technote
 wcag

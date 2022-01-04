@@ -1,0 +1,168 @@
+////
+/// Decorator mixins.
+/// @group decorator
+/// @copyright IBM Security 2019 - 2021
+////
+
+@import '@carbon/colors/scss/colors';
+@import '@carbon/layout/scss/mini-unit';
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/motion/scss/motion';
+@import '@carbon/themes/scss/tokens';
+@import '@carbon/type/scss/styles';
+
+@import 'carbon-components/scss/globals/scss/helper-mixins';
+
+@import '../../globals/motion/index';
+
+@mixin security--decorator__padding($decorator__spacing__padding) {
+  &__icon {
+    padding-left: $decorator__spacing__padding;
+  }
+
+  &__type,
+  &__value {
+    padding-right: $decorator__spacing__padding;
+    padding-left: $decorator__spacing__padding;
+  }
+}
+
+@mixin decorator {
+  $root: &;
+
+  @include carbon--type-style($name: body-short-01);
+  @include security--decorator__padding(
+    $decorator__spacing__padding: $carbon--spacing-03
+  );
+
+  display: inline-flex;
+  max-width: 100%;
+  height: carbon--mini-units($count: 3.25);
+  box-sizing: border-box;
+  align-items: center;
+  padding: unset;
+  border: unset;
+  background-color: $hover-ui;
+  color: $text-02;
+  font-family: inherit;
+  text-align: left;
+  text-decoration: none;
+  text-transform: none;
+
+  #{$root}--interactive:not(&--active) {
+    #{$root}__type {
+      color: $text-02;
+    }
+
+    #{$root}__value {
+      color: $hover-primary-text;
+    }
+
+    &:visited #{$root}__value {
+      color: $visited-link;
+    }
+  }
+
+  &#{$root}--interactive {
+    &:hover {
+      background-color: $active-ui;
+      cursor: pointer;
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    &:active,
+    &:focus,
+    &:hover,
+    &:focus:active {
+      box-shadow: none;
+      text-decoration: none;
+
+      #{$root}__value {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &#{$root}--active,
+  &#{$root}--active:hover,
+  &#{$root}:focus:active {
+    background-color: $ui-05;
+    color: $active-ui;
+  }
+
+  &#{$root}--active:focus {
+    @include focus-outline('outline');
+
+    outline-color: $inverse-focus-ui;
+  }
+
+  &__icon,
+  &__type,
+  &__value {
+    @include carbon--motion($mode: productive, $name: standard);
+
+    display: inherit;
+    height: inherit;
+    align-items: center;
+    transition-duration: $moderate-02;
+    transition-property: background-color;
+  }
+
+  &#{$root}--inline {
+    @include carbon--type-style($name: caption-01);
+
+    height: carbon--mini-units($count: 2.5);
+    vertical-align: middle;
+
+    > #{$root} {
+      @include security--decorator__padding(
+        $decorator__spacing__padding: $carbon--spacing-02
+      );
+    }
+  }
+
+  @each $modifier,
+    $fill
+      in (
+        critical: $support-01,
+        high: $support-01,
+        low: $support-03,
+        medium: $carbon--orange-40,
+        unknown: $icon-02
+      )
+  {
+    &__icon--#{$modifier},
+    &--#{$modifier} #{$root}__icon {
+      fill: $fill;
+    }
+  }
+
+  &--high,
+  &--critical {
+    &--active,
+    &:focus:active {
+      #{$root}__icon {
+        fill: $hover-danger;
+      }
+    }
+  }
+
+  &__type {
+    border-right: 1px solid $ui-01;
+    white-space: nowrap;
+  }
+
+  &--active &__type {
+    border-right: 1px solid $ui-04;
+  }
+
+  &__value {
+    @include text-overflow;
+
+    max-width: 30ch;
+    height: auto;
+  }
+}

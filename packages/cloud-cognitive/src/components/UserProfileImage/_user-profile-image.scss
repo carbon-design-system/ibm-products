@@ -13,7 +13,7 @@
 // TooltipIcon
 @import 'carbon-components/scss/components/tooltip/tooltip';
 
-$block-class: #{$pkg-prefix}-user-profile-avatar;
+$block-class: #{$pkg-prefix}--user-profile-image;
 
 $sizes: (
   xlg: $spacing-10,
@@ -75,7 +75,7 @@ $theme-keys: map-keys($themes);
     text-transform: uppercase;
   }
 
-  .bx--tooltip__trigger .exp-user-profile-avatar svg {
+  .#{$prefix}--tooltip__trigger .#{$block-class} svg {
     fill: $ui-01;
   }
 

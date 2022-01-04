@@ -8,7 +8,7 @@
 // Standard imports.
 @import '../../global/styles/project-settings';
 
-// ProductiveCard uses the following Cloud & Cognitive components:
+// ProductiveCard uses the following IBM Products components:
 // Card
 @import '../Card/card';
 
@@ -36,6 +36,10 @@
       align-items: center;
       justify-content: space-between;
       border-top: 1px solid $ui-03;
+
+      .#{$carbon-prefix}--btn svg {
+        margin-left: $spacing-03;
+      }
     }
 
     .#{$block-class}__footer-no-button {

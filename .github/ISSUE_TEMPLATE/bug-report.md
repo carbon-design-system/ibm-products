@@ -14,7 +14,7 @@ assignees: ''
 
 ## What package(s) are you using?
 
-- [ ] Cloud & Cognitive
+- [ ] Carbon for IBM Products (or Carbon for IBM Cloud & Cognitive)
 - [ ] Legacy/CDAI
 - [ ] Legacy/Security
 
@@ -29,7 +29,8 @@ assignees: ''
 
 > What browser are you working in?
 
-> What version of the @carbon/ibm-cloud-cognitive packge are you using?
+> What version of the @carbon/ibm-products (or @carbon/ibm-cloud-cognitive)
+> package are you using?
 
 > What offering/product do you work on? Any pressing ship or release dates we
 > should be aware of?

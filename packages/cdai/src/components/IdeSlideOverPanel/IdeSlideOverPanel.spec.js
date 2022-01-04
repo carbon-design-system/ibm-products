@@ -8,7 +8,7 @@
 import React from 'react';
 import { IdeSlideOverPanel } from '../IdeSlideOverPanel';
 import { shallow } from 'enzyme';
-import CloseIcon16 from '@carbon/icons-react/lib/close/16';
+import { Close16 } from '@carbon/icons-react';
 
 const requiredProps = { onClose: () => {} };
 
@@ -131,7 +131,7 @@ describe('IdeSlideOverPanel', () => {
       expect(wrapper.find('.ide-slide-over-panel--close')).toHaveLength(1);
       expect(
         wrapper.find('.ide-slide-over-panel--close').props().renderIcon
-      ).toEqual(CloseIcon16);
+      ).toEqual(Close16);
     });
 
     it('Triggers onClose when close button is clicked', () => {

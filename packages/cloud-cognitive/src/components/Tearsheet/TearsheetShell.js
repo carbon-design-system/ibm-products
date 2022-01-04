@@ -13,7 +13,6 @@ import { useResizeDetector } from 'react-resize-detector';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg, carbon } from '../../settings';
-import { deprecateProp } from '../../global/js/utils/props-helper';
 import pconsole from '../../global/js/utils/pconsole';
 
 // Carbon and package components we use.
@@ -75,6 +74,7 @@ export const TearsheetShell = React.forwardRef(
       navigation,
       onClose,
       open,
+      selectorPrimaryFocus,
       size,
       title,
       verticalPosition,
@@ -83,6 +83,8 @@ export const TearsheetShell = React.forwardRef(
     },
     ref
   ) => {
+    const localRef = useRef();
+    const modalRef = ref || localRef;
     const { width, ref: resizer } = useResizeDetector({ handleHeight: false });
 
     // Keep track of the stack depth and our position in it (1-based, 0=closed)
@@ -106,15 +108,37 @@ export const TearsheetShell = React.forwardRef(
       setPosition(newPosition);
     }
 
+    handleStackChange.checkFocus = function () {
+      // if we are now the topmost tearsheet, ensure we have focus
+      if (
+        position === depth &&
+        modalRef.current &&
+        !modalRef.current.innerModal.current.contains(document.activeElement)
+      ) {
+        handleStackChange.claimFocus();
+      }
+    };
+
+    // Callback to give the tearsheet the opportunity to claim focus
+    handleStackChange.claimFocus = function () {
+      const element = selectorPrimaryFocus
+        ? modalRef.current.innerModal.current.querySelector(
+            selectorPrimaryFocus
+          )
+        : modalRef.current.startSentinel.current;
+      setTimeout(() => element.focus(), 1);
+    };
+
     // Hook called whenever the tearsheet mounts, unmounts, or 'open' changes.
     useLayoutEffect(() => {
       const notify = () =>
-        stack.all.forEach((handler) =>
+        stack.all.forEach((handler) => {
           handler(
             Math.min(stack.open.length, maxDepth),
             stack.open.indexOf(handler) + 1
-          )
-        );
+          );
+          handler.checkFocus();
+        });
 
       // Register this tearsheet's stack change callback/listener.
       stack.all.push(handleStackChange);
@@ -145,6 +169,14 @@ export const TearsheetShell = React.forwardRef(
         }
       };
     }, [open]);
+
+    function handleFocus() {
+      // If something within us is receiving focus but we are not the topmost
+      // stacked tearsheet, transfer focus to the topmost tearsheet instead
+      if (position < depth) {
+        stack.open[stack.open.length - 1].claimFocus();
+      }
+    }
 
     if (position <= depth) {
       // Include a modal header if and only if one or more of these is given.
@@ -182,8 +214,16 @@ export const TearsheetShell = React.forwardRef(
           containerClassName={cx(`${bc}__container`, {
             [`${bc}__container--lower`]: verticalPosition === 'lower',
           })}
-          {...{ onClose, open, ref }}
+          {...{ onClose, open, selectorPrimaryFocus }}
+          onFocus={handleFocus}
           preventCloseOnClickOutside={!isPassive}
+          ref={modalRef}
+          selectorsFloatingMenus={[
+            `.${carbon.prefix}--overflow-menu-options`,
+            `.${carbon.prefix}--tooltip`,
+            '.flatpickr-calendar',
+            `.${bc}__container`,
+          ]}
           size="sm"
         >
           {includeHeader && (
@@ -277,18 +317,6 @@ export const TearsheetShell = React.forwardRef(
 TearsheetShell.displayName = componentName;
 
 export const deprecatedProps = {
-  /**
-   * **Deprecated**
-   *
-   * Prevent the tearsheet from automatically closing (triggering onClose, if
-   * provided, which can be cancelled by returning 'false') if the user clicks
-   * outside it.
-   */
-  preventCloseOnClickOutside: deprecateProp(
-    PropTypes.bool,
-    'The tearsheet will close automatically if the user clicks outside it if and only if the tearsheet is passive (no navigation actions)'
-  ),
-
   /**
    * **Deprecated**
    *

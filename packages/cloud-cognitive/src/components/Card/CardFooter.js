@@ -18,9 +18,13 @@ export let CardFooter = ({
   hasButton,
   onPrimaryButtonClick,
   onSecondaryButtonClick,
+  primaryButtonHref,
+  primaryButtonIcon,
   primaryButtonKind,
   primaryButtonText,
   productive,
+  secondaryButtonHref,
+  secondaryButtonIcon,
   secondaryButtonKind,
   secondaryButtonText,
 }) => {
@@ -37,6 +41,8 @@ export let CardFooter = ({
           kind={secondaryButtonKind}
           onClick={onSecondaryButtonClick}
           size="field"
+          renderIcon={secondaryButtonIcon}
+          href={secondaryButtonHref}
         >
           {secondaryButtonText}
         </Button>
@@ -46,6 +52,8 @@ export let CardFooter = ({
           kind={productive ? 'ghost' : primaryButtonKind}
           onClick={onPrimaryButtonClick}
           size="field"
+          renderIcon={primaryButtonIcon}
+          href={primaryButtonHref}
         >
           {primaryButtonText}
         </Button>
@@ -61,9 +69,13 @@ CardFooter.propTypes = {
   hasButton: PropTypes.bool,
   onPrimaryButtonClick: PropTypes.func,
   onSecondaryButtonClick: PropTypes.func,
+  primaryButtonHref: PropTypes.string,
+  primaryButtonIcon: PropTypes.string,
   primaryButtonKind: PropTypes.oneOf(['primary', 'ghost']),
   primaryButtonText: PropTypes.string,
   productive: PropTypes.bool,
+  secondaryButtonHref: PropTypes.string,
+  secondaryButtonIcon: PropTypes.string,
   secondaryButtonKind: PropTypes.oneOf(['secondary', 'ghost']),
   secondaryButtonText: PropTypes.string,
 };

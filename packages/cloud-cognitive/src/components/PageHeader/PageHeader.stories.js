@@ -5,15 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import { carbon } from '../../settings';
 
 import {
+  Button,
   Column,
   Grid,
   Header,
   HeaderName,
+  HeaderMenuButton,
+  SideNav,
+  SideNavItems,
+  SideNavLink,
   Row,
   Tab,
   Tabs,
@@ -36,13 +41,12 @@ import {
 import cx from 'classnames';
 
 import { ActionBarItem } from '../ActionBar';
-import { PageHeader, deprecatedProps } from './PageHeader';
+import { PageHeader } from './PageHeader';
 
 import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
-import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 
 import { demoTableHeaders, demoTableData } from './PageHeaderDemo.data';
 
@@ -64,7 +68,7 @@ const actionBarItems = {
   'A single item': [1].map(makeActionBarItem),
   'Four items': [1, 2, 3, 4].map(makeActionBarItem),
   'Many items': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(makeActionBarItem),
-  'Custom items': [
+  'In context items': [
     { key: '1', renderIcon: Printer16, iconDescription: `Print` },
     { key: '2', renderIcon: Settings16, iconDescription: `Settings` },
     { key: '3', renderIcon: VolumeMute16, iconDescription: `Mute` },
@@ -137,7 +141,7 @@ const children = {
     </div>
   ),
   // cspell: enable
-  'Custom content': (
+  'In context content': (
     <>
       <p>Severity 1: 0</p>
       <p>Severity 1: 814</p>
@@ -168,7 +172,7 @@ const navigation = {
       <Tab label="Tab 8" />
     </Tabs>
   ),
-  'Custom tabs': (
+  'In context tabs': (
     <Tabs>
       <Tab label="Summary" />
       <Tab label="Region 1" />
@@ -222,7 +226,7 @@ const pageActions = {
       onClick: () => {},
     },
   ],
-  'Custom page actions': [
+  'In context page actions': [
     {
       key: 'acknowledge',
       kind: 'secondary',
@@ -236,6 +240,39 @@ const pageActions = {
       onClick: () => {},
     },
   ],
+  'User defined page actions': {
+    content: (
+      <Button
+        type="button"
+        className="bx--button"
+        size="field"
+        style={{ maxWidth: '100%' }}
+      >
+        <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          Custom component
+        </span>
+      </Button>
+    ),
+    minWidth: 160,
+    maxWidth: 400,
+  },
+  'User defined page action that is long': {
+    content: (
+      <Button
+        type="button"
+        className="bx--button"
+        size="field"
+        style={{ maxWidth: '100%' }}
+        title="Custom component with long content"
+      >
+        <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          Custom content must keep within the alloted width
+        </span>
+      </Button>
+    ),
+    minWidth: 160,
+    maxWidth: 400,
+  },
 };
 
 const tags = {
@@ -253,7 +290,11 @@ const tags = {
     { type: 'purple', label: 'Purple' },
     { type: 'red', label: 'Red' },
     { type: 'teal', label: 'Teal' },
-    { type: 'red', label: 'Longer ThanAPieceOfString' },
+    {
+      type: 'red',
+      label:
+        'Longer ThanAPieceOfString it just keeps going and going and going and going',
+    },
     { type: 'high-contrast', label: 'High contrast' },
     { type: 'magenta', label: 'Magenta' },
     { type: 'blue', label: 'Blue 2' },
@@ -262,16 +303,21 @@ const tags = {
     { type: 'purple', label: 'Purple 2' },
     { type: 'red', label: 'Red 2' },
     { type: 'teal', label: 'Teal 2' },
-    { type: 'red', label: 'Longer ThanAPieceOfString 2' },
+    {
+      type: 'red',
+      label:
+        'Longer ThanAPieceOfString 2this one is even longer it is not quite a book but it is working on it. As it would be a little bit silly to be this long we should probably truncate',
+    },
     { type: 'high-contrast', label: 'High contrast 2' },
     { type: 'magenta', label: 'Magenta 2' },
   ],
-  'Custom tags': [
+  'In context tags': [
     { type: 'cyan', label: 'Not urgent' },
     { type: 'red', label: 'Security' },
   ],
 };
 
+const userDefinedStyle = { color: 'red', fontWeight: '600' };
 const title = {
   'No title': null,
   'Plain text title': 'Page title',
@@ -282,10 +328,25 @@ const title = {
     icon: Bee24,
   },
   'Loading title': { text: 'Patience is a virtue', loading: true },
-  'Custom title': {
+  'In context title': {
     text: 'Authentication activity',
     loading: false,
     icon: Security24,
+  },
+  'User defined title': {
+    content: (
+      <span>
+        User <span style={userDefinedStyle}>defined</span>
+        title
+      </span>
+    ),
+    breadcrumbContent: (
+      <span>
+        User <span style={userDefinedStyle}>defined</span>
+        title
+      </span>
+    ),
+    asText: 'User defined title',
   },
 };
 
@@ -305,7 +366,6 @@ export default {
     (story) => <div className={`${storyClass}__viewport`}>{story()}</div>,
   ],
   argTypes: {
-    ...getDeprecatedArgTypes(deprecatedProps),
     actionBarItems: {
       control: {
         type: 'select',
@@ -486,7 +546,6 @@ export const withTitle = prepareStory(Template, {
   storyName: 'Simple page header with page title',
   args: {
     title: 2,
-    hasBackgroundAlways: false,
     ...commonArgs,
   },
 });
@@ -623,6 +682,7 @@ export const fullyLoadedAndSome = prepareStory(Template, {
 // Template for demo.
 // eslint-disable-next-line react/prop-types
 const TemplateDemo = ({ children, storyOptionWholePageScroll, ...props }) => {
+  const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
   return (
     <>
       <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
@@ -634,9 +694,28 @@ const TemplateDemo = ({ children, storyOptionWholePageScroll, ...props }) => {
         key={storyOptionWholePageScroll ? 'keyYes' : 'keyNo'}
       >
         <Header aria-label="IBM Platform Name">
+          <HeaderMenuButton
+            aria-label="Open menu"
+            isCollapsible
+            onClick={() => {
+              setIsSideNavExpanded((prev) => !prev);
+            }}
+            isActive={isSideNavExpanded}
+          />
           <HeaderName href="#" prefix="IBM">
-            Cloud Cognitive application
+            Products application
           </HeaderName>
+          <SideNav
+            aria-label="Side navigation"
+            expanded={isSideNavExpanded}
+            isFixedNav
+          >
+            <SideNavItems>
+              <SideNavLink href="javascript:void(0)">
+                Sample side bar
+              </SideNavLink>
+            </SideNavItems>
+          </SideNav>
         </Header>
         <div
           className={`${storyClass}__content-container`}

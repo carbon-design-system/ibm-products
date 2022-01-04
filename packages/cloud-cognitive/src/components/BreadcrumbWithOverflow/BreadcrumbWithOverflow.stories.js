@@ -96,7 +96,7 @@ const Template = (argsIn) => {
     key: 'last one',
     href: isCurrentPage ? null : '/#',
     isCurrentPage: isCurrentPage,
-    label: <span>{lastBreadcrumb}</span>,
+    label: lastBreadcrumb, // wrapping this with a span causes error - "Cannot convert a symbol value to a string" - perhaps ? https://github.com/storybookjs/storybook/issues/11554
     title: lastBreadcrumb,
   });
 

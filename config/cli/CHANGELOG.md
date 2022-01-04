@@ -3,6 +3,99 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.18.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cli@0.18.3...@carbon/ibm-cloud-cognitive-cli@0.18.4) (2022-01-04)
+
+
+### Bug Fixes
+
+* update Carbon versions and package dependencies to latest ([#1509](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1509)) ([613db81](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/613db817bffec2c5b26b1fe50a337dd7bac5d963))
+
+
+
+
+
+## [0.18.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cli@0.18.2...@carbon/ibm-cloud-cognitive-cli@0.18.3) (2021-12-21)
+
+
+### Bug Fixes
+
+* update Carbon versions and package dependencies to latest ([#1499](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1499)) ([8aed3d5](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8aed3d53d06cc896984e6847c0450cc647e34041))
+
+
+
+
+
+## [0.18.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cli@0.18.1...@carbon/ibm-cloud-cognitive-cli@0.18.2) (2021-12-14)
+
+
+### Bug Fixes
+
+* update Carbon versions and package dependencies to latest ([#1493](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1493)) ([91b8238](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/91b82383e0aa74383ebb81f625a9e7b870f06c00))
+
+
+
+
+
+## [0.18.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cli@0.18.0...@carbon/ibm-cloud-cognitive-cli@0.18.1) (2021-12-07)
+
+
+### Bug Fixes
+
+* update Carbon versions and package dependencies to latest ([#1491](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1491)) ([45f7b77](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/45f7b77f797c5841b9dc15bc3013f31e50244d29))
+
+
+
+
+
+# [0.18.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cli@0.17.0...@carbon/ibm-cloud-cognitive-cli@0.18.0) (2021-11-30)
+
+
+### Features
+
+* update Carbon versions and dependencies to latest ([#1473](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1473)) ([9cafbea](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9cafbea95226c46ff1732f9ad6b22c9c8837616e))
+
+
+
+
+
+# [0.17.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cli@0.16.0...@carbon/ibm-cloud-cognitive-cli@0.17.0) (2021-11-23)
+
+
+### Features
+
+* update Carbon versions and dependencies to latest ([#1465](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1465)) ([0c6b37f](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/0c6b37f5b713c54ec320d9da945fbd3f6b3f91d9))
+
+
+
+
+
+# [0.16.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cli@0.15.0...@carbon/ibm-cloud-cognitive-cli@0.16.0) (2021-11-16)
+
+
+### Bug Fixes
+
+* replace "cloud & cognitive" with "Carbon for IBM Products" in docs ([#1437](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1437)) ([0a58354](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/0a58354ccbdd723173b2e6758907713938a7f163))
+
+
+### Features
+
+* update Carbon versions and package dependencies to latest ([#1425](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1425)) ([4fd5883](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/4fd5883961e0f3fc6be1c87bbe084b2cf6dc5db0)), closes [#10000](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/10000)
+
+
+
+
+
+# [0.15.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cli@0.14.0...@carbon/ibm-cloud-cognitive-cli@0.15.0) (2021-11-09)
+
+
+### Features
+
+* update Carbon versions and package dependencies to latest ([#1365](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1365)) ([ea11cf7](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ea11cf7ae44b61b48142c511c16460cf7978b88c))
+
+
+
+
+
 # [0.14.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cli@0.13.0...@carbon/ibm-cloud-cognitive-cli@0.14.0) (2021-10-07)
 
 

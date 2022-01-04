@@ -7,7 +7,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { ActionBar, ActionBarItem } from '.';
+import { ActionBar } from '.';
 import { Lightning16, Bee16 } from '@carbon/icons-react';
 import { mockHTMLElement } from '../../global/js/utils/test-helper';
 
@@ -20,57 +20,6 @@ const actions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => ({
   iconDescription: `Action ${num.toString().padStart(2, '0')}`,
   onClick: () => {},
 }));
-
-const ActionBarChildren = (
-  <>
-    <ActionBarItem
-      key="key-1"
-      renderIcon={Lightning16}
-      iconDescription="Action 01"
-    />
-    <ActionBarItem
-      key="key-2"
-      renderIcon={Lightning16}
-      iconDescription="Action 02"
-    />
-    <ActionBarItem key="key-3" renderIcon={Bee16} iconDescription="Action 03" />
-    <ActionBarItem
-      key="key-4"
-      renderIcon={Lightning16}
-      iconDescription="Action 04"
-    />
-    <ActionBarItem
-      key="key-5"
-      renderIcon={Lightning16}
-      iconDescription="Action 05"
-    />
-    <ActionBarItem
-      key="key-6"
-      renderIcon={Lightning16}
-      iconDescription="Action 06"
-    />
-    <ActionBarItem
-      key="key-7"
-      renderIcon={Lightning16}
-      iconDescription="Action 07"
-    />
-    <ActionBarItem
-      key="key-8"
-      renderIcon={Lightning16}
-      iconDescription="Action 08"
-    />
-    <ActionBarItem
-      key="key-9"
-      renderIcon={Lightning16}
-      iconDescription="Action 09"
-    />
-    <ActionBarItem
-      key="key-10"
-      renderIcon={Lightning16}
-      iconDescription="Action 10"
-    />
-  </>
-);
 
 const overflowAriaLabel = 'overflow-label';
 
@@ -150,30 +99,6 @@ describe(ActionBar.displayName, () => {
     mockElement.mockRestore();
     jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
-  });
-
-  it('Works with deprecated children', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-    // const { container } =
-    render(
-      <TestActionBar width={1150} overflowAriaLabel={overflowAriaLabel}>
-        {ActionBarChildren}
-      </TestActionBar>
-    );
-    // console.log(container.outerHTML);
-    screen.getByText(/Action 01/, {
-      selector: `.${blockClass}__displayed-items .${carbon.prefix}--assistive-text`,
-    });
-    screen.getByText(/Action 10/, {
-      selector: `.${blockClass}__displayed-items .${carbon.prefix}--assistive-text`,
-    });
-
-    expect(warn).toBeCalledWith(
-      'The prop `children` of `ActionBar` has been deprecated and will soon be removed. See documentation on the `actions` prop.'
-    );
-
-    warn.mockRestore(); // Remove mock
   });
 
   it('Renders an action bar', () => {

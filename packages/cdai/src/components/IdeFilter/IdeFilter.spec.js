@@ -100,6 +100,7 @@ describe('IdeFilter', () => {
     input.simulate('change');
     expect(inputChangeSpy).toHaveBeenCalledWith('my new value', {
       action: 'input-change',
+      prevInputValue: '',
     });
   });
   it('Creates new options', () => {
@@ -228,6 +229,7 @@ describe('IdeFilter', () => {
     input.simulate('change');
     expect(inputChangeSpy).toHaveBeenCalledWith('my new value', {
       action: 'input-change',
+      prevInputValue: '',
     });
   });
   it('Can disable creation of plaintext options with allowPlaintext false', () => {

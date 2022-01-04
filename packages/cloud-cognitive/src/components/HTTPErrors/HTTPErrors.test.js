@@ -16,9 +16,7 @@ import { HTTPError404 } from './HTTPError404';
 import { HTTPError403 } from './HTTPError403';
 import { HTTPErrorOther } from './HTTPErrorOther';
 
-const { devtoolsAttribute, getDevtoolsId, prefix } = pkg;
-
-const blockClass = `${prefix}--http-errors`;
+const blockClass = `${pkg.prefix}--http-errors`;
 const componentName = HTTPError404.displayName;
 
 const dataTestId = uuidv4();
@@ -38,7 +36,7 @@ const defaultProps = {
       href: 'https://www.carbondesignsystem.com/',
     },
     {
-      text: 'IBM Cloud and Cognitive component library',
+      text: 'Carbon for IBM Products component library',
       href: 'https://github.com/carbon-design-system/ibm-cloud-cognitive',
     },
   ],
@@ -51,7 +49,7 @@ describe(componentName, () => {
     const { container } = render(<HTTPError404 {...defaultProps} />);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
-  }, 80000);
+  });
 
   it('Renders the component `HTTPErrors` if flag is enabled', () => {
     const { container } = render(<HTTPError404 {...defaultProps} />);
@@ -73,7 +71,7 @@ describe(componentName, () => {
     const { container } = render(<HTTPError404 {...defaultProps} />);
     expect(screen.getByText(errorCodeLabel));
     expect(screen.getByText(description));
-    expect(screen.getByText('IBM Cloud and Cognitive component library'));
+    expect(screen.getByText('Carbon for IBM Products component library'));
     expect(ref.current.classList.contains(blockClass)).toBeTruthy();
     expect(
       container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
@@ -83,9 +81,8 @@ describe(componentName, () => {
   it("adds the Devtools attribute to the `HTTPError404`'s containing node", () => {
     render(<HTTPError404 {...defaultProps} data-testid={dataTestId} />);
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(componentName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      componentName
     );
   });
 
@@ -93,7 +90,7 @@ describe(componentName, () => {
     const { container } = render(<HTTPError403 {...defaultProps} />);
     expect(screen.getByText(errorCodeLabel));
     expect(screen.getByText(description));
-    expect(screen.getByText('IBM Cloud and Cognitive component library'));
+    expect(screen.getByText('Carbon for IBM Products component library'));
     expect(ref.current.classList.contains(blockClass)).toBeTruthy();
     expect(
       container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
@@ -103,9 +100,8 @@ describe(componentName, () => {
   it("adds the Devtools attribute to the `HTTPError403`'s containing node", () => {
     render(<HTTPError403 {...defaultProps} data-testid={dataTestId} />);
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(HTTPError403.displayName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      HTTPError403.displayName
     );
   });
 
@@ -113,7 +109,7 @@ describe(componentName, () => {
     const { container } = render(<HTTPErrorOther {...defaultProps} />);
     expect(screen.getByText(errorCodeLabel));
     expect(screen.getByText(description));
-    expect(screen.getByText('IBM Cloud and Cognitive component library'));
+    expect(screen.getByText('Carbon for IBM Products component library'));
     expect(ref.current.classList.contains(blockClass)).toBeTruthy();
     expect(
       container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
@@ -123,9 +119,8 @@ describe(componentName, () => {
   it("adds the Devtools attribute to the `HTTPErrorOther`'s containing node", () => {
     render(<HTTPErrorOther {...defaultProps} data-testid={dataTestId} />);
 
-    expect(screen.getByTestId(dataTestId)).toHaveAttribute(
-      devtoolsAttribute,
-      getDevtoolsId(HTTPErrorOther.displayName)
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      HTTPErrorOther.displayName
     );
   });
 });

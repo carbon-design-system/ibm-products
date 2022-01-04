@@ -92,7 +92,7 @@ CreateTearsheetStep.propTypes = {
    * Otherwise, use CSS to hide/remove this label text.
    */
   fieldsetLegendText: PropTypes.string.isRequired.if(
-    ({ hasFieldset }) => hasFieldset === true
+    ({ hasFieldset }) => !!hasFieldset
   ),
 
   /**
@@ -101,6 +101,11 @@ CreateTearsheetStep.propTypes = {
    * You can set this prop to `false` if you have multiple fieldset elements or want to control the children of your Full Page's step content.
    */
   hasFieldset: PropTypes.bool,
+
+  /**
+   * This prop can be used on the first step to mark it as an intro step, which will not render the progress indicator steps
+   */
+  introStep: PropTypes.bool,
 
   /**
    * @ignore

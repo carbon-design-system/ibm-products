@@ -6,6 +6,8 @@
  */
 
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import { settings } from 'carbon-components';
 import React, { createRef } from 'react';
 
@@ -16,6 +18,7 @@ import { blockClass, componentName } from './Toolbar';
 import { blockClass as toolbarButtonClass } from './ToolbarButton';
 
 const { getByTestId, getByText } = screen;
+const { keyboard, tab } = userEvent;
 
 function instance(prop) {
   return `${uuidv4()}--${prop}`;
@@ -74,6 +77,89 @@ function test(Component) {
 describe(componentName, () => {
   test(Toolbar);
 
+  const component = instance(componentName);
+
+  function _array(length) {
+    return new Array(length).fill();
+  }
+
+  function getText(id) {
+    return `${component}--${id}`;
+  }
+
+  function key(text) {
+    keyboard(`{Arrow${text}}`);
+  }
+
+  function setupFocus(length = 3, props) {
+    render(
+      <Toolbar {...props}>
+        {_array(length).map((_value, index) => {
+          const children = getText(index);
+
+          return <ToolbarButton key={children}>{children}</ToolbarButton>;
+        })}
+      </Toolbar>
+    );
+
+    expect(document.body).toHaveFocus();
+    tab();
+  }
+
+  it('moves the focus out when tabbed', () => {
+    setupFocus();
+
+    expect(getByText(getText(0))).toHaveFocus();
+
+    tab();
+    expect(document.body).toHaveFocus();
+  });
+
+  it('sets focus on the item that previously contained focus', () => {
+    setupFocus();
+
+    key('Right');
+
+    tab();
+    tab();
+
+    expect(getByText(getText(1))).toHaveFocus();
+  });
+
+  function expectNextKeyFocus(text, props) {
+    const length = 5;
+    setupFocus(length, props);
+
+    _array(length - 1).forEach((_value, index) => {
+      key(text);
+
+      expect(getByText(getText(index + 1))).toHaveFocus();
+    });
+  }
+
+  it('moves focus to the next item', () => {
+    expectNextKeyFocus('Right');
+  });
+
+  function expectPreviousKeyFocus({ next, previous }, props) {
+    const children = 5;
+    setupFocus(children, props);
+
+    const length = children - 1;
+
+    _array(length)
+      .map(() => key(next))
+      .forEach((_value, index) => {
+        key(previous);
+
+        expect(getByText(getText(length - (index + 1)))).toHaveFocus();
+      });
+  }
+
+  it('moves focus to the previous item', () => {
+    expectPreviousKeyFocus({ next: 'Right', previous: 'Left' });
+  });
+
   toBeAccessible(
     'has no accessibility violations for the vertical variant',
     <Toolbar {...props} vertical />,
@@ -90,6 +176,17 @@ describe(componentName, () => {
 
     rerender(<Toolbar {...props} data-testid={dataTestId} vertical />);
     expect(getByTestId(dataTestId)).toHaveClass(className);
+  });
+
+  it('moves focus to the next item for the vertical variant', () => {
+    expectNextKeyFocus('Down', { vertical: true });
+  });
+
+  it('moves focus to the previous item for the vertical variant', () => {
+    expectPreviousKeyFocus(
+      { next: 'Down', previous: 'Up' },
+      { vertical: true }
+    );
   });
 });
 

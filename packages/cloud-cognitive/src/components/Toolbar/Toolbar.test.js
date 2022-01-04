@@ -102,13 +102,13 @@ describe(componentName, () => {
     );
 
     expect(document.body).toHaveFocus();
+
     tab();
+    expect(getByText(getText(0))).toHaveFocus();
   }
 
   it('moves the focus out when tabbed', () => {
     setupFocus();
-
-    expect(getByText(getText(0))).toHaveFocus();
 
     tab();
     expect(document.body).toHaveFocus();

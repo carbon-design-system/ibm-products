@@ -7,7 +7,6 @@
 
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-
 import { settings } from 'carbon-components';
 import React, { createRef } from 'react';
 

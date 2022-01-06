@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products",
   "description": "Carbon for IBM Products",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -50,8 +50,8 @@
     "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react$|^react-dom$|^chalk$)/'"
   },
   "devDependencies": {
-    "@babel/cli": "^7.16.0",
-    "@babel/core": "^7.16.5",
+    "@babel/cli": "^7.16.7",
+    "@babel/core": "^7.16.7",
     "babel-preset-ibm-cloud-cognitive": "^0.14.2",
     "chalk": "^4.1.2",
     "change-case": "^4.1.2",
@@ -64,13 +64,13 @@
     "npm-check-updates": "^12.0.5",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
-    "sass": "^1.45.0",
-    "yargs": "^17.3.0"
+    "sass": "^1.45.2",
+    "yargs": "^17.3.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.16.5",
+    "@babel/runtime": "^7.16.7",
     "@carbon/telemetry": "^0.0.0-alpha.6",
-    "react-resize-detector": "^6.7.6"
+    "react-resize-detector": "^6.7.7"
   },
   "peerDependencies": {
     "@carbon/colors": "^10.34.0",

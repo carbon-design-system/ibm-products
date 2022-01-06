@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -47,6 +47,7 @@
     );
   }
 
+  [storybook-carbon-theme='debug'],
   :root[storybook-carbon-theme='g100'],
   .sb--use-carbon-theme-g100 {
     @include carbon--theme(
@@ -56,9 +57,8 @@
   }
 }
 
-// set default color and background for stories
-.sb-show-main {
-  background-color: $ui-background;
+[storybook-carbon-theme='debug'] body {
+  color: initial;
 }
 
 /**

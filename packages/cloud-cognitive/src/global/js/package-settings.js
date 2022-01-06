@@ -58,6 +58,7 @@ const defaults = {
     WebTerminal: false,
     EditSidePanel: false,
     OptionsTile: false,
+    CancelableTextEdit: false,
     /* new component flags here - comment used by generate CLI */
   },
 

@@ -28,7 +28,7 @@
     "jest": "^27.3.1"
   },
   "dependencies": {
-    "@babel/core": "^7.16.5",
+    "@babel/core": "^7.16.7",
     "@testing-library/jest-dom": "^5.16.1",
     "accessibility-checker": "^3.1.13",
     "axe-core": "^4.3.5",

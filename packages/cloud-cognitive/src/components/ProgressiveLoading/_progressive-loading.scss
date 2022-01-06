@@ -13,7 +13,10 @@
 // TODO: @import 'carbon-components/scss/globals/grid/grid'; if needed
 
 // ProgressiveLoading uses the following Carbon components:
-// TODO: @import(s) of Carbon component styles used by ProgressiveLoading
+// InlineLoading, Loading, Unstable_ProgressBar
+@import 'carbon-components/scss/components/inline-loading/inline-loading';
+@import 'carbon-components/scss/components/loading/loading';
+@import 'carbon-components/scss/components/progress-bar/progress-bar';
 
 // ProgressiveLoading uses the following Carbon for IBM Products components:
 // TODO: @import(s) of IBM Products component styles used by ProgressiveLoading
@@ -24,8 +27,16 @@
   // The block part of our conventional BEM class names (blockClass__E--M).
   $block-class: #{$pkg-prefix}--progressive-loading;
 
-  .#{$block-class} {
-    // TODO: Styles.
+  @include block-wrap($block-class) {
+    &.#{$block-class}--spinner.#{$block-class}--finished {
+      .bx--loading {
+        animation-play-state: paused;
+      }
+
+      .bx--loading__stroke {
+        stroke-dashoffset: 0;
+      }
+    }
   }
 }
 

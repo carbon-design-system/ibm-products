@@ -19,13 +19,26 @@ import mdx from './ProgressiveLoading.mdx';
 
 import styles from './_storybook-styles.scss';
 
+const progressLabels = {
+  'No label': null,
+  'Simple label': 'Loading...',
+  'Show percentage': (pc) => pc ?? `${pc}%`,
+  'Loading message': (pc) => (pc ? `Loading: ${pc}%` : 'Loading...'),
+};
+
 export default {
   title: getStoryTitle(ProgressiveLoading.displayName),
   component: ProgressiveLoading,
-  // TODO: Define argTypes for props not represented by standard JS types.
-  // argTypes: {
-  //   egProp: { control: 'color' },
-  // },
+  argTypes: {
+    progressLabel: {
+      control: {
+        type: 'select',
+        labels: Object.keys(progressLabels),
+      },
+      options: Object.values(progressLabels).map((_k, i) => i),
+      mapping: Object.values(progressLabels),
+    },
+  },
   parameters: {
     styles,
     docs: {
@@ -38,13 +51,7 @@ export default {
  * TODO: Declare template(s) for one or more scenarios.
  */
 const Template = (args) => {
-  return (
-    <ProgressiveLoading
-      // TODO: handle events with action or local handler.
-      // onTodo={action('onTodo log action')}
-      {...args}
-    />
-  );
+  return <ProgressiveLoading {...args} />;
 };
 
 /**
@@ -52,8 +59,5 @@ const Template = (args) => {
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
 export const progressiveLoading = prepareStory(Template, {
-  args: {
-    // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#ProgressiveLoading-args
-    children: 'hello, world',
-  },
+  args: {},
 });

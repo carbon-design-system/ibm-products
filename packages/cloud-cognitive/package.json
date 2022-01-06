@@ -46,14 +46,14 @@
     "generate": "cross-env FORCE_COLOR=1 node scripts/generate",
     "postinstall": "carbon-telemetry collect --install",
     "test": "jest --colors",
-    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react/react-dom (explicit range peer dependency)",
-    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react$|^react-dom$)/'"
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react/react-dom (explicit range peer dependency) or chalk (until we can load it as ESM)",
+    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react$|^react-dom$|^chalk$)/'"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.7",
     "@babel/core": "^7.16.7",
     "babel-preset-ibm-cloud-cognitive": "^0.14.2",
-    "chalk": "^5.0.0",
+    "chalk": "^4.1.2",
     "change-case": "^4.1.2",
     "copyfiles": "^2.4.1",
     "cross-env": "^7.0.3",

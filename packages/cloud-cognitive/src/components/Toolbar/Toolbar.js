@@ -27,9 +27,6 @@ const ToolbarContext = createContext();
 
 /** Toolbars are a collection of action items that organize a program’s interaction patterns into a series of closely related commands. */
 let Toolbar = forwardRef(({ children, className, vertical, ...rest }, r) => {
-  const _ref = useRef();
-  const ref = r || _ref;
-
   const focusableElements = useRef();
 
   const getFocusableElements = useCallback(
@@ -37,11 +34,30 @@ let Toolbar = forwardRef(({ children, className, vertical, ...rest }, r) => {
     [focusableElements]
   );
 
+  const _ref = useRef();
+  const ref = r || _ref;
+
   const [focus, setFocus] = useState();
 
-  const [arrowPrevious, arrowNext] = !vertical
-    ? ['ArrowLeft', 'ArrowRight']
-    : ['ArrowUp', 'ArrowDown'];
+  useEffect(() => {
+    focusableElements.current = _getFocusableElements(ref.current);
+
+    typeof focus !== 'undefined' &&
+      getFocusableElements().forEach((element, index) => {
+        element[index !== focus ? 'setAttribute' : 'removeAttribute'](
+          'tabindex',
+          -1
+        );
+      });
+  });
+
+  useEffect(() => {
+    typeof focus !== 'undefined' && getFocusableElements()[focus].focus();
+  }, [focus, getFocusableElements]);
+
+  const [arrowNext, arrowPrevious] = !vertical
+    ? ['ArrowRight', 'ArrowLeft']
+    : ['ArrowDown', 'ArrowUp'];
 
   function onArrowDown(increment) {
     const nextFocus = focus + increment;
@@ -68,22 +84,6 @@ let Toolbar = forwardRef(({ children, className, vertical, ...rest }, r) => {
       }
     }
   }
-
-  useEffect(() => {
-    focusableElements.current = _getFocusableElements(ref.current);
-
-    typeof focus !== 'undefined' &&
-      getFocusableElements().forEach((element, index) => {
-        element[index !== focus ? 'setAttribute' : 'removeAttribute'](
-          'tabindex',
-          -1
-        );
-      });
-  });
-
-  useEffect(() => {
-    typeof focus !== 'undefined' && getFocusableElements()[focus].focus();
-  }, [focus, getFocusableElements]);
 
   return (
     <div

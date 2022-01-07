@@ -125,14 +125,22 @@ describe(componentName, () => {
     expect(getByText(getText(1))).toHaveFocus();
   });
 
-  function expectNextKeyFocus(text, props) {
+  function setupKeyFocus(props) {
     const length = 5;
     setupFocus(length, props);
 
-    _array(length - 1).forEach((_value, index) => {
-      key(text);
+    return _array(length - 1);
+  }
 
-      expect(getByText(getText(index + 1))).toHaveFocus();
+  function expectMove(text, id) {
+    key(text);
+
+    expect(getByText(getText(id))).toHaveFocus();
+  }
+
+  function expectNextKeyFocus(text, props) {
+    setupKeyFocus(props).forEach((_value, index) => {
+      expectMove(text, index + 1);
     });
   }
 
@@ -141,17 +149,13 @@ describe(componentName, () => {
   });
 
   function expectPreviousKeyFocus({ next, previous }, props) {
-    const children = 5;
-    setupFocus(children, props);
+    const items = setupKeyFocus(props);
+    const { length } = items;
 
-    const length = children - 1;
-
-    _array(length)
+    items
       .map(() => key(next))
       .forEach((_value, index) => {
-        key(previous);
-
-        expect(getByText(getText(length - (index + 1)))).toHaveFocus();
+        expectMove(previous, length - (index + 1));
       });
   }
 

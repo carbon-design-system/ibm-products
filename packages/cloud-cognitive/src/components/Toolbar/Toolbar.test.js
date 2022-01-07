@@ -19,7 +19,7 @@ import { blockClass as toolbarButtonClass } from './ToolbarButton';
 const { getByTestId, getByText } = screen;
 const { keyboard, tab } = userEvent;
 
-function instance(prop) {
+function _instance(prop) {
   return `${uuidv4()}--${prop}`;
 }
 
@@ -32,8 +32,8 @@ function toBeAccessible(label, node, displayName) {
   });
 }
 
-const children = instance('children');
-const dataTestId = instance('dataTestId');
+const children = _instance('children');
+const dataTestId = _instance('dataTestId');
 
 const props = { children };
 
@@ -51,7 +51,7 @@ function test(Component) {
   });
 
   it('adds a class to the containing node', () => {
-    const className = instance('class-name');
+    const className = _instance('class-name');
     render(
       <Component {...props} className={className} data-testid={dataTestId} />
     );
@@ -76,18 +76,18 @@ function test(Component) {
 describe(componentName, () => {
   test(Toolbar);
 
-  const component = instance(componentName);
+  const instance = _instance(componentName);
 
   function _array(length) {
     return new Array(length).fill();
   }
 
   function getText(id) {
-    return `${component}--${id}`;
+    return `${instance}--${id}`;
   }
 
   function key(text) {
-    keyboard(`{Arrow${text}}`);
+    keyboard(`{${text}}`);
   }
 
   function setupFocus(length = 3, props) {
@@ -117,7 +117,7 @@ describe(componentName, () => {
   it('sets focus on the item that previously contained focus', () => {
     setupFocus();
 
-    key('Right');
+    key('ArrowRight');
 
     tab();
     tab();
@@ -139,28 +139,28 @@ describe(componentName, () => {
   }
 
   function expectNextKeyFocus(text, props) {
-    setupKeyFocus(props).forEach((_value, index) => {
-      expectMove(text, index + 1);
-    });
+    setupKeyFocus(props).forEach((_value, index) =>
+      expectMove(text, index + 1)
+    );
   }
 
   it('moves focus to the next item', () => {
-    expectNextKeyFocus('Right');
+    expectNextKeyFocus('ArrowRight');
   });
 
   function expectPreviousKeyFocus({ next, previous }, props) {
     const items = setupKeyFocus(props);
     const { length } = items;
 
-    items
-      .map(() => key(next))
-      .forEach((_value, index) => {
-        expectMove(previous, length - (index + 1));
-      });
+    items.forEach(() => key(next));
+
+    items.forEach((_value, index) =>
+      expectMove(previous, length - (index + 1))
+    );
   }
 
   it('moves focus to the previous item', () => {
-    expectPreviousKeyFocus({ next: 'Right', previous: 'Left' });
+    expectPreviousKeyFocus({ next: 'ArrowRight', previous: 'ArrowLeft' });
   });
 
   toBeAccessible(
@@ -182,12 +182,12 @@ describe(componentName, () => {
   });
 
   it('moves focus to the next item for the vertical variant', () => {
-    expectNextKeyFocus('Down', { vertical: true });
+    expectNextKeyFocus('ArrowDown', { vertical: true });
   });
 
   it('moves focus to the previous item for the vertical variant', () => {
     expectPreviousKeyFocus(
-      { next: 'Down', previous: 'Up' },
+      { next: 'ArrowDown', previous: 'ArrowUp' },
       { vertical: true }
     );
   });

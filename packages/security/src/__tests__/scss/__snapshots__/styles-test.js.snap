@@ -36127,7 +36127,6 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
   min-width: auto;
   padding-right: 3rem;
   margin: 0;
-  line-height: 1;
 }
 
 .bx--time-picker__input-field {

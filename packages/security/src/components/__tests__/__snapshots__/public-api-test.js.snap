@@ -3134,12 +3134,14 @@ Map {
       "mode": Object {
         "args": Array [
           Array [
-            "default",
             "stacked",
             "toggle",
           ],
         ],
         "type": "oneOf",
+      },
+      "short": Object {
+        "type": "bool",
       },
     },
   },

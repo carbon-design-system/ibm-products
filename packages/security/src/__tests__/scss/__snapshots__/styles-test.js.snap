@@ -13814,20 +13814,31 @@ li.bx--accordion__item--disabled:last-of-type {
 .security--layout-module--description-list {
   padding-bottom: 2rem;
 }
+.security--layout-module--description-list--dense {
+  padding-bottom: 1rem;
+}
 .security--layout-module--description-list > .security--type-layout__container {
   margin-bottom: 0;
 }
-.security--layout-module--description-list--dense {
+.security--layout-module--description-list > .security--type-layout__container .security--type-layout__container__cell:first-of-type {
+  padding-left: 0;
+}
+.security--layout-module--description-list .security--type-layout__container__cell {
+  padding-top: 0;
   padding-bottom: 1rem;
+}
+.security--layout-module--description-list--short .security--type-layout__container__cell {
+  padding-bottom: 0.5rem;
 }
 .security--layout-module--description-list--stacked .security--type-layout__container__cell {
   display: block;
 }
 .security--layout-module--description-list--stacked .security--type-layout__container__cell:first-of-type {
-  padding: 0 0 0 1rem;
+  padding-right: 0;
+  padding-bottom: 0;
 }
 .security--layout-module--description-list--stacked .security--type-layout__container__cell:not(:first-of-type) {
-  padding: 0 0 1rem 1rem;
+  padding-left: 0;
 }
 @media (max-width: 320px) {
   .security--layout-module--description-list--toggle .security--type-layout__container__cell {

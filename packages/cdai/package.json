@@ -61,10 +61,10 @@
     "@babel/preset-env": "^7.16.7",
     "@babel/preset-react": "^7.16.7",
     "cpx": "^1.5.0",
-    "jest": "^27.4.5",
+    "jest": "^27.4.7",
     "jest-config-ibm-cloud-cognitive": "^0.23.3",
     "node-sass": "^7.0.1",
-    "npm-check-updates": "^12.0.5",
+    "npm-check-updates": "^12.1.0",
     "rimraf": "^3.0.2",
     "sinon": "^12.0.1"
   },

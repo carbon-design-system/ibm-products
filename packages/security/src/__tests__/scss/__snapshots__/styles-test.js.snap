@@ -13845,10 +13845,11 @@ li.bx--accordion__item--disabled:last-of-type {
     display: block;
   }
   .security--layout-module--description-list--toggle .security--type-layout__container__cell:first-of-type {
-    padding: 0 0 0 1rem;
+    padding-right: 0;
+    padding-bottom: 0;
   }
   .security--layout-module--description-list--toggle .security--type-layout__container__cell:not(:first-of-type) {
-    padding: 0 0 1rem 1rem;
+    padding-left: 0;
   }
 }
 
@@ -36138,6 +36139,7 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
   min-width: auto;
   padding-right: 3rem;
   margin: 0;
+  line-height: 1;
 }
 
 .bx--time-picker__input-field {

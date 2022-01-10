@@ -20,7 +20,7 @@ export const getStoryTitle = (componentName) => {
   const title =
     // if the component isn't in the master structure, put it in a lost+found section
     getPathForComponent('c', componentName) ||
-    `Cloud & Cognitive/Lost + found/${componentName}`;
+    `Carbon for IBM Products/Lost + found/${componentName}`;
 
   // add a canary tag if the component is public but not normally enabled
   return !pkg.isComponentEnabled(componentName, true) &&

@@ -55,12 +55,10 @@ export let AddSelect = forwardRef(
     const influencer = (
       <div className={`${blockClass}__influencer`}>
         <div className={`${blockClass}__influencer-header`}>
-          <p className={`${blockClass}__influencer-title`}>
-            {influencerTitle}
-            <Tag type="gray" size="sm">
-              {selected}
-            </Tag>
-          </p>
+          <p className={`${blockClass}__influencer-title`}>{influencerTitle}</p>
+          <Tag type="gray" size="sm">
+            {selected}
+          </Tag>
         </div>
         <div className={`${blockClass}__influencer-body`}>
           {selected > 0 ? (
@@ -79,13 +77,17 @@ export let AddSelect = forwardRef(
     const body = (
       <>
         <div className={`${blockClass}__header`}>
-          <TextInput placeholder={inputPlaceholder} />
-          <p className={`${blockClass}__items-label`}>
-            {itemsLabel}
+          <TextInput
+            id="temp-id"
+            labelText="temp label"
+            placeholder={inputPlaceholder}
+          />
+          <div className={`${blockClass}__items-label-container`}>
+            <p className={`${blockClass}__items-label`}>{itemsLabel}</p>
             <Tag type="gray" size="sm">
               {items.length}
             </Tag>
-          </p>
+          </div>
         </div>
         <StructuredListWrapper
           selection
@@ -137,6 +139,8 @@ AddSelect.propTypes = {
   title: PropTypes.string,
 };
 
-AddSelect.defaultProps = {};
+AddSelect.defaultProps = {
+  items: [],
+};
 
 AddSelect.displayName = componentName;

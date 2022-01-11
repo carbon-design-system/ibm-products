@@ -20,9 +20,18 @@
     border-top: 1px solid $ui-03;
 
     .#{$block-class}__items-label {
+      @include carbon--type-style('productive-heading-01');
+    }
+  }
+
+  .#{$block-class}__items-label {
+    margin-right: $spacing-03;
+
+    &-container {
+      display: flex;
+      align-items: center;
       margin-top: $spacing-05;
       margin-bottom: $spacing-03;
-      @include carbon--type-style('productive-heading-01');
     }
   }
 
@@ -33,12 +42,17 @@
   // multi select specific
 
   .#{$block-class}__influencer-header {
+    display: flex;
     padding: $spacing-06 $spacing-05 $spacing-03 $spacing-05;
     border-bottom: 1px solid $ui-03;
 
     .#{$block-class}__influencer-title {
       @include carbon--type-style('productive-heading-02');
     }
+  }
+
+  .#{$block-class}__influencer-title {
+    margin-right: $spacing-03;
   }
 
   .#{$block-class}__influencer-body {

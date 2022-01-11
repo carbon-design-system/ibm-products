@@ -50,6 +50,7 @@ export let AddSelect = forwardRef(
       title,
       actions,
       description,
+      closeIconDescription: 'temp description',
     };
 
     const influencer = (

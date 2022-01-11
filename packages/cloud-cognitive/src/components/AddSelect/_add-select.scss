@@ -1,0 +1,59 @@
+//
+// Copyright IBM Corp. 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@import '../../global/styles/project-settings';
+
+@import 'carbon-components/scss/components/structured-list/structured-list';
+
+@mixin add-select {
+  $block-class: #{$pkg-prefix}--add-select;
+  $tearsheet-class: #{$pkg-prefix}--tearsheet;
+
+  .#{$block-class}__header {
+    padding: $spacing-05;
+    padding-bottom: 0;
+    border-top: 1px solid $ui-03;
+
+    .#{$block-class}__items-label {
+      margin-top: $spacing-05;
+      margin-bottom: $spacing-03;
+      @include carbon--type-style('productive-heading-01');
+    }
+  }
+
+  .#{$block-class}__selections {
+    border-top: 1px solid $ui-03;
+  }
+
+  // multi select specific
+
+  .#{$block-class}__influencer-header {
+    padding: $spacing-06 $spacing-05 $spacing-03 $spacing-05;
+    border-bottom: 1px solid $ui-03;
+
+    .#{$block-class}__influencer-title {
+      @include carbon--type-style('productive-heading-02');
+    }
+  }
+
+  .#{$block-class}__influencer-body {
+    padding: $spacing-05;
+  }
+
+  // overrides
+
+  // the influencer sidebar needs to be even with the buttons
+  .#{$block-class} .#{$tearsheet-class} .#{$tearsheet-class}__influencer {
+    max-width: 29rem;
+    flex: 0 0 50%;
+  }
+}
+
+@include exports('add-select') {
+  @include add-select;
+}

@@ -12,8 +12,6 @@ import { AddSelect } from './AddSelect';
 const componentName = AddSelect.name;
 const defaultProps = {};
 
-URL.createObjectURL = jest.fn(() => Promise.resolve('download-link'));
-
 describe(componentName, () => {
   it('renders', () => {
     render(<AddSelect {...defaultProps} />);

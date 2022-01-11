@@ -60,7 +60,7 @@ export const Default = () => (
                 );
               }}
             </DescriptionModule>
-            <Row>
+            <Row style={{ marginBottom: '100px' }}>
               <Column>
                 <Button {...primaryButton} kind="primary">
                   Button
@@ -85,7 +85,7 @@ export const Default = () => (
               Ghost Button
             </Button>
           </Column>
-          <Column lg={{ span: 7, offset: 2 }}>
+          <Column lg={{ span: 8, offset: 1 }}>
             <img
               {...illustration}
               src={placeholder}

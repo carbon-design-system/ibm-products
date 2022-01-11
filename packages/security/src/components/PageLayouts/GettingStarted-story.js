@@ -123,7 +123,7 @@ export const Default = () => (
                     Knowledge Center
                   </Button>
                 </Column>
-                <Column lg={{ span: 7, offset: 2 }}>
+                <Column lg={{ span: 8, offset: 1 }}>
                   <img
                     {...illustration}
                     src={placeholder}

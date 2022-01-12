@@ -20,6 +20,7 @@ import {
 import { Tearsheet, TearsheetNarrow } from '../../components/Tearsheet';
 import { NoDataEmptyState } from '../../components/EmptyStates/NoDataEmptyState';
 import { pkg } from '../../settings';
+
 const componentName = 'AddSelect';
 
 export let AddSelect = forwardRef(
@@ -125,6 +126,9 @@ export let AddSelect = forwardRef(
   }
 );
 
+AddSelect = pkg.checkComponentEnabled(AddSelect, componentName);
+AddSelect.displayName = componentName;
+
 AddSelect.propTypes = {
   actions: PropTypes.array,
   className: PropTypes.string,
@@ -143,5 +147,3 @@ AddSelect.propTypes = {
 AddSelect.defaultProps = {
   items: [],
 };
-
-AddSelect.displayName = componentName;

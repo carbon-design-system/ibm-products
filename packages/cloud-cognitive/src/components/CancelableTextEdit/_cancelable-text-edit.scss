@@ -131,7 +131,6 @@
   }
 
   .#{$block-class} .#{$carbon-prefix}--text-input__invalid-icon {
-    // stylelint-disable-next-line carbon/layout-token-use
     margin-right: $spacing-11;
   }
 }

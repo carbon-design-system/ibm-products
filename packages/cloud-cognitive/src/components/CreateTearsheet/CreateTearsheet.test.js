@@ -59,18 +59,20 @@ const defaultProps = {
   open: true,
 };
 
-const renderCreateTearsheet = (
-  {
-    rejectOnSubmit = false,
-    rejectOnNext = false,
-    submitFn = onRequestSubmitFn,
-    onNext = onNextStepFn,
-    finalOnNextFn = finalStepOnNext,
-    rejectOnSubmitNext = false,
-    ...rest
-  },
-  children = (
-    <>
+const renderCreateTearsheet = ({
+  rejectOnSubmit = false,
+  rejectOnNext = false,
+  submitFn = onRequestSubmitFn,
+  onNext = onNextStepFn,
+  finalOnNextFn = finalStepOnNext,
+  rejectOnSubmitNext = false,
+  ...rest
+}) =>
+  render(
+    <CreateTearsheet
+      onRequestSubmit={rejectOnSubmit ? onRequestSubmitRejectFn : submitFn}
+      {...rest}
+    >
       <CreateTearsheetStep
         onNext={rejectOnNext ? onNextStepRejectionFn : onNext}
         title={step1Title}
@@ -93,15 +95,6 @@ const renderCreateTearsheet = (
       >
         step 3 content
       </CreateTearsheetStep>
-    </>
-  )
-) =>
-  render(
-    <CreateTearsheet
-      onRequestSubmit={rejectOnSubmit ? onRequestSubmitRejectFn : submitFn}
-      {...rest}
-    >
-      {children}
     </CreateTearsheet>
   );
 
@@ -176,7 +169,7 @@ describe(CreateTearsheet.displayName, () => {
     ).children;
     expect(
       createTearsheetSteps[1].classList.contains(
-        `.${createTearsheetBlockClass}__step--visible-section`
+        `.${createTearsheetBlockClass}__step__step--visible-section`
       )
     );
   });
@@ -196,7 +189,7 @@ describe(CreateTearsheet.displayName, () => {
         ).children;
         expect(
           createTearsheetSteps[0].classList.contains(
-            `.${createTearsheetBlockClass}__step--visible-section`
+            `.${createTearsheetBlockClass}__step__step--visible-section`
           )
         );
         // The onMount prop will get called here because the first step is rendered
@@ -215,7 +208,7 @@ describe(CreateTearsheet.displayName, () => {
     ).children;
     expect(
       createTearsheetSteps[1].classList.contains(
-        `.${createTearsheetBlockClass}__step--visible-section`
+        `.${createTearsheetBlockClass}__step__step--visible-section`
       )
     );
 
@@ -259,7 +252,7 @@ describe(CreateTearsheet.displayName, () => {
     ).children;
     expect(
       tearsheetChildren[2].classList.contains(
-        `.${createTearsheetBlockClass}__step--visible-section`
+        `.${createTearsheetBlockClass}__step__step--visible-section`
       )
     );
     rerender(
@@ -414,7 +407,7 @@ describe(CreateTearsheet.displayName, () => {
     ).children;
     expect(
       tearsheetChildren[0].classList.contains(
-        `.${createTearsheetBlockClass}__step--visible-section`
+        `.${createTearsheetBlockClass}__step__step--visible-section`
       )
     );
   });

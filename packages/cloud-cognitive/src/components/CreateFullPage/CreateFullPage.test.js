@@ -13,7 +13,7 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import {
   expectWarn,
   expectWarnAsync,
-  expectMultipleError,
+  expectMultipleWarn,
 } from '../../global/js/utils/test-helper';
 
 import { CreateFullPage } from '.';
@@ -149,18 +149,20 @@ const renderOneStepCreateFullPage = ({ ...rest }) =>
     </CreateFullPage>
   );
 
-const renderFullPageWithNonStepChildren = ({ ...rest }) =>
+const renderFullPageWithStepChildrenOutside = ({ ...rest }) =>
   render(
-    <CreateFullPage
-      {...rest}
-      {...defaultFullPageProps}
-      onRequestSubmit={onRequestSubmitFn}
-    >
-      {stepFormField}
-      <CreateFullPageStep title="Title 1">{stepFormField}</CreateFullPageStep>
-      {stepFormField}
-      <CreateFullPageStep title="Title 2">{stepFormField}</CreateFullPageStep>
-    </CreateFullPage>
+    <>
+      <CreateFullPage
+        {...rest}
+        {...defaultFullPageProps}
+        onRequestSubmit={onRequestSubmitFn}
+      >
+        <CreateFullPageStep title="Title 1">{stepFormField}</CreateFullPageStep>
+        <CreateFullPageStep title="Title 2">{stepFormField}</CreateFullPageStep>
+      </CreateFullPage>
+      <CreateFullPageStep title="Test title">content</CreateFullPageStep>
+      <CreateFullPageStep title="Test title 2">content</CreateFullPageStep>
+    </>
   );
 
 describe(componentName, () => {
@@ -206,21 +208,15 @@ describe(componentName, () => {
       }).toThrow();
     }));
 
-  it('throws a console error when children of CreateFullPage are not a FullPageStep', () =>
-    expectMultipleError(
+  it('throws a console warning when FullPageStep is used outside of CreateFullPage', () =>
+    expectMultipleWarn(
       [
-        'Each child of CreateFullPage is required to be a CreateFullPageStep',
-        [
-          'React does not recognize the `%s` prop on a DOM element',
-          'defaultFullPageProps',
-          /.*/,
-          /.*/,
-        ],
+        `You have tried using a ${componentName}Step component outside of a CreateFullPage. This is not allowed. ${componentName}Steps should always be children of the CreateFullPage`,
+        `You have tried using a ${componentName}Step component outside of a CreateFullPage. This is not allowed. ${componentName}Steps should always be children of the CreateFullPage`,
       ],
       () => {
-        const { container } = renderFullPageWithNonStepChildren({
-          defaultFullPageProps,
-        });
+        const { container } =
+          renderFullPageWithStepChildrenOutside(defaultFullPageProps);
         expect(() => {
           render(...container);
         }).toThrow();
@@ -237,7 +233,7 @@ describe(componentName, () => {
     ).children;
     expect(
       createFullPageSteps[0].classList.contains(
-        `.${blockClass}__step--visible-step`
+        `.${blockClass}__step__step--visible-step`
       )
     );
 
@@ -446,11 +442,11 @@ describe(componentName, () => {
     const backButtonElement = screen.getByText(backButtonText);
     click(backButtonElement);
     const fullPageChildren = container.querySelector(
-      `.${blockClass}__content`
+      `.${blockClass}__form`
     ).children;
     expect(
       fullPageChildren[0].classList.contains(
-        `.${blockClass}__step--visible-section`
+        `.${blockClass}__step__step--visible-step`
       )
     );
   });

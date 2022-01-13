@@ -87,55 +87,6 @@ component with form items as children:
     </CreateTearsheet>
 ```
 
-#### Create Tearsheet with Sections
-
-This is used when you have several sections per step. This can be created by
-passing in the overall `<CreateTearsheet />` component and the
-`<CreateTearsheetStep />` component for the first `section`. There is a
-`<CreateTearsheetDivider />` component that provides the divider line. All
-additional `sections` must be passed in as children, as shown below:
-
-```jsx
-      ...
-        <CreateTearsheetStep
-          title="Required title"
-          subtitle="Optional subtitle"
-          description="Optional description"
-          onNext={() => {'Optional function'}}
-          disableSubmit={}
-          hasForm={false}
-          >
-          <fieldset className={`#{$pkg-prefix}--tearsheet-create__step--fieldset`}>
-            <TextInput
-              id="test-1"
-              invalidText="A valid value is required"
-              labelText="Topic name"
-              placeholder="Enter topic name"
-            />
-          </fieldset>
-          <span className={`#{$pkg-prefix}--tearsheet-create__section--divider`} />
-          <h4 className={`#{$pkg-prefix}--tearsheet-create__step--title`}>Required title</h4>
-          <h6 className={`#{$pkg-prefix}--tearsheet-create__step--subtitle`}>
-            Optional subtitle
-          </h6>
-          <p className={`#{$pkg-prefix}--tearsheet-create__step--description`}>
-            Optional description
-          </p>
-          <fieldset className={`#{$pkg-prefix}--tearsheet-create__step--fieldset`}>
-            <TextInput
-              id="test-2"
-              invalidText="A valid value is required"
-              labelText="Topic name"
-              placeholder="Enter topic name"
-            />
-          </fieldset>
-      </CreateTearsheetStep>
-```
-
-Notice, in this example, we set the `hasForm` prop in `CreateTearsheetStep`
-component to `false`. This disables the included fieldset, allowing us to pass
-in our own.
-
 ## Using custom components
 
 It is possible to use custom components that return `CreateTearsheetStep`s in
@@ -143,11 +94,14 @@ order to help reduce the amount of logic in the component that contains the main
 `CreateTearsheet`. An example of this could look like the following:
 
 ```jsx
-const CreateStepCustom = () => {
+const CreateStepCustom = ({subtitle, ...rest}) => {
   return (
     <CreateTearsheetStep
+      {...rest}
+      subtitle={subtitle}
       title="Step 1"
       onNext={() => console.log('optional validation check')}
+      onMount={() => console.log('optional onMount fn')}
       disableSubmit={false}
     >
       step content here
@@ -158,7 +112,17 @@ const CreateStepCustom = () => {
 const CreateComponent = () => {
   return (
     <CreateTearsheet {...createTearsheetProps}>
-      <CreateStepCustom />
+      <CreateStepCustom subtitle="Custom step subtitle" />
+      <CreateTearsheetStep
+        title="Topic name"
+        fieldsetLegendText="Topic information"
+        disableSubmit={!value}
+        subtitle="This is the unique name used to recognize your topic"
+        description="It will also be used by your producers and consumers as part of the
+        connection information, so make it something easy to recognize."
+      >
+        Content for second step
+      </CreateTearsheetStep>
     </CreateTearsheet>
   );
 };

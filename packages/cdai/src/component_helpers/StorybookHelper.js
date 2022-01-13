@@ -11,7 +11,7 @@ export const getComponentLabel = (componentName) => {
   const title =
     // if the component isn't in the master structure, put it in a lost+found section
     getPathForComponent('a', componentName) ||
-    `Cloud & Cognitive/Lost + found/${componentName}`;
+    `CD&AI Legacy/Lost + found/${componentName}`;
 
   return title;
 };

@@ -6,6 +6,7 @@
 //
 
 export { AboutModal } from './AboutModal';
+export { AddSelect } from './AddSelect';
 export { APIKeyModal } from './APIKeyModal';
 export { Cascade } from './Cascade';
 export { ComboButton, ComboButtonItem } from './ComboButton';

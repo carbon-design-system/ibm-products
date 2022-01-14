@@ -129,7 +129,9 @@ passing in the overall `<CreateFullPage />` component and the
 
 It is possible to use custom components that return `CreateFullPageStep`s in
 order to help reduce the amount of logic in the component that contains the main
-`CreateFullPage`. An example of this could look like the following:
+`CreateFullPage`. _It is required that each child of the `CreateFullPage` either
+be a custom step or a `CreateFullPageStep`_. An example of this could look like
+the following:
 
 ```jsx
 const CreateStepCustom = ({ subtitle, ...rest }) => {

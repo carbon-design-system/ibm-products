@@ -91,7 +91,9 @@ component with form items as children:
 
 It is possible to use custom components that return `CreateTearsheetStep`s in
 order to help reduce the amount of logic in the component that contains the main
-`CreateTearsheet`. An example of this could look like the following:
+`CreateTearsheet`. _It is required that each child of the `CreateTearsheet`
+either be a custom step or a `CreateTearsheetStep`_. An example of this could
+look like the following:
 
 ```jsx
 const CreateStepCustom = ({ subtitle, ...rest }) => {

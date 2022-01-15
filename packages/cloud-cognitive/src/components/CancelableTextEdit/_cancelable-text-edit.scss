@@ -1,0 +1,140 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@import '../../global/styles/project-settings';
+@import '../../global/styles/mixins';
+
+// Other Carbon settings.
+// TODO: @import 'carbon-components/scss/globals/grid/grid'; if needed
+
+// CancelableTextEdit uses the following Carbon components:
+// TODO: @import(s) of Carbon component styles used by CancelableTextEdit
+
+// CancelableTextEdit uses the following Carbon for IBM Products components:
+// TODO: @import(s) of IBM Products component styles used by CancelableTextEdit
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin cancelable-text-edit {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+  $block-class: #{$pkg-prefix}--cancelable-text-edit;
+
+  .#{$block-class}.#{$block-class} {
+    --size: #{$spacing-08};
+
+    position: relative;
+    width: 100%;
+    min-height: var(--size);
+  }
+
+  .#{$block-class}.#{$block-class}--xl {
+    --size: $spacing-09;
+  }
+
+  .#{$block-class}.#{$block-class} .#{$block-class}__input {
+    height: var(--size);
+    // stylelint-disable-next-line carbon/layout-token-use
+    padding-right: calc(2 * var(--size));
+  }
+
+  .#{$block-class}__buttons {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .#{$block-class}.#{$block-class} .#{$block-class}__revert,
+  .#{$block-class}.#{$block-class} .#{$block-class}__save {
+    width: var(--size);
+    height: var(--size);
+    min-height: var(--size);
+
+    &:hover {
+      // border hover input does NOT have focus
+      border-color: $hover-field;
+      border-bottom: 1px solid transparent;
+      background-clip: content-box;
+      box-shadow: initial;
+    }
+
+    &:focus:active,
+    &:focus {
+      // border focus input does NOT have focus
+      border-width: 2px;
+      border-color: $focus;
+      box-shadow: initial;
+    }
+
+    &:focus:active:hover {
+      // stylelint-disable-next-line carbon/layout-token-use
+      padding: 1px;
+    }
+
+    &::before {
+      background-color: transparent;
+    }
+  }
+
+  // border hover input has focus
+  // and/or is invalid
+  .#{$block-class}.#{$block-class}--invalid
+    .#{$carbon-prefix}--text-input-wrapper
+    ~ .#{$block-class}__buttons,
+  .#{$block-class}.#{$block-class}
+    .#{$carbon-prefix}--text-input-wrapper:focus-within
+    ~ .#{$block-class}__buttons {
+    .#{$block-class}__revert,
+    .#{$block-class}__save {
+      border: 2px solid transparent;
+      // transition-property: initial; // turn off seems to cause a bit of a visual glitch
+    }
+
+    // button hover state
+    .#{$block-class}__revert:hover,
+    .#{$block-class}__save:hover {
+      border-top: 2px solid transparent;
+      border-bottom: 2px solid transparent;
+      background-clip: content-box;
+    }
+    .#{$block-class}__save {
+      // border hover input has focus or is in error
+      border-right: 2px solid transparent;
+    }
+  }
+
+  // > only wish to affect version added for inline
+  .#{$block-class}--invalid > .#{$carbon-prefix}--form-requirement,
+  .#{$block-class}--warn > .#{$carbon-prefix}--form-requirement {
+    display: block;
+    max-height: initial;
+    // stylelint-disable-next-line carbon/layout-token-use
+    margin-left: calc(20% + 1.25rem); // needs to match inline input layout
+  }
+
+  // > only wish to affect version added for inline
+  .#{$block-class}--invalid > .#{$carbon-prefix}--form-requirement {
+    color: $text-error;
+  }
+
+  .#{$block-class} .#{$carbon-prefix}--text-input {
+    // stylelint-disable-next-line carbon/layout-token-use
+    padding-right: calc(2 * var(--size)); // to take account of save and revert
+  }
+
+  .#{$block-class} .#{$carbon-prefix}--text-input--invalid {
+    // stylelint-disable-next-line carbon/layout-token-use
+    padding-right: calc(3 * var(--size)); // to take account of save and revert
+  }
+
+  .#{$block-class} .#{$carbon-prefix}--text-input__invalid-icon {
+    margin-right: $spacing-11;
+  }
+}
+
+@include exports('cancelable-text-edit') {
+  @include cancelable-text-edit;
+}

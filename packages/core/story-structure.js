@@ -32,6 +32,7 @@ const s = [
       {
         n: 'Patterns',
         s: [
+          { n: 'AddSelect', s: ['c/AddSelect'] },
           { n: 'About modal', s: ['c/AboutModal'] },
           {
             n: 'Create flows',
@@ -84,6 +85,7 @@ const s = [
           'c/BreadcrumbWithOverflow',
           'c/ButtonMenu',
           'c/ButtonSetWithOverflow',
+          'c/CancelableTextEdit',
           'c/ComboButton',
           'c/ExampleComponent',
           'c/TearsheetShell',

@@ -6,6 +6,7 @@
 //
 
 export { AboutModal } from './AboutModal';
+export { AddSelect } from './AddSelect';
 export { APIKeyModal } from './APIKeyModal';
 export { Cascade } from './Cascade';
 export { ComboButton, ComboButtonItem } from './ComboButton';
@@ -47,3 +48,4 @@ export { UserProfileImage } from './UserProfileImage';
 export { WebTerminal } from './WebTerminal';
 export { EditSidePanel } from './EditSidePanel';
 export { OptionsTile } from './OptionsTile';
+export { CancelableTextEdit } from './CancelableTextEdit';

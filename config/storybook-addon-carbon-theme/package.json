@@ -42,18 +42,18 @@
     "vue": "*"
   },
   "dependencies": {
-    "@storybook/addons": "6.4.9",
-    "@storybook/api": "6.4.9",
-    "@storybook/client-api": "6.4.9",
-    "@storybook/client-logger": "6.4.9",
-    "@storybook/components": "6.4.9",
-    "@storybook/core-events": "6.4.9",
-    "@storybook/theming": "6.4.9",
+    "@storybook/addons": "6.4.12",
+    "@storybook/api": "6.4.12",
+    "@storybook/client-api": "6.4.12",
+    "@storybook/client-logger": "6.4.12",
+    "@storybook/components": "6.4.12",
+    "@storybook/core-events": "6.4.12",
+    "@storybook/theming": "6.4.12",
     "core-js": "^3.20.2",
     "global": "^4.4.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.16.7",
+    "@babel/cli": "^7.16.8",
     "@babel/core": "^7.16.7",
     "@babel/preset-react": "^7.16.7",
     "npm-check-updates": "^12.1.0",

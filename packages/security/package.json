@@ -45,8 +45,8 @@
     "sync:clone": "git clone git@github.com:carbon-design-system/ibm-security.git --depth 1",
     "sync:copy": "copyfiles 'ibm-security/src/**/*' . -u 1",
     "test": "jest --colors",
-    "//upgrade-dependencies": "# don't upgrade carbon (done globally)",
-    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon)/'"
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally) or faker (destructively updated)",
+    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^faker$)/'"
   },
   "peerDependencies": {
     "react": "^17.0.2",
@@ -68,7 +68,7 @@
     "classnames": "^2.3.1",
     "downshift": "^6.1.7",
     "export-to-csv": "^0.2.1",
-    "focus-trap-react": "^8.9.0",
+    "focus-trap-react": "^8.9.1",
     "invariant": "^2.2.4",
     "numeral": "^2.0.6",
     "prop-types": "^15.8.1",

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.32.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.31.5...@carbon/ibm-cloud-cognitive-core@0.32.0) (2022-01-18)
+
+
+### Features
+
+* add select component init ([#1523](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1523)) ([3c61353](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/3c613539ce6334be13dbf2b5d09b5f7b73f87a20))
+
+
+
+
+
 ## [0.31.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.31.4...@carbon/ibm-cloud-cognitive-core@0.31.5) (2022-01-11)
 
 

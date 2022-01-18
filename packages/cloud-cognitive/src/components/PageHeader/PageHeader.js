@@ -90,6 +90,10 @@ export let PageHeader = React.forwardRef(
     const sizingContainerRef = useRef();
     const offsetTopMeasuringRef = useRef(null);
 
+    // state based on props only
+    const hasActionBar = actionBarItems && actionBarItems.length > 0;
+    const hasBreadcrumbRow = !!breadcrumbs || !!actionBarItems;
+
     // utility functions
     const checkUpdateVerticalSpace = function () {
       return utilCheckUpdateVerticalSpace(
@@ -97,13 +101,10 @@ export let PageHeader = React.forwardRef(
         offsetTopMeasuringRef,
         navigation,
         disableBreadcrumbScroll,
+        hasActionBar,
         setMetrics
       );
     };
-
-    // state based on props only
-    const hasActionBar = actionBarItems && actionBarItems.length > 0;
-    const hasBreadcrumbRow = breadcrumbs || actionBarItems;
 
     // NOTE: The buffer is used to add space between the bottom of the header and the last content
     // Not pre-collapsed and (subtitle or children)
@@ -1025,6 +1026,10 @@ PageHeader.propTypes = {
    *    - text: title string
    *    - icon: optional icon
    *    - loading: boolean shows loading indicator if true
+   *    - onChange: function to process edits only supply if in place edit is desired
+   *    - editableLabel: label for edit required if onChange supplied
+   *    - revertDescription: label for edit revert button
+   *    - saveDescription: label for edit save button
    * - Object containing user defined contents. These must fit within the area defined for the title in both main part of the header and the breadcrumb.
    *    - content: title or name of current location shown in main part of page header
    *    - breadcrumbContent: version of content used in the breadcrumb on scroll. If not supplied
@@ -1036,6 +1041,13 @@ PageHeader.propTypes = {
       text: PropTypes.string.isRequired,
       icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
       loading: PropTypes.bool,
+
+      // inline edit version properties
+      editableLabel: PropTypes.string, // .isRequired.if(inlineEditRequired),
+      id: PropTypes.string, // .isRequired.if(inlineEditRequired),
+      onChange: PropTypes.func,
+      revertDescription: PropTypes.string, //.isRequired.if(inlineEditRequired),
+      saveDescription: PropTypes.string, //.isRequired.if(inlineEditRequired),
       // Update docgen if changed
     }),
     PropTypes.string,

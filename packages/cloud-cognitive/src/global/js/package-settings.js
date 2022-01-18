@@ -60,6 +60,7 @@ const defaults = {
     EditSidePanel: false,
     OptionsTile: false,
     CancelableTextEdit: false,
+    InlineEdit: false,
     /* new component flags here - comment used by generate CLI */
   },
 

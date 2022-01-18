@@ -5897,7 +5897,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   height: var(--cds-spacing-02, 0.25rem);
 }
 .c4p--page-header .c4p--page-header__breadcrumb-row:not(.c4p--page-header__breadcrumb-row--has-action-bar) {
-  margin-bottom: calc(-1 * var(--cds-spacing-03, 0.5rem));
+  min-height: var(--cds-spacing-07, 2rem);
 }
 .c4p--page-header .c4p--page-header__breadcrumb-row--container {
   display: flex;
@@ -6116,8 +6116,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   top: var(--c4p--page-header--breadcrumb-top);
 }
 .c4p--page-header .c4p--page-header__title-column {
-  overflow: hidden;
-  /* required for ellipsis in title */
   min-height: 40px;
   flex: 0 0 100%;
 }
@@ -6132,9 +6130,16 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: var(--cds-productive-heading-04-font-weight, 400);
   line-height: var(--cds-productive-heading-04-line-height, 1.28572);
   letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0);
-  overflow: hidden;
+  overflow-x: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.c4p--page-header .c4p--page-header__title .c4p--inline-edit__value {
+  transform: translateY(-2px);
+}
+.c4p--page-header .c4p--page-header__title--editable {
+  display: flex;
+  overflow: visible;
 }
 .c4p--page-header .c4p--page-header__title-skeleton {
   height: var(--cds-spacing-07, 2rem);

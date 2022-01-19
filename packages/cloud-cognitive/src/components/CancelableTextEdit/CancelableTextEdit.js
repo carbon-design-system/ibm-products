@@ -15,6 +15,7 @@ import { Button, TextInput } from 'carbon-components-react';
 
 import { prepareProps } from '../../global/js/utils/props-helper';
 import { pkg, carbon } from '../../settings';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { Checkmark16, Reset16 } from '@carbon/icons-react';
 
 // Carbon and package components we use.
@@ -33,14 +34,18 @@ export let CancelableTextEdit = React.forwardRef(
   (
     {
       className,
+      hideLabel,
       inline,
       invalid,
       invalidText,
       labelText,
       onChange,
       onInput,
-      revertLabel,
-      saveLabel,
+      onRevert,
+      revertDescription,
+      saveDescription,
+      saveDisabled,
+      size,
       value,
       warn,
       warnText,
@@ -78,6 +83,9 @@ export let CancelableTextEdit = React.forwardRef(
 
     const handleRevert = () => {
       doInput(value);
+      if (onRevert) {
+        onRevert(value);
+      }
     };
 
     const handleSave = () => {
@@ -88,50 +96,67 @@ export let CancelableTextEdit = React.forwardRef(
 
     return (
       <div
-        className={cx(className, `${blockClass}`, {
+        className={cx(className, `${blockClass}`, `${blockClass}--${size}`, {
           [`${blockClass}--invalid`]: invalid,
           [`${blockClass}--warn`]: warn,
+          [`${blockClass}--inline`]: inline,
         })}
+        {...getDevtoolsProps(componentName)}
       >
-        <TextInput
-          {...prepareProps(rest, removeProps)} // it is not permitted to pass children down to TextInput guard against this
-          className={`${blockClass}__input`}
-          ref={ref}
-          onInput={handleInput}
-          value={liveValue ?? ''} // ?? '' prevents controlled components test failure https://reactjs.org/docs/forms.html#controlled-components
-          {...{ inline, invalid, invalidText, labelText, warn, warnText }}
-        />
-        <div className={`${blockClass}__buttons`}>
-          {!inline && labelText && (
-            <div
-              className={`${blockClass}__label-spacer ${carbon.prefix}--label`}
-            >
-              &nbsp;
+        <div className={`${blockClass}__main`}>
+          <TextInput
+            {...prepareProps(rest, removeProps)} // it is not permitted to pass children down to TextInput guard against this
+            className={`${blockClass}__input`}
+            ref={ref}
+            onInput={handleInput}
+            size={size}
+            value={liveValue ?? ''} // ?? '' prevents controlled components test failure https://reactjs.org/docs/forms.html#controlled-components
+            {...{
+              hideLabel,
+              inline,
+              invalid,
+              invalidText,
+              labelText,
+              warn,
+              warnText,
+            }}
+          />
+          <div className={`${blockClass}__buttons`}>
+            {!inline && !hideLabel && labelText && (
+              <div
+                className={`${blockClass}__label-spacer ${carbon.prefix}--label`}
+              >
+                &nbsp;
+              </div>
+            )}
+            <div className={`${blockClass}__buttons-inner`}>
+              <Button
+                className={`${blockClass}__revert`}
+                kind="ghost"
+                hasIconOnly
+                iconDescription={revertDescription}
+                onClick={handleRevert}
+                renderIcon={Reset16}
+              />
+              <Button
+                className={`${blockClass}__save`}
+                kind="ghost"
+                hasIconOnly
+                iconDescription={saveDescription}
+                onClick={handleSave}
+                renderIcon={Checkmark16}
+                disabled={invalid || saveDisabled || value === liveValue}
+                data-v={value}
+                data-lv={liveValue}
+              />
             </div>
-          )}
-          <div>
-            <Button
-              className={`${blockClass}__revert ${carbon.prefix}--search-close`}
-              kind="ghost"
-              hasIconOnly
-              iconDescription={revertLabel}
-              onClick={handleRevert}
-              renderIcon={Reset16}
-            />
-            <Button
-              className={`${blockClass}__save  ${carbon.prefix}--search-close`}
-              kind="ghost"
-              hasIconOnly
-              iconDescription={saveLabel}
-              onClick={handleSave}
-              renderIcon={Checkmark16}
-              disabled={invalid}
-            />
           </div>
         </div>
         {/* NOTE: By default the inline Carbon text edit does not display the invalid text */}
         {inline && (showInvalid || showWarn) && (
-          <div className={`${carbon.prefix}--form-requirement`}>
+          <div
+            className={`${blockClass}__problem ${carbon.prefix}--form-requirement`}
+          >
             {showInvalid ? invalidText : warnText}
           </div>
         )}
@@ -173,19 +198,23 @@ CancelableTextEdit.propTypes = {
    */
   className: PropTypes.string,
   /**
+   * hide the label
+   */
+  hideLabel: PropTypes.bool,
+  /**
    * inline variant
    */
   inline: PropTypes.bool,
   /**
-   * show invalid for current value
+   * set invalid state for input
    */
   invalid: PropTypes.bool,
   /**
-   * invalid text
+   * text shown when invalid is true
    */
   invalidText: PropTypes.string,
   /**
-   * labelText for text input
+   * label for text input
    */
   labelText: PropTypes.string,
   /**
@@ -197,23 +226,35 @@ CancelableTextEdit.propTypes = {
    */
   onInput: PropTypes.func,
   /**
+   * method called on revert event
+   */
+  onRevert: PropTypes.func,
+  /**
    * label for revert button
    */
-  revertLabel: PropTypes.string.isRequired,
+  revertDescription: PropTypes.string.isRequired,
   /**
    * label for save button
    */
-  saveLabel: PropTypes.string.isRequired,
+  saveDescription: PropTypes.string.isRequired,
   /**
-   * unedited value
+   * disabled state of the save button
+   */
+  saveDisabled: PropTypes.bool,
+  /**
+   * vertical size of control
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  /**
+   * initial/unedited value
    */
   value: PropTypes.string,
   /**
-   * show warning for current value
+   * set warn state for input
    */
   warn: PropTypes.bool,
   /**
-   * warn text
+   * text shown when warn true
    */
   warnText: PropTypes.string,
 };
@@ -224,4 +265,5 @@ CancelableTextEdit.propTypes = {
 // component needs to make a choice or assumption when a prop is not supplied.
 CancelableTextEdit.defaultProps = {
   /* TODO: add defaults for relevant props. */
+  size: 'md',
 };

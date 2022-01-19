@@ -20,14 +20,14 @@ const componentName = CancelableTextEdit.displayName;
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 const labelText = 'Test label';
-const saveLabel = 'Save label';
-const revertLabel = 'Revert label';
+const saveDescription = 'Save label';
+const revertDescription = 'Revert label';
 
 const requiredProps = {
   id: dataTestId,
   labelText,
-  revertLabel,
-  saveLabel,
+  revertDescription,
+  saveDescription,
   onChange: () => {},
 };
 

@@ -6,6 +6,7 @@
  */
 
 import React, { useState } from 'react';
+import { action } from '@storybook/addon-actions';
 
 import { carbon } from '../../settings';
 
@@ -348,6 +349,20 @@ const title = {
     ),
     asText: 'User defined title',
   },
+  'Editable title': {
+    editDescription: 'Edit',
+    editableLabel: 'Label for inline edit',
+    id: 'id for inline edit',
+    onChange: () => {
+      // gets replaced in template
+    },
+    onInput: () => {
+      // gets replaced in template
+    },
+    revertDescription: 'Revert',
+    saveDescription: 'Save',
+    text: 'An editable title',
+  },
 };
 
 const fullWidthGrid = {
@@ -520,15 +535,70 @@ const demoDummyPageContent = (
   </section>
 );
 
+const actionTitleChange = action('title onChange');
+const actionTitleInput = action('title onInput');
 // Template.
 // eslint-disable-next-line react/prop-types
-const Template = ({ children, ...props }) => (
-  <>
-    <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
-    <PageHeader {...props}>{children}</PageHeader>
-    {dummyPageContent}
-  </>
-);
+const Template = ({ children, title, ...props }) => {
+  // eslint-disable-next-line react/prop-types
+  const [titleText, setTitleText] = useState(title?.text ?? title);
+  const handleTitleChange = title?.onChange
+    ? (val) => {
+        actionTitleChange(val);
+        setTitleText(val);
+      }
+    : null;
+  const handleTitleInput = title?.onInput ? actionTitleInput : null;
+
+  // const [theTitle, setTheTitle] = useState({});
+
+  // useEffect(() => {
+  //   console.log('effect1', titleText);
+  //   // eslint-disable-next-line react/prop-types
+  //   if (title?.text) {
+  //     setTheTitle({ ...title, text: titleText });
+  //   } else {
+  //     setTheTitle(title);
+  //   }
+  // }, [title, title.text]);
+
+  // useEffect(() => {
+  //   // only used if title property changes
+  //   // eslint-disable-next-line react/prop-types
+  //   if (title?.text) {
+  //     setTheTitle({
+  //       ...title,
+  //       // eslint-disable-next-line react/prop-types
+  //       onChange: title?.onChange && handleTitleChange,
+  //     });
+  //   } else {
+  //     setTitleText(title);
+  //   }
+  // }, [title]);
+
+  // console.log(theTitle);
+  return (
+    <>
+      <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
+      <PageHeader
+        {...props}
+        title={
+          title?.onChange
+            ? {
+                ...title,
+                text: titleText,
+                onChange: handleTitleChange,
+                onInput: handleTitleInput,
+              }
+            : title
+        }
+      >
+        {children}
+      </PageHeader>
+      {dummyPageContent}
+    </>
+  );
+};
 
 const commonArgs = {
   allTagsModalSearchLabel,
@@ -683,6 +753,7 @@ export const fullyLoadedAndSome = prepareStory(Template, {
 // eslint-disable-next-line react/prop-types
 const TemplateDemo = ({ children, storyOptionWholePageScroll, ...props }) => {
   const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
+
   return (
     <>
       <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>

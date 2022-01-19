@@ -19,6 +19,7 @@ export const blockClass = `${pkg.prefix}--page-header`;
  * @param {{}} offsetTopMeasuringRef
  * @param {{}} navigation
  * @param {boolean} disableBreadcrumbScroll
+ * @param {boolean} hasActionBar
  * @param {()} setMetrics
  */
 export const utilCheckUpdateVerticalSpace = (
@@ -26,6 +27,7 @@ export const utilCheckUpdateVerticalSpace = (
   offsetTopMeasuringRef,
   navigation,
   disableBreadcrumbScroll,
+  hasActionBar,
   setMetrics
 ) => {
   const dynamicRefs = {};
@@ -107,6 +109,12 @@ export const utilCheckUpdateVerticalSpace = (
     if (navigation) {
       // adjust top for sticky with navigation
       update.headerTopValue += update.navigationRowHeight;
+    }
+
+    if (!hasActionBar) {
+      // Add difference between $spacing-08 and $spacing-07 to ensure space below breadcrumb is correct on scroll
+      // $spacing-07 is used as size for breadcrumb when no action bar otherwise $spacing-08
+      update.headerTopValue += 8;
     }
 
     if (disableBreadcrumbScroll || !navigation) {

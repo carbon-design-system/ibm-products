@@ -7,12 +7,18 @@
 
 import React from 'react';
 import { getPathForComponent } from '../../../../packages/core/story-structure';
+
 import App from './App';
 
+import styles from './_storybook-styles.scss';
+
 export default {
-  title: getPathForComponent('o', 'Examples on CodePen.io'),
+  title: getPathForComponent('o', 'Examples on CodeSandbox'),
+  parameters: {
+    styles,
+  },
 };
 
-export const OneStory = () => <App />;
-OneStory.storyName = 'IBM Products';
-OneStory.parameters = { options: { showPanel: false } };
+export const c4pGallery = () => <App />;
+c4pGallery.storyName = 'Carbon for IBM Products';
+c4pGallery.parameters = { options: { showPanel: false } };

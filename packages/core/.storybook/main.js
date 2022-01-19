@@ -35,7 +35,7 @@ module.exports = {
     //fastRefresh: true, -- this option would be nice, but seems to cause errors, see https://github.com/storybookjs/storybook/issues/13745
     strictMode: true,
   },
-  stories: ['../../**/+(docs|src)/**/*+(-story|.stories).*'],
+  stories: ['../../../**/+(docs|src)/**/*+(-story|.stories).*'],
   webpackFinal: async (configuration) =>
     merge(configuration, {
       cache: {

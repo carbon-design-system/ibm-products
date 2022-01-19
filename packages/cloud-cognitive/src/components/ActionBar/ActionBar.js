@@ -68,9 +68,11 @@ export let ActionBar = React.forwardRef(
             overflowItems={[]}
             key="hidden-overflow-menu"
           ></ActionBarOverflowItems>
-          {actions.map(({ key, ...rest }) => (
+          {actions.map(({ key, id, ...rest }) => (
             <ActionBarItem
               {...rest}
+              // ensure id is not duplicated
+              data-original-id={id}
               key={`hidden-item-${key}`}
               className={`${blockClass}__hidden-sizing-item`}
             />

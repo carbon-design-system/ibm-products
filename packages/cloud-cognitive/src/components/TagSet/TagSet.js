@@ -63,14 +63,18 @@ export let TagSet = React.forwardRef(
       // create sizing tags
       setHiddenSizingTags(
         tags && tags.length > 0
-          ? tags.map(({ label, ...other }, index) => {
+          ? tags.map(({ label, id, ...other }, index) => {
               return (
                 <div
                   key={index}
                   className={`${blockClass}__sizing-tag`}
                   ref={(el) => (newSizingTags[index] = el)}
                 >
-                  <Tag {...other} filter={false}>
+                  <Tag
+                    {...other} // ensure id is not duplicated
+                    data-original-id={id}
+                    filter={false}
+                  >
                     {label}
                   </Tag>
                 </div>

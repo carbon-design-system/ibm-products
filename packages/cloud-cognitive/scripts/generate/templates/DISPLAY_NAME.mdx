@@ -1,5 +1,8 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import { getStoryId } from '../../global/js/utils/story-helper';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
 import { DISPLAY_NAME } from '.';
 
 # DISPLAY_NAME
@@ -21,6 +24,10 @@ import { DISPLAY_NAME } from '.';
 <Canvas>
   <Story id={getStoryId(DISPLAY_NAME.displayName, 'STYLE_NAME')} />
 </Canvas>
+
+## Code sample
+
+<!-- <CodesandboxLink exampleDirectory="DISPLAY_NAME" /> -->
 
 ## Component API
 

@@ -50,6 +50,7 @@ const defaults = {
     UserProfileImage: true,
 
     // other public components not yet reviewed and released:
+    AddSelect: false,
     LoadingBar: false,
     ModifiedTabs: false,
     Toolbar: false,
@@ -58,6 +59,8 @@ const defaults = {
     WebTerminal: false,
     EditSidePanel: false,
     OptionsTile: false,
+    CancelableTextEdit: false,
+    InlineEdit: false,
     /* new component flags here - comment used by generate CLI */
   },
 

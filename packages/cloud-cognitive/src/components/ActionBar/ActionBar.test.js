@@ -16,6 +16,7 @@ const blockClass = `${pkg.prefix}--action-bar`;
 
 const actions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => ({
   key: `key is this num ${num}`,
+  id: `id-${num}`,
   renderIcon: num % 2 ? Lightning16 : Bee16,
   iconDescription: `Action ${num.toString().padStart(2, '0')}`,
   onClick: () => {},
@@ -153,6 +154,19 @@ describe(ActionBar.displayName, () => {
       name: 'Action 10',
     });
     expect(menuItemSeen).not.toBeNull();
+  });
+
+  it('Does not duplicate action IDs', () => {
+    // not enough room so should see an overflow.
+    const { container } = render(
+      <TestActionBar
+        width={200}
+        overflowAriaLabel={overflowAriaLabel}
+        actions={actions}
+      />
+    );
+
+    expect(container.querySelectorAll(`#${actions[0].id}`)).toHaveLength(1);
   });
 
   it('Renders an action bar with max items set', () => {

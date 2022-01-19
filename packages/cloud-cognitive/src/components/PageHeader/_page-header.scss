@@ -144,7 +144,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
 
     .#{$block-class}__breadcrumb-row:not(.#{$block-class}__breadcrumb-row--has-action-bar) {
       // lifts up page title when there is no action bar
-      margin-bottom: calc(-1 * #{$spacing-03});
+      min-height: $spacing-07;
     }
 
     .#{$block-class}__breadcrumb-row--container {
@@ -408,7 +408,6 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     }
 
     .#{$block-class}__title-column {
-      overflow: hidden; /* required for ellipsis in title */
       min-height: 40px;
       flex: 0 0 100%;
 
@@ -421,9 +420,20 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     .#{$block-class}__title {
       @include carbon--type-style('productive-heading-04');
 
-      overflow: hidden;
+      overflow-x: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+
+    .#{$block-class}__title .#{$pkg-prefix}--inline-edit__value {
+      // The heading text sits 2px pixels lower in the inline edit which is aligned center
+      // stylelint-disable-next-line carbon/layout-token-use
+      transform: translateY(-2px);
+    }
+
+    .#{$block-class}__title--editable {
+      display: flex;
+      overflow: visible;
     }
 
     .#{$block-class}__title-skeleton {

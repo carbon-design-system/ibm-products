@@ -13,7 +13,6 @@ import styles from './_storybook-styles.scss';
 import { CreateTearsheet } from './CreateTearsheet';
 import { CreateTearsheetStep } from './CreateTearsheetStep';
 import { MultiStepTearsheet } from './preview-components/MultiStepTearsheet';
-import { MultiStepWithSectionsTearsheet } from './preview-components/MultiStepWithSectionsTearsheet';
 import { MultiStepWithIntro } from './preview-components/MultiStepWithIntro';
 import mdx from './CreateTearsheet.mdx';
 
@@ -48,14 +47,6 @@ const createTearsheetProps = {
 
 export const multiStepTearsheet = prepareStory(MultiStepTearsheet, {
   storyName: 'Create tearsheet',
-  args: {
-    includeViewAllToggle: false,
-    ...createTearsheetProps,
-  },
-});
-
-export const withSections = prepareStory(MultiStepWithSectionsTearsheet, {
-  storyName: 'Create tearsheet with sections',
   args: {
     ...createTearsheetProps,
   },

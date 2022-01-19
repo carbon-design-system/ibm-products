@@ -49,8 +49,8 @@ export let OptionsTile = React.forwardRef(
       locked,
       lockedText,
       onToggle,
-      open = false,
-      size = 'xl',
+      open,
+      size,
       summary,
       warn,
       warnText,
@@ -366,5 +366,6 @@ OptionsTile.propTypes = {
 // 'undefined' values reasonably. Default values should be provided when the
 // component needs to make a choice or assumption when a prop is not supplied.
 OptionsTile.defaultProps = {
+  open: false,
   size: 'xl',
 };

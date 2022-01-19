@@ -8,13 +8,15 @@
 import { useCallback, useEffect } from 'react';
 
 export const useCreateComponentStepChange = ({
+  totalStepCount,
+  onNext,
+  isSubmitDisabled,
   setCurrentStep,
   setIsSubmitting,
   setShouldViewAll,
   onClose,
   onRequestSubmit,
   componentName,
-  getComponentSteps,
   currentStep,
   shouldViewAll,
   backButtonText,
@@ -46,31 +48,11 @@ export const useCreateComponentStepChange = ({
         console.warn(`${componentName} submit error: ${error}`);
       }
     };
-    const isSubmitDisabled = () => {
-      let step = 0;
-      let submitDisabled = false;
-      let viewAllSubmitDisabled = false;
-      const createComponentSteps = getComponentSteps();
-      createComponentSteps.forEach((child) => {
-        step++;
-        if (currentStep === step) {
-          submitDisabled = child.props.disableSubmit;
-        }
-        if (shouldViewAll && child.props.disableSubmit) {
-          viewAllSubmitDisabled = true;
-        }
-      });
-      if (!shouldViewAll) {
-        return submitDisabled;
-      }
-      return viewAllSubmitDisabled;
-    };
     const handleNext = async () => {
       setIsSubmitting(true);
-      const createSteps = getComponentSteps();
-      if (createSteps[currentStep - 1].props.onNext) {
+      if (typeof onNext === 'function') {
         try {
-          await createSteps[currentStep - 1].props.onNext();
+          await onNext();
           continueToNextStep();
         } catch (error) {
           setIsSubmitting(false);
@@ -82,11 +64,10 @@ export const useCreateComponentStepChange = ({
     };
     const handleSubmit = async () => {
       setIsSubmitting(true);
-      const createSteps = getComponentSteps();
       // last step should have onNext as well
-      if (createSteps[currentStep - 1].props.onNext) {
+      if (typeof onNext === 'function') {
         try {
-          await createSteps[currentStep - 1].props.onNext();
+          await onNext();
           await handleOnRequestSubmit();
         } catch (error) {
           setIsSubmitting(false);
@@ -96,11 +77,9 @@ export const useCreateComponentStepChange = ({
         await handleOnRequestSubmit();
       }
     };
-    if (getComponentSteps()?.length) {
-      const createSteps = getComponentSteps();
-      const total = createSteps.length;
+    if (totalStepCount > 0) {
       const buttons = [];
-      if (total > 1 && !shouldViewAll) {
+      if (totalStepCount > 1 && !shouldViewAll) {
         buttons.push({
           key: 'create-action-button-back',
           label: backButtonText,
@@ -122,15 +101,15 @@ export const useCreateComponentStepChange = ({
         key: 'create-action-button-submit',
         label: shouldViewAll
           ? submitButtonText
-          : currentStep < total
+          : currentStep < totalStepCount
           ? nextButtonText
           : submitButtonText,
         onClick: shouldViewAll
           ? handleSubmit
-          : currentStep < total
+          : currentStep < totalStepCount
           ? handleNext
           : handleSubmit,
-        disabled: isSubmitDisabled(),
+        disabled: isSubmitDisabled,
         kind: 'primary',
         loading: isSubmitting,
         className: `${componentBlockClass}__create-button`,
@@ -138,7 +117,9 @@ export const useCreateComponentStepChange = ({
       setCreateComponentActions(buttons);
     }
   }, [
-    getComponentSteps,
+    totalStepCount,
+    onNext,
+    isSubmitDisabled,
     backButtonText,
     cancelButtonText,
     currentStep,

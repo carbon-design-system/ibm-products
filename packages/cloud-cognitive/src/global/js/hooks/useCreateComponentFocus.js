@@ -8,49 +8,34 @@
 import { useEffect } from 'react';
 import { getFocusableElements } from '../utils/getFocusableElements';
 
-/**
- * Returns the previous state values included in the param
- * @param {object} previousState
- * @param {number} currentStep
- * @param {Function} getCreateComponentSteps
- * @param {string} componentBlockClass
- */
-export const useCreateComponentFocus = (
+// Focus the first focusable element and call the onMount prop for the current step if one is provided
+export const useCreateComponentFocus = ({
   previousState,
   currentStep,
-  getCreateComponentSteps,
-  componentBlockClass
-) => {
+  blockClass,
+  onMount,
+}) => {
+  useEffect(() => {
+    if (typeof onMount === 'function') {
+      onMount();
+    }
+  }, [onMount]);
   useEffect(() => {
     if (previousState?.currentStep !== currentStep && currentStep > 0) {
       const visibleStepInnerContent = document.querySelector(
-        `.${componentBlockClass}__step.${componentBlockClass}__step--visible-step`
+        `.${blockClass}__step.${blockClass}__step__step--visible-step`
       );
-      const createComponentSteps = getCreateComponentSteps();
-      const focusableStepElements =
-        createComponentSteps &&
-        createComponentSteps.length &&
-        getFocusableElements(visibleStepInnerContent);
-      const activeStepComponent =
-        createComponentSteps &&
-        createComponentSteps.length &&
-        createComponentSteps[currentStep - 1];
-      if (activeStepComponent && activeStepComponent.props.onMount) {
-        activeStepComponent.props.onMount();
-      }
+      const focusableStepElements = visibleStepInnerContent
+        ? getFocusableElements(visibleStepInnerContent)
+        : [];
       if (focusableStepElements && focusableStepElements.length) {
         focusableStepElements[0].focus();
       } else {
         const nextButton = document.querySelector(
-          `.${componentBlockClass}__create-button`
+          `.${blockClass}__create-button`
         );
         nextButton?.focus();
       }
     }
-  }, [
-    currentStep,
-    getCreateComponentSteps,
-    previousState,
-    componentBlockClass,
-  ]);
+  }, [currentStep, previousState, blockClass, onMount]);
 };

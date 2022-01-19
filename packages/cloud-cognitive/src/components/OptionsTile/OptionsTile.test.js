@@ -134,6 +134,12 @@ describe(componentName, () => {
     expect(summary).toHaveClass(`${blockClass}__summary--locked`);
   });
 
+  it('renders open state when passed', () => {
+    const { container } = render(<OptionsTile {...props} open={true} />);
+
+    expect(container.querySelector('details').open).toBe(true);
+  });
+
   it('supports "lg" size', () => {
     render(<OptionsTile {...props} size="lg" />);
     expect(screen.getByTestId(dataTestId)).toHaveClass(`${blockClass}--lg`);

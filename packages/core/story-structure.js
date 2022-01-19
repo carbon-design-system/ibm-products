@@ -88,6 +88,7 @@ const s = [
           'c/CancelableTextEdit',
           'c/ComboButton',
           'c/ExampleComponent',
+          'c/InlineEdit',
           'c/TearsheetShell',
         ],
       },

@@ -1,12 +1,11 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2022, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React, { useEffect, useState } from 'react';
-
 import { action } from '@storybook/addon-actions';
 
 import {
@@ -14,18 +13,14 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 
-import { CancelableTextEdit } from '.';
-import mdx from './CancelableTextEdit.mdx';
+import { InlineEdit } from '.';
+import mdx from './InlineEdit.mdx';
 
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(CancelableTextEdit.displayName),
-  component: CancelableTextEdit,
-  // TODO: Define argTypes for props not represented by standard JS types.
-  // argTypes: {
-  //   egProp: { control: 'color' },
-  // },
+  title: getStoryTitle(InlineEdit.displayName),
+  component: InlineEdit,
   parameters: {
     styles,
     docs: {
@@ -34,12 +29,15 @@ export default {
   },
 };
 
-const actionInput = action('input');
 const actionChange = action('change');
+const actionInput = action('input');
 const actionRevert = action('revert');
 
-// eslint-disable-next-line react/prop-types
+/**
+ * TODO: Declare template(s) for one or more scenarios.
+ */
 const Template = ({
+  editDescription,
   revertDescription,
   saveDescription,
   value: initialValue,
@@ -59,9 +57,11 @@ const Template = ({
   }, [initialValue]);
 
   return (
-    <CancelableTextEdit
+    <InlineEdit
+      invalidText="Cannot be empty"
       {...rest}
       {...{
+        editDescription,
         onChange,
         onInput,
         onRevert,
@@ -73,15 +73,11 @@ const Template = ({
   );
 };
 
-/**
- * TODO: Declare one or more stories, generally one per design scenario.
- * NB no need for a 'Playground' because all stories have all controls anyway.
- */
-export const Default = prepareStory(Template, {
+export const inlineEdit = prepareStory(Template, {
   args: {
-    id: 'edit button',
     editDescription: 'Edit',
-    labelText: 'Label',
+    id: 'edit button',
+    labelText: 'Inline edit',
     revertDescription: 'Revert',
     saveDescription: 'Save',
     value: 'hello, world',

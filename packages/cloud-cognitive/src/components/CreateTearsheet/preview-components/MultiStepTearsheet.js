@@ -25,6 +25,24 @@ import { CreateTearsheetStep } from '../CreateTearsheetStep';
 
 const blockClass = `${pkg.prefix}--tearsheet-create-multi-step`;
 
+const CustomStep = ({ value1, setValue1, ...rest }) => {
+  return (
+    <CreateTearsheetStep {...rest} disableSubmit={!value1}>
+      <Row>
+        <Column xlg={8} lg={8} md={8} sm={8}>
+          <TextInput
+            value={value1}
+            onChange={(event) => setValue1(event.target.value)}
+            id="custom-step-input"
+            labelText="Location"
+            placeholder="Enter location"
+          />
+        </Column>
+      </Row>
+    </CreateTearsheetStep>
+  );
+};
+
 export const MultiStepTearsheet = ({
   backButtonText,
   cancelButtonText,
@@ -40,6 +58,7 @@ export const MultiStepTearsheet = ({
   const [open, setOpen] = useState(false);
   const [shouldReject, setShouldReject] = useState(false);
   const [hasSubmitError, setHasSubmitError] = useState(false);
+  const [value1, setValue1] = useState('');
   const [stepOneTextInputValue, setStepOneTextInputValue] = useState('');
   const [topicDescriptionValue, setTopicDescriptionValue] = useState('');
   const [topicVersionValue, setTopicVersionValue] = useState('');
@@ -57,6 +76,7 @@ export const MultiStepTearsheet = ({
     setHasSubmitError(false);
     setIsInvalid(false);
     setOpen(false);
+    setValue1('');
   };
 
   return (
@@ -112,9 +132,9 @@ export const MultiStepTearsheet = ({
             <Column xlg={8} lg={8} md={8} sm={8}>
               <TextInput
                 labelText="Topic name"
+                placeholder="Enter topic name"
                 id="tearsheet-multi-step-story-text-input-multi-step-1"
                 value={stepOneTextInputValue}
-                placeholder="Enter topic name"
                 onChange={(event) => {
                   if (event.target.value.length) {
                     setIsInvalid(false);
@@ -163,6 +183,13 @@ export const MultiStepTearsheet = ({
             </Column>
           </Row>
         </CreateTearsheetStep>
+        <CustomStep
+          title="Location"
+          subtitle="Custom step subtitle"
+          description="Custom step description (see storybook implementation for new custom step capability)"
+          value1={value1}
+          setValue1={setValue1}
+        />
         <CreateTearsheetStep
           title="Partitions"
           disableSubmit={!stepTwoTextInputValue}

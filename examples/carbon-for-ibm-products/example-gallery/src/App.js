@@ -37,6 +37,7 @@ const App = () => {
               key={index}
               title={item.label}
               url={item.url}
+              target="_blank" // NOTE: _top and _parent do not seem to work in codesandbox
               thumbnail={item.thumbnail}
             />
           ))}

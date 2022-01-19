@@ -100,6 +100,7 @@ const parameters = {
   },
   layout: 'centered',
   options: {
+    showPanel: true,
     storySort: (a, b) => {
       const aPosition = getSectionSequence(a[1].kind);
       const bPosition = getSectionSequence(b[1].kind);

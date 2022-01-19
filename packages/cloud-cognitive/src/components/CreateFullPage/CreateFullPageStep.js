@@ -1,16 +1,18 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
-import { CREATE_FULL_PAGE_STEP } from './constants.js';
 import { FormGroup } from 'carbon-components-react';
+import { StepsContext, StepNumberContext } from './CreateFullPage';
+import { usePreviousValue } from '../../global/js/hooks';
+import pconsole from '../../global/js/utils/pconsole';
 
 const componentName = 'CreateFullPageStep';
 const blockClass = `${pkg.prefix}--create-full-page__step`;
@@ -22,14 +24,69 @@ export let CreateFullPageStep = forwardRef(
       className,
       subtitle,
       description,
+      disableSubmit,
+      introStep,
       title,
       hasFieldset,
       fieldsetLegendText,
+      onNext,
+      onMount,
+      secondaryLabel,
     },
     ref
   ) => {
-    return (
-      <section className={cx(blockClass, className)} ref={ref}>
+    const steps = useContext(StepsContext);
+    const stepNumber = useContext(StepNumberContext);
+    const previousState = usePreviousValue({ currentStep: steps?.currentStep });
+
+    // This useEffect reports back the onNext and onMount values so that they can be used
+    // in the appropriate custom hooks.
+    useEffect(() => {
+      if (
+        stepNumber === steps?.currentStep &&
+        previousState?.currentStep !== steps?.currentStep
+      ) {
+        steps?.setOnNext(onNext);
+        steps?.setOnMount(onMount);
+      }
+    }, [onMount, onNext, steps, stepNumber, previousState?.currentStep]);
+
+    // This useEffect makes sure that every CreateTearsheetStep reports back it's
+    // title, secondaryLabel, and introStep props so that it can be sent to the CreateInfluencer.
+    useEffect(() => {
+      const stepHasReported = steps?.stepData?.includes(
+        (item) => item.title === title
+      );
+      if (!stepHasReported && steps?.stepData?.length < steps?.totalStepCount) {
+        steps?.setStepData((prev) => [
+          ...prev,
+          {
+            title,
+            secondaryLabel,
+            introStep,
+          },
+        ]);
+      }
+    }, [steps, title, secondaryLabel, introStep]);
+
+    // Whenever we are the current step, supply our disableSubmit value to the
+    // steps container context so that it can manage the 'Next' button appropriately.
+    useEffect(() => {
+      if (stepNumber === steps?.currentStep) {
+        steps.setIsDisabled(disableSubmit);
+      }
+    }, [steps, stepNumber, disableSubmit, onNext]);
+
+    return steps ? (
+      <section
+        className={cx(blockClass, className, {
+          [`${blockClass}__step--hidden-step`]:
+            stepNumber !== steps?.currentStep,
+          [`${blockClass}__step--visible-step`]:
+            stepNumber === steps?.currentStep,
+        })}
+        ref={ref}
+      >
         <h5 className={`${blockClass}-title`}>{title}</h5>
         {subtitle && <h6 className={`${blockClass}-subtitle`}>{subtitle}</h6>}
         {description && (
@@ -46,6 +103,10 @@ export let CreateFullPageStep = forwardRef(
           children
         )}
       </section>
+    ) : (
+      pconsole.warn(
+        `You have tried using a ${componentName} component outside of a CreateFullPage. This is not allowed. ${componentName}s should always be children of the CreateFullPage`
+      )
     );
   }
 );
@@ -121,12 +182,4 @@ CreateFullPageStep.propTypes = {
    * Sets the title text for a create full page step
    */
   title: PropTypes.node.isRequired,
-};
-
-// Default values for component props. Default values are not required for
-// props that are required, nor for props where the component can apply
-// 'undefined' values reasonably. Default values should be provided when the
-// component needs to make a choice or assumption when a prop is not supplied.
-CreateFullPageStep.defaultProps = {
-  type: CREATE_FULL_PAGE_STEP,
 };

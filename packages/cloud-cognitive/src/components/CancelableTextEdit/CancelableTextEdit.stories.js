@@ -34,70 +34,39 @@ export default {
   },
 };
 
+const actionInput = action('input');
+const actionChange = action('change');
+const actionRevert = action('revert');
+
 // eslint-disable-next-line react/prop-types
 const Template = ({
-  invalid: invalidIn,
-  invalidText: invalidTextIn,
-  revertLabel,
-  saveLabel,
+  revertDescription,
+  saveDescription,
   value: initialValue,
   ...rest
 }) => {
-  const inputAction = action('live value');
-
   const [value, setValue] = useState(initialValue);
-  const [invalid, setInvalid] = useState(invalidIn);
-  const [invalidText, setInvalidText] = useState(invalidTextIn);
 
   const onChange = (val) => {
     setValue(val);
+    actionChange(val);
   };
-  const onInput = (val) => {
-    inputAction(val);
-    if (val === '') {
-      setInvalidText('Value cannot be empty');
-      setInvalid(true);
-    } else {
-      setInvalidText(invalidTextIn);
-      setInvalid(invalidIn);
-    }
-  };
+  const onInput = actionInput;
+  const onRevert = actionRevert;
 
-  useEffect(() => {
-    setInvalid(invalidIn);
-  }, [invalidIn]);
-  useEffect(() => {
-    setInvalidText(invalidTextIn);
-  }, [invalidTextIn]);
   useEffect(() => {
     setValue(initialValue);
   }, [initialValue]);
-
-  // useEffect(() => {
-  //   setTextInput((prev) => ({ ...prev, ...rest }));
-  // }, [rest]);
-
-  console.dir(rest);
-  console.dir({
-    invalid,
-    invalidText,
-    onChange,
-    onInput,
-    revertLabel,
-    saveLabel,
-    value,
-  });
 
   return (
     <CancelableTextEdit
       {...rest}
       {...{
-        invalid,
-        invalidText,
         onChange,
         onInput,
-        revertLabel,
-        saveLabel,
+        onRevert,
+        revertDescription,
+        saveDescription,
         value,
       }}
     />
@@ -111,9 +80,10 @@ const Template = ({
 export const Default = prepareStory(Template, {
   args: {
     id: 'edit button',
-    labelText: 'Inline edit',
-    revertLabel: 'Revert',
-    saveLabel: 'Save',
+    editDescription: 'Edit',
+    labelText: 'Label',
+    revertDescription: 'Revert',
+    saveDescription: 'Save',
     value: 'hello, world',
   },
 });

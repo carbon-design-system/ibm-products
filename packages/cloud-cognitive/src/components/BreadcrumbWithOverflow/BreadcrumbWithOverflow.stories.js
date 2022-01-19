@@ -42,6 +42,7 @@ export default {
 const breadcrumbItems = [
   {
     key: '1',
+    id: 'id-1',
     href: '/#',
     onClick: (ev) => {
       ev.preventDefault();
@@ -51,6 +52,7 @@ const breadcrumbItems = [
   },
   {
     key: '2',
+    id: 'id-2',
     href: '/#',
     onClick: (ev) => {
       ev.preventDefault();
@@ -60,6 +62,7 @@ const breadcrumbItems = [
   },
   {
     key: '3',
+    id: 'id-3',
     href: '/#',
     onClick: (ev) => {
       ev.preventDefault();
@@ -69,6 +72,7 @@ const breadcrumbItems = [
   },
   {
     key: '4',
+    id: 'id-4',
     href: '/#',
     onClick: (ev) => {
       ev.preventDefault();

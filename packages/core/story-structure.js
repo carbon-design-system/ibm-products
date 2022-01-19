@@ -14,7 +14,21 @@
 // paths but ignored during searching.
 const s = [
   {
-    n: 'Carbon for IBM Products',
+    n: 'Overview',
+    s: [
+      {
+        n: 'Getting started',
+        s: [],
+      },
+      {
+        n: 'Usage examples',
+        s: [],
+      },
+      'o/Examples on CodeSandbox',
+    ],
+  },
+  {
+    n: 'IBM Products',
     s: [
       {
         n: 'Components',
@@ -138,10 +152,6 @@ const s = [
         ],
       },
     ],
-  },
-  {
-    n: 'Getting Started',
-    s: [],
   },
 ];
 

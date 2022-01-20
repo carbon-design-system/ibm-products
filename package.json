@@ -56,6 +56,7 @@
     "//upgrade:dependencies:top": "# don't upgrade carbon (done globally), react/react-dom (not tested), husky (major change in action), eslint (until eslint-config-carbon's babel-eslint supports eslint v8), stylelint (until stylelint-config-carbon supports stylelint v14)",
     "upgrade:dependencies:top": "npm-check-updates -u --reject '/(carbon|^react$|^react-dom$|^husky$|^eslint$|^stylelint$)/'",
     "upgrade:dependencies:packages": "yarn run-all --no-sort --concurrency 1 upgrade-dependencies",
+    "upgrade:dependencies:yarn": "yarn policies set-version",
     "upgrade:automatic": "run-s upgrade:dependencies:*",
     "upgrade:carbon": "npm-check-updates -u --packageFile '{package.json,{config/**,packages/**}/package.json}' --filter '/carbon/'",
     "upgrade:manual": "sh ./scripts/monorepo-npm-upgrade.sh"

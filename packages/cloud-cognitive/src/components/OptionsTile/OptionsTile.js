@@ -49,7 +49,8 @@ export let OptionsTile = React.forwardRef(
       locked,
       lockedText,
       onToggle,
-      size = 'xl',
+      open,
+      size,
       summary,
       warn,
       warnText,
@@ -58,7 +59,8 @@ export let OptionsTile = React.forwardRef(
     },
     ref
   ) => {
-    const [open, setOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(open);
+    const [prevIsOpen, setPrevIsOpen] = useState(open);
     const [closing, setClosing] = useState(false);
 
     const detailsRef = useRef(null);
@@ -78,9 +80,18 @@ export let OptionsTile = React.forwardRef(
         ? window.matchMedia('(prefers-reduced-motion: reduce)')
         : { matches: true };
 
+    if (open !== prevIsOpen) {
+      if (isOpen && !open) {
+        collapse();
+      } else if (!isOpen && open) {
+        expand();
+      }
+      setPrevIsOpen(open);
+    }
+
     function expand() {
       if (detailsRef.current && contentRef.current && !reducedMotion.matches) {
-        setOpen(true);
+        setIsOpen(true);
 
         detailsRef.current.open = true;
         const { paddingTop, paddingBottom, height } = getComputedStyle(
@@ -111,7 +122,7 @@ export let OptionsTile = React.forwardRef(
         );
       } else {
         // in case the refs are not set or the user prefers reduced motion, skip the animation
-        setOpen(true);
+        setIsOpen(true);
       }
     }
 
@@ -145,7 +156,7 @@ export let OptionsTile = React.forwardRef(
         );
 
         const callback = () => {
-          setOpen(false);
+          setIsOpen(false);
           setClosing(false);
         };
 
@@ -153,14 +164,14 @@ export let OptionsTile = React.forwardRef(
         animation.oncancel = callback;
       } else {
         // in case the ref is not set or the user prefers reduced motion, skip the animation
-        setOpen(false);
+        setIsOpen(false);
       }
     }
 
     function toggle(e) {
       e.preventDefault();
 
-      if (open) {
+      if (isOpen) {
         collapse();
       } else {
         expand();
@@ -236,7 +247,7 @@ export let OptionsTile = React.forwardRef(
           </div>
         )}
         {isExpandable ? (
-          <details open={open} ref={detailsRef}>
+          <details open={isOpen} ref={detailsRef}>
             <summary className={`${blockClass}__header`} onClick={toggle}>
               <ChevronDown16 className={`${blockClass}__chevron`} />
               {renderTitle()}
@@ -325,6 +336,11 @@ OptionsTile.propTypes = {
   onToggle: PropTypes.func,
 
   /**
+   * Whether the OptionsTile is in open state.
+   */
+  open: PropTypes.bool,
+
+  /**
    * Define the size of the OptionsTile.
    */
   size: PropTypes.oneOf(['lg', 'xl']),
@@ -350,5 +366,6 @@ OptionsTile.propTypes = {
 // 'undefined' values reasonably. Default values should be provided when the
 // component needs to make a choice or assumption when a prop is not supplied.
 OptionsTile.defaultProps = {
+  open: false,
   size: 'xl',
 };

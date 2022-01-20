@@ -92,8 +92,14 @@ export let BreadcrumbWithOverflow = ({
               renderIcon={OverflowMenuHorizontal32}
             />
           </BreadcrumbItem>
-          {breadcrumbs.map(({ label, key, title, ...rest }) => (
-            <BreadcrumbItem key={key} {...rest} title={title ?? label}>
+          {breadcrumbs.map(({ label, key, title, id, ...rest }) => (
+            <BreadcrumbItem
+              key={key}
+              {...rest}
+              // ensure id is not duplicated
+              data-original-id={id}
+              title={title ?? label}
+            >
               {label}
             </BreadcrumbItem>
           ))}

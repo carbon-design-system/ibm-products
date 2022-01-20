@@ -22,6 +22,7 @@ const breadcrumbContent = Array.from(
 
 const breadcrumbItems = breadcrumbContent.map((item) => ({
   href: '/#',
+  id: `id-${item.replace(' ', '_')}`,
   key: item,
   label: item,
   onClick: () => {},
@@ -246,6 +247,21 @@ describe(BreadcrumbWithOverflow.displayName, () => {
       selector: `.${blockClass}__overflow-menu`,
     });
     expect(overflowBtn).toBeTruthy();
+  });
+
+  it('does not duplicate ids', () => {
+    const plentyOfSpace = (breadcrumbItems.length + 1) * sizes.breadcrumbWidth;
+
+    const { container } = render(
+      <TestBreadcrumbWithOverflow
+        width={plentyOfSpace}
+        overflowAriaLabel="Open and close additional breadcrumb item list."
+        breadcrumbs={breadcrumbItems}
+      />
+    );
+    expect(
+      container.querySelectorAll(`#${breadcrumbItems[0].id}`)
+    ).toHaveLength(1);
   });
 
   it('adds additional properties to an breadcrumb with overflow', () => {

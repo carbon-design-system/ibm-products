@@ -20,7 +20,6 @@ import {
 import { Tearsheet, TearsheetNarrow } from '../../components/Tearsheet';
 import { NoDataEmptyState } from '../../components/EmptyStates/NoDataEmptyState';
 import { pkg } from '../../settings';
-
 const componentName = 'AddSelect';
 
 export let AddSelect = forwardRef(
@@ -33,7 +32,7 @@ export let AddSelect = forwardRef(
       inputPlaceholder,
       items,
       itemsLabel,
-      multiSelect,
+      multi,
       noSelectionDescription,
       noSelectionTitle,
       open,
@@ -110,10 +109,10 @@ export let AddSelect = forwardRef(
 
     return (
       <div ref={ref} className={cx(className, blockClass)} {...rest}>
-        {multiSelect ? (
+        {multi ? (
           <Tearsheet
             {...commonTearsheetProps}
-            influencer={multiSelect && influencer}
+            influencer={multi && influencer}
             influencerPosition="right"
           >
             {body}
@@ -126,9 +125,6 @@ export let AddSelect = forwardRef(
   }
 );
 
-AddSelect = pkg.checkComponentEnabled(AddSelect, componentName);
-AddSelect.displayName = componentName;
-
 AddSelect.propTypes = {
   actions: PropTypes.array,
   className: PropTypes.string,
@@ -137,7 +133,7 @@ AddSelect.propTypes = {
   inputPlaceholder: PropTypes.string,
   items: PropTypes.array,
   itemsLabel: PropTypes.string,
-  multiSelect: PropTypes.bool,
+  multi: PropTypes.bool,
   noSelectionDescription: PropTypes.string,
   noSelectionTitle: PropTypes.string,
   open: PropTypes.bool,
@@ -147,3 +143,5 @@ AddSelect.propTypes = {
 AddSelect.defaultProps = {
   items: [],
 };
+
+AddSelect.displayName = componentName;

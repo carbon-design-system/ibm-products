@@ -275,8 +275,6 @@ export let BreadcrumbWithOverflow = ({
     targetRef: breadcrumbItemWithOverflow,
   });
 
-  console.log(backItem);
-
   return (
     <div
       className={cx(blockClass, className, {

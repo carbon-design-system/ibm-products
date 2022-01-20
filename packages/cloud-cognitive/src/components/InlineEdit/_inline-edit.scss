@@ -1,0 +1,44 @@
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@import '../../global/styles/project-settings';
+@import '../../global/styles/mixins';
+
+// Other Carbon settings.
+// TODO: @import 'carbon-components/scss/globals/grid/grid'; if needed
+
+// InlineEdit uses the following Carbon components:
+// TODO: @import(s) of Carbon component styles used by InlineEdit
+
+// InlineEdit uses the following Carbon for IBM Products components:
+// TODO: @import(s) of IBM Products component styles used by InlineEdit
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin inline-edit {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+  $block-class: #{$pkg-prefix}--inline-edit;
+
+  .#{$block-class} {
+    display: inline-flex;
+    align-content: center;
+  }
+
+  .#{$block-class} .#{$block-class}__value {
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$block-class} .#{$block-class}__button {
+    margin-left: $spacing-03;
+  }
+}
+
+@include exports('inline-edit') {
+  @include inline-edit;
+}

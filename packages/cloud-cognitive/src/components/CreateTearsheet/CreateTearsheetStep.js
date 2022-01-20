@@ -5,12 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Column, FormGroup, Row } from 'carbon-components-react';
+import { StepsContext, StepNumberContext } from './CreateTearsheet';
 import { pkg } from '../../settings';
-import { CREATE_TEARSHEET_STEP } from './constants';
+import pconsole from '../../global/js/utils/pconsole';
+import { usePreviousValue } from '../../global/js/hooks';
 
 const componentName = 'CreateTearsheetStep';
 const blockClass = `${pkg.prefix}--tearsheet-create__step`;
@@ -22,24 +24,76 @@ export let CreateTearsheetStep = forwardRef(
       className,
       subtitle,
       description,
+      disableSubmit,
+      introStep,
       title,
       hasFieldset,
       fieldsetLegendText,
-      isViewingAllStepsTogether,
+      onNext,
+      onMount,
+      secondaryLabel,
     },
     ref
   ) => {
-    return (
-      <div className={cx(blockClass, className)} ref={ref}>
+    const steps = useContext(StepsContext);
+    const stepNumber = useContext(StepNumberContext);
+    const previousState = usePreviousValue({ currentStep: steps?.currentStep });
+
+    // This useEffect reports back the onNext and onMount values so that they can be used
+    // in the appropriate custom hooks.
+    useEffect(() => {
+      if (
+        stepNumber === steps?.currentStep &&
+        previousState?.currentStep !== steps?.currentStep
+      ) {
+        steps?.setOnNext(onNext);
+        steps?.setOnMount(onMount);
+      }
+    }, [onMount, onNext, steps, stepNumber, previousState?.currentStep]);
+
+    // This useEffect makes sure that every CreateTearsheetStep reports back it's
+    // title, secondaryLabel, and introStep props so that it can be sent to the CreateInfluencer.
+    useEffect(() => {
+      const stepHasReported = steps?.stepData?.includes(
+        (item) => item.title === title
+      );
+      if (!stepHasReported && steps?.stepData?.length < steps?.totalStepCount) {
+        steps?.setStepData((prev) => [
+          ...prev,
+          {
+            title,
+            secondaryLabel,
+            introStep,
+          },
+        ]);
+      }
+    }, [steps, title, secondaryLabel, introStep]);
+
+    // Whenever we are the current step, supply our disableSubmit value to the
+    // steps container context so that it can manage the 'Next' button appropriately.
+    useEffect(() => {
+      if (stepNumber === steps?.currentStep) {
+        steps.setIsDisabled(disableSubmit);
+      }
+    }, [steps, stepNumber, disableSubmit, onNext]);
+
+    return steps ? (
+      <div
+        className={cx(blockClass, className, {
+          [`${blockClass}__step--hidden-step`]:
+            stepNumber !== steps?.currentStep,
+          [`${blockClass}__step--visible-step`]:
+            stepNumber === steps?.currentStep,
+        })}
+        ref={ref}
+      >
         <Row>
           <Column xlg={12} lg={12} md={8} sm={8}>
-            {!isViewingAllStepsTogether && (
-              <h4 className={`${blockClass}--title`}>{title}</h4>
-            )}
-            {!isViewingAllStepsTogether && subtitle && (
+            <h4 className={`${blockClass}--title`}>{title}</h4>
+            {subtitle && (
               <h6 className={`${blockClass}--subtitle`}>{subtitle}</h6>
             )}
-            {!isViewingAllStepsTogether && description && (
+            {description && (
               <p className={`${blockClass}--description`}>{description}</p>
             )}
           </Column>
@@ -55,6 +109,10 @@ export let CreateTearsheetStep = forwardRef(
           children
         )}
       </div>
+    ) : (
+      pconsole.warn(
+        `You have tried using a ${componentName} component outside of a CreateTearsheet. This is not allowed. ${componentName}s should always be children of the CreateTearsheet`
+      )
     );
   }
 );
@@ -108,12 +166,6 @@ CreateTearsheetStep.propTypes = {
   introStep: PropTypes.bool,
 
   /**
-   * @ignore
-   * The is an internal prop set in CreateTearsheet so the step knows when to render it's title
-   */
-  isViewingAllStepsTogether: PropTypes.bool,
-
-  /**
    * Optional function to be called on initial mount of a step.
    * For example, this can be used to fetch data that is required on a particular step.
    */
@@ -147,6 +199,5 @@ CreateTearsheetStep.propTypes = {
 // 'undefined' values reasonably. Default values should be provided when the
 // component needs to make a choice or assumption when a prop is not supplied.
 CreateTearsheetStep.defaultProps = {
-  type: CREATE_TEARSHEET_STEP,
   hasFieldset: true,
 };

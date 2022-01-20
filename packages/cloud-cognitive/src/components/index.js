@@ -6,7 +6,6 @@
 //
 
 export { AboutModal } from './AboutModal';
-export { AddSelect } from './AddSelect';
 export { APIKeyModal } from './APIKeyModal';
 export { Cascade } from './Cascade';
 export { ComboButton, ComboButtonItem } from './ComboButton';
@@ -34,12 +33,14 @@ export { HTTPError403, HTTPError404, HTTPErrorOther } from './HTTPErrors';
 export { ImportModal } from './ImportModal';
 export { LoadingBar } from './LoadingBar';
 export { ModifiedTabs } from './ModifiedTabs';
+export { MultiAddSelect } from './MultiAddSelect';
 export { NotificationsPanel } from './NotificationsPanel';
 export { PageHeader } from './PageHeader';
 export { ProductiveCard } from './ProductiveCard';
 export { RemoveModal } from './RemoveModal';
 export { Saving } from './Saving';
 export { SidePanel } from './SidePanel';
+export { SingleAddSelect } from './SingleAddSelect';
 export { StatusIcon } from './StatusIcon';
 export { TagSet } from './TagSet';
 export { Tearsheet, TearsheetNarrow } from './Tearsheet';
@@ -48,3 +49,5 @@ export { UserProfileImage } from './UserProfileImage';
 export { WebTerminal } from './WebTerminal';
 export { EditSidePanel } from './EditSidePanel';
 export { OptionsTile } from './OptionsTile';
+export { CancelableTextEdit } from './CancelableTextEdit';
+export { InlineEdit } from './InlineEdit';

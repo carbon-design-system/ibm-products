@@ -9,20 +9,15 @@ import { useEffect } from 'react';
 
 /**
  * Logs a warning to console if an invalid number of steps are used with the given CreateComponent
- * @param {Function} getCreateComponentSteps
+ * @param {number} stepCount
  * @param {string} componentName
  */
-export const useValidCreateStepCount = (
-  getCreateComponentSteps,
-  componentName
-) => {
+export const useValidCreateStepCount = (stepCount, componentName) => {
   useEffect(() => {
-    const createSteps = getCreateComponentSteps();
-    const total = createSteps.length;
-    if (total === 1) {
+    if (stepCount === 1) {
       console.warn(
         `${componentName}: ${componentName}s with one step are not permitted. If you require only one step, please use either the CreateTearsheetNarrow, CreateSidePanel, or CreateModal components.`
       );
     }
-  }, [getCreateComponentSteps, componentName]);
+  }, [stepCount, componentName]);
 };

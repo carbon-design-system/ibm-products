@@ -57,15 +57,25 @@ export let AddSelect = forwardRef(
     const [selected] = useState(0);
     const [searchTerm, setSearchTerm] = useState('');
 
-    // data manipulation
-    const filteredResults = items.filter((i) => {
-      // if the user wants to provide their own filter function use that instead of the default
+    // handlers
+    const onSearchHandler = (e) => {
+      const { value } = e.target;
+      setSearchTerm(value);
       if (onSearchFilter) {
-        return onSearchFilter(i);
+        onSearchFilter(value);
+      }
+    };
+
+    // data manipulation
+    const getFilteredItems = () => {
+      // if the user uses their own filter then they provide the filtered items
+      if (onSearchFilter) {
+        return items;
       }
       // by default, just filter results by their label from a single search term
-      return i.label.includes(searchTerm);
-    });
+      return items.filter((i) => i.label.includes(searchTerm));
+    };
+    const filteredResults = getFilteredItems();
 
     // sidebar
     const influencer = (
@@ -99,7 +109,7 @@ export let AddSelect = forwardRef(
             labelText="temp label"
             placeholder={inputPlaceholder}
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={onSearchHandler}
           />
           <div className={`${blockClass}__items-label-container`}>
             <p className={`${blockClass}__items-label`}>{itemsLabel}</p>

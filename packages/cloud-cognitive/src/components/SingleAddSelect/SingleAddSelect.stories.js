@@ -54,9 +54,10 @@ const defaultProps = {
       id: 3,
     },
   ],
-  multiSelect: false,
   inputPlaceholder: 'Find categories',
   itemsLabel: 'Categories',
+  noResultsTitle: 'No results',
+  noResultsDescription: 'Try again',
 };
 
 const Template = (args) => {

@@ -11,7 +11,7 @@ import React, { useState, useEffect, useRef } from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Button } from 'carbon-components-react';
+import { Link, TooltipIcon } from 'carbon-components-react';
 import { pkg, carbon } from '../../settings';
 import { useResizeDetector } from 'react-resize-detector';
 import { ArrowLeft16 } from '@carbon/icons-react';
@@ -275,6 +275,8 @@ export let BreadcrumbWithOverflow = ({
     targetRef: breadcrumbItemWithOverflow,
   });
 
+  console.log(backItem);
+
   return (
     <div
       className={cx(blockClass, className, {
@@ -285,19 +287,6 @@ export let BreadcrumbWithOverflow = ({
       <div className={cx([`${blockClass}__space`])}>
         {hiddenSizingItems}
 
-        {backItem?.href && backItem?.title && (
-          <Button
-            className={`${blockClass}__breadcrumb-back-button`}
-            hasIconOnly
-            iconDescription={backItem.title}
-            kind="ghost"
-            href={backItem.href}
-            renderIcon={ArrowLeft16}
-            size="field"
-            tooltipPosition="right"
-            type="button"
-          />
-        )}
         <Breadcrumb
           className={cx(`${blockClass}__breadcrumb-container`, {
             [`${blockClass}__breadcrumb-container-with-items`]:
@@ -306,6 +295,20 @@ export let BreadcrumbWithOverflow = ({
           noTrailingSlash={noTrailingSlash}
           {...other}
         >
+          {backItem?.href && (backItem?.label || backItem?.title) && (
+            <BreadcrumbItem className={cx(`${blockClass}__breadcrumb-back`)}>
+              <Link
+                href={backItem.href}
+                renderIcon={() => (
+                  <TooltipIcon
+                    tooltipText={backItem.title || backItem.label}
+                    direction="right"
+                    renderIcon={ArrowLeft16}
+                  />
+                )}
+              />
+            </BreadcrumbItem>
+          )}
           {displayedBreadcrumbItems}
         </Breadcrumb>
       </div>

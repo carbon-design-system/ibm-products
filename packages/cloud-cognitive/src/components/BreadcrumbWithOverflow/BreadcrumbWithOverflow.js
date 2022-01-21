@@ -267,7 +267,7 @@ export let BreadcrumbWithOverflow = ({
 
   let backItem = breadcrumbs[breadcrumbs.length - 1];
   /* istanbul ignore if */ // not sure how to test media queries
-  if (backItem?.isCurrentPage) {
+  if (backItem.isCurrentPage) {
     backItem = breadcrumbs[breadcrumbs.length - 2];
   }
 

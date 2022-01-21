@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   TextInput,
@@ -151,13 +151,6 @@ const MultiStepTemplate = (args) => {
   const [open, setOpen] = useState(false);
   const [apiKey, setApiKey] = useState('');
   const [loading, setLoading] = useState(false);
-  const inputRef = useRef();
-
-  useEffect(() => {
-    if (inputRef.current && open) {
-      inputRef.current.focus();
-    }
-  }, [open]);
 
   // multi step options
   const [name, setName] = useState(savedName);
@@ -219,8 +212,8 @@ const MultiStepTemplate = (args) => {
             onChange={(e) => setName(e.target.value)}
             labelText="Name your application"
             placeholder="Application name"
-            ref={inputRef}
             id="name-input"
+            data-modal-primary-focus
           />
           <FormGroup
             legendText="What do you want your application to be able to do"
@@ -473,5 +466,14 @@ export const CustomEdit = prepareStory(MultiStepTemplate, {
     savedPermissions: 'Read only',
     editing: true,
     editButtonText: 'Save API key',
+  },
+  parameters: {
+    docs: {
+      source: {
+        // TODO provide better alternative source code, or remove this once the issue is resolved:
+        // https://github.com/storybookjs/storybook/issues/11554
+        code: 'Sorry, this feature is not currently available for this story',
+      },
+    },
   },
 });

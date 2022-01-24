@@ -19,8 +19,6 @@ import {
 } from './components';
 //import { CardData } from './data';
 
-import './App.scss';
-
 const App = () => {
   const [cards, setCards] = useState([]);
   const [sidePanelOpen, setSidePanelOpen] = useState(false);

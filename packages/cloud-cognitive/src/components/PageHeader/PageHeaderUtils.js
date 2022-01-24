@@ -20,6 +20,7 @@ export const blockClass = `${pkg.prefix}--page-header`;
  * @param {{}} navigation
  * @param {boolean} disableBreadcrumbScroll
  * @param {boolean} hasActionBar
+ * @param {boolean} widthIsNarrow
  * @param {()} setMetrics
  */
 export const utilCheckUpdateVerticalSpace = (
@@ -28,6 +29,7 @@ export const utilCheckUpdateVerticalSpace = (
   navigation,
   disableBreadcrumbScroll,
   hasActionBar,
+  widthIsNarrow,
   setMetrics
 ) => {
   const dynamicRefs = {};
@@ -59,6 +61,7 @@ export const utilCheckUpdateVerticalSpace = (
     const subtitleRowEl = getDynamicRef(`.${blockClass}__subtitle-row`);
     const availableRowEl = getDynamicRef(`.${blockClass}__available-row`);
     const navigationRowEl = getDynamicRef(`.${blockClass}__navigation-row`);
+    const pageActionsEl = getDynamicRef(`.${blockClass}__page-actions`);
 
     /* istanbul ignore next */
     update.headerHeight = headerRef.current
@@ -88,7 +91,7 @@ export const utilCheckUpdateVerticalSpace = (
 
     /* istanbul ignore next */
     update.breadcrumbTitleHeight = breadcrumbTitleEl
-      ? breadcrumbTitleEl.clientHeight
+      ? breadcrumbTitleEl.offsetHeight // clientHeight returns 0 when window small
       : 1;
 
     /* istanbul ignore next */
@@ -111,7 +114,7 @@ export const utilCheckUpdateVerticalSpace = (
       update.headerTopValue += update.navigationRowHeight;
     }
 
-    if (!hasActionBar) {
+    if (!hasActionBar && !widthIsNarrow) {
       // Add difference between $spacing-08 and $spacing-07 to ensure space below breadcrumb is correct on scroll
       // $spacing-07 is used as size for breadcrumb when no action bar otherwise $spacing-08
       update.headerTopValue += 8;
@@ -120,6 +123,10 @@ export const utilCheckUpdateVerticalSpace = (
     if (disableBreadcrumbScroll || !navigation) {
       // adjust sticky top if no navigation or breadcrumb is to stay on screen
       update.headerTopValue += update.breadcrumbRowHeight;
+    } else {
+      if (navigation && !widthIsNarrow) {
+        update.headerTopValue -= 8;
+      }
     }
 
     if (window) {
@@ -143,6 +150,20 @@ export const utilCheckUpdateVerticalSpace = (
           10
         );
         update.titleRowSpaceAbove = isNaN(val) ? 0 : val;
+
+        if (pageActionsEl) {
+          val = parseFloat(
+            window
+              .getComputedStyle(pageActionsEl)
+              .getPropertyValue('margin-top'),
+            10
+          );
+          update.pageActionsSpaceAbove =
+            titleRowEl.clientHeight -
+            pageActionsEl.clientHeight +
+            update.titleRowSpaceAbove -
+            (isNaN(val) ? 0 : val);
+        }
       }
     } else {
       update.breadcrumbRowSpaceBelow = 0;

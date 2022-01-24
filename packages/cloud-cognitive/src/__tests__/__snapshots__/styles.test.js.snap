@@ -5418,13 +5418,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   white-space: nowrap;
 }
 .c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__breadcrumb-container.c4p--breadcrumb-with-overflow__breadcrumb-container-with-items {
-  display: none;
+  display: inline-flex;
   width: 100%;
-}
-@media (min-width: 42rem) {
-  .c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__breadcrumb-container.c4p--breadcrumb-with-overflow__breadcrumb-container-with-items {
-    display: inline-flex;
-  }
 }
 .c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__breadcrumb-container .bx--breadcrumb {
   width: 100%;
@@ -5440,11 +5435,24 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   pointer-events: none;
   visibility: hidden;
 }
+.c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__breadcrumb-back {
+  display: none;
+}
+@media (max-width: 41.98rem) {
+  .c4p--breadcrumb-with-overflow .bx--breadcrumb-item {
+    display: none;
+  }
+  .c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__breadcrumb-back,
 .c4p--breadcrumb-with-overflow .bx--breadcrumb-item:last-child {
-  display: inline;
+    display: inline-flex;
+    vertical-align: middle;
+  }
+}
+.c4p--breadcrumb-with-overflow .bx--breadcrumb-item:last-child {
+  display: inline-flex;
 }
 .c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__displayed-breadcrumb:last-child {
-  display: inline;
+  display: inline-flex;
   overflow: hidden;
 }
 .c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__displayed-breadcrumb:last-child .bx--link {
@@ -5455,15 +5463,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--breadcrumb-with-overflow .bx--link {
   max-height: 18px;
-}
-.c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__breadcrumb-back-button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
-  display: inline-flex;
-  margin-top: calc(-1 * var(--cds-spacing-04, 0.75rem));
-}
-@media (min-width: 42rem) {
-  .c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__breadcrumb-back-button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
-    display: none;
-  }
 }
 
 /* stylelint-disable-line no-invalid-position-at-import-rule */

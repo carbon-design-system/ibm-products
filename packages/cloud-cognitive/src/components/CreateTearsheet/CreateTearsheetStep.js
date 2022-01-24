@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, useContext, useEffect } from 'react';
+import React, { forwardRef, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Column, FormGroup, Row } from 'carbon-components-react';
@@ -22,22 +22,26 @@ export let CreateTearsheetStep = forwardRef(
     {
       children,
       className,
-      subtitle,
       description,
       disableSubmit,
-      introStep,
-      title,
-      hasFieldset,
       fieldsetLegendText,
+      hasFieldset,
+      id,
+      includeAfter,
+      includeStep,
+      introStep,
       onNext,
       onMount,
       secondaryLabel,
+      subtitle,
+      title,
     },
     ref
   ) => {
     const steps = useContext(StepsContext);
     const stepNumber = useContext(StepNumberContext);
-    const previousState = usePreviousValue({ currentStep: steps?.currentStep });
+    const [shouldIncludeStep, setShouldIncludeStep] = useState();
+    const previousState = usePreviousValue({ currentStep: steps?.currentStep, shouldIncludeStep });
 
     // This useEffect reports back the onNext and onMount values so that they can be used
     // in the appropriate custom hooks.
@@ -51,23 +55,44 @@ export let CreateTearsheetStep = forwardRef(
       }
     }, [onMount, onNext, steps, stepNumber, previousState?.currentStep]);
 
-    // This useEffect makes sure that every CreateTearsheetStep reports back it's
-    // title, secondaryLabel, and introStep props so that it can be sent to the CreateInfluencer.
     useEffect(() => {
-      const stepHasReported = steps?.stepData?.includes(
-        (item) => item.title === title
-      );
-      if (!stepHasReported && steps?.stepData?.length < steps?.totalStepCount) {
-        steps?.setStepData((prev) => [
-          ...prev,
-          {
+      setShouldIncludeStep(includeStep);
+    }, [includeStep]);
+    // console.log({shouldIncludeStep});
+
+    useEffect(() => {
+      if (!previousState?.shouldIncludeStep && shouldIncludeStep) {
+        console.log('Conditional step: ', {title}, steps.stepData, includeAfter);
+        steps.setStepData(prev => {
+          // console.log({prev});
+          const clonedPrev = [...prev];
+          const insertAfterIndex = includeAfter && clonedPrev.findIndex(item => item.id === includeAfter);
+          console.log({insertAfterIndex});
+          const stepItem = {
             title,
             secondaryLabel,
             introStep,
-          },
-        ]);
+            shouldIncludeStep,
+            id
+          };
+          // console.log(clonedPrev.splice(insertAfterIndex + 1, 0, stepItem));
+          // const 
+          return includeAfter
+            ? prev.splice(insertAfterIndex + 1, 0, stepItem)
+            : [
+              ...prev,
+              stepItem
+            ]
+          });
       }
-    }, [steps, title, secondaryLabel, introStep]);
+      if (!shouldIncludeStep && previousState?.shouldIncludeStep) {
+        console.log('Step to remove:', {title}, steps.stepData);
+        const stepDataClone = [...steps.stepData];
+        const stepsWithoutConditional = stepDataClone.filter(item => item.title !== title);
+        console.log({stepsWithoutConditional});
+        steps.setStepData(stepsWithoutConditional);
+      }
+    }, [shouldIncludeStep, title, secondaryLabel, introStep, steps, previousState?.shouldIncludeStep, includeAfter, id]);
 
     // Whenever we are the current step, supply our disableSubmit value to the
     // steps container context so that it can manage the 'Next' button appropriately.
@@ -161,6 +186,11 @@ CreateTearsheetStep.propTypes = {
   hasFieldset: PropTypes.bool,
 
   /**
+   * This prop is used to help track dynamic steps
+   */
+   includeStep: PropTypes.bool,
+
+  /**
    * This prop can be used on the first step to mark it as an intro step, which will not render the progress indicator steps
    */
   introStep: PropTypes.bool,
@@ -200,4 +230,5 @@ CreateTearsheetStep.propTypes = {
 // component needs to make a choice or assumption when a prop is not supplied.
 CreateTearsheetStep.defaultProps = {
   hasFieldset: true,
+  includeStep: true,
 };

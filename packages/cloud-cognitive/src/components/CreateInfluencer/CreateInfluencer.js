@@ -22,6 +22,7 @@ export let CreateInfluencer = ({ className, currentStep, stepData }) => {
   // renders the step progression components in the left influencer area
   const renderProgressSteps = () => {
     const extractedSteps = stepData?.filter((item) => !item?.introStep);
+    console.log(extractedSteps);
     return (
       <div className={`${blockClass}__left-nav`}>
         {currentStep === 1 && stepData[0]?.introStep ? null : (

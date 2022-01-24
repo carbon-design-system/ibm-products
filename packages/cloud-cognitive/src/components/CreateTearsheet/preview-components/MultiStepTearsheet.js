@@ -17,6 +17,7 @@ import {
   TextInput,
   Toggle,
   NumberInput,
+  Checkbox,
 } from 'carbon-components-react';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
@@ -66,6 +67,7 @@ export const MultiStepTearsheet = ({
   const [stepThreeTextInputValue, setStepThreeTextInputValue] =
     useState('one-day');
   const [isInvalid, setIsInvalid] = useState(false);
+  const [shouldIncludeAdditionalStep, setShouldIncludeAdditionalStep] = useState(false);
 
   const clearCreateData = () => {
     setStepOneTextInputValue('');
@@ -127,6 +129,7 @@ export const MultiStepTearsheet = ({
           subtitle="This is the unique name used to recognize your topic"
           description="It will also be used by your producers and consumers as part of the
           connection information, so make it something easy to recognize."
+          id="topic-name-step"
         >
           <Row>
             <Column xlg={8} lg={8} md={8} sm={8}>
@@ -180,8 +183,24 @@ export const MultiStepTearsheet = ({
                 labelText="Simulate error"
                 onToggle={(event) => setShouldReject(event)}
               />
+              <Checkbox
+                labelText={`Include additional step`}
+                id="include-additional-step-checkbox"
+                onChange={value => setShouldIncludeAdditionalStep(value)}
+                checked={shouldIncludeAdditionalStep}
+              />
             </Column>
           </Row>
+        </CreateTearsheetStep>
+        <CreateTearsheetStep
+          title="Conditional step"
+          subtitle="Conditional step subtitle"
+          description="Test description"
+          hasForm={false}
+          includeStep={shouldIncludeAdditionalStep}
+          includeAfter="topic-name-step"
+        >
+          conditional step
         </CreateTearsheetStep>
         <CustomStep
           title="Location"
@@ -189,6 +208,7 @@ export const MultiStepTearsheet = ({
           description="Custom step description (see storybook implementation for new custom step capability)"
           value1={value1}
           setValue1={setValue1}
+          hasForm={false}
         />
         <CreateTearsheetStep
           title="Partitions"

@@ -88,7 +88,7 @@ export const utilCheckUpdateVerticalSpace = (
 
     /* istanbul ignore next */
     update.breadcrumbTitleHeight = breadcrumbTitleEl
-      ? breadcrumbTitleEl.clientHeight
+      ? breadcrumbTitleEl.offsetHeight // clientHeight returns 0 when window small
       : 1;
 
     /* istanbul ignore next */

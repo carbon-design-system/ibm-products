@@ -95,11 +95,17 @@ export let RemoveModal = forwardRef(
               placeholder={inputPlaceholderText}
               onChange={onChangeHandler}
               value={userInput}
+              data-modal-primary-focus
             />
           )}
         </ModalBody>
         <ModalFooter>
-          <Button type="button" kind="secondary" onClick={onClose}>
+          <Button
+            type="button"
+            kind="secondary"
+            onClick={onClose}
+            data-modal-primary-focus={!textConfirmation}
+          >
             {secondaryButtonText}
           </Button>
           <Button

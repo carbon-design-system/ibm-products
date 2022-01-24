@@ -9,7 +9,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { PageHeader as CCPageHeader } from '../../../../../cloud-cognitive/src';
-import { BreadcrumbItem } from 'carbon-components-react';
 import { Lightning16, Bee24 } from '@carbon/icons-react';
 
 const PageHeader = (props) => {
@@ -36,32 +35,42 @@ const PageHeader = (props) => {
     </div>
   );
 
-  const breadcrumbItems = (
-    <>
-      <BreadcrumbItem href="#">Breadcrumb 1</BreadcrumbItem>
-      <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-      <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
-      <BreadcrumbItem href="#">Breadcrumb 4</BreadcrumbItem>
-      <BreadcrumbItem href="#">Breadcrumb 5</BreadcrumbItem>
-    </>
-  );
-
   const actionBarItems = [1, 2, 3, 4].map((item, index) => ({
+    key: `${index}_action_bar_item`,
     renderIcon: index % 2 ? Lightning16 : Bee24,
     iconDescription: `Action ${item}`,
-    onClick: () => {
-      console.log(`Action ${index}`);
-    },
+    onClick: () => {},
   }));
 
   return (
     <CCPageHeader
       actionBarOverflowAriaLabel="label"
-      background
-      breadcrumbItems={breadcrumbItems}
+      breadcrumbs={[
+        {
+          href: '#',
+          key: 'breadcrumb_1',
+          label: 'Breadcrumb 1',
+        },
+        {
+          href: '#',
+          key: 'breadcrumb_2',
+          label: 'Breadcrumb 2',
+        },
+        {
+          href: '#',
+          key: 'breadcrumb_3',
+          label: 'Breadcrumb 3',
+        },
+        {
+          href: '#',
+          key: 'breadcrumb_4',
+          label: 'Breadcrumb 4',
+        },
+      ]}
+      breadcrumbOverflowAriaLabel="View breadcrumbs"
       actionBarItems={actionBarItems}
-      title="Home"
-      pageActionsOverflowLabel="label"
+      title="Task manager"
+      pageActionsOverflowLabel="Actions..."
       pageActions={[
         {
           key: 'secondary',
@@ -72,18 +81,18 @@ const PageHeader = (props) => {
         {
           key: 'primary',
           kind: 'primary',
-          label: 'Create new card',
+          label: 'Create new task',
           onClick: () => {
             props.setIsOpen(true);
           },
         },
       ]}
-      subtitle="What is this?"
+      subtitle="Help manage your team's tasks"
       tags={[
-        { type: 'blue', label: 'A tag' },
-        { type: 'green', label: 'A tag' },
-        { type: 'warm-gray', label: 'A tag' },
-        { type: 'purple', label: 'A tag' },
+        { type: 'blue', label: 'Tag 1' },
+        { type: 'green', label: 'Tag 2' },
+        { type: 'warm-gray', label: 'Tag 3' },
+        { type: 'purple', label: 'Tag 4' },
       ]}
     >
       {content}

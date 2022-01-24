@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -28,13 +28,8 @@ import {
 } from 'carbon-components-react';
 
 const MultiStepTearsheetWide = (props) => {
-  console.log('sheet', props);
-
   const [createValues, setCreateValues] = useState({});
 
-  useEffect(() => {
-    console.log('values', createValues);
-  }, [createValues]);
   return (
     <CreateTearsheet
       {...props.componentConfig}
@@ -49,54 +44,21 @@ const MultiStepTearsheetWide = (props) => {
       }}
     >
       <CreateTearsheetStep
-        onMount={async () => {
-          console.log('mounting');
-          // try {
-          //   const data = await fetch("https://randomuser.me/api/?results=5");
-          //   const json = await data.json();
-          //   if (!data.ok) {
-          //     throw new Error("received non 200 response");
-          //   }
-          //   setAllTopicOwners(json.results);
-          // } catch (error) {
-          //   console.warn(
-          //     `CreateTearsheet [storybook example]: API request failed.`
-          //   );
-          //   setApiFailed(true);
-          // }
-        }}
-        onNext={() => {
-          console.log('on next');
-          // return new Promise((resolve, reject) => {
-          //   setTimeout(() => {
-          //     // Example usage of how to prevent the next step if some kind
-          //     // of error occurred during the `onNext` handler.
-          //     if (shouldReject) {
-          //       setHasSubmitError(true);
-          //       reject("Simulated error");
-          //     }
-          //     setIsInvalid(false);
-          //     resolve();
-          //   }, simulatedDelay);
-          // });
-        }}
-        title="Topic name"
-        fieldsetLegendText="Topic information"
-        //   disableSubmit={!stepOneTextInputValue}
-        subtitle="This is the unique name used to recognize your topic"
+        title="Create new task"
+        fieldsetLegendText="Task information"
+        disableSubmit={!createValues.topic?.name}
+        subtitle="This is the unique name used to recognize your task"
         description="It will also be used by your producers and consumers as part of the
           connection information, so make it something easy to recognize."
       >
         <Row>
           <Column xlg={8} lg={8} md={8} sm={8}>
             <TextInput
-              labelText="Topic name*"
+              labelText="Task name"
               id="tearsheet-multi-step-story-text-input-multi-step-1"
-              // value={stepOneTextInputValue}
               value={createValues.topic ? createValues.topic.name : ''}
-              placeholder="Enter topic name"
+              placeholder="Enter task name"
               onChange={(event) => {
-                console.log('on change');
                 setCreateValues({
                   ...createValues,
                   topic: {
@@ -110,13 +72,9 @@ const MultiStepTearsheetWide = (props) => {
               name="name"
               invalid={false}
               invalidText="This is a required field"
-              onBlur={() => {
-                console.log('on blur');
-                //   if (!stepOneTextInputValue.length) setIsInvalid(true);
-              }}
             />
             <TextInput
-              labelText="Description"
+              labelText="Description (optional)"
               id="tearsheet-multi-step-story-text-input-multi-step-1-input-2"
               //value={topicDescriptionValue}
               value={createValues.topic ? createValues.topic.description : ''}
@@ -133,7 +91,7 @@ const MultiStepTearsheetWide = (props) => {
               }
             />
             <TextInput
-              labelText="Author"
+              labelText="Author (optional)"
               id="tearsheet-multi-step-story-text-input-multi-step-1-input-3"
               value={createValues.topic ? createValues.topic.author : ''}
               name="author"
@@ -149,7 +107,7 @@ const MultiStepTearsheetWide = (props) => {
               }
             />
             <TextInput
-              labelText="Date published"
+              labelText="Date published (optional)"
               id="tearsheet-multi-step-story-text-input-multi-step-1-input-3"
               value={createValues.topic ? createValues.topic.date : ''}
               name="date"
@@ -231,7 +189,6 @@ const MultiStepTearsheetWide = (props) => {
               defaultSelected="one-day"
               valueSelected="one-day"
               onChange={(event) => {
-                console.log('radio', event);
                 setCreateValues({ ...createValues, retention: event });
               }}
               orientation="vertical"
@@ -252,6 +209,7 @@ const MultiStepTearsheetWide = (props) => {
       <CreateTearsheetStep
         title="Replicas"
         description="The partitions of each topic can be replicated across a configurable number of brokers"
+        fieldsetLegendText=""
         //disableSubmit={!stepThreeTextInputValue}
         onNext={() => Promise.resolve()}
       >
@@ -269,8 +227,7 @@ const MultiStepTearsheetWide = (props) => {
               <RadioButton
                 labelText="Replication factor: 1"
                 value="factor-1"
-                id="factor-1`"
-                checked
+                id="factor-1"
               />
               <RadioButton
                 labelText="Replication factor: 2"
@@ -291,7 +248,7 @@ const MultiStepTearsheetWide = (props) => {
 };
 MultiStepTearsheetWide.propTypes = {
   actions: PropTypes.object,
-  cards: PropTypes.object,
+  cards: PropTypes.array,
   componentConfig: PropTypes.object,
   isOpen: PropTypes.bool,
   setIsOpen: PropTypes.func,

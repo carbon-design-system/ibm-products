@@ -113,7 +113,7 @@ const SidePanel = (props) => {
         />
 
         <div className="bx--row">
-          <div className="bx--col-lg-2">
+          <div className="bx--col-lg-3">
             <UserProfileImage
               backgroundColor="light-cyan"
               theme="light"

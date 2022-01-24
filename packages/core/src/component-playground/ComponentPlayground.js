@@ -33,10 +33,10 @@ const App = () => {
     tagSet: {},
     tearSheet: {},
     createTearsheet: {
-      title: 'Create card',
+      title: 'Create task',
       label: 'This is the label of the multi step tearsheet',
       nextButtonText: 'Next step',
-      description: 'Specify details for the new topic you want to create',
+      description: 'Specify details for the new task you want to create',
       submitButtonText: 'Create',
       cancelButtonText: 'Cancel',
       backButtonText: 'Back',
@@ -79,7 +79,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="App">
+    <div className="component-playground">
       <GlobalHeader />
       <div
         style={{
@@ -123,7 +123,7 @@ const App = () => {
           getCards()
         }  */}
             {cards.map((card, index) => {
-              console.log('card info', card);
+              // console.log('card info', card);
               return (
                 <div
                   key={card.topic.name}

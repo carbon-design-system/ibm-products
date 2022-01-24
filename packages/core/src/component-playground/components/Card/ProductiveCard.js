@@ -9,58 +9,52 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { ProductiveCard as CCProductiveCard } from '../../../../../cloud-cognitive/src';
-import { View16, Edit16 } from '@carbon/icons-react';
+import { TrashCan16, Edit16 } from '@carbon/icons-react';
 import { StatusIcon } from '../../../../../cloud-cognitive/src';
 
 const ProductiveCard = (props) => {
   const kinds = [
-    'fatal',
-    'critical',
-    'major-warning',
-    'minor-warning',
-    'undefined',
-    'unknown',
-    'normal',
-    'info',
-    'in-progress',
-    'running',
-    'pending',
+    { type: 'fatal', label: 'Fatal' },
+    { type: 'critical', label: 'Critical' },
+    { type: 'major-warning', label: 'Major warning' },
+    { type: 'minor-warning', label: 'Minor warning' },
+    { type: 'undefined', label: 'Undefined' },
+    { type: 'unknown', label: 'Unknown' },
+    { type: 'normal', label: 'Normal' },
+    { type: 'info', label: 'Info' },
+    { type: 'in-progress', label: 'In progress' },
+    { type: 'running', label: 'Running' },
+    { type: 'pending', label: 'Pending' },
   ];
 
   const [statusIconKind /*setStatusIconKind*/] = useState(
     kinds[Math.floor(Math.random() * (kinds.length - 1))]
   );
-  //const [size, setSize] = useState('xlg');
 
-  /*const getKind = () => {
-    console.log('random', Math.random());
-    let index = Math.floor(Math.random() * (kinds.length - 1));
-    return kinds[index];
-  };*/
   const actionIcons = [
     {
       id: '1',
       icon: () => (
         <StatusIcon
-          iconDescription={statusIconKind}
-          kind={statusIconKind}
+          iconDescription={statusIconKind.label}
+          kind={statusIconKind.type}
           size="sm"
           theme="dark"
         />
       ),
+      iconDescription: statusIconKind.label,
     },
     {
-      id: '1',
-      icon: View16,
+      id: '2',
+      icon: TrashCan16,
       //onClick: action,
       //onKeyDown: action,
       iconDescription: 'Delete',
     },
     {
-      id: '2',
+      id: '3',
       icon: Edit16,
       onClick: () => {
-        console.log('data on card', props.index);
         props.actions.setSidePanelOpen(true);
         props.actions.setCardToEdit(props.index);
       },

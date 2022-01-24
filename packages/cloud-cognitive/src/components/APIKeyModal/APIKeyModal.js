@@ -85,7 +85,6 @@ export let APIKeyModal = forwardRef(
     const [copyError, setCopyError] = useState(false);
     const [name, setName] = useState(apiKeyName);
     const [currentStep, setCurrentStep] = useState(0);
-    const inputRef = useRef();
     const copyRef = useRef();
     const apiKeyInputId = useRef(uuidv4());
     const nameInputId = useRef(uuidv4());
@@ -99,12 +98,6 @@ export let APIKeyModal = forwardRef(
       ref: copyRef,
     };
     const blockClass = `${pkg.prefix}--apikey-modal`;
-
-    useEffect(() => {
-      if (inputRef.current && open) {
-        inputRef.current.focus();
-      }
-    }, [open]);
 
     useEffect(() => {
       if (copyRef.current && open && apiKeyLoaded) {
@@ -168,7 +161,8 @@ export let APIKeyModal = forwardRef(
       onClose();
     };
 
-    const submitHandler = async () => {
+    const submitHandler = async (e) => {
+      e.preventDefault();
       if (hasNextStep) {
         setCurrentStep(currentStep + 1);
       } else if (apiKeyLoaded) {
@@ -245,8 +239,8 @@ export let APIKeyModal = forwardRef(
                     value={name}
                     id={nameInputId.current}
                     disabled={loading}
-                    ref={inputRef}
                     required={nameRequired}
+                    data-modal-primary-focus
                   />
                 </Form>
               )}

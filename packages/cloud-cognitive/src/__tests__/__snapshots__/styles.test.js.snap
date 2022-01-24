@@ -5914,7 +5914,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   transform: translateX(-50%) scaleX(1);
   transition: all 150ms ease-out;
 }
-.c4p--page-header .c4p--page-header__breadcrumb-row--next-to-tabs::after,
+.c4p--page-header .c4p--page-header__breadcrumb-row--next-to-tabs:not(.c4p--page-header__has-page-actions-without-action-bar)::after,
 .c4p--page-header .c4p--page-header__breadcrumb-row--has-action-bar::after {
   /* creates a full width box shadow without causing scroll */
   box-shadow: 25vw 1px 0 0 var(--cds-ui-03, #e0e0e0), -25vw 1px 0 0 var(--cds-ui-03, #e0e0e0);

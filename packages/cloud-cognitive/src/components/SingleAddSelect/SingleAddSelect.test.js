@@ -11,8 +11,10 @@ import { SingleAddSelect } from './SingleAddSelect';
 
 const componentName = SingleAddSelect.name;
 const defaultProps = {
-  noSelectionTitle: 'test title',
-  noSelectionDescription: 'test description',
+  noSelectionTitle: 'No selection title',
+  noSelectionDescription: 'No selection description',
+  noResultsTitle: 'No results title',
+  noResultsDescription: 'Try again description',
 };
 
 describe(componentName, () => {

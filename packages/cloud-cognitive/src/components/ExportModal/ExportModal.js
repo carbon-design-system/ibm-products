@@ -128,6 +128,7 @@ export let ExportModal = forwardRef(
                         id={o.extension}
                         value={o.extension}
                         labelText={`${o.extension} (${o.description})`}
+                        data-modal-primary-focus
                       />
                     ))}
                   </RadioButtonGroup>
@@ -141,6 +142,7 @@ export let ExportModal = forwardRef(
                   invalid={hasInvalidExtension()}
                   invalidText={invalidInputText}
                   onBlur={onBlurHandler}
+                  data-modal-primary-focus
                 />
               )}
             </>

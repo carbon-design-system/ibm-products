@@ -184,6 +184,7 @@ export let ImportModal = forwardRef(
             labelText={fileDropLabel}
             onAddFiles={onAddFile}
             disabled={hasFiles}
+            data-modal-primary-focus
           />
           {inputLabel && <p className={`${blockClass}__label`}>{inputLabel}</p>}
           <div className={`${blockClass}__input-group`}>

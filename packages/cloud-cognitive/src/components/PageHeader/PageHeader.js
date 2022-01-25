@@ -839,7 +839,7 @@ PageHeader.propTypes = {
    * It is used in an overflow menu when there is insufficient space to display all breadcrumbs inline.
    */
   breadcrumbOverflowAriaLabel: PropTypes.string.isRequired.if(
-    ({ breadcrumbs }) => breadcrumbs && breadcrumbs.length > 0
+    ({ breadcrumbs }) => breadcrumbs && breadcrumbs.length > 1 // always shows the title
   ),
   /**
    * Specifies the breadcrumb components to be shown in the breadcrumb area of

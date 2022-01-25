@@ -372,7 +372,9 @@ BreadcrumbWithOverflow.propTypes = {
   /**
    * overflowAriaLabel label for open close button overflow used for action bar items that do nto fit.
    */
-  overflowAriaLabel: PropTypes.string.isRequired,
+  overflowAriaLabel: PropTypes.string.isRequired.if(
+    ({ breadcrumbs }) => breadcrumbs.length > 1
+  ), // title always shown
 };
 
 BreadcrumbWithOverflow.defaultProps = {

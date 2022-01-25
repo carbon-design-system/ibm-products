@@ -136,7 +136,7 @@ const ICA = ({
             <span>/{truncatedTotal}</span>
           </span>
         ) : null}
-        {iconButton}
+         <span className={`${namespace}__icon`}>{iconButton}</span>
       </span>
     </div>
   );

@@ -483,7 +483,7 @@ export let PageHeader = React.forwardRef(
                     [`${blockClass}__breadcrumb-row--next-to-tabs`]:
                       nextToTabsCheck(),
                     [`${blockClass}__breadcrumb-row--has-breadcrumbs`]:
-                      breadcrumbs,
+                      breadcrumbs || breadcrumbItemForTitle,
                     [`${blockClass}__breadcrumb-row--has-action-bar`]:
                       hasActionBar || widthIsNarrow,
                     [`${blockClass}__has-page-actions-without-action-bar`]:
@@ -499,17 +499,17 @@ export let PageHeader = React.forwardRef(
                     >
                       {/* keeps actionBar right even if empty */}
 
-                      {breadcrumbs ? (
+                      {breadcrumbs || breadcrumbItemForTitle ? (
                         <BreadcrumbWithOverflow
                           className={`${blockClass}__breadcrumb`}
                           noTrailingSlash={!!title}
                           overflowAriaLabel={breadcrumbOverflowAriaLabel}
                           breadcrumbs={
-                            breadcrumbs
-                              ? breadcrumbItemForTitle
-                                ? breadcrumbs.concat(breadcrumbItemForTitle)
-                                : breadcrumbs
-                              : null
+                            breadcrumbs && breadcrumbItemForTitle
+                              ? breadcrumbs.concat(breadcrumbItemForTitle)
+                              : breadcrumbItemForTitle
+                              ? [breadcrumbItemForTitle]
+                              : breadcrumbs // breadcrumbs may be null or undefined
                           }
                         />
                       ) : null}

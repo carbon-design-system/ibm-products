@@ -111,6 +111,8 @@ $block-class: #{$pkg-prefix}--status-icon;
 @each $theme in $themes {
   @each $icon in $icons {
     @each $theme-key in $themes {
+      .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger
+        .#{$block-class}--#{$theme}.#{$block-class}--#{$theme-key}-#{$icon},
       .#{$block-class}--#{$theme}.#{$block-class}--#{$theme-key}-#{$icon} {
         @if $icon == in-progress {
           @media (prefers-reduced-motion: reduce) {

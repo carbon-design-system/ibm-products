@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.3.0...@carbon/ibm-products@1.4.0) (2022-01-25)
+
+
+### Bug Fixes
+
+* fixes for modal focus ([#1552](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1552)) ([cc23b0f](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/cc23b0f6b87d082239f013020410e2af534441d0))
+* issue1508 ([#1557](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1557)) ([f08ed89](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f08ed89216edf6aaccf446abf1da45f0d5cc00ed))
+* Prevent id duplication in page header ([#1537](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1537)) ([dff0887](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/dff088791920c32f52ae7d915076b0af2ffb5828))
+* Rework breadcrumb back button ([#1545](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1545)) ([46fcfc2](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/46fcfc2db159613afff049d74f8afc49c58aed07))
+
+
+### Features
+
+* add new step tracking approach allowing for custom steps ([#1524](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1524)) ([a4b44f5](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a4b44f5d1b0f99c2ed5fcbf3314c2e96c61c5aef))
+* add search filter to add select ([#1547](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1547)) ([96a1874](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/96a1874bfe6343620175c5de4ba40c6000bd2c68))
+* initial inline edit to page-header ([#1533](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1533)) ([dffbba6](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/dffbba6a761237a3fa1aa92d8f3b07c8de88fe0d))
+* **OptionsTile:** add open prop ([#1534](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1534)) ([e99d208](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e99d2081a4d7986030878092e890ebe158e26691)), closes [#1521](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1521) [#1521](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1521)
+* split addselect into multiple exports ([#1542](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1542)) ([b9de902](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b9de9024b7e5e422119fc90ef0258a1314a62124))
+* **toolbar:** add keyboard accessibility ([#1514](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1514)) ([709c10a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/709c10afaf0845aa8209ad7dffc598e1f9ce12e6))
+
+
+
+
+
 # [1.3.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.2.5...@carbon/ibm-products@1.3.0) (2022-01-18)
 
 

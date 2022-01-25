@@ -20,6 +20,10 @@
     border-top: 1px solid $ui-03;
   }
 
+  .#{$block-class}__body {
+    padding: $spacing-05;
+  }
+
   .#{$block-class}__items-label {
     margin-right: $spacing-03;
 

@@ -26,6 +26,11 @@
 
     margin-bottom: 0;
   }
+  
+  &__icon {
+    width: carbon--mini-units($count: 2);
+    height: carbon--mini-units($count: 2);
+  }
 
   &__total {
     @include carbon--type-style($name: body-short-01);

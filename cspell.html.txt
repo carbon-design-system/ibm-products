@@ -6,10 +6,12 @@ easings
 evenodd
 labelledby
 listitem
+lsquo
 noopener
 noreferrer
 preload
 progressbar
+rsquo
 searchbox
 tabindex
 viewports

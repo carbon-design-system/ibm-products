@@ -58,7 +58,7 @@
     "upgrade:dependencies:packages": "yarn run-all --no-sort --concurrency 1 upgrade-dependencies",
     "upgrade:dependencies:yarn": "yarn set version latest",
     "upgrade:automatic": "run-s upgrade:dependencies:*",
-    "upgrade:carbon": "npm-check-updates -u --packageFile '{package.json,{config/**,packages/**}/package.json}' --filter '/carbon/'",
+    "upgrade:carbon": "npm-check-updates -u --dep dev,peer,prod --packageFile '{package.json,{config/**,packages/**}/package.json}' --filter '/carbon/'",
     "upgrade:manual": "sh ./scripts/monorepo-npm-upgrade.sh"
   },
   "devDependencies": {

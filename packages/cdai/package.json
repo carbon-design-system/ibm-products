@@ -32,7 +32,7 @@
     "clean": "rimraf es lib scss",
     "test": "jest --colors",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (explicit range peer dependency), uuid (not tested)",
-    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react$|^react-dom$|^uuid$)/'"
+    "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$|^uuid$)/'"
   },
   "peerDependencies": {
     "@carbon/elements": "^10.50.0",

@@ -47,7 +47,7 @@
     "postinstall": "carbon-telemetry collect --install",
     "test": "jest --colors",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally), react/react-dom (explicit range peer dependency) or chalk (until we can load it as ESM)",
-    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react$|^react-dom$|^chalk$)/'"
+    "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$|^chalk$)/'"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.8",

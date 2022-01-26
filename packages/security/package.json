@@ -45,8 +45,8 @@
     "sync:clone": "git clone git@github.com:carbon-design-system/ibm-security.git --depth 1",
     "sync:copy": "copyfiles 'ibm-security/src/**/*' . -u 1",
     "test": "jest --colors",
-    "//upgrade-dependencies": "# don't upgrade carbon (done globally) or faker (destructively updated)",
-    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^faker$)/'"
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react/react-dom (explicit range peer dependency) or faker (destructively updated)",
+    "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$|^faker$)/'"
   },
   "peerDependencies": {
     "react": "^17.0.2",

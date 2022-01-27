@@ -752,7 +752,13 @@ SidePanel.propTypes = {
     PropTypes.arrayOf(
       PropTypes.shape({
         ...Button.propTypes,
-        kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
+        kind: PropTypes.oneOf([
+          'ghost',
+          'danger--ghost',
+          'secondary',
+          'danger',
+          'primary',
+        ]),
         label: PropTypes.string,
         loading: PropTypes.bool,
         // we duplicate this Button prop to improve the DocGen here

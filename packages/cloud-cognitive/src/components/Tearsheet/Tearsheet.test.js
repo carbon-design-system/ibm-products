@@ -40,7 +40,7 @@ const badActions = [
   { kind: 'primary' },
   { kind: 'ghost' },
   { kind: 'ghost' },
-  { kind: 'danger' },
+  { kind: 'danger--tertiary' },
 ];
 const childFragment = `Main ${uuidv4()} content`;
 const children = <div>{childFragment}</div>;
@@ -137,9 +137,9 @@ const commonTests = (Ts, name, props, testActions) => {
             ]
           : [
               `Invalid prop \`actions\` supplied to \`${name}\`: you cannot have more than four actions`,
-              'Invalid prop `actions[4].kind` of value `danger` supplied to `TearsheetShell`',
+              'Invalid prop `actions[4].kind` of value `danger--tertiary` supplied to `TearsheetShell`',
               'Invalid prop `actions` supplied to `ActionSet`: you cannot have more than four actions',
-              'Invalid prop `kind` of value `danger` supplied to `ActionSetButton`',
+              'Invalid prop `kind` of value `danger--tertiary` supplied to `ActionSetButton`',
             ],
         () => {
           tooManyButtonsTestedAlready = true;

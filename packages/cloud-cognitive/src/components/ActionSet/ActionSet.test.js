@@ -4,6 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+// cspell:words Scooby
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
@@ -23,14 +24,19 @@ const componentName = ActionSet.displayName;
 
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
-const label1 = `Secondary button ${uuidv4()}`;
-const action1 = { label: label1, kind: 'secondary' };
-const label2 = `Primary button ${uuidv4()}`;
-const action2 = { label: label2 };
-const label3 = `Ghost button ${uuidv4()}`;
-const action3 = { label: label3, kind: 'ghost' };
-const label4 = `Another secondary button ${uuidv4()}`;
-const action4 = { label: label4, kind: 'secondary' };
+const dangerDescription = 'Run Scooby!';
+const labelP = `Primary button ${uuidv4()}`;
+const actionP = { label: labelP };
+const labelD = `Danger button ${uuidv4()}`;
+const actionD = { label: labelD, dangerDescription };
+const labelS = `Secondary button ${uuidv4()}`;
+const actionS = { label: labelS, kind: 'secondary' };
+const labelS2 = `Another secondary button ${uuidv4()}`;
+const actionS2 = { label: labelS2, kind: 'secondary' };
+const labelG = `Ghost button ${uuidv4()}`;
+const actionG = { label: labelG, kind: 'ghost' };
+const labelDG = `Danger Ghost button ${uuidv4()}`;
+const actionDG = { label: labelDG, kind: 'danger--ghost', dangerDescription };
 
 const getByRoleAndLabel = (role, label) =>
   screen.getByRole(role, { name: label });
@@ -46,88 +52,105 @@ describe(componentName, () => {
   });
 
   it('renders one action button', () => {
-    render(<ActionSet actions={[action1]} />);
-    getByRoleAndLabel('button', label1);
+    render(<ActionSet actions={[actionS]} />);
+    getByRoleAndLabel('button', labelS);
   });
 
   it('renders three action buttons', () => {
-    render(<ActionSet size="lg" actions={[action1, action2, action3]} />);
-    expect(getByRoleAndLabel('button', label1)).toHaveClass(secondaryButton);
-    expect(getByRoleAndLabel('button', label2)).toHaveClass(primaryButton);
-    expect(getByRoleAndLabel('button', label3)).toHaveClass(ghostButton);
+    render(<ActionSet size="lg" actions={[actionS, actionP, actionG]} />);
+    expect(getByRoleAndLabel('button', labelS)).toHaveClass(secondaryButton);
+    expect(getByRoleAndLabel('button', labelP)).toHaveClass(primaryButton);
+    expect(getByRoleAndLabel('button', labelG)).toHaveClass(ghostButton);
   });
 
   it('renders ghost button first and primary button last', () => {
     render(
-      <ActionSet size="max" actions={[action1, action2, action3, action4]} />
+      <ActionSet size="max" actions={[actionS, actionP, actionG, actionS2]} />
     );
     const buttons = screen.getAllByRole('button');
-    expect(buttons[0].textContent).toEqual(label3);
-    expect(buttons[1].textContent).toEqual(label1);
-    expect(buttons[2].textContent).toEqual(label4);
-    expect(buttons[3].textContent).toEqual(label2);
+    expect(buttons[0].textContent).toEqual(labelG);
+    expect(buttons[1].textContent).toEqual(labelS);
+    expect(buttons[2].textContent).toEqual(labelS2);
+    expect(buttons[3].textContent).toEqual(labelP);
+  });
+
+  it('renders danger--ghost button first and danger button last', () => {
+    render(
+      <ActionSet size="max" actions={[actionS, actionD, actionDG, actionS2]} />
+    );
+    const buttons = screen.getAllByRole('button');
+    expect(buttons[0].textContent).toEqual(dangerDescription + labelDG);
+    expect(buttons[1].textContent).toEqual(labelS);
+    expect(buttons[2].textContent).toEqual(labelS2);
+    expect(buttons[3].textContent).toEqual(labelD);
   });
 
   it('renders primary button first when stacking', () => {
-    render(<ActionSet size="xs" actions={[action1, action2]} />);
+    render(<ActionSet size="xs" actions={[actionS, actionP]} />);
     const buttons = screen.getAllByRole('button');
-    expect(buttons[0].textContent).toEqual(label2);
-    expect(buttons[1].textContent).toEqual(label1);
+    expect(buttons[0].textContent).toEqual(labelP);
+    expect(buttons[1].textContent).toEqual(labelS);
   });
 
   it('renders primary button first when stacking whichever way round they are supplied', () => {
-    render(<ActionSet size="xs" actions={[action2, action1]} />);
+    render(<ActionSet size="xs" actions={[actionP, actionS]} />);
     const buttons = screen.getAllByRole('button');
-    expect(buttons[0].textContent).toEqual(label2);
-    expect(buttons[1].textContent).toEqual(label1);
+    expect(buttons[0].textContent).toEqual(labelP);
+    expect(buttons[1].textContent).toEqual(labelS);
   });
 
   it('rejects too many buttons using the custom validator', () =>
     expectMultipleError(
       [
         'Invalid prop `actions` supplied to `ActionSet`: you cannot have more than three actions',
-        'Invalid prop `kind` of value `danger` supplied to `ActionSetButton`',
+        'Invalid prop `kind` of value `danger--tertiary` supplied to `ActionSetButton`',
       ],
       () => {
         render(
           <ActionSet
-            actions={[action2, action2, action3, action3, { kind: 'danger' }]}
+            actions={[
+              actionP,
+              actionP,
+              actionG,
+              actionG,
+              { kind: 'danger--tertiary' },
+            ]}
           />
         );
       }
     ));
 
   it('applies className to an action button', () => {
-    render(<ActionSet actions={[{ ...action1, className }, action2]} />);
-    expect(getByRoleAndLabel('button', label1)).toHaveClass(className);
-    expect(getByRoleAndLabel('button', label2)).not.toHaveClass(className);
+    render(<ActionSet actions={[{ ...actionS, className }, actionP]} />);
+    expect(getByRoleAndLabel('button', labelS)).toHaveClass(className);
+    expect(getByRoleAndLabel('button', labelP)).not.toHaveClass(className);
   });
 
   it('renders a loading button', () => {
-    render(<ActionSet actions={[{ ...action1, loading: true }]} />);
+    render(<ActionSet actions={[{ ...actionS, loading: true }]} />);
     const loader = Loading.defaultProps.description;
     expect(screen.getByRole('button').textContent).toEqual(
-      `${label1}${loader}${loader}`
+      `${labelS}${loader}${loader}`
     );
   });
 
   it('reports clicks on an action button', () => {
     const onClick = jest.fn();
-    render(<ActionSet actions={[{ ...action1, onClick }]} />);
+    render(<ActionSet actions={[{ ...actionS, onClick }]} />);
     expect(onClick).toBeCalledTimes(0);
-    userEvent.click(getByRoleAndLabel('button', label1));
+    userEvent.click(getByRoleAndLabel('button', labelS));
     expect(onClick).toBeCalledTimes(1);
   });
 
   it('adds additional properties to an action button', () => {
-    render(<ActionSet actions={[{ ...action1, 'data-testid': dataTestId }]} />);
+    render(<ActionSet actions={[{ ...actionS, 'data-testid': dataTestId }]} />);
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an action button', () => {
     const ref = React.createRef();
-    render(<ActionSet actions={[{ ...action1, ref }, action2]} />);
-    expect(ref.current).toEqual(getByRoleAndLabel('button', label1));
+    render(<ActionSet actions={[{ ...actionS, ref }, actionP]} />);
+    expect(ref.current).toEqual(getByRoleAndLabel('button', labelS));
   });
 
   it('applies className to the containing node', () => {
@@ -238,15 +261,14 @@ describe(`${componentName}.validateActions`, () => {
     expect(v('max', props.psg, prop, componentName)).toBeNull();
   });
 
-  it('rejects any kind other than primary, secondary, ghost', () => {
+  it('rejects any kind other than primary, danger, secondary, danger--ghost, ghost', () => {
     expect(v('md', props.primary, prop, componentName)).toBeNull();
+    expect(v('md', props.danger, prop, componentName)).toBeNull();
     expect(v('md', props.secondary, prop, componentName)).toBeNull();
-    expect(v('md', props.danger, prop, componentName)).toBeInstanceOf(Error);
+    expect(v('md', props.dangerGhost, prop, componentName)).toBeNull();
     expect(v('md', props.ghost, prop, componentName)).toBeNull();
+
     expect(v('md', props.dangerPrimary, prop, componentName)).toBeInstanceOf(
-      Error
-    );
-    expect(v('md', props.dangerGhost, prop, componentName)).toBeInstanceOf(
       Error
     );
     expect(v('md', props.dangerTertiary, prop, componentName)).toBeInstanceOf(

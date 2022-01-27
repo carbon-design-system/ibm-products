@@ -14,7 +14,7 @@ const namespace = 'getting-started';
 /**
  * The Getting Started Module provides the means to create a consistent and orderly getting started experience.
  */
-const GettingStartedModule = ({ children, ...other }) => {
+const GettingStartedLayout = ({ children, ...other }) => {
   const content = children({
     getLayoutProps: ({ className, ...rest } = {}) => {
       const assignClassName = (type) => ({
@@ -46,9 +46,9 @@ const GettingStartedModule = ({ children, ...other }) => {
   );
 };
 
-GettingStartedModule.propTypes = {
-  /** Provide the `DescriptionModule`, `Button` elements, `Grid` elements, and optionally `image` and `paragraph` elements, for the `GettingStartedModule` */
+GettingStartedLayout.propTypes = {
+  /** Provide the `DescriptionModule`, `Button` elements, `Grid` elements, and optionally `image` and `paragraph` elements, for the `GettingStartedLayout` */
   children: func.isRequired,
 };
 
-export default GettingStartedModule;
+export default GettingStartedLayout;

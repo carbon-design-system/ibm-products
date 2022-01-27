@@ -2,9 +2,9 @@ import { parameters } from '../../../../.storybook/preview';
 import GettingStarted from '../docs/examples/GettingStarted/index.mdx';
 import { getDocsId } from '../../../../.storybook';
 
-# GettingStartedModule
+# GettingStartedLayout
 
-The GettingStartedModule is a module designed to create a consistent and orderly
+The GettingStartedLayout is a module designed to create a consistent and orderly
 getting started experience.
 
 [↳ Overview](#overview)  
@@ -17,7 +17,7 @@ getting started experience.
 
 ### Overview
 
-The GettingStartedModule module can be built using a combination of the
+The GettingStartedLayout module can be built using a combination of the
 `DescriptionModule`, `Button`,
 [paragraph](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p),
 [image](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img), and
@@ -25,11 +25,11 @@ The GettingStartedModule module can be built using a combination of the
 
 Everything passed in as a
 [render prop](https://reactjs.org/docs/render-props.html) child of
-`GettingStartedModule` will be rendered.
+`GettingStartedLayout` will be rendered.
 
 <Canvas>
   <Story
-    id={getDocsId('layout-modules-gettingstartedmodule--default')}
+    id={getDocsId('layout-modules-gettingstartedlayout--default')}
     parameters={parameters}
   />
 </Canvas>
@@ -40,7 +40,7 @@ Everything passed in as a
 
 _**\***Required property_
 
-Additional props passed into `GettingStartedModule` will be forwarded along to
+Additional props passed into `GettingStartedLayout` will be forwarded along to
 the underlying getting started module container.
 
 #### Render props
@@ -48,7 +48,7 @@ the underlying getting started module container.
 In order to make sure that everything works as intended, it’s important to pass
 all of the props of the component as fields on the object given to the prop
 getter. For example, to add an `illustration` child inside a
-`GettingStartedModule`:
+`GettingStartedLayout`:
 
 ```jsx
 <img {...getLayoutProps({ type: ’illustration' })}/>

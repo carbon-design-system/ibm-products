@@ -1,5 +1,5 @@
 /**
- * @file ICA module stories.
+ * @file Getting Started layout stories.
  * @copyright IBM Security 2020 - 2021
  */
 
@@ -11,7 +11,7 @@ import {
   Button,
   Column,
   DescriptionModule,
-  GettingStartedModule,
+  GettingStartedLayout,
   Row,
   TitleBarModule,
 } from '../../..';
@@ -22,8 +22,8 @@ import getTitle from '../stories';
 import page from './index.mdx';
 
 export default {
-  title: getTitle(GettingStartedModule.name),
-  component: GettingStartedModule,
+  title: getTitle(GettingStartedLayout.name),
+  component: GettingStartedLayout,
   parameters: {
     docs: { page },
 
@@ -32,7 +32,7 @@ export default {
 };
 
 export const Default = () => (
-  <GettingStartedModule className="security--theme--cg10">
+  <GettingStartedLayout className="security--theme--cg10">
     {({ getLayoutProps }) => {
       const {
         description,
@@ -95,5 +95,5 @@ export const Default = () => (
         </>
       );
     }}
-  </GettingStartedModule>
+  </GettingStartedLayout>
 );

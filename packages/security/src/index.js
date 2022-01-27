@@ -104,7 +104,7 @@ export {
   CardAreaModule as CardModule,
   DescriptionListModule,
   DescriptionModule,
-  GettingStartedModule,
+  GettingStartedLayout,
   ICAModule,
   ListItemModule,
   TitleBarModule,

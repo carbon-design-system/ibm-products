@@ -26,6 +26,7 @@ const defaultProps = {
   secondaryButtonText: 'secondary button',
   successMessage: 'success',
   title: 'header content',
+  inputType: 'text',
 };
 
 describe(componentName, () => {
@@ -153,6 +154,16 @@ describe(componentName, () => {
 
     click(screen.getByText(props.secondaryButtonText));
     expect(onClose).toBeCalled();
+  });
+
+  it('renders with password field', () => {
+    const { container } = render(
+      <ExportModal {...defaultProps} inputType="password" />
+    );
+    expect(container.querySelector('.bx--text-input')).toHaveAttribute(
+      'type',
+      'password'
+    );
   });
 
   //@TODO: reinstate this test as soon as https://github.com/carbon-design-system/carbon/issues/10107 is fixed

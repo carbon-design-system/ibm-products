@@ -6,20 +6,26 @@
  */
 
 // Import portions of React that are needed.
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
-import { CancelableTextEdit } from '../';
 import { Button } from 'carbon-components-react';
-import { Edit16, EditOff16 } from '@carbon/icons-react';
+import {
+  Close16,
+  Edit16,
+  EditOff16,
+  Checkmark16,
+  WarningFilled16,
+  WarningAltFilled16,
+} from '@carbon/icons-react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--inline-edit`;
@@ -33,20 +39,19 @@ export let InlineEdit = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
+      cancelDescription,
       className,
       disabled,
       editDescription,
       id,
-      inline,
       invalid,
       invalidText,
       labelText,
+      onCancel,
       onChange,
       onInput,
-      onRevert,
-      revertDescription,
       saveDescription,
-      saveDisabled,
+      // saveDisabled,
       size,
       value,
       warn,
@@ -57,68 +62,161 @@ export let InlineEdit = React.forwardRef(
       // Collect any other property values passed in.
       ...rest
     },
-    ref
+    refIn
   ) => {
+    const refInput = useRef(null);
+    const localRef = useRef(null);
+    const ref = refIn || localRef;
     const [editing, setEditing] = useState(false);
-    const handleEdit = () => setEditing((prev) => !prev);
-    const handleChange = (val) => {
-      setEditing(false);
-      onChange(val);
+    const showValidationText = invalid || warn;
+    const validationText = invalidText || warnText;
+    const validationIcon = showValidationText ? (
+      invalid ? (
+        <WarningFilled16 />
+      ) : (
+        <WarningAltFilled16 />
+      )
+    ) : null;
+
+    const handleEdit = () => {
+      if (!disabled) {
+        setEditing(true);
+        setTimeout(() => {
+          refInput.current.focus();
+        }, 0);
+      }
     };
-    const handleRevert = () => {
+    const handleFocus = () => {
+      if (!editing) {
+        setEditing(true);
+      }
+    };
+    const handleChange = () => {
       setEditing(false);
-      onRevert(value);
+      if (onChange) {
+        onChange(refInput.current.innerText);
+      }
+    };
+    const handleInput = (ev) => {
+      // if (
+      //   refInput.current.innerText.trim() !== refInput.current.innerHTML.trim()
+      // ) {
+      //   console.log(refInput.current.innerText);
+      //   console.log(refInput.current.innerHTML);
+      //   refInput.current.innerHTML = refInput.current.innerText;
+      // }
+
+      if (onInput) {
+        onInput(refInput.current.innerText);
+      }
+    };
+    const handleCancel = () => {
+      handleInput(value);
+      setEditing(false);
+      if (onCancel) {
+        onCancel(value);
+      }
+      refInput.current.innerHTML = value;
+    };
+    const handleBlur = (ev) => {
+      if (!ref.current.contains(ev.relatedTarget)) {
+        // setEditing(false);
+        // handleChange();
+      }
     };
 
-    const stdProps = {
-      // Pass through any other property values as HTML attributes.
-      ...rest,
-      className: cx(
-        blockClass, // Apply the block class to the main HTML element
-        className, // Apply any supplied class names to the main HTML element.
-        {
-          // switched classes dependant on props or state
-          [`${blockClass}--editing`]: editing,
-        }
-      ),
-      id,
-      size,
-      ref,
-      ...getDevtoolsProps(componentName),
+    const handleKeyDown = (ev) => {
+      console.dir('key down');
+      if (ev.key === 'Enter') {
+        ev.preventDefault();
+        refInput.current.blur(); // will cause save
+      }
     };
 
-    return editing ? (
-      <CancelableTextEdit
-        {...stdProps}
-        hideLabel
-        {...{
-          inline,
-          invalid,
-          invalidText,
-          labelText,
-          onChange: handleChange,
-          onInput,
-          onRevert: handleRevert,
-          revertDescription,
-          saveDescription,
-          saveDisabled,
-          value,
-          warn,
-          warnText,
-        }}
-      />
-    ) : (
-      <div {...stdProps}>
-        <div className={`${blockClass}__value`}>{value}</div>
-        <Button
-          className={`${blockClass}__button ${carbon.prefix}--btn--md`}
-          kind="ghost"
-          hasIconOnly
-          iconDescription={editDescription}
-          onClick={handleEdit}
-          renderIcon={disabled ? EditOff16 : Edit16}
-          disabled={disabled}
-        />
+    return (
+      <div
+        className={cx(
+          blockClass, // Apply the block class to the main HTML element
+          className, // Apply any supplied class names to the main HTML element.
+          `${blockClass}--${size}`,
+          // `${carbon.prefix}--btn ${carbon.prefix}--btn--ghost`, // make like a ghost button
+          {
+            // switched classes dependant on props or state
+            [`${blockClass}--editing`]: editing,
+            [`${blockClass}--invalid`]: invalid,
+          }
+        )}
+        onBlur={handleBlur}
+        ref={ref}
+      >
+        {!editing && (
+          <div className={`${blockClass}__controls`}>
+            {/* placed here for hover purposes */}
+            <Button
+              aria-hidden="true"
+              className={`${blockClass}__edit`}
+              kind="ghost"
+              hasIconOnly
+              iconDescription={editDescription}
+              onClick={handleEdit}
+              renderIcon={disabled ? EditOff16 : Edit16}
+              disabled={disabled}
+              tabIndex={-1}
+            />
+          </div>
+        )}
+        <div
+          {...rest}
+          {...getDevtoolsProps(componentName)}
+          {...{ id, size, refInput }}
+          className={`${blockClass}__input`}
+          contentEditable
+          aria-label={labelText}
+          role="textbox"
+          tabIndex="0"
+          onFocus={handleFocus}
+          onInput={handleInput}
+          onChange={handleChange}
+          onCancel={handleCancel}
+          onKeyDown={handleKeyDown}
+          suppressContentEditableWarning={true}
+          ref={refInput}
+        >
+          {value}
+        </div>
+        {refInput.current && refInput.current.innerText.length === 0 && (
+          <div className={`${blockClass}__placeholder`}>{labelText}</div>
+        )}
+        {showValidationText && validationText.length > 0 && (
+          <div className={`${blockClass}__validation-text`}>
+            {validationText}
+          </div>
+        )}
+        <div className={`${blockClass}__validation-icon`}>{validationIcon}</div>
+        {editing && (
+          <div className={`${blockClass}__controls`}>
+            {/* placed here for focus order */}
+            <div className={`${blockClass}__edit-controls`}>
+              <Button
+                className={`${blockClass}__cancel`}
+                kind="ghost"
+                hasIconOnly
+                iconDescription={cancelDescription}
+                onClick={handleCancel}
+                renderIcon={Close16}
+              />
+              <Button
+                className={`${blockClass}__save`}
+                kind="ghost"
+                hasIconOnly
+                iconDescription={saveDescription}
+                onClick={handleChange}
+                renderIcon={Checkmark16}
+                // disabled={invalid || saveDisabled || value === liveValue}
+              />
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -136,6 +234,10 @@ InlineEdit.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 InlineEdit.propTypes = {
   /**
+   * label for cancel button
+   */
+  cancelDescription: PropTypes.string.isRequired,
+  /**
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
@@ -151,10 +253,6 @@ InlineEdit.propTypes = {
    * ID for inline edit
    */
   id: PropTypes.string,
-  /* TODO: add types and DocGen for all props. */ /**
-   * inline variant
-   */
-  inline: PropTypes.bool,
   /**
    * set invalid state for input
    */
@@ -168,6 +266,10 @@ InlineEdit.propTypes = {
    */
   labelText: PropTypes.string,
   /**
+   * method called on cancel event
+   */
+  onCancel: PropTypes.func,
+  /**
    * method called on change event
    */
   onChange: PropTypes.func,
@@ -175,14 +277,6 @@ InlineEdit.propTypes = {
    * method called on input event
    */
   onInput: PropTypes.func,
-  /**
-   * method called on revert event
-   */
-  onRevert: PropTypes.func,
-  /**
-   * label for revert button
-   */
-  revertDescription: PropTypes.string.isRequired,
   /**
    * label for save button
    */
@@ -197,7 +291,8 @@ InlineEdit.propTypes = {
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
   /**
    * initial/unedited value
-   */ value: PropTypes.string,
+   */
+  value: PropTypes.string,
   /**
    * set warn state for input
    */

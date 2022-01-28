@@ -18,27 +18,33 @@ import mdx from './InlineEdit.mdx';
 
 import styles from './_storybook-styles.scss';
 
+const storyClass = 'inline-edit-stories';
+
 export default {
   title: getStoryTitle(InlineEdit.displayName),
   component: InlineEdit,
   parameters: {
     styles,
+    layout: 'padded',
     docs: {
       page: mdx,
     },
   },
+  decorators: [
+    (story) => <div className={`${storyClass}__viewport`}>{story()}</div>,
+  ],
 };
 
 const actionChange = action('change');
 const actionInput = action('input');
-const actionRevert = action('revert');
+const actionCancel = action('cancel');
 
 /**
  * TODO: Declare template(s) for one or more scenarios.
  */
 const Template = ({
   editDescription,
-  revertDescription,
+  cancelDescription,
   saveDescription,
   value: initialValue,
   ...rest
@@ -50,7 +56,7 @@ const Template = ({
     actionChange(val);
   };
   const onInput = actionInput;
-  const onRevert = actionRevert;
+  const onCancel = actionCancel;
 
   useEffect(() => {
     setValue(initialValue);
@@ -64,8 +70,8 @@ const Template = ({
         editDescription,
         onChange,
         onInput,
-        onRevert,
-        revertDescription,
+        onCancel,
+        cancelDescription,
         saveDescription,
         value,
       }}
@@ -78,7 +84,7 @@ export const inlineEdit = prepareStory(Template, {
     editDescription: 'Edit',
     id: 'edit button',
     labelText: 'Inline edit',
-    revertDescription: 'Revert',
+    cancelDescription: 'Cancel',
     saveDescription: 'Save',
     value: 'hello, world',
   },

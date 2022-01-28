@@ -18,24 +18,178 @@
 // InlineEdit uses the following Carbon for IBM Products components:
 // TODO: @import(s) of IBM Products component styles used by InlineEdit
 
+// cut down version borrowed from 'carbon-components/scss/globals/scss/vendor/@carbon/styles/scss/utilities/focus-outline';
+@mixin input-outline($color: $focus) {
+  outline: $spacing-01 solid $color;
+  outline-offset: calc(-1 * $spacing-01);
+
+  @media screen and (prefers-contrast) {
+    outline-style: dotted;
+  }
+}
+
+@mixin input-button-defaults() {
+  width: var(--size);
+  height: 100%;
+  min-height: initial;
+  max-height: var(--size);
+
+  // stylelint-disable-next-line carbon/layout-token-use
+  padding: calc(0.5 * (var(--size) - var(--icon-size)));
+  border: 2px solid transparent;
+}
+
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
 @mixin inline-edit {
   // The block part of our conventional BEM class names (blockClass__E--M).
   $block-class: #{$pkg-prefix}--inline-edit;
 
-  .#{$block-class} {
-    display: inline-flex;
-    align-content: center;
-  }
+  @include block-wrap($block-class, 3) {
+    --size: #{$spacing-08};
+    --icon-size: #{$spacing-05};
 
-  .#{$block-class} .#{$block-class}__value {
-    display: flex;
-    align-items: center;
-  }
+    position: relative;
+    display: inline-block;
+    // min-width: 250px; // similar to min input box with room for edit-controls
+    height: var(--size);
 
-  .#{$block-class} .#{$block-class}__button {
-    margin-left: $spacing-03;
+    transition: background $duration--fast-01 motion(entrance, productive),
+      box-shadow $duration--fast-01 motion(entrance, productive),
+      border-color $duration--fast-01 motion(entrance, productive);
+
+    // &.#{$block-class}:focus-within svg {
+    //   outline: none;
+    // }
+
+    &.#{$block-class}--sm {
+      --size: #{$spacing-07};
+      --icon-size: #{$spacing-05};
+    }
+
+    &.#{$block-class}--lg {
+      --size: #{$spacing-09};
+      --icon-size: #{$spacing-05};
+    }
+
+    .#{$block-class}__input:hover:not(.#{$block-class}__input:focus),
+    .#{$block-class}__controls:hover ~ .#{$block-class}__input {
+      // }:not(.#{$block-class}__input:focus) {
+      background-color: $hover-field;
+    }
+
+    .#{$block-class}__input {
+      display: inline-flex;
+      height: 100%;
+      align-items: center;
+      padding-right: $spacing-12; // space for two edit-controls, additional padding may be needed for error control
+      padding-left: $spacing-03;
+
+      :focus-within &,
+      &:focus,
+      &:active {
+        @include input-outline($focus);
+
+        background-color: $ui-01;
+      }
+
+      .#{$block-class}--invalid & {
+        @include input-outline($support-01);
+      }
+    }
+
+    .#{$block-class}__placeholder {
+      position: absolute;
+      left: $spacing-03;
+    }
+
+    .#{$block-class}__controls {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+
+    .#{$block-class}__save,
+    .#{$block-class}__cancel {
+      @include input-button-defaults();
+
+      // input does not have focus
+      &:hover {
+        border-top-color: $focus;
+        border-bottom-color: $focus;
+        outline: initial;
+      }
+
+      &:focus:active,
+      &:focus {
+        // border focus input does NOT have focus
+        border-color: $focus;
+        box-shadow: initial;
+        outline: initial;
+      }
+
+      &:focus:active:hover {
+        box-shadow: inset 0 0 0 1px $field-01;
+      }
+
+      &::before {
+        background-color: transparent;
+      }
+
+      &[disabled] {
+        border-color: transparent;
+      }
+    }
+    .#{$block-class}__save {
+      &:hover {
+        border-right-color: $focus;
+      }
+    }
+
+    .#{$block-class}__edit {
+      @include input-button-defaults();
+
+      &:hover,
+      &:active,
+      &:focus {
+        border-color: transparent;
+        background-color: transparent;
+        box-shadow: initial;
+        outline: initial;
+      }
+    }
+
+    // .#{$block-class}--editing {
+    //   margin-left: calc(-1 * #{$spacing-05});
+    // }
+
+    // .#{$block-class} .#{$block-class}__value {
+    //   position: relative;
+    //   display: flex;
+    //   flex: 1 1 100%;
+    //   align-items: center;
+    //   // // padding to line up with edit content
+    //   padding-right: $spacing-03;
+    //   padding-left: $spacing-05;
+
+    //   cursor: pointer;
+    // }
+
+    // .#{$block-class}.#{$block-class}.#{$block-class} .#{$block-class}__button {
+    //   flex: 0 0 var(--icon-size);
+    //   pointer-events: none;
+    //   cursor: pointer;
+
+    //   &:hover,
+    //   &:active,
+    //   &:focus {
+    //     border-color: transparent;
+    //     background-color: transparent;
+    //     box-shadow: none;
+    //     outline: none;
+    //   }
+    // }
   }
 }
 

@@ -33,6 +33,7 @@ import {
   useCreateComponentFocus,
   useCreateComponentStepChange,
 } from '../../global/js/hooks';
+import { lastIndexOf } from '../../global/js/utils/lastIndexOf';
 
 const blockClass = `${pkg.prefix}--create-full-page`;
 const componentName = 'CreateFullPage';
@@ -77,15 +78,6 @@ export let CreateFullPage = React.forwardRef(
     const [stepData, setStepData] = useState([]);
     const [firstIncludedStep, setFirstIncludedStep] = useState(1);
     const [lastIncludedStep, setLastIncludedStep] = useState(null);
-
-    const lastIndexOf = (array, key) => {
-      for (let i = array.length - 1; i >= 0; i--) {
-        if (array[i]?.[key] === true) {
-          return i + 1;
-        }
-      }
-      return -1;
-    };
 
     useEffect(() => {
       const firstItem =

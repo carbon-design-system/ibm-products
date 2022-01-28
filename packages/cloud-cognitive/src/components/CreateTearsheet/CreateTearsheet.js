@@ -27,6 +27,7 @@ import {
   useCreateComponentStepChange,
 } from '../../global/js/hooks';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { lastIndexOf } from '../../global/js/utils/lastIndexOf';
 
 const componentName = 'CreateTearsheet';
 const blockClass = `${pkg.prefix}--tearsheet-create`;
@@ -75,15 +76,6 @@ export let CreateTearsheet = forwardRef(
 
     const previousState = usePreviousValue({ currentStep, open });
     const contentRef = useRef();
-
-    const lastIndexOf = (array, key) => {
-      for (let i = array.length - 1; i >= 0; i--) {
-        if (array[i]?.[key] === true) {
-          return i + 1;
-        }
-      }
-      return -1;
-    };
 
     useEffect(() => {
       const firstItem =

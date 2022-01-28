@@ -11,7 +11,7 @@ import cx from 'classnames';
 import { pkg } from '../../settings';
 import { FormGroup } from 'carbon-components-react';
 import { StepsContext, StepNumberContext } from './CreateFullPage';
-import { usePreviousValue } from '../../global/js/hooks';
+import { usePreviousValue, useRetrieveStepData } from '../../global/js/hooks';
 import pconsole from '../../global/js/utils/pconsole';
 
 const componentName = 'CreateFullPageStep';
@@ -43,6 +43,15 @@ export let CreateFullPageStep = forwardRef(
       currentStep: stepsContext?.currentStep,
     });
 
+    useRetrieveStepData({
+      stepsContext,
+      stepNumber,
+      introStep,
+      shouldIncludeStep,
+      secondaryLabel,
+      title,
+    });
+
     // This useEffect reports back the onNext and onMount values so that they can be used
     // in the appropriate custom hooks.
     useEffect(() => {
@@ -58,40 +67,6 @@ export let CreateFullPageStep = forwardRef(
     useEffect(() => {
       setShouldIncludeStep(includeStep);
     }, [includeStep, stepsContext, title]);
-
-    // This useEffect makes sure that every CreateFullPageStep reports back it's
-    // title, secondaryLabel, and introStep props so that it can be sent to the CreateInfluencer.
-    useEffect(() => {
-      if (stepsContext) {
-        stepsContext.setStepData((prev) => {
-          const stepItem = {
-            title,
-            secondaryLabel,
-            introStep,
-            shouldIncludeStep,
-          };
-          const previousItem = prev[stepNumber - 1];
-          if (
-            previousItem?.title !== stepItem.title ||
-            previousItem?.secondaryLabel !== stepItem.secondaryLabel ||
-            previousItem?.introStep !== stepItem.introStep ||
-            previousItem?.shouldIncludeStep !== stepItem.shouldIncludeStep
-          ) {
-            const clone = [...prev];
-            clone[stepNumber - 1] = stepItem;
-            return clone;
-          }
-          return prev;
-        });
-      }
-    }, [
-      shouldIncludeStep,
-      title,
-      secondaryLabel,
-      introStep,
-      stepsContext,
-      stepNumber,
-    ]);
 
     // Whenever we are the current step, supply our disableSubmit value to the
     // steps container context so that it can manage the 'Next' button appropriately.

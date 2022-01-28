@@ -47,7 +47,7 @@
     "postinstall": "carbon-telemetry collect --install",
     "test": "jest --colors",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally), react/react-dom (explicit range peer dependency) or chalk (until we can load it as ESM)",
-    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react$|^react-dom$|^chalk$)/'"
+    "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$|^chalk$)/'"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.8",
@@ -73,15 +73,15 @@
     "react-resize-detector": "^7.0.0"
   },
   "peerDependencies": {
-    "@carbon/colors": "^10.34.0",
-    "@carbon/icons-react": "^10.42.0",
+    "@carbon/colors": "^10.35.0",
+    "@carbon/icons-react": "^10.45.0",
     "@carbon/import-once": "^10.5.0",
-    "@carbon/layout": "^10.34.0",
-    "@carbon/motion": "^10.26.0",
-    "@carbon/themes": "^10.46.0",
-    "@carbon/type": "^10.38.0",
-    "carbon-components": "^10.47.1",
-    "carbon-components-react": "^7.47.2",
+    "@carbon/layout": "^10.35.0",
+    "@carbon/motion": "^10.27.0",
+    "@carbon/themes": "^10.49.0",
+    "@carbon/type": "^10.40.0",
+    "carbon-components": "^10.51.0",
+    "carbon-components-react": "^7.51.0",
     "carbon-icons": "^7.0.7",
     "react": "^16.8.6 || ^17.0.1",
     "react-dom": "^16.8.6 || ^17.0.1"

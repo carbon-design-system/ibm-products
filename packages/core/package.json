@@ -25,7 +25,7 @@
     "start": "run-s build:carbon start:storybook",
     "start:storybook": "start-storybook -s ./public -p 3000",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (not tested)",
-    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react$|^react-dom$)/'"
+    "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$)/'"
   },
   "devDependencies": {
     "@babel/core": "^7.16.10",

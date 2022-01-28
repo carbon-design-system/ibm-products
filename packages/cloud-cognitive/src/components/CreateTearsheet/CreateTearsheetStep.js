@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -26,8 +26,6 @@ export let CreateTearsheetStep = forwardRef(
       disableSubmit,
       fieldsetLegendText,
       hasFieldset,
-      id,
-      includeAfter,
       includeStep,
       introStep,
       onNext,
@@ -38,77 +36,79 @@ export let CreateTearsheetStep = forwardRef(
     },
     ref
   ) => {
-    const steps = useContext(StepsContext);
+    const stepsContext = useContext(StepsContext);
     const stepNumber = useContext(StepNumberContext);
     const [shouldIncludeStep, setShouldIncludeStep] = useState();
-    const previousState = usePreviousValue({ currentStep: steps?.currentStep, shouldIncludeStep });
+    const previousState = usePreviousValue({
+      currentStep: stepsContext?.currentStep,
+    });
 
     // This useEffect reports back the onNext and onMount values so that they can be used
     // in the appropriate custom hooks.
     useEffect(() => {
       if (
-        stepNumber === steps?.currentStep &&
-        previousState?.currentStep !== steps?.currentStep
+        stepNumber === stepsContext?.currentStep &&
+        previousState?.currentStep !== stepsContext?.currentStep
       ) {
-        steps?.setOnNext(onNext);
-        steps?.setOnMount(onMount);
+        stepsContext?.setOnNext(onNext);
+        stepsContext?.setOnMount(onMount);
       }
-    }, [onMount, onNext, steps, stepNumber, previousState?.currentStep]);
+    }, [onMount, onNext, stepsContext, stepNumber, previousState?.currentStep]);
 
+    // Used to take the `includeStep` prop and use it as a local state value
     useEffect(() => {
       setShouldIncludeStep(includeStep);
-    }, [includeStep]);
-    // console.log({shouldIncludeStep});
+    }, [includeStep, stepsContext, title]);
 
+    // This useEffect makes sure that every CreateTearsheetStep reports back it's
+    // title, secondaryLabel, and introStep props so that it can be sent to the CreateInfluencer.
     useEffect(() => {
-      if (!previousState?.shouldIncludeStep && shouldIncludeStep) {
-        console.log('Conditional step: ', {title}, steps.stepData, includeAfter);
-        steps.setStepData(prev => {
-          // console.log({prev});
-          const clonedPrev = [...prev];
-          const insertAfterIndex = includeAfter && clonedPrev.findIndex(item => item.id === includeAfter);
-          console.log({insertAfterIndex});
+      if (stepsContext) {
+        stepsContext.setStepData((prev) => {
           const stepItem = {
             title,
             secondaryLabel,
             introStep,
             shouldIncludeStep,
-            id
           };
-          // console.log(clonedPrev.splice(insertAfterIndex + 1, 0, stepItem));
-          // const 
-          return includeAfter
-            ? prev.splice(insertAfterIndex + 1, 0, stepItem)
-            : [
-              ...prev,
-              stepItem
-            ]
-          });
+          const previousItem = prev[stepNumber - 1];
+          if (
+            previousItem?.title !== stepItem.title ||
+            previousItem?.secondaryLabel !== stepItem.secondaryLabel ||
+            previousItem?.introStep !== stepItem.introStep ||
+            previousItem?.shouldIncludeStep !== stepItem.shouldIncludeStep
+          ) {
+            const clone = [...prev];
+            clone[stepNumber - 1] = stepItem;
+            return clone;
+          }
+          return prev;
+        });
       }
-      if (!shouldIncludeStep && previousState?.shouldIncludeStep) {
-        console.log('Step to remove:', {title}, steps.stepData);
-        const stepDataClone = [...steps.stepData];
-        const stepsWithoutConditional = stepDataClone.filter(item => item.title !== title);
-        console.log({stepsWithoutConditional});
-        steps.setStepData(stepsWithoutConditional);
-      }
-    }, [shouldIncludeStep, title, secondaryLabel, introStep, steps, previousState?.shouldIncludeStep, includeAfter, id]);
+    }, [
+      shouldIncludeStep,
+      title,
+      secondaryLabel,
+      introStep,
+      stepsContext,
+      stepNumber,
+    ]);
 
     // Whenever we are the current step, supply our disableSubmit value to the
     // steps container context so that it can manage the 'Next' button appropriately.
     useEffect(() => {
-      if (stepNumber === steps?.currentStep) {
-        steps.setIsDisabled(disableSubmit);
+      if (stepNumber === stepsContext?.currentStep) {
+        stepsContext.setIsDisabled(disableSubmit);
       }
-    }, [steps, stepNumber, disableSubmit, onNext]);
+    }, [stepsContext, stepNumber, disableSubmit, onNext]);
 
-    return steps ? (
+    return stepsContext ? (
       <div
         className={cx(blockClass, className, {
           [`${blockClass}__step--hidden-step`]:
-            stepNumber !== steps?.currentStep,
+            stepNumber !== stepsContext?.currentStep,
           [`${blockClass}__step--visible-step`]:
-            stepNumber === steps?.currentStep,
+            stepNumber === stepsContext?.currentStep,
         })}
         ref={ref}
       >
@@ -186,9 +186,10 @@ CreateTearsheetStep.propTypes = {
   hasFieldset: PropTypes.bool,
 
   /**
-   * This prop is used to help track dynamic steps
+   * This prop is used to help track dynamic steps. If this value is `false` then the step is not included in the visible steps or the ProgressIndicator
+   * steps. If this value is `true` then the step will be included in the list of visible steps, as well as being included in the ProgressIndicator step list
    */
-   includeStep: PropTypes.bool,
+  includeStep: PropTypes.bool,
 
   /**
    * This prop can be used on the first step to mark it as an intro step, which will not render the progress indicator steps

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -67,7 +67,8 @@ export const MultiStepTearsheet = ({
   const [stepThreeTextInputValue, setStepThreeTextInputValue] =
     useState('one-day');
   const [isInvalid, setIsInvalid] = useState(false);
-  const [shouldIncludeAdditionalStep, setShouldIncludeAdditionalStep] = useState(false);
+  const [shouldIncludeAdditionalStep, setShouldIncludeAdditionalStep] =
+    useState(false);
 
   const clearCreateData = () => {
     setStepOneTextInputValue('');
@@ -79,6 +80,7 @@ export const MultiStepTearsheet = ({
     setIsInvalid(false);
     setOpen(false);
     setValue1('');
+    setShouldIncludeAdditionalStep(false);
   };
 
   return (
@@ -129,7 +131,6 @@ export const MultiStepTearsheet = ({
           subtitle="This is the unique name used to recognize your topic"
           description="It will also be used by your producers and consumers as part of the
           connection information, so make it something easy to recognize."
-          id="topic-name-step"
         >
           <Row>
             <Column xlg={8} lg={8} md={8} sm={8}>
@@ -186,21 +187,20 @@ export const MultiStepTearsheet = ({
               <Checkbox
                 labelText={`Include additional step`}
                 id="include-additional-step-checkbox"
-                onChange={value => setShouldIncludeAdditionalStep(value)}
+                onChange={(value) => setShouldIncludeAdditionalStep(value)}
                 checked={shouldIncludeAdditionalStep}
               />
             </Column>
           </Row>
         </CreateTearsheetStep>
         <CreateTearsheetStep
-          title="Conditional step"
-          subtitle="Conditional step subtitle"
-          description="Test description"
-          hasForm={false}
+          title="Dynamic step"
+          subtitle="Dynamic step subtitle"
+          description="This is an example showing how to include a dynamic step into the CreateTearsheet"
+          hasFieldset={false}
           includeStep={shouldIncludeAdditionalStep}
-          includeAfter="topic-name-step"
         >
-          conditional step
+          dynamic step content
         </CreateTearsheetStep>
         <CustomStep
           title="Location"
@@ -208,7 +208,7 @@ export const MultiStepTearsheet = ({
           description="Custom step description (see storybook implementation for new custom step capability)"
           value1={value1}
           setValue1={setValue1}
-          hasForm={false}
+          hasFieldset={false}
         />
         <CreateTearsheetStep
           title="Partitions"

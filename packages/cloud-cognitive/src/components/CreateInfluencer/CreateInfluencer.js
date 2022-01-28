@@ -19,22 +19,44 @@ const blockClass = `${pkg.prefix}--create-influencer`;
 const componentName = 'CreateInfluencer';
 
 export let CreateInfluencer = ({ className, currentStep, stepData }) => {
+  const getNumberOfDynamicStepsBeforeCurrentStep = (array, key) => {
+    const dynamicSteps = [];
+    array.forEach((item, index) => {
+      if (array[index]?.[key] === false && index <= currentStep - 1) {
+        dynamicSteps.push(item);
+      }
+    });
+    return dynamicSteps.length;
+  };
+
   // renders the step progression components in the left influencer area
   const renderProgressSteps = () => {
     const extractedSteps = stepData?.filter((item) => !item?.introStep);
-    console.log(extractedSteps);
+    const progressSteps = extractedSteps?.filter(
+      (item) => item?.shouldIncludeStep
+    );
+
+    // To get the ProgressIndicator's `currentIndex`, accounting for dynamic steps,
+    // we need to subtract the number of !shouldIncludeStep/s before the current step
+    // which we get from `getNumberOfDynamicStepsBeforeCurrentStep()`
+    const totalDynamicSteps =
+      getNumberOfDynamicStepsBeforeCurrentStep(stepData, 'shouldIncludeStep') ||
+      0;
+
     return (
       <div className={`${blockClass}__left-nav`}>
         {currentStep === 1 && stepData[0]?.introStep ? null : (
           <ProgressIndicator
             currentIndex={
-              stepData[0]?.introStep ? currentStep - 2 : currentStep - 1
+              stepData[0]?.introStep
+                ? currentStep - totalDynamicSteps - 2 // minus 2 because we need to account for the intro step in addition to `currentIndex` being 0 index based and our steps being 1 index based
+                : currentStep - totalDynamicSteps - 1 // minus 1 because ProgressIndicator currentIndex prop is 0 index based, but our steps are 1 index based
             }
             spaceEqually
             vertical
             className={cx(`${blockClass}__progress-indicator`)}
           >
-            {extractedSteps.map((step, stepIndex) => {
+            {progressSteps.map((step, stepIndex) => {
               return (
                 <ProgressStep
                   label={step.title}
@@ -75,6 +97,7 @@ CreateInfluencer.propTypes = {
     PropTypes.shape({
       introStep: PropTypes.bool,
       secondaryLabel: PropTypes.string,
+      shouldIncludeStep: PropTypes.bool,
       title: PropTypes.node,
     })
   ),

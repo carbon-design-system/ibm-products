@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -142,20 +142,21 @@ export const MultiStepWithIntro = ({
             </RadioTile>
           </TileGroup>
         </CreateTearsheetStep>
-        {selectedCategory === 'plus' && (
-          <CreateTearsheetStep
-            title="Conditional step"
-            subtitle="This step will only show for plus category creation flows"
-            hasFieldset={false}
-          >
-            conditional step content
-          </CreateTearsheetStep>
-        )}
-        {selectedCategory === 'standard' && (
-          <CreateTearsheetStep title="Standard step only" hasFieldset={false}>
-            This step will only show for standard flows
-          </CreateTearsheetStep>
-        )}
+        <CreateTearsheetStep
+          title="Conditional step"
+          subtitle="This step will only show for plus category creation flows"
+          hasFieldset={false}
+          includeStep={selectedCategory === 'plus'}
+        >
+          This step will only show for plus create flows
+        </CreateTearsheetStep>
+        <CreateTearsheetStep
+          title="Standard step only"
+          hasFieldset={false}
+          includeStep={selectedCategory === 'standard'}
+        >
+          This step will only show for standard create flows
+        </CreateTearsheetStep>
         <CreateTearsheetStep
           onNext={() => {
             return new Promise((resolve, reject) => {

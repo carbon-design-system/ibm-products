@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, useContext, useEffect } from 'react';
+import React, { forwardRef, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
@@ -25,6 +25,7 @@ export let CreateFullPageStep = forwardRef(
       subtitle,
       description,
       disableSubmit,
+      includeStep,
       introStep,
       title,
       hasFieldset,
@@ -35,55 +36,78 @@ export let CreateFullPageStep = forwardRef(
     },
     ref
   ) => {
-    const steps = useContext(StepsContext);
+    const stepsContext = useContext(StepsContext);
     const stepNumber = useContext(StepNumberContext);
-    const previousState = usePreviousValue({ currentStep: steps?.currentStep });
+    const [shouldIncludeStep, setShouldIncludeStep] = useState();
+    const previousState = usePreviousValue({
+      currentStep: stepsContext?.currentStep,
+    });
 
     // This useEffect reports back the onNext and onMount values so that they can be used
     // in the appropriate custom hooks.
     useEffect(() => {
       if (
-        stepNumber === steps?.currentStep &&
-        previousState?.currentStep !== steps?.currentStep
+        stepNumber === stepsContext?.currentStep &&
+        previousState?.currentStep !== stepsContext?.currentStep
       ) {
-        steps?.setOnNext(onNext);
-        steps?.setOnMount(onMount);
+        stepsContext?.setOnNext(onNext);
+        stepsContext?.setOnMount(onMount);
       }
-    }, [onMount, onNext, steps, stepNumber, previousState?.currentStep]);
+    }, [onMount, onNext, stepsContext, stepNumber, previousState?.currentStep]);
 
-    // This useEffect makes sure that every CreateTearsheetStep reports back it's
+    useEffect(() => {
+      setShouldIncludeStep(includeStep);
+    }, [includeStep, stepsContext, title]);
+
+    // This useEffect makes sure that every CreateFullPageStep reports back it's
     // title, secondaryLabel, and introStep props so that it can be sent to the CreateInfluencer.
     useEffect(() => {
-      const stepHasReported = steps?.stepData?.includes(
-        (item) => item.title === title
-      );
-      if (!stepHasReported && steps?.stepData?.length < steps?.totalStepCount) {
-        steps?.setStepData((prev) => [
-          ...prev,
-          {
+      if (stepsContext) {
+        stepsContext.setStepData((prev) => {
+          const stepItem = {
             title,
             secondaryLabel,
             introStep,
-          },
-        ]);
+            shouldIncludeStep,
+          };
+          const previousItem = prev[stepNumber - 1];
+          if (
+            previousItem?.title !== stepItem.title ||
+            previousItem?.secondaryLabel !== stepItem.secondaryLabel ||
+            previousItem?.introStep !== stepItem.introStep ||
+            previousItem?.shouldIncludeStep !== stepItem.shouldIncludeStep
+          ) {
+            const clone = [...prev];
+            clone[stepNumber - 1] = stepItem;
+            return clone;
+          }
+          return prev;
+        });
       }
-    }, [steps, title, secondaryLabel, introStep]);
+    }, [
+      shouldIncludeStep,
+      title,
+      secondaryLabel,
+      introStep,
+      stepsContext,
+      stepNumber,
+    ]);
 
     // Whenever we are the current step, supply our disableSubmit value to the
     // steps container context so that it can manage the 'Next' button appropriately.
     useEffect(() => {
-      if (stepNumber === steps?.currentStep) {
-        steps.setIsDisabled(disableSubmit);
+      if (stepNumber === stepsContext?.currentStep) {
+        stepsContext.setIsDisabled(disableSubmit);
       }
-    }, [steps, stepNumber, disableSubmit, onNext]);
+    }, [stepsContext, stepNumber, disableSubmit, onNext]);
 
-    return steps ? (
+    return stepsContext ? (
       <section
         className={cx(blockClass, className, {
           [`${blockClass}__step--hidden-step`]:
-            stepNumber !== steps?.currentStep,
+            stepNumber !== stepsContext?.currentStep,
           [`${blockClass}__step--visible-step`]:
-            stepNumber === steps?.currentStep,
+            stepNumber === stepsContext?.currentStep,
         })}
         ref={ref}
       >
@@ -151,6 +175,12 @@ CreateFullPageStep.propTypes = {
   hasFieldset: PropTypes.bool,
 
   /**
+   * This prop is used to help track dynamic steps. If this value is `false` then the step is not included in the visible steps or the ProgressIndicator
+   * steps. If this value is `true` then the step will be included in the list of visible steps, as well as being included in the ProgressIndicator step list
+   */
+  includeStep: PropTypes.bool,
+
+  /**
    * This prop can be used on the first step to mark it as an intro step, which will not render the progress indicator steps
    */
   introStep: PropTypes.bool,
@@ -182,4 +212,8 @@ CreateFullPageStep.propTypes = {
    * Sets the title text for a create full page step
    */
   title: PropTypes.node.isRequired,
+};
+
+CreateFullPageStep.defaultProps = {
+  includeStep: true,
 };

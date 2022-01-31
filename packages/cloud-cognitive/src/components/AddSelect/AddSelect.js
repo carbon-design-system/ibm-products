@@ -157,7 +157,7 @@ export let AddSelect = forwardRef(
                       ) : (
                         <RadioButton
                           className={`${blockClass}__selections-radio`}
-                          name="category-selection-go"
+                          name="add-select-selections"
                           id={item.id}
                           value={item.value}
                           labelText={item.label}

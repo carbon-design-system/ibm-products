@@ -22,7 +22,7 @@
   ],
   "scripts": {
     "//upgrade-dependencies": "# don't upgrade carbon (done globally)",
-    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon)/'"
+    "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon)/'"
   },
   "devDependencies": {
     "@commitlint/parse": "^16.0.0",
@@ -31,7 +31,7 @@
     "fast-glob": "^3.2.11",
     "fs-extra": "^10.0.0",
     "inquirer": "^8.2.0",
-    "npm-check-updates": "^12.2.0",
+    "npm-check-updates": "^12.2.1",
     "prettier": "^2.5.1",
     "prettier-config-carbon": "^0.4.0",
     "remark": "^14.0.2",

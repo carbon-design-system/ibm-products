@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, useState, useRef, createContext } from 'react';
+import React, {
+  forwardRef,
+  useState,
+  useRef,
+  createContext,
+  useEffect,
+} from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Grid, Form } from 'carbon-components-react';
@@ -21,6 +27,7 @@ import {
   useCreateComponentStepChange,
 } from '../../global/js/hooks';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { lastIndexInArray } from '../../global/js/utils/lastIndexInArray';
 
 const componentName = 'CreateTearsheet';
 const blockClass = `${pkg.prefix}--tearsheet-create`;
@@ -64,10 +71,23 @@ export let CreateTearsheet = forwardRef(
     const [onNext, setOnNext] = useState();
     const [onMount, setOnMount] = useState();
     const [stepData, setStepData] = useState([]);
-    const totalStepCount = React.Children.count(children);
+    const [firstIncludedStep, setFirstIncludedStep] = useState(1);
+    const [lastIncludedStep, setLastIncludedStep] = useState(null);
 
     const previousState = usePreviousValue({ currentStep, open });
     const contentRef = useRef();
+
+    useEffect(() => {
+      const firstItem =
+        stepData.findIndex((item) => item?.shouldIncludeStep) + 1;
+      const lastItem = lastIndexInArray(stepData, 'shouldIncludeStep', true);
+      if (firstItem !== firstIncludedStep) {
+        setFirstIncludedStep(firstItem);
+      }
+      if (lastItem !== lastIncludedStep) {
+        setLastIncludedStep(lastItem);
+      }
+    }, [stepData, firstIncludedStep, lastIncludedStep]);
 
     useCreateComponentFocus({
       previousState,
@@ -77,15 +97,18 @@ export let CreateTearsheet = forwardRef(
     });
     useValidCreateStepCount(stepData.length, componentName);
     useResetCreateComponent({
+      firstIncludedStep,
       previousState,
       open,
       setCurrentStep,
       initialStep,
-      totalSteps: totalStepCount,
+      totalSteps: stepData?.length,
       componentName,
     });
     useCreateComponentStepChange({
-      totalStepCount,
+      firstIncludedStep,
+      lastIncludedStep,
+      stepData,
       onNext,
       isSubmitDisabled: isDisabled,
       setCurrentStep,
@@ -159,7 +182,6 @@ export let CreateTearsheet = forwardRef(
                   setOnMount: (fn) => setOnMount(() => fn),
                   setStepData,
                   stepData,
-                  totalStepCount,
                 }}
               >
                 {React.Children.map(children, (child, index) => (

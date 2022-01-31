@@ -19,16 +19,16 @@
   ],
   "scripts": {
     "//upgrade-dependencies": "# don't upgrade carbon (done globally) or chalk (until v5 works in the jest config, see https://github.com/facebook/jest/issues/12119)",
-    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^chalk$)/'"
+    "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^chalk$)/'"
   },
   "devDependencies": {
-    "npm-check-updates": "^12.2.0"
+    "npm-check-updates": "^12.2.1"
   },
   "peerDependencies": {
-    "jest": "^27.3.1"
+    "jest": "^27.4.7"
   },
   "dependencies": {
-    "@babel/core": "^7.16.10",
+    "@babel/core": "^7.16.12",
     "@testing-library/jest-dom": "^5.16.1",
     "accessibility-checker": "^3.1.14",
     "axe-core": "^4.3.5",

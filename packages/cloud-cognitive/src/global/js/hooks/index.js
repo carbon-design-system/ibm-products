@@ -12,4 +12,5 @@ export { useCreateComponentFocus } from './useCreateComponentFocus';
 export { useCreateComponentStepChange } from './useCreateComponentStepChange';
 export { usePreviousValue } from './usePreviousValue';
 export { useResetCreateComponent } from './useResetCreateComponent';
+export { useRetrieveStepData } from './useRetrieveStepData';
 export { useValidCreateStepCount } from './useValidCreateStepCount';

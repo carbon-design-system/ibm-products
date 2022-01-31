@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useState, createContext } from 'react';
+import React, { useEffect, useState, createContext } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -33,6 +33,7 @@ import {
   useCreateComponentFocus,
   useCreateComponentStepChange,
 } from '../../global/js/hooks';
+import { lastIndexInArray } from '../../global/js/utils/lastIndexInArray';
 
 const blockClass = `${pkg.prefix}--create-full-page`;
 const componentName = 'CreateFullPage';
@@ -75,7 +76,20 @@ export let CreateFullPage = React.forwardRef(
     const [onNext, setOnNext] = useState();
     const [onMount, setOnMount] = useState();
     const [stepData, setStepData] = useState([]);
-    const totalStepCount = React.Children.count(children);
+    const [firstIncludedStep, setFirstIncludedStep] = useState(1);
+    const [lastIncludedStep, setLastIncludedStep] = useState(null);
+
+    useEffect(() => {
+      const firstItem =
+        stepData.findIndex((item) => item?.shouldIncludeStep) + 1;
+      const lastItem = lastIndexInArray(stepData, 'shouldIncludeStep', true);
+      if (firstItem !== firstIncludedStep) {
+        setFirstIncludedStep(firstItem);
+      }
+      if (lastItem !== lastIncludedStep) {
+        setLastIncludedStep(lastItem);
+      }
+    }, [stepData, firstIncludedStep, lastIncludedStep]);
 
     useCreateComponentFocus({
       previousState,
@@ -85,7 +99,9 @@ export let CreateFullPage = React.forwardRef(
     });
     useValidCreateStepCount(stepData.length, componentName);
     useCreateComponentStepChange({
-      totalStepCount,
+      firstIncludedStep,
+      lastIncludedStep,
+      stepData,
       onNext,
       isSubmitDisabled: isDisabled,
       setCurrentStep,
@@ -131,7 +147,6 @@ export let CreateFullPage = React.forwardRef(
                       setOnMount: (fn) => setOnMount(() => fn),
                       setStepData,
                       stepData,
-                      totalStepCount,
                     }}
                   >
                     {React.Children.map(children, (child, index) => (

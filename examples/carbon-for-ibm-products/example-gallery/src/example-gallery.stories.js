@@ -13,12 +13,12 @@ import App from './App';
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: getPathForComponent('o', 'Examples on CodeSandbox'),
+  title: getPathForComponent('o', 'Examples'),
   parameters: {
     styles,
   },
 };
 
 export const c4pGallery = () => <App />;
-c4pGallery.storyName = 'Carbon for IBM Products';
+c4pGallery.storyName = 'on CodeSandbox';
 c4pGallery.parameters = { options: { showPanel: false } };

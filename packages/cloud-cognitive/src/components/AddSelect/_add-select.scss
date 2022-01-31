@@ -18,10 +18,10 @@
     padding: $spacing-05;
     padding-bottom: 0;
     border-top: 1px solid $ui-03;
+  }
 
-    .#{$block-class}__items-label {
-      @include carbon--type-style('productive-heading-01');
-    }
+  .#{$block-class}__body {
+    padding: $spacing-05;
   }
 
   .#{$block-class}__items-label {
@@ -65,6 +65,17 @@
   .#{$block-class} .#{$tearsheet-class} .#{$tearsheet-class}__influencer {
     max-width: 29rem;
     flex: 0 0 50%;
+  }
+
+  .#{$block-class} .#{$block-class}__items-label {
+    @include carbon--type-style('productive-heading-01');
+  }
+
+  .#{$block-class}
+    .#{$carbon-prefix}--modal-container--sm
+    .bx--modal-content
+    p {
+    padding-right: 0;
   }
 }
 

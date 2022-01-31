@@ -102,6 +102,7 @@ export let PageHeader = React.forwardRef(
         navigation,
         disableBreadcrumbScroll,
         hasActionBar,
+        widthIsNarrow,
         setMetrics
       );
     };
@@ -125,6 +126,7 @@ export let PageHeader = React.forwardRef(
       useState(0);
     const [actionBarColumnWidth, setActionBarColumnWidth] = useState(0);
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
+    const [widthIsNarrow, setWidthIsNarrow] = useState(false);
 
     // handlers
     const handleActionBarWidthChange = ({ minWidth, maxWidth }) => {
@@ -181,14 +183,17 @@ export let PageHeader = React.forwardRef(
       /* istanbul ignore next */
       setPageActionsInBreadcrumbRow(
         collapseTitle ||
-          (scrollYValue > metrics.titleRowSpaceAbove && hasActionBar)
+          (hasActionBar && scrollYValue > metrics.titleRowSpaceAbove) ||
+          (widthIsNarrow && scrollYValue > metrics.pageActionsSpaceAbove)
       );
     }, [
       hasActionBar,
       metrics.breadcrumbRowSpaceBelow,
       metrics.titleRowSpaceAbove,
+      metrics.pageActionsSpaceAbove,
       collapseTitle,
       scrollYValue,
+      widthIsNarrow,
     ]);
 
     useEffect(() => {
@@ -327,20 +332,24 @@ export let PageHeader = React.forwardRef(
       ]
     );
 
-    useWindowResize(() => {
-      // on window resize and other updates some values may have changed
-      checkUpdateVerticalSpace();
-    }, [
-      actionBarItems,
-      children,
-      breadcrumbs,
-      disableBreadcrumbScroll,
-      navigation,
-      pageActions,
-      subtitle,
-      tags,
-      title,
-    ]);
+    useWindowResize(
+      ({ current }) => {
+        // on window resize and other updates some values may have changed
+        checkUpdateVerticalSpace();
+        setWidthIsNarrow(current.innerWidth < 672); // small (below medium) media query
+      },
+      [
+        actionBarItems,
+        children,
+        breadcrumbs,
+        disableBreadcrumbScroll,
+        navigation,
+        pageActions,
+        subtitle,
+        tags,
+        title,
+      ]
+    );
 
     useEffect(() => {
       checkUpdateVerticalSpace();
@@ -476,16 +485,16 @@ export let PageHeader = React.forwardRef(
                     [`${blockClass}__breadcrumb-row--has-breadcrumbs`]:
                       breadcrumbs,
                     [`${blockClass}__breadcrumb-row--has-action-bar`]:
-                      hasActionBar,
+                      hasActionBar || widthIsNarrow,
                     [`${blockClass}__has-page-actions-without-action-bar`]:
-                      !hasActionBar && pageActions,
+                      !hasActionBar && !widthIsNarrow && pageActions,
                   })}
                 >
                   <div className={`${blockClass}__breadcrumb-row--container`}>
                     <Column
                       className={cx(`${blockClass}__breadcrumb-column`, {
                         [`${blockClass}__breadcrumb-column--background`]:
-                          !!breadcrumbs || hasActionBar,
+                          !!breadcrumbs || hasActionBar || widthIsNarrow,
                       })}
                     >
                       {/* keeps actionBar right even if empty */}
@@ -536,7 +545,10 @@ export let PageHeader = React.forwardRef(
                               rightAlign={true}
                             />
                           </>
-                        ) : null}
+                        ) : (
+                          widthIsNarrow &&
+                          thePageActions(true, pageActionsInBreadcrumbRow)
+                        )}
                       </div>
                     </Column>
                   </div>
@@ -549,7 +561,7 @@ export let PageHeader = React.forwardRef(
                     [`${blockClass}__title-row--no-breadcrumb-row`]:
                       !hasBreadcrumbRow,
                     [`${blockClass}__title-row--under-action-bar`]:
-                      hasActionBar,
+                      hasActionBar || widthIsNarrow,
                     [`${blockClass}__title-row--has-page-actions`]:
                       !!pageActions,
                     [`${blockClass}__title-row--sticky`]:

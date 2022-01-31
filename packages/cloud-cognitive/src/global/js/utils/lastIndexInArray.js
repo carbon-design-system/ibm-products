@@ -7,14 +7,15 @@
 
 /**
  * This utility will return the index of the last instance of an
- * item in the given array of objects whose key is equal to true.
- * If there are no matches, -1 is returned as similar to findIndex
+ * item in the given array of objects whose key is equal to the value
+ * parameter. If there are no matches, -1 is returned as similar to findIndex
  * @param {Array<Object.*>} array
  * @param {string} key
+ * @param {string} value
  */
-export const lastIndexOf = (array, key) => {
+export const lastIndexInArray = (array, key, value) => {
   for (let i = array.length - 1; i >= 0; i--) {
-    if (array[i]?.[key] === true) {
+    if (array[i]?.[key] === value) {
       return i + 1;
     }
   }

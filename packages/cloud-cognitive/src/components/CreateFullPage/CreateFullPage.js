@@ -33,7 +33,7 @@ import {
   useCreateComponentFocus,
   useCreateComponentStepChange,
 } from '../../global/js/hooks';
-import { lastIndexOf } from '../../global/js/utils/lastIndexOf';
+import { lastIndexInArray } from '../../global/js/utils/lastIndexInArray';
 
 const blockClass = `${pkg.prefix}--create-full-page`;
 const componentName = 'CreateFullPage';
@@ -82,7 +82,7 @@ export let CreateFullPage = React.forwardRef(
     useEffect(() => {
       const firstItem =
         stepData.findIndex((item) => item?.shouldIncludeStep) + 1;
-      const lastItem = lastIndexOf(stepData, 'shouldIncludeStep');
+      const lastItem = lastIndexInArray(stepData, 'shouldIncludeStep', true);
       if (firstItem !== firstIncludedStep) {
         setFirstIncludedStep(firstItem);
       }

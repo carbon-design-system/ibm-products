@@ -27,7 +27,7 @@ import {
   useCreateComponentStepChange,
 } from '../../global/js/hooks';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { lastIndexOf } from '../../global/js/utils/lastIndexOf';
+import { lastIndexInArray } from '../../global/js/utils/lastIndexInArray';
 
 const componentName = 'CreateTearsheet';
 const blockClass = `${pkg.prefix}--tearsheet-create`;
@@ -80,7 +80,7 @@ export let CreateTearsheet = forwardRef(
     useEffect(() => {
       const firstItem =
         stepData.findIndex((item) => item?.shouldIncludeStep) + 1;
-      const lastItem = lastIndexOf(stepData, 'shouldIncludeStep');
+      const lastItem = lastIndexInArray(stepData, 'shouldIncludeStep', true);
       if (firstItem !== firstIncludedStep) {
         setFirstIncludedStep(firstItem);
       }

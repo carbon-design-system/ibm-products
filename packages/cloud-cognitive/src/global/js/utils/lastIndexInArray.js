@@ -11,7 +11,7 @@
  * parameter. If there are no matches, -1 is returned as similar to findIndex
  * @param {Array<Object.*>} array
  * @param {string} key
- * @param {string} value
+ * @param {string|boolean|number} value
  */
 export const lastIndexInArray = (array, key, value) => {
   for (let i = array.length - 1; i >= 0; i--) {

@@ -79,10 +79,19 @@ export let Card = forwardRef(
       }
 
       const icons = actionIcons.map(
-        ({ id, icon: Icon, onClick, iconDescription, onKeyDown, href }) => {
+        ({
+          id,
+          icon: Icon,
+          onClick,
+          iconDescription,
+          onKeyDown,
+          href,
+          ...rest
+        }) => {
           if (productive) {
             return (
               <Button
+                {...rest}
                 key={id}
                 renderIcon={Icon}
                 hasIconOnly

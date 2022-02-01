@@ -42,16 +42,19 @@ const defaultProps = {
   description: 'select a category lorem ipsum',
   items: [
     {
-      label: 'first',
       id: '1',
+      label: 'Kansas',
+      value: 'kansas',
     },
     {
-      label: 'second',
       id: '2',
+      label: 'Texas',
+      value: 'texas',
     },
     {
-      label: 'third',
       id: '3',
+      label: 'Florida',
+      value: 'florida',
     },
   ],
   inputPlaceholder: 'Find categories',

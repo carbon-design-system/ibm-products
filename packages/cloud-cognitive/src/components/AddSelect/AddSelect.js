@@ -9,11 +9,12 @@ import React, { forwardRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import {
+  Checkbox,
+  RadioButton,
   StructuredListRow,
   StructuredListWrapper,
   StructuredListBody,
   StructuredListCell,
-  // StructuredListInput,
   TextInput,
   Tag,
 } from 'carbon-components-react';
@@ -54,7 +55,8 @@ export let AddSelect = forwardRef(
     };
 
     // hooks
-    const [selected] = useState(0);
+    const [singleSelection, setSingleSelection] = useState('');
+    const [multiSelection, setMultiSelection] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
 
     // handlers
@@ -63,6 +65,20 @@ export let AddSelect = forwardRef(
       setSearchTerm(value);
       if (onSearchFilter) {
         onSearchFilter(value);
+      }
+    };
+
+    const handleSingleSelection = (value) => {
+      setSingleSelection(value);
+    };
+
+    const handleMultiSelection = (value, checked) => {
+      if (checked) {
+        const newValues = [...multiSelection, value];
+        setMultiSelection(newValues);
+      } else {
+        const newValues = multiSelection.filter((v) => v !== value);
+        setMultiSelection(newValues);
       }
     };
 
@@ -83,11 +99,11 @@ export let AddSelect = forwardRef(
         <div className={`${blockClass}__influencer-header`}>
           <p className={`${blockClass}__influencer-title`}>{influencerTitle}</p>
           <Tag type="gray" size="sm">
-            {selected}
+            {multiSelection.length}
           </Tag>
         </div>
         <div className={`${blockClass}__influencer-body`}>
-          {selected > 0 ? (
+          {multiSelection.length > 0 ? (
             <p>content</p>
           ) : (
             <NoDataEmptyState
@@ -119,20 +135,42 @@ export let AddSelect = forwardRef(
           </div>
         </div>
         {filteredResults.length > 0 ? (
-          <StructuredListWrapper
-            selection
-            className={`${blockClass}__selections`}
-          >
-            <StructuredListBody>
-              {filteredResults.map((item) => (
-                <StructuredListRow key={item.id}>
-                  <StructuredListCell>
-                    <p>{item.label}</p>
-                  </StructuredListCell>
-                </StructuredListRow>
-              ))}
-            </StructuredListBody>
-          </StructuredListWrapper>
+          <div className={`${blockClass}__selections-wrapper`}>
+            <StructuredListWrapper
+              selection
+              className={`${blockClass}__selections`}
+            >
+              <StructuredListBody>
+                {filteredResults.map((item) => (
+                  <StructuredListRow key={item.id}>
+                    <StructuredListCell>
+                      {multi ? (
+                        <Checkbox
+                          className={`${blockClass}__selections-checkbox`}
+                          onChange={(value) =>
+                            handleMultiSelection(item.value, value)
+                          }
+                          labelText={item.label}
+                          id={item.id}
+                          checked={multiSelection.includes(item.value)}
+                        />
+                      ) : (
+                        <RadioButton
+                          className={`${blockClass}__selections-radio`}
+                          name="add-select-selections"
+                          id={item.id}
+                          value={item.value}
+                          labelText={item.label}
+                          onChange={handleSingleSelection}
+                          selected={item.value === singleSelection}
+                        />
+                      )}
+                    </StructuredListCell>
+                  </StructuredListRow>
+                ))}
+              </StructuredListBody>
+            </StructuredListWrapper>
+          </div>
         ) : (
           <div className={`${blockClass}__body`}>
             <NoDataEmptyState
@@ -170,8 +208,9 @@ AddSelect.propTypes = {
   inputPlaceholder: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.shape({
-      label: PropTypes.string,
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      label: PropTypes.string,
+      value: PropTypes.string,
     })
   ),
   itemsLabel: PropTypes.string,

@@ -48,19 +48,25 @@
   @include block-wrap($block-class, 3) {
     --size: #{$spacing-08};
     --icon-size: #{$spacing-05};
+    --background-color: #{$ui-background};
+
+    &:hover {
+      --background-color: #{$hover-field};
+      // background-color: $background-color;
+    }
 
     position: relative;
-    display: inline-block;
+    display: inline-flex;
     // min-width: 250px; // similar to min input box with room for edit-controls
+    max-width: 100%;
     height: var(--size);
+    background-color: var(--background-color);
 
-    transition: background $duration--fast-01 motion(entrance, productive),
+    transition: background-color $duration--fast-01 motion(entrance, productive),
       box-shadow $duration--fast-01 motion(entrance, productive),
       border-color $duration--fast-01 motion(entrance, productive);
 
-    // &.#{$block-class}:focus-within svg {
-    //   outline: none;
-    // }
+    white-space: nowrap;
 
     &.#{$block-class}--sm {
       --size: #{$spacing-07};
@@ -72,29 +78,35 @@
       --icon-size: #{$spacing-05};
     }
 
-    .#{$block-class}__input:hover:not(.#{$block-class}__input:focus),
-    .#{$block-class}__controls:hover ~ .#{$block-class}__input {
-      // }:not(.#{$block-class}__input:focus) {
-      background-color: $hover-field;
+    // &:focus-within
+    &.#{$block-class}--editing {
+      @include input-outline($focus);
+
+      background-color: $ui-01;
+    }
+
+    .#{$block-class}__left-padding {
+      width: $spacing-05;
+      height: 100%;
+      cursor: text;
+    }
+
+    .#{$block-class}--invalid {
+      @include input-outline($support-01);
     }
 
     .#{$block-class}__input {
-      display: inline-flex;
+      display: flex;
+      overflow: hidden;
+      max-width: calc(100% - 2 * var(--size) - $spacing-05);
       height: 100%;
       align-items: center;
-      padding-right: $spacing-12; // space for two edit-controls, additional padding may be needed for error control
-      padding-left: $spacing-03;
+      // stylelint-disable-next-line carbon/layout-token-use
+      margin-right: calc(2 * var(--size)); // room for controls
 
-      :focus-within &,
-      &:focus,
-      &:active {
-        @include input-outline($focus);
-
-        background-color: $ui-01;
-      }
-
-      .#{$block-class}--invalid & {
-        @include input-outline($support-01);
+      &:focus {
+        // stylelint-disable-next-line
+        outline: none;
       }
     }
 
@@ -106,8 +118,11 @@
     .#{$block-class}__controls {
       position: absolute;
       top: 0;
+      // stylelint-disable-next-line carbon/layout-token-use
       right: 0;
+      width: calc(2 * var(--size));
       height: 100%;
+      cursor: text;
     }
 
     .#{$block-class}__save,
@@ -150,6 +165,11 @@
     .#{$block-class}__edit {
       @include input-button-defaults();
 
+      position: absolute;
+      top: 0;
+      right: 0;
+      // pointer-events: none;
+
       &:hover,
       &:active,
       &:focus {
@@ -160,36 +180,14 @@
       }
     }
 
-    // .#{$block-class}--editing {
-    //   margin-left: calc(-1 * #{$spacing-05});
-    // }
+    .#{$block-class}__edit--hover-visible {
+      opacity: 0;
+      transition: opacity $duration--fast-01 motion(entrance, productive);
+    }
 
-    // .#{$block-class} .#{$block-class}__value {
-    //   position: relative;
-    //   display: flex;
-    //   flex: 1 1 100%;
-    //   align-items: center;
-    //   // // padding to line up with edit content
-    //   padding-right: $spacing-03;
-    //   padding-left: $spacing-05;
-
-    //   cursor: pointer;
-    // }
-
-    // .#{$block-class}.#{$block-class}.#{$block-class} .#{$block-class}__button {
-    //   flex: 0 0 var(--icon-size);
-    //   pointer-events: none;
-    //   cursor: pointer;
-
-    //   &:hover,
-    //   &:active,
-    //   &:focus {
-    //     border-color: transparent;
-    //     background-color: transparent;
-    //     box-shadow: none;
-    //     outline: none;
-    //   }
-    // }
+    &:hover .#{$block-class}__edit--hover-visible {
+      opacity: 1;
+    }
   }
 }
 

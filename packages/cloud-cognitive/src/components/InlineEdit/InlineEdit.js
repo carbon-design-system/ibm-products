@@ -43,13 +43,14 @@ export let InlineEdit = React.forwardRef(
       className,
       disabled,
       editDescription,
+      editVisibleOnHoverOnly,
       id,
       invalid,
       invalidText,
       labelText,
       onCancel,
+      onSave,
       onChange,
-      onInput,
       saveDescription,
       // saveDisabled,
       size,
@@ -78,36 +79,95 @@ export let InlineEdit = React.forwardRef(
       )
     ) : null;
 
-    const handleEdit = () => {
+    const handleEdit = (ev) => {
       if (!disabled) {
-        setEditing(true);
-        setTimeout(() => {
-          refInput.current.focus();
-        }, 0);
+        const leftPad = ev.target.classList.contains(
+          `${blockClass}__left-padding`
+        );
+        const controls =
+          ev.currentTarget.classList.contains(`${blockClass}__edit`) ||
+          ev.target.classList.contains(`${blockClass}__controls`);
+
+        if (leftPad || controls) {
+          setEditing(true);
+          setTimeout(() => {
+            refInput.current.focus();
+            if (document.queryCommandSupported('selectAll')) {
+              // select all the content
+              document.getSelection().selectAllChildren(refInput.current);
+              if (leftPad) {
+                document.getSelection().collapseToStart();
+              } else {
+                document.getSelection().collapseToEnd();
+              }
+            } else {
+              // create range at end position
+              const range = document.createRange();
+              range.selectNodeContents(refInput.current);
+              range.collapse(leftPad); // true start, false end
+
+              // remove existing range
+              const selection = document.getSelection();
+              selection.removeAllRanges();
+
+              // set the new range
+              selection.addRange(range);
+            }
+          }, 0);
+        }
       }
     };
-    const handleFocus = () => {
-      if (!editing) {
+    const handleFocus = (ev) => {
+      if (!editing && ev.target.classList.contains(`${blockClass}__input`)) {
+        // console.log(editing);
         setEditing(true);
       }
     };
-    const handleChange = () => {
+
+    const handleSave = () => {
       setEditing(false);
+      if (onSave) {
+        onSave(refInput.current.innerText);
+      }
+    };
+
+    const handlePaste = (ev) => {
+      ev.preventDefault();
+
+      // Get clipboard as plain text
+      const text = (ev.clipboardData || window.clipboardData).getData(
+        'text/plain'
+      );
+
+      // remove \n
+      const sanitizedText = text
+        .replaceAll(/\n/g, '') // remove carriage returns
+        .replaceAll(/\t/g, '  '); // replace tab with two spaces
+
+      if (document.queryCommandSupported('insertText')) {
+        document.execCommand('insertText', false, sanitizedText);
+      } else {
+        // Insert text at the current position of caret
+        const range = document.getSelection().getRangeAt(0);
+        range.deleteContents();
+
+        const textNode = document.createTextNode(sanitizedText);
+        range.insertNode(textNode);
+        // move selection end of textNode
+        range.selectNodeContents(textNode);
+        range.collapse(false);
+
+        // remove existing range
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+
+        // set the new range
+        selection.addRange(range);
+      }
+    };
+    const handleInput = () => {
       if (onChange) {
         onChange(refInput.current.innerText);
-      }
-    };
-    const handleInput = (ev) => {
-      // if (
-      //   refInput.current.innerText.trim() !== refInput.current.innerHTML.trim()
-      // ) {
-      //   console.log(refInput.current.innerText);
-      //   console.log(refInput.current.innerHTML);
-      //   refInput.current.innerHTML = refInput.current.innerText;
-      // }
-
-      if (onInput) {
-        onInput(refInput.current.innerText);
       }
     };
     const handleCancel = () => {
@@ -121,19 +181,37 @@ export let InlineEdit = React.forwardRef(
     const handleBlur = (ev) => {
       if (!ref.current.contains(ev.relatedTarget)) {
         // setEditing(false);
-        // handleChange();
+        // handleSave();
       }
     };
 
     const handleKeyDown = (ev) => {
-      console.dir('key down');
       if (ev.key === 'Enter') {
         ev.preventDefault();
         refInput.current.blur(); // will cause save
       }
     };
 
+    /*
+      The HTML is structured as follows:
+
+     <container>
+       <left-padding>
+       <edit-button>
+       <controls>
+     </container>
+
+     An input is not used as this would not permit a heading tag e.g. <h2>.
+
+     In making content-editable behave like an input of type text we have to account for.
+     - Enforcing a single line
+     - Pasting of non-text e.g. html or text with carriage returns
+     - The padding and border not hiding typed in text.
+     - Placing the cursor at the start or end depending on area clicked (before for left-padding)
+    */
+
     return (
+      // eslint-disable-next-line
       <div
         className={cx(
           blockClass, // Apply the block class to the main HTML element
@@ -146,29 +224,15 @@ export let InlineEdit = React.forwardRef(
             [`${blockClass}--invalid`]: invalid,
           }
         )}
+        onClick={handleEdit} // disabled eslint for click handler
         onBlur={handleBlur}
         ref={ref}
       >
-        {!editing && (
-          <div className={`${blockClass}__controls`}>
-            {/* placed here for hover purposes */}
-            <Button
-              aria-hidden="true"
-              className={`${blockClass}__edit`}
-              kind="ghost"
-              hasIconOnly
-              iconDescription={editDescription}
-              onClick={handleEdit}
-              renderIcon={disabled ? EditOff16 : Edit16}
-              disabled={disabled}
-              tabIndex={-1}
-            />
-          </div>
-        )}
+        <div className={`${blockClass}__left-padding`} />
         <div
           {...rest}
           {...getDevtoolsProps(componentName)}
-          {...{ id, size, refInput }}
+          {...{ id, size }}
           className={`${blockClass}__input`}
           contentEditable
           aria-label={labelText}
@@ -176,9 +240,8 @@ export let InlineEdit = React.forwardRef(
           tabIndex="0"
           onFocus={handleFocus}
           onInput={handleInput}
-          onChange={handleChange}
-          onCancel={handleCancel}
           onKeyDown={handleKeyDown}
+          onPaste={handlePaste}
           suppressContentEditableWarning={true}
           ref={refInput}
         >
@@ -193,9 +256,8 @@ export let InlineEdit = React.forwardRef(
           </div>
         )}
         <div className={`${blockClass}__validation-icon`}>{validationIcon}</div>
-        {editing && (
-          <div className={`${blockClass}__controls`}>
-            {/* placed here for focus order */}
+        <div className={`${blockClass}__controls`}>
+          {editing ? (
             <div className={`${blockClass}__edit-controls`}>
               <Button
                 className={`${blockClass}__cancel`}
@@ -210,13 +272,27 @@ export let InlineEdit = React.forwardRef(
                 kind="ghost"
                 hasIconOnly
                 iconDescription={saveDescription}
-                onClick={handleChange}
+                onClick={handleSave}
                 renderIcon={Checkmark16}
                 // disabled={invalid || saveDisabled || value === liveValue}
               />
             </div>
-          </div>
-        )}
+          ) : (
+            <Button
+              aria-hidden="true"
+              className={cx(`${blockClass}__edit`, {
+                [`${blockClass}__edit--hover-visible`]: editVisibleOnHoverOnly,
+              })}
+              kind="ghost"
+              hasIconOnly
+              iconDescription={editDescription}
+              onClick={handleEdit}
+              renderIcon={disabled ? EditOff16 : Edit16}
+              disabled={disabled}
+              tabIndex={-1}
+            />
+          )}
+        </div>
       </div>
     );
   }
@@ -250,6 +326,11 @@ InlineEdit.propTypes = {
    */
   editDescription: PropTypes.string.isRequired,
   /**
+   * In some scenarios the edit icon only needs to be shown on hover. These cases are where continual visibility of
+   * the edit icon is redundant. E.g. a spreadsheet a property panel.
+   */
+  editVisibleOnHoverOnly: PropTypes.bool,
+  /**
    * ID for inline edit
    */
   id: PropTypes.string,
@@ -270,13 +351,13 @@ InlineEdit.propTypes = {
    */
   onCancel: PropTypes.func,
   /**
-   * method called on change event
+   * method called on input event (it's a React thing onChange behaves like on input)
    */
   onChange: PropTypes.func,
   /**
-   * method called on input event
+   * method called on change event
    */
-  onInput: PropTypes.func,
+  onSave: PropTypes.func,
   /**
    * label for save button
    */

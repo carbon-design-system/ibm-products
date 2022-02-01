@@ -35,8 +35,8 @@ export default {
   ],
 };
 
+const actionSave = action('save');
 const actionChange = action('change');
-const actionInput = action('input');
 const actionCancel = action('cancel');
 
 /**
@@ -51,11 +51,11 @@ const Template = ({
 }) => {
   const [value, setValue] = useState(initialValue);
 
-  const onChange = (val) => {
+  const onSave = (val) => {
     setValue(val);
-    actionChange(val);
+    actionSave(val);
   };
-  const onInput = actionInput;
+  const onChange = actionChange;
   const onCancel = actionCancel;
 
   useEffect(() => {
@@ -68,8 +68,8 @@ const Template = ({
       {...rest}
       {...{
         editDescription,
+        onSave,
         onChange,
-        onInput,
         onCancel,
         cancelDescription,
         saveDescription,

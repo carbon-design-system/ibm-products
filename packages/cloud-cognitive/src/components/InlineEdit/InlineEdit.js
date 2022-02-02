@@ -48,11 +48,12 @@ export let InlineEdit = React.forwardRef(
       invalid,
       invalidText,
       labelText,
+      light,
       onCancel,
       onSave,
       onChange,
       saveDescription,
-      // saveDisabled,
+      saveDisabled,
       size,
       value,
       warn,
@@ -69,6 +70,7 @@ export let InlineEdit = React.forwardRef(
     const localRef = useRef(null);
     const ref = refIn || localRef;
     const [editing, setEditing] = useState(false);
+    const [internalValue, setInternalValue] = useState(value);
     const showValidationText = invalid || warn;
     const validationText = invalidText || warnText;
     const validationIcon = showValidationText ? (
@@ -153,6 +155,7 @@ export let InlineEdit = React.forwardRef(
       }
     };
     const handleInput = () => {
+      setInternalValue(refInput.current.innerText);
       if (onChange) {
         onChange(refInput.current.innerText);
       }
@@ -169,8 +172,8 @@ export let InlineEdit = React.forwardRef(
     };
     const handleBlur = (ev) => {
       if (!ref.current.contains(ev.relatedTarget)) {
-        setEditing(false);
-        handleSave();
+        // setEditing(false);
+        // handleSave();
       }
     };
 
@@ -204,6 +207,8 @@ export let InlineEdit = React.forwardRef(
      - Placing the cursor at the start or end depending on area clicked (before for left-padding)
     */
 
+    const controlsAnimation = true;
+
     return (
       // eslint-disable-next-line
       <div
@@ -216,6 +221,7 @@ export let InlineEdit = React.forwardRef(
             // switched classes dependant on props or state
             [`${blockClass}--editing`]: editing,
             [`${blockClass}--invalid`]: invalid,
+            [`${blockClass}--light`]: light,
           }
         )}
         onClick={handleEdit} // disabled eslint for click handler
@@ -249,7 +255,15 @@ export let InlineEdit = React.forwardRef(
           </div>
         )}
         <div className={`${blockClass}__validation-icon`}>{validationIcon}</div>
-        <div className={`${blockClass}__controls`}>
+        <div
+          className={cx(`${blockClass}__controls`, {
+            [`${blockClass}__controls--animation`]: controlsAnimation,
+            [`${blockClass}__controls--saveable`]:
+              invalid ||
+              saveDisabled ||
+              (refInput.current && value !== internalValue),
+          })}
+        >
           {editing ? (
             <>
               <Button
@@ -267,7 +281,7 @@ export let InlineEdit = React.forwardRef(
                 iconDescription={saveDescription}
                 onClick={handleSave}
                 renderIcon={Checkmark16}
-                // disabled={invalid || saveDisabled || value === liveValue}
+                disabled={invalid || saveDisabled || value === internalValue}
               />
             </>
           ) : (
@@ -340,6 +354,10 @@ InlineEdit.propTypes = {
    */
   labelText: PropTypes.string,
   /**
+   * change background to light version (mimic React TextInput)
+   */
+  light: PropTypes.bool,
+  /**
    * method called on cancel event
    */
   onCancel: PropTypes.func,
@@ -382,6 +400,6 @@ InlineEdit.propTypes = {
 // 'undefined' values reasonably. Default values should be provided when the
 // component needs to make a choice or assumption when a prop is not supplied.
 InlineEdit.defaultProps = {
-  /* TODO: add defaults for relevant props. */
+  light: true, // defaults to true to reflect design
   size: 'md',
 };

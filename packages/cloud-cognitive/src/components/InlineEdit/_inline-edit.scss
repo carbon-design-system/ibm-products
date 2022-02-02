@@ -48,7 +48,11 @@
   @include block-wrap($block-class, 3) {
     --size: #{$spacing-08};
     --icon-size: #{$spacing-05};
-    --background-color: #{$ui-background};
+    --background-color: #{$ui-01};
+
+    &.#{$block-class}--light {
+      --background-color: transparent;
+    }
 
     &:hover {
       --background-color: #{$hover-field};
@@ -78,7 +82,6 @@
       --icon-size: #{$spacing-05};
     }
 
-    // &:focus-within
     &.#{$block-class}--editing {
       @include input-outline($focus);
 
@@ -121,14 +124,41 @@
       cursor: text;
     }
 
+    .#{$block-class}__controls--animation {
+      padding-left: var(--size);
+      overflow-x: hidden;
+      transition: padding-left $duration--moderate-02
+        motion(standard, productive);
+    }
+
+    .#{$block-class}__controls--saveable {
+      padding-left: 0;
+    }
+
+    &.#{$block-class}--editing .#{$block-class}__controls::after {
+      // cover top and bottom when focus within block
+      // doing the same on the buttons is problematic when animating
+      // and causes visual artifacts when the button is hovered without focus
+      // as the buttons leave a 45% join between sides with transparent borders and top/bottom with $focus
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      border: 2px solid $focus;
+      border-left: 0;
+      content: '';
+      pointer-events: none;
+    }
+
     .#{$block-class}__save,
     .#{$block-class}__cancel {
       @include input-button-defaults();
 
       // input does not have focus
       &:hover {
-        border-top-color: $focus;
-        border-bottom-color: $focus;
         outline: initial;
       }
 
@@ -152,6 +182,8 @@
         border-color: transparent;
       }
     }
+    .#{$block-class}__controls--animation:not(.#{$block-class}__controls--saveable)
+      .#{$block-class}__cancel,
     .#{$block-class}__save {
       &:hover {
         border-right-color: $focus;

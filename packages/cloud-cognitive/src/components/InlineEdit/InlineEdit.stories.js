@@ -23,6 +23,18 @@ const storyClass = 'inline-edit-stories';
 export default {
   title: getStoryTitle(InlineEdit.displayName),
   component: InlineEdit,
+  argTypes: {
+    containerWidth: {
+      control: { type: 'range', min: 20, max: 800, step: 10 },
+      description:
+        'Controls containing element width. Used for demonstration purposes, not property of the component.',
+    },
+    inlineEditFullWidth: {
+      control: { type: 'boolean' },
+      description:
+        'Sets component width `100%`. Used for demonstration purposes, not property of the component.',
+    },
+  },
   parameters: {
     styles,
     layout: 'padded',
@@ -31,7 +43,11 @@ export default {
     },
   },
   decorators: [
-    (story) => <div className={`${storyClass}__viewport`}>{story()}</div>,
+    (story) => (
+      <div className={`${storyClass}__viewport ccs-sb__display-box`}>
+        {story()}
+      </div>
+    ),
   ],
 };
 
@@ -43,6 +59,8 @@ const actionCancel = action('cancel');
  * TODO: Declare template(s) for one or more scenarios.
  */
 const Template = ({
+  containerWidth,
+  inlineEditFullWidth,
   editDescription,
   cancelDescription,
   saveDescription,
@@ -63,24 +81,31 @@ const Template = ({
   }, [initialValue]);
 
   return (
-    <InlineEdit
-      invalidText="Cannot be empty"
-      {...rest}
-      {...{
-        editDescription,
-        onSave,
-        onChange,
-        onCancel,
-        cancelDescription,
-        saveDescription,
-        value,
-      }}
-    />
+    <div
+      style={{ width: containerWidth }}
+      className={inlineEditFullWidth ? 'component-full-width' : ''}
+    >
+      <InlineEdit
+        invalidText="Cannot be empty"
+        {...rest}
+        {...{
+          editDescription,
+          onSave,
+          onChange,
+          onCancel,
+          cancelDescription,
+          saveDescription,
+          value,
+        }}
+      />
+    </div>
   );
 };
 
 export const inlineEdit = prepareStory(Template, {
   args: {
+    containerWidth: 300,
+    inlineEditFullWidth: true,
     editDescription: 'Edit',
     id: 'edit button',
     labelText: 'Inline edit',

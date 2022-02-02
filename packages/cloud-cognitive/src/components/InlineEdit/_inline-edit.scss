@@ -104,7 +104,6 @@
       margin-left: $spacing-05;
 
       &:focus {
-        // stylelint-disable-next-line
         outline: none;
       }
     }
@@ -118,7 +117,6 @@
       // not simply flexed in as this causes flexbox to mis-measure the size of the input
       position: absolute;
       top: 0;
-      // stylelint-disable-next-line carbon/layout-token-use
       right: 0;
       width: calc(2 * var(--size));
       height: 100%;

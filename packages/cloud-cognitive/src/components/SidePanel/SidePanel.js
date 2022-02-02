@@ -77,6 +77,11 @@ export let SidePanel = React.forwardRef(
     const sidePanelCloseRef = useRef();
     const previousState = usePreviousValue({ size });
 
+    const reducedMotion =
+      window && window.matchMedia
+        ? window.matchMedia('(prefers-reduced-motion: reduce)')
+        : { matches: true };
+
     // scroll panel to top going between steps
     useEffect(() => {
       const panelRef = ref || sidePanelRef;
@@ -172,7 +177,14 @@ export let SidePanel = React.forwardRef(
 
     // Title and subtitle scroll animation
     useEffect(() => {
-      if (open && animateTitle && animationComplete && title && title.length) {
+      if (
+        open &&
+        animateTitle &&
+        animationComplete &&
+        title &&
+        title.length &&
+        !reducedMotion.matches
+      ) {
         const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
         const sidePanelScrollArea = document.querySelector(
           `#${blockClass}-outer .${blockClass}__inner-content`
@@ -380,6 +392,7 @@ export let SidePanel = React.forwardRef(
       panelHeight,
       title,
       size,
+      reducedMotion.matches,
     ]);
 
     // click outside functionality if `includeOverlay` prop is set
@@ -393,6 +406,10 @@ export let SidePanel = React.forwardRef(
           onRequestClose
         ) {
           onRequestClose();
+          if (open && reducedMotion.matches) {
+            setRender(false);
+            onUnmount?.();
+          }
         }
       };
       const bodyElement = document.body;
@@ -407,7 +424,15 @@ export let SidePanel = React.forwardRef(
       return () => {
         document.removeEventListener('click', handleOutsideClick);
       };
-    }, [includeOverlay, onRequestClose, open, preventCloseOnClickOutside, ref]);
+    }, [
+      includeOverlay,
+      onRequestClose,
+      open,
+      preventCloseOnClickOutside,
+      ref,
+      onUnmount,
+      reducedMotion.matches,
+    ]);
 
     // initialize the side panel to open
     useEffect(() => {
@@ -424,6 +449,14 @@ export let SidePanel = React.forwardRef(
       }
       setAnimationComplete(true);
     };
+
+    // Set the internal state `animationComplete` to true if
+    // prefers reduced motion is true
+    useEffect(() => {
+      if (reducedMotion.matches) {
+        setAnimationComplete(true);
+      }
+    }, [reducedMotion.matches]);
 
     // initializes the side panel to open
     const onAnimationStart = (event) => {
@@ -618,7 +651,7 @@ export let SidePanel = React.forwardRef(
             {title}
           </h2>
         )}
-        {animateTitle && title && title.length && (
+        {animateTitle && title && title.length && !reducedMotion.matches && (
           <h2
             className={`${blockClass}__collapsed-title-text`}
             title={title}
@@ -647,15 +680,17 @@ export let SidePanel = React.forwardRef(
             id={`${blockClass}-outer`}
             className={mainPanelClassNames}
             style={{
-              animation: `${
-                open
-                  ? placement === 'right'
-                    ? `sidePanelEntranceRight ${moderate02}`
-                    : `sidePanelEntranceLeft ${moderate02}`
-                  : placement === 'right'
-                  ? `sidePanelExitRight ${moderate02}`
-                  : `sidePanelExitLeft ${moderate02}`
-              }`,
+              animation: !reducedMotion.matches
+                ? `${
+                    open
+                      ? placement === 'right'
+                        ? `sidePanelEntranceRight ${moderate02}`
+                        : `sidePanelEntranceLeft ${moderate02}`
+                      : placement === 'right'
+                      ? `sidePanelExitRight ${moderate02}`
+                      : `sidePanelExitLeft ${moderate02}`
+                  }`
+                : null,
             }}
             onAnimationEnd={onAnimationEnd}
             onAnimationStart={(event) => onAnimationStart(event)}
@@ -703,11 +738,13 @@ export let SidePanel = React.forwardRef(
               ref={sidePanelOverlayRef}
               className={`${blockClass}__overlay`}
               style={{
-                animation: `${
-                  open
-                    ? `sidePanelOverlayEntrance ${moderate02}`
-                    : `sidePanelOverlayExit ${moderate02}`
-                }`,
+                animation: !reducedMotion.matches
+                  ? `${
+                      open
+                        ? `sidePanelOverlayEntrance ${moderate02}`
+                        : `sidePanelOverlayExit ${moderate02}`
+                    }`
+                  : null,
               }}
             />
           )}

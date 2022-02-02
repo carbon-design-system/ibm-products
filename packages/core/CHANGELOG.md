@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.33.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.33.0...@carbon/ibm-cloud-cognitive-core@0.33.1) (2022-02-01)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
+
+
+
+
+
+# [0.33.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.32.0...@carbon/ibm-cloud-cognitive-core@0.33.0) (2022-01-25)
+
+
+### Bug Fixes
+
+* update Carbon versions to latest ([#1548](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1548)) ([5617870](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/561787014feac09c1a8e70895c51abb3bf46245e))
+
+
+### Features
+
+* initial inline edit to page-header ([#1533](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1533)) ([dffbba6](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/dffbba6a761237a3fa1aa92d8f3b07c8de88fe0d))
+* split addselect into multiple exports ([#1542](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1542)) ([b9de902](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b9de9024b7e5e422119fc90ef0258a1314a62124))
+
+
+
+
+
 # [0.32.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.31.5...@carbon/ibm-cloud-cognitive-core@0.32.0) (2022-01-18)
 
 

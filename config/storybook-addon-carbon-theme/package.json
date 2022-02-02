@@ -1,7 +1,7 @@
 {
   "name": "@carbon/storybook-addon-theme",
   "description": "Carbon theme switcher for Storybook",
-  "version": "0.22.5",
+  "version": "0.22.7",
   "license": "Apache-2.0",
   "main": "dist/react.js",
   "repository": {
@@ -35,28 +35,28 @@
     "build:js": "babel src --out-dir dist -s",
     "prepare": "npm run build",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally)",
-    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon)/'"
+    "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon)/'"
   },
   "peerDependencies": {
     "react": "*",
     "vue": "*"
   },
   "dependencies": {
-    "@storybook/addons": "6.4.12",
-    "@storybook/api": "6.4.12",
-    "@storybook/client-api": "6.4.12",
-    "@storybook/client-logger": "6.4.12",
-    "@storybook/components": "6.4.12",
-    "@storybook/core-events": "6.4.12",
-    "@storybook/theming": "6.4.12",
-    "core-js": "^3.20.2",
+    "@storybook/addons": "6.4.14",
+    "@storybook/api": "6.4.14",
+    "@storybook/client-api": "6.4.14",
+    "@storybook/client-logger": "6.4.14",
+    "@storybook/components": "6.4.14",
+    "@storybook/core-events": "6.4.14",
+    "@storybook/theming": "6.4.14",
+    "core-js": "^3.20.3",
     "global": "^4.4.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.8",
-    "@babel/core": "^7.16.7",
+    "@babel/core": "^7.16.12",
     "@babel/preset-react": "^7.16.7",
-    "npm-check-updates": "^12.1.0",
+    "npm-check-updates": "^12.2.1",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2"
   }

@@ -40,27 +40,31 @@ const defaultProps = {
   ],
   items: [
     {
-      label: 'first',
-      id: 1,
+      id: '1',
+      label: 'Kansas',
+      value: 'kansas',
     },
     {
-      label: 'second',
-      id: 2,
+      id: '2',
+      label: 'Texas',
+      value: 'texas',
     },
     {
-      label: 'third',
-      id: 3,
+      id: '3',
+      label: 'Florida',
+      value: 'florida',
     },
   ],
   title: 'Add business terms',
   description: 'Select business terms from the list',
-  multiSelect: false,
   inputPlaceholder: 'Find business terms',
   itemsLabel: 'Business terms',
   influencerTitle: 'Selected business terms',
   noSelectionTitle: 'No business terms selected',
   noSelectionDescription:
     'Select a term to include the full set of the governance artifacts it contains in the governance scope.',
+  noResultsTitle: 'No results',
+  noResultsDescription: 'Try again',
 };
 
 const Template = (args) => {

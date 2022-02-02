@@ -130,6 +130,43 @@ const CreateComponent = () => {
 };
 ```
 
+## Using dynamic steps
+
+The use of dynamic steps can be utilized in a scenario when the user makes a
+certain selection on one step that effects which steps will follow it, this is
+controlled via the `includeStep` prop. See abbreviated example below:
+
+```jsx
+import { useState } from 'react';
+
+const CreateFlow = () => {
+  const [shouldIncludeAdditionalStep, setShouldIncludeAdditionalStep] =
+    useState(false);
+  return (
+    <CreateTearsheet {...createTearsheetProps}>
+      <CreateTearsheetStep {...step1Props}>
+        Step 1 content
+        <Checkbox
+          labelText={`Include additional step`}
+          id="include-additional-step-checkbox"
+          onChange={(value) => setShouldIncludeAdditionalStep(value)}
+          checked={shouldIncludeAdditionalStep}
+        />
+      </CreateTearsheetStep>
+      <CreateTearsheetStep
+        {...step2Props}
+        includeStep={shouldIncludeAdditionalStep}
+      >
+        Dynamic step content
+      </CreateTearsheetStep>
+      <CreateTearsheetStep {...step3Props}>
+        Final step content
+      </CreateTearsheetStep>
+    </CreateTearsheet>
+  );
+};
+```
+
 ## Class names
 
 Additionally, to get the preferred styling when including your own children as

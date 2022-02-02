@@ -9,11 +9,12 @@ import React, { forwardRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import {
+  Checkbox,
+  RadioButton,
   StructuredListRow,
   StructuredListWrapper,
   StructuredListBody,
   StructuredListCell,
-  // StructuredListInput,
   TextInput,
   Tag,
 } from 'carbon-components-react';
@@ -33,8 +34,11 @@ export let AddSelect = forwardRef(
       items,
       itemsLabel,
       multi,
+      noResultsDescription,
+      noResultsTitle,
       noSelectionDescription,
       noSelectionTitle,
+      onSearchFilter,
       open,
       title,
       ...rest
@@ -42,9 +46,6 @@ export let AddSelect = forwardRef(
     ref
   ) => {
     const blockClass = `${pkg.prefix}--add-select`;
-
-    const [selected] = useState(0);
-
     const commonTearsheetProps = {
       open,
       title,
@@ -53,16 +54,56 @@ export let AddSelect = forwardRef(
       closeIconDescription: 'temp description',
     };
 
+    // hooks
+    const [singleSelection, setSingleSelection] = useState('');
+    const [multiSelection, setMultiSelection] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+
+    // handlers
+    const onSearchHandler = (e) => {
+      const { value } = e.target;
+      setSearchTerm(value);
+      if (onSearchFilter) {
+        onSearchFilter(value);
+      }
+    };
+
+    const handleSingleSelection = (value) => {
+      setSingleSelection(value);
+    };
+
+    const handleMultiSelection = (value, checked) => {
+      if (checked) {
+        const newValues = [...multiSelection, value];
+        setMultiSelection(newValues);
+      } else {
+        const newValues = multiSelection.filter((v) => v !== value);
+        setMultiSelection(newValues);
+      }
+    };
+
+    // data manipulation
+    const getFilteredItems = () => {
+      // if the user uses their own filter then they provide the filtered items
+      if (onSearchFilter) {
+        return items;
+      }
+      // by default, just filter results by their label from a single search term
+      return items.filter((i) => i.label.includes(searchTerm));
+    };
+    const filteredResults = getFilteredItems();
+
+    // sidebar
     const influencer = (
       <div className={`${blockClass}__influencer`}>
         <div className={`${blockClass}__influencer-header`}>
           <p className={`${blockClass}__influencer-title`}>{influencerTitle}</p>
           <Tag type="gray" size="sm">
-            {selected}
+            {multiSelection.length}
           </Tag>
         </div>
         <div className={`${blockClass}__influencer-body`}>
-          {selected > 0 ? (
+          {multiSelection.length > 0 ? (
             <p>content</p>
           ) : (
             <NoDataEmptyState
@@ -75,6 +116,7 @@ export let AddSelect = forwardRef(
       </div>
     );
 
+    // main content
     const body = (
       <>
         <div className={`${blockClass}__header`}>
@@ -82,28 +124,61 @@ export let AddSelect = forwardRef(
             id="temp-id"
             labelText="temp label"
             placeholder={inputPlaceholder}
+            value={searchTerm}
+            onChange={onSearchHandler}
           />
           <div className={`${blockClass}__items-label-container`}>
             <p className={`${blockClass}__items-label`}>{itemsLabel}</p>
             <Tag type="gray" size="sm">
-              {items.length}
+              {filteredResults.length}
             </Tag>
           </div>
         </div>
-        <StructuredListWrapper
-          selection
-          className={`${blockClass}__selections`}
-        >
-          <StructuredListBody>
-            {items.map((item) => (
-              <StructuredListRow key={item.id}>
-                <StructuredListCell>
-                  <p>{item.label}</p>
-                </StructuredListCell>
-              </StructuredListRow>
-            ))}
-          </StructuredListBody>
-        </StructuredListWrapper>
+        {filteredResults.length > 0 ? (
+          <div className={`${blockClass}__selections-wrapper`}>
+            <StructuredListWrapper
+              selection
+              className={`${blockClass}__selections`}
+            >
+              <StructuredListBody>
+                {filteredResults.map((item) => (
+                  <StructuredListRow key={item.id}>
+                    <StructuredListCell>
+                      {multi ? (
+                        <Checkbox
+                          className={`${blockClass}__selections-checkbox`}
+                          onChange={(value) =>
+                            handleMultiSelection(item.value, value)
+                          }
+                          labelText={item.label}
+                          id={item.id}
+                          checked={multiSelection.includes(item.value)}
+                        />
+                      ) : (
+                        <RadioButton
+                          className={`${blockClass}__selections-radio`}
+                          name="add-select-selections"
+                          id={item.id}
+                          value={item.value}
+                          labelText={item.label}
+                          onChange={handleSingleSelection}
+                          selected={item.value === singleSelection}
+                        />
+                      )}
+                    </StructuredListCell>
+                  </StructuredListRow>
+                ))}
+              </StructuredListBody>
+            </StructuredListWrapper>
+          </div>
+        ) : (
+          <div className={`${blockClass}__body`}>
+            <NoDataEmptyState
+              subtitle={noResultsDescription}
+              title={noResultsTitle}
+            />
+          </div>
+        )}
       </>
     );
 
@@ -131,11 +206,20 @@ AddSelect.propTypes = {
   description: PropTypes.string,
   influencerTitle: PropTypes.string,
   inputPlaceholder: PropTypes.string,
-  items: PropTypes.array,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      label: PropTypes.string,
+      value: PropTypes.string,
+    })
+  ),
   itemsLabel: PropTypes.string,
   multi: PropTypes.bool,
+  noResultsDescription: PropTypes.string,
+  noResultsTitle: PropTypes.string,
   noSelectionDescription: PropTypes.string,
   noSelectionTitle: PropTypes.string,
+  onSearchFilter: PropTypes.func,
   open: PropTypes.bool,
   title: PropTypes.string,
 };

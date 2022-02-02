@@ -296,7 +296,7 @@ describe('SidePanel', () => {
       [
         'Invalid prop `actions` supplied to `SidePanel`: you cannot have more than three actions',
         'Invalid prop `actions` supplied to `ActionSet`: you cannot have more than three actions',
-        'Invalid prop `kind` of value `danger` supplied to `ActionSetButton`',
+        'Invalid prop `kind` of value `danger--tertiary` supplied to `ActionSetButton`',
       ],
       () => {
         renderSidePanel({
@@ -305,7 +305,7 @@ describe('SidePanel', () => {
             { kind: 'primary' },
             { kind: 'ghost' },
             { kind: 'ghost' },
-            { kind: 'danger' },
+            { kind: 'danger--tertiary' },
           ],
         });
       }

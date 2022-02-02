@@ -17,6 +17,7 @@ import {
   RadioButtonGroup,
   FormGroup,
   Loading,
+  PasswordInput,
 } from 'carbon-components-react';
 import cx from 'classnames';
 import { ErrorFilled16, CheckmarkFilled16 } from '@carbon/icons-react';
@@ -36,7 +37,9 @@ export let ExportModal = forwardRef(
       error,
       errorMessage,
       filename,
+      hidePasswordLabel,
       inputLabel,
+      inputType,
       invalidInputText,
       loading,
       loadingMessage,
@@ -47,6 +50,7 @@ export let ExportModal = forwardRef(
       preformattedExtensionsLabel,
       primaryButtonText,
       secondaryButtonText,
+      showPasswordLabel,
       successMessage,
       successful,
       title,
@@ -100,6 +104,17 @@ export let ExportModal = forwardRef(
     const primaryButtonDisabled = loading || !name || hasInvalidExtension();
     const submitted = loading || error || successful;
 
+    const commonInputProps = {
+      id: `text-input--${internalId.current}`,
+      value: name,
+      onChange: onNameChangeHandler,
+      labelText: inputLabel,
+      invalid: hasInvalidExtension(),
+      invalidText: invalidInputText,
+      onBlur: onBlurHandler,
+      ['data-modal-primary-focus']: true,
+    };
+
     return (
       <ComposedModal
         {...rest}
@@ -128,20 +143,24 @@ export let ExportModal = forwardRef(
                         id={o.extension}
                         value={o.extension}
                         labelText={`${o.extension} (${o.description})`}
+                        data-modal-primary-focus
                       />
                     ))}
                   </RadioButtonGroup>
                 </FormGroup>
               ) : (
-                <TextInput
-                  id={`text-input--${internalId.current}`}
-                  value={name}
-                  onChange={onNameChangeHandler}
-                  labelText={inputLabel}
-                  invalid={hasInvalidExtension()}
-                  invalidText={invalidInputText}
-                  onBlur={onBlurHandler}
-                />
+                <div className={`${blockClass}__input-container`}>
+                  {inputType === 'text' ? (
+                    <TextInput {...commonInputProps} />
+                  ) : (
+                    <PasswordInput
+                      {...commonInputProps}
+                      showPasswordLabel={showPasswordLabel}
+                      hidePasswordLabel={hidePasswordLabel}
+                      tooltipPosition="left"
+                    />
+                  )}
+                </div>
               )}
             </>
           )}
@@ -213,9 +232,17 @@ ExportModal.propTypes = {
    */
   filename: PropTypes.string.isRequired,
   /**
+   * label text that's displayed when hovering over visibility toggler to hide key
+   */
+  hidePasswordLabel: PropTypes.string,
+  /**
    * label for the text input
    */
   inputLabel: PropTypes.string,
+  /**
+   * specify the type of text input
+   */
+  inputType: PropTypes.oneOf(['text', 'password']),
   /**
    * text for an invalid input
    */
@@ -262,6 +289,10 @@ ExportModal.propTypes = {
    */
   secondaryButtonText: PropTypes.string.isRequired,
   /**
+   * label text that's displayed when hovering over visibility toggler to show key
+   */
+  showPasswordLabel: PropTypes.string,
+  /**
    * messaging to display if the export was successful
    */
   successMessage: PropTypes.string,
@@ -280,6 +311,7 @@ ExportModal.propTypes = {
 };
 
 ExportModal.defaultProps = {
+  inputType: 'text',
   preformattedExtensions: [],
   validExtensions: [],
 };

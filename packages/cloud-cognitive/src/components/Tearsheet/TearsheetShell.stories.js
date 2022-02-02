@@ -29,7 +29,15 @@ const closeIconDescription = 'Close the tearsheet';
 const className = 'client-class-1 client-class-2';
 
 const dummyContent = (
-  <div style={{ padding: '50px', height: '400px', background: 'pink' }}>
+  <div
+    style={{
+      // stylelint-disable-next-line carbon/layout-token-use
+      padding: '50px',
+      height: '400px',
+      // stylelint-disable-next-line color-named
+      background: 'pink',
+    }}
+  >
     Tearsheet content
   </div>
 );

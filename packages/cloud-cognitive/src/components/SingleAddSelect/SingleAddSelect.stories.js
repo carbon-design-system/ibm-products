@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import {
   getStoryTitle,
@@ -42,28 +42,59 @@ const defaultProps = {
   description: 'select a category lorem ipsum',
   items: [
     {
-      label: 'first',
-      id: 1,
+      id: '1',
+      label: 'Kansas',
+      value: 'kansas',
     },
     {
-      label: 'second',
-      id: 2,
+      id: '2',
+      label: 'Texas',
+      value: 'texas',
     },
     {
-      label: 'third',
-      id: 3,
+      id: '3',
+      label: 'Florida',
+      value: 'florida',
     },
   ],
-  multiSelect: false,
   inputPlaceholder: 'Find categories',
   itemsLabel: 'Categories',
+  noResultsTitle: 'No results',
+  noResultsDescription: 'Try again',
 };
 
 const Template = (args) => {
   return <SingleAddSelect {...args} />;
 };
 
+const CustomFilterTemplate = (args) => {
+  const [items, setItems] = useState(args.items);
+  const filterHandler = (searchTerm) => {
+    if (!searchTerm) {
+      setItems(args.items);
+    } else {
+      // search all attributes for value
+      const newItems = items.filter((i) =>
+        Object.keys(i).some((key) => i[key].includes(searchTerm))
+      );
+      setItems(newItems);
+    }
+  };
+  const props = {
+    ...defaultProps,
+    items,
+    onSearchFilter: filterHandler,
+  };
+  return <SingleAddSelect {...props} />;
+};
+
 export const Default = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+  },
+});
+
+export const WithCustomFilter = prepareStory(CustomFilterTemplate, {
   args: {
     ...defaultProps,
   },

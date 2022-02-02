@@ -5,7 +5,7 @@
 
 import React from 'react';
 
-import { getDocsParameters } from '../../../../.storybook';
+import { getDocsParameters, microlayouts } from '../../../.storybook';
 
 import {
   Button,
@@ -14,19 +14,17 @@ import {
   GettingStartedLayout,
   Row,
   TitleBarModule,
-} from '../../..';
+} from '../..';
 import { Add16, Launch16 } from '@carbon/icons-react';
 import placeholder from './images/placeholder.svg';
 
-import getTitle from '../stories';
 import page from './index.mdx';
 
 export default {
-  title: getTitle(GettingStartedLayout.name),
+  title: microlayouts(GettingStartedLayout.name),
   component: GettingStartedLayout,
   parameters: {
     docs: { page },
-
     ...getDocsParameters(),
   },
 };

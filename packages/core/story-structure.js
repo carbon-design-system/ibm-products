@@ -120,6 +120,8 @@ const s = [
         s: ['a/Library'],
       },
       { n: 'Layouts', s: [] },
+      // cSpell:words Microlayouts
+      { n: 'Microlayouts', s: [] },
       {
         n: 'Patterns',
         s: [],

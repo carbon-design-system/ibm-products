@@ -7,7 +7,7 @@ import classnames from 'classnames';
 import { func } from 'prop-types';
 import React from 'react';
 
-import LayoutModule, { layoutModuleNamespace } from '../LayoutModule';
+import Microlayout, { microlayoutNamespace } from './Microlayout';
 
 const namespace = 'getting-started';
 
@@ -19,7 +19,7 @@ const GettingStartedLayout = ({ children, ...other }) => {
     getLayoutProps: ({ className, ...rest } = {}) => {
       const assignClassName = (type) => ({
         className: classnames(className, {
-          [`${layoutModuleNamespace}--${namespace}__${type}`]: type,
+          [`${microlayoutNamespace}--${namespace}__${type}`]: type,
         }),
         ...rest,
       });
@@ -37,12 +37,12 @@ const GettingStartedLayout = ({ children, ...other }) => {
   });
 
   return (
-    <LayoutModule
-      namespace={`${namespace} ${layoutModuleNamespace}--${namespace}`}
+    <Microlayout
+      namespace={`${namespace} ${microlayoutNamespace}--${namespace}`}
       {...other}
     >
       {content}
-    </LayoutModule>
+    </Microlayout>
   );
 };
 

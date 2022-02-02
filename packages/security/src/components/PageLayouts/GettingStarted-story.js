@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { Add16, Launch16 } from '@carbon/icons-react';
-import placeholder from '../LayoutModules/GettingStartedModule/images/placeholder.svg';
+import placeholder from '../GettingStartedLayout/images/placeholder.svg';
 import aurora from '../../images/aurora_full_width.png';
 import { colors } from '@carbon/colors';
 import { pageLayouts } from '../../../.storybook';
@@ -14,7 +14,7 @@ import {
   Button,
   Column,
   DescriptionModule,
-  GettingStartedModule,
+  GettingStartedLayout,
   Grid,
   Row,
   Tab,
@@ -67,7 +67,7 @@ export const Default = () => (
     ></PageHeader>
     <Grid className="security--theme--cg10" style={backgroundStyle}>
       <Row>
-        <GettingStartedModule>
+        <GettingStartedLayout>
           {({ getLayoutProps }) => {
             const {
               description,
@@ -133,7 +133,7 @@ export const Default = () => (
               </>
             );
           }}
-        </GettingStartedModule>
+        </GettingStartedLayout>
       </Row>
       <img src={aurora} alt="Aurora background" style={imageStyle}></img>
     </Grid>

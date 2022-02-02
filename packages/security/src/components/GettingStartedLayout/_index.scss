@@ -8,16 +8,16 @@
 @import '@carbon/themes/scss/tokens';
 @import '@carbon/type/scss/styles';
 
-@import '../../../globals/border/index';
+@import '../../globals/border/index';
 
 @import 'carbon-components/scss/globals/scss/helper-mixins';
 
-@import '../../Component/mixins';
-@import '../variables';
+@import '../Component/mixins';
+@import './variables';
 
-@import '../../../globals/motion/index';
+@import '../../globals/motion/index';
 
-@include security--component($name: #{$layout-modules__name}--getting-started) {
+@include security--component($name: #{$microlayouts__name}--getting-started) {
   position: relative;
   display: flex;
   width: 100%;

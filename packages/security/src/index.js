@@ -104,11 +104,12 @@ export {
   CardAreaModule as CardModule,
   DescriptionListModule,
   DescriptionModule,
-  GettingStartedLayout,
   ICAModule,
   ListItemModule,
   TitleBarModule,
 } from './components/LayoutModules';
+
+export GettingStartedLayout from './components/GettingStartedLayout';
 
 export Link from './components/Link';
 export ListBox from './components/ListBox';

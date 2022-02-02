@@ -95,11 +95,13 @@ export let InlineEdit = React.forwardRef(
           setTimeout(() => {
             refInput.current.focus();
             // select all the content
-            document.getSelection().selectAllChildren(refInput.current);
+            // document.getSelection().selectAllChildren(refInput.current);
             if (rightOfInput) {
-              document.getSelection().collapseToEnd();
+              refInput.scrollLeft = 9999; // never going to get there but ensures at end.
+              // document.getSelection().collapseToEnd();
             } else {
-              document.getSelection().collapseToStart();
+              refInput.scrollLeft = 0; // scroll to start
+              // document.getSelection().collapseToStart();
             }
           }, 0);
         }

@@ -90,18 +90,19 @@ export let InlineEdit = React.forwardRef(
           `${blockClass}`
         ));
 
+        // clicking on the content editable element should not set either of these to true
         if (rightOfInput || leftOfInput) {
           setEditing(true);
           setTimeout(() => {
             refInput.current.focus();
             // select all the content
-            // document.getSelection().selectAllChildren(refInput.current);
+            document.getSelection().selectAllChildren(refInput.current);
             if (rightOfInput) {
-              refInput.scrollLeft = 9999; // never going to get there but ensures at end.
-              // document.getSelection().collapseToEnd();
+              document.getSelection().collapseToEnd();
+              refInput.current.scrollLeft = 9999; // never going to get there but ensures at end.
             } else {
-              refInput.scrollLeft = 0; // scroll to start
-              // document.getSelection().collapseToStart();
+              document.getSelection().collapseToStart();
+              refInput.current.scrollLeft = 0; // scroll to start
             }
           }, 0);
         }
@@ -201,6 +202,9 @@ export let InlineEdit = React.forwardRef(
      - Some padding is added to the left 16px standard for a Carbon text input
      - The controls are position absolute with a margin to on the input to reserve space. Using inline-flex
      - does not measure space properly for the input otherwise.
+     - The content editable is not expected to change size when buttons are added, to ensure the text does not move space
+      is reserved up front for buttons and invalid icon. Mostly this is only noticed if the width of the component is not 100%.
+      which can be shown by setting inlineEditFullWidth to false in storybook.
 
      In making content-editable behave like an input of type text we have to account for.
      - Enforcing a single line

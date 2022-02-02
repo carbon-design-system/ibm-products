@@ -97,6 +97,7 @@
       overflow: hidden;
       max-width: calc(100% - 2 * var(--size) - $spacing-05);
       height: 100%;
+      flex: 1 1 100%;
       align-items: center;
       // stylelint-disable-next-line carbon/layout-token-use
       margin-right: calc(2 * var(--size)); // room for controls
@@ -180,13 +181,6 @@
 
       &[disabled] {
         border-color: transparent;
-      }
-    }
-    .#{$block-class}__controls--animation:not(.#{$block-class}__controls--saveable)
-      .#{$block-class}__cancel,
-    .#{$block-class}__save {
-      &:hover {
-        border-right-color: $focus;
       }
     }
 

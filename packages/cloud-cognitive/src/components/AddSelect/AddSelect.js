@@ -61,21 +61,18 @@ export let AddSelect = forwardRef(
     const [multiSelection, setMultiSelection] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
 
-    // save items locally
-    useEffect(() => {
-      setFilteredItems(items);
-    }, [items]);
-
     // filter items as a search term is entered
     useEffect(() => {
-      const results = items.filter((item) => {
-        // if user provides their own filter function use that
-        if (onSearchFilter) {
-          return onSearchFilter(item, searchTerm);
-        }
-        // otherwise use the default label filter
-        return item.label.includes(searchTerm);
-      });
+      const results = searchTerm
+        ? items.filter((item) => {
+            // if user provides their own filter function use that
+            if (onSearchFilter) {
+              return onSearchFilter(item, searchTerm);
+            }
+            // otherwise use the default label filter
+            return item.label.includes(searchTerm);
+          })
+        : items;
       setFilteredItems(results);
     }, [items, onSearchFilter, searchTerm]);
 

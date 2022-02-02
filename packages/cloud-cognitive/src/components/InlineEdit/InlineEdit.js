@@ -81,37 +81,23 @@ export let InlineEdit = React.forwardRef(
 
     const handleEdit = (ev) => {
       if (!disabled) {
-        const leftPad = ev.target.classList.contains(
-          `${blockClass}__left-padding`
-        );
-        const controls =
+        const rightOfInput =
           ev.currentTarget.classList.contains(`${blockClass}__edit`) ||
           ev.target.classList.contains(`${blockClass}__controls`);
+        const leftOfInput = (ev.currentTarget = ev.target.classList.contains(
+          `${blockClass}`
+        ));
 
-        if (leftPad || controls) {
+        if (rightOfInput || leftOfInput) {
           setEditing(true);
           setTimeout(() => {
             refInput.current.focus();
-            if (document.queryCommandSupported('selectAll')) {
-              // select all the content
-              document.getSelection().selectAllChildren(refInput.current);
-              if (leftPad) {
-                document.getSelection().collapseToStart();
-              } else {
-                document.getSelection().collapseToEnd();
-              }
+            // select all the content
+            document.getSelection().selectAllChildren(refInput.current);
+            if (rightOfInput) {
+              document.getSelection().collapseToEnd();
             } else {
-              // create range at end position
-              const range = document.createRange();
-              range.selectNodeContents(refInput.current);
-              range.collapse(leftPad); // true start, false end
-
-              // remove existing range
-              const selection = document.getSelection();
-              selection.removeAllRanges();
-
-              // set the new range
-              selection.addRange(range);
+              document.getSelection().collapseToStart();
             }
           }, 0);
         }
@@ -126,6 +112,7 @@ export let InlineEdit = React.forwardRef(
 
     const handleSave = () => {
       setEditing(false);
+      document.getSelection().removeAllRanges();
       if (onSave) {
         onSave(refInput.current.innerText);
       }
@@ -158,7 +145,7 @@ export let InlineEdit = React.forwardRef(
         range.collapse(false);
 
         // remove existing range
-        const selection = window.getSelection();
+        const selection = document.getSelection();
         selection.removeAllRanges();
 
         // set the new range
@@ -173,6 +160,8 @@ export let InlineEdit = React.forwardRef(
     const handleCancel = () => {
       handleInput(value);
       setEditing(false);
+      document.getSelection().removeAllRanges();
+
       if (onCancel) {
         onCancel(value);
       }
@@ -180,8 +169,8 @@ export let InlineEdit = React.forwardRef(
     };
     const handleBlur = (ev) => {
       if (!ref.current.contains(ev.relatedTarget)) {
-        // setEditing(false);
-        // handleSave();
+        setEditing(false);
+        handleSave();
       }
     };
 
@@ -195,13 +184,18 @@ export let InlineEdit = React.forwardRef(
     /*
       The HTML is structured as follows:
 
-     <container>
-       <left-padding>
-       <edit-button>
-       <controls>
-     </container>
+    <container>
+      <!-- margin left of input to match Carbon -->
+      <content-editable>
+      <-- margin right of input space for controls -->
+      <controls>
+    </container>
 
-     An input is not used as this would not permit a heading tag e.g. <h2>.
+     NOTE:
+     - An input is not used as this would not permit a heading tag e.g. <h2>.
+     - Some padding is added to the left 16px standard for a Carbon text input
+     - The controls are position absolute with a margin to on the input to reserve space. Using inline-flex
+     - does not measure space properly for the input otherwise.
 
      In making content-editable behave like an input of type text we have to account for.
      - Enforcing a single line
@@ -228,7 +222,6 @@ export let InlineEdit = React.forwardRef(
         onBlur={handleBlur}
         ref={ref}
       >
-        <div className={`${blockClass}__left-padding`} />
         <div
           {...rest}
           {...getDevtoolsProps(componentName)}
@@ -258,7 +251,7 @@ export let InlineEdit = React.forwardRef(
         <div className={`${blockClass}__validation-icon`}>{validationIcon}</div>
         <div className={`${blockClass}__controls`}>
           {editing ? (
-            <div className={`${blockClass}__edit-controls`}>
+            <>
               <Button
                 className={`${blockClass}__cancel`}
                 kind="ghost"
@@ -276,7 +269,7 @@ export let InlineEdit = React.forwardRef(
                 renderIcon={Checkmark16}
                 // disabled={invalid || saveDisabled || value === liveValue}
               />
-            </div>
+            </>
           ) : (
             <Button
               aria-hidden="true"

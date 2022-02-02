@@ -61,7 +61,7 @@
     max-width: 100%;
     height: var(--size);
     background-color: var(--background-color);
-
+    cursor: text; // appear to be part of the text box
     transition: background-color $duration--fast-01 motion(entrance, productive),
       box-shadow $duration--fast-01 motion(entrance, productive),
       border-color $duration--fast-01 motion(entrance, productive);
@@ -85,12 +85,6 @@
       background-color: $ui-01;
     }
 
-    .#{$block-class}__left-padding {
-      width: $spacing-05;
-      height: 100%;
-      cursor: text;
-    }
-
     .#{$block-class}--invalid {
       @include input-outline($support-01);
     }
@@ -103,6 +97,7 @@
       align-items: center;
       // stylelint-disable-next-line carbon/layout-token-use
       margin-right: calc(2 * var(--size)); // room for controls
+      margin-left: $spacing-05;
 
       &:focus {
         // stylelint-disable-next-line
@@ -116,6 +111,7 @@
     }
 
     .#{$block-class}__controls {
+      // not simply flexed in as this causes flexbox to mis-measure the size of the input
       position: absolute;
       top: 0;
       // stylelint-disable-next-line carbon/layout-token-use

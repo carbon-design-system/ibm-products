@@ -427,7 +427,6 @@ export let SidePanel = React.forwardRef(
       preventCloseOnClickOutside,
       ref,
       onUnmount,
-      reducedMotion.matches,
     ]);
 
     // initialize the side panel to open

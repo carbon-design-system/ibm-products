@@ -75,7 +75,7 @@ export let SidePanel = React.forwardRef(
     const endTrapRef = useRef();
     const sidePanelInnerRef = useRef();
     const sidePanelCloseRef = useRef();
-    const previousState = usePreviousValue({ size });
+    const previousState = usePreviousValue({ size, open });
 
     const reducedMotion =
       window && window.matchMedia
@@ -406,10 +406,6 @@ export let SidePanel = React.forwardRef(
           onRequestClose
         ) {
           onRequestClose();
-          if (open && reducedMotion.matches) {
-            setRender(false);
-            onUnmount?.();
-          }
         }
       };
       const bodyElement = document.body;
@@ -444,7 +440,7 @@ export let SidePanel = React.forwardRef(
     // initializes the side panel to close
     const onAnimationEnd = () => {
       if (!open) {
-        onUnmount && onUnmount();
+        onUnmount?.();
         setRender(false);
       }
       setAnimationComplete(true);
@@ -479,21 +475,39 @@ export let SidePanel = React.forwardRef(
       }
     }, [open, placement, selectorPageContent, slideIn]);
 
+    useEffect(() => {
+      if (!open && previousState?.open && reducedMotion.matches) {
+        setRender(false);
+        onUnmount?.();
+      }
+    }, [open, onUnmount, reducedMotion.matches, previousState?.open]);
+
     // used to set margins of content for slide in panel version
     useEffect(() => {
       if (shouldRender && slideIn) {
         const pageContentElement = document.querySelector(selectorPageContent);
         if (placement && placement === 'right' && pageContentElement) {
           pageContentElement.style.marginRight = 0;
-          pageContentElement.style.transition = `margin-right ${moderate02}`;
+          pageContentElement.style.transition = !reducedMotion.matches
+            ? `margin-right ${moderate02}`
+            : null;
           pageContentElement.style.marginRight = SIDE_PANEL_SIZES[size];
         } else if (pageContentElement) {
           pageContentElement.style.marginLeft = 0;
-          pageContentElement.style.transition = `margin-left ${moderate02}`;
+          pageContentElement.style.transition = !reducedMotion.matches
+            ? `margin-left ${moderate02}`
+            : null;
           pageContentElement.style.marginLeft = SIDE_PANEL_SIZES[size];
         }
       }
-    }, [slideIn, selectorPageContent, placement, shouldRender, size]);
+    }, [
+      slideIn,
+      selectorPageContent,
+      placement,
+      shouldRender,
+      size,
+      reducedMotion.matches,
+    ]);
 
     // adds focus trap functionality
     /* istanbul ignore next */

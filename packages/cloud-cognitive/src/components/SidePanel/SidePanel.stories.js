@@ -210,9 +210,9 @@ const actions_7 = [
 
 const actions_8 = [
   {
-    label: 'Ghost button',
+    label: 'Secondary button',
     onClick: action('Clicked action button'),
-    kind: 'ghost',
+    kind: 'secondary',
   },
   {
     label: 'Secondary button',

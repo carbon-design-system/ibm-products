@@ -561,6 +561,8 @@ export let SidePanel = React.forwardRef(
             [`${blockClass}__title-container-is-animating`]:
               !animationComplete || !open,
             [`${blockClass}__title-container-without-title`]: !title,
+            [`${blockClass}__title-container--reduced-motion`]:
+              reducedMotion.matches,
           })}
         >
           {currentStep > 0 && (

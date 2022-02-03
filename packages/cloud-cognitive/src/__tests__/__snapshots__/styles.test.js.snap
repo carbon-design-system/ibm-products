@@ -1967,6 +1967,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   content: \\"\\";
   opacity: var(--c4p--side-panel--divider-opacity);
 }
+.c4p--side-panel__container .c4p--side-panel__title-container.c4p--side-panel__title-container--reduced-motion {
+  z-index: 5;
+  border-bottom: 1px solid var(--cds-decorative-01, #e0e0e0);
+  margin-bottom: var(--cds-spacing-05, 1rem);
+}
 .c4p--side-panel__container .c4p--side-panel__title-container.c4p--side-panel__on-detail-step .c4p--side-panel__collapsed-title-text {
   top: var(--cds-spacing-09, 3rem);
 }

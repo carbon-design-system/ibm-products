@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { forwardRef, useState, useEffect } from 'react';
+import React, { forwardRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import {
@@ -56,25 +56,9 @@ export let AddSelect = forwardRef(
     };
 
     // hooks
-    const [filteredItems, setFilteredItems] = useState([]);
     const [singleSelection, setSingleSelection] = useState('');
     const [multiSelection, setMultiSelection] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
-
-    // filter items as a search term is entered
-    useEffect(() => {
-      const results = searchTerm
-        ? items.filter((item) => {
-            // if user provides their own filter function use that
-            if (onSearchFilter) {
-              return onSearchFilter(item, searchTerm);
-            }
-            // otherwise use the default label filter
-            return item.label.includes(searchTerm);
-          })
-        : items;
-      setFilteredItems(results);
-    }, [items, onSearchFilter, searchTerm]);
 
     // handlers
     const handleSearch = (e) => {
@@ -98,6 +82,22 @@ export let AddSelect = forwardRef(
     const onNavigateItem = () => {
       // TODO figure out navigation
     };
+
+    // item filtering
+    const getFilteredItems = () =>
+      items.filter((item) => {
+        if (!searchTerm) {
+          return item;
+        }
+        // if user provides their own filter function use that
+        if (onSearchFilter) {
+          return onSearchFilter(item, searchTerm);
+        }
+        // otherwise use the default label filter
+        return item.label.toLowerCase().includes(searchTerm);
+      });
+
+    const filteredItems = getFilteredItems();
 
     // sidebar
     const influencer = (

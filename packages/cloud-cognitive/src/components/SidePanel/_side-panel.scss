@@ -191,6 +191,10 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
         border-bottom: 1px solid $decorative-01;
         margin-bottom: $spacing-05;
       }
+      &.#{$block-class}__title-container--reduced-motion.#{$block-class}__title-container--no-title-animation {
+        border-bottom: 0;
+        margin-bottom: 0;
+      }
       &.#{$block-class}__on-detail-step .#{$block-class}__collapsed-title-text {
         top: $spacing-09;
       }

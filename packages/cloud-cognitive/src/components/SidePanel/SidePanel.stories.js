@@ -53,15 +53,18 @@ export default {
         labels: {
           0: 'One button',
           1: 'One button (ghost)',
-          2: 'Two buttons',
-          3: 'Two buttons with ghost',
-          4: 'Three buttons with ghost',
-          5: 'Three buttons',
-          6: 'None',
+          2: 'One button (danger)',
+          3: 'Two buttons',
+          4: 'Two buttons with ghost',
+          5: 'Two buttons with danger',
+          6: 'Three buttons with ghost',
+          7: 'Three buttons with danger',
+          8: 'Three buttons',
+          9: 'None',
         },
         default: 0,
       },
-      options: [0, 1, 2, 3, 4, 5, 6],
+      options: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     },
     slideIn: {
       table: {
@@ -142,19 +145,27 @@ const actions_2 = [
 
 const actions_3 = [
   {
-    label: 'Primary button',
+    label: 'Danger button',
     onClick: action('Clicked action button'),
-    kind: 'primary',
-  },
-  {
-    label: 'Secondary button',
-    onClick: action('Clicked action button'),
-    kind: 'secondary',
+    kind: 'danger',
   },
 ];
 
 const actions_4 = [
   {
+    label: 'Primary button',
+    onClick: action('Clicked action button'),
+    kind: 'primary',
+  },
+  {
+    label: 'Secondary button',
+    onClick: action('Clicked action button'),
+    kind: 'secondary',
+  },
+];
+
+const actions_5 = [
+  {
     label: 'Ghost button',
     onClick: action('Clicked action button'),
     kind: 'ghost',
@@ -166,7 +177,20 @@ const actions_4 = [
   },
 ];
 
-const actions_5 = [
+const actions_6 = [
+  {
+    label: 'Ghost button',
+    onClick: action('Clicked action button'),
+    kind: 'ghost',
+  },
+  {
+    label: 'Danger button',
+    onClick: action('Clicked action button'),
+    kind: 'danger',
+  },
+];
+
+const actions_7 = [
   {
     label: 'Primary button',
     onClick: action('Clicked action button'),
@@ -184,7 +208,25 @@ const actions_5 = [
   },
 ];
 
-const actions_6 = [
+const actions_8 = [
+  {
+    label: 'Secondary button',
+    onClick: action('Clicked action button'),
+    kind: 'secondary',
+  },
+  {
+    label: 'Secondary button',
+    onClick: action('Clicked action button'),
+    kind: 'secondary',
+  },
+  {
+    label: 'Danger button',
+    onClick: action('Clicked action button'),
+    kind: 'danger',
+  },
+];
+
+const actions_9 = [
   {
     label: 'Primary button',
     onClick: action('Clicked action button'),
@@ -209,6 +251,9 @@ const actionSets = [
   actions_4,
   actions_5,
   actions_6,
+  actions_7,
+  actions_8,
+  actions_9,
   [],
 ];
 

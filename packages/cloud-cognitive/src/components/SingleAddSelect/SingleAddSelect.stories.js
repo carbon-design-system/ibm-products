@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import {
   getStoryTitle,
@@ -67,23 +67,11 @@ const Template = (args) => {
   return <SingleAddSelect {...args} />;
 };
 
-const CustomFilterTemplate = (args) => {
-  const [items, setItems] = useState(args.items);
-  const filterHandler = (searchTerm) => {
-    if (!searchTerm) {
-      setItems(args.items);
-    } else {
-      // search all attributes for value
-      const newItems = items.filter((i) =>
-        Object.keys(i).some((key) => i[key].includes(searchTerm))
-      );
-      setItems(newItems);
-    }
-  };
+const CustomFilterTemplate = () => {
   const props = {
     ...defaultProps,
-    items,
-    onSearchFilter: filterHandler,
+    onSearchFilter: (item, searchTerm) =>
+      Object.keys(item).some((key) => item[key].includes(searchTerm)),
   };
   return <SingleAddSelect {...props} />;
 };
@@ -97,5 +85,26 @@ export const Default = prepareStory(Template, {
 export const WithCustomFilter = prepareStory(CustomFilterTemplate, {
   args: {
     ...defaultProps,
+  },
+});
+
+export const WithHierarchy = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    items: [
+      ...defaultProps.items,
+      {
+        id: '4',
+        label: 'California',
+        value: 'california',
+        children: [
+          {
+            id: '1',
+            label: 'Los Angeles',
+            value: 'la',
+          },
+        ],
+      },
+    ],
   },
 });

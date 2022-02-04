@@ -164,6 +164,7 @@ export let InlineEdit = React.forwardRef(
       }
     };
     const handleCancel = () => {
+      refInput.current.innerText = value;
       handleInput(value);
       setEditing(false);
       document.getSelection().removeAllRanges();
@@ -171,7 +172,6 @@ export let InlineEdit = React.forwardRef(
       if (onCancel) {
         onCancel(value);
       }
-      refInput.current.innerHTML = value;
     };
     const handleBlur = (ev) => {
       if (!ref.current.contains(ev.relatedTarget)) {

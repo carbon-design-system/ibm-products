@@ -28,7 +28,24 @@
   }
 }
 
-@mixin input-button-defaults() {
+@function tooltip-top-bottom-safe-clip() {
+  @return polygon(
+    0 0,
+    -100vw 0,
+    -100vw -100vh,
+    100vw -100vh,
+    100vw 0,
+    100% 0,
+    100% 100%,
+    100vw 100%,
+    100vw 100vh,
+    -100vw 100vh,
+    -100vw 100%,
+    0 100%
+  );
+}
+
+@mixin input-button-defaults($block-class) {
   width: var(--#{$block-class}--size);
   height: 100%;
   min-height: initial;
@@ -47,7 +64,7 @@
   // The block part of our conventional BEM class names (blockClass__E--M).
   $block-class: #{$pkg-prefix}--inline-edit;
 
-  @include block-wrap($block-class, 3) {
+  @include block-wrap($block-class) {
     --#{$block-class}--size: #{$spacing-08};
     --#{$block-class}--icon-size: #{$spacing-05};
     --#{$block-class}--background-color: #{$ui-01};
@@ -126,14 +143,10 @@
     }
 
     .#{$block-class}__controls--animation {
-      padding-left: var(--#{$block-class}--size);
-      overflow-x: hidden;
-      transition: padding-left $duration--moderate-02
-        motion(standard, productive);
-    }
-
-    .#{$block-class}__controls--saveable {
-      padding-left: 0;
+      // makes room for the top clip text but hides the side overflow
+      clip-path: tooltip-top-bottom-safe-clip();
+      // NOTE: The above allows the tooltip to show through when overflowX: hidden would not when at right edge.
+      // It is used with margin animation of contained buttons
     }
 
     &.#{$block-class}--editing .#{$block-class}__controls::after {
@@ -154,9 +167,9 @@
       pointer-events: none;
     }
 
-    .#{$block-class}__save,
-    .#{$block-class}__cancel {
-      @include input-button-defaults();
+    &.#{$block-class}.#{$block-class} .#{$block-class}__save,
+    &.#{$block-class}.#{$block-class} .#{$block-class}__cancel {
+      @include input-button-defaults($block-class);
 
       // input does not have focus
       &:hover {
@@ -184,8 +197,22 @@
       }
     }
 
-    .#{$block-class}__edit {
-      @include input-button-defaults();
+    .#{$block-class}__controls .#{$block-class}__edit {
+      margin-left: var(--#{$block-class}--size);
+    }
+
+    .#{$block-class}__controls--animation .#{$block-class}__cancel {
+      margin-left: var(--#{$block-class}--size);
+      transition: margin-left $duration--moderate-02
+        motion(standard, productive);
+    }
+
+    .#{$block-class}__controls--saveable .#{$block-class}__cancel {
+      margin-left: 0;
+    }
+
+    &.#{$block-class}.#{$block-class} .#{$block-class}__edit {
+      @include input-button-defaults($block-class);
 
       position: absolute;
       top: 0;

@@ -5,13 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@mixin block-wrap($block-class, $deep: 1) {
-  $selector: '';
-
-  @for $i from 1 through $deep {
-    $selector: $selector + '.' + $block-class;
-  }
-  #{$selector} {
+@mixin block-wrap($block-class) {
+  .#{$block-class} {
     @content;
   }
 }

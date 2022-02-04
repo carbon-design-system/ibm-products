@@ -28,16 +28,6 @@ export default {
 
 const defaultProps = {
   open: true,
-  actions: [
-    {
-      label: 'Cancel',
-      kind: 'secondary',
-    },
-    {
-      label: 'Add',
-      kind: 'primary',
-    },
-  ],
   items: [
     {
       id: '1',
@@ -65,6 +55,8 @@ const defaultProps = {
     'Select a term to include the full set of the governance artifacts it contains in the governance scope.',
   noResultsTitle: 'No results',
   noResultsDescription: 'Try again',
+  onCloseButtonText: 'Cancel',
+  onSubmitButtonText: 'Add',
 };
 
 const Template = (args) => {

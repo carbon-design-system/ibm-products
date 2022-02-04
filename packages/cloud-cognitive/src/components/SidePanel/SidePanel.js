@@ -75,7 +75,12 @@ export let SidePanel = React.forwardRef(
     const endTrapRef = useRef();
     const sidePanelInnerRef = useRef();
     const sidePanelCloseRef = useRef();
-    const previousState = usePreviousValue({ size });
+    const previousState = usePreviousValue({ size, open });
+
+    const reducedMotion =
+      window && window.matchMedia
+        ? window.matchMedia('(prefers-reduced-motion: reduce)')
+        : { matches: true };
 
     // scroll panel to top going between steps
     useEffect(() => {
@@ -172,7 +177,14 @@ export let SidePanel = React.forwardRef(
 
     // Title and subtitle scroll animation
     useEffect(() => {
-      if (open && animateTitle && animationComplete && title && title.length) {
+      if (
+        open &&
+        animateTitle &&
+        animationComplete &&
+        title &&
+        title.length &&
+        !reducedMotion.matches
+      ) {
         const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
         const sidePanelScrollArea = document.querySelector(
           `#${blockClass}-outer .${blockClass}__inner-content`
@@ -380,6 +392,7 @@ export let SidePanel = React.forwardRef(
       panelHeight,
       title,
       size,
+      reducedMotion.matches,
     ]);
 
     // click outside functionality if `includeOverlay` prop is set
@@ -407,7 +420,14 @@ export let SidePanel = React.forwardRef(
       return () => {
         document.removeEventListener('click', handleOutsideClick);
       };
-    }, [includeOverlay, onRequestClose, open, preventCloseOnClickOutside, ref]);
+    }, [
+      includeOverlay,
+      onRequestClose,
+      open,
+      preventCloseOnClickOutside,
+      ref,
+      onUnmount,
+    ]);
 
     // initialize the side panel to open
     useEffect(() => {
@@ -419,11 +439,19 @@ export let SidePanel = React.forwardRef(
     // initializes the side panel to close
     const onAnimationEnd = () => {
       if (!open) {
-        onUnmount && onUnmount();
+        onUnmount?.();
         setRender(false);
       }
       setAnimationComplete(true);
     };
+
+    // Set the internal state `animationComplete` to true if
+    // prefers reduced motion is true
+    useEffect(() => {
+      if (reducedMotion.matches) {
+        setAnimationComplete(true);
+      }
+    }, [reducedMotion.matches]);
 
     // initializes the side panel to open
     const onAnimationStart = (event) => {
@@ -446,21 +474,39 @@ export let SidePanel = React.forwardRef(
       }
     }, [open, placement, selectorPageContent, slideIn]);
 
+    useEffect(() => {
+      if (!open && previousState?.open && reducedMotion.matches) {
+        setRender(false);
+        onUnmount?.();
+      }
+    }, [open, onUnmount, reducedMotion.matches, previousState?.open]);
+
     // used to set margins of content for slide in panel version
     useEffect(() => {
       if (shouldRender && slideIn) {
         const pageContentElement = document.querySelector(selectorPageContent);
         if (placement && placement === 'right' && pageContentElement) {
           pageContentElement.style.marginRight = 0;
-          pageContentElement.style.transition = `margin-right ${moderate02}`;
+          pageContentElement.style.transition = !reducedMotion.matches
+            ? `margin-right ${moderate02}`
+            : null;
           pageContentElement.style.marginRight = SIDE_PANEL_SIZES[size];
         } else if (pageContentElement) {
           pageContentElement.style.marginLeft = 0;
-          pageContentElement.style.transition = `margin-left ${moderate02}`;
+          pageContentElement.style.transition = !reducedMotion.matches
+            ? `margin-left ${moderate02}`
+            : null;
           pageContentElement.style.marginLeft = SIDE_PANEL_SIZES[size];
         }
       }
-    }, [slideIn, selectorPageContent, placement, shouldRender, size]);
+    }, [
+      slideIn,
+      selectorPageContent,
+      placement,
+      shouldRender,
+      size,
+      reducedMotion.matches,
+    ]);
 
     // adds focus trap functionality
     /* istanbul ignore next */
@@ -515,6 +561,8 @@ export let SidePanel = React.forwardRef(
             [`${blockClass}__title-container-is-animating`]:
               !animationComplete || !open,
             [`${blockClass}__title-container-without-title`]: !title,
+            [`${blockClass}__title-container--reduced-motion`]:
+              reducedMotion.matches,
           })}
         >
           {currentStep > 0 && (
@@ -618,7 +666,7 @@ export let SidePanel = React.forwardRef(
             {title}
           </h2>
         )}
-        {animateTitle && title && title.length && (
+        {animateTitle && title && title.length && !reducedMotion.matches && (
           <h2
             className={`${blockClass}__collapsed-title-text`}
             title={title}
@@ -647,15 +695,17 @@ export let SidePanel = React.forwardRef(
             id={`${blockClass}-outer`}
             className={mainPanelClassNames}
             style={{
-              animation: `${
-                open
-                  ? placement === 'right'
-                    ? `sidePanelEntranceRight ${moderate02}`
-                    : `sidePanelEntranceLeft ${moderate02}`
-                  : placement === 'right'
-                  ? `sidePanelExitRight ${moderate02}`
-                  : `sidePanelExitLeft ${moderate02}`
-              }`,
+              animation: !reducedMotion.matches
+                ? `${
+                    open
+                      ? placement === 'right'
+                        ? `sidePanelEntranceRight ${moderate02}`
+                        : `sidePanelEntranceLeft ${moderate02}`
+                      : placement === 'right'
+                      ? `sidePanelExitRight ${moderate02}`
+                      : `sidePanelExitLeft ${moderate02}`
+                  }`
+                : null,
             }}
             onAnimationEnd={onAnimationEnd}
             onAnimationStart={(event) => onAnimationStart(event)}
@@ -703,11 +753,13 @@ export let SidePanel = React.forwardRef(
               ref={sidePanelOverlayRef}
               className={`${blockClass}__overlay`}
               style={{
-                animation: `${
-                  open
-                    ? `sidePanelOverlayEntrance ${moderate02}`
-                    : `sidePanelOverlayExit ${moderate02}`
-                }`,
+                animation: !reducedMotion.matches
+                  ? `${
+                      open
+                        ? `sidePanelOverlayEntrance ${moderate02}`
+                        : `sidePanelOverlayExit ${moderate02}`
+                    }`
+                  : null,
               }}
             />
           )}

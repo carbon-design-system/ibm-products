@@ -35,11 +35,11 @@
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$|^uuid$)/'"
   },
   "peerDependencies": {
-    "@carbon/elements": "^10.50.0",
+    "@carbon/elements": "^10.51.0",
     "@carbon/grid": "^10.40.0",
     "@carbon/icons-react": "^10.45.0",
-    "carbon-components": "^10.51.0",
-    "carbon-components-react": "^7.51.0",
+    "carbon-components": "^10.52.0",
+    "carbon-components-react": "^7.52.0",
     "prop-types": "^15.8.1",
     "react": "^16.8.6 || ^17.0.1",
     "react-dom": "^16.8.6 || ^17.0.1"

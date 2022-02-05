@@ -4607,8 +4607,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-layer-selected-hover: #4c4c4c;
   --cds-layer-selected-inverse: #f4f4f4;
   --cds-border-subtle-selected: #525252;
-  --cds-layer-disabled: #262626;
-  --cds-field-disabled: #262626;
   --cds-border-disabled: #262626;
   --cds-text-disabled: #525252;
   --cds-button-disabled: #525252;

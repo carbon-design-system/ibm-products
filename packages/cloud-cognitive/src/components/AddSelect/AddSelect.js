@@ -9,14 +9,16 @@ import React, { forwardRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import {
+  Checkbox,
+  RadioButton,
   StructuredListRow,
   StructuredListWrapper,
   StructuredListBody,
   StructuredListCell,
-  // StructuredListInput,
   TextInput,
   Tag,
 } from 'carbon-components-react';
+import { ChevronRight16 } from '@carbon/icons-react';
 import { Tearsheet, TearsheetNarrow } from '../../components/Tearsheet';
 import { NoDataEmptyState } from '../../components/EmptyStates/NoDataEmptyState';
 import { pkg } from '../../settings';
@@ -54,28 +56,48 @@ export let AddSelect = forwardRef(
     };
 
     // hooks
-    const [selected] = useState(0);
+    const [singleSelection, setSingleSelection] = useState('');
+    const [multiSelection, setMultiSelection] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
 
     // handlers
-    const onSearchHandler = (e) => {
-      const { value } = e.target;
-      setSearchTerm(value);
-      if (onSearchFilter) {
-        onSearchFilter(value);
+    const handleSearch = (e) => {
+      setSearchTerm(e.target.value);
+    };
+
+    const handleSingleSelection = (value) => {
+      setSingleSelection(value);
+    };
+
+    const handleMultiSelection = (value, checked) => {
+      if (checked) {
+        const newValues = [...multiSelection, value];
+        setMultiSelection(newValues);
+      } else {
+        const newValues = multiSelection.filter((v) => v !== value);
+        setMultiSelection(newValues);
       }
     };
 
-    // data manipulation
-    const getFilteredItems = () => {
-      // if the user uses their own filter then they provide the filtered items
-      if (onSearchFilter) {
-        return items;
-      }
-      // by default, just filter results by their label from a single search term
-      return items.filter((i) => i.label.includes(searchTerm));
+    const onNavigateItem = () => {
+      // TODO figure out navigation
     };
-    const filteredResults = getFilteredItems();
+
+    // item filtering
+    const getFilteredItems = () =>
+      items.filter((item) => {
+        if (!searchTerm) {
+          return item;
+        }
+        // if user provides their own filter function use that
+        if (onSearchFilter) {
+          return onSearchFilter(item, searchTerm);
+        }
+        // otherwise use the default label filter
+        return item.label.toLowerCase().includes(searchTerm);
+      });
+
+    const filteredItems = getFilteredItems();
 
     // sidebar
     const influencer = (
@@ -83,11 +105,11 @@ export let AddSelect = forwardRef(
         <div className={`${blockClass}__influencer-header`}>
           <p className={`${blockClass}__influencer-title`}>{influencerTitle}</p>
           <Tag type="gray" size="sm">
-            {selected}
+            {multiSelection.length}
           </Tag>
         </div>
         <div className={`${blockClass}__influencer-body`}>
-          {selected > 0 ? (
+          {multiSelection.length > 0 ? (
             <p>content</p>
           ) : (
             <NoDataEmptyState
@@ -109,30 +131,57 @@ export let AddSelect = forwardRef(
             labelText="temp label"
             placeholder={inputPlaceholder}
             value={searchTerm}
-            onChange={onSearchHandler}
+            onChange={handleSearch}
           />
           <div className={`${blockClass}__items-label-container`}>
             <p className={`${blockClass}__items-label`}>{itemsLabel}</p>
             <Tag type="gray" size="sm">
-              {filteredResults.length}
+              {filteredItems.length}
             </Tag>
           </div>
         </div>
-        {filteredResults.length > 0 ? (
-          <StructuredListWrapper
-            selection
-            className={`${blockClass}__selections`}
-          >
-            <StructuredListBody>
-              {filteredResults.map((item) => (
-                <StructuredListRow key={item.id}>
-                  <StructuredListCell>
-                    <p>{item.label}</p>
-                  </StructuredListCell>
-                </StructuredListRow>
-              ))}
-            </StructuredListBody>
-          </StructuredListWrapper>
+        {filteredItems.length > 0 ? (
+          <div className={`${blockClass}__selections-wrapper`}>
+            <StructuredListWrapper
+              selection
+              className={`${blockClass}__selections`}
+            >
+              <StructuredListBody>
+                {filteredItems.map((item) => (
+                  <StructuredListRow key={item.id}>
+                    <StructuredListCell>
+                      <div className={`${blockClass}__selections-cell-wrapper`}>
+                        {multi ? (
+                          <Checkbox
+                            className={`${blockClass}__selections-checkbox`}
+                            onChange={(value) =>
+                              handleMultiSelection(item.value, value)
+                            }
+                            labelText={item.label}
+                            id={item.id}
+                            checked={multiSelection.includes(item.value)}
+                          />
+                        ) : (
+                          <RadioButton
+                            className={`${blockClass}__selections-radio`}
+                            name="add-select-selections"
+                            id={item.id}
+                            value={item.value}
+                            labelText={item.label}
+                            onChange={handleSingleSelection}
+                            selected={item.value === singleSelection}
+                          />
+                        )}
+                        {item.children && (
+                          <ChevronRight16 onClick={onNavigateItem} />
+                        )}
+                      </div>
+                    </StructuredListCell>
+                  </StructuredListRow>
+                ))}
+              </StructuredListBody>
+            </StructuredListWrapper>
+          </div>
         ) : (
           <div className={`${blockClass}__body`}>
             <NoDataEmptyState
@@ -170,8 +219,9 @@ AddSelect.propTypes = {
   inputPlaceholder: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.shape({
-      label: PropTypes.string,
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      label: PropTypes.string,
+      value: PropTypes.string,
     })
   ),
   itemsLabel: PropTypes.string,

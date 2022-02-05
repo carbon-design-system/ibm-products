@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -22,6 +22,7 @@ const storyClass = 'create-full-page-stories';
 const blockClass = `${pkg.prefix}--create-full-page`;
 
 import {
+  Checkbox,
   TextInput,
   NumberInput,
   InlineNotification,
@@ -61,7 +62,6 @@ const defaultFullPageProps = {
   modalSecondaryButtonText: 'Return to form',
   onRequestSubmit: action('Submit handler called'),
   onClose: action('Close handler called'),
-  sideNavAriaLabel: 'Create topic side nav',
 };
 
 const Template = ({ ...args }) => {
@@ -70,6 +70,8 @@ const Template = ({ ...args }) => {
   const [shouldReject, setShouldReject] = useState(false);
   const [isInvalid, setIsInvalid] = useState(false);
   const [simulatedDelay] = useState(750);
+  const [shouldIncludeAdditionalStep, setShouldIncludeAdditionalStep] =
+    useState(false);
 
   return (
     <>
@@ -145,9 +147,20 @@ const Template = ({ ...args }) => {
                   onToggle={(event) => setShouldReject(event)}
                 />
               </div>
+              <Checkbox
+                labelText={`Include additional step`}
+                id="include-additional-step-checkbox"
+                onChange={(value) => setShouldIncludeAdditionalStep(value)}
+                checked={shouldIncludeAdditionalStep}
+              />
             </Column>
           </Row>
         </CreateFullPageStep>
+        <CreateFullPageStep
+          title="Dynamic step"
+          description="Example dynamic step"
+          includeStep={shouldIncludeAdditionalStep}
+        />
         <CreateFullPageStep
           title="Empty"
           secondaryLabel="Optional"

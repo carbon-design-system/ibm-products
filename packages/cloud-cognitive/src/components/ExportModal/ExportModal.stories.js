@@ -36,6 +36,7 @@ const defaultProps = {
   primaryButtonText: 'Export',
   secondaryButtonText: 'Cancel',
   title: 'Export',
+  inputType: 'text',
 };
 
 const Template = (args) => {

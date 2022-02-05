@@ -53,8 +53,10 @@ export default {
       mapping: actionsMapping(
         {
           primary: 'Replace',
+          danger: 'Delete',
           secondary: 'Back',
           secondary2: 'Keep Both',
+          dangerGhost: 'Abort',
           ghost: 'Cancel',
         },
         action
@@ -160,19 +162,21 @@ const title = 'Title of the tearsheet';
 const Template = ({ actions, ...args }) => {
   const [open, setOpen] = useState(false);
 
-  const wiredActions = Array.prototype.map.call(actions, (action) => {
-    if (action.label === 'Cancel') {
-      const previousClick = action.onClick;
-      return {
-        ...action,
-        onClick: (evt) => {
-          setOpen(false);
-          previousClick(evt);
-        },
-      };
-    }
-    return action;
-  });
+  const wiredActions =
+    actions &&
+    Array.prototype.map.call(actions, (action) => {
+      if (action.label === 'Cancel') {
+        const previousClick = action.onClick;
+        return {
+          ...action,
+          onClick: (evt) => {
+            setOpen(false);
+            previousClick(evt);
+          },
+        };
+      }
+      return action;
+    });
 
   return (
     <>
@@ -340,7 +344,7 @@ export const tearsheet = prepareStory(Template, {
     description,
     onClose: action('onClose called'),
     title,
-    actions: 6,
+    actions: 7,
   },
 });
 
@@ -353,7 +357,7 @@ export const withNavigation = prepareStory(Template, {
     navigation: tabs,
     onClose: action('onClose called'),
     title,
-    actions: 6,
+    actions: 7,
   },
 });
 
@@ -367,7 +371,7 @@ export const withInfluencer = prepareStory(Template, {
     influencerWidth: 'narrow',
     onClose: action('onClose called'),
     title,
-    actions: 6,
+    actions: 7,
   },
 });
 
@@ -398,6 +402,6 @@ export const stacked = prepareStory(StackedTemplate, {
     height: 'lower',
     influencer,
     label,
-    actions: 6,
+    actions: 7,
   },
 });

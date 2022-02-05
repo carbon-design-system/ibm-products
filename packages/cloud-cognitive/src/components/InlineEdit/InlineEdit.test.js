@@ -22,10 +22,10 @@ const dataTestId = uuidv4();
 const editDescription = 'Edit';
 const id = dataTestId;
 const labelText = 'Inline edit';
-const revertDescription = 'Revert';
+const cancelDescription = 'Revert';
 const saveDescription = 'Save';
 const value = 'hello; world';
-const requiredProps = { editDescription, revertDescription, saveDescription };
+const requiredProps = { editDescription, cancelDescription, saveDescription };
 
 describe(componentName, () => {
   it('renders a component InlineEdit', () => {
@@ -40,7 +40,7 @@ describe(componentName, () => {
           editDescription,
           id,
           labelText,
-          revertDescription,
+          cancelDescription,
           saveDescription,
           value,
         }}

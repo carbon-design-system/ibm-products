@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-cdai",
   "description": "Carbon for Cloud & Cognitive CD&AI UI components",
-  "version": "1.21.6",
+  "version": "1.21.7",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -32,20 +32,20 @@
     "clean": "rimraf es lib scss",
     "test": "jest --colors",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (explicit range peer dependency), uuid (not tested)",
-    "upgrade-dependencies": "npm-check-updates -u --color --reject '/(carbon|^react$|^react-dom$|^uuid$)/'"
+    "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$|^uuid$)/'"
   },
   "peerDependencies": {
-    "@carbon/elements": "^10.46.0",
-    "@carbon/grid": "^10.39.0",
-    "@carbon/icons-react": "^10.42.0",
-    "carbon-components": "^10.47.1",
-    "carbon-components-react": "^7.47.2",
-    "prop-types": "^15.7.2",
+    "@carbon/elements": "^10.51.0",
+    "@carbon/grid": "^10.40.0",
+    "@carbon/icons-react": "^10.45.0",
+    "carbon-components": "^10.52.0",
+    "carbon-components-react": "^7.52.0",
+    "prop-types": "^15.8.1",
     "react": "^16.8.6 || ^17.0.1",
     "react-dom": "^16.8.6 || ^17.0.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.16.7",
+    "@babel/runtime": "^7.17.0",
     "focus-trap-react": "^8.9.1",
     "pluralize": "^8.0.0",
     "react-highlighter": "^0.4.3",
@@ -53,20 +53,20 @@
     "uuid": "^3.4.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.16.8",
-    "@babel/core": "^7.16.10",
+    "@babel/cli": "^7.17.0",
+    "@babel/core": "^7.17.0",
     "@babel/plugin-proposal-class-properties": "^7.16.7",
     "@babel/plugin-transform-regenerator": "^7.16.7",
-    "@babel/plugin-transform-runtime": "^7.16.10",
+    "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "cpx": "^1.5.0",
     "jest": "^27.4.7",
-    "jest-config-ibm-cloud-cognitive": "^0.23.5",
+    "jest-config-ibm-cloud-cognitive": "^0.23.6",
     "node-sass": "^7.0.1",
-    "npm-check-updates": "^12.2.0",
+    "npm-check-updates": "^12.2.1",
     "rimraf": "^3.0.2",
-    "sinon": "^12.0.1"
+    "sinon": "^13.0.1"
   },
   "babel": {
     "presets": [

@@ -37,6 +37,16 @@
 
   .#{$block-class}__selections {
     border-top: 1px solid $ui-03;
+
+    &-wrapper {
+      display: block;
+    }
+
+    &-cell-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
   }
 
   // multi select specific
@@ -76,6 +86,20 @@
     .bx--modal-content
     p {
     padding-right: 0;
+  }
+
+  .#{$block-class} .#{$carbon-prefix}--structured-list-td {
+    padding-bottom: $spacing-05;
+  }
+
+  .#{$block-class}
+    .#{$carbon-prefix}--radio-button-wrapper
+    .#{$carbon-prefix}--radio-button__label {
+    justify-content: left;
+  }
+
+  .#{$block-class}__selections-wrapper .#{$carbon-prefix}---form-item {
+    display: block;
   }
 }
 

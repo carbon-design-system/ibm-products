@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,7 +9,11 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { expectWarn, expectWarnAsync } from '../../global/js/utils/test-helper';
+import {
+  expectWarn,
+  expectWarnAsync,
+  expectMultipleWarn,
+} from '../../global/js/utils/test-helper';
 import { pkg, carbon } from '../../settings';
 import { CreateTearsheet } from './CreateTearsheet';
 import { CreateTearsheetStep } from './CreateTearsheetStep';
@@ -44,6 +48,8 @@ const nextButtonText = 'Next';
 const step3Title = uuidv4();
 const step2Title = uuidv4();
 const step1Title = uuidv4();
+const step1Description = uuidv4();
+const step1Subtitle = uuidv4();
 const title = uuidv4();
 const dataTestId = uuidv4();
 const ref = React.createRef();
@@ -78,6 +84,8 @@ const renderCreateTearsheet = ({
         title={step1Title}
         fieldsetLegendText={step1Title}
         onMount={onMountFn}
+        description={step1Description}
+        subtitle={step1Subtitle}
       >
         step 1 content
         <button type="button" disabled>
@@ -85,7 +93,7 @@ const renderCreateTearsheet = ({
         </button>
         <input type="text" />
       </CreateTearsheetStep>
-      <CreateTearsheetStep title={step2Title} fieldsetLegendText={step2Title}>
+      <CreateTearsheetStep title={step2Title} hasFieldset={false}>
         step 2 content
       </CreateTearsheetStep>
       <CreateTearsheetStep
@@ -112,6 +120,23 @@ const renderSingleStepCreateTearsheet = ({ ...rest }) =>
         step 1 content
       </CreateTearsheetStep>
     </CreateTearsheet>
+  );
+
+const renderInvalidCreateTearsheet = ({ ...rest }) =>
+  render(
+    <>
+      <CreateTearsheet onRequestSubmit={onRequestSubmitFn} {...rest}>
+        <CreateTearsheetStep title={step1Title} hasFieldset={false}>
+          step 1 content
+        </CreateTearsheetStep>
+        <CreateTearsheetStep title={step2Title} hasFieldset={false}>
+          step 2 content
+        </CreateTearsheetStep>
+      </CreateTearsheet>
+      <CreateTearsheetStep title="Invalid step title" hasFieldset={false}>
+        Invalid step
+      </CreateTearsheetStep>
+    </>
   );
 
 describe(CreateTearsheet.displayName, () => {
@@ -422,4 +447,15 @@ describe(CreateTearsheet.displayName, () => {
     expectWarn('CreateTearsheets with one step are not permitted', () => {
       renderSingleStepCreateTearsheet(defaultProps);
     }));
+
+  it('should render an invalid create tearsheet', () =>
+    expectMultipleWarn(
+      [
+        `You have tried using a ${componentName}Step component outside of a ${componentName}. This is not allowed. ${componentName}Steps should always be children of the ${componentName}`,
+        `You have tried using a ${componentName}Step component outside of a ${componentName}. This is not allowed. ${componentName}Steps should always be children of the ${componentName}`,
+      ],
+      () => {
+        renderInvalidCreateTearsheet(defaultProps);
+      }
+    ));
 });

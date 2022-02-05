@@ -36,10 +36,6 @@
       align-items: center;
       justify-content: space-between;
       border-top: 1px solid $ui-03;
-
-      .#{$carbon-prefix}--btn svg {
-        margin-left: $spacing-03;
-      }
     }
 
     .#{$block-class}__footer-no-button {

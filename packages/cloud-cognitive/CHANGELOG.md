@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.4.0...@carbon/ibm-products@1.5.0) (2022-02-01)
+
+
+### Bug Fixes
+
+* remove changes to security snapshot ([#1569](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1569)) ([efa0557](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/efa0557cb886f57414b65fad2cf6e090bc0aaa7d))
+* **Tearsheet,SidePanel:** enable danger button kinds as actions ([#1572](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1572)) ([9b0acc9](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9b0acc96ac16eea4085e559f30b184af5e593631))
+
+
+### Features
+
+* **CreateTearsheet/FullPage:** [#1538](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1538) add support for dynamic steps ([#1576](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1576)) ([cdd0880](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/cdd0880e2bdf07e488c7bd74c60b1dd2b44d2dc0))
+* password input option for export modal ([#1574](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1574)) ([d5384da](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d5384da13e69ec6566ffff720f0616f116521e4a))
+
+
+
+
+
 # [1.4.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.3.0...@carbon/ibm-products@1.4.0) (2022-01-25)
 
 

@@ -13,3 +13,16 @@
 // that the SCSS styles for this component are sufficiently specific
 // to override Carbon whichever order the styles get loaded in.
 //@import 'carbon-components/css/carbon-components.min';
+
+.inline-edit-stories__viewport {
+  // width: 300px; // larger than standard size needed by text input at standard font size (html input attribute size)
+  // stylelint-disable-next-line carbon/layout-token-use
+  margin: 100px;
+}
+
+$block-class: #{$pkg-prefix}--inline-edit;
+.component-full-width {
+  .#{$block-class} {
+    width: 100%;
+  }
+}

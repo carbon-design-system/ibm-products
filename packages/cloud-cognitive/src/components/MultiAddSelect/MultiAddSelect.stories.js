@@ -40,16 +40,19 @@ const defaultProps = {
   ],
   items: [
     {
-      label: 'first',
-      id: 1,
+      id: '1',
+      label: 'Kansas',
+      value: 'kansas',
     },
     {
-      label: 'second',
-      id: 2,
+      id: '2',
+      label: 'Texas',
+      value: 'texas',
     },
     {
-      label: 'third',
-      id: 3,
+      id: '3',
+      label: 'Florida',
+      value: 'florida',
     },
   ],
   title: 'Add business terms',

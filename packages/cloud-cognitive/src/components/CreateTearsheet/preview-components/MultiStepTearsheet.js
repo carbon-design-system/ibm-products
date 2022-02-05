@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,6 +17,7 @@ import {
   TextInput,
   Toggle,
   NumberInput,
+  Checkbox,
 } from 'carbon-components-react';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
@@ -66,6 +67,8 @@ export const MultiStepTearsheet = ({
   const [stepThreeTextInputValue, setStepThreeTextInputValue] =
     useState('one-day');
   const [isInvalid, setIsInvalid] = useState(false);
+  const [shouldIncludeAdditionalStep, setShouldIncludeAdditionalStep] =
+    useState(false);
 
   const clearCreateData = () => {
     setStepOneTextInputValue('');
@@ -77,6 +80,7 @@ export const MultiStepTearsheet = ({
     setIsInvalid(false);
     setOpen(false);
     setValue1('');
+    setShouldIncludeAdditionalStep(false);
   };
 
   return (
@@ -180,8 +184,23 @@ export const MultiStepTearsheet = ({
                 labelText="Simulate error"
                 onToggle={(event) => setShouldReject(event)}
               />
+              <Checkbox
+                labelText={`Include additional step`}
+                id="include-additional-step-checkbox"
+                onChange={(value) => setShouldIncludeAdditionalStep(value)}
+                checked={shouldIncludeAdditionalStep}
+              />
             </Column>
           </Row>
+        </CreateTearsheetStep>
+        <CreateTearsheetStep
+          title="Dynamic step"
+          subtitle="Dynamic step subtitle"
+          description="This is an example showing how to include a dynamic step into the CreateTearsheet"
+          hasFieldset={false}
+          includeStep={shouldIncludeAdditionalStep}
+        >
+          dynamic step content
         </CreateTearsheetStep>
         <CustomStep
           title="Location"
@@ -189,6 +208,7 @@ export const MultiStepTearsheet = ({
           description="Custom step description (see storybook implementation for new custom step capability)"
           value1={value1}
           setValue1={setValue1}
+          hasFieldset={false}
         />
         <CreateTearsheetStep
           title="Partitions"

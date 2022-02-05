@@ -356,7 +356,7 @@ const title = {
     onChange: () => {
       // gets replaced in template
     },
-    onInput: () => {
+    onSave: () => {
       // gets replaced in template
     },
     revertDescription: 'Revert',
@@ -536,19 +536,19 @@ const demoDummyPageContent = (
 );
 
 const actionTitleChange = action('title onChange');
-const actionTitleInput = action('title onInput');
+const actionTitleSave = action('title onSave');
 // Template.
 // eslint-disable-next-line react/prop-types
 const Template = ({ children, title, ...props }) => {
   // eslint-disable-next-line react/prop-types
   const [titleText, setTitleText] = useState(title?.text ?? title);
-  const handleTitleChange = title?.onChange
+  const handleTitleSave = title?.onSave
     ? (val) => {
-        actionTitleChange(val);
+        actionTitleSave(val);
         setTitleText(val);
       }
     : null;
-  const handleTitleInput = title?.onInput ? actionTitleInput : null;
+  const handleTitleChange = title?.onSave ? actionTitleChange : null;
 
   // const [theTitle, setTheTitle] = useState({});
 
@@ -583,12 +583,12 @@ const Template = ({ children, title, ...props }) => {
       <PageHeader
         {...props}
         title={
-          title?.onChange
+          title?.onSave
             ? {
                 ...title,
                 text: titleText,
                 onChange: handleTitleChange,
-                onInput: handleTitleInput,
+                onSave: handleTitleSave,
               }
             : title
         }

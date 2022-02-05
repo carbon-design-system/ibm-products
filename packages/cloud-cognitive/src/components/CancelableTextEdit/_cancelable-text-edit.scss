@@ -120,6 +120,7 @@
     .#{$block-class}__main {
       position: relative;
       display: inline-flex;
+      width: 100%;
       min-height: var(--size);
       vertical-align: top;
     }

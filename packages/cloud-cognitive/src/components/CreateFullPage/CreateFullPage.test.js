@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -161,7 +161,6 @@ const renderFullPageWithStepChildrenOutside = ({ ...rest }) =>
         <CreateFullPageStep title="Title 2">{stepFormField}</CreateFullPageStep>
       </CreateFullPage>
       <CreateFullPageStep title="Test title">content</CreateFullPageStep>
-      <CreateFullPageStep title="Test title 2">content</CreateFullPageStep>
     </>
   );
 
@@ -211,8 +210,8 @@ describe(componentName, () => {
   it('throws a console warning when FullPageStep is used outside of CreateFullPage', () =>
     expectMultipleWarn(
       [
-        `You have tried using a ${componentName}Step component outside of a CreateFullPage. This is not allowed. ${componentName}Steps should always be children of the CreateFullPage`,
-        `You have tried using a ${componentName}Step component outside of a CreateFullPage. This is not allowed. ${componentName}Steps should always be children of the CreateFullPage`,
+        `You have tried using a ${componentName}Step component outside of a ${componentName}. This is not allowed. ${componentName}Steps should always be children of the ${componentName}`,
+        `You have tried using a ${componentName}Step component outside of a ${componentName}. This is not allowed. ${componentName}Steps should always be children of the ${componentName}`,
       ],
       () => {
         const { container } =

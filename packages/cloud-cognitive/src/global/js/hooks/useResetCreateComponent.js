@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 /**
  * Resets the current step of the create component if it has been closed.
  * @param {object} useResetCreateComponent - Create component that uses this custom hook
+ * @param {object} useResetCreateComponent.firstIncludedStep
  * @param {object} useResetCreateComponent.previousState
  * @param {boolean} useResetCreateComponent.open
  * @param {Function} useResetCreateComponent.setCurrentStep
@@ -18,6 +19,7 @@ import { useEffect } from 'react';
  * @param {string} useResetCreateComponent.componentName
  */
 export const useResetCreateComponent = ({
+  firstIncludedStep,
   previousState,
   open,
   setCurrentStep,
@@ -35,7 +37,8 @@ export const useResetCreateComponent = ({
       ) {
         setCurrentStep(Number(initialStep));
       } else {
-        setCurrentStep(1);
+        // default should be fist includedStep instead of just 1
+        setCurrentStep(firstIncludedStep);
       }
 
       // An invalid initialStep value was provided, we'll default to rendering the first step in this scenario
@@ -51,6 +54,7 @@ export const useResetCreateComponent = ({
       }
     }
   }, [
+    firstIncludedStep,
     open,
     previousState,
     setCurrentStep,

@@ -1967,6 +1967,15 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   content: \\"\\";
   opacity: var(--c4p--side-panel--divider-opacity);
 }
+.c4p--side-panel__container .c4p--side-panel__title-container.c4p--side-panel__title-container--reduced-motion {
+  z-index: 5;
+  border-bottom: 1px solid var(--cds-decorative-01, #e0e0e0);
+  margin-bottom: var(--cds-spacing-05, 1rem);
+}
+.c4p--side-panel__container .c4p--side-panel__title-container.c4p--side-panel__title-container--reduced-motion.c4p--side-panel__title-container--no-title-animation {
+  border-bottom: 0;
+  margin-bottom: 0;
+}
 .c4p--side-panel__container .c4p--side-panel__title-container.c4p--side-panel__on-detail-step .c4p--side-panel__collapsed-title-text {
   top: var(--cds-spacing-09, 3rem);
 }
@@ -6413,9 +6422,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   justify-content: space-between;
   border-top: 1px solid var(--cds-ui-03, #e0e0e0);
 }
-.c4p--card__productive .c4p--card__footer .bx--btn svg {
-  margin-left: var(--cds-spacing-03, 0.5rem);
-}
 .c4p--card__productive .c4p--card__footer-no-button {
   justify-content: flex-end;
 }
@@ -6915,386 +6921,470 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   fill: #161616;
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-fatal,
 .c4p--status-icon--light.c4p--status-icon--light-fatal {
   fill: #000000;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--light.c4p--status-icon--light-fatal .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-fatal .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+.c4p--status-icon--light.c4p--status-icon--light-fatal .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-fatal,
 .c4p--status-icon--light.c4p--status-icon--dark-fatal {
   fill: #000000;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--light.c4p--status-icon--dark-fatal .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-fatal .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+.c4p--status-icon--light.c4p--status-icon--dark-fatal .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-critical,
 .c4p--status-icon--light.c4p--status-icon--light-critical {
   fill: #da1e28;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--light.c4p--status-icon--light-critical .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-critical .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+.c4p--status-icon--light.c4p--status-icon--light-critical .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-critical,
 .c4p--status-icon--light.c4p--status-icon--dark-critical {
   fill: #da1e28;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--light.c4p--status-icon--dark-critical .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-critical .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+.c4p--status-icon--light.c4p--status-icon--dark-critical .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-major-warning,
 .c4p--status-icon--light.c4p--status-icon--light-major-warning {
   fill: #ff832b;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--light.c4p--status-icon--light-major-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-major-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+.c4p--status-icon--light.c4p--status-icon--light-major-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-major-warning,
 .c4p--status-icon--light.c4p--status-icon--dark-major-warning {
   fill: #ff832b;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--light.c4p--status-icon--dark-major-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-major-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+.c4p--status-icon--light.c4p--status-icon--dark-major-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-minor-warning,
 .c4p--status-icon--light.c4p--status-icon--light-minor-warning {
   fill: #fddc69;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--light.c4p--status-icon--light-minor-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-minor-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+.c4p--status-icon--light.c4p--status-icon--light-minor-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-minor-warning,
 .c4p--status-icon--light.c4p--status-icon--dark-minor-warning {
   fill: #fddc69;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--light.c4p--status-icon--dark-minor-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-minor-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+.c4p--status-icon--light.c4p--status-icon--dark-minor-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-undefined,
 .c4p--status-icon--light.c4p--status-icon--light-undefined {
   fill: #8a3ffc;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--light.c4p--status-icon--light-undefined .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-undefined .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+.c4p--status-icon--light.c4p--status-icon--light-undefined .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-undefined,
 .c4p--status-icon--light.c4p--status-icon--dark-undefined {
   fill: #8a3ffc;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--light.c4p--status-icon--dark-undefined .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-undefined .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+.c4p--status-icon--light.c4p--status-icon--dark-undefined .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-unknown,
 .c4p--status-icon--light.c4p--status-icon--light-unknown {
   fill: #6f6f6f;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--light.c4p--status-icon--light-unknown .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-unknown .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+.c4p--status-icon--light.c4p--status-icon--light-unknown .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-unknown,
 .c4p--status-icon--light.c4p--status-icon--dark-unknown {
   fill: #6f6f6f;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--light.c4p--status-icon--dark-unknown .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-unknown .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+.c4p--status-icon--light.c4p--status-icon--dark-unknown .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-normal,
 .c4p--status-icon--light.c4p--status-icon--light-normal {
   fill: #198038;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--light.c4p--status-icon--light-normal .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-normal .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+.c4p--status-icon--light.c4p--status-icon--light-normal .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-normal,
 .c4p--status-icon--light.c4p--status-icon--dark-normal {
   fill: #198038;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--light.c4p--status-icon--dark-normal .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-normal .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+.c4p--status-icon--light.c4p--status-icon--dark-normal .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-info,
 .c4p--status-icon--light.c4p--status-icon--light-info {
   fill: #0f62fe;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--light.c4p--status-icon--light-info .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-info .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+.c4p--status-icon--light.c4p--status-icon--light-info .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-info,
 .c4p--status-icon--light.c4p--status-icon--dark-info {
   fill: #0f62fe;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--light.c4p--status-icon--dark-info .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-info .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+.c4p--status-icon--light.c4p--status-icon--dark-info .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-in-progress,
 .c4p--status-icon--light.c4p--status-icon--light-in-progress {
   animation: rotating 8000ms infinite linear;
   fill: #0f62fe;
 }
 @media (prefers-reduced-motion: reduce) {
-  .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+.c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
 .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
   animation: rotating 8000ms infinite linear;
   fill: #0f62fe;
 }
 @media (prefers-reduced-motion: reduce) {
-  .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+.c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-running,
 .c4p--status-icon--light.c4p--status-icon--light-running {
   fill: #198038;
   transform: scaleY(-1);
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-running,
 .c4p--status-icon--light.c4p--status-icon--dark-running {
   fill: #198038;
   transform: scaleY(-1);
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-pending,
 .c4p--status-icon--light.c4p--status-icon--light-pending {
   fill: #6f6f6f;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--light.c4p--status-icon--light-pending .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-pending .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+.c4p--status-icon--light.c4p--status-icon--light-pending .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-pending,
 .c4p--status-icon--light.c4p--status-icon--dark-pending {
   fill: #6f6f6f;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--light.c4p--status-icon--dark-pending .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-pending .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+.c4p--status-icon--light.c4p--status-icon--dark-pending .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-fatal,
 .c4p--status-icon--dark.c4p--status-icon--light-fatal {
   fill: #8d8d8d;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--dark.c4p--status-icon--light-fatal .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-fatal .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+.c4p--status-icon--dark.c4p--status-icon--light-fatal .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-fatal,
 .c4p--status-icon--dark.c4p--status-icon--dark-fatal {
   fill: #8d8d8d;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--dark.c4p--status-icon--dark-fatal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-fatal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+.c4p--status-icon--dark.c4p--status-icon--dark-fatal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-critical,
 .c4p--status-icon--dark.c4p--status-icon--light-critical {
   fill: #fa4d56;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--dark.c4p--status-icon--light-critical .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-critical .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+.c4p--status-icon--dark.c4p--status-icon--light-critical .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-critical,
 .c4p--status-icon--dark.c4p--status-icon--dark-critical {
   fill: #fa4d56;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--dark.c4p--status-icon--dark-critical .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-critical .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+.c4p--status-icon--dark.c4p--status-icon--dark-critical .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-major-warning,
 .c4p--status-icon--dark.c4p--status-icon--light-major-warning {
   fill: #ff832b;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--dark.c4p--status-icon--light-major-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-major-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+.c4p--status-icon--dark.c4p--status-icon--light-major-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-major-warning,
 .c4p--status-icon--dark.c4p--status-icon--dark-major-warning {
   fill: #ff832b;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--dark.c4p--status-icon--dark-major-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-major-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+.c4p--status-icon--dark.c4p--status-icon--dark-major-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-minor-warning,
 .c4p--status-icon--dark.c4p--status-icon--light-minor-warning {
   fill: #fddc69;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--dark.c4p--status-icon--light-minor-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-minor-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+.c4p--status-icon--dark.c4p--status-icon--light-minor-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-minor-warning,
 .c4p--status-icon--dark.c4p--status-icon--dark-minor-warning {
   fill: #fddc69;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--dark.c4p--status-icon--dark-minor-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-minor-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+.c4p--status-icon--dark.c4p--status-icon--dark-minor-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-undefined,
 .c4p--status-icon--dark.c4p--status-icon--light-undefined {
   fill: #a56eff;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--dark.c4p--status-icon--light-undefined .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-undefined .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+.c4p--status-icon--dark.c4p--status-icon--light-undefined .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-undefined,
 .c4p--status-icon--dark.c4p--status-icon--dark-undefined {
   fill: #a56eff;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--dark.c4p--status-icon--dark-undefined .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-undefined .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+.c4p--status-icon--dark.c4p--status-icon--dark-undefined .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-unknown,
 .c4p--status-icon--dark.c4p--status-icon--light-unknown {
   fill: #8d8d8d;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--dark.c4p--status-icon--light-unknown .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-unknown .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+.c4p--status-icon--dark.c4p--status-icon--light-unknown .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-unknown,
 .c4p--status-icon--dark.c4p--status-icon--dark-unknown {
   fill: #8d8d8d;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--dark.c4p--status-icon--dark-unknown .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-unknown .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+.c4p--status-icon--dark.c4p--status-icon--dark-unknown .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-normal,
 .c4p--status-icon--dark.c4p--status-icon--light-normal {
   fill: #24a148;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--dark.c4p--status-icon--light-normal .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-normal .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+.c4p--status-icon--dark.c4p--status-icon--light-normal .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-normal,
 .c4p--status-icon--dark.c4p--status-icon--dark-normal {
   fill: #24a148;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--dark.c4p--status-icon--dark-normal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-normal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+.c4p--status-icon--dark.c4p--status-icon--dark-normal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-info,
 .c4p--status-icon--dark.c4p--status-icon--light-info {
   fill: #4589ff;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--dark.c4p--status-icon--light-info .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-info .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+.c4p--status-icon--dark.c4p--status-icon--light-info .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-info,
 .c4p--status-icon--dark.c4p--status-icon--dark-info {
   fill: #4589ff;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--dark.c4p--status-icon--dark-info .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-info .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+.c4p--status-icon--dark.c4p--status-icon--dark-info .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
 .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
   animation: rotating 8000ms infinite linear;
   fill: #4589ff;
 }
 @media (prefers-reduced-motion: reduce) {
-  .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+.c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
 .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
   animation: rotating 8000ms infinite linear;
   fill: #4589ff;
 }
 @media (prefers-reduced-motion: reduce) {
-  .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+.c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-running,
 .c4p--status-icon--dark.c4p--status-icon--light-running {
   fill: #24a148;
   transform: scaleY(-1);
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-running,
 .c4p--status-icon--dark.c4p--status-icon--dark-running {
   fill: #24a148;
   transform: scaleY(-1);
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-pending,
 .c4p--status-icon--dark.c4p--status-icon--light-pending {
   fill: #8d8d8d;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--dark.c4p--status-icon--light-pending .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-pending .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+.c4p--status-icon--dark.c4p--status-icon--light-pending .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
 
+.bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-pending,
 .c4p--status-icon--dark.c4p--status-icon--dark-pending {
   fill: #8d8d8d;
 }
 @media (prefers-reduced-motion) {
-  .c4p--status-icon--dark.c4p--status-icon--dark-pending .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-pending .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+.c4p--status-icon--dark.c4p--status-icon--dark-pending .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }

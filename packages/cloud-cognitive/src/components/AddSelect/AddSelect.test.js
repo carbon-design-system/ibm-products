@@ -9,21 +9,26 @@ import { render, fireEvent, screen } from '@testing-library/react';
 import React from 'react';
 import { AddSelect } from './AddSelect';
 import { carbon } from '../../settings';
+import { pkg } from '../../settings';
 
+const blockClass = `${pkg.prefix}--add-select`;
 const componentName = AddSelect.name;
 const defaultProps = {
   items: [
     {
+      id: '1',
       label: 'item a',
-      id: 1,
+      value: 'item a',
     },
     {
+      id: '2',
       label: 'item b',
-      id: 2,
+      value: 'item b',
     },
     {
+      id: '3',
       label: 'item c',
-      id: 3,
+      value: 'item c',
     },
   ],
   noSelectionTitle: 'No selection title',
@@ -76,5 +81,19 @@ describe(componentName, () => {
       target: { value: 'value' },
     });
     expect(onSearchFilter).toHaveBeenCalled();
+  });
+
+  it('renders SingleAddSelect', () => {
+    const { container } = render(<AddSelect {...defaultProps} />);
+    expect(
+      container.querySelector(`.${blockClass}__selections-radio`)
+    ).toBeVisible();
+  });
+
+  it('renders MultiAddSelect', () => {
+    const { container } = render(<AddSelect {...defaultProps} multi />);
+    expect(
+      container.querySelector(`.${blockClass}__selections-checkbox`)
+    ).toBeVisible();
   });
 });

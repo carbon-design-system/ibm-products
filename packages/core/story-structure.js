@@ -24,7 +24,7 @@ const s = [
         n: 'Usage examples',
         s: [],
       },
-      'o/Examples on CodeSandbox',
+      'o/Examples',
     ],
   },
   {

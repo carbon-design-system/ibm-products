@@ -1,18 +1,18 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, useContext, useEffect } from 'react';
+import React, { forwardRef, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Column, FormGroup, Row } from 'carbon-components-react';
 import { StepsContext, StepNumberContext } from './CreateTearsheet';
 import { pkg } from '../../settings';
 import pconsole from '../../global/js/utils/pconsole';
-import { usePreviousValue } from '../../global/js/hooks';
+import { usePreviousValue, useRetrieveStepData } from '../../global/js/hooks';
 
 const componentName = 'CreateTearsheetStep';
 const blockClass = `${pkg.prefix}--tearsheet-create__step`;
@@ -22,68 +22,68 @@ export let CreateTearsheetStep = forwardRef(
     {
       children,
       className,
-      subtitle,
       description,
       disableSubmit,
-      introStep,
-      title,
-      hasFieldset,
       fieldsetLegendText,
+      hasFieldset,
+      includeStep,
+      introStep,
       onNext,
       onMount,
       secondaryLabel,
+      subtitle,
+      title,
     },
     ref
   ) => {
-    const steps = useContext(StepsContext);
+    const stepsContext = useContext(StepsContext);
     const stepNumber = useContext(StepNumberContext);
-    const previousState = usePreviousValue({ currentStep: steps?.currentStep });
+    const [shouldIncludeStep, setShouldIncludeStep] = useState();
+    const previousState = usePreviousValue({
+      currentStep: stepsContext?.currentStep,
+    });
+
+    useRetrieveStepData({
+      stepsContext,
+      stepNumber,
+      introStep,
+      shouldIncludeStep,
+      secondaryLabel,
+      title,
+    });
 
     // This useEffect reports back the onNext and onMount values so that they can be used
     // in the appropriate custom hooks.
     useEffect(() => {
       if (
-        stepNumber === steps?.currentStep &&
-        previousState?.currentStep !== steps?.currentStep
+        stepNumber === stepsContext?.currentStep &&
+        previousState?.currentStep !== stepsContext?.currentStep
       ) {
-        steps?.setOnNext(onNext);
-        steps?.setOnMount(onMount);
+        stepsContext?.setOnNext(onNext);
+        stepsContext?.setOnMount(onMount);
       }
-    }, [onMount, onNext, steps, stepNumber, previousState?.currentStep]);
+    }, [onMount, onNext, stepsContext, stepNumber, previousState?.currentStep]);
 
-    // This useEffect makes sure that every CreateTearsheetStep reports back it's
-    // title, secondaryLabel, and introStep props so that it can be sent to the CreateInfluencer.
+    // Used to take the `includeStep` prop and use it as a local state value
     useEffect(() => {
-      const stepHasReported = steps?.stepData?.includes(
-        (item) => item.title === title
-      );
-      if (!stepHasReported && steps?.stepData?.length < steps?.totalStepCount) {
-        steps?.setStepData((prev) => [
-          ...prev,
-          {
-            title,
-            secondaryLabel,
-            introStep,
-          },
-        ]);
-      }
-    }, [steps, title, secondaryLabel, introStep]);
+      setShouldIncludeStep(includeStep);
+    }, [includeStep, stepsContext, title]);
 
     // Whenever we are the current step, supply our disableSubmit value to the
     // steps container context so that it can manage the 'Next' button appropriately.
     useEffect(() => {
-      if (stepNumber === steps?.currentStep) {
-        steps.setIsDisabled(disableSubmit);
+      if (stepNumber === stepsContext?.currentStep) {
+        stepsContext.setIsDisabled(disableSubmit);
       }
-    }, [steps, stepNumber, disableSubmit, onNext]);
+    }, [stepsContext, stepNumber, disableSubmit, onNext]);
 
-    return steps ? (
+    return stepsContext ? (
       <div
         className={cx(blockClass, className, {
           [`${blockClass}__step--hidden-step`]:
-            stepNumber !== steps?.currentStep,
+            stepNumber !== stepsContext?.currentStep,
           [`${blockClass}__step--visible-step`]:
-            stepNumber === steps?.currentStep,
+            stepNumber === stepsContext?.currentStep,
         })}
         ref={ref}
       >
@@ -161,6 +161,12 @@ CreateTearsheetStep.propTypes = {
   hasFieldset: PropTypes.bool,
 
   /**
+   * This prop is used to help track dynamic steps. If this value is `false` then the step is not included in the visible steps or the ProgressIndicator
+   * steps. If this value is `true` then the step will be included in the list of visible steps, as well as being included in the ProgressIndicator step list
+   */
+  includeStep: PropTypes.bool,
+
+  /**
    * This prop can be used on the first step to mark it as an intro step, which will not render the progress indicator steps
    */
   introStep: PropTypes.bool,
@@ -200,4 +206,5 @@ CreateTearsheetStep.propTypes = {
 // component needs to make a choice or assumption when a prop is not supplied.
 CreateTearsheetStep.defaultProps = {
   hasFieldset: true,
+  includeStep: true,
 };

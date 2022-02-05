@@ -50,8 +50,8 @@
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$|^chalk$)/'"
   },
   "devDependencies": {
-    "@babel/cli": "^7.16.8",
-    "@babel/core": "^7.16.12",
+    "@babel/cli": "^7.17.0",
+    "@babel/core": "^7.17.0",
     "babel-preset-ibm-cloud-cognitive": "^0.14.5",
     "chalk": "^4.1.2",
     "change-case": "^4.1.2",
@@ -64,11 +64,11 @@
     "npm-check-updates": "^12.2.1",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
-    "sass": "^1.49.0",
+    "sass": "^1.49.7",
     "yargs": "^17.3.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.16.7",
+    "@babel/runtime": "^7.17.0",
     "@carbon/telemetry": "^0.0.0-alpha.6",
     "react-resize-detector": "^7.0.0"
   },
@@ -78,10 +78,10 @@
     "@carbon/import-once": "^10.5.0",
     "@carbon/layout": "^10.35.0",
     "@carbon/motion": "^10.27.0",
-    "@carbon/themes": "^10.49.0",
+    "@carbon/themes": "^10.50.0",
     "@carbon/type": "^10.40.0",
-    "carbon-components": "^10.51.0",
-    "carbon-components-react": "^7.51.0",
+    "carbon-components": "^10.52.0",
+    "carbon-components-react": "^7.52.0",
     "carbon-icons": "^7.0.7",
     "react": "^16.8.6 || ^17.0.1",
     "react-dom": "^16.8.6 || ^17.0.1"

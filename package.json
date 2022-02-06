@@ -39,6 +39,7 @@
     "lint:prettier:files": "yarn format:prettier:files --check --loglevel warn",
     "lint:style": "yarn lint:style:files 'packages/*/src/**/*.scss'",
     "lint:style:files": "stylelint --report-needless-disables --report-invalid-scope-disables",
+    "prepare": "husky install",
     "run-all": "lerna run --stream --prefix --loglevel success",
     "test": "run-p test:*",
     "test:cdai": "lerna run --stream --scope @carbon/ibm-cloud-cognitive-cdai test --",
@@ -71,7 +72,7 @@
     "cspell": "^5.18.2",
     "eslint": "^7.32.0",
     "eslint-config-carbon": "^2.10.0",
-    "husky": "^4.3.6",
+    "husky": "^7.0.4",
     "jest": "^27.4.7",
     "json": "^11.0.0",
     "lerna": "^4.0.0",
@@ -102,12 +103,6 @@
       "react/display-name": [
         0
       ]
-    }
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
-      "pre-commit": "yarn update-gallery-config; yarn copy-common-files; lint-staged"
     }
   },
   "commitlint": {

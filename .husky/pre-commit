@@ -1,0 +1,6 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+yarn update-gallery-config
+yarn copy-common-files
+yarn lint-staged

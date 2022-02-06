@@ -31,8 +31,8 @@
     "build": "node scripts/build.js",
     "clean": "rimraf es lib scss",
     "test": "jest --colors",
-    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (explicit range peer dependency), uuid (not tested)",
-    "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$|^uuid$)/'"
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (explicit range peer dependency)",
+    "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$)/'"
   },
   "peerDependencies": {
     "@carbon/elements": "^10.51.0",
@@ -50,7 +50,7 @@
     "pluralize": "^8.0.0",
     "react-highlighter": "^0.4.3",
     "react-select": "^5.2.2",
-    "uuid": "^3.4.0"
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.0",

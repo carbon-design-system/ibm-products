@@ -24,7 +24,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2 # https://github.com/actions/setup-node
         with:
-          node-version: lts/fermium
+          node-version: lts/gallium
           registry-url: https://registry.npmjs.org
           cache: yarn
 

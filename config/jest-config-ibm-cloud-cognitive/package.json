@@ -18,7 +18,7 @@
     "carbon for ibm products"
   ],
   "scripts": {
-    "//upgrade-dependencies": "# don't upgrade carbon (done globally) or chalk (until v5 works in the jest config, see https://github.com/facebook/jest/issues/12119)",
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally), chalk (issue #1596)",
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^chalk$)/'"
   },
   "devDependencies": {

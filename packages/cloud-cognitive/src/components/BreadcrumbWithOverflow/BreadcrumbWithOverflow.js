@@ -374,7 +374,7 @@ BreadcrumbWithOverflow.propTypes = {
    */
   overflowAriaLabel: PropTypes.string.isRequired.if(
     ({ breadcrumbs }) => breadcrumbs.length > 1
-  ), // title always shown
+  ),
 };
 
 BreadcrumbWithOverflow.defaultProps = {

@@ -18,6 +18,7 @@ import {
   TextInput,
   Tag,
 } from 'carbon-components-react';
+import { ChevronRight16 } from '@carbon/icons-react';
 import { Tearsheet, TearsheetNarrow } from '../../components/Tearsheet';
 import { NoDataEmptyState } from '../../components/EmptyStates/NoDataEmptyState';
 import { pkg } from '../../settings';
@@ -60,12 +61,8 @@ export let AddSelect = forwardRef(
     const [searchTerm, setSearchTerm] = useState('');
 
     // handlers
-    const onSearchHandler = (e) => {
-      const { value } = e.target;
-      setSearchTerm(value);
-      if (onSearchFilter) {
-        onSearchFilter(value);
-      }
+    const handleSearch = (e) => {
+      setSearchTerm(e.target.value);
     };
 
     const handleSingleSelection = (value) => {
@@ -82,16 +79,25 @@ export let AddSelect = forwardRef(
       }
     };
 
-    // data manipulation
-    const getFilteredItems = () => {
-      // if the user uses their own filter then they provide the filtered items
-      if (onSearchFilter) {
-        return items;
-      }
-      // by default, just filter results by their label from a single search term
-      return items.filter((i) => i.label.includes(searchTerm));
+    const onNavigateItem = () => {
+      // TODO figure out navigation
     };
-    const filteredResults = getFilteredItems();
+
+    // item filtering
+    const getFilteredItems = () =>
+      items.filter((item) => {
+        if (!searchTerm) {
+          return item;
+        }
+        // if user provides their own filter function use that
+        if (onSearchFilter) {
+          return onSearchFilter(item, searchTerm);
+        }
+        // otherwise use the default label filter
+        return item.label.toLowerCase().includes(searchTerm);
+      });
+
+    const filteredItems = getFilteredItems();
 
     // sidebar
     const influencer = (
@@ -125,46 +131,51 @@ export let AddSelect = forwardRef(
             labelText="temp label"
             placeholder={inputPlaceholder}
             value={searchTerm}
-            onChange={onSearchHandler}
+            onChange={handleSearch}
           />
           <div className={`${blockClass}__items-label-container`}>
             <p className={`${blockClass}__items-label`}>{itemsLabel}</p>
             <Tag type="gray" size="sm">
-              {filteredResults.length}
+              {filteredItems.length}
             </Tag>
           </div>
         </div>
-        {filteredResults.length > 0 ? (
+        {filteredItems.length > 0 ? (
           <div className={`${blockClass}__selections-wrapper`}>
             <StructuredListWrapper
               selection
               className={`${blockClass}__selections`}
             >
               <StructuredListBody>
-                {filteredResults.map((item) => (
+                {filteredItems.map((item) => (
                   <StructuredListRow key={item.id}>
                     <StructuredListCell>
-                      {multi ? (
-                        <Checkbox
-                          className={`${blockClass}__selections-checkbox`}
-                          onChange={(value) =>
-                            handleMultiSelection(item.value, value)
-                          }
-                          labelText={item.label}
-                          id={item.id}
-                          checked={multiSelection.includes(item.value)}
-                        />
-                      ) : (
-                        <RadioButton
-                          className={`${blockClass}__selections-radio`}
-                          name="add-select-selections"
-                          id={item.id}
-                          value={item.value}
-                          labelText={item.label}
-                          onChange={handleSingleSelection}
-                          selected={item.value === singleSelection}
-                        />
-                      )}
+                      <div className={`${blockClass}__selections-cell-wrapper`}>
+                        {multi ? (
+                          <Checkbox
+                            className={`${blockClass}__selections-checkbox`}
+                            onChange={(value) =>
+                              handleMultiSelection(item.value, value)
+                            }
+                            labelText={item.label}
+                            id={item.id}
+                            checked={multiSelection.includes(item.value)}
+                          />
+                        ) : (
+                          <RadioButton
+                            className={`${blockClass}__selections-radio`}
+                            name="add-select-selections"
+                            id={item.id}
+                            value={item.value}
+                            labelText={item.label}
+                            onChange={handleSingleSelection}
+                            selected={item.value === singleSelection}
+                          />
+                        )}
+                        {item.children && (
+                          <ChevronRight16 onClick={onNavigateItem} />
+                        )}
+                      </div>
                     </StructuredListCell>
                   </StructuredListRow>
                 ))}

@@ -60,6 +60,7 @@ Array [
             data-ui-id="IdePageHeader--tabs-container"
           >
             <Tabs
+              scrollDebounceWait={150}
               scrollIntoView={true}
               selected={0}
               selectionMode="automatic"
@@ -178,6 +179,7 @@ Array [
             data-ui-id="IdePageHeader--tabs-container"
           >
             <Tabs
+              scrollDebounceWait={150}
               scrollIntoView={true}
               selected={0}
               selectionMode="automatic"

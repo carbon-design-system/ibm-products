@@ -483,7 +483,7 @@ export let PageHeader = React.forwardRef(
                     [`${blockClass}__breadcrumb-row--next-to-tabs`]:
                       nextToTabsCheck(),
                     [`${blockClass}__breadcrumb-row--has-breadcrumbs`]:
-                      breadcrumbs,
+                      breadcrumbs || breadcrumbItemForTitle,
                     [`${blockClass}__breadcrumb-row--has-action-bar`]:
                       hasActionBar || widthIsNarrow,
                     [`${blockClass}__has-page-actions-without-action-bar`]:
@@ -499,17 +499,17 @@ export let PageHeader = React.forwardRef(
                     >
                       {/* keeps actionBar right even if empty */}
 
-                      {breadcrumbs ? (
+                      {breadcrumbs || breadcrumbItemForTitle ? (
                         <BreadcrumbWithOverflow
                           className={`${blockClass}__breadcrumb`}
                           noTrailingSlash={!!title}
                           overflowAriaLabel={breadcrumbOverflowAriaLabel}
                           breadcrumbs={
-                            breadcrumbs
-                              ? breadcrumbItemForTitle
-                                ? breadcrumbs.concat(breadcrumbItemForTitle)
-                                : breadcrumbs
-                              : null
+                            breadcrumbs && breadcrumbItemForTitle
+                              ? breadcrumbs.concat(breadcrumbItemForTitle)
+                              : breadcrumbItemForTitle
+                              ? [breadcrumbItemForTitle]
+                              : breadcrumbs // breadcrumbs may be null or undefined
                           }
                         />
                       ) : null}
@@ -1038,7 +1038,8 @@ PageHeader.propTypes = {
    *    - text: title string
    *    - icon: optional icon
    *    - loading: boolean shows loading indicator if true
-   *    - onChange: function to process edits only supply if in place edit is desired
+   *    - onChange: function to process the live value (React change === HTML Input)
+   *    - onSave: function to process a confirmed change
    *    - editableLabel: label for edit required if onChange supplied
    *    - revertDescription: label for edit revert button
    *    - saveDescription: label for edit save button
@@ -1058,6 +1059,7 @@ PageHeader.propTypes = {
       editableLabel: PropTypes.string, // .isRequired.if(inlineEditRequired),
       id: PropTypes.string, // .isRequired.if(inlineEditRequired),
       onChange: PropTypes.func,
+      onSave: PropTypes.func,
       revertDescription: PropTypes.string, //.isRequired.if(inlineEditRequired),
       saveDescription: PropTypes.string, //.isRequired.if(inlineEditRequired),
       // Update docgen if changed

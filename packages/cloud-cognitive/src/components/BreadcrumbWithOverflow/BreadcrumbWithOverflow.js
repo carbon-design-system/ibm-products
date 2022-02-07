@@ -370,9 +370,11 @@ BreadcrumbWithOverflow.propTypes = {
    */
   noTrailingSlash: PropTypes.bool,
   /**
-   * overflowAriaLabel label for open close button overflow used for action bar items that do nto fit.
+   * overflowAriaLabel label for open close button overflow used for breadcrumb items that do not fit.
    */
-  overflowAriaLabel: PropTypes.string.isRequired,
+  overflowAriaLabel: PropTypes.string.isRequired.if(
+    ({ breadcrumbs }) => breadcrumbs.length > 1
+  ),
 };
 
 BreadcrumbWithOverflow.defaultProps = {

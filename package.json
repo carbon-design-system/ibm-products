@@ -63,6 +63,7 @@
     "upgrade:manual": "sh ./scripts/monorepo-npm-upgrade.sh"
   },
   "devDependencies": {
+    "@babel/core": "^7.17.0",
     "@babel/eslint-parser": "^7.17.0",
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-conventional": "^16.0.0",

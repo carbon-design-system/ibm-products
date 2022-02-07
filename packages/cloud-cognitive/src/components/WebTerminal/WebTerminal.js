@@ -76,7 +76,7 @@ export let WebTerminal = React.forwardRef(
         ])}
         style={{
           animation: `${
-            open ? 'webTerminalEntrance 250ms' : 'webTerminalExit 250ms'
+            open ? 'web-terminal-entrance 250ms' : 'web-terminal-exit 250ms'
           }`,
         }}
         onAnimationEnd={onAnimationEnd}

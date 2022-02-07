@@ -25,7 +25,7 @@ $block-class: #{$pkg-prefix}--side-panel;
 $action-set-block-class: #{$pkg-prefix}--action-set;
 
 @mixin sidePanelEntranceRight($size: map-get($side-panel-sizes, md)) {
-  @keyframes sidePanelEntranceRight {
+  @keyframes side-panel-entrance-right {
     0% {
       opacity: 0;
       // stylelint-disable-next-line carbon/layout-token-use
@@ -39,7 +39,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
 }
 
 @mixin sidePanelEntranceLeft($size: map-get($side-panel-sizes, md)) {
-  @keyframes sidePanelEntranceLeft {
+  @keyframes side-panel-entrance-left {
     0% {
       opacity: 0;
       // stylelint-disable-next-line carbon/layout-token-use
@@ -90,7 +90,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
 }
 
 @mixin side-panel {
-  @keyframes sidePanelExitLeft {
+  @keyframes side-panel-exit-left {
     0% {
       opacity: 1;
       transform: translateX(0);
@@ -102,7 +102,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     }
   }
 
-  @keyframes sidePanelExitRight {
+  @keyframes side-panel-exit-right {
     0% {
       opacity: 1;
       transform: translateX(0);
@@ -453,7 +453,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     background-color: $field-02;
   }
 
-  @keyframes sidePanelOverlayEntrance {
+  @keyframes side-panel-overlay-entrance {
     0% {
       opacity: 0;
     }
@@ -462,7 +462,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     }
   }
 
-  @keyframes sidePanelOverlayExit {
+  @keyframes side-panel-overlay-exit {
     0% {
       opacity: 1;
     }

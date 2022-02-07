@@ -23,7 +23,7 @@
 @import '../CreateInfluencer/index';
 
 @mixin create-tearsheet {
-  @keyframes stepContentEntrance {
+  @keyframes step-content-entrance {
     0% {
       opacity: 0;
       // stylelint-disable-next-line carbon/layout-token-use
@@ -50,7 +50,7 @@
   }
 
   .#{$block-class} .#{$step-block-class}__step--visible-step {
-    animation: $duration--slow-01 stepContentEntrance;
+    animation: $duration--slow-01 step-content-entrance;
     animation-fill-mode: forwards;
     animation-timing-function: $carbon--standard-easing;
     opacity: 0;

@@ -20,12 +20,12 @@ import { pkg } from '../../settings';
 import { Button } from 'carbon-components-react';
 import {
   Close16,
-  Edit16,
-  EditOff16,
   Checkmark16,
   WarningFilled16,
   WarningAltFilled16,
 } from '@carbon/icons-react';
+
+import { EditAndEditOff } from './edit-n-edit-off-svg';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--inline-edit`;
@@ -300,7 +300,7 @@ export let InlineEdit = React.forwardRef(
               hasIconOnly
               iconDescription={editDescription}
               onClick={handleEdit}
-              renderIcon={disabled ? EditOff16 : Edit16}
+              renderIcon={EditAndEditOff}
               disabled={disabled}
               tabIndex={-1}
             />

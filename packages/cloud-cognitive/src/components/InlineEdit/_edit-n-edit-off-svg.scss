@@ -1,0 +1,32 @@
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@import '../../global/styles/project-settings';
+@import '../../global/styles/mixins';
+
+.edit-n-edit-off-svg .underline {
+  transform: rotate(0);
+  transform-origin: 100% 60%;
+  transition: all $duration--moderate-02 motion(standard, productive);
+}
+
+[disabled] > .edit-n-edit-off-svg .underline {
+  /* 4.2px = width of line * 1.5  */
+  // stylelint-disable-next-line carbon/layout-token-use
+  transform: rotate(45deg) scaleX(1.33) translateX(4.2px);
+}
+
+.edit-n-edit-off-svg .mask-black {
+  // stylelint-disable-next-line
+  fill: #000000 !important;
+}
+
+.edit-n-edit-off-svg .mask-white {
+  // stylelint-disable-next-line
+  fill: #ffffff !important;
+}

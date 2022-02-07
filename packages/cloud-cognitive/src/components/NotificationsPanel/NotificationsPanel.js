@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30,6 +30,7 @@ import {
   Close16,
   Settings16,
 } from '@carbon/icons-react';
+import { usePreviousValue } from '../../global/js/hooks';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'NotificationsPanel';
@@ -79,6 +80,12 @@ export let NotificationsPanel = React.forwardRef(
     const notificationPanelRef = useRef();
     const [shouldRender, setRender] = useState(open);
     const [allNotifications, setAllNotifications] = useState([]);
+    const previousState = usePreviousValue({ open });
+
+    const reducedMotion =
+      window && window.matchMedia
+        ? window.matchMedia('(prefers-reduced-motion: reduce)')
+        : { matches: true };
 
     useEffect(() => {
       // Set the notifications passed to the state within this component
@@ -100,6 +107,12 @@ export let NotificationsPanel = React.forwardRef(
       // initialize the notification panel to close
       !open && setRender(false);
     };
+
+    useEffect(() => {
+      if (!open && previousState?.open && reducedMotion.matches) {
+        setRender(false);
+      }
+    }, [open, reducedMotion.matches, previousState?.open]);
 
     const sortChronologically = (arr) => {
       if (!arr || (arr && !arr.length)) {
@@ -336,7 +349,9 @@ export let NotificationsPanel = React.forwardRef(
         id={blockClass}
         className={cx(blockClass, className, `${blockClass}__container`)}
         style={{
-          animation: `${open ? 'fade-in 250ms' : 'fade-out 250ms'}`,
+          animation: !reducedMotion.matches
+            ? `${open ? 'fade-in 250ms' : 'fade-out 250ms'}`
+            : null,
         }}
         onAnimationEnd={onAnimationEnd}
         ref={ref || notificationPanelRef}

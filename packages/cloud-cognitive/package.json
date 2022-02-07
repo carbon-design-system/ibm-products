@@ -46,7 +46,7 @@
     "generate": "cross-env FORCE_COLOR=1 node scripts/generate",
     "postinstall": "carbon-telemetry collect --install",
     "test": "jest --colors",
-    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react/react-dom (explicit range peer dependency) or chalk (until we can load it as ESM)",
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react/react-dom (explicit range peer dependency), chalk (issue #1596)",
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$|^chalk$)/'"
   },
   "devDependencies": {

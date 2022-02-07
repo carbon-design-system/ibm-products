@@ -913,7 +913,6 @@ Map {
         "type": "func",
       },
       "placeholder": Object {
-        "isRequired": true,
         "type": "string",
       },
       "selectedItem": Object {
@@ -10725,6 +10724,7 @@ Map {
       "_threadCount": 0,
     },
     "defaultProps": Object {
+      "scrollDebounceWait": 150,
       "scrollIntoView": true,
       "selected": 0,
       "selectionMode": "automatic",
@@ -10757,6 +10757,9 @@ Map {
       },
       "rightOverflowButtonProps": Object {
         "type": "object",
+      },
+      "scrollDebounceWait": Object {
+        "type": "number",
       },
       "scrollIntoView": Object {
         "type": "bool",
@@ -13423,7 +13426,6 @@ Map {
     "field": "var(--cds-field, #262626)",
     "field01": "var(--cds-field-01, #262626)",
     "field02": "var(--cds-field-02, #393939)",
-    "fieldDisabled": "var(--cds-field-disabled, #262626)",
     "fieldHover": "var(--cds-field-hover, #353535)",
     "fluidDisplay01": "var(--cds-fluid-display-01, [object Object])",
     "fluidDisplay02": "var(--cds-fluid-display-02, [object Object])",
@@ -13497,7 +13499,6 @@ Map {
     "layerAccentActive": "var(--cds-layer-accent-active, #6f6f6f)",
     "layerAccentHover": "var(--cds-layer-accent-hover, #474747)",
     "layerActive": "var(--cds-layer-active, #525252)",
-    "layerDisabled": "var(--cds-layer-disabled, #262626)",
     "layerHover": "var(--cds-layer-hover, #353535)",
     "layerSelected": "var(--cds-layer-selected, #393939)",
     "layerSelectedDisabled": "var(--cds-layer-selected-disabled, #8d8d8d)",
@@ -15230,6 +15231,38 @@ Map {
           },
         ],
         "type": "objectOf",
+      },
+    },
+  },
+  "unstable_FlexGrid" => Object {
+    "propTypes": Object {
+      "as": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "elementType",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "condensed": Object {
+        "type": "bool",
+      },
+      "fullWidth": Object {
+        "type": "bool",
+      },
+      "narrow": Object {
+        "type": "bool",
       },
     },
   },

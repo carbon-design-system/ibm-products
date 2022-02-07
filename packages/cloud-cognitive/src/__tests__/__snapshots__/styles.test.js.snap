@@ -1191,7 +1191,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
-@keyframes influencerMenuEntrance {
+@keyframes influencer-menu-entrance {
   0% {
     opacity: 0;
     transform: translateX(calc(-1 * var(--cds-spacing-05, 1rem)));
@@ -1201,7 +1201,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     transform: translateX(0);
   }
 }
-@keyframes influencerMenuExit {
+@keyframes influencer-menu-exit {
   0% {
     opacity: 1;
     transform: translateX(0);
@@ -1236,14 +1236,14 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .c4p--create-influencer__side-nav-opening,
 .c4p--create-influencer__progress-indicator-opening {
-  animation: influencerMenuEntrance 240ms 1;
+  animation: influencer-menu-entrance 240ms 1;
   animation-fill-mode: forwards;
   transition-timing-function: cubic-bezier(0, 0, 0.38, 0.9);
 }
 
 .c4p--create-influencer__side-nav-closing,
 .c4p--create-influencer__progress-indicator-closing {
-  animation: influencerMenuExit 240ms 1;
+  animation: influencer-menu-exit 240ms 1;
   animation-fill-mode: forwards;
   transition-timing-function: cubic-bezier(0.2, 0, 1, 0.9);
 }
@@ -1677,7 +1677,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     stroke-dashoffset: 0;
   }
 }
-@keyframes sidePanelExitLeft {
+@keyframes side-panel-exit-left {
   0% {
     opacity: 1;
     transform: translateX(0);
@@ -1687,7 +1687,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     transform: translateX(calc(-1 * 30rem));
   }
 }
-@keyframes sidePanelExitRight {
+@keyframes side-panel-exit-right {
   0% {
     opacity: 1;
     transform: translateX(0);
@@ -1735,7 +1735,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   right: 0;
   border-left: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
-@keyframes sidePanelEntranceRight {
+@keyframes side-panel-entrance-right {
   0% {
     opacity: 0;
     transform: translateX(16rem);
@@ -1751,7 +1751,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   left: 0;
   border-right: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
-@keyframes sidePanelEntranceLeft {
+@keyframes side-panel-entrance-left {
   0% {
     opacity: 0;
     transform: translateX(-16rem);
@@ -1778,7 +1778,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   right: 0;
   border-left: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
-@keyframes sidePanelEntranceRight {
+@keyframes side-panel-entrance-right {
   0% {
     opacity: 0;
     transform: translateX(20rem);
@@ -1794,7 +1794,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   left: 0;
   border-right: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
-@keyframes sidePanelEntranceLeft {
+@keyframes side-panel-entrance-left {
   0% {
     opacity: 0;
     transform: translateX(-20rem);
@@ -1821,7 +1821,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   right: 0;
   border-left: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
-@keyframes sidePanelEntranceRight {
+@keyframes side-panel-entrance-right {
   0% {
     opacity: 0;
     transform: translateX(30rem);
@@ -1837,7 +1837,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   left: 0;
   border-right: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
-@keyframes sidePanelEntranceLeft {
+@keyframes side-panel-entrance-left {
   0% {
     opacity: 0;
     transform: translateX(-30rem);
@@ -1864,7 +1864,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   right: 0;
   border-left: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
-@keyframes sidePanelEntranceRight {
+@keyframes side-panel-entrance-right {
   0% {
     opacity: 0;
     transform: translateX(40rem);
@@ -1880,7 +1880,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   left: 0;
   border-right: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
-@keyframes sidePanelEntranceLeft {
+@keyframes side-panel-entrance-left {
   0% {
     opacity: 0;
     transform: translateX(-40rem);
@@ -1907,7 +1907,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   right: 0;
   border-left: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
-@keyframes sidePanelEntranceRight {
+@keyframes side-panel-entrance-right {
   0% {
     opacity: 0;
     transform: translateX(75%);
@@ -1923,7 +1923,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   left: 0;
   border-right: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
-@keyframes sidePanelEntranceLeft {
+@keyframes side-panel-entrance-left {
   0% {
     opacity: 0;
     transform: translateX(-75%);
@@ -2206,7 +2206,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   background-color: var(--cds-field-02, #ffffff);
 }
 
-@keyframes sidePanelOverlayEntrance {
+@keyframes side-panel-overlay-entrance {
   0% {
     opacity: 0;
   }
@@ -2214,7 +2214,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     opacity: 1;
   }
 }
-@keyframes sidePanelOverlayExit {
+@keyframes side-panel-overlay-exit {
   0% {
     opacity: 1;
   }
@@ -3214,7 +3214,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
-@keyframes stepContentEntrance {
+@keyframes step-content-entrance {
   0% {
     opacity: 0;
     transform: translateY(-0.75rem);
@@ -3233,7 +3233,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--tearsheet-create .c4p--tearsheet-create__step__step--visible-step {
-  animation: 400ms stepContentEntrance;
+  animation: 400ms step-content-entrance;
   animation-fill-mode: forwards;
   animation-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
   opacity: 0;
@@ -4454,7 +4454,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
 /* stylelint-disable-line no-invalid-position-at-import-rule */
-@keyframes fadeIn {
+@keyframes fade-in {
   0% {
     opacity: 0;
     transform: translateY(-38.5rem);
@@ -4464,7 +4464,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     transform: translateY(0);
   }
 }
-@keyframes fadeOut {
+@keyframes fade-out {
   0% {
     opacity: 1;
     transform: translateY(0);
@@ -4607,8 +4607,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-layer-selected-hover: #4c4c4c;
   --cds-layer-selected-inverse: #f4f4f4;
   --cds-border-subtle-selected: #525252;
-  --cds-layer-disabled: #262626;
-  --cds-field-disabled: #262626;
   --cds-border-disabled: #262626;
   --cds-text-disabled: #525252;
   --cds-button-disabled: #525252;

@@ -66,6 +66,7 @@
 */
 .ccs-sb__display-box {
   position: relative;
+  display: inline-block;
   border: $layout-02 solid $ui-01;
   color: $text-01;
 }

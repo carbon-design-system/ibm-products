@@ -16,7 +16,7 @@ import { Button, TextInput } from 'carbon-components-react';
 import { prepareProps } from '../../global/js/utils/props-helper';
 import { pkg, carbon } from '../../settings';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { Checkmark16, Reset16 } from '@carbon/icons-react';
+import { Checkmark16, Close16 } from '@carbon/icons-react';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
@@ -136,7 +136,7 @@ export let CancelableTextEdit = React.forwardRef(
                 hasIconOnly
                 iconDescription={revertDescription}
                 onClick={handleRevert}
-                renderIcon={Reset16}
+                renderIcon={Close16}
               />
               <Button
                 className={`${blockClass}__save`}

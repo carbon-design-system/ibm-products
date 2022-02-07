@@ -18,24 +18,225 @@
 // InlineEdit uses the following Carbon for IBM Products components:
 // TODO: @import(s) of IBM Products component styles used by InlineEdit
 
+// cut down version borrowed from 'carbon-components/scss/globals/scss/vendor/@carbon/styles/scss/utilities/focus-outline';
+@mixin input-outline($color: $focus) {
+  outline: $spacing-01 solid $color;
+  outline-offset: calc(-1 * $spacing-01);
+
+  @media screen and (prefers-contrast) {
+    outline-style: dotted;
+  }
+}
+
+@function tooltip-top-bottom-safe-clip() {
+  @return polygon(
+    0 0,
+    -100vw 0,
+    -100vw -100vh,
+    100vw -100vh,
+    100vw 0,
+    100% 0,
+    100% 100%,
+    100vw 100%,
+    100vw 100vh,
+    -100vw 100vh,
+    -100vw 100%,
+    0 100%
+  );
+}
+
+@mixin input-button-defaults($block-class) {
+  width: var(--#{$block-class}--size);
+  height: 100%;
+  min-height: initial;
+  max-height: var(--#{$block-class}--size);
+
+  // stylelint-disable-next-line carbon/layout-token-use
+  padding: calc(
+    0.5 * (var(--#{$block-class}--size) - var(--#{$block-class}--icon-size))
+  );
+  border: 2px solid transparent;
+}
+
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
 @mixin inline-edit {
   // The block part of our conventional BEM class names (blockClass__E--M).
   $block-class: #{$pkg-prefix}--inline-edit;
 
-  .#{$block-class} {
+  @include block-wrap($block-class) {
+    --#{$block-class}--size: #{$spacing-08};
+    --#{$block-class}--icon-size: #{$spacing-05};
+    --#{$block-class}--background-color: #{$ui-01};
+
+    &.#{$block-class}--light {
+      --#{$block-class}--background-color: transparent;
+    }
+
+    &:hover {
+      --#{$block-class}--background-color: #{$hover-field};
+      // background-color: $background-color;
+    }
+
+    position: relative;
     display: inline-flex;
-    align-content: center;
-  }
+    // min-width: 250px; // similar to min input box with room for edit-controls
+    max-width: 100%;
+    height: var(--#{$block-class}--size);
+    background-color: var(--#{$block-class}--background-color);
+    cursor: text; // appear to be part of the text box
+    transition: background-color $duration--fast-01 motion(entrance, productive),
+      box-shadow $duration--fast-01 motion(entrance, productive),
+      border-color $duration--fast-01 motion(entrance, productive);
 
-  .#{$block-class} .#{$block-class}__value {
-    display: flex;
-    align-items: center;
-  }
+    white-space: nowrap;
 
-  .#{$block-class} .#{$block-class}__button {
-    margin-left: $spacing-03;
+    &.#{$block-class}--sm {
+      --#{$block-class}--size: #{$spacing-07};
+      --#{$block-class}--icon-size: #{$spacing-05};
+    }
+
+    &.#{$block-class}--lg {
+      --#{$block-class}--size: #{$spacing-09};
+      --#{$block-class}--icon-size: #{$spacing-05};
+    }
+
+    &.#{$block-class}--editing {
+      @include input-outline($focus);
+
+      background-color: $ui-01;
+    }
+
+    .#{$block-class}--invalid {
+      @include input-outline($support-01);
+    }
+
+    .#{$block-class}__input {
+      display: flex;
+      overflow: hidden;
+      max-width: calc(100% - 2 * var(--#{$block-class}--size) - $spacing-05);
+      height: 100%;
+      flex: 1 1 100%;
+      align-items: center;
+      // stylelint-disable-next-line carbon/layout-token-use
+      margin-right: calc(2 * var(--#{$block-class}--size)); // room for controls
+      margin-left: $spacing-05;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .#{$block-class}__placeholder {
+      position: absolute;
+      left: $spacing-03;
+    }
+
+    .#{$block-class}__controls {
+      // not simply flexed in as this causes flexbox to mis-measure the size of the input
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: calc(2 * var(--#{$block-class}--size));
+      height: 100%;
+      cursor: text;
+    }
+
+    .#{$block-class}__controls--animation {
+      // makes room for the top clip text but hides the side overflow
+      clip-path: tooltip-top-bottom-safe-clip();
+      // NOTE: The above allows the tooltip to show through when overflowX: hidden would not when at right edge.
+      // It is used with margin animation of contained buttons
+    }
+
+    &.#{$block-class}--editing .#{$block-class}__controls::after {
+      // cover top and bottom when focus within block
+      // doing the same on the buttons is problematic when animating
+      // and causes visual artifacts when the button is hovered without focus
+      // as the buttons leave a 45% join between sides with transparent borders and top/bottom with $focus
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      border: 2px solid $focus;
+      border-left: 0;
+      content: '';
+      pointer-events: none;
+    }
+
+    &.#{$block-class}.#{$block-class} .#{$block-class}__save,
+    &.#{$block-class}.#{$block-class} .#{$block-class}__cancel {
+      @include input-button-defaults($block-class);
+
+      // input does not have focus
+      &:hover {
+        outline: initial;
+      }
+
+      &:focus:active,
+      &:focus {
+        // border focus input does NOT have focus
+        border-color: $focus;
+        box-shadow: initial;
+        outline: initial;
+      }
+
+      &:focus:active:hover {
+        box-shadow: inset 0 0 0 1px $field-01;
+      }
+
+      &::before {
+        background-color: transparent;
+      }
+
+      &[disabled] {
+        border-color: transparent;
+      }
+    }
+
+    .#{$block-class}__controls .#{$block-class}__edit {
+      margin-left: var(--#{$block-class}--size);
+    }
+
+    .#{$block-class}__controls--animation .#{$block-class}__cancel {
+      margin-left: var(--#{$block-class}--size);
+      transition: margin-left $duration--moderate-02
+        motion(standard, productive);
+    }
+
+    .#{$block-class}__controls--saveable .#{$block-class}__cancel {
+      margin-left: 0;
+    }
+
+    &.#{$block-class}.#{$block-class} .#{$block-class}__edit {
+      @include input-button-defaults($block-class);
+
+      position: absolute;
+      top: 0;
+      right: 0;
+      // pointer-events: none;
+
+      &:hover,
+      &:active,
+      &:focus {
+        border-color: transparent;
+        background-color: transparent;
+        box-shadow: initial;
+        outline: initial;
+      }
+    }
+
+    .#{$block-class}__edit--hover-visible {
+      opacity: 0;
+      transition: opacity $duration--fast-01 motion(entrance, productive);
+    }
+
+    &:hover .#{$block-class}__edit--hover-visible {
+      opacity: 1;
+    }
   }
 }
 
